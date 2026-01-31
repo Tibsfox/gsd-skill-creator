@@ -586,6 +586,31 @@ API integration patterns for REST, GraphQL, error handling, caching, and optimis
 | `model` | string | Model to use (`inherit`, `sonnet`, `opus`, `haiku`) |
 | `skills` | string[] | Skills to preload |
 
+### Agent Format Compliance
+
+Generated agents follow the official Claude Code agent format:
+
+- **name**: lowercase letters, numbers, and hyphens only
+- **description**: explains when Claude should delegate to this agent
+- **tools**: comma-separated string (e.g., `tools: Read, Write, Bash`)
+- **model**: optional model alias (sonnet, opus, haiku, inherit)
+
+Run `skill-creator agents validate` to check all agents for format issues.
+Run `skill-creator migrate-agent` to fix agents with legacy format (array tools).
+
+### Known Issues
+
+**User-Level Agent Discovery (GitHub #11205)**
+
+There is a known bug where agents in `~/.claude/agents/` may not be automatically discovered by Claude Code at session startup.
+
+**Workarounds:**
+1. Use project-level agents (`.claude/agents/`) instead
+2. Use the `/agents` UI command within Claude Code
+3. Pass agents via `--agents` CLI flag when starting Claude Code
+
+This tool will warn you when creating user-level agents about this issue.
+
 ---
 
 ## Configuration
