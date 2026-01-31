@@ -3,6 +3,65 @@ import { OFFICIAL_NAME_PATTERN, validateSkillName } from '../types/skill.js';
 import { ReservedNameValidator, formatReservedNameError } from './reserved-names.js';
 
 // ============================================================================
+// Description Quality Validation
+// ============================================================================
+
+/**
+ * Patterns that indicate activation-friendly descriptions.
+ * Based on official Claude Code skill documentation.
+ */
+const ACTIVATION_PATTERNS = [
+  /\buse when\b/i,
+  /\bwhen (user|you|working|editing|creating|reviewing|debugging)/i,
+  /\bactivate when\b/i,
+  /\bfor (handling|processing|working with|managing|creating|editing)/i,
+  /\bhelps? (with|to) \w+/i,
+  /\b(asks?|mentions?|says?) ['"]?[^'"]+['"]?/i,
+];
+
+/**
+ * Check if description contains activation-friendly patterns.
+ *
+ * @param description - The description to check
+ * @returns true if description has activation patterns
+ */
+export function hasActivationPattern(description: string): boolean {
+  return ACTIVATION_PATTERNS.some(pattern => pattern.test(description));
+}
+
+/**
+ * Result of description quality validation.
+ */
+export interface DescriptionQualityResult {
+  hasActivationTriggers: boolean;
+  warning?: string;
+  suggestions?: string[];
+}
+
+/**
+ * Validate description quality for skill activation.
+ * Returns warnings (not errors) for poor descriptions.
+ *
+ * @param description - The skill description to validate
+ * @returns Quality result with optional warning and suggestions
+ */
+export function validateDescriptionQuality(description: string): DescriptionQualityResult {
+  if (hasActivationPattern(description)) {
+    return { hasActivationTriggers: true };
+  }
+
+  return {
+    hasActivationTriggers: false,
+    warning: 'Description may not activate reliably - lacks trigger phrases',
+    suggestions: [
+      'Add "Use when..." to specify when this skill should activate',
+      'Include specific keywords users might mention',
+      'Example: "Use when working with TypeScript projects"',
+    ],
+  };
+}
+
+// ============================================================================
 // Name Suggestion Helper
 // ============================================================================
 

@@ -3,6 +3,8 @@ import {
   suggestFixedName,
   validateSkillNameStrict,
   OfficialSkillNameSchema,
+  hasActivationPattern,
+  validateDescriptionQuality,
 } from './skill-validation.js';
 import { validateSkillName, OFFICIAL_NAME_PATTERN } from '../types/skill.js';
 
@@ -270,6 +272,93 @@ describe('Skill Name Validation', () => {
       expect(result.valid).toBe(false);
       expect(result.errors.length).toBeGreaterThan(0);
       // Empty input has no suggestion
+    });
+  });
+});
+
+describe('Description Quality Validation', () => {
+  describe('hasActivationPattern', () => {
+    it('should detect "Use when" pattern', () => {
+      expect(hasActivationPattern('Guide for TypeScript. Use when setting up a new project.')).toBe(true);
+      expect(hasActivationPattern('USE WHEN working with databases.')).toBe(true);
+    });
+
+    it('should detect "when user/working/editing" patterns', () => {
+      expect(hasActivationPattern('Activates when user mentions TypeScript.')).toBe(true);
+      expect(hasActivationPattern('Runs when working with config files.')).toBe(true);
+      expect(hasActivationPattern('Helps when editing package.json.')).toBe(true);
+      expect(hasActivationPattern('When creating new components.')).toBe(true);
+      expect(hasActivationPattern('Applied when reviewing PRs.')).toBe(true);
+      expect(hasActivationPattern('Used when debugging issues.')).toBe(true);
+    });
+
+    it('should detect "activate when" pattern', () => {
+      expect(hasActivationPattern('Activate when deploying to production.')).toBe(true);
+    });
+
+    it('should detect "for handling/processing" patterns', () => {
+      expect(hasActivationPattern('For handling database migrations.')).toBe(true);
+      expect(hasActivationPattern('For processing API responses.')).toBe(true);
+      expect(hasActivationPattern('For working with Docker containers.')).toBe(true);
+      expect(hasActivationPattern('For managing environment variables.')).toBe(true);
+    });
+
+    it('should detect "helps with/to" patterns', () => {
+      expect(hasActivationPattern('Helps with TypeScript configuration.')).toBe(true);
+      expect(hasActivationPattern('Helps to set up testing.')).toBe(true);
+      expect(hasActivationPattern('This skill help with debugging.')).toBe(true);
+    });
+
+    it('should detect "asks/mentions/says" patterns', () => {
+      expect(hasActivationPattern('When user asks "how do I deploy?"')).toBe(true);
+      expect(hasActivationPattern('Triggered when user mentions "docker".')).toBe(true);
+      expect(hasActivationPattern('Activates when user says something about testing.')).toBe(true);
+    });
+
+    it('should return false for generic descriptions without triggers', () => {
+      expect(hasActivationPattern('Guide for TypeScript patterns.')).toBe(false);
+      expect(hasActivationPattern('A skill for database operations.')).toBe(false);
+      expect(hasActivationPattern('Handles code review workflows.')).toBe(false);
+      expect(hasActivationPattern('Documentation generator tool.')).toBe(false);
+    });
+  });
+
+  describe('validateDescriptionQuality', () => {
+    it('should return success for activation-friendly descriptions', () => {
+      const result = validateDescriptionQuality('Guide for git workflows. Use when committing changes or reviewing PRs.');
+      expect(result.hasActivationTriggers).toBe(true);
+      expect(result.warning).toBeUndefined();
+      expect(result.suggestions).toBeUndefined();
+    });
+
+    it('should return warning for descriptions lacking triggers', () => {
+      const result = validateDescriptionQuality('Guide for TypeScript patterns (seen 5 times).');
+      expect(result.hasActivationTriggers).toBe(false);
+      expect(result.warning).toBeDefined();
+      expect(result.warning).toContain('trigger phrases');
+    });
+
+    it('should include suggestions for improving descriptions', () => {
+      const result = validateDescriptionQuality('Generic skill description.');
+      expect(result.hasActivationTriggers).toBe(false);
+      expect(result.suggestions).toBeDefined();
+      expect(result.suggestions!.length).toBeGreaterThan(0);
+      expect(result.suggestions!.some(s => s.includes('Use when'))).toBe(true);
+    });
+
+    it('should accept various activation pattern formats', () => {
+      const goodDescriptions = [
+        'Use when working with React components.',
+        'Helps with database query optimization.',
+        'For handling API authentication.',
+        'Activates when user debugging performance issues.',
+        'When creating new microservices.',
+      ];
+
+      for (const desc of goodDescriptions) {
+        const result = validateDescriptionQuality(desc);
+        expect(result.hasActivationTriggers).toBe(true);
+      }
     });
   });
 });
