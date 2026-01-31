@@ -322,8 +322,9 @@ export function suggestToolCorrection(input: string): string | null {
   const exactMatch = KNOWN_TOOLS.find(
     (tool) => tool.toLowerCase() === trimmed.toLowerCase()
   );
-  if (exactMatch && exactMatch !== trimmed) {
-    return exactMatch;
+  if (exactMatch) {
+    // Return correction only if casing differs, otherwise null (no correction needed)
+    return exactMatch !== trimmed ? exactMatch : null;
   }
 
   // Fuzzy match
