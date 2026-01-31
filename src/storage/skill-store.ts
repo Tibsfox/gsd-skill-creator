@@ -2,7 +2,7 @@ import matter from 'gray-matter';
 import { readFile, writeFile, mkdir, readdir, stat, unlink } from 'fs/promises';
 import { join, dirname } from 'path';
 import { Skill, SkillMetadata, validateSkillMetadata } from '../types/skill.js';
-import { validateSkillNameStrict, suggestFixedName } from '../validation/skill-validation.js';
+import { validateSkillNameStrict, suggestFixedName, validateReservedName } from '../validation/skill-validation.js';
 import {
   getExtension,
   isLegacyFormat,
@@ -77,6 +77,12 @@ export class SkillStore {
         ? `Invalid skill name "${skillName}": ${nameValidation.errors.join('; ')}. Suggestion: "${suggestion}"`
         : `Invalid skill name "${skillName}": ${nameValidation.errors.join('; ')}`;
       throw new Error(errorMsg);
+    }
+
+    // Check for reserved names (fallback protection - workflow should check first)
+    const reservedCheck = await validateReservedName(skillName);
+    if (!reservedCheck.valid) {
+      throw new Error(reservedCheck.error);
     }
 
     // Validate that skillName matches metadata.name if provided

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { OFFICIAL_NAME_PATTERN, validateSkillName } from '../types/skill.js';
+import { ReservedNameValidator, formatReservedNameError } from './reserved-names.js';
 
 // ============================================================================
 // Name Suggestion Helper
@@ -140,6 +141,60 @@ export function validateSkillNameStrict(name: string): StrictNameValidationResul
     valid: false,
     errors,
     suggestion,
+  };
+}
+
+// ============================================================================
+// Reserved Name Validation
+// ============================================================================
+
+// Cached validator instance (lazy-loaded)
+let validatorInstance: ReservedNameValidator | null = null;
+
+async function getValidator(): Promise<ReservedNameValidator> {
+  if (!validatorInstance) {
+    validatorInstance = await ReservedNameValidator.load();
+  }
+  return validatorInstance;
+}
+
+/**
+ * Result of reserved name validation.
+ */
+export interface ReservedNameValidationResult {
+  valid: boolean;
+  reserved: boolean;
+  category?: string;
+  reason?: string;
+  error?: string;
+  alternatives?: string[];
+}
+
+/**
+ * Check if a name is reserved and return validation result.
+ * Does NOT throw - returns structured result for caller to handle.
+ *
+ * @param name - The skill name to check
+ * @returns Validation result with reserved status and alternatives
+ */
+export async function validateReservedName(name: string): Promise<ReservedNameValidationResult> {
+  const validator = await getValidator();
+  const check = validator.isReserved(name);
+
+  if (!check.reserved) {
+    return { valid: true, reserved: false };
+  }
+
+  const alternatives = validator.suggestAlternatives(name);
+  const error = formatReservedNameError(name, check, alternatives);
+
+  return {
+    valid: false,
+    reserved: true,
+    category: check.entry?.category,
+    reason: check.entry?.reason,
+    error,
+    alternatives,
   };
 }
 
