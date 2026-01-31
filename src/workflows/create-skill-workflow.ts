@@ -1,7 +1,7 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { SkillStore } from '../storage/skill-store.js';
-import { validateSkillInput } from '../validation/skill-validation.js';
+import { validateSkillInput, suggestFixedName } from '../validation/skill-validation.js';
 import type { SkillTrigger, SkillMetadata } from '../types/skill.js';
 import type { GsdSkillCreatorExtension } from '../types/extensions.js';
 
@@ -42,12 +42,48 @@ export async function createSkillWorkflow(skillStore: SkillStore): Promise<void>
       name: () =>
         p.text({
           message: 'Skill name:',
-          placeholder: 'my-skill-name',
+          placeholder: 'my-skill-name (lowercase, numbers, hyphens)',
           validate: (value) => {
             if (!value) return 'Name is required';
-            if (value.length > 64) return 'Name must be 64 characters or less';
+
+            // Check for specific issues and provide suggestions
+            const suggestion = suggestFixedName(value);
+
+            if (value.length > 64) {
+              return suggestion
+                ? `Max 64 characters. Suggestion: ${suggestion}`
+                : 'Max 64 characters';
+            }
+
+            if (/[A-Z]/.test(value)) {
+              return suggestion
+                ? `Use lowercase. Suggestion: ${suggestion}`
+                : 'Use lowercase letters only';
+            }
+
+            if (value.startsWith('-')) {
+              return suggestion
+                ? `Cannot start with hyphen. Suggestion: ${suggestion}`
+                : 'Cannot start with hyphen';
+            }
+
+            if (value.endsWith('-')) {
+              return suggestion
+                ? `Cannot end with hyphen. Suggestion: ${suggestion}`
+                : 'Cannot end with hyphen';
+            }
+
+            if (value.includes('--')) {
+              return suggestion
+                ? `Cannot have consecutive hyphens. Suggestion: ${suggestion}`
+                : 'Cannot have consecutive hyphens';
+            }
+
+            // Catch-all for other invalid characters (underscores, spaces, etc.)
             if (!/^[a-z0-9-]+$/.test(value)) {
-              return 'Name must be lowercase letters, numbers, and hyphens only';
+              return suggestion
+                ? `Only lowercase letters, numbers, and hyphens. Suggestion: ${suggestion}`
+                : 'Only lowercase letters, numbers, and hyphens allowed';
             }
           },
         }),
