@@ -43,7 +43,8 @@ import type { SkillScope } from './types/scope.js';
 
 // Re-export storage classes
 export { PatternStore, SkillStore, SkillIndex };
-export type { SkillIndexEntry, SkillIndexData } from './storage/skill-index.js';
+export type { SkillIndexEntry, SkillIndexData, ScopedSkillEntry } from './storage/skill-index.js';
+export { listAllScopes } from './storage/skill-index.js';
 
 // Convenience factory for creating all stores with consistent paths
 export function createStores(options?: {
