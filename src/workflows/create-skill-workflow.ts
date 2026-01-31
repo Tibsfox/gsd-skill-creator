@@ -115,6 +115,18 @@ export async function createSkillWorkflow(skillStore: SkillStore): Promise<void>
 
   const { name, description, enabled } = basicInfo;
 
+  // Check description quality and show warning if needed
+  const descQuality = validateDescriptionQuality(description);
+  if (!descQuality.hasActivationTriggers) {
+    p.log.warn('');
+    p.log.warn(pc.yellow('Description may not activate reliably.'));
+    p.log.message(pc.dim('Tip: Add "Use when..." to specify activation triggers.'));
+    if (descQuality.suggestions && descQuality.suggestions.length > 0) {
+      p.log.message(pc.dim(`Example: "${descQuality.suggestions[2]}"`));
+    }
+    p.log.message('');
+  }
+
   // Step 2: Check if skill already exists
   const exists = await skillStore.exists(name);
   if (exists) {
