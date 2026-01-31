@@ -6,6 +6,7 @@ import {
   AgentGenerator,
   GeneratedAgent,
   DEFAULT_AGENT_GENERATOR_CONFIG,
+  USER_AGENT_BUG_WARNING,
 } from './agent-generator.js';
 import { SkillCluster } from './cluster-detector.js';
 import { SkillStore } from '../storage/skill-store.js';
@@ -247,6 +248,144 @@ describe('AgentGenerator', () => {
       expect(result.content).toContain('skill-a');
       expect(result.content).toContain('nonexistent-skill');
       expect(result.content).toContain('(description not available)');
+    });
+  });
+
+  describe('validation', () => {
+    it('generated agent passes schema validation', async () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, { agentsDir });
+      const cluster = createCluster();
+
+      // Should not throw - validates internally
+      const result = await generator.generateContent(cluster);
+
+      expect(result.name).toBe('test-agent');
+      expect(result.description).toBeTruthy();
+    });
+
+    it('tools field uses comma-separated format (not array)', async () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, {
+        agentsDir,
+        tools: ['Read', 'Write', 'Bash'],
+      });
+      const cluster = createCluster();
+
+      const result = await generator.generateContent(cluster);
+
+      // Should be comma-separated string, not YAML array
+      expect(result.content).toContain('tools: Read, Write, Bash');
+      expect(result.content).not.toMatch(/tools:\n\s+-\s+Read/);
+    });
+
+    it('invalid tool names are corrected automatically', async () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      // Use lowercase 'read' instead of 'Read'
+      const generator = new AgentGenerator(skillStore, {
+        agentsDir,
+        tools: ['read', 'write', 'bash'],
+      });
+      const cluster = createCluster();
+
+      const result = await generator.generateContent(cluster);
+
+      // Should be corrected to proper PascalCase
+      expect(result.content).toContain('tools: Read, Write, Bash');
+    });
+
+    it('unknown tools generate warning but do not fail', async () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      // Include an unknown tool
+      const generator = new AgentGenerator(skillStore, {
+        agentsDir,
+        tools: ['Read', 'UnknownCustomTool'],
+      });
+      const cluster = createCluster();
+
+      // Should not throw - unknown tools are accepted with warning
+      const result = await generator.generateContent(cluster);
+
+      expect(result.content).toContain('Read');
+      expect(result.content).toContain('UnknownCustomTool');
+    });
+
+    it('MCP tools are preserved in output', async () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, {
+        agentsDir,
+        tools: ['Read', 'mcp__context7__query-docs'],
+      });
+      const cluster = createCluster();
+
+      const result = await generator.generateContent(cluster);
+
+      expect(result.content).toContain('mcp__context7__query-docs');
+    });
+  });
+
+  describe('bug warning', () => {
+    it('user-level scope includes warning in result', async () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, {
+        agentsDir,
+        scope: 'user',
+      });
+      const cluster = createCluster();
+
+      const result = await generator.create(cluster);
+
+      expect(result.warning).toBe(USER_AGENT_BUG_WARNING);
+    });
+
+    it('project-level scope has no warning', async () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, {
+        agentsDir,
+        scope: 'project',
+      });
+      const cluster = createCluster();
+
+      const result = await generator.create(cluster);
+
+      expect(result.warning).toBeUndefined();
+    });
+
+    it('warning message mentions bug #11205', () => {
+      expect(USER_AGENT_BUG_WARNING).toContain('#11205');
+      expect(USER_AGENT_BUG_WARNING).toContain('GitHub issue');
+    });
+
+    it('no scope specified has no warning (default)', async () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, { agentsDir });
+      const cluster = createCluster();
+
+      const result = await generator.create(cluster);
+
+      expect(result.warning).toBeUndefined();
+    });
+  });
+
+  describe('validation errors', () => {
+    it('creating agent with empty name throws', async () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, { agentsDir });
+      const cluster = createCluster({ suggestedName: '' });
+
+      await expect(generator.generateContent(cluster)).rejects.toThrow(
+        /validation failed/i
+      );
+    });
+
+    it('creating agent with empty description throws', async () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, { agentsDir });
+      const cluster = createCluster({ suggestedDescription: '' });
+
+      await expect(generator.generateContent(cluster)).rejects.toThrow(
+        /validation failed/i
+      );
     });
   });
 });
