@@ -1,6 +1,21 @@
 import type { SkillTrigger, SkillLearning } from './skill.js';
 
 /**
+ * Tracking data for force-override of reserved names.
+ * Recorded when user bypasses reserved name protection.
+ */
+export interface ForceOverrideReservedName {
+  /** The reserved name that was used */
+  reservedName: string;
+  /** Category of the reserved name (e.g., 'built-in-commands') */
+  category: string;
+  /** Reason why the name was reserved */
+  reason: string;
+  /** ISO timestamp when the override occurred */
+  overrideDate: string;
+}
+
+/**
  * Extension fields managed by gsd-skill-creator.
  * These fields are stored under metadata.extensions['gsd-skill-creator'] in new format,
  * or at the root level in legacy format.
@@ -26,6 +41,9 @@ export interface GsdSkillCreatorExtension {
 
   /** ISO timestamp of last update */
   updatedAt?: string;
+
+  /** Tracking data if user force-overrode reserved name protection */
+  forceOverrideReservedName?: ForceOverrideReservedName;
 }
 
 /**
@@ -143,6 +161,7 @@ export function hasExtensionData(ext: GsdSkillCreatorExtension): boolean {
     ext.version !== undefined ||
     ext.extends !== undefined ||
     ext.createdAt !== undefined ||
-    ext.updatedAt !== undefined
+    ext.updatedAt !== undefined ||
+    ext.forceOverrideReservedName !== undefined
   );
 }
