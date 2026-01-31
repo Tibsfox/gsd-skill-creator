@@ -2,6 +2,29 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { SkillCluster } from './cluster-detector.js';
 import { SkillStore } from '../storage/skill-store.js';
+import {
+  validateAgentFrontmatter,
+  validateToolsField,
+} from '../validation/agent-validation.js';
+import type { AgentFrontmatter } from '../types/agent.js';
+
+/**
+ * Warning message for user-level agent creation.
+ *
+ * GitHub issue #11205: User-level agents in ~/.claude/agents/ may not be
+ * discovered by Claude Code at session startup.
+ */
+export const USER_AGENT_BUG_WARNING = `
+Note: There is a known bug (GitHub issue #11205) where user-level agents
+in ~/.claude/agents/ may not be discovered by Claude Code at session startup.
+
+Workarounds:
+1. Use project-level agents (.claude/agents/) instead
+2. Use the /agents UI command to create agents interactively
+3. Pass agents via --agents CLI flag for session-only agents
+
+The agent was created successfully, but you may need to use a workaround.
+`.trim();
 
 export interface GeneratedAgent {
   name: string;
@@ -9,12 +32,15 @@ export interface GeneratedAgent {
   skills: string[];
   filePath: string;
   content: string;
+  /** Warning message for user-level agents (bug #11205) */
+  warning?: string;
 }
 
 export interface AgentGeneratorConfig {
   agentsDir: string;            // Output directory (default .claude/agents)
   model: 'inherit' | 'sonnet' | 'opus' | 'haiku';  // Model to use
   tools: string[];              // Default tools for generated agents
+  scope?: 'user' | 'project';   // Scope for detecting when warning is needed
 }
 
 export const DEFAULT_AGENT_GENERATOR_CONFIG: AgentGeneratorConfig = {
@@ -42,12 +68,37 @@ export class AgentGenerator {
     const name = this.sanitizeName(cluster.suggestedName);
     const description = cluster.suggestedDescription;
 
+    // Validate and correct tools before generating content
+    const correctedTools = this.validateAndCorrectTools();
+
     const content = this.formatAgentMarkdown({
       name,
       description,
       skills: cluster.skills,
       skillDescriptions,
+      tools: correctedTools,
     });
+
+    // Validate the generated frontmatter
+    const frontmatterData: AgentFrontmatter = {
+      name,
+      description,
+      tools: correctedTools.join(', '),
+      model: this.config.model,
+      skills: cluster.skills,
+    };
+
+    const validation = validateAgentFrontmatter(frontmatterData);
+
+    if (!validation.valid) {
+      const errorList = validation.errors.join('; ');
+      throw new Error(`Agent validation failed: ${errorList}`);
+    }
+
+    // Log warnings but don't fail
+    if (validation.warnings.length > 0) {
+      console.warn(`Agent validation warnings: ${validation.warnings.join('; ')}`);
+    }
 
     return {
       name,
@@ -75,6 +126,14 @@ export class AgentGenerator {
     // Write agent file
     fs.writeFileSync(agent.filePath, agent.content, 'utf8');
 
+    // Add warning for user-level agents (bug #11205)
+    if (this.config.scope === 'user') {
+      return {
+        ...agent,
+        warning: USER_AGENT_BUG_WARNING,
+      };
+    }
+
     return agent;
   }
 
@@ -100,8 +159,9 @@ export class AgentGenerator {
     description: string;
     skills: string[];
     skillDescriptions: Map<string, string>;
+    tools: string[];
   }): string {
-    const { name, description, skills, skillDescriptions } = opts;
+    const { name, description, skills, skillDescriptions, tools } = opts;
 
     // Build skill list for body
     const skillList = skills
@@ -111,7 +171,7 @@ export class AgentGenerator {
     return `---
 name: ${name}
 description: ${description}
-tools: ${this.config.tools.join(', ')}
+tools: ${tools.join(', ')}
 model: ${this.config.model}
 skills:
 ${skills.map(s => `  - ${s}`).join('\n')}
@@ -145,6 +205,35 @@ ${skills.map(s => {
       .replace(/-+/g, '-')
       .replace(/^-|-$/g, '')
       .slice(0, 64);
+  }
+
+  /**
+   * Validate and correct tools from config.
+   *
+   * Runs tools through validation to:
+   * - Fix case mismatches (e.g., "read" -> "Read")
+   * - Apply fuzzy match corrections for typos
+   *
+   * @returns Corrected tools array
+   */
+  private validateAndCorrectTools(): string[] {
+    const toolsString = this.config.tools.join(', ');
+    const result = validateToolsField(toolsString);
+
+    if (result.corrected) {
+      // Parse the corrected string back to array
+      const correctedTools = result.corrected
+        .split(',')
+        .map((t) => t.trim())
+        .filter((t) => t.length > 0);
+
+      // Log corrections made
+      console.log(`Tool names corrected: "${toolsString}" -> "${result.corrected}"`);
+
+      return correctedTools;
+    }
+
+    return this.config.tools;
   }
 
   /**
