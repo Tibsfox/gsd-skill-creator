@@ -575,6 +575,9 @@ skill-creator rollback my-skill
 
 ## Agent Generation
 
+> [!NOTE]
+> For the complete official Claude Code agent format specification, see [docs/OFFICIAL-FORMAT.md](docs/OFFICIAL-FORMAT.md).
+
 Generated agents follow Claude Code's `.claude/agents/` format:
 
 ```markdown
@@ -617,13 +620,18 @@ API integration patterns for REST, GraphQL, error handling, caching, and optimis
 
 ### Agent Frontmatter
 
+All agent frontmatter fields follow the official Claude Code specification:
+
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Agent identifier |
-| `description` | string | What the agent does |
-| `tools` | string | Comma-separated list of allowed tools |
+| `name` | string | Agent identifier (required) |
+| `description` | string | What the agent does (required) |
+| `tools` | string | **Comma-separated string** of allowed tools (NOT an array) |
 | `model` | string | Model to use (`inherit`, `sonnet`, `opus`, `haiku`) |
 | `skills` | string[] | Skills to preload |
+
+> [!WARNING]
+> The `tools` field must be a comma-separated string (e.g., `tools: Read, Write, Bash`), not a YAML array. This is the most common agent format mistake.
 
 ### Agent Format Compliance
 
