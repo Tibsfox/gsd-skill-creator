@@ -80,12 +80,13 @@ export async function scanForLegacySkills(
  * - skill-creator migrate <skill-name> - Migrate a specific skill
  *
  * @param skillName - Optional specific skill name to migrate
- * @param skillsDir - Optional skills directory path
+ * @param options - Optional configuration including skillsDir
  */
 export async function migrateCommand(
   skillName?: string,
-  skillsDir: string = '.claude/skills'
+  options?: { skillsDir?: string }
 ): Promise<void> {
+  const skillsDir = options?.skillsDir ?? '.claude/skills';
   // Case 1: Specific skill provided
   if (skillName) {
     const legacyPath = join(skillsDir, `${skillName}.md`);

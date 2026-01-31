@@ -3,7 +3,7 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { createStores, createApplicationContext } from './index.js';
 import { createSkillWorkflow } from './workflows/create-skill-workflow.js';
-import { listSkillsWorkflow } from './workflows/list-skills-workflow.js';
+import { listSkillsWorkflow, parseScopeFilter } from './workflows/list-skills-workflow.js';
 import { searchSkillsWorkflow } from './workflows/search-skills-workflow.js';
 import { migrateCommand } from './cli/commands/migrate.js';
 import { validateCommand } from './cli/commands/validate.js';
@@ -11,6 +11,19 @@ import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { budgetCommand } from './cli/commands/budget.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
+import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
+import { SkillStore } from './storage/skill-store.js';
+import { SkillIndex } from './storage/skill-index.js';
+
+/**
+ * Create skill store and index for a specific scope.
+ */
+function createScopedStoreAndIndex(scope: SkillScope) {
+  const skillsDir = getSkillsBasePath(scope);
+  const skillStore = new SkillStore(skillsDir);
+  const skillIndex = new SkillIndex(skillStore, skillsDir);
+  return { skillStore, skillIndex, skillsDir };
+}
 
 async function main() {
   const args = process.argv.slice(2);
@@ -19,14 +32,19 @@ async function main() {
 
   switch (command) {
     case 'create':
-    case 'c':
-      await createSkillWorkflow(skillStore);
+    case 'c': {
+      const scope = parseScope(args);
+      const { skillStore: scopedStore } = createScopedStoreAndIndex(scope);
+      await createSkillWorkflow(scopedStore, scope);
       break;
+    }
 
     case 'list':
-    case 'ls':
-      await listSkillsWorkflow(skillIndex);
+    case 'ls': {
+      const scopeFilter = parseScopeFilter(args);
+      await listSkillsWorkflow(skillIndex, { scopeFilter });
       break;
+    }
 
     case 'search':
     case 's':
@@ -35,20 +53,22 @@ async function main() {
 
     case 'migrate':
     case 'mg': {
-      const skillName = args[1];
-      await migrateCommand(skillName);
+      const scope = parseScope(args);
+      const skillName = args.filter(a => !a.startsWith('-'))[1];
+      await migrateCommand(skillName, { skillsDir: getSkillsBasePath(scope) });
       break;
     }
 
     case 'validate':
     case 'v': {
+      const scope = parseScope(args);
       const isAll = args.includes('--all') || args.includes('-a');
       // Filter out flags to get skill name
       const skillArgs = args.slice(1).filter(a => !a.startsWith('-'));
       const skillName = skillArgs[0];
       const exitCode = await validateCommand(
         isAll ? undefined : skillName,
-        { all: isAll }
+        { all: isAll, skillsDir: getSkillsBasePath(scope) }
       );
       if (exitCode !== 0) {
         process.exit(exitCode);
@@ -67,10 +87,44 @@ async function main() {
 
     case 'budget':
     case 'bg': {
-      const exitCode = await budgetCommand();
+      const scope = parseScope(args);
+      const exitCode = await budgetCommand({ skillsDir: getSkillsBasePath(scope) });
       if (exitCode !== 0) {
         process.exit(exitCode);
       }
+      break;
+    }
+
+    case 'delete':
+    case 'del':
+    case 'rm': {
+      const scope = parseScope(args);
+      const skillName = args.filter(a => !a.startsWith('-'))[1];
+
+      if (!skillName) {
+        p.log.error('Usage: skill-creator delete <skill-name> [--project]');
+        process.exit(1);
+      }
+
+      const { skillStore: scopedStore } = createScopedStoreAndIndex(scope);
+      const exists = await scopedStore.exists(skillName);
+      if (!exists) {
+        p.log.error(`Skill "${skillName}" not found at ${scope} scope.`);
+        process.exit(1);
+      }
+
+      const confirm = await p.confirm({
+        message: `Delete "${skillName}" from ${scope} scope?`,
+        initialValue: false,
+      });
+
+      if (p.isCancel(confirm) || !confirm) {
+        p.log.info('Deletion cancelled.');
+        process.exit(0);
+      }
+
+      await scopedStore.delete(skillName);
+      p.log.success(`Deleted "${skillName}".`);
       break;
     }
 
@@ -645,6 +699,7 @@ Usage:
 
 Commands:
   create, c         Create a new skill through guided workflow
+  delete, del, rm   Delete a skill by name
   list, ls          List all available skills
   search, s         Search skills by keyword
   validate, v       Validate skill structure and metadata
@@ -661,6 +716,14 @@ Commands:
   rollback, rb      Rollback skill to previous version
   agents, ag        Manage agent suggestions from skill clusters
   help, -h          Show this help message
+
+Scope Options:
+  --project, -p     Target project-level skills (.claude/skills/)
+                    Default is user-level (~/.claude/skills/)
+                    Applies to: create, delete, validate, migrate, budget
+
+  --scope=<scope>   Filter list by scope (user, project, all)
+                    Only applies to 'list' command. Default: all
 
 Pattern Detection:
   The suggest command analyzes your Claude Code usage patterns and
@@ -697,8 +760,12 @@ Budget Management:
   Skills exceeding the budget may be silently hidden by Claude Code.
 
 Examples:
-  skill-creator create              # Start skill creation wizard
-  skill-creator list                # Show all skills
+  skill-creator create              # Create user-level skill (default)
+  skill-creator create --project    # Create project-level skill
+  skill-creator delete my-skill     # Delete from user scope
+  skill-creator delete my-skill -p  # Delete from project scope
+  skill-creator list                # Show all skills (both scopes)
+  skill-creator list --scope=user   # Show only user-level skills
   skill-creator search              # Interactive search
   skill-creator validate my-skill   # Validate a specific skill
   skill-creator validate --all      # Validate all skills
@@ -713,11 +780,15 @@ Examples:
   skill-creator rollback my-skill   # Rollback to previous version
   skill-creator agents suggest      # Analyze co-activations, suggest agents
   skill-creator agents list         # List pending agent suggestions
-  skill-creator budget              # Show budget usage across all skills
+  skill-creator budget              # Show budget usage for user scope
+  skill-creator budget --project    # Show budget usage for project scope
 
 Skill Storage:
-  Skills are stored in .claude/skills/ and are git-tracked by default.
-  Each skill is a SKILL.md file with YAML frontmatter.
+  User-level skills: ~/.claude/skills/ (shared across projects)
+  Project-level skills: .claude/skills/ (project-specific, takes precedence)
+
+  Skills are git-tracked by default. Each skill is a SKILL.md file
+  with YAML frontmatter inside a named subdirectory.
 
 Pattern Storage:
   Session observations are stored in .planning/patterns/sessions.jsonl.

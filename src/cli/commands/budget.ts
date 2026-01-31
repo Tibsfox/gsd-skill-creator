@@ -10,8 +10,11 @@ import { BudgetValidator, formatProgressBar } from '../../validation/budget-vali
  * - Per-skill breakdown sorted by size
  * - Warnings if approaching or exceeding limit
  * - Actionable suggestions for large skills
+ *
+ * @param options - Optional configuration including skillsDir
  */
-export async function budgetCommand(skillsDir: string = '.claude/skills'): Promise<number> {
+export async function budgetCommand(options?: { skillsDir?: string }): Promise<number> {
+  const skillsDir = options?.skillsDir ?? '.claude/skills';
   p.intro(pc.bgCyan(pc.black(' Skill Budget Status ')));
 
   try {
