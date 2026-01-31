@@ -60,6 +60,44 @@ Example skill structure:
 - Version-tracked through git history
 - Can extend other skills via `extends:` frontmatter
 
+### Skill Scopes
+
+Skills can exist at two locations (scopes):
+
+| Scope | Location | Purpose |
+|-------|----------|---------|
+| **User-level** | `~/.claude/skills/` | Shared across all projects. Default scope. |
+| **Project-level** | `.claude/skills/` | Project-specific customizations. |
+
+**Precedence Rule:** When the same skill name exists at both scopes, the project-level version takes precedence. This allows you to:
+- Create portable user-level skills shared across projects
+- Override specific skills per-project when needed
+
+**Scope Commands:**
+
+```bash
+# Create at user-level (default)
+skill-creator create
+
+# Create at project-level
+skill-creator create --project
+
+# See which version of a skill is active
+skill-creator resolve my-skill
+
+# List skills filtered by scope
+skill-creator list --scope=user
+skill-creator list --scope=project
+
+# Delete project-level version (user-level becomes active)
+skill-creator delete my-skill --project
+```
+
+**Use Cases:**
+
+- **User-level skills** - Personal preferences, coding standards you use everywhere, language-specific patterns
+- **Project-level skills** - Project conventions, framework-specific patterns, team standards that override your personal defaults
+
 ### Observations
 
 The system observes your Claude Code sessions and stores pattern summaries in `.planning/patterns/`. Observations are:
