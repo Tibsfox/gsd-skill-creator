@@ -7,6 +7,8 @@ import { ReservedNameValidator } from '../validation/reserved-names.js';
 import { BudgetValidator, formatBudgetDisplay } from '../validation/budget-validation.js';
 import type { SkillTrigger, SkillMetadata } from '../types/skill.js';
 import type { GsdSkillCreatorExtension, ForceOverrideReservedName, ForceOverrideBudget } from '../types/extensions.js';
+import type { SkillScope } from '../types/scope.js';
+import { getSkillsBasePath } from '../types/scope.js';
 
 // Parse comma-separated string into array
 function parseCommaSeparated(input: string | undefined): string[] {
@@ -36,8 +38,15 @@ function suggestFilePatterns(description: string): string {
   return suggestions.join(', ');
 }
 
-export async function createSkillWorkflow(skillStore: SkillStore): Promise<void> {
-  p.intro(pc.bgCyan(pc.black(' Create a New Skill ')));
+export async function createSkillWorkflow(
+  skillStore: SkillStore,
+  scope: SkillScope = 'user'
+): Promise<void> {
+  const scopePath = getSkillsBasePath(scope);
+  const scopeLabel = scope === 'user' ? 'user-level' : 'project-level';
+  p.intro(pc.bgCyan(pc.black(` Create a New Skill (${scopeLabel}) `)));
+  p.log.message(pc.dim(`Target: ${scopePath}`));
+  p.log.message('');
 
   // Step 1: Collect basic info
   const basicInfo = await p.group(
@@ -130,8 +139,31 @@ export async function createSkillWorkflow(skillStore: SkillStore): Promise<void>
   // Step 2: Check if skill already exists
   const exists = await skillStore.exists(name);
   if (exists) {
-    p.log.error(`Skill "${name}" already exists. Choose a different name.`);
+    p.log.error(`Skill "${name}" already exists at ${scope} scope. Choose a different name.`);
     return;
+  }
+
+  // Check for conflict at other scope
+  const otherScope: SkillScope = scope === 'user' ? 'project' : 'user';
+  const otherStore = new SkillStore(getSkillsBasePath(otherScope));
+  const existsAtOther = await otherStore.exists(name);
+  if (existsAtOther) {
+    const precedenceNote = scope === 'user'
+      ? 'The project-level version will take precedence.'
+      : 'This will override the user-level version.';
+
+    p.log.warn(`Skill "${name}" already exists at ${otherScope} scope.`);
+    p.log.message(pc.dim(precedenceNote));
+
+    const continueAnyway = await p.confirm({
+      message: 'Create anyway?',
+      initialValue: true,
+    });
+
+    if (p.isCancel(continueAnyway) || !continueAnyway) {
+      p.cancel('Skill creation cancelled');
+      return;
+    }
   }
 
   // Step 2.5: Check if name is reserved
@@ -192,7 +224,7 @@ export async function createSkillWorkflow(skillStore: SkillStore): Promise<void>
   // Step 2.7: Check cumulative budget before proceeding
   let forceOverrideBudgetData: ForceOverrideBudget | undefined;
   const budgetValidator = BudgetValidator.load();
-  const cumulativeCheck = await budgetValidator.checkCumulative('.claude/skills');
+  const cumulativeCheck = await budgetValidator.checkCumulative(getSkillsBasePath(scope));
 
   if (cumulativeCheck.severity === 'warning' || cumulativeCheck.severity === 'error') {
     p.log.warn(`Budget warning: ${cumulativeCheck.usagePercent.toFixed(0)}% of cumulative limit used`);
@@ -389,7 +421,10 @@ export async function createSkillWorkflow(skillStore: SkillStore): Promise<void>
     await skillStore.create(name, metadata, content as string);
 
     s.stop('Skill created!');
-    p.outro(`Skill "${name}" created at ${pc.cyan(`.claude/skills/${name}/SKILL.md`)}`);
+    const targetPath = scope === 'user'
+      ? `~/.claude/skills/${name}/SKILL.md`
+      : `.claude/skills/${name}/SKILL.md`;
+    p.outro(`Skill "${name}" created at ${pc.cyan(targetPath)}`);
   } catch (error) {
     s.stop('Failed to create skill');
     const message = error instanceof Error ? error.message : String(error);
