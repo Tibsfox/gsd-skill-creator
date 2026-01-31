@@ -2,6 +2,7 @@ import matter from 'gray-matter';
 import { readFile, writeFile, mkdir, readdir, stat, unlink } from 'fs/promises';
 import { join, dirname } from 'path';
 import { Skill, SkillMetadata, validateSkillMetadata } from '../types/skill.js';
+import { validateSkillNameStrict, suggestFixedName } from '../validation/skill-validation.js';
 import {
   getExtension,
   isLegacyFormat,
@@ -68,7 +69,25 @@ export class SkillStore {
 
   // Create a new skill
   async create(skillName: string, metadata: SkillMetadata, body: string): Promise<Skill> {
-    // Validate metadata
+    // Validate skill name against official Claude Code specification
+    const nameValidation = validateSkillNameStrict(skillName);
+    if (!nameValidation.valid) {
+      const suggestion = nameValidation.suggestion;
+      const errorMsg = suggestion
+        ? `Invalid skill name "${skillName}": ${nameValidation.errors.join('; ')}. Suggestion: "${suggestion}"`
+        : `Invalid skill name "${skillName}": ${nameValidation.errors.join('; ')}`;
+      throw new Error(errorMsg);
+    }
+
+    // Validate that skillName matches metadata.name if provided
+    if (metadata.name && metadata.name !== skillName) {
+      throw new Error(
+        `Skill name mismatch: skillName parameter "${skillName}" does not match metadata.name "${metadata.name}". ` +
+        `These must be identical.`
+      );
+    }
+
+    // Validate metadata structure
     const errors = validateSkillMetadata(metadata);
     if (errors.length > 0) {
       throw new Error(`Invalid skill metadata: ${errors.join(', ')}`);
