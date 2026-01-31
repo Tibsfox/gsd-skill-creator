@@ -1,6 +1,7 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import type { SkillIndex, SkillIndexEntry } from '../storage/skill-index.js';
+import { BudgetValidator, formatProgressBar } from '../validation/budget-validation.js';
 
 // Format a skill entry for display
 function formatSkillEntry(entry: SkillIndexEntry): string {
@@ -59,6 +60,42 @@ export async function listSkillsWorkflow(skillIndex: SkillIndex): Promise<void> 
     for (const skill of disabled) {
       p.log.message(formatSkillEntry(skill));
     }
+  }
+
+  // Budget summary
+  try {
+    const budgetValidator = BudgetValidator.load();
+    const budgetResult = await budgetValidator.checkCumulative('.claude/skills');
+
+    if (budgetResult.skills.length > 0) {
+      p.log.message('');
+      p.log.message(pc.dim('─'.repeat(40)));
+
+      const bar = formatProgressBar(budgetResult.totalChars, budgetResult.budget, 15);
+      const pct = budgetResult.usagePercent.toFixed(0);
+
+      let statusStr: string;
+      switch (budgetResult.severity) {
+        case 'error':
+          statusStr = pc.red(`${bar} ${pct}% budget used`);
+          break;
+        case 'warning':
+          statusStr = pc.yellow(`${bar} ${pct}% budget used`);
+          break;
+        default:
+          statusStr = pc.dim(`${bar} ${pct}% budget used`);
+      }
+
+      p.log.message(statusStr);
+
+      if (budgetResult.severity === 'error') {
+        p.log.message(pc.red(`Warning: ${budgetResult.hiddenCount} skill(s) may be hidden. Run 'skill-creator budget' for details.`));
+      } else if (budgetResult.severity === 'warning') {
+        p.log.message(pc.yellow(`Approaching limit. Run 'skill-creator budget' for details.`));
+      }
+    }
+  } catch {
+    // Budget check failed silently - don't disrupt list output
   }
 
   p.outro(`${skills.length} skill(s) found`);
