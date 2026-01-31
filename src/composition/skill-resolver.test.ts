@@ -4,7 +4,7 @@ import { join } from 'path';
 import { tmpdir } from 'os';
 import { SkillStore } from '../storage/skill-store.js';
 import { SkillResolver } from './skill-resolver.js';
-import { SkillMetadata } from '../types/skill.js';
+import { SkillMetadata, getExtension } from '../types/skill.js';
 
 describe('SkillResolver', () => {
   const testDir = join(tmpdir(), `skill-resolver-test-${Date.now()}`);
@@ -38,7 +38,8 @@ describe('SkillResolver', () => {
 
       expect(result.inheritanceChain).toEqual(['standalone']);
       expect(result.resolvedContent).toContain('Standalone Skill');
-      expect(result.resolvedMetadata.extends).toBeUndefined();
+      const ext = getExtension(result.resolvedMetadata);
+      expect(ext.extends).toBeUndefined();
     });
 
     it('should merge single level extension (parent before child)', async () => {
@@ -89,16 +90,17 @@ describe('SkillResolver', () => {
       }, '# Child');
 
       const result = await resolver.resolve('child');
+      const ext = getExtension(result.resolvedMetadata);
 
       // Intents should be unioned: build, deploy, test
-      expect(result.resolvedMetadata.triggers?.intents).toContain('build');
-      expect(result.resolvedMetadata.triggers?.intents).toContain('deploy');
-      expect(result.resolvedMetadata.triggers?.intents).toContain('test');
-      expect(result.resolvedMetadata.triggers?.intents?.length).toBe(3); // No duplicates
+      expect(ext.triggers?.intents).toContain('build');
+      expect(ext.triggers?.intents).toContain('deploy');
+      expect(ext.triggers?.intents).toContain('test');
+      expect(ext.triggers?.intents?.length).toBe(3); // No duplicates
 
       // Files should be unioned
-      expect(result.resolvedMetadata.triggers?.files).toContain('*.ts');
-      expect(result.resolvedMetadata.triggers?.files).toContain('*.tsx');
+      expect(ext.triggers?.files).toContain('*.ts');
+      expect(ext.triggers?.files).toContain('*.tsx');
     });
 
     it('should use child values for name, description, threshold', async () => {
@@ -113,10 +115,11 @@ describe('SkillResolver', () => {
       }, '# Child');
 
       const result = await resolver.resolve('child');
+      const ext = getExtension(result.resolvedMetadata);
 
       expect(result.resolvedMetadata.name).toBe('child');
       expect(result.resolvedMetadata.description).toBe('Child-specific description');
-      expect(result.resolvedMetadata.triggers?.threshold).toBe(0.8);
+      expect(ext.triggers?.threshold).toBe(0.8);
     });
 
     it('should NOT inherit learning metadata', async () => {
@@ -135,10 +138,11 @@ describe('SkillResolver', () => {
       }, '# Child');
 
       const result = await resolver.resolve('child');
+      const ext = getExtension(result.resolvedMetadata);
 
       // Should use child's learning, not parent's
-      expect(result.resolvedMetadata.learning?.applicationCount).toBe(2);
-      expect(result.resolvedMetadata.learning?.lastRefined).toBeUndefined();
+      expect(ext.learning?.applicationCount).toBe(2);
+      expect(ext.learning?.lastRefined).toBeUndefined();
     });
 
     it('should throw for circular dependency', async () => {
@@ -167,8 +171,9 @@ describe('SkillResolver', () => {
       await createSkill('child', { extends: 'parent' }, '# Child');
 
       const result = await resolver.resolve('child');
+      const ext = getExtension(result.resolvedMetadata);
 
-      expect(result.resolvedMetadata.extends).toBeUndefined();
+      expect(ext.extends).toBeUndefined();
     });
   });
 });

@@ -3,6 +3,8 @@
  * Uses Kahn's algorithm (BFS topological sort) for O(n+m) cycle detection.
  */
 
+import { SkillMetadata, getExtension } from '../types/skill.js';
+
 export interface DependencyResult {
   hasCycle: boolean;
   cycle?: string[];           // Skills in the cycle (for error message)
@@ -32,12 +34,13 @@ export class DependencyGraph {
   /**
    * Build graph from skill metadata map
    */
-  static fromSkills(skills: Map<string, { extends?: string }>): DependencyGraph {
+  static fromSkills(skills: Map<string, SkillMetadata>): DependencyGraph {
     const graph = new DependencyGraph();
     for (const [name, metadata] of skills) {
       graph.addNode(name);
-      if (metadata.extends) {
-        graph.addEdge(name, metadata.extends);
+      const ext = getExtension(metadata);
+      if (ext.extends) {
+        graph.addEdge(name, ext.extends);
       }
     }
     return graph;

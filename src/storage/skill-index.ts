@@ -1,7 +1,10 @@
 import { readFile, writeFile, stat, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
 import { SkillStore } from './skill-store.js';
-import { SkillMetadata } from '../types/skill.js';
+import { Skill } from '../types/skill.js';
+import { getExtension } from '../types/extensions.js';
+import type { SkillScope } from '../types/scope.js';
+import { getSkillsBasePath } from '../types/scope.js';
 
 // Index entry with metadata snapshot and mtime for invalidation
 export interface SkillIndexEntry {
@@ -23,6 +26,16 @@ export interface SkillIndexData {
   entries: SkillIndexEntry[];
 }
 
+/**
+ * Extended skill entry with scope and conflict information.
+ * Used for multi-scope listing to show which scope each skill belongs to
+ * and whether there's a name conflict across scopes.
+ */
+export interface ScopedSkillEntry extends SkillIndexEntry {
+  scope: SkillScope;
+  hasConflict?: boolean;  // Same name exists at other scope
+}
+
 export class SkillIndex {
   private indexPath: string;
   private entries: Map<string, SkillIndexEntry> = new Map();
@@ -33,6 +46,26 @@ export class SkillIndex {
     private skillsDir: string = '.claude/skills'
   ) {
     this.indexPath = join(skillsDir, '.skill-index.json');
+  }
+
+  /**
+   * Build an index entry from a skill, using getExtension accessor
+   * for format-agnostic access to extension fields.
+   */
+  private buildEntry(skill: Skill, skillPath: string, mtime: number): SkillIndexEntry {
+    const ext = getExtension(skill.metadata);
+    return {
+      name: skill.metadata.name,
+      description: skill.metadata.description,
+      enabled: ext.enabled ?? true,
+      triggers: ext.triggers ? {
+        intents: ext.triggers.intents,
+        files: ext.triggers.files,
+        contexts: ext.triggers.contexts,
+      } : undefined,
+      path: skillPath,
+      mtime,
+    };
   }
 
   // Load index from disk or rebuild if missing/stale
@@ -80,19 +113,7 @@ export class SkillIndex {
         const skillPath = join(this.skillsDir, skillName, 'SKILL.md');
         const stats = await stat(skillPath);
 
-        const entry: SkillIndexEntry = {
-          name: skill.metadata.name,
-          description: skill.metadata.description,
-          enabled: skill.metadata.enabled ?? true,
-          triggers: skill.metadata.triggers ? {
-            intents: skill.metadata.triggers.intents,
-            files: skill.metadata.triggers.files,
-            contexts: skill.metadata.triggers.contexts,
-          } : undefined,
-          path: skillPath,
-          mtime: stats.mtimeMs,
-        };
-
+        const entry = this.buildEntry(skill, skillPath, stats.mtimeMs);
         this.entries.set(skillName, entry);
       } catch (err) {
         // Skip skills that fail to parse
@@ -130,18 +151,8 @@ export class SkillIndex {
           const skill = await this.skillStore.read(skillName);
           const stats = await stat(entry.path);
 
-          this.entries.set(skillName, {
-            name: skill.metadata.name,
-            description: skill.metadata.description,
-            enabled: skill.metadata.enabled ?? true,
-            triggers: skill.metadata.triggers ? {
-              intents: skill.metadata.triggers.intents,
-              files: skill.metadata.triggers.files,
-              contexts: skill.metadata.triggers.contexts,
-            } : undefined,
-            path: entry.path,
-            mtime: stats.mtimeMs,
-          });
+          const updatedEntry = this.buildEntry(skill, entry.path, stats.mtimeMs);
+          this.entries.set(skillName, updatedEntry);
         } catch {
           // Skill was deleted, remove from index
           this.entries.delete(skillName);
@@ -157,18 +168,8 @@ export class SkillIndex {
         const skillPath = join(this.skillsDir, skillName, 'SKILL.md');
         const stats = await stat(skillPath);
 
-        this.entries.set(skillName, {
-          name: skill.metadata.name,
-          description: skill.metadata.description,
-          enabled: skill.metadata.enabled ?? true,
-          triggers: skill.metadata.triggers ? {
-            intents: skill.metadata.triggers.intents,
-            files: skill.metadata.triggers.files,
-            contexts: skill.metadata.triggers.contexts,
-          } : undefined,
-          path: skillPath,
-          mtime: stats.mtimeMs,
-        });
+        const newEntry = this.buildEntry(skill, skillPath, stats.mtimeMs);
+        this.entries.set(skillName, newEntry);
       }
     }
 
@@ -244,4 +245,50 @@ export class SkillIndex {
       return false;
     });
   }
+}
+
+/**
+ * List skills from all scopes (user and project) with conflict detection.
+ *
+ * This standalone function creates separate stores for each scope and
+ * combines results with scope and conflict information.
+ *
+ * @returns Array of ScopedSkillEntry from both user and project scopes
+ */
+export async function listAllScopes(): Promise<ScopedSkillEntry[]> {
+  const userDir = getSkillsBasePath('user');
+  const projectDir = getSkillsBasePath('project');
+
+  // Create separate stores for each scope
+  const userStore = new SkillStore(userDir);
+  const projectStore = new SkillStore(projectDir);
+
+  const userIndex = new SkillIndex(userStore, userDir);
+  const projectIndex = new SkillIndex(projectStore, projectDir);
+
+  // Load both indexes in parallel
+  const [userSkills, projectSkills] = await Promise.all([
+    userIndex.getAll(),
+    projectIndex.getAll(),
+  ]);
+
+  // Build name sets for conflict detection
+  const userNames = new Set(userSkills.map(s => s.name));
+  const projectNames = new Set(projectSkills.map(s => s.name));
+
+  // Combine with scope and conflict info
+  const result: ScopedSkillEntry[] = [
+    ...userSkills.map(s => ({
+      ...s,
+      scope: 'user' as const,
+      hasConflict: projectNames.has(s.name),
+    })),
+    ...projectSkills.map(s => ({
+      ...s,
+      scope: 'project' as const,
+      hasConflict: userNames.has(s.name),
+    })),
+  ];
+
+  return result;
 }

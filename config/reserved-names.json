@@ -1,0 +1,72 @@
+{
+  "version": "1.0.0",
+  "lastSync": "2026-01-30T00:00:00.000Z",
+  "sourceVersion": "Claude Code 1.0.33",
+  "categories": {
+    "built-in-commands": {
+      "description": "Claude Code slash commands",
+      "reason": "conflicts with built-in Claude Code command",
+      "names": [
+        "clear",
+        "compact",
+        "exit",
+        "context",
+        "memory",
+        "config",
+        "permissions",
+        "status",
+        "cost",
+        "doctor",
+        "usage",
+        "help",
+        "init",
+        "model",
+        "plan",
+        "resume",
+        "rename",
+        "stats",
+        "vim",
+        "theme",
+        "mcp",
+        "agents",
+        "copy",
+        "export",
+        "rewind",
+        "tasks",
+        "teleport",
+        "todos",
+        "statusline",
+        "terminal-setup"
+      ]
+    },
+    "agent-types": {
+      "description": "Built-in agent type names",
+      "reason": "conflicts with built-in Claude Code agent",
+      "names": [
+        "explore",
+        "plan",
+        "general-purpose",
+        "task",
+        "bash",
+        "statusline-setup",
+        "claude-code-guide"
+      ]
+    },
+    "system-skills": {
+      "description": "System-reserved skill names",
+      "reason": "conflicts with Claude Code system feature",
+      "names": [
+        "skill",
+        "skills",
+        "agent",
+        "subagent",
+        "system",
+        "claude",
+        "anthropic",
+        "memory",
+        "context",
+        "compact"
+      ]
+    }
+  }
+}

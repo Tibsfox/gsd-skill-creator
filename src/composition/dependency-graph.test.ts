@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { DependencyGraph } from './dependency-graph.js';
+import { SkillMetadata } from '../types/skill.js';
 
 describe('DependencyGraph', () => {
   describe('detectCycles', () => {
@@ -120,10 +121,10 @@ describe('DependencyGraph', () => {
 
   describe('fromSkills', () => {
     it('should build graph from skill metadata map', () => {
-      const skills = new Map([
-        ['skill-a', {}],
-        ['skill-b', { extends: 'skill-a' }],
-        ['skill-c', { extends: 'skill-b' }],
+      const skills = new Map<string, SkillMetadata>([
+        ['skill-a', { name: 'skill-a', description: 'Base skill' }],
+        ['skill-b', { name: 'skill-b', description: 'Extends A', extends: 'skill-a' }],
+        ['skill-c', { name: 'skill-c', description: 'Extends B', extends: 'skill-b' }],
       ]);
 
       const graph = DependencyGraph.fromSkills(skills);
@@ -135,15 +136,35 @@ describe('DependencyGraph', () => {
     });
 
     it('should detect cycles in skill metadata', () => {
-      const skills = new Map([
-        ['skill-a', { extends: 'skill-b' }],
-        ['skill-b', { extends: 'skill-a' }],
+      const skills = new Map<string, SkillMetadata>([
+        ['skill-a', { name: 'skill-a', description: 'Skill A', extends: 'skill-b' }],
+        ['skill-b', { name: 'skill-b', description: 'Skill B', extends: 'skill-a' }],
       ]);
 
       const graph = DependencyGraph.fromSkills(skills);
       const result = graph.detectCycles();
 
       expect(result.hasCycle).toBe(true);
+    });
+
+    it('should read extends from nested metadata.extensions format', () => {
+      const skills = new Map<string, SkillMetadata>([
+        ['skill-a', { name: 'skill-a', description: 'Base skill' }],
+        ['skill-b', {
+          name: 'skill-b',
+          description: 'Uses nested format',
+          metadata: {
+            extensions: {
+              'gsd-skill-creator': { extends: 'skill-a' }
+            }
+          }
+        }],
+      ]);
+
+      const graph = DependencyGraph.fromSkills(skills);
+
+      expect(graph.size).toBe(2);
+      expect(graph.getParent('skill-b')).toBe('skill-a');
     });
   });
 

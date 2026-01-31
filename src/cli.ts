@@ -3,10 +3,30 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { createStores, createApplicationContext } from './index.js';
 import { createSkillWorkflow } from './workflows/create-skill-workflow.js';
-import { listSkillsWorkflow } from './workflows/list-skills-workflow.js';
+import { listSkillsWorkflow, parseScopeFilter } from './workflows/list-skills-workflow.js';
 import { searchSkillsWorkflow } from './workflows/search-skills-workflow.js';
+import { migrateCommand } from './cli/commands/migrate.js';
+import { migrateAgentCommand, listAgentsInDir } from './cli/commands/migrate-agent.js';
+import { validateAgentFrontmatter } from './validation/agent-validation.js';
+import { validateCommand } from './cli/commands/validate.js';
+import { syncReservedCommand } from './cli/commands/sync-reserved.js';
+import { budgetCommand } from './cli/commands/budget.js';
+import { resolveCommand } from './cli/commands/resolve.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
+import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
+import { SkillStore } from './storage/skill-store.js';
+import { SkillIndex } from './storage/skill-index.js';
+
+/**
+ * Create skill store and index for a specific scope.
+ */
+function createScopedStoreAndIndex(scope: SkillScope) {
+  const skillsDir = getSkillsBasePath(scope);
+  const skillStore = new SkillStore(skillsDir);
+  const skillIndex = new SkillIndex(skillStore, skillsDir);
+  return { skillStore, skillIndex, skillsDir };
+}
 
 async function main() {
   const args = process.argv.slice(2);
@@ -15,19 +35,127 @@ async function main() {
 
   switch (command) {
     case 'create':
-    case 'c':
-      await createSkillWorkflow(skillStore);
+    case 'c': {
+      const scope = parseScope(args);
+      const { skillStore: scopedStore } = createScopedStoreAndIndex(scope);
+      await createSkillWorkflow(scopedStore, scope);
       break;
+    }
 
     case 'list':
-    case 'ls':
-      await listSkillsWorkflow(skillIndex);
+    case 'ls': {
+      const scopeFilter = parseScopeFilter(args);
+      await listSkillsWorkflow(skillIndex, { scopeFilter });
       break;
+    }
 
     case 'search':
     case 's':
       await searchSkillsWorkflow(skillIndex);
       break;
+
+    case 'migrate':
+    case 'mg': {
+      const scope = parseScope(args);
+      const skillName = args.filter(a => !a.startsWith('-'))[1];
+      await migrateCommand(skillName, { skillsDir: getSkillsBasePath(scope) });
+      break;
+    }
+
+    case 'validate':
+    case 'v': {
+      const scope = parseScope(args);
+      const isAll = args.includes('--all') || args.includes('-a');
+      // Filter out flags to get skill name
+      const skillArgs = args.slice(1).filter(a => !a.startsWith('-'));
+      const skillName = skillArgs[0];
+      const exitCode = await validateCommand(
+        isAll ? undefined : skillName,
+        { all: isAll, skillsDir: getSkillsBasePath(scope) }
+      );
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'sync-reserved':
+    case 'sync': {
+      const exitCode = await syncReservedCommand();
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'budget':
+    case 'bg': {
+      const scope = parseScope(args);
+      const exitCode = await budgetCommand({ skillsDir: getSkillsBasePath(scope) });
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'delete':
+    case 'del':
+    case 'rm': {
+      const scope = parseScope(args);
+      const skillName = args.filter(a => !a.startsWith('-'))[1];
+
+      if (!skillName) {
+        p.log.error('Usage: skill-creator delete <skill-name> [--project]');
+        process.exit(1);
+      }
+
+      const { skillStore: scopedStore } = createScopedStoreAndIndex(scope);
+      const exists = await scopedStore.exists(skillName);
+      if (!exists) {
+        p.log.error(`Skill "${skillName}" not found at ${scope} scope.`);
+        process.exit(1);
+      }
+
+      // Check for version at other scope
+      const otherScope: SkillScope = scope === 'user' ? 'project' : 'user';
+      const otherStore = new SkillStore(getSkillsBasePath(otherScope));
+      const existsAtOther = await otherStore.exists(skillName);
+
+      // Confirm deletion with scope-aware message
+      const confirmMsg = existsAtOther
+        ? `Delete "${skillName}" from ${scope} scope? (${otherScope}-level version will become active)`
+        : `Delete "${skillName}" from ${scope} scope?`;
+
+      const confirm = await p.confirm({
+        message: confirmMsg,
+        initialValue: false,
+      });
+
+      if (p.isCancel(confirm) || !confirm) {
+        p.log.info('Deletion cancelled.');
+        process.exit(0);
+      }
+
+      await scopedStore.delete(skillName);
+
+      if (existsAtOther) {
+        p.log.success(`Deleted "${skillName}" from ${scope} scope.`);
+        p.log.message(pc.dim(`The ${otherScope}-level version is now active.`));
+      } else {
+        p.log.success(`Deleted "${skillName}".`);
+      }
+      break;
+    }
+
+    case 'resolve':
+    case 'res': {
+      const skillName = args.filter(a => !a.startsWith('-'))[1];
+      const exitCode = await resolveCommand(skillName);
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
 
     case 'invoke':
     case 'i': {
@@ -451,6 +579,7 @@ async function main() {
       const { skillStore } = createStores();
       const { AgentSuggestionManager } = await import('./agents/index.js');
       const manager = new AgentSuggestionManager('.planning/patterns', skillStore);
+      const matter = await import('gray-matter');
 
       switch (subcommand) {
         case 'suggest':
@@ -524,22 +653,151 @@ async function main() {
           break;
         }
 
+        case 'validate':
+        case 'v': {
+          // Validate all agent files for format issues
+          const agentsDir = '.claude/agents';
+          const agents = await listAgentsInDir(agentsDir);
+
+          if (agents.length === 0) {
+            p.log.info(`No agents found in ${agentsDir}`);
+            break;
+          }
+
+          const { readFile } = await import('fs/promises');
+          const { join } = await import('path');
+
+          p.log.message(pc.bold('Agent Validation Results:'));
+          p.log.message('');
+
+          let validCount = 0;
+          let needsMigrationCount = 0;
+
+          for (const agent of agents) {
+            try {
+              const content = await readFile(agent.path, 'utf-8');
+              const parsed = matter.default(content);
+              const validation = validateAgentFrontmatter(parsed.data);
+
+              if (agent.needsMigration) {
+                needsMigrationCount++;
+                p.log.message(`  ${pc.yellow('!')} ${agent.name}`);
+                for (const issue of agent.issues) {
+                  p.log.message(`    ${pc.dim(issue)}`);
+                }
+                p.log.message(`    ${pc.dim('Run: skill-creator migrate-agent ' + agent.name)}`);
+              } else if (!validation.valid) {
+                needsMigrationCount++;
+                p.log.message(`  ${pc.red('x')} ${agent.name}`);
+                for (const error of validation.errors) {
+                  p.log.message(`    ${pc.red(error)}`);
+                }
+              } else {
+                validCount++;
+                // Show warnings even for valid agents
+                if (validation.warnings.length > 0) {
+                  p.log.message(`  ${pc.green('+')} ${agent.name} ${pc.yellow('(warnings)')}`);
+                  for (const warning of validation.warnings) {
+                    p.log.message(`    ${pc.dim(warning)}`);
+                  }
+                } else {
+                  p.log.message(`  ${pc.green('+')} ${agent.name}`);
+                }
+              }
+            } catch (err) {
+              needsMigrationCount++;
+              p.log.message(`  ${pc.red('x')} ${agent.name}`);
+              p.log.message(`    ${pc.dim('Could not read or parse file')}`);
+            }
+          }
+
+          p.log.message('');
+          p.log.message(pc.bold('Summary:'));
+          p.log.message(`  ${pc.green('Valid:')} ${validCount}`);
+          if (needsMigrationCount > 0) {
+            p.log.message(`  ${pc.yellow('Needs migration:')} ${needsMigrationCount}`);
+            p.log.message('');
+            p.log.message(`Run ${pc.cyan('skill-creator migrate-agent')} to fix issues.`);
+          }
+          break;
+        }
+
         case 'list':
-        case 'ls':
-        default: {
+        case 'ls': {
+          // Show both pending suggestions AND existing agents with validation status
+          const agentsDir = '.claude/agents';
+          const agents = await listAgentsInDir(agentsDir);
+
+          // Show existing agents first
+          if (agents.length > 0) {
+            p.log.message(pc.bold('Agents in .claude/agents/:'));
+
+            const valid = agents.filter(a => !a.needsMigration);
+            const needsMigration = agents.filter(a => a.needsMigration);
+
+            if (valid.length > 0) {
+              for (const a of valid) {
+                p.log.message(`  ${pc.green('+')} ${a.name}`);
+              }
+            }
+
+            if (needsMigration.length > 0) {
+              for (const a of needsMigration) {
+                p.log.message(`  ${pc.yellow('!')} ${a.name} ${pc.dim('(needs migration)')}`);
+              }
+            }
+            p.log.message('');
+          }
+
+          // Show pending suggestions
           const pending = await manager.getPending();
-          if (pending.length === 0) {
-            p.log.info('No pending agent suggestions.');
-            p.log.message('Run skill-creator agents suggest to analyze patterns.');
-          } else {
+          if (pending.length > 0) {
             p.log.message(pc.bold('Pending Agent Suggestions:'));
             for (const s of pending) {
               p.log.message(`  - ${s.cluster.suggestedName}`);
               p.log.message(pc.dim(`    Skills: ${s.cluster.skills.join(', ')}`));
             }
+          } else if (agents.length === 0) {
+            p.log.info('No agents found and no pending suggestions.');
+            p.log.message('Run skill-creator agents suggest to analyze patterns.');
           }
           break;
         }
+
+        default: {
+          // Show help for agents command
+          p.log.message('');
+          p.log.message(pc.bold('Agent Management:'));
+          p.log.message('');
+          p.log.message('  The "agents" command manages agent suggestions from skill clusters.');
+          p.log.message('  Generated agents use official Claude Code format with comma-separated');
+          p.log.message('  tools field.');
+          p.log.message('');
+          p.log.message(pc.yellow('  Note: User-level agents (~/.claude/agents/) have a known discovery'));
+          p.log.message(pc.yellow('  bug (GitHub #11205). Consider using project-level agents instead.'));
+          p.log.message('');
+          p.log.message('  Subcommands:');
+          p.log.message(`    ${pc.cyan('agents suggest')}    Analyze co-activations, suggest agents`);
+          p.log.message(`    ${pc.cyan('agents list')}       List agents with validation status`);
+          p.log.message(`    ${pc.cyan('agents validate')}   Check all agent files for format issues`);
+          p.log.message('');
+          p.log.message('  Examples:');
+          p.log.message('    skill-creator agents suggest');
+          p.log.message('    skill-creator agents list');
+          p.log.message('    skill-creator agents validate');
+          break;
+        }
+      }
+      break;
+    }
+
+    case 'migrate-agent':
+    case 'ma': {
+      const dryRun = args.includes('--dry-run') || args.includes('-d');
+      const agentName = args.filter(a => !a.startsWith('-'))[1];
+      const exitCode = await migrateAgentCommand(agentName, { dryRun });
+      if (exitCode !== 0) {
+        process.exit(exitCode);
       }
       break;
     }
@@ -600,8 +858,15 @@ Usage:
 
 Commands:
   create, c         Create a new skill through guided workflow
-  list, ls          List all available skills
-  search, s         Search skills by keyword
+  list, ls          List all available skills with metadata
+  search, s         Search skills by keyword interactively
+  delete, del, rm   Delete a skill
+  resolve, res      Show which version of a skill is active
+  validate, v       Validate skill structure and metadata
+  migrate, mg       Migrate legacy flat-file skills to subdirectory format
+  migrate-agent, ma Migrate agents with legacy tools format
+  sync-reserved     Show/update reserved skill names list
+  budget, bg        Show character budget usage across all skills
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
   suggest, sg       Analyze patterns and review skill suggestions
@@ -612,6 +877,29 @@ Commands:
   rollback, rb      Rollback skill to previous version
   agents, ag        Manage agent suggestions from skill clusters
   help, -h          Show this help message
+
+Scope Options:
+  Skills can exist at two scopes:
+    - User-level:    ~/.claude/skills/    (default, shared across projects)
+    - Project-level: .claude/skills/      (project-specific)
+
+  Project-level skills take precedence over user-level skills with the
+  same name. This allows project-specific customization.
+
+  --project, -p     Target project-level scope
+                    Without this flag, operations default to user-level
+                    Applies to: create, delete, validate, migrate, budget
+
+  --scope=<value>   Filter list output by scope
+                    Values: user, project, all (default: all)
+                    Only applies to 'list' command
+
+  Examples:
+    skill-creator create              # Create at ~/.claude/skills/
+    skill-creator create --project    # Create at .claude/skills/
+    skill-creator list --scope=user   # Show only user-level skills
+    skill-creator delete my-skill -p  # Delete project-level version
+    skill-creator resolve my-skill    # Show which version is active
 
 Pattern Detection:
   The suggest command analyzes your Claude Code usage patterns and
@@ -640,10 +928,40 @@ Agent Composition:
   Run 'agents suggest' to detect stable clusters and create agents
   that combine related skills into a single invocation.
 
+  Generated agents follow the official Claude Code agent format:
+    - name: lowercase letters, numbers, and hyphens
+    - description: when Claude should delegate to this agent
+    - tools: comma-separated string (e.g., "Read, Write, Bash")
+    - model: optional model alias (sonnet, opus, haiku, inherit)
+
+  Run 'agents validate' to check all agents for format issues.
+  Run 'migrate-agent' to fix agents with legacy format.
+
+  Note: User-level agents (~/.claude/agents/) have a known discovery
+  bug (GitHub #11205). Consider using project-level agents instead.
+  Workarounds: use project-level agents, the /agents UI command, or
+  pass agents via --agents CLI flag when starting Claude Code.
+
+Budget Management:
+  Claude Code limits skill content to ~15,000 characters per skill and
+  ~15,500 characters total. Run 'budget' to see current usage and identify
+  large skills that may need optimization.
+
+  Skills exceeding the budget may be silently hidden by Claude Code.
+
 Examples:
-  skill-creator create              # Start skill creation wizard
-  skill-creator list                # Show all skills
+  skill-creator create              # Create user-level skill (default)
+  skill-creator create --project    # Create project-level skill
+  skill-creator delete my-skill     # Delete from user scope
+  skill-creator delete my-skill -p  # Delete from project scope
+  skill-creator resolve my-skill    # Show which version is active
+  skill-creator list                # Show all skills (both scopes)
+  skill-creator list --scope=user   # Show only user-level skills
   skill-creator search              # Interactive search
+  skill-creator validate my-skill   # Validate a specific skill
+  skill-creator validate --all      # Validate all skills
+  skill-creator migrate             # Migrate all legacy skills interactively
+  skill-creator migrate my-skill    # Migrate a specific skill
   skill-creator invoke my-skill     # Load a specific skill
   skill-creator status              # Show active skills
   skill-creator suggest             # Analyze patterns, review suggestions
@@ -652,11 +970,20 @@ Examples:
   skill-creator history my-skill    # View version history
   skill-creator rollback my-skill   # Rollback to previous version
   skill-creator agents suggest      # Analyze co-activations, suggest agents
-  skill-creator agents list         # List pending agent suggestions
+  skill-creator agents list         # List agents with validation status
+  skill-creator agents validate     # Check all agents for format issues
+  skill-creator budget              # Show budget usage for user scope
+  skill-creator budget --project    # Show budget usage for project scope
+  skill-creator migrate-agent       # Check all agents for legacy format
+  skill-creator migrate-agent my-agent  # Migrate specific agent
+  skill-creator ma --dry-run        # Preview changes without writing
 
 Skill Storage:
-  Skills are stored in .claude/skills/ and are git-tracked by default.
-  Each skill is a SKILL.md file with YAML frontmatter.
+  User-level skills: ~/.claude/skills/ (shared across projects)
+  Project-level skills: .claude/skills/ (project-specific, takes precedence)
+
+  Skills are git-tracked by default. Each skill is a SKILL.md file
+  with YAML frontmatter inside a named subdirectory.
 
 Pattern Storage:
   Session observations are stored in .planning/patterns/sessions.jsonl.

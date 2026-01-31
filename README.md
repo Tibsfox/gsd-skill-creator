@@ -11,6 +11,7 @@ A self-evolving skill ecosystem for Claude Code that observes usage patterns, su
 - [How It Works](#how-it-works)
 - [File Structure](#file-structure)
 - [Skill Format](#skill-format)
+- [Official Claude Code Format](#official-claude-code-format)
 - [Token Budget](#token-budget)
 - [Bounded Learning](#bounded-learning)
 - [Agent Generation](#agent-generation)
@@ -59,6 +60,44 @@ Example skill structure:
 - Portable (no project-specific paths or dependencies)
 - Version-tracked through git history
 - Can extend other skills via `extends:` frontmatter
+
+### Skill Scopes
+
+Skills can exist at two locations (scopes):
+
+| Scope | Location | Purpose |
+|-------|----------|---------|
+| **User-level** | `~/.claude/skills/` | Shared across all projects. Default scope. |
+| **Project-level** | `.claude/skills/` | Project-specific customizations. |
+
+**Precedence Rule:** When the same skill name exists at both scopes, the project-level version takes precedence. This allows you to:
+- Create portable user-level skills shared across projects
+- Override specific skills per-project when needed
+
+**Scope Commands:**
+
+```bash
+# Create at user-level (default)
+skill-creator create
+
+# Create at project-level
+skill-creator create --project
+
+# See which version of a skill is active
+skill-creator resolve my-skill
+
+# List skills filtered by scope
+skill-creator list --scope=user
+skill-creator list --scope=project
+
+# Delete project-level version (user-level becomes active)
+skill-creator delete my-skill --project
+```
+
+**Use Cases:**
+
+- **User-level skills** - Personal preferences, coding standards you use everywhere, language-specific patterns
+- **Project-level skills** - Project conventions, framework-specific patterns, team standards that override your personal defaults
 
 ### Observations
 
@@ -273,6 +312,9 @@ your-project/
 
 ## Skill Format
 
+> [!NOTE]
+> For the complete official Claude Code skill format specification, see [docs/OFFICIAL-FORMAT.md](docs/OFFICIAL-FORMAT.md). This section shows the extended format used by gsd-skill-creator.
+
 Skills use Markdown with YAML frontmatter:
 
 ```markdown
@@ -340,15 +382,129 @@ function identity<T>(value: T): T {
 |-------|------|----------|-------------|
 | `name` | string | Yes | Unique skill identifier |
 | `description` | string | Yes | Human-readable description |
-| `triggers.intents` | string[] | No | Intent patterns that activate the skill |
-| `triggers.files` | string[] | No | File glob patterns that activate the skill |
-| `triggers.contexts` | string[] | No | Context keywords that activate the skill |
-| `triggers.threshold` | number | No | Minimum relevance score (0-1, default 0.5) |
-| `enabled` | boolean | No | Whether skill is active (default true) |
-| `version` | number | Auto | Auto-incremented on updates |
-| `extends` | string | No | Parent skill name to inherit from |
-| `createdAt` | string | Auto | ISO timestamp of creation |
-| `updatedAt` | string | Auto | ISO timestamp of last update |
+| `triggers.intents` | string[] | No | Intent patterns that activate the skill (extension) |
+| `triggers.files` | string[] | No | File glob patterns that activate the skill (extension) |
+| `triggers.contexts` | string[] | No | Context keywords that activate the skill (extension) |
+| `triggers.threshold` | number | No | Minimum relevance score (0-1, default 0.5) (extension) |
+| `enabled` | boolean | No | Whether skill is active (default true) (extension) |
+| `version` | number | Auto | Auto-incremented on updates (extension) |
+| `extends` | string | No | Parent skill name to inherit from (extension) |
+| `createdAt` | string | Auto | ISO timestamp of creation (extension) |
+| `updatedAt` | string | Auto | ISO timestamp of last update (extension) |
+
+*Fields marked (extension) are gsd-skill-creator additions, not part of official Claude Code format.*
+
+### Effective Descriptions
+
+Claude uses skill descriptions to decide when to auto-activate skills during conversations. Well-written descriptions significantly improve activation rates.
+
+**The "Use when..." Pattern**
+
+The most effective descriptions follow a two-part structure:
+1. **Capability statement** - What the skill does
+2. **Trigger conditions** - When to activate (using "Use when...")
+
+```yaml
+# Good: Clear capability and triggers
+description: Guides structured git commits with conventional format. Use when committing changes, preparing commit messages, or when user asks about commit conventions.
+
+# Bad: No trigger context
+description: Guide for git commit patterns (seen 5 times).
+```
+
+**Tips for Better Activation:**
+
+| Do | Don't |
+|----|-------|
+| Include "Use when..." clause | Use generic descriptions |
+| Add specific keywords users mention | Include occurrence counts |
+| Keep under 150 characters | Put trigger info only in skill body |
+| Describe observable triggers | Use first/second person |
+
+**Trigger Keywords:**
+
+Include words users actually say or type:
+- Actions: "committing", "reviewing", "debugging", "testing"
+- Questions: "how do I", "what's the best way"
+- Contexts: "working with", "setting up", "creating"
+
+**Example Skills:**
+
+These examples demonstrate effective description patterns:
+
+```yaml
+# Example 1: Git Commit Workflow
+---
+name: git-commit-workflow
+description: Guides structured git commits with conventional format. Use when committing changes, writing commit messages, or when user mentions 'commit', 'conventional commits'.
+---
+
+## Conventional Commit Format
+
+Structure: `type(scope): description`
+
+Types: feat, fix, docs, style, refactor, test, chore
+
+# Example 2: TypeScript Setup
+---
+name: typescript-setup
+description: Automates TypeScript project configuration. Use when initializing a new TypeScript project, configuring tsconfig, or when user asks about TypeScript setup.
+---
+
+## TypeScript Project Setup
+
+When setting up TypeScript projects...
+
+# Example 3: Code Review
+---
+name: code-review
+description: Reviews code for best practices and potential issues. Use when reviewing pull requests, checking code quality, or when user mentions 'review', 'PR', or 'code quality'.
+---
+
+## Code Review Checklist
+
+When reviewing code...
+```
+
+Note how each example:
+- States capability first (what it does)
+- Includes "Use when..." with specific scenarios
+- Lists keywords users might mention
+
+---
+
+## Official Claude Code Format
+
+Claude Code has an official specification for skills and agents. This tool generates files that comply with the official format while adding optional extensions.
+
+**Official Format Reference:** See [docs/OFFICIAL-FORMAT.md](docs/OFFICIAL-FORMAT.md) for complete documentation of:
+- Required and optional frontmatter fields
+- Directory structure requirements
+- Field reference tables with constraints
+- Copy-paste examples
+- Common mistakes to avoid
+
+### Official vs Extension Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | Official | Unique identifier (required) |
+| `description` | Official | What skill does (required) |
+| `user-invocable` | Official | Allow /skill-name invocation |
+| `disable-model-invocation` | Official | Prevent auto-activation |
+| `allowed-tools` | Official | Tools Claude can use |
+| `triggers` | **Extension** | gsd-skill-creator auto-activation patterns |
+| `extends` | **Extension** | Skill inheritance |
+| `version` | **Extension** | Auto-incremented version tracking |
+| `enabled` | **Extension** | Enable/disable without deleting |
+| `createdAt`, `updatedAt` | **Extension** | Timestamp tracking |
+
+Extension fields are stored under `metadata.extensions.gsd-skill-creator` to avoid polluting the official namespace.
+
+> [!NOTE]
+> Extension fields are value-adds from gsd-skill-creator. Skills work in Claude Code even without them - they enhance the skill management experience.
+
+**Extension Documentation:** See [docs/EXTENSIONS.md](docs/EXTENSIONS.md) for complete documentation of gsd-skill-creator's custom fields including triggers, learning, extends, and migration guides.
 
 ---
 
@@ -421,6 +577,9 @@ skill-creator rollback my-skill
 
 ## Agent Generation
 
+> [!NOTE]
+> For the complete official Claude Code agent format specification, see [docs/OFFICIAL-FORMAT.md](docs/OFFICIAL-FORMAT.md).
+
 Generated agents follow Claude Code's `.claude/agents/` format:
 
 ```markdown
@@ -463,13 +622,43 @@ API integration patterns for REST, GraphQL, error handling, caching, and optimis
 
 ### Agent Frontmatter
 
+All agent frontmatter fields follow the official Claude Code specification:
+
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Agent identifier |
-| `description` | string | What the agent does |
-| `tools` | string | Comma-separated list of allowed tools |
+| `name` | string | Agent identifier (required) |
+| `description` | string | What the agent does (required) |
+| `tools` | string | **Comma-separated string** of allowed tools (NOT an array) |
 | `model` | string | Model to use (`inherit`, `sonnet`, `opus`, `haiku`) |
 | `skills` | string[] | Skills to preload |
+
+> [!WARNING]
+> The `tools` field must be a comma-separated string (e.g., `tools: Read, Write, Bash`), not a YAML array. This is the most common agent format mistake.
+
+### Agent Format Compliance
+
+Generated agents follow the official Claude Code agent format:
+
+- **name**: lowercase letters, numbers, and hyphens only
+- **description**: explains when Claude should delegate to this agent
+- **tools**: comma-separated string (e.g., `tools: Read, Write, Bash`)
+- **model**: optional model alias (sonnet, opus, haiku, inherit)
+
+Run `skill-creator agents validate` to check all agents for format issues.
+Run `skill-creator migrate-agent` to fix agents with legacy format (array tools).
+
+### Known Issues
+
+**User-Level Agent Discovery (GitHub #11205)**
+
+There is a known bug where agents in `~/.claude/agents/` may not be automatically discovered by Claude Code at session startup.
+
+**Workarounds:**
+1. Use project-level agents (`.claude/agents/`) instead
+2. Use the `/agents` UI command within Claude Code
+3. Pass agents via `--agents` CLI flag when starting Claude Code
+
+This tool will warn you when creating user-level agents about this issue.
 
 ---
 
