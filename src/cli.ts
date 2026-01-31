@@ -6,6 +6,7 @@ import { createSkillWorkflow } from './workflows/create-skill-workflow.js';
 import { listSkillsWorkflow, parseScopeFilter } from './workflows/list-skills-workflow.js';
 import { searchSkillsWorkflow } from './workflows/search-skills-workflow.js';
 import { migrateCommand } from './cli/commands/migrate.js';
+import { migrateAgentCommand } from './cli/commands/migrate-agent.js';
 import { validateCommand } from './cli/commands/validate.js';
 import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { budgetCommand } from './cli/commands/budget.js';
@@ -670,6 +671,17 @@ async function main() {
       break;
     }
 
+    case 'migrate-agent':
+    case 'ma': {
+      const dryRun = args.includes('--dry-run') || args.includes('-d');
+      const agentName = args.filter(a => !a.startsWith('-'))[1];
+      const exitCode = await migrateAgentCommand(agentName, { dryRun });
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -732,6 +744,7 @@ Commands:
   resolve, res      Show which version of a skill is active
   validate, v       Validate skill structure and metadata
   migrate, mg       Migrate legacy flat-file skills to subdirectory format
+  migrate-agent, ma Migrate agents with legacy tools format
   sync-reserved     Show/update reserved skill names list
   budget, bg        Show character budget usage across all skills
   invoke, i         Manually invoke a skill by name
@@ -826,6 +839,9 @@ Examples:
   skill-creator agents list         # List pending agent suggestions
   skill-creator budget              # Show budget usage for user scope
   skill-creator budget --project    # Show budget usage for project scope
+  skill-creator migrate-agent       # Check all agents for legacy format
+  skill-creator migrate-agent my-agent  # Migrate specific agent
+  skill-creator ma --dry-run        # Preview changes without writing
 
 Skill Storage:
   User-level skills: ~/.claude/skills/ (shared across projects)
