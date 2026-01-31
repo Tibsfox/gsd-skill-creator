@@ -504,6 +504,8 @@ Extension fields are stored under `metadata.extensions.gsd-skill-creator` to avo
 > [!NOTE]
 > Extension fields are value-adds from gsd-skill-creator. Skills work in Claude Code even without them - they enhance the skill management experience.
 
+**Extension Documentation:** See [docs/EXTENSIONS.md](docs/EXTENSIONS.md) for complete documentation of gsd-skill-creator's custom fields including triggers, learning, extends, and migration guides.
+
 ---
 
 ## Token Budget
