@@ -726,9 +726,10 @@ Usage:
 
 Commands:
   create, c         Create a new skill through guided workflow
-  delete, del, rm   Delete a skill by name
-  list, ls          List all available skills
-  search, s         Search skills by keyword
+  list, ls          List all available skills with metadata
+  search, s         Search skills by keyword interactively
+  delete, del, rm   Delete a skill
+  resolve, res      Show which version of a skill is active
   validate, v       Validate skill structure and metadata
   migrate, mg       Migrate legacy flat-file skills to subdirectory format
   sync-reserved     Show/update reserved skill names list
@@ -745,12 +746,27 @@ Commands:
   help, -h          Show this help message
 
 Scope Options:
-  --project, -p     Target project-level skills (.claude/skills/)
-                    Default is user-level (~/.claude/skills/)
+  Skills can exist at two scopes:
+    - User-level:    ~/.claude/skills/    (default, shared across projects)
+    - Project-level: .claude/skills/      (project-specific)
+
+  Project-level skills take precedence over user-level skills with the
+  same name. This allows project-specific customization.
+
+  --project, -p     Target project-level scope
+                    Without this flag, operations default to user-level
                     Applies to: create, delete, validate, migrate, budget
 
-  --scope=<scope>   Filter list by scope (user, project, all)
-                    Only applies to 'list' command. Default: all
+  --scope=<value>   Filter list output by scope
+                    Values: user, project, all (default: all)
+                    Only applies to 'list' command
+
+  Examples:
+    skill-creator create              # Create at ~/.claude/skills/
+    skill-creator create --project    # Create at .claude/skills/
+    skill-creator list --scope=user   # Show only user-level skills
+    skill-creator delete my-skill -p  # Delete project-level version
+    skill-creator resolve my-skill    # Show which version is active
 
 Pattern Detection:
   The suggest command analyzes your Claude Code usage patterns and
@@ -791,6 +807,7 @@ Examples:
   skill-creator create --project    # Create project-level skill
   skill-creator delete my-skill     # Delete from user scope
   skill-creator delete my-skill -p  # Delete from project scope
+  skill-creator resolve my-skill    # Show which version is active
   skill-creator list                # Show all skills (both scopes)
   skill-creator list --scope=user   # Show only user-level skills
   skill-creator search              # Interactive search
