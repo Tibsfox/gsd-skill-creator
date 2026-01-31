@@ -3,6 +3,7 @@ import { readFile, writeFile, mkdir, readdir, stat, unlink } from 'fs/promises';
 import { join, dirname } from 'path';
 import { Skill, SkillMetadata, validateSkillMetadata } from '../types/skill.js';
 import { validateSkillNameStrict, suggestFixedName, validateReservedName } from '../validation/skill-validation.js';
+import { BudgetValidator } from '../validation/budget-validation.js';
 import {
   getExtension,
   isLegacyFormat,
@@ -151,6 +152,21 @@ export class SkillStore {
     // Create frontmatter content using gray-matter
     const content = matter.stringify(body, diskMetadata);
 
+    // Check budget (fallback protection - workflow should check first)
+    // Skip if forceOverrideBudget is set (user already confirmed override)
+    if (!existingExtForCheck.forceOverrideBudget) {
+      const budgetValidator = BudgetValidator.load();
+      const budgetCheck = budgetValidator.checkSingleSkill(content.length);
+
+      if (budgetCheck.severity === 'error') {
+        console.warn(
+          `Warning: Skill "${skillName}" exceeds character budget ` +
+          `(${budgetCheck.charCount.toLocaleString()} / ${budgetCheck.budget.toLocaleString()} chars). ` +
+          `This skill may be hidden by Claude Code.`
+        );
+      }
+    }
+
     await writeFile(skillPath, content, 'utf-8');
 
     return {
@@ -223,6 +239,23 @@ export class SkillStore {
 
     const body = newBody ?? existing.body;
     const content = matter.stringify(body, diskMetadata);
+
+    // Budget warning for updates
+    const budgetValidator = BudgetValidator.load();
+    const budgetCheck = budgetValidator.checkSingleSkill(content.length);
+
+    if (budgetCheck.severity === 'error') {
+      console.warn(
+        `Warning: Updated skill "${skillName}" exceeds character budget ` +
+        `(${budgetCheck.charCount.toLocaleString()} / ${budgetCheck.budget.toLocaleString()} chars). ` +
+        `This skill may be hidden by Claude Code.`
+      );
+    } else if (budgetCheck.severity === 'warning') {
+      console.warn(
+        `Warning: Skill "${skillName}" approaching character budget ` +
+        `(${budgetCheck.usagePercent.toFixed(0)}%). Consider reducing size.`
+      );
+    }
 
     await writeFile(existing.path, content, 'utf-8');
 
