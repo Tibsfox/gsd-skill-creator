@@ -3,6 +3,7 @@ import pc from 'picocolors';
 import { SkillStore } from '../storage/skill-store.js';
 import { validateSkillInput } from '../validation/skill-validation.js';
 import type { SkillTrigger, SkillMetadata } from '../types/skill.js';
+import type { GsdSkillCreatorExtension } from '../types/extensions.js';
 
 // Parse comma-separated string into array
 function parseCommaSeparated(input: string | undefined): string[] {
@@ -180,15 +181,24 @@ export async function createSkillWorkflow(skillStore: SkillStore): Promise<void>
   s.start('Creating skill...');
 
   try {
-    // Build metadata
-    const metadata: SkillMetadata = {
-      name,
-      description,
+    // Build extension data
+    const ext: GsdSkillCreatorExtension = {
       enabled,
     };
     if (triggers) {
-      metadata.triggers = triggers;
+      ext.triggers = triggers;
     }
+
+    // Build metadata with proper nested structure
+    const metadata: SkillMetadata = {
+      name,
+      description,
+      metadata: {
+        extensions: {
+          'gsd-skill-creator': ext,
+        },
+      },
+    };
 
     // Validate with Zod for safety
     validateSkillInput(metadata);

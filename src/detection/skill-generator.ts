@@ -1,5 +1,6 @@
 import { SkillStore } from '../storage/skill-store.js';
-import { SkillMetadata } from '../types/skill.js';
+import { SkillMetadata, SkillTrigger } from '../types/skill.js';
+import { type GsdSkillCreatorExtension } from '../types/extensions.js';
 import { SkillCandidate, PatternEvidence } from '../types/detection.js';
 
 export interface GeneratedSkill {
@@ -18,11 +19,19 @@ export class SkillGenerator {
   generateScaffold(candidate: SkillCandidate): GeneratedSkill {
     const name = this.sanitizeName(candidate.suggestedName);
 
+    const ext: GsdSkillCreatorExtension = {
+      enabled: true,
+      triggers: this.generateTriggers(candidate),
+    };
+
     const metadata: SkillMetadata = {
       name,
       description: candidate.suggestedDescription,
-      enabled: true,
-      triggers: this.generateTriggers(candidate),
+      metadata: {
+        extensions: {
+          'gsd-skill-creator': ext,
+        },
+      },
     };
 
     const body = this.generateBody(candidate);
@@ -42,8 +51,8 @@ export class SkillGenerator {
   /**
    * Generate trigger configuration from candidate
    */
-  private generateTriggers(candidate: SkillCandidate): SkillMetadata['triggers'] {
-    const triggers: SkillMetadata['triggers'] = {};
+  private generateTriggers(candidate: SkillCandidate): SkillTrigger {
+    const triggers: SkillTrigger = {};
 
     switch (candidate.type) {
       case 'command':
