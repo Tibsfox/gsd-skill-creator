@@ -16,6 +16,21 @@ export interface ForceOverrideReservedName {
 }
 
 /**
+ * Tracking data for force-overriding budget limits.
+ * Stored when user explicitly chooses to exceed character budget.
+ */
+export interface ForceOverrideBudget {
+  /** Character count at time of override */
+  charCount: number;
+  /** Budget limit that was exceeded */
+  budgetLimit: number;
+  /** Usage percentage at time of override */
+  usagePercent: number;
+  /** ISO date when override was granted */
+  overrideDate: string;
+}
+
+/**
  * Extension fields managed by gsd-skill-creator.
  * These fields are stored under metadata.extensions['gsd-skill-creator'] in new format,
  * or at the root level in legacy format.
@@ -44,6 +59,9 @@ export interface GsdSkillCreatorExtension {
 
   /** Tracking data if user force-overrode reserved name protection */
   forceOverrideReservedName?: ForceOverrideReservedName;
+
+  /** Tracking data if user force-overrode budget limits */
+  forceOverrideBudget?: ForceOverrideBudget;
 }
 
 /**
@@ -162,6 +180,7 @@ export function hasExtensionData(ext: GsdSkillCreatorExtension): boolean {
     ext.extends !== undefined ||
     ext.createdAt !== undefined ||
     ext.updatedAt !== undefined ||
-    ext.forceOverrideReservedName !== undefined
+    ext.forceOverrideReservedName !== undefined ||
+    ext.forceOverrideBudget !== undefined
   );
 }
