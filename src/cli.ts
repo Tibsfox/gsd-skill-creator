@@ -9,6 +9,7 @@ import { migrateCommand } from './cli/commands/migrate.js';
 import { validateCommand } from './cli/commands/validate.js';
 import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { budgetCommand } from './cli/commands/budget.js';
+import { resolveCommand } from './cli/commands/resolve.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
@@ -113,8 +114,18 @@ async function main() {
         process.exit(1);
       }
 
+      // Check for version at other scope
+      const otherScope: SkillScope = scope === 'user' ? 'project' : 'user';
+      const otherStore = new SkillStore(getSkillsBasePath(otherScope));
+      const existsAtOther = await otherStore.exists(skillName);
+
+      // Confirm deletion with scope-aware message
+      const confirmMsg = existsAtOther
+        ? `Delete "${skillName}" from ${scope} scope? (${otherScope}-level version will become active)`
+        : `Delete "${skillName}" from ${scope} scope?`;
+
       const confirm = await p.confirm({
-        message: `Delete "${skillName}" from ${scope} scope?`,
+        message: confirmMsg,
         initialValue: false,
       });
 
@@ -124,7 +135,23 @@ async function main() {
       }
 
       await scopedStore.delete(skillName);
-      p.log.success(`Deleted "${skillName}".`);
+
+      if (existsAtOther) {
+        p.log.success(`Deleted "${skillName}" from ${scope} scope.`);
+        p.log.message(pc.dim(`The ${otherScope}-level version is now active.`));
+      } else {
+        p.log.success(`Deleted "${skillName}".`);
+      }
+      break;
+    }
+
+    case 'resolve':
+    case 'res': {
+      const skillName = args.filter(a => !a.startsWith('-'))[1];
+      const exitCode = await resolveCommand(skillName);
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
       break;
     }
 
