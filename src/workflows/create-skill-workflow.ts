@@ -2,7 +2,7 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import matter from 'gray-matter';
 import { SkillStore } from '../storage/skill-store.js';
-import { validateSkillInput, suggestFixedName } from '../validation/skill-validation.js';
+import { validateSkillInput, suggestFixedName, validateDescriptionQuality } from '../validation/skill-validation.js';
 import { ReservedNameValidator } from '../validation/reserved-names.js';
 import { BudgetValidator, formatBudgetDisplay } from '../validation/budget-validation.js';
 import type { SkillTrigger, SkillMetadata } from '../types/skill.js';
@@ -93,7 +93,7 @@ export async function createSkillWorkflow(skillStore: SkillStore): Promise<void>
       description: () =>
         p.text({
           message: 'Description (what triggers this skill):',
-          placeholder: 'Guide for working with TypeScript projects',
+          placeholder: 'Guides X workflow. Use when working with Y or Z.',
           validate: (value) => {
             if (!value) return 'Description is required';
             if (value.length > 1024) return 'Description must be 1024 characters or less';
