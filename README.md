@@ -350,6 +350,83 @@ function identity<T>(value: T): T {
 | `createdAt` | string | Auto | ISO timestamp of creation |
 | `updatedAt` | string | Auto | ISO timestamp of last update |
 
+### Effective Descriptions
+
+Claude uses skill descriptions to decide when to auto-activate skills during conversations. Well-written descriptions significantly improve activation rates.
+
+**The "Use when..." Pattern**
+
+The most effective descriptions follow a two-part structure:
+1. **Capability statement** - What the skill does
+2. **Trigger conditions** - When to activate (using "Use when...")
+
+```yaml
+# Good: Clear capability and triggers
+description: Guides structured git commits with conventional format. Use when committing changes, preparing commit messages, or when user asks about commit conventions.
+
+# Bad: No trigger context
+description: Guide for git commit patterns (seen 5 times).
+```
+
+**Tips for Better Activation:**
+
+| Do | Don't |
+|----|-------|
+| Include "Use when..." clause | Use generic descriptions |
+| Add specific keywords users mention | Include occurrence counts |
+| Keep under 150 characters | Put trigger info only in skill body |
+| Describe observable triggers | Use first/second person |
+
+**Trigger Keywords:**
+
+Include words users actually say or type:
+- Actions: "committing", "reviewing", "debugging", "testing"
+- Questions: "how do I", "what's the best way"
+- Contexts: "working with", "setting up", "creating"
+
+**Example Skills:**
+
+These examples demonstrate effective description patterns:
+
+```yaml
+# Example 1: Git Commit Workflow
+---
+name: git-commit-workflow
+description: Guides structured git commits with conventional format. Use when committing changes, writing commit messages, or when user mentions 'commit', 'conventional commits'.
+---
+
+## Conventional Commit Format
+
+Structure: `type(scope): description`
+
+Types: feat, fix, docs, style, refactor, test, chore
+
+# Example 2: TypeScript Setup
+---
+name: typescript-setup
+description: Automates TypeScript project configuration. Use when initializing a new TypeScript project, configuring tsconfig, or when user asks about TypeScript setup.
+---
+
+## TypeScript Project Setup
+
+When setting up TypeScript projects...
+
+# Example 3: Code Review
+---
+name: code-review
+description: Reviews code for best practices and potential issues. Use when reviewing pull requests, checking code quality, or when user mentions 'review', 'PR', or 'code quality'.
+---
+
+## Code Review Checklist
+
+When reviewing code...
+```
+
+Note how each example:
+- States capability first (what it does)
+- Includes "Use when..." with specific scenarios
+- Lists keywords users might mention
+
 ---
 
 ## Token Budget
