@@ -118,11 +118,36 @@ export interface Skill {
 }
 
 // Validation helpers
+// LEGACY: Too permissive - allows ---, -foo, foo-
 export const SKILL_NAME_PATTERN = /^[a-z0-9-]{1,64}$/;
+
+// Official pattern from agentskills.io specification
+// - Must start and end with alphanumeric (not hyphen)
+// - Single char names allowed (just alphanumeric)
+// - Still need separate check for consecutive hyphens (--)
+export const OFFICIAL_NAME_PATTERN = /^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/;
+
 export const MAX_DESCRIPTION_LENGTH = 1024;
 
+/**
+ * Validate skill name against official Claude Code specification.
+ *
+ * Rules:
+ * - 1-64 characters
+ * - Only lowercase letters, numbers, and hyphens
+ * - Must not start or end with hyphen
+ * - Must not contain consecutive hyphens (--)
+ *
+ * @param name - Skill name to validate
+ * @returns true if valid, false otherwise
+ */
 export function validateSkillName(name: string): boolean {
-  return SKILL_NAME_PATTERN.test(name);
+  return (
+    name.length >= 1 &&
+    name.length <= 64 &&
+    OFFICIAL_NAME_PATTERN.test(name) &&
+    !name.includes('--')
+  );
 }
 
 export function validateSkillMetadata(metadata: SkillMetadata): string[] {
