@@ -6,7 +6,8 @@ import { createSkillWorkflow } from './workflows/create-skill-workflow.js';
 import { listSkillsWorkflow, parseScopeFilter } from './workflows/list-skills-workflow.js';
 import { searchSkillsWorkflow } from './workflows/search-skills-workflow.js';
 import { migrateCommand } from './cli/commands/migrate.js';
-import { migrateAgentCommand } from './cli/commands/migrate-agent.js';
+import { migrateAgentCommand, listAgentsInDir } from './cli/commands/migrate-agent.js';
+import { validateAgentFrontmatter } from './validation/agent-validation.js';
 import { validateCommand } from './cli/commands/validate.js';
 import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { budgetCommand } from './cli/commands/budget.js';
@@ -578,6 +579,7 @@ async function main() {
       const { skillStore } = createStores();
       const { AgentSuggestionManager } = await import('./agents/index.js');
       const manager = new AgentSuggestionManager('.planning/patterns', skillStore);
+      const matter = await import('gray-matter');
 
       switch (subcommand) {
         case 'suggest':
@@ -651,20 +653,138 @@ async function main() {
           break;
         }
 
+        case 'validate':
+        case 'v': {
+          // Validate all agent files for format issues
+          const agentsDir = '.claude/agents';
+          const agents = await listAgentsInDir(agentsDir);
+
+          if (agents.length === 0) {
+            p.log.info(`No agents found in ${agentsDir}`);
+            break;
+          }
+
+          const { readFile } = await import('fs/promises');
+          const { join } = await import('path');
+
+          p.log.message(pc.bold('Agent Validation Results:'));
+          p.log.message('');
+
+          let validCount = 0;
+          let needsMigrationCount = 0;
+
+          for (const agent of agents) {
+            try {
+              const content = await readFile(agent.path, 'utf-8');
+              const parsed = matter.default(content);
+              const validation = validateAgentFrontmatter(parsed.data);
+
+              if (agent.needsMigration) {
+                needsMigrationCount++;
+                p.log.message(`  ${pc.yellow('!')} ${agent.name}`);
+                for (const issue of agent.issues) {
+                  p.log.message(`    ${pc.dim(issue)}`);
+                }
+                p.log.message(`    ${pc.dim('Run: skill-creator migrate-agent ' + agent.name)}`);
+              } else if (!validation.valid) {
+                needsMigrationCount++;
+                p.log.message(`  ${pc.red('x')} ${agent.name}`);
+                for (const error of validation.errors) {
+                  p.log.message(`    ${pc.red(error)}`);
+                }
+              } else {
+                validCount++;
+                // Show warnings even for valid agents
+                if (validation.warnings.length > 0) {
+                  p.log.message(`  ${pc.green('+')} ${agent.name} ${pc.yellow('(warnings)')}`);
+                  for (const warning of validation.warnings) {
+                    p.log.message(`    ${pc.dim(warning)}`);
+                  }
+                } else {
+                  p.log.message(`  ${pc.green('+')} ${agent.name}`);
+                }
+              }
+            } catch (err) {
+              needsMigrationCount++;
+              p.log.message(`  ${pc.red('x')} ${agent.name}`);
+              p.log.message(`    ${pc.dim('Could not read or parse file')}`);
+            }
+          }
+
+          p.log.message('');
+          p.log.message(pc.bold('Summary:'));
+          p.log.message(`  ${pc.green('Valid:')} ${validCount}`);
+          if (needsMigrationCount > 0) {
+            p.log.message(`  ${pc.yellow('Needs migration:')} ${needsMigrationCount}`);
+            p.log.message('');
+            p.log.message(`Run ${pc.cyan('skill-creator migrate-agent')} to fix issues.`);
+          }
+          break;
+        }
+
         case 'list':
-        case 'ls':
-        default: {
+        case 'ls': {
+          // Show both pending suggestions AND existing agents with validation status
+          const agentsDir = '.claude/agents';
+          const agents = await listAgentsInDir(agentsDir);
+
+          // Show existing agents first
+          if (agents.length > 0) {
+            p.log.message(pc.bold('Agents in .claude/agents/:'));
+
+            const valid = agents.filter(a => !a.needsMigration);
+            const needsMigration = agents.filter(a => a.needsMigration);
+
+            if (valid.length > 0) {
+              for (const a of valid) {
+                p.log.message(`  ${pc.green('+')} ${a.name}`);
+              }
+            }
+
+            if (needsMigration.length > 0) {
+              for (const a of needsMigration) {
+                p.log.message(`  ${pc.yellow('!')} ${a.name} ${pc.dim('(needs migration)')}`);
+              }
+            }
+            p.log.message('');
+          }
+
+          // Show pending suggestions
           const pending = await manager.getPending();
-          if (pending.length === 0) {
-            p.log.info('No pending agent suggestions.');
-            p.log.message('Run skill-creator agents suggest to analyze patterns.');
-          } else {
+          if (pending.length > 0) {
             p.log.message(pc.bold('Pending Agent Suggestions:'));
             for (const s of pending) {
               p.log.message(`  - ${s.cluster.suggestedName}`);
               p.log.message(pc.dim(`    Skills: ${s.cluster.skills.join(', ')}`));
             }
+          } else if (agents.length === 0) {
+            p.log.info('No agents found and no pending suggestions.');
+            p.log.message('Run skill-creator agents suggest to analyze patterns.');
           }
+          break;
+        }
+
+        default: {
+          // Show help for agents command
+          p.log.message('');
+          p.log.message(pc.bold('Agent Management:'));
+          p.log.message('');
+          p.log.message('  The "agents" command manages agent suggestions from skill clusters.');
+          p.log.message('  Generated agents use official Claude Code format with comma-separated');
+          p.log.message('  tools field.');
+          p.log.message('');
+          p.log.message(pc.yellow('  Note: User-level agents (~/.claude/agents/) have a known discovery'));
+          p.log.message(pc.yellow('  bug (GitHub #11205). Consider using project-level agents instead.'));
+          p.log.message('');
+          p.log.message('  Subcommands:');
+          p.log.message(`    ${pc.cyan('agents suggest')}    Analyze co-activations, suggest agents`);
+          p.log.message(`    ${pc.cyan('agents list')}       List agents with validation status`);
+          p.log.message(`    ${pc.cyan('agents validate')}   Check all agent files for format issues`);
+          p.log.message('');
+          p.log.message('  Examples:');
+          p.log.message('    skill-creator agents suggest');
+          p.log.message('    skill-creator agents list');
+          p.log.message('    skill-creator agents validate');
           break;
         }
       }
@@ -808,6 +928,20 @@ Agent Composition:
   Run 'agents suggest' to detect stable clusters and create agents
   that combine related skills into a single invocation.
 
+  Generated agents follow the official Claude Code agent format:
+    - name: lowercase letters, numbers, and hyphens
+    - description: when Claude should delegate to this agent
+    - tools: comma-separated string (e.g., "Read, Write, Bash")
+    - model: optional model alias (sonnet, opus, haiku, inherit)
+
+  Run 'agents validate' to check all agents for format issues.
+  Run 'migrate-agent' to fix agents with legacy format.
+
+  Note: User-level agents (~/.claude/agents/) have a known discovery
+  bug (GitHub #11205). Consider using project-level agents instead.
+  Workarounds: use project-level agents, the /agents UI command, or
+  pass agents via --agents CLI flag when starting Claude Code.
+
 Budget Management:
   Claude Code limits skill content to ~15,000 characters per skill and
   ~15,500 characters total. Run 'budget' to see current usage and identify
@@ -836,7 +970,8 @@ Examples:
   skill-creator history my-skill    # View version history
   skill-creator rollback my-skill   # Rollback to previous version
   skill-creator agents suggest      # Analyze co-activations, suggest agents
-  skill-creator agents list         # List pending agent suggestions
+  skill-creator agents list         # List agents with validation status
+  skill-creator agents validate     # Check all agents for format issues
   skill-creator budget              # Show budget usage for user scope
   skill-creator budget --project    # Show budget usage for project scope
   skill-creator migrate-agent       # Check all agents for legacy format
