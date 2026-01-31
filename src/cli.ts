@@ -8,6 +8,7 @@ import { searchSkillsWorkflow } from './workflows/search-skills-workflow.js';
 import { migrateCommand } from './cli/commands/migrate.js';
 import { validateCommand } from './cli/commands/validate.js';
 import { syncReservedCommand } from './cli/commands/sync-reserved.js';
+import { budgetCommand } from './cli/commands/budget.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 
@@ -58,6 +59,15 @@ async function main() {
     case 'sync-reserved':
     case 'sync': {
       const exitCode = await syncReservedCommand();
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'budget':
+    case 'bg': {
+      const exitCode = await budgetCommand();
       if (exitCode !== 0) {
         process.exit(exitCode);
       }
@@ -640,6 +650,7 @@ Commands:
   validate, v       Validate skill structure and metadata
   migrate, mg       Migrate legacy flat-file skills to subdirectory format
   sync-reserved     Show/update reserved skill names list
+  budget, bg        Show character budget usage across all skills
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
   suggest, sg       Analyze patterns and review skill suggestions
@@ -678,6 +689,13 @@ Agent Composition:
   Run 'agents suggest' to detect stable clusters and create agents
   that combine related skills into a single invocation.
 
+Budget Management:
+  Claude Code limits skill content to ~15,000 characters per skill and
+  ~15,500 characters total. Run 'budget' to see current usage and identify
+  large skills that may need optimization.
+
+  Skills exceeding the budget may be silently hidden by Claude Code.
+
 Examples:
   skill-creator create              # Start skill creation wizard
   skill-creator list                # Show all skills
@@ -695,6 +713,7 @@ Examples:
   skill-creator rollback my-skill   # Rollback to previous version
   skill-creator agents suggest      # Analyze co-activations, suggest agents
   skill-creator agents list         # List pending agent suggestions
+  skill-creator budget              # Show budget usage across all skills
 
 Skill Storage:
   Skills are stored in .claude/skills/ and are git-tracked by default.
