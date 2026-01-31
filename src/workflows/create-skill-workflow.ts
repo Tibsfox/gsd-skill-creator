@@ -1,10 +1,12 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
+import matter from 'gray-matter';
 import { SkillStore } from '../storage/skill-store.js';
 import { validateSkillInput, suggestFixedName } from '../validation/skill-validation.js';
 import { ReservedNameValidator } from '../validation/reserved-names.js';
+import { BudgetValidator, formatBudgetDisplay } from '../validation/budget-validation.js';
 import type { SkillTrigger, SkillMetadata } from '../types/skill.js';
-import type { GsdSkillCreatorExtension, ForceOverrideReservedName } from '../types/extensions.js';
+import type { GsdSkillCreatorExtension, ForceOverrideReservedName, ForceOverrideBudget } from '../types/extensions.js';
 
 // Parse comma-separated string into array
 function parseCommaSeparated(input: string | undefined): string[] {
@@ -175,6 +177,33 @@ export async function createSkillWorkflow(skillStore: SkillStore): Promise<void>
     };
   }
 
+  // Step 2.7: Check cumulative budget before proceeding
+  let forceOverrideBudgetData: ForceOverrideBudget | undefined;
+  const budgetValidator = BudgetValidator.load();
+  const cumulativeCheck = await budgetValidator.checkCumulative('.claude/skills');
+
+  if (cumulativeCheck.severity === 'warning' || cumulativeCheck.severity === 'error') {
+    p.log.warn(`Budget warning: ${cumulativeCheck.usagePercent.toFixed(0)}% of cumulative limit used`);
+    p.log.message(formatBudgetDisplay(cumulativeCheck));
+    p.log.message('');
+
+    if (cumulativeCheck.severity === 'error') {
+      p.log.error('Adding a new skill may exceed Claude Code\'s character budget.');
+      p.log.message('Some skills may be hidden by Claude Code if the budget is exceeded.');
+      p.log.message('');
+
+      const forceOverride = await p.confirm({
+        message: 'Continue anyway? (Not recommended)',
+        initialValue: false,
+      });
+
+      if (p.isCancel(forceOverride) || !forceOverride) {
+        p.cancel('Skill creation cancelled - reduce skill sizes first.');
+        return;
+      }
+    }
+  }
+
   // Step 3: Trigger configuration (optional)
   let triggers: SkillTrigger | undefined;
 
@@ -247,6 +276,49 @@ export async function createSkillWorkflow(skillStore: SkillStore): Promise<void>
     return;
   }
 
+  // Step 4.5: Check single skill budget with actual content
+  const skillContent = matter.stringify(content as string, {
+    name,
+    description,
+  });
+  const singleCheck = budgetValidator.checkSingleSkill(skillContent.length);
+
+  if (singleCheck.severity === 'error') {
+    p.log.error(`Skill exceeds character budget (${singleCheck.charCount.toLocaleString()} chars)`);
+    p.log.message(`Budget: ${singleCheck.budget.toLocaleString()} characters`);
+    if (singleCheck.suggestions) {
+      p.log.message('');
+      p.log.message('To fix:');
+      singleCheck.suggestions.forEach(s => p.log.message(`  - ${s}`));
+    }
+    p.log.message('');
+
+    const forceOverride = await p.confirm({
+      message: 'Create anyway? (Skill may be hidden by Claude Code)',
+      initialValue: false,
+    });
+
+    if (p.isCancel(forceOverride) || !forceOverride) {
+      p.cancel('Skill creation cancelled - reduce content size.');
+      return;
+    }
+
+    // Track force-override
+    forceOverrideBudgetData = {
+      charCount: singleCheck.charCount,
+      budgetLimit: singleCheck.budget,
+      usagePercent: singleCheck.usagePercent,
+      overrideDate: new Date().toISOString(),
+    };
+
+    p.log.warn('');
+    p.log.warn(pc.bold(pc.yellow('WARNING: Creating over-budget skill.')));
+    p.log.warn(pc.yellow('This skill may be hidden or truncated by Claude Code.'));
+    p.log.warn('');
+  } else if (singleCheck.severity === 'warning') {
+    p.log.warn(`Budget warning: ${singleCheck.usagePercent.toFixed(0)}% of character budget used`);
+  }
+
   // Step 5: Preview
   p.log.message(pc.bold('\n--- Preview ---'));
   p.log.message(`name: ${pc.cyan(name)}`);
@@ -282,6 +354,9 @@ export async function createSkillWorkflow(skillStore: SkillStore): Promise<void>
     }
     if (forceOverrideData) {
       ext.forceOverrideReservedName = forceOverrideData;
+    }
+    if (forceOverrideBudgetData) {
+      ext.forceOverrideBudget = forceOverrideBudgetData;
     }
 
     // Build metadata with proper nested structure
