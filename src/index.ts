@@ -21,10 +21,25 @@ export {
   validateSkillMetadata,
 } from './types/skill.js';
 
+// Scope types and utilities
+export type { SkillScope, ScopedSkillPath } from './types/scope.js';
+export {
+  getSkillsBasePath,
+  getSkillPath,
+  parseScope,
+  resolveScopedSkillPath,
+  SCOPE_FLAG,
+  SCOPE_FLAG_SHORT,
+} from './types/scope.js';
+
 // Storage - Import first so we can use in functions
 import { PatternStore } from './storage/pattern-store.js';
 import { SkillStore } from './storage/skill-store.js';
 import { SkillIndex } from './storage/skill-index.js';
+
+// Import scope utilities for factory functions
+import { getSkillsBasePath } from './types/scope.js';
+import type { SkillScope } from './types/scope.js';
 
 // Re-export storage classes
 export { PatternStore, SkillStore, SkillIndex };
@@ -34,9 +49,12 @@ export type { SkillIndexEntry, SkillIndexData } from './storage/skill-index.js';
 export function createStores(options?: {
   patternsDir?: string;
   skillsDir?: string;
+  scope?: SkillScope;
 }) {
   const patternsDir = options?.patternsDir ?? '.planning/patterns';
-  const skillsDir = options?.skillsDir ?? '.claude/skills';
+  // If scope provided and skillsDir not provided, use scope-based path
+  const skillsDir = options?.skillsDir ??
+    (options?.scope ? getSkillsBasePath(options.scope) : '.claude/skills');
 
   const patternStore = new PatternStore(patternsDir);
   const skillStore = new SkillStore(skillsDir);
@@ -46,6 +64,32 @@ export function createStores(options?: {
     patternStore,
     skillStore,
     skillIndex,
+  };
+}
+
+/**
+ * Create stores configured for a specific scope (user or project).
+ *
+ * @param scope - 'user' for ~/.claude/skills or 'project' for .claude/skills
+ * @param options - Optional configuration
+ * @returns Object containing all stores plus scope metadata
+ */
+export function createScopedStores(scope: SkillScope, options?: {
+  patternsDir?: string;
+}) {
+  const skillsDir = getSkillsBasePath(scope);
+  const patternsDir = options?.patternsDir ?? '.planning/patterns';
+
+  const patternStore = new PatternStore(patternsDir);
+  const skillStore = new SkillStore(skillsDir);
+  const skillIndex = new SkillIndex(skillStore, skillsDir);
+
+  return {
+    patternStore,
+    skillStore,
+    skillIndex,
+    scope,
+    skillsDir,
   };
 }
 
