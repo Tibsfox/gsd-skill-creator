@@ -6,6 +6,7 @@ import { createSkillWorkflow } from './workflows/create-skill-workflow.js';
 import { listSkillsWorkflow } from './workflows/list-skills-workflow.js';
 import { searchSkillsWorkflow } from './workflows/search-skills-workflow.js';
 import { migrateCommand } from './cli/commands/migrate.js';
+import { validateCommand } from './cli/commands/validate.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 
@@ -34,6 +35,22 @@ async function main() {
     case 'mg': {
       const skillName = args[1];
       await migrateCommand(skillName);
+      break;
+    }
+
+    case 'validate':
+    case 'v': {
+      const isAll = args.includes('--all') || args.includes('-a');
+      // Filter out flags to get skill name
+      const skillArgs = args.slice(1).filter(a => !a.startsWith('-'));
+      const skillName = skillArgs[0];
+      const exitCode = await validateCommand(
+        isAll ? undefined : skillName,
+        { all: isAll }
+      );
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
       break;
     }
 
@@ -610,6 +627,7 @@ Commands:
   create, c         Create a new skill through guided workflow
   list, ls          List all available skills
   search, s         Search skills by keyword
+  validate, v       Validate skill structure and metadata
   migrate, mg       Migrate legacy flat-file skills to subdirectory format
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
@@ -653,6 +671,8 @@ Examples:
   skill-creator create              # Start skill creation wizard
   skill-creator list                # Show all skills
   skill-creator search              # Interactive search
+  skill-creator validate my-skill   # Validate a specific skill
+  skill-creator validate --all      # Validate all skills
   skill-creator migrate             # Migrate all legacy skills interactively
   skill-creator migrate my-skill    # Migrate a specific skill
   skill-creator invoke my-skill     # Load a specific skill
