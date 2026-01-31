@@ -143,14 +143,15 @@ async function readLegacySkill(path: string): Promise<{ metadata: Record<string,
  * - skill-creator validate --all        - Validate all skills
  *
  * @param skillName - Optional specific skill name to validate
- * @param options - Command options
+ * @param options - Command options including optional skillsDir
  * @returns Exit code (0 for success, 1 for validation failure)
  */
 export async function validateCommand(
   skillName?: string,
-  options?: { all?: boolean }
+  options?: { all?: boolean; skillsDir?: string }
 ): Promise<number> {
-  const store = new SkillStore('.claude/skills');
+  const skillsDir = options?.skillsDir ?? '.claude/skills';
+  const store = new SkillStore(skillsDir);
 
   // Case 1: Validate all skills
   if (options?.all) {
@@ -159,7 +160,7 @@ export async function validateCommand(
     const skills = await store.listWithFormat();
 
     if (skills.length === 0) {
-      p.log.info('No skills found in .claude/skills/');
+      p.log.info(`No skills found in ${skillsDir}/`);
       p.outro('Nothing to validate.');
       return 0;
     }
@@ -203,7 +204,7 @@ export async function validateCommand(
 
     if (!skill) {
       p.log.error(`Skill "${skillName}" not found.`);
-      p.log.message('Check that the skill exists in .claude/skills/');
+      p.log.message(`Check that the skill exists in ${skillsDir}/`);
       return 1;
     }
 
