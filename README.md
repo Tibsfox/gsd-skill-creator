@@ -11,6 +11,7 @@ A self-evolving skill ecosystem for Claude Code that observes usage patterns, su
 - [How It Works](#how-it-works)
 - [File Structure](#file-structure)
 - [Skill Format](#skill-format)
+- [Official Claude Code Format](#official-claude-code-format)
 - [Token Budget](#token-budget)
 - [Bounded Learning](#bounded-learning)
 - [Agent Generation](#agent-generation)
@@ -464,6 +465,39 @@ Note how each example:
 - States capability first (what it does)
 - Includes "Use when..." with specific scenarios
 - Lists keywords users might mention
+
+---
+
+## Official Claude Code Format
+
+Claude Code has an official specification for skills and agents. This tool generates files that comply with the official format while adding optional extensions.
+
+**Official Format Reference:** See [docs/OFFICIAL-FORMAT.md](docs/OFFICIAL-FORMAT.md) for complete documentation of:
+- Required and optional frontmatter fields
+- Directory structure requirements
+- Field reference tables with constraints
+- Copy-paste examples
+- Common mistakes to avoid
+
+### Official vs Extension Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | Official | Unique identifier (required) |
+| `description` | Official | What skill does (required) |
+| `user-invocable` | Official | Allow /skill-name invocation |
+| `disable-model-invocation` | Official | Prevent auto-activation |
+| `allowed-tools` | Official | Tools Claude can use |
+| `triggers` | **Extension** | gsd-skill-creator auto-activation patterns |
+| `extends` | **Extension** | Skill inheritance |
+| `version` | **Extension** | Auto-incremented version tracking |
+| `enabled` | **Extension** | Enable/disable without deleting |
+| `createdAt`, `updatedAt` | **Extension** | Timestamp tracking |
+
+Extension fields are stored under `metadata.extensions.gsd-skill-creator` to avoid polluting the official namespace.
+
+> [!NOTE]
+> Extension fields are value-adds from gsd-skill-creator. Skills work in Claude Code even without them - they enhance the skill management experience.
 
 ---
 
