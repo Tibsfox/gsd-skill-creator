@@ -279,18 +279,50 @@ export class PatternAnalyzer {
   }
 
   /**
-   * Generate description with evidence context
+   * Generate description with activation-friendly "Use when" pattern.
+   * Based on official Claude Code skill documentation.
    */
   private generateDescription(
     type: string,
     pattern: string,
-    occurrences: number,
+    _occurrences: number,
     coFiles: string[]
   ): string {
-    const fileContext = coFiles.length > 0
-      ? ` Often used with: ${coFiles.slice(0, 3).map(f => f.split('/').pop()).join(', ')}.`
-      : '';
-    return `Guide for ${pattern} ${type} usage patterns (seen ${occurrences} times).${fileContext}`;
+    // Capability statement based on type
+    const capabilities: Record<string, string> = {
+      command: `Workflow for running ${pattern} commands`,
+      tool: `Guide for using ${pattern} tool`,
+      file: `Patterns for working with ${pattern} files`,
+      workflow: `Multi-step workflow involving ${pattern}`,
+    };
+    const capability = capabilities[type] || `Guide for ${pattern}`;
+
+    // Generate trigger phrases from type and context
+    const triggers: string[] = [];
+    switch (type) {
+      case 'command':
+        triggers.push(`running ${pattern} commands`);
+        triggers.push(`setting up ${pattern}`);
+        break;
+      case 'tool':
+        triggers.push(`using ${pattern}`);
+        triggers.push(`working with ${pattern} tool`);
+        break;
+      case 'file':
+        triggers.push(`editing ${pattern} files`);
+        triggers.push(`working with ${pattern}`);
+        break;
+      default:
+        triggers.push(`working with ${pattern}`);
+    }
+
+    // Add file context if available
+    if (coFiles.length > 0) {
+      const fileTypes = coFiles.slice(0, 2).map(f => f.split('/').pop()).join(' or ');
+      triggers.push(`editing ${fileTypes}`);
+    }
+
+    return `${capability}. Use when ${triggers.slice(0, 3).join(', ')}.`;
   }
 
   /**
