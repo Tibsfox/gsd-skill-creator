@@ -5,6 +5,7 @@ import { createStores, createApplicationContext } from './index.js';
 import { createSkillWorkflow } from './workflows/create-skill-workflow.js';
 import { listSkillsWorkflow } from './workflows/list-skills-workflow.js';
 import { searchSkillsWorkflow } from './workflows/search-skills-workflow.js';
+import { migrateCommand } from './cli/commands/migrate.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 
@@ -28,6 +29,13 @@ async function main() {
     case 's':
       await searchSkillsWorkflow(skillIndex);
       break;
+
+    case 'migrate':
+    case 'mg': {
+      const skillName = args[1];
+      await migrateCommand(skillName);
+      break;
+    }
 
     case 'invoke':
     case 'i': {
@@ -602,6 +610,7 @@ Commands:
   create, c         Create a new skill through guided workflow
   list, ls          List all available skills
   search, s         Search skills by keyword
+  migrate, mg       Migrate legacy flat-file skills to subdirectory format
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
   suggest, sg       Analyze patterns and review skill suggestions
@@ -644,6 +653,8 @@ Examples:
   skill-creator create              # Start skill creation wizard
   skill-creator list                # Show all skills
   skill-creator search              # Interactive search
+  skill-creator migrate             # Migrate all legacy skills interactively
+  skill-creator migrate my-skill    # Migrate a specific skill
   skill-creator invoke my-skill     # Load a specific skill
   skill-creator status              # Show active skills
   skill-creator suggest             # Analyze patterns, review suggestions
