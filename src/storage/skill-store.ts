@@ -80,9 +80,13 @@ export class SkillStore {
     }
 
     // Check for reserved names (fallback protection - workflow should check first)
-    const reservedCheck = await validateReservedName(skillName);
-    if (!reservedCheck.valid) {
-      throw new Error(reservedCheck.error);
+    // Skip if forceOverrideReservedName is set (user already confirmed override in workflow)
+    const existingExtForCheck = getExtension(metadata);
+    if (!existingExtForCheck.forceOverrideReservedName) {
+      const reservedCheck = await validateReservedName(skillName);
+      if (!reservedCheck.valid) {
+        throw new Error(reservedCheck.error);
+      }
     }
 
     // Validate that skillName matches metadata.name if provided
