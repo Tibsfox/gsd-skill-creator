@@ -1,4 +1,4 @@
-import { Skill, SkillMetadata, SkillTrigger } from '../types/skill.js';
+import { Skill, SkillMetadata, SkillTrigger, getExtension, hasExtensionData, type GsdSkillCreatorExtension } from '../types/skill.js';
 import { SkillStore } from '../storage/skill-store.js';
 import { DependencyGraph } from './dependency-graph.js';
 
@@ -28,10 +28,11 @@ export class SkillResolver {
     }
 
     // 2. If no extends, return as-is
-    if (!skill.metadata.extends) {
+    const ext = getExtension(skill.metadata);
+    if (!ext.extends) {
       return {
         resolvedContent: skill.body,
-        resolvedMetadata: { ...skill.metadata, extends: undefined },
+        resolvedMetadata: { ...skill.metadata },
         inheritanceChain: [skillName],
       };
     }
@@ -71,9 +72,12 @@ export class SkillResolver {
     graph.addNode(skillName);
 
     const skill = await this.skillStore.read(skillName);
-    if (skill?.metadata.extends) {
-      graph.addEdge(skillName, skill.metadata.extends);
-      await this.buildGraphForSkill(skill.metadata.extends, graph, visited);
+    if (skill) {
+      const skillExt = getExtension(skill.metadata);
+      if (skillExt.extends) {
+        graph.addEdge(skillName, skillExt.extends);
+        await this.buildGraphForSkill(skillExt.extends, graph, visited);
+      }
     }
   }
 
@@ -105,9 +109,6 @@ export class SkillResolver {
       mergedMetadata = this.mergeMetadata(mergedMetadata, child.metadata);
     }
 
-    // Clear extends from resolved metadata
-    mergedMetadata.extends = undefined;
-
     return {
       resolvedContent: mergedContent,
       resolvedMetadata: mergedMetadata,
@@ -120,26 +121,29 @@ export class SkillResolver {
    * Child wins for most fields, triggers are unioned
    */
   private mergeMetadata(parent: SkillMetadata, child: SkillMetadata): SkillMetadata {
-    return {
+    const parentExt = getExtension(parent);
+    const childExt = getExtension(child);
+
+    // Merge extension data
+    const mergedExt: GsdSkillCreatorExtension = {
+      // State fields - child wins if defined
+      enabled: childExt.enabled ?? parentExt.enabled,
+      version: childExt.version ?? parentExt.version,
+      createdAt: childExt.createdAt ?? parentExt.createdAt,
+      updatedAt: childExt.updatedAt,
+      // Don't inherit extends (already resolved)
+      extends: undefined,
+      // Union triggers
+      triggers: this.mergeTriggers(parentExt.triggers, childExt.triggers),
+      // Learning is NOT inherited (each skill learns independently)
+      learning: childExt.learning,
+    };
+
+    // Build result with nested extension structure
+    const result: SkillMetadata = {
       // Child always wins for identity
       name: child.name,
       description: child.description,
-
-      // State fields - child wins if defined
-      enabled: child.enabled ?? parent.enabled,
-      version: child.version ?? parent.version,
-      createdAt: child.createdAt ?? parent.createdAt,
-      updatedAt: child.updatedAt,
-
-      // Don't inherit extends (already resolved)
-      extends: undefined,
-
-      // Union triggers
-      triggers: this.mergeTriggers(parent.triggers, child.triggers),
-
-      // Learning is NOT inherited (each skill learns independently)
-      learning: child.learning,
-
       // Claude Code fields - child wins if defined
       'disable-model-invocation':
         child['disable-model-invocation'] ?? parent['disable-model-invocation'],
@@ -148,14 +152,25 @@ export class SkillResolver {
       'allowed-tools':
         child['allowed-tools'] ?? parent['allowed-tools'],
     };
+
+    // Add extension container if there's data
+    if (hasExtensionData(mergedExt)) {
+      result.metadata = {
+        extensions: {
+          'gsd-skill-creator': mergedExt,
+        },
+      };
+    }
+
+    return result;
   }
 
   /**
    * Merge trigger conditions (union arrays, child wins for threshold)
    */
   private mergeTriggers(
-    parent?: SkillTrigger,
-    child?: SkillTrigger
+    parent: SkillTrigger | undefined,
+    child: SkillTrigger | undefined
   ): SkillTrigger | undefined {
     if (!parent && !child) return undefined;
     if (!parent) return child;
