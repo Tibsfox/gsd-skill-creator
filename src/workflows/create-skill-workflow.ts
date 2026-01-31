@@ -2,8 +2,9 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { SkillStore } from '../storage/skill-store.js';
 import { validateSkillInput, suggestFixedName } from '../validation/skill-validation.js';
+import { ReservedNameValidator } from '../validation/reserved-names.js';
 import type { SkillTrigger, SkillMetadata } from '../types/skill.js';
-import type { GsdSkillCreatorExtension } from '../types/extensions.js';
+import type { GsdSkillCreatorExtension, ForceOverrideReservedName } from '../types/extensions.js';
 
 // Parse comma-separated string into array
 function parseCommaSeparated(input: string | undefined): string[] {
@@ -119,6 +120,61 @@ export async function createSkillWorkflow(skillStore: SkillStore): Promise<void>
     return;
   }
 
+  // Step 2.5: Check if name is reserved
+  let forceOverrideData: ForceOverrideReservedName | undefined;
+  const validator = await ReservedNameValidator.load();
+  const reservedCheck = validator.isReserved(name);
+
+  if (reservedCheck.reserved && reservedCheck.entry) {
+    const alternatives = validator.suggestAlternatives(name);
+
+    p.log.error(`Cannot use "${name}" as skill name: ${reservedCheck.entry.reason}.`);
+    p.log.message('');
+
+    // Category-specific explanation
+    const explanations: Record<string, string> = {
+      'built-in-commands': 'This name is used by Claude Code for a built-in slash command.',
+      'agent-types': 'This name is reserved for a built-in Claude Code agent type.',
+      'system-skills': 'This name is reserved for a Claude Code system feature.',
+    };
+    p.log.message(explanations[reservedCheck.entry.category] ?? 'This name is reserved.');
+
+    if (alternatives.length > 0) {
+      p.log.message('');
+      p.log.message('Suggested alternatives:');
+      alternatives.forEach(alt => p.log.message(`  - ${alt}`));
+    }
+
+    p.log.message('');
+    p.log.message(pc.dim('See: https://code.claude.com/docs/en/skills#naming'));
+    p.log.message('');
+
+    // Ask if user wants to force-override (power user escape hatch)
+    const forceOverride = await p.confirm({
+      message: 'Override and use this name anyway? (Not recommended)',
+      initialValue: false,
+    });
+
+    if (p.isCancel(forceOverride) || !forceOverride) {
+      p.cancel('Skill creation cancelled - choose a different name.');
+      return;
+    }
+
+    // User chose to force - show prominent warning
+    p.log.warn('');
+    p.log.warn(pc.bold(pc.yellow('WARNING: Using reserved name may cause conflicts with Claude Code.')));
+    p.log.warn(pc.yellow('This skill may not work correctly or may break other features.'));
+    p.log.warn('');
+
+    // Track force-override for future reference
+    forceOverrideData = {
+      reservedName: name,
+      category: reservedCheck.entry.category,
+      reason: reservedCheck.entry.reason,
+      overrideDate: new Date().toISOString(),
+    };
+  }
+
   // Step 3: Trigger configuration (optional)
   let triggers: SkillTrigger | undefined;
 
@@ -223,6 +279,9 @@ export async function createSkillWorkflow(skillStore: SkillStore): Promise<void>
     };
     if (triggers) {
       ext.triggers = triggers;
+    }
+    if (forceOverrideData) {
+      ext.forceOverrideReservedName = forceOverrideData;
     }
 
     // Build metadata with proper nested structure
