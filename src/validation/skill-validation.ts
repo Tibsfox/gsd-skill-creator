@@ -1,6 +1,154 @@
 import { z } from 'zod';
+import { OFFICIAL_NAME_PATTERN, validateSkillName } from '../types/skill.js';
+
+// ============================================================================
+// Name Suggestion Helper
+// ============================================================================
+
+/**
+ * Transform an invalid skill name into a valid suggestion.
+ *
+ * @param input - The invalid name to transform
+ * @returns Suggested fixed name, or null if no improvement possible
+ */
+export function suggestFixedName(input: string): string | null {
+  if (!input || typeof input !== 'string') return null;
+
+  let fixed = input
+    .toLowerCase()                    // Force lowercase
+    .replace(/[^a-z0-9-]/g, '-')     // Replace invalid chars with hyphen
+    .replace(/-+/g, '-')             // Collapse consecutive hyphens
+    .replace(/^-+|-+$/g, '');        // Trim leading/trailing hyphens
+
+  // Truncate to 64 chars
+  if (fixed.length > 64) {
+    fixed = fixed.slice(0, 64).replace(/-+$/, '');
+  }
+
+  // Return null if no improvement or invalid result
+  if (!fixed || fixed === input || !validateSkillName(fixed)) {
+    return null;
+  }
+
+  return fixed;
+}
+
+// ============================================================================
+// Official Skill Name Schema (Strict)
+// ============================================================================
+
+/**
+ * Official Claude Code skill name schema with strict validation.
+ *
+ * Enforces:
+ * - 1-64 characters
+ * - Only lowercase letters, numbers, and hyphens
+ * - Must not start or end with hyphen
+ * - Must not contain consecutive hyphens (--)
+ *
+ * Error messages include suggestions when possible.
+ */
+export const OfficialSkillNameSchema = z
+  .string({
+    error: (iss) =>
+      iss.input === undefined
+        ? 'Skill name is required'
+        : 'Skill name must be a string',
+  })
+  .min(1, 'Skill name cannot be empty')
+  .max(64, {
+    error: (iss) => {
+      const input = iss.input as string;
+      const truncated = input.slice(0, 64).replace(/-+$/, '');
+      const suggested = suggestFixedName(truncated);
+      return suggested
+        ? `Skill name exceeds 64 characters. Suggestion: "${suggested}"`
+        : `Skill name exceeds 64 characters. Maximum is 64.`;
+    },
+  })
+  .regex(/^[a-z0-9]/, {
+    error: (iss) => {
+      const input = iss.input as string;
+      const suggested = suggestFixedName(input);
+      return suggested
+        ? `Skill name must start with a lowercase letter or number (not hyphen). Did you mean: "${suggested}"?`
+        : 'Skill name must start with a lowercase letter or number (not hyphen)';
+    },
+  })
+  .regex(/[a-z0-9]$/, {
+    error: (iss) => {
+      const input = iss.input as string;
+      const suggested = suggestFixedName(input);
+      return suggested
+        ? `Skill name must end with a lowercase letter or number (not hyphen). Did you mean: "${suggested}"?`
+        : 'Skill name must end with a lowercase letter or number (not hyphen)';
+    },
+  })
+  .regex(/^[a-z0-9-]+$/, {
+    error: (iss) => {
+      const input = iss.input as string;
+      const suggested = suggestFixedName(input);
+      return suggested
+        ? `Invalid characters in name. Only lowercase letters, numbers, and hyphens allowed. Did you mean: "${suggested}"?`
+        : 'Name must contain only lowercase letters, numbers, and hyphens';
+    },
+  })
+  .superRefine((name, ctx) => {
+    if (name.includes('--')) {
+      const suggested = suggestFixedName(name);
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: suggested
+          ? `Skill name cannot contain consecutive hyphens (--). Did you mean: "${suggested}"?`
+          : 'Skill name cannot contain consecutive hyphens (--)',
+      });
+    }
+  });
+
+// ============================================================================
+// Validation Result Type and Function
+// ============================================================================
+
+/**
+ * Result of strict skill name validation.
+ */
+export interface StrictNameValidationResult {
+  valid: boolean;
+  errors: string[];
+  suggestion?: string;
+}
+
+/**
+ * Validate a skill name against official Claude Code specification.
+ *
+ * Returns structured result with validation status, errors, and suggestions.
+ *
+ * @param name - The name to validate
+ * @returns Validation result with errors and suggestion
+ */
+export function validateSkillNameStrict(name: string): StrictNameValidationResult {
+  const result = OfficialSkillNameSchema.safeParse(name);
+
+  if (result.success) {
+    return { valid: true, errors: [] };
+  }
+
+  const errors = result.error.issues.map((issue: z.ZodIssue) => issue.message);
+  const suggestion = suggestFixedName(name) ?? undefined;
+
+  return {
+    valid: false,
+    errors,
+    suggestion,
+  };
+}
+
+// ============================================================================
+// Legacy Schema (for backward compatibility)
+// ============================================================================
 
 // Schema for skill name: lowercase alphanumeric with hyphens, 1-64 chars
+// NOTE: This is the legacy schema - use OfficialSkillNameSchema for strict validation
 export const SkillNameSchema = z
   .string()
   .min(1, 'Name is required')
