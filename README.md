@@ -312,6 +312,9 @@ your-project/
 
 ## Skill Format
 
+> [!NOTE]
+> For the complete official Claude Code skill format specification, see [docs/OFFICIAL-FORMAT.md](docs/OFFICIAL-FORMAT.md). This section shows the extended format used by gsd-skill-creator.
+
 Skills use Markdown with YAML frontmatter:
 
 ```markdown
@@ -379,15 +382,17 @@ function identity<T>(value: T): T {
 |-------|------|----------|-------------|
 | `name` | string | Yes | Unique skill identifier |
 | `description` | string | Yes | Human-readable description |
-| `triggers.intents` | string[] | No | Intent patterns that activate the skill |
-| `triggers.files` | string[] | No | File glob patterns that activate the skill |
-| `triggers.contexts` | string[] | No | Context keywords that activate the skill |
-| `triggers.threshold` | number | No | Minimum relevance score (0-1, default 0.5) |
-| `enabled` | boolean | No | Whether skill is active (default true) |
-| `version` | number | Auto | Auto-incremented on updates |
-| `extends` | string | No | Parent skill name to inherit from |
-| `createdAt` | string | Auto | ISO timestamp of creation |
-| `updatedAt` | string | Auto | ISO timestamp of last update |
+| `triggers.intents` | string[] | No | Intent patterns that activate the skill (extension) |
+| `triggers.files` | string[] | No | File glob patterns that activate the skill (extension) |
+| `triggers.contexts` | string[] | No | Context keywords that activate the skill (extension) |
+| `triggers.threshold` | number | No | Minimum relevance score (0-1, default 0.5) (extension) |
+| `enabled` | boolean | No | Whether skill is active (default true) (extension) |
+| `version` | number | Auto | Auto-incremented on updates (extension) |
+| `extends` | string | No | Parent skill name to inherit from (extension) |
+| `createdAt` | string | Auto | ISO timestamp of creation (extension) |
+| `updatedAt` | string | Auto | ISO timestamp of last update (extension) |
+
+*Fields marked (extension) are gsd-skill-creator additions, not part of official Claude Code format.*
 
 ### Effective Descriptions
 
