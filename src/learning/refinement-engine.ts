@@ -12,7 +12,7 @@ import {
   ApplyResult,
   CorrectionPattern,
 } from '../types/learning.js';
-import { Skill, SkillMetadata } from '../types/skill.js';
+import { Skill, SkillMetadata, getExtension, type GsdSkillCreatorExtension } from '../types/skill.js';
 
 /**
  * RefinementEngine generates bounded skill refinement suggestions based on accumulated feedback.
@@ -44,8 +44,9 @@ export class RefinementEngine {
     }
 
     // Check cooldown
-    if (skill.metadata.learning?.lastRefined) {
-      const lastRefined = new Date(skill.metadata.learning.lastRefined);
+    const ext = getExtension(skill.metadata);
+    if (ext.learning?.lastRefined) {
+      const lastRefined = new Date(ext.learning.lastRefined);
       const now = new Date();
       const daysSince = (now.getTime() - lastRefined.getTime()) / (1000 * 60 * 60 * 24);
 
@@ -125,9 +126,10 @@ export class RefinementEngine {
     // Generate preview
     const preview = this.generatePreview(skill, suggestedChanges);
 
+    const skillExt = getExtension(skill.metadata);
     return {
       skillName,
-      currentVersion: skill.metadata.version ?? 1,
+      currentVersion: skillExt.version ?? 1,
       suggestedChanges,
       confidence,
       basedOnCorrections: corrections.length,
@@ -215,16 +217,27 @@ export class RefinementEngine {
       }
     }
 
-    // Update metadata
-    const newVersion = (skill.metadata.version ?? 1) + 1;
-    const updatedMetadata: SkillMetadata = {
-      ...skill.metadata,
+    // Update metadata using accessor pattern
+    const currentExt = getExtension(skill.metadata);
+    const newVersion = (currentExt.version ?? 1) + 1;
+
+    const updatedExt: GsdSkillCreatorExtension = {
+      ...currentExt,
       version: newVersion,
       updatedAt: new Date().toISOString(),
       learning: {
-        ...skill.metadata.learning,
+        ...currentExt.learning,
         lastRefined: new Date().toISOString(),
-        applicationCount: (skill.metadata.learning?.applicationCount ?? 0) + 1,
+        applicationCount: (currentExt.learning?.applicationCount ?? 0) + 1,
+      },
+    };
+
+    // Build metadata update with proper nested structure
+    const updatedMetadata: Partial<SkillMetadata> = {
+      metadata: {
+        extensions: {
+          'gsd-skill-creator': updatedExt,
+        },
       },
     };
 

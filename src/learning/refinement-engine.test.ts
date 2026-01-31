@@ -5,7 +5,7 @@ import { tmpdir } from 'os';
 import { RefinementEngine } from './refinement-engine.js';
 import { FeedbackStore } from './feedback-store.js';
 import { SkillStore } from '../storage/skill-store.js';
-import { Skill, SkillMetadata } from '../types/skill.js';
+import { Skill, SkillMetadata, getExtension } from '../types/skill.js';
 
 describe('RefinementEngine', () => {
   const testDir = join(tmpdir(), `refinement-engine-test-${Date.now()}`);
@@ -216,8 +216,9 @@ describe('RefinementEngine', () => {
 
       // Verify skill was updated
       const updatedSkill = await skillStore.read('test-skill');
-      expect(updatedSkill?.metadata.version).toBe(2);
-      expect(updatedSkill?.metadata.learning?.lastRefined).toBeDefined();
+      const ext = getExtension(updatedSkill!.metadata);
+      expect(ext.version).toBe(2);
+      expect(ext.learning?.lastRefined).toBeDefined();
       expect(updatedSkill?.body).toContain('very nice test');
     });
   });
@@ -308,7 +309,8 @@ describe('RefinementEngine', () => {
 
       // Verify lastRefined is set
       const skill = await skillStore.read('flow-skill');
-      expect(skill?.metadata.learning?.lastRefined).toBeDefined();
+      const flowExt = getExtension(skill!.metadata);
+      expect(flowExt.learning?.lastRefined).toBeDefined();
     });
   });
 });
