@@ -247,4 +247,77 @@ this is not valid json
       expect(candidates.find(c => c.pattern === 'Bash')).toBeUndefined();
     });
   });
+
+  describe('description generation', () => {
+    it('should generate descriptions with Use when pattern', () => {
+      const analyzer = new PatternAnalyzer({ threshold: 2 });
+      const sessions = [
+        createSession({ topCommands: ['prisma'] }),
+        createSession({ topCommands: ['prisma'] }),
+      ];
+
+      const candidates = analyzer.analyzeFromSessions(sessions);
+      const candidate = candidates.find(c => c.pattern === 'prisma');
+
+      expect(candidate).toBeDefined();
+      expect(candidate!.suggestedDescription).toContain('Use when');
+      expect(candidate!.suggestedDescription).toContain('prisma');
+    });
+
+    it('should include file context in description triggers', () => {
+      const analyzer = new PatternAnalyzer({ threshold: 2 });
+      const sessions = [
+        createSession({
+          topCommands: ['prisma'],
+          topFiles: ['/src/schema.prisma'],
+        }),
+        createSession({
+          topCommands: ['prisma'],
+          topFiles: ['/src/schema.prisma'],
+        }),
+      ];
+
+      const candidates = analyzer.analyzeFromSessions(sessions);
+      const candidate = candidates.find(c => c.pattern === 'prisma');
+
+      expect(candidate!.suggestedDescription).toMatch(/editing.*schema\.prisma/i);
+    });
+
+    it('should generate type-specific capability statements', () => {
+      const analyzer = new PatternAnalyzer({ threshold: 2 });
+
+      // Command type
+      const commandSessions = [
+        createSession({ topCommands: ['docker'] }),
+        createSession({ topCommands: ['docker'] }),
+      ];
+      const commandCandidates = analyzer.analyzeFromSessions(commandSessions);
+      const commandCandidate = commandCandidates.find(c => c.pattern === 'docker');
+      expect(commandCandidate!.suggestedDescription).toContain('Workflow for running docker commands');
+
+      // Tool type
+      const toolSessions = [
+        createSession({ topTools: ['WebFetch'] }),
+        createSession({ topTools: ['WebFetch'] }),
+      ];
+      const toolCandidates = analyzer.analyzeFromSessions(toolSessions);
+      const toolCandidate = toolCandidates.find(c => c.pattern === 'WebFetch');
+      expect(toolCandidate!.suggestedDescription).toContain('Guide for using WebFetch tool');
+    });
+
+    it('should generate type-specific trigger phrases', () => {
+      const analyzer = new PatternAnalyzer({ threshold: 2 });
+
+      // Command type should have "running X commands" trigger
+      const sessions = [
+        createSession({ topCommands: ['terraform'] }),
+        createSession({ topCommands: ['terraform'] }),
+      ];
+      const candidates = analyzer.analyzeFromSessions(sessions);
+      const candidate = candidates.find(c => c.pattern === 'terraform');
+
+      expect(candidate!.suggestedDescription).toMatch(/running terraform commands/i);
+      expect(candidate!.suggestedDescription).toMatch(/setting up terraform/i);
+    });
+  });
 });
