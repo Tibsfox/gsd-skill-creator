@@ -7,6 +7,7 @@ import { listSkillsWorkflow } from './workflows/list-skills-workflow.js';
 import { searchSkillsWorkflow } from './workflows/search-skills-workflow.js';
 import { migrateCommand } from './cli/commands/migrate.js';
 import { validateCommand } from './cli/commands/validate.js';
+import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 
@@ -48,6 +49,15 @@ async function main() {
         isAll ? undefined : skillName,
         { all: isAll }
       );
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'sync-reserved':
+    case 'sync': {
+      const exitCode = await syncReservedCommand();
       if (exitCode !== 0) {
         process.exit(exitCode);
       }
@@ -629,6 +639,7 @@ Commands:
   search, s         Search skills by keyword
   validate, v       Validate skill structure and metadata
   migrate, mg       Migrate legacy flat-file skills to subdirectory format
+  sync-reserved     Show/update reserved skill names list
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
   suggest, sg       Analyze patterns and review skill suggestions
