@@ -2,6 +2,66 @@ import matter from 'gray-matter';
 import { readFile, writeFile, mkdir, readdir, stat, unlink } from 'fs/promises';
 import { join, dirname } from 'path';
 import { Skill, SkillMetadata, validateSkillMetadata } from '../types/skill.js';
+import {
+  getExtension,
+  isLegacyFormat,
+  hasExtensionData,
+  type GsdSkillCreatorExtension,
+} from '../types/extensions.js';
+import type { OfficialSkillMetadata } from '../types/skill.js';
+
+/**
+ * Normalize metadata to official Claude Code format for writing to disk.
+ * Extension fields are moved under metadata.extensions['gsd-skill-creator'].
+ * Empty extension containers are not written.
+ */
+function normalizeForWrite(metadata: SkillMetadata): OfficialSkillMetadata {
+  // Extract extension data from either location
+  const ext = getExtension(metadata);
+
+  // Build official metadata (without legacy fields at root)
+  const official: OfficialSkillMetadata = {
+    name: metadata.name,
+    description: metadata.description,
+  };
+
+  // Add optional official fields only if defined
+  if (metadata['disable-model-invocation'] !== undefined) {
+    official['disable-model-invocation'] = metadata['disable-model-invocation'];
+  }
+  if (metadata['user-invocable'] !== undefined) {
+    official['user-invocable'] = metadata['user-invocable'];
+  }
+  if (metadata['allowed-tools']) {
+    official['allowed-tools'] = metadata['allowed-tools'];
+  }
+  if (metadata['argument-hint']) {
+    official['argument-hint'] = metadata['argument-hint'];
+  }
+  if (metadata.model) {
+    official.model = metadata.model;
+  }
+  if (metadata.context) {
+    official.context = metadata.context;
+  }
+  if (metadata.agent) {
+    official.agent = metadata.agent;
+  }
+  if (metadata.hooks) {
+    official.hooks = metadata.hooks;
+  }
+
+  // Add extension container only if there's data
+  if (hasExtensionData(ext)) {
+    official.metadata = {
+      extensions: {
+        'gsd-skill-creator': ext,
+      },
+    };
+  }
+
+  return official;
+}
 
 export class SkillStore {
   constructor(private skillsDir: string = '.claude/skills') {}
@@ -14,15 +74,44 @@ export class SkillStore {
       throw new Error(`Invalid skill metadata: ${errors.join(', ')}`);
     }
 
-    // Add timestamps
     const now = new Date().toISOString();
-    const fullMetadata: SkillMetadata = {
-      ...metadata,
-      enabled: metadata.enabled ?? true,
+
+    // Build extension data, merging any provided extension fields
+    const existingExt = getExtension(metadata);
+    const fullExt: GsdSkillCreatorExtension = {
+      ...existingExt,
+      enabled: existingExt.enabled ?? true,
       version: 1,
       createdAt: now,
       updatedAt: now,
     };
+
+    // Build full metadata for internal use (new format)
+    const fullMetadata: SkillMetadata = {
+      name: metadata.name,
+      description: metadata.description,
+      'disable-model-invocation': metadata['disable-model-invocation'],
+      'user-invocable': metadata['user-invocable'],
+      'allowed-tools': metadata['allowed-tools'],
+      'argument-hint': metadata['argument-hint'],
+      model: metadata.model,
+      context: metadata.context,
+      agent: metadata.agent,
+      hooks: metadata.hooks,
+      metadata: {
+        extensions: {
+          'gsd-skill-creator': fullExt,
+        },
+      },
+    };
+
+    // Log if migrating from legacy format
+    if (isLegacyFormat(metadata)) {
+      console.info(`Migrating skill "${skillName}" to new metadata format`);
+    }
+
+    // Normalize for disk (new format, no legacy fields at root)
+    const diskMetadata = normalizeForWrite(fullMetadata);
 
     const skillDir = join(this.skillsDir, skillName);
     const skillPath = join(skillDir, 'SKILL.md');
@@ -31,7 +120,7 @@ export class SkillStore {
     await mkdir(skillDir, { recursive: true });
 
     // Create frontmatter content using gray-matter
-    const content = matter.stringify(body, fullMetadata);
+    const content = matter.stringify(body, diskMetadata);
 
     await writeFile(skillPath, content, 'utf-8');
 
@@ -59,12 +148,34 @@ export class SkillStore {
   // Update an existing skill
   async update(skillName: string, updates: Partial<SkillMetadata>, newBody?: string): Promise<Skill> {
     const existing = await this.read(skillName);
+    const existingExt = getExtension(existing.metadata);
+    const updateExt = getExtension(updates);
 
-    const updatedMetadata: SkillMetadata = {
-      ...existing.metadata,
-      ...updates,
-      version: (existing.metadata.version ?? 0) + 1,
+    // Merge extension data from existing and updates
+    const mergedExt: GsdSkillCreatorExtension = {
+      ...existingExt,
+      ...updateExt,
+      version: (existingExt.version ?? 0) + 1,
       updatedAt: new Date().toISOString(),
+    };
+
+    // Build full updated metadata (new format)
+    const updatedMetadata: SkillMetadata = {
+      name: updates.name ?? existing.metadata.name,
+      description: updates.description ?? existing.metadata.description,
+      'disable-model-invocation': updates['disable-model-invocation'] ?? existing.metadata['disable-model-invocation'],
+      'user-invocable': updates['user-invocable'] ?? existing.metadata['user-invocable'],
+      'allowed-tools': updates['allowed-tools'] ?? existing.metadata['allowed-tools'],
+      'argument-hint': updates['argument-hint'] ?? existing.metadata['argument-hint'],
+      model: updates.model ?? existing.metadata.model,
+      context: updates.context ?? existing.metadata.context,
+      agent: updates.agent ?? existing.metadata.agent,
+      hooks: updates.hooks ?? existing.metadata.hooks,
+      metadata: {
+        extensions: {
+          'gsd-skill-creator': mergedExt,
+        },
+      },
     };
 
     // Validate updated metadata
@@ -73,8 +184,16 @@ export class SkillStore {
       throw new Error(`Invalid skill metadata: ${errors.join(', ')}`);
     }
 
+    // Log if migrating from legacy format
+    if (isLegacyFormat(existing.metadata)) {
+      console.info(`Migrating skill "${skillName}" to new metadata format`);
+    }
+
+    // Normalize for disk (new format, no legacy fields at root)
+    const diskMetadata = normalizeForWrite(updatedMetadata);
+
     const body = newBody ?? existing.body;
-    const content = matter.stringify(body, updatedMetadata);
+    const content = matter.stringify(body, diskMetadata);
 
     await writeFile(existing.path, content, 'utf-8');
 
