@@ -271,4 +271,76 @@ export class SkillStore {
       return false;
     }
   }
+
+  /**
+   * List all skills with their format indicator.
+   *
+   * Returns both current (subdirectory) and legacy (flat file) skills,
+   * with metadata about their format for migration purposes.
+   *
+   * @returns Array of skill info objects with name, format, and path
+   */
+  async listWithFormat(): Promise<{ name: string; format: 'current' | 'legacy'; path: string }[]> {
+    const results: { name: string; format: 'current' | 'legacy'; path: string }[] = [];
+
+    try {
+      const entries = await readdir(this.skillsDir, { withFileTypes: true });
+
+      for (const entry of entries) {
+        if (entry.name.startsWith('.')) continue;
+
+        if (entry.isDirectory()) {
+          // Check for current subdirectory format
+          const skillPath = join(this.skillsDir, entry.name, 'SKILL.md');
+          try {
+            await stat(skillPath);
+            results.push({
+              name: entry.name,
+              format: 'current',
+              path: skillPath,
+            });
+          } catch {
+            // Directory without SKILL.md - not a valid skill
+          }
+        } else if (entry.isFile() && entry.name.endsWith('.md')) {
+          // Check for legacy flat-file format
+          const skillPath = join(this.skillsDir, entry.name);
+          const name = entry.name.replace(/\.md$/, '');
+          results.push({
+            name,
+            format: 'legacy',
+            path: skillPath,
+          });
+        }
+      }
+    } catch {
+      // Skills directory doesn't exist yet
+    }
+
+    return results;
+  }
+
+  /**
+   * Check if there are any legacy flat-file skills in the skills directory.
+   *
+   * @returns true if at least one legacy skill exists
+   */
+  async hasLegacySkills(): Promise<boolean> {
+    try {
+      const entries = await readdir(this.skillsDir, { withFileTypes: true });
+
+      for (const entry of entries) {
+        if (entry.name.startsWith('.')) continue;
+
+        // Check for .md files directly in skillsDir (not in subdirectories)
+        if (entry.isFile() && entry.name.endsWith('.md')) {
+          return true;
+        }
+      }
+    } catch {
+      // Skills directory doesn't exist
+    }
+
+    return false;
+  }
 }
