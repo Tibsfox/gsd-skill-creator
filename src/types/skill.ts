@@ -1,4 +1,20 @@
-// Claude Code required frontmatter fields
+import {
+  getExtension,
+  isLegacyFormat,
+  hasExtensionData,
+  type GsdSkillCreatorExtension,
+} from './extensions.js';
+
+// Re-export extension helpers for convenience
+export { getExtension, isLegacyFormat, hasExtensionData, type GsdSkillCreatorExtension };
+
+/**
+ * Claude Code skill metadata interface.
+ *
+ * Contains both official Claude Code fields at root level and a `metadata` container
+ * for extension fields. Legacy extension fields at root are preserved for backward
+ * compatibility but deprecated - use getExtension() to access extension data.
+ */
 export interface SkillMetadata {
   // Required by Claude Code
   name: string;           // max 64 chars, lowercase + hyphens only
@@ -8,22 +24,54 @@ export interface SkillMetadata {
   'disable-model-invocation'?: boolean;  // Prevent Claude from using
   'user-invocable'?: boolean;            // Allow /skill:name invocation
   'allowed-tools'?: string[];            // Restrict available tools
+  'argument-hint'?: string;              // Hint for user invocation arguments
+  model?: string;                        // Model override for skill execution
+  context?: 'fork';                      // Fork context for isolated execution
+  agent?: string;                        // Agent reference for skill
+  hooks?: Record<string, unknown>;       // Lifecycle hooks configuration
 
-  // Extension: Trigger conditions (when to auto-apply)
+  // Official metadata container for extensions
+  metadata?: {
+    extensions?: {
+      'gsd-skill-creator'?: GsdSkillCreatorExtension;
+      /** Preserve unknown extensions from other tools */
+      [key: string]: unknown;
+    };
+  };
+
+  // LEGACY: These fields are deprecated, use metadata.extensions.gsd-skill-creator
+  // Kept for backward compatibility - getExtension() handles both locations
+
+  /** @deprecated Use getExtension(metadata).triggers */
   triggers?: SkillTrigger;
 
-  // Extension: Learning metadata (how skill improves)
+  /** @deprecated Use getExtension(metadata).learning */
   learning?: SkillLearning;
 
-  // Extension: State
-  enabled?: boolean;       // Default true, can disable without deleting
-  version?: number;        // Incremented on updates
-  createdAt?: string;      // ISO timestamp
-  updatedAt?: string;      // ISO timestamp
+  /** @deprecated Use getExtension(metadata).enabled */
+  enabled?: boolean;
 
-  // Extension: Inheritance
-  extends?: string;        // Parent skill name to inherit from
+  /** @deprecated Use getExtension(metadata).version */
+  version?: number;
+
+  /** @deprecated Use getExtension(metadata).createdAt */
+  createdAt?: string;
+
+  /** @deprecated Use getExtension(metadata).updatedAt */
+  updatedAt?: string;
+
+  /** @deprecated Use getExtension(metadata).extends */
+  extends?: string;
 }
+
+/**
+ * Official Claude Code skill metadata (without legacy extension fields).
+ * Use this type for write operations to ensure clean output format.
+ */
+export type OfficialSkillMetadata = Omit<
+  SkillMetadata,
+  'triggers' | 'learning' | 'enabled' | 'version' | 'extends' | 'createdAt' | 'updatedAt'
+>;
 
 // Trigger conditions for auto-activation
 export interface SkillTrigger {
@@ -92,11 +140,14 @@ export function validateSkillMetadata(metadata: SkillMetadata): string[] {
     errors.push(`description exceeds ${MAX_DESCRIPTION_LENGTH} chars`);
   }
 
-  // Validate extends field if provided
-  if (metadata.extends !== undefined) {
-    if (!validateSkillName(metadata.extends)) {
+  // Validate extends field - check both root (legacy) and extension location
+  const ext = getExtension(metadata);
+  const extendsValue = metadata.extends ?? ext.extends;
+
+  if (extendsValue !== undefined) {
+    if (!validateSkillName(extendsValue)) {
       errors.push('extends must be a valid skill name (lowercase, hyphens only, max 64 chars)');
-    } else if (metadata.extends === metadata.name) {
+    } else if (extendsValue === metadata.name) {
       errors.push('skill cannot extend itself');
     }
   }
