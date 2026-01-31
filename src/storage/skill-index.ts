@@ -1,8 +1,10 @@
 import { readFile, writeFile, stat, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
 import { SkillStore } from './skill-store.js';
-import { SkillMetadata, Skill } from '../types/skill.js';
+import { Skill } from '../types/skill.js';
 import { getExtension } from '../types/extensions.js';
+import type { SkillScope } from '../types/scope.js';
+import { getSkillsBasePath } from '../types/scope.js';
 
 // Index entry with metadata snapshot and mtime for invalidation
 export interface SkillIndexEntry {
@@ -22,6 +24,16 @@ export interface SkillIndexData {
   version: number;
   buildTime: string;
   entries: SkillIndexEntry[];
+}
+
+/**
+ * Extended skill entry with scope and conflict information.
+ * Used for multi-scope listing to show which scope each skill belongs to
+ * and whether there's a name conflict across scopes.
+ */
+export interface ScopedSkillEntry extends SkillIndexEntry {
+  scope: SkillScope;
+  hasConflict?: boolean;  // Same name exists at other scope
 }
 
 export class SkillIndex {
@@ -233,4 +245,50 @@ export class SkillIndex {
       return false;
     });
   }
+}
+
+/**
+ * List skills from all scopes (user and project) with conflict detection.
+ *
+ * This standalone function creates separate stores for each scope and
+ * combines results with scope and conflict information.
+ *
+ * @returns Array of ScopedSkillEntry from both user and project scopes
+ */
+export async function listAllScopes(): Promise<ScopedSkillEntry[]> {
+  const userDir = getSkillsBasePath('user');
+  const projectDir = getSkillsBasePath('project');
+
+  // Create separate stores for each scope
+  const userStore = new SkillStore(userDir);
+  const projectStore = new SkillStore(projectDir);
+
+  const userIndex = new SkillIndex(userStore, userDir);
+  const projectIndex = new SkillIndex(projectStore, projectDir);
+
+  // Load both indexes in parallel
+  const [userSkills, projectSkills] = await Promise.all([
+    userIndex.getAll(),
+    projectIndex.getAll(),
+  ]);
+
+  // Build name sets for conflict detection
+  const userNames = new Set(userSkills.map(s => s.name));
+  const projectNames = new Set(projectSkills.map(s => s.name));
+
+  // Combine with scope and conflict info
+  const result: ScopedSkillEntry[] = [
+    ...userSkills.map(s => ({
+      ...s,
+      scope: 'user' as const,
+      hasConflict: projectNames.has(s.name),
+    })),
+    ...projectSkills.map(s => ({
+      ...s,
+      scope: 'project' as const,
+      hasConflict: userNames.has(s.name),
+    })),
+  ];
+
+  return result;
 }
