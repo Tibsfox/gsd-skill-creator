@@ -69,3 +69,40 @@ export interface ActivationScore {
   /** Original description (for reference) */
   description: string;
 }
+
+/**
+ * Confidence level for LLM analysis.
+ */
+export type LLMConfidence = 'high' | 'medium' | 'low';
+
+/**
+ * Result of LLM-based activation analysis.
+ * Returned when user opts into --llm flag and API key is available.
+ */
+export interface LLMAnalysisResult {
+  /** Predicted activation likelihood (0-100) */
+  score: number;
+  /** Confidence in the prediction */
+  confidence: LLMConfidence;
+  /** Brief explanation of the score */
+  reasoning: string;
+  /** What's good about the description */
+  strengths: string[];
+  /** What could be improved */
+  weaknesses: string[];
+  /** Specific improvement suggestions */
+  suggestions: string[];
+  /** Source identifier */
+  source: 'llm';
+}
+
+/**
+ * Combined result showing both heuristic and LLM analysis.
+ * Used when --llm flag is provided.
+ */
+export interface CombinedActivationResult {
+  /** Heuristic-based score (always available) */
+  heuristic: ActivationScore;
+  /** LLM-based analysis (null if unavailable) */
+  llm: LLMAnalysisResult | null;
+}
