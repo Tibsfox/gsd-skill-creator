@@ -16,6 +16,7 @@ import { budgetCommand } from './cli/commands/budget.js';
 import { resolveCommand } from './cli/commands/resolve.js';
 import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
 import { testCommand } from './cli/commands/test.js';
+import { simulateCommand, simulateHelp } from './cli/commands/simulate.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
@@ -170,6 +171,36 @@ async function main() {
       if (exitCode !== 0) {
         process.exit(exitCode);
       }
+      break;
+    }
+
+    case 'simulate':
+    case 'sim': {
+      // Handle help flag specially
+      if (args.includes('--help') || args.includes('-h')) {
+        console.log(simulateHelp());
+        break;
+      }
+
+      const scope = parseScope(args);
+      const verbose = args.includes('--verbose') || args.includes('-v');
+      const json = args.includes('--json');
+
+      const thresholdArg = args.find(a => a.startsWith('--threshold='));
+      const threshold = thresholdArg ? parseFloat(thresholdArg.split('=')[1]) : undefined;
+
+      const batchArg = args.find(a => a.startsWith('--batch='));
+      const batch = batchArg?.split('=')[1];
+
+      // Filter out options and command name to get the prompt
+      const promptArgs = args.filter(a =>
+        !a.startsWith('--') &&
+        !a.startsWith('-') &&
+        a !== 'simulate' &&
+        a !== 'sim'
+      );
+
+      await simulateCommand(promptArgs, { scope, verbose, threshold, json, batch });
       break;
     }
 
@@ -961,6 +992,7 @@ Commands:
   migrate-agent, ma Migrate agents with legacy tools format
   sync-reserved     Show/update reserved skill names list
   test, t           Manage skill test cases
+  simulate, sim     Predict which skill would activate for a prompt
   budget, bg        Show character budget usage across all skills
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
@@ -1064,6 +1096,24 @@ Test Management:
     skill-creator test list my-skill
     skill-creator test list my-skill --expected=negative
     skill-creator test delete my-skill abc123 --force
+
+Activation Simulation:
+  The 'simulate' command predicts which skill would activate for a given
+  prompt using semantic similarity. Use it to validate skill descriptions
+  and identify potential conflicts.
+
+  Options:
+    --scope             Scope: user (default) or project
+    --verbose, -v       Show all predictions and trace details
+    --batch <file>      Test multiple prompts from file (one per line)
+    --threshold <n>     Activation threshold (default: 0.75)
+    --json              Output results as JSON
+
+  Examples:
+    skill-creator simulate "commit my changes"
+    skill-creator sim "deploy to production" --verbose
+    skill-creator simulate --batch prompts.txt --json
+    skill-creator simulate "test" --scope project --threshold 0.8
 
 Budget Management:
   Claude Code limits skill content to ~15,000 characters per skill and
