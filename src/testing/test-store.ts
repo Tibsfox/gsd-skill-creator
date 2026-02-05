@@ -1,6 +1,5 @@
 import { readFile, writeFile, rename, mkdir, access } from 'fs/promises';
 import { join, dirname } from 'path';
-import { tmpdir } from 'os';
 import { randomUUID } from 'crypto';
 import type { TestCase } from '../types/testing.js';
 import { validateTestCaseInput, type TestCaseInput } from '../validation/test-validation.js';
@@ -86,10 +85,10 @@ export class TestStore {
     // Ensure parent directory exists
     await mkdir(dirname(testsPath), { recursive: true });
 
-    // Write to temp file first
+    // Write to temp file in the same directory as target to avoid cross-device link issues
     const tempPath = join(
-      tmpdir(),
-      `tests-${Date.now()}-${Math.random().toString(36).slice(2)}.json`
+      dirname(testsPath),
+      `.tests-${Date.now()}-${Math.random().toString(36).slice(2)}.json.tmp`
     );
 
     await writeFile(tempPath, JSON.stringify(tests, null, 2), 'utf-8');
