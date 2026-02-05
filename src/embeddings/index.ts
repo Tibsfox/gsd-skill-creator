@@ -12,6 +12,7 @@
 
 export { cosineSimilarity } from './cosine-similarity.js';
 export { HeuristicEmbedder } from './heuristic-fallback.js';
+export { EmbeddingCache } from './embedding-cache.js';
 
 // Re-export types for convenience
 export type {
