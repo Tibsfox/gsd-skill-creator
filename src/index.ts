@@ -145,6 +145,36 @@ export type {
 
 export { DEFAULT_CONFIG } from './types/application.js';
 
+// Embeddings module
+export {
+  EmbeddingService,
+  getEmbeddingService,
+  cosineSimilarity,
+  HeuristicEmbedder,
+  EmbeddingCache,
+} from './embeddings/index.js';
+export type {
+  EmbeddingVector,
+  CacheEntry,
+  CacheStore,
+  EmbeddingServiceConfig,
+  ProgressInfo,
+  EmbeddingResult,
+} from './embeddings/index.js';
+
+// Conflicts module
+export {
+  ConflictDetector,
+  ConflictFormatter,
+  RewriteSuggester,
+} from './conflicts/index.js';
+export type {
+  ConflictConfig,
+  ConflictPair,
+  ConflictResult as ConflictDetectionResult,
+  RewriteSuggestion,
+} from './conflicts/index.js';
+
 // Application components
 export { TokenCounter } from './application/token-counter.js';
 export { RelevanceScorer } from './application/relevance-scorer.js';
