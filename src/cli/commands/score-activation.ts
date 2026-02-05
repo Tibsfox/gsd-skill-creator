@@ -12,7 +12,9 @@ import {
   ActivationScorer,
   ActivationFormatter,
   ActivationSuggester,
+  LLMActivationAnalyzer,
 } from '../../activation/index.js';
+import type { CombinedActivationResult } from '../../types/activation.js';
 
 /**
  * Options for the score-activation command.
@@ -28,6 +30,8 @@ export interface ScoreActivationOptions {
   json?: boolean;
   /** Skills directory path */
   skillsDir?: string;
+  /** Use LLM for deep analysis (requires ANTHROPIC_API_KEY) */
+  llm?: boolean;
 }
 
 /**
@@ -106,25 +110,61 @@ export async function scoreActivationCommand(
 
       const result = scorer.score({ name: skillName, description });
 
+      // LLM analysis (single skill only)
+      let llmResult = null;
+      if (options?.llm) {
+        const llmAnalyzer = new LLMActivationAnalyzer();
+
+        if (!llmAnalyzer.isAvailable()) {
+          if (!json && !quiet) {
+            p.log.warn('LLM analysis unavailable (no ANTHROPIC_API_KEY). Using heuristic only.');
+          }
+        } else {
+          let llmSpinner: ReturnType<typeof p.spinner> | undefined;
+          if (!json && !quiet) {
+            llmSpinner = p.spinner();
+            llmSpinner.start('Analyzing with Claude...');
+          }
+
+          llmResult = await llmAnalyzer.analyze({ name: skillName, description });
+          llmSpinner?.stop(llmResult ? 'LLM analysis complete' : 'LLM analysis failed');
+        }
+      }
+
       // Output based on format
       if (json) {
-        console.log(formatter.formatJson(result));
+        if (options?.llm) {
+          const combined: CombinedActivationResult = { heuristic: result, llm: llmResult };
+          console.log(formatter.formatCombinedJson(combined));
+        } else {
+          console.log(formatter.formatJson(result));
+        }
       } else if (quiet) {
         console.log(formatter.formatQuiet(result));
       } else {
         console.log('');
         console.log(formatter.formatText(result, { verbose }));
 
-        // Show suggestions for non-Reliable scores
-        const suggestions = suggester.suggest(result);
-        if (suggestions.length > 0) {
+        // Show LLM result if available
+        if (llmResult) {
           console.log('');
-          console.log(pc.bold('Suggestions:'));
-          for (const suggestion of suggestions) {
-            console.log(`  - ${suggestion.text}`);
-            if (suggestion.example && verbose) {
-              console.log(pc.dim(`    Before: "${truncate(suggestion.example.before, 60)}"`));
-              console.log(pc.dim(`    After:  "${truncate(suggestion.example.after, 60)}"`));
+          console.log(pc.dim('─'.repeat(40)));
+          console.log('');
+          console.log(formatter.formatLLMResult(llmResult, { verbose }));
+        }
+
+        // Show suggestions for non-Reliable scores (only when no LLM result)
+        if (!llmResult) {
+          const suggestions = suggester.suggest(result);
+          if (suggestions.length > 0) {
+            console.log('');
+            console.log(pc.bold('Suggestions:'));
+            for (const suggestion of suggestions) {
+              console.log(`  - ${suggestion.text}`);
+              if (suggestion.example && verbose) {
+                console.log(pc.dim(`    Before: "${truncate(suggestion.example.before, 60)}"`));
+                console.log(pc.dim(`    After:  "${truncate(suggestion.example.after, 60)}"`));
+              }
             }
           }
         }
@@ -142,6 +182,11 @@ export async function scoreActivationCommand(
   }
 
   // Batch mode (--all)
+  // Warn if --llm flag is passed with --all
+  if (options?.llm && !json && !quiet) {
+    p.log.warn('--llm flag ignored in batch mode (single skill analysis only).');
+  }
+
   let loadSpinner: ReturnType<typeof p.spinner> | undefined;
 
   if (!quiet && !json) {
@@ -246,6 +291,7 @@ Options:
   --quiet, -q     Minimal output (skillName,score,label)
   --json          JSON output for scripting
   --project, -p   Use project-level skills (.claude/skills/)
+  --llm           Use Claude API for deep analysis (requires ANTHROPIC_API_KEY)
 
 Score Labels:
   Reliable (90+)    Very likely to auto-activate correctly
@@ -259,6 +305,8 @@ Examples:
   skill-creator score-activation --all            # Score all skills
   skill-creator sa --all --json                   # JSON output for CI
   skill-creator sa --all --quiet | sort -t, -k2n # Sort by score
+  skill-creator sa my-skill --llm                 # LLM-powered analysis
+  skill-creator sa my-skill --llm --verbose       # Full LLM breakdown
 
 Scoring Factors:
   Specificity       Unique terms vs generic terms
@@ -268,5 +316,10 @@ Scoring Factors:
   Generic penalty   Reduction for overused terms
 
 The command uses local heuristics - no API calls, instant results.
+
+LLM Analysis:
+  The --llm flag enables deep analysis using Claude API.
+  Requires ANTHROPIC_API_KEY environment variable.
+  Only available for single skill analysis (not batch mode).
 `);
 }
