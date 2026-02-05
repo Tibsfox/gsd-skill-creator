@@ -44,7 +44,35 @@ See [docs/EXTENSIONS.md](docs/EXTENSIONS.md) for detailed migration guide.
 
 ---
 
-## v0.1.0 - 2026-01-30
+## [1.1.0] - 2026-02-05
+
+### Added
+
+- Semantic conflict detection between skills with configurable threshold (default 0.85)
+- Activation likelihood scoring (0-100) with 5-factor heuristic analysis
+- LLM-based deep activation analysis via `--llm` flag
+- Local embeddings via @huggingface/transformers for zero API cost
+- Embedding cache with content-hash invalidation
+- Cache invalidation when embedding model version changes
+- `detect-conflicts` CLI command with `--threshold` and `--quiet` options
+- `score-activation` CLI command with `--all`, `--verbose`, and `--llm` options
+- `reload-embeddings` CLI command for model retry
+
+### Changed
+
+- Graceful degradation to heuristics when embedding model unavailable
+
+### Technical Details
+
+- Cosine similarity calculation for semantic matching
+- 5-factor scoring weights: specificity (0.35), pattern (0.25), length (0.20), verb (0.10), penalty (0.10)
+- Activation labels: Reliable (90+), Likely (70-89), Uncertain (50-69), Unlikely (<50)
+- Dynamic import for SDK dependencies to reduce bundle size
+- Never-throw API pattern for graceful degradation
+
+---
+
+## [0.1.0] - 2026-01-30
 
 ### Added
 
