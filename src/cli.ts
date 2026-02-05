@@ -9,6 +9,7 @@ import { migrateCommand } from './cli/commands/migrate.js';
 import { migrateAgentCommand, listAgentsInDir } from './cli/commands/migrate-agent.js';
 import { validateAgentFrontmatter } from './validation/agent-validation.js';
 import { validateCommand } from './cli/commands/validate.js';
+import { detectConflictsCommand } from './cli/commands/detect-conflicts.js';
 import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { budgetCommand } from './cli/commands/budget.js';
 import { resolveCommand } from './cli/commands/resolve.js';
@@ -27,6 +28,19 @@ function createScopedStoreAndIndex(scope: SkillScope) {
   const skillStore = new SkillStore(skillsDir);
   const skillIndex = new SkillIndex(skillStore, skillsDir);
   return { skillStore, skillIndex, skillsDir };
+}
+
+/**
+ * Parse threshold value from command-line arguments.
+ * Looks for --threshold=N format.
+ */
+function parseThreshold(args: string[]): number | undefined {
+  const thresholdArg = args.find(a => a.startsWith('--threshold='));
+  if (thresholdArg) {
+    const value = parseFloat(thresholdArg.split('=')[1]);
+    if (!isNaN(value)) return value;
+  }
+  return undefined;
 }
 
 async function main() {
@@ -74,6 +88,28 @@ async function main() {
         isAll ? undefined : skillName,
         { all: isAll, skillsDir: getSkillsBasePath(scope) }
       );
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'detect-conflicts':
+    case 'conflicts':
+    case 'dc': {
+      const scope = parseScope(args);
+      const threshold = parseThreshold(args);
+      const quiet = args.includes('--quiet') || args.includes('-q');
+      const json = args.includes('--json');
+      const skillArgs = args.slice(1).filter(a => !a.startsWith('-'));
+      const skillName = skillArgs[0];
+
+      const exitCode = await detectConflictsCommand(skillName, {
+        threshold,
+        quiet,
+        json,
+        skillsDir: getSkillsBasePath(scope),
+      });
       if (exitCode !== 0) {
         process.exit(exitCode);
       }
@@ -871,6 +907,7 @@ Commands:
   delete, del, rm   Delete a skill
   resolve, res      Show which version of a skill is active
   validate, v       Validate skill structure and metadata
+  detect-conflicts, dc  Detect semantic conflicts between skills
   migrate, mg       Migrate legacy flat-file skills to subdirectory format
   migrate-agent, ma Migrate agents with legacy tools format
   sync-reserved     Show/update reserved skill names list
@@ -983,6 +1020,10 @@ Examples:
   skill-creator agents validate     # Check all agents for format issues
   skill-creator budget              # Show budget usage for user scope
   skill-creator budget --project    # Show budget usage for project scope
+  skill-creator detect-conflicts    # Scan all skills for conflicts
+  skill-creator dc my-skill         # Check one skill against others
+  skill-creator dc --threshold=0.90 # Use stricter threshold
+  skill-creator dc --json           # JSON output for CI/scripting
   skill-creator migrate-agent       # Check all agents for legacy format
   skill-creator migrate-agent my-agent  # Migrate specific agent
   skill-creator ma --dry-run        # Preview changes without writing
