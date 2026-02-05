@@ -11,8 +11,10 @@ This document describes extension fields added by gsd-skill-creator beyond the [
 - [Force Override Fields](#force-override-fields)
 - [Storage Format](#storage-format)
 - [Stability Indicators](#stability-indicators)
-- [Migration Paths](#migration-paths)
+- [Migration Guide](#migration-guide)
 - [Troubleshooting](#troubleshooting)
+- [Known Issues](#known-issues)
+- [Documentation Notes](#documentation-notes)
 
 ---
 
@@ -253,15 +255,83 @@ These fields may change:
 
 ---
 
-## Migration Paths
+## Migration Guide
 
-There are two migration scenarios users may encounter.
+This section documents all migration paths for deprecated patterns. Users with legacy skills should follow these guides to ensure compatibility with current versions.
 
-### Flat-File to Directory Migration
+### Root-Level Extension Fields (v1.0.0+)
 
-**When it applies:** Skills stored as `.claude/skills/name.md` instead of `.claude/skills/name/SKILL.md`
+In v1.0.0, extension fields moved from root level to `metadata.extensions.gsd-skill-creator`.
 
-**CLI command:**
+**Deprecated fields at root level:**
+- `triggers` - Use `getExtension(metadata).triggers`
+- `learning` - Use `getExtension(metadata).learning`
+- `enabled` - Use `getExtension(metadata).enabled`
+- `version` - Use `getExtension(metadata).version`
+- `createdAt` - Use `getExtension(metadata).createdAt`
+- `updatedAt` - Use `getExtension(metadata).updatedAt`
+- `extends` - Use `getExtension(metadata).extends`
+
+**Before (deprecated):**
+```yaml
+---
+name: my-skill
+description: My skill description
+triggers:
+  intents: ["typescript"]
+enabled: true
+version: 3
+---
+```
+
+**After (recommended):**
+```yaml
+---
+name: my-skill
+description: My skill description
+metadata:
+  extensions:
+    gsd-skill-creator:
+      triggers:
+        intents: ["typescript"]
+      enabled: true
+      version: 3
+---
+```
+
+**Migration:** Automatic - skills are migrated on save. No command needed. When you run `skill-creator edit` or update a skill via the CLI, the tool automatically moves root-level extension fields to the correct namespaced location.
+
+**Programmatic access:**
+```typescript
+import { getExtension } from 'gsd-skill-creator';
+
+// Works for both old and new format
+const ext = getExtension(skill.metadata);
+console.log(ext.triggers);  // Always finds triggers
+console.log(ext.enabled);   // Always finds enabled
+console.log(ext.version);   // Always finds version
+```
+
+The `getExtension()` accessor handles both locations transparently, so code that reads skills does not need to change.
+
+### Flat-File to Directory Format (v1.0.0+)
+
+Skills moved from single files to directories to support reference materials and scripts.
+
+**Before (legacy):**
+```
+.claude/skills/my-skill.md
+```
+
+**After (current):**
+```
+.claude/skills/my-skill/
+  SKILL.md
+  reference.md    (optional)
+  scripts/        (optional)
+```
+
+**Migration command:**
 ```bash
 # Migrate all skills
 skill-creator migrate
@@ -270,52 +340,54 @@ skill-creator migrate
 skill-creator migrate my-skill
 ```
 
-**Before (legacy flat-file):**
-```
-.claude/skills/my-skill.md
-```
+This command:
+1. Scans for flat-file skills (*.md directly in skills/)
+2. Creates directories for each
+3. Moves content to SKILL.md
+4. Reports migration results
 
-**After (current subdirectory):**
-```
-.claude/skills/my-skill/SKILL.md
-```
+**What gets preserved:**
+- All frontmatter fields (name, description, triggers, etc.)
+- All skill body content (markdown)
+- Git history (content is moved, not recreated)
 
-Content is preserved during migration. The skill body and frontmatter are moved to the new location unchanged.
+### Agent Tools Array Format (v1.0.0+)
 
-### Legacy Metadata Format Migration
+Agent `tools` field changed from YAML array to comma-separated string to match the official Claude Code specification.
 
-**When it applies:** Extension fields at root level instead of under `metadata.extensions`
-
-**Migration:** Automatic. Fields are moved to the correct location on next skill update via `skill-creator edit` or `skill-creator create --force`.
-
-**Before (legacy root-level):**
+**Before (deprecated):**
 ```yaml
 ---
-name: my-skill
-description: My skill
-triggers:
-  intents: ["typescript"]
-version: 1
-createdAt: "2026-01-01T00:00:00Z"
+name: my-agent
+tools:
+  - Read
+  - Write
+  - Bash
 ---
 ```
 
-**After (current namespaced):**
+**After (required):**
 ```yaml
 ---
-name: my-skill
-description: My skill
-metadata:
-  extensions:
-    gsd-skill-creator:
-      triggers:
-        intents: ["typescript"]
-      version: 1
-      createdAt: "2026-01-01T00:00:00Z"
+name: my-agent
+tools: Read, Write, Bash
 ---
 ```
 
-Both formats are readable via the `getExtension()` accessor. Legacy skills continue to work but will be updated to new format on next write.
+**Migration command:**
+```bash
+skill-creator migrate-agent
+```
+
+This command:
+1. Scans all agents in .claude/agents/
+2. Converts array tools to string format
+3. Validates against official Claude Code spec
+4. Reports migration results
+
+**Why:** The official Claude Code agent format requires comma-separated strings, not YAML arrays. See [OFFICIAL-FORMAT.md](./OFFICIAL-FORMAT.md) for the complete specification.
+
+**Validation:** Run `skill-creator agents validate` to check all agents for format compliance.
 
 ---
 
@@ -348,6 +420,76 @@ Validation output shows:
 - `+` Valid skill
 - `!` Needs migration (legacy format detected)
 - `x` Errors (invalid name, missing fields)
+
+---
+
+## Known Issues
+
+This section documents known bugs and limitations with workarounds.
+
+### User-Level Agent Discovery (GitHub #11205)
+
+**Status:** Known bug in Claude Code
+
+**Description:** Agents stored in `~/.claude/agents/` may not be automatically discovered by Claude Code at session startup. This affects user-level agents only; project-level agents in `.claude/agents/` work correctly.
+
+**Symptoms:**
+- User-level agents don't appear in agent list at session start
+- `/agents` command doesn't show expected agents
+- Agents work if manually specified via CLI flag
+
+**Workarounds:**
+
+1. **Use project-level agents (recommended)**
+   Store agents in `.claude/agents/` instead of `~/.claude/agents/`. Project-level agents are always discovered.
+
+2. **Use the /agents UI command**
+   Within Claude Code, run `/agents` to list and manually load agents.
+
+3. **Pass agents via CLI flag**
+   When starting Claude Code: `claude --agents=path/to/agent.md`
+
+**Impact on gsd-skill-creator:**
+- The tool warns when creating user-level agents
+- Agent suggestion workflow defaults to project-level
+- User can override with `--scope=user` if needed
+
+**Tracking:** Claude Code issue #11205
+
+---
+
+### No Other Known Issues
+
+As of v1.2.0, no other significant issues have been identified. If you encounter problems:
+
+1. Check the [GitHub Issues](https://github.com/user/gsd-skill-creator/issues)
+2. Run `skill-creator validate` to check skill format
+3. Run `skill-creator agents validate` to check agent format
+4. Enable verbose mode: `skill-creator --verbose <command>`
+
+---
+
+## Documentation Notes
+
+### Inline Comment Audit (v1.2.0)
+
+The following source files were audited for comment accuracy:
+
+| File | Status | Notes |
+|------|--------|-------|
+| `src/types/skill.ts` | Accurate | All @deprecated tags include migration path (e.g., "Use getExtension(metadata).triggers") |
+| `src/detection/skill-generator.ts` | Accurate | TODO comments in generated skills are intentional placeholders for user customization |
+| `src/storage/skill-store.ts` | Accurate | Migration behavior documented correctly; logs when migrating from legacy format |
+
+**Findings:**
+
+1. **@deprecated annotations** in `src/types/skill.ts` correctly reference `getExtension(metadata)` accessor for all 7 deprecated root-level fields.
+
+2. **TODO comments** in `src/detection/skill-generator.ts` are part of generated skill templates and serve as user prompts, not unfinished work.
+
+3. **Migration logging** in `src/storage/skill-store.ts` accurately describes automatic migration from legacy to namespaced format.
+
+All inline documentation matches actual code behavior.
 
 ---
 
