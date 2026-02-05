@@ -135,6 +135,7 @@ async function main() {
       const verbose = args.includes('--verbose') || args.includes('-v');
       const quiet = args.includes('--quiet') || args.includes('-q');
       const json = args.includes('--json');
+      const llm = args.includes('--llm');
       const skillArgs = args.slice(1).filter(a => !a.startsWith('-'));
       const skillName = skillArgs[0];
 
@@ -143,6 +144,7 @@ async function main() {
         verbose,
         quiet,
         json,
+        llm,
         skillsDir: getSkillsBasePath(scope),
       });
       if (exitCode !== 0) {
