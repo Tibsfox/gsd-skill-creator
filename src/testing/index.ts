@@ -33,3 +33,6 @@ export {
   formatJSON,
   type FormatOptions,
 } from './result-formatter.js';
+
+// Test generators for automated test case creation
+export * from './generators/index.js';
