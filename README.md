@@ -269,6 +269,8 @@ skill-creator calibrate                     # Optimize thresholds from history
 skill-creator benchmark                     # Check simulator correlation
 ```
 
+For complete CLI documentation including all options, examples, and exit codes, see [docs/CLI.md](docs/CLI.md).
+
 ---
 
 ## How It Works
