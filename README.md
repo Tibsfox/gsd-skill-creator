@@ -24,7 +24,7 @@ A self-evolving skill ecosystem for Claude Code that observes usage patterns, su
 
 ## What It Does
 
-The Dynamic Skill Creator helps you build a personalized knowledge base for Claude Code through six core capabilities:
+The Dynamic Skill Creator helps you build a personalized knowledge base for Claude Code through these core capabilities:
 
 | Capability | Description |
 |------------|-------------|
