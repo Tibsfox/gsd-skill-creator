@@ -89,9 +89,9 @@ flowchart TB
 | Document | Purpose |
 |----------|---------|
 | [layers.md](layers.md) | Comprehensive 12+ layer module documentation with dependency matrix |
-| [data-flows.md](data-flows.md) | Per-operation data flow diagrams (TODO) |
-| [storage.md](storage.md) | Storage locations and file formats (TODO) |
-| [extending.md](extending.md) | Extension points and customization (TODO) |
+| [data-flows.md](data-flows.md) | Per-operation data flow diagrams |
+| [storage.md](storage.md) | Storage locations and file formats |
+| [extending.md](extending.md) | Extension points and customization |
 
 ## Related Documentation
 
