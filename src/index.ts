@@ -141,6 +141,33 @@ export {
   validateTeamConfig,
 } from './validation/team-validation.js';
 
+// Teams module: templates, storage, agent generation, wizard
+export {
+  generateLeaderWorkerTemplate,
+  generatePipelineTemplate,
+  generateSwarmTemplate,
+  LEADER_TOOLS,
+  WORKER_TOOLS,
+  PIPELINE_STAGE_TOOLS,
+  SWARM_WORKER_TOOLS,
+  TeamStore,
+  getTeamsBasePath,
+  getAgentsBasePath,
+  writeTeamAgentFiles,
+  generateAgentContent,
+  teamCreationWizard,
+  nonInteractiveCreate,
+} from './teams/index.js';
+export type {
+  TemplateOptions,
+  TemplateResult,
+  TeamScope,
+  AgentFileResult,
+  AgentMemberInput,
+  WizardOptions,
+  CreatePaths,
+} from './teams/index.js';
+
 // Workflows
 export { createSkillWorkflow } from './workflows/create-skill-workflow.js';
 export { listSkillsWorkflow } from './workflows/list-skills-workflow.js';
