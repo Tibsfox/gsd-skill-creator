@@ -5,8 +5,19 @@
 // TestStore for persisting test cases
 export { TestStore } from './test-store.js';
 
+// ResultStore for persisting test run results
+export { ResultStore } from './result-store.js';
+
 // Re-export types from types/testing.ts for convenience
 export type { TestCase, TestResult, TestExpectation } from '../types/testing.js';
+
+// Re-export types from types/test-run.ts for test execution results
+export type {
+  TestCaseResult,
+  RunMetrics,
+  TestRunResult,
+  TestRunSnapshot,
+} from '../types/test-run.js';
 
 // Re-export validation utilities
 export { validateTestCaseInput, TestCaseInputSchema } from '../validation/test-validation.js';
