@@ -12,6 +12,7 @@ import { validateCommand } from './cli/commands/validate.js';
 import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { budgetCommand } from './cli/commands/budget.js';
 import { resolveCommand } from './cli/commands/resolve.js';
+import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
@@ -802,6 +803,13 @@ async function main() {
       break;
     }
 
+    case 'reload-embeddings':
+    case 're': {
+      const verbose = args.includes('--verbose') || args.includes('-v');
+      await reloadEmbeddingsCommand({ verbose });
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -876,6 +884,7 @@ Commands:
   history, hist     View skill version history
   rollback, rb      Rollback skill to previous version
   agents, ag        Manage agent suggestions from skill clusters
+  reload-embeddings, re  Reload embedding model (retry after fallback)
   help, -h          Show this help message
 
 Scope Options:
