@@ -112,6 +112,8 @@ describe('FeedbackStore', () => {
       // Record events with slight delays
       await store.record({ type: 'correction', skillName: 'skill', sessionId: '1', original: '', corrected: '' });
 
+      // Delay to ensure midPoint is strictly after first event's timestamp
+      await new Promise(r => setTimeout(r, 10));
       const midPoint = new Date().toISOString();
       await new Promise(r => setTimeout(r, 10));
 
