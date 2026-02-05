@@ -215,6 +215,247 @@ const context = createApplicationContext({
 
 ---
 
+## Storage Layer
+
+APIs for persisting and retrieving skills and patterns. These classes provide the foundation for skill management.
+
+### SkillStore
+
+File-based storage for skills. Skills are stored in subdirectory format: `skill-name/SKILL.md`.
+
+**Constructor:**
+
+```typescript
+import { SkillStore } from 'gsd-skill-creator';
+
+const store = new SkillStore('.claude/skills');
+```
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `skillsDir` | `string` | `.claude/skills` | Directory for skill storage |
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `create` | `name, metadata, body` | `Promise<Skill>` | Create new skill |
+| `read` | `name` | `Promise<Skill>` | Read skill by name |
+| `update` | `name, metadata?, body?` | `Promise<Skill>` | Update existing skill |
+| `delete` | `name` | `Promise<void>` | Delete skill |
+| `list` | - | `Promise<string[]>` | List all skill names |
+| `exists` | `name` | `Promise<boolean>` | Check if skill exists |
+| `listWithFormat` | - | `Promise<{name, format, path}[]>` | List skills with format info |
+| `hasLegacySkills` | - | `Promise<boolean>` | Check for legacy flat-file skills |
+
+**Example - Complete CRUD:**
+
+```typescript
+import { SkillStore } from 'gsd-skill-creator';
+
+const store = new SkillStore('.claude/skills');
+
+// Create a skill
+const skill = await store.create('my-skill', {
+  name: 'my-skill',
+  description: 'Use when working with X',
+}, '# Instructions\n\nDo the thing.');
+
+// Read a skill
+const existing = await store.read('my-skill');
+console.log(existing.metadata.description);
+console.log(existing.body);
+
+// Update a skill
+const updated = await store.update('my-skill', {
+  description: 'Updated description',
+}, 'New body content');
+
+// Delete a skill
+await store.delete('my-skill');
+
+// List all skills
+const names = await store.list();
+console.log(`Found ${names.length} skills`);
+
+// Check existence
+const exists = await store.exists('my-skill');
+if (!exists) {
+  console.log('Skill not found');
+}
+```
+
+**Skill Structure:**
+
+The `Skill` type returned by read/create/update contains:
+
+```typescript
+interface Skill {
+  metadata: SkillMetadata;  // YAML frontmatter fields
+  body: string;             // Markdown content
+  path: string;             // Full path to SKILL.md
+}
+```
+
+### PatternStore
+
+Append-only storage for usage patterns. Patterns are stored as JSONL files organized by category.
+
+**Constructor:**
+
+```typescript
+import { PatternStore } from 'gsd-skill-creator';
+
+const store = new PatternStore('.planning/patterns');
+```
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `patternsDir` | `string` | `.planning/patterns` | Directory for pattern storage |
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `append` | `category, data` | `Promise<void>` | Append pattern to category file |
+| `read` | `category` | `Promise<Pattern[]>` | Read all patterns from category |
+
+**Example:**
+
+```typescript
+import { PatternStore } from 'gsd-skill-creator';
+
+const store = new PatternStore('.planning/patterns');
+
+// Append a command pattern
+await store.append('commands', {
+  command: 'git commit',
+  context: 'After editing files',
+  frequency: 5,
+});
+
+// Read patterns from a category
+const patterns = await store.read('commands');
+patterns.forEach(p => {
+  console.log(`${p.category}: ${JSON.stringify(p.data)}`);
+});
+```
+
+**Pattern Structure:**
+
+```typescript
+interface Pattern {
+  timestamp: number;        // Unix timestamp
+  category: PatternCategory;  // 'commands' | 'decisions' | 'files' | 'errors'
+  data: Record<string, unknown>;  // Category-specific data
+}
+```
+
+**Note:** PatternStore is primarily used internally by pattern detection features. Most users won't need to interact with it directly.
+
+### SkillIndex
+
+In-memory index for fast skill lookups and search. Automatically maintains an index file (`.skill-index.json`) for persistence.
+
+**Constructor:**
+
+```typescript
+import { SkillStore, SkillIndex } from 'gsd-skill-creator';
+
+const skillStore = new SkillStore('.claude/skills');
+const index = new SkillIndex(skillStore, '.claude/skills');
+```
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `skillStore` | `SkillStore` | Store instance for reading skills |
+| `skillsDir` | `string` | Skills directory path |
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `load` | - | `Promise<void>` | Load index from disk |
+| `rebuild` | - | `Promise<void>` | Rebuild index from skills |
+| `refresh` | - | `Promise<void>` | Refresh stale entries |
+| `getAll` | - | `Promise<SkillIndexEntry[]>` | Get all indexed skills |
+| `getEnabled` | - | `Promise<SkillIndexEntry[]>` | Get enabled skills only |
+| `search` | `query` | `Promise<SkillIndexEntry[]>` | Search by name/description |
+| `findByTrigger` | `intent?, file?, context?` | `Promise<SkillIndexEntry[]>` | Find by trigger pattern |
+
+**Example - Search and Filter:**
+
+```typescript
+import { createStores } from 'gsd-skill-creator';
+
+const { skillIndex } = createStores();
+
+// Get all skills
+const all = await skillIndex.getAll();
+console.log(`Total skills: ${all.length}`);
+
+// Get enabled skills only
+const enabled = await skillIndex.getEnabled();
+console.log(`Enabled skills: ${enabled.length}`);
+
+// Search by name or description
+const results = await skillIndex.search('git');
+results.forEach(skill => {
+  console.log(`${skill.name}: ${skill.description}`);
+});
+
+// Find by trigger pattern
+const triggered = await skillIndex.findByTrigger('commit changes');
+triggered.forEach(skill => {
+  console.log(`Matched: ${skill.name}`);
+});
+```
+
+**Index Entry Structure:**
+
+```typescript
+interface SkillIndexEntry {
+  name: string;
+  description: string;
+  enabled: boolean;
+  triggers?: {
+    intents?: string[];
+    files?: string[];
+    contexts?: string[];
+  };
+  path: string;
+  mtime: number;  // File modification time
+}
+```
+
+### listAllScopes()
+
+List skills from all scopes (user and project) with conflict detection.
+
+```typescript
+import { listAllScopes } from 'gsd-skill-creator';
+
+const skills = await listAllScopes();
+
+skills.forEach(skill => {
+  const conflict = skill.hasConflict ? ' (CONFLICT)' : '';
+  console.log(`[${skill.scope}] ${skill.name}${conflict}`);
+});
+```
+
+**Returns:** `Promise<ScopedSkillEntry[]>`
+
+**ScopedSkillEntry Structure:**
+
+```typescript
+interface ScopedSkillEntry extends SkillIndexEntry {
+  scope: 'user' | 'project';
+  hasConflict?: boolean;  // Same name exists at other scope
+}
+```
+
+---
+
 ## TypeScript Types
 
 Key types exported for TypeScript consumers. For complete type definitions, see the source files.
