@@ -839,6 +839,361 @@ Key types exported for TypeScript consumers. For complete type definitions, see 
 
 ---
 
+## Embeddings
+
+APIs for generating semantic embeddings used in conflict detection and activation simulation.
+
+### getEmbeddingService()
+
+Get an initialized EmbeddingService instance. This is the recommended entry point.
+
+```typescript
+import { getEmbeddingService } from 'gsd-skill-creator';
+
+const service = await getEmbeddingService();
+```
+
+**Returns:** `Promise<EmbeddingService>`
+
+The service is lazily initialized on first call. Subsequent calls return the same singleton instance.
+
+### EmbeddingService
+
+Generate semantic embeddings with automatic caching and fallback support.
+
+The service uses [BGE-small-en-v1.5](https://huggingface.co/BAAI/bge-small-en-v1.5) for 384-dimensional embeddings. When the model is unavailable (no network, memory constraints), it automatically falls back to TF-IDF heuristic embeddings.
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `embed` | `text`, `skillName?` | `Promise<EmbeddingResult>` | Generate embedding for single text |
+| `embedBatch` | `texts`, `skillNames?` | `Promise<EmbeddingResult[]>` | Batch embedding for efficiency |
+| `getOrCompute` | `skillName`, `content` | `Promise<EmbeddingResult>` | Alias for embed with skillName |
+| `getStatus` | - | `ServiceStatus` | Check service status |
+| `isUsingFallback` | - | `boolean` | Check if using heuristic mode |
+| `reloadModel` | - | `Promise<boolean>` | Attempt to reload model after fallback |
+| `saveCache` | - | `Promise<void>` | Force save cache to disk |
+
+**EmbeddingResult Type:**
+
+```typescript
+interface EmbeddingResult {
+  embedding: number[];   // 384-dimensional vector
+  fromCache: boolean;    // Whether result was cached
+  method: 'model' | 'heuristic';  // Computation method used
+}
+```
+
+**Example - Single Embedding:**
+
+```typescript
+import { getEmbeddingService } from 'gsd-skill-creator';
+
+const service = await getEmbeddingService();
+
+// Without caching
+const result = await service.embed('commit my changes');
+console.log(result.embedding.length); // 384
+
+// With caching (pass skillName)
+const cached = await service.embed('commit my changes', 'git-commit');
+console.log(cached.fromCache); // false (first call)
+
+const second = await service.embed('commit my changes', 'git-commit');
+console.log(second.fromCache); // true (cache hit)
+```
+
+**Example - Batch Embedding:**
+
+```typescript
+const service = await getEmbeddingService();
+
+// Batch embedding for efficiency
+const results = await service.embedBatch(
+  ['commit my changes', 'create a new file', 'run tests'],
+  ['git-commit', 'file-create', 'test-runner']  // skill names for caching
+);
+
+results.forEach((r, i) => {
+  console.log(`Skill ${i}: ${r.method}, cached: ${r.fromCache}`);
+});
+```
+
+**Example - Service Status:**
+
+```typescript
+const service = await getEmbeddingService();
+const status = service.getStatus();
+
+console.log(`Initialized: ${status.initialized}`);
+console.log(`Using fallback: ${status.fallbackMode}`);
+console.log(`Cache entries: ${status.cacheStats.entries}`);
+console.log(`Model: ${status.cacheStats.modelId}`);
+```
+
+### Caching Behavior
+
+Embeddings are automatically cached when a `skillName` parameter is provided.
+
+**Cache Location:** `.planning/calibration/embedding-cache.json`
+
+**Cache Key:** Skill name + SHA-256 hash of content (first 16 characters)
+
+**Cache Invalidation:** Automatic when content changes (hash mismatch)
+
+**When to use skillName:**
+- Always pass it when embedding skill descriptions (enables caching)
+- Omit when embedding user prompts (they vary too much to cache effectively)
+
+```typescript
+// Good: skill descriptions benefit from caching
+await service.embed(skill.description, skill.name);
+
+// Also fine: one-off prompts don't need caching
+await service.embed(userPrompt);
+```
+
+### Fallback Mode
+
+When the HuggingFace model fails to load (network issues, memory constraints), the service automatically enters fallback mode using TF-IDF heuristic embeddings.
+
+**Checking fallback status:**
+
+```typescript
+const service = await getEmbeddingService();
+
+if (service.isUsingFallback()) {
+  console.log('Using heuristic embeddings (model unavailable)');
+}
+```
+
+**Reloading the model:**
+
+```typescript
+// After network becomes available
+const success = await service.reloadModel();
+if (success) {
+  console.log('Model loaded successfully');
+} else {
+  console.log('Still in fallback mode');
+}
+```
+
+**CLI command:** Use `gsd-skill reload-embeddings` to attempt model reload.
+
+### cosineSimilarity()
+
+Calculate similarity between two embedding vectors.
+
+**Signature:**
+
+```typescript
+function cosineSimilarity(a: number[], b: number[]): number
+```
+
+**Returns:** Similarity score from -1 to 1 (higher = more similar)
+
+**Example:**
+
+```typescript
+import { cosineSimilarity, getEmbeddingService } from 'gsd-skill-creator';
+
+const service = await getEmbeddingService();
+
+const embedding1 = (await service.embed('commit changes')).embedding;
+const embedding2 = (await service.embed('save changes')).embedding;
+const embedding3 = (await service.embed('delete files')).embedding;
+
+console.log(cosineSimilarity(embedding1, embedding2)); // ~0.85 (similar)
+console.log(cosineSimilarity(embedding1, embedding3)); // ~0.40 (different)
+```
+
+### Embedding Types
+
+| Type | Description |
+|------|-------------|
+| `EmbeddingVector` | `number[]` - 384-dimensional embedding |
+| `EmbeddingResult` | Result with embedding, cache status, and method |
+| `EmbeddingServiceConfig` | Configuration options |
+| `ProgressInfo` | Model download progress |
+| `CacheEntry` | Single cache entry with metadata |
+| `CacheStore` | Full cache structure |
+
+---
+
+## Conflict Detection
+
+APIs for detecting semantic conflicts between skills that may cause activation confusion.
+
+### ConflictDetector
+
+Detect skills with overlapping descriptions using embedding similarity.
+
+**Constructor:**
+
+```typescript
+import { ConflictDetector } from 'gsd-skill-creator';
+
+const detector = new ConflictDetector();  // Uses default threshold (0.85)
+const strict = new ConflictDetector({ threshold: 0.90 });  // Stricter matching
+```
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `threshold` | `number` | `0.85` | Minimum similarity to flag as conflict |
+
+**Threshold range:** 0.5 to 0.95 (values outside are clamped with warning)
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `detect` | `skills` | `Promise<ConflictDetectionResult>` | Find conflicting skill pairs |
+
+**ConflictDetectionResult Type:**
+
+```typescript
+interface ConflictDetectionResult {
+  conflicts: ConflictPair[];  // Detected conflict pairs
+  skillCount: number;         // Total skills analyzed
+  pairsAnalyzed: number;      // Number of pairs compared
+  threshold: number;          // Threshold used
+  analysisMethod: 'model' | 'heuristic';  // Embedding method used
+}
+```
+
+**ConflictPair Type:**
+
+```typescript
+interface ConflictPair {
+  skillA: string;             // First skill name
+  skillB: string;             // Second skill name
+  similarity: number;         // Similarity score (0-1)
+  severity: 'high' | 'medium';  // Based on similarity
+  overlappingTerms: string[]; // Common words found
+  descriptionA: string;       // First skill description
+  descriptionB: string;       // Second skill description
+}
+```
+
+**Example - Basic Detection:**
+
+```typescript
+import { ConflictDetector } from 'gsd-skill-creator';
+
+const detector = new ConflictDetector({ threshold: 0.85 });
+
+const result = await detector.detect([
+  { name: 'git-commit', description: 'Use when committing changes to git repository' },
+  { name: 'save-work', description: 'Use when saving and committing work to git' },
+  { name: 'run-tests', description: 'Use when running test suites' },
+]);
+
+console.log(`Analyzed ${result.skillCount} skills`);
+console.log(`Compared ${result.pairsAnalyzed} pairs`);
+console.log(`Found ${result.conflicts.length} conflicts`);
+
+result.conflicts.forEach(c => {
+  console.log(`${c.skillA} <-> ${c.skillB}: ${(c.similarity * 100).toFixed(1)}% (${c.severity})`);
+  console.log(`  Common terms: ${c.overlappingTerms.join(', ')}`);
+});
+```
+
+### Severity Levels
+
+Conflicts are categorized by severity based on similarity score:
+
+| Severity | Similarity | Meaning |
+|----------|------------|---------|
+| `high` | > 90% | Very likely conflict, activation confusion probable |
+| `medium` | 85-90% | Possible conflict, worth reviewing |
+
+**Example - Filtering by Severity:**
+
+```typescript
+const result = await detector.detect(skills);
+
+const critical = result.conflicts.filter(c => c.severity === 'high');
+console.log(`${critical.length} high-severity conflicts need immediate attention`);
+
+const warnings = result.conflicts.filter(c => c.severity === 'medium');
+console.log(`${warnings.length} medium-severity conflicts to review`);
+```
+
+### ConflictFormatter
+
+Format conflict detection results for display.
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `formatTerminal` | `result` | `string` | Colored terminal output |
+| `formatJSON` | `result` | `string` | JSON output for scripting |
+
+**Example:**
+
+```typescript
+import { ConflictDetector, ConflictFormatter } from 'gsd-skill-creator';
+
+const detector = new ConflictDetector();
+const result = await detector.detect(skills);
+
+const formatter = new ConflictFormatter();
+
+// For CLI display
+console.log(formatter.formatTerminal(result));
+
+// For CI/scripting
+const json = formatter.formatJSON(result);
+fs.writeFileSync('conflicts.json', json);
+```
+
+### RewriteSuggester
+
+Generate suggestions to differentiate conflicting skills.
+
+Uses Claude API when `ANTHROPIC_API_KEY` is available, otherwise provides heuristic suggestions based on overlapping terms.
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `suggest` | `conflict`, `skill1`, `skill2` | `Promise<RewriteSuggestion>` | Generate rewrite suggestion |
+
+**Example:**
+
+```typescript
+import { ConflictDetector, RewriteSuggester, SkillStore } from 'gsd-skill-creator';
+
+const detector = new ConflictDetector();
+const suggester = new RewriteSuggester();
+const store = new SkillStore('.claude/skills');
+
+const result = await detector.detect(skills);
+
+for (const conflict of result.conflicts) {
+  const skill1 = await store.read(conflict.skillA);
+  const skill2 = await store.read(conflict.skillB);
+
+  const suggestion = await suggester.suggest(conflict, skill1, skill2);
+  console.log(`Suggestion for ${conflict.skillA}:`);
+  console.log(`  ${suggestion.suggestedDescription}`);
+}
+```
+
+### Conflict Detection Types
+
+| Type | Description |
+|------|-------------|
+| `ConflictConfig` | Configuration with threshold |
+| `ConflictPair` | Single detected conflict |
+| `ConflictDetectionResult` | Full detection results |
+| `RewriteSuggestion` | Rewrite suggestion for conflict |
+
+---
+
 ## Learning Module
 
 APIs for feedback capture, skill refinement, and version management.
