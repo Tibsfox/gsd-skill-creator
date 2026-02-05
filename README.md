@@ -33,6 +33,16 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **4. Auto-Loading** | Automatically loads relevant skills based on context while respecting token budgets (2-5% of context) |
 | **5. Learning** | Refines skills based on your corrections and feedback with bounded parameters and user confirmation |
 | **6. Composing Agents** | Groups frequently co-activated skills into composite agents stored in `.claude/agents/` |
+| **7. Quality Validation** | Detects semantic conflicts between skills and scores activation likelihood (v1.1) |
+| **8. Testing & Simulation** | Automated test cases, activation simulation, and calibration benchmarks (v1.2) |
+
+### Version History
+
+| Version | Key Features |
+|---------|--------------|
+| **v1.0** | Core skill management, pattern observation, learning loop, agent composition |
+| **v1.1** | Semantic conflict detection, activation scoring, local embeddings via HuggingFace |
+| **v1.2** | Test infrastructure, activation simulation, threshold calibration, benchmarking |
 
 ---
 
@@ -213,6 +223,48 @@ skill-creator rollback my-skill abc123 # Rollback to specific commit
 skill-creator agents suggest  # Review agent suggestions interactively
 skill-creator agents list     # List pending agent suggestions
 skill-creator ag sg           # Shorthand for agents suggest
+```
+
+### Quality & Validation
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `detect-conflicts` | `dc` | Detect semantic conflicts between skills |
+| `score-activation` | `sa` | Score activation likelihood for a skill |
+| `reload-embeddings` | - | Reload the embedding model |
+
+**Examples:**
+```bash
+skill-creator detect-conflicts              # Check all skills for conflicts
+skill-creator detect-conflicts --threshold 0.8  # Custom threshold
+skill-creator score-activation my-skill     # Score single skill
+skill-creator score-activation --all        # Score all skills
+skill-creator score-activation my-skill --llm  # Use LLM analysis
+```
+
+### Testing & Simulation
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `test add <skill>` | `t add` | Add a test case for a skill |
+| `test list <skill>` | `t ls` | List test cases for a skill |
+| `test edit <skill> <id>` | `t edit` | Edit a test case |
+| `test delete <skill> <id>` | `t del` | Delete a test case |
+| `test run <skill>` | `t run` | Run tests for a skill |
+| `test generate <skill>` | `t gen` | Auto-generate test cases |
+| `simulate <skill>` | `sim` | Simulate activation for a skill |
+| `calibrate` | `cal` | Calibrate activation thresholds |
+| `benchmark` | `bench` | Benchmark simulator fidelity |
+
+**Examples:**
+```bash
+skill-creator test add my-skill             # Add test case interactively
+skill-creator test list my-skill            # List all test cases
+skill-creator test run my-skill             # Run tests
+skill-creator test generate my-skill        # Auto-generate tests
+skill-creator simulate my-skill "user query here"  # Simulate activation
+skill-creator calibrate                     # Optimize thresholds
+skill-creator benchmark                     # Check simulator correlation
 ```
 
 ---
@@ -682,6 +734,14 @@ Pattern retention is bounded to prevent unbounded growth:
 | **Stability requirement** | 7+ days | Minimum pattern persistence |
 | **Refinement eligibility** | 3+ corrections | Minimum feedback count |
 
+### Validation Thresholds (v1.1+)
+
+| Threshold | Default | Range | Description |
+|-----------|---------|-------|-------------|
+| **Conflict threshold** | 0.85 | 0.5-0.95 | Semantic similarity for conflict detection |
+| **Activation threshold** | 0.75 | 0.5-0.95 | Confidence level for activation prediction |
+| **Too-close-to-call** | <2% margin | - | Flags skills that are borderline competitors |
+
 ### Cluster Constraints
 
 | Setting | Default | Description |
@@ -706,7 +766,7 @@ Pattern retention is bounded to prevent unbounded growth:
 ### Running Tests
 
 ```bash
-# Run all tests (202 tests)
+# Run all tests (1000+ tests)
 npm test
 
 # Run specific test file
@@ -784,6 +844,39 @@ src/
 │   ├── cluster-detector.ts       # Detect clusters
 │   ├── agent-generator.ts        # Generate agents
 │   └── agent-suggestion-manager.ts # Manage suggestions
+│
+├── embeddings/        # Local embedding infrastructure (v1.1)
+│   ├── embedding-service.ts    # HuggingFace transformers
+│   ├── embedding-cache.ts      # Content-hash caching
+│   ├── cosine-similarity.ts    # Similarity calculation
+│   └── heuristic-fallback.ts   # Graceful degradation
+│
+├── conflicts/         # Conflict detection (v1.1)
+│   ├── conflict-detector.ts    # Pairwise similarity
+│   ├── conflict-formatter.ts   # CLI output formatting
+│   └── rewrite-suggester.ts    # Conflict resolution hints
+│
+├── activation/        # Activation scoring (v1.1)
+│   ├── activation-scorer.ts    # Heuristic scoring (0-100)
+│   ├── activation-suggester.ts # Improvement suggestions
+│   └── llm-activation-analyzer.ts # Optional LLM analysis
+│
+├── testing/           # Test infrastructure (v1.2)
+│   ├── test-store.ts          # Test case JSON storage
+│   ├── test-runner.ts         # Test execution engine
+│   ├── test-generator.ts      # Auto-generation orchestrator
+│   └── result-formatter.ts    # Terminal/JSON output
+│
+├── simulation/        # Activation simulation (v1.2)
+│   ├── activation-simulator.ts # Single query simulation
+│   ├── batch-simulator.ts      # Batch processing with progress
+│   └── challenger-detector.ts  # Competition analysis
+│
+├── calibration/       # Threshold tuning (v1.2)
+│   ├── calibration-store.ts   # Event collection (JSONL)
+│   ├── threshold-optimizer.ts # F1 score optimization
+│   ├── threshold-history.ts   # Rollback support
+│   └── benchmark-reporter.ts  # MCC correlation metrics
 │
 ├── cli.ts             # CLI entry point
 └── index.ts           # Module exports
@@ -897,4 +990,4 @@ MIT
 3. Make changes with tests
 4. Submit a pull request
 
-All contributions should include tests and pass the existing test suite (202 tests).
+All contributions should include tests and pass the existing test suite (1000+ tests).
