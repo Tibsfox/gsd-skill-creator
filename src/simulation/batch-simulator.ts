@@ -7,6 +7,7 @@
  * 3. Concurrent similarity computation (parallel cosine calculations)
  */
 
+import * as p from '@clack/prompts';
 import { getEmbeddingService, cosineSimilarity } from '../embeddings/index.js';
 import { ActivationSimulator } from './activation-simulator.js';
 import { categorizeConfidence, formatConfidence } from './confidence-categorizer.js';
@@ -335,5 +336,48 @@ export class BatchSimulator {
         // Return empty - caller should use stats only
         return [];
     }
+  }
+
+  /**
+   * Run test suite with visual progress bar.
+   * Uses @clack/prompts for consistent CLI UI.
+   */
+  async runTestSuiteWithProgress(
+    prompts: string[],
+    skills: Array<{ name: string; description: string }>
+  ): Promise<BatchResult> {
+    const spin = p.spinner();
+    spin.start(`Testing ${prompts.length} prompts against ${skills.length} skills...`);
+
+    // Update spinner with progress
+    const originalOnProgress = this.onProgress;
+    this.onProgress = (progress) => {
+      spin.message(
+        `[${this.progressBar(progress.percent)}] ${progress.percent}% (${progress.current}/${progress.total})`
+      );
+      originalOnProgress?.(progress);
+    };
+
+    try {
+      const result = await this.runTestSuite(prompts, skills);
+      spin.stop(`Completed ${prompts.length} simulations in ${result.duration}ms`);
+      return result;
+    } catch (error) {
+      spin.stop('Simulation failed');
+      throw error;
+    } finally {
+      this.onProgress = originalOnProgress;
+    }
+  }
+
+  /**
+   * Generate ASCII progress bar.
+   * Format: [████████░░░░░░░░░░░░] for visual feedback.
+   */
+  private progressBar(percent: number): string {
+    const width = 20;
+    const filled = Math.round((percent / 100) * width);
+    const empty = width - filled;
+    return '\u2588'.repeat(filled) + '\u2591'.repeat(empty);
   }
 }
