@@ -15,6 +15,16 @@
 
 import { SessionObserver, SessionEndData } from '../observation/session-observer.js';
 
+// Claude Code sends snake_case fields, map to our internal interface
+interface ClaudeCodeSessionEndInput {
+  session_id: string;
+  transcript_path: string;
+  cwd: string;
+  reason?: 'clear' | 'logout' | 'prompt_input_exit' | 'bypass_permissions_disabled' | 'other';
+  permission_mode?: string;
+  hook_event_name?: string;
+}
+
 async function main(): Promise<void> {
   // Read JSON from stdin
   const chunks: Buffer[] = [];
@@ -29,27 +39,27 @@ async function main(): Promise<void> {
     process.exit(0);
   }
 
-  let data: SessionEndData;
+  let rawData: ClaudeCodeSessionEndInput;
   try {
-    data = JSON.parse(input);
+    rawData = JSON.parse(input);
   } catch (err) {
     console.error('Failed to parse session end data:', err);
     process.exit(1);
   }
 
-  // Validate required fields
-  if (!data.sessionId || !data.transcriptPath || !data.cwd) {
-    console.error('Missing required fields: sessionId, transcriptPath, or cwd');
+  // Validate required fields (using snake_case as sent by Claude Code)
+  if (!rawData.session_id || !rawData.transcript_path || !rawData.cwd) {
+    console.error('Missing required fields: session_id, transcript_path, or cwd');
     process.exit(1);
   }
 
-  // Set defaults for optional fields
+  // Map snake_case input to our internal camelCase interface
   const endData: SessionEndData = {
-    sessionId: data.sessionId,
-    transcriptPath: data.transcriptPath,
-    cwd: data.cwd,
-    reason: data.reason || 'other',
-    activeSkills: data.activeSkills || [],
+    sessionId: rawData.session_id,
+    transcriptPath: rawData.transcript_path,
+    cwd: rawData.cwd,
+    reason: rawData.reason || 'other',
+    activeSkills: [],  // Not provided by Claude Code
   };
 
   try {
