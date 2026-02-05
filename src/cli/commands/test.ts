@@ -12,8 +12,12 @@ import {
   TestRunner,
   ResultStore,
   ResultFormatter,
+  TestGenerator,
+  ReviewWorkflow,
   type TestCaseInput,
   type TestRunResult,
+  type GeneratedTest,
+  type GenerationResult,
 } from '../../testing/index.js';
 import { SkillStore } from '../../storage/skill-store.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from '../../types/scope.js';
@@ -641,6 +645,196 @@ async function handleDelete(args: string[], scope: SkillScope): Promise<number> 
 }
 
 /**
+ * Handle 'test generate <skill>' subcommand.
+ */
+async function handleGenerate(args: string[], scope: SkillScope): Promise<number> {
+  const nonFlagArgs = getNonFlagArgs(args);
+  const skillName = nonFlagArgs[1];
+
+  if (!skillName) {
+    p.log.error('Usage: gsd-skill test generate <skill-name> [options]');
+    p.log.message('');
+    p.log.message('Options:');
+    p.log.message('  --count=N       Number of tests to generate per type (default: 5)');
+    p.log.message('  --no-review     Save all tests without review');
+    p.log.message('  --no-llm        Skip LLM generation, use heuristic only');
+    return 1;
+  }
+
+  const count = parseNumericFlag(args, 'count') ?? 5;
+  const noReview = hasFlag(args, 'no-review');
+  const noLLM = hasFlag(args, 'no-llm');
+
+  // Validate count (per RESEARCH.md pitfall 6)
+  if (count > 50) {
+    p.log.error('Maximum count is 50 per type');
+    return 1;
+  }
+  if (count < 1) {
+    p.log.error('Count must be at least 1');
+    return 1;
+  }
+
+  // Load skill to verify it exists and get description
+  const basePath = getSkillsBasePath(scope);
+  const skillStore = new SkillStore(basePath);
+  const testStore = new TestStore(scope);
+
+  let skill;
+  try {
+    skill = await skillStore.read(skillName);
+  } catch {
+    p.log.error(`Skill '${skillName}' not found in ${scope} scope`);
+    return 1;
+  }
+
+  const skillInfo = {
+    name: skillName,
+    description: skill.metadata.description,
+    // Extract "when to use" from body if present
+    whenToUse: extractWhenToUse(skill.body),
+  };
+
+  // Generate tests
+  p.intro(pc.bgCyan(pc.black(' Generate Test Cases ')));
+  p.log.message(pc.dim(`Skill: ${skillName} (${scope} scope)`));
+  p.log.message('');
+
+  const generator = new TestGenerator(skillStore, scope);
+  const llmAvailable = generator.getLLMAvailability();
+
+  if (llmAvailable && !noLLM) {
+    p.log.message(pc.green('LLM generation enabled (Claude Haiku)'));
+  } else if (noLLM) {
+    p.log.message(pc.yellow('LLM generation disabled (--no-llm)'));
+  } else {
+    p.log.message(pc.yellow('LLM not available, using heuristic generation'));
+  }
+  p.log.message('');
+
+  const spin = p.spinner();
+  spin.start(`Generating ${count} positive and ${count} negative tests...`);
+
+  let result: GenerationResult;
+  try {
+    result = await generator.generate(skillInfo, {
+      positiveCount: count,
+      negativeCount: count,
+      useLLM: !noLLM,
+    });
+  } catch (err) {
+    spin.stop('Generation failed');
+    const message = err instanceof Error ? err.message : String(err);
+    p.log.error(message);
+    return 1;
+  }
+
+  spin.stop(`Generated ${result.tests.length} tests`);
+
+  // Show source breakdown (per RESEARCH.md pitfall 5)
+  p.log.message(
+    pc.dim(
+      `Sources: ${result.sources.llm} LLM, ${result.sources.heuristic} heuristic, ${result.sources.crossSkill} cross-skill`
+    )
+  );
+
+  // Show any warnings
+  for (const warning of result.warnings) {
+    p.log.warn(warning);
+  }
+
+  if (result.tests.length === 0) {
+    p.log.warn('No tests generated');
+    return 0;
+  }
+
+  // Review or save directly
+  let testsToSave: GeneratedTest[];
+  let editedCount = 0;
+
+  if (noReview) {
+    testsToSave = result.tests;
+    p.log.message(pc.dim('Skipping review (--no-review)'));
+  } else {
+    const workflow = new ReviewWorkflow();
+    const reviewResult = await workflow.review(result.tests, skillName);
+
+    if (reviewResult.cancelled) {
+      p.log.info('Generation cancelled');
+      return 0;
+    }
+
+    testsToSave = reviewResult.approved;
+    editedCount = reviewResult.edited.length;
+
+    if (testsToSave.length === 0) {
+      p.log.info('No tests selected for saving');
+      return 0;
+    }
+  }
+
+  // Save approved tests
+  const saveSpin = p.spinner();
+  saveSpin.start(`Saving ${testsToSave.length} tests...`);
+
+  let added = 0;
+  let skipped = 0;
+  const errors: string[] = [];
+
+  for (const test of testsToSave) {
+    try {
+      const input: TestCaseInput = {
+        prompt: test.prompt,
+        expected: test.expected,
+        description: test.description,
+        reason: test.reason,
+      };
+      await testStore.add(skillName, input);
+      added++;
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      if (message.includes('Duplicate test prompt')) {
+        skipped++;
+      } else {
+        errors.push(message);
+      }
+    }
+  }
+
+  saveSpin.stop('Save complete');
+
+  // Summary
+  p.log.message('');
+  p.log.success(`Added: ${added} tests`);
+  if (skipped > 0) {
+    p.log.warn(`Skipped: ${skipped} (duplicate prompts)`);
+  }
+  if (editedCount > 0) {
+    p.log.message(pc.dim(`Edited: ${editedCount} tests modified before saving`));
+  }
+  if (errors.length > 0) {
+    p.log.error(`Errors: ${errors.length}`);
+    for (const err of errors) {
+      p.log.message(pc.red(`  - ${err}`));
+    }
+  }
+
+  return errors.length > 0 ? 1 : 0;
+}
+
+/**
+ * Extract "when to use" text from skill body.
+ * Looks for markdown headings like "## When to Use" or "### When to use"
+ */
+function extractWhenToUse(body: string): string | undefined {
+  const match = body.match(/#+\s*when\s+to\s+use[:\s]*\n+([\s\S]*?)(?=\n#|\n\n\n|$)/i);
+  if (match) {
+    return match[1].trim();
+  }
+  return undefined;
+}
+
+/**
  * Handle 'test run <skill>' or 'test run --all' subcommand.
  */
 async function handleRun(args: string[], scope: SkillScope): Promise<number> {
@@ -831,6 +1025,8 @@ Subcommands:
   edit <skill> <id>      Edit an existing test case
   delete <skill> <id>    Delete a test case
   rm <skill> <id>        Alias for delete
+  generate <skill>       Generate test cases automatically
+  gen <skill>            Alias for generate
 
 Test Add Options:
   --prompt="..."         Test prompt
@@ -858,6 +1054,11 @@ Test Run Options:
 Test Delete Options:
   --force, -f            Skip confirmation prompt
 
+Test Generate Options:
+  --count=N              Tests per type (default: 5, max: 50)
+  --no-review            Save all tests without review
+  --no-llm               Skip LLM, use heuristic only
+
 Scope Options:
   --project, -p          Use project scope (.claude/skills/)
                          Default is user scope (~/.claude/skills/)
@@ -873,6 +1074,9 @@ Examples:
   gsd-skill test run my-skill --min-accuracy=90 --max-false-positive=5
   skill-creator test edit my-skill abc123
   skill-creator test delete my-skill abc123 --force
+  gsd-skill test generate my-skill
+  gsd-skill test generate my-skill --count=10
+  gsd-skill test generate my-skill --no-review
 `);
 }
 
@@ -907,6 +1111,10 @@ export async function testCommand(args: string[]): Promise<number> {
     case 'delete':
     case 'rm':
       return handleDelete(args, scope);
+
+    case 'generate':
+    case 'gen':
+      return handleGenerate(args, scope);
 
     case 'help':
     case '--help':
