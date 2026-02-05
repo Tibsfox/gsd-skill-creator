@@ -1596,8 +1596,557 @@ if (result.success) {
 
 ---
 
+## Calibration
+
+APIs for collecting activation data, optimizing thresholds, and measuring accuracy.
+
+### CalibrationStore
+
+Persist calibration events (skill activation decisions and user outcomes) for threshold calibration and accuracy benchmarking.
+
+**Storage:** `~/.gsd-skill/calibration/events.jsonl` (JSONL format)
+
+**Constructor:**
+
+```typescript
+import { CalibrationStore } from 'gsd-skill-creator';
+
+const store = new CalibrationStore();  // Default path
+const customStore = new CalibrationStore('/custom/path');  // Custom path
+```
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `record` | `input` | `Promise<CalibrationEvent>` | Record new calibration event |
+| `updateOutcome` | `eventId, outcome` | `Promise<boolean>` | Update event outcome |
+| `getAll` | - | `Promise<CalibrationEvent[]>` | Get all events |
+| `getKnownOutcomes` | - | `Promise<CalibrationEvent[]>` | Get events with known outcomes |
+| `count` | `knownOnly?` | `Promise<number>` | Count events |
+| `clear` | - | `Promise<void>` | Clear all data (testing) |
+
+**Example:**
+
+```typescript
+import { CalibrationStore } from 'gsd-skill-creator';
+
+const store = new CalibrationStore();
+
+// Record a calibration event
+const event = await store.record({
+  prompt: 'commit my work',
+  skillScores: [
+    { skillName: 'git-commit', similarity: 0.85 },
+    { skillName: 'save-file', similarity: 0.42 },
+  ],
+  outcome: 'continued',  // User continued with skill activation
+  topSkill: 'git-commit',
+  topSimilarity: 0.85,
+  activationThreshold: 0.75,
+  wouldActivate: true,
+});
+
+console.log(`Event ID: ${event.id}`);
+console.log(`Timestamp: ${event.timestamp}`);
+
+// Get events with known outcomes for calibration
+const knownEvents = await store.getKnownOutcomes();
+console.log(`Calibration data: ${knownEvents.length} events`);
+```
+
+**CalibrationEvent Type:**
+
+```typescript
+interface CalibrationEvent {
+  id: string;                    // UUID
+  timestamp: string;             // ISO timestamp
+  prompt: string;                // User prompt
+  skillScores: SkillScore[];     // All skill similarity scores
+  outcome: CalibrationOutcome;   // 'continued' | 'corrected' | 'unknown'
+  topSkill?: string;             // Highest scoring skill
+  topSimilarity?: number;        // Highest similarity score
+  activationThreshold: number;   // Threshold at time of event
+  wouldActivate: boolean;        // Whether activation would occur
+}
+
+type CalibrationOutcome = 'continued' | 'corrected' | 'unknown';
+```
+
+### ThresholdOptimizer
+
+Find optimal activation thresholds using F1 score optimization via grid search.
+
+**Constructor:**
+
+```typescript
+import { ThresholdOptimizer } from 'gsd-skill-creator';
+
+const optimizer = new ThresholdOptimizer();
+```
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `findOptimalThreshold` | `events, currentThreshold` | `OptimizationResult` | Find optimal threshold |
+| `evaluateThreshold` | `events, threshold` | `ThresholdCandidate` | Evaluate single threshold |
+
+**Example:**
+
+```typescript
+import { CalibrationStore, ThresholdOptimizer } from 'gsd-skill-creator';
+
+const store = new CalibrationStore();
+const optimizer = new ThresholdOptimizer();
+
+// Get calibration data with known outcomes
+const events = await store.getKnownOutcomes();
+const currentThreshold = 0.75;
+
+// Find optimal threshold
+const result = optimizer.findOptimalThreshold(events, currentThreshold);
+
+console.log(`Current threshold: ${result.currentThreshold}`);
+console.log(`Current F1: ${(result.currentF1 * 100).toFixed(1)}%`);
+console.log(`Optimal threshold: ${result.optimalThreshold}`);
+console.log(`Optimal F1: ${(result.optimalF1 * 100).toFixed(1)}%`);
+console.log(`Improvement: ${(result.improvement * 100).toFixed(1)}%`);
+console.log(`Data points: ${result.dataPoints}`);
+
+// Evaluate a specific threshold
+const candidate = optimizer.evaluateThreshold(events, 0.80);
+console.log(`Precision: ${(candidate.precision * 100).toFixed(1)}%`);
+console.log(`Recall: ${(candidate.recall * 100).toFixed(1)}%`);
+```
+
+**OptimizationResult Type:**
+
+```typescript
+interface OptimizationResult {
+  optimalThreshold: number;      // Best threshold found
+  optimalF1: number;             // F1 score at optimal
+  currentThreshold: number;      // Comparison baseline
+  currentF1: number;             // F1 at current
+  improvement: number;           // optimalF1 - currentF1
+  dataPoints: number;            // Events used
+  allCandidates: ThresholdCandidate[];  // All evaluated
+}
+
+interface ThresholdCandidate {
+  threshold: number;
+  f1: number;         // Harmonic mean of precision/recall
+  precision: number;  // TP / (TP + FP)
+  recall: number;     // TP / (TP + FN)
+  accuracy: number;   // (TP + TN) / total
+}
+```
+
+### ThresholdHistory
+
+Track threshold changes over time for auditing and rollback.
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `record` | `threshold, f1, reason` | `Promise<ThresholdSnapshot>` | Record threshold change |
+| `getHistory` | - | `Promise<ThresholdSnapshot[]>` | Get all history |
+| `getCurrent` | - | `Promise<ThresholdSnapshot \| null>` | Get current threshold |
+| `rollback` | `timestamp` | `Promise<ThresholdSnapshot \| null>` | Rollback to snapshot |
+
+**Example:**
+
+```typescript
+import { ThresholdHistory } from 'gsd-skill-creator';
+
+const history = new ThresholdHistory();
+
+// Record a threshold change
+await history.record(0.72, 0.89, 'Optimization based on 150 calibration events');
+
+// Get history
+const snapshots = await history.getHistory();
+snapshots.forEach(s => {
+  console.log(`${s.timestamp}: ${s.threshold} (F1: ${s.f1})`);
+});
+
+// Rollback if needed
+const previousSnapshot = snapshots[1];
+if (previousSnapshot) {
+  await history.rollback(previousSnapshot.timestamp);
+}
+```
+
+### BenchmarkReporter
+
+Generate benchmark reports for accuracy analysis.
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `computeReport` | `events, threshold, perSkill?` | `BenchmarkReport` | Compute benchmark |
+| `formatTerminal` | `report` | `string` | Terminal-friendly output |
+| `formatJSON` | `report` | `string` | JSON output |
+
+**Example:**
+
+```typescript
+import { CalibrationStore, BenchmarkReporter } from 'gsd-skill-creator';
+
+const store = new CalibrationStore();
+const reporter = new BenchmarkReporter();
+
+const events = await store.getKnownOutcomes();
+const report = reporter.computeReport(events, 0.75, true);  // Per-skill metrics
+
+console.log(`Overall correlation: ${report.correlation}%`);
+console.log(`Precision: ${report.metrics.precision}%`);
+console.log(`Recall: ${report.metrics.recall}%`);
+console.log(`F1: ${report.metrics.f1}%`);
+
+if (report.recommendations.length > 0) {
+  console.log('Recommendations:');
+  report.recommendations.forEach(r => console.log(`  - ${r}`));
+}
+
+// Terminal output
+console.log(reporter.formatTerminal(report));
+
+// JSON for CI
+const json = reporter.formatJSON(report);
+```
+
+### MCC Utilities
+
+Matthews Correlation Coefficient for balanced accuracy measurement.
+
+| Function | Parameters | Returns | Description |
+|----------|------------|---------|-------------|
+| `calculateMCC` | `tp, tn, fp, fn` | `number` | Calculate MCC (-1 to 1) |
+| `mccToPercentage` | `mcc` | `number` | Convert to 0-100 scale |
+
+**Example:**
+
+```typescript
+import { calculateMCC, mccToPercentage } from 'gsd-skill-creator';
+
+const mcc = calculateMCC(80, 15, 3, 2);  // TP, TN, FP, FN
+console.log(`MCC: ${mcc.toFixed(3)}`);   // ~0.87
+console.log(`Correlation: ${mccToPercentage(mcc)}%`);  // ~87%
+```
+
+### Calibration Types
+
+| Type | Description |
+|------|-------------|
+| `CalibrationEvent` | Complete calibration event |
+| `CalibrationEventInput` | Input for recording events |
+| `CalibrationOutcome` | `'continued' \| 'corrected' \| 'unknown'` |
+| `SkillScore` | Skill name with similarity score |
+| `OptimizationResult` | Threshold optimization results |
+| `ThresholdCandidate` | Single threshold evaluation |
+| `ThresholdSnapshot` | Historical threshold record |
+| `BenchmarkReport` | Benchmark analysis report |
+
+---
+
+## Testing
+
+APIs for managing and running activation test cases.
+
+### TestStore
+
+Persist test cases for skills. Test cases are stored in `<skillsDir>/<skillName>/tests.json`.
+
+**Constructor:**
+
+```typescript
+import { TestStore } from 'gsd-skill-creator';
+
+const store = new TestStore('user');     // User scope: ~/.claude/skills
+const projectStore = new TestStore('project');  // Project scope: .claude/skills
+```
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `scope` | `SkillScope` | `'user'` | `'user'` or `'project'` |
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `add` | `skillName, input` | `Promise<TestCase>` | Add new test case |
+| `get` | `skillName, testId` | `Promise<TestCase \| null>` | Get test case by ID |
+| `update` | `skillName, testId, updates` | `Promise<TestCase \| null>` | Update test case |
+| `delete` | `skillName, testId` | `Promise<boolean>` | Delete test case |
+| `list` | `skillName` | `Promise<TestCase[]>` | List all test cases |
+
+**Example:**
+
+```typescript
+import { TestStore } from 'gsd-skill-creator';
+
+const store = new TestStore('user');
+
+// Add a test case
+const test = await store.add('git-commit', {
+  prompt: 'commit my changes',
+  expected: 'positive',
+  description: 'Basic commit intent',
+  tags: ['basic', 'intent'],
+  difficulty: 'easy',
+  minConfidence: 75,
+});
+
+console.log(`Test ID: ${test.id}`);
+
+// List all tests for a skill
+const tests = await store.list('git-commit');
+console.log(`${tests.length} tests for git-commit`);
+
+// Update a test
+await store.update('git-commit', test.id, {
+  description: 'Updated description',
+  difficulty: 'medium',
+});
+
+// Delete a test
+await store.delete('git-commit', test.id);
+```
+
+**TestCase Type:**
+
+```typescript
+interface TestCase {
+  id: string;                    // UUID
+  prompt: string;                // Test prompt
+  expected: TestExpectation;     // 'positive' | 'negative' | 'edge-case'
+  description?: string;          // Human-readable description
+  tags?: string[];               // Categorization tags
+  difficulty?: 'easy' | 'medium' | 'hard';
+  minConfidence?: number;        // Expected minimum confidence
+  maxConfidence?: number;        // Expected maximum confidence
+  reason?: string;               // Why this is expected result
+  createdAt: string;             // ISO timestamp
+}
+```
+
+### TestRunner
+
+Execute test cases and collect results. Connects TestStore with BatchSimulator.
+
+**Constructor:**
+
+```typescript
+import { TestStore, TestRunner, ResultStore, SkillStore } from 'gsd-skill-creator';
+
+const testStore = new TestStore('user');
+const skillStore = new SkillStore('~/.claude/skills');
+const resultStore = new ResultStore('user');
+
+const runner = new TestRunner(testStore, skillStore, resultStore, 'user');
+```
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `runForSkill` | `skillName, options?` | `Promise<TestRunResult>` | Run all tests for skill |
+
+**RunOptions:**
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `threshold` | `number` | `0.75` | Activation threshold |
+| `storeResults` | `boolean` | `true` | Save results to history |
+| `onProgress` | `function` | - | Progress callback |
+
+**Example:**
+
+```typescript
+import {
+  TestStore,
+  TestRunner,
+  ResultStore,
+  SkillStore,
+} from 'gsd-skill-creator';
+
+const testStore = new TestStore('user');
+const skillStore = new SkillStore('~/.claude/skills');
+const resultStore = new ResultStore('user');
+const runner = new TestRunner(testStore, skillStore, resultStore, 'user');
+
+// Run tests for a skill
+const result = await runner.runForSkill('git-commit', {
+  threshold: 0.75,
+  onProgress: ({ current, total }) => {
+    console.log(`Progress: ${current}/${total}`);
+  },
+});
+
+console.log(`Accuracy: ${result.metrics.accuracy}%`);
+console.log(`Passed: ${result.metrics.passed}/${result.metrics.total}`);
+console.log(`False positives: ${result.metrics.falsePositives}`);
+console.log(`False negatives: ${result.metrics.falseNegatives}`);
+
+// Check individual results
+result.positiveResults.forEach(r => {
+  const status = r.passed ? 'PASS' : 'FAIL';
+  console.log(`[${status}] ${r.prompt}`);
+});
+```
+
+**TestRunResult Type:**
+
+```typescript
+interface TestRunResult {
+  skillName: string;
+  timestamp: string;
+  metrics: RunMetrics;
+  positiveResults: TestCaseResult[];
+  negativeResults: TestCaseResult[];
+  edgeCaseResults: TestCaseResult[];
+  threshold: number;
+  duration: number;
+}
+
+interface RunMetrics {
+  total: number;
+  passed: number;
+  failed: number;
+  accuracy: number;
+  falsePositives: number;
+  falseNegatives: number;
+}
+```
+
+### Result Formatting
+
+Format test results for display.
+
+| Export | Description |
+|--------|-------------|
+| `ResultFormatter` | Class for formatting results |
+| `formatTestResults(results, options)` | Format for terminal output |
+| `formatTestJSON(results)` | Format as JSON |
+
+**Example:**
+
+```typescript
+import { formatTestResults, formatTestJSON } from 'gsd-skill-creator';
+
+// Terminal output
+console.log(formatTestResults(result, { verbose: true }));
+
+// JSON for CI
+const json = formatTestJSON(result);
+fs.writeFileSync('test-results.json', json);
+```
+
+### ReviewWorkflow
+
+Interactive workflow for reviewing and approving generated test cases.
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `review` | `skillName, tests` | `Promise<ReviewResult>` | Interactive review |
+
+> **Note:** Test generators (`HeuristicTestGenerator`, `LLMTestGenerator`) are exported via the testing module for advanced use but are typically accessed via the `test generate` CLI command.
+
+### Testing Types
+
+| Type | Description |
+|------|-------------|
+| `TestCase` | Complete test case |
+| `TestCaseInput` | Input for creating test case |
+| `TestExpectation` | `'positive' \| 'negative' \| 'edge-case'` |
+| `TestResult` | Legacy result type |
+| `TestCaseResult` | Individual test execution result |
+| `RunMetrics` | Aggregated test metrics |
+| `TestRunResult` | Complete test run result |
+| `TestRunSnapshot` | Historical test run |
+| `RunOptions` | Test runner options |
+| `FormatOptions` | Formatting options |
+| `ValidationWarning` | Test validation warning |
+| `ReviewResult` | Review workflow result |
+
+---
+
+## Application Components
+
+Lower-level components for building custom skill systems. Most users should use factory functions instead.
+
+| Component | Purpose |
+|-----------|---------|
+| `TokenCounter` | Count tokens in skill content using tiktoken |
+| `RelevanceScorer` | Score skill relevance to user prompts |
+| `ConflictResolver` | Resolve overlapping skill activations at runtime |
+| `SkillSession` | Manage active skills within a session |
+| `SkillApplicator` | Apply skills to Claude conversations |
+
+**Example - SkillApplicator:**
+
+```typescript
+import { createApplicationContext } from 'gsd-skill-creator';
+
+const { applicator } = createApplicationContext();
+
+// Apply skills to a prompt
+const result = await applicator.apply('commit my changes');
+
+if (result.activated) {
+  console.log(`Skill: ${result.skillName}`);
+  console.log(`Content:\n${result.content}`);
+}
+
+// Invoke a specific skill by name
+const invokeResult = await applicator.invoke('git-commit');
+console.log(invokeResult.content);
+```
+
+See source files for detailed API documentation of individual components.
+
+---
+
+## Workflows
+
+High-level workflow functions for common operations.
+
+| Function | Description |
+|----------|-------------|
+| `createSkillWorkflow()` | Interactive skill creation with validation |
+| `listSkillsWorkflow()` | List skills with formatting options |
+| `searchSkillsWorkflow()` | Interactive fuzzy search for skills |
+
+**Example:**
+
+```typescript
+import { createSkillWorkflow, listSkillsWorkflow } from 'gsd-skill-creator';
+
+// Create a skill interactively
+const skill = await createSkillWorkflow({
+  name: 'my-skill',
+  description: 'Use when working with X',
+});
+
+// List all skills with details
+await listSkillsWorkflow({ verbose: true });
+```
+
+> **Note:** These workflows are designed for CLI use. For programmatic access, use the underlying stores directly.
+
+---
+
 ## See Also
 
 - [CLI Reference](./CLI.md) - Command-line interface documentation
-- [Official Format](./OFFICIAL-FORMAT.md) - Skill file format specification
-- [Extensions](./EXTENSIONS.md) - Extension format documentation
+- [Official Format](./OFFICIAL-FORMAT.md) - Skill format specification
+- [Extensions](./EXTENSIONS.md) - Extended frontmatter fields
+
+---
+
+*API Reference for gsd-skill-creator*
