@@ -456,6 +456,314 @@ interface ScopedSkillEntry extends SkillIndexEntry {
 
 ---
 
+## Validation
+
+Zod schemas and validation functions for skill input validation. These ensure skills meet the official Claude Code specification before storage.
+
+### Schemas
+
+Zod schemas for validating skill data.
+
+| Schema | Purpose |
+|--------|---------|
+| `SkillInputSchema` | Full skill creation input validation |
+| `SkillUpdateSchema` | Partial skill update validation |
+| `SkillNameSchema` | Skill name format validation (legacy) |
+| `OfficialSkillNameSchema` | Strict official name validation |
+| `TriggerPatternsSchema` | Trigger patterns array validation |
+| `SkillMetadataSchema` | Full metadata validation |
+| `GsdExtensionSchema` | Extension data validation |
+
+**Example - Using Schemas Directly:**
+
+```typescript
+import { SkillInputSchema, OfficialSkillNameSchema } from 'gsd-skill-creator';
+
+// Parse and validate input
+const result = SkillInputSchema.safeParse({
+  name: 'my-skill',
+  description: 'Use when working with X',
+});
+
+if (!result.success) {
+  console.log('Validation errors:', result.error.issues);
+} else {
+  console.log('Valid input:', result.data);
+}
+
+// Validate just the name
+const nameResult = OfficialSkillNameSchema.safeParse('My-Skill');
+// { success: false, error: ... }
+```
+
+### validateSkillInput()
+
+Validate complete skill input for creation. Throws on validation failure.
+
+**Signature:**
+
+```typescript
+function validateSkillInput(input: unknown): SkillInput
+```
+
+**Throws:** `Error` with detailed message if validation fails
+
+**Example:**
+
+```typescript
+import { validateSkillInput } from 'gsd-skill-creator';
+
+try {
+  const validated = validateSkillInput({
+    name: 'my-skill',
+    description: 'Use when working with X',
+    enabled: true,
+    triggers: {
+      intents: ['work with X', 'handle X'],
+    },
+  });
+  console.log('Valid:', validated.name);
+} catch (error) {
+  console.error('Invalid:', error.message);
+  // "Invalid skill input: name: Name must be lowercase..."
+}
+```
+
+### validateSkillUpdate()
+
+Validate partial skill update data. All fields are optional except `name` (which cannot be updated).
+
+**Signature:**
+
+```typescript
+function validateSkillUpdate(input: unknown): SkillUpdate
+```
+
+**Throws:** `Error` with detailed message if validation fails
+
+**Example:**
+
+```typescript
+import { validateSkillUpdate } from 'gsd-skill-creator';
+
+const validated = validateSkillUpdate({
+  description: 'Updated description',
+  enabled: false,
+});
+```
+
+### validateSkillNameStrict()
+
+Strict name validation with detailed errors and suggestions for invalid names.
+
+**Signature:**
+
+```typescript
+function validateSkillNameStrict(name: string): StrictNameValidationResult
+
+interface StrictNameValidationResult {
+  valid: boolean;
+  errors: string[];
+  suggestion?: string;
+}
+```
+
+**Example:**
+
+```typescript
+import { validateSkillNameStrict } from 'gsd-skill-creator';
+
+// Valid name
+const valid = validateSkillNameStrict('my-skill');
+// { valid: true, errors: [] }
+
+// Invalid name with suggestion
+const invalid = validateSkillNameStrict('My-Skill');
+// {
+//   valid: false,
+//   errors: ['Name must start with a lowercase letter...'],
+//   suggestion: 'my-skill'
+// }
+
+// Invalid with multiple errors
+const bad = validateSkillNameStrict('My--Skill!!');
+// {
+//   valid: false,
+//   errors: ['Invalid characters...', 'Cannot contain consecutive hyphens...'],
+//   suggestion: 'my-skill'
+// }
+```
+
+**Name Requirements:**
+- 1-64 characters
+- Only lowercase letters, numbers, and hyphens
+- Must start and end with letter or number
+- No consecutive hyphens (`--`)
+
+### validateReservedName()
+
+Check if a name conflicts with Claude Code built-in commands.
+
+**Signature:**
+
+```typescript
+function validateReservedName(name: string): Promise<ReservedNameValidationResult>
+
+interface ReservedNameValidationResult {
+  valid: boolean;
+  reserved: boolean;
+  category?: string;
+  reason?: string;
+  error?: string;
+  alternatives?: string[];
+}
+```
+
+**Example:**
+
+```typescript
+import { validateReservedName } from 'gsd-skill-creator';
+
+// Non-reserved name
+const ok = await validateReservedName('my-custom-skill');
+// { valid: true, reserved: false }
+
+// Reserved name
+const reserved = await validateReservedName('init');
+// {
+//   valid: false,
+//   reserved: true,
+//   category: 'commands',
+//   reason: 'Built-in Claude Code command',
+//   error: 'Name "init" is reserved...',
+//   alternatives: ['my-init', 'custom-init', 'project-init']
+// }
+```
+
+### validateDescriptionQuality()
+
+Check description quality for reliable skill activation. Returns warnings (not errors) for poor descriptions.
+
+**Signature:**
+
+```typescript
+function validateDescriptionQuality(description: string): DescriptionQualityResult
+
+interface DescriptionQualityResult {
+  hasActivationTriggers: boolean;
+  warning?: string;
+  suggestions?: string[];
+}
+```
+
+**Example:**
+
+```typescript
+import { validateDescriptionQuality } from 'gsd-skill-creator';
+
+// Good description with activation triggers
+const good = validateDescriptionQuality('Use when working with TypeScript projects');
+// { hasActivationTriggers: true }
+
+// Poor description lacking triggers
+const poor = validateDescriptionQuality('Handles TypeScript');
+// {
+//   hasActivationTriggers: false,
+//   warning: 'Description may not activate reliably - lacks trigger phrases',
+//   suggestions: [
+//     'Add "Use when..." to specify when this skill should activate',
+//     'Include specific keywords users might mention',
+//     'Example: "Use when working with TypeScript projects"'
+//   ]
+// }
+```
+
+### hasActivationPattern()
+
+Quick check if description contains activation-friendly patterns.
+
+**Signature:**
+
+```typescript
+function hasActivationPattern(description: string): boolean
+```
+
+**Example:**
+
+```typescript
+import { hasActivationPattern } from 'gsd-skill-creator';
+
+hasActivationPattern('Use when editing Python files');  // true
+hasActivationPattern('Activate when user mentions git');  // true
+hasActivationPattern('Helps with testing');  // true
+hasActivationPattern('Python utilities');  // false
+```
+
+**Recognized Patterns:**
+- "Use when..."
+- "When user/you/working/editing..."
+- "Activate when..."
+- "For handling/processing/working with..."
+- "Helps with/to..."
+- "Asks/mentions/says..."
+
+### suggestFixedName()
+
+Transform an invalid skill name into a valid suggestion.
+
+**Signature:**
+
+```typescript
+function suggestFixedName(input: string): string | null
+```
+
+**Example:**
+
+```typescript
+import { suggestFixedName } from 'gsd-skill-creator';
+
+suggestFixedName('My-Skill');      // 'my-skill'
+suggestFixedName('foo__bar');      // 'foo-bar'
+suggestFixedName('hello world');   // 'hello-world'
+suggestFixedName('valid-name');    // null (already valid, no change needed)
+```
+
+### Input/Update Types
+
+Types inferred from validation schemas.
+
+| Type | Description |
+|------|-------------|
+| `SkillInput` | Validated input for skill creation |
+| `SkillUpdate` | Validated input for skill updates |
+
+**SkillInput Fields:**
+
+```typescript
+interface SkillInput {
+  name: string;           // Required: 1-64 chars, lowercase/numbers/hyphens
+  description: string;    // Required: 1-1024 chars
+  enabled?: boolean;      // Default: true
+  triggers?: {
+    intents?: string[];   // Activation phrases
+    files?: string[];     // File patterns
+    contexts?: string[];  // Context patterns
+    threshold?: number;   // 0-1 activation threshold
+  };
+  // Claude Code official fields
+  'disable-model-invocation'?: boolean;
+  'user-invocable'?: boolean;
+  'allowed-tools'?: string[];
+  'argument-hint'?: string;
+  model?: string;
+  context?: 'fork';
+  agent?: string;
+  hooks?: Record<string, unknown>;
+}
+```
+
+---
+
 ## TypeScript Types
 
 Key types exported for TypeScript consumers. For complete type definitions, see the source files.
