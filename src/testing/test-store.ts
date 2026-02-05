@@ -13,10 +13,13 @@ import { getSkillsBasePath, type SkillScope } from '../types/scope.js';
  * or `.claude/skills/<skillName>/tests.json` (project scope).
  *
  * Uses atomic writes (temp file + rename) to prevent corruption.
+ * Serializes concurrent writes to the same skill using a write queue.
  */
 export class TestStore {
   private basePath: string;
   private scope: SkillScope;
+  // Write queues per skill to serialize concurrent writes
+  private writeQueues: Map<string, Promise<void>> = new Map();
 
   /**
    * Create a new TestStore instance.
@@ -94,6 +97,26 @@ export class TestStore {
   }
 
   /**
+   * Serialize writes to a skill by queueing them.
+   * This prevents race conditions when multiple adds happen concurrently.
+   */
+  private async serializedWrite<T>(
+    skillName: string,
+    operation: () => Promise<T>
+  ): Promise<T> {
+    const currentQueue = this.writeQueues.get(skillName) ?? Promise.resolve();
+
+    let result: T;
+    const newQueue = currentQueue.then(async () => {
+      result = await operation();
+    });
+
+    this.writeQueues.set(skillName, newQueue);
+    await newQueue;
+    return result!;
+  }
+
+  /**
    * Add a new test case for a skill.
    *
    * @param skillName - Name of the skill
@@ -102,7 +125,7 @@ export class TestStore {
    * @throws Error if input validation fails or prompt is duplicate
    */
   async add(skillName: string, input: TestCaseInput): Promise<TestCase> {
-    // Validate input
+    // Validate input first (can be done outside serialized write)
     const validationResult = validateTestCaseInput(input);
 
     if (!validationResult.valid) {
@@ -121,36 +144,39 @@ export class TestStore {
     // Warn if skill directory doesn't exist
     await this.warnIfSkillNotExists(skillName);
 
-    // Load existing tests
-    const tests = await this.load(skillName);
+    // Serialize the read-modify-write operation
+    return this.serializedWrite(skillName, async () => {
+      // Load existing tests
+      const tests = await this.load(skillName);
 
-    // Check for duplicate prompt (exact match)
-    const duplicatePrompt = tests.find((t) => t.prompt === input.prompt);
-    if (duplicatePrompt) {
-      throw new Error(
-        `Duplicate test prompt: A test with the exact same prompt already exists (id: ${duplicatePrompt.id})`
-      );
-    }
+      // Check for duplicate prompt (exact match)
+      const duplicatePrompt = tests.find((t) => t.prompt === input.prompt);
+      if (duplicatePrompt) {
+        throw new Error(
+          `Duplicate test prompt: A test with the exact same prompt already exists (id: ${duplicatePrompt.id})`
+        );
+      }
 
-    // Create new test case
-    const newTest: TestCase = {
-      id: randomUUID(),
-      prompt: input.prompt,
-      expected: input.expected,
-      description: input.description,
-      tags: input.tags,
-      difficulty: input.difficulty,
-      minConfidence: input.minConfidence,
-      maxConfidence: input.maxConfidence,
-      reason: input.reason,
-      createdAt: new Date().toISOString(),
-    };
+      // Create new test case
+      const newTest: TestCase = {
+        id: randomUUID(),
+        prompt: input.prompt,
+        expected: input.expected,
+        description: input.description,
+        tags: input.tags,
+        difficulty: input.difficulty,
+        minConfidence: input.minConfidence,
+        maxConfidence: input.maxConfidence,
+        reason: input.reason,
+        createdAt: new Date().toISOString(),
+      };
 
-    // Append and save
-    tests.push(newTest);
-    await this.save(skillName, tests);
+      // Append and save
+      tests.push(newTest);
+      await this.save(skillName, tests);
 
-    return newTest;
+      return newTest;
+    });
   }
 
   /**
@@ -179,73 +205,75 @@ export class TestStore {
     testId: string,
     updates: Partial<TestCaseInput>
   ): Promise<TestCase | null> {
-    const tests = await this.load(skillName);
-    const index = tests.findIndex((t) => t.id === testId);
+    return this.serializedWrite(skillName, async () => {
+      const tests = await this.load(skillName);
+      const index = tests.findIndex((t) => t.id === testId);
 
-    if (index === -1) {
-      return null;
-    }
+      if (index === -1) {
+        return null;
+      }
 
-    const existingTest = tests[index];
+      const existingTest = tests[index];
 
-    // If updating prompt, check for duplicates (excluding current test)
-    if (updates.prompt !== undefined && updates.prompt !== existingTest.prompt) {
-      const duplicatePrompt = tests.find(
-        (t) => t.id !== testId && t.prompt === updates.prompt
-      );
-      if (duplicatePrompt) {
+      // If updating prompt, check for duplicates (excluding current test)
+      if (updates.prompt !== undefined && updates.prompt !== existingTest.prompt) {
+        const duplicatePrompt = tests.find(
+          (t) => t.id !== testId && t.prompt === updates.prompt
+        );
+        if (duplicatePrompt) {
+          throw new Error(
+            `Duplicate test prompt: A test with the exact same prompt already exists (id: ${duplicatePrompt.id})`
+          );
+        }
+      }
+
+      // Merge updates (preserving id and createdAt)
+      const mergedInput: TestCaseInput = {
+        prompt: updates.prompt ?? existingTest.prompt,
+        expected: updates.expected ?? existingTest.expected,
+        description: updates.description ?? existingTest.description,
+        tags: updates.tags ?? existingTest.tags,
+        difficulty: updates.difficulty ?? existingTest.difficulty,
+        minConfidence: updates.minConfidence ?? existingTest.minConfidence,
+        maxConfidence: updates.maxConfidence ?? existingTest.maxConfidence,
+        reason: updates.reason ?? existingTest.reason,
+      };
+
+      // Validate merged input
+      const validationResult = validateTestCaseInput(mergedInput);
+
+      if (!validationResult.valid) {
         throw new Error(
-          `Duplicate test prompt: A test with the exact same prompt already exists (id: ${duplicatePrompt.id})`
+          `Invalid test case input: ${validationResult.errors?.join(', ')}`
         );
       }
-    }
 
-    // Merge updates (preserving id and createdAt)
-    const mergedInput: TestCaseInput = {
-      prompt: updates.prompt ?? existingTest.prompt,
-      expected: updates.expected ?? existingTest.expected,
-      description: updates.description ?? existingTest.description,
-      tags: updates.tags ?? existingTest.tags,
-      difficulty: updates.difficulty ?? existingTest.difficulty,
-      minConfidence: updates.minConfidence ?? existingTest.minConfidence,
-      maxConfidence: updates.maxConfidence ?? existingTest.maxConfidence,
-      reason: updates.reason ?? existingTest.reason,
-    };
-
-    // Validate merged input
-    const validationResult = validateTestCaseInput(mergedInput);
-
-    if (!validationResult.valid) {
-      throw new Error(
-        `Invalid test case input: ${validationResult.errors?.join(', ')}`
-      );
-    }
-
-    // Log warnings if any
-    if (validationResult.warnings && validationResult.warnings.length > 0) {
-      for (const warning of validationResult.warnings) {
-        console.warn(`Warning [${warning.field}]: ${warning.message}`);
+      // Log warnings if any
+      if (validationResult.warnings && validationResult.warnings.length > 0) {
+        for (const warning of validationResult.warnings) {
+          console.warn(`Warning [${warning.field}]: ${warning.message}`);
+        }
       }
-    }
 
-    // Update test case (preserve id and createdAt)
-    const updatedTest: TestCase = {
-      id: existingTest.id,
-      prompt: mergedInput.prompt,
-      expected: mergedInput.expected,
-      description: mergedInput.description,
-      tags: mergedInput.tags,
-      difficulty: mergedInput.difficulty,
-      minConfidence: mergedInput.minConfidence,
-      maxConfidence: mergedInput.maxConfidence,
-      reason: mergedInput.reason,
-      createdAt: existingTest.createdAt,
-    };
+      // Update test case (preserve id and createdAt)
+      const updatedTest: TestCase = {
+        id: existingTest.id,
+        prompt: mergedInput.prompt,
+        expected: mergedInput.expected,
+        description: mergedInput.description,
+        tags: mergedInput.tags,
+        difficulty: mergedInput.difficulty,
+        minConfidence: mergedInput.minConfidence,
+        maxConfidence: mergedInput.maxConfidence,
+        reason: mergedInput.reason,
+        createdAt: existingTest.createdAt,
+      };
 
-    tests[index] = updatedTest;
-    await this.save(skillName, tests);
+      tests[index] = updatedTest;
+      await this.save(skillName, tests);
 
-    return updatedTest;
+      return updatedTest;
+    });
   }
 
   /**
@@ -256,16 +284,18 @@ export class TestStore {
    * @returns true if deleted, false if not found
    */
   async delete(skillName: string, testId: string): Promise<boolean> {
-    const tests = await this.load(skillName);
-    const initialLength = tests.length;
-    const filtered = tests.filter((t) => t.id !== testId);
+    return this.serializedWrite(skillName, async () => {
+      const tests = await this.load(skillName);
+      const initialLength = tests.length;
+      const filtered = tests.filter((t) => t.id !== testId);
 
-    if (filtered.length === initialLength) {
-      return false;
-    }
+      if (filtered.length === initialLength) {
+        return false;
+      }
 
-    await this.save(skillName, filtered);
-    return true;
+      await this.save(skillName, filtered);
+      return true;
+    });
   }
 
   /**
