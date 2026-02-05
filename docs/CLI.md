@@ -881,3 +881,229 @@ save work and push
 # Another comment
 deploy to production
 ```
+
+---
+
+## Calibrate: Threshold Optimization
+
+Commands for optimizing activation thresholds and measuring simulator accuracy.
+
+### Calibration Workflow
+
+The calibration workflow improves activation accuracy over time:
+
+1. **Use skills normally** - Activation events are recorded automatically when skills activate or don't activate
+2. **Accumulate data** - Wait until you have at least 75 events with known outcomes
+3. **Run calibration** - `skill-creator calibrate` finds the F1-optimal threshold
+4. **Review and apply** - Preview the proposed threshold and confirm before applying
+5. **Verify improvement** - `skill-creator benchmark` measures real-world accuracy
+
+---
+
+### calibrate
+
+Optimize activation threshold from calibration data.
+
+**Synopsis:**
+
+```
+skill-creator calibrate [options]
+skill-creator calibrate rollback
+skill-creator calibrate history
+```
+
+**Description:**
+
+Analyzes collected activation events to find the optimal threshold that maximizes F1 score (balance of precision and recall). Shows a preview of current vs optimal threshold with expected improvement before applying changes.
+
+Requires at least 75 events with known outcomes before calibration can run. Events are collected automatically during normal skill usage.
+
+**Options:**
+
+| Option | Description |
+|--------|-------------|
+| `--preview` | Show proposed changes without applying |
+| `--force, -f` | Skip confirmation prompt |
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `rollback` | Revert to the previous threshold |
+| `history` | Show threshold history |
+
+**Examples:**
+
+```bash
+# Preview calibration without applying
+skill-creator calibrate --preview
+
+# Run calibration with confirmation
+skill-creator calibrate
+
+# Apply without confirmation
+skill-creator calibrate --force
+
+# Short form
+skill-creator cal
+skill-creator cal --preview
+```
+
+**Sample Output:**
+
+```
+Calibration Analysis
+
+Current threshold: 0.75 (F1: 82.3%)
+Optimal threshold: 0.72 (F1: 87.1%)
+Improvement: +4.8%
+
+Based on 156 calibration events
+
+? Apply new threshold 0.72? (Y/n)
+```
+
+---
+
+### calibrate rollback
+
+Revert to the previous threshold.
+
+**Synopsis:**
+
+```
+skill-creator calibrate rollback
+```
+
+**Description:**
+
+Undoes the most recent threshold change by reverting to the previous value in the threshold history. Useful if a calibration made activation behavior worse.
+
+**Example:**
+
+```bash
+# Undo last calibration
+skill-creator calibrate rollback
+
+# Or equivalently
+skill-creator cal rollback
+```
+
+**Sample Output:**
+
+```
+Rolled back to threshold 0.75
+From: 2/4/2026, 3:45:00 PM
+F1 score: 82.3%
+Reason: calibration
+```
+
+---
+
+### calibrate history
+
+Show threshold history.
+
+**Synopsis:**
+
+```
+skill-creator calibrate history
+```
+
+**Description:**
+
+Displays all threshold snapshots with timestamps, F1 scores, and the reason for each change. The current active threshold is highlighted with `>`.
+
+**Example:**
+
+```bash
+skill-creator calibrate history
+```
+
+**Sample Output:**
+
+```
+Threshold History
+
+  Timestamp            Threshold    F1       Reason
+  ------------------------------------------------------------
+> 2/5/2026, 10:30 AM   0.72         87.1%    calibration
+  2/4/2026, 3:45 PM    0.75         82.3%    calibration
+  2/1/2026, 9:00 AM    0.75         78.5%    manual
+
+Total: 3 snapshot(s)
+```
+
+---
+
+### benchmark
+
+Measure simulator accuracy vs real activation.
+
+**Synopsis:**
+
+```
+skill-creator benchmark [options]
+```
+
+**Description:**
+
+Computes correlation between simulated activation predictions and actual activation outcomes. Reports Matthews Correlation Coefficient (MCC), agreement rate, and confusion matrix breakdown.
+
+Results are always written to `.planning/calibration/benchmark.json` for tracking over time, regardless of output mode.
+
+**Options:**
+
+| Option | Description |
+|--------|-------------|
+| `--verbose, -v` | Show per-skill breakdown |
+| `--json` | Output JSON only |
+
+**Exit Codes:**
+
+| Code | Meaning |
+|------|---------|
+| 0 | Correlation >= 85% |
+| 1 | Correlation < 85% |
+
+**Examples:**
+
+```bash
+# Summary view
+skill-creator benchmark
+
+# Detailed per-skill breakdown
+skill-creator benchmark --verbose
+
+# JSON output for scripting
+skill-creator benchmark --json
+
+# Short form
+skill-creator bench -v
+```
+
+**Sample Output:**
+
+```
+Benchmark Report
+
+Correlation (MCC): 87%
+Agreement rate: 91%
+
+Confusion Matrix:
+  True Positives:  142
+  True Negatives:   89
+  False Positives:  12
+  False Negatives:  13
+
+JSON written to: .planning/calibration/benchmark.json
+```
+
+**CI Integration:**
+
+Use the exit code for CI quality gates:
+
+```bash
+# Fail CI if correlation drops below 85%
+skill-creator benchmark || exit 1
+```
