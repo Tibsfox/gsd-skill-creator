@@ -15,6 +15,9 @@ import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { budgetCommand } from './cli/commands/budget.js';
 import { resolveCommand } from './cli/commands/resolve.js';
 import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
+import { testCommand } from './cli/commands/test.js';
+import { simulateCommand, simulateHelp } from './cli/commands/simulate.js';
+import { calibrateCommand, calibrateHelp } from './cli/commands/calibrate.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
@@ -159,6 +162,46 @@ async function main() {
       if (exitCode !== 0) {
         process.exit(exitCode);
       }
+      break;
+    }
+
+    case 'test':
+    case 't': {
+      const subArgs = args.slice(1);
+      const exitCode = await testCommand(subArgs);
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'simulate':
+    case 'sim': {
+      // Handle help flag specially
+      if (args.includes('--help') || args.includes('-h')) {
+        console.log(simulateHelp());
+        break;
+      }
+
+      const scope = parseScope(args);
+      const verbose = args.includes('--verbose') || args.includes('-v');
+      const json = args.includes('--json');
+
+      const thresholdArg = args.find(a => a.startsWith('--threshold='));
+      const threshold = thresholdArg ? parseFloat(thresholdArg.split('=')[1]) : undefined;
+
+      const batchArg = args.find(a => a.startsWith('--batch='));
+      const batch = batchArg?.split('=')[1];
+
+      // Filter out options and command name to get the prompt
+      const promptArgs = args.filter(a =>
+        !a.startsWith('--') &&
+        !a.startsWith('-') &&
+        a !== 'simulate' &&
+        a !== 'sim'
+      );
+
+      await simulateCommand(promptArgs, { scope, verbose, threshold, json, batch });
       break;
     }
 
@@ -883,6 +926,35 @@ async function main() {
       break;
     }
 
+    case 'calibrate':
+    case 'cal': {
+      // Handle help flag
+      if (args.includes('--help') || args.includes('-h')) {
+        console.log(calibrateHelp());
+        break;
+      }
+      const exitCode = await calibrateCommand(args.slice(1));
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'benchmark':
+    case 'bench': {
+      // Handle help flag
+      if (args.includes('--help') || args.includes('-h')) {
+        console.log(calibrateHelp());
+        break;
+      }
+      // Route to calibrate command which handles benchmark subcommand
+      const exitCode = await calibrateCommand(['benchmark', ...args.slice(1)]);
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -949,6 +1021,8 @@ Commands:
   migrate, mg       Migrate legacy flat-file skills to subdirectory format
   migrate-agent, ma Migrate agents with legacy tools format
   sync-reserved     Show/update reserved skill names list
+  test, t           Manage skill test cases
+  simulate, sim     Predict which skill would activate for a prompt
   budget, bg        Show character budget usage across all skills
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
@@ -960,6 +1034,8 @@ Commands:
   rollback, rb      Rollback skill to previous version
   agents, ag        Manage agent suggestions from skill clusters
   reload-embeddings, re  Reload embedding model (retry after fallback)
+  calibrate, cal    Optimize activation threshold from calibration data
+  benchmark, bench  Measure simulator accuracy vs real activation
   help, -h          Show this help message
 
 Scope Options:
@@ -1034,6 +1110,42 @@ Agent Composition:
   bug (GitHub #11205). Consider using project-level agents instead.
   Workarounds: use project-level agents, the /agents UI command, or
   pass agents via --agents CLI flag when starting Claude Code.
+
+Test Management:
+  The 'test' command manages test cases for skill activation testing.
+  Test cases define expected behavior: should the skill activate for
+  a given prompt?
+
+  Subcommands:
+    test add <skill>       Add a test case (interactive or flags)
+    test list <skill>      List test cases for a skill
+    test edit <skill> <id> Edit an existing test case
+    test delete <skill> <id> Delete a test case
+
+  Examples:
+    skill-creator test add my-skill
+    skill-creator test add my-skill --prompt="commit my changes" --expected=positive
+    skill-creator test list my-skill
+    skill-creator test list my-skill --expected=negative
+    skill-creator test delete my-skill abc123 --force
+
+Activation Simulation:
+  The 'simulate' command predicts which skill would activate for a given
+  prompt using semantic similarity. Use it to validate skill descriptions
+  and identify potential conflicts.
+
+  Options:
+    --scope             Scope: user (default) or project
+    --verbose, -v       Show all predictions and trace details
+    --batch <file>      Test multiple prompts from file (one per line)
+    --threshold <n>     Activation threshold (default: 0.75)
+    --json              Output results as JSON
+
+  Examples:
+    skill-creator simulate "commit my changes"
+    skill-creator sim "deploy to production" --verbose
+    skill-creator simulate --batch prompts.txt --json
+    skill-creator simulate "test" --scope project --threshold 0.8
 
 Budget Management:
   Claude Code limits skill content to ~15,000 characters per skill and
