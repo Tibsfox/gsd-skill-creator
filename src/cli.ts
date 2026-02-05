@@ -97,6 +97,11 @@ async function main() {
     case 'detect-conflicts':
     case 'conflicts':
     case 'dc': {
+      // Handle help flag specially
+      if (args.includes('--help') || args.includes('-h')) {
+        const exitCode = await detectConflictsCommand('--help', {});
+        break;
+      }
       const scope = parseScope(args);
       const threshold = parseThreshold(args);
       const quiet = args.includes('--quiet') || args.includes('-q');
