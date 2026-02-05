@@ -1,11 +1,14 @@
 /**
  * Conflict detection module for identifying semantically similar skills.
  *
- * This module provides the ConflictDetector which uses embedding-based
- * similarity analysis to identify potential functionality overlap between skills.
+ * This module provides:
+ * - ConflictDetector: Uses embedding-based similarity analysis to identify
+ *   potential functionality overlap between skills
+ * - ConflictFormatter: Formats detection results for CLI output
  */
 
 export { ConflictDetector } from './conflict-detector.js';
+export { ConflictFormatter } from './conflict-formatter.js';
 
 // Re-export types for convenience
 export type {
