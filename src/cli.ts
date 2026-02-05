@@ -10,6 +10,7 @@ import { migrateAgentCommand, listAgentsInDir } from './cli/commands/migrate-age
 import { validateAgentFrontmatter } from './validation/agent-validation.js';
 import { validateCommand } from './cli/commands/validate.js';
 import { detectConflictsCommand } from './cli/commands/detect-conflicts.js';
+import { scoreActivationCommand } from './cli/commands/score-activation.js';
 import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { budgetCommand } from './cli/commands/budget.js';
 import { resolveCommand } from './cli/commands/resolve.js';
@@ -111,6 +112,35 @@ async function main() {
 
       const exitCode = await detectConflictsCommand(skillName, {
         threshold,
+        quiet,
+        json,
+        skillsDir: getSkillsBasePath(scope),
+      });
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'score-activation':
+    case 'sa':
+    case 'score': {
+      // Handle help flag specially
+      if (args.includes('--help') || args.includes('-h')) {
+        const exitCode = await scoreActivationCommand('--help', {});
+        break;
+      }
+      const scope = parseScope(args);
+      const all = args.includes('--all') || args.includes('-a');
+      const verbose = args.includes('--verbose') || args.includes('-v');
+      const quiet = args.includes('--quiet') || args.includes('-q');
+      const json = args.includes('--json');
+      const skillArgs = args.slice(1).filter(a => !a.startsWith('-'));
+      const skillName = skillArgs[0];
+
+      const exitCode = await scoreActivationCommand(skillName, {
+        all,
+        verbose,
         quiet,
         json,
         skillsDir: getSkillsBasePath(scope),
@@ -913,6 +943,7 @@ Commands:
   resolve, res      Show which version of a skill is active
   validate, v       Validate skill structure and metadata
   detect-conflicts, dc  Detect semantic conflicts between skills
+  score-activation, sa  Score skill activation likelihood
   migrate, mg       Migrate legacy flat-file skills to subdirectory format
   migrate-agent, ma Migrate agents with legacy tools format
   sync-reserved     Show/update reserved skill names list
@@ -957,6 +988,15 @@ Pattern Detection:
   proposes skills when it detects recurring workflows (3+ occurrences).
 
   Run 'suggest' periodically to discover automation opportunities.
+
+Activation Scoring:
+  The score-activation command predicts how reliably a skill will
+  auto-activate based on its description quality. Scores range from
+  0-100 with labels: Reliable (90+), Likely (70-89), Uncertain (50-69),
+  Unlikely (<50).
+
+  Run 'score-activation my-skill' for detailed factor breakdown and
+  suggestions for improvement. Run '--all' to see scores for all skills.
 
 Learning Loop:
   Skills can be refined based on user corrections. After 3+ corrections
@@ -1029,6 +1069,9 @@ Examples:
   skill-creator dc my-skill         # Check one skill against others
   skill-creator dc --threshold=0.90 # Use stricter threshold
   skill-creator dc --json           # JSON output for CI/scripting
+  skill-creator score-activation my-skill  # Score single skill
+  skill-creator sa --all                   # Score all skills
+  skill-creator sa --all --verbose         # With factor breakdown
   skill-creator migrate-agent       # Check all agents for legacy format
   skill-creator migrate-agent my-agent  # Migrate specific agent
   skill-creator ma --dry-run        # Preview changes without writing
