@@ -184,6 +184,65 @@ export type { SkillLoadResult, SessionReport } from './application/skill-session
 export { SkillApplicator } from './application/skill-applicator.js';
 export type { ApplyResult, InvokeResult } from './application/skill-applicator.js';
 
+// Simulation module
+export {
+  ActivationSimulator,
+  BatchSimulator,
+  categorizeConfidence,
+  formatConfidence,
+  getDefaultThresholds,
+  detectChallengers,
+  isWeakMatch,
+  generateDifferentiationHints,
+  formatHints,
+  generateExplanation,
+  generateBriefNegativeExplanation,
+} from './simulation/index.js';
+export type {
+  SkillInput as SimulationSkillInput,
+  BatchConfig,
+  BatchProgress,
+  BatchResult,
+  BatchStats,
+  ConfidenceThresholds,
+  ChallengerConfig,
+  ChallengerResult,
+  DifferentiationHint,
+  ExplanationOptions,
+  SimulationConfig,
+  SimulationResult,
+  SimulationTrace,
+  SkillPrediction,
+  ConfidenceLevel,
+} from './simulation/index.js';
+
+// Testing module
+export {
+  TestStore,
+  ResultStore,
+  TestRunner,
+  ResultFormatter,
+  formatTestResults,
+  formatJSON as formatTestJSON,
+  validateTestCaseInput,
+  TestCaseInputSchema,
+  ReviewWorkflow,
+} from './testing/index.js';
+export type {
+  RunOptions,
+  TestCase,
+  TestResult,
+  TestExpectation,
+  TestCaseResult,
+  RunMetrics,
+  TestRunResult,
+  TestRunSnapshot,
+  TestCaseInput,
+  ValidationWarning,
+  FormatOptions,
+  ReviewResult,
+} from './testing/index.js';
+
 // Import applicator for factory
 import { SkillApplicator } from './application/skill-applicator.js';
 import type { ApplicationConfig } from './types/application.js';
