@@ -1194,6 +1194,287 @@ for (const conflict of result.conflicts) {
 
 ---
 
+## Simulation
+
+APIs for predicting skill activation behavior using semantic similarity.
+
+### ActivationSimulator
+
+Simulate which skill would activate for a given prompt.
+
+**Constructor:**
+
+```typescript
+import { ActivationSimulator } from 'gsd-skill-creator';
+
+const simulator = new ActivationSimulator();  // Default threshold: 0.75
+const customSimulator = new ActivationSimulator({
+  threshold: 0.80,           // Require 80% similarity for activation
+  challengerMargin: 0.1,     // 10% margin for challengers
+  challengerFloor: 0.5,      // Minimum 50% for challenger consideration
+  includeTrace: true,        // Include timing/debug info
+});
+```
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `threshold` | `number` | `0.75` | Minimum similarity to consider activation |
+| `challengerMargin` | `number` | `0.1` | Within this margin of winner = challenger |
+| `challengerFloor` | `number` | `0.5` | Minimum similarity for challenger |
+| `includeTrace` | `boolean` | `false` | Include debug trace in results |
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `simulate` | `prompt, skills` | `Promise<SimulationResult>` | Predict which skill would activate |
+| `getConfig` | - | `SimulationConfig` | Get current configuration |
+
+**Example:**
+
+```typescript
+import { ActivationSimulator } from 'gsd-skill-creator';
+
+const simulator = new ActivationSimulator();
+
+const result = await simulator.simulate('commit my changes', [
+  { name: 'git-commit', description: 'Use when committing changes to git repository' },
+  { name: 'prisma-migrate', description: 'Use when running database migrations' },
+  { name: 'test-runner', description: 'Use when running test suites' },
+]);
+
+if (result.winner) {
+  console.log(`Would activate: ${result.winner.skillName}`);
+  console.log(`Confidence: ${result.winner.confidence.toFixed(1)}%`);
+  console.log(`Level: ${result.winner.confidenceLevel}`);  // 'high', 'medium', 'low'
+} else {
+  console.log('No skill would activate');
+}
+
+console.log(`Explanation: ${result.explanation}`);
+// "git-commit" would activate at 87.3%.
+
+// Check for close competitors
+if (result.challengers.length > 0) {
+  console.log('Close competitors:');
+  result.challengers.forEach(c => {
+    console.log(`  - ${c.skillName}: ${c.confidence.toFixed(1)}%`);
+  });
+}
+```
+
+**SimulationResult Type:**
+
+```typescript
+interface SimulationResult {
+  prompt: string;                    // Input prompt
+  winner: SkillPrediction | null;    // Predicted activated skill
+  challengers: SkillPrediction[];    // Close runner-ups
+  allPredictions: SkillPrediction[]; // All skills ranked by similarity
+  explanation: string;               // Human-readable explanation
+  method: 'model' | 'heuristic';     // Embedding method used
+  trace?: SimulationTrace;           // Debug info (if includeTrace: true)
+}
+```
+
+**SkillPrediction Type:**
+
+```typescript
+interface SkillPrediction {
+  skillName: string;
+  similarity: number;           // 0-1 raw similarity score
+  confidence: number;           // 0-100 percentage
+  confidenceLevel: ConfidenceLevel;  // 'high' | 'medium' | 'low' | 'none'
+  wouldActivate: boolean;       // Whether above threshold
+}
+```
+
+### BatchSimulator
+
+Run simulations across multiple prompts efficiently. Achieves 5x+ speedup through:
+1. Batching embedding requests (amortizes model overhead)
+2. Pre-computing skill embeddings (reused across all prompts)
+3. Concurrent similarity computation
+
+**Constructor:**
+
+```typescript
+import { BatchSimulator } from 'gsd-skill-creator';
+
+const batch = new BatchSimulator();  // Default concurrency: 10
+const customBatch = new BatchSimulator({
+  concurrency: 20,             // Parallel operations limit
+  threshold: 0.75,             // Activation threshold
+  verbosity: 'all',            // 'summary' | 'all' | 'failures'
+  onProgress: (p) => console.log(`${p.percent}%`),  // Progress callback
+});
+```
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `concurrency` | `number` | `10` | Maximum parallel operations |
+| `threshold` | `number` | `0.75` | Activation threshold |
+| `verbosity` | `string` | `'summary'` | Result filtering level |
+| `onProgress` | `function` | - | Progress callback |
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `runTestSuite` | `prompts, skills` | `Promise<BatchResult>` | Run many prompts vs skills |
+| `runCrossSkill` | `prompt, skills` | `Promise<SimulationResult>` | One prompt vs all skills |
+| `runTestSuiteWithProgress` | `prompts, skills` | `Promise<BatchResult>` | With visual progress bar |
+| `filterResults` | `results` | `SimulationResult[]` | Filter by verbosity setting |
+
+**Example - Test Suite:**
+
+```typescript
+import { BatchSimulator } from 'gsd-skill-creator';
+
+const batch = new BatchSimulator({ concurrency: 20 });
+
+const prompts = [
+  'commit my changes',
+  'run the tests',
+  'deploy to production',
+  'fix the bug in auth',
+];
+
+const skills = [
+  { name: 'git-commit', description: 'Use when committing changes' },
+  { name: 'test-runner', description: 'Use when running tests' },
+  { name: 'deploy', description: 'Use when deploying applications' },
+];
+
+const result = await batch.runTestSuite(prompts, skills);
+
+console.log(`Processed: ${result.stats.total} prompts`);
+console.log(`Activations: ${result.stats.activations}`);
+console.log(`Close competitions: ${result.stats.closeCompetitions}`);
+console.log(`No activations: ${result.stats.noActivations}`);
+console.log(`Duration: ${result.duration}ms`);
+
+// Access individual results
+result.results.forEach((r, i) => {
+  console.log(`"${prompts[i]}" -> ${r.winner?.skillName ?? 'none'}`);
+});
+```
+
+**Example - Progress Callback:**
+
+```typescript
+const batch = new BatchSimulator({
+  onProgress: ({ current, total, percent, currentPrompt }) => {
+    process.stdout.write(`\r[${percent}%] Processing: ${currentPrompt}`);
+  },
+});
+
+const result = await batch.runTestSuite(prompts, skills);
+console.log('\nDone!');
+```
+
+**BatchResult Type:**
+
+```typescript
+interface BatchResult {
+  results: SimulationResult[];  // Individual results
+  stats: BatchStats;            // Summary statistics
+  duration: number;             // Total time in milliseconds
+}
+
+interface BatchStats {
+  total: number;           // Total prompts processed
+  activations: number;     // Prompts where skill activated
+  closeCompetitions: number;  // Activations with challengers
+  noActivations: number;   // Prompts with no activation
+}
+```
+
+### Confidence Utilities
+
+Helper functions for interpreting and formatting confidence scores.
+
+| Function | Parameters | Returns | Description |
+|----------|------------|---------|-------------|
+| `categorizeConfidence` | `score: number` | `ConfidenceLevel` | Categorize score as high/medium/low/none |
+| `formatConfidence` | `score: number` | `string` | Format as percentage string (e.g., "87.3%") |
+| `getDefaultThresholds` | - | `ConfidenceThresholds` | Get default threshold values |
+| `detectChallengers` | `winner, predictions, config` | `ChallengerResult` | Find close runner-ups |
+| `isWeakMatch` | `score, threshold` | `boolean` | Check if score is borderline |
+
+**Example:**
+
+```typescript
+import {
+  categorizeConfidence,
+  formatConfidence,
+  getDefaultThresholds,
+  isWeakMatch,
+} from 'gsd-skill-creator';
+
+const score = 0.823;
+
+console.log(categorizeConfidence(score));  // 'high'
+console.log(formatConfidence(score));      // '82.3%'
+
+const thresholds = getDefaultThresholds();
+console.log(thresholds);
+// { high: 0.85, medium: 0.70, low: 0.50 }
+
+// Check if a match is borderline
+if (isWeakMatch(score, 0.80)) {
+  console.log('This is a borderline match - consider reviewing');
+}
+```
+
+**ConfidenceLevel Type:**
+
+```typescript
+type ConfidenceLevel = 'high' | 'medium' | 'low' | 'none';
+```
+
+| Level | Score Range | Meaning |
+|-------|-------------|---------|
+| `high` | >= 85% | Strong match, reliable activation |
+| `medium` | 70-84% | Reasonable match, likely correct |
+| `low` | 50-69% | Weak match, may need review |
+| `none` | < 50% | No meaningful match |
+
+### Explanation and Hint Generation
+
+Functions for generating human-readable explanations and differentiation hints.
+
+| Function | Description |
+|----------|-------------|
+| `generateExplanation` | Generate natural language explanation of prediction |
+| `generateBriefNegativeExplanation` | Short explanation when no skill matches |
+| `generateDifferentiationHints` | Suggestions to differentiate similar skills |
+| `formatHints` | Format hints for display |
+
+These are used internally by `ActivationSimulator` but can be called directly for custom formatting.
+
+### Simulation Types
+
+| Type | Description |
+|------|-------------|
+| `SimulationSkillInput` | Input skill for simulation (name + description) |
+| `SimulationConfig` | Simulator configuration options |
+| `SimulationResult` | Full simulation result |
+| `SimulationTrace` | Debug/timing information |
+| `SkillPrediction` | Single skill prediction with scores |
+| `ConfidenceLevel` | Confidence categorization |
+| `ConfidenceThresholds` | Threshold configuration |
+| `BatchConfig` | Batch simulator configuration |
+| `BatchResult` | Batch simulation results |
+| `BatchStats` | Summary statistics |
+| `BatchProgress` | Progress callback data |
+| `ChallengerConfig` | Challenger detection config |
+| `ChallengerResult` | Challenger detection result |
+| `DifferentiationHint` | Hint for differentiating skills |
+| `ExplanationOptions` | Explanation generation options |
+
+---
+
 ## Learning Module
 
 APIs for feedback capture, skill refinement, and version management.
