@@ -17,6 +17,7 @@ import { resolveCommand } from './cli/commands/resolve.js';
 import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
 import { testCommand } from './cli/commands/test.js';
 import { simulateCommand, simulateHelp } from './cli/commands/simulate.js';
+import { calibrateCommand, calibrateHelp } from './cli/commands/calibrate.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
@@ -925,6 +926,35 @@ async function main() {
       break;
     }
 
+    case 'calibrate':
+    case 'cal': {
+      // Handle help flag
+      if (args.includes('--help') || args.includes('-h')) {
+        console.log(calibrateHelp());
+        break;
+      }
+      const exitCode = await calibrateCommand(args.slice(1));
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'benchmark':
+    case 'bench': {
+      // Handle help flag
+      if (args.includes('--help') || args.includes('-h')) {
+        console.log(calibrateHelp());
+        break;
+      }
+      // Route to calibrate command which handles benchmark subcommand
+      const exitCode = await calibrateCommand(['benchmark', ...args.slice(1)]);
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1004,6 +1034,8 @@ Commands:
   rollback, rb      Rollback skill to previous version
   agents, ag        Manage agent suggestions from skill clusters
   reload-embeddings, re  Reload embedding model (retry after fallback)
+  calibrate, cal    Optimize activation threshold from calibration data
+  benchmark, bench  Measure simulator accuracy vs real activation
   help, -h          Show this help message
 
 Scope Options:

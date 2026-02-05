@@ -124,6 +124,25 @@ export type {
 // Learning module
 export * from './learning/index.js';
 
+// Calibration module
+export {
+  CalibrationStore,
+  ThresholdOptimizer,
+  ThresholdHistory,
+  calculateMCC,
+  mccToPercentage,
+  BenchmarkReporter,
+} from './calibration/index.js';
+export type {
+  CalibrationEvent,
+  CalibrationOutcome,
+  CalibrationEventInput,
+  SkillScore,
+  OptimizationResult,
+  ThresholdSnapshot,
+  BenchmarkReport,
+} from './calibration/index.js';
+
 export { DEFAULT_CONFIG } from './types/application.js';
 
 // Application components
