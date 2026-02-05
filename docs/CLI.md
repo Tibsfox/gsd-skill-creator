@@ -1691,3 +1691,199 @@ Attempting to reload embedding model...
 ✓ Model loaded successfully
 Future embedding operations will use the model.
 ```
+
+---
+
+## Exit Codes
+
+Commands return exit codes for CI/scripting integration:
+
+| Command | Exit 0 | Exit 1 |
+|---------|--------|--------|
+| validate | All validations pass | Any validation fails |
+| detect-conflicts | No high-severity conflicts | High-severity conflicts found (>90% similarity) |
+| test run | All tests pass AND thresholds met | Failures OR accuracy/FPR thresholds exceeded |
+| benchmark | Correlation >= 85% | Correlation < 85% |
+| budget | Success | Error reading skills |
+| migrate-agent | Success or no migration needed | Error during migration |
+| (all others) | Success | Error occurred |
+
+### Threshold Flags for CI
+
+`test run` supports threshold flags for CI pipelines:
+
+- `--min-accuracy=<n>`: Exit 1 if accuracy below N%
+- `--max-false-positive=<n>`: Exit 1 if false positive rate above N%
+
+**Example CI check:**
+
+```bash
+skill-creator test run --all --min-accuracy=90 --max-false-positive=5
+```
+
+---
+
+## CI Integration
+
+### JSON Output
+
+Commands supporting `--json` output for scripting:
+
+| Command | JSON Flag | Output |
+|---------|-----------|--------|
+| detect-conflicts | `--json` | Conflict array with severity |
+| score-activation | `--json` | Scores array with factors |
+| test list | `--json` | Test case array |
+| test run | `--json=compact\|pretty` | Results with metrics |
+| simulate | `--json` | Prediction with confidence |
+| benchmark | `--json` | Report with correlation |
+
+### JSON Schema: detect-conflicts
+
+```json
+{
+  "conflicts": [
+    {
+      "skill1": "commit-helper",
+      "skill2": "git-workflow",
+      "similarity": 0.92,
+      "severity": "high"
+    }
+  ],
+  "threshold": 0.85,
+  "scanned": 5
+}
+```
+
+### JSON Schema: test run
+
+```json
+{
+  "skill": "my-skill",
+  "metrics": {
+    "total": 10,
+    "passed": 8,
+    "failed": 2,
+    "accuracy": 80.0,
+    "falsePositiveRate": 10.0
+  },
+  "results": [
+    {
+      "id": "abc123",
+      "prompt": "commit my changes",
+      "expected": "positive",
+      "actual": "positive",
+      "confidence": 0.92,
+      "passed": true
+    }
+  ]
+}
+```
+
+### Example CI Pipeline
+
+```yaml
+# GitHub Actions workflow for skill quality
+name: Skill Quality
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install skill-creator
+        run: npm install -g skill-creator
+
+      - name: Validate skills
+        run: skill-creator validate --all
+
+      - name: Check conflicts
+        run: |
+          skill-creator detect-conflicts --json > conflicts.json
+          jq -e '.conflicts | length == 0' conflicts.json
+
+      - name: Run tests
+        run: skill-creator test run --all --min-accuracy=90 --max-false-positive=5
+
+      - name: Benchmark accuracy
+        run: skill-creator benchmark
+```
+
+---
+
+## Common Tasks
+
+Quick reference for common workflows.
+
+### Check Skill Quality
+
+```bash
+# Validate structure and metadata
+skill-creator validate my-skill
+
+# Check for semantic conflicts
+skill-creator detect-conflicts my-skill
+
+# Score activation likelihood
+skill-creator score-activation my-skill --verbose
+```
+
+### Test Activation Behavior
+
+```bash
+# Add test cases
+skill-creator test add my-skill
+
+# Run tests with details
+skill-creator test run my-skill --verbose
+
+# Simulate a specific prompt
+skill-creator simulate "my test prompt" --verbose
+```
+
+### Optimize Activation Threshold
+
+```bash
+# Preview calibration changes
+skill-creator calibrate --preview
+
+# Apply optimal threshold
+skill-creator calibrate
+
+# Verify improvement
+skill-creator benchmark
+```
+
+### Migrate Legacy Files
+
+```bash
+# Scan and migrate all legacy skills
+skill-creator migrate
+
+# Check agents for format issues
+skill-creator agents validate
+
+# Fix agent format issues
+skill-creator migrate-agent
+```
+
+### Monitor Budget Usage
+
+```bash
+# Check user-level budget
+skill-creator budget
+
+# Check project-level budget
+skill-creator budget --project
+
+# See active skills
+skill-creator status
+```
