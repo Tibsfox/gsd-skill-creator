@@ -36,3 +36,6 @@ export {
 
 // Test generators for automated test case creation
 export * from './generators/index.js';
+
+// Review workflow for interactive test case review
+export { ReviewWorkflow, type ReviewResult } from './review-workflow.js';
