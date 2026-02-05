@@ -32,6 +32,33 @@ export {
   SCOPE_FLAG_SHORT,
 } from './types/scope.js';
 
+// Team types
+export type {
+  TeamConfig,
+  TeamMember,
+  TeamTask,
+  InboxMessage,
+  TeamValidationResult,
+} from './types/team.js';
+
+export {
+  TEAM_TOPOLOGIES,
+  TEAM_ROLES,
+  TEAM_TASK_STATUSES,
+  TEAM_MEMBER_MODELS,
+  BACKEND_TYPES,
+  STRUCTURED_MESSAGE_TYPES,
+} from './types/team.js';
+
+export type {
+  TeamTopology,
+  TeamRole,
+  TeamTaskStatus,
+  TeamMemberModel,
+  BackendType,
+  StructuredMessageType,
+} from './types/team.js';
+
 // Storage - Import first so we can use in functions
 import { PatternStore } from './storage/pattern-store.js';
 import { SkillStore } from './storage/skill-store.js';
@@ -104,6 +131,15 @@ export {
   validateSkillUpdate,
 } from './validation/skill-validation.js';
 export type { SkillInput, SkillUpdate } from './validation/skill-validation.js';
+
+// Team validation
+export {
+  TeamMemberSchema,
+  TeamConfigSchema,
+  TeamTaskSchema,
+  InboxMessageSchema,
+  validateTeamConfig,
+} from './validation/team-validation.js';
 
 // Workflows
 export { createSkillWorkflow } from './workflows/create-skill-workflow.js';
