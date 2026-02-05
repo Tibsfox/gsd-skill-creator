@@ -7,6 +7,7 @@ A self-evolving skill ecosystem for Claude Code that observes usage patterns, su
 - [What It Does](#what-it-does)
 - [Core Concepts](#core-concepts)
 - [Installation](#installation)
+- [Documentation](#documentation)
 - [CLI Commands](#cli-commands)
 - [How It Works](#how-it-works)
 - [File Structure](#file-structure)
@@ -152,6 +153,18 @@ npm link
 # Verify
 skill-creator help
 ```
+
+---
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [Getting Started](docs/GETTING-STARTED.md) | Installation, quickstart, and tutorials |
+| [CLI Reference](docs/CLI.md) | Complete command documentation |
+| [API Reference](docs/API.md) | Programmatic usage for library consumers |
+| [Architecture](docs/architecture/) | System design for contributors |
+| [Examples](examples/) | Ready-to-use skill templates |
 
 ---
 
