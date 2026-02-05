@@ -251,19 +251,21 @@ skill-creator score-activation my-skill --llm  # Use LLM analysis
 | `test edit <skill> <id>` | `t edit` | Edit a test case |
 | `test delete <skill> <id>` | `t del` | Delete a test case |
 | `test run <skill>` | `t run` | Run tests for a skill |
-| `test generate <skill>` | `t gen` | Auto-generate test cases |
-| `simulate <skill>` | `sim` | Simulate activation for a skill |
-| `calibrate` | `cal` | Calibrate activation thresholds |
-| `benchmark` | `bench` | Benchmark simulator fidelity |
+| `test generate <skill>` | `t gen` | Auto-generate test cases (heuristic, cross-skill, LLM) |
+| `simulate <skill>` | `sim` | Simulate activation with confidence levels |
+| `calibrate` | `cal` | Optimize thresholds via F1 score |
+| `benchmark` | `bench` | Measure simulator correlation (MCC) |
 
 **Examples:**
 ```bash
 skill-creator test add my-skill             # Add test case interactively
 skill-creator test list my-skill            # List all test cases
-skill-creator test run my-skill             # Run tests
+skill-creator test run my-skill             # Run tests (shows accuracy, FPR)
 skill-creator test generate my-skill        # Auto-generate tests
+skill-creator test generate my-skill --llm  # LLM-enhanced generation
 skill-creator simulate my-skill "user query here"  # Simulate activation
-skill-creator calibrate                     # Optimize thresholds
+skill-creator simulate my-skill --batch     # Batch mode with progress bar
+skill-creator calibrate                     # Optimize thresholds from history
 skill-creator benchmark                     # Check simulator correlation
 ```
 
