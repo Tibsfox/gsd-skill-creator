@@ -19,7 +19,7 @@ export interface SessionEndData {
   sessionId: string;
   transcriptPath: string;
   cwd: string;
-  reason: 'clear' | 'logout' | 'prompt_input_exit' | 'other';
+  reason: 'clear' | 'logout' | 'prompt_input_exit' | 'bypass_permissions_disabled' | 'other';
   activeSkills?: string[];  // Skills that were active during the session
 }
 

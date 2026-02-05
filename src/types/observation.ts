@@ -40,7 +40,7 @@ export interface SessionObservation {
   endTime: number;
   durationMinutes: number;
   source: 'startup' | 'resume' | 'clear' | 'compact';
-  reason: 'clear' | 'logout' | 'prompt_input_exit' | 'other';
+  reason: 'clear' | 'logout' | 'prompt_input_exit' | 'bypass_permissions_disabled' | 'other';
   metrics: SessionMetrics;
   topCommands: string[];
   topFiles: string[];
