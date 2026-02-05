@@ -7,7 +7,10 @@
  */
 
 import { getEmbeddingService, cosineSimilarity } from '../embeddings/index.js';
-import { categorizeConfidence, formatConfidence } from './confidence-categorizer.js';
+import { categorizeConfidence } from './confidence-categorizer.js';
+import { detectChallengers } from './challenger-detector.js';
+import { generateDifferentiationHints } from './hint-generator.js';
+import { generateExplanation } from './explanation-generator.js';
 import type {
   SimulationConfig,
   SimulationResult,
@@ -120,22 +123,34 @@ export class ActivationSimulator {
     // Determine winner (highest above threshold)
     const winner = predictions.find((p) => p.wouldActivate) ?? null;
 
-    // Determine challengers (within margin of winner AND above floor)
-    const challengers: SkillPrediction[] = [];
-    if (winner) {
-      for (const pred of predictions) {
-        if (pred.skillName === winner.skillName) continue;
-        const withinMargin =
-          winner.similarity - pred.similarity <= this.config.challengerMargin;
-        const aboveFloor = pred.similarity >= this.config.challengerFloor;
-        if (withinMargin && aboveFloor) {
-          challengers.push(pred);
-        }
-      }
-    }
+    // Detect challengers using the extracted module
+    const challengerResult = detectChallengers(winner, predictions, {
+      margin: this.config.challengerMargin,
+      floor: this.config.challengerFloor,
+    });
 
-    // Generate natural language explanation
-    const explanation = this.generateExplanation(winner, challengers, predictions);
+    // Build skill description map for hints
+    const skillDescMap = new Map(skills.map((s) => [s.name, s.description]));
+    const winnerDesc = winner ? skillDescMap.get(winner.skillName) ?? '' : '';
+
+    // Generate differentiation hints if there are challengers
+    const hints = winner
+      ? generateDifferentiationHints(
+          winner,
+          winnerDesc,
+          challengerResult.challengers,
+          skillDescMap
+        )
+      : [];
+
+    // Generate natural language explanation using the extracted module
+    const explanation = generateExplanation(
+      winner,
+      challengerResult,
+      predictions,
+      hints,
+      { verbose: false, includeHints: challengerResult.tooCloseToCall }
+    );
 
     // Build trace if requested
     const embeddingTime = Date.now() - startTime;
@@ -152,44 +167,12 @@ export class ActivationSimulator {
     return {
       prompt,
       winner,
-      challengers,
+      challengers: challengerResult.challengers,
       allPredictions: predictions,
       explanation,
       method: promptResult.method,
       trace,
     };
-  }
-
-  /**
-   * Generate a natural language explanation for the prediction.
-   */
-  private generateExplanation(
-    winner: SkillPrediction | null,
-    challengers: SkillPrediction[],
-    allPredictions: SkillPrediction[]
-  ): string {
-    if (!winner) {
-      const topPred = allPredictions[0];
-      if (topPred) {
-        return `No skill would activate. Closest match: "${topPred.skillName}" at ${formatConfidence(topPred.similarity)}, below activation threshold.`;
-      }
-      return 'No skill would activate. No skills provided for comparison.';
-    }
-
-    let explanation = `"${winner.skillName}" would activate at ${formatConfidence(winner.similarity)}.`;
-
-    if (challengers.length > 0) {
-      const challengerNames = challengers.map(
-        (c) => `"${c.skillName}" (${formatConfidence(c.similarity)})`
-      );
-      if (challengers.length === 1) {
-        explanation += ` Close competitor: ${challengerNames[0]}.`;
-      } else {
-        explanation += ` Close competitors: ${challengerNames.join(', ')}.`;
-      }
-    }
-
-    return explanation;
   }
 
   /**
