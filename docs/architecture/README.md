@@ -95,6 +95,19 @@ flowchart TB
 
 ## Related Documentation
 
+For learning-oriented documentation, see:
+
+- [Getting Started](../GETTING-STARTED.md) - Installation and quickstart
+- [Workflows](../WORKFLOWS.md) - Common usage patterns
+- [Tutorials](../tutorials/) - Step-by-step guides:
+  - [Skill Creation](../tutorials/skill-creation.md)
+  - [Conflict Detection](../tutorials/conflict-detection.md)
+  - [Calibration](../tutorials/calibration.md)
+  - [CI Integration](../tutorials/ci-integration.md)
+- [Examples](../../examples/) - Ready-to-use skill templates
+
+For reference documentation:
+
 - [API.md](../API.md) - Complete programmatic API reference
 - [CLI.md](../CLI.md) - Command-line interface reference
 - [CHANGELOG.md](../CHANGELOG.md) - Version history and changes
