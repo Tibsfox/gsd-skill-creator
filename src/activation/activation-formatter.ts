@@ -9,7 +9,11 @@
  */
 
 import pc from 'picocolors';
-import type { ActivationScore } from '../types/activation.js';
+import type {
+  ActivationScore,
+  LLMAnalysisResult,
+  CombinedActivationResult,
+} from '../types/activation.js';
 
 export interface FormatOptions {
   /** Show full factor breakdown */
@@ -114,6 +118,90 @@ export class ActivationFormatter {
    */
   formatBatchJson(results: ActivationScore[]): string {
     return JSON.stringify(results, null, 2);
+  }
+
+  /**
+   * Format LLM analysis result as human-readable text.
+   *
+   * Shows score with confidence, reasoning, and in verbose mode
+   * includes strengths, weaknesses, and suggestions.
+   */
+  formatLLMResult(result: LLMAnalysisResult, options?: FormatOptions): string {
+    const lines: string[] = [];
+
+    // Header with score and confidence
+    const scoreColor = result.score >= 90 ? pc.green :
+                       result.score >= 70 ? pc.cyan :
+                       result.score >= 50 ? pc.yellow : pc.red;
+    lines.push(pc.bold('LLM Analysis'));
+    lines.push(`  Score: ${scoreColor(result.score.toString())}/100 (${result.confidence} confidence)`);
+    lines.push(`  ${result.reasoning}`);
+
+    if (options?.verbose) {
+      if (result.strengths.length > 0) {
+        lines.push('');
+        lines.push(pc.bold('  Strengths:'));
+        for (const strength of result.strengths) {
+          lines.push(`    + ${pc.green(strength)}`);
+        }
+      }
+
+      if (result.weaknesses.length > 0) {
+        lines.push('');
+        lines.push(pc.bold('  Weaknesses:'));
+        for (const weakness of result.weaknesses) {
+          lines.push(`    - ${pc.yellow(weakness)}`);
+        }
+      }
+
+      if (result.suggestions.length > 0) {
+        lines.push('');
+        lines.push(pc.bold('  Suggestions:'));
+        for (const suggestion of result.suggestions) {
+          lines.push(`    * ${suggestion}`);
+        }
+      }
+    }
+
+    return lines.join('\n');
+  }
+
+  /**
+   * Format combined heuristic + LLM result.
+   *
+   * Shows heuristic result first, then LLM analysis if available,
+   * separated by a visual divider.
+   */
+  formatCombined(combined: CombinedActivationResult, options?: FormatOptions): string {
+    const lines: string[] = [];
+
+    // Heuristic result first
+    lines.push(this.formatText(combined.heuristic, options));
+
+    // LLM result if available
+    if (combined.llm) {
+      lines.push('');
+      lines.push(pc.dim('─'.repeat(40)));
+      lines.push('');
+      lines.push(this.formatLLMResult(combined.llm, options));
+    }
+
+    return lines.join('\n');
+  }
+
+  /**
+   * Format combined result as JSON.
+   */
+  formatCombinedJson(combined: CombinedActivationResult): string {
+    return JSON.stringify({
+      heuristic: {
+        skillName: combined.heuristic.skillName,
+        score: combined.heuristic.score,
+        label: combined.heuristic.label,
+        factors: combined.heuristic.factors,
+      },
+      llm: combined.llm,
+    }, null, 2);
   }
 
   private getLabelColor(label: string): (s: string) => string {
