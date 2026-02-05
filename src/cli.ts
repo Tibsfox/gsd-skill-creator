@@ -9,9 +9,12 @@ import { migrateCommand } from './cli/commands/migrate.js';
 import { migrateAgentCommand, listAgentsInDir } from './cli/commands/migrate-agent.js';
 import { validateAgentFrontmatter } from './validation/agent-validation.js';
 import { validateCommand } from './cli/commands/validate.js';
+import { detectConflictsCommand } from './cli/commands/detect-conflicts.js';
+import { scoreActivationCommand } from './cli/commands/score-activation.js';
 import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { budgetCommand } from './cli/commands/budget.js';
 import { resolveCommand } from './cli/commands/resolve.js';
+import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
@@ -26,6 +29,19 @@ function createScopedStoreAndIndex(scope: SkillScope) {
   const skillStore = new SkillStore(skillsDir);
   const skillIndex = new SkillIndex(skillStore, skillsDir);
   return { skillStore, skillIndex, skillsDir };
+}
+
+/**
+ * Parse threshold value from command-line arguments.
+ * Looks for --threshold=N format.
+ */
+function parseThreshold(args: string[]): number | undefined {
+  const thresholdArg = args.find(a => a.startsWith('--threshold='));
+  if (thresholdArg) {
+    const value = parseFloat(thresholdArg.split('=')[1]);
+    if (!isNaN(value)) return value;
+  }
+  return undefined;
 }
 
 async function main() {
@@ -73,6 +89,64 @@ async function main() {
         isAll ? undefined : skillName,
         { all: isAll, skillsDir: getSkillsBasePath(scope) }
       );
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'detect-conflicts':
+    case 'conflicts':
+    case 'dc': {
+      // Handle help flag specially
+      if (args.includes('--help') || args.includes('-h')) {
+        const exitCode = await detectConflictsCommand('--help', {});
+        break;
+      }
+      const scope = parseScope(args);
+      const threshold = parseThreshold(args);
+      const quiet = args.includes('--quiet') || args.includes('-q');
+      const json = args.includes('--json');
+      const skillArgs = args.slice(1).filter(a => !a.startsWith('-'));
+      const skillName = skillArgs[0];
+
+      const exitCode = await detectConflictsCommand(skillName, {
+        threshold,
+        quiet,
+        json,
+        skillsDir: getSkillsBasePath(scope),
+      });
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'score-activation':
+    case 'sa':
+    case 'score': {
+      // Handle help flag specially
+      if (args.includes('--help') || args.includes('-h')) {
+        const exitCode = await scoreActivationCommand('--help', {});
+        break;
+      }
+      const scope = parseScope(args);
+      const all = args.includes('--all') || args.includes('-a');
+      const verbose = args.includes('--verbose') || args.includes('-v');
+      const quiet = args.includes('--quiet') || args.includes('-q');
+      const json = args.includes('--json');
+      const llm = args.includes('--llm');
+      const skillArgs = args.slice(1).filter(a => !a.startsWith('-'));
+      const skillName = skillArgs[0];
+
+      const exitCode = await scoreActivationCommand(skillName, {
+        all,
+        verbose,
+        quiet,
+        json,
+        llm,
+        skillsDir: getSkillsBasePath(scope),
+      });
       if (exitCode !== 0) {
         process.exit(exitCode);
       }
@@ -802,6 +876,13 @@ async function main() {
       break;
     }
 
+    case 'reload-embeddings':
+    case 're': {
+      const verbose = args.includes('--verbose') || args.includes('-v');
+      await reloadEmbeddingsCommand({ verbose });
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -863,6 +944,8 @@ Commands:
   delete, del, rm   Delete a skill
   resolve, res      Show which version of a skill is active
   validate, v       Validate skill structure and metadata
+  detect-conflicts, dc  Detect semantic conflicts between skills
+  score-activation, sa  Score skill activation likelihood
   migrate, mg       Migrate legacy flat-file skills to subdirectory format
   migrate-agent, ma Migrate agents with legacy tools format
   sync-reserved     Show/update reserved skill names list
@@ -876,6 +959,7 @@ Commands:
   history, hist     View skill version history
   rollback, rb      Rollback skill to previous version
   agents, ag        Manage agent suggestions from skill clusters
+  reload-embeddings, re  Reload embedding model (retry after fallback)
   help, -h          Show this help message
 
 Scope Options:
@@ -906,6 +990,15 @@ Pattern Detection:
   proposes skills when it detects recurring workflows (3+ occurrences).
 
   Run 'suggest' periodically to discover automation opportunities.
+
+Activation Scoring:
+  The score-activation command predicts how reliably a skill will
+  auto-activate based on its description quality. Scores range from
+  0-100 with labels: Reliable (90+), Likely (70-89), Uncertain (50-69),
+  Unlikely (<50).
+
+  Run 'score-activation my-skill' for detailed factor breakdown and
+  suggestions for improvement. Run '--all' to see scores for all skills.
 
 Learning Loop:
   Skills can be refined based on user corrections. After 3+ corrections
@@ -974,6 +1067,13 @@ Examples:
   skill-creator agents validate     # Check all agents for format issues
   skill-creator budget              # Show budget usage for user scope
   skill-creator budget --project    # Show budget usage for project scope
+  skill-creator detect-conflicts    # Scan all skills for conflicts
+  skill-creator dc my-skill         # Check one skill against others
+  skill-creator dc --threshold=0.90 # Use stricter threshold
+  skill-creator dc --json           # JSON output for CI/scripting
+  skill-creator score-activation my-skill  # Score single skill
+  skill-creator sa --all                   # Score all skills
+  skill-creator sa --all --verbose         # With factor breakdown
   skill-creator migrate-agent       # Check all agents for legacy format
   skill-creator migrate-agent my-agent  # Migrate specific agent
   skill-creator ma --dry-run        # Preview changes without writing

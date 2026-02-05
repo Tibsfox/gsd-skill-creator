@@ -14,6 +14,7 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.72.1",
     "@clack/prompts": "^1.0.0",
+    "@huggingface/transformers": "^3.8.1",
     "diff": "^8.0.3",
     "gpt-tokenizer": "^3.4.0",
     "gray-matter": "^4.0.3",
