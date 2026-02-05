@@ -14,6 +14,7 @@ This document describes extension fields added by gsd-skill-creator beyond the [
 - [Migration Guide](#migration-guide)
 - [Troubleshooting](#troubleshooting)
 - [Known Issues](#known-issues)
+- [Documentation Notes](#documentation-notes)
 
 ---
 
@@ -465,6 +466,30 @@ As of v1.2.0, no other significant issues have been identified. If you encounter
 2. Run `skill-creator validate` to check skill format
 3. Run `skill-creator agents validate` to check agent format
 4. Enable verbose mode: `skill-creator --verbose <command>`
+
+---
+
+## Documentation Notes
+
+### Inline Comment Audit (v1.2.0)
+
+The following source files were audited for comment accuracy:
+
+| File | Status | Notes |
+|------|--------|-------|
+| `src/types/skill.ts` | Accurate | All @deprecated tags include migration path (e.g., "Use getExtension(metadata).triggers") |
+| `src/detection/skill-generator.ts` | Accurate | TODO comments in generated skills are intentional placeholders for user customization |
+| `src/storage/skill-store.ts` | Accurate | Migration behavior documented correctly; logs when migrating from legacy format |
+
+**Findings:**
+
+1. **@deprecated annotations** in `src/types/skill.ts` correctly reference `getExtension(metadata)` accessor for all 7 deprecated root-level fields.
+
+2. **TODO comments** in `src/detection/skill-generator.ts` are part of generated skill templates and serve as user prompts, not unfinished work.
+
+3. **Migration logging** in `src/storage/skill-store.ts` accurately describes automatic migration from legacy to namespaced format.
+
+All inline documentation matches actual code behavior.
 
 ---
 
