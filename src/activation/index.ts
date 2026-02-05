@@ -2,7 +2,8 @@
  * Activation likelihood scoring module.
  *
  * Provides fast, local predictions of how reliably skill descriptions
- * will trigger Claude's auto-activation feature.
+ * will trigger Claude's auto-activation feature, with optional LLM-based
+ * deep analysis.
  */
 
 export { ActivationScorer } from './activation-scorer.js';
