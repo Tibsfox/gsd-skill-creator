@@ -15,6 +15,7 @@ import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { budgetCommand } from './cli/commands/budget.js';
 import { resolveCommand } from './cli/commands/resolve.js';
 import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
+import { testCommand } from './cli/commands/test.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
@@ -156,6 +157,16 @@ async function main() {
     case 'sync-reserved':
     case 'sync': {
       const exitCode = await syncReservedCommand();
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'test':
+    case 't': {
+      const subArgs = args.slice(1);
+      const exitCode = await testCommand(subArgs);
       if (exitCode !== 0) {
         process.exit(exitCode);
       }
@@ -949,6 +960,7 @@ Commands:
   migrate, mg       Migrate legacy flat-file skills to subdirectory format
   migrate-agent, ma Migrate agents with legacy tools format
   sync-reserved     Show/update reserved skill names list
+  test, t           Manage skill test cases
   budget, bg        Show character budget usage across all skills
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
@@ -1034,6 +1046,24 @@ Agent Composition:
   bug (GitHub #11205). Consider using project-level agents instead.
   Workarounds: use project-level agents, the /agents UI command, or
   pass agents via --agents CLI flag when starting Claude Code.
+
+Test Management:
+  The 'test' command manages test cases for skill activation testing.
+  Test cases define expected behavior: should the skill activate for
+  a given prompt?
+
+  Subcommands:
+    test add <skill>       Add a test case (interactive or flags)
+    test list <skill>      List test cases for a skill
+    test edit <skill> <id> Edit an existing test case
+    test delete <skill> <id> Delete a test case
+
+  Examples:
+    skill-creator test add my-skill
+    skill-creator test add my-skill --prompt="commit my changes" --expected=positive
+    skill-creator test list my-skill
+    skill-creator test list my-skill --expected=negative
+    skill-creator test delete my-skill abc123 --force
 
 Budget Management:
   Claude Code limits skill content to ~15,000 characters per skill and
