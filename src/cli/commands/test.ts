@@ -7,11 +7,26 @@
 
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import { TestStore, type TestCaseInput, type ValidationWarning } from '../../testing/index.js';
+import {
+  TestStore,
+  TestRunner,
+  ResultStore,
+  ResultFormatter,
+  type TestCaseInput,
+  type TestRunResult,
+} from '../../testing/index.js';
+import { SkillStore } from '../../storage/skill-store.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from '../../types/scope.js';
 import type { TestExpectation, TestDifficulty, TestCase } from '../../types/testing.js';
 import { access } from 'fs/promises';
 import { join } from 'path';
+
+/**
+ * Check if running in CI environment.
+ */
+function isCI(): boolean {
+  return process.env.CI === 'true';
+}
 
 // ============================================================================
 // Flag Parsing Helpers
@@ -626,19 +641,193 @@ async function handleDelete(args: string[], scope: SkillScope): Promise<number> 
 }
 
 /**
+ * Handle 'test run <skill>' or 'test run --all' subcommand.
+ */
+async function handleRun(args: string[], scope: SkillScope): Promise<number> {
+  const nonFlagArgs = getNonFlagArgs(args);
+  const skillName = nonFlagArgs[1];
+  const runAll = hasFlag(args, 'all', 'a');
+  const verbose = hasFlag(args, 'verbose', 'v');
+  const jsonModeRaw = parseFlag(args, 'json');
+  const jsonMode = jsonModeRaw as 'compact' | 'pretty' | undefined;
+  const threshold = parseNumericFlag(args, 'threshold');
+  const minAccuracy = parseNumericFlag(args, 'min-accuracy');
+  const maxFalsePositive = parseNumericFlag(args, 'max-false-positive');
+
+  // Validate args
+  if (!skillName && !runAll) {
+    p.log.error('Usage: gsd-skill test run <skill-name> [options]');
+    p.log.message('       gsd-skill test run --all [options]');
+    p.log.message('');
+    p.log.message('Options:');
+    p.log.message('  --all, -a                Run tests for all skills');
+    p.log.message('  --verbose, -v            Show confidence scores');
+    p.log.message('  --json=compact|pretty    Output as JSON');
+    p.log.message('  --threshold=N            Activation threshold (default: 0.75)');
+    p.log.message('  --min-accuracy=N         Fail if accuracy below N%');
+    p.log.message('  --max-false-positive=N   Fail if FPR above N%');
+    return 1;
+  }
+
+  // Validate json mode if provided
+  if (jsonModeRaw && !['compact', 'pretty'].includes(jsonModeRaw)) {
+    p.log.error(`Invalid --json value: ${jsonModeRaw}`);
+    p.log.message('Must be: compact or pretty');
+    return 1;
+  }
+
+  // Auto-detect CI mode per CONTEXT.md
+  const outputMode = jsonMode ?? (isCI() ? 'compact' : undefined);
+
+  // Initialize stores
+  const basePath = getSkillsBasePath(scope);
+  const testStore = new TestStore(scope);
+  const skillStore = new SkillStore(basePath);
+  const resultStore = new ResultStore(scope);
+  const formatter = new ResultFormatter();
+
+  // Build list of skills to test
+  let skillsToTest: string[] = [];
+  if (runAll) {
+    skillsToTest = await skillStore.list();
+    if (skillsToTest.length === 0) {
+      if (!outputMode) {
+        p.log.warn(`No skills found in ${scope} scope`);
+      }
+      return 0;
+    }
+  } else {
+    skillsToTest = [skillName];
+  }
+
+  // Run tests
+  const runner = new TestRunner(testStore, skillStore, resultStore, scope);
+  const allResults: TestRunResult[] = [];
+  let hasFailures = false;
+
+  const spin = outputMode ? null : p.spinner();
+  spin?.start(`Running tests for ${skillsToTest.length} skill(s)...`);
+
+  for (const skill of skillsToTest) {
+    try {
+      // Check if skill has tests
+      const testCount = await testStore.count(skill);
+      if (testCount === 0) {
+        if (!outputMode) {
+          spin?.stop(`No tests for ${skill}`);
+          p.log.warn(`Skipping ${skill}: no test cases`);
+          spin?.start(`Running tests...`);
+        }
+        continue;
+      }
+
+      spin?.message(`Testing ${skill}...`);
+
+      const result = await runner.runForSkill(skill, {
+        threshold: threshold ?? 0.75,
+        storeResults: true,
+      });
+
+      // Regression detection: compare to previous run (before this one)
+      // Note: The current run is already stored, so we need the second-to-last entry
+      // For now, we'll get the latest and compare if it exists from a prior session
+      if (!outputMode) {
+        const history = await resultStore.list(skill);
+        // If more than one entry, previous run is the second-to-last
+        if (history.length > 1) {
+          const previousRun = history[history.length - 2];
+          const accuracyDiff = result.metrics.accuracy - previousRun.metrics.accuracy;
+          if (accuracyDiff < -5) {
+            spin?.stop('');
+            p.log.warn(
+              pc.yellow(`Regression detected for ${skill}: accuracy dropped ${Math.abs(accuracyDiff).toFixed(1)}% `) +
+              pc.dim(`(${previousRun.metrics.accuracy.toFixed(1)}% -> ${result.metrics.accuracy.toFixed(1)}%)`)
+            );
+            spin?.start('Running tests...');
+          } else if (accuracyDiff > 5) {
+            spin?.stop('');
+            p.log.success(
+              pc.green(`Improvement for ${skill}: accuracy increased ${accuracyDiff.toFixed(1)}% `) +
+              pc.dim(`(${previousRun.metrics.accuracy.toFixed(1)}% -> ${result.metrics.accuracy.toFixed(1)}%)`)
+            );
+            spin?.start('Running tests...');
+          }
+        }
+      }
+
+      allResults.push(result);
+
+      if (result.metrics.failed > 0) {
+        hasFailures = true;
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      if (!outputMode) {
+        spin?.stop('');
+        p.log.error(`Error testing ${skill}: ${message}`);
+        spin?.start('Running tests...');
+      }
+      hasFailures = true;
+    }
+  }
+
+  spin?.stop(hasFailures ? 'Tests completed with failures' : 'Tests completed');
+
+  // Output results
+  if (outputMode) {
+    // JSON output
+    for (const result of allResults) {
+      console.log(formatter.formatJSON(result, outputMode));
+    }
+  } else {
+    // Terminal output
+    for (const result of allResults) {
+      console.log(formatter.formatTerminal(result, { verbose, showHints: true }));
+    }
+  }
+
+  // Check threshold flags (CI integration per CONTEXT.md)
+  let exitCode = hasFailures ? 1 : 0;
+
+  if (allResults.length > 0) {
+    // Aggregate metrics for threshold checks
+    const totalAccuracy = allResults.reduce((sum, r) => sum + r.metrics.accuracy, 0) / allResults.length;
+    const totalFPR = allResults.reduce((sum, r) => sum + r.metrics.falsePositiveRate, 0) / allResults.length;
+
+    if (minAccuracy !== undefined && totalAccuracy < minAccuracy) {
+      if (!outputMode) {
+        p.log.error(`Accuracy ${totalAccuracy.toFixed(1)}% below minimum ${minAccuracy}%`);
+      }
+      exitCode = 1;
+    }
+
+    if (maxFalsePositive !== undefined && totalFPR > maxFalsePositive) {
+      if (!outputMode) {
+        p.log.error(`False positive rate ${totalFPR.toFixed(1)}% exceeds maximum ${maxFalsePositive}%`);
+      }
+      exitCode = 1;
+    }
+  }
+
+  return exitCode;
+}
+
+/**
  * Show help for the test command.
  */
 function showTestHelp(): void {
   console.log(`
-skill-creator test - Manage skill test cases
+gsd-skill test - Manage skill test cases
 
 Usage:
-  skill-creator test <subcommand> [options]
+  gsd-skill test <subcommand> [options]
 
 Subcommands:
   add <skill>            Add a test case (interactive or flags)
   list <skill>           List test cases for a skill
   ls <skill>             Alias for list
+  run <skill>            Run tests for a skill
+  run --all              Run tests for all skills
   edit <skill> <id>      Edit an existing test case
   delete <skill> <id>    Delete a test case
   rm <skill> <id>        Alias for delete
@@ -658,6 +847,14 @@ Test List Options:
   --tags=tag1,tag2       Filter by tags (match any)
   --json                 Output as JSON
 
+Test Run Options:
+  --all, -a              Run tests for all skills
+  --verbose, -v          Show confidence scores on all results
+  --json=compact|pretty  Output as JSON (auto-detected in CI)
+  --threshold=N          Activation threshold (default: 0.75)
+  --min-accuracy=N       Fail if accuracy below N%
+  --max-false-positive=N Fail if FPR above N%
+
 Test Delete Options:
   --force, -f            Skip confirmation prompt
 
@@ -666,10 +863,14 @@ Scope Options:
                          Default is user scope (~/.claude/skills/)
 
 Examples:
-  skill-creator test add my-skill
-  skill-creator test add my-skill --prompt="commit changes" --expected=positive
-  skill-creator test list my-skill
-  skill-creator test list my-skill --expected=negative --json
+  gsd-skill test add my-skill
+  gsd-skill test add my-skill --prompt="commit changes" --expected=positive
+  gsd-skill test list my-skill
+  gsd-skill test list my-skill --expected=negative --json
+  gsd-skill test run my-skill
+  gsd-skill test run my-skill --verbose
+  gsd-skill test run --all --json=compact
+  gsd-skill test run my-skill --min-accuracy=90 --max-false-positive=5
   skill-creator test edit my-skill abc123
   skill-creator test delete my-skill abc123 --force
 `);
@@ -696,6 +897,9 @@ export async function testCommand(args: string[]): Promise<number> {
     case 'list':
     case 'ls':
       return handleList(args, scope);
+
+    case 'run':
+      return handleRun(args, scope);
 
     case 'edit':
       return handleEdit(args, scope);
