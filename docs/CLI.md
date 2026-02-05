@@ -1107,3 +1107,587 @@ Use the exit code for CI quality gates:
 # Fail CI if correlation drops below 85%
 skill-creator benchmark || exit 1
 ```
+
+---
+
+## Utils: Utilities
+
+Commands for migration, budget management, pattern detection, and system maintenance.
+
+### Migration Commands
+
+Commands for migrating skills and agents from legacy formats to current specifications.
+
+---
+
+### migrate
+
+Migrate legacy flat-file skills to subdirectory format.
+
+**Synopsis:**
+
+```
+skill-creator migrate [<skill-name>] [--project]
+```
+
+**Description:**
+
+Scans for skills using the legacy flat-file format (`skill-name.md`) and migrates them to the current subdirectory format (`skill-name/SKILL.md`). Without a skill name, interactively migrates all detected legacy skills. With a skill name, migrates only that specific skill.
+
+**Options:**
+
+- `--project, -p`: Target project-level scope (`.claude/skills/`)
+
+**Examples:**
+
+```bash
+# Scan and migrate all legacy skills interactively
+skill-creator migrate
+
+# Migrate a specific skill
+skill-creator migrate my-commit-helper
+
+# Migrate project-level skills
+skill-creator migrate --project
+
+# Short form
+skill-creator mg my-skill -p
+```
+
+---
+
+### migrate-agent
+
+Migrate agents with legacy tools format.
+
+**Synopsis:**
+
+```
+skill-creator migrate-agent [<agent-name>] [--dry-run]
+```
+
+**Description:**
+
+Detects and fixes agents using the legacy array-style tools format. Converts tools arrays to the required comma-separated string format and corrects tool name casing issues.
+
+Without an agent name, scans all agents in `.claude/agents/` and offers to migrate those needing fixes. With an agent name, migrates only that specific agent.
+
+**Options:**
+
+- `--dry-run, -d`: Preview changes without writing to files
+
+**Examples:**
+
+```bash
+# Check all agents for legacy format issues
+skill-creator migrate-agent
+
+# Migrate a specific agent
+skill-creator migrate-agent react-fullstack
+
+# Preview changes without modifying files
+skill-creator migrate-agent --dry-run
+
+# Dry run for specific agent
+skill-creator ma react-fullstack -d
+
+# Short form
+skill-creator ma
+```
+
+---
+
+### Budget and Status
+
+Commands for monitoring skill size and token budget usage.
+
+---
+
+### budget
+
+Show character budget usage across all skills.
+
+**Synopsis:**
+
+```
+skill-creator budget [--project]
+```
+
+**Description:**
+
+Displays current character budget consumption with visual progress bar and per-skill breakdown. Claude Code limits skills to approximately 15,000 characters per skill and 15,500 characters cumulative. Skills exceeding the budget may be silently hidden.
+
+Shows severity indicators and actionable suggestions when approaching or exceeding limits.
+
+**Options:**
+
+- `--project, -p`: Check project-level skills (`.claude/skills/`)
+
+**Examples:**
+
+```bash
+# Check user-level skill budget
+skill-creator budget
+
+# Check project-level skill budget
+skill-creator budget --project
+
+# Short form
+skill-creator bg -p
+```
+
+**Sample Output:**
+
+```
+Character Budget
+[████████████░░░░░░░░] 62% (9,300 / 15,500 chars)
+
+Per-Skill Breakdown
+(sorted by size, largest first)
+
+  [████░░░░░░] typescript-patterns
+       4,200 chars (27% of budget)
+       desc: 150, body: 4,050
+
+  [███░░░░░░░] react-hooks
+       3,100 chars (20% of budget)
+       desc: 120, body: 2,980
+```
+
+---
+
+### status
+
+Show active skills and token budget.
+
+**Synopsis:**
+
+```
+skill-creator status
+```
+
+**Description:**
+
+Displays currently loaded skills in the session with their token counts and remaining budget. Also lists any skills flagged for review (where token cost exceeds savings).
+
+**Examples:**
+
+```bash
+# Show active skills
+skill-creator status
+
+# Short form
+skill-creator st
+```
+
+**Sample Output:**
+
+```
+Active Skills (3):
+  - typescript-patterns (1,200 tokens)
+  - testing-best-practices (800 tokens)
+  - git-workflow (500 tokens)
+
+Token Budget: 2,500 / 4,000 (62.5% used)
+Remaining: 1,500 tokens
+```
+
+---
+
+### invoke
+
+Manually invoke a skill by name.
+
+**Synopsis:**
+
+```
+skill-creator invoke <skill-name>
+```
+
+**Description:**
+
+Loads a specific skill into the current session manually. Shows token usage, remaining budget, and a content preview. Useful for testing skills or forcing a specific skill to load regardless of automatic activation.
+
+**Examples:**
+
+```bash
+# Load a specific skill
+skill-creator invoke typescript-patterns
+
+# Short form
+skill-creator i react-hooks
+```
+
+**Sample Output:**
+
+```
+Skill 'typescript-patterns' loaded successfully.
+
+Token usage: 1,200
+Remaining budget: 2,800
+
+Content preview:
+────────────────────────────────────────
+## TypeScript Patterns
+
+When working with TypeScript, follow these patterns:
+
+### Type Definitions
+
+1. **Prefer interfaces over types** for object shapes...
+```
+
+---
+
+### Pattern Detection and Learning
+
+Commands for analyzing usage patterns, managing suggestions, and refining skills based on feedback.
+
+---
+
+### suggest
+
+Analyze patterns and review skill suggestions.
+
+**Synopsis:**
+
+```
+skill-creator suggest
+```
+
+**Description:**
+
+Analyzes your Claude Code usage patterns stored in `.planning/patterns/sessions.jsonl` and surfaces skill suggestions when patterns repeat 3+ times. Provides an interactive review workflow with options to accept, preview, defer, dismiss, skip, or quit.
+
+**Interactive Actions:**
+
+| Action | Description |
+|--------|-------------|
+| Accept | Generate and save the skill immediately |
+| Preview | See the generated skill content before deciding |
+| Defer | Re-ask about this pattern in 7 days |
+| Dismiss | Never suggest this pattern again |
+| Skip | Move to next suggestion (leave pending) |
+| Quit | Exit review (remaining stay pending) |
+
+**Examples:**
+
+```bash
+# Run pattern detection and review suggestions
+skill-creator suggest
+
+# Short form
+skill-creator sg
+```
+
+---
+
+### suggestions
+
+List and manage skill suggestions.
+
+**Synopsis:**
+
+```
+skill-creator suggestions [list|clear]
+```
+
+**Description:**
+
+View statistics about skill suggestions or manage dismissed suggestions.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `list` | Show suggestion statistics and pending items (default) |
+| `clear` | Remove all dismissed suggestions |
+
+**Examples:**
+
+```bash
+# Show suggestion statistics
+skill-creator suggestions
+
+# List pending suggestions
+skill-creator suggestions list
+
+# Clear dismissed suggestions
+skill-creator suggestions clear
+
+# Short form
+skill-creator sgs
+```
+
+---
+
+### feedback
+
+View feedback for skills.
+
+**Synopsis:**
+
+```
+skill-creator feedback [list <skill-name>]
+```
+
+**Description:**
+
+View correction history and feedback statistics for skills. Feedback is collected when you override or correct skill output, enabling the refinement system.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `stats` | Show total feedback event count (default) |
+| `list <skill>` | Show correction history for a specific skill |
+
+**Examples:**
+
+```bash
+# Show feedback statistics
+skill-creator feedback
+
+# List feedback for a specific skill
+skill-creator feedback list my-commit-skill
+
+# Short form
+skill-creator fb list my-skill
+```
+
+---
+
+### refine
+
+Generate and apply skill refinements.
+
+**Synopsis:**
+
+```
+skill-creator refine <skill-name>
+```
+
+**Description:**
+
+Generates and applies bounded refinements based on accumulated feedback. Requires at least 3 corrections before suggestions become available. Refinements are limited to 20% content change per application with a 7-day cooldown between refinements.
+
+Always shows suggested changes and requires user confirmation before applying.
+
+**Refinement Bounds:**
+
+| Parameter | Value |
+|-----------|-------|
+| Minimum corrections | 3 |
+| Maximum content change | 20% |
+| Cooldown period | 7 days |
+
+**Examples:**
+
+```bash
+# Check eligibility and refine a skill
+skill-creator refine my-commit-skill
+
+# Short form
+skill-creator rf my-skill
+```
+
+---
+
+### history
+
+View skill version history.
+
+**Synopsis:**
+
+```
+skill-creator history <skill-name>
+```
+
+**Description:**
+
+Shows the git commit history for a skill file. Each entry shows the commit hash, date, version number (if tracked), and commit message.
+
+**Examples:**
+
+```bash
+# View version history for a skill
+skill-creator history my-commit-skill
+
+# Short form
+skill-creator hist my-skill
+```
+
+**Sample Output:**
+
+```
+Version History for 'my-commit-skill':
+  a1b2c3d 2/5/2026 v3
+    refine: updated trigger patterns
+  e4f5g6h 2/1/2026 v2
+    refine: improved description
+  i7j8k9l 1/28/2026 v1
+    feat: initial skill creation
+```
+
+---
+
+### rollback
+
+Rollback skill to previous version.
+
+**Synopsis:**
+
+```
+skill-creator rollback <skill-name> [hash]
+```
+
+**Description:**
+
+Reverts a skill to a previous version from git history. Without a hash, presents an interactive selection of available versions. With a hash, rolls back directly to that specific commit.
+
+**Examples:**
+
+```bash
+# Interactive version selection
+skill-creator rollback my-commit-skill
+
+# Rollback to specific commit
+skill-creator rollback my-commit-skill a1b2c3d
+
+# Short form
+skill-creator rb my-skill
+```
+
+---
+
+### Agent Management
+
+Commands for managing agent suggestions and validating agent format compliance.
+
+---
+
+### agents
+
+Manage agent suggestions from skill clusters.
+
+**Synopsis:**
+
+```
+skill-creator agents <subcommand>
+```
+
+**Description:**
+
+Analyzes skill co-activation patterns and manages agent suggestions. When skills frequently activate together (5+ co-activations over 7+ days), suggests creating composite agents that bundle related expertise.
+
+Generated agents follow the official Claude Code agent format with comma-separated tools field.
+
+> **Note:** User-level agents (`~/.claude/agents/`) have a known discovery bug (GitHub #11205). Consider using project-level agents instead. Workarounds: use the `/agents` UI command, or pass agents via `--agents` CLI flag when starting Claude Code.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `suggest` | Analyze co-activations and review agent suggestions |
+| `list` | List existing agents with validation status |
+| `validate` | Check all agents for format issues |
+
+**Examples:**
+
+```bash
+# Analyze patterns and suggest agents
+skill-creator agents suggest
+
+# List agents with validation status
+skill-creator agents list
+
+# Validate all agent files
+skill-creator agents validate
+
+# Short forms
+skill-creator ag suggest
+skill-creator ag ls
+skill-creator ag v
+```
+
+---
+
+### Maintenance
+
+Commands for system maintenance and configuration updates.
+
+---
+
+### sync-reserved
+
+Show and update reserved skill names list.
+
+**Synopsis:**
+
+```
+skill-creator sync-reserved
+```
+
+**Description:**
+
+Displays the current reserved skill names configuration with categories and examples. Reserved names are skill names that conflict with Claude Code built-in commands and cannot be used.
+
+Provides instructions for manually updating the reserved names list when Claude Code releases new versions.
+
+**Examples:**
+
+```bash
+# Show reserved names and sync status
+skill-creator sync-reserved
+
+# Short form
+skill-creator sync
+```
+
+---
+
+### reload-embeddings
+
+Reload the embedding model.
+
+**Synopsis:**
+
+```
+skill-creator reload-embeddings [--verbose]
+```
+
+**Description:**
+
+Checks the embedding service status and attempts to reload the model if currently in fallback (heuristic) mode. Use after GPU becomes available, network connectivity is restored, or to retry after an initial load failure.
+
+**Options:**
+
+- `--verbose, -v`: Show detailed status information
+
+**Examples:**
+
+```bash
+# Check status and reload if needed
+skill-creator reload-embeddings
+
+# Verbose output
+skill-creator reload-embeddings --verbose
+
+# Short form
+skill-creator re -v
+```
+
+**Sample Output:**
+
+```
+Embedding Service Status
+
+Initialized: Yes
+Mode: Heuristic (fallback)
+Cache entries: 42
+
+Attempting to reload embedding model...
+
+✓ Model loaded successfully
+Future embedding operations will use the model.
+```
