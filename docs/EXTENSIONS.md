@@ -11,8 +11,9 @@ This document describes extension fields added by gsd-skill-creator beyond the [
 - [Force Override Fields](#force-override-fields)
 - [Storage Format](#storage-format)
 - [Stability Indicators](#stability-indicators)
-- [Migration Paths](#migration-paths)
+- [Migration Guide](#migration-guide)
 - [Troubleshooting](#troubleshooting)
+- [Known Issues](#known-issues)
 
 ---
 
@@ -418,6 +419,52 @@ Validation output shows:
 - `+` Valid skill
 - `!` Needs migration (legacy format detected)
 - `x` Errors (invalid name, missing fields)
+
+---
+
+## Known Issues
+
+This section documents known bugs and limitations with workarounds.
+
+### User-Level Agent Discovery (GitHub #11205)
+
+**Status:** Known bug in Claude Code
+
+**Description:** Agents stored in `~/.claude/agents/` may not be automatically discovered by Claude Code at session startup. This affects user-level agents only; project-level agents in `.claude/agents/` work correctly.
+
+**Symptoms:**
+- User-level agents don't appear in agent list at session start
+- `/agents` command doesn't show expected agents
+- Agents work if manually specified via CLI flag
+
+**Workarounds:**
+
+1. **Use project-level agents (recommended)**
+   Store agents in `.claude/agents/` instead of `~/.claude/agents/`. Project-level agents are always discovered.
+
+2. **Use the /agents UI command**
+   Within Claude Code, run `/agents` to list and manually load agents.
+
+3. **Pass agents via CLI flag**
+   When starting Claude Code: `claude --agents=path/to/agent.md`
+
+**Impact on gsd-skill-creator:**
+- The tool warns when creating user-level agents
+- Agent suggestion workflow defaults to project-level
+- User can override with `--scope=user` if needed
+
+**Tracking:** Claude Code issue #11205
+
+---
+
+### No Other Known Issues
+
+As of v1.2.0, no other significant issues have been identified. If you encounter problems:
+
+1. Check the [GitHub Issues](https://github.com/user/gsd-skill-creator/issues)
+2. Run `skill-creator validate` to check skill format
+3. Run `skill-creator agents validate` to check agent format
+4. Enable verbose mode: `skill-creator --verbose <command>`
 
 ---
 
