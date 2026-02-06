@@ -955,6 +955,58 @@ async function main() {
       break;
     }
 
+    case 'team':
+    case 'tm': {
+      const subcommand = args[1];
+      const subArgs = args.slice(2);
+
+      switch (subcommand) {
+        case 'create':
+        case 'c': {
+          const { teamCreateCommand } = await import('./cli/commands/team-create.js');
+          const exitCode = await teamCreateCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        case 'list':
+        case 'l': {
+          const { teamListCommand } = await import('./cli/commands/team-list.js');
+          const exitCode = await teamListCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        case 'validate':
+        case 'v': {
+          const { teamValidateCommand } = await import('./cli/commands/team-validate.js');
+          const exitCode = await teamValidateCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        case 'spawn':
+        case 'sp': {
+          const { teamSpawnCommand } = await import('./cli/commands/team-spawn.js');
+          const exitCode = await teamSpawnCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        case 'status':
+        case 's': {
+          const { teamStatusCommand } = await import('./cli/commands/team-status.js');
+          const exitCode = await teamStatusCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        default:
+          showTeamHelp();
+      }
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1002,6 +1054,35 @@ async function processAction(
   }
 }
 
+function showTeamHelp(): void {
+  console.log(`
+skill-creator team - Manage agent teams
+
+Usage:
+  skill-creator team <command> [options]
+  skill-creator tm <command> [options]
+
+Commands:
+  create, c     Create a new team (interactive wizard or flags)
+  list, l       List all teams with member counts
+  validate, v   Validate team config(s) with detailed report
+  spawn, sp     Check team readiness (agent resolution)
+  status, s     Show team details and validation summary
+
+Examples:
+  skill-creator team create                    Interactive team creation
+  skill-creator tm c --pattern=leader-worker --name=research
+  skill-creator team list                      List all teams
+  skill-creator tm l --scope=project           List project teams only
+  skill-creator team validate my-team          Validate single team
+  skill-creator tm v --all                     Validate all teams
+  skill-creator team spawn my-team             Check readiness
+  skill-creator tm s my-team                   Show team details
+
+Use 'skill-creator team <command> --help' for command-specific help.
+`);
+}
+
 function showHelp() {
   console.log(`
 skill-creator - Manage Claude Code skills
@@ -1033,6 +1114,7 @@ Commands:
   history, hist     View skill version history
   rollback, rb      Rollback skill to previous version
   agents, ag        Manage agent suggestions from skill clusters
+  team, tm          Manage agent teams (create, list, validate, spawn, status)
   reload-embeddings, re  Reload embedding model (retry after fallback)
   calibrate, cal    Optimize activation threshold from calibration data
   benchmark, bench  Measure simulator accuracy vs real activation
@@ -1060,6 +1142,16 @@ Scope Options:
     skill-creator list --scope=user   # Show only user-level skills
     skill-creator delete my-skill -p  # Delete project-level version
     skill-creator resolve my-skill    # Show which version is active
+
+Team Management:
+  The 'team' command manages agent teams -- multi-agent configurations
+  for coordinated work. Teams use pattern templates (leader-worker,
+  pipeline, swarm) and validate member resolution, tool overlap,
+  and role coherence.
+
+  Run 'team create' for an interactive wizard, or use flags for
+  scripted team creation. Run 'team validate --all' to check all
+  teams at once.
 
 Pattern Detection:
   The suggest command analyzes your Claude Code usage patterns and
@@ -1189,6 +1281,12 @@ Examples:
   skill-creator migrate-agent       # Check all agents for legacy format
   skill-creator migrate-agent my-agent  # Migrate specific agent
   skill-creator ma --dry-run        # Preview changes without writing
+  skill-creator team create         # Interactive team creation wizard
+  skill-creator tm c --pattern=leader-worker --name=my-team
+  skill-creator team list           # List all teams
+  skill-creator team validate --all # Validate all teams
+  skill-creator team spawn my-team  # Check spawn readiness
+  skill-creator tm s my-team        # Show team details
 
 Skill Storage:
   User-level skills: ~/.claude/skills/ (shared across projects)
