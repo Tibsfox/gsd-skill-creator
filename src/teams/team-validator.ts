@@ -15,9 +15,10 @@
 import { existsSync, readdirSync } from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
-import type { TeamMember, TeamTask } from '../types/team.js';
+import type { TeamConfig, TeamMember, TeamTask } from '../types/team.js';
 import { ConflictDetector } from '../conflicts/conflict-detector.js';
 import { getEmbeddingService, cosineSimilarity } from '../embeddings/index.js';
+import { validateTeamConfig, validateTopologyRules } from '../validation/team-validation.js';
 
 // ============================================================================
 // Type Definitions
@@ -107,6 +108,44 @@ export interface RoleCoherenceWarning {
 export interface RoleCoherenceResult {
   /** Warnings about near-duplicate descriptions across different-role members. */
   warnings: RoleCoherenceWarning[];
+}
+
+// ============================================================================
+// Full Validation Types
+// ============================================================================
+
+/**
+ * Options for the full team validation orchestrator.
+ */
+export interface TeamFullValidationOptions {
+  /** Directories to search for agent .md files. Defaults to project + user scope. */
+  agentsDirs?: string[];
+  /** Skills that are intentionally shared across members (excluded from conflict detection). */
+  sharedSkills?: string[];
+  /** Similarity threshold for conflict and coherence detection. Default: 0.85. */
+  threshold?: number;
+  /** Optional tasks for cycle detection. If omitted, VALID-05 is skipped. */
+  tasks?: TeamTask[];
+  /** Member skills for conflict detection. If omitted, VALID-03 is skipped. */
+  memberSkills?: Array<{ agentId: string; skills: Array<{ name: string; description: string }> }>;
+  /** Member descriptions for role coherence. If omitted, VALID-04 is skipped. */
+  memberDescriptions?: Array<{ agentId: string; agentType?: string; description: string }>;
+}
+
+/**
+ * Result of the full team validation orchestrator.
+ */
+export interface TeamFullValidationResult {
+  /** Whether the team config is valid (no errors). Warnings do not affect this. */
+  valid: boolean;
+  /** Error messages (blocking issues). */
+  errors: string[];
+  /** Warning messages (non-blocking suggestions). */
+  warnings: string[];
+  /** Per-member agent file resolution status (VALID-02). */
+  memberResolution: MemberResolutionResult[];
+  /** Parsed config data (if schema validation passed). */
+  data?: TeamConfig;
 }
 
 // ============================================================================
@@ -519,4 +558,103 @@ export async function detectRoleCoherence(
   }
 
   return { warnings };
+}
+
+// ============================================================================
+// validateTeamFull: Full Validation Orchestrator
+// ============================================================================
+
+/**
+ * Run all seven validation checks on a team configuration and aggregate results.
+ *
+ * Orchestration sequence:
+ * 1. VALID-01: Schema validation (via validateTeamConfig) -- early return on failure
+ * 2. VALID-07: Topology rules (via validateTopologyRules) -- adds errors/warnings
+ * 3. VALID-02: Member resolution (via validateMemberAgents) -- informational
+ * 4. VALID-05: Task cycles (via detectTaskCycles) -- if tasks provided
+ * 5. VALID-06: Tool overlap (via detectToolOverlap) -- warnings only
+ * 6. VALID-03: Skill conflicts (via detectSkillConflicts) -- if memberSkills provided
+ * 7. VALID-04: Role coherence (via detectRoleCoherence) -- if memberDescriptions provided
+ *
+ * @param config - Raw team configuration data to validate
+ * @param options - Optional parameters for conditional checks
+ * @returns Aggregated validation result with errors, warnings, and member resolution
+ */
+export async function validateTeamFull(
+  config: unknown,
+  options?: TeamFullValidationOptions
+): Promise<TeamFullValidationResult> {
+  const errors: string[] = [];
+  const warnings: string[] = [];
+  let memberResolution: MemberResolutionResult[] = [];
+
+  // ---- VALID-01: Schema validation ----
+  const schemaResult = validateTeamConfig(config);
+  if (!schemaResult.valid) {
+    return {
+      valid: false,
+      errors: schemaResult.errors,
+      warnings: schemaResult.warnings,
+      memberResolution: [],
+    };
+  }
+
+  const parsedConfig = schemaResult.data!;
+
+  // ---- VALID-07: Topology rules ----
+  const topoResult = validateTopologyRules(parsedConfig);
+  errors.push(...topoResult.errors);
+  warnings.push(...topoResult.warnings);
+
+  // ---- VALID-02: Member resolution ----
+  memberResolution = validateMemberAgents(parsedConfig.members, options?.agentsDirs);
+
+  // ---- VALID-05: Task cycles (optional) ----
+  if (options?.tasks) {
+    const cycleResult = detectTaskCycles(options.tasks);
+    if (cycleResult.hasCycle) {
+      const cycleIds = cycleResult.cycle?.join(' -> ') ?? 'unknown';
+      errors.push(`Task dependency cycle detected: ${cycleIds}`);
+    }
+  }
+
+  // ---- VALID-06: Tool overlap ----
+  const overlaps = detectToolOverlap(parsedConfig.members);
+  for (const overlap of overlaps) {
+    warnings.push(
+      `Tool "${overlap.tool}" is shared by members: ${overlap.members.join(', ')}`
+    );
+  }
+
+  // ---- VALID-03: Skill conflicts (optional) ----
+  if (options?.memberSkills) {
+    const skillResult = await detectSkillConflicts(options.memberSkills, {
+      sharedSkills: options.sharedSkills,
+      threshold: options.threshold,
+    });
+    for (const conflict of skillResult.conflicts) {
+      const pct = (conflict.similarity * 100).toFixed(0);
+      warnings.push(
+        `Skill conflict (${conflict.severity}): "${conflict.skillA}" (${conflict.memberA}) and "${conflict.skillB}" (${conflict.memberB}) are ${pct}% similar`
+      );
+    }
+  }
+
+  // ---- VALID-04: Role coherence (optional) ----
+  if (options?.memberDescriptions) {
+    const coherenceResult = await detectRoleCoherence(options.memberDescriptions, {
+      threshold: options?.threshold,
+    });
+    for (const warning of coherenceResult.warnings) {
+      warnings.push(warning.suggestion);
+    }
+  }
+
+  return {
+    valid: errors.length === 0,
+    errors,
+    warnings,
+    memberResolution,
+    data: parsedConfig,
+  };
 }
