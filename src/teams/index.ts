@@ -34,3 +34,24 @@ export type { AgentFileResult, AgentMemberInput } from './team-agent-generator.j
 // Team creation wizard
 export { teamCreationWizard, nonInteractiveCreate } from './team-wizard.js';
 export type { WizardOptions, CreatePaths } from './team-wizard.js';
+
+// Team validation
+export {
+  validateTeamFull,
+  validateMemberAgents,
+  detectTaskCycles,
+  detectToolOverlap,
+  detectSkillConflicts,
+  detectRoleCoherence,
+} from './team-validator.js';
+export type {
+  TeamFullValidationResult,
+  TeamFullValidationOptions,
+  MemberResolutionResult,
+  CycleDetectionResult,
+  ToolOverlapResult,
+  SkillConflictResult,
+  SkillConflictEntry,
+  RoleCoherenceResult,
+  RoleCoherenceWarning,
+} from './team-validator.js';

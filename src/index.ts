@@ -141,7 +141,7 @@ export {
   validateTeamConfig,
 } from './validation/team-validation.js';
 
-// Teams module: templates, storage, agent generation, wizard
+// Teams module: templates, storage, agent generation, wizard, validation
 export {
   generateLeaderWorkerTemplate,
   generatePipelineTemplate,
@@ -157,6 +157,12 @@ export {
   generateAgentContent,
   teamCreationWizard,
   nonInteractiveCreate,
+  validateTeamFull,
+  validateMemberAgents,
+  detectTaskCycles,
+  detectToolOverlap,
+  detectSkillConflicts,
+  detectRoleCoherence,
 } from './teams/index.js';
 export type {
   TemplateOptions,
@@ -166,6 +172,15 @@ export type {
   AgentMemberInput,
   WizardOptions,
   CreatePaths,
+  TeamFullValidationResult,
+  TeamFullValidationOptions,
+  MemberResolutionResult,
+  CycleDetectionResult,
+  ToolOverlapResult,
+  SkillConflictResult,
+  SkillConflictEntry,
+  RoleCoherenceResult,
+  RoleCoherenceWarning,
 } from './teams/index.js';
 
 // Workflows
