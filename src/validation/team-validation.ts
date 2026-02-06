@@ -6,7 +6,8 @@
  * - TeamConfigSchema for top-level team configuration
  * - TeamTaskSchema for task queue entries
  * - InboxMessageSchema for inter-agent messages
- * - validateTeamConfig() for structured validation results
+ * - validateTeamConfig() for structured validation results with semantic checks
+ * - validateTopologyRules() for topology-specific structural validation
  */
 
 import { z } from 'zod';
@@ -133,6 +134,110 @@ export function validateTeamConfig(data: unknown): TeamValidationResult {
     return { valid: false, errors, warnings: [] };
   }
 
-  // Semantic warnings can be added in Phase 26
-  return { valid: true, errors: [], warnings: [], data: result.data as TeamConfig };
+  // Semantic validation (VALID-01)
+  const config = result.data as TeamConfig;
+  const errors: string[] = [];
+  const warnings: string[] = [];
+
+  // Check leadAgentId matches a member's agentId
+  const leadExists = config.members.some((m) => m.agentId === config.leadAgentId);
+  if (!leadExists) {
+    errors.push(
+      `leadAgentId "${config.leadAgentId}" does not match any member's agentId`
+    );
+  }
+
+  // Check for duplicate agentIds
+  const agentIds = config.members.map((m) => m.agentId);
+  const seen = new Set<string>();
+  const duplicates = new Set<string>();
+  for (const id of agentIds) {
+    if (seen.has(id)) {
+      duplicates.add(id);
+    }
+    seen.add(id);
+  }
+  if (duplicates.size > 0) {
+    errors.push(`Duplicate member agentIds: ${[...duplicates].join(', ')}`);
+  }
+
+  return {
+    valid: errors.length === 0,
+    errors,
+    warnings,
+    data: config,
+  };
+}
+
+// ============================================================================
+// Topology Rule Validation (VALID-07)
+// ============================================================================
+
+/**
+ * Validate topology-specific rules for a team configuration.
+ *
+ * Enforces structural constraints based on the topology field:
+ * - leader-worker: exactly 1 leader (coordinator or orchestrator)
+ * - pipeline: exactly 1 orchestrator
+ * - swarm: exactly 1 coordinator
+ * - custom: no rules enforced
+ * - absent/unknown: graceful skip (no errors, no warnings)
+ *
+ * @param config - Parsed team configuration
+ * @returns Object with errors and warnings arrays
+ */
+export function validateTopologyRules(config: TeamConfig): {
+  errors: string[];
+  warnings: string[];
+} {
+  const errors: string[] = [];
+  const warnings: string[] = [];
+
+  const topology = (config as Record<string, unknown>).topology as string | undefined;
+
+  if (topology === undefined) {
+    return { errors, warnings };
+  }
+
+  switch (topology) {
+    case 'leader-worker': {
+      const leaderCount = config.members.filter(
+        (m) => m.agentType === 'coordinator' || m.agentType === 'orchestrator'
+      ).length;
+      if (leaderCount !== 1) {
+        errors.push(
+          `Leader-worker topology requires exactly 1 leader, found ${leaderCount}`
+        );
+      }
+      break;
+    }
+    case 'pipeline': {
+      const orchestratorCount = config.members.filter(
+        (m) => m.agentType === 'orchestrator'
+      ).length;
+      if (orchestratorCount !== 1) {
+        errors.push(
+          `Pipeline topology requires exactly 1 orchestrator, found ${orchestratorCount}`
+        );
+      }
+      break;
+    }
+    case 'swarm': {
+      const coordinatorCount = config.members.filter(
+        (m) => m.agentType === 'coordinator'
+      ).length;
+      if (coordinatorCount !== 1) {
+        errors.push(
+          `Swarm topology requires exactly 1 coordinator, found ${coordinatorCount}`
+        );
+      }
+      break;
+    }
+    case 'custom':
+    default:
+      // No rules to enforce for custom or unknown topologies
+      break;
+  }
+
+  return { errors, warnings };
 }
