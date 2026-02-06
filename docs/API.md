@@ -100,6 +100,41 @@ Quick reference of all exports organized by functional layer.
 | `listSkillsWorkflow()` | Function | List skills via workflow |
 | `searchSkillsWorkflow()` | Function | Search skills via workflow |
 
+### Teams
+
+| Export | Type | Description |
+|--------|------|-------------|
+| `TeamStore` | Class | CRUD operations for team config files |
+| `getTeamsBasePath()` | Function | Get teams directory for scope |
+| `getAgentsBasePath()` | Function | Get agents directory path |
+| `generateLeaderWorkerTemplate()` | Function | Generate leader/worker team config |
+| `generatePipelineTemplate()` | Function | Generate pipeline team config |
+| `generateSwarmTemplate()` | Function | Generate swarm team config |
+| `generateGsdResearchTeam()` | Function | Generate GSD parallel research team |
+| `generateGsdDebuggingTeam()` | Function | Generate GSD adversarial debugging team |
+| `writeTeamAgentFiles()` | Function | Write agent `.md` files for team members |
+| `generateAgentContent()` | Function | Generate markdown content for an agent file |
+| `teamCreationWizard()` | Function | Interactive/non-interactive team creation |
+| `nonInteractiveCreate()` | Function | Create team from CLI flags |
+| `validateTeamFull()` | Function | Run all validation checks on team config |
+| `validateMemberAgents()` | Function | Check agent files exist for members |
+| `detectTaskCycles()` | Function | Detect circular task dependencies |
+| `detectToolOverlap()` | Function | Detect shared write-capable tools |
+| `detectSkillConflicts()` | Function | Detect cross-member skill conflicts |
+| `detectRoleCoherence()` | Function | Detect near-duplicate role descriptions |
+| `LEADER_TOOLS` | Constant | Tool array for leader/coordinator agents |
+| `WORKER_TOOLS` | Constant | Tool array for leader/worker workers |
+| `PIPELINE_STAGE_TOOLS` | Constant | Tool array for pipeline stage agents |
+| `SWARM_WORKER_TOOLS` | Constant | Tool array for swarm worker agents |
+| `GSD_RESEARCH_AGENT_IDS` | Constant | Agent IDs for GSD research team |
+| `GSD_DEBUG_AGENT_IDS` | Constant | Agent IDs for GSD debugging team |
+| `RESEARCH_DIMENSIONS` | Constant | Research dimension names |
+| `TeamMemberSchema` | Zod Schema | Team member validation |
+| `TeamConfigSchema` | Zod Schema | Team config validation |
+| `TeamTaskSchema` | Zod Schema | Team task validation |
+| `InboxMessageSchema` | Zod Schema | Inbox message validation |
+| `validateTeamConfig()` | Function | Validate team config against schema |
+
 ---
 
 ## Factory Functions
@@ -793,6 +828,39 @@ Key types exported for TypeScript consumers. For complete type definitions, see 
 |------|--------|-------------|
 | `SkillScope` | `types/scope.ts` | `'user' \| 'project'` |
 | `ScopedSkillPath` | `types/scope.ts` | Resolved skill path with scope |
+
+### Team Types
+
+| Type | Source | Description |
+|------|--------|-------------|
+| `TeamConfig` | `types/team.ts` | Top-level team configuration |
+| `TeamMember` | `types/team.ts` | Team member definition |
+| `TeamTask` | `types/team.ts` | Task in a team's work queue |
+| `InboxMessage` | `types/team.ts` | Inter-agent inbox message |
+| `TeamValidationResult` | `types/team.ts` | Schema validation result |
+| `TeamTopology` | `types/team.ts` | `'leader-worker' \| 'pipeline' \| 'swarm' \| 'custom'` |
+| `TeamRole` | `types/team.ts` | `'leader' \| 'worker' \| 'reviewer' \| 'orchestrator' \| 'specialist'` |
+| `TeamTaskStatus` | `types/team.ts` | `'pending' \| 'in_progress' \| 'completed'` |
+| `TeamMemberModel` | `types/team.ts` | `'haiku' \| 'sonnet' \| 'opus'` |
+| `BackendType` | `types/team.ts` | `'in-process' \| 'tmux' \| 'iterm2'` |
+| `StructuredMessageType` | `types/team.ts` | Structured message type (extensible) |
+| `TemplateOptions` | `teams/templates.ts` | Options for template generators |
+| `TemplateResult` | `teams/templates.ts` | Template generation result |
+| `GsdTemplateOptions` | `teams/gsd-templates.ts` | Options for GSD template generators |
+| `TeamScope` | `teams/team-store.ts` | `'user' \| 'project'` team storage scope |
+| `AgentFileResult` | `teams/team-agent-generator.ts` | Agent file generation result |
+| `AgentMemberInput` | `teams/team-agent-generator.ts` | Input for agent content generation |
+| `WizardOptions` | `teams/team-wizard.ts` | Team creation wizard options |
+| `CreatePaths` | `teams/team-wizard.ts` | Injectable paths for testing |
+| `TeamFullValidationResult` | `teams/team-validator.ts` | Full validation orchestrator result |
+| `TeamFullValidationOptions` | `teams/team-validator.ts` | Full validation options |
+| `MemberResolutionResult` | `teams/team-validator.ts` | Agent file resolution result |
+| `CycleDetectionResult` | `teams/team-validator.ts` | Task cycle detection result |
+| `ToolOverlapResult` | `teams/team-validator.ts` | Write-tool overlap result |
+| `SkillConflictResult` | `teams/team-validator.ts` | Cross-member skill conflict result |
+| `SkillConflictEntry` | `teams/team-validator.ts` | Single skill conflict entry |
+| `RoleCoherenceResult` | `teams/team-validator.ts` | Role coherence validation result |
+| `RoleCoherenceWarning` | `teams/team-validator.ts` | Role coherence warning entry |
 
 ### Application Types
 
