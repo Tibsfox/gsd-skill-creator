@@ -23,6 +23,16 @@ export {
 } from './templates.js';
 export type { TemplateOptions, TemplateResult } from './templates.js';
 
+// GSD-specific templates: parallel research and adversarial debugging
+export {
+  generateGsdResearchTeam,
+  generateGsdDebuggingTeam,
+  GSD_RESEARCH_AGENT_IDS,
+  GSD_DEBUG_AGENT_IDS,
+  RESEARCH_DIMENSIONS,
+} from './gsd-templates.js';
+export type { GsdTemplateOptions } from './gsd-templates.js';
+
 // Storage: TeamStore class, scope type, path helpers
 export { TeamStore, getTeamsBasePath, getAgentsBasePath } from './team-store.js';
 export type { TeamScope } from './team-store.js';
