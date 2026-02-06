@@ -12,6 +12,7 @@ Centralized troubleshooting for common issues with skill-creator. Each issue fol
 - [Skill Creation Issues](#skill-creation-issues)
 - [Testing Issues](#testing-issues)
 - [Conflict Detection Issues](#conflict-detection-issues)
+- [Team Issues](#team-issues)
 - [CI/CD Issues](#cicd-issues)
 - [Still Stuck?](#still-stuck)
 
@@ -349,6 +350,102 @@ skill-creator benchmark
 3. Verify with verbose output:
    ```bash
    skill-creator detect-conflicts --verbose
+   ```
+
+---
+
+## Team Issues
+
+### Missing agent files after team creation
+
+**Symptom:** `skill-creator team spawn` reports missing agent files, or `skill-creator team status` shows spawn readiness as "not ready".
+
+**Cause:** Agent files were not generated during team creation, or were deleted/moved after creation.
+
+**Solution:**
+
+1. Check which files are missing:
+   ```bash
+   skill-creator team spawn my-team
+   ```
+   The output lists each missing agent file path.
+
+2. Regenerate agent files:
+   ```bash
+   skill-creator team create --name=my-team --pattern=leader-worker
+   ```
+   Re-running creation with the same name regenerates agent files.
+
+3. Verify files exist:
+   ```bash
+   skill-creator team status my-team
+   ```
+   Spawn readiness should now show "ready".
+
+---
+
+### Invalid topology errors during validation
+
+**Symptom:** `skill-creator team validate` fails with topology-related errors such as "missing leader", "invalid pipeline order", or "cycle detected".
+
+**Cause:** Team configuration does not satisfy the rules for the chosen topology pattern.
+
+**Solution by topology:**
+
+| Topology | Common Error | Fix |
+|----------|-------------|-----|
+| leader-worker | No leader agent | Ensure one member has `agentType: "orchestrator"` or `"coordinator"` |
+| leader-worker | Multiple leaders | Only one member should be the leader; set others to `"worker"` |
+| pipeline | Cycle detected | Remove circular `dependsOn` references between members |
+| pipeline | Missing stage | Ensure all pipeline stages are defined with correct ordering |
+| swarm | No coordinator | Swarm topologies still require one coordinating agent |
+
+Review your team configuration:
+```bash
+skill-creator team status my-team
+```
+
+Fix the configuration and re-validate:
+```bash
+skill-creator team validate my-team
+```
+
+See [GSD Teams Guide](GSD-TEAMS.md) for topology selection guidance.
+
+---
+
+### Team not found
+
+**Symptom:** `skill-creator team validate my-team` or `skill-creator team status my-team` returns "Team not found" or "No team with name my-team".
+
+**Cause:** Team name misspelled, team created in a different scope (user vs project), or team configuration file missing.
+
+**Solution:**
+
+1. List all available teams:
+   ```bash
+   skill-creator team list
+   ```
+   Check that your team appears in the output.
+
+2. Check both scopes:
+   ```bash
+   skill-creator team list
+   ```
+   Teams may exist at user level (`~/.claude/teams/`) or project level (`.claude/teams/`).
+
+3. If the team is missing entirely, recreate it:
+   ```bash
+   skill-creator team create
+   ```
+
+4. Verify the team name matches exactly (lowercase, hyphens only):
+   ```bash
+   # Correct
+   skill-creator team status my-research-team
+
+   # Wrong (spaces, uppercase)
+   skill-creator team status "My Research Team"
    ```
 
 ---

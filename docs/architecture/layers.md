@@ -22,26 +22,27 @@ This structure ensures:
 
 Quick reference showing which layers depend on which.
 
-| Layer | types | storage | validation | embeddings | testing | observation | detection | activation | conflicts | composition | agents | application | simulation | learning | calibration | workflows | cli | hooks |
-|-------|:-----:|:-------:|:----------:|:----------:|:-------:|:-----------:|:---------:|:----------:|:---------:|:-----------:|:------:|:-----------:|:----------:|:--------:|:-----------:|:---------:|:---:|:-----:|
-| **types** | - | | | | | | | | | | | | | | | | | |
-| **storage** | Y | - | | | | | | | | | | | | | | | | |
-| **validation** | Y | | - | | | | | | | | | | | | | | | |
-| **embeddings** | Y | | | - | | | | | | | | | | | | | | |
-| **testing** | Y | Y | Y | Y | - | | | | | | | | | | | | | |
-| **observation** | Y | Y | | | | - | | | | | | | | | | | | |
-| **detection** | Y | Y | | | | | - | | | | | | | | | | | |
-| **activation** | Y | | | Y | | | | - | | | | | | | | | | |
-| **conflicts** | Y | | | Y | | | | | - | | | | | | | | | |
-| **composition** | Y | Y | | | | | | | | - | | | | | | | | |
-| **agents** | Y | Y | | | | | Y | | | | - | | | | | | | |
-| **application** | Y | Y | Y | Y | | | | | | | | - | | | | | | |
-| **simulation** | Y | Y | | Y | | | | | | | | | - | | | | | |
-| **learning** | Y | Y | | | | | | | | | | | | - | | | | |
-| **calibration** | Y | Y | | | | | | | | | | | | | - | | | |
-| **workflows** | Y | Y | Y | | | | | | | | | | | | | - | | |
-| **cli** | Y | Y | Y | Y | Y | | Y | Y | Y | Y | Y | | Y | Y | Y | | - | |
-| **hooks** | Y | | | | | Y | | | | | | | | | | | | - |
+| Layer | types | storage | validation | embeddings | testing | observation | detection | activation | conflicts | composition | agents | teams | application | simulation | learning | calibration | workflows | cli | hooks |
+|-------|:-----:|:-------:|:----------:|:----------:|:-------:|:-----------:|:---------:|:----------:|:---------:|:-----------:|:------:|:-----:|:-----------:|:----------:|:--------:|:-----------:|:---------:|:---:|:-----:|
+| **types** | - | | | | | | | | | | | | | | | | | | |
+| **storage** | Y | - | | | | | | | | | | | | | | | | | |
+| **validation** | Y | | - | | | | | | | | | | | | | | | | |
+| **embeddings** | Y | | | - | | | | | | | | | | | | | | | |
+| **testing** | Y | Y | Y | Y | - | | | | | | | | | | | | | | |
+| **observation** | Y | Y | | | | - | | | | | | | | | | | | | |
+| **detection** | Y | Y | | | | | - | | | | | | | | | | | | |
+| **activation** | Y | | | Y | | | | - | | | | | | | | | | | |
+| **conflicts** | Y | | | Y | | | | | - | | | | | | | | | | |
+| **composition** | Y | Y | | | | | | | | - | | | | | | | | | |
+| **agents** | Y | Y | | | | | Y | | | | - | | | | | | | | |
+| **teams** | Y | | Y | Y | | | | | Y | | | - | | | | | | | |
+| **application** | Y | Y | Y | Y | | | | | | | | | - | | | | | | |
+| **simulation** | Y | Y | | Y | | | | | | | | | | - | | | | | |
+| **learning** | Y | Y | | | | | | | | | | | | | - | | | | |
+| **calibration** | Y | Y | | | | | | | | | | | | | | - | | | |
+| **workflows** | Y | Y | Y | | | | | | | | | | | | | | - | | |
+| **cli** | Y | Y | Y | Y | Y | | Y | Y | Y | Y | Y | Y | | Y | Y | Y | | - | |
+| **hooks** | Y | | | | | Y | | | | | | | | | | | | | - |
 
 **Legend:** Y = depends on, - = self, empty = no dependency
 
@@ -72,6 +73,7 @@ graph TB
         Conf[conflicts/]
         Comp[composition/]
         Agents[agents/]
+        Teams[teams/]
     end
 
     subgraph L2["Layer 2: Infrastructure"]
@@ -93,6 +95,11 @@ graph TB
     L4 --> L2
     L3 --> L2
     L2 --> L1
+
+    CLI --> Teams
+    Teams --> Val
+    Teams --> Emb
+    Teams --> Conf
 ```
 
 ---
@@ -473,6 +480,52 @@ graph TB
 **Used By:** `cli/`
 
 **Rationale:** Agent suggestion is a higher-level feature built on skill detection. Separating it allows agent composition logic to evolve independently.
+
+---
+
+### teams/
+
+**Responsibility:** Manage team configurations including template generation, persistence, creation wizards, and comprehensive validation (schema, topology, agent resolution, cycle detection, tool overlap, skill conflicts, role coherence).
+
+**Key Files:**
+
+| File | Purpose |
+|------|---------|
+| `templates.ts` | Leader/worker, pipeline, and swarm pattern template generators |
+| `gsd-templates.ts` | GSD-specific research and debugging team template generators |
+| `team-store.ts` | Team config CRUD (read, write, list, delete) with scope support |
+| `team-agent-generator.ts` | Generate agent markdown files from team member definitions |
+| `team-wizard.ts` | Interactive and non-interactive team creation workflow |
+| `team-validator.ts` | Full validation orchestrator: agent resolution, cycles, tool overlap, skill conflicts, role coherence |
+| `index.ts` | Barrel export for all teams/ public API |
+
+**Key Exports:**
+
+| Export | Type | Description |
+|--------|------|-------------|
+| `TeamStore` | Class | Team config persistence (project/user scope) |
+| `getTeamsBasePath()` | Function | Get teams directory for scope |
+| `getAgentsBasePath()` | Function | Get agents directory path |
+| `generateLeaderWorkerTemplate()` | Function | Generate leader/worker team config |
+| `generatePipelineTemplate()` | Function | Generate pipeline team config |
+| `generateSwarmTemplate()` | Function | Generate swarm team config |
+| `generateGsdResearchTeam()` | Function | Generate GSD parallel research team |
+| `generateGsdDebuggingTeam()` | Function | Generate GSD adversarial debugging team |
+| `teamCreationWizard()` | Function | Interactive team creation flow |
+| `nonInteractiveCreate()` | Function | Non-interactive team creation |
+| `writeTeamAgentFiles()` | Function | Write agent .md files for team members |
+| `validateTeamFull()` | Function | Full 7-check team validation orchestrator |
+| `validateMemberAgents()` | Function | Check agent files exist on disk |
+| `detectTaskCycles()` | Function | Detect circular task dependencies |
+| `detectToolOverlap()` | Function | Find shared write-capable tools |
+| `detectSkillConflicts()` | Function | Cross-member skill overlap detection |
+| `detectRoleCoherence()` | Function | Near-duplicate description warnings |
+
+**Depends On:** `types/`, `validation/`, `embeddings/`, `conflicts/`
+
+**Used By:** `cli/`
+
+**Rationale:** Teams group multiple agents into coordinated units with shared task management. Isolating team logic allows template patterns, validation rules, and persistence to evolve independently from individual agent or skill management.
 
 ---
 

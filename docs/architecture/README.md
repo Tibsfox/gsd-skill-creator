@@ -38,6 +38,7 @@ flowchart TB
         Conf["Conflicts<br/>src/conflicts/"]
         Comp["Composition<br/>src/composition/"]
         Agents["Agents<br/>src/agents/"]
+        TeamsMod["Teams<br/>src/teams/"]
     end
 
     subgraph Infrastructure["Infrastructure Layer"]
@@ -78,6 +79,11 @@ flowchart TB
     Agents --> Det
     Agents --> Store
 
+    CLI --> TeamsMod
+    TeamsMod --> Val
+    TeamsMod --> Emb
+    TeamsMod --> Conf
+
     Emb --> Types
     Test --> Types
     Val --> Types
@@ -110,4 +116,5 @@ For reference documentation:
 
 - [API.md](../API.md) - Complete programmatic API reference
 - [CLI.md](../CLI.md) - Command-line interface reference
+- [GSD-TEAMS.md](../GSD-TEAMS.md) - GSD teams vs subagents decision guide
 - [CHANGELOG.md](../CHANGELOG.md) - Version history and changes
