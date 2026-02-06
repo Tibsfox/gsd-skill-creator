@@ -1,16 +1,23 @@
 /**
- * Team validator functions for agent resolution, cycle detection, and tool overlap.
+ * Team validator functions for agent resolution, cycle detection, tool overlap,
+ * skill conflict detection, and role coherence validation.
  *
- * Three pure/sync validators:
+ * Sync validators:
  * - VALID-02: validateMemberAgents() -- checks agent files exist on disk
  * - VALID-05: detectTaskCycles() -- detects circular blockedBy dependencies
  * - VALID-06: detectToolOverlap() -- warns when members share write-capable tools
+ *
+ * Async validators (embedding-dependent):
+ * - VALID-03: detectSkillConflicts() -- cross-member skill overlap detection
+ * - VALID-04: detectRoleCoherence() -- near-duplicate description warnings
  */
 
 import { existsSync, readdirSync } from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
 import type { TeamMember, TeamTask } from '../types/team.js';
+import { ConflictDetector } from '../conflicts/conflict-detector.js';
+import { getEmbeddingService, cosineSimilarity } from '../embeddings/index.js';
 
 // ============================================================================
 // Type Definitions
@@ -50,6 +57,56 @@ export interface ToolOverlapResult {
   tool: string;
   /** Agent IDs of members that share this tool. */
   members: string[];
+}
+
+/**
+ * A single skill conflict entry between two skills owned by different members.
+ */
+export interface SkillConflictEntry {
+  /** Name of the first conflicting skill. */
+  skillA: string;
+  /** Name of the second conflicting skill. */
+  skillB: string;
+  /** Agent ID of the member owning skillA. */
+  memberA: string;
+  /** Agent ID of the member owning skillB. */
+  memberB: string;
+  /** Cosine similarity between the skills. */
+  similarity: number;
+  /** Severity level based on similarity score. */
+  severity: 'high' | 'medium';
+}
+
+/**
+ * Result of cross-member skill conflict detection.
+ */
+export interface SkillConflictResult {
+  /** Detected cross-member skill conflicts. */
+  conflicts: SkillConflictEntry[];
+  /** Total number of skills analyzed across all members. */
+  totalSkillsAnalyzed: number;
+}
+
+/**
+ * A warning about two members with different roles having near-duplicate descriptions.
+ */
+export interface RoleCoherenceWarning {
+  /** Agent ID of the first member. */
+  memberA: string;
+  /** Agent ID of the second member. */
+  memberB: string;
+  /** Cosine similarity between their descriptions. */
+  similarity: number;
+  /** Human-readable suggestion for role differentiation. */
+  suggestion: string;
+}
+
+/**
+ * Result of role coherence validation.
+ */
+export interface RoleCoherenceResult {
+  /** Warnings about near-duplicate descriptions across different-role members. */
+  warnings: RoleCoherenceWarning[];
 }
 
 // ============================================================================
@@ -321,4 +378,145 @@ export function detectToolOverlap(members: TeamMember[]): ToolOverlapResult[] {
   }
 
   return results;
+}
+
+// ============================================================================
+// VALID-03: detectSkillConflicts
+// ============================================================================
+
+/**
+ * Detect semantically overlapping skills across different team members.
+ *
+ * Uses the ConflictDetector to find skill pairs with high semantic similarity,
+ * then filters to only cross-member conflicts (intra-member pairs are expected).
+ * Supports a shared-skill exclusion list for intentionally duplicated skills.
+ *
+ * @param memberSkills - Array of members with their skill lists
+ * @param options - Optional threshold and shared-skill exclusions
+ * @returns Skill conflict result with cross-member conflicts
+ */
+export async function detectSkillConflicts(
+  memberSkills: Array<{ agentId: string; skills: Array<{ name: string; description: string }> }>,
+  options?: { sharedSkills?: string[]; threshold?: number }
+): Promise<SkillConflictResult> {
+  // Need at least 2 members for cross-member conflicts
+  if (memberSkills.length < 2) {
+    const totalSkills = memberSkills.reduce((sum, m) => sum + m.skills.length, 0);
+    return { conflicts: [], totalSkillsAnalyzed: totalSkills };
+  }
+
+  // Build combined skills list with member ownership
+  const allSkills: Array<{ name: string; description: string; agentId: string }> = [];
+  for (const member of memberSkills) {
+    for (const skill of member.skills) {
+      allSkills.push({ ...skill, agentId: member.agentId });
+    }
+  }
+
+  if (allSkills.length < 2) {
+    return { conflicts: [], totalSkillsAnalyzed: allSkills.length };
+  }
+
+  // Run conflict detection on all skills
+  const detector = new ConflictDetector({ threshold: options?.threshold ?? 0.85 });
+  const detectResult = await detector.detect(
+    allSkills.map((s) => ({ name: s.name, description: s.description }))
+  );
+
+  const sharedSkills = new Set(options?.sharedSkills ?? []);
+
+  // Post-filter: keep only cross-member conflicts, exclude shared skills
+  const conflicts: SkillConflictEntry[] = [];
+  for (const pair of detectResult.conflicts) {
+    // Find member ownership for each skill in the pair
+    const ownerA = allSkills.find((s) => s.name === pair.skillA);
+    const ownerB = allSkills.find((s) => s.name === pair.skillB);
+
+    if (!ownerA || !ownerB) continue;
+
+    // Skip intra-member conflicts (same member owns both skills)
+    if (ownerA.agentId === ownerB.agentId) continue;
+
+    // Skip conflicts involving shared skills
+    if (sharedSkills.has(pair.skillA) || sharedSkills.has(pair.skillB)) continue;
+
+    conflicts.push({
+      skillA: pair.skillA,
+      skillB: pair.skillB,
+      memberA: ownerA.agentId,
+      memberB: ownerB.agentId,
+      similarity: pair.similarity,
+      severity: pair.severity,
+    });
+  }
+
+  return {
+    conflicts,
+    totalSkillsAnalyzed: allSkills.length,
+  };
+}
+
+// ============================================================================
+// VALID-04: detectRoleCoherence
+// ============================================================================
+
+/**
+ * Detect when members with different roles have near-duplicate descriptions.
+ *
+ * Same-role members (e.g., multiple workers) having similar descriptions is
+ * expected and normal. Different-role members with very similar descriptions
+ * suggests poor role differentiation that should be addressed.
+ *
+ * @param members - Array of members with agentId, agentType, and description
+ * @param options - Optional similarity threshold (default 0.85)
+ * @returns Role coherence result with warnings for near-duplicate descriptions
+ */
+export async function detectRoleCoherence(
+  members: Array<{ agentId: string; agentType?: string; description: string }>,
+  options?: { threshold?: number }
+): Promise<RoleCoherenceResult> {
+  // Need at least 2 members for comparison
+  if (members.length < 2) {
+    return { warnings: [] };
+  }
+
+  const threshold = options?.threshold ?? 0.85;
+
+  // Batch embed all member descriptions
+  const embeddingService = await getEmbeddingService();
+  const descriptions = members.map((m) => m.description);
+  const ids = members.map((m) => m.agentId);
+  const results = await embeddingService.embedBatch(descriptions, ids);
+
+  const embeddings = results.map((r) => r.embedding);
+
+  // Compare all pairs of members with DIFFERENT agentTypes
+  const warnings: RoleCoherenceWarning[] = [];
+
+  for (let i = 0; i < members.length; i++) {
+    for (let j = i + 1; j < members.length; j++) {
+      const memberA = members[i];
+      const memberB = members[j];
+
+      // Skip pairs where both have the same agentType (expected similarity)
+      if (memberA.agentType === memberB.agentType) continue;
+
+      const similarity = cosineSimilarity(embeddings[i], embeddings[j]);
+
+      if (similarity >= threshold) {
+        const typeA = memberA.agentType ?? 'unknown';
+        const typeB = memberB.agentType ?? 'unknown';
+        const pct = (similarity * 100).toFixed(0);
+
+        warnings.push({
+          memberA: memberA.agentId,
+          memberB: memberB.agentId,
+          similarity,
+          suggestion: `Members "${memberA.agentId}" (${typeA}) and "${memberB.agentId}" (${typeB}) have very similar descriptions (${pct}% similar). Consider differentiating their roles.`,
+        });
+      }
+    }
+  }
+
+  return { warnings };
 }
