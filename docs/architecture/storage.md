@@ -22,6 +22,8 @@ Skills can exist at two scopes:
 
 Project-level skills take precedence over user-level skills with the same name. See [Scope Resolution](#scope-resolution) for details.
 
+**Teams** follow the same scope model: project teams live in `.claude/teams/` and user teams in `~/.claude/teams/`. Agent files generated from teams are always written to project scope (`.claude/agents/`) due to Claude Code bug #11205 where user-level agents may not be discovered.
+
 ## Storage Locations Overview
 
 | Data Type | Location | Format | Source File |
@@ -34,6 +36,8 @@ Project-level skills take precedence over user-level skills with the same name. 
 | Calibration events | `~/.gsd-skill/calibration/events.jsonl` | JSONL | [src/calibration/calibration-store.ts](../../src/calibration/calibration-store.ts) |
 | Embedding cache | `~/.gsd-skill-creator/embeddings/cache.json` | JSON | [src/embeddings/embedding-cache.ts](../../src/embeddings/embedding-cache.ts) |
 | Threshold history | `~/.gsd-skill/calibration/thresholds.json` | JSON | [src/calibration/threshold-history.ts](../../src/calibration/threshold-history.ts) |
+| Project teams | `.claude/teams/{name}/config.json` | JSON | [src/teams/team-store.ts](../../src/teams/team-store.ts) |
+| User teams | `~/.claude/teams/{name}/config.json` | JSON | [src/teams/team-store.ts](../../src/teams/team-store.ts) |
 
 ## File Formats
 
@@ -92,6 +96,53 @@ Detailed guidance...
 | `triggers` | object | Optional trigger patterns |
 
 For the complete official specification, see [OFFICIAL-FORMAT.md](../OFFICIAL-FORMAT.md).
+
+### Team Config Format
+
+Team configurations are stored as JSON files at `{teams-dir}/{team-name}/config.json`. The `TeamStore` class handles persistence and validates configs via `validateTeamConfig()` before writing.
+
+```json
+{
+  "name": "my-team",
+  "description": "A leader/worker team for parallel task execution",
+  "leadAgentId": "my-team-lead",
+  "version": 1,
+  "topology": "leader-worker",
+  "createdAt": "2026-02-05T10:00:00.000Z",
+  "members": [
+    {
+      "agentId": "my-team-lead",
+      "name": "Lead",
+      "agentType": "coordinator"
+    },
+    {
+      "agentId": "my-team-worker-1",
+      "name": "Worker 1",
+      "agentType": "worker"
+    }
+  ]
+}
+```
+
+**Config Fields:**
+
+| Field | Required | Type | Description |
+|-------|----------|------|-------------|
+| `name` | Yes | string | Team identifier (must match directory name) |
+| `description` | Yes | string | Team purpose description |
+| `leadAgentId` | Yes | string | Agent ID of the team leader (must match a member) |
+| `version` | Yes | number | Config version (currently 1) |
+| `topology` | Yes | string | Team pattern: `leader-worker`, `pipeline`, or `swarm` |
+| `createdAt` | Yes | string | ISO timestamp of creation |
+| `members` | Yes | array | Array of team member objects |
+
+**Member Fields:**
+
+| Field | Required | Type | Description |
+|-------|----------|------|-------------|
+| `agentId` | Yes | string | Unique agent identifier (maps to `{agentId}.md` file) |
+| `name` | Yes | string | Human-readable display name |
+| `agentType` | Yes | string | Role: `orchestrator`, `coordinator`, or `worker` |
 
 ### tests.json Format
 
@@ -387,6 +438,9 @@ See [CLI.md](../CLI.md#migrate) and [CLI.md](../CLI.md#migrate-agent) for full c
       tests.json        # Test cases
       reference.md      # Optional reference docs
       scripts/          # Optional scripts
+  teams/
+    {team-name}/
+      config.json       # Team configuration
 
 ~/.gsd-skill/
   calibration/
@@ -405,6 +459,9 @@ See [CLI.md](../CLI.md#migrate) and [CLI.md](../CLI.md#migrate-agent) for full c
       tests.json
   agents/
     {agent-name}.md     # Agent definitions
+  teams/
+    {team-name}/
+      config.json       # Team configuration
 
 .planning/
   patterns/
