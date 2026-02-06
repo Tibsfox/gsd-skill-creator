@@ -27,6 +27,19 @@ vi.mock('../conflicts/conflict-detector.js', () => ({
   ConflictDetector: vi.fn(),
 }));
 
+// ============================================================================
+// Mock team-validation module for validateTeamFull integration tests
+// ============================================================================
+
+vi.mock('../validation/team-validation.js', () => ({
+  validateTeamConfig: vi.fn(),
+  validateTopologyRules: vi.fn(),
+}));
+
+import { validateTeamConfig, validateTopologyRules } from '../validation/team-validation.js';
+const mockValidateTeamConfig = vi.mocked(validateTeamConfig);
+const mockValidateTopologyRules = vi.mocked(validateTopologyRules);
+
 import { getEmbeddingService, cosineSimilarity } from '../embeddings/index.js';
 import { ConflictDetector } from '../conflicts/conflict-detector.js';
 
@@ -40,10 +53,12 @@ import {
   detectToolOverlap,
   detectSkillConflicts,
   detectRoleCoherence,
+  validateTeamFull,
 } from './team-validator.js';
 import type {
   SkillConflictResult,
   RoleCoherenceResult,
+  TeamFullValidationResult,
 } from './team-validator.js';
 
 // ============================================================================
@@ -634,5 +649,245 @@ describe('detectRoleCoherence', () => {
     expect(warning.suggestion).toContain('specialist');
     expect(warning.suggestion).toContain('88%');
     expect(warning.suggestion).toContain('differentiating');
+  });
+});
+
+// ============================================================================
+// validateTeamFull() Integration Tests
+// ============================================================================
+
+describe('validateTeamFull', () => {
+  const validConfig = {
+    name: 'test-team',
+    description: 'A test team',
+    leadAgentId: 'lead',
+    createdAt: '2026-01-01T00:00:00Z',
+    members: [
+      { agentId: 'lead', name: 'Lead Agent', agentType: 'coordinator' },
+      { agentId: 'worker-1', name: 'Worker One', agentType: 'worker' },
+    ],
+  };
+
+  const mockDetect = vi.fn();
+
+  beforeEach(() => {
+    vi.resetAllMocks();
+    mockDetect.mockReset();
+
+    // Default: schema validation passes
+    mockValidateTeamConfig.mockReturnValue({
+      valid: true,
+      errors: [],
+      warnings: [],
+      data: validConfig as any,
+    });
+
+    // Default: topology rules pass
+    mockValidateTopologyRules.mockReturnValue({
+      errors: [],
+      warnings: [],
+    });
+
+    // Default: fs mocks for member resolution (all found)
+    mockExistsSync.mockReturnValue(true);
+    mockReaddirSync.mockReturnValue([]);
+
+    // Default: conflict detector returns no conflicts
+    MockConflictDetector.mockImplementation(() => ({
+      detect: mockDetect,
+    } as any));
+    mockDetect.mockResolvedValue({
+      conflicts: [],
+      skillCount: 0,
+      pairsAnalyzed: 0,
+      threshold: 0.85,
+      analysisMethod: 'model',
+    });
+
+    // Default: embeddings for role coherence
+    const mockEmbedBatch = vi.fn().mockResolvedValue([
+      { embedding: [1, 0, 0], fromCache: false, method: 'model' },
+      { embedding: [0, 1, 0], fromCache: false, method: 'model' },
+    ]);
+    mockGetEmbeddingService.mockResolvedValue({ embedBatch: mockEmbedBatch } as any);
+    mockCosineSimilarity.mockReturnValue(0.3);
+  });
+
+  it('returns valid: true with empty errors/warnings for a well-formed config', async () => {
+    const result = await validateTeamFull(validConfig);
+
+    expect(result.valid).toBe(true);
+    expect(result.errors).toEqual([]);
+    expect(result.warnings).toEqual([]);
+    expect(result.data).toBeDefined();
+    expect(result.data?.name).toBe('test-team');
+  });
+
+  it('returns valid: false with schema errors for invalid config', async () => {
+    mockValidateTeamConfig.mockReturnValue({
+      valid: false,
+      errors: ['name: Team name is required'],
+      warnings: [],
+    });
+
+    const result = await validateTeamFull({});
+
+    expect(result.valid).toBe(false);
+    expect(result.errors).toContain('name: Team name is required');
+    // Should return early -- no other validators called
+    expect(mockValidateTopologyRules).not.toHaveBeenCalled();
+  });
+
+  it('returns valid: false when leadAgentId does not match any member', async () => {
+    mockValidateTeamConfig.mockReturnValue({
+      valid: false,
+      errors: ['leadAgentId "ghost" does not match any member\'s agentId'],
+      warnings: [],
+    });
+
+    const result = await validateTeamFull({
+      ...validConfig,
+      leadAgentId: 'ghost',
+    });
+
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('leadAgentId'))).toBe(true);
+  });
+
+  it('returns valid: false when topology rules are violated', async () => {
+    mockValidateTopologyRules.mockReturnValue({
+      errors: ['Leader-worker topology requires exactly 1 leader, found 0'],
+      warnings: [],
+    });
+
+    const configWithTopology = { ...validConfig, topology: 'leader-worker' };
+    mockValidateTeamConfig.mockReturnValue({
+      valid: true,
+      errors: [],
+      warnings: [],
+      data: configWithTopology as any,
+    });
+
+    const result = await validateTeamFull(configWithTopology);
+
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('topology'))).toBe(true);
+  });
+
+  it('returns valid: true with warnings when tool overlap detected', async () => {
+    // Two members sharing Write tool
+    const configWithTools = {
+      ...validConfig,
+      members: [
+        { agentId: 'lead', name: 'Lead', agentType: 'coordinator', tools: ['Write', 'Read'] },
+        { agentId: 'worker-1', name: 'Worker', agentType: 'worker', tools: ['Write', 'Grep'] },
+      ],
+    };
+    mockValidateTeamConfig.mockReturnValue({
+      valid: true,
+      errors: [],
+      warnings: [],
+      data: configWithTools as any,
+    });
+
+    const result = await validateTeamFull(configWithTools);
+
+    expect(result.valid).toBe(true);
+    expect(result.warnings.length).toBeGreaterThan(0);
+    expect(result.warnings.some((w) => w.includes('Write'))).toBe(true);
+  });
+
+  it('returns valid: false when task cycle detected', async () => {
+    const tasks: TeamTask[] = [
+      { id: 'A', subject: 'Task A', status: 'pending', blockedBy: ['B'] },
+      { id: 'B', subject: 'Task B', status: 'pending', blockedBy: ['A'] },
+    ];
+
+    const result = await validateTeamFull(validConfig, { tasks });
+
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('cycle') || e.includes('Cycle'))).toBe(true);
+  });
+
+  it('skips VALID-03 when memberSkills not provided', async () => {
+    const result = await validateTeamFull(validConfig);
+
+    expect(result.valid).toBe(true);
+    // ConflictDetector should not be called when memberSkills is not provided
+    expect(MockConflictDetector).not.toHaveBeenCalled();
+  });
+
+  it('skips VALID-04 when memberDescriptions not provided', async () => {
+    const result = await validateTeamFull(validConfig);
+
+    expect(result.valid).toBe(true);
+    // Embedding service should not be called when memberDescriptions is not provided
+    expect(mockGetEmbeddingService).not.toHaveBeenCalled();
+  });
+
+  it('skips VALID-05 when tasks not provided', async () => {
+    const result = await validateTeamFull(validConfig);
+
+    expect(result.valid).toBe(true);
+    // No task cycle errors should exist
+    expect(result.errors.filter((e) => e.includes('cycle') || e.includes('Cycle'))).toEqual([]);
+  });
+
+  it('populates memberResolution array for each member', async () => {
+    const result = await validateTeamFull(validConfig);
+
+    expect(result.memberResolution).toBeDefined();
+    expect(result.memberResolution).toHaveLength(2);
+    expect(result.memberResolution[0].agentId).toBe('lead');
+    expect(result.memberResolution[1].agentId).toBe('worker-1');
+  });
+
+  it('aggregates warnings from skill conflicts when memberSkills provided', async () => {
+    mockDetect.mockResolvedValue({
+      conflicts: [
+        {
+          skillA: 'typescript',
+          skillB: 'js-coding',
+          similarity: 0.92,
+          severity: 'high',
+          overlappingTerms: ['code'],
+          descriptionA: 'Write TypeScript code',
+          descriptionB: 'Write JavaScript code',
+        },
+      ],
+      skillCount: 2,
+      pairsAnalyzed: 1,
+      threshold: 0.85,
+      analysisMethod: 'model',
+    });
+
+    const result = await validateTeamFull(validConfig, {
+      memberSkills: [
+        { agentId: 'lead', skills: [{ name: 'typescript', description: 'Write TypeScript code' }] },
+        { agentId: 'worker-1', skills: [{ name: 'js-coding', description: 'Write JavaScript code' }] },
+      ],
+    });
+
+    expect(result.valid).toBe(true); // Skill conflicts are warnings, not errors
+    expect(result.warnings.some((w) => w.includes('typescript') || w.includes('skill'))).toBe(true);
+  });
+
+  it('aggregates warnings from role coherence when memberDescriptions provided', async () => {
+    const mockEmbedBatch = vi.fn().mockResolvedValue([
+      { embedding: [1, 0, 0], fromCache: false, method: 'model' },
+      { embedding: [0.99, 0.14, 0], fromCache: false, method: 'model' },
+    ]);
+    mockGetEmbeddingService.mockResolvedValue({ embedBatch: mockEmbedBatch } as any);
+    mockCosineSimilarity.mockReturnValue(0.92);
+
+    const result = await validateTeamFull(validConfig, {
+      memberDescriptions: [
+        { agentId: 'lead', agentType: 'coordinator', description: 'Manages all code' },
+        { agentId: 'worker-1', agentType: 'worker', description: 'Manages all code' },
+      ],
+    });
+
+    expect(result.valid).toBe(true); // Role coherence issues are warnings, not errors
+    expect(result.warnings.some((w) => w.includes('lead') || w.includes('differentiating'))).toBe(true);
   });
 });
