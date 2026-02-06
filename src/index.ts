@@ -32,6 +32,33 @@ export {
   SCOPE_FLAG_SHORT,
 } from './types/scope.js';
 
+// Team types
+export type {
+  TeamConfig,
+  TeamMember,
+  TeamTask,
+  InboxMessage,
+  TeamValidationResult,
+} from './types/team.js';
+
+export {
+  TEAM_TOPOLOGIES,
+  TEAM_ROLES,
+  TEAM_TASK_STATUSES,
+  TEAM_MEMBER_MODELS,
+  BACKEND_TYPES,
+  STRUCTURED_MESSAGE_TYPES,
+} from './types/team.js';
+
+export type {
+  TeamTopology,
+  TeamRole,
+  TeamTaskStatus,
+  TeamMemberModel,
+  BackendType,
+  StructuredMessageType,
+} from './types/team.js';
+
 // Storage - Import first so we can use in functions
 import { PatternStore } from './storage/pattern-store.js';
 import { SkillStore } from './storage/skill-store.js';
@@ -105,6 +132,63 @@ export {
 } from './validation/skill-validation.js';
 export type { SkillInput, SkillUpdate } from './validation/skill-validation.js';
 
+// Team validation
+export {
+  TeamMemberSchema,
+  TeamConfigSchema,
+  TeamTaskSchema,
+  InboxMessageSchema,
+  validateTeamConfig,
+} from './validation/team-validation.js';
+
+// Teams module: templates, storage, agent generation, wizard, validation
+export {
+  generateLeaderWorkerTemplate,
+  generatePipelineTemplate,
+  generateSwarmTemplate,
+  LEADER_TOOLS,
+  WORKER_TOOLS,
+  PIPELINE_STAGE_TOOLS,
+  SWARM_WORKER_TOOLS,
+  generateGsdResearchTeam,
+  generateGsdDebuggingTeam,
+  GSD_RESEARCH_AGENT_IDS,
+  GSD_DEBUG_AGENT_IDS,
+  RESEARCH_DIMENSIONS,
+  TeamStore,
+  getTeamsBasePath,
+  getAgentsBasePath,
+  writeTeamAgentFiles,
+  generateAgentContent,
+  teamCreationWizard,
+  nonInteractiveCreate,
+  validateTeamFull,
+  validateMemberAgents,
+  detectTaskCycles,
+  detectToolOverlap,
+  detectSkillConflicts,
+  detectRoleCoherence,
+} from './teams/index.js';
+export type {
+  TemplateOptions,
+  TemplateResult,
+  GsdTemplateOptions,
+  TeamScope,
+  AgentFileResult,
+  AgentMemberInput,
+  WizardOptions,
+  CreatePaths,
+  TeamFullValidationResult,
+  TeamFullValidationOptions,
+  MemberResolutionResult,
+  CycleDetectionResult,
+  ToolOverlapResult,
+  SkillConflictResult,
+  SkillConflictEntry,
+  RoleCoherenceResult,
+  RoleCoherenceWarning,
+} from './teams/index.js';
+
 // Workflows
 export { createSkillWorkflow } from './workflows/create-skill-workflow.js';
 export { listSkillsWorkflow } from './workflows/list-skills-workflow.js';
@@ -124,7 +208,56 @@ export type {
 // Learning module
 export * from './learning/index.js';
 
+// Calibration module
+export {
+  CalibrationStore,
+  ThresholdOptimizer,
+  ThresholdHistory,
+  calculateMCC,
+  mccToPercentage,
+  BenchmarkReporter,
+} from './calibration/index.js';
+export type {
+  CalibrationEvent,
+  CalibrationOutcome,
+  CalibrationEventInput,
+  SkillScore,
+  OptimizationResult,
+  ThresholdSnapshot,
+  BenchmarkReport,
+} from './calibration/index.js';
+
 export { DEFAULT_CONFIG } from './types/application.js';
+
+// Embeddings module
+export {
+  EmbeddingService,
+  getEmbeddingService,
+  cosineSimilarity,
+  HeuristicEmbedder,
+  EmbeddingCache,
+} from './embeddings/index.js';
+export type {
+  EmbeddingVector,
+  CacheEntry,
+  CacheStore,
+  EmbeddingServiceConfig,
+  ProgressInfo,
+  EmbeddingResult,
+} from './embeddings/index.js';
+
+// Conflicts module
+export {
+  ConflictDetector,
+  ConflictFormatter,
+  RewriteSuggester,
+} from './conflicts/index.js';
+export type {
+  ConflictConfig,
+  ConflictPair,
+  ConflictResult as ConflictDetectionResult,
+  RewriteSuggestion,
+} from './conflicts/index.js';
 
 // Application components
 export { TokenCounter } from './application/token-counter.js';
@@ -134,6 +267,65 @@ export { SkillSession } from './application/skill-session.js';
 export type { SkillLoadResult, SessionReport } from './application/skill-session.js';
 export { SkillApplicator } from './application/skill-applicator.js';
 export type { ApplyResult, InvokeResult } from './application/skill-applicator.js';
+
+// Simulation module
+export {
+  ActivationSimulator,
+  BatchSimulator,
+  categorizeConfidence,
+  formatConfidence,
+  getDefaultThresholds,
+  detectChallengers,
+  isWeakMatch,
+  generateDifferentiationHints,
+  formatHints,
+  generateExplanation,
+  generateBriefNegativeExplanation,
+} from './simulation/index.js';
+export type {
+  SkillInput as SimulationSkillInput,
+  BatchConfig,
+  BatchProgress,
+  BatchResult,
+  BatchStats,
+  ConfidenceThresholds,
+  ChallengerConfig,
+  ChallengerResult,
+  DifferentiationHint,
+  ExplanationOptions,
+  SimulationConfig,
+  SimulationResult,
+  SimulationTrace,
+  SkillPrediction,
+  ConfidenceLevel,
+} from './simulation/index.js';
+
+// Testing module
+export {
+  TestStore,
+  ResultStore,
+  TestRunner,
+  ResultFormatter,
+  formatTestResults,
+  formatJSON as formatTestJSON,
+  validateTestCaseInput,
+  TestCaseInputSchema,
+  ReviewWorkflow,
+} from './testing/index.js';
+export type {
+  RunOptions,
+  TestCase,
+  TestResult,
+  TestExpectation,
+  TestCaseResult,
+  RunMetrics,
+  TestRunResult,
+  TestRunSnapshot,
+  TestCaseInput,
+  ValidationWarning,
+  FormatOptions,
+  ReviewResult,
+} from './testing/index.js';
 
 // Import applicator for factory
 import { SkillApplicator } from './application/skill-applicator.js';
