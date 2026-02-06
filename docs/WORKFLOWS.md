@@ -12,6 +12,7 @@ This guide documents common workflows for the skill lifecycle: creation, validat
 - [Quality Assurance Workflow](#quality-assurance-workflow)
 - [Testing Workflow](#testing-workflow)
 - [Calibration Workflow](#calibration-workflow)
+- [Team Management Workflow](#team-management-workflow)
 - [Configuration Options](#configuration-options)
 - [CI/CD Workflow](#cicd-workflow)
 
@@ -328,6 +329,108 @@ skill-creator calibrate history
 ```
 
 For advanced threshold tuning, see [Architecture: Extending](architecture/extending.md#threshold-tuning).
+
+---
+
+## Team Management Workflow
+
+Create, validate, and deploy multi-agent teams for parallel coordination tasks.
+
+### Overview
+
+```
+Create -> Validate -> Check Spawn Readiness -> Deploy
+```
+
+### Step 1: Create Team
+
+Use the interactive wizard or non-interactive mode to define a team.
+
+**Interactive (wizard):**
+
+```bash
+skill-creator team create
+```
+
+Follow the prompts to choose a name, topology (leader-worker, pipeline, swarm), and configure team members.
+
+**Non-interactive (scripted):**
+
+```bash
+skill-creator team create --name=research-team --pattern=leader-worker
+```
+
+**Key considerations:**
+- Team names follow the same lowercase-hyphen format as skills
+- Choose topology based on coordination needs (see [GSD Teams Guide](GSD-TEAMS.md) for guidance)
+- Each team requires at least one leader/coordinator and one worker member
+
+See [CLI: team create](CLI.md#teams-multi-agent-coordination) for all options.
+
+### Step 2: Validate Configuration
+
+Check that the team configuration is correct and complete:
+
+```bash
+skill-creator team validate my-team
+```
+
+Validation checks:
+1. Schema validity (required fields, types)
+2. Lead agent ID references a valid member
+3. No duplicate agent IDs
+4. Topology rules satisfied (correct agent types for pattern)
+5. No circular dependencies in pipeline topologies
+6. Tool overlap warnings (multiple members writing to same files)
+7. Skill conflict detection across members
+8. Role coherence (members have distinct responsibilities)
+
+**Validate all teams:**
+
+```bash
+skill-creator team validate --all
+```
+
+See [CLI: team validate](CLI.md#teams-multi-agent-coordination) for output format and options.
+
+### Step 3: Check Spawn Readiness
+
+Verify that all agent files exist and are ready to deploy:
+
+```bash
+skill-creator team spawn my-team
+```
+
+Spawn readiness checks:
+- All member agent files exist on disk
+- Agent file content matches team configuration
+- Lead agent has coordination tools configured
+
+**If not ready:** The command reports which files are missing and offers to regenerate them.
+
+Returns exit code 0 when ready, exit code 1 when issues found.
+
+### Step 4: Review and Deploy
+
+Review team status and deploy:
+
+```bash
+# Check team status and configuration summary
+skill-creator team status my-team
+
+# List all configured teams
+skill-creator team list
+```
+
+Teams are active once agent files are in place. The lead agent coordinates member agents during execution.
+
+**Verify team is operational:**
+
+```bash
+skill-creator team status my-team
+```
+
+Shows member count, topology, validation status, and spawn readiness.
 
 ---
 
