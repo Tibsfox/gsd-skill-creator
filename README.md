@@ -7,6 +7,7 @@ A self-evolving skill ecosystem for Claude Code that observes usage patterns, su
 - [What It Does](#what-it-does)
 - [Core Concepts](#core-concepts)
 - [Installation](#installation)
+- [Documentation](#documentation)
 - [CLI Commands](#cli-commands)
 - [How It Works](#how-it-works)
 - [File Structure](#file-structure)
@@ -15,6 +16,7 @@ A self-evolving skill ecosystem for Claude Code that observes usage patterns, su
 - [Token Budget](#token-budget)
 - [Bounded Learning](#bounded-learning)
 - [Agent Generation](#agent-generation)
+- [Agent Teams](#agent-teams)
 - [Configuration](#configuration)
 - [Development](#development)
 - [Requirements Implemented](#requirements-implemented)
@@ -23,7 +25,7 @@ A self-evolving skill ecosystem for Claude Code that observes usage patterns, su
 
 ## What It Does
 
-The Dynamic Skill Creator helps you build a personalized knowledge base for Claude Code through six core capabilities:
+The Dynamic Skill Creator helps you build a personalized knowledge base for Claude Code through these core capabilities:
 
 | Capability | Description |
 |------------|-------------|
@@ -33,6 +35,19 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **4. Auto-Loading** | Automatically loads relevant skills based on context while respecting token budgets (2-5% of context) |
 | **5. Learning** | Refines skills based on your corrections and feedback with bounded parameters and user confirmation |
 | **6. Composing Agents** | Groups frequently co-activated skills into composite agents stored in `.claude/agents/` |
+| **7. Quality Validation** | Detects semantic conflicts between skills and scores activation likelihood (v1.1) |
+| **8. Testing & Simulation** | Automated test cases, activation simulation, and calibration benchmarks (v1.2) |
+| **9. Agent Teams** | Multi-agent team coordination with leader-worker, pipeline, and swarm topologies (v1.4) |
+
+### Version History
+
+| Version | Key Features |
+|---------|--------------|
+| **v1.0** | Core skill management, pattern observation, learning loop, agent composition |
+| **v1.1** | Semantic conflict detection, activation scoring, local embeddings via HuggingFace |
+| **v1.2** | Test infrastructure, activation simulation, threshold calibration, benchmarking |
+| **v1.3** | Documentation overhaul, official format specification, getting started guide |
+| **v1.4** | Agent Teams: team schemas, storage, validation, CLI commands, GSD workflow templates |
 
 ---
 
@@ -145,6 +160,21 @@ skill-creator help
 
 ---
 
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [Getting Started](docs/GETTING-STARTED.md) | Installation, quickstart, and tutorials |
+| [CLI Reference](docs/CLI.md) | Complete command documentation |
+| [API Reference](docs/API.md) | Programmatic usage for library consumers |
+| [Architecture](docs/architecture/) | System design for contributors |
+| [GSD Teams Guide](docs/GSD-TEAMS.md) | Teams vs subagents for GSD workflows |
+| [Skills vs Agents vs Teams](docs/COMPARISON.md) | Choosing the right abstraction level |
+| [Team Creation Tutorial](docs/tutorials/team-creation.md) | End-to-end team creation walkthrough |
+| [Examples](examples/) | Ready-to-use skill templates |
+
+---
+
 ## CLI Commands
 
 ### Skill Management
@@ -214,6 +244,72 @@ skill-creator agents suggest  # Review agent suggestions interactively
 skill-creator agents list     # List pending agent suggestions
 skill-creator ag sg           # Shorthand for agents suggest
 ```
+
+### Team Management
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `team create` | `tm c` | Create a team from pattern template |
+| `team list` | `tm ls` | List all teams with member counts |
+| `team validate` | `tm v` | Validate team configuration(s) |
+| `team spawn` | `tm sp` | Check team readiness (agent resolution) |
+| `team status` | `tm s` | Show team details and validation summary |
+
+**Examples:**
+```bash
+skill-creator team create                          # Interactive team wizard
+skill-creator team create --name my-team --pattern leader-worker  # Non-interactive
+skill-creator team list                            # List all teams
+skill-creator team validate my-team                # Validate specific team
+skill-creator team spawn my-team                   # Check readiness
+skill-creator team status my-team                  # Show details
+```
+
+### Quality & Validation
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `detect-conflicts` | `dc` | Detect semantic conflicts between skills |
+| `score-activation` | `sa` | Score activation likelihood for a skill |
+| `reload-embeddings` | - | Reload the embedding model |
+
+**Examples:**
+```bash
+skill-creator detect-conflicts              # Check all skills for conflicts
+skill-creator detect-conflicts --threshold 0.8  # Custom threshold
+skill-creator score-activation my-skill     # Score single skill
+skill-creator score-activation --all        # Score all skills
+skill-creator score-activation my-skill --llm  # Use LLM analysis
+```
+
+### Testing & Simulation
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `test add <skill>` | `t add` | Add a test case for a skill |
+| `test list <skill>` | `t ls` | List test cases for a skill |
+| `test edit <skill> <id>` | `t edit` | Edit a test case |
+| `test delete <skill> <id>` | `t del` | Delete a test case |
+| `test run <skill>` | `t run` | Run tests for a skill |
+| `test generate <skill>` | `t gen` | Auto-generate test cases (heuristic, cross-skill, LLM) |
+| `simulate <skill>` | `sim` | Simulate activation with confidence levels |
+| `calibrate` | `cal` | Optimize thresholds via F1 score |
+| `benchmark` | `bench` | Measure simulator correlation (MCC) |
+
+**Examples:**
+```bash
+skill-creator test add my-skill             # Add test case interactively
+skill-creator test list my-skill            # List all test cases
+skill-creator test run my-skill             # Run tests (shows accuracy, FPR)
+skill-creator test generate my-skill        # Auto-generate tests
+skill-creator test generate my-skill --llm  # LLM-enhanced generation
+skill-creator simulate my-skill "user query here"  # Simulate activation
+skill-creator simulate my-skill --batch     # Batch mode with progress bar
+skill-creator calibrate                     # Optimize thresholds from history
+skill-creator benchmark                     # Check simulator correlation
+```
+
+For complete CLI documentation including all options, examples, and exit codes, see [docs/CLI.md](docs/CLI.md).
 
 ---
 
@@ -291,6 +387,8 @@ your-project/
 │   │       └── scripts/            # Optional automation scripts
 │   ├── agents/                      # Generated/custom agents
 │   │   └── <agent-name>.md         # Composite agent file
+│   ├── teams/                       # Agent team configurations
+│   │   └── <team-name>.json        # Team config (members, topology)
 │   └── settings.json               # Claude Code settings (hooks, etc.)
 │
 ├── .planning/
@@ -662,6 +760,60 @@ This tool will warn you when creating user-level agents about this issue.
 
 ---
 
+## Agent Teams
+
+Agent teams coordinate multiple Claude Code agents working together on complex tasks. Teams support leader-worker, pipeline, swarm, and custom topologies.
+
+### Team Configuration
+
+Teams are stored as JSON files in `.claude/teams/`:
+
+```json
+{
+  "name": "research-team",
+  "description": "Parallel research across multiple dimensions",
+  "leadAgentId": "research-synthesizer",
+  "members": [
+    { "agentId": "research-synthesizer", "name": "Synthesizer", "agentType": "coordinator", "model": "sonnet" },
+    { "agentId": "researcher-alpha", "name": "Alpha", "agentType": "specialist", "model": "opus" }
+  ],
+  "createdAt": "2026-01-15T10:00:00Z"
+}
+```
+
+Each member references an agent file in `.claude/agents/`. The `leadAgentId` must match one member's `agentId`.
+
+### Team Validation
+
+Team validation checks schema compliance, topology rules, tool overlap, skill conflicts, and role coherence:
+
+```bash
+skill-creator team validate my-team   # Validate specific team
+skill-creator team validate --all     # Validate all teams
+```
+
+Errors are blocking (invalid schema, missing lead, duplicate IDs, topology violations, dependency cycles). Warnings are informational (tool overlap, skill conflicts, role coherence).
+
+### GSD Workflow Templates
+
+Two built-in templates for GSD workflows:
+
+| Template | Members | Pattern | Use Case |
+|----------|---------|---------|----------|
+| Research Team | 5 (1 synthesizer + 4 researchers) | leader-worker | Parallel ecosystem research |
+| Debugging Team | 4 (1 coordinator + 3 investigators) | leader-worker | Adversarial debugging |
+
+```typescript
+import { generateGsdResearchTeam, generateGsdDebuggingTeam } from 'gsd-skill-creator';
+
+const research = generateGsdResearchTeam();
+const debugging = generateGsdDebuggingTeam();
+```
+
+See [GSD Teams Guide](docs/GSD-TEAMS.md) for detailed workflow analysis and [Skills vs Agents vs Teams](docs/COMPARISON.md) for choosing the right abstraction.
+
+---
+
 ## Configuration
 
 ### Retention Settings
@@ -681,6 +833,14 @@ Pattern retention is bounded to prevent unbounded growth:
 | **Agent suggestion** | 5+ co-activations | Minimum skill pair activations |
 | **Stability requirement** | 7+ days | Minimum pattern persistence |
 | **Refinement eligibility** | 3+ corrections | Minimum feedback count |
+
+### Validation Thresholds (v1.1+)
+
+| Threshold | Default | Range | Description |
+|-----------|---------|-------|-------------|
+| **Conflict threshold** | 0.85 | 0.5-0.95 | Semantic similarity for conflict detection |
+| **Activation threshold** | 0.75 | 0.5-0.95 | Confidence level for activation prediction |
+| **Too-close-to-call** | <2% margin | - | Flags skills that are borderline competitors |
 
 ### Cluster Constraints
 
@@ -706,7 +866,7 @@ Pattern retention is bounded to prevent unbounded growth:
 ### Running Tests
 
 ```bash
-# Run all tests (202 tests)
+# Run all tests (1000+ tests)
 npm test
 
 # Run specific test file
@@ -784,6 +944,46 @@ src/
 │   ├── cluster-detector.ts       # Detect clusters
 │   ├── agent-generator.ts        # Generate agents
 │   └── agent-suggestion-manager.ts # Manage suggestions
+│
+├── embeddings/        # Local embedding infrastructure (v1.1)
+│   ├── embedding-service.ts    # HuggingFace transformers
+│   ├── embedding-cache.ts      # Content-hash caching
+│   ├── cosine-similarity.ts    # Similarity calculation
+│   └── heuristic-fallback.ts   # Graceful degradation
+│
+├── conflicts/         # Conflict detection (v1.1)
+│   ├── conflict-detector.ts    # Pairwise similarity
+│   ├── conflict-formatter.ts   # CLI output formatting
+│   └── rewrite-suggester.ts    # Conflict resolution hints
+│
+├── activation/        # Activation scoring (v1.1)
+│   ├── activation-scorer.ts    # Heuristic scoring (0-100)
+│   ├── activation-suggester.ts # Improvement suggestions
+│   └── llm-activation-analyzer.ts # Optional LLM analysis
+│
+├── testing/           # Test infrastructure (v1.2)
+│   ├── test-store.ts          # Test case JSON storage
+│   ├── test-runner.ts         # Test execution engine
+│   ├── test-generator.ts      # Auto-generation orchestrator
+│   └── result-formatter.ts    # Terminal/JSON output
+│
+├── simulation/        # Activation simulation (v1.2)
+│   ├── activation-simulator.ts # Single query simulation
+│   ├── batch-simulator.ts      # Batch processing with progress
+│   └── challenger-detector.ts  # Competition analysis
+│
+├── calibration/       # Threshold tuning (v1.2)
+│   ├── calibration-store.ts   # Event collection (JSONL)
+│   ├── threshold-optimizer.ts # F1 score optimization
+│   ├── threshold-history.ts   # Rollback support
+│   └── benchmark-reporter.ts  # MCC correlation metrics
+│
+├── teams/             # Agent team management (v1.4)
+│   ├── team-store.ts          # Team config CRUD
+│   ├── team-validator.ts      # Full validation pipeline
+│   ├── team-scaffold.ts       # Agent file generation
+│   ├── create-team-workflow.ts # Interactive/non-interactive creation
+│   └── gsd-templates.ts       # GSD research and debugging templates
 │
 ├── cli.ts             # CLI entry point
 └── index.ts           # Module exports
@@ -884,6 +1084,69 @@ src/
 | AGENT-02 | System suggests agent creation for stable skill clusters | ✓ |
 | AGENT-03 | Generated agents integrate with `.claude/agents/` format | ✓ |
 
+### v1.4 Agent Teams Requirements (37 total)
+
+#### Team Schemas (SCHEMA-01 to SCHEMA-08)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| SCHEMA-01 | TeamConfig type with name, description, leadAgentId, members | ✓ |
+| SCHEMA-02 | TeamMember type with agentId, name, agentType, model, backend | ✓ |
+| SCHEMA-03 | TeamTask type with id, subject, status, owner, dependencies | ✓ |
+| SCHEMA-04 | TeamTopology union: leader-worker, pipeline, swarm, custom | ✓ |
+| SCHEMA-05 | TeamValidationResult with valid, errors, warnings, data | ✓ |
+| SCHEMA-06 | Zod schemas for runtime validation of all team types | ✓ |
+| SCHEMA-07 | InboxMessage type for inter-agent communication | ✓ |
+| SCHEMA-08 | StructuredMessageType union with string for forward compatibility | ✓ |
+
+#### Team Scaffolding (SCAFFOLD-01 to SCAFFOLD-06)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| SCAFFOLD-01 | TeamStore provides CRUD for team configs in .claude/teams/ | ✓ |
+| SCAFFOLD-02 | writeTeamAgentFiles generates agent .md files for each member | ✓ |
+| SCAFFOLD-03 | Interactive create-team workflow with pattern selection | ✓ |
+| SCAFFOLD-04 | Non-interactive team creation for scripted usage | ✓ |
+| SCAFFOLD-05 | Leader content uses coordinator tools, workers use standard tools | ✓ |
+| SCAFFOLD-06 | All team modules exported via barrel files | ✓ |
+
+#### Team Validation (VALID-01 to VALID-07)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| VALID-01 | Schema validation via Zod with descriptive error messages | ✓ |
+| VALID-02 | Topology rules: leader-worker requires exactly one leader | ✓ |
+| VALID-03 | Tool overlap detection across team members (write tools only) | ✓ |
+| VALID-04 | Skill conflict detection across team members | ✓ |
+| VALID-05 | Role coherence validation (description matches role) | ✓ |
+| VALID-06 | Dependency cycle detection in team tasks (Kahn's algorithm) | ✓ |
+| VALID-07 | Full validation pipeline combining all checks | ✓ |
+
+#### Team CLI Commands (CLI-01 to CLI-06)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| CLI-01 | team create command with interactive and non-interactive modes | ✓ |
+| CLI-02 | team list command with scope filtering and output formats | ✓ |
+| CLI-03 | team validate command with single-team and batch modes | ✓ |
+| CLI-04 | team spawn command to check agent resolution readiness | ✓ |
+| CLI-05 | team status command with config display and validation summary | ✓ |
+| CLI-06 | team/tm namespace dispatch with help text | ✓ |
+
+#### GSD Workflow Templates (GSD-01 to GSD-04)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| GSD-01 | Research team template: 1 synthesizer + 4 specialist researchers | ✓ |
+| GSD-02 | Debugging team template: 1 coordinator + 3 investigators | ✓ |
+| GSD-03 | Template generators return TeamConfig + sample tasks | ✓ |
+| GSD-04 | GSD teams conversion guide (teams vs subagents decision framework) | ✓ |
+
+#### Documentation (DOCS-01 to DOCS-06)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| DOCS-01 | CLI reference updated with all team commands | ✓ |
+| DOCS-02 | API reference updated with teams module | ✓ |
+| DOCS-03 | Architecture docs updated with teams layer | ✓ |
+| DOCS-04 | Tutorial: end-to-end team creation walkthrough | ✓ |
+| DOCS-05 | README updated with v1.4 Agent Teams | ✓ |
+| DOCS-06 | Skills vs Agents vs Teams comparison guide | ✓ |
+
 ---
 
 ## License
@@ -897,4 +1160,4 @@ MIT
 3. Make changes with tests
 4. Submit a pull request
 
-All contributions should include tests and pass the existing test suite (202 tests).
+All contributions should include tests and pass the existing test suite (1000+ tests).

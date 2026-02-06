@@ -41,6 +41,13 @@ export const KNOWN_TOOLS = [
   'MultiEdit',
   'AskUserQuestion',
   'MCPSearch',
+  // Team coordination tools
+  'TeammateTool',
+  'SendMessage',
+  'TaskCreate',
+  'TaskList',
+  'TaskGet',
+  'TaskUpdate',
 ] as const;
 
 /** Type for known tool names */

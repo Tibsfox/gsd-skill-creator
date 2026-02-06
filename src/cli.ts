@@ -15,6 +15,9 @@ import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { budgetCommand } from './cli/commands/budget.js';
 import { resolveCommand } from './cli/commands/resolve.js';
 import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
+import { testCommand } from './cli/commands/test.js';
+import { simulateCommand, simulateHelp } from './cli/commands/simulate.js';
+import { calibrateCommand, calibrateHelp } from './cli/commands/calibrate.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
@@ -159,6 +162,46 @@ async function main() {
       if (exitCode !== 0) {
         process.exit(exitCode);
       }
+      break;
+    }
+
+    case 'test':
+    case 't': {
+      const subArgs = args.slice(1);
+      const exitCode = await testCommand(subArgs);
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'simulate':
+    case 'sim': {
+      // Handle help flag specially
+      if (args.includes('--help') || args.includes('-h')) {
+        console.log(simulateHelp());
+        break;
+      }
+
+      const scope = parseScope(args);
+      const verbose = args.includes('--verbose') || args.includes('-v');
+      const json = args.includes('--json');
+
+      const thresholdArg = args.find(a => a.startsWith('--threshold='));
+      const threshold = thresholdArg ? parseFloat(thresholdArg.split('=')[1]) : undefined;
+
+      const batchArg = args.find(a => a.startsWith('--batch='));
+      const batch = batchArg?.split('=')[1];
+
+      // Filter out options and command name to get the prompt
+      const promptArgs = args.filter(a =>
+        !a.startsWith('--') &&
+        !a.startsWith('-') &&
+        a !== 'simulate' &&
+        a !== 'sim'
+      );
+
+      await simulateCommand(promptArgs, { scope, verbose, threshold, json, batch });
       break;
     }
 
@@ -883,6 +926,87 @@ async function main() {
       break;
     }
 
+    case 'calibrate':
+    case 'cal': {
+      // Handle help flag
+      if (args.includes('--help') || args.includes('-h')) {
+        console.log(calibrateHelp());
+        break;
+      }
+      const exitCode = await calibrateCommand(args.slice(1));
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'benchmark':
+    case 'bench': {
+      // Handle help flag
+      if (args.includes('--help') || args.includes('-h')) {
+        console.log(calibrateHelp());
+        break;
+      }
+      // Route to calibrate command which handles benchmark subcommand
+      const exitCode = await calibrateCommand(['benchmark', ...args.slice(1)]);
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'team':
+    case 'tm': {
+      const subcommand = args[1];
+      const subArgs = args.slice(2);
+
+      switch (subcommand) {
+        case 'create':
+        case 'c': {
+          const { teamCreateCommand } = await import('./cli/commands/team-create.js');
+          const exitCode = await teamCreateCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        case 'list':
+        case 'l': {
+          const { teamListCommand } = await import('./cli/commands/team-list.js');
+          const exitCode = await teamListCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        case 'validate':
+        case 'v': {
+          const { teamValidateCommand } = await import('./cli/commands/team-validate.js');
+          const exitCode = await teamValidateCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        case 'spawn':
+        case 'sp': {
+          const { teamSpawnCommand } = await import('./cli/commands/team-spawn.js');
+          const exitCode = await teamSpawnCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        case 'status':
+        case 's': {
+          const { teamStatusCommand } = await import('./cli/commands/team-status.js');
+          const exitCode = await teamStatusCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        default:
+          showTeamHelp();
+      }
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -930,6 +1054,35 @@ async function processAction(
   }
 }
 
+function showTeamHelp(): void {
+  console.log(`
+skill-creator team - Manage agent teams
+
+Usage:
+  skill-creator team <command> [options]
+  skill-creator tm <command> [options]
+
+Commands:
+  create, c     Create a new team (interactive wizard or flags)
+  list, l       List all teams with member counts
+  validate, v   Validate team config(s) with detailed report
+  spawn, sp     Check team readiness (agent resolution)
+  status, s     Show team details and validation summary
+
+Examples:
+  skill-creator team create                    Interactive team creation
+  skill-creator tm c --pattern=leader-worker --name=research
+  skill-creator team list                      List all teams
+  skill-creator tm l --scope=project           List project teams only
+  skill-creator team validate my-team          Validate single team
+  skill-creator tm v --all                     Validate all teams
+  skill-creator team spawn my-team             Check readiness
+  skill-creator tm s my-team                   Show team details
+
+Use 'skill-creator team <command> --help' for command-specific help.
+`);
+}
+
 function showHelp() {
   console.log(`
 skill-creator - Manage Claude Code skills
@@ -949,6 +1102,8 @@ Commands:
   migrate, mg       Migrate legacy flat-file skills to subdirectory format
   migrate-agent, ma Migrate agents with legacy tools format
   sync-reserved     Show/update reserved skill names list
+  test, t           Manage skill test cases
+  simulate, sim     Predict which skill would activate for a prompt
   budget, bg        Show character budget usage across all skills
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
@@ -959,7 +1114,10 @@ Commands:
   history, hist     View skill version history
   rollback, rb      Rollback skill to previous version
   agents, ag        Manage agent suggestions from skill clusters
+  team, tm          Manage agent teams (create, list, validate, spawn, status)
   reload-embeddings, re  Reload embedding model (retry after fallback)
+  calibrate, cal    Optimize activation threshold from calibration data
+  benchmark, bench  Measure simulator accuracy vs real activation
   help, -h          Show this help message
 
 Scope Options:
@@ -984,6 +1142,16 @@ Scope Options:
     skill-creator list --scope=user   # Show only user-level skills
     skill-creator delete my-skill -p  # Delete project-level version
     skill-creator resolve my-skill    # Show which version is active
+
+Team Management:
+  The 'team' command manages agent teams -- multi-agent configurations
+  for coordinated work. Teams use pattern templates (leader-worker,
+  pipeline, swarm) and validate member resolution, tool overlap,
+  and role coherence.
+
+  Run 'team create' for an interactive wizard, or use flags for
+  scripted team creation. Run 'team validate --all' to check all
+  teams at once.
 
 Pattern Detection:
   The suggest command analyzes your Claude Code usage patterns and
@@ -1035,6 +1203,42 @@ Agent Composition:
   Workarounds: use project-level agents, the /agents UI command, or
   pass agents via --agents CLI flag when starting Claude Code.
 
+Test Management:
+  The 'test' command manages test cases for skill activation testing.
+  Test cases define expected behavior: should the skill activate for
+  a given prompt?
+
+  Subcommands:
+    test add <skill>       Add a test case (interactive or flags)
+    test list <skill>      List test cases for a skill
+    test edit <skill> <id> Edit an existing test case
+    test delete <skill> <id> Delete a test case
+
+  Examples:
+    skill-creator test add my-skill
+    skill-creator test add my-skill --prompt="commit my changes" --expected=positive
+    skill-creator test list my-skill
+    skill-creator test list my-skill --expected=negative
+    skill-creator test delete my-skill abc123 --force
+
+Activation Simulation:
+  The 'simulate' command predicts which skill would activate for a given
+  prompt using semantic similarity. Use it to validate skill descriptions
+  and identify potential conflicts.
+
+  Options:
+    --scope             Scope: user (default) or project
+    --verbose, -v       Show all predictions and trace details
+    --batch <file>      Test multiple prompts from file (one per line)
+    --threshold <n>     Activation threshold (default: 0.75)
+    --json              Output results as JSON
+
+  Examples:
+    skill-creator simulate "commit my changes"
+    skill-creator sim "deploy to production" --verbose
+    skill-creator simulate --batch prompts.txt --json
+    skill-creator simulate "test" --scope project --threshold 0.8
+
 Budget Management:
   Claude Code limits skill content to ~15,000 characters per skill and
   ~15,500 characters total. Run 'budget' to see current usage and identify
@@ -1077,6 +1281,12 @@ Examples:
   skill-creator migrate-agent       # Check all agents for legacy format
   skill-creator migrate-agent my-agent  # Migrate specific agent
   skill-creator ma --dry-run        # Preview changes without writing
+  skill-creator team create         # Interactive team creation wizard
+  skill-creator tm c --pattern=leader-worker --name=my-team
+  skill-creator team list           # List all teams
+  skill-creator team validate --all # Validate all teams
+  skill-creator team spawn my-team  # Check spawn readiness
+  skill-creator tm s my-team        # Show team details
 
 Skill Storage:
   User-level skills: ~/.claude/skills/ (shared across projects)

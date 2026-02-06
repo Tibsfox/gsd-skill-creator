@@ -2,7 +2,84 @@
 
 All notable changes to gsd-skill-creator are documented in this file.
 
-## v1.0.0 - 2026-01-31
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+## [Unreleased]
+
+(No unreleased changes)
+
+---
+
+## [1.2.0] - 2026-02-05
+
+### Added
+
+- Test case CRUD: `test add`, `test list`, `test edit`, `test delete` commands
+- Test execution via `test run` command with accuracy and false positive rate metrics
+- Auto-generated test cases via `test generate` command
+  - Heuristic generation using NLP phrase extraction
+  - Cross-skill negative tests from competing skills
+  - Optional LLM-enhanced generation with API key
+- Activation simulation via `simulate` command
+  - Confidence levels: high (85%+), medium (70-84%), low (50-69%), none (<50%)
+  - Challenger detection with too-close-to-call warnings
+  - Batch processing with progress bar (`--batch` flag)
+- Calibration data collection via `calibrate` command
+  - F1 score optimization via grid search
+  - ThresholdHistory with rollback support
+- Benchmark reporting via `benchmark` command
+  - MCC (Matthews Correlation Coefficient) correlation metric
+  - Recommendation thresholds for FPR, recall, and F1
+- ResultStore for historical test result tracking
+- TestStore with Zod validation and atomic writes
+
+### Changed
+
+- Default activation threshold from 0.50 to 0.75 (conservative before calibration)
+- Too-close-to-call margin set to <2%
+
+### Fixed
+
+- Cross-device link error in atomic writes (temp file now in same directory)
+
+### Technical Details
+
+- Minimum 75 samples required for calibration statistical significance
+- Recommendation thresholds: FPR > 10%, recall < 70%, F1 < 70%, data < 100
+- Global calibration storage at ~/.gsd-skill/calibration/events.jsonl
+- Outcome types: continued/corrected/unknown for behavior inference
+
+---
+
+## [1.1.0] - 2026-02-05
+
+### Added
+
+- Semantic conflict detection between skills with configurable threshold (default 0.85)
+- Activation likelihood scoring (0-100) with 5-factor heuristic analysis
+- LLM-based deep activation analysis via `--llm` flag
+- Local embeddings via @huggingface/transformers for zero API cost
+- Embedding cache with content-hash invalidation
+- Cache invalidation when embedding model version changes
+- `detect-conflicts` CLI command with `--threshold` and `--quiet` options
+- `score-activation` CLI command with `--all`, `--verbose`, and `--llm` options
+- `reload-embeddings` CLI command for model retry
+
+### Changed
+
+- Graceful degradation to heuristics when embedding model unavailable
+
+### Technical Details
+
+- Cosine similarity calculation for semantic matching
+- 5-factor scoring weights: specificity (0.35), pattern (0.25), length (0.20), verb (0.10), penalty (0.10)
+- Activation labels: Reliable (90+), Likely (70-89), Uncertain (50-69), Unlikely (<50)
+- Dynamic import for SDK dependencies to reduce bundle size
+- Never-throw API pattern for graceful degradation
+
+---
+
+## [1.0.0] - 2026-01-31
 
 ### Changed
 
@@ -44,7 +121,7 @@ See [docs/EXTENSIONS.md](docs/EXTENSIONS.md) for detailed migration guide.
 
 ---
 
-## v0.1.0 - 2026-01-30
+## [0.1.0] - 2026-01-30
 
 ### Added
 
@@ -54,3 +131,11 @@ See [docs/EXTENSIONS.md](docs/EXTENSIONS.md) for detailed migration guide.
 - Token budget management
 - Feedback-driven skill refinement
 - Agent composition from skill clusters
+
+---
+
+[Unreleased]: https://github.com/user/gsd-skill-creator/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/user/gsd-skill-creator/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/user/gsd-skill-creator/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/user/gsd-skill-creator/compare/v0.1.0...v1.0.0
+[0.1.0]: https://github.com/user/gsd-skill-creator/releases/tag/v0.1.0
