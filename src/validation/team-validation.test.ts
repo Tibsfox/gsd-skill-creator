@@ -5,7 +5,9 @@ import {
   TeamTaskSchema,
   InboxMessageSchema,
   validateTeamConfig,
+  validateTopologyRules,
 } from './team-validation.js';
+import type { TeamConfig } from '../types/team.js';
 
 // ============================================================================
 // TeamMemberSchema Tests
@@ -494,5 +496,219 @@ describe('validateTeamConfig', () => {
     expect(result.valid).toBe(true);
     expect(result.data).toBeDefined();
     expect((result.data as Record<string, unknown>).topology).toBe('leader-worker');
+  });
+});
+
+// ============================================================================
+// validateTeamConfig - Semantic Validation (VALID-01 Enhancements)
+// ============================================================================
+
+describe('validateTeamConfig - semantic validation', () => {
+  const baseConfig: TeamConfig = {
+    name: 'test-team',
+    description: 'Test team',
+    leadAgentId: 'test-lead',
+    createdAt: new Date().toISOString(),
+    members: [
+      { agentId: 'test-lead', name: 'Lead', agentType: 'coordinator' },
+      { agentId: 'test-worker-1', name: 'Worker 1', agentType: 'worker' },
+    ],
+  };
+
+  it('should return error when leadAgentId does not match any member agentId', () => {
+    const config = {
+      ...baseConfig,
+      leadAgentId: 'nonexistent-agent',
+    };
+    const result = validateTeamConfig(config);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('leadAgentId'))).toBe(true);
+    expect(result.errors.some((e) => e.includes('nonexistent-agent'))).toBe(true);
+  });
+
+  it('should return error when duplicate agentId values exist in members', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      members: [
+        { agentId: 'test-lead', name: 'Lead', agentType: 'coordinator' },
+        { agentId: 'test-lead', name: 'Lead Copy', agentType: 'worker' },
+        { agentId: 'test-worker-1', name: 'Worker 1', agentType: 'worker' },
+      ],
+    };
+    const result = validateTeamConfig(config);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('Duplicate'))).toBe(true);
+    expect(result.errors.some((e) => e.includes('test-lead'))).toBe(true);
+  });
+
+  it('should return valid: true when leadAgentId matches and all agentIds are unique', () => {
+    const result = validateTeamConfig(baseConfig);
+    expect(result.valid).toBe(true);
+    expect(result.errors).toEqual([]);
+    expect(result.data).toBeDefined();
+    expect(result.data?.name).toBe('test-team');
+  });
+
+  it('should detect both leadAgentId mismatch and duplicate agentIds simultaneously', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      leadAgentId: 'ghost-agent',
+      members: [
+        { agentId: 'dup-id', name: 'Agent A', agentType: 'worker' },
+        { agentId: 'dup-id', name: 'Agent B', agentType: 'worker' },
+      ],
+    };
+    const result = validateTeamConfig(config);
+    expect(result.valid).toBe(false);
+    expect(result.errors.length).toBeGreaterThanOrEqual(2);
+    expect(result.errors.some((e) => e.includes('leadAgentId'))).toBe(true);
+    expect(result.errors.some((e) => e.includes('Duplicate'))).toBe(true);
+  });
+});
+
+// ============================================================================
+// validateTopologyRules Tests (VALID-07)
+// ============================================================================
+
+describe('validateTopologyRules', () => {
+  const baseConfig: TeamConfig = {
+    name: 'test-team',
+    description: 'Test team',
+    leadAgentId: 'test-lead',
+    createdAt: new Date().toISOString(),
+    members: [
+      { agentId: 'test-lead', name: 'Lead', agentType: 'coordinator' },
+      { agentId: 'test-worker-1', name: 'Worker 1', agentType: 'worker' },
+    ],
+  };
+
+  // --- leader-worker topology ---
+
+  it('should return error when leader-worker topology has zero leaders', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'leader-worker',
+      members: [
+        { agentId: 'worker-1', name: 'Worker 1', agentType: 'worker' },
+        { agentId: 'worker-2', name: 'Worker 2', agentType: 'worker' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.errors.some((e) => e.includes('leader'))).toBe(true);
+  });
+
+  it('should return error when leader-worker topology has multiple leaders', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'leader-worker',
+      members: [
+        { agentId: 'lead-1', name: 'Lead 1', agentType: 'coordinator' },
+        { agentId: 'lead-2', name: 'Lead 2', agentType: 'orchestrator' },
+        { agentId: 'worker-1', name: 'Worker 1', agentType: 'worker' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.errors.some((e) => e.includes('exactly 1 leader'))).toBe(true);
+  });
+
+  it('should return no error when leader-worker topology has exactly 1 coordinator', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'leader-worker',
+      members: [
+        { agentId: 'test-lead', name: 'Lead', agentType: 'coordinator' },
+        { agentId: 'worker-1', name: 'Worker 1', agentType: 'worker' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors).toEqual([]);
+  });
+
+  // --- pipeline topology ---
+
+  it('should return error when pipeline topology has zero orchestrators', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'pipeline',
+      members: [
+        { agentId: 'worker-1', name: 'Worker 1', agentType: 'worker' },
+        { agentId: 'worker-2', name: 'Worker 2', agentType: 'worker' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.errors.some((e) => e.includes('orchestrator'))).toBe(true);
+  });
+
+  it('should return no error when pipeline topology has exactly 1 orchestrator', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'pipeline',
+      members: [
+        { agentId: 'test-lead', name: 'Lead', agentType: 'orchestrator' },
+        { agentId: 'worker-1', name: 'Worker 1', agentType: 'worker' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors).toEqual([]);
+  });
+
+  // --- swarm topology ---
+
+  it('should return error when swarm topology has zero coordinators', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'swarm',
+      members: [
+        { agentId: 'worker-1', name: 'Worker 1', agentType: 'worker' },
+        { agentId: 'worker-2', name: 'Worker 2', agentType: 'worker' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.errors.some((e) => e.includes('coordinator'))).toBe(true);
+  });
+
+  it('should return no error when swarm topology has exactly 1 coordinator', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'swarm',
+      members: [
+        { agentId: 'test-lead', name: 'Lead', agentType: 'coordinator' },
+        { agentId: 'worker-1', name: 'Worker 1', agentType: 'worker' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors).toEqual([]);
+  });
+
+  // --- absent topology ---
+
+  it('should return no errors and no warnings when topology field is absent', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+    };
+    // Ensure topology is not set
+    delete (config as Record<string, unknown>).topology;
+    const result = validateTopologyRules(config);
+    expect(result.errors).toEqual([]);
+    expect(result.warnings).toEqual([]);
+  });
+
+  // --- custom topology ---
+
+  it('should return no errors for custom topology (no rules to enforce)', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'custom',
+      members: [
+        { agentId: 'agent-1', name: 'Agent 1', agentType: 'specialist' },
+        { agentId: 'agent-2', name: 'Agent 2', agentType: 'specialist' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors).toEqual([]);
   });
 });
