@@ -1706,6 +1706,401 @@ Future embedding operations will use the model.
 
 ---
 
+## Teams: Multi-Agent Coordination
+
+Commands for creating, managing, and validating agent teams. Teams coordinate multiple Claude Code agents working together on complex tasks.
+
+### team create
+
+Create a new team from a pattern template.
+
+**Synopsis:**
+
+```
+skill-creator team create [options]
+```
+
+**Description:**
+
+Interactive wizard or flag-based team creation from pattern templates. When `--name` and `--pattern` are both provided, runs in non-interactive mode for scripted usage. Otherwise, launches an interactive wizard that prompts for team name, pattern, description, and member count.
+
+Available patterns:
+- **leader-worker**: One leader coordinates multiple workers (default)
+- **pipeline**: Sequential processing stages with an orchestrator
+- **swarm**: Peer agents with a coordinator for parallel work
+
+**Options:**
+
+| Option | Description |
+|--------|-------------|
+| `--pattern=<pattern>` | Team pattern: `leader-worker`, `pipeline`, `swarm` |
+| `--name=<name>` | Team name (lowercase, hyphens) |
+| `--members=<n>` | Number of workers (default: 3) |
+| `--scope=<scope>` | Storage scope: `project` (default) or `user` |
+| `--description=<text>` | Team description |
+| `--help, -h` | Show help |
+
+**Exit Codes:**
+
+| Code | Meaning |
+|------|---------|
+| 0 | Team created successfully |
+| 1 | Error or user cancelled |
+
+**Examples:**
+
+```bash
+# Interactive wizard
+skill-creator team create
+
+# Non-interactive with flags
+skill-creator team create --pattern=leader-worker --name=my-team
+
+# Pipeline pattern with 4 members
+skill-creator team create --pattern=pipeline --name=data-flow --members=4
+
+# Create in user scope
+skill-creator team create --pattern=swarm --name=research --scope=user
+
+# Short form
+skill-creator tm c
+```
+
+---
+
+### team list
+
+List all teams with member counts.
+
+**Synopsis:**
+
+```
+skill-creator team list [options]
+```
+
+**Description:**
+
+Discovers teams from both project and user scopes using the team store. Shows team name, topology pattern, member count, and scope in a styled table. Supports filtering by scope and three output modes: text (styled table), quiet (CSV-like), and JSON.
+
+**Options:**
+
+| Option | Description |
+|--------|-------------|
+| `--scope=<scope>` | Filter by scope: `project`, `user` (default: show both) |
+| `--quiet, -q` | Machine-readable CSV-like output (`name,topology,memberCount,scope`) |
+| `--json` | JSON output for scripting |
+| `--help, -h` | Show help |
+
+**Examples:**
+
+```bash
+# List all teams from both scopes
+skill-creator team list
+
+# Filter to project-level teams only
+skill-creator team list --scope=project
+
+# JSON output for scripting
+skill-creator team list --json
+
+# Quiet mode for piping
+skill-creator team list --quiet
+
+# Short forms
+skill-creator tm l
+skill-creator tm ls --json
+```
+
+**Sample Output:**
+
+```
+Teams:
+
+  Name                  Pattern          Members  Scope
+  ────────────────────  ───────────────  ───────  ───────
+  research-team         leader-worker          4  project
+  data-pipeline         pipeline               5  project
+  code-review           swarm                  3  user
+
+Found 3 team(s).
+```
+
+---
+
+### team validate
+
+Validate team configuration(s).
+
+**Synopsis:**
+
+```
+skill-creator team validate [<name>] [options]
+```
+
+**Description:**
+
+Runs the full validation pipeline on team configurations:
+
+1. **Schema validation** - Correct structure with required fields
+2. **Member resolution** - All member agent IDs are valid
+3. **Topology rules** - Pattern-specific constraints (leader count, pipeline ordering)
+4. **Tool overlap detection** - Identifies write-tool conflicts between members
+5. **Skill conflict detection** - Finds semantically overlapping skill assignments
+6. **Role coherence** - Validates member roles are consistent with topology
+
+Errors are blocking (schema, leadAgentId, duplicates, topology, cycles). Warnings are informational (tool overlap, skill conflicts, role coherence).
+
+**Options:**
+
+| Option | Description |
+|--------|-------------|
+| `--all, -a` | Validate all discovered teams |
+| `--scope=<scope>` | Storage scope: `project` (default) or `user` |
+| `--quiet, -q` | Minimal output: `name,pass` or `name,fail` per team |
+| `--json` | Full validation result as JSON |
+| `--help, -h` | Show help |
+
+**Exit Codes:**
+
+| Code | Meaning |
+|------|---------|
+| 0 | All teams valid (or only warnings) |
+| 1 | One or more teams have errors |
+
+**Examples:**
+
+```bash
+# Validate a specific team
+skill-creator team validate my-team
+
+# Validate all teams
+skill-creator team validate --all
+
+# JSON output for CI
+skill-creator team validate my-team --json
+
+# Quick pass/fail check for all teams
+skill-creator team validate --all --quiet
+
+# Short forms
+skill-creator tm v my-team
+skill-creator tm v -a
+skill-creator tm v -a -q
+```
+
+**Sample Output (text):**
+
+```
+✓ my-team PASS
+
+✗ broken-team FAIL
+  ✗ ERROR: leadAgentId 'missing-lead' does not match any member agentId
+  ℹ Did you mean: main-lead, team-lead?
+  ⚠ WARN: Tool overlap: members 'worker-a' and 'worker-b' share write tools: Edit, Write
+
+Validation Summary
+──────────────────────────────────────────────────
+  Name                      Status   Errors   Warnings
+  ─────────────────────────  ────────  ────────  ────────
+  my-team                   PASS     0        0
+  broken-team               FAIL     1        1
+
+  1/2 teams passed validation
+```
+
+**Sample Output (JSON):**
+
+```json
+{
+  "name": "my-team",
+  "valid": true,
+  "errors": [],
+  "warnings": [],
+  "memberResolution": [
+    { "agentId": "lead-agent", "status": "found", "path": ".claude/agents/lead-agent.md" }
+  ]
+}
+```
+
+---
+
+### team spawn
+
+Check team readiness by validating agent resolution.
+
+**Synopsis:**
+
+```
+skill-creator team spawn <name> [options]
+```
+
+**Description:**
+
+Validates that all member agent files exist and are resolvable on disk. For each member, checks whether a corresponding `.md` agent file exists in `.claude/agents/`. When agents are missing, displays fuzzy name suggestions (Levenshtein distance <= 2 or 4+ character prefix match) and offers to generate the missing agent files interactively.
+
+Interactive fix is only offered in text mode (not quiet or JSON).
+
+**Options:**
+
+| Option | Description |
+|--------|-------------|
+| `--scope=<scope>` | Scope to search: `project`, `user`, or both (default) |
+| `--quiet, -q` | Machine-readable output (`name,ready` or `name,not-ready`) |
+| `--json` | JSON output with per-member resolution details |
+| `--help, -h` | Show help |
+
+**Exit Codes:**
+
+| Code | Meaning |
+|------|---------|
+| 0 | All member agents resolved (team is ready) |
+| 1 | One or more agents missing (team is not ready) |
+
+**Examples:**
+
+```bash
+# Check if team is ready to spawn
+skill-creator team spawn my-team
+
+# JSON output for scripting
+skill-creator team spawn my-team --json
+
+# Quick readiness check
+skill-creator team spawn my-team --quiet
+
+# Filter to project scope only
+skill-creator team spawn my-team --scope=project
+
+# Short form
+skill-creator tm sp my-team
+```
+
+**Sample Output (ready):**
+
+```
+✓ Team 'my-team' is ready. 3 members resolved: lead-agent, worker-a, worker-b
+```
+
+**Sample Output (not ready):**
+
+```
+2 agent(s) resolved:
+  + lead-agent .claude/agents/lead-agent.md
+  + worker-a .claude/agents/worker-a.md
+
+1 agent(s) not found:
+  x Agent 'workerr-b' not found.
+    Searched: .claude/agents/workerr-b.md, ~/.claude/agents/workerr-b.md
+    Did you mean: worker-b?
+
+? Generate missing agent file for 'workerr-b'? (Y/n)
+```
+
+**Sample Output (JSON):**
+
+```json
+{
+  "name": "my-team",
+  "ready": false,
+  "members": [
+    { "agentId": "lead-agent", "status": "found", "path": ".claude/agents/lead-agent.md" },
+    { "agentId": "worker-a", "status": "found", "path": ".claude/agents/worker-a.md" },
+    { "agentId": "workerr-b", "status": "missing", "suggestions": ["worker-b"] }
+  ]
+}
+```
+
+---
+
+### team status
+
+Show team details and validation summary.
+
+**Synopsis:**
+
+```
+skill-creator team status <name> [options]
+```
+
+**Description:**
+
+Displays full team configuration details including name, topology pattern, description, lead agent, creation date, a member table (Agent ID, Name, Type, Model), and a compact validation summary with error and warning counts.
+
+This command is informational and always returns exit code 0 (except when the team is not found).
+
+**Options:**
+
+| Option | Description |
+|--------|-------------|
+| `--scope=<scope>` | Scope to search: `project`, `user`, or both (default) |
+| `--quiet, -q` | Machine-readable output (`name,topology,memberCount,valid`) |
+| `--json` | JSON output with full config and validation |
+| `--help, -h` | Show help |
+
+**Examples:**
+
+```bash
+# Show team details
+skill-creator team status my-team
+
+# JSON output for scripting
+skill-creator team status my-team --json
+
+# Quiet mode
+skill-creator team status my-team --quiet
+
+# Short form
+skill-creator tm s my-team
+```
+
+**Sample Output (text):**
+
+```
+  Team: my-team
+  Pattern: leader-worker
+  Description: A team for code review tasks
+  Lead Agent: lead-agent
+  Created: 2026-02-05
+
+  Members (3):
+    Agent ID          Name                Type            Model
+    ────────────────  ──────────────────  ──────────────  ──────────
+    lead-agent        Lead Agent          coordinator     opus
+    worker-a          Worker A            worker          sonnet
+    worker-b          Worker B            worker          sonnet
+
+  Validation: PASS (0 errors, 0 warnings)
+```
+
+**Sample Output (JSON):**
+
+```json
+{
+  "name": "my-team",
+  "topology": "leader-worker",
+  "description": "A team for code review tasks",
+  "leadAgentId": "lead-agent",
+  "members": [
+    { "agentId": "lead-agent", "name": "Lead Agent", "agentType": "coordinator", "model": "opus" },
+    { "agentId": "worker-a", "name": "Worker A", "agentType": "worker", "model": "sonnet" },
+    { "agentId": "worker-b", "name": "Worker B", "agentType": "worker", "model": "sonnet" }
+  ],
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "warnings": []
+  }
+}
+```
+
+**See Also:**
+
+- [API Reference: Teams Module](API.md#teams-module)
+- [GSD Teams Guide](GSD-TEAMS.md)
+- [Team Creation Tutorial](tutorials/team-creation.md)
+
+---
+
 ## Exit Codes
 
 Commands return exit codes for CI/scripting integration:
@@ -1718,6 +2113,8 @@ Commands return exit codes for CI/scripting integration:
 | benchmark | Correlation >= 85% | Correlation < 85% |
 | budget | Success | Error reading skills |
 | migrate-agent | Success or no migration needed | Error during migration |
+| team validate | All teams valid (or only warnings) | One or more teams have errors |
+| team spawn | All member agents resolved | One or more agents missing |
 | (all others) | Success | Error occurred |
 
 ### Threshold Flags for CI
@@ -1749,6 +2146,10 @@ Commands supporting `--json` output for scripting:
 | test run | `--json=compact\|pretty` | Results with metrics |
 | simulate | `--json` | Prediction with confidence |
 | benchmark | `--json` | Report with correlation |
+| team list | `--json` | Team array with topology and scope |
+| team validate | `--json` | Validation result with errors/warnings |
+| team spawn | `--json` | Readiness status with member resolution |
+| team status | `--json` | Full config with validation summary |
 
 ### JSON Schema: detect-conflicts
 
@@ -1824,6 +2225,9 @@ jobs:
 
       - name: Run tests
         run: skill-creator test run --all --min-accuracy=90 --max-false-positive=5
+
+      - name: Validate teams
+        run: skill-creator team validate --all --quiet
 
       - name: Benchmark accuracy
         run: skill-creator benchmark
