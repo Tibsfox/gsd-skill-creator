@@ -100,6 +100,41 @@ Quick reference of all exports organized by functional layer.
 | `listSkillsWorkflow()` | Function | List skills via workflow |
 | `searchSkillsWorkflow()` | Function | Search skills via workflow |
 
+### Teams
+
+| Export | Type | Description |
+|--------|------|-------------|
+| `TeamStore` | Class | CRUD operations for team config files |
+| `getTeamsBasePath()` | Function | Get teams directory for scope |
+| `getAgentsBasePath()` | Function | Get agents directory path |
+| `generateLeaderWorkerTemplate()` | Function | Generate leader/worker team config |
+| `generatePipelineTemplate()` | Function | Generate pipeline team config |
+| `generateSwarmTemplate()` | Function | Generate swarm team config |
+| `generateGsdResearchTeam()` | Function | Generate GSD parallel research team |
+| `generateGsdDebuggingTeam()` | Function | Generate GSD adversarial debugging team |
+| `writeTeamAgentFiles()` | Function | Write agent `.md` files for team members |
+| `generateAgentContent()` | Function | Generate markdown content for an agent file |
+| `teamCreationWizard()` | Function | Interactive/non-interactive team creation |
+| `nonInteractiveCreate()` | Function | Create team from CLI flags |
+| `validateTeamFull()` | Function | Run all validation checks on team config |
+| `validateMemberAgents()` | Function | Check agent files exist for members |
+| `detectTaskCycles()` | Function | Detect circular task dependencies |
+| `detectToolOverlap()` | Function | Detect shared write-capable tools |
+| `detectSkillConflicts()` | Function | Detect cross-member skill conflicts |
+| `detectRoleCoherence()` | Function | Detect near-duplicate role descriptions |
+| `LEADER_TOOLS` | Constant | Tool array for leader/coordinator agents |
+| `WORKER_TOOLS` | Constant | Tool array for leader/worker workers |
+| `PIPELINE_STAGE_TOOLS` | Constant | Tool array for pipeline stage agents |
+| `SWARM_WORKER_TOOLS` | Constant | Tool array for swarm worker agents |
+| `GSD_RESEARCH_AGENT_IDS` | Constant | Agent IDs for GSD research team |
+| `GSD_DEBUG_AGENT_IDS` | Constant | Agent IDs for GSD debugging team |
+| `RESEARCH_DIMENSIONS` | Constant | Research dimension names |
+| `TeamMemberSchema` | Zod Schema | Team member validation |
+| `TeamConfigSchema` | Zod Schema | Team config validation |
+| `TeamTaskSchema` | Zod Schema | Team task validation |
+| `InboxMessageSchema` | Zod Schema | Inbox message validation |
+| `validateTeamConfig()` | Function | Validate team config against schema |
+
 ---
 
 ## Factory Functions
@@ -793,6 +828,39 @@ Key types exported for TypeScript consumers. For complete type definitions, see 
 |------|--------|-------------|
 | `SkillScope` | `types/scope.ts` | `'user' \| 'project'` |
 | `ScopedSkillPath` | `types/scope.ts` | Resolved skill path with scope |
+
+### Team Types
+
+| Type | Source | Description |
+|------|--------|-------------|
+| `TeamConfig` | `types/team.ts` | Top-level team configuration |
+| `TeamMember` | `types/team.ts` | Team member definition |
+| `TeamTask` | `types/team.ts` | Task in a team's work queue |
+| `InboxMessage` | `types/team.ts` | Inter-agent inbox message |
+| `TeamValidationResult` | `types/team.ts` | Schema validation result |
+| `TeamTopology` | `types/team.ts` | `'leader-worker' \| 'pipeline' \| 'swarm' \| 'custom'` |
+| `TeamRole` | `types/team.ts` | `'leader' \| 'worker' \| 'reviewer' \| 'orchestrator' \| 'specialist'` |
+| `TeamTaskStatus` | `types/team.ts` | `'pending' \| 'in_progress' \| 'completed'` |
+| `TeamMemberModel` | `types/team.ts` | `'haiku' \| 'sonnet' \| 'opus'` |
+| `BackendType` | `types/team.ts` | `'in-process' \| 'tmux' \| 'iterm2'` |
+| `StructuredMessageType` | `types/team.ts` | Structured message type (extensible) |
+| `TemplateOptions` | `teams/templates.ts` | Options for template generators |
+| `TemplateResult` | `teams/templates.ts` | Template generation result |
+| `GsdTemplateOptions` | `teams/gsd-templates.ts` | Options for GSD template generators |
+| `TeamScope` | `teams/team-store.ts` | `'user' \| 'project'` team storage scope |
+| `AgentFileResult` | `teams/team-agent-generator.ts` | Agent file generation result |
+| `AgentMemberInput` | `teams/team-agent-generator.ts` | Input for agent content generation |
+| `WizardOptions` | `teams/team-wizard.ts` | Team creation wizard options |
+| `CreatePaths` | `teams/team-wizard.ts` | Injectable paths for testing |
+| `TeamFullValidationResult` | `teams/team-validator.ts` | Full validation orchestrator result |
+| `TeamFullValidationOptions` | `teams/team-validator.ts` | Full validation options |
+| `MemberResolutionResult` | `teams/team-validator.ts` | Agent file resolution result |
+| `CycleDetectionResult` | `teams/team-validator.ts` | Task cycle detection result |
+| `ToolOverlapResult` | `teams/team-validator.ts` | Write-tool overlap result |
+| `SkillConflictResult` | `teams/team-validator.ts` | Cross-member skill conflict result |
+| `SkillConflictEntry` | `teams/team-validator.ts` | Single skill conflict entry |
+| `RoleCoherenceResult` | `teams/team-validator.ts` | Role coherence validation result |
+| `RoleCoherenceWarning` | `teams/team-validator.ts` | Role coherence warning entry |
 
 ### Application Types
 
@@ -2141,11 +2209,560 @@ await listSkillsWorkflow({ verbose: true });
 
 ---
 
+## Teams Module
+
+APIs for creating, storing, validating, and managing agent teams. Teams coordinate multiple Claude Code agents working in parallel using leader-worker, pipeline, or swarm topologies.
+
+### Team Types and Constants
+
+Core types and constant arrays used throughout the teams module.
+
+**Type Aliases:**
+
+| Type | Values | Description |
+|------|--------|-------------|
+| `TeamTopology` | `'leader-worker' \| 'pipeline' \| 'swarm' \| 'custom'` | Team coordination pattern |
+| `TeamRole` | `'leader' \| 'worker' \| 'reviewer' \| 'orchestrator' \| 'specialist'` | Member role classification |
+| `TeamTaskStatus` | `'pending' \| 'in_progress' \| 'completed'` | Task lifecycle status |
+| `TeamMemberModel` | `'haiku' \| 'sonnet' \| 'opus'` | Claude model alias |
+| `BackendType` | `'in-process' \| 'tmux' \| 'iterm2'` | Process backend type |
+| `StructuredMessageType` | Known types + `string` | Inter-agent message type (extensible) |
+
+**Constant Arrays:**
+
+| Constant | Type | Description |
+|----------|------|-------------|
+| `TEAM_TOPOLOGIES` | `readonly string[]` | Valid topology values |
+| `TEAM_ROLES` | `readonly string[]` | Valid role values |
+| `TEAM_TASK_STATUSES` | `readonly string[]` | Valid task status values |
+| `TEAM_MEMBER_MODELS` | `readonly string[]` | Valid model aliases |
+| `BACKEND_TYPES` | `readonly string[]` | Valid backend types |
+| `STRUCTURED_MESSAGE_TYPES` | `readonly string[]` | Known message types |
+
+**Key Interfaces:**
+
+```typescript
+import type { TeamConfig, TeamMember, TeamTask, InboxMessage } from 'gsd-skill-creator';
+
+// TeamConfig: top-level team configuration
+const config: TeamConfig = {
+  name: 'my-team',
+  description: 'Research team for API analysis',
+  leadAgentId: 'my-team-lead',
+  createdAt: new Date().toISOString(),
+  members: [/* TeamMember[] */],
+};
+
+// TeamMember: individual agent in a team
+const member: TeamMember = {
+  agentId: 'my-team-lead',
+  name: 'Lead',
+  agentType: 'coordinator',
+  model: 'sonnet',
+  backendType: 'tmux',
+  prompt: 'Coordinate the research team...',
+};
+
+// TeamTask: work item in the team's queue
+const task: TeamTask = {
+  id: 'task-1',
+  subject: 'Analyze API surface',
+  status: 'pending',
+  owner: 'my-team-worker-1',
+  blockedBy: ['task-0'],
+};
+
+// InboxMessage: inter-agent communication
+const message: InboxMessage = {
+  from: 'my-team-lead',
+  text: 'Please begin task-1',
+  timestamp: new Date().toISOString(),
+  read: false,
+};
+```
+
+### Template Generators
+
+Pure functions that produce valid `TeamConfig` objects with pattern-specific members, tools, and sample tasks. No side effects or I/O.
+
+**Tool Constant Arrays:**
+
+| Constant | Tools Included | Used By |
+|----------|---------------|---------|
+| `LEADER_TOOLS` | Read, Write, Bash, Glob, Grep, TaskCreate, TaskList, TaskGet, TaskUpdate, SendMessage, TeammateTool | Leader/coordinator agents |
+| `WORKER_TOOLS` | Read, Write, Edit, Bash, Glob, Grep, WebFetch, WebSearch, TaskGet, TaskUpdate, SendMessage | Leader/worker workers |
+| `PIPELINE_STAGE_TOOLS` | Read, Write, Edit, Bash, Glob, Grep, TaskGet, TaskUpdate, SendMessage | Pipeline stage agents |
+| `SWARM_WORKER_TOOLS` | Read, Write, Edit, Bash, Glob, Grep, TaskList, TaskGet, TaskUpdate, SendMessage | Swarm worker agents |
+
+**Functions:**
+
+| Function | Parameters | Returns | Description |
+|----------|------------|---------|-------------|
+| `generateLeaderWorkerTemplate` | `opts: TemplateOptions` | `TemplateResult` | 1 coordinator + N workers |
+| `generatePipelineTemplate` | `opts: TemplateOptions` | `TemplateResult` | 1 orchestrator + N sequential stages |
+| `generateSwarmTemplate` | `opts: TemplateOptions` | `TemplateResult` | 1 coordinator + N self-claiming workers |
+
+**TemplateOptions:**
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `name` | `string` | Required | Team name, used as prefix for agent IDs |
+| `description` | `string` | Pattern-specific | Human-readable team description |
+| `workerCount` | `number` | `3` | Number of workers or stages |
+
+**TemplateResult:**
+
+```typescript
+interface TemplateResult {
+  config: TeamConfig;          // Valid config ready for serialization
+  sampleTasks: TeamTask[];     // Placeholder tasks demonstrating the pattern
+  patternInfo: {
+    topology: string;          // e.g., 'leader-worker'
+    description: string;       // Pattern explanation
+    memberSummary: string;     // e.g., '1 lead + 3 workers'
+  };
+}
+```
+
+**Example - Generate a Leader/Worker Team:**
+
+```typescript
+import { generateLeaderWorkerTemplate } from 'gsd-skill-creator';
+
+const result = generateLeaderWorkerTemplate({
+  name: 'code-review',
+  description: 'Parallel code review team',
+  workerCount: 4,
+});
+
+console.log(result.config.name);                // 'code-review'
+console.log(result.config.members.length);       // 5 (1 lead + 4 workers)
+console.log(result.config.leadAgentId);          // 'code-review-lead'
+console.log(result.patternInfo.memberSummary);   // '1 lead + 4 workers'
+console.log(result.sampleTasks.length);          // 2
+```
+
+**Example - Generate a Pipeline Team:**
+
+```typescript
+import { generatePipelineTemplate } from 'gsd-skill-creator';
+
+const result = generatePipelineTemplate({
+  name: 'data-pipeline',
+  workerCount: 3,
+});
+
+// Pipeline tasks have sequential dependencies
+console.log(result.sampleTasks[0].blockedBy);    // undefined (first stage)
+console.log(result.sampleTasks[1].blockedBy);    // ['stage-1']
+console.log(result.sampleTasks[2].blockedBy);    // ['stage-2']
+```
+
+### GSD Templates
+
+Pre-configured team templates for GSD workflows: parallel research and adversarial debugging.
+
+**Functions:**
+
+| Function | Parameters | Returns | Description |
+|----------|------------|---------|-------------|
+| `generateGsdResearchTeam` | `opts?: GsdTemplateOptions` | `TemplateResult` | 1 synthesizer + 4 dimension researchers |
+| `generateGsdDebuggingTeam` | `opts?: GsdTemplateOptions` | `TemplateResult` | 1 coordinator + 3 adversarial debuggers |
+
+**GsdTemplateOptions:**
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `name` | `string` | `'gsd-research'` or `'gsd-debug'` | Team name override |
+| `description` | `string` | Pattern-specific | Team description override |
+
+**Constants:**
+
+| Constant | Description |
+|----------|-------------|
+| `GSD_RESEARCH_AGENT_IDS` | Readonly tuple of 5 agent IDs for the research team |
+| `GSD_DEBUG_AGENT_IDS` | Readonly tuple of 4 agent IDs for the debugging team |
+| `RESEARCH_DIMENSIONS` | `['stack', 'features', 'architecture', 'pitfalls']` |
+
+**Example - GSD Research Team:**
+
+```typescript
+import { generateGsdResearchTeam, RESEARCH_DIMENSIONS } from 'gsd-skill-creator';
+
+const result = generateGsdResearchTeam();
+
+console.log(result.config.members.length);       // 5 (1 synthesizer + 4 researchers)
+console.log(result.config.leadAgentId);          // 'gsd-research-synthesizer'
+console.log(RESEARCH_DIMENSIONS);                // ['stack', 'features', 'architecture', 'pitfalls']
+
+// Research tasks: one per dimension + synthesis
+console.log(result.sampleTasks.length);          // 5
+console.log(result.sampleTasks[4].subject);      // 'Synthesize research findings'
+console.log(result.sampleTasks[4].blockedBy);    // ['research-stack', 'research-features', ...]
+```
+
+**Example - GSD Debugging Team:**
+
+```typescript
+import { generateGsdDebuggingTeam } from 'gsd-skill-creator';
+
+const result = generateGsdDebuggingTeam({ name: 'my-debug' });
+
+console.log(result.config.members.length);       // 4 (1 coordinator + 3 debuggers)
+console.log(result.config.leadAgentId);          // 'gsd-debug-lead'
+
+// Debug tasks: hypothesize -> 3 investigations -> synthesize
+console.log(result.sampleTasks.length);          // 5
+console.log(result.sampleTasks[0].subject);      // 'Form debugging hypotheses'
+```
+
+### TeamStore
+
+File-based persistence for team configurations. Configs are stored as JSON at `{teamsDir}/{teamName}/config.json`. Validates configs with Zod schemas before writing.
+
+**Constructor:**
+
+```typescript
+import { TeamStore, getTeamsBasePath } from 'gsd-skill-creator';
+
+// Project-level teams
+const store = new TeamStore('.claude/teams');
+
+// User-level teams
+const store = new TeamStore(getTeamsBasePath('user'));
+// resolves to ~/.claude/teams
+```
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `teamsDir` | `string` | Directory for team config storage |
+
+**Methods:**
+
+| Method | Parameters | Returns | Description |
+|--------|------------|---------|-------------|
+| `save` | `config: TeamConfig` | `Promise<string>` | Validate and save config, returns path |
+| `read` | `teamName: string` | `Promise<TeamConfig>` | Read config by team name |
+| `exists` | `teamName: string` | `Promise<boolean>` | Check if team config exists |
+| `list` | - | `Promise<string[]>` | List all team names |
+| `delete` | `teamName: string` | `Promise<void>` | Delete team config and directory |
+
+**Path Helpers:**
+
+| Function | Parameters | Returns | Description |
+|----------|------------|---------|-------------|
+| `getTeamsBasePath` | `scope: TeamScope` | `string` | `'user'` -> `~/.claude/teams`, `'project'` -> `.claude/teams` |
+| `getAgentsBasePath` | - | `string` | Always `.claude/agents` (project scope) |
+
+**Example - Complete CRUD:**
+
+```typescript
+import { TeamStore, generateLeaderWorkerTemplate } from 'gsd-skill-creator';
+
+const store = new TeamStore('.claude/teams');
+
+// Create a team from template
+const { config } = generateLeaderWorkerTemplate({ name: 'my-team' });
+const configPath = await store.save(config);
+console.log(`Saved to: ${configPath}`);
+
+// Read it back
+const loaded = await store.read('my-team');
+console.log(loaded.name);           // 'my-team'
+console.log(loaded.members.length); // 4
+
+// List all teams
+const teams = await store.list();
+console.log(`Found ${teams.length} teams`);
+
+// Check existence
+const exists = await store.exists('my-team');
+console.log(exists);  // true
+
+// Delete
+await store.delete('my-team');
+```
+
+### Agent File Generation
+
+Generate role-aware agent `.md` files for team members. Coordinators/orchestrators get leader-focused instructions; workers get task-execution-focused instructions.
+
+**Functions:**
+
+| Function | Parameters | Returns | Description |
+|----------|------------|---------|-------------|
+| `generateAgentContent` | `member, teamName, tools` | `string` | Generate markdown with YAML frontmatter |
+| `writeTeamAgentFiles` | `members, teamName, agentsDir` | `AgentFileResult` | Write agent files, skip existing |
+
+**AgentMemberInput:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `agentId` | `string` | Unique agent identifier |
+| `name` | `string` | Display name |
+| `agentType` | `string?` | Agent classification (e.g., `'coordinator'`, `'worker'`) |
+| `tools` | `string[]` | Tools assigned to this member |
+
+**AgentFileResult:**
+
+```typescript
+interface AgentFileResult {
+  created: string[];   // agentIds of newly created files
+  skipped: string[];   // agentIds of existing files (preserved)
+}
+```
+
+**Example - Generate Agent Files:**
+
+```typescript
+import {
+  writeTeamAgentFiles,
+  generateAgentContent,
+  LEADER_TOOLS,
+  WORKER_TOOLS,
+} from 'gsd-skill-creator';
+
+// Generate content for a single agent
+const content = generateAgentContent(
+  { agentId: 'my-team-lead', name: 'Lead', agentType: 'coordinator', tools: LEADER_TOOLS },
+  'my-team',
+  LEADER_TOOLS,
+);
+console.log(content);  // Markdown with YAML frontmatter
+
+// Write agent files for all members (existing files are never overwritten)
+const result = writeTeamAgentFiles(
+  [
+    { agentId: 'my-team-lead', name: 'Lead', agentType: 'coordinator', tools: LEADER_TOOLS },
+    { agentId: 'my-team-worker-1', name: 'Worker 1', agentType: 'worker', tools: WORKER_TOOLS },
+  ],
+  'my-team',
+  '.claude/agents',
+);
+
+console.log(`Created: ${result.created.join(', ')}`);
+console.log(`Skipped: ${result.skipped.join(', ')}`);
+```
+
+### Team Creation Wizard
+
+Interactive and non-interactive team creation workflows. The interactive wizard uses `@clack/prompts` to guide users through pattern selection, naming, and scope configuration.
+
+**Functions:**
+
+| Function | Parameters | Returns | Description |
+|----------|------------|---------|-------------|
+| `teamCreationWizard` | `opts?: WizardOptions` | `Promise<void>` | Entry point (routes to interactive or non-interactive) |
+| `nonInteractiveCreate` | `opts, paths?` | `Promise<void>` | Create team from CLI flags |
+
+**Routing Logic:** If both `name` and `pattern` are provided, `teamCreationWizard` uses the non-interactive path. Otherwise, it launches the interactive wizard.
+
+**WizardOptions:**
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `name` | `string` | - | Team name (lowercase, alphanumeric + hyphens) |
+| `pattern` | `string` | - | `'leader-worker' \| 'pipeline' \| 'swarm'` |
+| `members` | `string` | `'3'` | Worker/stage count (1-10) |
+| `scope` | `string` | `'project'` | `'user' \| 'project'` |
+| `description` | `string` | - | Optional team description |
+
+**CreatePaths (for testing):**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `teamsDir` | `string` | Directory for team config files |
+| `agentsDir` | `string` | Directory for agent `.md` files |
+
+**Example - Non-Interactive Creation:**
+
+```typescript
+import { nonInteractiveCreate } from 'gsd-skill-creator';
+
+await nonInteractiveCreate({
+  name: 'my-research-team',
+  pattern: 'leader-worker',
+  members: '4',
+  scope: 'project',
+  description: 'Parallel research team',
+});
+// Creates config at .claude/teams/my-research-team/config.json
+// Creates agent files at .claude/agents/{agentId}.md
+```
+
+**Example - Interactive Wizard:**
+
+```typescript
+import { teamCreationWizard } from 'gsd-skill-creator';
+
+// No name/pattern -> launches interactive prompts
+await teamCreationWizard();
+
+// With name/pattern -> non-interactive path
+await teamCreationWizard({
+  name: 'fast-team',
+  pattern: 'swarm',
+});
+```
+
+### Team Validation
+
+Comprehensive validation for team configurations including schema validation, agent resolution, cycle detection, tool overlap analysis, skill conflict detection, and role coherence checking.
+
+**Primary Function:**
+
+| Function | Parameters | Returns | Description |
+|----------|------------|---------|-------------|
+| `validateTeamFull` | `config, options?` | `Promise<TeamFullValidationResult>` | Run all 7 validation checks |
+
+**Individual Validators:**
+
+| Function | Parameters | Returns | Description |
+|----------|------------|---------|-------------|
+| `validateTeamConfig` | `config: unknown` | `TeamValidationResult` | Schema validation (Zod) |
+| `validateMemberAgents` | `members, agentsDirs?` | `MemberResolutionResult[]` | Check agent files exist on disk |
+| `detectTaskCycles` | `tasks: TeamTask[]` | `CycleDetectionResult` | Detect circular `blockedBy` dependencies |
+| `detectToolOverlap` | `members: TeamMember[]` | `ToolOverlapResult[]` | Find shared write-capable tools |
+| `detectSkillConflicts` | `memberSkills, options?` | `Promise<SkillConflictResult>` | Cross-member skill overlap (async) |
+| `detectRoleCoherence` | `members, options?` | `Promise<RoleCoherenceResult>` | Near-duplicate role descriptions (async) |
+
+**TeamFullValidationResult:**
+
+```typescript
+interface TeamFullValidationResult {
+  valid: boolean;                          // No errors (warnings allowed)
+  errors: string[];                        // Blocking issues
+  warnings: string[];                      // Non-blocking suggestions
+  memberResolution: MemberResolutionResult[];  // Per-member agent file status
+  data?: TeamConfig;                       // Parsed config (if schema valid)
+}
+```
+
+**TeamFullValidationOptions:**
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `agentsDirs` | `string[]` | Project + user scope | Directories to search for agent files |
+| `sharedSkills` | `string[]` | - | Skills excluded from conflict detection |
+| `threshold` | `number` | `0.85` | Similarity threshold for conflicts |
+| `tasks` | `TeamTask[]` | - | Tasks for cycle detection (optional) |
+| `memberSkills` | `Array<{agentId, skills}>` | - | Skills for conflict detection (optional) |
+| `memberDescriptions` | `Array<{agentId, agentType?, description}>` | - | Descriptions for role coherence (optional) |
+
+**Validation Sequence:**
+
+1. **Schema validation** -- early return on failure
+2. **Topology rules** -- leader count, member roles
+3. **Member resolution** -- agent files on disk
+4. **Task cycles** -- circular `blockedBy` (if tasks provided)
+5. **Tool overlap** -- shared Write/Edit/MultiEdit (warnings)
+6. **Skill conflicts** -- cross-member semantic overlap (if memberSkills provided)
+7. **Role coherence** -- near-duplicate descriptions (if memberDescriptions provided)
+
+**Example - Full Validation:**
+
+```typescript
+import { validateTeamFull } from 'gsd-skill-creator';
+
+const result = await validateTeamFull(
+  {
+    name: 'my-team',
+    leadAgentId: 'my-team-lead',
+    createdAt: new Date().toISOString(),
+    members: [
+      { agentId: 'my-team-lead', name: 'Lead', agentType: 'coordinator' },
+      { agentId: 'my-team-worker-1', name: 'Worker 1' },
+    ],
+  },
+  {
+    tasks: [
+      { id: 'task-1', subject: 'Do A', status: 'pending' },
+      { id: 'task-2', subject: 'Do B', status: 'pending', blockedBy: ['task-1'] },
+    ],
+  },
+);
+
+if (result.valid) {
+  console.log('Team is valid!');
+} else {
+  console.log('Errors:', result.errors);
+}
+
+console.log('Warnings:', result.warnings);
+
+// Check member agent file resolution
+result.memberResolution.forEach(m => {
+  console.log(`${m.agentId}: ${m.status}`);
+  if (m.status === 'missing' && m.suggestions) {
+    console.log(`  Did you mean: ${m.suggestions.join(', ')}?`);
+  }
+});
+```
+
+**Example - Individual Validators:**
+
+```typescript
+import { detectTaskCycles, detectToolOverlap } from 'gsd-skill-creator';
+
+// Detect circular task dependencies
+const cycleResult = detectTaskCycles([
+  { id: 'a', subject: 'Task A', status: 'pending', blockedBy: ['c'] },
+  { id: 'b', subject: 'Task B', status: 'pending', blockedBy: ['a'] },
+  { id: 'c', subject: 'Task C', status: 'pending', blockedBy: ['b'] },
+]);
+console.log(cycleResult.hasCycle);  // true
+console.log(cycleResult.cycle);     // ['a', 'b', 'c']
+
+// Detect write-tool overlap
+const overlaps = detectToolOverlap([
+  { agentId: 'worker-1', name: 'W1', tools: ['Read', 'Write', 'Edit'] },
+  { agentId: 'worker-2', name: 'W2', tools: ['Read', 'Write'] },
+] as any);
+console.log(overlaps);
+// [{ tool: 'Write', members: ['worker-1', 'worker-2'] }]
+```
+
+### Zod Schemas
+
+Schemas for validating team data structures. Available for direct use with Zod's `.safeParse()` or `.parse()`.
+
+| Schema | Purpose |
+|--------|---------|
+| `TeamMemberSchema` | Validate a single team member object |
+| `TeamConfigSchema` | Validate a complete team configuration |
+| `TeamTaskSchema` | Validate a team task object |
+| `InboxMessageSchema` | Validate an inbox message object |
+
+**Example - Direct Schema Use:**
+
+```typescript
+import { TeamConfigSchema, TeamMemberSchema } from 'gsd-skill-creator';
+
+const result = TeamConfigSchema.safeParse({
+  name: 'my-team',
+  leadAgentId: 'my-team-lead',
+  createdAt: new Date().toISOString(),
+  members: [{ agentId: 'my-team-lead', name: 'Lead' }],
+});
+
+if (!result.success) {
+  console.log('Errors:', result.error.issues);
+}
+```
+
+### See Also
+
+- [CLI Reference](./CLI.md) - Team CLI commands (`team create`, `team list`, `team validate`, `team spawn`, `team status`)
+- [GSD Teams Guide](./GSD-TEAMS.md) - When to use teams vs. subagents in GSD workflows
+
+---
+
 ## See Also
 
 - [CLI Reference](./CLI.md) - Command-line interface documentation
 - [Official Format](./OFFICIAL-FORMAT.md) - Skill format specification
 - [Extensions](./EXTENSIONS.md) - Extended frontmatter fields
+- [GSD Teams Guide](./GSD-TEAMS.md) - Agent teams conversion guide
 
 ---
 
