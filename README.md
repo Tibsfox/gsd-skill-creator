@@ -16,6 +16,7 @@ A self-evolving skill ecosystem for Claude Code that observes usage patterns, su
 - [Token Budget](#token-budget)
 - [Bounded Learning](#bounded-learning)
 - [Agent Generation](#agent-generation)
+- [Agent Teams](#agent-teams)
 - [Configuration](#configuration)
 - [Development](#development)
 - [Requirements Implemented](#requirements-implemented)
@@ -36,6 +37,7 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **6. Composing Agents** | Groups frequently co-activated skills into composite agents stored in `.claude/agents/` |
 | **7. Quality Validation** | Detects semantic conflicts between skills and scores activation likelihood (v1.1) |
 | **8. Testing & Simulation** | Automated test cases, activation simulation, and calibration benchmarks (v1.2) |
+| **9. Agent Teams** | Multi-agent team coordination with leader-worker, pipeline, and swarm topologies (v1.4) |
 
 ### Version History
 
@@ -44,6 +46,8 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.0** | Core skill management, pattern observation, learning loop, agent composition |
 | **v1.1** | Semantic conflict detection, activation scoring, local embeddings via HuggingFace |
 | **v1.2** | Test infrastructure, activation simulation, threshold calibration, benchmarking |
+| **v1.3** | Documentation overhaul, official format specification, getting started guide |
+| **v1.4** | Agent Teams: team schemas, storage, validation, CLI commands, GSD workflow templates |
 
 ---
 
@@ -164,6 +168,9 @@ skill-creator help
 | [CLI Reference](docs/CLI.md) | Complete command documentation |
 | [API Reference](docs/API.md) | Programmatic usage for library consumers |
 | [Architecture](docs/architecture/) | System design for contributors |
+| [GSD Teams Guide](docs/GSD-TEAMS.md) | Teams vs subagents for GSD workflows |
+| [Skills vs Agents vs Teams](docs/COMPARISON.md) | Choosing the right abstraction level |
+| [Team Creation Tutorial](docs/tutorials/team-creation.md) | End-to-end team creation walkthrough |
 | [Examples](examples/) | Ready-to-use skill templates |
 
 ---
@@ -236,6 +243,26 @@ skill-creator rollback my-skill abc123 # Rollback to specific commit
 skill-creator agents suggest  # Review agent suggestions interactively
 skill-creator agents list     # List pending agent suggestions
 skill-creator ag sg           # Shorthand for agents suggest
+```
+
+### Team Management
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `team create` | `tm c` | Create a team from pattern template |
+| `team list` | `tm ls` | List all teams with member counts |
+| `team validate` | `tm v` | Validate team configuration(s) |
+| `team spawn` | `tm sp` | Check team readiness (agent resolution) |
+| `team status` | `tm s` | Show team details and validation summary |
+
+**Examples:**
+```bash
+skill-creator team create                          # Interactive team wizard
+skill-creator team create --name my-team --pattern leader-worker  # Non-interactive
+skill-creator team list                            # List all teams
+skill-creator team validate my-team                # Validate specific team
+skill-creator team spawn my-team                   # Check readiness
+skill-creator team status my-team                  # Show details
 ```
 
 ### Quality & Validation
@@ -360,6 +387,8 @@ your-project/
 │   │       └── scripts/            # Optional automation scripts
 │   ├── agents/                      # Generated/custom agents
 │   │   └── <agent-name>.md         # Composite agent file
+│   ├── teams/                       # Agent team configurations
+│   │   └── <team-name>.json        # Team config (members, topology)
 │   └── settings.json               # Claude Code settings (hooks, etc.)
 │
 ├── .planning/
@@ -731,6 +760,60 @@ This tool will warn you when creating user-level agents about this issue.
 
 ---
 
+## Agent Teams
+
+Agent teams coordinate multiple Claude Code agents working together on complex tasks. Teams support leader-worker, pipeline, swarm, and custom topologies.
+
+### Team Configuration
+
+Teams are stored as JSON files in `.claude/teams/`:
+
+```json
+{
+  "name": "research-team",
+  "description": "Parallel research across multiple dimensions",
+  "leadAgentId": "research-synthesizer",
+  "members": [
+    { "agentId": "research-synthesizer", "name": "Synthesizer", "agentType": "coordinator", "model": "sonnet" },
+    { "agentId": "researcher-alpha", "name": "Alpha", "agentType": "specialist", "model": "opus" }
+  ],
+  "createdAt": "2026-01-15T10:00:00Z"
+}
+```
+
+Each member references an agent file in `.claude/agents/`. The `leadAgentId` must match one member's `agentId`.
+
+### Team Validation
+
+Team validation checks schema compliance, topology rules, tool overlap, skill conflicts, and role coherence:
+
+```bash
+skill-creator team validate my-team   # Validate specific team
+skill-creator team validate --all     # Validate all teams
+```
+
+Errors are blocking (invalid schema, missing lead, duplicate IDs, topology violations, dependency cycles). Warnings are informational (tool overlap, skill conflicts, role coherence).
+
+### GSD Workflow Templates
+
+Two built-in templates for GSD workflows:
+
+| Template | Members | Pattern | Use Case |
+|----------|---------|---------|----------|
+| Research Team | 5 (1 synthesizer + 4 researchers) | leader-worker | Parallel ecosystem research |
+| Debugging Team | 4 (1 coordinator + 3 investigators) | leader-worker | Adversarial debugging |
+
+```typescript
+import { generateGsdResearchTeam, generateGsdDebuggingTeam } from 'gsd-skill-creator';
+
+const research = generateGsdResearchTeam();
+const debugging = generateGsdDebuggingTeam();
+```
+
+See [GSD Teams Guide](docs/GSD-TEAMS.md) for detailed workflow analysis and [Skills vs Agents vs Teams](docs/COMPARISON.md) for choosing the right abstraction.
+
+---
+
 ## Configuration
 
 ### Retention Settings
@@ -895,6 +978,13 @@ src/
 │   ├── threshold-history.ts   # Rollback support
 │   └── benchmark-reporter.ts  # MCC correlation metrics
 │
+├── teams/             # Agent team management (v1.4)
+│   ├── team-store.ts          # Team config CRUD
+│   ├── team-validator.ts      # Full validation pipeline
+│   ├── team-scaffold.ts       # Agent file generation
+│   ├── create-team-workflow.ts # Interactive/non-interactive creation
+│   └── gsd-templates.ts       # GSD research and debugging templates
+│
 ├── cli.ts             # CLI entry point
 └── index.ts           # Module exports
 ```
@@ -993,6 +1083,69 @@ src/
 | AGENT-01 | System detects when skills frequently activate together | ✓ |
 | AGENT-02 | System suggests agent creation for stable skill clusters | ✓ |
 | AGENT-03 | Generated agents integrate with `.claude/agents/` format | ✓ |
+
+### v1.4 Agent Teams Requirements (37 total)
+
+#### Team Schemas (SCHEMA-01 to SCHEMA-08)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| SCHEMA-01 | TeamConfig type with name, description, leadAgentId, members | ✓ |
+| SCHEMA-02 | TeamMember type with agentId, name, agentType, model, backend | ✓ |
+| SCHEMA-03 | TeamTask type with id, subject, status, owner, dependencies | ✓ |
+| SCHEMA-04 | TeamTopology union: leader-worker, pipeline, swarm, custom | ✓ |
+| SCHEMA-05 | TeamValidationResult with valid, errors, warnings, data | ✓ |
+| SCHEMA-06 | Zod schemas for runtime validation of all team types | ✓ |
+| SCHEMA-07 | InboxMessage type for inter-agent communication | ✓ |
+| SCHEMA-08 | StructuredMessageType union with string for forward compatibility | ✓ |
+
+#### Team Scaffolding (SCAFFOLD-01 to SCAFFOLD-06)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| SCAFFOLD-01 | TeamStore provides CRUD for team configs in .claude/teams/ | ✓ |
+| SCAFFOLD-02 | writeTeamAgentFiles generates agent .md files for each member | ✓ |
+| SCAFFOLD-03 | Interactive create-team workflow with pattern selection | ✓ |
+| SCAFFOLD-04 | Non-interactive team creation for scripted usage | ✓ |
+| SCAFFOLD-05 | Leader content uses coordinator tools, workers use standard tools | ✓ |
+| SCAFFOLD-06 | All team modules exported via barrel files | ✓ |
+
+#### Team Validation (VALID-01 to VALID-07)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| VALID-01 | Schema validation via Zod with descriptive error messages | ✓ |
+| VALID-02 | Topology rules: leader-worker requires exactly one leader | ✓ |
+| VALID-03 | Tool overlap detection across team members (write tools only) | ✓ |
+| VALID-04 | Skill conflict detection across team members | ✓ |
+| VALID-05 | Role coherence validation (description matches role) | ✓ |
+| VALID-06 | Dependency cycle detection in team tasks (Kahn's algorithm) | ✓ |
+| VALID-07 | Full validation pipeline combining all checks | ✓ |
+
+#### Team CLI Commands (CLI-01 to CLI-06)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| CLI-01 | team create command with interactive and non-interactive modes | ✓ |
+| CLI-02 | team list command with scope filtering and output formats | ✓ |
+| CLI-03 | team validate command with single-team and batch modes | ✓ |
+| CLI-04 | team spawn command to check agent resolution readiness | ✓ |
+| CLI-05 | team status command with config display and validation summary | ✓ |
+| CLI-06 | team/tm namespace dispatch with help text | ✓ |
+
+#### GSD Workflow Templates (GSD-01 to GSD-04)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| GSD-01 | Research team template: 1 synthesizer + 4 specialist researchers | ✓ |
+| GSD-02 | Debugging team template: 1 coordinator + 3 investigators | ✓ |
+| GSD-03 | Template generators return TeamConfig + sample tasks | ✓ |
+| GSD-04 | GSD teams conversion guide (teams vs subagents decision framework) | ✓ |
+
+#### Documentation (DOCS-01 to DOCS-06)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| DOCS-01 | CLI reference updated with all team commands | ✓ |
+| DOCS-02 | API reference updated with teams module | ✓ |
+| DOCS-03 | Architecture docs updated with teams layer | ✓ |
+| DOCS-04 | Tutorial: end-to-end team creation walkthrough | ✓ |
+| DOCS-05 | README updated with v1.4 Agent Teams | ✓ |
+| DOCS-06 | Skills vs Agents vs Teams comparison guide | ✓ |
 
 ---
 

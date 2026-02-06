@@ -2,6 +2,8 @@
 
 Dynamic Skill Creator helps you build a personalized knowledge base for Claude Code. It observes your usage patterns, suggests skills when workflows repeat, and manages skills throughout their lifecycle. This guide covers installation, a quickstart tutorial, and navigation to deeper tutorials.
 
+**New in v1.4:** Agent Teams support -- create, validate, and deploy multi-agent teams with leader-worker, pipeline, or swarm topologies. See the [Team Creation Tutorial](tutorials/team-creation.md) and [GSD Teams Guide](GSD-TEAMS.md).
+
 For a complete feature overview, see the [README](../README.md).
 
 ## Table of Contents
@@ -161,6 +163,7 @@ After completing the quickstart, explore these tutorials for deeper learning.
 | [Conflict Detection](tutorials/conflict-detection.md) | 10 min | Find and resolve semantic conflicts between skills |
 | [Calibration](tutorials/calibration.md) | 10 min | Optimize activation thresholds for better accuracy |
 | [CI Integration](tutorials/ci-integration.md) | 10 min | Add skill validation to CI/CD pipelines |
+| [Team Creation](tutorials/team-creation.md) | 20 min | Create and deploy multi-agent teams |
 
 ### Reference Documentation
 
@@ -171,6 +174,7 @@ After completing the quickstart, explore these tutorials for deeper learning.
 | [Official Format](OFFICIAL-FORMAT.md) | Claude Code skill format specification |
 | [Extensions](EXTENSIONS.md) | Extended frontmatter fields for advanced features |
 | [Architecture](architecture/README.md) | System architecture and data flows |
+| [GSD Teams Guide](GSD-TEAMS.md) | When to use teams vs subagents in GSD workflows |
 
 ### Common Workflows
 
