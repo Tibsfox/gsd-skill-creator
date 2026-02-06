@@ -57,6 +57,16 @@ Quick reference for all commands organized by workflow stage.
 | [sync-reserved](#sync-reserved) | `sync` | Show/update reserved skill names list |
 | [reload-embeddings](#reload-embeddings) | `re` | Reload embedding model (retry after fallback) |
 
+### Teams: Multi-Agent Coordination
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| [team create](#team-create) | `tm c` | Create a team from pattern template |
+| [team list](#team-list) | `tm l`, `tm ls` | List all teams with member counts |
+| [team validate](#team-validate) | `tm v` | Validate team config(s) |
+| [team spawn](#team-spawn) | `tm sp` | Check team readiness (agent resolution) |
+| [team status](#team-status) | `tm s` | Show team details and validation summary |
+
 ---
 
 ## Global Options
@@ -95,6 +105,8 @@ Filter list output by scope. Only applies to the `list` command.
 - `--scope=user`: Show only user-level skills
 - `--scope=project`: Show only project-level skills
 - `--scope=all`: Show skills from both scopes (default)
+
+**Team commands** accept `--scope=project` or `--scope=user` to filter by storage scope. Without `--scope`, commands search both scopes.
 
 ```bash
 # Show all skills (default)
