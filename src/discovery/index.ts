@@ -9,6 +9,8 @@
  * - Incremental corpus scanning with watermark-based change detection (corpus-scanner.ts)
  * - Tool sequence n-gram extraction (tool-sequence-extractor.ts)
  * - Bash command pattern extraction (bash-pattern-extractor.ts)
+ * - Pattern aggregation with noise filtering (pattern-aggregator.ts)
+ * - Session pattern processing with subagent discovery (session-pattern-processor.ts)
  */
 
 export * from './types.js';
@@ -35,3 +37,13 @@ export {
   type BashCategory,
   type BashPattern,
 } from './bash-pattern-extractor.js';
+export {
+  PatternAggregator,
+  type PatternOccurrence,
+  type SessionPatterns,
+} from './pattern-aggregator.js';
+export {
+  processSession,
+  discoverSubagentFiles,
+  createPatternSessionProcessor,
+} from './session-pattern-processor.js';
