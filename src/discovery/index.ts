@@ -19,6 +19,8 @@
  * - Prompt embedding cache with content-hash keying (prompt-embedding-cache.ts)
  * - DBSCAN clustering with cosine distance (dbscan.ts)
  * - Epsilon auto-tuning via k-NN knee method (epsilon-tuner.ts)
+ * - Cluster-specific scoring with 4-factor formula (cluster-scorer.ts)
+ * - Activation-focused draft generation for cluster candidates (cluster-drafter.ts)
  */
 
 export * from './types.js';
@@ -98,3 +100,16 @@ export {
   type DbscanResult,
 } from './dbscan.js';
 export { tuneEpsilon } from './epsilon-tuner.js';
+export {
+  scoreCluster,
+  generateClusterName,
+  generateClusterDescription,
+  rankClusterCandidates,
+  DEFAULT_CLUSTER_WEIGHTS,
+  type PromptCluster,
+  type ClusterScoreBreakdown,
+  type ClusterScore,
+  type ClusterScoringWeights,
+  type ClusterCandidate,
+} from './cluster-scorer.js';
+export { generateClusterDraft } from './cluster-drafter.js';
