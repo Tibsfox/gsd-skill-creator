@@ -1,17 +1,19 @@
 /**
  * CLI command for the pattern discovery pipeline.
  *
- * Orchestrates the full scan -> extract -> filter -> rank -> select -> draft
- * pipeline from Phases 30-33 into a single callable function with progress
- * output, flag handling, and interactive candidate selection.
+ * Orchestrates the full scan -> extract -> filter -> cluster -> rank -> select
+ * -> draft pipeline from Phases 30-35 into a single callable function with
+ * progress output, flag handling, and interactive candidate selection.
  *
  * Pipeline stages:
- * 1. Scan corpus with progress spinner
- * 2. Filter framework noise from aggregated patterns
- * 3. Load existing skills for deduplication
- * 4. Rank and score candidates
- * 5. Interactive multiselect for candidate selection
- * 6. Generate and write skill drafts to disk
+ * 1. Scan corpus with progress spinner (tool patterns + prompt collection)
+ * 2. Load existing skills for deduplication
+ * 3. Filter framework noise from aggregated patterns
+ * 4. Cluster user prompts via semantic embedding + DBSCAN
+ * 5. Rank and score both tool pattern and cluster candidates
+ * 6. Interactive multiselect for tool pattern candidates
+ * 7. Interactive multiselect for prompt-based cluster candidates
+ * 8. Generate and write skill drafts (workflow templates + activation templates)
  */
 
 import * as p from '@clack/prompts';
@@ -22,18 +24,25 @@ import { homedir } from 'node:os';
 import {
   CorpusScanner,
   PatternAggregator,
-  createPatternSessionProcessor,
+  createPromptCollectingProcessor,
   rankCandidates,
   selectCandidates,
   generateSkillDraft,
   formatCandidateTable,
+  PromptEmbeddingCache,
+  clusterPrompts,
+  rankClusterCandidates,
+  generateClusterDraft,
 } from '../../discovery/index.js';
 import type {
   SessionProcessor,
   SessionInfo,
   ParsedEntry,
   ExistingSkill,
+  ClusterCandidate,
+  PromptCollectorResult,
 } from '../../discovery/index.js';
+import { EmbeddingService } from '../../embeddings/embedding-service.js';
 import { SkillStore } from '../../storage/skill-store.js';
 import { getSkillsBasePath } from '../../types/scope.js';
 
@@ -85,8 +94,9 @@ Examples:
 /**
  * CLI command for pattern discovery pipeline.
  *
- * Orchestrates the full pipeline: scan with progress -> filter noise ->
- * rank with dedup -> interactive select -> generate drafts -> write to disk.
+ * Orchestrates the full pipeline: scan with progress -> load skills ->
+ * filter noise -> cluster prompts -> rank both -> interactive select both ->
+ * generate drafts -> write to disk.
  *
  * @param args - Command-line arguments (after 'discover')
  * @returns Exit code (0 for success, 1 for error)
@@ -107,10 +117,11 @@ export async function discoverCommand(args: string[]): Promise<number> {
     p.intro(pc.bgCyan(pc.black(' Skill Discovery ')));
 
     // -----------------------------------------------------------------------
-    // 1. Setup: aggregator + base session processor
+    // 1. Setup: aggregator + prompt-collecting session processor
     // -----------------------------------------------------------------------
     const aggregator = new PatternAggregator();
-    const baseProcessor = createPatternSessionProcessor(aggregator);
+    const promptStore: PromptCollectorResult = { prompts: new Map() };
+    const collectingProcessor = createPromptCollectingProcessor(aggregator, promptStore);
 
     // -----------------------------------------------------------------------
     // 2. Progress wrapper: tracks session count and timestamps
@@ -128,8 +139,8 @@ export async function discoverCommand(args: string[]): Promise<number> {
       // Record timestamp for recency scoring
       sessionTimestamps.set(session.sessionId, session.fileMtime);
 
-      // Delegate to pattern extraction processor
-      await baseProcessor(session, entries);
+      // Delegate to prompt-collecting pattern extraction processor
+      await collectingProcessor(session, entries);
 
       // Update progress
       processedCount++;
@@ -147,22 +158,7 @@ export async function discoverCommand(args: string[]): Promise<number> {
     spin.stop(`Scanned ${scanResult.totalSessions} sessions across ${scanResult.totalProjects} projects`);
 
     // -----------------------------------------------------------------------
-    // 4. Filter framework noise
-    // -----------------------------------------------------------------------
-    aggregator.filterNoise(aggregator.getTotalProjectsTracked());
-    const patterns = aggregator.getResults();
-
-    // -----------------------------------------------------------------------
-    // 5. Early exit if no patterns
-    // -----------------------------------------------------------------------
-    if (patterns.size === 0) {
-      p.log.info('No patterns found after noise filtering.');
-      p.outro('Nothing to discover.');
-      return 0;
-    }
-
-    // -----------------------------------------------------------------------
-    // 6. Load existing skills for deduplication
+    // 4. Load existing skills for deduplication (before both pipelines)
     // -----------------------------------------------------------------------
     const existingSkills: ExistingSkill[] = [];
     for (const scope of ['user', 'project'] as const) {
@@ -177,7 +173,63 @@ export async function discoverCommand(args: string[]): Promise<number> {
     }
 
     // -----------------------------------------------------------------------
-    // 7. Rank candidates
+    // 5. Filter framework noise
+    // -----------------------------------------------------------------------
+    aggregator.filterNoise(aggregator.getTotalProjectsTracked());
+    const patterns = aggregator.getResults();
+
+    // -----------------------------------------------------------------------
+    // 5b. Cluster user prompts (if any collected)
+    // -----------------------------------------------------------------------
+    let clusterCandidates: ClusterCandidate[] = [];
+    const totalCollectedPrompts = Array.from(promptStore.prompts.values())
+      .reduce((sum, arr) => sum + arr.length, 0);
+
+    if (totalCollectedPrompts > 0) {
+      spin.start('Clustering user prompts...');
+      try {
+        const embeddingService = EmbeddingService.getInstance();
+        const promptCache = new PromptEmbeddingCache('bge-small-en-v1.5-v1');
+        await promptCache.load();
+
+        const clusterResult = await clusterPrompts(
+          promptStore.prompts,
+          embeddingService,
+          promptCache,
+        );
+
+        if (clusterResult.clusters.length > 0) {
+          clusterCandidates = rankClusterCandidates(
+            clusterResult.clusters,
+            totalCollectedPrompts,
+            aggregator.getTotalProjectsTracked(),
+            existingSkills,
+          );
+          spin.stop(`Found ${clusterResult.clusters.length} prompt clusters (${clusterCandidates.length} after dedup)`);
+        } else {
+          spin.stop('No prompt clusters found');
+        }
+
+        if (clusterResult.skippedProjects.length > 0) {
+          p.log.info(pc.dim(`Skipped ${clusterResult.skippedProjects.length} project(s) with < 10 prompts`));
+        }
+      } catch {
+        // Clustering is supplementary -- don't fail the whole command
+        spin.stop('Prompt clustering skipped (embedding unavailable)');
+      }
+    }
+
+    // -----------------------------------------------------------------------
+    // 6. Early exit if no patterns and no clusters
+    // -----------------------------------------------------------------------
+    if (patterns.size === 0 && clusterCandidates.length === 0) {
+      p.log.info('No patterns found after noise filtering.');
+      p.outro('Nothing to discover.');
+      return 0;
+    }
+
+    // -----------------------------------------------------------------------
+    // 7. Rank tool pattern candidates
     // -----------------------------------------------------------------------
     const totalProjects = aggregator.getTotalProjectsTracked();
     const totalSessions = scanResult.totalSessions;
@@ -191,37 +243,74 @@ export async function discoverCommand(args: string[]): Promise<number> {
     );
 
     // -----------------------------------------------------------------------
-    // 8. Early exit if no candidates
+    // 8. Early exit if no candidates of either type
     // -----------------------------------------------------------------------
-    if (candidates.length === 0) {
+    if (candidates.length === 0 && clusterCandidates.length === 0) {
       p.log.info('No skill candidates found after ranking and deduplication.');
       p.outro('Nothing to discover.');
       return 0;
     }
 
     // -----------------------------------------------------------------------
-    // 9. Display summary and select candidates
+    // 9. Display summary and select tool pattern candidates
     // -----------------------------------------------------------------------
     p.log.info(
       `Scan summary: ${pc.bold(String(totalProjects))} projects, ` +
       `${pc.bold(String(processedCount))} sessions processed, ` +
       `${pc.bold(String(patterns.size))} patterns found, ` +
-      `${pc.bold(String(candidates.length))} candidates ranked`,
+      `${pc.bold(String(candidates.length))} candidates ranked` +
+      (clusterCandidates.length > 0
+        ? `, ${pc.bold(String(clusterCandidates.length))} prompt clusters`
+        : ''),
     );
 
     const selected = await selectCandidates(candidates);
 
     // -----------------------------------------------------------------------
-    // 10. Early exit if nothing selected
+    // 9b. Display and select prompt-based cluster candidates
     // -----------------------------------------------------------------------
-    if (selected.length === 0) {
+    let selectedClusters: ClusterCandidate[] = [];
+    if (clusterCandidates.length > 0) {
+      p.log.message('');
+      p.log.message(pc.bold('Prompt-based Candidates:'));
+      const clusterTableLines = clusterCandidates.map((c, i) => {
+        const idx = pc.dim(String(i + 1).padStart(2));
+        const score = pc.cyan(c.score.toFixed(3).padStart(6));
+        const type = pc.dim('cluster'.padEnd(8));
+        const label = c.label.slice(0, 50).padEnd(50);
+        const projects = pc.dim(`${c.evidence.projects.length}p`);
+        const size = pc.dim(`${c.clusterSize}m`);
+        return `  ${idx}  ${score}  ${type}  ${label}  ${projects}  ${size}`;
+      });
+      p.log.message(clusterTableLines.join('\n'));
+      p.log.message('');
+
+      const clusterSelected = await p.multiselect({
+        message: 'Select prompt-based patterns to generate skills from (space to toggle):',
+        options: clusterCandidates.map((c, i) => ({
+          value: i,
+          label: c.label.slice(0, 60),
+          hint: `score: ${c.score.toFixed(3)} | ${c.evidence.projects.length} projects | ${c.clusterSize} prompts`,
+        })),
+        required: false,
+      });
+
+      if (!p.isCancel(clusterSelected)) {
+        selectedClusters = (clusterSelected as number[]).map(i => clusterCandidates[i]);
+      }
+    }
+
+    // -----------------------------------------------------------------------
+    // 10. Early exit if nothing selected from either pipeline
+    // -----------------------------------------------------------------------
+    if (selected.length === 0 && selectedClusters.length === 0) {
       p.log.info('No candidates selected.');
       p.outro('Discovery complete.');
       return 0;
     }
 
     // -----------------------------------------------------------------------
-    // 11. Generate and write skill drafts
+    // 11. Generate and write tool pattern skill drafts
     // -----------------------------------------------------------------------
     for (const candidate of selected) {
       const draft = generateSkillDraft(candidate);
@@ -232,9 +321,21 @@ export async function discoverCommand(args: string[]): Promise<number> {
     }
 
     // -----------------------------------------------------------------------
+    // 11b. Generate and write cluster-based skill drafts
+    // -----------------------------------------------------------------------
+    for (const candidate of selectedClusters) {
+      const draft = generateClusterDraft(candidate);
+      const skillDir = join(homedir(), '.claude', 'skills', draft.name);
+      await mkdir(skillDir, { recursive: true });
+      await writeFile(join(skillDir, 'SKILL.md'), draft.content, 'utf-8');
+      p.log.success(`Created skill: ${pc.green(draft.name)} ${pc.dim('(from prompt cluster)')}`);
+    }
+
+    // -----------------------------------------------------------------------
     // 12. Summary outro
     // -----------------------------------------------------------------------
-    p.outro(`Generated ${selected.length} skill draft(s). Review and customize in ~/.claude/skills/`);
+    const totalGenerated = selected.length + selectedClusters.length;
+    p.outro(`Generated ${totalGenerated} skill draft(s). Review and customize in ~/.claude/skills/`);
 
     return 0;
   } catch (err) {
