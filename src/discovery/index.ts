@@ -15,6 +15,8 @@
  * - Candidate ranking with deduplication (candidate-ranker.ts)
  * - Skill draft generation from candidates (skill-drafter.ts)
  * - Interactive candidate selection UI (candidate-selector.ts)
+ * - DBSCAN clustering with cosine distance (dbscan.ts)
+ * - Epsilon auto-tuning via k-NN knee method (epsilon-tuner.ts)
  */
 
 export * from './types.js';
@@ -80,3 +82,11 @@ export {
   selectCandidates,
   formatCandidateTable,
 } from './candidate-selector.js';
+
+// Phase 35: Semantic Clustering
+export {
+  dbscan,
+  cosineDistance,
+  type DbscanResult,
+} from './dbscan.js';
+export { tuneEpsilon } from './epsilon-tuner.js';
