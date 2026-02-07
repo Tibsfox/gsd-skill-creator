@@ -3,13 +3,14 @@ import { classifyUserEntry, isRealUserPrompt } from './user-prompt-classifier.js
 import type { UserEntry } from './types.js';
 
 function makeUserEntry(overrides: Partial<UserEntry> & { message: UserEntry['message'] }): UserEntry {
+  const { message, ...rest } = overrides;
   return {
     type: 'user' as const,
     uuid: 'test-uuid',
     sessionId: 'test-session',
     timestamp: '2026-01-15T10:00:00.000Z',
-    message: overrides.message,
-    ...overrides,
+    ...rest,
+    message,
   };
 }
 
