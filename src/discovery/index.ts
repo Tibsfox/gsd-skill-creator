@@ -6,6 +6,7 @@
  * - TypeScript types inferred from Zod schemas
  * - Processed result types for downstream consumers
  * - Scan state persistence with atomic writes (scan-state-store.ts)
+ * - Incremental corpus scanning with watermark-based change detection (corpus-scanner.ts)
  */
 
 export * from './types.js';
@@ -22,3 +23,5 @@ export {
   type SessionWatermark,
   type ScanStats,
 } from './scan-state-store.js';
+export { CorpusScanner } from './corpus-scanner.js';
+export type { CorpusScannerOptions, SessionProcessor, ScanResult } from './corpus-scanner.js';
