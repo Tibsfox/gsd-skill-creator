@@ -8,6 +8,7 @@
  * - Scan state persistence with atomic writes (scan-state-store.ts)
  * - Incremental corpus scanning with watermark-based change detection (corpus-scanner.ts)
  * - Tool sequence n-gram extraction (tool-sequence-extractor.ts)
+ * - Bash command pattern extraction (bash-pattern-extractor.ts)
  */
 
 export * from './types.js';
@@ -27,3 +28,10 @@ export {
 export { CorpusScanner } from './corpus-scanner.js';
 export type { CorpusScannerOptions, SessionProcessor, ScanResult } from './corpus-scanner.js';
 export { extractNgrams, buildToolSequence } from './tool-sequence-extractor.js';
+export {
+  classifyBashCommand,
+  normalizeBashCommand,
+  extractBashPatterns,
+  type BashCategory,
+  type BashPattern,
+} from './bash-pattern-extractor.js';
