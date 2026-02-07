@@ -25,14 +25,31 @@ interface ClaudeCodeSessionEndInput {
   hook_event_name?: string;
 }
 
-async function main(): Promise<void> {
-  // Read JSON from stdin
-  const chunks: Buffer[] = [];
-  for await (const chunk of process.stdin) {
-    chunks.push(chunk);
-  }
+function readStdin(timeoutMs: number): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = [];
+    const timer = setTimeout(() => {
+      process.stdin.removeAllListeners();
+      process.stdin.pause();
+      resolve(Buffer.concat(chunks).toString('utf-8').trim());
+    }, timeoutMs);
 
-  const input = Buffer.concat(chunks).toString('utf-8').trim();
+    process.stdin.on('data', (chunk: Buffer) => chunks.push(chunk));
+    process.stdin.on('end', () => {
+      clearTimeout(timer);
+      resolve(Buffer.concat(chunks).toString('utf-8').trim());
+    });
+    process.stdin.on('error', (err) => {
+      clearTimeout(timer);
+      reject(err);
+    });
+    process.stdin.resume();
+  });
+}
+
+async function main(): Promise<void> {
+  // Read JSON from stdin with timeout to prevent hanging
+  const input = await readStdin(3000);
 
   if (!input) {
     // No input provided - this is fine, hook might be called without data
