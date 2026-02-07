@@ -173,8 +173,9 @@ describe('generateClusterName', () => {
 
   it('removes stopwords from label', () => {
     const name = generateClusterName('Debug the failing test in payment service');
-    expect(name).not.toContain('the');
-    expect(name).not.toContain('in');
+    const words = name.split('-');
+    expect(words).not.toContain('the');
+    expect(words).not.toContain('in');
   });
 
   it('limits slug to 5 significant words', () => {
@@ -277,14 +278,21 @@ describe('rankClusterCandidates', () => {
   it('deduplicates against existing skills with Jaccard similarity', () => {
     const clusters = [
       makeCluster({ label: 'Refactor authentication module' }),
+      makeCluster({
+        label: 'Build new database schema',
+        memberCount: 5,
+        projectSlugs: ['p1'],
+        timestamps: [new Date(now).toISOString()],
+      }),
     ];
     const existingSkills: ExistingSkill[] = [
       { name: 'refactor-auth', description: 'Guides workflow when: Refactor authentication module' },
     ];
 
     const result = rankClusterCandidates(clusters, 100, 5, existingSkills, now);
-    // Should be removed by dedup (Jaccard similarity >= 0.5)
-    expect(result.length).toBe(0);
+    // First cluster should be removed by dedup, second should remain
+    expect(result.length).toBe(1);
+    expect(result[0].label).toBe('Build new database schema');
   });
 
   it('minimum-results guarantee: returns all if all would be deduplicated', () => {
@@ -297,7 +305,6 @@ describe('rankClusterCandidates', () => {
 
     // When there's only one candidate and it would be removed, minimum-results guarantee kicks in
     const result = rankClusterCandidates(clusters, 100, 5, existingSkills, now);
-    // Either returned (minimum guarantee) or removed -- depends on whether it's the ONLY candidate
     // Since it's the only one, minimum-results guarantee should return it
     expect(result.length).toBe(1);
   });
