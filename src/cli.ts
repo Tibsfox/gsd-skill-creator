@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { createRequire } from 'node:module';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { createStores, createApplicationContext } from './index.js';
@@ -47,9 +48,33 @@ function parseThreshold(args: string[]): number | undefined {
   return undefined;
 }
 
+async function printVersion(): Promise<void> {
+  const require = createRequire(import.meta.url);
+  const pkg = require('../package.json') as { version: string; name: string };
+
+  let tsVersion = 'unknown';
+  try {
+    const tsPkg = require('typescript/package.json') as { version: string };
+    tsVersion = tsPkg.version;
+  } catch {
+    tsVersion = 'not installed';
+  }
+
+  console.log(`skill-creator  v${pkg.version}`);
+  console.log(`Node.js        ${process.version}`);
+  console.log(`TypeScript     ${tsVersion}`);
+  console.log(`Platform       ${process.platform} ${process.arch}`);
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const command = args[0];
+
+  if (command === '--version' || command === '-V' || args.includes('--version') || args.includes('-V')) {
+    await printVersion();
+    return;
+  }
+
   const { skillStore, skillIndex } = createStores();
 
   switch (command) {
@@ -1119,6 +1144,7 @@ Commands:
   calibrate, cal    Optimize activation threshold from calibration data
   benchmark, bench  Measure simulator accuracy vs real activation
   help, -h          Show this help message
+  --version, -V     Show version information
 
 Scope Options:
   Skills can exist at two scopes:
