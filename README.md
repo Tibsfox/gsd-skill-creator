@@ -19,6 +19,7 @@ Built with GSD https://github.com/glittercowboy/get-shit-done for GSD
 - [Bounded Learning](#bounded-learning)
 - [Agent Generation](#agent-generation)
 - [Agent Teams](#agent-teams)
+- [Pattern Discovery](#pattern-discovery)
 - [Configuration](#configuration)
 - [Development](#development)
 - [Requirements Implemented](#requirements-implemented)
@@ -40,6 +41,7 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **7. Quality Validation** | Detects semantic conflicts between skills and scores activation likelihood (v1.1) |
 | **8. Testing & Simulation** | Automated test cases, activation simulation, and calibration benchmarks (v1.2) |
 | **9. Agent Teams** | Multi-agent team coordination with leader-worker, pipeline, and swarm topologies (v1.4) |
+| **10. Pattern Discovery** | Scan session logs to discover recurring workflows and generate draft skills automatically (v1.5) |
 
 ### Version History
 
@@ -50,6 +52,7 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.2** | Test infrastructure, activation simulation, threshold calibration, benchmarking |
 | **v1.3** | Documentation overhaul, official format specification, getting started guide |
 | **v1.4** | Agent Teams: team schemas, storage, validation, CLI commands, GSD workflow templates |
+| **v1.5** | Pattern Discovery: session log scanning, tool sequence extraction, DBSCAN clustering, draft generation |
 
 ---
 
@@ -265,6 +268,19 @@ skill-creator team list                            # List all teams
 skill-creator team validate my-team                # Validate specific team
 skill-creator team spawn my-team                   # Check readiness
 skill-creator team status my-team                  # Show details
+```
+
+### Pattern Discovery
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `discover` | `disc` | Scan session logs, extract patterns, rank candidates, generate draft skills |
+
+**Examples:**
+```bash
+skill-creator discover                      # Full pipeline: scan → extract → rank → select → draft
+skill-creator discover --exclude my-project  # Skip specific project
+skill-creator discover --rescan             # Force full rescan (ignore watermarks)
 ```
 
 ### Quality & Validation
@@ -816,6 +832,47 @@ See [GSD Teams Guide](docs/GSD-TEAMS.md) for detailed workflow analysis and [Ski
 
 ---
 
+## Pattern Discovery
+
+The `discover` command scans your Claude Code session history to find recurring interaction patterns and generate draft skills from them.
+
+### How It Works
+
+1. **Scan** — Enumerates all projects under `~/.claude/projects/` and stream-parses JSONL session files
+2. **Extract** — Identifies tool sequence n-grams (Read→Edit→Bash) and Bash command patterns (git workflows, build commands)
+3. **Cluster** — Groups similar user prompts using DBSCAN with automatic epsilon tuning
+4. **Rank** — Scores candidates using frequency, cross-project occurrence, recency, and consistency
+5. **Present** — Shows ranked candidates with evidence (which sessions, which projects, examples)
+6. **Draft** — Generates SKILL.md files with pre-filled workflow steps for selected candidates
+
+### Key Features
+
+| Feature | Description |
+|---------|-------------|
+| **Incremental scanning** | Only processes new/modified sessions on subsequent runs via watermarks |
+| **Noise filtering** | Filters framework patterns appearing in 15+ projects (dual-threshold) |
+| **Deduplication** | Skips patterns that match existing skills |
+| **Semantic clustering** | Groups similar prompts using embeddings + DBSCAN |
+| **Stream parsing** | Handles 23MB+ session files without loading into memory |
+| **Subagent support** | Includes subagent session directories in analysis |
+
+### Usage
+
+```bash
+# Discover patterns from all projects
+skill-creator discover
+
+# Exclude specific projects from scanning
+skill-creator discover --exclude my-private-project
+
+# Force full rescan (ignore previous watermarks)
+skill-creator discover --rescan
+```
+
+The command displays progress during scanning (project count, session count, patterns found) and presents an interactive selection UI for choosing which candidates to turn into skills.
+
+---
+
 ## Configuration
 
 ### Retention Settings
@@ -868,7 +925,7 @@ Pattern retention is bounded to prevent unbounded growth:
 ### Running Tests
 
 ```bash
-# Run all tests (1000+ tests)
+# Run all tests
 npm test
 
 # Run specific test file
@@ -986,6 +1043,30 @@ src/
 │   ├── team-scaffold.ts       # Agent file generation
 │   ├── create-team-workflow.ts # Interactive/non-interactive creation
 │   └── gsd-templates.ts       # GSD research and debugging templates
+│
+├── discovery/         # Pattern discovery from session logs (v1.5)
+│   ├── types.ts               # Zod schemas for JSONL session format
+│   ├── session-parser.ts      # Streaming JSONL parser
+│   ├── session-enumerator.ts  # Session enumeration from index files
+│   ├── user-prompt-classifier.ts # 4-layer noise filtering
+│   ├── scan-state-store.ts    # Atomic persistence for scan state
+│   ├── corpus-scanner.ts      # Incremental scanning with watermarks
+│   ├── tool-sequence-extractor.ts # N-gram extraction (bigrams/trigrams)
+│   ├── bash-pattern-extractor.ts  # 8-category command classification
+│   ├── pattern-aggregator.ts  # Cross-session aggregation + noise filter
+│   ├── session-pattern-processor.ts # Per-session processing + subagents
+│   ├── pattern-scorer.ts      # Multi-factor scoring formula
+│   ├── candidate-ranker.ts    # Ranking with evidence + deduplication
+│   ├── skill-drafter.ts       # Draft SKILL.md generation
+│   ├── candidate-selector.ts  # Interactive multiselect UI
+│   ├── dbscan.ts              # DBSCAN clustering algorithm
+│   ├── epsilon-tuner.ts       # Auto epsilon via k-NN knee detection
+│   ├── prompt-collector.ts    # Prompt collection wrapper
+│   ├── prompt-embedding-cache.ts # Content-hash embedding cache
+│   ├── prompt-clusterer.ts    # Per-project clustering + merge
+│   ├── cluster-scorer.ts      # 4-factor cluster scoring
+│   ├── cluster-drafter.ts     # Activation-focused cluster drafts
+│   └── discover-command.ts    # CLI command orchestrator
 │
 ├── cli.ts             # CLI entry point
 └── index.ts           # Module exports
@@ -1149,6 +1230,59 @@ src/
 | DOCS-05 | README updated with v1.4 Agent Teams | ✓ |
 | DOCS-06 | Skills vs Agents vs Teams comparison guide | ✓ |
 
+### v1.5 Pattern Discovery Requirements (27 total)
+
+#### Scanning & Parsing (SCAN-01 to SCAN-09)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| SCAN-01 | Stream-parse JSONL session files line-by-line without loading into memory | ✓ |
+| SCAN-02 | Enumerate all projects and sessions from sessions-index.json | ✓ |
+| SCAN-03 | Track scanned sessions incrementally via watermark | ✓ |
+| SCAN-04 | Skip already-scanned sessions on subsequent runs | ✓ |
+| SCAN-05 | Support project exclude list | ✓ |
+| SCAN-06 | Display progress output during scan | ✓ |
+| SCAN-07 | Handle all 7 JSONL entry types | ✓ |
+| SCAN-08 | Extract tool_use blocks from nested assistant content arrays | ✓ |
+| SCAN-09 | Filter noise from user entries (97% are non-prompts) | ✓ |
+
+#### Pattern Extraction (PATT-01 to PATT-05)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| PATT-01 | Extract tool sequence n-grams (bigrams, trigrams) | ✓ |
+| PATT-02 | Extract recurring Bash command patterns | ✓ |
+| PATT-03 | Track per-session and cross-project frequency | ✓ |
+| PATT-04 | Filter framework noise (15+ projects threshold) | ✓ |
+| PATT-05 | Include subagent sessions in analysis | ✓ |
+
+#### Ranking & Output (RANK-01 to RANK-05)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| RANK-01 | Multi-factor scoring (frequency, cross-project, recency, consistency) | ✓ |
+| RANK-02 | Evidence with sessions, projects, and invocations | ✓ |
+| RANK-03 | Interactive candidate selection | ✓ |
+| RANK-04 | Draft SKILL.md with pre-filled workflow steps | ✓ |
+| RANK-05 | Deduplicate against existing skills | ✓ |
+
+#### Semantic Clustering (CLUS-01 to CLUS-03)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| CLUS-01 | Cluster user prompts with DBSCAN + embeddings | ✓ |
+| CLUS-02 | Label clusters with representative prompt text | ✓ |
+| CLUS-03 | Surface clusters alongside tool sequence patterns | ✓ |
+
+#### Persistence (PERS-01 to PERS-02)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| PERS-01 | Persistent scan state with Zod validation | ✓ |
+| PERS-02 | Atomic writes (write-tmp-then-rename) | ✓ |
+
+#### CLI (CLI-01 to CLI-03)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| CLI-01 | `discover` command for full pipeline | ✓ |
+| CLI-02 | `--exclude` flag for project exclusion | ✓ |
+| CLI-03 | `--rescan` flag to force full rescan | ✓ |
+
 ---
 
 ## License
@@ -1162,4 +1296,4 @@ MIT
 3. Make changes with tests
 4. Submit a pull request
 
-All contributions should include tests and pass the existing test suite (1000+ tests).
+All contributions should include tests and pass the existing test suite.
