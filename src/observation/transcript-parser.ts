@@ -1,4 +1,4 @@
-import { createReadStream } from 'fs';
+import { createReadStream, existsSync } from 'fs';
 import { createInterface } from 'readline';
 import type { TranscriptEntry } from '../types/observation.js';
 
@@ -9,6 +9,10 @@ export class TranscriptParser {
    * Skips corrupted lines gracefully
    */
   async parse(transcriptPath: string): Promise<TranscriptEntry[]> {
+    if (!existsSync(transcriptPath)) {
+      return [];
+    }
+
     const entries: TranscriptEntry[] = [];
 
     const fileStream = createReadStream(transcriptPath, { encoding: 'utf8' });
