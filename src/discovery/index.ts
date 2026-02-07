@@ -11,3 +11,5 @@
  */
 
 export * from './types.js';
+export { parseSessionFile, parseJsonlLine } from './session-parser.js';
+export { enumerateSessions } from './session-enumerator.js';
