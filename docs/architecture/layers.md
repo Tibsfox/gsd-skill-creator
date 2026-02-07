@@ -22,27 +22,28 @@ This structure ensures:
 
 Quick reference showing which layers depend on which.
 
-| Layer | types | storage | validation | embeddings | testing | observation | detection | activation | conflicts | composition | agents | teams | application | simulation | learning | calibration | workflows | cli | hooks |
-|-------|:-----:|:-------:|:----------:|:----------:|:-------:|:-----------:|:---------:|:----------:|:---------:|:-----------:|:------:|:-----:|:-----------:|:----------:|:--------:|:-----------:|:---------:|:---:|:-----:|
-| **types** | - | | | | | | | | | | | | | | | | | | |
-| **storage** | Y | - | | | | | | | | | | | | | | | | | |
-| **validation** | Y | | - | | | | | | | | | | | | | | | | |
-| **embeddings** | Y | | | - | | | | | | | | | | | | | | | |
-| **testing** | Y | Y | Y | Y | - | | | | | | | | | | | | | | |
-| **observation** | Y | Y | | | | - | | | | | | | | | | | | | |
-| **detection** | Y | Y | | | | | - | | | | | | | | | | | | |
-| **activation** | Y | | | Y | | | | - | | | | | | | | | | | |
-| **conflicts** | Y | | | Y | | | | | - | | | | | | | | | | |
-| **composition** | Y | Y | | | | | | | | - | | | | | | | | | |
-| **agents** | Y | Y | | | | | Y | | | | - | | | | | | | | |
-| **teams** | Y | | Y | Y | | | | | Y | | | - | | | | | | | |
-| **application** | Y | Y | Y | Y | | | | | | | | | - | | | | | | |
-| **simulation** | Y | Y | | Y | | | | | | | | | | - | | | | | |
-| **learning** | Y | Y | | | | | | | | | | | | | - | | | | |
-| **calibration** | Y | Y | | | | | | | | | | | | | | - | | | |
-| **workflows** | Y | Y | Y | | | | | | | | | | | | | | - | | |
-| **cli** | Y | Y | Y | Y | Y | | Y | Y | Y | Y | Y | Y | | Y | Y | Y | | - | |
-| **hooks** | Y | | | | | Y | | | | | | | | | | | | | - |
+| Layer | types | storage | validation | embeddings | testing | observation | detection | activation | conflicts | composition | agents | teams | discovery | application | simulation | learning | calibration | workflows | cli | hooks |
+|-------|:-----:|:-------:|:----------:|:----------:|:-------:|:-----------:|:---------:|:----------:|:---------:|:-----------:|:------:|:-----:|:---------:|:-----------:|:----------:|:--------:|:-----------:|:---------:|:---:|:-----:|
+| **types** | - | | | | | | | | | | | | | | | | | | | |
+| **storage** | Y | - | | | | | | | | | | | | | | | | | | |
+| **validation** | Y | | - | | | | | | | | | | | | | | | | | |
+| **embeddings** | Y | | | - | | | | | | | | | | | | | | | | |
+| **testing** | Y | Y | Y | Y | - | | | | | | | | | | | | | | | |
+| **observation** | Y | Y | | | | - | | | | | | | | | | | | | | |
+| **detection** | Y | Y | | | | | - | | | | | | | | | | | | | |
+| **activation** | Y | | | Y | | | | - | | | | | | | | | | | | |
+| **conflicts** | Y | | | Y | | | | | - | | | | | | | | | | | |
+| **composition** | Y | Y | | | | | | | | - | | | | | | | | | | |
+| **agents** | Y | Y | | | | | Y | | | | - | | | | | | | | | |
+| **teams** | Y | | Y | Y | | | | | Y | | | - | | | | | | | | |
+| **discovery** | | | | Y | | | | | | | | | - | | | | | | | |
+| **application** | Y | Y | Y | Y | | | | | | | | | | - | | | | | | |
+| **simulation** | Y | Y | | Y | | | | | | | | | | | - | | | | | |
+| **learning** | Y | Y | | | | | | | | | | | | | | - | | | | |
+| **calibration** | Y | Y | | | | | | | | | | | | | | | - | | | |
+| **workflows** | Y | Y | Y | | | | | | | | | | | | | | | - | | |
+| **cli** | Y | Y | Y | Y | Y | | Y | Y | Y | Y | Y | Y | Y | | Y | Y | Y | | - | |
+| **hooks** | Y | | | | | Y | | | | | | | | | | | | | | - |
 
 **Legend:** Y = depends on, - = self, empty = no dependency
 
@@ -74,6 +75,7 @@ graph TB
         Comp[composition/]
         Agents[agents/]
         Teams[teams/]
+        Disc[discovery/]
     end
 
     subgraph L2["Layer 2: Infrastructure"]
@@ -97,9 +99,11 @@ graph TB
     L2 --> L1
 
     CLI --> Teams
+    CLI --> Disc
     Teams --> Val
     Teams --> Emb
     Teams --> Conf
+    Disc --> Emb
 ```
 
 ---
@@ -526,6 +530,66 @@ graph TB
 **Used By:** `cli/`
 
 **Rationale:** Teams group multiple agents into coordinated units with shared task management. Isolating team logic allows template patterns, validation rules, and persistence to evolve independently from individual agent or skill management.
+
+---
+
+### discovery/
+
+**Responsibility:** Scan Claude Code session logs, extract recurring patterns, cluster similar prompts, rank candidates, and generate draft skills.
+
+**Key Files:**
+
+| File | Purpose |
+|------|---------|
+| `types.ts` | Zod schemas for JSONL session format (7 entry types) |
+| `session-parser.ts` | Streaming line-by-line JSONL parser |
+| `session-enumerator.ts` | Session enumeration from sessions-index.json |
+| `user-prompt-classifier.ts` | 4-layer noise filtering (97% of user entries) |
+| `scan-state-store.ts` | Atomic persistence for scan watermarks |
+| `corpus-scanner.ts` | Incremental scanning with watermark-based change detection |
+| `tool-sequence-extractor.ts` | Tool sequence n-gram extraction (bigrams, trigrams) |
+| `bash-pattern-extractor.ts` | 8-category Bash command classification |
+| `pattern-aggregator.ts` | Cross-session aggregation with dual-threshold noise filtering |
+| `session-pattern-processor.ts` | Per-session processing with subagent discovery |
+| `pattern-scorer.ts` | Multi-factor scoring formula (frequency, cross-project, recency, consistency) |
+| `candidate-ranker.ts` | Ranking with evidence assembly and Jaccard deduplication |
+| `skill-drafter.ts` | Draft SKILL.md generation with pre-filled steps |
+| `candidate-selector.ts` | Interactive multiselect UI |
+| `dbscan.ts` | DBSCAN clustering with cosine distance |
+| `epsilon-tuner.ts` | Automatic epsilon via k-NN knee detection |
+| `prompt-collector.ts` | Prompt collection wrapper for clustering pipeline |
+| `prompt-embedding-cache.ts` | Content-hash based embedding cache |
+| `prompt-clusterer.ts` | Per-project clustering with cross-project merge |
+| `cluster-scorer.ts` | 4-factor cluster scoring (size, cross-project, coherence, recency) |
+| `cluster-drafter.ts` | Activation-focused draft generation for clusters |
+| `discover-command.ts` | CLI command orchestrating the full pipeline |
+
+**Key Exports:**
+
+| Export | Type | Description |
+|--------|------|-------------|
+| `parseSessionFile()` | Function | Stream-parse a JSONL session file |
+| `enumerateSessions()` | Function | Find all sessions across projects |
+| `classifyUserEntry()` | Function | Classify user entry as prompt or noise |
+| `ScanStateStore` | Class | Persistent scan state with atomic writes |
+| `CorpusScanner` | Class | Incremental corpus scanning |
+| `extractNgrams()` | Function | Extract tool sequence n-grams |
+| `PatternAggregator` | Class | Aggregate patterns across sessions |
+| `scorePattern()` | Function | Multi-factor pattern scoring |
+| `rankCandidates()` | Function | Rank and deduplicate candidates |
+| `generateSkillDraft()` | Function | Generate draft SKILL.md content |
+| `selectCandidates()` | Function | Interactive candidate selection |
+| `dbscan()` | Function | DBSCAN clustering algorithm |
+| `tuneEpsilon()` | Function | Auto epsilon via k-distance knee |
+| `clusterPrompts()` | Function | Full clustering pipeline |
+| `rankClusterCandidates()` | Function | Score and rank cluster candidates |
+| `generateClusterDraft()` | Function | Generate cluster-based skill drafts |
+
+**Depends On:** `embeddings/` (for prompt embedding cache)
+
+**Used By:** `cli/`
+
+**Rationale:** Discovery is a self-contained pipeline that transforms raw session logs into actionable skill candidates. Isolating it from the rest of the codebase keeps the pipeline's streaming/incremental semantics separate from CRUD-style skill management.
 
 ---
 
