@@ -186,14 +186,17 @@ describe('deduplicateAgainstExisting', () => {
   it('filters candidate with keyword overlap above threshold', () => {
     const candidates = [
       makeCandidate('my-skill', 'Guides reading files and editing code in projects'),
+      makeCandidate('unrelated-skill', 'Guides running tests and building packages'),
     ];
     const existingSkills: ExistingSkill[] = [
       { name: 'different-name', description: 'Guides reading files and editing code in projects' },
     ];
 
     const { filtered, removed } = deduplicateAgainstExisting(candidates, existingSkills, 0.5);
-    expect(filtered).toHaveLength(0);
+    expect(filtered).toHaveLength(1);
+    expect(filtered[0].suggestedName).toBe('unrelated-skill');
     expect(removed).toHaveLength(1);
+    expect(removed[0].suggestedName).toBe('my-skill');
   });
 
   it('does NOT filter candidate with keyword overlap below threshold', () => {
