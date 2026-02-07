@@ -15,42 +15,70 @@
 
 import { SessionObserver, SessionStartData } from '../observation/session-observer.js';
 
-async function main(): Promise<void> {
-  // Read JSON from stdin
-  const chunks: Buffer[] = [];
-  for await (const chunk of process.stdin) {
-    chunks.push(chunk);
-  }
+// Claude Code sends snake_case fields, map to our internal interface
+interface ClaudeCodeSessionStartInput {
+  session_id: string;
+  transcript_path: string;
+  cwd: string;
+  source?: 'startup' | 'resume' | 'clear' | 'compact';
+  model?: string;
+  hook_event_name?: string;
+  permission_mode?: string;
+}
 
-  const input = Buffer.concat(chunks).toString('utf-8').trim();
+function readStdin(timeoutMs: number): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = [];
+    const timer = setTimeout(() => {
+      process.stdin.removeAllListeners();
+      process.stdin.pause();
+      resolve(Buffer.concat(chunks).toString('utf-8').trim());
+    }, timeoutMs);
+
+    process.stdin.on('data', (chunk: Buffer) => chunks.push(chunk));
+    process.stdin.on('end', () => {
+      clearTimeout(timer);
+      resolve(Buffer.concat(chunks).toString('utf-8').trim());
+    });
+    process.stdin.on('error', (err) => {
+      clearTimeout(timer);
+      reject(err);
+    });
+    process.stdin.resume();
+  });
+}
+
+async function main(): Promise<void> {
+  // Read JSON from stdin with timeout to prevent hanging
+  const input = await readStdin(3000);
 
   if (!input) {
     // No input provided - this is fine, hook might be called without data
     process.exit(0);
   }
 
-  let data: SessionStartData;
+  let rawData: ClaudeCodeSessionStartInput;
   try {
-    data = JSON.parse(input);
+    rawData = JSON.parse(input);
   } catch (err) {
     console.error('Failed to parse session start data:', err);
     process.exit(1);
   }
 
-  // Validate required fields
-  if (!data.sessionId || !data.transcriptPath || !data.cwd) {
-    console.error('Missing required fields: sessionId, transcriptPath, or cwd');
+  // Validate required fields (using snake_case as sent by Claude Code)
+  if (!rawData.session_id || !rawData.transcript_path || !rawData.cwd) {
+    console.error('Missing required fields: session_id, transcript_path, or cwd');
     process.exit(1);
   }
 
-  // Set defaults for optional fields
+  // Map snake_case input to our internal camelCase interface
   const startData: SessionStartData = {
-    sessionId: data.sessionId,
-    transcriptPath: data.transcriptPath,
-    cwd: data.cwd,
-    source: data.source || 'startup',
-    model: data.model || 'unknown',
-    startTime: data.startTime || Date.now(),
+    sessionId: rawData.session_id,
+    transcriptPath: rawData.transcript_path,
+    cwd: rawData.cwd,
+    source: rawData.source || 'startup',
+    model: rawData.model || 'unknown',
+    startTime: Date.now(),
   };
 
   try {
