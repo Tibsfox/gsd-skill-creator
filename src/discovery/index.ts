@@ -21,6 +21,7 @@
  * - Epsilon auto-tuning via k-NN knee method (epsilon-tuner.ts)
  * - Cluster-specific scoring with 4-factor formula (cluster-scorer.ts)
  * - Activation-focused draft generation for cluster candidates (cluster-drafter.ts)
+ * - Prompt clustering orchestrator with cross-project merge (prompt-clusterer.ts)
  */
 
 export * from './types.js';
@@ -113,3 +114,8 @@ export {
   type ClusterCandidate,
 } from './cluster-scorer.js';
 export { generateClusterDraft } from './cluster-drafter.js';
+export {
+  clusterPrompts,
+  type ClusterResult,
+  type ClusterOptions,
+} from './prompt-clusterer.js';
