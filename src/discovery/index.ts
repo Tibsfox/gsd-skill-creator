@@ -7,6 +7,7 @@
  * - Processed result types for downstream consumers
  * - Scan state persistence with atomic writes (scan-state-store.ts)
  * - Incremental corpus scanning with watermark-based change detection (corpus-scanner.ts)
+ * - Tool sequence n-gram extraction (tool-sequence-extractor.ts)
  */
 
 export * from './types.js';
@@ -25,3 +26,4 @@ export {
 } from './scan-state-store.js';
 export { CorpusScanner } from './corpus-scanner.js';
 export type { CorpusScannerOptions, SessionProcessor, ScanResult } from './corpus-scanner.js';
+export { extractNgrams, buildToolSequence } from './tool-sequence-extractor.js';
