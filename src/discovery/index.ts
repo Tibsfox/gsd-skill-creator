@@ -15,6 +15,8 @@
  * - Candidate ranking with deduplication (candidate-ranker.ts)
  * - Skill draft generation from candidates (skill-drafter.ts)
  * - Interactive candidate selection UI (candidate-selector.ts)
+ * - Prompt collection wrapper for clustering pipeline (prompt-collector.ts)
+ * - Prompt embedding cache with content-hash keying (prompt-embedding-cache.ts)
  * - DBSCAN clustering with cosine distance (dbscan.ts)
  * - Epsilon auto-tuning via k-NN knee method (epsilon-tuner.ts)
  */
@@ -84,6 +86,12 @@ export {
 } from './candidate-selector.js';
 
 // Phase 35: Semantic Clustering
+export {
+  createPromptCollectingProcessor,
+  type CollectedPrompt,
+  type PromptCollectorResult,
+} from './prompt-collector.js';
+export { PromptEmbeddingCache } from './prompt-embedding-cache.js';
 export {
   dbscan,
   cosineDistance,
