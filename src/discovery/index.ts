@@ -11,6 +11,10 @@
  * - Bash command pattern extraction (bash-pattern-extractor.ts)
  * - Pattern aggregation with noise filtering (pattern-aggregator.ts)
  * - Session pattern processing with subagent discovery (session-pattern-processor.ts)
+ * - Multi-factor pattern scoring (pattern-scorer.ts)
+ * - Candidate ranking with deduplication (candidate-ranker.ts)
+ * - Skill draft generation from candidates (skill-drafter.ts)
+ * - Interactive candidate selection UI (candidate-selector.ts)
  */
 
 export * from './types.js';
@@ -47,3 +51,32 @@ export {
   discoverSubagentFiles,
   createPatternSessionProcessor,
 } from './session-pattern-processor.js';
+
+// Phase 33: Ranking & Drafting
+export {
+  scorePattern,
+  parsePatternKey,
+  generateCandidateName,
+  DEFAULT_SCORING_WEIGHTS,
+  type ParsedPatternKey,
+  type ScoringWeights,
+  type ScoreBreakdown,
+  type PatternEvidence,
+  type RankedCandidate,
+} from './pattern-scorer.js';
+export {
+  rankCandidates,
+  assembleEvidence,
+  deduplicateAgainstExisting,
+  type ExistingSkill,
+  type RankingOptions,
+} from './candidate-ranker.js';
+export {
+  generateSkillDraft,
+  TOOL_DESCRIPTIONS,
+  BASH_DESCRIPTIONS,
+} from './skill-drafter.js';
+export {
+  selectCandidates,
+  formatCandidateTable,
+} from './candidate-selector.js';
