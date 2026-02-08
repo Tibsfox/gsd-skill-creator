@@ -1,0 +1,42 @@
+{
+  "name": "migration-team",
+  "description": "Framework and library migration with phased analysis-then-transformation workflow. Analyzer is read-only; transformers make atomic, individually revertable changes.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "migration-coordinator",
+      "role": "leader",
+      "description": "Plans migration strategy, defines transformation scope and ordering, tracks progress across all workers, resolves conflicts when multiple transformers touch related files, and ensures the migration maintains a working state at each step.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "opus"
+    },
+    {
+      "name": "compatibility-analyzer",
+      "role": "worker",
+      "description": "Identifies all deprecated API usage, maps old patterns to new equivalents, catalogs breaking changes, and produces a migration manifest listing every required transformation with file locations and severity. Read-only: analyzes but never modifies code.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "sonnet"
+    },
+    {
+      "name": "code-transformer",
+      "role": "worker",
+      "description": "Performs source code transformations based on the migration manifest. Updates import paths, API call signatures, component patterns, and type definitions. Each transformation is atomic and individually revertable.",
+      "tools": ["Read", "Write", "Edit", "Glob", "Grep"],
+      "model": "sonnet"
+    },
+    {
+      "name": "test-updater",
+      "role": "worker",
+      "description": "Updates test files to match migrated source code. Fixes broken imports, updates mocking patterns, replaces deprecated test utilities, and ensures test coverage is maintained or improved after migration.",
+      "tools": ["Read", "Write", "Edit", "Glob", "Grep"],
+      "model": "sonnet"
+    },
+    {
+      "name": "config-migrator",
+      "role": "worker",
+      "description": "Updates build configuration, package dependencies, tooling config (ESLint, Prettier, TSConfig), CI/CD pipelines, and environment setup. Handles version bumps, new required dependencies, and removed deprecated packages.",
+      "tools": ["Read", "Write", "Edit", "Bash", "Glob", "Grep"],
+      "model": "sonnet"
+    }
+  ]
+}
