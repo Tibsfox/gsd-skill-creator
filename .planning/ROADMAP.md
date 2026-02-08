@@ -17,7 +17,7 @@ v1.8 brings capability-aware planning and token efficiency to the GSD workflow. 
 - [x] **Phase 52: Pipeline Extraction** - Refactor SkillApplicator into SkillPipeline abstraction with pluggable stages ✓ 2026-02-08
 - [x] **Phase 53: Token Budget Tiers** - Per-agent token budgets with priority tiers and budget estimation CLI ✓ 2026-02-08
 - [x] **Phase 54: Capability Manifest** - Auto-generated CAPABILITIES.md from discovered skills, agents, and teams ✓ 2026-02-08
-- [ ] **Phase 55: Phase and Plan Capability Declarations** - Capability verbs in ROADMAP.md phases and capabilities field in plan frontmatter
+- [x] **Phase 55: Phase and Plan Capability Declarations** - Capability verbs in ROADMAP.md phases and capabilities field in plan frontmatter ✓ 2026-02-08
 - [ ] **Phase 56: Skill Injection and Dynamic Creation** - Auto-inject skills into executor context and scaffold new capabilities as plan tasks
 - [ ] **Phase 57: Cache-Aware Ordering** - Order skills by cacheTier metadata for prompt cache optimization
 - [ ] **Phase 58: Research Compression** - Compress research artifacts to distilled skill files with staleness detection
@@ -83,10 +83,10 @@ Plans:
   3. Capability references in phases and plans are validated against CAPABILITIES.md (unknown capabilities produce warnings)
 **Plans:** 4 plans
 Plans:
-- [ ] 55-01-PLAN.md — TDD: Capability declaration types and ROADMAP.md capability parser
-- [ ] 55-02-PLAN.md — TDD: CAPABILITIES.md manifest parser (inverse of renderer)
-- [ ] 55-03-PLAN.md — TDD: CapabilityValidator (validation against manifest)
-- [ ] 55-04-PLAN.md — Wire roadmap-parser integration, barrel exports, planner agent capability inheritance docs
+- [x] 55-01-PLAN.md — TDD: Capability declaration types and ROADMAP.md capability parser
+- [x] 55-02-PLAN.md — TDD: CAPABILITIES.md manifest parser (inverse of renderer)
+- [x] 55-03-PLAN.md — TDD: CapabilityValidator (validation against manifest)
+- [x] 55-04-PLAN.md — Wire roadmap-parser integration, barrel exports, planner agent capability inheritance docs
 
 ### Phase 56: Skill Injection and Dynamic Creation
 **Goal**: Executors automatically receive the skills they need based on plan capabilities, and phases can scaffold new capabilities as plan tasks
@@ -97,7 +97,11 @@ Plans:
   2. When a phase declares capabilities with `create` verb, plan tasks are generated that scaffold new skill/agent files in project-local `.claude/`
   3. Auto-injected skills respect the token budget system from Phase 53 (critical capabilities load first)
   4. Created capabilities appear in CAPABILITIES.md on next regeneration
-**Plans**: TBD
+**Plans:** 3 plans
+Plans:
+- [ ] 56-01-PLAN.md — TDD: SkillInjector service (resolve use-verb capabilities to disk content with critical budget tier)
+- [ ] 56-02-PLAN.md — TDD: CapabilityScaffolder service (generate scaffold tasks for create-verb capabilities)
+- [ ] 56-03-PLAN.md — Wire barrel exports, public API, and GSD workflow documentation (executor, planner, execute-phase)
 
 ### Phase 57: Cache-Aware Ordering
 **Goal**: Skills are ordered to maximize Anthropic prompt cache hits by grouping stable content before dynamic content
@@ -166,8 +170,8 @@ Note: Phases 53 and 54 can execute in parallel (both depend only on 52). Phases 
 | 52. Pipeline Extraction | v1.8 | 2/2 | Complete | 2026-02-08 |
 | 53. Token Budget Tiers | v1.8 | 3/3 | Complete | 2026-02-08 |
 | 54. Capability Manifest | v1.8 | 4/4 | Complete | 2026-02-08 |
-| 55. Phase and Plan Capability Declarations | v1.8 | 0/4 | Not started | - |
-| 56. Skill Injection and Dynamic Creation | v1.8 | 0/TBD | Not started | - |
+| 55. Phase and Plan Capability Declarations | v1.8 | 4/4 | Complete | 2026-02-08 |
+| 56. Skill Injection and Dynamic Creation | v1.8 | 0/3 | Not started | - |
 | 57. Cache-Aware Ordering | v1.8 | 0/TBD | Not started | - |
 | 58. Research Compression | v1.8 | 0/TBD | Not started | - |
 | 59. Model-Aware Activation | v1.8 | 0/TBD | Not started | - |
