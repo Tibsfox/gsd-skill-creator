@@ -389,7 +389,7 @@ describe('SessionObserver', () => {
       expect(summary).not.toBeNull();
       expect(summary!.tier).toBe('ephemeral');
 
-      // Verify NOT in sessions.jsonl
+      // Verify NOT in sessions.jsonl (low-signal sessions are not persisted)
       const sessionsFile = join(patternsDir, 'sessions.jsonl');
       let sessionsContent = '';
       try {
@@ -397,10 +397,11 @@ describe('SessionObserver', () => {
       } catch { /* file may not exist */ }
       expect(sessionsContent).not.toContain('low-signal');
 
-      // Verify IS in .ephemeral.jsonl
+      // Ephemeral buffer is cleared after promotion evaluation
+      // (single low-signal entry scores below threshold, gets discarded)
       const ephemeralFile = join(patternsDir, '.ephemeral.jsonl');
       const ephemeralContent = await readFile(ephemeralFile, 'utf-8');
-      expect(ephemeralContent).toContain('low-signal');
+      expect(ephemeralContent.trim()).toBe('');
     });
 
     it('should promote ephemeral entries via collective squashing', async () => {

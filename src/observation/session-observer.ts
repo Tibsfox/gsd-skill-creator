@@ -4,6 +4,9 @@ import { TranscriptParser } from './transcript-parser.js';
 import { PatternSummarizer } from './pattern-summarizer.js';
 import { RetentionManager } from './retention-manager.js';
 import { PatternStore } from '../storage/pattern-store.js';
+import { EphemeralStore } from './ephemeral-store.js';
+import { PromotionEvaluator } from './promotion-evaluator.js';
+import { ObservationSquasher } from './observation-squasher.js';
 import { SessionObservation, RetentionConfig } from '../types/observation.js';
 
 export interface SessionStartData {
@@ -28,6 +31,9 @@ export class SessionObserver {
   private summarizer: PatternSummarizer;
   private retentionManager: RetentionManager;
   private patternStore: PatternStore;
+  private ephemeralStore: EphemeralStore;
+  private promotionEvaluator: PromotionEvaluator;
+  private squasher: ObservationSquasher;
   private cacheDir: string;
 
   constructor(
@@ -38,6 +44,9 @@ export class SessionObserver {
     this.summarizer = new PatternSummarizer();
     this.retentionManager = new RetentionManager(retentionConfig);
     this.patternStore = new PatternStore(patternsDir);
+    this.ephemeralStore = new EphemeralStore(patternsDir);
+    this.promotionEvaluator = new PromotionEvaluator();
+    this.squasher = new ObservationSquasher();
     this.cacheDir = patternsDir;
   }
 
@@ -90,13 +99,48 @@ export class SessionObserver {
       data.activeSkills || []
     );
 
-    // Store in pattern store
-    await this.patternStore.append('sessions', summary as unknown as Record<string, unknown>);
+    // Evaluate current session for promotion
+    const result = this.promotionEvaluator.evaluate(summary);
+
+    if (result.promote) {
+      summary.tier = 'persistent';
+      await this.patternStore.append('sessions', summary as unknown as Record<string, unknown>);
+    } else {
+      summary.tier = 'ephemeral';
+      await this.ephemeralStore.append(summary);
+    }
+
+    // Promote accumulated ephemeral entries
+    await this.promoteEphemeralEntries();
 
     // Prune old patterns
     const sessionsFile = join(this.cacheDir, 'sessions.jsonl');
     await this.retentionManager.prune(sessionsFile);
 
     return summary;
+  }
+
+  /**
+   * Evaluate accumulated ephemeral entries for batch promotion.
+   * Squashes all entries into a single aggregate, evaluates the aggregate,
+   * and promotes to persistent storage if the collective signal is strong enough.
+   * Clears the ephemeral buffer regardless of outcome.
+   */
+  private async promoteEphemeralEntries(): Promise<void> {
+    const ephemeralEntries = await this.ephemeralStore.readAll();
+    if (ephemeralEntries.length === 0) return;
+
+    // Squash ALL ephemeral entries into a single aggregate
+    const squashed = this.squasher.squash(ephemeralEntries);
+    if (squashed) {
+      // Evaluate the SQUASHED aggregate for promotion
+      const result = this.promotionEvaluator.evaluate(squashed);
+      if (result.promote) {
+        await this.patternStore.append('sessions', squashed as unknown as Record<string, unknown>);
+      }
+    }
+
+    // Clear ephemeral buffer regardless (promoted or discarded)
+    await this.ephemeralStore.clear();
   }
 }
