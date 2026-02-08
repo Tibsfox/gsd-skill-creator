@@ -241,6 +241,14 @@ async function main() {
       break;
     }
 
+    case 'capabilities':
+    case 'cap': {
+      const { capabilitiesCommand } = await import('./cli/commands/capabilities.js');
+      const exitCode = await capabilitiesCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'budget-estimate':
     case 'be': {
       const agentArg = args.find(a => a.startsWith('--agent='));
@@ -1195,6 +1203,7 @@ Commands:
   simulate, sim     Predict which skill would activate for a prompt
   budget, bg        Show character budget usage across all skills
   budget-estimate, be  Show token budget estimates per agent profile
+  capabilities, cap  Generate or show capability manifest (CAPABILITIES.md)
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
   suggest, sg       Analyze patterns and review skill suggestions

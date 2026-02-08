@@ -280,6 +280,10 @@ export { ScoreStage, ResolveStage, LoadStage, BudgetStage } from './application/
 // Budget profiles (Phase 53)
 export { DEFAULT_PROFILES, getBudgetProfile, getTierForSkill } from './application/budget-profiles.js';
 
+// Capabilities module (Phase 54)
+export { CapabilityDiscovery, renderManifest, computeContentHash } from './capabilities/index.js';
+export type { CapabilityManifest, SkillCapability, AgentCapability, TeamCapability } from './capabilities/index.js';
+
 // Simulation module
 export {
   ActivationSimulator,
