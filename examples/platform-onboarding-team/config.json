@@ -1,0 +1,42 @@
+{
+  "name": "platform-onboarding-team",
+  "description": "Comprehensive platform onboarding with specialized analysts for codebase architecture, CI/CD pipelines, infrastructure setup, and test strategy. Produces a unified onboarding guide with architecture overview, pipeline recommendations, and testing strategy.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "onboarding-coordinator",
+      "role": "leader",
+      "description": "Coordinates new service or team onboarding across architecture, pipeline, infrastructure, and testing dimensions. Produces a comprehensive onboarding guide with architecture overview, pipeline setup recommendations, and testing strategy.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "codebase-navigator",
+      "role": "worker",
+      "description": "Analyzes codebase architecture, maps component relationships, traces data flow through the system, identifies entry points, key abstractions, and domain boundaries that a new team needs to understand.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "sonnet"
+    },
+    {
+      "name": "pipeline-analyzer",
+      "role": "worker",
+      "description": "Reviews existing CI/CD configuration, maps build and deployment stages, identifies pipeline bottlenecks, evaluates artifact management, and recommends improvements for reliability and speed.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "infrastructure-auditor",
+      "role": "worker",
+      "description": "Reviews infrastructure setup for best practice adherence, identifies gaps in IaC coverage, evaluates environment configuration, and documents the infrastructure topology for onboarding context.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "test-orchestrator",
+      "role": "worker",
+      "description": "Analyzes existing test strategy across unit, integration, and end-to-end layers, identifies coverage gaps, evaluates test quality and reliability, and recommends a testing approach for the onboarding team.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    }
+  ]
+}

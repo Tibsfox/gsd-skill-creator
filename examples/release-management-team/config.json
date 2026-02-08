@@ -1,0 +1,42 @@
+{
+  "name": "release-management-team",
+  "description": "Release readiness assessment with specialized workers for risk scoring, deployment validation, changelog generation, and test coverage verification. Produces go/no-go recommendations with evidence.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "release-coordinator",
+      "role": "leader",
+      "description": "Coordinates release readiness assessment, synthesizes risk analysis from all workers, and produces go/no-go recommendation with supporting evidence.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "release-risk-scorer",
+      "role": "worker",
+      "description": "Scores release risk by analyzing change volume, blast radius, dependency impact, and historical failure patterns. Provides a quantified risk assessment with contributing factors.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "opus"
+    },
+    {
+      "name": "deployment-validator",
+      "role": "worker",
+      "description": "Validates deployment configurations, checks environment parity between staging and production, and verifies rollback plans are complete and tested.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "changelog-generator",
+      "role": "worker",
+      "description": "Generates release notes and changelog from commit history, PR descriptions, and issue references. Categorizes changes by type and highlights breaking changes.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "test-orchestrator",
+      "role": "worker",
+      "description": "Verifies test coverage for changed code, identifies coverage gaps in critical paths, and checks for skipped or disabled tests that may mask regressions.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    }
+  ]
+}

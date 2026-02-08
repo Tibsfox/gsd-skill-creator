@@ -1,0 +1,42 @@
+{
+  "name": "security-audit-team",
+  "description": "Comprehensive security audit with specialized scanners for vulnerability detection, triage, compliance mapping, and dependency health. Entirely read-only team that produces unified security reports with prioritized remediation.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "security-coordinator",
+      "role": "leader",
+      "description": "Coordinates comprehensive security audit, correlates findings across all scanners, prioritizes remediation by exploitability and impact, and produces unified security report.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "opus"
+    },
+    {
+      "name": "security-reviewer",
+      "role": "worker",
+      "description": "OWASP Top 10 scanning, code-level vulnerability detection, injection pattern analysis, authentication and authorization flaw identification, and insecure data handling review.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "opus"
+    },
+    {
+      "name": "vulnerability-triager",
+      "role": "worker",
+      "description": "Triages vulnerability findings by exploitability, reachability, and real-world impact. Filters false positives, assesses attack surface exposure, and ranks findings by actual risk.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "opus"
+    },
+    {
+      "name": "compliance-auditor",
+      "role": "worker",
+      "description": "SOC2, HIPAA, and PCI-DSS control mapping and gap analysis. Maps codebase practices to compliance framework requirements and identifies missing or insufficient controls.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "opus"
+    },
+    {
+      "name": "dependency-health-checker",
+      "role": "worker",
+      "description": "Dependency vulnerability scanning, license compliance verification, and supply chain risk assessment. Identifies vulnerable transitive dependencies, incompatible licenses, and unmaintained packages.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    }
+  ]
+}
