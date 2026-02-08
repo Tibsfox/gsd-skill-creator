@@ -1,6 +1,9 @@
 // Observation category extends pattern categories
 export type ObservationCategory = 'sessions';
 
+// Tier discriminant for observation storage routing
+export type ObservationTier = 'ephemeral' | 'persistent';
+
 // Claude Code transcript entry format
 export interface TranscriptEntry {
   uuid: string;
@@ -48,6 +51,12 @@ export interface SessionObservation {
 
   // Skills that were active during this session (AGENT-01)
   activeSkills: string[];
+
+  // Tier discriminant controlling storage destination (47-01)
+  tier?: ObservationTier;
+
+  // Number of observations squashed into this one (47-02)
+  squashedFrom?: number;
 }
 
 // Configuration for retention management
@@ -61,3 +70,11 @@ export const DEFAULT_RETENTION_CONFIG: RetentionConfig = {
   maxEntries: 100,
   maxAgeDays: 30,
 };
+
+/**
+ * Normalize observation tier field for backward compatibility.
+ * Old entries without a tier field default to 'persistent'.
+ */
+export function normalizeObservationTier(obs: SessionObservation): SessionObservation {
+  return { ...obs, tier: obs.tier ?? 'persistent' };
+}
