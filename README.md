@@ -4,6 +4,10 @@ A self-evolving skill ecosystem for Claude Code that observes usage patterns, su
 
 Built with [GSD (Get Shit Done)](https://github.com/glittercowboy/get-shit-done) from TÂCHES 
 
+```
+npx get-shit-done-cc@latest
+```
+
 ## Table of Contents
 
 - [What It Does](#what-it-does)
