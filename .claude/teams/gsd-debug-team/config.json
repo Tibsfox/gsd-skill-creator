@@ -1,0 +1,90 @@
+{
+  "name": "gsd-debug",
+  "description": "GSD adversarial debugging team: competing hypotheses with 3 investigators",
+  "leadAgentId": "gsd-debug-lead",
+  "createdAt": "2026-02-08T00:03:34.233Z",
+  "members": [
+    {
+      "agentId": "gsd-debug-lead",
+      "name": "Debug Coordinator",
+      "agentType": "coordinator",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Bash",
+        "Glob",
+        "Grep",
+        "TaskCreate",
+        "TaskList",
+        "TaskGet",
+        "TaskUpdate",
+        "SendMessage",
+        "TeammateTool"
+      ],
+      "prompt": "Coordinate adversarial debugging. Form initial hypotheses, dispatch investigators with competing angles, and synthesize findings into a root cause analysis with fix recommendations."
+    },
+    {
+      "agentId": "gsd-debugger-alpha",
+      "name": "Debugger Alpha",
+      "agentType": "specialist",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Bash",
+        "Glob",
+        "Grep",
+        "WebFetch",
+        "WebSearch",
+        "TaskGet",
+        "TaskUpdate",
+        "SendMessage"
+      ],
+      "prompt": "Primary hypothesis investigator. Form the most likely explanation for the bug and systematically verify or refute it through code analysis, logging, and reproduction."
+    },
+    {
+      "agentId": "gsd-debugger-beta",
+      "name": "Debugger Beta",
+      "agentType": "specialist",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Bash",
+        "Glob",
+        "Grep",
+        "WebFetch",
+        "WebSearch",
+        "TaskGet",
+        "TaskUpdate",
+        "SendMessage"
+      ],
+      "prompt": "Adversarial investigator. Challenge the primary hypothesis by exploring alternative explanations, edge cases, and unexpected interaction patterns that others may overlook."
+    },
+    {
+      "agentId": "gsd-debugger-gamma",
+      "name": "Debugger Gamma",
+      "agentType": "specialist",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Bash",
+        "Glob",
+        "Grep",
+        "WebFetch",
+        "WebSearch",
+        "TaskGet",
+        "TaskUpdate",
+        "SendMessage"
+      ],
+      "prompt": "Environmental and configuration investigator. Focus on infrastructure, dependencies, environment variables, build configuration, and deployment-related root causes."
+    }
+  ],
+  "version": 1,
+  "topology": "leader-worker"
+}
