@@ -213,7 +213,7 @@ Not every team member needs the same model:
 More members means more coordination overhead for the lead:
 
 - **Research team (5 members):** Well-suited because the 4 research dimensions are naturally independent and the synthesis step is well-defined.
-- **Debugging team (4 members):** Three investigation angles is a good balance. More than 3 debuggers would likely produce overlapping investigations.
+- **Debugging team (4 members):** Three investigation agents is a good balance. More than 3 debuggers would likely produce overlapping investigations.
 - **General guideline:** If you're adding team members beyond what the templates provide, ask whether the new member would truly investigate something independent or just overlap with existing members.
 
 ---

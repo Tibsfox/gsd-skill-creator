@@ -90,8 +90,8 @@ export class SessionObserver {
       data.activeSkills || []
     );
 
-    // Store in pattern store (extend PatternCategory with 'sessions')
-    await this.patternStore.append('sessions' as any, summary as unknown as Record<string, unknown>);
+    // Store in pattern store
+    await this.patternStore.append('sessions', summary as unknown as Record<string, unknown>);
 
     // Prune old patterns
     const sessionsFile = join(this.cacheDir, 'sessions.jsonl');
