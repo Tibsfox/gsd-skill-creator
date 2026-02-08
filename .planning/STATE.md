@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 60 (ninth of 10 in v1.8) — Post-Phase Invocation and Collector Agents
-Plan: 2 of 3 in current phase (60-01, 60-02 complete)
-Status: Executing Phase 60
-Last activity: 2026-02-08 — Completed 60-02 CollectorAgentGenerator TDD
+Plan: 3 of 3 in current phase (60-01, 60-02, 60-03 complete)
+Status: Phase 60 complete
+Last activity: 2026-02-08 — Completed 60-03 barrel exports, CLI, and workflow integration
 
 Progress: [##############░░░░░░] ~60%
 
@@ -114,6 +114,9 @@ Recent decisions affecting current work:
 - [59-02]: Pipeline order: Score -> Resolve -> ModelFilter -> CacheOrder -> Budget -> Load (CacheOrder before Budget)
 - [59-02]: ModelFilterStage conditionally inserted only when modelProfile provided (backward compatible)
 - [59-02]: modelProfile is 5th optional constructor param on SkillApplicator (after budgetProfile)
+- [60-03]: Dynamic import for generate-collector command matching capabilities/compress-research CLI pattern
+- [60-03]: Default gather instructions provided when none specified for minimal-args usage
+- [60-03]: post_phase_invocation step fires only on passed status, defers on gaps_found/human_needed
 
 ### Pending Todos
 
@@ -135,7 +138,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 60-02-PLAN.md (CollectorAgentGenerator TDD). Next: 60-03.
+Stopped at: Completed 60-03-PLAN.md (Phase 60 complete). Next phase.
 Resume file: None
 
 ## Performance Metrics
@@ -166,6 +169,7 @@ Resume file: None
 | 57-02 | 2min | 2 | 4 | 2026-02-08 |
 | 58-03 | 3min | 2 | 5 | 2026-02-08 |
 | 59-02 | 4min | 2 | 3 | 2026-02-08 |
+| 60-03 | 3min | 2 | 6 | 2026-02-08 |
 
 ---
-*Updated: 2026-02-08 after 59-02 ModelFilterStage pipeline wiring completed*
+*Updated: 2026-02-08 after 60-03 barrel exports, CLI, and workflow integration completed*
