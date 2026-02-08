@@ -7,7 +7,7 @@ import { SkillSession, type SkillLoadResult, type SessionReport } from './skill-
 import type { ApplicationConfig, ConflictResult, BudgetProfile, SkippedSkill, BudgetWarning } from '../types/application.js';
 import { DEFAULT_CONFIG } from '../types/application.js';
 import { SkillPipeline, createEmptyContext } from './skill-pipeline.js';
-import { ScoreStage, ResolveStage, LoadStage, BudgetStage, CacheOrderStage } from './stages/index.js';
+import { ScoreStage, ResolveStage, LoadStage, BudgetStage, CacheOrderStage, ModelFilterStage } from './stages/index.js';
 
 export interface ApplyResult {
   loaded: string[];
@@ -33,13 +33,15 @@ export class SkillApplicator {
   private session: SkillSession;
   private pipeline: SkillPipeline;
   private budgetProfile?: BudgetProfile;
+  private modelProfile?: string;
   private indexed = false;
 
   constructor(
     private skillIndex: SkillIndex,
     private skillStore: SkillStore,
     config?: Partial<ApplicationConfig>,
-    budgetProfile?: BudgetProfile
+    budgetProfile?: BudgetProfile,
+    modelProfile?: string
   ) {
     const fullConfig = { ...DEFAULT_CONFIG, ...config };
 
@@ -48,10 +50,18 @@ export class SkillApplicator {
     this.resolver = new ConflictResolver();
     this.session = new SkillSession(this.tokenCounter, fullConfig);
     this.budgetProfile = budgetProfile;
+    this.modelProfile = modelProfile;
 
+    // Pipeline order: Score -> Resolve -> ModelFilter (conditional) -> CacheOrder -> Budget (conditional) -> Load
     this.pipeline = new SkillPipeline();
     this.pipeline.addStage(new ScoreStage(this.skillIndex, this.scorer));
     this.pipeline.addStage(new ResolveStage(this.resolver));
+
+    if (modelProfile) {
+      this.pipeline.addStage(new ModelFilterStage(this.skillStore));
+    }
+
+    this.pipeline.addStage(new CacheOrderStage(this.skillStore));
 
     if (budgetProfile) {
       this.pipeline.addStage(new BudgetStage(
@@ -62,7 +72,6 @@ export class SkillApplicator {
       ));
     }
 
-    this.pipeline.addStage(new CacheOrderStage(this.skillStore));
     this.pipeline.addStage(new LoadStage(this.skillStore, this.session));
   }
 
@@ -87,6 +96,7 @@ export class SkillApplicator {
       intent,
       file,
       context,
+      modelProfile: this.modelProfile,
       getReport: () => this.session.getReport(),
     });
 
