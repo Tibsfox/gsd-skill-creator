@@ -102,6 +102,8 @@ export interface ClassificationResult {
   arguments: ExtractedArguments;
   alternatives: Array<{ command: GsdCommandMetadata; confidence: number }>;
   lifecycleStage: LifecycleStage | null;
+  /** Classification method: 'exact' for explicit /gsd: prefix, 'bayes' for NL, 'semantic' for embedding fallback */
+  method?: 'bayes' | 'semantic' | 'exact';
   [key: string]: unknown;
 }
 
@@ -121,6 +123,10 @@ export const ClassifierConfigSchema = z.object({
   ambiguityGap: z.number().min(0).max(1).default(0.15),
   /** Maximum alternative candidates for ambiguous results (default 3) */
   maxAlternatives: z.number().int().min(1).default(3),
+  /** Minimum cosine similarity for semantic fallback to replace weak Bayes result (default 0.65) */
+  semanticThreshold: z.number().min(0).max(1).default(0.65),
+  /** Enable semantic embedding fallback when available (default true) */
+  enableSemantic: z.boolean().default(true),
 }).passthrough();
 
 export type ClassifierConfig = z.infer<typeof ClassifierConfigSchema>;
