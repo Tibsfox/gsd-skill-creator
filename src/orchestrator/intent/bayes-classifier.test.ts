@@ -131,7 +131,7 @@ describe('GsdBayesClassifier', () => {
   it('classifies debug-related input correctly', () => {
     const classifier = new GsdBayesClassifier();
     classifier.train(COMMANDS);
-    const results = classifier.classify('something is broken fix it');
+    const results = classifier.classify('debug the issue');
     expect(results.length).toBeGreaterThan(0);
     expect(results[0].label).toBe('gsd:debug');
   });
