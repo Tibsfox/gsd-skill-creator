@@ -203,6 +203,10 @@ export type {
   ConflictResult,
   TokenTracking,
   ApplicationConfig,
+  PriorityTier,
+  SkippedSkill,
+  BudgetWarning,
+  BudgetProfile,
 } from './types/application.js';
 
 // Learning module
@@ -271,7 +275,10 @@ export type { ApplyResult, InvokeResult } from './application/skill-applicator.j
 // Pipeline infrastructure (Phase 52)
 export { SkillPipeline, createEmptyContext } from './application/skill-pipeline.js';
 export type { PipelineStage, PipelineContext } from './application/skill-pipeline.js';
-export { ScoreStage, ResolveStage, LoadStage } from './application/stages/index.js';
+export { ScoreStage, ResolveStage, LoadStage, BudgetStage } from './application/stages/index.js';
+
+// Budget profiles (Phase 53)
+export { DEFAULT_PROFILES, getBudgetProfile, getTierForSkill } from './application/budget-profiles.js';
 
 // Simulation module
 export {
@@ -334,13 +341,14 @@ export type {
 
 // Import applicator for factory
 import { SkillApplicator } from './application/skill-applicator.js';
-import type { ApplicationConfig } from './types/application.js';
+import type { ApplicationConfig, BudgetProfile } from './types/application.js';
 
 // Enhanced factory that includes applicator
 export function createApplicationContext(options?: {
   patternsDir?: string;
   skillsDir?: string;
   config?: Partial<ApplicationConfig>;
+  budgetProfile?: BudgetProfile;
 }) {
   const stores = createStores({
     patternsDir: options?.patternsDir,
@@ -350,7 +358,8 @@ export function createApplicationContext(options?: {
   const applicator = new SkillApplicator(
     stores.skillIndex,
     stores.skillStore,
-    options?.config
+    options?.config,
+    options?.budgetProfile
   );
 
   return {
