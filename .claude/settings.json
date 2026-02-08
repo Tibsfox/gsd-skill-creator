@@ -24,6 +24,14 @@
             "command": "node .claude/hooks/gsd-restore-work-state.js"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/gsd-inject-snapshot.js"
+          }
+        ]
       }
     ],
     "SessionEnd": [
@@ -32,6 +40,14 @@
           {
             "type": "command",
             "command": "node .claude/hooks/gsd-save-work-state.js"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/gsd-snapshot-session.js"
           }
         ]
       }
