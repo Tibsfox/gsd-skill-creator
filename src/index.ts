@@ -284,6 +284,10 @@ export { DEFAULT_PROFILES, getBudgetProfile, getTierForSkill } from './applicati
 export { CapabilityDiscovery, renderManifest, computeContentHash } from './capabilities/index.js';
 export type { CapabilityManifest, SkillCapability, AgentCapability, TeamCapability } from './capabilities/index.js';
 
+// Skill injection and scaffolding (Phase 56)
+export { SkillInjector, CapabilityScaffolder } from './capabilities/index.js';
+export type { InjectionRequest, InjectedSkill, InjectionResult, ScaffoldTask } from './capabilities/index.js';
+
 // Simulation module
 export {
   ActivationSimulator,
