@@ -12,6 +12,7 @@
  * - state: Read .planning/ artifacts into typed ProjectState
  * - classify: Map natural language or /gsd:command to GSD commands
  * - lifecycle: Suggest next actions from project state
+ * - work-state: Persist and restore work state (save/restore/queue-*)
  */
 
 import { join } from 'path';
@@ -24,6 +25,10 @@ import {
 } from '../../orchestrator/index.js';
 import type { OutputSection } from '../../orchestrator/index.js';
 import { ProjectStateReader } from '../../orchestrator/state/state-reader.js';
+import { WorkStateWriter } from '../../orchestrator/work-state/work-state-writer.js';
+import { WorkStateReader } from '../../orchestrator/work-state/work-state-reader.js';
+import { QueueManager } from '../../orchestrator/work-state/queue-manager.js';
+import { DEFAULT_WORK_STATE_FILENAME } from '../../orchestrator/work-state/types.js';
 
 // ============================================================================
 // Argument parsing helpers
@@ -75,7 +80,7 @@ function resolveVerbosity(args: string[], configVerbosity?: number): number {
 
 /**
  * Display help text for the orchestrator command.
- * Lists all four subcommands (discover, state, classify, lifecycle).
+ * Lists all subcommands (discover, state, classify, lifecycle, work-state).
  */
 function showOrchestratorHelp(): void {
   console.log(`
@@ -86,10 +91,11 @@ Usage:
   skill-creator orch <subcommand> [options]
 
 Subcommands:
-  discover, d     Discover installed GSD commands, agents, and teams
-  state, s        Read project lifecycle position from .planning/
-  classify, c     Classify user intent to a GSD command
-  lifecycle, l    Suggest next actions from project state
+  discover, d        Discover installed GSD commands, agents, and teams
+  state, s           Read project lifecycle position from .planning/
+  classify, c        Classify user intent to a GSD command
+  lifecycle, l       Suggest next actions from project state
+  work-state, ws     Persist and restore work state
 
 Common Options:
   --pretty        Human-readable formatted output (default: JSON)
@@ -110,6 +116,30 @@ Lifecycle Options:
   --planning-dir=<path> Override .planning/ directory path
   --after=<command>     Completed command hint (e.g., --after=plan-phase)
 
+Work-State Sub-subcommands:
+  save                  Save current work state to YAML
+    --session-id=<id>   Session identifier
+    --active-task=<task> Active task name
+    --skills=<a,b,c>    Comma-separated loaded skills
+    --planning-dir=<path> Override .planning/ directory path
+
+  restore               Restore saved work state
+    --pretty            Human-readable output
+    --planning-dir=<path> Override .planning/ directory path
+
+  queue-add             Add a task to the queue
+    --description=<text> Task description (required)
+    --skills=<a,b>      Comma-separated skills needed
+    --priority=<level>  high, medium, or low (default: medium)
+    --planning-dir=<path> Override .planning/ directory path
+
+  queue-list            List queued tasks
+    --planning-dir=<path> Override .planning/ directory path
+
+  queue-remove          Remove a queued task
+    --id=<task-id>      Task ID to remove (required)
+    --planning-dir=<path> Override .planning/ directory path
+
 Output:
   By default, all subcommands output structured JSON to stdout.
   Use --pretty for human-readable output. Errors are JSON objects
@@ -124,6 +154,11 @@ Examples:
   skill-creator orch c "plan the next phase"
   skill-creator orchestrator lifecycle
   skill-creator orch l --after=plan-phase
+  skill-creator orchestrator work-state save --session-id=abc123
+  skill-creator orch ws restore --pretty
+  skill-creator orch ws queue-add --description="Fix auth bug"
+  skill-creator orch ws queue-list
+  skill-creator orch ws queue-remove --id=<task-id>
 `);
 }
 
@@ -390,6 +425,228 @@ async function handleLifecycle(args: string[]): Promise<number> {
 }
 
 // ============================================================================
+// Work-state subcommand
+// ============================================================================
+
+/**
+ * Resolve the work state file path from --planning-dir flag.
+ * Defaults to `.planning/hooks/current-work.yaml` in cwd.
+ */
+function resolveWorkStatePath(args: string[]): string {
+  const planningDir = extractFlag(args, 'planning-dir')
+    ?? join(process.cwd(), '.planning');
+  return join(planningDir, 'hooks', DEFAULT_WORK_STATE_FILENAME);
+}
+
+/**
+ * Execute the work-state subcommand.
+ *
+ * Dispatches to sub-subcommands: save, restore, queue-add, queue-list, queue-remove.
+ */
+async function handleWorkState(args: string[]): Promise<number> {
+  const subSub = args[0];
+
+  if (!subSub || subSub === '--help' || subSub === '-h') {
+    // Show the full help which now includes work-state details
+    showOrchestratorHelp();
+    return 0;
+  }
+
+  const handlerArgs = args.slice(1);
+
+  switch (subSub) {
+    case 'save':
+      return handleWorkStateSave(handlerArgs);
+    case 'restore':
+      return handleWorkStateRestore(handlerArgs);
+    case 'queue-add':
+      return handleWorkStateQueueAdd(handlerArgs);
+    case 'queue-list':
+      return handleWorkStateQueueList(handlerArgs);
+    case 'queue-remove':
+      return handleWorkStateQueueRemove(handlerArgs);
+    default:
+      console.log(JSON.stringify({
+        error: `Unknown work-state subcommand: ${subSub}`,
+        help: 'Available: save, restore, queue-add, queue-list, queue-remove',
+      }, null, 2));
+      return 1;
+  }
+}
+
+/**
+ * Save work state to YAML file.
+ *
+ * Builds a WorkState from CLI flags and writes via WorkStateWriter.
+ * Flags: --session-id, --active-task, --skills (comma-separated)
+ */
+async function handleWorkStateSave(args: string[]): Promise<number> {
+  const filePath = resolveWorkStatePath(args);
+  const sessionId = extractFlag(args, 'session-id') ?? null;
+  const activeTask = extractFlag(args, 'active-task') ?? null;
+  const skillsRaw = extractFlag(args, 'skills');
+  const loadedSkills = skillsRaw ? skillsRaw.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+  try {
+    const writer = new WorkStateWriter(filePath);
+    const state = {
+      version: 1,
+      session_id: sessionId,
+      saved_at: new Date().toISOString(),
+      active_task: activeTask,
+      checkpoint: null,
+      loaded_skills: loadedSkills,
+      queued_tasks: [] as any[],
+      workflow: null,
+    };
+
+    // Preserve existing queued_tasks if file already exists
+    const reader = new WorkStateReader(filePath);
+    const existing = await reader.read();
+    if (existing) {
+      state.queued_tasks = existing.queued_tasks;
+    }
+
+    await writer.save(state);
+    console.log(JSON.stringify({ saved: filePath }, null, 2));
+    return 0;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.log(JSON.stringify({ error: message }, null, 2));
+    return 1;
+  }
+}
+
+/**
+ * Restore (read) work state from YAML file.
+ *
+ * Outputs as JSON or pretty-printed text.
+ */
+async function handleWorkStateRestore(args: string[]): Promise<number> {
+  const filePath = resolveWorkStatePath(args);
+  const pretty = hasFlag(args, 'pretty');
+
+  try {
+    const reader = new WorkStateReader(filePath);
+    const state = await reader.read();
+
+    if (!state) {
+      console.log(JSON.stringify({ error: 'No work state found' }, null, 2));
+      return 1;
+    }
+
+    if (pretty) {
+      console.log('Work State');
+      console.log('==========');
+      console.log(`Version: ${state.version}`);
+      console.log(`Session: ${state.session_id ?? '(none)'}`);
+      console.log(`Saved at: ${state.saved_at}`);
+      console.log(`Active task: ${state.active_task ?? '(none)'}`);
+      console.log(`Loaded skills: ${state.loaded_skills.length > 0 ? state.loaded_skills.join(', ') : '(none)'}`);
+      console.log(`Queued tasks: ${state.queued_tasks.length}`);
+      if (state.checkpoint) {
+        console.log(`Checkpoint: phase ${state.checkpoint.phase}, plan ${state.checkpoint.plan}, status ${state.checkpoint.status}`);
+      }
+      if (state.workflow) {
+        console.log(`Workflow: ${state.workflow.name} (step: ${state.workflow.current_step})`);
+      }
+    } else {
+      console.log(JSON.stringify(state, null, 2));
+    }
+
+    return 0;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.log(JSON.stringify({ error: message }, null, 2));
+    return 1;
+  }
+}
+
+/**
+ * Add a task to the work state queue.
+ *
+ * Required: --description. Optional: --skills, --priority, --source.
+ */
+async function handleWorkStateQueueAdd(args: string[]): Promise<number> {
+  const filePath = resolveWorkStatePath(args);
+  const description = extractFlag(args, 'description');
+  const skillsRaw = extractFlag(args, 'skills');
+  const priority = extractFlag(args, 'priority') as 'high' | 'medium' | 'low' | undefined;
+  const source = extractFlag(args, 'source');
+
+  if (!description) {
+    console.log(JSON.stringify({
+      error: 'Missing required --description flag',
+      help: 'Usage: skill-creator orch ws queue-add --description="task description"',
+    }, null, 2));
+    return 1;
+  }
+
+  try {
+    const manager = new QueueManager(filePath);
+    const task = await manager.add({
+      description,
+      skills_needed: skillsRaw ? skillsRaw.split(',').map(s => s.trim()).filter(Boolean) : undefined,
+      priority,
+      source,
+    });
+    console.log(JSON.stringify(task, null, 2));
+    return 0;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.log(JSON.stringify({ error: message }, null, 2));
+    return 1;
+  }
+}
+
+/**
+ * List all queued tasks from the work state.
+ */
+async function handleWorkStateQueueList(args: string[]): Promise<number> {
+  const filePath = resolveWorkStatePath(args);
+
+  try {
+    const manager = new QueueManager(filePath);
+    const tasks = await manager.list();
+    console.log(JSON.stringify(tasks, null, 2));
+    return 0;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.log(JSON.stringify({ error: message }, null, 2));
+    return 1;
+  }
+}
+
+/**
+ * Remove a task from the work state queue by id.
+ *
+ * Required: --id.
+ */
+async function handleWorkStateQueueRemove(args: string[]): Promise<number> {
+  const filePath = resolveWorkStatePath(args);
+  const id = extractFlag(args, 'id');
+
+  if (!id) {
+    console.log(JSON.stringify({
+      error: 'Missing required --id flag',
+      help: 'Usage: skill-creator orch ws queue-remove --id=<task-id>',
+    }, null, 2));
+    return 1;
+  }
+
+  try {
+    const manager = new QueueManager(filePath);
+    const removed = await manager.remove(id);
+    console.log(JSON.stringify({ removed }, null, 2));
+    return 0;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.log(JSON.stringify({ error: message }, null, 2));
+    return 1;
+  }
+}
+
+// ============================================================================
 // Main dispatcher
 // ============================================================================
 
@@ -429,6 +686,10 @@ export async function orchestratorCommand(args: string[]): Promise<number> {
     case 'lifecycle':
     case 'l':
       return handleLifecycle(handlerArgs);
+
+    case 'work-state':
+    case 'ws':
+      return handleWorkState(handlerArgs);
 
     default:
       console.log(JSON.stringify({
