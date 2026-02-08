@@ -29,3 +29,9 @@ export type { CompressedResearch, CompressionOptions } from './research-compress
 // Staleness detection (Phase 58)
 export { StalenessChecker } from './staleness-checker.js';
 export type { StalenessResult, ConflictResolution } from './staleness-checker.js';
+// Post-Phase Invocation (Phase 60)
+export { PostPhaseInvoker } from './post-phase-invoker.js';
+export type { InvocationRequest, InvocationInstruction, InvocationResult } from './post-phase-invoker.js';
+// Collector Agent Generation (Phase 60)
+export { CollectorAgentGenerator, COLLECTOR_TOOLS } from './collector-agent-generator.js';
+export type { CollectorAgentConfig, CollectorAgentResult } from './collector-agent-generator.js';
