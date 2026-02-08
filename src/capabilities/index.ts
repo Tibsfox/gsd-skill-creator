@@ -14,3 +14,9 @@ export { parseManifest } from './manifest-parser.js';
 // Validator
 export { CapabilityValidator } from './capability-validator.js';
 export type { ValidationResult, ValidationWarning } from './capability-validator.js';
+// Skill Injection (Phase 56)
+export { SkillInjector } from './skill-injector.js';
+export type { InjectionRequest, InjectedSkill, InjectionResult } from './skill-injector.js';
+// Capability Scaffolding (Phase 56)
+export { CapabilityScaffolder } from './capability-scaffolder.js';
+export type { ScaffoldTask } from './capability-scaffolder.js';
