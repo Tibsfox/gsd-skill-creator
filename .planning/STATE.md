@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns
-**Current focus:** Phase 54 Capability Manifest
+**Current focus:** Phase 55 Phase Plan Capability Declarations
 
 ## Current Position
 
-Phase: 54 (third of 10 in v1.8) — Capability Manifest -- COMPLETE
-Plan: 4 of 4 in current phase (all complete)
-Status: Phase 54 complete, ready for Phase 55
-Last activity: 2026-02-08 — Completed 54-04 GSD Workflow Integration
+Phase: 55 (fourth of 10 in v1.8) — Phase Plan Capability Declarations
+Plan: 2 of 3 in current phase (55-01, 55-02 complete)
+Status: Executing Phase 55
+Last activity: 2026-02-08 — Completed 55-02 Manifest Parser
 
-Progress: [########░░░░░░░░░░░░] ~30%
+Progress: [#########░░░░░░░░░░░] ~35%
 
 ## Shipped Milestones
 
@@ -64,6 +64,12 @@ Recent decisions affecting current work:
 - [54-04]: CLI invoked as npx skill-creator capabilities generate (matching package.json bin entry)
 - [54-04]: Capability discovery runs after roadmap commit but before completion banner
 - [54-04]: CAPABILITIES.md committed via gsd-tools commit pattern matching existing workflow style
+- [55-01]: Plain TypeScript types (not Zod) for CapabilityVerb/CapabilityType/CapabilityRef since used in parsing, not schema validation
+- [55-01]: parseCapabilityLine kept private, only parseCapabilityDeclarations exported as public API
+- [55-01]: Block termination at **metadata** lines, # headings, and 1. numbered lists
+- [55-02]: Placeholder-based pipe splitting: replace \| with null-byte placeholder before splitting by |, then restore
+- [55-02]: gray-matter Date coercion handled: generatedAt may be parsed as Date object, converted back to ISO string
+- [55-02]: Optional fields use dash-to-undefined mapping: '-' in table cells becomes undefined on typed objects
 
 ### Pending Todos
 
@@ -85,7 +91,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 54-04-PLAN.md (GSD Workflow Integration). Phase 54 complete. Next: Phase 55.
+Stopped at: Completed 55-02-PLAN.md (Manifest Parser). Next: 55-03.
 Resume file: None
 
 ## Performance Metrics
@@ -100,6 +106,8 @@ Resume file: None
 | 54-01 | 2min | 2 | 3 | 2026-02-08 |
 | 54-03 | 3min | 2 | 5 | 2026-02-08 |
 | 54-04 | 2min | 2 | 2 | 2026-02-08 |
+| 55-01 | 2min | 2 | 3 | 2026-02-08 |
+| 55-02 | 2min | 2 | 2 | 2026-02-08 |
 
 ---
-*Updated: 2026-02-08 after 54-04 GSD Workflow Integration completed*
+*Updated: 2026-02-08 after 55-02 Manifest Parser completed*
