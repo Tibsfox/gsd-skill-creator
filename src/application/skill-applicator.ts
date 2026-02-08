@@ -4,16 +4,18 @@ import { TokenCounter } from './token-counter.js';
 import { RelevanceScorer } from './relevance-scorer.js';
 import { ConflictResolver } from './conflict-resolver.js';
 import { SkillSession, type SkillLoadResult, type SessionReport } from './skill-session.js';
-import type { ApplicationConfig, ConflictResult } from '../types/application.js';
+import type { ApplicationConfig, ConflictResult, BudgetProfile, SkippedSkill, BudgetWarning } from '../types/application.js';
 import { DEFAULT_CONFIG } from '../types/application.js';
 import { SkillPipeline, createEmptyContext } from './skill-pipeline.js';
-import { ScoreStage, ResolveStage, LoadStage } from './stages/index.js';
+import { ScoreStage, ResolveStage, LoadStage, BudgetStage } from './stages/index.js';
 
 export interface ApplyResult {
   loaded: string[];
   skipped: string[];
   conflicts: ConflictResult;
   report: SessionReport;
+  skippedWithReasons: SkippedSkill[];
+  budgetWarnings: BudgetWarning[];
 }
 
 export interface InvokeResult {
@@ -30,12 +32,14 @@ export class SkillApplicator {
   private resolver: ConflictResolver;
   private session: SkillSession;
   private pipeline: SkillPipeline;
+  private budgetProfile?: BudgetProfile;
   private indexed = false;
 
   constructor(
     private skillIndex: SkillIndex,
     private skillStore: SkillStore,
-    config?: Partial<ApplicationConfig>
+    config?: Partial<ApplicationConfig>,
+    budgetProfile?: BudgetProfile
   ) {
     const fullConfig = { ...DEFAULT_CONFIG, ...config };
 
@@ -43,10 +47,21 @@ export class SkillApplicator {
     this.scorer = new RelevanceScorer();
     this.resolver = new ConflictResolver();
     this.session = new SkillSession(this.tokenCounter, fullConfig);
+    this.budgetProfile = budgetProfile;
 
     this.pipeline = new SkillPipeline();
     this.pipeline.addStage(new ScoreStage(this.skillIndex, this.scorer));
     this.pipeline.addStage(new ResolveStage(this.resolver));
+
+    if (budgetProfile) {
+      this.pipeline.addStage(new BudgetStage(
+        this.tokenCounter,
+        budgetProfile,
+        this.skillStore,
+        fullConfig.contextWindowSize
+      ));
+    }
+
     this.pipeline.addStage(new LoadStage(this.skillStore, this.session));
   }
 
@@ -81,6 +96,8 @@ export class SkillApplicator {
       skipped: result.skipped,
       conflicts: result.conflicts,
       report: result.getReport(),
+      skippedWithReasons: result.budgetSkipped,
+      budgetWarnings: result.budgetWarnings,
     };
   }
 
