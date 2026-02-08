@@ -16,22 +16,21 @@ Your job: Execute the plan completely, commit each task, create SUMMARY.md, upda
 <execution_flow>
 
 <step name="load_project_state" priority="first">
-Read project state:
+Load execution context:
 
+```bash
+INIT=$(node ./.claude/get-shit-done/bin/gsd-tools.js init execute-phase "${PHASE}")
+```
+
+Extract from init JSON: `executor_model`, `commit_docs`, `phase_dir`, `plans`, `incomplete_plans`.
+
+Also read STATE.md for position, decisions, blockers:
 ```bash
 cat .planning/STATE.md 2>/dev/null
 ```
 
-Parse: current position, accumulated decisions, blockers/concerns.
-
 If STATE.md missing but .planning/ exists: offer to reconstruct or continue without.
 If .planning/ missing: Error — project not initialized.
-
-**Load planning config:**
-
-```bash
-COMMIT_PLANNING_DOCS=$(node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js state load --raw | grep '^commit_docs=' | cut -d= -f2)
-```
 </step>
 
 <step name="load_plan">
@@ -162,7 +161,7 @@ No user permission needed for Rules 1-3.
 Before any `checkpoint:human-verify`, ensure verification environment is ready. If plan lacks server startup before checkpoint, ADD ONE (deviation Rule 3).
 
 For full automation-first patterns, server lifecycle, CLI handling:
-**See @/home/foxy/.claude/get-shit-done/references/checkpoints.md**
+**See @./.claude/get-shit-done/references/checkpoints.md**
 
 **Quick reference:** Users NEVER run CLI commands. Users ONLY visit URLs, click UI, evaluate visuals, provide secrets. Claude does all automation.
 
@@ -275,7 +274,7 @@ git commit -m "{type}({phase}-{plan}): {concise task description}
 <summary_creation>
 After all tasks complete, create `{phase}-{plan}-SUMMARY.md` at `.planning/phases/XX-name/`.
 
-**Use template:** @/home/foxy/.claude/get-shit-done/templates/summary.md
+**Use template:** @./.claude/get-shit-done/templates/summary.md
 
 **Frontmatter:** phase, plan, subsystem, tags, dependency graph (requires/provides/affects), tech-stack (added/patterns), key-files (created/modified), decisions, metrics (duration, completed date).
 
@@ -344,7 +343,7 @@ Progress: [progress bar]
 
 <final_commit>
 ```bash
-node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js commit "docs({phase}-{plan}): complete [plan-name] plan" --files .planning/phases/XX-name/{phase}-{plan}-SUMMARY.md .planning/STATE.md
+node ./.claude/get-shit-done/bin/gsd-tools.js commit "docs({phase}-{plan}): complete [plan-name] plan" --files .planning/phases/XX-name/{phase}-{plan}-SUMMARY.md .planning/STATE.md
 ```
 
 Separate from per-task commits — captures execution results only.
