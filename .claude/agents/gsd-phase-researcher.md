@@ -293,11 +293,16 @@ Verified patterns from official sources:
 
 Orchestrator provides: phase number/name, description/goal, requirements, constraints, output path.
 
+Load phase context using init command:
 ```bash
-PHASE_DIR=$(node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js find-phase "$PHASE" --raw)
-PADDED_PHASE=$(node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js find-phase "$PHASE" | grep -o '"phase_number":"[^"]*"' | cut -d'"' -f4)
+INIT=$(node ./.claude/get-shit-done/bin/gsd-tools.js init phase-op "${PHASE}")
+```
 
-cat "$PHASE_DIR"/*-CONTEXT.md 2>/dev/null
+Extract from init JSON: `phase_dir`, `padded_phase`, `phase_number`, `commit_docs`.
+
+Then read CONTEXT.md if exists:
+```bash
+cat "$phase_dir"/*-CONTEXT.md 2>/dev/null
 ```
 
 **If CONTEXT.md exists**, it constrains research:
@@ -363,7 +368,7 @@ Write to: `$PHASE_DIR/$PADDED_PHASE-RESEARCH.md`
 ## Step 6: Commit Research (optional)
 
 ```bash
-node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js commit "docs($PHASE): research phase domain" --files "$PHASE_DIR/$PADDED_PHASE-RESEARCH.md"
+node ./.claude/get-shit-done/bin/gsd-tools.js commit "docs($PHASE): research phase domain" --files "$PHASE_DIR/$PADDED_PHASE-RESEARCH.md"
 ```
 
 ## Step 7: Return Structured Result
