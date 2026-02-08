@@ -10,7 +10,8 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { IntentClassifier } from './intent-classifier.js';
 import type { GsdCommandMetadata, DiscoveryResult } from '../discovery/types.js';
 import type { ProjectState } from '../state/types.js';
-import type { SemanticMatcher, SemanticMatch } from './semantic-matcher.js';
+import { SemanticMatcher } from './semantic-matcher.js';
+import type { SemanticMatch } from './semantic-matcher.js';
 
 // ============================================================================
 // Fixtures
@@ -547,6 +548,10 @@ describe('IntentClassifier', () => {
     });
 
     it('when SemanticMatcher.initialize() rejects, classify works without semantic', async () => {
+      // Mock SemanticMatcher.prototype.initialize to throw
+      const initSpy = vi.spyOn(SemanticMatcher.prototype, 'initialize')
+        .mockRejectedValueOnce(new Error('Embedding model not found'));
+
       const semClassifier = new IntentClassifier({ enableSemantic: true });
 
       // Initialize -- semantic will silently degrade, but must return Promise
@@ -562,6 +567,8 @@ describe('IntentClassifier', () => {
       const result = await semClassifier.classify('plan the next phase', executingState);
       expect(result).toBeDefined();
       expect(result.type).not.toBe('error');
+
+      initSpy.mockRestore();
     });
 
     it('classification results are identical to pre-semantic behavior when disabled', async () => {
