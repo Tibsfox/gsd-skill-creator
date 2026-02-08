@@ -81,11 +81,12 @@ Plans:
   1. ROADMAP.md phases can declare capability verbs (use/create/after/adapt) referencing skills, agents, and teams by name
   2. Plan frontmatter includes a capabilities field that inherits from the parent phase declarations
   3. Capability references in phases and plans are validated against CAPABILITIES.md (unknown capabilities produce warnings)
-**Plans:** 3 plans
+**Plans:** 4 plans
 Plans:
 - [ ] 55-01-PLAN.md — TDD: Capability declaration types and ROADMAP.md capability parser
 - [ ] 55-02-PLAN.md — TDD: CAPABILITIES.md manifest parser (inverse of renderer)
-- [ ] 55-03-PLAN.md — TDD: CapabilityValidator, roadmap-parser integration, barrel exports, planner agent docs
+- [ ] 55-03-PLAN.md — TDD: CapabilityValidator (validation against manifest)
+- [ ] 55-04-PLAN.md — Wire roadmap-parser integration, barrel exports, planner agent capability inheritance docs
 
 ### Phase 56: Skill Injection and Dynamic Creation
 **Goal**: Executors automatically receive the skills they need based on plan capabilities, and phases can scaffold new capabilities as plan tasks
@@ -165,7 +166,7 @@ Note: Phases 53 and 54 can execute in parallel (both depend only on 52). Phases 
 | 52. Pipeline Extraction | v1.8 | 2/2 | Complete | 2026-02-08 |
 | 53. Token Budget Tiers | v1.8 | 3/3 | Complete | 2026-02-08 |
 | 54. Capability Manifest | v1.8 | 4/4 | Complete | 2026-02-08 |
-| 55. Phase and Plan Capability Declarations | v1.8 | 0/3 | Not started | - |
+| 55. Phase and Plan Capability Declarations | v1.8 | 0/4 | Not started | - |
 | 56. Skill Injection and Dynamic Creation | v1.8 | 0/TBD | Not started | - |
 | 57. Cache-Aware Ordering | v1.8 | 0/TBD | Not started | - |
 | 58. Research Compression | v1.8 | 0/TBD | Not started | - |
