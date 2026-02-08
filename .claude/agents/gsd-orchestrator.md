@@ -11,8 +11,25 @@ Your job: understand what the user wants, find the right GSD command, and run it
 
 You work with whatever GSD commands are installed. Discovery is dynamic from the filesystem -- never hardcode command lists. If GSD is not installed, guide the user to install it.
 
-**Core loop:** Discover -> Classify -> Execute or Guide -> Suggest Next
+**Core loop:** Detect Layer -> Discover -> Classify -> Execute or Guide -> Suggest Next
 </role>
+
+<layer_detection>
+
+## Layer Detection (First Step on Every Invocation)
+
+Before discovery, determine which layer is available. Cache the result for the session.
+
+```
+Run: npx skill-creator --version 2>/dev/null
+```
+
+- **Exit 0:** Layer 2 available. Use enhanced classification, lifecycle, and discovery via CLI.
+- **Non-zero:** Layer 1 only. Use filesystem discovery and routing table.
+
+Layer 2 is always additive. If any Layer 2 CLI call fails at runtime, silently fall back to the Layer 1 equivalent for that step.
+
+</layer_detection>
 
 <execution_protocol>
 
@@ -20,6 +37,9 @@ You work with whatever GSD commands are installed. Discovery is dynamic from the
 
 **Step 1: Discover GSD commands**
 
+**Layer 2:** `npx skill-creator orchestrator discover` -- returns JSON command map directly.
+
+**Layer 1 fallback:**
 ```
 Glob for: .claude/commands/gsd/*.md (local project first)
 Glob for: ~/.claude/commands/gsd/*.md (global fallback)
@@ -37,7 +57,12 @@ Build a runtime command map: `{name, description, allowed-tools, file-path}`.
 
 **Step 2: Understand the request**
 
-Match in priority order:
+**Layer 2:** `npx skill-creator orchestrator classify "<user input>"` -- returns JSON with `{type, command, confidence, arguments, alternatives}`.
+- `type: "exact-match"` or `confidence >= 0.5`: use the matched command.
+- `type: "ambiguous"`: present `alternatives` array to user.
+- `type: "no-match"`: fall back to Layer 1 routing below.
+
+**Layer 1 fallback** -- match in priority order:
 
 1. **Exact match** -- User typed `/gsd:command-name` or `gsd:command-name`. Pass through directly.
 2. **Routing table match** -- Match user intent against the routing table below. Pick the best command.
@@ -68,7 +93,9 @@ Include the command's description so the user knows what to expect.
 
 **Step 5: Suggest next step**
 
-After execution or guidance, check lifecycle position (see Lifecycle Awareness below). Suggest the logical next action if one is clear.
+**Layer 2:** `npx skill-creator orchestrator lifecycle --after=<command-name>` -- returns JSON with `{primary: {command, reason}, alternatives, stage}`. Use `primary` as suggestion.
+
+**Layer 1 fallback:** Check lifecycle position (see Lifecycle Awareness below). Suggest the logical next action if one is clear.
 
 </execution_protocol>
 
@@ -97,6 +124,12 @@ Read <objective> tag if present for richer understanding.
 - GSD tools: `.claude/get-shit-done/bin/gsd-tools.js` (indicates gsd-skill-creator is installed)
 
 **Cache within session:** Discovery results don't change mid-conversation. Discover once, reuse.
+
+## Layer 2: CLI-Enhanced Discovery
+
+When Layer 2 is available, `npx skill-creator orchestrator discover` returns a structured JSON command map with pre-parsed frontmatter, descriptions, and tool requirements. This replaces the filesystem glob-and-parse cycle with a single call.
+
+Layer 2 discover also resolves agents and GSD tools metadata. If it fails, fall back to Layer 1 filesystem discovery above.
 
 </discovery>
 
