@@ -14,6 +14,7 @@ import {
   generateCandidateName,
   DEFAULT_SCORING_WEIGHTS,
 } from './pattern-scorer.js';
+import { extractKeywords, jaccardSimilarity } from './text-utils.js';
 import type {
   PatternOccurrence,
 } from './pattern-aggregator.js';
@@ -55,12 +56,6 @@ const DEFAULT_MAX_CANDIDATES = 20;
 
 /** Default Jaccard similarity threshold for deduplication */
 const DEFAULT_DEDUP_THRESHOLD = 0.5;
-
-/** Stopwords filtered from keyword extraction */
-const STOPWORDS = new Set([
-  'the', 'a', 'an', 'and', 'or', 'when', 'use', 'for', 'with',
-  'this', 'that', 'from', 'to', 'in', 'of', 'is', 'it', 'on',
-]);
 
 // ============================================================================
 // assembleEvidence
@@ -339,30 +334,4 @@ function collectVerbs(tools: string[]): string[] {
   return verbs;
 }
 
-/**
- * Extract keywords from a description string.
- *
- * Splits on whitespace, lowercases, and filters stopwords.
- */
-function extractKeywords(text: string): Set<string> {
-  const words = text
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(w => w.length > 0 && !STOPWORDS.has(w));
-  return new Set(words);
-}
-
-/**
- * Compute Jaccard similarity between two sets: |A intersect B| / |A union B|.
- */
-function jaccardSimilarity(a: Set<string>, b: Set<string>): number {
-  if (a.size === 0 && b.size === 0) return 0;
-
-  let intersection = 0;
-  for (const item of a) {
-    if (b.has(item)) intersection++;
-  }
-
-  const union = a.size + b.size - intersection;
-  return union === 0 ? 0 : intersection / union;
-}
+// extractKeywords and jaccardSimilarity are now imported from text-utils.js

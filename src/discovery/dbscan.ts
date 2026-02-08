@@ -98,6 +98,7 @@ export function dbscan(
 
     // Seed list: neighbors to expand (excluding the point itself)
     const seeds = neighbors.filter((idx) => idx !== i);
+    const seedsSet = new Set(seeds); // O(1) membership checking
     let seedIdx = 0;
 
     while (seedIdx < seeds.length) {
@@ -123,8 +124,9 @@ export function dbscan(
         // q is a core point -- add its neighbors to seed list
         for (const neighbor of qNeighbors) {
           if (labels[neighbor] === UNVISITED || labels[neighbor] === NOISE) {
-            if (!seeds.includes(neighbor)) {
+            if (!seedsSet.has(neighbor)) {
               seeds.push(neighbor);
+              seedsSet.add(neighbor);
             }
           }
         }

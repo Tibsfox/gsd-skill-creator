@@ -72,7 +72,7 @@ export const UserEntrySchema = z.object({
   parentUuid: z.string().optional(),
   message: z.object({
     role: z.literal('user'),
-    content: z.union([z.string(), z.array(z.any())]),
+    content: z.union([z.string(), z.array(ContentBlockSchema)]),
   }),
 }).passthrough();
 
@@ -87,7 +87,7 @@ export const AssistantEntrySchema = z.object({
   message: z.object({
     role: z.literal('assistant'),
     model: z.string().optional(),
-    content: z.array(z.any()), // Array of TextBlock | ToolUseBlock
+    content: z.array(ContentBlockSchema), // Array of TextBlock | ToolUseBlock | ToolResultBlock
     usage: z.object({
       input_tokens: z.number(),
       output_tokens: z.number(),

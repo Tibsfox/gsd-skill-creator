@@ -19,7 +19,7 @@ import {
   UserEntrySchema,
   AssistantEntrySchema,
 } from './types.js';
-import type { ParsedEntry, ExtractedToolUse, ExtractedPrompt } from './types.js';
+import type { ParsedEntry, ExtractedToolUse, ExtractedPrompt, ContentBlock } from './types.js';
 
 /**
  * Parse a single JSONL line into a ParsedEntry.
@@ -62,8 +62,8 @@ export function parseJsonlLine(line: string): ParsedEntry | null {
       } else if (Array.isArray(content)) {
         // Join text blocks from content array
         text = content
-          .filter((block: { type?: string }) => block.type === 'text')
-          .map((block: { text?: string }) => block.text ?? '')
+          .filter((block: ContentBlock) => block.type === 'text')
+          .map((block: ContentBlock) => ('text' in block ? block.text : ''))
           .join('\n');
       } else {
         text = '';
@@ -87,10 +87,10 @@ export function parseJsonlLine(line: string): ParsedEntry | null {
       const contentBlocks = entry.message.content;
 
       const tools: ExtractedToolUse[] = contentBlocks
-        .filter((block: { type?: string }) => block.type === 'tool_use')
-        .map((block: { name?: string; input?: Record<string, unknown> }) => ({
-          name: block.name ?? '',
-          input: (block.input ?? {}) as Record<string, unknown>,
+        .filter((block: ContentBlock) => block.type === 'tool_use')
+        .map((block: ContentBlock) => ({
+          name: ('name' in block ? block.name : '') as string,
+          input: ('input' in block ? block.input : {}) as Record<string, unknown>,
         }));
 
       return { kind: 'tool-uses', data: tools };
@@ -157,5 +157,9 @@ export async function* parseSessionFile(filePath: string): AsyncGenerator<Parsed
       return;
     }
     throw err;
+  } finally {
+    // Suppress any unhandled rejection from errorPromise after iteration completes
+    // The data was successfully read, so post-iteration stream errors can be ignored
+    errorPromise.catch(() => {});
   }
 }
