@@ -295,6 +295,14 @@ export type { InjectionRequest, InjectedSkill, InjectionResult, ScaffoldTask } f
 export { ResearchCompressor, StalenessChecker } from './capabilities/index.js';
 export type { CompressedResearch, CompressionOptions, StalenessResult, ConflictResolution } from './capabilities/index.js';
 
+// Post-phase invocation and collector agents (Phase 60)
+export { PostPhaseInvoker, CollectorAgentGenerator, COLLECTOR_TOOLS } from './capabilities/index.js';
+export type { InvocationRequest, InvocationInstruction, InvocationResult, CollectorAgentConfig, CollectorAgentResult } from './capabilities/index.js';
+
+// Parallelization advisor (Phase 61)
+export { ParallelizationAdvisor } from './capabilities/index.js';
+export type { PlanDependencyInfo, WaveAssignment, AdvisoryReport } from './capabilities/index.js';
+
 // Simulation module
 export {
   ActivationSimulator,
