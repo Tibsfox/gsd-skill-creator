@@ -521,6 +521,22 @@ capabilities:
 - When you are unsure which plan needs which capability
 - When the phase has few capabilities (1-2) and splitting adds no value
 
+### Create Verb Scaffolding
+
+When the phase declares `create` verb capabilities, the planner should generate scaffold tasks in the plan:
+
+1. Identify `create` verb refs from the phase capabilities (from capabilitiesByPhase)
+2. For each create ref:
+   - `create: skill/name` -> generate a task that creates `.claude/skills/name/SKILL.md` with skeleton content
+   - `create: agent/name` -> generate a task that creates `.claude/agents/name.md` with skeleton content
+3. The scaffold task should instruct the executor to:
+   - Create the file with the skeleton template
+   - Fill in the TODO markers with real content based on phase context
+   - Ensure the file has valid frontmatter (name, description at minimum)
+4. Created capabilities will appear in CAPABILITIES.md on next regeneration (automatic — CapabilityDiscovery scans project-local `.claude/`)
+
+**Important:** Scaffold tasks generate SKELETON files. The executor fills in real content. Do not produce complete, functional skills/agents in the template — the plan's tasks provide the intelligence.
+
 </capability_inheritance>
 
 <goal_backward>
