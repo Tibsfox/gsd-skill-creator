@@ -1,0 +1,42 @@
+{
+  "name": "sre-operations-team",
+  "description": "Comprehensive SRE operations review with specialized analysts for SLO validation, capacity planning, incident patterns, and performance profiling. Produces an operational health report with reliability improvement recommendations.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "sre-coordinator",
+      "role": "leader",
+      "description": "Coordinates SRE operations review across reliability, capacity, incident, and performance dimensions. Synthesizes reliability metrics into an operational health report with prioritized improvement recommendations.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "slo-monitor",
+      "role": "worker",
+      "description": "Validates SLO definitions against actual service behavior, tracks error budget consumption rates, predicts budget breaches, and identifies SLIs that need recalibration based on user-facing impact.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "sonnet"
+    },
+    {
+      "name": "capacity-planner",
+      "role": "worker",
+      "description": "Analyzes resource utilization trends, identifies scaling bottlenecks, projects capacity needs based on growth patterns, and recommends horizontal or vertical scaling strategies with cost implications.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "incident-analyzer",
+      "role": "worker",
+      "description": "Analyzes incident patterns and frequency, tracks mean time to resolution, reviews postmortem quality and action item completion, identifies recurring failure modes and systemic reliability gaps.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "performance-profiler",
+      "role": "worker",
+      "description": "Identifies performance bottlenecks through latency analysis, query efficiency review, memory allocation patterns, connection pool utilization, and hot-path optimization opportunities.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    }
+  ]
+}

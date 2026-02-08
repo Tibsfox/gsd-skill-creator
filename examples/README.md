@@ -23,6 +23,19 @@ This directory contains examples demonstrating proper skill, agent, and team aut
 | [hook-recipes](hook-recipes/SKILL.md) | Claude Code Hooks | Ready-to-use hook configurations for automation |
 | [accessibility-patterns](accessibility-patterns/SKILL.md) | Web Accessibility | WCAG guidelines, ARIA patterns, keyboard navigation |
 | [dependency-audit](dependency-audit/SKILL.md) | Supply Chain Security | Dependency auditing, license compliance, upgrade strategies |
+| [agent-orchestration](agent-orchestration/SKILL.md) | AI/Multi-Agent | MCP servers, A2A protocol, multi-agent coordination, swarm architectures |
+| [chaos-engineering](chaos-engineering/SKILL.md) | Resilience Testing | Fault injection, game day planning, resilience experiments |
+| [compliance-governance](compliance-governance/SKILL.md) | Compliance | OPA/Kyverno policies, SBOM, SLSA, SOC2/HIPAA/PCI-DSS mapping |
+| [file-operation-patterns](file-operation-patterns/SKILL.md) | Shell/DevOps | Safe file system operations for scripts and deployments |
+| [finops-patterns](finops-patterns/SKILL.md) | Cloud Finance | Cost optimization, rightsizing, reserved/spot instances, chargeback models |
+| [gitops-patterns](gitops-patterns/SKILL.md) | Continuous Delivery | ArgoCD, Flux, progressive delivery, sealed secrets |
+| [incident-response](incident-response/SKILL.md) | Operations | Severity classification, war rooms, runbooks, blameless postmortems |
+| [infrastructure-as-code](infrastructure-as-code/SKILL.md) | Infrastructure | Terraform, Pulumi, CloudFormation, module composition, state management |
+| [kubernetes-patterns](kubernetes-patterns/SKILL.md) | Container Orchestration | Helm, service mesh, HPA/VPA/KEDA, security contexts, namespaces |
+| [monitoring-observability](monitoring-observability/SKILL.md) | Observability | Logs/metrics/traces, OpenTelemetry, Prometheus/Grafana, SLO alerting |
+| [platform-engineering](platform-engineering/SKILL.md) | Developer Experience | IDPs, golden paths, Backstage catalogs, self-service workflows |
+| [release-management](release-management/SKILL.md) | Release Engineering | Blue-green, canary, rolling deploys, feature flags, rollback |
+| [sre-patterns](sre-patterns/SKILL.md) | Site Reliability | SLOs/SLIs/SLAs, error budgets, toil reduction, reliability reviews |
 
 ### General Agents
 
@@ -33,6 +46,20 @@ This directory contains examples demonstrating proper skill, agent, and team aut
 | [performance-profiler](performance-profiler/AGENT.md) | Performance Analysis | Algorithmic complexity and optimization recommendations |
 | [changelog-generator](changelog-generator/AGENT.md) | Release Management | Generate changelogs from git history |
 | [doc-linter](doc-linter/AGENT.md) | Documentation Quality | Audit docs for broken links, stale content, consistency |
+| [capacity-planner](capacity-planner/AGENT.md) | Infrastructure | Resource usage analysis, scaling bottlenecks, growth projections |
+| [compliance-auditor](compliance-auditor/AGENT.md) | Compliance | SOC2/HIPAA/PCI-DSS/GDPR control mapping and gap analysis |
+| [cost-optimizer](cost-optimizer/AGENT.md) | FinOps | Cloud cost waste detection, rightsizing, savings recommendations |
+| [dependency-health-checker](dependency-health-checker/AGENT.md) | Supply Chain | Package freshness, EOL detection, license compliance |
+| [deployment-validator](deployment-validator/AGENT.md) | Release Engineering | Deployment readiness checks, rollback plans, environment parity |
+| [drift-detector](drift-detector/AGENT.md) | Infrastructure | IaC vs actual state drift, cross-environment inconsistencies |
+| [incident-analyzer](incident-analyzer/AGENT.md) | Operations | Log/metric/trace correlation, root cause analysis, postmortem generation |
+| [infrastructure-auditor](infrastructure-auditor/AGENT.md) | Infrastructure | IaC security misconfigs, cost optimization, compliance violations |
+| [pipeline-analyzer](pipeline-analyzer/AGENT.md) | CI/CD | Pipeline bottlenecks, parallelization, cache optimization |
+| [release-risk-scorer](release-risk-scorer/AGENT.md) | Release Engineering | Risk scoring by blast radius, dependency impact, failure patterns |
+| [runbook-executor](runbook-executor/AGENT.md) | Operations | Step-by-step runbook execution with approval gates and rollback |
+| [slo-monitor](slo-monitor/AGENT.md) | SRE | SLO validation, error budget consumption, burn rate analysis |
+| [test-orchestrator](test-orchestrator/AGENT.md) | Testing | Intelligent test selection, coverage analysis, flaky test detection |
+| [vulnerability-triager](vulnerability-triager/AGENT.md) | Security | Exploitability/reachability triage, remediation prioritization |
 
 ### General Teams
 
@@ -41,6 +68,13 @@ This directory contains examples demonstrating proper skill, agent, and team aut
 | [code-review-team](code-review-team/) | Multi-Perspective Review | 5 (all read-only) | Parallel review: correctness, security, performance, maintainability |
 | [doc-generation-team](doc-generation-team/) | Documentation Generation | 4 (write-scoped) | Parallel doc writing: API docs, architecture, user guides |
 | [migration-team](migration-team/) | Framework Migration | 5 (mixed access) | Coordinated migration: analyze, transform, test, configure |
+| [devops-pipeline-team](devops-pipeline-team/) | CI/CD | leader-worker | Pipeline audit: bottleneck detection, test optimization, deployment validation |
+| [incident-response-team](incident-response-team/) | Operations | leader-worker | Coordinated incident response: log correlation, SLO impact, runbook execution |
+| [infrastructure-review-team](infrastructure-review-team/) | Infrastructure | leader-worker | Multi-dimensional IaC audit: best practices, drift, cost, compliance |
+| [platform-onboarding-team](platform-onboarding-team/) | Developer Experience | leader-worker | Onboarding evaluation: architecture, CI/CD, infrastructure, test strategy |
+| [release-management-team](release-management-team/) | Release Engineering | leader-worker | Release readiness: risk scoring, deployment validation, go/no-go decisions |
+| [security-audit-team](security-audit-team/) | Security | leader-worker | Comprehensive audit: OWASP, vulnerability triage, compliance, dependencies |
+| [sre-operations-team](sre-operations-team/) | SRE | leader-worker | Operational health: SLO validation, capacity planning, incident patterns |
 
 ### GSD-Focused Examples
 
@@ -59,10 +93,10 @@ This directory contains examples demonstrating proper skill, agent, and team aut
 
 | Type | Count | Domains Covered |
 |------|-------|-----------------|
-| Skills | 23 | Git, Code Quality, Testing, TypeScript, Decision-Making, API Design, Docker, Environment Config, Session Continuity, SQL, CI/CD, Hooks, Accessibility, Supply Chain, GSD (5) |
-| Agents | 8 | Architecture, Security, Performance, Release Management, Documentation, GSD (3) |
-| Teams | 3 | Code Review, Documentation, Migration |
-| **Total** | **34** | **26 distinct domains** |
+| Skills | 33 | Git, Code Quality, Testing, TypeScript, Decision-Making, API Design, Docker, Environment Config, Session Continuity, SQL, CI/CD, Hooks, Accessibility, Supply Chain, AI/Multi-Agent, Resilience, Compliance, Shell/DevOps, FinOps, GitOps, Operations, Infrastructure, Kubernetes, Observability, Platform Engineering, Release Engineering, SRE, GSD (5) |
+| Agents | 22 | Architecture, Security, Performance, Release Management, Documentation, Infrastructure, Compliance, FinOps, Supply Chain, Operations, CI/CD, SRE, Testing, GSD (3) |
+| Teams | 10 | Code Review, Documentation, Migration, CI/CD, Operations, Infrastructure, Developer Experience, Release Engineering, Security, SRE |
+| **Total** | **65** | **35+ distinct domains** |
 
 ## Key Patterns Demonstrated
 
