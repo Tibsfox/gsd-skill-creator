@@ -1072,6 +1072,14 @@ async function main() {
       break;
     }
 
+    case 'event':
+    case 'ev': {
+      const { eventCommand } = await import('./cli/commands/event.js');
+      const exitCode = await eventCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1188,6 +1196,7 @@ Commands:
   workflow, wf      Manage skill workflows (create, run, list, status)
   role, rl          Manage skill roles (create, list)
   bundle, bd        Manage work bundles (create, list, activate, deactivate, status)
+  event, ev         Manage skill events (list, emit, consume, suggest, expire)
   help, -h          Show this help message
   --version, -V     Show version information
 
@@ -1306,6 +1315,13 @@ Bundle Management:
   Run 'bundle create' for an interactive wizard, or use --name and
   --skills flags for scripted creation. Run 'bundle activate --name=X'
   to set active bundle. Run 'bundle status' to see current state.
+
+Event Management:
+  The 'event' command manages inter-skill communication events.
+  Skills declare emits/listens in their frontmatter extension fields.
+  Events are logged to .planning/patterns/events.jsonl.
+  Use 'event emit' to fire events and 'event suggest' to discover
+  potential event connections from co-activation patterns.
 
 Pattern Discovery:
   The 'discover' command scans your Claude Code session history for
