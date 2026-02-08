@@ -14,6 +14,7 @@ import { detectConflictsCommand } from './cli/commands/detect-conflicts.js';
 import { scoreActivationCommand } from './cli/commands/score-activation.js';
 import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { budgetCommand } from './cli/commands/budget.js';
+import { budgetEstimateCommand } from './cli/commands/budget-estimate.js';
 import { resolveCommand } from './cli/commands/resolve.js';
 import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
 import { testCommand } from './cli/commands/test.js';
@@ -234,6 +235,21 @@ async function main() {
     case 'bg': {
       const scope = parseScope(args);
       const exitCode = await budgetCommand({ skillsDir: getSkillsBasePath(scope) });
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'budget-estimate':
+    case 'be': {
+      const agentArg = args.find(a => a.startsWith('--agent='));
+      const agent = agentArg?.split('=')[1];
+      const scope = parseScope(args);
+      const exitCode = await budgetEstimateCommand({
+        agent,
+        skillsDir: getSkillsBasePath(scope),
+      });
       if (exitCode !== 0) {
         process.exit(exitCode);
       }
@@ -1178,6 +1194,7 @@ Commands:
   test, t           Manage skill test cases
   simulate, sim     Predict which skill would activate for a prompt
   budget, bg        Show character budget usage across all skills
+  budget-estimate, be  Show token budget estimates per agent profile
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
   suggest, sg       Analyze patterns and review skill suggestions
