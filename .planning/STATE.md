@@ -108,6 +108,12 @@ Recent decisions affecting current work:
 - [58-01]: generatedFrom details stored in gsd-skill-creator extension namespace
 - [58-01]: Priority-based section ranking with configurable sectionPriority list
 - [58-01]: Distillation keeps bullets/code/decisions, truncates prose > 3 lines, removes cross-refs and bare URLs
+- [58-03]: Manual skill always wins: if existing skill has no source: auto-generated, skip overwrite
+- [58-03]: Cast SkillMetadata through unknown for custom source field access (matching staleness-checker pattern)
+- [58-03]: Dry-run shows first 1000 chars of compressed output as preview
+- [59-02]: Pipeline order: Score -> Resolve -> ModelFilter -> CacheOrder -> Budget -> Load (CacheOrder before Budget)
+- [59-02]: ModelFilterStage conditionally inserted only when modelProfile provided (backward compatible)
+- [59-02]: modelProfile is 5th optional constructor param on SkillApplicator (after budgetProfile)
 
 ### Pending Todos
 
@@ -158,6 +164,8 @@ Resume file: None
 | 58-01 | 3min | 2 | 2 | 2026-02-08 |
 | 61-01 | 3min | 2 | 3 | 2026-02-08 |
 | 57-02 | 2min | 2 | 4 | 2026-02-08 |
+| 58-03 | 3min | 2 | 5 | 2026-02-08 |
+| 59-02 | 4min | 2 | 3 | 2026-02-08 |
 
 ---
-*Updated: 2026-02-08 after 61-01 ParallelizationAdvisor TDD completed*
+*Updated: 2026-02-08 after 59-02 ModelFilterStage pipeline wiring completed*
