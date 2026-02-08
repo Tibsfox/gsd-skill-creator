@@ -49,11 +49,28 @@ function suggestion(
 
 /**
  * Enrich context with completedCommand hint if provided.
+ * Side-quest commands get a "Returning to phase work" prefix.
  */
 function enrichContext(baseContext: string, completedCommand?: string): string {
   if (!completedCommand) return baseContext;
+  if (SIDE_QUEST_COMMANDS.has(completedCommand)) {
+    return `Returning to phase work after ${completedCommand}. ${baseContext}`;
+  }
   return `After ${completedCommand}: ${baseContext}`;
 }
+
+// ============================================================================
+// Command Categories
+// ============================================================================
+
+/** Side-quest commands that don't change the artifact-derived suggestion */
+const SIDE_QUEST_COMMANDS = new Set(['gsd:quick', 'gsd:debug']);
+
+/** Phase mutation commands that override primary to plan-phase */
+const PHASE_MUTATION_COMMANDS: Record<string, string> = {
+  'gsd:insert-phase': 'Newly inserted phase needs planning.',
+  'gsd:add-phase': 'Newly added phase needs planning.',
+};
 
 // ============================================================================
 // Stage-Level Transitions
@@ -122,6 +139,7 @@ function phaseLevelSuggestion(
   artifacts: PhaseArtifacts,
   stage: LifecycleStage,
   completedCommand?: string,
+  nextPhaseNumber?: string,
 ): NextStepSuggestion {
   const phaseNum = artifacts.phaseNumber;
 
@@ -170,6 +188,11 @@ function phaseLevelSuggestion(
     const total = artifacts.planCount;
     const completed = artifacts.summaryCount;
 
+    // When UAT exists but gap closures remain, mention gap closure in context
+    const contextText = artifacts.hasUat
+      ? `Phase ${phaseNum}: ${remaining} gap closure plan(s) need execution before phase is complete.`
+      : `Phase ${phaseNum}: ${completed}/${total} plans executed, ${remaining} remaining.`;
+
     return suggestion(
       action('gsd:execute-phase', `${remaining} of ${total} plans remaining. Continue execution.`, phaseNum, true),
       [
@@ -177,24 +200,35 @@ function phaseLevelSuggestion(
         action('gsd:plan-phase', 'Review or update plans.', phaseNum),
       ],
       stage,
-      enrichContext(
-        `Phase ${phaseNum}: ${completed}/${total} plans executed, ${remaining} remaining.`,
-        completedCommand,
-      ),
+      enrichContext(contextText, completedCommand),
     );
   }
 
   // All plans have summaries
   if (artifacts.planCount > 0 && artifacts.summaryCount === artifacts.planCount) {
-    // Has UAT -> phase is verified, suggest next phase
+    // Has UAT -> phase is fully complete
     if (artifacts.hasUat) {
+      // If we know the next phase, suggest discussing/planning it
+      if (nextPhaseNumber) {
+        return suggestion(
+          action('gsd:discuss-phase', `Phase ${phaseNum} complete. Discuss phase ${nextPhaseNumber} approach.`, nextPhaseNumber),
+          [
+            action('gsd:plan-phase', `Skip discussion and plan phase ${nextPhaseNumber} directly.`, nextPhaseNumber, true),
+            action('gsd:audit-milestone', 'Check milestone-level progress.'),
+          ],
+          stage,
+          enrichContext(`Phase ${phaseNum} complete and verified. Ready for next phase ${nextPhaseNumber}.`, completedCommand),
+        );
+      }
+
+      // No next phase -> suggest audit
       return suggestion(
-        action('gsd:plan-phase', 'Phase verified. Move to the next phase.', String(Number(phaseNum) + 1)),
+        action('gsd:audit-milestone', 'All phases complete. Audit the milestone for quality and completeness.'),
         [
-          action('gsd:audit-milestone', 'Check milestone-level progress.'),
+          action('gsd:complete-milestone', 'Archive the milestone and prepare for the next one.'),
         ],
         stage,
-        enrichContext(`Phase ${phaseNum} complete and verified. Ready for next phase.`, completedCommand),
+        enrichContext(`Phase ${phaseNum} complete and verified. No more phases to execute.`, completedCommand),
       );
     }
 
@@ -234,21 +268,42 @@ function phaseLevelSuggestion(
  *
  * If completedCommand is provided, it enriches the context field
  * without overriding the artifact-derived primary suggestion.
+ * Side-quest commands (quick/debug) add a "Returning to phase work" prefix.
+ * Phase mutation commands (insert-phase/add-phase) override the primary
+ * to gsd:plan-phase for the newly added/inserted phase.
+ *
+ * If nextPhaseNumber is provided and the current phase is fully complete,
+ * suggestions target the next phase instead of the current one.
  *
  * @param artifacts - Phase artifact scan results
  * @param stage - Current lifecycle stage
  * @param completedCommand - Optional hint about which command just completed
+ * @param nextPhaseNumber - Optional next phase number for post-completion advancement
  * @returns Complete NextStepSuggestion with primary, alternatives, and context
  */
 export function deriveNextActions(
   artifacts: PhaseArtifacts,
   stage: LifecycleStage,
   completedCommand?: string,
+  nextPhaseNumber?: string,
 ): NextStepSuggestion {
   // Try stage-level shortcut first
   const stageResult = stageLevelSuggestion(stage, completedCommand);
   if (stageResult) return stageResult;
 
+  // Check for phase mutation commands (insert/add) -> override to plan-phase
+  if (completedCommand && completedCommand in PHASE_MUTATION_COMMANDS) {
+    const reason = PHASE_MUTATION_COMMANDS[completedCommand];
+    return suggestion(
+      action('gsd:plan-phase', reason, artifacts.phaseNumber, true),
+      [
+        action('gsd:discuss-phase', 'Discuss approach before planning.', artifacts.phaseNumber),
+      ],
+      stage,
+      reason,
+    );
+  }
+
   // Phase-level logic for roadmapped, planning, executing, verifying
-  return phaseLevelSuggestion(artifacts, stage, completedCommand);
+  return phaseLevelSuggestion(artifacts, stage, completedCommand, nextPhaseNumber);
 }
