@@ -9,8 +9,9 @@
  * This service is the primary API surface for all downstream phases (37-44).
  */
 
-import { readFile, stat } from 'fs/promises';
+import { readFile, stat, access } from 'fs/promises';
 import { join, basename } from 'path';
+import { homedir } from 'os';
 import { parseCommandFile } from './command-parser.js';
 import { parseAgentFile } from './agent-parser.js';
 import { parseTeamConfig } from './team-parser.js';
@@ -23,6 +24,65 @@ import type {
   DiscoveryWarning,
   GsdLocation,
 } from './types.js';
+
+/**
+ * Detect where GSD is installed by checking for VERSION file presence.
+ *
+ * Checks global (~/.claude/) first, then local (./.claude/). Returns the
+ * first installation found, or null if GSD is not installed in either location.
+ *
+ * Accepts optional overrides for dependency injection in tests (DISC-08).
+ *
+ * @param overrides - Optional path overrides for testing
+ * @returns Installation info with location and basePath, or null if not found
+ */
+export async function detectGsdInstallation(
+  overrides?: { globalBase?: string; localBase?: string },
+): Promise<{ location: GsdLocation; basePath: string } | null> {
+  // Check global first (most common installation location)
+  const globalBase = overrides?.globalBase ?? join(homedir(), '.claude');
+  const globalVersion = join(globalBase, 'get-shit-done', 'VERSION');
+
+  try {
+    await access(globalVersion);
+    return { location: 'global', basePath: globalBase };
+  } catch {
+    /* not found -- continue to local */
+  }
+
+  // Check local (./.claude/ in current working directory)
+  const localBase = overrides?.localBase ?? join(process.cwd(), '.claude');
+  const localVersion = join(localBase, 'get-shit-done', 'VERSION');
+
+  try {
+    await access(localVersion);
+    return { location: 'local', basePath: localBase };
+  } catch {
+    /* not found */
+  }
+
+  return null;
+}
+
+/**
+ * Factory function to create a configured GsdDiscoveryService.
+ *
+ * Auto-detects the GSD installation location and returns a ready-to-use
+ * service instance, or null if no GSD installation is found.
+ *
+ * This is the recommended public API entry point for consumers who
+ * don't want to manage installation paths manually.
+ *
+ * @param overrides - Optional path overrides for testing
+ * @returns Configured discovery service, or null if no GSD installation found
+ */
+export async function createDiscoveryService(
+  overrides?: { globalBase?: string; localBase?: string },
+): Promise<GsdDiscoveryService | null> {
+  const installation = await detectGsdInstallation(overrides);
+  if (!installation) return null;
+  return new GsdDiscoveryService(installation.basePath, installation.location);
+}
 
 /**
  * Main discovery service for GSD installations.

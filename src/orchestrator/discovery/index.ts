@@ -34,4 +34,8 @@ export { parseAgentFile } from './agent-parser.js';
 export { parseTeamConfig } from './team-parser.js';
 
 // Discovery service
-export { GsdDiscoveryService } from './discovery-service.js';
+export {
+  GsdDiscoveryService,
+  detectGsdInstallation,
+  createDiscoveryService,
+} from './discovery-service.js';
