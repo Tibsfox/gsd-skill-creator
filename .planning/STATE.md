@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns
-**Current focus:** Phase 57 in progress — Cache-Aware Ordering
+**Current focus:** Phase 58 in progress — Research Compression
 
 ## Current Position
 
-Phase: 57 (sixth of 10 in v1.8) — Cache-Aware Ordering
-Plan: 1 of 2 in current phase (57-01 complete)
-Status: Executing Phase 57
-Last activity: 2026-02-08 — Completed 57-01 CacheOrderStage TDD
+Phase: 58 (seventh of 10 in v1.8) — Research Compression
+Plan: 2 of 3 in current phase (58-01, 58-02 complete)
+Status: Executing Phase 58
+Last activity: 2026-02-08 — Completed 58-02 StalenessChecker TDD
 
-Progress: [#############░░░░░░░] ~55%
+Progress: [##############░░░░░░] ~60%
 
 ## Shipped Milestones
 
@@ -89,6 +89,9 @@ Recent decisions affecting current work:
 - [57-01]: Name-based mock registry pattern for SkillStore in pipeline stage tests (avoids sequential mock ordering bugs)
 - [57-01]: isValidCacheTier type guard validates tier values from untyped frontmatter
 - [57-01]: Legacy cacheTier read from metadata root level for backward compatibility
+- [58-02]: generatedFrom accessed via type assertion on extension (formal typing deferred to Plan 03)
+- [58-02]: source field checked via Record cast on SkillMetadata (custom field from ResearchCompressor)
+- [58-02]: Missing generatedFrom treated as not_auto_generated (safe fallback)
 
 ### Pending Todos
 
@@ -110,7 +113,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 57-01-PLAN.md (CacheOrderStage TDD). Next: 57-02 wire into pipeline.
+Stopped at: Completed 58-02-PLAN.md (StalenessChecker TDD). Next: 58-03 wiring.
 Resume file: None
 
 ## Performance Metrics
@@ -133,6 +136,7 @@ Resume file: None
 | 56-01 | 2min | 2 | 2 | 2026-02-08 |
 | 56-03 | 3min | 2 | 5 | 2026-02-08 |
 | 57-01 | 3min | 2 | 2 | 2026-02-08 |
+| 58-02 | 1min | 2 | 2 | 2026-02-08 |
 
 ---
-*Updated: 2026-02-08 after 57-01 CacheOrderStage TDD completed*
+*Updated: 2026-02-08 after 58-02 StalenessChecker TDD completed*

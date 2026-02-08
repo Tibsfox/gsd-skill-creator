@@ -20,3 +20,6 @@ export type { InjectionRequest, InjectedSkill, InjectionResult } from './skill-i
 // Capability Scaffolding (Phase 56)
 export { CapabilityScaffolder } from './capability-scaffolder.js';
 export type { ScaffoldTask } from './capability-scaffolder.js';
+// Parallelization Advisor (Phase 61)
+export { ParallelizationAdvisor } from './parallelization-advisor.js';
+export type { PlanDependencyInfo, WaveAssignment, AdvisoryReport } from './parallelization-advisor.js';
