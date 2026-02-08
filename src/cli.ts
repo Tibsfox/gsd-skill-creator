@@ -1040,6 +1040,46 @@ async function main() {
       break;
     }
 
+    case 'orchestrator':
+    case 'orch': {
+      const { orchestratorCommand } = await import('./cli/commands/orchestrator.js');
+      const exitCode = await orchestratorCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'workflow':
+    case 'wf': {
+      const { workflowCommand } = await import('./cli/commands/workflow.js');
+      const exitCode = await workflowCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'role':
+    case 'rl': {
+      const { roleCommand } = await import('./cli/commands/role.js');
+      const exitCode = await roleCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'bundle':
+    case 'bd': {
+      const { bundleCommand } = await import('./cli/commands/bundle.js');
+      const exitCode = await bundleCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'event':
+    case 'ev': {
+      const { eventCommand } = await import('./cli/commands/event.js');
+      const exitCode = await eventCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1152,6 +1192,11 @@ Commands:
   calibrate, cal    Optimize activation threshold from calibration data
   benchmark, bench  Measure simulator accuracy vs real activation
   discover, disc    Discover skill candidates from session history
+  orchestrator, orch  GSD orchestrator (discover, state, classify, lifecycle)
+  workflow, wf      Manage skill workflows (create, run, list, status)
+  role, rl          Manage skill roles (create, list)
+  bundle, bd        Manage work bundles (create, list, activate, deactivate, status)
+  event, ev         Manage skill events (list, emit, consume, suggest, expire)
   help, -h          Show this help message
   --version, -V     Show version information
 
@@ -1237,6 +1282,46 @@ Agent Composition:
   bug (GitHub #11205). Consider using project-level agents instead.
   Workarounds: use project-level agents, the /agents UI command, or
   pass agents via --agents CLI flag when starting Claude Code.
+
+Workflow Management:
+  The 'workflow' command manages skill workflows -- multi-step
+  execution pipelines that compose skills into repeatable processes.
+  Workflows are defined as .workflow.yaml files in .claude/workflows/.
+
+  Run 'workflow create' for an interactive wizard, or use --name and
+  --steps flags for scripted creation. Run 'workflow run <name>' to
+  execute a workflow, and 'workflow status <name>' to check progress.
+  Interrupted runs can be resumed with 'workflow run <name> --resume'.
+
+Role Management:
+  The 'role' command manages agent roles -- behavioral constraint templates
+  that define skills, constraints, tools, and model for agent personas.
+  Roles are defined as .role.yaml files in .claude/roles/.
+
+  Roles can extend other roles via the extends: field, inheriting
+  constraints additively and tools/model with child-wins semantics.
+
+  Run 'role create' for an interactive wizard, or use --name flag
+  for scripted creation. Run 'role list' to see all defined roles.
+
+Bundle Management:
+  The 'bundle' command manages work bundles -- groups of skills for
+  specific project phases. Bundles are defined as .bundle.yaml files
+  in .claude/bundles/.
+
+  Activating a bundle gives required skills priority 10 in token
+  budget allocation, while optional skills get priority 1.
+
+  Run 'bundle create' for an interactive wizard, or use --name and
+  --skills flags for scripted creation. Run 'bundle activate --name=X'
+  to set active bundle. Run 'bundle status' to see current state.
+
+Event Management:
+  The 'event' command manages inter-skill communication events.
+  Skills declare emits/listens in their frontmatter extension fields.
+  Events are logged to .planning/patterns/events.jsonl.
+  Use 'event emit' to fire events and 'event suggest' to discover
+  potential event connections from co-activation patterns.
 
 Pattern Discovery:
   The 'discover' command scans your Claude Code session history for
@@ -1337,6 +1422,22 @@ Examples:
   skill-creator discover              # Scan sessions for patterns
   skill-creator disc --rescan         # Force full rescan
   skill-creator discover --exclude=temp  # Skip specific projects
+  skill-creator workflow create       # Interactive workflow creation
+  skill-creator wf c --name=deploy --steps='[{"id":"lint","skill":"linter"}]'
+  skill-creator workflow run deploy   # Run a workflow
+  skill-creator wf r deploy --resume  # Resume interrupted run
+  skill-creator workflow list         # List all workflows
+  skill-creator workflow status deploy # Show run progress
+  skill-creator role create            # Interactive role creation
+  skill-creator rl c --name=reviewer --constraints="Read only,Never delete"
+  skill-creator role list              # List all roles
+  skill-creator rl l --pretty          # Human-readable list
+  skill-creator bundle create          # Interactive bundle creation
+  skill-creator bd c --name=frontend --skills=ts,react
+  skill-creator bundle list            # List all bundles
+  skill-creator bundle activate --name=frontend  # Activate bundle
+  skill-creator bundle deactivate      # Deactivate bundle
+  skill-creator bundle status          # Show active bundle
 
 Skill Storage:
   User-level skills: ~/.claude/skills/ (shared across projects)

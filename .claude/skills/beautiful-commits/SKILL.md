@@ -1,6 +1,7 @@
 ---
 name: beautiful-commits
 description: Crafts beautiful, professional git commit messages following Conventional Commits with semantic structure. Use when committing changes, writing commit messages, or when user mentions 'commit', 'git commit', 'commit message', or wants help with commits.
+extends: git-commit
 ---
 
 # Beautiful Git Commits
