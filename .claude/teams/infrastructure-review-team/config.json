@@ -1,0 +1,42 @@
+{
+  "name": "infrastructure-review-team",
+  "description": "Multi-dimensional infrastructure audit with specialized reviewers for IaC best practices, configuration drift, cost optimization, and regulatory compliance. Produces a unified infrastructure health report.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "infra-coordinator",
+      "role": "leader",
+      "description": "Coordinates infrastructure audit across IaC, drift, cost, and compliance dimensions. Synthesizes findings into a unified infrastructure health report with prioritized remediation steps.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "infrastructure-auditor",
+      "role": "worker",
+      "description": "Reviews infrastructure-as-code for best practices, security misconfigurations, resource naming conventions, module structure, and provider version pinning. Focuses on whether IaC definitions follow organizational and cloud-provider standards.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "drift-detector",
+      "role": "worker",
+      "description": "Detects configuration drift between environments, compares IaC definitions against actual state, identifies manual changes that bypassed the IaC pipeline, and flags environment parity issues.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "cost-optimizer",
+      "role": "worker",
+      "description": "Identifies cloud resource waste, underutilized instances, oversized allocations, missing reserved instance opportunities, orphaned resources, and rightsizing candidates across compute, storage, and network layers.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "compliance-auditor",
+      "role": "worker",
+      "description": "Maps infrastructure configurations against regulatory frameworks (SOC2, HIPAA, PCI-DSS, CIS benchmarks), identifies control gaps, missing encryption, logging deficiencies, and access policy violations.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "sonnet"
+    }
+  ]
+}

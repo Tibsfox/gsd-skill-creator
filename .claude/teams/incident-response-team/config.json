@@ -1,0 +1,42 @@
+{
+  "name": "incident-response-team",
+  "description": "Coordinated incident response with specialized workers for log analysis, SLO impact assessment, runbook execution, and codebase navigation. Produces root cause analysis and postmortem reports.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "incident-commander",
+      "role": "leader",
+      "description": "Commands incident response, coordinates evidence gathering across workers, synthesizes root cause analysis, and produces incident report and blameless postmortem.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "opus"
+    },
+    {
+      "name": "incident-analyzer",
+      "role": "worker",
+      "description": "Log and metric correlation, timeline reconstruction, and root cause analysis. Traces error propagation through systems and identifies the originating failure point.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "opus"
+    },
+    {
+      "name": "slo-monitor",
+      "role": "worker",
+      "description": "SLO impact assessment, error budget consumption tracking, and availability calculation. Determines how the incident affects reliability targets and customer-facing SLAs.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "sonnet"
+    },
+    {
+      "name": "runbook-executor",
+      "role": "worker",
+      "description": "Executes remediation runbooks with approval gates for any actions that modify state. Follows documented procedures step-by-step and reports outcomes at each stage.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "codebase-navigator",
+      "role": "worker",
+      "description": "Traces code paths to identify failure points, follows error propagation through call chains, and maps affected components. Provides precise file and line references for root cause.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "sonnet"
+    }
+  ]
+}
