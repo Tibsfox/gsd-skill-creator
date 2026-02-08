@@ -257,6 +257,14 @@ async function main() {
       break;
     }
 
+    case 'generate-collector':
+    case 'gc': {
+      const { generateCollectorCommand } = await import('./cli/commands/generate-collector.js');
+      const exitCode = await generateCollectorCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'budget-estimate':
     case 'be': {
       const agentArg = args.find(a => a.startsWith('--agent='));
@@ -1112,6 +1120,14 @@ async function main() {
       break;
     }
 
+    case 'advise-parallelization':
+    case 'ap': {
+      const { adviseParallelizationCommand } = await import('./cli/commands/advise-parallelization.js');
+      const exitCode = await adviseParallelizationCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1213,6 +1229,8 @@ Commands:
   budget-estimate, be  Show token budget estimates per agent profile
   capabilities, cap  Generate or show capability manifest (CAPABILITIES.md)
   compress-research, cr  Compress research files to distilled skill files
+  generate-collector, gc  Generate a read-only collector agent
+  advise-parallelization, ap  Analyze plan dependencies for parallel execution
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
   suggest, sg       Analyze patterns and review skill suggestions
