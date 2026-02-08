@@ -3,13 +3,13 @@
 // Called by SessionEnd hook - persists active task, skills, and checkpoint
 // Invokes: skill-creator orchestrator work-state save
 
-const { execSync } = require('child_process');
-const fs = require('fs');
+import { execSync } from 'child_process';
+import { readFileSync } from 'fs';
 
 // Read hook input from stdin (Claude Code provides session context as JSON)
 let input = '';
 try {
-  input = fs.readFileSync('/dev/stdin', 'utf-8');
+  input = readFileSync('/dev/stdin', 'utf-8');
 } catch (e) {}
 
 let parsed = {};
