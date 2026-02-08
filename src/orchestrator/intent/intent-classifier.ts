@@ -1,0 +1,218 @@
+/**
+ * Intent Classifier pipeline assembling all classification stages.
+ *
+ * Wires the complete 5-stage pipeline:
+ * 1. Exact match (/gsd:command detection)
+ * 2. Lifecycle filtering (stage-relevant command narrowing)
+ * 3. Bayes classification (natural language to command)
+ * 4. Confidence resolution (threshold + gap analysis)
+ * 5. Argument extraction (structured args from input)
+ *
+ * Includes circular invocation guard to prevent re-entrant classify() calls.
+ * Configurable via ClassifierConfig (confidence threshold, ambiguity gap, max alternatives).
+ */
+
+import type { GsdCommandMetadata, DiscoveryResult } from '../discovery/types.js';
+import type { ProjectState } from '../state/types.js';
+import type { ClassificationResult, ClassifierConfig, ExtractedArguments } from './types.js';
+import { ClassifierConfigSchema } from './types.js';
+import { exactMatch } from './exact-match.js';
+import { GsdBayesClassifier } from './bayes-classifier.js';
+import { deriveLifecycleStage, filterByLifecycle } from './lifecycle-filter.js';
+import { extractArguments } from './argument-extractor.js';
+
+// ============================================================================
+// Empty Result Helpers
+// ============================================================================
+
+/** Default empty arguments for results where extraction is not applicable */
+function emptyArguments(raw: string): ExtractedArguments {
+  return {
+    phaseNumber: null,
+    flags: [],
+    description: null,
+    version: null,
+    profile: null,
+    raw,
+  };
+}
+
+/** Build a no-match result */
+function noMatchResult(input: string, lifecycleStage: ClassificationResult['lifecycleStage'] = null): ClassificationResult {
+  return {
+    type: 'no-match',
+    command: null,
+    confidence: 0,
+    arguments: emptyArguments(input),
+    alternatives: [],
+    lifecycleStage,
+  };
+}
+
+// ============================================================================
+// IntentClassifier
+// ============================================================================
+
+/**
+ * Main intent classification pipeline.
+ *
+ * Call initialize() once with a DiscoveryResult to load commands and
+ * train the Bayes classifier. Then call classify() for each user input.
+ *
+ * @example
+ * ```ts
+ * const classifier = new IntentClassifier();
+ * classifier.initialize(discoveryResult);
+ *
+ * const result = classifier.classify('/gsd:plan-phase 3', projectState);
+ * // => { type: 'exact-match', command: {...}, confidence: 1.0, ... }
+ *
+ * const result2 = classifier.classify('plan the next phase', projectState);
+ * // => { type: 'classified', command: {...}, confidence: 0.72, ... }
+ * ```
+ */
+export class IntentClassifier {
+  private bayesClassifier: GsdBayesClassifier;
+  private commands: GsdCommandMetadata[] = [];
+  private config: ClassifierConfig;
+  private isClassifying: boolean = false;
+
+  constructor(config?: Partial<ClassifierConfig>) {
+    this.bayesClassifier = new GsdBayesClassifier();
+    // Parse config through Zod to apply defaults
+    this.config = ClassifierConfigSchema.parse(config ?? {});
+  }
+
+  /**
+   * Initialize with discovered commands.
+   *
+   * Stores commands for exact match lookup and trains the Bayes
+   * classifier on augmented utterances. Call once after discovery.
+   *
+   * @param discovery - DiscoveryResult from GsdDiscoveryService
+   */
+  initialize(discovery: DiscoveryResult): void {
+    this.commands = discovery.commands;
+    this.bayesClassifier.train(discovery.commands);
+  }
+
+  /**
+   * Full classification pipeline.
+   *
+   * Stages:
+   * 1. Circular invocation guard
+   * 2. Exact match (bypasses lifecycle filter)
+   * 3. Lifecycle filtering
+   * 4. Bayes classification with confidence resolution
+   * 5. Argument extraction
+   *
+   * @param input - Raw user input string
+   * @param state - Current ProjectState for lifecycle context
+   * @returns Complete ClassificationResult
+   */
+  classify(input: string, state: ProjectState): ClassificationResult {
+    // ---- Guard: circular invocation ----
+    if (this.isClassifying) {
+      return noMatchResult(input);
+    }
+
+    this.isClassifying = true;
+    try {
+      return this.classifyInternal(input, state);
+    } finally {
+      this.isClassifying = false;
+    }
+  }
+
+  // --------------------------------------------------------------------------
+  // Internal Pipeline
+  // --------------------------------------------------------------------------
+
+  private classifyInternal(input: string, state: ProjectState): ClassificationResult {
+    const trimmed = input.trim();
+
+    // ---- Empty input ----
+    if (!trimmed) {
+      return noMatchResult(input);
+    }
+
+    // ---- Stage 1: Exact match ----
+    const exact = exactMatch(trimmed, this.commands);
+    if (exact) {
+      const args = extractArguments(exact.rawArgs);
+      return {
+        type: 'exact-match',
+        command: exact.command,
+        confidence: 1.0,
+        arguments: args,
+        alternatives: [],
+        lifecycleStage: null,
+      };
+    }
+
+    // ---- Stage 2: Lifecycle filtering ----
+    const lifecycleStage = deriveLifecycleStage(state);
+    const validCommands = filterByLifecycle(this.commands, lifecycleStage);
+
+    if (validCommands.length === 0) {
+      return noMatchResult(input, lifecycleStage);
+    }
+
+    // ---- Stage 3: Bayes classification ----
+    const validNames = new Set(validCommands.map(cmd => cmd.name));
+    const classifications = this.bayesClassifier.classify(trimmed, validNames);
+
+    if (classifications.length === 0) {
+      return noMatchResult(input, lifecycleStage);
+    }
+
+    // Build command lookup for mapping labels back to metadata
+    const commandByName = new Map(this.commands.map(cmd => [cmd.name, cmd]));
+
+    // ---- Stage 4: Confidence resolution ----
+    const top = classifications[0];
+    const second = classifications.length > 1 ? classifications[1] : null;
+
+    const meetsThreshold = top.confidence >= this.config.confidenceThreshold;
+    const gap = second ? top.confidence - second.confidence : 1.0;
+    const meetsGap = gap >= this.config.ambiguityGap;
+
+    // ---- Stage 5: Argument extraction ----
+    const args = extractArguments(trimmed);
+
+    if (meetsThreshold && meetsGap) {
+      // Confident single match
+      const matchedCommand = commandByName.get(top.label) ?? null;
+      return {
+        type: 'classified',
+        command: matchedCommand,
+        confidence: top.confidence,
+        arguments: args,
+        alternatives: [],
+        lifecycleStage,
+      };
+    }
+
+    // Ambiguous -- return top N alternatives
+    const alternatives = classifications
+      .slice(0, this.config.maxAlternatives)
+      .map(c => ({
+        command: commandByName.get(c.label)!,
+        confidence: c.confidence,
+      }))
+      .filter(a => a.command != null);
+
+    if (alternatives.length === 0) {
+      return noMatchResult(input, lifecycleStage);
+    }
+
+    return {
+      type: 'ambiguous',
+      command: null,
+      confidence: top.confidence,
+      arguments: args,
+      alternatives,
+      lifecycleStage,
+    };
+  }
+}
