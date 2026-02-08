@@ -16,3 +16,11 @@ export { EventStore } from './event-store.js';
 
 // Lifecycle
 export { emitEvent, consumeEvent, expireStaleEvents } from './event-lifecycle.js';
+
+// Event boost
+export { applyEventBoost } from './event-boost.js';
+export type { EventAwareSkill } from './event-boost.js';
+
+// Event suggestions
+export { EventSuggester } from './event-suggester.js';
+export type { EventSuggesterConfig } from './event-suggester.js';
