@@ -20,11 +20,19 @@ This directory contains example skills demonstrating proper skill authoring patt
 | [gsd-explain](gsd-explain/SKILL.md) | Skill | Explains GSD workflows before execution |
 | [gsd-preflight](gsd-preflight/SKILL.md) | Skill | Validates GSD artifacts pre-workflow |
 | [gsd-health-checker](gsd-health-checker/AGENT.md) | Agent | Pre-flight health checks for GSD |
+| [gsd-onboard](gsd-onboard/SKILL.md) | Skill | Interactive tutorial for learning GSD |
+| [gsd-migrate](gsd-migrate/SKILL.md) | Skill | Migrate existing projects to GSD |
+| [gsd-trace](gsd-trace/SKILL.md) | Skill | Decision archaeology and requirement tracing |
+| [gsd-plan-optimizer](gsd-plan-optimizer/AGENT.md) | Agent | Pre-execution plan quality review |
+| [gsd-milestone-advisor](gsd-milestone-advisor/AGENT.md) | Agent | Milestone scoping and timeline advice |
 
 **Note:** These GSD-focused examples demonstrate **complementary** skills and agents that enhance GSD workflows without replacing core GSD functionality. They show:
-- How to build skills that explain existing tools
-- How to create validation layers for artifact integrity
-- How to design agents that integrate as quality gates
+- How to build skills that explain existing tools (gsd-explain, gsd-onboard)
+- How to create validation layers for artifact integrity (gsd-preflight, gsd-health-checker)
+- How to design agents that integrate as quality gates (gsd-plan-optimizer, gsd-milestone-advisor)
+- How to enhance project lifecycle workflows (gsd-migrate, gsd-trace)
+- How to create comprehensive documentation and tutorials (gsd-onboard: 640 lines, 4 learning stages)
+- How to build decision archaeology tools (gsd-trace: trace requirement evolution, decision chains)
 
 ## Key Patterns Demonstrated
 
