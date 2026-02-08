@@ -1,0 +1,42 @@
+{
+  "name": "devops-pipeline-team",
+  "description": "Full CI/CD pipeline audit with specialized analyzers for bottleneck detection, test optimization, deployment validation, and security review. Produces unified pipeline health reports with prioritized improvements.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "pipeline-coordinator",
+      "role": "leader",
+      "description": "Coordinates CI/CD analysis, synthesizes findings from all workers, produces unified pipeline health report with prioritized improvements.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "pipeline-analyzer",
+      "role": "worker",
+      "description": "CI/CD bottleneck detection, parallelization opportunities, cache optimization, and workflow structure analysis. Identifies slow stages, redundant steps, and missed parallelism.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "test-orchestrator",
+      "role": "worker",
+      "description": "Test selection optimization, coverage analysis, and flaky test detection. Analyzes test suite structure, identifies slow or unreliable tests, and recommends test splitting strategies.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "deployment-validator",
+      "role": "worker",
+      "description": "Deployment configuration validation, environment parity checks, and rollback plan verification. Ensures deployment configs are consistent, complete, and recoverable.",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "model": "sonnet"
+    },
+    {
+      "name": "security-reviewer",
+      "role": "worker",
+      "description": "Pipeline security review, secret handling audit, permission analysis, and supply chain security checks. Scans for exposed secrets, overly permissive tokens, and insecure pipeline steps.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "sonnet"
+    }
+  ]
+}
