@@ -37,6 +37,8 @@ export interface StepResult {
 }
 
 export class WorkflowRunner {
+  private activeWorkflowName: string = '';
+
   constructor(private deps: WorkflowRunnerDeps) {}
 
   /**
@@ -64,6 +66,7 @@ export class WorkflowRunner {
 
     const executionOrder = validation.executionOrder!;
     const runId = randomUUID();
+    this.activeWorkflowName = workflowName;
 
     // Write initial WorkState
     const currentState = await this.deps.workStateReader.read();
@@ -100,6 +103,8 @@ export class WorkflowRunner {
     const state = await this.deps.workStateReader.read();
     if (!state?.workflow) return null;
 
+    this.activeWorkflowName = state.workflow.name;
+
     const definition = await this.deps.loadWorkflow(state.workflow.name);
     if (!definition) return null;
 
@@ -130,7 +135,7 @@ export class WorkflowRunner {
   async advanceStep(runId: string, stepId: string): Promise<StepResult> {
     const entry: WorkflowRunEntry = {
       run_id: runId,
-      workflow_name: '',
+      workflow_name: this.activeWorkflowName,
       step_id: stepId,
       status: 'started',
       started_at: new Date().toISOString(),
@@ -151,7 +156,7 @@ export class WorkflowRunner {
     // Append completed entry to JSONL
     const entry: WorkflowRunEntry = {
       run_id: runId,
-      workflow_name: '',
+      workflow_name: this.activeWorkflowName,
       step_id: stepId,
       status: 'completed',
       started_at: new Date().toISOString(),
@@ -218,7 +223,7 @@ export class WorkflowRunner {
   async failStep(runId: string, stepId: string, error: string): Promise<void> {
     const entry: WorkflowRunEntry = {
       run_id: runId,
-      workflow_name: '',
+      workflow_name: this.activeWorkflowName,
       step_id: stepId,
       status: 'failed',
       started_at: new Date().toISOString(),
