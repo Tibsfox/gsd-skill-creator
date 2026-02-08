@@ -1056,6 +1056,14 @@ async function main() {
       break;
     }
 
+    case 'role':
+    case 'rl': {
+      const { roleCommand } = await import('./cli/commands/role.js');
+      const exitCode = await roleCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1170,6 +1178,7 @@ Commands:
   discover, disc    Discover skill candidates from session history
   orchestrator, orch  GSD orchestrator (discover, state, classify, lifecycle)
   workflow, wf      Manage skill workflows (create, run, list, status)
+  role, rl          Manage skill roles (create, list)
   help, -h          Show this help message
   --version, -V     Show version information
 
@@ -1265,6 +1274,17 @@ Workflow Management:
   --steps flags for scripted creation. Run 'workflow run <name>' to
   execute a workflow, and 'workflow status <name>' to check progress.
   Interrupted runs can be resumed with 'workflow run <name> --resume'.
+
+Role Management:
+  The 'role' command manages agent roles -- behavioral constraint templates
+  that define skills, constraints, tools, and model for agent personas.
+  Roles are defined as .role.yaml files in .claude/roles/.
+
+  Roles can extend other roles via the extends: field, inheriting
+  constraints additively and tools/model with child-wins semantics.
+
+  Run 'role create' for an interactive wizard, or use --name flag
+  for scripted creation. Run 'role list' to see all defined roles.
 
 Pattern Discovery:
   The 'discover' command scans your Claude Code session history for
@@ -1371,6 +1391,10 @@ Examples:
   skill-creator wf r deploy --resume  # Resume interrupted run
   skill-creator workflow list         # List all workflows
   skill-creator workflow status deploy # Show run progress
+  skill-creator role create            # Interactive role creation
+  skill-creator rl c --name=reviewer --constraints="Read only,Never delete"
+  skill-creator role list              # List all roles
+  skill-creator rl l --pretty          # Human-readable list
 
 Skill Storage:
   User-level skills: ~/.claude/skills/ (shared across projects)
