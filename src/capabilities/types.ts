@@ -69,6 +69,36 @@ export interface CapabilityManifest {
 }
 
 // ============================================================================
+// Capability Declaration Types
+// ============================================================================
+
+/**
+ * Verbs that describe how a phase relates to a capability.
+ *
+ * - use: Phase uses an existing capability
+ * - create: Phase creates a new capability
+ * - after: Phase invokes a capability after completion
+ * - adapt: Phase modifies an existing capability
+ */
+export type CapabilityVerb = 'use' | 'create' | 'after' | 'adapt';
+
+/**
+ * The kind of capability being referenced.
+ */
+export type CapabilityType = 'skill' | 'agent' | 'team';
+
+/**
+ * A reference to a capability declared in a ROADMAP.md phase section.
+ *
+ * Parsed from syntax like `use: skill/beautiful-commits`.
+ */
+export interface CapabilityRef {
+  verb: CapabilityVerb;
+  type: CapabilityType;
+  name: string;
+}
+
+// ============================================================================
 // Utility
 // ============================================================================
 
