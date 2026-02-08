@@ -57,6 +57,12 @@ Quick reference for all commands organized by workflow stage.
 | [sync-reserved](#sync-reserved) | `sync` | Show/update reserved skill names list |
 | [reload-embeddings](#reload-embeddings) | `re` | Reload embedding model (retry after fallback) |
 
+### Discover: Pattern Discovery
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| [discover](#discover) | `disc` | Scan session logs, extract patterns, rank candidates, generate draft skills |
+
 ### Teams: Multi-Agent Coordination
 
 | Command | Alias | Description |
@@ -2101,6 +2107,72 @@ skill-creator tm s my-team
 
 ---
 
+## discover
+
+Scan Claude Code session logs to discover recurring interaction patterns and generate draft skills.
+
+**Aliases:** `disc`
+
+**Usage:**
+
+```bash
+skill-creator discover [options]
+```
+
+**Options:**
+
+| Option | Description |
+|--------|-------------|
+| `--exclude <project>` | Skip a specific project during scanning (can be repeated) |
+| `--rescan` | Force full rescan, ignoring previously stored watermarks |
+
+**Description:**
+
+The `discover` command runs the full pattern discovery pipeline:
+
+1. **Scan** — Enumerates all projects under `~/.claude/projects/` and stream-parses JSONL session files. Only new/modified sessions are processed on subsequent runs (watermark-based incremental scanning).
+2. **Extract** — Identifies tool sequence n-grams (bigrams like Read→Edit, trigrams like Read→Edit→Bash) and classifies Bash commands into 8 categories (git, build, test, install, search, file-ops, docker, other).
+3. **Cluster** — Groups similar user prompts using DBSCAN with automatic epsilon tuning via k-NN knee detection. Clusters per-project first, then merges across projects.
+4. **Rank** — Scores all candidates using a multi-factor formula (frequency, cross-project occurrence, recency, consistency). Deduplicates against existing skills.
+5. **Present** — Displays ranked tool pattern candidates and cluster candidates with evidence (sessions, projects, examples).
+6. **Draft** — Generates SKILL.md files for selected candidates with pre-filled workflow steps.
+
+Progress output is displayed during scanning (project count, session count, patterns found).
+
+**Examples:**
+
+```bash
+# Run full discovery pipeline
+skill-creator discover
+
+# Exclude a project from scanning
+skill-creator discover --exclude my-private-project
+
+# Force full rescan (reprocess all sessions)
+skill-creator discover --rescan
+
+# Combine flags
+skill-creator discover --rescan --exclude scratch-project
+```
+
+**Output:**
+
+The command displays two ranked tables:
+
+1. **Tool Pattern Candidates** — Recurring tool sequences and Bash patterns with scores and evidence
+2. **Prompt Cluster Candidates** — Semantically similar user prompts grouped by intent
+
+For each table, you can interactively select which candidates to turn into draft skills. Selected candidates generate SKILL.md files in `.claude/skills/`.
+
+**Notes:**
+
+- First run scans all sessions (may take 30-60s for large corpora). Subsequent runs are fast due to incremental scanning.
+- Scan state is stored at `~/.gsd-skill-creator/discovery/scan-state.json`.
+- Framework noise (patterns appearing in 15+ projects AND 80%+ of tracked projects) is automatically filtered.
+- Patterns matching existing skills are deduplicated and not presented.
+
+---
+
 ## Exit Codes
 
 Commands return exit codes for CI/scripting integration:
@@ -2115,6 +2187,7 @@ Commands return exit codes for CI/scripting integration:
 | migrate-agent | Success or no migration needed | Error during migration |
 | team validate | All teams valid (or only warnings) | One or more teams have errors |
 | team spawn | All member agents resolved | One or more agents missing |
+| discover | Pipeline completes, drafts written | Error during scan/extract/rank |
 | (all others) | Success | Error occurred |
 
 ### Threshold Flags for CI
