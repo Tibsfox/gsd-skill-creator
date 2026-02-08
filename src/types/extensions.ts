@@ -1,5 +1,8 @@
 import type { SkillTrigger, SkillLearning } from './skill.js';
 import type { SkillEvents } from '../events/types.js';
+import type { CacheTier } from '../application/stages/cache-order-stage.js';
+
+export type { CacheTier } from '../application/stages/cache-order-stage.js';
 
 /**
  * Tracking data for force-override of reserved names.
@@ -66,6 +69,9 @@ export interface GsdSkillCreatorExtension {
 
   /** Event declarations for inter-skill communication */
   events?: SkillEvents;
+
+  /** Cache tier for prompt cache optimization (static > session > dynamic) */
+  cacheTier?: CacheTier;
 }
 
 /**
@@ -186,6 +192,7 @@ export function hasExtensionData(ext: GsdSkillCreatorExtension): boolean {
     ext.updatedAt !== undefined ||
     ext.forceOverrideReservedName !== undefined ||
     ext.forceOverrideBudget !== undefined ||
-    ext.events !== undefined
+    ext.events !== undefined ||
+    ext.cacheTier !== undefined
   );
 }
