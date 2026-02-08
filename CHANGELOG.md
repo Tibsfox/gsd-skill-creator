@@ -10,6 +10,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [1.6.1] - 2026-02-07
+
+### Added
+
+- 34 DevOps/SRE/Platform examples from Skills-and-Agents repository
+- 13 new skills: agent-orchestration, chaos-engineering, compliance-governance, file-operation-patterns, finops-patterns, gitops-patterns, incident-response, infrastructure-as-code, kubernetes-patterns, monitoring-observability, platform-engineering, release-management, sre-patterns
+- 14 new agents: capacity-planner, compliance-auditor, cost-optimizer, dependency-health-checker, deployment-validator, drift-detector, incident-analyzer, infrastructure-auditor, pipeline-analyzer, release-risk-scorer, runbook-executor, slo-monitor, test-orchestrator, vulnerability-triager
+- 7 new teams: devops-pipeline-team, incident-response-team, infrastructure-review-team, platform-onboarding-team, release-management-team, security-audit-team, sre-operations-team
+- Local installation of all new examples as usable `.claude/` skills, agents, and teams
+- Total examples now 65 across 35+ domains (up from 34 across 26 domains)
+
+---
+
 ## [1.6.0] - 2026-02-07
 
 ### Added
@@ -245,7 +258,8 @@ See [docs/EXTENSIONS.md](docs/EXTENSIONS.md) for detailed migration guide.
 
 ---
 
-[Unreleased]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.6...HEAD
+[Unreleased]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.6.1...HEAD
+[1.6.1]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.6...v1.6.1
 [1.6.0]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.5...v1.6
 [1.5.0]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.4...v1.5
 [1.4.0]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.3...v1.4
