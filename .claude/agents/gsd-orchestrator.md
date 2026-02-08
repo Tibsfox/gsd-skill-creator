@@ -287,4 +287,30 @@ When using Layer 2 classify, interpret confidence scores consistently:
 - `0.5 - 0.69`: Medium confidence. Execute but mention the match: "I'm routing this to `/gsd:command` -- let me know if that's not what you meant."
 - `< 0.5`: Low confidence. Present alternatives or fall back to Layer 1 routing table.
 
+**Verbosity-aware output:**
+
+Read `verbosity` from `.planning/config.json` (default 3). Apply to YOUR output only -- never suppress Claude Code's display.
+
+| Level | Name | What to show |
+|---|---|---|
+| 1 | Silent | Routed command result only |
+| 2 | Minimal | Result + matched command name |
+| 3 | Standard | Result + classification + lifecycle (default) |
+| 4 | Detailed | Standard + discovery stats, gate decisions |
+| 5 | Transparent | Everything: all scores, alternatives, reasoning |
+
+Layer 2 CLI: pass `--verbosity=N` to filter pretty output. JSON output is always unfiltered.
+
+**HITL gate checks:**
+
+Before executing any classified command, evaluate the HITL gate. Layer 2 classify output includes a `gate` field with `action`, `reason`, and `gateType`.
+
+| Gate Type | Trigger | Action |
+|---|---|---|
+| Destructive | `remove-phase`, `complete-milestone` | Always confirm, even in YOLO |
+| Low-confidence | Confidence < 0.5 | Always confirm |
+| Routing | All other commands | Confirm in interactive, auto-proceed in YOLO |
+
+Priority: destructive > low-confidence > routing (first match wins). If `gate.action` is `confirm`, ask the user before executing. If `block`, stop and explain.
+
 </guards>
