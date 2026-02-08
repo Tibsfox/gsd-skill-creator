@@ -2,7 +2,7 @@
 
 A self-evolving skill ecosystem for Claude Code that observes usage patterns, suggests skill creation, and composes related skills into purpose-built agents.
 
-Built with GSD https://github.com/glittercowboy/get-shit-done for GSD
+Built with [GSD (Get Shit Done)](https://github.com/Tibsfox/get-shit-done)
 
 ## Table of Contents
 
@@ -53,6 +53,7 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.3** | Documentation overhaul, official format specification, getting started guide |
 | **v1.4** | Agent Teams: team schemas, storage, validation, CLI commands, GSD workflow templates |
 | **v1.5** | Pattern Discovery: session log scanning, tool sequence extraction, DBSCAN clustering, draft generation |
+| **v1.6** | 34 cross-domain examples (20 skills, 8 agents, 3 teams), local installation, beautiful-commits skill |
 
 ---
 
@@ -176,7 +177,7 @@ skill-creator help
 | [GSD Teams Guide](docs/GSD-TEAMS.md) | Teams vs subagents for GSD workflows |
 | [Skills vs Agents vs Teams](docs/COMPARISON.md) | Choosing the right abstraction level |
 | [Team Creation Tutorial](docs/tutorials/team-creation.md) | End-to-end team creation walkthrough |
-| [Examples](examples/) | Ready-to-use skill templates |
+| [Examples](examples/) | 34 ready-to-use skills, agents, and teams across 26 domains |
 
 ---
 
