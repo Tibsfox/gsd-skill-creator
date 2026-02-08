@@ -1,4 +1,4 @@
-import type { ScoredSkill, ConflictResult } from '../types/application.js';
+import type { ScoredSkill, ConflictResult, SkippedSkill, BudgetWarning } from '../types/application.js';
 import type { SkillIndexEntry } from '../storage/skill-index.js';
 import type { SessionReport } from './skill-session.js';
 
@@ -23,6 +23,13 @@ export interface PipelineContext {
   // Outputs (final results)
   loaded: string[];
   skipped: string[];
+
+  // Budget tier results (written by BudgetStage, read by callers)
+  budgetSkipped: SkippedSkill[];
+  budgetWarnings: BudgetWarning[];
+
+  // Content cache (written by BudgetStage to avoid double reads in LoadStage)
+  contentCache: Map<string, string>;
 
   // Control flag -- stages check this, runner ignores it
   earlyExit: boolean;
@@ -117,6 +124,9 @@ export function createEmptyContext(
     },
     loaded: [],
     skipped: [],
+    budgetSkipped: [],
+    budgetWarnings: [],
+    contentCache: new Map(),
     earlyExit: false,
     getReport: () => ({
       activeSkills: [],
