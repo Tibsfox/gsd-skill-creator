@@ -47,7 +47,7 @@ afterEach(async () => {
 // Helper: capture console.log output
 // ============================================================================
 
-function captureLog(): { logs: string[]; spy: ReturnType<typeof vi.spyOn> } {
+function captureLog() {
   const logs: string[] = [];
   const spy = vi.spyOn(console, 'log').mockImplementation((...args: unknown[]) => {
     logs.push(args.map(String).join(' '));
