@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns
-**Current focus:** Phase 55 Phase Plan Capability Declarations
+**Current focus:** Phase 56 in progress — Skill Injection & Dynamic Creation
 
 ## Current Position
 
-Phase: 55 (fourth of 10 in v1.8) — Phase Plan Capability Declarations
-Plan: 4 of 4 in current phase (55-01, 55-02, 55-03, 55-04 complete)
-Status: Phase 55 Complete
-Last activity: 2026-02-08 — Completed 55-04 Roadmap-Parser Wiring
+Phase: 56 (fifth of 10 in v1.8) — Skill Injection & Dynamic Creation
+Plan: 2 of N in current phase (56-01 complete, 56-02 complete)
+Status: Executing Phase 56
+Last activity: 2026-02-08 — Completed 56-01 SkillInjector
 
-Progress: [##########░░░░░░░░░░] ~40%
+Progress: [##########░░░░░░░░░░] ~45%
 
 ## Shipped Milestones
 
@@ -76,6 +76,13 @@ Recent decisions affecting current work:
 - [55-04]: Cast capabilitiesByPhase as ParsedRoadmap type to bridge Zod passthrough and CapabilityRef types
 - [55-04]: Omit capabilitiesByPhase from result when no phases have capabilities for backward compatibility
 - [55-04]: Planner inheritance rule: missing capabilities field = inherit all from parent phase
+- [56-02]: gray-matter stringify for skill templates ensures SkillStore.read() compatibility
+- [56-02]: Raw markdown frontmatter for agent templates (simpler, matches parseAgentFile)
+- [56-02]: Teams silently skipped from scaffolding (too complex for auto-generation)
+- [56-02]: checkExisting uses existsSync for synchronous file detection
+- [56-01]: All declared capabilities get critical tier (declared = must-load)
+- [56-01]: use/adapt verbs loaded, create/after verbs filtered, team refs filtered
+- [56-01]: Token estimation via content.length/4 ceiling matching existing codebase pattern
 
 ### Pending Todos
 
@@ -97,7 +104,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 55-04-PLAN.md (Roadmap-Parser Wiring). Phase 55 fully complete. Next: Phase 56.
+Stopped at: Completed 56-01-PLAN.md (SkillInjector). Phase 56 in progress.
 Resume file: None
 
 ## Performance Metrics
@@ -116,6 +123,8 @@ Resume file: None
 | 55-02 | 2min | 2 | 2 | 2026-02-08 |
 | 55-03 | 1min | 2 | 2 | 2026-02-08 |
 | 55-04 | 3min | 2 | 5 | 2026-02-08 |
+| 56-02 | 2min | 2 | 2 | 2026-02-08 |
+| 56-01 | 2min | 2 | 2 | 2026-02-08 |
 
 ---
-*Updated: 2026-02-08 after 55-04 Roadmap-Parser Wiring completed*
+*Updated: 2026-02-08 after 56-01 SkillInjector completed*
