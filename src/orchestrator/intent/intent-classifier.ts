@@ -1,15 +1,17 @@
 /**
  * Intent Classifier pipeline assembling all classification stages.
  *
- * Wires the complete 5-stage pipeline:
+ * Wires the complete 6-stage pipeline:
  * 1. Exact match (/gsd:command detection)
  * 2. Lifecycle filtering (stage-relevant command narrowing)
  * 3. Bayes classification (natural language to command)
+ * 3.5. Semantic fallback (embedding similarity when Bayes is weak)
  * 4. Confidence resolution (threshold + gap analysis)
  * 5. Argument extraction (structured args from input)
  *
  * Includes circular invocation guard to prevent re-entrant classify() calls.
- * Configurable via ClassifierConfig (confidence threshold, ambiguity gap, max alternatives).
+ * Configurable via ClassifierConfig (confidence threshold, ambiguity gap, max alternatives,
+ * semantic threshold, enable semantic).
  */
 
 import type { GsdCommandMetadata, DiscoveryResult } from '../discovery/types.js';
@@ -20,6 +22,7 @@ import { exactMatch } from './exact-match.js';
 import { GsdBayesClassifier } from './bayes-classifier.js';
 import { deriveLifecycleStage, filterByLifecycle } from './lifecycle-filter.js';
 import { extractArguments } from './argument-extractor.js';
+import type { SemanticMatcher } from './semantic-matcher.js';
 
 // ============================================================================
 // Empty Result Helpers
@@ -59,16 +62,19 @@ function noMatchResult(input: string, lifecycleStage: ClassificationResult['life
  * Call initialize() once with a DiscoveryResult to load commands and
  * train the Bayes classifier. Then call classify() for each user input.
  *
+ * Optionally inject a SemanticMatcher via setSemanticMatcher() for
+ * embedding-based fallback when Bayes confidence is below threshold.
+ *
  * @example
  * ```ts
  * const classifier = new IntentClassifier();
  * classifier.initialize(discoveryResult);
  *
- * const result = classifier.classify('/gsd:plan-phase 3', projectState);
- * // => { type: 'exact-match', command: {...}, confidence: 1.0, ... }
+ * const result = await classifier.classify('/gsd:plan-phase 3', projectState);
+ * // => { type: 'exact-match', command: {...}, confidence: 1.0, method: 'exact', ... }
  *
- * const result2 = classifier.classify('plan the next phase', projectState);
- * // => { type: 'classified', command: {...}, confidence: 0.72, ... }
+ * const result2 = await classifier.classify('plan the next phase', projectState);
+ * // => { type: 'classified', command: {...}, confidence: 0.72, method: 'bayes', ... }
  * ```
  */
 export class IntentClassifier {
@@ -76,6 +82,7 @@ export class IntentClassifier {
   private commands: GsdCommandMetadata[] = [];
   private config: ClassifierConfig;
   private isClassifying: boolean = false;
+  private semanticMatcher: SemanticMatcher | null = null;
 
   constructor(config?: Partial<ClassifierConfig>) {
     this.bayesClassifier = new GsdBayesClassifier();
@@ -97,20 +104,34 @@ export class IntentClassifier {
   }
 
   /**
-   * Full classification pipeline.
+   * Set the semantic matcher for embedding-based fallback.
+   *
+   * The matcher should already be initialized with command embeddings.
+   * When set, low-confidence Bayes results trigger semantic matching.
+   *
+   * @param matcher - Initialized SemanticMatcher instance
+   */
+  setSemanticMatcher(matcher: SemanticMatcher): void {
+    this.semanticMatcher = matcher;
+  }
+
+  /**
+   * Full classification pipeline (async).
    *
    * Stages:
    * 1. Circular invocation guard
    * 2. Exact match (bypasses lifecycle filter)
    * 3. Lifecycle filtering
-   * 4. Bayes classification with confidence resolution
-   * 5. Argument extraction
+   * 4. Bayes classification
+   * 3.5. Semantic fallback (when Bayes confidence is below threshold)
+   * 5. Confidence resolution (threshold + gap analysis)
+   * 6. Argument extraction
    *
    * @param input - Raw user input string
    * @param state - Current ProjectState for lifecycle context
    * @returns Complete ClassificationResult
    */
-  classify(input: string, state: ProjectState): ClassificationResult {
+  async classify(input: string, state: ProjectState): Promise<ClassificationResult> {
     // ---- Guard: circular invocation ----
     if (this.isClassifying) {
       return noMatchResult(input);
@@ -118,7 +139,7 @@ export class IntentClassifier {
 
     this.isClassifying = true;
     try {
-      return this.classifyInternal(input, state);
+      return await this.classifyInternal(input, state);
     } finally {
       this.isClassifying = false;
     }
@@ -128,7 +149,7 @@ export class IntentClassifier {
   // Internal Pipeline
   // --------------------------------------------------------------------------
 
-  private classifyInternal(input: string, state: ProjectState): ClassificationResult {
+  private async classifyInternal(input: string, state: ProjectState): Promise<ClassificationResult> {
     const trimmed = input.trim();
 
     // ---- Empty input ----
@@ -147,6 +168,7 @@ export class IntentClassifier {
         arguments: args,
         alternatives: [],
         lifecycleStage: null,
+        method: 'exact',
       };
     }
 
@@ -169,6 +191,27 @@ export class IntentClassifier {
     // Build command lookup for mapping labels back to metadata
     const commandByName = new Map(this.commands.map(cmd => [cmd.name, cmd]));
 
+    // ---- Stage 3.5: Semantic fallback (only when Bayes is weak) ----
+    if (this.semanticMatcher?.isReady() && classifications.length > 0) {
+      const topBayes = classifications[0];
+      if (topBayes.confidence < this.config.confidenceThreshold) {
+        const semanticMatches = await this.semanticMatcher.match(trimmed, validNames);
+        if (semanticMatches.length > 0 && semanticMatches[0].similarity >= this.config.semanticThreshold) {
+          // Semantic match is confident -- use it instead of weak Bayes
+          const args = extractArguments(trimmed);
+          return {
+            type: 'classified',
+            command: semanticMatches[0].command,
+            confidence: semanticMatches[0].similarity,
+            arguments: args,
+            alternatives: [],
+            lifecycleStage,
+            method: 'semantic',
+          };
+        }
+      }
+    }
+
     // ---- Stage 4: Confidence resolution ----
     const top = classifications[0];
     const second = classifications.length > 1 ? classifications[1] : null;
@@ -190,6 +233,7 @@ export class IntentClassifier {
         arguments: args,
         alternatives: [],
         lifecycleStage,
+        method: 'bayes',
       };
     }
 
