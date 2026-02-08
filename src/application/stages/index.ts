@@ -5,3 +5,4 @@ export { BudgetStage } from './budget-stage.js';
 export { CacheOrderStage } from './cache-order-stage.js';
 export type { CacheTier } from './cache-order-stage.js';
 export { DEFAULT_CACHE_TIER } from './cache-order-stage.js';
+export { ModelFilterStage } from './model-filter-stage.js';

@@ -23,3 +23,9 @@ export type { ScaffoldTask } from './capability-scaffolder.js';
 // Parallelization Advisor (Phase 61)
 export { ParallelizationAdvisor } from './parallelization-advisor.js';
 export type { PlanDependencyInfo, WaveAssignment, AdvisoryReport } from './parallelization-advisor.js';
+// Research compression (Phase 58)
+export { ResearchCompressor } from './research-compressor.js';
+export type { CompressedResearch, CompressionOptions } from './research-compressor.js';
+// Staleness detection (Phase 58)
+export { StalenessChecker } from './staleness-checker.js';
+export type { StalenessResult, ConflictResolution } from './staleness-checker.js';
