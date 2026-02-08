@@ -131,11 +131,12 @@ describe('OutputSectionSchema', () => {
     })).toThrow();
   });
 
-  it('rejects missing minLevel', () => {
-    expect(() => OutputSectionSchema.parse({
+  it('defaults minLevel to 3 when missing', () => {
+    const result = OutputSectionSchema.parse({
       tag: 'result',
       content: 'Hello',
-    })).toThrow();
+    });
+    expect(result.minLevel).toBe(3);
   });
 
   it('passes through extra fields', () => {
