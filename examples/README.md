@@ -4,12 +4,27 @@ This directory contains example skills demonstrating proper skill authoring patt
 
 ## Available Examples
 
+### General Skills
+
 | Skill | Domain | Use Case |
 |-------|--------|----------|
 | [git-commit](git-commit/SKILL.md) | Git | Conventional commit messages |
 | [code-review](code-review/SKILL.md) | Code Quality | PR review checklists |
 | [test-generator](test-generator/SKILL.md) | Testing | Test case generation |
 | [typescript-patterns](typescript-patterns/SKILL.md) | TypeScript | Best practices and patterns |
+
+### GSD-Focused Examples
+
+| Skill/Agent | Type | Use Case |
+|-------------|------|----------|
+| [gsd-explain](gsd-explain/SKILL.md) | Skill | Explains GSD workflows before execution |
+| [gsd-preflight](gsd-preflight/SKILL.md) | Skill | Validates GSD artifacts pre-workflow |
+| [gsd-health-checker](gsd-health-checker/AGENT.md) | Agent | Pre-flight health checks for GSD |
+
+**Note:** These GSD-focused examples demonstrate **complementary** skills and agents that enhance GSD workflows without replacing core GSD functionality. They show:
+- How to build skills that explain existing tools
+- How to create validation layers for artifact integrity
+- How to design agents that integrate as quality gates
 
 ## Key Patterns Demonstrated
 
