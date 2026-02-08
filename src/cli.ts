@@ -1064,6 +1064,14 @@ async function main() {
       break;
     }
 
+    case 'bundle':
+    case 'bd': {
+      const { bundleCommand } = await import('./cli/commands/bundle.js');
+      const exitCode = await bundleCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1179,6 +1187,7 @@ Commands:
   orchestrator, orch  GSD orchestrator (discover, state, classify, lifecycle)
   workflow, wf      Manage skill workflows (create, run, list, status)
   role, rl          Manage skill roles (create, list)
+  bundle, bd        Manage work bundles (create, list, activate, deactivate, status)
   help, -h          Show this help message
   --version, -V     Show version information
 
@@ -1285,6 +1294,18 @@ Role Management:
 
   Run 'role create' for an interactive wizard, or use --name flag
   for scripted creation. Run 'role list' to see all defined roles.
+
+Bundle Management:
+  The 'bundle' command manages work bundles -- groups of skills for
+  specific project phases. Bundles are defined as .bundle.yaml files
+  in .claude/bundles/.
+
+  Activating a bundle gives required skills priority 10 in token
+  budget allocation, while optional skills get priority 1.
+
+  Run 'bundle create' for an interactive wizard, or use --name and
+  --skills flags for scripted creation. Run 'bundle activate --name=X'
+  to set active bundle. Run 'bundle status' to see current state.
 
 Pattern Discovery:
   The 'discover' command scans your Claude Code session history for
@@ -1395,6 +1416,12 @@ Examples:
   skill-creator rl c --name=reviewer --constraints="Read only,Never delete"
   skill-creator role list              # List all roles
   skill-creator rl l --pretty          # Human-readable list
+  skill-creator bundle create          # Interactive bundle creation
+  skill-creator bd c --name=frontend --skills=ts,react
+  skill-creator bundle list            # List all bundles
+  skill-creator bundle activate --name=frontend  # Activate bundle
+  skill-creator bundle deactivate      # Deactivate bundle
+  skill-creator bundle status          # Show active bundle
 
 Skill Storage:
   User-level skills: ~/.claude/skills/ (shared across projects)
