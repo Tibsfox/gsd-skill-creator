@@ -268,6 +268,11 @@ export type { SkillLoadResult, SessionReport } from './application/skill-session
 export { SkillApplicator } from './application/skill-applicator.js';
 export type { ApplyResult, InvokeResult } from './application/skill-applicator.js';
 
+// Pipeline infrastructure (Phase 52)
+export { SkillPipeline, createEmptyContext } from './application/skill-pipeline.js';
+export type { PipelineStage, PipelineContext } from './application/skill-pipeline.js';
+export { ScoreStage, ResolveStage, LoadStage } from './application/stages/index.js';
+
 // Simulation module
 export {
   ActivationSimulator,
