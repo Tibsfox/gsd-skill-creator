@@ -10,13 +10,15 @@
  * Subcommands:
  * - discover: Scan filesystem for installed GSD commands, agents, and teams
  * - state: Read .planning/ artifacts into typed ProjectState
- * - classify: (Phase 40-02) Map natural language to GSD commands
- * - lifecycle: (Phase 40-02) Suggest next actions from project state
+ * - classify: Map natural language or /gsd:command to GSD commands
+ * - lifecycle: Suggest next actions from project state
  */
 
 import { join } from 'path';
 import {
   createDiscoveryService,
+  IntentClassifier,
+  LifecycleCoordinator,
 } from '../../orchestrator/index.js';
 import { ProjectStateReader } from '../../orchestrator/state/state-reader.js';
 
@@ -40,6 +42,17 @@ function hasFlag(args: string[], flag: string): boolean {
   return args.includes(`--${flag}`);
 }
 
+/**
+ * Extract positional args (everything that is not a --flag).
+ * Joins them with spaces to reconstruct the original input text.
+ */
+function extractPositionalArgs(args: string[]): string {
+  return args
+    .filter((a) => !a.startsWith('--'))
+    .join(' ')
+    .trim();
+}
+
 // ============================================================================
 // Help text
 // ============================================================================
@@ -59,8 +72,8 @@ Usage:
 Subcommands:
   discover, d     Discover installed GSD commands, agents, and teams
   state, s        Read project lifecycle position from .planning/
-  classify, c     Classify user intent to a GSD command (Phase 40-02)
-  lifecycle, l    Suggest next actions from project state (Phase 40-02)
+  classify, c     Classify user intent to a GSD command
+  lifecycle, l    Suggest next actions from project state
 
 Common Options:
   --pretty        Human-readable formatted output (default: JSON)
@@ -72,6 +85,14 @@ Discover Options:
 State Options:
   --planning-dir=<path> Override .planning/ directory path
 
+Classify Options:
+  --gsd-base=<path>     Override GSD installation base path
+  --planning-dir=<path> Override .planning/ directory path
+
+Lifecycle Options:
+  --planning-dir=<path> Override .planning/ directory path
+  --after=<command>     Completed command hint (e.g., --after=plan-phase)
+
 Output:
   By default, all subcommands output structured JSON to stdout.
   Use --pretty for human-readable output. Errors are JSON objects
@@ -82,6 +103,10 @@ Examples:
   skill-creator orch d --pretty
   skill-creator orchestrator state --planning-dir=/path/to/.planning
   skill-creator orch s --pretty
+  skill-creator orchestrator classify "/gsd:plan-phase 3"
+  skill-creator orch c "plan the next phase"
+  skill-creator orchestrator lifecycle
+  skill-creator orch l --after=plan-phase
 `);
 }
 
@@ -197,6 +222,161 @@ async function handleState(args: string[]): Promise<number> {
 }
 
 // ============================================================================
+// Classify subcommand
+// ============================================================================
+
+/**
+ * Execute the classify subcommand.
+ *
+ * Wires discovery + state + IntentClassifier into a single invocation.
+ * Input text is everything after flags (positional args joined by space).
+ *
+ * Pipeline: discover commands -> read project state -> classify input
+ *
+ * Errors:
+ * - No input text provided -> JSON error, exit 1
+ * - GSD not installed -> JSON error, exit 1
+ */
+async function handleClassify(args: string[]): Promise<number> {
+  const pretty = hasFlag(args, 'pretty');
+  const gsdBase = extractFlag(args, 'gsd-base');
+  const planningDir = extractFlag(args, 'planning-dir')
+    ?? join(process.cwd(), '.planning');
+
+  // Extract input text (everything not a flag)
+  const input = extractPositionalArgs(args);
+
+  if (!input) {
+    console.log(JSON.stringify({
+      error: 'No input text provided',
+      help: 'Usage: skill-creator orchestrator classify "your intent or /gsd:command"',
+    }, null, 2));
+    return 1;
+  }
+
+  try {
+    // Create discovery service
+    const overrides = gsdBase
+      ? { globalBase: gsdBase, localBase: gsdBase }
+      : undefined;
+
+    const service = await createDiscoveryService(overrides);
+
+    if (!service) {
+      console.log(JSON.stringify({
+        error: 'GSD installation not detected',
+        help: 'Install GSD at ~/.claude/get-shit-done/ or ./.claude/get-shit-done/',
+      }, null, 2));
+      return 1;
+    }
+
+    // Discover commands
+    const discovery = await service.discover();
+
+    // Read project state
+    const reader = new ProjectStateReader(planningDir);
+    const state = await reader.read();
+
+    // Initialize classifier and classify
+    const classifier = new IntentClassifier();
+    classifier.initialize(discovery);
+    const result = classifier.classify(input, state);
+
+    if (pretty) {
+      console.log('Classification Result');
+      console.log('=====================');
+      console.log(`Type: ${result.type}`);
+      console.log(`Confidence: ${(result.confidence * 100).toFixed(1)}%`);
+      if (result.command) {
+        console.log(`Command: ${result.command.name}`);
+        console.log(`Description: ${result.command.description}`);
+      }
+      if (result.arguments.phaseNumber) {
+        console.log(`Phase: ${result.arguments.phaseNumber}`);
+      }
+      if (result.lifecycleStage) {
+        console.log(`Lifecycle Stage: ${result.lifecycleStage}`);
+      }
+      if (result.alternatives.length > 0) {
+        console.log('');
+        console.log('Alternatives:');
+        for (const alt of result.alternatives) {
+          console.log(`  - ${alt.command.name} (${(alt.confidence * 100).toFixed(1)}%)`);
+        }
+      }
+    } else {
+      console.log(JSON.stringify(result, null, 2));
+    }
+
+    return 0;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.log(JSON.stringify({ error: message }, null, 2));
+    return 1;
+  }
+}
+
+// ============================================================================
+// Lifecycle subcommand
+// ============================================================================
+
+/**
+ * Execute the lifecycle subcommand.
+ *
+ * Wires state reading + LifecycleCoordinator to suggest next actions.
+ * Accepts optional --after=<command> flag for completed command context.
+ *
+ * Pipeline: read project state -> derive lifecycle stage -> suggest next step
+ *
+ * Works even without GSD installed (state reading is independent).
+ */
+async function handleLifecycle(args: string[]): Promise<number> {
+  const pretty = hasFlag(args, 'pretty');
+  const planningDir = extractFlag(args, 'planning-dir')
+    ?? join(process.cwd(), '.planning');
+  const afterCommand = extractFlag(args, 'after');
+
+  try {
+    // Read project state
+    const reader = new ProjectStateReader(planningDir);
+    const state = await reader.read();
+
+    // Create lifecycle coordinator and suggest next step
+    const coordinator = new LifecycleCoordinator(planningDir);
+    const suggestion = await coordinator.suggestNextStep(state, afterCommand);
+
+    if (pretty) {
+      console.log('Lifecycle Suggestion');
+      console.log('====================');
+      console.log(`Stage: ${suggestion.stage}`);
+      console.log(`Context: ${suggestion.context}`);
+      console.log('');
+      console.log('Primary Action:');
+      console.log(`  Command: ${suggestion.primary.command}`);
+      if (suggestion.primary.args) {
+        console.log(`  Args: ${suggestion.primary.args}`);
+      }
+      console.log(`  Reason: ${suggestion.primary.reason}`);
+      if (suggestion.alternatives.length > 0) {
+        console.log('');
+        console.log('Alternatives:');
+        for (const alt of suggestion.alternatives) {
+          console.log(`  - ${alt.command}: ${alt.reason}`);
+        }
+      }
+    } else {
+      console.log(JSON.stringify(suggestion, null, 2));
+    }
+
+    return 0;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.log(JSON.stringify({ error: message }, null, 2));
+    return 1;
+  }
+}
+
+// ============================================================================
 // Main dispatcher
 // ============================================================================
 
@@ -231,13 +411,11 @@ export async function orchestratorCommand(args: string[]): Promise<number> {
 
     case 'classify':
     case 'c':
-      console.log(JSON.stringify({ error: 'classify subcommand not yet implemented (Phase 40-02)' }, null, 2));
-      return 1;
+      return handleClassify(handlerArgs);
 
     case 'lifecycle':
     case 'l':
-      console.log(JSON.stringify({ error: 'lifecycle subcommand not yet implemented (Phase 40-02)' }, null, 2));
-      return 1;
+      return handleLifecycle(handlerArgs);
 
     default:
       console.log(JSON.stringify({
