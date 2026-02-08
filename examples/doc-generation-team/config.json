@@ -1,0 +1,35 @@
+{
+  "name": "doc-generation-team",
+  "description": "Documentation generation pipeline with specialized writers for API docs, architecture docs, and user guides. Writers are scoped to docs/ and README.md only.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "doc-coordinator",
+      "role": "leader",
+      "description": "Assigns documentation scope to writers, reviews drafts for accuracy and consistency, ensures cross-references between docs are correct, and maintains a unified voice and terminology across all generated documentation.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "sonnet"
+    },
+    {
+      "name": "api-doc-writer",
+      "role": "worker",
+      "description": "Generates API endpoint documentation, request/response schemas, authentication guides, error code references, and usage examples. Reads source code to extract route definitions, types, and validation rules. Writes output to docs/ directory only.",
+      "tools": ["Read", "Write", "Glob", "Grep"],
+      "model": "sonnet"
+    },
+    {
+      "name": "architecture-writer",
+      "role": "worker",
+      "description": "Generates system design documentation, component relationship diagrams (as text), data flow descriptions, dependency maps, and deployment architecture overviews. Reads source code structure to infer architecture. Writes output to docs/ directory only.",
+      "tools": ["Read", "Write", "Glob", "Grep"],
+      "model": "sonnet"
+    },
+    {
+      "name": "guide-writer",
+      "role": "worker",
+      "description": "Generates README files, getting started guides, tutorials, FAQ pages, and troubleshooting guides. Reads existing code and docs to create user-facing content. Writes output to docs/ directory and README.md only.",
+      "tools": ["Read", "Write", "Glob", "Grep"],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "name": "code-review-team",
+  "description": "Multi-perspective code review with specialized reviewers for correctness, security, performance, and maintainability. All members are read-only for maximum safety.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "review-coordinator",
+      "role": "leader",
+      "description": "Synthesizes findings from all reviewers, resolves conflicting recommendations, prioritizes action items by severity, and produces a unified review summary with clear next steps.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "sonnet"
+    },
+    {
+      "name": "correctness-reviewer",
+      "role": "worker",
+      "description": "Reviews code for logic errors, edge cases, off-by-one errors, race conditions, null/undefined handling, incorrect type coercions, and broken invariants. Focuses on whether the code does what it claims to do.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "sonnet"
+    },
+    {
+      "name": "security-reviewer",
+      "role": "worker",
+      "description": "Reviews code for OWASP Top 10 patterns, input validation gaps, authentication and authorization flaws, secret exposure, injection vulnerabilities, insecure deserialization, and missing security headers.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "sonnet"
+    },
+    {
+      "name": "performance-reviewer",
+      "role": "worker",
+      "description": "Reviews code for algorithmic complexity issues, inefficient database queries, N+1 problems, unnecessary re-renders, memory leaks, bundle size impact, and missing caching opportunities.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "sonnet"
+    },
+    {
+      "name": "maintainability-reviewer",
+      "role": "worker",
+      "description": "Reviews code for naming clarity, single responsibility violations, DRY violations, test coverage gaps, missing documentation, excessive coupling, and inconsistency with project conventions.",
+      "tools": ["Read", "Glob", "Grep"],
+      "model": "sonnet"
+    }
+  ]
+}

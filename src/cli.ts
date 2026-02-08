@@ -1032,6 +1032,14 @@ async function main() {
       break;
     }
 
+    case 'discover':
+    case 'disc': {
+      const { discoverCommand } = await import('./cli/commands/discover.js');
+      const exitCode = await discoverCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1143,6 +1151,7 @@ Commands:
   reload-embeddings, re  Reload embedding model (retry after fallback)
   calibrate, cal    Optimize activation threshold from calibration data
   benchmark, bench  Measure simulator accuracy vs real activation
+  discover, disc    Discover skill candidates from session history
   help, -h          Show this help message
   --version, -V     Show version information
 
@@ -1229,6 +1238,18 @@ Agent Composition:
   Workarounds: use project-level agents, the /agents UI command, or
   pass agents via --agents CLI flag when starting Claude Code.
 
+Pattern Discovery:
+  The 'discover' command scans your Claude Code session history for
+  recurring tool sequences and bash command patterns. It ranks
+  candidates by frequency, cross-project usage, and recency, then
+  lets you interactively select which patterns to generate as skills.
+
+  Options:
+    --exclude=<projects>  Skip comma-separated project slugs
+    --rescan              Force full rescan (ignore watermarks)
+
+  Run 'discover' periodically as your session history grows.
+
 Test Management:
   The 'test' command manages test cases for skill activation testing.
   Test cases define expected behavior: should the skill activate for
@@ -1313,6 +1334,9 @@ Examples:
   skill-creator team validate --all # Validate all teams
   skill-creator team spawn my-team  # Check spawn readiness
   skill-creator tm s my-team        # Show team details
+  skill-creator discover              # Scan sessions for patterns
+  skill-creator disc --rescan         # Force full rescan
+  skill-creator discover --exclude=temp  # Skip specific projects
 
 Skill Storage:
   User-level skills: ~/.claude/skills/ (shared across projects)

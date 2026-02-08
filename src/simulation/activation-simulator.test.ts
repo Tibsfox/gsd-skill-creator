@@ -1,11 +1,57 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+/**
+ * Unit tests for ActivationSimulator.
+ *
+ * Uses mocked embedding service to avoid model download dependency
+ * and ensure deterministic results regardless of model availability.
+ */
+
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ActivationSimulator } from './activation-simulator.js';
+import type { EmbeddingResult } from '../types/embeddings.js';
+
+// Mock the embeddings module to avoid model-loading flakiness
+vi.mock('../embeddings/index.js', () => ({
+  getEmbeddingService: vi.fn(),
+  cosineSimilarity: vi.fn(),
+}));
+
+import { getEmbeddingService, cosineSimilarity } from '../embeddings/index.js';
+
+const mockGetEmbeddingService = vi.mocked(getEmbeddingService);
+const mockCosineSimilarity = vi.mocked(cosineSimilarity);
+
+/**
+ * Create a mock embedding service that returns dummy vectors.
+ * Actual similarity is controlled via mockCosineSimilarity.
+ */
+function createMockEmbeddingService() {
+  const dummyEmbedding = [0.1, 0.2, 0.3];
+  return {
+    embed: vi.fn().mockResolvedValue({
+      embedding: dummyEmbedding,
+      fromCache: false,
+      method: 'model' as const,
+    } satisfies EmbeddingResult),
+    embedBatch: vi.fn().mockImplementation((texts: string[]) =>
+      Promise.resolve(
+        texts.map(() => ({
+          embedding: dummyEmbedding,
+          fromCache: false,
+          method: 'model' as const,
+        } satisfies EmbeddingResult))
+      )
+    ),
+  };
+}
 
 describe('ActivationSimulator', () => {
   let simulator: ActivationSimulator;
 
   beforeEach(() => {
+    vi.clearAllMocks();
     simulator = new ActivationSimulator({ includeTrace: true });
+    const mockService = createMockEmbeddingService();
+    mockGetEmbeddingService.mockResolvedValue(mockService as any);
   });
 
   describe('simulate', () => {
@@ -14,6 +60,10 @@ describe('ActivationSimulator', () => {
         { name: 'git-commit', description: 'Commit changes to git repository' },
         { name: 'prisma-migrate', description: 'Run database migrations with Prisma' },
       ];
+
+      mockCosineSimilarity
+        .mockReturnValueOnce(0.92)  // git-commit: high match
+        .mockReturnValueOnce(0.3);  // prisma-migrate: low match
 
       const result = await simulator.simulate('commit my changes', skills);
 
@@ -28,6 +78,8 @@ describe('ActivationSimulator', () => {
         { name: 'git-commit', description: 'Commit changes to git repository' },
       ];
 
+      mockCosineSimilarity.mockReturnValueOnce(0.2);
+
       const result = await simulator.simulate('make me a sandwich', skills);
 
       expect(result.winner).toBeNull();
@@ -41,6 +93,10 @@ describe('ActivationSimulator', () => {
         { name: 'prisma-migrate', description: 'Run database migrations with Prisma ORM' },
       ];
 
+      mockCosineSimilarity
+        .mockReturnValueOnce(0.88)  // db-migrate
+        .mockReturnValueOnce(0.85); // prisma-migrate
+
       const result = await simulator.simulate('run database migrations', skills);
 
       // Both should be ranked, with first being more similar than second
@@ -53,6 +109,8 @@ describe('ActivationSimulator', () => {
     it('should include trace when configured', async () => {
       const skills = [{ name: 'test-skill', description: 'Test skill description' }];
 
+      mockCosineSimilarity.mockReturnValueOnce(0.6);
+
       const result = await simulator.simulate('test prompt', skills);
 
       expect(result.trace).toBeDefined();
@@ -63,6 +121,8 @@ describe('ActivationSimulator', () => {
     it('should not include trace when not configured', async () => {
       const noTraceSimulator = new ActivationSimulator({ includeTrace: false });
       const skills = [{ name: 'test-skill', description: 'Test skill description' }];
+
+      mockCosineSimilarity.mockReturnValueOnce(0.6);
 
       const result = await noTraceSimulator.simulate('test prompt', skills);
 
@@ -87,6 +147,8 @@ describe('ActivationSimulator', () => {
         },
       ];
 
+      mockCosineSimilarity.mockReturnValueOnce(0.95);
+
       const result = await simulator.simulate('git commit my staged changes', skills);
 
       // High similarity prompt should yield medium or high confidence
@@ -100,6 +162,8 @@ describe('ActivationSimulator', () => {
         { name: 'git-commit', description: 'Commit changes to git repository' },
       ];
 
+      mockCosineSimilarity.mockReturnValueOnce(0.87);
+
       const result = await simulator.simulate('commit my changes to git', skills);
 
       // Explanation should contain percentage format like "87% (High)"
@@ -111,6 +175,8 @@ describe('ActivationSimulator', () => {
     it('should respect custom threshold', async () => {
       const strictSimulator = new ActivationSimulator({ threshold: 0.99 });
       const skills = [{ name: 'test-skill', description: 'A test skill for testing' }];
+
+      mockCosineSimilarity.mockReturnValueOnce(0.85);
 
       const result = await strictSimulator.simulate('test', skills);
 
@@ -133,6 +199,11 @@ describe('ActivationSimulator', () => {
         { name: 'skill-b', description: 'Database schema management' },
         { name: 'skill-c', description: 'Cooking recipes' },
       ];
+
+      mockCosineSimilarity
+        .mockReturnValueOnce(0.85)  // skill-a
+        .mockReturnValueOnce(0.78)  // skill-b
+        .mockReturnValueOnce(0.2);  // skill-c
 
       const result = await wideMarginSimulator.simulate('database query', skills);
 
@@ -169,7 +240,7 @@ describe('ActivationSimulator', () => {
 
   describe('challenger detection', () => {
     it('should not include challengers below floor', async () => {
-      const simulator = new ActivationSimulator({
+      const sim = new ActivationSimulator({
         threshold: 0.5,
         challengerMargin: 0.5, // Very wide margin
         challengerFloor: 0.6,  // But high floor
@@ -181,7 +252,11 @@ describe('ActivationSimulator', () => {
         { name: 'cooking', description: 'Make delicious food in the kitchen' },
       ];
 
-      const result = await simulator.simulate('commit my changes', skills);
+      mockCosineSimilarity
+        .mockReturnValueOnce(0.9)    // git-commit: strong match
+        .mockReturnValueOnce(0.15);  // cooking: far below floor
+
+      const result = await sim.simulate('commit my changes', skills);
 
       // Cooking skill should not be a challenger even if within margin
       // because it should be below floor for this prompt

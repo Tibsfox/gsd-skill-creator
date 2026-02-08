@@ -135,6 +135,38 @@ Quick reference of all exports organized by functional layer.
 | `InboxMessageSchema` | Zod Schema | Inbox message validation |
 | `validateTeamConfig()` | Function | Validate team config against schema |
 
+### Discovery
+
+| Export | Type | Description |
+|--------|------|-------------|
+| `parseSessionFile()` | Function | Stream-parse a JSONL session file |
+| `parseJsonlLine()` | Function | Parse a single JSONL line |
+| `enumerateSessions()` | Function | Find all sessions across projects |
+| `classifyUserEntry()` | Function | Classify user entry as prompt or noise |
+| `isRealUserPrompt()` | Function | Check if entry is a real user prompt |
+| `ScanStateStore` | Class | Persistent scan state with atomic writes |
+| `CorpusScanner` | Class | Incremental scanning with watermarks |
+| `extractNgrams()` | Function | Extract tool sequence n-grams |
+| `buildToolSequence()` | Function | Build tool name sequence from entries |
+| `classifyBashCommand()` | Function | Classify Bash command into category |
+| `normalizeBashCommand()` | Function | Normalize command for pattern matching |
+| `extractBashPatterns()` | Function | Extract patterns from Bash commands |
+| `PatternAggregator` | Class | Aggregate patterns across sessions |
+| `processSession()` | Function | Process a single session for patterns |
+| `createPatternSessionProcessor()` | Function | Create processor for CorpusScanner |
+| `scorePattern()` | Function | Multi-factor pattern scoring |
+| `rankCandidates()` | Function | Rank and deduplicate candidates |
+| `generateSkillDraft()` | Function | Generate draft SKILL.md content |
+| `selectCandidates()` | Function | Interactive candidate selection |
+| `dbscan()` | Function | DBSCAN clustering algorithm |
+| `tuneEpsilon()` | Function | Auto epsilon via k-distance knee |
+| `clusterPrompts()` | Function | Full clustering pipeline |
+| `createPromptCollectingProcessor()` | Function | Wrap processor to collect prompts |
+| `PromptEmbeddingCache` | Class | Content-hash embedding cache |
+| `scoreCluster()` | Function | Score a prompt cluster |
+| `rankClusterCandidates()` | Function | Rank cluster candidates |
+| `generateClusterDraft()` | Function | Generate cluster-based skill draft |
+
 ---
 
 ## Factory Functions
@@ -2754,6 +2786,150 @@ if (!result.success) {
 
 - [CLI Reference](./CLI.md) - Team CLI commands (`team create`, `team list`, `team validate`, `team spawn`, `team status`)
 - [GSD Teams Guide](./GSD-TEAMS.md) - When to use teams vs. subagents in GSD workflows
+
+---
+
+## Discovery Module
+
+The discovery module scans Claude Code session logs to find recurring interaction patterns and generate draft skills. All exports are available from the `gsd-skill-creator` package.
+
+### Session Parsing
+
+```typescript
+import { parseSessionFile, enumerateSessions, classifyUserEntry } from 'gsd-skill-creator';
+
+// Stream-parse a JSONL session file
+for await (const entry of parseSessionFile('/path/to/session.jsonl')) {
+  if (entry.kind === 'tool-uses') {
+    console.log('Tools used:', entry.tools.map(t => t.name));
+  }
+  if (entry.kind === 'user' && classifyUserEntry(entry).isRealPrompt) {
+    console.log('Real prompt:', entry.text);
+  }
+}
+
+// Enumerate all sessions across projects
+const sessions = await enumerateSessions();
+for (const session of sessions) {
+  console.log(`${session.projectSlug}: ${session.sessionId}`);
+}
+```
+
+### Incremental Scanning
+
+```typescript
+import { ScanStateStore, CorpusScanner } from 'gsd-skill-creator';
+
+const stateStore = new ScanStateStore('/path/to/scan-state.json');
+const scanner = new CorpusScanner({
+  stateStore,
+  excludeProjects: ['my-private-project'],
+  forceRescan: false,
+});
+
+const result = await scanner.scan(async (sessionFile, metadata) => {
+  // Process each new/modified session
+  console.log(`Processing: ${metadata.projectSlug}/${metadata.sessionId}`);
+});
+
+console.log(`Scanned ${result.newSessions} new, ${result.skippedSessions} skipped`);
+```
+
+### Pattern Extraction
+
+```typescript
+import {
+  extractNgrams, classifyBashCommand,
+  PatternAggregator, createPatternSessionProcessor,
+} from 'gsd-skill-creator';
+
+// Extract tool sequence n-grams
+const toolNames = ['Read', 'Edit', 'Bash'];
+const bigrams = extractNgrams(toolNames, 2); // ['Read->Edit', 'Edit->Bash']
+const trigrams = extractNgrams(toolNames, 3); // ['Read->Edit->Bash']
+
+// Classify Bash commands
+const category = classifyBashCommand('git commit -m "fix"'); // 'git'
+
+// Aggregate patterns across sessions
+const aggregator = new PatternAggregator();
+const processor = createPatternSessionProcessor(aggregator);
+// Use processor with CorpusScanner...
+const results = aggregator.getResults(); // { patterns, projectSlugs }
+```
+
+### Ranking & Drafting
+
+```typescript
+import { rankCandidates, generateSkillDraft, selectCandidates } from 'gsd-skill-creator';
+
+// Rank candidates from aggregated patterns
+const ranked = rankCandidates(patterns, {
+  totalSessions: 100,
+  existingSkills: [{ name: 'git-commit', description: '...' }],
+});
+
+// Interactive selection
+const selected = await selectCandidates(ranked);
+
+// Generate draft SKILL.md for each selected candidate
+for (const candidate of selected) {
+  const draft = generateSkillDraft(candidate);
+  console.log(draft); // Full SKILL.md content with frontmatter
+}
+```
+
+### Semantic Clustering
+
+```typescript
+import {
+  dbscan, tuneEpsilon, clusterPrompts,
+  PromptEmbeddingCache, rankClusterCandidates, generateClusterDraft,
+} from 'gsd-skill-creator';
+
+// Low-level DBSCAN
+const points = [[0.1, 0.2], [0.15, 0.25], [0.9, 0.8]];
+const result = dbscan(points, { epsilon: 0.3, minPoints: 2, distanceFn: cosineDistance });
+
+// Auto-tune epsilon
+const epsilon = tuneEpsilon(embeddings, { minEpsilon: 0.05, maxEpsilon: 0.5 });
+
+// Full clustering pipeline
+const clusters = await clusterPrompts(collectedPrompts, {
+  embeddingCache: new PromptEmbeddingCache('/path/to/cache'),
+});
+
+// Rank and draft cluster candidates
+const clusterCandidates = rankClusterCandidates(clusters, { totalSessions: 100 });
+for (const candidate of clusterCandidates) {
+  const draft = generateClusterDraft(candidate);
+}
+```
+
+### Discovery Types
+
+Key types exported from the discovery module:
+
+| Type | Description |
+|------|-------------|
+| `ParsedEntry` | Union of all parsed JSONL entry types |
+| `ScanState` | Persisted scan state (watermarks, stats) |
+| `SessionWatermark` | Per-session scan tracking data |
+| `ScanResult` | Result of a corpus scan operation |
+| `BashCategory` | Bash command category union type |
+| `PatternOccurrence` | Aggregated pattern with frequency data |
+| `RankedCandidate` | Scored and ranked pattern candidate |
+| `ScoreBreakdown` | Per-factor scoring details |
+| `PatternEvidence` | Evidence supporting a candidate |
+| `CollectedPrompt` | User prompt collected during scanning |
+| `DbscanResult` | DBSCAN clustering output |
+| `PromptCluster` | Cluster of semantically similar prompts |
+| `ClusterCandidate` | Scored cluster candidate |
+
+### See Also
+
+- [CLI Reference](./CLI.md) - `discover` command documentation
+- [Architecture: Discovery Layer](./architecture/layers.md#discovery) - Module internals
 
 ---
 
