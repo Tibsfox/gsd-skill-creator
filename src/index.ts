@@ -207,6 +207,8 @@ export type {
   SkippedSkill,
   BudgetWarning,
   BudgetProfile,
+  ModelTier,
+  ModelGuidance,
 } from './types/application.js';
 
 // Learning module
@@ -275,7 +277,7 @@ export type { ApplyResult, InvokeResult } from './application/skill-applicator.j
 // Pipeline infrastructure (Phase 52)
 export { SkillPipeline, createEmptyContext } from './application/skill-pipeline.js';
 export type { PipelineStage, PipelineContext } from './application/skill-pipeline.js';
-export { ScoreStage, ResolveStage, LoadStage, BudgetStage, CacheOrderStage, DEFAULT_CACHE_TIER } from './application/stages/index.js';
+export { ScoreStage, ResolveStage, LoadStage, BudgetStage, CacheOrderStage, ModelFilterStage, DEFAULT_CACHE_TIER } from './application/stages/index.js';
 export type { CacheTier } from './application/stages/index.js';
 
 // Budget profiles (Phase 53)
@@ -288,6 +290,10 @@ export type { CapabilityManifest, SkillCapability, AgentCapability, TeamCapabili
 // Skill injection and scaffolding (Phase 56)
 export { SkillInjector, CapabilityScaffolder } from './capabilities/index.js';
 export type { InjectionRequest, InjectedSkill, InjectionResult, ScaffoldTask } from './capabilities/index.js';
+
+// Research compression (Phase 58)
+export { ResearchCompressor, StalenessChecker } from './capabilities/index.js';
+export type { CompressedResearch, CompressionOptions, StalenessResult, ConflictResolution } from './capabilities/index.js';
 
 // Simulation module
 export {
@@ -358,6 +364,7 @@ export function createApplicationContext(options?: {
   skillsDir?: string;
   config?: Partial<ApplicationConfig>;
   budgetProfile?: BudgetProfile;
+  modelProfile?: string;
 }) {
   const stores = createStores({
     patternsDir: options?.patternsDir,
@@ -368,7 +375,8 @@ export function createApplicationContext(options?: {
     stores.skillIndex,
     stores.skillStore,
     options?.config,
-    options?.budgetProfile
+    options?.budgetProfile,
+    options?.modelProfile
   );
 
   return {
