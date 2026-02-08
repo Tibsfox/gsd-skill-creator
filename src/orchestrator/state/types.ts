@@ -147,19 +147,19 @@ export const GsdConfigSchema = z.object({
     research: z.boolean().default(true),
     plan_check: z.boolean().default(true),
     verifier: z.boolean().default(true),
-  }).passthrough().default({}),
+  }).passthrough().default(() => ({ research: true, plan_check: true, verifier: true })),
   gates: z.object({
     require_plan_approval: z.boolean().default(false),
     require_checkpoint_approval: z.boolean().default(true),
-  }).passthrough().default({}),
+  }).passthrough().default(() => ({ require_plan_approval: false, require_checkpoint_approval: true })),
   safety: z.object({
     max_files_per_commit: z.number().default(20),
     require_tests: z.boolean().default(true),
-  }).passthrough().default({}),
+  }).passthrough().default(() => ({ max_files_per_commit: 20, require_tests: true })),
   git: z.object({
     auto_commit: z.boolean().default(true),
     commit_style: z.string().default('conventional'),
-  }).passthrough().default({}),
+  }).passthrough().default(() => ({ auto_commit: true, commit_style: 'conventional' })),
 }).passthrough();
 
 export type GsdConfig = z.infer<typeof GsdConfigSchema>;
