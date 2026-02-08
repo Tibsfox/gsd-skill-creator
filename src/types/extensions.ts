@@ -1,4 +1,5 @@
 import type { SkillTrigger, SkillLearning } from './skill.js';
+import type { SkillEvents } from '../events/types.js';
 
 /**
  * Tracking data for force-override of reserved names.
@@ -62,6 +63,9 @@ export interface GsdSkillCreatorExtension {
 
   /** Tracking data if user force-overrode budget limits */
   forceOverrideBudget?: ForceOverrideBudget;
+
+  /** Event declarations for inter-skill communication */
+  events?: SkillEvents;
 }
 
 /**
@@ -181,6 +185,7 @@ export function hasExtensionData(ext: GsdSkillCreatorExtension): boolean {
     ext.createdAt !== undefined ||
     ext.updatedAt !== undefined ||
     ext.forceOverrideReservedName !== undefined ||
-    ext.forceOverrideBudget !== undefined
+    ext.forceOverrideBudget !== undefined ||
+    ext.events !== undefined
   );
 }
