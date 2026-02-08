@@ -10,6 +10,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [1.6.0] - 2026-02-07
+
+### Added
+
+- 34 cross-domain examples: 20 skills, 8 agents, 3 teams spanning 26 domains
+- beautiful-commits skill for professional Conventional Commits with semantic structure
+- GSD-complementary examples: gsd-explain, gsd-preflight, gsd-onboard, gsd-migrate, gsd-trace (skills); gsd-health-checker, gsd-plan-optimizer, gsd-milestone-advisor (agents)
+- General-purpose skills: api-design, docker-patterns, sql-patterns, ci-cd-patterns, hook-recipes, accessibility-patterns, dependency-audit, env-setup, context-handoff, decision-framework
+- General-purpose agents: codebase-navigator, security-reviewer, performance-profiler, changelog-generator, doc-linter
+- General-purpose teams: code-review-team (5 parallel reviewers), doc-generation-team (4 writers), migration-team (5 mixed-access members)
+- Local installation of all examples as usable `.claude/` skills, agents, and teams
+- Taches-CC-Resources integration: decision-framework, context-handoff, hook-recipes, security-reviewer, doc-linter
+
+### Fixed
+
+- Audit findings from GSD adversarial debugging team
+- Documentation updates for v1.5 pattern discovery
+
+---
+
 ## [1.5.0] - 2026-02-07
 
 ### Added
@@ -225,11 +245,12 @@ See [docs/EXTENSIONS.md](docs/EXTENSIONS.md) for detailed migration guide.
 
 ---
 
-[Unreleased]: https://github.com/user/gsd-skill-creator/compare/v1.5.0...HEAD
-[1.5.0]: https://github.com/user/gsd-skill-creator/compare/v1.4.0...v1.5.0
-[1.4.0]: https://github.com/user/gsd-skill-creator/compare/v1.3.0...v1.4.0
-[1.3.0]: https://github.com/user/gsd-skill-creator/compare/v1.2.0...v1.3.0
-[1.2.0]: https://github.com/user/gsd-skill-creator/compare/v1.1.0...v1.2.0
-[1.1.0]: https://github.com/user/gsd-skill-creator/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/user/gsd-skill-creator/compare/v0.1.0...v1.0.0
-[0.1.0]: https://github.com/user/gsd-skill-creator/releases/tag/v0.1.0
+[Unreleased]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.6...HEAD
+[1.6.0]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.5...v1.6
+[1.5.0]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.4...v1.5
+[1.4.0]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.3...v1.4
+[1.3.0]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.2...v1.3
+[1.2.0]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.1...v1.2
+[1.1.0]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.0...v1.1
+[1.0.0]: https://github.com/Tibsfox/gsd-skill-creator/compare/v0.1.0...v1.0
+[0.1.0]: https://github.com/Tibsfox/gsd-skill-creator/releases/tag/v0.1.0
