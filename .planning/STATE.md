@@ -89,6 +89,8 @@ Recent decisions affecting current work:
 - [57-01]: Name-based mock registry pattern for SkillStore in pipeline stage tests (avoids sequential mock ordering bugs)
 - [57-01]: isValidCacheTier type guard validates tier values from untyped frontmatter
 - [57-01]: Legacy cacheTier read from metadata root level for backward compatibility
+- [57-02]: CacheOrderStage always runs (not conditional on budgetProfile) since cache ordering is valuable regardless of budget
+- [57-02]: CacheTier re-exported from both extensions.ts and stages/index.ts for flexible import paths
 - [58-02]: generatedFrom accessed via type assertion on extension (formal typing deferred to Plan 03)
 - [58-02]: source field checked via Record cast on SkillMetadata (custom field from ResearchCompressor)
 - [58-02]: Missing generatedFrom treated as not_auto_generated (safe fallback)
@@ -98,6 +100,14 @@ Recent decisions affecting current work:
 - [59-01]: modelGuidance read via type assertion from raw metadata (not added to SkillMetadata interface)
 - [59-01]: Unknown model profiles default to sonnet tier (safe middle ground)
 - [59-01]: Capability levels: opus=3, sonnet=2, haiku=1 for minimumCapability checks
+- [61-01]: Kahn's algorithm for topological wave assignment with file conflict edges
+- [61-01]: Conservative default: plans without files_modified get sequential assignment
+- [61-01]: Plan ID alphabetical ordering breaks ties deterministically for file conflicts
+- [61-01]: Advisory only: recommendations with rationale, never automatic changes
+- [58-01]: source: 'auto-generated' placed as custom field on SkillMetadata root (not official Claude Code field)
+- [58-01]: generatedFrom details stored in gsd-skill-creator extension namespace
+- [58-01]: Priority-based section ranking with configurable sectionPriority list
+- [58-01]: Distillation keeps bullets/code/decisions, truncates prose > 3 lines, removes cross-refs and bare URLs
 
 ### Pending Todos
 
@@ -145,6 +155,9 @@ Resume file: None
 | 58-02 | 1min | 2 | 2 | 2026-02-08 |
 | 60-02 | 2min | 2 | 2 | 2026-02-08 |
 | 59-01 | 2min | 2 | 4 | 2026-02-08 |
+| 58-01 | 3min | 2 | 2 | 2026-02-08 |
+| 61-01 | 3min | 2 | 3 | 2026-02-08 |
+| 57-02 | 2min | 2 | 4 | 2026-02-08 |
 
 ---
-*Updated: 2026-02-08 after 59-01 ModelGuidance type and ModelFilterStage completed*
+*Updated: 2026-02-08 after 61-01 ParallelizationAdvisor TDD completed*
