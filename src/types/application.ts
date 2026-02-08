@@ -45,6 +45,41 @@ export interface TokenTracking {
   loadedAt: Date;
 }
 
+// Priority tier for token budget allocation
+export type PriorityTier = 'critical' | 'standard' | 'optional';
+
+// Skill skipped due to budget constraints
+export interface SkippedSkill {
+  name: string;
+  tier: PriorityTier;
+  reason: 'budget_exceeded' | 'hard_ceiling_reached' | 'lower_priority';
+  estimatedTokens: number;
+}
+
+// Budget threshold warning
+export interface BudgetWarning {
+  threshold: 50 | 80 | 100;
+  currentUsagePercent: number;
+  message: string;
+}
+
+// Per-agent budget profile configuration
+export interface BudgetProfile {
+  name: string;
+  budgetPercent: number;        // Standard budget as fraction (e.g., 0.05 = 5%)
+  hardCeilingPercent: number;   // Absolute max including critical overflow (e.g., 0.10)
+  tiers: {
+    critical: string[];         // Skill names that always load (up to hard ceiling)
+    standard: string[];         // Skill names that load within standard budget
+    optional: string[];         // Skill names that load only if budget remains
+  };
+  thresholds: {
+    warn50: boolean;
+    warn80: boolean;
+    warn100: boolean;
+  };
+}
+
 // Configuration for skill application
 export interface ApplicationConfig {
   contextWindowSize: number;
