@@ -18,7 +18,7 @@ v1.8 brings capability-aware planning and token efficiency to the GSD workflow. 
 - [x] **Phase 53: Token Budget Tiers** - Per-agent token budgets with priority tiers and budget estimation CLI ✓ 2026-02-08
 - [x] **Phase 54: Capability Manifest** - Auto-generated CAPABILITIES.md from discovered skills, agents, and teams ✓ 2026-02-08
 - [x] **Phase 55: Phase and Plan Capability Declarations** - Capability verbs in ROADMAP.md phases and capabilities field in plan frontmatter ✓ 2026-02-08
-- [ ] **Phase 56: Skill Injection and Dynamic Creation** - Auto-inject skills into executor context and scaffold new capabilities as plan tasks
+- [x] **Phase 56: Skill Injection and Dynamic Creation** - Auto-inject skills into executor context and scaffold new capabilities as plan tasks ✓ 2026-02-08
 - [ ] **Phase 57: Cache-Aware Ordering** - Order skills by cacheTier metadata for prompt cache optimization
 - [ ] **Phase 58: Research Compression** - Compress research artifacts to distilled skill files with staleness detection
 - [ ] **Phase 59: Model-Aware Activation** - Skills declare modelGuidance for whole-skill model targeting
@@ -99,9 +99,9 @@ Plans:
   4. Created capabilities appear in CAPABILITIES.md on next regeneration
 **Plans:** 3 plans
 Plans:
-- [ ] 56-01-PLAN.md — TDD: SkillInjector service (resolve use-verb capabilities to disk content with critical budget tier)
-- [ ] 56-02-PLAN.md — TDD: CapabilityScaffolder service (generate scaffold tasks for create-verb capabilities)
-- [ ] 56-03-PLAN.md — Wire barrel exports, public API, and GSD workflow documentation (executor, planner, execute-phase)
+- [x] 56-01-PLAN.md — TDD: SkillInjector service (resolve use-verb capabilities to disk content with critical budget tier)
+- [x] 56-02-PLAN.md — TDD: CapabilityScaffolder service (generate scaffold tasks for create-verb capabilities)
+- [x] 56-03-PLAN.md — Wire barrel exports, public API, and GSD workflow documentation (executor, planner, execute-phase)
 
 ### Phase 57: Cache-Aware Ordering
 **Goal**: Skills are ordered to maximize Anthropic prompt cache hits by grouping stable content before dynamic content
@@ -112,7 +112,10 @@ Plans:
   2. Skills are sorted by cacheTier within relevance bands (cache ordering is a tiebreaker, not a primary sort)
   3. Ordering is deterministic: same inputs always produce same output (tier then alphabetical tiebreaking)
   4. Relevance quality is preserved (cache ordering never changes which skills survive the maxSkills cut)
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 57-01-PLAN.md — TDD: CacheTier type and CacheOrderStage (pipeline stage reordering within relevance bands)
+- [ ] 57-02-PLAN.md — Wire CacheOrderStage into pipeline, add cacheTier to extension type, update exports
 
 ### Phase 58: Research Compression
 **Goal**: Research artifacts are compressed to distilled skill files at 10-20x reduction so executors get actionable guidance without context bloat
@@ -123,7 +126,11 @@ Plans:
   2. Compressed skills include `source: auto-generated` and `generatedFrom` metadata linking back to source file with content hash
   3. When the source research file changes, derived skills are detected as stale and excluded from loading
   4. Manual skills always win over auto-generated skills in conflict resolution
-**Plans**: TBD
+**Plans:** 3 plans
+Plans:
+- [ ] 58-01-PLAN.md — TDD: ResearchCompressor service (extract key insights, generate distilled skill content, content hash tracking)
+- [ ] 58-02-PLAN.md — TDD: StalenessChecker service (staleness detection, manual-wins conflict resolution)
+- [ ] 58-03-PLAN.md — Wire compress-research CLI command, barrel exports, integration tests
 
 ### Phase 59: Model-Aware Activation
 **Goal**: Skills declare which model tier they target so the right skills load for the right model profile
@@ -134,7 +141,10 @@ Plans:
   2. When the active model profile does not match a skill's modelGuidance, the skill is gracefully skipped (not an error)
   3. Skipped-due-to-model-mismatch skills appear in the skipped list with the reason
   4. Default behavior (no modelGuidance declared) loads the skill regardless of model profile (backward compatible)
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 59-01-PLAN.md — TDD: ModelGuidance type and ModelFilterStage pipeline stage with model-to-tier mapping
+- [ ] 59-02-PLAN.md — Wire ModelFilterStage into SkillApplicator pipeline, barrel exports, public API
 
 ### Phase 60: Post-Phase Invocation and Collector Agents
 **Goal**: Phases can trigger capabilities automatically after completion, and read-only collector agents can be generated for context-efficient information gathering
@@ -171,9 +181,9 @@ Note: Phases 53 and 54 can execute in parallel (both depend only on 52). Phases 
 | 53. Token Budget Tiers | v1.8 | 3/3 | Complete | 2026-02-08 |
 | 54. Capability Manifest | v1.8 | 4/4 | Complete | 2026-02-08 |
 | 55. Phase and Plan Capability Declarations | v1.8 | 4/4 | Complete | 2026-02-08 |
-| 56. Skill Injection and Dynamic Creation | v1.8 | 0/3 | Not started | - |
-| 57. Cache-Aware Ordering | v1.8 | 0/TBD | Not started | - |
-| 58. Research Compression | v1.8 | 0/TBD | Not started | - |
-| 59. Model-Aware Activation | v1.8 | 0/TBD | Not started | - |
+| 56. Skill Injection and Dynamic Creation | v1.8 | 3/3 | Complete | 2026-02-08 |
+| 57. Cache-Aware Ordering | v1.8 | 0/2 | Not started | - |
+| 58. Research Compression | v1.8 | 0/3 | Not started | - |
+| 59. Model-Aware Activation | v1.8 | 0/2 | Not started | - |
 | 60. Post-Phase Invocation and Collector Agents | v1.8 | 0/TBD | Not started | - |
 | 61. Parallelization Advisor | v1.8 | 0/TBD | Not started | - |
