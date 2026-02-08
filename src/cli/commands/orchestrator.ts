@@ -279,7 +279,7 @@ async function handleClassify(args: string[]): Promise<number> {
 
     // Initialize classifier and classify
     const classifier = new IntentClassifier();
-    classifier.initialize(discovery);
+    await classifier.initialize(discovery);
     const result = await classifier.classify(input, state);
 
     if (pretty) {
