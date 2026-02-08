@@ -227,6 +227,19 @@ Key rules:
 - Add body for complex changes (explain WHY/WHAT, not HOW)
 - Include `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>` on all commits
 
+## Project Setup
+
+This project extends GSD with a master orchestrator and base skills.
+Project-specific `.claude/` files are stored in `project-claude/` and
+installed via:
+
+    node project-claude/install.cjs
+
+Run this after GSD updates or when setting up a fresh clone.
+
+If `gsd-orchestrator.md` or other project files are missing, Claude
+should suggest running the install script before proceeding.
+
 ## Anti-Patterns to Avoid
 
 - **Don't** stop after GSD output without reading "Next Up" instructions
