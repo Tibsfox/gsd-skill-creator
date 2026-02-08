@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 56 (fifth of 10 in v1.8) — Skill Injection & Dynamic Creation
-Plan: 2 of N in current phase (56-01 complete, 56-02 complete)
+Plan: 3 of N in current phase (56-01 complete, 56-02 complete, 56-03 complete)
 Status: Executing Phase 56
-Last activity: 2026-02-08 — Completed 56-01 SkillInjector
+Last activity: 2026-02-08 — Completed 56-03 Integration Wiring
 
 Progress: [##########░░░░░░░░░░] ~45%
 
@@ -83,6 +83,9 @@ Recent decisions affecting current work:
 - [56-01]: All declared capabilities get critical tier (declared = must-load)
 - [56-01]: use/adapt verbs loaded, create/after verbs filtered, team refs filtered
 - [56-01]: Token estimation via content.length/4 ceiling matching existing codebase pattern
+- [56-03]: SkillInjector and CapabilityScaffolder re-exported from both barrel and package root
+- [56-03]: Execute-phase skill injection step inserted as step 3 before agent wait
+- [56-03]: Injected skills protocol placed between continuation_handling and tdd_execution in executor
 
 ### Pending Todos
 
@@ -104,7 +107,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 56-01-PLAN.md (SkillInjector). Phase 56 in progress.
+Stopped at: Completed 56-03-PLAN.md (Integration Wiring). Phase 56 in progress.
 Resume file: None
 
 ## Performance Metrics
@@ -125,6 +128,7 @@ Resume file: None
 | 55-04 | 3min | 2 | 5 | 2026-02-08 |
 | 56-02 | 2min | 2 | 2 | 2026-02-08 |
 | 56-01 | 2min | 2 | 2 | 2026-02-08 |
+| 56-03 | 3min | 2 | 5 | 2026-02-08 |
 
 ---
-*Updated: 2026-02-08 after 56-01 SkillInjector completed*
+*Updated: 2026-02-08 after 56-03 Integration Wiring completed*
