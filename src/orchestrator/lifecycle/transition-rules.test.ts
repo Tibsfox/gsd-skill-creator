@@ -176,7 +176,7 @@ describe('deriveNextActions - phase-level transitions', () => {
     expect(result.primary.args).toBe('39');
   });
 
-  it('suggests next phase when hasUat', () => {
+  it('suggests audit-milestone when hasUat and no nextPhaseNumber', () => {
     const artifacts = makeArtifacts({
       planIds: ['39-01', '39-02'],
       summaryIds: ['39-01', '39-02'],
@@ -188,8 +188,25 @@ describe('deriveNextActions - phase-level transitions', () => {
 
     const result = deriveNextActions(artifacts, 'verifying');
 
-    // Should suggest moving to next phase or audit
-    expect(result.primary.command).toBe('gsd:plan-phase');
+    // No nextPhaseNumber -> suggests audit (phase done, no known next phase)
+    expect(result.primary.command).toBe('gsd:audit-milestone');
+    expect(result.context).toMatch(/complete|verified/i);
+  });
+
+  it('suggests next phase when hasUat and nextPhaseNumber provided', () => {
+    const artifacts = makeArtifacts({
+      planIds: ['39-01', '39-02'],
+      summaryIds: ['39-01', '39-02'],
+      planCount: 2,
+      summaryCount: 2,
+      unexecutedPlans: [],
+      hasUat: true,
+    });
+
+    const result = deriveNextActions(artifacts, 'verifying', undefined, '40');
+
+    expect(result.primary.command).toBe('gsd:discuss-phase');
+    expect(result.primary.args).toBe('40');
     expect(result.context).toMatch(/complete|next|verified/i);
   });
 });
