@@ -44,6 +44,7 @@ function makeCluster(overrides: Partial<PromptCluster> = {}): PromptCluster {
       new Date(Date.now() - 2 * 86400000).toISOString(),   // 2 days ago
       new Date(Date.now() - 5 * 86400000).toISOString(),   // 5 days ago
     ],
+    coherence: overrides.coherence ?? 0.75, // Default reasonable coherence
   };
 }
 

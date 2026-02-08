@@ -95,7 +95,7 @@ export function classifyBashCommand(command: string): BashCategory {
   if (SEARCH_CMDS.has(cmd)) return 'search';
 
   // 7. Scripted (inline scripts)
-  if ((cmd === 'python3' || cmd === 'python' || cmd === 'node') && sub === '-c' || sub === '-e') {
+  if ((cmd === 'python3' || cmd === 'python' || cmd === 'node') && (sub === '-c' || sub === '-e')) {
     // More precise: python/python3 use -c, node uses -e
     if ((cmd === 'python3' || cmd === 'python') && sub === '-c') return 'scripted';
     if (cmd === 'node' && sub === '-e') return 'scripted';
