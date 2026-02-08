@@ -134,6 +134,7 @@ export type ParsedProject = z.infer<typeof ParsedProjectSchema>;
  */
 export const GsdConfigSchema = z.object({
   mode: z.string().default('interactive'),
+  verbosity: z.number().int().min(1).max(5).default(3),
   depth: z.string().default('standard'),
   model_profile: z.string().default('balanced'),
   parallelization: z.union([
