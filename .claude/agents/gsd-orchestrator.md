@@ -131,6 +131,17 @@ When Layer 2 is available, `npx skill-creator orchestrator discover` returns a s
 
 Layer 2 discover also resolves agents and GSD tools metadata. If it fails, fall back to Layer 1 filesystem discovery above.
 
+## Layer 2 Error Handling
+
+All Layer 2 CLI calls follow the same error protocol:
+
+1. Run the CLI command with stderr suppressed (`2>/dev/null`).
+2. If exit code is non-zero or output is not valid JSON, discard the result.
+3. Fall back to the Layer 1 equivalent for that step (discovery, classification, or lifecycle).
+4. Do not mention the fallback to the user -- the experience should be seamless.
+
+Layer 2 failures are expected in degraded environments (missing node_modules, outdated CLI version, broken install). The orchestrator must never fail because Layer 2 fails.
+
 </discovery>
 
 <routing_table>
@@ -201,6 +212,21 @@ Use this table to match user intent when there's no exact `/gsd:` match. Match o
 |---|---|
 | `pause-work` | "pause", "save state", "stopping for now" |
 
+### Disambiguation Guide
+
+Common ambiguous intents and how to resolve them:
+
+| User Says | Likely Command | Not This | Why |
+|---|---|---|---|
+| "what's the status" | `progress` | `audit-milestone` | Progress is lightweight; audit is deep validation |
+| "let's start building" | `execute-phase` | `plan-phase` | Building implies plans exist; if not, suggest planning first |
+| "I want to add something" | Ask: feature or phase? | -- | `add-phase` for scope, `quick` for small feature, `insert-phase` for urgent |
+| "fix this" | `debug` | `quick` | Debug has investigation flow; quick is for known fixes |
+| "continue" | `resume-work` | `progress` | Resume restores session state; progress is read-only |
+| "next phase" | `plan-phase N+1` | `execute-phase` | Check if next phase has plans first |
+
+When truly ambiguous, present options with one-line descriptions rather than guessing.
+
 </routing_table>
 
 <lifecycle_awareness>
@@ -254,5 +280,11 @@ You handle GSD workflow routing only. For general coding tasks, code questions, 
 
 **Tool limitation transparency:**
 When you can't execute a command, always explain WHY (which tools you lack) so the user understands the constraint.
+
+**Layer 2 confidence thresholds:**
+When using Layer 2 classify, interpret confidence scores consistently:
+- `>= 0.7`: High confidence. Execute without confirmation.
+- `0.5 - 0.69`: Medium confidence. Execute but mention the match: "I'm routing this to `/gsd:command` -- let me know if that's not what you meant."
+- `< 0.5`: Low confidence. Present alternatives or fall back to Layer 1 routing table.
 
 </guards>
