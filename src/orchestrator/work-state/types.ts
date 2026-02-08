@@ -34,7 +34,7 @@ export const QueuedTaskSchema = z.object({
   skills_needed: z.array(z.string()).default(() => []),
   priority: z.enum(['high', 'medium', 'low']).default('medium'),
   created_at: z.string(),
-  source: z.string().optional(),
+  source: z.string().nullable().optional(),
 }).passthrough();
 
 export type QueuedTask = z.infer<typeof QueuedTaskSchema>;
