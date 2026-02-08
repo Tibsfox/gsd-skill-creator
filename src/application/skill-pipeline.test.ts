@@ -238,3 +238,160 @@ describe('createEmptyContext', () => {
     expect(ctx.getReport().totalTokens).toBe(100);
   });
 });
+
+describe('SkillPipeline integration', () => {
+  it('should produce ApplyResult-compatible output from score->resolve->load flow', async () => {
+    const pipeline = new SkillPipeline();
+
+    // Mock score stage: populates matches and scoredSkills
+    const scoreStage: PipelineStage = {
+      name: 'score',
+      process: async (ctx) => {
+        ctx.matches = [
+          { name: 'git-commit', description: 'Git commit', enabled: true, path: '/skills/git-commit', mtime: 0 },
+        ];
+        ctx.scoredSkills = [{ name: 'git-commit', score: 0.8, matchType: 'intent' }];
+        return ctx;
+      },
+    };
+
+    // Mock resolve stage: populates conflicts and resolvedSkills
+    const resolveStage: PipelineStage = {
+      name: 'resolve',
+      process: async (ctx) => {
+        ctx.conflicts = { hasConflict: false, conflictingSkills: [], resolution: 'priority' };
+        ctx.resolvedSkills = ctx.scoredSkills;
+        return ctx;
+      },
+    };
+
+    // Mock load stage: populates loaded/skipped
+    const loadStage: PipelineStage = {
+      name: 'load',
+      process: async (ctx) => {
+        for (const skill of ctx.resolvedSkills) {
+          ctx.loaded.push(skill.name);
+        }
+        return ctx;
+      },
+    };
+
+    pipeline.addStage(scoreStage);
+    pipeline.addStage(resolveStage);
+    pipeline.addStage(loadStage);
+
+    const customReport = {
+      activeSkills: [],
+      totalTokens: 50,
+      budgetLimit: 6000,
+      budgetUsedPercent: 0.83,
+      remainingBudget: 5950,
+      tokenTracking: [],
+      flaggedSkills: [],
+    };
+
+    const ctx = createEmptyContext({
+      intent: 'write a commit message',
+      getReport: () => customReport,
+    });
+
+    const result = await pipeline.process(ctx);
+
+    // Verify ApplyResult structure
+    expect(result.loaded).toEqual(['git-commit']);
+    expect(result.skipped).toEqual([]);
+    expect(result.conflicts).toEqual({
+      hasConflict: false,
+      conflictingSkills: [],
+      resolution: 'priority',
+    });
+    expect(result.getReport()).toBe(customReport);
+    expect(result.getReport().totalTokens).toBe(50);
+  });
+
+  it('should skip resolve and load logic when score stage sets earlyExit', async () => {
+    const pipeline = new SkillPipeline();
+    const stagesRun: string[] = [];
+
+    // Score stage sets earlyExit (no matches found)
+    pipeline.addStage({
+      name: 'score',
+      process: async (ctx) => {
+        stagesRun.push('score');
+        ctx.earlyExit = true;
+        ctx.loaded = [];
+        ctx.skipped = [];
+        return ctx;
+      },
+    });
+
+    // Resolve stage checks earlyExit
+    pipeline.addStage({
+      name: 'resolve',
+      process: async (ctx) => {
+        stagesRun.push('resolve');
+        if (ctx.earlyExit) return ctx;
+        // This should NOT execute
+        ctx.conflicts = { hasConflict: true, conflictingSkills: ['x'], resolution: 'priority' };
+        return ctx;
+      },
+    });
+
+    // Load stage checks earlyExit
+    pipeline.addStage({
+      name: 'load',
+      process: async (ctx) => {
+        stagesRun.push('load');
+        if (ctx.earlyExit) return ctx;
+        // This should NOT execute
+        ctx.loaded.push('should-not-appear');
+        return ctx;
+      },
+    });
+
+    const result = await pipeline.process(createEmptyContext());
+
+    // All stages are called by the runner (it ignores earlyExit)
+    expect(stagesRun).toEqual(['score', 'resolve', 'load']);
+
+    // But resolve and load skipped their logic due to earlyExit
+    expect(result.earlyExit).toBe(true);
+    expect(result.loaded).toEqual([]);
+    expect(result.skipped).toEqual([]);
+    // Conflicts remain at default (resolve stage skipped its logic)
+    expect(result.conflicts).toEqual({
+      hasConflict: false,
+      conflictingSkills: [],
+      resolution: 'priority',
+    });
+  });
+
+  it('should allow inserting a new stage without modifying existing stages', async () => {
+    const pipeline = new SkillPipeline();
+    const order: string[] = [];
+
+    pipeline.addStage({
+      name: 'score',
+      process: async (ctx) => { order.push('score'); return ctx; },
+    });
+    pipeline.addStage({
+      name: 'resolve',
+      process: async (ctx) => { order.push('resolve'); return ctx; },
+    });
+    pipeline.addStage({
+      name: 'load',
+      process: async (ctx) => { order.push('load'); return ctx; },
+    });
+
+    // Insert a budget-check stage before load (simulating future Phase 53)
+    pipeline.insertBefore('load', {
+      name: 'budget-check',
+      process: async (ctx) => { order.push('budget-check'); return ctx; },
+    });
+
+    await pipeline.process(createEmptyContext());
+
+    expect(pipeline.getStageNames()).toEqual(['score', 'resolve', 'budget-check', 'load']);
+    expect(order).toEqual(['score', 'resolve', 'budget-check', 'load']);
+  });
+});
