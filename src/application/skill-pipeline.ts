@@ -31,6 +31,9 @@ export interface PipelineContext {
   // Content cache (written by BudgetStage to avoid double reads in LoadStage)
   contentCache: Map<string, string>;
 
+  // Model profile for model-aware filtering (set by caller, read-only to stages)
+  readonly modelProfile?: string;   // Active model profile name: 'quality' | 'balanced' | 'budget'
+
   // Control flag -- stages check this, runner ignores it
   earlyExit: boolean;
 
@@ -127,6 +130,7 @@ export function createEmptyContext(
     budgetSkipped: [],
     budgetWarnings: [],
     contentCache: new Map(),
+    modelProfile: undefined,
     earlyExit: false,
     getReport: () => ({
       activeSkills: [],
