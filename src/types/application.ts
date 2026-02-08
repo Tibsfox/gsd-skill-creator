@@ -48,11 +48,20 @@ export interface TokenTracking {
 // Priority tier for token budget allocation
 export type PriorityTier = 'critical' | 'standard' | 'optional';
 
+// Model tier for model-aware skill activation
+export type ModelTier = 'opus' | 'sonnet' | 'haiku';
+
+// Model guidance metadata for skill filtering
+export interface ModelGuidance {
+  preferred: ModelTier[];          // Which model tiers this skill targets (e.g., ['opus', 'sonnet'])
+  minimumCapability?: number;      // Minimum capability level (opus=3, sonnet=2, haiku=1)
+}
+
 // Skill skipped due to budget constraints
 export interface SkippedSkill {
   name: string;
   tier: PriorityTier;
-  reason: 'budget_exceeded' | 'hard_ceiling_reached' | 'lower_priority';
+  reason: 'budget_exceeded' | 'hard_ceiling_reached' | 'lower_priority' | 'model_mismatch';
   estimatedTokens: number;
 }
 
