@@ -366,3 +366,90 @@ Plans:
     expect(result!.plansByPhase['1']).toHaveLength(2);
   });
 });
+
+// ============================================================================
+// Capability extraction
+// ============================================================================
+
+describe('capability extraction', () => {
+  const ROADMAP_WITH_CAPABILITIES = `# Roadmap
+
+## Phases
+
+- [ ] **Phase 10: Skill Injection** - Inject skills into plans
+
+## Phase Details
+
+### Phase 10: Skill Injection
+**Goal**: Inject discovered skills into executor context
+**Capabilities**: use: skill/beautiful-commits, agent/gsd-executor
+
+Plans:
+- [ ] 10-01 -- Wiring plan
+`;
+
+  const ROADMAP_MULTI_PHASE_CAPABILITIES = `# Roadmap
+
+## Phases
+
+- [ ] **Phase 10: Skill Injection** - Inject skills
+- [ ] **Phase 11: Agent Wiring** - Wire agents
+
+## Phase Details
+
+### Phase 10: Skill Injection
+**Goal**: Inject skills
+**Capabilities**: use: skill/beautiful-commits, skill/typescript-patterns
+
+Plans:
+- [ ] 10-01 -- Wiring
+
+### Phase 11: Agent Wiring
+**Goal**: Wire agents
+**Capabilities**: create: agent/new-agent
+
+Plans:
+- [ ] 11-01 -- Agent scaffolding
+`;
+
+  it('extracts capabilities from phases with Capabilities line', () => {
+    const result = parseRoadmap(ROADMAP_WITH_CAPABILITIES);
+    expect(result).not.toBeNull();
+    expect(result!.capabilitiesByPhase).toBeDefined();
+
+    const caps = result!.capabilitiesByPhase!['10'];
+    expect(caps).toHaveLength(2);
+    expect(caps[0]).toMatchObject({
+      verb: 'use',
+      type: 'skill',
+      name: 'beautiful-commits',
+    });
+    expect(caps[1]).toMatchObject({
+      verb: 'use',
+      type: 'agent',
+      name: 'gsd-executor',
+    });
+  });
+
+  it('returns no capabilitiesByPhase for roadmaps without Capabilities lines', () => {
+    const result = parseRoadmap(COMPLETE_ROADMAP);
+    expect(result).not.toBeNull();
+    // capabilitiesByPhase should be undefined (omitted from output)
+    expect(result!.capabilitiesByPhase).toBeUndefined();
+  });
+
+  it('extracts capabilities from multiple phases', () => {
+    const result = parseRoadmap(ROADMAP_MULTI_PHASE_CAPABILITIES);
+    expect(result).not.toBeNull();
+    expect(result!.capabilitiesByPhase).toBeDefined();
+
+    const phase10 = result!.capabilitiesByPhase!['10'];
+    expect(phase10).toHaveLength(2);
+    expect(phase10[0]).toMatchObject({ verb: 'use', type: 'skill', name: 'beautiful-commits' });
+    expect(phase10[1]).toMatchObject({ verb: 'use', type: 'skill', name: 'typescript-patterns' });
+
+    const phase11 = result!.capabilitiesByPhase!['11'];
+    expect(phase11).toHaveLength(1);
+    expect(phase11[0]).toMatchObject({ verb: 'create', type: 'agent', name: 'new-agent' });
+  });
+});
