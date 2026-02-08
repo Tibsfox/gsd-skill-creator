@@ -34,5 +34,9 @@ export { deriveLifecycleStage, filterByLifecycle, UNIVERSAL_COMMANDS } from './l
 // Argument extraction
 export { extractArguments } from './argument-extractor.js';
 
+// Semantic matcher (embedding-based fallback)
+export { SemanticMatcher } from './semantic-matcher.js';
+export type { SemanticMatch } from './semantic-matcher.js';
+
 // Main classifier
 export { IntentClassifier } from './intent-classifier.js';
