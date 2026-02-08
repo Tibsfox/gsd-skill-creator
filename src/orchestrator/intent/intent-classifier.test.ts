@@ -476,4 +476,124 @@ describe('IntentClassifier', () => {
       expect(result.method).toBe('exact');
     });
   });
+
+  // --------------------------------------------------------------------------
+  // Extension-Gated Semantic Activation
+  // --------------------------------------------------------------------------
+
+  describe('extension-gated semantic activation', () => {
+    it('initialize() returns a Promise when called with enableSemantic option', async () => {
+      const semClassifier = new IntentClassifier({
+        confidenceThreshold: 0.99,
+        semanticThreshold: 0.7,
+      });
+      // Current initialize() returns void, not Promise<void>.
+      // After implementation, it must return a Promise.
+      const result = semClassifier.initialize(makeDiscovery(), { enableSemantic: true });
+      expect(result).toBeInstanceOf(Promise);
+      await result;
+    });
+
+    it('initialize() with enableSemantic: false does NOT create SemanticMatcher', async () => {
+      const semClassifier = new IntentClassifier({ enableSemantic: true });
+      // After implementation, options.enableSemantic: false overrides config
+      const initResult = semClassifier.initialize(makeDiscovery(), { enableSemantic: false });
+      expect(initResult).toBeInstanceOf(Promise);
+      await initResult;
+
+      const internal = semClassifier as unknown as { semanticMatcher: SemanticMatcher | null };
+      expect(internal.semanticMatcher).toBeNull();
+
+      // Verify classify still works without semantic (Bayes-only)
+      const result = await semClassifier.classify('plan the next phase', executingState);
+      expect(result).toBeDefined();
+      expect(result.method).not.toBe('semantic');
+    });
+
+    it('initialize() defaults to config.enableSemantic when options not provided', async () => {
+      // Config has enableSemantic: true (default) -- initialize() should return Promise
+      // because it attempts SemanticMatcher creation (even if it silently fails)
+      const semClassifier = new IntentClassifier({ enableSemantic: true });
+      const initResult = semClassifier.initialize(makeDiscovery());
+      // Must return a Promise (the async semantic initialization path)
+      expect(initResult).toBeInstanceOf(Promise);
+      await initResult;
+    });
+  });
+
+  // --------------------------------------------------------------------------
+  // Graceful Degradation
+  // --------------------------------------------------------------------------
+
+  describe('graceful degradation', () => {
+    it('when EmbeddingService init throws, classify still works (Bayes-only)', async () => {
+      const semClassifier = new IntentClassifier({ enableSemantic: true });
+
+      // Initialize with semantic enabled -- in test env, getEmbeddingService
+      // will throw because embeddings aren't available.
+      // The key assertion: initialize must return a Promise and NOT throw.
+      const initResult = semClassifier.initialize(makeDiscovery(), { enableSemantic: true });
+      expect(initResult).toBeInstanceOf(Promise);
+      await initResult;
+
+      // classify should still work using Bayes-only
+      const result = await semClassifier.classify('plan the next phase', executingState);
+      expect(result).toBeDefined();
+      expect(['exact-match', 'classified', 'ambiguous', 'no-match']).toContain(result.type);
+      // Should NOT be semantic since embeddings are unavailable
+      if (result.method) {
+        expect(result.method).not.toBe('semantic');
+      }
+    });
+
+    it('when SemanticMatcher.initialize() rejects, classify works without semantic', async () => {
+      const semClassifier = new IntentClassifier({ enableSemantic: true });
+
+      // Initialize -- semantic will silently degrade, but must return Promise
+      const initResult = semClassifier.initialize(makeDiscovery(), { enableSemantic: true });
+      expect(initResult).toBeInstanceOf(Promise);
+      await initResult;
+
+      // After graceful degradation, semanticMatcher should be null
+      const internal = semClassifier as unknown as { semanticMatcher: SemanticMatcher | null };
+      expect(internal.semanticMatcher).toBeNull();
+
+      // Classify should work fine with Bayes only
+      const result = await semClassifier.classify('plan the next phase', executingState);
+      expect(result).toBeDefined();
+      expect(result.type).not.toBe('error');
+    });
+
+    it('classification results are identical to pre-semantic behavior when disabled', async () => {
+      // Classifier with semantic explicitly disabled -- must still return Promise
+      const noSemanticClassifier = new IntentClassifier({ enableSemantic: false });
+      const initResult = noSemanticClassifier.initialize(makeDiscovery(), { enableSemantic: false });
+      expect(initResult).toBeInstanceOf(Promise);
+      await initResult;
+
+      // Classifier with no semantic initialization (original behavior)
+      const bayesOnlyClassifier = new IntentClassifier({ enableSemantic: false });
+      bayesOnlyClassifier.initialize(makeDiscovery());
+
+      // Test several inputs -- results should be structurally identical
+      const inputs = [
+        'plan the next phase',
+        '/gsd:progress',
+        'debug this issue',
+        '',
+      ];
+
+      for (const input of inputs) {
+        const semResult = await noSemanticClassifier.classify(input, executingState);
+        const bayesResult = await bayesOnlyClassifier.classify(input, executingState);
+
+        expect(semResult.type).toBe(bayesResult.type);
+        expect(semResult.command?.name).toBe(bayesResult.command?.name);
+        // Method should never be 'semantic' when disabled
+        if (semResult.method) {
+          expect(semResult.method).not.toBe('semantic');
+        }
+      }
+    });
+  });
 });
