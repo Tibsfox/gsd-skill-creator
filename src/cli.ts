@@ -1048,6 +1048,14 @@ async function main() {
       break;
     }
 
+    case 'workflow':
+    case 'wf': {
+      const { workflowCommand } = await import('./cli/commands/workflow.js');
+      const exitCode = await workflowCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1161,6 +1169,7 @@ Commands:
   benchmark, bench  Measure simulator accuracy vs real activation
   discover, disc    Discover skill candidates from session history
   orchestrator, orch  GSD orchestrator (discover, state, classify, lifecycle)
+  workflow, wf      Manage skill workflows (create, run, list, status)
   help, -h          Show this help message
   --version, -V     Show version information
 
@@ -1246,6 +1255,16 @@ Agent Composition:
   bug (GitHub #11205). Consider using project-level agents instead.
   Workarounds: use project-level agents, the /agents UI command, or
   pass agents via --agents CLI flag when starting Claude Code.
+
+Workflow Management:
+  The 'workflow' command manages skill workflows -- multi-step
+  execution pipelines that compose skills into repeatable processes.
+  Workflows are defined as .workflow.yaml files in .claude/workflows/.
+
+  Run 'workflow create' for an interactive wizard, or use --name and
+  --steps flags for scripted creation. Run 'workflow run <name>' to
+  execute a workflow, and 'workflow status <name>' to check progress.
+  Interrupted runs can be resumed with 'workflow run <name> --resume'.
 
 Pattern Discovery:
   The 'discover' command scans your Claude Code session history for
@@ -1346,6 +1365,12 @@ Examples:
   skill-creator discover              # Scan sessions for patterns
   skill-creator disc --rescan         # Force full rescan
   skill-creator discover --exclude=temp  # Skip specific projects
+  skill-creator workflow create       # Interactive workflow creation
+  skill-creator wf c --name=deploy --steps='[{"id":"lint","skill":"linter"}]'
+  skill-creator workflow run deploy   # Run a workflow
+  skill-creator wf r deploy --resume  # Resume interrupted run
+  skill-creator workflow list         # List all workflows
+  skill-creator workflow status deploy # Show run progress
 
 Skill Storage:
   User-level skills: ~/.claude/skills/ (shared across projects)
