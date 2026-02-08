@@ -19,7 +19,10 @@ import {
   createDiscoveryService,
   IntentClassifier,
   LifecycleCoordinator,
+  evaluateGate,
+  filterByVerbosity,
 } from '../../orchestrator/index.js';
+import type { OutputSection } from '../../orchestrator/index.js';
 import { ProjectStateReader } from '../../orchestrator/state/state-reader.js';
 
 // ============================================================================
@@ -53,6 +56,19 @@ function extractPositionalArgs(args: string[]): string {
     .trim();
 }
 
+/**
+ * Resolve verbosity level from --verbosity=N flag, falling back to
+ * a provided config value, or the default of 3.
+ */
+function resolveVerbosity(args: string[], configVerbosity?: number): number {
+  const raw = extractFlag(args, 'verbosity');
+  if (raw !== undefined) {
+    const parsed = parseInt(raw, 10);
+    if (!isNaN(parsed) && parsed >= 1 && parsed <= 5) return parsed;
+  }
+  return configVerbosity ?? 3;
+}
+
 // ============================================================================
 // Help text
 // ============================================================================
@@ -77,6 +93,7 @@ Subcommands:
 
 Common Options:
   --pretty        Human-readable formatted output (default: JSON)
+  --verbosity=N   Output verbosity level 1-5 (default: config or 3)
   --help, -h      Show this help message
 
 Discover Options:
@@ -144,24 +161,19 @@ async function handleDiscover(args: string[]): Promise<number> {
     const result = await service.discover();
 
     if (pretty) {
+      const verbosity = resolveVerbosity(args);
+      const sections: OutputSection[] = [
+        { tag: 'location', content: `Location: ${result.location} (${result.basePath})`, minLevel: 2 },
+        { tag: 'version', content: `Version: ${result.version ?? 'unknown'}`, minLevel: 3 },
+        { tag: 'commands', content: `Commands (${result.commands.length}):\n${result.commands.map((c: { name: string; description: string }) => `  - ${c.name}: ${c.description}`).join('\n')}`, minLevel: 1 },
+        { tag: 'agents', content: `Agents (${result.agents.length}):\n${result.agents.map((a: { name: string; description: string }) => `  - ${a.name}: ${a.description}`).join('\n')}`, minLevel: 3 },
+        { tag: 'teams', content: `Teams (${result.teams.length}):\n${result.teams.map((t: { name: string; description?: string; memberCount: number }) => `  - ${t.name}: ${t.description ?? 'no description'} (${t.memberCount} members)`).join('\n')}`, minLevel: 4 },
+      ];
+      const visible = filterByVerbosity(sections, verbosity);
       console.log('GSD Discovery Results');
       console.log('=====================');
-      console.log(`Location: ${result.location} (${result.basePath})`);
-      console.log(`Version: ${result.version ?? 'unknown'}`);
-      console.log('');
-      console.log(`Commands (${result.commands.length}):`);
-      for (const cmd of result.commands) {
-        console.log(`  - ${cmd.name}: ${cmd.description}`);
-      }
-      console.log('');
-      console.log(`Agents (${result.agents.length}):`);
-      for (const agent of result.agents) {
-        console.log(`  - ${agent.name}: ${agent.description}`);
-      }
-      console.log('');
-      console.log(`Teams (${result.teams.length}):`);
-      for (const team of result.teams) {
-        console.log(`  - ${team.name}: ${team.description ?? 'no description'} (${team.memberCount} members)`);
+      for (const s of visible) {
+        console.log(s.content);
       }
     } else {
       console.log(JSON.stringify(result, null, 2));
@@ -282,30 +294,33 @@ async function handleClassify(args: string[]): Promise<number> {
     await classifier.initialize(discovery);
     const result = await classifier.classify(input, state);
 
+    // Evaluate HITL gate
+    const gate = evaluateGate(
+      result.command?.name ?? '',
+      state.config.mode,
+      result.confidence,
+    );
+
     if (pretty) {
+      const verbosity = resolveVerbosity(args, state.config.verbosity);
+      const sections: OutputSection[] = [
+        { tag: 'command', content: result.command ? `Command: ${result.command.name}` : 'Command: (none)', minLevel: 1 },
+        { tag: 'confidence', content: `Confidence: ${(result.confidence * 100).toFixed(1)}%`, minLevel: 2 },
+        { tag: 'type', content: `Type: ${result.type}`, minLevel: 3 },
+        ...(result.command ? [{ tag: 'description', content: `Description: ${result.command.description}`, minLevel: 3 }] : []),
+        ...(result.arguments.phaseNumber ? [{ tag: 'phase', content: `Phase: ${result.arguments.phaseNumber}`, minLevel: 2 }] : []),
+        ...(result.lifecycleStage ? [{ tag: 'lifecycle', content: `Lifecycle Stage: ${result.lifecycleStage}`, minLevel: 4 }] : []),
+        ...(result.alternatives.length > 0 ? [{ tag: 'alternatives', content: `Alternatives:\n${result.alternatives.map((a: { command: { name: string }; confidence: number }) => `  - ${a.command.name} (${(a.confidence * 100).toFixed(1)}%)`).join('\n')}`, minLevel: 5 }] : []),
+        ...(gate.action !== 'proceed' ? [{ tag: 'gate', content: `Gate: ${gate.action} - ${gate.reason}`, minLevel: 2 }] : []),
+      ];
+      const visible = filterByVerbosity(sections, verbosity);
       console.log('Classification Result');
       console.log('=====================');
-      console.log(`Type: ${result.type}`);
-      console.log(`Confidence: ${(result.confidence * 100).toFixed(1)}%`);
-      if (result.command) {
-        console.log(`Command: ${result.command.name}`);
-        console.log(`Description: ${result.command.description}`);
-      }
-      if (result.arguments.phaseNumber) {
-        console.log(`Phase: ${result.arguments.phaseNumber}`);
-      }
-      if (result.lifecycleStage) {
-        console.log(`Lifecycle Stage: ${result.lifecycleStage}`);
-      }
-      if (result.alternatives.length > 0) {
-        console.log('');
-        console.log('Alternatives:');
-        for (const alt of result.alternatives) {
-          console.log(`  - ${alt.command.name} (${(alt.confidence * 100).toFixed(1)}%)`);
-        }
+      for (const s of visible) {
+        console.log(s.content);
       }
     } else {
-      console.log(JSON.stringify(result, null, 2));
+      console.log(JSON.stringify({ ...result, gate }, null, 2));
     }
 
     return 0;
@@ -346,23 +361,21 @@ async function handleLifecycle(args: string[]): Promise<number> {
     const suggestion = await coordinator.suggestNextStep(state, afterCommand);
 
     if (pretty) {
+      const verbosity = resolveVerbosity(args);
+      const primaryContent = suggestion.primary.args
+        ? `Primary Action:\n  Command: ${suggestion.primary.command}\n  Args: ${suggestion.primary.args}\n  Reason: ${suggestion.primary.reason}`
+        : `Primary Action:\n  Command: ${suggestion.primary.command}\n  Reason: ${suggestion.primary.reason}`;
+      const sections: OutputSection[] = [
+        { tag: 'primary', content: primaryContent, minLevel: 1 },
+        { tag: 'stage', content: `Stage: ${suggestion.stage}`, minLevel: 2 },
+        { tag: 'context', content: `Context: ${suggestion.context}`, minLevel: 3 },
+        ...(suggestion.alternatives.length > 0 ? [{ tag: 'alternatives', content: `Alternatives:\n${suggestion.alternatives.map((a: { command: string; reason: string }) => `  - ${a.command}: ${a.reason}`).join('\n')}`, minLevel: 4 }] : []),
+      ];
+      const visible = filterByVerbosity(sections, verbosity);
       console.log('Lifecycle Suggestion');
       console.log('====================');
-      console.log(`Stage: ${suggestion.stage}`);
-      console.log(`Context: ${suggestion.context}`);
-      console.log('');
-      console.log('Primary Action:');
-      console.log(`  Command: ${suggestion.primary.command}`);
-      if (suggestion.primary.args) {
-        console.log(`  Args: ${suggestion.primary.args}`);
-      }
-      console.log(`  Reason: ${suggestion.primary.reason}`);
-      if (suggestion.alternatives.length > 0) {
-        console.log('');
-        console.log('Alternatives:');
-        for (const alt of suggestion.alternatives) {
-          console.log(`  - ${alt.command}: ${alt.reason}`);
-        }
+      for (const s of visible) {
+        console.log(s.content);
       }
     } else {
       console.log(JSON.stringify(suggestion, null, 2));
