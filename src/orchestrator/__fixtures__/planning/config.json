@@ -1,0 +1,6 @@
+{
+  "mode": "yolo",
+  "depth": "standard",
+  "parallelization": { "enabled": true, "max_agents": 3 },
+  "model_profile": "quality"
+}

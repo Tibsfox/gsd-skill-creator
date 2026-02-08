@@ -1,0 +1,17 @@
+{
+  "name": "gsd-research-team",
+  "description": "Collaborative research team for phase investigation and domain analysis",
+  "version": "1.0.0",
+  "topology": "leader-worker",
+  "leadAgentId": "gsd-phase-researcher",
+  "members": [
+    {
+      "agentId": "gsd-phase-researcher",
+      "role": "lead"
+    },
+    {
+      "agentId": "gsd-research-synthesizer",
+      "role": "worker"
+    }
+  ]
+}
