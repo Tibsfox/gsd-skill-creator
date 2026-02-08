@@ -275,7 +275,8 @@ export type { ApplyResult, InvokeResult } from './application/skill-applicator.j
 // Pipeline infrastructure (Phase 52)
 export { SkillPipeline, createEmptyContext } from './application/skill-pipeline.js';
 export type { PipelineStage, PipelineContext } from './application/skill-pipeline.js';
-export { ScoreStage, ResolveStage, LoadStage, BudgetStage } from './application/stages/index.js';
+export { ScoreStage, ResolveStage, LoadStage, BudgetStage, CacheOrderStage, DEFAULT_CACHE_TIER } from './application/stages/index.js';
+export type { CacheTier } from './application/stages/index.js';
 
 // Budget profiles (Phase 53)
 export { DEFAULT_PROFILES, getBudgetProfile, getTierForSkill } from './application/budget-profiles.js';

@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns
-**Current focus:** Phase 58 in progress — Research Compression
+**Current focus:** Phase 60 in progress — Post-Phase Invocation and Collector Agents
 
 ## Current Position
 
-Phase: 58 (seventh of 10 in v1.8) — Research Compression
-Plan: 2 of 3 in current phase (58-01, 58-02 complete)
-Status: Executing Phase 58
-Last activity: 2026-02-08 — Completed 58-02 StalenessChecker TDD
+Phase: 60 (ninth of 10 in v1.8) — Post-Phase Invocation and Collector Agents
+Plan: 2 of 3 in current phase (60-01, 60-02 complete)
+Status: Executing Phase 60
+Last activity: 2026-02-08 — Completed 60-02 CollectorAgentGenerator TDD
 
 Progress: [##############░░░░░░] ~60%
 
@@ -92,6 +92,12 @@ Recent decisions affecting current work:
 - [58-02]: generatedFrom accessed via type assertion on extension (formal typing deferred to Plan 03)
 - [58-02]: source field checked via Record cast on SkillMetadata (custom field from ResearchCompressor)
 - [58-02]: Missing generatedFrom treated as not_auto_generated (safe fallback)
+- [60-02]: Raw markdown frontmatter (not gray-matter) matching CapabilityScaffolder agent pattern
+- [60-02]: Pure generate() returns content string, no disk write (CLI handles persistence)
+- [60-02]: Validation via existing validateAgentFrontmatter for format compliance
+- [59-01]: modelGuidance read via type assertion from raw metadata (not added to SkillMetadata interface)
+- [59-01]: Unknown model profiles default to sonnet tier (safe middle ground)
+- [59-01]: Capability levels: opus=3, sonnet=2, haiku=1 for minimumCapability checks
 
 ### Pending Todos
 
@@ -113,7 +119,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 58-02-PLAN.md (StalenessChecker TDD). Next: 58-03 wiring.
+Stopped at: Completed 60-02-PLAN.md (CollectorAgentGenerator TDD). Next: 60-03.
 Resume file: None
 
 ## Performance Metrics
@@ -137,6 +143,8 @@ Resume file: None
 | 56-03 | 3min | 2 | 5 | 2026-02-08 |
 | 57-01 | 3min | 2 | 2 | 2026-02-08 |
 | 58-02 | 1min | 2 | 2 | 2026-02-08 |
+| 60-02 | 2min | 2 | 2 | 2026-02-08 |
+| 59-01 | 2min | 2 | 4 | 2026-02-08 |
 
 ---
-*Updated: 2026-02-08 after 58-02 StalenessChecker TDD completed*
+*Updated: 2026-02-08 after 59-01 ModelGuidance type and ModelFilterStage completed*
