@@ -7,7 +7,7 @@ import { SkillSession, type SkillLoadResult, type SessionReport } from './skill-
 import type { ApplicationConfig, ConflictResult, BudgetProfile, SkippedSkill, BudgetWarning } from '../types/application.js';
 import { DEFAULT_CONFIG } from '../types/application.js';
 import { SkillPipeline, createEmptyContext } from './skill-pipeline.js';
-import { ScoreStage, ResolveStage, LoadStage, BudgetStage } from './stages/index.js';
+import { ScoreStage, ResolveStage, LoadStage, BudgetStage, CacheOrderStage } from './stages/index.js';
 
 export interface ApplyResult {
   loaded: string[];
@@ -62,6 +62,7 @@ export class SkillApplicator {
       ));
     }
 
+    this.pipeline.addStage(new CacheOrderStage(this.skillStore));
     this.pipeline.addStage(new LoadStage(this.skillStore, this.session));
   }
 
