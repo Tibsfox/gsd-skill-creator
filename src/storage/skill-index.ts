@@ -16,6 +16,10 @@ export interface SkillIndexEntry {
     files?: string[];
     contexts?: string[];
   };
+  events?: {
+    emits?: string[];
+    listens?: string[];
+  };
   path: string;
   mtime: number;  // File modification time for cache invalidation
 }
@@ -54,6 +58,10 @@ export class SkillIndex {
    */
   private buildEntry(skill: Skill, skillPath: string, mtime: number): SkillIndexEntry {
     const ext = getExtension(skill.metadata);
+    const events = ext.events ? {
+      emits: ext.events.emits,
+      listens: ext.events.listens,
+    } : undefined;
     return {
       name: skill.metadata.name,
       description: skill.metadata.description,
@@ -63,6 +71,7 @@ export class SkillIndex {
         files: ext.triggers.files,
         contexts: ext.triggers.contexts,
       } : undefined,
+      events,
       path: skillPath,
       mtime,
     };
