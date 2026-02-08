@@ -248,6 +248,10 @@ function buildCluster(
   // Collect timestamps
   const timestamps = indices.map((i) => prompts[i].timestamp);
 
+  // Compute coherence: mean similarity to centroid (1 - mean distance)
+  const meanDistance = distancesToCentroid.reduce((sum, d) => sum + d.distance, 0) / distancesToCentroid.length;
+  const coherence = Math.max(0, 1 - meanDistance);
+
   return {
     label,
     examplePrompts,
@@ -255,6 +259,7 @@ function buildCluster(
     memberCount: indices.length,
     projectSlugs: [...projectSlugs],
     timestamps,
+    coherence,
   };
 }
 
@@ -338,6 +343,10 @@ function mergeCrossProject(
           (a.centroid[d] * a.memberCount + b.centroid[d] * b.memberCount) / totalMembers;
       }
 
+      // Merge coherence as weighted average
+      const mergedCoherence =
+        (a.coherence * a.memberCount + b.coherence * b.memberCount) / totalMembers;
+
       // Merge into bestI
       working[bestI] = {
         label: labelSource.label,
@@ -346,6 +355,7 @@ function mergeCrossProject(
         memberCount: totalMembers,
         projectSlugs: [...slugSet],
         timestamps: [...a.timestamps, ...b.timestamps],
+        coherence: mergedCoherence,
       };
 
       // Remove bestJ
