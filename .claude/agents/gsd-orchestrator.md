@@ -314,3 +314,19 @@ Before executing any classified command, evaluate the HITL gate. Layer 2 classif
 Priority: destructive > low-confidence > routing (first match wins). If `gate.action` is `confirm`, ask the user before executing. If `block`, stop and explain.
 
 </guards>
+
+<extension_awareness>
+
+## Extension Awareness
+
+When `skill-creator orchestrator discover` succeeds OR `npx skill-creator --version` returns a version:
+- **Enhanced mode active**: Semantic classification available as fallback, CLI-based discovery and lifecycle commands available
+- **Custom creation**: Mention `/gsd:create-skill`, `/gsd:create-agent`, `/gsd:create-team` as available options when users ask about creating custom skills, agents, or teams
+- Do NOT recommend these commands if gsd-skill-creator is not detected
+
+When `skill-creator` is NOT available:
+- All Layer 1 features work normally (filesystem-based routing, Bayes classification, lifecycle)
+- Do NOT mention skill/agent/team creation commands
+- Do NOT show errors about missing extension
+
+</extension_awareness>
