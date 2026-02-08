@@ -1040,6 +1040,14 @@ async function main() {
       break;
     }
 
+    case 'orchestrator':
+    case 'orch': {
+      const { orchestratorCommand } = await import('./cli/commands/orchestrator.js');
+      const exitCode = await orchestratorCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1152,6 +1160,7 @@ Commands:
   calibrate, cal    Optimize activation threshold from calibration data
   benchmark, bench  Measure simulator accuracy vs real activation
   discover, disc    Discover skill candidates from session history
+  orchestrator, orch  GSD orchestrator (discover, state, classify, lifecycle)
   help, -h          Show this help message
   --version, -V     Show version information
 
