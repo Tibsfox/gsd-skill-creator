@@ -2,7 +2,7 @@
 
 A self-evolving skill ecosystem for Claude Code that observes usage patterns, suggests skill creation, and composes related skills into purpose-built agents.
 
-Built with [GSD (Get Shit Done)](https://github.com/Tibsfox/get-shit-done)
+Built with [GSD (Get Shit Done)](https://github.com/glittercowboy/get-shit-done) from TÂCHES 
 
 ## Table of Contents
 
