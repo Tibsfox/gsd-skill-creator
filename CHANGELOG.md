@@ -10,6 +10,72 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [1.7.0] - 2026-02-08
+
+### Added
+
+- **GSD Master Orchestrator** — single entry-point agent that routes user intent to GSD commands
+  - Dynamic filesystem discovery of GSD commands, agents, and teams with version-aware mtime caching
+  - Intent classification pipeline: exact match → lifecycle filter → Bayes classifier → embedding similarity fallback → confidence resolution
+  - Lifecycle coordinator reading `.planning/` artifacts to determine project state and suggest next actions
+  - Two-layer delivery: Layer 1 standalone agent `.md` (works without skill-creator), Layer 2 TypeScript CLI enhancement
+  - Verbosity controller with 5 levels (Silent → Transparent) configurable via CLI flag or config
+  - HITL gate framework with routing confirmation, destructive action, and low-confidence gates (YOLO-mode bypass for non-destructive)
+  - Extension awareness detecting gsd-skill-creator installation with capability-based feature flags
+  - CLI commands: `orchestrator discover`, `orchestrator state`, `orchestrator classify`, `orchestrator lifecycle`
+- **Work State Persistence** (Gas Town Hook-inspired)
+  - Auto-save/restore active task, loaded skills, and last checkpoint to `.planning/hooks/current-work.yaml`
+  - Queued task tracking with `skills_needed` metadata for cross-session task pickup
+  - Session start/end hook scripts with settings.json registration
+  - Work state CLI subcommands: `work-state save`, `work-state restore`, `work-state queue`
+- **Session Continuity** (Gas Town Seance-inspired)
+  - Auto-generated session snapshots (summary, active skills, files modified, open questions)
+  - Snapshot injection into skill loading context on session start
+  - Bounded retention (last 20, configurable) with automatic pruning
+  - Skill pre-load suggestions from `files_modified` and `open_questions` patterns
+  - CLI commands: `snapshot generate`, `snapshot list`, `snapshot latest`
+- **Ephemeral Observations** (Gas Town Wisp-inspired)
+  - Tier field on observations (ephemeral/persistent) controlling storage lifecycle
+  - Promotion evaluator with multi-factor scoring to promote high-signal patterns
+  - Observation squasher with additive merging for related ephemeral entries
+  - Integrated tiered routing into SessionObserver
+- **Skill Workflows** (Gas Town Formula-inspired)
+  - `.claude/workflows/*.workflow.yaml` format with steps, `needs:` dependencies, and skill references
+  - DAG-based dependency resolution using Kahn's algorithm with cycle detection
+  - Workflow runner with crash recovery (resume from last completed step)
+  - Workflow composition via `extends:` field with deep chain resolution
+  - Step completion tracking in `.planning/patterns/workflow-runs.jsonl`
+  - CLI commands: `workflow create`, `workflow run`, `workflow list`, `workflow validate`
+- **Skill Roles** (Gas Town Role-inspired)
+  - `.claude/roles/*.role.yaml` format with skills, constraints, tools, and model fields
+  - Constraint injection into agent system prompts as behavioral boundaries
+  - Role composition via `extends:` with additive constraint merging
+  - CLI commands: `role create`, `role list`
+- **Work Bundles** (Gas Town Convoy-inspired)
+  - `.claude/bundles/*.bundle.yaml` with required/optional skill lists and status tracking
+  - Active bundle gives required skills priority in token budget allocation
+  - Progress tracking based on session observations (skill loaded → applied)
+  - Auto-suggestion via clique detection when pattern analyzer detects consistent skill sets
+  - CLI commands: `bundle create`, `bundle list`, `bundle activate`, `bundle status`
+- **Inter-Skill Events** (Gas Town Mail/Nudge-inspired)
+  - `events.emits` and `events.listens` extension fields in skill frontmatter
+  - Event store with JSONL persistence and lifecycle management (emit, consume, expire)
+  - Relevance scorer boosts skills with matching `listens` entries for pending events
+  - Co-activation tracker suggests event connections from observed correlation patterns
+  - CLI commands: `event list`, `event emit`, `event consume`, `event suggest`, `event expire`
+
+### Technical Details
+
+- 67 requirements shipped (37 orchestrator + 30 Gas Town-inspired platform features)
+- 198 files created/modified, 27,617 lines added (80,723 LOC TypeScript total)
+- 16 phases (36-51), 38 plans, 128 commits
+- Fixture-based test suite with versioned GSD command snapshots (not live installation)
+- Regex-based argument extraction from natural language ("plan phase 3 with research" → `3 --research`)
+- Lifecycle stage derivation from artifact existence (not hardcoded state machine)
+- Null object pattern for graceful degradation without gsd-skill-creator
+
+---
+
 ## [1.6.1] - 2026-02-07
 
 ### Added
@@ -258,7 +324,8 @@ See [docs/EXTENSIONS.md](docs/EXTENSIONS.md) for detailed migration guide.
 
 ---
 
-[Unreleased]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.6.1...HEAD
+[Unreleased]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.7...HEAD
+[1.7.0]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.6.1...v1.7
 [1.6.1]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.6...v1.6.1
 [1.6.0]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.5...v1.6
 [1.5.0]: https://github.com/Tibsfox/gsd-skill-creator/compare/v1.4...v1.5
