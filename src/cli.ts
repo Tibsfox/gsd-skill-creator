@@ -249,6 +249,14 @@ async function main() {
       break;
     }
 
+    case 'compress-research':
+    case 'cr': {
+      const { compressResearchCommand } = await import('./cli/commands/compress-research.js');
+      const exitCode = await compressResearchCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'budget-estimate':
     case 'be': {
       const agentArg = args.find(a => a.startsWith('--agent='));
@@ -1204,6 +1212,7 @@ Commands:
   budget, bg        Show character budget usage across all skills
   budget-estimate, be  Show token budget estimates per agent profile
   capabilities, cap  Generate or show capability manifest (CAPABILITIES.md)
+  compress-research, cr  Compress research files to distilled skill files
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
   suggest, sg       Analyze patterns and review skill suggestions
@@ -1464,6 +1473,9 @@ Examples:
   skill-creator bundle activate --name=frontend  # Activate bundle
   skill-creator bundle deactivate      # Deactivate bundle
   skill-creator bundle status          # Show active bundle
+  skill-creator compress-research .planning/phases/58-research-compression/58-RESEARCH.md
+  skill-creator cr path/to/research.md --dry-run
+  skill-creator cr path/to/research.md --project
 
 Skill Storage:
   User-level skills: ~/.claude/skills/ (shared across projects)
