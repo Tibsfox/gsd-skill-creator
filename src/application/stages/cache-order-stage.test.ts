@@ -45,18 +45,25 @@ function scored(name: string, score: number): ScoredSkill {
   return { name, score, matchType: 'intent' };
 }
 
-// Mock SkillStore
+// Mock SkillStore with name-based lookup
+const skillRegistry = new Map<string, Skill>();
 const mockSkillStore = {
-  read: vi.fn(),
+  read: vi.fn((name: string) => {
+    const skill = skillRegistry.get(name);
+    if (!skill) return Promise.resolve(buildSkill(name));
+    return Promise.resolve(skill);
+  }),
 } as any;
+
+/** Register a skill in the mock store for name-based lookup. */
+function registerSkill(name: string, cacheTier?: string, legacy?: boolean): void {
+  skillRegistry.set(name, buildSkill(name, cacheTier, legacy));
+}
 
 describe('CacheOrderStage', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    // Default: return skills without cacheTier (should default to dynamic)
-    mockSkillStore.read.mockImplementation((name: string) =>
-      Promise.resolve(buildSkill(name)),
-    );
+    skillRegistry.clear();
   });
 
   it('earlyExit returns context unchanged', async () => {
@@ -85,7 +92,7 @@ describe('CacheOrderStage', () => {
 
   it('single skill passes through', async () => {
     const stage = new CacheOrderStage(mockSkillStore);
-    mockSkillStore.read.mockResolvedValueOnce(buildSkill('solo', 'static'));
+    registerSkill('solo', 'static');
     const ctx = createEmptyContext({
       resolvedSkills: [scored('solo', 0.8)],
     });
@@ -97,10 +104,9 @@ describe('CacheOrderStage', () => {
 
   it('sorts static before session before dynamic within same score', async () => {
     const stage = new CacheOrderStage(mockSkillStore);
-    mockSkillStore.read
-      .mockResolvedValueOnce(buildSkill('dyn-skill', 'dynamic'))
-      .mockResolvedValueOnce(buildSkill('stat-skill', 'static'))
-      .mockResolvedValueOnce(buildSkill('sess-skill', 'session'));
+    registerSkill('dyn-skill', 'dynamic');
+    registerSkill('stat-skill', 'static');
+    registerSkill('sess-skill', 'session');
 
     const ctx = createEmptyContext({
       resolvedSkills: [
@@ -121,10 +127,9 @@ describe('CacheOrderStage', () => {
 
   it('defaults missing cacheTier to dynamic', async () => {
     const stage = new CacheOrderStage(mockSkillStore);
-    // no-tier-skill has no cacheTier in frontmatter
-    mockSkillStore.read
-      .mockResolvedValueOnce(buildSkill('no-tier-skill'))
-      .mockResolvedValueOnce(buildSkill('static-skill', 'static'));
+    // no-tier-skill has no cacheTier in frontmatter (defaults to dynamic)
+    registerSkill('static-skill', 'static');
+    // no-tier-skill not registered -> returns skill without cacheTier via default mock
 
     const ctx = createEmptyContext({
       resolvedSkills: [
@@ -146,9 +151,8 @@ describe('CacheOrderStage', () => {
   it('preserves relative order of different scores', async () => {
     const stage = new CacheOrderStage(mockSkillStore);
     // high-dyn is dynamic at score 0.9, low-static is static at score 0.5
-    mockSkillStore.read
-      .mockResolvedValueOnce(buildSkill('high-dyn', 'dynamic'))
-      .mockResolvedValueOnce(buildSkill('low-static', 'static'));
+    registerSkill('high-dyn', 'dynamic');
+    registerSkill('low-static', 'static');
 
     const ctx = createEmptyContext({
       resolvedSkills: [
@@ -168,9 +172,8 @@ describe('CacheOrderStage', () => {
 
   it('alphabetical tiebreaking within same tier and score', async () => {
     const stage = new CacheOrderStage(mockSkillStore);
-    mockSkillStore.read
-      .mockResolvedValueOnce(buildSkill('zeta', 'session'))
-      .mockResolvedValueOnce(buildSkill('alpha', 'session'));
+    registerSkill('zeta', 'session');
+    registerSkill('alpha', 'session');
 
     const ctx = createEmptyContext({
       resolvedSkills: [
@@ -191,12 +194,11 @@ describe('CacheOrderStage', () => {
     const stage = new CacheOrderStage(mockSkillStore);
     // Score 0.8 group: dynamic, static, session
     // Score 0.5 group: session, static
-    mockSkillStore.read
-      .mockResolvedValueOnce(buildSkill('a-dyn', 'dynamic'))
-      .mockResolvedValueOnce(buildSkill('b-static', 'static'))
-      .mockResolvedValueOnce(buildSkill('c-session', 'session'))
-      .mockResolvedValueOnce(buildSkill('d-session', 'session'))
-      .mockResolvedValueOnce(buildSkill('e-static', 'static'));
+    registerSkill('a-dyn', 'dynamic');
+    registerSkill('b-static', 'static');
+    registerSkill('c-session', 'session');
+    registerSkill('d-session', 'session');
+    registerSkill('e-static', 'static');
 
     const ctx = createEmptyContext({
       resolvedSkills: [
@@ -223,26 +225,18 @@ describe('CacheOrderStage', () => {
 
   it('deterministic output', async () => {
     const stage = new CacheOrderStage(mockSkillStore);
+    registerSkill('c-dyn', 'dynamic');
+    registerSkill('a-stat', 'static');
+    registerSkill('b-sess', 'session');
+
     const skills = [
       scored('c-dyn', 0.8),
       scored('a-stat', 0.8),
       scored('b-sess', 0.8),
     ];
 
-    // First call
-    mockSkillStore.read
-      .mockResolvedValueOnce(buildSkill('c-dyn', 'dynamic'))
-      .mockResolvedValueOnce(buildSkill('a-stat', 'static'))
-      .mockResolvedValueOnce(buildSkill('b-sess', 'session'));
-
     const ctx1 = createEmptyContext({ resolvedSkills: [...skills] });
     const result1 = await stage.process(ctx1);
-
-    // Second call
-    mockSkillStore.read
-      .mockResolvedValueOnce(buildSkill('c-dyn', 'dynamic'))
-      .mockResolvedValueOnce(buildSkill('a-stat', 'static'))
-      .mockResolvedValueOnce(buildSkill('b-sess', 'session'));
 
     const ctx2 = createEmptyContext({ resolvedSkills: [...skills] });
     const result2 = await stage.process(ctx2);
@@ -252,9 +246,8 @@ describe('CacheOrderStage', () => {
 
   it('does not modify original resolvedSkills array', async () => {
     const stage = new CacheOrderStage(mockSkillStore);
-    mockSkillStore.read
-      .mockResolvedValueOnce(buildSkill('z-dyn', 'dynamic'))
-      .mockResolvedValueOnce(buildSkill('a-stat', 'static'));
+    registerSkill('z-dyn', 'dynamic');
+    registerSkill('a-stat', 'static');
 
     const original = [
       scored('z-dyn', 0.8),
@@ -272,9 +265,8 @@ describe('CacheOrderStage', () => {
   it('reads cacheTier from legacy format', async () => {
     const stage = new CacheOrderStage(mockSkillStore);
     // Legacy format: cacheTier at root of metadata
-    mockSkillStore.read
-      .mockResolvedValueOnce(buildSkill('legacy-static', 'static', true))
-      .mockResolvedValueOnce(buildSkill('normal-dyn', 'dynamic'));
+    registerSkill('legacy-static', 'static', true);
+    registerSkill('normal-dyn', 'dynamic');
 
     const ctx = createEmptyContext({
       resolvedSkills: [
@@ -292,12 +284,16 @@ describe('CacheOrderStage', () => {
   });
 
   it('handles SkillStore.read() errors gracefully', async () => {
-    const stage = new CacheOrderStage(mockSkillStore);
-    // First skill read throws, second succeeds with static
-    mockSkillStore.read
-      .mockRejectedValueOnce(new Error('File not found'))
-      .mockResolvedValueOnce(buildSkill('good-static', 'static'));
+    // Override default mock to throw for broken-skill specifically
+    registerSkill('good-static', 'static');
+    mockSkillStore.read.mockImplementation((name: string) => {
+      if (name === 'broken-skill') return Promise.reject(new Error('File not found'));
+      const skill = skillRegistry.get(name);
+      if (!skill) return Promise.resolve(buildSkill(name));
+      return Promise.resolve(skill);
+    });
 
+    const stage = new CacheOrderStage(mockSkillStore);
     const ctx = createEmptyContext({
       resolvedSkills: [
         scored('broken-skill', 0.8),
