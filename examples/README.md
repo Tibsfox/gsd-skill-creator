@@ -8,6 +8,7 @@ This directory contains example skills demonstrating proper skill authoring patt
 
 | Skill | Domain | Use Case |
 |-------|--------|----------|
+| [beautiful-commits](beautiful-commits/SKILL.md) | Git | Comprehensive commit message crafting guide |
 | [git-commit](git-commit/SKILL.md) | Git | Conventional commit messages |
 | [code-review](code-review/SKILL.md) | Code Quality | PR review checklists |
 | [test-generator](test-generator/SKILL.md) | Testing | Test case generation |
