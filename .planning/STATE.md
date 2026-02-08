@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns
-**Current focus:** Phase 56 in progress — Skill Injection & Dynamic Creation
+**Current focus:** Phase 57 in progress — Cache-Aware Ordering
 
 ## Current Position
 
-Phase: 56 (fifth of 10 in v1.8) — Skill Injection & Dynamic Creation
-Plan: 3 of N in current phase (56-01 complete, 56-02 complete, 56-03 complete)
-Status: Executing Phase 56
-Last activity: 2026-02-08 — Completed 56-03 Integration Wiring
+Phase: 57 (sixth of 10 in v1.8) — Cache-Aware Ordering
+Plan: 1 of 2 in current phase (57-01 complete)
+Status: Executing Phase 57
+Last activity: 2026-02-08 — Completed 57-01 CacheOrderStage TDD
 
-Progress: [##########░░░░░░░░░░] ~45%
+Progress: [#############░░░░░░░] ~55%
 
 ## Shipped Milestones
 
@@ -86,6 +86,9 @@ Recent decisions affecting current work:
 - [56-03]: SkillInjector and CapabilityScaffolder re-exported from both barrel and package root
 - [56-03]: Execute-phase skill injection step inserted as step 3 before agent wait
 - [56-03]: Injected skills protocol placed between continuation_handling and tdd_execution in executor
+- [57-01]: Name-based mock registry pattern for SkillStore in pipeline stage tests (avoids sequential mock ordering bugs)
+- [57-01]: isValidCacheTier type guard validates tier values from untyped frontmatter
+- [57-01]: Legacy cacheTier read from metadata root level for backward compatibility
 
 ### Pending Todos
 
@@ -107,7 +110,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 56-03-PLAN.md (Integration Wiring). Phase 56 in progress.
+Stopped at: Completed 57-01-PLAN.md (CacheOrderStage TDD). Next: 57-02 wire into pipeline.
 Resume file: None
 
 ## Performance Metrics
@@ -129,6 +132,7 @@ Resume file: None
 | 56-02 | 2min | 2 | 2 | 2026-02-08 |
 | 56-01 | 2min | 2 | 2 | 2026-02-08 |
 | 56-03 | 3min | 2 | 5 | 2026-02-08 |
+| 57-01 | 3min | 2 | 2 | 2026-02-08 |
 
 ---
-*Updated: 2026-02-08 after 56-03 Integration Wiring completed*
+*Updated: 2026-02-08 after 57-01 CacheOrderStage TDD completed*
