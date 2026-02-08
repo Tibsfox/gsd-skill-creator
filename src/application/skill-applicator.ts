@@ -1,11 +1,13 @@
-import type { SkillIndex, SkillIndexEntry } from '../storage/skill-index.js';
+import type { SkillIndex } from '../storage/skill-index.js';
 import type { SkillStore } from '../storage/skill-store.js';
 import { TokenCounter } from './token-counter.js';
 import { RelevanceScorer } from './relevance-scorer.js';
 import { ConflictResolver } from './conflict-resolver.js';
 import { SkillSession, type SkillLoadResult, type SessionReport } from './skill-session.js';
-import type { ScoredSkill, ApplicationConfig, ConflictResult } from '../types/application.js';
+import type { ApplicationConfig, ConflictResult } from '../types/application.js';
 import { DEFAULT_CONFIG } from '../types/application.js';
+import { SkillPipeline, createEmptyContext } from './skill-pipeline.js';
+import { ScoreStage, ResolveStage, LoadStage } from './stages/index.js';
 
 export interface ApplyResult {
   loaded: string[];
@@ -27,6 +29,7 @@ export class SkillApplicator {
   private scorer: RelevanceScorer;
   private resolver: ConflictResolver;
   private session: SkillSession;
+  private pipeline: SkillPipeline;
   private indexed = false;
 
   constructor(
@@ -40,6 +43,11 @@ export class SkillApplicator {
     this.scorer = new RelevanceScorer();
     this.resolver = new ConflictResolver();
     this.session = new SkillSession(this.tokenCounter, fullConfig);
+
+    this.pipeline = new SkillPipeline();
+    this.pipeline.addStage(new ScoreStage(this.skillIndex, this.scorer));
+    this.pipeline.addStage(new ResolveStage(this.resolver));
+    this.pipeline.addStage(new LoadStage(this.skillStore, this.session));
   }
 
   // Initialize by indexing all enabled skills
@@ -59,65 +67,20 @@ export class SkillApplicator {
       await this.initialize();
     }
 
-    const loaded: string[] = [];
-    const skipped: string[] = [];
+    const pipelineContext = createEmptyContext({
+      intent,
+      file,
+      context,
+      getReport: () => this.session.getReport(),
+    });
 
-    const matches = await this.skillIndex.findByTrigger(intent, file, context);
-
-    if (matches.length === 0) {
-      return {
-        loaded,
-        skipped,
-        conflicts: { hasConflict: false, conflictingSkills: [], resolution: 'priority' },
-        report: this.session.getReport(),
-      };
-    }
-
-    const query = [intent, context].filter(Boolean).join(' ');
-    let scoredSkills: ScoredSkill[] = [];
-
-    if (query) {
-      scoredSkills = this.scorer.scoreAgainstQuery(query);
-      const matchNames = new Set(matches.map(m => m.name));
-      scoredSkills = scoredSkills.filter(s => matchNames.has(s.name));
-    } else {
-      scoredSkills = matches.map(m => ({ name: m.name, score: 1, matchType: 'file' as const }));
-    }
-
-    const conflicts = this.resolver.detectConflicts(matches);
-    const resolved = this.resolver.resolveByPriority(scoredSkills);
-
-    for (const scored of resolved) {
-      if (this.session.isActive(scored.name)) {
-        continue;
-      }
-
-      try {
-        const skill = await this.skillStore.read(scored.name);
-        const estimatedSavings = skill.body.length * 2;
-
-        const result = await this.session.load(
-          scored.name,
-          skill.body,
-          scored.score,
-          estimatedSavings
-        );
-
-        if (result.success) {
-          loaded.push(scored.name);
-        } else {
-          skipped.push(scored.name);
-        }
-      } catch {
-        skipped.push(scored.name);
-      }
-    }
+    const result = await this.pipeline.process(pipelineContext);
 
     return {
-      loaded,
-      skipped,
-      conflicts,
-      report: this.session.getReport(),
+      loaded: result.loaded,
+      skipped: result.skipped,
+      conflicts: result.conflicts,
+      report: result.getReport(),
     };
   }
 
@@ -165,6 +128,11 @@ export class SkillApplicator {
         error: `Skill not found: ${skillName}`,
       };
     }
+  }
+
+  // Get pipeline for extensibility (insertBefore/insertAfter)
+  getPipeline(): SkillPipeline {
+    return this.pipeline;
   }
 
   // Get current session state
