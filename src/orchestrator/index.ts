@@ -12,3 +12,4 @@ export * from './intent/index.js';
 export * from './lifecycle/index.js';
 export * from './gates/index.js';
 export * from './verbosity/index.js';
+export * from './extension/index.js';

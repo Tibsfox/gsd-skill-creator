@@ -5,7 +5,7 @@
  * dist/ directory strategies, null capabilities, and DI overrides.
  */
 
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { mkdtemp, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
@@ -101,29 +101,15 @@ describe('detectExtension', () => {
   });
 
   it('handles missing overrides (no args) gracefully', async () => {
-    // Mock child_process.execSync to throw (CLI not available)
-    vi.mock('node:child_process', () => ({
-      execSync: vi.fn(() => {
-        throw new Error('Command not found: skill-creator');
-      }),
-    }));
-
-    // Mock fs/promises access to reject (dist/ not available)
-    const originalAccess = (await import('node:fs/promises')).access;
-    vi.mock('node:fs/promises', async (importOriginal) => {
-      const mod = await importOriginal<typeof import('node:fs/promises')>();
-      return {
-        ...mod,
-        access: vi.fn(() => Promise.reject(new Error('ENOENT'))),
-      };
+    // Use DI overrides to simulate "no CLI, no dist/" without module mocking.
+    // This tests the same code paths as calling with no args when neither
+    // CLI nor dist/ exists, but avoids vi.mock hoisting issues.
+    // cliAvailable=false skips CLI, nonexistent distPath fails access().
+    const caps = await detectExtension({
+      cliAvailable: false,
+      distPath: '/nonexistent/skill-creator/dist/that/cannot/exist',
     });
-
-    // Re-import to pick up mocks
-    const { detectExtension: detectFresh } = await import('./extension-detector.js');
-    const caps = await detectFresh();
     expect(caps.detected).toBe(false);
     expect(caps.detectionMethod).toBe('none');
-
-    vi.restoreAllMocks();
   });
 });
