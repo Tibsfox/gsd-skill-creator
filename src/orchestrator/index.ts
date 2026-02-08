@@ -8,3 +8,4 @@
 export * from './discovery/index.js';
 export * from './state/index.js';
 export * from './intent/index.js';
+export * from './lifecycle/index.js';
