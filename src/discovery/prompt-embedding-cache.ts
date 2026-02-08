@@ -23,7 +23,7 @@
  */
 
 import { createHash } from 'crypto';
-import { readFile, writeFile, mkdir } from 'fs/promises';
+import { readFile, writeFile, mkdir, rename } from 'fs/promises';
 import { dirname } from 'path';
 import { join } from 'path';
 import { homedir } from 'os';
@@ -145,7 +145,15 @@ export class PromptEmbeddingCache {
 
     const dir = dirname(this.cachePath);
     await mkdir(dir, { recursive: true });
-    await writeFile(this.cachePath, JSON.stringify(this.cache, null, 2), 'utf-8');
+
+    // Atomic write: temp file in same directory, then rename
+    const tempPath = join(
+      dir,
+      `.prompt-embedding-cache-${Date.now()}-${Math.random().toString(36).slice(2)}.json.tmp`,
+    );
+
+    await writeFile(tempPath, JSON.stringify(this.cache, null, 2), 'utf-8');
+    await rename(tempPath, this.cachePath);
     this.dirty = false;
   }
 

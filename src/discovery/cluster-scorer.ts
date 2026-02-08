@@ -13,6 +13,7 @@
  */
 
 import type { ExistingSkill } from './candidate-ranker.js';
+import { extractKeywords, jaccardSimilarity } from './text-utils.js';
 
 // ============================================================================
 // Types
@@ -26,6 +27,7 @@ export interface PromptCluster {
   memberCount: number;
   projectSlugs: string[];
   timestamps: string[];
+  coherence: number; // Mean similarity to centroid (0-1, higher is more cohesive)
 }
 
 /** Individual factor scores for a single cluster */
@@ -87,13 +89,6 @@ const LN2 = 0.693;
 
 /** Milliseconds per day */
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
-
-/** Stopwords filtered from cluster name generation */
-const STOPWORDS = new Set([
-  'the', 'a', 'an', 'and', 'or', 'when', 'use', 'for', 'with',
-  'this', 'that', 'from', 'to', 'in', 'of', 'is', 'it', 'on',
-  'me', 'my', 'i', 'we', 'our', 'you', 'your',
-]);
 
 /** Maximum words in a cluster name slug */
 const MAX_SLUG_WORDS = 5;
@@ -177,13 +172,9 @@ export function scoreCluster(
  * - Joins with hyphens
  */
 export function generateClusterName(label: string): string {
-  const words = label
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(w => w.length > 0 && !STOPWORDS.has(w));
-
-  const slug = words.slice(0, MAX_SLUG_WORDS).join('-');
-  return slug;
+  const keywords = extractKeywords(label);
+  const words = Array.from(keywords).slice(0, MAX_SLUG_WORDS);
+  return words.join('-');
 }
 
 // ============================================================================
@@ -248,10 +239,8 @@ export function rankClusterCandidates(
       lastSeen = new Date(mostRecentTs).toISOString();
     }
 
-    // Coherence: for now we default to 0 since PromptCluster doesn't carry
-    // mean intra-similarity directly. Plan 35-03 will provide this.
-    // We use a simple heuristic based on centroid magnitude.
-    const coherence = 0;
+    // Coherence: mean similarity to cluster centroid (computed in buildCluster)
+    const coherence = cluster.coherence;
 
     const { score, breakdown } = scoreCluster(
       cluster.memberCount,
@@ -361,30 +350,4 @@ function deduplicateClusterCandidates(
   return { filtered, removed };
 }
 
-/**
- * Extract keywords from a text string.
- *
- * Splits on whitespace and hyphens, lowercases, and filters stopwords.
- */
-function extractKeywords(text: string): Set<string> {
-  const words = text
-    .toLowerCase()
-    .split(/[\s-]+/)
-    .filter(w => w.length > 0 && !STOPWORDS.has(w));
-  return new Set(words);
-}
-
-/**
- * Compute Jaccard similarity between two sets: |A intersect B| / |A union B|.
- */
-function jaccardSimilarity(a: Set<string>, b: Set<string>): number {
-  if (a.size === 0 && b.size === 0) return 0;
-
-  let intersection = 0;
-  for (const item of a) {
-    if (b.has(item)) intersection++;
-  }
-
-  const union = a.size + b.size - intersection;
-  return union === 0 ? 0 : intersection / union;
-}
+// extractKeywords and jaccardSimilarity are now imported from text-utils.js

@@ -10,7 +10,7 @@
  * Only entries that pass all 4 layers are classified as real user prompts.
  */
 
-import type { UserEntry, ExtractedPrompt } from './types.js';
+import type { UserEntry, ExtractedPrompt, ContentBlock } from './types.js';
 
 /**
  * Checks if a string looks like a command, system, or otherwise non-prompt message.
@@ -50,15 +50,15 @@ export function isRealUserPrompt(entry: UserEntry): boolean {
   if (Array.isArray(content)) {
     // Tool result arrays = noise (83% of user entries)
     const hasToolResult = content.some(
-      (b: any) => b.type === 'tool_result'
+      (b: ContentBlock) => b.type === 'tool_result'
     );
     if (hasToolResult) return false;
 
     // Extract text from text blocks
-    const textBlocks = content.filter((b: any) => b.type === 'text');
+    const textBlocks = content.filter((b: ContentBlock) => b.type === 'text');
     if (textBlocks.length === 0) return false;
 
-    const text = textBlocks.map((b: any) => b.text).join('');
+    const text = textBlocks.map((b: ContentBlock) => 'text' in b ? b.text : '').join('');
     return !isCommandOrSystemMessage(text);
   }
 
@@ -83,8 +83,8 @@ export function classifyUserEntry(entry: UserEntry): ExtractedPrompt | null {
   let text: string;
 
   if (Array.isArray(content)) {
-    const textBlocks = content.filter((b: any) => b.type === 'text');
-    text = textBlocks.map((b: any) => b.text).join('');
+    const textBlocks = content.filter((b: ContentBlock) => b.type === 'text');
+    text = textBlocks.map((b: ContentBlock) => 'text' in b ? b.text : '').join('');
   } else if (typeof content === 'string') {
     text = content;
   } else {
