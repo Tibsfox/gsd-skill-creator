@@ -9,7 +9,7 @@
  */
 
 import { join } from 'node:path';
-import type { ProjectState } from '../state/types.js';
+import type { ProjectState, PhaseInfo } from '../state/types.js';
 import type { NextStepSuggestion, PhaseArtifacts } from './types.js';
 import { deriveLifecycleStage } from '../intent/lifecycle-filter.js';
 import { scanPhaseArtifacts } from './artifact-scanner.js';
@@ -96,8 +96,49 @@ export class LifecycleCoordinator {
       );
     }
 
-    // 5. Derive next actions from artifacts + stage
-    return deriveNextActions(artifacts, stage, completedCommand);
+    // 5. Resolve next-phase number if current phase is fully complete
+    //    (all plans executed + UAT exists + no unexecuted plans)
+    let nextPhaseNumber: string | undefined;
+    if (
+      artifacts.hasUat &&
+      artifacts.planCount > 0 &&
+      artifacts.unexecutedPlans.length === 0 &&
+      artifacts.summaryCount === artifacts.planCount
+    ) {
+      const nextPhase = this.findNextIncompletePhase(state.phases, currentPhase.number);
+      nextPhaseNumber = nextPhase?.number;
+    }
+
+    // 6. Derive next actions from artifacts + stage + next-phase context
+    return deriveNextActions(artifacts, stage, completedCommand, nextPhaseNumber);
+  }
+
+  /**
+   * Find the next incomplete phase after the given phase number.
+   *
+   * Uses array order from state.phases (NOT arithmetic on phase numbers)
+   * to handle non-sequential numbering (e.g., 36, 37, 39 -- skip 38).
+   *
+   * @param phases - All phases from ProjectState
+   * @param afterPhaseNumber - Phase number to look after
+   * @returns First incomplete phase after the given one, or null
+   */
+  private findNextIncompletePhase(
+    phases: PhaseInfo[],
+    afterPhaseNumber: string,
+  ): PhaseInfo | null {
+    // Find the index of the current phase in the array
+    const currentIndex = phases.findIndex(p => p.number === afterPhaseNumber);
+    if (currentIndex === -1) return null;
+
+    // Search forward from the next position
+    for (let i = currentIndex + 1; i < phases.length; i++) {
+      if (!phases[i].complete) {
+        return phases[i];
+      }
+    }
+
+    return null;
   }
 
   /**
