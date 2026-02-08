@@ -26,3 +26,12 @@ export { parseCommandFile, extractFirstTag } from './command-parser.js';
 
 // Filesystem scanner
 export { scanDirectory, scanDirectoryForDirs } from './scanner.js';
+
+// Agent file parser
+export { parseAgentFile } from './agent-parser.js';
+
+// Team config parser
+export { parseTeamConfig } from './team-parser.js';
+
+// Discovery service
+export { GsdDiscoveryService } from './discovery-service.js';
