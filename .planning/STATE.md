@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 55 (fourth of 10 in v1.8) — Phase Plan Capability Declarations
-Plan: 3 of 3 in current phase (55-01, 55-02, 55-03 complete)
+Plan: 4 of 4 in current phase (55-01, 55-02, 55-03, 55-04 complete)
 Status: Phase 55 Complete
-Last activity: 2026-02-08 — Completed 55-03 Capability Validator
+Last activity: 2026-02-08 — Completed 55-04 Roadmap-Parser Wiring
 
 Progress: [##########░░░░░░░░░░] ~40%
 
@@ -73,6 +73,9 @@ Recent decisions affecting current work:
 - [55-03]: Create verb always bypasses validation (declares intent, not dependency)
 - [55-03]: Set-based O(1) lookups built in constructor for per-reference validation
 - [55-03]: ValidationResult.valid derived from warnings.length === 0
+- [55-04]: Cast capabilitiesByPhase as ParsedRoadmap type to bridge Zod passthrough and CapabilityRef types
+- [55-04]: Omit capabilitiesByPhase from result when no phases have capabilities for backward compatibility
+- [55-04]: Planner inheritance rule: missing capabilities field = inherit all from parent phase
 
 ### Pending Todos
 
@@ -94,7 +97,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Completed 55-03-PLAN.md (Capability Validator). Phase 55 complete. Next: Phase 56.
+Stopped at: Completed 55-04-PLAN.md (Roadmap-Parser Wiring). Phase 55 fully complete. Next: Phase 56.
 Resume file: None
 
 ## Performance Metrics
@@ -112,6 +115,7 @@ Resume file: None
 | 55-01 | 2min | 2 | 3 | 2026-02-08 |
 | 55-02 | 2min | 2 | 2 | 2026-02-08 |
 | 55-03 | 1min | 2 | 2 | 2026-02-08 |
+| 55-04 | 3min | 2 | 5 | 2026-02-08 |
 
 ---
-*Updated: 2026-02-08 after 55-03 Capability Validator completed*
+*Updated: 2026-02-08 after 55-04 Roadmap-Parser Wiring completed*
