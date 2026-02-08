@@ -13,6 +13,7 @@
  * - classify: Map natural language or /gsd:command to GSD commands
  * - lifecycle: Suggest next actions from project state
  * - work-state: Persist and restore work state (save/restore/queue-*)
+ * - snapshot: Session snapshot management (generate/latest/list/prune)
  */
 
 import { join } from 'path';
@@ -29,6 +30,9 @@ import { WorkStateWriter } from '../../orchestrator/work-state/work-state-writer
 import { WorkStateReader } from '../../orchestrator/work-state/work-state-reader.js';
 import { QueueManager } from '../../orchestrator/work-state/queue-manager.js';
 import { DEFAULT_WORK_STATE_FILENAME } from '../../orchestrator/work-state/types.js';
+import { SnapshotManager } from '../../orchestrator/session-continuity/snapshot-manager.js';
+import { SNAPSHOT_FILENAME } from '../../orchestrator/session-continuity/types.js';
+import { RetentionManager } from '../../observation/retention-manager.js';
 
 // ============================================================================
 // Argument parsing helpers
@@ -96,6 +100,7 @@ Subcommands:
   classify, c        Classify user intent to a GSD command
   lifecycle, l       Suggest next actions from project state
   work-state, ws     Persist and restore work state
+  snapshot, snap     Session snapshot management
 
 Common Options:
   --pretty        Human-readable formatted output (default: JSON)
@@ -140,6 +145,24 @@ Work-State Sub-subcommands:
     --id=<task-id>      Task ID to remove (required)
     --planning-dir=<path> Override .planning/ directory path
 
+Snapshot Sub-subcommands:
+  generate              Generate snapshot from transcript
+    --session-id=<id>   Session identifier (required)
+    --transcript-path=<path> Path to transcript JSONL (required)
+    --skills=<a,b,c>    Comma-separated active skills
+    --planning-dir=<path> Override .planning/ directory path
+
+  latest                Get most recent snapshot
+    --format=json|context Output format (default: json)
+    --planning-dir=<path> Override .planning/ directory path
+
+  list                  List all stored snapshots
+    --planning-dir=<path> Override .planning/ directory path
+
+  prune                 Prune old snapshots
+    --max=<N>           Maximum snapshots to retain (default: 20)
+    --planning-dir=<path> Override .planning/ directory path
+
 Output:
   By default, all subcommands output structured JSON to stdout.
   Use --pretty for human-readable output. Errors are JSON objects
@@ -159,6 +182,10 @@ Examples:
   skill-creator orch ws queue-add --description="Fix auth bug"
   skill-creator orch ws queue-list
   skill-creator orch ws queue-remove --id=<task-id>
+  skill-creator orchestrator snapshot generate --session-id=abc --transcript-path=t.jsonl
+  skill-creator orch snap latest --format=context
+  skill-creator orch snap list
+  skill-creator orch snap prune --max=10
 `);
 }
 
@@ -647,6 +674,238 @@ async function handleWorkStateQueueRemove(args: string[]): Promise<number> {
 }
 
 // ============================================================================
+// Snapshot subcommand
+// ============================================================================
+
+/**
+ * Resolve the snapshot directory path from --planning-dir flag.
+ * Defaults to `.planning/patterns` in cwd.
+ */
+function resolveSnapshotDir(args: string[]): string {
+  const planningDir = extractFlag(args, 'planning-dir')
+    ?? join(process.cwd(), '.planning');
+  return join(planningDir, 'patterns');
+}
+
+/**
+ * Execute the snapshot subcommand.
+ *
+ * Dispatches to sub-subcommands: generate, latest, list, prune.
+ */
+async function handleSnapshot(args: string[]): Promise<number> {
+  const subSub = args[0];
+
+  if (!subSub || subSub === '--help' || subSub === '-h') {
+    showOrchestratorHelp();
+    return 0;
+  }
+
+  const handlerArgs = args.slice(1);
+
+  switch (subSub) {
+    case 'generate':
+      return handleSnapshotGenerate(handlerArgs);
+    case 'latest':
+      return handleSnapshotLatest(handlerArgs);
+    case 'list':
+      return handleSnapshotList(handlerArgs);
+    case 'prune':
+      return handleSnapshotPrune(handlerArgs);
+    default:
+      console.log(JSON.stringify({
+        error: `Unknown snapshot subcommand: ${subSub}`,
+        help: 'Available: generate, latest, list, prune',
+      }, null, 2));
+      return 1;
+  }
+}
+
+/**
+ * Generate a session snapshot from a transcript file and store it.
+ *
+ * Required: --session-id, --transcript-path
+ * Optional: --skills (comma-separated), --planning-dir
+ */
+async function handleSnapshotGenerate(args: string[]): Promise<number> {
+  const sessionId = extractFlag(args, 'session-id');
+  const transcriptPath = extractFlag(args, 'transcript-path');
+  const skillsRaw = extractFlag(args, 'skills');
+  const activeSkills = skillsRaw
+    ? skillsRaw.split(',').map(s => s.trim()).filter(Boolean)
+    : [];
+
+  if (!sessionId || !transcriptPath) {
+    console.log(JSON.stringify({
+      error: 'Missing required flags: --session-id and --transcript-path',
+      help: 'Usage: skill-creator orchestrator snapshot generate --session-id=<id> --transcript-path=<path>',
+    }, null, 2));
+    return 1;
+  }
+
+  try {
+    const snapshotDir = resolveSnapshotDir(args);
+    const manager = new SnapshotManager(snapshotDir);
+    const snapshot = await manager.generate(transcriptPath, sessionId, activeSkills);
+
+    if (!snapshot) {
+      console.log(JSON.stringify({
+        info: 'No snapshot generated (empty or missing transcript)',
+      }, null, 2));
+      return 0;
+    }
+
+    await manager.store(snapshot);
+    console.log(JSON.stringify({
+      stored: true,
+      snapshot_id: snapshot.session_id,
+    }, null, 2));
+    return 0;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.log(JSON.stringify({ error: message }, null, 2));
+    return 1;
+  }
+}
+
+/**
+ * Retrieve the latest session snapshot.
+ *
+ * Optional: --format=json|context (default: json), --planning-dir
+ *
+ * When format=context, outputs a compact narrative suitable for session start
+ * injection (< 500 tokens). When format=json, outputs the raw snapshot JSON.
+ */
+async function handleSnapshotLatest(args: string[]): Promise<number> {
+  const format = extractFlag(args, 'format') ?? 'json';
+
+  try {
+    const snapshotDir = resolveSnapshotDir(args);
+    const manager = new SnapshotManager(snapshotDir);
+    const snapshot = await manager.getLatest();
+
+    if (!snapshot) {
+      console.log(JSON.stringify({
+        info: 'No previous session snapshot found',
+      }, null, 2));
+      return 0;
+    }
+
+    if (format === 'context') {
+      // Compact narrative for session start injection
+      const filesDisplay = snapshot.files_modified.length > 5
+        ? snapshot.files_modified.slice(0, 5).join(', ') + `, +${snapshot.files_modified.length - 5} more`
+        : snapshot.files_modified.join(', ') || '(none)';
+
+      const skillsDisplay = snapshot.active_skills.length > 0
+        ? snapshot.active_skills.join(', ')
+        : '(none)';
+
+      const questionsDisplay = snapshot.open_questions.length > 0
+        ? snapshot.open_questions.join('\n')
+        : '(none)';
+
+      const lines = [
+        '## Previous Session Context',
+        `**Summary:** ${snapshot.summary}`,
+        `**Files Modified:** ${filesDisplay}`,
+        `**Active Skills:** ${skillsDisplay}`,
+        `**Open Questions:** ${questionsDisplay}`,
+        `**Duration:** ${snapshot.metrics.duration_minutes} min | **Tool Calls:** ${snapshot.metrics.tool_calls}`,
+      ];
+      console.log(lines.join('\n'));
+    } else {
+      console.log(JSON.stringify(snapshot, null, 2));
+    }
+
+    return 0;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.log(JSON.stringify({ error: message }, null, 2));
+    return 1;
+  }
+}
+
+/**
+ * List all stored snapshots as a summary array.
+ *
+ * Each entry: { session_id, saved_at, summary (truncated to 80 chars) }
+ */
+async function handleSnapshotList(args: string[]): Promise<number> {
+  try {
+    const snapshotDir = resolveSnapshotDir(args);
+    const filePath = join(snapshotDir, SNAPSHOT_FILENAME);
+
+    let content: string;
+    try {
+      const { readFile } = await import('node:fs/promises');
+      content = await readFile(filePath, 'utf-8');
+    } catch (e) {
+      if ((e as NodeJS.ErrnoException).code === 'ENOENT') {
+        console.log(JSON.stringify([], null, 2));
+        return 0;
+      }
+      throw e;
+    }
+
+    const lines = content.split('\n').filter(line => line.trim());
+    const summaries: Array<{ session_id: string; saved_at: string; summary: string }> = [];
+
+    for (const line of lines) {
+      try {
+        const envelope = JSON.parse(line);
+        const data = envelope?.data;
+        if (data?.session_id) {
+          summaries.push({
+            session_id: data.session_id,
+            saved_at: data.saved_at ?? '',
+            summary: (data.summary ?? '').slice(0, 80),
+          });
+        }
+      } catch {
+        // Skip corrupted lines
+      }
+    }
+
+    console.log(JSON.stringify(summaries, null, 2));
+    return 0;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.log(JSON.stringify({ error: message }, null, 2));
+    return 1;
+  }
+}
+
+/**
+ * Prune old snapshots using RetentionManager.
+ *
+ * Optional: --max=<N> (default: 20), --planning-dir
+ */
+async function handleSnapshotPrune(args: string[]): Promise<number> {
+  const maxRaw = extractFlag(args, 'max');
+  const maxEntries = maxRaw ? parseInt(maxRaw, 10) : 20;
+
+  if (isNaN(maxEntries) || maxEntries < 1) {
+    console.log(JSON.stringify({
+      error: 'Invalid --max value: must be a positive integer',
+    }, null, 2));
+    return 1;
+  }
+
+  try {
+    const snapshotDir = resolveSnapshotDir(args);
+    const filePath = join(snapshotDir, SNAPSHOT_FILENAME);
+    const retention = new RetentionManager({ maxEntries });
+    const pruned = await retention.prune(filePath);
+    console.log(JSON.stringify({ pruned }, null, 2));
+    return 0;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.log(JSON.stringify({ error: message }, null, 2));
+    return 1;
+  }
+}
+
+// ============================================================================
 // Main dispatcher
 // ============================================================================
 
@@ -690,6 +949,10 @@ export async function orchestratorCommand(args: string[]): Promise<number> {
     case 'work-state':
     case 'ws':
       return handleWorkState(handlerArgs);
+
+    case 'snapshot':
+    case 'snap':
+      return handleSnapshot(handlerArgs);
 
     default:
       console.log(JSON.stringify({

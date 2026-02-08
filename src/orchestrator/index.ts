@@ -14,3 +14,4 @@ export * from './gates/index.js';
 export * from './verbosity/index.js';
 export * from './extension/index.js';
 export * from './work-state/index.js';
+export * from './session-continuity/index.js';
