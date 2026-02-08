@@ -215,6 +215,18 @@ To run a GSD command, read the command file from `.claude/commands/gsd/[command]
 
 **Critical:** Don't just acknowledge GSD output — act on it.
 
+## Commit Guidelines
+
+**Always use the `beautiful-commits` skill** (which extends `git-commit`) when writing commit messages. This is mandatory for all commits in this project — both direct commits and those made by GSD executor agents.
+
+Key rules:
+- Follow Conventional Commits: `<type>(<scope>): <subject>`
+- Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore
+- Imperative mood: "add" not "added" or "adds"
+- Subject <72 chars (preferably <50), lowercase, no period
+- Add body for complex changes (explain WHY/WHAT, not HOW)
+- Include `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>` on all commits
+
 ## Anti-Patterns to Avoid
 
 - **Don't** stop after GSD output without reading "Next Up" instructions

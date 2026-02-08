@@ -361,8 +361,8 @@ Output: [Artifacts created]
 </objective>
 
 <execution_context>
-@/home/foxy/.claude/get-shit-done/workflows/execute-plan.md
-@/home/foxy/.claude/get-shit-done/templates/summary.md
+@./.claude/get-shit-done/workflows/execute-plan.md
+@./.claude/get-shit-done/templates/summary.md
 </execution_context>
 
 <context>
@@ -683,14 +683,14 @@ Triggered by `--gaps` flag. Creates plans to address verification or UAT failure
 
 **1. Find gap sources:**
 
-```bash
-PHASE_DIR=$(node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js find-phase "$PHASE_ARG" --raw)
+Use init context (from load_project_state) which provides `phase_dir`:
 
+```bash
 # Check for VERIFICATION.md (code verification gaps)
-ls "$PHASE_DIR"/*-VERIFICATION.md 2>/dev/null
+ls "$phase_dir"/*-VERIFICATION.md 2>/dev/null
 
 # Check for UAT.md with diagnosed status (user testing gaps)
-grep -l "status: diagnosed" "$PHASE_DIR"/*-UAT.md 2>/dev/null
+grep -l "status: diagnosed" "$phase_dir"/*-UAT.md 2>/dev/null
 ```
 
 **2. Parse gaps:** Each gap has: truth (failed behavior), reason, artifacts (files with issues), missing (things to add/fix).
@@ -794,7 +794,7 @@ Group by plan, dimension, severity.
 ### Step 6: Commit
 
 ```bash
-node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js commit "fix($PHASE): revise plans based on checker feedback" --files .planning/phases/$PHASE-*/$PHASE-*-PLAN.md
+node ./.claude/get-shit-done/bin/gsd-tools.js commit "fix($PHASE): revise plans based on checker feedback" --files .planning/phases/$PHASE-*/$PHASE-*-PLAN.md
 ```
 
 ### Step 7: Return Revision Summary
@@ -830,15 +830,20 @@ node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js commit "fix($PHASE): revi
 <execution_flow>
 
 <step name="load_project_state" priority="first">
-Read `.planning/STATE.md` — parse current position, accumulated decisions, pending todos, blockers/concerns.
-
-If STATE.md missing but .planning/ exists, offer to reconstruct or continue without.
-
-**Load planning config:**
+Load planning context:
 
 ```bash
-COMMIT_PLANNING_DOCS=$(node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js state load --raw | grep '^commit_docs=' | cut -d= -f2)
+INIT=$(node ./.claude/get-shit-done/bin/gsd-tools.js init plan-phase "${PHASE}")
 ```
+
+Extract from init JSON: `planner_model`, `researcher_model`, `checker_model`, `commit_docs`, `research_enabled`, `phase_dir`, `phase_number`, `has_research`, `has_context`.
+
+Also read STATE.md for position, decisions, blockers:
+```bash
+cat .planning/STATE.md 2>/dev/null
+```
+
+If STATE.md missing but .planning/ exists, offer to reconstruct or continue without.
 </step>
 
 <step name="load_codebase_context">
@@ -880,42 +885,56 @@ Apply discovery level protocol (see discovery_levels section).
 </step>
 
 <step name="read_project_history">
-**Intelligent context assembly from frontmatter dependency graph:**
+**Two-step context assembly: digest for selection, full read for understanding.**
 
-1. Scan all summary frontmatter:
+**Step 1 — Generate digest index:**
 ```bash
-for f in .planning/phases/*/*-SUMMARY.md; do
-  sed -n '1,/^---$/p; /^---$/q' "$f" | head -30
-done
+node ./.claude/get-shit-done/bin/gsd-tools.js history-digest
 ```
 
-2. Build dependency graph for current phase:
-- `affects` field: Which prior phases affect current?
-- `subsystem`: Which prior phases share same subsystem?
-- `requires` chains: Transitive dependencies
-- Roadmap: Any phases marked as dependencies?
+**Step 2 — Select relevant phases (typically 2-4):**
 
-3. Select relevant summaries (typically 2-4 prior phases)
+Score each phase by relevance to current work:
+- `affects` overlap: Does it touch same subsystems?
+- `provides` dependency: Does current phase need what it created?
+- `patterns`: Are its patterns applicable?
+- Roadmap: Marked as explicit dependency?
 
-4. Extract from frontmatter: tech available, patterns established, key files, decisions.
+Select top 2-4 phases. Skip phases with no relevance signal.
 
-5. Read FULL summaries only for selected relevant phases.
+**Step 3 — Read full SUMMARYs for selected phases:**
+```bash
+cat .planning/phases/{selected-phase}/*-SUMMARY.md
+```
+
+From full SUMMARYs extract:
+- How things were implemented (file patterns, code structure)
+- Why decisions were made (context, tradeoffs)
+- What problems were solved (avoid repeating)
+- Actual artifacts created (realistic expectations)
+
+**Step 4 — Keep digest-level context for unselected phases:**
+
+For phases not selected, retain from digest:
+- `tech_stack`: Available libraries
+- `decisions`: Constraints on approach
+- `patterns`: Conventions to follow
 
 **From STATE.md:** Decisions → constrain approach. Pending todos → candidates.
 </step>
 
 <step name="gather_phase_context">
-```bash
-PHASE_DIR=$(node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js find-phase "$PHASE" --raw)
+Use `phase_dir` from init context (already loaded in load_project_state).
 
-cat "$PHASE_DIR"/*-CONTEXT.md 2>/dev/null   # From /gsd:discuss-phase
-cat "$PHASE_DIR"/*-RESEARCH.md 2>/dev/null   # From /gsd:research-phase
-cat "$PHASE_DIR"/*-DISCOVERY.md 2>/dev/null  # From mandatory discovery
+```bash
+cat "$phase_dir"/*-CONTEXT.md 2>/dev/null   # From /gsd:discuss-phase
+cat "$phase_dir"/*-RESEARCH.md 2>/dev/null   # From /gsd:research-phase
+cat "$phase_dir"/*-DISCOVERY.md 2>/dev/null  # From mandatory discovery
 ```
 
-**If CONTEXT.md exists:** Honor user's vision, prioritize essential features, respect boundaries. Locked decisions — do not revisit.
+**If CONTEXT.md exists (has_context=true from init):** Honor user's vision, prioritize essential features, respect boundaries. Locked decisions — do not revisit.
 
-**If RESEARCH.md exists:** Use standard_stack, architecture_patterns, dont_hand_roll, common_pitfalls.
+**If RESEARCH.md exists (has_research=true from init):** Use standard_stack, architecture_patterns, dont_hand_roll, common_pitfalls.
 </step>
 
 <step name="break_into_tasks">
@@ -1008,7 +1027,7 @@ Plans:
 
 <step name="git_commit">
 ```bash
-node /home/foxy/.claude/get-shit-done/bin/gsd-tools.js commit "docs($PHASE): create phase plan" --files .planning/phases/$PHASE-*/$PHASE-*-PLAN.md .planning/ROADMAP.md
+node ./.claude/get-shit-done/bin/gsd-tools.js commit "docs($PHASE): create phase plan" --files .planning/phases/$PHASE-*/$PHASE-*-PLAN.md .planning/ROADMAP.md
 ```
 </step>
 
