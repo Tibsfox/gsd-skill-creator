@@ -234,7 +234,7 @@ describe('orchestratorCommand discover', () => {
     // Should not be valid JSON
     expect(() => JSON.parse(output)).toThrow();
     // Should contain human-readable text
-    expect(output).toContain('command');
+    expect(output).toContain('Commands');
   });
 
   it('returns JSON error with exit code 1 when GSD not installed', async () => {
