@@ -343,3 +343,263 @@ describe('orchestratorCommand help', () => {
     expect(output.length).toBeGreaterThan(50);
   });
 });
+
+// ============================================================================
+// Classify subcommand tests
+// ============================================================================
+
+describe('orchestratorCommand classify', () => {
+  let gsdDir: string;
+  let planningDir: string;
+
+  beforeEach(async () => {
+    const suffix = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    gsdDir = join(tmpdir(), `gsd-orch-classify-gsd-${suffix}`);
+    planningDir = join(tmpdir(), `gsd-orch-classify-plan-${suffix}`);
+
+    // Create GSD directory structure with commands
+    await mkdir(join(gsdDir, 'commands', 'gsd'), { recursive: true });
+    await mkdir(join(gsdDir, 'agents'), { recursive: true });
+    await mkdir(join(gsdDir, 'get-shit-done'), { recursive: true });
+
+    await writeFile(join(gsdDir, 'commands', 'gsd', 'plan-phase.md'), COMMAND_PLAN_PHASE);
+    await writeFile(join(gsdDir, 'commands', 'gsd', 'execute-phase.md'), COMMAND_EXECUTE_PHASE);
+    await writeFile(join(gsdDir, 'agents', 'gsd-executor.md'), AGENT_EXECUTOR);
+    await writeFile(join(gsdDir, 'get-shit-done', 'VERSION'), '1.12.1');
+
+    // Create .planning/ structure
+    await mkdir(planningDir, { recursive: true });
+    await writeFile(join(planningDir, 'ROADMAP.md'), ROADMAP_MD);
+    await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+    await writeFile(join(planningDir, 'config.json'), CONFIG_JSON);
+  });
+
+  afterEach(async () => {
+    await rm(gsdDir, { recursive: true, force: true });
+    await rm(planningDir, { recursive: true, force: true });
+  });
+
+  it('classifies exact match input with confidence 1.0', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand([
+        'classify',
+        `--gsd-base=${gsdDir}`,
+        `--planning-dir=${planningDir}`,
+        '/gsd:plan-phase 3',
+      ])
+    );
+
+    expect(exitCode).toBe(0);
+    const result = JSON.parse(output);
+    expect(result.type).toBe('exact-match');
+    expect(result.command.name).toBe('gsd:plan-phase');
+    expect(result.confidence).toBe(1.0);
+    expect(result.arguments.phaseNumber).toBe('3');
+  });
+
+  it('classifies natural language input', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand([
+        'classify',
+        `--gsd-base=${gsdDir}`,
+        `--planning-dir=${planningDir}`,
+        'plan the next phase',
+      ])
+    );
+
+    expect(exitCode).toBe(0);
+    const result = JSON.parse(output);
+    expect(result.type).toBeDefined();
+    expect(result.confidence).toBeGreaterThan(0);
+  });
+
+  it('--pretty flag produces human-readable output', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand([
+        'classify',
+        '--pretty',
+        `--gsd-base=${gsdDir}`,
+        `--planning-dir=${planningDir}`,
+        'plan something',
+      ])
+    );
+
+    expect(exitCode).toBe(0);
+    // Pretty output is NOT valid JSON
+    expect(() => JSON.parse(output)).toThrow();
+  });
+
+  it('returns JSON error with exit 1 when no input provided', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand([
+        'classify',
+        `--gsd-base=${gsdDir}`,
+        `--planning-dir=${planningDir}`,
+      ])
+    );
+
+    expect(exitCode).toBe(1);
+    const result = JSON.parse(output);
+    expect(result.error).toBeDefined();
+  });
+
+  it('accepts --planning-dir flag', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand([
+        'classify',
+        `--gsd-base=${gsdDir}`,
+        `--planning-dir=${planningDir}`,
+        '/gsd:plan-phase',
+      ])
+    );
+
+    expect(exitCode).toBe(0);
+    const result = JSON.parse(output);
+    expect(result.command).toBeDefined();
+  });
+
+  it('returns JSON error when GSD not installed', async () => {
+    const noGsdDir = join(tmpdir(), `gsd-orch-classify-nogsd-${Date.now()}`);
+    await mkdir(noGsdDir, { recursive: true });
+
+    try {
+      const { exitCode, output } = await captureOutput(() =>
+        orchestratorCommand([
+          'classify',
+          `--gsd-base=${noGsdDir}`,
+          `--planning-dir=${planningDir}`,
+          'plan something',
+        ])
+      );
+
+      expect(exitCode).toBe(1);
+      const result = JSON.parse(output);
+      expect(result.error).toBeDefined();
+    } finally {
+      await rm(noGsdDir, { recursive: true, force: true });
+    }
+  });
+
+  it('"c" alias works for classify', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand([
+        'c',
+        `--gsd-base=${gsdDir}`,
+        `--planning-dir=${planningDir}`,
+        '/gsd:plan-phase',
+      ])
+    );
+
+    expect(exitCode).toBe(0);
+    const result = JSON.parse(output);
+    expect(result.type).toBe('exact-match');
+  });
+});
+
+// ============================================================================
+// Lifecycle subcommand tests
+// ============================================================================
+
+describe('orchestratorCommand lifecycle', () => {
+  let planningDir: string;
+
+  beforeEach(async () => {
+    const suffix = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    planningDir = join(tmpdir(), `gsd-orch-lifecycle-${suffix}`);
+
+    // Create .planning/ structure with roadmap and phases
+    await mkdir(join(planningDir, 'phases', '01-foundation'), { recursive: true });
+    await writeFile(join(planningDir, 'ROADMAP.md'), ROADMAP_MD);
+    await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+    await writeFile(join(planningDir, 'config.json'), CONFIG_JSON);
+  });
+
+  afterEach(async () => {
+    await rm(planningDir, { recursive: true, force: true });
+  });
+
+  it('returns JSON with primary, alternatives, and stage fields', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand([
+        'lifecycle',
+        `--planning-dir=${planningDir}`,
+      ])
+    );
+
+    expect(exitCode).toBe(0);
+    const result = JSON.parse(output);
+    expect(result.primary).toBeDefined();
+    expect(result.primary.command).toBeDefined();
+    expect(result.primary.reason).toBeDefined();
+    expect(result.alternatives).toBeDefined();
+    expect(result.stage).toBeDefined();
+  });
+
+  it('accepts --after flag for completed command context', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand([
+        'lifecycle',
+        `--planning-dir=${planningDir}`,
+        '--after=plan-phase',
+      ])
+    );
+
+    expect(exitCode).toBe(0);
+    const result = JSON.parse(output);
+    expect(result.primary).toBeDefined();
+  });
+
+  it('--pretty flag produces human-readable output', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand([
+        'lifecycle',
+        '--pretty',
+        `--planning-dir=${planningDir}`,
+      ])
+    );
+
+    expect(exitCode).toBe(0);
+    expect(() => JSON.parse(output)).toThrow();
+  });
+
+  it('accepts --planning-dir flag', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand([
+        'lifecycle',
+        `--planning-dir=${planningDir}`,
+      ])
+    );
+
+    expect(exitCode).toBe(0);
+    const result = JSON.parse(output);
+    expect(result.stage).toBeDefined();
+  });
+
+  it('returns stage uninitialized when no .planning/ exists', async () => {
+    const nonexistent = join(tmpdir(), `gsd-orch-lifecycle-nope-${Date.now()}`);
+
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand([
+        'lifecycle',
+        `--planning-dir=${nonexistent}`,
+      ])
+    );
+
+    expect(exitCode).toBe(0);
+    const result = JSON.parse(output);
+    expect(result.stage).toBe('uninitialized');
+  });
+
+  it('"l" alias works for lifecycle', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand([
+        'l',
+        `--planning-dir=${planningDir}`,
+      ])
+    );
+
+    expect(exitCode).toBe(0);
+    const result = JSON.parse(output);
+    expect(result.primary).toBeDefined();
+  });
+});
