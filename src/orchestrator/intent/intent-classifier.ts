@@ -22,7 +22,7 @@ import { exactMatch } from './exact-match.js';
 import { GsdBayesClassifier } from './bayes-classifier.js';
 import { deriveLifecycleStage, filterByLifecycle } from './lifecycle-filter.js';
 import { extractArguments } from './argument-extractor.js';
-import type { SemanticMatcher } from './semantic-matcher.js';
+import { SemanticMatcher } from './semantic-matcher.js';
 
 // ============================================================================
 // Empty Result Helpers
@@ -62,13 +62,18 @@ function noMatchResult(input: string, lifecycleStage: ClassificationResult['life
  * Call initialize() once with a DiscoveryResult to load commands and
  * train the Bayes classifier. Then call classify() for each user input.
  *
- * Optionally inject a SemanticMatcher via setSemanticMatcher() for
- * embedding-based fallback when Bayes confidence is below threshold.
+ * When `enableSemantic` is true (the default), initialize() attempts to
+ * create and initialize a SemanticMatcher for embedding-based fallback.
+ * If embeddings are unavailable (e.g., the library isn't installed),
+ * initialization silently degrades to Bayes-only classification.
+ *
+ * The SemanticMatcher can also be injected manually via setSemanticMatcher()
+ * for test flexibility.
  *
  * @example
  * ```ts
  * const classifier = new IntentClassifier();
- * classifier.initialize(discoveryResult);
+ * await classifier.initialize(discoveryResult);
  *
  * const result = await classifier.classify('/gsd:plan-phase 3', projectState);
  * // => { type: 'exact-match', command: {...}, confidence: 1.0, method: 'exact', ... }
@@ -94,13 +99,34 @@ export class IntentClassifier {
    * Initialize with discovered commands.
    *
    * Stores commands for exact match lookup and trains the Bayes
-   * classifier on augmented utterances. Call once after discovery.
+   * classifier on augmented utterances. When `enableSemantic` is true
+   * (default from config), attempts to create and initialize a
+   * SemanticMatcher inside a try/catch. If EmbeddingService is
+   * unavailable or initialization fails, semantic matching is silently
+   * disabled and Bayes-only classification continues.
    *
    * @param discovery - DiscoveryResult from GsdDiscoveryService
+   * @param options - Optional overrides for semantic initialization
    */
-  initialize(discovery: DiscoveryResult): void {
+  async initialize(
+    discovery: DiscoveryResult,
+    options?: { enableSemantic?: boolean },
+  ): Promise<void> {
     this.commands = discovery.commands;
     this.bayesClassifier.train(discovery.commands);
+
+    // Semantic matcher initialization (extension-gated)
+    const shouldEnableSemantic = options?.enableSemantic ?? this.config.enableSemantic;
+    if (shouldEnableSemantic) {
+      try {
+        const matcher = new SemanticMatcher();
+        await matcher.initialize(discovery.commands);
+        this.semanticMatcher = matcher;
+      } catch {
+        // EmbeddingService not available -- degrade to Bayes-only
+        this.semanticMatcher = null;
+      }
+    }
   }
 
   /**
