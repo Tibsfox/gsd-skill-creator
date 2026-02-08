@@ -155,7 +155,11 @@ Plans:
   2. Read-only collector agents can be auto-generated via CLI that gather information and return compressed summary output
   3. Generated collector agents follow official Claude Code agent format and pass validation
   4. Post-phase invocation integrates with the existing verify-phase workflow (after triggers fire only when verification passes)
-**Plans**: TBD
+**Plans:** 3 plans
+Plans:
+- [ ] 60-01-PLAN.md — TDD: PostPhaseInvoker service (resolve after-verb capabilities to invocation instructions)
+- [ ] 60-02-PLAN.md — TDD: CollectorAgentGenerator (generate read-only agents with compressed output format)
+- [ ] 60-03-PLAN.md — Wire barrel exports, generate-collector CLI command, verify-phase workflow integration
 
 ### Phase 61: Parallelization Advisor
 **Goal**: Plan dependencies are automatically analyzed to recommend wave-based parallel execution instead of manual wave composition
@@ -185,5 +189,5 @@ Note: Phases 53 and 54 can execute in parallel (both depend only on 52). Phases 
 | 57. Cache-Aware Ordering | v1.8 | 0/2 | Not started | - |
 | 58. Research Compression | v1.8 | 0/3 | Not started | - |
 | 59. Model-Aware Activation | v1.8 | 0/2 | Not started | - |
-| 60. Post-Phase Invocation and Collector Agents | v1.8 | 0/TBD | Not started | - |
+| 60. Post-Phase Invocation and Collector Agents | v1.8 | 0/3 | Not started | - |
 | 61. Parallelization Advisor | v1.8 | 0/TBD | Not started | - |
