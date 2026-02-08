@@ -6,3 +6,4 @@
  */
 
 export * from './discovery/index.js';
+export * from './state/index.js';
