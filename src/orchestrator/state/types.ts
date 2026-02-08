@@ -30,6 +30,11 @@ export const PhaseInfoSchema = z.object({
   completedInfo: z.string().optional(),
   description: z.string().optional(),
   directory: z.string().optional(),
+  capabilities: z.array(z.object({
+    verb: z.string(),
+    type: z.string(),
+    name: z.string(),
+  }).passthrough()).optional(),
 }).passthrough();
 
 export type PhaseInfo = z.infer<typeof PhaseInfoSchema>;
@@ -56,6 +61,11 @@ export type PlanInfo = z.infer<typeof PlanInfoSchema>;
 export const ParsedRoadmapSchema = z.object({
   phases: z.array(PhaseInfoSchema),
   plansByPhase: z.record(z.string(), z.array(PlanInfoSchema)),
+  capabilitiesByPhase: z.record(z.string(), z.array(z.object({
+    verb: z.string(),
+    type: z.string(),
+    name: z.string(),
+  }).passthrough())).optional(),
 }).passthrough();
 
 export type ParsedRoadmap = z.infer<typeof ParsedRoadmapSchema>;
