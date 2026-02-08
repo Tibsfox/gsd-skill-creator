@@ -20,6 +20,8 @@ Built with [GSD (Get Shit Done)](https://github.com/Tibsfox/get-shit-done)
 - [Agent Generation](#agent-generation)
 - [Agent Teams](#agent-teams)
 - [Pattern Discovery](#pattern-discovery)
+- [GSD Orchestrator](#gsd-orchestrator)
+- [Skill Workflows, Roles, Bundles & Events](#skill-workflows-roles-bundles--events)
 - [Configuration](#configuration)
 - [Development](#development)
 - [Requirements Implemented](#requirements-implemented)
@@ -42,6 +44,11 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **8. Testing & Simulation** | Automated test cases, activation simulation, and calibration benchmarks (v1.2) |
 | **9. Agent Teams** | Multi-agent team coordination with leader-worker, pipeline, and swarm topologies (v1.4) |
 | **10. Pattern Discovery** | Scan session logs to discover recurring workflows and generate draft skills automatically (v1.5) |
+| **11. Orchestrator** | Master agent routing user intent to GSD commands via dynamic discovery and intent classification (v1.7) |
+| **12. Skill Workflows** | Multi-step skill chains with dependency tracking and crash recovery (v1.7) |
+| **13. Skill Roles** | Behavioral constraints and tool scoping for agent personas (v1.7) |
+| **14. Work Bundles** | Project-phase skill sets with progress tracking and auto-suggestion (v1.7) |
+| **15. Inter-Skill Events** | Event emit/listen system enabling causal activation chains (v1.7) |
 
 ### Version History
 
@@ -54,6 +61,7 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.4** | Agent Teams: team schemas, storage, validation, CLI commands, GSD workflow templates |
 | **v1.5** | Pattern Discovery: session log scanning, tool sequence extraction, DBSCAN clustering, draft generation |
 | **v1.6** | 34 cross-domain examples (20 skills, 8 agents, 3 teams), local installation, beautiful-commits skill |
+| **v1.7** | GSD Master Orchestration Agent: dynamic discovery, intent classification, lifecycle coordination, verbosity/HITL gates, persistent work state, session continuity, skill workflows, roles, bundles, inter-skill events |
 
 ---
 
@@ -284,6 +292,111 @@ skill-creator discover --exclude my-project  # Skip specific project
 skill-creator discover --rescan             # Force full rescan (ignore watermarks)
 ```
 
+### Orchestrator
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `orchestrator discover` | `orch disc` | Discover installed GSD commands, agents, and teams |
+| `orchestrator classify <input>` | `orch cls` | Classify user intent to a GSD command |
+| `orchestrator state` | `orch st` | Show current project lifecycle position |
+| `orchestrator lifecycle` | `orch lc` | Show suggested next actions |
+
+**Examples:**
+```bash
+skill-creator orchestrator discover                     # List all installed GSD commands
+skill-creator orchestrator classify "plan the next phase"  # Classify intent
+skill-creator orchestrator state --planning-dir .planning  # Show project state
+skill-creator orchestrator lifecycle                     # Suggest next workflow step
+```
+
+### Skill Workflows
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `workflow create` | `wf c` | Create a workflow definition |
+| `workflow run <name>` | `wf run` | Execute a workflow |
+| `workflow list` | `wf ls` | List all workflows |
+| `workflow status <name>` | `wf st` | Show workflow run status |
+
+**Examples:**
+```bash
+skill-creator workflow create                           # Interactive workflow wizard
+skill-creator workflow create --name deploy --steps "lint,test,build"  # Non-interactive
+skill-creator workflow run deploy                       # Execute workflow
+skill-creator workflow list                             # List all workflows
+skill-creator workflow status deploy                    # Check run progress
+```
+
+### Skill Roles
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `role create` | `rl c` | Create a role definition |
+| `role list` | `rl ls` | List all roles |
+
+**Examples:**
+```bash
+skill-creator role create                               # Interactive role wizard
+skill-creator role create --name reviewer --skills "code-review,test-generator"  # Non-interactive
+skill-creator role list                                 # List all roles
+```
+
+### Work Bundles
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `bundle create` | `bdl c` | Create a skill bundle |
+| `bundle list` | `bdl ls` | List all bundles |
+| `bundle activate <name>` | `bdl act` | Activate a bundle |
+| `bundle deactivate` | `bdl deact` | Deactivate current bundle |
+| `bundle status <name>` | `bdl st` | Show bundle progress |
+| `bundle suggest` | `bdl sg` | Auto-suggest bundles from usage patterns |
+
+**Examples:**
+```bash
+skill-creator bundle create --name frontend --skills "typescript-patterns,react-hooks"
+skill-creator bundle activate frontend                  # Activate bundle
+skill-creator bundle status frontend                    # Check skill progress
+skill-creator bundle suggest                            # Auto-detect bundles from sessions
+```
+
+### Inter-Skill Events
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `event list` | `evt ls` | List pending events |
+| `event emit <name>` | `evt em` | Emit an event |
+| `event consume <name>` | `evt con` | Consume a pending event |
+| `event suggest` | `evt sg` | Suggest event connections from patterns |
+| `event expire` | `evt exp` | Expire old pending events |
+
+**Examples:**
+```bash
+skill-creator event list                                # Show pending events
+skill-creator event emit "build:complete"               # Emit event
+skill-creator event suggest                             # Suggest connections
+```
+
+### Work State & Session Continuity
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `work-state save` | `ws save` | Save current work state |
+| `work-state load` | `ws load` | Load saved work state |
+| `work-state queue add` | `ws q add` | Queue a task for later |
+| `work-state queue list` | `ws q ls` | List queued tasks |
+| `snapshot generate` | `snap gen` | Generate session snapshot |
+| `snapshot latest` | `snap lat` | Show most recent snapshot |
+| `snapshot list` | `snap ls` | List all snapshots |
+| `snapshot prune` | `snap prune` | Prune old snapshots |
+
+**Examples:**
+```bash
+skill-creator work-state save --task "implementing auth" --skills "typescript-patterns"
+skill-creator work-state load                           # Restore previous state
+skill-creator snapshot latest --format=context           # Get context for new session
+```
+
 ### Quality & Validation
 
 | Command | Alias | Description |
@@ -408,6 +521,12 @@ your-project/
 │   │   └── <agent-name>.md         # Composite agent file
 │   ├── teams/                       # Agent team configurations
 │   │   └── <team-name>.json        # Team config (members, topology)
+│   ├── workflows/                   # Skill workflow definitions (v1.7)
+│   │   └── <name>.workflow.yaml    # Multi-step skill chains
+│   ├── roles/                       # Skill role definitions (v1.7)
+│   │   └── <name>.role.yaml        # Behavioral constraints
+│   ├── bundles/                     # Work bundle definitions (v1.7)
+│   │   └── <name>.bundle.yaml      # Project-phase skill sets
 │   └── settings.json               # Claude Code settings (hooks, etc.)
 │
 ├── .planning/
@@ -415,7 +534,12 @@ your-project/
 │   │   ├── sessions.jsonl          # Session observations (append-only)
 │   │   ├── suggestions.json        # Skill suggestion state
 │   │   ├── feedback.jsonl          # User corrections/feedback
-│   │   └── agent-suggestions.json  # Agent suggestion state
+│   │   ├── agent-suggestions.json  # Agent suggestion state
+│   │   ├── workflow-runs.jsonl     # Workflow execution state (v1.7)
+│   │   ├── events.jsonl            # Inter-skill events (v1.7)
+│   │   └── snapshots.jsonl         # Session snapshots (v1.7)
+│   ├── hooks/                       # Work state persistence (v1.7)
+│   │   └── current-work.yaml       # Active task/skills/checkpoint
 │   ├── PROJECT.md                  # Project context
 │   ├── REQUIREMENTS.md             # Requirements specification
 │   ├── ROADMAP.md                  # Development roadmap
@@ -874,6 +998,106 @@ The command displays progress during scanning (project count, session count, pat
 
 ---
 
+## GSD Orchestrator
+
+The orchestrator transforms GSD from a memorize-28-commands system into a conversational routing layer. It uses a two-layer architecture:
+
+**Layer 1 (Agent-only):** A pure `.claude/agents/gsd-orchestrator.md` file that works with any GSD installation. Uses filesystem-based discovery to find commands and route user intent.
+
+**Layer 2 (Enhanced):** When gsd-skill-creator is installed, the agent detects the CLI and uses it for Bayes+embedding intent classification, lifecycle coordination, and structured output.
+
+### Intent Classification Pipeline
+
+1. **Exact match** — `/gsd:plan-phase 3` passes through directly
+2. **Lifecycle filter** — Narrows 28+ commands to valid ones for current project state
+3. **Bayes classifier** — Trained on command descriptions and augmented utterances
+4. **Embedding similarity** — Fallback for ambiguous phrasings (requires gsd-skill-creator)
+5. **Confidence resolution** — Auto-execute (≥0.7), execute with note (0.5-0.69), or present candidates (<0.5)
+
+### Lifecycle Coordination
+
+The orchestrator reads `.planning/` artifacts to determine project state and suggest next actions. Transitions are artifact-driven (not a hardcoded state machine), so they adapt to new GSD commands automatically.
+
+### Verbosity & HITL Gates
+
+| Level | Name | Output |
+|-------|------|--------|
+| 1 | Silent | Routed command result only |
+| 2 | Minimal | Command + confidence |
+| 3 | Standard | Command + classification method + lifecycle hint (default) |
+| 4 | Detailed | All candidates with scores |
+| 5 | Transparent | Discovery, scoring, lifecycle reasoning, gate decisions |
+
+Destructive commands (remove-phase, complete-milestone) always require confirmation, even in YOLO mode.
+
+---
+
+## Skill Workflows, Roles, Bundles & Events
+
+### Skill Workflows
+
+Define multi-step skill chains in `.claude/workflows/*.workflow.yaml`:
+
+```yaml
+name: deploy-pipeline
+steps:
+  - name: lint
+    skill: code-review
+  - name: test
+    skill: test-generator
+    needs: [lint]
+  - name: build
+    skill: typescript-patterns
+    needs: [test]
+```
+
+Workflows support `needs:` dependencies (DAG-based execution order via Kahn's algorithm), `extends:` composition, and crash recovery (resumes from last completed step).
+
+### Skill Roles
+
+Define behavioral constraints in `.claude/roles/*.role.yaml`:
+
+```yaml
+name: security-reviewer
+skills: [code-review, dependency-audit]
+constraints:
+  - Never approve code with hardcoded secrets
+  - Flag all uses of eval() or dynamic code execution
+tools: Read, Grep, Glob
+model: opus
+```
+
+Roles support `extends:` with additive constraint merging — child constraints add to parent constraints, while tools and model use child-wins semantics.
+
+### Work Bundles
+
+Group skills by project phase in `.claude/bundles/*.bundle.yaml`:
+
+```yaml
+name: frontend-dev
+required: [typescript-patterns, react-hooks, css-patterns]
+optional: [accessibility-patterns, test-generator]
+```
+
+Bundles track skill progress (pending → loaded → applied) based on session observations and auto-suggest new bundles when they detect consistent co-activation patterns using Bron-Kerbosch clique detection.
+
+### Inter-Skill Events
+
+Skills declare events in frontmatter extension fields:
+
+```yaml
+metadata:
+  extensions:
+    gsd-skill-creator:
+      events:
+        emits: ["build:complete", "test:pass"]
+        listens: ["lint:complete"]
+```
+
+Events are stored in `.planning/patterns/events.jsonl`. The relevance scorer boosts skills with matching `listens` entries when pending events exist. A co-activation tracker suggests event connections from observed correlation patterns.
+
+---
+
 ## Configuration
 
 ### Retention Settings
@@ -1068,6 +1292,93 @@ src/
 │   ├── cluster-scorer.ts      # 4-factor cluster scoring
 │   ├── cluster-drafter.ts     # Activation-focused cluster drafts
 │   └── discover-command.ts    # CLI command orchestrator
+│
+├── orchestrator/      # GSD Master Orchestration Agent (v1.7)
+│   ├── discovery/             # Filesystem discovery of GSD commands/agents/teams
+│   │   ├── types.ts           # Zod schemas for GSD metadata
+│   │   ├── command-parser.ts  # Parse command .md files
+│   │   ├── agent-parser.ts    # Parse agent .md files
+│   │   ├── team-parser.ts     # Parse team config.json files
+│   │   ├── scanner.ts         # Filesystem scanner
+│   │   └── discovery-service.ts # Cached discovery with mtime invalidation
+│   ├── state/                 # Project state reading
+│   │   ├── types.ts           # ProjectState Zod schemas
+│   │   ├── roadmap-parser.ts  # Parse ROADMAP.md
+│   │   ├── state-parser.ts    # Parse STATE.md
+│   │   ├── project-parser.ts  # Parse PROJECT.md
+│   │   ├── config-reader.ts   # Parse config.json (dual-format)
+│   │   └── state-reader.ts    # Assemble ProjectState
+│   ├── intent/                # Intent classification
+│   │   ├── types.ts           # ClassificationResult schemas
+│   │   ├── exact-matcher.ts   # /gsd:command pass-through
+│   │   ├── utterance-augmenter.ts # Training data generation
+│   │   ├── bayes-wrapper.ts   # Bayes classifier wrapper
+│   │   ├── lifecycle-filter.ts # Stage-aware command filtering
+│   │   ├── argument-extractor.ts # NL argument extraction
+│   │   ├── semantic-matcher.ts # Embedding similarity fallback
+│   │   └── intent-classifier.ts # 5-stage pipeline
+│   ├── lifecycle/             # Lifecycle coordination
+│   │   ├── types.ts           # Transition types
+│   │   ├── artifact-scanner.ts # Filesystem artifact detection
+│   │   └── lifecycle-coordinator.ts # Next-step suggestions
+│   ├── verbosity/             # Output control
+│   │   ├── types.ts           # Verbosity level schemas
+│   │   └── verbosity-filter.ts # Section filtering
+│   ├── gates/                 # HITL approval gates
+│   │   ├── types.ts           # Gate types
+│   │   └── gate-evaluator.ts  # Gate evaluation logic
+│   ├── extension/             # gsd-skill-creator detection
+│   │   └── extension-detector.ts # Capability-based feature flags
+│   └── cli.ts                 # Orchestrator CLI subcommands
+│
+├── work-state/        # Persistent work state (v1.7)
+│   ├── types.ts               # Work state Zod schemas
+│   ├── work-state-writer.ts   # YAML serialization
+│   ├── work-state-reader.ts   # YAML deserialization
+│   ├── queue-manager.ts       # Queued task management
+│   └── cli.ts                 # Work state CLI subcommands
+│
+├── session-continuity/ # Session snapshots (v1.7)
+│   ├── types.ts               # Snapshot Zod schemas
+│   ├── snapshot-manager.ts    # Generate/store/retrieve snapshots
+│   ├── skill-preload-suggester.ts # Suggest skills from snapshot
+│   └── cli.ts                 # Snapshot CLI subcommands
+│
+├── ephemeral-observations/ # Tiered observations (v1.7)
+│   ├── types.ts               # Tiered observation schemas
+│   ├── ephemeral-store.ts     # In-memory ephemeral buffer
+│   ├── promotion-evaluator.ts # Signal quality scoring
+│   └── observation-squasher.ts # Merge related entries
+│
+├── workflows/         # Skill workflows (v1.7)
+│   ├── types.ts               # Workflow Zod schemas
+│   ├── workflow-parser.ts     # YAML parsing
+│   ├── workflow-dag.ts        # Multi-edge DAG (Kahn's algorithm)
+│   ├── workflow-validator.ts  # Acyclic + skill existence checks
+│   ├── workflow-run-store.ts  # JSONL execution state
+│   ├── workflow-runner.ts     # Step tracking with crash recovery
+│   └── cli.ts                 # Workflow CLI subcommands
+│
+├── roles/             # Skill roles (v1.7)
+│   ├── types.ts               # Role Zod schemas
+│   ├── role-parser.ts         # YAML parsing
+│   ├── constraint-injector.ts # System prompt injection
+│   └── cli.ts                 # Role CLI subcommands
+│
+├── bundles/           # Work bundles (v1.7)
+│   ├── types.ts               # Bundle Zod schemas
+│   ├── bundle-parser.ts       # YAML parsing
+│   ├── bundle-activator.ts    # Activation with WorkState integration
+│   ├── bundle-progress.ts     # Three-tier status tracking
+│   ├── bundle-suggester.ts    # Bron-Kerbosch clique detection
+│   └── cli.ts                 # Bundle CLI subcommands
+│
+├── events/            # Inter-skill communication (v1.7)
+│   ├── types.ts               # Event Zod schemas
+│   ├── event-store.ts         # JSONL event persistence
+│   ├── event-boost.ts         # Relevance score boosting
+│   ├── event-suggester.ts     # Co-activation event suggestions
+│   └── cli.ts                 # Event CLI subcommands
 │
 ├── cli.ts             # CLI entry point
 └── index.ts           # Module exports
@@ -1283,6 +1594,119 @@ src/
 | CLI-01 | `discover` command for full pipeline | ✓ |
 | CLI-02 | `--exclude` flag for project exclusion | ✓ |
 | CLI-03 | `--rescan` flag to force full rescan | ✓ |
+
+### v1.7 GSD Master Orchestration Agent Requirements (67 total)
+
+#### Discovery & Parsing (DISC-01 to DISC-08)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| DISC-01 | Dynamic scanning of GSD commands from filesystem | ✓ |
+| DISC-02 | Command file frontmatter and objective tag parsing | ✓ |
+| DISC-03 | Agent discovery from gsd-*.md files | ✓ |
+| DISC-04 | Team discovery from .claude/teams/ | ✓ |
+| DISC-05 | Version-aware cache invalidation (VERSION mtime) | ✓ |
+| DISC-06 | Auto-detect GSD installation location (global vs local) | ✓ |
+| DISC-07 | Graceful tolerance of malformed/missing files | ✓ |
+| DISC-08 | Configurable base path for testing (DI) | ✓ |
+
+#### Intent Classification (INTC-01 to INTC-08)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| INTC-01 | Exact match pass-through for /gsd:* syntax | ✓ |
+| INTC-02 | Bayes classifier with augmented utterances | ✓ |
+| INTC-03 | Embedding similarity fallback (EmbeddingService) | ✓ |
+| INTC-04 | State-aware routing from .planning/ artifacts | ✓ |
+| INTC-05 | Argument extraction from natural language | ✓ |
+| INTC-06 | Ambiguity resolution with top candidates | ✓ |
+| INTC-07 | Lifecycle stage as first-pass filter | ✓ |
+| INTC-08 | Circular invocation guard | ✓ |
+
+#### Lifecycle Coordination (LIFE-01 to LIFE-04)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| LIFE-01 | Read .planning/ for lifecycle position | ✓ |
+| LIFE-02 | Next-step suggestions after command completion | ✓ |
+| LIFE-03 | Artifact-driven transitions (not hardcoded) | ✓ |
+| LIFE-04 | Respect GSD config.json settings | ✓ |
+
+#### Verbosity & HITL Gates (VERB-01 to HITL-04)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| VERB-01 | 5 verbosity levels (Silent to Transparent) | ✓ |
+| VERB-02 | Controls orchestrator output only | ✓ |
+| VERB-03 | Configurable via CLI flag or config.json | ✓ |
+| VERB-04 | Default level 3 (Standard) | ✓ |
+| HITL-01 | Routing confirmation gate (YOLO-skippable) | ✓ |
+| HITL-02 | Destructive action gates (never skipped) | ✓ |
+| HITL-03 | Respects YOLO/interactive mode | ✓ |
+| HITL-04 | Low-confidence gate trigger | ✓ |
+
+#### Extension & Delivery (EXTD-01 to DELV-05)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| EXTD-01 | Detect gsd-skill-creator installation | ✓ |
+| EXTD-02 | Mention custom creation when detected | ✓ |
+| EXTD-03 | Enhanced features activate with extension | ✓ |
+| EXTD-04 | Full function without extension (graceful degradation) | ✓ |
+| DELV-01 | Layer 1: Pure agent .md (no dependencies) | ✓ |
+| DELV-02 | Layer 2: TypeScript library in src/orchestrator/ | ✓ |
+| DELV-03 | CLI commands (discover, classify, state, lifecycle) | ✓ |
+| DELV-04 | Agent .md within ~15k character budget | ✓ |
+| DELV-05 | Fixture-based test suite | ✓ |
+
+#### Work State & Session Continuity (WKST-01 to SESS-04)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| WKST-01 | Auto-save work state on session end | ✓ |
+| WKST-02 | Auto-restore on session start | ✓ |
+| WKST-03 | Queued tasks with skills_needed metadata | ✓ |
+| WKST-04 | Workflow integration for step position | ✓ |
+| SESS-01 | Auto-generate session snapshots on end | ✓ |
+| SESS-02 | Inject snapshot on session start | ✓ |
+| SESS-03 | Bounded retention (last 20) with pruning | ✓ |
+| SESS-04 | Snapshot-informed skill pre-loading | ✓ |
+
+#### Ephemeral Observations (EPHO-01 to EPHO-04)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| EPHO-01 | Tiered observations (ephemeral/persistent) | ✓ |
+| EPHO-02 | Session-end promotion of high-signal patterns | ✓ |
+| EPHO-03 | Related entry squashing on promotion | ✓ |
+| EPHO-04 | Reduced storage footprint with better signal | ✓ |
+
+#### Skill Workflows (WKFL-01 to WKFL-06)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| WKFL-01 | YAML workflow format with steps and dependencies | ✓ |
+| WKFL-02 | Step completion tracking in JSONL | ✓ |
+| WKFL-03 | Crash recovery from last completed step | ✓ |
+| WKFL-04 | Workflow extension via extends: field | ✓ |
+| WKFL-05 | CLI create and run commands | ✓ |
+| WKFL-06 | Acyclic dependency graph validation | ✓ |
+
+#### Skill Roles (ROLE-01 to ROLE-04)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| ROLE-01 | YAML role format with constraints and tools | ✓ |
+| ROLE-02 | Constraint injection into system prompt | ✓ |
+| ROLE-03 | Additive extends composition | ✓ |
+| ROLE-04 | CLI create and list commands | ✓ |
+
+#### Work Bundles (BNDL-01 to BNDL-04)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| BNDL-01 | YAML bundle format with required/optional skills | ✓ |
+| BNDL-02 | Required skills get token budget priority | ✓ |
+| BNDL-03 | Progress tracking from session observations | ✓ |
+| BNDL-04 | Auto-suggestion from usage pattern analysis | ✓ |
+
+#### Inter-Skill Events (EVNT-01 to EVNT-04)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| EVNT-01 | Events declared in skill frontmatter extensions | ✓ |
+| EVNT-02 | JSONL event storage | ✓ |
+| EVNT-03 | Relevance score boosting for matching listeners | ✓ |
+| EVNT-04 | Co-activation-based event connection suggestions | ✓ |
 
 ---
 
