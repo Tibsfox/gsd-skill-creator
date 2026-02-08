@@ -69,8 +69,8 @@ describe('BudgetStage', () => {
 
   it('skips optional skills when standard budget is exhausted', async () => {
     // Tight budget: contextWindowSize=200_000 * 0.05 = 10_000 standard budget
-    // Each skill = 5000 tokens, so standard-skill (5000) fills standard budget, optional gets skipped
-    mockTokenCounter.count.mockResolvedValue({ count: 5000, source: 'estimate', confidence: 'medium' });
+    // Each skill = 6000 tokens, standard-skill (6000) nearly fills budget, optional (6000) exceeds it
+    mockTokenCounter.count.mockResolvedValue({ count: 6000, source: 'estimate', confidence: 'medium' });
 
     const stage = new BudgetStage(mockTokenCounter, testProfile, mockSkillStore);
     const ctx = createEmptyContext({
