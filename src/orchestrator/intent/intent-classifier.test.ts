@@ -3,13 +3,14 @@
  *
  * Verifies the full 5-stage classification pipeline:
  * exact match -> lifecycle filter -> Bayes classify -> confidence resolution -> argument extraction.
- * Also tests circular invocation guard, uninitialized state, and edge cases.
+ * Also tests circular invocation guard, uninitialized state, semantic fallback, and edge cases.
  */
 
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { IntentClassifier } from './intent-classifier.js';
 import type { GsdCommandMetadata, DiscoveryResult } from '../discovery/types.js';
 import type { ProjectState } from '../state/types.js';
+import type { SemanticMatcher, SemanticMatch } from './semantic-matcher.js';
 
 // ============================================================================
 // Fixtures
@@ -109,6 +110,21 @@ function makeMilestoneEndState(): ProjectState {
 }
 
 // ============================================================================
+// Mock SemanticMatcher for fallback tests
+// ============================================================================
+
+function createMockSemanticMatcher(overrides: {
+  isReady?: boolean;
+  matchResult?: SemanticMatch[];
+} = {}): SemanticMatcher {
+  return {
+    initialize: vi.fn().mockResolvedValue(undefined),
+    match: vi.fn().mockResolvedValue(overrides.matchResult ?? []),
+    isReady: vi.fn().mockReturnValue(overrides.isReady ?? true),
+  } as unknown as SemanticMatcher;
+}
+
+// ============================================================================
 // IntentClassifier
 // ============================================================================
 
@@ -127,30 +143,30 @@ describe('IntentClassifier', () => {
   // --------------------------------------------------------------------------
 
   describe('exact match', () => {
-    it('returns type "exact-match" with confidence 1.0 for /gsd:plan-phase 3', () => {
-      const result = classifier.classify('/gsd:plan-phase 3', executingState);
+    it('returns type "exact-match" with confidence 1.0 for /gsd:plan-phase 3', async () => {
+      const result = await classifier.classify('/gsd:plan-phase 3', executingState);
       expect(result.type).toBe('exact-match');
       expect(result.confidence).toBe(1.0);
       expect(result.command).not.toBeNull();
       expect(result.command!.name).toBe('gsd:plan-phase');
     });
 
-    it('extracts phaseNumber from exact match raw args', () => {
-      const result = classifier.classify('/gsd:plan-phase 3', executingState);
+    it('extracts phaseNumber from exact match raw args', async () => {
+      const result = await classifier.classify('/gsd:plan-phase 3', executingState);
       expect(result.arguments.phaseNumber).toBe('3');
     });
 
-    it('bypasses lifecycle filter for explicit commands', () => {
+    it('bypasses lifecycle filter for explicit commands', async () => {
       // In uninitialized state, execute-phase would normally be filtered out
       const uninitState = makeUninitializedState();
-      const result = classifier.classify('/gsd:execute-phase 5', uninitState);
+      const result = await classifier.classify('/gsd:execute-phase 5', uninitState);
       expect(result.type).toBe('exact-match');
       expect(result.confidence).toBe(1.0);
       expect(result.command!.name).toBe('gsd:execute-phase');
     });
 
-    it('includes arguments with flags for exact match', () => {
-      const result = classifier.classify('/gsd:plan-phase 3 --research', executingState);
+    it('includes arguments with flags for exact match', async () => {
+      const result = await classifier.classify('/gsd:plan-phase 3 --research', executingState);
       expect(result.type).toBe('exact-match');
       expect(result.arguments.phaseNumber).toBe('3');
       expect(result.arguments.flags).toContain('research');
@@ -162,18 +178,18 @@ describe('IntentClassifier', () => {
   // --------------------------------------------------------------------------
 
   describe('classification', () => {
-    it('returns type "classified" for clear natural language input', () => {
-      const result = classifier.classify('plan the next phase', executingState);
+    it('returns type "classified" for clear natural language input', async () => {
+      const result = await classifier.classify('plan the next phase', executingState);
       expect(result.type).toBe('classified');
       expect(result.command).not.toBeNull();
       expect(result.command!.name).toBe('gsd:plan-phase');
       expect(result.confidence).toBeGreaterThanOrEqual(0.5);
     });
 
-    it('respects lifecycle filtering for classification', () => {
+    it('respects lifecycle filtering for classification', async () => {
       // In uninitialized state, "create a new project" should match gsd:new-project
       const uninitState = makeUninitializedState();
-      const result = classifier.classify('initialize a new project', uninitState);
+      const result = await classifier.classify('initialize a new project', uninitState);
       // new-project is valid in uninitialized stage
       expect(result.command).not.toBeNull();
       // It should match new-project (available in uninitialized) or be ambiguous,
@@ -187,8 +203,8 @@ describe('IntentClassifier', () => {
       }
     });
 
-    it('includes lifecycle stage in classified result', () => {
-      const result = classifier.classify('plan the next phase', executingState);
+    it('includes lifecycle stage in classified result', async () => {
+      const result = await classifier.classify('plan the next phase', executingState);
       expect(result.lifecycleStage).not.toBeNull();
       expect(result.lifecycleStage).toBe('executing');
     });
@@ -199,8 +215,8 @@ describe('IntentClassifier', () => {
   // --------------------------------------------------------------------------
 
   describe('no match', () => {
-    it('returns type "no-match" for completely unrelated input', () => {
-      const result = classifier.classify('what is the weather today in paris', executingState);
+    it('returns type "no-match" for completely unrelated input', async () => {
+      const result = await classifier.classify('what is the weather today in paris', executingState);
       // Even if Bayes returns something, we check the result type
       // The confidence should be below threshold for random input
       // Since Bayes always returns SOMETHING, we verify behaviour by checking
@@ -208,15 +224,15 @@ describe('IntentClassifier', () => {
       expect(result.confidence).toBeLessThan(1.0);
     });
 
-    it('returns type "no-match" for empty input', () => {
-      const result = classifier.classify('', executingState);
+    it('returns type "no-match" for empty input', async () => {
+      const result = await classifier.classify('', executingState);
       expect(result.type).toBe('no-match');
       expect(result.command).toBeNull();
       expect(result.confidence).toBe(0);
     });
 
-    it('returns type "no-match" for whitespace-only input', () => {
-      const result = classifier.classify('   ', executingState);
+    it('returns type "no-match" for whitespace-only input', async () => {
+      const result = await classifier.classify('   ', executingState);
       expect(result.type).toBe('no-match');
       expect(result.command).toBeNull();
     });
@@ -227,14 +243,14 @@ describe('IntentClassifier', () => {
   // --------------------------------------------------------------------------
 
   describe('ambiguous results', () => {
-    it('returns alternatives array with command metadata', () => {
+    it('returns alternatives array with command metadata', async () => {
       // Use config with very high threshold to force ambiguity
       const strictClassifier = new IntentClassifier({
         confidenceThreshold: 0.99,
         ambiguityGap: 0.01,
       });
       strictClassifier.initialize(makeDiscovery());
-      const result = strictClassifier.classify('plan the next phase', executingState);
+      const result = await strictClassifier.classify('plan the next phase', executingState);
       // With threshold 0.99, nearly nothing should be confident enough
       if (result.type === 'ambiguous') {
         expect(result.alternatives.length).toBeGreaterThan(0);
@@ -249,14 +265,14 @@ describe('IntentClassifier', () => {
       expect(['ambiguous', 'no-match']).toContain(result.type);
     });
 
-    it('limits alternatives to maxAlternatives config', () => {
+    it('limits alternatives to maxAlternatives config', async () => {
       const limitedClassifier = new IntentClassifier({
         confidenceThreshold: 0.99,
         ambiguityGap: 0.01,
         maxAlternatives: 2,
       });
       limitedClassifier.initialize(makeDiscovery());
-      const result = limitedClassifier.classify('plan the next phase', executingState);
+      const result = await limitedClassifier.classify('plan the next phase', executingState);
       if (result.type === 'ambiguous') {
         expect(result.alternatives.length).toBeLessThanOrEqual(2);
       }
@@ -268,7 +284,7 @@ describe('IntentClassifier', () => {
   // --------------------------------------------------------------------------
 
   describe('circular invocation guard', () => {
-    it('prevents re-entrant classify calls', () => {
+    it('prevents re-entrant classify calls', async () => {
       // We test the guard by accessing the private isClassifying flag
       // through a subclass or by verifying the flag mechanism works
       // Since we can't easily trigger true re-entrancy in a sync function,
@@ -280,7 +296,7 @@ describe('IntentClassifier', () => {
 
       // Simulate re-entrancy by setting the flag manually
       internalClassifier.isClassifying = true;
-      const result = classifier.classify('/gsd:plan-phase 3', executingState);
+      const result = await classifier.classify('/gsd:plan-phase 3', executingState);
       expect(result.type).toBe('no-match');
       expect(result.confidence).toBe(0);
 
@@ -294,16 +310,16 @@ describe('IntentClassifier', () => {
   // --------------------------------------------------------------------------
 
   describe('uninitialized classifier', () => {
-    it('returns no-match before initialize() is called', () => {
+    it('returns no-match before initialize() is called', async () => {
       const freshClassifier = new IntentClassifier();
-      const result = freshClassifier.classify('plan the next phase', executingState);
+      const result = await freshClassifier.classify('plan the next phase', executingState);
       expect(result.type).toBe('no-match');
       expect(result.command).toBeNull();
     });
 
-    it('exact match still works on uninitialized classifier (no commands)', () => {
+    it('exact match still works on uninitialized classifier (no commands)', async () => {
       const freshClassifier = new IntentClassifier();
-      const result = freshClassifier.classify('/gsd:plan-phase 3', executingState);
+      const result = await freshClassifier.classify('/gsd:plan-phase 3', executingState);
       // No commands loaded, so exact match can't find a match
       expect(result.type).toBe('no-match');
     });
@@ -314,21 +330,21 @@ describe('IntentClassifier', () => {
   // --------------------------------------------------------------------------
 
   describe('argument extraction', () => {
-    it('includes extracted arguments in exact-match results', () => {
-      const result = classifier.classify('/gsd:plan-phase 3 --research', executingState);
+    it('includes extracted arguments in exact-match results', async () => {
+      const result = await classifier.classify('/gsd:plan-phase 3 --research', executingState);
       expect(result.arguments).toBeDefined();
       expect(result.arguments.phaseNumber).toBe('3');
       expect(result.arguments.flags).toContain('research');
     });
 
-    it('includes extracted arguments in classified results', () => {
-      const result = classifier.classify('plan phase 3', executingState);
+    it('includes extracted arguments in classified results', async () => {
+      const result = await classifier.classify('plan phase 3', executingState);
       expect(result.arguments).toBeDefined();
       expect(result.arguments.phaseNumber).toBe('3');
     });
 
-    it('includes raw input in arguments for all result types', () => {
-      const result = classifier.classify('', executingState);
+    it('includes raw input in arguments for all result types', async () => {
+      const result = await classifier.classify('', executingState);
       expect(result.arguments).toBeDefined();
       expect(result.arguments.raw).toBe('');
     });
@@ -339,19 +355,19 @@ describe('IntentClassifier', () => {
   // --------------------------------------------------------------------------
 
   describe('config', () => {
-    it('uses default config when no config provided', () => {
+    it('uses default config when no config provided', async () => {
       const defaultClassifier = new IntentClassifier();
       defaultClassifier.initialize(makeDiscovery());
       // Should work with defaults (threshold 0.5, gap 0.15, max 3)
-      const result = defaultClassifier.classify('plan the next phase', executingState);
+      const result = await defaultClassifier.classify('plan the next phase', executingState);
       expect(result).toBeDefined();
       expect(['exact-match', 'classified', 'ambiguous', 'no-match']).toContain(result.type);
     });
 
-    it('accepts partial config overrides', () => {
+    it('accepts partial config overrides', async () => {
       const customClassifier = new IntentClassifier({ confidenceThreshold: 0.8 });
       customClassifier.initialize(makeDiscovery());
-      const result = customClassifier.classify('plan the next phase', executingState);
+      const result = await customClassifier.classify('plan the next phase', executingState);
       expect(result).toBeDefined();
     });
   });
@@ -361,8 +377,8 @@ describe('IntentClassifier', () => {
   // --------------------------------------------------------------------------
 
   describe('result structure', () => {
-    it('always includes all required fields in the result', () => {
-      const result = classifier.classify('/gsd:plan-phase', executingState);
+    it('always includes all required fields in the result', async () => {
+      const result = await classifier.classify('/gsd:plan-phase', executingState);
       expect(result).toHaveProperty('type');
       expect(result).toHaveProperty('command');
       expect(result).toHaveProperty('confidence');
@@ -371,16 +387,93 @@ describe('IntentClassifier', () => {
       expect(result).toHaveProperty('lifecycleStage');
     });
 
-    it('exact match result has empty alternatives array', () => {
-      const result = classifier.classify('/gsd:plan-phase 3', executingState);
+    it('exact match result has empty alternatives array', async () => {
+      const result = await classifier.classify('/gsd:plan-phase 3', executingState);
       expect(result.type).toBe('exact-match');
       expect(result.alternatives).toEqual([]);
     });
 
-    it('no-match result has null command and empty alternatives', () => {
-      const result = classifier.classify('', executingState);
+    it('no-match result has null command and empty alternatives', async () => {
+      const result = await classifier.classify('', executingState);
       expect(result.command).toBeNull();
       expect(result.alternatives).toEqual([]);
+    });
+  });
+
+  // --------------------------------------------------------------------------
+  // Semantic Fallback
+  // --------------------------------------------------------------------------
+
+  describe('semantic fallback', () => {
+    it('uses semantic result when Bayes confidence is below threshold', async () => {
+      // Use high threshold so Bayes always fails confidence check
+      const semanticClassifier = new IntentClassifier({
+        confidenceThreshold: 0.99,
+        semanticThreshold: 0.7,
+      });
+      semanticClassifier.initialize(makeDiscovery());
+
+      const mockMatcher = createMockSemanticMatcher({
+        isReady: true,
+        matchResult: [{
+          command: TEST_COMMANDS[0], // plan-phase
+          similarity: 0.85,
+        }],
+      });
+      semanticClassifier.setSemanticMatcher(mockMatcher);
+
+      const result = await semanticClassifier.classify('plan the next phase', executingState);
+      expect(result.type).toBe('classified');
+      expect(result.command!.name).toBe('gsd:plan-phase');
+      expect(result.method).toBe('semantic');
+    });
+
+    it('does NOT invoke semantic fallback when Bayes confidence is above threshold', async () => {
+      // Use low threshold so Bayes passes easily
+      const semanticClassifier = new IntentClassifier({
+        confidenceThreshold: 0.01,
+      });
+      semanticClassifier.initialize(makeDiscovery());
+
+      const mockMatcher = createMockSemanticMatcher({ isReady: true });
+      semanticClassifier.setSemanticMatcher(mockMatcher);
+
+      await semanticClassifier.classify('plan the next phase', executingState);
+
+      // match() should never be called when Bayes is confident
+      expect(mockMatcher.match).not.toHaveBeenCalled();
+    });
+
+    it('semantic match result has method: "semantic"', async () => {
+      const semanticClassifier = new IntentClassifier({
+        confidenceThreshold: 0.99,
+        semanticThreshold: 0.7,
+      });
+      semanticClassifier.initialize(makeDiscovery());
+
+      const mockMatcher = createMockSemanticMatcher({
+        isReady: true,
+        matchResult: [{
+          command: TEST_COMMANDS[2], // progress
+          similarity: 0.8,
+        }],
+      });
+      semanticClassifier.setSemanticMatcher(mockMatcher);
+
+      const result = await semanticClassifier.classify('check my status', executingState);
+      expect(result.method).toBe('semantic');
+    });
+
+    it('Bayes classified result has method: "bayes"', async () => {
+      const result = await classifier.classify('plan the next phase', executingState);
+      if (result.type === 'classified') {
+        expect(result.method).toBe('bayes');
+      }
+    });
+
+    it('exact match result has method: "exact"', async () => {
+      const result = await classifier.classify('/gsd:plan-phase 3', executingState);
+      expect(result.method).toBe('exact');
     });
   });
 });
