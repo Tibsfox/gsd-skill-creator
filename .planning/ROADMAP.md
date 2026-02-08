@@ -170,7 +170,10 @@ Plans:
   2. Plans that modify the same files are assigned to the same wave (sequential) and independent plans to different waves (parallel)
   3. Output is advisory only (recommendations with rationale, not automatic execution changes)
   4. Conservative defaults: plans are sequential unless proven independent
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 61-01-PLAN.md — TDD: ParallelizationAdvisor service (parse plan frontmatter, build file dependency graph, compute wave assignments, generate advisory report)
+- [ ] 61-02-PLAN.md — Wire advise-parallelization CLI command, barrel exports, public API
 
 ## Progress
 
@@ -190,4 +193,4 @@ Note: Phases 53 and 54 can execute in parallel (both depend only on 52). Phases 
 | 58. Research Compression | v1.8 | 0/3 | Not started | - |
 | 59. Model-Aware Activation | v1.8 | 0/2 | Not started | - |
 | 60. Post-Phase Invocation and Collector Agents | v1.8 | 0/3 | Not started | - |
-| 61. Parallelization Advisor | v1.8 | 0/TBD | Not started | - |
+| 61. Parallelization Advisor | v1.8 | 0/2 | Not started | - |
