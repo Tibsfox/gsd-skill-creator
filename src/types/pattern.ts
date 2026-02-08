@@ -1,5 +1,5 @@
 // Pattern categories for different observation types
-export type PatternCategory = 'commands' | 'decisions' | 'workflows' | 'contexts' | 'sessions';
+export type PatternCategory = 'commands' | 'decisions' | 'workflows' | 'contexts' | 'sessions' | 'events';
 
 // Base pattern structure
 export interface Pattern {
