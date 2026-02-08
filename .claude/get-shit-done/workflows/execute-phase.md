@@ -13,15 +13,13 @@ Read STATE.md before any operation to load project context.
 <process>
 
 <step name="initialize" priority="first">
-Load all context in one call (include file contents to avoid redundant reads):
+Load all context in one call:
 
 ```bash
-INIT=$(node ./.claude/get-shit-done/bin/gsd-tools.js init execute-phase "${PHASE_ARG}" --include state,config)
+INIT=$(node ./.claude/get-shit-done/bin/gsd-tools.js init execute-phase "${PHASE_ARG}")
 ```
 
 Parse JSON for: `executor_model`, `verifier_model`, `commit_docs`, `parallelization`, `branching_strategy`, `branch_name`, `phase_found`, `phase_dir`, `phase_number`, `phase_name`, `phase_slug`, `plans`, `incomplete_plans`, `plan_count`, `incomplete_count`, `state_exists`, `roadmap_exists`.
-
-**File contents (from --include):** `state_content`, `config_content`. These are null if files don't exist.
 
 **If `phase_found` is false:** Error — phase directory not found.
 **If `plan_count` is 0:** Error — no plans found in phase.
@@ -96,55 +94,76 @@ Execute each wave in sequence. Within a wave: parallel if `PARALLELIZATION=true`
    - Bad: "Executing terrain generation plan"
    - Good: "Procedural terrain generator using Perlin noise — creates height maps, biome zones, and collision meshes. Required before vehicle physics can interact with ground."
 
-2. **Read files and spawn agents:**
+2. **Spawn executor agents:**
 
-   Content must be inlined — `@` syntax doesn't work across Task() boundaries.
-   STATE and CONFIG are already loaded via `--include` in initialize step.
-
-   ```bash
-   PLAN_CONTENT=$(cat "{plan_path}")
-   # Use state_content and config_content from INIT (no need to re-read)
-   STATE_CONTENT=$(echo "$INIT" | jq -r '.state_content // empty')
-   CONFIG_CONTENT=$(echo "$INIT" | jq -r '.config_content // empty')
-   ```
-
-   Each agent prompt:
+   Pass paths only — executors read files themselves with their fresh 200k context.
+   This keeps orchestrator context lean (~10-15%).
 
    ```
-   <objective>
-   Execute plan {plan_number} of phase {phase_number}-{phase_name}.
-   Commit each task atomically. Create SUMMARY.md. Update STATE.md.
-   </objective>
+   Task(
+     subagent_type="gsd-executor",
+     model="{executor_model}",
+     prompt="
+       <objective>
+       Execute plan {plan_number} of phase {phase_number}-{phase_name}.
+       Commit each task atomically. Create SUMMARY.md. Update STATE.md.
+       </objective>
 
-   <execution_context>
-   @./.claude/get-shit-done/workflows/execute-plan.md
-   @./.claude/get-shit-done/templates/summary.md
-   @./.claude/get-shit-done/references/checkpoints.md
-   @./.claude/get-shit-done/references/tdd.md
-   </execution_context>
+       <execution_context>
+       @./.claude/get-shit-done/workflows/execute-plan.md
+       @./.claude/get-shit-done/templates/summary.md
+       @./.claude/get-shit-done/references/checkpoints.md
+       @./.claude/get-shit-done/references/tdd.md
+       </execution_context>
 
-   <context>
-   Plan:
-   {plan_content}
+       <files_to_read>
+       Read these files at execution start using the Read tool:
+       - Plan: {phase_dir}/{plan_file}
+       - State: .planning/STATE.md
+       - Config: .planning/config.json (if exists)
+       </files_to_read>
 
-   Project state:
-   {state_content}
-
-   Config (if exists):
-   {config_content}
-   </context>
-
-   <success_criteria>
-   - [ ] All tasks executed
-   - [ ] Each task committed individually
-   - [ ] SUMMARY.md created in plan directory
-   - [ ] STATE.md updated with position and decisions
-   </success_criteria>
+       <success_criteria>
+       - [ ] All tasks executed
+       - [ ] Each task committed individually
+       - [ ] SUMMARY.md created in plan directory
+       - [ ] STATE.md updated with position and decisions
+       </success_criteria>
+     "
+   )
    ```
 
-3. **Wait for all agents in wave to complete.**
+3. **Skill Injection (Phase 56):**
 
-4. **Report completion — spot-check claims first:**
+   Before spawning each executor agent, resolve the plan's declared capabilities:
+
+   1. Read plan frontmatter `capabilities` field
+   2. If plan has no `capabilities` field, inherit from phase (read `capabilitiesByPhase` from roadmap parser)
+   3. Filter to `use` and `adapt` verbs only
+   4. For each capability reference:
+      - `skill/name` -> read from `.claude/skills/name/SKILL.md` (project scope first, then user scope)
+      - `agent/name` -> read from `.claude/agents/name.md`
+   5. Include resolved content in the executor prompt inside `<injected_skills>` tags:
+
+      ```xml
+      <injected_skills>
+      <!-- Auto-injected based on plan capabilities field -->
+      ## skill/beautiful-commits
+      [Full skill content here]
+
+      ## agent/gsd-verifier
+      [Full agent content here]
+      </injected_skills>
+      ```
+
+   6. If a capability cannot be resolved (file not found), log a warning but do not fail the execution
+   7. Injected skills get `critical` budget tier — they load before auto-activated skills
+
+   **Budget interaction:** The total estimated tokens from injected skills should be considered when evaluating the executor's context budget. Injected skills bypass the pipeline's ScoreStage (they are deterministic, not relevance-scored).
+
+4. **Wait for all agents in wave to complete.**
+
+5. **Report completion — spot-check claims first:**
 
    For each SUMMARY.md:
    - Verify first 2 files from `key-files.created` exist on disk
@@ -169,11 +188,15 @@ Execute each wave in sequence. Within a wave: parallel if `PARALLELIZATION=true`
    - Bad: "Wave 2 complete. Proceeding to Wave 3."
    - Good: "Terrain system complete — 3 biome types, height-based texturing, physics collision meshes. Vehicle physics (Wave 3) can now reference ground surfaces."
 
-5. **Handle failures:** Report which plan failed → ask "Continue?" or "Stop?" → if continue, dependent plans may also fail. If stop, partial completion report.
+6. **Handle failures:**
 
-6. **Execute checkpoint plans between waves** — see `<checkpoint_handling>`.
+   **Known Claude Code bug (classifyHandoffIfNeeded):** If an agent reports "failed" with error containing `classifyHandoffIfNeeded is not defined`, this is a Claude Code runtime bug — not a GSD or agent issue. The error fires in the completion handler AFTER all tool calls finish. In this case: run the same spot-checks as step 5 (SUMMARY.md exists, git commits present, no Self-Check: FAILED). If spot-checks PASS → treat as **successful**. If spot-checks FAIL → treat as real failure below.
 
-7. **Proceed to next wave.**
+   For real failures: report which plan failed → ask "Continue?" or "Stop?" → if continue, dependent plans may also fail. If stop, partial completion report.
+
+7. **Execute checkpoint plans between waves** — see `<checkpoint_handling>`.
+
+8. **Proceed to next wave.**
 </step>
 
 <step name="checkpoint_handling">
@@ -329,6 +352,7 @@ Orchestrator: ~10-15% context. Subagents: fresh 200k each. No polling (Task bloc
 </context_efficiency>
 
 <failure_handling>
+- **classifyHandoffIfNeeded false failure:** Agent reports "failed" but error is `classifyHandoffIfNeeded is not defined` → Claude Code bug, not GSD. Spot-check (SUMMARY exists, commits present) → if pass, treat as success
 - **Agent fails mid-plan:** Missing SUMMARY.md → report, ask user how to proceed
 - **Dependency chain breaks:** Wave 1 fails → Wave 2 dependents likely fail → user chooses attempt or skip
 - **All agents in wave fail:** Systemic issue → stop, report for investigation
