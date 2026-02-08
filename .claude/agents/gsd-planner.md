@@ -345,6 +345,11 @@ wave: N                     # Execution wave (1, 2, 3...)
 depends_on: []              # Plan IDs this plan requires
 files_modified: []          # Files this plan touches
 autonomous: true            # false if plan has checkpoints
+capabilities:                # Optional: inherited from phase if phase declares them
+  use:                       # Skills/agents/teams this plan needs injected
+    - skill/name
+  create:                    # New capabilities this plan scaffolds
+    - skill/new-skill
 user_setup: []              # Human-required setup (omit if empty)
 
 must_haves:
@@ -411,6 +416,7 @@ After completion, create `.planning/phases/XX-name/{phase}-{plan}-SUMMARY.md`
 | `files_modified` | Yes | Files this plan touches |
 | `autonomous` | Yes | `true` if no checkpoints |
 | `user_setup` | No | Human-required setup items |
+| `capabilities` | No | Capability declarations for this plan (use/create/after/adapt verbs) |
 | `must_haves` | Yes | Goal-backward verification criteria |
 
 Wave numbers are pre-computed during planning. Execute-phase reads `wave` directly from frontmatter.
@@ -440,6 +446,82 @@ user_setup:
 Only include what Claude literally cannot do.
 
 </plan_format>
+
+<capability_inheritance>
+
+## Capability Inheritance in Plans
+
+When ROADMAP.md phase detail sections declare capabilities (e.g., `**Capabilities**: use: skill/beautiful-commits`), the planner agent must propagate these into plan frontmatter.
+
+### How It Works
+
+**Step 1: Read capabilitiesByPhase from roadmap-parser output.**
+
+During the `gather_phase_context` step, after reading ROADMAP.md, check if `parseRoadmap()` output includes `capabilitiesByPhase`. This is a `Record<string, CapabilityRef[]>` mapping phase numbers to their declared capabilities.
+
+```typescript
+// Conceptual -- the planner reads ROADMAP.md and the parser provides this
+const parsed = parseRoadmap(roadmapContent);
+const phaseCapabilities = parsed?.capabilitiesByPhase?.[phaseNumber] ?? [];
+```
+
+If the current phase has no entry in `capabilitiesByPhase`, skip capability assignment entirely (no `capabilities` field in plan frontmatter).
+
+**Step 2: Assign capabilities to each plan.**
+
+For each plan being created:
+- If the plan needs ONLY A SUBSET of the phase capabilities (e.g., Plan 01 uses skill/X but not skill/Y), include only the relevant capabilities in that plan's frontmatter.
+- Group by verb in the frontmatter for readability:
+
+```yaml
+capabilities:
+  use:
+    - skill/beautiful-commits
+    - agent/gsd-executor
+  create:
+    - skill/new-generated-skill
+```
+
+**Step 3: Inheritance rule -- plans without explicit capabilities inherit all.**
+
+If you cannot determine which specific capabilities a plan needs (or ALL capabilities apply to all plans), OMIT the `capabilities` field from individual plans. The downstream consumer (Phase 56 skill injection) treats a missing `capabilities` field as "inherit all from parent phase."
+
+This means:
+- Plan WITH `capabilities` field = selective override (only listed capabilities apply)
+- Plan WITHOUT `capabilities` field = inherits everything from parent phase
+
+### Example: Selective Assignment
+
+Phase declares: `use: skill/beautiful-commits, skill/typescript-patterns, agent/gsd-executor`
+
+```yaml
+# Plan 01 -- only needs the code patterns skill
+capabilities:
+  use:
+    - skill/typescript-patterns
+
+# Plan 02 -- needs commits skill and executor agent
+capabilities:
+  use:
+    - skill/beautiful-commits
+    - agent/gsd-executor
+
+# Plan 03 -- inherits all (capabilities field omitted)
+# Downstream treats this as: use all 3 capabilities from phase
+```
+
+### When to Use Selective Assignment
+
+- When plans have clearly distinct concerns (e.g., Plan 01 = tests, Plan 02 = implementation, Plan 03 = docs)
+- When a capability is only relevant to one plan (e.g., `create: skill/new-thing` only in the plan that scaffolds it)
+
+### When to Omit (Use Inheritance)
+
+- When all plans in the phase use the same capabilities
+- When you are unsure which plan needs which capability
+- When the phase has few capabilities (1-2) and splitting adds no value
+
+</capability_inheritance>
 
 <goal_backward>
 
@@ -999,6 +1081,34 @@ Use template structure for each PLAN.md.
 Write to `.planning/phases/XX-name/{phase}-{NN}-PLAN.md`
 
 Include all frontmatter fields.
+</step>
+
+<step name="validate_plan">
+Validate each created PLAN.md using gsd-tools:
+
+```bash
+VALID=$(node ./.claude/get-shit-done/bin/gsd-tools.js frontmatter validate "$PLAN_PATH" --schema plan)
+```
+
+Returns JSON: `{ valid, missing, present, schema }`
+
+**If `valid=false`:** Fix missing required fields before proceeding.
+
+Required plan frontmatter fields:
+- `phase`, `plan`, `type`, `wave`, `depends_on`, `files_modified`, `autonomous`, `must_haves`
+
+Also validate plan structure:
+
+```bash
+STRUCTURE=$(node ./.claude/get-shit-done/bin/gsd-tools.js verify plan-structure "$PLAN_PATH")
+```
+
+Returns JSON: `{ valid, errors, warnings, task_count, tasks }`
+
+**If errors exist:** Fix before committing:
+- Missing `<name>` in task → add name element
+- Missing `<action>` → add action element
+- Checkpoint/autonomous mismatch → update `autonomous: false`
 </step>
 
 <step name="update_roadmap">
