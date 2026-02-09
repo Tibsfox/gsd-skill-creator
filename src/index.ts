@@ -203,6 +203,12 @@ export type {
   ConflictResult,
   TokenTracking,
   ApplicationConfig,
+  PriorityTier,
+  SkippedSkill,
+  BudgetWarning,
+  BudgetProfile,
+  ModelTier,
+  ModelGuidance,
 } from './types/application.js';
 
 // Learning module
@@ -268,6 +274,35 @@ export type { SkillLoadResult, SessionReport } from './application/skill-session
 export { SkillApplicator } from './application/skill-applicator.js';
 export type { ApplyResult, InvokeResult } from './application/skill-applicator.js';
 
+// Pipeline infrastructure (Phase 52)
+export { SkillPipeline, createEmptyContext } from './application/skill-pipeline.js';
+export type { PipelineStage, PipelineContext } from './application/skill-pipeline.js';
+export { ScoreStage, ResolveStage, LoadStage, BudgetStage, CacheOrderStage, ModelFilterStage, DEFAULT_CACHE_TIER } from './application/stages/index.js';
+export type { CacheTier } from './application/stages/index.js';
+
+// Budget profiles (Phase 53)
+export { DEFAULT_PROFILES, getBudgetProfile, getTierForSkill } from './application/budget-profiles.js';
+
+// Capabilities module (Phase 54)
+export { CapabilityDiscovery, renderManifest, computeContentHash } from './capabilities/index.js';
+export type { CapabilityManifest, SkillCapability, AgentCapability, TeamCapability } from './capabilities/index.js';
+
+// Skill injection and scaffolding (Phase 56)
+export { SkillInjector, CapabilityScaffolder } from './capabilities/index.js';
+export type { InjectionRequest, InjectedSkill, InjectionResult, ScaffoldTask } from './capabilities/index.js';
+
+// Research compression (Phase 58)
+export { ResearchCompressor, StalenessChecker } from './capabilities/index.js';
+export type { CompressedResearch, CompressionOptions, StalenessResult, ConflictResolution } from './capabilities/index.js';
+
+// Post-phase invocation and collector agents (Phase 60)
+export { PostPhaseInvoker, CollectorAgentGenerator, COLLECTOR_TOOLS } from './capabilities/index.js';
+export type { InvocationRequest, InvocationInstruction, InvocationResult, CollectorAgentConfig, CollectorAgentResult } from './capabilities/index.js';
+
+// Parallelization advisor (Phase 61)
+export { ParallelizationAdvisor } from './capabilities/index.js';
+export type { PlanDependencyInfo, WaveAssignment, AdvisoryReport } from './capabilities/index.js';
+
 // Simulation module
 export {
   ActivationSimulator,
@@ -329,13 +364,15 @@ export type {
 
 // Import applicator for factory
 import { SkillApplicator } from './application/skill-applicator.js';
-import type { ApplicationConfig } from './types/application.js';
+import type { ApplicationConfig, BudgetProfile } from './types/application.js';
 
 // Enhanced factory that includes applicator
 export function createApplicationContext(options?: {
   patternsDir?: string;
   skillsDir?: string;
   config?: Partial<ApplicationConfig>;
+  budgetProfile?: BudgetProfile;
+  modelProfile?: string;
 }) {
   const stores = createStores({
     patternsDir: options?.patternsDir,
@@ -345,7 +382,9 @@ export function createApplicationContext(options?: {
   const applicator = new SkillApplicator(
     stores.skillIndex,
     stores.skillStore,
-    options?.config
+    options?.config,
+    options?.budgetProfile,
+    options?.modelProfile
   );
 
   return {

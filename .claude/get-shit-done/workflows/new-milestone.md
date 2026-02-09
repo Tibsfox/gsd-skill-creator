@@ -88,6 +88,16 @@ AskUserQuestion: "Research the domain ecosystem for new features before defining
 - "Research first (Recommended)" — Discover patterns, features, architecture for NEW capabilities
 - "Skip research" — Go straight to requirements
 
+**Persist choice to config** (so future `/gsd:plan-phase` honors it):
+
+```bash
+# If "Research first": persist true
+node ./.claude/get-shit-done/bin/gsd-tools.js config-set workflow.research true
+
+# If "Skip research": persist false
+node ./.claude/get-shit-done/bin/gsd-tools.js config-set workflow.research false
+```
+
 **If "Research first":**
 
 ```
@@ -316,6 +326,18 @@ node ./.claude/get-shit-done/bin/gsd-tools.js commit "docs: create milestone v[X
 
 ## 11. Done
 
+**Generate capability manifest:**
+
+```bash
+npx skill-creator capabilities generate
+```
+
+**Commit CAPABILITIES.md:**
+
+```bash
+node ./.claude/get-shit-done/bin/gsd-tools.js commit "docs: generate capability manifest" --files .planning/CAPABILITIES.md
+```
+
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  GSD ► MILESTONE INITIALIZED ✓
@@ -329,6 +351,7 @@ node ./.claude/get-shit-done/bin/gsd-tools.js commit "docs: create milestone v[X
 | Research       | `.planning/research/`       |
 | Requirements   | `.planning/REQUIREMENTS.md` |
 | Roadmap        | `.planning/ROADMAP.md`      |
+| Capabilities   | `.planning/CAPABILITIES.md` |
 
 **[N] phases** | **[X] requirements** | Ready to build ✓
 

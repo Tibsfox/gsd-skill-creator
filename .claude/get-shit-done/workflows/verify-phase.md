@@ -46,15 +46,22 @@ Extract **phase goal** from ROADMAP.md (the outcome to verify, not tasks) and **
 <step name="establish_must_haves">
 **Option A: Must-haves in PLAN frontmatter**
 
+Use gsd-tools to extract must_haves from each PLAN:
+
 ```bash
-grep -l "must_haves:" "$PHASE_DIR"/*-PLAN.md 2>/dev/null
+for plan in "$PHASE_DIR"/*-PLAN.md; do
+  MUST_HAVES=$(node ./.claude/get-shit-done/bin/gsd-tools.js frontmatter get "$plan" --field must_haves)
+  echo "=== $plan ===" && echo "$MUST_HAVES"
+done
 ```
 
-If found, extract truths, artifacts (with paths), and key_links (from/to/via).
+Returns JSON: `{ truths: [...], artifacts: [...], key_links: [...] }`
+
+Aggregate all must_haves across plans for phase-level verification.
 
 **Option B: Derive from phase goal**
 
-If no must_haves in frontmatter:
+If no must_haves in frontmatter (MUST_HAVES returns error or empty):
 1. State the goal from ROADMAP.md
 2. Derive **truths** (3-7 observable behaviors, each testable)
 3. Derive **artifacts** (concrete file paths for each truth)
@@ -73,20 +80,28 @@ For each truth: identify supporting artifacts → check artifact status → chec
 </step>
 
 <step name="verify_artifacts">
-For each required artifact, verify three levels:
+Use gsd-tools for artifact verification against must_haves in each PLAN:
 
-**Level 1 — Existence:** File/directory exists. If MISSING → record and continue.
+```bash
+for plan in "$PHASE_DIR"/*-PLAN.md; do
+  ARTIFACT_RESULT=$(node ./.claude/get-shit-done/bin/gsd-tools.js verify artifacts "$plan")
+  echo "=== $plan ===" && echo "$ARTIFACT_RESULT"
+done
+```
 
-**Level 2 — Substantive:** Real implementation, not a stub.
-- Line minimums: Component 15+, API route 10+, Hook/util 10+, Schema 5+
-- Stub detection: `TODO|FIXME|placeholder|not implemented|coming soon`, empty returns (`return null|return {}|return []`), placeholder content
-- Export check: `export (default )?(function|const|class)` exists
-- SUBSTANTIVE = adequate length + no stubs + has exports. STUB = too short OR stub patterns OR no exports. PARTIAL = mixed.
+Parse JSON result: `{ all_passed, passed, total, artifacts: [{path, exists, issues, passed}] }`
 
-**Level 3 — Wired:** Connected to the system.
-- Import: `grep -r "import.*$artifact_name" src/ --include="*.ts" --include="*.tsx"` → IMPORTED
-- Usage: same grep excluding import lines → USED
-- WIRED = imported AND used. ORPHANED = exists but not imported/used. PARTIAL = imported but unused.
+**Artifact status from result:**
+- `exists=false` → MISSING
+- `issues` not empty → STUB (check issues for "Only N lines" or "Missing pattern")
+- `passed=true` → VERIFIED (Levels 1-2 pass)
+
+**Level 3 — Wired (manual check for artifacts that pass Levels 1-2):**
+```bash
+grep -r "import.*$artifact_name" src/ --include="*.ts" --include="*.tsx"  # IMPORTED
+grep -r "$artifact_name" src/ --include="*.ts" --include="*.tsx" | grep -v "import"  # USED
+```
+WIRED = imported AND used. ORPHANED = exists but not imported/used.
 
 | Exists | Substantive | Wired | Status |
 |--------|-------------|-------|--------|
@@ -97,7 +112,23 @@ For each required artifact, verify three levels:
 </step>
 
 <step name="verify_wiring">
-Key links are critical connections — if broken, goal fails even with all artifacts present.
+Use gsd-tools for key link verification against must_haves in each PLAN:
+
+```bash
+for plan in "$PHASE_DIR"/*-PLAN.md; do
+  LINKS_RESULT=$(node ./.claude/get-shit-done/bin/gsd-tools.js verify key-links "$plan")
+  echo "=== $plan ===" && echo "$LINKS_RESULT"
+done
+```
+
+Parse JSON result: `{ all_verified, verified, total, links: [{from, to, via, verified, detail}] }`
+
+**Link status from result:**
+- `verified=true` → WIRED
+- `verified=false` with "not found" → NOT_WIRED
+- `verified=false` with "Pattern not found" → PARTIAL
+
+**Fallback patterns (if key_links not in must_haves):**
 
 | Pattern | Check | Status |
 |---------|-------|--------|
@@ -149,6 +180,37 @@ Format each as: Test Name → What to do → Expected result → Why can't verif
 **Score:** `verified_truths / total_truths`
 </step>
 
+<step name="post_phase_invocation">
+Check if the phase declares any `after` verb capabilities. This step only runs when status is `passed`.
+
+```bash
+# Read phase capabilities from ROADMAP.md
+PHASE_LINES=$(node ./.claude/get-shit-done/bin/gsd-tools.js roadmap get-phase "${phase_number}")
+```
+
+Look for `after:` verb in the phase's Capabilities declaration. If found:
+
+1. Parse capability references using parseCapabilityDeclarations from the phase lines
+2. Filter to `after` verb only
+3. For each after-verb reference, report the invocation instruction:
+
+```
+## Post-Phase Hooks
+
+The following capabilities are triggered by this phase's completion:
+
+| Capability | Type | Action |
+|------------|------|--------|
+| {name} | {type} | Invoke after verification passes |
+```
+
+4. Include invocation instructions in the VERIFICATION.md report under a "## Post-Phase Hooks" section
+5. If after-verb capabilities reference skills: note that the skill should be loaded into the next context
+6. If after-verb capabilities reference agents: note that the agent should be spawned as a subagent
+
+**Important:** After-verb hooks fire ONLY when verification status is `passed`. If status is `gaps_found` or `human_needed`, hooks are deferred until gaps are closed.
+</step>
+
 <step name="generate_fix_plans">
 If gaps_found:
 
@@ -175,7 +237,9 @@ Return status (`passed` | `gaps_found` | `human_needed`), score (N/M must-haves)
 If gaps_found: list gaps + recommended fix plan names.
 If human_needed: list items requiring human testing.
 
-Orchestrator routes: `passed` → update_roadmap | `gaps_found` → create/execute fixes, re-verify | `human_needed` → present to user.
+If `passed` and after-hooks exist: list invocation instructions for orchestrator to execute.
+
+Orchestrator routes: `passed` → update_roadmap (+ execute after-hooks if any) | `gaps_found` → create/execute fixes, re-verify | `human_needed` → present to user.
 </step>
 
 </process>
@@ -190,6 +254,7 @@ Orchestrator routes: `passed` → update_roadmap | `gaps_found` → create/execu
 - [ ] Human verification items identified
 - [ ] Overall status determined
 - [ ] Fix plans generated (if gaps_found)
+- [ ] Post-phase invocation hooks checked (if applicable)
 - [ ] VERIFICATION.md created with complete report
 - [ ] Results returned to orchestrator
 </success_criteria>

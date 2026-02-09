@@ -9,7 +9,10 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/cli.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "setup:claude": "node project-claude/install.cjs",
+    "setup:claude:force": "node project-claude/install.cjs --force",
+    "setup:claude:check": "node project-claude/install.cjs --dry-run"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.72.1",
