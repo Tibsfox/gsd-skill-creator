@@ -1,0 +1,254 @@
+{
+  "version": 1,
+  "project": "gsd-skill-creator",
+  "description": "Project-specific .claude files that extend GSD framework",
+  "files": {
+    "standalone": [
+      {
+        "source": "agents/gsd-orchestrator.md",
+        "target": ".claude/agents/gsd-orchestrator.md",
+        "description": "GSD master routing agent"
+      },
+      {
+        "source": "skills/beautiful-commits/SKILL.md",
+        "target": ".claude/skills/beautiful-commits/SKILL.md",
+        "description": "Beautiful commits skill (extends git-commit)"
+      },
+      {
+        "source": "skills/git-commit/SKILL.md",
+        "target": ".claude/skills/git-commit/SKILL.md",
+        "description": "Git commit base skill"
+      },
+      {
+        "source": "skills/file-operation-patterns/SKILL.md",
+        "target": ".claude/skills/file-operation-patterns/SKILL.md",
+        "description": "File operation patterns skill"
+      },
+      {
+        "source": "skills/code-review/SKILL.md",
+        "target": ".claude/skills/code-review/SKILL.md",
+        "description": "Code review skill"
+      },
+      {
+        "source": "skills/context-handoff/SKILL.md",
+        "target": ".claude/skills/context-handoff/SKILL.md",
+        "description": "Context handoff skill"
+      },
+      {
+        "source": "skills/decision-framework/SKILL.md",
+        "target": ".claude/skills/decision-framework/SKILL.md",
+        "description": "Decision framework skill"
+      },
+      {
+        "source": "skills/gsd-explain/SKILL.md",
+        "target": ".claude/skills/gsd-explain/SKILL.md",
+        "description": "GSD explain skill"
+      },
+      {
+        "source": "skills/gsd-preflight/SKILL.md",
+        "target": ".claude/skills/gsd-preflight/SKILL.md",
+        "description": "GSD preflight skill"
+      },
+      {
+        "source": "skills/gsd-onboard/SKILL.md",
+        "target": ".claude/skills/gsd-onboard/SKILL.md",
+        "description": "GSD onboard skill"
+      },
+      {
+        "source": "skills/gsd-trace/SKILL.md",
+        "target": ".claude/skills/gsd-trace/SKILL.md",
+        "description": "GSD trace skill"
+      },
+      {
+        "source": "commands/beautiful-commits.md",
+        "target": ".claude/commands/beautiful-commits.md",
+        "description": "Beautiful commits command"
+      },
+      {
+        "source": "commands/git-commit.md",
+        "target": ".claude/commands/git-commit.md",
+        "description": "Git commit command"
+      },
+      {
+        "source": "commands/file-operation-patterns.md",
+        "target": ".claude/commands/file-operation-patterns.md",
+        "description": "File operation patterns command"
+      },
+      {
+        "source": "commands/code-review.md",
+        "target": ".claude/commands/code-review.md",
+        "description": "Code review command"
+      },
+      {
+        "source": "commands/context-handoff.md",
+        "target": ".claude/commands/context-handoff.md",
+        "description": "Context handoff command"
+      },
+      {
+        "source": "commands/decision-framework.md",
+        "target": ".claude/commands/decision-framework.md",
+        "description": "Decision framework command"
+      },
+      {
+        "source": "commands/gsd-explain.md",
+        "target": ".claude/commands/gsd-explain.md",
+        "description": "GSD explain command"
+      },
+      {
+        "source": "commands/gsd-preflight.md",
+        "target": ".claude/commands/gsd-preflight.md",
+        "description": "GSD preflight command"
+      },
+      {
+        "source": "commands/gsd-onboard.md",
+        "target": ".claude/commands/gsd-onboard.md",
+        "description": "GSD onboard command"
+      },
+      {
+        "source": "commands/gsd-trace.md",
+        "target": ".claude/commands/gsd-trace.md",
+        "description": "GSD trace command"
+      },
+      {
+        "source": "hooks/gsd-inject-snapshot.js",
+        "target": ".claude/hooks/gsd-inject-snapshot.js",
+        "description": "Session start: inject latest snapshot"
+      },
+      {
+        "source": "hooks/gsd-inject-snapshot.test.ts",
+        "target": ".claude/hooks/gsd-inject-snapshot.test.ts",
+        "description": "Test for inject snapshot hook"
+      },
+      {
+        "source": "hooks/gsd-restore-work-state.js",
+        "target": ".claude/hooks/gsd-restore-work-state.js",
+        "description": "Session start: restore work state"
+      },
+      {
+        "source": "hooks/gsd-restore-work-state.test.ts",
+        "target": ".claude/hooks/gsd-restore-work-state.test.ts",
+        "description": "Test for restore work state hook"
+      },
+      {
+        "source": "hooks/gsd-save-work-state.js",
+        "target": ".claude/hooks/gsd-save-work-state.js",
+        "description": "Session end: save work state"
+      },
+      {
+        "source": "hooks/gsd-save-work-state.test.ts",
+        "target": ".claude/hooks/gsd-save-work-state.test.ts",
+        "description": "Test for save work state hook"
+      },
+      {
+        "source": "hooks/gsd-snapshot-session.js",
+        "target": ".claude/hooks/gsd-snapshot-session.js",
+        "description": "Session end: generate session snapshot"
+      },
+      {
+        "source": "hooks/gsd-snapshot-session.test.ts",
+        "target": ".claude/hooks/gsd-snapshot-session.test.ts",
+        "description": "Test for snapshot session hook"
+      },
+      {
+        "source": "teams/gsd-debug-team/config.json",
+        "target": ".claude/teams/gsd-debug-team/config.json",
+        "description": "GSD adversarial debugging team"
+      },
+      {
+        "source": "teams/gsd-research-team/config.json",
+        "target": ".claude/teams/gsd-research-team/config.json",
+        "description": "GSD parallel research team"
+      },
+      {
+        "source": "skills/test-generator/SKILL.md",
+        "target": ".claude/skills/test-generator/SKILL.md",
+        "description": "Test generator skill (GSD example)"
+      },
+      {
+        "source": "skills/typescript-patterns/SKILL.md",
+        "target": ".claude/skills/typescript-patterns/SKILL.md",
+        "description": "TypeScript patterns skill (GSD example)"
+      },
+      {
+        "source": "skills/api-design/SKILL.md",
+        "target": ".claude/skills/api-design/SKILL.md",
+        "description": "API design skill (GSD example)"
+      },
+      {
+        "source": "skills/env-setup/SKILL.md",
+        "target": ".claude/skills/env-setup/SKILL.md",
+        "description": "Environment setup skill (GSD example)"
+      },
+      {
+        "source": "commands/test-generator.md",
+        "target": ".claude/commands/test-generator.md",
+        "description": "Test generator command (GSD example)"
+      },
+      {
+        "source": "commands/typescript-patterns.md",
+        "target": ".claude/commands/typescript-patterns.md",
+        "description": "TypeScript patterns command (GSD example)"
+      },
+      {
+        "source": "commands/api-design.md",
+        "target": ".claude/commands/api-design.md",
+        "description": "API design command (GSD example)"
+      },
+      {
+        "source": "commands/env-setup.md",
+        "target": ".claude/commands/env-setup.md",
+        "description": "Environment setup command (GSD example)"
+      },
+      {
+        "source": "agents/codebase-navigator.md",
+        "target": ".claude/agents/codebase-navigator.md",
+        "description": "Codebase navigator agent (GSD example)"
+      },
+      {
+        "source": "agents/changelog-generator.md",
+        "target": ".claude/agents/changelog-generator.md",
+        "description": "Changelog generator agent (GSD example)"
+      },
+      {
+        "source": "agents/doc-linter.md",
+        "target": ".claude/agents/doc-linter.md",
+        "description": "Documentation linter agent (GSD example)"
+      },
+      {
+        "source": "teams/code-review-team/config.json",
+        "target": ".claude/teams/code-review-team/config.json",
+        "description": "Code review team (GSD example)"
+      },
+      {
+        "source": "teams/doc-generation-team/config.json",
+        "target": ".claude/teams/doc-generation-team/config.json",
+        "description": "Documentation generation team (GSD example)"
+      }
+    ],
+    "extensions": [
+      {
+        "source": "extensions/gsd-executor--injected-skills.md",
+        "target": ".claude/agents/gsd-executor.md",
+        "marker": "PROJECT:gsd-skill-creator:injected-skills",
+        "description": "Injected skills protocol for executor agent"
+      },
+      {
+        "source": "extensions/gsd-planner--capability-inheritance.md",
+        "target": ".claude/agents/gsd-planner.md",
+        "marker": "PROJECT:gsd-skill-creator:capability-inheritance",
+        "description": "Capability inheritance for planner agent"
+      }
+    ],
+    "settings": {
+      "source": "settings.json",
+      "target": ".claude/settings.json",
+      "description": "Hook registrations (merged with existing)",
+      "projectHooks": [
+        "gsd-inject-snapshot",
+        "gsd-restore-work-state",
+        "gsd-save-work-state",
+        "gsd-snapshot-session"
+      ]
+    }
+  }
+}
