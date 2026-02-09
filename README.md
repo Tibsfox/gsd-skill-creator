@@ -53,6 +53,12 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **13. Skill Roles** | Behavioral constraints and tool scoping for agent personas (v1.7) |
 | **14. Work Bundles** | Project-phase skill sets with progress tracking and auto-suggestion (v1.7) |
 | **15. Inter-Skill Events** | Event emit/listen system enabling causal activation chains (v1.7) |
+| **16. Skill Pipeline** | Composable pipeline architecture with pluggable stages replacing monolithic skill loading (v1.8) |
+| **17. Token Budgets** | Per-agent token budget profiles with critical/standard/optional priority tiers (v1.8) |
+| **18. Capability Planning** | Auto-generated capability manifests, phase declarations, and skill injection into executors (v1.8) |
+| **19. Cache Optimization** | Cache-aware skill ordering with cacheTier metadata for prompt cache efficiency (v1.8) |
+| **20. Research Compression** | 10-20x research document reduction with staleness detection (v1.8) |
+| **21. Parallelization Advisor** | Wave-based parallel execution recommendations from plan dependency analysis (v1.8) |
 
 ### Version History
 
@@ -66,6 +72,7 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.5** | Pattern Discovery: session log scanning, tool sequence extraction, DBSCAN clustering, draft generation |
 | **v1.6** | 34 cross-domain examples (20 skills, 8 agents, 3 teams), local installation, beautiful-commits skill |
 | **v1.7** | GSD Master Orchestration Agent: dynamic discovery, intent classification, lifecycle coordination, verbosity/HITL gates, persistent work state, session continuity, skill workflows, roles, bundles, inter-skill events |
+| **v1.8** | Capability-Aware Planning + Token Efficiency: skill pipeline architecture, per-agent token budgets, capability manifests, phase capability declarations, skill injection, cache-aware ordering, research compression, model-aware activation, collector agents, parallelization advisor |
 
 ---
 
@@ -399,6 +406,25 @@ skill-creator event suggest                             # Suggest connections
 skill-creator work-state save --task "implementing auth" --skills "typescript-patterns"
 skill-creator work-state load                           # Restore previous state
 skill-creator snapshot latest --format=context           # Get context for new session
+```
+
+### Capability Planning & Token Efficiency (v1.8)
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `budget-estimate` | `be` | Show token budget estimates per agent profile |
+| `capabilities` | `cap` | Generate or show capability manifest (CAPABILITIES.md) |
+| `compress-research` | `cr` | Compress research files to distilled skill files |
+| `generate-collector` | `gc` | Generate a read-only collector agent |
+| `advise-parallelization` | `ap` | Analyze plan dependencies for parallel execution |
+
+**Examples:**
+```bash
+skill-creator budget-estimate                    # Show budget estimates for all agent profiles
+skill-creator capabilities                       # Generate CAPABILITIES.md from available skills/agents/teams
+skill-creator compress-research research.md      # Compress a research file (10-20x reduction)
+skill-creator generate-collector my-context      # Generate a read-only collector agent
+skill-creator advise-parallelization 52-01-PLAN.md  # Analyze plan for parallel execution waves
 ```
 
 ### Quality & Validation
@@ -1199,11 +1225,14 @@ src/
 │   ├── list-skills-workflow.ts    # List skills
 │   └── search-skills-workflow.ts  # Search skills
 │
-├── application/       # Skill application
+├── application/       # Skill application + pipeline (v1.8)
 │   ├── relevance-scorer.ts    # Score skill relevance
 │   ├── conflict-resolver.ts   # Resolve skill conflicts
 │   ├── skill-session.ts       # Manage active skills
-│   └── skill-applicator.ts    # Apply skills to context
+│   ├── skill-applicator.ts    # Apply skills to context
+│   ├── skill-pipeline.ts      # Composable pipeline with pluggable stages (v1.8)
+│   ├── budget-profiles.ts     # Per-agent budget configurations (v1.8)
+│   └── token-counter.ts       # Token counting utilities (v1.8)
 │
 ├── observation/       # Session observation
 │   ├── transcript-parser.ts   # Parse session transcripts
@@ -1383,6 +1412,19 @@ src/
 │   ├── event-boost.ts         # Relevance score boosting
 │   ├── event-suggester.ts     # Co-activation event suggestions
 │   └── cli.ts                 # Event CLI subcommands
+│
+├── application/stages/ # Pipeline stages (v1.8)
+│   ├── budget-stage.ts        # Tiered token budget enforcement
+│   ├── cache-order-stage.ts   # Cache-aware skill reordering
+│   └── model-filter-stage.ts  # Model-aware activation filtering
+│
+├── capabilities/      # Capability-aware planning (v1.8)
+│   ├── manifest-renderer.ts   # CAPABILITIES.md generation
+│   ├── manifest-parser.ts     # CAPABILITIES.md parsing
+│   ├── research-compressor.ts # 10-20x research compression
+│   ├── post-phase-invoker.ts  # After-verb auto-invocation
+│   ├── collector-agent-generator.ts # Read-only agent generation
+│   └── parallelization-advisor.ts   # Wave-based execution planning
 │
 ├── cli.ts             # CLI entry point
 └── index.ts           # Module exports
@@ -1711,6 +1753,43 @@ src/
 | EVNT-02 | JSONL event storage | ✓ |
 | EVNT-03 | Relevance score boosting for matching listeners | ✓ |
 | EVNT-04 | Co-activation-based event connection suggestions | ✓ |
+
+### v1.8 Capability-Aware Planning & Token Efficiency Requirements (15 total)
+
+#### Skill Pipeline (PIPE-01 to PIPE-03)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| PIPE-01 | Composable pipeline architecture with pluggable stages | ✓ |
+| PIPE-02 | PipelineContext carries data, stages hold services (constructor injection) | ✓ |
+| PIPE-03 | Pipeline earlyExit checked by stages, not runner | ✓ |
+
+#### Token Budgets (BUDG-01 to BUDG-02)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| BUDG-01 | Per-agent token budget profiles with critical/standard/optional priority tiers | ✓ |
+| BUDG-02 | Budget estimation CLI with threshold warnings | ✓ |
+
+#### Capability Planning (CAPA-01 to CAPA-05)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| CAPA-01 | Auto-generated CAPABILITIES.md with dual-scope discovery | ✓ |
+| CAPA-02 | Phase capability declarations with use/create/after/adapt verbs | ✓ |
+| CAPA-03 | Plan frontmatter capabilities field with skill/agent/team references | ✓ |
+| CAPA-04 | Skill injection into executor context during plan execution | ✓ |
+| CAPA-05 | Post-phase automatic capability invocation (after verb) | ✓ |
+
+#### Cache & Performance (CACH-01 to CACH-02)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| CACH-01 | Cache-aware skill ordering with cacheTier metadata | ✓ |
+| CACH-02 | Model-aware activation with modelGuidance metadata | ✓ |
+
+#### Compression & Agents (COMP-01 to COMP-03)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| COMP-01 | Research compression pipeline with 10-20x reduction | ✓ |
+| COMP-02 | Collector agent generation for read-only context-efficient gathering | ✓ |
+| COMP-03 | Parallelization advisor for wave-based parallel execution | ✓ |
 
 ---
 
