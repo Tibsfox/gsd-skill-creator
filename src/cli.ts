@@ -14,6 +14,7 @@ import { detectConflictsCommand } from './cli/commands/detect-conflicts.js';
 import { scoreActivationCommand } from './cli/commands/score-activation.js';
 import { syncReservedCommand } from './cli/commands/sync-reserved.js';
 import { budgetCommand } from './cli/commands/budget.js';
+import { budgetEstimateCommand } from './cli/commands/budget-estimate.js';
 import { resolveCommand } from './cli/commands/resolve.js';
 import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
 import { testCommand } from './cli/commands/test.js';
@@ -234,6 +235,45 @@ async function main() {
     case 'bg': {
       const scope = parseScope(args);
       const exitCode = await budgetCommand({ skillsDir: getSkillsBasePath(scope) });
+      if (exitCode !== 0) {
+        process.exit(exitCode);
+      }
+      break;
+    }
+
+    case 'capabilities':
+    case 'cap': {
+      const { capabilitiesCommand } = await import('./cli/commands/capabilities.js');
+      const exitCode = await capabilitiesCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'compress-research':
+    case 'cr': {
+      const { compressResearchCommand } = await import('./cli/commands/compress-research.js');
+      const exitCode = await compressResearchCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'generate-collector':
+    case 'gc': {
+      const { generateCollectorCommand } = await import('./cli/commands/generate-collector.js');
+      const exitCode = await generateCollectorCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'budget-estimate':
+    case 'be': {
+      const agentArg = args.find(a => a.startsWith('--agent='));
+      const agent = agentArg?.split('=')[1];
+      const scope = parseScope(args);
+      const exitCode = await budgetEstimateCommand({
+        agent,
+        skillsDir: getSkillsBasePath(scope),
+      });
       if (exitCode !== 0) {
         process.exit(exitCode);
       }
@@ -1080,6 +1120,14 @@ async function main() {
       break;
     }
 
+    case 'advise-parallelization':
+    case 'ap': {
+      const { adviseParallelizationCommand } = await import('./cli/commands/advise-parallelization.js');
+      const exitCode = await adviseParallelizationCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1178,6 +1226,11 @@ Commands:
   test, t           Manage skill test cases
   simulate, sim     Predict which skill would activate for a prompt
   budget, bg        Show character budget usage across all skills
+  budget-estimate, be  Show token budget estimates per agent profile
+  capabilities, cap  Generate or show capability manifest (CAPABILITIES.md)
+  compress-research, cr  Compress research files to distilled skill files
+  generate-collector, gc  Generate a read-only collector agent
+  advise-parallelization, ap  Analyze plan dependencies for parallel execution
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
   suggest, sg       Analyze patterns and review skill suggestions
@@ -1438,6 +1491,9 @@ Examples:
   skill-creator bundle activate --name=frontend  # Activate bundle
   skill-creator bundle deactivate      # Deactivate bundle
   skill-creator bundle status          # Show active bundle
+  skill-creator compress-research .planning/phases/58-research-compression/58-RESEARCH.md
+  skill-creator cr path/to/research.md --dry-run
+  skill-creator cr path/to/research.md --project
 
 Skill Storage:
   User-level skills: ~/.claude/skills/ (shared across projects)

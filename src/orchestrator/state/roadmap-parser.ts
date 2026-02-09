@@ -9,6 +9,8 @@
  */
 
 import type { ParsedRoadmap, PhaseInfo, PlanInfo } from './types.js';
+import type { CapabilityRef } from '../../capabilities/types.js';
+import { parseCapabilityDeclarations } from '../../capabilities/roadmap-capabilities.js';
 
 /**
  * Regex for phase checkbox lines in the ## Phases section:
@@ -63,7 +65,14 @@ export function parseRoadmap(content: string): ParsedRoadmap | null {
   // Step 2: Extract per-phase plan lists from detail sections
   const plansByPhase = extractPlansByPhase(lines);
 
-  return { phases, plansByPhase };
+  // Step 3: Extract capability declarations from phase detail sections
+  const capabilitiesByPhase = extractCapabilitiesByPhase(lines);
+
+  const result: ParsedRoadmap = { phases, plansByPhase };
+  if (Object.keys(capabilitiesByPhase).length > 0) {
+    result.capabilitiesByPhase = capabilitiesByPhase as ParsedRoadmap['capabilitiesByPhase'];
+  }
+  return result;
 }
 
 /**
@@ -169,4 +178,60 @@ function extractPlansByPhase(lines: string[]): Record<string, PlanInfo[]> {
   }
 
   return plansByPhase;
+}
+
+/**
+ * Extract capability declarations from phase detail sections.
+ *
+ * Iterates lines, tracks current phase number via PHASE_HEADING_REGEX,
+ * accumulates lines per phase section, and calls parseCapabilityDeclarations
+ * on each accumulated set.
+ *
+ * @returns Record mapping phase number -> CapabilityRef[] (only non-empty)
+ */
+function extractCapabilitiesByPhase(lines: string[]): Record<string, CapabilityRef[]> {
+  const result: Record<string, CapabilityRef[]> = {};
+  let currentPhaseNumber: string | null = null;
+  let currentPhaseLines: string[] = [];
+
+  function flushPhase(): void {
+    if (currentPhaseNumber && currentPhaseLines.length > 0) {
+      const refs = parseCapabilityDeclarations(currentPhaseLines);
+      if (refs.length > 0) {
+        result[currentPhaseNumber] = refs;
+      }
+    }
+  }
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    // Check for phase detail heading (### or ####)
+    const headingMatch = trimmed.match(PHASE_HEADING_REGEX);
+    if (headingMatch) {
+      // Flush previous phase
+      flushPhase();
+      currentPhaseNumber = headingMatch[1];
+      currentPhaseLines = [];
+      continue;
+    }
+
+    // If we hit another heading of level <= 3, reset current phase
+    if (/^#{1,3}\s+/.test(trimmed) && !PHASE_HEADING_REGEX.test(trimmed)) {
+      flushPhase();
+      currentPhaseNumber = null;
+      currentPhaseLines = [];
+      continue;
+    }
+
+    // Accumulate lines within the current phase section
+    if (currentPhaseNumber) {
+      currentPhaseLines.push(trimmed);
+    }
+  }
+
+  // Flush the last phase
+  flushPhase();
+
+  return result;
 }
