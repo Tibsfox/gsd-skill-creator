@@ -224,12 +224,14 @@ export class CapabilityDiscovery {
 
   /**
    * Create a canonical representation of an entry with sorted keys.
+   * Accepts strictly-typed objects by casting through unknown first.
    */
-  private canonicalEntry(entry: Record<string, unknown>): Record<string, unknown> {
+  private canonicalEntry(entry: Record<string, unknown> | SkillCapability | AgentCapability | TeamCapability): Record<string, unknown> {
+    const entryAsRecord = entry as unknown as Record<string, unknown>;
     const sorted: Record<string, unknown> = {};
-    for (const key of Object.keys(entry).sort()) {
-      if (entry[key] !== undefined) {
-        sorted[key] = entry[key];
+    for (const key of Object.keys(entryAsRecord).sort()) {
+      if (entryAsRecord[key] !== undefined) {
+        sorted[key] = entryAsRecord[key];
       }
     }
     return sorted;
