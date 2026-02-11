@@ -64,7 +64,7 @@ export class StalenessChecker {
 
     // Check if this is an auto-generated skill via the source field
     // (custom field added by ResearchCompressor, accessed via type assertion)
-    const source = (skillMetadata as Record<string, unknown>).source;
+    const source = (skillMetadata as unknown as Record<string, unknown>).source;
     if (source !== 'auto-generated') {
       return {
         skillName,
