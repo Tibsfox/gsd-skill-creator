@@ -53,7 +53,7 @@ export class ModelFilterStage implements PipelineStage {
 
     for (const skill of context.resolvedSkills) {
       const skillData = await this.skillStore.read(skill.name);
-      const guidance = (skillData.metadata as Record<string, unknown>)
+      const guidance = (skillData.metadata as unknown as Record<string, unknown>)
         .modelGuidance as ModelGuidance | undefined;
 
       // No modelGuidance means skill is compatible with all models
