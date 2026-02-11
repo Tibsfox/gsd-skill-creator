@@ -25,7 +25,7 @@ vi.mock('@clack/prompts', () => ({
 }));
 
 vi.mock('../../testing/index.js', () => ({
-  TestStore: vi.fn(function() {
+  TestStore: vi.fn(function(this: any) {
     this.count = vi.fn();
     this.list = vi.fn();
     this.add = vi.fn();
@@ -33,22 +33,22 @@ vi.mock('../../testing/index.js', () => ({
     this.update = vi.fn();
     this.get = vi.fn();
   }),
-  TestRunner: vi.fn(function() {
+  TestRunner: vi.fn(function(this: any) {
     this.runForSkill = vi.fn();
   }),
-  ResultStore: vi.fn(function() {
+  ResultStore: vi.fn(function(this: any) {
     this.list = vi.fn();
     this.append = vi.fn();
     this.getLatest = vi.fn();
   }),
-  ResultFormatter: vi.fn(function() {
+  ResultFormatter: vi.fn(function(this: any) {
     this.formatTerminal = vi.fn(() => 'Terminal output');
     this.formatJSON = vi.fn(() => '{"result": "json"}');
   }),
 }));
 
 vi.mock('../../storage/skill-store.js', () => ({
-  SkillStore: vi.fn(function() {
+  SkillStore: vi.fn(function(this: any) {
     this.list = vi.fn();
     this.read = vi.fn();
   }),
