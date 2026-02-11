@@ -25,33 +25,33 @@ vi.mock('@clack/prompts', () => ({
 }));
 
 vi.mock('../../testing/index.js', () => ({
-  TestStore: vi.fn().mockImplementation(() => ({
-    count: vi.fn(),
-    list: vi.fn(),
-    add: vi.fn(),
-    delete: vi.fn(),
-    update: vi.fn(),
-    get: vi.fn(),
-  })),
-  TestRunner: vi.fn().mockImplementation(() => ({
-    runForSkill: vi.fn(),
-  })),
-  ResultStore: vi.fn().mockImplementation(() => ({
-    list: vi.fn(),
-    append: vi.fn(),
-    getLatest: vi.fn(),
-  })),
-  ResultFormatter: vi.fn().mockImplementation(() => ({
-    formatTerminal: vi.fn(() => 'Terminal output'),
-    formatJSON: vi.fn(() => '{"result": "json"}'),
-  })),
+  TestStore: vi.fn(function() {
+    this.count = vi.fn();
+    this.list = vi.fn();
+    this.add = vi.fn();
+    this.delete = vi.fn();
+    this.update = vi.fn();
+    this.get = vi.fn();
+  }),
+  TestRunner: vi.fn(function() {
+    this.runForSkill = vi.fn();
+  }),
+  ResultStore: vi.fn(function() {
+    this.list = vi.fn();
+    this.append = vi.fn();
+    this.getLatest = vi.fn();
+  }),
+  ResultFormatter: vi.fn(function() {
+    this.formatTerminal = vi.fn(() => 'Terminal output');
+    this.formatJSON = vi.fn(() => '{"result": "json"}');
+  }),
 }));
 
 vi.mock('../../storage/skill-store.js', () => ({
-  SkillStore: vi.fn().mockImplementation(() => ({
-    list: vi.fn(),
-    read: vi.fn(),
-  })),
+  SkillStore: vi.fn(function() {
+    this.list = vi.fn();
+    this.read = vi.fn();
+  }),
 }));
 
 // Import after mocking
@@ -104,12 +104,12 @@ describe('test run command', () => {
       count: vi.fn().mockResolvedValue(5),
       list: vi.fn().mockResolvedValue([]),
     };
-    vi.mocked(TestStore).mockImplementation(() => mockTestStore as unknown as TestStore);
+    vi.mocked(TestStore).mockImplementation(function() { return mockTestStore; });
 
     mockRunner = {
       runForSkill: vi.fn().mockResolvedValue(createTestRunResult()),
     };
-    vi.mocked(TestRunner).mockImplementation(() => mockRunner as unknown as TestRunner);
+    vi.mocked(TestRunner).mockImplementation(function() { return mockRunner; });
 
     mockSkillStore = {
       list: vi.fn().mockResolvedValue(['test-skill', 'other-skill']),
@@ -119,18 +119,18 @@ describe('test run command', () => {
         path: '/test/path',
       }),
     };
-    vi.mocked(SkillStore).mockImplementation(() => mockSkillStore as unknown as SkillStore);
+    vi.mocked(SkillStore).mockImplementation(function() { return mockSkillStore; });
 
     mockResultStore = {
       list: vi.fn().mockResolvedValue([]),
     };
-    vi.mocked(ResultStore).mockImplementation(() => mockResultStore as unknown as ResultStore);
+    vi.mocked(ResultStore).mockImplementation(function() { return mockResultStore; });
 
     mockFormatter = {
       formatTerminal: vi.fn().mockReturnValue('Terminal output'),
       formatJSON: vi.fn().mockReturnValue('{"result": "json"}'),
     };
-    vi.mocked(ResultFormatter).mockImplementation(() => mockFormatter as unknown as ResultFormatter);
+    vi.mocked(ResultFormatter).mockImplementation(function() { return mockFormatter; });
 
     // Ensure CI env is not set by default
     delete process.env.CI;
