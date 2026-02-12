@@ -261,6 +261,147 @@ describe('RefinementEngine', () => {
     });
   });
 
+  describe('applyRefinement - cumulative drift check', () => {
+    it('should reject refinement when cumulative drift exceeds 60% threshold', async () => {
+      await createTestSkill('drifted-skill');
+
+      const suggestion = {
+        skillName: 'drifted-skill',
+        currentVersion: 1,
+        suggestedChanges: [{
+          section: 'body' as const,
+          original: 'test',
+          suggested: 'best',
+          reason: 'correction',
+        }],
+        confidence: 0.8,
+        basedOnCorrections: 3,
+        preview: 'preview',
+      };
+
+      // Create a mock DriftTracker that reports drift over threshold
+      const mockDriftTracker = {
+        checkThreshold: vi.fn().mockResolvedValue({
+          originalContent: 'original',
+          currentContent: 'current',
+          cumulativeDriftPercent: 65.2,
+          thresholdExceeded: true,
+          threshold: 60,
+        }),
+        computeDrift: vi.fn(),
+        computeDriftWithContent: vi.fn(),
+      };
+
+      // Create engine with drift tracker
+      const engineWithDrift = new RefinementEngine(
+        feedbackStore,
+        skillStore,
+        undefined,
+        mockDriftTracker as any
+      );
+
+      const result = await engineWithDrift.applyRefinement('drifted-skill', suggestion, true);
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('drift');
+      expect(result.error).toContain('65.2%');
+      expect(result.error).toContain('60%');
+    });
+
+    it('should allow refinement when cumulative drift is under 60%', async () => {
+      const longBody = 'This is a very long test skill body with many words so that a small change will be under twenty percent of the total content length here.';
+      const fullMetadata: SkillMetadata = {
+        name: 'safe-skill',
+        description: 'Test skill',
+        version: 1,
+      };
+      await skillStore.create('safe-skill', fullMetadata, longBody);
+
+      const suggestion = {
+        skillName: 'safe-skill',
+        currentVersion: 1,
+        suggestedChanges: [{
+          section: 'body' as const,
+          original: 'very long test',
+          suggested: 'very nice test',
+          reason: 'correction',
+        }],
+        confidence: 0.8,
+        basedOnCorrections: 3,
+        preview: 'preview',
+      };
+
+      // Mock DriftTracker reports drift under threshold
+      const mockDriftTracker = {
+        checkThreshold: vi.fn().mockResolvedValue({
+          originalContent: 'original',
+          currentContent: 'current',
+          cumulativeDriftPercent: 25.0,
+          thresholdExceeded: false,
+          threshold: 60,
+        }),
+        computeDrift: vi.fn(),
+        computeDriftWithContent: vi.fn().mockResolvedValue({
+          originalContent: 'original',
+          currentContent: 'projected',
+          cumulativeDriftPercent: 28.0,
+          thresholdExceeded: false,
+          threshold: 60,
+        }),
+      };
+
+      const engineWithDrift = new RefinementEngine(
+        feedbackStore,
+        skillStore,
+        { maxContentChangePercent: 60 },
+        mockDriftTracker as any
+      );
+
+      const result = await engineWithDrift.applyRefinement('safe-skill', suggestion, true);
+
+      expect(result.success).toBe(true);
+      expect(result.newVersion).toBe(2);
+    });
+
+    it('should include drift percentage and threshold info in error message', async () => {
+      await createTestSkill('drift-error-skill');
+
+      const suggestion = {
+        skillName: 'drift-error-skill',
+        currentVersion: 1,
+        suggestedChanges: [],
+        confidence: 0.8,
+        basedOnCorrections: 3,
+        preview: 'preview',
+      };
+
+      const mockDriftTracker = {
+        checkThreshold: vi.fn().mockResolvedValue({
+          originalContent: 'original',
+          currentContent: 'current',
+          cumulativeDriftPercent: 72.5,
+          thresholdExceeded: true,
+          threshold: 60,
+        }),
+        computeDrift: vi.fn(),
+        computeDriftWithContent: vi.fn(),
+      };
+
+      const engineWithDrift = new RefinementEngine(
+        feedbackStore,
+        skillStore,
+        undefined,
+        mockDriftTracker as any
+      );
+
+      const result = await engineWithDrift.applyRefinement('drift-error-skill', suggestion, true);
+
+      expect(result.success).toBe(false);
+      expect(result.error).toMatch(/72\.5%/);
+      expect(result.error).toMatch(/60%/);
+    });
+  });
+
   describe('integration flow', () => {
     it('should complete full refinement flow', async () => {
       // Create skill

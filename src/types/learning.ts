@@ -138,3 +138,15 @@ export interface CorrectionPattern {
   correctedPattern: string;
   frequency: number;
 }
+
+// Cumulative drift tracking result (LRN-01/LRN-02)
+export interface DriftResult {
+  originalContent: string;
+  currentContent: string;
+  cumulativeDriftPercent: number;
+  thresholdExceeded: boolean;
+  threshold: number;
+}
+
+// Default cumulative drift threshold (60%)
+export const DEFAULT_DRIFT_THRESHOLD = 60;
