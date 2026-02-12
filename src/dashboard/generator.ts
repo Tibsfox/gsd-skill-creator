@@ -17,6 +17,13 @@ import {
   generateMilestonesJsonLd,
   generateRoadmapJsonLd,
 } from './structured-data.js';
+import {
+  computeHash,
+  loadManifest,
+  saveManifest,
+  needsRegeneration,
+} from './incremental.js';
+import { generateRefreshScript } from './refresh.js';
 import type { DashboardData } from './types.js';
 import { mkdir, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -32,11 +39,17 @@ export interface GenerateOptions {
   outputDir: string;
   /** Overwrite existing files without warning. */
   force?: boolean;
+  /** Inject auto-refresh script into generated pages. */
+  live?: boolean;
+  /** Auto-refresh interval in milliseconds (default: 5000). */
+  refreshInterval?: number;
 }
 
 export interface GenerateResult {
   /** List of generated page filenames. */
   pages: string[];
+  /** Pages that were skipped (content unchanged). */
+  skipped: string[];
   /** Errors encountered during generation. */
   errors: string[];
   /** Generation duration in milliseconds. */
@@ -299,6 +312,7 @@ function statusToBadgeClass(status: string): string {
 export async function generate(options: GenerateOptions): Promise<GenerateResult> {
   const start = performance.now();
   const pages: string[] = [];
+  const skipped: string[] = [];
   const errors: string[] = [];
 
   // Verify planning dir exists
@@ -306,7 +320,7 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     await access(options.planningDir);
   } catch {
     errors.push(`Planning directory not found: ${options.planningDir}`);
-    return { pages, errors, duration: performance.now() - start };
+    return { pages, skipped, errors, duration: performance.now() - start };
   }
 
   // Parse planning artifacts
@@ -316,7 +330,7 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     errors.push(`Failed to parse planning directory: ${msg}`);
-    return { pages, errors, duration: performance.now() - start };
+    return { pages, skipped, errors, duration: performance.now() - start };
   }
 
   // Ensure output directory exists
@@ -325,8 +339,18 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     errors.push(`Failed to create output directory: ${msg}`);
-    return { pages, errors, duration: performance.now() - start };
+    return { pages, skipped, errors, duration: performance.now() - start };
   }
+
+  // Load build manifest for incremental builds (unless forced)
+  const manifest = options.force
+    ? { pages: {} }
+    : await loadManifest(options.outputDir);
+
+  // Prepare refresh script (injected only when --live is set)
+  const refreshSnippet = options.live
+    ? generateRefreshScript(options.refreshInterval ?? 5000)
+    : '';
 
   // Shared rendering context
   const projectName = data.project?.name ?? 'GSD Dashboard';
@@ -400,13 +424,13 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     },
   ];
 
-  // Generate all pages
+  // Generate pages (with incremental build support)
   for (const pageDef of pageDefinitions) {
     try {
       const nav = renderNav(NAV_PAGES, pageDef.name);
       const content = pageDef.render();
 
-      const html = renderLayout({
+      let html = renderLayout({
         title: `${projectName} - ${pageDef.name === 'index' ? 'Dashboard' : pageDef.name.charAt(0).toUpperCase() + pageDef.name.slice(1)}`,
         content,
         nav,
@@ -417,7 +441,27 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
         jsonLd: pageDef.jsonLd,
       });
 
+      // Inject refresh script before closing </body> when live mode is on
+      if (refreshSnippet) {
+        html = html.replace('</body>', `${refreshSnippet}\n  </body>`);
+      }
+
+      // Check content hash for incremental builds
+      const hash = computeHash(html);
+
+      if (!needsRegeneration(pageDef.filename, hash, manifest)) {
+        skipped.push(pageDef.filename);
+        continue;
+      }
+
       await writeFile(join(options.outputDir, pageDef.filename), html, 'utf-8');
+
+      // Update manifest entry
+      manifest.pages[pageDef.filename] = {
+        hash,
+        generatedAt: data.generatedAt,
+      };
+
       pages.push(pageDef.filename);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
@@ -425,8 +469,17 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     }
   }
 
+  // Persist updated manifest
+  try {
+    await saveManifest(options.outputDir, manifest);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    errors.push(`Failed to save build manifest: ${msg}`);
+  }
+
   return {
     pages,
+    skipped,
     errors,
     duration: performance.now() - start,
   };
