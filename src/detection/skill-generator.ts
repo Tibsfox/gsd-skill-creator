@@ -6,6 +6,7 @@ import { detectArguments, suggestArgumentHint, checkInjectionRisk } from '../val
 import { shouldForkContext, suggestAgent } from '../validation/context-fork-detection.js';
 import { ContentDecomposer } from '../disclosure/index.js';
 import type { ReferenceFile, ScriptFile } from '../disclosure/index.js';
+import { injectGsdReferences } from './gsd-reference-injector.js';
 
 export interface GeneratedSkill {
   name: string;
@@ -18,7 +19,7 @@ export interface GeneratedSkill {
 }
 
 export class SkillGenerator {
-  constructor(private skillStore: SkillStore) {}
+  constructor(private skillStore: SkillStore, private gsdInstalled = false) {}
 
   /**
    * Generate skill scaffold from candidate
@@ -172,7 +173,7 @@ export class SkillGenerator {
   private generateBody(candidate: SkillCandidate): string {
     const evidence = this.formatEvidence(candidate.evidence);
 
-    return `# ${candidate.suggestedName}
+    let body = `# ${candidate.suggestedName}
 
 ## Purpose
 
@@ -205,6 +206,11 @@ When working with ${candidate.pattern}:
 ---
 *Generated from pattern detection. Edit this skill to customize for your workflow.*
 `;
+
+    // QOL-04: Inject GSD command references if applicable
+    body = injectGsdReferences(body, candidate.suggestedDescription, this.gsdInstalled);
+
+    return body;
   }
 
   /**
