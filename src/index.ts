@@ -139,7 +139,18 @@ export {
   TeamTaskSchema,
   InboxMessageSchema,
   validateTeamConfig,
+  validateInboxMessage,
 } from './validation/team-validation.js';
+export type { InboxMessageValidationResult } from './validation/team-validation.js';
+
+// Message safety
+export {
+  sanitizeMessageText,
+  truncateMessageText,
+  sanitizeInboxMessage,
+  DEFAULT_MAX_MESSAGE_LENGTH,
+} from './validation/message-safety.js';
+export type { MessageSanitizeResult } from './validation/message-safety.js';
 
 // Teams module: templates, storage, agent generation, wizard, validation
 export {
