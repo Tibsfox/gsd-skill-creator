@@ -662,6 +662,391 @@ else
 fi
 
 # ==============================================================================
+# Push Subcommand Tests (basic)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Push Subcommand Tests (basic)${RESET}\n"
+
+# Reset stack dir for push tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# 1. push exits 0
+set +e
+output=$("$GSD_STACK" push "implement auth module" 2>&1)
+rc=$?
+set -e
+assert_eq "push exits 0" "0" "$rc"
+
+# 2. After push, exactly 1 file in pending/
+file_count=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+file_count=$((file_count + 0))
+assert_eq "push creates 1 file in pending/" "1" "$file_count"
+
+# 3. Filename starts with 5- (default priority is normal)
+first_file=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | head -1)
+if [[ "$first_file" == 5-* ]]; then
+  pass "push default priority filename starts with 5-"
+else
+  fail "push default priority filename starts with 5-" "got: $first_file"
+fi
+
+# 4. Filename ends with .md
+if [[ "$first_file" == *.md ]]; then
+  pass "push filename ends with .md"
+else
+  fail "push filename ends with .md" "got: $first_file"
+fi
+
+# 5-9: File content tests (guard against missing file in RED phase)
+if [[ -n "$first_file" ]] && [[ -f "$GSD_STACK_DIR/pending/$first_file" ]]; then
+  file_content=$(cat "$GSD_STACK_DIR/pending/$first_file")
+  # 5. File body contains "implement auth module"
+  assert_contains "push file body contains message" "$file_content" "implement auth module"
+  # 6. File contains YAML frontmatter delimiter --- at start
+  first_line=$(head -1 "$GSD_STACK_DIR/pending/$first_file")
+  assert_eq "push file starts with ---" "---" "$first_line"
+  # 7. Frontmatter contains priority: normal
+  assert_contains "push frontmatter has priority: normal" "$file_content" "priority: normal"
+  # 8. Frontmatter contains source: cli
+  assert_contains "push frontmatter has source: cli" "$file_content" "source: cli"
+  # 9. Frontmatter contains created: field with ISO 8601 timestamp
+  if echo "$file_content" | grep -qE 'created: [0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z'; then
+    pass "push frontmatter has ISO 8601 created field"
+  else
+    fail "push frontmatter has ISO 8601 created field" "content: $file_content"
+  fi
+else
+  fail "push file body contains message" "no file created by push"
+  fail "push file starts with ---" "no file created by push"
+  fail "push frontmatter has priority: normal" "no file created by push"
+  fail "push frontmatter has source: cli" "no file created by push"
+  fail "push frontmatter has ISO 8601 created field" "no file created by push"
+fi
+
+# 10. After push, history.jsonl has a push event
+if [[ -f "$GSD_STACK_DIR/history.jsonl" ]] && grep -q '"event":"push"' "$GSD_STACK_DIR/history.jsonl"; then
+  pass "push logs event to history.jsonl"
+else
+  fail "push logs event to history.jsonl" "no push event found"
+fi
+
+# ==============================================================================
+# Push Priority Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Push Priority Tests${RESET}\n"
+
+# Reset stack dir for priority tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# 11. --priority=urgent creates file starting with 0-
+set +e
+output=$("$GSD_STACK" push --priority=urgent "fix critical bug" 2>&1)
+rc=$?
+set -e
+urgent_file=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | head -1)
+if [[ "$urgent_file" == 0-* ]]; then
+  pass "push --priority=urgent creates 0- prefix file"
+else
+  fail "push --priority=urgent creates 0- prefix file" "got: $urgent_file"
+fi
+
+# 12. --priority=normal creates file starting with 5-
+rm -rf "$TEST_DIR/stack"
+set +e
+output=$("$GSD_STACK" push --priority=normal "add feature" 2>&1)
+rc=$?
+set -e
+normal_file=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | head -1)
+if [[ "$normal_file" == 5-* ]]; then
+  pass "push --priority=normal creates 5- prefix file"
+else
+  fail "push --priority=normal creates 5- prefix file" "got: $normal_file"
+fi
+
+# 13. --priority=low creates file starting with 9-
+rm -rf "$TEST_DIR/stack"
+set +e
+output=$("$GSD_STACK" push --priority=low "update docs" 2>&1)
+rc=$?
+set -e
+low_file=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | head -1)
+if [[ "$low_file" == 9-* ]]; then
+  pass "push --priority=low creates 9- prefix file"
+else
+  fail "push --priority=low creates 9- prefix file" "got: $low_file"
+fi
+
+# 14. --priority=invalid exits 1 with error
+rm -rf "$TEST_DIR/stack"
+set +e
+output=$("$GSD_STACK" push --priority=invalid "test" 2>&1)
+rc=$?
+set -e
+assert_eq "push --priority=invalid exits 1" "1" "$rc"
+assert_contains "push --priority=invalid shows error" "$output" "Invalid priority"
+
+# 15. Multiple pushes: ls sorts urgent first, normal second, low third
+rm -rf "$TEST_DIR/stack"
+set +e
+"$GSD_STACK" push --priority=low "low msg" >/dev/null 2>&1
+"$GSD_STACK" push --priority=urgent "urgent msg" >/dev/null 2>&1
+"$GSD_STACK" push --priority=normal "normal msg" >/dev/null 2>&1
+set -e
+sorted_files=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null)
+first_sorted=$(echo "$sorted_files" | head -1)
+last_sorted=$(echo "$sorted_files" | tail -1)
+if [[ "$first_sorted" == 0-* ]] && [[ "$last_sorted" == 9-* ]]; then
+  pass "push multi-priority: ls sorts urgent first, low last"
+else
+  fail "push multi-priority: ls sorts urgent first, low last" "first=$first_sorted last=$last_sorted"
+fi
+
+# 16. GSD_PRIORITY=urgent env var sets default priority
+rm -rf "$TEST_DIR/stack"
+set +e
+output=$(GSD_PRIORITY=urgent "$GSD_STACK" push "env priority" 2>&1)
+rc=$?
+set -e
+env_file=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | head -1)
+if [[ "$env_file" == 0-* ]]; then
+  pass "GSD_PRIORITY=urgent env sets 0- prefix"
+else
+  fail "GSD_PRIORITY=urgent env sets 0- prefix" "got: $env_file"
+fi
+
+# ==============================================================================
+# Push Stdin Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Push Stdin Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# 17. echo "piped message" | gsd-stack push reads from stdin
+set +e
+output=$(echo "piped message" | "$GSD_STACK" push 2>&1)
+rc=$?
+set -e
+assert_eq "push from stdin exits 0" "0" "$rc"
+
+# 18. File body contains "piped message"
+stdin_file=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | head -1)
+if [[ -n "$stdin_file" ]]; then
+  stdin_content=$(cat "$GSD_STACK_DIR/pending/$stdin_file")
+  assert_contains "push stdin file body has message" "$stdin_content" "piped message"
+else
+  fail "push stdin file body has message" "no file created"
+fi
+
+# 19. Push with no args and no stdin exits 1
+rm -rf "$TEST_DIR/stack"
+set +e
+output=$("$GSD_STACK" push 2>&1 </dev/null)
+rc=$?
+set -e
+assert_eq "push no args no stdin exits 1" "1" "$rc"
+assert_contains "push no args shows error" "$output" "No message"
+
+# ==============================================================================
+# Push JSON Output Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Push JSON Output Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# 20. GSD_FORMAT=json outputs valid JSON
+set +e
+output=$(GSD_FORMAT=json "$GSD_STACK" push "json test" 2>&1)
+rc=$?
+set -e
+if [[ "$output" == "{"* ]] && [[ "$output" == *"}" ]]; then
+  pass "push json outputs JSON object"
+else
+  fail "push json outputs JSON object" "output: $output"
+fi
+
+# 21. JSON output contains "id" key
+assert_contains "push json has id key" "$output" '"id"'
+
+# 22. JSON output contains "priority" key
+assert_contains "push json has priority key" "$output" '"priority"'
+
+# 23. JSON output contains "path" key
+assert_contains "push json has path key" "$output" '"path"'
+
+# ==============================================================================
+# Push GSD_SOURCE Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Push GSD_SOURCE Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# 24. Default source is "cli" in frontmatter
+set +e
+"$GSD_STACK" push "default source test" >/dev/null 2>&1
+set -e
+src_file=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | head -1)
+if [[ -n "$src_file" ]]; then
+  src_content=$(cat "$GSD_STACK_DIR/pending/$src_file")
+  assert_contains "push default source is cli" "$src_content" "source: cli"
+else
+  fail "push default source is cli" "no file created"
+fi
+
+# 25. GSD_SOURCE=agent creates file with source: agent
+rm -rf "$TEST_DIR/stack"
+set +e
+GSD_SOURCE=agent "$GSD_STACK" push "from agent" >/dev/null 2>&1
+set -e
+agent_file=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | head -1)
+if [[ -n "$agent_file" ]]; then
+  agent_content=$(cat "$GSD_STACK_DIR/pending/$agent_file")
+  assert_contains "push GSD_SOURCE=agent sets source: agent" "$agent_content" "source: agent"
+else
+  fail "push GSD_SOURCE=agent sets source: agent" "no file created"
+fi
+
+# ==============================================================================
+# Peek Subcommand Tests (empty stack)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Peek Subcommand Tests (empty stack)${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# 26. peek on empty stack exits 0
+set +e
+output=$("$GSD_STACK" peek 2>&1)
+rc=$?
+set -e
+assert_eq "peek empty exits 0" "0" "$rc"
+
+# 27. peek on empty stack shows informative message
+if echo "$output" | grep -qi "empty\|no message"; then
+  pass "peek empty shows informative message"
+else
+  fail "peek empty shows informative message" "output: $output"
+fi
+
+# ==============================================================================
+# Peek Subcommand Tests (FIFO mode)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Peek Subcommand Tests (FIFO mode)${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# Push 3 messages with different priorities
+set +e
+"$GSD_STACK" push --priority=normal "normal message" >/dev/null 2>&1
+"$GSD_STACK" push --priority=urgent "urgent message" >/dev/null 2>&1
+"$GSD_STACK" push --priority=low "low message" >/dev/null 2>&1
+set -e
+
+# 28. FIFO peek shows urgent one (highest priority = lowest prefix, sorts first)
+set +e
+output=$(GSD_STACK_MODE=fifo "$GSD_STACK" peek 2>&1)
+rc=$?
+set -e
+assert_contains "peek fifo shows urgent message" "$output" "urgent message"
+
+# 29. Peek output contains message body
+assert_contains "peek output contains message body" "$output" "urgent message"
+
+# 30. Peek output contains priority indicator
+if echo "$output" | grep -qi "urgent\|URGENT"; then
+  pass "peek shows priority indicator"
+else
+  fail "peek shows priority indicator" "output: $output"
+fi
+
+# 31. Peek output contains queue depth
+assert_contains "peek shows queue depth" "$output" "3"
+
+# 32. After peek, file is STILL in pending/
+file_count=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+file_count=$((file_count + 0))
+if [[ "$file_count" -ge 1 ]]; then
+  pass "peek does not consume file"
+else
+  fail "peek does not consume file" "pending/ is empty after peek"
+fi
+
+# 33. After peek, pending/ still has exactly 3 files
+assert_eq "peek leaves all 3 files" "3" "$file_count"
+
+# ==============================================================================
+# Peek Subcommand Tests (LIFO mode)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Peek Subcommand Tests (LIFO mode)${RESET}\n"
+
+# Reset stack dir -- push 3 same-priority messages with slight delay
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+set +e
+"$GSD_STACK" push --priority=normal "first message" >/dev/null 2>&1
+sleep 0.05
+"$GSD_STACK" push --priority=normal "second message" >/dev/null 2>&1
+sleep 0.05
+"$GSD_STACK" push --priority=normal "third message" >/dev/null 2>&1
+set -e
+
+# 34. LIFO peek shows the newest (third) message
+set +e
+output=$(GSD_STACK_MODE=lifo "$GSD_STACK" peek 2>&1)
+rc=$?
+set -e
+assert_contains "peek lifo shows newest message" "$output" "third message"
+
+# ==============================================================================
+# Peek JSON Output Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Peek JSON Output Tests${RESET}\n"
+
+# 35. GSD_FORMAT=json peek outputs valid JSON
+set +e
+output=$(GSD_FORMAT=json "$GSD_STACK" peek 2>&1)
+rc=$?
+set -e
+if [[ "$output" == "{"* ]] && [[ "$output" == *"}" ]]; then
+  pass "peek json outputs JSON object"
+else
+  fail "peek json outputs JSON object" "output: $output"
+fi
+
+# 36. JSON output contains body, priority, depth keys
+assert_contains "peek json has body key" "$output" '"body"'
+assert_contains "peek json has priority key" "$output" '"priority"'
+assert_contains "peek json has depth key" "$output" '"depth"'
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
