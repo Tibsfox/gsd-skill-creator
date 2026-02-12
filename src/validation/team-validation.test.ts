@@ -7,6 +7,7 @@ import {
   validateTeamConfig,
   validateTopologyRules,
 } from './team-validation.js';
+import { TEAM_TOPOLOGIES, TEAM_ROLES } from '../types/team.js';
 import type { TeamConfig } from '../types/team.js';
 
 // ============================================================================
@@ -710,5 +711,158 @@ describe('validateTopologyRules', () => {
     };
     const result = validateTopologyRules(config);
     expect(result.errors).toEqual([]);
+  });
+
+  // --- router topology ---
+
+  it('should return no errors when router topology has 1 router + 2 specialists', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'router',
+      members: [
+        { agentId: 'router-1', name: 'Router', agentType: 'router' },
+        { agentId: 'spec-1', name: 'Specialist 1', agentType: 'specialist' },
+        { agentId: 'spec-2', name: 'Specialist 2', agentType: 'specialist' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors).toEqual([]);
+  });
+
+  it('should return error when router topology has 0 routers', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'router',
+      members: [
+        { agentId: 'spec-1', name: 'Specialist 1', agentType: 'specialist' },
+        { agentId: 'spec-2', name: 'Specialist 2', agentType: 'specialist' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.errors.some((e) => e.includes('exactly 1 router'))).toBe(true);
+  });
+
+  it('should return error when router topology has 2 routers', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'router',
+      members: [
+        { agentId: 'router-1', name: 'Router 1', agentType: 'router' },
+        { agentId: 'router-2', name: 'Router 2', agentType: 'router' },
+        { agentId: 'spec-1', name: 'Specialist 1', agentType: 'specialist' },
+        { agentId: 'spec-2', name: 'Specialist 2', agentType: 'specialist' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.errors.some((e) => e.includes('exactly 1 router'))).toBe(true);
+  });
+
+  it('should return error when router topology has 1 router + 1 specialist', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'router',
+      members: [
+        { agentId: 'router-1', name: 'Router', agentType: 'router' },
+        { agentId: 'spec-1', name: 'Specialist 1', agentType: 'specialist' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.errors.some((e) => e.includes('at least 2 specialists'))).toBe(true);
+  });
+
+  it('should return error when router topology has 1 router + 0 specialists', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'router',
+      members: [
+        { agentId: 'router-1', name: 'Router', agentType: 'router' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.errors.some((e) => e.includes('at least 2 specialists'))).toBe(true);
+  });
+
+  // --- map-reduce topology ---
+
+  it('should return no errors when map-reduce topology has 1 orchestrator + 2 workers', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'map-reduce',
+      members: [
+        { agentId: 'orch-1', name: 'Orchestrator', agentType: 'orchestrator' },
+        { agentId: 'worker-1', name: 'Worker 1', agentType: 'worker' },
+        { agentId: 'worker-2', name: 'Worker 2', agentType: 'worker' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors).toEqual([]);
+  });
+
+  it('should return error when map-reduce topology has 0 orchestrators', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'map-reduce',
+      members: [
+        { agentId: 'worker-1', name: 'Worker 1', agentType: 'worker' },
+        { agentId: 'worker-2', name: 'Worker 2', agentType: 'worker' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.errors.some((e) => e.includes('exactly 1 orchestrator'))).toBe(true);
+  });
+
+  it('should return error when map-reduce topology has 2 orchestrators', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'map-reduce',
+      members: [
+        { agentId: 'orch-1', name: 'Orchestrator 1', agentType: 'orchestrator' },
+        { agentId: 'orch-2', name: 'Orchestrator 2', agentType: 'orchestrator' },
+        { agentId: 'worker-1', name: 'Worker 1', agentType: 'worker' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.errors.some((e) => e.includes('exactly 1 orchestrator'))).toBe(true);
+  });
+
+  it('should return error when map-reduce topology has 1 orchestrator + 0 workers', () => {
+    const config: TeamConfig = {
+      ...baseConfig,
+      topology: 'map-reduce',
+      members: [
+        { agentId: 'orch-1', name: 'Orchestrator', agentType: 'orchestrator' },
+      ],
+    };
+    const result = validateTopologyRules(config);
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.errors.some((e) => e.includes('at least 1 worker'))).toBe(true);
+  });
+});
+
+// ============================================================================
+// Type Constants Tests (67-01)
+// ============================================================================
+
+describe('Type constants - router and map-reduce', () => {
+  it('should include router in TEAM_TOPOLOGIES', () => {
+    expect(TEAM_TOPOLOGIES).toContain('router');
+  });
+
+  it('should include map-reduce in TEAM_TOPOLOGIES', () => {
+    expect(TEAM_TOPOLOGIES).toContain('map-reduce');
+  });
+
+  it('should include router in TEAM_ROLES', () => {
+    expect(TEAM_ROLES).toContain('router');
+  });
+
+  it('should include reducer in TEAM_ROLES', () => {
+    expect(TEAM_ROLES).toContain('reducer');
   });
 });
