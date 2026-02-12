@@ -5,6 +5,8 @@ import {
   OfficialSkillNameSchema,
   hasActivationPattern,
   validateDescriptionQuality,
+  SkillInputSchema,
+  SkillMetadataSchema,
 } from './skill-validation.js';
 import { validateSkillName, OFFICIAL_NAME_PATTERN } from '../types/skill.js';
 
@@ -359,6 +361,132 @@ describe('Description Quality Validation', () => {
         const result = validateDescriptionQuality(desc);
         expect(result.hasActivationTriggers).toBe(true);
       }
+    });
+  });
+});
+
+describe('Spec Alignment (SPEC-01, SPEC-04, SPEC-06)', () => {
+  /** Helper to build a minimal valid skill input object */
+  function validSkill(overrides: Record<string, unknown> = {}) {
+    return {
+      name: 'test-skill',
+      description: 'Use when testing spec alignment features.',
+      ...overrides,
+    };
+  }
+
+  describe('allowed-tools dual-format parsing', () => {
+    it('should accept allowed-tools as array', () => {
+      const result = SkillInputSchema.safeParse(validSkill({ 'allowed-tools': ['Read', 'Grep'] }));
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data['allowed-tools']).toEqual(['Read', 'Grep']);
+      }
+    });
+
+    it('should accept allowed-tools as space-delimited string and normalize to array', () => {
+      const result = SkillInputSchema.safeParse(validSkill({ 'allowed-tools': 'Read Grep' }));
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data['allowed-tools']).toEqual(['Read', 'Grep']);
+      }
+    });
+
+    it('should accept single tool string and normalize to array', () => {
+      const result = SkillInputSchema.safeParse(validSkill({ 'allowed-tools': 'Read' }));
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data['allowed-tools']).toEqual(['Read']);
+      }
+    });
+
+    it('should accept empty string and normalize to empty array', () => {
+      const result = SkillInputSchema.safeParse(validSkill({ 'allowed-tools': '' }));
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data['allowed-tools']).toEqual([]);
+      }
+    });
+
+    it('should accept empty array', () => {
+      const result = SkillInputSchema.safeParse(validSkill({ 'allowed-tools': [] }));
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data['allowed-tools']).toEqual([]);
+      }
+    });
+
+    it('should also work on SkillMetadataSchema', () => {
+      const result = SkillMetadataSchema.safeParse(validSkill({ 'allowed-tools': 'Read Grep Bash' }));
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data['allowed-tools']).toEqual(['Read', 'Grep', 'Bash']);
+      }
+    });
+  });
+
+  describe('license field', () => {
+    it('should accept license: MIT', () => {
+      const result = SkillInputSchema.safeParse(validSkill({ license: 'MIT' }));
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data.license).toBe('MIT');
+      }
+    });
+
+    it('should accept license: Apache-2.0', () => {
+      const result = SkillInputSchema.safeParse(validSkill({ license: 'Apache-2.0' }));
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data.license).toBe('Apache-2.0');
+      }
+    });
+
+    it('should allow skill without license field', () => {
+      const result = SkillInputSchema.safeParse(validSkill());
+      expect(result.success).toBe(true);
+    });
+  });
+
+  describe('compatibility field', () => {
+    it('should accept compatibility string', () => {
+      const result = SkillInputSchema.safeParse(validSkill({ compatibility: 'Requires Node.js 18+' }));
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data.compatibility).toBe('Requires Node.js 18+');
+      }
+    });
+
+    it('should reject compatibility over 500 chars', () => {
+      const result = SkillInputSchema.safeParse(validSkill({ compatibility: 'x'.repeat(501) }));
+      expect(result.success).toBe(false);
+    });
+
+    it('should allow skill without compatibility field', () => {
+      const result = SkillInputSchema.safeParse(validSkill());
+      expect(result.success).toBe(true);
+    });
+  });
+
+  describe('name validation edge cases (SPEC-06)', () => {
+    it('should reject name with only hyphens ---', () => {
+      expect(validateSkillName('---')).toBe(false);
+    });
+
+    it('should reject single-char hyphen -', () => {
+      expect(validateSkillName('-')).toBe(false);
+    });
+  });
+
+  describe('description validation (SPEC-06)', () => {
+    it('should reject empty description', () => {
+      const result = SkillInputSchema.safeParse({ name: 'test-skill', description: '' });
+      expect(result.success).toBe(false);
+    });
+
+    it('should reject description over 1024 chars', () => {
+      const result = SkillInputSchema.safeParse({ name: 'test-skill', description: 'x'.repeat(1025) });
+      expect(result.success).toBe(false);
     });
   });
 });
