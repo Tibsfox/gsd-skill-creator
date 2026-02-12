@@ -4,6 +4,45 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.9.0] - 2026-02-12
+
+### Added
+
+- **Spec Alignment:** Full Claude Code spec compliance with $ARGUMENTS injection, context:fork detection, dual-format allowed-tools, !command syntax, and shell injection prevention
+- **Progressive Disclosure:** Large skills auto-decompose into SKILL.md + references/ + scripts/ with token budget awareness
+- **Cross-Platform Portability:** Export skills as portable .tar.gz archives or platform-specific formats (Claude, Cursor, Codex, Copilot, Gemini)
+- **Evaluator-Optimizer:** Precision/recall/F1 tracking, A/B evaluation with t-test significance, skill health scoring, and health dashboard
+- **MCP Distribution:** Publish .tar.gz skill packages, install from local/remote, MCP server exposing search/install/list/info tools
+- **Enhanced Topologies:** Router and Map-Reduce team patterns, inter-team bridge communication, deadlock detection, and cost estimation
+- **Session Continuity:** Session save/restore/handoff with warm-start context injection and cross-session ephemeral promotion
+- **Agentic RAG:** Adaptive TF-IDF/embedding routing, corrective refinement loop, cross-project skill discovery, and version drift detection
+- **Quality of Life:** Description quality scoring, enhanced status with budget dashboard and trends, Mermaid dependency graphs, GSD command reference injection
+
+### New CLI Commands
+
+- `export` — Export skills to portable or platform-specific formats
+- `quality` — Score skill description quality with suggestions
+- `status` — Enhanced status with budget breakdown and trend history
+- `graph` — Generate Mermaid dependency graphs
+- `publish` — Package skills as .tar.gz
+- `install` — Install skill packages from local/remote
+- `mcp-server` — Start MCP server on stdio
+- `session save/restore/handoff` — Session continuity management
+- `team estimate` — Team execution cost estimation
+
+### New Dependencies
+
+- `@modelcontextprotocol/sdk` — MCP server protocol support
+- `modern-tar` — .tar.gz packaging for skill distribution
+- `simple-statistics` — Statistical tests for A/B evaluation
+
+### Stats
+
+- 9 phases (62-70), 37 plans, 49 requirements
+- ~20k LOC added across 127 files
+
+---
+
 ## [1.8.1] - 2026-02-12
 
 ### Fixed - Critical (3)
