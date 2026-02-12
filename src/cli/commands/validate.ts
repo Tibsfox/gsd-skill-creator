@@ -1,9 +1,10 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { SkillStore } from '../../storage/skill-store.js';
-import { validateSkillNameStrict } from '../../validation/skill-validation.js';
+import { validateSkillNameStrict, classifyFields } from '../../validation/skill-validation.js';
 import { validateSkillDirectory, validateDirectoryNameMatch } from '../../validation/directory-validation.js';
 import { SkillMetadataSchema } from '../../validation/skill-validation.js';
+import type { FieldClassification } from '../../validation/skill-validation.js';
 import { getExtension, isLegacyFormat } from '../../types/extensions.js';
 
 // ============================================================================
@@ -24,6 +25,8 @@ export interface ValidationResult {
   warnings: string[];
   /** Whether the skill uses legacy or current format */
   format: 'current' | 'legacy';
+  /** Field classification: standard vs extension vs unknown (informational) */
+  fieldInfo?: FieldClassification;
 }
 
 // ============================================================================
@@ -53,6 +56,7 @@ export async function validateSingleSkill(
 ): Promise<ValidationResult> {
   const errors: string[] = [];
   const warnings: string[] = [];
+  let fieldInfo: FieldClassification | undefined;
 
   // Add deprecation warning for legacy format
   if (format === 'legacy') {
@@ -86,6 +90,9 @@ export async function validateSingleSkill(
       }
     }
 
+    // 5. Field classification (standard vs extension vs unknown)
+    fieldInfo = classifyFields(skill.metadata as Record<string, unknown>);
+
     // 4. Directory/name match validation (only for current format)
     if (format === 'current') {
       const metadataName = typeof skill.metadata.name === 'string' ? skill.metadata.name : '';
@@ -110,6 +117,7 @@ export async function validateSingleSkill(
     errors,
     warnings,
     format,
+    fieldInfo,
   };
 }
 
@@ -229,6 +237,7 @@ export async function validateCommand(
 function displayValidationResult(result: ValidationResult): void {
   if (result.valid && result.warnings.length === 0) {
     p.log.success(`${pc.green('\u2713')} ${result.name}`);
+    displayFieldInfo(result);
     return;
   }
 
@@ -237,6 +246,7 @@ function displayValidationResult(result: ValidationResult): void {
     for (const warning of result.warnings) {
       p.log.message(`    ${pc.dim(warning)}`);
     }
+    displayFieldInfo(result);
     return;
   }
 
@@ -247,6 +257,25 @@ function displayValidationResult(result: ValidationResult): void {
   }
   for (const warning of result.warnings) {
     p.log.message(`    ${pc.dim(warning)}`);
+  }
+  displayFieldInfo(result);
+}
+
+/**
+ * Display field classification info (standard vs extension vs unknown).
+ * Shown as dim informational lines after the main result.
+ */
+function displayFieldInfo(result: ValidationResult): void {
+  if (!result.fieldInfo) return;
+
+  const { extensions, unknown } = result.fieldInfo;
+
+  if (extensions.length > 0) {
+    p.log.message(`    ${pc.dim(`Claude Code extensions: ${extensions.join(', ')}`)}`);
+  }
+
+  if (unknown.length > 0) {
+    p.log.message(`    ${pc.dim(`Unknown fields: ${unknown.join(', ')}. These are ignored by spec-compliant tools.`)}`);
   }
 }
 
