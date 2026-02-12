@@ -152,4 +152,53 @@ export class DependencyGraph {
   getParent(skillName: string): string | undefined {
     return this.edges.get(skillName);
   }
+
+  /**
+   * Get all skills that directly extend the given skill (reverse lookup).
+   * Returns the immediate children in the inheritance tree.
+   */
+  getDependents(skillName: string): string[] {
+    const dependents: string[] = [];
+    for (const [child, parent] of this.edges) {
+      if (parent === skillName) {
+        dependents.push(child);
+      }
+    }
+    return dependents;
+  }
+
+  /**
+   * Get the inheritance depth for a skill.
+   * 0 = no parent, 1 = extends one parent, etc.
+   * Throws if cycle detected (delegates to getInheritanceChain).
+   */
+  getDepth(skillName: string): number {
+    const chain = this.getInheritanceChain(skillName);
+    return chain.length - 1;
+  }
+
+  /**
+   * Get all transitive dependents (skills that would be affected by changes).
+   * Uses BFS from the skill through the reverse edge map.
+   * Does not include the starting skill itself.
+   */
+  getAllDependents(skillName: string): string[] {
+    const visited = new Set<string>();
+    const queue: string[] = [skillName];
+    const result: string[] = [];
+
+    while (queue.length > 0) {
+      const current = queue.shift()!;
+      const children = this.getDependents(current);
+      for (const child of children) {
+        if (!visited.has(child)) {
+          visited.add(child);
+          result.push(child);
+          queue.push(child);
+        }
+      }
+    }
+
+    return result;
+  }
 }
