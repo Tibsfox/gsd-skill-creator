@@ -24,6 +24,7 @@ import { mcpServerCommand } from './cli/commands/mcp-server.js';
 import { publishCommand } from './cli/commands/publish.js';
 import { installCommand } from './cli/commands/install.js';
 import { statusCommand } from './cli/commands/status.js';
+import { auditCommand } from './cli/commands/audit.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
@@ -693,6 +694,14 @@ async function main() {
       break;
     }
 
+    case 'audit':
+    case 'au': {
+      const skillName = args.filter(a => !a.startsWith('-'))[1];
+      const exitCode = await auditCommand(skillName, {});
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'rollback':
     case 'rb': {
       const skillName = args[1];
@@ -1179,6 +1188,14 @@ async function main() {
       break;
     }
 
+    case 'impact':
+    case 'imp': {
+      const { impactCommand } = await import('./cli/commands/impact.js');
+      const exitCode = await impactCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'mcp-server': {
       const exitCode = await mcpServerCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
@@ -1369,6 +1386,7 @@ Commands:
   feedback, fb      View feedback for skills
   refine, rf        Generate and apply skill refinements
   history, hist     View skill version history
+  audit, au         Show skill evolution: drift, contradictions, version diffs
   rollback, rb      Rollback skill to previous version
   agents, ag        Manage agent suggestions from skill clusters
   team, tm          Manage agent teams (create, list, validate, spawn, status)
@@ -1378,6 +1396,7 @@ Commands:
   discover, disc    Discover skill candidates from session history
   quality, q        Show per-skill health scores (precision, success rate, efficiency)
   graph, gr         Output Mermaid diagram of skill relationships
+  impact, imp       Analyze inheritance impact of modifying a skill
   export, ex        Export skill for other platforms (--portable, --platform)
   publish, pub      Package a skill as .tar.gz for distribution
   install, inst     Install a skill from local file or remote URL

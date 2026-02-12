@@ -19,10 +19,12 @@ const mockList = vi.fn();
 const mockRead = vi.fn();
 
 vi.mock('../../storage/skill-store.js', () => ({
-  SkillStore: vi.fn().mockImplementation(() => ({
-    list: mockList,
-    read: mockRead,
-  })),
+  SkillStore: function SkillStore() {
+    return {
+      list: mockList,
+      read: mockRead,
+    };
+  },
 }));
 
 // Mock picocolors to passthrough

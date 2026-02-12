@@ -23,6 +23,9 @@ import { BudgetValidator, formatProgressBar } from '../../validation/budget-vali
 import { DisclosureBudget } from '../../disclosure/disclosure-budget.js';
 import { BudgetHistory } from '../../storage/budget-history.js';
 import { createApplicationContext } from '../../index.js';
+import { SkillStore } from '../../storage/skill-store.js';
+import { DependencyGraph } from '../../composition/dependency-graph.js';
+import { SkillMetadata, getExtension } from '../../types/skill.js';
 
 const HELP_TEXT = `
 Usage: skill-creator status [options]
@@ -186,6 +189,29 @@ export async function statusCommand(
       const sortedSkills = [...result.skills].sort((a, b) => b.totalChars - a.totalChars);
       const disclosure = new DisclosureBudget();
 
+      // Build dependency graph for inheritance chain display
+      let depGraph: DependencyGraph | null = null;
+      try {
+        const skillStore = new SkillStore(skillsDir);
+        const allNames = await skillStore.list();
+        const allSkills = new Map<string, SkillMetadata>();
+        for (const name of allNames) {
+          try {
+            const skill = await skillStore.read(name);
+            if (skill) {
+              allSkills.set(name, skill.metadata);
+            }
+          } catch {
+            // Skip unreadable skills
+          }
+        }
+        if (allSkills.size > 0) {
+          depGraph = DependencyGraph.fromSkills(allSkills);
+        }
+      } catch {
+        // Dependency graph is optional enhancement -- skip on error
+      }
+
       for (const skill of sortedSkills) {
         const pct = ((skill.totalChars / result.budget) * 100).toFixed(1);
         const miniBar = formatProgressBar(skill.totalChars, result.budget, 10);
@@ -201,6 +227,19 @@ export async function statusCommand(
         }
 
         console.log(`  ${miniBar} ${nameColored} ${pc.dim(`${skill.totalChars.toLocaleString()} chars (${pct}%)`)}`);
+
+        // Show inheritance chain if skill extends another
+        if (depGraph) {
+          try {
+            const parent = depGraph.getParent(skill.name);
+            if (parent) {
+              const chain = depGraph.getInheritanceChain(skill.name);
+              console.log(pc.dim(`    extends: ${chain.join(' -> ')}`));
+            }
+          } catch {
+            // Skip chain display on error (e.g., cycle)
+          }
+        }
 
         // Show disclosure breakdown if skill has references/ or scripts/
         const hasDisclosure = await hasDisclosureDirs(skill.path);
