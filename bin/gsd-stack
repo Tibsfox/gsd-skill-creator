@@ -828,6 +828,199 @@ cmd_session() {
 }
 
 # ==============================================================================
+# List subcommand
+# ==============================================================================
+
+cmd_list() {
+  local filter=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --filter=*) filter="${1#--filter=}" ; shift ;;
+      --filter)   filter="${2:-}" ; shift 2 ;;
+      *)          shift ;;
+    esac
+  done
+
+  local sessions_dir="$GSD_STACK_DIR/sessions"
+  local found=0
+  local json_items=()
+
+  # Count pending messages for stack depth
+  local stack_depth=0
+  if [[ -d "$GSD_STACK_DIR/pending" ]]; then
+    stack_depth=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+    stack_depth=$((stack_depth + 0))
+  fi
+
+  # Detect active recording
+  local recording=""
+  for rec_meta in "$GSD_STACK_DIR"/recordings/*/meta.json; do
+    if [[ -f "$rec_meta" ]]; then
+      local rec_content
+      rec_content=$(cat "$rec_meta")
+      local rec_status
+      rec_status=$(json_field "$rec_content" "status")
+      if [[ "$rec_status" == "recording" ]]; then
+        recording=$(json_field "$rec_content" "name")
+        break
+      fi
+    fi
+  done
+
+  # Iterate session directories
+  for session_dir in "$sessions_dir"/*/; do
+    if [[ ! -d "$session_dir" ]]; then continue; fi
+
+    local name
+    name=$(basename "$session_dir")
+    local meta_file="$session_dir/meta.json"
+    if [[ ! -f "$meta_file" ]]; then continue; fi
+
+    local meta_content
+    meta_content=$(cat "$meta_file")
+    local session_name project started tmux_session
+    session_name=$(json_field "$meta_content" "name")
+    project=$(json_field "$meta_content" "project")
+    started=$(json_field "$meta_content" "started")
+    tmux_session=$(json_field "$meta_content" "tmux_session")
+
+    # Get live state from state machine
+    local state
+    state=$(get_session_state "$name" 2>/dev/null || echo "unknown")
+
+    # Apply filter
+    if [[ -n "$filter" ]] && [[ "$state" != "$filter" ]]; then
+      continue
+    fi
+
+    # Compute uptime for active/stalled/paused sessions
+    local uptime_str="--"
+    if [[ "$state" == "active" || "$state" == "stalled" || "$state" == "paused" ]]; then
+      if [[ -n "$started" ]]; then
+        local started_epoch
+        started_epoch=$(date -d "$started" +%s 2>/dev/null || echo "0")
+        if [[ "$started_epoch" -gt 0 ]]; then
+          local now_epoch elapsed hours minutes
+          now_epoch=$(date +%s)
+          elapsed=$((now_epoch - started_epoch))
+          hours=$((elapsed / 3600))
+          minutes=$(((elapsed % 3600) / 60))
+          if [[ $hours -gt 0 ]]; then
+            uptime_str="${hours}h ${minutes}m"
+          else
+            uptime_str="${minutes}m"
+          fi
+        fi
+      fi
+    fi
+
+    # Recording for this output
+    local rec_display="${recording:-"--"}"
+
+    found=$((found + 1))
+
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      json_items+=("{\"name\":\"${session_name}\",\"state\":\"${state}\",\"project\":\"${project}\",\"uptime\":\"${uptime_str}\",\"stack_depth\":${stack_depth},\"recording\":\"${rec_display}\"}")
+    else
+      # Human output -- print header on first session
+      if [[ "$found" -eq 1 ]]; then
+        printf "%-15s %-10s %-30s %-8s %-6s %s\n" "NAME" "STATE" "PROJECT" "UPTIME" "STACK" "REC"
+      fi
+      printf "%-15s %-10s %-30s %-8s %-6s %s\n" \
+        "$session_name" "$state" "$project" "$uptime_str" "$stack_depth" "$rec_display"
+    fi
+  done
+
+  # Handle empty results
+  if [[ "$found" -eq 0 ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      echo "[]"
+    else
+      echo "No sessions found."
+    fi
+    log_event "list" "listed sessions (filter=${filter:-all}) -- none found"
+    return 0
+  fi
+
+  # JSON output: build array
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    local first=true
+    printf "["
+    for item in "${json_items[@]}"; do
+      if [[ "$first" == true ]]; then
+        first=false
+      else
+        printf ","
+      fi
+      printf "%s" "$item"
+    done
+    printf "]\n"
+  fi
+
+  log_event "list" "listed sessions (filter=${filter:-all}, count=$found)"
+}
+
+# ==============================================================================
+# Watch subcommand
+# ==============================================================================
+
+cmd_watch() {
+  local session_name=""
+
+  # Parse arguments
+  if [[ $# -lt 1 ]] || [[ -z "${1:-}" ]]; then
+    echo "Error: Session name required. Usage: gsd-stack watch <session-name>"
+    exit 1
+  fi
+  session_name="$1"
+
+  # Check session exists
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+  if [[ ! -d "$session_dir" ]] || [[ ! -f "$session_dir/meta.json" ]]; then
+    echo "Error: Session '$session_name' not found"
+    exit 1
+  fi
+
+  # Get session state
+  local state
+  state=$(get_session_state "$session_name" 2>/dev/null || echo "unknown")
+  if [[ "$state" != "active" ]]; then
+    echo "Error: Cannot watch session '$session_name' (state: $state) -- session must be active"
+    exit 1
+  fi
+
+  # Read tmux session name
+  local meta_content tmux_session
+  meta_content=$(cat "$session_dir/meta.json")
+  tmux_session=$(json_field "$meta_content" "tmux_session")
+
+  # Mock mode: just print what would happen
+  if [[ -n "$GSD_MOCK_TMUX" ]]; then
+    echo "Would attach read-only to tmux session '$tmux_session' (session: $session_name)"
+    log_event "watch" "watched: $session_name (mock)"
+    return 0
+  fi
+
+  # Real mode: check tmux availability
+  if ! command -v tmux &>/dev/null; then
+    echo "Error: tmux is not available. Install tmux to watch sessions."
+    exit 1
+  fi
+
+  # Check tmux session exists
+  if ! tmux has-session -t "$tmux_session" 2>/dev/null; then
+    echo "Error: Tmux session '$tmux_session' not found"
+    exit 1
+  fi
+
+  # Attach read-only
+  tmux attach-session -t "$tmux_session" -r
+  log_event "watch" "watched: $session_name"
+}
+
+# ==============================================================================
 # Known subcommands (stubs for future implementation)
 # ==============================================================================
 
@@ -898,7 +1091,17 @@ main() {
       cmd_clear "$@"
       exit 0
       ;;
-    poke|drain|list|watch|pause|resume|stop|save|record|stop-record|mark|play|metrics)
+    list)
+      shift
+      cmd_list "$@"
+      exit 0
+      ;;
+    watch)
+      shift
+      cmd_watch "$@"
+      exit $?
+      ;;
+    poke|drain|pause|resume|stop|save|record|stop-record|mark|play|metrics)
       echo "$cmd: not yet implemented"
       log_event "$cmd" "stub invoked"
       exit 0
