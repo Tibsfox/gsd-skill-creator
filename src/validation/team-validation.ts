@@ -16,8 +16,10 @@ import {
   BACKEND_TYPES,
   TEAM_MEMBER_MODELS,
   type TeamConfig,
+  type InboxMessage,
   type TeamValidationResult,
 } from '../types/team.js';
+import { sanitizeInboxMessage } from './message-safety.js';
 
 // ============================================================================
 // TeamMemberSchema
@@ -278,4 +280,52 @@ export function validateTopologyRules(config: TeamConfig): {
   }
 
   return { errors, warnings };
+}
+
+// ============================================================================
+// Inbox Message Validation (76-02)
+// ============================================================================
+
+/**
+ * Result of validating and sanitizing an inbox message.
+ */
+export interface InboxMessageValidationResult {
+  /** Whether the message passed schema validation. */
+  valid: boolean;
+  /** Schema validation errors (only when valid is false). */
+  errors: string[];
+  /** Sanitization warnings (injection detected, truncation applied). */
+  warnings: string[];
+  /** Sanitized message (only when valid is true). */
+  data?: InboxMessage;
+}
+
+/**
+ * Validate and sanitize an inbox message.
+ *
+ * Combines schema validation (InboxMessageSchema) with message safety
+ * sanitization (injection pattern detection + content-length truncation).
+ *
+ * @param message - Raw message data to validate and sanitize
+ * @returns Validation result with sanitized message and warnings
+ */
+export function validateInboxMessage(message: unknown): InboxMessageValidationResult {
+  const result = InboxMessageSchema.safeParse(message);
+
+  if (!result.success) {
+    const errors = result.error.issues.map(
+      (issue) => `${issue.path.join('.')}: ${issue.message}`,
+    );
+    return { valid: false, errors, warnings: [] };
+  }
+
+  const parsed = result.data as InboxMessage;
+  const { message: sanitizedMessage, warnings } = sanitizeInboxMessage(parsed);
+
+  return {
+    valid: true,
+    errors: [],
+    warnings,
+    data: sanitizedMessage,
+  };
 }
