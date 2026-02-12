@@ -539,6 +539,138 @@ $line"
 }
 
 # ==============================================================================
+# Pop subcommand
+# ==============================================================================
+
+cmd_pop() {
+  # List pending messages in sort order (same logic as peek)
+  local files
+  if [[ "$GSD_STACK_MODE" == "lifo" ]]; then
+    files=$(ls -1r "$GSD_STACK_DIR/pending/" 2>/dev/null)
+  else
+    files=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null)
+  fi
+
+  # Check empty
+  if [[ -z "$files" ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"empty":true}\n'
+    else
+      echo "Stack is empty. No messages to pop."
+    fi
+    log_event "pop" "empty stack"
+    return 0
+  fi
+
+  # Get the first file (next message to consume)
+  local next_file
+  next_file=$(echo "$files" | head -1)
+  local src_path="$GSD_STACK_DIR/pending/$next_file"
+  local dst_path="$GSD_STACK_DIR/done/$next_file"
+
+  # Read file content before moving
+  local content
+  content=$(cat "$src_path")
+
+  # Parse frontmatter and body (same as peek)
+  local priority="unknown"
+  local body=""
+  local in_frontmatter=false
+  local frontmatter_end=0
+  local line_num=0
+
+  while IFS= read -r line; do
+    line_num=$((line_num + 1))
+    if [[ "$line" == "---" ]]; then
+      if [[ "$in_frontmatter" == false ]]; then
+        in_frontmatter=true
+        continue
+      else
+        frontmatter_end=$line_num
+        in_frontmatter=false
+        continue
+      fi
+    fi
+    # Extract priority from frontmatter
+    if [[ "$in_frontmatter" == true ]] && [[ "$line" == priority:* ]]; then
+      priority="${line#priority: }"
+    fi
+    # Collect body lines (after frontmatter closes)
+    if [[ "$frontmatter_end" -gt 0 ]]; then
+      if [[ -n "$body" ]]; then
+        body="$body
+$line"
+      else
+        body="$line"
+      fi
+    fi
+  done <<< "$content"
+
+  # Move file from pending/ to done/ (audit-preserving, never delete)
+  mv "$src_path" "$dst_path"
+
+  # Log event
+  log_event "pop" "$priority: $(echo "$body" | head -1)"
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    local json_body="${body//\\/\\\\}"
+    json_body="${json_body//\"/\\\"}"
+    printf '{"id":"%s","priority":"%s","body":"%s"}\n' \
+      "${next_file%.md}" "$priority" "$json_body"
+  else
+    local priority_label
+    case "$priority" in
+      urgent) priority_label="[URGENT]" ;;
+      normal) priority_label="[normal]" ;;
+      low)    priority_label="[low]" ;;
+      *)      priority_label="[$priority]" ;;
+    esac
+    printf "%s %s\n" "$priority_label" "$body"
+  fi
+}
+
+# ==============================================================================
+# Clear subcommand
+# ==============================================================================
+
+cmd_clear() {
+  # Count pending files
+  local files
+  files=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null)
+
+  if [[ -z "$files" ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"cleared":0}\n'
+    else
+      echo "Cleared 0 messages (stack was empty)."
+    fi
+    log_event "clear" "0 messages (empty)"
+    return 0
+  fi
+
+  # Count files
+  local count
+  count=$(echo "$files" | wc -l)
+  count=$((count + 0))  # trim whitespace
+
+  # Move ALL files from pending/ to done/
+  while IFS= read -r file; do
+    mv "$GSD_STACK_DIR/pending/$file" "$GSD_STACK_DIR/done/$file"
+  done <<< "$files"
+
+  # Log event
+  log_event "clear" "$count messages moved to done/"
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"cleared":%d}\n' "$count"
+  else
+    echo "Cleared $count message(s). All moved to done/."
+  fi
+}
+
+# ==============================================================================
 # Session state machine
 # ==============================================================================
 
@@ -756,7 +888,17 @@ main() {
       get_session_state "$1"
       exit $?
       ;;
-    pop|poke|drain|clear|list|watch|pause|resume|stop|save|record|stop-record|mark|play|metrics)
+    pop)
+      shift
+      cmd_pop "$@"
+      exit 0
+      ;;
+    clear)
+      shift
+      cmd_clear "$@"
+      exit 0
+      ;;
+    poke|drain|list|watch|pause|resume|stop|save|record|stop-record|mark|play|metrics)
       echo "$cmd: not yet implemented"
       log_event "$cmd" "stub invoked"
       exit 0
