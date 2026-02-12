@@ -4,6 +4,10 @@ import type { SkillIndex, SkillIndexEntry } from '../storage/skill-index.js';
 import { listAllScopes, type ScopedSkillEntry } from '../storage/skill-index.js';
 import type { SkillScope } from '../types/scope.js';
 import { BudgetValidator, formatProgressBar } from '../validation/budget-validation.js';
+import { SkillStore } from '../storage/skill-store.js';
+import { DependencyGraph } from '../composition/dependency-graph.js';
+import { getSkillsBasePath } from '../types/scope.js';
+import type { SkillMetadata } from '../types/skill.js';
 
 /**
  * Scope filter for listing skills.
@@ -38,9 +42,10 @@ function formatScopeHeader(scope: SkillScope, count: number): string {
 }
 
 /**
- * Format a scoped skill entry with scope indicator and conflict marker.
+ * Format a scoped skill entry with scope indicator, conflict marker,
+ * and optional inheritance chain.
  */
-function formatScopedSkillEntry(entry: ScopedSkillEntry): string {
+function formatScopedSkillEntry(entry: ScopedSkillEntry, extendsChain?: string[]): string {
   const badge = entry.enabled
     ? pc.green('\u25cf')  // filled circle
     : pc.dim('\u25cb');   // empty circle
@@ -54,7 +59,14 @@ function formatScopedSkillEntry(entry: ScopedSkillEntry): string {
     ? entry.description.slice(0, maxDescLen) + '...'
     : entry.description;
 
-  return `${badge} ${pc.bold(entry.name)} ${scopeTag}${conflict}\n  ${pc.dim(desc)}`;
+  let result = `${badge} ${pc.bold(entry.name)} ${scopeTag}${conflict}\n  ${pc.dim(desc)}`;
+
+  // Show inheritance chain if the skill extends another
+  if (extendsChain && extendsChain.length > 1) {
+    result += `\n  ${pc.dim(`extends: ${extendsChain.join(' -> ')}`)}`;
+  }
+
+  return result;
 }
 
 /**
@@ -93,19 +105,52 @@ export async function listSkillsWorkflow(
   const projectSkills = skills.filter(s => s.scope === 'project');
   const userSkills = skills.filter(s => s.scope === 'user');
 
+  // Build dependency graphs for inheritance chain display (per scope)
+  const chainsByScope = new Map<string, Map<string, string[]>>();
+  for (const scope of ['project', 'user'] as const) {
+    try {
+      const store = new SkillStore(getSkillsBasePath(scope));
+      const names = await store.list();
+      const metadataMap = new Map<string, SkillMetadata>();
+      for (const name of names) {
+        try {
+          const skill = await store.read(name);
+          if (skill) metadataMap.set(name, skill.metadata);
+        } catch { /* skip unreadable */ }
+      }
+      if (metadataMap.size > 0) {
+        const graph = DependencyGraph.fromSkills(metadataMap);
+        const chains = new Map<string, string[]>();
+        for (const name of metadataMap.keys()) {
+          try {
+            const parent = graph.getParent(name);
+            if (parent) {
+              chains.set(name, graph.getInheritanceChain(name));
+            }
+          } catch { /* skip cycles */ }
+        }
+        chainsByScope.set(scope, chains);
+      }
+    } catch { /* skip scope on error */ }
+  }
+
   // Display project-level first (takes precedence)
   if (projectSkills.length > 0) {
+    const chains = chainsByScope.get('project');
     p.log.message(formatScopeHeader('project', projectSkills.length));
     for (const skill of projectSkills) {
-      p.log.message(formatScopedSkillEntry(skill));
+      const chain = chains?.get(skill.name);
+      p.log.message(formatScopedSkillEntry(skill, chain));
     }
   }
 
   // Then user-level
   if (userSkills.length > 0) {
+    const chains = chainsByScope.get('user');
     p.log.message(formatScopeHeader('user', userSkills.length));
     for (const skill of userSkills) {
-      p.log.message(formatScopedSkillEntry(skill));
+      const chain = chains?.get(skill.name);
+      p.log.message(formatScopedSkillEntry(skill, chain));
     }
   }
 
