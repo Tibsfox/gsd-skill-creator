@@ -8,6 +8,10 @@
 import { parsePlanningDir } from './parser.js';
 import { renderLayout, renderNav, escapeHtml, type NavPage } from './renderer.js';
 import { renderStyles } from './styles.js';
+import { renderRequirementsPage } from './pages/requirements.js';
+import { renderRoadmapPage } from './pages/roadmap.js';
+import { renderMilestonesPage } from './pages/milestones.js';
+import { renderStatePage } from './pages/state.js';
 import type { DashboardData } from './types.js';
 import { mkdir, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -40,6 +44,10 @@ export interface GenerateResult {
 
 const NAV_PAGES: NavPage[] = [
   { name: 'index', path: 'index.html', label: 'Dashboard' },
+  { name: 'requirements', path: 'requirements.html', label: 'Requirements' },
+  { name: 'roadmap', path: 'roadmap.html', label: 'Roadmap' },
+  { name: 'milestones', path: 'milestones.html', label: 'Milestones' },
+  { name: 'state', path: 'state.html', label: 'State' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -315,33 +323,91 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     return { pages, errors, duration: performance.now() - start };
   }
 
-  // Build the index page
+  // Shared rendering context
   const projectName = data.project?.name ?? 'GSD Dashboard';
   const styles = renderStyles();
-  const nav = renderNav(NAV_PAGES, 'index');
-  const content = renderIndexContent(data);
 
-  const html = renderLayout({
-    title: `${projectName} - Dashboard`,
-    content,
-    nav,
-    projectName,
-    generatedAt: data.generatedAt,
-    styles,
-    meta: {
-      description: data.project?.description ?? 'GSD Planning Docs Dashboard',
-      ogTitle: projectName,
-      ogType: 'website',
+  // Page definitions: name, filename, content renderer, meta
+  const pageDefinitions: {
+    name: string;
+    filename: string;
+    render: () => string;
+    meta: { description: string; ogTitle: string; ogType: string };
+  }[] = [
+    {
+      name: 'index',
+      filename: 'index.html',
+      render: () => renderIndexContent(data),
+      meta: {
+        description: data.project?.description ?? 'GSD Planning Docs Dashboard',
+        ogTitle: projectName,
+        ogType: 'website',
+      },
     },
-  });
+    {
+      name: 'requirements',
+      filename: 'requirements.html',
+      render: () => renderRequirementsPage(data),
+      meta: {
+        description: 'Project requirements and their status',
+        ogTitle: `${projectName} - Requirements`,
+        ogType: 'website',
+      },
+    },
+    {
+      name: 'roadmap',
+      filename: 'roadmap.html',
+      render: () => renderRoadmapPage(data),
+      meta: {
+        description: 'Project roadmap with phase progress',
+        ogTitle: `${projectName} - Roadmap`,
+        ogType: 'website',
+      },
+    },
+    {
+      name: 'milestones',
+      filename: 'milestones.html',
+      render: () => renderMilestonesPage(data),
+      meta: {
+        description: 'Shipped milestones and accomplishments',
+        ogTitle: `${projectName} - Milestones`,
+        ogType: 'website',
+      },
+    },
+    {
+      name: 'state',
+      filename: 'state.html',
+      render: () => renderStatePage(data),
+      meta: {
+        description: 'Current project state and session continuity',
+        ogTitle: `${projectName} - State`,
+        ogType: 'website',
+      },
+    },
+  ];
 
-  // Write index.html
-  try {
-    await writeFile(join(options.outputDir, 'index.html'), html, 'utf-8');
-    pages.push('index.html');
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err);
-    errors.push(`Failed to write index.html: ${msg}`);
+  // Generate all pages
+  for (const pageDef of pageDefinitions) {
+    try {
+      const nav = renderNav(NAV_PAGES, pageDef.name);
+      const content = pageDef.render();
+
+      const html = renderLayout({
+        title: `${projectName} - ${pageDef.name === 'index' ? 'Dashboard' : pageDef.name.charAt(0).toUpperCase() + pageDef.name.slice(1)}`,
+        content,
+        nav,
+        projectName,
+        generatedAt: data.generatedAt,
+        styles,
+        meta: pageDef.meta,
+      });
+
+      await writeFile(join(options.outputDir, pageDef.filename), html, 'utf-8');
+      pages.push(pageDef.filename);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      errors.push(`Failed to write ${pageDef.filename}: ${msg}`);
+    }
   }
 
   return {
