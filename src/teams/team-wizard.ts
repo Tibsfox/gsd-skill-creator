@@ -19,10 +19,14 @@ import {
   generateLeaderWorkerTemplate,
   generatePipelineTemplate,
   generateSwarmTemplate,
+  generateRouterTemplate,
+  generateMapReduceTemplate,
   LEADER_TOOLS,
   WORKER_TOOLS,
   PIPELINE_STAGE_TOOLS,
   SWARM_WORKER_TOOLS,
+  ROUTER_TOOLS,
+  REDUCER_TOOLS,
 } from './templates.js';
 import type { TemplateResult } from './templates.js';
 import { TeamStore, getTeamsBasePath, getAgentsBasePath } from './team-store.js';
@@ -68,7 +72,7 @@ export interface CreatePaths {
 // Template Dispatch
 // ============================================================================
 
-const VALID_PATTERNS = ['leader-worker', 'pipeline', 'swarm'] as const;
+const VALID_PATTERNS = ['leader-worker', 'pipeline', 'swarm', 'router', 'map-reduce'] as const;
 type ValidPattern = (typeof VALID_PATTERNS)[number];
 
 /**
@@ -89,6 +93,10 @@ function generateTemplate(
       return generatePipelineTemplate(opts);
     case 'swarm':
       return generateSwarmTemplate(opts);
+    case 'router':
+      return generateRouterTemplate(opts);
+    case 'map-reduce':
+      return generateMapReduceTemplate(opts);
   }
 }
 
@@ -99,6 +107,9 @@ function getToolsForMember(
   member: { agentType?: string },
   pattern: ValidPattern
 ): string[] {
+  if (member.agentType === 'router') return ROUTER_TOOLS;
+  if (member.agentType === 'reducer') return REDUCER_TOOLS;
+
   const isLeader = member.agentType === 'coordinator' || member.agentType === 'orchestrator';
   if (isLeader) {
     return LEADER_TOOLS;
@@ -111,6 +122,10 @@ function getToolsForMember(
       return PIPELINE_STAGE_TOOLS;
     case 'swarm':
       return SWARM_WORKER_TOOLS;
+    case 'router':
+      return WORKER_TOOLS;
+    case 'map-reduce':
+      return WORKER_TOOLS;
   }
 }
 
@@ -200,6 +215,8 @@ async function interactiveWizard(opts?: WizardOptions): Promise<void> {
       { value: 'leader-worker', label: 'Leader/Worker', hint: '1 lead + N workers for parallel tasks' },
       { value: 'pipeline', label: 'Pipeline', hint: 'Sequential stages with task dependencies' },
       { value: 'swarm', label: 'Swarm', hint: 'Lead + self-claiming workers' },
+      { value: 'router', label: 'Router', hint: '1 router classifies, N specialists handle' },
+      { value: 'map-reduce', label: 'Map-Reduce', hint: 'Fan-out to workers, consolidate results' },
     ],
   });
 
@@ -228,6 +245,8 @@ async function interactiveWizard(opts?: WizardOptions): Promise<void> {
     'leader-worker': 'A leader delegates tasks to parallel workers',
     'pipeline': 'Sequential stages process data in order',
     'swarm': 'Workers self-claim tasks from a shared queue',
+    'router': 'A router classifies and routes work to specialist members',
+    'map-reduce': 'Work is split, processed in parallel, and consolidated',
   };
 
   const description = await p.text({
@@ -241,7 +260,9 @@ async function interactiveWizard(opts?: WizardOptions): Promise<void> {
   }
 
   // Step 4: Worker/stage count
-  const countLabel = pattern === 'pipeline' ? 'Number of stages' : 'Number of workers';
+  const countLabel = pattern === 'pipeline' ? 'Number of stages'
+    : pattern === 'router' ? 'Number of specialists'
+    : 'Number of workers';
   const workerCountStr = await p.text({
     message: `${countLabel} (1-10):`,
     defaultValue: '3',
