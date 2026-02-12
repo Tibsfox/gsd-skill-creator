@@ -116,15 +116,250 @@ HELPTEXT
 }
 
 # ==============================================================================
-# Stub commands (implemented in future plans)
+# JSON field extraction helpers (no jq dependency)
+# ==============================================================================
+
+json_field() {
+  echo "$1" | grep -o "\"$2\":\"[^\"]*\"" | head -1 | cut -d'"' -f4
+}
+
+json_field_num() {
+  echo "$1" | grep -o "\"$2\":[0-9]*" | head -1 | cut -d':' -f2
+}
+
+# ==============================================================================
+# Status subcommand
 # ==============================================================================
 
 cmd_status() {
-  echo "Status: not yet implemented"
+  # Count pending messages
+  local total_pending=0 urgent=0 normal=0 low=0
+  if [[ -d "$GSD_STACK_DIR/pending" ]]; then
+    total_pending=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+    total_pending=$((total_pending + 0))  # trim whitespace
+    urgent=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | grep -c '^0-' || true)
+    normal=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | grep -c '^5-' || true)
+    low=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | grep -c '^9-' || true)
+  fi
+
+  # Build breakdown string (only non-zero categories)
+  local breakdown=""
+  local parts=()
+  if [[ "$urgent" -gt 0 ]]; then parts+=("$urgent urgent"); fi
+  if [[ "$normal" -gt 0 ]]; then parts+=("$normal normal"); fi
+  if [[ "$low" -gt 0 ]]; then parts+=("$low low"); fi
+  if [[ ${#parts[@]} -gt 0 ]]; then
+    breakdown=" ("
+    for i in "${!parts[@]}"; do
+      if [[ "$i" -gt 0 ]]; then breakdown+=", "; fi
+      breakdown+="${parts[$i]}"
+    done
+    breakdown+=")"
+  fi
+
+  # Count done messages
+  local done_count=0
+  if [[ -d "$GSD_STACK_DIR/done" ]]; then
+    done_count=$(ls -1 "$GSD_STACK_DIR/done/" 2>/dev/null | wc -l)
+    done_count=$((done_count + 0))  # trim whitespace
+  fi
+
+  # Detect active session
+  local session_status="none"
+  local session_name=""
+  for meta in "$GSD_STACK_DIR"/sessions/*/meta.json; do
+    if [[ -f "$meta" ]]; then
+      local meta_content
+      meta_content=$(cat "$meta")
+      local s_status
+      s_status=$(json_field "$meta_content" "status")
+      if [[ "$s_status" == "active" ]]; then
+        session_status="active"
+        session_name=$(json_field "$meta_content" "name")
+        break
+      fi
+    fi
+  done
+
+  # Detect active recording
+  local recording_status="none"
+  local recording_name=""
+  for meta in "$GSD_STACK_DIR"/recordings/*/meta.json; do
+    if [[ -f "$meta" ]]; then
+      local meta_content
+      meta_content=$(cat "$meta")
+      local r_status
+      r_status=$(json_field "$meta_content" "status")
+      if [[ "$r_status" == "recording" ]]; then
+        recording_status="recording"
+        recording_name=$(json_field "$meta_content" "name")
+        break
+      fi
+    fi
+  done
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    # JSON output
+    local session_json recording_json
+    if [[ "$session_status" == "active" ]]; then
+      session_json="{\"status\":\"active\",\"name\":\"$session_name\"}"
+    else
+      session_json="{\"status\":\"none\"}"
+    fi
+    if [[ "$recording_status" == "recording" ]]; then
+      recording_json="{\"status\":\"recording\",\"name\":\"$recording_name\"}"
+    else
+      recording_json="{\"status\":\"none\"}"
+    fi
+    printf '{"pending":%d,"urgent":%d,"normal":%d,"low":%d,"mode":"%s","session":%s,"recording":%s,"done":%d}\n' \
+      "$total_pending" "$urgent" "$normal" "$low" "$GSD_STACK_MODE" \
+      "$session_json" "$recording_json" "$done_count"
+  else
+    # Human output
+    local use_color=false
+    if [[ -t 1 ]] && [[ -z "${NO_COLOR:-}" ]]; then
+      use_color=true
+    fi
+
+    local green="" dim="" reset="" bullet="●" dash="—"
+    if [[ "$use_color" == true ]]; then
+      green='\033[32m'
+      dim='\033[2m'
+      reset='\033[0m'
+    fi
+
+    printf "  Stack:     %d pending%s\n" "$total_pending" "$breakdown"
+    printf "  Mode:      %s\n" "$GSD_STACK_MODE"
+
+    if [[ "$session_status" == "active" ]]; then
+      printf "  Session:   ${green}${bullet} active (%s)${reset}\n" "$session_name"
+    else
+      printf "  Session:   ${dim}${dash} none${reset}\n"
+    fi
+
+    if [[ "$recording_status" == "recording" ]]; then
+      printf "  Recording: ${green}${bullet} recording (%s)${reset}\n" "$recording_name"
+    else
+      printf "  Recording: ${dim}${dash} none${reset}\n"
+    fi
+
+    printf "  Done:      %d completed\n" "$done_count"
+  fi
 }
 
+# ==============================================================================
+# Log subcommand
+# ==============================================================================
+
 cmd_log() {
-  echo "Log: not yet implemented"
+  local limit=20
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -n|--limit)
+        if [[ -n "${2:-}" ]]; then
+          limit="$2"
+          shift 2
+        else
+          echo "Error: -n requires a number"
+          exit 1
+        fi
+        ;;
+      *)
+        shift
+        ;;
+    esac
+  done
+
+  local history_file="$GSD_STACK_DIR/history.jsonl"
+
+  # Check if history exists and has content
+  if [[ ! -f "$history_file" ]] || [[ ! -s "$history_file" ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      echo "[]"
+    else
+      echo "No events recorded yet."
+    fi
+    return 0
+  fi
+
+  # Read last N entries
+  local lines
+  lines=$(tail -n "$limit" "$history_file")
+
+  if [[ -z "$lines" ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      echo "[]"
+    else
+      echo "No events recorded yet."
+    fi
+    return 0
+  fi
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    # JSON array output
+    local first=true
+    printf "["
+    while IFS= read -r line; do
+      if [[ "$first" == true ]]; then
+        first=false
+      else
+        printf ","
+      fi
+      printf "%s" "$line"
+    done <<< "$lines"
+    printf "]\n"
+  else
+    # Human output with colors
+    local use_color=false
+    if [[ -t 1 ]] && [[ -z "${NO_COLOR:-}" ]]; then
+      use_color=true
+    fi
+
+    local green='' yellow='' blue='' red='' reset=''
+    if [[ "$use_color" == true ]]; then
+      green='\033[32m'
+      yellow='\033[33m'
+      blue='\033[34m'
+      red='\033[31m'
+      reset='\033[0m'
+    fi
+
+    while IFS= read -r line; do
+      local ts event detail
+      ts=$(json_field "$line" "ts")
+      event=$(json_field "$line" "event")
+      detail=$(json_field "$line" "detail")
+
+      # Format timestamp: strip seconds and timezone for compact display
+      # "2026-02-12T15:00:00Z" -> "2026-02-12 15:00"
+      local display_ts="${ts:0:10} ${ts:11:5}"
+
+      # Truncate detail to 80 chars
+      if [[ ${#detail} -gt 80 ]]; then
+        detail="${detail:0:80}..."
+      fi
+
+      # Color the event type
+      local color=""
+      case "$event" in
+        push|pop|session|record)
+          color="$green" ;;
+        poke|drain|pause|resume)
+          color="$yellow" ;;
+        status|log|help|version)
+          color="$blue" ;;
+        error|stop|clear)
+          color="$red" ;;
+        *)
+          color="" ;;
+      esac
+
+      printf "%s  ${color}%-8s${reset}  %s\n" "$display_ts" "$event" "$detail"
+    done <<< "$lines"
+  fi
 }
 
 # ==============================================================================
@@ -159,7 +394,8 @@ main() {
       exit 0
       ;;
     log)
-      cmd_log
+      shift
+      cmd_log "$@"
       log_event "log" "displayed log"
       exit 0
       ;;
