@@ -1021,6 +1021,100 @@ cmd_watch() {
 }
 
 # ==============================================================================
+# Poke subcommand
+# ==============================================================================
+
+cmd_poke() {
+  local message=""
+  local target_session=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --session=*) target_session="${1#--session=}" ; shift ;;
+      --session)   target_session="${2:-}" ; shift 2 ;;
+      -*)          echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)           message="$1" ; shift ;;
+    esac
+  done
+
+  # Find active session
+  local session_name="" tmux_target=""
+  if [[ -n "$target_session" ]]; then
+    # Targeted session
+    local session_dir="$GSD_STACK_DIR/sessions/$target_session"
+    if [[ ! -f "$session_dir/meta.json" ]]; then
+      echo "Error: No session '$target_session' found."
+      exit 1
+    fi
+    local meta_content
+    meta_content=$(cat "$session_dir/meta.json")
+    local state
+    state=$(get_session_state "$target_session") || true
+    if [[ "$state" != "active" ]] && [[ "$state" != "stalled" ]]; then
+      echo "Error: Session '$target_session' is not active (status: $state)."
+      exit 1
+    fi
+    session_name="$target_session"
+    tmux_target=$(json_field "$meta_content" "tmux_session")
+  else
+    # Find first active session
+    for meta in "$GSD_STACK_DIR"/sessions/*/meta.json; do
+      if [[ -f "$meta" ]]; then
+        local meta_content
+        meta_content=$(cat "$meta")
+        local s_name s_status
+        s_name=$(json_field "$meta_content" "name")
+        s_status=$(json_field "$meta_content" "status")
+        if [[ "$s_status" == "active" ]]; then
+          session_name="$s_name"
+          tmux_target=$(json_field "$meta_content" "tmux_session")
+          break
+        fi
+      fi
+    done
+  fi
+
+  # Error if no active session found
+  if [[ -z "$session_name" ]]; then
+    echo "Error: No active session found. Start one with 'gsd-stack session <path>'."
+    exit 1
+  fi
+
+  # Determine poke content: direct message or nudge
+  local poke_type="direct"
+  local poke_content="$message"
+  if [[ -z "$message" ]]; then
+    poke_type="nudge"
+    poke_content="process the command stack -- run /pop-stack"
+  fi
+
+  # Send via tmux or mock
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    # Real tmux send-keys
+    tmux send-keys -t "$tmux_target" "$poke_content" Enter
+  fi
+  # In mock mode, skip tmux but still log and report
+
+  # Log event
+  log_event "poke" "$poke_type: $poke_content (session: $session_name)"
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    local json_content="${poke_content//\\/\\\\}"
+    json_content="${json_content//\"/\\\"}"
+    printf '{"status":"delivered","type":"%s","message":"%s","session":"%s"}\n' \
+      "$poke_type" "$json_content" "$session_name"
+  else
+    if [[ "$poke_type" == "nudge" ]]; then
+      echo "Poked '$session_name' with nudge: $poke_content"
+    else
+      echo "Poked '$session_name': $poke_content"
+    fi
+  fi
+}
+
+# ==============================================================================
 # Known subcommands (stubs for future implementation)
 # ==============================================================================
 
@@ -1101,7 +1195,12 @@ main() {
       cmd_watch "$@"
       exit $?
       ;;
-    poke|drain|pause|resume|stop|save|record|stop-record|mark|play|metrics)
+    poke)
+      shift
+      cmd_poke "$@"
+      exit 0
+      ;;
+    drain|pause|resume|stop|save|record|stop-record|mark|play|metrics)
       echo "$cmd: not yet implemented"
       log_event "$cmd" "stub invoked"
       exit 0
