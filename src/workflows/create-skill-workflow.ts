@@ -6,6 +6,7 @@ import { validateSkillInput, suggestFixedName, validateDescriptionQuality } from
 import { ReservedNameValidator } from '../validation/reserved-names.js';
 import { BudgetValidator, formatBudgetDisplay } from '../validation/budget-validation.js';
 import { detectArguments, detectPreprocessing, checkInjectionRisk, suggestArgumentHint } from '../validation/arguments-validation.js';
+import { ContentAnalyzer, WORD_THRESHOLD_WARNING } from '../disclosure/index.js';
 import type { SkillTrigger, SkillMetadata } from '../types/skill.js';
 import type { GsdSkillCreatorExtension, ForceOverrideReservedName, ForceOverrideBudget } from '../types/extensions.js';
 import type { SkillScope } from '../types/scope.js';
@@ -364,6 +365,31 @@ export async function createSkillWorkflow(
     }
   }
 
+  // Step 4.4: Progressive disclosure analysis (DISC-01/DISC-02)
+  const contentAnalyzer = new ContentAnalyzer();
+  const disclosureAnalysis = contentAnalyzer.analyzeContent(contentStr);
+
+  if (disclosureAnalysis.exceedsWarning) {
+    // >5000 words: show warning suggesting split
+    p.log.warn('');
+    p.log.warn(pc.yellow(`This skill is very large (${disclosureAnalysis.wordCount.toLocaleString()} words). Consider splitting into a progressive disclosure structure.`));
+    p.log.warn(pc.yellow(`Skills over ${WORD_THRESHOLD_WARNING.toLocaleString()} words may impact Claude's context window.`));
+    p.log.warn('');
+  } else if (disclosureAnalysis.exceedsDecompose && disclosureAnalysis.sections.length > 1) {
+    // >2000 words with multiple sections: inform about auto-decomposition
+    const refCount = disclosureAnalysis.sections.length - 1; // First section stays inline
+    const scriptCount = disclosureAnalysis.deterministicOps.length;
+    p.log.message('');
+    p.log.message(pc.cyan('This skill will be auto-decomposed into SKILL.md + references/ for better token management.'));
+    const parts: string[] = [];
+    if (refCount > 0) parts.push(`${refCount} section${refCount > 1 ? 's' : ''} will be extracted to references/`);
+    if (scriptCount > 0) parts.push(`${scriptCount} script${scriptCount > 1 ? 's' : ''} will be extracted to scripts/`);
+    if (parts.length > 0) {
+      p.log.message(pc.dim(parts.join('. ') + '.'));
+    }
+    p.log.message('');
+  }
+
   // Step 4.5: Check single skill budget with actual content
   const skillContent = matter.stringify(content as string, {
     name,
@@ -466,13 +492,43 @@ export async function createSkillWorkflow(
     // Validate with Zod for safety
     validateSkillInput(metadata);
 
-    // Create skill
-    await skillStore.create(name, metadata, content as string);
+    // Determine if decomposition is needed
+    const needsDecomposition = disclosureAnalysis.exceedsDecompose && disclosureAnalysis.sections.length > 1;
+
+    // Create skill (with or without progressive disclosure)
+    if (needsDecomposition) {
+      await skillStore.createWithDisclosure(name, metadata, content as string);
+    } else {
+      await skillStore.create(name, metadata, content as string);
+    }
 
     s.stop('Skill created!');
     const targetPath = scope === 'user'
       ? `~/.claude/skills/${name}/SKILL.md`
       : `.claude/skills/${name}/SKILL.md`;
+
+    // Show file structure if decomposition happened
+    if (needsDecomposition) {
+      p.log.message('');
+      p.log.message(pc.bold('Created file structure:'));
+      p.log.message(`  ${targetPath}`);
+      const refCount = disclosureAnalysis.sections.length - 1;
+      if (refCount > 0) {
+        const refDir = scope === 'user'
+          ? `~/.claude/skills/${name}/references/`
+          : `.claude/skills/${name}/references/`;
+        p.log.message(`  ${refDir} (${refCount} file${refCount > 1 ? 's' : ''})`);
+      }
+      const scriptCount = disclosureAnalysis.deterministicOps.length;
+      if (scriptCount > 0) {
+        const scriptDir = scope === 'user'
+          ? `~/.claude/skills/${name}/scripts/`
+          : `.claude/skills/${name}/scripts/`;
+        p.log.message(`  ${scriptDir} (${scriptCount} file${scriptCount > 1 ? 's' : ''})`);
+      }
+      p.log.message('');
+    }
+
     p.outro(`Skill "${name}" created at ${pc.cyan(targetPath)}`);
   } catch (error) {
     s.stop('Failed to create skill');
