@@ -10,6 +10,7 @@ import {
 } from './agent-generator.js';
 import { SkillCluster } from './cluster-detector.js';
 import { SkillStore } from '../storage/skill-store.js';
+import { PathTraversalError } from '../validation/path-safety.js';
 
 describe('AgentGenerator', () => {
   let tempDir: string;
@@ -386,6 +387,67 @@ describe('AgentGenerator', () => {
       await expect(generator.generateContent(cluster)).rejects.toThrow(
         /validation failed/i
       );
+    });
+  });
+
+  // --------------------------------------------------------------------------
+  // Path traversal protection
+  // --------------------------------------------------------------------------
+
+  describe('path traversal protection', () => {
+    it('isNameAvailable rejects parent traversal name', () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, { agentsDir });
+
+      expect(() => generator.isNameAvailable('../../../etc')).toThrow(
+        PathTraversalError,
+      );
+    });
+
+    it('isNameAvailable rejects name with forward slash', () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, { agentsDir });
+
+      expect(() => generator.isNameAvailable('foo/bar')).toThrow(
+        PathTraversalError,
+      );
+    });
+
+    it('isNameAvailable rejects name with null byte', () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, { agentsDir });
+
+      expect(() => generator.isNameAvailable('foo\x00bar')).toThrow(
+        PathTraversalError,
+      );
+    });
+
+    it('isNameAvailable works for valid name (no regression)', () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, { agentsDir });
+
+      expect(generator.isNameAvailable('valid-agent')).toBe(true);
+    });
+
+    it('create with sanitized cluster name still works (no regression)', async () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, { agentsDir });
+      const cluster = createCluster({ suggestedName: 'safe-agent' });
+
+      const result = await generator.create(cluster);
+
+      expect(fs.existsSync(result.filePath)).toBe(true);
+    });
+
+    it('generateContent asserts safe path on output', async () => {
+      const agentsDir = path.join(tempDir, 'agents');
+      const generator = new AgentGenerator(skillStore, { agentsDir });
+      const cluster = createCluster({ suggestedName: 'valid-content-agent' });
+
+      const result = await generator.generateContent(cluster);
+
+      // Path should be within agents directory
+      expect(result.filePath).toContain(agentsDir);
     });
   });
 });
