@@ -599,6 +599,91 @@ describe('TestRunner', () => {
       expect(result.metrics.falsePositives).toBe(1);
     });
 
+    it('should compute precision, recall, and f1Score between 0 and 1', async () => {
+      const testCases = [
+        createTestCase({ id: '1', expected: 'positive' }),
+        createTestCase({ id: '2', expected: 'negative', prompt: 'Negative' }),
+      ];
+      vi.mocked(mockTestStore.list).mockResolvedValue(testCases);
+
+      const batchResult: BatchResult = {
+        results: [
+          createSimResult(0.8), // Positive passes (TP)
+          createSimResult(0.5), // Negative passes (TN)
+        ],
+        stats: { total: 2, activations: 1, closeCompetitions: 0, noActivations: 1 },
+        duration: 100,
+      };
+      vi.mocked(BatchSimulator).mockImplementation(() => ({
+        runTestSuite: vi.fn().mockResolvedValue(batchResult),
+      } as unknown as BatchSimulator));
+
+      const result = await runner.runForSkill('test-skill');
+
+      expect(result.metrics.precision).toBeGreaterThanOrEqual(0);
+      expect(result.metrics.precision).toBeLessThanOrEqual(1);
+      expect(result.metrics.recall).toBeGreaterThanOrEqual(0);
+      expect(result.metrics.recall).toBeLessThanOrEqual(1);
+      expect(result.metrics.f1Score).toBeGreaterThanOrEqual(0);
+      expect(result.metrics.f1Score).toBeLessThanOrEqual(1);
+    });
+
+    it('should compute perfect precision, recall, f1Score when all tests pass', async () => {
+      const testCases = [
+        createTestCase({ id: '1', expected: 'positive' }),
+        createTestCase({ id: '2', expected: 'positive', prompt: 'Positive 2' }),
+        createTestCase({ id: '3', expected: 'negative', prompt: 'Negative' }),
+        createTestCase({ id: '4', expected: 'negative', prompt: 'Negative 2' }),
+      ];
+      vi.mocked(mockTestStore.list).mockResolvedValue(testCases);
+
+      const batchResult: BatchResult = {
+        results: [
+          createSimResult(0.8), // TP
+          createSimResult(0.8), // TP
+          createSimResult(0.5), // TN
+          createSimResult(0.5), // TN
+        ],
+        stats: { total: 4, activations: 2, closeCompetitions: 0, noActivations: 2 },
+        duration: 100,
+      };
+      vi.mocked(BatchSimulator).mockImplementation(() => ({
+        runTestSuite: vi.fn().mockResolvedValue(batchResult),
+      } as unknown as BatchSimulator));
+
+      const result = await runner.runForSkill('test-skill');
+
+      expect(result.metrics.precision).toBe(1.0);
+      expect(result.metrics.recall).toBe(1.0);
+      expect(result.metrics.f1Score).toBe(1.0);
+    });
+
+    it('should compute precision=0, recall=0, f1Score=0 when only negative tests exist', async () => {
+      const testCases = [
+        createTestCase({ id: '1', expected: 'negative' }),
+        createTestCase({ id: '2', expected: 'negative', prompt: 'Negative 2' }),
+      ];
+      vi.mocked(mockTestStore.list).mockResolvedValue(testCases);
+
+      const batchResult: BatchResult = {
+        results: [
+          createSimResult(0.5), // TN
+          createSimResult(0.5), // TN
+        ],
+        stats: { total: 2, activations: 0, closeCompetitions: 0, noActivations: 2 },
+        duration: 100,
+      };
+      vi.mocked(BatchSimulator).mockImplementation(() => ({
+        runTestSuite: vi.fn().mockResolvedValue(batchResult),
+      } as unknown as BatchSimulator));
+
+      const result = await runner.runForSkill('test-skill');
+
+      expect(result.metrics.precision).toBe(0);
+      expect(result.metrics.recall).toBe(0);
+      expect(result.metrics.f1Score).toBe(0);
+    });
+
     it('should handle empty scored results (only edge cases)', async () => {
       const testCases = [
         createTestCase({ id: '1', expected: 'edge-case' }),

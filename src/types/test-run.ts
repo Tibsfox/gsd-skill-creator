@@ -78,6 +78,24 @@ export interface RunMetrics {
 
   /** Number of edge-case tests (reported separately, not included in accuracy) */
   edgeCaseCount: number;
+
+  /**
+   * Precision: TP / (TP + FP)
+   * Measures how many activations were correct. 0 when no positive predictions.
+   */
+  precision: number;
+
+  /**
+   * Recall: TP / (TP + FN)
+   * Measures how many expected activations were caught. 0 when no actual positives.
+   */
+  recall: number;
+
+  /**
+   * F1 Score: harmonic mean of precision and recall.
+   * 0 when both precision and recall are 0.
+   */
+  f1Score: number;
 }
 
 /**

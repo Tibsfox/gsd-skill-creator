@@ -315,6 +315,27 @@ describe('ResultFormatter', () => {
       expect(output).toContain('5.0%');
     });
 
+    it('should display Precision line', () => {
+      const metrics = createMockMetrics({ precision: 0.85, recall: 0.9, f1Score: 0.874 });
+      const output = formatter.formatMetrics(metrics);
+
+      expect(output).toContain('Precision:');
+    });
+
+    it('should display Recall line', () => {
+      const metrics = createMockMetrics({ precision: 0.85, recall: 0.9, f1Score: 0.874 });
+      const output = formatter.formatMetrics(metrics);
+
+      expect(output).toContain('Recall:');
+    });
+
+    it('should display F1 Score line', () => {
+      const metrics = createMockMetrics({ precision: 0.85, recall: 0.9, f1Score: 0.874 });
+      const output = formatter.formatMetrics(metrics);
+
+      expect(output).toContain('F1 Score:');
+    });
+
     it('should display duration when provided', () => {
       const metrics = createMockMetrics();
       const output = formatter.formatMetrics(metrics, 234);
@@ -388,6 +409,20 @@ describe('ResultFormatter', () => {
       }
     });
 
+    it('should include precision, recall, f1Score in compact summary', () => {
+      const result = createMockRunResult({
+        metrics: createMockMetrics({ precision: 0.85, recall: 0.9, f1Score: 0.874 }),
+      });
+      const output = formatter.formatJSON(result, 'compact');
+
+      const lines = output.split('\n');
+      const summary = JSON.parse(lines[0]);
+
+      expect(summary).toHaveProperty('precision');
+      expect(summary).toHaveProperty('recall');
+      expect(summary).toHaveProperty('f1Score');
+    });
+
     it('should include test result fields', () => {
       const result = createMockRunResult();
       const output = formatter.formatJSON(result, 'compact');
@@ -430,6 +465,18 @@ describe('ResultFormatter', () => {
       expect(parsed.results.positive).toHaveLength(2);
       expect(parsed.results.negative).toHaveLength(2);
       expect(parsed.results.edgeCases).toHaveLength(1);
+    });
+
+    it('should include precision, recall, f1Score in pretty metrics', () => {
+      const result = createMockRunResult({
+        metrics: createMockMetrics({ precision: 0.85, recall: 0.9, f1Score: 0.874 }),
+      });
+      const output = formatter.formatJSON(result, 'pretty');
+
+      const parsed = JSON.parse(output);
+      expect(parsed.metrics).toHaveProperty('precision');
+      expect(parsed.metrics).toHaveProperty('recall');
+      expect(parsed.metrics).toHaveProperty('f1Score');
     });
 
     it('should include hints array', () => {
