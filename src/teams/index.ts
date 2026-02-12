@@ -65,3 +65,7 @@ export type {
   RoleCoherenceResult,
   RoleCoherenceWarning,
 } from './team-validator.js';
+
+// Cost estimation
+export { CostEstimator, MODEL_PRICING, TOPOLOGY_TOKEN_ESTIMATES, PRICING_LAST_UPDATED } from './cost-estimator.js';
+export type { MemberEstimate, CostEstimate } from './cost-estimator.js';
