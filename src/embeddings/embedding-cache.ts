@@ -246,6 +246,76 @@ export class EmbeddingCache {
   }
 
   /**
+   * Get cached entry with version metadata, regardless of version match.
+   *
+   * Unlike `get()` which returns null when the model version differs,
+   * this method returns the entry WITH its version info so callers can
+   * decide how to handle version drift (e.g., re-embed or use as-is).
+   *
+   * @param skillName - Name of the skill
+   * @param content - Content to look up by hash
+   * @returns Entry with embedding, modelVersion, and contentHash, or null if not found
+   */
+  getWithVersionInfo(
+    skillName: string,
+    content: string
+  ): { embedding: EmbeddingVector; modelVersion: string; contentHash: string } | null {
+    const contentHash = this.computeContentHash(content);
+    const key = this.getCacheKey(skillName, contentHash);
+    const entry = this.cache.entries[key];
+
+    if (!entry) return null;
+
+    return {
+      embedding: entry.embedding,
+      modelVersion: entry.modelVersion,
+      contentHash: entry.contentHash,
+    };
+  }
+
+  /**
+   * Get the model version this cache instance uses for new entries.
+   *
+   * Useful for external comparison against entry versions returned
+   * by `getWithVersionInfo()`.
+   */
+  getVersionInfo(): string {
+    return this.modelVersion;
+  }
+
+  /**
+   * Check if a cached entry was created with a different model version
+   * than the current cache instance.
+   *
+   * Returns false if entry doesn't exist (no entry = no drift, just cache miss).
+   *
+   * @param skillName - Name of the skill
+   * @param content - Content to look up by hash
+   * @returns true if entry exists and has a different model version
+   */
+  hasVersionDrift(skillName: string, content: string): boolean {
+    const contentHash = this.computeContentHash(content);
+    const key = this.getCacheKey(skillName, contentHash);
+    const entry = this.cache.entries[key];
+
+    if (!entry) return false;
+
+    return entry.modelVersion !== this.modelVersion;
+  }
+
+  /**
+   * Get cache keys for entries whose modelVersion differs from the current
+   * cache model version. Useful for bulk re-embedding after model upgrades.
+   *
+   * @returns Array of cache keys with stale model versions
+   */
+  getStaleVersionEntries(): string[] {
+    return Object.entries(this.cache.entries)
+      .filter(([_, entry]) => entry.modelVersion !== this.modelVersion)
+      .map(([key]) => key);
+  }
+
+  /**
    * Get the current cache file path.
    */
   getCachePath(): string {
