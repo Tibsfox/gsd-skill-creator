@@ -16,10 +16,14 @@ export {
   generateLeaderWorkerTemplate,
   generatePipelineTemplate,
   generateSwarmTemplate,
+  generateRouterTemplate,
+  generateMapReduceTemplate,
   LEADER_TOOLS,
   WORKER_TOOLS,
   PIPELINE_STAGE_TOOLS,
   SWARM_WORKER_TOOLS,
+  ROUTER_TOOLS,
+  REDUCER_TOOLS,
 } from './templates.js';
 export type { TemplateOptions, TemplateResult } from './templates.js';
 
@@ -65,6 +69,10 @@ export type {
   RoleCoherenceResult,
   RoleCoherenceWarning,
 } from './team-validator.js';
+
+// Inter-team communication
+export { validateInterTeamLinks, detectInterTeamCycles } from './inter-team-bridge.js';
+export type { InterTeamCycleResult, InterTeamValidationResult } from './inter-team-bridge.js';
 
 // Cost estimation
 export { CostEstimator, MODEL_PRICING, TOPOLOGY_TOKEN_ESTIMATES, PRICING_LAST_UPDATED } from './cost-estimator.js';
