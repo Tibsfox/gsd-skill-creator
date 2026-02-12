@@ -14,6 +14,8 @@ import { createGzip } from 'node:zlib';
 import matter from 'gray-matter';
 import { exportPortableContent } from '../portability/index.js';
 import type { SkillMetadata, Skill } from '../types/skill.js';
+import { safeParseFrontmatter } from '../validation/yaml-safety.js';
+import { SkillMetadataSchema } from '../validation/skill-validation.js';
 
 /**
  * Format version envelope for skill packages.
@@ -72,11 +74,15 @@ export async function packSkill(
   skillName: string,
   outputPath: string,
 ): Promise<SkillPackageManifest> {
-  // 1. Read skill metadata from SKILL.md
+  // 1. Read skill metadata from SKILL.md (safe parsing + Zod validation)
   const skillMdPath = join(skillDir, 'SKILL.md');
   const rawContent = await readFile(skillMdPath, 'utf-8');
-  const { data, content: body } = matter(rawContent);
-  const metadata = data as SkillMetadata;
+  const parseResult = safeParseFrontmatter(rawContent);
+  if (!parseResult.success) {
+    throw new Error(`Invalid skill file "${skillName}": ${parseResult.error}`);
+  }
+  const metadata = SkillMetadataSchema.parse(parseResult.data) as SkillMetadata;
+  const body = parseResult.body;
 
   // 2. Convert SKILL.md to portable format (strips extension fields, converts allowed-tools)
   const skill: Skill = {
