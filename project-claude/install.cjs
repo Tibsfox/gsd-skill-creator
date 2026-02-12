@@ -420,6 +420,8 @@ function validateInstallation() {
     { name: 'wrap:phase', path: '.claude/commands/wrap/phase.md' },
     // Agent
     { name: 'observer agent', path: '.claude/agents/observer.md' },
+    // Dashboard
+    { name: 'gsd-dashboard', path: '.claude/commands/gsd-dashboard.md' },
     // Config
     { name: 'integration config', path: '.planning/skill-creator.json' },
   ];
