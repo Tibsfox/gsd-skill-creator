@@ -74,6 +74,9 @@ export type {
 export { validateInterTeamLinks, detectInterTeamCycles } from './inter-team-bridge.js';
 export type { InterTeamCycleResult, InterTeamValidationResult } from './inter-team-bridge.js';
 
+// Message safety
+export { sanitizeInboxMessage } from '../validation/message-safety.js';
+
 // Cost estimation
 export { CostEstimator, MODEL_PRICING, TOPOLOGY_TOKEN_ESTIMATES, PRICING_LAST_UPDATED } from './cost-estimator.js';
 export type { MemberEstimate, CostEstimate } from './cost-estimator.js';
