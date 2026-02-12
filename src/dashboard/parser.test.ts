@@ -671,25 +671,21 @@ describe('parseMilestonesMd', () => {
 // parsePlanningDir
 // ---------------------------------------------------------------------------
 
+const { mockReadFile } = vi.hoisted(() => ({
+  mockReadFile: vi.fn(),
+}));
+
+vi.mock('node:fs/promises', () => ({
+  readFile: mockReadFile,
+}));
+
 describe('parsePlanningDir', () => {
-  const mockFs = {
-    readFile: vi.fn(),
-  };
-
   beforeEach(() => {
-    vi.resetModules();
-    vi.mock('node:fs/promises', () => ({
-      default: mockFs,
-      readFile: mockFs.readFile,
-    }));
-  });
-
-  afterEach(() => {
-    vi.restoreAllMocks();
+    mockReadFile.mockReset();
   });
 
   it('reads all planning files and returns combined data', async () => {
-    mockFs.readFile.mockImplementation((path: string) => {
+    mockReadFile.mockImplementation((path: string) => {
       if (path.endsWith('PROJECT.md')) return Promise.resolve(PROJECT_MD);
       if (path.endsWith('REQUIREMENTS.md'))
         return Promise.resolve(REQUIREMENTS_MD);
@@ -700,11 +696,7 @@ describe('parsePlanningDir', () => {
       return Promise.reject(new Error('ENOENT'));
     });
 
-    // Re-import to get the mocked version
-    const { parsePlanningDir: parsePlanningDirMocked } = await import(
-      './parser.js'
-    );
-    const data = await parsePlanningDirMocked('/fake/.planning');
+    const data = await parsePlanningDir('/fake/.planning');
 
     expect(data.project).toBeDefined();
     expect(data.project!.name).toBe('GSD Skill Creator');
@@ -720,16 +712,13 @@ describe('parsePlanningDir', () => {
   });
 
   it('returns partial data when some files are missing', async () => {
-    mockFs.readFile.mockImplementation((path: string) => {
+    mockReadFile.mockImplementation((path: string) => {
       if (path.endsWith('PROJECT.md')) return Promise.resolve(PROJECT_MD);
       if (path.endsWith('STATE.md')) return Promise.resolve(STATE_MD);
       return Promise.reject(new Error('ENOENT'));
     });
 
-    const { parsePlanningDir: parsePlanningDirMocked } = await import(
-      './parser.js'
-    );
-    const data = await parsePlanningDirMocked('/fake/.planning');
+    const data = await parsePlanningDir('/fake/.planning');
 
     expect(data.project).toBeDefined();
     expect(data.state).toBeDefined();
@@ -740,12 +729,9 @@ describe('parsePlanningDir', () => {
   });
 
   it('returns only generatedAt when all files are missing', async () => {
-    mockFs.readFile.mockRejectedValue(new Error('ENOENT'));
+    mockReadFile.mockRejectedValue(new Error('ENOENT'));
 
-    const { parsePlanningDir: parsePlanningDirMocked } = await import(
-      './parser.js'
-    );
-    const data = await parsePlanningDirMocked('/fake/.planning');
+    const data = await parsePlanningDir('/fake/.planning');
 
     expect(data.project).toBeUndefined();
     expect(data.requirements).toBeUndefined();
