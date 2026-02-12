@@ -363,6 +363,178 @@ cmd_log() {
 }
 
 # ==============================================================================
+# Push subcommand
+# ==============================================================================
+
+cmd_push() {
+  local priority="$GSD_PRIORITY"
+  local message=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --priority=*) priority="${1#--priority=}" ; shift ;;
+      --priority)   priority="${2:-normal}" ; shift 2 ;;
+      -*)           echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)            message="$1" ; shift ;;
+    esac
+  done
+
+  # If no message from args, try stdin
+  if [[ -z "$message" ]]; then
+    if [[ ! -t 0 ]]; then
+      message=$(cat)
+    fi
+  fi
+
+  # Validate message exists
+  if [[ -z "$message" ]]; then
+    echo "Error: No message provided. Usage: gsd-stack push [--priority=urgent|normal|low] \"message\""
+    exit 1
+  fi
+
+  # Map priority to sort prefix
+  local prefix
+  case "$priority" in
+    urgent) prefix="0" ;;
+    normal) prefix="5" ;;
+    low)    prefix="9" ;;
+    *)
+      echo "Error: Invalid priority '$priority'. Use urgent, normal, or low."
+      exit 1
+      ;;
+  esac
+
+  # Generate unique filename: {prefix}-{epoch_ns}-{random}.md
+  local ts_epoch
+  ts_epoch=$(date +%s%N | cut -c1-13)  # millisecond epoch
+  local rand=$((RANDOM % 10000))
+  local filename="${prefix}-${ts_epoch}-$(printf '%04d' $rand).md"
+  local filepath="$GSD_STACK_DIR/pending/$filename"
+
+  # Generate ISO 8601 timestamp for frontmatter
+  local ts_iso
+  ts_iso=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+  # Write message file with YAML frontmatter
+  cat > "$filepath" <<MSGEOF
+---
+priority: $priority
+source: $GSD_SOURCE
+created: $ts_iso
+---
+$message
+MSGEOF
+
+  # Log event
+  log_event "push" "$priority: $message"
+
+  # Output
+  local msg_id="${filename%.md}"
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"id":"%s","priority":"%s","path":"%s"}\n' "$msg_id" "$priority" "$filepath"
+  else
+    echo "$filename"
+  fi
+}
+
+# ==============================================================================
+# Peek subcommand
+# ==============================================================================
+
+cmd_peek() {
+  # List pending messages in sort order
+  local files
+  if [[ "$GSD_STACK_MODE" == "lifo" ]]; then
+    # LIFO: newest first (reverse sort -- last pushed = highest timestamp)
+    files=$(ls -1r "$GSD_STACK_DIR/pending/" 2>/dev/null)
+  else
+    # FIFO: oldest first (normal sort -- priority prefix then oldest timestamp)
+    files=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null)
+  fi
+
+  # Check empty
+  if [[ -z "$files" ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"empty":true,"depth":0}\n'
+    else
+      echo "Stack is empty. No messages pending."
+    fi
+    log_event "peek" "empty stack"
+    return 0
+  fi
+
+  # Get the first file (next message)
+  local next_file
+  next_file=$(echo "$files" | head -1)
+  local filepath="$GSD_STACK_DIR/pending/$next_file"
+
+  # Count total pending
+  local depth
+  depth=$(echo "$files" | wc -l)
+  depth=$((depth + 0))  # trim whitespace
+
+  # Read the file and parse frontmatter + body
+  local content
+  content=$(cat "$filepath")
+
+  local priority="unknown"
+  local body=""
+  local in_frontmatter=false
+  local frontmatter_end=0
+  local line_num=0
+
+  while IFS= read -r line; do
+    line_num=$((line_num + 1))
+    if [[ "$line" == "---" ]]; then
+      if [[ "$in_frontmatter" == false ]]; then
+        in_frontmatter=true
+        continue
+      else
+        frontmatter_end=$line_num
+        in_frontmatter=false
+        continue
+      fi
+    fi
+    # Extract priority from frontmatter
+    if [[ "$in_frontmatter" == true ]] && [[ "$line" == priority:* ]]; then
+      priority="${line#priority: }"
+    fi
+    # Collect body lines (after frontmatter closes)
+    if [[ "$frontmatter_end" -gt 0 ]]; then
+      if [[ -n "$body" ]]; then
+        body="$body
+$line"
+      else
+        body="$line"
+      fi
+    fi
+  done <<< "$content"
+
+  # Log event
+  log_event "peek" "$priority: $(echo "$body" | head -1)"
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    # Escape body for JSON
+    local json_body="${body//\\/\\\\}"
+    json_body="${json_body//\"/\\\"}"
+    printf '{"id":"%s","priority":"%s","body":"%s","depth":%d}\n' \
+      "${next_file%.md}" "$priority" "$json_body" "$depth"
+  else
+    local priority_label
+    case "$priority" in
+      urgent) priority_label="[URGENT]" ;;
+      normal) priority_label="[normal]" ;;
+      low)    priority_label="[low]" ;;
+      *)      priority_label="[$priority]" ;;
+    esac
+    printf "%s %s\n" "$priority_label" "$body"
+    printf "(%d pending)\n" "$depth"
+  fi
+}
+
+# ==============================================================================
 # Known subcommands (stubs for future implementation)
 # ==============================================================================
 
@@ -399,7 +571,17 @@ main() {
       log_event "log" "displayed log"
       exit 0
       ;;
-    push|pop|peek|poke|drain|clear|session|list|watch|pause|resume|stop|save|record|stop-record|mark|play|metrics)
+    push)
+      shift
+      cmd_push "$@"
+      exit 0
+      ;;
+    peek)
+      shift
+      cmd_peek "$@"
+      exit 0
+      ;;
+    pop|poke|drain|clear|session|list|watch|pause|resume|stop|save|record|stop-record|mark|play|metrics)
       echo "$cmd: not yet implemented"
       log_event "$cmd" "stub invoked"
       exit 0
