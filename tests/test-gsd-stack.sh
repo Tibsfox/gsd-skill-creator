@@ -1662,6 +1662,255 @@ assert_eq "mixed ops: pending has 0 files" "0" "$file_count"
 assert_eq "mixed ops: done has 5 files" "5" "$done_count"
 
 # ==============================================================================
+# List Subcommand Tests (no sessions)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}List Subcommand Tests (no sessions)${RESET}\n"
+
+# Reset stack dir for clean list tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# -- list with no sessions exits 0 --
+set +e
+output=$("$GSD_STACK" list 2>&1)
+rc=$?
+set -e
+assert_eq "list no sessions exits 0" "0" "$rc"
+
+# -- Output contains "No sessions" or "no sessions" --
+if echo "$output" | grep -qi "no sessions"; then
+  pass "list no sessions shows empty-state message"
+else
+  fail "list no sessions shows empty-state message" "output: $output"
+fi
+
+# ==============================================================================
+# List Subcommand Tests (multiple sessions with different states)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}List Subcommand Tests (multiple sessions)${RESET}\n"
+
+# Reset and set up 4 session directories manually
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl"
+touch "$GSD_STACK_DIR/registry.jsonl"
+
+# Active session (fresh heartbeat)
+mkdir -p "$GSD_STACK_DIR/sessions/webapp"
+echo '{"name":"webapp","status":"active","project":"/home/user/webapp","started":"2026-02-12T10:00:00Z","tmux_session":"claude-webapp"}' > "$GSD_STACK_DIR/sessions/webapp/meta.json"
+touch "$GSD_STACK_DIR/sessions/webapp/heartbeat"
+
+# Stalled session (old heartbeat)
+mkdir -p "$GSD_STACK_DIR/sessions/api-server"
+echo '{"name":"api-server","status":"active","project":"/home/user/api","started":"2026-02-12T09:00:00Z","tmux_session":"claude-api-server"}' > "$GSD_STACK_DIR/sessions/api-server/meta.json"
+touch -d "10 minutes ago" "$GSD_STACK_DIR/sessions/api-server/heartbeat"
+
+# Stopped session
+mkdir -p "$GSD_STACK_DIR/sessions/old-proj"
+echo '{"name":"old-proj","status":"stopped","project":"/home/user/old","started":"2026-02-11T08:00:00Z","tmux_session":"claude-old-proj"}' > "$GSD_STACK_DIR/sessions/old-proj/meta.json"
+
+# Paused session
+mkdir -p "$GSD_STACK_DIR/sessions/paused-work"
+echo '{"name":"paused-work","status":"paused","project":"/home/user/work","started":"2026-02-12T11:00:00Z","tmux_session":"claude-paused-work"}' > "$GSD_STACK_DIR/sessions/paused-work/meta.json"
+touch "$GSD_STACK_DIR/sessions/paused-work/heartbeat"
+
+# -- list exits 0 --
+set +e
+output=$("$GSD_STACK" list 2>&1)
+rc=$?
+set -e
+assert_eq "list with sessions exits 0" "0" "$rc"
+
+# -- Output contains all session names --
+assert_contains "list shows webapp" "$output" "webapp"
+assert_contains "list shows api-server" "$output" "api-server"
+assert_contains "list shows old-proj" "$output" "old-proj"
+assert_contains "list shows paused-work" "$output" "paused-work"
+
+# -- Output contains state labels --
+assert_contains "list shows active state" "$output" "active"
+assert_contains "list shows stalled state" "$output" "stalled"
+assert_contains "list shows stopped state" "$output" "stopped"
+assert_contains "list shows paused state" "$output" "paused"
+
+# -- Output contains at least one project path --
+assert_contains "list shows project path" "$output" "/home/user/"
+
+# ==============================================================================
+# List --filter Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}List --filter Tests${RESET}\n"
+
+# Using same session setup above
+
+# -- filter=active shows webapp but NOT old-proj --
+set +e
+output=$("$GSD_STACK" list --filter=active 2>&1)
+rc=$?
+set -e
+assert_eq "list --filter=active exits 0" "0" "$rc"
+assert_contains "list --filter=active shows webapp" "$output" "webapp"
+assert_not_contains "list --filter=active hides old-proj" "$output" "old-proj"
+
+# -- filter=stalled shows api-server but NOT webapp (as state label) --
+set +e
+output=$("$GSD_STACK" list --filter=stalled 2>&1)
+rc=$?
+set -e
+assert_eq "list --filter=stalled exits 0" "0" "$rc"
+assert_contains "list --filter=stalled shows api-server" "$output" "api-server"
+assert_not_contains "list --filter=stalled hides webapp" "$output" "webapp"
+
+# -- filter=stopped shows old-proj but NOT webapp --
+set +e
+output=$("$GSD_STACK" list --filter=stopped 2>&1)
+rc=$?
+set -e
+assert_eq "list --filter=stopped exits 0" "0" "$rc"
+assert_contains "list --filter=stopped shows old-proj" "$output" "old-proj"
+assert_not_contains "list --filter=stopped hides webapp" "$output" "webapp"
+
+# -- filter=paused shows paused-work but NOT webapp --
+set +e
+output=$("$GSD_STACK" list --filter=paused 2>&1)
+rc=$?
+set -e
+assert_eq "list --filter=paused exits 0" "0" "$rc"
+assert_contains "list --filter=paused shows paused-work" "$output" "paused-work"
+assert_not_contains "list --filter=paused hides webapp" "$output" "webapp"
+
+# -- filter=active does NOT show stalled as a state (filter works) --
+set +e
+output=$("$GSD_STACK" list --filter=active 2>&1)
+set -e
+assert_not_contains "list --filter=active no stalled state shown" "$output" "stalled"
+
+# ==============================================================================
+# List --json Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}List --json Tests${RESET}\n"
+
+# Using same session setup
+
+# -- GSD_FORMAT=json list exits 0 --
+set +e
+output=$(GSD_FORMAT=json "$GSD_STACK" list 2>&1)
+rc=$?
+set -e
+assert_eq "list json exits 0" "0" "$rc"
+
+# -- Output starts with [ (JSON array) --
+if [[ "$output" == "["* ]]; then
+  pass "list json starts with ["
+else
+  fail "list json starts with [" "output starts with: ${output:0:40}"
+fi
+
+# -- JSON contains session data --
+assert_contains "list json has webapp name" "$output" '"name":"webapp"'
+
+# -- JSON contains state field --
+if echo "$output" | grep -qE '"state":"(active|stalled|stopped|paused|saved)"'; then
+  pass "list json has state field"
+else
+  fail "list json has state field" "output: ${output:0:200}"
+fi
+
+# Validate JSON with python3 if available
+if command -v python3 &>/dev/null; then
+  set +e
+  echo "$output" | python3 -m json.tool >/dev/null 2>&1
+  json_rc=$?
+  set -e
+  if [[ "$json_rc" -eq 0 ]]; then
+    pass "list json is valid JSON (python3 validated)"
+  else
+    fail "list json is valid JSON (python3 validated)" "python3 json.tool failed"
+  fi
+else
+  pass "list json is valid JSON (python3 not available, skipped)"
+fi
+
+# ==============================================================================
+# Watch Subcommand Tests (mocked tmux)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Watch Subcommand Tests${RESET}\n"
+
+# Using same session setup (webapp=active, old-proj=stopped)
+
+# -- watch active session exits 0 (mock mode) --
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" watch webapp 2>&1)
+rc=$?
+set -e
+assert_eq "watch active session exits 0" "0" "$rc"
+# Output should mention webapp and read-only or watching or the tmux session name
+if echo "$output" | grep -qi "webapp\|read-only\|watching\|claude-webapp"; then
+  pass "watch active session shows relevant info"
+else
+  fail "watch active session shows relevant info" "output: $output"
+fi
+
+# -- watch nonexistent session exits non-zero --
+set +e
+output=$("$GSD_STACK" watch nonexistent-session 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "watch nonexistent session exits non-zero"
+else
+  fail "watch nonexistent session exits non-zero" "exit code: $rc"
+fi
+if echo "$output" | grep -qi "not found\|does not exist"; then
+  pass "watch nonexistent session shows error"
+else
+  fail "watch nonexistent session shows error" "output: $output"
+fi
+
+# -- watch stopped session exits non-zero --
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" watch old-proj 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "watch stopped session exits non-zero"
+else
+  fail "watch stopped session exits non-zero" "exit code: $rc"
+fi
+if echo "$output" | grep -qi "not active\|not running\|cannot watch\|must be active"; then
+  pass "watch stopped session shows state error"
+else
+  fail "watch stopped session shows state error" "output: $output"
+fi
+
+# -- watch with no session name exits non-zero --
+set +e
+output=$("$GSD_STACK" watch 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "watch no args exits non-zero"
+else
+  fail "watch no args exits non-zero" "exit code: $rc"
+fi
+if echo "$output" | grep -qi "usage\|session name\|required"; then
+  pass "watch no args shows usage hint"
+else
+  fail "watch no args shows usage hint" "output: $output"
+fi
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
