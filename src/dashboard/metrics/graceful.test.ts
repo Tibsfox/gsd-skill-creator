@@ -77,7 +77,7 @@ describe('safeCollectGit', () => {
 
     const result = await safeCollectGit('/some/dir');
 
-    expect(result).toEqual({ commits: [], totalCommits: 0 });
+    expect(result).toEqual({ commits: [], totalCommits: 0, timeRange: null });
     expect(mockCollectGit).toHaveBeenCalledOnce();
   });
 });
