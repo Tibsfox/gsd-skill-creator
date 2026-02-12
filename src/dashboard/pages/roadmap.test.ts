@@ -154,4 +154,156 @@ describe('renderRoadmapPage', () => {
     expect(typeof html).toBe('string');
     expect(html).toContain('Roadmap');
   });
+
+  it('renders blocked status badge', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      roadmap: {
+        totalPhases: 1,
+        phases: [
+          {
+            number: 1,
+            name: 'Blocked Phase',
+            status: 'blocked',
+            goal: 'Blocked goal',
+            requirements: [],
+            deliverables: [],
+          },
+        ],
+      },
+    };
+    const html = renderRoadmapPage(data);
+    expect(html).toContain('badge-blocked');
+  });
+
+  it('renders phase without goal, requirements, or deliverables', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      roadmap: {
+        totalPhases: 1,
+        phases: [
+          {
+            number: 1,
+            name: 'Minimal Phase',
+            status: 'pending',
+            goal: '',
+            requirements: [],
+            deliverables: [],
+          },
+        ],
+      },
+    };
+    const html = renderRoadmapPage(data);
+    expect(html).toContain('Minimal Phase');
+    expect(html).not.toContain('<strong>Goal:</strong>');
+    expect(html).not.toContain('<strong>Requirements:</strong>');
+    expect(html).not.toContain('<strong>Deliverables:</strong>');
+  });
+
+  it('renders shipped status as badge-complete', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      roadmap: {
+        totalPhases: 1,
+        phases: [
+          {
+            number: 1,
+            name: 'Shipped Phase',
+            status: 'shipped',
+            goal: 'Already shipped',
+            requirements: [],
+            deliverables: [],
+          },
+        ],
+      },
+    };
+    const html = renderRoadmapPage(data);
+    expect(html).toContain('badge-complete');
+  });
+
+  it('renders done status as badge-complete', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      roadmap: {
+        totalPhases: 1,
+        phases: [
+          {
+            number: 1,
+            name: 'Done Phase',
+            status: 'done',
+            goal: 'Completed',
+            requirements: [],
+            deliverables: [],
+          },
+        ],
+      },
+    };
+    const html = renderRoadmapPage(data);
+    expect(html).toContain('badge-complete');
+  });
+
+  it('renders executing status as badge-active', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      roadmap: {
+        totalPhases: 1,
+        phases: [
+          {
+            number: 1,
+            name: 'Executing Phase',
+            status: 'executing',
+            goal: 'In progress',
+            requirements: [],
+            deliverables: [],
+          },
+        ],
+      },
+    };
+    const html = renderRoadmapPage(data);
+    expect(html).toContain('badge-active');
+  });
+
+  it('renders empty status string as pending badge', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      roadmap: {
+        totalPhases: 1,
+        phases: [
+          {
+            number: 1,
+            name: 'Unknown Phase',
+            status: '',
+            goal: '',
+            requirements: [],
+            deliverables: [],
+          },
+        ],
+      },
+    };
+    const html = renderRoadmapPage(data);
+    expect(html).toContain('badge-pending');
+    expect(html).toContain('pending');
+  });
+
+  it('renders 100% progress bar with success class', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      roadmap: {
+        totalPhases: 1,
+        phases: [
+          {
+            number: 1,
+            name: 'Done Phase',
+            status: 'complete',
+            goal: 'All done',
+            requirements: [],
+            deliverables: [],
+          },
+        ],
+      },
+    };
+    const html = renderRoadmapPage(data);
+    expect(html).toContain('progress-fill success');
+    expect(html).toContain('width: 100%');
+  });
 });

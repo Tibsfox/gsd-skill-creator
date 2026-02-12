@@ -157,4 +157,72 @@ describe('renderMilestonesPage', () => {
     // v1.2 has no accomplishments — should not crash
     expect(html).toContain('Teams &amp; Orchestration');
   });
+
+  it('renders in-progress milestone without shipped date', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      milestones: {
+        milestones: [
+          {
+            version: 'v2.0',
+            name: 'WIP Release',
+            goal: 'Still building',
+            shipped: '',
+            stats: { phases: 2 },
+          },
+        ],
+        totals: { milestones: 1, phases: 2, plans: 0 },
+      },
+    };
+    const html = renderMilestonesPage(data);
+    expect(html).toContain('In progress');
+    expect(html).toContain('WIP Release');
+  });
+
+  it('renders milestone with no stats at all', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      milestones: {
+        milestones: [
+          {
+            version: 'v0.1',
+            name: 'Proto',
+            goal: '',
+            shipped: '2025-01-01',
+            stats: {},
+          },
+        ],
+        totals: { milestones: 1, phases: 0, plans: 0 },
+      },
+    };
+    const html = renderMilestonesPage(data);
+    expect(html).toContain('Proto');
+    expect(html).toContain('Shipped 2025-01-01');
+    // No stats parts should be rendered
+    expect(html).not.toContain('phases');
+    expect(html).not.toContain('plans');
+    expect(html).not.toContain('reqs');
+  });
+
+  it('renders milestone without goal', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      milestones: {
+        milestones: [
+          {
+            version: 'v0.2',
+            name: 'Goalless',
+            goal: '',
+            shipped: '2025-02-01',
+            stats: { plans: 5 },
+          },
+        ],
+        totals: { milestones: 1, phases: 0, plans: 5 },
+      },
+    };
+    const html = renderMilestonesPage(data);
+    expect(html).toContain('Goalless');
+    // No timeline-body div when goal is empty
+    expect(html).not.toContain('timeline-body');
+  });
 });

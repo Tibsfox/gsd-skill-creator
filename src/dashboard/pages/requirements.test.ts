@@ -117,4 +117,39 @@ describe('renderRequirementsPage', () => {
     expect(typeof html).toBe('string');
     expect(html).toContain('Requirements');
   });
+
+  it('renders requirements without a goal', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      requirements: {
+        goal: '',
+        groups: [
+          {
+            name: 'Features',
+            requirements: [
+              { id: 'REQ-10', text: 'Some feature' },
+            ],
+          },
+        ],
+      },
+    };
+    const html = renderRequirementsPage(data);
+    // Should render requirements but no goal card
+    expect(html).toContain('REQ-10');
+    expect(html).not.toContain('card-title">Goal');
+  });
+
+  it('renders empty groups without goal (no goal card)', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      requirements: {
+        goal: '',
+        groups: [],
+      },
+    };
+    const html = renderRequirementsPage(data);
+    expect(html).toContain('No requirements defined yet');
+    // No goal card when goal is empty
+    expect(html).not.toContain('card-body">Some goal');
+  });
 });

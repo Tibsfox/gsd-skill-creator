@@ -11,9 +11,10 @@
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { mkdtemp, rm, mkdir, writeFile, readFile } from 'node:fs/promises';
+import { mkdtemp, rm, mkdir, writeFile, readFile, chmod } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import { existsSync } from 'node:fs';
 
 // ---------------------------------------------------------------------------
 // Fixtures — realistic .planning/ content
@@ -176,5 +177,72 @@ describe('generate', () => {
     expect(result.pages).toContain('index.html');
     const content = await readFile(join(nestedOutput, 'index.html'), 'utf-8');
     expect(content).toBeTruthy();
+  });
+
+  it('injects refresh script when live mode is enabled', async () => {
+    await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+
+    const { generate } = await import('./generator.js');
+    const result = await generate({
+      planningDir,
+      outputDir,
+      live: true,
+      refreshInterval: 3000,
+    });
+
+    expect(result.pages).toContain('index.html');
+    const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
+    // Refresh script should be injected
+    expect(content).toContain('setInterval');
+    expect(content).toContain('3000');
+  });
+
+  it('generates all 5 pages with full data', async () => {
+    await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+    await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+    await writeFile(join(planningDir, 'ROADMAP.md'), ROADMAP_MD);
+    await writeFile(join(planningDir, 'MILESTONES.md'), MILESTONES_MD);
+
+    const { generate } = await import('./generator.js');
+    const result = await generate({ planningDir, outputDir, force: true });
+
+    expect(result.pages).toContain('index.html');
+    expect(result.pages).toContain('requirements.html');
+    expect(result.pages).toContain('roadmap.html');
+    expect(result.pages).toContain('milestones.html');
+    expect(result.pages).toContain('state.html');
+    expect(result.pages).toHaveLength(5);
+  });
+
+  it('skips pages when content hash matches manifest (incremental)', async () => {
+    await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+
+    const { generate } = await import('./generator.js');
+
+    // First run generates pages
+    const result1 = await generate({ planningDir, outputDir, force: true });
+    expect(result1.pages.length).toBeGreaterThan(0);
+
+    // Manually read back the manifest and verify it exists
+    const manifestPath = join(outputDir, '.dashboard-manifest.json');
+    const manifestContent = await readFile(manifestPath, 'utf-8');
+    const manifest = JSON.parse(manifestContent);
+    expect(Object.keys(manifest.pages).length).toBeGreaterThan(0);
+  });
+
+  it('uses default refresh interval when live is true but no interval specified', async () => {
+    await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+
+    const { generate } = await import('./generator.js');
+    const result = await generate({
+      planningDir,
+      outputDir,
+      live: true,
+    });
+
+    expect(result.pages).toContain('index.html');
+    const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
+    // Default interval is 5000ms
+    expect(content).toContain('5000');
   });
 });

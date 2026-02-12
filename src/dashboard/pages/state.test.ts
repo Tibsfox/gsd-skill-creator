@@ -137,4 +137,56 @@ describe('renderStatePage', () => {
     expect(html).toContain('State');
     expect(html).toContain('No state');
   });
+
+  it('renders position card with partial fields (no milestone, no progress)', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      state: {
+        milestone: '',
+        phase: '90',
+        status: 'Active',
+        progress: '',
+        focus: '',
+        blockers: [],
+        metrics: {},
+        nextAction: '',
+      },
+    };
+    const html = renderStatePage(data);
+    // Should render phase and status but not milestone or progress
+    expect(html).toContain('Phase');
+    expect(html).toContain('Status');
+    expect(html).not.toContain('Milestone');
+    expect(html).not.toContain('Progress');
+    // No focus section when focus is empty
+    expect(html).not.toContain('Focus');
+    // No next action section when empty
+    expect(html).not.toContain('Next action');
+    // No metrics table when empty
+    expect(html).not.toContain('<table>');
+  });
+
+  it('renders position card with only milestone (no phase, no status)', () => {
+    const data: DashboardData = {
+      generatedAt: '2026-02-12T10:00:00Z',
+      state: {
+        milestone: 'v2.0',
+        phase: '',
+        status: '',
+        progress: '',
+        focus: '',
+        blockers: [],
+        metrics: {},
+        nextAction: '',
+      },
+    };
+    const html = renderStatePage(data);
+    expect(html).toContain('Milestone');
+    expect(html).toContain('v2.0');
+    // Should NOT contain Phase or Status labels
+    const phaseMatches = html.match(/<strong>Phase:<\/strong>/g);
+    expect(phaseMatches).toBeNull();
+    const statusMatches = html.match(/<strong>Status:<\/strong>/g);
+    expect(statusMatches).toBeNull();
+  });
 });
