@@ -401,6 +401,80 @@ function installGitHook() {
   }
 }
 
+// --- Validation ---
+function validateInstallation() {
+  log('Validation:');
+
+  const checks = [
+    // Slash commands
+    { name: 'sc:start', path: '.claude/commands/sc/start.md' },
+    { name: 'sc:status', path: '.claude/commands/sc/status.md' },
+    { name: 'sc:suggest', path: '.claude/commands/sc/suggest.md' },
+    { name: 'sc:observe', path: '.claude/commands/sc/observe.md' },
+    { name: 'sc:digest', path: '.claude/commands/sc/digest.md' },
+    { name: 'sc:wrap', path: '.claude/commands/sc/wrap.md' },
+    // Wrapper commands
+    { name: 'wrap:execute', path: '.claude/commands/wrap/execute.md' },
+    { name: 'wrap:verify', path: '.claude/commands/wrap/verify.md' },
+    { name: 'wrap:plan', path: '.claude/commands/wrap/plan.md' },
+    { name: 'wrap:phase', path: '.claude/commands/wrap/phase.md' },
+    // Agent
+    { name: 'observer agent', path: '.claude/agents/observer.md' },
+    // Config
+    { name: 'integration config', path: '.planning/skill-creator.json' },
+  ];
+
+  let ok = 0;
+  let missing = 0;
+
+  for (const check of checks) {
+    const fullPath = path.join(projectRoot, check.path);
+    if (fs.existsSync(fullPath)) {
+      log(`  ✓ ${check.name}`);
+      ok++;
+    } else {
+      log(`  ✗ ${check.name} — missing: ${check.path}`);
+      missing++;
+    }
+  }
+
+  // Check patterns directory
+  const patternsDir = path.join(projectRoot, '.planning', 'patterns');
+  if (fs.existsSync(patternsDir)) {
+    log('  ✓ patterns directory');
+    ok++;
+  } else {
+    log('  ✗ patterns directory — missing: .planning/patterns/');
+    missing++;
+  }
+
+  // Check git hook
+  const hookPath = path.join(projectRoot, '.git', 'hooks', 'post-commit');
+  if (fs.existsSync(hookPath)) {
+    log('  ✓ post-commit hook');
+    ok++;
+  } else {
+    log('  ✗ post-commit hook — missing: .git/hooks/post-commit');
+    missing++;
+  }
+
+  // Check .gitignore
+  const gitignorePath = path.join(projectRoot, '.gitignore');
+  const gitignoreContent = readFileSafe(gitignorePath) || '';
+  if (gitignoreContent.includes('.planning/patterns/') || gitignoreContent.includes('.planning/')) {
+    log('  ✓ .gitignore (patterns excluded)');
+    ok++;
+  } else {
+    log('  ✗ .gitignore — .planning/patterns/ not excluded');
+    missing++;
+  }
+
+  log('');
+  log(`Validation: ${ok} ok, ${missing} missing`);
+
+  return missing === 0;
+}
+
 // --- Uninstall integration ---
 function uninstallIntegration() {
   const prefix = dryRun ? '[DRY RUN] ' : '';
@@ -559,8 +633,20 @@ function main() {
     log('\n(Dry run — no files were modified)');
   }
 
-  if (stats.warnings > 0) {
-    process.exit(1);
+  // Validation (skip during dry-run since nothing was actually installed)
+  if (!dryRun) {
+    log('');
+    const valid = validateInstallation();
+    if (!valid) {
+      log('\nSome components are missing. Run without --dry-run to install.');
+    }
+    if (stats.warnings > 0 || !valid) {
+      process.exit(1);
+    }
+  } else {
+    if (stats.warnings > 0) {
+      process.exit(1);
+    }
   }
 }
 
