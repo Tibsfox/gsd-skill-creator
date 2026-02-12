@@ -26,6 +26,8 @@ GSD_PRIORITY="${GSD_PRIORITY:-normal}"
 GSD_SOURCE="${GSD_SOURCE:-cli}"
 GSD_FORMAT="${GSD_FORMAT:-}"
 GSD_MOCK_TMUX="${GSD_MOCK_TMUX:-}"
+GSD_MOCK_DRAIN="${GSD_MOCK_DRAIN:-}"
+GSD_DRAIN_LOG_DIR="${GSD_DRAIN_LOG_DIR:-.planning/logs}"
 
 # ==============================================================================
 # Directory bootstrapping
@@ -1115,6 +1117,206 @@ cmd_poke() {
 }
 
 # ==============================================================================
+# Drain subcommand
+# ==============================================================================
+
+cmd_drain() {
+  local dry_run=false
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --dry-run) dry_run=true ; shift ;;
+      -*)        echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)         shift ;;
+    esac
+  done
+
+  # Count pending messages
+  local files
+  if [[ "$GSD_STACK_MODE" == "lifo" ]]; then
+    files=$(ls -1r "$GSD_STACK_DIR/pending/" 2>/dev/null)
+  else
+    files=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null)
+  fi
+
+  if [[ -z "$files" ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"processed":0,"passed":0,"failed":0,"status":"empty"}\n'
+    else
+      echo "Nothing to drain. Stack is empty."
+    fi
+    log_event "drain" "0 messages (empty)"
+    return 0
+  fi
+
+  local total
+  total=$(echo "$files" | wc -l)
+  total=$((total + 0))
+
+  # Dry-run mode: show what would be executed without consuming
+  if [[ "$dry_run" == true ]]; then
+    local idx=0
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"dry_run":true,"total":%d,"messages":[' "$total"
+      local first=true
+      while IFS= read -r file; do
+        idx=$((idx + 1))
+        local filepath="$GSD_STACK_DIR/pending/$file"
+        local body=""
+        local in_fm=false fm_end=0
+        while IFS= read -r line; do
+          if [[ "$line" == "---" ]]; then
+            if [[ "$in_fm" == false ]]; then in_fm=true; continue; else fm_end=1; in_fm=false; continue; fi
+          fi
+          if [[ "$fm_end" -gt 0 ]]; then
+            if [[ -n "$body" ]]; then body="$body $line"; else body="$line"; fi
+          fi
+        done < "$filepath"
+        local json_body="${body//\\/\\\\}"
+        json_body="${json_body//\"/\\\"}"
+        if [[ "$first" == true ]]; then first=false; else printf ","; fi
+        printf '{"index":%d,"id":"%s","body":"%s"}' "$idx" "${file%.md}" "$json_body"
+      done <<< "$files"
+      printf ']}\n'
+    else
+      echo "Dry-run: would process $total message(s):"
+      while IFS= read -r file; do
+        idx=$((idx + 1))
+        local filepath="$GSD_STACK_DIR/pending/$file"
+        # Extract body from file
+        local body=""
+        local in_fm=false fm_end=0
+        while IFS= read -r line; do
+          if [[ "$line" == "---" ]]; then
+            if [[ "$in_fm" == false ]]; then in_fm=true; continue; else fm_end=1; in_fm=false; continue; fi
+          fi
+          if [[ "$fm_end" -gt 0 ]]; then
+            if [[ -n "$body" ]]; then body="$body $line"; else body="$line"; fi
+          fi
+        done < "$filepath"
+        # Truncate body for display
+        if [[ ${#body} -gt 80 ]]; then body="${body:0:80}..."; fi
+        printf "  [%d/%d] would execute: %s\n" "$idx" "$total" "$body"
+      done <<< "$files"
+    fi
+    log_event "drain" "dry-run: $total messages"
+    return 0
+  fi
+
+  # Create log directory
+  local drain_ts
+  drain_ts=$(date +%s)
+  local log_dir="$GSD_DRAIN_LOG_DIR/drain-$drain_ts"
+  mkdir -p "$log_dir"
+
+  # Process loop: pop and execute each message
+  local processed=0 passed=0 failed=0
+  local idx=0
+  local json_results=""
+
+  while true; do
+    # Check if stack is empty
+    local remaining
+    remaining=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+    remaining=$((remaining + 0))
+    if [[ "$remaining" -eq 0 ]]; then break; fi
+
+    idx=$((idx + 1))
+
+    # Pop the next message (reuse pop's sort logic inline to get body)
+    local pop_files
+    if [[ "$GSD_STACK_MODE" == "lifo" ]]; then
+      pop_files=$(ls -1r "$GSD_STACK_DIR/pending/" 2>/dev/null)
+    else
+      pop_files=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null)
+    fi
+    local next_file
+    next_file=$(echo "$pop_files" | head -1)
+    local src_path="$GSD_STACK_DIR/pending/$next_file"
+    local dst_path="$GSD_STACK_DIR/done/$next_file"
+
+    # Read content
+    local content
+    content=$(cat "$src_path")
+
+    # Extract body
+    local body="" priority="unknown"
+    local in_fm=false fm_end=0
+    while IFS= read -r line; do
+      if [[ "$line" == "---" ]]; then
+        if [[ "$in_fm" == false ]]; then in_fm=true; continue; else fm_end=1; in_fm=false; continue; fi
+      fi
+      if [[ "$in_fm" == true ]] && [[ "$line" == priority:* ]]; then
+        priority="${line#priority: }"
+      fi
+      if [[ "$fm_end" -gt 0 ]]; then
+        if [[ -n "$body" ]]; then body="$body
+$line"; else body="$line"; fi
+      fi
+    done <<< "$content"
+
+    # Move to done (consume)
+    mv "$src_path" "$dst_path"
+
+    # Display progress (truncate body for display)
+    local display_body="$body"
+    if [[ ${#display_body} -gt 60 ]]; then display_body="${display_body:0:60}..."; fi
+
+    # Execute via claude -p --continue (or mock)
+    local log_file="$log_dir/$(printf '%03d' $idx)-${next_file%.md}.log"
+    local exec_rc=0
+
+    if [[ -n "$GSD_MOCK_DRAIN" ]]; then
+      # Mock mode: simulate success
+      echo "[mock] Would execute: $body" > "$log_file"
+      exec_rc=0
+    else
+      # Real execution via claude -p --continue
+      set +e
+      echo "$body" | claude -p --continue > "$log_file" 2>&1
+      exec_rc=$?
+      set -e
+    fi
+
+    processed=$((processed + 1))
+    local result_status="passed"
+    if [[ "$exec_rc" -eq 0 ]]; then
+      passed=$((passed + 1))
+    else
+      failed=$((failed + 1))
+      result_status="failed"
+    fi
+
+    # Log per-message event
+    log_event "pop" "$priority: $(echo "$body" | head -1)"
+
+    if [[ "$GSD_FORMAT" != "json" ]]; then
+      local status_icon="+"
+      if [[ "$result_status" == "failed" ]]; then status_icon="!"; fi
+      printf "  [%d/%d] %s %s\n" "$idx" "$total" "$status_icon" "$display_body"
+    else
+      local json_body="${body//\\/\\\\}"
+      json_body="${json_body//\"/\\\"}"
+      if [[ -n "$json_results" ]]; then json_results="$json_results,"; fi
+      json_results="${json_results}{\"index\":$idx,\"id\":\"${next_file%.md}\",\"status\":\"$result_status\",\"body\":\"$json_body\"}"
+    fi
+  done
+
+  # Final summary
+  log_event "drain" "$processed processed ($passed passed, $failed failed)"
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"processed":%d,"passed":%d,"failed":%d,"log_dir":"%s","results":[%s]}\n' \
+      "$processed" "$passed" "$failed" "$log_dir" "$json_results"
+  else
+    echo ""
+    echo "Drain complete: $processed processed ($passed passed, $failed failed)"
+    echo "Logs: $log_dir"
+  fi
+}
+
+# ==============================================================================
 # Known subcommands (stubs for future implementation)
 # ==============================================================================
 
@@ -1200,7 +1402,12 @@ main() {
       cmd_poke "$@"
       exit 0
       ;;
-    drain|pause|resume|stop|save|record|stop-record|mark|play|metrics)
+    drain)
+      shift
+      cmd_drain "$@"
+      exit 0
+      ;;
+    pause|resume|stop|save|record|stop-record|mark|play|metrics)
       echo "$cmd: not yet implemented"
       log_event "$cmd" "stub invoked"
       exit 0
