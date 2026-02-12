@@ -10,3 +10,8 @@ export { SkillGenerator } from './skill-generator.js';
 export type { GeneratedSkill } from './skill-generator.js';
 export { SuggestionManager } from './suggestion-manager.js';
 export type { DetectionResult, AcceptResult } from './suggestion-manager.js';
+export {
+  injectGsdReferences,
+  checkGsdInstalled,
+  GSD_COMMAND_MAP,
+} from './gsd-reference-injector.js';

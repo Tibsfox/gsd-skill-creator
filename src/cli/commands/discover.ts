@@ -45,6 +45,7 @@ import type {
 import { EmbeddingService } from '../../embeddings/embedding-service.js';
 import { SkillStore } from '../../storage/skill-store.js';
 import { getSkillsBasePath } from '../../types/scope.js';
+import { checkGsdInstalled } from '../../detection/gsd-reference-injector.js';
 
 // ============================================================================
 // Flag parsing
@@ -312,8 +313,9 @@ export async function discoverCommand(args: string[]): Promise<number> {
     // -----------------------------------------------------------------------
     // 11. Generate and write tool pattern skill drafts
     // -----------------------------------------------------------------------
+    const gsdInstalled = await checkGsdInstalled();
     for (const candidate of selected) {
-      const draft = generateSkillDraft(candidate);
+      const draft = generateSkillDraft(candidate, gsdInstalled);
       const skillDir = join(homedir(), '.claude', 'skills', draft.name);
       await mkdir(skillDir, { recursive: true });
       await writeFile(join(skillDir, 'SKILL.md'), draft.content, 'utf-8');
