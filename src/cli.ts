@@ -20,6 +20,9 @@ import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
 import { testCommand } from './cli/commands/test.js';
 import { simulateCommand, simulateHelp } from './cli/commands/simulate.js';
 import { calibrateCommand, calibrateHelp } from './cli/commands/calibrate.js';
+import { mcpServerCommand } from './cli/commands/mcp-server.js';
+import { publishCommand } from './cli/commands/publish.js';
+import { installCommand } from './cli/commands/install.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
@@ -1128,6 +1131,49 @@ async function main() {
       break;
     }
 
+    case 'mcp-server': {
+      const exitCode = await mcpServerCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'publish':
+    case 'pub': {
+      const scope = parseScope(args);
+      // Handle help flag
+      if (args.includes('--help') || args.includes('-h')) {
+        await publishCommand(undefined, {});
+        break;
+      }
+      const skillArgs = args.slice(1).filter(a => !a.startsWith('-'));
+      const skillName = skillArgs[0];
+      // Parse --output flag
+      const outputIdx = args.findIndex(a => a === '--output' || a === '-o');
+      const output = outputIdx >= 0 ? args[outputIdx + 1] : undefined;
+      const exitCode = await publishCommand(skillName, {
+        skillsDir: getSkillsBasePath(scope),
+        output,
+      });
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'install':
+    case 'inst': {
+      const scope = parseScope(args);
+      if (args.includes('--help') || args.includes('-h')) {
+        await installCommand(undefined, {});
+        break;
+      }
+      const installArgs = args.slice(1).filter(a => !a.startsWith('-'));
+      const source = installArgs[0];
+      const exitCode = await installCommand(source, {
+        skillsDir: getSkillsBasePath(scope),
+      });
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'export':
     case 'ex': {
       const { exportCommand } = await import('./cli/commands/export.js');
@@ -1283,6 +1329,9 @@ Commands:
   discover, disc    Discover skill candidates from session history
   quality, q        Show per-skill health scores (precision, success rate, efficiency)
   export, ex        Export skill for other platforms (--portable, --platform)
+  publish, pub      Package a skill as .tar.gz for distribution
+  install, inst     Install a skill from local file or remote URL
+  mcp-server        Start MCP server for skill browsing/installation
   orchestrator, orch  GSD orchestrator (discover, state, classify, lifecycle)
   workflow, wf      Manage skill workflows (create, run, list, status)
   role, rl          Manage skill roles (create, list)
