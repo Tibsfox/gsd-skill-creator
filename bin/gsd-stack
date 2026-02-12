@@ -1,0 +1,181 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ==============================================================================
+# gsd-stack -- Session lifecycle & workflow coprocessor CLI
+#
+# A bash-based stack/queue for managing Claude Code sessions, messages,
+# recordings, and workflow automation via tmux.
+#
+# Usage: gsd-stack <command> [options]
+# ==============================================================================
+
+GSD_STACK_VERSION="0.1.0"
+
+# ==============================================================================
+# Environment variables with defaults
+# ==============================================================================
+
+GSD_STACK_DIR="${GSD_STACK_DIR:-.claude/stack}"
+GSD_TMUX_SESSION="${GSD_TMUX_SESSION:-claude}"
+GSD_TMUX_PANE="${GSD_TMUX_PANE:-0}"
+GSD_STACK_MODE="${GSD_STACK_MODE:-fifo}"
+GSD_STALL_TIMEOUT="${GSD_STALL_TIMEOUT:-300}"
+GSD_RECORD_INTERVAL="${GSD_RECORD_INTERVAL:-5}"
+GSD_PRIORITY="${GSD_PRIORITY:-normal}"
+GSD_SOURCE="${GSD_SOURCE:-cli}"
+GSD_FORMAT="${GSD_FORMAT:-}"
+
+# ==============================================================================
+# Directory bootstrapping
+# ==============================================================================
+
+ensure_dirs() {
+  mkdir -p "$GSD_STACK_DIR/pending"
+  mkdir -p "$GSD_STACK_DIR/done"
+  mkdir -p "$GSD_STACK_DIR/sessions"
+  mkdir -p "$GSD_STACK_DIR/recordings"
+  mkdir -p "$GSD_STACK_DIR/saves"
+  if [[ ! -f "$GSD_STACK_DIR/history.jsonl" ]]; then
+    touch "$GSD_STACK_DIR/history.jsonl"
+  fi
+}
+
+# ==============================================================================
+# History logging
+# ==============================================================================
+
+log_event() {
+  local event_type="$1"
+  local detail="$2"
+
+  # Truncate detail to 200 chars max
+  if [[ ${#detail} -gt 200 ]]; then
+    detail="${detail:0:200}"
+  fi
+
+  local ts
+  ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+  # Escape double quotes in detail for valid JSON
+  detail="${detail//\\/\\\\}"
+  detail="${detail//\"/\\\"}"
+
+  printf '{"ts":"%s","event":"%s","detail":"%s"}\n' "$ts" "$event_type" "$detail" \
+    >> "$GSD_STACK_DIR/history.jsonl"
+}
+
+# ==============================================================================
+# Help
+# ==============================================================================
+
+show_help() {
+  cat <<'HELPTEXT'
+Usage: gsd-stack <command> [options]
+
+Stack Commands:
+  push        Push a message onto the stack
+  pop         Pop and consume the next message
+  peek        View the next message without consuming
+  poke        Send directly to tmux or nudge session
+  drain       Process entire queue headlessly
+  clear       Clear all pending messages
+
+Session Commands:
+  session     Start a managed Claude Code session
+  list        List all sessions with state
+  watch       Watch a session read-only
+  pause       Pause a session
+  resume      Resume a paused/stalled session
+  stop        Stop a session gracefully
+  save        Save a session snapshot
+
+Recording Commands:
+  record      Start recording session activity
+  stop-record Stop recording and compute metrics
+  mark        Insert a named marker
+  play        Analyze/replay recordings
+  metrics     View and compare recording metrics
+
+General:
+  status      Show stack and session overview
+  log         View event history
+  help        Show this help message
+  version     Show version
+
+Environment Variables:
+  GSD_STACK_DIR       Root directory (default: .claude/stack)
+  GSD_TMUX_SESSION    Tmux session name (default: claude)
+  GSD_STACK_MODE      Message ordering: fifo|lifo (default: fifo)
+  GSD_STALL_TIMEOUT   Seconds before stalled (default: 300)
+  GSD_RECORD_INTERVAL Capture interval in seconds (default: 5)
+  GSD_PRIORITY        Default push priority (default: normal)
+  GSD_SOURCE          Source label (default: cli)
+  GSD_FORMAT          Output format: json|"" for human (default: "")
+HELPTEXT
+}
+
+# ==============================================================================
+# Stub commands (implemented in future plans)
+# ==============================================================================
+
+cmd_status() {
+  echo "Status: not yet implemented"
+}
+
+cmd_log() {
+  echo "Log: not yet implemented"
+}
+
+# ==============================================================================
+# Known subcommands (stubs for future implementation)
+# ==============================================================================
+
+KNOWN_COMMANDS="push pop peek poke drain clear session list watch pause resume stop save record stop-record mark play metrics"
+
+# ==============================================================================
+# CLI dispatch (main)
+# ==============================================================================
+
+main() {
+  ensure_dirs
+
+  local cmd="${1:-}"
+
+  case "$cmd" in
+    ""|help|--help)
+      show_help
+      log_event "help" "displayed help"
+      exit 0
+      ;;
+    version|--version)
+      echo "gsd-stack $GSD_STACK_VERSION"
+      log_event "version" "displayed version"
+      exit 0
+      ;;
+    status)
+      cmd_status
+      log_event "status" "displayed status"
+      exit 0
+      ;;
+    log)
+      cmd_log
+      log_event "log" "displayed log"
+      exit 0
+      ;;
+    push|pop|peek|poke|drain|clear|session|list|watch|pause|resume|stop|save|record|stop-record|mark|play|metrics)
+      echo "$cmd: not yet implemented"
+      log_event "$cmd" "stub invoked"
+      exit 0
+      ;;
+    *)
+      echo "Error: Unknown command '$cmd'"
+      echo ""
+      show_help
+      log_event "error" "unknown command: $cmd"
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"
