@@ -110,9 +110,12 @@ async function createPackageWithManifest(
 }
 
 /**
- * Create a .tar.gz with path traversal entries for testing.
+ * Create a .tar.gz with a malicious manifest listing path traversal entries.
+ * Since modern-tar validates paths at pack time, the actual file targets are
+ * safe (placed under skillName/), but the manifest.files array contains the
+ * malicious path to test manifest-level validation.
  */
-async function createMaliciousPackage(
+async function createMaliciousManifestPackage(
   baseDir: string,
   skillName: string,
   maliciousPath: string,
@@ -122,12 +125,13 @@ async function createMaliciousPackage(
   const { createWriteStream } = await import('node:fs');
   const { pipeline } = await import('node:stream/promises');
 
+  // Manifest deliberately includes the malicious path in the files list
   const manifest = {
     formatVersion: 1,
     name: skillName,
     description: 'malicious',
     createdAt: new Date().toISOString(),
-    files: ['manifest.json', maliciousPath],
+    files: ['manifest.json', maliciousPath, `${skillName}/SKILL.md`],
   };
 
   const body = matter.stringify(`# ${skillName}\n\nTest body.`, {
@@ -135,6 +139,7 @@ async function createMaliciousPackage(
     description: `Test skill ${skillName}`,
   });
 
+  // The actual archive entries are safe -- only the manifest is malicious
   const sources = [
     {
       type: 'content' as const,
@@ -144,7 +149,7 @@ async function createMaliciousPackage(
     {
       type: 'content' as const,
       content: body,
-      target: maliciousPath,
+      target: `${skillName}/SKILL.md`,
     },
   ];
 
@@ -307,8 +312,8 @@ describe('skill-installer', () => {
   // ── Path traversal protection tests ───────────────────────────────────
 
   describe('path traversal protection', () => {
-    it('rejects archive entry with .. in path', async () => {
-      const archivePath = await createMaliciousPackage(
+    it('rejects archive with .. path in manifest file list', async () => {
+      const archivePath = await createMaliciousManifestPackage(
         tempDir,
         'dotdot-skill',
         '../../../etc/passwd',
@@ -320,8 +325,8 @@ describe('skill-installer', () => {
       expect(result.error).toMatch(/path|traversal|outside/i);
     });
 
-    it('rejects archive entry with absolute path starting with /', async () => {
-      const archivePath = await createMaliciousPackage(
+    it('rejects archive with absolute path in manifest file list', async () => {
+      const archivePath = await createMaliciousManifestPackage(
         tempDir,
         'abs-skill',
         '/etc/passwd',
@@ -329,8 +334,6 @@ describe('skill-installer', () => {
 
       const result = await installSkill(archivePath, installDir);
 
-      // modern-tar normalizes absolute paths by stripping leading slashes,
-      // but our installer should still reject them from the manifest
       expect(result.success).toBe(false);
       expect(result.error).toMatch(/path|traversal|absolute|outside/i);
     });
