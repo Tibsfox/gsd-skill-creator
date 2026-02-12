@@ -2084,6 +2084,272 @@ fi
 assert_contains "poke json contains message text" "$output" "json test"
 
 # ==============================================================================
+# Drain Subcommand Tests (empty stack)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Drain Subcommand Tests (empty stack)${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+export GSD_DRAIN_LOG_DIR="$TEST_DIR/logs"
+
+# 1. drain on empty stack exits 0
+set +e
+output=$(GSD_MOCK_DRAIN=1 "$GSD_STACK" drain 2>&1)
+rc=$?
+set -e
+assert_eq "drain empty exits 0" "0" "$rc"
+
+# 2. Output contains indication of nothing to drain
+if echo "$output" | grep -qi "nothing\|empty\|0"; then
+  pass "drain empty shows nothing to drain"
+else
+  fail "drain empty shows nothing to drain" "output: $output"
+fi
+
+# ==============================================================================
+# Drain Subcommand Tests (basic execution, 3 messages)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Drain Subcommand Tests (basic execution)${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+rm -rf "$TEST_DIR/logs"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+export GSD_DRAIN_LOG_DIR="$TEST_DIR/logs"
+
+# Push 3 messages with different priorities
+set +e
+"$GSD_STACK" push --priority=urgent "fix critical auth bug" >/dev/null 2>&1
+sleep 0.01
+"$GSD_STACK" push --priority=normal "add user profile page" >/dev/null 2>&1
+sleep 0.01
+"$GSD_STACK" push --priority=low "update README" >/dev/null 2>&1
+set -e
+
+# 3. drain exits 0
+set +e
+output=$(GSD_MOCK_DRAIN=1 "$GSD_STACK" drain 2>&1)
+rc=$?
+set -e
+assert_eq "drain 3 msgs exits 0" "0" "$rc"
+
+# 4. After drain, pending/ has 0 files
+file_count=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+file_count=$((file_count + 0))
+assert_eq "drain: pending has 0 files" "0" "$file_count"
+
+# 5. After drain, done/ has 3 files
+done_count=$(ls -1 "$GSD_STACK_DIR/done/" 2>/dev/null | wc -l)
+done_count=$((done_count + 0))
+assert_eq "drain: done has 3 files" "3" "$done_count"
+
+# 6. Drain output contains "1/3" progress
+assert_contains "drain output has 1/3 progress" "$output" "1/3"
+
+# 7. Drain output contains "3/3" progress
+assert_contains "drain output has 3/3 progress" "$output" "3/3"
+
+# 8. Drain output contains first message (urgent priority processed first)
+if echo "$output" | grep -qi "fix critical auth bug\|auth"; then
+  pass "drain output contains urgent message"
+else
+  fail "drain output contains urgent message" "output: $output"
+fi
+
+# 9. Drain output contains summary with "3" (total processed)
+assert_contains "drain summary shows 3 processed" "$output" "3"
+
+# ==============================================================================
+# Drain Subcommand Tests (history logging)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Drain Subcommand Tests (history logging)${RESET}\n"
+
+# 10. After drain, history.jsonl contains a "drain" event
+if [[ -f "$GSD_STACK_DIR/history.jsonl" ]] && grep -q '"event":"drain"' "$GSD_STACK_DIR/history.jsonl"; then
+  pass "drain logs drain event to history.jsonl"
+else
+  fail "drain logs drain event to history.jsonl" "no drain event found"
+fi
+
+# 11. Drain event detail contains "3" (count of messages processed)
+if [[ -f "$GSD_STACK_DIR/history.jsonl" ]] && grep '"event":"drain"' "$GSD_STACK_DIR/history.jsonl" | grep -q "3"; then
+  pass "drain history detail contains count 3"
+else
+  fail "drain history detail contains count 3" "no '3' in drain event detail"
+fi
+
+# ==============================================================================
+# Drain Subcommand Tests (log output)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Drain Subcommand Tests (log output)${RESET}\n"
+
+# 12. After drain, log directory exists
+assert_dir_exists "drain log dir exists" "$TEST_DIR/logs"
+
+# 13. A drain-* subdirectory exists inside the log dir
+drain_log_found=false
+for d in "$TEST_DIR/logs"/drain-*; do
+  if [[ -d "$d" ]]; then
+    drain_log_found=true
+    drain_log_dir="$d"
+    break
+  fi
+done
+if [[ "$drain_log_found" == true ]]; then
+  pass "drain log drain-* directory exists"
+else
+  fail "drain log drain-* directory exists" "no drain-* directory found in $TEST_DIR/logs"
+fi
+
+# 14. The drain log directory contains output files (one per message)
+if [[ "$drain_log_found" == true ]]; then
+  log_file_count=$(ls -1 "$drain_log_dir"/*.log 2>/dev/null | wc -l)
+  log_file_count=$((log_file_count + 0))
+  if [[ "$log_file_count" -ge 3 ]]; then
+    pass "drain log has 3 output files"
+  else
+    fail "drain log has 3 output files" "found $log_file_count log files"
+  fi
+else
+  fail "drain log has 3 output files" "no drain log directory to check"
+fi
+
+# ==============================================================================
+# Drain --dry-run Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Drain --dry-run Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+rm -rf "$TEST_DIR/logs"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+export GSD_DRAIN_LOG_DIR="$TEST_DIR/logs"
+
+# Push 2 messages
+set +e
+"$GSD_STACK" push --priority=normal "dry-run msg 1" >/dev/null 2>&1
+"$GSD_STACK" push --priority=urgent "dry-run msg 2" >/dev/null 2>&1
+set -e
+
+# 15. drain --dry-run exits 0
+set +e
+output=$(GSD_MOCK_DRAIN=1 "$GSD_STACK" drain --dry-run 2>&1)
+rc=$?
+set -e
+assert_eq "drain --dry-run exits 0" "0" "$rc"
+
+# 16. After dry-run, pending/ still has 2 files
+file_count=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+file_count=$((file_count + 0))
+assert_eq "drain --dry-run: pending still has 2 files" "2" "$file_count"
+
+# 17. Dry-run output contains "dry-run" or "would execute" or "would process"
+if echo "$output" | grep -qi "dry-run\|would execute\|would process"; then
+  pass "drain --dry-run output indicates dry-run"
+else
+  fail "drain --dry-run output indicates dry-run" "output: $output"
+fi
+
+# 18. Dry-run output shows the messages
+if echo "$output" | grep -qi "dry-run msg\|msg"; then
+  pass "drain --dry-run shows messages"
+else
+  fail "drain --dry-run shows messages" "output: $output"
+fi
+
+# ==============================================================================
+# Drain JSON Output Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Drain JSON Output Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+rm -rf "$TEST_DIR/logs"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+export GSD_DRAIN_LOG_DIR="$TEST_DIR/logs"
+
+# Push 2 messages
+set +e
+"$GSD_STACK" push --priority=normal "json drain 1" >/dev/null 2>&1
+"$GSD_STACK" push --priority=normal "json drain 2" >/dev/null 2>&1
+set -e
+
+# 19. GSD_FORMAT=json drain outputs valid JSON (last line starts with {)
+set +e
+output=$(GSD_FORMAT=json GSD_MOCK_DRAIN=1 "$GSD_STACK" drain 2>&1)
+rc=$?
+set -e
+last_line=$(echo "$output" | tail -1)
+if [[ "$last_line" == "{"* ]]; then
+  pass "drain json output starts with {"
+else
+  fail "drain json output starts with {" "last line: $last_line"
+fi
+
+# 20. JSON output contains "processed" or "total" key
+if echo "$output" | grep -qE '"processed"|"total"'; then
+  pass "drain json has processed/total key"
+else
+  fail "drain json has processed/total key" "output: $output"
+fi
+
+# 21. JSON output contains "passed" or "succeeded" key
+if echo "$output" | grep -qE '"passed"|"succeeded"'; then
+  pass "drain json has passed/succeeded key"
+else
+  fail "drain json has passed/succeeded key" "output: $output"
+fi
+
+# ==============================================================================
+# Drain Single Message Test
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Drain Single Message Test${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+rm -rf "$TEST_DIR/logs"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+export GSD_DRAIN_LOG_DIR="$TEST_DIR/logs"
+
+# Push exactly 1 message
+set +e
+"$GSD_STACK" push --priority=normal "single drain msg" >/dev/null 2>&1
+set -e
+
+# 22. drain exits 0
+set +e
+output=$(GSD_MOCK_DRAIN=1 "$GSD_STACK" drain 2>&1)
+rc=$?
+set -e
+assert_eq "drain single msg exits 0" "0" "$rc"
+
+# 23. Output contains "1/1"
+assert_contains "drain single msg has 1/1 progress" "$output" "1/1"
+
+# 24. After drain, pending/ has 0 files, done/ has 1 file
+file_count=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+file_count=$((file_count + 0))
+done_count=$(ls -1 "$GSD_STACK_DIR/done/" 2>/dev/null | wc -l)
+done_count=$((done_count + 0))
+assert_eq "drain single: pending has 0 files" "0" "$file_count"
+assert_eq "drain single: done has 1 file" "1" "$done_count"
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
