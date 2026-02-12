@@ -35,6 +35,9 @@ function createMockMetrics(overrides: Partial<RunMetrics> = {}): RunMetrics {
     falsePositives: 1,
     falseNegatives: 1,
     edgeCaseCount: 2,
+    precision: 0.833,
+    recall: 0.833,
+    f1Score: 0.833,
     ...overrides,
   };
 }

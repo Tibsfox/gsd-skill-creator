@@ -232,6 +232,27 @@ export class ResultFormatter {
     const fprStr = fpr <= 5 ? pc.green(`${fpr.toFixed(1)}%`) : pc.yellow(`${fpr.toFixed(1)}%`);
     lines.push(`False Positive Rate: ${fprStr}`);
 
+    // Precision
+    const precisionPct = (metrics.precision * 100).toFixed(1);
+    const precisionStr = metrics.precision >= 0.9 ? pc.green(`${precisionPct}%`)
+      : metrics.precision >= 0.7 ? pc.yellow(`${precisionPct}%`)
+      : pc.red(`${precisionPct}%`);
+    lines.push(`Precision: ${precisionStr}`);
+
+    // Recall
+    const recallPct = (metrics.recall * 100).toFixed(1);
+    const recallStr = metrics.recall >= 0.9 ? pc.green(`${recallPct}%`)
+      : metrics.recall >= 0.7 ? pc.yellow(`${recallPct}%`)
+      : pc.red(`${recallPct}%`);
+    lines.push(`Recall: ${recallStr}`);
+
+    // F1 Score
+    const f1Pct = (metrics.f1Score * 100).toFixed(1);
+    const f1Str = metrics.f1Score >= 0.9 ? pc.green(`${f1Pct}%`)
+      : metrics.f1Score >= 0.7 ? pc.yellow(`${f1Pct}%`)
+      : pc.red(`${f1Pct}%`);
+    lines.push(`F1 Score: ${f1Str}`);
+
     // Duration
     if (duration !== undefined) {
       lines.push(`Duration: ${duration}ms`);
@@ -287,6 +308,9 @@ export class ResultFormatter {
         skill: result.skillName,
         accuracy: Number(result.metrics.accuracy.toFixed(1)),
         fpr: Number(result.metrics.falsePositiveRate.toFixed(1)),
+        precision: Number(result.metrics.precision.toFixed(3)),
+        recall: Number(result.metrics.recall.toFixed(3)),
+        f1Score: Number(result.metrics.f1Score.toFixed(3)),
         passed: result.metrics.passed,
         failed: result.metrics.failed,
         duration: result.duration,
@@ -321,6 +345,9 @@ export class ResultFormatter {
         failed: result.metrics.failed,
         accuracy: Number(result.metrics.accuracy.toFixed(1)),
         falsePositiveRate: Number(result.metrics.falsePositiveRate.toFixed(1)),
+        precision: Number(result.metrics.precision.toFixed(3)),
+        recall: Number(result.metrics.recall.toFixed(3)),
+        f1Score: Number(result.metrics.f1Score.toFixed(3)),
         confusion: {
           truePositives: result.metrics.truePositives,
           trueNegatives: result.metrics.trueNegatives,
