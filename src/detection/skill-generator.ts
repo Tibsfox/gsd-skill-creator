@@ -4,11 +4,17 @@ import { type GsdSkillCreatorExtension } from '../types/extensions.js';
 import { SkillCandidate, PatternEvidence } from '../types/detection.js';
 import { detectArguments, suggestArgumentHint, checkInjectionRisk } from '../validation/arguments-validation.js';
 import { shouldForkContext, suggestAgent } from '../validation/context-fork-detection.js';
+import { ContentDecomposer } from '../disclosure/index.js';
+import type { ReferenceFile, ScriptFile } from '../disclosure/index.js';
 
 export interface GeneratedSkill {
   name: string;
   metadata: SkillMetadata;
   body: string;
+  /** Reference files extracted by progressive disclosure (>2000 words) */
+  references?: ReferenceFile[];
+  /** Script files extracted by progressive disclosure (deterministic ops) */
+  scripts?: ScriptFile[];
 }
 
 export class SkillGenerator {
@@ -63,16 +69,68 @@ export class SkillGenerator {
       }
     }
 
+    // DISC-01/DISC-02: Decompose large generated skills via progressive disclosure
+    const decomposer = new ContentDecomposer();
+    const decomposed = decomposer.decompose(name, metadata, body);
+    if (decomposed.decomposed) {
+      return {
+        name,
+        metadata,
+        body: decomposed.skillMd,
+        references: decomposed.references,
+        scripts: decomposed.scripts,
+      };
+    }
+
     return { name, metadata, body };
   }
 
   /**
    * Create skill from candidate (saves to disk)
+   * If the generated skill was decomposed, writes reference and script files
+   * alongside the SKILL.md created by the store.
    */
   async createFromCandidate(candidate: SkillCandidate): Promise<string> {
-    const { name, metadata, body } = this.generateScaffold(candidate);
+    const { name, metadata, body, references, scripts } = this.generateScaffold(candidate);
     await this.skillStore.create(name, metadata, body);
+
+    // Write decomposed reference/script files if progressive disclosure triggered
+    if ((references && references.length > 0) || (scripts && scripts.length > 0)) {
+      const { mkdir, writeFile, chmod } = await import('fs/promises');
+      const { join } = await import('path');
+
+      const skillDir = join(this.getSkillsDir(), name);
+
+      if (references && references.length > 0) {
+        const refsDir = join(skillDir, 'references');
+        await mkdir(refsDir, { recursive: true });
+        for (const ref of references) {
+          await writeFile(join(refsDir, ref.filename), ref.content, 'utf-8');
+        }
+      }
+
+      if (scripts && scripts.length > 0) {
+        const scriptsDir = join(skillDir, 'scripts');
+        await mkdir(scriptsDir, { recursive: true });
+        for (const script of scripts) {
+          const scriptPath = join(scriptsDir, script.filename);
+          await writeFile(scriptPath, script.content, 'utf-8');
+          if (script.executable) {
+            await chmod(scriptPath, 0o755);
+          }
+        }
+      }
+    }
+
     return name;
+  }
+
+  /**
+   * Get the skills directory from the store.
+   * Accesses the private skillsDir field via bracket notation.
+   */
+  private getSkillsDir(): string {
+    return (this.skillStore as unknown as { skillsDir: string }).skillsDir;
   }
 
   /**
