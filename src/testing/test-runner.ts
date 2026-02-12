@@ -238,6 +238,21 @@ export class TestRunner {
         ? (falsePositives / (falsePositives + trueNegatives)) * 100
         : 0;
 
+    // Precision: TP / (TP + FP) - how many activations were correct
+    const precision = (truePositives + falsePositives) > 0
+      ? truePositives / (truePositives + falsePositives)
+      : 0;
+
+    // Recall: TP / (TP + FN) - how many expected activations were caught
+    const recall = (truePositives + falseNegatives) > 0
+      ? truePositives / (truePositives + falseNegatives)
+      : 0;
+
+    // F1: harmonic mean of precision and recall
+    const f1Score = (precision + recall) > 0
+      ? 2 * (precision * recall) / (precision + recall)
+      : 0;
+
     return {
       total,
       passed,
@@ -249,6 +264,9 @@ export class TestRunner {
       falsePositives,
       falseNegatives,
       edgeCaseCount,
+      precision,
+      recall,
+      f1Score,
     };
   }
 

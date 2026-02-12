@@ -84,7 +84,7 @@ describe('TestRunner', () => {
       skillName: 'test-skill',
       runAt: '2026-01-01T00:00:00.000Z',
       duration: 100,
-      metrics: { total: 0, passed: 0, failed: 0, accuracy: 0, falsePositiveRate: 0, truePositives: 0, trueNegatives: 0, falsePositives: 0, falseNegatives: 0, edgeCaseCount: 0 },
+      metrics: { total: 0, passed: 0, failed: 0, accuracy: 0, falsePositiveRate: 0, truePositives: 0, trueNegatives: 0, falsePositives: 0, falseNegatives: 0, edgeCaseCount: 0, precision: 0, recall: 0, f1Score: 0 },
       results: [],
       positiveResults: [],
       negativeResults: [],
