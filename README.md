@@ -73,6 +73,7 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.6** | 34 cross-domain examples (20 skills, 8 agents, 3 teams), local installation, beautiful-commits skill |
 | **v1.7** | GSD Master Orchestration Agent: dynamic discovery, intent classification, lifecycle coordination, verbosity/HITL gates, persistent work state, session continuity, skill workflows, roles, bundles, inter-skill events |
 | **v1.8** | Capability-Aware Planning + Token Efficiency: skill pipeline architecture, per-agent token budgets, capability manifests, phase capability declarations, skill injection, cache-aware ordering, research compression, model-aware activation, collector agents, parallelization advisor |
+| **v1.8.1** | Audit Remediation: test infrastructure fixes, type safety improvements, CLI validation, error handling, dependency validation, security hardening, code refactoring, cache invalidation |
 
 ---
 
