@@ -183,4 +183,117 @@ describe('DependencyGraph', () => {
       expect(graph.getParent('orphan')).toBeUndefined();
     });
   });
+
+  describe('getDependents', () => {
+    it('should return direct children that extend a given skill', () => {
+      // child1 extends base, child2 extends base
+      const graph = new DependencyGraph();
+      graph.addEdge('child1', 'base');
+      graph.addEdge('child2', 'base');
+
+      const dependents = graph.getDependents('base');
+
+      expect(dependents).toHaveLength(2);
+      expect(dependents).toContain('child1');
+      expect(dependents).toContain('child2');
+    });
+
+    it('should return empty array for leaf skills', () => {
+      const graph = new DependencyGraph();
+      graph.addEdge('leaf', 'parent');
+
+      const dependents = graph.getDependents('leaf');
+
+      expect(dependents).toEqual([]);
+    });
+
+    it('should return empty array for unknown skills', () => {
+      const graph = new DependencyGraph();
+      graph.addNode('known');
+
+      const dependents = graph.getDependents('unknown');
+
+      expect(dependents).toEqual([]);
+    });
+  });
+
+  describe('getDepth', () => {
+    it('should return 0 for skill with no parent', () => {
+      const graph = new DependencyGraph();
+      graph.addNode('root');
+
+      expect(graph.getDepth('root')).toBe(0);
+    });
+
+    it('should return 1 for child extends parent', () => {
+      const graph = new DependencyGraph();
+      graph.addEdge('child', 'parent');
+
+      expect(graph.getDepth('child')).toBe(1);
+    });
+
+    it('should return 2 for grandchild extends child extends parent', () => {
+      const graph = new DependencyGraph();
+      graph.addEdge('grandchild', 'child');
+      graph.addEdge('child', 'parent');
+
+      expect(graph.getDepth('grandchild')).toBe(2);
+    });
+
+    it('should return 3 for great-grandchild chain', () => {
+      const graph = new DependencyGraph();
+      graph.addEdge('great-grandchild', 'grandchild');
+      graph.addEdge('grandchild', 'child');
+      graph.addEdge('child', 'parent');
+
+      expect(graph.getDepth('great-grandchild')).toBe(3);
+    });
+
+    it('should throw on cycle', () => {
+      const graph = new DependencyGraph();
+      graph.addEdge('a', 'b');
+      graph.addEdge('b', 'a');
+
+      expect(() => graph.getDepth('a')).toThrow(/Circular dependency detected/);
+    });
+  });
+
+  describe('getAllDependents', () => {
+    it('should return all transitive dependents via BFS', () => {
+      // root <- mid <- leaf
+      const graph = new DependencyGraph();
+      graph.addEdge('mid', 'root');
+      graph.addEdge('leaf', 'mid');
+
+      const allDeps = graph.getAllDependents('root');
+
+      expect(allDeps).toHaveLength(2);
+      expect(allDeps).toContain('mid');
+      expect(allDeps).toContain('leaf');
+    });
+
+    it('should return empty array for leaf skills', () => {
+      const graph = new DependencyGraph();
+      graph.addEdge('leaf', 'parent');
+
+      const allDeps = graph.getAllDependents('leaf');
+
+      expect(allDeps).toEqual([]);
+    });
+
+    it('should return all transitive dependents in a tree', () => {
+      // root <- a, root <- b, a <- c
+      const graph = new DependencyGraph();
+      graph.addEdge('a', 'root');
+      graph.addEdge('b', 'root');
+      graph.addEdge('c', 'a');
+
+      const allDeps = graph.getAllDependents('root');
+
+      expect(allDeps).toHaveLength(3);
+      expect(allDeps).toContain('a');
+      expect(allDeps).toContain('b');
+      expect(allDeps).toContain('c');
+    });
+  });
 });
