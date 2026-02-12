@@ -4,6 +4,8 @@ import { normalizePaths } from './path-normalizer.js';
 import matter from 'gray-matter';
 import { readdir, copyFile, mkdir, readFile, writeFile, stat } from 'fs/promises';
 import { join, relative } from 'path';
+import { safeParseFrontmatter } from '../validation/yaml-safety.js';
+import { SkillMetadataSchema } from '../validation/skill-validation.js';
 
 /**
  * Platform configuration for skill storage and export.
@@ -176,15 +178,19 @@ export async function exportSkillDirectory(
 ): Promise<string[]> {
   const copiedFiles: string[] = [];
 
-  // Read and parse SKILL.md from source
+  // Read and parse SKILL.md from source (safe parsing + Zod validation)
   const skillMdPath = join(sourceDir, 'SKILL.md');
   const rawContent = await readFile(skillMdPath, 'utf-8');
-  const { data, content: body } = matter(rawContent);
+  const parseResult = safeParseFrontmatter(rawContent);
+  if (!parseResult.success) {
+    throw new Error(`Invalid skill file: ${parseResult.error}`);
+  }
+  const validatedMetadata = SkillMetadataSchema.parse(parseResult.data);
 
   // Build a Skill object from parsed content
   const skill: Skill = {
-    metadata: data as SkillMetadata,
-    body,
+    metadata: validatedMetadata as SkillMetadata,
+    body: parseResult.body,
     path: skillMdPath,
   };
 

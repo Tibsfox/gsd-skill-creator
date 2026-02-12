@@ -16,6 +16,8 @@ import matter from 'gray-matter';
 import { unpackTar } from 'modern-tar/fs';
 import { validateContentSafety } from './content-validator.js';
 import type { SkillPackageManifest } from './skill-packager.js';
+import { safeParseFrontmatter } from '../validation/yaml-safety.js';
+import { SkillMetadataSchema } from '../validation/skill-validation.js';
 
 /** Default maximum download size: 10 MB */
 const DEFAULT_MAX_DOWNLOAD_BYTES = 10 * 1024 * 1024;
@@ -320,12 +322,35 @@ async function validateAndInstall(
     };
   }
 
-  const { data: metadata, content: body } = matter(skillMdContent);
+  // 5b. Safe YAML parsing + Zod validation
+  const parseResult = safeParseFrontmatter(skillMdContent);
+  if (!parseResult.success) {
+    return {
+      success: false,
+      skillName,
+      error: `Invalid skill file: ${parseResult.error}`,
+      warnings: [],
+    };
+  }
+
+  let metadata: Record<string, unknown>;
+  try {
+    metadata = SkillMetadataSchema.parse(parseResult.data) as Record<string, unknown>;
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    return {
+      success: false,
+      skillName,
+      error: `Invalid skill metadata: ${message}`,
+      warnings: [],
+    };
+  }
+  const body = parseResult.body;
 
   // 6. Run content safety validation
   const safetyResult = validateContentSafety(
     body,
-    metadata as Record<string, unknown>,
+    metadata,
     { strict },
   );
 
