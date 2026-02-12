@@ -361,4 +361,73 @@ describe('exportSkillDirectory', () => {
     expect(content).not.toContain('references\\nested\\file.md');
     expect(content).not.toContain('scripts\\run.sh');
   });
+
+  // ========================================================================
+  // YAML safety validation (72-02)
+  // ========================================================================
+
+  describe('YAML safety validation', () => {
+    it('rejects SKILL.md with !!js/function in frontmatter', async () => {
+      await writeFile(
+        join(sourceDir, 'SKILL.md'),
+        [
+          '---',
+          'name: evil-func',
+          'description: !!js/function "function() { return 1; }"',
+          '---',
+          'body content',
+        ].join('\n'),
+        'utf-8',
+      );
+
+      await expect(
+        exportSkillDirectory(sourceDir, targetDir, 'claude'),
+      ).rejects.toThrow(/[Dd]angerous YAML tag/);
+    });
+
+    it('rejects SKILL.md with missing required name field', async () => {
+      await writeFile(
+        join(sourceDir, 'SKILL.md'),
+        [
+          '---',
+          'description: A valid description',
+          '---',
+          'body content',
+        ].join('\n'),
+        'utf-8',
+      );
+
+      await expect(
+        exportSkillDirectory(sourceDir, targetDir, 'cursor'),
+      ).rejects.toThrow(/name/i);
+    });
+
+    it('rejects SKILL.md with wrong type for description', async () => {
+      await writeFile(
+        join(sourceDir, 'SKILL.md'),
+        [
+          '---',
+          'name: bad-desc',
+          'description: 42',
+          '---',
+          'body content',
+        ].join('\n'),
+        'utf-8',
+      );
+
+      await expect(
+        exportSkillDirectory(sourceDir, targetDir, 'codex'),
+      ).rejects.toThrow();
+    });
+
+    it('succeeds for valid SKILL.md (regression check)', async () => {
+      await writeSkillMd(sourceDir, {
+        name: 'valid-skill',
+        description: 'A perfectly valid skill',
+      }, '# Valid\n\nValid body.');
+
+      const files = await exportSkillDirectory(sourceDir, targetDir, 'claude');
+      expect(files).toContain('SKILL.md');
+    });
+  });
 });
