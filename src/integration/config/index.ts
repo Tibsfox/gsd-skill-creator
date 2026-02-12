@@ -23,3 +23,11 @@ export {
   DEFAULT_INTEGRATION_CONFIG,
 } from './schema.js';
 export type { InferredIntegrationConfig } from './schema.js';
+
+// Reader: filesystem loading and validation
+export {
+  readIntegrationConfig,
+  validateIntegrationConfig,
+  IntegrationConfigError,
+  DEFAULT_CONFIG_PATH,
+} from './reader.js';
