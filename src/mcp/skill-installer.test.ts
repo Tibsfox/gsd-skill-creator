@@ -564,4 +564,97 @@ describe('skill-installer', () => {
       expect(result.warnings.some((w) => /bash/i.test(w))).toBe(true);
     });
   });
+
+  // ── YAML safety validation (72-02) ─────────────────────────────────────
+
+  describe('YAML safety validation', () => {
+    it('returns error for skill with !!js/function in frontmatter', async () => {
+      const archivePath = await createPackageWithManifest(
+        tempDir,
+        'evil-func',
+        {
+          formatVersion: 1,
+          name: 'evil-func',
+          description: 'Evil function',
+          createdAt: new Date().toISOString(),
+          files: ['manifest.json', 'evil-func/SKILL.md'],
+        },
+        [
+          '---',
+          'name: evil-func',
+          'description: !!js/function "function() { return 1; }"',
+          '---',
+          'body content',
+        ].join('\n'),
+      );
+
+      const result = await installSkill(archivePath, installDir);
+
+      expect(result.success).toBe(false);
+      expect(result.error).toMatch(/[Dd]angerous YAML tag/);
+    });
+
+    it('returns error for skill with missing required name field', async () => {
+      const archivePath = await createPackageWithManifest(
+        tempDir,
+        'no-name',
+        {
+          formatVersion: 1,
+          name: 'no-name',
+          description: 'No name field',
+          createdAt: new Date().toISOString(),
+          files: ['manifest.json', 'no-name/SKILL.md'],
+        },
+        [
+          '---',
+          'description: A valid description',
+          '---',
+          'body content',
+        ].join('\n'),
+      );
+
+      const result = await installSkill(archivePath, installDir);
+
+      expect(result.success).toBe(false);
+      expect(result.error).toMatch(/name/i);
+    });
+
+    it('returns error for skill with wrong type for description', async () => {
+      const archivePath = await createPackageWithManifest(
+        tempDir,
+        'bad-desc',
+        {
+          formatVersion: 1,
+          name: 'bad-desc',
+          description: 'Bad description type',
+          createdAt: new Date().toISOString(),
+          files: ['manifest.json', 'bad-desc/SKILL.md'],
+        },
+        [
+          '---',
+          'name: bad-desc',
+          'description: 42',
+          '---',
+          'body content',
+        ].join('\n'),
+      );
+
+      const result = await installSkill(archivePath, installDir);
+
+      expect(result.success).toBe(false);
+      expect(result.error).toBeDefined();
+    });
+
+    it('succeeds for valid skill (regression check)', async () => {
+      const archivePath = await createPackage(tempDir, 'valid-yaml', {
+        description: 'A perfectly valid skill',
+        body: '# Valid\n\nValid body.',
+      });
+
+      const result = await installSkill(archivePath, installDir);
+
+      expect(result.success).toBe(true);
+      expect(result.skillName).toBe('valid-yaml');
+    });
+  });
 });

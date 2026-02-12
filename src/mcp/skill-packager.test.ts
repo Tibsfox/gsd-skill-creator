@@ -321,4 +321,84 @@ describe('skill-packager', () => {
       expect(parsed.data['allowed-tools']).toBe('Read Write Bash');
     });
   });
+
+  // ========================================================================
+  // YAML safety validation (72-02)
+  // ========================================================================
+
+  describe('YAML safety validation', () => {
+    it('rejects skill with !!js/function in frontmatter', async () => {
+      const skillDir = join(tempDir, 'evil-func');
+      await mkdir(skillDir, { recursive: true });
+      await writeFile(
+        join(skillDir, 'SKILL.md'),
+        [
+          '---',
+          'name: evil-func',
+          'description: !!js/function "function() { return 1; }"',
+          '---',
+          'body content',
+        ].join('\n'),
+        'utf-8',
+      );
+      const outputPath = join(outputDir, 'evil-func.tar.gz');
+
+      await expect(
+        packSkill(skillDir, 'evil-func', outputPath),
+      ).rejects.toThrow(/[Dd]angerous YAML tag/);
+    });
+
+    it('rejects skill with missing required name field', async () => {
+      const skillDir = join(tempDir, 'no-name');
+      await mkdir(skillDir, { recursive: true });
+      await writeFile(
+        join(skillDir, 'SKILL.md'),
+        [
+          '---',
+          'description: A valid description',
+          '---',
+          'body content',
+        ].join('\n'),
+        'utf-8',
+      );
+      const outputPath = join(outputDir, 'no-name.tar.gz');
+
+      await expect(
+        packSkill(skillDir, 'no-name', outputPath),
+      ).rejects.toThrow(/name/i);
+    });
+
+    it('rejects skill with wrong type for description', async () => {
+      const skillDir = join(tempDir, 'bad-desc');
+      await mkdir(skillDir, { recursive: true });
+      await writeFile(
+        join(skillDir, 'SKILL.md'),
+        [
+          '---',
+          'name: bad-desc',
+          'description: 42',
+          '---',
+          'body content',
+        ].join('\n'),
+        'utf-8',
+      );
+      const outputPath = join(outputDir, 'bad-desc.tar.gz');
+
+      await expect(
+        packSkill(skillDir, 'bad-desc', outputPath),
+      ).rejects.toThrow();
+    });
+
+    it('succeeds for valid skill (regression check)', async () => {
+      const skillDir = await createSkillDir(tempDir, 'valid-skill', {
+        description: 'A perfectly valid skill',
+        body: '# Valid\n\nValid body.',
+      });
+      const outputPath = join(outputDir, 'valid-skill.tar.gz');
+
+      const manifest = await packSkill(skillDir, 'valid-skill', outputPath);
+      expect(manifest.formatVersion).toBe(1);
+      expect(manifest.name).toBe('valid-skill');
+    });
+  });
 });
