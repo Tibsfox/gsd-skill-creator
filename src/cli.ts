@@ -1083,6 +1083,14 @@ async function main() {
       break;
     }
 
+    case 'session':
+    case 'sess': {
+      const { sessionCommand } = await import('./cli/commands/session.js');
+      const exitCode = await sessionCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'discover':
     case 'disc': {
       const { discoverCommand } = await import('./cli/commands/discover.js');
@@ -1341,6 +1349,7 @@ Commands:
   publish, pub      Package a skill as .tar.gz for distribution
   install, inst     Install a skill from local file or remote URL
   mcp-server        Start MCP server for skill browsing/installation
+  session, sess     Manage session continuity (save, restore, handoff)
   orchestrator, orch  GSD orchestrator (discover, state, classify, lifecycle)
   workflow, wf      Manage skill workflows (create, run, list, status)
   role, rl          Manage skill roles (create, list)
