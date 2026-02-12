@@ -18,6 +18,8 @@ import type { SessionInfo, ParsedEntry } from './types.js';
 import { enumerateSessions } from './session-enumerator.js';
 import { parseSessionFile } from './session-parser.js';
 import { ScanStateStore } from './scan-state-store.js';
+import { validateProjectAccess } from './discovery-safety.js';
+import type { ProjectAccessConfig } from './discovery-safety.js';
 
 // ============================================================================
 // Types
@@ -42,8 +44,12 @@ export interface CorpusScannerOptions {
   statePath?: string;
   /** Additional projects to exclude (merged with state excludes) */
   excludeProjects?: string[];
+  /** If set, ONLY these projects are scanned (allowlist). */
+  allowProjects?: string[];
   /** Force rescan, ignoring watermarks. Processes all sessions as new. */
   forceRescan?: boolean;
+  /** When true, enumerate and filter sessions but skip processing and watermark updates. */
+  dryRun?: boolean;
 }
 
 /** Statistics from a scan run. */
@@ -60,6 +66,8 @@ export interface ScanResult {
   skippedSessions: number;
   /** Sessions in excluded projects (skipped) */
   excludedSessions: number;
+  /** Whether this was a dry-run scan (no processing, no watermark updates) */
+  dryRun: boolean;
 }
 
 // ============================================================================
@@ -81,13 +89,17 @@ export class CorpusScanner {
   private readonly stateStore: ScanStateStore;
   private readonly claudeBaseDir?: string;
   private readonly additionalExcludes: string[];
+  private readonly allowProjects?: string[];
   private readonly forceRescan: boolean;
+  private readonly dryRun: boolean;
 
   constructor(options: CorpusScannerOptions = {}) {
     this.stateStore = new ScanStateStore(options.statePath);
     this.claudeBaseDir = options.claudeBaseDir;
     this.additionalExcludes = options.excludeProjects ?? [];
+    this.allowProjects = options.allowProjects;
     this.forceRescan = options.forceRescan ?? false;
+    this.dryRun = options.dryRun ?? false;
   }
 
   /**
@@ -117,7 +129,13 @@ export class CorpusScanner {
     // 4. Collect unique projects for stats
     const projectSlugs = new Set(sessions.map((s) => s.projectSlug));
 
-    // 5. Initialize stats
+    // 5. Build project access config for unified filtering
+    const accessConfig: ProjectAccessConfig = {
+      allowProjects: this.allowProjects,
+      excludeProjects: [...excludeSet],
+    };
+
+    // 6. Initialize stats
     const stats: ScanResult = {
       totalProjects: projectSlugs.size,
       totalSessions: sessions.length,
@@ -125,12 +143,13 @@ export class CorpusScanner {
       modifiedSessions: 0,
       skippedSessions: 0,
       excludedSessions: 0,
+      dryRun: this.dryRun,
     };
 
-    // 6. Process each session
+    // 7. Process each session
     for (const session of sessions) {
-      // Check exclusion
-      if (excludeSet.has(session.projectSlug)) {
+      // Check access via unified allowlist/blocklist validation
+      if (!validateProjectAccess(session.projectSlug, accessConfig)) {
         stats.excludedSessions++;
         continue;
       }
@@ -152,6 +171,11 @@ export class CorpusScanner {
         stats.newSessions++;
       }
 
+      // In dry-run mode: count stats but do NOT process or update watermarks
+      if (this.dryRun) {
+        continue;
+      }
+
       // Process the session via callback
       const entries = parseSessionFile(session.fullPath);
       await processor(session, entries);
@@ -164,18 +188,20 @@ export class CorpusScanner {
       };
     }
 
-    // 7. Update state metadata
-    state.lastScanAt = new Date().toISOString();
-    state.lastScanStats = {
-      totalProjects: stats.totalProjects,
-      totalSessions: stats.totalSessions,
-      newSessions: stats.newSessions,
-      modifiedSessions: stats.modifiedSessions,
-      skippedSessions: stats.skippedSessions,
-    };
+    // 8. Update state metadata (skip in dry-run to avoid side effects)
+    if (!this.dryRun) {
+      state.lastScanAt = new Date().toISOString();
+      state.lastScanStats = {
+        totalProjects: stats.totalProjects,
+        totalSessions: stats.totalSessions,
+        newSessions: stats.newSessions,
+        modifiedSessions: stats.modifiedSessions,
+        skippedSessions: stats.skippedSessions,
+      };
 
-    // 8. Persist state atomically
-    await this.stateStore.save(state);
+      // 9. Persist state atomically
+      await this.stateStore.save(state);
+    }
 
     return stats;
   }

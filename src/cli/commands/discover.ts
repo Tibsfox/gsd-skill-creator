@@ -75,16 +75,22 @@ Usage:
   skill-creator discover              Scan and present candidates
   skill-creator discover --rescan     Force full rescan
   skill-creator discover --exclude=project1,project2  Skip projects
+  skill-creator discover --allow=project1,project2    Only scan these projects
+  skill-creator discover --dry-run    Show what would be scanned without reading content
 
 Options:
   --exclude=<projects>  Comma-separated project slugs to skip
+  --allow=<projects>    Comma-separated project slugs to scan (allowlist)
   --rescan              Force full rescan, ignore watermarks
+  --dry-run             Enumerate sessions and show stats without processing
   --help, -h            Show this help
 
 Examples:
   skill-creator discover
   skill-creator disc --rescan
   skill-creator discover --exclude=node_modules,temp
+  skill-creator discover --allow=my-project,other-project
+  skill-creator discover --dry-run
 `);
 }
 
@@ -113,7 +119,10 @@ export async function discoverCommand(args: string[]): Promise<number> {
     // Parse flags
     const excludeArg = parseFlag(args, 'exclude');
     const excludeProjects = excludeArg ? excludeArg.split(',') : [];
+    const allowArg = parseFlag(args, 'allow');
+    const allowProjects = allowArg ? allowArg.split(',') : undefined;
     const forceRescan = args.includes('--rescan');
+    const dryRun = args.includes('--dry-run');
 
     p.intro(pc.bgCyan(pc.black(' Skill Discovery ')));
 
@@ -153,10 +162,27 @@ export async function discoverCommand(args: string[]): Promise<number> {
     // -----------------------------------------------------------------------
     const scanner = new CorpusScanner({
       excludeProjects,
+      allowProjects,
       forceRescan,
+      dryRun,
     });
     const scanResult = await scanner.scan(progressProcessor);
-    spin.stop(`Scanned ${scanResult.totalSessions} sessions across ${scanResult.totalProjects} projects`);
+
+    const scanSummaryPrefix = dryRun ? '[DRY RUN] ' : '';
+    spin.stop(`${scanSummaryPrefix}Scanned ${scanResult.totalSessions} sessions across ${scanResult.totalProjects} projects`);
+
+    // In dry-run mode: show stats and exit without processing candidates
+    if (dryRun) {
+      p.log.info(
+        `${scanSummaryPrefix}Would process: ` +
+        `${pc.bold(String(scanResult.newSessions))} new, ` +
+        `${pc.bold(String(scanResult.modifiedSessions))} modified, ` +
+        `${pc.bold(String(scanResult.skippedSessions))} skipped, ` +
+        `${pc.bold(String(scanResult.excludedSessions))} excluded`,
+      );
+      p.outro(`${scanSummaryPrefix}Discovery complete (no content was read).`);
+      return 0;
+    }
 
     // -----------------------------------------------------------------------
     // 4. Load existing skills for deduplication (before both pipelines)
