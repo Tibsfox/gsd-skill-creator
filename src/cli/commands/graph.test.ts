@@ -36,15 +36,18 @@ vi.mock('picocolors', () => ({
 }));
 
 // Mock SkillStore to return controlled data
+// Must use regular function (not arrow) for vitest new-ability
 vi.mock('../../storage/skill-store.js', () => ({
-  SkillStore: vi.fn().mockImplementation(() => ({
-    list: vi.fn().mockResolvedValue([]),
-    read: vi.fn().mockResolvedValue({
-      metadata: { name: 'test', description: 'Test skill' },
-      body: '',
-      path: '/tmp/test/SKILL.md',
-    }),
-  })),
+  SkillStore: vi.fn(function () {
+    return {
+      list: vi.fn().mockResolvedValue([]),
+      read: vi.fn().mockResolvedValue({
+        metadata: { name: 'test', description: 'Test skill' },
+        body: '',
+        path: '/tmp/test/SKILL.md',
+      }),
+    };
+  }),
 }));
 
 // Mock CoActivationTracker
