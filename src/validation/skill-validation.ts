@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { OFFICIAL_NAME_PATTERN, validateSkillName } from '../types/skill.js';
 import { ReservedNameValidator, formatReservedNameError } from './reserved-names.js';
+import { DescriptionQualityValidator } from './description-quality.js';
 
 // ============================================================================
 // Description Quality Validation
@@ -34,24 +35,50 @@ export function hasActivationPattern(description: string): boolean {
  */
 export interface DescriptionQualityResult {
   hasActivationTriggers: boolean;
+  hasCapabilityStatement?: boolean;
+  hasUseWhenClause?: boolean;
+  qualityScore?: number;
   warning?: string;
   suggestions?: string[];
+}
+
+// Lazy-initialized validator singleton (avoids circular dependency at module load)
+let qualityValidator: DescriptionQualityValidator | null = null;
+function getQualityValidator(): DescriptionQualityValidator {
+  if (!qualityValidator) {
+    qualityValidator = new DescriptionQualityValidator();
+  }
+  return qualityValidator;
 }
 
 /**
  * Validate description quality for skill activation.
  * Returns warnings (not errors) for poor descriptions.
  *
+ * Enriched with quality score, capability detection, and Use when clause detection
+ * while preserving backward-compatible hasActivationTriggers behavior.
+ *
  * @param description - The skill description to validate
  * @returns Quality result with optional warning and suggestions
  */
 export function validateDescriptionQuality(description: string): DescriptionQualityResult {
-  if (hasActivationPattern(description)) {
-    return { hasActivationTriggers: true };
+  const assessment = getQualityValidator().validate(description);
+  const hasActivation = hasActivationPattern(description);
+
+  if (hasActivation) {
+    return {
+      hasActivationTriggers: true,
+      hasCapabilityStatement: assessment.hasCapabilityStatement,
+      hasUseWhenClause: assessment.hasUseWhenClause,
+      qualityScore: assessment.qualityScore,
+    };
   }
 
   return {
     hasActivationTriggers: false,
+    hasCapabilityStatement: assessment.hasCapabilityStatement,
+    hasUseWhenClause: assessment.hasUseWhenClause,
+    qualityScore: assessment.qualityScore,
     warning: 'Description may not activate reliably - lacks trigger phrases',
     suggestions: [
       'Add "Use when..." to specify when this skill should activate',
