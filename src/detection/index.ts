@@ -15,3 +15,17 @@ export {
   checkGsdInstalled,
   GSD_COMMAND_MAP,
 } from './gsd-reference-injector.js';
+
+// Phase 74: Generation Safety
+export {
+  DANGEROUS_COMMANDS,
+  scanForDangerousCommands,
+  inferAllowedTools,
+  wrapAsScript,
+  sanitizeGeneratedContent,
+  type DangerousFinding,
+  type DangerousCommandPattern,
+  type ToolInferenceCandidate,
+  type WrappedScript,
+  type SanitizeResult,
+} from '../validation/generation-safety.js';
