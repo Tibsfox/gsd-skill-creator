@@ -59,6 +59,15 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **19. Cache Optimization** | Cache-aware skill ordering with cacheTier metadata for prompt cache efficiency (v1.8) |
 | **20. Research Compression** | 10-20x research document reduction with staleness detection (v1.8) |
 | **21. Parallelization Advisor** | Wave-based parallel execution recommendations from plan dependency analysis (v1.8) |
+| **22. Spec Alignment** | Full Claude Code spec compliance: $ARGUMENTS injection, context:fork, dual-format allowed-tools, shell injection prevention (v1.9) |
+| **23. Progressive Disclosure** | Large skills auto-decompose into SKILL.md + references/ + scripts/ with token budget awareness (v1.9) |
+| **24. Cross-Platform Portability** | Export skills as portable archives or platform-specific formats (Claude, Cursor, Codex, Copilot, Gemini) (v1.9) |
+| **25. Evaluator-Optimizer** | Precision/recall/F1 tracking, A/B evaluation with t-test significance, health dashboard (v1.9) |
+| **26. MCP Distribution** | Publish .tar.gz skill packages, install from local/remote, MCP server with 4 tools (v1.9) |
+| **27. Enhanced Topologies** | Router and Map-Reduce team patterns, inter-team deadlock detection, cost estimation (v1.9) |
+| **28. Session Continuity** | Save/restore/handoff with warm-start context and cross-session ephemeral promotion (v1.9) |
+| **29. Agentic RAG** | Adaptive TF-IDF/embedding routing, corrective refinement, cross-project skill discovery (v1.9) |
+| **30. Quality of Life** | Description quality scoring, budget dashboard, Mermaid dependency graphs, GSD command injection (v1.9) |
 
 ### Version History
 
@@ -74,6 +83,7 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.7** | GSD Master Orchestration Agent: dynamic discovery, intent classification, lifecycle coordination, verbosity/HITL gates, persistent work state, session continuity, skill workflows, roles, bundles, inter-skill events |
 | **v1.8** | Capability-Aware Planning + Token Efficiency: skill pipeline architecture, per-agent token budgets, capability manifests, phase capability declarations, skill injection, cache-aware ordering, research compression, model-aware activation, collector agents, parallelization advisor |
 | **v1.8.1** | Audit Remediation: test infrastructure fixes, type safety improvements, CLI validation, error handling, dependency validation, security hardening, code refactoring, cache invalidation |
+| **v1.9** | Ecosystem Alignment & Advanced Orchestration: spec-aligned skill generation, progressive disclosure, 5-platform portability, evaluator-optimizer with A/B testing, MCP-based distribution, router/map-reduce topologies, session save/restore/handoff, agentic RAG with corrective refinement, quality-of-life CLI improvements |
 
 ---
 
@@ -426,6 +436,77 @@ skill-creator capabilities                       # Generate CAPABILITIES.md from
 skill-creator compress-research research.md      # Compress a research file (10-20x reduction)
 skill-creator generate-collector my-context      # Generate a read-only collector agent
 skill-creator advise-parallelization 52-01-PLAN.md  # Analyze plan for parallel execution waves
+```
+
+### Portability & Export (v1.9)
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `export` | `exp` | Export skills as portable archives or platform-specific formats |
+
+**Examples:**
+```bash
+skill-creator export my-skill                        # Export as portable .tar.gz
+skill-creator export my-skill --platform cursor      # Export for Cursor
+skill-creator export my-skill --platform copilot     # Export for GitHub Copilot
+skill-creator export my-skill --platform codex       # Export for OpenAI Codex
+skill-creator export my-skill --platform gemini      # Export for Gemini
+```
+
+### Evaluator & Quality (v1.9)
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `quality` | `q` | Score skill description quality with improvement suggestions |
+| `status` | `st` | Enhanced status with budget breakdown and trend history |
+| `graph` | `gr` | Generate Mermaid dependency graphs for skills and agents |
+
+**Examples:**
+```bash
+skill-creator quality my-skill                # Score description quality
+skill-creator status                          # Budget dashboard with trends
+skill-creator graph                           # Mermaid graph of all dependencies
+```
+
+### MCP Distribution (v1.9)
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `publish` | `pub` | Package and publish a skill as .tar.gz |
+| `install` | `inst` | Install a skill from local file or remote URL |
+| `mcp-server` | `mcp` | Start MCP server exposing skill operations |
+
+**Examples:**
+```bash
+skill-creator publish my-skill                # Package as .tar.gz
+skill-creator install ./my-skill.tar.gz       # Install from local file
+skill-creator mcp-server                      # Start MCP server on stdio
+```
+
+### Session Management (v1.9)
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `session save` | `sess save` | Save current session context |
+| `session restore` | `sess rest` | Restore a saved session |
+| `session handoff` | `sess hand` | Generate handoff document for session continuity |
+
+**Examples:**
+```bash
+skill-creator session save --label "auth work"   # Save session context
+skill-creator session restore                     # Restore most recent session
+skill-creator session handoff                     # Generate handoff document
+```
+
+### Team Estimation (v1.9)
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `team estimate` | `tm est` | Estimate team execution cost and token usage |
+
+**Examples:**
+```bash
+skill-creator team estimate my-team           # Estimate cost for team execution
 ```
 
 ### Quality & Validation
@@ -1427,6 +1508,45 @@ src/
 │   ├── collector-agent-generator.ts # Read-only agent generation
 │   └── parallelization-advisor.ts   # Wave-based execution planning
 │
+├── validation/        # Spec alignment & validation (v1.9)
+│   ├── skill-validation.ts    # Full skill spec validation
+│   ├── arguments-validation.ts # $ARGUMENTS injection & shell safety
+│   ├── context-fork-detection.ts # context:fork pattern detection
+│   ├── description-quality.ts # Description quality scoring
+│   └── team-validation.ts     # Team config validation
+│
+├── disclosure/        # Progressive disclosure (v1.9)
+│   ├── content-analyzer.ts    # Skill size & complexity analysis
+│   ├── content-decomposer.ts  # Auto-decomposition into references/scripts
+│   ├── compact-generator.ts   # Compact skill generation
+│   ├── disclosure-budget.ts   # Token budget for disclosure decisions
+│   └── reference-linker.ts    # Reference file linking
+│
+├── portability/       # Cross-platform export (v1.9)
+│   ├── portable-exporter.ts   # Multi-platform skill export
+│   ├── platform-adapter.ts    # Platform-specific format adapters
+│   └── path-normalizer.ts     # Cross-platform path handling
+│
+├── evaluator/         # Evaluator-optimizer (v1.9)
+│   ├── success-tracker.ts     # Precision/recall/F1 tracking
+│   ├── ab-evaluator.ts        # A/B evaluation with t-test
+│   ├── health-scorer.ts       # Skill health scoring
+│   └── health-formatter.ts    # Health dashboard formatting
+│
+├── mcp/               # MCP distribution (v1.9)
+│   ├── server.ts              # MCP server with 4 tools
+│   ├── skill-packager.ts      # .tar.gz packaging
+│   ├── skill-installer.ts     # Package installation
+│   └── content-validator.ts   # Package content validation
+│
+├── retrieval/         # Agentic RAG (v1.9)
+│   ├── adaptive-router.ts     # TF-IDF/embedding routing
+│   ├── corrective-rag.ts      # Corrective refinement loop
+│   └── cross-project-index.ts # Cross-project skill discovery
+│
+├── cli/               # CLI command modules (v1.9)
+│   └── commands/              # Individual command implementations
+│
 ├── cli.ts             # CLI entry point
 └── index.ts           # Module exports
 ```
@@ -1791,6 +1911,92 @@ src/
 | COMP-01 | Research compression pipeline with 10-20x reduction | ✓ |
 | COMP-02 | Collector agent generation for read-only context-efficient gathering | ✓ |
 | COMP-03 | Parallelization advisor for wave-based parallel execution | ✓ |
+
+### v1.9 Ecosystem Alignment & Advanced Orchestration Requirements (49 total)
+
+#### Spec Alignment (SPEC-01 to SPEC-06)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| SPEC-01 | $ARGUMENTS placeholder injection in user-invocable skills | ✓ |
+| SPEC-02 | Shell injection prevention for $ARGUMENTS values | ✓ |
+| SPEC-03 | context:fork detection and handling | ✓ |
+| SPEC-04 | Dual-format allowed-tools (string and array) | ✓ |
+| SPEC-05 | !command syntax support in skill content | ✓ |
+| SPEC-06 | Backward compatibility with pre-spec skills | ✓ |
+
+#### Progressive Disclosure (DISC-01 to DISC-05)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| DISC-01 | Content size analysis for decomposition eligibility | ✓ |
+| DISC-02 | Auto-decomposition into SKILL.md + references/ + scripts/ | ✓ |
+| DISC-03 | Compact skill generation with reference linking | ✓ |
+| DISC-04 | Token budget awareness for disclosure decisions | ✓ |
+| DISC-05 | Integration with existing skill pipeline | ✓ |
+
+#### Cross-Platform Portability (PORT-01 to PORT-06)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| PORT-01 | Portable archive export (.tar.gz) | ✓ |
+| PORT-02 | Claude Code native format export | ✓ |
+| PORT-03 | Cursor rules format export | ✓ |
+| PORT-04 | OpenAI Codex format export | ✓ |
+| PORT-05 | GitHub Copilot format export | ✓ |
+| PORT-06 | Gemini format export | ✓ |
+
+#### Evaluator-Optimizer (EVAL-01 to EVAL-06)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| EVAL-01 | Precision/recall/F1 tracking per skill | ✓ |
+| EVAL-02 | A/B evaluation with statistical significance (t-test) | ✓ |
+| EVAL-03 | Skill health scoring with multi-factor assessment | ✓ |
+| EVAL-04 | Health dashboard with formatted output | ✓ |
+| EVAL-05 | Success/failure event recording | ✓ |
+| EVAL-06 | Historical trend analysis | ✓ |
+
+#### MCP Distribution (MCP-01 to MCP-05)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| MCP-01 | Skill packaging as .tar.gz with manifest | ✓ |
+| MCP-02 | Package installation from local files | ✓ |
+| MCP-03 | Package content validation | ✓ |
+| MCP-04 | MCP server with search/install/list/info tools | ✓ |
+| MCP-05 | CLI commands for publish/install/mcp-server | ✓ |
+
+#### Enhanced Topologies (TOPO-01 to TOPO-06)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| TOPO-01 | Router topology pattern for dynamic agent routing | ✓ |
+| TOPO-02 | Map-Reduce topology pattern for parallel aggregation | ✓ |
+| TOPO-03 | Inter-team bridge for cross-team communication | ✓ |
+| TOPO-04 | Deadlock detection in inter-team dependencies | ✓ |
+| TOPO-05 | Cost estimation for team execution | ✓ |
+| TOPO-06 | Team templates for router and map-reduce patterns | ✓ |
+
+#### Session Continuity (SESS-01 to SESS-05)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| SESS-01 | Session save with labeled context snapshots | ✓ |
+| SESS-02 | Session restore with warm-start context injection | ✓ |
+| SESS-03 | Handoff document generation for session continuity | ✓ |
+| SESS-04 | Cross-session ephemeral observation promotion | ✓ |
+| SESS-05 | CLI commands for session save/restore/handoff | ✓ |
+
+#### Agentic RAG (RAG-01 to RAG-05)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| RAG-01 | Adaptive routing between TF-IDF and embedding search | ✓ |
+| RAG-02 | Corrective refinement loop for low-confidence results | ✓ |
+| RAG-03 | Cross-project skill discovery and indexing | ✓ |
+| RAG-04 | Version drift detection in embedding cache | ✓ |
+| RAG-05 | Integration with skill pipeline scoring | ✓ |
+
+#### Quality of Life (QOL-01 to QOL-04)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| QOL-01 | Description quality scoring with improvement suggestions | ✓ |
+| QOL-02 | Enhanced status command with budget breakdown and trends | ✓ |
+| QOL-03 | Mermaid dependency graph generation | ✓ |
+| QOL-04 | GSD command reference injection in generated skills | ✓ |
 
 ---
 
