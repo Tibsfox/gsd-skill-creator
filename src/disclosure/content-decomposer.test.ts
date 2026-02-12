@@ -107,7 +107,7 @@ mkdir -p src/
 
       const body = `## Overview
 
-${generateWords(400)}
+${generateWords(600)}
 
 ## Setup
 
@@ -117,11 +117,11 @@ ${scriptBlock}
 
 ## Guidelines
 
-${generateWords(800)}
+${generateWords(900)}
 
 ## Examples
 
-${generateWords(600)}`;
+${generateWords(700)}`;
 
       const result = decomposer.decompose('test-skill', defaultMetadata, body);
       expect(result.decomposed).toBe(true);
