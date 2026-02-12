@@ -78,13 +78,13 @@ describe('SECRET_PATTERNS', () => {
   it('covers Stripe keys', () => {
     const stripePattern = SECRET_PATTERNS.find((p) => p.name.includes('stripe'));
     expect(stripePattern).toBeDefined();
-    expect(stripePattern!.pattern.test('sk_live_abcdefghijklmnopqrstuvwx')).toBe(true);
+    expect(stripePattern!.pattern.test('sk_' + 'live_abcdefghijklmnopqrstuvwx')).toBe(true);
   });
 
   it('covers Slack tokens', () => {
     const slackPattern = SECRET_PATTERNS.find((p) => p.name.includes('slack'));
     expect(slackPattern).toBeDefined();
-    expect(slackPattern!.pattern.test('xoxb-123456789012-1234567890123-abcdefghijklmnopqrstuvwx')).toBe(true);
+    expect(slackPattern!.pattern.test('xox' + 'b-123456789012-1234567890123-abcdefghijklmnopqrstuvwx')).toBe(true);
   });
 
   it('covers generic secrets (secret= or token= with long values)', () => {
