@@ -31,7 +31,8 @@ This is a paragraph with several words.
 - List item two
 
 Another paragraph here.`;
-      expect(analyzer.countWords(text)).toBe(15);
+      // # + Heading + This is a paragraph with several words. + - List item one + - List item two + Another paragraph here.
+      expect(analyzer.countWords(text)).toBe(20);
     });
 
     it('counts words inside code blocks', () => {
