@@ -233,6 +233,44 @@ export function validateTopologyRules(config: TeamConfig): {
       }
       break;
     }
+    case 'router': {
+      const routerCount = config.members.filter(
+        (m) => m.agentType === 'router'
+      ).length;
+      if (routerCount !== 1) {
+        errors.push(
+          `Router topology requires exactly 1 router, found ${routerCount}`
+        );
+      }
+      const specialistCount = config.members.filter(
+        (m) => m.agentType === 'specialist'
+      ).length;
+      if (specialistCount < 2) {
+        errors.push(
+          `Router topology requires at least 2 specialists, found ${specialistCount}`
+        );
+      }
+      break;
+    }
+    case 'map-reduce': {
+      const mapReduceOrchestratorCount = config.members.filter(
+        (m) => m.agentType === 'orchestrator'
+      ).length;
+      if (mapReduceOrchestratorCount !== 1) {
+        errors.push(
+          `Map-reduce topology requires exactly 1 orchestrator (mapper/reducer), found ${mapReduceOrchestratorCount}`
+        );
+      }
+      const mapReduceWorkerCount = config.members.filter(
+        (m) => m.agentType === 'worker'
+      ).length;
+      if (mapReduceWorkerCount < 1) {
+        errors.push(
+          `Map-reduce topology requires at least 1 worker, found ${mapReduceWorkerCount}`
+        );
+      }
+      break;
+    }
     case 'custom':
     default:
       // No rules to enforce for custom or unknown topologies
