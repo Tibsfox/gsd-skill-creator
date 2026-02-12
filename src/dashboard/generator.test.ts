@@ -16,6 +16,11 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { existsSync } from 'node:fs';
 
+// Mock the metrics integration module
+vi.mock('./metrics/integration.js', () => ({
+  collectAndRenderMetrics: vi.fn(),
+}));
+
 // ---------------------------------------------------------------------------
 // Fixtures — realistic .planning/ content
 // ---------------------------------------------------------------------------
@@ -244,5 +249,95 @@ describe('generate', () => {
     const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
     // Default interval is 5000ms
     expect(content).toContain('5000');
+  });
+
+  // -------------------------------------------------------------------------
+  // Metrics integration tests (100-02)
+  // -------------------------------------------------------------------------
+
+  describe('metrics integration', () => {
+    beforeEach(async () => {
+      // Reset the mock before each metrics test
+      const { collectAndRenderMetrics } = await import('./metrics/integration.js');
+      vi.mocked(collectAndRenderMetrics).mockReset();
+    });
+
+    it('includes metrics HTML in generated index page', async () => {
+      // Setup: mock collectAndRenderMetrics to return known HTML
+      const { collectAndRenderMetrics } = await import('./metrics/integration.js');
+      vi.mocked(collectAndRenderMetrics).mockResolvedValue({
+        html: '<!-- METRICS_SECTION -->',
+        sections: 4,
+        durationMs: 50,
+      });
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      const result = await generate({ planningDir, outputDir, force: true });
+
+      expect(result.pages).toContain('index.html');
+      const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
+      expect(content).toContain('<!-- METRICS_SECTION -->');
+    });
+
+    it('passes live: true to collectAndRenderMetrics when live option is set', async () => {
+      const { collectAndRenderMetrics } = await import('./metrics/integration.js');
+      vi.mocked(collectAndRenderMetrics).mockResolvedValue({
+        html: '<!-- LIVE_METRICS -->',
+        sections: 4,
+        durationMs: 30,
+      });
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+
+      const { generate } = await import('./generator.js');
+      await generate({ planningDir, outputDir, live: true, force: true });
+
+      expect(collectAndRenderMetrics).toHaveBeenCalledWith(
+        expect.objectContaining({ live: true }),
+      );
+    });
+
+    it('passes live: false to collectAndRenderMetrics when live option is not set', async () => {
+      const { collectAndRenderMetrics } = await import('./metrics/integration.js');
+      vi.mocked(collectAndRenderMetrics).mockResolvedValue({
+        html: '<!-- STATIC_METRICS -->',
+        sections: 4,
+        durationMs: 20,
+      });
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+
+      const { generate } = await import('./generator.js');
+      await generate({ planningDir, outputDir, force: true });
+
+      expect(collectAndRenderMetrics).toHaveBeenCalledWith(
+        expect.objectContaining({ live: false }),
+      );
+    });
+
+    it('generates index page without metrics when collectAndRenderMetrics rejects', async () => {
+      const { collectAndRenderMetrics } = await import('./metrics/integration.js');
+      vi.mocked(collectAndRenderMetrics).mockRejectedValue(
+        new Error('Metrics collection failed'),
+      );
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      const result = await generate({ planningDir, outputDir, force: true });
+
+      // Generation should still succeed
+      expect(result.pages).toContain('index.html');
+      expect(result.errors).toHaveLength(0);
+
+      // Index page should exist but without metrics content
+      const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
+      expect(content).toBeTruthy();
+      expect(content).not.toContain('<!-- METRICS_SECTION -->');
+    });
   });
 });
