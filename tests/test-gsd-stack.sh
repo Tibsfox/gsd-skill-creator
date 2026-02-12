@@ -352,6 +352,310 @@ else
 fi
 
 # ==============================================================================
+# Status Subcommand Tests (empty state)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Status Subcommand Tests (empty state)${RESET}\n"
+
+# Reset stack dir for clean status tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# -- status exits 0 --
+set +e
+output=$("$GSD_STACK" status 2>&1)
+rc=$?
+set -e
+assert_eq "status exits 0" "0" "$rc"
+
+# -- status shows 0 pending --
+assert_contains "status shows 0 pending" "$output" "0 pending"
+
+# -- status shows no active session --
+# Should contain "none" or "no" for session
+if [[ "$output" == *[Ss]ession* ]] && [[ "$output" == *"none"* || "$output" == *"no "* ]]; then
+  pass "status shows no active session"
+else
+  fail "status shows no active session" "output: $output"
+fi
+
+# -- status shows no recording --
+if [[ "$output" == *[Rr]ecording* ]] && [[ "$output" == *"none"* || "$output" == *"no "* ]]; then
+  pass "status shows no recording"
+else
+  fail "status shows no recording" "output: $output"
+fi
+
+# -- status shows mode --
+assert_contains "status shows mode" "$output" "fifo"
+
+# -- status shows done count --
+if [[ "$output" == *[Dd]one* ]] && [[ "$output" == *"0"* ]]; then
+  pass "status shows done count 0"
+else
+  fail "status shows done count 0" "output: $output"
+fi
+
+# ==============================================================================
+# Status Subcommand Tests (with data)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Status Subcommand Tests (with data)${RESET}\n"
+
+# Reset stack dir for data tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl"
+
+# -- Create fake pending messages --
+touch "$GSD_STACK_DIR/pending/0-001.md"   # urgent
+touch "$GSD_STACK_DIR/pending/5-002.md"   # normal
+touch "$GSD_STACK_DIR/pending/5-003.md"   # normal
+
+set +e
+output=$("$GSD_STACK" status 2>&1)
+rc=$?
+set -e
+assert_eq "status with pending exits 0" "0" "$rc"
+assert_contains "status shows 3 pending" "$output" "3 pending"
+assert_contains "status shows 1 urgent" "$output" "1 urgent"
+assert_contains "status shows 2 normal" "$output" "2 normal"
+
+# -- Create fake done files --
+touch "$GSD_STACK_DIR/done/msg1.md"
+touch "$GSD_STACK_DIR/done/msg2.md"
+
+set +e
+output=$("$GSD_STACK" status 2>&1)
+rc=$?
+set -e
+assert_contains "status shows 2 done" "$output" "2"
+
+# -- Create fake active session --
+mkdir -p "$GSD_STACK_DIR/sessions/myapp"
+echo '{"name":"myapp","status":"active","project":"/home/user/proj","started":"2026-02-12T10:00:00Z"}' > "$GSD_STACK_DIR/sessions/myapp/meta.json"
+
+set +e
+output=$("$GSD_STACK" status 2>&1)
+rc=$?
+set -e
+assert_contains "status shows active session" "$output" "active"
+assert_contains "status shows session name" "$output" "myapp"
+
+# -- Create fake recording --
+mkdir -p "$GSD_STACK_DIR/recordings/sprint-1"
+echo '{"name":"sprint-1","status":"recording","started":"2026-02-12T14:00:00Z"}' > "$GSD_STACK_DIR/recordings/sprint-1/meta.json"
+
+set +e
+output=$("$GSD_STACK" status 2>&1)
+rc=$?
+set -e
+assert_contains "status shows recording" "$output" "recording"
+assert_contains "status shows recording name" "$output" "sprint-1"
+
+# ==============================================================================
+# Status JSON Output Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Status JSON Output Tests${RESET}\n"
+
+set +e
+output=$(GSD_FORMAT=json "$GSD_STACK" status 2>&1)
+rc=$?
+set -e
+assert_eq "status json exits 0" "0" "$rc"
+
+# -- Output is valid JSON (check for opening/closing braces) --
+if [[ "$output" == "{"* ]] && [[ "$output" == *"}" ]]; then
+  pass "status json starts/ends with braces"
+else
+  fail "status json starts/ends with braces" "output: $output"
+fi
+
+# -- JSON contains expected keys --
+assert_contains "status json has pending key" "$output" '"pending"'
+assert_contains "status json has mode key" "$output" '"mode"'
+assert_contains "status json has session key" "$output" '"session"'
+assert_contains "status json has recording key" "$output" '"recording"'
+
+# Validate JSON with python3 if available
+if command -v python3 &>/dev/null; then
+  set +e
+  echo "$output" | python3 -m json.tool >/dev/null 2>&1
+  json_rc=$?
+  set -e
+  if [[ "$json_rc" -eq 0 ]]; then
+    pass "status json is valid JSON (python3 validated)"
+  else
+    fail "status json is valid JSON (python3 validated)" "python3 json.tool failed"
+  fi
+else
+  pass "status json is valid JSON (python3 not available, skipped)"
+fi
+
+# ==============================================================================
+# Log Subcommand Tests (empty history)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Log Subcommand Tests (empty history)${RESET}\n"
+
+# Reset stack dir for log tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl"
+
+# Truncate history to empty
+> "$GSD_STACK_DIR/history.jsonl"
+
+set +e
+output=$("$GSD_STACK" log 2>&1)
+rc=$?
+set -e
+assert_eq "log empty exits 0" "0" "$rc"
+
+# Should contain some indication of no events
+if echo "$output" | grep -qi "no.*event\|no.*history\|empty"; then
+  pass "log empty shows no-events message"
+else
+  fail "log empty shows no-events message" "output: $output"
+fi
+
+# ==============================================================================
+# Log Subcommand Tests (with events)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Log Subcommand Tests (with events)${RESET}\n"
+
+# Reset and write test events
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+
+# Write 5 test events
+cat > "$GSD_STACK_DIR/history.jsonl" <<'EVENTS'
+{"ts":"2026-02-12T15:00:00Z","event":"push","detail":"implement auth module"}
+{"ts":"2026-02-12T15:01:00Z","event":"poke","detail":"tmux: process stack"}
+{"ts":"2026-02-12T15:02:00Z","event":"pop","detail":"implement auth module"}
+{"ts":"2026-02-12T15:03:00Z","event":"push","detail":"fix login validation bug in the authentication handler service that processes incoming requests"}
+{"ts":"2026-02-12T15:04:00Z","event":"status","detail":"displayed status"}
+EVENTS
+
+set +e
+output=$("$GSD_STACK" log 2>&1)
+rc=$?
+set -e
+assert_eq "log with events exits 0" "0" "$rc"
+
+# -- All 5 timestamps appear --
+assert_contains "log shows 15:00 timestamp" "$output" "15:00"
+assert_contains "log shows 15:01 timestamp" "$output" "15:01"
+assert_contains "log shows 15:02 timestamp" "$output" "15:02"
+assert_contains "log shows 15:03 timestamp" "$output" "15:03"
+assert_contains "log shows 15:04 timestamp" "$output" "15:04"
+
+# -- Event types present --
+assert_contains "log shows push event" "$output" "push"
+assert_contains "log shows poke event" "$output" "poke"
+assert_contains "log shows pop event" "$output" "pop"
+assert_contains "log shows status event" "$output" "status"
+
+# -- Long detail is truncated (the 15:03 entry has >80 char detail) --
+# The full detail is "fix login validation bug in the authentication handler service that processes incoming requests"
+# which is 95 chars, so it should be cut with "..."
+if echo "$output" | grep "15:03" | grep -q '\.\.\.'; then
+  pass "log truncates long detail with ..."
+else
+  fail "log truncates long detail with ..." "15:03 line: $(echo "$output" | grep '15:03')"
+fi
+
+# ==============================================================================
+# Log --limit / -n Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Log --limit / -n Tests${RESET}\n"
+
+# Write 25 test events
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+> "$GSD_STACK_DIR/history.jsonl"
+
+for i in $(seq -w 1 25); do
+  echo "{\"ts\":\"2026-02-12T16:${i}:00Z\",\"event\":\"push\",\"detail\":\"event number $i\"}" >> "$GSD_STACK_DIR/history.jsonl"
+done
+
+# -- Default log shows exactly 20 entries --
+set +e
+output=$("$GSD_STACK" log 2>&1)
+rc=$?
+set -e
+
+# Count lines that contain timestamps (event lines)
+ts_count=$(echo "$output" | grep -c "2026-02-12" || true)
+assert_eq "log default shows 20 entries" "20" "$ts_count"
+
+# -- log -n 5 shows exactly 5 entries --
+set +e
+output=$("$GSD_STACK" log -n 5 2>&1)
+rc=$?
+set -e
+
+ts_count=$(echo "$output" | grep -c "2026-02-12" || true)
+assert_eq "log -n 5 shows 5 entries" "5" "$ts_count"
+
+# -- log -n 30 shows all 25 entries (not more) --
+set +e
+output=$("$GSD_STACK" log -n 30 2>&1)
+rc=$?
+set -e
+
+ts_count=$(echo "$output" | grep -c "2026-02-12" || true)
+assert_eq "log -n 30 shows all 25 entries" "25" "$ts_count"
+
+# ==============================================================================
+# Log JSON Output Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Log JSON Output Tests${RESET}\n"
+
+set +e
+output=$(GSD_FORMAT=json "$GSD_STACK" log 2>&1)
+rc=$?
+set -e
+assert_eq "log json exits 0" "0" "$rc"
+
+# -- Output starts with [ (JSON array) --
+if [[ "$output" == "["* ]]; then
+  pass "log json starts with ["
+else
+  fail "log json starts with [" "output starts with: ${output:0:20}"
+fi
+
+# Validate JSON with python3 if available
+if command -v python3 &>/dev/null; then
+  set +e
+  echo "$output" | python3 -m json.tool >/dev/null 2>&1
+  json_rc=$?
+  set -e
+  if [[ "$json_rc" -eq 0 ]]; then
+    pass "log json is valid JSON (python3 validated)"
+  else
+    fail "log json is valid JSON (python3 validated)" "python3 json.tool failed"
+  fi
+else
+  pass "log json is valid JSON (python3 not available, skipped)"
+fi
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
