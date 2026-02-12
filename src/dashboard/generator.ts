@@ -24,6 +24,7 @@ import {
   needsRegeneration,
 } from './incremental.js';
 import { generateRefreshScript } from './refresh.js';
+import { collectAndRenderMetrics } from './metrics/integration.js';
 import type { DashboardData } from './types.js';
 import { mkdir, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -75,7 +76,7 @@ const NAV_PAGES: NavPage[] = [
 /**
  * Render the main dashboard index page content.
  */
-function renderIndexContent(data: DashboardData): string {
+function renderIndexContent(data: DashboardData, metricsHtml?: string): string {
   const sections: string[] = [];
 
   // Page title
@@ -93,6 +94,11 @@ function renderIndexContent(data: DashboardData): string {
   // Current milestone status
   if (data.state) {
     sections.push(renderCurrentStatus(data));
+  }
+
+  // Live metrics sections
+  if (metricsHtml) {
+    sections.push(metricsHtml);
   }
 
   // Phase list from roadmap
@@ -333,6 +339,20 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     return { pages, skipped, errors, duration: performance.now() - start };
   }
 
+  // Collect and render metrics (graceful — never fails the pipeline)
+  let metricsHtml = '';
+  try {
+    const metricsResult = await collectAndRenderMetrics({
+      planningDir: options.planningDir,
+      cwd: process.cwd(),
+      live: options.live ?? false,
+      dashboardData: data,
+    });
+    metricsHtml = metricsResult.html;
+  } catch {
+    // Metrics collection failure never blocks dashboard generation
+  }
+
   // Ensure output directory exists
   try {
     await mkdir(options.outputDir, { recursive: true });
@@ -367,7 +387,7 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     {
       name: 'index',
       filename: 'index.html',
-      render: () => renderIndexContent(data),
+      render: () => renderIndexContent(data, metricsHtml),
       meta: {
         description: data.project?.description ?? 'GSD Planning Docs Dashboard',
         ogTitle: projectName,

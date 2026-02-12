@@ -31,3 +31,10 @@ export {
   generateSectionRefreshScript,
   wrapSectionWithRefresh,
 } from './tier-refresh.js';
+
+// Integration pipeline
+export { collectAndRenderMetrics } from './integration.js';
+export type { MetricsOptions, MetricsResult } from './integration.js';
+
+// Graceful degradation
+export { safeCollectGit, safeCollectSession, safeCollectPlanning } from './graceful.js';
