@@ -1142,6 +1142,35 @@ async function main() {
       break;
     }
 
+    case 'config':
+    case 'cfg': {
+      const subcommand = args[1];
+      const subArgs = args.slice(2);
+
+      switch (subcommand) {
+        case 'validate':
+        case 'v': {
+          const { configValidateCommand } = await import('./cli/commands/config-validate.js');
+          const exitCode = await configValidateCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        default:
+          p.log.message('');
+          p.log.message(pc.bold('Config Management:'));
+          p.log.message('');
+          p.log.message('  Subcommands:');
+          p.log.message(`    ${pc.cyan('config validate')}   Validate GSD configuration against ranges and security policies`);
+          p.log.message('');
+          p.log.message('  Examples:');
+          p.log.message('    skill-creator config validate');
+          p.log.message('    skill-creator config validate --json');
+          p.log.message('    skill-creator config validate --config=/path/to/config.json');
+      }
+      break;
+    }
+
     case 'graph':
     case 'gr': {
       const { graphCommand } = await import('./cli/commands/graph.js');
@@ -1358,6 +1387,7 @@ Commands:
   workflow, wf      Manage skill workflows (create, run, list, status)
   role, rl          Manage skill roles (create, list)
   bundle, bd        Manage work bundles (create, list, activate, deactivate, status)
+  config, cfg       Manage GSD configuration (validate)
   event, ev         Manage skill events (list, emit, consume, suggest, expire)
   help, -h          Show this help message
   --version, -V     Show version information
