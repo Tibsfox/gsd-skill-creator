@@ -3,6 +3,7 @@ import { SkillMetadata, SkillTrigger } from '../types/skill.js';
 import { type GsdSkillCreatorExtension } from '../types/extensions.js';
 import { SkillCandidate, PatternEvidence } from '../types/detection.js';
 import { detectArguments, suggestArgumentHint, checkInjectionRisk } from '../validation/arguments-validation.js';
+import { shouldForkContext, suggestAgent } from '../validation/context-fork-detection.js';
 
 export interface GeneratedSkill {
   name: string;
@@ -50,6 +51,16 @@ export class SkillGenerator {
     const injectionRisk = checkInjectionRisk(body);
     if (injectionRisk.risk === 'high') {
       body = `<!-- WARNING: This skill combines $ARGUMENTS with !command preprocessing. Ensure arguments are sanitized before use in shell context. -->\n${body}`;
+    }
+
+    // SPEC-05: Detect research/analysis workflows for context:fork
+    const forkDetection = shouldForkContext(candidate.suggestedDescription, body);
+    if (forkDetection.shouldFork) {
+      metadata.context = 'fork';
+      const agent = suggestAgent(candidate.suggestedDescription, body);
+      if (agent) {
+        metadata.agent = agent;
+      }
     }
 
     return { name, metadata, body };
