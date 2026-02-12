@@ -120,6 +120,17 @@ vi.mock('../../index.js', () => ({
   })),
 }));
 
+// Mock SkillStore for inheritance chain display
+const mockSkillStoreList = vi.fn().mockResolvedValue([]);
+const mockSkillStoreRead = vi.fn().mockResolvedValue(null);
+
+vi.mock('../../storage/skill-store.js', () => ({
+  SkillStore: vi.fn().mockImplementation(() => ({
+    list: mockSkillStoreList,
+    read: mockSkillStoreRead,
+  })),
+}));
+
 // Capture console.log output
 const consoleOutput: string[] = [];
 const originalLog = console.log;
@@ -146,6 +157,8 @@ beforeEach(() => {
   mockRead.mockResolvedValue([]);
   mockAppend.mockResolvedValue(undefined);
   (BudgetHistory as any).getTrend = vi.fn().mockReturnValue(null);
+  mockSkillStoreList.mockResolvedValue([]);
+  mockSkillStoreRead.mockResolvedValue(null);
 });
 
 afterEach(() => {
@@ -230,5 +243,53 @@ describe('statusCommand', () => {
     expect(parsed).toHaveProperty('headroom');
     expect(parsed).toHaveProperty('skills');
     expect(parsed).toHaveProperty('trend');
+  });
+
+  it('should show extends line for skills with inheritance', async () => {
+    // Set up skills with extends relationships
+    mockSkillStoreList.mockResolvedValue(['git-commit', 'test-runner', 'deploy']);
+    mockSkillStoreRead.mockImplementation(async (name: string) => {
+      const skills: Record<string, any> = {
+        'git-commit': {
+          metadata: { name: 'git-commit', description: 'Git commit', extends: 'base-commit' },
+          body: '', path: '/skills/git-commit/SKILL.md',
+        },
+        'test-runner': {
+          metadata: { name: 'test-runner', description: 'Test runner' },
+          body: '', path: '/skills/test-runner/SKILL.md',
+        },
+        'deploy': {
+          metadata: { name: 'deploy', description: 'Deploy' },
+          body: '', path: '/skills/deploy/SKILL.md',
+        },
+      };
+      return skills[name] || null;
+    });
+
+    const exitCode = await statusCommand([]);
+
+    expect(exitCode).toBe(0);
+    const output = consoleOutput.join('\n');
+    // Should include extends info for git-commit
+    expect(output).toMatch(/extends:/);
+  });
+
+  it('should NOT show extends line for skills without inheritance', async () => {
+    // Set up skills without extends relationships
+    mockSkillStoreList.mockResolvedValue(['deploy']);
+    mockSkillStoreRead.mockImplementation(async (name: string) => {
+      if (name === 'deploy') return {
+        metadata: { name: 'deploy', description: 'Deploy' },
+        body: '', path: '/skills/deploy/SKILL.md',
+      };
+      return null;
+    });
+
+    const exitCode = await statusCommand([]);
+
+    expect(exitCode).toBe(0);
+    const output = consoleOutput.join('\n');
+    // Should NOT include extends info
+    expect(output).not.toMatch(/extends:/);
   });
 });
