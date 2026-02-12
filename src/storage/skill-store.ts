@@ -2,7 +2,7 @@ import matter from 'gray-matter';
 import { readFile, writeFile, mkdir, readdir, stat, unlink, rm, chmod } from 'fs/promises';
 import { join, dirname, resolve } from 'path';
 import { Skill, SkillMetadata, validateSkillMetadata } from '../types/skill.js';
-import { validateSkillNameStrict, suggestFixedName, validateReservedName } from '../validation/skill-validation.js';
+import { validateSkillNameStrict, suggestFixedName, validateReservedName, SkillMetadataSchema } from '../validation/skill-validation.js';
 import { BudgetValidator } from '../validation/budget-validation.js';
 import {
   getExtension,
@@ -21,6 +21,7 @@ import {
   assertSafePath,
   PathTraversalError,
 } from '../validation/path-safety.js';
+import { safeParseFrontmatter } from '../validation/yaml-safety.js';
 
 export { PathTraversalError } from '../validation/path-safety.js';
 
@@ -391,11 +392,15 @@ export class SkillStore {
     this.assertSafeSkillPath(skillPath);
     const content = await readFile(skillPath, 'utf-8');
 
-    const { data, content: body } = matter(content);
+    const parseResult = safeParseFrontmatter(content);
+    if (!parseResult.success) {
+      throw new Error(`Invalid skill file "${skillName}": ${parseResult.error}`);
+    }
+    const metadata = SkillMetadataSchema.parse(parseResult.data);
 
     return {
-      metadata: data as SkillMetadata,
-      body: body.trim(),
+      metadata: metadata as SkillMetadata,
+      body: parseResult.body.trim(),
       path: skillPath,
     };
   }
