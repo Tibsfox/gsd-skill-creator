@@ -90,10 +90,11 @@ describe('TeamStore', () => {
   // ==========================================================================
 
   describe('save with validation', () => {
-    it('rejects config with empty name', async () => {
+    it('rejects config with empty name (caught by path safety)', async () => {
       const config = createValidConfig({ name: '' });
 
-      await expect(store.save(config)).rejects.toThrow(/Invalid team config/);
+      // Empty name is now caught by assertSafeName before team validation
+      await expect(store.save(config)).rejects.toThrow(PathTraversalError);
     });
 
     it('rejects config with missing members', async () => {
@@ -105,6 +106,7 @@ describe('TeamStore', () => {
     it('includes descriptive error in rejection', async () => {
       const config = createValidConfig({ name: '', leadAgentId: '' });
 
+      // Empty name is caught by path safety with descriptive message
       await expect(store.save(config)).rejects.toThrow(/name/i);
     });
   });
