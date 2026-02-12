@@ -13,6 +13,7 @@
 
 import { parsePatternKey } from './pattern-scorer.js';
 import type { RankedCandidate, ParsedPatternKey } from './pattern-scorer.js';
+import { injectGsdReferences } from '../detection/gsd-reference-injector.js';
 
 // ============================================================================
 // Exported constants
@@ -163,7 +164,10 @@ const BASH_COMMON_COMMANDS: Record<string, string[]> = {
  * content including YAML frontmatter, workflow steps, usage guidance,
  * and pattern evidence metadata.
  */
-export function generateSkillDraft(candidate: RankedCandidate): { name: string; content: string } {
+export function generateSkillDraft(
+  candidate: RankedCandidate,
+  gsdInstalled = false,
+): { name: string; content: string } {
   const parsed = parsePatternKey(candidate.patternKey);
 
   // Build frontmatter manually (no gray-matter dependency needed)
@@ -174,9 +178,12 @@ export function generateSkillDraft(candidate: RankedCandidate): { name: string; 
     '---\n\n';
 
   // Generate body based on pattern type
-  const body = parsed.type === 'bash-pattern'
+  let body = parsed.type === 'bash-pattern'
     ? generateBashPatternBody(candidate, parsed)
     : generateToolPatternBody(candidate, parsed);
+
+  // QOL-04: Inject GSD command references if applicable
+  body = injectGsdReferences(body, candidate.suggestedDescription, gsdInstalled);
 
   return {
     name: candidate.suggestedName,
