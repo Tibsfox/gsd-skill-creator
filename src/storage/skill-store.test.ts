@@ -132,3 +132,129 @@ describe('SkillStore path safety', () => {
     });
   });
 });
+
+// ============================================================================
+// SkillStore YAML Safety Tests (72-02)
+// ============================================================================
+
+describe('SkillStore YAML safety', () => {
+  let tempDir: string;
+  let skillsDir: string;
+  let store: SkillStore;
+
+  beforeEach(async () => {
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'skill-store-yaml-'));
+    skillsDir = path.join(tempDir, 'skills');
+    fs.mkdirSync(skillsDir, { recursive: true });
+    store = new SkillStore(skillsDir);
+  });
+
+  afterEach(() => {
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  });
+
+  /**
+   * Helper: write a raw SKILL.md file directly (bypassing store.create).
+   */
+  function writeRawSkill(name: string, rawContent: string): void {
+    const skillDir = path.join(skillsDir, name);
+    fs.mkdirSync(skillDir, { recursive: true });
+    fs.writeFileSync(path.join(skillDir, 'SKILL.md'), rawContent, 'utf-8');
+  }
+
+  describe('read() rejects dangerous YAML tags', () => {
+    it('rejects !!js/function in frontmatter', async () => {
+      writeRawSkill('evil-func', [
+        '---',
+        'name: evil-func',
+        'description: !!js/function "function() { return 1; }"',
+        '---',
+        'body content',
+      ].join('\n'));
+
+      await expect(store.read('evil-func')).rejects.toThrow(/[Dd]angerous YAML tag/);
+    });
+
+    it('rejects !!js/undefined in frontmatter', async () => {
+      writeRawSkill('evil-undef', [
+        '---',
+        'name: evil-undef',
+        'description: !!js/undefined ""',
+        '---',
+        'body',
+      ].join('\n'));
+
+      await expect(store.read('evil-undef')).rejects.toThrow(/YAML/i);
+    });
+
+    it('rejects !!python/object in frontmatter', async () => {
+      writeRawSkill('evil-python', [
+        '---',
+        'name: evil-python',
+        'description: !!python/object:os.system "rm -rf /"',
+        '---',
+        'body',
+      ].join('\n'));
+
+      await expect(store.read('evil-python')).rejects.toThrow(/YAML/i);
+    });
+  });
+
+  describe('read() rejects malformed frontmatter via Zod', () => {
+    it('rejects missing required name field', async () => {
+      writeRawSkill('no-name', [
+        '---',
+        'description: A valid description',
+        '---',
+        'body content',
+      ].join('\n'));
+
+      await expect(store.read('no-name')).rejects.toThrow(/name/i);
+    });
+
+    it('rejects wrong type for description (number instead of string)', async () => {
+      writeRawSkill('bad-desc', [
+        '---',
+        'name: bad-desc',
+        'description: 42',
+        '---',
+        'body content',
+      ].join('\n'));
+
+      await expect(store.read('bad-desc')).rejects.toThrow();
+    });
+  });
+
+  describe('read() succeeds for valid skills (regression)', () => {
+    it('reads a valid skill with all standard fields', async () => {
+      // Create a valid skill through the store API
+      await store.create(
+        'valid-skill',
+        { name: 'valid-skill', description: 'A perfectly valid skill' },
+        'Valid body content',
+      );
+
+      const skill = await store.read('valid-skill');
+      expect(skill.metadata.name).toBe('valid-skill');
+      expect(skill.metadata.description).toBe('A perfectly valid skill');
+      expect(skill.body).toBe('Valid body content');
+    });
+
+    it('reads a valid skill with optional fields preserved', async () => {
+      await store.create(
+        'full-skill',
+        {
+          name: 'full-skill',
+          description: 'Full featured skill',
+          'allowed-tools': ['Read', 'Write'],
+          model: 'claude-sonnet-4-20250514',
+        },
+        'Full body',
+      );
+
+      const skill = await store.read('full-skill');
+      expect(skill.metadata.name).toBe('full-skill');
+      expect(skill.metadata.description).toBe('Full featured skill');
+    });
+  });
+});
