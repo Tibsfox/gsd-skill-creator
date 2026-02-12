@@ -21,6 +21,8 @@ import {
   generateMilestonesJsonLd,
   generateRoadmapJsonLd,
 } from './structured-data.js';
+import { renderLayout } from './renderer.js';
+import { renderStyles } from './styles.js';
 
 // ---------------------------------------------------------------------------
 // Fixtures
@@ -264,10 +266,6 @@ describe('OG tags and JSON-LD integration', () => {
   // These import generator indirectly to verify end-to-end wiring
 
   it('renderLayout includes OG tags when meta is provided', () => {
-    // This tests the renderer directly, confirming OG wiring is correct
-    const { renderLayout } = require('./renderer.js') as typeof import('./renderer.js');
-    const { renderStyles } = require('./styles.js') as typeof import('./styles.js');
-
     const html = renderLayout({
       title: 'Test',
       content: '<p>Test</p>',
@@ -294,9 +292,6 @@ describe('OG tags and JSON-LD integration', () => {
   });
 
   it('renderLayout includes JSON-LD script tag when jsonLd is provided', () => {
-    const { renderLayout } = require('./renderer.js') as typeof import('./renderer.js');
-    const { renderStyles } = require('./styles.js') as typeof import('./styles.js');
-
     const jsonLd = generateProjectJsonLd(sampleDashboardData);
     const html = renderLayout({
       title: 'Test',
