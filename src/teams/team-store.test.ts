@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as os from 'os';
 import { TeamStore, getTeamsBasePath, getAgentsBasePath } from './team-store.js';
 import type { TeamConfig } from '../types/team.js';
+import { PathTraversalError } from '../validation/path-safety.js';
 
 describe('TeamStore', () => {
   let tempDir: string;
@@ -199,6 +200,79 @@ describe('TeamStore', () => {
       await store.delete('test-team');
 
       expect(await store.exists('test-team')).toBe(false);
+    });
+  });
+
+  // ==========================================================================
+  // Path traversal protection
+  // ==========================================================================
+
+  describe('path traversal protection', () => {
+    const maliciousNames = [
+      { name: '../malicious', label: 'parent traversal' },
+      { name: 'foo/bar', label: 'forward slash separator' },
+      { name: 'foo\\bar', label: 'backslash separator' },
+      { name: 'foo\x00bar', label: 'null byte' },
+      { name: '../../etc/passwd', label: 'deep traversal' },
+      { name: '..', label: 'standalone double dot' },
+    ];
+
+    describe('save rejects traversal names', () => {
+      for (const { name, label } of maliciousNames) {
+        it(`rejects ${label}: "${name.replace('\x00', '\\x00')}"`, async () => {
+          const config = createValidConfig({ name });
+          await expect(store.save(config)).rejects.toThrow(PathTraversalError);
+        });
+      }
+    });
+
+    describe('read rejects traversal names', () => {
+      for (const { name, label } of maliciousNames) {
+        it(`rejects ${label}: "${name.replace('\x00', '\\x00')}"`, async () => {
+          await expect(store.read(name)).rejects.toThrow(PathTraversalError);
+        });
+      }
+    });
+
+    describe('exists rejects traversal names', () => {
+      for (const { name, label } of maliciousNames) {
+        it(`rejects ${label}: "${name.replace('\x00', '\\x00')}"`, async () => {
+          await expect(store.exists(name)).rejects.toThrow(PathTraversalError);
+        });
+      }
+    });
+
+    describe('delete rejects traversal names', () => {
+      for (const { name, label } of maliciousNames) {
+        it(`rejects ${label}: "${name.replace('\x00', '\\x00')}"`, async () => {
+          await expect(store.delete(name)).rejects.toThrow(PathTraversalError);
+        });
+      }
+    });
+
+    describe('valid names still work (no regression)', () => {
+      it('save with valid name succeeds', async () => {
+        const config = createValidConfig({ name: 'valid-team' });
+        const result = await store.save(config);
+        expect(result).toContain('valid-team');
+      });
+
+      it('read after save works', async () => {
+        await store.save(createValidConfig());
+        const result = await store.read('test-team');
+        expect(result.name).toBe('test-team');
+      });
+
+      it('exists returns true for saved team', async () => {
+        await store.save(createValidConfig());
+        expect(await store.exists('test-team')).toBe(true);
+      });
+
+      it('delete removes saved team', async () => {
+        await store.save(createValidConfig());
+        await store.delete('test-team');
+        expect(await store.exists('test-team')).toBe(false);
+      });
     });
   });
 });
