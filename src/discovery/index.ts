@@ -119,3 +119,12 @@ export {
   type ClusterResult,
   type ClusterOptions,
 } from './prompt-clusterer.js';
+
+// Phase 74: Discovery Safety
+export {
+  SECRET_PATTERNS,
+  redactSecrets,
+  filterStructuralOnly,
+  validateProjectAccess,
+  type ProjectAccessConfig,
+} from './discovery-safety.js';

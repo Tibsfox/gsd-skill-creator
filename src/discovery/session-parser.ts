@@ -20,6 +20,7 @@ import {
   AssistantEntrySchema,
 } from './types.js';
 import type { ParsedEntry, ExtractedToolUse, ExtractedPrompt, ContentBlock } from './types.js';
+import { redactSecrets } from './discovery-safety.js';
 
 /**
  * Parse a single JSONL line into a ParsedEntry.
@@ -70,7 +71,7 @@ export function parseJsonlLine(line: string): ParsedEntry | null {
       }
 
       const data: ExtractedPrompt = {
-        text,
+        text: redactSecrets(text),
         sessionId: entry.sessionId,
         timestamp: entry.timestamp,
         cwd: entry.cwd ?? '',
