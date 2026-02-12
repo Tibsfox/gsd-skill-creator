@@ -10,6 +10,7 @@ const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
 const force = args.includes('--force');
 const quiet = args.includes('--quiet');
+const uninstall = args.includes('--uninstall');
 
 // --- Paths ---
 const projectRoot = path.resolve(__dirname, '..');
@@ -400,6 +401,82 @@ function installGitHook() {
   }
 }
 
+// --- Uninstall integration ---
+function uninstallIntegration() {
+  const prefix = dryRun ? '[DRY RUN] ' : '';
+  log(`${prefix}Uninstalling integration components...\n`);
+
+  const integrationTargets = {
+    dirs: [
+      '.claude/commands/sc',
+      '.claude/commands/wrap',
+    ],
+    files: [
+      '.claude/agents/observer.md',
+      '.planning/skill-creator.json',
+    ],
+  };
+
+  let removed = 0;
+  let notFound = 0;
+  let skipped = 0;
+
+  // Remove directories
+  for (const dir of integrationTargets.dirs) {
+    const fullPath = path.join(projectRoot, dir);
+    if (fs.existsSync(fullPath)) {
+      if (!dryRun) {
+        fs.rmSync(fullPath, { recursive: true, force: true });
+      }
+      log(`  - removed:   ${dir}/`);
+      removed++;
+    } else {
+      log(`  . not found: ${dir}/`);
+      notFound++;
+    }
+  }
+
+  // Remove files
+  for (const file of integrationTargets.files) {
+    const fullPath = path.join(projectRoot, file);
+    if (fs.existsSync(fullPath)) {
+      if (!dryRun) {
+        fs.unlinkSync(fullPath);
+      }
+      log(`  - removed:   ${file}`);
+      removed++;
+    } else {
+      log(`  . not found: ${file}`);
+      notFound++;
+    }
+  }
+
+  // Remove git hook (only if it's ours)
+  const hookPath = path.join(projectRoot, '.git', 'hooks', 'post-commit');
+  const hookContent = readFileSafe(hookPath);
+  if (hookContent !== null) {
+    if (hookContent.includes('GSD skill-creator post-commit hook')) {
+      if (!dryRun) {
+        fs.unlinkSync(hookPath);
+      }
+      log('  - removed:   .git/hooks/post-commit');
+      removed++;
+    } else {
+      log('  ~ skipped:   .git/hooks/post-commit (not ours)');
+      skipped++;
+    }
+  } else {
+    log('  . not found: .git/hooks/post-commit');
+    notFound++;
+  }
+
+  log('');
+  log('  Preserved: .planning/patterns/ (observation data)');
+
+  log('');
+  log(`${prefix}Uninstall complete: ${removed} removed, ${notFound} not found, ${skipped} skipped`);
+}
+
 // --- Main ---
 function main() {
   // Verify .claude/ exists
@@ -422,6 +499,11 @@ function main() {
   } catch {
     console.error('Error: manifest.json is not valid JSON');
     process.exit(1);
+  }
+
+  if (uninstall) {
+    uninstallIntegration();
+    return;
   }
 
   const prefix = dryRun ? '[DRY RUN] ' : '';
