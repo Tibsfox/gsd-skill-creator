@@ -31,6 +31,12 @@ export { renderStyles } from './styles.js';
 // Generator
 export { generate } from './generator.js';
 
+// Pages
+export { renderRequirementsPage } from './pages/requirements.js';
+export { renderRoadmapPage } from './pages/roadmap.js';
+export { renderMilestonesPage } from './pages/milestones.js';
+export { renderStatePage } from './pages/state.js';
+
 // Types
 export type {
   DashboardData,
