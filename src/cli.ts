@@ -1217,6 +1217,14 @@ async function main() {
       break;
     }
 
+    case 'dashboard':
+    case 'db': {
+      const { dashboardCommand } = await import('./cli/commands/dashboard.js');
+      const exitCode = await dashboardCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'mcp-server': {
       const exitCode = await mcpServerCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
@@ -1431,6 +1439,7 @@ Commands:
   integration, int  Manage skill-creator integration config (validate, show)
   config, cfg       Manage GSD configuration (validate)
   event, ev         Manage skill events (list, emit, consume, suggest, expire)
+  dashboard, db     Generate GSD Planning Docs Dashboard from .planning/
   help, -h          Show this help message
   --version, -V     Show version information
 
