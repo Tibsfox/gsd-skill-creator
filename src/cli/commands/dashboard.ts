@@ -7,6 +7,7 @@
  *
  * Subcommands:
  *   generate (default)  Generate dashboard HTML from .planning/ artifacts
+ *   clean               Remove generated HTML files and build manifest
  *
  * Options:
  *   --output, -o <dir>    Output directory (default: dashboard/)
@@ -23,7 +24,8 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { generate } from '../../dashboard/generator.js';
 import type { GenerateOptions } from '../../dashboard/generator.js';
-import { stat } from 'node:fs/promises';
+import { MANIFEST_FILENAME } from '../../dashboard/incremental.js';
+import { stat, rm, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
 /**
@@ -59,6 +61,7 @@ Usage:
 
 Subcommands:
   generate (default)    Generate dashboard HTML from .planning/ artifacts
+  clean                 Remove generated HTML files and build manifest
 
 Options:
   --output, -o <dir>        Output directory (default: dashboard/)
@@ -77,6 +80,8 @@ Examples:
   skill-creator dashboard --planning .plan/   Use alternate planning dir
   skill-creator dashboard --live --watch      Live-refresh with file watching
   skill-creator dashboard --watch -f          Force-rebuild on every watch cycle
+  skill-creator dashboard clean               Remove generated files
+  skill-creator db clean -o /tmp/docs         Clean custom output dir
 `);
 }
 
@@ -89,6 +94,11 @@ export async function dashboardCommand(args: string[]): Promise<number> {
 
   // Determine subcommand — default to 'generate'
   const subcommand = args.find((a) => !a.startsWith('-')) ?? 'generate';
+
+  if (subcommand === 'clean') {
+    const outputDir = parseFlagValue(args, '--output', '-o') ?? 'dashboard';
+    return runClean(outputDir);
+  }
 
   if (subcommand !== 'generate') {
     p.log.error(`Unknown subcommand: ${subcommand}`);
@@ -160,6 +170,38 @@ export async function dashboardCommand(args: string[]): Promise<number> {
   }
 
   return code;
+}
+
+/**
+ * Remove all generated HTML files and the build manifest from the output directory.
+ */
+async function runClean(outputDir: string): Promise<number> {
+  p.intro(pc.bold('GSD Dashboard Clean'));
+
+  let removed = 0;
+
+  try {
+    const entries = await readdir(outputDir);
+    for (const entry of entries) {
+      if (entry.endsWith('.html') || entry === MANIFEST_FILENAME) {
+        await rm(join(outputDir, entry), { force: true });
+        p.log.message(`  ${pc.red('-')} ${entry}`);
+        removed++;
+      }
+    }
+  } catch {
+    p.log.info(`Output directory not found: ${pc.dim(outputDir)}`);
+    p.log.info('Nothing to clean.');
+    return 0;
+  }
+
+  if (removed === 0) {
+    p.log.info('No generated files found.');
+  } else {
+    p.log.success(`Removed ${removed} file(s) from ${pc.dim(outputDir)}`);
+  }
+
+  return 0;
 }
 
 /**
