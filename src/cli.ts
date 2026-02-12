@@ -1120,6 +1120,34 @@ async function main() {
       break;
     }
 
+    case 'export':
+    case 'ex': {
+      const { exportCommand } = await import('./cli/commands/export.js');
+      const scope = parseScope(args);
+      const portable = args.includes('--portable');
+      const platformArg = args.find(a => a.startsWith('--platform='));
+      const platformArgIdx = args.indexOf('--platform');
+      const platform = platformArg
+        ? platformArg.split('=')[1]
+        : (platformArgIdx >= 0 ? args[platformArgIdx + 1] : undefined);
+      const outputArg = args.find(a => a.startsWith('--output=') || a.startsWith('-o='));
+      const outputArgIdx = args.findIndex(a => a === '--output' || a === '-o');
+      const output = outputArg
+        ? outputArg.split('=')[1]
+        : (outputArgIdx >= 0 ? args[outputArgIdx + 1] : undefined);
+      // Get skill name: first positional arg after 'export' that isn't a flag or flag value
+      const flagValues = new Set([platform, output].filter(Boolean));
+      const skillName = args.slice(1).find(a => !a.startsWith('-') && !flagValues.has(a));
+      const exitCode = await exportCommand(skillName, {
+        portable,
+        platform,
+        output,
+        skillsDir: getSkillsBasePath(scope),
+      });
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'advise-parallelization':
     case 'ap': {
       const { adviseParallelizationCommand } = await import('./cli/commands/advise-parallelization.js');
@@ -1245,6 +1273,7 @@ Commands:
   calibrate, cal    Optimize activation threshold from calibration data
   benchmark, bench  Measure simulator accuracy vs real activation
   discover, disc    Discover skill candidates from session history
+  export, ex        Export skill for other platforms (--portable, --platform)
   orchestrator, orch  GSD orchestrator (discover, state, classify, lifecycle)
   workflow, wf      Manage skill workflows (create, run, list, status)
   role, rl          Manage skill roles (create, list)
@@ -1475,6 +1504,8 @@ Examples:
   skill-creator discover              # Scan sessions for patterns
   skill-creator disc --rescan         # Force full rescan
   skill-creator discover --exclude=temp  # Skip specific projects
+  skill-creator export --portable my-skill    # Portable agentskills.io output
+  skill-creator export --platform cursor my-skill  # Cursor-specific variant
   skill-creator workflow create       # Interactive workflow creation
   skill-creator wf c --name=deploy --steps='[{"id":"lint","skill":"linter"}]'
   skill-creator workflow run deploy   # Run a workflow
