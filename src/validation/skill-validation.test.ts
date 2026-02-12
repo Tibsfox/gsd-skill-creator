@@ -362,6 +362,30 @@ describe('Description Quality Validation', () => {
         expect(result.hasActivationTriggers).toBe(true);
       }
     });
+
+    // New tests for enriched description quality fields (backward compatible)
+    it('should include new quality fields in result', () => {
+      const result = validateDescriptionQuality('Guides setup. Use when testing.');
+      expect(result).toHaveProperty('hasCapabilityStatement');
+      expect(result).toHaveProperty('hasUseWhenClause');
+      expect(result).toHaveProperty('qualityScore');
+    });
+
+    it('should preserve existing behavior when new fields are present', () => {
+      // Existing tests expect hasActivationTriggers, warning, suggestions to work identically
+      const result = validateDescriptionQuality('Generic skill description.');
+      expect(result.hasActivationTriggers).toBe(false);
+      expect(result.warning).toBeDefined();
+      expect(result.suggestions).toBeDefined();
+    });
+
+    it('should return enriched result for high-quality description', () => {
+      const result = validateDescriptionQuality('Guides TypeScript project setup. Use when creating new TypeScript projects.');
+      expect(result.hasCapabilityStatement).toBe(true);
+      expect(result.hasUseWhenClause).toBe(true);
+      expect(result.qualityScore).toBeGreaterThanOrEqual(0.8);
+      expect(result.hasActivationTriggers).toBe(true);
+    });
   });
 });
 
