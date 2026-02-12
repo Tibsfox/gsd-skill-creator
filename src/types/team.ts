@@ -16,12 +16,16 @@
  * - leader-worker: One leader delegates to workers
  * - pipeline: Sequential processing chain
  * - swarm: Peer-to-peer collaboration
+ * - router: One router classifies and directs to specialists
+ * - map-reduce: Orchestrator splits work to parallel workers and consolidates
  * - custom: User-defined topology
  */
 export const TEAM_TOPOLOGIES = [
   'leader-worker',
   'pipeline',
   'swarm',
+  'router',
+  'map-reduce',
   'custom',
 ] as const;
 
@@ -40,6 +44,8 @@ export type TeamTopology = (typeof TEAM_TOPOLOGIES)[number];
  * - reviewer: Reviews and validates output
  * - orchestrator: Manages workflow and routing
  * - specialist: Domain-specific expert
+ * - router: Classifies and directs work to specialists
+ * - reducer: Consolidates results from parallel workers
  */
 export const TEAM_ROLES = [
   'leader',
@@ -47,10 +53,27 @@ export const TEAM_ROLES = [
   'reviewer',
   'orchestrator',
   'specialist',
+  'router',
+  'reducer',
 ] as const;
 
 /** Type for team role */
 export type TeamRole = (typeof TEAM_ROLES)[number];
+
+// ============================================================================
+// Inter-Team Links
+// ============================================================================
+
+/**
+ * Declaration for inter-team output/input connections.
+ *
+ * Used by team members to declare outputTo/inputFrom relationships
+ * with other teams for cross-team coordination.
+ */
+export interface InterTeamLink {
+  teamName: string;
+  description?: string;
+}
 
 // ============================================================================
 // Backend Types
