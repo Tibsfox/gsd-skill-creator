@@ -12,6 +12,11 @@ import { renderRequirementsPage } from './pages/requirements.js';
 import { renderRoadmapPage } from './pages/roadmap.js';
 import { renderMilestonesPage } from './pages/milestones.js';
 import { renderStatePage } from './pages/state.js';
+import {
+  generateProjectJsonLd,
+  generateMilestonesJsonLd,
+  generateRoadmapJsonLd,
+} from './structured-data.js';
 import type { DashboardData } from './types.js';
 import { mkdir, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -327,12 +332,13 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
   const projectName = data.project?.name ?? 'GSD Dashboard';
   const styles = renderStyles();
 
-  // Page definitions: name, filename, content renderer, meta
+  // Page definitions: name, filename, content renderer, meta, jsonLd
   const pageDefinitions: {
     name: string;
     filename: string;
     render: () => string;
-    meta: { description: string; ogTitle: string; ogType: string };
+    meta: { description: string; ogTitle: string; ogDescription: string; ogType: string };
+    jsonLd?: string;
   }[] = [
     {
       name: 'index',
@@ -341,8 +347,10 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
       meta: {
         description: data.project?.description ?? 'GSD Planning Docs Dashboard',
         ogTitle: projectName,
+        ogDescription: data.project?.description ?? 'GSD Planning Docs Dashboard',
         ogType: 'website',
       },
+      jsonLd: generateProjectJsonLd(data),
     },
     {
       name: 'requirements',
@@ -351,6 +359,7 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
       meta: {
         description: 'Project requirements and their status',
         ogTitle: `${projectName} - Requirements`,
+        ogDescription: 'Project requirements and their status',
         ogType: 'website',
       },
     },
@@ -361,8 +370,10 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
       meta: {
         description: 'Project roadmap with phase progress',
         ogTitle: `${projectName} - Roadmap`,
+        ogDescription: 'Project roadmap with phase progress',
         ogType: 'website',
       },
+      jsonLd: generateRoadmapJsonLd(data),
     },
     {
       name: 'milestones',
@@ -371,8 +382,10 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
       meta: {
         description: 'Shipped milestones and accomplishments',
         ogTitle: `${projectName} - Milestones`,
+        ogDescription: 'Shipped milestones and accomplishments',
         ogType: 'website',
       },
+      jsonLd: generateMilestonesJsonLd(data),
     },
     {
       name: 'state',
@@ -381,6 +394,7 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
       meta: {
         description: 'Current project state and session continuity',
         ogTitle: `${projectName} - State`,
+        ogDescription: 'Current project state and session continuity',
         ogType: 'website',
       },
     },
@@ -400,6 +414,7 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
         generatedAt: data.generatedAt,
         styles,
         meta: pageDef.meta,
+        jsonLd: pageDef.jsonLd,
       });
 
       await writeFile(join(options.outputDir, pageDef.filename), html, 'utf-8');

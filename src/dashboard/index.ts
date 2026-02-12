@@ -31,6 +31,13 @@ export { renderStyles } from './styles.js';
 // Generator
 export { generate } from './generator.js';
 
+// Structured Data (JSON-LD)
+export {
+  generateProjectJsonLd,
+  generateMilestonesJsonLd,
+  generateRoadmapJsonLd,
+} from './structured-data.js';
+
 // Pages
 export { renderRequirementsPage } from './pages/requirements.js';
 export { renderRoadmapPage } from './pages/roadmap.js';
