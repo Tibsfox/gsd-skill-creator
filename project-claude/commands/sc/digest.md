@@ -25,6 +25,14 @@ If the file is missing, use defaults and proceed.
 
 Also read `.planning/STATE.md` to get the current phase and plan context. This helps contextualize recommendations (e.g., which phase is active now vs. historical data).
 
+## Step 1.5: Run Monitoring Scan (MON-03)
+
+Before analyzing session data, run a monitoring scan to capture any recent changes not yet recorded.
+
+Follow the same monitoring scan process described in `/sc:start` Step 1. This ensures the digest includes the very latest plan-vs-summary diffs, STATE.md transitions, and ROADMAP.md changes.
+
+If the scan produces new observations, they will be included in the subsequent session data analysis.
+
 ## Step 2: Load session data
 
 Read `.planning/patterns/sessions.jsonl` in full using the Read tool.
@@ -119,6 +127,25 @@ If any entries have file-level data (entries with `type: "observation"` from `/s
 ```
 
 If no file-level data is available, display: "No file-level data available. Run `/sc:observe` to capture file data."
+
+### 3f. Plan-vs-summary diffs (MON-01)
+
+Look for entries in sessions.jsonl with `type: "scan"` and `scan_type: "plan_summary_diff"`. For each diff entry, display:
+
+```
+### Plan vs Summary Diffs
+| Phase-Plan | Scope Change | Emergent Work | Dropped Items |
+|------------|-------------|---------------|---------------|
+| 86-01      | on_track    | 0             | 0             |
+| 85-03      | expanded    | 2             | 0             |
+```
+
+If any diffs show `scope_change` other than "on_track", highlight them:
+- **Expanded:** "Phase N-M had emergent work not in the original plan: [list]"
+- **Contracted:** "Phase N-M dropped planned items: [list]"
+- **Shifted:** "Phase N-M scope shifted: different files than planned"
+
+If no scan entries exist, display: "No plan-vs-summary diffs available. Run `/sc:start` to capture baseline."
 
 ## Step 4: Activation history
 
