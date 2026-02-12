@@ -2,12 +2,13 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { SkillIndexEntry } from '../storage/skill-index.js';
 
 // Mock dependencies before importing the module under test
+// Use regular functions (not arrows) so mocks can be called with `new` (68-04 pattern)
 vi.mock('../storage/skill-store.js', () => ({
-  SkillStore: vi.fn(),
+  SkillStore: vi.fn(function SkillStore() { return {}; }),
 }));
 
 vi.mock('../storage/skill-index.js', () => ({
-  SkillIndex: vi.fn(),
+  SkillIndex: vi.fn(function SkillIndex() { return {}; }),
 }));
 
 vi.mock('../types/scope.js', () => ({
@@ -18,7 +19,7 @@ vi.mock('../types/scope.js', () => ({
 }));
 
 vi.mock('../embeddings/embedding-cache.js', () => ({
-  EmbeddingCache: vi.fn(),
+  EmbeddingCache: vi.fn(function EmbeddingCache() { return {}; }),
 }));
 
 // Now import the module under test and mocked modules
@@ -61,14 +62,16 @@ describe('CrossProjectIndex', () => {
     vi.clearAllMocks();
 
     // Configure SkillIndex constructor to return mock indexes based on dir
-    const mockIndexes = new Map<string, SkillIndex>();
-    vi.mocked(SkillIndex).mockImplementation((_store: unknown, dir?: string) => {
-      const existing = mockIndexes.get(dir ?? '');
-      if (existing) return existing;
-      return createMockIndex([]);
-    });
+    // Use regular functions (not arrows) for vitest new-ability (68-04 pattern)
+    vi.mocked(SkillIndex).mockImplementation(function (this: any, _store: unknown, dir?: string) {
+      const mock = createMockIndex([]);
+      Object.assign(this, mock);
+      return this;
+    } as any);
 
-    vi.mocked(SkillStore).mockImplementation((_dir?: string) => ({} as any));
+    vi.mocked(SkillStore).mockImplementation(function (this: any, _dir?: string) {
+      return this;
+    } as any);
 
     index = new CrossProjectIndex();
   });
@@ -78,9 +81,10 @@ describe('CrossProjectIndex', () => {
       const entry1 = makeEntry('typescript-patterns', 'TypeScript coding patterns');
       const entry2 = makeEntry('typescript-testing', 'TypeScript testing utilities');
 
-      vi.mocked(SkillIndex).mockImplementation((_store: unknown, _dir?: string) => {
-        return createMockIndex([entry1, entry2]);
-      });
+      vi.mocked(SkillIndex).mockImplementation(function (this: any, _store: unknown, _dir?: string) {
+        Object.assign(this, createMockIndex([entry1, entry2]));
+        return this;
+      } as any);
 
       const output = await index.search('typescript', ['/path/to/skills']);
 
@@ -98,12 +102,13 @@ describe('CrossProjectIndex', () => {
       const projectEntry = makeEntry('project-skill', 'A project skill for testing');
       const pluginEntry = makeEntry('plugin-skill', 'A plugin skill for testing');
 
-      vi.mocked(SkillIndex).mockImplementation((_store: unknown, dir?: string) => {
-        if (dir === userDir) return createMockIndex([userEntry]);
-        if (dir === projectDir) return createMockIndex([projectEntry]);
-        if (dir === pluginDir) return createMockIndex([pluginEntry]);
-        return createMockIndex([]);
-      });
+      vi.mocked(SkillIndex).mockImplementation(function (this: any, _store: unknown, dir?: string) {
+        if (dir === userDir) Object.assign(this, createMockIndex([userEntry]));
+        else if (dir === projectDir) Object.assign(this, createMockIndex([projectEntry]));
+        else if (dir === pluginDir) Object.assign(this, createMockIndex([pluginEntry]));
+        else Object.assign(this, createMockIndex([]));
+        return this;
+      } as any);
 
       const output = await index.search('test', [userDir, projectDir, pluginDir]);
 
@@ -126,12 +131,13 @@ describe('CrossProjectIndex', () => {
       // Plugin dir: description match only -> mid score
       const pluginEntry = makeEntry('something', 'a test plugin for tasks');
 
-      vi.mocked(SkillIndex).mockImplementation((_store: unknown, dir?: string) => {
-        if (dir === userDir) return createMockIndex([userEntry]);
-        if (dir === projectDir) return createMockIndex([projectEntry]);
-        if (dir === pluginDir) return createMockIndex([pluginEntry]);
-        return createMockIndex([]);
-      });
+      vi.mocked(SkillIndex).mockImplementation(function (this: any, _store: unknown, dir?: string) {
+        if (dir === userDir) Object.assign(this, createMockIndex([userEntry]));
+        else if (dir === projectDir) Object.assign(this, createMockIndex([projectEntry]));
+        else if (dir === pluginDir) Object.assign(this, createMockIndex([pluginEntry]));
+        else Object.assign(this, createMockIndex([]));
+        return this;
+      } as any);
 
       const output = await index.search('test', [userDir, projectDir, pluginDir]);
 
@@ -153,12 +159,13 @@ describe('CrossProjectIndex', () => {
       const projectEntry = makeEntry('p-skill', 'project skill');
       const pluginEntry = makeEntry('x-skill', 'plugin skill');
 
-      vi.mocked(SkillIndex).mockImplementation((_store: unknown, dir?: string) => {
-        if (dir === userDir) return createMockIndex([userEntry]);
-        if (dir === projectDir) return createMockIndex([projectEntry]);
-        if (dir === pluginDir) return createMockIndex([pluginEntry]);
-        return createMockIndex([]);
-      });
+      vi.mocked(SkillIndex).mockImplementation(function (this: any, _store: unknown, dir?: string) {
+        if (dir === userDir) Object.assign(this, createMockIndex([userEntry]));
+        else if (dir === projectDir) Object.assign(this, createMockIndex([projectEntry]));
+        else if (dir === pluginDir) Object.assign(this, createMockIndex([pluginEntry]));
+        else Object.assign(this, createMockIndex([]));
+        return this;
+      } as any);
 
       const output = await index.search('skill', [userDir, projectDir, pluginDir]);
 
@@ -172,7 +179,10 @@ describe('CrossProjectIndex', () => {
     });
 
     it('returns empty array when no matches', async () => {
-      vi.mocked(SkillIndex).mockImplementation(() => createMockIndex([]));
+      vi.mocked(SkillIndex).mockImplementation(function (this: any) {
+        Object.assign(this, createMockIndex([]));
+        return this;
+      } as any);
 
       const output = await index.search('nonexistent', ['/dir1', '/dir2']);
 
@@ -185,15 +195,18 @@ describe('CrossProjectIndex', () => {
 
       const validEntry = makeEntry('valid-skill', 'A valid skill');
 
-      vi.mocked(SkillIndex).mockImplementation((_store: unknown, dir?: string) => {
-        if (dir === validDir) return createMockIndex([validEntry]);
-        if (dir === invalidDir) {
+      vi.mocked(SkillIndex).mockImplementation(function (this: any, _store: unknown, dir?: string) {
+        if (dir === validDir) {
+          Object.assign(this, createMockIndex([validEntry]));
+        } else if (dir === invalidDir) {
           const failingIndex = createMockIndex([]);
           vi.mocked(failingIndex.search).mockRejectedValue(new Error('ENOENT: no such file or directory'));
-          return failingIndex;
+          Object.assign(this, failingIndex);
+        } else {
+          Object.assign(this, createMockIndex([]));
         }
-        return createMockIndex([]);
-      });
+        return this;
+      } as any);
 
       // Should not throw
       const output = await index.search('skill', [validDir, invalidDir]);
@@ -210,11 +223,12 @@ describe('CrossProjectIndex', () => {
       const entry1 = makeEntry('skill-a', 'skill in dir1');
       const entry2 = makeEntry('skill-b', 'skill in dir2');
 
-      vi.mocked(SkillIndex).mockImplementation((_store: unknown, dir?: string) => {
-        if (dir === dir1) return createMockIndex([entry1]);
-        if (dir === dir2) return createMockIndex([entry2]);
-        return createMockIndex([]);
-      });
+      vi.mocked(SkillIndex).mockImplementation(function (this: any, _store: unknown, dir?: string) {
+        if (dir === dir1) Object.assign(this, createMockIndex([entry1]));
+        else if (dir === dir2) Object.assign(this, createMockIndex([entry2]));
+        else Object.assign(this, createMockIndex([]));
+        return this;
+      } as any);
 
       // Mock EmbeddingCache instances with different model versions
       const cache1 = { getVersionInfo: vi.fn().mockReturnValue('model-v1') };
