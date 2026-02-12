@@ -7,6 +7,11 @@ import {
   validateToolsField,
 } from '../validation/agent-validation.js';
 import type { AgentFrontmatter } from '../types/agent.js';
+import {
+  validateSafeName,
+  assertSafePath,
+  PathTraversalError,
+} from '../validation/path-safety.js';
 
 /**
  * Warning message for user-level agent creation.
@@ -59,6 +64,28 @@ export class AgentGenerator {
   }
 
   /**
+   * Validate that a name is safe for filesystem use (no traversal).
+   * @throws PathTraversalError if name contains traversal sequences
+   */
+  private assertSafeName(name: string): void {
+    const result = validateSafeName(name);
+    if (!result.valid) {
+      throw new PathTraversalError(result.error!);
+    }
+  }
+
+  /**
+   * Verify a resolved path stays within the agents directory.
+   * @throws PathTraversalError if path escapes the base directory
+   */
+  private assertSafeAgentPath(resolvedPath: string): void {
+    assertSafePath(
+      path.resolve(resolvedPath),
+      path.resolve(this.config.agentsDir),
+    );
+  }
+
+  /**
    * Generate agent content from a skill cluster (preview)
    */
   async generateContent(cluster: SkillCluster): Promise<GeneratedAgent> {
@@ -100,11 +127,16 @@ export class AgentGenerator {
       console.warn(`Agent validation warnings: ${validation.warnings.join('; ')}`);
     }
 
+    const filePath = path.join(this.config.agentsDir, `${name}.md`);
+
+    // Defense-in-depth: verify resolved path stays within agents directory
+    this.assertSafeAgentPath(filePath);
+
     return {
       name,
       description,
       skills: cluster.skills,
-      filePath: path.join(this.config.agentsDir, `${name}.md`),
+      filePath,
       content,
     };
   }
@@ -114,6 +146,9 @@ export class AgentGenerator {
    */
   async create(cluster: SkillCluster): Promise<GeneratedAgent> {
     const agent = await this.generateContent(cluster);
+
+    // Defense-in-depth: verify resolved path stays within agents directory
+    this.assertSafeAgentPath(agent.filePath);
 
     // Check for existing agent with same name
     if (fs.existsSync(agent.filePath)) {
@@ -238,9 +273,12 @@ ${skills.map(s => {
 
   /**
    * Check if an agent name is available
+   * @throws PathTraversalError if name contains traversal sequences
    */
   isNameAvailable(name: string): boolean {
+    this.assertSafeName(name);
     const filePath = path.join(this.config.agentsDir, `${name}.md`);
+    this.assertSafeAgentPath(filePath);
     return !fs.existsSync(filePath);
   }
 }
