@@ -1,11 +1,15 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
+import { stat as fsStat } from 'fs/promises';
+import { join, dirname } from 'path';
 import { SkillStore } from '../../storage/skill-store.js';
 import { validateSkillNameStrict, classifyFields } from '../../validation/skill-validation.js';
 import { validateSkillDirectory, validateDirectoryNameMatch } from '../../validation/directory-validation.js';
 import { SkillMetadataSchema } from '../../validation/skill-validation.js';
 import type { FieldClassification } from '../../validation/skill-validation.js';
 import { getExtension, isLegacyFormat } from '../../types/extensions.js';
+import { ReferenceLinker, DisclosureBudget } from '../../disclosure/index.js';
+import type { DisclosureBudgetResult } from '../../disclosure/index.js';
 
 // ============================================================================
 // Validation Result Types
@@ -27,6 +31,8 @@ export interface ValidationResult {
   format: 'current' | 'legacy';
   /** Field classification: standard vs extension vs unknown (informational) */
   fieldInfo?: FieldClassification;
+  /** Disclosure budget result (if skill has references/scripts) */
+  disclosureBudget?: DisclosureBudgetResult;
 }
 
 // ============================================================================
@@ -111,6 +117,38 @@ export async function validateSingleSkill(
     errors.push(`Failed to read skill: ${errMsg}`);
   }
 
+  // 6. Disclosure validation (reference cycles, dead links, budget breakdown)
+  const skillDir = format === 'current' ? dirname(skillPath) : null;
+  let disclosureBudget: DisclosureBudgetResult | undefined;
+
+  if (skillDir) {
+    try {
+      // Check for references/ or scripts/ subdirectories
+      const hasRefs = await dirExists(join(skillDir, 'references'));
+      const hasScripts = await dirExists(join(skillDir, 'scripts'));
+
+      if (hasRefs || hasScripts) {
+        // Validate references for cycles and dead links
+        const linker = new ReferenceLinker();
+        const refValidation = await linker.validateSkillReferences(skillDir);
+        if (!refValidation.valid) {
+          for (const err of refValidation.errors) {
+            errors.push(err);
+          }
+        }
+        for (const warn of refValidation.warnings) {
+          warnings.push(warn);
+        }
+
+        // Calculate disclosure budget breakdown
+        const budget = new DisclosureBudget();
+        disclosureBudget = await budget.checkDisclosureBudget(skillDir);
+      }
+    } catch {
+      // Disclosure checks are informational; don't fail validation on errors
+    }
+  }
+
   return {
     name: skillName,
     valid: errors.length === 0,
@@ -118,7 +156,20 @@ export async function validateSingleSkill(
     warnings,
     format,
     fieldInfo,
+    disclosureBudget,
   };
+}
+
+/**
+ * Check if a directory exists.
+ */
+async function dirExists(path: string): Promise<boolean> {
+  try {
+    const s = await fsStat(path);
+    return s.isDirectory();
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -238,6 +289,7 @@ function displayValidationResult(result: ValidationResult): void {
   if (result.valid && result.warnings.length === 0) {
     p.log.success(`${pc.green('\u2713')} ${result.name}`);
     displayFieldInfo(result);
+    displayDisclosureBudget(result);
     return;
   }
 
@@ -247,6 +299,7 @@ function displayValidationResult(result: ValidationResult): void {
       p.log.message(`    ${pc.dim(warning)}`);
     }
     displayFieldInfo(result);
+    displayDisclosureBudget(result);
     return;
   }
 
@@ -259,6 +312,7 @@ function displayValidationResult(result: ValidationResult): void {
     p.log.message(`    ${pc.dim(warning)}`);
   }
   displayFieldInfo(result);
+  displayDisclosureBudget(result);
 }
 
 /**
@@ -277,6 +331,31 @@ function displayFieldInfo(result: ValidationResult): void {
   if (unknown.length > 0) {
     p.log.message(`    ${pc.dim(`Unknown fields: ${unknown.join(', ')}. These are ignored by spec-compliant tools.`)}`);
   }
+}
+
+/**
+ * Display disclosure budget breakdown (SKILL.md vs references vs scripts).
+ * Shown as dim informational lines, same styling as field classification.
+ */
+function displayDisclosureBudget(result: ValidationResult): void {
+  if (!result.disclosureBudget) return;
+
+  const { message, skillMdSeverity } = result.disclosureBudget;
+
+  // Color the severity indicator
+  let severityDisplay: string;
+  switch (skillMdSeverity) {
+    case 'error':
+      severityDisplay = pc.red(`[${skillMdSeverity}]`);
+      break;
+    case 'warning':
+      severityDisplay = pc.yellow(`[${skillMdSeverity}]`);
+      break;
+    default:
+      severityDisplay = pc.dim(`[${skillMdSeverity}]`);
+  }
+
+  p.log.message(`    ${pc.dim(`Budget: ${message}`)} ${severityDisplay}`);
 }
 
 /**
