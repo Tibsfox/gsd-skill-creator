@@ -32,8 +32,9 @@ command -v jq >/dev/null 2>&1 || exit 0
 
 # 3. Check integration config toggle (default: enabled)
 if [ -f ".planning/skill-creator.json" ]; then
-    OBSERVE=$(jq -r '.integration.observe_sessions // true' ".planning/skill-creator.json" 2>/dev/null)
-    [ "$OBSERVE" = "false" ] && exit 0
+    if jq -e '.integration.observe_sessions == false' ".planning/skill-creator.json" >/dev/null 2>&1; then
+        exit 0
+    fi
 fi
 
 # ---------------------------------------------------------------------------
@@ -50,8 +51,8 @@ COMMIT_MSG=$(git log -1 --pretty=format:"%s" 2>/dev/null || exit 0)
 COMMIT_TYPE=$(echo "$COMMIT_MSG" | sed -n 's/^\([a-z]*\).*/\1/p')
 [ -z "$COMMIT_TYPE" ] && COMMIT_TYPE="other"
 
-# Number of files changed in this commit
-FILES_CHANGED=$(git diff-tree --no-commit-id --name-only -r HEAD 2>/dev/null | wc -l | tr -d ' ')
+# Number of files changed in this commit (--root handles initial commits)
+FILES_CHANGED=$(git diff-tree --no-commit-id --name-only -r --root HEAD 2>/dev/null | wc -l | tr -d ' ')
 
 # Current phase from STATE.md (null if unavailable)
 PHASE=$(sed -n 's/^.*Phase:*[[:space:]]*\([0-9]*\).*/\1/p' .planning/STATE.md 2>/dev/null | head -1)
@@ -60,7 +61,7 @@ PHASE=$(sed -n 's/^.*Phase:*[[:space:]]*\([0-9]*\).*/\1/p' .planning/STATE.md 2>
 # JSON construction with jq (safe escaping for all string values)
 # ---------------------------------------------------------------------------
 
-ENTRY=$(jq -n \
+ENTRY=$(jq -c -n \
     --arg type "commit" \
     --arg timestamp "$TIMESTAMP" \
     --arg commit_type "$COMMIT_TYPE" \
