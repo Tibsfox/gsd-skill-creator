@@ -1,9 +1,9 @@
 /**
- * Copper List module -- YAML-based workflow instruction programs.
+ * Barrel index for the Copper coprocessor module.
  *
- * Copper Lists define sequences of WAIT/MOVE/SKIP instructions that
- * synchronize skill activation to GSD lifecycle events. This module
- * provides types, schemas, and parsing for the Copper List format.
+ * Re-exports all public types, schemas, classes, and functions from
+ * the copper sub-modules: types, schema, parser, lifecycle-sync,
+ * executor, activation, and compiler.
  */
 
 // Types
@@ -69,3 +69,11 @@ export type {
   ActivationContext,
   ActivationResult,
 } from './activation.js';
+
+// Compiler
+export { compileCopperList, saveCopperList, loadCopperLists } from './compiler.js';
+
+export type {
+  PlanMetadata,
+  CompilerOptions,
+} from './compiler.js';
