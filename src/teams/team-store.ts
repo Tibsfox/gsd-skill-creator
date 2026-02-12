@@ -10,10 +10,15 @@
  */
 
 import { readFile, writeFile, mkdir, readdir, stat, rm } from 'fs/promises';
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { homedir } from 'node:os';
 import { validateTeamConfig } from '../validation/team-validation.js';
 import type { TeamConfig } from '../types/team.js';
+import {
+  validateSafeName,
+  assertSafePath,
+  PathTraversalError,
+} from '../validation/path-safety.js';
 
 // ============================================================================
 // Scope Types
@@ -69,6 +74,25 @@ export class TeamStore {
   constructor(private teamsDir: string) {}
 
   /**
+   * Validate that a name is safe for filesystem use (no traversal).
+   * @throws PathTraversalError if name contains traversal sequences
+   */
+  private assertSafeName(name: string): void {
+    const result = validateSafeName(name);
+    if (!result.valid) {
+      throw new PathTraversalError(result.error!);
+    }
+  }
+
+  /**
+   * Verify a resolved path stays within the teams directory.
+   * @throws PathTraversalError if path escapes the base directory
+   */
+  private assertSafeTeamPath(resolvedPath: string): void {
+    assertSafePath(resolve(resolvedPath), resolve(this.teamsDir));
+  }
+
+  /**
    * Save a team configuration to disk.
    *
    * Validates the config with validateTeamConfig() before writing.
@@ -79,6 +103,8 @@ export class TeamStore {
    * @throws Error if config fails validation
    */
   async save(config: TeamConfig): Promise<string> {
+    this.assertSafeName(config.name);
+
     const validation = validateTeamConfig(config);
     if (!validation.valid) {
       throw new Error(
@@ -88,6 +114,7 @@ export class TeamStore {
 
     const teamDir = join(this.teamsDir, config.name);
     const configPath = join(teamDir, 'config.json');
+    this.assertSafeTeamPath(teamDir);
 
     await mkdir(teamDir, { recursive: true });
     await writeFile(configPath, JSON.stringify(config, null, 2) + '\n', 'utf-8');
@@ -103,7 +130,9 @@ export class TeamStore {
    * @throws Error if config file doesn't exist
    */
   async read(teamName: string): Promise<TeamConfig> {
+    this.assertSafeName(teamName);
     const configPath = join(this.teamsDir, teamName, 'config.json');
+    this.assertSafeTeamPath(configPath);
     const content = await readFile(configPath, 'utf-8');
     return JSON.parse(content) as TeamConfig;
   }
@@ -115,7 +144,9 @@ export class TeamStore {
    * @returns true if config.json exists for this team
    */
   async exists(teamName: string): Promise<boolean> {
+    this.assertSafeName(teamName);
     const configPath = join(this.teamsDir, teamName, 'config.json');
+    this.assertSafeTeamPath(configPath);
     try {
       await stat(configPath);
       return true;
@@ -162,7 +193,9 @@ export class TeamStore {
    * @param teamName - Name of the team to delete
    */
   async delete(teamName: string): Promise<void> {
+    this.assertSafeName(teamName);
     const teamDir = join(this.teamsDir, teamName);
+    this.assertSafeTeamPath(teamDir);
     await rm(teamDir, { recursive: true, force: true });
   }
 }
