@@ -480,3 +480,79 @@ export function validateSkillMetadataSchema(data: unknown): SkillMetadataInput {
 
   return result.data;
 }
+
+// ============================================================================
+// Field Classification (SPEC-06: Standard vs Extension Awareness)
+// ============================================================================
+
+/**
+ * Fields defined in the Agent Skills standard specification.
+ */
+export const STANDARD_FIELDS = ['name', 'description', 'license', 'compatibility', 'metadata', 'allowed-tools'] as const;
+
+/**
+ * Fields that are Claude Code extensions (not in the base Agent Skills spec).
+ */
+export const CLAUDE_EXTENSION_FIELDS = ['context', 'agent', 'model', 'hooks', 'disable-model-invocation', 'user-invocable', 'argument-hint'] as const;
+
+/**
+ * Fields used by gsd-skill-creator extensions (legacy root-level or internal).
+ */
+const GSD_EXTENSION_FIELDS = ['triggers', 'enabled', 'version', 'extends', 'createdAt', 'updatedAt', 'learning'] as const;
+
+/**
+ * Result of classifying frontmatter fields.
+ */
+export interface FieldClassification {
+  /** Fields from the Agent Skills specification */
+  standard: string[];
+  /** Claude Code extension fields */
+  extensions: string[];
+  /** Fields not recognized in any category */
+  unknown: string[];
+  /** Whether the skill has gsd-skill-creator extension data */
+  gsdExtension: boolean;
+}
+
+/**
+ * Classify frontmatter fields as standard, extension, or unknown.
+ *
+ * @param metadata - Raw frontmatter object
+ * @returns Classification of all fields
+ */
+export function classifyFields(metadata: Record<string, unknown>): FieldClassification {
+  const standard: string[] = [];
+  const extensions: string[] = [];
+  const unknown: string[] = [];
+  let gsdExtension = false;
+
+  const standardSet = new Set<string>(STANDARD_FIELDS);
+  const extensionSet = new Set<string>(CLAUDE_EXTENSION_FIELDS);
+  const gsdSet = new Set<string>(GSD_EXTENSION_FIELDS);
+
+  for (const key of Object.keys(metadata)) {
+    if (standardSet.has(key)) {
+      standard.push(key);
+    } else if (extensionSet.has(key)) {
+      extensions.push(key);
+    } else if (gsdSet.has(key)) {
+      gsdExtension = true;
+      // Don't classify gsd fields as unknown -- they're handled by the extension system
+    } else {
+      unknown.push(key);
+    }
+  }
+
+  // Also check for gsd data in metadata.extensions container
+  if (
+    metadata.metadata &&
+    typeof metadata.metadata === 'object' &&
+    (metadata.metadata as Record<string, unknown>).extensions &&
+    typeof (metadata.metadata as Record<string, unknown>).extensions === 'object' &&
+    ((metadata.metadata as Record<string, unknown>).extensions as Record<string, unknown>)['gsd-skill-creator']
+  ) {
+    gsdExtension = true;
+  }
+
+  return { standard, extensions, unknown, gsdExtension };
+}
