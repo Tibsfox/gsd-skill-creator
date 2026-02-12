@@ -238,6 +238,105 @@ function installSettings(entry) {
   }
 }
 
+// --- Integration config install ---
+function installIntegrationConfig() {
+  const targetPath = path.join(projectRoot, '.planning', 'skill-creator.json');
+
+  if (fs.existsSync(targetPath)) {
+    log('  = preserved: .planning/skill-creator.json (user config)');
+    stats.current++;
+    return;
+  }
+
+  const defaultConfig = {
+    integration: {
+      auto_load_skills: true,
+      observe_sessions: true,
+      phase_transition_hooks: true,
+      suggest_on_session_start: true,
+      install_git_hooks: true,
+      wrapper_commands: true
+    },
+    token_budget: {
+      max_percent: 5,
+      warn_at_percent: 4
+    },
+    observation: {
+      retention_days: 90,
+      max_entries: 1000,
+      capture_corrections: true
+    },
+    suggestions: {
+      min_occurrences: 3,
+      cooldown_days: 7,
+      auto_dismiss_after_days: 30
+    }
+  };
+
+  if (!dryRun) {
+    ensureDir(targetPath);
+    fs.writeFileSync(targetPath, JSON.stringify(defaultConfig, null, 2) + '\n');
+  }
+  log('  + installed: .planning/skill-creator.json');
+  stats.installed++;
+}
+
+// --- Patterns directory install ---
+function installPatternsDir() {
+  const targetDir = path.join(projectRoot, '.planning', 'patterns');
+
+  if (fs.existsSync(targetDir)) {
+    log('  = current:   .planning/patterns/');
+    stats.current++;
+    return;
+  }
+
+  if (!dryRun) {
+    fs.mkdirSync(targetDir, { recursive: true });
+  }
+  log('  + installed: .planning/patterns/');
+  stats.installed++;
+}
+
+// --- Gitignore update ---
+function updateGitignore() {
+  const targetPath = path.join(projectRoot, '.gitignore');
+  const content = readFileSafe(targetPath) || '';
+
+  // Check if .planning/ is already a blanket ignore (covers patterns)
+  const lines = content.split('\n');
+  const hasBlanketPlanning = lines.some(line => {
+    const trimmed = line.trim();
+    return trimmed === '.planning/' || trimmed === '.planning';
+  });
+
+  if (hasBlanketPlanning) {
+    log('  = current:   .gitignore (.planning/ covers patterns)');
+    stats.current++;
+    return;
+  }
+
+  // Check if .planning/patterns/ is explicitly listed
+  const hasPatternsEntry = lines.some(line => {
+    const trimmed = line.trim();
+    return trimmed === '.planning/patterns/' || trimmed === '.planning/patterns';
+  });
+
+  if (hasPatternsEntry) {
+    log('  = current:   .gitignore (.planning/patterns/)');
+    stats.current++;
+    return;
+  }
+
+  // Append entry
+  if (!dryRun) {
+    const addition = '\n# Skill-creator observation data\n.planning/patterns/\n';
+    fs.writeFileSync(targetPath, content.trimEnd() + addition);
+  }
+  log('  + updated:   .gitignore (.planning/patterns/ added)');
+  stats.updated++;
+}
+
 // --- Main ---
 function main() {
   // Verify .claude/ exists
