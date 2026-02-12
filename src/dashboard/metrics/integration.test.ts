@@ -157,7 +157,10 @@ beforeEach(() => {
 
   // Velocity helpers
   mockGroupCommits.mockReturnValue(new Map());
-  mockComputeStats.mockReturnValue(null);
+  mockComputeStats.mockReturnValue({
+    phase: 0, wallTimeMs: 0, commitCount: 0, insertions: 0, deletions: 0,
+    filesChanged: 0, plansExecuted: 0, commitTypes: {}, firstCommit: '', lastCommit: '',
+  });
   mockExtractTdd.mockReturnValue([]);
 
   // Wrap refresh returns the content with a wrapper marker
