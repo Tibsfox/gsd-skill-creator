@@ -1911,6 +1911,179 @@ else
 fi
 
 # ==============================================================================
+# Poke Subcommand Tests (mock mode, direct message)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Poke Subcommand Tests (mock mode, direct message)${RESET}\n"
+
+# Reset stack dir with active session for poke tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/sessions/test-sess" "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl" "$GSD_STACK_DIR/registry.jsonl"
+echo '{"name":"test-sess","status":"active","project":"/tmp/p","started":"2026-02-12T10:00:00Z","tmux_session":"claude-test-sess","pid":"1234"}' > "$GSD_STACK_DIR/sessions/test-sess/meta.json"
+touch "$GSD_STACK_DIR/sessions/test-sess/heartbeat"
+
+# 1. poke with direct message exits 0
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" poke "run the tests" 2>&1)
+rc=$?
+set -e
+assert_eq "poke direct exits 0" "0" "$rc"
+
+# 2. After poke, history.jsonl contains a "poke" event
+if [[ -f "$GSD_STACK_DIR/history.jsonl" ]] && grep -q '"event":"poke"' "$GSD_STACK_DIR/history.jsonl"; then
+  pass "poke logs event to history.jsonl"
+else
+  fail "poke logs event to history.jsonl" "no poke event found in history"
+fi
+
+# 3. poke event detail contains the message text
+if [[ -f "$GSD_STACK_DIR/history.jsonl" ]] && grep '"event":"poke"' "$GSD_STACK_DIR/history.jsonl" | grep -q "run the tests"; then
+  pass "poke history detail contains message text"
+else
+  fail "poke history detail contains message text" "detail does not contain 'run the tests'"
+fi
+
+# 4. Poke output (human mode) contains "Poked" or "Sent" or the message text
+if echo "$output" | grep -qi "poked\|sent\|run the tests"; then
+  pass "poke output confirms delivery"
+else
+  fail "poke output confirms delivery" "output: $output"
+fi
+
+# ==============================================================================
+# Poke Subcommand Tests (mock mode, nudge -- no arguments)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Poke Subcommand Tests (mock mode, nudge)${RESET}\n"
+
+# Reset stack dir with active session for nudge tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/sessions/test-sess" "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl" "$GSD_STACK_DIR/registry.jsonl"
+echo '{"name":"test-sess","status":"active","project":"/tmp/p","started":"2026-02-12T10:00:00Z","tmux_session":"claude-test-sess","pid":"1234"}' > "$GSD_STACK_DIR/sessions/test-sess/meta.json"
+touch "$GSD_STACK_DIR/sessions/test-sess/heartbeat"
+
+# 5. poke with no arguments (nudge mode) exits 0
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" poke 2>&1)
+rc=$?
+set -e
+assert_eq "poke nudge exits 0" "0" "$rc"
+
+# 6. After nudge poke, history.jsonl contains a "poke" event with "nudge" or "pop-stack" in detail
+if [[ -f "$GSD_STACK_DIR/history.jsonl" ]] && grep '"event":"poke"' "$GSD_STACK_DIR/history.jsonl" | grep -qi "nudge\|pop-stack"; then
+  pass "poke nudge history contains nudge/pop-stack"
+else
+  fail "poke nudge history contains nudge/pop-stack" "no nudge or pop-stack in poke history"
+fi
+
+# 7. Nudge poke output contains "nudge" or "pop-stack"
+if echo "$output" | grep -qi "nudge\|pop-stack"; then
+  pass "poke nudge output contains nudge/pop-stack"
+else
+  fail "poke nudge output contains nudge/pop-stack" "output: $output"
+fi
+
+# ==============================================================================
+# Poke Subcommand Tests (no active session)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Poke Subcommand Tests (no active session)${RESET}\n"
+
+# Reset stack dir -- do NOT create any session metadata
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl" "$GSD_STACK_DIR/registry.jsonl"
+
+# 8. poke with no active session exits 1
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" poke "hello" 2>&1)
+rc=$?
+set -e
+assert_eq "poke no session exits 1" "1" "$rc"
+
+# 9. Error output contains "no" and "session" (case insensitive)
+if echo "$output" | grep -qi "no.*session\|no active"; then
+  pass "poke no session error mentions 'no session'"
+else
+  fail "poke no session error mentions 'no session'" "output: $output"
+fi
+
+# ==============================================================================
+# Poke Subcommand Tests (target specific session with --session)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Poke Subcommand Tests (--session targeting)${RESET}\n"
+
+# Reset stack dir with two mock active sessions
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/sessions/sess-a" "$GSD_STACK_DIR/sessions/sess-b" "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl" "$GSD_STACK_DIR/registry.jsonl"
+echo '{"name":"sess-a","status":"active","project":"/tmp/pa","started":"2026-02-12T10:00:00Z","tmux_session":"claude-sess-a","pid":"1234"}' > "$GSD_STACK_DIR/sessions/sess-a/meta.json"
+touch "$GSD_STACK_DIR/sessions/sess-a/heartbeat"
+echo '{"name":"sess-b","status":"active","project":"/tmp/pb","started":"2026-02-12T10:00:00Z","tmux_session":"claude-sess-b","pid":"5678"}' > "$GSD_STACK_DIR/sessions/sess-b/meta.json"
+touch "$GSD_STACK_DIR/sessions/sess-b/heartbeat"
+
+# 10. poke --session=sess-a with targeted message exits 0
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" poke --session=sess-a "targeted msg" 2>&1)
+rc=$?
+set -e
+assert_eq "poke --session=sess-a exits 0" "0" "$rc"
+
+# 11. History event detail contains "sess-a" or "targeted msg"
+if [[ -f "$GSD_STACK_DIR/history.jsonl" ]] && grep '"event":"poke"' "$GSD_STACK_DIR/history.jsonl" | grep -qi "sess-a\|targeted msg"; then
+  pass "poke --session history contains sess-a or targeted msg"
+else
+  fail "poke --session history contains sess-a or targeted msg" "no matching poke event in history"
+fi
+
+# ==============================================================================
+# Poke JSON Output Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Poke JSON Output Tests${RESET}\n"
+
+# Reset stack dir with active session
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/sessions/test-sess" "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl" "$GSD_STACK_DIR/registry.jsonl"
+echo '{"name":"test-sess","status":"active","project":"/tmp/p","started":"2026-02-12T10:00:00Z","tmux_session":"claude-test-sess","pid":"1234"}' > "$GSD_STACK_DIR/sessions/test-sess/meta.json"
+touch "$GSD_STACK_DIR/sessions/test-sess/heartbeat"
+
+# 12. GSD_FORMAT=json poke outputs valid JSON (starts with {, ends with })
+set +e
+output=$(GSD_FORMAT=json GSD_MOCK_TMUX=1 "$GSD_STACK" poke "json test" 2>&1)
+rc=$?
+set -e
+if [[ "$output" == "{"* ]] && [[ "$output" == *"}" ]]; then
+  pass "poke json outputs JSON object"
+else
+  fail "poke json outputs JSON object" "output: $output"
+fi
+
+# 13. JSON output contains "delivered" or "status" key
+if echo "$output" | grep -qE '"delivered"|"status"'; then
+  pass "poke json has status/delivered key"
+else
+  fail "poke json has status/delivered key" "output: $output"
+fi
+
+# 14. JSON output contains the message text "json test"
+assert_contains "poke json contains message text" "$output" "json test"
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
