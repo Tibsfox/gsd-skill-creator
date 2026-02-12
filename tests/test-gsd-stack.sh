@@ -612,6 +612,12 @@ ts_count=$(echo "$output" | grep -c "2026-02-12" || true)
 assert_eq "log -n 5 shows 5 entries" "5" "$ts_count"
 
 # -- log -n 30 shows all 25 entries (not more) --
+# Re-write exactly 25 events (previous log calls added log_event entries)
+> "$GSD_STACK_DIR/history.jsonl"
+for i in $(seq -w 1 25); do
+  echo "{\"ts\":\"2026-02-12T16:${i}:00Z\",\"event\":\"push\",\"detail\":\"event number $i\"}" >> "$GSD_STACK_DIR/history.jsonl"
+done
+
 set +e
 output=$("$GSD_STACK" log -n 30 2>&1)
 rc=$?
