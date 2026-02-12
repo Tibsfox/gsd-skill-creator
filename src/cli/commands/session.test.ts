@@ -9,39 +9,41 @@ const mockStore = vi.fn();
 const mockGetLatest = vi.fn();
 
 vi.mock('../../orchestrator/session-continuity/snapshot-manager.js', () => ({
-  SnapshotManager: vi.fn().mockImplementation(() => ({
-    generate: mockGenerate,
-    store: mockStore,
-    getLatest: mockGetLatest,
-  })),
+  SnapshotManager: vi.fn().mockImplementation(function (this: Record<string, unknown>) {
+    this.generate = mockGenerate;
+    this.store = mockStore;
+    this.getLatest = mockGetLatest;
+  }),
 }));
 
 const mockWarmStartGenerate = vi.fn();
 
 vi.mock('../../orchestrator/session-continuity/warm-start.js', () => ({
-  WarmStartGenerator: vi.fn().mockImplementation(() => ({
-    generate: mockWarmStartGenerate,
-  })),
+  WarmStartGenerator: vi.fn().mockImplementation(function (this: Record<string, unknown>) {
+    this.generate = mockWarmStartGenerate;
+  }),
 }));
 
 const mockHandoffGenerate = vi.fn();
 
 vi.mock('../../orchestrator/session-continuity/handoff-generator.js', () => ({
-  HandoffGenerator: vi.fn().mockImplementation(() => ({
-    generate: mockHandoffGenerate,
-  })),
+  HandoffGenerator: vi.fn().mockImplementation(function (this: Record<string, unknown>) {
+    this.generate = mockHandoffGenerate;
+  }),
 }));
 
 vi.mock('../../orchestrator/session-continuity/skill-preload-suggester.js', () => ({
-  SkillPreloadSuggester: vi.fn().mockImplementation(() => ({})),
+  SkillPreloadSuggester: vi.fn().mockImplementation(function () {
+    // No methods needed for preload suggester
+  }),
 }));
 
 const mockStateRead = vi.fn();
 
 vi.mock('../../orchestrator/state/state-reader.js', () => ({
-  ProjectStateReader: vi.fn().mockImplementation(() => ({
-    read: mockStateRead,
-  })),
+  ProjectStateReader: vi.fn().mockImplementation(function (this: Record<string, unknown>) {
+    this.read = mockStateRead;
+  }),
 }));
 
 vi.mock('node:fs/promises', async () => {
