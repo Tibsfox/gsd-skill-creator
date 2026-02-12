@@ -61,3 +61,11 @@ export type {
   CopperExecutorConfig,
   CopperExecutionResult,
 } from './executor.js';
+
+// Activation Dispatch
+export { CopperActivationDispatch } from './activation.js';
+
+export type {
+  ActivationContext,
+  ActivationResult,
+} from './activation.js';
