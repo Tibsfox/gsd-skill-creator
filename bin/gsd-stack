@@ -25,6 +25,7 @@ GSD_RECORD_INTERVAL="${GSD_RECORD_INTERVAL:-5}"
 GSD_PRIORITY="${GSD_PRIORITY:-normal}"
 GSD_SOURCE="${GSD_SOURCE:-cli}"
 GSD_FORMAT="${GSD_FORMAT:-}"
+GSD_MOCK_TMUX="${GSD_MOCK_TMUX:-}"
 
 # ==============================================================================
 # Directory bootstrapping
@@ -38,6 +39,9 @@ ensure_dirs() {
   mkdir -p "$GSD_STACK_DIR/saves"
   if [[ ! -f "$GSD_STACK_DIR/history.jsonl" ]]; then
     touch "$GSD_STACK_DIR/history.jsonl"
+  fi
+  if [[ ! -f "$GSD_STACK_DIR/registry.jsonl" ]]; then
+    touch "$GSD_STACK_DIR/registry.jsonl"
   fi
 }
 
@@ -535,6 +539,163 @@ $line"
 }
 
 # ==============================================================================
+# Session state machine
+# ==============================================================================
+
+get_session_state() {
+  local session_name="$1"
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+
+  # Check session exists
+  if [[ ! -d "$session_dir" ]] || [[ ! -f "$session_dir/meta.json" ]]; then
+    echo "unknown"
+    return 1
+  fi
+
+  # Read meta.json
+  local meta_content
+  meta_content=$(cat "$session_dir/meta.json")
+  local status
+  status=$(json_field "$meta_content" "status")
+
+  # Terminal/explicit states take priority
+  case "$status" in
+    paused)  echo "paused";  return 0 ;;
+    stopped) echo "stopped"; return 0 ;;
+    saved)   echo "saved";   return 0 ;;
+  esac
+
+  # For active status, cross-reference heartbeat freshness
+  if [[ "$status" == "active" ]]; then
+    local heartbeat_file="$session_dir/heartbeat"
+    if [[ ! -f "$heartbeat_file" ]]; then
+      echo "stalled"
+      return 0
+    fi
+
+    # Check heartbeat freshness
+    local now heartbeat_mtime age
+    now=$(date +%s)
+    heartbeat_mtime=$(stat -c %Y "$heartbeat_file" 2>/dev/null || stat -f %m "$heartbeat_file" 2>/dev/null)
+    age=$((now - heartbeat_mtime))
+
+    if [[ "$age" -gt "$GSD_STALL_TIMEOUT" ]]; then
+      echo "stalled"
+    else
+      echo "active"
+    fi
+    return 0
+  fi
+
+  # Fallback: return raw status from meta
+  echo "$status"
+  return 0
+}
+
+# ==============================================================================
+# Session subcommand
+# ==============================================================================
+
+cmd_session() {
+  local project_path=""
+  local name=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --name=*) name="${1#--name=}" ; shift ;;
+      --name)   name="${2:-}" ; shift 2 ;;
+      -*)       echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)        project_path="$1" ; shift ;;
+    esac
+  done
+
+  # Validate project path
+  if [[ -z "$project_path" ]]; then
+    echo "Error: Project path required. Usage: gsd-stack session <project-path> [--name=NAME]"
+    exit 1
+  fi
+
+  # Default name to basename of project path
+  if [[ -z "$name" ]]; then
+    name=$(basename "$project_path")
+  fi
+
+  # Check tmux availability (skip in mock mode)
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    if ! command -v tmux &>/dev/null; then
+      echo "Error: tmux is not available. Install tmux to manage sessions."
+      exit 1
+    fi
+  fi
+
+  # Check for duplicate active session
+  local session_dir="$GSD_STACK_DIR/sessions/$name"
+  if [[ -f "$session_dir/meta.json" ]]; then
+    local state
+    state=$(get_session_state "$name") || true
+    if [[ "$state" == "active" ]] || [[ "$state" == "stalled" ]]; then
+      echo "Error: Session '$name' already exists (status: $state)"
+      exit 1
+    fi
+  fi
+
+  # Create session directory
+  mkdir -p "$session_dir"
+
+  # Generate metadata
+  local ts tmux_name
+  ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  tmux_name="${GSD_TMUX_SESSION}-${name}"
+
+  # Write meta.json
+  printf '{"name":"%s","status":"active","project":"%s","started":"%s","tmux_session":"%s","pid":"%s"}\n' \
+    "$name" "$project_path" "$ts" "$tmux_name" "$$" > "$session_dir/meta.json"
+
+  # Touch heartbeat file
+  touch "$session_dir/heartbeat"
+
+  # Start heartbeat background process (skip in mock mode to avoid orphans)
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    (while true; do
+      if [[ -f "$session_dir/meta.json" ]]; then
+        local loop_status
+        loop_status=$(json_field "$(cat "$session_dir/meta.json")" "status")
+        if [[ "$loop_status" != "active" ]]; then break; fi
+      else
+        break
+      fi
+      touch "$session_dir/heartbeat"
+      sleep 10
+    done) &
+  fi
+
+  # Append to registry
+  printf '{"ts":"%s","name":"%s","project":"%s","action":"start"}\n' \
+    "$ts" "$name" "$project_path" >> "$GSD_STACK_DIR/registry.jsonl"
+
+  # Launch tmux session or mock
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    tmux new-session -d -s "$tmux_name" -c "$project_path" "claude"
+    log_event "session" "started: $name at $project_path"
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"name":"%s","status":"active","project":"%s","tmux_session":"%s"}\n' \
+        "$name" "$project_path" "$tmux_name"
+    else
+      echo "Session '$name' started in tmux ($tmux_name)"
+    fi
+  else
+    log_event "session" "started: $name at $project_path"
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"name":"%s","status":"active","project":"%s","tmux_session":"%s","mock":true}\n' \
+        "$name" "$project_path" "$tmux_name"
+    else
+      echo "Session '$name' started (mock mode)"
+    fi
+  fi
+}
+
+# ==============================================================================
 # Known subcommands (stubs for future implementation)
 # ==============================================================================
 
@@ -581,7 +742,21 @@ main() {
       cmd_peek "$@"
       exit 0
       ;;
-    pop|poke|drain|clear|session|list|watch|pause|resume|stop|save|record|stop-record|mark|play|metrics)
+    session)
+      shift
+      cmd_session "$@"
+      exit $?
+      ;;
+    _get-state)
+      shift
+      if [[ -z "${1:-}" ]]; then
+        echo "Usage: gsd-stack _get-state <session-name>"
+        exit 1
+      fi
+      get_session_state "$1"
+      exit $?
+      ;;
+    pop|poke|drain|clear|list|watch|pause|resume|stop|save|record|stop-record|mark|play|metrics)
       echo "$cmd: not yet implemented"
       log_event "$cmd" "stub invoked"
       exit 0
