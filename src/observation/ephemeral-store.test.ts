@@ -121,6 +121,79 @@ describe('EphemeralStore', () => {
     expect(results.map(r => r.sessionId)).toEqual(['multi-1', 'multi-2', 'multi-3']);
   });
 
+  describe('cross-session tracking', () => {
+    it('append() with sessionId stores session_id in envelope', async () => {
+      const store = new EphemeralStore(patternsDir);
+      const obs = makeObservation({ sessionId: 'cs-test', tier: 'ephemeral' });
+
+      await store.append(obs, 'session-1');
+
+      const filePath = join(patternsDir, '.ephemeral.jsonl');
+      const content = await readFile(filePath, 'utf-8');
+      const envelope = JSON.parse(content.trim());
+      expect(envelope.session_id).toBe('session-1');
+    });
+
+    it('append() same observation pattern in different sessions tracks both session_ids', async () => {
+      const store = new EphemeralStore(patternsDir);
+      const obs1 = makeObservation({ sessionId: 's1', tier: 'ephemeral', topCommands: ['npm test'], topTools: ['Bash'] });
+      const obs2 = makeObservation({ sessionId: 's2', tier: 'ephemeral', topCommands: ['npm test'], topTools: ['Bash'] });
+
+      await store.append(obs1, 'session-1');
+      await store.append(obs2, 'session-2');
+
+      const counts = await store.getSessionCounts();
+      // Both observations share the same pattern key (same topCommands + topTools)
+      // So the pattern should have 2 distinct sessions
+      const values = [...counts.values()];
+      expect(values.some(v => v === 2)).toBe(true);
+    });
+
+    it('append() same session does NOT duplicate session_id in counts', async () => {
+      const store = new EphemeralStore(patternsDir);
+      const obs1 = makeObservation({ sessionId: 's1', tier: 'ephemeral', topCommands: ['npm test'], topTools: ['Bash'] });
+      const obs2 = makeObservation({ sessionId: 's2', tier: 'ephemeral', topCommands: ['npm test'], topTools: ['Bash'] });
+
+      await store.append(obs1, 'session-1');
+      await store.append(obs2, 'session-1'); // same session
+
+      const counts = await store.getSessionCounts();
+      const values = [...counts.values()];
+      // Same session_id should only count once
+      expect(values.every(v => v === 1)).toBe(true);
+    });
+
+    it('getSessionCounts() returns distinct session count per pattern', async () => {
+      const store = new EphemeralStore(patternsDir);
+      // 3 observations with same pattern across 3 different sessions
+      for (let i = 1; i <= 3; i++) {
+        const obs = makeObservation({
+          sessionId: `s${i}`,
+          tier: 'ephemeral',
+          topCommands: ['git status'],
+          topTools: ['Read'],
+        });
+        await store.append(obs, `session-${i}`);
+      }
+
+      const counts = await store.getSessionCounts();
+      const values = [...counts.values()];
+      expect(values).toContain(3);
+    });
+
+    it('readAll() still returns valid observations with session tracking (backward compat)', async () => {
+      const store = new EphemeralStore(patternsDir);
+      const obs = makeObservation({ sessionId: 'compat-test', tier: 'ephemeral', topCommands: ['npm test'] });
+
+      await store.append(obs, 'session-1');
+
+      const results = await store.readAll();
+      expect(results).toHaveLength(1);
+      expect(results[0].sessionId).toBe('compat-test');
+      expect(results[0].topCommands).toEqual(['npm test']);
+    });
+  });
+
   it('readAll() defaults missing tier to persistent (backward compat)', async () => {
     const store = new EphemeralStore(patternsDir);
 
