@@ -98,9 +98,13 @@ async function main() {
     }
 
     case 'search':
-    case 's':
-      await searchSkillsWorkflow(skillIndex);
+    case 's': {
+      const allScopes = args.includes('--all') || args.includes('-a');
+      const dirsFlag = args.find(a => a.startsWith('--dirs='));
+      const pluginDirs = dirsFlag ? dirsFlag.slice('--dirs='.length).split(',') : undefined;
+      await searchSkillsWorkflow(skillIndex, { allScopes, pluginDirs });
       break;
+    }
 
     case 'migrate':
     case 'mg': {
@@ -1313,7 +1317,7 @@ Usage:
 Commands:
   create, c         Create a new skill through guided workflow
   list, ls          List all available skills with metadata
-  search, s         Search skills by keyword interactively
+  search, s         Search skills by keyword (--all for cross-directory)
   delete, del, rm   Delete a skill
   resolve, res      Show which version of a skill is active
   validate, v       Validate skill structure and metadata
@@ -1545,6 +1549,8 @@ Examples:
   skill-creator list                # Show all skills (both scopes)
   skill-creator list --scope=user   # Show only user-level skills
   skill-creator search              # Interactive search
+  skill-creator search --all        # Search user, project, and plugin directories
+  skill-creator search --all --dirs=/path/to/plugins  # Include custom plugin directory
   skill-creator validate my-skill   # Validate a specific skill
   skill-creator validate --all      # Validate all skills
   skill-creator migrate             # Migrate all legacy skills interactively
