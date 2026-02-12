@@ -1,6 +1,6 @@
 import matter from 'gray-matter';
 import { readFile, writeFile, mkdir, readdir, stat, unlink, rm, chmod } from 'fs/promises';
-import { join, dirname } from 'path';
+import { join, dirname, resolve } from 'path';
 import { Skill, SkillMetadata, validateSkillMetadata } from '../types/skill.js';
 import { validateSkillNameStrict, suggestFixedName, validateReservedName } from '../validation/skill-validation.js';
 import { BudgetValidator } from '../validation/budget-validation.js';
@@ -16,6 +16,13 @@ import {
   ReferenceLinker,
   CircularReferenceError,
 } from '../disclosure/index.js';
+import {
+  validateSafeName,
+  assertSafePath,
+  PathTraversalError,
+} from '../validation/path-safety.js';
+
+export { PathTraversalError } from '../validation/path-safety.js';
 
 /**
  * Normalize metadata to official Claude Code format for writing to disk.
@@ -82,6 +89,25 @@ function normalizeForWrite(metadata: SkillMetadata): OfficialSkillMetadata {
 
 export class SkillStore {
   constructor(private skillsDir: string = '.claude/skills') {}
+
+  /**
+   * Validate that a name is safe for filesystem use (no traversal).
+   * @throws PathTraversalError if name contains traversal sequences
+   */
+  private assertSafeName(name: string): void {
+    const result = validateSafeName(name);
+    if (!result.valid) {
+      throw new PathTraversalError(result.error!);
+    }
+  }
+
+  /**
+   * Verify a resolved path stays within the skills directory.
+   * @throws PathTraversalError if path escapes the base directory
+   */
+  private assertSafeSkillPath(resolvedPath: string): void {
+    assertSafePath(resolve(resolvedPath), resolve(this.skillsDir));
+  }
 
   // Create a new skill
   async create(skillName: string, metadata: SkillMetadata, body: string): Promise<Skill> {
@@ -162,6 +188,9 @@ export class SkillStore {
 
     const skillDir = join(this.skillsDir, skillName);
     const skillPath = join(skillDir, 'SKILL.md');
+
+    // Defense-in-depth: verify resolved path stays within skills directory
+    this.assertSafeSkillPath(skillDir);
 
     // Ensure directory exists
     await mkdir(skillDir, { recursive: true });
@@ -289,6 +318,9 @@ export class SkillStore {
     const skillDir = join(this.skillsDir, skillName);
     const skillPath = join(skillDir, 'SKILL.md');
 
+    // Defense-in-depth: verify resolved path stays within skills directory
+    this.assertSafeSkillPath(skillDir);
+
     // Ensure skill directory exists
     await mkdir(skillDir, { recursive: true });
 
@@ -354,7 +386,9 @@ export class SkillStore {
 
   // Read a skill by name
   async read(skillName: string): Promise<Skill> {
+    this.assertSafeName(skillName);
     const skillPath = join(this.skillsDir, skillName, 'SKILL.md');
+    this.assertSafeSkillPath(skillPath);
     const content = await readFile(skillPath, 'utf-8');
 
     const { data, content: body } = matter(content);
@@ -368,6 +402,7 @@ export class SkillStore {
 
   // Update an existing skill
   async update(skillName: string, updates: Partial<SkillMetadata>, newBody?: string): Promise<Skill> {
+    this.assertSafeName(skillName);
     const existing = await this.read(skillName);
     const existingExt = getExtension(existing.metadata);
     const updateExt = getExtension(updates);
@@ -446,7 +481,9 @@ export class SkillStore {
 
   // Delete a skill (including references/ and scripts/ subdirectories)
   async delete(skillName: string): Promise<void> {
+    this.assertSafeName(skillName);
     const skillDir = join(this.skillsDir, skillName);
+    this.assertSafeSkillPath(skillDir);
     const skillPath = join(skillDir, 'SKILL.md');
 
     // Remove SKILL.md file
@@ -486,7 +523,9 @@ export class SkillStore {
 
   // Check if a skill exists
   async exists(skillName: string): Promise<boolean> {
+    this.assertSafeName(skillName);
     const skillPath = join(this.skillsDir, skillName, 'SKILL.md');
+    this.assertSafeSkillPath(skillPath);
     try {
       await stat(skillPath);
       return true;
