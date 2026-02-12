@@ -167,6 +167,8 @@ If the Task tool is not available, instruct directly:
 The delegated wrapper will handle its own skill loading, GSD delegation, and observation
 capture -- the phase router's job is only detection and routing.
 
+**Note:** Monitoring scans (MON-03) are handled by the delegated wrapper command (wrap:plan, wrap:execute, or wrap:verify). The phase router does not run its own scan.
+
 </process>
 
 <success_criteria>

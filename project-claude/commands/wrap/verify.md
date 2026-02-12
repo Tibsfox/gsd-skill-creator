@@ -192,6 +192,23 @@ And continue to Step 5.
 
 ---
 
+## Step 4.5: Run Monitoring Scan (MON-03)
+
+After verification completes and observations are captured, run a monitoring scan.
+
+If `integration.phase_transition_hooks` is `true`:
+
+1. Read `.planning/patterns/scan-state.json` for previous state
+2. Check STATE.md for transitions (verification may mark phase as verified)
+3. Check ROADMAP.md for status changes
+4. Run plan-vs-summary diff for the verified phase if SUMMARY exists
+5. Write scan observations to sessions.jsonl with `"source": "scan"`
+6. Update scan-state.json
+
+If the scan encounters errors, proceed to Step 5 without blocking.
+
+---
+
 ## Step 5: Transparency Summary (WRAP-07)
 
 Display a summary of everything the wrapper did:
@@ -202,6 +219,7 @@ Display a summary of everything the wrapper did:
 - **Skills loaded:** 2 (beautiful-commits, tdd-workflow)
 - **GSD command:** /gsd:verify-work N
 - **Observation captured:** Yes (wrapper_verification entry appended to sessions.jsonl)
+- **Monitoring scan:** [N observations detected] or [no changes] or [skipped]
 - **Verification outcome:** pass (M truths checked, K gaps found)
 - **Phase status:** [current status from STATE.md]
 ```
