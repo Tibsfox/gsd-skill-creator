@@ -3,10 +3,14 @@ import {
   generateLeaderWorkerTemplate,
   generatePipelineTemplate,
   generateSwarmTemplate,
+  generateRouterTemplate,
+  generateMapReduceTemplate,
   LEADER_TOOLS,
   WORKER_TOOLS,
   PIPELINE_STAGE_TOOLS,
   SWARM_WORKER_TOOLS,
+  ROUTER_TOOLS,
+  REDUCER_TOOLS,
 } from './templates.js';
 import { validateTeamConfig } from '../validation/team-validation.js';
 
@@ -328,6 +332,165 @@ describe('generateSwarmTemplate', () => {
 });
 
 // ============================================================================
+// Router Template Tests
+// ============================================================================
+
+describe('generateRouterTemplate', () => {
+  it('should produce config with correct name, topology, and version', () => {
+    const result = generateRouterTemplate({ name: 'classify' });
+    expect(result.config.name).toBe('classify');
+    expect((result.config as Record<string, unknown>).topology).toBe('router');
+    expect((result.config as Record<string, unknown>).version).toBe(1);
+  });
+
+  it('should have 1 router + 3 specialists by default', () => {
+    const result = generateRouterTemplate({ name: 'classify' });
+    expect(result.config.members).toHaveLength(4); // 1 router + 3 specialists
+    const router = result.config.members[0];
+    expect(router.agentType).toBe('router');
+    const specialists = result.config.members.slice(1);
+    for (const spec of specialists) {
+      expect(spec.agentType).toBe('specialist');
+    }
+  });
+
+  it('should set leadAgentId to router agentId', () => {
+    const result = generateRouterTemplate({ name: 'classify' });
+    const router = result.config.members[0];
+    expect(result.config.leadAgentId).toBe(router.agentId);
+    expect(router.agentId).toBe('classify-router');
+  });
+
+  it('should assign ROUTER_TOOLS to router', () => {
+    const result = generateRouterTemplate({ name: 'classify' });
+    const router = result.config.members[0];
+    expect((router as Record<string, unknown>).tools).toEqual(ROUTER_TOOLS);
+  });
+
+  it('should assign WORKER_TOOLS to specialists', () => {
+    const result = generateRouterTemplate({ name: 'classify' });
+    const specialists = result.config.members.slice(1);
+    for (const spec of specialists) {
+      expect((spec as Record<string, unknown>).tools).toEqual(WORKER_TOOLS);
+    }
+  });
+
+  it('should support custom workerCount changing specialist count', () => {
+    const result = generateRouterTemplate({ name: 'classify', workerCount: 5 });
+    expect(result.config.members).toHaveLength(6); // 1 router + 5 specialists
+    expect(result.config.members[5].agentId).toBe('classify-specialist-5');
+  });
+
+  it('should use custom description when provided', () => {
+    const result = generateRouterTemplate({
+      name: 'classify',
+      description: 'Request classifier team',
+    });
+    expect(result.config.description).toBe('Request classifier team');
+  });
+
+  it('should set patternInfo correctly', () => {
+    const result = generateRouterTemplate({ name: 'classify' });
+    expect(result.patternInfo.topology).toBe('router');
+    expect(result.patternInfo.description).toContain('router');
+    expect(result.patternInfo.memberSummary).toBe('1 router + 3 specialists');
+  });
+
+  it('should return non-empty sampleTasks', () => {
+    const result = generateRouterTemplate({ name: 'classify' });
+    expect(result.sampleTasks.length).toBeGreaterThan(0);
+    for (const task of result.sampleTasks) {
+      expect(task.status).toBe('pending');
+    }
+  });
+
+  it('should produce config that passes validateTeamConfig', () => {
+    const result = generateRouterTemplate({ name: 'valid-router' });
+    const validation = validateTeamConfig(result.config);
+    expect(validation.valid).toBe(true);
+    expect(validation.errors).toEqual([]);
+  });
+});
+
+// ============================================================================
+// Map-Reduce Template Tests
+// ============================================================================
+
+describe('generateMapReduceTemplate', () => {
+  it('should produce config with correct name, topology, and version', () => {
+    const result = generateMapReduceTemplate({ name: 'batch' });
+    expect(result.config.name).toBe('batch');
+    expect((result.config as Record<string, unknown>).topology).toBe('map-reduce');
+    expect((result.config as Record<string, unknown>).version).toBe(1);
+  });
+
+  it('should have 1 orchestrator + 3 workers by default', () => {
+    const result = generateMapReduceTemplate({ name: 'batch' });
+    expect(result.config.members).toHaveLength(4); // 1 orchestrator + 3 workers
+    const orchestrator = result.config.members[0];
+    expect(orchestrator.agentType).toBe('orchestrator');
+    const workers = result.config.members.slice(1);
+    for (const worker of workers) {
+      expect(worker.agentType).toBe('worker');
+    }
+  });
+
+  it('should set leadAgentId to orchestrator agentId', () => {
+    const result = generateMapReduceTemplate({ name: 'batch' });
+    const orchestrator = result.config.members[0];
+    expect(result.config.leadAgentId).toBe(orchestrator.agentId);
+    expect(orchestrator.agentId).toBe('batch-orchestrator');
+  });
+
+  it('should assign REDUCER_TOOLS to orchestrator', () => {
+    const result = generateMapReduceTemplate({ name: 'batch' });
+    const orchestrator = result.config.members[0];
+    expect((orchestrator as Record<string, unknown>).tools).toEqual(REDUCER_TOOLS);
+  });
+
+  it('should assign WORKER_TOOLS to workers', () => {
+    const result = generateMapReduceTemplate({ name: 'batch' });
+    const workers = result.config.members.slice(1);
+    for (const worker of workers) {
+      expect((worker as Record<string, unknown>).tools).toEqual(WORKER_TOOLS);
+    }
+  });
+
+  it('should support custom workerCount changing worker count', () => {
+    const result = generateMapReduceTemplate({ name: 'batch', workerCount: 5 });
+    expect(result.config.members).toHaveLength(6); // 1 orchestrator + 5 workers
+    expect(result.config.members[5].agentId).toBe('batch-worker-5');
+  });
+
+  it('should have sampleTasks with dependency chain (blockedBy)', () => {
+    const result = generateMapReduceTemplate({ name: 'batch' });
+    // Should have at least a map task and worker tasks
+    expect(result.sampleTasks.length).toBeGreaterThan(1);
+    // Worker tasks should have blockedBy referencing the map task
+    const mapTask = result.sampleTasks[0];
+    const workerTasks = result.sampleTasks.slice(1);
+    for (const task of workerTasks) {
+      expect(task.blockedBy).toBeDefined();
+      expect(task.blockedBy).toContain(mapTask.id);
+    }
+  });
+
+  it('should set patternInfo correctly', () => {
+    const result = generateMapReduceTemplate({ name: 'batch' });
+    expect(result.patternInfo.topology).toBe('map-reduce');
+    expect(result.patternInfo.description).toContain('Orchestrator');
+    expect(result.patternInfo.memberSummary).toBe('1 orchestrator + 3 workers');
+  });
+
+  it('should produce config that passes validateTeamConfig', () => {
+    const result = generateMapReduceTemplate({ name: 'valid-mr' });
+    const validation = validateTeamConfig(result.config);
+    expect(validation.valid).toBe(true);
+    expect(validation.errors).toEqual([]);
+  });
+});
+
+// ============================================================================
 // Cross-template Tests
 // ============================================================================
 
@@ -336,6 +499,8 @@ describe('Cross-template properties', () => {
     { name: 'leader-worker', fn: generateLeaderWorkerTemplate },
     { name: 'pipeline', fn: generatePipelineTemplate },
     { name: 'swarm', fn: generateSwarmTemplate },
+    { name: 'router', fn: generateRouterTemplate },
+    { name: 'map-reduce', fn: generateMapReduceTemplate },
   ];
 
   for (const { name, fn } of templates) {
