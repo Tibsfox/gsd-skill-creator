@@ -14,6 +14,7 @@
 import { parsePatternKey } from './pattern-scorer.js';
 import type { RankedCandidate, ParsedPatternKey } from './pattern-scorer.js';
 import { injectGsdReferences } from '../detection/gsd-reference-injector.js';
+import { sanitizeGeneratedContent } from '../validation/generation-safety.js';
 
 // ============================================================================
 // Exported constants
@@ -184,6 +185,13 @@ export function generateSkillDraft(
 
   // QOL-04: Inject GSD command references if applicable
   body = injectGsdReferences(body, candidate.suggestedDescription, gsdInstalled);
+
+  // SEC-05: Sanitize generated content to block dangerous commands
+  const { sanitized, findings } = sanitizeGeneratedContent(body);
+  body = sanitized;
+  if (findings.length > 0) {
+    body += `\n<!-- Safety: ${findings.length} dangerous command(s) blocked during generation -->\n`;
+  }
 
   return {
     name: candidate.suggestedName,

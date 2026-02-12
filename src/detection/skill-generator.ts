@@ -7,6 +7,7 @@ import { shouldForkContext, suggestAgent } from '../validation/context-fork-dete
 import { ContentDecomposer } from '../disclosure/index.js';
 import type { ReferenceFile, ScriptFile } from '../disclosure/index.js';
 import { injectGsdReferences } from './gsd-reference-injector.js';
+import { inferAllowedTools, sanitizeGeneratedContent, scanForDangerousCommands } from '../validation/generation-safety.js';
 
 export interface GeneratedSkill {
   name: string;
@@ -44,6 +45,22 @@ export class SkillGenerator {
     };
 
     let body = this.generateBody(candidate);
+
+    // SEC-05: Sanitize generated content to block dangerous commands
+    const dangerousFindings = scanForDangerousCommands(body);
+    const { sanitized: sanitizedBody, findings: sanitizeFindings } = sanitizeGeneratedContent(body);
+    body = sanitizedBody;
+    if (dangerousFindings.length > 0) {
+      body = `<!-- WARNING: ${dangerousFindings.length} dangerous command(s) were detected and blocked during generation. -->\n${body}`;
+    }
+
+    // SEC-07: Infer allowed-tools and set on metadata
+    const allowedTools = inferAllowedTools({
+      type: candidate.type,
+      pattern: candidate.pattern,
+      suggestedDescription: candidate.suggestedDescription,
+    });
+    (metadata as Record<string, unknown>)['allowed-tools'] = allowedTools;
 
     // SPEC-02: Detect $ARGUMENTS and set argument-hint
     const argDetection = detectArguments(body);
