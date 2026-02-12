@@ -258,6 +258,33 @@ export async function validateReservedName(name: string): Promise<ReservedNameVa
 }
 
 // ============================================================================
+// Dual-Format Allowed-Tools Schema (SPEC-04)
+// ============================================================================
+
+/**
+ * Schema for allowed-tools that accepts both array and space-delimited string formats.
+ *
+ * Input formats:
+ * - Array: ['Read', 'Grep'] -> ['Read', 'Grep']
+ * - String: 'Read Grep'     -> ['Read', 'Grep']
+ * - Single:  'Read'         -> ['Read']
+ * - Empty:   ''             -> []
+ * - Empty:   []             -> []
+ *
+ * Output is always string[].
+ */
+export const AllowedToolsSchema = z.preprocess(
+  (val) => {
+    if (typeof val === 'string') {
+      const trimmed = val.trim();
+      return trimmed === '' ? [] : trimmed.split(/\s+/);
+    }
+    return val;
+  },
+  z.array(z.string()),
+);
+
+// ============================================================================
 // Legacy Schema (for backward compatibility)
 // ============================================================================
 
@@ -336,12 +363,16 @@ export const SkillInputSchema = z.object({
   // Claude Code optional fields
   'disable-model-invocation': z.boolean().optional(),
   'user-invocable': z.boolean().optional(),
-  'allowed-tools': z.array(z.string()).optional(),
+  'allowed-tools': AllowedToolsSchema.optional(),
   'argument-hint': z.string().optional(),
   model: z.string().optional(),
   context: z.literal('fork').optional(),
   agent: z.string().optional(),
   hooks: z.record(z.string(), z.unknown()).optional(),
+
+  // Spec-standard fields (SPEC-01)
+  license: z.string().optional(),
+  compatibility: z.string().max(500, 'Compatibility must be 500 characters or less').optional(),
 
   // New format: metadata container
   metadata: MetadataContainerSchema,
@@ -403,12 +434,16 @@ export const SkillMetadataSchema = z.object({
   // Claude Code optional fields
   'disable-model-invocation': z.boolean().optional(),
   'user-invocable': z.boolean().optional(),
-  'allowed-tools': z.array(z.string()).optional(),
+  'allowed-tools': AllowedToolsSchema.optional(),
   'argument-hint': z.string().optional(),
   model: z.string().optional(),
   context: z.literal('fork').optional(),
   agent: z.string().optional(),
   hooks: z.record(z.string(), z.unknown()).optional(),
+
+  // Spec-standard fields (SPEC-01)
+  license: z.string().optional(),
+  compatibility: z.string().max(500, 'Compatibility must be 500 characters or less').optional(),
 
   // New format: metadata container
   metadata: MetadataContainerSchema,

@@ -23,12 +23,14 @@ export interface SkillMetadata {
   // Claude Code optional fields
   'disable-model-invocation'?: boolean;  // Prevent Claude from using
   'user-invocable'?: boolean;            // Allow /skill:name invocation
-  'allowed-tools'?: string[];            // Restrict available tools
+  'allowed-tools'?: string[] | string;    // Restrict available tools (array or space-delimited string)
   'argument-hint'?: string;              // Hint for user invocation arguments
   model?: string;                        // Model override for skill execution
   context?: 'fork';                      // Fork context for isolated execution
   agent?: string;                        // Agent reference for skill
   hooks?: Record<string, unknown>;       // Lifecycle hooks configuration
+  license?: string;                      // SPDX license identifier or free text
+  compatibility?: string;                // Compatibility notes (max 500 chars)
 
   // Official metadata container for extensions
   metadata?: {
