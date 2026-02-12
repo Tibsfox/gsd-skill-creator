@@ -1069,6 +1069,14 @@ async function main() {
           break;
         }
 
+        case 'estimate':
+        case 'e': {
+          const { teamEstimateCommand } = await import('./cli/commands/team-estimate.js');
+          const exitCode = await teamEstimateCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
         default:
           showTeamHelp();
       }
@@ -1271,6 +1279,7 @@ Commands:
   validate, v   Validate team config(s) with detailed report
   spawn, sp     Check team readiness (agent resolution)
   status, s     Show team details and validation summary
+  estimate, e   Show projected token usage and cost
 
 Examples:
   skill-creator team create                    Interactive team creation
