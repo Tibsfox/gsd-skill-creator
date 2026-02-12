@@ -35,7 +35,11 @@ function normalizeForWrite(metadata: SkillMetadata): OfficialSkillMetadata {
     official['user-invocable'] = metadata['user-invocable'];
   }
   if (metadata['allowed-tools']) {
-    official['allowed-tools'] = metadata['allowed-tools'];
+    // Always write as array (Claude Code format), even if input was a space-delimited string
+    const tools = metadata['allowed-tools'];
+    official['allowed-tools'] = typeof tools === 'string'
+      ? (tools.trim() === '' ? [] : tools.trim().split(/\s+/))
+      : tools;
   }
   if (metadata['argument-hint']) {
     official['argument-hint'] = metadata['argument-hint'];
@@ -51,6 +55,12 @@ function normalizeForWrite(metadata: SkillMetadata): OfficialSkillMetadata {
   }
   if (metadata.hooks) {
     official.hooks = metadata.hooks;
+  }
+  if (metadata.license) {
+    official.license = metadata.license;
+  }
+  if (metadata.compatibility) {
+    official.compatibility = metadata.compatibility;
   }
 
   // Add extension container only if there's data
@@ -128,6 +138,8 @@ export class SkillStore {
       context: metadata.context,
       agent: metadata.agent,
       hooks: metadata.hooks,
+      license: metadata.license,
+      compatibility: metadata.compatibility,
       metadata: {
         extensions: {
           'gsd-skill-creator': fullExt,
@@ -216,6 +228,8 @@ export class SkillStore {
       context: updates.context ?? existing.metadata.context,
       agent: updates.agent ?? existing.metadata.agent,
       hooks: updates.hooks ?? existing.metadata.hooks,
+      license: updates.license ?? existing.metadata.license,
+      compatibility: updates.compatibility ?? existing.metadata.compatibility,
       metadata: {
         extensions: {
           'gsd-skill-creator': mergedExt,
