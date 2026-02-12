@@ -665,6 +665,50 @@ describe('parseMilestonesMd', () => {
     expect(data.milestones).toEqual([]);
     expect(data.totals).toEqual({ milestones: 0, phases: 0, plans: 0 });
   });
+
+  it('computes totals from stats when no totals footer exists', () => {
+    const noTotals = `# Shipped Milestones
+
+### v1.0 — First Release (Phases 1-3)
+
+**Goal:** Ship the initial version.
+**Shipped:** 2026-01-15
+
+**Requirements:** 10 | **Phases:** 3 | **Plans:** 8
+
+### v1.1 — Second Release (Phases 4-6)
+
+**Goal:** Add more features.
+**Shipped:** 2026-02-01
+
+**Requirements:** 5 | **Phases:** 2 | **Plans:** 4
+`;
+    const data = parseMilestonesMd(noTotals);
+    expect(data.milestones).toHaveLength(2);
+    // Totals computed from individual milestone stats
+    expect(data.totals.milestones).toBe(2);
+    expect(data.totals.phases).toBe(5); // 3 + 2
+    expect(data.totals.plans).toBe(12); // 8 + 4
+  });
+
+  it('treats empty accomplishments list as undefined', () => {
+    const withEmptyAccomp = `# Shipped Milestones
+
+### v1.0 — Release (Phases 1-3)
+
+**Goal:** Ship it.
+**Shipped:** 2026-01-15
+
+**Requirements:** 10 | **Phases:** 3 | **Plans:** 8
+
+**Key accomplishments:**
+
+**Totals:** 1 milestones | 3 phases | 8 plans
+`;
+    const data = parseMilestonesMd(withEmptyAccomp);
+    expect(data.milestones).toHaveLength(1);
+    expect(data.milestones[0].accomplishments).toBeUndefined();
+  });
 });
 
 // ---------------------------------------------------------------------------
