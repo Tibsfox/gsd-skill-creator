@@ -8,6 +8,21 @@ import type { ApplicationConfig, ConflictResult, BudgetProfile, SkippedSkill, Bu
 import { DEFAULT_CONFIG } from '../types/application.js';
 import { SkillPipeline, createEmptyContext } from './skill-pipeline.js';
 import { ScoreStage, ResolveStage, LoadStage, BudgetStage, CacheOrderStage, ModelFilterStage } from './stages/index.js';
+import { AdaptiveRouter, CorrectionStage } from '../retrieval/index.js';
+import type { CorrectionConfig } from '../retrieval/types.js';
+import { EmbeddingService } from '../embeddings/embedding-service.js';
+
+/**
+ * Optional configuration for enabling retrieval-augmented features.
+ * When enabled, AdaptiveRouter selects scoring strategy per query,
+ * and CorrectionStage refines low-confidence results.
+ */
+export interface RetrievalConfig {
+  /** Enable adaptive routing + correction (default: false) */
+  enabled?: boolean;
+  /** Override default correction thresholds */
+  correctionConfig?: CorrectionConfig;
+}
 
 export interface ApplyResult {
   loaded: string[];
@@ -41,7 +56,8 @@ export class SkillApplicator {
     private skillStore: SkillStore,
     config?: Partial<ApplicationConfig>,
     budgetProfile?: BudgetProfile,
-    modelProfile?: string
+    modelProfile?: string,
+    retrievalConfig?: RetrievalConfig,
   ) {
     const fullConfig = { ...DEFAULT_CONFIG, ...config };
 
@@ -52,10 +68,30 @@ export class SkillApplicator {
     this.budgetProfile = budgetProfile;
     this.modelProfile = modelProfile;
 
-    // Pipeline order: Score -> Resolve -> ModelFilter (conditional) -> CacheOrder -> Budget (conditional) -> Load
+    // Pipeline order: Score -> [Correction] -> Resolve -> ModelFilter (conditional) -> CacheOrder -> Budget (conditional) -> Load
     this.pipeline = new SkillPipeline();
-    this.pipeline.addStage(new ScoreStage(this.skillIndex, this.scorer));
+
+    // Score stage: optionally with adaptive routing
+    if (retrievalConfig?.enabled) {
+      const router = new AdaptiveRouter();
+      const embeddingService = EmbeddingService.getInstance();
+      this.pipeline.addStage(new ScoreStage(this.skillIndex, this.scorer, router, embeddingService));
+    } else {
+      this.pipeline.addStage(new ScoreStage(this.skillIndex, this.scorer));
+    }
+
     this.pipeline.addStage(new ResolveStage(this.resolver));
+
+    // Insert correction stage after score if retrieval enabled
+    if (retrievalConfig?.enabled) {
+      const embeddingService = EmbeddingService.getInstance();
+      const correctionStage = new CorrectionStage(
+        embeddingService,
+        this.scorer,
+        retrievalConfig.correctionConfig,
+      );
+      this.pipeline.insertAfter('score', correctionStage);
+    }
 
     if (modelProfile) {
       this.pipeline.addStage(new ModelFilterStage(this.skillStore));
