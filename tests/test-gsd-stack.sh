@@ -1318,6 +1318,350 @@ else
 fi
 
 # ==============================================================================
+# Pop Subcommand Tests (empty stack)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Pop Subcommand Tests (empty stack)${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# 1. pop on empty stack exits 0
+set +e
+output=$("$GSD_STACK" pop 2>&1)
+rc=$?
+set -e
+assert_eq "pop empty exits 0" "0" "$rc"
+
+# 2. pop on empty stack shows empty/no messages message
+if echo "$output" | grep -qi "empty\|no message"; then
+  pass "pop empty shows informative message"
+else
+  fail "pop empty shows informative message" "output: $output"
+fi
+
+# ==============================================================================
+# Pop Subcommand Tests (FIFO mode)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Pop Subcommand Tests (FIFO mode)${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# Push 3 messages with different priorities (sleep between for unique timestamps)
+set +e
+"$GSD_STACK" push --priority=urgent "fix bug" >/dev/null 2>&1
+sleep 0.01
+"$GSD_STACK" push --priority=normal "add feature" >/dev/null 2>&1
+sleep 0.01
+"$GSD_STACK" push --priority=low "update docs" >/dev/null 2>&1
+set -e
+
+# 3. FIFO pop returns urgent message
+set +e
+output=$(GSD_STACK_MODE=fifo "$GSD_STACK" pop 2>&1)
+rc=$?
+set -e
+assert_eq "pop fifo exits 0" "0" "$rc"
+assert_contains "pop fifo returns urgent message" "$output" "fix bug"
+
+# 4. After pop, pending/ has exactly 2 files remaining
+file_count=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+file_count=$((file_count + 0))
+assert_eq "pop fifo: pending has 2 files" "2" "$file_count"
+
+# 5. After pop, done/ has exactly 1 file
+done_count=$(ls -1 "$GSD_STACK_DIR/done/" 2>/dev/null | wc -l)
+done_count=$((done_count + 0))
+assert_eq "pop fifo: done has 1 file" "1" "$done_count"
+
+# 6. Popped file in done/ preserves original YAML frontmatter and body
+done_file=$(ls -1 "$GSD_STACK_DIR/done/" 2>/dev/null | head -1)
+if [[ -n "$done_file" ]] && [[ -f "$GSD_STACK_DIR/done/$done_file" ]]; then
+  done_content=$(cat "$GSD_STACK_DIR/done/$done_file")
+  assert_contains "pop done file has frontmatter" "$done_content" "priority: urgent"
+  assert_contains "pop done file has body" "$done_content" "fix bug"
+else
+  fail "pop done file has frontmatter" "no file in done/"
+  fail "pop done file has body" "no file in done/"
+fi
+
+# 7. Pop output contains message body text
+assert_contains "pop output has body text" "$output" "fix bug"
+
+# 8. Pop output contains a priority indicator
+if echo "$output" | grep -qi "urgent\|URGENT"; then
+  pass "pop output has priority indicator"
+else
+  fail "pop output has priority indicator" "output: $output"
+fi
+
+# 9. Second pop returns normal priority message
+set +e
+output2=$(GSD_STACK_MODE=fifo "$GSD_STACK" pop 2>&1)
+rc=$?
+set -e
+assert_contains "second pop returns normal message" "$output2" "add feature"
+
+# 10. After two pops, pending has 1 file, done has 2 files
+file_count=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+file_count=$((file_count + 0))
+done_count=$(ls -1 "$GSD_STACK_DIR/done/" 2>/dev/null | wc -l)
+done_count=$((done_count + 0))
+assert_eq "after 2 pops: pending has 1 file" "1" "$file_count"
+assert_eq "after 2 pops: done has 2 files" "2" "$done_count"
+
+# ==============================================================================
+# Pop Subcommand Tests (LIFO mode)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Pop Subcommand Tests (LIFO mode)${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# Push 3 same-priority messages with distinguishable content
+set +e
+"$GSD_STACK" push --priority=normal "first" >/dev/null 2>&1
+sleep 0.01
+"$GSD_STACK" push --priority=normal "second" >/dev/null 2>&1
+sleep 0.01
+"$GSD_STACK" push --priority=normal "third" >/dev/null 2>&1
+set -e
+
+# 11. LIFO pop returns "third" (newest)
+set +e
+output=$(GSD_STACK_MODE=lifo "$GSD_STACK" pop 2>&1)
+rc=$?
+set -e
+assert_contains "pop lifo returns newest (third)" "$output" "third"
+
+# 12. After LIFO pop, pending/ has 2 files
+file_count=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+file_count=$((file_count + 0))
+assert_eq "pop lifo: pending has 2 files" "2" "$file_count"
+
+# ==============================================================================
+# Pop JSON Output Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Pop JSON Output Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+set +e
+"$GSD_STACK" push --priority=urgent "json pop test" >/dev/null 2>&1
+set -e
+
+# 13. GSD_FORMAT=json pop outputs valid JSON
+set +e
+output=$(GSD_FORMAT=json "$GSD_STACK" pop 2>&1)
+rc=$?
+set -e
+if [[ "$output" == "{"* ]] && [[ "$output" == *"}" ]]; then
+  pass "pop json outputs JSON object"
+else
+  fail "pop json outputs JSON object" "output: $output"
+fi
+
+# 14. JSON output contains "id" key
+assert_contains "pop json has id key" "$output" '"id"'
+
+# 15. JSON output contains "priority" key
+assert_contains "pop json has priority key" "$output" '"priority"'
+
+# 16. JSON output contains "body" key
+assert_contains "pop json has body key" "$output" '"body"'
+
+# ==============================================================================
+# Pop History Logging Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Pop History Logging Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+set +e
+"$GSD_STACK" push "history pop test" >/dev/null 2>&1
+"$GSD_STACK" pop >/dev/null 2>&1
+set -e
+
+# 17. After pop, history.jsonl has a "pop" event
+if [[ -f "$GSD_STACK_DIR/history.jsonl" ]] && grep -q '"event":"pop"' "$GSD_STACK_DIR/history.jsonl"; then
+  pass "pop logs event to history.jsonl"
+else
+  fail "pop logs event to history.jsonl" "no pop event found"
+fi
+
+# ==============================================================================
+# Clear Subcommand Tests (empty stack)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Clear Subcommand Tests (empty stack)${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# 18. clear on empty stack exits 0
+set +e
+output=$("$GSD_STACK" clear 2>&1)
+rc=$?
+set -e
+assert_eq "clear empty exits 0" "0" "$rc"
+
+# 19. clear on empty stack shows "0" in output
+assert_contains "clear empty shows 0" "$output" "0"
+
+# ==============================================================================
+# Clear Subcommand Tests (with messages)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Clear Subcommand Tests (with messages)${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# Push 3 messages
+set +e
+"$GSD_STACK" push --priority=urgent "clear msg 1" >/dev/null 2>&1
+"$GSD_STACK" push --priority=normal "clear msg 2" >/dev/null 2>&1
+"$GSD_STACK" push --priority=low "clear msg 3" >/dev/null 2>&1
+set -e
+
+# 20. clear exits 0
+set +e
+output=$("$GSD_STACK" clear 2>&1)
+rc=$?
+set -e
+assert_eq "clear with msgs exits 0" "0" "$rc"
+
+# 21. After clear, pending/ has 0 files
+file_count=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+file_count=$((file_count + 0))
+assert_eq "clear: pending has 0 files" "0" "$file_count"
+
+# 22. After clear, done/ has 3 files
+done_count=$(ls -1 "$GSD_STACK_DIR/done/" 2>/dev/null | wc -l)
+done_count=$((done_count + 0))
+assert_eq "clear: done has 3 files" "3" "$done_count"
+
+# 23. Clear output reports "3" (count of messages moved)
+assert_contains "clear output shows count 3" "$output" "3"
+
+# 24. Files in done/ after clear preserve YAML frontmatter
+done_file=$(ls -1 "$GSD_STACK_DIR/done/" 2>/dev/null | head -1)
+if [[ -n "$done_file" ]] && [[ -f "$GSD_STACK_DIR/done/$done_file" ]]; then
+  done_content=$(cat "$GSD_STACK_DIR/done/$done_file")
+  assert_contains "clear done file preserves frontmatter" "$done_content" "priority:"
+else
+  fail "clear done file preserves frontmatter" "no file in done/"
+fi
+
+# ==============================================================================
+# Clear History Logging Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Clear History Logging Tests${RESET}\n"
+
+# 25. After clear, history.jsonl has a "clear" event
+if [[ -f "$GSD_STACK_DIR/history.jsonl" ]] && grep -q '"event":"clear"' "$GSD_STACK_DIR/history.jsonl"; then
+  pass "clear logs event to history.jsonl"
+else
+  fail "clear logs event to history.jsonl" "no clear event found"
+fi
+
+# ==============================================================================
+# Clear JSON Output Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Clear JSON Output Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+set +e
+"$GSD_STACK" push "json clear test 1" >/dev/null 2>&1
+"$GSD_STACK" push "json clear test 2" >/dev/null 2>&1
+set -e
+
+# 26. GSD_FORMAT=json clear outputs valid JSON
+set +e
+output=$(GSD_FORMAT=json "$GSD_STACK" clear 2>&1)
+rc=$?
+set -e
+if [[ "$output" == "{"* ]] && [[ "$output" == *"}" ]]; then
+  pass "clear json outputs JSON object"
+else
+  fail "clear json outputs JSON object" "output: $output"
+fi
+
+# 27. JSON output contains "cleared" count
+assert_contains "clear json has cleared key" "$output" '"cleared"'
+
+# ==============================================================================
+# Mixed Operations Test
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Mixed Operations Test${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# Push 5 messages
+set +e
+"$GSD_STACK" push --priority=urgent "mix msg 1" >/dev/null 2>&1
+sleep 0.01
+"$GSD_STACK" push --priority=normal "mix msg 2" >/dev/null 2>&1
+sleep 0.01
+"$GSD_STACK" push --priority=normal "mix msg 3" >/dev/null 2>&1
+sleep 0.01
+"$GSD_STACK" push --priority=low "mix msg 4" >/dev/null 2>&1
+sleep 0.01
+"$GSD_STACK" push --priority=low "mix msg 5" >/dev/null 2>&1
+set -e
+
+# Pop 2 messages
+set +e
+"$GSD_STACK" pop >/dev/null 2>&1
+"$GSD_STACK" pop >/dev/null 2>&1
+set -e
+
+# Clear remaining
+set +e
+"$GSD_STACK" clear >/dev/null 2>&1
+set -e
+
+# 28. After push 5, pop 2, clear: pending has 0, done has 5
+file_count=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+file_count=$((file_count + 0))
+done_count=$(ls -1 "$GSD_STACK_DIR/done/" 2>/dev/null | wc -l)
+done_count=$((done_count + 0))
+assert_eq "mixed ops: pending has 0 files" "0" "$file_count"
+assert_eq "mixed ops: done has 5 files" "5" "$done_count"
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
