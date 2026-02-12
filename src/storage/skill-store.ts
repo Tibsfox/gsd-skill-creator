@@ -1,5 +1,5 @@
 import matter from 'gray-matter';
-import { readFile, writeFile, mkdir, readdir, stat, unlink } from 'fs/promises';
+import { readFile, writeFile, mkdir, readdir, stat, unlink, rm, chmod } from 'fs/promises';
 import { join, dirname } from 'path';
 import { Skill, SkillMetadata, validateSkillMetadata } from '../types/skill.js';
 import { validateSkillNameStrict, suggestFixedName, validateReservedName } from '../validation/skill-validation.js';
@@ -11,6 +11,11 @@ import {
   type GsdSkillCreatorExtension,
 } from '../types/extensions.js';
 import type { OfficialSkillMetadata } from '../types/skill.js';
+import {
+  ContentDecomposer,
+  ReferenceLinker,
+  CircularReferenceError,
+} from '../disclosure/index.js';
 
 /**
  * Normalize metadata to official Claude Code format for writing to disk.
@@ -188,6 +193,165 @@ export class SkillStore {
     };
   }
 
+  /**
+   * Create a skill with progressive disclosure support.
+   *
+   * Runs ContentDecomposer on the body. If the skill exceeds the decomposition
+   * threshold (2000 words with multiple sections), writes SKILL.md + references/
+   * subdirectory + scripts/ subdirectory. Otherwise falls through to standard
+   * create() logic.
+   *
+   * After writing all files, validates references for circular dependencies.
+   */
+  async createWithDisclosure(
+    skillName: string,
+    metadata: SkillMetadata,
+    body: string,
+  ): Promise<Skill> {
+    const decomposer = new ContentDecomposer();
+    const result = decomposer.decompose(skillName, metadata, body);
+
+    // If not decomposed, fall through to standard create()
+    if (!result.decomposed) {
+      return this.create(skillName, metadata, body);
+    }
+
+    // Validate skill name (same as create())
+    const nameValidation = validateSkillNameStrict(skillName);
+    if (!nameValidation.valid) {
+      const suggestion = nameValidation.suggestion;
+      const errorMsg = suggestion
+        ? `Invalid skill name "${skillName}": ${nameValidation.errors.join('; ')}. Suggestion: "${suggestion}"`
+        : `Invalid skill name "${skillName}": ${nameValidation.errors.join('; ')}`;
+      throw new Error(errorMsg);
+    }
+
+    // Check for reserved names
+    const existingExtForCheck = getExtension(metadata);
+    if (!existingExtForCheck.forceOverrideReservedName) {
+      const reservedCheck = await validateReservedName(skillName);
+      if (!reservedCheck.valid) {
+        throw new Error(reservedCheck.error);
+      }
+    }
+
+    // Validate name matches metadata
+    if (metadata.name && metadata.name !== skillName) {
+      throw new Error(
+        `Skill name mismatch: skillName parameter "${skillName}" does not match metadata.name "${metadata.name}". ` +
+        `These must be identical.`
+      );
+    }
+
+    // Validate metadata
+    const errors = validateSkillMetadata(metadata);
+    if (errors.length > 0) {
+      throw new Error(`Invalid skill metadata: ${errors.join(', ')}`);
+    }
+
+    const now = new Date().toISOString();
+
+    // Build extension data
+    const existingExt = getExtension(metadata);
+    const fullExt: GsdSkillCreatorExtension = {
+      ...existingExt,
+      enabled: existingExt.enabled ?? true,
+      version: 1,
+      createdAt: now,
+      updatedAt: now,
+    };
+
+    const fullMetadata: SkillMetadata = {
+      name: metadata.name,
+      description: metadata.description,
+      'disable-model-invocation': metadata['disable-model-invocation'],
+      'user-invocable': metadata['user-invocable'],
+      'allowed-tools': metadata['allowed-tools'],
+      'argument-hint': metadata['argument-hint'],
+      model: metadata.model,
+      context: metadata.context,
+      agent: metadata.agent,
+      hooks: metadata.hooks,
+      license: metadata.license,
+      compatibility: metadata.compatibility,
+      metadata: {
+        extensions: {
+          'gsd-skill-creator': fullExt,
+        },
+      },
+    };
+
+    if (isLegacyFormat(metadata)) {
+      console.info(`Migrating skill "${skillName}" to new metadata format`);
+    }
+
+    const diskMetadata = normalizeForWrite(fullMetadata);
+    const skillDir = join(this.skillsDir, skillName);
+    const skillPath = join(skillDir, 'SKILL.md');
+
+    // Ensure skill directory exists
+    await mkdir(skillDir, { recursive: true });
+
+    // Write compact SKILL.md with decomposed content
+    const content = matter.stringify(result.skillMd, diskMetadata);
+
+    // Budget check on the compact SKILL.md (what Claude always loads)
+    if (!existingExtForCheck.forceOverrideBudget) {
+      const budgetValidator = BudgetValidator.load();
+      const budgetCheck = budgetValidator.checkSingleSkill(content.length);
+
+      if (budgetCheck.severity === 'error') {
+        console.warn(
+          `Warning: Skill "${skillName}" exceeds character budget ` +
+          `(${budgetCheck.charCount.toLocaleString()} / ${budgetCheck.budget.toLocaleString()} chars). ` +
+          `This skill may be hidden by Claude Code.`
+        );
+      }
+    }
+
+    await writeFile(skillPath, content, 'utf-8');
+
+    // Write reference files to references/ subdirectory
+    if (result.references.length > 0) {
+      const refsDir = join(skillDir, 'references');
+      await mkdir(refsDir, { recursive: true });
+
+      for (const ref of result.references) {
+        await writeFile(join(refsDir, ref.filename), ref.content, 'utf-8');
+      }
+    }
+
+    // Write script files to scripts/ subdirectory with executable permissions
+    if (result.scripts.length > 0) {
+      const scriptsDir = join(skillDir, 'scripts');
+      await mkdir(scriptsDir, { recursive: true });
+
+      for (const script of result.scripts) {
+        const scriptPath = join(scriptsDir, script.filename);
+        await writeFile(scriptPath, script.content, 'utf-8');
+        await chmod(scriptPath, 0o755);
+      }
+    }
+
+    // Validate references for circular dependencies
+    const linker = new ReferenceLinker();
+    const validation = await linker.validateSkillReferences(skillDir);
+
+    if (!validation.valid) {
+      // Circular references detected — should not happen with auto-generated
+      // content, but defends against future manual edits
+      throw new CircularReferenceError(
+        validation.errors.map(e => e.replace('Circular reference detected: ', '').split(' -> ')).flat()
+      );
+    }
+
+    return {
+      metadata: fullMetadata,
+      body: result.skillMd.trim(),
+      path: skillPath,
+    };
+  }
+
   // Read a skill by name
   async read(skillName: string): Promise<Skill> {
     const skillPath = join(this.skillsDir, skillName, 'SKILL.md');
@@ -280,7 +444,7 @@ export class SkillStore {
     };
   }
 
-  // Delete a skill
+  // Delete a skill (including references/ and scripts/ subdirectories)
   async delete(skillName: string): Promise<void> {
     const skillDir = join(this.skillsDir, skillName);
     const skillPath = join(skillDir, 'SKILL.md');
@@ -288,8 +452,10 @@ export class SkillStore {
     // Remove SKILL.md file
     await unlink(skillPath);
 
-    // Note: Directory left in place (may contain reference.md, scripts/)
-    // Full cleanup would require rmdir, but that's more destructive
+    // Clean up progressive disclosure subdirectories
+    // force: true ensures no error if subdirectories don't exist (backward compatible)
+    await rm(join(skillDir, 'references'), { recursive: true, force: true });
+    await rm(join(skillDir, 'scripts'), { recursive: true, force: true });
   }
 
   // List all skill names
