@@ -1151,6 +1151,14 @@ async function main() {
       break;
     }
 
+    case 'graph':
+    case 'gr': {
+      const { graphCommand } = await import('./cli/commands/graph.js');
+      const exitCode = await graphCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'mcp-server': {
       const exitCode = await mcpServerCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
@@ -1349,6 +1357,7 @@ Commands:
   benchmark, bench  Measure simulator accuracy vs real activation
   discover, disc    Discover skill candidates from session history
   quality, q        Show per-skill health scores (precision, success rate, efficiency)
+  graph, gr         Output Mermaid diagram of skill relationships
   export, ex        Export skill for other platforms (--portable, --platform)
   publish, pub      Package a skill as .tar.gz for distribution
   install, inst     Install a skill from local file or remote URL
