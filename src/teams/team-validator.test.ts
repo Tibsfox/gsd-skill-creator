@@ -362,9 +362,9 @@ describe('detectSkillConflicts', () => {
   beforeEach(() => {
     vi.resetAllMocks();
     mockDetect.mockReset();
-    MockConflictDetector.mockImplementation(() => ({
-      detect: mockDetect,
-    } as any));
+    MockConflictDetector.mockImplementation(function() {
+      this.detect = mockDetect;
+    });
   });
 
   it('returns empty conflicts when all members have different skills', async () => {
@@ -693,9 +693,9 @@ describe('validateTeamFull', () => {
     mockReaddirSync.mockReturnValue([]);
 
     // Default: conflict detector returns no conflicts
-    MockConflictDetector.mockImplementation(() => ({
-      detect: mockDetect,
-    } as any));
+    MockConflictDetector.mockImplementation(function() {
+      this.detect = mockDetect;
+    });
     mockDetect.mockResolvedValue({
       conflicts: [],
       skillCount: 0,

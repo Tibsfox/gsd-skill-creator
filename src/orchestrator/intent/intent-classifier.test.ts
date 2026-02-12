@@ -7,6 +7,13 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+
+// Mock embeddings to prevent model loading during tests
+vi.mock('../../embeddings/index.js', () => ({
+  getEmbeddingService: vi.fn(),
+  cosineSimilarity: vi.fn(),
+}));
+
 import { IntentClassifier } from './intent-classifier.js';
 import type { GsdCommandMetadata, DiscoveryResult } from '../discovery/types.js';
 import type { ProjectState } from '../state/types.js';
@@ -483,7 +490,7 @@ describe('IntentClassifier', () => {
   // --------------------------------------------------------------------------
 
   describe('extension-gated semantic activation', () => {
-    it('initialize() returns a Promise when called with enableSemantic option', async () => {
+    it('initialize() returns a Promise when called with enableSemantic option', async () => {  // timeout: 10000ms for model loading
       const semClassifier = new IntentClassifier({
         confidenceThreshold: 0.99,
         semanticThreshold: 0.7,

@@ -14,6 +14,7 @@
 import { getEmbeddingService, cosineSimilarity } from '../../embeddings/index.js';
 import type { GsdCommandMetadata } from '../discovery/types.js';
 import type { EmbeddingVector } from '../../types/embeddings.js';
+import type { EmbeddingService } from '../../embeddings/embedding-service.js';
 
 // ============================================================================
 // Types
@@ -47,7 +48,7 @@ export interface SemanticMatch {
 export class SemanticMatcher {
   private commandEmbeddings: Map<string, EmbeddingVector> = new Map();
   private commands: Map<string, GsdCommandMetadata> = new Map();
-  private embeddingService: any | null = null;
+  private embeddingService: EmbeddingService | null = null;
   private initialized: boolean = false;
 
   /**
