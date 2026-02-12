@@ -15,7 +15,7 @@
 import { existsSync, readdirSync } from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
-import type { TeamConfig, TeamMember, TeamTask } from '../types/team.js';
+import type { TeamConfig, TeamMember, TeamTask, InterTeamLink } from '../types/team.js';
 import { ConflictDetector } from '../conflicts/conflict-detector.js';
 import { getEmbeddingService, cosineSimilarity } from '../embeddings/index.js';
 import { validateTeamConfig, validateTopologyRules } from '../validation/team-validation.js';
@@ -130,6 +130,8 @@ export interface TeamFullValidationOptions {
   memberSkills?: Array<{ agentId: string; skills: Array<{ name: string; description: string }> }>;
   /** Member descriptions for role coherence. If omitted, VALID-04 is skipped. */
   memberDescriptions?: Array<{ agentId: string; agentType?: string; description: string }>;
+  /** Related teams for inter-team link validation. If omitted, inter-team validation is skipped. */
+  relatedTeams?: Array<{ name: string; outputTo?: InterTeamLink[]; inputFrom?: InterTeamLink[] }>;
 }
 
 /**
@@ -624,6 +626,14 @@ export async function validateTeamFull(
     warnings.push(
       `Tool "${overlap.tool}" is shared by members: ${overlap.members.join(', ')}`
     );
+  }
+
+  // ---- Inter-team link validation (optional) ----
+  if (options?.relatedTeams) {
+    const { validateInterTeamLinks } = await import('./inter-team-bridge.js');
+    const linkResult = validateInterTeamLinks(options.relatedTeams);
+    errors.push(...linkResult.errors);
+    warnings.push(...linkResult.warnings);
   }
 
   // ---- VALID-03: Skill conflicts (optional) ----
