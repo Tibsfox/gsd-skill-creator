@@ -2,6 +2,7 @@ import { SkillStore } from '../storage/skill-store.js';
 import { SkillMetadata, SkillTrigger } from '../types/skill.js';
 import { type GsdSkillCreatorExtension } from '../types/extensions.js';
 import { SkillCandidate, PatternEvidence } from '../types/detection.js';
+import { detectArguments, suggestArgumentHint, checkInjectionRisk } from '../validation/arguments-validation.js';
 
 export interface GeneratedSkill {
   name: string;
@@ -34,7 +35,22 @@ export class SkillGenerator {
       },
     };
 
-    const body = this.generateBody(candidate);
+    let body = this.generateBody(candidate);
+
+    // SPEC-02: Detect $ARGUMENTS and set argument-hint
+    const argDetection = detectArguments(body);
+    if (argDetection.found) {
+      const hint = suggestArgumentHint(body);
+      if (hint) {
+        metadata['argument-hint'] = hint;
+      }
+    }
+
+    // SPEC-07: Check for injection risk ($ARGUMENTS inside !`command`)
+    const injectionRisk = checkInjectionRisk(body);
+    if (injectionRisk.risk === 'high') {
+      body = `<!-- WARNING: This skill combines $ARGUMENTS with !command preprocessing. Ensure arguments are sanitized before use in shell context. -->\n${body}`;
+    }
 
     return { name, metadata, body };
   }

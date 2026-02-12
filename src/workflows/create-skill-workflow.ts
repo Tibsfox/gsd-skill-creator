@@ -5,6 +5,7 @@ import { SkillStore } from '../storage/skill-store.js';
 import { validateSkillInput, suggestFixedName, validateDescriptionQuality } from '../validation/skill-validation.js';
 import { ReservedNameValidator } from '../validation/reserved-names.js';
 import { BudgetValidator, formatBudgetDisplay } from '../validation/budget-validation.js';
+import { detectArguments, detectPreprocessing, checkInjectionRisk, suggestArgumentHint } from '../validation/arguments-validation.js';
 import type { SkillTrigger, SkillMetadata } from '../types/skill.js';
 import type { GsdSkillCreatorExtension, ForceOverrideReservedName, ForceOverrideBudget } from '../types/extensions.js';
 import type { SkillScope } from '../types/scope.js';
@@ -320,6 +321,49 @@ export async function createSkillWorkflow(
     return;
   }
 
+  // Step 4.1: Detect $ARGUMENTS and suggest argument-hint (SPEC-02)
+  let argumentHint: string | undefined;
+  const contentStr = content as string;
+  const argDetection = detectArguments(contentStr);
+
+  if (argDetection.found) {
+    const suggestedHint = suggestArgumentHint(contentStr);
+    const hintInput = await p.text({
+      message: 'Skill uses $ARGUMENTS. Add an argument hint for autocomplete?',
+      placeholder: suggestedHint ?? 'e.g., file-path or search-term',
+      initialValue: suggestedHint ?? '',
+    });
+
+    if (!p.isCancel(hintInput) && hintInput) {
+      argumentHint = hintInput as string;
+    }
+  }
+
+  // Step 4.2: Check for injection risk (SPEC-07)
+  const injectionRisk = checkInjectionRisk(contentStr);
+  if (injectionRisk.risk === 'high') {
+    p.log.error('');
+    p.log.error(pc.bold(pc.red('SECURITY WARNING: This skill uses $ARGUMENTS inside !command preprocessing.')));
+    p.log.error(pc.red('User-supplied arguments could execute arbitrary shell commands.'));
+    p.log.error(pc.red('Consider separating $ARGUMENTS from shell command context.'));
+    p.log.error('');
+  }
+
+  // Step 4.3: Detect preprocessing commands (SPEC-03)
+  const preprocessing = detectPreprocessing(contentStr);
+  if (preprocessing.found) {
+    p.log.info(`Detected preprocessing commands: ${preprocessing.commands.join(', ')}`);
+    p.log.message(pc.dim('These will run before Claude sees the skill content.'));
+
+    // Suggest compatibility field for required tools
+    const toolNames = preprocessing.commands
+      .map(cmd => cmd.split(/\s+/)[0])
+      .filter((v, i, a) => a.indexOf(v) === i); // deduplicate
+    if (toolNames.length > 0) {
+      p.log.message(pc.dim(`Consider adding compatibility: "Requires ${toolNames.join(', ')} CLI"`));
+    }
+  }
+
   // Step 4.5: Check single skill budget with actual content
   const skillContent = matter.stringify(content as string, {
     name,
@@ -413,6 +457,11 @@ export async function createSkillWorkflow(
         },
       },
     };
+
+    // Add argument-hint if detected (SPEC-02)
+    if (argumentHint) {
+      metadata['argument-hint'] = argumentHint;
+    }
 
     // Validate with Zod for safety
     validateSkillInput(metadata);
