@@ -1,6 +1,7 @@
 /**
  * Progressive disclosure module.
- * Content analysis, decomposition, and circular reference detection.
+ * Content analysis, decomposition, circular reference detection,
+ * disclosure-aware budget calculation, and compact generation.
  */
 
 export {
@@ -33,3 +34,17 @@ export type {
   CycleDetectionResult,
   ValidationResult,
 } from './reference-linker.js';
+
+export { DisclosureBudget } from './disclosure-budget.js';
+
+export type {
+  FileSizeInfo,
+  SkillSizeBreakdown,
+  DisclosureBudgetResult,
+} from './disclosure-budget.js';
+
+export { CompactGenerator } from './compact-generator.js';
+
+export type {
+  CompactSkillOutput,
+} from './compact-generator.js';
