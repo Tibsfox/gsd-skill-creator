@@ -2,6 +2,7 @@ import { appendFile, readFile, writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import type { SessionObservation } from '../types/observation.js';
 import { normalizeObservationTier } from '../types/observation.js';
+import { createChecksummedEntry, validateJsonlEntry, verifyChecksum } from '../validation/jsonl-safety.js';
 
 /** Filename for the ephemeral observation buffer */
 export const EPHEMERAL_FILENAME = '.ephemeral.jsonl';
@@ -25,6 +26,7 @@ export class EphemeralStore {
   /**
    * Append an observation to the ephemeral buffer.
    * Wraps in pattern envelope format for consistency with PatternStore.
+   * Entries are checksummed for tamper detection (INT-01).
    * Optional sessionId enables cross-session frequency tracking.
    */
   async append(observation: SessionObservation, sessionId?: string): Promise<void> {
@@ -33,16 +35,20 @@ export class EphemeralStore {
     const envelope = {
       timestamp: Date.now(),
       category: 'sessions' as const,
-      data: observation,
+      data: observation as unknown as Record<string, unknown>,
       ...(sessionId ? { session_id: sessionId } : {}),
     };
 
-    const line = JSON.stringify(envelope) + '\n';
+    // Wrap with checksum for tamper-evident storage
+    const checksummed = createChecksummedEntry(envelope);
+
+    const line = JSON.stringify(checksummed) + '\n';
     await appendFile(this.filePath, line, 'utf-8');
   }
 
   /**
    * Read all observations from the ephemeral buffer.
+   * Validates schema (INT-02) and verifies checksums (INT-01) on read.
    * Applies normalizeObservationTier() so old data without tier defaults to 'persistent'.
    * Returns empty array if file does not exist.
    */
@@ -61,8 +67,23 @@ export class EphemeralStore {
     const observations: SessionObservation[] = [];
 
     for (const line of lines) {
+      // Schema validation
+      const validation = validateJsonlEntry(line);
+      if (!validation.valid) {
+        continue; // Skip malformed entries
+      }
+
       try {
-        const envelope = JSON.parse(line);
+        const envelope = JSON.parse(line) as Record<string, unknown>;
+
+        // Checksum verification (only if entry has _checksum)
+        if (typeof envelope._checksum === 'string') {
+          const checksumResult = verifyChecksum(envelope);
+          if (!checksumResult.valid) {
+            continue; // Skip tampered entries
+          }
+        }
+
         const obs = normalizeObservationTier(envelope.data as SessionObservation);
         observations.push(obs);
       } catch {
@@ -109,8 +130,23 @@ export class EphemeralStore {
     const patternSessions = new Map<string, Set<string>>();
 
     for (const line of lines) {
+      // Schema validation
+      const validation = validateJsonlEntry(line);
+      if (!validation.valid) {
+        continue; // Skip malformed entries
+      }
+
       try {
-        const envelope = JSON.parse(line);
+        const envelope = JSON.parse(line) as Record<string, unknown>;
+
+        // Checksum verification (only if entry has _checksum)
+        if (typeof envelope._checksum === 'string') {
+          const checksumResult = verifyChecksum(envelope);
+          if (!checksumResult.valid) {
+            continue; // Skip tampered entries
+          }
+        }
+
         const sessionId = envelope.session_id as string | undefined;
         if (!sessionId) continue;
 
