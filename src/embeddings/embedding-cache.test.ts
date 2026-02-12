@@ -301,4 +301,102 @@ describe('EmbeddingCache', () => {
       expect(cache.getStaleEntries(0)).toHaveLength(1);
     });
   });
+
+  describe('Version drift detection', () => {
+    it('getWithVersionInfo() returns embedding with modelVersion metadata', () => {
+      const cache = new EmbeddingCache('v1', testCachePath);
+      cache.set('skill-a', 'content', sampleEmbedding);
+
+      const result = cache.getWithVersionInfo('skill-a', 'content');
+      expect(result).not.toBeNull();
+      expect(result!.embedding).toEqual(sampleEmbedding);
+      expect(result!.modelVersion).toBe('v1');
+      expect(typeof result!.contentHash).toBe('string');
+      expect(result!.contentHash.length).toBeGreaterThan(0);
+    });
+
+    it('getWithVersionInfo() returns null when entry does not exist', () => {
+      const cache = new EmbeddingCache('v1', testCachePath);
+
+      const result = cache.getWithVersionInfo('nonexistent', 'content');
+      expect(result).toBeNull();
+    });
+
+    it('getWithVersionInfo() returns entry even when version differs (unlike get())', async () => {
+      // Create cache with v1 and set entry
+      const cacheV1 = new EmbeddingCache('v1', testCachePath);
+      cacheV1.set('skill-a', 'content', sampleEmbedding);
+      await cacheV1.save();
+
+      // Load with v2
+      const cacheV2 = new EmbeddingCache('v2', testCachePath);
+      await cacheV2.load();
+
+      // get() returns null on version mismatch (existing behavior)
+      expect(cacheV2.get('skill-a', 'content')).toBeNull();
+
+      // getWithVersionInfo() returns the entry WITH its v1 modelVersion
+      const result = cacheV2.getWithVersionInfo('skill-a', 'content');
+      expect(result).not.toBeNull();
+      expect(result!.embedding).toEqual(sampleEmbedding);
+      expect(result!.modelVersion).toBe('v1');
+    });
+
+    it('getVersionInfo() returns current cache model version', () => {
+      const cache = new EmbeddingCache('model-v1.5', testCachePath);
+      expect(cache.getVersionInfo()).toBe('model-v1.5');
+    });
+
+    it('hasVersionDrift() detects when entry version != cache version', async () => {
+      // Create cache with v1 and set entry
+      const cacheV1 = new EmbeddingCache('v1', testCachePath);
+      cacheV1.set('skill-a', 'content', sampleEmbedding);
+      await cacheV1.save();
+
+      // Load with v2
+      const cacheV2 = new EmbeddingCache('v2', testCachePath);
+      await cacheV2.load();
+
+      // Entry was created with v1 but cache is now v2 — drift detected
+      expect(cacheV2.hasVersionDrift('skill-a', 'content')).toBe(true);
+    });
+
+    it('hasVersionDrift() returns false when versions match', () => {
+      const cache = new EmbeddingCache('v1', testCachePath);
+      cache.set('skill-a', 'content', sampleEmbedding);
+
+      expect(cache.hasVersionDrift('skill-a', 'content')).toBe(false);
+    });
+
+    it('hasVersionDrift() returns false when entry does not exist', () => {
+      const cache = new EmbeddingCache('v1', testCachePath);
+
+      expect(cache.hasVersionDrift('nonexistent', 'content')).toBe(false);
+    });
+
+    it('getStaleVersionEntries() returns entries where modelVersion differs from current', async () => {
+      // Create cache with v1 and add 3 entries
+      const cache = new EmbeddingCache('v1', testCachePath);
+      cache.set('skill-a', 'content-a', sampleEmbedding);
+      cache.set('skill-b', 'content-b', sampleEmbedding);
+      cache.set('skill-c', 'content-c', sampleEmbedding);
+      await cache.save();
+
+      // Read the cache file and manually modify one entry's modelVersion to simulate legacy data
+      const raw = JSON.parse(await readFile(testCachePath, 'utf-8'));
+      const entries = Object.entries(raw.entries);
+      // Find the first entry key and change its modelVersion to 'v0'
+      const firstKey = entries[0][0] as string;
+      (raw.entries[firstKey] as { modelVersion: string }).modelVersion = 'v0';
+      await writeFile(testCachePath, JSON.stringify(raw, null, 2), 'utf-8');
+
+      // Reload cache with v1 — the v0 entry should be detected as stale
+      const cache2 = new EmbeddingCache('v1', testCachePath);
+      await cache2.load();
+
+      const stale = cache2.getStaleVersionEntries();
+      expect(stale).toHaveLength(1);
+      expect(stale[0]).toBe(firstKey);
+    });
+  });
 });
