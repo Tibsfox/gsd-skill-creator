@@ -1120,6 +1120,14 @@ async function main() {
       break;
     }
 
+    case 'quality':
+    case 'q': {
+      const { qualityCommand } = await import('./cli/commands/quality.js');
+      const exitCode = await qualityCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'export':
     case 'ex': {
       const { exportCommand } = await import('./cli/commands/export.js');
@@ -1273,6 +1281,7 @@ Commands:
   calibrate, cal    Optimize activation threshold from calibration data
   benchmark, bench  Measure simulator accuracy vs real activation
   discover, disc    Discover skill candidates from session history
+  quality, q        Show per-skill health scores (precision, success rate, efficiency)
   export, ex        Export skill for other platforms (--portable, --platform)
   orchestrator, orch  GSD orchestrator (discover, state, classify, lifecycle)
   workflow, wf      Manage skill workflows (create, run, list, status)
