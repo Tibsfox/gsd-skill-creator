@@ -337,6 +337,69 @@ function updateGitignore() {
   stats.updated++;
 }
 
+// --- Git hook install ---
+function installGitHook() {
+  const sourcePath = path.join(sourceDir, 'hooks', 'post-commit');
+  const targetPath = path.join(projectRoot, '.git', 'hooks', 'post-commit');
+
+  // Read source hook
+  const sourceContent = readFileSafe(sourcePath);
+  if (sourceContent === null) {
+    warn('Hook source missing: hooks/post-commit');
+    return;
+  }
+
+  // Check for .git directory
+  const gitDir = path.join(projectRoot, '.git');
+  if (!fs.existsSync(gitDir)) {
+    warn('Not a git repository (.git/ not found)');
+    return;
+  }
+
+  // Ensure .git/hooks/ exists
+  const hooksDir = path.join(gitDir, 'hooks');
+  if (!fs.existsSync(hooksDir)) {
+    if (!dryRun) {
+      fs.mkdirSync(hooksDir, { recursive: true });
+    }
+  }
+
+  // Check existing target
+  const targetContent = readFileSafe(targetPath);
+
+  if (targetContent !== null) {
+    // Target exists — compare
+    if (sha256(sourceContent) === sha256(targetContent)) {
+      log('  = current:   .git/hooks/post-commit');
+      stats.current++;
+      return;
+    }
+
+    // Different content — backup and update
+    const timestamp = Date.now();
+    const backupPath = targetPath + '.bak.' + timestamp;
+    if (!dryRun) {
+      fs.writeFileSync(backupPath, targetContent);
+    }
+    log(`  ~ backup:    .git/hooks/post-commit.bak.${timestamp}`);
+
+    if (!dryRun) {
+      fs.writeFileSync(targetPath, sourceContent);
+      fs.chmodSync(targetPath, 0o755);
+    }
+    log('  ↻ updated:   .git/hooks/post-commit');
+    stats.updated++;
+  } else {
+    // Target does not exist — fresh install
+    if (!dryRun) {
+      fs.writeFileSync(targetPath, sourceContent);
+      fs.chmodSync(targetPath, 0o755);
+    }
+    log('  + installed: .git/hooks/post-commit');
+    stats.installed++;
+  }
+}
+
 // --- Main ---
 function main() {
   // Verify .claude/ exists
@@ -388,6 +451,22 @@ function main() {
     installSettings(manifest.files.settings);
     log('');
   }
+
+  // Install integration config
+  log('Integration:');
+  installIntegrationConfig();
+  log('');
+
+  // Install patterns directory
+  log('Patterns:');
+  installPatternsDir();
+  updateGitignore();
+  log('');
+
+  // Install git hook
+  log('Git hooks:');
+  installGitHook();
+  log('');
 
   // Summary
   const total = stats.installed + stats.updated + stats.current + stats.warnings;
