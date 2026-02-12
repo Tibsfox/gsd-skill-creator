@@ -48,3 +48,16 @@ export type {
   CopperParseResult,
   CopperParseError,
 } from './parser.js';
+
+// Lifecycle Sync
+export { LifecycleSync } from './lifecycle-sync.js';
+
+export type { LifecycleEvent } from './lifecycle-sync.js';
+
+// Executor
+export { CopperExecutor } from './executor.js';
+
+export type {
+  CopperExecutorConfig,
+  CopperExecutionResult,
+} from './executor.js';
