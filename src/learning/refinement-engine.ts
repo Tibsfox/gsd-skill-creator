@@ -1,6 +1,7 @@
 import { diffWords } from 'diff';
 import { FeedbackStore } from './feedback-store.js';
 import { SkillStore } from '../storage/skill-store.js';
+import { DriftTracker } from './drift-tracker.js';
 import {
   BoundedLearningConfig,
   DEFAULT_BOUNDED_CONFIG,
@@ -22,15 +23,18 @@ export class RefinementEngine {
   private feedbackStore: FeedbackStore;
   private skillStore: SkillStore;
   private config: BoundedLearningConfig;
+  private driftTracker?: DriftTracker;
 
   constructor(
     feedbackStore: FeedbackStore,
     skillStore: SkillStore,
-    config?: Partial<BoundedLearningConfig>
+    config?: Partial<BoundedLearningConfig>,
+    driftTracker?: DriftTracker
   ) {
     this.feedbackStore = feedbackStore;
     this.skillStore = skillStore;
     this.config = { ...DEFAULT_BOUNDED_CONFIG, ...config };
+    this.driftTracker = driftTracker;
   }
 
   /**
@@ -198,6 +202,17 @@ export class RefinementEngine {
       return { success: false, error: 'Skill not found' };
     }
 
+    // Check cumulative drift before applying changes (LRN-01/LRN-02)
+    if (this.driftTracker) {
+      const driftResult = await this.driftTracker.checkThreshold(skillName);
+      if (driftResult.thresholdExceeded) {
+        return {
+          success: false,
+          error: `Cumulative drift (${driftResult.cumulativeDriftPercent}%) exceeds threshold (${driftResult.threshold}%). Automatic refinement halted.`,
+        };
+      }
+    }
+
     // Validate all changes are within bounds
     for (const change of suggestion.suggestedChanges) {
       const validation = this.validateChange(change.original, change.suggested);
@@ -214,6 +229,17 @@ export class RefinementEngine {
     for (const change of suggestion.suggestedChanges) {
       if (change.section === 'body' && change.original) {
         newBody = newBody.replace(change.original, change.suggested);
+      }
+    }
+
+    // Check projected drift after applying changes (LRN-02)
+    if (this.driftTracker) {
+      const projectedDrift = await this.driftTracker.computeDriftWithContent(skillName, newBody);
+      if (projectedDrift.thresholdExceeded) {
+        return {
+          success: false,
+          error: `Projected drift (${projectedDrift.cumulativeDriftPercent}%) would exceed threshold (${projectedDrift.threshold}%). Refinement rejected.`,
+        };
       }
     }
 
