@@ -247,4 +247,68 @@ describe('PromotionEvaluator', () => {
   it('exports DEFAULT_PROMOTION_CRITERIA with minScore 0.3', () => {
     expect(DEFAULT_PROMOTION_CRITERIA.minScore).toBe(0.3);
   });
+
+  describe('cross-session scoring', () => {
+    it('boosts score for observation with squashedFrom >= 2', () => {
+      const obsSquashed = makeObservation({ squashedFrom: 3 });
+      const obsNormal = makeObservation({ squashedFrom: 1 });
+
+      const resultSquashed = evaluator.evaluate(obsSquashed);
+      const resultNormal = evaluator.evaluate(obsNormal);
+
+      expect(resultSquashed.score).toBeGreaterThan(resultNormal.score);
+      expect(resultSquashed.reasons.some(r => r.includes('squashed'))).toBe(true);
+    });
+
+    it('adds 0.3 bonus for crossSessionCount >= 2', () => {
+      const obs = makeObservation();
+      const resultWithCross = evaluator.evaluate(obs, { crossSessionCount: 3 });
+      const resultWithout = evaluator.evaluate(obs);
+
+      expect(resultWithCross.score).toBe(resultWithout.score + 0.3);
+      expect(resultWithCross.reasons.some(r => r.includes('3 sessions'))).toBe(true);
+    });
+
+    it('adds no bonus for crossSessionCount = 1', () => {
+      const obs = makeObservation();
+      const resultWith1 = evaluator.evaluate(obs, { crossSessionCount: 1 });
+      const resultWithout = evaluator.evaluate(obs);
+
+      expect(resultWith1.score).toBe(resultWithout.score);
+    });
+
+    it('cross-session bonus can push observation over promotion threshold', () => {
+      // Short duration gives 0.1, below 0.3 threshold
+      const obs = makeObservation({ durationMinutes: 3 });
+
+      const resultWithout = evaluator.evaluate(obs);
+      expect(resultWithout.promote).toBe(false);
+      expect(resultWithout.score).toBeLessThan(0.3);
+
+      const resultWith = evaluator.evaluate(obs, { crossSessionCount: 2 });
+      expect(resultWith.promote).toBe(true);
+    });
+
+    it('evaluate() without crossSessionCount (backward compat) works same as before', () => {
+      const obs = makeObservation({
+        durationMinutes: 10,
+        metrics: {
+          userMessages: 6,
+          assistantMessages: 5,
+          toolCalls: 3,
+          uniqueFilesRead: 4,
+          uniqueFilesWritten: 2,
+          uniqueCommandsRun: 1,
+        },
+        topCommands: ['npm test'],
+      });
+
+      const result = evaluator.evaluate(obs);
+      // Same as existing behavior: 0.3 + 0.2 + 0.2 + 0.15 + 0.15 = 1.0
+      expect(result.score).toBe(1.0);
+      expect(result.promote).toBe(true);
+      // Should NOT contain any cross-session reason
+      expect(result.reasons.some(r => r.includes('session'))).toBe(false);
+    });
+  });
 });
