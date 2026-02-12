@@ -68,6 +68,11 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **28. Session Continuity** | Save/restore/handoff with warm-start context and cross-session ephemeral promotion (v1.9) |
 | **29. Agentic RAG** | Adaptive TF-IDF/embedding routing, corrective refinement, cross-project skill discovery (v1.9) |
 | **30. Quality of Life** | Description quality scoring, budget dashboard, Mermaid dependency graphs, GSD command injection (v1.9) |
+| **31. Security Hardening** | Path traversal prevention, YAML safe deserialization, JSONL integrity with checksums, secret redaction, dangerous command deny list (v1.10) |
+| **32. Data Integrity** | SHA-256 checksums on JSONL entries, schema validation, observation rate limiting, anomaly detection, compaction and purge (v1.10) |
+| **33. Learning Safety** | Cumulative drift tracking with 60% threshold, contradictory feedback detection, skill audit CLI (v1.10) |
+| **34. Access Control** | File integrity monitoring, audit logging, inheritance depth limits, impact analysis, concurrency locks, operation cooldowns (v1.10) |
+| **35. Operational Safety** | Hook error boundaries, hook safety validation, orchestrator confirmation gates, classification audit logging (v1.10) |
 
 ### Version History
 
@@ -84,6 +89,7 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.8** | Capability-Aware Planning + Token Efficiency: skill pipeline architecture, per-agent token budgets, capability manifests, phase capability declarations, skill injection, cache-aware ordering, research compression, model-aware activation, collector agents, parallelization advisor |
 | **v1.8.1** | Audit Remediation: test infrastructure fixes, type safety improvements, CLI validation, error handling, dependency validation, security hardening, code refactoring, cache invalidation |
 | **v1.9** | Ecosystem Alignment & Advanced Orchestration: spec-aligned skill generation, progressive disclosure, 5-platform portability, evaluator-optimizer with A/B testing, MCP-based distribution, router/map-reduce topologies, session save/restore/handoff, agentic RAG with corrective refinement, quality-of-life CLI improvements |
+| **v1.10** | Security Hardening: path traversal prevention, YAML safe deserialization, JSONL integrity (checksums, rate limiting, anomaly detection, compaction), discovery safety (secret redaction, allowlist/blocklist, deny list), learning safety (drift tracking, contradiction detection), team message sanitization, config validation, inheritance chain validation, file integrity monitoring, hook error boundaries, SECURITY.md, CI pipeline |
 
 ---
 
@@ -207,6 +213,7 @@ skill-creator help
 | [GSD Teams Guide](docs/GSD-TEAMS.md) | Teams vs subagents for GSD workflows |
 | [Skills vs Agents vs Teams](docs/COMPARISON.md) | Choosing the right abstraction level |
 | [Team Creation Tutorial](docs/tutorials/team-creation.md) | End-to-end team creation walkthrough |
+| [SECURITY.md](SECURITY.md) | Threat model, vulnerability reporting, security boundaries |
 | [Examples](examples/) | 34 ready-to-use skills, agents, and teams across 26 domains |
 
 ---
@@ -312,6 +319,8 @@ skill-creator team status my-team                  # Show details
 skill-creator discover                      # Full pipeline: scan → extract → rank → select → draft
 skill-creator discover --exclude my-project  # Skip specific project
 skill-creator discover --rescan             # Force full rescan (ignore watermarks)
+skill-creator discover --dry-run            # Preview what would be scanned (v1.10)
+skill-creator discover --allow my-project   # Explicitly allow a project (v1.10)
 ```
 
 ### Orchestrator
@@ -507,6 +516,27 @@ skill-creator session handoff                     # Generate handoff document
 **Examples:**
 ```bash
 skill-creator team estimate my-team           # Estimate cost for team execution
+```
+
+### Security & Maintenance (v1.10)
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `purge` | `pg` | Compact and clean JSONL observation files with retention controls |
+| `audit <skill>` | `au` | Show cumulative drift, version history, and contradiction analysis for a skill |
+| `impact <skill>` | `imp` | Show direct and transitive dependents affected by changing a skill |
+| `config validate` | `cfg v` | Validate configuration values against documented ranges and security implications |
+
+**Examples:**
+```bash
+skill-creator purge                        # Compact all JSONL files (remove expired entries)
+skill-creator purge --dry-run              # Preview what would be cleaned
+skill-creator purge --max-age 60           # Custom retention period (days)
+skill-creator audit my-skill               # Show drift %, contradictions, version diffs
+skill-creator impact my-skill              # Show downstream skills affected by changes
+skill-creator impact my-skill --json       # Machine-readable output
+skill-creator config validate              # Check all config for issues
+skill-creator config validate --json       # JSON output for automation
 ```
 
 ### Quality & Validation
@@ -902,6 +932,8 @@ Skill refinement has strict guardrails to prevent runaway changes:
 | **Max change** | 20% | Prevent drastic alterations in a single refinement |
 | **Cooldown** | 7 days | Allow observation of changes before next refinement |
 | **User confirm** | Always | Human in the loop for every change |
+| **Max cumulative drift** | 60% | Halt auto-refinements when skill has drifted too far from original (v1.10) |
+| **Contradiction detection** | Auto | Flag contradictory feedback corrections before applying (v1.10) |
 
 ### Refinement Workflow
 
@@ -1508,12 +1540,24 @@ src/
 │   ├── collector-agent-generator.ts # Read-only agent generation
 │   └── parallelization-advisor.ts   # Wave-based execution planning
 │
-├── validation/        # Spec alignment & validation (v1.9)
+├── validation/        # Spec alignment & validation (v1.9+)
 │   ├── skill-validation.ts    # Full skill spec validation
 │   ├── arguments-validation.ts # $ARGUMENTS injection & shell safety
 │   ├── context-fork-detection.ts # context:fork pattern detection
 │   ├── description-quality.ts # Description quality scoring
-│   └── team-validation.ts     # Team config validation
+│   ├── team-validation.ts     # Team config validation
+│   ├── path-safety.ts         # Path traversal prevention (v1.10)
+│   ├── yaml-safety.ts         # Safe YAML deserialization (v1.10)
+│   └── generation-safety.ts   # Dangerous command deny list, allowed-tools inference (v1.10)
+│
+├── safety/            # Security & integrity (v1.10)
+│   ├── jsonl-safety.ts        # SHA-256 checksums, schema validation
+│   ├── rate-limiter.ts        # Observation rate limiting
+│   ├── jsonl-compactor.ts     # JSONL compaction with expiry
+│   ├── integrity-monitor.ts   # File integrity monitoring (SHA-256 snapshots)
+│   ├── audit-logger.ts        # Append-only audit logging
+│   ├── file-lock.ts           # O_EXCL atomic file locking
+│   └── operation-cooldown.ts  # Per-operation cooldown enforcement
 │
 ├── disclosure/        # Progressive disclosure (v1.9)
 │   ├── content-analyzer.ts    # Skill size & complexity analysis
@@ -1544,7 +1588,11 @@ src/
 │   ├── corrective-rag.ts      # Corrective refinement loop
 │   └── cross-project-index.ts # Cross-project skill discovery
 │
-├── cli/               # CLI command modules (v1.9)
+├── hooks/             # Hook safety (v1.10)
+│   ├── hook-error-boundary.ts # Error boundaries with timeout
+│   └── hook-validator.ts      # Hook safety validation
+│
+├── cli/               # CLI command modules (v1.9+)
 │   └── commands/              # Individual command implementations
 │
 ├── cli.ts             # CLI entry point
@@ -1997,6 +2045,90 @@ src/
 | QOL-02 | Enhanced status command with budget breakdown and trends | ✓ |
 | QOL-03 | Mermaid dependency graph generation | ✓ |
 | QOL-04 | GSD command reference injection in generated skills | ✓ |
+
+### v1.10 Security Hardening Requirements (39 total)
+
+#### Input Validation & Sanitization (VAL-01 to VAL-08)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| VAL-01 | Skill names validated against safe pattern, reject path traversal sequences | ✓ |
+| VAL-02 | Resolved paths verified against expected base directory (defense-in-depth) | ✓ |
+| VAL-03 | YAML frontmatter parsing uses safe mode (no dangerous tags) | ✓ |
+| VAL-04 | All parsed YAML validated against Zod schemas before use | ✓ |
+| VAL-05 | Team inbox messages sanitized against prompt injection | ✓ |
+| VAL-06 | Team messages have content-length limits | ✓ |
+| VAL-07 | Configuration values validated against documented ranges | ✓ |
+| VAL-08 | `config validate` CLI command for security audit | ✓ |
+
+#### Data Integrity & Retention (INT-01 to INT-06)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| INT-01 | SHA-256 checksums on JSONL entries for tamper detection | ✓ |
+| INT-02 | Schema validation on JSONL read with malformed entry rejection | ✓ |
+| INT-03 | Observation rate limits (per-session and per-hour caps) | ✓ |
+| INT-04 | Anomaly detection for duplicate timestamps and impossible durations | ✓ |
+| INT-05 | Physical compaction removing expired entries | ✓ |
+| INT-06 | `purge` CLI command for manual JSONL cleanup | ✓ |
+
+#### Information Security (SEC-01 to SEC-07)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| SEC-01 | Discovery allowlist/blocklist for project access control | ✓ |
+| SEC-02 | Secret pattern filtering (API keys, tokens, private keys) | ✓ |
+| SEC-03 | Structural-only pattern extraction (no raw content) | ✓ |
+| SEC-04 | Discovery dry-run mode | ✓ |
+| SEC-05 | Dangerous command deny list for generated skills | ✓ |
+| SEC-06 | Script wrapping with shebangs and error handling | ✓ |
+| SEC-07 | Allowed-tools restrictions proportional to scope | ✓ |
+
+#### Learning Safety (LRN-01 to LRN-04)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| LRN-01 | Cumulative drift tracking over full skill lifetime | ✓ |
+| LRN-02 | 60% total drift threshold halts automatic refinements | ✓ |
+| LRN-03 | Contradictory feedback detection and flagging | ✓ |
+| LRN-04 | `audit` CLI command for skill evolution inspection | ✓ |
+
+#### Access Control & Monitoring (ACL-01 to ACL-08)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| ACL-01 | File integrity monitoring for unexpected modifications | ✓ |
+| ACL-02 | Modification audit logging with timestamps | ✓ |
+| ACL-03 | Inheritance circular dependency detection | ✓ |
+| ACL-04 | Inheritance chain display in list/status | ✓ |
+| ACL-05 | `impact` CLI command for dependency analysis | ✓ |
+| ACL-06 | Inheritance depth limit (max 3 levels) | ✓ |
+| ACL-07 | File-based concurrency locks | ✓ |
+| ACL-08 | Operation cooldowns for expensive operations | ✓ |
+
+#### Documentation & Process (DOC-01 to DOC-06)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| DOC-01 | SECURITY.md with threat model and vulnerability reporting | ✓ |
+| DOC-02 | npm audit integrated in CI pipeline | ✓ |
+| DOC-03 | Hook error boundaries (never crash Claude Code session) | ✓ |
+| DOC-04 | Hook safety validation at registration | ✓ |
+| DOC-05 | Orchestrator confirmation gates for destructive operations | ✓ |
+| DOC-06 | Classification audit logging for routing decisions | ✓ |
+
+---
+
+## Security
+
+See [SECURITY.md](SECURITY.md) for:
+- Vulnerability reporting instructions
+- Threat model covering 6 security domains
+- Security boundaries (in-scope vs out-of-scope)
+- Implemented controls reference
+
+**Key security features (v1.10):**
+- All filesystem paths validated against traversal attacks
+- YAML parsing hardened against deserialization exploits
+- JSONL entries checksummed for tamper detection
+- Secret patterns redacted from discovery results
+- Generated skills screened against dangerous command deny list
+- Learning loop bounded by cumulative drift threshold
+- File-based locks prevent concurrent state corruption
 
 ---
 
