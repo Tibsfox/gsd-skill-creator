@@ -110,6 +110,11 @@
         "description": "GSD trace command"
       },
       {
+        "source": "commands/gsd-dashboard.md",
+        "target": ".claude/commands/gsd-dashboard.md",
+        "description": "GSD Dashboard generator command"
+      },
+      {
         "source": "hooks/gsd-inject-snapshot.js",
         "target": ".claude/hooks/gsd-inject-snapshot.js",
         "description": "Session start: inject latest snapshot"
