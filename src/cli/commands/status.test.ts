@@ -125,10 +125,12 @@ const mockSkillStoreList = vi.fn().mockResolvedValue([]);
 const mockSkillStoreRead = vi.fn().mockResolvedValue(null);
 
 vi.mock('../../storage/skill-store.js', () => ({
-  SkillStore: vi.fn().mockImplementation(() => ({
-    list: mockSkillStoreList,
-    read: mockSkillStoreRead,
-  })),
+  SkillStore: function SkillStore() {
+    return {
+      list: mockSkillStoreList,
+      read: mockSkillStoreRead,
+    };
+  },
 }));
 
 // Capture console.log output
