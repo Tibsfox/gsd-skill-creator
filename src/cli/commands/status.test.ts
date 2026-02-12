@@ -39,21 +39,28 @@ vi.mock('picocolors', () => ({
   },
 }));
 
+// Mock fs/promises stat to control disclosure directory checks
+vi.mock('fs/promises', () => ({
+  stat: vi.fn().mockRejectedValue(new Error('ENOENT')),
+}));
+
+const mockCheckCumulative = vi.fn().mockResolvedValue({
+  totalChars: 8000,
+  budget: 15500,
+  usagePercent: 51.6,
+  severity: 'ok' as const,
+  skills: [
+    { name: 'git-commit', descriptionChars: 50, bodyChars: 3500, totalChars: 3800, path: '/skills/git-commit/SKILL.md' },
+    { name: 'test-runner', descriptionChars: 40, bodyChars: 2200, totalChars: 2500, path: '/skills/test-runner/SKILL.md' },
+    { name: 'deploy', descriptionChars: 30, bodyChars: 1700, totalChars: 1700, path: '/skills/deploy/SKILL.md' },
+  ],
+  hiddenCount: 0,
+});
+
 vi.mock('../../validation/budget-validation.js', () => ({
   BudgetValidator: {
     load: vi.fn(() => ({
-      checkCumulative: vi.fn().mockResolvedValue({
-        totalChars: 8000,
-        budget: 15500,
-        usagePercent: 51.6,
-        severity: 'ok' as const,
-        skills: [
-          { name: 'git-commit', descriptionChars: 50, bodyChars: 3500, totalChars: 3800, path: '/skills/git-commit/SKILL.md' },
-          { name: 'test-runner', descriptionChars: 40, bodyChars: 2200, totalChars: 2500, path: '/skills/test-runner/SKILL.md' },
-          { name: 'deploy', descriptionChars: 30, bodyChars: 1700, totalChars: 1700, path: '/skills/deploy/SKILL.md' },
-        ],
-        hiddenCount: 0,
-      }),
+      checkCumulative: mockCheckCumulative,
       getBudget: vi.fn().mockReturnValue(15000),
       getCumulativeBudget: vi.fn().mockReturnValue(15500),
     })),
@@ -65,26 +72,41 @@ vi.mock('../../validation/budget-validation.js', () => ({
   }),
 }));
 
-vi.mock('../../disclosure/disclosure-budget.js', () => ({
-  DisclosureBudget: vi.fn().mockImplementation(() => ({
-    calculateBreakdown: vi.fn().mockResolvedValue({
-      skillMdChars: 3000,
-      skillMdWords: 500,
-      references: [{ filename: 'patterns.md', chars: 800, words: 100, path: 'references/patterns.md' }],
-      scripts: [],
-      totalChars: 3800,
-      alwaysLoadedChars: 3000,
-      conditionalChars: 800,
-    }),
-  })),
-}));
+vi.mock('../../disclosure/disclosure-budget.js', () => {
+  return {
+    DisclosureBudget: function DisclosureBudget() {
+      return {
+        calculateBreakdown: vi.fn().mockResolvedValue({
+          skillMdChars: 3000,
+          skillMdWords: 500,
+          references: [{ filename: 'patterns.md', chars: 800, words: 100, path: 'references/patterns.md' }],
+          scripts: [],
+          totalChars: 3800,
+          alwaysLoadedChars: 3000,
+          conditionalChars: 800,
+        }),
+      };
+    },
+  };
+});
 
-vi.mock('../../storage/budget-history.js', () => ({
-  BudgetHistory: vi.fn().mockImplementation(() => ({
-    read: vi.fn().mockResolvedValue([]),
-    append: vi.fn().mockResolvedValue(undefined),
-  })),
-}));
+const mockRead = vi.fn().mockResolvedValue([]);
+const mockAppend = vi.fn().mockResolvedValue(undefined);
+
+vi.mock('../../storage/budget-history.js', () => {
+  return {
+    BudgetHistory: function BudgetHistory() {
+      return {
+        read: mockRead,
+        append: mockAppend,
+      };
+    },
+  };
+});
+
+// Add static getTrend to the mock
+import { BudgetHistory } from '../../storage/budget-history.js';
+(BudgetHistory as any).getTrend = vi.fn().mockReturnValue(null);
 
 vi.mock('../../index.js', () => ({
   createApplicationContext: vi.fn(() => ({
@@ -107,11 +129,27 @@ beforeEach(() => {
   console.log = vi.fn((...args: unknown[]) => {
     consoleOutput.push(args.map(String).join(' '));
   });
+  vi.clearAllMocks();
+  // Reset default mock behaviors after clearAllMocks
+  mockCheckCumulative.mockResolvedValue({
+    totalChars: 8000,
+    budget: 15500,
+    usagePercent: 51.6,
+    severity: 'ok' as const,
+    skills: [
+      { name: 'git-commit', descriptionChars: 50, bodyChars: 3500, totalChars: 3800, path: '/skills/git-commit/SKILL.md' },
+      { name: 'test-runner', descriptionChars: 40, bodyChars: 2200, totalChars: 2500, path: '/skills/test-runner/SKILL.md' },
+      { name: 'deploy', descriptionChars: 30, bodyChars: 1700, totalChars: 1700, path: '/skills/deploy/SKILL.md' },
+    ],
+    hiddenCount: 0,
+  });
+  mockRead.mockResolvedValue([]);
+  mockAppend.mockResolvedValue(undefined);
+  (BudgetHistory as any).getTrend = vi.fn().mockReturnValue(null);
 });
 
 afterEach(() => {
   console.log = originalLog;
-  vi.restoreAllMocks();
 });
 
 import { statusCommand } from './status.js';
@@ -142,19 +180,14 @@ describe('statusCommand', () => {
 
   it('should show "No skills found" when no skills exist', async () => {
     // Override mock for this test
-    const { BudgetValidator } = await import('../../validation/budget-validation.js');
-    vi.mocked(BudgetValidator.load).mockReturnValue({
-      checkCumulative: vi.fn().mockResolvedValue({
-        totalChars: 0,
-        budget: 15500,
-        usagePercent: 0,
-        severity: 'ok' as const,
-        skills: [],
-        hiddenCount: 0,
-      }),
-      getBudget: vi.fn().mockReturnValue(15000),
-      getCumulativeBudget: vi.fn().mockReturnValue(15500),
-    } as any);
+    mockCheckCumulative.mockResolvedValue({
+      totalChars: 0,
+      budget: 15500,
+      usagePercent: 0,
+      severity: 'ok' as const,
+      skills: [],
+      hiddenCount: 0,
+    });
 
     const exitCode = await statusCommand([]);
 
@@ -164,7 +197,7 @@ describe('statusCommand', () => {
     expect(output).toMatch(/[Nn]o skills found/i);
   });
 
-  it('should show SKILL.md vs reference breakdown for skills with references', async () => {
+  it('should show per-skill breakdown for skills with references', async () => {
     const exitCode = await statusCommand([]);
 
     expect(exitCode).toBe(0);
@@ -189,19 +222,9 @@ describe('statusCommand', () => {
 
     expect(exitCode).toBe(0);
 
-    // Find the JSON output line
-    const jsonLine = consoleOutput.find(line => {
-      try {
-        JSON.parse(line);
-        return true;
-      } catch {
-        return false;
-      }
-    });
-
-    expect(jsonLine).toBeDefined();
-
-    const parsed = JSON.parse(jsonLine!);
+    // Find the JSON output line(s) - may be multi-line pretty-printed
+    const fullOutput = consoleOutput.join('\n');
+    const parsed = JSON.parse(fullOutput);
     expect(parsed).toHaveProperty('budget');
     expect(parsed).toHaveProperty('totalChars');
     expect(parsed).toHaveProperty('headroom');

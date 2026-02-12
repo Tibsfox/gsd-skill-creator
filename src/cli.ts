@@ -23,6 +23,7 @@ import { calibrateCommand, calibrateHelp } from './cli/commands/calibrate.js';
 import { mcpServerCommand } from './cli/commands/mcp-server.js';
 import { publishCommand } from './cli/commands/publish.js';
 import { installCommand } from './cli/commands/install.js';
+import { statusCommand } from './cli/commands/status.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
@@ -388,17 +389,7 @@ async function main() {
 
     case 'status':
     case 'st': {
-      const { applicator } = createApplicationContext();
-      await applicator.initialize();
-
-      console.log(applicator.getActiveDisplay());
-
-      const report = applicator.getReport();
-      if (report.flaggedSkills.length > 0) {
-        console.log('');
-        console.log('Flagged for review (cost > savings):');
-        report.flaggedSkills.forEach(name => console.log(`  - ${name}`));
-      }
+      await statusCommand(args);
       break;
     }
 
