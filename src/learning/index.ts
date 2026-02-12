@@ -8,6 +8,9 @@ export type { DetectorConfig, DetectionResult } from './feedback-detector.js';
 // Refinement
 export { RefinementEngine } from './refinement-engine.js';
 
+// Drift tracking
+export { DriftTracker, DriftThresholdError } from './drift-tracker.js';
+
 // Versioning
 export { VersionManager } from './version-manager.js';
 export type { RollbackResult } from './version-manager.js';
@@ -24,6 +27,7 @@ export type {
   EligibilityResult,
   ValidationResult,
   ApplyResult,
+  DriftResult,
 } from '../types/learning.js';
 
-export { DEFAULT_BOUNDED_CONFIG } from '../types/learning.js';
+export { DEFAULT_BOUNDED_CONFIG, DEFAULT_DRIFT_THRESHOLD } from '../types/learning.js';
