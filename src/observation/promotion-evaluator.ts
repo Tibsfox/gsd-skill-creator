@@ -10,6 +10,12 @@ export interface PromotionResult {
   reasons: string[];
 }
 
+/** Optional context for cross-session evaluation */
+export interface EvaluationContext {
+  /** Number of distinct sessions this observation pattern was seen in */
+  crossSessionCount?: number;
+}
+
 /** Default promotion criteria */
 export const DEFAULT_PROMOTION_CRITERIA = {
   minScore: 0.3,
@@ -33,8 +39,9 @@ export class PromotionEvaluator {
 
   /**
    * Evaluate an observation and return promotion decision with score breakdown.
+   * Optional context provides cross-session frequency data for bonus scoring.
    */
-  evaluate(observation: SessionObservation): PromotionResult {
+  evaluate(observation: SessionObservation, context?: EvaluationContext): PromotionResult {
     let score = 0;
     const reasons: string[] = [];
 
@@ -74,6 +81,17 @@ export class PromotionEvaluator {
     ) {
       score += 0.15;
       reasons.push('rich metadata');
+    }
+
+    // Factor 6: Cross-session frequency (weight 0.3)
+    const crossSessionCount = context?.crossSessionCount ?? 0;
+    if (crossSessionCount >= 2) {
+      score += 0.3;
+      reasons.push(`seen in ${crossSessionCount} sessions`);
+    } else if (crossSessionCount < 2 && observation.squashedFrom && observation.squashedFrom >= 2) {
+      // Fallback: squashedFrom as cross-session signal (backward compat)
+      score += 0.2;
+      reasons.push(`squashed from ${observation.squashedFrom} observations`);
     }
 
     // Cap at 1.0
