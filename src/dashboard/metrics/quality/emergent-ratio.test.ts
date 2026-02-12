@@ -89,9 +89,9 @@ describe('renderEmergentRatio', () => {
     const html = renderEmergentRatio([noEmergent, someEmergent]);
 
     // Phase 1: 0%, Phase 2: 66.7%
-    // Rolling average: (0 + 66.7) / 2 = 33.3%
+    // Rolling average: (0 + 66.7) / 2 = 33.35 => rounded to 33.4%
     expect(html).toContain('Rolling Average');
-    expect(html).toContain('33.3%');
+    expect(html).toContain('33.4%');
   });
 
   // -------------------------------------------------------------------------
