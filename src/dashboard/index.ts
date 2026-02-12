@@ -31,6 +31,18 @@ export { renderStyles } from './styles.js';
 // Generator
 export { generate } from './generator.js';
 
+// Incremental builds
+export {
+  computeHash,
+  loadManifest,
+  saveManifest,
+  needsRegeneration,
+  MANIFEST_FILENAME,
+} from './incremental.js';
+
+// Auto-refresh
+export { generateRefreshScript } from './refresh.js';
+
 // Structured Data (JSON-LD)
 export {
   generateProjectJsonLd,
@@ -64,6 +76,11 @@ export type {
   GenerateOptions,
   GenerateResult,
 } from './generator.js';
+
+export type {
+  BuildManifest,
+  ManifestEntry,
+} from './incremental.js';
 
 export type {
   NavPage,
