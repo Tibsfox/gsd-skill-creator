@@ -73,6 +73,11 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **33. Learning Safety** | Cumulative drift tracking with 60% threshold, contradictory feedback detection, skill audit CLI (v1.10) |
 | **34. Access Control** | File integrity monitoring, audit logging, inheritance depth limits, impact analysis, concurrency locks, operation cooldowns (v1.10) |
 | **35. Operational Safety** | Hook error boundaries, hook safety validation, orchestrator confirmation gates, classification audit logging (v1.10) |
+| **36. GSD Integration Config** | Per-feature toggles, Zod-validated JSON config, CLI validation command, opt-out model with sensible defaults (v1.11) |
+| **37. Install & Git Hooks** | Idempotent install script with --uninstall, POSIX shell post-commit hook for zero-cost commit observation to sessions.jsonl (v1.11) |
+| **38. Session Commands** | `/sc:start` warm-start briefing, `/sc:status` budget dashboard, `/sc:suggest` interactive review, `/sc:observe` session snapshot, `/sc:digest` learning digest (v1.11) |
+| **39. Wrapper Commands** | `/wrap:execute`, `/wrap:verify`, `/wrap:plan` with skill loading, `/wrap:phase` smart lifecycle router (v1.11) |
+| **40. Passive Monitoring** | Plan-vs-summary diffing, STATE.md transition detection, ROADMAP.md structural diff, scan-on-demand architecture (v1.11) |
 
 ### Version History
 
@@ -90,6 +95,7 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.8.1** | Audit Remediation: test infrastructure fixes, type safety improvements, CLI validation, error handling, dependency validation, security hardening, code refactoring, cache invalidation |
 | **v1.9** | Ecosystem Alignment & Advanced Orchestration: spec-aligned skill generation, progressive disclosure, 5-platform portability, evaluator-optimizer with A/B testing, MCP-based distribution, router/map-reduce topologies, session save/restore/handoff, agentic RAG with corrective refinement, quality-of-life CLI improvements |
 | **v1.10** | Security Hardening: path traversal prevention, YAML safe deserialization, JSONL integrity (checksums, rate limiting, anomaly detection, compaction), discovery safety (secret redaction, allowlist/blocklist, deny list), learning safety (drift tracking, contradiction detection), team message sanitization, config validation, inheritance chain validation, file integrity monitoring, hook error boundaries, SECURITY.md, CI pipeline |
+| **v1.11** | GSD Integration Layer: integration config with per-feature toggles, idempotent install script with --uninstall, POSIX shell post-commit hook, 6 slash commands (/sc:start, status, suggest, observe, digest, wrap), 4 wrapper commands (/wrap:execute, verify, plan, phase with smart routing), passive monitoring (plan-vs-summary diffing, STATE.md transitions, ROADMAP.md structural diff) |
 
 ---
 
@@ -2110,6 +2116,76 @@ src/
 | DOC-04 | Hook safety validation at registration | ✓ |
 | DOC-05 | Orchestrator confirmation gates for destructive operations | ✓ |
 | DOC-06 | Classification audit logging for routing decisions | ✓ |
+
+### v1.11 GSD Integration Layer Requirements (40 total)
+
+#### Integration Config (CONFIG-01 to CONFIG-05)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| CONFIG-01 | Integration config file with per-feature boolean toggles | ✓ |
+| CONFIG-02 | Token budget configuration with max percent and warning threshold | ✓ |
+| CONFIG-03 | Observation retention settings (retention days, max entries, corrections) | ✓ |
+| CONFIG-04 | Suggestion settings (min occurrences, cooldown days, auto-dismiss) | ✓ |
+| CONFIG-05 | Config schema validation on read with sensible defaults | ✓ |
+
+#### Install Script (INST-01 to INST-09)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| INST-01 | Install deploys skill-creator slash commands to .claude/commands/sc/ | ✓ |
+| INST-02 | Install deploys wrapper commands to .claude/commands/wrap/ | ✓ |
+| INST-03 | Install deploys post-commit git hook with backup | ✓ |
+| INST-04 | Install creates default integration config if not exists | ✓ |
+| INST-05 | Install creates patterns directory and updates .gitignore | ✓ |
+| INST-06 | Install deploys observer agent definition | ✓ |
+| INST-07 | Install is idempotent — safe to run multiple times | ✓ |
+| INST-08 | Install supports --uninstall to cleanly remove integration | ✓ |
+| INST-09 | Install validates and reports status of all components | ✓ |
+
+#### Git Hooks (HOOK-01 to HOOK-05)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| HOOK-01 | Post-commit captures commit metadata to sessions.jsonl | ✓ |
+| HOOK-02 | Post-commit extracts current phase from STATE.md | ✓ |
+| HOOK-03 | Post-commit completes in <100ms with zero network calls | ✓ |
+| HOOK-04 | Graceful degradation when jq, STATE.md, or patterns dir missing | ✓ |
+| HOOK-05 | All entries include source field for provenance | ✓ |
+
+#### Session Start (SESS-01 to SESS-04)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| SESS-01 | /sc:start displays current GSD position from STATE.md | ✓ |
+| SESS-02 | /sc:start shows recent session history from sessions.jsonl | ✓ |
+| SESS-03 | /sc:start surfaces pending suggestions with occurrence counts | ✓ |
+| SESS-04 | /sc:start shows active skills and token budget usage | ✓ |
+
+#### Slash Commands (CMD-01 to CMD-05)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| CMD-01 | /sc:status shows per-skill token consumption and budget usage | ✓ |
+| CMD-02 | /sc:suggest reviews suggestions interactively (accept/dismiss/defer) | ✓ |
+| CMD-03 | /sc:observe dumps current session observation snapshot | ✓ |
+| CMD-04 | /sc:digest generates learning digest from sessions.jsonl | ✓ |
+| CMD-05 | /sc:wrap explains wrapper commands and integration levels | ✓ |
+
+#### Wrapper Commands (WRAP-01 to WRAP-07)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| WRAP-01 | /wrap:execute loads skills before and records after GSD execute-phase | ✓ |
+| WRAP-02 | /wrap:verify loads skills before and records after GSD verify-work | ✓ |
+| WRAP-03 | /wrap:plan loads skills before GSD plan-phase | ✓ |
+| WRAP-04 | /wrap:phase smart router detects type and delegates to wrapper | ✓ |
+| WRAP-05 | All wrappers read integration config for behavior preferences | ✓ |
+| WRAP-06 | Wrappers degrade gracefully — GSD command runs if skill loading fails | ✓ |
+| WRAP-07 | Wrappers log which skills were loaded and observations captured | ✓ |
+
+#### Passive Monitoring (MON-01 to MON-05)
+| ID | Requirement | Status |
+|----|-------------|--------|
+| MON-01 | Plan vs summary diffing detects scope changes and emergent work | ✓ |
+| MON-02 | STATE.md transition detection identifies completions and blockers | ✓ |
+| MON-03 | Scan-on-demand triggered by /sc:start, wrappers, /sc:digest | ✓ |
+| MON-04 | Detected changes appended to sessions.jsonl with scan source | ✓ |
+| MON-05 | ROADMAP.md structural diff detects additions, removals, reordering | ✓ |
 
 ---
 
