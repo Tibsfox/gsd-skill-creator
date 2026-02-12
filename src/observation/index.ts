@@ -6,9 +6,11 @@ export { SessionObserver } from './session-observer.js';
 export { EphemeralStore } from './ephemeral-store.js';
 export { PromotionEvaluator, DEFAULT_PROMOTION_CRITERIA } from './promotion-evaluator.js';
 export { ObservationSquasher } from './observation-squasher.js';
+export { ObservationRateLimiter, detectAnomalies, DEFAULT_RATE_LIMIT_CONFIG } from './rate-limiter.js';
 
 // Types
 export type { SessionStartData, SessionEndData } from './session-observer.js';
 export type { PromotionResult } from './promotion-evaluator.js';
+export type { RateLimitConfig, RateLimitResult, AnomalyReport } from './rate-limiter.js';
 export type { ObservationTier } from '../types/observation.js';
 export { normalizeObservationTier } from '../types/observation.js';

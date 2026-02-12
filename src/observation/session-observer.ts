@@ -8,6 +8,8 @@ import { EphemeralStore } from './ephemeral-store.js';
 import { PromotionEvaluator } from './promotion-evaluator.js';
 import { ObservationSquasher } from './observation-squasher.js';
 import { SessionObservation, RetentionConfig } from '../types/observation.js';
+import { ObservationRateLimiter, detectAnomalies } from './rate-limiter.js';
+import type { RateLimitConfig } from './rate-limiter.js';
 
 export interface SessionStartData {
   sessionId: string;
@@ -34,11 +36,13 @@ export class SessionObserver {
   private ephemeralStore: EphemeralStore;
   private promotionEvaluator: PromotionEvaluator;
   private squasher: ObservationSquasher;
+  private rateLimiter: ObservationRateLimiter;
   private cacheDir: string;
 
   constructor(
     patternsDir: string = '.planning/patterns',
-    retentionConfig?: Partial<RetentionConfig>
+    retentionConfig?: Partial<RetentionConfig>,
+    rateLimitConfig?: Partial<RateLimitConfig>,
   ) {
     this.parser = new TranscriptParser();
     this.summarizer = new PatternSummarizer();
@@ -47,6 +51,7 @@ export class SessionObserver {
     this.ephemeralStore = new EphemeralStore(patternsDir);
     this.promotionEvaluator = new PromotionEvaluator();
     this.squasher = new ObservationSquasher();
+    this.rateLimiter = new ObservationRateLimiter(rateLimitConfig);
     this.cacheDir = patternsDir;
   }
 
@@ -99,6 +104,12 @@ export class SessionObserver {
       data.activeSkills || []
     );
 
+    // Rate limit check before writing (INT-03)
+    const limitResult = this.rateLimiter.checkLimit(data.sessionId);
+    if (!limitResult.allowed) {
+      return null; // Rate limited, do not write
+    }
+
     // Evaluate current session for promotion
     const result = this.promotionEvaluator.evaluate(summary);
 
@@ -108,6 +119,12 @@ export class SessionObserver {
     } else {
       summary.tier = 'ephemeral';
       await this.ephemeralStore.append(summary);
+    }
+
+    // Anomaly detection (INT-04)
+    const anomalyReport = detectAnomalies([summary]);
+    for (const anomaly of anomalyReport.anomalies) {
+      console.warn('Observation anomaly:', anomaly.type, anomaly.message);
     }
 
     // Promote accumulated ephemeral entries
