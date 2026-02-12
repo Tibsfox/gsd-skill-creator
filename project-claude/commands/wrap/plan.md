@@ -156,6 +156,18 @@ If enabled, append an observation entry to `.planning/patterns/sessions.jsonl`:
 - Append one JSON line to `sessions.jsonl` (create the file if it does not exist)
 - If observation capture fails, display a note and continue without error
 
+### Monitoring Scan (MON-03)
+
+After capturing the planning observation, run a monitoring scan:
+
+If `integration.phase_transition_hooks` is `true`:
+1. Check STATE.md for transitions since last scan
+2. Check ROADMAP.md for structural changes (plan-phase may have updated it)
+3. Write any scan observations to sessions.jsonl with `"source": "scan"`
+4. Update scan-state.json
+
+This captures ROADMAP.md changes that occur during planning (new plans added, phase structure updated).
+
 ---
 
 ## Step 5: Transparency Summary (WRAP-07)
