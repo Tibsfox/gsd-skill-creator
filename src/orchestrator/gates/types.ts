@@ -28,7 +28,7 @@ export const GateDecisionSchema = z.object({
   /** Human-readable explanation of the decision */
   reason: z.string(),
   /** Which gate type produced this decision */
-  gateType: z.enum(['routing', 'destructive', 'low-confidence']),
+  gateType: z.enum(['routing', 'destructive', 'low-confidence', 'confirmation']),
   /** Whether YOLO mode influenced the decision */
   skippedByYolo: z.boolean(),
 }).passthrough();

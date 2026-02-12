@@ -40,3 +40,7 @@ export type { SemanticMatch } from './semantic-matcher.js';
 
 // Main classifier
 export { IntentClassifier } from './intent-classifier.js';
+
+// Classification audit logger
+export { ClassificationLogger } from './classification-logger.js';
+export type { ClassificationLogEntry } from './classification-logger.js';
