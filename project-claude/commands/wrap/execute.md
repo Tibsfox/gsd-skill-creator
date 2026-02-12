@@ -190,6 +190,25 @@ And continue to Step 5.
 
 ---
 
+## Step 4.5: Run Monitoring Scan (MON-03)
+
+After execution completes and observations are captured, run a monitoring scan to detect what changed during execution.
+
+If `integration.phase_transition_hooks` is `true` (from Step 1 config):
+
+1. Read `.planning/patterns/scan-state.json` for previous state
+2. Check STATE.md for phase transitions (did the phase complete during execution?)
+3. Check ROADMAP.md for structural changes
+4. If the phase just completed and PLAN/SUMMARY files exist, run plan-vs-summary diff
+5. Write any scan observations to sessions.jsonl with `"source": "scan"`
+6. Update scan-state.json
+
+This scan captures the execution's impact on GSD planning artifacts. The observations complement the wrapper_execution entry from Step 4.
+
+If the scan encounters errors, proceed to Step 5 without blocking.
+
+---
+
 ## Step 5: Transparency Summary (WRAP-07)
 
 Display a summary of everything the wrapper did:
@@ -200,6 +219,7 @@ Display a summary of everything the wrapper did:
 - **Skills loaded:** 2 (beautiful-commits, tdd-workflow)
 - **GSD command:** /gsd:execute-phase N
 - **Observation captured:** Yes (wrapper_execution entry appended to sessions.jsonl)
+- **Monitoring scan:** [N observations detected] or [no changes] or [skipped]
 - **Phase status:** [current status from STATE.md]
 ```
 
