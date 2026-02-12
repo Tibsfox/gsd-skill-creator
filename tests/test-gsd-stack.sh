@@ -76,6 +76,24 @@ assert_dir_exists() {
   fi
 }
 
+assert_not_contains() {
+  local test_name="$1" haystack="$2" needle="$3"
+  if [[ "$haystack" != *"$needle"* ]]; then
+    pass "$test_name"
+  else
+    fail "$test_name" "output should NOT contain '$needle'"
+  fi
+}
+
+assert_exit_code() {
+  local test_name="$1" expected="$2" actual="$3"
+  if [[ "$expected" == "$actual" ]]; then
+    pass "$test_name"
+  else
+    fail "$test_name" "expected exit code $expected, got $actual"
+  fi
+}
+
 summary() {
   echo ""
   printf "${BOLD}Results: %d passed, %d failed${RESET}\n" "$PASS_COUNT" "$FAIL_COUNT"
@@ -1045,6 +1063,259 @@ fi
 assert_contains "peek json has body key" "$output" '"body"'
 assert_contains "peek json has priority key" "$output" '"priority"'
 assert_contains "peek json has depth key" "$output" '"depth"'
+
+# ==============================================================================
+# Session Start Tests (tmux mocked)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Session Start Tests (tmux mocked)${RESET}\n"
+
+# Reset stack dir for session tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# -- Session start with --name=test-sess exits 0 --
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" session /tmp/testproject --name=test-sess 2>&1)
+rc=$?
+set -e
+assert_exit_code "session start exits 0" "0" "$rc"
+
+# -- Creates session directory --
+assert_dir_exists "session creates session dir" "$GSD_STACK_DIR/sessions/test-sess"
+
+# -- Creates meta.json --
+assert_file_exists "session creates meta.json" "$GSD_STACK_DIR/sessions/test-sess/meta.json"
+
+# -- meta.json contains expected fields --
+if [[ -f "$GSD_STACK_DIR/sessions/test-sess/meta.json" ]]; then
+  meta_content=$(cat "$GSD_STACK_DIR/sessions/test-sess/meta.json")
+  assert_contains "meta.json has name" "$meta_content" '"name":"test-sess"'
+  assert_contains "meta.json has status active" "$meta_content" '"status":"active"'
+  assert_contains "meta.json has project path" "$meta_content" '"project":"/tmp/testproject"'
+  assert_contains "meta.json has tmux_session" "$meta_content" '"tmux_session"'
+  # Check started field has ISO 8601 timestamp pattern
+  if echo "$meta_content" | grep -qE '"started":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z"'; then
+    pass "meta.json has ISO 8601 started timestamp"
+  else
+    fail "meta.json has ISO 8601 started timestamp" "meta: $meta_content"
+  fi
+else
+  fail "meta.json has name" "meta.json does not exist"
+  fail "meta.json has status active" "meta.json does not exist"
+  fail "meta.json has project path" "meta.json does not exist"
+  fail "meta.json has tmux_session" "meta.json does not exist"
+  fail "meta.json has ISO 8601 started timestamp" "meta.json does not exist"
+fi
+
+# -- Creates heartbeat file --
+assert_file_exists "session creates heartbeat" "$GSD_STACK_DIR/sessions/test-sess/heartbeat"
+
+# -- Appends to history.jsonl with session event --
+if [[ -f "$GSD_STACK_DIR/history.jsonl" ]] && grep -q '"event":"session"' "$GSD_STACK_DIR/history.jsonl"; then
+  pass "session logs event to history.jsonl"
+else
+  fail "session logs event to history.jsonl" "no session event found in history"
+fi
+
+# -- Appends to registry.jsonl --
+if [[ -f "$GSD_STACK_DIR/registry.jsonl" ]] && grep -q '"name":"test-sess"' "$GSD_STACK_DIR/registry.jsonl"; then
+  pass "session appends to registry.jsonl"
+else
+  fail "session appends to registry.jsonl" "no registry entry found"
+fi
+
+# ==============================================================================
+# Session Name Default Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Session Name Default Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# -- Session name defaults to project basename when --name not provided --
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" session /tmp/my-cool-project 2>&1)
+rc=$?
+set -e
+assert_exit_code "session default name exits 0" "0" "$rc"
+
+if [[ -f "$GSD_STACK_DIR/sessions/my-cool-project/meta.json" ]]; then
+  meta_content=$(cat "$GSD_STACK_DIR/sessions/my-cool-project/meta.json")
+  assert_contains "default name is project basename" "$meta_content" '"name":"my-cool-project"'
+else
+  fail "default name is project basename" "meta.json not found at sessions/my-cool-project/"
+fi
+
+# ==============================================================================
+# Session Duplicate Detection Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Session Duplicate Detection Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# -- Start first session --
+set +e
+GSD_MOCK_TMUX=1 "$GSD_STACK" session /tmp/testproject --name=dup-test >/dev/null 2>&1
+set -e
+
+# -- Start duplicate session --
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" session /tmp/testproject --name=dup-test 2>&1)
+rc=$?
+set -e
+assert_exit_code "duplicate session exits 1" "1" "$rc"
+if echo "$output" | grep -qi "already"; then
+  pass "duplicate session shows already exists error"
+else
+  fail "duplicate session shows already exists error" "output: $output"
+fi
+
+# ==============================================================================
+# Session Missing Project Path Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Session Missing Project Path Tests${RESET}\n"
+
+# -- Session without project path fails --
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" session 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "session no project path exits non-zero"
+else
+  fail "session no project path exits non-zero" "exit code: $rc"
+fi
+if echo "$output" | grep -qiE "project|path|usage"; then
+  pass "session no project path shows usage hint"
+else
+  fail "session no project path shows usage hint" "output: $output"
+fi
+
+# ==============================================================================
+# Session State Machine Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Session State Machine Tests${RESET}\n"
+
+# Reset stack dir for state machine tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl"
+
+# -- Active state: fresh heartbeat --
+mkdir -p "$GSD_STACK_DIR/sessions/fresh-sess"
+echo '{"name":"fresh-sess","status":"active","project":"/tmp/p","started":"2026-02-12T10:00:00Z","tmux_session":"claude-fresh-sess","pid":"1234"}' > "$GSD_STACK_DIR/sessions/fresh-sess/meta.json"
+touch "$GSD_STACK_DIR/sessions/fresh-sess/heartbeat"
+
+set +e
+output=$("$GSD_STACK" _get-state fresh-sess 2>&1)
+rc=$?
+set -e
+assert_eq "active state: exit 0" "0" "$rc"
+assert_eq "active state: outputs active" "active" "$output"
+
+# -- Stalled state: old heartbeat (10 minutes ago, timeout 300s) --
+mkdir -p "$GSD_STACK_DIR/sessions/stalled-sess"
+echo '{"name":"stalled-sess","status":"active","project":"/tmp/p","started":"2026-02-12T10:00:00Z","tmux_session":"claude-stalled-sess","pid":"1234"}' > "$GSD_STACK_DIR/sessions/stalled-sess/meta.json"
+touch -d "10 minutes ago" "$GSD_STACK_DIR/sessions/stalled-sess/heartbeat"
+
+set +e
+output=$(GSD_STALL_TIMEOUT=300 "$GSD_STACK" _get-state stalled-sess 2>&1)
+rc=$?
+set -e
+assert_eq "stalled state: exit 0" "0" "$rc"
+assert_eq "stalled state: outputs stalled" "stalled" "$output"
+
+# -- Stalled with custom timeout: 60s, heartbeat 90s old --
+mkdir -p "$GSD_STACK_DIR/sessions/timeout-sess"
+echo '{"name":"timeout-sess","status":"active","project":"/tmp/p","started":"2026-02-12T10:00:00Z","tmux_session":"claude-timeout-sess","pid":"1234"}' > "$GSD_STACK_DIR/sessions/timeout-sess/meta.json"
+touch -d "90 seconds ago" "$GSD_STACK_DIR/sessions/timeout-sess/heartbeat"
+
+set +e
+output=$(GSD_STALL_TIMEOUT=60 "$GSD_STACK" _get-state timeout-sess 2>&1)
+rc=$?
+set -e
+assert_eq "stalled custom timeout: exit 0" "0" "$rc"
+assert_eq "stalled custom timeout: outputs stalled" "stalled" "$output"
+
+# -- Stopped state: meta says stopped --
+mkdir -p "$GSD_STACK_DIR/sessions/stopped-sess"
+echo '{"name":"stopped-sess","status":"stopped","project":"/tmp/p","started":"2026-02-12T10:00:00Z","tmux_session":"claude-stopped-sess","pid":"1234"}' > "$GSD_STACK_DIR/sessions/stopped-sess/meta.json"
+
+set +e
+output=$("$GSD_STACK" _get-state stopped-sess 2>&1)
+rc=$?
+set -e
+assert_eq "stopped state: exit 0" "0" "$rc"
+assert_eq "stopped state: outputs stopped" "stopped" "$output"
+
+# -- Paused state: meta says paused --
+mkdir -p "$GSD_STACK_DIR/sessions/paused-sess"
+echo '{"name":"paused-sess","status":"paused","project":"/tmp/p","started":"2026-02-12T10:00:00Z","tmux_session":"claude-paused-sess","pid":"1234"}' > "$GSD_STACK_DIR/sessions/paused-sess/meta.json"
+
+set +e
+output=$("$GSD_STACK" _get-state paused-sess 2>&1)
+rc=$?
+set -e
+assert_eq "paused state: exit 0" "0" "$rc"
+assert_eq "paused state: outputs paused" "paused" "$output"
+
+# -- Saved state: meta says saved --
+mkdir -p "$GSD_STACK_DIR/sessions/saved-sess"
+echo '{"name":"saved-sess","status":"saved","project":"/tmp/p","started":"2026-02-12T10:00:00Z","tmux_session":"claude-saved-sess","pid":"1234"}' > "$GSD_STACK_DIR/sessions/saved-sess/meta.json"
+
+set +e
+output=$("$GSD_STACK" _get-state saved-sess 2>&1)
+rc=$?
+set -e
+assert_eq "saved state: exit 0" "0" "$rc"
+assert_eq "saved state: outputs saved" "saved" "$output"
+
+# -- Active overrides to stalled when heartbeat is stale --
+mkdir -p "$GSD_STACK_DIR/sessions/active-stale-sess"
+echo '{"name":"active-stale-sess","status":"active","project":"/tmp/p","started":"2026-02-12T10:00:00Z","tmux_session":"claude-active-stale-sess","pid":"1234"}' > "$GSD_STACK_DIR/sessions/active-stale-sess/meta.json"
+touch -d "10 minutes ago" "$GSD_STACK_DIR/sessions/active-stale-sess/heartbeat"
+
+set +e
+output=$(GSD_STALL_TIMEOUT=300 "$GSD_STACK" _get-state active-stale-sess 2>&1)
+rc=$?
+set -e
+assert_eq "active stale override: exit 0" "0" "$rc"
+assert_eq "active stale override: outputs stalled" "stalled" "$output"
+
+# -- Missing session: nonexistent returns unknown --
+set +e
+output=$("$GSD_STACK" _get-state nonexistent 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]] || [[ "$output" == "unknown" ]]; then
+  pass "missing session: returns unknown or exits non-zero"
+else
+  fail "missing session: returns unknown or exits non-zero" "rc=$rc output=$output"
+fi
+if [[ "$output" == "unknown" ]]; then
+  pass "missing session: outputs unknown"
+else
+  # If it exits non-zero that's also acceptable
+  if [[ "$rc" -ne 0 ]]; then
+    pass "missing session: outputs unknown (exits non-zero instead)"
+  else
+    fail "missing session: outputs unknown" "output: $output"
+  fi
+fi
 
 # ==============================================================================
 # Summary
