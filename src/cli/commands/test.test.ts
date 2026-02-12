@@ -80,6 +80,9 @@ describe('test run command', () => {
       falsePositives: 1,
       falseNegatives: 0,
       edgeCaseCount: 0,
+      precision: 0.75,
+      recall: 1.0,
+      f1Score: 0.857,
     };
 
     return {
