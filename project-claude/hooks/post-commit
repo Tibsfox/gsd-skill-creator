@@ -1,0 +1,10 @@
+#!/bin/sh
+# GSD skill-creator post-commit hook
+# Captures commit metadata to .planning/patterns/sessions.jsonl
+#
+# Stub: Full implementation in Phase 84 (Post-Commit Git Hook)
+#
+# This hook is installed by: node project-claude/install.cjs
+# It is safe to remove: node project-claude/install.cjs --uninstall
+
+exit 0
