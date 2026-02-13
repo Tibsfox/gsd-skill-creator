@@ -48,3 +48,7 @@ export { handleMessage } from './message-handler.js';
 // Status writer (session progress updates to outbox)
 export type { SessionStatus } from './status-writer.js';
 export { StatusWriter } from './status-writer.js';
+
+// Question schema (structured questions from session to dashboard)
+export type { Question, QuestionType, QuestionUrgency, QuestionStatus, TimeoutFallback } from './question-schema.js';
+export { QuestionSchema } from './question-schema.js';
