@@ -15,6 +15,7 @@ export type {
   ObservationConfig,
   SuggestionConfig,
   IntegrationConfig,
+  TerminalConfig,
 } from './types.js';
 
 // Schema, default config, and inferred type
@@ -23,6 +24,10 @@ export {
   DEFAULT_INTEGRATION_CONFIG,
 } from './schema.js';
 export type { InferredIntegrationConfig } from './schema.js';
+
+// Terminal schema, default config, and inferred type
+export { TerminalConfigSchema, DEFAULT_TERMINAL_CONFIG } from './terminal-schema.js';
+export type { InferredTerminalConfig } from './terminal-schema.js';
 
 // Reader: filesystem loading and validation
 export {
