@@ -4,9 +4,9 @@
 
 Milestone: v1.17 — Staging Layer
 Phase: 135 — Hygiene Pattern Engine (in progress)
-Plan: 135-01 complete
+Plan: 135-03 complete
 Status: Executing phase 135
-Last activity: 2026-02-13 — Completed 135-01 (pattern registry types and built-in patterns)
+Last activity: 2026-02-13 — Completed 135-03 (YAML config safety scanner)
 
 ## Project Reference
 
@@ -105,6 +105,11 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - 11 built-in hygiene patterns across 3 categories (4 embedded-instructions, 3 hidden-content, 4 config-safety)
 - Detect functions for complex patterns (zero-width chars, base64, YAML merge bombs); regex for simple matching
 - Registry uses mutable array with immutable reference copy for reset
+- Regex cloned with global flag for per-match finding generation in scanners
+- Detect functions take priority over regex when pattern has both
+- Line number computed from newline count before match offset (1-based)
+- Scanner functions delegate to registry patterns via getPatterns(category) -- scanners are thin, patterns carry the logic
+- Both scanners (embedded, hidden) share identical structure: fetch patterns, iterate, delegate to detect or regex
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -119,7 +124,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Helper endpoint wired into serve-dashboard.mjs via dynamic import (browser->filesystem bridge)
 - No WebSockets -- dashboard polls outbox at 2-3s intervals
 - Staging module at src/staging/ (types, schema, directory, intake, state-machine, index)
-- Staging hygiene submodule at src/staging/hygiene/ (types, patterns)
+- Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -134,15 +139,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 384 complete |
+| Total plans | 385 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 135-01-PLAN.md
-Stopped at: Plan 135-01 complete (hygiene pattern registry types and built-in patterns)
-Next action: Execute 135-02
-Context: v1.17 Staging Layer. Phase 135 in progress (1/4 plans). src/staging/hygiene/ submodule created with types.ts and patterns.ts. 11 built-in patterns, 15 new tests, 71 total staging tests passing.
+Last: 2026-02-13 — Completed 135-03-PLAN.md
+Stopped at: Plan 135-03 complete (YAML config safety scanner)
+Next action: Execute remaining 135 plans
+Context: v1.17 Staging Layer. Phase 135 in progress. src/staging/hygiene/ has types, patterns, scanner-config, scanner-embedded. 48 hygiene tests passing (17 new from 135-03).
 
 ---
-*Last updated: 2026-02-13 (135-01 complete)*
+*Last updated: 2026-02-13 (135-03 complete)*
