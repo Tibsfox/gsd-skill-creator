@@ -1,5 +1,5 @@
 /**
- * Tests for Copper List YAML parser and serializer.
+ * Tests for Pipeline YAML parser and serializer.
  *
  * Covers:
  * - Valid parsing: minimal, full, all instruction types, metadata fields
@@ -11,15 +11,15 @@
 
 import { describe, it, expect } from 'vitest';
 import yaml from 'js-yaml';
-import { parseCopperList, serializeCopperList } from './parser.js';
-import type { CopperList } from './types.js';
+import { parsePipeline, serializePipeline } from './parser.js';
+import type { Pipeline } from './types.js';
 
 // ============================================================================
 // Valid Parsing Tests
 // ============================================================================
 
-describe('parseCopperList - valid parsing', () => {
-  it('parses a minimal Copper List with one WAIT instruction', () => {
+describe('parsePipeline - valid parsing', () => {
+  it('parses a minimal Pipeline with one WAIT instruction', () => {
     const input = `
 metadata:
   name: minimal-list
@@ -27,7 +27,7 @@ instructions:
   - type: wait
     event: phase-start
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.metadata.name).toBe('minimal-list');
@@ -39,7 +39,7 @@ instructions:
     }
   });
 
-  it('parses a full Copper List with all three instruction types', () => {
+  it('parses a full Pipeline with all three instruction types', () => {
     const input = `
 metadata:
   name: full-list
@@ -55,9 +55,9 @@ instructions:
   - type: move
     target: skill
     name: git-commit
-    mode: sprite
+    mode: lite
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.instructions).toHaveLength(3);
@@ -86,7 +86,7 @@ instructions:
   - type: wait
     event: phase-start
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.metadata.name).toBe('full-metadata');
@@ -108,12 +108,12 @@ instructions:
   - type: move
     target: skill
     name: git-commit
-    mode: sprite
+    mode: lite
     args:
       message: initial commit
       amend: false
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       const move = result.data.instructions[0];
@@ -135,7 +135,7 @@ instructions:
       op: equals
       right: production
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       const skip = result.data.instructions[0];
@@ -158,7 +158,7 @@ instructions:
       left: file:tsconfig.json
       op: exists
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       const skip = result.data.instructions[0];
@@ -176,7 +176,7 @@ instructions:
 // YAML Kebab-case to CamelCase Key Mapping Tests
 // ============================================================================
 
-describe('parseCopperList - key mapping', () => {
+describe('parsePipeline - key mapping', () => {
   it('maps YAML source-patterns to TypeScript sourcePatterns', () => {
     const input = `
 metadata:
@@ -187,7 +187,7 @@ instructions:
   - type: wait
     event: phase-start
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.metadata.sourcePatterns).toEqual(['pattern:a']);
@@ -203,7 +203,7 @@ instructions:
   - type: wait
     event: phase-start
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.metadata.tokenEstimate).toBe(250);
@@ -220,7 +220,7 @@ instructions:
       left: file:missing.txt
       op: not-exists
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       const skip = result.data.instructions[0];
@@ -241,7 +241,7 @@ instructions:
       op: not-equals
       right: debug
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       const skip = result.data.instructions[0];
@@ -262,7 +262,7 @@ instructions:
   - type: wait
     event: phase-start
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.metadata.tokenEstimate).toBe(100);
@@ -275,14 +275,14 @@ instructions:
 // Error Handling Tests
 // ============================================================================
 
-describe('parseCopperList - error handling', () => {
+describe('parsePipeline - error handling', () => {
   it('returns error for completely invalid YAML (syntax error)', () => {
     const input = `
 metadata:
   name: broken
   items: [unclosed
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.errors.length).toBeGreaterThan(0);
@@ -292,7 +292,7 @@ metadata:
 
   it('returns error for valid YAML that is not an object (plain string)', () => {
     const input = 'just a string';
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.errors.length).toBeGreaterThan(0);
@@ -305,7 +305,7 @@ metadata:
 - item1
 - item2
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.errors.length).toBeGreaterThan(0);
@@ -318,7 +318,7 @@ instructions:
   - type: wait
     event: phase-start
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.errors.length).toBeGreaterThan(0);
@@ -330,7 +330,7 @@ instructions:
 metadata:
   name: no-instructions
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.errors.length).toBeGreaterThan(0);
@@ -343,7 +343,7 @@ metadata:
   name: empty-instructions
 instructions: []
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.errors.length).toBeGreaterThan(0);
@@ -358,7 +358,7 @@ instructions:
   - type: jump
     target: label-1
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.errors.length).toBeGreaterThan(0);
@@ -376,7 +376,7 @@ instructions:
   - type: wait
     event: invalid-event
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.errors.length).toBeGreaterThan(0);
@@ -393,7 +393,7 @@ instructions:
     name: test
     mode: turbo
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.errors.length).toBeGreaterThan(0);
@@ -408,7 +408,7 @@ instructions:
   - type: move
     target: skill
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.errors.length).toBeGreaterThan(0);
@@ -421,7 +421,7 @@ metadata:
   name: test
 instructions: []
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(false);
     if (!result.success) {
       for (const err of result.errors) {
@@ -439,7 +439,7 @@ metadata:
 instructions:
   - type: jump
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(false);
     if (!result.success) {
       // Should have at least 1 error -- could have 2+ depending on Zod behavior
@@ -452,7 +452,7 @@ instructions:
 // Round-trip Serialization Tests
 // ============================================================================
 
-describe('serializeCopperList - round-trip', () => {
+describe('serializePipeline - round-trip', () => {
   it('round-trip parse -> serialize -> re-parse produces equivalent object', () => {
     const input = `
 metadata:
@@ -472,16 +472,16 @@ instructions:
   - type: move
     target: skill
     name: git-commit
-    mode: sprite
+    mode: lite
 `;
-    const firstParse = parseCopperList(input);
+    const firstParse = parsePipeline(input);
     expect(firstParse.success).toBe(true);
     if (!firstParse.success) return;
 
-    const serialized = serializeCopperList(firstParse.data);
+    const serialized = serializePipeline(firstParse.data);
     expect(serialized.length).toBeGreaterThan(0);
 
-    const secondParse = parseCopperList(serialized);
+    const secondParse = parsePipeline(serialized);
     expect(secondParse.success).toBe(true);
     if (!secondParse.success) return;
 
@@ -494,7 +494,7 @@ instructions:
   });
 
   it('serialized YAML uses kebab-case keys (not camelCase)', () => {
-    const list: CopperList = {
+    const list: Pipeline = {
       metadata: {
         name: 'kebab-check',
         sourcePatterns: ['a:b'],
@@ -507,7 +507,7 @@ instructions:
         { type: 'wait', event: 'phase-start' },
       ],
     };
-    const serialized = serializeCopperList(list);
+    const serialized = serializePipeline(list);
     expect(serialized).toContain('source-patterns');
     expect(serialized).toContain('token-estimate');
     expect(serialized).not.toContain('sourcePatterns');
@@ -515,7 +515,7 @@ instructions:
   });
 
   it('serialized YAML is valid YAML (re-parseable by js-yaml)', () => {
-    const list: CopperList = {
+    const list: Pipeline = {
       metadata: {
         name: 'yaml-valid',
         priority: 50,
@@ -524,10 +524,10 @@ instructions:
       },
       instructions: [
         { type: 'wait', event: 'session-start' },
-        { type: 'move', target: 'script', name: 'lint', mode: 'blitter' },
+        { type: 'move', target: 'script', name: 'lint', mode: 'offload' },
       ],
     };
-    const serialized = serializeCopperList(list);
+    const serialized = serializePipeline(list);
     expect(() => yaml.load(serialized)).not.toThrow();
   });
 
@@ -539,7 +539,7 @@ instructions:
   - type: wait
     event: phase-start
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (!result.success) return;
 
@@ -548,7 +548,7 @@ instructions:
     expect(result.data.metadata.confidence).toBe(1.0);
     expect(result.data.metadata.version).toBe(1);
 
-    const serialized = serializeCopperList(result.data);
+    const serialized = serializePipeline(result.data);
     expect(serialized).toContain('priority');
     expect(serialized).toContain('confidence');
     expect(serialized).toContain('version');
@@ -559,7 +559,7 @@ instructions:
 // Edge Cases
 // ============================================================================
 
-describe('parseCopperList - edge cases', () => {
+describe('parsePipeline - edge cases', () => {
   it('handles YAML with extra whitespace and comments', () => {
     const input = `
 # This is a comment
@@ -573,7 +573,7 @@ instructions:
   - type: wait
     event: phase-start
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.metadata.name).toBe('whitespace-test');
@@ -592,7 +592,7 @@ metadata:
 instructions:
 ${instructions.join('\n')}
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.instructions).toHaveLength(12);
@@ -609,7 +609,7 @@ instructions:
   - type: wait
     event: phase-start
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     expect(result.success).toBe(true);
     if (result.success) {
       // Extra fields should be preserved (via passthrough)
@@ -621,7 +621,7 @@ instructions:
   });
 
   it('handles empty string input (returns error, not crash)', () => {
-    const result = parseCopperList('');
+    const result = parsePipeline('');
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.errors.length).toBeGreaterThan(0);
@@ -638,7 +638,7 @@ instructions:
   - type: wait
     event: phase-start
 `;
-    const result = parseCopperList(input);
+    const result = parsePipeline(input);
     // Should succeed -- null/undefined optional fields are valid
     expect(result.success).toBe(true);
   });
