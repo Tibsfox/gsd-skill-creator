@@ -1,25 +1,25 @@
 /**
- * Copper List YAML parser and serializer.
+ * Pipeline YAML parser and serializer.
  *
- * Parses YAML Copper List files into validated CopperList typed objects
+ * Parses YAML Pipeline files into validated Pipeline typed objects
  * with structured error reporting. Handles YAML kebab-case to TypeScript
  * camelCase key mapping. Provides round-trip serialization back to YAML.
  *
- * Uses js-yaml for YAML parsing and CopperListSchema for Zod validation.
+ * Uses js-yaml for YAML parsing and PipelineSchema for Zod validation.
  */
 
 import yaml from 'js-yaml';
-import { CopperListSchema } from './schema.js';
-import type { CopperList } from './types.js';
+import { PipelineSchema } from './schema.js';
+import type { Pipeline } from './types.js';
 
 // ============================================================================
 // Types
 // ============================================================================
 
 /**
- * Structured error from parsing a Copper List.
+ * Structured error from parsing a Pipeline.
  */
-export interface CopperParseError {
+export interface PipelineParseError {
   /** Human-readable error description. */
   message: string;
 
@@ -31,12 +31,12 @@ export interface CopperParseError {
 }
 
 /**
- * Result of parsing a Copper List YAML string.
+ * Result of parsing a Pipeline YAML string.
  * Discriminated union: check `success` to narrow the type.
  */
-export type CopperParseResult =
-  | { success: true; data: CopperList }
-  | { success: false; errors: CopperParseError[] };
+export type PipelineParseResult =
+  | { success: true; data: Pipeline }
+  | { success: false; errors: PipelineParseError[] };
 
 // ============================================================================
 // Key Mapping Helpers
@@ -126,20 +126,20 @@ function stripNulls(value: unknown): unknown {
 // ============================================================================
 
 /**
- * Parse a YAML string into a validated CopperList object.
+ * Parse a YAML string into a validated Pipeline object.
  *
  * Steps:
  * 1. Reject empty/falsy input
  * 2. Parse YAML with js-yaml (catches syntax errors)
  * 3. Verify raw result is an object (not string, array, null)
  * 4. Convert kebab-case keys to camelCase
- * 5. Validate with Zod CopperListSchema
- * 6. Return typed CopperList or structured errors
+ * 5. Validate with Zod PipelineSchema
+ * 6. Return typed Pipeline or structured errors
  *
- * @param input - Raw YAML string containing a Copper List
- * @returns Parse result with validated CopperList or structured errors
+ * @param input - Raw YAML string containing a Pipeline
+ * @returns Parse result with validated Pipeline or structured errors
  */
-export function parseCopperList(input: string): CopperParseResult {
+export function parsePipeline(input: string): PipelineParseResult {
   // 1. Handle empty/falsy input
   if (!input || !input.trim()) {
     return { success: false, errors: [{ message: 'Empty input' }] };
@@ -165,7 +165,7 @@ export function parseCopperList(input: string): CopperParseResult {
     return {
       success: false,
       errors: [{
-        message: 'Copper List must be a YAML object with metadata and instructions fields',
+        message: 'Pipeline must be a YAML object with metadata and instructions fields',
       }],
     };
   }
@@ -174,17 +174,17 @@ export function parseCopperList(input: string): CopperParseResult {
   const mapped = stripNulls(mapKeys(raw, kebabToCamel));
 
   // 5. Validate with Zod schema
-  const result = CopperListSchema.safeParse(mapped);
+  const result = PipelineSchema.safeParse(mapped);
   if (!result.success) {
-    // Convert Zod errors to CopperParseError[]
-    const errors: CopperParseError[] = result.error.issues.map((issue) => ({
+    // Convert Zod errors to PipelineParseError[]
+    const errors: PipelineParseError[] = result.error.issues.map((issue) => ({
       message: issue.message,
       path: issue.path.join('.'),
     }));
     return { success: false, errors };
   }
 
-  return { success: true, data: result.data as CopperList };
+  return { success: true, data: result.data as Pipeline };
 }
 
 // ============================================================================
@@ -192,15 +192,15 @@ export function parseCopperList(input: string): CopperParseResult {
 // ============================================================================
 
 /**
- * Serialize a CopperList object back to YAML string.
+ * Serialize a Pipeline object back to YAML string.
  *
  * Converts camelCase TypeScript keys back to kebab-case for YAML output.
  * Uses js-yaml.dump with readable formatting options.
  *
- * @param list - Validated CopperList object
+ * @param list - Validated Pipeline object
  * @returns YAML string representation with kebab-case keys
  */
-export function serializeCopperList(list: CopperList): string {
+export function serializePipeline(list: Pipeline): string {
   const mapped = mapKeys(list, camelToKebab);
   return yaml.dump(mapped, {
     indent: 2,
