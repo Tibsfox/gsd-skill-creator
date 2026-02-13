@@ -155,32 +155,82 @@ const UX_CLEANUP_SCRIPT = `
     flex-direction: column;
     justify-content: center;
   }
-  #gsd-section-phase-velocity {
+  #gsd-section-recent-commits {
     grid-column: 2;
-    grid-row: 1;
+    grid-row: 1 / span 2;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
+    overflow-y: auto;
   }
-  #gsd-section-phase-velocity h2 {
-    font-size: 1rem;
-    margin-top: 0;
-    margin-bottom: var(--space-sm);
-  }
-  #gsd-section-milestone-comparison {
-    grid-column: 2;
-    grid-row: 2;
-  }
-  #gsd-section-milestone-comparison > .card {
+  #gsd-section-recent-commits > .card {
     height: 100%;
     margin-bottom: 0;
+    border: none;
+    background: transparent;
+  }
+  #gsd-section-recent-commits > .card > .card-body {
+    padding: 0;
+  }
+  .rc-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0 0 var(--space-sm) 0;
+    color: var(--text-primary);
+  }
+  .recent-commits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .rc-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    line-height: 1.3;
+    transition: background 0.15s;
+  }
+  .rc-row:hover {
+    background: var(--surface-raised, rgba(255,255,255,0.04));
+  }
+  .rc-hash {
+    font-family: var(--font-mono, 'SF Mono', 'Fira Code', monospace);
+    font-size: 0.72rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .rc-scope {
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    flex-shrink: 0;
+  }
+  .rc-subject {
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+  }
+  .rc-time {
+    color: var(--text-dim);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .recent-commits-empty {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    padding: var(--space-md);
   }
   @media (max-width: 1200px) {
     .metrics-dashboard { grid-template-columns: 1fr !important; }
     #gsd-section-terminal,
-    #gsd-section-phase-velocity,
-    #gsd-section-milestone-comparison {
+    #gsd-section-recent-commits {
       grid-column: 1;
       grid-row: auto;
     }
@@ -292,135 +342,6 @@ const UX_CLEANUP_SCRIPT = `
   .gsd-section-label.warm { border-color: #d29922; }
   .gsd-section-label.cold { border-color: #8b949e; }
 
-  /* --- Phase Velocity: compact empty states --- */
-  .velocity-timeline-empty,
-  .velocity-stats-empty,
-  .velocity-tdd-empty {
-    font-size: 0.8rem;
-    padding: 4px 0;
-    color: var(--text-dim);
-  }
-
-  /* --- Historical Trends: fully replaced by JS charts --- */
-  .history-section { margin-bottom: var(--space-sm); }
-  .history-section table { font-size: 0.8rem; }
-  .history-empty { display: none; }
-
-  /* Hide original broken velocity chart (replaced by JS) */
-  .velocity-chart { display: none; }
-
-  /* === Phases Per Milestone Chart (replaces velocity trend) === */
-  .gsd-phase-chart {
-    display: flex;
-    align-items: flex-end;
-    gap: 3px;
-    height: 140px;
-    padding: 0 4px 24px 4px;
-    position: relative;
-    border-bottom: 1px solid var(--border);
-  }
-  .gsd-phase-chart-bar {
-    flex: 1;
-    min-width: 0;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    height: 100%;
-  }
-  .gsd-phase-chart-fill {
-    width: 100%;
-    max-width: 36px;
-    border-radius: 3px 3px 0 0;
-    background: linear-gradient(to top, #1f6feb, #58a6ff);
-    transition: height 0.3s ease;
-    position: relative;
-    min-height: 2px;
-  }
-  .gsd-phase-chart-fill:hover {
-    filter: brightness(1.3);
-  }
-  .gsd-phase-chart-val {
-    font-size: 0.65rem;
-    color: var(--text-muted);
-    margin-bottom: 2px;
-    font-weight: 600;
-  }
-  .gsd-phase-chart-label {
-    position: absolute;
-    bottom: -20px;
-    font-size: 0.6rem;
-    color: var(--text-dim);
-    white-space: nowrap;
-    transform: rotate(-35deg);
-    transform-origin: top center;
-  }
-  .gsd-phase-chart-title {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 8px;
-  }
-
-  /* === Milestone Comparison Chart (replaces table) === */
-  .gsd-milestone-bars {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-top: 8px;
-  }
-  .gsd-ms-row {
-    display: grid;
-    grid-template-columns: 100px 1fr 50px;
-    align-items: center;
-    gap: 8px;
-    height: 22px;
-  }
-  .gsd-ms-label {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    text-align: right;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .gsd-ms-track {
-    height: 16px;
-    background: var(--surface);
-    border-radius: 3px;
-    overflow: hidden;
-    display: flex;
-    gap: 1px;
-  }
-  .gsd-ms-seg {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 0.3s ease;
-    position: relative;
-  }
-  .gsd-ms-seg.phases { background: #1f6feb; }
-  .gsd-ms-seg.plans { background: #3fb950; }
-  .gsd-ms-count {
-    font-size: 0.65rem;
-    color: var(--text-dim);
-    white-space: nowrap;
-  }
-  .gsd-ms-legend {
-    display: flex;
-    gap: 12px;
-    margin-top: 6px;
-    font-size: 0.7rem;
-    color: var(--text-muted);
-  }
-  .gsd-ms-legend-swatch {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-    margin-right: 4px;
-    vertical-align: middle;
-  }
 
   /* === Milestones Timeline: compact grid === */
   .timeline { display: none; } /* hide original, replaced by grid */
@@ -487,100 +408,7 @@ const UX_CLEANUP_SCRIPT = `
 <script>
 (function() {
   // =====================================================================
-  // 1. VELOCITY TREND -> Proper bar chart using phase counts
-  // =====================================================================
-  var velocityChart = document.querySelector('.velocity-chart');
-  if (velocityChart) {
-    var groups = velocityChart.querySelectorAll('.velocity-bar-group');
-    var data = [];
-    groups.forEach(function(g) {
-      var label = g.querySelector('.velocity-label');
-      var phases = g.querySelector('.velocity-phases');
-      if (label && phases) {
-        var count = parseInt(phases.textContent) || 0;
-        data.push({ label: label.textContent.trim(), count: count });
-      }
-    });
-
-    // Reverse so oldest is on the left (chronological)
-    data.reverse();
-
-    var maxCount = Math.max.apply(null, data.map(function(d) { return d.count; }));
-    if (maxCount === 0) maxCount = 1;
-
-    var chartHtml = '<div class="gsd-phase-chart-title">Phases per Milestone</div>';
-    chartHtml += '<div class="gsd-phase-chart">';
-    data.forEach(function(d) {
-      var pct = Math.round((d.count / maxCount) * 100);
-      var heightPct = Math.max(pct, d.count > 0 ? 8 : 2);
-      chartHtml += '<div class="gsd-phase-chart-bar">' +
-        '<div class="gsd-phase-chart-val">' + d.count + '</div>' +
-        '<div class="gsd-phase-chart-fill" style="height:' + heightPct + '%" title="' + d.label + ': ' + d.count + ' phases"></div>' +
-        '<div class="gsd-phase-chart-label">' + d.label + '</div>' +
-        '</div>';
-    });
-    chartHtml += '</div>';
-
-    // Replace the history-section containing velocity chart
-    var histSection = velocityChart.closest('.history-section');
-    if (histSection) {
-      histSection.innerHTML = '<h3>Phases per Milestone</h3>' + chartHtml;
-    }
-  }
-
-  // =====================================================================
-  // 2. MILESTONE COMPARISON TABLE -> Horizontal bar chart
-  // =====================================================================
-  var milestoneTable = document.querySelector('.milestone-table');
-  if (milestoneTable) {
-    var rows = milestoneTable.querySelectorAll('tbody tr');
-    var msData = [];
-    var maxPlans = 0;
-    rows.forEach(function(row) {
-      var cells = row.querySelectorAll('td');
-      if (cells.length >= 3) {
-        var name = cells[0].textContent.trim();
-        var vMatch = name.match(/^v[\\d.]+/);
-        var shortName = vMatch ? vMatch[0] : name.substring(0, 8);
-        var phases = parseInt(cells[1].textContent) || 0;
-        var plans = parseInt(cells[2].textContent) || 0;
-        var total = phases + plans;
-        if (total > maxPlans) maxPlans = total;
-        msData.push({ name: shortName, phases: phases, plans: plans });
-      }
-    });
-    if (maxPlans === 0) maxPlans = 1;
-
-    // Reverse for chronological order (oldest first)
-    msData.reverse();
-
-    var barsHtml = '<div class="gsd-ms-legend">' +
-      '<span><span class="gsd-ms-legend-swatch" style="background:#1f6feb"></span>Phases</span>' +
-      '<span><span class="gsd-ms-legend-swatch" style="background:#3fb950"></span>Plans</span>' +
-      '</div>';
-    barsHtml += '<div class="gsd-milestone-bars">';
-    msData.forEach(function(d) {
-      var phaseW = Math.round((d.phases / maxPlans) * 100);
-      var planW = Math.round((d.plans / maxPlans) * 100);
-      barsHtml += '<div class="gsd-ms-row">' +
-        '<div class="gsd-ms-label" title="' + d.name + '">' + d.name + '</div>' +
-        '<div class="gsd-ms-track">' +
-        '<div class="gsd-ms-seg phases" style="width:' + phaseW + '%"></div>' +
-        '<div class="gsd-ms-seg plans" style="width:' + planW + '%"></div>' +
-        '</div>' +
-        '<div class="gsd-ms-count">' + d.phases + 'p / ' + d.plans + 'pl</div>' +
-        '</div>';
-    });
-    barsHtml += '</div>';
-
-    var tableSection = milestoneTable.closest('.history-section');
-    if (tableSection) {
-      tableSection.innerHTML = '<h3>Milestone Comparison</h3>' + barsHtml;
-    }
-  }
-
-  // =====================================================================
-  // 3. MILESTONES TIMELINE -> Compact 2-column grid
+  // 1. MILESTONES TIMELINE -> Compact 2-column grid
   // =====================================================================
   var timeline = document.querySelector('.timeline');
   if (timeline) {
@@ -654,12 +482,11 @@ const UX_CLEANUP_SCRIPT = `
   }
 
   // =====================================================================
-  // 4. Tier labels on metric sections
+  // 2. Tier labels on metric sections
   // =====================================================================
   var tierLabels = {
     'terminal': ['Terminal', 'hot'],
-    'phase-velocity': ['Phase Velocity', 'warm'],
-    'milestone-comparison': ['Milestone Comparison', 'cold'],
+    'recent-commits': ['Recent Commits', 'warm'],
   };
   Object.keys(tierLabels).forEach(function(id) {
     var el = document.getElementById('gsd-section-' + id);
@@ -672,7 +499,7 @@ const UX_CLEANUP_SCRIPT = `
   });
 
   // =====================================================================
-  // 6. Misc cleanup
+  // 3. Misc cleanup
   // =====================================================================
 
   // Replace raw session UUID with friendly label
@@ -692,17 +519,6 @@ const UX_CLEANUP_SCRIPT = `
     }
   }
 
-  // Fix velocity "314/318 plans" to be contextual
-  var progressPlans = document.querySelector('.progress-plans');
-  if (progressPlans) {
-    var txt = progressPlans.textContent;
-    var match = txt.match(/(\\d+)\\s*\\/\\s*(\\d+)/);
-    if (match && parseInt(match[2]) > 50) {
-      progressPlans.innerHTML = '<span title="' + txt + '">' + match[1] + ' / ' + match[2] + ' plans (all milestones)</span>';
-      progressPlans.style.fontSize = '0.8rem';
-      progressPlans.style.color = 'var(--text-dim)';
-    }
-  }
 })();
 </script>`;
 
@@ -789,8 +605,8 @@ const LIVE_RELOAD_SCRIPT = `
             var oldRow = document.querySelector('.status-pulse-row');
             var newRow = newDoc.querySelector('.status-pulse-row');
             if (oldRow && newRow) oldRow.innerHTML = newRow.innerHTML;
-            // Update velocity + history sections (not terminal)
-            ['phase-velocity', 'milestone-comparison'].forEach(function(id) {
+            // Update recent commits section (not terminal)
+            ['recent-commits'].forEach(function(id) {
               var oldEl = document.getElementById('gsd-section-' + id);
               var newEl = newDoc.getElementById('gsd-section-' + id);
               if (oldEl && newEl) oldEl.innerHTML = newEl.innerHTML;
