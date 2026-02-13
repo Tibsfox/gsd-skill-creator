@@ -1,14 +1,14 @@
 /**
- * Typed exec message protocol for inter-team communication.
+ * Typed kernel message protocol for inter-engine communication.
  *
- * Messages use Amiga exec-inspired field names:
- * - `ln_Type`: message type (from Node.ln_Type -- the node type field)
- * - `ln_Pri`: priority as signed byte -128..127 (from Node.ln_Pri)
- * - `mn_ReplyPort`: reply port name (from Message.mn_ReplyPort)
- * - `mn_Length`: estimated token cost (from Message.mn_Length)
+ * Messages use descriptive field names:
+ * - `type`: message type (determines how the payload is interpreted)
+ * - `priority`: priority as signed byte -128..127
+ * - `replyPort`: reply port name
+ * - `tokenCost`: estimated token cost
  *
  * This is the structured format that flows through the MessagePort FIFO
- * transport from Phase 111. ExecMessage defines the typed protocol;
+ * transport from Phase 111. KernelMessage defines the typed protocol;
  * PortMessage provides the transport layer.
  */
 
@@ -20,29 +20,29 @@ import { randomUUID } from 'node:crypto';
 // ============================================================================
 
 /**
- * All inter-chip message type strings.
+ * All inter-engine message type strings.
  *
- * Organized by chip domain, these types align with the messageTypes
- * declared in chip port declarations (chip-registry.ts).
+ * Organized by engine domain, these types align with the messageTypes
+ * declared in engine port declarations (engine-registry.ts).
  */
 export const MESSAGE_TYPES = [
-  // Agnus (context/scheduling)
+  // Context engine (context/scheduling)
   'budget-query',
   'budget-response',
   'allocate',
   'allocation-result',
   'schedule-request',
   'schedule-update',
-  // Denise (output/rendering)
+  // Render engine (output/rendering)
   'render-request',
   'render-result',
   'format-request',
   'format-result',
-  // Paula (I/O/events)
+  // IO engine (I/O/events)
   'io-request',
   'io-result',
   'observation',
-  // Gary (glue/integration)
+  // Router engine (glue/integration)
   'route-request',
   'route-result',
   'pattern-data',
@@ -55,49 +55,45 @@ export const MESSAGE_TYPES = [
 export type MessageType = (typeof MESSAGE_TYPES)[number];
 
 // ============================================================================
-// ExecMessageSchema
+// KernelMessageSchema
 // ============================================================================
 
 /**
- * Zod schema for an exec message with Amiga-inspired field names.
- *
- * Field naming follows the Amiga exec library conventions:
- * - `ln_Type` / `ln_Pri` from struct Node (list node fields)
- * - `mn_ReplyPort` / `mn_Length` from struct Message
+ * Zod schema for a kernel message.
  *
  * Priority uses a signed byte range (-128 to 127) where higher values
- * mean higher priority, matching the Amiga exec convention.
+ * mean higher priority.
  */
-export const ExecMessageSchema = z.object({
+export const KernelMessageSchema = z.object({
   /** Unique message identifier. */
   id: z.string().min(1),
 
   /** Message type -- determines how the payload is interpreted. */
-  ln_Type: z.enum(MESSAGE_TYPES),
+  type: z.enum(MESSAGE_TYPES),
 
   /**
    * Priority as signed byte (-128 to 127).
-   * Higher values mean higher priority, matching Amiga exec convention.
+   * Higher values mean higher priority.
    */
-  ln_Pri: z.number().int().min(-128).max(127),
+  priority: z.number().int().min(-128).max(127),
 
   /** Reply port name -- where to send responses. Optional. */
-  mn_ReplyPort: z.string().min(1).optional(),
+  replyPort: z.string().min(1).optional(),
 
   /**
    * Estimated token cost of this message.
-   * Enables the DMA budget system to account for message overhead.
+   * Enables the budget system to account for message overhead.
    * Non-negative integer, defaults to 0.
    */
-  mn_Length: z.number().int().min(0).default(0),
+  tokenCost: z.number().int().min(0).default(0),
 
-  /** Sending chip name. */
+  /** Sending engine name. */
   sender: z.string().min(1),
 
-  /** Receiving chip name. */
+  /** Receiving engine name. */
   receiver: z.string().min(1),
 
-  /** Message payload -- typed by ln_Type convention, not schema-enforced. */
+  /** Message payload -- typed by type convention, not schema-enforced. */
   payload: z.unknown(),
 
   /** ISO 8601 timestamp. */
@@ -107,35 +103,35 @@ export const ExecMessageSchema = z.object({
   inReplyTo: z.string().optional(),
 });
 
-/** A typed exec message with Amiga-inspired fields. */
-export type ExecMessage = z.infer<typeof ExecMessageSchema>;
+/** A typed kernel message. */
+export type KernelMessage = z.infer<typeof KernelMessageSchema>;
 
 // ============================================================================
 // createMessage
 // ============================================================================
 
 /**
- * Factory for creating exec messages with sensible defaults.
+ * Factory for creating kernel messages with sensible defaults.
  *
  * Generates a unique ID via `crypto.randomUUID()`, defaults priority
- * to 0 (neutral), mn_Length to 0, and sets the timestamp to now.
- * The resulting message is validated against `ExecMessageSchema`.
+ * to 0 (neutral), tokenCost to 0, and sets the timestamp to now.
+ * The resulting message is validated against `KernelMessageSchema`.
  */
 export function createMessage(opts: {
-  ln_Type: MessageType;
+  type: MessageType;
   sender: string;
   receiver: string;
   payload: unknown;
-  ln_Pri?: number;
-  mn_ReplyPort?: string;
-  mn_Length?: number;
-}): ExecMessage {
-  return ExecMessageSchema.parse({
+  priority?: number;
+  replyPort?: string;
+  tokenCost?: number;
+}): KernelMessage {
+  return KernelMessageSchema.parse({
     id: randomUUID(),
-    ln_Type: opts.ln_Type,
-    ln_Pri: opts.ln_Pri ?? 0,
-    mn_ReplyPort: opts.mn_ReplyPort,
-    mn_Length: opts.mn_Length ?? 0,
+    type: opts.type,
+    priority: opts.priority ?? 0,
+    replyPort: opts.replyPort,
+    tokenCost: opts.tokenCost ?? 0,
     sender: opts.sender,
     receiver: opts.receiver,
     payload: opts.payload,
@@ -153,29 +149,29 @@ export function createMessage(opts: {
  * The reply:
  * - References the original message via `inReplyTo`
  * - Routes to the original sender (receiver = original.sender)
- * - Does not chain reply ports (mn_ReplyPort is undefined)
+ * - Does not chain reply ports (replyPort is undefined)
  *
- * @throws {Error} If the original message has no `mn_ReplyPort`.
+ * @throws {Error} If the original message has no `replyPort`.
  */
 export function createReply(
-  original: ExecMessage,
+  original: KernelMessage,
   opts: {
-    ln_Type: MessageType;
+    type: MessageType;
     payload: unknown;
     sender: string;
-    ln_Pri?: number;
-    mn_Length?: number;
+    priority?: number;
+    tokenCost?: number;
   },
-): ExecMessage {
-  if (!original.mn_ReplyPort) {
+): KernelMessage {
+  if (!original.replyPort) {
     throw new Error('Original message has no reply port');
   }
 
-  return ExecMessageSchema.parse({
+  return KernelMessageSchema.parse({
     id: randomUUID(),
-    ln_Type: opts.ln_Type,
-    ln_Pri: opts.ln_Pri ?? 0,
-    mn_Length: opts.mn_Length ?? 0,
+    type: opts.type,
+    priority: opts.priority ?? 0,
+    tokenCost: opts.tokenCost ?? 0,
     sender: opts.sender,
     receiver: original.sender,
     payload: opts.payload,

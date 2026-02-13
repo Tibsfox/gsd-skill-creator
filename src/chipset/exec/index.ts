@@ -1,24 +1,24 @@
 /**
- * Barrel exports for the exec kernel module.
+ * Barrel exports for the kernel module.
  *
- * Re-exports the complete exec API: message protocol, scheduler,
- * DMA budget manager, and kernel orchestrator.
+ * Re-exports the complete kernel API: message protocol, scheduler,
+ * budget manager, and kernel orchestrator.
  */
 
 // Message protocol
 export {
-  ExecMessageSchema,
+  KernelMessageSchema,
   MESSAGE_TYPES,
   createMessage,
   createReply,
 } from './messages.js';
-export type { ExecMessage, MessageType } from './messages.js';
+export type { KernelMessage, MessageType } from './messages.js';
 
 // Scheduler
 export { ExecScheduler } from './scheduler.js';
 export type { SchedulerEntry, TeamState } from './scheduler.js';
 
-// DMA Budget
+// Budget
 export { DmaBudgetManager } from './dma-budget.js';
 export type { BudgetStatus, DmaBudgetConfig } from './dma-budget.js';
 
