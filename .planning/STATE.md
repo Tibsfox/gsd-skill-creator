@@ -123,6 +123,11 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Parent in ProvenanceNode means upstream input (first resolvable input in chain), not downstream consumer
 - Conservative default: unknown/empty provenance chains inherit 'stranger' tier
 - Cycle prevention via visited Set in recursive provenance trace
+- Trust progression based on approval count: 1=session, 2=7-day, 3=30-day, 4+=90-day
+- Critical patterns locked at session level forever regardless of approval count
+- approve and suppress both call trustStore.approve (UI distinction only, same trust mechanics)
+- Session-level entries have null expiresAt (caller manages session lifecycle externally)
+- pruneExpired skips session entries (no expiresAt to compare against)
 - Common word filtering via 60+ entry Set for scope extraction (stop words, verbs, generic heading words)
 - File glob extraction strips wildcards, extensions, and leading dots to get meaningful stems
 - Drift ratio rounded to 2 decimal places for consistent severity thresholds
@@ -145,7 +150,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Helper endpoint wired into serve-dashboard.mjs via dynamic import (browser->filesystem bridge)
 - No WebSockets -- dashboard polls outbox at 2-3s intervals
 - Staging module at src/staging/ (types, schema, directory, intake, state-machine, index)
-- Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, report, index)
+- Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, trust-store, finding-actions, report, index)
 - Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
@@ -161,15 +166,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 388 complete |
+| Total plans | 389 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 139-03-PLAN.md
-Stopped at: Plan 139-03 complete (scope drift detector)
-Next action: Continue phase 139 (plans 139-04 and 139-05 remaining).
-Context: v1.17 Staging Layer. Phase 139 in progress. Scope drift detector added to src/staging/derived/. 28 derived tests passing (14 new from 139-03).
+Last: 2026-02-13 — Completed 136-04-PLAN.md
+Stopped at: Plan 136-04 complete (finding actions and trust decay store)
+Next action: Continue phase 136 (plan 136-05 remaining).
+Context: v1.17 Staging Layer. Phase 136 in progress. Trust store and finding actions added to src/staging/hygiene/. 222 hygiene tests passing (61 new from 136-04).
 
 ---
-*Last updated: 2026-02-13 (139-03 complete)*
+*Last updated: 2026-02-13 (136-04 complete)*
