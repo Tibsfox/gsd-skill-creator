@@ -1,10 +1,10 @@
 /**
- * Copper Learning Compiler -- transforms session observations into candidate Copper Lists.
+ * Pipeline Learning Compiler -- transforms session observations into candidate Pipelines.
  *
  * Bridges the observation pipeline (sessions.jsonl, PatternAnalyzer) to the
- * Copper execution system. Detects recurring workflows from session data,
+ * Pipeline execution system. Detects recurring workflows from session data,
  * infers lifecycle synchronization points and skill activations, and produces
- * executable Copper Lists with confidence scores derived from frequency and recency.
+ * executable Pipelines with confidence scores derived from frequency and recency.
  *
  * Compilation pipeline:
  * 1. Extract workflow fingerprints from sessions (normalized tool+command keys)
@@ -12,18 +12,18 @@
  * 3. Infer lifecycle events from command/tool keywords
  * 4. Calculate confidence from frequency + recency
  * 5. Filter, sort, and limit patterns
- * 6. Compile each pattern into a validated CopperList
+ * 6. Compile each pattern into a validated Pipeline
  */
 
 import type { SessionObservation } from '../../../types/observation.js';
 import type { SkillCandidate } from '../../../types/detection.js';
 import type {
-  CopperList,
-  CopperInstruction,
-  CopperMetadata,
+  Pipeline,
+  PipelineInstruction,
+  PipelineMetadata,
   GsdLifecycleEvent,
 } from '../types.js';
-import { CopperListSchema } from '../schema.js';
+import { PipelineSchema } from '../schema.js';
 import type {
   ObservationInput,
   WorkflowPattern,
@@ -70,11 +70,11 @@ const LIFECYCLE_KEYWORD_MAP: Array<{ keywords: string[]; event: GsdLifecycleEven
 // ============================================================================
 
 /**
- * Compiles session observation data into candidate Copper Lists.
+ * Compiles session observation data into candidate Pipelines.
  *
  * Groups sessions by workflow fingerprint, detects patterns above the
  * configured occurrence threshold, infers lifecycle events from commands
- * and tools, and produces validated CopperLists with confidence scores.
+ * and tools, and produces validated Pipelines with confidence scores.
  */
 export class LearningCompiler {
   private readonly config: CompilerConfig;
@@ -84,7 +84,7 @@ export class LearningCompiler {
   }
 
   /**
-   * Compile observation input into candidate Copper Lists.
+   * Compile observation input into candidate Pipelines.
    */
   compile(input: ObservationInput): CompilationResult {
     const { sessions, candidates } = input;
@@ -126,8 +126,8 @@ export class LearningCompiler {
     const acceptedPatterns = allPatterns.slice(0, this.config.maxPatterns);
     filteredCount += Math.max(0, allPatterns.length - this.config.maxPatterns);
 
-    // Step 4: Compile each pattern into a CopperList
-    const lists: CopperList[] = [];
+    // Step 4: Compile each pattern into a Pipeline
+    const lists: Pipeline[] = [];
     for (const pattern of acceptedPatterns) {
       const list = this.compilePattern(pattern, candidates);
       if (list !== null) {
@@ -300,15 +300,15 @@ export class LearningCompiler {
   }
 
   /**
-   * Compile a WorkflowPattern into a CopperList.
+   * Compile a WorkflowPattern into a Pipeline.
    *
-   * Returns null if the compiled list fails schema validation.
+   * Returns null if the compiled pipeline fails schema validation.
    */
   private compilePattern(
     pattern: WorkflowPattern,
     candidates?: SkillCandidate[],
-  ): CopperList | null {
-    const instructions: CopperInstruction[] = [];
+  ): Pipeline | null {
+    const instructions: PipelineInstruction[] = [];
 
     // First lifecycle event as initial WAIT
     if (pattern.lifecycleEvents.length > 0) {
@@ -362,7 +362,7 @@ export class LearningCompiler {
     }
 
     // Build metadata
-    const metadata: CopperMetadata = {
+    const metadata: PipelineMetadata = {
       name: `learning-${pattern.id}`,
       description: `Learned workflow: ${pattern.description}`,
       sourcePatterns: [pattern.workflowType],
@@ -372,15 +372,15 @@ export class LearningCompiler {
       version: 1,
     };
 
-    const list: CopperList = { metadata, instructions };
+    const list: Pipeline = { metadata, instructions };
 
     // Validate against schema
-    const result = CopperListSchema.safeParse(list);
+    const result = PipelineSchema.safeParse(list);
     if (!result.success) {
       return null;
     }
 
-    return result.data as CopperList;
+    return result.data as Pipeline;
   }
 
   /**
