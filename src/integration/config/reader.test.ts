@@ -177,6 +177,12 @@ describe('readIntegrationConfig', () => {
           cooldown_days: 14,
           auto_dismiss_after_days: 60,
         },
+        terminal: {
+          port: 9090,
+          base_path: '/term',
+          auth_mode: 'none' as const,
+          theme: 'light' as const,
+        },
       };
 
       mockReadFile.mockResolvedValue(JSON.stringify(fullConfig));

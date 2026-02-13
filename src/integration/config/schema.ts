@@ -14,6 +14,7 @@
 
 import { z } from 'zod';
 import type { IntegrationConfig } from './types.js';
+import { TerminalConfigSchema } from './terminal-schema.js';
 
 // ============================================================================
 // CONFIG-01: Feature Toggles Schema
@@ -114,6 +115,12 @@ export const IntegrationConfigSchema = z.object({
     min_occurrences: 3,
     cooldown_days: 7,
     auto_dismiss_after_days: 30,
+  })),
+  terminal: TerminalConfigSchema.default(() => ({
+    port: 3000,
+    base_path: '/terminal',
+    auth_mode: 'none' as const,
+    theme: 'dark' as const,
   })),
 });
 
