@@ -3,11 +3,11 @@
 ## Current Position
 
 Milestone: v1.16 -- Dashboard Console & Milestone Ingestion
-Phase: 132-console-panel-settings (plan 03 complete)
-Status: Executing phase 132
-Last activity: 2026-02-13 -- Completed 132-03 (activity timeline)
+Phase: 133-helper-endpoint-integration (plan 01 complete)
+Status: Executing phase 133
+Last activity: 2026-02-13 -- Completed 133-01 (helper endpoint wiring)
 
-Progress: [███░░░░░░░░░░░░░] 1/5 phases (132 in progress)
+Progress: [██████░░░░░░░░░░] 2/5 phases (133 in progress)
 
 ## Project Reference
 
@@ -92,6 +92,9 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - Toast notification auto-dismisses after 3 seconds with fade-out animation
 - Persistent offline banner before .console-settings-panel when helper unreachable
 - Force-tracked dist/dashboard/console-activity.js (matching existing dist/ pattern)
+- Dynamic import('./dist/console/helper.js') with try/catch for graceful degradation when dist/ not compiled
+- Helper router passthrough placed after /api/regenerate but before static file serving for correct priority
+- Integration test creates minimal HTTP server mirroring serve-dashboard.mjs handler flow (not importing .mjs directly)
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -103,7 +106,7 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - v1.14 promotion pipeline: src/pipeline/ + src/dashboard/collectors/
 - 19 milestones shipped, 127 phases, 362 plans, ~149k LOC
 - Filesystem message bus at .planning/console/ (inbox/outbox/config/uploads/logs)
-- Helper endpoint (Express) mounted alongside dashboard, localhost-only
+- Helper endpoint wired into serve-dashboard.mjs via dynamic import (browser->filesystem bridge)
 - No WebSockets -- dashboard polls outbox at 2-3s intervals
 
 ### Todos
@@ -123,10 +126,10 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Completed 132-03 (activity timeline)
-Stopped at: Completed 132-03-PLAN.md execution
-Next action: Continue with remaining 132 plans
-Context: Activity timeline renders bridge.jsonl entries reverse-chronologically with five color-coded type badges. classifyLogEntry converts BridgeLogEntry to ActivityEntry via priority dispatch. Clipboard fallback wraps window.fetch for helper endpoint failure detection with toast notification and offline banner. All three console page sections (status, questions+settings, activity) now wired with real implementations. Generator reads bridge.jsonl at generation time. 16 new tests (202 total dashboard tests passing).
+Last: 2026-02-13 -- Completed 133-01 (helper endpoint wiring)
+Stopped at: Completed 133-01-PLAN.md execution
+Next action: Continue with remaining 133 plans or next phase
+Context: createHelperRouter wired into serve-dashboard.mjs via dynamic import of dist/console/helper.js. Helper router passthrough placed after /api/regenerate but before static file serving. POST /api/console/message now reaches filesystem bridge. Integration test (7 cases) proves end-to-end flow. Graceful degradation if dist/ not compiled. All browser-to-filesystem flows (settings, questions, milestones) now work through the live dashboard server.
 
 ---
-*Last updated: 2026-02-13 (132-03 complete)*
+*Last updated: 2026-02-13 (133-01 complete)*
