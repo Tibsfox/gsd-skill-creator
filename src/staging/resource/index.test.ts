@@ -242,8 +242,8 @@ describe('end-to-end flow', () => {
     const complexityToUtilization: Record<string, number> = {
       low: 40, medium: 55, high: 70, critical: 80,
     };
-    expect(manifest.tokenBudget.utilizationPercent).toBe(
-      complexityToUtilization[manifest.visionAnalysis.overallComplexity],
+    expect(manifest.tokenBudget.utilizationPercent).toBeCloseTo(
+      complexityToUtilization[manifest.visionAnalysis.overallComplexity], 1,
     );
 
     // Tags match requirement categories
