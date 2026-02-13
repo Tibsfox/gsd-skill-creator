@@ -7,7 +7,7 @@ node_modules/
 # Planning docs (local only)
 .planning/
 
-# Generated dashboard
-dashboard/
+# Generated dashboard (root-level only, not src/dashboard/)
+/dashboard/
 
 .claude/
