@@ -1,0 +1,88 @@
+#!/bin/sh
+# GSD skill-creator post-commit hook
+# Captures commit metadata to .planning/patterns/sessions.jsonl
+#
+# This hook runs after every git commit and appends a structured JSON
+# observation entry for skill-creator's pattern detection pipeline.
+#
+# Requirements:
+#   - jq must be on PATH (graceful exit if missing)
+#   - .planning/patterns/ directory must exist
+#   - .planning/skill-creator.json observe_sessions must not be false
+#
+# Design:
+#   - POSIX shell (no bash-isms)
+#   - No network calls, no npm/node invocations
+#   - All failures exit 0 silently (never block commits)
+#   - JSON constructed with jq for safe escaping
+#   - Append-only writes to sessions.jsonl
+#
+# This hook is installed by: node project-claude/install.cjs
+# It is safe to remove: node project-claude/install.cjs --uninstall
+
+# ---------------------------------------------------------------------------
+# Guard checks — exit silently if preconditions are not met
+# ---------------------------------------------------------------------------
+
+# 1. jq is required for safe JSON construction
+command -v jq >/dev/null 2>&1 || exit 0
+
+# 2. Patterns directory must exist (created by install script)
+[ -d ".planning/patterns" ] || exit 0
+
+# 3. Check integration config toggle (default: enabled)
+if [ -f ".planning/skill-creator.json" ]; then
+    if jq -e '.integration.observe_sessions == false' ".planning/skill-creator.json" >/dev/null 2>&1; then
+        exit 0
+    fi
+fi
+
+# ---------------------------------------------------------------------------
+# Data extraction
+# ---------------------------------------------------------------------------
+
+# Timestamp in ISO 8601 UTC
+TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+# Full commit subject line
+COMMIT_MSG=$(git log -1 --pretty=format:"%s" 2>/dev/null || exit 0)
+
+# Conventional commit type: text before first '(' or ':'
+COMMIT_TYPE=$(echo "$COMMIT_MSG" | sed -n 's/^\([a-z]*\).*/\1/p')
+[ -z "$COMMIT_TYPE" ] && COMMIT_TYPE="other"
+
+# Number of files changed in this commit (--root handles initial commits)
+FILES_CHANGED=$(git diff-tree --no-commit-id --name-only -r --root HEAD 2>/dev/null | wc -l | tr -d ' ')
+
+# Current phase from STATE.md (null if unavailable)
+PHASE=$(sed -n 's/^.*Phase:*[[:space:]]*\([0-9]*\).*/\1/p' .planning/STATE.md 2>/dev/null | head -1)
+
+# ---------------------------------------------------------------------------
+# JSON construction with jq (safe escaping for all string values)
+# ---------------------------------------------------------------------------
+
+ENTRY=$(jq -c -n \
+    --arg type "commit" \
+    --arg timestamp "$TIMESTAMP" \
+    --arg commit_type "$COMMIT_TYPE" \
+    --arg message "$COMMIT_MSG" \
+    --argjson files_changed "${FILES_CHANGED:-0}" \
+    --arg source "hook" \
+    --arg phase "$PHASE" \
+    '{
+        type: $type,
+        timestamp: $timestamp,
+        commit_type: $commit_type,
+        message: $message,
+        files_changed: $files_changed,
+        source: $source,
+        phase: (if $phase == "" then null else ($phase | tonumber) end)
+    }') || exit 0
+
+# ---------------------------------------------------------------------------
+# Append to sessions.jsonl (atomic append, no locking needed for single line)
+# ---------------------------------------------------------------------------
+
+printf '%s\n' "$ENTRY" >> ".planning/patterns/sessions.jsonl"
+
+exit 0
