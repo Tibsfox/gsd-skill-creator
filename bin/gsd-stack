@@ -2170,6 +2170,217 @@ cmd_mark() {
 }
 
 # ==============================================================================
+# Stop-Record subcommand
+# ==============================================================================
+
+cmd_stop_record() {
+  # Check for active recording
+  local rec_name
+  rec_name=$(is_recording) || {
+    echo "Error: No active recording. Nothing to stop."
+    exit 1
+  }
+
+  local rec_dir="$GSD_STACK_DIR/recordings/$rec_name"
+
+  # Write recording_stop event to stream before stopping
+  local stop_ts
+  stop_ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  printf '{"ts":"%s","type":"recording_stop","name":"%s"}\n' \
+    "$stop_ts" "$rec_name" >> "$rec_dir/stream.jsonl"
+
+  # Update meta.json: change status to stopped, add ended timestamp
+  local meta_content started session interval
+  meta_content=$(cat "$rec_dir/meta.json")
+  started=$(json_field "$meta_content" "started")
+  session=$(json_field "$meta_content" "session")
+  interval=$(json_field_num "$meta_content" "interval")
+  interval="${interval:-5}"
+
+  printf '{"name":"%s","status":"stopped","started":"%s","ended":"%s","session":"%s","interval":%s}\n' \
+    "$rec_name" "$started" "$stop_ts" "$session" "$interval" > "$rec_dir/meta.json"
+
+  # === Compute metrics from stream.jsonl ===
+  local stream_file="$rec_dir/stream.jsonl"
+  local total_events=0
+  local terminal_count=0
+  local file_change_count=0
+  local marker_count=0
+  local stack_push_count=0
+  local stack_pop_count=0
+  local stack_clear_count=0
+  local stack_poke_count=0
+  local recording_start_count=0
+  local recording_stop_count=0
+  local first_ts=""
+  local last_ts=""
+
+  while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+    total_events=$((total_events + 1))
+
+    local event_type event_ts
+    event_type=$(json_field "$line" "type")
+    event_ts=$(json_field "$line" "ts")
+
+    # Track first/last timestamps
+    if [[ -z "$first_ts" ]]; then
+      first_ts="$event_ts"
+    fi
+    last_ts="$event_ts"
+
+    # Count by type
+    case "$event_type" in
+      terminal)         terminal_count=$((terminal_count + 1)) ;;
+      file_change)      file_change_count=$((file_change_count + 1)) ;;
+      marker)           marker_count=$((marker_count + 1)) ;;
+      stack_push)       stack_push_count=$((stack_push_count + 1)) ;;
+      stack_pop)        stack_pop_count=$((stack_pop_count + 1)) ;;
+      stack_clear)      stack_clear_count=$((stack_clear_count + 1)) ;;
+      stack_poke)       stack_poke_count=$((stack_poke_count + 1)) ;;
+      recording_start)  recording_start_count=$((recording_start_count + 1)) ;;
+      recording_stop)   recording_stop_count=$((recording_stop_count + 1)) ;;
+    esac
+  done < "$stream_file"
+
+  # Compute duration in seconds
+  local duration_seconds=0
+  if [[ -n "$first_ts" ]] && [[ -n "$last_ts" ]]; then
+    local first_epoch last_epoch
+    first_epoch=$(date -d "$first_ts" +%s 2>/dev/null || echo "0")
+    last_epoch=$(date -d "$last_ts" +%s 2>/dev/null || echo "0")
+    if [[ "$first_epoch" -gt 0 ]] && [[ "$last_epoch" -gt 0 ]]; then
+      duration_seconds=$((last_epoch - first_epoch))
+    fi
+  fi
+
+  # Calculate stack operations total
+  local stack_ops=$((stack_push_count + stack_pop_count + stack_clear_count + stack_poke_count))
+
+  # Write metrics.json
+  printf '{"name":"%s","duration_seconds":%d,"event_count":%d,"events_by_type":{"terminal":%d,"file_change":%d,"marker":%d,"stack_push":%d,"stack_pop":%d,"stack_clear":%d,"stack_poke":%d,"recording_start":%d,"recording_stop":%d},"stack_operations":%d,"first_event":"%s","last_event":"%s"}\n' \
+    "$rec_name" "$duration_seconds" "$total_events" \
+    "$terminal_count" "$file_change_count" "$marker_count" \
+    "$stack_push_count" "$stack_pop_count" "$stack_clear_count" "$stack_poke_count" \
+    "$recording_start_count" "$recording_stop_count" \
+    "$stack_ops" "$first_ts" "$last_ts" > "$rec_dir/metrics.json"
+
+  # === Generate transcript.md ===
+  {
+    printf "# Recording Transcript: %s\n\n" "$rec_name"
+    printf "**Started:** %s  \n" "$started"
+    printf "**Ended:** %s  \n" "$stop_ts"
+    printf "**Duration:** %d seconds  \n" "$duration_seconds"
+    printf "**Events:** %d total  \n\n" "$total_events"
+    printf '%s\n\n' "---"
+    printf "## Timeline\n\n"
+
+    # Re-read stream and generate timeline
+    while IFS= read -r line; do
+      [[ -z "$line" ]] && continue
+
+      local evt_type evt_ts
+      evt_type=$(json_field "$line" "type")
+      evt_ts=$(json_field "$line" "ts")
+      local display_ts="${evt_ts:11:8}"  # HH:MM:SS
+
+      case "$evt_type" in
+        recording_start)
+          printf "### %s -- Recording Started\n\n" "$display_ts"
+          ;;
+        recording_stop)
+          printf "### %s -- Recording Stopped\n\n" "$display_ts"
+          ;;
+        terminal)
+          local content
+          content=$(json_field "$line" "content")
+          # Truncate content for transcript
+          if [[ ${#content} -gt 200 ]]; then
+            content="${content:0:200}..."
+          fi
+          printf "**%s** Terminal snapshot  \n" "$display_ts"
+          if [[ -n "$content" ]]; then
+            printf '```\n%s\n```\n\n' "$content"
+          else
+            printf "\n"
+          fi
+          ;;
+        file_change)
+          local path action lines_delta
+          path=$(json_field "$line" "path")
+          action=$(json_field "$line" "action")
+          lines_delta=$(json_field_num "$line" "lines_delta" || echo "")
+          printf "**%s** File %s: \`%s\`" "$display_ts" "$action" "$path"
+          if [[ -n "${lines_delta:-}" ]]; then
+            printf " (%s lines)" "$lines_delta"
+          fi
+          printf "\n\n"
+          ;;
+        marker)
+          local label
+          label=$(json_field "$line" "label")
+          printf "### %s -- Marker: %s\n\n" "$display_ts" "$label"
+          ;;
+        stack_push)
+          local priority message
+          priority=$(json_field "$line" "priority")
+          message=$(json_field "$line" "message")
+          printf "**%s** Stack push [%s]: %s\n\n" "$display_ts" "$priority" "$message"
+          ;;
+        stack_pop)
+          local priority message
+          priority=$(json_field "$line" "priority")
+          message=$(json_field "$line" "message")
+          printf "**%s** Stack pop [%s]: %s\n\n" "$display_ts" "$priority" "$message"
+          ;;
+        stack_clear)
+          local count
+          count=$(json_field_num "$line" "count" || echo "0")
+          printf "**%s** Stack cleared (%s messages)\n\n" "$display_ts" "${count:-0}"
+          ;;
+        stack_poke)
+          printf "**%s** Stack poke\n\n" "$display_ts"
+          ;;
+        *)
+          printf "**%s** [%s]\n\n" "$display_ts" "$evt_type"
+          ;;
+      esac
+    done < "$stream_file"
+
+    printf '%s\n\n' "---"
+    printf "## Summary\n\n"
+    printf "| Metric | Value |\n"
+    printf "|--------|-------|\n"
+    printf "| Duration | %d seconds |\n" "$duration_seconds"
+    printf "| Total Events | %d |\n" "$total_events"
+    printf "| Terminal Snapshots | %d |\n" "$terminal_count"
+    printf "| File Changes | %d |\n" "$file_change_count"
+    printf "| Markers | %d |\n" "$marker_count"
+    printf "| Stack Operations | %d |\n" "$stack_ops"
+  } > "$rec_dir/transcript.md"
+
+  # Log event
+  log_event "stop-record" "stopped: $rec_name (${total_events} events, ${duration_seconds}s)"
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"name":"%s","duration_seconds":%d,"event_count":%d,"metrics":"%s","transcript":"%s"}\n' \
+      "$rec_name" "$duration_seconds" "$total_events" \
+      "$rec_dir/metrics.json" "$rec_dir/transcript.md"
+  else
+    printf "Recording '%s' stopped.\n" "$rec_name"
+    printf "  Duration:   %d seconds\n" "$duration_seconds"
+    printf "  Events:     %d total\n" "$total_events"
+    printf "  Terminal:   %d snapshots\n" "$terminal_count"
+    printf "  Files:      %d changes\n" "$file_change_count"
+    printf "  Markers:    %d\n" "$marker_count"
+    printf "  Stack ops:  %d\n" "$stack_ops"
+    printf "  Metrics:    %s\n" "$rec_dir/metrics.json"
+    printf "  Transcript: %s\n" "$rec_dir/transcript.md"
+  fi
+}
+
+# ==============================================================================
 # Known subcommands (stubs for future implementation)
 # ==============================================================================
 
@@ -2290,7 +2501,12 @@ main() {
       cmd_mark "$@"
       exit $?
       ;;
-    stop-record|play|metrics)
+    stop-record)
+      shift
+      cmd_stop_record "$@"
+      exit $?
+      ;;
+    play|metrics)
       echo "$cmd: not yet implemented"
       log_event "$cmd" "stub invoked"
       exit 0
