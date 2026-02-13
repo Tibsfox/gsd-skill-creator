@@ -25,6 +25,7 @@ import { IncomingMessage, ServerResponse } from 'node:http';
 import { writeFile, mkdir } from 'node:fs/promises';
 import { join, resolve, relative } from 'node:path';
 import { CONSOLE_DIRS } from './types.js';
+import { BridgeLogger } from './bridge-logger.js';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -131,6 +132,32 @@ function containsTraversal(value: string): boolean {
  */
 export function createHelperRouter(basePath: string): HelperRouter {
   const consoleRoot = resolve(basePath, CONSOLE_DIRS.root);
+  const logger = new BridgeLogger(basePath);
+
+  /**
+   * Safely log a bridge operation. Logger failures never propagate --
+   * they are swallowed to prevent HTTP 500 responses from audit logging.
+   */
+  async function safeLog(
+    filename: string,
+    subdirectory: string,
+    contentSize: number,
+    status: 'success' | 'error',
+    error?: string,
+  ): Promise<void> {
+    try {
+      await logger.log({
+        timestamp: new Date().toISOString(),
+        filename,
+        subdirectory,
+        contentSize,
+        status,
+        ...(error !== undefined ? { error } : {}),
+      });
+    } catch {
+      // Logger failure must not break the HTTP response
+    }
+  }
 
   return {
     async handleRequest(
@@ -177,15 +204,18 @@ export function createHelperRouter(basePath: string): HelperRouter {
       if (!ALLOWED_SUBDIRECTORIES.has(subdirectory)) {
         // Also check for traversal in subdirectory
         if (containsTraversal(subdirectory)) {
+          await safeLog(body.filename, subdirectory, 0, 'error', 'Path traversal rejected');
           jsonResponse(res, 403, { error: 'Path traversal rejected' });
           return true;
         }
+        await safeLog(body.filename, subdirectory, 0, 'error', 'Subdirectory not allowed');
         jsonResponse(res, 403, { error: 'Subdirectory not allowed' });
         return true;
       }
 
       // Path traversal prevention on filename (belt-and-suspenders)
       if (containsTraversal(body.filename)) {
+        await safeLog(body.filename, subdirectory, 0, 'error', 'Path traversal rejected');
         jsonResponse(res, 403, { error: 'Path traversal rejected' });
         return true;
       }
@@ -195,13 +225,18 @@ export function createHelperRouter(basePath: string): HelperRouter {
       const targetPath = resolve(targetDir, body.filename);
 
       if (!targetPath.startsWith(resolve(consoleRoot) + '/')) {
+        await safeLog(body.filename, subdirectory, 0, 'error', 'Path traversal rejected');
         jsonResponse(res, 403, { error: 'Path traversal rejected' });
         return true;
       }
 
       // Write the file
       await mkdir(targetDir, { recursive: true });
-      await writeFile(targetPath, JSON.stringify(body.content, null, 2), 'utf-8');
+      const contentStr = JSON.stringify(body.content, null, 2);
+      await writeFile(targetPath, contentStr, 'utf-8');
+
+      // Log the successful write
+      await safeLog(body.filename, subdirectory, contentStr.length, 'success');
 
       // Return relative path from console root
       const relativePath = relative(consoleRoot, targetPath);
