@@ -123,3 +123,36 @@ export const DEFAULT_RETENTION_CONFIG: RetentionConfig = {
 export function normalizeObservationTier(obs: SessionObservation): SessionObservation {
   return { ...obs, tier: obs.tier ?? 'persistent' };
 }
+
+/** Configuration for determinism analysis (DTRM-04) */
+export interface DeterminismConfig {
+  /** Minimum number of observations required before scoring an operation (default: 3) */
+  minSampleSize: number;
+}
+
+/** Default configuration for determinism analysis */
+export const DEFAULT_DETERMINISM_CONFIG: DeterminismConfig = {
+  minSampleSize: 3,
+};
+
+/** Composite key identifying a unique tool operation: toolName + SHA-256 of JSON-serialized input */
+export interface OperationKey {
+  /** Tool name (e.g., 'Read', 'Write', 'Bash') */
+  toolName: string;
+  /** SHA-256 hex of the JSON-stringified input parameters */
+  inputHash: string;
+}
+
+/** Determinism analysis result for one operation (DTRM-02) */
+export interface DeterminismScore {
+  /** Operation identifier (tool + input hash) */
+  operation: OperationKey;
+  /** Variance score: 0.0 = always identical output, 1.0 = always different */
+  varianceScore: number;
+  /** Total number of observations for this operation */
+  observationCount: number;
+  /** Number of unique output hashes seen */
+  uniqueOutputs: number;
+  /** Session IDs where this operation was observed */
+  sessionIds: string[];
+}
