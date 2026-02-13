@@ -7,6 +7,7 @@ const defaultConfig: TerminalConfig = {
   base_path: '/terminal',
   auth_mode: 'none',
   theme: 'dark',
+  session_name: 'dev',
 };
 
 // ---------------------------------------------------------------------------
