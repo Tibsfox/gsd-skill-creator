@@ -25,7 +25,7 @@ import type { EngineRegistry } from '../teams/chip-registry.js';
 import { MessagePort } from '../teams/message-port.js';
 import type { KernelMessage } from './messages.js';
 import { ExecScheduler } from './scheduler.js';
-import { DmaBudgetManager } from './dma-budget.js';
+import { BudgetManager } from './dma-budget.js';
 import type { BudgetStatus } from './dma-budget.js';
 
 // ============================================================================
@@ -67,7 +67,7 @@ export class ExecKernel {
   private readonly scheduler: ExecScheduler;
 
   /** Budget manager. */
-  private readonly budget: DmaBudgetManager;
+  private readonly budget: BudgetManager;
 
   /** Per-engine inbound message ports. */
   private readonly ports: Map<string, MessagePort> = new Map();
@@ -80,7 +80,7 @@ export class ExecKernel {
 
     // Create scheduler and budget manager
     this.scheduler = new ExecScheduler();
-    this.budget = new DmaBudgetManager({
+    this.budget = new BudgetManager({
       totalBudget: config.totalBudget,
       headroomPercent: config.headroomPercent,
     });
@@ -90,7 +90,7 @@ export class ExecKernel {
     for (const engine of this.registry.all()) {
       this.engineNames.push(engine.name);
       this.scheduler.add(engine.name, engine.dma.percentage);
-      this.budget.registerChip(engine.name, engine.dma.percentage);
+      this.budget.registerEngine(engine.name, engine.dma.percentage);
       this.ports.set(engine.name, new MessagePort(`${engine.name}-inbound`, 64));
     }
   }

@@ -202,7 +202,7 @@ describe('ExecKernel -- getState', () => {
     expect(state.engines.length).toBe(4);
 
     // Find context-engine in the engines array
-    const contextStatus = state.engines.find((c) => c.chipName === 'context-engine');
+    const contextStatus = state.engines.find((c) => c.engineName === 'context-engine');
     expect(contextStatus).toBeDefined();
     expect(contextStatus!.spent).toBe(1000);
   });

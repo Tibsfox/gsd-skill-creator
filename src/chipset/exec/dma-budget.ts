@@ -1,21 +1,20 @@
 /**
- * DMA-channel token budget manager for the exec kernel.
+ * Token budget manager for the coprocessor kernel.
  *
- * Provides percentage-based per-chip token budget allocation with a
- * configurable headroom reserve and burst mode (BLITHOG). Each chip
- * receives a guaranteed minimum allocation calculated from the effective
- * budget (total minus headroom). Burst mode allows a chip to temporarily
+ * Provides percentage-based per-engine token budget allocation with a
+ * configurable headroom reserve and burst mode. Each engine receives a
+ * guaranteed minimum allocation calculated from the effective budget
+ * (total minus headroom). Burst mode allows an engine to temporarily
  * exceed its allocation by borrowing from the headroom pool.
  *
  * Budget enforcement is soft: exceeding the allocation triggers a callback
- * and sets the exceeded flag, but does not block further spending. This
- * matches the Amiga DMA philosophy where the coprocessor signals contention
- * rather than hard-blocking.
+ * and sets the exceeded flag, but does not block further spending. The
+ * coprocessor signals contention rather than hard-blocking.
  *
  * Key behaviors:
- * - registerChip() allocates a percentage of the effective budget
+ * - registerEngine() allocates a percentage of the effective budget
  * - spend() deducts tokens with soft-limit exceeded detection
- * - enableBurst()/disableBurst() toggle BLITHOG burst mode per chip
+ * - enableBurst()/disableBurst() toggle burst mode per engine
  * - Burst spending beyond allocation draws from the headroom pool
  * - onExceeded() callback fires exactly once per exceedance (reset clears)
  * - reset()/resetAll() restore spending counters and headroom
@@ -25,51 +24,50 @@
 // Types
 // ============================================================================
 
-/** Configuration for the DMA budget manager. */
-export interface DmaBudgetConfig {
-  /** Total token budget across all chips. */
+/** Configuration for the budget manager. */
+export interface BudgetConfig {
+  /** Total token budget across all engines. */
   totalBudget: number;
   /** Percentage of total budget reserved as headroom (default 5). */
   headroomPercent?: number;
 }
 
-/** Budget status snapshot for a single chip. */
+/** Budget status snapshot for a single engine. */
 export interface BudgetStatus {
-  /** Chip name. */
-  chipName: string;
-  /** Allocated token budget for this chip. */
+  /** Engine name. */
+  engineName: string;
+  /** Allocated token budget for this engine. */
   allocation: number;
   /** Tokens spent so far. */
   spent: number;
   /** Remaining tokens (can be negative if exceeded). */
   remaining: number;
-  /** Whether this chip has exceeded its allocation. */
+  /** Whether this engine has exceeded its allocation. */
   exceeded: boolean;
-  /** Whether burst mode (BLITHOG) is active for this chip. */
+  /** Whether burst mode is active for this engine. */
   burstActive: boolean;
 }
 
 // ============================================================================
-// Internal chip state
+// Internal engine state
 // ============================================================================
 
-interface ChipBudgetState {
+interface EngineBudgetState {
   allocation: number;
   spent: number;
   burstActive: boolean;
-  /** Tokens this chip has consumed from the headroom pool during burst. */
+  /** Tokens this engine has consumed from the headroom pool during burst. */
   burstSpent: number;
 }
 
 // ============================================================================
-// DmaBudgetManager
+// BudgetManager
 // ============================================================================
 
 /**
- * Per-chip DMA channel token budget manager with guaranteed minimums
- * and burst mode (BLITHOG).
+ * Per-engine token budget manager with guaranteed minimums and burst mode.
  */
-export class DmaBudgetManager {
+export class BudgetManager {
   /** Total token budget. */
   private readonly totalBudget: number;
 
@@ -82,19 +80,19 @@ export class DmaBudgetManager {
   /** Effective budget after headroom deduction. */
   private readonly effectiveBudget: number;
 
-  /** Per-chip budget state. */
-  private chips: Map<string, ChipBudgetState> = new Map();
+  /** Per-engine budget state. */
+  private engines: Map<string, EngineBudgetState> = new Map();
 
-  /** Tokens consumed from headroom across all burst-mode chips. */
+  /** Tokens consumed from headroom across all burst-mode engines. */
   private headroomSpent: number = 0;
 
-  /** Chips that have already triggered the exceeded callback. */
+  /** Engines that have already triggered the exceeded callback. */
   private exceededSet: Set<string> = new Set();
 
   /** Registered exceeded callbacks. */
-  private onExceededCallbacks: Array<(chipName: string) => void> = [];
+  private onExceededCallbacks: Array<(engineName: string) => void> = [];
 
-  constructor(config: DmaBudgetConfig) {
+  constructor(config: BudgetConfig) {
     this.totalBudget = config.totalBudget;
     this.headroomPercent = config.headroomPercent ?? 5;
     this.headroomPool = Math.floor(this.totalBudget * this.headroomPercent / 100);
@@ -106,17 +104,17 @@ export class DmaBudgetManager {
   // --------------------------------------------------------------------------
 
   /**
-   * Register a chip with the given DMA percentage.
+   * Register an engine with the given budget percentage.
    *
    * The allocation is calculated as a percentage of the effective budget
    * (total minus headroom), floored to an integer.
    *
-   * @param chipName - Unique chip identifier
-   * @param dmaPercentage - Percentage of effective budget (0-100)
+   * @param engineName - Unique engine identifier
+   * @param percentage - Percentage of effective budget (0-100)
    */
-  registerChip(chipName: string, dmaPercentage: number): void {
-    const allocation = Math.floor(this.effectiveBudget * dmaPercentage / 100);
-    this.chips.set(chipName, {
+  registerEngine(engineName: string, percentage: number): void {
+    const allocation = Math.floor(this.effectiveBudget * percentage / 100);
+    this.engines.set(engineName, {
       allocation,
       spent: 0,
       burstActive: false,
@@ -129,64 +127,64 @@ export class DmaBudgetManager {
   // --------------------------------------------------------------------------
 
   /**
-   * Spend tokens from a chip's budget.
+   * Spend tokens from an engine's budget.
    *
-   * If burst mode is active and the chip is at or over its allocation,
+   * If burst mode is active and the engine is at or over its allocation,
    * overflow spending is drawn from the headroom pool. Budget enforcement
    * is soft: exceeding triggers a callback but does not block.
    *
-   * @param chipName - Chip to deduct from
+   * @param engineName - Engine to deduct from
    * @param tokens - Number of tokens to spend
    * @returns Current BudgetStatus after spending
    */
-  spend(chipName: string, tokens: number): BudgetStatus {
-    const chip = this.requireChip(chipName);
+  spend(engineName: string, tokens: number): BudgetStatus {
+    const engine = this.requireEngine(engineName);
 
-    const previousSpent = chip.spent;
-    chip.spent += tokens;
+    const previousSpent = engine.spent;
+    engine.spent += tokens;
 
     // If burst is active and spending goes beyond allocation, deduct overflow from headroom
-    if (chip.burstActive) {
-      const overflowBefore = Math.max(0, previousSpent - chip.allocation);
-      const overflowAfter = Math.max(0, chip.spent - chip.allocation);
+    if (engine.burstActive) {
+      const overflowBefore = Math.max(0, previousSpent - engine.allocation);
+      const overflowAfter = Math.max(0, engine.spent - engine.allocation);
       const newBurstSpending = overflowAfter - overflowBefore;
       if (newBurstSpending > 0) {
         this.headroomSpent += newBurstSpending;
-        chip.burstSpent += newBurstSpending;
+        engine.burstSpent += newBurstSpending;
       }
     }
 
     // Check exceeded: remaining < 0 and not already flagged
-    const remaining = chip.allocation - chip.spent;
-    if (remaining < 0 && !this.exceededSet.has(chipName)) {
-      this.exceededSet.add(chipName);
+    const remaining = engine.allocation - engine.spent;
+    if (remaining < 0 && !this.exceededSet.has(engineName)) {
+      this.exceededSet.add(engineName);
       for (const cb of this.onExceededCallbacks) {
-        cb(chipName);
+        cb(engineName);
       }
     }
 
-    return this.buildStatus(chipName, chip);
+    return this.buildStatus(engineName, engine);
   }
 
   // --------------------------------------------------------------------------
   // Queries
   // --------------------------------------------------------------------------
 
-  /** Get the allocated token budget for a chip. */
-  getAllocation(chipName: string): number {
-    return this.requireChip(chipName).allocation;
+  /** Get the allocated token budget for an engine. */
+  getAllocation(engineName: string): number {
+    return this.requireEngine(engineName).allocation;
   }
 
-  /** Get remaining tokens for a chip (can be negative if exceeded). */
-  getRemaining(chipName: string): number {
-    const chip = this.requireChip(chipName);
-    return chip.allocation - chip.spent;
+  /** Get remaining tokens for an engine (can be negative if exceeded). */
+  getRemaining(engineName: string): number {
+    const engine = this.requireEngine(engineName);
+    return engine.allocation - engine.spent;
   }
 
-  /** Get the full budget status for a chip. */
-  getStatus(chipName: string): BudgetStatus {
-    const chip = this.requireChip(chipName);
-    return this.buildStatus(chipName, chip);
+  /** Get the full budget status for an engine. */
+  getStatus(engineName: string): BudgetStatus {
+    const engine = this.requireEngine(engineName);
+    return this.buildStatus(engineName, engine);
   }
 
   /** Get remaining headroom pool tokens. */
@@ -195,17 +193,17 @@ export class DmaBudgetManager {
   }
 
   // --------------------------------------------------------------------------
-  // Burst mode (BLITHOG)
+  // Burst mode
   // --------------------------------------------------------------------------
 
-  /** Enable burst mode for a chip, allowing headroom borrowing. */
-  enableBurst(chipName: string): void {
-    this.requireChip(chipName).burstActive = true;
+  /** Enable burst mode for an engine, allowing headroom borrowing. */
+  enableBurst(engineName: string): void {
+    this.requireEngine(engineName).burstActive = true;
   }
 
-  /** Disable burst mode for a chip. */
-  disableBurst(chipName: string): void {
-    this.requireChip(chipName).burstActive = false;
+  /** Disable burst mode for an engine. */
+  disableBurst(engineName: string): void {
+    this.requireEngine(engineName).burstActive = false;
   }
 
   // --------------------------------------------------------------------------
@@ -213,11 +211,11 @@ export class DmaBudgetManager {
   // --------------------------------------------------------------------------
 
   /**
-   * Register a callback invoked when a chip exceeds its allocation.
-   * The callback fires exactly once per exceedance; resetting the chip
+   * Register a callback invoked when an engine exceeds its allocation.
+   * The callback fires exactly once per exceedance; resetting the engine
    * allows it to fire again on a subsequent exceedance.
    */
-  onExceeded(callback: (chipName: string) => void): void {
+  onExceeded(callback: (engineName: string) => void): void {
     this.onExceededCallbacks.push(callback);
   }
 
@@ -226,32 +224,32 @@ export class DmaBudgetManager {
   // --------------------------------------------------------------------------
 
   /**
-   * Reset spending for a single chip.
+   * Reset spending for a single engine.
    *
    * Returns any burst spending to the headroom pool, clears the spent
    * counter, disables burst mode, and removes the exceeded flag.
    */
-  reset(chipName: string): void {
-    const chip = this.requireChip(chipName);
+  reset(engineName: string): void {
+    const engine = this.requireEngine(engineName);
 
     // Return burst spending to headroom
-    if (chip.burstSpent > 0) {
-      this.headroomSpent -= chip.burstSpent;
+    if (engine.burstSpent > 0) {
+      this.headroomSpent -= engine.burstSpent;
     }
 
-    chip.spent = 0;
-    chip.burstActive = false;
-    chip.burstSpent = 0;
-    this.exceededSet.delete(chipName);
+    engine.spent = 0;
+    engine.burstActive = false;
+    engine.burstSpent = 0;
+    this.exceededSet.delete(engineName);
   }
 
-  /** Reset all chips and restore headroom. */
+  /** Reset all engines and restore headroom. */
   resetAll(): void {
-    for (const [name] of this.chips) {
-      const chip = this.chips.get(name)!;
-      chip.spent = 0;
-      chip.burstActive = false;
-      chip.burstSpent = 0;
+    for (const [name] of this.engines) {
+      const engine = this.engines.get(name)!;
+      engine.spent = 0;
+      engine.burstActive = false;
+      engine.burstSpent = 0;
     }
     this.headroomSpent = 0;
     this.exceededSet.clear();
@@ -261,25 +259,25 @@ export class DmaBudgetManager {
   // Internal helpers
   // --------------------------------------------------------------------------
 
-  /** Look up a chip or throw if not registered. */
-  private requireChip(chipName: string): ChipBudgetState {
-    const chip = this.chips.get(chipName);
-    if (!chip) {
-      throw new Error(`Unknown chip: '${chipName}'`);
+  /** Look up an engine or throw if not registered. */
+  private requireEngine(engineName: string): EngineBudgetState {
+    const engine = this.engines.get(engineName);
+    if (!engine) {
+      throw new Error(`Unknown engine: '${engineName}'`);
     }
-    return chip;
+    return engine;
   }
 
   /** Build a BudgetStatus from internal state. */
-  private buildStatus(chipName: string, chip: ChipBudgetState): BudgetStatus {
-    const remaining = chip.allocation - chip.spent;
+  private buildStatus(engineName: string, engine: EngineBudgetState): BudgetStatus {
+    const remaining = engine.allocation - engine.spent;
     return {
-      chipName,
-      allocation: chip.allocation,
-      spent: chip.spent,
+      engineName,
+      allocation: engine.allocation,
+      spent: engine.spent,
       remaining,
       exceeded: remaining < 0,
-      burstActive: chip.burstActive,
+      burstActive: engine.burstActive,
     };
   }
 }
