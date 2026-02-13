@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.17 — Staging Layer
-Phase: 135 — Hygiene Pattern Engine (in progress)
-Plan: 135-04 complete
-Status: Phase 135 complete
-Last activity: 2026-02-13 — Completed 135-04 (unified scan engine and barrel index)
+Phase: 136 — Hygiene Trust and Reporting (in progress)
+Plan: 136-01 complete
+Status: Executing phase 136
+Last activity: 2026-02-13 — Completed 136-01 (trust tier types and familiarity classifier)
 
 ## Project Reference
 
@@ -113,6 +113,16 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - scanContent uses spread-concat of all three scanner results (intentionally simple composition)
 - Barrel uses type-only exports for HygieneCategory, HygieneSeverity, HygienePattern, HygieneFinding
 - Integration test verifies custom patterns work through barrel API (addPattern + scanContent)
+- TOOL_PURPOSE_MAP with 5 tool categories (Bash/Write/WebFetch/WebSearch/NotebookEdit) and keyword-based matching
+- Tools not in TOOL_PURPOSE_MAP treated as safe (never flagged) -- forward-compatible for new safe tools
+- scopeKeywords checked alongside purpose string for additional scope coherence matching surface
+- riskLevel computed as highest severity among findings using ordered SEVERITY_ORDER array
+- Four-tier trust model: home > neighborhood > town > stranger with strict priority ordering
+- isProjectLocal/isUserLocal boolean overrides take priority over origin string for home/neighborhood
+- CRITICAL_PATTERN_IDS as ReadonlySet<string> for O(1) lookup and immutability
+- Parent in ProvenanceNode means upstream input (first resolvable input in chain), not downstream consumer
+- Conservative default: unknown/empty provenance chains inherit 'stranger' tier
+- Cycle prevention via visited Set in recursive provenance trace
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -127,7 +137,8 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Helper endpoint wired into serve-dashboard.mjs via dynamic import (browser->filesystem bridge)
 - No WebSockets -- dashboard polls outbox at 2-3s intervals
 - Staging module at src/staging/ (types, schema, directory, intake, state-machine, index)
-- Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, index)
+- Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, index)
+- Staging derived submodule at src/staging/derived/ (types, provenance)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -142,15 +153,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 386 complete |
+| Total plans | 387 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 135-04-PLAN.md
-Stopped at: Plan 135-04 complete (unified scan engine and barrel index)
-Next action: Phase 135 complete. Proceed to phase 136.
-Context: v1.17 Staging Layer. Phase 135 complete. src/staging/hygiene/ fully built with types, patterns, 3 category scanners, unified scanner, barrel index. 76 hygiene tests passing (14 new from 135-04).
+Last: 2026-02-13 — Completed 136-01-PLAN.md
+Stopped at: Plan 136-01 complete (trust tier types and familiarity classifier)
+Next action: Continue phase 136 (plans 136-02 through 136-05 remaining).
+Context: v1.17 Staging Layer. Phase 136 in progress. Trust tier types and familiarity classifier added to src/staging/hygiene/. 126 hygiene tests passing (37 new from 136-01).
 
 ---
-*Last updated: 2026-02-13 (135-04 complete)*
+*Last updated: 2026-02-13 (136-01 complete)*
