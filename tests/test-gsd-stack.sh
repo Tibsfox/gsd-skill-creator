@@ -3640,6 +3640,284 @@ else
 fi
 
 # ==============================================================================
+# Stop-Record Basic Tests
+# ==============================================================================
+
+printf "${BOLD}Stop-Record Basic Tests${RESET}\n"
+
+# Reset stack dir and start recording
+rm -rf "$GSD_STACK_DIR"
+"$GSD_STACK" version >/dev/null 2>&1
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=stop-test >/dev/null 2>&1
+
+# Add some markers
+"$GSD_STACK" mark "phase-1-start" >/dev/null 2>&1
+"$GSD_STACK" mark "phase-1-done" >/dev/null 2>&1
+
+# Add a stack push to get a stack event in the stream
+"$GSD_STACK" push "test msg" >/dev/null 2>&1
+
+# Stop recording
+set +e
+stop_output=$("$GSD_STACK" stop-record 2>&1)
+stop_rc=$?
+set -e
+
+# 1. stop-record exits 0
+assert_exit_code "stop-record exits 0" "0" "$stop_rc"
+
+# 2. meta.json has status stopped
+meta_content=$(cat "$GSD_STACK_DIR/recordings/stop-test/meta.json" 2>/dev/null || echo "")
+assert_contains "meta.json has status stopped" "$meta_content" '"status":"stopped"'
+
+# 3. meta.json has ended field
+assert_contains "meta.json has ended field" "$meta_content" '"ended"'
+
+# 4. history.jsonl has stop-record event
+history=$(cat "$GSD_STACK_DIR/history.jsonl" 2>/dev/null || echo "")
+assert_contains "history.jsonl has stop-record event" "$history" '"event":"stop-record"'
+
+# 5. After stop-record, mark should fail
+set +e
+mark_output=$("$GSD_STACK" mark "should fail" 2>&1)
+mark_rc=$?
+set -e
+if [[ "$mark_rc" -ne 0 ]]; then
+  pass "mark fails after stop-record (no active recording)"
+else
+  fail "mark fails after stop-record (no active recording)" "expected non-zero exit, got $mark_rc"
+fi
+
+# ==============================================================================
+# Stop-Record Creates metrics.json
+# ==============================================================================
+
+printf "${BOLD}Stop-Record Creates metrics.json${RESET}\n"
+
+# Using the stop-test recording from above
+metrics_file="$GSD_STACK_DIR/recordings/stop-test/metrics.json"
+
+# 1. metrics.json exists
+assert_file_exists "metrics.json file exists" "$metrics_file"
+
+# Read metrics
+metrics_content=$(cat "$metrics_file" 2>/dev/null || echo "")
+
+# 2. has duration_seconds
+assert_contains "metrics.json has duration_seconds" "$metrics_content" '"duration_seconds"'
+
+# 3. has event_count
+assert_contains "metrics.json has event_count" "$metrics_content" '"event_count"'
+
+# 4. has events_by_type
+assert_contains "metrics.json has events_by_type" "$metrics_content" '"events_by_type"'
+
+# 5. event_count is > 0
+event_count=$(echo "$metrics_content" | grep -o '"event_count":[0-9]*' 2>/dev/null | head -1 | cut -d: -f2 || echo "0")
+event_count=${event_count:-0}
+if [[ "$event_count" -gt 0 ]]; then
+  pass "metrics.json event_count > 0 (got $event_count)"
+else
+  fail "metrics.json event_count > 0" "got $event_count"
+fi
+
+# 6. events_by_type has terminal
+assert_contains "metrics.json events_by_type has terminal" "$metrics_content" '"terminal"'
+
+# 7. events_by_type has marker
+assert_contains "metrics.json events_by_type has marker" "$metrics_content" '"marker"'
+
+# 8. has first_event timestamp
+assert_contains "metrics.json has first_event" "$metrics_content" '"first_event"'
+
+# 9. has last_event timestamp
+assert_contains "metrics.json has last_event" "$metrics_content" '"last_event"'
+
+# ==============================================================================
+# Stop-Record Creates transcript.md
+# ==============================================================================
+
+printf "${BOLD}Stop-Record Creates transcript.md${RESET}\n"
+
+transcript_file="$GSD_STACK_DIR/recordings/stop-test/transcript.md"
+
+# 1. transcript.md exists
+assert_file_exists "transcript.md file exists" "$transcript_file"
+
+# Read transcript
+transcript_content=$(cat "$transcript_file" 2>/dev/null || echo "")
+
+# 2. contains Recording Transcript
+assert_contains "transcript.md has Recording Transcript heading" "$transcript_content" "Recording Transcript"
+
+# 3. contains recording name
+assert_contains "transcript.md has recording name" "$transcript_content" "stop-test"
+
+# 4. contains marker label phase-1-start
+assert_contains "transcript.md has phase-1-start marker" "$transcript_content" "phase-1-start"
+
+# 5. contains marker label phase-1-done
+assert_contains "transcript.md has phase-1-done marker" "$transcript_content" "phase-1-done"
+
+# 6. contains terminal reference
+if [[ "$transcript_content" == *"terminal"* ]] || [[ "$transcript_content" == *"Terminal"* ]]; then
+  pass "transcript.md has terminal reference"
+else
+  fail "transcript.md has terminal reference" "no terminal/Terminal found"
+fi
+
+# 7. contains file reference
+if [[ "$transcript_content" == *"file"* ]] || [[ "$transcript_content" == *"File"* ]]; then
+  pass "transcript.md has file reference"
+else
+  fail "transcript.md has file reference" "no file/File found"
+fi
+
+# 8. transcript has at least 10 lines
+transcript_lines=$(echo "$transcript_content" | wc -l 2>/dev/null || echo "0")
+transcript_lines=$((transcript_lines + 0))
+if [[ "$transcript_lines" -ge 10 ]]; then
+  pass "transcript.md has >= 10 lines (got $transcript_lines)"
+else
+  fail "transcript.md has >= 10 lines" "got $transcript_lines lines"
+fi
+
+# ==============================================================================
+# Stop-Record Output Summary
+# ==============================================================================
+
+printf "${BOLD}Stop-Record Output Summary${RESET}\n"
+
+# 1. output contains duration/Duration
+if [[ "$stop_output" == *"uration"* ]] || [[ "$stop_output" == *"duration"* ]]; then
+  pass "stop-record output contains duration"
+else
+  fail "stop-record output contains duration" "output: $stop_output"
+fi
+
+# 2. output contains recording name
+assert_contains "stop-record output contains recording name" "$stop_output" "stop-test"
+
+# 3. output contains events/Events
+if [[ "$stop_output" == *"vents"* ]] || [[ "$stop_output" == *"events"* ]]; then
+  pass "stop-record output contains events"
+else
+  fail "stop-record output contains events" "output: $stop_output"
+fi
+
+# ==============================================================================
+# Stop-Record Without Active Recording
+# ==============================================================================
+
+printf "${BOLD}Stop-Record Without Active Recording${RESET}\n"
+
+# Reset stack dir (no recording started)
+rm -rf "$GSD_STACK_DIR"
+"$GSD_STACK" version >/dev/null 2>&1
+
+# 1. stop-record exits non-zero
+set +e
+no_rec_output=$("$GSD_STACK" stop-record 2>&1)
+no_rec_rc=$?
+set -e
+
+if [[ "$no_rec_rc" -ne 0 ]]; then
+  pass "stop-record with no recording exits non-zero"
+else
+  fail "stop-record with no recording exits non-zero" "got exit code $no_rec_rc"
+fi
+
+# 2. output contains error message about no recording
+if [[ "$no_rec_output" == *"no active recording"* ]] || [[ "$no_rec_output" == *"No active recording"* ]] || [[ "$no_rec_output" == *"not recording"* ]]; then
+  pass "stop-record error message mentions no recording"
+else
+  fail "stop-record error message mentions no recording" "output: $no_rec_output"
+fi
+
+# ==============================================================================
+# Stop-Record JSON Output
+# ==============================================================================
+
+printf "${BOLD}Stop-Record JSON Output${RESET}\n"
+
+# Reset stack dir
+rm -rf "$GSD_STACK_DIR"
+"$GSD_STACK" version >/dev/null 2>&1
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=json-stop >/dev/null 2>&1
+"$GSD_STACK" mark "json-test-marker" >/dev/null 2>&1
+
+# 1. GSD_FORMAT=json stop-record exits 0
+set +e
+json_stop_output=$(GSD_FORMAT=json "$GSD_STACK" stop-record 2>&1)
+json_stop_rc=$?
+set -e
+assert_exit_code "GSD_FORMAT=json stop-record exits 0" "0" "$json_stop_rc"
+
+# 2. output starts with {
+if [[ "$json_stop_output" == "{"* ]]; then
+  pass "JSON stop-record output starts with {"
+else
+  fail "JSON stop-record output starts with {" "output: $json_stop_output"
+fi
+
+# 3. output contains name
+assert_contains "JSON stop-record has name" "$json_stop_output" '"name":"json-stop"'
+
+# 4. output contains duration_seconds
+assert_contains "JSON stop-record has duration_seconds" "$json_stop_output" '"duration_seconds"'
+
+# 5. output contains event_count
+assert_contains "JSON stop-record has event_count" "$json_stop_output" '"event_count"'
+
+# ==============================================================================
+# Stop-Record With Rich Stream Data
+# ==============================================================================
+
+printf "${BOLD}Stop-Record With Rich Stream Data${RESET}\n"
+
+# Reset stack dir
+rm -rf "$GSD_STACK_DIR"
+"$GSD_STACK" version >/dev/null 2>&1
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=rich-test >/dev/null 2>&1
+
+# Add 3 markers
+"$GSD_STACK" mark "m1" >/dev/null 2>&1
+"$GSD_STACK" mark "m2" >/dev/null 2>&1
+"$GSD_STACK" mark "m3" >/dev/null 2>&1
+
+# Push 2 messages (for stack_push events)
+"$GSD_STACK" push "msg1" >/dev/null 2>&1
+"$GSD_STACK" push "msg2" >/dev/null 2>&1
+
+# Stop recording
+set +e
+"$GSD_STACK" stop-record >/dev/null 2>&1
+rich_rc=$?
+set -e
+assert_exit_code "rich-test stop-record exits 0" "0" "$rich_rc"
+
+# Read metrics
+rich_metrics=$(cat "$GSD_STACK_DIR/recordings/rich-test/metrics.json" 2>/dev/null || echo "")
+
+# event_count should be >= 8
+rich_event_count=$(echo "$rich_metrics" | grep -o '"event_count":[0-9]*' 2>/dev/null | head -1 | cut -d: -f2 || echo "0")
+rich_event_count=${rich_event_count:-0}
+if [[ "$rich_event_count" -ge 8 ]]; then
+  pass "rich-test event_count >= 8 (got $rich_event_count)"
+else
+  fail "rich-test event_count >= 8" "got $rich_event_count"
+fi
+
+# Validate marker count >= 3
+rich_marker_count=$(echo "$rich_metrics" | grep -o '"marker":[0-9]*' 2>/dev/null | head -1 | cut -d: -f2 || echo "0")
+rich_marker_count=${rich_marker_count:-0}
+if [[ "$rich_marker_count" -ge 3 ]]; then
+  pass "rich-test marker count >= 3 (got $rich_marker_count)"
+else
+  fail "rich-test marker count >= 3" "got $rich_marker_count"
+fi
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
