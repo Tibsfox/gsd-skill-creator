@@ -2410,11 +2410,18 @@ cmd_play() {
     esac
   done
 
-  # Validate recording name
+  # Validate recording name / file path
   if [[ -z "$recording_name" ]]; then
     echo "Error: Recording name required."
     echo "Usage: gsd-stack play [--step|--run|--feed] <recording-name>"
     exit 1
+  fi
+
+  # For --feed mode, the argument is a file path, not a recording name
+  if [[ "$mode" == "feed" ]]; then
+    play_feed "$recording_name" "" "$dry_run"
+    log_event "play" "feed: $recording_name"
+    return 0
   fi
 
   # Validate recording exists
@@ -2437,7 +2444,6 @@ cmd_play() {
     analyze) play_analyze "$recording_name" "$rec_dir" ;;
     step)    play_step "$recording_name" "$rec_dir" ;;
     run)     play_run "$recording_name" "$rec_dir" "$dry_run" ;;
-    feed)    play_feed "$recording_name" "$rec_dir" "$dry_run" ;;
   esac
 
   log_event "play" "$mode: $recording_name"
@@ -2692,13 +2698,279 @@ play_step() {
 # ==============================================================================
 
 play_run() {
-  echo "play --run: not yet implemented (Plan 107-03)"
-  return 0
+  local recording_name="$1"
+  local rec_dir="$2"
+  local dry_run="${3:-0}"
+  local stream="$rec_dir/stream.jsonl"
+
+  # Extract replayable commands from stream
+  # Replayable = stack_push (message field) and stack_poke (text field)
+  local -a commands=()
+  local -a command_types=()
+
+  while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+    local evt_type
+    evt_type=$(json_field "$line" "type")
+
+    case "$evt_type" in
+      stack_push)
+        local message
+        message=$(json_field "$line" "message")
+        if [[ -n "$message" ]]; then
+          commands+=("$message")
+          command_types+=("push")
+        fi
+        ;;
+      stack_poke)
+        local text
+        text=$(json_field "$line" "text")
+        if [[ -n "$text" ]]; then
+          commands+=("$text")
+          command_types+=("poke")
+        fi
+        ;;
+    esac
+  done < "$stream"
+
+  local total=${#commands[@]}
+
+  if [[ $total -eq 0 ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"name":"%s","mode":"run","replayed":0,"commands":[]}\n' "$recording_name"
+    else
+      echo "No replayable commands found in recording '$recording_name'."
+    fi
+    return 0
+  fi
+
+  # Dry-run mode: just show what would be replayed
+  if [[ $dry_run -eq 1 ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"name":"%s","mode":"run","dry_run":true,"replayed":%d,"commands":[' "$recording_name" "$total"
+      for i in "${!commands[@]}"; do
+        if [[ $i -gt 0 ]]; then printf ","; fi
+        local cmd="${commands[$i]}"
+        cmd="${cmd//\\/\\\\}"
+        cmd="${cmd//\"/\\\"}"
+        printf '{"index":%d,"type":"%s","command":"%s"}' "$((i + 1))" "${command_types[$i]}" "$cmd"
+      done
+      printf "]}\n"
+      return 0
+    fi
+
+    printf "\n${BOLD}Dry run: %s (%d replayable commands)${RESET}\n\n" "$recording_name" "$total"
+    for i in "${!commands[@]}"; do
+      printf "  %d. [%s] %s\n" "$((i + 1))" "${command_types[$i]}" "${commands[$i]}"
+    done
+    printf "\nUse without --dry-run to replay against a live session.\n"
+    return 0
+  fi
+
+  # Live replay
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"name":"%s","mode":"run","replayed":%d,"commands":[' "$recording_name" "$total"
+  else
+    printf "\n${BOLD}Replaying: %s (%d commands)${RESET}\n\n" "$recording_name" "$total"
+  fi
+
+  local replayed=0
+  for i in "${!commands[@]}"; do
+    local cmd="${commands[$i]}"
+    local cmd_type="${command_types[$i]}"
+    local idx=$((i + 1))
+
+    if [[ "$GSD_FORMAT" != "json" ]]; then
+      printf "  [%d/%d] %s: %s" "$idx" "$total" "$cmd_type" "$cmd"
+    fi
+
+    # Execute the command
+    if [[ "$cmd_type" == "push" ]]; then
+      # Push to stack via subprocess
+      "$0" push "$cmd" >/dev/null 2>&1 && {
+        replayed=$((replayed + 1))
+        [[ "$GSD_FORMAT" != "json" ]] && printf " ${GREEN}OK${RESET}\n"
+      } || {
+        [[ "$GSD_FORMAT" != "json" ]] && printf " ${RED_C}FAIL${RESET}\n"
+      }
+    elif [[ "$cmd_type" == "poke" ]]; then
+      # Send to tmux
+      if [[ -n "$GSD_MOCK_TMUX" ]]; then
+        # Mock mode: simulate
+        replayed=$((replayed + 1))
+        [[ "$GSD_FORMAT" != "json" ]] && printf " ${GREEN}OK (mock)${RESET}\n"
+      else
+        local tmux_target="${GSD_TMUX_SESSION}"
+        tmux send-keys -t "$tmux_target" "$cmd" Enter 2>/dev/null && {
+          replayed=$((replayed + 1))
+          [[ "$GSD_FORMAT" != "json" ]] && printf " ${GREEN}OK${RESET}\n"
+        } || {
+          [[ "$GSD_FORMAT" != "json" ]] && printf " ${RED_C}FAIL${RESET}\n"
+        }
+      fi
+    fi
+
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      if [[ $i -gt 0 ]]; then printf ","; fi
+      local json_cmd="${cmd//\\/\\\\}"
+      json_cmd="${json_cmd//\"/\\\"}"
+      printf '{"index":%d,"type":"%s","command":"%s","status":"ok"}' "$idx" "$cmd_type" "$json_cmd"
+    fi
+  done
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '],"completed":%d}\n' "$replayed"
+  else
+    printf "\n${BOLD}Replay complete: %d/%d commands executed${RESET}\n" "$replayed" "$total"
+  fi
 }
 
 play_feed() {
-  echo "play --feed: not yet implemented (Plan 107-03)"
-  return 0
+  local playbook_path="$1"
+  local _rec_dir="$2"
+  local dry_run="${3:-0}"
+
+  local playbook="$playbook_path"
+
+  # Validate playbook file exists
+  if [[ ! -f "$playbook" ]]; then
+    echo "Error: Playbook file not found: $playbook"
+    exit 1
+  fi
+
+  # Read all entries from playbook
+  local -a entries=()
+  local -a entry_types=()
+  local -a entry_messages=()
+  local -a entry_delays=()
+  local -a entry_priorities=()
+
+  while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+    entries+=("$line")
+
+    local etype emsg edelay epri
+    etype=$(json_field "$line" "type" || echo "")
+    emsg=$(json_field "$line" "message" || echo "")
+    # For "send" type, the text field is used instead of message
+    if [[ -z "$emsg" ]]; then
+      emsg=$(json_field "$line" "text" || echo "")
+    fi
+    edelay=$(json_field_num "$line" "delay" || echo "0")
+    edelay=${edelay:-0}
+    epri=$(json_field "$line" "priority" || echo "")
+
+    entry_types+=("${etype:-push}")
+    entry_messages+=("${emsg:-}")
+    entry_delays+=("${edelay:-0}")
+    entry_priorities+=("${epri:-normal}")
+  done < "$playbook"
+
+  local total=${#entries[@]}
+
+  if [[ $total -eq 0 ]]; then
+    echo "Playbook is empty: $playbook"
+    return 0
+  fi
+
+  # Dry-run mode
+  if [[ $dry_run -eq 1 ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"playbook":"%s","mode":"feed","dry_run":true,"commands_executed":%d,"commands":[' "$playbook" "$total"
+      for i in "${!entries[@]}"; do
+        if [[ $i -gt 0 ]]; then printf ","; fi
+        local msg="${entry_messages[$i]}"
+        msg="${msg//\\/\\\\}"
+        msg="${msg//\"/\\\"}"
+        printf '{"index":%d,"type":"%s","message":"%s","delay":%s,"priority":"%s"}' \
+          "$((i + 1))" "${entry_types[$i]}" "$msg" "${entry_delays[$i]:-0}" "${entry_priorities[$i]}"
+      done
+      printf "]}\n"
+      return 0
+    fi
+
+    printf "\n${BOLD}Dry run playbook: %s (%d commands)${RESET}\n\n" "$playbook" "$total"
+    for i in "${!entries[@]}"; do
+      local delay_note=""
+      if [[ "${entry_delays[$i]}" != "0" ]] && [[ -n "${entry_delays[$i]}" ]]; then
+        delay_note=" (delay: ${entry_delays[$i]}s)"
+      fi
+      printf "  %d. [%s] %s%s\n" "$((i + 1))" "${entry_types[$i]}" "${entry_messages[$i]}" "$delay_note"
+    done
+    printf "\nUse without --dry-run to execute the playbook.\n"
+    return 0
+  fi
+
+  # Live execution
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"playbook":"%s","mode":"feed","commands_executed":%d,"results":[' "$playbook" "$total"
+  else
+    printf "\n${BOLD}Executing playbook: %s (%d commands)${RESET}\n\n" "$playbook" "$total"
+  fi
+
+  local executed=0
+  for i in "${!entries[@]}"; do
+    local etype="${entry_types[$i]}"
+    local emsg="${entry_messages[$i]}"
+    local edelay="${entry_delays[$i]}"
+    local epri="${entry_priorities[$i]}"
+    local idx=$((i + 1))
+
+    # Apply delay if specified (and > 0)
+    if [[ "${edelay:-0}" != "0" ]] && [[ -n "$edelay" ]]; then
+      if [[ "$GSD_FORMAT" != "json" ]]; then
+        printf "  [waiting %ss]\n" "$edelay"
+      fi
+      sleep "$edelay" 2>/dev/null || true
+    fi
+
+    if [[ "$GSD_FORMAT" != "json" ]]; then
+      printf "  [%d/%d] %s: %s" "$idx" "$total" "$etype" "$emsg"
+    fi
+
+    # Execute based on type
+    case "$etype" in
+      push)
+        "$0" push --priority="$epri" "$emsg" >/dev/null 2>&1 && {
+          executed=$((executed + 1))
+          [[ "$GSD_FORMAT" != "json" ]] && printf " ${GREEN}OK${RESET}\n"
+        } || {
+          [[ "$GSD_FORMAT" != "json" ]] && printf " ${RED_C}FAIL${RESET}\n"
+        }
+        ;;
+      send)
+        # Send directly to tmux
+        if [[ -n "$GSD_MOCK_TMUX" ]]; then
+          executed=$((executed + 1))
+          [[ "$GSD_FORMAT" != "json" ]] && printf " ${GREEN}OK (mock)${RESET}\n"
+        else
+          local tmux_target="${GSD_TMUX_SESSION}"
+          tmux send-keys -t "$tmux_target" "$emsg" Enter 2>/dev/null && {
+            executed=$((executed + 1))
+            [[ "$GSD_FORMAT" != "json" ]] && printf " ${GREEN}OK${RESET}\n"
+          } || {
+            [[ "$GSD_FORMAT" != "json" ]] && printf " ${RED_C}FAIL (no tmux)${RESET}\n"
+          }
+        fi
+        ;;
+      *)
+        [[ "$GSD_FORMAT" != "json" ]] && printf " ${RED_C}SKIP (unknown type)${RESET}\n"
+        ;;
+    esac
+
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      if [[ $i -gt 0 ]]; then printf ","; fi
+      local json_msg="${emsg//\\/\\\\}"
+      json_msg="${json_msg//\"/\\\"}"
+      printf '{"index":%d,"type":"%s","message":"%s","status":"ok"}' "$idx" "$etype" "$json_msg"
+    fi
+  done
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '],"executed":%d}\n' "$executed"
+  else
+    printf "\n${BOLD}Playbook complete: %d/%d commands executed${RESET}\n" "$executed" "$total"
+  fi
 }
 
 # ==============================================================================
