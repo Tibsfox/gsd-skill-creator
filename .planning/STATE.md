@@ -3,11 +3,11 @@
 ## Current Position
 
 Milestone: v1.16 -- Dashboard Console & Milestone Ingestion
-Phase: 129-filesystem-bridge-upload-configuration (all 5 plans complete)
-Status: Phase 129 complete
-Last activity: 2026-02-13 -- Completed 129-05 (submit flow + barrel exports)
+Phase: 130-session-integration (plans 01-03 complete)
+Status: Executing phase 130
+Last activity: 2026-02-13 -- Completed 130-03 (message handler + status writer)
 
-Progress: [░░░░░░░░░░░░░░░░] 0/5 phases (128 in progress)
+Progress: [███░░░░░░░░░░░░░] 1/5 phases (130 in progress)
 
 ## Project Reference
 
@@ -56,13 +56,22 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - Component composition via function calls for submit flow (renderUploadZone + renderConfigForm inlined)
 - setInterval polling at 500ms for submit readiness check (avoids cross-component event coupling)
 - Two-stage fetch pattern: config write first, milestone-submit message only on config success
+- Skill references scripts by relative path (scripts/console/*.sh) for project portability
+- Content quality enforced at <5000 words and 3+ sections via test suite
+- jq --argjson for progress field ensures numeric type in JSON output (write-status.sh)
+- Timestamp colons replaced with hyphens in question filenames for filesystem safety
+- validate-config.sh checks only milestone.name and milestone.submitted_at as required fields
+- Pure function dispatch for message handler (no side effects, no filesystem)
+- Discriminated union MessageAction type for structured return values
+- StatusWriter overwrites current.json each time (always reflects current state)
+- Boolean(payload.hot) defaults to false when hot flag not specified in config-update
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
-- Console module: src/console/ (message types/schemas, reader, writer, helper endpoint, bridge-logger, check-inbox integration tests)
-- Scripts module (new): scripts/console/ (check-inbox.sh for session-side inbox polling)
+- Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, check-inbox integration tests)
+- Scripts module: scripts/console/ (check-inbox.sh, write-question.sh, write-status.sh, validate-config.sh)
 - gsd-stack session management: bash scripts with tmux integration (v1.13)
 - v1.14 promotion pipeline: src/pipeline/ + src/dashboard/collectors/
 - 19 milestones shipped, 127 phases, 362 plans, ~149k LOC
@@ -87,10 +96,10 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Completed 129-05 (submit flow + barrel exports)
-Stopped at: Completed 129-05-PLAN.md execution -- phase 129 complete
-Next action: Proceed to next phase or milestone verification
-Context: Submit flow composes upload zone + config form + submit button. Two-stage fetch writes config then milestone-submit message. 15 submit-flow tests, 120 console tests, all passing. Console barrel exports complete for all phase 129 modules. Phase 129 fully complete (5/5 plans done).
+Last: 2026-02-13 -- Completed 130-03 (message handler + status writer)
+Stopped at: Completed 130-03-PLAN.md execution
+Next action: Continue with remaining 130 plans (04+)
+Context: handleMessage dispatches milestone-submit/config-update/setting-change/question-response. Returns MessageAction discriminated union. StatusWriter writes outbox/status/current.json. 22 new tests, 182 total console tests passing. Barrel exports updated.
 
 ---
-*Last updated: 2026-02-13 (129-05 complete, phase 129 done)*
+*Last updated: 2026-02-13 (130-03 complete)*
