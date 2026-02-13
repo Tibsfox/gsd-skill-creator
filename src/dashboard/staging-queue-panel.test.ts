@@ -375,7 +375,7 @@ describe('renderStagingQueuePanel', () => {
         ],
       };
       const html = renderStagingQueuePanel(data);
-      const lineCount = (html.match(/sq-dep-line/g) || []).length;
+      const lineCount = (html.match(/<line[^>]*sq-dep-line/g) || []).length;
       expect(lineCount).toBe(2);
     });
 
