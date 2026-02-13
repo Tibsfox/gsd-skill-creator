@@ -1,15 +1,15 @@
 /**
- * Shared types for the Copper Learning subsystem.
+ * Shared types for the Pipeline Learning subsystem.
  *
  * Defines interfaces used by the learning compiler (plan 01),
  * feedback engine (plan 02), and library (plan 03). These types
  * bridge the observation pipeline (sessions.jsonl, PatternAnalyzer)
- * to the Copper execution system.
+ * to the Pipeline execution system.
  */
 
 import type { SessionObservation } from '../../../types/observation.js';
 import type { SkillCandidate } from '../../../types/detection.js';
-import type { CopperList, GsdLifecycleEvent } from '../types.js';
+import type { Pipeline, GsdLifecycleEvent } from '../types.js';
 
 // ============================================================================
 // Compiler Input
@@ -30,7 +30,7 @@ export interface ObservationInput {
 // ============================================================================
 
 /**
- * An extracted workflow pattern before compilation into a Copper List.
+ * An extracted workflow pattern before compilation into a Pipeline.
  *
  * Represents a recurring sequence of tools, commands, and file accesses
  * detected across multiple sessions. The compiler groups sessions by
@@ -69,8 +69,8 @@ export interface WorkflowPattern {
  * Output of the learning compiler.
  */
 export interface CompilationResult {
-  /** Compiled candidate Copper Lists. */
-  lists: CopperList[];
+  /** Compiled candidate Pipelines. */
+  lists: Pipeline[];
   /** The workflow patterns that were detected and compiled. */
   patterns: WorkflowPattern[];
   /** Number of sessions analyzed. */
@@ -110,13 +110,13 @@ export const DEFAULT_COMPILER_CONFIG: CompilerConfig = {
 // ============================================================================
 
 /**
- * Record of feedback from executing a learned Copper List.
+ * Record of feedback from executing a learned Pipeline.
  *
  * Tracks predicted vs actual skill activations to measure accuracy
  * and drive refinement decisions.
  */
 export interface FeedbackRecord {
-  /** Copper List name that was executed. */
+  /** Pipeline name that was executed. */
   listName: string;
   /** Workflow type of the list. */
   workflowType: string;
@@ -137,14 +137,14 @@ export interface FeedbackRecord {
 // ============================================================================
 
 /**
- * Entry in the learned Copper List library.
+ * Entry in the learned Pipeline library.
  *
- * Wraps a Copper List with versioning, accuracy tracking,
+ * Wraps a Pipeline with versioning, accuracy tracking,
  * and feedback history for continuous refinement.
  */
 export interface LibraryEntry {
-  /** The Copper List. */
-  list: CopperList;
+  /** The Pipeline. */
+  list: Pipeline;
   /** Workflow type this list represents. */
   workflowType: string;
   /** Version number (starts at 1, increments on refinement). */
