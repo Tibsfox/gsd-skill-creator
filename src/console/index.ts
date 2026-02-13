@@ -40,3 +40,11 @@ export { MilestoneConfigSchema, DEFAULT_MILESTONE_CONFIG } from './milestone-con
 // Bridge logger (structured logging for console operations)
 export type { BridgeLogEntry } from './bridge-logger.js';
 export { BridgeLogger } from './bridge-logger.js';
+
+// Message handler (type dispatch for incoming messages)
+export type { MessageAction } from './message-handler.js';
+export { handleMessage } from './message-handler.js';
+
+// Status writer (session progress updates to outbox)
+export type { SessionStatus } from './status-writer.js';
+export { StatusWriter } from './status-writer.js';
