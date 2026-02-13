@@ -1,9 +1,9 @@
 /**
- * Tests for the exec kernel orchestrator.
+ * Tests for the kernel orchestrator.
  *
  * Validates kernel lifecycle (idle -> running -> stopped), tick cycle
  * with scheduler integration, message routing through inbound ports,
- * budget tracking via DmaBudgetManager, sleep/wake delegation to
+ * budget tracking via BudgetManager, sleep/wake delegation to
  * scheduler, and getState snapshot.
  */
 
@@ -29,7 +29,7 @@ function defaultConfig(): KernelConfig {
 // ============================================================================
 
 describe('ExecKernel -- initialization', () => {
-  it('creates kernel with chip registry', () => {
+  it('creates kernel with engine registry', () => {
     const kernel = new ExecKernel(defaultConfig());
     const state = kernel.getState();
     expect(state.state).toBe('idle');
@@ -86,34 +86,34 @@ describe('ExecKernel -- message routing', () => {
     kernel.start();
 
     const message = createMessage({
-      ln_Type: 'render-request',
+      type: 'render-request',
       sender: 'agnus',
       receiver: 'denise',
       payload: { format: 'markdown' },
-      mn_Length: 100,
+      tokenCost: 100,
     });
 
     kernel.sendMessage(message);
     expect(kernel.getPendingMessages('denise')).toBe(1);
   });
 
-  it('receiveMessages returns pending messages for a chip', () => {
+  it('receiveMessages returns pending messages for an engine', () => {
     const kernel = new ExecKernel(defaultConfig());
     kernel.start();
 
     const message = createMessage({
-      ln_Type: 'render-request',
+      type: 'render-request',
       sender: 'agnus',
       receiver: 'denise',
       payload: { format: 'markdown' },
-      mn_Length: 100,
+      tokenCost: 100,
     });
 
     kernel.sendMessage(message);
 
     const received = kernel.receiveMessages('denise');
     expect(received).toHaveLength(1);
-    expect(received[0].ln_Type).toBe('render-request');
+    expect(received[0].type).toBe('render-request');
     expect(received[0].sender).toBe('agnus');
 
     // Calling again returns empty (messages consumed)
@@ -127,17 +127,17 @@ describe('ExecKernel -- message routing', () => {
 // ============================================================================
 
 describe('ExecKernel -- budget integration', () => {
-  it('tick reports budget status for all chips', () => {
+  it('tick reports budget status for all engines', () => {
     const kernel = new ExecKernel(defaultConfig());
     kernel.start();
 
-    // Send a message with mn_Length 1000 -- sender pays
+    // Send a message with tokenCost 1000 -- sender pays
     const message = createMessage({
-      ln_Type: 'render-request',
+      type: 'render-request',
       sender: 'agnus',
       receiver: 'denise',
       payload: {},
-      mn_Length: 1000,
+      tokenCost: 1000,
     });
     kernel.sendMessage(message);
     kernel.tick();
@@ -198,11 +198,11 @@ describe('ExecKernel -- getState', () => {
     const state = kernel.getState();
     expect(state.state).toBe('running');
     expect(state.tickCount).toBe(1);
-    expect(state.chips).toBeInstanceOf(Array);
-    expect(state.chips.length).toBe(4);
+    expect(state.engines).toBeInstanceOf(Array);
+    expect(state.engines.length).toBe(4);
 
-    // Find agnus in the chips array
-    const agnusStatus = state.chips.find((c) => c.chipName === 'agnus');
+    // Find agnus in the engines array
+    const agnusStatus = state.engines.find((c) => c.chipName === 'agnus');
     expect(agnusStatus).toBeDefined();
     expect(agnusStatus!.spent).toBe(1000);
   });
