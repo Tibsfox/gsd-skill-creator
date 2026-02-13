@@ -11,6 +11,9 @@
 
 import type { ClarityAssessment, GapDetail } from './types.js';
 
+/** Regex matching markdown headings (h1-h6). Captures heading text in group 1. */
+const HEADING_RE = /^#{1,6}\s+(.+)$/;
+
 /**
  * Known key areas that a well-structured document should address.
  * Used to detect gaps when areas are missing.
@@ -47,7 +50,7 @@ function extractSections(content: string): string[] {
   const lines = content.split('\n');
 
   for (const line of lines) {
-    const match = line.match(/^#{1,6}\s+(.+)$/);
+    const match = line.match(HEADING_RE);
     if (match) {
       sections.push(match[1].trim());
     }
@@ -127,7 +130,7 @@ function getSectionDetails(content: string): Array<{ heading: string; wordCount:
   let currentContent: string[] = [];
 
   for (const line of lines) {
-    const headingMatch = line.match(/^#{1,6}\s+(.+)$/);
+    const headingMatch = line.match(HEADING_RE);
     if (headingMatch) {
       if (currentHeading !== null) {
         const text = currentContent.join(' ').trim();
