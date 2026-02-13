@@ -1771,6 +1771,182 @@ cmd_resume() {
 }
 
 # ==============================================================================
+# Session stats helper (internal)
+# ==============================================================================
+
+_compute_session_stats() {
+  local session_name="$1"
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+  local meta_content
+  meta_content=$(cat "$session_dir/meta.json")
+  local started
+  started=$(json_field "$meta_content" "started")
+
+  # Compute duration
+  local duration_str="unknown"
+  if [[ -n "$started" ]]; then
+    local started_epoch
+    started_epoch=$(date -d "$started" +%s 2>/dev/null || echo "0")
+    if [[ "$started_epoch" -gt 0 ]]; then
+      local now_epoch elapsed hours minutes seconds
+      now_epoch=$(date +%s)
+      elapsed=$((now_epoch - started_epoch))
+      hours=$((elapsed / 3600))
+      minutes=$(((elapsed % 3600) / 60))
+      seconds=$((elapsed % 60))
+      if [[ $hours -gt 0 ]]; then
+        duration_str="${hours}h ${minutes}m ${seconds}s"
+      elif [[ $minutes -gt 0 ]]; then
+        duration_str="${minutes}m ${seconds}s"
+      else
+        duration_str="${seconds}s"
+      fi
+    fi
+  fi
+
+  # Count push/pop events from history
+  local push_count=0
+  local pop_count=0
+  if [[ -f "$GSD_STACK_DIR/history.jsonl" ]]; then
+    push_count=$(grep -c '"event":"push"' "$GSD_STACK_DIR/history.jsonl" 2>/dev/null || echo "0")
+    pop_count=$(grep -c '"event":"pop"' "$GSD_STACK_DIR/history.jsonl" 2>/dev/null || echo "0")
+  fi
+
+  # Count save files for this session
+  local save_count=0
+  for sf in "$GSD_STACK_DIR/saves/${session_name}"-*.json; do
+    if [[ -f "$sf" ]]; then
+      save_count=$((save_count + 1))
+    fi
+  done
+
+  # Output as simple key=value pairs for the caller to parse
+  echo "duration=$duration_str"
+  echo "pushes=$push_count"
+  echo "pops=$pop_count"
+  echo "saves=$save_count"
+}
+
+# ==============================================================================
+# Stop subcommand
+# ==============================================================================
+
+cmd_stop() {
+  local session_name=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -*)  echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)   session_name="$1" ; shift ;;
+    esac
+  done
+
+  # Validate session name provided
+  if [[ -z "$session_name" ]]; then
+    echo "Error: Session name required. Usage: gsd-stack stop <session-name>"
+    exit 1
+  fi
+
+  # Check session exists
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+  if [[ ! -d "$session_dir" ]] || [[ ! -f "$session_dir/meta.json" ]]; then
+    echo "Error: Session '$session_name' not found"
+    exit 1
+  fi
+
+  # Get current state
+  local state
+  state=$(get_session_state "$session_name") || state="unknown"
+
+  # Cannot stop an already-stopped session
+  if [[ "$state" == "stopped" ]]; then
+    echo "Error: Session '$session_name' is already stopped"
+    exit 1
+  fi
+
+  # Cannot stop unknown/nonexistent
+  if [[ "$state" == "unknown" ]]; then
+    echo "Error: Session '$session_name' not found"
+    exit 1
+  fi
+
+  # Step 1: Auto-save before shutdown
+  local save_file=""
+  save_file=$(_save_snapshot "$session_name" "auto-save on stop") || true
+
+  # Step 2: Graceful shutdown sequence (skip in mock mode)
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    local meta_content tmux_session
+    meta_content=$(cat "$session_dir/meta.json")
+    tmux_session=$(json_field "$meta_content" "tmux_session")
+
+    if tmux has-session -t "$tmux_session" 2>/dev/null; then
+      # Send /exit (Claude's exit command)
+      tmux send-keys -t "$tmux_session" "/exit" Enter 2>/dev/null || true
+      sleep 3
+
+      # If still alive, send Ctrl+C
+      if tmux has-session -t "$tmux_session" 2>/dev/null; then
+        tmux send-keys -t "$tmux_session" C-c 2>/dev/null || true
+        sleep 2
+      fi
+
+      # If still alive, send Ctrl+D (EOF)
+      if tmux has-session -t "$tmux_session" 2>/dev/null; then
+        tmux send-keys -t "$tmux_session" C-d 2>/dev/null || true
+        sleep 1
+      fi
+
+      # Final resort: kill the tmux session
+      if tmux has-session -t "$tmux_session" 2>/dev/null; then
+        tmux kill-session -t "$tmux_session" 2>/dev/null || true
+      fi
+    fi
+  fi
+
+  # Step 3: Update meta.json status to stopped
+  local meta_content
+  meta_content=$(cat "$session_dir/meta.json")
+  local updated_meta
+  updated_meta=$(echo "$meta_content" | sed 's/"status":"[^"]*"/"status":"stopped"/')
+  echo "$updated_meta" > "$session_dir/meta.json"
+
+  # Step 4: Remove heartbeat file (cleanup)
+  rm -f "$session_dir/heartbeat"
+
+  # Step 5: Compute and display session stats
+  local stats duration pushes pops saves
+  stats=$(_compute_session_stats "$session_name")
+  duration=$(echo "$stats" | grep "^duration=" | cut -d= -f2)
+  pushes=$(echo "$stats" | grep "^pushes=" | cut -d= -f2)
+  pops=$(echo "$stats" | grep "^pops=" | cut -d= -f2)
+  saves=$(echo "$stats" | grep "^saves=" | cut -d= -f2)
+
+  # Step 6: Log to history and registry
+  log_event "stop" "stopped: $session_name (duration: $duration)"
+
+  local ts
+  ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  printf '{"ts":"%s","name":"%s","project":"%s","action":"stop"}\n' \
+    "$ts" "$session_name" "$(json_field "$meta_content" "project")" >> "$GSD_STACK_DIR/registry.jsonl"
+
+  # Step 7: Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"session":"%s","status":"stopped","duration":"%s","pushes":%s,"pops":%s,"saves":%s}\n' \
+      "$session_name" "$duration" "$pushes" "$pops" "$saves"
+  else
+    echo "Session '$session_name' stopped"
+    echo "  Duration: $duration"
+    echo "  Messages: $pushes pushed, $pops popped"
+    echo "  Saves:    $saves snapshot(s)"
+    if [[ -n "${save_file:-}" ]]; then
+      echo "  Final save: $(basename "$save_file")"
+    fi
+  fi
+}
+
+# ==============================================================================
 # Known subcommands (stubs for future implementation)
 # ==============================================================================
 
@@ -1876,7 +2052,12 @@ main() {
       cmd_resume "$@"
       exit $?
       ;;
-    stop|record|stop-record|mark|play|metrics)
+    stop)
+      shift
+      cmd_stop "$@"
+      exit $?
+      ;;
+    record|stop-record|mark|play|metrics)
       echo "$cmd: not yet implemented"
       log_event "$cmd" "stub invoked"
       exit 0
