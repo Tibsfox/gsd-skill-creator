@@ -51,6 +51,7 @@ describe('TerminalConfigSchema defaults', () => {
       base_path: '/terminal',
       auth_mode: 'none',
       theme: 'dark',
+      session_name: 'dev',
     });
   });
 });
@@ -251,6 +252,7 @@ describe('Full config roundtrip', () => {
       base_path: '/wetty',
       auth_mode: 'none' as const,
       theme: 'light' as const,
+      session_name: 'work',
     };
 
     const parsed = TerminalConfigSchema.parse(fullConfig);

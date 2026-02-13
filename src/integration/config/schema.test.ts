@@ -382,6 +382,7 @@ describe('Full config roundtrip', () => {
         base_path: '/shell',
         auth_mode: 'none' as const,
         theme: 'light' as const,
+        session_name: 'work',
       },
     };
 
@@ -522,6 +523,7 @@ describe('Full config roundtrip with terminal', () => {
         base_path: '/term',
         auth_mode: 'none' as const,
         theme: 'light' as const,
+        session_name: 'custom',
       },
     };
 
@@ -563,6 +565,7 @@ describe('Existing config behavior unchanged', () => {
       base_path: '/terminal',
       auth_mode: 'none',
       theme: 'dark',
+      session_name: 'dev',
     });
   });
 });

@@ -41,6 +41,9 @@ export const TerminalConfigSchema = z.object({
 
   /** Terminal color theme. Default: 'dark'. */
   theme: z.enum(['dark', 'light']).default('dark'),
+
+  /** tmux session name to attach/create. Default: 'dev'. */
+  session_name: z.string().min(1).default('dev'),
 });
 
 /**

@@ -25,4 +25,6 @@ export interface TerminalConfig {
   auth_mode: 'none';
   /** Terminal color theme. Default: 'dark'. */
   theme: 'dark' | 'light';
+  /** tmux session name to attach/create. Default: 'dev'. */
+  session_name: string;
 }
