@@ -69,13 +69,16 @@ describe('ALL_STAGING_DIRS', () => {
     expect(ALL_STAGING_DIRS).toHaveLength(5);
   });
 
-  it('includes all directory values from STAGING_DIRS', () => {
-    expect(ALL_STAGING_DIRS).toContain(STAGING_DIRS.root);
+  it('includes all 5 subdirectory paths from STAGING_DIRS', () => {
     expect(ALL_STAGING_DIRS).toContain(STAGING_DIRS.inbox);
     expect(ALL_STAGING_DIRS).toContain(STAGING_DIRS.checking);
     expect(ALL_STAGING_DIRS).toContain(STAGING_DIRS.attention);
     expect(ALL_STAGING_DIRS).toContain(STAGING_DIRS.ready);
     expect(ALL_STAGING_DIRS).toContain(STAGING_DIRS.aside);
+  });
+
+  it('does not include root (created implicitly by recursive mkdir)', () => {
+    expect(ALL_STAGING_DIRS).not.toContain(STAGING_DIRS.root);
   });
 
   it('does not include queue.jsonl (it is a file, not a directory)', () => {
