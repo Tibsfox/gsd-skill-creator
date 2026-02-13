@@ -1,17 +1,17 @@
 /**
- * Blitter signal system: completion signal creation and event bus
+ * Offload signal system: completion signal creation and event bus
  * for notifying downstream consumers (Copper synchronization, etc.)
- * when blitter operations finish executing.
+ * when offload operations finish executing.
  *
  * The signal bus follows an event emitter pattern with on/off/once/waitFor
- * semantics, keeping the blitter decoupled from specific consumers.
+ * semantics, keeping the offload decoupled from specific consumers.
  */
 
-import type { CompletionSignal, BlitterResult } from './types.js';
+import type { CompletionSignal, OffloadResult } from './types.js';
 import { CompletionSignalSchema } from './types.js';
 
 /**
- * Create a CompletionSignal from a BlitterResult.
+ * Create a CompletionSignal from an OffloadResult.
  *
  * Status determination priority:
  *   1. error option provided → 'error'
@@ -24,7 +24,7 @@ import { CompletionSignalSchema } from './types.js';
  * @returns Validated CompletionSignal
  */
 export function createCompletionSignal(
-  result: BlitterResult,
+  result: OffloadResult,
   options?: { error?: string },
 ): CompletionSignal {
   let status: CompletionSignal['status'];
@@ -54,13 +54,13 @@ export function createCompletionSignal(
 type SignalListener = (signal: CompletionSignal) => void;
 
 /**
- * Event bus for blitter completion signals.
+ * Event bus for offload completion signals.
  *
  * Supports standard event patterns: on, off, once, and waitFor.
  * Keyed by event type (typically 'completion') to allow future
  * expansion to additional signal types.
  */
-export class BlitterSignalBus {
+export class SignalBus {
   private listeners: Map<string, SignalListener[]> = new Map();
   private onceListeners: Map<string, SignalListener[]> = new Map();
 

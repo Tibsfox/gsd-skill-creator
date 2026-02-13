@@ -1,25 +1,25 @@
 /**
- * Tests for Blitter promoter: detection and extraction of
+ * Tests for Offload promoter: detection and extraction of
  * promotable operations from skill metadata extensions.
  */
 
 import { describe, it, expect } from 'vitest';
 import type { SkillMetadata } from '../../types/skill.js';
-import { detectPromotable, extractBlitterOps } from './promoter.js';
+import { detectPromotable, extractOffloadOps } from './promoter.js';
 
 /**
- * Helper: create a SkillMetadata fixture with blitter promotions.
+ * Helper: create a SkillMetadata fixture with offload promotions.
  */
 function makeSkill(
   name: string,
   promotions?: unknown[],
-  opts?: { noExtensions?: boolean; noBlitter?: boolean; blitterNoPromotions?: boolean },
+  opts?: { noExtensions?: boolean; noOffload?: boolean; offloadNoPromotions?: boolean },
 ): SkillMetadata {
   if (opts?.noExtensions) {
     return { name, description: `Skill ${name}` };
   }
 
-  if (opts?.noBlitter) {
+  if (opts?.noOffload) {
     return {
       name,
       description: `Skill ${name}`,
@@ -31,14 +31,14 @@ function makeSkill(
     };
   }
 
-  if (opts?.blitterNoPromotions) {
+  if (opts?.offloadNoPromotions) {
     return {
       name,
       description: `Skill ${name}`,
       metadata: {
         extensions: {
           'gsd-skill-creator': {
-            blitter: {},
+            offload: {},
           } as any,
         },
       },
@@ -51,7 +51,7 @@ function makeSkill(
     metadata: {
       extensions: {
         'gsd-skill-creator': {
-          blitter: {
+          offload: {
             promotions: promotions ?? [],
           },
         } as any,
@@ -78,23 +78,23 @@ describe('detectPromotable', () => {
     expect(detectPromotable(skill)).toBe(false);
   });
 
-  it('returns false when skill has extensions but no blitter field', () => {
-    const skill = makeSkill('no-blitter', undefined, { noBlitter: true });
+  it('returns false when skill has extensions but no offload field', () => {
+    const skill = makeSkill('no-offload', undefined, { noOffload: true });
     expect(detectPromotable(skill)).toBe(false);
   });
 
-  it('returns false when blitter.promotions is undefined', () => {
-    const skill = makeSkill('blitter-no-promotions', undefined, { blitterNoPromotions: true });
+  it('returns false when offload.promotions is undefined', () => {
+    const skill = makeSkill('offload-no-promotions', undefined, { offloadNoPromotions: true });
     expect(detectPromotable(skill)).toBe(false);
   });
 });
 
-describe('extractBlitterOps', () => {
-  it('extracts BlitterOperation from skill with one promotion', () => {
+describe('extractOffloadOps', () => {
+  it('extracts OffloadOperation from skill with one promotion', () => {
     const skill = makeSkill('lint-runner', [
       { name: 'lint-fix', scriptContent: '#!/bin/bash\neslint --fix .', scriptType: 'bash' },
     ]);
-    const ops = extractBlitterOps(skill);
+    const ops = extractOffloadOps(skill);
     expect(ops).toHaveLength(1);
     expect(ops[0].id).toBe('lint-runner:lint-fix');
     expect(ops[0].script).toBe('#!/bin/bash\neslint --fix .');
@@ -107,7 +107,7 @@ describe('extractBlitterOps', () => {
       { name: 'build', scriptContent: 'npm run build', scriptType: 'node' },
       { name: 'test', scriptContent: 'vitest run', scriptType: 'node' },
     ]);
-    const ops = extractBlitterOps(skill);
+    const ops = extractOffloadOps(skill);
     expect(ops).toHaveLength(2);
     expect(ops[0].id).toBe('build-tool:build');
     expect(ops[1].id).toBe('build-tool:test');
@@ -115,13 +115,13 @@ describe('extractBlitterOps', () => {
 
   it('returns empty array for skill without promotions', () => {
     const skill = makeSkill('plain-skill', undefined, { noExtensions: true });
-    const ops = extractBlitterOps(skill);
+    const ops = extractOffloadOps(skill);
     expect(ops).toEqual([]);
   });
 
   it('returns empty array for skill with empty promotions array', () => {
     const skill = makeSkill('empty', []);
-    const ops = extractBlitterOps(skill);
+    const ops = extractOffloadOps(skill);
     expect(ops).toEqual([]);
   });
 
@@ -129,7 +129,7 @@ describe('extractBlitterOps', () => {
     const skill = makeSkill('my-skill', [
       { name: 'deploy', scriptContent: 'deploy.sh', scriptType: 'bash' },
     ]);
-    const ops = extractBlitterOps(skill);
+    const ops = extractOffloadOps(skill);
     expect(ops[0].id).toBe('my-skill:deploy');
   });
 
@@ -142,7 +142,7 @@ describe('extractBlitterOps', () => {
         conditions: { alwaysPromote: true },
       },
     ]);
-    const ops = extractBlitterOps(skill);
+    const ops = extractOffloadOps(skill);
     expect(ops).toHaveLength(1);
     // alwaysPromote is in the promotion declaration, not the operation itself
     // but the operation should still be extracted successfully
@@ -153,13 +153,13 @@ describe('extractBlitterOps', () => {
     const withDir = makeSkill('tool', [
       { name: 'run', scriptContent: 'echo hi', scriptType: 'bash', workingDir: '/custom' },
     ]);
-    const opsWithDir = extractBlitterOps(withDir);
+    const opsWithDir = extractOffloadOps(withDir);
     expect(opsWithDir[0].workingDir).toBe('/custom');
 
     const withoutDir = makeSkill('tool2', [
       { name: 'run', scriptContent: 'echo hi', scriptType: 'bash' },
     ]);
-    const opsWithoutDir = extractBlitterOps(withoutDir);
+    const opsWithoutDir = extractOffloadOps(withoutDir);
     expect(opsWithoutDir[0].workingDir).toBe('.');
   });
 
@@ -167,13 +167,13 @@ describe('extractBlitterOps', () => {
     const withTimeout = makeSkill('tool', [
       { name: 'slow', scriptContent: 'sleep 100', scriptType: 'bash', timeout: 120000 },
     ]);
-    const opsWithTimeout = extractBlitterOps(withTimeout);
+    const opsWithTimeout = extractOffloadOps(withTimeout);
     expect(opsWithTimeout[0].timeout).toBe(120000);
 
     const withoutTimeout = makeSkill('tool2', [
       { name: 'fast', scriptContent: 'echo hi', scriptType: 'bash' },
     ]);
-    const opsWithoutTimeout = extractBlitterOps(withoutTimeout);
+    const opsWithoutTimeout = extractOffloadOps(withoutTimeout);
     expect(opsWithoutTimeout[0].timeout).toBe(30000);
   });
 
@@ -181,13 +181,13 @@ describe('extractBlitterOps', () => {
     const withEnv = makeSkill('tool', [
       { name: 'prod', scriptContent: 'deploy.sh', scriptType: 'bash', env: { NODE_ENV: 'production' } },
     ]);
-    const opsWithEnv = extractBlitterOps(withEnv);
+    const opsWithEnv = extractOffloadOps(withEnv);
     expect(opsWithEnv[0].env).toEqual({ NODE_ENV: 'production' });
 
     const withoutEnv = makeSkill('tool2', [
       { name: 'dev', scriptContent: 'dev.sh', scriptType: 'bash' },
     ]);
-    const opsWithoutEnv = extractBlitterOps(withoutEnv);
+    const opsWithoutEnv = extractOffloadOps(withoutEnv);
     expect(opsWithoutEnv[0].env).toEqual({});
   });
 });

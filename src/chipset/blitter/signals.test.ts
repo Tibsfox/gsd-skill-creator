@@ -1,16 +1,16 @@
 /**
- * Tests for Blitter signal system: completion signal creation,
+ * Tests for Offload signal system: completion signal creation,
  * signal bus event emission, and listener management.
  */
 
 import { describe, it, expect, vi } from 'vitest';
-import { createCompletionSignal, BlitterSignalBus } from './signals.js';
-import type { BlitterResult, CompletionSignal } from './types.js';
+import { createCompletionSignal, SignalBus } from './signals.js';
+import type { OffloadResult, CompletionSignal } from './types.js';
 
 /**
- * Helper: create a BlitterResult fixture.
+ * Helper: create a OffloadResult fixture.
  */
-function makeResult(overrides: Partial<BlitterResult> = {}): BlitterResult {
+function makeResult(overrides: Partial<OffloadResult> = {}): OffloadResult {
   return {
     operationId: 'test:op',
     exitCode: 0,
@@ -57,9 +57,9 @@ describe('createCompletionSignal', () => {
   });
 });
 
-describe('BlitterSignalBus', () => {
+describe('SignalBus', () => {
   it('calls listeners when signal is emitted', () => {
-    const bus = new BlitterSignalBus();
+    const bus = new SignalBus();
     const callback = vi.fn();
 
     bus.on('completion', callback);
@@ -72,7 +72,7 @@ describe('BlitterSignalBus', () => {
   });
 
   it('notifies multiple listeners on same event', () => {
-    const bus = new BlitterSignalBus();
+    const bus = new SignalBus();
     const cb1 = vi.fn();
     const cb2 = vi.fn();
 
@@ -87,7 +87,7 @@ describe('BlitterSignalBus', () => {
   });
 
   it('off() removes a listener so it is not called', () => {
-    const bus = new BlitterSignalBus();
+    const bus = new SignalBus();
     const callback = vi.fn();
 
     bus.on('completion', callback);
@@ -100,7 +100,7 @@ describe('BlitterSignalBus', () => {
   });
 
   it('once() listener fires only on first emission', () => {
-    const bus = new BlitterSignalBus();
+    const bus = new SignalBus();
     const callback = vi.fn();
 
     bus.once('completion', callback);
@@ -115,7 +115,7 @@ describe('BlitterSignalBus', () => {
   });
 
   it('waitFor() returns a promise that resolves on next signal', async () => {
-    const bus = new BlitterSignalBus();
+    const bus = new SignalBus();
 
     const promise = bus.waitFor('completion');
 

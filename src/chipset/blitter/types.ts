@@ -1,8 +1,8 @@
 /**
- * Blitter type system: Zod schemas for operations, promotion declarations,
+ * Offload type system: Zod schemas for operations, promotion declarations,
  * completion signals, and execution results.
  *
- * The Blitter promotes deterministic skill operations to standalone scripts
+ * The Offload subsystem promotes deterministic skill operations to standalone scripts
  * that execute outside the context window. This module defines the type
  * foundation that the executor and promoter build on.
  */
@@ -10,23 +10,23 @@
 import { z } from 'zod';
 
 // ============================================================================
-// BlitterStatus
+// OffloadStatus
 // ============================================================================
 
-/** Lifecycle status of a blitter operation. */
-export type BlitterStatus = 'pending' | 'running' | 'completed' | 'failed' | 'timed-out';
+/** Lifecycle status of an offload operation. */
+export type OffloadStatus = 'pending' | 'running' | 'completed' | 'failed' | 'timed-out';
 
 // ============================================================================
-// BlitterOperationSchema
+// OffloadOperationSchema
 // ============================================================================
 
 /**
- * Schema for a single blitter operation -- a script ready for execution.
+ * Schema for a single offload operation -- a script ready for execution.
  *
  * Operations are constructed from promotion declarations in skill metadata.
  * The `id` follows the convention `{skillName}:{promotionName}`.
  */
-export const BlitterOperationSchema = z.object({
+export const OffloadOperationSchema = z.object({
   /** Unique identifier, typically `{skillName}:{promotionName}` */
   id: z.string().min(1),
 
@@ -49,7 +49,7 @@ export const BlitterOperationSchema = z.object({
   label: z.string().optional(),
 });
 
-export type BlitterOperation = z.infer<typeof BlitterOperationSchema>;
+export type OffloadOperation = z.infer<typeof OffloadOperationSchema>;
 
 // ============================================================================
 // PromotionConditionsSchema
@@ -78,7 +78,7 @@ export const PromotionConditionsSchema = z.object({
  * Schema for a promotion declaration in skill metadata.
  *
  * Skills declare deterministic operations as promotable via
- * `metadata.extensions['gsd-skill-creator'].blitter.promotions`.
+ * `metadata.extensions['gsd-skill-creator'].offload.promotions`.
  */
 export const PromotionDeclarationSchema = z.object({
   /** Promotion name (used to build operation ID) */
@@ -106,14 +106,14 @@ export const PromotionDeclarationSchema = z.object({
 export type PromotionDeclaration = z.infer<typeof PromotionDeclarationSchema>;
 
 // ============================================================================
-// BlitterResultSchema
+// OffloadResultSchema
 // ============================================================================
 
 /**
- * Schema for execution results from a blitter operation.
+ * Schema for execution results from an offload operation.
  * Captures exit code, output streams, timing, and timeout status.
  */
-export const BlitterResultSchema = z.object({
+export const OffloadResultSchema = z.object({
   /** ID of the operation that produced this result */
   operationId: z.string().min(1),
 
@@ -133,14 +133,14 @@ export const BlitterResultSchema = z.object({
   timedOut: z.boolean().default(false),
 });
 
-export type BlitterResult = z.infer<typeof BlitterResultSchema>;
+export type OffloadResult = z.infer<typeof OffloadResultSchema>;
 
 // ============================================================================
 // CompletionSignalSchema
 // ============================================================================
 
 /**
- * Schema for completion signals emitted after blitter operation finishes.
+ * Schema for completion signals emitted after offload operation finishes.
  * Combines operation identity, status, full result, and optional error info.
  */
 export const CompletionSignalSchema = z.object({
@@ -151,7 +151,7 @@ export const CompletionSignalSchema = z.object({
   status: z.enum(['success', 'failure', 'timeout', 'error']),
 
   /** Full execution result */
-  result: BlitterResultSchema,
+  result: OffloadResultSchema,
 
   /** ISO 8601 timestamp of completion */
   timestamp: z.string(),

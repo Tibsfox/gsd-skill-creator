@@ -1,31 +1,31 @@
 /**
- * Blitter module barrel exports.
+ * Offload module barrel exports.
  *
- * Re-exports the complete public API for the blitter engine:
+ * Re-exports the complete public API for the offload engine:
  * types/schemas, promoter, executor, and signal system.
  */
 
 // Types and schemas
 export {
-  BlitterOperationSchema,
+  OffloadOperationSchema,
   PromotionDeclarationSchema,
   PromotionConditionsSchema,
-  BlitterResultSchema,
+  OffloadResultSchema,
   CompletionSignalSchema,
 } from './types.js';
 export type {
-  BlitterOperation,
+  OffloadOperation,
   PromotionDeclaration,
-  BlitterResult,
+  OffloadResult,
   CompletionSignal,
-  BlitterStatus,
+  OffloadStatus,
 } from './types.js';
 
 // Promoter
-export { detectPromotable, extractBlitterOps } from './promoter.js';
+export { detectPromotable, extractOffloadOps } from './promoter.js';
 
 // Executor
-export { executeBlitterOp, BlitterExecutor } from './executor.js';
+export { executeOffloadOp, OffloadExecutor } from './executor.js';
 
 // Signals
-export { createCompletionSignal, BlitterSignalBus } from './signals.js';
+export { createCompletionSignal, SignalBus } from './signals.js';

@@ -1,65 +1,65 @@
 /**
- * Blitter promoter: detects promotable operations from skill metadata
- * extensions and extracts them as BlitterOperation objects.
+ * Offload promoter: detects promotable operations from skill metadata
+ * extensions and extracts them as OffloadOperation objects.
  *
  * Skills declare deterministic operations as promotable via:
- *   metadata.extensions['gsd-skill-creator'].blitter.promotions
+ *   metadata.extensions['gsd-skill-creator'].offload.promotions
  *
  * The promoter reads these declarations, validates them against
- * PromotionDeclarationSchema, and constructs BlitterOperation objects
+ * PromotionDeclarationSchema, and constructs OffloadOperation objects
  * with deterministic IDs (`{skillName}:{promotionName}`).
  */
 
 import type { SkillMetadata } from '../../types/skill.js';
-import { PromotionDeclarationSchema, BlitterOperationSchema } from './types.js';
-import type { BlitterOperation } from './types.js';
+import { PromotionDeclarationSchema, OffloadOperationSchema } from './types.js';
+import type { OffloadOperation } from './types.js';
 
-/** Shape of the blitter extension block in skill metadata. */
-interface BlitterExtension {
+/** Shape of the offload extension block in skill metadata. */
+interface OffloadExtension {
   promotions?: unknown[];
 }
 
 /**
- * Extract the blitter extension from skill metadata.
+ * Extract the offload extension from skill metadata.
  *
  * Follows the project pattern: extension data is namespaced under
  * `metadata.extensions['gsd-skill-creator']`.
  *
  * @internal
  */
-function getBlitterExtension(metadata: SkillMetadata): BlitterExtension | undefined {
+function getOffloadExtension(metadata: SkillMetadata): OffloadExtension | undefined {
   const ext = metadata.metadata?.extensions?.['gsd-skill-creator'] as
-    | (Record<string, unknown> & { blitter?: BlitterExtension })
+    | (Record<string, unknown> & { offload?: OffloadExtension })
     | undefined;
 
-  if (!ext || !ext.blitter) {
+  if (!ext || !ext.offload) {
     return undefined;
   }
 
-  return ext.blitter;
+  return ext.offload;
 }
 
 /**
  * Detect whether a skill has promotable operations.
  *
  * Returns true only when the skill's metadata contains a non-empty
- * `blitter.promotions` array under the gsd-skill-creator extension.
+ * `offload.promotions` array under the gsd-skill-creator extension.
  *
  * @param metadata - Skill metadata to inspect
  * @returns true if promotable operations exist
  */
 export function detectPromotable(metadata: SkillMetadata): boolean {
-  const blitter = getBlitterExtension(metadata);
-  if (!blitter?.promotions) {
+  const offload = getOffloadExtension(metadata);
+  if (!offload?.promotions) {
     return false;
   }
-  return blitter.promotions.length > 0;
+  return offload.promotions.length > 0;
 }
 
 /**
- * Extract BlitterOperation objects from skill metadata promotion declarations.
+ * Extract OffloadOperation objects from skill metadata promotion declarations.
  *
- * For each valid promotion declaration, constructs a BlitterOperation with:
+ * For each valid promotion declaration, constructs an OffloadOperation with:
  * - `id`: `{skillName}:{promotionName}` (deterministic)
  * - `script`: the declaration's scriptContent
  * - `scriptType`: propagated from declaration
@@ -71,28 +71,28 @@ export function detectPromotable(metadata: SkillMetadata): boolean {
  * Invalid declarations are skipped with a stderr warning.
  *
  * @param metadata - Skill metadata to extract from
- * @returns Array of validated BlitterOperation objects
+ * @returns Array of validated OffloadOperation objects
  */
-export function extractBlitterOps(metadata: SkillMetadata): BlitterOperation[] {
-  const blitter = getBlitterExtension(metadata);
-  if (!blitter?.promotions || blitter.promotions.length === 0) {
+export function extractOffloadOps(metadata: SkillMetadata): OffloadOperation[] {
+  const offload = getOffloadExtension(metadata);
+  if (!offload?.promotions || offload.promotions.length === 0) {
     return [];
   }
 
-  const operations: BlitterOperation[] = [];
+  const operations: OffloadOperation[] = [];
 
-  for (const raw of blitter.promotions) {
+  for (const raw of offload.promotions) {
     const parsed = PromotionDeclarationSchema.safeParse(raw);
     if (!parsed.success) {
       process.stderr.write(
-        `[blitter] skipping invalid promotion declaration in skill "${metadata.name}": ${parsed.error.message}\n`,
+        `[offload] skipping invalid promotion declaration in skill "${metadata.name}": ${parsed.error.message}\n`,
       );
       continue;
     }
 
     const declaration = parsed.data;
 
-    const operation = BlitterOperationSchema.parse({
+    const operation = OffloadOperationSchema.parse({
       id: `${metadata.name}:${declaration.name}`,
       script: declaration.scriptContent,
       scriptType: declaration.scriptType,

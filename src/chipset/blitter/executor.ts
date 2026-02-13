@@ -1,12 +1,12 @@
 /**
- * Blitter executor: runs scripts as child processes outside the LLM
+ * Offload executor: runs scripts as child processes outside the LLM
  * context window, capturing stdout, stderr, exit code, and timing.
  *
  * Supports bash, node, python, and custom script types. Each execution
  * writes the script to a temp file, spawns an interpreter, and collects
  * results. Timeout enforcement kills long-running scripts.
  *
- * The BlitterExecutor class wraps executeBlitterOp with optional signal
+ * The OffloadExecutor class wraps executeOffloadOp with optional signal
  * bus integration for notifying downstream consumers on completion.
  */
 
@@ -14,8 +14,8 @@ import { spawn } from 'node:child_process';
 import { writeFile, unlink, mkdtemp, chmod } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import type { BlitterOperation, BlitterResult } from './types.js';
-import { BlitterSignalBus, createCompletionSignal } from './signals.js';
+import type { OffloadOperation, OffloadResult } from './types.js';
+import { SignalBus, createCompletionSignal } from './signals.js';
 
 /** Map script types to file extensions. */
 const SCRIPT_EXTENSIONS: Record<string, string> = {
@@ -33,17 +33,17 @@ const INTERPRETERS: Record<string, string> = {
 };
 
 /**
- * Execute a BlitterOperation as a child process.
+ * Execute an OffloadOperation as a child process.
  *
  * Writes the script to a temporary file, spawns the appropriate
  * interpreter, captures stdout/stderr, and enforces the timeout.
  *
- * @param operation - The blitter operation to execute
+ * @param operation - The offload operation to execute
  * @returns Execution result with exit code, output, and timing
  */
-export async function executeBlitterOp(operation: BlitterOperation): Promise<BlitterResult> {
+export async function executeOffloadOp(operation: OffloadOperation): Promise<OffloadResult> {
   // Create a temp directory for the script file
-  const scriptDir = await mkdtemp(join(tmpdir(), 'blitter-exec-'));
+  const scriptDir = await mkdtemp(join(tmpdir(), 'offload-exec-'));
   const ext = SCRIPT_EXTENSIONS[operation.scriptType] ?? '.sh';
   const scriptPath = join(scriptDir, `script${ext}`);
 
@@ -70,7 +70,7 @@ export async function executeBlitterOp(operation: BlitterOperation): Promise<Bli
   const startTime = Date.now();
   let timedOut = false;
 
-  return new Promise<BlitterResult>((resolve) => {
+  return new Promise<OffloadResult>((resolve) => {
     const child = spawn(command, args, {
       cwd: operation.workingDir || '.',
       env: { ...process.env, ...operation.env },
@@ -140,31 +140,31 @@ export async function executeBlitterOp(operation: BlitterOperation): Promise<Bli
 }
 
 /**
- * Blitter executor with optional signal bus integration.
+ * Offload executor with optional signal bus integration.
  *
- * Wraps executeBlitterOp and emits completion signals to an attached
- * BlitterSignalBus after each execution finishes. This allows downstream
- * consumers (e.g., Copper synchronization) to react to blitter completions
+ * Wraps executeOffloadOp and emits completion signals to an attached
+ * SignalBus after each execution finishes. This allows downstream
+ * consumers (e.g., Copper synchronization) to react to offload completions
  * without tight coupling.
  */
-export class BlitterExecutor {
-  private signalBus?: BlitterSignalBus;
+export class OffloadExecutor {
+  private signalBus?: SignalBus;
 
   /**
    * @param signalBus - Optional bus for emitting completion signals
    */
-  constructor(signalBus?: BlitterSignalBus) {
+  constructor(signalBus?: SignalBus) {
     this.signalBus = signalBus;
   }
 
   /**
-   * Execute a blitter operation and optionally emit a completion signal.
+   * Execute an offload operation and optionally emit a completion signal.
    *
    * @param operation - The operation to execute
    * @returns Execution result
    */
-  async execute(operation: BlitterOperation): Promise<BlitterResult> {
-    const result = await executeBlitterOp(operation);
+  async execute(operation: OffloadOperation): Promise<OffloadResult> {
+    const result = await executeOffloadOp(operation);
 
     if (this.signalBus) {
       const signal = createCompletionSignal(result);
