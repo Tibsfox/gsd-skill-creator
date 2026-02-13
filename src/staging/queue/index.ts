@@ -32,3 +32,13 @@ export { OPTIMIZATION_TYPES, analyzeOptimizations } from './optimization-analyze
 // Queue manager facade
 export type { QueueManagerDeps } from './manager.js';
 export { createQueueManager } from './manager.js';
+
+// Pre-wiring engine
+export type {
+  PreWiringOptions,
+  PreWiringResult,
+  PreWiredSkill,
+  PreWiredTopology,
+  PreWiredAgent,
+} from './pre-wiring.js';
+export { generatePreWiring } from './pre-wiring.js';
