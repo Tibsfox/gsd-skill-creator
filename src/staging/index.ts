@@ -82,3 +82,20 @@ export {
 // Resource analysis -- intake bridge
 export type { ConfirmResourceResult } from './resource/intake-bridge.js';
 export { confirmWithResources } from './resource/intake-bridge.js';
+
+// Queue management -- types
+export type { QueueState, QueueEntry, QueueAuditEntry } from './queue/index.js';
+export type { DependencyEdge, DependencyGraph } from './queue/index.js';
+export type { OptimizationSuggestion, OptimizationType } from './queue/index.js';
+export type { QueueManagerDeps } from './queue/index.js';
+
+// Queue management -- constants
+export { QUEUE_STATES, VALID_QUEUE_TRANSITIONS } from './queue/index.js';
+export { OPTIMIZATION_TYPES } from './queue/index.js';
+
+// Queue management -- functions
+export { transitionQueueItem } from './queue/index.js';
+export { appendAuditEntry, readAuditLog } from './queue/index.js';
+export { detectDependencies } from './queue/index.js';
+export { analyzeOptimizations } from './queue/index.js';
+export { createQueueManager } from './queue/index.js';
