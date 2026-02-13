@@ -3,11 +3,11 @@
 ## Current Position
 
 Milestone: v1.16 -- Dashboard Console & Milestone Ingestion
-Phase: 131-question-system (plan 03 complete)
-Status: Executing phase 131
-Last activity: 2026-02-13 -- Completed 131-03 (question poller and timeout responder)
+Phase: 132-console-panel-settings (plan 01 complete)
+Status: Executing phase 132
+Last activity: 2026-02-13 -- Completed 132-01 (console page renderer)
 
-Progress: [███░░░░░░░░░░░░░] 1/5 phases (131 in progress)
+Progress: [███░░░░░░░░░░░░░] 1/5 phases (132 in progress)
 
 ## Project Reference
 
@@ -75,9 +75,13 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - Event delegation on document.click for question card interactions (cards rendered dynamically)
 - Urgency escalation ladder: low->high, medium->critical, high->critical, critical->critical (ceiling)
 - submitQuestionResponse globally accessible via window for external integration
+- Force-tracked dist/ compiled files (console-page.js, question-card.js, question-poller.js) since generator.js imports them
+- Console status reads outbox/status/current.json at generation time with graceful ENOENT handling
+- QuestionPoller basePath derived from planningDir by stripping .planning/ suffix
+- Settings and activity sections render as placeholders for plans 02 and 03 to replace
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
 - Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, question-responder, check-inbox integration tests)
@@ -106,10 +110,10 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Completed 131-03 (question poller and timeout responder)
-Stopped at: Completed 131-03-PLAN.md execution
-Next action: Continue with remaining 131 plans (04+)
-Context: QuestionPoller scans outbox/questions/ for pending questions. renderQuestionResponseScript generates client-side JS with event delegation for all 5 input types. applyTimeoutFallback handles all 4 fallback actions with urgency escalation. 29 new tests, 376 total console+dashboard tests passing.
+Last: 2026-02-13 -- Completed 132-01 (console page renderer)
+Stopped at: Completed 132-01-PLAN.md execution
+Next action: Continue with 132-02 (settings panel) and 132-03 (activity log)
+Context: Console page renders 4 sections: status (from outbox/status/current.json), questions (via QuestionPoller + renderQuestionCard), settings placeholder, activity placeholder. Console appears in dashboard nav as "Console" at console.html. Generator reads status and polls questions at generation time. 12 new tests, 167 total dashboard tests passing.
 
 ---
-*Last updated: 2026-02-13 (131-03 complete)*
+*Last updated: 2026-02-13 (132-01 complete)*
