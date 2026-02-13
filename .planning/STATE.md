@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.17 — Staging Layer
-Phase: 136 — Hygiene Trust and Reporting (complete)
-Plan: 136-05 complete
-Status: Phase 136 complete
-Last activity: 2026-02-13 — Completed 136-05 (barrel index integration tests)
+Phase: 139 — Derived Knowledge Checking (complete)
+Plan: 139-05 complete
+Status: Phase 139 complete
+Last activity: 2026-02-13 — Completed 139-05 (unified derived checker and barrel index)
 
 ## Project Reference
 
@@ -144,6 +144,9 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Sliding window with match merging for verbatim copying detection (50-char minimum)
 - Sentence-level best-match averaging for overall similarity in copying detector
 - Non-critical finding selection for pipeline integration test (critical patterns locked at session, coherence findings as fallback)
+- checkDerived aggregates all sub-checkers; passed=true only when no critical/warning findings
+- Optional checks (trainingPairs, referenceTexts) skipped when input not provided
+- Barrel uses type-only exports for interfaces, value exports for functions and constants (derived index follows hygiene pattern)
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -159,7 +162,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - No WebSockets -- dashboard polls outbox at 2-3s intervals
 - Staging module at src/staging/ (types, schema, directory, intake, state-machine, index)
 - Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, trust-store, finding-actions, report, index)
-- Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift, pattern-fidelity, training-coherence, copying-detector)
+- Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift, pattern-fidelity, training-coherence, copying-detector, checker, index)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -174,15 +177,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 391 complete |
+| Total plans | 392 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 136-05-PLAN.md
-Stopped at: Plan 136-05 complete (barrel index integration tests, Phase 136 complete)
-Next action: Phase 136 complete. Continue with remaining phases.
-Context: v1.17 Staging Layer. Phase 136 complete (5 plans, 234 hygiene tests). All trust-and-reporting modules wired into barrel with full pipeline integration tests.
+Last: 2026-02-13 — Completed 139-05-PLAN.md
+Stopped at: Plan 139-05 complete (unified derived checker and barrel index). Phase 139 complete.
+Next action: Continue with remaining v1.17 phases.
+Context: v1.17 Staging Layer. Phase 139 complete (5 plans, 78 derived tests, 368 staging tests total). Derived module fully operational with unified checkDerived entry point and barrel index.
 
 ---
-*Last updated: 2026-02-13 (136-05 complete)*
+*Last updated: 2026-02-13 (139-05 complete)*
