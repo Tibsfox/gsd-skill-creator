@@ -31,6 +31,15 @@ GSD_DRAIN_LOG_DIR="${GSD_DRAIN_LOG_DIR:-.planning/logs}"
 GSD_MOCK_CAPTURE="${GSD_MOCK_CAPTURE:-}"
 
 # ==============================================================================
+# Color constants (safe for non-TTY: consumers check before use)
+# ==============================================================================
+
+BOLD='\033[1m'
+GREEN='\033[0;32m'
+RED_C='\033[0;31m'
+RESET='\033[0m'
+
+# ==============================================================================
 # Directory bootstrapping
 # ==============================================================================
 
@@ -2381,6 +2390,318 @@ cmd_stop_record() {
 }
 
 # ==============================================================================
+# Play subcommand -- analyze and step through recordings
+# ==============================================================================
+
+cmd_play() {
+  local mode="analyze"
+  local recording_name=""
+  local dry_run=0
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --step)    mode="step" ; shift ;;
+      --run)     mode="run" ; shift ;;
+      --feed)    mode="feed" ; shift ;;
+      --dry-run) dry_run=1 ; shift ;;
+      -*)        echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)         recording_name="$1" ; shift ;;
+    esac
+  done
+
+  # Validate recording name
+  if [[ -z "$recording_name" ]]; then
+    echo "Error: Recording name required."
+    echo "Usage: gsd-stack play [--step|--run|--feed] <recording-name>"
+    exit 1
+  fi
+
+  # Validate recording exists
+  local rec_dir="$GSD_STACK_DIR/recordings/$recording_name"
+  if [[ ! -d "$rec_dir" ]]; then
+    echo "Error: Recording '$recording_name' not found."
+    echo "Available recordings:"
+    ls "$GSD_STACK_DIR/recordings/" 2>/dev/null || echo "  (none)"
+    exit 1
+  fi
+
+  # Validate stream.jsonl exists
+  if [[ ! -f "$rec_dir/stream.jsonl" ]]; then
+    echo "Error: Recording '$recording_name' has no stream data."
+    exit 1
+  fi
+
+  # Dispatch to mode
+  case "$mode" in
+    analyze) play_analyze "$recording_name" "$rec_dir" ;;
+    step)    play_step "$recording_name" "$rec_dir" ;;
+    run)     play_run "$recording_name" "$rec_dir" "$dry_run" ;;
+    feed)    play_feed "$recording_name" "$rec_dir" "$dry_run" ;;
+  esac
+
+  log_event "play" "$mode: $recording_name"
+}
+
+# ==============================================================================
+# Play analyze mode -- formatted timeline view
+# ==============================================================================
+
+play_analyze() {
+  local recording_name="$1"
+  local rec_dir="$2"
+  local stream="$rec_dir/stream.jsonl"
+  local metrics_file="$rec_dir/metrics.json"
+
+  # JSON output mode
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    local timeline="["
+    local first=1
+    while IFS= read -r line; do
+      [[ -z "$line" ]] && continue
+      if [[ $first -eq 1 ]]; then
+        first=0
+      else
+        timeline="$timeline,"
+      fi
+      timeline="$timeline$line"
+    done < "$stream"
+    timeline="$timeline]"
+
+    # Read metrics if available
+    local metrics="{}"
+    if [[ -f "$metrics_file" ]]; then
+      metrics=$(cat "$metrics_file")
+    fi
+
+    printf '{"name":"%s","timeline":%s,"metrics":%s}\n' \
+      "$recording_name" "$timeline" "$metrics"
+    return 0
+  fi
+
+  # Human-readable output
+
+  # Header
+  printf "\n${BOLD}Recording: %s${RESET}\n" "$recording_name"
+
+  # Show metrics summary from metrics.json if available
+  if [[ -f "$metrics_file" ]]; then
+    local mc
+    mc=$(cat "$metrics_file")
+    local dur evt
+    dur=$(json_field_num "$mc" "duration_seconds" || echo "0")
+    dur=${dur:-0}
+    evt=$(json_field_num "$mc" "event_count" || echo "0")
+    evt=${evt:-0}
+    printf "Duration: %ss | Events: %s\n" "$dur" "$evt"
+  fi
+
+  printf "\n"
+
+  # Timeline
+  printf "${BOLD}Timeline${RESET}\n"
+  printf '%s\n' "────────────────────────────────────────"
+
+  while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+
+    local evt_type evt_ts
+    evt_type=$(json_field "$line" "type")
+    evt_ts=$(json_field "$line" "ts")
+    local display_ts="${evt_ts:11:8}"  # HH:MM:SS
+
+    case "$evt_type" in
+      recording_start)
+        printf "${GREEN}%s${RESET}  Recording started\n" "$display_ts"
+        ;;
+      recording_stop)
+        printf "${GREEN}%s${RESET}  Recording stopped\n" "$display_ts"
+        ;;
+      terminal)
+        local content
+        content=$(json_field "$line" "content")
+        local preview="${content:0:60}"
+        printf "%s  ${BOLD}Terminal${RESET}" "$display_ts"
+        if [[ -n "$preview" ]]; then
+          printf " -- %s" "$preview"
+        fi
+        printf "\n"
+        ;;
+      file_change)
+        local path action
+        path=$(json_field "$line" "path")
+        action=$(json_field "$line" "action")
+        printf "%s  File %s: %s\n" "$display_ts" "${action:-changed}" "${path:-unknown}"
+        ;;
+      marker)
+        local label
+        label=$(json_field "$line" "label")
+        printf "\n${BOLD}%s  ▶ %s${RESET}\n\n" "$display_ts" "$label"
+        ;;
+      stack_push)
+        local priority message
+        priority=$(json_field "$line" "priority")
+        message=$(json_field "$line" "message")
+        printf "%s  Stack push [%s]: %s\n" "$display_ts" "${priority:-normal}" "${message:0:60}"
+        ;;
+      stack_pop)
+        local priority message
+        priority=$(json_field "$line" "priority")
+        message=$(json_field "$line" "message")
+        printf "%s  Stack pop [%s]: %s\n" "$display_ts" "${priority:-normal}" "${message:0:60}"
+        ;;
+      stack_clear)
+        local count
+        count=$(json_field_num "$line" "count" || echo "0")
+        count=${count:-0}
+        printf "%s  Stack cleared (%s messages)\n" "$display_ts" "$count"
+        ;;
+      *)
+        printf "%s  [%s]\n" "$display_ts" "$evt_type"
+        ;;
+    esac
+  done < "$stream"
+
+  printf '%s\n' "────────────────────────────────────────"
+
+  # Metrics summary table
+  if [[ -f "$metrics_file" ]]; then
+    local mc
+    mc=$(cat "$metrics_file")
+    printf "\n${BOLD}Metrics Summary${RESET}\n"
+    local m_dur m_evt m_term m_file m_marker m_stackops
+    m_dur=$(json_field_num "$mc" "duration_seconds" || echo "0")
+    m_evt=$(json_field_num "$mc" "event_count" || echo "0")
+    # For nested fields in events_by_type, use grep pattern
+    m_term=$(echo "$mc" | grep -o '"terminal":[0-9]*' | head -1 | cut -d: -f2 || echo "0")
+    m_file=$(echo "$mc" | grep -o '"file_change":[0-9]*' | head -1 | cut -d: -f2 || echo "0")
+    m_marker=$(echo "$mc" | grep -o '"marker":[0-9]*' | head -1 | cut -d: -f2 || echo "0")
+    m_stackops=$(echo "$mc" | grep -o '"stack_operations":[0-9]*' | head -1 | cut -d: -f2 || echo "0")
+    printf "  Duration:          %ss\n" "${m_dur:-0}"
+    printf "  Events:            %s\n" "${m_evt:-0}"
+    printf "  Terminal snapshots: %s\n" "${m_term:-0}"
+    printf "  File changes:      %s\n" "${m_file:-0}"
+    printf "  Markers:           %s\n" "${m_marker:-0}"
+    printf "  Stack operations:  %s\n" "${m_stackops:-0}"
+  fi
+
+  # Footer
+  if [[ -f "$rec_dir/transcript.md" ]]; then
+    printf "\nFull transcript: %s\n" "$rec_dir/transcript.md"
+  fi
+}
+
+# ==============================================================================
+# Play step mode -- event-by-event stepping
+# ==============================================================================
+
+play_step() {
+  local recording_name="$1"
+  local rec_dir="$2"
+  local stream="$rec_dir/stream.jsonl"
+
+  # Read all events into an array
+  local -a events=()
+  while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+    events+=("$line")
+  done < "$stream"
+
+  local total=${#events[@]}
+  local index=0
+
+  printf "\n${BOLD}Stepping through: %s (%d events)${RESET}\n" "$recording_name" "$total"
+  printf "Press Enter for next event, q to quit\n\n"
+
+  while [[ $index -lt $total ]]; do
+    local event="${events[$index]}"
+    local evt_type evt_ts
+    evt_type=$(json_field "$event" "type")
+    evt_ts=$(json_field "$event" "ts")
+    local display_ts="${evt_ts:11:8}"
+
+    # Show event header
+    printf "${BOLD}[%d/%d]${RESET} %s " "$((index + 1))" "$total" "$display_ts"
+
+    # Show event details based on type
+    case "$evt_type" in
+      recording_start)
+        printf "${GREEN}Recording started${RESET}\n"
+        ;;
+      recording_stop)
+        printf "${GREEN}Recording stopped${RESET}\n"
+        ;;
+      terminal)
+        printf "${BOLD}Terminal snapshot${RESET}\n"
+        local content
+        content=$(json_field "$event" "content")
+        if [[ -n "$content" ]]; then
+          printf "  %s\n" "${content:0:500}"
+        fi
+        ;;
+      file_change)
+        local path action lines_delta
+        path=$(json_field "$event" "path")
+        action=$(json_field "$event" "action")
+        lines_delta=$(json_field_num "$event" "lines_delta" || echo "")
+        printf "File %s: %s" "${action:-changed}" "${path:-unknown}"
+        if [[ -n "${lines_delta:-}" ]]; then
+          printf " (%s lines)" "$lines_delta"
+        fi
+        printf "\n"
+        ;;
+      marker)
+        local label
+        label=$(json_field "$event" "label")
+        printf "${BOLD}▶ Marker: %s${RESET}\n" "$label"
+        ;;
+      stack_push|stack_pop|stack_clear|stack_poke)
+        local message
+        message=$(json_field "$event" "message")
+        printf "Stack %s" "${evt_type#stack_}"
+        if [[ -n "$message" ]]; then
+          printf ": %s" "${message:0:80}"
+        fi
+        printf "\n"
+        ;;
+      *)
+        printf "[%s]\n" "$evt_type"
+        ;;
+    esac
+
+    index=$((index + 1))
+
+    # Check if last event
+    if [[ $index -ge $total ]]; then
+      printf "\n${BOLD}End of recording${RESET} (%d events)\n" "$total"
+      break
+    fi
+
+    # Wait for input (Enter or q)
+    local input=""
+    read -r input 2>/dev/null || break
+    if [[ "$input" == "q" || "$input" == "Q" ]]; then
+      printf "Quit at event %d/%d\n" "$index" "$total"
+      break
+    fi
+  done
+}
+
+# ==============================================================================
+# Play run/feed stubs (implemented in Plan 107-03)
+# ==============================================================================
+
+play_run() {
+  echo "play --run: not yet implemented (Plan 107-03)"
+  return 0
+}
+
+play_feed() {
+  echo "play --feed: not yet implemented (Plan 107-03)"
+  return 0
+}
+
+# ==============================================================================
 # Known subcommands (stubs for future implementation)
 # ==============================================================================
 
@@ -2506,7 +2827,12 @@ main() {
       cmd_stop_record "$@"
       exit $?
       ;;
-    play|metrics)
+    play)
+      shift
+      cmd_play "$@"
+      exit $?
+      ;;
+    metrics)
       echo "$cmd: not yet implemented"
       log_event "$cmd" "stub invoked"
       exit 0
