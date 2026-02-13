@@ -369,3 +369,44 @@ export interface DemotionDecision {
   /** All drift events that contributed to this decision (most recent window) */
   events: DriftEvent[];
 }
+
+/** Artifact types in the promotion pipeline (LINE-01) */
+export type ArtifactType = 'observation' | 'pattern' | 'candidate' | 'script' | 'decision' | 'execution';
+
+/** Pipeline stages that produce artifacts (LINE-02) */
+export type PipelineStage = 'capture' | 'analysis' | 'detection' | 'generation' | 'gatekeeping' | 'feedback';
+
+/** A lineage entry recording one artifact's provenance in the pipeline (LINE-01, LINE-02) */
+export interface LineageEntry {
+  /** Unique artifact ID following the format for its type:
+   *  - obs:{sessionId}:{toolName}:{inputHash}
+   *  - pat:{toolName}:{inputHash}
+   *  - cand:{toolName}:{inputHash}
+   *  - script:{operationId}
+   *  - gate:{operationId}:{timestamp}
+   *  - exec:{operationId}:{timestamp}
+   */
+  artifactId: string;
+  /** The type of artifact */
+  artifactType: ArtifactType;
+  /** The pipeline stage that produced this artifact */
+  stage: PipelineStage;
+  /** Artifact IDs of inputs consumed by this stage */
+  inputs: string[];
+  /** Artifact IDs of outputs produced by this stage */
+  outputs: string[];
+  /** Stage-specific decision metadata (e.g., scores, thresholds, reasoning) */
+  metadata: Record<string, unknown>;
+  /** ISO timestamp of when this entry was recorded */
+  timestamp: string;
+}
+
+/** Full lineage chain for an artifact, with upstream and downstream traces (LINE-03) */
+export interface LineageChain {
+  /** The central artifact being traced */
+  artifact: LineageEntry;
+  /** All entries upstream (what produced this artifact, recursively) */
+  upstream: LineageEntry[];
+  /** All entries downstream (what this artifact produced, recursively) */
+  downstream: LineageEntry[];
+}
