@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { CopperListSchema } from '../schema.js';
+import { PipelineSchema } from '../schema.js';
 import type { SessionObservation } from '../../../types/observation.js';
 import type { SkillCandidate, PatternEvidence } from '../../../types/detection.js';
-import type { CopperList, MoveInstruction, WaitInstruction } from '../types.js';
+import type { Pipeline, MoveInstruction, WaitInstruction } from '../types.js';
 import { LearningCompiler } from './compiler.js';
 
 // ============================================================================
@@ -118,9 +118,9 @@ describe('LearningCompiler', () => {
   });
 
   // --------------------------------------------------------------------------
-  // 4. Compiled CopperList contains MOVE instructions for detected skills
+  // 4. Compiled Pipeline contains MOVE instructions for detected skills
   // --------------------------------------------------------------------------
-  it('compiled CopperList contains MOVE instructions for detected skills', () => {
+  it('compiled Pipeline contains MOVE instructions for detected skills', () => {
     const compiler = new LearningCompiler();
     const sessions = Array.from({ length: 4 }, () =>
       makeSession({
@@ -148,9 +148,9 @@ describe('LearningCompiler', () => {
   });
 
   // --------------------------------------------------------------------------
-  // 5. Compiled CopperList contains WAIT instructions for inferred lifecycle events
+  // 5. Compiled Pipeline contains WAIT instructions for inferred lifecycle events
   // --------------------------------------------------------------------------
-  it('compiled CopperList contains WAIT instructions for inferred lifecycle events', () => {
+  it('compiled Pipeline contains WAIT instructions for inferred lifecycle events', () => {
     const compiler = new LearningCompiler();
     const sessions = Array.from({ length: 4 }, () =>
       makeSession({
@@ -219,9 +219,9 @@ describe('LearningCompiler', () => {
   });
 
   // --------------------------------------------------------------------------
-  // 7. Compiled CopperList validates against CopperListSchema
+  // 7. Compiled Pipeline validates against PipelineSchema
   // --------------------------------------------------------------------------
-  it('compiled CopperList validates against CopperListSchema', () => {
+  it('compiled Pipeline validates against PipelineSchema', () => {
     const compiler = new LearningCompiler();
     const sessions = Array.from({ length: 4 }, () =>
       makeSession({
@@ -235,7 +235,7 @@ describe('LearningCompiler', () => {
 
     expect(result.lists.length).toBeGreaterThanOrEqual(1);
     for (const list of result.lists) {
-      const validation = CopperListSchema.safeParse(list);
+      const validation = PipelineSchema.safeParse(list);
       expect(validation.success).toBe(true);
     }
   });
