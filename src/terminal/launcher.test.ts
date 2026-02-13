@@ -58,6 +58,7 @@ const DEFAULT_CONFIG: TerminalConfig = {
   base_path: '/terminal',
   auth_mode: 'none',
   theme: 'dark',
+  session_name: 'dev',
 };
 
 /** Helper to get the mocked spawn function. */

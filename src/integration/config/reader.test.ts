@@ -182,6 +182,7 @@ describe('readIntegrationConfig', () => {
           base_path: '/term',
           auth_mode: 'none' as const,
           theme: 'light' as const,
+          session_name: 'custom',
         },
       };
 
@@ -362,6 +363,7 @@ describe('terminal config via reader', () => {
       base_path: '/terminal',
       auth_mode: 'none',
       theme: 'dark',
+      session_name: 'dev',
     });
   });
 
@@ -375,6 +377,7 @@ describe('terminal config via reader', () => {
       base_path: '/terminal',
       auth_mode: 'none',
       theme: 'dark',
+      session_name: 'dev',
     });
   });
 
@@ -415,6 +418,7 @@ describe('validateIntegrationConfig with terminal', () => {
         base_path: '/terminal',
         auth_mode: 'none',
         theme: 'dark',
+        session_name: 'dev',
       });
     }
   });
