@@ -325,3 +325,47 @@ export interface DryRunResult {
   /** Failure reason if passed=false (null if passed=true) */
   failureReason: string | null;
 }
+
+/** Configuration for drift monitoring (FEED-03) */
+export interface DriftMonitorConfig {
+  /** Number of consecutive mismatches before triggering demotion (default: 3) */
+  sensitivity: number;
+  /** Whether drift monitoring is enabled (default: true) */
+  enabled: boolean;
+}
+
+/** Default configuration for drift monitoring */
+export const DEFAULT_DRIFT_MONITOR_CONFIG: DriftMonitorConfig = {
+  sensitivity: 3,
+  enabled: true,
+};
+
+/** A single drift check event recorded after comparing output hashes (FEED-01) */
+export interface DriftEvent {
+  /** Operation ID of the promoted script (toolName:inputHash format) */
+  operationId: string;
+  /** ISO timestamp of this drift check */
+  timestamp: string;
+  /** Whether the actual output matched the expected output */
+  matched: boolean;
+  /** SHA-256 hash of the actual execution output */
+  actualHash: string;
+  /** SHA-256 hash of the expected output from observations */
+  expectedHash: string;
+  /** Running count of consecutive mismatches (resets to 0 on match) */
+  consecutiveMismatches: number;
+}
+
+/** Decision returned by the drift monitor when demotion threshold is reached (FEED-02) */
+export interface DemotionDecision {
+  /** Operation ID of the promoted script */
+  operationId: string;
+  /** Whether demotion was triggered */
+  demoted: boolean;
+  /** Human-readable reason for the decision */
+  reason: string;
+  /** Number of consecutive mismatches at time of decision */
+  consecutiveMismatches: number;
+  /** All drift events that contributed to this decision (most recent window) */
+  events: DriftEvent[];
+}
