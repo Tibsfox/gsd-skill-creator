@@ -175,3 +175,44 @@ export interface ClassifiedOperation {
   /** The determinism value used for classification (1 - varianceScore) */
   determinism: number;
 }
+
+/** Tool names that qualify as tool-based patterns for promotion (PRMO-04) */
+export const PROMOTABLE_TOOL_NAMES = [
+  'Read', 'Write', 'Bash', 'Glob', 'Grep', 'Edit', 'WebFetch',
+] as const;
+
+/** Type for promotable tool names */
+export type PromotableToolName = typeof PROMOTABLE_TOOL_NAMES[number];
+
+/** Configuration for promotion detection */
+export interface PromotionDetectorConfig {
+  /** Minimum determinism score to qualify as a promotion candidate (default: 0.95) */
+  minDeterminism: number;
+  /** Minimum confidence threshold for filtering results (default: 0.0 = no filter) */
+  minConfidence: number;
+  /** Approximate characters per token for savings estimation (default: 4) */
+  charsPerToken: number;
+}
+
+/** Default configuration for promotion detection */
+export const DEFAULT_PROMOTION_DETECTOR_CONFIG: PromotionDetectorConfig = {
+  minDeterminism: 0.95,
+  minConfidence: 0.0,
+  charsPerToken: 4,
+};
+
+/** A promotion candidate identified by the detector (PRMO-01, PRMO-02) */
+export interface PromotionCandidate {
+  /** The classified operation this candidate is based on */
+  operation: ClassifiedOperation;
+  /** Tool name (must be a promotable tool) */
+  toolName: string;
+  /** Number of times this operation was invoked across sessions */
+  frequency: number;
+  /** Estimated token savings per invocation (based on input+output size) */
+  estimatedTokenSavings: number;
+  /** Composite score combining determinism, frequency, and token savings (0.0-1.0) */
+  compositeScore: number;
+  /** Whether this candidate passes the minimum confidence threshold */
+  meetsConfidence: boolean;
+}
