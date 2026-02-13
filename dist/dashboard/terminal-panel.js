@@ -7,13 +7,9 @@
  *
  * @module dashboard/terminal-panel
  */
-
-import type { TerminalConfig } from '../integration/config/terminal-types.js';
-
 // ---------------------------------------------------------------------------
 // Panel Renderer
 // ---------------------------------------------------------------------------
-
 /**
  * Render a terminal panel containing a Wetty iframe with offline fallback.
  *
@@ -25,10 +21,9 @@ import type { TerminalConfig } from '../integration/config/terminal-types.js';
  * @param config - Terminal configuration with port, base_path, etc.
  * @returns HTML string for the terminal panel.
  */
-export function renderTerminalPanel(config: TerminalConfig): string {
-  const url = `http://localhost:${config.port}${config.base_path}`;
-
-  return `<div class="terminal-panel">
+export function renderTerminalPanel(config) {
+    const url = `http://localhost:${config.port}${config.base_path}`;
+    return `<div class="terminal-panel">
   <iframe
     class="terminal-iframe"
     data-terminal-url="${url}"
@@ -73,11 +68,9 @@ export function renderTerminalPanel(config: TerminalConfig): string {
   </script>
 </div>`;
 }
-
 // ---------------------------------------------------------------------------
 // Styles
 // ---------------------------------------------------------------------------
-
 /**
  * Return CSS styles for the terminal panel component.
  *
@@ -87,8 +80,8 @@ export function renderTerminalPanel(config: TerminalConfig): string {
  *
  * @returns CSS string.
  */
-export function renderTerminalStyles(): string {
-  return `
+export function renderTerminalStyles() {
+    return `
 /* -----------------------------------------------------------------------
    Terminal Panel
    ----------------------------------------------------------------------- */
