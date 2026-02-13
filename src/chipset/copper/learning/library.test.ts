@@ -2,9 +2,9 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import type { CopperList } from '../types.js';
+import type { Pipeline } from '../types.js';
 import type { LibraryEntry, FeedbackRecord } from './types.js';
-import { CopperLibrary, DEFAULT_LIBRARY_CONFIG } from './library.js';
+import { PipelineLibrary, DEFAULT_LIBRARY_CONFIG } from './library.js';
 import type { LibraryConfig, MatchResult } from './library.js';
 
 // ============================================================================
@@ -12,7 +12,7 @@ import type { LibraryConfig, MatchResult } from './library.js';
 // ============================================================================
 
 /**
- * Factory for creating a minimal valid CopperList.
+ * Factory for creating a minimal valid Pipeline.
  * Configurable metadata name, confidence, and MOVE instruction names.
  */
 function makeList(overrides: {
@@ -22,7 +22,7 @@ function makeList(overrides: {
   sourcePatterns?: string[];
   tags?: string[];
   version?: number;
-} = {}): CopperList {
+} = {}): Pipeline {
   const {
     name = 'learning-wf-test',
     confidence = 0.8,
@@ -60,7 +60,7 @@ function makeList(overrides: {
  */
 function makeEntry(overrides: {
   workflowType?: string;
-  list?: CopperList;
+  list?: Pipeline;
   version?: number;
   accuracy?: number;
   executionCount?: number;
@@ -89,16 +89,16 @@ function makeEntry(overrides: {
 }
 
 // ============================================================================
-// CopperLibrary Tests
+// PipelineLibrary Tests
 // ============================================================================
 
-describe('CopperLibrary', () => {
-  let library: InstanceType<typeof CopperLibrary>;
+describe('PipelineLibrary', () => {
+  let library: InstanceType<typeof PipelineLibrary>;
   let tmpDir: string;
 
   beforeEach(async () => {
-    library = new CopperLibrary();
-    tmpDir = await mkdtemp(join(tmpdir(), 'copper-library-'));
+    library = new PipelineLibrary();
+    tmpDir = await mkdtemp(join(tmpdir(), 'pipeline-library-'));
   });
 
   afterEach(async () => {
@@ -166,7 +166,7 @@ describe('CopperLibrary', () => {
     expect(result!.version).toBe(2);
   });
 
-  it('getByName() retrieves by Copper List metadata name', () => {
+  it('getByName() retrieves by Pipeline metadata name', () => {
     const entry = makeEntry({
       workflowType: 'tdd-vitest-cycle',
       list: makeList({ name: 'learning-wf-tdd-vitest' }),
@@ -392,7 +392,7 @@ describe('CopperLibrary', () => {
 
   it('load() reads library from JSON file on disk', async () => {
     // Save entries to disk first
-    const original = new CopperLibrary();
+    const original = new PipelineLibrary();
     original.add(makeEntry({
       workflowType: 'tdd-vitest-cycle',
       list: makeList({ name: 'learning-wf-tdd' }),
@@ -406,13 +406,13 @@ describe('CopperLibrary', () => {
     await original.save(filePath);
 
     // Load into a new library
-    const loaded = new CopperLibrary();
+    const loaded = new PipelineLibrary();
     await loaded.load(filePath);
 
     expect(loaded.list()).toHaveLength(2);
   });
 
-  it('load() validates lists against CopperListSchema and skips invalid', async () => {
+  it('load() validates lists against PipelineSchema and skips invalid', async () => {
     // Create a JSON file with one valid and one invalid entry
     const validEntry = makeEntry({
       workflowType: 'valid-cycle',
@@ -424,7 +424,7 @@ describe('CopperLibrary', () => {
       list: {
         metadata: { name: 'learning-wf-invalid' },
         instructions: [], // Invalid: must have at least one instruction
-      } as unknown as CopperList,
+      } as unknown as Pipeline,
     });
 
     const data = {
@@ -438,7 +438,7 @@ describe('CopperLibrary', () => {
     const { writeFile } = await import('node:fs/promises');
     await writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
 
-    const loaded = new CopperLibrary();
+    const loaded = new PipelineLibrary();
     await loaded.load(filePath);
 
     // Only the valid entry should be loaded
@@ -448,8 +448,8 @@ describe('CopperLibrary', () => {
   });
 
   it('load() from nonexistent file is a no-op (no error)', async () => {
-    const loaded = new CopperLibrary();
-    await loaded.load('/tmp/nonexistent-copper-library-test-12345.json');
+    const loaded = new PipelineLibrary();
+    await loaded.load('/tmp/nonexistent-pipeline-library-test-12345.json');
 
     expect(loaded.list()).toEqual([]);
   });
@@ -478,7 +478,7 @@ describe('CopperLibrary', () => {
     const filePath = join(tmpDir, 'library.json');
     await library.save(filePath);
 
-    const loaded = new CopperLibrary();
+    const loaded = new PipelineLibrary();
     await loaded.load(filePath);
 
     // Check entries

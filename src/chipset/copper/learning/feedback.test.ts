@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { CopperListSchema } from '../schema.js';
-import type { CopperList, MoveInstruction } from '../types.js';
+import { PipelineSchema } from '../schema.js';
+import type { Pipeline, MoveInstruction } from '../types.js';
 import type { FeedbackRecord, LibraryEntry } from './types.js';
 import {
   FeedbackEngine,
@@ -14,7 +14,7 @@ import {
 // ============================================================================
 
 /**
- * Factory for creating a minimal valid CopperList.
+ * Factory for creating a minimal valid Pipeline.
  * Override metadata fields and provide custom MOVE instruction names.
  */
 function makeList(overrides: {
@@ -22,7 +22,7 @@ function makeList(overrides: {
   confidence?: number;
   version?: number;
   moveSkills?: string[];
-} = {}): CopperList {
+} = {}): Pipeline {
   const {
     name = 'test-list',
     confidence = 0.7,
@@ -53,10 +53,10 @@ function makeList(overrides: {
 
 /**
  * Factory for creating a minimal valid LibraryEntry.
- * Wraps a CopperList with default metadata.
+ * Wraps a Pipeline with default metadata.
  */
 function makeEntry(overrides: {
-  list?: CopperList;
+  list?: Pipeline;
   workflowType?: string;
   version?: number;
   accuracy?: number;
@@ -327,7 +327,7 @@ describe('FeedbackEngine', () => {
       expect(entry.list.metadata.confidence).toBe(0.7);
     });
 
-    it('validates the refined list against CopperListSchema', () => {
+    it('validates the refined list against PipelineSchema', () => {
       const engine = new FeedbackEngine();
       const list = makeList({ moveSkills: ['git-commit'] });
       const entry = makeEntry({ list });
@@ -347,7 +347,7 @@ describe('FeedbackEngine', () => {
 
       engine.refine(entry);
 
-      const parsed = CopperListSchema.safeParse(entry.list);
+      const parsed = PipelineSchema.safeParse(entry.list);
       expect(parsed.success).toBe(true);
     });
 
