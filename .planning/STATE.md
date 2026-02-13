@@ -3,9 +3,9 @@
 ## Current Position
 
 Milestone: v1.16 -- Dashboard Console & Milestone Ingestion
-Phase: 131-question-system (plan 01 complete)
+Phase: 131-question-system (plan 02 complete)
 Status: Executing phase 131
-Last activity: 2026-02-13 -- Completed 131-01 (question schema validation)
+Last activity: 2026-02-13 -- Completed 131-02 (question card renderer)
 
 Progress: [███░░░░░░░░░░░░░] 1/5 phases (131 in progress)
 
@@ -68,9 +68,13 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - Type aliases inferred from schema via z.infer indexed access (not separate type definitions) for QuestionSchema
 - TimeoutFallback extracted via NonNullable<Question['timeout']>['fallback'] for DRY type inference
 - Options structurally optional in schema -- renderer enforces semantic requirement for choice/multi-select
+- Binary and confirmation types render direct action buttons (no separate submit button)
+- Choice, multi-select, text types include submit button in actions bar
+- Urgency conveyed via left border color (dim/accent/orange/red) with critical background tint
+- Timeout formatted as Xm Ys for >= 60s, Xs for < 60s
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
 - Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, check-inbox integration tests)
@@ -99,10 +103,10 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Completed 131-01 (question schema validation)
-Stopped at: Completed 131-01-PLAN.md execution
-Next action: Continue with remaining 131 plans (02+)
-Context: QuestionSchema validates 5 question types (binary, choice, multi-select, text, confirmation) with defaults (status: pending, urgency: medium). TimeoutSchema enforces positive int seconds and 4 fallback actions. 28 new tests, 210 total console tests passing. Barrel exports updated in src/console/index.ts.
+Last: 2026-02-13 -- Completed 131-02 (question card renderer)
+Stopped at: Completed 131-02-PLAN.md execution
+Next action: Continue with remaining 131 plans (03+)
+Context: renderQuestionCard produces HTML for all 5 question types with type-specific inputs. renderQuestionCardStyles returns themed CSS. 31 new tests, 137 total dashboard tests passing. Imports Question type from console/question-schema.ts (131-01).
 
 ---
-*Last updated: 2026-02-13 (131-01 complete)*
+*Last updated: 2026-02-13 (131-02 complete)*
