@@ -1,15 +1,15 @@
 /**
- * Tests for the typed exec message protocol.
+ * Tests for the typed kernel message protocol.
  *
- * Validates Amiga-inspired message fields (ln_Type, ln_Pri, mn_ReplyPort,
- * mn_Length), Zod schema validation, MESSAGE_TYPES enum, createMessage
- * factory with defaults, and createReply factory with routing.
+ * Validates message fields (type, priority, replyPort, tokenCost),
+ * Zod schema validation, MESSAGE_TYPES enum, createMessage factory
+ * with defaults, and createReply factory with routing.
  */
 
 import { describe, it, expect } from 'vitest';
 import {
-  ExecMessageSchema,
-  ExecMessage,
+  KernelMessageSchema,
+  KernelMessage,
   MessageType,
   MESSAGE_TYPES,
   createMessage,
@@ -17,31 +17,31 @@ import {
 } from './messages.js';
 
 // ============================================================================
-// ExecMessageSchema Validation
+// KernelMessageSchema Validation
 // ============================================================================
 
-describe('ExecMessageSchema', () => {
-  const validMessage: ExecMessage = {
+describe('KernelMessageSchema', () => {
+  const validMessage: KernelMessage = {
     id: 'msg-001',
-    ln_Type: 'budget-query',
-    ln_Pri: 0,
-    mn_ReplyPort: 'agnus-reply',
-    mn_Length: 500,
-    sender: 'agnus',
-    receiver: 'denise',
+    type: 'budget-query',
+    priority: 0,
+    replyPort: 'context-engine-reply',
+    tokenCost: 500,
+    sender: 'context-engine',
+    receiver: 'render-engine',
     payload: { query: 'remaining' },
     timestamp: '2026-02-12T00:00:00.000Z',
   };
 
   it('parses valid message with all fields', () => {
-    const result = ExecMessageSchema.parse(validMessage);
+    const result = KernelMessageSchema.parse(validMessage);
     expect(result.id).toBe('msg-001');
-    expect(result.ln_Type).toBe('budget-query');
-    expect(result.ln_Pri).toBe(0);
-    expect(result.mn_ReplyPort).toBe('agnus-reply');
-    expect(result.mn_Length).toBe(500);
-    expect(result.sender).toBe('agnus');
-    expect(result.receiver).toBe('denise');
+    expect(result.type).toBe('budget-query');
+    expect(result.priority).toBe(0);
+    expect(result.replyPort).toBe('context-engine-reply');
+    expect(result.tokenCost).toBe(500);
+    expect(result.sender).toBe('context-engine');
+    expect(result.receiver).toBe('render-engine');
     expect(result.payload).toEqual({ query: 'remaining' });
     expect(result.timestamp).toBe('2026-02-12T00:00:00.000Z');
   });
@@ -49,81 +49,81 @@ describe('ExecMessageSchema', () => {
   it('parses valid message with minimal fields', () => {
     const minimal = {
       id: 'msg-002',
-      ln_Type: 'heartbeat',
-      ln_Pri: 0,
-      mn_Length: 0,
-      sender: 'agnus',
-      receiver: 'denise',
+      type: 'heartbeat',
+      priority: 0,
+      tokenCost: 0,
+      sender: 'context-engine',
+      receiver: 'render-engine',
       payload: {},
       timestamp: '2026-02-12T00:00:00.000Z',
     };
-    const result = ExecMessageSchema.parse(minimal);
+    const result = KernelMessageSchema.parse(minimal);
     expect(result.id).toBe('msg-002');
-    expect(result.mn_ReplyPort).toBeUndefined();
+    expect(result.replyPort).toBeUndefined();
     expect(result.inReplyTo).toBeUndefined();
   });
 
-  it('rejects missing ln_Type', () => {
-    const { ln_Type, ...noType } = validMessage;
-    expect(() => ExecMessageSchema.parse(noType)).toThrow();
+  it('rejects missing type', () => {
+    const { type, ...noType } = validMessage;
+    expect(() => KernelMessageSchema.parse(noType)).toThrow();
   });
 
   it('rejects missing sender', () => {
     const { sender, ...noSender } = validMessage;
-    expect(() => ExecMessageSchema.parse(noSender)).toThrow();
+    expect(() => KernelMessageSchema.parse(noSender)).toThrow();
   });
 
   it('rejects missing receiver', () => {
     const { receiver, ...noReceiver } = validMessage;
-    expect(() => ExecMessageSchema.parse(noReceiver)).toThrow();
+    expect(() => KernelMessageSchema.parse(noReceiver)).toThrow();
   });
 
-  describe('ln_Pri signed byte range', () => {
+  describe('priority signed byte range', () => {
     it('accepts -128 (lowest priority)', () => {
-      const msg = { ...validMessage, ln_Pri: -128 };
-      const result = ExecMessageSchema.parse(msg);
-      expect(result.ln_Pri).toBe(-128);
+      const msg = { ...validMessage, priority: -128 };
+      const result = KernelMessageSchema.parse(msg);
+      expect(result.priority).toBe(-128);
     });
 
     it('accepts 127 (highest priority)', () => {
-      const msg = { ...validMessage, ln_Pri: 127 };
-      const result = ExecMessageSchema.parse(msg);
-      expect(result.ln_Pri).toBe(127);
+      const msg = { ...validMessage, priority: 127 };
+      const result = KernelMessageSchema.parse(msg);
+      expect(result.priority).toBe(127);
     });
 
     it('accepts 0 (default neutral)', () => {
-      const msg = { ...validMessage, ln_Pri: 0 };
-      const result = ExecMessageSchema.parse(msg);
-      expect(result.ln_Pri).toBe(0);
+      const msg = { ...validMessage, priority: 0 };
+      const result = KernelMessageSchema.parse(msg);
+      expect(result.priority).toBe(0);
     });
 
     it('rejects -129 (below signed byte range)', () => {
-      const msg = { ...validMessage, ln_Pri: -129 };
-      expect(() => ExecMessageSchema.parse(msg)).toThrow();
+      const msg = { ...validMessage, priority: -129 };
+      expect(() => KernelMessageSchema.parse(msg)).toThrow();
     });
 
     it('rejects 128 (above signed byte range)', () => {
-      const msg = { ...validMessage, ln_Pri: 128 };
-      expect(() => ExecMessageSchema.parse(msg)).toThrow();
+      const msg = { ...validMessage, priority: 128 };
+      expect(() => KernelMessageSchema.parse(msg)).toThrow();
     });
   });
 
-  describe('mn_Length non-negative', () => {
+  describe('tokenCost non-negative', () => {
     it('accepts 0', () => {
-      const msg = { ...validMessage, mn_Length: 0 };
-      const result = ExecMessageSchema.parse(msg);
-      expect(result.mn_Length).toBe(0);
+      const msg = { ...validMessage, tokenCost: 0 };
+      const result = KernelMessageSchema.parse(msg);
+      expect(result.tokenCost).toBe(0);
     });
 
     it('accepts 10000', () => {
-      const msg = { ...validMessage, mn_Length: 10000 };
-      const result = ExecMessageSchema.parse(msg);
-      expect(result.mn_Length).toBe(10000);
+      const msg = { ...validMessage, tokenCost: 10000 };
+      const result = KernelMessageSchema.parse(msg);
+      expect(result.tokenCost).toBe(10000);
     });
 
     it('rejects -1', () => {
-      const msg = { ...validMessage, mn_Length: -1 };
-      expect(() => ExecMessageSchema.parse(msg)).toThrow();
+      const msg = { ...validMessage, tokenCost: -1 };
+      expect(() => KernelMessageSchema.parse(msg)).toThrow();
     });
   });
 });
@@ -160,35 +160,35 @@ describe('MESSAGE_TYPES', () => {
     }
   });
 
-  it('accepts any MESSAGE_TYPES value as ln_Type', () => {
+  it('accepts any MESSAGE_TYPES value as type', () => {
     for (const type of MESSAGE_TYPES) {
       const msg = {
         id: 'msg-test',
-        ln_Type: type,
-        ln_Pri: 0,
-        mn_Length: 0,
-        sender: 'agnus',
-        receiver: 'denise',
+        type: type,
+        priority: 0,
+        tokenCost: 0,
+        sender: 'context-engine',
+        receiver: 'render-engine',
         payload: {},
         timestamp: '2026-02-12T00:00:00.000Z',
       };
-      const result = ExecMessageSchema.parse(msg);
-      expect(result.ln_Type).toBe(type);
+      const result = KernelMessageSchema.parse(msg);
+      expect(result.type).toBe(type);
     }
   });
 
   it('rejects unknown message type', () => {
     const msg = {
       id: 'msg-bad',
-      ln_Type: 'not-a-real-type',
-      ln_Pri: 0,
-      mn_Length: 0,
-      sender: 'agnus',
-      receiver: 'denise',
+      type: 'not-a-real-type',
+      priority: 0,
+      tokenCost: 0,
+      sender: 'context-engine',
+      receiver: 'render-engine',
       payload: {},
       timestamp: '2026-02-12T00:00:00.000Z',
     };
-    expect(() => ExecMessageSchema.parse(msg)).toThrow();
+    expect(() => KernelMessageSchema.parse(msg)).toThrow();
   });
 });
 
@@ -199,73 +199,73 @@ describe('MESSAGE_TYPES', () => {
 describe('createMessage', () => {
   it('creates message with defaults', () => {
     const msg = createMessage({
-      ln_Type: 'budget-query',
-      sender: 'agnus',
-      receiver: 'denise',
+      type: 'budget-query',
+      sender: 'context-engine',
+      receiver: 'render-engine',
       payload: {},
     });
 
     expect(msg.id).toBeTruthy();
     expect(typeof msg.id).toBe('string');
     expect(msg.id.length).toBeGreaterThan(0);
-    expect(msg.ln_Pri).toBe(0);
-    expect(msg.mn_Length).toBe(0);
+    expect(msg.priority).toBe(0);
+    expect(msg.tokenCost).toBe(0);
     expect(msg.timestamp).toBeTruthy();
-    expect(msg.mn_ReplyPort).toBeUndefined();
+    expect(msg.replyPort).toBeUndefined();
     expect(msg.inReplyTo).toBeUndefined();
   });
 
   it('creates message with explicit fields', () => {
     const msg = createMessage({
-      ln_Type: 'render-request',
-      sender: 'agnus',
-      receiver: 'denise',
+      type: 'render-request',
+      sender: 'context-engine',
+      receiver: 'render-engine',
       payload: { format: 'markdown' },
-      ln_Pri: 50,
-      mn_ReplyPort: 'agnus-reply',
-      mn_Length: 1500,
+      priority: 50,
+      replyPort: 'context-engine-reply',
+      tokenCost: 1500,
     });
 
-    expect(msg.ln_Type).toBe('render-request');
-    expect(msg.sender).toBe('agnus');
-    expect(msg.receiver).toBe('denise');
+    expect(msg.type).toBe('render-request');
+    expect(msg.sender).toBe('context-engine');
+    expect(msg.receiver).toBe('render-engine');
     expect(msg.payload).toEqual({ format: 'markdown' });
-    expect(msg.ln_Pri).toBe(50);
-    expect(msg.mn_ReplyPort).toBe('agnus-reply');
-    expect(msg.mn_Length).toBe(1500);
+    expect(msg.priority).toBe(50);
+    expect(msg.replyPort).toBe('context-engine-reply');
+    expect(msg.tokenCost).toBe(1500);
   });
 
   it('creates message with custom priority', () => {
     const msg = createMessage({
-      ln_Type: 'budget-query',
-      sender: 'agnus',
-      receiver: 'denise',
+      type: 'budget-query',
+      sender: 'context-engine',
+      receiver: 'render-engine',
       payload: {},
-      ln_Pri: 50,
+      priority: 50,
     });
-    expect(msg.ln_Pri).toBe(50);
+    expect(msg.priority).toBe(50);
   });
 
   it('creates message with reply port', () => {
     const msg = createMessage({
-      ln_Type: 'budget-query',
-      sender: 'agnus',
-      receiver: 'denise',
+      type: 'budget-query',
+      sender: 'context-engine',
+      receiver: 'render-engine',
       payload: {},
-      mn_ReplyPort: 'agnus-reply',
+      replyPort: 'context-engine-reply',
     });
-    expect(msg.mn_ReplyPort).toBe('agnus-reply');
+    expect(msg.replyPort).toBe('context-engine-reply');
   });
 
   it('creates message with token cost estimate', () => {
     const msg = createMessage({
-      ln_Type: 'budget-query',
-      sender: 'agnus',
-      receiver: 'denise',
+      type: 'budget-query',
+      sender: 'context-engine',
+      receiver: 'render-engine',
       payload: {},
-      mn_Length: 1500,
+      tokenCost: 1500,
     });
-    expect(msg.mn_Length).toBe(1500);
+    expect(msg.tokenCost).toBe(1500);
   });
 });
 
@@ -276,39 +276,39 @@ describe('createMessage', () => {
 describe('createReply', () => {
   it('creates reply referencing original message', () => {
     const original = createMessage({
-      ln_Type: 'budget-query',
-      sender: 'agnus',
-      receiver: 'denise',
+      type: 'budget-query',
+      sender: 'context-engine',
+      receiver: 'render-engine',
       payload: { query: 'remaining' },
-      mn_ReplyPort: 'agnus-reply',
+      replyPort: 'context-engine-reply',
     });
     // Override id for deterministic test
     const origWithId = { ...original, id: 'msg-001' };
 
     const reply = createReply(origWithId, {
-      ln_Type: 'budget-response',
+      type: 'budget-response',
       payload: { remaining: 5000 },
-      sender: 'denise',
+      sender: 'render-engine',
     });
 
     expect(reply.inReplyTo).toBe('msg-001');
-    expect(reply.receiver).toBe('agnus'); // original sender
-    expect(reply.sender).toBe('denise'); // the replier
+    expect(reply.receiver).toBe('context-engine'); // original sender
+    expect(reply.sender).toBe('render-engine'); // the replier
   });
 
   it('routes reply to original sender', () => {
     const original = createMessage({
-      ln_Type: 'render-request',
-      sender: 'agnus',
-      receiver: 'denise',
+      type: 'render-request',
+      sender: 'context-engine',
+      receiver: 'render-engine',
       payload: {},
-      mn_ReplyPort: 'agnus-reply',
+      replyPort: 'context-engine-reply',
     });
 
     const reply = createReply(original, {
-      ln_Type: 'render-result',
+      type: 'render-result',
       payload: { output: 'done' },
-      sender: 'denise',
+      sender: 'render-engine',
     });
 
     // Reply receiver is the original sender (correct routing)
@@ -317,17 +317,17 @@ describe('createReply', () => {
 
   it('throws when original has no reply port', () => {
     const original = createMessage({
-      ln_Type: 'heartbeat',
-      sender: 'agnus',
-      receiver: 'denise',
+      type: 'heartbeat',
+      sender: 'context-engine',
+      receiver: 'render-engine',
       payload: {},
     });
 
     expect(() =>
       createReply(original, {
-        ln_Type: 'heartbeat',
+        type: 'heartbeat',
         payload: {},
-        sender: 'denise',
+        sender: 'render-engine',
       }),
     ).toThrow('Original message has no reply port');
   });

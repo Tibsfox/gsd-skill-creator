@@ -1,9 +1,9 @@
 /**
- * Exec kernel orchestrator for the chipset framework.
+ * Kernel orchestrator for the coprocessor framework.
  *
- * Wires the scheduler (112-02), message protocol (112-01), and DMA budget
+ * Wires the scheduler (112-02), message protocol (112-01), and budget
  * manager (112-03) into a unified tick-driven execution engine. Each kernel
- * tick runs one scheduling round, processes pending messages on each chip's
+ * tick runs one scheduling round, processes pending messages on each engine's
  * inbound port, and tracks budget consumption.
  *
  * The kernel manages the lifecycle of the execution engine:
@@ -14,16 +14,16 @@
  * Key behaviors:
  * - start()/stop() manage lifecycle transitions
  * - tick() runs one round: schedule teams, process inbound ports
- * - sendMessage() routes ExecMessages through MessagePort FIFO transport
- * - receiveMessages() drains a chip's inbound port
- * - spend()/getBudgetStatus() delegate to DmaBudgetManager
- * - sleep()/wake() delegate to ExecScheduler
- * - getState() returns a snapshot of kernel state and per-chip budgets
+ * - sendMessage() routes KernelMessages through MessagePort FIFO transport
+ * - receiveMessages() drains an engine's inbound port
+ * - spend()/getBudgetStatus() delegate to BudgetManager
+ * - sleep()/wake() delegate to Scheduler
+ * - getState() returns a snapshot of kernel state and per-engine budgets
  */
 
 import type { ChipRegistry } from '../teams/chip-registry.js';
 import { MessagePort } from '../teams/message-port.js';
-import type { ExecMessage } from './messages.js';
+import type { KernelMessage } from './messages.js';
 import { ExecScheduler } from './scheduler.js';
 import { DmaBudgetManager } from './dma-budget.js';
 import type { BudgetStatus } from './dma-budget.js';
@@ -35,11 +35,11 @@ import type { BudgetStatus } from './dma-budget.js';
 /** Kernel lifecycle state. */
 export type KernelState = 'idle' | 'running' | 'stopped';
 
-/** Configuration for creating an ExecKernel. */
+/** Configuration for creating a Kernel. */
 export interface KernelConfig {
-  /** Chip registry providing the set of chips to manage. */
+  /** Engine registry providing the set of engines to manage. */
   registry: ChipRegistry;
-  /** Total token budget across all chips. */
+  /** Total token budget across all engines. */
   totalBudget: number;
   /** Headroom percentage (default 5). */
   headroomPercent?: number;
@@ -60,20 +60,20 @@ export class ExecKernel {
   /** Number of ticks executed. */
   private _tickCount: number = 0;
 
-  /** Chip registry. */
+  /** Engine registry. */
   private readonly registry: ChipRegistry;
 
   /** Prioritized round-robin scheduler. */
   private readonly scheduler: ExecScheduler;
 
-  /** DMA budget manager. */
+  /** Budget manager. */
   private readonly budget: DmaBudgetManager;
 
-  /** Per-chip inbound message ports. */
+  /** Per-engine inbound message ports. */
   private readonly ports: Map<string, MessagePort> = new Map();
 
-  /** Chip names for iteration. */
-  private readonly chipNames: string[];
+  /** Engine names for iteration. */
+  private readonly engineNames: string[];
 
   constructor(config: KernelConfig) {
     this.registry = config.registry;
@@ -85,13 +85,13 @@ export class ExecKernel {
       headroomPercent: config.headroomPercent,
     });
 
-    // Register all chips from registry
-    this.chipNames = [];
-    for (const chip of this.registry.all()) {
-      this.chipNames.push(chip.name);
-      this.scheduler.add(chip.name, chip.dma.percentage);
-      this.budget.registerChip(chip.name, chip.dma.percentage);
-      this.ports.set(chip.name, new MessagePort(`${chip.name}-inbound`, 64));
+    // Register all engines from registry
+    this.engineNames = [];
+    for (const engine of this.registry.all()) {
+      this.engineNames.push(engine.name);
+      this.scheduler.add(engine.name, engine.dma.percentage);
+      this.budget.registerChip(engine.name, engine.dma.percentage);
+      this.ports.set(engine.name, new MessagePort(`${engine.name}-inbound`, 64));
     }
   }
 
@@ -137,12 +137,12 @@ export class ExecKernel {
     const scheduled = this.scheduler.schedule();
 
     // Process each scheduled team's inbound port
-    for (const chipName of scheduled) {
-      const port = this.ports.get(chipName);
+    for (const engineName of scheduled) {
+      const port = this.ports.get(engineName);
       if (port) {
         // Dequeue all pending messages (represents running the team)
         // Messages are consumed but the data was already available
-        // via receiveMessages() for the chip's own processing
+        // via receiveMessages() for the engine's own processing
       }
     }
 
@@ -154,17 +154,17 @@ export class ExecKernel {
   // --------------------------------------------------------------------------
 
   /**
-   * Send an ExecMessage through the kernel.
+   * Send a KernelMessage through the kernel.
    *
    * The message is wrapped as a PortMessage and enqueued on the receiver's
-   * inbound port. The sender pays the token cost (mn_Length) from its budget.
+   * inbound port. The sender pays the token cost (tokenCost) from its budget.
    *
-   * @param message - The ExecMessage to route
+   * @param message - The KernelMessage to route
    */
-  sendMessage(message: ExecMessage): void {
+  sendMessage(message: KernelMessage): void {
     const port = this.ports.get(message.receiver);
     if (!port) {
-      throw new Error(`Unknown receiver chip: '${message.receiver}'`);
+      throw new Error(`Unknown receiver engine: '${message.receiver}'`);
     }
 
     // Enqueue as PortMessage on receiver's inbound port
@@ -172,49 +172,49 @@ export class ExecKernel {
       id: message.id,
       sender: message.sender,
       receiver: message.receiver,
-      type: message.ln_Type,
+      type: message.type,
       priority: 'normal',
       payload: message,
       timestamp: message.timestamp,
-      replyPort: message.mn_ReplyPort,
+      replyPort: message.replyPort,
       inReplyTo: message.inReplyTo,
     });
 
     // Sender pays the token cost
-    if (message.mn_Length > 0) {
-      this.budget.spend(message.sender, message.mn_Length);
+    if (message.tokenCost > 0) {
+      this.budget.spend(message.sender, message.tokenCost);
     }
   }
 
   /**
-   * Receive (drain) all pending messages for a chip.
+   * Receive (drain) all pending messages for an engine.
    *
-   * Returns the ExecMessage payloads extracted from the PortMessages.
+   * Returns the KernelMessage payloads extracted from the PortMessages.
    * Messages are consumed; calling again returns empty.
    *
-   * @param chipName - Chip to drain messages for
-   * @returns Array of ExecMessage payloads
+   * @param engineName - Engine to drain messages for
+   * @returns Array of KernelMessage payloads
    */
-  receiveMessages(chipName: string): ExecMessage[] {
-    const port = this.ports.get(chipName);
+  receiveMessages(engineName: string): KernelMessage[] {
+    const port = this.ports.get(engineName);
     if (!port) {
-      throw new Error(`Unknown chip: '${chipName}'`);
+      throw new Error(`Unknown engine: '${engineName}'`);
     }
 
     const portMessages = port.drain();
-    return portMessages.map((pm) => pm.payload as ExecMessage);
+    return portMessages.map((pm) => pm.payload as KernelMessage);
   }
 
   /**
-   * Get the number of pending messages for a chip.
+   * Get the number of pending messages for an engine.
    *
-   * @param chipName - Chip to check
+   * @param engineName - Engine to check
    * @returns Number of pending messages
    */
-  getPendingMessages(chipName: string): number {
-    const port = this.ports.get(chipName);
+  getPendingMessages(engineName: string): number {
+    const port = this.ports.get(engineName);
     if (!port) {
-      throw new Error(`Unknown chip: '${chipName}'`);
+      throw new Error(`Unknown engine: '${engineName}'`);
     }
     return port.pending;
   }
@@ -223,14 +223,14 @@ export class ExecKernel {
   // Budget delegation
   // --------------------------------------------------------------------------
 
-  /** Spend tokens from a chip's budget. */
-  spend(chipName: string, tokens: number): BudgetStatus {
-    return this.budget.spend(chipName, tokens);
+  /** Spend tokens from an engine's budget. */
+  spend(engineName: string, tokens: number): BudgetStatus {
+    return this.budget.spend(engineName, tokens);
   }
 
-  /** Get the budget status for a chip. */
-  getBudgetStatus(chipName: string): BudgetStatus {
-    return this.budget.getStatus(chipName);
+  /** Get the budget status for an engine. */
+  getBudgetStatus(engineName: string): BudgetStatus {
+    return this.budget.getStatus(engineName);
   }
 
   // --------------------------------------------------------------------------
@@ -238,13 +238,13 @@ export class ExecKernel {
   // --------------------------------------------------------------------------
 
   /** Put a team to sleep (excluded from scheduling). */
-  sleep(chipName: string): void {
-    this.scheduler.sleep(chipName);
+  sleep(engineName: string): void {
+    this.scheduler.sleep(engineName);
   }
 
   /** Wake a sleeping team (return to scheduling). */
-  wake(chipName: string): void {
-    this.scheduler.wake(chipName);
+  wake(engineName: string): void {
+    this.scheduler.wake(engineName);
   }
 
   // --------------------------------------------------------------------------
@@ -254,14 +254,14 @@ export class ExecKernel {
   /**
    * Get a snapshot of the kernel state.
    *
-   * @returns Current state, tick count, and per-chip budget statuses
+   * @returns Current state, tick count, and per-engine budget statuses
    */
-  getState(): { state: KernelState; tickCount: number; chips: BudgetStatus[] } {
-    const chips = this.chipNames.map((name) => this.budget.getStatus(name));
+  getState(): { state: KernelState; tickCount: number; engines: BudgetStatus[] } {
+    const engines = this.engineNames.map((name) => this.budget.getStatus(name));
     return {
       state: this._state,
       tickCount: this._tickCount,
-      chips,
+      engines,
     };
   }
 }
