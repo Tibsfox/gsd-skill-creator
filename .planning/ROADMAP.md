@@ -197,6 +197,14 @@ Plans:
 2. Dashboard displays a staging queue panel with incoming/attention/ready/aside cards and dependency lines between items
 3. When the pattern reference is updated, system recommends retroactive hygiene audit for previously approved items that may be affected
 
+**Plans:** 4 plans
+
+Plans:
+- [ ] 141-01-PLAN.md -- Pre-wiring engine: resource manifest to planning doc conversion (TDD)
+- [ ] 141-02-PLAN.md -- Retroactive audit recommender: pattern update to audit recommendations (TDD)
+- [ ] 141-03-PLAN.md -- Staging queue dashboard panel: cards, columns, dependency lines (TDD)
+- [ ] 141-04-PLAN.md -- Barrel index updates and integration tests
+
 ---
 
 ## Progress
@@ -209,7 +217,7 @@ Plans:
 | 137 | Smart Intake Flow | INTAKE-03, INTAKE-04, INTAKE-06 | Complete ✓ |
 | 138 | Resource Analysis | RESOURCE-01, RESOURCE-02, RESOURCE-03, RESOURCE-04, RESOURCE-05, RESOURCE-06, INTAKE-07 | Complete ✓ |
 | 139 | Derived Knowledge Checking | DERIVED-01, DERIVED-02, DERIVED-03, DERIVED-04, DERIVED-05 | Complete ✓ |
-| 140 | Staging Queue Core | QUEUE-01, QUEUE-02, QUEUE-03, QUEUE-04, QUEUE-05, QUEUE-06 | Pending |
+| 140 | Staging Queue Core | QUEUE-01, QUEUE-02, QUEUE-03, QUEUE-04, QUEUE-05, QUEUE-06 | Complete ✓ |
 | 141 | Queue Pipelining and Dashboard | QUEUE-07, QUEUE-08, QUEUE-09 | Pending |
 
 **Coverage:** 38/38 requirements mapped
