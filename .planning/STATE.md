@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.17 — Staging Layer
-Phase: 140 — Staging Queue Core (in progress)
-Plan: 140-03 complete
-Status: Executing phase 140
-Last activity: 2026-02-13 — Completed 140-03 (optimization analyzer)
+Phase: 140 — Staging Queue Core (complete)
+Plan: 140-04 complete
+Status: Phase 140 complete (4 of 4 plans)
+Last activity: 2026-02-13 — Completed 140-04 (queue manager facade and barrel)
 
 ## Project Reference
 
@@ -201,6 +201,11 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Tag batching requires both Jaccard >= 0.4 AND >= 2 shared tags to prevent false positives
 - Greedy maximal independent set for parallel lane detection (sufficient for queue sizes)
 - Shared setup merges multiple signals per pair into single suggestion with highest confidence
+- Eager async load via IIFE promise in createQueueManager (sync methods read from populated map after any async call)
+- Queue state persisted to queue-state.json (separate from queue.jsonl audit log)
+- QueueManager is a plain object from factory function (not a class)
+- Queue barrel follows hygiene/derived/resource pattern: type-only + value exports
+- Staging barrel re-exports complete queue API (9 types, 3 constants, 6 functions)
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -219,7 +224,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift, pattern-fidelity, training-coherence, copying-detector, checker, index)
 - Staging intake-flow submodule at src/staging/intake-flow/ (types, clarity-assessor, step-types, step-tracker, orchestrator, index)
 - Staging resource submodule at src/staging/resource/ (types, analyzer, skill-matcher, topology, budget, decomposer, manifest, intake-bridge, index)
-- Staging queue submodule at src/staging/queue/ (types, state-machine, audit-logger, dependency-detector, optimization-analyzer)
+- Staging queue submodule at src/staging/queue/ (types, state-machine, audit-logger, dependency-detector, optimization-analyzer, manager, index)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -233,16 +238,16 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 | Metric | Value |
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
-| Total phases | 134 complete |
-| Total plans | 402 complete |
+| Total phases | 140 complete |
+| Total plans | 406 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 140-03-PLAN.md (optimization analyzer)
-Stopped at: Plan 140-03 complete. Phase 140 in progress (3 of 4 plans complete).
-Next action: Continue with 140-04 (queue barrel/index).
-Context: v1.17 Staging Layer. Phase 140 in progress. Queue submodule: types, state-machine, audit-logger, dependency-detector, optimization-analyzer. 584 staging tests pass.
+Last: 2026-02-13 — Completed 140-04-PLAN.md (queue manager facade and barrel)
+Stopped at: Phase 140 complete (4 of 4 plans). All queue submodule components built.
+Next action: Continue with phase 141 (next v1.17 phase).
+Context: v1.17 Staging Layer. Phase 140 complete. Queue submodule: types, state-machine, audit-logger, dependency-detector, optimization-analyzer, manager, index. 610 staging tests pass.
 
 ---
-*Last updated: 2026-02-13 (140-03 complete)*
+*Last updated: 2026-02-13 (140-04 complete, phase 140 complete)*
