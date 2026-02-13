@@ -3,9 +3,9 @@
 ## Current Position
 
 Milestone: v1.16 -- Dashboard Console & Milestone Ingestion
-Phase: 128-message-bridge-foundation (plans 01-03 complete, executing)
-Status: Executing phase 128
-Last activity: 2026-02-13 -- Completed 128-03 (check-inbox.sh)
+Phase: 129-filesystem-bridge-upload-configuration (plan 03 complete, executing)
+Status: Executing phase 129
+Last activity: 2026-02-13 -- Completed 129-03 (upload zone renderer)
 
 Progress: [░░░░░░░░░░░░░░░░] 0/5 phases (128 in progress)
 
@@ -41,9 +41,12 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - jq required as runtime dependency for bash JSON parsing in check-inbox.sh
 - Malformed JSON files moved to acknowledged/ to prevent infinite retry loops
 - set -euo pipefail for strict bash error handling in scripts
+- Embedded client-side extractMetadata mirrors server-side extractDocumentMetadata for isomorphic parsing
+- SVG icon for upload zone (not emoji) for accessibility and theme consistency
+- color-mix() CSS function for drag-active background tint
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
 - Console module (new): src/console/ (message types/schemas, reader, writer, helper endpoint, check-inbox integration tests)
@@ -72,10 +75,10 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Completed 128-03 (check-inbox.sh)
-Stopped at: Completed 128-03-PLAN.md execution
-Next action: Continue executing phase 128 plans (128-04+)
-Context: Console module has types, schema, directory, reader, writer, and check-inbox.sh. 63 tests passing across 5 test files. check-inbox.sh polls inbox/pending/ for JSON messages, outputs summary, moves to acknowledged/.
+Last: 2026-02-13 -- Completed 129-03 (upload zone renderer)
+Stopped at: Completed 129-03-PLAN.md execution
+Next action: Continue executing phase 129 plans (129-04+)
+Context: Upload zone component complete with drag-drop, FileReader, metadata extraction. 18 tests passing. renderUploadZone/renderUploadZoneStyles/extractDocumentMetadata exported from src/dashboard/upload-zone.ts.
 
 ---
-*Last updated: 2026-02-13 (128-03 complete)*
+*Last updated: 2026-02-13 (129-03 complete)*
