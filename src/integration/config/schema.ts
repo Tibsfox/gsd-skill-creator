@@ -121,6 +121,7 @@ export const IntegrationConfigSchema = z.object({
     base_path: '/terminal',
     auth_mode: 'none' as const,
     theme: 'dark' as const,
+    session_name: 'dev',
   })),
 });
 
