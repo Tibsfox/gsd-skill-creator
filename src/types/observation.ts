@@ -216,3 +216,94 @@ export interface PromotionCandidate {
   /** Whether this candidate passes the minimum confidence threshold */
   meetsConfidence: boolean;
 }
+
+/** Evidence collected during a gatekeeper evaluation (GATE-04) */
+export interface GatekeeperEvidence {
+  /** Determinism score of the candidate (1 - varianceScore) */
+  determinism: number;
+  /** Composite score from the promotion detector */
+  compositeScore: number;
+  /** Number of observations for this operation */
+  observationCount: number;
+  /** Configured threshold for determinism */
+  thresholdDeterminism: number;
+  /** Configured threshold for confidence (compositeScore) */
+  thresholdConfidence: number;
+  /** Configured minimum observation count */
+  thresholdMinObservations: number;
+  /** F1 score from calibration report (if provided) */
+  f1Score?: number;
+  /** Threshold for F1 score (if configured) */
+  thresholdF1?: number;
+  /** Accuracy from calibration report (if provided) */
+  accuracy?: number;
+  /** Threshold for accuracy (if configured) */
+  thresholdAccuracy?: number;
+  /** MCC from calibration report (if provided) */
+  mcc?: number;
+  /** Threshold for MCC (if configured) */
+  thresholdMCC?: number;
+}
+
+/** A gatekeeper decision for a promotion candidate (GATE-01, GATE-04) */
+export interface GatekeeperDecision {
+  /** Whether the candidate is approved for promotion */
+  approved: boolean;
+  /** Human-readable reasoning for the decision (one entry per gate check) */
+  reasoning: string[];
+  /** Evidence: actual scores vs configured thresholds */
+  evidence: GatekeeperEvidence;
+  /** Reference to the evaluated candidate */
+  candidate: PromotionCandidate;
+  /** ISO timestamp of the decision */
+  timestamp: string;
+}
+
+/** Configuration for the promotion gatekeeper (GATE-01, GATE-02) */
+export interface GatekeeperConfig {
+  /** Minimum determinism score required (default: 0.95) */
+  minDeterminism: number;
+  /** Minimum composite score (confidence) required (default: 0.85) */
+  minConfidence: number;
+  /** Minimum number of observations required (default: 5) */
+  minObservations: number;
+  /** Minimum F1 score from calibration report (optional, skipped if undefined) */
+  minF1?: number;
+  /** Minimum accuracy from calibration report (optional, skipped if undefined) */
+  minAccuracy?: number;
+  /** Minimum MCC from calibration report (optional, skipped if undefined) */
+  minMCC?: number;
+}
+
+/** Default gatekeeper configuration with safe defaults (GATE-02) */
+export const DEFAULT_GATEKEEPER_CONFIG: GatekeeperConfig = {
+  minDeterminism: 0.95,
+  minConfidence: 0.85,
+  minObservations: 5,
+};
+
+/** Configuration for script generation (SCRP-01) */
+export interface ScriptGeneratorConfig {
+  /** Default timeout in milliseconds for generated scripts (default: 30000) */
+  defaultTimeout: number;
+  /** Default working directory for generated scripts (default: '.') */
+  defaultWorkingDir: string;
+}
+
+/** Default configuration for script generation */
+export const DEFAULT_SCRIPT_GENERATOR_CONFIG: ScriptGeneratorConfig = {
+  defaultTimeout: 30000,
+  defaultWorkingDir: '.',
+};
+
+/** A generated script ready for dry-run validation and promotion (SCRP-01, SCRP-02) */
+export interface GeneratedScript {
+  /** The OffloadOperation-conformant object (SCRP-04) */
+  operation: import('../chipset/blitter/types.js').OffloadOperation;
+  /** The source promotion candidate this script was generated from */
+  sourceCandidate: PromotionCandidate;
+  /** The raw script content (same as operation.script, exposed for inspection) */
+  scriptContent: string;
+  /** Whether the script passed Zod schema validation */
+  isValid: boolean;
+}
