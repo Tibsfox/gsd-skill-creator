@@ -52,3 +52,7 @@ export { StatusWriter } from './status-writer.js';
 // Question schema (structured questions from session to dashboard)
 export type { Question, QuestionType, QuestionUrgency, QuestionStatus, TimeoutFallback } from './question-schema.js';
 export { QuestionSchema } from './question-schema.js';
+
+// Question responder (timeout fallback logic)
+export type { QuestionTimeoutResult } from './question-responder.js';
+export { applyTimeoutFallback } from './question-responder.js';
