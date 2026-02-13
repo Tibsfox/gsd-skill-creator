@@ -1,5 +1,5 @@
 /**
- * Tests for the Copper List lifecycle sync bridge.
+ * Tests for the Pipeline lifecycle sync bridge.
  *
  * Verifies that LifecycleSync correctly bridges GSD lifecycle events
  * to WAIT instruction promises: emit fires waiters, timeouts reject,

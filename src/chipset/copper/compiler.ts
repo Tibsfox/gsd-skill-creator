@@ -1,31 +1,31 @@
 /**
- * Copper List compiler -- pre-compiles Copper Lists from plan metadata.
+ * Pipeline compiler -- pre-compiles Pipelines from plan metadata.
  *
  * The compiler transforms GSD plan metadata (phase, skills, lifecycle events)
- * into executable Copper Lists containing WAIT/MOVE/SKIP instructions. This
+ * into executable Pipelines containing WAIT/MOVE/SKIP instructions. This
  * makes the coprocessor data-driven: plans declare what to activate and when,
  * and the compiler generates the instruction program.
  *
  * The loader reads compiled lists from disk, validates them against the
- * CopperListSchema, and returns them for execution by CopperExecutor.
+ * PipelineSchema, and returns them for execution by PipelineExecutor.
  *
  * Serialization uses JSON (a valid YAML superset) to avoid adding a
- * dependency on a YAML library. Files use the .copper.yaml extension
+ * dependency on a YAML library. Files use the .pipeline.yaml extension
  * for forward compatibility with full YAML parsers.
  */
 
 import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import type {
-  CopperList,
-  CopperInstruction,
-  CopperMetadata,
+  Pipeline,
+  PipelineInstruction,
+  PipelineMetadata,
   GsdLifecycleEvent,
   ActivationMode,
   MoveTargetType,
   SkipCondition,
 } from './types.js';
-import { CopperListSchema } from './schema.js';
+import { PipelineSchema } from './schema.js';
 
 // ============================================================================
 // Interfaces
@@ -79,7 +79,7 @@ export interface PlanMetadata {
 }
 
 /**
- * Options for customizing compiled Copper List metadata.
+ * Options for customizing compiled Pipeline metadata.
  */
 export interface CompilerOptions {
   /** Priority score (1-100). Default: 50. */
@@ -100,23 +100,23 @@ export interface CompilerOptions {
 // ============================================================================
 
 /**
- * Compile a Copper List from plan metadata.
+ * Compile a Pipeline from plan metadata.
  *
  * Transforms plan metadata into an executable instruction program:
  * 1. WAIT instructions for lifecycle events
  * 2. MOVE instructions for skill activations
  * 3. SKIP instructions for conditional activations
  *
- * The compiled list is validated against CopperListSchema before return.
+ * The compiled list is validated against PipelineSchema before return.
  *
  * @param metadata - Plan metadata (phase, skills, lifecycle events)
  * @param options - Optional compiler options (priority, confidence, etc.)
- * @returns A validated CopperList ready for execution
+ * @returns A validated Pipeline ready for execution
  */
-export function compileCopperList(
+export function compilePipeline(
   metadata: PlanMetadata,
   options?: CompilerOptions,
-): CopperList {
+): Pipeline {
   const planNum = String(metadata.plan).padStart(2, '0');
   const listName = `${metadata.phase}-${planNum}`;
 
@@ -124,7 +124,7 @@ export function compileCopperList(
   const lifecycleEvents = metadata.lifecycle_events ?? ['phase-start'];
 
   // Build instruction array
-  const instructions: CopperInstruction[] = [];
+  const instructions: PipelineInstruction[] = [];
 
   // Start with WAIT for the first lifecycle event
   if (lifecycleEvents.length > 0) {
@@ -171,11 +171,11 @@ export function compileCopperList(
   }
 
   // Build metadata
-  const copperMetadata: CopperMetadata = {
+  const pipelineMetadata: PipelineMetadata = {
     name: listName,
     description:
       options?.description ??
-      `Copper List for ${metadata.phase} plan ${metadata.plan}`,
+      `Pipeline for ${metadata.phase} plan ${metadata.plan}`,
     sourcePatterns: [metadata.phase],
     priority: options?.priority ?? 50,
     confidence: options?.confidence ?? 1.0,
@@ -183,13 +183,13 @@ export function compileCopperList(
     version: 1,
   };
 
-  const list: CopperList = {
-    metadata: copperMetadata,
+  const list: Pipeline = {
+    metadata: pipelineMetadata,
     instructions,
   };
 
   // Validate against schema (throws on invalid)
-  return CopperListSchema.parse(list) as CopperList;
+  return PipelineSchema.parse(list) as Pipeline;
 }
 
 // ============================================================================
@@ -197,22 +197,22 @@ export function compileCopperList(
 // ============================================================================
 
 /**
- * Save a compiled Copper List to disk as a .copper.yaml file.
+ * Save a compiled Pipeline to disk as a .pipeline.yaml file.
  *
  * Serializes using JSON (valid YAML superset). Creates the target
  * directory if it doesn't exist.
  *
- * @param list - The Copper List to save
+ * @param list - The Pipeline to save
  * @param directory - Target directory path
  * @returns The absolute file path of the saved file
  */
-export async function saveCopperList(
-  list: CopperList,
+export async function savePipeline(
+  list: Pipeline,
   directory: string,
 ): Promise<string> {
   await mkdir(directory, { recursive: true });
 
-  const filePath = join(directory, `${list.metadata.name}.copper.yaml`);
+  const filePath = join(directory, `${list.metadata.name}.pipeline.yaml`);
   const content = JSON.stringify(list, null, 2);
 
   await writeFile(filePath, content, 'utf-8');
@@ -221,21 +221,21 @@ export async function saveCopperList(
 }
 
 /**
- * Load all compiled Copper Lists from a directory.
+ * Load all compiled Pipelines from a directory.
  *
- * Reads all .copper.yaml files, parses them as JSON, and validates
- * each against CopperListSchema. Invalid files are skipped with a
+ * Reads all .pipeline.yaml files, parses them as JSON, and validates
+ * each against PipelineSchema. Invalid files are skipped with a
  * warning to stderr.
  *
- * @param directory - Directory to scan for .copper.yaml files
+ * @param directory - Directory to scan for .pipeline.yaml files
  * @param options - Optional filter options
  * @param options.phase - If provided, only load lists from a subdirectory matching this phase name
- * @returns Array of validated CopperList objects
+ * @returns Array of validated Pipeline objects
  */
-export async function loadCopperLists(
+export async function loadPipelines(
   directory: string,
   options?: { phase?: string },
-): Promise<CopperList[]> {
+): Promise<Pipeline[]> {
   // If phase filter is specified, look in the phase subdirectory
   const targetDir = options?.phase
     ? join(directory, options.phase)
@@ -249,29 +249,29 @@ export async function loadCopperLists(
     return [];
   }
 
-  // Filter for .copper.yaml files
-  const copperFiles = entries.filter((f) => f.endsWith('.copper.yaml'));
+  // Filter for .pipeline.yaml files
+  const pipelineFiles = entries.filter((f) => f.endsWith('.pipeline.yaml'));
 
-  const lists: CopperList[] = [];
+  const lists: Pipeline[] = [];
 
-  for (const file of copperFiles) {
+  for (const file of pipelineFiles) {
     const filePath = join(targetDir, file);
     try {
       const content = await readFile(filePath, 'utf-8');
       const parsed = JSON.parse(content);
-      const result = CopperListSchema.safeParse(parsed);
+      const result = PipelineSchema.safeParse(parsed);
 
       if (result.success) {
-        lists.push(result.data as CopperList);
+        lists.push(result.data as Pipeline);
       } else {
         process.stderr.write(
-          `Warning: Skipping invalid Copper List file "${file}": ${result.error.message}\n`,
+          `Warning: Skipping invalid Pipeline file "${file}": ${result.error.message}\n`,
         );
       }
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       process.stderr.write(
-        `Warning: Failed to parse Copper List file "${file}": ${message}\n`,
+        `Warning: Failed to parse Pipeline file "${file}": ${message}\n`,
       );
     }
   }
