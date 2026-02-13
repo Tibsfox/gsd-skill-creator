@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.17 — Staging Layer
-Phase: 134 — Staging Foundation (complete)
-Plan: 134-03 complete (phase 134 done)
-Status: Phase 134 complete, ready for phase 135
-Last activity: 2026-02-13 — Completed 134-03 (state machine and barrel index)
+Phase: 135 — Hygiene Pattern Engine (in progress)
+Plan: 135-01 complete
+Status: Executing phase 135
+Last activity: 2026-02-13 — Completed 135-01 (pattern registry types and built-in patterns)
 
 ## Project Reference
 
@@ -102,6 +102,9 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - rename() for document move, write+unlink for metadata (same filesystem guarantees atomic rename; metadata needs status update)
 - Re-validate metadata through StagingMetadataSchema after status update (ensures integrity after mutation)
 - Barrel imports from intake.ts without stub (plan 02 completed before plan 03 barrel creation)
+- 11 built-in hygiene patterns across 3 categories (4 embedded-instructions, 3 hidden-content, 4 config-safety)
+- Detect functions for complex patterns (zero-width chars, base64, YAML merge bombs); regex for simple matching
+- Registry uses mutable array with immutable reference copy for reset
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -116,6 +119,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Helper endpoint wired into serve-dashboard.mjs via dynamic import (browser->filesystem bridge)
 - No WebSockets -- dashboard polls outbox at 2-3s intervals
 - Staging module at src/staging/ (types, schema, directory, intake, state-machine, index)
+- Staging hygiene submodule at src/staging/hygiene/ (types, patterns)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -130,15 +134,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 383 complete |
+| Total plans | 384 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 134-03-PLAN.md (phase 134 complete)
-Stopped at: Phase 134 complete (staging foundation: types, schema, directory, intake, state-machine, barrel index)
-Next action: Execute phase 135
-Context: v1.17 Staging Layer. Phase 134 complete (3/3 plans). src/staging/ module fully operational with 11 files (6 source + 5 test), 56 tests passing, barrel index exporting complete public API.
+Last: 2026-02-13 — Completed 135-01-PLAN.md
+Stopped at: Plan 135-01 complete (hygiene pattern registry types and built-in patterns)
+Next action: Execute 135-02
+Context: v1.17 Staging Layer. Phase 135 in progress (1/4 plans). src/staging/hygiene/ submodule created with types.ts and patterns.ts. 11 built-in patterns, 15 new tests, 71 total staging tests passing.
 
 ---
-*Last updated: 2026-02-13 (134-03 complete, phase 134 done)*
+*Last updated: 2026-02-13 (135-01 complete)*
