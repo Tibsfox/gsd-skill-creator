@@ -3,7 +3,7 @@ import { mkdtemp, rm } from 'fs/promises';
 import { join } from 'path';
 import * as os from 'os';
 import { PatternStore } from '../storage/pattern-store.js';
-import type { StoredExecutionBatch, ToolExecutionPair, ExecutionContext } from '../types/observation.js';
+import type { StoredExecutionBatch, ToolExecutionPair, ExecutionContext, DeterminismClassification, ClassifiedOperation, DeterminismConfig } from '../types/observation.js';
 import { DeterminismAnalyzer } from './determinism-analyzer.js';
 
 /**
@@ -230,5 +230,130 @@ describe('DeterminismAnalyzer', () => {
 
     expect(results).toHaveLength(1);
     expect(results[0].varianceScore).toBe(0.0);
+  });
+
+  describe('classify', () => {
+    it('classifies operation with variance 0.0 as deterministic', async () => {
+      // 3 batches with same tool+input+output (all identical)
+      const input = { file_path: '/deterministic.ts' };
+      for (const sid of ['sess-1', 'sess-2', 'sess-3']) {
+        await storeBatch(store, sid, [
+          completePair('Read', input, 'same-content', 'hash-same', sid),
+        ]);
+      }
+
+      const analyzer = new DeterminismAnalyzer(store);
+      const results = await analyzer.classify();
+
+      expect(results).toHaveLength(1);
+      expect(results[0].classification).toBe('deterministic');
+      expect(results[0].determinism).toBe(1.0);
+    });
+
+    it('classifies operation with variance 1.0 as non-deterministic', async () => {
+      // 3 batches with same tool+input but all different outputs
+      const input = { file_path: '/nondeterministic.ts' };
+      await storeBatch(store, 'sess-1', [
+        completePair('Read', input, 'output-a', 'hash-a', 'sess-1'),
+      ]);
+      await storeBatch(store, 'sess-2', [
+        completePair('Read', input, 'output-b', 'hash-b', 'sess-2'),
+      ]);
+      await storeBatch(store, 'sess-3', [
+        completePair('Read', input, 'output-c', 'hash-c', 'sess-3'),
+      ]);
+
+      const analyzer = new DeterminismAnalyzer(store);
+      const results = await analyzer.classify();
+
+      expect(results).toHaveLength(1);
+      expect(results[0].classification).toBe('non-deterministic');
+    });
+
+    it('classifies semi-deterministic for intermediate variance', async () => {
+      // 10 observations: 9 with output 'A', 1 with output 'B' (same tool+input)
+      // variance = (2-1)/(10-1) = 1/9 = 0.111 -> determinism = 0.889 -> semi-deterministic
+      const input = { file_path: '/semi.ts' };
+      for (let i = 0; i < 9; i++) {
+        await storeBatch(store, `sess-same-${i}`, [
+          completePair('Read', input, 'output-A', 'hash-A', `sess-same-${i}`),
+        ]);
+      }
+      await storeBatch(store, 'sess-diff', [
+        completePair('Read', input, 'output-B', 'hash-B', 'sess-diff'),
+      ]);
+
+      const analyzer = new DeterminismAnalyzer(store);
+      const results = await analyzer.classify();
+
+      expect(results).toHaveLength(1);
+      expect(results[0].classification).toBe('semi-deterministic');
+      expect(results[0].determinism).toBeCloseTo(1 - 1 / 9, 5);
+    });
+
+    it('uses custom classification thresholds', async () => {
+      // 5 batches: 4 with output 'same', 1 with output 'diff'
+      // Variance = (2-1)/(5-1) = 0.25, determinism = 0.75
+      const input = { file_path: '/custom-threshold.ts' };
+      for (let i = 0; i < 4; i++) {
+        await storeBatch(store, `sess-s-${i}`, [
+          completePair('Read', input, 'same', 'hash-same', `sess-s-${i}`),
+        ]);
+      }
+      await storeBatch(store, 'sess-d', [
+        completePair('Read', input, 'diff', 'hash-diff', 'sess-d'),
+      ]);
+
+      // With default thresholds (0.95/0.7): determinism 0.75 is semi-deterministic
+      const defaultAnalyzer = new DeterminismAnalyzer(store);
+      const defaultResults = await defaultAnalyzer.classify();
+      expect(defaultResults).toHaveLength(1);
+      expect(defaultResults[0].classification).toBe('semi-deterministic');
+
+      // With custom thresholds { deterministicThreshold: 0.7, semiDeterministicThreshold: 0.5 }: deterministic
+      const customAnalyzer = new DeterminismAnalyzer(store, {
+        minSampleSize: 3,
+        deterministicThreshold: 0.7,
+        semiDeterministicThreshold: 0.5,
+      });
+      const customResults = await customAnalyzer.classify();
+      expect(customResults).toHaveLength(1);
+      expect(customResults[0].classification).toBe('deterministic');
+    });
+
+    it('classify returns results sorted by determinism descending (most deterministic first)', async () => {
+      // Create 2 operations: one deterministic (all same outputs), one non-deterministic (all different)
+      const deterministicInput = { file_path: '/stable.ts' };
+      const nonDeterministicInput = { file_path: '/unstable.ts' };
+
+      for (const sid of ['sess-1', 'sess-2', 'sess-3']) {
+        await storeBatch(store, sid, [
+          completePair('Read', deterministicInput, 'stable-output', 'hash-stable', sid),
+          completePair('Read', nonDeterministicInput, `output-${sid}`, `hash-${sid}`, sid),
+        ]);
+      }
+
+      const analyzer = new DeterminismAnalyzer(store);
+      const results = await analyzer.classify();
+
+      expect(results).toHaveLength(2);
+      // First result should be deterministic (highest determinism)
+      expect(results[0].classification).toBe('deterministic');
+      expect(results[0].determinism).toBe(1.0);
+      // Second result should be non-deterministic (lowest determinism)
+      expect(results[1].classification).toBe('non-deterministic');
+      expect(results[1].determinism).toBe(0.0);
+    });
+
+    it('exports DeterminismAnalyzer and types from observation barrel', async () => {
+      // Import from barrel to verify exports are wired
+      const barrel = await import('../index.js');
+      expect(barrel.DeterminismAnalyzer).toBeDefined();
+
+      // Type imports verified at compile time via the import statement at the top
+      // Runtime check that DEFAULT_DETERMINISM_CONFIG is exported
+      expect(barrel.DEFAULT_DETERMINISM_CONFIG).toBeDefined();
+      expect(barrel.DEFAULT_DETERMINISM_CONFIG.minSampleSize).toBe(3);
+    });
   });
 });

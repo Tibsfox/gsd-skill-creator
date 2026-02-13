@@ -128,11 +128,17 @@ export function normalizeObservationTier(obs: SessionObservation): SessionObserv
 export interface DeterminismConfig {
   /** Minimum number of observations required before scoring an operation (default: 3) */
   minSampleSize: number;
+  /** Determinism score threshold for 'deterministic' classification (default: 0.95) */
+  deterministicThreshold?: number;
+  /** Determinism score threshold for 'semi-deterministic' classification (default: 0.7) */
+  semiDeterministicThreshold?: number;
 }
 
 /** Default configuration for determinism analysis */
 export const DEFAULT_DETERMINISM_CONFIG: DeterminismConfig = {
   minSampleSize: 3,
+  deterministicThreshold: 0.95,
+  semiDeterministicThreshold: 0.7,
 };
 
 /** Composite key identifying a unique tool operation: toolName + SHA-256 of JSON-serialized input */
@@ -155,4 +161,17 @@ export interface DeterminismScore {
   uniqueOutputs: number;
   /** Session IDs where this operation was observed */
   sessionIds: string[];
+}
+
+/** Classification tiers for determinism (DTRM-03) */
+export type DeterminismClassification = 'deterministic' | 'semi-deterministic' | 'non-deterministic';
+
+/** A DeterminismScore with its classification attached (DTRM-03) */
+export interface ClassifiedOperation {
+  /** The base score data */
+  score: DeterminismScore;
+  /** Classification based on thresholds */
+  classification: DeterminismClassification;
+  /** The determinism value used for classification (1 - varianceScore) */
+  determinism: number;
 }
