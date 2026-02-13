@@ -32,3 +32,11 @@ export { MessageReader } from './reader.js';
 // Helper endpoint (browser-to-filesystem bridge)
 export type { HelperRouter } from './helper.js';
 export { createHelperRouter } from './helper.js';
+
+// Milestone configuration schema + defaults
+export type { MilestoneConfig } from './milestone-config.js';
+export { MilestoneConfigSchema, DEFAULT_MILESTONE_CONFIG } from './milestone-config.js';
+
+// Bridge logger (structured logging for console operations)
+export type { BridgeLogEntry } from './bridge-logger.js';
+export { BridgeLogger } from './bridge-logger.js';
