@@ -2,8 +2,8 @@
  * End-to-end integration tests for the chipset integration layer.
  *
  * Validates cross-system workflows:
- * 1. Recording -> Learning Pipeline: stream.jsonl -> StackBridge -> LearningCompiler -> CopperLists
- * 2. Session Lifecycle -> Copper WAIT Resolution: SessionEventBridge -> LifecycleSync -> CopperExecutor
+ * 1. Recording -> Learning Pipeline: stream.jsonl -> StackBridge -> LearningCompiler -> Pipelines
+ * 2. Session Lifecycle -> Pipeline WAIT Resolution: SessionEventBridge -> LifecycleSync -> PipelineExecutor
  * 3. PopStackAwareness with session lifecycle state
  * 4. Full lifecycle with combined transitions
  */
@@ -18,15 +18,15 @@ import { SessionEventBridge } from '../../../src/chipset/integration/session-eve
 import { PopStackAwareness } from '../../../src/chipset/integration/pop-stack-awareness.js';
 import { LearningCompiler } from '../../../src/chipset/copper/learning/compiler.js';
 import { LifecycleSync } from '../../../src/chipset/copper/lifecycle-sync.js';
-import { CopperExecutor } from '../../../src/chipset/copper/executor.js';
-import type { CopperList, MoveInstruction } from '../../../src/chipset/copper/types.js';
+import { PipelineExecutor } from '../../../src/chipset/copper/executor.js';
+import type { Pipeline, MoveInstruction } from '../../../src/chipset/copper/types.js';
 
 // ============================================================================
 // Test Scenario 1: Recording -> Learning Pipeline
 // ============================================================================
 
 describe('End-to-End: Recording -> Learning Pipeline', () => {
-  it('should transform stream.jsonl events through StackBridge to LearningCompiler producing CopperLists', () => {
+  it('should transform stream.jsonl events through StackBridge to LearningCompiler producing Pipelines', () => {
     // Create realistic stream.jsonl content
     const streamContent = [
       JSON.stringify({ type: 'recording_start', ts: '2026-02-12T10:00:00Z', name: 'test-recording', session: 'my-session' }),
@@ -100,11 +100,11 @@ describe('End-to-End: Recording -> Learning Pipeline', () => {
 });
 
 // ============================================================================
-// Test Scenario 2: Session Lifecycle -> Copper WAIT Resolution
+// Test Scenario 2: Session Lifecycle -> Pipeline WAIT Resolution
 // ============================================================================
 
-describe('End-to-End: Session Lifecycle -> Copper WAIT Resolution', () => {
-  it('should resolve CopperExecutor WAIT instructions via SessionEventBridge transitions', async () => {
+describe('End-to-End: Session Lifecycle -> Pipeline WAIT Resolution', () => {
+  it('should resolve PipelineExecutor WAIT instructions via SessionEventBridge transitions', async () => {
     // Create system instances
     const lifecycleSync = new LifecycleSync();
     const sessionBridge = new SessionEventBridge(lifecycleSync);
@@ -115,13 +115,13 @@ describe('End-to-End: Session Lifecycle -> Copper WAIT Resolution', () => {
       activations.push(instruction.name);
     };
 
-    const executor = new CopperExecutor({
+    const executor = new PipelineExecutor({
       lifecycleSync,
       activationHandler,
     });
 
-    // Create a CopperList: WAIT 'session-start' -> MOVE skill -> WAIT 'session-pause'
-    const copperList: CopperList = {
+    // Create a Pipeline: WAIT 'session-start' -> MOVE skill -> WAIT 'session-pause'
+    const pipeline: Pipeline = {
       metadata: {
         name: 'test-lifecycle',
         description: 'Test session lifecycle integration',
@@ -134,7 +134,7 @@ describe('End-to-End: Session Lifecycle -> Copper WAIT Resolution', () => {
     };
 
     // Start executor (it will block on first WAIT 'session-start')
-    const executionPromise = executor.run(copperList);
+    const executionPromise = executor.run(pipeline);
 
     // Give the executor a moment to start and register its waiter
     await new Promise((resolve) => setTimeout(resolve, 10));
@@ -164,19 +164,19 @@ describe('End-to-End: Session Lifecycle -> Copper WAIT Resolution', () => {
     const lifecycleSync = new LifecycleSync();
     const sessionBridge = new SessionEventBridge(lifecycleSync);
 
-    const executor = new CopperExecutor({
+    const executor = new PipelineExecutor({
       lifecycleSync,
       activationHandler: async () => {},
     });
 
-    const copperList: CopperList = {
+    const pipeline: Pipeline = {
       metadata: { name: 'test-resume' },
       instructions: [
         { type: 'wait', event: 'session-resume' },
       ],
     };
 
-    const executionPromise = executor.run(copperList);
+    const executionPromise = executor.run(pipeline);
     await new Promise((resolve) => setTimeout(resolve, 10));
 
     // paused -> active emits session-resume
@@ -395,12 +395,12 @@ describe('End-to-End: Full Lifecycle', () => {
     const observationInput = bridge.fromStreamFile(streamContent);
     expect(observationInput.sessions).toHaveLength(1);
 
-    // LearningCompiler produces CopperLists
+    // LearningCompiler produces Pipelines
     const compiler = new LearningCompiler({ minOccurrences: 1, minConfidence: 0 });
     const compilationResult = compiler.compile(observationInput);
     expect(compilationResult.lists.length).toBeGreaterThanOrEqual(1);
 
-    // Each list is a valid CopperList structure
+    // Each list is a valid Pipeline structure
     for (const list of compilationResult.lists) {
       expect(list.metadata).toBeDefined();
       expect(list.metadata.name).toBeTruthy();
@@ -415,7 +415,7 @@ describe('End-to-End: Full Lifecycle', () => {
     // Create an executor and verify the compiled list can be run
     const lifecycleSync = new LifecycleSync();
     const activations: string[] = [];
-    const executor = new CopperExecutor({
+    const executor = new PipelineExecutor({
       lifecycleSync,
       activationHandler: async (instr: MoveInstruction) => {
         activations.push(instr.name);
@@ -472,15 +472,15 @@ describe('Barrel Exports', () => {
 
     // Spot-check copper namespace has key exports
     expect(chipsetModule.copper.LifecycleSync).toBeDefined();
-    expect(chipsetModule.copper.CopperExecutor).toBeDefined();
-    expect(chipsetModule.copper.compileCopperList).toBeDefined();
+    expect(chipsetModule.copper.PipelineExecutor).toBeDefined();
+    expect(chipsetModule.copper.compilePipeline).toBeDefined();
 
     // Spot-check blitter namespace
     expect(chipsetModule.blitter.BlitterExecutor).toBeDefined();
     expect(chipsetModule.blitter.BlitterSignalBus).toBeDefined();
 
     // Spot-check teams namespace
-    expect(chipsetModule.teams.ChipRegistry).toBeDefined();
+    expect(chipsetModule.teams.EngineRegistry).toBeDefined();
     expect(chipsetModule.teams.TeamSignals).toBeDefined();
 
     // Spot-check exec namespace

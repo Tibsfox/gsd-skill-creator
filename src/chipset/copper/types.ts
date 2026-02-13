@@ -1,8 +1,8 @@
 /**
- * Copper List type system for the chipset architecture.
+ * Pipeline type system for the coprocessor architecture.
  *
  * Defines TypeScript types for WAIT/MOVE/SKIP instructions, metadata,
- * and the CopperList container. These types model the instruction programs
+ * and the Pipeline container. These types model the instruction programs
  * that synchronize skill/script/team activation to GSD lifecycle events.
  *
  * Uses const arrays with derived types for type-safe enums, following
@@ -17,7 +17,7 @@
  * GSD lifecycle events that WAIT instructions can reference.
  *
  * These events correspond to phase, milestone, and session transitions
- * in the GSD workflow. A WAIT instruction pauses the Copper List until
+ * in the GSD workflow. A WAIT instruction pauses the Pipeline until
  * the specified event fires.
  */
 export const GSD_LIFECYCLE_EVENTS = [
@@ -45,12 +45,12 @@ export type GsdLifecycleEvent = (typeof GSD_LIFECYCLE_EVENTS)[number];
 /**
  * How a MOVE instruction activates its target.
  *
- * - `sprite`: lightweight activation (~200 tokens, summary context only)
+ * - `lite`: lightweight activation (~200 tokens, summary context only)
  * - `full`: full context activation (complete skill loaded)
- * - `blitter`: delegate to blitter engine (script execution outside context)
+ * - `offload`: delegate to offload engine (script execution outside context)
  * - `async`: fire-and-forget, don't wait for completion
  */
-export const ACTIVATION_MODES = ['sprite', 'full', 'blitter', 'async'] as const;
+export const ACTIVATION_MODES = ['lite', 'full', 'offload', 'async'] as const;
 
 /** Type for an activation mode. */
 export type ActivationMode = (typeof ACTIVATION_MODES)[number];
@@ -107,7 +107,7 @@ export type SkipOperator = (typeof SKIP_OPERATORS)[number];
 // ============================================================================
 
 /**
- * WAIT instruction -- pauses the Copper List until a GSD lifecycle event fires.
+ * WAIT instruction -- pauses the Pipeline until a GSD lifecycle event fires.
  */
 export interface WaitInstruction {
   /** Instruction type discriminator. */
@@ -174,22 +174,22 @@ export interface SkipInstruction {
   description?: string;
 }
 
-/** Union of all Copper List instruction types. */
-export type CopperInstruction = WaitInstruction | MoveInstruction | SkipInstruction;
+/** Union of all Pipeline instruction types. */
+export type PipelineInstruction = WaitInstruction | MoveInstruction | SkipInstruction;
 
 // ============================================================================
 // Metadata and List Interfaces
 // ============================================================================
 
 /**
- * Metadata for a Copper List.
+ * Metadata for a Pipeline.
  *
  * Contains identification, origin tracking, token budget estimation,
  * and priority/confidence scores. Unknown fields are preserved for
  * forward compatibility.
  */
-export interface CopperMetadata {
-  /** Unique name for this Copper List. */
+export interface PipelineMetadata {
+  /** Unique name for this Pipeline. */
   name: string;
 
   /** Human-readable description of what this list does. */
@@ -218,15 +218,15 @@ export interface CopperMetadata {
 }
 
 /**
- * A Copper List -- a program of WAIT/MOVE/SKIP instructions with metadata.
+ * A Pipeline -- a program of WAIT/MOVE/SKIP instructions with metadata.
  *
- * Copper Lists are the primary execution unit for the chipset coprocessor.
+ * Pipelines are the primary execution unit for the coprocessor.
  * They synchronize skill/script/team activation to GSD lifecycle events.
  */
-export interface CopperList {
+export interface Pipeline {
   /** Metadata describing this list. */
-  metadata: CopperMetadata;
+  metadata: PipelineMetadata;
 
   /** Ordered list of instructions to execute. */
-  instructions: CopperInstruction[];
+  instructions: PipelineInstruction[];
 }
