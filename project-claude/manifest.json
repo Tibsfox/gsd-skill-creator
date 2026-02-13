@@ -12,12 +12,7 @@
       {
         "source": "skills/beautiful-commits/SKILL.md",
         "target": ".claude/skills/beautiful-commits/SKILL.md",
-        "description": "Beautiful commits skill (extends git-commit)"
-      },
-      {
-        "source": "skills/git-commit/SKILL.md",
-        "target": ".claude/skills/git-commit/SKILL.md",
-        "description": "Git commit base skill"
+        "description": "Beautiful commits skill"
       },
       {
         "source": "skills/file-operation-patterns/SKILL.md",
@@ -40,11 +35,6 @@
         "description": "Decision framework skill"
       },
       {
-        "source": "skills/gsd-explain/SKILL.md",
-        "target": ".claude/skills/gsd-explain/SKILL.md",
-        "description": "GSD explain skill"
-      },
-      {
         "source": "skills/gsd-preflight/SKILL.md",
         "target": ".claude/skills/gsd-preflight/SKILL.md",
         "description": "GSD preflight skill"
@@ -65,11 +55,6 @@
         "description": "Beautiful commits command"
       },
       {
-        "source": "commands/git-commit.md",
-        "target": ".claude/commands/git-commit.md",
-        "description": "Git commit command"
-      },
-      {
         "source": "commands/file-operation-patterns.md",
         "target": ".claude/commands/file-operation-patterns.md",
         "description": "File operation patterns command"
@@ -88,11 +73,6 @@
         "source": "commands/decision-framework.md",
         "target": ".claude/commands/decision-framework.md",
         "description": "Decision framework command"
-      },
-      {
-        "source": "commands/gsd-explain.md",
-        "target": ".claude/commands/gsd-explain.md",
-        "description": "GSD explain command"
       },
       {
         "source": "commands/gsd-preflight.md",
@@ -223,6 +203,61 @@
         "source": "teams/doc-generation-team/config.json",
         "target": ".claude/teams/doc-generation-team/config.json",
         "description": "Documentation generation team (GSD example)"
+      },
+      {
+        "source": "commands/sc/start.md",
+        "target": ".claude/commands/sc/start.md",
+        "description": "skill-creator session start command"
+      },
+      {
+        "source": "commands/sc/status.md",
+        "target": ".claude/commands/sc/status.md",
+        "description": "skill-creator status command"
+      },
+      {
+        "source": "commands/sc/suggest.md",
+        "target": ".claude/commands/sc/suggest.md",
+        "description": "skill-creator suggest command"
+      },
+      {
+        "source": "commands/sc/observe.md",
+        "target": ".claude/commands/sc/observe.md",
+        "description": "skill-creator observe command"
+      },
+      {
+        "source": "commands/sc/digest.md",
+        "target": ".claude/commands/sc/digest.md",
+        "description": "skill-creator digest command"
+      },
+      {
+        "source": "commands/sc/wrap.md",
+        "target": ".claude/commands/sc/wrap.md",
+        "description": "skill-creator wrap meta-command"
+      },
+      {
+        "source": "commands/wrap/execute.md",
+        "target": ".claude/commands/wrap/execute.md",
+        "description": "GSD execute-phase wrapper with skill loading"
+      },
+      {
+        "source": "commands/wrap/verify.md",
+        "target": ".claude/commands/wrap/verify.md",
+        "description": "GSD verify-work wrapper with skill loading"
+      },
+      {
+        "source": "commands/wrap/plan.md",
+        "target": ".claude/commands/wrap/plan.md",
+        "description": "GSD plan-phase wrapper with skill loading"
+      },
+      {
+        "source": "commands/wrap/phase.md",
+        "target": ".claude/commands/wrap/phase.md",
+        "description": "GSD phase smart router wrapper"
+      },
+      {
+        "source": "agents/observer.md",
+        "target": ".claude/agents/observer.md",
+        "description": "Passive session observer agent"
       }
     ],
     "extensions": [
