@@ -330,7 +330,7 @@ export class LearningCompiler {
       coveredSkills.add(skill);
     }
 
-    // MOVE instructions for candidate skills not already covered (mode: 'sprite')
+    // MOVE instructions for candidate skills not already covered (mode: 'lite')
     if (candidates) {
       for (const candidate of candidates) {
         if (!coveredSkills.has(candidate.suggestedName)) {
@@ -338,7 +338,7 @@ export class LearningCompiler {
             type: 'move' as const,
             target: 'skill' as const,
             name: candidate.suggestedName,
-            mode: 'sprite' as const,
+            mode: 'lite' as const,
           });
           coveredSkills.add(candidate.suggestedName);
         }
