@@ -185,7 +185,7 @@ describe('confirmWithResources', () => {
     );
 
     const expectedMetaPath = join(basePath, STAGING_DIRS.ready, `${filename}.meta.json`);
-    expect(deps.recordStep).toHaveBeenCalledWith('queued', expectedMetaPath, undefined);
+    expect(deps.recordStep).toHaveBeenCalledWith('queued', expectedMetaPath);
   });
 
   it('should pass custom context window size to manifest generation', async () => {
