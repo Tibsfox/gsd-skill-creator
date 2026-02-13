@@ -3255,6 +3255,391 @@ else
 fi
 
 # ==============================================================================
+# Record Subcommand Tests (basic, mocked capture)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Record Subcommand Tests${RESET}\n"
+
+# Reset stack dir for clean record tests
+rm -rf "$GSD_STACK_DIR"
+"$GSD_STACK" version >/dev/null 2>&1  # re-bootstrap dirs
+
+# 1. GSD_MOCK_CAPTURE=1 record --name=test-rec exits 0
+set +e
+output=$(GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=test-rec 2>&1)
+rc=$?
+set -e
+assert_exit_code "record --name=test-rec exits 0" "0" "$rc"
+
+# 2. Creates recordings/test-rec/ directory
+assert_dir_exists "record creates recordings/test-rec/ directory" "$GSD_STACK_DIR/recordings/test-rec"
+
+# 3. Creates meta.json
+assert_file_exists "record creates meta.json" "$GSD_STACK_DIR/recordings/test-rec/meta.json"
+
+# 4. meta.json contains "name":"test-rec"
+meta_content=$(cat "$GSD_STACK_DIR/recordings/test-rec/meta.json" 2>/dev/null || echo "")
+assert_contains "meta.json contains name:test-rec" "$meta_content" '"name":"test-rec"'
+
+# 5. meta.json contains "status":"recording"
+assert_contains "meta.json contains status:recording" "$meta_content" '"status":"recording"'
+
+# 6. meta.json contains "started" with ISO 8601 timestamp
+assert_contains "meta.json contains started timestamp" "$meta_content" '"started":"'
+
+# 7. Creates stream.jsonl
+assert_file_exists "record creates stream.jsonl" "$GSD_STACK_DIR/recordings/test-rec/stream.jsonl"
+
+# 8. stream.jsonl has at least 1 entry
+stream_lines=$(wc -l < "$GSD_STACK_DIR/recordings/test-rec/stream.jsonl" 2>/dev/null || echo "0")
+stream_lines=$((stream_lines + 0))
+if [[ "$stream_lines" -ge 1 ]]; then
+  pass "stream.jsonl has at least 1 entry"
+else
+  fail "stream.jsonl has at least 1 entry" "got $stream_lines lines"
+fi
+
+# 9. First stream.jsonl entry contains "type":"recording_start"
+first_line=$(head -1 "$GSD_STACK_DIR/recordings/test-rec/stream.jsonl" 2>/dev/null || echo "")
+assert_contains "first stream entry is recording_start" "$first_line" '"type":"recording_start"'
+
+# 10. History.jsonl has a record event
+history_content=$(cat "$GSD_STACK_DIR/history.jsonl" 2>/dev/null || echo "")
+assert_contains "history has record event" "$history_content" '"event":"record"'
+
+# ==============================================================================
+# Record Default Name Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Record Default Name Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$GSD_STACK_DIR"
+"$GSD_STACK" version >/dev/null 2>&1
+
+# 1. GSD_MOCK_CAPTURE=1 record (no --name) exits 0
+set +e
+output=$(GSD_MOCK_CAPTURE=1 "$GSD_STACK" record 2>&1)
+rc=$?
+set -e
+assert_exit_code "record with no --name exits 0" "0" "$rc"
+
+# 2. A recording directory exists under recordings/
+rec_dirs=$(ls -1 "$GSD_STACK_DIR/recordings/" 2>/dev/null | wc -l)
+rec_dirs=$((rec_dirs + 0))
+if [[ "$rec_dirs" -ge 1 ]]; then
+  pass "record default name creates directory under recordings/"
+else
+  fail "record default name creates directory under recordings/" "no directories found"
+fi
+
+# 3. meta.json inside that directory has status:recording
+rec_dir=$(ls -1 "$GSD_STACK_DIR/recordings/" 2>/dev/null | head -1)
+if [[ -n "$rec_dir" ]] && [[ -f "$GSD_STACK_DIR/recordings/$rec_dir/meta.json" ]]; then
+  default_meta=$(cat "$GSD_STACK_DIR/recordings/$rec_dir/meta.json")
+  assert_contains "default name meta.json has status:recording" "$default_meta" '"status":"recording"'
+else
+  fail "default name meta.json has status:recording" "no meta.json found"
+fi
+
+# ==============================================================================
+# Record Duplicate Detection Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Record Duplicate Detection Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$GSD_STACK_DIR"
+"$GSD_STACK" version >/dev/null 2>&1
+
+# Start first recording
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=dup-rec >/dev/null 2>&1
+
+# Start second recording (should fail)
+set +e
+output=$(GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=dup-rec2 2>&1)
+rc=$?
+set -e
+
+# 1. Second invocation exits non-zero
+if [[ "$rc" -ne 0 ]]; then
+  pass "duplicate record exits non-zero"
+else
+  fail "duplicate record exits non-zero" "exit code: $rc"
+fi
+
+# 2. Output contains indication of active recording
+if echo "$output" | grep -iq "already\|active recording"; then
+  pass "duplicate record output mentions active recording"
+else
+  fail "duplicate record output mentions active recording" "output: $output"
+fi
+
+# ==============================================================================
+# Record Mock Capture Events Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Record Mock Capture Events Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$GSD_STACK_DIR"
+"$GSD_STACK" version >/dev/null 2>&1
+
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=capture-test >/dev/null 2>&1
+
+# 1. stream.jsonl has at least 3 entries
+stream_lines=$(wc -l < "$GSD_STACK_DIR/recordings/capture-test/stream.jsonl" 2>/dev/null || echo "0")
+stream_lines=$((stream_lines + 0))
+if [[ "$stream_lines" -ge 3 ]]; then
+  pass "mock capture writes at least 3 stream entries"
+else
+  fail "mock capture writes at least 3 stream entries" "got $stream_lines lines"
+fi
+
+# 2. At least one entry contains "type":"terminal"
+if grep -q '"type":"terminal"' "$GSD_STACK_DIR/recordings/capture-test/stream.jsonl" 2>/dev/null; then
+  pass "mock capture has terminal event"
+else
+  fail "mock capture has terminal event" "no terminal event found"
+fi
+
+# 3. At least one entry contains "type":"file_change"
+if grep -q '"type":"file_change"' "$GSD_STACK_DIR/recordings/capture-test/stream.jsonl" 2>/dev/null; then
+  pass "mock capture has file_change event"
+else
+  fail "mock capture has file_change event" "no file_change event found"
+fi
+
+# ==============================================================================
+# Record JSON Output Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Record JSON Output Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$GSD_STACK_DIR"
+"$GSD_STACK" version >/dev/null 2>&1
+
+# 1. JSON record exits 0
+set +e
+output=$(GSD_FORMAT=json GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=json-rec 2>&1)
+rc=$?
+set -e
+assert_exit_code "record JSON output exits 0" "0" "$rc"
+
+# 2. Output starts with {
+if [[ "$output" == "{"* ]]; then
+  pass "record JSON output starts with {"
+else
+  fail "record JSON output starts with {" "output: $output"
+fi
+
+# 3. Output contains name:json-rec
+assert_contains "record JSON contains name:json-rec" "$output" '"name":"json-rec"'
+
+# 4. Output contains status:recording
+assert_contains "record JSON contains status:recording" "$output" '"status":"recording"'
+
+# ==============================================================================
+# Mark Subcommand Tests (with active recording)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Mark Subcommand Tests${RESET}\n"
+
+# Reset stack dir
+rm -rf "$GSD_STACK_DIR"
+"$GSD_STACK" version >/dev/null 2>&1
+
+# Start recording for mark tests
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=mark-test >/dev/null 2>&1
+
+# 1. mark "tests passing" exits 0
+set +e
+output=$("$GSD_STACK" mark "tests passing" 2>&1)
+rc=$?
+set -e
+assert_exit_code "mark 'tests passing' exits 0" "0" "$rc"
+
+# 2. stream.jsonl has an entry with "type":"marker"
+if grep -q '"type":"marker"' "$GSD_STACK_DIR/recordings/mark-test/stream.jsonl" 2>/dev/null; then
+  pass "stream.jsonl has marker event"
+else
+  fail "stream.jsonl has marker event" "no marker event found"
+fi
+
+# 3. Marker entry contains "label":"tests passing"
+if grep '"type":"marker"' "$GSD_STACK_DIR/recordings/mark-test/stream.jsonl" 2>/dev/null | grep -q '"label":"tests passing"'; then
+  pass "marker entry contains label:tests passing"
+else
+  fail "marker entry contains label:tests passing" "label not found"
+fi
+
+# 4. History.jsonl has a mark event
+history_content=$(cat "$GSD_STACK_DIR/history.jsonl" 2>/dev/null || echo "")
+assert_contains "history has mark event" "$history_content" '"event":"mark"'
+
+# ==============================================================================
+# Mark Multiple Markers Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Mark Multiple Markers Tests${RESET}\n"
+
+# Use the same recording from above (mark-test)
+"$GSD_STACK" mark "checkpoint-1" >/dev/null 2>&1
+"$GSD_STACK" mark "checkpoint-2" >/dev/null 2>&1
+
+# Count marker events (at least 3: tests passing + checkpoint-1 + checkpoint-2)
+marker_count=$(grep -c '"type":"marker"' "$GSD_STACK_DIR/recordings/mark-test/stream.jsonl" 2>/dev/null || echo "0")
+if [[ "$marker_count" -ge 2 ]]; then
+  pass "stream.jsonl has at least 2 marker entries (got $marker_count)"
+else
+  fail "stream.jsonl has at least 2 marker entries" "got $marker_count"
+fi
+
+# ==============================================================================
+# Mark Without Active Recording Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Mark Without Active Recording Tests${RESET}\n"
+
+# Reset stack dir (no recording started)
+rm -rf "$GSD_STACK_DIR"
+"$GSD_STACK" version >/dev/null 2>&1
+
+# 1. mark with no recording exits non-zero
+set +e
+output=$("$GSD_STACK" mark "no recording" 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "mark without recording exits non-zero"
+else
+  fail "mark without recording exits non-zero" "exit code: $rc"
+fi
+
+# 2. Output mentions no active recording
+if echo "$output" | grep -iq "no active recording\|not recording"; then
+  pass "mark without recording mentions no active recording"
+else
+  fail "mark without recording mentions no active recording" "output: $output"
+fi
+
+# ==============================================================================
+# Mark Without Label Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Mark Without Label Tests${RESET}\n"
+
+# Reset and start recording
+rm -rf "$GSD_STACK_DIR"
+"$GSD_STACK" version >/dev/null 2>&1
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=nolabel >/dev/null 2>&1
+
+# 1. mark with no label exits non-zero
+set +e
+output=$("$GSD_STACK" mark 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "mark without label exits non-zero"
+else
+  fail "mark without label exits non-zero" "exit code: $rc"
+fi
+
+# 2. Output mentions label required
+if echo "$output" | grep -iq "label\|Usage\|required"; then
+  pass "mark without label mentions label required"
+else
+  fail "mark without label mentions label required" "output: $output"
+fi
+
+# ==============================================================================
+# Mark JSON Output Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Mark JSON Output Tests${RESET}\n"
+
+# Recording still active from nolabel test above
+set +e
+output=$(GSD_FORMAT=json "$GSD_STACK" mark "json-marker" 2>&1)
+rc=$?
+set -e
+
+# 1. Exits 0
+assert_exit_code "mark JSON exits 0" "0" "$rc"
+
+# 2. Output starts with {
+if [[ "$output" == "{"* ]]; then
+  pass "mark JSON output starts with {"
+else
+  fail "mark JSON output starts with {" "output: $output"
+fi
+
+# 3. Contains type:marker
+assert_contains "mark JSON contains type:marker" "$output" '"type":"marker"'
+
+# 4. Contains label:json-marker
+assert_contains "mark JSON contains label:json-marker" "$output" '"label":"json-marker"'
+
+# ==============================================================================
+# Stack Event Mirroring Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Stack Event Mirroring Tests${RESET}\n"
+
+# Reset stack dir and start recording
+rm -rf "$GSD_STACK_DIR"
+"$GSD_STACK" version >/dev/null 2>&1
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=mirror-test >/dev/null 2>&1
+
+# Count stream lines before push
+before_count=$(wc -l < "$GSD_STACK_DIR/recordings/mirror-test/stream.jsonl" 2>/dev/null || echo "0")
+before_count=$((before_count + 0))
+
+# Push a message
+"$GSD_STACK" push "mirrored msg" >/dev/null 2>&1
+
+# Count stream lines after push
+after_count=$(wc -l < "$GSD_STACK_DIR/recordings/mirror-test/stream.jsonl" 2>/dev/null || echo "0")
+after_count=$((after_count + 0))
+
+# 1. after_count > before_count
+if [[ "$after_count" -gt "$before_count" ]]; then
+  pass "push adds event to recording stream (before=$before_count, after=$after_count)"
+else
+  fail "push adds event to recording stream" "before=$before_count, after=$after_count"
+fi
+
+# 2. stream.jsonl has stack_push event
+if grep -q '"type":"stack_push"' "$GSD_STACK_DIR/recordings/mirror-test/stream.jsonl" 2>/dev/null; then
+  pass "stream.jsonl has stack_push event"
+else
+  fail "stream.jsonl has stack_push event" "no stack_push event found"
+fi
+
+# 3. Pop and check for stack_pop event
+set +e
+"$GSD_STACK" pop >/dev/null 2>&1
+set -e
+
+if grep -q '"type":"stack_pop"' "$GSD_STACK_DIR/recordings/mirror-test/stream.jsonl" 2>/dev/null; then
+  pass "stream.jsonl has stack_pop event after pop"
+else
+  fail "stream.jsonl has stack_pop event after pop" "no stack_pop event found"
+fi
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
