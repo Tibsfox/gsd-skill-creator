@@ -1,5 +1,5 @@
 import { PatternStore } from '../storage/pattern-store.js';
-import type { LineageEntry, LineageChain } from '../types/observation.js';
+import type { LineageEntry, LineageChain, ArtifactType } from '../types/observation.js';
 
 /**
  * Provides full provenance tracking across all 6 pipeline stages.
@@ -52,7 +52,7 @@ class LineageTracker {
   async getUpstream(artifactId: string): Promise<LineageEntry[]> {
     const all = await this.loadAll();
     const result: LineageEntry[] = [];
-    const visited = new Set<string>();
+    const visited = new Set<string>([artifactId]);
     this.traceUpstream(artifactId, all, result, visited);
     return result;
   }
@@ -67,9 +67,21 @@ class LineageTracker {
   async getDownstream(artifactId: string): Promise<LineageEntry[]> {
     const all = await this.loadAll();
     const result: LineageEntry[] = [];
-    const visited = new Set<string>();
+    const visited = new Set<string>([artifactId]);
     this.traceDownstream(artifactId, all, result, visited);
     return result;
+  }
+
+  /**
+   * Get all lineage entries of a specific artifact type.
+   * Useful for filtering entries to show only observations, patterns, scripts, etc.
+   *
+   * @param artifactType - The artifact type to filter by
+   * @returns All lineage entries matching the specified type
+   */
+  async getByArtifactType(artifactType: ArtifactType): Promise<LineageEntry[]> {
+    const all = await this.loadAll();
+    return all.filter(e => e.artifactType === artifactType);
   }
 
   /**
@@ -84,11 +96,11 @@ class LineageTracker {
     }
 
     const upstream: LineageEntry[] = [];
-    const upVisited = new Set<string>();
+    const upVisited = new Set<string>([artifactId]);
     this.traceUpstream(artifactId, all, upstream, upVisited);
 
     const downstream: LineageEntry[] = [];
-    const downVisited = new Set<string>();
+    const downVisited = new Set<string>([artifactId]);
     this.traceDownstream(artifactId, all, downstream, downVisited);
 
     return {
