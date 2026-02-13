@@ -307,3 +307,21 @@ export interface GeneratedScript {
   /** Whether the script passed Zod schema validation */
   isValid: boolean;
 }
+
+/** Result of a dry-run validation for a generated script (SCRP-03) */
+export interface DryRunResult {
+  /** The generated script that was validated */
+  generatedScript: GeneratedScript;
+  /** Whether the dry-run output matches the expected output */
+  passed: boolean;
+  /** SHA-256 hash of the actual dry-run stdout */
+  actualOutputHash: string;
+  /** SHA-256 hash of the expected output from stored observations */
+  expectedOutputHash: string;
+  /** Exit code from the dry-run execution */
+  exitCode: number;
+  /** Execution duration in milliseconds */
+  durationMs: number;
+  /** Failure reason if passed=false (null if passed=true) */
+  failureReason: string | null;
+}
