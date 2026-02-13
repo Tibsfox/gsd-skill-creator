@@ -26,3 +26,17 @@ export { stageDocument } from './intake.js';
 // State machine
 export type { MoveDocumentResult } from './state-machine.js';
 export { moveDocument, VALID_TRANSITIONS } from './state-machine.js';
+
+// Intake flow -- clarity assessment
+export type { ClarityRoute, ClarityAssessment, GapDetail } from './intake-flow/index.js';
+export { CLARITY_ROUTES } from './intake-flow/index.js';
+export { assessClarity } from './intake-flow/index.js';
+
+// Intake flow -- step tracking
+export type { IntakeFlowStep, IntakeFlowState } from './intake-flow/index.js';
+export { INTAKE_FLOW_STEPS } from './intake-flow/index.js';
+export { recordStep, getResumePoint, readFlowState } from './intake-flow/index.js';
+
+// Intake flow -- orchestrator
+export type { IntakeFlowResult } from './intake-flow/index.js';
+export { runIntakeFlow, confirmIntake, resumeIntakeFlow } from './intake-flow/index.js';
