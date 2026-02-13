@@ -3,11 +3,11 @@
 ## Current Position
 
 Milestone: v1.16 -- Dashboard Console & Milestone Ingestion
-Phase: 130-session-integration (plans 01-03 complete)
-Status: Executing phase 130
-Last activity: 2026-02-13 -- Completed 130-03 (message handler + status writer)
+Phase: 131-question-system (plan 01 complete)
+Status: Executing phase 131
+Last activity: 2026-02-13 -- Completed 131-01 (question schema validation)
 
-Progress: [███░░░░░░░░░░░░░] 1/5 phases (130 in progress)
+Progress: [███░░░░░░░░░░░░░] 1/5 phases (131 in progress)
 
 ## Project Reference
 
@@ -65,12 +65,15 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - Discriminated union MessageAction type for structured return values
 - StatusWriter overwrites current.json each time (always reflects current state)
 - Boolean(payload.hot) defaults to false when hot flag not specified in config-update
+- Type aliases inferred from schema via z.infer indexed access (not separate type definitions) for QuestionSchema
+- TimeoutFallback extracted via NonNullable<Question['timeout']>['fallback'] for DRY type inference
+- Options structurally optional in schema -- renderer enforces semantic requirement for choice/multi-select
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
-- Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, check-inbox integration tests)
+- Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, check-inbox integration tests)
 - Scripts module: scripts/console/ (check-inbox.sh, write-question.sh, write-status.sh, validate-config.sh)
 - gsd-stack session management: bash scripts with tmux integration (v1.13)
 - v1.14 promotion pipeline: src/pipeline/ + src/dashboard/collectors/
@@ -96,10 +99,10 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Completed 130-03 (message handler + status writer)
-Stopped at: Completed 130-03-PLAN.md execution
-Next action: Continue with remaining 130 plans (04+)
-Context: handleMessage dispatches milestone-submit/config-update/setting-change/question-response. Returns MessageAction discriminated union. StatusWriter writes outbox/status/current.json. 22 new tests, 182 total console tests passing. Barrel exports updated.
+Last: 2026-02-13 -- Completed 131-01 (question schema validation)
+Stopped at: Completed 131-01-PLAN.md execution
+Next action: Continue with remaining 131 plans (02+)
+Context: QuestionSchema validates 5 question types (binary, choice, multi-select, text, confirmation) with defaults (status: pending, urgency: medium). TimeoutSchema enforces positive int seconds and 4 fallback actions. 28 new tests, 210 total console tests passing. Barrel exports updated in src/console/index.ts.
 
 ---
-*Last updated: 2026-02-13 (130-03 complete)*
+*Last updated: 2026-02-13 (131-01 complete)*
