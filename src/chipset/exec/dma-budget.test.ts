@@ -1,77 +1,77 @@
 /**
- * Tests for DMA-channel token budget manager.
+ * Tests for token budget manager.
  *
- * Validates percentage-based allocation with headroom reserve, per-chip
- * spending and remaining tracking, burst mode (BLITHOG) using headroom
- * pool, exceeded callback semantics (fires once per exceedance), and
- * per-chip and global reset.
+ * Validates percentage-based allocation with headroom reserve, per-engine
+ * spending and remaining tracking, burst mode using headroom pool,
+ * exceeded callback semantics (fires once per exceedance), and
+ * per-engine and global reset.
  */
 
 import { describe, it, expect, vi } from 'vitest';
-import { DmaBudgetManager } from './dma-budget.js';
-import type { BudgetStatus, DmaBudgetConfig } from './dma-budget.js';
+import { BudgetManager } from './dma-budget.js';
+import type { BudgetStatus, BudgetConfig } from './dma-budget.js';
 
 // ============================================================================
-// DmaBudgetManager -- initialization
+// BudgetManager -- initialization
 // ============================================================================
 
-describe('DmaBudgetManager -- initialization', () => {
-  it('creates with default chip allocations', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000 });
-    manager.registerChip('agnus', 60);
-    manager.registerChip('denise', 15);
-    manager.registerChip('paula', 15);
-    manager.registerChip('gary', 10);
+describe('BudgetManager -- initialization', () => {
+  it('creates with default engine allocations', () => {
+    const manager = new BudgetManager({ totalBudget: 100000 });
+    manager.registerEngine('context-engine', 60);
+    manager.registerEngine('render-engine', 15);
+    manager.registerEngine('io-engine', 15);
+    manager.registerEngine('router-engine', 10);
 
     // Default headroom is 5%, so effective budget = 95000
-    expect(manager.getAllocation('agnus')).toBe(57000); // 60% of 95000
-    expect(manager.getAllocation('denise')).toBe(14250); // 15% of 95000
-    expect(manager.getAllocation('gary')).toBe(9500); // 10% of 95000
+    expect(manager.getAllocation('context-engine')).toBe(57000); // 60% of 95000
+    expect(manager.getAllocation('render-engine')).toBe(14250); // 15% of 95000
+    expect(manager.getAllocation('router-engine')).toBe(9500); // 10% of 95000
   });
 
   it('creates with custom headroom', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000, headroomPercent: 5 });
-    manager.registerChip('agnus', 60);
+    const manager = new BudgetManager({ totalBudget: 100000, headroomPercent: 5 });
+    manager.registerEngine('context-engine', 60);
 
     // Headroom = 5000 (5% of 100000), effective = 95000
     expect(manager.getHeadroom()).toBe(5000);
-    expect(manager.getAllocation('agnus')).toBe(57000); // 60% of 95000
+    expect(manager.getAllocation('context-engine')).toBe(57000); // 60% of 95000
   });
 
   it('default headroom is 5%', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000 });
+    const manager = new BudgetManager({ totalBudget: 100000 });
     // Headroom pool = 5% of 100000 = 5000
     expect(manager.getHeadroom()).toBe(5000);
   });
 });
 
 // ============================================================================
-// DmaBudgetManager -- spending
+// BudgetManager -- spending
 // ============================================================================
 
-describe('DmaBudgetManager -- spending', () => {
-  it('spend deducts from chip budget', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000 });
-    manager.registerChip('agnus', 60);
+describe('BudgetManager -- spending', () => {
+  it('spend deducts from engine budget', () => {
+    const manager = new BudgetManager({ totalBudget: 100000 });
+    manager.registerEngine('context-engine', 60);
     // allocation = 57000
 
-    manager.spend('agnus', 1000);
-    expect(manager.getRemaining('agnus')).toBe(56000);
+    manager.spend('context-engine', 1000);
+    expect(manager.getRemaining('context-engine')).toBe(56000);
   });
 
   it('spend multiple times accumulates', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000 });
-    manager.registerChip('agnus', 60);
+    const manager = new BudgetManager({ totalBudget: 100000 });
+    manager.registerEngine('context-engine', 60);
 
-    manager.spend('agnus', 1000);
-    manager.spend('agnus', 1000);
-    manager.spend('agnus', 1000);
-    expect(manager.getRemaining('agnus')).toBe(54000); // 57000 - 3000
+    manager.spend('context-engine', 1000);
+    manager.spend('context-engine', 1000);
+    manager.spend('context-engine', 1000);
+    expect(manager.getRemaining('context-engine')).toBe(54000); // 57000 - 3000
   });
 
   it('spend exactly to zero succeeds', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 1000, headroomPercent: 0 });
-    manager.registerChip('tiny', 100);
+    const manager = new BudgetManager({ totalBudget: 1000, headroomPercent: 0 });
+    manager.registerEngine('tiny', 100);
     // allocation = 1000
 
     manager.spend('tiny', 1000);
@@ -79,8 +79,8 @@ describe('DmaBudgetManager -- spending', () => {
   });
 
   it('spend beyond allocation does NOT hard-fail (soft limit)', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 1000, headroomPercent: 0 });
-    manager.registerChip('tiny', 100);
+    const manager = new BudgetManager({ totalBudget: 1000, headroomPercent: 0 });
+    manager.registerEngine('tiny', 100);
     // allocation = 1000
 
     const status = manager.spend('tiny', 1500);
@@ -90,18 +90,18 @@ describe('DmaBudgetManager -- spending', () => {
 });
 
 // ============================================================================
-// DmaBudgetManager -- BudgetStatus
+// BudgetManager -- BudgetStatus
 // ============================================================================
 
-describe('DmaBudgetManager -- BudgetStatus', () => {
+describe('BudgetManager -- BudgetStatus', () => {
   it('getStatus returns current budget state', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000 });
-    manager.registerChip('agnus', 60);
-    manager.spend('agnus', 1000);
+    const manager = new BudgetManager({ totalBudget: 100000 });
+    manager.registerEngine('context-engine', 60);
+    manager.spend('context-engine', 1000);
 
-    const status = manager.getStatus('agnus');
+    const status = manager.getStatus('context-engine');
     expect(status).toEqual({
-      chipName: 'agnus',
+      engineName: 'context-engine',
       allocation: 57000,
       spent: 1000,
       remaining: 56000,
@@ -111,8 +111,8 @@ describe('DmaBudgetManager -- BudgetStatus', () => {
   });
 
   it('getStatus shows exceeded when over budget', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 1000, headroomPercent: 0 });
-    manager.registerChip('tiny', 100);
+    const manager = new BudgetManager({ totalBudget: 1000, headroomPercent: 0 });
+    manager.registerEngine('tiny', 100);
     manager.spend('tiny', 1500);
 
     const status = manager.getStatus('tiny');
@@ -122,79 +122,79 @@ describe('DmaBudgetManager -- BudgetStatus', () => {
 });
 
 // ============================================================================
-// DmaBudgetManager -- burst mode (BLITHOG)
+// BudgetManager -- burst mode
 // ============================================================================
 
-describe('DmaBudgetManager -- burst mode (BLITHOG)', () => {
+describe('BudgetManager -- burst mode', () => {
   it('enableBurst allows temporary overallocation from headroom', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000, headroomPercent: 5 });
+    const manager = new BudgetManager({ totalBudget: 100000, headroomPercent: 5 });
     // headroom = 5000
-    manager.registerChip('agnus', 60);
+    manager.registerEngine('context-engine', 60);
     // allocation = 57000
 
-    manager.spend('agnus', 57000); // at limit
-    manager.enableBurst('agnus');
-    manager.spend('agnus', 3000); // burst spending from headroom
+    manager.spend('context-engine', 57000); // at limit
+    manager.enableBurst('context-engine');
+    manager.spend('context-engine', 3000); // burst spending from headroom
 
-    const status = manager.getStatus('agnus');
+    const status = manager.getStatus('context-engine');
     expect(status.burstActive).toBe(true);
   });
 
   it('burst spending reduces headroom pool', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000, headroomPercent: 5 });
-    manager.registerChip('agnus', 60);
+    const manager = new BudgetManager({ totalBudget: 100000, headroomPercent: 5 });
+    manager.registerEngine('context-engine', 60);
 
-    manager.spend('agnus', 57000); // exhaust allocation
-    manager.enableBurst('agnus');
-    manager.spend('agnus', 3000); // burst spending
+    manager.spend('context-engine', 57000); // exhaust allocation
+    manager.enableBurst('context-engine');
+    manager.spend('context-engine', 3000); // burst spending
 
     expect(manager.getHeadroom()).toBe(2000); // 5000 - 3000
   });
 
   it('burst beyond headroom returns exceeded status', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000, headroomPercent: 5 });
-    manager.registerChip('agnus', 60);
+    const manager = new BudgetManager({ totalBudget: 100000, headroomPercent: 5 });
+    manager.registerEngine('context-engine', 60);
 
-    manager.spend('agnus', 57000);
-    manager.enableBurst('agnus');
-    manager.spend('agnus', 6000); // 6000 > 5000 headroom
+    manager.spend('context-engine', 57000);
+    manager.enableBurst('context-engine');
+    manager.spend('context-engine', 6000); // 6000 > 5000 headroom
 
-    const status = manager.getStatus('agnus');
+    const status = manager.getStatus('context-engine');
     expect(status.exceeded).toBe(true);
   });
 
   it('disableBurst stops burst mode', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000, headroomPercent: 5 });
-    manager.registerChip('agnus', 60);
-    manager.enableBurst('agnus');
-    manager.disableBurst('agnus');
+    const manager = new BudgetManager({ totalBudget: 100000, headroomPercent: 5 });
+    manager.registerEngine('context-engine', 60);
+    manager.enableBurst('context-engine');
+    manager.disableBurst('context-engine');
 
-    const status = manager.getStatus('agnus');
+    const status = manager.getStatus('context-engine');
     expect(status.burstActive).toBe(false);
   });
 
   it('burst only available when at or over allocation', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000, headroomPercent: 5 });
-    manager.registerChip('agnus', 60);
+    const manager = new BudgetManager({ totalBudget: 100000, headroomPercent: 5 });
+    manager.registerEngine('context-engine', 60);
     // allocation = 57000
 
-    manager.enableBurst('agnus');
-    manager.spend('agnus', 100); // well under allocation
+    manager.enableBurst('context-engine');
+    manager.spend('context-engine', 100); // well under allocation
 
     // Headroom unchanged -- spending comes from regular allocation
     expect(manager.getHeadroom()).toBe(5000);
-    expect(manager.getRemaining('agnus')).toBe(56900);
+    expect(manager.getRemaining('context-engine')).toBe(56900);
   });
 });
 
 // ============================================================================
-// DmaBudgetManager -- exceeded signal
+// BudgetManager -- exceeded signal
 // ============================================================================
 
-describe('DmaBudgetManager -- exceeded signal', () => {
+describe('BudgetManager -- exceeded signal', () => {
   it('exceeded triggers callback', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 1000, headroomPercent: 0 });
-    manager.registerChip('tiny', 100);
+    const manager = new BudgetManager({ totalBudget: 1000, headroomPercent: 0 });
+    manager.registerEngine('tiny', 100);
 
     const callback = vi.fn();
     manager.onExceeded(callback);
@@ -204,8 +204,8 @@ describe('DmaBudgetManager -- exceeded signal', () => {
   });
 
   it('exceeded callback fires only once per exceedance', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 1000, headroomPercent: 0 });
-    manager.registerChip('tiny', 100);
+    const manager = new BudgetManager({ totalBudget: 1000, headroomPercent: 0 });
+    manager.registerEngine('tiny', 100);
 
     const callback = vi.fn();
     manager.onExceeded(callback);
@@ -224,42 +224,42 @@ describe('DmaBudgetManager -- exceeded signal', () => {
 });
 
 // ============================================================================
-// DmaBudgetManager -- reset
+// BudgetManager -- reset
 // ============================================================================
 
-describe('DmaBudgetManager -- reset', () => {
-  it('reset(chipName) resets spending for one chip', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000 });
-    manager.registerChip('agnus', 60);
-    manager.registerChip('denise', 15);
+describe('BudgetManager -- reset', () => {
+  it('reset(engineName) resets spending for one engine', () => {
+    const manager = new BudgetManager({ totalBudget: 100000 });
+    manager.registerEngine('context-engine', 60);
+    manager.registerEngine('render-engine', 15);
 
-    manager.spend('agnus', 5000);
-    manager.spend('denise', 2000);
-    manager.reset('agnus');
+    manager.spend('context-engine', 5000);
+    manager.spend('render-engine', 2000);
+    manager.reset('context-engine');
 
-    expect(manager.getRemaining('agnus')).toBe(57000); // full allocation
-    expect(manager.getRemaining('denise')).toBe(12250); // unchanged (14250 - 2000)
+    expect(manager.getRemaining('context-engine')).toBe(57000); // full allocation
+    expect(manager.getRemaining('render-engine')).toBe(12250); // unchanged (14250 - 2000)
   });
 
-  it('resetAll() resets all chips and headroom', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000, headroomPercent: 5 });
-    manager.registerChip('agnus', 60);
-    manager.registerChip('denise', 15);
+  it('resetAll() resets all engines and headroom', () => {
+    const manager = new BudgetManager({ totalBudget: 100000, headroomPercent: 5 });
+    manager.registerEngine('context-engine', 60);
+    manager.registerEngine('render-engine', 15);
 
-    manager.spend('agnus', 57000);
-    manager.enableBurst('agnus');
-    manager.spend('agnus', 3000);
-    manager.spend('denise', 1000);
+    manager.spend('context-engine', 57000);
+    manager.enableBurst('context-engine');
+    manager.spend('context-engine', 3000);
+    manager.spend('render-engine', 1000);
 
     manager.resetAll();
 
-    expect(manager.getRemaining('agnus')).toBe(57000);
-    expect(manager.getRemaining('denise')).toBe(14250);
+    expect(manager.getRemaining('context-engine')).toBe(57000);
+    expect(manager.getRemaining('render-engine')).toBe(14250);
     expect(manager.getHeadroom()).toBe(5000);
   });
 
-  it('unknown chip name throws', () => {
-    const manager = new DmaBudgetManager({ totalBudget: 100000 });
+  it('unknown engine name throws', () => {
+    const manager = new BudgetManager({ totalBudget: 100000 });
     expect(() => manager.getStatus('nonexistent')).toThrow();
   });
 });
