@@ -346,8 +346,8 @@ describe('DeterminismAnalyzer', () => {
     });
 
     it('exports DeterminismAnalyzer and types from observation barrel', async () => {
-      // Import from barrel to verify exports are wired
-      const barrel = await import('../index.js');
+      // Import from observation barrel to verify exports are wired
+      const barrel = await import('./index.js');
       expect(barrel.DeterminismAnalyzer).toBeDefined();
 
       // Type imports verified at compile time via the import statement at the top
