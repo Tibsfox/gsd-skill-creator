@@ -88,6 +88,22 @@ export interface ToolExecutionPair {
   context: ExecutionContext;
 }
 
+/** Storage envelope for a batch of tool execution pairs from one session (CAPT-02, CAPT-03) */
+export interface StoredExecutionBatch {
+  /** Session ID this batch belongs to */
+  sessionId: string;
+  /** Execution context for this batch */
+  context: ExecutionContext;
+  /** All tool execution pairs from this session */
+  pairs: ToolExecutionPair[];
+  /** Count of complete pairs */
+  completeCount: number;
+  /** Count of partial pairs */
+  partialCount: number;
+  /** Timestamp when this batch was captured */
+  capturedAt: number;
+}
+
 // Configuration for retention management
 export interface RetentionConfig {
   maxEntries: number;
