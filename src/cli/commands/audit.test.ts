@@ -103,7 +103,7 @@ describe('auditCommand', () => {
     const exitCode = await auditCommand('my-skill', {});
 
     expect(exitCode).toBe(0);
-    const output = consoleSpy.mock.calls.map(c => c.join(' ')).join('\n');
+    const output = consoleSpy.mock.calls.map((c: unknown[]) => c.join(' ')).join('\n');
     expect(output).toContain('my-skill');
   });
 
@@ -135,7 +135,7 @@ describe('auditCommand', () => {
     const exitCode = await auditCommand('drift-skill', {});
 
     expect(exitCode).toBe(0);
-    const output = consoleSpy.mock.calls.map(c => c.join(' ')).join('\n');
+    const output = consoleSpy.mock.calls.map((c: unknown[]) => c.join(' ')).join('\n');
     expect(output).toContain('42.7%');
   });
 
@@ -175,7 +175,7 @@ describe('auditCommand', () => {
     const exitCode = await auditCommand('conflict-skill', {});
 
     expect(exitCode).toBe(0);
-    const output = consoleSpy.mock.calls.map(c => c.join(' ')).join('\n');
+    const output = consoleSpy.mock.calls.map((c: unknown[]) => c.join(' ')).join('\n');
     expect(output).toMatch(/contradiction|conflict|reversal/i);
   });
 });
