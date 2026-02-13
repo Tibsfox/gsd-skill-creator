@@ -66,8 +66,8 @@ Display a markdown table sorted by size (largest first):
 
 | Skill | Size | % of Budget |
 |-------|------|-------------|
-| beautiful-commits | 2,340 chars | 1.2% |
-| git-commit | 1,890 chars | 0.9% |
+| beautiful-commits | 1,333 chars | 8.6% |
+| gsd-trace | 1,472 chars | 9.5% |
 | ... | ... | ... |
 ```
 

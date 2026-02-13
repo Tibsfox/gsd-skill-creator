@@ -156,8 +156,8 @@ Read `.planning/patterns/budget-history.jsonl` using the Read tool.
   ### Activation History
   | Skill | Activations | Last Used |
   |-------|-------------|-----------|
-  | git-commit | 12 | Feb 12 |
-  | beautiful-commits | 10 | Feb 12 |
+  | beautiful-commits | 12 | Feb 13 |
+  | gsd-onboard | 10 | Feb 13 |
   ```
 - If the file does not exist, display: "No activation history available."
 

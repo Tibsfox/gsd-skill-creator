@@ -6,7 +6,7 @@ This directory contains examples demonstrating proper skill, agent, and team aut
 
 ```
 examples/
-├── skills/          # 33 skill examples (SKILL.md each)
+├── skills/          # 31 skill examples (SKILL.md each)
 ├── agents/          # 22 agent examples (AGENT.md each)
 └── teams/           # 10 team examples (config.json + README.md each)
 ```
@@ -17,8 +17,7 @@ examples/
 
 | Skill | Domain | Use Case |
 |-------|--------|----------|
-| [beautiful-commits](skills/beautiful-commits/SKILL.md) | Git | Comprehensive commit message crafting guide |
-| [git-commit](skills/git-commit/SKILL.md) | Git | Conventional commit messages |
+| [beautiful-commits](skills/beautiful-commits/SKILL.md) | Git | Conventional commit message crafting |
 | [code-review](skills/code-review/SKILL.md) | Code Quality | PR review checklists |
 | [test-generator](skills/test-generator/SKILL.md) | Testing | Test case generation |
 | [typescript-patterns](skills/typescript-patterns/SKILL.md) | TypeScript | Best practices and patterns |
@@ -89,7 +88,6 @@ examples/
 
 | Skill/Agent | Type | Use Case |
 |-------------|------|----------|
-| [gsd-explain](skills/gsd-explain/SKILL.md) | Skill | Explains GSD workflows before execution |
 | [gsd-preflight](skills/gsd-preflight/SKILL.md) | Skill | Validates GSD artifacts pre-workflow |
 | [gsd-health-checker](agents/gsd-health-checker/AGENT.md) | Agent | Pre-flight health checks for GSD |
 | [gsd-onboard](skills/gsd-onboard/SKILL.md) | Skill | Interactive tutorial for learning GSD |
@@ -102,10 +100,10 @@ examples/
 
 | Type | Count | Domains Covered |
 |------|-------|-----------------|
-| Skills | 33 | Git, Code Quality, Testing, TypeScript, Decision-Making, API Design, Docker, Environment Config, Session Continuity, SQL, CI/CD, Hooks, Accessibility, Supply Chain, AI/Multi-Agent, Resilience, Compliance, Shell/DevOps, FinOps, GitOps, Operations, Infrastructure, Kubernetes, Observability, Platform Engineering, Release Engineering, SRE, GSD (5) |
+| Skills | 31 | Git, Code Quality, Testing, TypeScript, Decision-Making, API Design, Docker, Environment Config, Session Continuity, SQL, CI/CD, Hooks, Accessibility, Supply Chain, AI/Multi-Agent, Resilience, Compliance, Shell/DevOps, FinOps, GitOps, Operations, Infrastructure, Kubernetes, Observability, Platform Engineering, Release Engineering, SRE, GSD (4) |
 | Agents | 22 | Architecture, Security, Performance, Release Management, Documentation, Infrastructure, Compliance, FinOps, Supply Chain, Operations, CI/CD, SRE, Testing, GSD (3) |
 | Teams | 10 | Code Review, Documentation, Migration, CI/CD, Operations, Infrastructure, Developer Experience, Release Engineering, Security, SRE |
-| **Total** | **65** | **35+ distinct domains** |
+| **Total** | **63** | **35+ distinct domains** |
 
 ## Key Patterns Demonstrated
 
