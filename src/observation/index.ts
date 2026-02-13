@@ -15,6 +15,7 @@ export { ScriptGenerator } from './script-generator.js';
 export { PromotionGatekeeper } from './promotion-gatekeeper.js';
 export { DriftMonitor } from './drift-monitor.js';
 export { FeedbackBridge } from './feedback-bridge.js';
+export { LineageTracker } from './lineage-tracker.js';
 
 // Types
 export type { SessionStartData, SessionEndData } from './session-observer.js';
@@ -27,6 +28,7 @@ export type { PromotionCandidate, PromotionDetectorConfig, PromotableToolName } 
 export type { GeneratedScript, ScriptGeneratorConfig, DryRunResult } from '../types/observation.js';
 export type { GatekeeperConfig, GatekeeperDecision, GatekeeperEvidence } from '../types/observation.js';
 export type { DriftMonitorConfig, DriftEvent, DemotionDecision } from '../types/observation.js';
+export type { LineageEntry, LineageChain, ArtifactType, PipelineStage } from '../types/observation.js';
 export { normalizeObservationTier, DEFAULT_DETERMINISM_CONFIG, DEFAULT_PROMOTION_DETECTOR_CONFIG, PROMOTABLE_TOOL_NAMES } from '../types/observation.js';
 export { DEFAULT_SCRIPT_GENERATOR_CONFIG, DEFAULT_GATEKEEPER_CONFIG } from '../types/observation.js';
 export { DEFAULT_DRIFT_MONITOR_CONFIG } from '../types/observation.js';
