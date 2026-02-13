@@ -8,10 +8,11 @@
  * @module terminal/launcher.test
  */
 
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { EventEmitter } from 'node:events';
 import type { ChildProcess } from 'node:child_process';
 import { launchWetty, shutdownWetty } from './launcher.js';
-import type { LaunchOptions, WettyProcess } from './types.js';
+import type { WettyProcess } from './types.js';
 import type { TerminalConfig } from '../integration/config/terminal-types.js';
 
 // ---------------------------------------------------------------------------
