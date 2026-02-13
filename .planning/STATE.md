@@ -4,9 +4,9 @@
 
 Milestone: v1.17 — Staging Layer
 Phase: 138 — Resource Analysis (in progress)
-Plan: 138-04 complete
+Plan: 138-05 complete
 Status: Executing phase 138
-Last activity: 2026-02-13 — Completed 138-04 (token budget estimator and work decomposer)
+Last activity: 2026-02-13 — Completed 138-05 (resource manifest generator and barrel index)
 
 ## Project Reference
 
@@ -177,6 +177,10 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Foundation/setup/infrastructure category requirements become dependency roots for all other tasks
 - Critical path computed via Kahn's topological sort with dynamic programming longest path
 - Max parallelism as widest anti-chain in dependency DAG via level assignment
+- ManifestDeps DI interface composes all 5 sub-analyzers for testability
+- HITL predictions from ambiguity markers (decision checkpoints) and high/critical complexity (review checkpoints)
+- Queue priority: critical=1, high=2, medium=3, low=4; duration = reqCount * complexity multiplier
+- Barrel follows hygiene/derived pattern: type-only exports for interfaces, value exports for functions/constants
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -194,7 +198,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, trust-store, finding-actions, report, index)
 - Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift, pattern-fidelity, training-coherence, copying-detector, checker, index)
 - Staging intake-flow submodule at src/staging/intake-flow/ (types, clarity-assessor, step-types, step-tracker, orchestrator, index)
-- Staging resource submodule at src/staging/resource/ (types, analyzer, skill-matcher, topology, budget, decomposer)
+- Staging resource submodule at src/staging/resource/ (types, analyzer, skill-matcher, topology, budget, decomposer, manifest, index)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -209,15 +213,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 397 complete |
+| Total plans | 398 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 138-02-PLAN.md (parallel with 138-03, 138-04)
-Stopped at: Plans 138-01 through 138-04 complete. Phase 138 in progress.
-Next action: Continue with remaining 138 plans (138-05 manifest assembly, 138-06 barrel).
-Context: v1.17 Staging Layer. Phase 138 in progress (4/6 plans complete). Resource submodule: types, analyzer, skill-matcher (matchSkills), topology, budget (estimateBudget), decomposer (decomposeWork). 483 staging tests pass.
+Last: 2026-02-13 — Completed 138-05-PLAN.md (manifest generator + barrel index)
+Stopped at: Plans 138-01 through 138-05 complete. Phase 138 in progress.
+Next action: Continue with remaining 138 plans if any, or finalize phase 138.
+Context: v1.17 Staging Layer. Phase 138 in progress (5/5 plans complete). Resource submodule complete: types, analyzer, skill-matcher, topology, budget, decomposer, manifest, index. 505 staging tests pass.
 
 ---
-*Last updated: 2026-02-13 (138-02 complete)*
+*Last updated: 2026-02-13 (138-05 complete)*
