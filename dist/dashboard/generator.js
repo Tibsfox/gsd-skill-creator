@@ -308,8 +308,7 @@ export async function generate(options) {
         : '';
     // Shared rendering context
     const projectName = data.project?.name ?? 'GSD Dashboard';
-    const styles = renderStyles();
-    const allStyles = styles + terminalStyles;
+    const styles = renderStyles() + terminalStyles;
     // Page definitions: name, filename, content renderer, meta, jsonLd
     const pageDefinitions = [
         {
@@ -382,7 +381,7 @@ export async function generate(options) {
                 nav,
                 projectName,
                 generatedAt: data.generatedAt,
-                styles: allStyles,
+                styles,
                 meta: pageDef.meta,
                 jsonLd: pageDef.jsonLd,
             });
