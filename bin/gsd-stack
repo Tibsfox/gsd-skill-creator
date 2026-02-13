@@ -1317,6 +1317,191 @@ $line"; else body="$line"; fi
 }
 
 # ==============================================================================
+# Save snapshot internal helper
+# ==============================================================================
+
+_save_snapshot() {
+  local session_name="$1"
+  local note="${2:-}"
+
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+
+  # Validate session exists
+  if [[ ! -d "$session_dir" ]] || [[ ! -f "$session_dir/meta.json" ]]; then
+    echo "Error: Session '$session_name' not found" >&2
+    return 1
+  fi
+
+  # Read meta.json
+  local meta_content
+  meta_content=$(cat "$session_dir/meta.json")
+
+  # Collect pending stack info
+  local pending_count=0
+  local pending_files=""
+  if [[ -d "$GSD_STACK_DIR/pending" ]]; then
+    pending_count=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+    pending_count=$((pending_count + 0))
+    pending_files=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | tr '\n' ',' | sed 's/,$//')
+  fi
+
+  # Read STATE.md from project dir if it exists
+  local project_path
+  project_path=$(json_field "$meta_content" "project")
+  local state_md_content=""
+  if [[ -n "$project_path" ]] && [[ -f "$project_path/.planning/STATE.md" ]]; then
+    state_md_content=$(cat "$project_path/.planning/STATE.md" 2>/dev/null || echo "")
+  fi
+
+  # Capture terminal context from tmux (last 50 lines) -- skip in mock mode
+  local terminal_context=""
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    local tmux_session
+    tmux_session=$(json_field "$meta_content" "tmux_session")
+    if tmux has-session -t "$tmux_session" 2>/dev/null; then
+      terminal_context=$(tmux capture-pane -t "$tmux_session" -p -S -50 2>/dev/null || echo "")
+    fi
+  fi
+
+  # Generate save filename and timestamp
+  local save_ts save_ts_file
+  save_ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  save_ts_file=$(date -u +"%Y%m%d-%H%M%S")
+  local save_file="$GSD_STACK_DIR/saves/${session_name}-${save_ts_file}.json"
+
+  # Escape strings for JSON embedding
+  local state_md_escaped terminal_escaped note_escaped pending_files_escaped
+  state_md_escaped=$(printf '%s' "$state_md_content" | sed 's/\\/\\\\/g; s/"/\\"/g' | tr '\n' '|' | sed 's/|/\\n/g')
+  terminal_escaped=$(printf '%s' "$terminal_context" | sed 's/\\/\\\\/g; s/"/\\"/g' | tr '\n' '|' | sed 's/|/\\n/g')
+  note_escaped=$(printf '%s' "${note:-}" | sed 's/\\/\\\\/g; s/"/\\"/g')
+  pending_files_escaped=$(printf '%s' "$pending_files" | sed 's/\\/\\\\/g; s/"/\\"/g')
+
+  # Write snapshot JSON
+  printf '{"name":"%s","saved_at":"%s","note":"%s","meta":%s,"pending_count":%d,"pending_files":"%s","state_md":"%s","terminal_context":"%s"}\n' \
+    "$session_name" "$save_ts" "$note_escaped" "$meta_content" "$pending_count" "$pending_files_escaped" "$state_md_escaped" "$terminal_escaped" \
+    > "$save_file"
+
+  echo "$save_file"
+  return 0
+}
+
+# ==============================================================================
+# Save subcommand
+# ==============================================================================
+
+cmd_save() {
+  local session_name=""
+  local note=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --note=*) note="${1#--note=}" ; shift ;;
+      --note)   note="${2:-}" ; shift 2 ;;
+      -*)       echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)        session_name="$1" ; shift ;;
+    esac
+  done
+
+  # Validate session name provided
+  if [[ -z "$session_name" ]]; then
+    echo "Error: Session name required. Usage: gsd-stack save <session-name> [--note=TEXT]"
+    exit 1
+  fi
+
+  # Call the internal save helper
+  local save_file
+  save_file=$(_save_snapshot "$session_name" "$note")
+  local save_rc=$?
+  if [[ "$save_rc" -ne 0 ]]; then
+    exit 1
+  fi
+
+  # Update meta.json status to "saved" (standalone save marks session as saved)
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+  local meta_content
+  meta_content=$(cat "$session_dir/meta.json")
+  local updated_meta
+  updated_meta=$(echo "$meta_content" | sed 's/"status":"[^"]*"/"status":"saved"/')
+  echo "$updated_meta" > "$session_dir/meta.json"
+
+  log_event "save" "saved: $session_name -> $(basename "$save_file")"
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"session":"%s","save_file":"%s","status":"saved"}\n' "$session_name" "$save_file"
+  else
+    echo "Session '$session_name' saved to $(basename "$save_file")"
+  fi
+}
+
+# ==============================================================================
+# Pause subcommand
+# ==============================================================================
+
+cmd_pause() {
+  local session_name=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -*)  echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)   session_name="$1" ; shift ;;
+    esac
+  done
+
+  # Validate session name provided
+  if [[ -z "$session_name" ]]; then
+    echo "Error: Session name required. Usage: gsd-stack pause <session-name>"
+    exit 1
+  fi
+
+  # Check session exists
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+  if [[ ! -d "$session_dir" ]] || [[ ! -f "$session_dir/meta.json" ]]; then
+    echo "Error: Session '$session_name' not found"
+    exit 1
+  fi
+
+  # Validate session state is active or stalled
+  local state
+  state=$(get_session_state "$session_name") || true
+  if [[ "$state" != "active" ]] && [[ "$state" != "stalled" ]]; then
+    echo "Error: Cannot pause session '$session_name' (state: $state) -- must be active or stalled"
+    exit 1
+  fi
+
+  # Step 1: Send Ctrl+C interrupt (skip in mock mode)
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    local tmux_session
+    tmux_session=$(json_field "$(cat "$session_dir/meta.json")" "tmux_session")
+    tmux send-keys -t "$tmux_session" C-c 2>/dev/null || true
+    sleep 1  # Brief pause to let interrupt propagate
+  fi
+
+  # Step 2: Auto-save (snapshot before status change)
+  local save_file=""
+  save_file=$(_save_snapshot "$session_name" "auto-save on pause") || true
+
+  # Step 3: Update meta.json status to "paused"
+  local meta_content
+  meta_content=$(cat "$session_dir/meta.json")
+  local updated_meta
+  updated_meta=$(echo "$meta_content" | sed 's/"status":"[^"]*"/"status":"paused"/')
+  echo "$updated_meta" > "$session_dir/meta.json"
+
+  log_event "pause" "paused: $session_name"
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"session":"%s","status":"paused","save_file":"%s"}\n' "$session_name" "${save_file:-none}"
+  else
+    echo "Session '$session_name' paused"
+    if [[ -n "${save_file:-}" ]]; then
+      echo "State saved to $(basename "$save_file")"
+    fi
+  fi
+}
+
+# ==============================================================================
 # Known subcommands (stubs for future implementation)
 # ==============================================================================
 
@@ -1407,7 +1592,17 @@ main() {
       cmd_drain "$@"
       exit 0
       ;;
-    pause|resume|stop|save|record|stop-record|mark|play|metrics)
+    save)
+      shift
+      cmd_save "$@"
+      exit $?
+      ;;
+    pause)
+      shift
+      cmd_pause "$@"
+      exit $?
+      ;;
+    resume|stop|record|stop-record|mark|play|metrics)
       echo "$cmd: not yet implemented"
       log_event "$cmd" "stub invoked"
       exit 0
