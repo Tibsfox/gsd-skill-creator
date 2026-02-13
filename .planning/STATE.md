@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.17 — Staging Layer
-Phase: 136 — Hygiene Trust and Reporting (in progress)
-Plan: 136-04 complete
-Status: Executing phase 136
-Last activity: 2026-02-13 — Completed 136-04 (finding actions and trust decay store)
+Phase: 136 — Hygiene Trust and Reporting (complete)
+Plan: 136-05 complete
+Status: Phase 136 complete
+Last activity: 2026-02-13 — Completed 136-05 (barrel index integration tests)
 
 ## Project Reference
 
@@ -143,6 +143,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Population stdDev (N not N-1) for length outlier detection in training coherence
 - Sliding window with match merging for verbatim copying detection (50-char minimum)
 - Sentence-level best-match averaging for overall similarity in copying detector
+- Non-critical finding selection for pipeline integration test (critical patterns locked at session, coherence findings as fallback)
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -173,15 +174,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 390 complete |
+| Total plans | 391 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 139-04-PLAN.md
-Stopped at: Plan 139-04 complete (training coherence and copying detection)
-Next action: Continue phase 139 (plan 139-05 remaining).
-Context: v1.17 Staging Layer. Phase 139 in progress. Training coherence checker and copying detector added to src/staging/derived/. 60 derived tests passing (22 new from 139-04).
+Last: 2026-02-13 — Completed 136-05-PLAN.md
+Stopped at: Plan 136-05 complete (barrel index integration tests, Phase 136 complete)
+Next action: Phase 136 complete. Continue with remaining phases.
+Context: v1.17 Staging Layer. Phase 136 complete (5 plans, 234 hygiene tests). All trust-and-reporting modules wired into barrel with full pipeline integration tests.
 
 ---
-*Last updated: 2026-02-13 (139-04 complete)*
+*Last updated: 2026-02-13 (136-05 complete)*
