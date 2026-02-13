@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { createHash } from 'crypto';
-import { mkdtemp, rm } from 'fs/promises';
+import { mkdtemp, rm, writeFile } from 'fs/promises';
 import { join } from 'path';
 import * as os from 'os';
 import { PatternStore } from '../storage/pattern-store.js';
@@ -292,5 +292,169 @@ describe('ScriptGenerator', () => {
 
     // The generated script must reference the actual file path from stored data
     expect(result.scriptContent).toContain('/deep/nested/path/file.tsx');
+  });
+
+  describe('dry-run validation', () => {
+    it('dry-run passes when script output matches expected output hash', async () => {
+      // Create a real temp file to cat
+      const testFilePath = join(tmpDir, 'test-file.txt');
+      const fileContent = 'hello world\n';
+      await writeFile(testFilePath, fileContent);
+
+      const expectedHash = createHash('sha256').update(fileContent).digest('hex');
+      const input = { file_path: testFilePath };
+      const inputHash = computeInputHash(input);
+
+      for (const sid of ['sess-1', 'sess-2', 'sess-3']) {
+        await storeBatch(store, sid, [
+          completePair('Read', input, fileContent, expectedHash, sid),
+        ]);
+      }
+
+      const candidate = makeCandidate('Read', inputHash);
+      const generated = await generator.generate(candidate);
+      const result = await generator.dryRun(generated);
+
+      expect(result.passed).toBe(true);
+      expect(result.actualOutputHash).toBe(result.expectedOutputHash);
+      expect(result.exitCode).toBe(0);
+      expect(result.failureReason).toBeNull();
+    });
+
+    it('dry-run fails when script output does not match expected hash', async () => {
+      // Create a file with different content than what was stored
+      const testFilePath = join(tmpDir, 'changed-file.txt');
+      await writeFile(testFilePath, 'new content\n');
+
+      const oldHash = createHash('sha256').update('old content\n').digest('hex');
+      const input = { file_path: testFilePath };
+      const inputHash = computeInputHash(input);
+
+      for (const sid of ['sess-1', 'sess-2', 'sess-3']) {
+        await storeBatch(store, sid, [
+          completePair('Read', input, 'old content\n', oldHash, sid),
+        ]);
+      }
+
+      const candidate = makeCandidate('Read', inputHash);
+      const generated = await generator.generate(candidate);
+      const result = await generator.dryRun(generated);
+
+      expect(result.passed).toBe(false);
+      expect(result.actualOutputHash).not.toBe(result.expectedOutputHash);
+      expect(result.failureReason).toMatch(/mismatch/i);
+    });
+
+    it('dry-run fails when script exits with non-zero code', async () => {
+      const input = { command: 'exit 1' };
+      const inputHash = computeInputHash(input);
+      const outputHash = createHash('sha256').update('').digest('hex');
+
+      for (const sid of ['sess-1', 'sess-2', 'sess-3']) {
+        await storeBatch(store, sid, [
+          completePair('Bash', input, '', outputHash, sid),
+        ]);
+      }
+
+      const candidate = makeCandidate('Bash', inputHash);
+      const generated = await generator.generate(candidate);
+      const result = await generator.dryRun(generated);
+
+      expect(result.passed).toBe(false);
+      expect(result.exitCode).not.toBe(0);
+      expect(result.failureReason).toMatch(/exit/i);
+    });
+
+    it('dry-run fails for invalid generated scripts (isValid=false)', async () => {
+      const input = { url: 'https://example.com' };
+      const inputHash = computeInputHash(input);
+
+      for (const sid of ['sess-1', 'sess-2', 'sess-3']) {
+        await storeBatch(store, sid, [
+          completePair('WebFetch', input, 'html', 'hash-web', sid),
+        ]);
+      }
+
+      const candidate = makeCandidate('WebFetch', inputHash);
+      const generated = await generator.generate(candidate);
+
+      expect(generated.isValid).toBe(false);
+
+      const result = await generator.dryRun(generated);
+
+      expect(result.passed).toBe(false);
+      expect(result.failureReason).toMatch(/invalid|unsupported/i);
+    });
+
+    it('dry-run for Bash tool compares stdout against stored output', async () => {
+      const input = { command: 'echo "deterministic output"' };
+      const inputHash = computeInputHash(input);
+      const expectedOutput = 'deterministic output\n';
+      const expectedHash = createHash('sha256').update(expectedOutput).digest('hex');
+
+      for (const sid of ['sess-1', 'sess-2', 'sess-3']) {
+        await storeBatch(store, sid, [
+          completePair('Bash', input, expectedOutput, expectedHash, sid),
+        ]);
+      }
+
+      const candidate = makeCandidate('Bash', inputHash);
+      const generated = await generator.generate(candidate);
+      const result = await generator.dryRun(generated);
+
+      expect(result.passed).toBe(true);
+    });
+
+    it('dry-run reports execution duration', async () => {
+      const testFilePath = join(tmpDir, 'duration-test.txt');
+      await writeFile(testFilePath, 'content\n');
+      const expectedHash = createHash('sha256').update('content\n').digest('hex');
+
+      const input = { file_path: testFilePath };
+      const inputHash = computeInputHash(input);
+
+      for (const sid of ['sess-1', 'sess-2', 'sess-3']) {
+        await storeBatch(store, sid, [
+          completePair('Read', input, 'content\n', expectedHash, sid),
+        ]);
+      }
+
+      const candidate = makeCandidate('Read', inputHash);
+      const generated = await generator.generate(candidate);
+      const result = await generator.dryRun(generated);
+
+      expect(typeof result.durationMs).toBe('number');
+      expect(result.durationMs).toBeGreaterThanOrEqual(0);
+    });
+
+    it('dry-run uses candidate stored output hash as expected hash', async () => {
+      const testFilePath = join(tmpDir, 'hash-test.txt');
+      const fileContent = 'expected content\n';
+      await writeFile(testFilePath, fileContent);
+      const expectedHash = createHash('sha256').update(fileContent).digest('hex');
+
+      const input = { file_path: testFilePath };
+      const inputHash = computeInputHash(input);
+
+      for (const sid of ['sess-1', 'sess-2', 'sess-3']) {
+        await storeBatch(store, sid, [
+          completePair('Read', input, fileContent, expectedHash, sid),
+        ]);
+      }
+
+      const candidate = makeCandidate('Read', inputHash);
+      const generated = await generator.generate(candidate);
+      const result = await generator.dryRun(generated);
+
+      expect(result.expectedOutputHash).toBe(expectedHash);
+    });
+  });
+
+  describe('barrel exports', () => {
+    it('exports ScriptGenerator and types from observation barrel', async () => {
+      const barrel = await import('./index.js');
+      expect(barrel.ScriptGenerator).toBeDefined();
+      expect(barrel.DEFAULT_SCRIPT_GENERATOR_CONFIG).toBeDefined();
+    });
   });
 });
