@@ -287,4 +287,213 @@ describe('LineageTracker', () => {
     expect(result.upstream.length).toBe(1);
     expect(result.downstream.length).toBe(1);
   });
+
+  describe('full pipeline integration', () => {
+    async function buildFullPipeline(t: LineageTracker): Promise<void> {
+      // Stage 1: Capture -- 3 observations from 3 sessions
+      await t.record({
+        artifactId: 'obs:sess1:Read:h1',
+        artifactType: 'observation',
+        stage: 'capture',
+        inputs: [],
+        outputs: ['pat:Read:h1'],
+        metadata: { sessionId: 'sess1', toolName: 'Read', inputHash: 'h1' },
+        timestamp: '2026-02-13T00:01:00Z',
+      });
+      await t.record({
+        artifactId: 'obs:sess2:Read:h1',
+        artifactType: 'observation',
+        stage: 'capture',
+        inputs: [],
+        outputs: ['pat:Read:h1'],
+        metadata: { sessionId: 'sess2', toolName: 'Read', inputHash: 'h1' },
+        timestamp: '2026-02-13T00:02:00Z',
+      });
+      await t.record({
+        artifactId: 'obs:sess3:Read:h1',
+        artifactType: 'observation',
+        stage: 'capture',
+        inputs: [],
+        outputs: ['pat:Read:h1'],
+        metadata: { sessionId: 'sess3', toolName: 'Read', inputHash: 'h1' },
+        timestamp: '2026-02-13T00:03:00Z',
+      });
+
+      // Stage 2: Analysis -- pattern from 3 observations
+      await t.record({
+        artifactId: 'pat:Read:h1',
+        artifactType: 'pattern',
+        stage: 'analysis',
+        inputs: ['obs:sess1:Read:h1', 'obs:sess2:Read:h1', 'obs:sess3:Read:h1'],
+        outputs: ['cand:Read:h1'],
+        metadata: { varianceScore: 0.0, determinism: 1.0, observationCount: 3 },
+        timestamp: '2026-02-13T00:04:00Z',
+      });
+
+      // Stage 3: Detection -- candidate from pattern
+      await t.record({
+        artifactId: 'cand:Read:h1',
+        artifactType: 'candidate',
+        stage: 'detection',
+        inputs: ['pat:Read:h1'],
+        outputs: ['script:Read:h1'],
+        metadata: { compositeScore: 0.88, frequency: 3, estimatedTokenSavings: 150 },
+        timestamp: '2026-02-13T00:05:00Z',
+      });
+
+      // Stage 4: Generation -- script from candidate
+      await t.record({
+        artifactId: 'script:Read:h1',
+        artifactType: 'script',
+        stage: 'generation',
+        inputs: ['cand:Read:h1'],
+        outputs: ['gate:Read:h1:t1'],
+        metadata: { scriptType: 'bash', isValid: true, tool: 'Read' },
+        timestamp: '2026-02-13T00:06:00Z',
+      });
+
+      // Stage 5: Gatekeeping -- decision on script
+      await t.record({
+        artifactId: 'gate:Read:h1:t1',
+        artifactType: 'decision',
+        stage: 'gatekeeping',
+        inputs: ['script:Read:h1'],
+        outputs: ['exec:Read:h1:t1'],
+        metadata: { approved: true, reasoning: ['Determinism 1.000 >= 0.95: passed'], determinism: 1.0, confidence: 0.88 },
+        timestamp: '2026-02-13T00:07:00Z',
+      });
+
+      // Stage 6: Feedback -- execution result
+      await t.record({
+        artifactId: 'exec:Read:h1:t1',
+        artifactType: 'execution',
+        stage: 'feedback',
+        inputs: ['gate:Read:h1:t1'],
+        outputs: [],
+        metadata: { matched: true, consecutiveMismatches: 0, operationId: 'Read:h1' },
+        timestamp: '2026-02-13T00:08:00Z',
+      });
+    }
+
+    it('getChain from candidate shows full upstream and downstream', async () => {
+      await buildFullPipeline(tracker);
+      const result = await tracker.getChain('cand:Read:h1');
+      expect(result.artifact.artifactId).toBe('cand:Read:h1');
+      expect(result.upstream.length).toBe(4); // pattern + 3 observations
+      expect(result.downstream.length).toBe(3); // script + decision + execution
+      const upIds = result.upstream.map(e => e.artifactId);
+      expect(upIds).toContain('pat:Read:h1');
+      expect(upIds).toContain('obs:sess1:Read:h1');
+      expect(upIds).toContain('obs:sess2:Read:h1');
+      expect(upIds).toContain('obs:sess3:Read:h1');
+      const downIds = result.downstream.map(e => e.artifactId);
+      expect(downIds).toContain('script:Read:h1');
+      expect(downIds).toContain('gate:Read:h1:t1');
+      expect(downIds).toContain('exec:Read:h1:t1');
+    });
+
+    it('getChain from observation traces all the way to execution', async () => {
+      await buildFullPipeline(tracker);
+      const result = await tracker.getChain('obs:sess1:Read:h1');
+      expect(result.upstream.length).toBe(0);
+      expect(result.downstream.length).toBe(5); // pattern + candidate + script + decision + execution
+    });
+
+    it('getChain from execution traces all the way back to observations', async () => {
+      await buildFullPipeline(tracker);
+      const result = await tracker.getChain('exec:Read:h1:t1');
+      expect(result.upstream.length).toBe(6); // decision + script + candidate + pattern + 3 observations
+      expect(result.downstream.length).toBe(0);
+    });
+
+    it('querying a script shows originating observations', async () => {
+      await buildFullPipeline(tracker);
+      const result = await tracker.getUpstream('script:Read:h1');
+      expect(result.filter(e => e.artifactType === 'candidate').length).toBe(1);
+      expect(result.filter(e => e.artifactType === 'pattern').length).toBe(1);
+      expect(result.filter(e => e.artifactType === 'observation').length).toBe(3);
+    });
+
+    it('querying an observation shows all downstream products', async () => {
+      await buildFullPipeline(tracker);
+      const result = await tracker.getDownstream('obs:sess1:Read:h1');
+      expect(result.length).toBe(5);
+      expect(result.map(e => e.artifactType)).toContain('pattern');
+      expect(result.map(e => e.artifactType)).toContain('candidate');
+      expect(result.map(e => e.artifactType)).toContain('script');
+      expect(result.map(e => e.artifactType)).toContain('decision');
+      expect(result.map(e => e.artifactType)).toContain('execution');
+    });
+
+    it('getByArtifactType() returns only entries of the specified type', async () => {
+      await buildFullPipeline(tracker);
+      const observations = await tracker.getByArtifactType('observation');
+      expect(observations.length).toBe(3);
+      expect(observations.every(e => e.artifactType === 'observation')).toBe(true);
+
+      const decisions = await tracker.getByArtifactType('decision');
+      expect(decisions.length).toBe(1);
+      expect(decisions[0].artifactId).toBe('gate:Read:h1:t1');
+    });
+
+    it('getByArtifactType() returns empty array for type with no entries', async () => {
+      await tracker.record(makeEntry({
+        artifactId: 'obs:s1:Read:h1',
+        artifactType: 'observation',
+        stage: 'capture',
+      }));
+      const result = await tracker.getByArtifactType('execution');
+      expect(result.length).toBe(0);
+    });
+  });
+
+  describe('cycle safety', () => {
+    it('handles cycles without infinite recursion', async () => {
+      await tracker.record(makeEntry({
+        artifactId: 'a',
+        artifactType: 'observation',
+        stage: 'capture',
+        inputs: ['b'],
+        outputs: ['b'],
+      }));
+      await tracker.record(makeEntry({
+        artifactId: 'b',
+        artifactType: 'pattern',
+        stage: 'analysis',
+        inputs: ['a'],
+        outputs: ['a'],
+      }));
+
+      const upstream = await tracker.getUpstream('a');
+      expect(upstream.length).toBeLessThanOrEqual(1);
+      expect(upstream.map(e => e.artifactId)).toContain('b');
+
+      const downstream = await tracker.getDownstream('a');
+      expect(downstream.length).toBeLessThanOrEqual(1);
+    });
+
+    it('handles self-referencing entries without infinite recursion', async () => {
+      await tracker.record(makeEntry({
+        artifactId: 'self',
+        artifactType: 'observation',
+        stage: 'capture',
+        inputs: ['self'],
+        outputs: ['self'],
+      }));
+
+      const upstream = await tracker.getUpstream('self');
+      const downstream = await tracker.getDownstream('self');
+      // Should not hang -- bounded result
+      expect(upstream.length).toBeLessThanOrEqual(1);
+      expect(downstream.length).toBeLessThanOrEqual(1);
+    });
+  });
+
+  describe('barrel exports', () => {
+    it('exports LineageTracker and lineage types from observation barrel', async () => {
+      const barrel = await import('./index.js');
+      expect(barrel.LineageTracker).toBeDefined();
+      expect(typeof barrel.LineageTracker).toBe('function');
+    });
+  });
 });
