@@ -92,7 +92,7 @@ async function writeDecomposedSkill(
   const decomposer = new ContentDecomposer();
   const decomposed = decomposer.decompose(
     name,
-    metadata as Parameters<typeof decomposer.decompose>[1],
+    metadata as unknown as Parameters<typeof decomposer.decompose>[1],
     body,
   );
 

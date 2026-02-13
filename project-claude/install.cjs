@@ -10,6 +10,7 @@ const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
 const force = args.includes('--force');
 const quiet = args.includes('--quiet');
+const uninstall = args.includes('--uninstall');
 
 // --- Paths ---
 const projectRoot = path.resolve(__dirname, '..');
@@ -238,6 +239,318 @@ function installSettings(entry) {
   }
 }
 
+// --- Integration config install ---
+function installIntegrationConfig() {
+  const targetPath = path.join(projectRoot, '.planning', 'skill-creator.json');
+
+  if (fs.existsSync(targetPath)) {
+    log('  = preserved: .planning/skill-creator.json (user config)');
+    stats.current++;
+    return;
+  }
+
+  const defaultConfig = {
+    integration: {
+      auto_load_skills: true,
+      observe_sessions: true,
+      phase_transition_hooks: true,
+      suggest_on_session_start: true,
+      install_git_hooks: true,
+      wrapper_commands: true
+    },
+    token_budget: {
+      max_percent: 5,
+      warn_at_percent: 4
+    },
+    observation: {
+      retention_days: 90,
+      max_entries: 1000,
+      capture_corrections: true
+    },
+    suggestions: {
+      min_occurrences: 3,
+      cooldown_days: 7,
+      auto_dismiss_after_days: 30
+    }
+  };
+
+  if (!dryRun) {
+    ensureDir(targetPath);
+    fs.writeFileSync(targetPath, JSON.stringify(defaultConfig, null, 2) + '\n');
+  }
+  log('  + installed: .planning/skill-creator.json');
+  stats.installed++;
+}
+
+// --- Patterns directory install ---
+function installPatternsDir() {
+  const targetDir = path.join(projectRoot, '.planning', 'patterns');
+
+  if (fs.existsSync(targetDir)) {
+    log('  = current:   .planning/patterns/');
+    stats.current++;
+    return;
+  }
+
+  if (!dryRun) {
+    fs.mkdirSync(targetDir, { recursive: true });
+  }
+  log('  + installed: .planning/patterns/');
+  stats.installed++;
+}
+
+// --- Gitignore update ---
+function updateGitignore() {
+  const targetPath = path.join(projectRoot, '.gitignore');
+  const content = readFileSafe(targetPath) || '';
+
+  // Check if .planning/ is already a blanket ignore (covers patterns)
+  const lines = content.split('\n');
+  const hasBlanketPlanning = lines.some(line => {
+    const trimmed = line.trim();
+    return trimmed === '.planning/' || trimmed === '.planning';
+  });
+
+  if (hasBlanketPlanning) {
+    log('  = current:   .gitignore (.planning/ covers patterns)');
+    stats.current++;
+    return;
+  }
+
+  // Check if .planning/patterns/ is explicitly listed
+  const hasPatternsEntry = lines.some(line => {
+    const trimmed = line.trim();
+    return trimmed === '.planning/patterns/' || trimmed === '.planning/patterns';
+  });
+
+  if (hasPatternsEntry) {
+    log('  = current:   .gitignore (.planning/patterns/)');
+    stats.current++;
+    return;
+  }
+
+  // Append entry
+  if (!dryRun) {
+    const addition = '\n# Skill-creator observation data\n.planning/patterns/\n';
+    fs.writeFileSync(targetPath, content.trimEnd() + addition);
+  }
+  log('  + updated:   .gitignore (.planning/patterns/ added)');
+  stats.updated++;
+}
+
+// --- Git hook install ---
+function installGitHook() {
+  const sourcePath = path.join(sourceDir, 'hooks', 'post-commit');
+  const targetPath = path.join(projectRoot, '.git', 'hooks', 'post-commit');
+
+  // Read source hook
+  const sourceContent = readFileSafe(sourcePath);
+  if (sourceContent === null) {
+    warn('Hook source missing: hooks/post-commit');
+    return;
+  }
+
+  // Check for .git directory
+  const gitDir = path.join(projectRoot, '.git');
+  if (!fs.existsSync(gitDir)) {
+    warn('Not a git repository (.git/ not found)');
+    return;
+  }
+
+  // Ensure .git/hooks/ exists
+  const hooksDir = path.join(gitDir, 'hooks');
+  if (!fs.existsSync(hooksDir)) {
+    if (!dryRun) {
+      fs.mkdirSync(hooksDir, { recursive: true });
+    }
+  }
+
+  // Check existing target
+  const targetContent = readFileSafe(targetPath);
+
+  if (targetContent !== null) {
+    // Target exists — compare
+    if (sha256(sourceContent) === sha256(targetContent)) {
+      log('  = current:   .git/hooks/post-commit');
+      stats.current++;
+      return;
+    }
+
+    // Different content — backup and update
+    const timestamp = Date.now();
+    const backupPath = targetPath + '.bak.' + timestamp;
+    if (!dryRun) {
+      fs.writeFileSync(backupPath, targetContent);
+    }
+    log(`  ~ backup:    .git/hooks/post-commit.bak.${timestamp}`);
+
+    if (!dryRun) {
+      fs.writeFileSync(targetPath, sourceContent);
+      fs.chmodSync(targetPath, 0o755);
+    }
+    log('  ↻ updated:   .git/hooks/post-commit');
+    stats.updated++;
+  } else {
+    // Target does not exist — fresh install
+    if (!dryRun) {
+      fs.writeFileSync(targetPath, sourceContent);
+      fs.chmodSync(targetPath, 0o755);
+    }
+    log('  + installed: .git/hooks/post-commit');
+    stats.installed++;
+  }
+}
+
+// --- Validation ---
+function validateInstallation() {
+  log('Validation:');
+
+  const checks = [
+    // Slash commands
+    { name: 'sc:start', path: '.claude/commands/sc/start.md' },
+    { name: 'sc:status', path: '.claude/commands/sc/status.md' },
+    { name: 'sc:suggest', path: '.claude/commands/sc/suggest.md' },
+    { name: 'sc:observe', path: '.claude/commands/sc/observe.md' },
+    { name: 'sc:digest', path: '.claude/commands/sc/digest.md' },
+    { name: 'sc:wrap', path: '.claude/commands/sc/wrap.md' },
+    // Wrapper commands
+    { name: 'wrap:execute', path: '.claude/commands/wrap/execute.md' },
+    { name: 'wrap:verify', path: '.claude/commands/wrap/verify.md' },
+    { name: 'wrap:plan', path: '.claude/commands/wrap/plan.md' },
+    { name: 'wrap:phase', path: '.claude/commands/wrap/phase.md' },
+    // Agent
+    { name: 'observer agent', path: '.claude/agents/observer.md' },
+    // Config
+    { name: 'integration config', path: '.planning/skill-creator.json' },
+  ];
+
+  let ok = 0;
+  let missing = 0;
+
+  for (const check of checks) {
+    const fullPath = path.join(projectRoot, check.path);
+    if (fs.existsSync(fullPath)) {
+      log(`  ✓ ${check.name}`);
+      ok++;
+    } else {
+      log(`  ✗ ${check.name} — missing: ${check.path}`);
+      missing++;
+    }
+  }
+
+  // Check patterns directory
+  const patternsDir = path.join(projectRoot, '.planning', 'patterns');
+  if (fs.existsSync(patternsDir)) {
+    log('  ✓ patterns directory');
+    ok++;
+  } else {
+    log('  ✗ patterns directory — missing: .planning/patterns/');
+    missing++;
+  }
+
+  // Check git hook
+  const hookPath = path.join(projectRoot, '.git', 'hooks', 'post-commit');
+  if (fs.existsSync(hookPath)) {
+    log('  ✓ post-commit hook');
+    ok++;
+  } else {
+    log('  ✗ post-commit hook — missing: .git/hooks/post-commit');
+    missing++;
+  }
+
+  // Check .gitignore
+  const gitignorePath = path.join(projectRoot, '.gitignore');
+  const gitignoreContent = readFileSafe(gitignorePath) || '';
+  if (gitignoreContent.includes('.planning/patterns/') || gitignoreContent.includes('.planning/')) {
+    log('  ✓ .gitignore (patterns excluded)');
+    ok++;
+  } else {
+    log('  ✗ .gitignore — .planning/patterns/ not excluded');
+    missing++;
+  }
+
+  log('');
+  log(`Validation: ${ok} ok, ${missing} missing`);
+
+  return missing === 0;
+}
+
+// --- Uninstall integration ---
+function uninstallIntegration() {
+  const prefix = dryRun ? '[DRY RUN] ' : '';
+  log(`${prefix}Uninstalling integration components...\n`);
+
+  const integrationTargets = {
+    dirs: [
+      '.claude/commands/sc',
+      '.claude/commands/wrap',
+    ],
+    files: [
+      '.claude/agents/observer.md',
+      '.planning/skill-creator.json',
+    ],
+  };
+
+  let removed = 0;
+  let notFound = 0;
+  let skipped = 0;
+
+  // Remove directories
+  for (const dir of integrationTargets.dirs) {
+    const fullPath = path.join(projectRoot, dir);
+    if (fs.existsSync(fullPath)) {
+      if (!dryRun) {
+        fs.rmSync(fullPath, { recursive: true, force: true });
+      }
+      log(`  - removed:   ${dir}/`);
+      removed++;
+    } else {
+      log(`  . not found: ${dir}/`);
+      notFound++;
+    }
+  }
+
+  // Remove files
+  for (const file of integrationTargets.files) {
+    const fullPath = path.join(projectRoot, file);
+    if (fs.existsSync(fullPath)) {
+      if (!dryRun) {
+        fs.unlinkSync(fullPath);
+      }
+      log(`  - removed:   ${file}`);
+      removed++;
+    } else {
+      log(`  . not found: ${file}`);
+      notFound++;
+    }
+  }
+
+  // Remove git hook (only if it's ours)
+  const hookPath = path.join(projectRoot, '.git', 'hooks', 'post-commit');
+  const hookContent = readFileSafe(hookPath);
+  if (hookContent !== null) {
+    if (hookContent.includes('GSD skill-creator post-commit hook')) {
+      if (!dryRun) {
+        fs.unlinkSync(hookPath);
+      }
+      log('  - removed:   .git/hooks/post-commit');
+      removed++;
+    } else {
+      log('  ~ skipped:   .git/hooks/post-commit (not ours)');
+      skipped++;
+    }
+  } else {
+    log('  . not found: .git/hooks/post-commit');
+    notFound++;
+  }
+
+  log('');
+  log('  Preserved: .planning/patterns/ (observation data)');
+
+  log('');
+  log(`${prefix}Uninstall complete: ${removed} removed, ${notFound} not found, ${skipped} skipped`);
+}
+
 // --- Main ---
 function main() {
   // Verify .claude/ exists
@@ -260,6 +573,11 @@ function main() {
   } catch {
     console.error('Error: manifest.json is not valid JSON');
     process.exit(1);
+  }
+
+  if (uninstall) {
+    uninstallIntegration();
+    return;
   }
 
   const prefix = dryRun ? '[DRY RUN] ' : '';
@@ -290,6 +608,22 @@ function main() {
     log('');
   }
 
+  // Install integration config
+  log('Integration:');
+  installIntegrationConfig();
+  log('');
+
+  // Install patterns directory
+  log('Patterns:');
+  installPatternsDir();
+  updateGitignore();
+  log('');
+
+  // Install git hook
+  log('Git hooks:');
+  installGitHook();
+  log('');
+
   // Summary
   const total = stats.installed + stats.updated + stats.current + stats.warnings;
   log('─'.repeat(50));
@@ -299,8 +633,20 @@ function main() {
     log('\n(Dry run — no files were modified)');
   }
 
-  if (stats.warnings > 0) {
-    process.exit(1);
+  // Validation (skip during dry-run since nothing was actually installed)
+  if (!dryRun) {
+    log('');
+    const valid = validateInstallation();
+    if (!valid) {
+      log('\nSome components are missing. Run without --dry-run to install.');
+    }
+    if (stats.warnings > 0 || !valid) {
+      process.exit(1);
+    }
+  } else {
+    if (stats.warnings > 0) {
+      process.exit(1);
+    }
   }
 }
 
