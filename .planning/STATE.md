@@ -3,9 +3,9 @@
 ## Current Position
 
 Milestone: v1.16 -- Dashboard Console & Milestone Ingestion
-Phase: 129-filesystem-bridge-upload-configuration (plans 01,03,04 complete, executing)
-Status: Executing phase 129
-Last activity: 2026-02-13 -- Completed 129-04 (milestone config schema + config form)
+Phase: 129-filesystem-bridge-upload-configuration (all 5 plans complete)
+Status: Phase 129 complete
+Last activity: 2026-02-13 -- Completed 129-05 (submit flow + barrel exports)
 
 Progress: [░░░░░░░░░░░░░░░░] 0/5 phases (128 in progress)
 
@@ -50,12 +50,18 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - Subdirectory allowlist via Set (inbox/pending, config, uploads) -- explicit, no regex bypass risk
 - Explicit section-level defaults in Zod schema (not empty objects) to ensure nested defaults apply correctly
 - mergeDefaults() function for shallow+nested merge of partial config overrides in form renderer
+- appendFile for JSONL concurrent safety (atomic for small writes, one line per entry)
+- Cached mkdir (dirEnsured flag) to avoid redundant filesystem calls after first logger write
+- safeLog wrapper swallows logger errors to prevent HTTP 500 from audit logging
+- Component composition via function calls for submit flow (renderUploadZone + renderConfigForm inlined)
+- setInterval polling at 500ms for submit readiness check (avoids cross-component event coupling)
+- Two-stage fetch pattern: config write first, milestone-submit message only on config success
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
-- Console module: src/console/ (message types/schemas, reader, writer, helper endpoint, check-inbox integration tests)
+- Console module: src/console/ (message types/schemas, reader, writer, helper endpoint, bridge-logger, check-inbox integration tests)
 - Scripts module (new): scripts/console/ (check-inbox.sh for session-side inbox polling)
 - gsd-stack session management: bash scripts with tmux integration (v1.13)
 - v1.14 promotion pipeline: src/pipeline/ + src/dashboard/collectors/
@@ -81,10 +87,10 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Completed 129-04 (milestone config schema + config form)
-Stopped at: Completed 129-04-PLAN.md execution
-Next action: Continue executing phase 129 plans (129-02, 129-05)
-Context: MilestoneConfigSchema validates 7 sections with Zod. Config form renders all controls with client-side JSON collection. 54 tests passing across milestone-config + config-form. Ready for 129-05 (submit flow).
+Last: 2026-02-13 -- Completed 129-05 (submit flow + barrel exports)
+Stopped at: Completed 129-05-PLAN.md execution -- phase 129 complete
+Next action: Proceed to next phase or milestone verification
+Context: Submit flow composes upload zone + config form + submit button. Two-stage fetch writes config then milestone-submit message. 15 submit-flow tests, 120 console tests, all passing. Console barrel exports complete for all phase 129 modules. Phase 129 fully complete (5/5 plans done).
 
 ---
-*Last updated: 2026-02-13 (129-04 complete)*
+*Last updated: 2026-02-13 (129-05 complete, phase 129 done)*
