@@ -1,22 +1,22 @@
 /**
- * Tests for the chip registry and four-chip definitions.
+ * Tests for the engine registry and four engine definitions.
  *
  * Validates:
- * - Default registry contains four chips: Agnus, Denise, Paula, Gary
- * - Each chip has correct domain, description, and DMA allocation
- * - DMA allocations sum to 100%
- * - ChipRegistry provides get/getByDomain/all/register operations
+ * - Default registry contains four engines: context, render, io, router
+ * - Each engine has correct domain, description, and budget allocation
+ * - Budget allocations sum to 100%
+ * - EngineRegistry provides get/getByDomain/all/register operations
  * - Duplicate registration throws
  */
 
 import { describe, it, expect } from 'vitest';
 import {
-  ChipRegistry,
+  EngineRegistry,
   createDefaultRegistry,
-  AGNUS,
-  DENISE,
-  PAULA,
-  GARY,
+  CONTEXT_ENGINE,
+  RENDER_ENGINE,
+  IO_ENGINE,
+  ROUTER_ENGINE,
 } from './chip-registry.js';
 
 // ============================================================================
@@ -24,138 +24,138 @@ import {
 // ============================================================================
 
 describe('createDefaultRegistry', () => {
-  it('returns registry with exactly 4 chips', () => {
+  it('returns registry with exactly 4 engines', () => {
     const registry = createDefaultRegistry();
     expect(registry.all()).toHaveLength(4);
   });
 
-  it('contains chips named agnus, denise, paula, gary', () => {
+  it('contains engines named context-engine, render-engine, io-engine, router-engine', () => {
     const registry = createDefaultRegistry();
     const names = registry.all().map((c) => c.name);
-    expect(names).toContain('agnus');
-    expect(names).toContain('denise');
-    expect(names).toContain('paula');
-    expect(names).toContain('gary');
+    expect(names).toContain('context-engine');
+    expect(names).toContain('render-engine');
+    expect(names).toContain('io-engine');
+    expect(names).toContain('router-engine');
   });
 });
 
 // ============================================================================
-// AGNUS chip definition
+// CONTEXT_ENGINE definition
 // ============================================================================
 
-describe('AGNUS chip definition', () => {
-  it('has name agnus', () => {
-    expect(AGNUS.name).toBe('agnus');
+describe('CONTEXT_ENGINE definition', () => {
+  it('has name context-engine', () => {
+    expect(CONTEXT_ENGINE.name).toBe('context-engine');
   });
 
   it('has domain context', () => {
-    expect(AGNUS.domain).toBe('context');
+    expect(CONTEXT_ENGINE.domain).toBe('context');
   });
 
   it('description contains context or scheduling', () => {
-    expect(AGNUS.description).toMatch(/context|scheduling/i);
+    expect(CONTEXT_ENGINE.description).toMatch(/context|scheduling/i);
   });
 
   it('has dma percentage of 60', () => {
-    expect(AGNUS.dma.percentage).toBe(60);
+    expect(CONTEXT_ENGINE.dma.percentage).toBe(60);
   });
 
   it('has port declarations (at least one)', () => {
-    expect(AGNUS.ports.length).toBeGreaterThanOrEqual(1);
+    expect(CONTEXT_ENGINE.ports.length).toBeGreaterThanOrEqual(1);
   });
 });
 
 // ============================================================================
-// DENISE chip definition
+// RENDER_ENGINE definition
 // ============================================================================
 
-describe('DENISE chip definition', () => {
-  it('has name denise', () => {
-    expect(DENISE.name).toBe('denise');
+describe('RENDER_ENGINE definition', () => {
+  it('has name render-engine', () => {
+    expect(RENDER_ENGINE.name).toBe('render-engine');
   });
 
   it('has domain output', () => {
-    expect(DENISE.domain).toBe('output');
+    expect(RENDER_ENGINE.domain).toBe('output');
   });
 
   it('description contains output or rendering', () => {
-    expect(DENISE.description).toMatch(/output|rendering/i);
+    expect(RENDER_ENGINE.description).toMatch(/output|rendering/i);
   });
 
   it('has dma percentage of 15', () => {
-    expect(DENISE.dma.percentage).toBe(15);
+    expect(RENDER_ENGINE.dma.percentage).toBe(15);
   });
 });
 
 // ============================================================================
-// PAULA chip definition
+// IO_ENGINE definition
 // ============================================================================
 
-describe('PAULA chip definition', () => {
-  it('has name paula', () => {
-    expect(PAULA.name).toBe('paula');
+describe('IO_ENGINE definition', () => {
+  it('has name io-engine', () => {
+    expect(IO_ENGINE.name).toBe('io-engine');
   });
 
   it('has domain io', () => {
-    expect(PAULA.domain).toBe('io');
+    expect(IO_ENGINE.domain).toBe('io');
   });
 
   it('description contains I/O or event', () => {
-    expect(PAULA.description).toMatch(/I\/O|event/i);
+    expect(IO_ENGINE.description).toMatch(/I\/O|event/i);
   });
 
   it('has dma percentage of 15', () => {
-    expect(PAULA.dma.percentage).toBe(15);
+    expect(IO_ENGINE.dma.percentage).toBe(15);
   });
 });
 
 // ============================================================================
-// GARY chip definition
+// ROUTER_ENGINE definition
 // ============================================================================
 
-describe('GARY chip definition', () => {
-  it('has name gary', () => {
-    expect(GARY.name).toBe('gary');
+describe('ROUTER_ENGINE definition', () => {
+  it('has name router-engine', () => {
+    expect(ROUTER_ENGINE.name).toBe('router-engine');
   });
 
   it('has domain glue', () => {
-    expect(GARY.domain).toBe('glue');
+    expect(ROUTER_ENGINE.domain).toBe('glue');
   });
 
   it('description contains glue or integration', () => {
-    expect(GARY.description).toMatch(/glue|integration/i);
+    expect(ROUTER_ENGINE.description).toMatch(/glue|integration/i);
   });
 
   it('has dma percentage of 10', () => {
-    expect(GARY.dma.percentage).toBe(10);
+    expect(ROUTER_ENGINE.dma.percentage).toBe(10);
   });
 });
 
 // ============================================================================
-// DMA allocations
+// Budget allocations
 // ============================================================================
 
-describe('DMA allocations', () => {
+describe('Budget allocations', () => {
   it('sum to 100%', () => {
     const total =
-      AGNUS.dma.percentage +
-      DENISE.dma.percentage +
-      PAULA.dma.percentage +
-      GARY.dma.percentage;
+      CONTEXT_ENGINE.dma.percentage +
+      RENDER_ENGINE.dma.percentage +
+      IO_ENGINE.dma.percentage +
+      ROUTER_ENGINE.dma.percentage;
     expect(total).toBe(100);
   });
 });
 
 // ============================================================================
-// ChipRegistry.get
+// EngineRegistry.get
 // ============================================================================
 
-describe('ChipRegistry.get', () => {
-  it('returns chip by name', () => {
+describe('EngineRegistry.get', () => {
+  it('returns engine by name', () => {
     const registry = createDefaultRegistry();
-    const agnus = registry.get('agnus');
-    expect(agnus).toBeDefined();
-    expect(agnus!.name).toBe('agnus');
+    const engine = registry.get('context-engine');
+    expect(engine).toBeDefined();
+    expect(engine!.name).toBe('context-engine');
   });
 
   it('returns undefined for nonexistent name', () => {
@@ -165,56 +165,56 @@ describe('ChipRegistry.get', () => {
 });
 
 // ============================================================================
-// ChipRegistry.getByDomain
+// EngineRegistry.getByDomain
 // ============================================================================
 
-describe('ChipRegistry.getByDomain', () => {
-  it('returns AGNUS for domain context', () => {
+describe('EngineRegistry.getByDomain', () => {
+  it('returns CONTEXT_ENGINE for domain context', () => {
     const registry = createDefaultRegistry();
-    const chip = registry.getByDomain('context');
-    expect(chip).toBeDefined();
-    expect(chip!.name).toBe('agnus');
+    const engine = registry.getByDomain('context');
+    expect(engine).toBeDefined();
+    expect(engine!.name).toBe('context-engine');
   });
 
-  it('returns DENISE for domain output', () => {
+  it('returns RENDER_ENGINE for domain output', () => {
     const registry = createDefaultRegistry();
-    const chip = registry.getByDomain('output');
-    expect(chip).toBeDefined();
-    expect(chip!.name).toBe('denise');
+    const engine = registry.getByDomain('output');
+    expect(engine).toBeDefined();
+    expect(engine!.name).toBe('render-engine');
   });
 });
 
 // ============================================================================
-// ChipRegistry.all
+// EngineRegistry.all
 // ============================================================================
 
-describe('ChipRegistry.all', () => {
+describe('EngineRegistry.all', () => {
   it('returns array of length 4', () => {
     const registry = createDefaultRegistry();
     expect(registry.all()).toHaveLength(4);
   });
 
-  it('contains all four chip names', () => {
+  it('contains all four engine names', () => {
     const registry = createDefaultRegistry();
     const names = registry.all().map((c) => c.name);
-    expect(names).toContain('agnus');
-    expect(names).toContain('denise');
-    expect(names).toContain('paula');
-    expect(names).toContain('gary');
+    expect(names).toContain('context-engine');
+    expect(names).toContain('render-engine');
+    expect(names).toContain('io-engine');
+    expect(names).toContain('router-engine');
   });
 });
 
 // ============================================================================
-// ChipRegistry.register
+// EngineRegistry.register
 // ============================================================================
 
-describe('ChipRegistry.register', () => {
-  it('adds a custom chip that can be retrieved', () => {
+describe('EngineRegistry.register', () => {
+  it('adds a custom engine that can be retrieved', () => {
     const registry = createDefaultRegistry();
     registry.register({
       name: 'custom',
       domain: 'glue',
-      description: 'A custom glue chip',
+      description: 'A custom glue engine',
       dma: { percentage: 5 },
       ports: [],
       signalMask: { allocated: 0 },
@@ -228,7 +228,7 @@ describe('ChipRegistry.register', () => {
     const registry = createDefaultRegistry();
     expect(() =>
       registry.register({
-        name: 'agnus',
+        name: 'context-engine',
         domain: 'context',
         description: 'Duplicate',
         dma: { percentage: 5 },

@@ -1,50 +1,50 @@
 /**
- * Tests for chip definition types and Zod schemas.
+ * Tests for engine definition types and Zod schemas.
  *
- * Validates the type foundation for the team-as-chip framework:
- * - CHIP_DOMAINS constant and ChipDomain type
- * - DmaAllocationSchema (percentage 0-100 with description)
+ * Validates the type foundation for the team-as-engine framework:
+ * - ENGINE_DOMAINS constant and EngineDomain type
+ * - BudgetAllocationSchema (percentage 0-100 with description)
  * - PortDeclarationSchema (name, direction, optional messageTypes)
  * - SignalMaskSchema (32-bit allocated mask with optional labels)
- * - ChipDefinitionSchema (complete chip definition with defaults)
+ * - EngineDefinitionSchema (complete engine definition with defaults)
  * - SYSTEM_SIGNAL_BITS and USER_SIGNAL_BITS constants
  */
 
 import { describe, it, expect } from 'vitest';
 import {
-  CHIP_DOMAINS,
-  DmaAllocationSchema,
+  ENGINE_DOMAINS,
+  BudgetAllocationSchema,
   PortDeclarationSchema,
   SignalMaskSchema,
-  ChipDefinitionSchema,
+  EngineDefinitionSchema,
   SYSTEM_SIGNAL_BITS,
   USER_SIGNAL_BITS,
 } from './types.js';
 
 // ============================================================================
-// CHIP_DOMAINS
+// ENGINE_DOMAINS
 // ============================================================================
 
-describe('CHIP_DOMAINS', () => {
+describe('ENGINE_DOMAINS', () => {
   it('contains exactly 4 entries', () => {
-    expect(CHIP_DOMAINS).toHaveLength(4);
+    expect(ENGINE_DOMAINS).toHaveLength(4);
   });
 
   it('contains context, output, io, and glue', () => {
-    expect(CHIP_DOMAINS).toContain('context');
-    expect(CHIP_DOMAINS).toContain('output');
-    expect(CHIP_DOMAINS).toContain('io');
-    expect(CHIP_DOMAINS).toContain('glue');
+    expect(ENGINE_DOMAINS).toContain('context');
+    expect(ENGINE_DOMAINS).toContain('output');
+    expect(ENGINE_DOMAINS).toContain('io');
+    expect(ENGINE_DOMAINS).toContain('glue');
   });
 });
 
 // ============================================================================
-// DmaAllocationSchema
+// BudgetAllocationSchema
 // ============================================================================
 
-describe('DmaAllocationSchema', () => {
+describe('BudgetAllocationSchema', () => {
   it('parses valid allocation with percentage and description', () => {
-    const result = DmaAllocationSchema.parse({
+    const result = BudgetAllocationSchema.parse({
       percentage: 60,
       description: 'Phase-critical context budget',
     });
@@ -52,31 +52,31 @@ describe('DmaAllocationSchema', () => {
     expect(result.description).toBe('Phase-critical context budget');
   });
 
-  it('parses percentage of 60 (Agnus level)', () => {
-    const result = DmaAllocationSchema.parse({ percentage: 60 });
+  it('parses percentage of 60 (context-engine level)', () => {
+    const result = BudgetAllocationSchema.parse({ percentage: 60 });
     expect(result.percentage).toBe(60);
   });
 
   it('parses percentage of 0 (edge case)', () => {
-    const result = DmaAllocationSchema.parse({ percentage: 0 });
+    const result = BudgetAllocationSchema.parse({ percentage: 0 });
     expect(result.percentage).toBe(0);
   });
 
   it('parses percentage of 100 (edge case)', () => {
-    const result = DmaAllocationSchema.parse({ percentage: 100 });
+    const result = BudgetAllocationSchema.parse({ percentage: 100 });
     expect(result.percentage).toBe(100);
   });
 
   it('rejects negative percentage', () => {
-    expect(() => DmaAllocationSchema.parse({ percentage: -1 })).toThrow();
+    expect(() => BudgetAllocationSchema.parse({ percentage: -1 })).toThrow();
   });
 
   it('rejects percentage over 100', () => {
-    expect(() => DmaAllocationSchema.parse({ percentage: 101 })).toThrow();
+    expect(() => BudgetAllocationSchema.parse({ percentage: 101 })).toThrow();
   });
 
   it('rejects missing percentage', () => {
-    expect(() => DmaAllocationSchema.parse({})).toThrow();
+    expect(() => BudgetAllocationSchema.parse({})).toThrow();
   });
 });
 
@@ -176,30 +176,30 @@ describe('SignalMaskSchema', () => {
 });
 
 // ============================================================================
-// ChipDefinitionSchema
+// EngineDefinitionSchema
 // ============================================================================
 
-describe('ChipDefinitionSchema', () => {
-  it('parses valid chip with all fields', () => {
-    const result = ChipDefinitionSchema.parse({
-      name: 'agnus',
+describe('EngineDefinitionSchema', () => {
+  it('parses valid engine with all fields', () => {
+    const result = EngineDefinitionSchema.parse({
+      name: 'context-engine',
       domain: 'context',
       description: 'Context management and scheduling',
       dma: { percentage: 60, description: 'Phase-critical budget' },
       ports: [{ name: 'context-request', direction: 'in' }],
       signalMask: { allocated: 0x00010000, labels: { ready: 16 } },
     });
-    expect(result.name).toBe('agnus');
+    expect(result.name).toBe('context-engine');
     expect(result.domain).toBe('context');
     expect(result.ports).toHaveLength(1);
     expect(result.signalMask.allocated).toBe(0x00010000);
   });
 
-  it('parses valid chip with minimal fields (ports and signalMask optional)', () => {
-    const result = ChipDefinitionSchema.parse({
+  it('parses valid engine with minimal fields (ports and signalMask optional)', () => {
+    const result = EngineDefinitionSchema.parse({
       name: 'test',
       domain: 'glue',
-      description: 'A test chip',
+      description: 'A test engine',
       dma: { percentage: 10 },
     });
     expect(result.name).toBe('test');
@@ -209,7 +209,7 @@ describe('ChipDefinitionSchema', () => {
 
   it('rejects missing name', () => {
     expect(() =>
-      ChipDefinitionSchema.parse({
+      EngineDefinitionSchema.parse({
         domain: 'context',
         description: 'No name',
         dma: { percentage: 10 },
@@ -219,7 +219,7 @@ describe('ChipDefinitionSchema', () => {
 
   it('rejects missing domain', () => {
     expect(() =>
-      ChipDefinitionSchema.parse({
+      EngineDefinitionSchema.parse({
         name: 'test',
         description: 'No domain',
         dma: { percentage: 10 },
@@ -229,7 +229,7 @@ describe('ChipDefinitionSchema', () => {
 
   it('rejects invalid domain value', () => {
     expect(() =>
-      ChipDefinitionSchema.parse({
+      EngineDefinitionSchema.parse({
         name: 'test',
         domain: 'invalid',
         description: 'Bad domain',
@@ -240,16 +240,16 @@ describe('ChipDefinitionSchema', () => {
 
   it('rejects missing dma', () => {
     expect(() =>
-      ChipDefinitionSchema.parse({
+      EngineDefinitionSchema.parse({
         name: 'test',
         domain: 'context',
-        description: 'No DMA',
+        description: 'No budget',
       })
     ).toThrow();
   });
 
   it('defaults ports to empty array when not provided', () => {
-    const result = ChipDefinitionSchema.parse({
+    const result = EngineDefinitionSchema.parse({
       name: 'test',
       domain: 'io',
       description: 'Test',
@@ -259,7 +259,7 @@ describe('ChipDefinitionSchema', () => {
   });
 
   it('defaults signalMask to { allocated: 0 } when not provided', () => {
-    const result = ChipDefinitionSchema.parse({
+    const result = EngineDefinitionSchema.parse({
       name: 'test',
       domain: 'output',
       description: 'Test',

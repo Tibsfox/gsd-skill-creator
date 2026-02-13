@@ -1,56 +1,56 @@
 /**
- * Chip definition type system for the team-as-chip framework.
+ * Engine definition type system for the team-as-engine framework.
  *
- * Defines Zod schemas and TypeScript types for chip domains, DMA channel
- * token budget allocation, message port declarations, 32-bit signal masks,
- * and complete chip definitions. These types model specialized coprocessors
- * (Agnus, Denise, Paula, Gary) with domain ownership boundaries.
+ * Defines Zod schemas and TypeScript types for engine domains, budget
+ * allocation, message port declarations, 32-bit signal masks, and
+ * complete engine definitions. These types model specialized coprocessor
+ * engines (context, render, io, router) with domain ownership boundaries.
  *
  * The signal mask partitions a 32-bit space:
- * - Bits 0-15: system-reserved (chipset kernel)
- * - Bits 16-31: user-allocatable (chip-specific signals)
+ * - Bits 0-15: system-reserved (coprocessor kernel)
+ * - Bits 16-31: user-allocatable (engine-specific signals)
  */
 
 import { z } from 'zod';
 
 // ============================================================================
-// Chip Domains
+// Engine Domains
 // ============================================================================
 
 /**
- * The four chip domains, each representing a specialized area of responsibility.
+ * The four engine domains, each representing a specialized area of responsibility.
  *
- * - `context`: Context management and scheduling (Agnus)
- * - `output`: Output rendering and formatting (Denise)
- * - `io`: I/O and event handling (Paula)
- * - `glue`: Glue logic and integration (Gary)
+ * - `context`: Context management and scheduling
+ * - `output`: Output rendering and formatting
+ * - `io`: I/O and event handling
+ * - `glue`: Glue logic and integration
  */
-export const CHIP_DOMAINS = ['context', 'output', 'io', 'glue'] as const;
+export const ENGINE_DOMAINS = ['context', 'output', 'io', 'glue'] as const;
 
-/** Type for a chip domain name. */
-export type ChipDomain = (typeof CHIP_DOMAINS)[number];
+/** Type for an engine domain name. */
+export type EngineDomain = (typeof ENGINE_DOMAINS)[number];
 
 // ============================================================================
 // Signal Bit Constants
 // ============================================================================
 
-/** System-reserved signal bits (0-15). Used by the chipset kernel. */
+/** System-reserved signal bits (0-15). Used by the coprocessor kernel. */
 export const SYSTEM_SIGNAL_BITS = 0x0000ffff;
 
-/** User-allocatable signal bits (16-31). Available for chip-specific signals. */
+/** User-allocatable signal bits (16-31). Available for engine-specific signals. */
 export const USER_SIGNAL_BITS = 0xffff0000;
 
 // ============================================================================
-// DmaAllocationSchema
+// BudgetAllocationSchema
 // ============================================================================
 
 /**
- * Schema for DMA channel token budget allocation.
+ * Schema for token budget allocation.
  *
- * Each chip receives a percentage of the total token budget for its
- * operations. The sum across all chips should equal 100%.
+ * Each engine receives a percentage of the total token budget for its
+ * operations. The sum across all engines should equal 100%.
  */
-export const DmaAllocationSchema = z.object({
+export const BudgetAllocationSchema = z.object({
   /** Percentage of total token budget (0-100). */
   percentage: z.number().int().min(0).max(100),
 
@@ -58,8 +58,8 @@ export const DmaAllocationSchema = z.object({
   description: z.string().optional(),
 });
 
-/** DMA channel token budget allocation. */
-export type DmaAllocation = z.infer<typeof DmaAllocationSchema>;
+/** Token budget allocation. */
+export type BudgetAllocation = z.infer<typeof BudgetAllocationSchema>;
 
 // ============================================================================
 // PortDeclarationSchema
@@ -68,7 +68,7 @@ export type DmaAllocation = z.infer<typeof DmaAllocationSchema>;
 /**
  * Schema for a message port declaration.
  *
- * Ports are named endpoints for inter-chip communication. Each port
+ * Ports are named endpoints for inter-engine communication. Each port
  * declares a direction (in, out, or bidirectional) and optionally
  * lists the message types it accepts or sends.
  */
@@ -93,8 +93,8 @@ export type PortDeclaration = z.infer<typeof PortDeclarationSchema>;
 /**
  * Schema for a 32-bit signal mask.
  *
- * Signals provide lightweight wake/sleep notification between chips.
- * The `allocated` bitmask indicates which bits this chip uses, and
+ * Signals provide lightweight wake/sleep notification between engines.
+ * The `allocated` bitmask indicates which bits this engine uses, and
  * the optional `labels` map provides human-readable names for each bit.
  */
 export const SignalMaskSchema = z.object({
@@ -109,38 +109,38 @@ export const SignalMaskSchema = z.object({
 export type SignalMask = z.infer<typeof SignalMaskSchema>;
 
 // ============================================================================
-// ChipDefinitionSchema
+// EngineDefinitionSchema
 // ============================================================================
 
 /**
- * Schema for a complete chip definition.
+ * Schema for a complete engine definition.
  *
- * A chip definition declares a specialized coprocessor with:
+ * An engine definition declares a specialized coprocessor with:
  * - Identity: name and domain ownership
  * - Description: human-readable purpose
- * - DMA allocation: token budget percentage
- * - Ports: message port declarations for inter-chip communication
+ * - Budget allocation: token budget percentage
+ * - Ports: message port declarations for inter-engine communication
  * - Signal mask: 32-bit signal allocation for lightweight coordination
  */
-export const ChipDefinitionSchema = z.object({
-  /** Chip identifier (e.g., 'agnus', 'denise', 'paula', 'gary'). */
+export const EngineDefinitionSchema = z.object({
+  /** Engine identifier (e.g., 'context-engine', 'render-engine'). */
   name: z.string().min(1),
 
   /** Domain ownership. */
-  domain: z.enum(CHIP_DOMAINS),
+  domain: z.enum(ENGINE_DOMAINS),
 
-  /** Human-readable description of this chip's purpose. */
+  /** Human-readable description of this engine's purpose. */
   description: z.string().min(1),
 
-  /** DMA channel token budget allocation. */
-  dma: DmaAllocationSchema,
+  /** Token budget allocation. */
+  dma: BudgetAllocationSchema,
 
-  /** Message port declarations for inter-chip communication. */
+  /** Message port declarations for inter-engine communication. */
   ports: z.array(PortDeclarationSchema).default([]),
 
   /** 32-bit signal mask for lightweight coordination. */
   signalMask: SignalMaskSchema.default({ allocated: 0 }),
 });
 
-/** A complete chip definition. */
-export type ChipDefinition = z.infer<typeof ChipDefinitionSchema>;
+/** A complete engine definition. */
+export type EngineDefinition = z.infer<typeof EngineDefinitionSchema>;
