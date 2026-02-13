@@ -3,9 +3,9 @@
 ## Current Position
 
 Milestone: v1.16 -- Dashboard Console & Milestone Ingestion
-Phase: 132-console-panel-settings (plan 02 complete)
+Phase: 132-console-panel-settings (plan 03 complete)
 Status: Executing phase 132
-Last activity: 2026-02-13 -- Completed 132-02 (settings panel)
+Last activity: 2026-02-13 -- Completed 132-03 (activity timeline)
 
 Progress: [███░░░░░░░░░░░░░] 1/5 phases (132 in progress)
 
@@ -85,9 +85,16 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - Config-update envelope posts to helper endpoint with hot:true flag and inbox/pending subdirectory
 - Pending-sync indicator via .setting-pending class with CSS animation
 - Force-tracked dist/dashboard/console-settings.js (matching existing dist/ pattern)
+- classifyLogEntry dispatches on error status first, then filename patterns, then subdirectory, then fallback to config-write
+- Relative time formatting with optional now parameter for deterministic testing
+- Maximum 50 activity entries displayed (newest first after reverse-chronological sort)
+- Clipboard fallback wraps window.fetch to intercept failed POSTs to /api/console/message
+- Toast notification auto-dismisses after 3 seconds with fade-out animation
+- Persistent offline banner before .console-settings-panel when helper unreachable
+- Force-tracked dist/dashboard/console-activity.js (matching existing dist/ pattern)
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
 - Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, question-responder, check-inbox integration tests)
@@ -116,10 +123,10 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Completed 132-02 (settings panel)
-Stopped at: Completed 132-02-PLAN.md execution
-Next action: Continue with 132-03 (activity log)
-Context: Settings panel renders 17 hot-configurable controls (toggles, selects) and 8 non-hot controls (disabled with tooltip) grouped by section. Client-side script posts config-update messages to helper endpoint on change with pending-sync indicator. Generator reads milestone-config.json for settings data. Activity section remains placeholder for plan 03. 19 new tests (186 total dashboard tests passing).
+Last: 2026-02-13 -- Completed 132-03 (activity timeline)
+Stopped at: Completed 132-03-PLAN.md execution
+Next action: Continue with remaining 132 plans
+Context: Activity timeline renders bridge.jsonl entries reverse-chronologically with five color-coded type badges. classifyLogEntry converts BridgeLogEntry to ActivityEntry via priority dispatch. Clipboard fallback wraps window.fetch for helper endpoint failure detection with toast notification and offline banner. All three console page sections (status, questions+settings, activity) now wired with real implementations. Generator reads bridge.jsonl at generation time. 16 new tests (202 total dashboard tests passing).
 
 ---
-*Last updated: 2026-02-13 (132-02 complete)*
+*Last updated: 2026-02-13 (132-03 complete)*
