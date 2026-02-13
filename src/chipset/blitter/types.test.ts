@@ -1,22 +1,22 @@
 /**
- * Tests for Blitter type system Zod schemas.
+ * Tests for Offload type system Zod schemas.
  *
- * Validates: BlitterOperationSchema, PromotionDeclarationSchema,
- * BlitterResultSchema, CompletionSignalSchema, BlitterStatus.
+ * Validates: OffloadOperationSchema, PromotionDeclarationSchema,
+ * OffloadResultSchema, CompletionSignalSchema, OffloadStatus.
  */
 
 import { describe, it, expect } from 'vitest';
 import {
-  BlitterOperationSchema,
+  OffloadOperationSchema,
   PromotionDeclarationSchema,
-  BlitterResultSchema,
+  OffloadResultSchema,
   CompletionSignalSchema,
-  type BlitterStatus,
+  type OffloadStatus,
 } from './types.js';
 
-describe('BlitterOperationSchema', () => {
+describe('OffloadOperationSchema', () => {
   it('parses valid operation with all fields', () => {
-    const result = BlitterOperationSchema.safeParse({
+    const result = OffloadOperationSchema.safeParse({
       id: 'my-skill:lint-fix',
       script: '#!/bin/bash\neslint --fix .',
       scriptType: 'bash',
@@ -38,7 +38,7 @@ describe('BlitterOperationSchema', () => {
   });
 
   it('parses valid operation with minimal fields', () => {
-    const result = BlitterOperationSchema.safeParse({
+    const result = OffloadOperationSchema.safeParse({
       id: 'test-skill:run',
       script: 'echo hello',
       scriptType: 'bash',
@@ -52,7 +52,7 @@ describe('BlitterOperationSchema', () => {
   });
 
   it('rejects operation missing id', () => {
-    const result = BlitterOperationSchema.safeParse({
+    const result = OffloadOperationSchema.safeParse({
       script: 'echo hello',
       scriptType: 'bash',
     });
@@ -60,7 +60,7 @@ describe('BlitterOperationSchema', () => {
   });
 
   it('rejects operation missing script', () => {
-    const result = BlitterOperationSchema.safeParse({
+    const result = OffloadOperationSchema.safeParse({
       id: 'test:run',
       scriptType: 'bash',
     });
@@ -68,7 +68,7 @@ describe('BlitterOperationSchema', () => {
   });
 
   it('rejects operation with invalid scriptType', () => {
-    const result = BlitterOperationSchema.safeParse({
+    const result = OffloadOperationSchema.safeParse({
       id: 'test:run',
       script: 'echo hello',
       scriptType: 'ruby',
@@ -77,7 +77,7 @@ describe('BlitterOperationSchema', () => {
   });
 
   it('defaults timeout to 30000 when not provided', () => {
-    const result = BlitterOperationSchema.safeParse({
+    const result = OffloadOperationSchema.safeParse({
       id: 'test:run',
       script: 'echo hello',
       scriptType: 'bash',
@@ -89,7 +89,7 @@ describe('BlitterOperationSchema', () => {
   });
 
   it('defaults env to empty object when not provided', () => {
-    const result = BlitterOperationSchema.safeParse({
+    const result = OffloadOperationSchema.safeParse({
       id: 'test:run',
       script: 'echo hello',
       scriptType: 'bash',
@@ -102,7 +102,7 @@ describe('BlitterOperationSchema', () => {
 
   it('accepts all four valid scriptType values', () => {
     for (const scriptType of ['bash', 'node', 'python', 'custom'] as const) {
-      const result = BlitterOperationSchema.safeParse({
+      const result = OffloadOperationSchema.safeParse({
         id: `test:${scriptType}`,
         script: 'echo hello',
         scriptType,
@@ -195,9 +195,9 @@ describe('PromotionDeclarationSchema', () => {
   });
 });
 
-describe('BlitterResultSchema', () => {
+describe('OffloadResultSchema', () => {
   it('parses valid result with exitCode 0', () => {
-    const result = BlitterResultSchema.safeParse({
+    const result = OffloadResultSchema.safeParse({
       operationId: 'my-skill:lint-fix',
       exitCode: 0,
       stdout: 'All files fixed',
@@ -212,7 +212,7 @@ describe('BlitterResultSchema', () => {
   });
 
   it('parses valid result with exitCode 1 (failure)', () => {
-    const result = BlitterResultSchema.safeParse({
+    const result = OffloadResultSchema.safeParse({
       operationId: 'my-skill:lint-fix',
       exitCode: 1,
       stdout: '',
@@ -226,7 +226,7 @@ describe('BlitterResultSchema', () => {
   });
 
   it('defaults timedOut to false', () => {
-    const result = BlitterResultSchema.safeParse({
+    const result = OffloadResultSchema.safeParse({
       operationId: 'my-skill:run',
       exitCode: 0,
       stdout: '',
@@ -240,7 +240,7 @@ describe('BlitterResultSchema', () => {
   });
 
   it('parses result with timedOut: true', () => {
-    const result = BlitterResultSchema.safeParse({
+    const result = OffloadResultSchema.safeParse({
       operationId: 'my-skill:run',
       exitCode: 124,
       stdout: '',
@@ -339,9 +339,9 @@ describe('CompletionSignalSchema', () => {
   });
 });
 
-describe('BlitterStatus', () => {
+describe('OffloadStatus', () => {
   it('all valid status values are assignable', () => {
-    const statuses: BlitterStatus[] = [
+    const statuses: OffloadStatus[] = [
       'pending',
       'running',
       'completed',

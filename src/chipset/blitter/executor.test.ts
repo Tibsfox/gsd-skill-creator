@@ -1,5 +1,5 @@
 /**
- * Tests for Blitter executor: child process execution with timeout,
+ * Tests for Offload executor: child process execution with timeout,
  * output capture, environment variable passing, and signal integration.
  */
 
@@ -7,16 +7,16 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm, writeFile, chmod } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import type { BlitterOperation } from './types.js';
-import { executeBlitterOp, BlitterExecutor } from './executor.js';
-import { BlitterSignalBus } from './signals.js';
+import type { OffloadOperation } from './types.js';
+import { executeOffloadOp, OffloadExecutor } from './executor.js';
+import { SignalBus } from './signals.js';
 import type { CompletionSignal } from './types.js';
 
-describe('executeBlitterOp', () => {
+describe('executeOffloadOp', () => {
   let tempDir: string;
 
   beforeEach(async () => {
-    tempDir = await mkdtemp(join(tmpdir(), 'blitter-test-'));
+    tempDir = await mkdtemp(join(tmpdir(), 'offload-test-'));
   });
 
   afterEach(async () => {
@@ -24,19 +24,19 @@ describe('executeBlitterOp', () => {
   });
 
   it('executes a successful bash script with stdout capture', async () => {
-    const operation: BlitterOperation = {
+    const operation: OffloadOperation = {
       id: 'test:echo',
-      script: '#!/bin/bash\necho "hello blitter"\nexit 0',
+      script: '#!/bin/bash\necho "hello offload"\nexit 0',
       scriptType: 'bash',
       workingDir: tempDir,
       timeout: 10000,
       env: {},
     };
 
-    const result = await executeBlitterOp(operation);
+    const result = await executeOffloadOp(operation);
 
     expect(result.exitCode).toBe(0);
-    expect(result.stdout).toContain('hello blitter');
+    expect(result.stdout).toContain('hello offload');
     expect(result.stderr).toBe('');
     expect(result.timedOut).toBe(false);
     expect(result.durationMs).toBeGreaterThanOrEqual(0);
@@ -44,7 +44,7 @@ describe('executeBlitterOp', () => {
   });
 
   it('captures stderr and nonzero exit code from failing script', async () => {
-    const operation: BlitterOperation = {
+    const operation: OffloadOperation = {
       id: 'test:fail',
       script: '#!/bin/bash\necho "error output" >&2\nexit 42',
       scriptType: 'bash',
@@ -53,7 +53,7 @@ describe('executeBlitterOp', () => {
       env: {},
     };
 
-    const result = await executeBlitterOp(operation);
+    const result = await executeOffloadOp(operation);
 
     expect(result.exitCode).toBe(42);
     expect(result.stderr).toContain('error output');
@@ -61,7 +61,7 @@ describe('executeBlitterOp', () => {
   });
 
   it('kills scripts that exceed timeout and reports timed-out status', async () => {
-    const operation: BlitterOperation = {
+    const operation: OffloadOperation = {
       id: 'test:timeout',
       script: '#!/bin/bash\nsleep 10',
       scriptType: 'bash',
@@ -70,7 +70,7 @@ describe('executeBlitterOp', () => {
       env: {},
     };
 
-    const result = await executeBlitterOp(operation);
+    const result = await executeOffloadOp(operation);
 
     expect(result.timedOut).toBe(true);
     expect(result.exitCode).not.toBe(0);
@@ -79,39 +79,39 @@ describe('executeBlitterOp', () => {
   }, 10000);
 
   it('passes environment variables from operation to child process', async () => {
-    const operation: BlitterOperation = {
+    const operation: OffloadOperation = {
       id: 'test:env',
       script: '#!/bin/bash\necho "$MY_VAR"',
       scriptType: 'bash',
       workingDir: tempDir,
       timeout: 10000,
-      env: { MY_VAR: 'blitter-test-value' },
+      env: { MY_VAR: 'offload-test-value' },
     };
 
-    const result = await executeBlitterOp(operation);
+    const result = await executeOffloadOp(operation);
 
     expect(result.exitCode).toBe(0);
-    expect(result.stdout).toContain('blitter-test-value');
+    expect(result.stdout).toContain('offload-test-value');
   });
 
   it('executes node scripts via node interpreter', async () => {
-    const operation: BlitterOperation = {
+    const operation: OffloadOperation = {
       id: 'test:node',
-      script: 'console.log("node blitter");',
+      script: 'console.log("node offload");',
       scriptType: 'node',
       workingDir: tempDir,
       timeout: 10000,
       env: {},
     };
 
-    const result = await executeBlitterOp(operation);
+    const result = await executeOffloadOp(operation);
 
     expect(result.exitCode).toBe(0);
-    expect(result.stdout).toContain('node blitter');
+    expect(result.stdout).toContain('node offload');
   });
 
   it('captures both stdout and stderr from same script', async () => {
-    const operation: BlitterOperation = {
+    const operation: OffloadOperation = {
       id: 'test:both-streams',
       script: '#!/bin/bash\necho "out"\necho "err" >&2\nexit 0',
       scriptType: 'bash',
@@ -120,7 +120,7 @@ describe('executeBlitterOp', () => {
       env: {},
     };
 
-    const result = await executeBlitterOp(operation);
+    const result = await executeOffloadOp(operation);
 
     expect(result.stdout).toContain('out');
     expect(result.stderr).toContain('err');
@@ -128,20 +128,20 @@ describe('executeBlitterOp', () => {
   });
 });
 
-describe('BlitterExecutor', () => {
+describe('OffloadExecutor', () => {
   let tempDir: string;
 
   beforeEach(async () => {
-    tempDir = await mkdtemp(join(tmpdir(), 'blitter-exec-'));
+    tempDir = await mkdtemp(join(tmpdir(), 'offload-exec-'));
   });
 
   afterEach(async () => {
     await rm(tempDir, { recursive: true, force: true });
   });
 
-  it('execute method returns BlitterResult shape', async () => {
-    const executor = new BlitterExecutor();
-    const operation: BlitterOperation = {
+  it('execute method returns OffloadResult shape', async () => {
+    const executor = new OffloadExecutor();
+    const operation: OffloadOperation = {
       id: 'test:class-exec',
       script: '#!/bin/bash\necho "class test"',
       scriptType: 'bash',
@@ -161,12 +161,12 @@ describe('BlitterExecutor', () => {
   });
 
   it('emits completion signal to bus on success', async () => {
-    const bus = new BlitterSignalBus();
+    const bus = new SignalBus();
     const received: CompletionSignal[] = [];
     bus.on('completion', (signal) => received.push(signal));
 
-    const executor = new BlitterExecutor(bus);
-    const operation: BlitterOperation = {
+    const executor = new OffloadExecutor(bus);
+    const operation: OffloadOperation = {
       id: 'test:signal-success',
       script: '#!/bin/bash\necho "ok"\nexit 0',
       scriptType: 'bash',
@@ -183,12 +183,12 @@ describe('BlitterExecutor', () => {
   });
 
   it('emits completion signal with failure status', async () => {
-    const bus = new BlitterSignalBus();
+    const bus = new SignalBus();
     const received: CompletionSignal[] = [];
     bus.on('completion', (signal) => received.push(signal));
 
-    const executor = new BlitterExecutor(bus);
-    const operation: BlitterOperation = {
+    const executor = new OffloadExecutor(bus);
+    const operation: OffloadOperation = {
       id: 'test:signal-fail',
       script: '#!/bin/bash\nexit 1',
       scriptType: 'bash',
@@ -204,12 +204,12 @@ describe('BlitterExecutor', () => {
   });
 
   it('emits completion signal with timeout status', async () => {
-    const bus = new BlitterSignalBus();
+    const bus = new SignalBus();
     const received: CompletionSignal[] = [];
     bus.on('completion', (signal) => received.push(signal));
 
-    const executor = new BlitterExecutor(bus);
-    const operation: BlitterOperation = {
+    const executor = new OffloadExecutor(bus);
+    const operation: OffloadOperation = {
       id: 'test:signal-timeout',
       script: '#!/bin/bash\nsleep 10',
       scriptType: 'bash',
