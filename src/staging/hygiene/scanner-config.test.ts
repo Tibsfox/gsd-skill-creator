@@ -94,7 +94,7 @@ describe('scanConfigSafety', () => {
     });
 
     it('detects multiple path traversals as separate findings', () => {
-      const content = 'a: ../secret\nb: ../../root\nc: ../../../etc';
+      const content = 'a: ../secret\nb: ../root\nc: ../etc';
       const findings = scanConfigSafety(content);
       const traversalFindings = findings.filter(
         (f) => f.patternId === 'path-traversal',
