@@ -35,3 +35,20 @@ export { scanConfigSafety } from './scanner-config.js';
 
 // Unified scanner
 export { scanContent } from './scanner.js';
+
+// Scope coherence checker
+export type {
+  ScopeDeclaration,
+  CoherenceFinding,
+  CoherenceResult,
+} from './scope-coherence.js';
+export { checkScopeCoherence } from './scope-coherence.js';
+
+// Trust tier types and classification
+export type {
+  FamiliarityTier,
+  TrustClassification,
+  ContentSourceInfo,
+} from './trust-types.js';
+export { FAMILIARITY_TIERS, CRITICAL_PATTERN_IDS } from './trust-types.js';
+export { classifyFamiliarity } from './familiarity.js';
