@@ -10,6 +10,7 @@ export { ObservationRateLimiter, detectAnomalies, DEFAULT_RATE_LIMIT_CONFIG } fr
 export { JsonlCompactor, DEFAULT_COMPACTION_CONFIG } from './jsonl-compactor.js';
 export { ExecutionCapture, EXECUTIONS_CATEGORY } from './execution-capture.js';
 export { DeterminismAnalyzer } from './determinism-analyzer.js';
+export { PromotionDetector } from './promotion-detector.js';
 
 // Types
 export type { SessionStartData, SessionEndData } from './session-observer.js';
@@ -18,4 +19,5 @@ export type { RateLimitConfig, RateLimitResult, AnomalyReport } from './rate-lim
 export type { CompactionConfig, CompactionResult } from './jsonl-compactor.js';
 export type { ObservationTier, ExecutionContext, ToolExecutionPair, StoredExecutionBatch } from '../types/observation.js';
 export type { DeterminismScore, DeterminismConfig, DeterminismClassification, ClassifiedOperation, OperationKey } from '../types/observation.js';
-export { normalizeObservationTier, DEFAULT_DETERMINISM_CONFIG } from '../types/observation.js';
+export type { PromotionCandidate, PromotionDetectorConfig, PromotableToolName } from '../types/observation.js';
+export { normalizeObservationTier, DEFAULT_DETERMINISM_CONFIG, DEFAULT_PROMOTION_DETECTOR_CONFIG, PROMOTABLE_TOOL_NAMES } from '../types/observation.js';
