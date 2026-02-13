@@ -3,7 +3,7 @@ import type { TerminalConfig } from '../integration/config/terminal-types.js';
 import { renderTerminalPanel, renderTerminalStyles } from './terminal-panel.js';
 
 const defaultConfig: TerminalConfig = {
-  port: 3000,
+  port: 11338,
   base_path: '/terminal',
   auth_mode: 'none',
   theme: 'dark',
@@ -22,7 +22,7 @@ describe('renderTerminalPanel', () => {
 
   it('iframe src uses config port and base_path', () => {
     const html = renderTerminalPanel(defaultConfig);
-    expect(html).toContain('http://localhost:3000/terminal');
+    expect(html).toContain('http://localhost:11338/terminal');
   });
 
   it('iframe src reflects custom port', () => {
@@ -32,7 +32,7 @@ describe('renderTerminalPanel', () => {
 
   it('iframe src reflects custom base_path', () => {
     const html = renderTerminalPanel({ ...defaultConfig, base_path: '/wetty' });
-    expect(html).toContain('http://localhost:3000/wetty');
+    expect(html).toContain('http://localhost:11338/wetty');
   });
 
   it('includes fallback container element', () => {
@@ -53,7 +53,7 @@ describe('renderTerminalPanel', () => {
 
   it('fallback script references correct Wetty URL', () => {
     const html = renderTerminalPanel(defaultConfig);
-    const url = 'http://localhost:3000/terminal';
+    const url = 'http://localhost:11338/terminal';
     // Script should contain the same URL used for the iframe
     const scriptMatch = html.match(/<script[\s\S]*?<\/script>/);
     expect(scriptMatch).toBeDefined();
@@ -62,7 +62,7 @@ describe('renderTerminalPanel', () => {
 
   it('iframe has data-terminal-url attribute', () => {
     const html = renderTerminalPanel(defaultConfig);
-    expect(html).toContain('data-terminal-url="http://localhost:3000/terminal"');
+    expect(html).toContain('data-terminal-url="http://localhost:11338/terminal"');
   });
 
   it('wraps content in terminal-panel container', () => {
