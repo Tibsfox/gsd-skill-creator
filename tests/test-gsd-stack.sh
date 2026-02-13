@@ -3003,6 +3003,258 @@ else
 fi
 
 # ==============================================================================
+# Stop Active Session Tests
+# ==============================================================================
+
+echo ""
+echo "${BOLD}Stop Active Session Tests${RESET}"
+
+# Reset stack dir for stop tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl" "$GSD_STACK_DIR/registry.jsonl"
+
+# Create active session
+mkdir -p "$GSD_STACK_DIR/sessions/stop-test"
+echo '{"name":"stop-test","status":"active","project":"/tmp/stop-proj","started":"2026-02-12T10:00:00Z","tmux_session":"claude-stop-test","pid":"1234"}' > "$GSD_STACK_DIR/sessions/stop-test/meta.json"
+touch "$GSD_STACK_DIR/sessions/stop-test/heartbeat"
+
+# Add some history events to compute stats from
+echo '{"ts":"2026-02-12T10:01:00Z","event":"push","detail":"normal: msg 1"}' >> "$GSD_STACK_DIR/history.jsonl"
+echo '{"ts":"2026-02-12T10:02:00Z","event":"push","detail":"normal: msg 2"}' >> "$GSD_STACK_DIR/history.jsonl"
+echo '{"ts":"2026-02-12T10:03:00Z","event":"pop","detail":"consumed msg 1"}' >> "$GSD_STACK_DIR/history.jsonl"
+echo '{"ts":"2026-02-12T10:04:00Z","event":"session","detail":"started: stop-test"}' >> "$GSD_STACK_DIR/history.jsonl"
+
+# Add a registry entry
+echo '{"ts":"2026-02-12T10:00:00Z","name":"stop-test","project":"/tmp/stop-proj","action":"start"}' >> "$GSD_STACK_DIR/registry.jsonl"
+
+# 1. stop active session exits 0
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" stop stop-test 2>&1)
+rc=$?
+if [[ "$rc" -eq 0 ]]; then
+  pass "stop active session exits 0"
+else
+  fail "stop active session exits 0" "exit code: $rc, output: $output"
+fi
+
+# 2. After stop, meta.json status is "stopped"
+meta_status=$(cat "$GSD_STACK_DIR/sessions/stop-test/meta.json" | grep -o '"status":"[^"]*"' | cut -d'"' -f4)
+assert_eq "stop: meta.json status is stopped" "stopped" "$meta_status"
+
+# 3. _get-state returns "stopped"
+state_output=$("$GSD_STACK" _get-state stop-test 2>&1)
+assert_eq "stop: _get-state returns stopped" "stopped" "$state_output"
+
+# 4. After stop, heartbeat file does NOT exist (cleaned up)
+if [[ ! -f "$GSD_STACK_DIR/sessions/stop-test/heartbeat" ]]; then
+  pass "stop: heartbeat file removed"
+else
+  fail "stop: heartbeat file removed" "heartbeat still exists"
+fi
+
+# 5. After stop, at least one save file exists in saves/ (final auto-save)
+save_count=$(ls -1 "$GSD_STACK_DIR/saves/" 2>/dev/null | wc -l)
+save_count=$((save_count + 0))
+if [[ "$save_count" -ge 1 ]]; then
+  pass "stop: at least one save file exists"
+else
+  fail "stop: at least one save file exists" "save count: $save_count"
+fi
+
+# 6. The save file name starts with "stop-test-"
+save_file=$(ls -1 "$GSD_STACK_DIR/saves/" 2>/dev/null | head -1)
+if [[ "$save_file" == stop-test-* ]]; then
+  pass "stop: save file name starts with stop-test-"
+else
+  fail "stop: save file name starts with stop-test-" "save file: $save_file"
+fi
+
+# 7. History.jsonl contains a "stop" event
+if grep -q '"event":"stop"' "$GSD_STACK_DIR/history.jsonl"; then
+  pass "stop: history.jsonl contains stop event"
+else
+  fail "stop: history.jsonl contains stop event" "no stop event found"
+fi
+
+# 8. Registry.jsonl contains an entry with "action":"stop"
+if grep -q '"action":"stop"' "$GSD_STACK_DIR/registry.jsonl"; then
+  pass "stop: registry.jsonl contains action:stop entry"
+else
+  fail "stop: registry.jsonl contains action:stop entry" "no stop action found"
+fi
+
+# 9. Output contains "stopped" or "Stopped"
+if echo "$output" | grep -qi "stopped"; then
+  pass "stop: output contains stopped confirmation"
+else
+  fail "stop: output contains stopped confirmation" "output: $output"
+fi
+
+# 10. Output contains session duration or stats information
+if echo "$output" | grep -qi "duration\|push\|pop\|save\|message"; then
+  pass "stop: output contains stats information"
+else
+  fail "stop: output contains stats information" "output: $output"
+fi
+
+# ==============================================================================
+# Stop Paused Session Tests
+# ==============================================================================
+
+echo ""
+echo "${BOLD}Stop Paused Session Tests${RESET}"
+
+# Create a paused session to stop
+mkdir -p "$GSD_STACK_DIR/sessions/stop-paused"
+echo '{"name":"stop-paused","status":"paused","project":"/tmp/stop-proj","started":"2026-02-12T11:00:00Z","tmux_session":"claude-stop-paused","pid":"5678"}' > "$GSD_STACK_DIR/sessions/stop-paused/meta.json"
+touch "$GSD_STACK_DIR/sessions/stop-paused/heartbeat"
+
+# 11. stop paused session exits 0
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" stop stop-paused 2>&1)
+rc=$?
+if [[ "$rc" -eq 0 ]]; then
+  pass "stop paused session exits 0"
+else
+  fail "stop paused session exits 0" "exit code: $rc, output: $output"
+fi
+
+# 12. After stop, meta.json status is "stopped"
+meta_status=$(cat "$GSD_STACK_DIR/sessions/stop-paused/meta.json" | grep -o '"status":"[^"]*"' | cut -d'"' -f4)
+assert_eq "stop paused: meta.json status is stopped" "stopped" "$meta_status"
+
+# 13. Heartbeat file does NOT exist
+if [[ ! -f "$GSD_STACK_DIR/sessions/stop-paused/heartbeat" ]]; then
+  pass "stop paused: heartbeat file removed"
+else
+  fail "stop paused: heartbeat file removed" "heartbeat still exists"
+fi
+
+# ==============================================================================
+# Stop Stalled Session Tests
+# ==============================================================================
+
+echo ""
+echo "${BOLD}Stop Stalled Session Tests${RESET}"
+
+# Create a stalled session to stop
+mkdir -p "$GSD_STACK_DIR/sessions/stop-stalled"
+echo '{"name":"stop-stalled","status":"active","project":"/tmp/stop-proj","started":"2026-02-12T09:00:00Z","tmux_session":"claude-stop-stalled","pid":"9012"}' > "$GSD_STACK_DIR/sessions/stop-stalled/meta.json"
+touch -d "10 minutes ago" "$GSD_STACK_DIR/sessions/stop-stalled/heartbeat"
+
+# 14. stop stalled session exits 0
+output=$(GSD_MOCK_TMUX=1 GSD_STALL_TIMEOUT=300 "$GSD_STACK" stop stop-stalled 2>&1)
+rc=$?
+if [[ "$rc" -eq 0 ]]; then
+  pass "stop stalled session exits 0"
+else
+  fail "stop stalled session exits 0" "exit code: $rc, output: $output"
+fi
+
+# 15. After stop, meta.json status is "stopped"
+meta_status=$(cat "$GSD_STACK_DIR/sessions/stop-stalled/meta.json" | grep -o '"status":"[^"]*"' | cut -d'"' -f4)
+assert_eq "stop stalled: meta.json status is stopped" "stopped" "$meta_status"
+
+# ==============================================================================
+# Stop Error Cases
+# ==============================================================================
+
+echo ""
+echo "${BOLD}Stop Error Cases${RESET}"
+
+# 16. stop nonexistent session exits non-zero
+set +e
+output=$("$GSD_STACK" stop nonexistent-session 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "stop nonexistent session exits non-zero"
+else
+  fail "stop nonexistent session exits non-zero" "exit code: $rc"
+fi
+
+# 17. Output contains "not found"
+if echo "$output" | grep -qi "not found"; then
+  pass "stop nonexistent: output shows not found"
+else
+  fail "stop nonexistent: output shows not found" "output: $output"
+fi
+
+# 18. stop already-stopped session exits non-zero
+mkdir -p "$GSD_STACK_DIR/sessions/already-stopped"
+echo '{"name":"already-stopped","status":"stopped","project":"/tmp/stop-proj","started":"2026-02-12T08:00:00Z","tmux_session":"claude-already-stopped","pid":"3456"}' > "$GSD_STACK_DIR/sessions/already-stopped/meta.json"
+
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" stop already-stopped 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "stop already-stopped session exits non-zero"
+else
+  fail "stop already-stopped session exits non-zero" "exit code: $rc"
+fi
+
+# 19. Output contains "already stopped"
+if echo "$output" | grep -qi "already stopped"; then
+  pass "stop already-stopped: output shows already stopped"
+else
+  fail "stop already-stopped: output shows already stopped" "output: $output"
+fi
+
+# 20. stop with no session name exits non-zero
+set +e
+output=$("$GSD_STACK" stop 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "stop no args exits non-zero"
+else
+  fail "stop no args exits non-zero" "exit code: $rc"
+fi
+
+# 21. Output contains usage hint
+if echo "$output" | grep -qi "usage\|session name\|required"; then
+  pass "stop no args shows usage hint"
+else
+  fail "stop no args shows usage hint" "output: $output"
+fi
+
+# ==============================================================================
+# Stop JSON Output Test
+# ==============================================================================
+
+echo ""
+echo "${BOLD}Stop JSON Output Tests${RESET}"
+
+# Create a fresh active session for JSON output test
+mkdir -p "$GSD_STACK_DIR/sessions/stop-json"
+echo '{"name":"stop-json","status":"active","project":"/tmp/stop-proj","started":"2026-02-12T12:00:00Z","tmux_session":"claude-stop-json","pid":"7890"}' > "$GSD_STACK_DIR/sessions/stop-json/meta.json"
+touch "$GSD_STACK_DIR/sessions/stop-json/heartbeat"
+
+# 22. JSON stop exits 0
+output=$(GSD_FORMAT=json GSD_MOCK_TMUX=1 "$GSD_STACK" stop stop-json 2>&1)
+rc=$?
+if [[ "$rc" -eq 0 ]]; then
+  pass "stop JSON output exits 0"
+else
+  fail "stop JSON output exits 0" "exit code: $rc, output: $output"
+fi
+
+# 23. Output starts with { (JSON object)
+if [[ "$output" == "{"* ]]; then
+  pass "stop JSON output starts with {"
+else
+  fail "stop JSON output starts with {" "output: $output"
+fi
+
+# 24. Output contains "status":"stopped" and "session" key
+if echo "$output" | grep -q '"status":"stopped"' && echo "$output" | grep -q '"session"'; then
+  pass "stop JSON output contains status:stopped and session"
+else
+  fail "stop JSON output contains status:stopped and session" "output: $output"
+fi
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
