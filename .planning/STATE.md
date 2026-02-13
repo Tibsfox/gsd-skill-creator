@@ -4,9 +4,9 @@
 
 Milestone: v1.17 — Staging Layer
 Phase: 137 — Smart Intake Flow (in progress)
-Plan: 137-01 complete
+Plan: 137-03 complete
 Status: Executing phase 137
-Last activity: 2026-02-13 — Completed 137-01 (clarity routing types and document assessor)
+Last activity: 2026-02-13 — Completed 137-03 (smart intake flow orchestrator)
 
 ## Project Reference
 
@@ -150,6 +150,12 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Structure-aware confused threshold: documents with headings route to gaps not confused even with few words
 - Allow up to 2 missing key areas for clear routing (focused technical docs may not use all 4 keyword sets)
 - HEADING_RE constant for DRY heading detection in clarity assessor
+- ATTENTION_RISKS ReadonlySet for O(1) critical/warning lookup in orchestrator
+- DI interface typed with inline moveDocument options (MoveDocumentOptions not exported from state-machine)
+- Placeholder ClarityAssessment for paused hygiene flow (route=confused, confidence=0)
+- Step executors extracted as private functions for testability and readability
+- buildResult helper centralizes route-to-message mapping and needsConfirmation logic
+- Content read from checking dir first, inbox fallback for resume (document may have moved)
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -166,7 +172,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Staging module at src/staging/ (types, schema, directory, intake, state-machine, index)
 - Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, trust-store, finding-actions, report, index)
 - Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift, pattern-fidelity, training-coherence, copying-detector, checker, index)
-- Staging intake-flow submodule at src/staging/intake-flow/ (types, clarity-assessor)
+- Staging intake-flow submodule at src/staging/intake-flow/ (types, clarity-assessor, step-types, step-tracker, orchestrator)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -181,15 +187,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 393 complete |
+| Total plans | 395 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 137-01-PLAN.md
-Stopped at: Plan 137-01 complete (clarity routing types and document assessor).
-Next action: Continue with 137-03 and 137-04 plans.
-Context: v1.17 Staging Layer. Phase 137 in progress (plans 01 and 02 complete in wave 1). Intake-flow submodule has types and clarity assessor. 11 assessor tests passing.
+Last: 2026-02-13 — Completed 137-03-PLAN.md
+Stopped at: Plan 137-03 complete (smart intake flow orchestrator).
+Next action: Continue with 137-04 plan (barrel exports).
+Context: v1.17 Staging Layer. Phase 137 in progress (plans 01, 02, 03 complete). Intake-flow submodule has types, clarity assessor, step tracker, and orchestrator. 40 intake-flow tests passing.
 
 ---
-*Last updated: 2026-02-13 (137-01 complete)*
+*Last updated: 2026-02-13 (137-03 complete)*
