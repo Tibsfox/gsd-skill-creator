@@ -127,17 +127,68 @@ const UX_CLEANUP_SCRIPT = `
   }
   main { width: 100%; }
 
-  /* Golden ratio: metrics grid uses ~61.8% / ~38.2% columns */
+  /* Metrics grid: clean centerline split, terminal aligns with right column */
   .metrics-dashboard {
-    grid-template-columns: 61.8fr 38.2fr !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto 1fr;
+    align-items: stretch;
+    margin-bottom: var(--space-lg);
+  }
+  /* Explicit placement: terminal left spanning both rows, velocity + history right */
+  #gsd-section-terminal {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+  #gsd-section-terminal .terminal-panel {
+    height: 100%;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+  #gsd-section-terminal .terminal-iframe {
+    flex: 1;
+    min-height: 400px;
+  }
+  #gsd-section-terminal .terminal-fallback {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #gsd-section-phase-velocity {
+    grid-column: 2;
+    grid-row: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+  }
+  #gsd-section-phase-velocity h2 {
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+  #gsd-section-milestone-comparison {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  #gsd-section-milestone-comparison > .card {
+    height: 100%;
+    margin-bottom: 0;
   }
   @media (max-width: 1200px) {
     .metrics-dashboard { grid-template-columns: 1fr !important; }
+    #gsd-section-terminal,
+    #gsd-section-phase-velocity,
+    #gsd-section-milestone-comparison {
+      grid-column: 1;
+      grid-row: auto;
+    }
   }
 
-  /* Golden ratio: milestone grid */
+  /* Milestone grid: clean centerline split */
   .gsd-milestone-grid {
-    grid-template-columns: 61.8fr 38.2fr;
+    grid-template-columns: 1fr 1fr;
   }
   @media (max-width: 1200px) {
     .gsd-milestone-grid { grid-template-columns: 1fr; }
@@ -157,8 +208,42 @@ const UX_CLEANUP_SCRIPT = `
   .stats-grid { margin-bottom: var(--space-md); }
   .stat-card { padding: var(--space-sm) var(--space-md); }
 
-  /* Compact current status */
+  /* Compact section titles */
   .section-title { margin-top: var(--space-md); margin-bottom: var(--space-sm); }
+
+  /* Extra breathing room above Milestones and Build Log (after metrics grid) */
+  .metrics-dashboard + .section-title {
+    margin-top: var(--space-xl);
+  }
+
+  /* Status + Pulse row: equal-height cards */
+  .status-pulse-row {
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+    align-items: stretch;
+  }
+  .status-pulse-row .status-column,
+  .status-pulse-row .pulse-column {
+    display: flex;
+    flex-direction: column;
+  }
+  .status-pulse-row .status-column > .card,
+  .status-pulse-row .pulse-column > .card {
+    flex: 1;
+  }
+  .status-pulse-row .section-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin: 0 0 var(--space-sm) 0;
+    padding: 0;
+    border: none;
+    font-weight: 600;
+  }
+  .status-pulse-row .card {
+    margin-bottom: 0;
+  }
 
   /* --- Session Pulse: clean up noise --- */
   .session-id { font-size: 0.75rem; color: var(--text-dim); max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
@@ -177,31 +262,6 @@ const UX_CLEANUP_SCRIPT = `
   }
   @media (max-width: 1200px) {
     .metrics-dashboard { grid-template-columns: 1fr; }
-  }
-
-  /* --- Planning Quality: collapse by default --- */
-  .quality-section { max-height: none; }
-  .quality-card.accuracy-scores,
-  .quality-card.emergent-ratio {
-    max-height: 200px;
-    overflow-y: auto;
-    position: relative;
-  }
-  .quality-card.deviation-summary {
-    max-height: 180px;
-    overflow-y: auto;
-  }
-
-  /* Hide rows with 0% / 0 deviations by default (toggled by JS) */
-  .quality-card.accuracy-scores .accuracy-row[data-zero],
-  .quality-card.emergent-ratio .emergent-row[data-zero],
-  .quality-card.deviation-summary .deviation-none {
-    display: none;
-  }
-  .quality-card.show-all .accuracy-row[data-zero],
-  .quality-card.show-all .emergent-row[data-zero],
-  .quality-card.show-all .deviation-none {
-    display: flex;
   }
 
   /* Toggle buttons */
@@ -594,48 +654,12 @@ const UX_CLEANUP_SCRIPT = `
   }
 
   // =====================================================================
-  // 4. Quality section toggles
-  // =====================================================================
-  document.querySelectorAll('.emergent-row').forEach(function(row) {
-    var pct = row.querySelector('.emergent-pct');
-    if (pct && pct.textContent.trim() === '0%') {
-      row.setAttribute('data-zero', '1');
-    }
-  });
-
-  document.querySelectorAll('.accuracy-row').forEach(function(row) {
-    var label = row.querySelector('.accuracy-label');
-    if (label && label.textContent.trim() === 'on_track') {
-      row.setAttribute('data-zero', '1');
-    }
-  });
-
-  ['accuracy-scores', 'emergent-ratio', 'deviation-summary'].forEach(function(cls) {
-    var card = document.querySelector('.quality-card.' + cls);
-    if (!card) return;
-    var total = card.children.length;
-    var hidden = card.querySelectorAll('[data-zero], .deviation-none').length;
-    if (hidden < 3) return;
-    var btn = document.createElement('button');
-    btn.className = 'gsd-toggle-btn';
-    btn.textContent = 'Show all ' + total + ' phases';
-    btn.addEventListener('click', function() {
-      card.classList.toggle('show-all');
-      btn.textContent = card.classList.contains('show-all')
-        ? 'Show notable only'
-        : 'Show all ' + total + ' phases';
-    });
-    card.parentNode.insertBefore(btn, card.nextSibling);
-  });
-
-  // =====================================================================
-  // 5. Tier labels on metric sections
+  // 4. Tier labels on metric sections
   // =====================================================================
   var tierLabels = {
-    'session-pulse': ['Session Pulse', 'hot'],
+    'terminal': ['Terminal', 'hot'],
     'phase-velocity': ['Phase Velocity', 'warm'],
-    'planning-quality': ['Planning Quality', 'warm'],
-    'historical-trends': ['Historical Trends', 'cold'],
+    'milestone-comparison': ['Milestone Comparison', 'cold'],
   };
   Object.keys(tierLabels).forEach(function(id) {
     var el = document.getElementById('gsd-section-' + id);
@@ -748,16 +772,46 @@ const LIVE_RELOAD_SCRIPT = `
     };
 
     es.addEventListener('reload', function(e) {
-      // Save scroll position before reload
-      sessionStorage.setItem(SCROLL_KEY, String(window.scrollY));
-      if (dot) { dot.classList.add('refreshing'); }
-      if (indicator) { indicator.classList.add('visible'); }
-      // Small delay so user sees the indicator
-      setTimeout(function() { window.location.reload(); }, 300);
+      // Check if terminal iframe is active — avoid full reload to preserve session
+      var terminalIframe = document.querySelector('.terminal-iframe');
+      var terminalActive = terminalIframe && terminalIframe.src && terminalIframe.style.display !== 'none';
+
+      if (terminalActive) {
+        // Soft refresh: fetch new page and update non-terminal sections in-place
+        if (dot) { dot.classList.add('refreshing'); }
+        if (indicator) { indicator.textContent = 'Updating...'; indicator.classList.add('visible'); }
+        fetch(window.location.href)
+          .then(function(r) { return r.text(); })
+          .then(function(html) {
+            var parser = new DOMParser();
+            var newDoc = parser.parseFromString(html, 'text/html');
+            // Update status-pulse row
+            var oldRow = document.querySelector('.status-pulse-row');
+            var newRow = newDoc.querySelector('.status-pulse-row');
+            if (oldRow && newRow) oldRow.innerHTML = newRow.innerHTML;
+            // Update velocity + history sections (not terminal)
+            ['phase-velocity', 'milestone-comparison'].forEach(function(id) {
+              var oldEl = document.getElementById('gsd-section-' + id);
+              var newEl = newDoc.getElementById('gsd-section-' + id);
+              if (oldEl && newEl) oldEl.innerHTML = newEl.innerHTML;
+            });
+            setTimeout(function() { indicator.classList.remove('visible'); }, 800);
+            if (dot) { dot.classList.remove('refreshing'); }
+          })
+          .catch(function() {
+            if (dot) { dot.classList.remove('refreshing'); }
+            indicator.classList.remove('visible');
+          });
+      } else {
+        // No active terminal — safe to do full page reload
+        sessionStorage.setItem(SCROLL_KEY, String(window.scrollY));
+        if (dot) { dot.classList.add('refreshing'); }
+        if (indicator) { indicator.classList.add('visible'); }
+        setTimeout(function() { window.location.reload(); }, 300);
+      }
     });
 
     es.addEventListener('section-update', function(e) {
-      // Granular section update (future: replace section innerHTML)
       var data = JSON.parse(e.data);
       var el = document.getElementById('gsd-section-' + data.sectionId);
       if (el && data.html) {
@@ -775,9 +829,11 @@ const LIVE_RELOAD_SCRIPT = `
 
   connect();
 
-  // Fallback: poll-based refresh if SSE fails entirely
+  // Fallback: poll-based refresh if SSE fails entirely (skipped when terminal is active)
   var pollInterval = setInterval(function() {
     if (es && es.readyState === EventSource.OPEN) return; // SSE is working
+    var termIframe = document.querySelector('.terminal-iframe');
+    if (termIframe && termIframe.src && termIframe.style.display !== 'none') return; // protect terminal
     fetch('/api/check')
       .then(function(r) { return r.json(); })
       .then(function(data) {
@@ -808,6 +864,25 @@ async function loadGenerator() {
   } catch (err) {
     console.error('[dashboard] Failed to load generator:', err.message);
     console.error('[dashboard] Dashboard will be served as static files (no regeneration)');
+    return false;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Helper router (console endpoint for browser -> filesystem writes)
+// ---------------------------------------------------------------------------
+
+let helperRouter = null;
+
+async function loadHelperRouter() {
+  try {
+    const mod = await import('./dist/console/helper.js');
+    helperRouter = mod.createHelperRouter(CWD);
+    console.log('[helper] Helper router loaded from dist/console/helper.js');
+    return true;
+  } catch (err) {
+    console.error('[helper] Failed to load helper router:', err.message);
+    console.error('[helper] POST /api/console/message will not be available');
     return false;
   }
 }
@@ -917,6 +992,12 @@ const server = createServer(async (req, res) => {
     return res.end(JSON.stringify({ ok: true, message: 'Regeneration queued' }));
   }
 
+  // API: console helper endpoint (browser -> filesystem bridge)
+  if (helperRouter) {
+    const handled = await helperRouter.handleRequest(req, res);
+    if (handled) return;
+  }
+
   // Static file serving from dashboard/
   let filePath = pathname === '/' ? '/index.html' : pathname;
   filePath = join(OUTPUT_DIR, filePath);
@@ -944,6 +1025,11 @@ const server = createServer(async (req, res) => {
       content = content.replace(
         /<meta\s+http-equiv=["']refresh["'][^>]*>/gi,
         '<!-- live-reload replaces meta refresh -->'
+      );
+      // Remove legacy setInterval-based refresh script (replaced by SSE)
+      content = content.replace(
+        /<style>\s*#gsd-refresh-indicator[\s\S]*?<\/script>/,
+        '<!-- legacy refresh removed by live server -->'
       );
       // Inject live-reload script before </body>
       content = content.replace('</body>', `${UX_CLEANUP_SCRIPT}\n${LIVE_RELOAD_SCRIPT}\n</body>`);
@@ -973,6 +1059,9 @@ async function main() {
   // Load generator
   const hasGenerator = await loadGenerator();
 
+  // Load helper router (console endpoint)
+  await loadHelperRouter();
+
   // Initial generation
   if (hasGenerator && existsSync(PLANNING_DIR)) {
     await regenerate('initial startup');
@@ -1000,6 +1089,7 @@ async function main() {
       console.log(`  Dashboard:  http://localhost:${actualPort}`);
       console.log(`  SSE:        http://localhost:${actualPort}/api/events`);
       console.log(`  Status:     http://localhost:${actualPort}/api/check`);
+      console.log(`  Helper:     http://localhost:${actualPort}/api/console/message`);
       console.log('');
       console.log('  Watching .planning/ for changes...');
       console.log('  Press Ctrl+C to stop');
