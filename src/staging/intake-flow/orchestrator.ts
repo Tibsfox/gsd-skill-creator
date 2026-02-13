@@ -219,6 +219,9 @@ export async function runIntakeFlow(options: {
   const documentPath = join(basePath, STAGING_DIRS.inbox, filename);
   const content = await deps.readFile(documentPath);
 
+  // Step: staged (record that the document is in the pipeline)
+  await deps.recordStep('staged', metadataPath);
+
   // Step: hygiene
   const hygieneResult = await executeHygieneStep(
     deps, basePath, filename, source, content, metadataPath,
