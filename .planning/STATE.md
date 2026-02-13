@@ -3,9 +3,9 @@
 ## Current Position
 
 Milestone: v1.16 -- Dashboard Console & Milestone Ingestion
-Phase: 132-console-panel-settings (plan 01 complete)
+Phase: 132-console-panel-settings (plan 02 complete)
 Status: Executing phase 132
-Last activity: 2026-02-13 -- Completed 132-01 (console page renderer)
+Last activity: 2026-02-13 -- Completed 132-02 (settings panel)
 
 Progress: [███░░░░░░░░░░░░░] 1/5 phases (132 in progress)
 
@@ -79,9 +79,15 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - Console status reads outbox/status/current.json at generation time with graceful ENOENT handling
 - QuestionPoller basePath derived from planningDir by stripping .planning/ suffix
 - Settings and activity sections render as placeholders for plans 02 and 03 to replace
+- HOT_SETTINGS Set with 17 dotted paths for runtime-changeable settings
+- Non-hot settings disabled with title tooltip 'Requires session restart to take effect'
+- Event delegation on .console-settings-panel for change events
+- Config-update envelope posts to helper endpoint with hot:true flag and inbox/pending subdirectory
+- Pending-sync indicator via .setting-pending class with CSS animation
+- Force-tracked dist/dashboard/console-settings.js (matching existing dist/ pattern)
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
 - Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, question-responder, check-inbox integration tests)
@@ -110,10 +116,10 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Completed 132-01 (console page renderer)
-Stopped at: Completed 132-01-PLAN.md execution
-Next action: Continue with 132-02 (settings panel) and 132-03 (activity log)
-Context: Console page renders 4 sections: status (from outbox/status/current.json), questions (via QuestionPoller + renderQuestionCard), settings placeholder, activity placeholder. Console appears in dashboard nav as "Console" at console.html. Generator reads status and polls questions at generation time. 12 new tests, 167 total dashboard tests passing.
+Last: 2026-02-13 -- Completed 132-02 (settings panel)
+Stopped at: Completed 132-02-PLAN.md execution
+Next action: Continue with 132-03 (activity log)
+Context: Settings panel renders 17 hot-configurable controls (toggles, selects) and 8 non-hot controls (disabled with tooltip) grouped by section. Client-side script posts config-update messages to helper endpoint on change with pending-sync indicator. Generator reads milestone-config.json for settings data. Activity section remains placeholder for plan 03. 19 new tests (186 total dashboard tests passing).
 
 ---
-*Last updated: 2026-02-13 (132-01 complete)*
+*Last updated: 2026-02-13 (132-02 complete)*
