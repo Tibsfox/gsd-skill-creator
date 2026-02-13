@@ -44,6 +44,20 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **38. Session Commands** | `/sc:start` warm-start briefing, `/sc:status` budget dashboard, `/sc:suggest` interactive review, `/sc:observe` session snapshot, `/sc:digest` learning digest (v1.11) |
 | **39. Wrapper Commands** | `/wrap:execute`, `/wrap:verify`, `/wrap:plan` with skill loading, `/wrap:phase` smart lifecycle router (v1.11) |
 | **40. Passive Monitoring** | Plan-vs-summary diffing, STATE.md transition detection, ROADMAP.md structural diff, scan-on-demand architecture (v1.11) |
+| **41. Planning Docs Dashboard** | Markdown-to-HTML generator parsing `.planning/` artifacts into 5 browsable pages with dark theme, no external dependencies (v1.12) |
+| **42. Structured Data & SEO** | JSON-LD (Schema.org), Open Graph meta tags, semantic HTML5 on all dashboard pages (v1.12) |
+| **43. Incremental Builds** | SHA-256 content hashing, build manifest, auto-refresh with scroll preservation, visual refresh indicator (v1.12) |
+| **44. Live Session Pulse** | Real-time session monitoring with ticking duration, commit feed, heartbeat indicator, message counters at 1-2s sample rate (v1.12.1) |
+| **45. Phase Velocity & Planning Quality** | Timeline visualization, per-phase stats, TDD rhythm analysis, accuracy scores, emergent work ratio at 5-10s sample rate (v1.12.1) |
+| **46. Historical Trends** | Milestone comparison, commit type distribution, velocity curves, file hotspots with CSS-only visualizations (v1.12.1) |
+| **47. Message Stack** | Async command queuing with priority levels (push/pop/poke/drain) and tmux session integration (v1.13) |
+| **48. Session Lifecycle** | Managed Claude Code sessions via tmux with start/list/watch/pause/resume/stop/save and heartbeat monitoring (v1.13) |
+| **49. Recording & Playback** | Stream capture (terminal, stack events, file changes) with 4 replay modes (analyze, step, run, feed) and 14-metric computation (v1.13) |
+| **50. Pipeline List Coprocessor** | Declarative workflow programs with WAIT/MOVE/SKIP instructions synchronized to GSD lifecycle events (v1.13) |
+| **51. Offload Engine** | Script promotion from skill metadata for deterministic operations executed outside the context window (v1.13) |
+| **52. Team-as-Chip Framework** | Amiga-inspired architecture with 4 specialized chips (Agnus, Denise, Paula, Gary), FIFO message ports, 32-bit signals (v1.13) |
+| **53. Exec Kernel** | Prioritized round-robin scheduler with 18 typed message protocols and per-team token budgets with burst mode (v1.13) |
+| **54. Pipeline Learning** | Observation-to-list compiler, Jaccard feedback engine, versioned library with best-match retrieval (v1.13) |
 
 ## Version History
 
@@ -62,3 +76,6 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.9** | Ecosystem Alignment & Advanced Orchestration: spec-aligned skill generation, progressive disclosure, 5-platform portability, evaluator-optimizer with A/B testing, MCP-based distribution, router/map-reduce topologies, session save/restore/handoff, agentic RAG with corrective refinement, quality-of-life CLI improvements |
 | **v1.10** | Security Hardening: path traversal prevention, YAML safe deserialization, JSONL integrity (checksums, rate limiting, anomaly detection, compaction), discovery safety (secret redaction, allowlist/blocklist, deny list), learning safety (drift tracking, contradiction detection), team message sanitization, config validation, inheritance chain validation, file integrity monitoring, hook error boundaries, SECURITY.md, CI pipeline |
 | **v1.11** | GSD Integration Layer: integration config with per-feature toggles, idempotent install script with --uninstall, POSIX shell post-commit hook, 6 slash commands (/sc:start, status, suggest, observe, digest, wrap), 4 wrapper commands (/wrap:execute, verify, plan, phase with smart routing), passive monitoring (plan-vs-summary diffing, STATE.md transitions, ROADMAP.md structural diff) |
+| **v1.12** | GSD Planning Docs Dashboard: markdown-to-HTML generator for `.planning/` artifacts, 5 dashboard pages with dark theme, JSON-LD structured data, Open Graph meta tags, incremental builds with SHA-256 hashing, auto-refresh with scroll preservation, GSD slash command |
+| **v1.12.1** | Live Metrics Dashboard: three-tier sample rate engine (hot/warm/cold), live session pulse, phase velocity analytics, planning quality scores, historical trends, CSS-only visualizations, 460 dashboard tests |
+| **v1.13** | Session Lifecycle & Workflow Coprocessor: message stack (push/pop/poke/drain), session management via tmux, recording/playback with 14 metrics, Pipeline List coprocessor (WAIT/MOVE/SKIP), Offload engine for script promotion, Team-as-Chip framework (Agnus/Denise/Paula/Gary), Exec kernel with prioritized scheduling, Pipeline learning from observations, 1057 tests |

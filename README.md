@@ -72,19 +72,19 @@ Just as the Amiga distributed work across specialized chips rather than routing 
 
 | Chip | Domain | Real Computer Analog |
 |------|--------|---------------------|
-| **Agnus** | Context management -- memory allocation, context window budgets, state tracking | Memory controller / DMA |
+| **Agnus** | Context management -- memory allocation, context window budgets, state tracking | Memory controller |
 | **Denise** | Output generation -- code production, documentation, rendering | Graphics processor |
 | **Paula** | I/O operations -- file access, API calls, external tool integration | I/O controller |
-| **Gary** | Glue logic -- routing, lifecycle coordination, inter-chip communication | Bus controller / chipset glue |
+| **Gary** | Glue logic -- routing, lifecycle coordination, inter-chip communication | Bus controller |
 
-Each chip has dedicated DMA channels (token budgets with guaranteed minimums), message ports (FIFO queues with reply-based ownership), and a 32-bit signal system for lightweight wake/sleep coordination -- the same primitives that real hardware uses for inter-processor communication.
+Each chip has dedicated budget channels (token budgets with guaranteed minimums), message ports (FIFO queues with reply-based ownership), and a 32-bit signal system for lightweight wake/sleep coordination -- the same primitives that real hardware uses for inter-processor communication.
 
-### Copper Lists: Declarative Workflow Programs
+### Pipeline Lists: Declarative Workflow Programs
 
-In the Amiga, the Copper was a simple coprocessor that executed display lists -- sequences of WAIT and MOVE instructions synchronized to the video beam. Skill Creator uses the same concept for workflow automation:
+Pipeline Lists are declarative workflow programs -- sequences of WAIT, MOVE, and SKIP instructions synchronized to GSD lifecycle events. Inspired by the Amiga's Copper coprocessor (which executed display lists synced to the video beam), Pipeline Lists bring the same concept to workflow automation:
 
 ```yaml
-# A Copper List synchronized to GSD lifecycle events
+# A Pipeline List synchronized to GSD lifecycle events
 - wait: phase-planned        # Block until planning completes
 - move:
     target: skill
@@ -96,22 +96,22 @@ In the Amiga, the Copper was a simple coprocessor that executed display lists --
 - move:
     target: script
     name: generate-docs
-    mode: blitter             # Execute outside context window
+    mode: offload             # Execute outside context window
 ```
 
-Copper Lists **pre-compile during planning** and **execute automatically during phase transitions**. The AI doesn't decide what skills to load at runtime -- the workflow program has already determined the optimal activation sequence based on observed patterns. This eliminates the overhead of skill selection from the critical path.
+Pipeline Lists **pre-compile during planning** and **execute automatically during phase transitions**. The AI doesn't decide what skills to load at runtime -- the workflow program has already determined the optimal activation sequence based on observed patterns. This eliminates the overhead of skill selection from the critical path.
 
-### The Blitter: Bulk Operations Outside the Context Window
+### The Offload Engine: Bulk Operations Outside the Context Window
 
-The Blitter handles deterministic operations that don't need AI reasoning -- running test suites, generating boilerplate, formatting code, computing metrics. These operations are "promoted" from skill metadata to standalone scripts and executed as child processes, freeing the context window for work that actually requires intelligence.
+The Offload engine handles deterministic operations that don't need AI reasoning -- running test suites, generating boilerplate, formatting code, computing metrics. These operations are "promoted" from skill metadata to standalone scripts and executed as child processes, freeing the context window for work that actually requires intelligence.
 
 ### The Exec Kernel
 
-A prioritized round-robin scheduler coordinates the chips, managing 18 typed message protocols for inter-team communication and DMA-channel token budgets with burst mode for temporary overallocation. Teams at different priority levels (phase-critical at 60%, workflow at 15%, background at 10%, pattern detection at 10%) share resources without starvation.
+A prioritized round-robin scheduler coordinates the chips, managing 18 typed message protocols for inter-team communication and per-team token budgets with burst mode for temporary overallocation. Teams at different priority levels (phase-critical at 60%, workflow at 15%, background at 10%, pattern detection at 10%) share resources without starvation.
 
 ### Why This Matters
 
-The chipset architecture means that building a complex agent system -- one with specialized roles, coordinated communication, resource budgets, and synchronized execution -- uses the same proven patterns that make high-performance computers work. You don't architect message passing from scratch. You define chips, wire up ports, write Copper Lists, and the kernel handles scheduling. The system learns which Copper Lists work well from execution feedback, refining activation sequences over time.
+The chipset architecture means that building a complex agent system -- one with specialized roles, coordinated communication, resource budgets, and synchronized execution -- uses the same proven patterns that make high-performance computers work. You don't architect message passing from scratch. You define chips, wire up ports, write Pipeline Lists, and the kernel handles scheduling. The system learns which Pipeline Lists work well from execution feedback, refining activation sequences over time.
 
 Skills, agents, and teams generated by Skill Creator follow the official [Claude Code](https://docs.anthropic.com/en/docs/build-with-claude/claude-code) and [Agent Skills](https://agentskills.io) specifications. They work natively in Claude Code and export to OpenAI Codex CLI, Cursor, GitHub Copilot, and Gemini CLI.
 
@@ -172,6 +172,7 @@ All documentation lives in [`docs/`](docs/).
 | [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 17 milestones |
 | [GSD Teams Guide](docs/GSD-TEAMS.md) | Teams vs subagents for GSD workflows |
 | [Comparison](docs/COMPARISON.md) | Skills vs Agents vs Teams |
+| [Release History](docs/RELEASE-HISTORY.md) | Detailed release notes for all 17 milestones |
 | [Troubleshooting](docs/TROUBLESHOOTING.md) | Common issues and solutions |
 | [Examples](examples/) | 34 ready-to-use skills, agents, and teams |
 
