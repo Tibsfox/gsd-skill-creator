@@ -1,8 +1,8 @@
 /**
- * Copper Learning feedback engine.
+ * Pipeline Learning feedback engine.
  *
  * Tracks execution accuracy by comparing predicted MOVE activations
- * (from a Copper List) against actual skill activations. Accumulates
+ * (from a Pipeline) against actual skill activations. Accumulates
  * feedback records per LibraryEntry and refines lists by adjusting
  * confidence, adding missing MOVEs, and removing unused MOVEs.
  *
@@ -11,11 +11,11 @@
  */
 
 import type {
-  CopperList,
-  CopperInstruction,
+  Pipeline,
+  PipelineInstruction,
   MoveInstruction,
 } from '../types.js';
-import { CopperListSchema } from '../schema.js';
+import { PipelineSchema } from '../schema.js';
 import type { FeedbackRecord, LibraryEntry } from './types.js';
 
 // ============================================================================
@@ -74,9 +74,9 @@ export interface RefinementResult {
 // ============================================================================
 
 /**
- * Engine that records execution feedback and refines Copper Lists.
+ * Engine that records execution feedback and refines Pipelines.
  *
- * After a learned Copper List executes, the engine compares predicted
+ * After a learned Pipeline executes, the engine compares predicted
  * MOVE instructions against actual skill activations. Over time, it
  * adjusts confidence scores and modifies lists by adding missed skills
  * or removing unused ones.
@@ -266,7 +266,7 @@ export class FeedbackEngine {
     const hasWait = entry.list.instructions.some((i) => i.type === 'wait');
     if (!hasWait) {
       // Revert to original instructions
-      entry.list.instructions = originalInstructions as CopperInstruction[];
+      entry.list.instructions = originalInstructions as PipelineInstruction[];
       entry.list.metadata.confidence = originalConfidence;
       return noChange;
     }
@@ -275,10 +275,10 @@ export class FeedbackEngine {
     entry.list.metadata.confidence = newConfidence;
 
     // Validate against schema
-    const parseResult = CopperListSchema.safeParse(entry.list);
+    const parseResult = PipelineSchema.safeParse(entry.list);
     if (!parseResult.success) {
       // Revert on validation failure
-      entry.list.instructions = originalInstructions as CopperInstruction[];
+      entry.list.instructions = originalInstructions as PipelineInstruction[];
       entry.list.metadata.confidence = originalConfidence;
       return noChange;
     }
@@ -313,9 +313,9 @@ export class FeedbackEngine {
   // --------------------------------------------------------------------------
 
   /**
-   * Extract predicted skill names from MOVE instructions in a CopperList.
+   * Extract predicted skill names from MOVE instructions in a Pipeline.
    */
-  private extractPredictedSkills(list: CopperList): string[] {
+  private extractPredictedSkills(list: Pipeline): string[] {
     return list.instructions
       .filter(
         (instr): instr is MoveInstruction =>
