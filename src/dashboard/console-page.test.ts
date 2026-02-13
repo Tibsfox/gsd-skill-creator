@@ -46,6 +46,7 @@ describe('renderConsolePage -- status section', () => {
       questions: [],
       helperUrl: '/api/console/message',
       config: null,
+      activityEntries: [],
     });
     expect(html).toContain('class="console-status"');
   });
@@ -61,6 +62,7 @@ describe('renderConsolePage -- status section', () => {
       questions: [],
       helperUrl: '/api/console/message',
       config: null,
+      activityEntries: [],
     });
     expect(html).toContain('132-console-panel-settings');
     expect(html).toContain('01');
@@ -74,6 +76,7 @@ describe('renderConsolePage -- status section', () => {
       questions: [],
       helperUrl: '/api/console/message',
       config: null,
+      activityEntries: [],
     });
     expect(html).toContain('console-status');
     expect(html).toMatch(/offline|no status/i);
@@ -85,6 +88,7 @@ describe('renderConsolePage -- status section', () => {
       questions: [],
       helperUrl: '/api/console/message',
       config: null,
+      activityEntries: [],
     });
     expect(html).toContain('data-refresh="console-status"');
   });
@@ -101,6 +105,7 @@ describe('renderConsolePage -- questions section', () => {
       questions: [],
       helperUrl: '/api/console/message',
       config: null,
+      activityEntries: [],
     });
     expect(html).toContain('class="console-questions"');
   });
@@ -115,6 +120,7 @@ describe('renderConsolePage -- questions section', () => {
       questions,
       helperUrl: '/api/console/message',
       config: null,
+      activityEntries: [],
     });
     expect(html).toContain('data-question-id="q-1"');
     expect(html).toContain('data-question-id="q-2"');
@@ -128,6 +134,7 @@ describe('renderConsolePage -- questions section', () => {
       questions: [],
       helperUrl: '/api/console/message',
       config: null,
+      activityEntries: [],
     });
     expect(html).toMatch(/no pending questions/i);
   });
@@ -138,6 +145,7 @@ describe('renderConsolePage -- questions section', () => {
       questions: [],
       helperUrl: '/api/console/message',
       config: null,
+      activityEntries: [],
     });
     expect(html).toContain('<script>');
     expect(html).toContain('submitQuestionResponse');
@@ -155,6 +163,7 @@ describe('renderConsolePage -- placeholder sections', () => {
       questions: [],
       helperUrl: '/api/console/message',
       config: null,
+      activityEntries: [],
     });
     expect(html).toContain('class="console-settings"');
   });
@@ -165,6 +174,7 @@ describe('renderConsolePage -- placeholder sections', () => {
       questions: [],
       helperUrl: '/api/console/message',
       config: null,
+      activityEntries: [],
     });
     expect(html).toContain('class="console-activity"');
   });

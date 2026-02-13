@@ -5,13 +5,14 @@
  * 1. Status -- live session progress from outbox/status/current.json
  * 2. Questions -- pending question cards with interactive response
  * 3. Settings -- hot-configurable toggles and non-hot disabled controls
- * 4. Activity -- placeholder (wired in plan 03)
+ * 4. Activity -- bridge.jsonl timeline with clipboard fallback
  *
  * @module dashboard/console-page
  */
 import { renderQuestionCard, renderQuestionCardStyles } from './question-card.js';
 import { renderQuestionResponseScript } from './question-poller.js';
 import { renderConsoleSettings, renderConsoleSettingsStyles, renderSettingsScript, } from './console-settings.js';
+import { renderConsoleActivity, renderConsoleActivityStyles, renderClipboardFallbackScript, } from './console-activity.js';
 // ---------------------------------------------------------------------------
 // Status section
 // ---------------------------------------------------------------------------
@@ -96,12 +97,12 @@ function renderSettingsSection(config, helperUrl) {
 </div>`;
 }
 // ---------------------------------------------------------------------------
-// Placeholder sections
+// Activity section
 // ---------------------------------------------------------------------------
-function renderActivitySection() {
+function renderActivitySection(entries) {
     return `<div class="console-activity">
   <h2 class="console-section-title">Activity</h2>
-  <div class="console-placeholder">Activity log -- loading...</div>
+  ${renderConsoleActivity(entries)}
 </div>`;
 }
 // ---------------------------------------------------------------------------
@@ -121,11 +122,12 @@ export function renderConsolePage(data) {
         renderStatusSection(data.status),
         renderQuestionsSection(data.questions, data.helperUrl),
         renderSettingsSection(data.config, data.helperUrl),
-        renderActivitySection(),
+        renderActivitySection(data.activityEntries),
     ];
     return `<div class="console-page">
   <h1 class="page-title">Console</h1>
   ${sections.join('\n  ')}
+  ${renderClipboardFallbackScript()}
 </div>`;
 }
 // ---------------------------------------------------------------------------
@@ -300,5 +302,7 @@ export function renderConsolePageStyles() {
 ${renderQuestionCardStyles()}
 
 ${renderConsoleSettingsStyles()}
+
+${renderConsoleActivityStyles()}
 `;
 }

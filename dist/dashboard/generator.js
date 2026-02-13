@@ -17,6 +17,7 @@ import { generateRefreshScript } from './refresh.js';
 import { collectAndRenderMetrics } from './metrics/integration.js';
 import { buildTerminalHtml } from './terminal-integration.js';
 import { renderConsolePage, renderConsolePageStyles } from './console-page.js';
+import { classifyLogEntry } from './console-activity.js';
 import { QuestionPoller } from './question-poller.js';
 import { mkdir, writeFile, readFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -351,6 +352,20 @@ export async function generate(options) {
     catch {
         // No config file — settings panel will show empty state
     }
+    // Read bridge.jsonl for activity timeline (graceful — never fails the pipeline)
+    let activityEntries = [];
+    try {
+        const logPath = join(options.planningDir, 'console/logs/bridge.jsonl');
+        const logRaw = await readFile(logPath, 'utf-8');
+        const lines = logRaw.trim().split('\n').filter(Boolean);
+        activityEntries = lines.map(line => {
+            const entry = JSON.parse(line);
+            return classifyLogEntry(entry);
+        });
+    }
+    catch {
+        // No log file or parse error — empty activity
+    }
     // Ensure output directory exists
     try {
         await mkdir(options.outputDir, { recursive: true });
@@ -440,6 +455,7 @@ export async function generate(options) {
                 questions: pendingQuestions,
                 helperUrl: '/api/console/message',
                 config: milestoneConfig,
+                activityEntries,
             }),
             meta: {
                 description: 'Console panel with live status, settings, and activity log',
