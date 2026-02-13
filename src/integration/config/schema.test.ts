@@ -402,10 +402,10 @@ describe('Terminal defaults in composite config', () => {
     expect(config).toHaveProperty('terminal');
   });
 
-  it('has port=3000 by default', () => {
+  it('has port=11338 by default', () => {
     const config = IntegrationConfigSchema.parse({});
 
-    expect(config.terminal.port).toBe(3000);
+    expect(config.terminal.port).toBe(11338);
   });
 
   it('has base_path="/terminal" by default', () => {
@@ -455,7 +455,7 @@ describe('Terminal partial overrides in composite config', () => {
     const config = IntegrationConfigSchema.parse({ terminal: { theme: 'light' } });
 
     expect(config.terminal.theme).toBe('light');
-    expect(config.terminal.port).toBe(3000);
+    expect(config.terminal.port).toBe(11338);
   });
 });
 
@@ -547,7 +547,7 @@ describe('Existing config behavior unchanged', () => {
     expect(config.integration.observe_sessions).toBe(true);
 
     // Terminal gets defaults
-    expect(config.terminal.port).toBe(3000);
+    expect(config.terminal.port).toBe(11338);
     expect(config.terminal.base_path).toBe('/terminal');
     expect(config.terminal.auth_mode).toBe('none');
     expect(config.terminal.theme).toBe('dark');
@@ -561,7 +561,7 @@ describe('Existing config behavior unchanged', () => {
   it('DEFAULT_INTEGRATION_CONFIG includes terminal section', () => {
     expect(DEFAULT_INTEGRATION_CONFIG).toHaveProperty('terminal');
     expect(DEFAULT_INTEGRATION_CONFIG.terminal).toEqual({
-      port: 3000,
+      port: 11338,
       base_path: '/terminal',
       auth_mode: 'none',
       theme: 'dark',
