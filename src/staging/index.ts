@@ -99,3 +99,25 @@ export { appendAuditEntry, readAuditLog } from './queue/index.js';
 export { detectDependencies } from './queue/index.js';
 export { analyzeOptimizations } from './queue/index.js';
 export { createQueueManager } from './queue/index.js';
+
+// Queue pre-wiring -- types
+export type {
+  PreWiringOptions,
+  PreWiringResult,
+  PreWiredSkill,
+  PreWiredTopology,
+  PreWiredAgent,
+} from './queue/index.js';
+
+// Queue pre-wiring -- functions
+export { generatePreWiring } from './queue/index.js';
+
+// Queue retroactive audit -- types
+export type {
+  RetroactiveAuditOptions,
+  RetroactiveAuditRecommendation,
+  PatternTrigger,
+} from './queue/index.js';
+
+// Queue retroactive audit -- constants and functions
+export { ELIGIBLE_STATES, SEVERITY_ORDER, recommendRetroactiveAudit } from './queue/index.js';
