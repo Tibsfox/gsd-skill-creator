@@ -136,6 +136,13 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Category-specific suggestion strings as const record keyed by HygieneCategory
 - Coherence findings always isCritical=false (never auto-approve blockers)
 - Summary counts computed from surfaced findings only (not pre-filter total)
+- Severity threshold >= 0.2 (not > 0.2) for warning in pattern fidelity (includes boundary)
+- Fuzzy stem matching via commonPrefixLength >= 4 chars for pattern fidelity evidence overlap
+- Evidence overlap threshold 0.3 (30% of section tokens must appear in evidence corpus)
+- Word-level Jaccard similarity for coherence and copying checks (deterministic, no embeddings)
+- Population stdDev (N not N-1) for length outlier detection in training coherence
+- Sliding window with match merging for verbatim copying detection (50-char minimum)
+- Sentence-level best-match averaging for overall similarity in copying detector
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -151,7 +158,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - No WebSockets -- dashboard polls outbox at 2-3s intervals
 - Staging module at src/staging/ (types, schema, directory, intake, state-machine, index)
 - Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, trust-store, finding-actions, report, index)
-- Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift)
+- Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift, pattern-fidelity, training-coherence, copying-detector)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -166,15 +173,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 389 complete |
+| Total plans | 390 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 136-04-PLAN.md
-Stopped at: Plan 136-04 complete (finding actions and trust decay store)
-Next action: Continue phase 136 (plan 136-05 remaining).
-Context: v1.17 Staging Layer. Phase 136 in progress. Trust store and finding actions added to src/staging/hygiene/. 222 hygiene tests passing (61 new from 136-04).
+Last: 2026-02-13 — Completed 139-04-PLAN.md
+Stopped at: Plan 139-04 complete (training coherence and copying detection)
+Next action: Continue phase 139 (plan 139-05 remaining).
+Context: v1.17 Staging Layer. Phase 139 in progress. Training coherence checker and copying detector added to src/staging/derived/. 60 derived tests passing (22 new from 139-04).
 
 ---
-*Last updated: 2026-02-13 (136-04 complete)*
+*Last updated: 2026-02-13 (139-04 complete)*
