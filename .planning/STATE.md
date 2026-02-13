@@ -4,9 +4,9 @@
 
 Milestone: v1.17 — Staging Layer
 Phase: 138 — Resource Analysis (in progress)
-Plan: 138-01 complete
+Plan: 138-04 complete
 Status: Executing phase 138
-Last activity: 2026-02-13 — Completed 138-01 (resource types and vision analyzer)
+Last activity: 2026-02-13 — Completed 138-04 (token budget estimator and work decomposer)
 
 ## Project Reference
 
@@ -163,6 +163,10 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Pure function analyzeVision() with pattern-matching extraction (no I/O, deterministic)
 - Section-based document parsing with heading detection for requirement category assignment
 - 30+ known external dependency patterns (databases, services, APIs, libraries) with type classification
+- Score-based topology recommender with 5 scoring functions and preference-ordered tiebreak
+- Hybrid cap raised to 1.5 to exceed pipeline's 1.0 for truly complex mixed work
+- Map-reduce independence boost guarded by requirements.length > 0 (prevents false scoring on empty analysis)
+- Confidence: winner score / total, penalized 0.05 per ambiguity marker, floor 0.3
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -180,7 +184,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, trust-store, finding-actions, report, index)
 - Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift, pattern-fidelity, training-coherence, copying-detector, checker, index)
 - Staging intake-flow submodule at src/staging/intake-flow/ (types, clarity-assessor, step-types, step-tracker, orchestrator, index)
-- Staging resource submodule at src/staging/resource/ (types, analyzer)
+- Staging resource submodule at src/staging/resource/ (types, analyzer, topology)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -200,10 +204,10 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 138-01-PLAN.md
-Stopped at: Plan 138-01 complete (resource types and vision analyzer). Phase 138 in progress.
-Next action: Continue with 138-02 (skill matcher).
-Context: v1.17 Staging Layer. Phase 138 in progress (1/6 plans complete, 26 resource tests). Resource submodule initialized: types (15 interfaces, 5 const arrays), analyzer (analyzeVision). All 440 staging tests pass.
+Last: 2026-02-13 — Completed 138-03-PLAN.md
+Stopped at: Plan 138-03 complete (topology recommender). Phase 138 in progress.
+Next action: Continue with remaining 138 plans.
+Context: v1.17 Staging Layer. Phase 138 in progress. Resource submodule: types, analyzer, topology (recommendTopology). 13 topology tests pass.
 
 ---
-*Last updated: 2026-02-13 (138-01 complete)*
+*Last updated: 2026-02-13 (138-03 complete)*
