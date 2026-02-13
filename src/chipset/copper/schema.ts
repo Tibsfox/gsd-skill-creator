@@ -1,12 +1,12 @@
 /**
- * Zod validation schemas for Copper List instructions and metadata.
+ * Zod validation schemas for Pipeline instructions and metadata.
  *
  * Provides runtime validation for WAIT/MOVE/SKIP instructions, metadata,
- * and the CopperList container. Uses const arrays from types.ts for
+ * and the Pipeline container. Uses const arrays from types.ts for
  * type-safe enum validation.
  *
  * All schemas produce clear error messages for malformed instructions.
- * CopperMetadataSchema uses .passthrough() for forward compatibility.
+ * PipelineMetadataSchema uses .passthrough() for forward compatibility.
  */
 
 import { z } from 'zod';
@@ -53,7 +53,7 @@ export const MoveInstructionSchema = z.object({
   }),
   name: z.string().min(1, 'MOVE instruction requires a non-empty name'),
   mode: z.enum(ACTIVATION_MODES, {
-    error: 'Invalid activation mode. Valid modes: sprite, full, blitter, async',
+    error: 'Invalid activation mode. Valid modes: lite, full, offload, async',
   }),
   args: z.record(z.string(), z.unknown()).optional(),
   description: z.string().optional(),
@@ -90,33 +90,33 @@ export const SkipInstructionSchema = z.object({
 });
 
 // ============================================================================
-// CopperInstructionSchema (discriminated union)
+// PipelineInstructionSchema (discriminated union)
 // ============================================================================
 
 /**
- * Discriminated union schema for all Copper List instruction types.
+ * Discriminated union schema for all Pipeline instruction types.
  *
  * Dispatches validation based on the `type` field: 'wait', 'move', or 'skip'.
  * Unknown type values are rejected with a descriptive error.
  */
-export const CopperInstructionSchema = z.discriminatedUnion('type', [
+export const PipelineInstructionSchema = z.discriminatedUnion('type', [
   WaitInstructionSchema,
   MoveInstructionSchema,
   SkipInstructionSchema,
 ]);
 
 // ============================================================================
-// CopperMetadataSchema
+// PipelineMetadataSchema
 // ============================================================================
 
 /**
- * Schema for Copper List metadata.
+ * Schema for Pipeline metadata.
  *
  * Requires a non-empty name. All other fields are optional with sensible defaults.
  * Uses .passthrough() so unknown fields survive parsing for forward compatibility.
  */
-export const CopperMetadataSchema = z.object({
-  name: z.string().min(1, 'Copper List name is required'),
+export const PipelineMetadataSchema = z.object({
+  name: z.string().min(1, 'Pipeline name is required'),
   description: z.string().optional(),
   sourcePatterns: z.array(z.string()).optional(),
   tokenEstimate: z.number().nonnegative('Token estimate must be non-negative').optional(),
@@ -127,16 +127,16 @@ export const CopperMetadataSchema = z.object({
 }).passthrough();
 
 // ============================================================================
-// CopperListSchema
+// PipelineSchema
 // ============================================================================
 
 /**
- * Schema for a complete Copper List.
+ * Schema for a complete Pipeline.
  *
  * Validates both metadata and instructions array. The instructions array
  * must contain at least one instruction.
  */
-export const CopperListSchema = z.object({
-  metadata: CopperMetadataSchema,
-  instructions: z.array(CopperInstructionSchema).min(1, 'Copper List must have at least one instruction'),
+export const PipelineSchema = z.object({
+  metadata: PipelineMetadataSchema,
+  instructions: z.array(PipelineInstructionSchema).min(1, 'Pipeline must have at least one instruction'),
 });

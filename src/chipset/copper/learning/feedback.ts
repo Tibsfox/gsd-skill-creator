@@ -213,7 +213,7 @@ export class FeedbackEngine {
           type: 'move',
           target: 'skill',
           name: skill,
-          mode: 'sprite',
+          mode: 'lite',
           description: 'Added by learning feedback',
         };
 

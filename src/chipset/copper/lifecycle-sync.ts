@@ -1,9 +1,9 @@
 /**
- * GSD lifecycle event bridge for Copper List WAIT instructions.
+ * GSD lifecycle event bridge for Pipeline WAIT instructions.
  *
  * LifecycleSync provides the event synchronization mechanism between
  * the GSD workflow (which emits lifecycle events like phase-start,
- * tests-passing, etc.) and the Copper executor (which blocks on WAIT
+ * tests-passing, etc.) and the Pipeline executor (which blocks on WAIT
  * instructions until the matching event fires).
  *
  * Events are ephemeral -- they are not stored. A waitFor() call only

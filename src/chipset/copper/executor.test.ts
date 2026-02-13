@@ -1,5 +1,5 @@
 /**
- * Tests for the Copper List executor.
+ * Tests for the Pipeline executor.
  *
  * Verifies sequential execution of WAIT/MOVE/SKIP instructions:
  * WAIT blocks until lifecycle events fire, SKIP evaluates conditions
@@ -11,15 +11,15 @@ import { writeFile, unlink } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { LifecycleSync } from './lifecycle-sync.js';
-import { CopperExecutor } from './executor.js';
-import type { CopperList, MoveInstruction, SkipCondition } from './types.js';
+import { PipelineExecutor } from './executor.js';
+import type { Pipeline, MoveInstruction, SkipCondition } from './types.js';
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
-/** Create a minimal CopperList from instructions. */
-function makeList(instructions: CopperList['instructions']): CopperList {
+/** Create a minimal Pipeline from instructions. */
+function makeList(instructions: Pipeline['instructions']): Pipeline {
   return {
     metadata: { name: 'test-list', priority: 50, confidence: 1, version: 1 },
     instructions,
@@ -28,14 +28,14 @@ function makeList(instructions: CopperList['instructions']): CopperList {
 
 /** Create a MOVE instruction with defaults. */
 function move(name: string): MoveInstruction {
-  return { type: 'move', target: 'skill', name, mode: 'sprite' };
+  return { type: 'move', target: 'skill', name, mode: 'lite' };
 }
 
 // ---------------------------------------------------------------------------
 // Tests
 // ---------------------------------------------------------------------------
 
-describe('CopperExecutor', () => {
+describe('PipelineExecutor', () => {
   // Track env var modifications so we can clean up
   const envVarsSet: string[] = [];
   afterEach(() => {
@@ -48,7 +48,7 @@ describe('CopperExecutor', () => {
   it('executes a list with only a MOVE instruction', async () => {
     const sync = new LifecycleSync();
     const handler = vi.fn().mockResolvedValue(undefined);
-    const executor = new CopperExecutor({ lifecycleSync: sync, activationHandler: handler });
+    const executor = new PipelineExecutor({ lifecycleSync: sync, activationHandler: handler });
 
     const list = makeList([move('git-commit')]);
     const result = await executor.run(list);
@@ -63,7 +63,7 @@ describe('CopperExecutor', () => {
   it('WAIT blocks until lifecycle event fires', async () => {
     const sync = new LifecycleSync();
     const handler = vi.fn().mockResolvedValue(undefined);
-    const executor = new CopperExecutor({ lifecycleSync: sync, activationHandler: handler });
+    const executor = new PipelineExecutor({ lifecycleSync: sync, activationHandler: handler });
 
     const list = makeList([
       { type: 'wait', event: 'phase-start' as const },
@@ -85,7 +85,7 @@ describe('CopperExecutor', () => {
   it('WAIT with timeout aborts execution if event never fires', async () => {
     const sync = new LifecycleSync();
     const handler = vi.fn().mockResolvedValue(undefined);
-    const executor = new CopperExecutor({ lifecycleSync: sync, activationHandler: handler });
+    const executor = new PipelineExecutor({ lifecycleSync: sync, activationHandler: handler });
 
     const list = makeList([
       { type: 'wait', event: 'phase-start' as const, timeout: 0.2 }, // 0.2 seconds = 200ms
@@ -99,7 +99,7 @@ describe('CopperExecutor', () => {
     const sync = new LifecycleSync();
     const handler = vi.fn().mockResolvedValue(undefined);
     const condEval = vi.fn().mockResolvedValue(true);
-    const executor = new CopperExecutor({
+    const executor = new PipelineExecutor({
       lifecycleSync: sync,
       activationHandler: handler,
       conditionEvaluator: condEval,
@@ -121,7 +121,7 @@ describe('CopperExecutor', () => {
     const sync = new LifecycleSync();
     const handler = vi.fn().mockResolvedValue(undefined);
     const condEval = vi.fn().mockResolvedValue(false);
-    const executor = new CopperExecutor({
+    const executor = new PipelineExecutor({
       lifecycleSync: sync,
       activationHandler: handler,
       conditionEvaluator: condEval,
@@ -142,7 +142,7 @@ describe('CopperExecutor', () => {
     const sync = new LifecycleSync();
     const handler = vi.fn().mockResolvedValue(undefined);
     const condEval = vi.fn().mockResolvedValue(true);
-    const executor = new CopperExecutor({
+    const executor = new PipelineExecutor({
       lifecycleSync: sync,
       activationHandler: handler,
       conditionEvaluator: condEval,
@@ -165,7 +165,7 @@ describe('CopperExecutor', () => {
     const handler = vi.fn().mockImplementation(async (instr: MoveInstruction) => {
       callOrder.push(instr.name);
     });
-    const executor = new CopperExecutor({ lifecycleSync: sync, activationHandler: handler });
+    const executor = new PipelineExecutor({ lifecycleSync: sync, activationHandler: handler });
 
     const list = makeList([
       { type: 'wait', event: 'phase-start' as const },
@@ -189,10 +189,10 @@ describe('CopperExecutor', () => {
   it('built-in condition evaluator: file:path exists check', async () => {
     const sync = new LifecycleSync();
     const handler = vi.fn().mockResolvedValue(undefined);
-    const executor = new CopperExecutor({ lifecycleSync: sync, activationHandler: handler });
+    const executor = new PipelineExecutor({ lifecycleSync: sync, activationHandler: handler });
 
     // Create a temp file
-    const tmpFile = join(tmpdir(), `test-copper-exists-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+    const tmpFile = join(tmpdir(), `test-pipeline-exists-${Date.now()}-${Math.random().toString(36).slice(2)}`);
     await writeFile(tmpFile, 'test');
 
     try {
@@ -212,10 +212,10 @@ describe('CopperExecutor', () => {
   it('built-in condition evaluator: file:path not-exists check', async () => {
     const sync = new LifecycleSync();
     const handler = vi.fn().mockResolvedValue(undefined);
-    const executor = new CopperExecutor({ lifecycleSync: sync, activationHandler: handler });
+    const executor = new PipelineExecutor({ lifecycleSync: sync, activationHandler: handler });
 
     const list = makeList([
-      { type: 'skip', condition: { left: 'file:/tmp/nonexistent-copper-9999999', op: 'not-exists' as const } },
+      { type: 'skip', condition: { left: 'file:/tmp/nonexistent-pipeline-9999999', op: 'not-exists' as const } },
       move('skill-1'),
     ]);
 
@@ -227,13 +227,13 @@ describe('CopperExecutor', () => {
   it('built-in condition evaluator: env:VAR equals check', async () => {
     const sync = new LifecycleSync();
     const handler = vi.fn().mockResolvedValue(undefined);
-    const executor = new CopperExecutor({ lifecycleSync: sync, activationHandler: handler });
+    const executor = new PipelineExecutor({ lifecycleSync: sync, activationHandler: handler });
 
-    process.env.COPPER_TEST_VAR = 'hello';
-    envVarsSet.push('COPPER_TEST_VAR');
+    process.env.PIPELINE_TEST_VAR = 'hello';
+    envVarsSet.push('PIPELINE_TEST_VAR');
 
     const list = makeList([
-      { type: 'skip', condition: { left: 'env:COPPER_TEST_VAR', op: 'equals' as const, right: 'hello' } },
+      { type: 'skip', condition: { left: 'env:PIPELINE_TEST_VAR', op: 'equals' as const, right: 'hello' } },
       move('skill-1'),
     ]);
 
@@ -245,13 +245,13 @@ describe('CopperExecutor', () => {
   it('built-in condition evaluator: env:VAR not-equals check', async () => {
     const sync = new LifecycleSync();
     const handler = vi.fn().mockResolvedValue(undefined);
-    const executor = new CopperExecutor({ lifecycleSync: sync, activationHandler: handler });
+    const executor = new PipelineExecutor({ lifecycleSync: sync, activationHandler: handler });
 
-    process.env.COPPER_TEST_VAR = 'hello';
-    envVarsSet.push('COPPER_TEST_VAR');
+    process.env.PIPELINE_TEST_VAR = 'hello';
+    envVarsSet.push('PIPELINE_TEST_VAR');
 
     const list = makeList([
-      { type: 'skip', condition: { left: 'env:COPPER_TEST_VAR', op: 'not-equals' as const, right: 'world' } },
+      { type: 'skip', condition: { left: 'env:PIPELINE_TEST_VAR', op: 'not-equals' as const, right: 'world' } },
       move('skill-1'),
     ]);
 
@@ -263,7 +263,7 @@ describe('CopperExecutor', () => {
   it('built-in condition evaluator: var: runtime variables check', async () => {
     const sync = new LifecycleSync();
     const handler = vi.fn().mockResolvedValue(undefined);
-    const executor = new CopperExecutor({
+    const executor = new PipelineExecutor({
       lifecycleSync: sync,
       activationHandler: handler,
       runtimeVars: { phase: 'testing' },
@@ -279,11 +279,11 @@ describe('CopperExecutor', () => {
     expect(handler).not.toHaveBeenCalled();
   });
 
-  it('run() returns CopperExecutionResult with full stats', async () => {
+  it('run() returns PipelineExecutionResult with full stats', async () => {
     const sync = new LifecycleSync();
     const handler = vi.fn().mockResolvedValue(undefined);
     const condEval = vi.fn().mockResolvedValue(true);
-    const executor = new CopperExecutor({
+    const executor = new PipelineExecutor({
       lifecycleSync: sync,
       activationHandler: handler,
       conditionEvaluator: condEval,

@@ -1,8 +1,8 @@
 /**
- * Copper List executor -- processes WAIT/MOVE/SKIP instruction programs.
+ * Pipeline executor -- processes WAIT/MOVE/SKIP instruction programs.
  *
- * The executor is the heart of the Copper coprocessor. It drives the
- * instruction pointer through a Copper List sequentially, synchronizing
+ * The executor is the heart of the Pipeline coprocessor. It drives the
+ * instruction pointer through a Pipeline sequentially, synchronizing
  * skill/script/team activations to GSD lifecycle events via LifecycleSync.
  *
  * Instruction processing:
@@ -18,8 +18,8 @@
 
 import { access } from 'node:fs/promises';
 import type {
-  CopperList,
-  CopperInstruction,
+  Pipeline,
+  PipelineInstruction,
   WaitInstruction,
   MoveInstruction,
   SkipInstruction,
@@ -33,9 +33,9 @@ import { LifecycleSync } from './lifecycle-sync.js';
 // ============================================================================
 
 /**
- * Configuration for a CopperExecutor instance.
+ * Configuration for a PipelineExecutor instance.
  */
-export interface CopperExecutorConfig {
+export interface PipelineExecutorConfig {
   /** The lifecycle sync bridge for WAIT instruction event resolution. */
   lifecycleSync: LifecycleSync;
 
@@ -50,9 +50,9 @@ export interface CopperExecutorConfig {
 }
 
 /**
- * Result of executing a Copper List.
+ * Result of executing a Pipeline.
  */
-export interface CopperExecutionResult {
+export interface PipelineExecutionResult {
   /** Overall execution status. */
   status: 'completed' | 'timeout' | 'error';
 
@@ -65,7 +65,7 @@ export interface CopperExecutionResult {
   /** Number of WAIT instructions that blocked on lifecycle events. */
   waited: number;
 
-  /** Total number of instructions in the Copper List. */
+  /** Total number of instructions in the Pipeline. */
   instructionCount: number;
 
   /** Execution duration in milliseconds. */
@@ -174,36 +174,36 @@ async function evaluateCondition(
 }
 
 // ============================================================================
-// CopperExecutor
+// PipelineExecutor
 // ============================================================================
 
 /**
- * Executes a Copper List by processing instructions sequentially.
+ * Executes a Pipeline by processing instructions sequentially.
  *
  * The instruction pointer advances through the list one instruction at
  * a time. WAIT instructions block until the matching lifecycle event fires.
  * SKIP instructions conditionally advance the pointer by 2 (skipping the
  * next instruction) when their condition evaluates to true.
  */
-export class CopperExecutor {
-  private config: CopperExecutorConfig;
+export class PipelineExecutor {
+  private config: PipelineExecutorConfig;
 
-  constructor(config: CopperExecutorConfig) {
+  constructor(config: PipelineExecutorConfig) {
     this.config = config;
   }
 
   /**
-   * Run a Copper List to completion.
+   * Run a Pipeline to completion.
    *
    * Processes each instruction sequentially:
    * - WAIT: blocks on LifecycleSync.waitFor() until the event fires
    * - MOVE: calls the activation handler
    * - SKIP: evaluates condition; if true, skips the next instruction
    *
-   * @param list - The Copper List to execute
+   * @param list - The Pipeline to execute
    * @returns Execution result with status and stats
    */
-  async run(list: CopperList): Promise<CopperExecutionResult> {
+  async run(list: Pipeline): Promise<PipelineExecutionResult> {
     const startTime = Date.now();
     let executed = 0;
     let skipped = 0;

@@ -1,13 +1,13 @@
 /**
- * Tests for Copper List Zod schemas and instruction types.
+ * Tests for Pipeline Zod schemas and instruction types.
  *
  * Covers:
  * - WaitInstructionSchema validates GSD lifecycle events with optional timeout/description
  * - MoveInstructionSchema validates target types, activation modes, name, optional args
  * - SkipInstructionSchema validates condition with operator, left operand, optional right
- * - CopperInstructionSchema discriminated union accepts all three instruction types
- * - CopperMetadataSchema validates name, priority range, confidence range, passthrough
- * - CopperListSchema validates metadata + instructions array (min 1 instruction)
+ * - PipelineInstructionSchema discriminated union accepts all three instruction types
+ * - PipelineMetadataSchema validates name, priority range, confidence range, passthrough
+ * - PipelineSchema validates metadata + instructions array (min 1 instruction)
  */
 
 import { describe, it, expect } from 'vitest';
@@ -15,9 +15,9 @@ import {
   WaitInstructionSchema,
   MoveInstructionSchema,
   SkipInstructionSchema,
-  CopperInstructionSchema,
-  CopperMetadataSchema,
-  CopperListSchema,
+  PipelineInstructionSchema,
+  PipelineMetadataSchema,
+  PipelineSchema,
 } from './schema.js';
 
 // ============================================================================
@@ -114,14 +114,14 @@ describe('MoveInstructionSchema', () => {
       type: 'move',
       target: 'skill',
       name: 'git-commit',
-      mode: 'sprite',
+      mode: 'lite',
     });
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.type).toBe('move');
       expect(result.data.target).toBe('skill');
       expect(result.data.name).toBe('git-commit');
-      expect(result.data.mode).toBe('sprite');
+      expect(result.data.mode).toBe('lite');
     }
   });
 
@@ -139,7 +139,7 @@ describe('MoveInstructionSchema', () => {
   });
 
   it('accepts all activation modes', () => {
-    const modes = ['sprite', 'full', 'blitter', 'async'];
+    const modes = ['lite', 'full', 'offload', 'async'];
     for (const mode of modes) {
       const result = MoveInstructionSchema.safeParse({
         type: 'move',
@@ -156,7 +156,7 @@ describe('MoveInstructionSchema', () => {
       type: 'move',
       target: 'skill',
       name: 'git-commit',
-      mode: 'sprite',
+      mode: 'lite',
       args: { message: 'initial commit', amend: false },
     });
     expect(result.success).toBe(true);
@@ -183,7 +183,7 @@ describe('MoveInstructionSchema', () => {
     const result = MoveInstructionSchema.safeParse({
       type: 'move',
       target: 'skill',
-      mode: 'sprite',
+      mode: 'lite',
     });
     expect(result.success).toBe(false);
   });
@@ -192,7 +192,7 @@ describe('MoveInstructionSchema', () => {
     const result = MoveInstructionSchema.safeParse({
       type: 'move',
       name: 'git-commit',
-      mode: 'sprite',
+      mode: 'lite',
     });
     expect(result.success).toBe(false);
   });
@@ -211,7 +211,7 @@ describe('MoveInstructionSchema', () => {
       type: 'move',
       target: 'unknown',
       name: 'test',
-      mode: 'sprite',
+      mode: 'lite',
     });
     expect(result.success).toBe(false);
   });
@@ -317,12 +317,12 @@ describe('SkipInstructionSchema', () => {
 });
 
 // ============================================================================
-// CopperInstructionSchema (discriminated union)
+// PipelineInstructionSchema (discriminated union)
 // ============================================================================
 
-describe('CopperInstructionSchema', () => {
+describe('PipelineInstructionSchema', () => {
   it('accepts a valid WAIT instruction', () => {
-    const result = CopperInstructionSchema.safeParse({
+    const result = PipelineInstructionSchema.safeParse({
       type: 'wait',
       event: 'phase-start',
     });
@@ -330,17 +330,17 @@ describe('CopperInstructionSchema', () => {
   });
 
   it('accepts a valid MOVE instruction', () => {
-    const result = CopperInstructionSchema.safeParse({
+    const result = PipelineInstructionSchema.safeParse({
       type: 'move',
       target: 'skill',
       name: 'git-commit',
-      mode: 'sprite',
+      mode: 'lite',
     });
     expect(result.success).toBe(true);
   });
 
   it('accepts a valid SKIP instruction', () => {
-    const result = CopperInstructionSchema.safeParse({
+    const result = PipelineInstructionSchema.safeParse({
       type: 'skip',
       condition: { left: 'file:test', op: 'exists' },
     });
@@ -348,7 +348,7 @@ describe('CopperInstructionSchema', () => {
   });
 
   it('rejects instruction with unknown type', () => {
-    const result = CopperInstructionSchema.safeParse({
+    const result = PipelineInstructionSchema.safeParse({
       type: 'jump',
       target: 'label-1',
     });
@@ -356,14 +356,14 @@ describe('CopperInstructionSchema', () => {
   });
 
   it('rejects instruction with missing type field', () => {
-    const result = CopperInstructionSchema.safeParse({
+    const result = PipelineInstructionSchema.safeParse({
       event: 'phase-start',
     });
     expect(result.success).toBe(false);
   });
 
   it('error message indicates discriminator issue for unknown type', () => {
-    const result = CopperInstructionSchema.safeParse({
+    const result = PipelineInstructionSchema.safeParse({
       type: 'jump',
     });
     expect(result.success).toBe(false);
@@ -375,12 +375,12 @@ describe('CopperInstructionSchema', () => {
 });
 
 // ============================================================================
-// CopperMetadataSchema
+// PipelineMetadataSchema
 // ============================================================================
 
-describe('CopperMetadataSchema', () => {
+describe('PipelineMetadataSchema', () => {
   it('accepts full metadata with all fields', () => {
-    const result = CopperMetadataSchema.safeParse({
+    const result = PipelineMetadataSchema.safeParse({
       name: 'tdd-cycle',
       description: 'TDD development cycle automation',
       sourcePatterns: ['test:fail', 'code:edit'],
@@ -404,7 +404,7 @@ describe('CopperMetadataSchema', () => {
   });
 
   it('name is required as non-empty string', () => {
-    const result = CopperMetadataSchema.safeParse({
+    const result = PipelineMetadataSchema.safeParse({
       name: 'minimal-list',
     });
     expect(result.success).toBe(true);
@@ -414,18 +414,18 @@ describe('CopperMetadataSchema', () => {
   });
 
   it('description is optional string', () => {
-    const withDesc = CopperMetadataSchema.safeParse({
+    const withDesc = PipelineMetadataSchema.safeParse({
       name: 'test',
-      description: 'A test copper list',
+      description: 'A test pipeline',
     });
     expect(withDesc.success).toBe(true);
 
-    const withoutDesc = CopperMetadataSchema.safeParse({ name: 'test' });
+    const withoutDesc = PipelineMetadataSchema.safeParse({ name: 'test' });
     expect(withoutDesc.success).toBe(true);
   });
 
   it('sourcePatterns is optional array of strings', () => {
-    const result = CopperMetadataSchema.safeParse({
+    const result = PipelineMetadataSchema.safeParse({
       name: 'test',
       sourcePatterns: ['test:fail', 'code:edit', 'build:start'],
     });
@@ -436,13 +436,13 @@ describe('CopperMetadataSchema', () => {
   });
 
   it('tokenEstimate is optional non-negative number', () => {
-    const result = CopperMetadataSchema.safeParse({
+    const result = PipelineMetadataSchema.safeParse({
       name: 'test',
       tokenEstimate: 0,
     });
     expect(result.success).toBe(true);
 
-    const result2 = CopperMetadataSchema.safeParse({
+    const result2 = PipelineMetadataSchema.safeParse({
       name: 'test',
       tokenEstimate: 1500,
     });
@@ -450,7 +450,7 @@ describe('CopperMetadataSchema', () => {
   });
 
   it('priority defaults to 50 and is number 1-100', () => {
-    const result = CopperMetadataSchema.safeParse({ name: 'test' });
+    const result = PipelineMetadataSchema.safeParse({ name: 'test' });
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.priority).toBe(50);
@@ -458,7 +458,7 @@ describe('CopperMetadataSchema', () => {
   });
 
   it('confidence defaults to 1.0 and is number 0-1', () => {
-    const result = CopperMetadataSchema.safeParse({ name: 'test' });
+    const result = PipelineMetadataSchema.safeParse({ name: 'test' });
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.confidence).toBe(1.0);
@@ -466,7 +466,7 @@ describe('CopperMetadataSchema', () => {
   });
 
   it('accepts optional tags array of strings', () => {
-    const result = CopperMetadataSchema.safeParse({
+    const result = PipelineMetadataSchema.safeParse({
       name: 'test',
       tags: ['ci', 'automation', 'tdd'],
     });
@@ -477,13 +477,13 @@ describe('CopperMetadataSchema', () => {
   });
 
   it('accepts optional version as positive integer with default 1', () => {
-    const result = CopperMetadataSchema.safeParse({ name: 'test' });
+    const result = PipelineMetadataSchema.safeParse({ name: 'test' });
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.data.version).toBe(1);
     }
 
-    const result2 = CopperMetadataSchema.safeParse({ name: 'test', version: 5 });
+    const result2 = PipelineMetadataSchema.safeParse({ name: 'test', version: 5 });
     expect(result2.success).toBe(true);
     if (result2.success) {
       expect(result2.data.version).toBe(5);
@@ -491,33 +491,33 @@ describe('CopperMetadataSchema', () => {
   });
 
   it('rejects metadata with empty name', () => {
-    const result = CopperMetadataSchema.safeParse({ name: '' });
+    const result = PipelineMetadataSchema.safeParse({ name: '' });
     expect(result.success).toBe(false);
   });
 
   it('rejects metadata with priority outside 1-100 range', () => {
-    const tooLow = CopperMetadataSchema.safeParse({ name: 'test', priority: 0 });
+    const tooLow = PipelineMetadataSchema.safeParse({ name: 'test', priority: 0 });
     expect(tooLow.success).toBe(false);
 
-    const tooHigh = CopperMetadataSchema.safeParse({ name: 'test', priority: 101 });
+    const tooHigh = PipelineMetadataSchema.safeParse({ name: 'test', priority: 101 });
     expect(tooHigh.success).toBe(false);
   });
 
   it('rejects metadata with confidence outside 0-1 range', () => {
-    const tooLow = CopperMetadataSchema.safeParse({ name: 'test', confidence: -0.1 });
+    const tooLow = PipelineMetadataSchema.safeParse({ name: 'test', confidence: -0.1 });
     expect(tooLow.success).toBe(false);
 
-    const tooHigh = CopperMetadataSchema.safeParse({ name: 'test', confidence: 1.1 });
+    const tooHigh = PipelineMetadataSchema.safeParse({ name: 'test', confidence: 1.1 });
     expect(tooHigh.success).toBe(false);
   });
 
   it('rejects metadata with negative tokenEstimate', () => {
-    const result = CopperMetadataSchema.safeParse({ name: 'test', tokenEstimate: -1 });
+    const result = PipelineMetadataSchema.safeParse({ name: 'test', tokenEstimate: -1 });
     expect(result.success).toBe(false);
   });
 
   it('preserves unknown fields via passthrough', () => {
-    const result = CopperMetadataSchema.safeParse({
+    const result = PipelineMetadataSchema.safeParse({
       name: 'test',
       customField: 'hello',
       extraNumber: 42,
@@ -531,16 +531,16 @@ describe('CopperMetadataSchema', () => {
 });
 
 // ============================================================================
-// CopperListSchema
+// PipelineSchema
 // ============================================================================
 
-describe('CopperListSchema', () => {
+describe('PipelineSchema', () => {
   it('accepts valid list with metadata and instructions', () => {
-    const result = CopperListSchema.safeParse({
+    const result = PipelineSchema.safeParse({
       metadata: { name: 'test-cycle' },
       instructions: [
         { type: 'wait', event: 'phase-start' },
-        { type: 'move', target: 'skill', name: 'git-commit', mode: 'sprite' },
+        { type: 'move', target: 'skill', name: 'git-commit', mode: 'lite' },
       ],
     });
     expect(result.success).toBe(true);
@@ -551,21 +551,21 @@ describe('CopperListSchema', () => {
   });
 
   it('rejects list with missing metadata', () => {
-    const result = CopperListSchema.safeParse({
+    const result = PipelineSchema.safeParse({
       instructions: [{ type: 'wait', event: 'phase-start' }],
     });
     expect(result.success).toBe(false);
   });
 
   it('rejects list with missing instructions', () => {
-    const result = CopperListSchema.safeParse({
+    const result = PipelineSchema.safeParse({
       metadata: { name: 'test' },
     });
     expect(result.success).toBe(false);
   });
 
   it('rejects list with empty instructions array', () => {
-    const result = CopperListSchema.safeParse({
+    const result = PipelineSchema.safeParse({
       metadata: { name: 'test' },
       instructions: [],
     });
@@ -573,7 +573,7 @@ describe('CopperListSchema', () => {
   });
 
   it('rejects list with invalid instruction inside array', () => {
-    const result = CopperListSchema.safeParse({
+    const result = PipelineSchema.safeParse({
       metadata: { name: 'test' },
       instructions: [{ type: 'jump', target: 'nowhere' }],
     });
@@ -581,7 +581,7 @@ describe('CopperListSchema', () => {
   });
 
   it('validates both metadata and instructions (nested validation)', () => {
-    const result = CopperListSchema.safeParse({
+    const result = PipelineSchema.safeParse({
       metadata: { name: '' },
       instructions: [{ type: 'wait', event: 'phase-start' }],
     });
@@ -589,12 +589,12 @@ describe('CopperListSchema', () => {
   });
 
   it('accepts list with mixed instruction types', () => {
-    const result = CopperListSchema.safeParse({
+    const result = PipelineSchema.safeParse({
       metadata: { name: 'mixed-list' },
       instructions: [
         { type: 'wait', event: 'session-start' },
         { type: 'skip', condition: { left: 'env:CI', op: 'equals', right: 'true' } },
-        { type: 'move', target: 'script', name: 'lint-fix', mode: 'blitter' },
+        { type: 'move', target: 'script', name: 'lint-fix', mode: 'offload' },
         { type: 'wait', event: 'code-complete' },
         { type: 'move', target: 'team', name: 'review-team', mode: 'full' },
       ],

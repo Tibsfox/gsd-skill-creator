@@ -49,7 +49,7 @@ function makeList(overrides: {
         type: 'move' as const,
         target: 'skill' as const,
         name: m,
-        mode: 'sprite' as const,
+        mode: 'lite' as const,
       })),
     ],
   };

@@ -1,8 +1,8 @@
 /**
- * Barrel index for the Copper coprocessor module.
+ * Barrel index for the Pipeline coprocessor module.
  *
  * Re-exports all public types, schemas, classes, and functions from
- * the copper sub-modules: types, schema, parser, lifecycle-sync,
+ * the pipeline sub-modules: types, schema, parser, lifecycle-sync,
  * executor, activation, and compiler.
  */
 
@@ -16,9 +16,9 @@ export type {
   MoveInstruction,
   SkipInstruction,
   SkipCondition,
-  CopperInstruction,
-  CopperMetadata,
-  CopperList,
+  PipelineInstruction,
+  PipelineMetadata,
+  Pipeline,
 } from './types.js';
 
 export {
@@ -33,20 +33,20 @@ export {
   WaitInstructionSchema,
   MoveInstructionSchema,
   SkipInstructionSchema,
-  CopperInstructionSchema,
-  CopperMetadataSchema,
-  CopperListSchema,
+  PipelineInstructionSchema,
+  PipelineMetadataSchema,
+  PipelineSchema,
 } from './schema.js';
 
 // Parser
 export {
-  parseCopperList,
-  serializeCopperList,
+  parsePipeline,
+  serializePipeline,
 } from './parser.js';
 
 export type {
-  CopperParseResult,
-  CopperParseError,
+  PipelineParseResult,
+  PipelineParseError,
 } from './parser.js';
 
 // Lifecycle Sync
@@ -55,15 +55,15 @@ export { LifecycleSync } from './lifecycle-sync.js';
 export type { LifecycleEvent } from './lifecycle-sync.js';
 
 // Executor
-export { CopperExecutor } from './executor.js';
+export { PipelineExecutor } from './executor.js';
 
 export type {
-  CopperExecutorConfig,
-  CopperExecutionResult,
+  PipelineExecutorConfig,
+  PipelineExecutionResult,
 } from './executor.js';
 
 // Activation Dispatch
-export { CopperActivationDispatch } from './activation.js';
+export { PipelineActivationDispatch } from './activation.js';
 
 export type {
   ActivationContext,
@@ -71,7 +71,7 @@ export type {
 } from './activation.js';
 
 // Compiler
-export { compileCopperList, saveCopperList, loadCopperLists } from './compiler.js';
+export { compilePipeline, savePipeline, loadPipelines } from './compiler.js';
 
 export type {
   PlanMetadata,

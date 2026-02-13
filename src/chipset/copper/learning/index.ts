@@ -1,5 +1,5 @@
 /**
- * Barrel exports for the Copper Learning subsystem.
+ * Barrel exports for the Pipeline Learning subsystem.
  *
  * Re-exports all public types and classes from the learning compiler,
  * feedback engine, and library modules. This is the single entry point
@@ -25,5 +25,5 @@ export { FeedbackEngine, DEFAULT_FEEDBACK_CONFIG } from './feedback.js';
 export type { FeedbackEngineConfig, RefinementResult } from './feedback.js';
 
 // Library
-export { CopperLibrary, DEFAULT_LIBRARY_CONFIG } from './library.js';
+export { PipelineLibrary, DEFAULT_LIBRARY_CONFIG } from './library.js';
 export type { LibraryConfig, MatchResult } from './library.js';
