@@ -24,6 +24,8 @@ export interface TranscriptEntry {
     pattern?: string;
     path?: string;
   };
+  tool_use_id?: string;   // Present on tool_result entries, references the tool_use
+  tool_output?: string;   // The result content from tool execution
 }
 
 // Metrics for session summary
@@ -57,6 +59,33 @@ export interface SessionObservation {
 
   // Number of observations squashed into this one (47-02)
   squashedFrom?: number;
+}
+
+/** Execution context metadata attached to each tool execution pair (CAPT-03) */
+export interface ExecutionContext {
+  sessionId: string;
+  phase?: string;        // Current GSD phase if known
+  activeSkill?: string;  // Active skill name if known
+}
+
+/** A paired tool_use + tool_result representing one complete tool execution (CAPT-01, CAPT-02) */
+export interface ToolExecutionPair {
+  /** Unique ID for this pair (the tool_use uuid) */
+  id: string;
+  /** Tool name (e.g., 'Read', 'Write', 'Bash') */
+  toolName: string;
+  /** Tool input parameters */
+  input: Record<string, unknown>;
+  /** Tool output content (string or stringified), null if partial */
+  output: string | null;
+  /** SHA-256 hash of the output content, null if partial */
+  outputHash: string | null;
+  /** Whether this pair is complete (has both use and result) or partial */
+  status: 'complete' | 'partial';
+  /** ISO timestamp of the tool_use entry */
+  timestamp: string;
+  /** Execution context metadata (CAPT-03) */
+  context: ExecutionContext;
 }
 
 // Configuration for retention management
