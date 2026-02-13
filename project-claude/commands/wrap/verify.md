@@ -93,7 +93,7 @@ Determine the phase topic/domain from the goal text. Look for domain keywords su
 2. Use the Glob tool to find `*/SKILL.md` files in `.claude/skills/`
 3. For each skill file found, read its first 10 lines to extract frontmatter (name, description)
 4. Match skills whose description or name contains keywords from the phase domain OR verification-related terms
-5. Always include skills tagged as always-applicable (e.g., `beautiful-commits`, `git-commit`) regardless of domain match
+5. Always include skills tagged as always-applicable (e.g., `beautiful-commits`) regardless of domain match
 
 ### 2c. Display loaded skills (WRAP-07 transparency)
 
