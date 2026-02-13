@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.17 — Staging Layer
-Phase: 137 — Smart Intake Flow (in progress)
-Plan: 137-03 complete
-Status: Executing phase 137
-Last activity: 2026-02-13 — Completed 137-03 (smart intake flow orchestrator)
+Phase: 137 — Smart Intake Flow (complete)
+Plan: 137-04 complete
+Status: Phase 137 complete
+Last activity: 2026-02-13 — Completed 137-04 (barrel index and integration tests)
 
 ## Project Reference
 
@@ -156,6 +156,8 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Step executors extracted as private functions for testability and readability
 - buildResult helper centralizes route-to-message mapping and needsConfirmation logic
 - Content read from checking dir first, inbox fallback for resume (document may have moved)
+- Intake-flow barrel follows hygiene/derived pattern: type-only exports for interfaces, value exports for functions/constants
+- Orchestrator must record 'staged' step before 'hygiene' (step tracker enforces sequential ordering)
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -172,7 +174,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Staging module at src/staging/ (types, schema, directory, intake, state-machine, index)
 - Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, trust-store, finding-actions, report, index)
 - Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift, pattern-fidelity, training-coherence, copying-detector, checker, index)
-- Staging intake-flow submodule at src/staging/intake-flow/ (types, clarity-assessor, step-types, step-tracker, orchestrator)
+- Staging intake-flow submodule at src/staging/intake-flow/ (types, clarity-assessor, step-types, step-tracker, orchestrator, index)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -187,15 +189,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 395 complete |
+| Total plans | 396 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 137-03-PLAN.md
-Stopped at: Plan 137-03 complete (smart intake flow orchestrator).
-Next action: Continue with 137-04 plan (barrel exports).
-Context: v1.17 Staging Layer. Phase 137 in progress (plans 01, 02, 03 complete). Intake-flow submodule has types, clarity assessor, step tracker, and orchestrator. 40 intake-flow tests passing.
+Last: 2026-02-13 — Completed 137-04-PLAN.md
+Stopped at: Plan 137-04 complete (barrel index and integration tests). Phase 137 complete.
+Next action: Continue with Phase 138 (Security Hygiene) or Phase 139 (Resource Analysis) per v1.17 roadmap.
+Context: v1.17 Staging Layer. Phase 137 complete (4 plans, 46 intake-flow tests). Intake-flow submodule fully wired: types, clarity assessor, step tracker, orchestrator, barrel index. All 414 staging tests pass.
 
 ---
-*Last updated: 2026-02-13 (137-03 complete)*
+*Last updated: 2026-02-13 (137-04 complete)*
