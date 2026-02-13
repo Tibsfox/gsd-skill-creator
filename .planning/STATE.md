@@ -163,10 +163,20 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Pure function analyzeVision() with pattern-matching extraction (no I/O, deterministic)
 - Section-based document parsing with heading detection for requirement category assignment
 - 30+ known external dependency patterns (databases, services, APIs, libraries) with type classification
+- Word-level Jaccard overlap with stop word filtering and category keyword boost (+0.2) for skill matching
+- Four-tier skill match classification: ready (>=0.5), recommended (>=0.3), flagged (>=0.1), missing (<0.1)
+- Project scope takes priority over user scope for duplicate skill names via deduplication
 - Score-based topology recommender with 5 scoring functions and preference-ordered tiebreak
 - Hybrid cap raised to 1.5 to exceed pipeline's 1.0 for truly complex mixed work
 - Map-reduce independence boost guarded by requirements.length > 0 (prevents false scoring on empty analysis)
 - Confidence: winner score / total, penalized 0.05 per ambiguity marker, floor 0.3
+- Budget allocation via complexity-based utilization targets (low=40%, medium=55%, high=70%, critical=80%) with 7-category proportional normalization
+- Minimum 5% safety margin enforced regardless of utilization target and category proportions
+- Skill-loading scales at 5% base + 2% per matched skill capped at 20%
+- Same-category requirements inferred as sequential dependencies (later depends on earlier)
+- Foundation/setup/infrastructure category requirements become dependency roots for all other tasks
+- Critical path computed via Kahn's topological sort with dynamic programming longest path
+- Max parallelism as widest anti-chain in dependency DAG via level assignment
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -184,7 +194,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, trust-store, finding-actions, report, index)
 - Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift, pattern-fidelity, training-coherence, copying-detector, checker, index)
 - Staging intake-flow submodule at src/staging/intake-flow/ (types, clarity-assessor, step-types, step-tracker, orchestrator, index)
-- Staging resource submodule at src/staging/resource/ (types, analyzer, topology)
+- Staging resource submodule at src/staging/resource/ (types, analyzer, skill-matcher, topology, budget, decomposer)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -204,10 +214,10 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 138-03-PLAN.md
-Stopped at: Plan 138-03 complete (topology recommender). Phase 138 in progress.
-Next action: Continue with remaining 138 plans.
-Context: v1.17 Staging Layer. Phase 138 in progress. Resource submodule: types, analyzer, topology (recommendTopology). 13 topology tests pass.
+Last: 2026-02-13 — Completed 138-02-PLAN.md (parallel with 138-03, 138-04)
+Stopped at: Plans 138-01 through 138-04 complete. Phase 138 in progress.
+Next action: Continue with remaining 138 plans (138-05 manifest assembly, 138-06 barrel).
+Context: v1.17 Staging Layer. Phase 138 in progress (4/6 plans complete). Resource submodule: types, analyzer, skill-matcher (matchSkills), topology, budget (estimateBudget), decomposer (decomposeWork). 483 staging tests pass.
 
 ---
-*Last updated: 2026-02-13 (138-03 complete)*
+*Last updated: 2026-02-13 (138-02 complete)*
