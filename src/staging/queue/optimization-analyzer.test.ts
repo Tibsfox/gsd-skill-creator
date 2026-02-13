@@ -164,7 +164,7 @@ describe('analyzeOptimizations - batching', () => {
           queueContext: {
             priority: 3,
             estimatedDuration: '2h',
-            tags: ['react', 'typescript', 'ui', 'testing'],
+            tags: ['typescript', 'ui', 'testing'],
           },
         }),
       ],
@@ -174,7 +174,7 @@ describe('analyzeOptimizations - batching', () => {
           queueContext: {
             priority: 3,
             estimatedDuration: '2h',
-            tags: ['node', 'typescript', 'ui', 'api'],
+            tags: ['typescript', 'ui', 'api'],
           },
         }),
       ],
