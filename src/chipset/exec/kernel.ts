@@ -21,7 +21,7 @@
  * - getState() returns a snapshot of kernel state and per-engine budgets
  */
 
-import type { ChipRegistry } from '../teams/chip-registry.js';
+import type { EngineRegistry } from '../teams/chip-registry.js';
 import { MessagePort } from '../teams/message-port.js';
 import type { KernelMessage } from './messages.js';
 import { ExecScheduler } from './scheduler.js';
@@ -38,7 +38,7 @@ export type KernelState = 'idle' | 'running' | 'stopped';
 /** Configuration for creating a Kernel. */
 export interface KernelConfig {
   /** Engine registry providing the set of engines to manage. */
-  registry: ChipRegistry;
+  registry: EngineRegistry;
   /** Total token budget across all engines. */
   totalBudget: number;
   /** Headroom percentage (default 5). */
@@ -61,7 +61,7 @@ export class ExecKernel {
   private _tickCount: number = 0;
 
   /** Engine registry. */
-  private readonly registry: ChipRegistry;
+  private readonly registry: EngineRegistry;
 
   /** Prioritized round-robin scheduler. */
   private readonly scheduler: ExecScheduler;
