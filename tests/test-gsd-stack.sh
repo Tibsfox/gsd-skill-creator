@@ -4166,6 +4166,360 @@ else
 fi
 
 # ==============================================================================
+# Metrics Display Tests (setup)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Metrics Display Tests${RESET}\n"
+
+# Create a recording with known, diverse data for metrics tests
+rm -rf "$TEST_DIR/stack" && export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# Start recording
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=metrics-test >/dev/null 2>&1
+
+# Add markers
+"$GSD_STACK" mark "phase-start" >/dev/null 2>&1
+"$GSD_STACK" mark "tests-done" >/dev/null 2>&1
+
+# Push 2 messages
+"$GSD_STACK" push "cmd1" >/dev/null 2>&1
+"$GSD_STACK" push "cmd2" >/dev/null 2>&1
+
+# Pop 1 message
+"$GSD_STACK" pop >/dev/null 2>&1
+
+# Stop recording
+"$GSD_STACK" stop-record >/dev/null 2>&1
+
+# ==============================================================================
+# Metrics Display Basic Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Metrics Display Basic Tests${RESET}\n"
+
+set +e
+metrics_output=$("$GSD_STACK" metrics metrics-test 2>&1)
+metrics_rc=$?
+set -e
+assert_eq "metrics display exits 0" "0" "$metrics_rc"
+
+# Output contains recording name
+assert_contains "metrics shows recording name" "$metrics_output" "metrics-test"
+
+# Output contains Duration metric
+if echo "$metrics_output" | grep -qi "duration"; then
+  pass "metrics shows duration"
+else
+  fail "metrics shows duration" "output: $metrics_output"
+fi
+
+# Output contains Efficiency metric
+if echo "$metrics_output" | grep -qi "efficiency"; then
+  pass "metrics shows efficiency"
+else
+  fail "metrics shows efficiency" "output: $metrics_output"
+fi
+
+# Output contains Active time metric
+if echo "$metrics_output" | grep -qi "active"; then
+  pass "metrics shows active time"
+else
+  fail "metrics shows active time" "output: $metrics_output"
+fi
+
+# Output contains Idle time metric
+if echo "$metrics_output" | grep -qi "idle"; then
+  pass "metrics shows idle time"
+else
+  fail "metrics shows idle time" "output: $metrics_output"
+fi
+
+# Output contains Stall metric
+if echo "$metrics_output" | grep -qi "stall"; then
+  pass "metrics shows stall count"
+else
+  fail "metrics shows stall count" "output: $metrics_output"
+fi
+
+# Output contains Marker metric
+if echo "$metrics_output" | grep -qi "marker"; then
+  pass "metrics shows marker count"
+else
+  fail "metrics shows marker count" "output: $metrics_output"
+fi
+
+# Output contains Terminal metric
+if echo "$metrics_output" | grep -qi "terminal"; then
+  pass "metrics shows terminal snapshots"
+else
+  fail "metrics shows terminal snapshots" "output: $metrics_output"
+fi
+
+# Output contains File metric
+if echo "$metrics_output" | grep -qi "file"; then
+  pass "metrics shows file changes"
+else
+  fail "metrics shows file changes" "output: $metrics_output"
+fi
+
+# Output contains Stack metric
+if echo "$metrics_output" | grep -qi "stack"; then
+  pass "metrics shows stack operations"
+else
+  fail "metrics shows stack operations" "output: $metrics_output"
+fi
+
+# Output contains Events metric
+if echo "$metrics_output" | grep -qi "events"; then
+  pass "metrics shows events per minute"
+else
+  fail "metrics shows events per minute" "output: $metrics_output"
+fi
+
+# Output contains Token metric
+if echo "$metrics_output" | grep -qi "token"; then
+  pass "metrics shows estimated tokens"
+else
+  fail "metrics shows estimated tokens" "output: $metrics_output"
+fi
+
+# ==============================================================================
+# Metrics Display Nonexistent Recording
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Metrics Display Nonexistent Recording${RESET}\n"
+
+set +e
+metrics_noexist_output=$("$GSD_STACK" metrics nonexistent 2>&1)
+metrics_noexist_rc=$?
+set -e
+
+if [[ "$metrics_noexist_rc" -ne 0 ]]; then
+  pass "metrics nonexistent exits non-zero"
+else
+  fail "metrics nonexistent exits non-zero" "got exit code $metrics_noexist_rc"
+fi
+
+if echo "$metrics_noexist_output" | grep -qi "not found\|does not exist\|no recording"; then
+  pass "metrics nonexistent shows error message"
+else
+  fail "metrics nonexistent shows error message" "output: $metrics_noexist_output"
+fi
+
+# ==============================================================================
+# Metrics Display No Arguments
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Metrics Display No Arguments${RESET}\n"
+
+set +e
+metrics_noargs_output=$("$GSD_STACK" metrics 2>&1)
+metrics_noargs_rc=$?
+set -e
+
+if [[ "$metrics_noargs_rc" -ne 0 ]]; then
+  pass "metrics no args exits non-zero"
+else
+  fail "metrics no args exits non-zero" "got exit code $metrics_noargs_rc"
+fi
+
+if echo "$metrics_noargs_output" | grep -qi "usage\|recording name"; then
+  pass "metrics no args shows usage hint"
+else
+  fail "metrics no args shows usage hint" "output: $metrics_noargs_output"
+fi
+
+# ==============================================================================
+# Metrics Display JSON Output
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Metrics Display JSON Output${RESET}\n"
+
+set +e
+metrics_json_output=$(GSD_FORMAT=json "$GSD_STACK" metrics metrics-test 2>&1)
+metrics_json_rc=$?
+set -e
+assert_eq "metrics json exits 0" "0" "$metrics_json_rc"
+
+if [[ "$metrics_json_output" == "{"* ]]; then
+  pass "metrics json starts with {"
+else
+  fail "metrics json starts with {" "output starts with: ${metrics_json_output:0:20}"
+fi
+
+assert_contains "metrics json has duration_seconds" "$metrics_json_output" '"duration_seconds"'
+assert_contains "metrics json has efficiency_pct" "$metrics_json_output" '"efficiency_pct"'
+assert_contains "metrics json has active_seconds" "$metrics_json_output" '"active_seconds"'
+assert_contains "metrics json has idle_seconds" "$metrics_json_output" '"idle_seconds"'
+assert_contains "metrics json has stall_count" "$metrics_json_output" '"stall_count"'
+assert_contains "metrics json has marker_count" "$metrics_json_output" '"marker_count"'
+assert_contains "metrics json has estimated_tokens" "$metrics_json_output" '"estimated_tokens"'
+assert_contains "metrics json has events_per_minute" "$metrics_json_output" '"events_per_minute"'
+
+# ==============================================================================
+# Metrics Compare Tests (setup)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Metrics Compare Tests${RESET}\n"
+
+# Reset and create two recordings with different characteristics
+rm -rf "$TEST_DIR/stack" && export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# Create first recording (minimal)
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=rec-a >/dev/null 2>&1
+"$GSD_STACK" mark "start" >/dev/null 2>&1
+"$GSD_STACK" push "msg1" >/dev/null 2>&1
+"$GSD_STACK" stop-record >/dev/null 2>&1
+
+# Create second recording (more activity)
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=rec-b >/dev/null 2>&1
+"$GSD_STACK" mark "start" >/dev/null 2>&1
+"$GSD_STACK" mark "middle" >/dev/null 2>&1
+"$GSD_STACK" mark "end" >/dev/null 2>&1
+"$GSD_STACK" push "msg1" >/dev/null 2>&1
+"$GSD_STACK" push "msg2" >/dev/null 2>&1
+"$GSD_STACK" push "msg3" >/dev/null 2>&1
+"$GSD_STACK" stop-record >/dev/null 2>&1
+
+# ==============================================================================
+# Metrics Compare Output Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Metrics Compare Output Tests${RESET}\n"
+
+set +e
+compare_output=$("$GSD_STACK" metrics --compare rec-a rec-b 2>&1)
+compare_rc=$?
+set -e
+assert_eq "metrics --compare exits 0" "0" "$compare_rc"
+
+# Output contains both recording names
+assert_contains "metrics --compare shows rec-a" "$compare_output" "rec-a"
+assert_contains "metrics --compare shows rec-b" "$compare_output" "rec-b"
+
+# Output contains Duration metric label
+if echo "$compare_output" | grep -qi "duration"; then
+  pass "metrics --compare shows duration label"
+else
+  fail "metrics --compare shows duration label" "output: $compare_output"
+fi
+
+# Output contains Marker metric label
+if echo "$compare_output" | grep -qi "marker"; then
+  pass "metrics --compare shows marker label"
+else
+  fail "metrics --compare shows marker label" "output: $compare_output"
+fi
+
+# Output contains delta/change indicators (+ or - or = or delta)
+if echo "$compare_output" | grep -qE '\+|Delta|delta|='; then
+  pass "metrics --compare shows delta indicators"
+else
+  fail "metrics --compare shows delta indicators" "output: $compare_output"
+fi
+
+# Output has at least 8 lines (table format with multiple metrics)
+compare_line_count=$(echo "$compare_output" | wc -l)
+compare_line_count=$((compare_line_count + 0))
+if [[ "$compare_line_count" -ge 8 ]]; then
+  pass "metrics --compare has at least 8 lines"
+else
+  fail "metrics --compare has at least 8 lines" "got $compare_line_count lines"
+fi
+
+# ==============================================================================
+# Metrics Compare JSON Output
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Metrics Compare JSON Output${RESET}\n"
+
+set +e
+compare_json_output=$(GSD_FORMAT=json "$GSD_STACK" metrics --compare rec-a rec-b 2>&1)
+compare_json_rc=$?
+set -e
+assert_eq "metrics --compare json exits 0" "0" "$compare_json_rc"
+
+if [[ "$compare_json_output" == "{"* ]]; then
+  pass "metrics --compare json starts with {"
+else
+  fail "metrics --compare json starts with {" "output starts with: ${compare_json_output:0:20}"
+fi
+
+if echo "$compare_json_output" | grep -qE '"rec_a"|"recording_a"|"left"'; then
+  pass "metrics --compare json has first recording key"
+else
+  fail "metrics --compare json has first recording key" "output: $compare_json_output"
+fi
+
+if echo "$compare_json_output" | grep -qE '"rec_b"|"recording_b"|"right"'; then
+  pass "metrics --compare json has second recording key"
+else
+  fail "metrics --compare json has second recording key" "output: $compare_json_output"
+fi
+
+if echo "$compare_json_output" | grep -qE '"delta"|"deltas"'; then
+  pass "metrics --compare json has delta section"
+else
+  fail "metrics --compare json has delta section" "output: $compare_json_output"
+fi
+
+# ==============================================================================
+# Metrics Compare Missing Recording
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Metrics Compare Missing Recording${RESET}\n"
+
+set +e
+compare_missing_output=$("$GSD_STACK" metrics --compare rec-a nonexistent 2>&1)
+compare_missing_rc=$?
+set -e
+
+if [[ "$compare_missing_rc" -ne 0 ]]; then
+  pass "metrics --compare missing recording exits non-zero"
+else
+  fail "metrics --compare missing recording exits non-zero" "got exit code $compare_missing_rc"
+fi
+
+if echo "$compare_missing_output" | grep -qi "not found\|does not exist"; then
+  pass "metrics --compare missing recording shows error"
+else
+  fail "metrics --compare missing recording shows error" "output: $compare_missing_output"
+fi
+
+# ==============================================================================
+# Metrics Compare Missing Second Arg
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Metrics Compare Missing Second Arg${RESET}\n"
+
+set +e
+compare_noarg_output=$("$GSD_STACK" metrics --compare rec-a 2>&1)
+compare_noarg_rc=$?
+set -e
+
+if [[ "$compare_noarg_rc" -ne 0 ]]; then
+  pass "metrics --compare missing second arg exits non-zero"
+else
+  fail "metrics --compare missing second arg exits non-zero" "got exit code $compare_noarg_rc"
+fi
+
+if echo "$compare_noarg_output" | grep -qi "two recordings\|usage\|second recording"; then
+  pass "metrics --compare missing second arg shows usage"
+else
+  fail "metrics --compare missing second arg shows usage" "output: $compare_noarg_output"
+fi
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
