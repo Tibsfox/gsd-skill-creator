@@ -53,6 +53,21 @@ export type {
 export { FAMILIARITY_TIERS, CRITICAL_PATTERN_IDS } from './trust-types.js';
 export { classifyFamiliarity } from './familiarity.js';
 
+// Trust decay store
+export type {
+  TrustLevel,
+  TrustEntry,
+  TrustStore,
+} from './trust-store.js';
+export { TRUST_LEVELS, TRUST_DURATIONS, createTrustStore } from './trust-store.js';
+
+// Finding actions
+export type {
+  FindingAction,
+  FindingActionResult,
+} from './finding-actions.js';
+export { FINDING_ACTIONS, applyFindingAction } from './finding-actions.js';
+
 // Report generator
 export type {
   ImportanceLevel,
