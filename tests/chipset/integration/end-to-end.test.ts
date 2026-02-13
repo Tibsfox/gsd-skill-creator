@@ -476,8 +476,8 @@ describe('Barrel Exports', () => {
     expect(chipsetModule.copper.compilePipeline).toBeDefined();
 
     // Spot-check blitter namespace
-    expect(chipsetModule.blitter.BlitterExecutor).toBeDefined();
-    expect(chipsetModule.blitter.BlitterSignalBus).toBeDefined();
+    expect(chipsetModule.blitter.OffloadExecutor).toBeDefined();
+    expect(chipsetModule.blitter.SignalBus).toBeDefined();
 
     // Spot-check teams namespace
     expect(chipsetModule.teams.EngineRegistry).toBeDefined();

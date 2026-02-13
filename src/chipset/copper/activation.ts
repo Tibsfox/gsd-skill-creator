@@ -10,12 +10,12 @@
  * Activation modes:
  * - lite: lightweight (~200 tokens, summary context only)
  * - full: complete skill loaded (token estimate = ceil(content.length / 4))
- * - offload: delegate to Blitter engine for script execution outside context
+ * - offload: delegate to offload engine for script execution outside context
  * - async: fire-and-forget, return immediately without waiting
  */
 
 import type { MoveInstruction, ActivationMode, MoveTargetType } from './types.js';
-import type { BlitterOperation, BlitterResult } from '../blitter/types.js';
+import type { OffloadOperation, OffloadResult } from '../blitter/types.js';
 
 // ============================================================================
 // Interfaces
@@ -32,14 +32,14 @@ export interface ActivationContext {
   /** Resolve a skill name to its content/path. Returns undefined if not found. */
   resolveSkill?: (name: string) => Promise<{ path: string; content: string } | undefined>;
 
-  /** Resolve a script name to a BlitterOperation. Returns undefined if not found. */
-  resolveScript?: (name: string) => Promise<BlitterOperation | undefined>;
+  /** Resolve a script name to an OffloadOperation. Returns undefined if not found. */
+  resolveScript?: (name: string) => Promise<OffloadOperation | undefined>;
 
   /** Resolve a team name to its definition. Returns undefined if not found. */
   resolveTeam?: (name: string) => Promise<{ name: string; members: string[] } | undefined>;
 
   /** Execute an offload operation. Returns the result. */
-  executeBlitter?: (operation: BlitterOperation) => Promise<BlitterResult>;
+  executeOffload?: (operation: OffloadOperation) => Promise<OffloadResult>;
 }
 
 /**
@@ -85,7 +85,7 @@ type DispatchResult = Pick<ActivationResult, 'status'> &
  * Each activation mode has different behavior:
  * - lite: resolve skill, return ~200 token estimate
  * - full: resolve skill, return content-based token estimate
- * - offload: resolve script/promoted-skill, execute via Blitter
+ * - offload: resolve script/promoted-skill, execute via offload engine
  * - async: fire activation in background, return immediately
  */
 export class PipelineActivationDispatch {
@@ -272,7 +272,7 @@ export class PipelineActivationDispatch {
       };
     }
 
-    if (!this.context.executeBlitter) {
+    if (!this.context.executeOffload) {
       return {
         status: 'failure',
         error: 'No offload executor configured',
@@ -313,19 +313,19 @@ export class PipelineActivationDispatch {
   // ==========================================================================
 
   /**
-   * Execute a BlitterOperation and map the result to activation status.
+   * Execute an OffloadOperation and map the result to activation status.
    */
   private async executeOffloadOp(
-    op: BlitterOperation,
+    op: OffloadOperation,
   ): Promise<DispatchResult> {
-    if (!this.context.executeBlitter) {
+    if (!this.context.executeOffload) {
       return {
         status: 'failure',
         error: 'No offload executor configured',
       };
     }
 
-    const result = await this.context.executeBlitter(op);
+    const result = await this.context.executeOffload(op);
 
     if (result.exitCode === 0) {
       return { status: 'success' };
