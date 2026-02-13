@@ -52,3 +52,11 @@ export type {
 } from './trust-types.js';
 export { FAMILIARITY_TIERS, CRITICAL_PATTERN_IDS } from './trust-types.js';
 export { classifyFamiliarity } from './familiarity.js';
+
+// Report generator
+export type {
+  ImportanceLevel,
+  ReportFinding,
+  HygieneReport,
+} from './report.js';
+export { generateHygieneReport } from './report.js';
