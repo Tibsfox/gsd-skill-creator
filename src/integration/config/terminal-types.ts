@@ -17,7 +17,7 @@
  * so users can provide a partial config or none at all.
  */
 export interface TerminalConfig {
-  /** Wetty server port (1-65535). Default: 3000. */
+  /** Wetty server port (1-65535). Default: 11338. */
   port: number;
   /** URL base path for Wetty (must start with /). Default: '/terminal'. */
   base_path: string;

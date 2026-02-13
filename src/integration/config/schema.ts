@@ -117,7 +117,7 @@ export const IntegrationConfigSchema = z.object({
     auto_dismiss_after_days: 30,
   })),
   terminal: TerminalConfigSchema.default(() => ({
-    port: 3000,
+    port: 11338,
     base_path: '/terminal',
     auth_mode: 'none' as const,
     theme: 'dark' as const,
