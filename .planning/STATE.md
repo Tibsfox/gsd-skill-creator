@@ -3,9 +3,9 @@
 ## Current Position
 
 Milestone: v1.16 -- Dashboard Console & Milestone Ingestion
-Phase: 129-filesystem-bridge-upload-configuration (plan 03 complete, executing)
+Phase: 129-filesystem-bridge-upload-configuration (plans 01,03 complete, executing)
 Status: Executing phase 129
-Last activity: 2026-02-13 -- Completed 129-03 (upload zone renderer)
+Last activity: 2026-02-13 -- Completed 129-01 (helper endpoint)
 
 Progress: [░░░░░░░░░░░░░░░░] 0/5 phases (128 in progress)
 
@@ -44,12 +44,16 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - Embedded client-side extractMetadata mirrors server-side extractDocumentMetadata for isomorphic parsing
 - SVG icon for upload zone (not emoji) for accessibility and theme consistency
 - color-mix() CSS function for drag-active background tint
+- Mock IncomingMessage/ServerResponse for helper tests (no real HTTP server needed)
+- CORS * since localhost-only is a server-level concern, not router concern
+- handleRequest returns boolean for route passthrough composability
+- Subdirectory allowlist via Set (inbox/pending, config, uploads) -- explicit, no regex bypass risk
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
-- Console module (new): src/console/ (message types/schemas, reader, writer, helper endpoint, check-inbox integration tests)
+- Console module: src/console/ (message types/schemas, reader, writer, helper endpoint, check-inbox integration tests)
 - Scripts module (new): scripts/console/ (check-inbox.sh for session-side inbox polling)
 - gsd-stack session management: bash scripts with tmux integration (v1.13)
 - v1.14 promotion pipeline: src/pipeline/ + src/dashboard/collectors/
@@ -75,10 +79,10 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Completed 129-03 (upload zone renderer)
-Stopped at: Completed 129-03-PLAN.md execution
-Next action: Continue executing phase 129 plans (129-04+)
-Context: Upload zone component complete with drag-drop, FileReader, metadata extraction. 18 tests passing. renderUploadZone/renderUploadZoneStyles/extractDocumentMetadata exported from src/dashboard/upload-zone.ts.
+Last: 2026-02-13 -- Completed 129-01 (helper endpoint)
+Stopped at: Completed 129-01-PLAN.md execution
+Next action: Continue executing phase 129 plans (129-02, 129-04, 129-05)
+Context: Helper endpoint at src/console/helper.ts with createHelperRouter factory. 15 tests passing. Path traversal prevention (4 vectors), subdirectory allowlist, CORS headers. Ready for serve-dashboard.mjs integration (129-02).
 
 ---
-*Last updated: 2026-02-13 (129-03 complete)*
+*Last updated: 2026-02-13 (129-01 complete)*
