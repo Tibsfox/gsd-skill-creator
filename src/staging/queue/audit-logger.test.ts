@@ -8,7 +8,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { appendAuditEntry, readAuditLog } from './audit-logger.js';
+import { appendAuditEntry, readAuditLog, _resetDirCache } from './audit-logger.js';
 import type { AuditLoggerDeps } from './audit-logger.js';
 import type { QueueAuditEntry } from './types.js';
 
@@ -53,6 +53,10 @@ function makeMockDeps(fileContents: string = ''): AuditLoggerDeps & {
 // ============================================================================
 
 describe('appendAuditEntry', () => {
+  beforeEach(() => {
+    _resetDirCache();
+  });
+
   it('appends one JSON line to queue.jsonl', async () => {
     const deps = makeMockDeps();
     const entry = makeAuditEntry();
@@ -62,7 +66,7 @@ describe('appendAuditEntry', () => {
     expect(deps.appendFile).toHaveBeenCalledTimes(1);
     const writtenData = deps.written[0];
     expect(writtenData).toContain('"audit-20240101-120000-001"');
-    expect(writtenData).toEndWith('\n');
+    expect(writtenData.endsWith('\n')).toBe(true);
   });
 
   it('writes valid JSON per line', async () => {
