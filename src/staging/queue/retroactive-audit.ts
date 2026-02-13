@@ -64,7 +64,7 @@ export interface RetroactiveAuditRecommendation {
 // ============================================================================
 
 /** Only entries in these states are candidates for retroactive audit. */
-export const ELIGIBLE_STATES: ReadonlySet<QueueState> = new Set([
+export const ELIGIBLE_STATES: ReadonlySet<QueueState> = new Set<QueueState>([
   'ready',
   'queued',
 ]);
