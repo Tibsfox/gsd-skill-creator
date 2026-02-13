@@ -402,7 +402,7 @@ describe('LineageTracker', () => {
     it('getChain from execution traces all the way back to observations', async () => {
       await buildFullPipeline(tracker);
       const result = await tracker.getChain('exec:Read:h1:t1');
-      expect(result.upstream.length).toBe(6); // decision + script + candidate + pattern + 3 observations
+      expect(result.upstream.length).toBe(7); // decision + script + candidate + pattern + 3 observations
       expect(result.downstream.length).toBe(0);
     });
 
