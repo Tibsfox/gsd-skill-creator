@@ -1502,6 +1502,275 @@ cmd_pause() {
 }
 
 # ==============================================================================
+# Warm-start prompt generator (internal helper)
+# ==============================================================================
+
+_generate_warm_start_prompt() {
+  local session_name="$1"
+
+  # Find the most recent save file for this session
+  # Save files are named {session_name}-{YYYYMMDD-HHMMSS}.json
+  # Glob iteration gives last match as most recent (lexicographic sort via timestamps)
+  local latest_save=""
+  for save_file in "$GSD_STACK_DIR/saves/${session_name}"-*.json; do
+    if [[ -f "$save_file" ]]; then
+      latest_save="$save_file"
+    fi
+  done
+
+  if [[ -z "$latest_save" ]]; then
+    # No save file found -- generate minimal prompt
+    echo "Resuming session '$session_name'. Check /gsd:progress for current state."
+    return 0
+  fi
+
+  # Read save file
+  local save_content
+  save_content=$(cat "$latest_save")
+
+  # Extract fields
+  local saved_at note pending_count state_md
+  saved_at=$(json_field "$save_content" "saved_at")
+  note=$(json_field "$save_content" "note")
+  pending_count=$(json_field_num "$save_content" "pending_count")
+  state_md=$(json_field "$save_content" "state_md")
+
+  # Build contextual prompt
+  local prompt="Resuming session '$session_name'"
+  if [[ -n "$saved_at" ]]; then
+    prompt="$prompt (last saved: $saved_at)"
+  fi
+  prompt="$prompt."
+
+  if [[ -n "$note" ]] && [[ "$note" != "auto-save on pause" ]]; then
+    prompt="$prompt Note: $note."
+  fi
+
+  if [[ "${pending_count:-0}" -gt 0 ]]; then
+    prompt="$prompt $pending_count message(s) in stack."
+  fi
+
+  if [[ -n "$state_md" ]] && [[ "$state_md" != "" ]]; then
+    prompt="$prompt Check STATE.md for current position."
+  fi
+
+  prompt="$prompt Run /gsd:progress to see where you left off."
+
+  echo "$prompt"
+  return 0
+}
+
+# ==============================================================================
+# Resume subcommand
+# ==============================================================================
+
+cmd_resume() {
+  local session_name=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -*)  echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)   session_name="$1" ; shift ;;
+    esac
+  done
+
+  # Validate session name provided
+  if [[ -z "$session_name" ]]; then
+    echo "Error: Session name required. Usage: gsd-stack resume <session-name>"
+    exit 1
+  fi
+
+  # Check session exists
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+  if [[ ! -d "$session_dir" ]] || [[ ! -f "$session_dir/meta.json" ]]; then
+    echo "Error: Session '$session_name' not found"
+    exit 1
+  fi
+
+  # Get current state
+  local state
+  state=$(get_session_state "$session_name") || state="unknown"
+
+  case "$state" in
+    active)
+      echo "Session '$session_name' is already active."
+      exit 0
+      ;;
+
+    paused)
+      # Path 1: Resume paused session -- reattach to existing tmux
+      local prompt
+      prompt=$(_generate_warm_start_prompt "$session_name")
+
+      # Update meta.json status to active
+      local meta_content updated_meta
+      meta_content=$(cat "$session_dir/meta.json")
+      updated_meta=$(echo "$meta_content" | sed 's/"status":"[^"]*"/"status":"active"/')
+      echo "$updated_meta" > "$session_dir/meta.json"
+
+      # Refresh heartbeat
+      touch "$session_dir/heartbeat"
+
+      # Start heartbeat background process (non-mock only)
+      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+        (while true; do
+          if [[ -f "$session_dir/meta.json" ]]; then
+            local loop_status
+            loop_status=$(json_field "$(cat "$session_dir/meta.json")" "status")
+            if [[ "$loop_status" != "active" ]]; then break; fi
+          else
+            break
+          fi
+          touch "$session_dir/heartbeat"
+          sleep 10
+        done) &
+      fi
+
+      # Send warm-start prompt to tmux session (non-mock only)
+      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+        local tmux_session
+        tmux_session=$(json_field "$meta_content" "tmux_session")
+        if tmux has-session -t "$tmux_session" 2>/dev/null; then
+          tmux send-keys -t "$tmux_session" "$prompt" Enter
+        fi
+      fi
+
+      log_event "resume" "resumed paused: $session_name"
+
+      if [[ "$GSD_FORMAT" == "json" ]]; then
+        local json_prompt="${prompt//\\/\\\\}"
+        json_prompt="${json_prompt//\"/\\\"}"
+        printf '{"session":"%s","status":"active","path":"paused","prompt":"%s"}\n' "$session_name" "$json_prompt"
+      else
+        echo "Session '$session_name' resumed (was paused)"
+        echo "Warm-start: $prompt"
+      fi
+      ;;
+
+    stalled)
+      # Path 2: Resume stalled session -- recovery attempt
+      local prompt
+      prompt=$(_generate_warm_start_prompt "$session_name")
+
+      # Update meta.json status to active
+      local meta_content updated_meta
+      meta_content=$(cat "$session_dir/meta.json")
+      updated_meta=$(echo "$meta_content" | sed 's/"status":"[^"]*"/"status":"active"/')
+      echo "$updated_meta" > "$session_dir/meta.json"
+
+      # Refresh heartbeat
+      touch "$session_dir/heartbeat"
+
+      # Start heartbeat background process (non-mock only)
+      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+        (while true; do
+          if [[ -f "$session_dir/meta.json" ]]; then
+            local loop_status
+            loop_status=$(json_field "$(cat "$session_dir/meta.json")" "status")
+            if [[ "$loop_status" != "active" ]]; then break; fi
+          else
+            break
+          fi
+          touch "$session_dir/heartbeat"
+          sleep 10
+        done) &
+      fi
+
+      # Send warm-start prompt to tmux session (non-mock, if tmux session still exists)
+      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+        local tmux_session
+        tmux_session=$(json_field "$meta_content" "tmux_session")
+        if tmux has-session -t "$tmux_session" 2>/dev/null; then
+          tmux send-keys -t "$tmux_session" "$prompt" Enter
+        fi
+      fi
+
+      log_event "resume" "recovered stalled: $session_name"
+
+      if [[ "$GSD_FORMAT" == "json" ]]; then
+        local json_prompt="${prompt//\\/\\\\}"
+        json_prompt="${json_prompt//\"/\\\"}"
+        printf '{"session":"%s","status":"active","path":"stalled","prompt":"%s"}\n' "$session_name" "$json_prompt"
+      else
+        echo "Session '$session_name' recovered (was stalled)"
+        echo "Warm-start: $prompt"
+      fi
+      ;;
+
+    saved)
+      # Path 3: Resume saved session -- start new tmux session seeded with context
+      local prompt
+      prompt=$(_generate_warm_start_prompt "$session_name")
+      local meta_content project_path tmux_name
+      meta_content=$(cat "$session_dir/meta.json")
+      project_path=$(json_field "$meta_content" "project")
+      tmux_name=$(json_field "$meta_content" "tmux_session")
+
+      # Update meta.json status to active
+      local updated_meta
+      updated_meta=$(echo "$meta_content" | sed 's/"status":"[^"]*"/"status":"active"/')
+      echo "$updated_meta" > "$session_dir/meta.json"
+
+      # Create/refresh heartbeat
+      touch "$session_dir/heartbeat"
+
+      # Start heartbeat background process (non-mock only)
+      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+        (while true; do
+          if [[ -f "$session_dir/meta.json" ]]; then
+            local loop_status
+            loop_status=$(json_field "$(cat "$session_dir/meta.json")" "status")
+            if [[ "$loop_status" != "active" ]]; then break; fi
+          else
+            break
+          fi
+          touch "$session_dir/heartbeat"
+          sleep 10
+        done) &
+      fi
+
+      # Start new tmux session with Claude (non-mock only)
+      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+        tmux new-session -d -s "$tmux_name" -c "$project_path" "claude"
+        sleep 1
+        # Send warm-start prompt
+        if tmux has-session -t "$tmux_name" 2>/dev/null; then
+          tmux send-keys -t "$tmux_name" "$prompt" Enter
+        fi
+      fi
+
+      # Log to registry (new session event)
+      local ts
+      ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+      printf '{"ts":"%s","name":"%s","project":"%s","action":"resume"}\n' \
+        "$ts" "$session_name" "$project_path" >> "$GSD_STACK_DIR/registry.jsonl"
+
+      log_event "resume" "resumed saved: $session_name (new session)"
+
+      if [[ "$GSD_FORMAT" == "json" ]]; then
+        local json_prompt="${prompt//\\/\\\\}"
+        json_prompt="${json_prompt//\"/\\\"}"
+        printf '{"session":"%s","status":"active","path":"saved","prompt":"%s"}\n' "$session_name" "$json_prompt"
+      else
+        echo "Session '$session_name' resumed (new session from save)"
+        echo "Warm-start: $prompt"
+      fi
+      ;;
+
+    stopped)
+      echo "Error: Cannot resume stopped session '$session_name'. Use 'gsd-stack session' to start a new session."
+      exit 1
+      ;;
+
+    unknown|*)
+      echo "Error: Session '$session_name' not found or in unknown state."
+      exit 1
+      ;;
+  esac
+}
+
+# ==============================================================================
 # Known subcommands (stubs for future implementation)
 # ==============================================================================
 
@@ -1602,7 +1871,12 @@ main() {
       cmd_pause "$@"
       exit $?
       ;;
-    resume|stop|record|stop-record|mark|play|metrics)
+    resume)
+      shift
+      cmd_resume "$@"
+      exit $?
+      ;;
+    stop|record|stop-record|mark|play|metrics)
       echo "$cmd: not yet implemented"
       log_event "$cmd" "stub invoked"
       exit 0
