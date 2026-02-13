@@ -341,6 +341,16 @@ export async function generate(options) {
     catch {
         // Question polling failure never blocks generation
     }
+    // Read milestone config for settings panel (graceful — never fails the pipeline)
+    let milestoneConfig = null;
+    try {
+        const configPath = join(options.planningDir, 'console/config/milestone-config.json');
+        const configRaw = await readFile(configPath, 'utf-8');
+        milestoneConfig = JSON.parse(configRaw);
+    }
+    catch {
+        // No config file — settings panel will show empty state
+    }
     // Ensure output directory exists
     try {
         await mkdir(options.outputDir, { recursive: true });
@@ -429,6 +439,7 @@ export async function generate(options) {
                 status: consoleStatus,
                 questions: pendingQuestions,
                 helperUrl: '/api/console/message',
+                config: milestoneConfig,
             }),
             meta: {
                 description: 'Console panel with live status, settings, and activity log',
