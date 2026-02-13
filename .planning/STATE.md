@@ -4,9 +4,9 @@
 
 Milestone: v1.17 — Staging Layer
 Phase: 135 — Hygiene Pattern Engine (in progress)
-Plan: 135-03 complete
-Status: Executing phase 135
-Last activity: 2026-02-13 — Completed 135-03 (YAML config safety scanner)
+Plan: 135-04 complete
+Status: Phase 135 complete
+Last activity: 2026-02-13 — Completed 135-04 (unified scan engine and barrel index)
 
 ## Project Reference
 
@@ -110,6 +110,9 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Line number computed from newline count before match offset (1-based)
 - Scanner functions delegate to registry patterns via getPatterns(category) -- scanners are thin, patterns carry the logic
 - Both scanners (embedded, hidden) share identical structure: fetch patterns, iterate, delegate to detect or regex
+- scanContent uses spread-concat of all three scanner results (intentionally simple composition)
+- Barrel uses type-only exports for HygieneCategory, HygieneSeverity, HygienePattern, HygieneFinding
+- Integration test verifies custom patterns work through barrel API (addPattern + scanContent)
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -124,7 +127,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Helper endpoint wired into serve-dashboard.mjs via dynamic import (browser->filesystem bridge)
 - No WebSockets -- dashboard polls outbox at 2-3s intervals
 - Staging module at src/staging/ (types, schema, directory, intake, state-machine, index)
-- Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden)
+- Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, index)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -139,15 +142,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 385 complete |
+| Total plans | 386 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 135-03-PLAN.md
-Stopped at: Plan 135-03 complete (YAML config safety scanner)
-Next action: Execute remaining 135 plans
-Context: v1.17 Staging Layer. Phase 135 in progress. src/staging/hygiene/ has types, patterns, scanner-config, scanner-embedded. 48 hygiene tests passing (17 new from 135-03).
+Last: 2026-02-13 — Completed 135-04-PLAN.md
+Stopped at: Plan 135-04 complete (unified scan engine and barrel index)
+Next action: Phase 135 complete. Proceed to phase 136.
+Context: v1.17 Staging Layer. Phase 135 complete. src/staging/hygiene/ fully built with types, patterns, 3 category scanners, unified scanner, barrel index. 76 hygiene tests passing (14 new from 135-04).
 
 ---
-*Last updated: 2026-02-13 (135-03 complete)*
+*Last updated: 2026-02-13 (135-04 complete)*
