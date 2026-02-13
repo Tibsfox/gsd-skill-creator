@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.17 — Staging Layer
-Phase: 137 — Smart Intake Flow (complete)
-Plan: 137-04 complete
-Status: Phase 137 complete
-Last activity: 2026-02-13 — Completed 137-04 (barrel index and integration tests)
+Phase: 138 — Resource Analysis (in progress)
+Plan: 138-01 complete
+Status: Executing phase 138
+Last activity: 2026-02-13 — Completed 138-01 (resource types and vision analyzer)
 
 ## Project Reference
 
@@ -158,6 +158,11 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Content read from checking dir first, inbox fallback for resume (document may have moved)
 - Intake-flow barrel follows hygiene/derived pattern: type-only exports for interfaces, value exports for functions/constants
 - Orchestrator must record 'staged' step before 'hygiene' (step tracker enforces sequential ordering)
+- 15 resource analysis types (DomainRequirement through ResourceManifest) with 5 const arrays
+- TopologyType subset of TEAM_TOPOLOGIES (single, pipeline, map-reduce, router, hybrid) -- excludes Claude Code team concepts
+- Pure function analyzeVision() with pattern-matching extraction (no I/O, deterministic)
+- Section-based document parsing with heading detection for requirement category assignment
+- 30+ known external dependency patterns (databases, services, APIs, libraries) with type classification
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -175,6 +180,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, trust-store, finding-actions, report, index)
 - Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift, pattern-fidelity, training-coherence, copying-detector, checker, index)
 - Staging intake-flow submodule at src/staging/intake-flow/ (types, clarity-assessor, step-types, step-tracker, orchestrator, index)
+- Staging resource submodule at src/staging/resource/ (types, analyzer)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -189,15 +195,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 396 complete |
+| Total plans | 397 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 137-04-PLAN.md
-Stopped at: Plan 137-04 complete (barrel index and integration tests). Phase 137 complete.
-Next action: Continue with Phase 138 (Security Hygiene) or Phase 139 (Resource Analysis) per v1.17 roadmap.
-Context: v1.17 Staging Layer. Phase 137 complete (4 plans, 46 intake-flow tests). Intake-flow submodule fully wired: types, clarity assessor, step tracker, orchestrator, barrel index. All 414 staging tests pass.
+Last: 2026-02-13 — Completed 138-01-PLAN.md
+Stopped at: Plan 138-01 complete (resource types and vision analyzer). Phase 138 in progress.
+Next action: Continue with 138-02 (skill matcher).
+Context: v1.17 Staging Layer. Phase 138 in progress (1/6 plans complete, 26 resource tests). Resource submodule initialized: types (15 interfaces, 5 const arrays), analyzer (analyzeVision). All 440 staging tests pass.
 
 ---
-*Last updated: 2026-02-13 (137-04 complete)*
+*Last updated: 2026-02-13 (138-01 complete)*
