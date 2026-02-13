@@ -2350,6 +2350,387 @@ assert_eq "drain single: pending has 0 files" "0" "$file_count"
 assert_eq "drain single: done has 1 file" "1" "$done_count"
 
 # ==============================================================================
+# Save Subcommand Tests (basic snapshot)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Save Subcommand Tests (basic snapshot)${RESET}\n"
+
+# Reset stack dir for save tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl" "$GSD_STACK_DIR/registry.jsonl"
+
+# Create active session
+mkdir -p "$GSD_STACK_DIR/sessions/save-test"
+echo '{"name":"save-test","status":"active","project":"/tmp/save-proj","started":"2026-02-12T10:00:00Z","tmux_session":"claude-save-test","pid":"1234"}' > "$GSD_STACK_DIR/sessions/save-test/meta.json"
+touch "$GSD_STACK_DIR/sessions/save-test/heartbeat"
+
+# Create fake pending messages
+printf -- "---\npriority: normal\nsource: cli\ncreated: 2026-02-12T10:01:00Z\n---\nfix the bug" > "$GSD_STACK_DIR/pending/5-001-0001.md"
+printf -- "---\npriority: urgent\nsource: cli\ncreated: 2026-02-12T10:02:00Z\n---\ndeploy hotfix" > "$GSD_STACK_DIR/pending/0-002-0002.md"
+
+# Create fake STATE.md in project dir
+mkdir -p /tmp/save-proj/.planning
+printf "# State\nPhase: 105\nStatus: executing" > /tmp/save-proj/.planning/STATE.md
+
+# 1. save exits 0
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" save save-test 2>&1)
+rc=$?
+set -e
+assert_exit_code "save exits 0" "0" "$rc"
+
+# 2. At least one file exists in saves/
+save_count=$(ls -1 "$GSD_STACK_DIR/saves/" 2>/dev/null | wc -l)
+save_count=$((save_count + 0))
+if [[ "$save_count" -ge 1 ]]; then
+  pass "save creates file in saves/"
+else
+  fail "save creates file in saves/" "found $save_count files in saves/"
+fi
+
+# 3. Save file name starts with "save-test-"
+save_file=$(ls -1 "$GSD_STACK_DIR/saves/" 2>/dev/null | head -1)
+if [[ "$save_file" == save-test-* ]]; then
+  pass "save file name starts with session name"
+else
+  fail "save file name starts with session name" "filename: $save_file"
+fi
+
+# 4. Save file name ends with ".json"
+if [[ "$save_file" == *.json ]]; then
+  pass "save file name ends with .json"
+else
+  fail "save file name ends with .json" "filename: $save_file"
+fi
+
+# 5. Save file contains name field from meta
+save_content=""
+if [[ -n "$save_file" ]] && [[ -f "$GSD_STACK_DIR/saves/$save_file" ]]; then
+  save_content=$(cat "$GSD_STACK_DIR/saves/$save_file" 2>/dev/null)
+fi
+assert_contains "save file has name field" "$save_content" '"name":"save-test"'
+
+# 6. Save file contains status field
+if echo "$save_content" | grep -q '"status"'; then
+  pass "save file has status field"
+else
+  fail "save file has status field" "no status field in save file"
+fi
+
+# 7. Save file contains project path
+assert_contains "save file has project path" "$save_content" '"/tmp/save-proj"'
+
+# 8. Save file contains pending count or pending field
+if echo "$save_content" | grep -qE '"pending_count"|"pending"'; then
+  pass "save file has pending info"
+else
+  fail "save file has pending info" "no pending info in save file"
+fi
+
+# 9. Save file contains saved_at with ISO 8601 timestamp
+if echo "$save_content" | grep -qE '"saved_at":"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z"'; then
+  pass "save file has ISO 8601 saved_at"
+else
+  fail "save file has ISO 8601 saved_at" "content: ${save_content:0:200}"
+fi
+
+# 10. History.jsonl contains a "save" event
+if [[ -f "$GSD_STACK_DIR/history.jsonl" ]] && grep -q '"event":"save"' "$GSD_STACK_DIR/history.jsonl"; then
+  pass "save logs event to history.jsonl"
+else
+  fail "save logs event to history.jsonl" "no save event found in history"
+fi
+
+# ==============================================================================
+# Save --note Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Save --note Tests${RESET}\n"
+
+# 11. save with --note exits 0
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" save save-test --note="before refactor" 2>&1)
+rc=$?
+set -e
+assert_exit_code "save --note exits 0" "0" "$rc"
+
+# 12. Save file contains the note text
+note_save=$(ls -1t "$GSD_STACK_DIR/saves/" 2>/dev/null | head -1)
+note_content=""
+if [[ -n "$note_save" ]] && [[ -f "$GSD_STACK_DIR/saves/$note_save" ]]; then
+  note_content=$(cat "$GSD_STACK_DIR/saves/$note_save" 2>/dev/null)
+fi
+if echo "$note_content" | grep -q "before refactor"; then
+  pass "save --note file contains note text"
+else
+  fail "save --note file contains note text" "content: ${note_content:0:200}"
+fi
+
+# ==============================================================================
+# Save with STATE.md Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Save with STATE.md Tests${RESET}\n"
+
+# 13. Save file contains state_md field
+if echo "$save_content" | grep -q '"state_md"'; then
+  pass "save file has state_md field"
+else
+  fail "save file has state_md field" "no state_md in save content"
+fi
+
+# 14. state_md contains content from STATE.md
+if echo "$save_content" | grep -qE "Phase.*105|State"; then
+  pass "save state_md contains STATE.md content"
+else
+  fail "save state_md contains STATE.md content" "content: ${save_content:0:200}"
+fi
+
+# ==============================================================================
+# Save Error Cases
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Save Error Cases${RESET}\n"
+
+# 15. save nonexistent session exits non-zero
+set +e
+output=$("$GSD_STACK" save nonexistent-session 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "save nonexistent session exits non-zero"
+else
+  fail "save nonexistent session exits non-zero" "exit code: $rc"
+fi
+
+# 16. Error output contains "not found" or "does not exist" or "No session"
+if echo "$output" | grep -qi "not found\|does not exist\|no session"; then
+  pass "save nonexistent session shows error message"
+else
+  fail "save nonexistent session shows error message" "output: $output"
+fi
+
+# 17. save with no session name exits non-zero
+set +e
+output=$("$GSD_STACK" save 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "save no args exits non-zero"
+else
+  fail "save no args exits non-zero" "exit code: $rc"
+fi
+
+# 18. Error output contains "Usage" or "session name"
+if echo "$output" | grep -qi "usage\|session name\|session_name\|required"; then
+  pass "save no args shows usage hint"
+else
+  fail "save no args shows usage hint" "output: $output"
+fi
+
+# ==============================================================================
+# Save Status Update Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Save Status Update Tests${RESET}\n"
+
+# Reset for clean status test
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl" "$GSD_STACK_DIR/registry.jsonl"
+
+mkdir -p "$GSD_STACK_DIR/sessions/status-test"
+echo '{"name":"status-test","status":"active","project":"/tmp/status-proj","started":"2026-02-12T10:00:00Z","tmux_session":"claude-status-test","pid":"1234"}' > "$GSD_STACK_DIR/sessions/status-test/meta.json"
+touch "$GSD_STACK_DIR/sessions/status-test/heartbeat"
+
+# 19. After standalone save, meta.json status changes to "saved"
+set +e
+GSD_MOCK_TMUX=1 "$GSD_STACK" save status-test >/dev/null 2>&1
+set -e
+status_after=""
+if [[ -f "$GSD_STACK_DIR/sessions/status-test/meta.json" ]]; then
+  status_after=$(cat "$GSD_STACK_DIR/sessions/status-test/meta.json" 2>/dev/null)
+fi
+if echo "$status_after" | grep -q '"status":"saved"'; then
+  pass "save standalone sets status to saved"
+else
+  fail "save standalone sets status to saved" "meta: $status_after"
+fi
+
+# 20. _get-state outputs "saved"
+set +e
+output=$("$GSD_STACK" _get-state status-test 2>&1)
+set -e
+assert_eq "save: _get-state outputs saved" "saved" "$output"
+
+# ==============================================================================
+# Pause Subcommand Tests (basic)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Pause Subcommand Tests (basic)${RESET}\n"
+
+# Reset stack dir for pause tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl" "$GSD_STACK_DIR/registry.jsonl"
+
+# Create active session for pause
+mkdir -p "$GSD_STACK_DIR/sessions/pause-test"
+echo '{"name":"pause-test","status":"active","project":"/tmp/pause-proj","started":"2026-02-12T12:00:00Z","tmux_session":"claude-pause-test","pid":"1234"}' > "$GSD_STACK_DIR/sessions/pause-test/meta.json"
+touch "$GSD_STACK_DIR/sessions/pause-test/heartbeat"
+
+# 21. pause exits 0
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" pause pause-test 2>&1)
+rc=$?
+set -e
+assert_exit_code "pause exits 0" "0" "$rc"
+
+# 22. After pause, meta.json status is "paused"
+meta_after=""
+if [[ -f "$GSD_STACK_DIR/sessions/pause-test/meta.json" ]]; then
+  meta_after=$(cat "$GSD_STACK_DIR/sessions/pause-test/meta.json" 2>/dev/null)
+fi
+if echo "$meta_after" | grep -q '"status":"paused"'; then
+  pass "pause sets meta status to paused"
+else
+  fail "pause sets meta status to paused" "meta: $meta_after"
+fi
+
+# 23. _get-state outputs "paused"
+set +e
+output=$("$GSD_STACK" _get-state pause-test 2>&1)
+set -e
+assert_eq "pause: _get-state outputs paused" "paused" "$output"
+
+# 24. After pause, at least one save file exists in saves/ (auto-save)
+save_count=$(ls -1 "$GSD_STACK_DIR/saves/" 2>/dev/null | wc -l)
+save_count=$((save_count + 0))
+if [[ "$save_count" -ge 1 ]]; then
+  pass "pause creates auto-save file"
+else
+  fail "pause creates auto-save file" "found $save_count files in saves/"
+fi
+
+# 25. Save file name starts with "pause-test-"
+pause_save=$(ls -1 "$GSD_STACK_DIR/saves/" 2>/dev/null | head -1)
+if [[ "$pause_save" == pause-test-* ]]; then
+  pass "pause save file starts with session name"
+else
+  fail "pause save file starts with session name" "filename: $pause_save"
+fi
+
+# 26. History.jsonl contains a "pause" event
+if [[ -f "$GSD_STACK_DIR/history.jsonl" ]] && grep -q '"event":"pause"' "$GSD_STACK_DIR/history.jsonl"; then
+  pass "pause logs event to history.jsonl"
+else
+  fail "pause logs event to history.jsonl" "no pause event found in history"
+fi
+
+# 27. Output contains "paused" or "Paused"
+if echo "$output" | grep -qi "paused"; then
+  pass "pause output mentions paused"
+else
+  fail "pause output mentions paused" "output: $output"
+fi
+
+# ==============================================================================
+# Pause Error Cases
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Pause Error Cases${RESET}\n"
+
+# 28. pause nonexistent session exits non-zero
+set +e
+output=$("$GSD_STACK" pause nonexistent-session 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "pause nonexistent session exits non-zero"
+else
+  fail "pause nonexistent session exits non-zero" "exit code: $rc"
+fi
+
+# 29. Error output contains "not found" or "does not exist"
+if echo "$output" | grep -qi "not found\|does not exist"; then
+  pass "pause nonexistent session shows error"
+else
+  fail "pause nonexistent session shows error" "output: $output"
+fi
+
+# 30. pause stopped session exits non-zero
+mkdir -p "$GSD_STACK_DIR/sessions/stopped-for-pause"
+echo '{"name":"stopped-for-pause","status":"stopped","project":"/tmp/p","started":"2026-02-12T10:00:00Z","tmux_session":"claude-stopped-for-pause","pid":"1234"}' > "$GSD_STACK_DIR/sessions/stopped-for-pause/meta.json"
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" pause stopped-for-pause 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "pause stopped session exits non-zero"
+else
+  fail "pause stopped session exits non-zero" "exit code: $rc"
+fi
+
+# 31. Error output mentions state issue
+if echo "$output" | grep -qi "cannot pause\|not active\|not in.*pausable\|state"; then
+  pass "pause stopped session shows state error"
+else
+  fail "pause stopped session shows state error" "output: $output"
+fi
+
+# 32. pause with no session name exits non-zero
+set +e
+output=$("$GSD_STACK" pause 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "pause no args exits non-zero"
+else
+  fail "pause no args exits non-zero" "exit code: $rc"
+fi
+
+# ==============================================================================
+# Pause Idempotency Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Pause Idempotency Tests${RESET}\n"
+
+# Create a paused session
+mkdir -p "$GSD_STACK_DIR/sessions/already-paused"
+echo '{"name":"already-paused","status":"paused","project":"/tmp/p","started":"2026-02-12T10:00:00Z","tmux_session":"claude-already-paused","pid":"1234"}' > "$GSD_STACK_DIR/sessions/already-paused/meta.json"
+touch "$GSD_STACK_DIR/sessions/already-paused/heartbeat"
+
+# 33. Pausing an already-paused session exits non-zero
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" pause already-paused 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "pause already-paused session exits non-zero"
+else
+  fail "pause already-paused session exits non-zero" "exit code: $rc"
+fi
+
+# 34. Output indicates already paused or not active
+if echo "$output" | grep -qi "not active\|already paused\|cannot pause\|not in.*pausable\|state"; then
+  pass "pause already-paused session shows state error"
+else
+  fail "pause already-paused session shows state error" "output: $output"
+fi
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
