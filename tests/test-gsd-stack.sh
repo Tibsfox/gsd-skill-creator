@@ -4520,6 +4520,247 @@ else
 fi
 
 # ==============================================================================
+# Play --run Tests (setup)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --run Tests${RESET}\n"
+
+# Create a recording with replayable commands
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# Start recording
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=run-test >/dev/null 2>&1
+
+# Push 3 messages (these create stack_push events in stream)
+"$GSD_STACK" push "echo hello" >/dev/null 2>&1
+"$GSD_STACK" push "echo world" >/dev/null 2>&1
+"$GSD_STACK" push "ls -la" >/dev/null 2>&1
+
+# Add a marker (not replayable -- should be skipped)
+"$GSD_STACK" mark "commands done" >/dev/null 2>&1
+
+# Stop recording
+"$GSD_STACK" stop-record >/dev/null 2>&1
+
+# ==============================================================================
+# Play --run Dry-Run Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --run Dry-Run Tests${RESET}\n"
+
+set +e
+run_dryrun_output=$("$GSD_STACK" play --run --dry-run run-test 2>&1)
+run_dryrun_rc=$?
+set -e
+
+assert_exit_code "play --run --dry-run exits 0" "0" "$run_dryrun_rc"
+assert_contains "play --run --dry-run shows dry-run indicator" "$run_dryrun_output" "ry run"
+assert_contains "play --run --dry-run shows echo hello" "$run_dryrun_output" "echo hello"
+assert_contains "play --run --dry-run shows echo world" "$run_dryrun_output" "echo world"
+assert_contains "play --run --dry-run shows ls -la" "$run_dryrun_output" "ls -la"
+assert_not_contains "play --run --dry-run excludes marker" "$run_dryrun_output" "commands done"
+assert_contains "play --run --dry-run shows count 3" "$run_dryrun_output" "3"
+
+# ==============================================================================
+# Play --run Mock Tmux Replay
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --run Mock Tmux Replay${RESET}\n"
+
+set +e
+run_mock_output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" play --run run-test 2>&1)
+run_mock_rc=$?
+set -e
+
+assert_exit_code "play --run mock tmux exits 0" "0" "$run_mock_rc"
+assert_contains "play --run mock shows echo hello" "$run_mock_output" "echo hello"
+assert_contains "play --run mock shows echo world" "$run_mock_output" "echo world"
+assert_contains "play --run mock shows progress 1/" "$run_mock_output" "1/"
+assert_contains "play --run mock shows total /3" "$run_mock_output" "/3"
+assert_contains "play --run mock shows completion" "$run_mock_output" "omplete"
+
+# ==============================================================================
+# Play --run Nonexistent Recording
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --run Nonexistent Recording${RESET}\n"
+
+set +e
+run_noexist_output=$("$GSD_STACK" play --run nonexistent 2>&1)
+run_noexist_rc=$?
+set -e
+
+if [[ "$run_noexist_rc" -ne 0 ]]; then
+  pass "play --run nonexistent exits non-zero"
+else
+  fail "play --run nonexistent exits non-zero" "got exit code $run_noexist_rc"
+fi
+assert_contains "play --run nonexistent shows not found" "$run_noexist_output" "not found"
+
+# ==============================================================================
+# Play --run JSON Output
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --run JSON Output${RESET}\n"
+
+set +e
+run_json_output=$(GSD_FORMAT=json GSD_MOCK_TMUX=1 "$GSD_STACK" play --run run-test 2>&1)
+run_json_rc=$?
+set -e
+
+assert_exit_code "play --run JSON exits 0" "0" "$run_json_rc"
+assert_contains "play --run JSON starts with {" "$run_json_output" "{"
+assert_contains "play --run JSON contains replayed" "$run_json_output" "replayed"
+assert_contains "play --run JSON contains mode run" "$run_json_output" "\"mode\":\"run\""
+
+# ==============================================================================
+# Play --feed Tests (setup)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --feed Tests${RESET}\n"
+
+PLAYBOOK="$TEST_DIR/playbook.jsonl"
+printf '{"type":"push","message":"playbook cmd 1","priority":"normal"}\n' > "$PLAYBOOK"
+printf '{"type":"push","message":"playbook cmd 2","priority":"urgent"}\n' >> "$PLAYBOOK"
+printf '{"type":"push","message":"playbook cmd 3","delay":1}\n' >> "$PLAYBOOK"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# ==============================================================================
+# Play --feed Dry-Run Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --feed Dry-Run Tests${RESET}\n"
+
+set +e
+feed_dryrun_output=$("$GSD_STACK" play --feed --dry-run "$PLAYBOOK" 2>&1)
+feed_dryrun_rc=$?
+set -e
+
+assert_exit_code "play --feed --dry-run exits 0" "0" "$feed_dryrun_rc"
+assert_contains "play --feed --dry-run shows dry-run indicator" "$feed_dryrun_output" "ry run"
+assert_contains "play --feed --dry-run shows cmd 1" "$feed_dryrun_output" "playbook cmd 1"
+assert_contains "play --feed --dry-run shows cmd 2" "$feed_dryrun_output" "playbook cmd 2"
+assert_contains "play --feed --dry-run shows cmd 3" "$feed_dryrun_output" "playbook cmd 3"
+assert_contains "play --feed --dry-run shows count 3" "$feed_dryrun_output" "3"
+assert_contains "play --feed --dry-run shows delay" "$feed_dryrun_output" "delay"
+
+# ==============================================================================
+# Play --feed Execution Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --feed Execution Tests${RESET}\n"
+
+set +e
+feed_exec_output=$("$GSD_STACK" play --feed "$PLAYBOOK" 2>&1)
+feed_exec_rc=$?
+set -e
+
+assert_exit_code "play --feed execution exits 0" "0" "$feed_exec_rc"
+assert_contains "play --feed shows cmd 1" "$feed_exec_output" "playbook cmd 1"
+assert_contains "play --feed shows completion" "$feed_exec_output" "omplete"
+
+# Verify messages were pushed to stack
+set +e
+feed_peek_output=$("$GSD_STACK" peek 2>&1)
+feed_peek_rc=$?
+set -e
+
+assert_exit_code "play --feed peek after push exits 0" "0" "$feed_peek_rc"
+assert_contains "play --feed peek shows playbook cmd" "$feed_peek_output" "playbook cmd"
+
+# ==============================================================================
+# Play --feed Nonexistent File
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --feed Nonexistent File${RESET}\n"
+
+set +e
+feed_noexist_output=$("$GSD_STACK" play --feed "$TEST_DIR/nonexistent.jsonl" 2>&1)
+feed_noexist_rc=$?
+set -e
+
+if [[ "$feed_noexist_rc" -ne 0 ]]; then
+  pass "play --feed nonexistent file exits non-zero"
+else
+  fail "play --feed nonexistent file exits non-zero" "got exit code $feed_noexist_rc"
+fi
+assert_contains "play --feed nonexistent file shows error" "$feed_noexist_output" "not found"
+
+# ==============================================================================
+# Play --feed No File Argument
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --feed No File Argument${RESET}\n"
+
+set +e
+feed_noarg_output=$("$GSD_STACK" play --feed 2>&1)
+feed_noarg_rc=$?
+set -e
+
+if [[ "$feed_noarg_rc" -ne 0 ]]; then
+  pass "play --feed no file arg exits non-zero"
+else
+  fail "play --feed no file arg exits non-zero" "got exit code $feed_noarg_rc"
+fi
+assert_contains "play --feed no file arg shows usage/error" "$feed_noarg_output" "equired"
+
+# ==============================================================================
+# Play --feed JSON Output
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --feed JSON Output${RESET}\n"
+
+# Reset stack dir
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+set +e
+feed_json_output=$(GSD_FORMAT=json "$GSD_STACK" play --feed "$PLAYBOOK" 2>&1)
+feed_json_rc=$?
+set -e
+
+assert_exit_code "play --feed JSON exits 0" "0" "$feed_json_rc"
+assert_contains "play --feed JSON starts with {" "$feed_json_output" "{"
+assert_contains "play --feed JSON contains executed" "$feed_json_output" "executed"
+assert_contains "play --feed JSON contains mode feed" "$feed_json_output" "\"mode\":\"feed\""
+
+# ==============================================================================
+# Play --feed With Send Type
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --feed With Send Type${RESET}\n"
+
+PLAYBOOK_SEND="$TEST_DIR/playbook-send.jsonl"
+printf '{"type":"send","text":"hello world"}\n' > "$PLAYBOOK_SEND"
+printf '{"type":"send","text":"/gsd:progress","delay":2}\n' >> "$PLAYBOOK_SEND"
+
+set +e
+feed_send_output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" play --feed --dry-run "$PLAYBOOK_SEND" 2>&1)
+feed_send_rc=$?
+set -e
+
+assert_exit_code "play --feed send type dry-run exits 0" "0" "$feed_send_rc"
+assert_contains "play --feed send shows hello world" "$feed_send_output" "hello world"
+assert_contains "play --feed send shows /gsd:progress" "$feed_send_output" "/gsd:progress"
+assert_contains "play --feed send shows send type" "$feed_send_output" "send"
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
