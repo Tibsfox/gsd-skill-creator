@@ -1,11 +1,13 @@
 import { createHash } from 'crypto';
 import { PatternStore } from '../storage/pattern-store.js';
 import { OffloadOperationSchema } from '../chipset/blitter/types.js';
-import type { OffloadOperation } from '../chipset/blitter/types.js';
+import { executeOffloadOp } from '../chipset/blitter/executor.js';
+import type { OffloadOperation, OffloadResult } from '../chipset/blitter/types.js';
 import type {
   PromotionCandidate,
   GeneratedScript,
   ScriptGeneratorConfig,
+  DryRunResult,
   StoredExecutionBatch,
   ToolExecutionPair,
 } from '../types/observation.js';
@@ -87,6 +89,83 @@ export class ScriptGenerator {
       sourceCandidate: candidate,
       scriptContent: fullScriptContent,
       isValid,
+    };
+  }
+
+  /**
+   * Execute a generated script in dry-run mode and compare output against expected.
+   * Uses Blitter's OffloadExecutor to run the script, then compares stdout hash
+   * against the stored output hash from observations (SCRP-03).
+   *
+   * @param generatedScript - The script to validate
+   * @param executor - Optional custom executor function (default: executeOffloadOp from Blitter)
+   * @returns DryRunResult with pass/fail, hashes, and failure reason
+   */
+  async dryRun(
+    generatedScript: GeneratedScript,
+    executor: (op: OffloadOperation) => Promise<OffloadResult> = executeOffloadOp,
+  ): Promise<DryRunResult> {
+    // Early return for invalid scripts
+    if (!generatedScript.isValid) {
+      return {
+        generatedScript,
+        passed: false,
+        actualOutputHash: '',
+        expectedOutputHash: '',
+        exitCode: -1,
+        durationMs: 0,
+        failureReason: 'Script is invalid or generated for unsupported tool',
+      };
+    }
+
+    // Look up the expected output hash from stored execution pairs
+    const representativePair = await this.findRepresentativePair(
+      generatedScript.sourceCandidate,
+    );
+
+    if (!representativePair || !representativePair.outputHash) {
+      return {
+        generatedScript,
+        passed: false,
+        actualOutputHash: '',
+        expectedOutputHash: '',
+        exitCode: -1,
+        durationMs: 0,
+        failureReason: 'No stored execution data found for output comparison',
+      };
+    }
+
+    const expectedOutputHash = representativePair.outputHash;
+
+    // Execute the script using the executor
+    const result = await executor(generatedScript.operation);
+
+    // Hash the actual stdout
+    const actualOutputHash = createHash('sha256')
+      .update(result.stdout)
+      .digest('hex');
+
+    // Compare hashes and exit code
+    const hashMatch = actualOutputHash === expectedOutputHash;
+    const exitOk = result.exitCode === 0;
+    const passed = hashMatch && exitOk;
+
+    // Determine failure reason
+    let failureReason: string | null = null;
+    if (!exitOk) {
+      failureReason = `Non-zero exit code: ${result.exitCode}`;
+    } else if (!hashMatch) {
+      failureReason = `Output hash mismatch: expected ${expectedOutputHash.slice(0, 12)}..., got ${actualOutputHash.slice(0, 12)}...`;
+    }
+
+    return {
+      generatedScript,
+      passed,
+      actualOutputHash,
+      expectedOutputHash,
+      exitCode: result.exitCode,
+      durationMs: result.durationMs,
+      failureReason,
     };
   }
 
