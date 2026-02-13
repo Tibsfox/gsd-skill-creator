@@ -1159,6 +1159,19 @@ async function main() {
       break;
     }
 
+    case 'integration':
+    case 'int': {
+      const subcommand = args[1];
+      const subArgs = args.slice(1);
+
+      // If subcommand is a known sub (validate, show), pass from args[1] onward
+      // If it's a flag (--help, --json), pass all args after 'integration'
+      const { integrationConfigCommand } = await import('./cli/commands/integration-config.js');
+      const exitCode = await integrationConfigCommand(subArgs);
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'config':
     case 'cfg': {
       const subcommand = args[1];
@@ -1415,6 +1428,7 @@ Commands:
   workflow, wf      Manage skill workflows (create, run, list, status)
   role, rl          Manage skill roles (create, list)
   bundle, bd        Manage work bundles (create, list, activate, deactivate, status)
+  integration, int  Manage skill-creator integration config (validate, show)
   config, cfg       Manage GSD configuration (validate)
   event, ev         Manage skill events (list, emit, consume, suggest, expire)
   help, -h          Show this help message
