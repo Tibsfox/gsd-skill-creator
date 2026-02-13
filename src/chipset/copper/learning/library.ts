@@ -1,19 +1,19 @@
 /**
- * Versioned Copper List library with CRUD, best-match retrieval, and JSON persistence.
+ * Versioned Pipeline library with CRUD, best-match retrieval, and JSON persistence.
  *
- * Stores learned Copper Lists indexed by workflow type, tracks version history
+ * Stores learned Pipelines indexed by workflow type, tracks version history
  * as feedback refines them, and provides Jaccard similarity-based best-match
  * retrieval for finding the most relevant list for a given execution context.
  *
- * Persistence uses JSON files validated against CopperListSchema on load to
+ * Persistence uses JSON files validated against PipelineSchema on load to
  * ensure only structurally valid lists are retained. Invalid entries are
  * skipped with a warning rather than causing load failure.
  */
 
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname } from 'node:path';
-import type { CopperList } from '../types.js';
-import { CopperListSchema } from '../schema.js';
+import type { Pipeline } from '../types.js';
+import { PipelineSchema } from '../schema.js';
 import type { LibraryEntry } from './types.js';
 
 // ============================================================================
@@ -21,7 +21,7 @@ import type { LibraryEntry } from './types.js';
 // ============================================================================
 
 /**
- * Configuration for the CopperLibrary.
+ * Configuration for the PipelineLibrary.
  */
 export interface LibraryConfig {
   /** Maximum versions to retain per workflowType (default 10). */
@@ -62,18 +62,18 @@ interface SerializedLibrary {
 }
 
 // ============================================================================
-// CopperLibrary
+// PipelineLibrary
 // ============================================================================
 
 /**
- * Versioned Copper List library with CRUD operations, best-match retrieval,
+ * Versioned Pipeline library with CRUD operations, best-match retrieval,
  * and JSON persistence.
  *
  * Entries are indexed by workflowType for efficient retrieval. Version history
  * is maintained per workflowType, with the latest version being the "current"
  * entry returned by get().
  */
-export class CopperLibrary {
+export class PipelineLibrary {
   /**
    * Current (latest) entry per workflowType.
    */
@@ -140,7 +140,7 @@ export class CopperLibrary {
   }
 
   /**
-   * Get an entry by its Copper List metadata name.
+   * Get an entry by its Pipeline metadata name.
    *
    * Searches both current entries and version history for the given name.
    *
@@ -335,7 +335,7 @@ export class CopperLibrary {
   /**
    * Load the library from a JSON file.
    *
-   * Each entry's list is validated against CopperListSchema. Invalid entries
+   * Each entry's list is validated against PipelineSchema. Invalid entries
    * are skipped with a warning to stderr. If the file does not exist, this
    * is a silent no-op.
    */
@@ -362,8 +362,8 @@ export class CopperLibrary {
       const validVersions: LibraryEntry[] = [];
 
       for (const entry of group.versions) {
-        // Validate the list against CopperListSchema
-        const result = CopperListSchema.safeParse(entry.list);
+        // Validate the list against PipelineSchema
+        const result = PipelineSchema.safeParse(entry.list);
         if (!result.success) {
           process.stderr.write(
             `Warning: Skipping invalid entry "${entry.list?.metadata?.name ?? 'unknown'}" ` +
@@ -373,7 +373,7 @@ export class CopperLibrary {
         }
 
         // Use the validated (possibly default-filled) list
-        entry.list = result.data as unknown as CopperList;
+        entry.list = result.data as unknown as Pipeline;
         validVersions.push(entry);
       }
 
