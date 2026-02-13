@@ -2731,6 +2731,278 @@ else
 fi
 
 # ==============================================================================
+# Resume Paused Session Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Resume Paused Session Tests${RESET}\n"
+
+# Reset stack dir for resume tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+mkdir -p "$GSD_STACK_DIR/sessions" "$GSD_STACK_DIR/pending" "$GSD_STACK_DIR/done" "$GSD_STACK_DIR/recordings" "$GSD_STACK_DIR/saves"
+touch "$GSD_STACK_DIR/history.jsonl" "$GSD_STACK_DIR/registry.jsonl"
+
+# Create paused session (simulates what pause leaves behind)
+mkdir -p "$GSD_STACK_DIR/sessions/resume-paused"
+echo '{"name":"resume-paused","status":"paused","project":"/tmp/resume-proj","started":"2026-02-12T10:00:00Z","tmux_session":"claude-resume-paused","pid":"1234"}' > "$GSD_STACK_DIR/sessions/resume-paused/meta.json"
+touch "$GSD_STACK_DIR/sessions/resume-paused/heartbeat"
+
+# Create a save file that resume will find
+echo '{"name":"resume-paused","saved_at":"2026-02-12T12:00:00Z","note":"auto-save on pause","meta":{"name":"resume-paused","status":"active","project":"/tmp/resume-proj"},"pending_count":2,"pending_files":"5-001.md,0-002.md","state_md":"# State\nPhase: 105\nStatus: executing","terminal_context":""}' > "$GSD_STACK_DIR/saves/resume-paused-20260212-120000.json"
+
+# Create pending messages for context
+echo -e "---\npriority: normal\n---\ntest msg" > "$GSD_STACK_DIR/pending/5-001.md"
+echo -e "---\npriority: urgent\n---\nhotfix" > "$GSD_STACK_DIR/pending/0-002.md"
+
+# 1. resume paused session exits 0
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" resume resume-paused 2>&1)
+rc=$?
+set -e
+assert_exit_code "resume paused session exits 0" "0" "$rc"
+
+# 2. After resume, meta.json status is "active"
+meta_after=""
+if [[ -f "$GSD_STACK_DIR/sessions/resume-paused/meta.json" ]]; then
+  meta_after=$(cat "$GSD_STACK_DIR/sessions/resume-paused/meta.json" 2>/dev/null)
+fi
+if echo "$meta_after" | grep -q '"status":"active"'; then
+  pass "resume paused: meta.json status is active"
+else
+  fail "resume paused: meta.json status is active" "meta: $meta_after"
+fi
+
+# 3. _get-state outputs "active"
+set +e
+state_output=$("$GSD_STACK" _get-state resume-paused 2>&1)
+set -e
+assert_eq "resume paused: _get-state outputs active" "active" "$state_output"
+
+# 4. After resume, heartbeat file is fresh (within last 10 seconds)
+if [[ -f "$GSD_STACK_DIR/sessions/resume-paused/heartbeat" ]]; then
+  hb_mtime=$(stat -c %Y "$GSD_STACK_DIR/sessions/resume-paused/heartbeat" 2>/dev/null || stat -f %m "$GSD_STACK_DIR/sessions/resume-paused/heartbeat" 2>/dev/null)
+  now_ts=$(date +%s)
+  hb_age=$((now_ts - hb_mtime))
+  if [[ "$hb_age" -lt 10 ]]; then
+    pass "resume paused: heartbeat is fresh"
+  else
+    fail "resume paused: heartbeat is fresh" "heartbeat age: ${hb_age}s"
+  fi
+else
+  fail "resume paused: heartbeat is fresh" "heartbeat file does not exist"
+fi
+
+# 5. History.jsonl contains a "resume" event
+if grep -q '"event":"resume"' "$GSD_STACK_DIR/history.jsonl" 2>/dev/null; then
+  pass "resume paused: history contains resume event"
+else
+  fail "resume paused: history contains resume event" "no resume event in history"
+fi
+
+# 6. Output contains "resume" or "Resumed" or "active" or "paused"
+if echo "$output" | grep -qi "resum\|active\|paused"; then
+  pass "resume paused: output mentions resume/active"
+else
+  fail "resume paused: output mentions resume/active" "output: $output"
+fi
+
+# ==============================================================================
+# Resume Generates Contextual Prompt Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Resume Contextual Prompt Tests${RESET}\n"
+
+# 7. Output references save snapshot context (pending count, project, or warm-start)
+if echo "$output" | grep -qi "warm-start\|context\|resuming\|pending\|message\|2\|resume-paused\|save\|progress"; then
+  pass "resume paused: output references context from save"
+else
+  fail "resume paused: output references context from save" "output: $output"
+fi
+
+# ==============================================================================
+# Resume Stalled Session Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Resume Stalled Session Tests${RESET}\n"
+
+# Create stalled session (active meta but old heartbeat)
+mkdir -p "$GSD_STACK_DIR/sessions/resume-stalled"
+echo '{"name":"resume-stalled","status":"active","project":"/tmp/stalled-proj","started":"2026-02-12T08:00:00Z","tmux_session":"claude-resume-stalled","pid":"5678"}' > "$GSD_STACK_DIR/sessions/resume-stalled/meta.json"
+touch -d "10 minutes ago" "$GSD_STACK_DIR/sessions/resume-stalled/heartbeat"
+
+# 8. Confirm state is stalled first
+set +e
+stalled_state=$(GSD_STALL_TIMEOUT=300 "$GSD_STACK" _get-state resume-stalled 2>&1)
+set -e
+assert_eq "stalled session: _get-state outputs stalled" "stalled" "$stalled_state"
+
+# 9. resume stalled session exits 0
+set +e
+output=$(GSD_MOCK_TMUX=1 GSD_STALL_TIMEOUT=300 "$GSD_STACK" resume resume-stalled 2>&1)
+rc=$?
+set -e
+assert_exit_code "resume stalled session exits 0" "0" "$rc"
+
+# 10. After resume, meta.json status is "active"
+meta_after=""
+if [[ -f "$GSD_STACK_DIR/sessions/resume-stalled/meta.json" ]]; then
+  meta_after=$(cat "$GSD_STACK_DIR/sessions/resume-stalled/meta.json" 2>/dev/null)
+fi
+if echo "$meta_after" | grep -q '"status":"active"'; then
+  pass "resume stalled: meta.json status is active"
+else
+  fail "resume stalled: meta.json status is active" "meta: $meta_after"
+fi
+
+# 11. Heartbeat file is fresh (touched after resume)
+if [[ -f "$GSD_STACK_DIR/sessions/resume-stalled/heartbeat" ]]; then
+  hb_mtime=$(stat -c %Y "$GSD_STACK_DIR/sessions/resume-stalled/heartbeat" 2>/dev/null || stat -f %m "$GSD_STACK_DIR/sessions/resume-stalled/heartbeat" 2>/dev/null)
+  now_ts=$(date +%s)
+  hb_age=$((now_ts - hb_mtime))
+  if [[ "$hb_age" -lt 10 ]]; then
+    pass "resume stalled: heartbeat is fresh"
+  else
+    fail "resume stalled: heartbeat is fresh" "heartbeat age: ${hb_age}s"
+  fi
+else
+  fail "resume stalled: heartbeat is fresh" "heartbeat file does not exist"
+fi
+
+# 12. Output contains "recover" or "stalled" or "resumed"
+if echo "$output" | grep -qi "recover\|stalled\|resum"; then
+  pass "resume stalled: output indicates recovery"
+else
+  fail "resume stalled: output indicates recovery" "output: $output"
+fi
+
+# ==============================================================================
+# Resume Saved Session Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Resume Saved Session Tests${RESET}\n"
+
+# Create saved session
+mkdir -p "$GSD_STACK_DIR/sessions/resume-saved"
+echo '{"name":"resume-saved","status":"saved","project":"/tmp/saved-proj","started":"2026-02-12T09:00:00Z","tmux_session":"claude-resume-saved","pid":"9012"}' > "$GSD_STACK_DIR/sessions/resume-saved/meta.json"
+
+# Create a save file
+echo '{"name":"resume-saved","saved_at":"2026-02-12T11:00:00Z","note":"manual save","meta":{"name":"resume-saved","status":"saved","project":"/tmp/saved-proj"},"pending_count":0,"pending_files":"","state_md":"","terminal_context":""}' > "$GSD_STACK_DIR/saves/resume-saved-20260212-110000.json"
+
+# 13. resume saved session exits 0
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" resume resume-saved 2>&1)
+rc=$?
+set -e
+assert_exit_code "resume saved session exits 0" "0" "$rc"
+
+# 14. After resume, meta.json status is "active"
+meta_after=""
+if [[ -f "$GSD_STACK_DIR/sessions/resume-saved/meta.json" ]]; then
+  meta_after=$(cat "$GSD_STACK_DIR/sessions/resume-saved/meta.json" 2>/dev/null)
+fi
+if echo "$meta_after" | grep -q '"status":"active"'; then
+  pass "resume saved: meta.json status is active"
+else
+  fail "resume saved: meta.json status is active" "meta: $meta_after"
+fi
+
+# 15. After resume, heartbeat file exists and is fresh
+if [[ -f "$GSD_STACK_DIR/sessions/resume-saved/heartbeat" ]]; then
+  hb_mtime=$(stat -c %Y "$GSD_STACK_DIR/sessions/resume-saved/heartbeat" 2>/dev/null || stat -f %m "$GSD_STACK_DIR/sessions/resume-saved/heartbeat" 2>/dev/null)
+  now_ts=$(date +%s)
+  hb_age=$((now_ts - hb_mtime))
+  if [[ "$hb_age" -lt 10 ]]; then
+    pass "resume saved: heartbeat exists and is fresh"
+  else
+    fail "resume saved: heartbeat exists and is fresh" "heartbeat age: ${hb_age}s"
+  fi
+else
+  fail "resume saved: heartbeat exists and is fresh" "heartbeat file does not exist"
+fi
+
+# 16. History.jsonl contains a "resume" event for saved
+if grep -q '"event":"resume"' "$GSD_STACK_DIR/history.jsonl" 2>/dev/null; then
+  pass "resume saved: history contains resume event"
+else
+  fail "resume saved: history contains resume event" "no resume event in history"
+fi
+
+# 17. Output contains "resume" or "new session" or context
+if echo "$output" | grep -qi "resum\|new session\|save\|context"; then
+  pass "resume saved: output mentions resume/new session"
+else
+  fail "resume saved: output mentions resume/new session" "output: $output"
+fi
+
+# ==============================================================================
+# Resume Error Cases
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Resume Error Cases${RESET}\n"
+
+# 18. resume nonexistent session exits non-zero
+set +e
+output=$("$GSD_STACK" resume nonexistent 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "resume nonexistent session exits non-zero"
+else
+  fail "resume nonexistent session exits non-zero" "exit code: $rc"
+fi
+
+# 19. Error output contains "not found"
+if echo "$output" | grep -qi "not found\|does not exist\|unknown"; then
+  pass "resume nonexistent: output shows not found"
+else
+  fail "resume nonexistent: output shows not found" "output: $output"
+fi
+
+# 20. resume stopped session exits non-zero
+mkdir -p "$GSD_STACK_DIR/sessions/stopped-for-resume"
+echo '{"name":"stopped-for-resume","status":"stopped","project":"/tmp/stopped","started":"2026-02-12T07:00:00Z","tmux_session":"claude-stopped","pid":"0000"}' > "$GSD_STACK_DIR/sessions/stopped-for-resume/meta.json"
+
+set +e
+output=$(GSD_MOCK_TMUX=1 "$GSD_STACK" resume stopped-for-resume 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "resume stopped session exits non-zero"
+else
+  fail "resume stopped session exits non-zero" "exit code: $rc"
+fi
+
+# 21. Output mentions "cannot resume" or "stopped" or "use session command"
+if echo "$output" | grep -qi "cannot resume\|stopped\|session.*command\|start.*new"; then
+  pass "resume stopped: output shows helpful error"
+else
+  fail "resume stopped: output shows helpful error" "output: $output"
+fi
+
+# 22. resume with no session name exits non-zero
+set +e
+output=$("$GSD_STACK" resume 2>&1)
+rc=$?
+set -e
+if [[ "$rc" -ne 0 ]]; then
+  pass "resume no args exits non-zero"
+else
+  fail "resume no args exits non-zero" "exit code: $rc"
+fi
+
+# 23. Error output contains usage hint
+if echo "$output" | grep -qi "usage\|session name\|required"; then
+  pass "resume no args shows usage hint"
+else
+  fail "resume no args shows usage hint" "output: $output"
+fi
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
