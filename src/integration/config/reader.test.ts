@@ -359,7 +359,7 @@ describe('terminal config via reader', () => {
     const config = await readIntegrationConfig();
 
     expect(config.terminal).toEqual({
-      port: 3000,
+      port: 11338,
       base_path: '/terminal',
       auth_mode: 'none',
       theme: 'dark',
@@ -373,7 +373,7 @@ describe('terminal config via reader', () => {
     const config = await readIntegrationConfig();
 
     expect(config.terminal).toEqual({
-      port: 3000,
+      port: 11338,
       base_path: '/terminal',
       auth_mode: 'none',
       theme: 'dark',
@@ -414,7 +414,7 @@ describe('validateIntegrationConfig with terminal', () => {
     expect(result.valid).toBe(true);
     if (result.valid) {
       expect(result.config.terminal).toEqual({
-        port: 3000,
+        port: 11338,
         base_path: '/terminal',
         auth_mode: 'none',
         theme: 'dark',

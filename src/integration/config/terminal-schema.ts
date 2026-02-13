@@ -6,7 +6,7 @@
  * config (or none at all) and get sensible behavior.
  *
  * Covers CONF-01 (schema validation) and CONF-03 (sensible defaults):
- * - port: 3000 (Wetty default)
+ * - port: 11338 (avoids conflict with common services on 3000)
  * - base_path: '/terminal' (dashboard integration path)
  * - auth_mode: 'none' (extensible enum, SSH auth out of scope)
  * - theme: 'dark' (matches dashboard theme)
@@ -30,8 +30,8 @@ import type { TerminalConfig } from './terminal-types.js';
  * ```
  */
 export const TerminalConfigSchema = z.object({
-  /** Wetty server port (1-65535). Default: 3000. */
-  port: z.number().int().min(1).max(65535).default(3000),
+  /** Wetty server port (1-65535). Default: 11338. */
+  port: z.number().int().min(1).max(65535).default(11338),
 
   /** URL base path for Wetty (must start with /). Default: '/terminal'. */
   base_path: z.string().min(1).regex(/^\//, 'base_path must start with /').default('/terminal'),

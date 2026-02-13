@@ -54,7 +54,7 @@ function createMockChildProcess(pid: number = 12345): ChildProcess {
 
 /** Default terminal config matching Phase 123 defaults. */
 const DEFAULT_CONFIG: TerminalConfig = {
-  port: 3000,
+  port: 11338,
   base_path: '/terminal',
   auth_mode: 'none',
   theme: 'dark',
@@ -86,7 +86,7 @@ describe('launchWetty -- spawns with correct arguments', () => {
 
     expect(spawn).toHaveBeenCalledWith(
       'wetty',
-      expect.arrayContaining(['--port', '3000', '--base', '/terminal']),
+      expect.arrayContaining(['--port', '11338', '--base', '/terminal']),
       expect.any(Object),
     );
   });

@@ -24,9 +24,9 @@ import { TerminalConfigSchema, DEFAULT_TERMINAL_CONFIG } from './terminal-schema
 // ============================================================================
 
 describe('TerminalConfigSchema defaults', () => {
-  it('produces port=3000 from empty object', () => {
+  it('produces port=11338 from empty object', () => {
     const config = TerminalConfigSchema.parse({});
-    expect(config.port).toBe(3000);
+    expect(config.port).toBe(11338);
   });
 
   it('produces base_path="/terminal" from empty object', () => {
@@ -47,7 +47,7 @@ describe('TerminalConfigSchema defaults', () => {
   it('produces complete default config from empty object', () => {
     const config = TerminalConfigSchema.parse({});
     expect(config).toEqual({
-      port: 3000,
+      port: 11338,
       base_path: '/terminal',
       auth_mode: 'none',
       theme: 'dark',
@@ -74,7 +74,7 @@ describe('Partial overrides', () => {
     const config = TerminalConfigSchema.parse({ theme: 'light' });
 
     expect(config.theme).toBe('light');
-    expect(config.port).toBe(3000);
+    expect(config.port).toBe(11338);
     expect(config.base_path).toBe('/terminal');
     expect(config.auth_mode).toBe('none');
   });
@@ -83,7 +83,7 @@ describe('Partial overrides', () => {
     const config = TerminalConfigSchema.parse({ base_path: '/wetty' });
 
     expect(config.base_path).toBe('/wetty');
-    expect(config.port).toBe(3000);
+    expect(config.port).toBe(11338);
     expect(config.auth_mode).toBe('none');
     expect(config.theme).toBe('dark');
   });
@@ -208,7 +208,7 @@ describe('Theme validation', () => {
 describe('Type validation', () => {
   it('rejects string for port', () => {
     expect(() =>
-      TerminalConfigSchema.parse({ port: '3000' }),
+      TerminalConfigSchema.parse({ port: '11338' }),
     ).toThrow(z.ZodError);
   });
 

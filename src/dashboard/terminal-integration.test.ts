@@ -34,7 +34,7 @@ import { buildTerminalHtml, getTerminalConfig } from './terminal-integration.js'
 // ---------------------------------------------------------------------------
 
 const defaultTerminal: TerminalConfig = {
-  port: 3000,
+  port: 11338,
   base_path: '/terminal',
   auth_mode: 'none',
   theme: 'dark',
@@ -92,12 +92,12 @@ describe('getTerminalConfig', () => {
   it('returns default terminal config when file missing', async () => {
     const defaultsConfig: IntegrationConfig = {
       ...fullConfig,
-      terminal: { port: 3000, base_path: '/terminal', auth_mode: 'none', theme: 'dark', session_name: 'dev' },
+      terminal: { port: 11338, base_path: '/terminal', auth_mode: 'none', theme: 'dark', session_name: 'dev' },
     };
     mockedReadConfig.mockResolvedValue(defaultsConfig);
 
     const result = await getTerminalConfig();
-    expect(result.port).toBe(3000);
+    expect(result.port).toBe(11338);
     expect(result.base_path).toBe('/terminal');
   });
 });
