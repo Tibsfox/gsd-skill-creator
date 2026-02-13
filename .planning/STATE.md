@@ -3,9 +3,9 @@
 ## Current Position
 
 Milestone: v1.16 -- Dashboard Console & Milestone Ingestion
-Phase: 131-question-system (plan 02 complete)
+Phase: 131-question-system (plan 03 complete)
 Status: Executing phase 131
-Last activity: 2026-02-13 -- Completed 131-02 (question card renderer)
+Last activity: 2026-02-13 -- Completed 131-03 (question poller and timeout responder)
 
 Progress: [███░░░░░░░░░░░░░] 1/5 phases (131 in progress)
 
@@ -72,12 +72,15 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - Choice, multi-select, text types include submit button in actions bar
 - Urgency conveyed via left border color (dim/accent/orange/red) with critical background tint
 - Timeout formatted as Xm Ys for >= 60s, Xs for < 60s
+- Event delegation on document.click for question card interactions (cards rendered dynamically)
+- Urgency escalation ladder: low->high, medium->critical, high->critical, critical->critical (ceiling)
+- submitQuestionResponse globally accessible via window for external integration
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
-- Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, check-inbox integration tests)
+- Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, question-responder, check-inbox integration tests)
 - Scripts module: scripts/console/ (check-inbox.sh, write-question.sh, write-status.sh, validate-config.sh)
 - gsd-stack session management: bash scripts with tmux integration (v1.13)
 - v1.14 promotion pipeline: src/pipeline/ + src/dashboard/collectors/
@@ -103,10 +106,10 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Completed 131-02 (question card renderer)
-Stopped at: Completed 131-02-PLAN.md execution
-Next action: Continue with remaining 131 plans (03+)
-Context: renderQuestionCard produces HTML for all 5 question types with type-specific inputs. renderQuestionCardStyles returns themed CSS. 31 new tests, 137 total dashboard tests passing. Imports Question type from console/question-schema.ts (131-01).
+Last: 2026-02-13 -- Completed 131-03 (question poller and timeout responder)
+Stopped at: Completed 131-03-PLAN.md execution
+Next action: Continue with remaining 131 plans (04+)
+Context: QuestionPoller scans outbox/questions/ for pending questions. renderQuestionResponseScript generates client-side JS with event delegation for all 5 input types. applyTimeoutFallback handles all 4 fallback actions with urgency escalation. 29 new tests, 376 total console+dashboard tests passing.
 
 ---
-*Last updated: 2026-02-13 (131-02 complete)*
+*Last updated: 2026-02-13 (131-03 complete)*
