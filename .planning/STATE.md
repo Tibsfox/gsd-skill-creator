@@ -4,9 +4,9 @@
 
 Milestone: v1.17 — Staging Layer
 Phase: 138 — Resource Analysis (in progress)
-Plan: 138-05 complete
+Plan: 138-06 complete
 Status: Executing phase 138
-Last activity: 2026-02-13 — Completed 138-05 (resource manifest generator and barrel index)
+Last activity: 2026-02-13 — Completed 138-06 (intake bridge and staging barrel update)
 
 ## Project Reference
 
@@ -181,6 +181,11 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - HITL predictions from ambiguity markers (decision checkpoints) and high/critical complexity (review checkpoints)
 - Queue priority: critical=1, high=2, medium=3, low=4; duration = reqCount * complexity multiplier
 - Barrel follows hygiene/derived pattern: type-only exports for interfaces, value exports for functions/constants
+- IntakeBridgeDeps DI interface mirrors orchestrator confirmIntake signature for bridge testability
+- Manifest persisted as {filename}.manifest.json in ready directory alongside document and metadata
+- Content read from ready directory post-confirmIntake (document already moved there by confirm flow)
+- 'queued' recorded as final INTAKE_FLOW_STEPS step after manifest generation
+- Staging barrel re-exports complete resource analysis API (15 types, 5 constants, 6 functions, bridge)
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -198,7 +203,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, trust-store, finding-actions, report, index)
 - Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift, pattern-fidelity, training-coherence, copying-detector, checker, index)
 - Staging intake-flow submodule at src/staging/intake-flow/ (types, clarity-assessor, step-types, step-tracker, orchestrator, index)
-- Staging resource submodule at src/staging/resource/ (types, analyzer, skill-matcher, topology, budget, decomposer, manifest, index)
+- Staging resource submodule at src/staging/resource/ (types, analyzer, skill-matcher, topology, budget, decomposer, manifest, intake-bridge, index)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -213,15 +218,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 398 complete |
+| Total plans | 399 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 138-05-PLAN.md (manifest generator + barrel index)
-Stopped at: Plans 138-01 through 138-05 complete. Phase 138 in progress.
+Last: 2026-02-13 — Completed 138-06-PLAN.md (intake bridge + staging barrel update)
+Stopped at: Plans 138-01 through 138-06 complete. Phase 138 in progress.
 Next action: Continue with remaining 138 plans if any, or finalize phase 138.
-Context: v1.17 Staging Layer. Phase 138 in progress (5/5 plans complete). Resource submodule complete: types, analyzer, skill-matcher, topology, budget, decomposer, manifest, index. 505 staging tests pass.
+Context: v1.17 Staging Layer. Phase 138 in progress (6 plans complete). Resource submodule complete: types, analyzer, skill-matcher, topology, budget, decomposer, manifest, intake-bridge, index. 515 staging tests pass.
 
 ---
-*Last updated: 2026-02-13 (138-05 complete)*
+*Last updated: 2026-02-13 (138-06 complete)*
