@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.17 — Staging Layer
-Phase: 140 — Staging Queue Core (complete)
-Plan: 140-04 complete
-Status: Phase 140 complete (4 of 4 plans)
-Last activity: 2026-02-13 — Completed 140-04 (queue manager facade and barrel)
+Phase: 141 — Queue Pipelining and Dashboard (in progress)
+Plan: 141-03 complete
+Status: Plan 141-03 complete (3 of 4 plans)
+Last activity: 2026-02-13 — Completed 141-03 (staging queue dashboard panel)
 
 ## Project Reference
 
@@ -206,9 +206,20 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - QueueManager is a plain object from factory function (not a class)
 - Queue barrel follows hygiene/derived/resource pattern: type-only + value exports
 - Staging barrel re-exports complete queue API (9 types, 3 constants, 6 functions)
+- Single topology assigns all non-missing skills to one executor agent
+- Pipeline/hybrid use round-robin distribution across stage-N agents
+- Map-reduce: coordinator gets first skill, workers split remainder
+- Router agent gets no skills; handler agents split all skills
+- Missing skills become gap strings, not PreWiredSkill entries
+- ELIGIBLE_STATES as ReadonlySet<QueueState> for O(1) lookup and type safety in retroactive audit
+- Precautionary severity (max across patterns) when no content available or no content matches
+- Regex cloned in patternMatchesContent to avoid shared state with global flag
+- 7 QueueStates mapped to 4 kanban columns: uploaded+checking->incoming, needs-attention->attention, ready+queued+executing->ready, set-aside->aside
+- SVG dependency lines use data-from/data-to attributes with client-side getBoundingClientRect positioning
+- Per-state badge colors: blue(uploaded), yellow(checking), orange(needs-attention), green(ready), teal(queued), purple(executing), gray(set-aside)
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
 - Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, question-responder, check-inbox integration tests)
@@ -224,7 +235,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift, pattern-fidelity, training-coherence, copying-detector, checker, index)
 - Staging intake-flow submodule at src/staging/intake-flow/ (types, clarity-assessor, step-types, step-tracker, orchestrator, index)
 - Staging resource submodule at src/staging/resource/ (types, analyzer, skill-matcher, topology, budget, decomposer, manifest, intake-bridge, index)
-- Staging queue submodule at src/staging/queue/ (types, state-machine, audit-logger, dependency-detector, optimization-analyzer, manager, index)
+- Staging queue submodule at src/staging/queue/ (types, state-machine, audit-logger, dependency-detector, optimization-analyzer, manager, pre-wiring, retroactive-audit, index)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -239,15 +250,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 140 complete |
-| Total plans | 406 complete |
+| Total plans | 408 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 140-04-PLAN.md (queue manager facade and barrel)
-Stopped at: Phase 140 complete (4 of 4 plans). All queue submodule components built.
-Next action: Continue with phase 141 (next v1.17 phase).
-Context: v1.17 Staging Layer. Phase 140 complete. Queue submodule: types, state-machine, audit-logger, dependency-detector, optimization-analyzer, manager, index. 610 staging tests pass.
+Last: 2026-02-13 — Completed 141-03-PLAN.md (staging queue dashboard panel)
+Stopped at: Plan 141-03 complete (3 of 4 plans). Staging queue panel with 4-column kanban and SVG dependency lines.
+Next action: Execute 141-04 (remaining phase 141 plan).
+Context: v1.17 Staging Layer. Phase 141 in progress. Dashboard staging-queue-panel built with 38 tests. 240 dashboard tests pass.
 
 ---
-*Last updated: 2026-02-13 (140-04 complete, phase 140 complete)*
+*Last updated: 2026-02-13 (141-03 complete)*
