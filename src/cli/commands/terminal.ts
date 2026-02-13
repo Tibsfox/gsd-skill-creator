@@ -6,11 +6,9 @@
  * and tracks it via a PID file so the CLI can exit immediately
  * while the terminal server keeps running.
  *
- * Subcommands:
- * - start: Launch the Wetty terminal server (background)
- * - stop: Gracefully shut down the terminal server
- * - status: Show current terminal service status
- * - restart: Stop then start the terminal server
+ * Prefers running wetty from a local source build (which has bundled
+ * client JS) over the global `wetty` binary (which may ship unbundled
+ * source due to npm packaging bugs in wetty 2.7.0).
  *
  * @module cli/commands/terminal
  */
@@ -18,6 +16,7 @@
 import { spawn } from 'node:child_process';
 import { existsSync, readFileSync, writeFileSync, unlinkSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { homedir } from 'node:os';
 import type { TerminalConfig } from '../../integration/config/terminal-types.js';
 import { checkHealth } from '../../terminal/health.js';
 import { buildSessionCommand } from '../../terminal/session.js';
@@ -26,7 +25,6 @@ import { buildSessionCommand } from '../../terminal/session.js';
 // PID file management
 // ---------------------------------------------------------------------------
 
-/** PID file location: .planning/.terminal.pid */
 function pidFilePath(): string {
   return join(process.cwd(), '.planning', '.terminal.pid');
 }
@@ -50,7 +48,6 @@ function removePid(): void {
   if (existsSync(path)) unlinkSync(path);
 }
 
-/** Check if a PID is still alive. */
 function isProcessAlive(pid: number): boolean {
   try {
     process.kill(pid, 0);
@@ -96,6 +93,38 @@ function buildUrl(config: TerminalConfig): string {
 }
 
 // ---------------------------------------------------------------------------
+// Wetty resolution
+// ---------------------------------------------------------------------------
+
+/**
+ * Resolve a working wetty installation.
+ *
+ * The npm-published wetty 2.7.0 ships unbundled client JS that browsers
+ * can't load (bare ESM imports). A source build produces a bundled client.
+ * This function searches for a working build in these locations:
+ *
+ * 1. ~/.local/share/wetty/build/main.js (user-installed build)
+ * 2. /tmp/wetty-build/build/main.js (build from source clone)
+ *
+ * Returns {cmd, args_prefix} for spawning, or falls back to global `wetty`.
+ */
+function resolveWetty(): { cmd: string; prefix: string[] } {
+  const candidates = [
+    join(homedir(), '.local', 'share', 'wetty', 'build', 'main.js'),
+    '/tmp/wetty-build/build/main.js',
+  ];
+
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) {
+      return { cmd: 'node', prefix: [candidate] };
+    }
+  }
+
+  // Fallback to global wetty binary
+  return { cmd: 'wetty', prefix: [] };
+}
+
+// ---------------------------------------------------------------------------
 // Main dispatcher
 // ---------------------------------------------------------------------------
 
@@ -133,7 +162,6 @@ export async function terminalCommand(args: string[]): Promise<number> {
 // ---------------------------------------------------------------------------
 
 async function handleStart(config: TerminalConfig): Promise<number> {
-  // Check if already running
   const existingPid = readPid();
   if (existingPid !== null && isProcessAlive(existingPid)) {
     const url = buildUrl(config);
@@ -149,22 +177,22 @@ async function handleStart(config: TerminalConfig): Promise<number> {
     return 0;
   }
 
-  // Build CLI args
   const wettyArgs: string[] = [
     '--port', String(config.port),
     '--base', config.base_path,
     '--allow-iframe',
   ];
 
-  // Only attach to tmux if a session already exists; otherwise
-  // let wetty spawn the user's default shell.
   const command = buildSessionCommand(config.session_name);
   if (command !== undefined) {
     wettyArgs.push('--command', `bash -c '${command}'`);
   }
 
   try {
-    const child = spawn('wetty', wettyArgs, {
+    const { cmd, prefix } = resolveWetty();
+    const spawnArgs = [...prefix, ...wettyArgs];
+
+    const child = spawn(cmd, spawnArgs, {
       detached: true,
       stdio: 'ignore',
     });
@@ -177,17 +205,18 @@ async function handleStart(config: TerminalConfig): Promise<number> {
       return 1;
     }
 
-    // Detach so CLI can exit
     child.unref();
     writePid(child.pid);
 
     const url = buildUrl(config);
+    const source = prefix.length > 0 ? prefix[0] : cmd;
     console.log(JSON.stringify({
       action: 'start',
       process: 'running',
       pid: child.pid,
       url,
       healthy: false,
+      source,
       message: 'Terminal started (health check may take a moment)',
     }, null, 2));
     return 0;
@@ -214,13 +243,11 @@ async function handleStop(config: TerminalConfig): Promise<number> {
   try {
     process.kill(pid, 'SIGTERM');
 
-    // Wait up to 5s for graceful shutdown
     const deadline = Date.now() + 5000;
     while (Date.now() < deadline && isProcessAlive(pid)) {
       await new Promise(r => setTimeout(r, 200));
     }
 
-    // Escalate if still alive
     if (isProcessAlive(pid)) {
       process.kill(pid, 'SIGKILL');
     }
