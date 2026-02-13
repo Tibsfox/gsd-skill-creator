@@ -4,9 +4,9 @@
 
 Milestone: v1.17 — Staging Layer
 Phase: 136 — Hygiene Trust and Reporting (in progress)
-Plan: 136-01 complete
+Plan: 136-04 complete
 Status: Executing phase 136
-Last activity: 2026-02-13 — Completed 136-01 (trust tier types and familiarity classifier)
+Last activity: 2026-02-13 — Completed 136-04 (finding actions and trust decay store)
 
 ## Project Reference
 
@@ -123,6 +123,14 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Parent in ProvenanceNode means upstream input (first resolvable input in chain), not downstream consumer
 - Conservative default: unknown/empty provenance chains inherit 'stranger' tier
 - Cycle prevention via visited Set in recursive provenance trace
+- Common word filtering via 60+ entry Set for scope extraction (stop words, verbs, generic heading words)
+- File glob extraction strips wildcards, extensions, and leading dots to get meaningful stems
+- Drift ratio rounded to 2 decimal places for consistent severity thresholds
+- Severity-to-importance mapping: critical->critical, high->warning, medium->notice, low/info->info
+- FILTERED_TIERS as ReadonlySet for O(1) home/neighborhood tier lookup
+- Category-specific suggestion strings as const record keyed by HygieneCategory
+- Coherence findings always isCritical=false (never auto-approve blockers)
+- Summary counts computed from surfaced findings only (not pre-filter total)
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -137,8 +145,8 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Helper endpoint wired into serve-dashboard.mjs via dynamic import (browser->filesystem bridge)
 - No WebSockets -- dashboard polls outbox at 2-3s intervals
 - Staging module at src/staging/ (types, schema, directory, intake, state-machine, index)
-- Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, index)
-- Staging derived submodule at src/staging/derived/ (types, provenance)
+- Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, report, index)
+- Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -153,15 +161,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 387 complete |
+| Total plans | 388 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 136-01-PLAN.md
-Stopped at: Plan 136-01 complete (trust tier types and familiarity classifier)
-Next action: Continue phase 136 (plans 136-02 through 136-05 remaining).
-Context: v1.17 Staging Layer. Phase 136 in progress. Trust tier types and familiarity classifier added to src/staging/hygiene/. 126 hygiene tests passing (37 new from 136-01).
+Last: 2026-02-13 — Completed 139-03-PLAN.md
+Stopped at: Plan 139-03 complete (scope drift detector)
+Next action: Continue phase 139 (plans 139-04 and 139-05 remaining).
+Context: v1.17 Staging Layer. Phase 139 in progress. Scope drift detector added to src/staging/derived/. 28 derived tests passing (14 new from 139-03).
 
 ---
-*Last updated: 2026-02-13 (136-01 complete)*
+*Last updated: 2026-02-13 (139-03 complete)*
