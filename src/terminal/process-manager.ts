@@ -12,6 +12,7 @@ import type { TerminalConfig } from '../integration/config/terminal-types.js';
 import type { WettyProcess, ServiceStatus } from './types.js';
 import { launchWetty, shutdownWetty } from './launcher.js';
 import { checkHealth } from './health.js';
+import { buildSessionCommand } from './session.js';
 
 /**
  * Manages a single Wetty terminal process lifecycle.
@@ -41,7 +42,8 @@ export class TerminalProcessManager {
       return this.buildStatus(false);
     }
 
-    this.process = await launchWetty({ config: this.config });
+    const command = buildSessionCommand(this.config.session_name);
+    this.process = await launchWetty({ config: this.config, command });
     return this.buildStatus(false);
   }
 
