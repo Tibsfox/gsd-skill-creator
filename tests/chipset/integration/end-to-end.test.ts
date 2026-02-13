@@ -473,7 +473,7 @@ describe('Barrel Exports', () => {
     // Spot-check copper namespace has key exports
     expect(chipsetModule.copper.LifecycleSync).toBeDefined();
     expect(chipsetModule.copper.CopperExecutor).toBeDefined();
-    expect(chipsetModule.copper.LearningCompiler).toBeDefined();
+    expect(chipsetModule.copper.compileCopperList).toBeDefined();
 
     // Spot-check blitter namespace
     expect(chipsetModule.blitter.BlitterExecutor).toBeDefined();
