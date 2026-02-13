@@ -3918,6 +3918,254 @@ else
 fi
 
 # ==============================================================================
+# Play Analyze Mode Tests (default)
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play Analyze Mode Tests${RESET}\n"
+
+# Set up a recording with known data for all play tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+# Start recording
+set +e
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=play-test >/dev/null 2>&1
+set -e
+
+# Add markers
+set +e
+"$GSD_STACK" mark "phase-start" >/dev/null 2>&1
+"$GSD_STACK" mark "tests-passing" >/dev/null 2>&1
+set -e
+
+# Push a message for stack event
+set +e
+"$GSD_STACK" push "test command" >/dev/null 2>&1
+set -e
+
+# Stop recording
+set +e
+"$GSD_STACK" stop-record >/dev/null 2>&1
+set -e
+
+# Test: play analyze exits 0
+set +e
+play_output=$("$GSD_STACK" play play-test 2>&1)
+play_rc=$?
+set -e
+assert_eq "play analyze exits 0" "0" "$play_rc"
+
+# Test: output contains recording name in header
+assert_contains "play analyze shows recording name" "$play_output" "play-test"
+
+# Test: output contains markers
+assert_contains "play analyze shows phase-start marker" "$play_output" "phase-start"
+assert_contains "play analyze shows tests-passing marker" "$play_output" "tests-passing"
+
+# Test: output contains terminal events
+if echo "$play_output" | grep -qi "terminal\|Terminal"; then
+  pass "play analyze shows terminal events"
+else
+  fail "play analyze shows terminal events" "output does not contain terminal/Terminal"
+fi
+
+# Test: output contains file events
+if echo "$play_output" | grep -qi "file\|File"; then
+  pass "play analyze shows file events"
+else
+  fail "play analyze shows file events" "output does not contain file/File"
+fi
+
+# Test: output contains Duration in metrics
+if echo "$play_output" | grep -qi "duration\|Duration"; then
+  pass "play analyze shows Duration in metrics"
+else
+  fail "play analyze shows Duration in metrics" "output does not contain Duration"
+fi
+
+# Test: output contains Events count
+if echo "$play_output" | grep -qi "events\|Events"; then
+  pass "play analyze shows Events count"
+else
+  fail "play analyze shows Events count" "output does not contain Events"
+fi
+
+# Test: output has at least 10 lines
+play_lines=$(echo "$play_output" | wc -l)
+play_lines=$((play_lines + 0))
+if [[ "$play_lines" -ge 10 ]]; then
+  pass "play analyze has >= 10 lines of output (got $play_lines)"
+else
+  fail "play analyze has >= 10 lines of output" "got $play_lines lines"
+fi
+
+# ==============================================================================
+# Play Analyze Nonexistent Recording Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play Analyze Nonexistent Recording Tests${RESET}\n"
+
+set +e
+noexist_output=$("$GSD_STACK" play nonexistent-recording 2>&1)
+noexist_rc=$?
+set -e
+
+if [[ "$noexist_rc" -ne 0 ]]; then
+  pass "play nonexistent recording exits non-zero"
+else
+  fail "play nonexistent recording exits non-zero" "exit code: $noexist_rc"
+fi
+
+if echo "$noexist_output" | grep -qi "not found\|does not exist\|no recording"; then
+  pass "play nonexistent shows error message"
+else
+  fail "play nonexistent shows error message" "output: $noexist_output"
+fi
+
+# ==============================================================================
+# Play No Arguments Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play No Arguments Tests${RESET}\n"
+
+set +e
+noargs_output=$("$GSD_STACK" play 2>&1)
+noargs_rc=$?
+set -e
+
+if [[ "$noargs_rc" -ne 0 ]]; then
+  pass "play no arguments exits non-zero"
+else
+  fail "play no arguments exits non-zero" "exit code: $noargs_rc"
+fi
+
+if echo "$noargs_output" | grep -qi "usage\|recording name"; then
+  pass "play no arguments shows usage hint"
+else
+  fail "play no arguments shows usage hint" "output: $noargs_output"
+fi
+
+# ==============================================================================
+# Play Analyze JSON Output Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play Analyze JSON Output Tests${RESET}\n"
+
+set +e
+json_play_output=$(GSD_FORMAT=json "$GSD_STACK" play play-test 2>&1)
+json_play_rc=$?
+set -e
+assert_eq "play json exits 0" "0" "$json_play_rc"
+
+# Output starts with { (JSON object)
+if [[ "$json_play_output" == "{"* ]]; then
+  pass "play json starts with {"
+else
+  fail "play json starts with {" "starts with: ${json_play_output:0:20}"
+fi
+
+# Output contains recording name
+assert_contains "play json has recording name" "$json_play_output" '"name":"play-test"'
+
+# Output contains timeline array
+assert_contains "play json has timeline key" "$json_play_output" '"timeline"'
+
+# Output contains duration_seconds
+assert_contains "play json has duration_seconds" "$json_play_output" '"duration_seconds"'
+
+# ==============================================================================
+# Play --step Mode Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --step Mode Tests${RESET}\n"
+
+# Create a helper recording for step tests
+rm -rf "$TEST_DIR/stack"
+export GSD_STACK_DIR="$TEST_DIR/stack"
+
+set +e
+GSD_MOCK_CAPTURE=1 "$GSD_STACK" record --name=step-test >/dev/null 2>&1
+"$GSD_STACK" mark "step-marker" >/dev/null 2>&1
+"$GSD_STACK" stop-record >/dev/null 2>&1
+set -e
+
+# Step mode with piped input (Enter presses then q to quit)
+set +e
+step_output=$(printf '\n\n\nq\n' | "$GSD_STACK" play --step step-test 2>&1)
+step_rc=$?
+set -e
+assert_eq "play --step exits 0" "0" "$step_rc"
+
+# Output contains event number with total format [1/
+if echo "$step_output" | grep -qE '1/|(\[1/)'; then
+  pass "play --step shows event number [1/N]"
+else
+  fail "play --step shows event number [1/N]" "output: $step_output"
+fi
+
+# Output contains recording_start (first event type)
+if echo "$step_output" | grep -qi "recording.start\|Recording started"; then
+  pass "play --step shows recording_start event"
+else
+  fail "play --step shows recording_start event" "output: $step_output"
+fi
+
+# Output contains marker label
+assert_contains "play --step shows step-marker label" "$step_output" "step-marker"
+
+# Output contains quit/end acknowledgement
+if echo "$step_output" | grep -qi "q\|quit\|end"; then
+  pass "play --step shows quit/end acknowledgement"
+else
+  fail "play --step shows quit/end acknowledgement" "output: $step_output"
+fi
+
+# ==============================================================================
+# Play --step End of Recording Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --step End of Recording Tests${RESET}\n"
+
+# Step through ALL events (send enough Enter presses)
+set +e
+step_all_output=$(printf '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n' | "$GSD_STACK" play --step step-test 2>&1)
+step_all_rc=$?
+set -e
+
+if echo "$step_all_output" | grep -qi "end of recording\|End of recording\|no more events"; then
+  pass "play --step shows end of recording message"
+else
+  fail "play --step shows end of recording message" "output: $step_all_output"
+fi
+
+# ==============================================================================
+# Play --step Shows Event Details Tests
+# ==============================================================================
+
+echo ""
+printf "${BOLD}Play --step Shows Event Details Tests${RESET}\n"
+
+# Check event type is shown
+if echo "$step_all_output" | grep -qi "type\|Type\|Recording\|Terminal\|Marker\|started"; then
+  pass "play --step shows event type details"
+else
+  fail "play --step shows event type details" "output: $step_all_output"
+fi
+
+# Check timestamp pattern (contains T or : for ISO format / time)
+if echo "$step_all_output" | grep -qE 'T|[0-9]{2}:[0-9]{2}'; then
+  pass "play --step shows timestamp pattern"
+else
+  fail "play --step shows timestamp pattern" "output: $step_all_output"
+fi
+
+# ==============================================================================
 # Summary
 # ==============================================================================
 
