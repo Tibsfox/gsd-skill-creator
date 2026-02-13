@@ -134,7 +134,7 @@ describe('integrationConfigCommand', () => {
       const exitCode = await integrationConfigCommand(['validate', '--json']);
       expect(exitCode).toBe(0);
 
-      const jsonCall = consoleLogSpy.mock.calls.find((call) => {
+      const jsonCall = consoleLogSpy.mock.calls.find((call: unknown[]) => {
         try {
           JSON.parse(call[0] as string);
           return true;
@@ -154,7 +154,7 @@ describe('integrationConfigCommand', () => {
       const exitCode = await integrationConfigCommand(['validate', '--json']);
       expect(exitCode).toBe(1);
 
-      const jsonCall = consoleLogSpy.mock.calls.find((call) => {
+      const jsonCall = consoleLogSpy.mock.calls.find((call: unknown[]) => {
         try {
           JSON.parse(call[0] as string);
           return true;
@@ -176,7 +176,7 @@ describe('integrationConfigCommand', () => {
       const exitCode = await integrationConfigCommand(['validate', '--json']);
       expect(exitCode).toBe(0);
 
-      const jsonCall = consoleLogSpy.mock.calls.find((call) => {
+      const jsonCall = consoleLogSpy.mock.calls.find((call: unknown[]) => {
         try {
           JSON.parse(call[0] as string);
           return true;
@@ -224,7 +224,7 @@ describe('integrationConfigCommand', () => {
       const exitCode = await integrationConfigCommand(['show', '--json']);
       expect(exitCode).toBe(0);
 
-      const jsonCall = consoleLogSpy.mock.calls.find((call) => {
+      const jsonCall = consoleLogSpy.mock.calls.find((call: unknown[]) => {
         try {
           const parsed = JSON.parse(call[0] as string);
           // The show --json output is the config itself (has integration key)
