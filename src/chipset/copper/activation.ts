@@ -1,16 +1,16 @@
 /**
- * Copper activation dispatch -- routes MOVE instructions to the
- * appropriate activation mode (sprite/full/blitter/async).
+ * Pipeline activation dispatch -- routes MOVE instructions to the
+ * appropriate activation mode (lite/full/offload/async).
  *
- * The dispatch is the bridge between the Copper executor's instruction
+ * The dispatch is the bridge between the Pipeline executor's instruction
  * pointer and actual skill/script/team execution. It decouples the
  * executor from mode-specific activation logic via pluggable resolvers
  * in the ActivationContext.
  *
  * Activation modes:
- * - sprite: lightweight (~200 tokens, summary context only)
+ * - lite: lightweight (~200 tokens, summary context only)
  * - full: complete skill loaded (token estimate = ceil(content.length / 4))
- * - blitter: delegate to Blitter engine for script execution outside context
+ * - offload: delegate to Blitter engine for script execution outside context
  * - async: fire-and-forget, return immediately without waiting
  */
 
@@ -24,7 +24,7 @@ import type { BlitterOperation, BlitterResult } from '../blitter/types.js';
 /**
  * Pluggable context providing resolvers and executors for activation.
  *
- * The Copper executor provides real implementations; tests inject mocks.
+ * The Pipeline executor provides real implementations; tests inject mocks.
  * All resolvers are optional -- missing resolvers produce clear failure
  * results rather than thrown exceptions.
  */
@@ -38,7 +38,7 @@ export interface ActivationContext {
   /** Resolve a team name to its definition. Returns undefined if not found. */
   resolveTeam?: (name: string) => Promise<{ name: string; members: string[] } | undefined>;
 
-  /** Execute a blitter operation. Returns the result. */
+  /** Execute an offload operation. Returns the result. */
   executeBlitter?: (operation: BlitterOperation) => Promise<BlitterResult>;
 }
 
@@ -61,7 +61,7 @@ export interface ActivationResult {
   /** The name of the target. */
   name: string;
 
-  /** Estimated token cost. Sprite: 200, Full: ceil(content.length / 4). */
+  /** Estimated token cost. Lite: 200, Full: ceil(content.length / 4). */
   tokenEstimate?: number;
 
   /** Execution duration in milliseconds. */
@@ -76,19 +76,19 @@ type DispatchResult = Pick<ActivationResult, 'status'> &
   Partial<Omit<ActivationResult, 'status'>>;
 
 // ============================================================================
-// CopperActivationDispatch
+// PipelineActivationDispatch
 // ============================================================================
 
 /**
  * Routes MOVE instructions to the appropriate activation mode handler.
  *
  * Each activation mode has different behavior:
- * - sprite: resolve skill, return ~200 token estimate
+ * - lite: resolve skill, return ~200 token estimate
  * - full: resolve skill, return content-based token estimate
- * - blitter: resolve script/promoted-skill, execute via Blitter
+ * - offload: resolve script/promoted-skill, execute via Blitter
  * - async: fire activation in background, return immediately
  */
-export class CopperActivationDispatch {
+export class PipelineActivationDispatch {
   private context: ActivationContext;
 
   constructor(context: ActivationContext) {
@@ -127,7 +127,7 @@ export class CopperActivationDispatch {
       };
     }
 
-    // Synchronous modes: sprite, full, blitter
+    // Synchronous modes: lite, full, offload
     try {
       const result = await this.dispatchByTarget(instruction);
       return {
@@ -176,17 +176,17 @@ export class CopperActivationDispatch {
   // ==========================================================================
 
   /**
-   * Handle skill target: sprite, full, or blitter mode.
+   * Handle skill target: lite, full, or offload mode.
    */
   private async handleSkill(
     instruction: MoveInstruction,
   ): Promise<DispatchResult> {
-    // Blitter mode for skills: try resolveScript first (skill may be promoted)
-    if (instruction.mode === 'blitter') {
-      return this.handleBlitterSkill(instruction);
+    // Offload mode for skills: try resolveScript first (skill may be promoted)
+    if (instruction.mode === 'offload') {
+      return this.handleOffloadSkill(instruction);
     }
 
-    // Sprite or full mode: need resolveSkill
+    // Lite or full mode: need resolveSkill
     if (!this.context.resolveSkill) {
       return {
         status: 'failure',
@@ -202,7 +202,7 @@ export class CopperActivationDispatch {
       };
     }
 
-    if (instruction.mode === 'sprite') {
+    if (instruction.mode === 'lite') {
       return {
         status: 'success',
         tokenEstimate: 200,
@@ -217,20 +217,20 @@ export class CopperActivationDispatch {
   }
 
   /**
-   * Handle blitter mode for skill targets (promoted skills).
+   * Handle offload mode for skill targets (promoted skills).
    *
    * Tries resolveScript first (skill promoted to script). If script
-   * resolver is available and returns an operation, delegates to blitter.
+   * resolver is available and returns an operation, delegates to offload.
    * Otherwise falls back to failure.
    */
-  private async handleBlitterSkill(
+  private async handleOffloadSkill(
     instruction: MoveInstruction,
   ): Promise<DispatchResult> {
     // Try to resolve as a script (promoted skill)
     if (this.context.resolveScript) {
       const op = await this.context.resolveScript(instruction.name);
       if (op) {
-        return this.executeBlitterOp(op);
+        return this.executeOffloadOp(op);
       }
     }
 
@@ -240,7 +240,7 @@ export class CopperActivationDispatch {
       if (skill) {
         return {
           status: 'failure',
-          error: `Skill "${instruction.name}" not promoted to blitter script`,
+          error: `Skill "${instruction.name}" not promoted to offload script`,
         };
       }
     }
@@ -252,7 +252,7 @@ export class CopperActivationDispatch {
   }
 
   /**
-   * Handle script target: resolve and execute via blitter.
+   * Handle script target: resolve and execute via offload.
    */
   private async handleScript(
     instruction: MoveInstruction,
@@ -275,11 +275,11 @@ export class CopperActivationDispatch {
     if (!this.context.executeBlitter) {
       return {
         status: 'failure',
-        error: 'No blitter executor configured',
+        error: 'No offload executor configured',
       };
     }
 
-    return this.executeBlitterOp(op);
+    return this.executeOffloadOp(op);
   }
 
   /**
@@ -309,19 +309,19 @@ export class CopperActivationDispatch {
   }
 
   // ==========================================================================
-  // Blitter Execution
+  // Offload Execution
   // ==========================================================================
 
   /**
    * Execute a BlitterOperation and map the result to activation status.
    */
-  private async executeBlitterOp(
+  private async executeOffloadOp(
     op: BlitterOperation,
   ): Promise<DispatchResult> {
     if (!this.context.executeBlitter) {
       return {
         status: 'failure',
-        error: 'No blitter executor configured',
+        error: 'No offload executor configured',
       };
     }
 
@@ -333,7 +333,7 @@ export class CopperActivationDispatch {
 
     return {
       status: 'failure',
-      error: `Blitter operation "${op.id}" failed with exit code ${result.exitCode}`,
+      error: `Offload operation "${op.id}" failed with exit code ${result.exitCode}`,
     };
   }
 }
