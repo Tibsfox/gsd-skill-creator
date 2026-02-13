@@ -89,12 +89,43 @@ const UX_CLEANUP_SCRIPT = `
 <style>
   /* === UX Cleanup: fit 1920x1080 === */
 
-  /* Full-width layout */
+  /* Full-width layout, nav as horizontal tabs */
   :root { --max-width: 100% !important; }
   .page-wrapper {
     max-width: 100% !important;
     padding: var(--space-md) var(--space-xl) !important;
+    flex-direction: column !important;
+    gap: 0 !important;
   }
+
+  /* Nav as horizontal tab bar */
+  nav {
+    min-width: auto !important;
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--space-md);
+  }
+  .nav-list {
+    flex-direction: row !important;
+    position: static !important;
+    gap: 0 !important;
+    flex-wrap: nowrap;
+  }
+  .nav-link {
+    padding: var(--space-sm) var(--space-lg) !important;
+    font-size: 0.85rem !important;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0 !important;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .nav-link:hover {
+    border-bottom-color: var(--text-dim);
+  }
+  .nav-link.active {
+    border-bottom-color: var(--accent) !important;
+    background: transparent !important;
+  }
+  main { width: 100%; }
 
   /* Golden ratio: metrics grid uses ~61.8% / ~38.2% columns */
   .metrics-dashboard {
