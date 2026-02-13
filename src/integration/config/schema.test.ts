@@ -383,3 +383,180 @@ describe('Full config roundtrip', () => {
     expect(parsed).toEqual(fullConfig);
   });
 });
+
+// ============================================================================
+// CONF-02: Terminal defaults in composite config
+// ============================================================================
+
+describe('Terminal defaults in composite config', () => {
+  it('produces terminal section from empty object', () => {
+    const config = IntegrationConfigSchema.parse({});
+
+    expect(config).toHaveProperty('terminal');
+  });
+
+  it('has port=3000 by default', () => {
+    const config = IntegrationConfigSchema.parse({});
+
+    expect(config.terminal.port).toBe(3000);
+  });
+
+  it('has base_path="/terminal" by default', () => {
+    const config = IntegrationConfigSchema.parse({});
+
+    expect(config.terminal.base_path).toBe('/terminal');
+  });
+
+  it('has auth_mode="none" by default', () => {
+    const config = IntegrationConfigSchema.parse({});
+
+    expect(config.terminal.auth_mode).toBe('none');
+  });
+
+  it('has theme="dark" by default', () => {
+    const config = IntegrationConfigSchema.parse({});
+
+    expect(config.terminal.theme).toBe('dark');
+  });
+});
+
+// ============================================================================
+// CONF-02: Terminal partial overrides in composite config
+// ============================================================================
+
+describe('Terminal partial overrides in composite config', () => {
+  it('allows overriding port without affecting other terminal fields', () => {
+    const config = IntegrationConfigSchema.parse({ terminal: { port: 8080 } });
+
+    expect(config.terminal.port).toBe(8080);
+    expect(config.terminal.base_path).toBe('/terminal');
+    expect(config.terminal.auth_mode).toBe('none');
+    expect(config.terminal.theme).toBe('dark');
+  });
+
+  it('does not affect other config sections when terminal is overridden', () => {
+    const config = IntegrationConfigSchema.parse({ terminal: { port: 8080 } });
+
+    // Existing sections retain defaults
+    expect(config.integration.auto_load_skills).toBe(true);
+    expect(config.token_budget.max_percent).toBe(5);
+    expect(config.observation.retention_days).toBe(90);
+    expect(config.suggestions.min_occurrences).toBe(3);
+  });
+
+  it('allows overriding theme to light', () => {
+    const config = IntegrationConfigSchema.parse({ terminal: { theme: 'light' } });
+
+    expect(config.terminal.theme).toBe('light');
+    expect(config.terminal.port).toBe(3000);
+  });
+});
+
+// ============================================================================
+// CONF-02: Terminal validation in composite config
+// ============================================================================
+
+describe('Terminal validation in composite config', () => {
+  it('rejects terminal port of 0', () => {
+    expect(() =>
+      IntegrationConfigSchema.parse({ terminal: { port: 0 } }),
+    ).toThrow(z.ZodError);
+  });
+
+  it('rejects invalid auth_mode', () => {
+    expect(() =>
+      IntegrationConfigSchema.parse({ terminal: { auth_mode: 'password' } }),
+    ).toThrow(z.ZodError);
+  });
+
+  it('rejects invalid theme value', () => {
+    expect(() =>
+      IntegrationConfigSchema.parse({ terminal: { theme: 'blue' } }),
+    ).toThrow(z.ZodError);
+  });
+
+  it('rejects empty base_path', () => {
+    expect(() =>
+      IntegrationConfigSchema.parse({ terminal: { base_path: '' } }),
+    ).toThrow(z.ZodError);
+  });
+});
+
+// ============================================================================
+// Full config roundtrip with terminal
+// ============================================================================
+
+describe('Full config roundtrip with terminal', () => {
+  it('preserves all values including terminal when fully specified', () => {
+    const fullConfig = {
+      integration: {
+        auto_load_skills: false,
+        observe_sessions: true,
+        phase_transition_hooks: true,
+        suggest_on_session_start: false,
+        install_git_hooks: true,
+        wrapper_commands: false,
+      },
+      token_budget: {
+        max_percent: 15,
+        warn_at_percent: 12,
+      },
+      observation: {
+        retention_days: 180,
+        max_entries: 5000,
+        capture_corrections: false,
+      },
+      suggestions: {
+        min_occurrences: 5,
+        cooldown_days: 14,
+        auto_dismiss_after_days: 60,
+      },
+      terminal: {
+        port: 9090,
+        base_path: '/term',
+        auth_mode: 'none' as const,
+        theme: 'light' as const,
+      },
+    };
+
+    const parsed = IntegrationConfigSchema.parse(fullConfig);
+    expect(parsed).toEqual(fullConfig);
+  });
+});
+
+// ============================================================================
+// Existing config behavior unchanged with terminal addition
+// ============================================================================
+
+describe('Existing config behavior unchanged', () => {
+  it('adding terminal section does not alter existing section defaults', () => {
+    const config = IntegrationConfigSchema.parse({
+      integration: { auto_load_skills: false },
+    });
+
+    // Integration override works
+    expect(config.integration.auto_load_skills).toBe(false);
+    expect(config.integration.observe_sessions).toBe(true);
+
+    // Terminal gets defaults
+    expect(config.terminal.port).toBe(3000);
+    expect(config.terminal.base_path).toBe('/terminal');
+    expect(config.terminal.auth_mode).toBe('none');
+    expect(config.terminal.theme).toBe('dark');
+
+    // Other sections unaffected
+    expect(config.token_budget.max_percent).toBe(5);
+    expect(config.observation.retention_days).toBe(90);
+    expect(config.suggestions.min_occurrences).toBe(3);
+  });
+
+  it('DEFAULT_INTEGRATION_CONFIG includes terminal section', () => {
+    expect(DEFAULT_INTEGRATION_CONFIG).toHaveProperty('terminal');
+    expect(DEFAULT_INTEGRATION_CONFIG.terminal).toEqual({
+      port: 3000,
+      base_path: '/terminal',
+      auth_mode: 'none',
+      theme: 'dark',
+    });
+  });
+});
