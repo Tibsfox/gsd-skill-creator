@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.17 — Staging Layer
-Phase: 139 — Derived Knowledge Checking (complete)
-Plan: 139-05 complete
-Status: Phase 139 complete
-Last activity: 2026-02-13 — Completed 139-05 (unified derived checker and barrel index)
+Phase: 137 — Smart Intake Flow (in progress)
+Plan: 137-01 complete
+Status: Executing phase 137
+Last activity: 2026-02-13 — Completed 137-01 (clarity routing types and document assessor)
 
 ## Project Reference
 
@@ -147,6 +147,9 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - checkDerived aggregates all sub-checkers; passed=true only when no critical/warning findings
 - Optional checks (trainingPairs, referenceTexts) skipped when input not provided
 - Barrel uses type-only exports for interfaces, value exports for functions and constants (derived index follows hygiene pattern)
+- Structure-aware confused threshold: documents with headings route to gaps not confused even with few words
+- Allow up to 2 missing key areas for clear routing (focused technical docs may not use all 4 keyword sets)
+- HEADING_RE constant for DRY heading detection in clarity assessor
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -163,6 +166,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Staging module at src/staging/ (types, schema, directory, intake, state-machine, index)
 - Staging hygiene submodule at src/staging/hygiene/ (types, patterns, scanner-config, scanner-embedded, scanner-hidden, scanner, scope-coherence, trust-types, familiarity, trust-store, finding-actions, report, index)
 - Staging derived submodule at src/staging/derived/ (types, provenance, scope-drift, pattern-fidelity, training-coherence, copying-detector, checker, index)
+- Staging intake-flow submodule at src/staging/intake-flow/ (types, clarity-assessor)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
@@ -177,15 +181,15 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
 | Total phases | 134 complete |
-| Total plans | 392 complete |
+| Total plans | 393 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 139-05-PLAN.md
-Stopped at: Plan 139-05 complete (unified derived checker and barrel index). Phase 139 complete.
-Next action: Continue with remaining v1.17 phases.
-Context: v1.17 Staging Layer. Phase 139 complete (5 plans, 78 derived tests, 368 staging tests total). Derived module fully operational with unified checkDerived entry point and barrel index.
+Last: 2026-02-13 — Completed 137-01-PLAN.md
+Stopped at: Plan 137-01 complete (clarity routing types and document assessor).
+Next action: Continue with 137-03 and 137-04 plans.
+Context: v1.17 Staging Layer. Phase 137 in progress (plans 01 and 02 complete in wave 1). Intake-flow submodule has types and clarity assessor. 11 assessor tests passing.
 
 ---
-*Last updated: 2026-02-13 (139-05 complete)*
+*Last updated: 2026-02-13 (137-01 complete)*
