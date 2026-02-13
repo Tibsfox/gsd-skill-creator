@@ -28,3 +28,7 @@ export { MessageWriter } from './writer.js';
 
 // Reader
 export { MessageReader } from './reader.js';
+
+// Helper endpoint (browser-to-filesystem bridge)
+export type { HelperRouter } from './helper.js';
+export { createHelperRouter } from './helper.js';
