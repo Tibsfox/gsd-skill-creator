@@ -19,8 +19,8 @@ export { ExecScheduler } from './scheduler.js';
 export type { SchedulerEntry, TeamState } from './scheduler.js';
 
 // Budget
-export { DmaBudgetManager } from './dma-budget.js';
-export type { BudgetStatus, DmaBudgetConfig } from './dma-budget.js';
+export { BudgetManager } from './dma-budget.js';
+export type { BudgetStatus, BudgetConfig } from './dma-budget.js';
 
 // Kernel
 export { ExecKernel } from './kernel.js';
