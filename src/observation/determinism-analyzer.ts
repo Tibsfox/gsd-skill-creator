@@ -5,6 +5,8 @@ import type {
   ToolExecutionPair,
   DeterminismScore,
   DeterminismConfig,
+  DeterminismClassification,
+  ClassifiedOperation,
   OperationKey,
 } from '../types/observation.js';
 import { DEFAULT_DETERMINISM_CONFIG } from '../types/observation.js';
@@ -92,6 +94,31 @@ export class DeterminismAnalyzer {
     results.sort((a, b) => a.varianceScore - b.varianceScore);
 
     return results;
+  }
+
+  /**
+   * Analyze and classify all operations by determinism tier (DTRM-03).
+   * Returns ClassifiedOperation[] sorted by determinism descending (most deterministic first).
+   */
+  async classify(): Promise<ClassifiedOperation[]> {
+    const deterministicThreshold = this.config.deterministicThreshold ?? DEFAULT_DETERMINISM_CONFIG.deterministicThreshold!;
+    const semiDeterministicThreshold = this.config.semiDeterministicThreshold ?? DEFAULT_DETERMINISM_CONFIG.semiDeterministicThreshold!;
+
+    const scores = await this.analyze();
+    return scores
+      .map(score => {
+        const determinism = 1 - score.varianceScore;
+        let classification: DeterminismClassification;
+        if (determinism >= deterministicThreshold) {
+          classification = 'deterministic';
+        } else if (determinism >= semiDeterministicThreshold) {
+          classification = 'semi-deterministic';
+        } else {
+          classification = 'non-deterministic';
+        }
+        return { score, classification, determinism };
+      })
+      .sort((a, b) => b.determinism - a.determinism);
   }
 
   /**
