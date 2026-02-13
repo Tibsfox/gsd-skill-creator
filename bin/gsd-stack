@@ -2702,6 +2702,293 @@ play_feed() {
 }
 
 # ==============================================================================
+# Compute extended metrics from stream.jsonl
+# ==============================================================================
+
+compute_extended_metrics() {
+  local rec_dir="$1"
+  local stream="$rec_dir/stream.jsonl"
+  local STALL_THRESHOLD=30  # seconds
+
+  # Initialize counters
+  local total_events=0
+  local terminal_count=0
+  local file_change_count=0
+  local marker_count=0
+  local stack_ops=0
+  local error_count=0
+  local first_ts="" last_ts=""
+  local prev_epoch=0
+  local active_seconds=0
+  local stall_count=0
+  local stall_total=0
+
+  if [[ -f "$stream" ]]; then
+    while IFS= read -r line; do
+      [[ -z "$line" ]] && continue
+      total_events=$((total_events + 1))
+
+      local evt_type evt_ts
+      evt_type=$(json_field "$line" "type")
+      evt_ts=$(json_field "$line" "ts")
+
+      # Track first/last
+      if [[ -z "$first_ts" ]]; then
+        first_ts="$evt_ts"
+      fi
+      last_ts="$evt_ts"
+
+      # Compute gaps for active/idle/stall
+      local cur_epoch
+      cur_epoch=$(date -d "$evt_ts" +%s 2>/dev/null || echo "0")
+      if [[ $prev_epoch -gt 0 ]] && [[ $cur_epoch -gt 0 ]]; then
+        local gap=$((cur_epoch - prev_epoch))
+        if [[ $gap -lt $STALL_THRESHOLD ]]; then
+          active_seconds=$((active_seconds + gap))
+        else
+          stall_count=$((stall_count + 1))
+          stall_total=$((stall_total + gap))
+        fi
+      fi
+      if [[ $cur_epoch -gt 0 ]]; then
+        prev_epoch=$cur_epoch
+      fi
+
+      # Count by type
+      case "$evt_type" in
+        terminal)    terminal_count=$((terminal_count + 1)) ;;
+        file_change) file_change_count=$((file_change_count + 1)) ;;
+        marker)      marker_count=$((marker_count + 1)) ;;
+        stack_push|stack_pop|stack_clear|stack_poke) stack_ops=$((stack_ops + 1)) ;;
+      esac
+
+      # Check for error indicators
+      if echo "$line" | grep -qi '"error"'; then
+        error_count=$((error_count + 1))
+      fi
+    done < "$stream"
+  fi
+
+  # Compute derived metrics
+  local duration_seconds=0
+  if [[ -n "$first_ts" ]] && [[ -n "$last_ts" ]]; then
+    local f_epoch l_epoch
+    f_epoch=$(date -d "$first_ts" +%s 2>/dev/null || echo "0")
+    l_epoch=$(date -d "$last_ts" +%s 2>/dev/null || echo "0")
+    if [[ $f_epoch -gt 0 ]] && [[ $l_epoch -gt 0 ]]; then
+      duration_seconds=$((l_epoch - f_epoch))
+    fi
+  fi
+
+  local idle_seconds=$((duration_seconds - active_seconds))
+  if [[ $idle_seconds -lt 0 ]]; then idle_seconds=0; fi
+
+  local efficiency_pct=0
+  if [[ $duration_seconds -gt 0 ]]; then
+    efficiency_pct=$(( (active_seconds * 100) / duration_seconds ))
+  fi
+
+  local events_per_minute=0
+  if [[ $duration_seconds -gt 0 ]]; then
+    events_per_minute=$(( (total_events * 60) / duration_seconds ))
+  fi
+
+  local estimated_tokens=$(( terminal_count * 200 + file_change_count * 100 + marker_count * 10 ))
+
+  # Output as JSON
+  printf '{"duration_seconds":%d,"active_seconds":%d,"idle_seconds":%d,"efficiency_pct":%d,"stall_count":%d,"stall_total_seconds":%d,"phase_transitions":%d,"marker_count":%d,"terminal_snapshots":%d,"file_changes":%d,"stack_operations":%d,"events_per_minute":%d,"estimated_tokens":%d,"error_indicators":%d,"event_count":%d,"first_event":"%s","last_event":"%s"}\n' \
+    "$duration_seconds" "$active_seconds" "$idle_seconds" "$efficiency_pct" \
+    "$stall_count" "$stall_total" "$marker_count" "$marker_count" \
+    "$terminal_count" "$file_change_count" "$stack_ops" "$events_per_minute" \
+    "$estimated_tokens" "$error_count" "$total_events" "$first_ts" "$last_ts"
+}
+
+# ==============================================================================
+# Metrics compare helper
+# ==============================================================================
+
+metrics_compare() {
+  local recording_a="$1"
+  local recording_b="$2"
+
+  local dir_a="$GSD_STACK_DIR/recordings/$recording_a"
+  local dir_b="$GSD_STACK_DIR/recordings/$recording_b"
+
+  # Validate both exist
+  if [[ ! -d "$dir_a" ]]; then
+    echo "Error: Recording '$recording_a' not found."
+    exit 1
+  fi
+  if [[ ! -d "$dir_b" ]]; then
+    echo "Error: Recording '$recording_b' not found."
+    exit 1
+  fi
+
+  # Compute metrics for both
+  local json_a json_b
+  json_a=$(compute_extended_metrics "$dir_a")
+  json_b=$(compute_extended_metrics "$dir_b")
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    # Build comparison JSON with both metrics and deltas
+    local fields=("duration_seconds" "active_seconds" "idle_seconds" "efficiency_pct" "stall_count" "stall_total_seconds" "phase_transitions" "marker_count" "terminal_snapshots" "file_changes" "stack_operations" "events_per_minute" "estimated_tokens" "error_indicators" "event_count")
+
+    printf '{"recording_a":{"name":"%s","metrics":%s},"recording_b":{"name":"%s","metrics":%s},"deltas":{' \
+      "$recording_a" "$json_a" "$recording_b" "$json_b"
+
+    local first=1
+    for field in "${fields[@]}"; do
+      local val_a val_b delta
+      val_a=$(echo "$json_a" | grep -o "\"${field}\":[0-9-]*" | head -1 | grep -o '[0-9-]*$' || echo "0")
+      val_b=$(echo "$json_b" | grep -o "\"${field}\":[0-9-]*" | head -1 | grep -o '[0-9-]*$' || echo "0")
+      delta=$((${val_b:-0} - ${val_a:-0}))
+      if [[ $first -eq 1 ]]; then first=0; else printf ","; fi
+      printf '"%s":%d' "$field" "$delta"
+    done
+
+    printf "}}\n"
+    return 0
+  fi
+
+  # Human-readable comparison table
+  printf "\n${BOLD}Metrics Comparison${RESET}\n"
+  printf "  %-20s vs %-20s\n\n" "$recording_a" "$recording_b"
+
+  # Header
+  printf "  %-24s %10s %10s %10s\n" "Metric" "$recording_a" "$recording_b" "Delta"
+  printf "  %-24s %10s %10s %10s\n" "------------------------" "----------" "----------" "----------"
+
+  # Compare each metric
+  local fields=("duration_seconds" "active_seconds" "idle_seconds" "efficiency_pct" "stall_count" "stall_total_seconds" "phase_transitions" "marker_count" "terminal_snapshots" "file_changes" "stack_operations" "events_per_minute" "estimated_tokens" "error_indicators" "event_count")
+  local labels=("Duration (s)" "Active time (s)" "Idle time (s)" "Efficiency (%)" "Stall count" "Stall time (s)" "Phase transitions" "Markers" "Terminal snapshots" "File changes" "Stack operations" "Events/minute" "Estimated tokens" "Error indicators" "Total events")
+
+  for i in "${!fields[@]}"; do
+    local field="${fields[$i]}"
+    local label="${labels[$i]}"
+    local val_a val_b delta sign
+    val_a=$(echo "$json_a" | grep -o "\"${field}\":[0-9-]*" | head -1 | grep -o '[0-9-]*$' || echo "0")
+    val_b=$(echo "$json_b" | grep -o "\"${field}\":[0-9-]*" | head -1 | grep -o '[0-9-]*$' || echo "0")
+    val_a="${val_a:-0}"
+    val_b="${val_b:-0}"
+    delta=$((val_b - val_a))
+
+    if [[ $delta -gt 0 ]]; then
+      sign="+${delta}"
+    elif [[ $delta -lt 0 ]]; then
+      sign="${delta}"
+    else
+      sign="="
+    fi
+
+    printf "  %-24s %10s %10s %10s\n" "$label" "$val_a" "$val_b" "$sign"
+  done
+}
+
+# ==============================================================================
+# Metrics subcommand -- display and compare recording metrics
+# ==============================================================================
+
+cmd_metrics() {
+  local compare_mode=0
+  local recording_a="" recording_b=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --compare) compare_mode=1 ; shift ;;
+      --json)    GSD_FORMAT=json ; shift ;;
+      -*)        echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)
+        if [[ -z "$recording_a" ]]; then
+          recording_a="$1"
+        elif [[ -z "$recording_b" ]]; then
+          recording_b="$1"
+        fi
+        shift ;;
+    esac
+  done
+
+  # Compare mode
+  if [[ $compare_mode -eq 1 ]]; then
+    if [[ -z "$recording_a" ]]; then
+      echo "Error: Recording name required."
+      echo "Usage: gsd-stack metrics --compare <recording-a> <recording-b>"
+      exit 1
+    fi
+    if [[ -z "$recording_b" ]]; then
+      echo "Error: Two recordings required for comparison."
+      echo "Usage: gsd-stack metrics --compare <recording-a> <recording-b>"
+      exit 1
+    fi
+    metrics_compare "$recording_a" "$recording_b"
+    log_event "metrics" "compare: $recording_a vs $recording_b"
+    return 0
+  fi
+
+  # Single display mode
+  if [[ -z "$recording_a" ]]; then
+    echo "Error: Recording name required."
+    echo "Usage: gsd-stack metrics [--compare] <recording-name> [<recording-name-2>]"
+    exit 1
+  fi
+
+  local rec_dir="$GSD_STACK_DIR/recordings/$recording_a"
+  if [[ ! -d "$rec_dir" ]]; then
+    echo "Error: Recording '$recording_a' not found."
+    exit 1
+  fi
+
+  # Compute extended metrics
+  local metrics_json
+  metrics_json=$(compute_extended_metrics "$rec_dir")
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    echo "$metrics_json"
+    log_event "metrics" "display: $recording_a (json)"
+    return 0
+  fi
+
+  # Human-readable display
+  printf "\n${BOLD}Metrics: %s${RESET}\n\n" "$recording_a"
+
+  # Parse metrics for display
+  local dur active idle eff stalls stall_secs phases markers terms files stack epm tokens errors total_events
+  dur=$(echo "$metrics_json" | grep -o '"duration_seconds":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  active=$(echo "$metrics_json" | grep -o '"active_seconds":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  idle=$(echo "$metrics_json" | grep -o '"idle_seconds":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  eff=$(echo "$metrics_json" | grep -o '"efficiency_pct":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  stalls=$(echo "$metrics_json" | grep -o '"stall_count":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  stall_secs=$(echo "$metrics_json" | grep -o '"stall_total_seconds":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  phases=$(echo "$metrics_json" | grep -o '"phase_transitions":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  markers=$(echo "$metrics_json" | grep -o '"marker_count":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  terms=$(echo "$metrics_json" | grep -o '"terminal_snapshots":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  files=$(echo "$metrics_json" | grep -o '"file_changes":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  stack=$(echo "$metrics_json" | grep -o '"stack_operations":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  epm=$(echo "$metrics_json" | grep -o '"events_per_minute":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  tokens=$(echo "$metrics_json" | grep -o '"estimated_tokens":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  errors=$(echo "$metrics_json" | grep -o '"error_indicators":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  total_events=$(echo "$metrics_json" | grep -o '"event_count":[0-9]*' | head -1 | grep -o '[0-9]*$')
+
+  printf "  %-24s %s\n" "Duration:" "${dur:-0}s"
+  printf "  %-24s %s\n" "Active time:" "${active:-0}s"
+  printf "  %-24s %s\n" "Idle time:" "${idle:-0}s"
+  printf "  %-24s %s%%\n" "Efficiency:" "${eff:-0}"
+  printf "  %-24s %s\n" "Stall count:" "${stalls:-0}"
+  printf "  %-24s %s\n" "Stall time:" "${stall_secs:-0}s"
+  printf "  %-24s %s\n" "Phase transitions:" "${phases:-0}"
+  printf "  %-24s %s\n" "Markers:" "${markers:-0}"
+  printf "  %-24s %s\n" "Terminal snapshots:" "${terms:-0}"
+  printf "  %-24s %s\n" "File changes:" "${files:-0}"
+  printf "  %-24s %s\n" "Stack operations:" "${stack:-0}"
+  printf "  %-24s %s\n" "Events/minute:" "${epm:-0}"
+  printf "  %-24s %s\n" "Estimated tokens:" "${tokens:-0}"
+  printf "  %-24s %s\n" "Error indicators:" "${errors:-0}"
+  printf "  %-24s %s\n" "Total events:" "${total_events:-0}"
+
+  log_event "metrics" "display: $recording_a"
+}
+
+# ==============================================================================
 # Known subcommands (stubs for future implementation)
 # ==============================================================================
 
@@ -2833,9 +3120,9 @@ main() {
       exit $?
       ;;
     metrics)
-      echo "$cmd: not yet implemented"
-      log_event "$cmd" "stub invoked"
-      exit 0
+      shift
+      cmd_metrics "$@"
+      exit $?
       ;;
     *)
       echo "Error: Unknown command '$cmd'"
