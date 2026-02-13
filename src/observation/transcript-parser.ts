@@ -1,6 +1,7 @@
 import { createReadStream, existsSync } from 'fs';
+import { createHash } from 'crypto';
 import { createInterface } from 'readline';
-import type { TranscriptEntry } from '../types/observation.js';
+import type { TranscriptEntry, ToolExecutionPair, ExecutionContext } from '../types/observation.js';
 
 export class TranscriptParser {
   /**
@@ -149,6 +150,85 @@ export class TranscriptParser {
       .sort((a, b) => b[1] - a[1])
       .slice(0, n)
       .map(([key]) => key);
+  }
+
+  /**
+   * Pair tool_use entries with their matching tool_result entries (CAPT-01, CAPT-04).
+   *
+   * Matching strategy:
+   * 1. By tool_use_id on the tool_result referencing a pending tool_use uuid
+   * 2. By sequential ordering (most recent unmatched tool_use)
+   *
+   * Unmatched tool_use entries become partial pairs with null output/outputHash.
+   */
+  pairToolExecutions(entries: TranscriptEntry[], context: ExecutionContext): ToolExecutionPair[] {
+    // Track pending tool_use entries by uuid, in insertion order
+    const pendingToolUses = new Map<string, TranscriptEntry>();
+    const pairs: ToolExecutionPair[] = [];
+    const matchedUuids = new Set<string>();
+
+    for (const entry of entries) {
+      if (entry.type === 'tool_use') {
+        pendingToolUses.set(entry.uuid, entry);
+      } else if (entry.type === 'tool_result') {
+        // Try to match by tool_use_id first
+        let matchedUse: TranscriptEntry | undefined;
+
+        if (entry.tool_use_id && pendingToolUses.has(entry.tool_use_id)) {
+          matchedUse = pendingToolUses.get(entry.tool_use_id);
+          pendingToolUses.delete(entry.tool_use_id);
+        } else {
+          // Fall back to most recent unmatched tool_use (sequential pairing)
+          const pendingKeys = Array.from(pendingToolUses.keys());
+          if (pendingKeys.length > 0) {
+            const lastKey = pendingKeys[pendingKeys.length - 1];
+            matchedUse = pendingToolUses.get(lastKey);
+            pendingToolUses.delete(lastKey);
+          }
+        }
+
+        if (matchedUse) {
+          const outputStr = typeof entry.tool_output === 'string'
+            ? entry.tool_output
+            : JSON.stringify(entry.tool_output);
+
+          pairs.push({
+            id: matchedUse.uuid,
+            toolName: matchedUse.tool_name || 'unknown',
+            input: (matchedUse.tool_input as Record<string, unknown>) || {},
+            output: outputStr,
+            outputHash: this.hashContent(outputStr),
+            status: 'complete',
+            timestamp: matchedUse.timestamp,
+            context,
+          });
+          matchedUuids.add(matchedUse.uuid);
+        }
+      }
+    }
+
+    // Remaining unmatched tool_use entries become partial pairs
+    for (const [, useEntry] of pendingToolUses) {
+      pairs.push({
+        id: useEntry.uuid,
+        toolName: useEntry.tool_name || 'unknown',
+        input: (useEntry.tool_input as Record<string, unknown>) || {},
+        output: null,
+        outputHash: null,
+        status: 'partial',
+        timestamp: useEntry.timestamp,
+        context,
+      });
+    }
+
+    return pairs;
+  }
+
+  /**
+   * Compute SHA-256 hex digest of content string
+   */
+  private hashContent(content: string): string {
+    return createHash('sha256').update(content).digest('hex');
   }
 }
 
