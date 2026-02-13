@@ -156,9 +156,11 @@ async function handleStart(config: TerminalConfig): Promise<number> {
     '--allow-iframe',
   ];
 
+  // Only attach to tmux if a session already exists; otherwise
+  // let wetty spawn the user's default shell.
   const command = buildSessionCommand(config.session_name);
   if (command !== undefined) {
-    wettyArgs.push('--command', command);
+    wettyArgs.push('--command', `bash -c '${command}'`);
   }
 
   try {
