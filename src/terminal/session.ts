@@ -7,6 +7,8 @@
  * @module terminal/session
  */
 
+import { execSync } from 'node:child_process';
+
 /**
  * List active tmux session names.
  *
@@ -15,7 +17,18 @@
  * not installed or no sessions exist.
  */
 export function listTmuxSessions(): string[] {
-  throw new Error('not implemented');
+  try {
+    const output = execSync('tmux list-sessions -F "#{session_name}"', {
+      encoding: 'utf-8',
+      timeout: 5000,
+    });
+    return output
+      .split('\n')
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
+  } catch {
+    return [];
+  }
 }
 
 /**
@@ -29,5 +42,5 @@ export function listTmuxSessions(): string[] {
  * @param sessionName - The tmux session name to target
  */
 export function buildSessionCommand(sessionName: string): string {
-  throw new Error('not implemented');
+  return `tmux attach -t ${sessionName} || tmux new -s ${sessionName}`;
 }
