@@ -2,19 +2,18 @@
 
 ## Current Position
 
-Milestone: v1.16 -- Dashboard Console & Milestone Ingestion
-Phase: 133-helper-endpoint-integration (plan 01 complete)
-Status: Executing phase 133
-Last activity: 2026-02-13 -- Completed 133-01 (helper endpoint wiring)
-
-Progress: [██████░░░░░░░░░░] 2/5 phases (133 in progress)
+Milestone: v1.17 — Staging Layer
+Phase: 134 — Staging Foundation (in progress)
+Plan: 134-01 complete, 134-02 next
+Status: Executing phase 134
+Last activity: 2026-02-13 — Completed 134-01 (types, schema, directory foundation)
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-13)
+See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns so they work correctly when loaded by Claude Code
-**Current focus:** v1.16 — Dashboard Console & Milestone Ingestion
+**Current focus:** v1.17 Staging Layer — smart intake, security hygiene, resource analysis, derived knowledge, queue pipelining
 
 ## Accumulated Context
 
@@ -26,6 +25,8 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - commit_docs: false
 
 ### Key Decisions
+- ALL_STAGING_DIRS explicitly lists 5 subdirs (root created implicitly by recursive mkdir; queue.jsonl managed by queue module)
+- StagingMetadata uses index signature [key: string]: unknown for future extensibility (INTAKE-02 incremental build)
 - Used z.string().regex(/^\//) for base_path validation (reliable across Zod versions)
 - auth_mode uses z.enum(['none']) for forward-extensibility to ['none', 'token']
 - No changes needed to reader.ts -- safeParse automatically includes terminal section
@@ -104,10 +105,12 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - Scripts module: scripts/console/ (check-inbox.sh, write-question.sh, write-status.sh, validate-config.sh)
 - gsd-stack session management: bash scripts with tmux integration (v1.13)
 - v1.14 promotion pipeline: src/pipeline/ + src/dashboard/collectors/
-- 19 milestones shipped, 127 phases, 362 plans, ~149k LOC
+- 20 milestones shipped, 133 phases, 380 plans, ~159k LOC
 - Filesystem message bus at .planning/console/ (inbox/outbox/config/uploads/logs)
 - Helper endpoint wired into serve-dashboard.mjs via dynamic import (browser->filesystem bridge)
 - No WebSockets -- dashboard polls outbox at 2-3s intervals
+- NEW: Staging module at src/staging/ (v1.17)
+- NEW: Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
 - (none)
@@ -119,17 +122,17 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 | Metric | Value |
 |--------|-------|
-| Total milestones | 19 shipped (v1.0-v1.15 + v1.8.1 patch) |
-| Total phases | 127 complete |
-| Total plans | 362 complete |
-| Total LOC | ~149k TypeScript |
+| Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
+| Total phases | 133 complete |
+| Total plans | 380 complete |
+| Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Completed 133-01 (helper endpoint wiring)
-Stopped at: Completed 133-01-PLAN.md execution
-Next action: Continue with remaining 133 plans or next phase
-Context: createHelperRouter wired into serve-dashboard.mjs via dynamic import of dist/console/helper.js. Helper router passthrough placed after /api/regenerate but before static file serving. POST /api/console/message now reaches filesystem bridge. Integration test (7 cases) proves end-to-end flow. Graceful degradation if dist/ not compiled. All browser-to-filesystem flows (settings, questions, milestones) now work through the live dashboard server.
+Last: 2026-02-13 — Completed 134-01-PLAN.md
+Stopped at: Completed 134-01-PLAN.md (types, schema, directory foundation)
+Next action: Execute 134-02-PLAN.md
+Context: v1.17 Staging Layer. Phase 134 in progress (1/3 plans complete). src/staging/ module created with types.ts, schema.ts, directory.ts + tests (32 tests passing).
 
 ---
-*Last updated: 2026-02-13 (133-01 complete)*
+*Last updated: 2026-02-13 (134-01 complete)*
