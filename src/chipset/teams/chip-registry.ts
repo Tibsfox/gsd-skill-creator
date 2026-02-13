@@ -1,38 +1,36 @@
 /**
- * Chip registry for the team-as-chip framework.
+ * Engine registry for the team-as-engine framework.
  *
- * Defines the four specialized chip definitions (Agnus, Denise, Paula, Gary)
- * modeled after the Amiga chipset architecture, and provides a registry for
- * lookup by name or domain.
+ * Defines the four specialized engine definitions (context, render, io, router)
+ * and provides a registry for lookup by name or domain.
  *
- * Chip allocations:
- * - Agnus (context/scheduling): 60% DMA -- phase-critical gets largest allocation
- * - Denise (output/rendering):  15% DMA -- workflow output budget
- * - Paula (I/O/events):         15% DMA -- background I/O budget
- * - Gary (glue/integration):    10% DMA -- pattern detection and glue budget
+ * Engine allocations:
+ * - Context engine (context/scheduling): 60% -- phase-critical gets largest allocation
+ * - Render engine (output/rendering):    15% -- workflow output budget
+ * - IO engine (I/O/events):              15% -- background I/O budget
+ * - Router engine (glue/integration):    10% -- pattern detection and glue budget
  *
- * Total: 100% DMA channel token budget
+ * Total: 100% token budget
  */
 
-import { ChipDefinitionSchema } from './types.js';
-import type { ChipDefinition, ChipDomain } from './types.js';
+import { EngineDefinitionSchema } from './types.js';
+import type { EngineDefinition, EngineDomain } from './types.js';
 
 // ============================================================================
-// Chip Definitions
+// Engine Definitions
 // ============================================================================
 
 /**
- * AGNUS -- Context management and scheduling coprocessor.
+ * CONTEXT_ENGINE -- Context management and scheduling coprocessor.
  *
- * Named after the Amiga's Agnus chip which managed memory and DMA channels.
- * In the skill-creator chipset, Agnus manages DMA channel allocation,
- * context window budgets, and phase-critical resource scheduling.
+ * Manages budget allocation, context window budgets, and phase-critical
+ * resource scheduling.
  */
-export const AGNUS: ChipDefinition = ChipDefinitionSchema.parse({
-  name: 'agnus',
+export const CONTEXT_ENGINE: EngineDefinition = EngineDefinitionSchema.parse({
+  name: 'context-engine',
   domain: 'context',
   description:
-    'Context management and scheduling coprocessor. Manages DMA channel allocation, context window budgets, and phase-critical resource scheduling.',
+    'Context management and scheduling coprocessor. Manages budget allocation, context window budgets, and phase-critical resource scheduling.',
   dma: { percentage: 60, description: 'Phase-critical context budget (largest allocation)' },
   ports: [
     { name: 'context-request', direction: 'in', messageTypes: ['budget-query', 'allocate'] },
@@ -54,14 +52,12 @@ export const AGNUS: ChipDefinition = ChipDefinitionSchema.parse({
 });
 
 /**
- * DENISE -- Output rendering and formatting coprocessor.
+ * RENDER_ENGINE -- Output rendering and formatting coprocessor.
  *
- * Named after the Amiga's Denise chip which handled display output.
- * In the skill-creator chipset, Denise handles skill output assembly,
- * response formatting, and the display pipeline.
+ * Handles skill output assembly, response formatting, and the display pipeline.
  */
-export const DENISE: ChipDefinition = ChipDefinitionSchema.parse({
-  name: 'denise',
+export const RENDER_ENGINE: EngineDefinition = EngineDefinitionSchema.parse({
+  name: 'render-engine',
   domain: 'output',
   description:
     'Output rendering and formatting coprocessor. Handles skill output assembly, response formatting, and display pipeline.',
@@ -81,14 +77,13 @@ export const DENISE: ChipDefinition = ChipDefinitionSchema.parse({
 });
 
 /**
- * PAULA -- I/O and event handling coprocessor.
+ * IO_ENGINE -- I/O and event handling coprocessor.
  *
- * Named after the Amiga's Paula chip which handled audio and I/O.
- * In the skill-creator chipset, Paula manages file system events,
- * external tool execution, and observation data streams.
+ * Manages file system events, external tool execution, and observation
+ * data streams.
  */
-export const PAULA: ChipDefinition = ChipDefinitionSchema.parse({
-  name: 'paula',
+export const IO_ENGINE: EngineDefinition = EngineDefinitionSchema.parse({
+  name: 'io-engine',
   domain: 'io',
   description:
     'I/O and event handling coprocessor. Manages file system events, external tool execution, and observation data streams.',
@@ -109,17 +104,16 @@ export const PAULA: ChipDefinition = ChipDefinitionSchema.parse({
 });
 
 /**
- * GARY -- Glue logic and integration coprocessor.
+ * ROUTER_ENGINE -- Glue logic and integration coprocessor.
  *
- * Named after the Amiga's Gary chip which handled address decoding
- * and glue logic. In the skill-creator chipset, Gary handles inter-chip
- * routing, address decoding, and pattern detection coordination.
+ * Handles inter-engine routing, address decoding, and pattern detection
+ * coordination.
  */
-export const GARY: ChipDefinition = ChipDefinitionSchema.parse({
-  name: 'gary',
+export const ROUTER_ENGINE: EngineDefinition = EngineDefinitionSchema.parse({
+  name: 'router-engine',
   domain: 'glue',
   description:
-    'Glue logic and integration coprocessor. Handles inter-chip routing, address decoding, and pattern detection coordination.',
+    'Glue logic and integration coprocessor. Handles inter-engine routing, address decoding, and pattern detection coordination.',
   dma: { percentage: 10, description: 'Pattern detection and glue budget' },
   ports: [
     {
@@ -136,57 +130,57 @@ export const GARY: ChipDefinition = ChipDefinitionSchema.parse({
 });
 
 // ============================================================================
-// ChipRegistry
+// EngineRegistry
 // ============================================================================
 
 /**
- * Registry of chip definitions with lookup by name and domain.
+ * Registry of engine definitions with lookup by name and domain.
  *
- * Stores chip definitions in a Map keyed by chip name, providing
- * efficient lookup and enumeration. Supports adding custom chips
+ * Stores engine definitions in a Map keyed by engine name, providing
+ * efficient lookup and enumeration. Supports adding custom engines
  * while preventing duplicate name conflicts.
  */
-export class ChipRegistry {
-  private chips: Map<string, ChipDefinition>;
+export class EngineRegistry {
+  private engines: Map<string, EngineDefinition>;
 
-  constructor(initialChips?: ChipDefinition[]) {
-    this.chips = new Map();
-    if (initialChips) {
-      for (const chip of initialChips) {
-        this.chips.set(chip.name, chip);
+  constructor(initialEngines?: EngineDefinition[]) {
+    this.engines = new Map();
+    if (initialEngines) {
+      for (const engine of initialEngines) {
+        this.engines.set(engine.name, engine);
       }
     }
   }
 
   /**
-   * Register a chip definition.
-   * @throws Error if a chip with the same name is already registered.
+   * Register an engine definition.
+   * @throws Error if an engine with the same name is already registered.
    */
-  register(chip: ChipDefinition): void {
-    if (this.chips.has(chip.name)) {
-      throw new Error(`Chip '${chip.name}' is already registered`);
+  register(engine: EngineDefinition): void {
+    if (this.engines.has(engine.name)) {
+      throw new Error(`Engine '${engine.name}' is already registered`);
     }
-    this.chips.set(chip.name, chip);
+    this.engines.set(engine.name, engine);
   }
 
-  /** Look up a chip by name. Returns undefined if not found. */
-  get(name: string): ChipDefinition | undefined {
-    return this.chips.get(name);
+  /** Look up an engine by name. Returns undefined if not found. */
+  get(name: string): EngineDefinition | undefined {
+    return this.engines.get(name);
   }
 
-  /** Find the first chip matching the given domain. Returns undefined if not found. */
-  getByDomain(domain: ChipDomain): ChipDefinition | undefined {
-    for (const chip of this.chips.values()) {
-      if (chip.domain === domain) {
-        return chip;
+  /** Find the first engine matching the given domain. Returns undefined if not found. */
+  getByDomain(domain: EngineDomain): EngineDefinition | undefined {
+    for (const engine of this.engines.values()) {
+      if (engine.domain === domain) {
+        return engine;
       }
     }
     return undefined;
   }
 
-  /** Return all registered chip definitions. */
-  all(): ChipDefinition[] {
-    return Array.from(this.chips.values());
+  /** Return all registered engine definitions. */
+  all(): EngineDefinition[] {
+    return Array.from(this.engines.values());
   }
 }
 
@@ -195,13 +189,13 @@ export class ChipRegistry {
 // ============================================================================
 
 /**
- * Create a new ChipRegistry populated with the four default chip definitions.
+ * Create a new EngineRegistry populated with the four default engine definitions.
  */
-export function createDefaultRegistry(): ChipRegistry {
-  const registry = new ChipRegistry();
-  registry.register(AGNUS);
-  registry.register(DENISE);
-  registry.register(PAULA);
-  registry.register(GARY);
+export function createDefaultRegistry(): EngineRegistry {
+  const registry = new EngineRegistry();
+  registry.register(CONTEXT_ENGINE);
+  registry.register(RENDER_ENGINE);
+  registry.register(IO_ENGINE);
+  registry.register(ROUTER_ENGINE);
   return registry;
 }
