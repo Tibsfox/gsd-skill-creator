@@ -89,6 +89,29 @@ const UX_CLEANUP_SCRIPT = `
 <style>
   /* === UX Cleanup: fit 1920x1080 === */
 
+  /* Full-width layout */
+  :root { --max-width: 100% !important; }
+  .page-wrapper {
+    max-width: 100% !important;
+    padding: var(--space-md) var(--space-xl) !important;
+  }
+
+  /* Golden ratio: metrics grid uses ~61.8% / ~38.2% columns */
+  .metrics-dashboard {
+    grid-template-columns: 61.8fr 38.2fr !important;
+  }
+  @media (max-width: 1200px) {
+    .metrics-dashboard { grid-template-columns: 1fr !important; }
+  }
+
+  /* Golden ratio: milestone grid */
+  .gsd-milestone-grid {
+    grid-template-columns: 61.8fr 38.2fr;
+  }
+  @media (max-width: 1200px) {
+    .gsd-milestone-grid { grid-template-columns: 1fr; }
+  }
+
   /* Truncate long description to 2 lines */
   .page-title + p {
     display: -webkit-box;
@@ -108,8 +131,8 @@ const UX_CLEANUP_SCRIPT = `
 
   /* --- Session Pulse: clean up noise --- */
   .session-id { font-size: 0.75rem; color: var(--text-dim); max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
-  .session-model { display: none; } /* hide "unknown" */
-  .pulse-card.message-counter { display: none; } /* hide all-zero counters */
+  .session-model { display: none; }
+  .pulse-card.message-counter { display: none; }
 
   /* Compact commit feed */
   .commit-row { font-size: 0.8rem; padding: 2px 0; }
@@ -150,7 +173,7 @@ const UX_CLEANUP_SCRIPT = `
     display: flex;
   }
 
-  /* Toggle buttons for quality sections */
+  /* Toggle buttons */
   .gsd-toggle-btn {
     display: inline-block;
     background: var(--surface-raised);
@@ -187,27 +210,181 @@ const UX_CLEANUP_SCRIPT = `
     color: var(--text-dim);
   }
 
-  /* --- Historical Trends: compact --- */
+  /* --- Historical Trends: fully replaced by JS charts --- */
   .history-section { margin-bottom: var(--space-sm); }
   .history-section table { font-size: 0.8rem; }
-  .history-empty { font-size: 0.8rem; color: var(--text-dim); padding: 4px 0; }
-  .velocity-chart { max-height: 120px; }
+  .history-empty { display: none; }
 
-  /* --- Milestones timeline: collapse older ones --- */
-  .timeline-item.gsd-collapsed .timeline-body { display: none; }
-  .timeline-item.gsd-collapsed .timeline-meta { font-size: 0.75rem; }
-  .gsd-milestone-toggle {
-    display: inline-block;
-    background: var(--surface-raised);
+  /* Hide original broken velocity chart (replaced by JS) */
+  .velocity-chart { display: none; }
+
+  /* === Phases Per Milestone Chart (replaces velocity trend) === */
+  .gsd-phase-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 140px;
+    padding: 0 4px 24px 4px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  .gsd-phase-chart-bar {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+  }
+  .gsd-phase-chart-fill {
+    width: 100%;
+    max-width: 36px;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(to top, #1f6feb, #58a6ff);
+    transition: height 0.3s ease;
+    position: relative;
+    min-height: 2px;
+  }
+  .gsd-phase-chart-fill:hover {
+    filter: brightness(1.3);
+  }
+  .gsd-phase-chart-val {
+    font-size: 0.65rem;
     color: var(--text-muted);
+    margin-bottom: 2px;
+    font-weight: 600;
+  }
+  .gsd-phase-chart-label {
+    position: absolute;
+    bottom: -20px;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+    transform: rotate(-35deg);
+    transform-origin: top center;
+  }
+  .gsd-phase-chart-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  /* === Milestone Comparison Chart (replaces table) === */
+  .gsd-milestone-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+  }
+  .gsd-ms-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 50px;
+    align-items: center;
+    gap: 8px;
+    height: 22px;
+  }
+  .gsd-ms-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .gsd-ms-track {
+    height: 16px;
+    background: var(--surface);
+    border-radius: 3px;
+    overflow: hidden;
+    display: flex;
+    gap: 1px;
+  }
+  .gsd-ms-seg {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    position: relative;
+  }
+  .gsd-ms-seg.phases { background: #1f6feb; }
+  .gsd-ms-seg.plans { background: #3fb950; }
+  .gsd-ms-count {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+  .gsd-ms-legend {
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .gsd-ms-legend-swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  /* === Milestones Timeline: compact grid === */
+  .timeline { display: none; } /* hide original, replaced by grid */
+  .timeline::before { display: none; }
+  .gsd-milestone-grid {
+    display: grid;
+    gap: 6px;
+    margin-bottom: var(--space-md);
+  }
+  .gsd-ms-card {
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 2px 10px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    margin: 4px 0 var(--space-sm) 0;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
-  .gsd-milestone-toggle:hover { color: var(--accent); border-color: var(--accent); }
+  .gsd-ms-card:first-child {
+    border-color: var(--accent);
+  }
+  .gsd-ms-card-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .gsd-ms-card-title .gsd-ms-badge {
+    font-size: 0.6rem;
+    background: #238636;
+    color: #fff;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-weight: 400;
+  }
+  .gsd-ms-card-meta {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+  .gsd-ms-card-desc {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .gsd-ms-card.gsd-compact .gsd-ms-card-desc { display: none; }
+  .gsd-ms-show-more {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4px;
+  }
 
   /* --- Phases table: compact --- */
   table { font-size: 0.85rem; }
@@ -218,13 +395,176 @@ const UX_CLEANUP_SCRIPT = `
 </style>
 <script>
 (function() {
-  // --- Mark zero-value quality rows for CSS hiding ---
-  document.querySelectorAll('.accuracy-row').forEach(function(row) {
-    var label = row.querySelector('.accuracy-label');
-    if (label && label.textContent === 'on_track') return;
-    // Keep rows with non-zero interesting data
-  });
+  // =====================================================================
+  // 1. VELOCITY TREND -> Proper bar chart using phase counts
+  // =====================================================================
+  var velocityChart = document.querySelector('.velocity-chart');
+  if (velocityChart) {
+    var groups = velocityChart.querySelectorAll('.velocity-bar-group');
+    var data = [];
+    groups.forEach(function(g) {
+      var label = g.querySelector('.velocity-label');
+      var phases = g.querySelector('.velocity-phases');
+      if (label && phases) {
+        var count = parseInt(phases.textContent) || 0;
+        data.push({ label: label.textContent.trim(), count: count });
+      }
+    });
 
+    // Reverse so oldest is on the left (chronological)
+    data.reverse();
+
+    var maxCount = Math.max.apply(null, data.map(function(d) { return d.count; }));
+    if (maxCount === 0) maxCount = 1;
+
+    var chartHtml = '<div class="gsd-phase-chart-title">Phases per Milestone</div>';
+    chartHtml += '<div class="gsd-phase-chart">';
+    data.forEach(function(d) {
+      var pct = Math.round((d.count / maxCount) * 100);
+      var heightPct = Math.max(pct, d.count > 0 ? 8 : 2);
+      chartHtml += '<div class="gsd-phase-chart-bar">' +
+        '<div class="gsd-phase-chart-val">' + d.count + '</div>' +
+        '<div class="gsd-phase-chart-fill" style="height:' + heightPct + '%" title="' + d.label + ': ' + d.count + ' phases"></div>' +
+        '<div class="gsd-phase-chart-label">' + d.label + '</div>' +
+        '</div>';
+    });
+    chartHtml += '</div>';
+
+    // Replace the history-section containing velocity chart
+    var histSection = velocityChart.closest('.history-section');
+    if (histSection) {
+      histSection.innerHTML = '<h3>Phases per Milestone</h3>' + chartHtml;
+    }
+  }
+
+  // =====================================================================
+  // 2. MILESTONE COMPARISON TABLE -> Horizontal bar chart
+  // =====================================================================
+  var milestoneTable = document.querySelector('.milestone-table');
+  if (milestoneTable) {
+    var rows = milestoneTable.querySelectorAll('tbody tr');
+    var msData = [];
+    var maxPlans = 0;
+    rows.forEach(function(row) {
+      var cells = row.querySelectorAll('td');
+      if (cells.length >= 3) {
+        var name = cells[0].textContent.trim();
+        var vMatch = name.match(/^v[\\d.]+/);
+        var shortName = vMatch ? vMatch[0] : name.substring(0, 8);
+        var phases = parseInt(cells[1].textContent) || 0;
+        var plans = parseInt(cells[2].textContent) || 0;
+        var total = phases + plans;
+        if (total > maxPlans) maxPlans = total;
+        msData.push({ name: shortName, phases: phases, plans: plans });
+      }
+    });
+    if (maxPlans === 0) maxPlans = 1;
+
+    // Reverse for chronological order (oldest first)
+    msData.reverse();
+
+    var barsHtml = '<div class="gsd-ms-legend">' +
+      '<span><span class="gsd-ms-legend-swatch" style="background:#1f6feb"></span>Phases</span>' +
+      '<span><span class="gsd-ms-legend-swatch" style="background:#3fb950"></span>Plans</span>' +
+      '</div>';
+    barsHtml += '<div class="gsd-milestone-bars">';
+    msData.forEach(function(d) {
+      var phaseW = Math.round((d.phases / maxPlans) * 100);
+      var planW = Math.round((d.plans / maxPlans) * 100);
+      barsHtml += '<div class="gsd-ms-row">' +
+        '<div class="gsd-ms-label" title="' + d.name + '">' + d.name + '</div>' +
+        '<div class="gsd-ms-track">' +
+        '<div class="gsd-ms-seg phases" style="width:' + phaseW + '%"></div>' +
+        '<div class="gsd-ms-seg plans" style="width:' + planW + '%"></div>' +
+        '</div>' +
+        '<div class="gsd-ms-count">' + d.phases + 'p / ' + d.plans + 'pl</div>' +
+        '</div>';
+    });
+    barsHtml += '</div>';
+
+    var tableSection = milestoneTable.closest('.history-section');
+    if (tableSection) {
+      tableSection.innerHTML = '<h3>Milestone Comparison</h3>' + barsHtml;
+    }
+  }
+
+  // =====================================================================
+  // 3. MILESTONES TIMELINE -> Compact 2-column grid
+  // =====================================================================
+  var timeline = document.querySelector('.timeline');
+  if (timeline) {
+    var items = timeline.querySelectorAll('.timeline-item');
+    if (items.length > 0) {
+      var grid = document.createElement('div');
+      grid.className = 'gsd-milestone-grid';
+      var SHOW_FULL = 4;
+
+      items.forEach(function(item, idx) {
+        var title = item.querySelector('.timeline-title');
+        var meta = item.querySelector('.timeline-meta');
+        var body = item.querySelector('.timeline-body');
+
+        var card = document.createElement('div');
+        card.className = 'gsd-ms-card' + (idx >= SHOW_FULL ? ' gsd-compact' : '');
+        if (idx >= 8) card.style.display = 'none';
+
+        var titleDiv = document.createElement('div');
+        titleDiv.className = 'gsd-ms-card-title';
+        titleDiv.textContent = title ? title.textContent.replace(/\\s*—\\s*/, ' - ').replace(/&mdash;/g, '-') : '';
+        if (idx === 0) {
+          var badge = document.createElement('span');
+          badge.className = 'gsd-ms-badge';
+          badge.textContent = 'latest';
+          titleDiv.appendChild(badge);
+        }
+        card.appendChild(titleDiv);
+
+        if (meta) {
+          var metaDiv = document.createElement('div');
+          metaDiv.className = 'gsd-ms-card-meta';
+          metaDiv.textContent = meta.textContent;
+          card.appendChild(metaDiv);
+        }
+
+        if (body && idx < SHOW_FULL) {
+          var descDiv = document.createElement('div');
+          descDiv.className = 'gsd-ms-card-desc';
+          descDiv.textContent = body.textContent;
+          card.appendChild(descDiv);
+        }
+
+        grid.appendChild(card);
+      });
+
+      // Show more / less toggle
+      if (items.length > 8) {
+        var moreDiv = document.createElement('div');
+        moreDiv.className = 'gsd-ms-show-more';
+        var moreBtn = document.createElement('button');
+        moreBtn.className = 'gsd-toggle-btn';
+        var hiddenCount = items.length - 8;
+        moreBtn.textContent = 'Show ' + hiddenCount + ' older milestones';
+        moreBtn.addEventListener('click', function() {
+          var cards = grid.querySelectorAll('.gsd-ms-card');
+          var isShowing = moreBtn.textContent.indexOf('Hide') === 0;
+          cards.forEach(function(c, i) {
+            if (i >= 8) c.style.display = isShowing ? 'none' : '';
+          });
+          moreBtn.textContent = isShowing
+            ? 'Show ' + hiddenCount + ' older milestones'
+            : 'Hide older milestones';
+        });
+        moreDiv.appendChild(moreBtn);
+        grid.appendChild(moreDiv);
+      }
+
+      timeline.parentNode.insertBefore(grid, timeline);
+    }
+  }
+
+  // =====================================================================
+  // 4. Quality section toggles
+  // =====================================================================
   document.querySelectorAll('.emergent-row').forEach(function(row) {
     var pct = row.querySelector('.emergent-pct');
     if (pct && pct.textContent.trim() === '0%') {
@@ -239,7 +579,6 @@ const UX_CLEANUP_SCRIPT = `
     }
   });
 
-  // --- Add toggle buttons to quality cards ---
   ['accuracy-scores', 'emergent-ratio', 'deviation-summary'].forEach(function(cls) {
     var card = document.querySelector('.quality-card.' + cls);
     if (!card) return;
@@ -258,7 +597,9 @@ const UX_CLEANUP_SCRIPT = `
     card.parentNode.insertBefore(btn, card.nextSibling);
   });
 
-  // --- Add tier labels to metric sections ---
+  // =====================================================================
+  // 5. Tier labels on metric sections
+  // =====================================================================
   var tierLabels = {
     'session-pulse': ['Session Pulse', 'hot'],
     'phase-velocity': ['Phase Velocity', 'warm'],
@@ -275,34 +616,11 @@ const UX_CLEANUP_SCRIPT = `
     el.insertBefore(label, el.firstChild);
   });
 
-  // --- Collapse older milestones (keep latest 3 visible) ---
-  var items = document.querySelectorAll('.timeline-item');
-  if (items.length > 3) {
-    for (var i = 3; i < items.length; i++) {
-      items[i].classList.add('gsd-collapsed');
-    }
-    var timeline = document.querySelector('.timeline');
-    if (timeline) {
-      var toggleBtn = document.createElement('button');
-      toggleBtn.className = 'gsd-milestone-toggle';
-      toggleBtn.textContent = 'Show ' + (items.length - 3) + ' older milestones';
-      toggleBtn.addEventListener('click', function() {
-        var collapsed = document.querySelectorAll('.timeline-item.gsd-collapsed');
-        if (collapsed.length > 0) {
-          collapsed.forEach(function(el) { el.classList.remove('gsd-collapsed'); });
-          toggleBtn.textContent = 'Collapse older milestones';
-        } else {
-          for (var j = 3; j < items.length; j++) {
-            items[j].classList.add('gsd-collapsed');
-          }
-          toggleBtn.textContent = 'Show ' + (items.length - 3) + ' older milestones';
-        }
-      });
-      timeline.parentNode.insertBefore(toggleBtn, timeline.nextSibling);
-    }
-  }
+  // =====================================================================
+  // 6. Misc cleanup
+  // =====================================================================
 
-  // --- Replace raw session UUID with friendly label ---
+  // Replace raw session UUID with friendly label
   var sessionIdEl = document.querySelector('.session-id');
   if (sessionIdEl) {
     var uuid = sessionIdEl.textContent.trim();
@@ -310,7 +628,7 @@ const UX_CLEANUP_SCRIPT = `
     sessionIdEl.textContent = 'Session ' + uuid.substring(0, 8);
   }
 
-  // --- Hide message counter if all zeros ---
+  // Hide message counter if all zeros
   var counter = document.querySelector('.message-counter');
   if (counter) {
     var total = counter.querySelector('.counter-total');
@@ -319,7 +637,7 @@ const UX_CLEANUP_SCRIPT = `
     }
   }
 
-  // --- Fix velocity "314/318 plans" to be contextual ---
+  // Fix velocity "314/318 plans" to be contextual
   var progressPlans = document.querySelector('.progress-plans');
   if (progressPlans) {
     var txt = progressPlans.textContent;
