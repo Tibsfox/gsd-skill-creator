@@ -42,3 +42,11 @@ export type {
   PreWiredAgent,
 } from './pre-wiring.js';
 export { generatePreWiring } from './pre-wiring.js';
+
+// Retroactive audit recommender
+export type {
+  PatternTrigger,
+  RetroactiveAuditOptions,
+  RetroactiveAuditRecommendation,
+} from './retroactive-audit.js';
+export { ELIGIBLE_STATES, SEVERITY_ORDER, recommendRetroactiveAudit } from './retroactive-audit.js';
