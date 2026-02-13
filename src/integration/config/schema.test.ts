@@ -377,6 +377,12 @@ describe('Full config roundtrip', () => {
         cooldown_days: 14,
         auto_dismiss_after_days: 60,
       },
+      terminal: {
+        port: 4000,
+        base_path: '/shell',
+        auth_mode: 'none' as const,
+        theme: 'light' as const,
+      },
     };
 
     const parsed = IntegrationConfigSchema.parse(fullConfig);
