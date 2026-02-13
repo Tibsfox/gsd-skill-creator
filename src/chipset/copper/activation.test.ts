@@ -5,7 +5,7 @@
 
 import { describe, it, expect, vi } from 'vitest';
 import type { MoveInstruction } from './types.js';
-import type { BlitterOperation, BlitterResult } from '../blitter/types.js';
+import type { OffloadOperation, OffloadResult } from '../blitter/types.js';
 import { PipelineActivationDispatch } from './activation.js';
 import type { ActivationContext, ActivationResult } from './activation.js';
 
@@ -26,8 +26,8 @@ function move(
   };
 }
 
-/** Create a minimal BlitterOperation. */
-function blitterOp(overrides: Partial<BlitterOperation> = {}): BlitterOperation {
+/** Create a minimal OffloadOperation. */
+function offloadOp(overrides: Partial<OffloadOperation> = {}): OffloadOperation {
   return {
     id: 'lint:fix',
     script: 'echo lint',
@@ -39,8 +39,8 @@ function blitterOp(overrides: Partial<BlitterOperation> = {}): BlitterOperation 
   };
 }
 
-/** Create a minimal BlitterResult. */
-function blitterResult(overrides: Partial<BlitterResult> = {}): BlitterResult {
+/** Create a minimal OffloadResult. */
+function offloadResult(overrides: Partial<OffloadResult> = {}): OffloadResult {
   return {
     operationId: 'lint:fix',
     exitCode: 0,
@@ -134,11 +134,11 @@ describe('PipelineActivationDispatch', () => {
 
   describe('offload mode', () => {
     it('executes script target via offload', async () => {
-      const op = blitterOp();
-      const res = blitterResult();
+      const op = offloadOp();
+      const res = offloadResult();
       const ctx: ActivationContext = {
         resolveScript: async () => op,
-        executeBlitter: async () => res,
+        executeOffload: async () => res,
       };
       const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
@@ -150,15 +150,15 @@ describe('PipelineActivationDispatch', () => {
     });
 
     it('executes skill target that has been promoted to script via offload', async () => {
-      const op = blitterOp({ id: 'skill:promoted' });
-      const res = blitterResult({ operationId: 'skill:promoted' });
+      const op = offloadOp({ id: 'skill:promoted' });
+      const res = offloadResult({ operationId: 'skill:promoted' });
       const ctx: ActivationContext = {
         resolveSkill: async () => ({
           path: '.claude/commands/promoted.md',
           content: '# promoted skill',
         }),
         resolveScript: async () => op,
-        executeBlitter: async () => res,
+        executeOffload: async () => res,
       };
       const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
@@ -181,12 +181,12 @@ describe('PipelineActivationDispatch', () => {
       expect(result.error).toMatch(/not found/i);
     });
 
-    it('returns failure when executeBlitter reports non-zero exit code', async () => {
-      const op = blitterOp();
-      const res = blitterResult({ exitCode: 1 });
+    it('returns failure when executeOffload reports non-zero exit code', async () => {
+      const op = offloadOp();
+      const res = offloadResult({ exitCode: 1 });
       const ctx: ActivationContext = {
         resolveScript: async () => op,
-        executeBlitter: async () => res,
+        executeOffload: async () => res,
       };
       const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
