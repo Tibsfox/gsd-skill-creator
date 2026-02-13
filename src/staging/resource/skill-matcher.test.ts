@@ -48,15 +48,15 @@ describe('matchSkills', () => {
     const requirements: DomainRequirement[] = [
       makeReq({
         id: 'req-001',
-        description: 'Run and manage test suites for the project',
+        description: 'Run test suites coverage',
         category: 'testing',
       }),
     ];
 
     const skills: SkillCapability[] = [
       makeSkill({
-        name: 'vitest-runner',
-        description: 'Runs vitest test suites and reports results',
+        name: 'testing-runner',
+        description: 'Run test suites coverage',
         scope: 'project',
       }),
     ];
@@ -66,7 +66,7 @@ describe('matchSkills', () => {
     expect(result).toHaveLength(1);
     expect(result[0].status).toBe('ready');
     expect(result[0].relevance).toBeGreaterThanOrEqual(0.5);
-    expect(result[0].skillName).toBe('vitest-runner');
+    expect(result[0].skillName).toBe('testing-runner');
   });
 
   // --------------------------------------------------------------------------
@@ -106,15 +106,15 @@ describe('matchSkills', () => {
     const requirements: DomainRequirement[] = [
       makeReq({
         id: 'req-001',
-        description: 'Deploy application to production environment',
-        category: 'deployment',
+        description: 'Deploy server production hosting',
+        category: 'deploy',
       }),
     ];
 
     const skills: SkillCapability[] = [
       makeSkill({
-        name: 'ci-pipeline',
-        description: 'Manages continuous integration build and deploy steps',
+        name: 'deploy-helper',
+        description: 'Server pipeline automation cloud tools',
       }),
     ];
 
@@ -124,7 +124,7 @@ describe('matchSkills', () => {
     expect(result[0].status).toBe('recommended');
     expect(result[0].relevance).toBeGreaterThanOrEqual(0.3);
     expect(result[0].relevance).toBeLessThan(0.5);
-    expect(result[0].skillName).toBe('ci-pipeline');
+    expect(result[0].skillName).toBe('deploy-helper');
   });
 
   // --------------------------------------------------------------------------
@@ -134,15 +134,15 @@ describe('matchSkills', () => {
     const requirements: DomainRequirement[] = [
       makeReq({
         id: 'req-001',
-        description: 'Render interactive charts with real-time data visualization',
-        category: 'data-visualization',
+        description: 'Render data charts graphics',
+        category: 'visualization',
       }),
     ];
 
     const skills: SkillCapability[] = [
       makeSkill({
         name: 'markdown-formatter',
-        description: 'Formats data output into markdown tables',
+        description: 'Format data output tables render text',
       }),
     ];
 
@@ -161,7 +161,7 @@ describe('matchSkills', () => {
     const requirements: DomainRequirement[] = [
       makeReq({
         id: 'req-001',
-        description: 'Run test suites and report coverage',
+        description: 'Run test suites coverage',
         category: 'testing',
       }),
       makeReq({
@@ -171,19 +171,19 @@ describe('matchSkills', () => {
       }),
       makeReq({
         id: 'req-003',
-        description: 'Deploy application to cloud environment',
-        category: 'deployment',
+        description: 'Deploy server production hosting',
+        category: 'deploy',
       }),
     ];
 
     const skills: SkillCapability[] = [
       makeSkill({
-        name: 'vitest-runner',
-        description: 'Runs vitest test suites and reports coverage results',
+        name: 'testing-runner',
+        description: 'Run test suites coverage',
       }),
       makeSkill({
-        name: 'ci-pipeline',
-        description: 'Manages continuous integration build and deploy steps',
+        name: 'deploy-helper',
+        description: 'Server pipeline automation cloud tools',
       }),
     ];
 
@@ -191,9 +191,9 @@ describe('matchSkills', () => {
 
     expect(result).toHaveLength(3);
 
-    const testing = result.find((m) => m.skillName === 'vitest-runner');
+    const testing = result.find((m) => m.skillName === 'testing-runner');
     const blockchain = result.find((m) => m.skillName === 'blockchain');
-    const deploy = result.find((m) => m.skillName === 'ci-pipeline');
+    const deploy = result.find((m) => m.skillName === 'deploy-helper');
 
     expect(testing?.status).toBe('ready');
     expect(blockchain?.status).toBe('missing');
