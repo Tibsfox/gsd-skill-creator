@@ -162,9 +162,9 @@ describe('renderConsoleSettings', () => {
 
   it('renders non-hot number inputs for resource settings', () => {
     const html = renderConsoleSettings(makeConfig());
-    // token_budget_pct is a non-hot number
+    // token_budget_pct is a non-hot number -- match the full input tag
     const tokenBudget = html.match(
-      /data-setting="resources\.token_budget_pct"[^>]*/,
+      /<input[^>]*data-setting="resources\.token_budget_pct"[^>]*/,
     );
     expect(tokenBudget).not.toBeNull();
     expect(tokenBudget![0]).toContain('type="number"');

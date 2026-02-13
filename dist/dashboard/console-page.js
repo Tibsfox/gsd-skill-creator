@@ -4,13 +4,14 @@
  * Produces a full console page with four sections:
  * 1. Status -- live session progress from outbox/status/current.json
  * 2. Questions -- pending question cards with interactive response
- * 3. Settings -- placeholder (wired in plan 02)
+ * 3. Settings -- hot-configurable toggles and non-hot disabled controls
  * 4. Activity -- placeholder (wired in plan 03)
  *
  * @module dashboard/console-page
  */
 import { renderQuestionCard, renderQuestionCardStyles } from './question-card.js';
 import { renderQuestionResponseScript } from './question-poller.js';
+import { renderConsoleSettings, renderConsoleSettingsStyles, renderSettingsScript, } from './console-settings.js';
 // ---------------------------------------------------------------------------
 // Status section
 // ---------------------------------------------------------------------------
@@ -81,14 +82,22 @@ function renderQuestionsSection(questions, helperUrl) {
 </div>`;
 }
 // ---------------------------------------------------------------------------
-// Placeholder sections
+// Settings section
 // ---------------------------------------------------------------------------
-function renderSettingsSection() {
+function renderSettingsSection(config, helperUrl) {
+    const settingsContent = config
+        ? renderConsoleSettings(config)
+        : '<div class="console-settings-empty">No milestone configuration loaded</div>';
+    const scriptContent = config ? renderSettingsScript(helperUrl) : '';
     return `<div class="console-settings">
   <h2 class="console-section-title">Settings</h2>
-  <div class="console-placeholder">Settings panel -- loading...</div>
+  ${settingsContent}
+  ${scriptContent}
 </div>`;
 }
+// ---------------------------------------------------------------------------
+// Placeholder sections
+// ---------------------------------------------------------------------------
 function renderActivitySection() {
     return `<div class="console-activity">
   <h2 class="console-section-title">Activity</h2>
@@ -101,17 +110,17 @@ function renderActivitySection() {
 /**
  * Render the complete console page content.
  *
- * Combines status display, question cards, settings placeholder,
+ * Combines status display, question cards, settings panel,
  * and activity log placeholder into a single HTML string.
  *
- * @param data - Console page data (status, questions, helperUrl)
+ * @param data - Console page data (status, questions, helperUrl, config)
  * @returns HTML string for the console page body
  */
 export function renderConsolePage(data) {
     const sections = [
         renderStatusSection(data.status),
         renderQuestionsSection(data.questions, data.helperUrl),
-        renderSettingsSection(),
+        renderSettingsSection(data.config, data.helperUrl),
         renderActivitySection(),
     ];
     return `<div class="console-page">
@@ -128,7 +137,8 @@ export function renderConsolePage(data) {
  * Uses CSS custom properties from the dashboard dark theme so the
  * component inherits colors and spacing automatically.
  *
- * Includes renderQuestionCardStyles() for question card styling.
+ * Includes renderQuestionCardStyles() for question card styling
+ * and renderConsoleSettingsStyles() for settings panel styling.
  *
  * @returns CSS string
  */
@@ -288,5 +298,7 @@ export function renderConsolePageStyles() {
 }
 
 ${renderQuestionCardStyles()}
+
+${renderConsoleSettingsStyles()}
 `;
 }
