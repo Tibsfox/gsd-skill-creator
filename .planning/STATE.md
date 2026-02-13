@@ -3,9 +3,9 @@
 ## Current Position
 
 Milestone: v1.16 -- Dashboard Console & Milestone Ingestion
-Phase: 129-filesystem-bridge-upload-configuration (plans 01,03 complete, executing)
+Phase: 129-filesystem-bridge-upload-configuration (plans 01,03,04 complete, executing)
 Status: Executing phase 129
-Last activity: 2026-02-13 -- Completed 129-01 (helper endpoint)
+Last activity: 2026-02-13 -- Completed 129-04 (milestone config schema + config form)
 
 Progress: [░░░░░░░░░░░░░░░░] 0/5 phases (128 in progress)
 
@@ -48,6 +48,8 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 - CORS * since localhost-only is a server-level concern, not router concern
 - handleRequest returns boolean for route passthrough composability
 - Subdirectory allowlist via Set (inbox/pending, config, uploads) -- explicit, no regex bypass risk
+- Explicit section-level defaults in Zod schema (not empty objects) to ensure nested defaults apply correctly
+- mergeDefaults() function for shallow+nested merge of partial config overrides in form renderer
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone)
@@ -79,10 +81,10 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Completed 129-01 (helper endpoint)
-Stopped at: Completed 129-01-PLAN.md execution
-Next action: Continue executing phase 129 plans (129-02, 129-04, 129-05)
-Context: Helper endpoint at src/console/helper.ts with createHelperRouter factory. 15 tests passing. Path traversal prevention (4 vectors), subdirectory allowlist, CORS headers. Ready for serve-dashboard.mjs integration (129-02).
+Last: 2026-02-13 -- Completed 129-04 (milestone config schema + config form)
+Stopped at: Completed 129-04-PLAN.md execution
+Next action: Continue executing phase 129 plans (129-02, 129-05)
+Context: MilestoneConfigSchema validates 7 sections with Zod. Config form renders all controls with client-side JSON collection. 54 tests passing across milestone-config + config-form. Ready for 129-05 (submit flow).
 
 ---
-*Last updated: 2026-02-13 (129-01 complete)*
+*Last updated: 2026-02-13 (129-04 complete)*
