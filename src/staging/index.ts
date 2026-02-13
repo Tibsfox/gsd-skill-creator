@@ -40,3 +40,45 @@ export { recordStep, getResumePoint, readFlowState } from './intake-flow/index.j
 // Intake flow -- orchestrator
 export type { IntakeFlowResult } from './intake-flow/index.js';
 export { runIntakeFlow, confirmIntake, resumeIntakeFlow } from './intake-flow/index.js';
+
+// Resource analysis -- types
+export type {
+  DomainRequirement,
+  ComplexitySignal,
+  AmbiguityMarker,
+  ExternalDependency,
+  VisionAnalysis,
+  SkillMatch,
+  SkillMatchStatus,
+  TopologyRecommendation,
+  TopologyType,
+  TokenBudgetBreakdown,
+  BudgetCategory,
+  Subtask,
+  ParallelDecomposition,
+  ResourceManifest,
+  ComplexityLevel,
+} from './resource/index.js';
+
+// Resource analysis -- constants
+export {
+  COMPLEXITY_LEVELS,
+  TOPOLOGY_TYPES,
+  BUDGET_CATEGORIES,
+  SKILL_MATCH_STATUSES,
+  EXTERNAL_DEP_TYPES,
+} from './resource/index.js';
+
+// Resource analysis -- functions
+export {
+  analyzeVision,
+  matchSkills,
+  recommendTopology,
+  estimateBudget,
+  decomposeWork,
+  generateResourceManifest,
+} from './resource/index.js';
+
+// Resource analysis -- intake bridge
+export type { ConfirmResourceResult } from './resource/intake-bridge.js';
+export { confirmWithResources } from './resource/intake-bridge.js';
