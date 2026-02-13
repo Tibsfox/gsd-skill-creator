@@ -28,6 +28,7 @@ GSD_FORMAT="${GSD_FORMAT:-}"
 GSD_MOCK_TMUX="${GSD_MOCK_TMUX:-}"
 GSD_MOCK_DRAIN="${GSD_MOCK_DRAIN:-}"
 GSD_DRAIN_LOG_DIR="${GSD_DRAIN_LOG_DIR:-.planning/logs}"
+GSD_MOCK_CAPTURE="${GSD_MOCK_CAPTURE:-}"
 
 # ==============================================================================
 # Directory bootstrapping
@@ -69,6 +70,44 @@ log_event() {
 
   printf '{"ts":"%s","event":"%s","detail":"%s"}\n' "$ts" "$event_type" "$detail" \
     >> "$GSD_STACK_DIR/history.jsonl"
+}
+
+# ==============================================================================
+# Recording helpers
+# ==============================================================================
+
+is_recording() {
+  for meta in "$GSD_STACK_DIR"/recordings/*/meta.json; do
+    if [[ -f "$meta" ]]; then
+      local content
+      content=$(cat "$meta")
+      local status
+      status=$(json_field "$content" "status")
+      if [[ "$status" == "recording" ]]; then
+        echo "$(json_field "$content" "name")"
+        return 0
+      fi
+    fi
+  done
+  return 1
+}
+
+get_recording_dir() {
+  local rec_name
+  rec_name=$(is_recording) || return 1
+  echo "$GSD_STACK_DIR/recordings/$rec_name"
+  return 0
+}
+
+record_event() {
+  local type="$1"
+  local data_json="$2"
+  local rec_dir
+  rec_dir=$(get_recording_dir) || return 0  # silently no-op if not recording
+  local ts
+  ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  printf '{"ts":"%s","type":"%s",%s}\n' "$ts" "$type" "$data_json" \
+    >> "$rec_dir/stream.jsonl"
 }
 
 # ==============================================================================
@@ -435,6 +474,12 @@ MSGEOF
   # Log event
   log_event "push" "$priority: $message"
 
+  # Mirror to recording stream if active
+  local push_msg_escaped="${message//\\/\\\\}"
+  push_msg_escaped="${push_msg_escaped//\"/\\\"}"
+  push_msg_escaped="$(echo "$push_msg_escaped" | head -c 100)"
+  record_event "stack_push" "\"priority\":\"$priority\",\"message\":\"$push_msg_escaped\""
+
   # Output
   local msg_id="${filename%.md}"
   if [[ "$GSD_FORMAT" == "json" ]]; then
@@ -614,6 +659,12 @@ $line"
   # Log event
   log_event "pop" "$priority: $(echo "$body" | head -1)"
 
+  # Mirror to recording stream if active
+  local pop_msg_escaped="${body//\\/\\\\}"
+  pop_msg_escaped="${pop_msg_escaped//\"/\\\"}"
+  pop_msg_escaped="$(echo "$pop_msg_escaped" | head -c 100)"
+  record_event "stack_pop" "\"priority\":\"$priority\",\"message\":\"$pop_msg_escaped\""
+
   # Output
   if [[ "$GSD_FORMAT" == "json" ]]; then
     local json_body="${body//\\/\\\\}"
@@ -663,6 +714,9 @@ cmd_clear() {
 
   # Log event
   log_event "clear" "$count messages moved to done/"
+
+  # Mirror to recording stream if active
+  record_event "stack_clear" "\"count\":$count"
 
   # Output
   if [[ "$GSD_FORMAT" == "json" ]]; then
@@ -1947,6 +2001,175 @@ cmd_stop() {
 }
 
 # ==============================================================================
+# Record subcommand
+# ==============================================================================
+
+cmd_record() {
+  local name=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --name=*) name="${1#--name=}" ; shift ;;
+      --name)   name="${2:-}" ; shift 2 ;;
+      -*)       echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)        shift ;;
+    esac
+  done
+
+  # Default name to timestamped recording
+  if [[ -z "$name" ]]; then
+    name="rec-$(date +%s)"
+  fi
+
+  # Check for existing active recording
+  local existing
+  existing=$(is_recording 2>/dev/null) && {
+    echo "Error: Already recording '$existing'. Stop the current recording first."
+    exit 1
+  }
+
+  # Create recording directory
+  local rec_dir="$GSD_STACK_DIR/recordings/$name"
+  mkdir -p "$rec_dir"
+
+  # Generate metadata
+  local ts
+  ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+  # Try to find active session for cross-reference
+  local session_name=""
+  for meta in "$GSD_STACK_DIR"/sessions/*/meta.json; do
+    if [[ -f "$meta" ]]; then
+      local mc
+      mc=$(cat "$meta")
+      local s
+      s=$(json_field "$mc" "status")
+      if [[ "$s" == "active" ]]; then
+        session_name=$(json_field "$mc" "name")
+        break
+      fi
+    fi
+  done
+
+  # Write meta.json
+  printf '{"name":"%s","status":"recording","started":"%s","session":"%s","interval":%s}\n' \
+    "$name" "$ts" "$session_name" "$GSD_RECORD_INTERVAL" > "$rec_dir/meta.json"
+
+  # Initialize stream.jsonl with recording_start event
+  printf '{"ts":"%s","type":"recording_start","name":"%s","session":"%s"}\n' \
+    "$ts" "$name" "$session_name" > "$rec_dir/stream.jsonl"
+
+  # Start capture
+  if [[ -n "$GSD_MOCK_CAPTURE" ]]; then
+    # Mock mode: write a few mock events for testing
+    local mock_ts
+    mock_ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+    printf '{"ts":"%s","type":"terminal","lines":25,"cols":80,"content":"$ claude\\nHello!"}\n' \
+      "$mock_ts" >> "$rec_dir/stream.jsonl"
+    printf '{"ts":"%s","type":"file_change","path":"src/index.ts","action":"modified","lines_delta":5}\n' \
+      "$mock_ts" >> "$rec_dir/stream.jsonl"
+  else
+    # Real capture: start background process
+    (
+      local capture_dir="$rec_dir"
+      while true; do
+        # Check if still recording
+        if [[ -f "$capture_dir/meta.json" ]]; then
+          local cap_status
+          cap_status=$(json_field "$(cat "$capture_dir/meta.json")" "status")
+          if [[ "$cap_status" != "recording" ]]; then break; fi
+        else
+          break
+        fi
+
+        # Terminal snapshot: capture tmux pane content if available
+        local cap_ts
+        cap_ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+        if command -v tmux &>/dev/null && [[ -n "${session_name:-}" ]]; then
+          local tmux_name="${GSD_TMUX_SESSION}-${session_name}"
+          local pane_content
+          pane_content=$(tmux capture-pane -t "$tmux_name" -p 2>/dev/null | tail -20 || echo "")
+          if [[ -n "$pane_content" ]]; then
+            # Escape for JSON
+            pane_content="${pane_content//\\/\\\\}"
+            pane_content="${pane_content//\"/\\\"}"
+            pane_content="${pane_content//$'\n'/\\n}"
+            printf '{"ts":"%s","type":"terminal","content":"%s"}\n' \
+              "$cap_ts" "$pane_content" >> "$capture_dir/stream.jsonl"
+          fi
+        fi
+
+        sleep "$GSD_RECORD_INTERVAL"
+      done
+    ) &
+  fi
+
+  # Log event
+  log_event "record" "started: $name"
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"name":"%s","status":"recording","started":"%s","session":"%s"}\n' \
+      "$name" "$ts" "$session_name"
+  else
+    if [[ -n "$session_name" ]]; then
+      echo "Recording '$name' started (session: $session_name)"
+    else
+      echo "Recording '$name' started"
+    fi
+  fi
+}
+
+# ==============================================================================
+# Mark subcommand
+# ==============================================================================
+
+cmd_mark() {
+  local label=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -*) echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)  label="$1" ; shift ;;
+    esac
+  done
+
+  # Validate label
+  if [[ -z "$label" ]]; then
+    echo "Error: Marker label required. Usage: gsd-stack mark \"label text\""
+    exit 1
+  fi
+
+  # Check for active recording
+  local rec_dir
+  rec_dir=$(get_recording_dir) || {
+    echo "Error: No active recording. Start one with: gsd-stack record"
+    exit 1
+  }
+
+  # Write marker event to stream.jsonl
+  local ts
+  ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  # Escape label for JSON
+  local json_label="${label//\\/\\\\}"
+  json_label="${json_label//\"/\\\"}"
+  printf '{"ts":"%s","type":"marker","label":"%s"}\n' \
+    "$ts" "$json_label" >> "$rec_dir/stream.jsonl"
+
+  # Log event
+  log_event "mark" "marker: $label"
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"type":"marker","label":"%s","ts":"%s"}\n' "$json_label" "$ts"
+  else
+    echo "Marker added: $label"
+  fi
+}
+
+# ==============================================================================
 # Known subcommands (stubs for future implementation)
 # ==============================================================================
 
@@ -2057,7 +2280,17 @@ main() {
       cmd_stop "$@"
       exit $?
       ;;
-    record|stop-record|mark|play|metrics)
+    record)
+      shift
+      cmd_record "$@"
+      exit $?
+      ;;
+    mark)
+      shift
+      cmd_mark "$@"
+      exit $?
+      ;;
+    stop-record|play|metrics)
       echo "$cmd: not yet implemented"
       log_event "$cmd" "stub invoked"
       exit 0
