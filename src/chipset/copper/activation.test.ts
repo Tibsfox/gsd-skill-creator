@@ -1,12 +1,12 @@
 /**
- * Tests for CopperActivationDispatch -- routes MOVE instructions to
- * sprite/full/blitter/async activation modes with pluggable resolvers.
+ * Tests for PipelineActivationDispatch -- routes MOVE instructions to
+ * lite/full/offload/async activation modes with pluggable resolvers.
  */
 
 import { describe, it, expect, vi } from 'vitest';
 import type { MoveInstruction } from './types.js';
 import type { BlitterOperation, BlitterResult } from '../blitter/types.js';
-import { CopperActivationDispatch } from './activation.js';
+import { PipelineActivationDispatch } from './activation.js';
 import type { ActivationContext, ActivationResult } from './activation.js';
 
 // ============================================================================
@@ -21,7 +21,7 @@ function move(
     type: 'move',
     target: 'skill',
     name: 'test-skill',
-    mode: 'sprite',
+    mode: 'lite',
     ...overrides,
   };
 }
@@ -53,11 +53,11 @@ function blitterResult(overrides: Partial<BlitterResult> = {}): BlitterResult {
 }
 
 // ============================================================================
-// Sprite Mode Tests
+// Lite Mode Tests
 // ============================================================================
 
-describe('CopperActivationDispatch', () => {
-  describe('sprite mode', () => {
+describe('PipelineActivationDispatch', () => {
+  describe('lite mode', () => {
     it('returns ~200 token estimate on success', async () => {
       const ctx: ActivationContext = {
         resolveSkill: async () => ({
@@ -65,13 +65,13 @@ describe('CopperActivationDispatch', () => {
           content: '# Git commit skill...(full content)',
         }),
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
-        move({ name: 'git-commit', mode: 'sprite' }),
+        move({ name: 'git-commit', mode: 'lite' }),
       );
 
       expect(result.status).toBe('success');
-      expect(result.mode).toBe('sprite');
+      expect(result.mode).toBe('lite');
       expect(result.tokenEstimate).toBe(200);
       expect(result.name).toBe('git-commit');
       expect(result.durationMs).toBeGreaterThanOrEqual(0);
@@ -81,9 +81,9 @@ describe('CopperActivationDispatch', () => {
       const ctx: ActivationContext = {
         resolveSkill: async () => undefined,
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
-        move({ name: 'missing-skill', mode: 'sprite' }),
+        move({ name: 'missing-skill', mode: 'lite' }),
       );
 
       expect(result.status).toBe('failure');
@@ -104,7 +104,7 @@ describe('CopperActivationDispatch', () => {
           content,
         }),
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
         move({ name: 'big-skill', mode: 'full' }),
       );
@@ -118,7 +118,7 @@ describe('CopperActivationDispatch', () => {
       const ctx: ActivationContext = {
         resolveSkill: async () => undefined,
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
         move({ name: 'missing-skill', mode: 'full' }),
       );
@@ -129,27 +129,27 @@ describe('CopperActivationDispatch', () => {
   });
 
   // ============================================================================
-  // Blitter Mode Tests
+  // Offload Mode Tests
   // ============================================================================
 
-  describe('blitter mode', () => {
-    it('executes script target via blitter', async () => {
+  describe('offload mode', () => {
+    it('executes script target via offload', async () => {
       const op = blitterOp();
       const res = blitterResult();
       const ctx: ActivationContext = {
         resolveScript: async () => op,
         executeBlitter: async () => res,
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
-        move({ target: 'script', name: 'lint-fix', mode: 'blitter' }),
+        move({ target: 'script', name: 'lint-fix', mode: 'offload' }),
       );
 
       expect(result.status).toBe('success');
-      expect(result.mode).toBe('blitter');
+      expect(result.mode).toBe('offload');
     });
 
-    it('executes skill target that has been promoted to script via blitter', async () => {
+    it('executes skill target that has been promoted to script via offload', async () => {
       const op = blitterOp({ id: 'skill:promoted' });
       const res = blitterResult({ operationId: 'skill:promoted' });
       const ctx: ActivationContext = {
@@ -160,9 +160,9 @@ describe('CopperActivationDispatch', () => {
         resolveScript: async () => op,
         executeBlitter: async () => res,
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
-        move({ target: 'skill', name: 'promoted', mode: 'blitter' }),
+        move({ target: 'skill', name: 'promoted', mode: 'offload' }),
       );
 
       expect(result.status).toBe('success');
@@ -172,9 +172,9 @@ describe('CopperActivationDispatch', () => {
       const ctx: ActivationContext = {
         resolveScript: async () => undefined,
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
-        move({ target: 'script', name: 'missing-script', mode: 'blitter' }),
+        move({ target: 'script', name: 'missing-script', mode: 'offload' }),
       );
 
       expect(result.status).toBe('failure');
@@ -188,9 +188,9 @@ describe('CopperActivationDispatch', () => {
         resolveScript: async () => op,
         executeBlitter: async () => res,
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
-        move({ target: 'script', name: 'lint-fix', mode: 'blitter' }),
+        move({ target: 'script', name: 'lint-fix', mode: 'offload' }),
       );
 
       expect(result.status).toBe('failure');
@@ -212,7 +212,7 @@ describe('CopperActivationDispatch', () => {
           };
         },
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
         move({ name: 'slow-skill', mode: 'async' }),
       );
@@ -227,7 +227,7 @@ describe('CopperActivationDispatch', () => {
           throw new Error('background failure');
         },
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
         move({ name: 'failing-skill', mode: 'async' }),
       );
@@ -248,7 +248,7 @@ describe('CopperActivationDispatch', () => {
           members: ['reviewer', 'linter'],
         }),
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
         move({ target: 'team', name: 'review-team', mode: 'full' }),
       );
@@ -261,7 +261,7 @@ describe('CopperActivationDispatch', () => {
       const ctx: ActivationContext = {
         resolveTeam: async () => undefined,
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
         move({ target: 'team', name: 'missing-team', mode: 'full' }),
       );
@@ -287,10 +287,10 @@ describe('CopperActivationDispatch', () => {
           };
         },
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const instruction = move({
         name: 'deploy',
-        mode: 'sprite',
+        mode: 'lite',
         args: { branch: 'main', message: 'initial' },
       });
       const result = await dispatch.activate(instruction);
@@ -305,7 +305,7 @@ describe('CopperActivationDispatch', () => {
           throw new Error('disk failure');
         },
       };
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
         move({ name: 'broken-skill', mode: 'full' }),
       );
@@ -316,9 +316,9 @@ describe('CopperActivationDispatch', () => {
 
     it('returns failure when no resolver is configured for target type', async () => {
       const ctx: ActivationContext = {};
-      const dispatch = new CopperActivationDispatch(ctx);
+      const dispatch = new PipelineActivationDispatch(ctx);
       const result = await dispatch.activate(
-        move({ target: 'skill', name: 'any-skill', mode: 'sprite' }),
+        move({ target: 'skill', name: 'any-skill', mode: 'lite' }),
       );
 
       expect(result.status).toBe('failure');
