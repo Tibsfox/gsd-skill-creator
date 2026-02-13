@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.17 — Staging Layer
-Phase: 134 — Staging Foundation (in progress)
-Plan: 134-01 complete, 134-02 next
-Status: Executing phase 134
-Last activity: 2026-02-13 — Completed 134-01 (types, schema, directory foundation)
+Phase: 134 — Staging Foundation (complete)
+Plan: 134-03 complete (phase 134 done)
+Status: Phase 134 complete, ready for phase 135
+Last activity: 2026-02-13 — Completed 134-03 (state machine and barrel index)
 
 ## Project Reference
 
@@ -96,6 +96,12 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Dynamic import('./dist/console/helper.js') with try/catch for graceful degradation when dist/ not compiled
 - Helper router passthrough placed after /api/regenerate but before static file serving for correct priority
 - Integration test creates minimal HTTP server mirroring serve-dashboard.mjs handler flow (not importing .mjs directly)
+- Promise.all for parallel document and metadata writes in stageDocument (independent files)
+- No filename sanitization in stageDocument (internal API; caller handles path traversal)
+- Metadata validated through StagingMetadataSchema.parse before writing (catches bugs at write time)
+- rename() for document move, write+unlink for metadata (same filesystem guarantees atomic rename; metadata needs status update)
+- Re-validate metadata through StagingMetadataSchema after status update (ensures integrity after mutation)
+- Barrel imports from intake.ts without stub (plan 02 completed before plan 03 barrel creation)
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity)
@@ -109,8 +115,8 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - Filesystem message bus at .planning/console/ (inbox/outbox/config/uploads/logs)
 - Helper endpoint wired into serve-dashboard.mjs via dynamic import (browser->filesystem bridge)
 - No WebSockets -- dashboard polls outbox at 2-3s intervals
-- NEW: Staging module at src/staging/ (v1.17)
-- NEW: Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
+- Staging module at src/staging/ (types, schema, directory, intake, state-machine, index)
+- Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
 
 ### Todos
 - (none)
@@ -123,16 +129,16 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 | Metric | Value |
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
-| Total phases | 133 complete |
-| Total plans | 380 complete |
+| Total phases | 134 complete |
+| Total plans | 383 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 134-01-PLAN.md
-Stopped at: Completed 134-01-PLAN.md (types, schema, directory foundation)
-Next action: Execute 134-02-PLAN.md
-Context: v1.17 Staging Layer. Phase 134 in progress (1/3 plans complete). src/staging/ module created with types.ts, schema.ts, directory.ts + tests (32 tests passing).
+Last: 2026-02-13 — Completed 134-03-PLAN.md (phase 134 complete)
+Stopped at: Phase 134 complete (staging foundation: types, schema, directory, intake, state-machine, barrel index)
+Next action: Execute phase 135
+Context: v1.17 Staging Layer. Phase 134 complete (3/3 plans). src/staging/ module fully operational with 11 files (6 source + 5 test), 56 tests passing, barrel index exporting complete public API.
 
 ---
-*Last updated: 2026-02-13 (134-01 complete)*
+*Last updated: 2026-02-13 (134-03 complete, phase 134 done)*
