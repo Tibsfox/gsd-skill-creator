@@ -50,49 +50,49 @@ function makeCandidate(overrides: {
 
 describe('PromotionGatekeeper', () => {
   describe('threshold checking and decision logic', () => {
-    it('approves candidate that passes all default thresholds', () => {
+    it('approves candidate that passes all default thresholds', async () => {
       const gatekeeper = new PromotionGatekeeper();
       const candidate = makeCandidate({ determinism: 1.0, compositeScore: 0.9, observationCount: 10 });
-      const decision = gatekeeper.evaluate(candidate);
+      const decision = await gatekeeper.evaluate(candidate);
       expect(decision.approved).toBe(true);
     });
 
-    it('rejects candidate with determinism below threshold', () => {
+    it('rejects candidate with determinism below threshold', async () => {
       const gatekeeper = new PromotionGatekeeper();
       const candidate = makeCandidate({ determinism: 0.8 });
-      const decision = gatekeeper.evaluate(candidate);
+      const decision = await gatekeeper.evaluate(candidate);
       expect(decision.approved).toBe(false);
       expect(decision.reasoning.some(r => r.toLowerCase().includes('determinism') && r.toLowerCase().includes('failed'))).toBe(true);
     });
 
-    it('rejects candidate with compositeScore below confidence threshold', () => {
+    it('rejects candidate with compositeScore below confidence threshold', async () => {
       const gatekeeper = new PromotionGatekeeper();
       const candidate = makeCandidate({ compositeScore: 0.5 });
-      const decision = gatekeeper.evaluate(candidate);
+      const decision = await gatekeeper.evaluate(candidate);
       expect(decision.approved).toBe(false);
       expect(decision.reasoning.some(r => r.toLowerCase().includes('confidence') && r.toLowerCase().includes('failed'))).toBe(true);
     });
 
-    it('rejects candidate with insufficient observations', () => {
+    it('rejects candidate with insufficient observations', async () => {
       const gatekeeper = new PromotionGatekeeper();
       const candidate = makeCandidate({ observationCount: 2 });
-      const decision = gatekeeper.evaluate(candidate);
+      const decision = await gatekeeper.evaluate(candidate);
       expect(decision.approved).toBe(false);
       expect(decision.reasoning.some(r => r.toLowerCase().includes('observation') && r.toLowerCase().includes('failed'))).toBe(true);
     });
 
-    it('rejects candidate failing multiple gates with all reasons listed', () => {
+    it('rejects candidate failing multiple gates with all reasons listed', async () => {
       const gatekeeper = new PromotionGatekeeper();
       const candidate = makeCandidate({ determinism: 0.5, compositeScore: 0.3, observationCount: 1 });
-      const decision = gatekeeper.evaluate(candidate);
+      const decision = await gatekeeper.evaluate(candidate);
       expect(decision.approved).toBe(false);
       expect(decision.reasoning.length).toBeGreaterThanOrEqual(3);
     });
 
-    it('includes evidence with actual scores and thresholds', () => {
+    it('includes evidence with actual scores and thresholds', async () => {
       const gatekeeper = new PromotionGatekeeper();
       const candidate = makeCandidate({ determinism: 0.98, compositeScore: 0.92, observationCount: 7 });
-      const decision = gatekeeper.evaluate(candidate);
+      const decision = await gatekeeper.evaluate(candidate);
       expect(decision.evidence.determinism).toBe(0.98);
       expect(decision.evidence.compositeScore).toBe(0.92);
       expect(decision.evidence.observationCount).toBe(7);
@@ -101,15 +101,15 @@ describe('PromotionGatekeeper', () => {
       expect(decision.evidence.thresholdMinObservations).toBe(5);
     });
 
-    it('uses custom thresholds from config', () => {
+    it('uses custom thresholds from config', async () => {
       const config: GatekeeperConfig = { minDeterminism: 0.7, minConfidence: 0.5, minObservations: 3 };
       const gatekeeper = new PromotionGatekeeper(config);
       const candidate = makeCandidate({ determinism: 0.8, compositeScore: 0.6, observationCount: 3 });
-      const decision = gatekeeper.evaluate(candidate);
+      const decision = await gatekeeper.evaluate(candidate);
       expect(decision.approved).toBe(true);
     });
 
-    it('default config enforces determinism >= 0.95, confidence >= 0.85, minObservations >= 5', () => {
+    it('default config enforces determinism >= 0.95, confidence >= 0.85, minObservations >= 5', async () => {
       expect(DEFAULT_GATEKEEPER_CONFIG.minDeterminism).toBe(0.95);
       expect(DEFAULT_GATEKEEPER_CONFIG.minConfidence).toBe(0.85);
       expect(DEFAULT_GATEKEEPER_CONFIG.minObservations).toBe(5);
@@ -118,33 +118,33 @@ describe('PromotionGatekeeper', () => {
 
       // Exact boundary values should pass
       const boundaryCandidate = makeCandidate({ determinism: 0.95, compositeScore: 0.85, observationCount: 5 });
-      const passDecision = gatekeeper.evaluate(boundaryCandidate);
+      const passDecision = await gatekeeper.evaluate(boundaryCandidate);
       expect(passDecision.approved).toBe(true);
 
       // Just below boundary should fail
       const belowCandidate = makeCandidate({ determinism: 0.949, compositeScore: 0.849, observationCount: 4 });
-      const failDecision = gatekeeper.evaluate(belowCandidate);
+      const failDecision = await gatekeeper.evaluate(belowCandidate);
       expect(failDecision.approved).toBe(false);
     });
 
-    it('includes candidate reference in decision', () => {
+    it('includes candidate reference in decision', async () => {
       const gatekeeper = new PromotionGatekeeper();
       const candidate = makeCandidate();
-      const decision = gatekeeper.evaluate(candidate);
+      const decision = await gatekeeper.evaluate(candidate);
       expect(decision.candidate).toBe(candidate);
     });
 
-    it('includes ISO timestamp in decision', () => {
+    it('includes ISO timestamp in decision', async () => {
       const gatekeeper = new PromotionGatekeeper();
       const candidate = makeCandidate();
-      const decision = gatekeeper.evaluate(candidate);
+      const decision = await gatekeeper.evaluate(candidate);
       expect(decision.timestamp).toMatch(/^\d{4}-\d{2}-\d{2}T/);
     });
 
-    it('approved decision has positive reasoning', () => {
+    it('approved decision has positive reasoning', async () => {
       const gatekeeper = new PromotionGatekeeper();
       const candidate = makeCandidate();
-      const decision = gatekeeper.evaluate(candidate);
+      const decision = await gatekeeper.evaluate(candidate);
       expect(decision.approved).toBe(true);
       expect(decision.reasoning.some(r => r.toLowerCase().includes('passed'))).toBe(true);
       // One reasoning entry per gate checked (3 core gates)
