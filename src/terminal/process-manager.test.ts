@@ -10,7 +10,7 @@ import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 import type { WettyProcess, HealthCheckResult } from './types.js';
 import { DEFAULT_TERMINAL_CONFIG } from '../integration/config/terminal-schema.js';
 
-// Mock the launcher and health modules
+// Mock the launcher, health, and session modules
 vi.mock('./launcher.js', () => ({
   launchWetty: vi.fn(),
   shutdownWetty: vi.fn(),
@@ -18,15 +18,21 @@ vi.mock('./launcher.js', () => ({
 vi.mock('./health.js', () => ({
   checkHealth: vi.fn(),
 }));
+vi.mock('./session.js', () => ({
+  buildSessionCommand: vi.fn(),
+  listTmuxSessions: vi.fn(),
+}));
 
 // Import after mocks are set up
 import { launchWetty, shutdownWetty } from './launcher.js';
 import { checkHealth } from './health.js';
+import { buildSessionCommand } from './session.js';
 import { TerminalProcessManager } from './process-manager.js';
 
 const mockLaunchWetty = launchWetty as Mock;
 const mockShutdownWetty = shutdownWetty as Mock;
 const mockCheckHealth = checkHealth as Mock;
+const mockBuildSessionCommand = buildSessionCommand as Mock;
 
 /** Helper: build a mock WettyProcess for launchWetty return value. */
 function mockWettyProcess(overrides: Partial<WettyProcess> = {}): WettyProcess {
@@ -293,6 +299,50 @@ describe('TerminalProcessManager', () => {
 
       expect(result.uptimeMs).toBeTypeOf('number');
       expect(result.uptimeMs).toBeGreaterThan(0);
+    });
+  });
+
+  // ---------------------------------------------------------------
+  // start() -- session binding
+  // ---------------------------------------------------------------
+  describe('start() -- session binding', () => {
+    it('calls buildSessionCommand with config.session_name', async () => {
+      mockBuildSessionCommand.mockReturnValue('tmux attach -t dev || tmux new -s dev');
+
+      await manager.start();
+
+      expect(mockBuildSessionCommand).toHaveBeenCalledWith('dev');
+    });
+
+    it('passes session command to launchWetty as command option', async () => {
+      mockBuildSessionCommand.mockReturnValue('tmux attach -t dev || tmux new -s dev');
+
+      await manager.start();
+
+      expect(mockLaunchWetty).toHaveBeenCalledWith(
+        expect.objectContaining({ command: 'tmux attach -t dev || tmux new -s dev' }),
+      );
+    });
+
+    it('uses custom session_name from config', async () => {
+      const customConfig = { ...DEFAULT_TERMINAL_CONFIG, session_name: 'work' };
+      const customManager = new TerminalProcessManager(customConfig);
+      mockBuildSessionCommand.mockReturnValue('tmux attach -t work || tmux new -s work');
+
+      await customManager.start();
+
+      expect(mockBuildSessionCommand).toHaveBeenCalledWith('work');
+    });
+
+    it('does not rebuild session command when already running (idempotent)', async () => {
+      mockBuildSessionCommand.mockReturnValue('tmux attach -t dev || tmux new -s dev');
+
+      await manager.start();
+      mockBuildSessionCommand.mockClear();
+
+      await manager.start();
+
+      expect(mockBuildSessionCommand).not.toHaveBeenCalled();
     });
   });
 });
