@@ -1,24 +1,58 @@
 import type { WindowState, CreateWindowOptions, WindowBounds } from "./types";
+import { DEFAULT_WINDOW_BOUNDS, MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT } from "./types";
 
 /** Create a new window state from options */
-export function createWindow(_options: CreateWindowOptions): WindowState {
-  throw new Error("Not implemented");
+export function createWindow(options: CreateWindowOptions): WindowState {
+  return {
+    id: options.id,
+    type: options.type,
+    title: options.title,
+    bounds: {
+      ...DEFAULT_WINDOW_BOUNDS,
+      ...options.bounds,
+    },
+    minimized: false,
+    restoreBounds: null,
+  };
 }
 
 /** Update window bounds (position and/or size) */
 export function updateBounds(
-  _window: WindowState,
-  _partial: Partial<WindowBounds>,
+  window: WindowState,
+  partial: Partial<WindowBounds>,
 ): WindowState {
-  throw new Error("Not implemented");
+  return {
+    ...window,
+    bounds: {
+      x: partial.x ?? window.bounds.x,
+      y: partial.y ?? window.bounds.y,
+      width: Math.max(partial.width ?? window.bounds.width, MIN_WINDOW_WIDTH),
+      height: Math.max(partial.height ?? window.bounds.height, MIN_WINDOW_HEIGHT),
+    },
+  };
 }
 
 /** Minimize a window (save current bounds for restore) */
-export function minimizeWindow(_window: WindowState): WindowState {
-  throw new Error("Not implemented");
+export function minimizeWindow(window: WindowState): WindowState {
+  if (window.minimized) {
+    return window;
+  }
+  return {
+    ...window,
+    minimized: true,
+    restoreBounds: window.bounds,
+  };
 }
 
 /** Restore a minimized window to its previous bounds */
-export function restoreWindow(_window: WindowState): WindowState {
-  throw new Error("Not implemented");
+export function restoreWindow(window: WindowState): WindowState {
+  if (!window.minimized) {
+    return window;
+  }
+  return {
+    ...window,
+    minimized: false,
+    bounds: window.restoreBounds ?? window.bounds,
+    restoreBounds: null,
+  };
 }
