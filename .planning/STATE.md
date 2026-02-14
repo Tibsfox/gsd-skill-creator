@@ -4,9 +4,9 @@
 
 Milestone: v1.19 — Budget Display Overhaul
 Phase: 149-budget-inventory-model (in progress)
-Plan: 149-01 complete, next 149-02
+Plan: 149-02 complete, next 149-03
 Status: Executing phase 149
-Last activity: 2026-02-14 — Completed 149-01 (loading projection with tier-based simulation)
+Last activity: 2026-02-14 — Completed 149-02 (extended CumulativeBudgetResult with inventory and projection)
 
 ## Project Reference
 
@@ -267,6 +267,11 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.19 milestone start)
 - Character-based simulation (not tokens) for projectLoading() synchronous operation without API calls
 - Separate criticalUsed and standardUsed counters mirroring BudgetStage dual-budget logic
 - Skills not listed in any profile tier default to standard (matching getTierForSkill behavior)
+- installedTotal aliases totalChars for backward compat (existing consumers unchanged)
+- loadableTotal defaults to totalChars when no profile provided (backward compat assumes everything loads)
+- formatBudgetDisplay uses nullish coalescing fallback for installedTotal/loadableTotal (handles pre-extension result objects)
+- Dual-view display only triggers when installedTotal !== loadableTotal (single-view otherwise)
+- Progress bar uses loadableTotal in dual-view (what actually loads matters more than what's installed)
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle, topology-renderer, topology-data, topology-integration)
@@ -301,15 +306,15 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.19 milestone start)
 |--------|-------|
 | Total milestones | 22 shipped (v1.0-v1.18 + v1.8.1 patch) |
 | Total phases | 148 complete |
-| Total plans | 430 complete |
+| Total plans | 431 complete |
 | Total LOC | ~190k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-14 — Completed 149-01 loading projection
-Stopped at: Completed 149-01-PLAN.md
-Next action: Execute 149-02 (next plan in phase 149)
-Context: 149-01 delivered ProjectedSkill/LoadingProjection types and projectLoading() function. 22 tests passing. Ready for downstream plans.
+Last: 2026-02-14 — Completed 149-02 extended CumulativeBudgetResult
+Stopped at: Completed 149-02-PLAN.md
+Next action: Execute 149-03 (next plan in phase 149)
+Context: 149-02 extended CumulativeBudgetResult with installedTotal/loadableTotal/projection. 72 tests passing. checkCumulative accepts optional BudgetProfile for loading projection. formatBudgetDisplay shows dual-view when totals differ.
 
 ---
-*Last updated: 2026-02-14 (149-01 complete)*
+*Last updated: 2026-02-14 (149-02 complete)*
