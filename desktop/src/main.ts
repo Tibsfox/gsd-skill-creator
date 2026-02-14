@@ -4,7 +4,16 @@ import { DesktopShell } from "./shell";
 import { DashboardHost, WatcherRefresh, applyPalette, DEFAULT_PALETTE } from "./dashboard";
 import { startWatcher } from "./ipc/watcher";
 import { CalibrationWizard, loadUserStyle, isFirstBoot, applyUserStyleCSS } from "./calibration";
+import {
+  shouldSkipBoot,
+  createBootRenderer,
+  createDesktopBackground,
+  detectAccessibilityPreferences,
+  applyAccessibilityMode,
+  watchAccessibilityChanges,
+} from "./boot";
 import "./styles/main.css";
+import "./styles/boot.css";
 
 async function init(): Promise<void> {
   const app = document.getElementById("app");
@@ -69,10 +78,17 @@ async function init(): Promise<void> {
 
   // --- WebGL CRT Engine ---
   const engine = Engine.create(document.body);
-  engine.start();
+
+  // --- Load user style ---
+  let userStyle = loadUserStyle();
+
+  // --- Accessibility check (before engine starts) ---
+  const a11y = detectAccessibilityPreferences();
+  if (a11y.isAccessibilityMode) {
+    applyAccessibilityMode(engine, document.body);
+  }
 
   // --- First-boot calibration gate ---
-  const userStyle = loadUserStyle();
   if (isFirstBoot(userStyle.calibrated)) {
     // Show calibration wizard; desktop loads after completion
     await new Promise<void>((resolve) => {
@@ -80,19 +96,46 @@ async function init(): Promise<void> {
         container: desktop,
         engine,
         onComplete: (style) => {
-          engine.setPaletteColors(style.palette.colors);
-          engine.updateConfig(style.crt);
+          userStyle = style;
+          if (!a11y.isAccessibilityMode) {
+            engine.setPaletteColors(style.palette.colors);
+            engine.updateConfig(style.crt);
+          }
           resolve();
         },
       });
       wizard.start();
     });
-  } else {
-    // Apply saved style immediately
+  } else if (!a11y.isAccessibilityMode) {
+    // Apply saved style immediately (only if not in accessibility mode)
     applyUserStyleCSS(userStyle);
-    engine.setPaletteColors(userStyle.palette.colors);
+    if (userStyle.palette.colors.length === 32) {
+      engine.setPaletteColors(userStyle.palette.colors);
+    }
     engine.updateConfig(userStyle.crt);
   }
+
+  engine.start();
+
+  // --- Watch for accessibility changes at runtime ---
+  watchAccessibilityChanges(
+    engine,
+    document.body,
+    () => userStyle,
+  );
+
+  // --- Boot sequence ---
+  if (!a11y.isAccessibilityMode && !shouldSkipBoot(userStyle.boot)) {
+    const bootRenderer = createBootRenderer({
+      container: app,
+      palette: userStyle.palette.colors.length === 32 ? userStyle.palette.colors : undefined,
+    });
+    await bootRenderer.start();
+    // Boot complete -- renderer auto-destroys
+  }
+
+  // --- Desktop background ---
+  createDesktopBackground(engine, userStyle.boot.background);
 
   // --- Apply palette CSS custom properties (fallback for dashboard) ---
   applyPalette(DEFAULT_PALETTE);
