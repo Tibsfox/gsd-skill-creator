@@ -103,17 +103,34 @@ function dominantScope(diffs: PlanSummaryDiff[]): PlanSummaryDiff['scope_change'
  * Render per-phase accuracy score cards with scope classification badges.
  *
  * @param diffs - Plan-vs-summary diff entries from the planning collector
+ * @param windowSize - Maximum number of recent phases to display (default: 20)
  * @returns HTML string with per-phase scope classification rows
  */
-export function renderAccuracyScores(diffs: PlanSummaryDiff[]): string {
+export function renderAccuracyScores(diffs: PlanSummaryDiff[], windowSize = 20): string {
   if (diffs.length === 0) {
     return '<div class="quality-card accuracy-scores empty">No planning data available</div>';
   }
 
   const grouped = groupByPhase(diffs);
+  const allEntries = [...grouped.entries()];
   const rows: string[] = [];
 
-  for (const [phaseNum, phaseDiffs] of grouped) {
+  // If more phases than window, show summary row then last windowSize phases
+  const hiddenCount = Math.max(0, allEntries.length - windowSize);
+  const visibleEntries = hiddenCount > 0 ? allEntries.slice(hiddenCount) : allEntries;
+
+  if (hiddenCount > 0) {
+    rows.push(
+      `  <div class="accuracy-row accuracy-summary">` +
+      `<span class="accuracy-indicator">&#x2026;</span>` +
+      `<span class="accuracy-phase">${escapeHtml(`${hiddenCount} earlier phases`)}</span>` +
+      `<span class="accuracy-plans">summarized</span>` +
+      `<span class="accuracy-label"></span>` +
+      `</div>`
+    );
+  }
+
+  for (const [phaseNum, phaseDiffs] of visibleEntries) {
     const scope = dominantScope(phaseDiffs);
     const cssClass = SCOPE_CSS[scope];
     const indicator = SCOPE_INDICATOR[scope];
