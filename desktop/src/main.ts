@@ -1,6 +1,8 @@
 import { Engine } from "./engine";
 import { WindowManager } from "./wm";
 import { DesktopShell } from "./shell";
+import { DashboardHost, WatcherRefresh, applyPalette, DEFAULT_PALETTE } from "./dashboard";
+import { startWatcher } from "./ipc/watcher";
 import "./styles/main.css";
 
 async function init(): Promise<void> {
@@ -68,12 +70,82 @@ async function init(): Promise<void> {
   const engine = Engine.create(document.body);
   engine.start();
 
+  // --- Apply palette CSS custom properties (defaults; Phase 167 reads user-style.yaml) ---
+  applyPalette(DEFAULT_PALETTE);
+
   // --- Window Manager ---
   const wm = new WindowManager(desktop, iconArea);
 
   // --- Desktop Shell (icons, taskbar, menu, keyboard) ---
   const shell = new DesktopShell({ desktop, wm });
   shell.init();
+
+  // --- Dashboard integration: mount DashboardHost when dashboard window opens ---
+  const planningDir = ".planning";
+  let dashHost: DashboardHost | null = null;
+  let watcherRefresh: WatcherRefresh | null = null;
+
+  wm.on((event) => {
+    if (event.type === "window-opened") {
+      const state = wm.getWindowState(event.windowId);
+      if (state?.type === "dashboard") {
+        const content = wm.getContentElement(event.windowId);
+        if (content) {
+          dashHost = new DashboardHost({
+            container: content,
+            planningDir,
+            onError: (err) => console.error("[Dashboard]", err),
+            onLoading: (loading) => {
+              if (loading) {
+                content.classList.add("dash-loading");
+              } else {
+                content.classList.remove("dash-loading");
+              }
+            },
+          });
+
+          // Load initial dashboard page
+          dashHost.loadPage("index").catch((err) => {
+            console.error("[Dashboard] Failed to load initial page:", err);
+            dashHost?.setHtml("index", `
+              <div class="dash-host-error">
+                <h3>Dashboard unavailable</h3>
+                <p>Dashboard generation requires Tauri runtime. Run with <code>npm run desktop:dev</code>.</p>
+                <p>Error: ${err instanceof Error ? err.message : String(err)}</p>
+              </div>
+            `);
+          });
+
+          // Connect watcher refresh to this dashboard host
+          watcherRefresh = new WatcherRefresh({
+            invalidateCache: (page) => dashHost?.invalidateCache(page),
+            reloadCurrentPage: () => dashHost?.loadPage(dashHost.currentPage) ?? Promise.resolve(),
+            debounceMs: 300,
+            onRefresh: () => console.log("[Dashboard] Refreshed via file watcher"),
+          });
+          watcherRefresh.start().catch((err) =>
+            console.warn("[Dashboard] WatcherRefresh failed to start:", err),
+          );
+        }
+      }
+    }
+
+    if (event.type === "window-closed") {
+      // Clean up dashboard resources when dashboard window closes
+      const closedState = wm.getWindowState(event.windowId);
+      if (closedState?.type === "dashboard" || (dashHost && !closedState)) {
+        dashHost?.destroy();
+        dashHost = null;
+        watcherRefresh?.stop();
+        watcherRefresh = null;
+      }
+    }
+  });
+
+  // --- Start file watcher (fire-and-forget; graceful failure if not in Tauri) ---
+  startWatcher(planningDir, ".")
+    .then(() => shell.updateProcessStatus("watcher", "running"))
+    .catch((err) => console.warn("[Watcher] Failed to start:", err));
 
   // --- Wire process indicators to real services ---
   // Claude session status (from SessionMonitor)
@@ -86,15 +158,6 @@ async function init(): Promise<void> {
     });
   } catch {
     // SessionMonitor requires Tauri runtime
-  }
-
-  // File watcher status
-  try {
-    const { watcherStatus } = await import("./ipc/watcher");
-    const isRunning = await watcherStatus();
-    shell.updateProcessStatus("watcher", isRunning ? "running" : "stopped");
-  } catch {
-    // Watcher requires Tauri runtime
   }
 }
 
