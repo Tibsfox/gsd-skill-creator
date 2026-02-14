@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { Engine } from './engine';
+import type { PalettePreset } from './palette';
 
 /**
  * Create a mock WebGL2RenderingContext with all methods used by Engine
@@ -19,8 +20,11 @@ function createMockGL() {
     TEXTURE0: 0x84c0,
     COLOR_BUFFER_BIT: 0x4000,
     TRIANGLES: 0x0004,
+    RGBA: 0x1908,
     RGBA8: 0x8058,
+    UNSIGNED_BYTE: 0x1401,
     LINEAR: 0x2601,
+    NEAREST: 0x2600,
     CLAMP_TO_EDGE: 0x812f,
     TEXTURE_MIN_FILTER: 0x2801,
     TEXTURE_MAG_FILTER: 0x2800,
@@ -55,6 +59,8 @@ function createMockGL() {
     deleteBuffer: vi.fn(),
     createTexture: vi.fn(() => ({})),
     bindTexture: vi.fn(),
+    texImage2D: vi.fn(),
+    texSubImage2D: vi.fn(),
     texStorage2D: vi.fn(),
     texParameteri: vi.fn(),
     createFramebuffer: vi.fn(() => ({})),
@@ -249,6 +255,43 @@ describe('Engine', () => {
 
       expect(container.querySelector('.crt-fallback-overlay')).toBeNull();
       expect(container.querySelector('.crt-fallback-vignette')).toBeNull();
+    });
+  });
+
+  describe('palette integration', () => {
+    it('creates engine with default amiga-3.1 palette in webgl2 mode', () => {
+      const engine = Engine.create(container);
+
+      expect(engine.mode).toBe('webgl2');
+      expect(engine.getPalette()).toBe('amiga-3.1');
+    });
+
+    it('setPalette changes the active palette preset', () => {
+      const engine = Engine.create(container);
+
+      engine.setPalette('amiga-1.3');
+
+      expect(engine.getPalette()).toBe('amiga-1.3');
+    });
+
+    it('setPalette to c64 returns c64 from getPalette', () => {
+      const engine = Engine.create(container);
+
+      engine.setPalette('c64');
+
+      expect(engine.getPalette()).toBe('c64');
+    });
+
+    it('setPaletteColors sets a custom palette with exact colors', () => {
+      const engine = Engine.create(container);
+      const customColors: string[] = [];
+      for (let i = 0; i < 32; i++) {
+        customColors.push(`#FF${i.toString(16).padStart(2, '0')}00`);
+      }
+
+      engine.setPaletteColors(customColors);
+
+      expect(engine.getPalette()).toBe('custom');
     });
   });
 });
