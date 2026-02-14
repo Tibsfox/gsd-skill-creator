@@ -14,12 +14,11 @@
  */
 
 import { spawn } from 'node:child_process';
-import { existsSync, readFileSync, writeFileSync, unlinkSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, readFileSync, writeFileSync, unlinkSync, mkdirSync, chmodSync } from 'node:fs';
+import { join, dirname } from 'node:path';
 import { homedir } from 'node:os';
 import type { TerminalConfig } from '../../integration/config/terminal-types.js';
 import { checkHealth } from '../../terminal/health.js';
-import { buildSessionCommand } from '../../terminal/session.js';
 
 // ---------------------------------------------------------------------------
 // PID file management
@@ -108,7 +107,7 @@ function buildUrl(config: TerminalConfig): string {
  *
  * Returns {cmd, args_prefix} for spawning, or falls back to global `wetty`.
  */
-function resolveWetty(): { cmd: string; prefix: string[] } {
+function resolveWetty(): { cmd: string; prefix: string[]; baseDir: string | null } {
   const candidates = [
     join(homedir(), '.local', 'share', 'wetty', 'build', 'main.js'),
     '/tmp/wetty-build/build/main.js',
@@ -116,12 +115,84 @@ function resolveWetty(): { cmd: string; prefix: string[] } {
 
   for (const candidate of candidates) {
     if (existsSync(candidate)) {
-      return { cmd: 'node', prefix: [candidate] };
+      // baseDir is parent of build/ (e.g. /tmp/wetty-build)
+      return { cmd: 'node', prefix: [candidate], baseDir: dirname(dirname(candidate)) };
     }
   }
 
   // Fallback to global wetty binary
-  return { cmd: 'wetty', prefix: [] };
+  return { cmd: 'wetty', prefix: [], baseDir: null };
+}
+
+/**
+ * Apply runtime patches to the wetty source build.
+ *
+ * Fixes three issues in stock wetty:
+ *
+ * 1. command.js: Removes root-only guard (`getuid() === 0`) so wetty
+ *    spawns a local PTY instead of trying SSH (which requires sshd).
+ * 2. env.js: Wraps version parsing in try/catch so non-GNU coreutils
+ *    (e.g. uutils) don't crash the process with an uncaught exception.
+ * 3. wetty.js: Disables beforeunload "Are you sure?" prompt that
+ *    blocks page navigation and iframe refreshes.
+ */
+function ensureLocalModePatch(baseDir: string): void {
+  // Patch 1: Allow local mode for non-root
+  const commandJs = join(baseDir, 'build', 'server', 'command.js');
+  if (existsSync(commandJs)) {
+    const content = readFileSync(commandJs, 'utf-8');
+    const rootOnlyCheck = 'process.getuid() === 0 &&';
+    if (content.includes(rootOnlyCheck)) {
+      writeFileSync(commandJs, content.replace(rootOnlyCheck, ''), 'utf-8');
+    }
+  }
+
+  // Patch 2: Fix env version crash with non-GNU coreutils
+  const envJs = join(baseDir, 'build', 'server', 'spawn', 'env.js');
+  if (existsSync(envJs)) {
+    const content = readFileSync(envJs, 'utf-8');
+    if (content.includes("split(' (GNU coreutils) ')[1].split")) {
+      const patched = content.replace(
+        /return resolve\(parseInt\(stdout\.split\(\/\\r\?\\n\/\)\[0\]\.split\(' \(GNU coreutils\) '\)\[1\]\.split\('\.'\)\[0\], 10\)\);/,
+        `try {
+            var line = stdout.split(/\\r?\\n/)[0];
+            var parts = line.split(' (GNU coreutils) ');
+            if (parts.length < 2) return reject(Error('non-GNU coreutils'));
+            return resolve(parseInt(parts[1].split('.')[0], 10));
+        } catch (e) { return reject(e); }`,
+      );
+      writeFileSync(envJs, patched, 'utf-8');
+    }
+  }
+
+  // Patch 3: Remove "Are you sure you want to leave?" prompt
+  const wettyJs = join(baseDir, 'build', 'client', 'wetty.js');
+  if (existsSync(wettyJs)) {
+    const content = readFileSync(wettyJs, 'utf-8');
+    const leavePrompt = 'function fe(i){return i.returnValue="Are you sure?",i.returnValue}';
+    if (content.includes(leavePrompt)) {
+      writeFileSync(wettyJs, content.replace(leavePrompt, 'function fe(i){return}'), 'utf-8');
+    }
+  }
+}
+
+/**
+ * Write an executable entry-point script for wetty's --command flag.
+ *
+ * Wetty's local mode runs `/usr/bin/env <command>` where command is a
+ * single token (no shell interpretation). A wrapper script lets us run
+ * the compound tmux attach-or-create command.
+ */
+function writeEntryScript(baseDir: string, sessionName: string): string {
+  const scriptPath = join(baseDir, 'terminal-entry.sh');
+  const content = [
+    '#!/bin/bash',
+    `exec tmux new-session -A -s ${sessionName}`,
+    '',
+  ].join('\n');
+  writeFileSync(scriptPath, content, 'utf-8');
+  chmodSync(scriptPath, 0o755);
+  return scriptPath;
 }
 
 // ---------------------------------------------------------------------------
@@ -183,13 +254,16 @@ async function handleStart(config: TerminalConfig): Promise<number> {
     '--allow-iframe',
   ];
 
-  const command = buildSessionCommand(config.session_name);
-  if (command !== undefined) {
-    wettyArgs.push('--command', `bash -c '${command}'`);
-  }
-
   try {
-    const { cmd, prefix } = resolveWetty();
+    const { cmd, prefix, baseDir } = resolveWetty();
+
+    // For source builds: patch local mode and generate entry script
+    if (baseDir !== null) {
+      ensureLocalModePatch(baseDir);
+      const entryScript = writeEntryScript(baseDir, config.session_name ?? 'dev');
+      wettyArgs.push('--command', entryScript);
+    }
+
     const spawnArgs = [...prefix, ...wettyArgs];
 
     const child = spawn(cmd, spawnArgs, {
