@@ -8,6 +8,9 @@ import {
   DetectionConfig,
   DEFAULT_DETECTION_CONFIG,
 } from '../types/detection.js';
+import { inferDomain, generateSkillId } from '../identifiers/generator.js';
+import type { AgentId } from '../identifiers/types.js';
+import { DOMAIN_PREFIX_MAP } from '../identifiers/types.js';
 
 export interface DetectionResult {
   newCandidates: number;
@@ -94,7 +97,13 @@ export class SuggestionManager {
 
     try {
       const skillName = await this.generator.createFromCandidate(suggestion.candidate);
-      await this.store.transition(candidateId, 'accepted', { createdSkillName: skillName });
+      const domain = inferDomain(
+        suggestion.candidate.suggestedDescription,
+        suggestion.candidate.pattern
+      );
+      const agentId = `${DOMAIN_PREFIX_MAP[domain]}-0` as AgentId;
+      const skillId = generateSkillId(agentId, skillName);
+      await this.store.transition(candidateId, 'accepted', { createdSkillName: skillName, skillId });
       return { success: true, skillName };
     } catch (err) {
       return { success: false, error: (err as Error).message };

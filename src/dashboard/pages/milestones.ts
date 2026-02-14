@@ -7,6 +7,7 @@
  */
 
 import { escapeHtml } from '../renderer.js';
+import { renderEntityShape } from '../entity-shapes.js';
 import type { DashboardData } from '../types.js';
 
 /**
@@ -69,8 +70,16 @@ export function renderMilestonesPage(data: DashboardData): string {
         accompHtml = `\n      <div style="margin-top: var(--space-sm);"><strong>Key accomplishments:</strong><ul class="list-styled">${accompItems}</ul></div>`;
       }
 
+      // Chevron shape: green fill for shipped, infrastructure purple for in-progress
+      const chevronSvg = milestone.shipped
+        ? renderEntityShape('milestone', 'infrastructure').replace(
+            /fill="[^"]*"/,
+            'fill="#3fb950"',
+          )
+        : renderEntityShape('milestone', 'infrastructure');
+
       return `    <div class="timeline-item ${timelineClass}">
-      <div class="timeline-title">${escapeHtml(milestone.version)} &mdash; ${escapeHtml(milestone.name)}</div>
+      <div class="timeline-title">${chevronSvg} ${escapeHtml(milestone.version)} &mdash; ${escapeHtml(milestone.name)}</div>
       <div class="timeline-meta">${metaParts.join(' | ')}</div>${goalHtml}${accompHtml}
     </div>`;
     })
