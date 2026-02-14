@@ -119,6 +119,18 @@ All 39 requirements implemented: input validation/sanitization, data integrity/r
 
 All 40 requirements implemented: integration config, install script, git hooks, session start, slash commands, wrapper commands, and passive monitoring.
 
+## v1.12 GSD Planning Docs Dashboard (30 total)
+
+All 30 requirements implemented: generator core, dashboard index, individual artifact pages, structured data/SEO, incremental builds/live mode, and GSD skill integration.
+
+## v1.12.1 Live Metrics Dashboard (30 total)
+
+All 30 requirements implemented: three-tier sample rates, data collectors, live session pulse, phase velocity, planning quality, and historical trends.
+
+## v1.13 Session Lifecycle & Workflow Coprocessor (39 total)
+
+All 39 requirements implemented: stack core, message operations, session lifecycle, recording/playback, Pipeline List format, Offload engine, Pipeline executor, team-as-chip framework, exec kernel, Pipeline learning, and chipset integration.
+
 ---
 
-**Total: 317 requirements across 12 milestones, all implemented.**
+**Total: 356 requirements across 17 milestones, all implemented.**

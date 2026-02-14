@@ -360,7 +360,7 @@ To run a GSD command, read the command file from `.claude/commands/gsd/[command]
 
 ## Commit Guidelines
 
-**Always use the `beautiful-commits` skill** (which extends `git-commit`) when writing commit messages. This is mandatory for all commits in this project — both direct commits and those made by GSD executor agents.
+**Always use the `beautiful-commits` skill** when writing commit messages. This is mandatory for all commits in this project — both direct commits and those made by GSD executor agents.
 
 Key rules:
 - Follow Conventional Commits: `<type>(<scope>): <subject>`

@@ -177,6 +177,13 @@ describe('readIntegrationConfig', () => {
           cooldown_days: 14,
           auto_dismiss_after_days: 60,
         },
+        terminal: {
+          port: 9090,
+          base_path: '/term',
+          auth_mode: 'none' as const,
+          theme: 'light' as const,
+          session_name: 'custom',
+        },
       };
 
       mockReadFile.mockResolvedValue(JSON.stringify(fullConfig));
@@ -331,6 +338,99 @@ describe('validateIntegrationConfig', () => {
     expect(result.valid).toBe(false);
     if (!result.valid) {
       expect(result.errors.some((e) => e.includes('observation.retention_days'))).toBe(true);
+    }
+  });
+});
+
+// =============================================================================
+// Terminal config via reader
+// =============================================================================
+
+describe('terminal config via reader', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('returns terminal defaults when file is missing', async () => {
+    const err = new Error('ENOENT') as NodeJS.ErrnoException;
+    err.code = 'ENOENT';
+    mockReadFile.mockRejectedValue(err);
+
+    const config = await readIntegrationConfig();
+
+    expect(config.terminal).toEqual({
+      port: 11338,
+      base_path: '/terminal',
+      auth_mode: 'none',
+      theme: 'dark',
+      session_name: 'dev',
+    });
+  });
+
+  it('returns terminal defaults for empty JSON object', async () => {
+    mockReadFile.mockResolvedValue('{}');
+
+    const config = await readIntegrationConfig();
+
+    expect(config.terminal).toEqual({
+      port: 11338,
+      base_path: '/terminal',
+      auth_mode: 'none',
+      theme: 'dark',
+      session_name: 'dev',
+    });
+  });
+
+  it('merges partial terminal override with defaults', async () => {
+    mockReadFile.mockResolvedValue(
+      JSON.stringify({ terminal: { port: 4000 } }),
+    );
+
+    const config = await readIntegrationConfig();
+
+    expect(config.terminal.port).toBe(4000);
+    expect(config.terminal.base_path).toBe('/terminal');
+    expect(config.terminal.auth_mode).toBe('none');
+    expect(config.terminal.theme).toBe('dark');
+  });
+
+  it('throws IntegrationConfigError for invalid terminal value', async () => {
+    mockReadFile.mockResolvedValue(
+      JSON.stringify({ terminal: { port: -1 } }),
+    );
+
+    await expect(readIntegrationConfig()).rejects.toThrow(IntegrationConfigError);
+  });
+});
+
+// =============================================================================
+// validateIntegrationConfig with terminal
+// =============================================================================
+
+describe('validateIntegrationConfig with terminal', () => {
+  it('returns config with terminal defaults for empty object', () => {
+    const result = validateIntegrationConfig({});
+
+    expect(result.valid).toBe(true);
+    if (result.valid) {
+      expect(result.config.terminal).toEqual({
+        port: 11338,
+        base_path: '/terminal',
+        auth_mode: 'none',
+        theme: 'dark',
+        session_name: 'dev',
+      });
+    }
+  });
+
+  it('returns valid=false for invalid terminal theme', () => {
+    const result = validateIntegrationConfig({
+      terminal: { theme: 'blue' },
+    });
+
+    expect(result.valid).toBe(false);
+    if (!result.valid) {
+      expect(result.errors.length).toBeGreaterThan(0);
     }
   });
 });

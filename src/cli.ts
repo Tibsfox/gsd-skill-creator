@@ -1304,6 +1304,14 @@ async function main() {
       break;
     }
 
+    case 'terminal':
+    case 'term': {
+      const { terminalCommand } = await import('./cli/commands/terminal.js');
+      const exitCode = await terminalCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1440,6 +1448,7 @@ Commands:
   config, cfg       Manage GSD configuration (validate)
   event, ev         Manage skill events (list, emit, consume, suggest, expire)
   dashboard, db     Generate GSD Planning Docs Dashboard from .planning/
+  terminal, term    Manage Wetty terminal server (start, stop, status, restart)
   help, -h          Show this help message
   --version, -V     Show version information
 

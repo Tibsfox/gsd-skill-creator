@@ -12,12 +12,7 @@
       {
         "source": "skills/beautiful-commits/SKILL.md",
         "target": ".claude/skills/beautiful-commits/SKILL.md",
-        "description": "Beautiful commits skill (extends git-commit)"
-      },
-      {
-        "source": "skills/git-commit/SKILL.md",
-        "target": ".claude/skills/git-commit/SKILL.md",
-        "description": "Git commit base skill"
+        "description": "Beautiful commits skill"
       },
       {
         "source": "skills/file-operation-patterns/SKILL.md",
@@ -40,11 +35,6 @@
         "description": "Decision framework skill"
       },
       {
-        "source": "skills/gsd-explain/SKILL.md",
-        "target": ".claude/skills/gsd-explain/SKILL.md",
-        "description": "GSD explain skill"
-      },
-      {
         "source": "skills/gsd-preflight/SKILL.md",
         "target": ".claude/skills/gsd-preflight/SKILL.md",
         "description": "GSD preflight skill"
@@ -65,11 +55,6 @@
         "description": "Beautiful commits command"
       },
       {
-        "source": "commands/git-commit.md",
-        "target": ".claude/commands/git-commit.md",
-        "description": "Git commit command"
-      },
-      {
         "source": "commands/file-operation-patterns.md",
         "target": ".claude/commands/file-operation-patterns.md",
         "description": "File operation patterns command"
@@ -88,11 +73,6 @@
         "source": "commands/decision-framework.md",
         "target": ".claude/commands/decision-framework.md",
         "description": "Decision framework command"
-      },
-      {
-        "source": "commands/gsd-explain.md",
-        "target": ".claude/commands/gsd-explain.md",
-        "description": "GSD explain command"
       },
       {
         "source": "commands/gsd-preflight.md",

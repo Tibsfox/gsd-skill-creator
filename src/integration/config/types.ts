@@ -5,14 +5,17 @@
  * install script, git hooks, session start, slash commands, wrappers, and
  * passive monitoring. Every downstream consumer reads this config.
  *
- * Four sections:
+ * Five sections:
  * - IntegrationToggles (CONFIG-01): Feature on/off switches
  * - TokenBudgetConfig (CONFIG-02): Skill loading token budget limits
  * - ObservationConfig (CONFIG-03): Session observation retention settings
  * - SuggestionConfig (CONFIG-04): Pattern suggestion thresholds
+ * - TerminalConfig (CONF-01/02/03): Terminal (Wetty) integration settings
  *
  * @module integration/config/types
  */
+
+import type { TerminalConfig } from './terminal-types.js';
 
 // ============================================================================
 // CONFIG-01: Feature Toggles
@@ -112,4 +115,8 @@ export interface IntegrationConfig {
   observation: ObservationConfig;
   /** Suggestion thresholds (CONFIG-04). */
   suggestions: SuggestionConfig;
+  /** Terminal integration settings (CONF-01/02/03). */
+  terminal: TerminalConfig;
 }
+
+export type { TerminalConfig } from './terminal-types.js';

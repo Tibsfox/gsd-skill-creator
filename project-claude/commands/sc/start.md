@@ -242,9 +242,9 @@ npx skill-creator status --json 2>/dev/null
 | Warning at     | 4%                             |
 
 **Top skills by size:**
-1. beautiful-commits (450 chars)
-2. gsd-explain (380 chars)
-3. git-commit (320 chars)
+1. beautiful-commits (1,333 chars)
+2. gsd-onboard (1,352 chars)
+3. gsd-trace (1,472 chars)
 ```
 
 - If budget usage exceeds `warn_at_percent`, add a warning line: "Warning: Budget usage approaching limit. Consider pruning inactive skills."
