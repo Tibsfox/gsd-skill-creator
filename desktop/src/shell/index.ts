@@ -26,3 +26,5 @@ export { createTaskbar } from "./taskbar";
 export type { SystemMenuHandle } from "./system-menu";
 export { createSystemMenu } from "./system-menu";
 export { KeyboardManager } from "./keyboard-nav";
+export { DesktopShell } from "./desktop-shell";
+export type { DesktopShellConfig } from "./desktop-shell";
