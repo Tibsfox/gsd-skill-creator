@@ -3,12 +3,12 @@
 ## Current Position
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
-Phase: 158 -- Tauri Scaffold + IPC Foundation (in progress)
-Plan: 03 complete, next: 04
-Status: Executing phase 158
-Last activity: 2026-02-14 -- Completed 158-03 (IPC type contracts)
+Phase: 158 -- Tauri Scaffold + IPC Foundation (COMPLETE)
+Plan: 04 complete (phase done, 4/4 plans)
+Status: Phase 158 complete, ready for parallel tracks
+Last activity: 2026-02-14 -- Completed 158-04 (IPC benchmark + capability ACL)
 
-Progress: [..........] 0/11 phases
+Progress: [#.........] 1/11 phases
 
 ## Project Reference
 
@@ -62,6 +62,8 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - Vite build target safari13 per Tauri v2 WebKitGTK engine requirements
 - mockIPC passes Channel object directly (use .id property, not string parsing)
 - vitest 3.x in desktop/ (not 4.x -- latest stable is 3.2.4)
+- Channel mock: runCallback with {index, message} envelope; Channel unwraps internally to onmessage
+- IPC benchmark uses CHUNK_COUNT=10 for channel throughput measurement baseline
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -84,19 +86,20 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total phases | 157 complete |
 | Total plans | 449 complete |
 | Total LOC | ~195k TypeScript + Rust |
-| v1.21 phases | 0/11 complete |
-| v1.21 plans | 3/? complete |
+| v1.21 phases | 1/11 complete |
+| v1.21 plans | 4/? complete |
 | v1.21 requirements | 50 total |
 | 158-01 duration | 11min |
 | 158-02 duration | 2min |
 | 158-03 duration | 6min |
+| 158-04 duration | 3min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Completed 158-03 (IPC type contracts)
-Stopped at: Completed 158-03-PLAN.md
-Next action: Execute 158-04 (capability ACL / remaining plans)
-Context: All three IPC primitives working: commands (invoke/response), events (emit/listen), channels (streaming). 7 passing desktop tests via mockIPC. Rust backend compiles with 5 registered commands. Ready for next plan.
+Last: 2026-02-14 -- Completed 158-04 (IPC benchmark + capability ACL)
+Stopped at: Completed 158-04-PLAN.md (Phase 158 complete)
+Next action: Plan parallel tracks -- Track A (160 WebGL), Track B (162 Terminal), Track C (159 File Watcher)
+Context: Phase 158 fully complete. Tauri scaffold with IPC foundation: 5 Rust commands, TypeScript wrappers for commands/events/channels, benchmark runner, capability ACL. 11 passing desktop tests. Ready for parallel phase execution.
 
 ---
-*Last updated: 2026-02-14 (158-03 complete)*
+*Last updated: 2026-02-14 (158-04 complete, phase 158 done)*
