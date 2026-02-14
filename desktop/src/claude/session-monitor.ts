@@ -15,20 +15,36 @@ export class SessionMonitor {
 
   /** Start listening for status events from Rust backend */
   async start(): Promise<void> {
-    // TODO: implement
-    throw new Error("Not implemented");
+    if (this.started) return;
+    this.unlisten = await listen<ClaudeStatusEvent>("claude:status", (event) => {
+      const statusEvent = event.payload;
+      for (const cb of this.listeners) {
+        try {
+          cb(statusEvent);
+        } catch {
+          // Don't let one bad listener break others
+        }
+      }
+    });
+    this.started = true;
   }
 
   /** Stop listening and clean up */
   async stop(): Promise<void> {
-    // TODO: implement
-    throw new Error("Not implemented");
+    if (!this.started) return;
+    if (this.unlisten) {
+      this.unlisten();
+      this.unlisten = null;
+    }
+    this.started = false;
   }
 
   /** Subscribe to status changes. Returns unsubscribe function. */
   subscribe(callback: StatusCallback): () => void {
-    // TODO: implement
-    throw new Error("Not implemented");
+    this.listeners.add(callback);
+    return () => {
+      this.listeners.delete(callback);
+    };
   }
 
   /** Check if monitor is active */
