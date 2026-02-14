@@ -3,6 +3,7 @@ import { WindowManager } from "./wm";
 import { DesktopShell } from "./shell";
 import { DashboardHost, WatcherRefresh, applyPalette, DEFAULT_PALETTE } from "./dashboard";
 import { startWatcher } from "./ipc/watcher";
+import { CalibrationWizard, loadUserStyle, isFirstBoot, applyUserStyleCSS } from "./calibration";
 import "./styles/main.css";
 
 async function init(): Promise<void> {
@@ -70,7 +71,30 @@ async function init(): Promise<void> {
   const engine = Engine.create(document.body);
   engine.start();
 
-  // --- Apply palette CSS custom properties (defaults; Phase 167 reads user-style.yaml) ---
+  // --- First-boot calibration gate ---
+  const userStyle = loadUserStyle();
+  if (isFirstBoot(userStyle.calibrated)) {
+    // Show calibration wizard; desktop loads after completion
+    await new Promise<void>((resolve) => {
+      const wizard = new CalibrationWizard({
+        container: desktop,
+        engine,
+        onComplete: (style) => {
+          engine.setPaletteColors(style.palette.colors);
+          engine.updateConfig(style.crt);
+          resolve();
+        },
+      });
+      wizard.start();
+    });
+  } else {
+    // Apply saved style immediately
+    applyUserStyleCSS(userStyle);
+    engine.setPaletteColors(userStyle.palette.colors);
+    engine.updateConfig(userStyle.crt);
+  }
+
+  // --- Apply palette CSS custom properties (fallback for dashboard) ---
   applyPalette(DEFAULT_PALETTE);
 
   // --- Window Manager ---

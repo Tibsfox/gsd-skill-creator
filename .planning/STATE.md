@@ -107,6 +107,9 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - Manual YAML serializer for user-style (no js-yaml dependency)
 - localStorage for webview persistence (future Tauri IPC for filesystem)
 - Calibration module at desktop/src/calibration/ (user-style, css-bridge, wizard-state, screen-color-picker, screen-crt-settings)
+- Boot module at desktop/src/boot/ (types, chipset, desktop-background)
+- Chipset delay subtraction model: subtract each chipset's delay from elapsed time, allowing multi-chipset advancement in a single frame
+- Boot progress distribution: init 0-10%, chipset 10-75%, ready 75-100%
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -168,12 +171,13 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 167-01 duration | 3min |
 | 167-03 duration | 3min |
 | 168-02 duration | 1min |
+| 168-01 duration | 3min |
 
 ## Session Continuity
 
 Last: 2026-02-14 -- Completed 168-02 (desktop background manager with copper list mode switching)
 Stopped at: Completed 168-02-PLAN.md
-Next action: Continue Phase 168 remaining plans (168-01, 168-03, 168-04).
+Next action: Continue Phase 168 remaining plans (168-03, 168-04).
 Context: Desktop background manager at desktop/src/boot/desktop-background.ts with gradient/flat/disabled modes via engine copper list API. Boot module at desktop/src/boot/. 531 desktop tests passing (10 new + 521 existing).
 
 ---
