@@ -67,6 +67,11 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - TerminalWriter interface abstracts xterm.js for unit testing (avoids heavy Terminal import)
 - Uint8Array normalization in ptyOpen handles Tauri dual encoding (number[] vs Uint8Array)
 - Callback-counting backpressure per xterm.js official guide (attach callback every 100KB, not every write)
+- vitest-webgl-canvas-mock only stubs WebGL1; WebGL2 tests use manual mocks with vi.fn()
+- PtySession stores writer via take_writer() once at spawn (portable-pty API constraint)
+- PTY reader uses tokio::task::spawn_blocking (blocking I/O, not async runtime threads)
+- Flow control: tokio::sync::mpsc<bool> capacity 16, try_recv drain + blocking_recv on pause
+- Short Mutex locks in async PTY commands -- clone flow_tx under lock, release before await
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -90,7 +95,7 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total plans | 449 complete |
 | Total LOC | ~195k TypeScript + Rust |
 | v1.21 phases | 1/11 complete |
-| v1.21 plans | 5/? complete |
+| v1.21 plans | 6/? complete |
 | v1.21 requirements | 50 total |
 | 158-01 duration | 11min |
 | 158-02 duration | 2min |
@@ -99,13 +104,16 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 160-01 duration | 2min |
 | 159-01 duration | 4min |
 | 162-02 duration | 3min |
+| 160-02 duration | 5min |
+| 159-02 duration | 5min |
+| 162-01 duration | 5min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Planned phases 159, 160, 162 (parallel tracks)
-Stopped at: All parallel track plans created
-Next action: Execute phases 159, 160, 162 in parallel (/gsd:execute-phase for each)
-Context: Three parallel tracks planned. Phase 159: 2 plans (file watcher). Phase 160: 3 plans in 2 waves (WebGL + CRT shaders). Phase 162: 4 plans in 2 waves (Rust PTY + xterm.js). All depend only on Phase 158 (complete). No file conflicts between tracks.
+Last: 2026-02-14 -- Executed 162-01 (Rust PTY backend)
+Stopped at: Completed 162-01-PLAN.md
+Next action: Continue parallel execution of phases 160 and 162 (remaining plans)
+Context: Phase 159 (file watcher) COMPLETE. Phase 162 plan 01 (Rust PTY backend) COMPLETE -- 6 IPC commands implemented, 7 tests passing. Plans 162-02, 162-03, 162-04 remaining. Track A (160 WebGL) and Track B (162 PTY) still executing in parallel.
 
 ---
-*Last updated: 2026-02-14 (phases 159, 160, 162 planned)*
+*Last updated: 2026-02-14 (162-01 complete)*

@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-start-watcher"
+description = "Enables the start_watcher command without any pre-configured scope."
+commands.allow = ["start_watcher"]
+
+[[permission]]
+identifier = "deny-start-watcher"
+description = "Denies the start_watcher command without any pre-configured scope."
+commands.deny = ["start_watcher"]
