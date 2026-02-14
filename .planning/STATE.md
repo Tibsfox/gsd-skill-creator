@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
-Phase: 161, 163 -- Next parallel tracks (Track A: palette, Track B: tmux)
-Plan: Phase 162 COMPLETE (4/4 plans). Tracks A+B+C need 161, 163.
-Status: Parallel tracks 159, 160, 162 COMPLETE. Next: 161 (palette) + 163 (tmux).
-Last activity: 2026-02-14 -- Completed 162-04 (PTY integration, ACL, barrel export)
+Phase: 161 -- Palette System + Copper List (plan 01 complete, plans 02-03 remain)
+Plan: 161-01 COMPLETE. Next: 161-02 (palette texture) or 161-03 (copper list).
+Status: Executing Phase 161 (Track A: Graphics). 161-01 done.
+Last activity: 2026-02-14 -- Completed 161-01 (palette types, presets, OKLCH generation)
 
 Progress: [####......] 4/11 phases
 
@@ -73,6 +73,7 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - Flow control: tokio::sync::mpsc<bool> capacity 16, try_recv drain + blocking_recv on pause
 - Short Mutex locks in async PTY commands -- clone flow_tx under lock, release before await
 - vite-plugin-glsl required in both vite.config.ts and vitest.config.ts (GLSL imports fail SSR transform without it)
+- culori v4.0 ships no type declarations; @types/culori@4.0.1 required as devDependency
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -96,7 +97,7 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total plans | 449 complete |
 | Total LOC | ~195k TypeScript + Rust |
 | v1.21 phases | 4/11 complete |
-| v1.21 plans | 15/? complete |
+| v1.21 plans | 16/? complete |
 | v1.21 requirements | 50 total |
 | 158-01 duration | 11min |
 | 158-02 duration | 2min |
@@ -111,13 +112,14 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 162-03 duration | 1min |
 | 160-03 duration | 4min |
 | 162-04 duration | 1min |
+| 161-01 duration | 3min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Executed 162-04 (PTY integration, ACL permissions, barrel export)
-Stopped at: Completed 162-04-PLAN.md
-Next action: Phase 162 COMPLETE. Continue with 161 (OKLCH palette renderer) and/or 163 (tmux multiplexer).
-Context: Phases 158, 159, 160, 162 all COMPLETE. Track A needs 161 (palette). Track B needs 163 (tmux). Track C (159) done. All converge at 164-166 (Desktop + Dashboard). Full PTY stack verified: 122 tests (115 vitest + 7 cargo).
+Last: 2026-02-14 -- Executed 161-01 (palette types, presets, OKLCH generation)
+Stopped at: Completed 161-01-PLAN.md
+Next action: Continue Phase 161 with 161-02 (palette texture) and/or 161-03 (copper list). Track B needs 163 (tmux).
+Context: Phases 158, 159, 160, 162 all COMPLETE. Phase 161 plan 01 done (palette types + presets + OKLCH generation). 97 engine tests passing. culori v4.0 installed. Track B needs 163. All converge at 164-166.
 
 ---
-*Last updated: 2026-02-14 (162-04 complete)*
+*Last updated: 2026-02-14 (161-01 complete)*
