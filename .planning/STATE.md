@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
-Phase: 163 -- tmux Integration + Claude Sessions -- COMPLETE (all 4 plans done)
-Plan: All 163 plans COMPLETE (01, 02, 03, 04).
-Status: Phase 163 COMPLETE. Track B (Terminal) done. Tracks converge at 164-166.
-Last activity: 2026-02-14 -- Completed 163-03 (Rust Claude session manager, tmux spawn, status monitor)
+Phase: 164 -- Window Manager + Custom Chrome -- IN PROGRESS
+Plan: 164-01 COMPLETE. Next: 164-02.
+Status: Phase 164 in progress. Plan 01 (window state types, CRUD, z-order) complete.
+Last activity: 2026-02-14 -- Completed 164-01 (window state types, CRUD, z-order depth cycling)
 
 Progress: [######....] 6/11 phases
 
@@ -84,6 +84,8 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - Last-writer-wins for overlapping copper entries
 - PtyOpenParams.args as optional string[] for backward-compatible shell argument passing (tmux attach)
 - Ctrl-B D detach sequence with 100ms delay before PTY close preserves tmux sessions
+- Z-order convention: index 0 = back, last index = front (maps to CSS z-index)
+- No-op operations return original reference for identity checks (perf optimization)
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -107,7 +109,7 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total plans | 449 complete |
 | Total LOC | ~195k TypeScript + Rust |
 | v1.21 phases | 6/11 complete |
-| v1.21 plans | 21/? complete |
+| v1.21 plans | 22/? complete |
 | v1.21 requirements | 50 total |
 | 158-01 duration | 11min |
 | 158-02 duration | 2min |
@@ -129,13 +131,14 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 163-02 duration | 3min |
 | 163-04 duration | 2min |
 | 163-03 duration | 5min |
+| 164-01 duration | 2min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Completed 163-03 (Rust Claude session manager, tmux spawn, status monitor)
-Stopped at: Completed 163-03-PLAN.md. Phase 163 ALL PLANS COMPLETE.
-Next action: Phase 163 COMPLETE. All three tracks (A: Graphics, B: Terminal, C: File Watcher) done. Next: converge at 164-166 (Desktop + Dashboard).
-Context: Phases 158, 159, 160, 161, 162, 163 all COMPLETE. 190 desktop tests passing, 29 Rust tests passing. Claude module fully wired: Rust session manager (spawn/stop/detect/monitor), TypeScript bridge (IPC commands, SessionMonitor pub/sub), tmux integration complete. Four IPC commands (claude_start/stop/list/status) with capability ACL.
+Last: 2026-02-14 -- Completed 164-01 (window state types, CRUD, z-order depth cycling)
+Stopped at: Completed 164-01-PLAN.md
+Next action: Execute 164-02 (window chrome DOM, title bar, gadgets, drag/resize).
+Context: Phases 158-163 all COMPLETE. Phase 164 in progress (plan 01 done). 217 desktop tests passing (190 existing + 27 new wm tests), 29 Rust tests passing. New wm module: types, window-state CRUD, z-order with Amiga depth cycling. All functions pure/immutable.
 
 ---
-*Last updated: 2026-02-14 (163-03 complete, Phase 163 COMPLETE)*
+*Last updated: 2026-02-14 (164-01 complete)*

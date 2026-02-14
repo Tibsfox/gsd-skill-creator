@@ -1,4 +1,5 @@
 import type { WindowBounds } from "./types";
+import { MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT } from "./types";
 
 /** Callback invoked during drag/resize with updated bounds */
 export type BoundsUpdateCallback = (bounds: WindowBounds) => void;
@@ -20,12 +21,59 @@ export type Cleanup = () => void;
  * @returns Cleanup function to remove listeners
  */
 export function enableDrag(
-  _dragHandle: HTMLElement,
-  _getFrame: () => HTMLElement,
-  _getBounds: () => WindowBounds,
-  _onUpdate: BoundsUpdateCallback,
+  dragHandle: HTMLElement,
+  getFrame: () => HTMLElement,
+  getBounds: () => WindowBounds,
+  onUpdate: BoundsUpdateCallback,
 ): Cleanup {
-  throw new Error("Not implemented");
+  let isDragging = false;
+  let startX = 0;
+  let startY = 0;
+  let startBounds: WindowBounds = { x: 0, y: 0, width: 0, height: 0 };
+
+  const onPointerDown = (e: PointerEvent): void => {
+    isDragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    startBounds = { ...getBounds() };
+    dragHandle.setPointerCapture(e.pointerId);
+  };
+
+  const onPointerMove = (e: PointerEvent): void => {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    const newBounds: WindowBounds = {
+      ...startBounds,
+      x: startBounds.x + dx,
+      y: startBounds.y + dy,
+    };
+    const frame = getFrame();
+    frame.style.left = `${newBounds.x}px`;
+    frame.style.top = `${newBounds.y}px`;
+    onUpdate(newBounds);
+  };
+
+  const onPointerUp = (e: PointerEvent): void => {
+    if (!isDragging) return;
+    isDragging = false;
+    try {
+      dragHandle.releasePointerCapture(e.pointerId);
+    } catch {
+      // pointerId might not match if capture was lost
+    }
+  };
+
+  dragHandle.addEventListener("pointerdown", onPointerDown);
+  window.addEventListener("pointermove", onPointerMove);
+  window.addEventListener("pointerup", onPointerUp);
+
+  return () => {
+    isDragging = false;
+    dragHandle.removeEventListener("pointerdown", onPointerDown);
+    window.removeEventListener("pointermove", onPointerMove);
+    window.removeEventListener("pointerup", onPointerUp);
+  };
 }
 
 /**
@@ -40,10 +88,58 @@ export function enableDrag(
  * @returns Cleanup function to remove listeners
  */
 export function enableResize(
-  _resizeHandle: HTMLElement,
-  _getFrame: () => HTMLElement,
-  _getBounds: () => WindowBounds,
-  _onUpdate: BoundsUpdateCallback,
+  resizeHandle: HTMLElement,
+  getFrame: () => HTMLElement,
+  getBounds: () => WindowBounds,
+  onUpdate: BoundsUpdateCallback,
 ): Cleanup {
-  throw new Error("Not implemented");
+  let isResizing = false;
+  let startX = 0;
+  let startY = 0;
+  let startBounds: WindowBounds = { x: 0, y: 0, width: 0, height: 0 };
+
+  const onPointerDown = (e: PointerEvent): void => {
+    isResizing = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    startBounds = { ...getBounds() };
+    resizeHandle.setPointerCapture(e.pointerId);
+  };
+
+  const onPointerMove = (e: PointerEvent): void => {
+    if (!isResizing) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    const newBounds: WindowBounds = {
+      x: startBounds.x,
+      y: startBounds.y,
+      width: Math.max(startBounds.width + dx, MIN_WINDOW_WIDTH),
+      height: Math.max(startBounds.height + dy, MIN_WINDOW_HEIGHT),
+    };
+    const frame = getFrame();
+    frame.style.width = `${newBounds.width}px`;
+    frame.style.height = `${newBounds.height}px`;
+    onUpdate(newBounds);
+  };
+
+  const onPointerUp = (e: PointerEvent): void => {
+    if (!isResizing) return;
+    isResizing = false;
+    try {
+      resizeHandle.releasePointerCapture(e.pointerId);
+    } catch {
+      // pointerId might not match if capture was lost
+    }
+  };
+
+  resizeHandle.addEventListener("pointerdown", onPointerDown);
+  window.addEventListener("pointermove", onPointerMove);
+  window.addEventListener("pointerup", onPointerUp);
+
+  return () => {
+    isResizing = false;
+    resizeHandle.removeEventListener("pointerdown", onPointerDown);
+    window.removeEventListener("pointermove", onPointerMove);
+    window.removeEventListener("pointerup", onPointerUp);
+  };
 }
