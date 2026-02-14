@@ -25,6 +25,11 @@ import {
 } from './incremental.js';
 import { generateRefreshScript } from './refresh.js';
 import { collectAndRenderMetrics } from './metrics/integration.js';
+import { renderGantryPanel, renderGantryStyles } from './gantry-panel.js';
+import { buildGantryData } from './gantry-data.js';
+import { renderTopologyStyles } from './topology-renderer.js';
+import { buildTopologyHtml } from './topology-integration.js';
+import type { TopologySource } from './topology-data.js';
 import type { DashboardData } from './types.js';
 import { mkdir, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -76,7 +81,7 @@ const NAV_PAGES: NavPage[] = [
 /**
  * Render the main dashboard index page content.
  */
-function renderIndexContent(data: DashboardData, metricsHtml?: string): string {
+function renderIndexContent(data: DashboardData, metricsHtml?: string, topologySource?: TopologySource): string {
   const sections: string[] = [];
 
   // Page title
@@ -99,6 +104,11 @@ function renderIndexContent(data: DashboardData, metricsHtml?: string): string {
   // Live metrics sections
   if (metricsHtml) {
     sections.push(metricsHtml);
+  }
+
+  // Route map topology (if source data available)
+  if (topologySource) {
+    sections.push(buildTopologyHtml(topologySource));
   }
 
   // Phase list from roadmap
@@ -374,7 +384,12 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
 
   // Shared rendering context
   const projectName = data.project?.name ?? 'GSD Dashboard';
-  const styles = renderStyles();
+  const baseStyles = renderStyles();
+  const gantryData = buildGantryData(data);
+  const gantryHtml = renderGantryPanel(gantryData);
+  const gantryStyles = renderGantryStyles();
+  const topologyStyles = renderTopologyStyles();
+  const styles = baseStyles + gantryStyles + topologyStyles;
 
   // Page definitions: name, filename, content renderer, meta, jsonLd
   const pageDefinitions: {
@@ -460,6 +475,11 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
         meta: pageDef.meta,
         jsonLd: pageDef.jsonLd,
       });
+
+      // Inject gantry strip between header and page-wrapper on all pages
+      if (gantryHtml) {
+        html = html.replace('</header>', `</header>\n    ${gantryHtml}`);
+      }
 
       // Inject refresh script before closing </body> when live mode is on
       if (refreshSnippet) {

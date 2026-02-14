@@ -28,6 +28,9 @@ export {
 // Styles
 export { renderStyles } from './styles.js';
 
+// Design System
+export { renderDesignSystem } from './design-system.js';
+
 // Generator
 export { generate } from './generator.js';
 
