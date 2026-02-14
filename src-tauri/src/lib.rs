@@ -2,6 +2,7 @@ mod commands;
 mod error;
 mod pty;
 mod state;
+mod tmux;
 mod watcher;
 
 use std::sync::Mutex;
