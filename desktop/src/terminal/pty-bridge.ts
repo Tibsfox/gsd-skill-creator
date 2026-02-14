@@ -22,6 +22,7 @@ export async function ptyOpen(
   await invoke("pty_open", {
     id: params.id,
     shell: params.shell ?? null,
+    args: params.args ?? null,
     cols: params.cols,
     rows: params.rows,
     onData: channel,
