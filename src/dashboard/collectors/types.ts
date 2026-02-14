@@ -160,6 +160,18 @@ export interface StagingCollectorResult {
 }
 
 // ============================================================================
+// Console Collector Types
+// ============================================================================
+
+/** Console-specific collector options. */
+export interface ConsoleCollectorOptions {
+  /** Project root directory (default: process.cwd()). */
+  basePath?: string;
+  /** URL for the helper endpoint (default: '/api/console/message'). */
+  helperUrl?: string;
+}
+
+// ============================================================================
 // Topology Collector Types
 // ============================================================================
 
