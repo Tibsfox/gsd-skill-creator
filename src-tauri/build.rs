@@ -20,6 +20,10 @@ fn main() {
         "tmux_has_tmux",
         "tmux_list_sessions",
         "tmux_ensure_session",
+        "claude_start",
+        "claude_stop",
+        "claude_list",
+        "claude_status",
     ]);
 
     tauri_build::try_build(

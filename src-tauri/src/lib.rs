@@ -9,6 +9,7 @@ mod watcher;
 use std::sync::Mutex;
 use tauri::Manager;
 
+use claude::session::ClaudeSessionManager;
 use pty::manager::PtyManager;
 use state::AppState;
 
@@ -18,6 +19,7 @@ pub fn run() {
             app.manage(Mutex::new(AppState::default()));
             app.manage(Mutex::new(state::WatcherState::default()));
             app.manage(Mutex::new(PtyManager::default()));
+            app.manage(Mutex::new(ClaudeSessionManager::default()));
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -38,6 +40,10 @@ pub fn run() {
             commands::tmux::tmux_has_tmux,
             commands::tmux::tmux_list_sessions,
             commands::tmux::tmux_ensure_session,
+            commands::claude::claude_start,
+            commands::claude::claude_stop,
+            commands::claude::claude_list,
+            commands::claude::claude_status,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
