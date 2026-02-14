@@ -23,6 +23,8 @@ function makeData(overrides: Partial<BudgetGaugeData> = {}): BudgetGaugeData {
     segments: overrides.segments ?? [],
     totalUsed: overrides.totalUsed ?? 0,
     label: overrides.label,
+    deferredSkills: overrides.deferredSkills,
+    overBudget: overrides.overBudget,
   };
 }
 
@@ -343,6 +345,197 @@ describe('renderBudgetGauge', () => {
       expect(html).toContain('aria-valuemax="100"');
     });
   });
+
+  // -------------------------------------------------------------------------
+  // Loading projection as gauge source (BD-01)
+  // -------------------------------------------------------------------------
+
+  describe('loading projection as gauge source (BD-01)', () => {
+    it('renders aria-valuenow matching totalUsed (loading projection)', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [makeSegment({ percentage: 65 })],
+          totalUsed: 65,
+        }),
+      );
+      expect(html).toContain('aria-valuenow="65"');
+    });
+
+    it('renders headroom at 35% when totalUsed is 65', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [makeSegment({ percentage: 65 })],
+          totalUsed: 65,
+        }),
+      );
+      expect(html).toContain('bg-headroom');
+      expect(html).toContain('width:35%');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // Deferred skills tooltip (BD-02)
+  // -------------------------------------------------------------------------
+
+  describe('deferred skills tooltip (BD-02)', () => {
+    it('renders tooltip with deferred skill names', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [makeSegment({ percentage: 50 })],
+          totalUsed: 50,
+          deferredSkills: ['git-commit', 'beautiful-commits'],
+        }),
+      );
+      expect(html).toContain('bg-deferred-tooltip');
+      expect(html).toContain('git-commit');
+      expect(html).toContain('beautiful-commits');
+    });
+
+    it('does not render tooltip when deferredSkills is empty', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [makeSegment({ percentage: 50 })],
+          totalUsed: 50,
+          deferredSkills: [],
+        }),
+      );
+      expect(html).not.toContain('bg-deferred-tooltip');
+    });
+
+    it('does not render tooltip when deferredSkills is undefined', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [makeSegment({ percentage: 50 })],
+          totalUsed: 50,
+        }),
+      );
+      expect(html).not.toContain('bg-deferred-tooltip');
+    });
+
+    it('renders tooltip inside .bg-bar', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [makeSegment({ percentage: 50 })],
+          totalUsed: 50,
+          deferredSkills: ['git-commit'],
+        }),
+      );
+      const barMatch = html.match(/<div class="bg-bar">([\s\S]*?)<\/div>\s*<\/div>/);
+      expect(barMatch).not.toBeNull();
+      expect(barMatch![1]).toContain('bg-deferred-tooltip');
+    });
+
+    it('renders tooltip with <ul> containing <li> per skill', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [makeSegment({ percentage: 50 })],
+          totalUsed: 50,
+          deferredSkills: ['git-commit', 'beautiful-commits'],
+        }),
+      );
+      expect(html).toContain('<ul>');
+      const liMatches = html.match(/<li>/g);
+      expect(liMatches).toHaveLength(2);
+    });
+
+    it('renders each skill name as exact <li> text', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [makeSegment({ percentage: 50 })],
+          totalUsed: 50,
+          deferredSkills: ['git-commit', 'beautiful-commits'],
+        }),
+      );
+      expect(html).toContain('<li>git-commit</li>');
+      expect(html).toContain('<li>beautiful-commits</li>');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // Over-budget rendering (BD-03)
+  // -------------------------------------------------------------------------
+
+  describe('over-budget rendering (BD-03)', () => {
+    it('adds bg-over-budget class when overBudget is true', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [makeSegment({ percentage: 100 })],
+          totalUsed: 100,
+          overBudget: true,
+        }),
+      );
+      expect(html).toContain('bg-over-budget');
+    });
+
+    it('clamps totalUsed to 100 when overBudget is true', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [makeSegment({ percentage: 120 })],
+          totalUsed: 120,
+          overBudget: true,
+        }),
+      );
+      expect(html).toContain('aria-valuenow="100"');
+      expect(html).not.toContain('bg-headroom');
+    });
+
+    it('ensures no segment width exceeds 100% when overBudget and totalUsed=120', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [
+            makeSegment({ domain: 'A', percentage: 60 }),
+            makeSegment({ domain: 'B', percentage: 60 }),
+          ],
+          totalUsed: 120,
+          overBudget: true,
+        }),
+      );
+      // Each segment should be scaled to 50% (60/120*100=50)
+      const widthMatches = html.match(/width:(\d+(?:\.\d+)?)%/g) ?? [];
+      for (const w of widthMatches) {
+        const val = parseFloat(w.replace('width:', '').replace('%', ''));
+        expect(val).toBeLessThanOrEqual(100);
+      }
+    });
+
+    it('does not add bg-over-budget class when overBudget is false', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [makeSegment({ percentage: 50 })],
+          totalUsed: 50,
+          overBudget: false,
+        }),
+      );
+      expect(html).not.toContain('bg-over-budget');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // Threshold transitions with loading projection (BD-04)
+  // -------------------------------------------------------------------------
+
+  describe('threshold transitions with loading projection (BD-04)', () => {
+    it('applies threshold classes based on totalUsed (loading projection %)', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [makeSegment({ percentage: 85 })],
+          totalUsed: 85,
+        }),
+      );
+      expect(html).toContain('bg-warning');
+    });
+
+    it('applies bg-critical when overBudget is true', () => {
+      const html = renderBudgetGauge(
+        makeData({
+          segments: [makeSegment({ percentage: 110 })],
+          totalUsed: 110,
+          overBudget: true,
+        }),
+      );
+      expect(html).toContain('bg-critical');
+    });
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -404,5 +597,26 @@ describe('renderBudgetGaugeStyles', () => {
   it('contains .bg-label styling', () => {
     const css = renderBudgetGaugeStyles();
     expect(css).toContain('.bg-label');
+  });
+
+  it('contains .bg-deferred-tooltip styling', () => {
+    const css = renderBudgetGaugeStyles();
+    expect(css).toContain('.bg-deferred-tooltip');
+  });
+
+  it('contains .bg-over-budget styling', () => {
+    const css = renderBudgetGaugeStyles();
+    expect(css).toContain('.bg-over-budget');
+  });
+
+  it('hides tooltip by default and shows on hover', () => {
+    const css = renderBudgetGaugeStyles();
+    expect(css).toContain('.bg-deferred-tooltip');
+    expect(css).toMatch(/\.bg-bar:hover\s+\.bg-deferred-tooltip|\.bg-bar:hover\s*\.bg-deferred-tooltip/);
+  });
+
+  it('ensures .bg-bar has position relative for tooltip positioning', () => {
+    const css = renderBudgetGaugeStyles();
+    expect(css).toMatch(/\.bg-bar\s*\{[^}]*position:\s*relative/);
   });
 });
