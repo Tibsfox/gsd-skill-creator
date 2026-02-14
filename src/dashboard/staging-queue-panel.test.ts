@@ -465,4 +465,13 @@ describe('renderStagingQueueStyles', () => {
     expect(css).toContain('var(--surface');
     expect(css).toContain('var(--border');
   });
+
+  it('uses only design system tokens for colors (no bare hex)', () => {
+    const css = renderStagingQueueStyles();
+    // Strip var() fallback values -- var(--name, #hex) is acceptable
+    const stripped = css.replace(/var\([^)]+\)/g, 'VAR_REPLACED');
+    // After stripping var() patterns, no bare #hex should remain in color/background/border rules
+    const hexInRules = stripped.match(/(?:color|background|border-\w+-color):\s*#[0-9a-fA-F]{3,8}/g);
+    expect(hexInRules).toBeNull();
+  });
 });
