@@ -15,11 +15,7 @@ import { generateProjectJsonLd, generateMilestonesJsonLd, generateRoadmapJsonLd,
 import { computeHash, loadManifest, saveManifest, needsRegeneration, } from './incremental.js';
 import { generateRefreshScript } from './refresh.js';
 import { collectAndRenderMetrics } from './metrics/integration.js';
-import { buildTerminalHtml } from './terminal-integration.js';
-import { renderConsolePage, renderConsolePageStyles } from './console-page.js';
-import { classifyLogEntry } from './console-activity.js';
-import { QuestionPoller } from './question-poller.js';
-import { mkdir, writeFile, readFile, access } from 'node:fs/promises';
+import { mkdir, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
 // ---------------------------------------------------------------------------
 // Navigation configuration
@@ -30,7 +26,6 @@ const NAV_PAGES = [
     { name: 'roadmap', path: 'roadmap.html', label: 'Roadmap' },
     { name: 'milestones', path: 'milestones.html', label: 'Milestones' },
     { name: 'state', path: 'state.html', label: 'State' },
-    { name: 'console', path: 'console.html', label: 'Console' },
 ];
 // ---------------------------------------------------------------------------
 // Content renderers
@@ -38,7 +33,7 @@ const NAV_PAGES = [
 /**
  * Render the main dashboard index page content.
  */
-function renderIndexContent(data, metricsHtml, terminalHtml, pulseHtml) {
+function renderIndexContent(data, metricsHtml) {
     const sections = [];
     // Page title
     const projectName = data.project?.name ?? 'Project Dashboard';
@@ -49,27 +44,13 @@ function renderIndexContent(data, metricsHtml, terminalHtml, pulseHtml) {
     }
     // Stats grid
     sections.push(renderStatsGrid(data));
-    // Current milestone status + session pulse (side by side)
+    // Current milestone status
     if (data.state) {
-        if (pulseHtml) {
-            sections.push(renderStatusWithPulse(data, pulseHtml));
-        } else {
-            sections.push(renderCurrentStatus(data));
-        }
-    } else if (pulseHtml) {
-        sections.push(`<h2 class="section-title">Session Pulse</h2>\n${pulseHtml}`);
+        sections.push(renderCurrentStatus(data));
     }
-    // Live metrics sections (with terminal in first position)
+    // Live metrics sections
     if (metricsHtml) {
-        if (terminalHtml) {
-            const terminalWrapped = `<div id="gsd-section-terminal" data-tier="hot">${terminalHtml}</div>`;
-            sections.push(metricsHtml.replace('<div class="metrics-dashboard">\n', '<div class="metrics-dashboard">\n' + terminalWrapped + '\n'));
-        } else {
-            sections.push(metricsHtml);
-        }
-    } else if (terminalHtml) {
-        sections.push('<h2 class="section-title">Terminal</h2>');
-        sections.push(terminalHtml);
+        sections.push(metricsHtml);
     }
     // Phase list from roadmap
     if (data.roadmap && data.roadmap.phases.length > 0) {
@@ -149,25 +130,6 @@ function renderCurrentStatus(data) {
 <div class="card">
   <div class="card-body">
     ${lines.join('\n    ')}
-  </div>
-</div>`;
-}
-/**
- * Render current status + session pulse in a side-by-side layout.
- */
-function renderStatusWithPulse(data, pulseHtml) {
-    const statusHtml = renderCurrentStatus(data);
-    return `<div class="status-pulse-row">
-  <div class="status-column">
-    ${statusHtml}
-  </div>
-  <div class="pulse-column">
-    <h2 class="section-title">Session Pulse</h2>
-    <div class="card">
-      <div class="card-body">
-        ${pulseHtml}
-      </div>
-    </div>
   </div>
 </div>`;
 }
@@ -298,7 +260,6 @@ export async function generate(options) {
     }
     // Collect and render metrics (graceful — never fails the pipeline)
     let metricsHtml = '';
-    let pulseHtml = '';
     try {
         const metricsResult = await collectAndRenderMetrics({
             planningDir: options.planningDir,
@@ -307,64 +268,9 @@ export async function generate(options) {
             dashboardData: data,
         });
         metricsHtml = metricsResult.html;
-        pulseHtml = metricsResult.pulseHtml ?? '';
     }
     catch {
         // Metrics collection failure never blocks dashboard generation
-    }
-    // Collect terminal panel HTML (graceful — never fails the pipeline)
-    let terminalHtml = '';
-    let terminalStyles = '';
-    try {
-        const terminalResult = await buildTerminalHtml();
-        terminalHtml = terminalResult.html;
-        terminalStyles = terminalResult.styles;
-    }
-    catch {
-        // Terminal panel failure never blocks dashboard generation
-    }
-    // Collect console status and pending questions (graceful — never fails the pipeline)
-    let consoleStatus = null;
-    let pendingQuestions = [];
-    try {
-        const statusPath = join(options.planningDir, 'console/outbox/status/current.json');
-        const statusRaw = await readFile(statusPath, 'utf-8');
-        consoleStatus = JSON.parse(statusRaw);
-    }
-    catch {
-        // No status file — console will show offline state
-    }
-    try {
-        const basePath = options.planningDir.replace(/\/.planning\/?$/, '') || process.cwd();
-        const poller = new QuestionPoller(basePath);
-        pendingQuestions = await poller.poll();
-    }
-    catch {
-        // Question polling failure never blocks generation
-    }
-    // Read milestone config for settings panel (graceful — never fails the pipeline)
-    let milestoneConfig = null;
-    try {
-        const configPath = join(options.planningDir, 'console/config/milestone-config.json');
-        const configRaw = await readFile(configPath, 'utf-8');
-        milestoneConfig = JSON.parse(configRaw);
-    }
-    catch {
-        // No config file — settings panel will show empty state
-    }
-    // Read bridge.jsonl for activity timeline (graceful — never fails the pipeline)
-    let activityEntries = [];
-    try {
-        const logPath = join(options.planningDir, 'console/logs/bridge.jsonl');
-        const logRaw = await readFile(logPath, 'utf-8');
-        const lines = logRaw.trim().split('\n').filter(Boolean);
-        activityEntries = lines.map(line => {
-            const entry = JSON.parse(line);
-            return classifyLogEntry(entry);
-        });
-    }
-    catch {
-        // No log file or parse error — empty activity
     }
     // Ensure output directory exists
     try {
@@ -379,20 +285,19 @@ export async function generate(options) {
     const manifest = options.force
         ? { pages: {} }
         : await loadManifest(options.outputDir);
-    // Refresh is handled by the live server's SSE-based reload (serve-dashboard.mjs).
-    // The old generateRefreshScript did blind full-page reloads on a timer which
-    // destroys stateful elements like the terminal iframe. Disabled in favor of
-    // event-driven updates.
-    const refreshSnippet = '';
+    // Prepare refresh script (injected only when --live is set)
+    const refreshSnippet = options.live
+        ? generateRefreshScript(options.refreshInterval ?? 5000)
+        : '';
     // Shared rendering context
     const projectName = data.project?.name ?? 'GSD Dashboard';
-    const styles = renderStyles() + terminalStyles + renderConsolePageStyles();
+    const styles = renderStyles();
     // Page definitions: name, filename, content renderer, meta, jsonLd
     const pageDefinitions = [
         {
             name: 'index',
             filename: 'index.html',
-            render: () => renderIndexContent(data, metricsHtml, terminalHtml, pulseHtml),
+            render: () => renderIndexContent(data, metricsHtml),
             meta: {
                 description: data.project?.description ?? 'GSD Planning Docs Dashboard',
                 ogTitle: projectName,
@@ -444,23 +349,6 @@ export async function generate(options) {
                 description: 'Current project state and session continuity',
                 ogTitle: `${projectName} - State`,
                 ogDescription: 'Current project state and session continuity',
-                ogType: 'website',
-            },
-        },
-        {
-            name: 'console',
-            filename: 'console.html',
-            render: () => renderConsolePage({
-                status: consoleStatus,
-                questions: pendingQuestions,
-                helperUrl: '/api/console/message',
-                config: milestoneConfig,
-                activityEntries,
-            }),
-            meta: {
-                description: 'Console panel with live status, settings, and activity log',
-                ogTitle: `${projectName} - Console`,
-                ogDescription: 'Console panel with live status, settings, and activity log',
                 ogType: 'website',
             },
         },
