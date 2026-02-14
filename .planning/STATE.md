@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.20 — Dashboard Assembly
-Phase: 153 — Topology Pipeline (in progress)
+Phase: 154 — Activity Feed Pipeline (in progress)
 Plan: 02 complete
-Status: Executing phase 153
-Last activity: 2026-02-14 — Completed 153-02 (topology generator wiring)
+Status: Executing phase 154
+Last activity: 2026-02-14 — Completed 154-02 (activity feed generator wiring)
 
 ## Project Reference
 
@@ -292,6 +292,9 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 milestone start)
 - Project root derived from planningDir via join(planningDir, '..') for topology collector .claude/ directory paths
 - Entity legend rendered conditionally alongside topology panel (only when topologySource is defined)
 - Test assertions use element selectors not CSS class names to avoid style false positives in generator tests
+- feedEntries parameter added as last optional arg to renderIndexContent (preserves backward compat)
+- Nullish coalescing fallback (feedEntries ?? []) in renderIndexContent for safety
+- Activity collection placed after topology collection block, before output directory creation in generator pipeline
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle, topology-renderer, topology-data, topology-integration, budget-silicon-collector)
@@ -326,15 +329,15 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 milestone start)
 |--------|-------|
 | Total milestones | 23 shipped (v1.0-v1.19 + v1.8.1 patch) |
 | Total phases | 152 complete |
-| Total plans | 441 complete |
+| Total plans | 442 complete |
 | Total LOC | ~192k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-14 — Completed 153-02 (topology generator wiring)
-Stopped at: Completed 153-02-PLAN.md
-Next action: Continue phase 153 remaining plans or parallel phases 154-156
-Context: Phase 153 plan 02 complete (topology collector wired into generator with entity legend). Phases 153-156 can run in parallel.
+Last: 2026-02-14 — Completed 154-02 (activity feed generator wiring)
+Stopped at: Completed 154-02-PLAN.md
+Next action: Continue remaining v1.20 parallel phases (153-156)
+Context: Phase 154 plan 02 complete (activity feed collector wired into generator pipeline). Phases 153-156 can run in parallel.
 
 ---
-*Last updated: 2026-02-14 (completed 153-02)*
+*Last updated: 2026-02-14 (completed 154-02)*
