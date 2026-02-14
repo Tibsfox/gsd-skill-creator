@@ -537,6 +537,18 @@ describe('Full config roundtrip with terminal', () => {
 // ============================================================================
 
 describe('Existing config behavior unchanged', () => {
+  it('cumulative_char_budget is undefined by default (opt-in)', () => {
+    const config = IntegrationConfigSchema.parse({});
+
+    expect(config.token_budget.cumulative_char_budget).toBeUndefined();
+  });
+
+  it('profile_budgets is undefined by default (opt-in)', () => {
+    const config = IntegrationConfigSchema.parse({});
+
+    expect(config.token_budget.profile_budgets).toBeUndefined();
+  });
+
   it('adding terminal section does not alter existing section defaults', () => {
     const config = IntegrationConfigSchema.parse({
       integration: { auto_load_skills: false },
@@ -567,5 +579,57 @@ describe('Existing config behavior unchanged', () => {
       theme: 'dark',
       session_name: 'dev',
     });
+  });
+});
+
+// ============================================================================
+// Cumulative budget config (BF-01, BF-02)
+// ============================================================================
+
+describe('cumulative budget config (BF-01, BF-02)', () => {
+  it('parsing {} produces default token_budget.cumulative_char_budget of undefined', () => {
+    const config = IntegrationConfigSchema.parse({});
+
+    expect(config.token_budget.cumulative_char_budget).toBeUndefined();
+  });
+
+  it('parsing { token_budget: { cumulative_char_budget: 20000 } } produces that value', () => {
+    const config = IntegrationConfigSchema.parse({
+      token_budget: { cumulative_char_budget: 20000 },
+    });
+
+    expect(config.token_budget.cumulative_char_budget).toBe(20000);
+  });
+
+  it('cumulative_char_budget: 0 fails validation (min 1000)', () => {
+    expect(() =>
+      IntegrationConfigSchema.parse({ token_budget: { cumulative_char_budget: 0 } }),
+    ).toThrow(z.ZodError);
+  });
+
+  it('cumulative_char_budget: -1 fails validation', () => {
+    expect(() =>
+      IntegrationConfigSchema.parse({ token_budget: { cumulative_char_budget: -1 } }),
+    ).toThrow(z.ZodError);
+  });
+
+  it('parsing { token_budget: { profile_budgets: { executor: 25000, planner: 15000 } } } produces those values', () => {
+    const config = IntegrationConfigSchema.parse({
+      token_budget: { profile_budgets: { executor: 25000, planner: 15000 } },
+    });
+
+    expect(config.token_budget.profile_budgets).toEqual({ executor: 25000, planner: 15000 });
+  });
+
+  it('parsing {} produces default token_budget.profile_budgets of undefined', () => {
+    const config = IntegrationConfigSchema.parse({});
+
+    expect(config.token_budget.profile_budgets).toBeUndefined();
+  });
+
+  it('profile_budgets values must be >= 1000', () => {
+    expect(() =>
+      IntegrationConfigSchema.parse({ token_budget: { profile_budgets: { executor: 500 } } }),
+    ).toThrow(z.ZodError);
   });
 });

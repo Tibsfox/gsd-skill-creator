@@ -1085,6 +1085,21 @@ describe('formatBudgetDisplay with projection', () => {
     expect(display).not.toContain('Loadable:');
   });
 
+  it('formatBudgetDisplay handles result without installedTotal/loadableTotal via nullish coalescing', () => {
+    // Simulate an old-format result that somehow lacks the new fields
+    const result = {
+      totalChars: 5000,
+      budget: 15500,
+      usagePercent: 32,
+      severity: 'ok' as const,
+      skills: [],
+      hiddenCount: 0,
+    } as CumulativeBudgetResult;
+
+    const display = formatBudgetDisplay(result);
+    expect(display).toContain('Budget:');
+  });
+
   it('progress bar uses loadableTotal against budget (not installedTotal)', () => {
     const result: CumulativeBudgetResult = {
       totalChars: 12000,
@@ -1115,5 +1130,79 @@ describe('formatBudgetDisplay with projection', () => {
     // With 20-char bar at 45%: 9 filled, 11 empty
     const loadablePercent = Math.round((7000 / 15500) * 100);
     expect(display).toContain(`${loadablePercent}%`);
+  });
+});
+
+// ============================================================================
+// BudgetValidator.loadFromConfig() (BF-01, BT-01)
+// ============================================================================
+
+describe('BudgetValidator.loadFromConfig() (BF-01, BT-01)', () => {
+  const originalEnv = process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET;
+
+  afterEach(() => {
+    if (originalEnv === undefined) {
+      delete process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET;
+    } else {
+      process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET = originalEnv;
+    }
+  });
+
+  it('loadFromConfig() with no args uses env var fallback (same as load())', () => {
+    delete process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET;
+    const validator = BudgetValidator.loadFromConfig();
+    expect(validator.getBudget()).toBe(15000);
+    expect(validator.getCumulativeBudget()).toBe(15500);
+  });
+
+  it('loadFromConfig({ cumulative_char_budget: 20000 }) sets cumulative budget to 20000', () => {
+    delete process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET;
+    const validator = BudgetValidator.loadFromConfig({ cumulative_char_budget: 20000 });
+    expect(validator.getCumulativeBudget()).toBe(20000);
+  });
+
+  it('getCumulativeBudget() returns 20000 when config set', () => {
+    delete process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET;
+    const validator = BudgetValidator.loadFromConfig({ cumulative_char_budget: 20000 });
+    expect(validator.getCumulativeBudget()).toBe(20000);
+  });
+
+  it('config wins over env var when both set', () => {
+    process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET = '12000';
+    const validator = BudgetValidator.loadFromConfig({ cumulative_char_budget: 20000 });
+    expect(validator.getCumulativeBudget()).toBe(20000);
+  });
+
+  it('env var used as fallback when no config cumulative_char_budget', () => {
+    process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET = '18000';
+    const validator = BudgetValidator.loadFromConfig();
+    expect(validator.getCumulativeBudget()).toBe(18000);
+  });
+
+  it('default 15500 when neither config nor env var set', () => {
+    delete process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET;
+    const validator = BudgetValidator.loadFromConfig();
+    expect(validator.getCumulativeBudget()).toBe(15500);
+  });
+
+  it('profile_budgets: { executor: 25000 } -> getCumulativeBudgetForProfile("gsd-executor") returns 25000', () => {
+    delete process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET;
+    const validator = BudgetValidator.loadFromConfig({ profile_budgets: { executor: 25000 } });
+    expect(validator.getCumulativeBudgetForProfile('gsd-executor')).toBe(25000);
+  });
+
+  it('getCumulativeBudgetForProfile falls back to cumulative_char_budget when profile not in profile_budgets', () => {
+    delete process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET;
+    const validator = BudgetValidator.loadFromConfig({
+      cumulative_char_budget: 20000,
+      profile_budgets: { executor: 25000 },
+    });
+    expect(validator.getCumulativeBudgetForProfile('gsd-planner')).toBe(20000);
+  });
+
+  it('getCumulativeBudgetForProfile falls back to default when nothing configured', () => {
+    delete process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET;
+    const validator = BudgetValidator.loadFromConfig();
+    expect(validator.getCumulativeBudgetForProfile('gsd-planner')).toBe(15500);
   });
 });
