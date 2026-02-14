@@ -114,32 +114,68 @@ export class BudgetValidator {
   /** Budget for single skills */
   private charBudget: number;
 
+  /** Cumulative budget across all skills */
+  private cumulativeBudget: number;
+
+  /** Per-profile cumulative budget overrides */
+  private profileBudgets?: Record<string, number>;
+
   /**
-   * Private constructor - use static load() method.
+   * Private constructor - use static load() or loadFromConfig() method.
    */
-  private constructor(charBudget: number) {
+  private constructor(
+    charBudget: number,
+    cumulativeBudget?: number,
+    profileBudgets?: Record<string, number>
+  ) {
     this.charBudget = charBudget;
+    this.cumulativeBudget = cumulativeBudget ?? BudgetValidator.CUMULATIVE_BUDGET;
+    this.profileBudgets = profileBudgets;
   }
 
   /**
    * Load validator with configuration from environment.
    *
    * Reads SLASH_COMMAND_TOOL_CHAR_BUDGET env var with 15000 default.
+   * Delegates to loadFromConfig() for consistent initialization.
    *
    * @returns Initialized validator instance
    */
   static load(): BudgetValidator {
+    return BudgetValidator.loadFromConfig();
+  }
+
+  /**
+   * Load validator with optional config override.
+   *
+   * Priority for cumulative budget: config > env var > default.
+   * Priority for single-skill budget: env var > default.
+   *
+   * @param tokenBudgetConfig - Optional config with cumulative and profile budgets
+   * @returns Initialized validator instance
+   */
+  static loadFromConfig(tokenBudgetConfig?: {
+    cumulative_char_budget?: number;
+    profile_budgets?: Record<string, number>;
+  }): BudgetValidator {
+    // Single-skill budget: env var fallback
     const envValue = process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET;
     let charBudget = BudgetValidator.DEFAULT_CHAR_BUDGET;
-
     if (envValue !== undefined) {
       const parsed = parseInt(envValue, 10);
-      if (!isNaN(parsed) && parsed > 0) {
-        charBudget = parsed;
-      }
+      if (!isNaN(parsed) && parsed > 0) charBudget = parsed;
     }
 
-    return new BudgetValidator(charBudget);
+    // Cumulative budget: config > env var > default
+    let cumulativeBudget = BudgetValidator.CUMULATIVE_BUDGET;
+    if (tokenBudgetConfig?.cumulative_char_budget !== undefined) {
+      cumulativeBudget = tokenBudgetConfig.cumulative_char_budget;
+    } else if (envValue !== undefined) {
+      const parsed = parseInt(envValue, 10);
+      if (!isNaN(parsed) && parsed > 0) cumulativeBudget = parsed;
+    }
+
+    return new BudgetValidator(charBudget, cumulativeBudget, tokenBudgetConfig?.profile_budgets);
   }
 
   /**
@@ -159,7 +195,24 @@ export class BudgetValidator {
    * @returns Cumulative budget in characters
    */
   getCumulativeBudget(): number {
-    return BudgetValidator.CUMULATIVE_BUDGET;
+    return this.cumulativeBudget;
+  }
+
+  /**
+   * Get the cumulative budget for a specific agent profile.
+   *
+   * Strips 'gsd-' prefix for lookup (config uses short names like "executor").
+   * Falls back to cumulative budget when profile not found.
+   *
+   * @param profileName - Agent profile name (e.g. "gsd-executor")
+   * @returns Cumulative budget in characters for the profile
+   */
+  getCumulativeBudgetForProfile(profileName: string): number {
+    const shortName = profileName.replace(/^gsd-/, '');
+    if (this.profileBudgets?.[shortName] !== undefined) {
+      return this.profileBudgets[shortName];
+    }
+    return this.cumulativeBudget;
   }
 
   /**
