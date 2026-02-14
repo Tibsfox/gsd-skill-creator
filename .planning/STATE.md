@@ -4,8 +4,8 @@
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
 Phase: 167 -- Calibration + Personalization -- IN PROGRESS
-Plan: 167-01 COMPLETE, 167-02 COMPLETE, 167-03 COMPLETE.
-Status: Phase 167 in progress. Plans 01, 02, and 03 complete.
+Plan: 167-01 COMPLETE, 167-02 COMPLETE, 167-03 COMPLETE, 167-04 COMPLETE.
+Status: Phase 167 COMPLETE. All 4 plans complete.
 Last activity: 2026-02-14 -- Completed 167-03 (color picker screen, CRT settings screen)
 
 Progress: [#########.] 9/11 phases
@@ -106,7 +106,9 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - Colors schema uses .catch() for graceful fallback on invalid array length
 - Manual YAML serializer for user-style (no js-yaml dependency)
 - localStorage for webview persistence (future Tauri IPC for filesystem)
-- Calibration module at desktop/src/calibration/ (user-style, css-bridge, wizard-state, screen-color-picker, screen-crt-settings)
+- Calibration module at desktop/src/calibration/ (user-style, css-bridge, wizard-state, screen-color-picker, screen-crt-settings, screen-theme-mode, wizard, index)
+- CalibrationWizard composes 3 screens via state machine; first-boot gate in main.ts blocks desktop until calibration
+- Wizard clears container innerHTML between screens (simpler than DOM diffing)
 - Boot module at desktop/src/boot/ (types, chipset, desktop-background)
 - Chipset delay subtraction model: subtract each chipset's delay from elapsed time, allowing multi-chipset advancement in a single frame
 - Boot progress distribution: init 0-10%, chipset 10-75%, ready 75-100%
@@ -171,6 +173,7 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 167-01 duration | 3min |
 | 167-03 duration | 3min |
 | 168-02 duration | 1min |
+| 167-04 duration | 4min |
 | 168-01 duration | 3min |
 
 ## Session Continuity
