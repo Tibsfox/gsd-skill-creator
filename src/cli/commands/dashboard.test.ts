@@ -40,6 +40,7 @@ vi.mock('picocolors', () => ({
 vi.mock('../../dashboard/generator.js', () => ({
   generate: vi.fn().mockResolvedValue({
     pages: ['index.html'],
+    skipped: [],
     errors: [],
     duration: 42,
   }),
