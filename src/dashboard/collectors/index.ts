@@ -14,6 +14,7 @@ export { collectPlanningMetrics } from './planning-collector.js';
 export { collectTopologyData } from './topology-collector.js';
 export { collectStagingQueue } from './staging-collector.js';
 export { collectActivityFeed } from './activity-collector.js';
+export { collectConsoleData } from './console-collector.js';
 
 // Pipeline collectors
 export { PipelineStatusCollector } from './pipeline-status.js';
@@ -34,6 +35,7 @@ export type {
   StagingCollectorOptions,
   ActivityCollectorOptions,
   StagingCollectorResult,
+  ConsoleCollectorOptions,
   CollectorOptions,
 } from './types.js';
 
