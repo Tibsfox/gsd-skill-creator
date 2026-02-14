@@ -33,6 +33,7 @@ export interface Suggestion {
   deferredUntil?: number;      // Re-surface after this timestamp
   dismissReason?: string;      // Optional user explanation
   createdSkillName?: string;   // If accepted, link to created skill
+  skillId?: string;            // Domain-prefixed skill identifier (e.g., I-0.prisma)
 }
 
 // Internal frequency counting structure
