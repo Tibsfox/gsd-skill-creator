@@ -110,6 +110,7 @@ export class SuggestionStore {
     options?: {
       dismissReason?: string;
       createdSkillName?: string;
+      skillId?: string;
     }
   ): Promise<Suggestion | null> {
     const all = await this.load();
@@ -132,6 +133,10 @@ export class SuggestionStore {
 
     if (options?.createdSkillName) {
       suggestion.createdSkillName = options.createdSkillName;
+    }
+
+    if (options?.skillId) {
+      suggestion.skillId = options.skillId;
     }
 
     await this.save(all);
