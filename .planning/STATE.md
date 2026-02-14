@@ -2,18 +2,18 @@
 
 ## Current Position
 
-Milestone: v1.18 — Information Design System (SHIPPED)
-Phase: All 7 phases complete (142-148)
-Plan: All 15 plans complete
-Status: Milestone shipped 2026-02-14
-Last activity: 2026-02-14 — v1.18 milestone archived
+Milestone: v1.19 — Budget Display Overhaul
+Phase: 149-budget-inventory-model (in progress)
+Plan: 149-01 complete, next 149-02
+Status: Executing phase 149
+Last activity: 2026-02-14 — Completed 149-01 (loading projection with tier-based simulation)
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-14 after v1.18 completion)
+See: .planning/PROJECT.md (updated 2026-02-14 after v1.19 milestone start)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns so they work correctly when loaded by Claude Code
-**Current focus:** Planning next milestone
+**Current focus:** v1.19 Budget Display Overhaul — separating installed inventory from loading projection
 
 ## Accumulated Context
 
@@ -49,6 +49,7 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.18 completion)
 - CORS * since localhost-only is a server-level concern, not router concern
 - handleRequest returns boolean for route passthrough composability
 - Subdirectory allowlist via Set (inbox/pending, config, uploads) -- explicit, no regex bypass risk
+- Dynamic import with try/catch for helper router (graceful degradation when dist/ not compiled)
 - Explicit section-level defaults in Zod schema (not empty objects) to ensure nested defaults apply correctly
 - mergeDefaults() function for shallow+nested merge of partial config overrides in form renderer
 - appendFile for JSONL concurrent safety (atomic for small writes, one line per entry)
@@ -146,7 +147,7 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.18 completion)
 - Non-critical finding selection for pipeline integration test (critical patterns locked at session, coherence findings as fallback)
 - checkDerived aggregates all sub-checkers; passed=true only when no critical/warning findings
 - Optional checks (trainingPairs, referenceTexts) skipped when input not provided
-- Barrel uses type-only exports for interfaces, value exports for functions and constants (derived index follows hygiene pattern)
+- Barrel follows hygiene/derived pattern: type-only + value exports
 - Structure-aware confused threshold: documents with headings route to gaps not confused even with few words
 - Allow up to 2 missing key areas for clear routing (focused technical docs may not use all 4 keyword sets)
 - HEADING_RE constant for DRY heading detection in clarity assessor
@@ -263,6 +264,9 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.18 completion)
 - Keyword hit ratio for migration confidence with 0.1 minimum floor
 - resolveIdentifier tries agent first, then skill, then adapter (most specific last)
 - skillId added to Suggestion interface and SuggestionStore transition options for identifier persistence
+- Character-based simulation (not tokens) for projectLoading() synchronous operation without API calls
+- Separate criticalUsed and standardUsed counters mirroring BudgetStage dual-budget logic
+- Skills not listed in any profile tier default to standard (matching getTierForSkill behavior)
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle, topology-renderer, topology-data, topology-integration)
@@ -272,7 +276,7 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.18 completion)
 - Scripts module: scripts/console/ (check-inbox.sh, write-question.sh, write-status.sh, validate-config.sh)
 - gsd-stack session management: bash scripts with tmux integration (v1.13)
 - v1.14 promotion pipeline: src/pipeline/ + src/dashboard/collectors/
-- 20 milestones shipped, 133 phases, 380 plans, ~159k LOC
+- 22 milestones shipped, 148 phases, 430 plans, ~190k LOC
 - Filesystem message bus at .planning/console/ (inbox/outbox/config/uploads/logs)
 - Helper endpoint wired into serve-dashboard.mjs via dynamic import (browser->filesystem bridge)
 - No WebSockets -- dashboard polls outbox at 2-3s intervals
@@ -302,10 +306,10 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.18 completion)
 
 ## Session Continuity
 
-Last: 2026-02-14 — v1.18 Information Design System milestone shipped
-Stopped at: Milestone completion and archival
-Next action: /gsd:new-milestone for next version
-Context: v1.18 shipped with 7 phases, 15 plans, 35 commits, 515 tests. Dashboard now has design system tokens, gantry strip, entity shapes/colors, topology view, activity feed, budget gauge, silicon panel, and domain-prefixed identifiers. Dev branch ready for merge to main.
+Last: 2026-02-14 — Completed 149-01 loading projection
+Stopped at: Completed 149-01-PLAN.md
+Next action: Execute 149-02 (next plan in phase 149)
+Context: 149-01 delivered ProjectedSkill/LoadingProjection types and projectLoading() function. 22 tests passing. Ready for downstream plans.
 
 ---
-*Last updated: 2026-02-14 (v1.18 shipped)*
+*Last updated: 2026-02-14 (149-01 complete)*
