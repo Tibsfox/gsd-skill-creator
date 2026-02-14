@@ -29,6 +29,23 @@ import { renderGantryPanel, renderGantryStyles } from './gantry-panel.js';
 import { buildGantryData } from './gantry-data.js';
 import { renderTopologyStyles } from './topology-renderer.js';
 import { buildTopologyHtml } from './topology-integration.js';
+import { renderMetricsStyles } from './metrics/metrics-styles.js';
+import { buildTerminalHtml } from './terminal-integration.js';
+import { renderActivityTabStyles } from './activity-tab-toggle.js';
+import { renderActivityFeed, renderActivityFeedStyles } from './activity-feed.js';
+import { renderEntityLegendStyles } from './entity-legend.js';
+import { renderEntityShapeStyles } from './entity-shapes.js';
+import { renderSiliconPanelStyles } from './silicon-panel.js';
+import { renderBudgetGaugeStyles } from './budget-gauge.js';
+import { renderStagingQueueStyles } from './staging-queue-panel.js';
+import { renderQuestionCardStyles } from './question-card.js';
+import { renderUploadZoneStyles } from './upload-zone.js';
+import { renderConfigFormStyles } from './config-form.js';
+import { renderSubmitFlowStyles } from './submit-flow.js';
+import { renderConsoleSettingsStyles } from './console-settings.js';
+import { renderConsoleActivityStyles } from './console-activity.js';
+import { renderConsolePageStyles } from './console-page.js';
+import type { FeedEntry } from './activity-feed.js';
 import type { TopologySource } from './topology-data.js';
 import type { DashboardData } from './types.js';
 import { mkdir, writeFile, access } from 'node:fs/promises';
@@ -81,7 +98,12 @@ const NAV_PAGES: NavPage[] = [
 /**
  * Render the main dashboard index page content.
  */
-function renderIndexContent(data: DashboardData, metricsHtml?: string, topologySource?: TopologySource): string {
+function renderIndexContent(
+  data: DashboardData,
+  metricsHtml?: string,
+  topologySource?: TopologySource,
+  terminalHtml?: string,
+): string {
   const sections: string[] = [];
 
   // Page title
@@ -93,30 +115,46 @@ function renderIndexContent(data: DashboardData, metricsHtml?: string, topologyS
     sections.push(`<p style="color: var(--text-muted); margin-bottom: var(--space-xl);">${escapeHtml(data.project.description)}</p>`);
   }
 
-  // Stats grid
+  // Stats grid (full width above the two-column layout)
   sections.push(renderStatsGrid(data));
+
+  // --- Two-column layout: Terminal (left) | Info cards (right) ---
+  const rightPanels: string[] = [];
 
   // Current milestone status
   if (data.state) {
-    sections.push(renderCurrentStatus(data));
+    rightPanels.push(renderCurrentStatus(data));
   }
+
+  // Activity feed (compact, standalone)
+  const feedEntries: FeedEntry[] = [];
+  const activityHtml = renderActivityFeed(feedEntries);
+  rightPanels.push(`<div class="compact-card"><h3 class="compact-title">Activity</h3>${activityHtml}</div>`);
 
   // Live metrics sections
   if (metricsHtml) {
-    sections.push(metricsHtml);
+    rightPanels.push(metricsHtml);
   }
 
-  // Route map topology (if source data available)
+  // Route map topology
   if (topologySource) {
-    sections.push(buildTopologyHtml(topologySource));
+    rightPanels.push(buildTopologyHtml(topologySource));
   }
 
   // Phase list from roadmap
   if (data.roadmap && data.roadmap.phases.length > 0) {
-    sections.push(renderPhaseList(data));
+    rightPanels.push(renderPhaseList(data));
   }
 
-  // Milestone timeline
+  const terminalCard = terminalHtml
+    ? `<div class="dashboard-terminal-col"><div class="terminal-standalone">${terminalHtml}</div></div>`
+    : '';
+
+  const rightCol = `<div class="dashboard-info-col">${rightPanels.join('\n')}</div>`;
+
+  sections.push(`<div class="dashboard-grid">${terminalCard}${rightCol}</div>`);
+
+  // Milestone timeline (full width below the grid)
   if (data.milestones && data.milestones.milestones.length > 0) {
     sections.push(renderMilestoneTimeline(data));
   }
@@ -363,6 +401,17 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     // Metrics collection failure never blocks dashboard generation
   }
 
+  // Build terminal panel (graceful — never fails the pipeline)
+  let terminalHtml = '';
+  let terminalStyles = '';
+  try {
+    const terminalResult = await buildTerminalHtml();
+    terminalHtml = terminalResult.html;
+    terminalStyles = terminalResult.styles;
+  } catch {
+    // Terminal failure never blocks dashboard generation
+  }
+
   // Ensure output directory exists
   try {
     await mkdir(options.outputDir, { recursive: true });
@@ -389,7 +438,28 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
   const gantryHtml = renderGantryPanel(gantryData);
   const gantryStyles = renderGantryStyles();
   const topologyStyles = renderTopologyStyles();
-  const styles = baseStyles + gantryStyles + topologyStyles;
+  const metricsStyles = renderMetricsStyles();
+  const activityTabStyles = renderActivityTabStyles();
+  const activityFeedStyles = renderActivityFeedStyles();
+  const entityLegendStyles = renderEntityLegendStyles();
+  const entityShapeStyles = renderEntityShapeStyles();
+  const siliconPanelStyles = renderSiliconPanelStyles();
+  const budgetGaugeStyles = renderBudgetGaugeStyles();
+  const stagingQueueStyles = renderStagingQueueStyles();
+  const questionCardStyles = renderQuestionCardStyles();
+  const uploadZoneStyles = renderUploadZoneStyles();
+  const configFormStyles = renderConfigFormStyles();
+  const submitFlowStyles = renderSubmitFlowStyles();
+  const consoleSettingsStyles = renderConsoleSettingsStyles();
+  const consoleActivityStyles = renderConsoleActivityStyles();
+  const consolePageStyles = renderConsolePageStyles();
+
+  const styles = baseStyles + gantryStyles + topologyStyles + metricsStyles
+    + activityTabStyles + activityFeedStyles + terminalStyles
+    + entityLegendStyles + entityShapeStyles + siliconPanelStyles
+    + budgetGaugeStyles + stagingQueueStyles + questionCardStyles
+    + uploadZoneStyles + configFormStyles + submitFlowStyles
+    + consoleSettingsStyles + consoleActivityStyles + consolePageStyles;
 
   // Page definitions: name, filename, content renderer, meta, jsonLd
   const pageDefinitions: {
@@ -402,7 +472,7 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     {
       name: 'index',
       filename: 'index.html',
-      render: () => renderIndexContent(data, metricsHtml),
+      render: () => renderIndexContent(data, metricsHtml, undefined, terminalHtml),
       meta: {
         description: data.project?.description ?? 'GSD Planning Docs Dashboard',
         ogTitle: projectName,
