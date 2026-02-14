@@ -90,13 +90,14 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total plans | 449 complete |
 | Total LOC | ~195k TypeScript + Rust |
 | v1.21 phases | 1/11 complete |
-| v1.21 plans | 4/? complete |
+| v1.21 plans | 5/? complete |
 | v1.21 requirements | 50 total |
 | 158-01 duration | 11min |
 | 158-02 duration | 2min |
 | 158-03 duration | 6min |
 | 158-04 duration | 3min |
 | 160-01 duration | 2min |
+| 159-01 duration | 4min |
 | 162-02 duration | 3min |
 
 ## Session Continuity
