@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-tmux-has-tmux"
+description = "Enables the tmux_has_tmux command without any pre-configured scope."
+commands.allow = ["tmux_has_tmux"]
+
+[[permission]]
+identifier = "deny-tmux-has-tmux"
+description = "Denies the tmux_has_tmux command without any pre-configured scope."
+commands.deny = ["tmux_has_tmux"]

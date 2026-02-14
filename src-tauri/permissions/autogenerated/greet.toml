@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-greet"
+description = "Enables the greet command without any pre-configured scope."
+commands.allow = ["greet"]
+
+[[permission]]
+identifier = "deny-greet"
+description = "Denies the greet command without any pre-configured scope."
+commands.deny = ["greet"]

@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-tmux-ensure-session"
+description = "Enables the tmux_ensure_session command without any pre-configured scope."
+commands.allow = ["tmux_ensure_session"]
+
+[[permission]]
+identifier = "deny-tmux-ensure-session"
+description = "Denies the tmux_ensure_session command without any pre-configured scope."
+commands.deny = ["tmux_ensure_session"]
