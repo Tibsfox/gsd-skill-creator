@@ -140,16 +140,39 @@ const mockRenderProjection = vi.fn().mockReturnValue('PROJECTION_SECTION_OUTPUT'
 vi.mock('./status-display.js', () => ({
   renderInstalledSection: (...args: unknown[]) => mockRenderInstalled(...args),
   renderProjectionSection: (...args: unknown[]) => mockRenderProjection(...args),
-  buildStatusJson: vi.fn((result: any) => ({
-    budget: result.budget,
-    totalInstalled: result.installedTotal ?? result.totalChars,
-    installed: (result.skills || []).map((s: any) => ({
-      name: s.name,
-      charCount: s.totalChars,
-      percentOfInstalled: 0,
-    })),
-    projection: null,
-  })),
+  buildStatusJson: vi.fn((result: any) => {
+    const installedTotal = result.installedTotal ?? result.totalChars;
+    const sorted = [...(result.skills || [])].sort((a: any, b: any) => b.totalChars - a.totalChars);
+    return {
+      budget: result.budget,
+      totalInstalled: installedTotal,
+      installed: sorted.map((s: any) => ({
+        name: s.name,
+        charCount: s.totalChars,
+        percentOfInstalled: installedTotal > 0
+          ? Math.round(((s.totalChars / installedTotal) * 100) * 10) / 10
+          : 0,
+      })),
+      projection: result.projection ? {
+        profileName: result.projection.profileName,
+        budgetLimit: result.projection.budgetLimit,
+        loadedTotal: result.projection.loadedTotal,
+        deferredTotal: result.projection.deferredTotal,
+        loaded: result.projection.loaded.map((s: any) => ({
+          name: s.name,
+          charCount: s.charCount,
+          tier: s.tier,
+          oversized: s.oversized,
+        })),
+        deferred: result.projection.deferred.map((s: any) => ({
+          name: s.name,
+          charCount: s.charCount,
+          tier: s.tier,
+          oversized: s.oversized,
+        })),
+      } : null,
+    };
+  }),
 }));
 
 // Mock budget-profiles

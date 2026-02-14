@@ -18,7 +18,7 @@ import pc from 'picocolors';
 import { BudgetValidator } from '../../validation/budget-validation.js';
 import { BudgetHistory } from '../../storage/budget-history.js';
 import { createApplicationContext } from '../../index.js';
-import { renderInstalledSection, renderProjectionSection } from './status-display.js';
+import { renderInstalledSection, renderProjectionSection, buildStatusJson } from './status-display.js';
 import { getBudgetProfile } from '../../application/budget-profiles.js';
 
 const HELP_TEXT = `
@@ -85,22 +85,11 @@ export async function statusCommand(
     const snapshots = await history.read();
     const trend = BudgetHistory.getTrend(snapshots);
 
-    // Calculate headroom
-    const headroom = result.budget - result.totalChars;
-
     if (jsonMode) {
-      // JSON output
+      // JSON output using buildStatusJson for structured installed + projection data
+      const jsonData = buildStatusJson(result);
       const jsonOutput = {
-        budget: result.budget,
-        totalChars: result.totalChars,
-        headroom,
-        usagePercent: result.usagePercent,
-        skills: result.skills.map(s => ({
-          name: s.name,
-          totalChars: s.totalChars,
-          descriptionChars: s.descriptionChars,
-          bodyChars: s.bodyChars,
-        })),
+        ...jsonData,
         trend: trend ? {
           charDelta: trend.charDelta,
           skillDelta: trend.skillDelta,
