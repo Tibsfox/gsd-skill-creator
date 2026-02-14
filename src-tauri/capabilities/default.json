@@ -14,6 +14,12 @@
     "allow-ipc-benchmark-channel",
     "allow-start-watcher",
     "allow-stop-watcher",
-    "allow-watcher-status"
+    "allow-watcher-status",
+    "allow-pty-open",
+    "allow-pty-write",
+    "allow-pty-resize",
+    "allow-pty-pause",
+    "allow-pty-resume",
+    "allow-pty-close"
   ]
 }
