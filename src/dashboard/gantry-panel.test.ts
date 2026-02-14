@@ -34,7 +34,7 @@ describe('renderGantryPanel', () => {
       const html = renderGantryPanel(makeData());
       expect(html).toContain('gantry-strip');
       expect(html).toContain('gantry-cells');
-      expect(html).not.toContain('gantry-cell');
+      expect(html).not.toContain('data-type=');
     });
 
     it('renders a single cell correctly', () => {
@@ -163,7 +163,7 @@ describe('renderGantryPanel', () => {
     it('renders empty strip when 0 cells provided', () => {
       const html = renderGantryPanel(makeData([]));
       expect(html).toContain('gantry-strip');
-      expect(html).not.toContain('gantry-cell');
+      expect(html).not.toContain('data-type=');
     });
   });
 
