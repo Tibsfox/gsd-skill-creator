@@ -12,6 +12,18 @@ pub enum AppError {
 
     #[error("Serialization error: {0}")]
     Serde(#[from] serde_json::Error),
+
+    #[error("Watcher error: {0}")]
+    Watcher(String),
+
+    #[error("Watcher already running")]
+    WatcherAlreadyRunning,
+
+    #[error("Watcher not running")]
+    WatcherNotRunning,
+
+    #[error("Watch path does not exist: {0}")]
+    WatchPathNotFound(String),
 }
 
 impl serde::Serialize for AppError {
