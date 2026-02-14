@@ -47,6 +47,14 @@ vi.mock('./budget-silicon-collector.js', () => ({
   }),
 }));
 
+// Mock the staging queue collector module
+vi.mock('./collectors/staging-collector.js', () => ({
+  collectStagingQueue: vi.fn().mockResolvedValue({
+    entries: [],
+    dependencies: [],
+  }),
+}));
+
 // ---------------------------------------------------------------------------
 // Fixtures — realistic .planning/ content
 // ---------------------------------------------------------------------------
@@ -739,6 +747,99 @@ describe('generate', () => {
       // renderSiliconPanel returns '' for null enabled, so no silicon-panel div in content
       // (styles will still contain .silicon-panel CSS class, but no HTML element)
       expect(content).not.toContain('<div class="silicon-panel">');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // Staging queue integration tests (156-02)
+  // -------------------------------------------------------------------------
+
+  describe('staging queue integration', () => {
+    beforeEach(async () => {
+      const { collectAndRenderMetrics } = await import('./metrics/integration.js');
+      vi.mocked(collectAndRenderMetrics).mockReset();
+      vi.mocked(collectAndRenderMetrics).mockResolvedValue({
+        html: '',
+        sections: 0,
+        durationMs: 0,
+      });
+
+      const { collectTopologyData } = await import('./collectors/topology-collector.js');
+      vi.mocked(collectTopologyData).mockReset();
+
+      const { collectActivityFeed } = await import('./collectors/activity-collector.js');
+      vi.mocked(collectActivityFeed).mockReset();
+      vi.mocked(collectActivityFeed).mockResolvedValue([]);
+
+      const { collectBudgetSiliconData } = await import('./budget-silicon-collector.js');
+      vi.mocked(collectBudgetSiliconData).mockReset();
+      vi.mocked(collectBudgetSiliconData).mockResolvedValue({
+        gauge: {
+          segments: [{ domain: 'test', percentage: 45, color: 'var(--domain-testing)' }],
+          totalUsed: 45,
+          label: 'Token Budget',
+        },
+        silicon: {
+          enabled: null,
+          adapters: [],
+          vram: { segments: [], totalUsed: 0 },
+        },
+      });
+
+      const { collectStagingQueue } = await import('./collectors/staging-collector.js');
+      vi.mocked(collectStagingQueue).mockReset();
+    });
+
+    it('renders staging queue panel with queue data in index.html', async () => {
+      const { collectStagingQueue } = await import('./collectors/staging-collector.js');
+      vi.mocked(collectStagingQueue).mockResolvedValue({
+        entries: [
+          {
+            id: 'q-20260214-001',
+            filename: 'vision.md',
+            state: 'uploaded',
+            milestoneName: 'v2.0',
+            domain: 'frontend',
+            tags: ['ui'],
+            resourceManifestPath: '.planning/staging/ready/vision.manifest.json',
+            createdAt: '2026-02-14T00:00:00Z',
+            updatedAt: '2026-02-14T00:00:00Z',
+          },
+        ],
+        dependencies: [],
+      });
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      const result = await generate({ planningDir, outputDir, force: true });
+
+      expect(result.pages).toContain('index.html');
+      const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
+      // Panel renders with queue data
+      expect(content).toContain('staging-queue-panel');
+      expect(content).toContain('sq-badge-uploaded');
+      expect(content).toContain('v2.0');
+    });
+
+    it('renders staging queue empty state when collector returns no entries', async () => {
+      const { collectStagingQueue } = await import('./collectors/staging-collector.js');
+      vi.mocked(collectStagingQueue).mockResolvedValue({
+        entries: [],
+        dependencies: [],
+      });
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      const result = await generate({ planningDir, outputDir, force: true });
+
+      expect(result.pages).toContain('index.html');
+      const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
+      // Empty state renders with sq-empty class
+      expect(content).toContain('sq-empty');
     });
   });
 });
