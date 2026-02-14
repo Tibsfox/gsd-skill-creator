@@ -24,14 +24,13 @@ describe("streamEchoData", () => {
 
     mockIPC((cmd, payload) => {
       if (cmd === "echo_channel") {
-        // The payload contains a serialized channel reference.
-        // In the mock environment, the channel's onmessage callback
-        // is registered via transformCallback, so we can send messages
-        // to it through runCallback using the channel's ID.
+        // In the mock environment, the Channel object is passed directly
+        // (not serialized). Its .id property is the callback identifier
+        // registered via transformCallback, so we use runCallback(id, ...)
+        // to simulate the Rust backend sending data through the channel.
         const args = payload as Record<string, unknown>;
-        const channelStr = args.channel as string;
-        // Channel serializes as "__CHANNEL__:<id>"
-        const channelId = parseInt(channelStr.replace("__CHANNEL__:", ""), 10);
+        const channelObj = args.channel as { id: number };
+        const channelId = channelObj.id;
         const chunkCount = args.chunkCount as number;
         const payloadSize = args.payloadSize as number;
 
@@ -78,8 +77,8 @@ describe("streamEchoData", () => {
         invokedArgs.push(args);
 
         // Send minimal data to satisfy the channel
-        const channelStr = args.channel as string;
-        const channelId = parseInt(channelStr.replace("__CHANNEL__:", ""), 10);
+        const channelObj = args.channel as { id: number };
+        const channelId = channelObj.id;
         window.__TAURI_INTERNALS__.runCallback(channelId, {
           index: 0,
           message: { index: 0, data: [0xab], size: 1 },
