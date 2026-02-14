@@ -42,3 +42,11 @@ export { createWindowChrome } from "./window-chrome";
 export type { BoundsUpdateCallback, Cleanup } from "./drag-resize";
 
 export { enableDrag, enableResize } from "./drag-resize";
+
+export {
+  WindowManager,
+  type OpenWindowOptions,
+  type DesktopIcon,
+  type WMEvent,
+  type WMEventListener,
+} from "./window-manager";
