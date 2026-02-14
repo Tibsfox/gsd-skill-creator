@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.18 — Information Design System
-Phase: 142 — Design System Foundation (planned)
-Plan: (none started)
-Status: Milestone v1.18 initialized — 7 phases, 15 plans planned
-Last activity: 2026-02-13 — Milestone v1.18 created from information design guide
+Phase: 142 — Design System Foundation (in progress)
+Plan: 02 complete, 03 next
+Status: Executing phase 142 — 2 of 4 plans complete
+Last activity: 2026-02-14 — 142-02 typography system complete
 
 ## Project Reference
 
@@ -219,6 +219,10 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 - 7 QueueStates mapped to 4 kanban columns: uploaded+checking->incoming, needs-attention->attention, ready+queued+executing->ready, set-aside->aside
 - SVG dependency lines use data-from/data-to attributes with client-side getBoundingClientRect positioning
 - Per-state badge colors: blue(uploaded), yellow(checking), orange(needs-attention), green(ready), teal(queued), purple(executing), gray(set-aside)
+- Google Fonts @import used for Inter and JetBrains Mono with system font fallback stacks (progressive enhancement)
+- Renderer test updated to allow font import URLs (strip Google Fonts @import before checking for external URLs)
+- Weight hierarchy uses font-weight only (no font-size) so primary/secondary differ by boldness at same size
+- Case discipline: .case-label is defensive text-transform:none; .case-interrupt is uppercase with letter-spacing
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel)
@@ -257,10 +261,10 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 
 ## Session Continuity
 
-Last: 2026-02-13 — Milestone v1.17 archived
-Stopped at: Milestone v1.17 complete. All 8 phases (134-141), 35 plans, 83 commits, 699 tests. Archives in .planning/milestones/.
-Next action: /gsd:new-milestone for next milestone
-Context: v1.17 Staging Layer shipped. Full staging pipeline operational. 21 milestones total.
+Last: 2026-02-14 — 142-02 typography system complete
+Stopped at: Completed 142-02-PLAN.md (typography system with fonts, weights, case discipline)
+Next action: Execute 142-03-PLAN.md
+Context: Design system foundation in progress. 142-01 (colors/spacing/status) and 142-02 (typography) complete. 750 dashboard tests passing.
 
 ---
-*Last updated: 2026-02-13 (v1.17 milestone complete)*
+*Last updated: 2026-02-14 (142-02 complete)*
