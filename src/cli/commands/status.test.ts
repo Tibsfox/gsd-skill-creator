@@ -418,18 +418,126 @@ describe('statusCommand', () => {
     expect(output).toContain('90%');
   });
 
-  it('should produce valid JSON with --json flag', async () => {
+  it('should produce JSON with installed section containing skills with percentOfInstalled', async () => {
     const exitCode = await statusCommand(['--json']);
 
     expect(exitCode).toBe(0);
 
     const fullOutput = consoleOutput.join('\n');
     const parsed = JSON.parse(fullOutput);
-    expect(parsed).toHaveProperty('budget');
-    expect(parsed).toHaveProperty('totalChars');
-    expect(parsed).toHaveProperty('headroom');
-    expect(parsed).toHaveProperty('skills');
-    expect(parsed).toHaveProperty('trend');
+    expect(parsed).toHaveProperty('installed');
+    expect(parsed.installed).toBeInstanceOf(Array);
+    expect(parsed.installed.length).toBe(3);
+    expect(parsed.installed[0]).toHaveProperty('name');
+    expect(parsed.installed[0]).toHaveProperty('charCount');
+    expect(parsed.installed[0]).toHaveProperty('percentOfInstalled');
+  });
+
+  it('should produce JSON with projection section when profile provides projection', async () => {
+    mockCheckCumulative.mockResolvedValue({
+      totalChars: 8000,
+      budget: 15500,
+      usagePercent: 51.6,
+      severity: 'ok' as const,
+      skills: [
+        { name: 'git-commit', descriptionChars: 50, bodyChars: 3500, totalChars: 3800, path: '/skills/git-commit/SKILL.md' },
+        { name: 'test-runner', descriptionChars: 40, bodyChars: 2200, totalChars: 2500, path: '/skills/test-runner/SKILL.md' },
+      ],
+      hiddenCount: 0,
+      installedTotal: 6300,
+      loadableTotal: 3800,
+      projection: {
+        loaded: [{ name: 'git-commit', charCount: 3800, tier: 'standard', oversized: false, status: 'loaded' }],
+        deferred: [{ name: 'test-runner', charCount: 2500, tier: 'optional', oversized: false, status: 'deferred' }],
+        loadedTotal: 3800,
+        deferredTotal: 2500,
+        budgetLimit: 12000,
+        profileName: 'gsd-executor',
+      },
+    });
+
+    const exitCode = await statusCommand(['--json']);
+
+    expect(exitCode).toBe(0);
+
+    const fullOutput = consoleOutput.join('\n');
+    const parsed = JSON.parse(fullOutput);
+    expect(parsed.projection).not.toBeNull();
+    expect(parsed.projection).toHaveProperty('profileName');
+    expect(parsed.projection).toHaveProperty('budgetLimit');
+    expect(parsed.projection).toHaveProperty('loadedTotal');
+    expect(parsed.projection).toHaveProperty('deferredTotal');
+    expect(parsed.projection.loaded).toBeInstanceOf(Array);
+    expect(parsed.projection.deferred).toBeInstanceOf(Array);
+    expect(parsed.projection.loaded[0]).toHaveProperty('name');
+    expect(parsed.projection.loaded[0]).toHaveProperty('charCount');
+    expect(parsed.projection.loaded[0]).toHaveProperty('tier');
+    expect(parsed.projection.loaded[0]).toHaveProperty('oversized');
+  });
+
+  it('should produce JSON with null projection when no profile available', async () => {
+    mockCheckCumulative.mockResolvedValue({
+      totalChars: 8000,
+      budget: 15500,
+      usagePercent: 51.6,
+      severity: 'ok' as const,
+      skills: [
+        { name: 'git-commit', descriptionChars: 50, bodyChars: 3500, totalChars: 3800, path: '/skills/git-commit/SKILL.md' },
+      ],
+      hiddenCount: 0,
+      installedTotal: 3800,
+      loadableTotal: 3800,
+      // No projection (no profile)
+    });
+
+    const exitCode = await statusCommand(['--json']);
+
+    expect(exitCode).toBe(0);
+
+    const fullOutput = consoleOutput.join('\n');
+    const parsed = JSON.parse(fullOutput);
+    expect(parsed.projection).toBeNull();
+  });
+
+  it('should include budget and totalInstalled in JSON output', async () => {
+    const exitCode = await statusCommand(['--json']);
+
+    expect(exitCode).toBe(0);
+
+    const fullOutput = consoleOutput.join('\n');
+    const parsed = JSON.parse(fullOutput);
+    expect(parsed.budget).toEqual(expect.any(Number));
+    expect(parsed.totalInstalled).toEqual(expect.any(Number));
+  });
+
+  it('should include trend data in JSON output', async () => {
+    (BudgetHistory as any).getTrend = vi.fn().mockReturnValue({
+      charDelta: 500,
+      skillDelta: 1,
+      periodSnapshots: 5,
+    });
+
+    const exitCode = await statusCommand(['--json']);
+
+    expect(exitCode).toBe(0);
+
+    const fullOutput = consoleOutput.join('\n');
+    const parsed = JSON.parse(fullOutput);
+    expect(parsed.trend).toHaveProperty('charDelta', 500);
+    expect(parsed.trend).toHaveProperty('skillDelta', 1);
+    expect(parsed.trend).toHaveProperty('periodSnapshots', 5);
+  });
+
+  it('should sort installed skills by size descending in JSON', async () => {
+    // skills are already in the mock: git-commit(3800) > test-runner(2500) > deploy(1700)
+    const exitCode = await statusCommand(['--json']);
+
+    expect(exitCode).toBe(0);
+
+    const fullOutput = consoleOutput.join('\n');
+    const parsed = JSON.parse(fullOutput);
+    expect(parsed.installed[0].charCount).toBeGreaterThanOrEqual(parsed.installed[1].charCount);
+    expect(parsed.installed[1].charCount).toBeGreaterThanOrEqual(parsed.installed[2].charCount);
   });
 
   it('should show "No skills installed" when no skills exist', async () => {
