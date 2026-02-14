@@ -209,7 +209,7 @@ describe('configValidateCommand', () => {
 
       // Find the JSON output call
       const jsonCall = consoleLogSpy.mock.calls.find(
-        (call) => {
+        (call: unknown[]) => {
           try {
             JSON.parse(call[0] as string);
             return true;
@@ -235,7 +235,7 @@ describe('configValidateCommand', () => {
       expect(exitCode).toBe(1);
 
       const jsonCall = consoleLogSpy.mock.calls.find(
-        (call) => {
+        (call: unknown[]) => {
           try {
             JSON.parse(call[0] as string);
             return true;
