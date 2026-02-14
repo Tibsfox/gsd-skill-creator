@@ -4,9 +4,9 @@
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
 Phase: 167 -- Calibration + Personalization -- IN PROGRESS
-Plan: 167-01 COMPLETE, 167-02 COMPLETE.
-Status: Phase 167 in progress. Plans 01 and 02 complete.
-Last activity: 2026-02-14 -- Completed 167-01 (UserStyle types, Zod schema, YAML serialization, CSS bridge)
+Plan: 167-01 COMPLETE, 167-02 COMPLETE, 167-03 COMPLETE.
+Status: Phase 167 in progress. Plans 01, 02, and 03 complete.
+Last activity: 2026-02-14 -- Completed 167-03 (color picker screen, CRT settings screen)
 
 Progress: [#########.] 9/11 phases
 
@@ -106,7 +106,7 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - Colors schema uses .catch() for graceful fallback on invalid array length
 - Manual YAML serializer for user-style (no js-yaml dependency)
 - localStorage for webview persistence (future Tauri IPC for filesystem)
-- Calibration module at desktop/src/calibration/ (user-style, css-bridge, wizard-state)
+- Calibration module at desktop/src/calibration/ (user-style, css-bridge, wizard-state, screen-color-picker, screen-crt-settings)
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -166,13 +166,14 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 166-05 duration | 4min |
 | 167-02 duration | 2min |
 | 167-01 duration | 3min |
+| 167-03 duration | 3min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Completed 167-01 (UserStyle types, Zod schema, YAML serialization, CSS bridge)
-Stopped at: Completed 167-01-PLAN.md
-Next action: Continue Phase 167 remaining plans (167-03, 167-04).
-Context: UserStyle at desktop/src/calibration/user-style.ts is single source of visual truth with Zod validation. CSS bridge at desktop/src/calibration/css-bridge.ts projects palette to DOM custom properties. Wizard state machine at desktop/src/calibration/wizard-state.ts for three-screen flow. 167-01 and 167-02 complete. 497 desktop tests passing.
+Last: 2026-02-14 -- Completed 167-03 (color picker screen with swatch grid, CRT settings screen with sliders)
+Stopped at: Completed 167-03-PLAN.md
+Next action: Continue Phase 167 remaining plans (167-04).
+Context: Color picker screen at desktop/src/calibration/screen-color-picker.ts with 24 OKLCH swatches and palette preview. CRT settings screen at desktop/src/calibration/screen-crt-settings.ts with 5 sliders and engine preview. 167-01, 167-02, and 167-03 complete. 521 desktop tests passing.
 
 ---
-*Last updated: 2026-02-14 (167-01 complete)*
+*Last updated: 2026-02-14 (167-03 complete)*
