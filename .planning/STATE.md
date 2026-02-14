@@ -2,21 +2,21 @@
 
 ## Current Position
 
-Milestone: v1.21 -- GSD-OS Desktop Foundation
-Phase: 167 -- Calibration + Personalization -- IN PROGRESS
-Plan: 167-01 COMPLETE, 167-02 COMPLETE, 167-03 COMPLETE, 167-04 COMPLETE.
-Status: Phase 167 COMPLETE. All 4 plans complete.
-Last activity: 2026-02-14 -- Completed 167-03 (color picker screen, CRT settings screen)
+Milestone: v1.21 -- GSD-OS Desktop Foundation -- SHIPPED
+Phase: (none -- between milestones)
+Plan: (none)
+Status: v1.21 SHIPPED. 25 milestones complete (v1.0-v1.21 + v1.8.1 patch).
+Last activity: 2026-02-14 -- Completed v1.21 milestone (archived, tagged)
 
-Progress: [#########.] 9/11 phases
+Progress: [##########] 25 milestones shipped
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
+See: .planning/PROJECT.md (updated 2026-02-14 after v1.21 shipped)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns so they work correctly when loaded by Claude Code
 
-**Current focus:** Build Tauri desktop application shell with WebGL 8-bit graphics, first-boot calibration, Amiga-inspired desktop environment, and native system bridges (PTY, file watcher, IPC)
+**Current focus:** Planning next milestone
 
 ## Accumulated Context
 
@@ -109,11 +109,16 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - Calibration module at desktop/src/calibration/ (user-style, css-bridge, wizard-state, screen-color-picker, screen-crt-settings, screen-theme-mode, wizard, index)
 - CalibrationWizard composes 3 screens via state machine; first-boot gate in main.ts blocks desktop until calibration
 - Wizard clears container innerHTML between screens (simpler than DOM diffing)
-- Boot module at desktop/src/boot/ (types, chipset, desktop-background, boot-renderer)
+- Boot module at desktop/src/boot/ (types, chipset, desktop-background, boot-renderer, accessibility, index)
 - Chipset delay subtraction model: subtract each chipset's delay from elapsed time, allowing multi-chipset advancement in a single frame
 - Boot progress distribution: init 0-10%, chipset 10-75%, ready 75-100%
 - Boot renderer uses incremental delta timing (not total elapsed) because state machine resets elapsedMs on phase transitions
 - Boot renderer palette via CSS custom properties on boot-screen element (--boot-bg, --boot-text, --boot-accent, --boot-ok, --boot-progress)
+- Accessibility mode detects prefers-reduced-motion and prefers-contrast via matchMedia
+- Accessibility applies before engine.start() to prevent CRT frames before disable
+- HIGH_CONTRAST_PALETTE: 32 strong colors, pure black (#000000) slot 0, pure white (#FFFFFF) slot 31
+- gsd-os--a11y CSS class disables all animations/transitions with !important
+- Runtime accessibility watcher auto-toggles on OS preference changes
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -136,8 +141,8 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total phases | 157 complete |
 | Total plans | 449 complete |
 | Total LOC | ~195k TypeScript + Rust |
-| v1.21 phases | 8/11 complete |
-| v1.21 plans | 30/? complete |
+| v1.21 phases | 11/11 complete |
+| v1.21 plans | 34/34 complete |
 | v1.21 requirements | 50 total |
 | 158-01 duration | 11min |
 | 158-02 duration | 2min |
@@ -178,13 +183,14 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 167-04 duration | 4min |
 | 168-01 duration | 3min |
 | 168-03 duration | 5min |
+| 168-04 duration | 4min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Completed 168-03 (boot renderer with chipset animation and skip handling)
-Stopped at: Completed 168-03-PLAN.md
-Next action: Continue Phase 168 remaining plan (168-04).
-Context: Boot renderer at desktop/src/boot/boot-renderer.ts with fullscreen overlay, chipset animation, progress bar, skip handling, palette theming. 614 desktop tests passing (22 new + 592 existing).
+Last: 2026-02-14 -- v1.21 milestone SHIPPED (archived, tagged)
+Stopped at: Milestone completion. All artifacts archived to .planning/milestones/v1.21-*.
+Next action: `/gsd:new-milestone` to start v1.22.
+Context: 25 milestones shipped (v1.0-v1.21 + v1.8.1). Full Tauri desktop app with WebGL CRT engine, Amiga desktop environment, native PTY terminal, calibration wizard, boot sequence, and accessibility mode. 636 desktop tests, ~214k LOC.
 
 ---
-*Last updated: 2026-02-14 (168-03 complete)*
+*Last updated: 2026-02-14 (v1.21 SHIPPED)*
