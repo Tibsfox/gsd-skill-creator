@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { Engine } from './engine';
 import type { PalettePreset } from './palette';
+import type { CopperEntry } from './copper-list';
 
 /**
  * Create a mock WebGL2RenderingContext with all methods used by Engine
@@ -255,6 +256,41 @@ describe('Engine', () => {
 
       expect(container.querySelector('.crt-fallback-overlay')).toBeNull();
       expect(container.querySelector('.crt-fallback-vignette')).toBeNull();
+    });
+  });
+
+  describe('copper list integration', () => {
+    it('creates engine with gradient as default copper program', () => {
+      const engine = Engine.create(container);
+
+      expect(engine.getCopperProgram()).toBe('gradient');
+    });
+
+    it('setCopperProgram changes the active copper program', () => {
+      const engine = Engine.create(container);
+
+      engine.setCopperProgram('raster-bars');
+
+      expect(engine.getCopperProgram()).toBe('raster-bars');
+    });
+
+    it('setCopperProgram to flat then getCopperProgram returns flat', () => {
+      const engine = Engine.create(container);
+
+      engine.setCopperProgram('flat');
+
+      expect(engine.getCopperProgram()).toBe('flat');
+    });
+
+    it('setCopperEntries sets a custom copper list', () => {
+      const engine = Engine.create(container);
+
+      engine.setCopperEntries([
+        { startLine: 0, endLine: 127, paletteIndexA: 5, paletteIndexB: 10, blend: 0 },
+        { startLine: 128, endLine: 255, paletteIndexA: 15, paletteIndexB: 20, blend: 0 },
+      ]);
+
+      expect(engine.getCopperProgram()).toBe('custom');
     });
   });
 
