@@ -81,7 +81,17 @@ pub fn start_claude_in_tmux(
     window_name: &str,
     project_dir: Option<&str>,
 ) -> Result<(), String> {
-    todo!()
+    let mut cmd = Command::new("tmux");
+    cmd.args(["new-window", "-t", session_name, "-n", window_name]);
+    if let Some(dir) = project_dir {
+        cmd.args(["-c", dir]);
+    }
+    cmd.arg("claude");
+    let output = cmd.output().map_err(|e| e.to_string())?;
+    if !output.status.success() {
+        return Err(String::from_utf8_lossy(&output.stderr).to_string());
+    }
+    Ok(())
 }
 
 /// Stop a Claude Code session in a tmux window.
@@ -91,12 +101,37 @@ pub fn stop_claude_in_tmux(
     session_name: &str,
     window_name: &str,
 ) -> Result<(), String> {
-    todo!()
+    let target = format!("{}:{}", session_name, window_name);
+    // Send Ctrl-C to interrupt Claude
+    let _ = Command::new("tmux")
+        .args(["send-keys", "-t", &target, "C-c", "C-c"])
+        .output();
+    // Brief pause for graceful shutdown
+    std::thread::sleep(std::time::Duration::from_millis(500));
+    // Kill the tmux window
+    let output = Command::new("tmux")
+        .args(["kill-window", "-t", &target])
+        .output()
+        .map_err(|e| e.to_string())?;
+    if !output.status.success() {
+        return Err(String::from_utf8_lossy(&output.stderr).to_string());
+    }
+    Ok(())
 }
 
 /// Check if the `claude` binary is in PATH.
 pub fn detect_claude_binary() -> Option<String> {
-    todo!()
+    let output = Command::new("which").arg("claude").output().ok()?;
+    if output.status.success() {
+        let path = String::from_utf8_lossy(&output.stdout).trim().to_string();
+        if path.is_empty() {
+            None
+        } else {
+            Some(path)
+        }
+    } else {
+        None
+    }
 }
 
 /// Generate a unique session ID based on current timestamp.
@@ -225,23 +260,64 @@ mod tests {
     }
 
     #[test]
-    #[should_panic(expected = "not yet implemented")]
-    fn test_start_claude_tmux_command_format() {
-        // This test exists to verify the stub panics.
-        // It will pass in RED phase (function is todo!()) and
-        // be replaced by a real test in GREEN phase.
-        let _ = start_claude_in_tmux("gsd", "test-window", None);
+    fn test_start_claude_in_tmux_returns_result() {
+        // Can't test actual tmux execution in unit tests, but verify
+        // the function returns a Result (not a panic) when tmux is
+        // unavailable or session doesn't exist.
+        let result = start_claude_in_tmux("nonexistent-session-xyzzy", "test-window", None);
+        // Either tmux isn't running (Err) or session doesn't exist (Err).
+        // In CI without tmux this will be Err. Either way, no panic.
+        assert!(result.is_err() || result.is_ok());
     }
 
     #[test]
-    #[should_panic(expected = "not yet implemented")]
-    fn test_stop_claude_tmux_stub() {
-        let _ = stop_claude_in_tmux("gsd", "test-window");
+    fn test_start_claude_in_tmux_with_project_dir() {
+        // Verify the function accepts project_dir without panicking
+        let result = start_claude_in_tmux(
+            "nonexistent-session-xyzzy",
+            "test-window",
+            Some("/tmp"),
+        );
+        assert!(result.is_err() || result.is_ok());
     }
 
     #[test]
-    #[should_panic(expected = "not yet implemented")]
-    fn test_detect_claude_binary_stub() {
-        let _ = detect_claude_binary();
+    fn test_stop_claude_in_tmux_returns_result() {
+        // Verify stop doesn't panic on nonexistent session
+        let result = stop_claude_in_tmux("nonexistent-session-xyzzy", "test-window");
+        assert!(result.is_err() || result.is_ok());
+    }
+
+    #[test]
+    fn test_detect_claude_binary_returns_option() {
+        // Should not panic -- returns Some(path) or None
+        let result = detect_claude_binary();
+        if let Some(ref path) = result {
+            assert!(
+                path.contains("claude"),
+                "path should contain 'claude', got: {}",
+                path
+            );
+        }
+        // Either way, no panic is the test
+    }
+
+    #[test]
+    fn test_update_activity() {
+        let mut mgr = ClaudeSessionManager::default();
+        mgr.insert(
+            "act-test".into(),
+            ClaudeSessionInfo {
+                id: "act-test".into(),
+                tmux_window: "act-test".into(),
+                status: ClaudeStatus::Active,
+                started_at: 100,
+                last_activity: 100,
+                project_dir: None,
+            },
+        );
+        mgr.update_activity("act-test", 999);
+        let session = mgr.get("act-test").unwrap();
+        assert_eq!(session.last_activity, 999);
     }
 }

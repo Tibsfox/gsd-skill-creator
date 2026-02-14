@@ -16,7 +16,7 @@ thiserror = "2"
 notify = { version = "8.2", default-features = false }
 notify-debouncer-full = { version = "0.7", default-features = false }
 portable-pty = "0.9"
-tokio = { version = "1", features = ["sync", "macros", "rt-multi-thread"] }
+tokio = { version = "1", features = ["sync", "macros", "rt-multi-thread", "time"] }
 
 [build-dependencies]
 tauri-build = { version = "2.5", features = [] }
