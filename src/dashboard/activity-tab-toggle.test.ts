@@ -6,6 +6,7 @@ import {
   renderActivityTabStyles,
 } from './activity-tab-toggle.js';
 import type { SessionEvent } from './activity-tab-toggle.js';
+import { renderActivityFeed } from './activity-feed.js';
 import type { FeedEntry } from './activity-feed.js';
 
 // ---------------------------------------------------------------------------
@@ -304,5 +305,51 @@ describe('renderActivityTabStyles', () => {
     const css = renderActivityTabStyles();
     expect(css).toContain('var(--surface');
     expect(css).toContain('var(--border');
+  });
+});
+
+// ===========================================================================
+// Integration tests
+// ===========================================================================
+
+describe('integration', () => {
+  it('translateSessionEvent output renders correctly in renderActivityFeed', () => {
+    const events: SessionEvent[] = [
+      makeEvent({ type: 'agent-start', entityId: 'F-1', entityName: 'Frontend Agent', domain: 'frontend', timestamp: '2026-02-14T10:00:00Z' }),
+      makeEvent({ type: 'skill-activate', entityId: 'F-1.rcp', entityName: 'Recipe Skill', domain: 'frontend', timestamp: '2026-02-14T10:01:00Z' }),
+      makeEvent({ type: 'phase-start', entityId: 'P-42', entityName: '42 - Design', domain: 'infrastructure', timestamp: '2026-02-14T10:02:00Z' }),
+    ];
+
+    const feedEntries = events.map(translateSessionEvent);
+    const html = renderActivityFeed(feedEntries);
+
+    // Verify entries rendered with correct shapes and identifiers
+    expect(html).toContain('af-entry');
+    expect(html).toContain('data-entity-type="agent"');
+    expect(html).toContain('data-entity-type="skill"');
+    expect(html).toContain('data-entity-type="phase"');
+    expect(html).toContain('F-1');
+    expect(html).toContain('F-1.rcp');
+    expect(html).toContain('Frontend Agent started');
+    expect(html).toContain('Recipe Skill activated');
+    // No timestamps visible
+    expect(html).not.toContain('ago');
+    expect(html).not.toContain('<time');
+  });
+
+  it('renderActivityTabPanel contains both activity feed and terminal content', () => {
+    const feedEntries: FeedEntry[] = [
+      { entityType: 'agent', domain: 'frontend', identifier: 'F-1',
+        description: 'Frontend Agent started', occurredAt: '2026-02-14T10:00:00Z' },
+    ];
+    const terminalHtml = '<div class="terminal-panel">mock terminal</div>';
+
+    const html = renderActivityTabPanel(feedEntries, terminalHtml);
+
+    expect(html).toContain('activity-tab-panel');
+    expect(html).toContain('data-tab="activity"');
+    expect(html).toContain('data-tab="terminal"');
+    expect(html).toContain('af-entry');          // activity feed rendered
+    expect(html).toContain('mock terminal');      // terminal passed through
   });
 });
