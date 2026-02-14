@@ -1,5 +1,6 @@
 @import "../wm/wm.css";
 @import "../shell/shell.css";
+@import './dashboard-host.css';
 
 body {
   background: var(--wm-desktop-bg);
