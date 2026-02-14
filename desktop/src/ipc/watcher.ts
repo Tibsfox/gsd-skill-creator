@@ -1,3 +1,6 @@
+import { invoke } from "@tauri-apps/api/core";
+import { listen } from "@tauri-apps/api/event";
+
 export interface FileChangeEvent {
   path: string;
   kind: "create" | "modify" | "remove" | "access" | "other";
@@ -9,28 +12,32 @@ export interface WatcherEventBatch {
 }
 
 export async function startWatcher(
-  _path: string,
-  _projectRoot: string,
+  path: string,
+  projectRoot: string,
 ): Promise<void> {
-  throw new Error("not implemented");
+  return invoke("start_watcher", { path, projectRoot });
 }
 
 export async function stopWatcher(): Promise<void> {
-  throw new Error("not implemented");
+  return invoke("stop_watcher");
 }
 
 export async function watcherStatus(): Promise<boolean> {
-  throw new Error("not implemented");
+  return invoke<boolean>("watcher_status");
 }
 
 export async function onFileChanged(
-  _callback: (batch: WatcherEventBatch) => void,
+  callback: (batch: WatcherEventBatch) => void,
 ): Promise<() => void> {
-  throw new Error("not implemented");
+  return listen<WatcherEventBatch>("fs:changed", (event) =>
+    callback(event.payload),
+  );
 }
 
 export async function onWatcherError(
-  _callback: (error: string) => void,
+  callback: (error: string) => void,
 ): Promise<() => void> {
-  throw new Error("not implemented");
+  return listen<string>("fs:watcher-error", (event) =>
+    callback(event.payload),
+  );
 }
