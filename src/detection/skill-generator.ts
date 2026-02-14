@@ -60,7 +60,7 @@ export class SkillGenerator {
       pattern: candidate.pattern,
       suggestedDescription: candidate.suggestedDescription,
     });
-    (metadata as Record<string, unknown>)['allowed-tools'] = allowedTools;
+    (metadata as unknown as Record<string, unknown>)['allowed-tools'] = allowedTools;
 
     // SPEC-02: Detect $ARGUMENTS and set argument-hint
     const argDetection = detectArguments(body);
