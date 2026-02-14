@@ -2,18 +2,18 @@
 
 ## Current Position
 
-Milestone: v1.17 — Staging Layer
+Milestone: v1.17 — Staging Layer (SHIPPED)
 Phase: 141 — Queue Pipelining and Dashboard (complete)
 Plan: 141-04 complete
-Status: Phase 141 complete (4 of 4 plans)
-Last activity: 2026-02-13 — Completed 141-04 (queue barrel finalization and integration tests)
+Status: Milestone v1.17 complete — all 8 phases, 35 plans shipped
+Last activity: 2026-02-13 — Milestone v1.17 archived
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
+See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns so they work correctly when loaded by Claude Code
-**Current focus:** v1.17 Staging Layer — smart intake, security hygiene, resource analysis, derived knowledge, queue pipelining
+**Current focus:** Planning next milestone
 
 ## Accumulated Context
 
@@ -250,17 +250,17 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 
 | Metric | Value |
 |--------|-------|
-| Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
+| Total milestones | 21 shipped (v1.0-v1.17 + v1.8.1 patch) |
 | Total phases | 141 complete |
-| Total plans | 412 complete |
-| Total LOC | ~159k TypeScript |
+| Total plans | 415 complete |
+| Total LOC | ~183k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 141-04-PLAN.md (queue barrel finalization and integration tests)
-Stopped at: Phase 141 complete (4 of 4 plans). Queue barrel exports finalized, staging barrel re-exports added, 9 integration tests passing.
-Next action: Next phase in v1.17 milestone.
-Context: v1.17 Staging Layer. Phase 141 complete. 661 staging tests, 240 dashboard tests all pass.
+Last: 2026-02-13 — Milestone v1.17 archived
+Stopped at: Milestone v1.17 complete. All 8 phases (134-141), 35 plans, 83 commits, 699 tests. Archives in .planning/milestones/.
+Next action: /gsd:new-milestone for next milestone
+Context: v1.17 Staging Layer shipped. Full staging pipeline operational. 21 milestones total.
 
 ---
-*Last updated: 2026-02-13 (141-04 complete)*
+*Last updated: 2026-02-13 (v1.17 milestone complete)*
