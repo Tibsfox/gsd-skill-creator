@@ -6,7 +6,7 @@ Milestone: v1.21 -- GSD-OS Desktop Foundation -- SHIPPED
 Phase: (none -- between milestones)
 Plan: (none)
 Status: v1.21 SHIPPED. 25 milestones complete (v1.0-v1.21 + v1.8.1 patch).
-Last activity: 2026-02-14 -- Completed v1.21 milestone (archived, tagged)
+Last activity: 2026-02-14 -- Completed quick task 3: Update README.md with GSD-OS desktop setup instructions
 
 Progress: [##########] 25 milestones shipped
 
@@ -132,6 +132,12 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 
 ### Blockers
 - (none)
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 3 | Update README.md with GSD-OS desktop application setup, install, and run instructions | 2026-02-14 | fc2bf3d | [3-update-readme-md-with-gsd-os-desktop-app](./quick/3-update-readme-md-with-gsd-os-desktop-app/) |
 
 ## Performance Metrics
 
