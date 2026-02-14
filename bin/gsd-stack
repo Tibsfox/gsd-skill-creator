@@ -1,0 +1,3409 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ==============================================================================
+# gsd-stack -- Session lifecycle & workflow coprocessor CLI
+#
+# A bash-based stack/queue for managing Claude Code sessions, messages,
+# recordings, and workflow automation via tmux.
+#
+# Usage: gsd-stack <command> [options]
+# ==============================================================================
+
+GSD_STACK_VERSION="0.1.0"
+
+# ==============================================================================
+# Environment variables with defaults
+# ==============================================================================
+
+GSD_STACK_DIR="${GSD_STACK_DIR:-.claude/stack}"
+GSD_TMUX_SESSION="${GSD_TMUX_SESSION:-claude}"
+GSD_TMUX_PANE="${GSD_TMUX_PANE:-0}"
+GSD_STACK_MODE="${GSD_STACK_MODE:-fifo}"
+GSD_STALL_TIMEOUT="${GSD_STALL_TIMEOUT:-300}"
+GSD_RECORD_INTERVAL="${GSD_RECORD_INTERVAL:-5}"
+GSD_PRIORITY="${GSD_PRIORITY:-normal}"
+GSD_SOURCE="${GSD_SOURCE:-cli}"
+GSD_FORMAT="${GSD_FORMAT:-}"
+GSD_MOCK_TMUX="${GSD_MOCK_TMUX:-}"
+GSD_MOCK_DRAIN="${GSD_MOCK_DRAIN:-}"
+GSD_DRAIN_LOG_DIR="${GSD_DRAIN_LOG_DIR:-.planning/logs}"
+GSD_MOCK_CAPTURE="${GSD_MOCK_CAPTURE:-}"
+
+# ==============================================================================
+# Color constants (safe for non-TTY: consumers check before use)
+# ==============================================================================
+
+BOLD='\033[1m'
+GREEN='\033[0;32m'
+RED_C='\033[0;31m'
+RESET='\033[0m'
+
+# ==============================================================================
+# Directory bootstrapping
+# ==============================================================================
+
+ensure_dirs() {
+  mkdir -p "$GSD_STACK_DIR/pending"
+  mkdir -p "$GSD_STACK_DIR/done"
+  mkdir -p "$GSD_STACK_DIR/sessions"
+  mkdir -p "$GSD_STACK_DIR/recordings"
+  mkdir -p "$GSD_STACK_DIR/saves"
+  if [[ ! -f "$GSD_STACK_DIR/history.jsonl" ]]; then
+    touch "$GSD_STACK_DIR/history.jsonl"
+  fi
+  if [[ ! -f "$GSD_STACK_DIR/registry.jsonl" ]]; then
+    touch "$GSD_STACK_DIR/registry.jsonl"
+  fi
+}
+
+# ==============================================================================
+# History logging
+# ==============================================================================
+
+log_event() {
+  local event_type="$1"
+  local detail="$2"
+
+  # Truncate detail to 200 chars max
+  if [[ ${#detail} -gt 200 ]]; then
+    detail="${detail:0:200}"
+  fi
+
+  local ts
+  ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+  # Escape double quotes in detail for valid JSON
+  detail="${detail//\\/\\\\}"
+  detail="${detail//\"/\\\"}"
+
+  printf '{"ts":"%s","event":"%s","detail":"%s"}\n' "$ts" "$event_type" "$detail" \
+    >> "$GSD_STACK_DIR/history.jsonl"
+}
+
+# ==============================================================================
+# Recording helpers
+# ==============================================================================
+
+is_recording() {
+  for meta in "$GSD_STACK_DIR"/recordings/*/meta.json; do
+    if [[ -f "$meta" ]]; then
+      local content
+      content=$(cat "$meta")
+      local status
+      status=$(json_field "$content" "status")
+      if [[ "$status" == "recording" ]]; then
+        echo "$(json_field "$content" "name")"
+        return 0
+      fi
+    fi
+  done
+  return 1
+}
+
+get_recording_dir() {
+  local rec_name
+  rec_name=$(is_recording) || return 1
+  echo "$GSD_STACK_DIR/recordings/$rec_name"
+  return 0
+}
+
+record_event() {
+  local type="$1"
+  local data_json="$2"
+  local rec_dir
+  rec_dir=$(get_recording_dir) || return 0  # silently no-op if not recording
+  local ts
+  ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  printf '{"ts":"%s","type":"%s",%s}\n' "$ts" "$type" "$data_json" \
+    >> "$rec_dir/stream.jsonl"
+}
+
+# ==============================================================================
+# Help
+# ==============================================================================
+
+show_help() {
+  cat <<'HELPTEXT'
+Usage: gsd-stack <command> [options]
+
+Stack Commands:
+  push        Push a message onto the stack
+  pop         Pop and consume the next message
+  peek        View the next message without consuming
+  poke        Send directly to tmux or nudge session
+  drain       Process entire queue headlessly
+  clear       Clear all pending messages
+
+Session Commands:
+  session     Start a managed Claude Code session
+  list        List all sessions with state
+  watch       Watch a session read-only
+  pause       Pause a session
+  resume      Resume a paused/stalled session
+  stop        Stop a session gracefully
+  save        Save a session snapshot
+
+Recording Commands:
+  record      Start recording session activity
+  stop-record Stop recording and compute metrics
+  mark        Insert a named marker
+  play        Analyze/replay recordings
+  metrics     View and compare recording metrics
+
+General:
+  status      Show stack and session overview
+  log         View event history
+  help        Show this help message
+  version     Show version
+
+Environment Variables:
+  GSD_STACK_DIR       Root directory (default: .claude/stack)
+  GSD_TMUX_SESSION    Tmux session name (default: claude)
+  GSD_STACK_MODE      Message ordering: fifo|lifo (default: fifo)
+  GSD_STALL_TIMEOUT   Seconds before stalled (default: 300)
+  GSD_RECORD_INTERVAL Capture interval in seconds (default: 5)
+  GSD_PRIORITY        Default push priority (default: normal)
+  GSD_SOURCE          Source label (default: cli)
+  GSD_FORMAT          Output format: json|"" for human (default: "")
+HELPTEXT
+}
+
+# ==============================================================================
+# JSON field extraction helpers (no jq dependency)
+# ==============================================================================
+
+json_field() {
+  echo "$1" | grep -o "\"$2\":\"[^\"]*\"" | head -1 | cut -d'"' -f4
+}
+
+json_field_num() {
+  echo "$1" | grep -o "\"$2\":[0-9]*" | head -1 | cut -d':' -f2
+}
+
+# ==============================================================================
+# Status subcommand
+# ==============================================================================
+
+cmd_status() {
+  # Count pending messages
+  local total_pending=0 urgent=0 normal=0 low=0
+  if [[ -d "$GSD_STACK_DIR/pending" ]]; then
+    total_pending=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+    total_pending=$((total_pending + 0))  # trim whitespace
+    urgent=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | grep -c '^0-' || true)
+    normal=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | grep -c '^5-' || true)
+    low=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | grep -c '^9-' || true)
+  fi
+
+  # Build breakdown string (only non-zero categories)
+  local breakdown=""
+  local parts=()
+  if [[ "$urgent" -gt 0 ]]; then parts+=("$urgent urgent"); fi
+  if [[ "$normal" -gt 0 ]]; then parts+=("$normal normal"); fi
+  if [[ "$low" -gt 0 ]]; then parts+=("$low low"); fi
+  if [[ ${#parts[@]} -gt 0 ]]; then
+    breakdown=" ("
+    for i in "${!parts[@]}"; do
+      if [[ "$i" -gt 0 ]]; then breakdown+=", "; fi
+      breakdown+="${parts[$i]}"
+    done
+    breakdown+=")"
+  fi
+
+  # Count done messages
+  local done_count=0
+  if [[ -d "$GSD_STACK_DIR/done" ]]; then
+    done_count=$(ls -1 "$GSD_STACK_DIR/done/" 2>/dev/null | wc -l)
+    done_count=$((done_count + 0))  # trim whitespace
+  fi
+
+  # Detect active session
+  local session_status="none"
+  local session_name=""
+  for meta in "$GSD_STACK_DIR"/sessions/*/meta.json; do
+    if [[ -f "$meta" ]]; then
+      local meta_content
+      meta_content=$(cat "$meta")
+      local s_status
+      s_status=$(json_field "$meta_content" "status")
+      if [[ "$s_status" == "active" ]]; then
+        session_status="active"
+        session_name=$(json_field "$meta_content" "name")
+        break
+      fi
+    fi
+  done
+
+  # Detect active recording
+  local recording_status="none"
+  local recording_name=""
+  for meta in "$GSD_STACK_DIR"/recordings/*/meta.json; do
+    if [[ -f "$meta" ]]; then
+      local meta_content
+      meta_content=$(cat "$meta")
+      local r_status
+      r_status=$(json_field "$meta_content" "status")
+      if [[ "$r_status" == "recording" ]]; then
+        recording_status="recording"
+        recording_name=$(json_field "$meta_content" "name")
+        break
+      fi
+    fi
+  done
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    # JSON output
+    local session_json recording_json
+    if [[ "$session_status" == "active" ]]; then
+      session_json="{\"status\":\"active\",\"name\":\"$session_name\"}"
+    else
+      session_json="{\"status\":\"none\"}"
+    fi
+    if [[ "$recording_status" == "recording" ]]; then
+      recording_json="{\"status\":\"recording\",\"name\":\"$recording_name\"}"
+    else
+      recording_json="{\"status\":\"none\"}"
+    fi
+    printf '{"pending":%d,"urgent":%d,"normal":%d,"low":%d,"mode":"%s","session":%s,"recording":%s,"done":%d}\n' \
+      "$total_pending" "$urgent" "$normal" "$low" "$GSD_STACK_MODE" \
+      "$session_json" "$recording_json" "$done_count"
+  else
+    # Human output
+    local use_color=false
+    if [[ -t 1 ]] && [[ -z "${NO_COLOR:-}" ]]; then
+      use_color=true
+    fi
+
+    local green="" dim="" reset="" bullet="●" dash="—"
+    if [[ "$use_color" == true ]]; then
+      green='\033[32m'
+      dim='\033[2m'
+      reset='\033[0m'
+    fi
+
+    printf "  Stack:     %d pending%s\n" "$total_pending" "$breakdown"
+    printf "  Mode:      %s\n" "$GSD_STACK_MODE"
+
+    if [[ "$session_status" == "active" ]]; then
+      printf "  Session:   ${green}${bullet} active (%s)${reset}\n" "$session_name"
+    else
+      printf "  Session:   ${dim}${dash} none${reset}\n"
+    fi
+
+    if [[ "$recording_status" == "recording" ]]; then
+      printf "  Recording: ${green}${bullet} recording (%s)${reset}\n" "$recording_name"
+    else
+      printf "  Recording: ${dim}${dash} none${reset}\n"
+    fi
+
+    printf "  Done:      %d completed\n" "$done_count"
+  fi
+}
+
+# ==============================================================================
+# Log subcommand
+# ==============================================================================
+
+cmd_log() {
+  local limit=20
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -n|--limit)
+        if [[ -n "${2:-}" ]]; then
+          limit="$2"
+          shift 2
+        else
+          echo "Error: -n requires a number"
+          exit 1
+        fi
+        ;;
+      *)
+        shift
+        ;;
+    esac
+  done
+
+  local history_file="$GSD_STACK_DIR/history.jsonl"
+
+  # Check if history exists and has content
+  if [[ ! -f "$history_file" ]] || [[ ! -s "$history_file" ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      echo "[]"
+    else
+      echo "No events recorded yet."
+    fi
+    return 0
+  fi
+
+  # Read last N entries
+  local lines
+  lines=$(tail -n "$limit" "$history_file")
+
+  if [[ -z "$lines" ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      echo "[]"
+    else
+      echo "No events recorded yet."
+    fi
+    return 0
+  fi
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    # JSON array output
+    local first=true
+    printf "["
+    while IFS= read -r line; do
+      if [[ "$first" == true ]]; then
+        first=false
+      else
+        printf ","
+      fi
+      printf "%s" "$line"
+    done <<< "$lines"
+    printf "]\n"
+  else
+    # Human output with colors
+    local use_color=false
+    if [[ -t 1 ]] && [[ -z "${NO_COLOR:-}" ]]; then
+      use_color=true
+    fi
+
+    local green='' yellow='' blue='' red='' reset=''
+    if [[ "$use_color" == true ]]; then
+      green='\033[32m'
+      yellow='\033[33m'
+      blue='\033[34m'
+      red='\033[31m'
+      reset='\033[0m'
+    fi
+
+    while IFS= read -r line; do
+      local ts event detail
+      ts=$(json_field "$line" "ts")
+      event=$(json_field "$line" "event")
+      detail=$(json_field "$line" "detail")
+
+      # Format timestamp: strip seconds and timezone for compact display
+      # "2026-02-12T15:00:00Z" -> "2026-02-12 15:00"
+      local display_ts="${ts:0:10} ${ts:11:5}"
+
+      # Truncate detail to 80 chars
+      if [[ ${#detail} -gt 80 ]]; then
+        detail="${detail:0:80}..."
+      fi
+
+      # Color the event type
+      local color=""
+      case "$event" in
+        push|pop|session|record)
+          color="$green" ;;
+        poke|drain|pause|resume)
+          color="$yellow" ;;
+        status|log|help|version)
+          color="$blue" ;;
+        error|stop|clear)
+          color="$red" ;;
+        *)
+          color="" ;;
+      esac
+
+      printf "%s  ${color}%-8s${reset}  %s\n" "$display_ts" "$event" "$detail"
+    done <<< "$lines"
+  fi
+}
+
+# ==============================================================================
+# Push subcommand
+# ==============================================================================
+
+cmd_push() {
+  local priority="$GSD_PRIORITY"
+  local message=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --priority=*) priority="${1#--priority=}" ; shift ;;
+      --priority)   priority="${2:-normal}" ; shift 2 ;;
+      -*)           echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)            message="$1" ; shift ;;
+    esac
+  done
+
+  # If no message from args, try stdin
+  if [[ -z "$message" ]]; then
+    if [[ ! -t 0 ]]; then
+      message=$(cat)
+    fi
+  fi
+
+  # Validate message exists
+  if [[ -z "$message" ]]; then
+    echo "Error: No message provided. Usage: gsd-stack push [--priority=urgent|normal|low] \"message\""
+    exit 1
+  fi
+
+  # Map priority to sort prefix
+  local prefix
+  case "$priority" in
+    urgent) prefix="0" ;;
+    normal) prefix="5" ;;
+    low)    prefix="9" ;;
+    *)
+      echo "Error: Invalid priority '$priority'. Use urgent, normal, or low."
+      exit 1
+      ;;
+  esac
+
+  # Generate unique filename: {prefix}-{epoch_ns}-{random}.md
+  local ts_epoch
+  ts_epoch=$(date +%s%N | cut -c1-13)  # millisecond epoch
+  local rand=$((RANDOM % 10000))
+  local filename="${prefix}-${ts_epoch}-$(printf '%04d' $rand).md"
+  local filepath="$GSD_STACK_DIR/pending/$filename"
+
+  # Generate ISO 8601 timestamp for frontmatter
+  local ts_iso
+  ts_iso=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+  # Write message file with YAML frontmatter
+  cat > "$filepath" <<MSGEOF
+---
+priority: $priority
+source: $GSD_SOURCE
+created: $ts_iso
+---
+$message
+MSGEOF
+
+  # Log event
+  log_event "push" "$priority: $message"
+
+  # Mirror to recording stream if active
+  local push_msg_escaped="${message//\\/\\\\}"
+  push_msg_escaped="${push_msg_escaped//\"/\\\"}"
+  push_msg_escaped="$(echo "$push_msg_escaped" | head -c 100)"
+  record_event "stack_push" "\"priority\":\"$priority\",\"message\":\"$push_msg_escaped\""
+
+  # Output
+  local msg_id="${filename%.md}"
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"id":"%s","priority":"%s","path":"%s"}\n' "$msg_id" "$priority" "$filepath"
+  else
+    echo "$filename"
+  fi
+}
+
+# ==============================================================================
+# Peek subcommand
+# ==============================================================================
+
+cmd_peek() {
+  # List pending messages in sort order
+  local files
+  if [[ "$GSD_STACK_MODE" == "lifo" ]]; then
+    # LIFO: newest first (reverse sort -- last pushed = highest timestamp)
+    files=$(ls -1r "$GSD_STACK_DIR/pending/" 2>/dev/null)
+  else
+    # FIFO: oldest first (normal sort -- priority prefix then oldest timestamp)
+    files=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null)
+  fi
+
+  # Check empty
+  if [[ -z "$files" ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"empty":true,"depth":0}\n'
+    else
+      echo "Stack is empty. No messages pending."
+    fi
+    log_event "peek" "empty stack"
+    return 0
+  fi
+
+  # Get the first file (next message)
+  local next_file
+  next_file=$(echo "$files" | head -1)
+  local filepath="$GSD_STACK_DIR/pending/$next_file"
+
+  # Count total pending
+  local depth
+  depth=$(echo "$files" | wc -l)
+  depth=$((depth + 0))  # trim whitespace
+
+  # Read the file and parse frontmatter + body
+  local content
+  content=$(cat "$filepath")
+
+  local priority="unknown"
+  local body=""
+  local in_frontmatter=false
+  local frontmatter_end=0
+  local line_num=0
+
+  while IFS= read -r line; do
+    line_num=$((line_num + 1))
+    if [[ "$line" == "---" ]]; then
+      if [[ "$in_frontmatter" == false ]]; then
+        in_frontmatter=true
+        continue
+      else
+        frontmatter_end=$line_num
+        in_frontmatter=false
+        continue
+      fi
+    fi
+    # Extract priority from frontmatter
+    if [[ "$in_frontmatter" == true ]] && [[ "$line" == priority:* ]]; then
+      priority="${line#priority: }"
+    fi
+    # Collect body lines (after frontmatter closes)
+    if [[ "$frontmatter_end" -gt 0 ]]; then
+      if [[ -n "$body" ]]; then
+        body="$body
+$line"
+      else
+        body="$line"
+      fi
+    fi
+  done <<< "$content"
+
+  # Log event
+  log_event "peek" "$priority: $(echo "$body" | head -1)"
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    # Escape body for JSON
+    local json_body="${body//\\/\\\\}"
+    json_body="${json_body//\"/\\\"}"
+    printf '{"id":"%s","priority":"%s","body":"%s","depth":%d}\n' \
+      "${next_file%.md}" "$priority" "$json_body" "$depth"
+  else
+    local priority_label
+    case "$priority" in
+      urgent) priority_label="[URGENT]" ;;
+      normal) priority_label="[normal]" ;;
+      low)    priority_label="[low]" ;;
+      *)      priority_label="[$priority]" ;;
+    esac
+    printf "%s %s\n" "$priority_label" "$body"
+    printf "(%d pending)\n" "$depth"
+  fi
+}
+
+# ==============================================================================
+# Pop subcommand
+# ==============================================================================
+
+cmd_pop() {
+  # List pending messages in sort order (same logic as peek)
+  local files
+  if [[ "$GSD_STACK_MODE" == "lifo" ]]; then
+    files=$(ls -1r "$GSD_STACK_DIR/pending/" 2>/dev/null)
+  else
+    files=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null)
+  fi
+
+  # Check empty
+  if [[ -z "$files" ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"empty":true}\n'
+    else
+      echo "Stack is empty. No messages to pop."
+    fi
+    log_event "pop" "empty stack"
+    return 0
+  fi
+
+  # Get the first file (next message to consume)
+  local next_file
+  next_file=$(echo "$files" | head -1)
+  local src_path="$GSD_STACK_DIR/pending/$next_file"
+  local dst_path="$GSD_STACK_DIR/done/$next_file"
+
+  # Read file content before moving
+  local content
+  content=$(cat "$src_path")
+
+  # Parse frontmatter and body (same as peek)
+  local priority="unknown"
+  local body=""
+  local in_frontmatter=false
+  local frontmatter_end=0
+  local line_num=0
+
+  while IFS= read -r line; do
+    line_num=$((line_num + 1))
+    if [[ "$line" == "---" ]]; then
+      if [[ "$in_frontmatter" == false ]]; then
+        in_frontmatter=true
+        continue
+      else
+        frontmatter_end=$line_num
+        in_frontmatter=false
+        continue
+      fi
+    fi
+    # Extract priority from frontmatter
+    if [[ "$in_frontmatter" == true ]] && [[ "$line" == priority:* ]]; then
+      priority="${line#priority: }"
+    fi
+    # Collect body lines (after frontmatter closes)
+    if [[ "$frontmatter_end" -gt 0 ]]; then
+      if [[ -n "$body" ]]; then
+        body="$body
+$line"
+      else
+        body="$line"
+      fi
+    fi
+  done <<< "$content"
+
+  # Move file from pending/ to done/ (audit-preserving, never delete)
+  mv "$src_path" "$dst_path"
+
+  # Log event
+  log_event "pop" "$priority: $(echo "$body" | head -1)"
+
+  # Mirror to recording stream if active
+  local pop_msg_escaped="${body//\\/\\\\}"
+  pop_msg_escaped="${pop_msg_escaped//\"/\\\"}"
+  pop_msg_escaped="$(echo "$pop_msg_escaped" | head -c 100)"
+  record_event "stack_pop" "\"priority\":\"$priority\",\"message\":\"$pop_msg_escaped\""
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    local json_body="${body//\\/\\\\}"
+    json_body="${json_body//\"/\\\"}"
+    printf '{"id":"%s","priority":"%s","body":"%s"}\n' \
+      "${next_file%.md}" "$priority" "$json_body"
+  else
+    local priority_label
+    case "$priority" in
+      urgent) priority_label="[URGENT]" ;;
+      normal) priority_label="[normal]" ;;
+      low)    priority_label="[low]" ;;
+      *)      priority_label="[$priority]" ;;
+    esac
+    printf "%s %s\n" "$priority_label" "$body"
+  fi
+}
+
+# ==============================================================================
+# Clear subcommand
+# ==============================================================================
+
+cmd_clear() {
+  # Count pending files
+  local files
+  files=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null)
+
+  if [[ -z "$files" ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"cleared":0}\n'
+    else
+      echo "Cleared 0 messages (stack was empty)."
+    fi
+    log_event "clear" "0 messages (empty)"
+    return 0
+  fi
+
+  # Count files
+  local count
+  count=$(echo "$files" | wc -l)
+  count=$((count + 0))  # trim whitespace
+
+  # Move ALL files from pending/ to done/
+  while IFS= read -r file; do
+    mv "$GSD_STACK_DIR/pending/$file" "$GSD_STACK_DIR/done/$file"
+  done <<< "$files"
+
+  # Log event
+  log_event "clear" "$count messages moved to done/"
+
+  # Mirror to recording stream if active
+  record_event "stack_clear" "\"count\":$count"
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"cleared":%d}\n' "$count"
+  else
+    echo "Cleared $count message(s). All moved to done/."
+  fi
+}
+
+# ==============================================================================
+# Session state machine
+# ==============================================================================
+
+get_session_state() {
+  local session_name="$1"
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+
+  # Check session exists
+  if [[ ! -d "$session_dir" ]] || [[ ! -f "$session_dir/meta.json" ]]; then
+    echo "unknown"
+    return 1
+  fi
+
+  # Read meta.json
+  local meta_content
+  meta_content=$(cat "$session_dir/meta.json")
+  local status
+  status=$(json_field "$meta_content" "status")
+
+  # Terminal/explicit states take priority
+  case "$status" in
+    paused)  echo "paused";  return 0 ;;
+    stopped) echo "stopped"; return 0 ;;
+    saved)   echo "saved";   return 0 ;;
+  esac
+
+  # For active status, cross-reference heartbeat freshness
+  if [[ "$status" == "active" ]]; then
+    local heartbeat_file="$session_dir/heartbeat"
+    if [[ ! -f "$heartbeat_file" ]]; then
+      echo "stalled"
+      return 0
+    fi
+
+    # Check heartbeat freshness
+    local now heartbeat_mtime age
+    now=$(date +%s)
+    heartbeat_mtime=$(stat -c %Y "$heartbeat_file" 2>/dev/null || stat -f %m "$heartbeat_file" 2>/dev/null)
+    age=$((now - heartbeat_mtime))
+
+    if [[ "$age" -gt "$GSD_STALL_TIMEOUT" ]]; then
+      echo "stalled"
+    else
+      echo "active"
+    fi
+    return 0
+  fi
+
+  # Fallback: return raw status from meta
+  echo "$status"
+  return 0
+}
+
+# ==============================================================================
+# Session subcommand
+# ==============================================================================
+
+cmd_session() {
+  local project_path=""
+  local name=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --name=*) name="${1#--name=}" ; shift ;;
+      --name)   name="${2:-}" ; shift 2 ;;
+      -*)       echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)        project_path="$1" ; shift ;;
+    esac
+  done
+
+  # Validate project path
+  if [[ -z "$project_path" ]]; then
+    echo "Error: Project path required. Usage: gsd-stack session <project-path> [--name=NAME]"
+    exit 1
+  fi
+
+  # Default name to basename of project path
+  if [[ -z "$name" ]]; then
+    name=$(basename "$project_path")
+  fi
+
+  # Check tmux availability (skip in mock mode)
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    if ! command -v tmux &>/dev/null; then
+      echo "Error: tmux is not available. Install tmux to manage sessions."
+      exit 1
+    fi
+  fi
+
+  # Check for duplicate active session
+  local session_dir="$GSD_STACK_DIR/sessions/$name"
+  if [[ -f "$session_dir/meta.json" ]]; then
+    local state
+    state=$(get_session_state "$name") || true
+    if [[ "$state" == "active" ]] || [[ "$state" == "stalled" ]]; then
+      echo "Error: Session '$name' already exists (status: $state)"
+      exit 1
+    fi
+  fi
+
+  # Create session directory
+  mkdir -p "$session_dir"
+
+  # Generate metadata
+  local ts tmux_name
+  ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  tmux_name="${GSD_TMUX_SESSION}-${name}"
+
+  # Write meta.json
+  printf '{"name":"%s","status":"active","project":"%s","started":"%s","tmux_session":"%s","pid":"%s"}\n' \
+    "$name" "$project_path" "$ts" "$tmux_name" "$$" > "$session_dir/meta.json"
+
+  # Touch heartbeat file
+  touch "$session_dir/heartbeat"
+
+  # Start heartbeat background process (skip in mock mode to avoid orphans)
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    (while true; do
+      if [[ -f "$session_dir/meta.json" ]]; then
+        local loop_status
+        loop_status=$(json_field "$(cat "$session_dir/meta.json")" "status")
+        if [[ "$loop_status" != "active" ]]; then break; fi
+      else
+        break
+      fi
+      touch "$session_dir/heartbeat"
+      sleep 10
+    done) &
+  fi
+
+  # Append to registry
+  printf '{"ts":"%s","name":"%s","project":"%s","action":"start"}\n' \
+    "$ts" "$name" "$project_path" >> "$GSD_STACK_DIR/registry.jsonl"
+
+  # Launch tmux session or mock
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    tmux new-session -d -s "$tmux_name" -c "$project_path" "claude"
+    log_event "session" "started: $name at $project_path"
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"name":"%s","status":"active","project":"%s","tmux_session":"%s"}\n' \
+        "$name" "$project_path" "$tmux_name"
+    else
+      echo "Session '$name' started in tmux ($tmux_name)"
+    fi
+  else
+    log_event "session" "started: $name at $project_path"
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"name":"%s","status":"active","project":"%s","tmux_session":"%s","mock":true}\n' \
+        "$name" "$project_path" "$tmux_name"
+    else
+      echo "Session '$name' started (mock mode)"
+    fi
+  fi
+}
+
+# ==============================================================================
+# List subcommand
+# ==============================================================================
+
+cmd_list() {
+  local filter=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --filter=*) filter="${1#--filter=}" ; shift ;;
+      --filter)   filter="${2:-}" ; shift 2 ;;
+      *)          shift ;;
+    esac
+  done
+
+  local sessions_dir="$GSD_STACK_DIR/sessions"
+  local found=0
+  local json_items=()
+
+  # Count pending messages for stack depth
+  local stack_depth=0
+  if [[ -d "$GSD_STACK_DIR/pending" ]]; then
+    stack_depth=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+    stack_depth=$((stack_depth + 0))
+  fi
+
+  # Detect active recording
+  local recording=""
+  for rec_meta in "$GSD_STACK_DIR"/recordings/*/meta.json; do
+    if [[ -f "$rec_meta" ]]; then
+      local rec_content
+      rec_content=$(cat "$rec_meta")
+      local rec_status
+      rec_status=$(json_field "$rec_content" "status")
+      if [[ "$rec_status" == "recording" ]]; then
+        recording=$(json_field "$rec_content" "name")
+        break
+      fi
+    fi
+  done
+
+  # Iterate session directories
+  for session_dir in "$sessions_dir"/*/; do
+    if [[ ! -d "$session_dir" ]]; then continue; fi
+
+    local name
+    name=$(basename "$session_dir")
+    local meta_file="$session_dir/meta.json"
+    if [[ ! -f "$meta_file" ]]; then continue; fi
+
+    local meta_content
+    meta_content=$(cat "$meta_file")
+    local session_name project started tmux_session
+    session_name=$(json_field "$meta_content" "name")
+    project=$(json_field "$meta_content" "project")
+    started=$(json_field "$meta_content" "started")
+    tmux_session=$(json_field "$meta_content" "tmux_session")
+
+    # Get live state from state machine
+    local state
+    state=$(get_session_state "$name" 2>/dev/null || echo "unknown")
+
+    # Apply filter
+    if [[ -n "$filter" ]] && [[ "$state" != "$filter" ]]; then
+      continue
+    fi
+
+    # Compute uptime for active/stalled/paused sessions
+    local uptime_str="--"
+    if [[ "$state" == "active" || "$state" == "stalled" || "$state" == "paused" ]]; then
+      if [[ -n "$started" ]]; then
+        local started_epoch
+        started_epoch=$(date -d "$started" +%s 2>/dev/null || echo "0")
+        if [[ "$started_epoch" -gt 0 ]]; then
+          local now_epoch elapsed hours minutes
+          now_epoch=$(date +%s)
+          elapsed=$((now_epoch - started_epoch))
+          hours=$((elapsed / 3600))
+          minutes=$(((elapsed % 3600) / 60))
+          if [[ $hours -gt 0 ]]; then
+            uptime_str="${hours}h ${minutes}m"
+          else
+            uptime_str="${minutes}m"
+          fi
+        fi
+      fi
+    fi
+
+    # Recording for this output
+    local rec_display="${recording:-"--"}"
+
+    found=$((found + 1))
+
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      json_items+=("{\"name\":\"${session_name}\",\"state\":\"${state}\",\"project\":\"${project}\",\"uptime\":\"${uptime_str}\",\"stack_depth\":${stack_depth},\"recording\":\"${rec_display}\"}")
+    else
+      # Human output -- print header on first session
+      if [[ "$found" -eq 1 ]]; then
+        printf "%-15s %-10s %-30s %-8s %-6s %s\n" "NAME" "STATE" "PROJECT" "UPTIME" "STACK" "REC"
+      fi
+      printf "%-15s %-10s %-30s %-8s %-6s %s\n" \
+        "$session_name" "$state" "$project" "$uptime_str" "$stack_depth" "$rec_display"
+    fi
+  done
+
+  # Handle empty results
+  if [[ "$found" -eq 0 ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      echo "[]"
+    else
+      echo "No sessions found."
+    fi
+    log_event "list" "listed sessions (filter=${filter:-all}) -- none found"
+    return 0
+  fi
+
+  # JSON output: build array
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    local first=true
+    printf "["
+    for item in "${json_items[@]}"; do
+      if [[ "$first" == true ]]; then
+        first=false
+      else
+        printf ","
+      fi
+      printf "%s" "$item"
+    done
+    printf "]\n"
+  fi
+
+  log_event "list" "listed sessions (filter=${filter:-all}, count=$found)"
+}
+
+# ==============================================================================
+# Watch subcommand
+# ==============================================================================
+
+cmd_watch() {
+  local session_name=""
+
+  # Parse arguments
+  if [[ $# -lt 1 ]] || [[ -z "${1:-}" ]]; then
+    echo "Error: Session name required. Usage: gsd-stack watch <session-name>"
+    exit 1
+  fi
+  session_name="$1"
+
+  # Check session exists
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+  if [[ ! -d "$session_dir" ]] || [[ ! -f "$session_dir/meta.json" ]]; then
+    echo "Error: Session '$session_name' not found"
+    exit 1
+  fi
+
+  # Get session state
+  local state
+  state=$(get_session_state "$session_name" 2>/dev/null || echo "unknown")
+  if [[ "$state" != "active" ]]; then
+    echo "Error: Cannot watch session '$session_name' (state: $state) -- session must be active"
+    exit 1
+  fi
+
+  # Read tmux session name
+  local meta_content tmux_session
+  meta_content=$(cat "$session_dir/meta.json")
+  tmux_session=$(json_field "$meta_content" "tmux_session")
+
+  # Mock mode: just print what would happen
+  if [[ -n "$GSD_MOCK_TMUX" ]]; then
+    echo "Would attach read-only to tmux session '$tmux_session' (session: $session_name)"
+    log_event "watch" "watched: $session_name (mock)"
+    return 0
+  fi
+
+  # Real mode: check tmux availability
+  if ! command -v tmux &>/dev/null; then
+    echo "Error: tmux is not available. Install tmux to watch sessions."
+    exit 1
+  fi
+
+  # Check tmux session exists
+  if ! tmux has-session -t "$tmux_session" 2>/dev/null; then
+    echo "Error: Tmux session '$tmux_session' not found"
+    exit 1
+  fi
+
+  # Attach read-only
+  tmux attach-session -t "$tmux_session" -r
+  log_event "watch" "watched: $session_name"
+}
+
+# ==============================================================================
+# Poke subcommand
+# ==============================================================================
+
+cmd_poke() {
+  local message=""
+  local target_session=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --session=*) target_session="${1#--session=}" ; shift ;;
+      --session)   target_session="${2:-}" ; shift 2 ;;
+      -*)          echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)           message="$1" ; shift ;;
+    esac
+  done
+
+  # Find active session
+  local session_name="" tmux_target=""
+  if [[ -n "$target_session" ]]; then
+    # Targeted session
+    local session_dir="$GSD_STACK_DIR/sessions/$target_session"
+    if [[ ! -f "$session_dir/meta.json" ]]; then
+      echo "Error: No session '$target_session' found."
+      exit 1
+    fi
+    local meta_content
+    meta_content=$(cat "$session_dir/meta.json")
+    local state
+    state=$(get_session_state "$target_session") || true
+    if [[ "$state" != "active" ]] && [[ "$state" != "stalled" ]]; then
+      echo "Error: Session '$target_session' is not active (status: $state)."
+      exit 1
+    fi
+    session_name="$target_session"
+    tmux_target=$(json_field "$meta_content" "tmux_session")
+  else
+    # Find first active session
+    for meta in "$GSD_STACK_DIR"/sessions/*/meta.json; do
+      if [[ -f "$meta" ]]; then
+        local meta_content
+        meta_content=$(cat "$meta")
+        local s_name s_status
+        s_name=$(json_field "$meta_content" "name")
+        s_status=$(json_field "$meta_content" "status")
+        if [[ "$s_status" == "active" ]]; then
+          session_name="$s_name"
+          tmux_target=$(json_field "$meta_content" "tmux_session")
+          break
+        fi
+      fi
+    done
+  fi
+
+  # Error if no active session found
+  if [[ -z "$session_name" ]]; then
+    echo "Error: No active session found. Start one with 'gsd-stack session <path>'."
+    exit 1
+  fi
+
+  # Determine poke content: direct message or nudge
+  local poke_type="direct"
+  local poke_content="$message"
+  if [[ -z "$message" ]]; then
+    poke_type="nudge"
+    poke_content="process the command stack -- run /pop-stack"
+  fi
+
+  # Send via tmux or mock
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    # Real tmux send-keys
+    tmux send-keys -t "$tmux_target" "$poke_content" Enter
+  fi
+  # In mock mode, skip tmux but still log and report
+
+  # Log event
+  log_event "poke" "$poke_type: $poke_content (session: $session_name)"
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    local json_content="${poke_content//\\/\\\\}"
+    json_content="${json_content//\"/\\\"}"
+    printf '{"status":"delivered","type":"%s","message":"%s","session":"%s"}\n' \
+      "$poke_type" "$json_content" "$session_name"
+  else
+    if [[ "$poke_type" == "nudge" ]]; then
+      echo "Poked '$session_name' with nudge: $poke_content"
+    else
+      echo "Poked '$session_name': $poke_content"
+    fi
+  fi
+}
+
+# ==============================================================================
+# Drain subcommand
+# ==============================================================================
+
+cmd_drain() {
+  local dry_run=false
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --dry-run) dry_run=true ; shift ;;
+      -*)        echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)         shift ;;
+    esac
+  done
+
+  # Count pending messages
+  local files
+  if [[ "$GSD_STACK_MODE" == "lifo" ]]; then
+    files=$(ls -1r "$GSD_STACK_DIR/pending/" 2>/dev/null)
+  else
+    files=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null)
+  fi
+
+  if [[ -z "$files" ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"processed":0,"passed":0,"failed":0,"status":"empty"}\n'
+    else
+      echo "Nothing to drain. Stack is empty."
+    fi
+    log_event "drain" "0 messages (empty)"
+    return 0
+  fi
+
+  local total
+  total=$(echo "$files" | wc -l)
+  total=$((total + 0))
+
+  # Dry-run mode: show what would be executed without consuming
+  if [[ "$dry_run" == true ]]; then
+    local idx=0
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"dry_run":true,"total":%d,"messages":[' "$total"
+      local first=true
+      while IFS= read -r file; do
+        idx=$((idx + 1))
+        local filepath="$GSD_STACK_DIR/pending/$file"
+        local body=""
+        local in_fm=false fm_end=0
+        while IFS= read -r line; do
+          if [[ "$line" == "---" ]]; then
+            if [[ "$in_fm" == false ]]; then in_fm=true; continue; else fm_end=1; in_fm=false; continue; fi
+          fi
+          if [[ "$fm_end" -gt 0 ]]; then
+            if [[ -n "$body" ]]; then body="$body $line"; else body="$line"; fi
+          fi
+        done < "$filepath"
+        local json_body="${body//\\/\\\\}"
+        json_body="${json_body//\"/\\\"}"
+        if [[ "$first" == true ]]; then first=false; else printf ","; fi
+        printf '{"index":%d,"id":"%s","body":"%s"}' "$idx" "${file%.md}" "$json_body"
+      done <<< "$files"
+      printf ']}\n'
+    else
+      echo "Dry-run: would process $total message(s):"
+      while IFS= read -r file; do
+        idx=$((idx + 1))
+        local filepath="$GSD_STACK_DIR/pending/$file"
+        # Extract body from file
+        local body=""
+        local in_fm=false fm_end=0
+        while IFS= read -r line; do
+          if [[ "$line" == "---" ]]; then
+            if [[ "$in_fm" == false ]]; then in_fm=true; continue; else fm_end=1; in_fm=false; continue; fi
+          fi
+          if [[ "$fm_end" -gt 0 ]]; then
+            if [[ -n "$body" ]]; then body="$body $line"; else body="$line"; fi
+          fi
+        done < "$filepath"
+        # Truncate body for display
+        if [[ ${#body} -gt 80 ]]; then body="${body:0:80}..."; fi
+        printf "  [%d/%d] would execute: %s\n" "$idx" "$total" "$body"
+      done <<< "$files"
+    fi
+    log_event "drain" "dry-run: $total messages"
+    return 0
+  fi
+
+  # Create log directory
+  local drain_ts
+  drain_ts=$(date +%s)
+  local log_dir="$GSD_DRAIN_LOG_DIR/drain-$drain_ts"
+  mkdir -p "$log_dir"
+
+  # Process loop: pop and execute each message
+  local processed=0 passed=0 failed=0
+  local idx=0
+  local json_results=""
+
+  while true; do
+    # Check if stack is empty
+    local remaining
+    remaining=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+    remaining=$((remaining + 0))
+    if [[ "$remaining" -eq 0 ]]; then break; fi
+
+    idx=$((idx + 1))
+
+    # Pop the next message (reuse pop's sort logic inline to get body)
+    local pop_files
+    if [[ "$GSD_STACK_MODE" == "lifo" ]]; then
+      pop_files=$(ls -1r "$GSD_STACK_DIR/pending/" 2>/dev/null)
+    else
+      pop_files=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null)
+    fi
+    local next_file
+    next_file=$(echo "$pop_files" | head -1)
+    local src_path="$GSD_STACK_DIR/pending/$next_file"
+    local dst_path="$GSD_STACK_DIR/done/$next_file"
+
+    # Read content
+    local content
+    content=$(cat "$src_path")
+
+    # Extract body
+    local body="" priority="unknown"
+    local in_fm=false fm_end=0
+    while IFS= read -r line; do
+      if [[ "$line" == "---" ]]; then
+        if [[ "$in_fm" == false ]]; then in_fm=true; continue; else fm_end=1; in_fm=false; continue; fi
+      fi
+      if [[ "$in_fm" == true ]] && [[ "$line" == priority:* ]]; then
+        priority="${line#priority: }"
+      fi
+      if [[ "$fm_end" -gt 0 ]]; then
+        if [[ -n "$body" ]]; then body="$body
+$line"; else body="$line"; fi
+      fi
+    done <<< "$content"
+
+    # Move to done (consume)
+    mv "$src_path" "$dst_path"
+
+    # Display progress (truncate body for display)
+    local display_body="$body"
+    if [[ ${#display_body} -gt 60 ]]; then display_body="${display_body:0:60}..."; fi
+
+    # Execute via claude -p --continue (or mock)
+    local log_file="$log_dir/$(printf '%03d' $idx)-${next_file%.md}.log"
+    local exec_rc=0
+
+    if [[ -n "$GSD_MOCK_DRAIN" ]]; then
+      # Mock mode: simulate success
+      echo "[mock] Would execute: $body" > "$log_file"
+      exec_rc=0
+    else
+      # Real execution via claude -p --continue
+      set +e
+      echo "$body" | claude -p --continue > "$log_file" 2>&1
+      exec_rc=$?
+      set -e
+    fi
+
+    processed=$((processed + 1))
+    local result_status="passed"
+    if [[ "$exec_rc" -eq 0 ]]; then
+      passed=$((passed + 1))
+    else
+      failed=$((failed + 1))
+      result_status="failed"
+    fi
+
+    # Log per-message event
+    log_event "pop" "$priority: $(echo "$body" | head -1)"
+
+    if [[ "$GSD_FORMAT" != "json" ]]; then
+      local status_icon="+"
+      if [[ "$result_status" == "failed" ]]; then status_icon="!"; fi
+      printf "  [%d/%d] %s %s\n" "$idx" "$total" "$status_icon" "$display_body"
+    else
+      local json_body="${body//\\/\\\\}"
+      json_body="${json_body//\"/\\\"}"
+      if [[ -n "$json_results" ]]; then json_results="$json_results,"; fi
+      json_results="${json_results}{\"index\":$idx,\"id\":\"${next_file%.md}\",\"status\":\"$result_status\",\"body\":\"$json_body\"}"
+    fi
+  done
+
+  # Final summary
+  log_event "drain" "$processed processed ($passed passed, $failed failed)"
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"processed":%d,"passed":%d,"failed":%d,"log_dir":"%s","results":[%s]}\n' \
+      "$processed" "$passed" "$failed" "$log_dir" "$json_results"
+  else
+    echo ""
+    echo "Drain complete: $processed processed ($passed passed, $failed failed)"
+    echo "Logs: $log_dir"
+  fi
+}
+
+# ==============================================================================
+# Save snapshot internal helper
+# ==============================================================================
+
+_save_snapshot() {
+  local session_name="$1"
+  local note="${2:-}"
+
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+
+  # Validate session exists
+  if [[ ! -d "$session_dir" ]] || [[ ! -f "$session_dir/meta.json" ]]; then
+    echo "Error: Session '$session_name' not found" >&2
+    return 1
+  fi
+
+  # Read meta.json
+  local meta_content
+  meta_content=$(cat "$session_dir/meta.json")
+
+  # Collect pending stack info
+  local pending_count=0
+  local pending_files=""
+  if [[ -d "$GSD_STACK_DIR/pending" ]]; then
+    pending_count=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | wc -l)
+    pending_count=$((pending_count + 0))
+    pending_files=$(ls -1 "$GSD_STACK_DIR/pending/" 2>/dev/null | tr '\n' ',' | sed 's/,$//')
+  fi
+
+  # Read STATE.md from project dir if it exists
+  local project_path
+  project_path=$(json_field "$meta_content" "project")
+  local state_md_content=""
+  if [[ -n "$project_path" ]] && [[ -f "$project_path/.planning/STATE.md" ]]; then
+    state_md_content=$(cat "$project_path/.planning/STATE.md" 2>/dev/null || echo "")
+  fi
+
+  # Capture terminal context from tmux (last 50 lines) -- skip in mock mode
+  local terminal_context=""
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    local tmux_session
+    tmux_session=$(json_field "$meta_content" "tmux_session")
+    if tmux has-session -t "$tmux_session" 2>/dev/null; then
+      terminal_context=$(tmux capture-pane -t "$tmux_session" -p -S -50 2>/dev/null || echo "")
+    fi
+  fi
+
+  # Generate save filename and timestamp
+  local save_ts save_ts_file
+  save_ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  save_ts_file=$(date -u +"%Y%m%d-%H%M%S")
+  local save_file="$GSD_STACK_DIR/saves/${session_name}-${save_ts_file}.json"
+
+  # Escape strings for JSON embedding
+  local state_md_escaped terminal_escaped note_escaped pending_files_escaped
+  state_md_escaped=$(printf '%s' "$state_md_content" | sed 's/\\/\\\\/g; s/"/\\"/g' | tr '\n' '|' | sed 's/|/\\n/g')
+  terminal_escaped=$(printf '%s' "$terminal_context" | sed 's/\\/\\\\/g; s/"/\\"/g' | tr '\n' '|' | sed 's/|/\\n/g')
+  note_escaped=$(printf '%s' "${note:-}" | sed 's/\\/\\\\/g; s/"/\\"/g')
+  pending_files_escaped=$(printf '%s' "$pending_files" | sed 's/\\/\\\\/g; s/"/\\"/g')
+
+  # Write snapshot JSON
+  printf '{"name":"%s","saved_at":"%s","note":"%s","meta":%s,"pending_count":%d,"pending_files":"%s","state_md":"%s","terminal_context":"%s"}\n' \
+    "$session_name" "$save_ts" "$note_escaped" "$meta_content" "$pending_count" "$pending_files_escaped" "$state_md_escaped" "$terminal_escaped" \
+    > "$save_file"
+
+  echo "$save_file"
+  return 0
+}
+
+# ==============================================================================
+# Save subcommand
+# ==============================================================================
+
+cmd_save() {
+  local session_name=""
+  local note=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --note=*) note="${1#--note=}" ; shift ;;
+      --note)   note="${2:-}" ; shift 2 ;;
+      -*)       echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)        session_name="$1" ; shift ;;
+    esac
+  done
+
+  # Validate session name provided
+  if [[ -z "$session_name" ]]; then
+    echo "Error: Session name required. Usage: gsd-stack save <session-name> [--note=TEXT]"
+    exit 1
+  fi
+
+  # Call the internal save helper
+  local save_file
+  save_file=$(_save_snapshot "$session_name" "$note")
+  local save_rc=$?
+  if [[ "$save_rc" -ne 0 ]]; then
+    exit 1
+  fi
+
+  # Update meta.json status to "saved" (standalone save marks session as saved)
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+  local meta_content
+  meta_content=$(cat "$session_dir/meta.json")
+  local updated_meta
+  updated_meta=$(echo "$meta_content" | sed 's/"status":"[^"]*"/"status":"saved"/')
+  echo "$updated_meta" > "$session_dir/meta.json"
+
+  log_event "save" "saved: $session_name -> $(basename "$save_file")"
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"session":"%s","save_file":"%s","status":"saved"}\n' "$session_name" "$save_file"
+  else
+    echo "Session '$session_name' saved to $(basename "$save_file")"
+  fi
+}
+
+# ==============================================================================
+# Pause subcommand
+# ==============================================================================
+
+cmd_pause() {
+  local session_name=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -*)  echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)   session_name="$1" ; shift ;;
+    esac
+  done
+
+  # Validate session name provided
+  if [[ -z "$session_name" ]]; then
+    echo "Error: Session name required. Usage: gsd-stack pause <session-name>"
+    exit 1
+  fi
+
+  # Check session exists
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+  if [[ ! -d "$session_dir" ]] || [[ ! -f "$session_dir/meta.json" ]]; then
+    echo "Error: Session '$session_name' not found"
+    exit 1
+  fi
+
+  # Validate session state is active or stalled
+  local state
+  state=$(get_session_state "$session_name") || true
+  if [[ "$state" != "active" ]] && [[ "$state" != "stalled" ]]; then
+    echo "Error: Cannot pause session '$session_name' (state: $state) -- must be active or stalled"
+    exit 1
+  fi
+
+  # Step 1: Send Ctrl+C interrupt (skip in mock mode)
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    local tmux_session
+    tmux_session=$(json_field "$(cat "$session_dir/meta.json")" "tmux_session")
+    tmux send-keys -t "$tmux_session" C-c 2>/dev/null || true
+    sleep 1  # Brief pause to let interrupt propagate
+  fi
+
+  # Step 2: Auto-save (snapshot before status change)
+  local save_file=""
+  save_file=$(_save_snapshot "$session_name" "auto-save on pause") || true
+
+  # Step 3: Update meta.json status to "paused"
+  local meta_content
+  meta_content=$(cat "$session_dir/meta.json")
+  local updated_meta
+  updated_meta=$(echo "$meta_content" | sed 's/"status":"[^"]*"/"status":"paused"/')
+  echo "$updated_meta" > "$session_dir/meta.json"
+
+  log_event "pause" "paused: $session_name"
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"session":"%s","status":"paused","save_file":"%s"}\n' "$session_name" "${save_file:-none}"
+  else
+    echo "Session '$session_name' paused"
+    if [[ -n "${save_file:-}" ]]; then
+      echo "State saved to $(basename "$save_file")"
+    fi
+  fi
+}
+
+# ==============================================================================
+# Warm-start prompt generator (internal helper)
+# ==============================================================================
+
+_generate_warm_start_prompt() {
+  local session_name="$1"
+
+  # Find the most recent save file for this session
+  # Save files are named {session_name}-{YYYYMMDD-HHMMSS}.json
+  # Glob iteration gives last match as most recent (lexicographic sort via timestamps)
+  local latest_save=""
+  for save_file in "$GSD_STACK_DIR/saves/${session_name}"-*.json; do
+    if [[ -f "$save_file" ]]; then
+      latest_save="$save_file"
+    fi
+  done
+
+  if [[ -z "$latest_save" ]]; then
+    # No save file found -- generate minimal prompt
+    echo "Resuming session '$session_name'. Check /gsd:progress for current state."
+    return 0
+  fi
+
+  # Read save file
+  local save_content
+  save_content=$(cat "$latest_save")
+
+  # Extract fields
+  local saved_at note pending_count state_md
+  saved_at=$(json_field "$save_content" "saved_at")
+  note=$(json_field "$save_content" "note")
+  pending_count=$(json_field_num "$save_content" "pending_count")
+  state_md=$(json_field "$save_content" "state_md")
+
+  # Build contextual prompt
+  local prompt="Resuming session '$session_name'"
+  if [[ -n "$saved_at" ]]; then
+    prompt="$prompt (last saved: $saved_at)"
+  fi
+  prompt="$prompt."
+
+  if [[ -n "$note" ]] && [[ "$note" != "auto-save on pause" ]]; then
+    prompt="$prompt Note: $note."
+  fi
+
+  if [[ "${pending_count:-0}" -gt 0 ]]; then
+    prompt="$prompt $pending_count message(s) in stack."
+  fi
+
+  if [[ -n "$state_md" ]] && [[ "$state_md" != "" ]]; then
+    prompt="$prompt Check STATE.md for current position."
+  fi
+
+  prompt="$prompt Run /gsd:progress to see where you left off."
+
+  echo "$prompt"
+  return 0
+}
+
+# ==============================================================================
+# Resume subcommand
+# ==============================================================================
+
+cmd_resume() {
+  local session_name=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -*)  echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)   session_name="$1" ; shift ;;
+    esac
+  done
+
+  # Validate session name provided
+  if [[ -z "$session_name" ]]; then
+    echo "Error: Session name required. Usage: gsd-stack resume <session-name>"
+    exit 1
+  fi
+
+  # Check session exists
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+  if [[ ! -d "$session_dir" ]] || [[ ! -f "$session_dir/meta.json" ]]; then
+    echo "Error: Session '$session_name' not found"
+    exit 1
+  fi
+
+  # Get current state
+  local state
+  state=$(get_session_state "$session_name") || state="unknown"
+
+  case "$state" in
+    active)
+      echo "Session '$session_name' is already active."
+      exit 0
+      ;;
+
+    paused)
+      # Path 1: Resume paused session -- reattach to existing tmux
+      local prompt
+      prompt=$(_generate_warm_start_prompt "$session_name")
+
+      # Update meta.json status to active
+      local meta_content updated_meta
+      meta_content=$(cat "$session_dir/meta.json")
+      updated_meta=$(echo "$meta_content" | sed 's/"status":"[^"]*"/"status":"active"/')
+      echo "$updated_meta" > "$session_dir/meta.json"
+
+      # Refresh heartbeat
+      touch "$session_dir/heartbeat"
+
+      # Start heartbeat background process (non-mock only)
+      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+        (while true; do
+          if [[ -f "$session_dir/meta.json" ]]; then
+            local loop_status
+            loop_status=$(json_field "$(cat "$session_dir/meta.json")" "status")
+            if [[ "$loop_status" != "active" ]]; then break; fi
+          else
+            break
+          fi
+          touch "$session_dir/heartbeat"
+          sleep 10
+        done) &
+      fi
+
+      # Send warm-start prompt to tmux session (non-mock only)
+      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+        local tmux_session
+        tmux_session=$(json_field "$meta_content" "tmux_session")
+        if tmux has-session -t "$tmux_session" 2>/dev/null; then
+          tmux send-keys -t "$tmux_session" "$prompt" Enter
+        fi
+      fi
+
+      log_event "resume" "resumed paused: $session_name"
+
+      if [[ "$GSD_FORMAT" == "json" ]]; then
+        local json_prompt="${prompt//\\/\\\\}"
+        json_prompt="${json_prompt//\"/\\\"}"
+        printf '{"session":"%s","status":"active","path":"paused","prompt":"%s"}\n' "$session_name" "$json_prompt"
+      else
+        echo "Session '$session_name' resumed (was paused)"
+        echo "Warm-start: $prompt"
+      fi
+      ;;
+
+    stalled)
+      # Path 2: Resume stalled session -- recovery attempt
+      local prompt
+      prompt=$(_generate_warm_start_prompt "$session_name")
+
+      # Update meta.json status to active
+      local meta_content updated_meta
+      meta_content=$(cat "$session_dir/meta.json")
+      updated_meta=$(echo "$meta_content" | sed 's/"status":"[^"]*"/"status":"active"/')
+      echo "$updated_meta" > "$session_dir/meta.json"
+
+      # Refresh heartbeat
+      touch "$session_dir/heartbeat"
+
+      # Start heartbeat background process (non-mock only)
+      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+        (while true; do
+          if [[ -f "$session_dir/meta.json" ]]; then
+            local loop_status
+            loop_status=$(json_field "$(cat "$session_dir/meta.json")" "status")
+            if [[ "$loop_status" != "active" ]]; then break; fi
+          else
+            break
+          fi
+          touch "$session_dir/heartbeat"
+          sleep 10
+        done) &
+      fi
+
+      # Send warm-start prompt to tmux session (non-mock, if tmux session still exists)
+      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+        local tmux_session
+        tmux_session=$(json_field "$meta_content" "tmux_session")
+        if tmux has-session -t "$tmux_session" 2>/dev/null; then
+          tmux send-keys -t "$tmux_session" "$prompt" Enter
+        fi
+      fi
+
+      log_event "resume" "recovered stalled: $session_name"
+
+      if [[ "$GSD_FORMAT" == "json" ]]; then
+        local json_prompt="${prompt//\\/\\\\}"
+        json_prompt="${json_prompt//\"/\\\"}"
+        printf '{"session":"%s","status":"active","path":"stalled","prompt":"%s"}\n' "$session_name" "$json_prompt"
+      else
+        echo "Session '$session_name' recovered (was stalled)"
+        echo "Warm-start: $prompt"
+      fi
+      ;;
+
+    saved)
+      # Path 3: Resume saved session -- start new tmux session seeded with context
+      local prompt
+      prompt=$(_generate_warm_start_prompt "$session_name")
+      local meta_content project_path tmux_name
+      meta_content=$(cat "$session_dir/meta.json")
+      project_path=$(json_field "$meta_content" "project")
+      tmux_name=$(json_field "$meta_content" "tmux_session")
+
+      # Update meta.json status to active
+      local updated_meta
+      updated_meta=$(echo "$meta_content" | sed 's/"status":"[^"]*"/"status":"active"/')
+      echo "$updated_meta" > "$session_dir/meta.json"
+
+      # Create/refresh heartbeat
+      touch "$session_dir/heartbeat"
+
+      # Start heartbeat background process (non-mock only)
+      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+        (while true; do
+          if [[ -f "$session_dir/meta.json" ]]; then
+            local loop_status
+            loop_status=$(json_field "$(cat "$session_dir/meta.json")" "status")
+            if [[ "$loop_status" != "active" ]]; then break; fi
+          else
+            break
+          fi
+          touch "$session_dir/heartbeat"
+          sleep 10
+        done) &
+      fi
+
+      # Start new tmux session with Claude (non-mock only)
+      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+        tmux new-session -d -s "$tmux_name" -c "$project_path" "claude"
+        sleep 1
+        # Send warm-start prompt
+        if tmux has-session -t "$tmux_name" 2>/dev/null; then
+          tmux send-keys -t "$tmux_name" "$prompt" Enter
+        fi
+      fi
+
+      # Log to registry (new session event)
+      local ts
+      ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+      printf '{"ts":"%s","name":"%s","project":"%s","action":"resume"}\n' \
+        "$ts" "$session_name" "$project_path" >> "$GSD_STACK_DIR/registry.jsonl"
+
+      log_event "resume" "resumed saved: $session_name (new session)"
+
+      if [[ "$GSD_FORMAT" == "json" ]]; then
+        local json_prompt="${prompt//\\/\\\\}"
+        json_prompt="${json_prompt//\"/\\\"}"
+        printf '{"session":"%s","status":"active","path":"saved","prompt":"%s"}\n' "$session_name" "$json_prompt"
+      else
+        echo "Session '$session_name' resumed (new session from save)"
+        echo "Warm-start: $prompt"
+      fi
+      ;;
+
+    stopped)
+      echo "Error: Cannot resume stopped session '$session_name'. Use 'gsd-stack session' to start a new session."
+      exit 1
+      ;;
+
+    unknown|*)
+      echo "Error: Session '$session_name' not found or in unknown state."
+      exit 1
+      ;;
+  esac
+}
+
+# ==============================================================================
+# Session stats helper (internal)
+# ==============================================================================
+
+_compute_session_stats() {
+  local session_name="$1"
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+  local meta_content
+  meta_content=$(cat "$session_dir/meta.json")
+  local started
+  started=$(json_field "$meta_content" "started")
+
+  # Compute duration
+  local duration_str="unknown"
+  if [[ -n "$started" ]]; then
+    local started_epoch
+    started_epoch=$(date -d "$started" +%s 2>/dev/null || echo "0")
+    if [[ "$started_epoch" -gt 0 ]]; then
+      local now_epoch elapsed hours minutes seconds
+      now_epoch=$(date +%s)
+      elapsed=$((now_epoch - started_epoch))
+      hours=$((elapsed / 3600))
+      minutes=$(((elapsed % 3600) / 60))
+      seconds=$((elapsed % 60))
+      if [[ $hours -gt 0 ]]; then
+        duration_str="${hours}h ${minutes}m ${seconds}s"
+      elif [[ $minutes -gt 0 ]]; then
+        duration_str="${minutes}m ${seconds}s"
+      else
+        duration_str="${seconds}s"
+      fi
+    fi
+  fi
+
+  # Count push/pop events from history
+  local push_count=0
+  local pop_count=0
+  if [[ -f "$GSD_STACK_DIR/history.jsonl" ]]; then
+    push_count=$(grep -c '"event":"push"' "$GSD_STACK_DIR/history.jsonl" 2>/dev/null || echo "0")
+    pop_count=$(grep -c '"event":"pop"' "$GSD_STACK_DIR/history.jsonl" 2>/dev/null || echo "0")
+  fi
+
+  # Count save files for this session
+  local save_count=0
+  for sf in "$GSD_STACK_DIR/saves/${session_name}"-*.json; do
+    if [[ -f "$sf" ]]; then
+      save_count=$((save_count + 1))
+    fi
+  done
+
+  # Output as simple key=value pairs for the caller to parse
+  echo "duration=$duration_str"
+  echo "pushes=$push_count"
+  echo "pops=$pop_count"
+  echo "saves=$save_count"
+}
+
+# ==============================================================================
+# Stop subcommand
+# ==============================================================================
+
+cmd_stop() {
+  local session_name=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -*)  echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)   session_name="$1" ; shift ;;
+    esac
+  done
+
+  # Validate session name provided
+  if [[ -z "$session_name" ]]; then
+    echo "Error: Session name required. Usage: gsd-stack stop <session-name>"
+    exit 1
+  fi
+
+  # Check session exists
+  local session_dir="$GSD_STACK_DIR/sessions/$session_name"
+  if [[ ! -d "$session_dir" ]] || [[ ! -f "$session_dir/meta.json" ]]; then
+    echo "Error: Session '$session_name' not found"
+    exit 1
+  fi
+
+  # Get current state
+  local state
+  state=$(get_session_state "$session_name") || state="unknown"
+
+  # Cannot stop an already-stopped session
+  if [[ "$state" == "stopped" ]]; then
+    echo "Error: Session '$session_name' is already stopped"
+    exit 1
+  fi
+
+  # Cannot stop unknown/nonexistent
+  if [[ "$state" == "unknown" ]]; then
+    echo "Error: Session '$session_name' not found"
+    exit 1
+  fi
+
+  # Step 1: Auto-save before shutdown
+  local save_file=""
+  save_file=$(_save_snapshot "$session_name" "auto-save on stop") || true
+
+  # Step 2: Graceful shutdown sequence (skip in mock mode)
+  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+    local meta_content tmux_session
+    meta_content=$(cat "$session_dir/meta.json")
+    tmux_session=$(json_field "$meta_content" "tmux_session")
+
+    if tmux has-session -t "$tmux_session" 2>/dev/null; then
+      # Send /exit (Claude's exit command)
+      tmux send-keys -t "$tmux_session" "/exit" Enter 2>/dev/null || true
+      sleep 3
+
+      # If still alive, send Ctrl+C
+      if tmux has-session -t "$tmux_session" 2>/dev/null; then
+        tmux send-keys -t "$tmux_session" C-c 2>/dev/null || true
+        sleep 2
+      fi
+
+      # If still alive, send Ctrl+D (EOF)
+      if tmux has-session -t "$tmux_session" 2>/dev/null; then
+        tmux send-keys -t "$tmux_session" C-d 2>/dev/null || true
+        sleep 1
+      fi
+
+      # Final resort: kill the tmux session
+      if tmux has-session -t "$tmux_session" 2>/dev/null; then
+        tmux kill-session -t "$tmux_session" 2>/dev/null || true
+      fi
+    fi
+  fi
+
+  # Step 3: Update meta.json status to stopped
+  local meta_content
+  meta_content=$(cat "$session_dir/meta.json")
+  local updated_meta
+  updated_meta=$(echo "$meta_content" | sed 's/"status":"[^"]*"/"status":"stopped"/')
+  echo "$updated_meta" > "$session_dir/meta.json"
+
+  # Step 4: Remove heartbeat file (cleanup)
+  rm -f "$session_dir/heartbeat"
+
+  # Step 5: Compute and display session stats
+  local stats duration pushes pops saves
+  stats=$(_compute_session_stats "$session_name")
+  duration=$(echo "$stats" | grep "^duration=" | cut -d= -f2)
+  pushes=$(echo "$stats" | grep "^pushes=" | cut -d= -f2)
+  pops=$(echo "$stats" | grep "^pops=" | cut -d= -f2)
+  saves=$(echo "$stats" | grep "^saves=" | cut -d= -f2)
+
+  # Step 6: Log to history and registry
+  log_event "stop" "stopped: $session_name (duration: $duration)"
+
+  local ts
+  ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  printf '{"ts":"%s","name":"%s","project":"%s","action":"stop"}\n' \
+    "$ts" "$session_name" "$(json_field "$meta_content" "project")" >> "$GSD_STACK_DIR/registry.jsonl"
+
+  # Step 7: Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"session":"%s","status":"stopped","duration":"%s","pushes":%s,"pops":%s,"saves":%s}\n' \
+      "$session_name" "$duration" "$pushes" "$pops" "$saves"
+  else
+    echo "Session '$session_name' stopped"
+    echo "  Duration: $duration"
+    echo "  Messages: $pushes pushed, $pops popped"
+    echo "  Saves:    $saves snapshot(s)"
+    if [[ -n "${save_file:-}" ]]; then
+      echo "  Final save: $(basename "$save_file")"
+    fi
+  fi
+}
+
+# ==============================================================================
+# Record subcommand
+# ==============================================================================
+
+cmd_record() {
+  local name=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --name=*) name="${1#--name=}" ; shift ;;
+      --name)   name="${2:-}" ; shift 2 ;;
+      -*)       echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)        shift ;;
+    esac
+  done
+
+  # Default name to timestamped recording
+  if [[ -z "$name" ]]; then
+    name="rec-$(date +%s)"
+  fi
+
+  # Check for existing active recording
+  local existing
+  existing=$(is_recording 2>/dev/null) && {
+    echo "Error: Already recording '$existing'. Stop the current recording first."
+    exit 1
+  }
+
+  # Create recording directory
+  local rec_dir="$GSD_STACK_DIR/recordings/$name"
+  mkdir -p "$rec_dir"
+
+  # Generate metadata
+  local ts
+  ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+  # Try to find active session for cross-reference
+  local session_name=""
+  for meta in "$GSD_STACK_DIR"/sessions/*/meta.json; do
+    if [[ -f "$meta" ]]; then
+      local mc
+      mc=$(cat "$meta")
+      local s
+      s=$(json_field "$mc" "status")
+      if [[ "$s" == "active" ]]; then
+        session_name=$(json_field "$mc" "name")
+        break
+      fi
+    fi
+  done
+
+  # Write meta.json
+  printf '{"name":"%s","status":"recording","started":"%s","session":"%s","interval":%s}\n' \
+    "$name" "$ts" "$session_name" "$GSD_RECORD_INTERVAL" > "$rec_dir/meta.json"
+
+  # Initialize stream.jsonl with recording_start event
+  printf '{"ts":"%s","type":"recording_start","name":"%s","session":"%s"}\n' \
+    "$ts" "$name" "$session_name" > "$rec_dir/stream.jsonl"
+
+  # Start capture
+  if [[ -n "$GSD_MOCK_CAPTURE" ]]; then
+    # Mock mode: write a few mock events for testing
+    local mock_ts
+    mock_ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+    printf '{"ts":"%s","type":"terminal","lines":25,"cols":80,"content":"$ claude\\nHello!"}\n' \
+      "$mock_ts" >> "$rec_dir/stream.jsonl"
+    printf '{"ts":"%s","type":"file_change","path":"src/index.ts","action":"modified","lines_delta":5}\n' \
+      "$mock_ts" >> "$rec_dir/stream.jsonl"
+  else
+    # Real capture: start background process
+    (
+      local capture_dir="$rec_dir"
+      while true; do
+        # Check if still recording
+        if [[ -f "$capture_dir/meta.json" ]]; then
+          local cap_status
+          cap_status=$(json_field "$(cat "$capture_dir/meta.json")" "status")
+          if [[ "$cap_status" != "recording" ]]; then break; fi
+        else
+          break
+        fi
+
+        # Terminal snapshot: capture tmux pane content if available
+        local cap_ts
+        cap_ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+        if command -v tmux &>/dev/null && [[ -n "${session_name:-}" ]]; then
+          local tmux_name="${GSD_TMUX_SESSION}-${session_name}"
+          local pane_content
+          pane_content=$(tmux capture-pane -t "$tmux_name" -p 2>/dev/null | tail -20 || echo "")
+          if [[ -n "$pane_content" ]]; then
+            # Escape for JSON
+            pane_content="${pane_content//\\/\\\\}"
+            pane_content="${pane_content//\"/\\\"}"
+            pane_content="${pane_content//$'\n'/\\n}"
+            printf '{"ts":"%s","type":"terminal","content":"%s"}\n' \
+              "$cap_ts" "$pane_content" >> "$capture_dir/stream.jsonl"
+          fi
+        fi
+
+        sleep "$GSD_RECORD_INTERVAL"
+      done
+    ) &
+  fi
+
+  # Log event
+  log_event "record" "started: $name"
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"name":"%s","status":"recording","started":"%s","session":"%s"}\n' \
+      "$name" "$ts" "$session_name"
+  else
+    if [[ -n "$session_name" ]]; then
+      echo "Recording '$name' started (session: $session_name)"
+    else
+      echo "Recording '$name' started"
+    fi
+  fi
+}
+
+# ==============================================================================
+# Mark subcommand
+# ==============================================================================
+
+cmd_mark() {
+  local label=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -*) echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)  label="$1" ; shift ;;
+    esac
+  done
+
+  # Validate label
+  if [[ -z "$label" ]]; then
+    echo "Error: Marker label required. Usage: gsd-stack mark \"label text\""
+    exit 1
+  fi
+
+  # Check for active recording
+  local rec_dir
+  rec_dir=$(get_recording_dir) || {
+    echo "Error: No active recording. Start one with: gsd-stack record"
+    exit 1
+  }
+
+  # Write marker event to stream.jsonl
+  local ts
+  ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  # Escape label for JSON
+  local json_label="${label//\\/\\\\}"
+  json_label="${json_label//\"/\\\"}"
+  printf '{"ts":"%s","type":"marker","label":"%s"}\n' \
+    "$ts" "$json_label" >> "$rec_dir/stream.jsonl"
+
+  # Log event
+  log_event "mark" "marker: $label"
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"type":"marker","label":"%s","ts":"%s"}\n' "$json_label" "$ts"
+  else
+    echo "Marker added: $label"
+  fi
+}
+
+# ==============================================================================
+# Stop-Record subcommand
+# ==============================================================================
+
+cmd_stop_record() {
+  # Check for active recording
+  local rec_name
+  rec_name=$(is_recording) || {
+    echo "Error: No active recording. Nothing to stop."
+    exit 1
+  }
+
+  local rec_dir="$GSD_STACK_DIR/recordings/$rec_name"
+
+  # Write recording_stop event to stream before stopping
+  local stop_ts
+  stop_ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  printf '{"ts":"%s","type":"recording_stop","name":"%s"}\n' \
+    "$stop_ts" "$rec_name" >> "$rec_dir/stream.jsonl"
+
+  # Update meta.json: change status to stopped, add ended timestamp
+  local meta_content started session interval
+  meta_content=$(cat "$rec_dir/meta.json")
+  started=$(json_field "$meta_content" "started")
+  session=$(json_field "$meta_content" "session")
+  interval=$(json_field_num "$meta_content" "interval")
+  interval="${interval:-5}"
+
+  printf '{"name":"%s","status":"stopped","started":"%s","ended":"%s","session":"%s","interval":%s}\n' \
+    "$rec_name" "$started" "$stop_ts" "$session" "$interval" > "$rec_dir/meta.json"
+
+  # === Compute metrics from stream.jsonl ===
+  local stream_file="$rec_dir/stream.jsonl"
+  local total_events=0
+  local terminal_count=0
+  local file_change_count=0
+  local marker_count=0
+  local stack_push_count=0
+  local stack_pop_count=0
+  local stack_clear_count=0
+  local stack_poke_count=0
+  local recording_start_count=0
+  local recording_stop_count=0
+  local first_ts=""
+  local last_ts=""
+
+  while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+    total_events=$((total_events + 1))
+
+    local event_type event_ts
+    event_type=$(json_field "$line" "type")
+    event_ts=$(json_field "$line" "ts")
+
+    # Track first/last timestamps
+    if [[ -z "$first_ts" ]]; then
+      first_ts="$event_ts"
+    fi
+    last_ts="$event_ts"
+
+    # Count by type
+    case "$event_type" in
+      terminal)         terminal_count=$((terminal_count + 1)) ;;
+      file_change)      file_change_count=$((file_change_count + 1)) ;;
+      marker)           marker_count=$((marker_count + 1)) ;;
+      stack_push)       stack_push_count=$((stack_push_count + 1)) ;;
+      stack_pop)        stack_pop_count=$((stack_pop_count + 1)) ;;
+      stack_clear)      stack_clear_count=$((stack_clear_count + 1)) ;;
+      stack_poke)       stack_poke_count=$((stack_poke_count + 1)) ;;
+      recording_start)  recording_start_count=$((recording_start_count + 1)) ;;
+      recording_stop)   recording_stop_count=$((recording_stop_count + 1)) ;;
+    esac
+  done < "$stream_file"
+
+  # Compute duration in seconds
+  local duration_seconds=0
+  if [[ -n "$first_ts" ]] && [[ -n "$last_ts" ]]; then
+    local first_epoch last_epoch
+    first_epoch=$(date -d "$first_ts" +%s 2>/dev/null || echo "0")
+    last_epoch=$(date -d "$last_ts" +%s 2>/dev/null || echo "0")
+    if [[ "$first_epoch" -gt 0 ]] && [[ "$last_epoch" -gt 0 ]]; then
+      duration_seconds=$((last_epoch - first_epoch))
+    fi
+  fi
+
+  # Calculate stack operations total
+  local stack_ops=$((stack_push_count + stack_pop_count + stack_clear_count + stack_poke_count))
+
+  # Write metrics.json
+  printf '{"name":"%s","duration_seconds":%d,"event_count":%d,"events_by_type":{"terminal":%d,"file_change":%d,"marker":%d,"stack_push":%d,"stack_pop":%d,"stack_clear":%d,"stack_poke":%d,"recording_start":%d,"recording_stop":%d},"stack_operations":%d,"first_event":"%s","last_event":"%s"}\n' \
+    "$rec_name" "$duration_seconds" "$total_events" \
+    "$terminal_count" "$file_change_count" "$marker_count" \
+    "$stack_push_count" "$stack_pop_count" "$stack_clear_count" "$stack_poke_count" \
+    "$recording_start_count" "$recording_stop_count" \
+    "$stack_ops" "$first_ts" "$last_ts" > "$rec_dir/metrics.json"
+
+  # === Generate transcript.md ===
+  {
+    printf "# Recording Transcript: %s\n\n" "$rec_name"
+    printf "**Started:** %s  \n" "$started"
+    printf "**Ended:** %s  \n" "$stop_ts"
+    printf "**Duration:** %d seconds  \n" "$duration_seconds"
+    printf "**Events:** %d total  \n\n" "$total_events"
+    printf '%s\n\n' "---"
+    printf "## Timeline\n\n"
+
+    # Re-read stream and generate timeline
+    while IFS= read -r line; do
+      [[ -z "$line" ]] && continue
+
+      local evt_type evt_ts
+      evt_type=$(json_field "$line" "type")
+      evt_ts=$(json_field "$line" "ts")
+      local display_ts="${evt_ts:11:8}"  # HH:MM:SS
+
+      case "$evt_type" in
+        recording_start)
+          printf "### %s -- Recording Started\n\n" "$display_ts"
+          ;;
+        recording_stop)
+          printf "### %s -- Recording Stopped\n\n" "$display_ts"
+          ;;
+        terminal)
+          local content
+          content=$(json_field "$line" "content")
+          # Truncate content for transcript
+          if [[ ${#content} -gt 200 ]]; then
+            content="${content:0:200}..."
+          fi
+          printf "**%s** Terminal snapshot  \n" "$display_ts"
+          if [[ -n "$content" ]]; then
+            printf '```\n%s\n```\n\n' "$content"
+          else
+            printf "\n"
+          fi
+          ;;
+        file_change)
+          local path action lines_delta
+          path=$(json_field "$line" "path")
+          action=$(json_field "$line" "action")
+          lines_delta=$(json_field_num "$line" "lines_delta" || echo "")
+          printf "**%s** File %s: \`%s\`" "$display_ts" "$action" "$path"
+          if [[ -n "${lines_delta:-}" ]]; then
+            printf " (%s lines)" "$lines_delta"
+          fi
+          printf "\n\n"
+          ;;
+        marker)
+          local label
+          label=$(json_field "$line" "label")
+          printf "### %s -- Marker: %s\n\n" "$display_ts" "$label"
+          ;;
+        stack_push)
+          local priority message
+          priority=$(json_field "$line" "priority")
+          message=$(json_field "$line" "message")
+          printf "**%s** Stack push [%s]: %s\n\n" "$display_ts" "$priority" "$message"
+          ;;
+        stack_pop)
+          local priority message
+          priority=$(json_field "$line" "priority")
+          message=$(json_field "$line" "message")
+          printf "**%s** Stack pop [%s]: %s\n\n" "$display_ts" "$priority" "$message"
+          ;;
+        stack_clear)
+          local count
+          count=$(json_field_num "$line" "count" || echo "0")
+          printf "**%s** Stack cleared (%s messages)\n\n" "$display_ts" "${count:-0}"
+          ;;
+        stack_poke)
+          printf "**%s** Stack poke\n\n" "$display_ts"
+          ;;
+        *)
+          printf "**%s** [%s]\n\n" "$display_ts" "$evt_type"
+          ;;
+      esac
+    done < "$stream_file"
+
+    printf '%s\n\n' "---"
+    printf "## Summary\n\n"
+    printf "| Metric | Value |\n"
+    printf "|--------|-------|\n"
+    printf "| Duration | %d seconds |\n" "$duration_seconds"
+    printf "| Total Events | %d |\n" "$total_events"
+    printf "| Terminal Snapshots | %d |\n" "$terminal_count"
+    printf "| File Changes | %d |\n" "$file_change_count"
+    printf "| Markers | %d |\n" "$marker_count"
+    printf "| Stack Operations | %d |\n" "$stack_ops"
+  } > "$rec_dir/transcript.md"
+
+  # Log event
+  log_event "stop-record" "stopped: $rec_name (${total_events} events, ${duration_seconds}s)"
+
+  # Output
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"name":"%s","duration_seconds":%d,"event_count":%d,"metrics":"%s","transcript":"%s"}\n' \
+      "$rec_name" "$duration_seconds" "$total_events" \
+      "$rec_dir/metrics.json" "$rec_dir/transcript.md"
+  else
+    printf "Recording '%s' stopped.\n" "$rec_name"
+    printf "  Duration:   %d seconds\n" "$duration_seconds"
+    printf "  Events:     %d total\n" "$total_events"
+    printf "  Terminal:   %d snapshots\n" "$terminal_count"
+    printf "  Files:      %d changes\n" "$file_change_count"
+    printf "  Markers:    %d\n" "$marker_count"
+    printf "  Stack ops:  %d\n" "$stack_ops"
+    printf "  Metrics:    %s\n" "$rec_dir/metrics.json"
+    printf "  Transcript: %s\n" "$rec_dir/transcript.md"
+  fi
+}
+
+# ==============================================================================
+# Play subcommand -- analyze and step through recordings
+# ==============================================================================
+
+cmd_play() {
+  local mode="analyze"
+  local recording_name=""
+  local dry_run=0
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --step)    mode="step" ; shift ;;
+      --run)     mode="run" ; shift ;;
+      --feed)    mode="feed" ; shift ;;
+      --dry-run) dry_run=1 ; shift ;;
+      -*)        echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)         recording_name="$1" ; shift ;;
+    esac
+  done
+
+  # Validate recording name / file path
+  if [[ -z "$recording_name" ]]; then
+    echo "Error: Recording name required."
+    echo "Usage: gsd-stack play [--step|--run|--feed] <recording-name>"
+    exit 1
+  fi
+
+  # For --feed mode, the argument is a file path, not a recording name
+  if [[ "$mode" == "feed" ]]; then
+    play_feed "$recording_name" "" "$dry_run"
+    log_event "play" "feed: $recording_name"
+    return 0
+  fi
+
+  # Validate recording exists
+  local rec_dir="$GSD_STACK_DIR/recordings/$recording_name"
+  if [[ ! -d "$rec_dir" ]]; then
+    echo "Error: Recording '$recording_name' not found."
+    echo "Available recordings:"
+    ls "$GSD_STACK_DIR/recordings/" 2>/dev/null || echo "  (none)"
+    exit 1
+  fi
+
+  # Validate stream.jsonl exists
+  if [[ ! -f "$rec_dir/stream.jsonl" ]]; then
+    echo "Error: Recording '$recording_name' has no stream data."
+    exit 1
+  fi
+
+  # Dispatch to mode
+  case "$mode" in
+    analyze) play_analyze "$recording_name" "$rec_dir" ;;
+    step)    play_step "$recording_name" "$rec_dir" ;;
+    run)     play_run "$recording_name" "$rec_dir" "$dry_run" ;;
+  esac
+
+  log_event "play" "$mode: $recording_name"
+}
+
+# ==============================================================================
+# Play analyze mode -- formatted timeline view
+# ==============================================================================
+
+play_analyze() {
+  local recording_name="$1"
+  local rec_dir="$2"
+  local stream="$rec_dir/stream.jsonl"
+  local metrics_file="$rec_dir/metrics.json"
+
+  # JSON output mode
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    local timeline="["
+    local first=1
+    while IFS= read -r line; do
+      [[ -z "$line" ]] && continue
+      if [[ $first -eq 1 ]]; then
+        first=0
+      else
+        timeline="$timeline,"
+      fi
+      timeline="$timeline$line"
+    done < "$stream"
+    timeline="$timeline]"
+
+    # Read metrics if available
+    local metrics="{}"
+    if [[ -f "$metrics_file" ]]; then
+      metrics=$(cat "$metrics_file")
+    fi
+
+    printf '{"name":"%s","timeline":%s,"metrics":%s}\n' \
+      "$recording_name" "$timeline" "$metrics"
+    return 0
+  fi
+
+  # Human-readable output
+
+  # Header
+  printf "\n${BOLD}Recording: %s${RESET}\n" "$recording_name"
+
+  # Show metrics summary from metrics.json if available
+  if [[ -f "$metrics_file" ]]; then
+    local mc
+    mc=$(cat "$metrics_file")
+    local dur evt
+    dur=$(json_field_num "$mc" "duration_seconds" || echo "0")
+    dur=${dur:-0}
+    evt=$(json_field_num "$mc" "event_count" || echo "0")
+    evt=${evt:-0}
+    printf "Duration: %ss | Events: %s\n" "$dur" "$evt"
+  fi
+
+  printf "\n"
+
+  # Timeline
+  printf "${BOLD}Timeline${RESET}\n"
+  printf '%s\n' "────────────────────────────────────────"
+
+  while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+
+    local evt_type evt_ts
+    evt_type=$(json_field "$line" "type")
+    evt_ts=$(json_field "$line" "ts")
+    local display_ts="${evt_ts:11:8}"  # HH:MM:SS
+
+    case "$evt_type" in
+      recording_start)
+        printf "${GREEN}%s${RESET}  Recording started\n" "$display_ts"
+        ;;
+      recording_stop)
+        printf "${GREEN}%s${RESET}  Recording stopped\n" "$display_ts"
+        ;;
+      terminal)
+        local content
+        content=$(json_field "$line" "content")
+        local preview="${content:0:60}"
+        printf "%s  ${BOLD}Terminal${RESET}" "$display_ts"
+        if [[ -n "$preview" ]]; then
+          printf " -- %s" "$preview"
+        fi
+        printf "\n"
+        ;;
+      file_change)
+        local path action
+        path=$(json_field "$line" "path")
+        action=$(json_field "$line" "action")
+        printf "%s  File %s: %s\n" "$display_ts" "${action:-changed}" "${path:-unknown}"
+        ;;
+      marker)
+        local label
+        label=$(json_field "$line" "label")
+        printf "\n${BOLD}%s  ▶ %s${RESET}\n\n" "$display_ts" "$label"
+        ;;
+      stack_push)
+        local priority message
+        priority=$(json_field "$line" "priority")
+        message=$(json_field "$line" "message")
+        printf "%s  Stack push [%s]: %s\n" "$display_ts" "${priority:-normal}" "${message:0:60}"
+        ;;
+      stack_pop)
+        local priority message
+        priority=$(json_field "$line" "priority")
+        message=$(json_field "$line" "message")
+        printf "%s  Stack pop [%s]: %s\n" "$display_ts" "${priority:-normal}" "${message:0:60}"
+        ;;
+      stack_clear)
+        local count
+        count=$(json_field_num "$line" "count" || echo "0")
+        count=${count:-0}
+        printf "%s  Stack cleared (%s messages)\n" "$display_ts" "$count"
+        ;;
+      *)
+        printf "%s  [%s]\n" "$display_ts" "$evt_type"
+        ;;
+    esac
+  done < "$stream"
+
+  printf '%s\n' "────────────────────────────────────────"
+
+  # Metrics summary table
+  if [[ -f "$metrics_file" ]]; then
+    local mc
+    mc=$(cat "$metrics_file")
+    printf "\n${BOLD}Metrics Summary${RESET}\n"
+    local m_dur m_evt m_term m_file m_marker m_stackops
+    m_dur=$(json_field_num "$mc" "duration_seconds" || echo "0")
+    m_evt=$(json_field_num "$mc" "event_count" || echo "0")
+    # For nested fields in events_by_type, use grep pattern
+    m_term=$(echo "$mc" | grep -o '"terminal":[0-9]*' | head -1 | cut -d: -f2 || echo "0")
+    m_file=$(echo "$mc" | grep -o '"file_change":[0-9]*' | head -1 | cut -d: -f2 || echo "0")
+    m_marker=$(echo "$mc" | grep -o '"marker":[0-9]*' | head -1 | cut -d: -f2 || echo "0")
+    m_stackops=$(echo "$mc" | grep -o '"stack_operations":[0-9]*' | head -1 | cut -d: -f2 || echo "0")
+    printf "  Duration:          %ss\n" "${m_dur:-0}"
+    printf "  Events:            %s\n" "${m_evt:-0}"
+    printf "  Terminal snapshots: %s\n" "${m_term:-0}"
+    printf "  File changes:      %s\n" "${m_file:-0}"
+    printf "  Markers:           %s\n" "${m_marker:-0}"
+    printf "  Stack operations:  %s\n" "${m_stackops:-0}"
+  fi
+
+  # Footer
+  if [[ -f "$rec_dir/transcript.md" ]]; then
+    printf "\nFull transcript: %s\n" "$rec_dir/transcript.md"
+  fi
+}
+
+# ==============================================================================
+# Play step mode -- event-by-event stepping
+# ==============================================================================
+
+play_step() {
+  local recording_name="$1"
+  local rec_dir="$2"
+  local stream="$rec_dir/stream.jsonl"
+
+  # Read all events into an array
+  local -a events=()
+  while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+    events+=("$line")
+  done < "$stream"
+
+  local total=${#events[@]}
+  local index=0
+
+  printf "\n${BOLD}Stepping through: %s (%d events)${RESET}\n" "$recording_name" "$total"
+  printf "Press Enter for next event, q to quit\n\n"
+
+  while [[ $index -lt $total ]]; do
+    local event="${events[$index]}"
+    local evt_type evt_ts
+    evt_type=$(json_field "$event" "type")
+    evt_ts=$(json_field "$event" "ts")
+    local display_ts="${evt_ts:11:8}"
+
+    # Show event header
+    printf "${BOLD}[%d/%d]${RESET} %s " "$((index + 1))" "$total" "$display_ts"
+
+    # Show event details based on type
+    case "$evt_type" in
+      recording_start)
+        printf "${GREEN}Recording started${RESET}\n"
+        ;;
+      recording_stop)
+        printf "${GREEN}Recording stopped${RESET}\n"
+        ;;
+      terminal)
+        printf "${BOLD}Terminal snapshot${RESET}\n"
+        local content
+        content=$(json_field "$event" "content")
+        if [[ -n "$content" ]]; then
+          printf "  %s\n" "${content:0:500}"
+        fi
+        ;;
+      file_change)
+        local path action lines_delta
+        path=$(json_field "$event" "path")
+        action=$(json_field "$event" "action")
+        lines_delta=$(json_field_num "$event" "lines_delta" || echo "")
+        printf "File %s: %s" "${action:-changed}" "${path:-unknown}"
+        if [[ -n "${lines_delta:-}" ]]; then
+          printf " (%s lines)" "$lines_delta"
+        fi
+        printf "\n"
+        ;;
+      marker)
+        local label
+        label=$(json_field "$event" "label")
+        printf "${BOLD}▶ Marker: %s${RESET}\n" "$label"
+        ;;
+      stack_push|stack_pop|stack_clear|stack_poke)
+        local message
+        message=$(json_field "$event" "message")
+        printf "Stack %s" "${evt_type#stack_}"
+        if [[ -n "$message" ]]; then
+          printf ": %s" "${message:0:80}"
+        fi
+        printf "\n"
+        ;;
+      *)
+        printf "[%s]\n" "$evt_type"
+        ;;
+    esac
+
+    index=$((index + 1))
+
+    # Check if last event
+    if [[ $index -ge $total ]]; then
+      printf "\n${BOLD}End of recording${RESET} (%d events)\n" "$total"
+      break
+    fi
+
+    # Wait for input (Enter or q)
+    local input=""
+    read -r input 2>/dev/null || break
+    if [[ "$input" == "q" || "$input" == "Q" ]]; then
+      printf "Quit at event %d/%d\n" "$index" "$total"
+      break
+    fi
+  done
+}
+
+# ==============================================================================
+# Play run/feed stubs (implemented in Plan 107-03)
+# ==============================================================================
+
+play_run() {
+  local recording_name="$1"
+  local rec_dir="$2"
+  local dry_run="${3:-0}"
+  local stream="$rec_dir/stream.jsonl"
+
+  # Extract replayable commands from stream
+  # Replayable = stack_push (message field) and stack_poke (text field)
+  local -a commands=()
+  local -a command_types=()
+
+  while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+    local evt_type
+    evt_type=$(json_field "$line" "type")
+
+    case "$evt_type" in
+      stack_push)
+        local message
+        message=$(json_field "$line" "message")
+        if [[ -n "$message" ]]; then
+          commands+=("$message")
+          command_types+=("push")
+        fi
+        ;;
+      stack_poke)
+        local text
+        text=$(json_field "$line" "text")
+        if [[ -n "$text" ]]; then
+          commands+=("$text")
+          command_types+=("poke")
+        fi
+        ;;
+    esac
+  done < "$stream"
+
+  local total=${#commands[@]}
+
+  if [[ $total -eq 0 ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"name":"%s","mode":"run","replayed":0,"commands":[]}\n' "$recording_name"
+    else
+      echo "No replayable commands found in recording '$recording_name'."
+    fi
+    return 0
+  fi
+
+  # Dry-run mode: just show what would be replayed
+  if [[ $dry_run -eq 1 ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"name":"%s","mode":"run","dry_run":true,"replayed":%d,"commands":[' "$recording_name" "$total"
+      for i in "${!commands[@]}"; do
+        if [[ $i -gt 0 ]]; then printf ","; fi
+        local cmd="${commands[$i]}"
+        cmd="${cmd//\\/\\\\}"
+        cmd="${cmd//\"/\\\"}"
+        printf '{"index":%d,"type":"%s","command":"%s"}' "$((i + 1))" "${command_types[$i]}" "$cmd"
+      done
+      printf "]}\n"
+      return 0
+    fi
+
+    printf "\n${BOLD}Dry run: %s (%d replayable commands)${RESET}\n\n" "$recording_name" "$total"
+    for i in "${!commands[@]}"; do
+      printf "  %d. [%s] %s\n" "$((i + 1))" "${command_types[$i]}" "${commands[$i]}"
+    done
+    printf "\nUse without --dry-run to replay against a live session.\n"
+    return 0
+  fi
+
+  # Live replay
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"name":"%s","mode":"run","replayed":%d,"commands":[' "$recording_name" "$total"
+  else
+    printf "\n${BOLD}Replaying: %s (%d commands)${RESET}\n\n" "$recording_name" "$total"
+  fi
+
+  local replayed=0
+  for i in "${!commands[@]}"; do
+    local cmd="${commands[$i]}"
+    local cmd_type="${command_types[$i]}"
+    local idx=$((i + 1))
+
+    if [[ "$GSD_FORMAT" != "json" ]]; then
+      printf "  [%d/%d] %s: %s" "$idx" "$total" "$cmd_type" "$cmd"
+    fi
+
+    # Execute the command
+    if [[ "$cmd_type" == "push" ]]; then
+      # Push to stack via subprocess
+      "$0" push "$cmd" >/dev/null 2>&1 && {
+        replayed=$((replayed + 1))
+        [[ "$GSD_FORMAT" != "json" ]] && printf " ${GREEN}OK${RESET}\n"
+      } || {
+        [[ "$GSD_FORMAT" != "json" ]] && printf " ${RED_C}FAIL${RESET}\n"
+      }
+    elif [[ "$cmd_type" == "poke" ]]; then
+      # Send to tmux
+      if [[ -n "$GSD_MOCK_TMUX" ]]; then
+        # Mock mode: simulate
+        replayed=$((replayed + 1))
+        [[ "$GSD_FORMAT" != "json" ]] && printf " ${GREEN}OK (mock)${RESET}\n"
+      else
+        local tmux_target="${GSD_TMUX_SESSION}"
+        tmux send-keys -t "$tmux_target" "$cmd" Enter 2>/dev/null && {
+          replayed=$((replayed + 1))
+          [[ "$GSD_FORMAT" != "json" ]] && printf " ${GREEN}OK${RESET}\n"
+        } || {
+          [[ "$GSD_FORMAT" != "json" ]] && printf " ${RED_C}FAIL${RESET}\n"
+        }
+      fi
+    fi
+
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      if [[ $i -gt 0 ]]; then printf ","; fi
+      local json_cmd="${cmd//\\/\\\\}"
+      json_cmd="${json_cmd//\"/\\\"}"
+      printf '{"index":%d,"type":"%s","command":"%s","status":"ok"}' "$idx" "$cmd_type" "$json_cmd"
+    fi
+  done
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '],"completed":%d}\n' "$replayed"
+  else
+    printf "\n${BOLD}Replay complete: %d/%d commands executed${RESET}\n" "$replayed" "$total"
+  fi
+}
+
+play_feed() {
+  local playbook_path="$1"
+  local _rec_dir="$2"
+  local dry_run="${3:-0}"
+
+  local playbook="$playbook_path"
+
+  # Validate playbook file exists
+  if [[ ! -f "$playbook" ]]; then
+    echo "Error: Playbook file not found: $playbook"
+    exit 1
+  fi
+
+  # Read all entries from playbook
+  local -a entries=()
+  local -a entry_types=()
+  local -a entry_messages=()
+  local -a entry_delays=()
+  local -a entry_priorities=()
+
+  while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+    entries+=("$line")
+
+    local etype emsg edelay epri
+    etype=$(json_field "$line" "type" || echo "")
+    emsg=$(json_field "$line" "message" || echo "")
+    # For "send" type, the text field is used instead of message
+    if [[ -z "$emsg" ]]; then
+      emsg=$(json_field "$line" "text" || echo "")
+    fi
+    edelay=$(json_field_num "$line" "delay" || echo "0")
+    edelay=${edelay:-0}
+    epri=$(json_field "$line" "priority" || echo "")
+
+    entry_types+=("${etype:-push}")
+    entry_messages+=("${emsg:-}")
+    entry_delays+=("${edelay:-0}")
+    entry_priorities+=("${epri:-normal}")
+  done < "$playbook"
+
+  local total=${#entries[@]}
+
+  if [[ $total -eq 0 ]]; then
+    echo "Playbook is empty: $playbook"
+    return 0
+  fi
+
+  # Dry-run mode
+  if [[ $dry_run -eq 1 ]]; then
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      printf '{"playbook":"%s","mode":"feed","dry_run":true,"commands_executed":%d,"commands":[' "$playbook" "$total"
+      for i in "${!entries[@]}"; do
+        if [[ $i -gt 0 ]]; then printf ","; fi
+        local msg="${entry_messages[$i]}"
+        msg="${msg//\\/\\\\}"
+        msg="${msg//\"/\\\"}"
+        printf '{"index":%d,"type":"%s","message":"%s","delay":%s,"priority":"%s"}' \
+          "$((i + 1))" "${entry_types[$i]}" "$msg" "${entry_delays[$i]:-0}" "${entry_priorities[$i]}"
+      done
+      printf "]}\n"
+      return 0
+    fi
+
+    printf "\n${BOLD}Dry run playbook: %s (%d commands)${RESET}\n\n" "$playbook" "$total"
+    for i in "${!entries[@]}"; do
+      local delay_note=""
+      if [[ "${entry_delays[$i]}" != "0" ]] && [[ -n "${entry_delays[$i]}" ]]; then
+        delay_note=" (delay: ${entry_delays[$i]}s)"
+      fi
+      printf "  %d. [%s] %s%s\n" "$((i + 1))" "${entry_types[$i]}" "${entry_messages[$i]}" "$delay_note"
+    done
+    printf "\nUse without --dry-run to execute the playbook.\n"
+    return 0
+  fi
+
+  # Live execution
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '{"playbook":"%s","mode":"feed","commands_executed":%d,"results":[' "$playbook" "$total"
+  else
+    printf "\n${BOLD}Executing playbook: %s (%d commands)${RESET}\n\n" "$playbook" "$total"
+  fi
+
+  local executed=0
+  for i in "${!entries[@]}"; do
+    local etype="${entry_types[$i]}"
+    local emsg="${entry_messages[$i]}"
+    local edelay="${entry_delays[$i]}"
+    local epri="${entry_priorities[$i]}"
+    local idx=$((i + 1))
+
+    # Apply delay if specified (and > 0)
+    if [[ "${edelay:-0}" != "0" ]] && [[ -n "$edelay" ]]; then
+      if [[ "$GSD_FORMAT" != "json" ]]; then
+        printf "  [waiting %ss]\n" "$edelay"
+      fi
+      sleep "$edelay" 2>/dev/null || true
+    fi
+
+    if [[ "$GSD_FORMAT" != "json" ]]; then
+      printf "  [%d/%d] %s: %s" "$idx" "$total" "$etype" "$emsg"
+    fi
+
+    # Execute based on type
+    case "$etype" in
+      push)
+        "$0" push --priority="$epri" "$emsg" >/dev/null 2>&1 && {
+          executed=$((executed + 1))
+          [[ "$GSD_FORMAT" != "json" ]] && printf " ${GREEN}OK${RESET}\n"
+        } || {
+          [[ "$GSD_FORMAT" != "json" ]] && printf " ${RED_C}FAIL${RESET}\n"
+        }
+        ;;
+      send)
+        # Send directly to tmux
+        if [[ -n "$GSD_MOCK_TMUX" ]]; then
+          executed=$((executed + 1))
+          [[ "$GSD_FORMAT" != "json" ]] && printf " ${GREEN}OK (mock)${RESET}\n"
+        else
+          local tmux_target="${GSD_TMUX_SESSION}"
+          tmux send-keys -t "$tmux_target" "$emsg" Enter 2>/dev/null && {
+            executed=$((executed + 1))
+            [[ "$GSD_FORMAT" != "json" ]] && printf " ${GREEN}OK${RESET}\n"
+          } || {
+            [[ "$GSD_FORMAT" != "json" ]] && printf " ${RED_C}FAIL (no tmux)${RESET}\n"
+          }
+        fi
+        ;;
+      *)
+        [[ "$GSD_FORMAT" != "json" ]] && printf " ${RED_C}SKIP (unknown type)${RESET}\n"
+        ;;
+    esac
+
+    if [[ "$GSD_FORMAT" == "json" ]]; then
+      if [[ $i -gt 0 ]]; then printf ","; fi
+      local json_msg="${emsg//\\/\\\\}"
+      json_msg="${json_msg//\"/\\\"}"
+      printf '{"index":%d,"type":"%s","message":"%s","status":"ok"}' "$idx" "$etype" "$json_msg"
+    fi
+  done
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    printf '],"executed":%d}\n' "$executed"
+  else
+    printf "\n${BOLD}Playbook complete: %d/%d commands executed${RESET}\n" "$executed" "$total"
+  fi
+}
+
+# ==============================================================================
+# Compute extended metrics from stream.jsonl
+# ==============================================================================
+
+compute_extended_metrics() {
+  local rec_dir="$1"
+  local stream="$rec_dir/stream.jsonl"
+  local STALL_THRESHOLD=30  # seconds
+
+  # Initialize counters
+  local total_events=0
+  local terminal_count=0
+  local file_change_count=0
+  local marker_count=0
+  local stack_ops=0
+  local error_count=0
+  local first_ts="" last_ts=""
+  local prev_epoch=0
+  local active_seconds=0
+  local stall_count=0
+  local stall_total=0
+
+  if [[ -f "$stream" ]]; then
+    while IFS= read -r line; do
+      [[ -z "$line" ]] && continue
+      total_events=$((total_events + 1))
+
+      local evt_type evt_ts
+      evt_type=$(json_field "$line" "type")
+      evt_ts=$(json_field "$line" "ts")
+
+      # Track first/last
+      if [[ -z "$first_ts" ]]; then
+        first_ts="$evt_ts"
+      fi
+      last_ts="$evt_ts"
+
+      # Compute gaps for active/idle/stall
+      local cur_epoch
+      cur_epoch=$(date -d "$evt_ts" +%s 2>/dev/null || echo "0")
+      if [[ $prev_epoch -gt 0 ]] && [[ $cur_epoch -gt 0 ]]; then
+        local gap=$((cur_epoch - prev_epoch))
+        if [[ $gap -lt $STALL_THRESHOLD ]]; then
+          active_seconds=$((active_seconds + gap))
+        else
+          stall_count=$((stall_count + 1))
+          stall_total=$((stall_total + gap))
+        fi
+      fi
+      if [[ $cur_epoch -gt 0 ]]; then
+        prev_epoch=$cur_epoch
+      fi
+
+      # Count by type
+      case "$evt_type" in
+        terminal)    terminal_count=$((terminal_count + 1)) ;;
+        file_change) file_change_count=$((file_change_count + 1)) ;;
+        marker)      marker_count=$((marker_count + 1)) ;;
+        stack_push|stack_pop|stack_clear|stack_poke) stack_ops=$((stack_ops + 1)) ;;
+      esac
+
+      # Check for error indicators
+      if echo "$line" | grep -qi '"error"'; then
+        error_count=$((error_count + 1))
+      fi
+    done < "$stream"
+  fi
+
+  # Compute derived metrics
+  local duration_seconds=0
+  if [[ -n "$first_ts" ]] && [[ -n "$last_ts" ]]; then
+    local f_epoch l_epoch
+    f_epoch=$(date -d "$first_ts" +%s 2>/dev/null || echo "0")
+    l_epoch=$(date -d "$last_ts" +%s 2>/dev/null || echo "0")
+    if [[ $f_epoch -gt 0 ]] && [[ $l_epoch -gt 0 ]]; then
+      duration_seconds=$((l_epoch - f_epoch))
+    fi
+  fi
+
+  local idle_seconds=$((duration_seconds - active_seconds))
+  if [[ $idle_seconds -lt 0 ]]; then idle_seconds=0; fi
+
+  local efficiency_pct=0
+  if [[ $duration_seconds -gt 0 ]]; then
+    efficiency_pct=$(( (active_seconds * 100) / duration_seconds ))
+  fi
+
+  local events_per_minute=0
+  if [[ $duration_seconds -gt 0 ]]; then
+    events_per_minute=$(( (total_events * 60) / duration_seconds ))
+  fi
+
+  local estimated_tokens=$(( terminal_count * 200 + file_change_count * 100 + marker_count * 10 ))
+
+  # Output as JSON
+  printf '{"duration_seconds":%d,"active_seconds":%d,"idle_seconds":%d,"efficiency_pct":%d,"stall_count":%d,"stall_total_seconds":%d,"phase_transitions":%d,"marker_count":%d,"terminal_snapshots":%d,"file_changes":%d,"stack_operations":%d,"events_per_minute":%d,"estimated_tokens":%d,"error_indicators":%d,"event_count":%d,"first_event":"%s","last_event":"%s"}\n' \
+    "$duration_seconds" "$active_seconds" "$idle_seconds" "$efficiency_pct" \
+    "$stall_count" "$stall_total" "$marker_count" "$marker_count" \
+    "$terminal_count" "$file_change_count" "$stack_ops" "$events_per_minute" \
+    "$estimated_tokens" "$error_count" "$total_events" "$first_ts" "$last_ts"
+}
+
+# ==============================================================================
+# Metrics compare helper
+# ==============================================================================
+
+metrics_compare() {
+  local recording_a="$1"
+  local recording_b="$2"
+
+  local dir_a="$GSD_STACK_DIR/recordings/$recording_a"
+  local dir_b="$GSD_STACK_DIR/recordings/$recording_b"
+
+  # Validate both exist
+  if [[ ! -d "$dir_a" ]]; then
+    echo "Error: Recording '$recording_a' not found."
+    exit 1
+  fi
+  if [[ ! -d "$dir_b" ]]; then
+    echo "Error: Recording '$recording_b' not found."
+    exit 1
+  fi
+
+  # Compute metrics for both
+  local json_a json_b
+  json_a=$(compute_extended_metrics "$dir_a")
+  json_b=$(compute_extended_metrics "$dir_b")
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    # Build comparison JSON with both metrics and deltas
+    local fields=("duration_seconds" "active_seconds" "idle_seconds" "efficiency_pct" "stall_count" "stall_total_seconds" "phase_transitions" "marker_count" "terminal_snapshots" "file_changes" "stack_operations" "events_per_minute" "estimated_tokens" "error_indicators" "event_count")
+
+    printf '{"recording_a":{"name":"%s","metrics":%s},"recording_b":{"name":"%s","metrics":%s},"deltas":{' \
+      "$recording_a" "$json_a" "$recording_b" "$json_b"
+
+    local first=1
+    for field in "${fields[@]}"; do
+      local val_a val_b delta
+      val_a=$(echo "$json_a" | grep -o "\"${field}\":[0-9-]*" | head -1 | grep -o '[0-9-]*$' || echo "0")
+      val_b=$(echo "$json_b" | grep -o "\"${field}\":[0-9-]*" | head -1 | grep -o '[0-9-]*$' || echo "0")
+      delta=$((${val_b:-0} - ${val_a:-0}))
+      if [[ $first -eq 1 ]]; then first=0; else printf ","; fi
+      printf '"%s":%d' "$field" "$delta"
+    done
+
+    printf "}}\n"
+    return 0
+  fi
+
+  # Human-readable comparison table
+  printf "\n${BOLD}Metrics Comparison${RESET}\n"
+  printf "  %-20s vs %-20s\n\n" "$recording_a" "$recording_b"
+
+  # Header
+  printf "  %-24s %10s %10s %10s\n" "Metric" "$recording_a" "$recording_b" "Delta"
+  printf "  %-24s %10s %10s %10s\n" "------------------------" "----------" "----------" "----------"
+
+  # Compare each metric
+  local fields=("duration_seconds" "active_seconds" "idle_seconds" "efficiency_pct" "stall_count" "stall_total_seconds" "phase_transitions" "marker_count" "terminal_snapshots" "file_changes" "stack_operations" "events_per_minute" "estimated_tokens" "error_indicators" "event_count")
+  local labels=("Duration (s)" "Active time (s)" "Idle time (s)" "Efficiency (%)" "Stall count" "Stall time (s)" "Phase transitions" "Markers" "Terminal snapshots" "File changes" "Stack operations" "Events/minute" "Estimated tokens" "Error indicators" "Total events")
+
+  for i in "${!fields[@]}"; do
+    local field="${fields[$i]}"
+    local label="${labels[$i]}"
+    local val_a val_b delta sign
+    val_a=$(echo "$json_a" | grep -o "\"${field}\":[0-9-]*" | head -1 | grep -o '[0-9-]*$' || echo "0")
+    val_b=$(echo "$json_b" | grep -o "\"${field}\":[0-9-]*" | head -1 | grep -o '[0-9-]*$' || echo "0")
+    val_a="${val_a:-0}"
+    val_b="${val_b:-0}"
+    delta=$((val_b - val_a))
+
+    if [[ $delta -gt 0 ]]; then
+      sign="+${delta}"
+    elif [[ $delta -lt 0 ]]; then
+      sign="${delta}"
+    else
+      sign="="
+    fi
+
+    printf "  %-24s %10s %10s %10s\n" "$label" "$val_a" "$val_b" "$sign"
+  done
+}
+
+# ==============================================================================
+# Metrics subcommand -- display and compare recording metrics
+# ==============================================================================
+
+cmd_metrics() {
+  local compare_mode=0
+  local recording_a="" recording_b=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --compare) compare_mode=1 ; shift ;;
+      --json)    GSD_FORMAT=json ; shift ;;
+      -*)        echo "Error: Unknown option '$1'" ; exit 1 ;;
+      *)
+        if [[ -z "$recording_a" ]]; then
+          recording_a="$1"
+        elif [[ -z "$recording_b" ]]; then
+          recording_b="$1"
+        fi
+        shift ;;
+    esac
+  done
+
+  # Compare mode
+  if [[ $compare_mode -eq 1 ]]; then
+    if [[ -z "$recording_a" ]]; then
+      echo "Error: Recording name required."
+      echo "Usage: gsd-stack metrics --compare <recording-a> <recording-b>"
+      exit 1
+    fi
+    if [[ -z "$recording_b" ]]; then
+      echo "Error: Two recordings required for comparison."
+      echo "Usage: gsd-stack metrics --compare <recording-a> <recording-b>"
+      exit 1
+    fi
+    metrics_compare "$recording_a" "$recording_b"
+    log_event "metrics" "compare: $recording_a vs $recording_b"
+    return 0
+  fi
+
+  # Single display mode
+  if [[ -z "$recording_a" ]]; then
+    echo "Error: Recording name required."
+    echo "Usage: gsd-stack metrics [--compare] <recording-name> [<recording-name-2>]"
+    exit 1
+  fi
+
+  local rec_dir="$GSD_STACK_DIR/recordings/$recording_a"
+  if [[ ! -d "$rec_dir" ]]; then
+    echo "Error: Recording '$recording_a' not found."
+    exit 1
+  fi
+
+  # Compute extended metrics
+  local metrics_json
+  metrics_json=$(compute_extended_metrics "$rec_dir")
+
+  if [[ "$GSD_FORMAT" == "json" ]]; then
+    echo "$metrics_json"
+    log_event "metrics" "display: $recording_a (json)"
+    return 0
+  fi
+
+  # Human-readable display
+  printf "\n${BOLD}Metrics: %s${RESET}\n\n" "$recording_a"
+
+  # Parse metrics for display
+  local dur active idle eff stalls stall_secs phases markers terms files stack epm tokens errors total_events
+  dur=$(echo "$metrics_json" | grep -o '"duration_seconds":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  active=$(echo "$metrics_json" | grep -o '"active_seconds":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  idle=$(echo "$metrics_json" | grep -o '"idle_seconds":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  eff=$(echo "$metrics_json" | grep -o '"efficiency_pct":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  stalls=$(echo "$metrics_json" | grep -o '"stall_count":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  stall_secs=$(echo "$metrics_json" | grep -o '"stall_total_seconds":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  phases=$(echo "$metrics_json" | grep -o '"phase_transitions":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  markers=$(echo "$metrics_json" | grep -o '"marker_count":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  terms=$(echo "$metrics_json" | grep -o '"terminal_snapshots":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  files=$(echo "$metrics_json" | grep -o '"file_changes":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  stack=$(echo "$metrics_json" | grep -o '"stack_operations":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  epm=$(echo "$metrics_json" | grep -o '"events_per_minute":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  tokens=$(echo "$metrics_json" | grep -o '"estimated_tokens":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  errors=$(echo "$metrics_json" | grep -o '"error_indicators":[0-9]*' | head -1 | grep -o '[0-9]*$')
+  total_events=$(echo "$metrics_json" | grep -o '"event_count":[0-9]*' | head -1 | grep -o '[0-9]*$')
+
+  printf "  %-24s %s\n" "Duration:" "${dur:-0}s"
+  printf "  %-24s %s\n" "Active time:" "${active:-0}s"
+  printf "  %-24s %s\n" "Idle time:" "${idle:-0}s"
+  printf "  %-24s %s%%\n" "Efficiency:" "${eff:-0}"
+  printf "  %-24s %s\n" "Stall count:" "${stalls:-0}"
+  printf "  %-24s %s\n" "Stall time:" "${stall_secs:-0}s"
+  printf "  %-24s %s\n" "Phase transitions:" "${phases:-0}"
+  printf "  %-24s %s\n" "Markers:" "${markers:-0}"
+  printf "  %-24s %s\n" "Terminal snapshots:" "${terms:-0}"
+  printf "  %-24s %s\n" "File changes:" "${files:-0}"
+  printf "  %-24s %s\n" "Stack operations:" "${stack:-0}"
+  printf "  %-24s %s\n" "Events/minute:" "${epm:-0}"
+  printf "  %-24s %s\n" "Estimated tokens:" "${tokens:-0}"
+  printf "  %-24s %s\n" "Error indicators:" "${errors:-0}"
+  printf "  %-24s %s\n" "Total events:" "${total_events:-0}"
+
+  log_event "metrics" "display: $recording_a"
+}
+
+# ==============================================================================
+# Known subcommands (stubs for future implementation)
+# ==============================================================================
+
+KNOWN_COMMANDS="push pop peek poke drain clear session list watch pause resume stop save record stop-record mark play metrics"
+
+# ==============================================================================
+# CLI dispatch (main)
+# ==============================================================================
+
+main() {
+  ensure_dirs
+
+  local cmd="${1:-}"
+
+  case "$cmd" in
+    ""|help|--help)
+      show_help
+      log_event "help" "displayed help"
+      exit 0
+      ;;
+    version|--version)
+      echo "gsd-stack $GSD_STACK_VERSION"
+      log_event "version" "displayed version"
+      exit 0
+      ;;
+    status)
+      cmd_status
+      log_event "status" "displayed status"
+      exit 0
+      ;;
+    log)
+      shift
+      cmd_log "$@"
+      log_event "log" "displayed log"
+      exit 0
+      ;;
+    push)
+      shift
+      cmd_push "$@"
+      exit 0
+      ;;
+    peek)
+      shift
+      cmd_peek "$@"
+      exit 0
+      ;;
+    session)
+      shift
+      cmd_session "$@"
+      exit $?
+      ;;
+    _get-state)
+      shift
+      if [[ -z "${1:-}" ]]; then
+        echo "Usage: gsd-stack _get-state <session-name>"
+        exit 1
+      fi
+      get_session_state "$1"
+      exit $?
+      ;;
+    pop)
+      shift
+      cmd_pop "$@"
+      exit 0
+      ;;
+    clear)
+      shift
+      cmd_clear "$@"
+      exit 0
+      ;;
+    list)
+      shift
+      cmd_list "$@"
+      exit 0
+      ;;
+    watch)
+      shift
+      cmd_watch "$@"
+      exit $?
+      ;;
+    poke)
+      shift
+      cmd_poke "$@"
+      exit 0
+      ;;
+    drain)
+      shift
+      cmd_drain "$@"
+      exit 0
+      ;;
+    save)
+      shift
+      cmd_save "$@"
+      exit $?
+      ;;
+    pause)
+      shift
+      cmd_pause "$@"
+      exit $?
+      ;;
+    resume)
+      shift
+      cmd_resume "$@"
+      exit $?
+      ;;
+    stop)
+      shift
+      cmd_stop "$@"
+      exit $?
+      ;;
+    record)
+      shift
+      cmd_record "$@"
+      exit $?
+      ;;
+    mark)
+      shift
+      cmd_mark "$@"
+      exit $?
+      ;;
+    stop-record)
+      shift
+      cmd_stop_record "$@"
+      exit $?
+      ;;
+    play)
+      shift
+      cmd_play "$@"
+      exit $?
+      ;;
+    metrics)
+      shift
+      cmd_metrics "$@"
+      exit $?
+      ;;
+    *)
+      echo "Error: Unknown command '$cmd'"
+      echo ""
+      show_help
+      log_event "error" "unknown command: $cmd"
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"
