@@ -11,3 +11,12 @@ node_modules/
 /dashboard/
 
 .claude/
+
+# Tauri / Desktop
+src-tauri/target/
+src-tauri/gen/
+desktop/dist/
+desktop/node_modules/
+
+# Coverage
+coverage/
