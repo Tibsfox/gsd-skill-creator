@@ -298,6 +298,9 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 milestone start)
 - budgetSiliconHtml placed after current status, before activity feed in right column of index page
 - Compact card wraps both budget gauge and silicon panel as single visual unit with "Budget" heading
 - Budget/silicon collection uses same graceful try/catch pattern as metrics, topology, activity collectors
+- Staging queue collector called with basePath=join(planningDir, '..') because collector reads from basePath/.planning/staging/queue-state.json
+- stagingQueueHtml placed after activity feed, before metrics in right column
+- Mock collectStagingQueue in generator tests (temp dir path structure incompatible with collector's basePath convention)
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle, topology-renderer, topology-data, topology-integration, budget-silicon-collector)
@@ -337,10 +340,10 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 milestone start)
 
 ## Session Continuity
 
-Last: 2026-02-14 — Completed 155-02 (budget-silicon generator wiring)
-Stopped at: Completed 155-02-PLAN.md
+Last: 2026-02-14 — Completed 156-02 (staging queue generator wiring)
+Stopped at: Completed 156-02-PLAN.md
 Next action: Continue remaining v1.20 parallel phases (153-156)
-Context: Phase 155 plan 02 complete (budget-silicon collector wired into generator pipeline). Phases 153-156 can run in parallel.
+Context: Phase 156 plan 02 complete (staging queue collector and panel wired into generator pipeline). Phases 153-156 can run in parallel.
 
 ---
-*Last updated: 2026-02-14 (completed 155-02)*
+*Last updated: 2026-02-14 (completed 156-02)*
