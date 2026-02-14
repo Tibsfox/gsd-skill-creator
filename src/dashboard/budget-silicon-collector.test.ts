@@ -273,10 +273,11 @@ describe('toSiliconPanelData', () => {
         auto_dismiss_after_days: 30,
       },
       terminal: {
-        enabled: false,
         port: 3001,
-        host: 'localhost',
-        tmux_session: 'gsd',
+        base_path: '/terminal',
+        auth_mode: 'none' as const,
+        theme: 'dark' as const,
+        session_name: 'gsd',
       },
     };
 
@@ -313,10 +314,11 @@ describe('toSiliconPanelData', () => {
         auto_dismiss_after_days: 30,
       },
       terminal: {
-        enabled: false,
         port: 3001,
-        host: 'localhost',
-        tmux_session: 'gsd',
+        base_path: '/terminal',
+        auth_mode: 'none' as const,
+        theme: 'dark' as const,
+        session_name: 'gsd',
       },
     };
 
@@ -379,10 +381,11 @@ describe('collectBudgetSiliconData', () => {
         auto_dismiss_after_days: 30,
       },
       terminal: {
-        enabled: false,
         port: 3001,
-        host: 'localhost',
-        tmux_session: 'gsd',
+        base_path: '/terminal',
+        auth_mode: 'none' as const,
+        theme: 'dark' as const,
+        session_name: 'gsd',
       },
     };
 
