@@ -340,4 +340,92 @@ describe('generate', () => {
       expect(content).not.toContain('<!-- METRICS_SECTION -->');
     });
   });
+
+  // -------------------------------------------------------------------------
+  // Style completeness tests (152-01)
+  // -------------------------------------------------------------------------
+
+  describe('style completeness', () => {
+    beforeEach(async () => {
+      const { collectAndRenderMetrics } = await import('./metrics/integration.js');
+      vi.mocked(collectAndRenderMetrics).mockReset();
+      vi.mocked(collectAndRenderMetrics).mockResolvedValue({
+        html: '',
+        sections: 0,
+        durationMs: 0,
+      });
+    });
+
+    async function generateAndReadIndex(): Promise<string> {
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+      await writeFile(join(planningDir, 'ROADMAP.md'), ROADMAP_MD);
+      await writeFile(join(planningDir, 'MILESTONES.md'), MILESTONES_MD);
+
+      const { generate } = await import('./generator.js');
+      await generate({ planningDir, outputDir, force: true });
+
+      return readFile(join(outputDir, 'index.html'), 'utf-8');
+    }
+
+    it('generated index.html includes entity-legend styles', async () => {
+      const content = await generateAndReadIndex();
+      expect(content).toContain('.entity-legend');
+    });
+
+    it('generated index.html includes entity-shape styles', async () => {
+      const content = await generateAndReadIndex();
+      expect(content).toContain('.entity-shape');
+    });
+
+    it('generated index.html includes silicon-panel styles', async () => {
+      const content = await generateAndReadIndex();
+      expect(content).toContain('.silicon-panel');
+    });
+
+    it('generated index.html includes budget-gauge styles', async () => {
+      const content = await generateAndReadIndex();
+      expect(content).toContain('.budget-gauge');
+    });
+
+    it('generated index.html includes staging-queue styles', async () => {
+      const content = await generateAndReadIndex();
+      expect(content).toContain('.staging-queue-panel');
+    });
+
+    it('generated index.html includes question-card styles', async () => {
+      const content = await generateAndReadIndex();
+      expect(content).toContain('.question-card');
+    });
+
+    it('generated index.html includes upload-zone styles', async () => {
+      const content = await generateAndReadIndex();
+      expect(content).toContain('.upload-zone');
+    });
+
+    it('generated index.html includes config-form styles', async () => {
+      const content = await generateAndReadIndex();
+      expect(content).toContain('.config-form');
+    });
+
+    it('generated index.html includes submit-flow styles', async () => {
+      const content = await generateAndReadIndex();
+      expect(content).toContain('.submit-flow');
+    });
+
+    it('generated index.html includes console-settings styles', async () => {
+      const content = await generateAndReadIndex();
+      expect(content).toContain('.console-settings-panel');
+    });
+
+    it('generated index.html includes console-activity styles', async () => {
+      const content = await generateAndReadIndex();
+      expect(content).toContain('.console-activity');
+    });
+
+    it('generated index.html includes console-page styles', async () => {
+      const content = await generateAndReadIndex();
+      expect(content).toContain('.console-page');
+    });
+  });
 });
