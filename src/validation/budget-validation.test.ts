@@ -12,6 +12,8 @@ import {
   formatBudgetDisplay,
   generateSuggestions,
 } from './budget-validation.js';
+import type { BudgetProfile } from '../types/application.js';
+import type { LoadingProjection } from './loading-projection.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const testDir = join(__dirname, '..', '..', 'test-fixtures', 'budget-validation');
@@ -817,5 +819,291 @@ ${largeBody}`;
 
     const suggestions = generateSuggestions(info, validator.getBudget());
     expect(suggestions.length).toBeGreaterThan(0);
+  });
+});
+
+// ============================================================================
+// CumulativeBudgetResult.installedTotal and loadableTotal tests
+// ============================================================================
+
+describe('CumulativeBudgetResult.installedTotal and loadableTotal', () => {
+  let validator: BudgetValidator;
+  const extDir = join(testDir, 'extended');
+
+  // Profile with 5% budget, 10% ceiling on 200k context = 10k standard, 20k critical
+  const testProfile: BudgetProfile = {
+    name: 'test-profile',
+    budgetPercent: 0.05,
+    hardCeilingPercent: 0.10,
+    tiers: {
+      critical: ['critical-skill'],
+      standard: ['skill-a', 'skill-b'],
+      optional: ['optional-skill'],
+    },
+    thresholds: { warn50: true, warn80: true, warn100: true },
+  };
+
+  beforeAll(() => {
+    delete process.env.SLASH_COMMAND_TOOL_CHAR_BUDGET;
+    validator = BudgetValidator.load();
+  });
+
+  beforeEach(async () => {
+    await mkdir(extDir, { recursive: true });
+  });
+
+  afterEach(async () => {
+    await rm(extDir, { recursive: true, force: true });
+  });
+
+  afterAll(async () => {
+    await rm(testDir, { recursive: true, force: true });
+  });
+
+  it('installedTotal equals totalChars (sum of all skill sizes)', async () => {
+    const content1 = `---\nname: skill-a\ndescription: A\n---\n${'x'.repeat(3000)}`;
+    const content2 = `---\nname: skill-b\ndescription: B\n---\n${'x'.repeat(2000)}`;
+
+    await mkdir(join(extDir, 'skill-a'), { recursive: true });
+    await mkdir(join(extDir, 'skill-b'), { recursive: true });
+    await writeFile(join(extDir, 'skill-a', 'SKILL.md'), content1, 'utf-8');
+    await writeFile(join(extDir, 'skill-b', 'SKILL.md'), content2, 'utf-8');
+
+    const result = await validator.checkCumulative(extDir, testProfile);
+
+    expect(result.installedTotal).toBe(result.totalChars);
+  });
+
+  it('loadableTotal is less than or equal to installedTotal', async () => {
+    // Create skills that exceed standard budget (10k chars)
+    const content1 = `---\nname: skill-a\ndescription: A\n---\n${'x'.repeat(6000)}`;
+    const content2 = `---\nname: skill-b\ndescription: B\n---\n${'x'.repeat(6000)}`;
+
+    await mkdir(join(extDir, 'skill-a'), { recursive: true });
+    await mkdir(join(extDir, 'skill-b'), { recursive: true });
+    await writeFile(join(extDir, 'skill-a', 'SKILL.md'), content1, 'utf-8');
+    await writeFile(join(extDir, 'skill-b', 'SKILL.md'), content2, 'utf-8');
+
+    const result = await validator.checkCumulative(extDir, testProfile);
+
+    expect(result.loadableTotal).toBeLessThanOrEqual(result.installedTotal);
+  });
+
+  it('when a BudgetProfile is provided, loadableTotal reflects projection', async () => {
+    // Two skills, both standard tier; total > standard budget (10k)
+    const content1 = `---\nname: skill-a\ndescription: A\n---\n${'x'.repeat(7000)}`;
+    const content2 = `---\nname: skill-b\ndescription: B\n---\n${'x'.repeat(7000)}`;
+
+    await mkdir(join(extDir, 'skill-a'), { recursive: true });
+    await mkdir(join(extDir, 'skill-b'), { recursive: true });
+    await writeFile(join(extDir, 'skill-a', 'SKILL.md'), content1, 'utf-8');
+    await writeFile(join(extDir, 'skill-b', 'SKILL.md'), content2, 'utf-8');
+
+    const result = await validator.checkCumulative(extDir, testProfile);
+
+    // loadableTotal should be less than installedTotal since not all fit
+    expect(result.loadableTotal).toBeLessThan(result.installedTotal);
+    expect(result.loadableTotal).toBeGreaterThan(0);
+  });
+
+  it('when a BudgetProfile is provided, projection contains full LoadingProjection', async () => {
+    const content1 = `---\nname: skill-a\ndescription: A\n---\n${'x'.repeat(5000)}`;
+
+    await mkdir(join(extDir, 'skill-a'), { recursive: true });
+    await writeFile(join(extDir, 'skill-a', 'SKILL.md'), content1, 'utf-8');
+
+    const result = await validator.checkCumulative(extDir, testProfile);
+
+    expect(result.projection).toBeDefined();
+    expect(result.projection!.loaded).toBeDefined();
+    expect(result.projection!.deferred).toBeDefined();
+    expect(result.projection!.loadedTotal).toEqual(expect.any(Number));
+    expect(result.projection!.deferredTotal).toEqual(expect.any(Number));
+  });
+
+  it('projection.loaded contains ProjectedSkill objects for skills that fit', async () => {
+    const content1 = `---\nname: skill-a\ndescription: A\n---\n${'x'.repeat(3000)}`;
+
+    await mkdir(join(extDir, 'skill-a'), { recursive: true });
+    await writeFile(join(extDir, 'skill-a', 'SKILL.md'), content1, 'utf-8');
+
+    const result = await validator.checkCumulative(extDir, testProfile);
+
+    expect(result.projection!.loaded.length).toBeGreaterThan(0);
+    const loadedSkill = result.projection!.loaded[0];
+    expect(loadedSkill).toHaveProperty('name');
+    expect(loadedSkill).toHaveProperty('charCount');
+    expect(loadedSkill).toHaveProperty('tier');
+    expect(loadedSkill).toHaveProperty('status', 'loaded');
+  });
+
+  it('projection.deferred contains ProjectedSkill objects for skills that did not fit', async () => {
+    // Create skills that together exceed standard budget (10k)
+    const content1 = `---\nname: skill-a\ndescription: A\n---\n${'x'.repeat(7000)}`;
+    const content2 = `---\nname: skill-b\ndescription: B\n---\n${'x'.repeat(7000)}`;
+
+    await mkdir(join(extDir, 'skill-a'), { recursive: true });
+    await mkdir(join(extDir, 'skill-b'), { recursive: true });
+    await writeFile(join(extDir, 'skill-a', 'SKILL.md'), content1, 'utf-8');
+    await writeFile(join(extDir, 'skill-b', 'SKILL.md'), content2, 'utf-8');
+
+    const result = await validator.checkCumulative(extDir, testProfile);
+
+    expect(result.projection!.deferred.length).toBeGreaterThan(0);
+    const deferredSkill = result.projection!.deferred[0];
+    expect(deferredSkill).toHaveProperty('name');
+    expect(deferredSkill).toHaveProperty('status', 'deferred');
+  });
+
+  it('when no profile is provided, projection is undefined (backward compat)', async () => {
+    const content1 = `---\nname: skill-a\ndescription: A\n---\nBody`;
+
+    await mkdir(join(extDir, 'skill-a'), { recursive: true });
+    await writeFile(join(extDir, 'skill-a', 'SKILL.md'), content1, 'utf-8');
+
+    const result = await validator.checkCumulative(extDir);
+
+    expect(result.projection).toBeUndefined();
+  });
+
+  it('installedTotal and loadableTotal are both numbers on the result object', async () => {
+    const content1 = `---\nname: skill-a\ndescription: A\n---\nBody`;
+
+    await mkdir(join(extDir, 'skill-a'), { recursive: true });
+    await writeFile(join(extDir, 'skill-a', 'SKILL.md'), content1, 'utf-8');
+
+    const result = await validator.checkCumulative(extDir, testProfile);
+
+    expect(typeof result.installedTotal).toBe('number');
+    expect(typeof result.loadableTotal).toBe('number');
+  });
+
+  it('when no profile is provided, installedTotal equals loadableTotal', async () => {
+    const content1 = `---\nname: skill-a\ndescription: A\n---\n${'x'.repeat(3000)}`;
+
+    await mkdir(join(extDir, 'skill-a'), { recursive: true });
+    await writeFile(join(extDir, 'skill-a', 'SKILL.md'), content1, 'utf-8');
+
+    const result = await validator.checkCumulative(extDir);
+
+    expect(result.installedTotal).toBe(result.loadableTotal);
+  });
+});
+
+// ============================================================================
+// formatBudgetDisplay with projection tests
+// ============================================================================
+
+describe('formatBudgetDisplay with projection', () => {
+  it('output contains "Installed:" line with installedTotal', () => {
+    const result: CumulativeBudgetResult = {
+      totalChars: 12000,
+      budget: 15500,
+      usagePercent: 77,
+      severity: 'info',
+      skills: [
+        { name: 'a', descriptionChars: 10, bodyChars: 7000, totalChars: 7000, path: '/a' },
+        { name: 'b', descriptionChars: 10, bodyChars: 5000, totalChars: 5000, path: '/b' },
+      ],
+      hiddenCount: 0,
+      installedTotal: 12000,
+      loadableTotal: 7000,
+      projection: {
+        loaded: [{ name: 'a', charCount: 7000, tier: 'standard', oversized: false, status: 'loaded' as const }],
+        deferred: [{ name: 'b', charCount: 5000, tier: 'standard', oversized: false, status: 'deferred' as const }],
+        loadedTotal: 7000,
+        deferredTotal: 5000,
+        budgetLimit: 10000,
+        profileName: 'test',
+      },
+    };
+
+    const display = formatBudgetDisplay(result);
+
+    expect(display).toContain('Installed:');
+    expect(display).toContain('12,000');
+  });
+
+  it('output contains "Loadable:" line with loadableTotal when it differs from installedTotal', () => {
+    const result: CumulativeBudgetResult = {
+      totalChars: 12000,
+      budget: 15500,
+      usagePercent: 77,
+      severity: 'info',
+      skills: [
+        { name: 'a', descriptionChars: 10, bodyChars: 7000, totalChars: 7000, path: '/a' },
+        { name: 'b', descriptionChars: 10, bodyChars: 5000, totalChars: 5000, path: '/b' },
+      ],
+      hiddenCount: 0,
+      installedTotal: 12000,
+      loadableTotal: 7000,
+      projection: {
+        loaded: [{ name: 'a', charCount: 7000, tier: 'standard', oversized: false, status: 'loaded' as const }],
+        deferred: [{ name: 'b', charCount: 5000, tier: 'standard', oversized: false, status: 'deferred' as const }],
+        loadedTotal: 7000,
+        deferredTotal: 5000,
+        budgetLimit: 10000,
+        profileName: 'test',
+      },
+    };
+
+    const display = formatBudgetDisplay(result);
+
+    expect(display).toContain('Loadable:');
+    expect(display).toContain('7,000');
+  });
+
+  it('when installedTotal equals loadableTotal, display shows single budget line (backward compat)', () => {
+    const result: CumulativeBudgetResult = {
+      totalChars: 5000,
+      budget: 15500,
+      usagePercent: 32,
+      severity: 'ok',
+      skills: [
+        { name: 'a', descriptionChars: 10, bodyChars: 5000, totalChars: 5000, path: '/a' },
+      ],
+      hiddenCount: 0,
+      installedTotal: 5000,
+      loadableTotal: 5000,
+    };
+
+    const display = formatBudgetDisplay(result);
+
+    // Should show the original single "Budget:" line, not separate Installed/Loadable
+    expect(display).toContain('Budget:');
+    expect(display).not.toContain('Installed:');
+    expect(display).not.toContain('Loadable:');
+  });
+
+  it('progress bar uses loadableTotal against budget (not installedTotal)', () => {
+    const result: CumulativeBudgetResult = {
+      totalChars: 12000,
+      budget: 15500,
+      usagePercent: 77,
+      severity: 'info',
+      skills: [
+        { name: 'a', descriptionChars: 10, bodyChars: 7000, totalChars: 7000, path: '/a' },
+        { name: 'b', descriptionChars: 10, bodyChars: 5000, totalChars: 5000, path: '/b' },
+      ],
+      hiddenCount: 0,
+      installedTotal: 12000,
+      loadableTotal: 7000,
+      projection: {
+        loaded: [{ name: 'a', charCount: 7000, tier: 'standard', oversized: false, status: 'loaded' as const }],
+        deferred: [{ name: 'b', charCount: 5000, tier: 'standard', oversized: false, status: 'deferred' as const }],
+        loadedTotal: 7000,
+        deferredTotal: 5000,
+        budgetLimit: 10000,
+        profileName: 'test',
+      },
+    };
+
+    const display = formatBudgetDisplay(result);
+
+    // The progress bar should be based on loadableTotal (7000) vs budget (15500) = ~45%
+    // NOT installedTotal (12000) vs budget (15500) = ~77%
+    // With 20-char bar at 45%: 9 filled, 11 empty
+    const loadablePercent = Math.round((7000 / 15500) * 100);
+    expect(display).toContain(`${loadablePercent}%`);
   });
 });
