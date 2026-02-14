@@ -40,7 +40,8 @@ import { renderEntityShapeStyles } from './entity-shapes.js';
 import { renderSiliconPanel, renderSiliconPanelStyles } from './silicon-panel.js';
 import { renderBudgetGauge, renderBudgetGaugeStyles } from './budget-gauge.js';
 import { collectBudgetSiliconData } from './budget-silicon-collector.js';
-import { renderStagingQueueStyles } from './staging-queue-panel.js';
+import { renderStagingQueuePanel, renderStagingQueueStyles } from './staging-queue-panel.js';
+import { collectStagingQueue } from './collectors/staging-collector.js';
 import { renderQuestionCardStyles } from './question-card.js';
 import { renderUploadZoneStyles } from './upload-zone.js';
 import { renderConfigFormStyles } from './config-form.js';
@@ -108,6 +109,7 @@ function renderIndexContent(
   terminalHtml?: string,
   feedEntries?: FeedEntry[],
   budgetSiliconHtml?: string,
+  stagingQueueHtml?: string,
 ): string {
   const sections: string[] = [];
 
@@ -139,6 +141,11 @@ function renderIndexContent(
   // Activity feed (compact, standalone)
   const activityHtml = renderActivityFeed(feedEntries ?? []);
   rightPanels.push(`<div class="compact-card"><h3 class="compact-title">Activity</h3>${activityHtml}</div>`);
+
+  // Staging queue panel
+  if (stagingQueueHtml) {
+    rightPanels.push(stagingQueueHtml);
+  }
 
   // Live metrics sections
   if (metricsHtml) {
@@ -461,6 +468,17 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     // Budget/silicon collection failure never blocks dashboard generation
   }
 
+  // Collect staging queue data (graceful — never fails the pipeline)
+  let stagingQueueHtml = '';
+  try {
+    const stagingData = await collectStagingQueue({
+      basePath: join(options.planningDir, '..'),
+    });
+    stagingQueueHtml = renderStagingQueuePanel(stagingData);
+  } catch {
+    // Staging queue failure never blocks dashboard generation
+  }
+
   // Ensure output directory exists
   try {
     await mkdir(options.outputDir, { recursive: true });
@@ -521,7 +539,7 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     {
       name: 'index',
       filename: 'index.html',
-      render: () => renderIndexContent(data, metricsHtml, topologySource, terminalHtml, feedEntries, budgetSiliconHtml),
+      render: () => renderIndexContent(data, metricsHtml, topologySource, terminalHtml, feedEntries, budgetSiliconHtml, stagingQueueHtml),
       meta: {
         description: data.project?.description ?? 'GSD Planning Docs Dashboard',
         ogTitle: projectName,
