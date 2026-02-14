@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.20 — Dashboard Assembly
-Phase: 152 — Layout & CSS Unification (in progress)
-Plan: 01 complete, 02 next
-Status: Executing phase 152
-Last activity: 2026-02-14 — Completed 152-01 (style assembly pipeline)
+Phase: 152 — Layout & CSS Unification (complete)
+Plan: 02 complete (all plans done)
+Status: Phase 152 complete
+Last activity: 2026-02-14 — Completed 152-02 (design system token replacement)
 
 ## Project Reference
 
@@ -274,6 +274,10 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 milestone start)
 - Progress bar uses loadableTotal in dual-view (what actually loads matters more than what's installed)
 - Import all 12 orphaned component style modules directly into generator.ts (no barrel) to match existing pattern
 - Test overflow-y via renderMetricsStyles() in renderer.test.ts since base renderStyles() does not contain quality/history overflow rules
+- Every bare hex in component CSS replaced with var(--token, #hex) preserving original hex as fallback for resilience
+- staging-queue-panel badge color-mix() args also wrapped in var() for full token coverage
+- submit-flow border and background color-mix hex values also tokenized beyond plan's 2-replacement scope
+- Token compliance test pattern: strip var() patterns then assert no bare hex in color/background/border rules
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle, topology-renderer, topology-data, topology-integration)
@@ -307,16 +311,16 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 milestone start)
 | Metric | Value |
 |--------|-------|
 | Total milestones | 23 shipped (v1.0-v1.19 + v1.8.1 patch) |
-| Total phases | 151 complete |
-| Total plans | 437 complete |
+| Total phases | 152 complete |
+| Total plans | 439 complete |
 | Total LOC | ~192k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-14 — Completed 152-01 (style assembly pipeline)
-Stopped at: Completed 152-01-PLAN.md
-Next action: Execute 152-02 (console page wiring)
-Context: Phase 152 plan 01 complete (style assembly). Plan 02 remaining in phase 152. After 152 completes, phases 153-156 can run in parallel. Phase 157 depends on all prior phases.
+Last: 2026-02-14 — Completed 152-02 (design system token replacement)
+Stopped at: Completed 152-02-PLAN.md
+Next action: Execute phases 153-156 (parallel wave)
+Context: Phase 152 complete (2 plans: style assembly + token replacement). Phases 153-156 can run in parallel. Phase 157 depends on all prior phases.
 
 ---
-*Last updated: 2026-02-14 (completed 152-01)*
+*Last updated: 2026-02-14 (completed 152-02)*
