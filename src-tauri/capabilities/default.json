@@ -11,6 +11,9 @@
     "allow-echo-event",
     "allow-echo-channel",
     "allow-ipc-benchmark",
-    "allow-ipc-benchmark-channel"
+    "allow-ipc-benchmark-channel",
+    "allow-start-watcher",
+    "allow-stop-watcher",
+    "allow-watcher-status"
   ]
 }

@@ -8,6 +8,9 @@ fn main() {
         "echo_channel",
         "ipc_benchmark",
         "ipc_benchmark_channel",
+        "start_watcher",
+        "stop_watcher",
+        "watcher_status",
     ]);
 
     tauri_build::try_build(
