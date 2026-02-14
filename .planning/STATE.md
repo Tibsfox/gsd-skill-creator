@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
-Phase: 158 -- Tauri Scaffold + IPC Foundation (not started)
-Plan: --
-Status: Roadmap approved, ready for planning
-Last activity: 2026-02-13 -- Roadmap created with 11 phases (158-168)
+Phase: 158 -- Tauri Scaffold + IPC Foundation (in progress)
+Plan: 01 complete, next: 02
+Status: Executing phase 158
+Last activity: 2026-02-14 -- Completed 158-01 (Tauri v2 Rust backend scaffold)
 
 Progress: [..........] 0/11 phases
 
@@ -45,6 +45,9 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - 24 milestones shipped, 157 phases, 449 plans, ~195k LOC
 
 ### Key Decisions (v1.21)
+- tauri-build has independent versioning from tauri crate (2.5.x vs 2.10.x)
+- AppManifest capability ACL: use try_build(Attributes::new().app_manifest(manifest)), not AppManifest::build()
+- Tauri requires RGBA PNG icons (1-bit colormap rejected at compile time)
 - Tauri v2.10.x for desktop framework (not Electron)
 - xterm.js v5.5.x (not v6.0 -- breaking API changes)
 - portable-pty 0.9.0 for Rust PTY management
@@ -76,16 +79,18 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total milestones | 24 shipped (v1.0-v1.20 + v1.8.1 patch) |
 | Total phases | 157 complete |
 | Total plans | 449 complete |
-| Total LOC | ~195k TypeScript |
+| Total LOC | ~195k TypeScript + Rust |
 | v1.21 phases | 0/11 complete |
+| v1.21 plans | 1/? complete |
 | v1.21 requirements | 50 total |
+| 158-01 duration | 11min |
 
 ## Session Continuity
 
-Last: 2026-02-13 -- Roadmap created for v1.21
-Stopped at: Roadmap complete
-Next action: `/gsd:plan-phase 158` -- create detailed execution plan for Tauri Scaffold + IPC Foundation
-Context: Phase 158 is the foundation -- Tauri scaffold, IPC system, capability security, build pipeline. Everything else depends on this.
+Last: 2026-02-14 -- Completed 158-01 (Tauri v2 Rust backend scaffold)
+Stopped at: Completed 158-01-PLAN.md
+Next action: Execute 158-02 (Vite frontend scaffold in desktop/)
+Context: Rust backend compiles, tauri.conf.json establishes devUrl :1420 contract. Plan 02 creates the Vite frontend that matches this contract.
 
 ---
-*Last updated: 2026-02-13 (v1.21 roadmap created)*
+*Last updated: 2026-02-14 (158-01 complete)*
