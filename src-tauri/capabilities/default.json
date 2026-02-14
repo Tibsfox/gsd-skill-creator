@@ -20,6 +20,9 @@
     "allow-pty-resize",
     "allow-pty-pause",
     "allow-pty-resume",
-    "allow-pty-close"
+    "allow-pty-close",
+    "allow-tmux-has-tmux",
+    "allow-tmux-list-sessions",
+    "allow-tmux-ensure-session"
   ]
 }

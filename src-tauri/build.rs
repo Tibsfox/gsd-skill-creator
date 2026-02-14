@@ -17,6 +17,9 @@ fn main() {
         "pty_pause",
         "pty_resume",
         "pty_close",
+        "tmux_has_tmux",
+        "tmux_list_sessions",
+        "tmux_ensure_session",
     ]);
 
     tauri_build::try_build(

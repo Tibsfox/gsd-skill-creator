@@ -34,6 +34,9 @@ pub fn run() {
             commands::pty::pty_pause,
             commands::pty::pty_resume,
             commands::pty::pty_close,
+            commands::tmux::tmux_has_tmux,
+            commands::tmux::tmux_list_sessions,
+            commands::tmux::tmux_ensure_session,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -1,11 +1,33 @@
+use std::process::Command;
+
 /// Check if the tmux binary exists in PATH and return its absolute path.
 pub fn detect_tmux() -> Option<String> {
-    todo!()
+    let output = Command::new("which").arg("tmux").output().ok()?;
+    if output.status.success() {
+        let path = String::from_utf8_lossy(&output.stdout).trim().to_string();
+        if path.is_empty() {
+            None
+        } else {
+            Some(path)
+        }
+    } else {
+        None
+    }
 }
 
 /// Return the tmux version string (e.g., "tmux 3.4").
 pub fn tmux_version() -> Option<String> {
-    todo!()
+    let output = Command::new("tmux").arg("-V").output().ok()?;
+    if output.status.success() {
+        let version = String::from_utf8_lossy(&output.stdout).trim().to_string();
+        if version.is_empty() {
+            None
+        } else {
+            Some(version)
+        }
+    } else {
+        None
+    }
 }
 
 #[cfg(test)]
