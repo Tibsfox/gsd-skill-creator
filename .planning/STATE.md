@@ -3,12 +3,12 @@
 ## Current Position
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
-Phase: 161 -- Palette System + Copper List (plans 01-02 complete, plan 03 remains)
-Plan: 161-02 COMPLETE. Next: 161-03 (copper list).
-Status: Executing Phase 161 (Track A: Graphics). 161-01 and 161-02 done.
-Last activity: 2026-02-14 -- Completed 161-02 (palette texture, background shader, engine integration)
+Phase: 163 -- tmux Integration + Claude Sessions (plan 02 complete, plans 03-04 remain)
+Plan: 163-02 COMPLETE. Next: 163-03 (Claude session bootstrap).
+Status: Executing Phase 163 (Track B: Terminal). 163-01 and 163-02 done.
+Last activity: 2026-02-14 -- Completed 163-02 (TypeScript tmux bridge, tmux-aware terminal factory)
 
-Progress: [####......] 4/11 phases
+Progress: [#####.....] 5/11 phases
 
 ## Project Reference
 
@@ -78,6 +78,12 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - NEAREST filtering on palette texture -- no interpolation between palette indices
 - Scene render target in Engine (not CRTPipeline) for clean separation of scene content vs post-processing
 - CRTPipeline.render() optional sourceTexture parameter for explicit input binding
+- Copper list encoded as 1xN RGBA texture: R=paletteIndexA, G=paletteIndexB, B=blend(0-255), A=255
+- Copper list texture on unit 2 (palette on unit 1, scene content on unit 0)
+- copperListToTexture pre-bakes interpolation factor; shader reads and mix()es palette colors
+- Last-writer-wins for overlapping copper entries
+- PtyOpenParams.args as optional string[] for backward-compatible shell argument passing (tmux attach)
+- Ctrl-B D detach sequence with 100ms delay before PTY close preserves tmux sessions
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -100,8 +106,8 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total phases | 157 complete |
 | Total plans | 449 complete |
 | Total LOC | ~195k TypeScript + Rust |
-| v1.21 phases | 4/11 complete |
-| v1.21 plans | 17/? complete |
+| v1.21 phases | 5/11 complete |
+| v1.21 plans | 19/? complete |
 | v1.21 requirements | 50 total |
 | 158-01 duration | 11min |
 | 158-02 duration | 2min |
@@ -118,13 +124,16 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 162-04 duration | 1min |
 | 161-01 duration | 3min |
 | 161-02 duration | 3min |
+| 163-01 duration | 3min |
+| 161-03 duration | 3min |
+| 163-02 duration | 3min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Executed 161-02 (palette texture, background shader, engine integration)
-Stopped at: Completed 161-02-PLAN.md
-Next action: Continue Phase 161 with 161-03 (copper list). Track B needs 163 (tmux).
-Context: Phases 158, 159, 160, 162 all COMPLETE. Phase 161 plans 01-02 done. 110 engine tests passing. PaletteTexture wired into Engine with scene render target. Track B needs 163. All converge at 164-166.
+Last: 2026-02-14 -- Executed 163-02 (TypeScript tmux bridge, tmux-aware terminal factory)
+Stopped at: Completed 163-02-PLAN.md
+Next action: Continue Phase 163 with 163-03 (Claude session bootstrap). Track A done, Track B in progress.
+Context: Phases 158, 159, 160, 161, 162 all COMPLETE. Phase 163 plans 01-02 done. 177 desktop tests passing, 15 Rust tests passing. tmux module wired: bridge IPC, terminal factory with PTY args, detach-on-dispose. Plans 03-04 remain for Claude sessions. All tracks converge at 164-166.
 
 ---
-*Last updated: 2026-02-14 (161-02 complete)*
+*Last updated: 2026-02-14 (163-02 complete)*
