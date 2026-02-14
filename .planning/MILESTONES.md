@@ -2,6 +2,19 @@
 
 ## Shipped
 
+### v1.21 — GSD-OS Desktop Foundation (Phases 158-168)
+**Goal:** Build the Tauri desktop application shell with WebGL 8-bit graphics engine, first-boot calibration, Amiga-inspired desktop environment, and native system bridges (PTY, file watcher, IPC)
+**Shipped:** 2026-02-14
+**Requirements:** 50 | **Phases:** 11 | **Plans:** 34 | **Commits:** 83 | **Tests:** 636
+
+**Key accomplishments:**
+- Tauri v2 desktop app with Rust backend, Vite webview frontend, and bidirectional IPC (commands, events, channels) with capability ACL security
+- WebGL2 CRT shader engine with multi-pass post-processing (scanlines, barrel distortion, phosphor glow, chromatic aberration, vignette) and CSS fallback
+- 32-color indexed palette system with 5 retro-computing presets, OKLCH generation, and copper list raster effects for per-scanline color manipulation
+- Native Rust PTY terminal with xterm.js emulator, watermark-based flow control, and tmux session binding with detach-on-close
+- Amiga Workbench-inspired desktop environment with window manager, taskbar, pixel-art icons, system menu, and keyboard shortcuts
+- Three-screen calibration wizard, Amiga chipset boot sequence, and accessibility auto-detection (prefers-reduced-motion, high-contrast palette)
+
 ### v1.20 — Dashboard Assembly (Phases 152-157)
 **Goal:** Wire 13 orphaned dashboard components into the generator pipeline with unified CSS and real data pipelines, so the generated dashboard reflects every feature built across v1.12-v1.19
 **Shipped:** 2026-02-14
@@ -252,6 +265,8 @@
 
 **Totals:** 24 milestones (v1.0-v1.20 + v1.8.1 patch) | 157 phases | 449 plans
 **Last phase number:** 157
+
+
 
 
 

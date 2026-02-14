@@ -145,23 +145,25 @@ Skills, agents, and teams must match official Claude Code patterns so they work 
 - ✓ Budget-silicon collector bridging budget results and config to gauge/panel renderers — v1.20
 - ✓ Staging queue collector reading queue-state.json for dashboard panel visualization — v1.20
 - ✓ Console page assembly with settings, activity, questions, and submit flow as 6th generated page — v1.20
+- ✓ Tauri v2 desktop application with Rust backend and webview frontend — v1.21
+- ✓ Bidirectional IPC (commands, events, channels) with capability ACL security — v1.21
+- ✓ WebGL2 CRT shader engine with multi-pass post-processing and CSS fallback — v1.21
+- ✓ 32-color indexed palette with 5 presets, OKLCH generation, and copper list raster effects — v1.21
+- ✓ Native Rust PTY terminal with xterm.js, watermark flow control, and tmux session binding — v1.21
+- ✓ Claude Code session management with tmux integration and real-time status monitor — v1.21
+- ✓ Native file watcher (notify crate) with debounced change events via Tauri IPC — v1.21
+- ✓ Amiga Workbench window manager with custom chrome, depth cycling, drag/resize — v1.21
+- ✓ Desktop shell with taskbar, pixel-art icons, system menu, and keyboard shortcuts — v1.21
+- ✓ Dashboard integration with palette CSS bridge and watcher-driven refresh — v1.21
+- ✓ Three-screen calibration wizard with UserStyle Zod schema and localStorage persistence — v1.21
+- ✓ Amiga chipset boot sequence (Agnus/Denise/Paula/Gary) with skip handling — v1.21
+- ✓ Accessibility auto-detection with CRT disable, high-contrast palette, and animation removal — v1.21
 
 ### Active
 
-<!-- Current milestone: v1.21 GSD-OS Desktop Foundation — see REQUIREMENTS.md -->
+<!-- Next milestone: v1.22 — see REQUIREMENTS.md when created -->
 
-- Tauri desktop application scaffold for Linux and macOS
-- WebGL 8-bit graphics engine with CRT post-processing shaders
-- First-boot calibration screen (color picking, shape/glow/density sliders, light/dark + palette selection)
-- user-style.yaml generation and system-wide style application
-- Boot sequence through WebGL shader engine with chipset metaphor
-- Desktop environment with Amiga Workbench-inspired window management
-- Taskbar with running process indicators and system menu
-- Rust-side tmux integration via native PTY (replacing Wetty HTTP bridge)
-- Native file watcher service (inotify on Linux, FSEvents on macOS)
-- Tauri IPC event system for webview↔backend communication
-- Embedded terminal emulator panel with direct tmux session binding
-- Claude Code session management through Tauri process manager
+(None yet — define with `/gsd:new-milestone`)
 
 ### Out of Scope
 
@@ -176,29 +178,18 @@ Skills, agents, and teams must match official Claude Code patterns so they work 
 - Automated remediation — v1 flags and suggests; auto-fix requires high confidence not yet established
 - Cross-project staging — v1 is project-scoped; cross-project adds significant coordination complexity
 
-## Current Milestone: v1.21 GSD-OS Desktop Foundation
-
-**Goal:** Build the Tauri desktop application shell with WebGL 8-bit graphics engine, first-boot calibration, boot sequence, Amiga-inspired desktop environment, and native system bridge (tmux PTY, file watcher, IPC) — transforming the existing TypeScript ecosystem into an interactive desktop application.
-
-**Target features:**
-- Tauri application with Rust backend and webview frontend
-- WebGL shader pipeline emulating OCS-era Amiga display (32-color palette, scanlines, phosphor glow, copper list effects)
-- Three-screen first-boot calibration (color picking, shape/glow/density, light/dark + palette) generating user-style.yaml
-- Personalized boot sequence showing chipset architecture metaphor
-- Desktop environment with window management, taskbar, and system menu
-- Native tmux integration via Rust PTY (replacing Wetty HTTP bridge)
-- File watcher service using inotify/FSEvents pushing events via Tauri IPC
-- Embedded terminal emulator with direct tmux session binding
-- Claude Code session management through Tauri process manager
-
 ## Current State
 
-v1.21 starting. 24 milestones shipped (v1.0-v1.20 + v1.8.1 patch), 157 phases, 449 plans, ~195k LOC TypeScript. Beginning major architectural expansion from TypeScript library/CLI to Tauri desktop application with Rust backend, WebGL graphics engine, and native system integration.
+v1.21 shipped. 25 milestones shipped (v1.0-v1.21 + v1.8.1 patch), 168 phases, 483 plans, ~214k LOC (TypeScript + Rust + GLSL). The project has expanded from a TypeScript library/CLI into a full Tauri desktop application with Rust backend (PTY, file watcher, tmux, Claude sessions), WebGL2 graphics engine (CRT shaders, indexed palette, copper list), and Amiga-inspired desktop environment (window manager, taskbar, calibration wizard, boot sequence).
 
 ## Context
 
-- Built with TypeScript, Vitest for testing, Zod for validation
-- ~192,000 LOC across 23 milestones (v1.0-v1.19 + v1.8.1)
+- Built with TypeScript, Rust, GLSL; Vitest for testing, Zod for validation
+- ~214,000 LOC across 25 milestones (v1.0-v1.21 + v1.8.1)
+- Tauri v2.10.x desktop framework with Rust backend (src-tauri/) and Vite webview frontend (desktop/)
+- WebGL2 shader engine with custom GLSL CRT post-processing and indexed palette system
+- portable-pty 0.9.0 for Rust PTY management, xterm.js v5.5.x for terminal emulation
+- notify 8.2.0 for native file watching, culori v4.0 for OKLCH palette generation
 - Uses HuggingFace transformers for local embeddings (all-MiniLM-L6-v2)
 - Natural.js for Bayes classification in orchestrator
 - @modelcontextprotocol/sdk for MCP server
@@ -309,4 +300,4 @@ v1.21 starting. 24 milestones shipped (v1.0-v1.20 + v1.8.1 patch), 157 phases, 4
 | Old BudgetSnapshot migration defaults to totalChars | Graceful upgrade path, no data loss on old snapshots | ✓ Good |
 
 ---
-*Last updated: 2026-02-14 after v1.20 milestone shipped*
+*Last updated: 2026-02-14 after v1.21 milestone shipped*
