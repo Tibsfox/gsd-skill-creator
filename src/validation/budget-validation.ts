@@ -1,6 +1,8 @@
 import matter from 'gray-matter';
 import { readFile, readdir, stat } from 'fs/promises';
 import { join } from 'path';
+import type { BudgetProfile } from '../types/application.js';
+import { projectLoading, type LoadingProjection } from './loading-projection.js';
 
 // ============================================================================
 // Types
@@ -68,6 +70,12 @@ export interface CumulativeBudgetResult {
   skills: SkillBudgetInfo[];
   /** Number of skills that would be hidden by Claude Code if over budget */
   hiddenCount: number;
+  /** Total characters across all installed skills (same as totalChars) */
+  installedTotal: number;
+  /** Total characters of skills that would actually load with the given profile */
+  loadableTotal: number;
+  /** Full loading projection with loaded/deferred skill arrays (only present when profile is provided) */
+  projection?: LoadingProjection;
 }
 
 // ============================================================================
@@ -244,10 +252,14 @@ export class BudgetValidator {
    * Scans for all SKILL.md files and calculates total budget usage.
    * Counts all skills by default (conservative approach for disabled skills).
    *
+   * When a BudgetProfile is provided, computes a loading projection to
+   * distinguish installed inventory from what would actually load.
+   *
    * @param skillsDir - Path to skills directory
+   * @param profile - Optional agent budget profile for loading projection
    * @returns Cumulative budget result with per-skill breakdown
    */
-  async checkCumulative(skillsDir: string): Promise<CumulativeBudgetResult> {
+  async checkCumulative(skillsDir: string, profile?: BudgetProfile): Promise<CumulativeBudgetResult> {
     const skills: SkillBudgetInfo[] = [];
     const budget = BudgetValidator.CUMULATIVE_BUDGET;
 
@@ -291,6 +303,20 @@ export class BudgetValidator {
       }
     }
 
+    // Compute loading projection when profile is provided
+    const installedTotal = totalChars;
+    let loadableTotal: number;
+    let projection: LoadingProjection | undefined;
+
+    if (profile) {
+      const proj = projectLoading(skills, profile, { singleSkillLimit: this.charBudget });
+      loadableTotal = proj.loadedTotal;
+      projection = proj;
+    } else {
+      loadableTotal = totalChars;
+      projection = undefined;
+    }
+
     return {
       totalChars,
       budget,
@@ -298,6 +324,9 @@ export class BudgetValidator {
       severity,
       skills,
       hiddenCount,
+      installedTotal,
+      loadableTotal,
+      projection,
     };
   }
 }
@@ -329,13 +358,29 @@ export function formatProgressBar(current: number, max: number, width = 20): str
  */
 export function formatBudgetDisplay(result: CumulativeBudgetResult): string {
   const lines: string[] = [];
-  const { totalChars, budget, usagePercent, skills, hiddenCount } = result;
+  const { totalChars, budget, skills, hiddenCount } = result;
+  const installedTotal = result.installedTotal ?? totalChars;
+  const loadableTotal = result.loadableTotal ?? totalChars;
+  const hasDualView = installedTotal !== loadableTotal;
 
-  // Header with progress bar
-  const bar = formatProgressBar(totalChars, budget);
-  lines.push(
-    `Budget: ${bar} ${usagePercent.toFixed(0)}% (${totalChars.toLocaleString()} / ${budget.toLocaleString()} chars)`
-  );
+  if (hasDualView) {
+    // Dual-view: show installed inventory and loadable subset separately
+    const loadedCount = result.projection?.loaded.length ?? 0;
+    const totalCount = skills.length;
+    const loadablePercent = (loadableTotal / budget) * 100;
+    const bar = formatProgressBar(loadableTotal, budget);
+
+    lines.push(`Installed: ${installedTotal.toLocaleString()} chars across ${totalCount} skills`);
+    lines.push(`Loadable:  ${loadableTotal.toLocaleString()} chars (${loadedCount} of ${totalCount} skills fit)`);
+    lines.push(`Budget: ${bar} ${loadablePercent.toFixed(0)}% (${loadableTotal.toLocaleString()} / ${budget.toLocaleString()} chars)`);
+  } else {
+    // Single-view: backward-compatible format
+    const bar = formatProgressBar(totalChars, budget);
+    const usagePercent = result.usagePercent;
+    lines.push(
+      `Budget: ${bar} ${usagePercent.toFixed(0)}% (${totalChars.toLocaleString()} / ${budget.toLocaleString()} chars)`
+    );
+  }
   lines.push('');
 
   // Per-skill breakdown (already sorted by size descending)
