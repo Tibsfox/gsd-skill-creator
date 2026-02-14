@@ -2,6 +2,8 @@
 export interface PtyOpenParams {
   id: string;
   shell?: string;
+  /** Additional arguments for the shell command (e.g. tmux attach args) */
+  args?: string[];
   cols: number;
   rows: number;
 }
