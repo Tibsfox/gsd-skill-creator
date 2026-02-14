@@ -180,7 +180,7 @@ describe('checkDerived', () => {
   it('skips training coherence when no training pairs provided', () => {
     const input = makeInput();
     // No trainingPairs property set (undefined)
-    delete (input as Record<string, unknown>).trainingPairs;
+    delete (input as unknown as Record<string, unknown>).trainingPairs;
 
     const result = checkDerived(input);
 
@@ -190,7 +190,7 @@ describe('checkDerived', () => {
   it('skips copying detection when no reference texts provided', () => {
     const input = makeInput();
     // No referenceTexts property set (undefined)
-    delete (input as Record<string, unknown>).referenceTexts;
+    delete (input as unknown as Record<string, unknown>).referenceTexts;
 
     const result = checkDerived(input);
 
