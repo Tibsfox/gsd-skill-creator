@@ -35,6 +35,7 @@ import { renderActivityTabStyles } from './activity-tab-toggle.js';
 import { renderActivityFeed, renderActivityFeedStyles } from './activity-feed.js';
 import { renderEntityLegend, renderEntityLegendStyles } from './entity-legend.js';
 import { collectTopologyData } from './collectors/topology-collector.js';
+import { collectActivityFeed } from './collectors/activity-collector.js';
 import { renderEntityShapeStyles } from './entity-shapes.js';
 import { renderSiliconPanelStyles } from './silicon-panel.js';
 import { renderBudgetGaugeStyles } from './budget-gauge.js';
@@ -104,6 +105,7 @@ function renderIndexContent(
   metricsHtml?: string,
   topologySource?: TopologySource,
   terminalHtml?: string,
+  feedEntries?: FeedEntry[],
 ): string {
   const sections: string[] = [];
 
@@ -128,8 +130,7 @@ function renderIndexContent(
   }
 
   // Activity feed (compact, standalone)
-  const feedEntries: FeedEntry[] = [];
-  const activityHtml = renderActivityFeed(feedEntries);
+  const activityHtml = renderActivityFeed(feedEntries ?? []);
   rightPanels.push(`<div class="compact-card"><h3 class="compact-title">Activity</h3>${activityHtml}</div>`);
 
   // Live metrics sections
@@ -427,6 +428,18 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     // Topology collection failure never blocks dashboard generation
   }
 
+  // Collect activity feed entries (graceful — never fails the pipeline)
+  let feedEntries: FeedEntry[] = [];
+  try {
+    feedEntries = await collectActivityFeed({
+      maxCommits: 30,
+      maxEntries: 50,
+      cwd: process.cwd(),
+    });
+  } catch {
+    // Activity collection failure never blocks dashboard generation
+  }
+
   // Ensure output directory exists
   try {
     await mkdir(options.outputDir, { recursive: true });
@@ -487,7 +500,7 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     {
       name: 'index',
       filename: 'index.html',
-      render: () => renderIndexContent(data, metricsHtml, topologySource, terminalHtml),
+      render: () => renderIndexContent(data, metricsHtml, topologySource, terminalHtml, feedEntries),
       meta: {
         description: data.project?.description ?? 'GSD Planning Docs Dashboard',
         ogTitle: projectName,
