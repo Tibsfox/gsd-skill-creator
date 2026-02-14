@@ -27,6 +27,9 @@ import { generateRefreshScript } from './refresh.js';
 import { collectAndRenderMetrics } from './metrics/integration.js';
 import { renderGantryPanel, renderGantryStyles } from './gantry-panel.js';
 import { buildGantryData } from './gantry-data.js';
+import { renderTopologyStyles } from './topology-renderer.js';
+import { buildTopologyHtml } from './topology-integration.js';
+import type { TopologySource } from './topology-data.js';
 import type { DashboardData } from './types.js';
 import { mkdir, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -78,7 +81,7 @@ const NAV_PAGES: NavPage[] = [
 /**
  * Render the main dashboard index page content.
  */
-function renderIndexContent(data: DashboardData, metricsHtml?: string): string {
+function renderIndexContent(data: DashboardData, metricsHtml?: string, topologySource?: TopologySource): string {
   const sections: string[] = [];
 
   // Page title
@@ -101,6 +104,11 @@ function renderIndexContent(data: DashboardData, metricsHtml?: string): string {
   // Live metrics sections
   if (metricsHtml) {
     sections.push(metricsHtml);
+  }
+
+  // Route map topology (if source data available)
+  if (topologySource) {
+    sections.push(buildTopologyHtml(topologySource));
   }
 
   // Phase list from roadmap
@@ -380,7 +388,8 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
   const gantryData = buildGantryData(data);
   const gantryHtml = renderGantryPanel(gantryData);
   const gantryStyles = renderGantryStyles();
-  const styles = baseStyles + gantryStyles;
+  const topologyStyles = renderTopologyStyles();
+  const styles = baseStyles + gantryStyles + topologyStyles;
 
   // Page definitions: name, filename, content renderer, meta, jsonLd
   const pageDefinitions: {
