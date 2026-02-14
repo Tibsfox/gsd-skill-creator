@@ -1,7 +1,9 @@
 import { defineConfig } from "vite";
+import glsl from "vite-plugin-glsl";
 
 // https://v2.tauri.app/start/frontend/vite/
 export default defineConfig({
+  plugins: [glsl({ minify: true })],
   clearScreen: false,
   server: {
     port: 1420,
