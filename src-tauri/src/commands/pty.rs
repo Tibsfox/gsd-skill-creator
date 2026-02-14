@@ -22,6 +22,7 @@ pub async fn pty_open(
     state: tauri::State<'_, Mutex<PtyManager>>,
     id: String,
     shell: Option<String>,
+    args: Option<Vec<String>>,
     cols: u16,
     rows: u16,
     on_data: Channel<Vec<u8>>,
@@ -40,6 +41,11 @@ pub async fn pty_open(
         std::env::var("SHELL").unwrap_or_else(|_| "/bin/bash".into())
     });
     let mut cmd = CommandBuilder::new(&shell_path);
+    if let Some(ref extra_args) = args {
+        for a in extra_args {
+            cmd.arg(a);
+        }
+    }
     cmd.env("TERM", "xterm-256color");
     cmd.env("COLORTERM", "truecolor");
 
@@ -215,7 +221,7 @@ mod tests {
     fn test_pty_commands_exist() {
         // These function references verify compilation of all 6 commands
         // with their #[tauri::command] attributes.
-        let _ = super::pty_open as fn(_, _, _, _, _, _) -> _;
+        let _ = super::pty_open as fn(_, _, _, _, _, _, _) -> _;
         let _ = super::pty_write as fn(_, _, _) -> _;
         let _ = super::pty_resize as fn(_, _, _, _) -> _;
         let _ = super::pty_pause as fn(_, _) -> _;
