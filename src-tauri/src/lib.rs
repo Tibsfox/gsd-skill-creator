@@ -1,3 +1,4 @@
+mod claude;
 mod commands;
 mod error;
 mod pty;
