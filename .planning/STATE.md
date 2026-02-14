@@ -4,9 +4,9 @@
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
 Phase: 158 -- Tauri Scaffold + IPC Foundation (in progress)
-Plan: 01 complete, next: 02
+Plan: 02 complete, next: 03
 Status: Executing phase 158
-Last activity: 2026-02-14 -- Completed 158-01 (Tauri v2 Rust backend scaffold)
+Last activity: 2026-02-14 -- Completed 158-02 (Vite frontend scaffold)
 
 Progress: [..........] 0/11 phases
 
@@ -58,6 +58,8 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - CSS fallback mandatory for WebGL context loss (Linux WebKitGTK/NVIDIA)
 - Watermark-based PTY flow control from day one (not optional)
 - Binary encoding for PTY IPC (Vec<u8>, not JSON strings)
+- desktop/ is standalone package (not workspace) for clean separation from src/
+- Vite build target safari13 per Tauri v2 WebKitGTK engine requirements
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -81,16 +83,17 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total plans | 449 complete |
 | Total LOC | ~195k TypeScript + Rust |
 | v1.21 phases | 0/11 complete |
-| v1.21 plans | 1/? complete |
+| v1.21 plans | 2/? complete |
 | v1.21 requirements | 50 total |
 | 158-01 duration | 11min |
+| 158-02 duration | 2min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Completed 158-01 (Tauri v2 Rust backend scaffold)
-Stopped at: Completed 158-01-PLAN.md
-Next action: Execute 158-02 (Vite frontend scaffold in desktop/)
-Context: Rust backend compiles, tauri.conf.json establishes devUrl :1420 contract. Plan 02 creates the Vite frontend that matches this contract.
+Last: 2026-02-14 -- Completed 158-02 (Vite frontend scaffold)
+Stopped at: Completed 158-02-PLAN.md
+Next action: Execute 158-03 (IPC type contracts)
+Context: Rust backend compiles (Plan 01), Vite frontend builds on port 1420 (Plan 02). Both halves of the Tauri app are in place. Plan 03 establishes the TypeScript IPC type contracts.
 
 ---
-*Last updated: 2026-02-14 (158-01 complete)*
+*Last updated: 2026-02-14 (158-02 complete)*
