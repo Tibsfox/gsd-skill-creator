@@ -64,6 +64,9 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - vitest 3.x in desktop/ (not 4.x -- latest stable is 3.2.4)
 - Channel mock: runCallback with {index, message} envelope; Channel unwraps internally to onmessage
 - IPC benchmark uses CHUNK_COUNT=10 for channel throughput measurement baseline
+- TerminalWriter interface abstracts xterm.js for unit testing (avoids heavy Terminal import)
+- Uint8Array normalization in ptyOpen handles Tauri dual encoding (number[] vs Uint8Array)
+- Callback-counting backpressure per xterm.js official guide (attach callback every 100KB, not every write)
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -94,6 +97,7 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 158-03 duration | 6min |
 | 158-04 duration | 3min |
 | 160-01 duration | 2min |
+| 162-02 duration | 3min |
 
 ## Session Continuity
 
