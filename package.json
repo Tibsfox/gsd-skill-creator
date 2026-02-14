@@ -12,7 +12,10 @@
     "test": "vitest",
     "setup:claude": "node project-claude/install.cjs",
     "setup:claude:force": "node project-claude/install.cjs --force",
-    "setup:claude:check": "node project-claude/install.cjs --dry-run"
+    "setup:claude:check": "node project-claude/install.cjs --dry-run",
+    "desktop:dev": "cd src-tauri && npx tauri dev",
+    "desktop:build": "cd src-tauri && npx tauri build",
+    "desktop:test": "cd desktop && npx vitest run"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.72.1",
@@ -36,6 +39,7 @@
     "@types/node": "^20.0.0",
     "tsx": "^4.21.0",
     "typescript": "^5.3.0",
-    "vitest": "^4.0.18"
+    "vitest": "^4.0.18",
+    "@tauri-apps/cli": "^2.0.0"
   }
 }

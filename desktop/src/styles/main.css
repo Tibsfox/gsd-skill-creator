@@ -1,0 +1,16 @@
+body {
+  background: #1a1a2e;
+  color: #e0e0e0;
+  font-family: monospace;
+  margin: 0;
+  padding: 2rem;
+}
+
+h1 {
+  color: #00ff88;
+}
+
+#app {
+  max-width: 800px;
+  margin: 0 auto;
+}
