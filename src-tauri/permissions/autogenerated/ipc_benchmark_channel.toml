@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-ipc-benchmark-channel"
+description = "Enables the ipc_benchmark_channel command without any pre-configured scope."
+commands.allow = ["ipc_benchmark_channel"]
+
+[[permission]]
+identifier = "deny-ipc-benchmark-channel"
+description = "Denies the ipc_benchmark_channel command without any pre-configured scope."
+commands.deny = ["ipc_benchmark_channel"]
