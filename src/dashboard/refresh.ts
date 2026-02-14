@@ -30,7 +30,7 @@ export function generateRefreshScript(intervalMs: number): string {
     top: 8px;
     right: 8px;
     background: rgba(59, 130, 246, 0.9);
-    color: #fff;
+    color: var(--text, #fff);
     padding: 4px 12px;
     border-radius: 4px;
     font-size: 12px;

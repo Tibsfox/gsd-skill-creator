@@ -325,45 +325,45 @@ export function renderStagingQueueStyles(): string {
 }
 
 .sq-badge-uploaded {
-  color: #58a6ff;
-  background: color-mix(in srgb, #58a6ff 12%, transparent);
-  border: 1px solid color-mix(in srgb, #58a6ff 30%, transparent);
+  color: var(--accent, #58a6ff);
+  background: color-mix(in srgb, var(--accent, #58a6ff) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent, #58a6ff) 30%, transparent);
 }
 
 .sq-badge-checking {
-  color: #e3b341;
-  background: color-mix(in srgb, #e3b341 12%, transparent);
-  border: 1px solid color-mix(in srgb, #e3b341 30%, transparent);
+  color: var(--yellow, #e3b341);
+  background: color-mix(in srgb, var(--yellow, #e3b341) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--yellow, #e3b341) 30%, transparent);
 }
 
 .sq-badge-needs-attention {
-  color: #f0883e;
-  background: color-mix(in srgb, #f0883e 12%, transparent);
-  border: 1px solid color-mix(in srgb, #f0883e 30%, transparent);
+  color: var(--signal-warning, #f0883e);
+  background: color-mix(in srgb, var(--signal-warning, #f0883e) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--signal-warning, #f0883e) 30%, transparent);
 }
 
 .sq-badge-ready {
-  color: #3fb950;
-  background: color-mix(in srgb, #3fb950 12%, transparent);
-  border: 1px solid color-mix(in srgb, #3fb950 30%, transparent);
+  color: var(--green, #3fb950);
+  background: color-mix(in srgb, var(--green, #3fb950) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--green, #3fb950) 30%, transparent);
 }
 
 .sq-badge-queued {
-  color: #39d3c5;
-  background: color-mix(in srgb, #39d3c5 12%, transparent);
-  border: 1px solid color-mix(in srgb, #39d3c5 30%, transparent);
+  color: var(--color-observation, #39d3c5);
+  background: color-mix(in srgb, var(--color-observation, #39d3c5) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-observation, #39d3c5) 30%, transparent);
 }
 
 .sq-badge-executing {
-  color: #bc8cff;
-  background: color-mix(in srgb, #bc8cff 12%, transparent);
-  border: 1px solid color-mix(in srgb, #bc8cff 30%, transparent);
+  color: var(--purple, #bc8cff);
+  background: color-mix(in srgb, var(--purple, #bc8cff) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--purple, #bc8cff) 30%, transparent);
 }
 
 .sq-badge-set-aside {
-  color: #8b949e;
-  background: color-mix(in srgb, #8b949e 12%, transparent);
-  border: 1px solid color-mix(in srgb, #8b949e 30%, transparent);
+  color: var(--text-muted, #8b949e);
+  background: color-mix(in srgb, var(--text-muted, #8b949e) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text-muted, #8b949e) 30%, transparent);
 }
 
 /* --- SVG overlay --- */
