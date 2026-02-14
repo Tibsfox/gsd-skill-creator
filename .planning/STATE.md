@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.20 — Dashboard Assembly
-Phase: 152 — Layout & CSS Unification (complete)
-Plan: 02 complete (all plans done)
-Status: Phase 152 complete
-Last activity: 2026-02-14 — Completed 152-02 (design system token replacement)
+Phase: 153 — Topology Pipeline (in progress)
+Plan: 02 complete
+Status: Executing phase 153
+Last activity: 2026-02-14 — Completed 153-02 (topology generator wiring)
 
 ## Project Reference
 
@@ -289,6 +289,9 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 milestone start)
 - Reused inferDomain from identifiers/generator.ts for budget-silicon collector domain classification
 - DOMAIN_COLOR_MAP uses var(--domain-*, #hex) format matching entity-shapes.ts CSS custom properties
 - Pure transformer + async collector pattern: pure sync transforms for data shape mapping, thin async I/O wrapper
+- Project root derived from planningDir via join(planningDir, '..') for topology collector .claude/ directory paths
+- Entity legend rendered conditionally alongside topology panel (only when topologySource is defined)
+- Test assertions use element selectors not CSS class names to avoid style false positives in generator tests
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle, topology-renderer, topology-data, topology-integration, budget-silicon-collector)
@@ -323,15 +326,15 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 milestone start)
 |--------|-------|
 | Total milestones | 23 shipped (v1.0-v1.19 + v1.8.1 patch) |
 | Total phases | 152 complete |
-| Total plans | 440 complete |
+| Total plans | 441 complete |
 | Total LOC | ~192k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-14 — Completed 152-02 (design system token replacement)
-Stopped at: Completed 152-02-PLAN.md
-Next action: Execute phases 153-156 (parallel wave)
-Context: Phase 152 complete (2 plans: style assembly + token replacement). Phases 153-156 can run in parallel. Phase 157 depends on all prior phases.
+Last: 2026-02-14 — Completed 153-02 (topology generator wiring)
+Stopped at: Completed 153-02-PLAN.md
+Next action: Continue phase 153 remaining plans or parallel phases 154-156
+Context: Phase 153 plan 02 complete (topology collector wired into generator with entity legend). Phases 153-156 can run in parallel.
 
 ---
-*Last updated: 2026-02-14 (completed 152-02)*
+*Last updated: 2026-02-14 (completed 153-02)*
