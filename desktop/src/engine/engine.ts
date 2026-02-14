@@ -14,6 +14,7 @@ import { CRTPipeline } from './crt-pipeline';
 import { RenderTarget } from './render-target';
 import { PaletteTexture } from './palette-texture';
 import { getPaletteColors, type PalettePreset } from './palette';
+import { type CopperEntry, type CopperProgram, COPPER_PRESETS, copperListToTexture } from './copper-list';
 import { type CRTConfig, CRT_DEFAULTS, mergeCRTConfig } from './crt-config';
 import { FrameTimeMeasurer } from './performance';
 import { applyCSSFallback, removeCSSFallback } from './css-fallback';
@@ -40,6 +41,9 @@ export class Engine {
   private readonly measurer: FrameTimeMeasurer;
   private config: CRTConfig;
   private currentPreset: PalettePreset;
+  private copperTexture: WebGLTexture | null;
+  private currentCopperProgram: string;
+  private readonly copperHeight: number;
   private animationFrameId: number | null = null;
   private resizeHandler: (() => void) | null = null;
 
@@ -55,6 +59,7 @@ export class Engine {
     paletteTexture: PaletteTexture | null = null,
     paletteProgram: ShaderProgram | null = null,
     sceneTarget: RenderTarget | null = null,
+    copperTexture: WebGLTexture | null = null,
   ) {
     this._mode = mode;
     this.container = container;
@@ -67,9 +72,12 @@ export class Engine {
     this.paletteTexture = paletteTexture;
     this.paletteProgram = paletteProgram;
     this.sceneTarget = sceneTarget;
+    this.copperTexture = copperTexture;
     this.measurer = new FrameTimeMeasurer();
     this.config = { ...CRT_DEFAULTS };
     this.currentPreset = 'amiga-3.1';
+    this.currentCopperProgram = 'gradient';
+    this.copperHeight = 256;
   }
 
   /**
@@ -103,6 +111,18 @@ export class Engine {
       // Scene render target: palette background renders here, CRT reads from it
       const sceneTarget = new RenderTarget(gl, w, h);
 
+      // Create copper list texture (Nx1 RGBA, per-scanline color parameters)
+      const copperHeight = 256;
+      const copperTexture = gl.createTexture()!;
+      gl.bindTexture(gl.TEXTURE_2D, copperTexture);
+      const copperData = copperListToTexture(COPPER_PRESETS['gradient'], copperHeight);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, copperHeight, 0, gl.RGBA, gl.UNSIGNED_BYTE, copperData);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.bindTexture(gl.TEXTURE_2D, null);
+
       // Create pipeline
       const pipeline = new CRTPipeline(gl, quad, distortProgram, postProgram, w, h);
 
@@ -121,6 +141,7 @@ export class Engine {
         paletteTexture,
         paletteProgram,
         sceneTarget,
+        copperTexture,
       );
 
       // Context loss/restore handlers
@@ -207,6 +228,36 @@ export class Engine {
     this.currentPreset = 'custom';
   }
 
+  /** Get the current copper program name. */
+  getCopperProgram(): string {
+    return this.currentCopperProgram;
+  }
+
+  /** Switch to a named copper preset program. */
+  setCopperProgram(name: string): void {
+    if (!this.gl || !this.copperTexture) return;
+    const preset = COPPER_PRESETS[name];
+    if (!preset) return;
+    const data = copperListToTexture(preset, this.copperHeight);
+    const gl = this.gl;
+    gl.bindTexture(gl.TEXTURE_2D, this.copperTexture);
+    gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, 1, this.copperHeight, gl.RGBA, gl.UNSIGNED_BYTE, data);
+    gl.bindTexture(gl.TEXTURE_2D, null);
+    this.currentCopperProgram = name;
+  }
+
+  /** Set a custom copper list from explicit entries. */
+  setCopperEntries(entries: CopperEntry[]): void {
+    if (!this.gl || !this.copperTexture) return;
+    const program: CopperProgram = { name: 'custom', entries };
+    const data = copperListToTexture(program, this.copperHeight);
+    const gl = this.gl;
+    gl.bindTexture(gl.TEXTURE_2D, this.copperTexture);
+    gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, 1, this.copperHeight, gl.RGBA, gl.UNSIGNED_BYTE, data);
+    gl.bindTexture(gl.TEXTURE_2D, null);
+    this.currentCopperProgram = 'custom';
+  }
+
   /** Start the requestAnimationFrame render loop. */
   start(): void {
     if (this._mode !== 'webgl2' || !this.gl || !this.pipeline) return;
@@ -229,6 +280,15 @@ export class Engine {
           paletteProgram.use();
           paletteTexture.bind(1);
           paletteProgram.setUniform1i('u_palette', 1);
+
+          // Bind copper list texture to unit 2
+          if (this.copperTexture) {
+            gl.activeTexture(gl.TEXTURE0 + 2);
+            gl.bindTexture(gl.TEXTURE_2D, this.copperTexture);
+            paletteProgram.setUniform1i('u_copperList', 2);
+            paletteProgram.setUniform1f('u_copperHeight', this.copperHeight);
+          }
+
           paletteProgram.setUniform1f('u_time', performance.now() / 1000);
           paletteProgram.setUniform2f('u_resolution', sceneTarget.width, sceneTarget.height);
           quad.draw(gl);
@@ -270,6 +330,10 @@ export class Engine {
       this.paletteTexture?.destroy();
       this.paletteProgram?.destroy();
       this.sceneTarget?.destroy();
+      if (this.copperTexture && this.gl) {
+        this.gl.deleteTexture(this.copperTexture);
+        this.copperTexture = null;
+      }
       this.canvas?.remove();
     } else {
       removeCSSFallback(this.container);
