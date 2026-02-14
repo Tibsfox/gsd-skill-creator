@@ -551,6 +551,8 @@ describe('formatBudgetDisplay()', () => {
       severity: 'ok',
       skills: [],
       hiddenCount: 0,
+      installedTotal: 7750,
+      loadableTotal: 7750,
     };
 
     const display = formatBudgetDisplay(result);
@@ -572,6 +574,8 @@ describe('formatBudgetDisplay()', () => {
         { name: 'small', descriptionChars: 50, bodyChars: 950, totalChars: 1000, path: '/b' },
       ],
       hiddenCount: 0,
+      installedTotal: 3000,
+      loadableTotal: 3000,
     };
 
     const display = formatBudgetDisplay(result);
@@ -595,6 +599,8 @@ describe('formatBudgetDisplay()', () => {
         { name: 'b', descriptionChars: 10, bodyChars: 10000, totalChars: 10000, path: '/b' },
       ],
       hiddenCount: 1,
+      installedTotal: 20000,
+      loadableTotal: 20000,
     };
 
     const display = formatBudgetDisplay(result);
@@ -611,6 +617,8 @@ describe('formatBudgetDisplay()', () => {
       severity: 'ok',
       skills: [],
       hiddenCount: 0,
+      installedTotal: 0,
+      loadableTotal: 0,
     };
 
     const display = formatBudgetDisplay(result);
@@ -626,6 +634,8 @@ describe('formatBudgetDisplay()', () => {
       severity: 'warning',
       skills: [],
       hiddenCount: 0,
+      installedTotal: 12400,
+      loadableTotal: 12400,
     };
 
     const display = formatBudgetDisplay(result);
