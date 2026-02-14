@@ -33,7 +33,8 @@ import { renderMetricsStyles } from './metrics/metrics-styles.js';
 import { buildTerminalHtml } from './terminal-integration.js';
 import { renderActivityTabStyles } from './activity-tab-toggle.js';
 import { renderActivityFeed, renderActivityFeedStyles } from './activity-feed.js';
-import { renderEntityLegendStyles } from './entity-legend.js';
+import { renderEntityLegend, renderEntityLegendStyles } from './entity-legend.js';
+import { collectTopologyData } from './collectors/topology-collector.js';
 import { renderEntityShapeStyles } from './entity-shapes.js';
 import { renderSiliconPanelStyles } from './silicon-panel.js';
 import { renderBudgetGaugeStyles } from './budget-gauge.js';
@@ -139,6 +140,7 @@ function renderIndexContent(
   // Route map topology
   if (topologySource) {
     rightPanels.push(buildTopologyHtml(topologySource));
+    rightPanels.push(renderEntityLegend());
   }
 
   // Phase list from roadmap
@@ -412,6 +414,19 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     // Terminal failure never blocks dashboard generation
   }
 
+  // Collect topology data (graceful — never fails the pipeline)
+  let topologySource: TopologySource | undefined;
+  try {
+    const projectRoot = join(options.planningDir, '..');
+    topologySource = await collectTopologyData({
+      commandsDir: join(projectRoot, '.claude', 'commands'),
+      agentsDir: join(projectRoot, '.claude', 'agents'),
+      teamsDir: join(projectRoot, '.claude', 'teams'),
+    });
+  } catch {
+    // Topology collection failure never blocks dashboard generation
+  }
+
   // Ensure output directory exists
   try {
     await mkdir(options.outputDir, { recursive: true });
@@ -472,7 +487,7 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     {
       name: 'index',
       filename: 'index.html',
-      render: () => renderIndexContent(data, metricsHtml, undefined, terminalHtml),
+      render: () => renderIndexContent(data, metricsHtml, topologySource, terminalHtml),
       meta: {
         description: data.project?.description ?? 'GSD Planning Docs Dashboard',
         ogTitle: projectName,
