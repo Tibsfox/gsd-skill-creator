@@ -42,6 +42,16 @@ export const DEFAULT_PALETTE: PaletteConfig = {
   purple: '#bc8cff',
 };
 
+/** All CSS variable names that paletteToCssVars produces. */
+const CSS_VAR_NAMES = [
+  '--bg', '--surface', '--surface-raised',
+  '--border', '--border-muted',
+  '--text', '--text-muted',
+  '--accent', '--green', '--yellow', '--red', '--purple',
+  '--signal-success', '--signal-warning', '--signal-error',
+  '--color-frontend', '--color-backend',
+] as const;
+
 /**
  * Convert a PaletteConfig to a Record of CSS custom property name-value pairs.
  *
@@ -50,9 +60,32 @@ export const DEFAULT_PALETTE: PaletteConfig = {
  * overrides (--color-frontend, --color-backend).
  */
 export function paletteToCssVars(
-  _palette: PaletteConfig,
+  palette: PaletteConfig,
 ): Record<string, string> {
-  throw new Error('not implemented');
+  return {
+    // Direct mappings
+    '--bg': palette.bg,
+    '--surface': palette.surface,
+    '--surface-raised': palette.surfaceRaised,
+    '--border': palette.border,
+    '--border-muted': palette.borderMuted,
+    '--text': palette.text,
+    '--text-muted': palette.textMuted,
+    '--accent': palette.accent,
+    '--green': palette.green,
+    '--yellow': palette.yellow,
+    '--red': palette.red,
+    '--purple': palette.purple,
+
+    // Signal color aliases
+    '--signal-success': palette.green,
+    '--signal-warning': palette.yellow,
+    '--signal-error': palette.red,
+
+    // Domain color overrides
+    '--color-frontend': palette.accent,
+    '--color-backend': palette.green,
+  };
 }
 
 /**
@@ -60,16 +93,23 @@ export function paletteToCssVars(
  * Defaults to document.documentElement if no root is provided.
  */
 export function applyPalette(
-  _palette: PaletteConfig,
-  _root?: HTMLElement,
+  palette: PaletteConfig,
+  root?: HTMLElement,
 ): void {
-  throw new Error('not implemented');
+  const target = root ?? document.documentElement;
+  const vars = paletteToCssVars(palette);
+  for (const [name, value] of Object.entries(vars)) {
+    target.style.setProperty(name, value);
+  }
 }
 
 /**
  * Remove all palette CSS variables from a target element.
  * Defaults to document.documentElement if no root is provided.
  */
-export function removePalette(_root?: HTMLElement): void {
-  throw new Error('not implemented');
+export function removePalette(root?: HTMLElement): void {
+  const target = root ?? document.documentElement;
+  for (const name of CSS_VAR_NAMES) {
+    target.style.removeProperty(name);
+  }
 }
