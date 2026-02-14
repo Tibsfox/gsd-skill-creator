@@ -7,58 +7,65 @@
 ### Phase 142 — Design System Foundation
 **Status:** planned
 **Goal:** Establish CSS design system with domain colors, signal colors, typography, spacing tokens, and five-state status vocabulary before changing any components.
-**Plans:** 2
-- 142-01: CSS custom properties (domain colors, signal colors, spacing tokens, status states)
-- 142-02: Typography system (font imports, weight hierarchy, numeric treatment, case discipline)
+**Plans:** 2 plans
+Plans:
+- [ ] 142-01-PLAN.md — CSS custom properties (domain colors, signal colors, spacing tokens, status states)
+- [ ] 142-02-PLAN.md — Typography system (font imports, weight hierarchy, numeric treatment, case discipline)
 
 ### Phase 143 — Gantry Status Strip
 **Status:** planned
 **Goal:** Build persistent real-time status strip answering "what's happening right now" in 2 seconds, with agent indicators, phase progress, and token budget.
 **Depends on:** Phase 142
-**Plans:** 2
-- 143-01: Gantry component (fixed position, agent circles, phase fraction, budget bar)
-- 143-02: Gantry data pipeline (STATE.md parsing, session observation sourcing, auto-refresh)
+**Plans:** 2 plans
+Plans:
+- [ ] 143-01-PLAN.md — Gantry component (fixed position, agent circles, phase fraction, budget bar, 8-cell max)
+- [ ] 143-02-PLAN.md — Gantry data pipeline (STATE.md parsing, DashboardData derivation, generator integration, auto-refresh)
 
 ### Phase 144 — Shape/Color Entity System
 **Status:** planned
 **Goal:** Apply the shape+color encoding across dashboard components — entity shapes, domain colors, milestone chevrons, and collapsible legend.
 **Depends on:** Phase 142
-**Plans:** 2
-- 144-01: Entity shape/color rendering (6 shapes, 6 domain colors, CSS classes, symbol rendering)
-- 144-02: Dashboard component updates (milestone chevrons, activity headers, legend footer)
+**Plans:** 2 plans
+Plans:
+- [ ] 144-01-PLAN.md — Entity shape/color rendering (6 shapes, 6 domain colors, inline SVG, CSS classes)
+- [ ] 144-02-PLAN.md — Dashboard component updates (milestone chevrons, legend footer, panel header shapes)
 
 ### Phase 145 — Topology View
 **Status:** planned
 **Goal:** Build a subway-map-style network diagram showing agent/skill/team connections with animated edges and click-to-detail.
 **Depends on:** Phase 144
-**Plans:** 3
-- 145-01: SVG network diagram renderer (node positioning, edge drawing, layout algorithm)
-- 145-02: Topology data pipeline (chipset.yaml parsing, active route detection, collapse logic)
-- 145-03: Topology interactivity (animated pulses, click-to-detail side panel, auto-refresh)
+**Plans:** 3 plans
+Plans:
+- [ ] 145-01-PLAN.md — SVG network diagram renderer (6 entity shapes, edge drawing, 12-node collapse)
+- [ ] 145-02-PLAN.md — Topology data pipeline (source parsing, layout positioning, collapse logic)
+- [ ] 145-03-PLAN.md — Topology interactivity (click-to-detail panel, generator wiring, auto-refresh)
 
 ### Phase 146 — Activity Feed
 **Status:** planned
 **Goal:** Build non-technical-friendly activity stream using shape/color/identifier format with tab toggle to terminal view.
 **Depends on:** Phase 144
-**Plans:** 2
-- 146-01: Activity feed component (8-entry limit, shape indicators, one-line descriptions)
-- 146-02: Activity/terminal tab toggle and SessionObserver event translation
+**Plans:** 2 plans
+Plans:
+- [ ] 146-01-PLAN.md — Activity feed component (shape/color indicators, 8-entry limit, one-line, no timestamps)
+- [ ] 146-02-PLAN.md — Activity/terminal tab toggle (SessionObserver event translation, tab switching)
 
 ### Phase 147 — Budget Gauge & Silicon Panel
 **Status:** planned
 **Goal:** Visualize token budget as domain-colored stacked bar and adapter health with diamond indicators and VRAM gauge.
 **Depends on:** Phase 142
-**Plans:** 2
-- 147-01: Token budget gauge (stacked bar, domain segments, threshold transitions)
-- 147-02: Silicon panel (diamond adapters, VRAM gauge, progressive enhancement)
+**Plans:** 2 plans
+Plans:
+- [ ] 147-01-PLAN.md — Token budget gauge (stacked bar, domain segments, threshold transitions, three-speed info layers)
+- [ ] 147-02-PLAN.md — Silicon panel (diamond adapters, five-state lifecycle, VRAM gauge, progressive enhancement)
 
 ### Phase 148 — Identifier Encoding
 **Status:** planned
 **Goal:** Push topology-encoding identifier system into skill-creator's generation pipeline with domain prefixes and backward compatibility.
 **Depends on:** Phase 144
-**Plans:** 2
-- 148-01: Domain prefix assignment (SuggestionManager, AgentComposer, identifier generation)
-- 148-02: Backward compatibility and SKILL.md metadata integration
+**Plans:** 2 plans
+Plans:
+- [ ] 148-01-PLAN.md — Domain prefix types, identifier generation, SuggestionManager + AgentComposer integration
+- [ ] 148-02-PLAN.md — Backward compatibility layer, SKILL.md metadata encoding, migration helpers
 
 ## Dependency Graph
 
