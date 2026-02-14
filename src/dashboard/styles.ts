@@ -61,8 +61,8 @@ export function renderStyles(): string {
   --radius-lg: 8px;
 
   /* Layout */
-  --max-width: 1200px;
-  --sidebar-width: 220px;
+  --max-width: 1600px;
+  --sidebar-width: 200px;
 }
 
 /* -----------------------------------------------------------------------
@@ -470,6 +470,139 @@ code {
 }
 
 /* -----------------------------------------------------------------------
+   Dashboard Two-Column Grid
+   ----------------------------------------------------------------------- */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  align-items: start;
+}
+
+.dashboard-terminal-col {
+  position: sticky;
+  top: 72px;
+  z-index: 10;
+}
+
+.terminal-standalone {
+  height: calc(100vh - 96px);
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-standalone .terminal-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  margin-bottom: 0;
+}
+
+.terminal-standalone .terminal-iframe {
+  flex: 1;
+  height: auto;
+  min-height: 400px;
+}
+
+.terminal-standalone .terminal-fallback {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dashboard-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  min-width: 0;
+}
+
+/* Compact card wrapper for right column */
+.compact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.compact-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+/* Compact overrides for cards in the info column */
+.dashboard-info-col .card {
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: 0;
+}
+
+.dashboard-info-col .card-body {
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.dashboard-info-col .section-title {
+  font-size: 1rem;
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.dashboard-info-col table {
+  font-size: 0.8rem;
+  margin-bottom: var(--space-sm);
+}
+
+.dashboard-info-col th,
+.dashboard-info-col td {
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.dashboard-info-col .metrics-dashboard {
+  gap: var(--space-md);
+}
+
+.dashboard-info-col .pulse-section {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-sm);
+}
+
+.dashboard-info-col .pulse-card {
+  padding: var(--space-sm);
+}
+
+.dashboard-info-col .velocity-section {
+  gap: var(--space-sm);
+}
+
+.dashboard-info-col .velocity-progress-card,
+.dashboard-info-col .velocity-timeline,
+.dashboard-info-col .velocity-tdd-rhythm,
+.dashboard-info-col .quality-section,
+.dashboard-info-col .history-section {
+  padding: var(--space-sm);
+}
+
+.dashboard-info-col .velocity-timeline {
+  max-height: 200px;
+}
+
+.dashboard-info-col .quality-section {
+  max-height: 300px;
+}
+
+.dashboard-info-col .history-section {
+  max-height: 300px;
+}
+
+/* -----------------------------------------------------------------------
    Build Log
    ----------------------------------------------------------------------- */
 
@@ -511,6 +644,18 @@ code {
    ----------------------------------------------------------------------- */
 
 @media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-terminal-col {
+    position: static;
+  }
+
+  .terminal-standalone {
+    height: 400px;
+  }
+
   .page-wrapper {
     flex-direction: column;
     padding: var(--space-md);
