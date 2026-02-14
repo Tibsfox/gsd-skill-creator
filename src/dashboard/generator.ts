@@ -37,8 +37,9 @@ import { renderEntityLegend, renderEntityLegendStyles } from './entity-legend.js
 import { collectTopologyData } from './collectors/topology-collector.js';
 import { collectActivityFeed } from './collectors/activity-collector.js';
 import { renderEntityShapeStyles } from './entity-shapes.js';
-import { renderSiliconPanelStyles } from './silicon-panel.js';
-import { renderBudgetGaugeStyles } from './budget-gauge.js';
+import { renderSiliconPanel, renderSiliconPanelStyles } from './silicon-panel.js';
+import { renderBudgetGauge, renderBudgetGaugeStyles } from './budget-gauge.js';
+import { collectBudgetSiliconData } from './budget-silicon-collector.js';
 import { renderStagingQueueStyles } from './staging-queue-panel.js';
 import { renderQuestionCardStyles } from './question-card.js';
 import { renderUploadZoneStyles } from './upload-zone.js';
@@ -106,6 +107,7 @@ function renderIndexContent(
   topologySource?: TopologySource,
   terminalHtml?: string,
   feedEntries?: FeedEntry[],
+  budgetSiliconHtml?: string,
 ): string {
   const sections: string[] = [];
 
@@ -127,6 +129,11 @@ function renderIndexContent(
   // Current milestone status
   if (data.state) {
     rightPanels.push(renderCurrentStatus(data));
+  }
+
+  // Budget & silicon section
+  if (budgetSiliconHtml) {
+    rightPanels.push(budgetSiliconHtml);
   }
 
   // Activity feed (compact, standalone)
@@ -440,6 +447,20 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     // Activity collection failure never blocks dashboard generation
   }
 
+  // Collect budget & silicon data (graceful — never fails the pipeline)
+  let budgetSiliconHtml = '';
+  try {
+    const bsData = await collectBudgetSiliconData({
+      skillsDir: join(process.cwd(), '.claude', 'commands'),
+      configPath: join(options.planningDir, 'skill-creator.json'),
+    });
+    const gaugeHtml = renderBudgetGauge(bsData.gauge);
+    const siliconHtml = renderSiliconPanel(bsData.silicon);
+    budgetSiliconHtml = `<div class="compact-card"><h3 class="compact-title">Budget</h3>${gaugeHtml}${siliconHtml}</div>`;
+  } catch {
+    // Budget/silicon collection failure never blocks dashboard generation
+  }
+
   // Ensure output directory exists
   try {
     await mkdir(options.outputDir, { recursive: true });
@@ -500,7 +521,7 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     {
       name: 'index',
       filename: 'index.html',
-      render: () => renderIndexContent(data, metricsHtml, topologySource, terminalHtml, feedEntries),
+      render: () => renderIndexContent(data, metricsHtml, topologySource, terminalHtml, feedEntries, budgetSiliconHtml),
       meta: {
         description: data.project?.description ?? 'GSD Planning Docs Dashboard',
         ogTitle: projectName,
