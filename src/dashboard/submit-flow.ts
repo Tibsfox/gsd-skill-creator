@@ -212,15 +212,15 @@ export function renderSubmitFlowStyles(): string {
 }
 
 .submit-status-success {
-  background: color-mix(in srgb, #3fb950 15%, var(--surface, #1e1e2e));
-  color: #3fb950;
-  border: 1px solid #3fb950;
+  background: color-mix(in srgb, var(--green, #3fb950) 15%, var(--surface, #1e1e2e));
+  color: var(--green, #3fb950);
+  border: 1px solid var(--green, #3fb950);
 }
 
 .submit-status-error {
-  background: color-mix(in srgb, #f85149 15%, var(--surface, #1e1e2e));
-  color: #f85149;
-  border: 1px solid #f85149;
+  background: color-mix(in srgb, var(--red, #f85149) 15%, var(--surface, #1e1e2e));
+  color: var(--red, #f85149);
+  border: 1px solid var(--red, #f85149);
 }
 `;
 }
