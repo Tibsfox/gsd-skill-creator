@@ -278,9 +278,20 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 milestone start)
 - staging-queue-panel badge color-mix() args also wrapped in var() for full token coverage
 - submit-flow border and background color-mix hex values also tokenized beyond plan's 2-replacement scope
 - Token compliance test pattern: strip var() patterns then assert no bare hex in color/background/border rules
+- collectStagingQueue reads queue-state.json with fault-tolerant try/catch; dependencies always empty from collector (generator enriches later)
+- collectTopologyData uses gray-matter for YAML frontmatter parsing of skill/agent files
+- Promise.all for parallel collection of skills, agents, teams in topology collector
+- Filename fallback when skill/agent frontmatter lacks name field
+- safeReaddir wrapper returns empty array on ENOENT for fault-tolerant directory reads
+- Scope classification via regex: PLAN_SCOPE_RE for plan, PHASE_SCOPE_RE for phase, else skill in activity collector
+- Domain inference via keyword Sets (frontend/backend/testing) with infrastructure fallback in activity collector
+- Session endTime converted to ISO string for occurredAt (matches git timestamp format)
+- Reused inferDomain from identifiers/generator.ts for budget-silicon collector domain classification
+- DOMAIN_COLOR_MAP uses var(--domain-*, #hex) format matching entity-shapes.ts CSS custom properties
+- Pure transformer + async collector pattern: pure sync transforms for data shape mapping, thin async I/O wrapper
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle, topology-renderer, topology-data, topology-integration)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle, topology-renderer, topology-data, topology-integration, budget-silicon-collector)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
 - Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, question-responder, check-inbox integration tests)
@@ -312,7 +323,7 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 milestone start)
 |--------|-------|
 | Total milestones | 23 shipped (v1.0-v1.19 + v1.8.1 patch) |
 | Total phases | 152 complete |
-| Total plans | 439 complete |
+| Total plans | 440 complete |
 | Total LOC | ~192k TypeScript |
 
 ## Session Continuity
