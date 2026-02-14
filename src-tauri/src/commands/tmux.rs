@@ -14,13 +14,22 @@ pub struct TmuxSessionInfo {
 /// Check whether the tmux binary is available on the system.
 #[tauri::command]
 pub fn tmux_has_tmux() -> bool {
-    todo!()
+    detector::detect_tmux().is_some()
 }
 
 /// List all running tmux sessions.
 #[tauri::command]
 pub fn tmux_list_sessions() -> Result<Vec<TmuxSessionInfo>, String> {
-    todo!()
+    let sessions = session::list_sessions()?;
+    Ok(sessions
+        .into_iter()
+        .map(|s| TmuxSessionInfo {
+            name: s.name,
+            created: s.created,
+            attached: s.attached,
+            windows: s.windows,
+        })
+        .collect())
 }
 
 /// Ensure a tmux session exists (create if needed), return attach command args.
@@ -29,7 +38,10 @@ pub fn tmux_list_sessions() -> Result<Vec<TmuxSessionInfo>, String> {
 /// shell command that pty_open should spawn.
 #[tauri::command]
 pub fn tmux_ensure_session(name: String) -> Result<Vec<String>, String> {
-    todo!()
+    if !session::has_session(&name) {
+        session::create_session(&name)?;
+    }
+    Ok(session::attach_command(&name))
 }
 
 #[cfg(test)]
