@@ -13,4 +13,6 @@ h1 {
 #app {
   max-width: 800px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }

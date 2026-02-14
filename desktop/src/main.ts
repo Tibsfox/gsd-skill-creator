@@ -2,6 +2,7 @@ import { greet, echoCommand } from "./ipc/commands";
 import { onEchoResponse } from "./ipc/events";
 import { streamEchoData } from "./ipc/channels";
 import { runIpcBenchmark } from "./ipc/benchmark";
+import { Engine } from "./engine";
 
 async function init(): Promise<void> {
   const app = document.getElementById("app");
@@ -25,6 +26,11 @@ async function init(): Promise<void> {
       <h2>IPC Benchmark</h2>
       <button id="run-benchmark">Run Benchmark</button>
       <pre id="benchmark-results"></pre>
+    </section>
+    <section id="engine-status">
+      <h2>WebGL Engine</h2>
+      <p id="engine-mode">Initializing...</p>
+      <p id="engine-perf"></p>
     </section>
   `;
 
@@ -115,6 +121,24 @@ async function init(): Promise<void> {
       }
     });
   }
+
+  // --- WebGL CRT Engine ---
+  const engine = Engine.create(document.body);
+  const engineModeEl = document.getElementById("engine-mode");
+  if (engineModeEl) {
+    engineModeEl.textContent = "Mode: " + engine.mode;
+  }
+  engine.start();
+
+  // Update performance display every second
+  const enginePerfEl = document.getElementById("engine-perf");
+  setInterval(() => {
+    if (enginePerfEl) {
+      const perf = engine.getPerformance();
+      enginePerfEl.textContent =
+        "Avg: " + perf.averageMs.toFixed(2) + "ms | Budget: " + (perf.withinBudget ? "OK" : "OVER");
+    }
+  }, 1000);
 }
 
 document.addEventListener("DOMContentLoaded", init);
