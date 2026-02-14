@@ -3,12 +3,12 @@
 ## Current Position
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
-Phase: 159, 160, 162 -- Parallel tracks PLANNED, ready to execute
-Plan: All plans created (159: 2 plans, 160: 3 plans, 162: 4 plans)
-Status: Parallel tracks planned, executing next
-Last activity: 2026-02-14 -- Planned phases 160 (WebGL) and 162 (PTY) in parallel
+Phase: 161, 163 -- Next parallel tracks (Track A: palette, Track B: tmux)
+Plan: Phase 162 COMPLETE (4/4 plans). Tracks A+B+C need 161, 163.
+Status: Parallel tracks 159, 160, 162 COMPLETE. Next: 161 (palette) + 163 (tmux).
+Last activity: 2026-02-14 -- Completed 162-04 (PTY integration, ACL, barrel export)
 
-Progress: [#.........] 1/11 phases
+Progress: [####......] 4/11 phases
 
 ## Project Reference
 
@@ -72,6 +72,7 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - PTY reader uses tokio::task::spawn_blocking (blocking I/O, not async runtime threads)
 - Flow control: tokio::sync::mpsc<bool> capacity 16, try_recv drain + blocking_recv on pause
 - Short Mutex locks in async PTY commands -- clone flow_tx under lock, release before await
+- vite-plugin-glsl required in both vite.config.ts and vitest.config.ts (GLSL imports fail SSR transform without it)
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -94,8 +95,8 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total phases | 157 complete |
 | Total plans | 449 complete |
 | Total LOC | ~195k TypeScript + Rust |
-| v1.21 phases | 1/11 complete |
-| v1.21 plans | 6/? complete |
+| v1.21 phases | 4/11 complete |
+| v1.21 plans | 15/? complete |
 | v1.21 requirements | 50 total |
 | 158-01 duration | 11min |
 | 158-02 duration | 2min |
@@ -108,13 +109,15 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 159-02 duration | 5min |
 | 162-01 duration | 5min |
 | 162-03 duration | 1min |
+| 160-03 duration | 4min |
+| 162-04 duration | 1min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Executed 162-03 (xterm.js terminal emulator)
-Stopped at: Completed 162-03-PLAN.md
-Next action: Execute 162-04 (terminal barrel export and integration)
-Context: Phase 162 plans 01-03 complete. 22 terminal tests passing (7 flow-control + 7 pty-bridge + 8 terminal-emulator). createTerminal() factory wires xterm.js to Rust PTY via IPC bridge with WebGL fallback and watermark backpressure. Plan 162-04 remaining.
+Last: 2026-02-14 -- Executed 162-04 (PTY integration, ACL permissions, barrel export)
+Stopped at: Completed 162-04-PLAN.md
+Next action: Phase 162 COMPLETE. Continue with 161 (OKLCH palette renderer) and/or 163 (tmux multiplexer).
+Context: Phases 158, 159, 160, 162 all COMPLETE. Track A needs 161 (palette). Track B needs 163 (tmux). Track C (159) done. All converge at 164-166 (Desktop + Dashboard). Full PTY stack verified: 122 tests (115 vitest + 7 cargo).
 
 ---
-*Last updated: 2026-02-14 (162-03 complete)*
+*Last updated: 2026-02-14 (162-04 complete)*
