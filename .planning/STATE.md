@@ -3,12 +3,12 @@
 ## Current Position
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
-Phase: 165 -- Desktop Shell - Taskbar, Icons, Menus -- IN PROGRESS
-Plan: 165-01 COMPLETE, 165-02 COMPLETE, 165-03 COMPLETE.
-Status: Executing Phase 165 plans.
-Last activity: 2026-02-14 -- Completed 165-03 (system menu popup and keyboard shortcut manager)
+Phase: 165 -- Desktop Shell - Taskbar, Icons, Menus -- COMPLETE
+Plan: 165-01 COMPLETE, 165-02 COMPLETE, 165-03 COMPLETE, 165-04 COMPLETE.
+Status: Phase 165 complete. All 4 plans executed.
+Last activity: 2026-02-14 -- Completed 165-04 (DesktopShell orchestrator, shell CSS, main.ts rewrite)
 
-Progress: [#######...] 7/11 phases
+Progress: [########..] 8/11 phases
 
 ## Project Reference
 
@@ -95,10 +95,13 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - Dynamic import for @tauri-apps/api/window with try/catch fallback for non-Tauri envs
 - 8x8 pixel-art bitmaps: uint8 row bitmasks, bit 7 = leftmost pixel
 - Canvas pixel-art scaled 6x (48px CSS) with image-rendering: pixelated
-- Shell module at desktop/src/shell/ (types, icon-registry, desktop-icons, taskbar, system-menu, keyboard-nav, process-monitor)
+- Shell module at desktop/src/shell/ (types, icon-registry, desktop-icons, taskbar, system-menu, keyboard-nav, process-monitor, desktop-shell)
 - System menu outside click uses document mousedown (not click) to prevent race conditions
 - KeyboardManager arrow function keydownHandler for stable this binding in add/removeEventListener
 - First-match-wins keyboard dispatch (no multi-binding for same key combo)
+- DesktopShell tracks open window types via Map<string, string> for O(1) type-to-id lookup
+- Context menu fires on desktop element or icon column only (not on window frames)
+- Alt+Tab brings second-from-top to front (standard focus cycling behavior)
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -121,8 +124,8 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total phases | 157 complete |
 | Total plans | 449 complete |
 | Total LOC | ~195k TypeScript + Rust |
-| v1.21 phases | 7/11 complete |
-| v1.21 plans | 26/? complete |
+| v1.21 phases | 8/11 complete |
+| v1.21 plans | 30/? complete |
 | v1.21 requirements | 50 total |
 | 158-01 duration | 11min |
 | 158-02 duration | 2min |
@@ -150,13 +153,14 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 165-01 duration | 3min |
 | 165-02 duration | 3min |
 | 165-03 duration | 3min |
+| 165-04 duration | 3min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Completed 165-03 (system menu popup and keyboard shortcut manager)
-Stopped at: Completed 165-03-PLAN.md. Continue Phase 165 plans.
-Next action: Execute 165-04.
-Context: Shell module at desktop/src/shell/ with types, icon-registry, desktop-icons, taskbar, process-monitor, system-menu, keyboard-nav. 359 desktop tests passing. Plan 165-04 (shell integration) remains.
+Last: 2026-02-14 -- Completed Phase 165 (Desktop Shell - all 4 plans)
+Stopped at: Completed 165-04-PLAN.md. Phase 165 complete.
+Next action: Execute Phase 166.
+Context: Shell module complete at desktop/src/shell/ with DesktopShell orchestrator wiring icons, taskbar, system menu, keyboard, process monitor to WindowManager. 378 desktop tests passing. main.ts rewritten with full desktop environment.
 
 ---
-*Last updated: 2026-02-14 (165-03 complete)*
+*Last updated: 2026-02-14 (165-04 complete, Phase 165 complete)*
