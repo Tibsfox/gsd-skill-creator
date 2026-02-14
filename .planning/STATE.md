@@ -4,9 +4,9 @@
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
 Phase: 158 -- Tauri Scaffold + IPC Foundation (in progress)
-Plan: 02 complete, next: 03
+Plan: 03 complete, next: 04
 Status: Executing phase 158
-Last activity: 2026-02-14 -- Completed 158-02 (Vite frontend scaffold)
+Last activity: 2026-02-14 -- Completed 158-03 (IPC type contracts)
 
 Progress: [..........] 0/11 phases
 
@@ -60,6 +60,8 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - Binary encoding for PTY IPC (Vec<u8>, not JSON strings)
 - desktop/ is standalone package (not workspace) for clean separation from src/
 - Vite build target safari13 per Tauri v2 WebKitGTK engine requirements
+- mockIPC passes Channel object directly (use .id property, not string parsing)
+- vitest 3.x in desktop/ (not 4.x -- latest stable is 3.2.4)
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -83,17 +85,18 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total plans | 449 complete |
 | Total LOC | ~195k TypeScript + Rust |
 | v1.21 phases | 0/11 complete |
-| v1.21 plans | 2/? complete |
+| v1.21 plans | 3/? complete |
 | v1.21 requirements | 50 total |
 | 158-01 duration | 11min |
 | 158-02 duration | 2min |
+| 158-03 duration | 6min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Completed 158-02 (Vite frontend scaffold)
-Stopped at: Completed 158-02-PLAN.md
-Next action: Execute 158-03 (IPC type contracts)
-Context: Rust backend compiles (Plan 01), Vite frontend builds on port 1420 (Plan 02). Both halves of the Tauri app are in place. Plan 03 establishes the TypeScript IPC type contracts.
+Last: 2026-02-14 -- Completed 158-03 (IPC type contracts)
+Stopped at: Completed 158-03-PLAN.md
+Next action: Execute 158-04 (capability ACL / remaining plans)
+Context: All three IPC primitives working: commands (invoke/response), events (emit/listen), channels (streaming). 7 passing desktop tests via mockIPC. Rust backend compiles with 5 registered commands. Ready for next plan.
 
 ---
-*Last updated: 2026-02-14 (158-02 complete)*
+*Last updated: 2026-02-14 (158-03 complete)*
