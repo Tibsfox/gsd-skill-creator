@@ -148,7 +148,20 @@ Skills, agents, and teams must match official Claude Code patterns so they work 
 
 ### Active
 
-<!-- Next milestone — see REQUIREMENTS.md when created -->
+<!-- Current milestone: v1.21 GSD-OS Desktop Foundation — see REQUIREMENTS.md -->
+
+- Tauri desktop application scaffold for Linux and macOS
+- WebGL 8-bit graphics engine with CRT post-processing shaders
+- First-boot calibration screen (color picking, shape/glow/density sliders, light/dark + palette selection)
+- user-style.yaml generation and system-wide style application
+- Boot sequence through WebGL shader engine with chipset metaphor
+- Desktop environment with Amiga Workbench-inspired window management
+- Taskbar with running process indicators and system menu
+- Rust-side tmux integration via native PTY (replacing Wetty HTTP bridge)
+- Native file watcher service (inotify on Linux, FSEvents on macOS)
+- Tauri IPC event system for webview↔backend communication
+- Embedded terminal emulator panel with direct tmux session binding
+- Claude Code session management through Tauri process manager
 
 ### Out of Scope
 
@@ -163,11 +176,24 @@ Skills, agents, and teams must match official Claude Code patterns so they work 
 - Automated remediation — v1 flags and suggests; auto-fix requires high confidence not yet established
 - Cross-project staging — v1 is project-scoped; cross-project adds significant coordination complexity
 
-## Current State
+## Current Milestone: v1.21 GSD-OS Desktop Foundation
+
+**Goal:** Build the Tauri desktop application shell with WebGL 8-bit graphics engine, first-boot calibration, boot sequence, Amiga-inspired desktop environment, and native system bridge (tmux PTY, file watcher, IPC) — transforming the existing TypeScript ecosystem into an interactive desktop application.
+
+**Target features:**
+- Tauri application with Rust backend and webview frontend
+- WebGL shader pipeline emulating OCS-era Amiga display (32-color palette, scanlines, phosphor glow, copper list effects)
+- Three-screen first-boot calibration (color picking, shape/glow/density, light/dark + palette) generating user-style.yaml
+- Personalized boot sequence showing chipset architecture metaphor
+- Desktop environment with window management, taskbar, and system menu
+- Native tmux integration via Rust PTY (replacing Wetty HTTP bridge)
+- File watcher service using inotify/FSEvents pushing events via Tauri IPC
+- Embedded terminal emulator with direct tmux session binding
+- Claude Code session management through Tauri process manager
 
 ## Current State
 
-v1.20 shipped. 24 milestones shipped (v1.0-v1.20 + v1.8.1 patch), 157 phases, 449 plans, ~195k LOC TypeScript. All dashboard components are now wired into the generator pipeline with unified CSS and real data pipelines. Generator produces 6 pages (index, requirements, roadmap, milestones, state, console). Topology renders real skill/agent/team data. Activity feed shows git commits and session observations. Budget gauge and silicon panel display real budget data. Staging queue panel visualizes queue state. Console page provides settings, activity timeline, question cards, and submit flow.
+v1.21 starting. 24 milestones shipped (v1.0-v1.20 + v1.8.1 patch), 157 phases, 449 plans, ~195k LOC TypeScript. Beginning major architectural expansion from TypeScript library/CLI to Tauri desktop application with Rust backend, WebGL graphics engine, and native system integration.
 
 ## Context
 
