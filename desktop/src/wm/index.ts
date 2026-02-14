@@ -30,3 +30,15 @@ export {
   getZIndex,
   getFront,
 } from "./z-order";
+
+export type {
+  GadgetAction,
+  GadgetCallback,
+  WindowChromeElements,
+} from "./window-chrome";
+
+export { createWindowChrome } from "./window-chrome";
+
+export type { BoundsUpdateCallback, Cleanup } from "./drag-resize";
+
+export { enableDrag, enableResize } from "./drag-resize";
