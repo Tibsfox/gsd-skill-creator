@@ -2,18 +2,18 @@
 
 ## Current Position
 
-Milestone: v1.18 — Information Design System
-Phase: 146 — Activity Feed (complete)
-Plan: 02 complete (all plans done)
-Status: Phase 146 complete — 2 of 2 plans complete
-Last activity: 2026-02-14 — 146-02 activity/terminal tab toggle with event translator complete
+Milestone: v1.18 — Information Design System (SHIPPED)
+Phase: All 7 phases complete (142-148)
+Plan: All 15 plans complete
+Status: Milestone shipped 2026-02-14
+Last activity: 2026-02-14 — v1.18 milestone archived
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
+See: .planning/PROJECT.md (updated 2026-02-14 after v1.18 completion)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns so they work correctly when loaded by Claude Code
-**Current focus:** v1.18 Information Design System — design system, gantry, shape/color, topology, activity feed, budget gauge, identifier encoding
+**Current focus:** Planning next milestone
 
 ## Accumulated Context
 
@@ -248,9 +248,24 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 - DESCRIPTION_TEMPLATES record with template functions for human-readable activity descriptions
 - Vanilla JS IIFE with event delegation on .activity-tab-panel for tab toggle (REQ-TC-01)
 - Activity tab visible by default, terminal hidden via inline style display:none
+- 6 topology shape builders as typed record: circle (agent), rect (skill), hexagon (team), chevron (phase), diamond (adapter), dot (plan)
+- Cubic bezier paths for topology edges with horizontal control point offset for smooth curves
+- 12-node collapse with active-first sorting and type-priority ranking (team>agent>skill>phase>adapter>plan)
+- CSS-only stroke-dashoffset animation for active edge pulse (tp-pulse keyframes)
+- Column layout for topology: teams 0.15, agents 0.5, skills 0.85 (normalized 0-1)
+- Even vertical distribution via (i+1)/(count+1) spacing within columns
+- Topology panel conditional on TopologySource availability in generator (graceful skip when no data)
+- Detail panel slide-in animation via @keyframes tp-slide-in with vanilla JS event delegation
+- Alphabetical tie-breaking for inferDomain when multiple domains score equally
+- DOMAIN_PREFIX_MAP[domain] for clean prefix lookup in SuggestionManager (not ternary chain)
+- Agent ID '-0' as unassigned agent prefix for skills without a parent agent
+- Consonant extraction for abbreviation generation in suggestMigration (skip vowels when >= 3 consonants)
+- Keyword hit ratio for migration confidence with 0.1 minimum floor
+- resolveIdentifier tries agent first, then skill, then adapter (most specific last)
+- skillId added to Suggestion interface and SuggestionStore transition options for identifier persistence
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle, topology-renderer, topology-data, topology-integration)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
 - Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, question-responder, check-inbox integration tests)
@@ -268,6 +283,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 - Staging resource submodule at src/staging/resource/ (types, analyzer, skill-matcher, topology, budget, decomposer, manifest, intake-bridge, index)
 - Staging queue submodule at src/staging/queue/ (types, state-machine, audit-logger, dependency-detector, optimization-analyzer, manager, pre-wiring, retroactive-audit, index)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
+- Identifiers module at src/identifiers/ (types, generator, compat, metadata, index)
 
 ### Todos
 - (none)
@@ -279,17 +295,17 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 
 | Metric | Value |
 |--------|-------|
-| Total milestones | 21 shipped (v1.0-v1.17 + v1.8.1 patch) |
-| Total phases | 141 complete |
-| Total plans | 415 complete |
-| Total LOC | ~183k TypeScript |
+| Total milestones | 22 shipped (v1.0-v1.18 + v1.8.1 patch) |
+| Total phases | 148 complete |
+| Total plans | 430 complete |
+| Total LOC | ~190k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-14 — 146-02 activity/terminal tab toggle complete
-Stopped at: Completed phase 146 (both 146-01 and 146-02 plans)
-Next action: Continue with next phase in v1.18 roadmap
-Context: Phase 146 complete. Activity feed component (shape/color/identifier format, 8-entry max, no timestamps) and activity/terminal tab toggle (event translator, vanilla JS toggle). 76 new tests, 5 commits.
+Last: 2026-02-14 — v1.18 Information Design System milestone shipped
+Stopped at: Milestone completion and archival
+Next action: /gsd:new-milestone for next version
+Context: v1.18 shipped with 7 phases, 15 plans, 35 commits, 515 tests. Dashboard now has design system tokens, gantry strip, entity shapes/colors, topology view, activity feed, budget gauge, silicon panel, and domain-prefixed identifiers. Dev branch ready for merge to main.
 
 ---
-*Last updated: 2026-02-14 (146-02 complete)*
+*Last updated: 2026-02-14 (v1.18 shipped)*
