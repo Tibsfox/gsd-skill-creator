@@ -5,6 +5,8 @@ import { ClusterDetector, SkillCluster } from './cluster-detector.js';
 import { AgentGenerator, GeneratedAgent } from './agent-generator.js';
 import { SessionObservation } from '../types/observation.js';
 import { SkillStore } from '../storage/skill-store.js';
+import { inferDomain, generateAgentId } from '../identifiers/generator.js';
+import type { AgentId } from '../identifiers/types.js';
 
 export type AgentSuggestionState = 'pending' | 'accepted' | 'deferred' | 'dismissed';
 
@@ -15,6 +17,7 @@ export interface AgentSuggestion {
   createdAt: number;
   decidedAt?: number;
   createdAgentName?: string;
+  agentId?: string;
   dismissReason?: string;
 }
 
@@ -100,9 +103,15 @@ export class AgentSuggestionManager {
 
     try {
       const agent = await this.generator.create(suggestions[idx].cluster);
+      const domain = inferDomain(suggestions[idx].cluster.suggestedDescription);
+      const existingAgentIds = suggestions
+        .filter(s => s.state === 'accepted' && s.agentId)
+        .map(s => s.agentId as AgentId);
+      const agentId = generateAgentId(domain, existingAgentIds);
       suggestions[idx].state = 'accepted';
       suggestions[idx].decidedAt = Date.now();
       suggestions[idx].createdAgentName = agent.name;
+      suggestions[idx].agentId = agentId;
       await this.saveSuggestions(suggestions);
       return { success: true, agentName: agent.name };
     } catch (err) {

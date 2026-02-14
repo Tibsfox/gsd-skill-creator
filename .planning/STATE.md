@@ -2,15 +2,15 @@
 
 ## Current Position
 
-Milestone: v1.17 — Staging Layer (SHIPPED)
-Phase: 141 — Queue Pipelining and Dashboard (complete)
-Plan: 141-04 complete
-Status: Milestone v1.17 complete — all 8 phases, 35 plans shipped
-Last activity: 2026-02-13 — Milestone v1.17 archived
+Milestone: v1.18 — Information Design System (SHIPPED)
+Phase: All 7 phases complete (142-148)
+Plan: All 15 plans complete
+Status: Milestone shipped 2026-02-14
+Last activity: 2026-02-14 — v1.18 milestone archived
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
+See: .planning/PROJECT.md (updated 2026-02-14 after v1.18 completion)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns so they work correctly when loaded by Claude Code
 **Current focus:** Planning next milestone
@@ -219,9 +219,53 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 - 7 QueueStates mapped to 4 kanban columns: uploaded+checking->incoming, needs-attention->attention, ready+queued+executing->ready, set-aside->aside
 - SVG dependency lines use data-from/data-to attributes with client-side getBoundingClientRect positioning
 - Per-state badge colors: blue(uploaded), yellow(checking), orange(needs-attention), green(ready), teal(queued), purple(executing), gray(set-aside)
+- Google Fonts @import used for Inter and JetBrains Mono with system font fallback stacks (progressive enhancement)
+- Renderer test updated to allow font import URLs (strip Google Fonts @import before checking for external URLs)
+- Weight hierarchy uses font-weight only (no font-size) so primary/secondary differ by boldness at same size
+- Case discipline: .case-label is defensive text-transform:none; .case-interrupt is uppercase with letter-spacing
+- Gantry cell ordering: status, agent, phase, budget (importance hierarchy)
+- Active status keywords: executing, active, running, building (case-insensitive matching)
+- Budget color thresholds: green <80%, orange 80-95%, red >95%
+- Post-render gantry injection via html.replace('</header>') pattern (same as refresh script)
+- Token metric detection via keyword matching on metric keys (token, budget, context)
+- 24x24 viewBox for all entity SVG shapes with configurable render size (default 16px)
+- Domain color CSS custom properties (--domain-*) with hex fallbacks for standalone rendering
+- Self-closing SVG shape elements with inline fill attribute for domain color
+- CSS-only <details>/<summary> for legend collapsibility (no JS, REQ-TC-01)
+- Shipped milestones get green fill (#3fb950) via inline style override; in-progress use infrastructure purple
+- Panel header shapes at size 14 for compact headers
+- Budget gauge scan-label hidden via opacity:0 with CSS-only hover reveal (no JS)
+- Budget gauge headroom uses opacity:0.3 on --text-dim for subtle gray fill
+- Budget gauge min-width:2px on segments prevents invisible slivers at very small percentages
+- Silicon panel progressive enhancement gate: null=empty string, false=disabled msg, true=full panel
+- Silicon panel STATE_STYLES constant maps all 5 adapter states to CSS class + diamond color
+- Silicon panel uses Unicode U+25C6 (black diamond) for adapter indicator shape
+- Test helper 'enabled' in overrides check instead of ?? to handle null correctly (nullish coalescing treats null as nullish)
+- Unicode shape chars for activity feed entity types: agent=circle, skill=square, team=hexagon, phase=chevron, adapter=diamond, plan=dot
+- 6 domain color CSS classes (.af-domain-{domain}) with custom property fallbacks for activity feed
+- occurredAt used for sort only in activity feed, never rendered (REQ-AF-06)
+- EVENT_ENTITY_MAP record for session event-to-entityType mapping (10 event types to 6 entity types)
+- DESCRIPTION_TEMPLATES record with template functions for human-readable activity descriptions
+- Vanilla JS IIFE with event delegation on .activity-tab-panel for tab toggle (REQ-TC-01)
+- Activity tab visible by default, terminal hidden via inline style display:none
+- 6 topology shape builders as typed record: circle (agent), rect (skill), hexagon (team), chevron (phase), diamond (adapter), dot (plan)
+- Cubic bezier paths for topology edges with horizontal control point offset for smooth curves
+- 12-node collapse with active-first sorting and type-priority ranking (team>agent>skill>phase>adapter>plan)
+- CSS-only stroke-dashoffset animation for active edge pulse (tp-pulse keyframes)
+- Column layout for topology: teams 0.15, agents 0.5, skills 0.85 (normalized 0-1)
+- Even vertical distribution via (i+1)/(count+1) spacing within columns
+- Topology panel conditional on TopologySource availability in generator (graceful skip when no data)
+- Detail panel slide-in animation via @keyframes tp-slide-in with vanilla JS event delegation
+- Alphabetical tie-breaking for inferDomain when multiple domains score equally
+- DOMAIN_PREFIX_MAP[domain] for clean prefix lookup in SuggestionManager (not ternary chain)
+- Agent ID '-0' as unassigned agent prefix for skills without a parent agent
+- Consonant extraction for abbreviation generation in suggestMigration (skip vowels when >= 3 consonants)
+- Keyword hit ratio for migration confidence with 0.1 minimum floor
+- resolveIdentifier tries agent first, then skill, then adapter (most specific last)
+- skillId added to Suggestion interface and SuggestionStore transition options for identifier persistence
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle, topology-renderer, topology-data, topology-integration)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
 - Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, question-responder, check-inbox integration tests)
@@ -239,6 +283,7 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 - Staging resource submodule at src/staging/resource/ (types, analyzer, skill-matcher, topology, budget, decomposer, manifest, intake-bridge, index)
 - Staging queue submodule at src/staging/queue/ (types, state-machine, audit-logger, dependency-detector, optimization-analyzer, manager, pre-wiring, retroactive-audit, index)
 - Staging filesystem at .planning/staging/ (inbox, checking, attention, ready, aside, queue.jsonl)
+- Identifiers module at src/identifiers/ (types, generator, compat, metadata, index)
 
 ### Todos
 - (none)
@@ -250,17 +295,17 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 
 | Metric | Value |
 |--------|-------|
-| Total milestones | 21 shipped (v1.0-v1.17 + v1.8.1 patch) |
-| Total phases | 141 complete |
-| Total plans | 415 complete |
-| Total LOC | ~183k TypeScript |
+| Total milestones | 22 shipped (v1.0-v1.18 + v1.8.1 patch) |
+| Total phases | 148 complete |
+| Total plans | 430 complete |
+| Total LOC | ~190k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Milestone v1.17 archived
-Stopped at: Milestone v1.17 complete. All 8 phases (134-141), 35 plans, 83 commits, 699 tests. Archives in .planning/milestones/.
-Next action: /gsd:new-milestone for next milestone
-Context: v1.17 Staging Layer shipped. Full staging pipeline operational. 21 milestones total.
+Last: 2026-02-14 — v1.18 Information Design System milestone shipped
+Stopped at: Milestone completion and archival
+Next action: /gsd:new-milestone for next version
+Context: v1.18 shipped with 7 phases, 15 plans, 35 commits, 515 tests. Dashboard now has design system tokens, gantry strip, entity shapes/colors, topology view, activity feed, budget gauge, silicon panel, and domain-prefixed identifiers. Dev branch ready for merge to main.
 
 ---
-*Last updated: 2026-02-13 (v1.17 milestone complete)*
+*Last updated: 2026-02-14 (v1.18 shipped)*
