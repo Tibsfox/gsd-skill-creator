@@ -55,6 +55,17 @@ vi.mock('./collectors/staging-collector.js', () => ({
   }),
 }));
 
+// Mock the console page data collector module
+vi.mock('./collectors/console-collector.js', () => ({
+  collectConsoleData: vi.fn().mockResolvedValue({
+    status: null,
+    questions: [],
+    helperUrl: '/api/console/message',
+    config: null,
+    activityEntries: [],
+  }),
+}));
+
 // ---------------------------------------------------------------------------
 // Fixtures — realistic .planning/ content
 // ---------------------------------------------------------------------------
@@ -236,7 +247,7 @@ describe('generate', () => {
     expect(content).toContain('3000');
   });
 
-  it('generates all 5 pages with full data', async () => {
+  it('generates all 6 pages with full data', async () => {
     await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
     await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
     await writeFile(join(planningDir, 'ROADMAP.md'), ROADMAP_MD);
@@ -250,7 +261,8 @@ describe('generate', () => {
     expect(result.pages).toContain('roadmap.html');
     expect(result.pages).toContain('milestones.html');
     expect(result.pages).toContain('state.html');
-    expect(result.pages).toHaveLength(5);
+    expect(result.pages).toContain('console.html');
+    expect(result.pages).toHaveLength(6);
   });
 
   it('skips pages when content hash matches manifest (incremental)', async () => {
@@ -840,6 +852,222 @@ describe('generate', () => {
       const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
       // Empty state renders with sq-empty class
       expect(content).toContain('sq-empty');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // Console page integration tests (157-02)
+  // -------------------------------------------------------------------------
+
+  describe('console page integration', () => {
+    beforeEach(async () => {
+      const { collectAndRenderMetrics } = await import('./metrics/integration.js');
+      vi.mocked(collectAndRenderMetrics).mockReset();
+      vi.mocked(collectAndRenderMetrics).mockResolvedValue({
+        html: '',
+        sections: 0,
+        durationMs: 0,
+      });
+
+      const { collectTopologyData } = await import('./collectors/topology-collector.js');
+      vi.mocked(collectTopologyData).mockReset();
+
+      const { collectActivityFeed } = await import('./collectors/activity-collector.js');
+      vi.mocked(collectActivityFeed).mockReset();
+      vi.mocked(collectActivityFeed).mockResolvedValue([]);
+
+      const { collectBudgetSiliconData } = await import('./budget-silicon-collector.js');
+      vi.mocked(collectBudgetSiliconData).mockReset();
+      vi.mocked(collectBudgetSiliconData).mockResolvedValue({
+        gauge: {
+          segments: [{ domain: 'test', percentage: 45, color: 'var(--domain-testing)' }],
+          totalUsed: 45,
+          label: 'Token Budget',
+        },
+        silicon: {
+          enabled: null,
+          adapters: [],
+          vram: { segments: [], totalUsed: 0 },
+        },
+      });
+
+      const { collectStagingQueue } = await import('./collectors/staging-collector.js');
+      vi.mocked(collectStagingQueue).mockReset();
+      vi.mocked(collectStagingQueue).mockResolvedValue({
+        entries: [],
+        dependencies: [],
+      });
+
+      const { collectConsoleData } = await import('./collectors/console-collector.js');
+      vi.mocked(collectConsoleData).mockReset();
+      vi.mocked(collectConsoleData).mockResolvedValue({
+        status: null,
+        questions: [],
+        helperUrl: '/api/console/message',
+        config: null,
+        activityEntries: [],
+      });
+    });
+
+    it('generates console.html in output directory', async () => {
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      const result = await generate({ planningDir, outputDir, force: true });
+
+      expect(result.pages).toContain('console.html');
+      expect(existsSync(join(outputDir, 'console.html'))).toBe(true);
+      const content = await readFile(join(outputDir, 'console.html'), 'utf-8');
+      expect(content.length).toBeGreaterThan(0);
+    });
+
+    it('console.html contains navigation links to index.html', async () => {
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      await generate({ planningDir, outputDir, force: true });
+
+      const content = await readFile(join(outputDir, 'console.html'), 'utf-8');
+      expect(content).toContain('index.html');
+      expect(content).toContain('Console');
+    });
+
+    it('console.html contains console-page class wrapper', async () => {
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      await generate({ planningDir, outputDir, force: true });
+
+      const content = await readFile(join(outputDir, 'console.html'), 'utf-8');
+      expect(content).toContain('console-page');
+    });
+
+    it('console.html contains settings section with config data', async () => {
+      const { collectConsoleData } = await import('./collectors/console-collector.js');
+      vi.mocked(collectConsoleData).mockResolvedValue({
+        status: null,
+        questions: [],
+        helperUrl: '/api/console/message',
+        config: {
+          milestone: { name: 'Test Milestone', submitted_at: '2026-02-14T00:00:00Z', submitted_by: 'dashboard' },
+          execution: { mode: 'supervised', yolo: false, pause_points: { after_planning: true, after_each_phase: true, after_verification: true } },
+          research: { enabled: true, web_search: false, max_research_time_minutes: 30, skip_if_vision_sufficient: true },
+          planning: { auto_approve: false, review_granularity: 'phase', max_plans_per_phase: 10, require_tdd: false },
+          verification: { run_tests: true, type_check: true, lint: true, block_on_failure: true, coverage_threshold: 80 },
+          resources: { token_budget_pct: 50, max_phases: 20, max_wall_time_minutes: 480, model_preference: 'quality' },
+          notifications: { on_phase_complete: true, on_question: true, on_error: true, on_milestone_complete: true },
+        },
+        activityEntries: [],
+      });
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      await generate({ planningDir, outputDir, force: true });
+
+      const content = await readFile(join(outputDir, 'console.html'), 'utf-8');
+      expect(content).toContain('console-settings-panel');
+    });
+
+    it('console.html contains question cards when questions exist', async () => {
+      const { collectConsoleData } = await import('./collectors/console-collector.js');
+      vi.mocked(collectConsoleData).mockResolvedValue({
+        status: null,
+        questions: [
+          {
+            question_id: 'q-test-001',
+            type: 'binary',
+            text: 'Continue with deployment?',
+            status: 'pending',
+            urgency: 'medium',
+          },
+        ],
+        helperUrl: '/api/console/message',
+        config: null,
+        activityEntries: [],
+      });
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      await generate({ planningDir, outputDir, force: true });
+
+      const content = await readFile(join(outputDir, 'console.html'), 'utf-8');
+      expect(content).toContain('question-card');
+      expect(content).toContain('Continue with deployment?');
+    });
+
+    it('console.html contains submit flow section', async () => {
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      await generate({ planningDir, outputDir, force: true });
+
+      const content = await readFile(join(outputDir, 'console.html'), 'utf-8');
+      expect(content).toContain('submit-flow');
+      expect(content).toContain('upload-zone');
+    });
+
+    it('console.html contains activity section with bridge log entries', async () => {
+      const { collectConsoleData } = await import('./collectors/console-collector.js');
+      vi.mocked(collectConsoleData).mockResolvedValue({
+        status: null,
+        questions: [],
+        helperUrl: '/api/console/message',
+        config: null,
+        activityEntries: [
+          {
+            timestamp: '2026-02-14T10:00:00Z',
+            label: 'Config',
+            badge: 'config-write',
+            detail: 'config-update.json',
+            relativeTime: '1m ago',
+          },
+        ],
+      });
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      await generate({ planningDir, outputDir, force: true });
+
+      const content = await readFile(join(outputDir, 'console.html'), 'utf-8');
+      expect(content).toContain('console-activity');
+      expect(content).toContain('Config');
+    });
+
+    it('generates 6 pages with full data when console data exists', async () => {
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+      await writeFile(join(planningDir, 'ROADMAP.md'), ROADMAP_MD);
+      await writeFile(join(planningDir, 'MILESTONES.md'), MILESTONES_MD);
+
+      const { generate } = await import('./generator.js');
+      const result = await generate({ planningDir, outputDir, force: true });
+
+      expect(result.pages).toHaveLength(6);
+      expect(result.pages).toContain('console.html');
+    });
+
+    it('console.html renders without errors when console directory is missing', async () => {
+      // Do NOT create .planning/console/ dir
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      const result = await generate({ planningDir, outputDir, force: true });
+
+      expect(result.pages).toContain('console.html');
+      expect(result.errors).toHaveLength(0);
+      const content = await readFile(join(outputDir, 'console.html'), 'utf-8');
+      expect(content).toContain('console-page');
     });
   });
 });
