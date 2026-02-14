@@ -510,10 +510,11 @@ describe('generate', () => {
       expect(result.pages).toContain('index.html');
       expect(result.errors).toHaveLength(0);
 
-      // Index page should exist but without topology content
+      // Index page should exist but without topology panel HTML element
       const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
       expect(content).toBeTruthy();
-      expect(content).not.toContain('topology-panel');
+      // Styles will still reference .topology-panel, but the actual panel div should not exist
+      expect(content).not.toContain('<div class="topology-panel">');
     });
 
     it('passes real topologySource to renderIndexContent instead of undefined', async () => {
