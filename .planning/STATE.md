@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.17 — Staging Layer
-Phase: 141 — Queue Pipelining and Dashboard (in progress)
-Plan: 141-03 complete
-Status: Plan 141-03 complete (3 of 4 plans)
-Last activity: 2026-02-13 — Completed 141-03 (staging queue dashboard panel)
+Phase: 141 — Queue Pipelining and Dashboard (complete)
+Plan: 141-04 complete
+Status: Phase 141 complete (4 of 4 plans)
+Last activity: 2026-02-13 — Completed 141-04 (queue barrel finalization and integration tests)
 
 ## Project Reference
 
@@ -206,6 +206,8 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 - QueueManager is a plain object from factory function (not a class)
 - Queue barrel follows hygiene/derived/resource pattern: type-only + value exports
 - Staging barrel re-exports complete queue API (9 types, 3 constants, 6 functions)
+- Staging barrel re-exports pre-wiring and retroactive audit APIs (8 types, 4 values)
+- Integration tests validate pre-wiring, retroactive audit, and dashboard panel composition through barrel API
 - Single topology assigns all non-missing skills to one executor agent
 - Pipeline/hybrid use round-robin distribution across stage-N agents
 - Map-reduce: coordinator gets first skill, workers split remainder
@@ -249,16 +251,16 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 started)
 | Metric | Value |
 |--------|-------|
 | Total milestones | 20 shipped (v1.0-v1.16 + v1.8.1 patch) |
-| Total phases | 140 complete |
-| Total plans | 408 complete |
+| Total phases | 141 complete |
+| Total plans | 412 complete |
 | Total LOC | ~159k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-13 — Completed 141-03-PLAN.md (staging queue dashboard panel)
-Stopped at: Plan 141-03 complete (3 of 4 plans). Staging queue panel with 4-column kanban and SVG dependency lines.
-Next action: Execute 141-04 (remaining phase 141 plan).
-Context: v1.17 Staging Layer. Phase 141 in progress. Dashboard staging-queue-panel built with 38 tests. 240 dashboard tests pass.
+Last: 2026-02-13 — Completed 141-04-PLAN.md (queue barrel finalization and integration tests)
+Stopped at: Phase 141 complete (4 of 4 plans). Queue barrel exports finalized, staging barrel re-exports added, 9 integration tests passing.
+Next action: Next phase in v1.17 milestone.
+Context: v1.17 Staging Layer. Phase 141 complete. 661 staging tests, 240 dashboard tests all pass.
 
 ---
-*Last updated: 2026-02-13 (141-03 complete)*
+*Last updated: 2026-02-13 (141-04 complete)*
