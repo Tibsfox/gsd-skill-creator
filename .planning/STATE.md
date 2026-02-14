@@ -3,12 +3,12 @@
 ## Current Position
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
-Phase: 164 -- Window Manager + Custom Chrome -- IN PROGRESS
-Plan: 164-01 COMPLETE, 164-02 COMPLETE. Next: 164-03.
-Status: Phase 164 in progress. Plans 01-02 complete.
-Last activity: 2026-02-14 -- Completed 164-02 (Amiga window chrome, pointer-event drag/resize)
+Phase: 164 -- Window Manager + Custom Chrome -- COMPLETE
+Plan: 164-01 COMPLETE, 164-02 COMPLETE, 164-03 COMPLETE.
+Status: Phase 164 complete. Next: Phase 165.
+Last activity: 2026-02-14 -- Completed 164-03 (WindowManager orchestrator, Amiga CSS, frameless Tauri, desktop shell)
 
-Progress: [######....] 6/11 phases
+Progress: [#######...] 7/11 phases
 
 ## Project Reference
 
@@ -89,6 +89,10 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - Titlebar three-section layout: left (close), center (title), right (depth+zoom) with data-section/data-gadget attrs
 - Pointer events on window (not handle) for move/up listeners -- reliable tracking when cursor leaves element
 - setPointerCapture on drag/resize start for out-of-bounds cursor tracking
+- WindowManager composes pure functions from window-state, z-order, chrome, drag-resize
+- Desktop icons use dblclick to restore (Amiga Workbench convention)
+- Tauri frameless: decorations:false + data-tauri-drag-region on app titlebar
+- Dynamic import for @tauri-apps/api/window with try/catch fallback for non-Tauri envs
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -111,8 +115,8 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total phases | 157 complete |
 | Total plans | 449 complete |
 | Total LOC | ~195k TypeScript + Rust |
-| v1.21 phases | 6/11 complete |
-| v1.21 plans | 23/? complete |
+| v1.21 phases | 7/11 complete |
+| v1.21 plans | 26/? complete |
 | v1.21 requirements | 50 total |
 | 158-01 duration | 11min |
 | 158-02 duration | 2min |
@@ -136,13 +140,14 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 163-03 duration | 5min |
 | 164-01 duration | 2min |
 | 164-02 duration | 4min |
+| 164-03 duration | 3min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Completed 164-02 (Amiga window chrome, pointer-event drag/resize)
-Stopped at: Completed 164-02-PLAN.md
-Next action: Execute 164-03 (window manager orchestrator).
-Context: Phases 158-163 all COMPLETE. Phase 164 in progress (plans 01-02 done). 247 desktop tests passing, 29 Rust tests passing. Window manager module: types, window-state CRUD, z-order, window chrome DOM factory, drag/resize handlers. Pointer events for unified touch/mouse.
+Last: 2026-02-14 -- Completed 164-03 (WindowManager orchestrator, Amiga CSS, frameless Tauri, desktop shell)
+Stopped at: Completed 164-03-PLAN.md. Phase 164 COMPLETE.
+Next action: Plan or execute Phase 165.
+Context: Phases 158-164 all COMPLETE. 265 desktop tests passing, 29 Rust tests passing. Window manager module complete: types, window-state, z-order, window-chrome, drag-resize, window-manager orchestrator, Amiga CSS. Desktop shell with 3 demo windows, frameless Tauri with custom app chrome.
 
 ---
-*Last updated: 2026-02-14 (164-02 complete)*
+*Last updated: 2026-02-14 (164-03 complete, Phase 164 COMPLETE)*
