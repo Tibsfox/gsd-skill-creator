@@ -45,10 +45,12 @@ import { collectStagingQueue } from './collectors/staging-collector.js';
 import { renderQuestionCardStyles } from './question-card.js';
 import { renderUploadZoneStyles } from './upload-zone.js';
 import { renderConfigFormStyles } from './config-form.js';
-import { renderSubmitFlowStyles } from './submit-flow.js';
+import { renderSubmitFlow, renderSubmitFlowStyles } from './submit-flow.js';
 import { renderConsoleSettingsStyles } from './console-settings.js';
 import { renderConsoleActivityStyles } from './console-activity.js';
-import { renderConsolePageStyles } from './console-page.js';
+import { renderConsolePage, renderConsolePageStyles } from './console-page.js';
+import type { ConsolePageData } from './console-page.js';
+import { collectConsoleData } from './collectors/console-collector.js';
 import type { FeedEntry } from './activity-feed.js';
 import type { TopologySource } from './topology-data.js';
 import type { DashboardData } from './types.js';
@@ -93,6 +95,7 @@ const NAV_PAGES: NavPage[] = [
   { name: 'roadmap', path: 'roadmap.html', label: 'Roadmap' },
   { name: 'milestones', path: 'milestones.html', label: 'Milestones' },
   { name: 'state', path: 'state.html', label: 'State' },
+  { name: 'console', path: 'console.html', label: 'Console' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -370,6 +373,18 @@ function statusToBadgeClass(status: string): string {
   return 'badge-pending';
 }
 
+/**
+ * Render the console page content.
+ *
+ * Combines the console page (status, questions, settings, activity)
+ * with the submit flow section.
+ */
+function renderConsoleContent(data: ConsolePageData): string {
+  const consolePage = renderConsolePage(data);
+  const submitFlow = renderSubmitFlow(data.helperUrl);
+  return consolePage + '\n' + submitFlow;
+}
+
 // ---------------------------------------------------------------------------
 // Main generator
 // ---------------------------------------------------------------------------
@@ -477,6 +492,22 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     stagingQueueHtml = renderStagingQueuePanel(stagingData);
   } catch {
     // Staging queue failure never blocks dashboard generation
+  }
+
+  // Collect console page data (graceful — never fails the pipeline)
+  let consoleData: ConsolePageData = {
+    status: null,
+    questions: [],
+    helperUrl: '/api/console/message',
+    config: null,
+    activityEntries: [],
+  };
+  try {
+    consoleData = await collectConsoleData({
+      basePath: join(options.planningDir, '..'),
+    });
+  } catch {
+    // Console data collection failure never blocks dashboard generation
   }
 
   // Ensure output directory exists
@@ -591,6 +622,17 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
         description: 'Current project state and session continuity',
         ogTitle: `${projectName} - State`,
         ogDescription: 'Current project state and session continuity',
+        ogType: 'website',
+      },
+    },
+    {
+      name: 'console',
+      filename: 'console.html',
+      render: () => renderConsoleContent(consoleData),
+      meta: {
+        description: 'Console interface for settings, activity, and milestone submission',
+        ogTitle: `${projectName} - Console`,
+        ogDescription: 'Console interface for settings, activity, and milestone submission',
         ogType: 'website',
       },
     },
