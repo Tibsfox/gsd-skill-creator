@@ -30,7 +30,7 @@ function makeVramSegment(overrides: Partial<VramSegment> = {}): VramSegment {
 
 function makeData(overrides: Partial<SiliconPanelData> = {}): SiliconPanelData {
   return {
-    enabled: overrides.enabled ?? true,
+    enabled: 'enabled' in overrides ? overrides.enabled! : true,
     adapters: overrides.adapters ?? [makeAdapter()],
     vram: overrides.vram ?? {
       segments: [makeVramSegment()],
