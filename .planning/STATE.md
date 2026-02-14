@@ -2,18 +2,18 @@
 
 ## Current Position
 
-Milestone: v1.19 — Budget Display Overhaul
-Phase: All phases complete (149, 150, 151)
-Plan: All 7 plans complete
-Status: Ready for milestone completion
-Last activity: 2026-02-14 — All phases executed (149: model, 150: CLI status, 151: dashboard gauge + config)
+Milestone: v1.20 — Dashboard Assembly
+Phase: 152 — Layout & CSS Unification (in progress)
+Plan: 01 complete, 02 next
+Status: Executing phase 152
+Last activity: 2026-02-14 — Completed 152-01 (style assembly pipeline)
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-14 after v1.19 milestone start)
+See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 milestone start)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns so they work correctly when loaded by Claude Code
-**Current focus:** v1.19 Budget Display Overhaul — separating installed inventory from loading projection
+**Current focus:** v1.20 Dashboard Assembly — wiring all orphaned dashboard components into generator pipeline
 
 ## Accumulated Context
 
@@ -272,6 +272,8 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.19 milestone start)
 - formatBudgetDisplay uses nullish coalescing fallback for installedTotal/loadableTotal (handles pre-extension result objects)
 - Dual-view display only triggers when installedTotal !== loadableTotal (single-view otherwise)
 - Progress bar uses loadableTotal in dual-view (what actually loads matters more than what's installed)
+- Import all 12 orphaned component style modules directly into generator.ts (no barrel) to match existing pattern
+- Test overflow-y via renderMetricsStyles() in renderer.test.ts since base renderStyles() does not contain quality/history overflow rules
 
 ### Architecture Notes
 - Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle, topology-renderer, topology-data, topology-integration)
@@ -281,7 +283,7 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.19 milestone start)
 - Scripts module: scripts/console/ (check-inbox.sh, write-question.sh, write-status.sh, validate-config.sh)
 - gsd-stack session management: bash scripts with tmux integration (v1.13)
 - v1.14 promotion pipeline: src/pipeline/ + src/dashboard/collectors/
-- 22 milestones shipped, 148 phases, 430 plans, ~190k LOC
+- 23 milestones shipped, 151 phases, 437 plans, ~192k LOC
 - Filesystem message bus at .planning/console/ (inbox/outbox/config/uploads/logs)
 - Helper endpoint wired into serve-dashboard.mjs via dynamic import (browser->filesystem bridge)
 - No WebSockets -- dashboard polls outbox at 2-3s intervals
@@ -304,17 +306,17 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.19 milestone start)
 
 | Metric | Value |
 |--------|-------|
-| Total milestones | 22 shipped (v1.0-v1.18 + v1.8.1 patch) |
-| Total phases | 148 complete |
-| Total plans | 431 complete |
-| Total LOC | ~190k TypeScript |
+| Total milestones | 23 shipped (v1.0-v1.19 + v1.8.1 patch) |
+| Total phases | 151 complete |
+| Total plans | 437 complete |
+| Total LOC | ~192k TypeScript |
 
 ## Session Continuity
 
-Last: 2026-02-14 — All v1.19 phases complete
-Stopped at: Phase 151 complete, ready for milestone completion
-Next action: /gsd:complete-milestone v1.19
-Context: Phase 149 (model) delivered LoadingProjection + CumulativeBudgetResult extensions. Phase 150 (CLI) delivered status display redesign with installed/projection sections. Phase 151 (dashboard) delivered gauge with deferred tooltip, over-budget rendering, config budget settings, history migration, dual-dimension trends.
+Last: 2026-02-14 — Completed 152-01 (style assembly pipeline)
+Stopped at: Completed 152-01-PLAN.md
+Next action: Execute 152-02 (console page wiring)
+Context: Phase 152 plan 01 complete (style assembly). Plan 02 remaining in phase 152. After 152 completes, phases 153-156 can run in parallel. Phase 157 depends on all prior phases.
 
 ---
-*Last updated: 2026-02-14 (all phases complete)*
+*Last updated: 2026-02-14 (completed 152-01)*
