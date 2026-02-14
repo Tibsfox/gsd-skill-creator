@@ -1,14 +1,17 @@
 /**
  * Design system CSS foundation for the GSD Dashboard.
  *
- * Provides domain colors, signal colors, spacing tokens, and
- * five-state status vocabulary as CSS custom properties and classes.
+ * Provides domain colors, signal colors, typography, spacing tokens,
+ * five-state status vocabulary, weight hierarchy, and case discipline
+ * as CSS custom properties and classes.
  *
  * @module dashboard/design-system
  */
 
 export function renderDesignSystem(): string {
   return `
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
 /* -----------------------------------------------------------------------
    GSD Design System — Foundation Tokens
    ----------------------------------------------------------------------- */
@@ -28,11 +31,23 @@ export function renderDesignSystem(): string {
   --signal-error: #ef4444;
   --signal-neutral: #6b7280;
 
+  /* Typography (REQ-DS-03) */
+  --font-data: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
   /* Spacing Tokens (REQ-DS-06) */
   --ds-letter-spacing: 0.025em;
   --ds-line-height: 1.5;
   --ds-card-margin-sm: 16px;
   --ds-card-margin-lg: 24px;
+}
+
+/* -----------------------------------------------------------------------
+   Tabular-Nums Numeric Treatment (REQ-DS-04)
+   ----------------------------------------------------------------------- */
+
+body {
+  font-variant-numeric: tabular-nums;
 }
 
 /* -----------------------------------------------------------------------
@@ -62,6 +77,31 @@ export function renderDesignSystem(): string {
 .status-attention {
   color: var(--signal-warning);
   border-color: var(--signal-warning);
+}
+
+/* -----------------------------------------------------------------------
+   Weight Hierarchy (REQ-DS-05)
+   ----------------------------------------------------------------------- */
+
+.text-primary {
+  font-weight: 700;
+}
+
+.text-secondary {
+  font-weight: 400;
+}
+
+/* -----------------------------------------------------------------------
+   Case Discipline (REQ-DS-08)
+   ----------------------------------------------------------------------- */
+
+.case-label {
+  text-transform: none;
+}
+
+.case-interrupt {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 `;
 }
