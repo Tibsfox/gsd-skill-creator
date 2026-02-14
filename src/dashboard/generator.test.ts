@@ -31,6 +31,22 @@ vi.mock('./collectors/activity-collector.js', () => ({
   collectActivityFeed: vi.fn().mockResolvedValue([]),
 }));
 
+// Mock the budget-silicon collector module
+vi.mock('./budget-silicon-collector.js', () => ({
+  collectBudgetSiliconData: vi.fn().mockResolvedValue({
+    gauge: {
+      segments: [{ domain: 'test', percentage: 45, color: 'var(--domain-testing)' }],
+      totalUsed: 45,
+      label: 'Token Budget',
+    },
+    silicon: {
+      enabled: null,
+      adapters: [],
+      vram: { segments: [], totalUsed: 0 },
+    },
+  }),
+}));
+
 // ---------------------------------------------------------------------------
 // Fixtures — realistic .planning/ content
 // ---------------------------------------------------------------------------
@@ -643,6 +659,86 @@ describe('generate', () => {
       expect(indexHtml).toContain('\u25A0');
       // Domain color class
       expect(indexHtml).toContain('af-domain-frontend');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // Budget-silicon integration tests (155-02)
+  // -------------------------------------------------------------------------
+
+  describe('budget-silicon integration', () => {
+    beforeEach(async () => {
+      const { collectAndRenderMetrics } = await import('./metrics/integration.js');
+      vi.mocked(collectAndRenderMetrics).mockReset();
+      vi.mocked(collectAndRenderMetrics).mockResolvedValue({
+        html: '',
+        sections: 0,
+        durationMs: 0,
+      });
+
+      const { collectTopologyData } = await import('./collectors/topology-collector.js');
+      vi.mocked(collectTopologyData).mockReset();
+
+      const { collectActivityFeed } = await import('./collectors/activity-collector.js');
+      vi.mocked(collectActivityFeed).mockReset();
+      vi.mocked(collectActivityFeed).mockResolvedValue([]);
+
+      const { collectBudgetSiliconData } = await import('./budget-silicon-collector.js');
+      vi.mocked(collectBudgetSiliconData).mockReset();
+      vi.mocked(collectBudgetSiliconData).mockResolvedValue({
+        gauge: {
+          segments: [{ domain: 'test', percentage: 45, color: 'var(--domain-testing)' }],
+          totalUsed: 45,
+          label: 'Token Budget',
+        },
+        silicon: {
+          enabled: null,
+          adapters: [],
+          vram: { segments: [], totalUsed: 0 },
+        },
+      });
+    });
+
+    it('includes budget gauge in index.html', async () => {
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      const result = await generate({ planningDir, outputDir, force: true });
+
+      expect(result.pages).toContain('index.html');
+      const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
+      expect(content).toContain('budget-gauge');
+      expect(content).toContain('Token Budget');
+    });
+
+    it('generates index.html even when budget collection fails', async () => {
+      const { collectBudgetSiliconData } = await import('./budget-silicon-collector.js');
+      vi.mocked(collectBudgetSiliconData).mockRejectedValueOnce(new Error('no skills dir'));
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      const result = await generate({ planningDir, outputDir, force: true });
+
+      // Generation should still succeed
+      expect(result.pages).toContain('index.html');
+      expect(result.errors).toHaveLength(0);
+    });
+
+    it('omits silicon panel HTML element when enabled is null', async () => {
+      // The default mock already has enabled: null
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      await generate({ planningDir, outputDir, force: true });
+
+      const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
+      // renderSiliconPanel returns '' for null enabled, so no silicon-panel div in content
+      // (styles will still contain .silicon-panel CSS class, but no HTML element)
+      expect(content).not.toContain('<div class="silicon-panel">');
     });
   });
 });
