@@ -156,13 +156,15 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 165-04 duration | 3min |
 | 166-02 duration | 2min |
 | 166-01 duration | 3min |
+| 166-03 duration | 2min |
+| 166-04 duration | 2min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Completed 166-01 (Dashboard IPC types and Rust generate command)
-Stopped at: Completed 166-01-PLAN.md
-Next action: Continue Phase 166 remaining plans (166-03, 166-04, 166-05).
-Context: Dashboard IPC bridge at desktop/src/dashboard/ (types, ipc wrappers) + Rust generate_dashboard command at src-tauri/src/commands/dashboard.rs. 166-01 and 166-02 complete. 12 dashboard tests + Rust compiles.
+Last: 2026-02-14 -- Completed 166-04 (WatcherRefresh: file change events to dashboard re-renders)
+Stopped at: Completed 166-04-PLAN.md
+Next action: Continue Phase 166 remaining plan (166-05).
+Context: WatcherRefresh at desktop/src/dashboard/watcher-refresh.ts bridges native file watcher events to debounced dashboard page invalidation. 166-01, 166-02, 166-03, 166-04 complete. 444 desktop tests passing.
 
 ---
-*Last updated: 2026-02-14 (166-01 complete)*
+*Last updated: 2026-02-14 (166-04 complete)*
