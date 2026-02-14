@@ -3,10 +3,8 @@
  *
  * Shows:
  * - Active skills display with flagged skills (preserved from original)
- * - Total budget usage with visual progress bar
- * - Per-skill breakdown sorted by size
- * - SKILL.md vs reference/script breakdown for progressive disclosure skills
- * - Remaining headroom in characters
+ * - Installed Skills section with proportional percentages and mini bars
+ * - Loading Projection section with loaded/deferred breakdown
  * - Trend over time from JSONL history
  *
  * Usage:
@@ -17,15 +15,11 @@
 
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import { stat } from 'fs/promises';
-import { join } from 'path';
-import { BudgetValidator, formatProgressBar } from '../../validation/budget-validation.js';
-import { DisclosureBudget } from '../../disclosure/disclosure-budget.js';
+import { BudgetValidator } from '../../validation/budget-validation.js';
 import { BudgetHistory } from '../../storage/budget-history.js';
 import { createApplicationContext } from '../../index.js';
-import { SkillStore } from '../../storage/skill-store.js';
-import { DependencyGraph } from '../../composition/dependency-graph.js';
-import { SkillMetadata, getExtension } from '../../types/skill.js';
+import { renderInstalledSection, renderProjectionSection } from './status-display.js';
+import { getBudgetProfile } from '../../application/budget-profiles.js';
 
 const HELP_TEXT = `
 Usage: skill-creator status [options]
@@ -56,36 +50,6 @@ function hasFlag(args: string[], ...flags: string[]): boolean {
 }
 
 /**
- * Color a percentage string based on severity.
- */
-function colorBySeverity(text: string, severity: string): string {
-  switch (severity) {
-    case 'error':
-      return pc.red(text);
-    case 'warning':
-      return pc.yellow(text);
-    case 'info':
-      return pc.cyan(text);
-    default:
-      return pc.green(text);
-  }
-}
-
-/**
- * Check if a skill directory has references/ or scripts/ subdirectories.
- */
-async function hasDisclosureDirs(skillPath: string): Promise<boolean> {
-  const skillDir = skillPath.replace(/\/SKILL\.md$/, '');
-  try {
-    const refStat = await stat(join(skillDir, 'references')).catch(() => null);
-    const scriptStat = await stat(join(skillDir, 'scripts')).catch(() => null);
-    return !!(refStat?.isDirectory() || scriptStat?.isDirectory());
-  } catch {
-    return false;
-  }
-}
-
-/**
  * Enhanced status command with budget breakdown and trend.
  *
  * @param args - Command-line arguments after 'status'
@@ -107,9 +71,10 @@ export async function statusCommand(
   const historyPath = options?.historyPath ?? DEFAULT_HISTORY_PATH;
 
   try {
-    // Load budget data
+    // Load budget data with optional profile for loading projection
     const validator = BudgetValidator.load();
-    const result = await validator.checkCumulative(skillsDir);
+    const profile = getBudgetProfile('gsd-executor');
+    const result = await validator.checkCumulative(skillsDir, profile);
 
     // Load application context for active display
     const { applicator } = createApplicationContext();
@@ -169,102 +134,14 @@ export async function statusCommand(
 
     console.log('');
 
-    // Section 2: Budget overview
-    const bar = formatProgressBar(result.totalChars, result.budget);
-    const pctStr = result.usagePercent.toFixed(0);
-    const pctColored = colorBySeverity(`${pctStr}%`, result.severity);
+    // Section 2: Installed Skills (from renderInstalledSection)
+    console.log(renderInstalledSection(result));
 
-    console.log(pc.bold('Budget'));
-    console.log(`${bar} ${pctColored} (${result.totalChars.toLocaleString()} / ${result.budget.toLocaleString()} chars)`);
+    // Section 3: Loading Projection (from renderProjectionSection)
     console.log('');
+    console.log(renderProjectionSection(result));
 
-    if (result.skills.length === 0) {
-      console.log(pc.dim('No skills found.'));
-    } else {
-      // Section 3: Per-skill breakdown
-      console.log(pc.bold('Per-Skill Breakdown'));
-      console.log(pc.dim('(sorted by size, largest first)'));
-      console.log('');
-
-      const sortedSkills = [...result.skills].sort((a, b) => b.totalChars - a.totalChars);
-      const disclosure = new DisclosureBudget();
-
-      // Build dependency graph for inheritance chain display
-      let depGraph: DependencyGraph | null = null;
-      try {
-        const skillStore = new SkillStore(skillsDir);
-        const allNames = await skillStore.list();
-        const allSkills = new Map<string, SkillMetadata>();
-        for (const name of allNames) {
-          try {
-            const skill = await skillStore.read(name);
-            if (skill) {
-              allSkills.set(name, skill.metadata);
-            }
-          } catch {
-            // Skip unreadable skills
-          }
-        }
-        if (allSkills.size > 0) {
-          depGraph = DependencyGraph.fromSkills(allSkills);
-        }
-      } catch {
-        // Dependency graph is optional enhancement -- skip on error
-      }
-
-      for (const skill of sortedSkills) {
-        const pct = ((skill.totalChars / result.budget) * 100).toFixed(1);
-        const miniBar = formatProgressBar(skill.totalChars, result.budget, 10);
-
-        const skillPct = (skill.totalChars / validator.getBudget()) * 100;
-        let nameColored: string;
-        if (skillPct >= 100) {
-          nameColored = pc.red(skill.name);
-        } else if (skillPct >= 80) {
-          nameColored = pc.yellow(skill.name);
-        } else {
-          nameColored = pc.white(skill.name);
-        }
-
-        console.log(`  ${miniBar} ${nameColored} ${pc.dim(`${skill.totalChars.toLocaleString()} chars (${pct}%)`)}`);
-
-        // Show inheritance chain if skill extends another
-        if (depGraph) {
-          try {
-            const parent = depGraph.getParent(skill.name);
-            if (parent) {
-              const chain = depGraph.getInheritanceChain(skill.name);
-              console.log(pc.dim(`    extends: ${chain.join(' -> ')}`));
-            }
-          } catch {
-            // Skip chain display on error (e.g., cycle)
-          }
-        }
-
-        // Show disclosure breakdown if skill has references/ or scripts/
-        const hasDisclosure = await hasDisclosureDirs(skill.path);
-        if (hasDisclosure) {
-          try {
-            const skillDir = skill.path.replace(/\/SKILL\.md$/, '');
-            const breakdown = await disclosure.calculateBreakdown(skillDir);
-            const refChars = breakdown.references.reduce((sum, f) => sum + f.chars, 0);
-            const scriptChars = breakdown.scripts.reduce((sum, f) => sum + f.chars, 0);
-            const parts: string[] = [`SKILL.md: ${breakdown.skillMdChars.toLocaleString()}`];
-            if (refChars > 0) parts.push(`references: ${refChars.toLocaleString()}`);
-            if (scriptChars > 0) parts.push(`scripts: ${scriptChars.toLocaleString()}`);
-            console.log(pc.dim(`           ${parts.join(' | ')}`));
-          } catch {
-            // Skip disclosure breakdown on error
-          }
-        }
-      }
-    }
-
-    // Section 4: Headroom
-    console.log('');
-    console.log(`Remaining headroom: ${pc.bold(headroom.toLocaleString())} chars`);
-
-    // Section 5: Trend
+    // Section 4: Trend
     console.log('');
     if (trend) {
       const charSign = trend.charDelta >= 0 ? '+' : '';
