@@ -11,6 +11,12 @@ fn main() {
         "start_watcher",
         "stop_watcher",
         "watcher_status",
+        "pty_open",
+        "pty_write",
+        "pty_resize",
+        "pty_pause",
+        "pty_resume",
+        "pty_close",
     ]);
 
     tauri_build::try_build(
