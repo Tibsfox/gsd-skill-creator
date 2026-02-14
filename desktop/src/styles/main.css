@@ -1,9 +1,11 @@
+@import "../wm/wm.css";
+
 body {
-  background: #1a1a2e;
+  background: var(--wm-desktop-bg);
   color: #e0e0e0;
   font-family: monospace;
   margin: 0;
-  padding: 2rem;
+  overflow: hidden;
 }
 
 h1 {
@@ -11,8 +13,7 @@ h1 {
 }
 
 #app {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
+  position: fixed;
+  inset: 0;
   z-index: 1;
 }

@@ -1,0 +1,226 @@
+/* Window Manager CSS Custom Properties */
+:root {
+  /* Amiga Workbench 2.0 inspired palette */
+  --wm-bg: #aaaaaa;
+  --wm-titlebar-active: #6688bb;
+  --wm-titlebar-inactive: #aaaaaa;
+  --wm-titlebar-text: #ffffff;
+  --wm-titlebar-text-inactive: #444444;
+  --wm-border: #000000;
+  --wm-content-bg: #bbbbbb;
+  --wm-gadget-bg: #aaaaaa;
+  --wm-gadget-border: #000000;
+  --wm-gadget-hover: #88aadd;
+  --wm-icon-bg: #667788;
+  --wm-icon-text: #ffffff;
+  --wm-desktop-bg: #556677;
+  --wm-shadow: rgba(0, 0, 0, 0.4);
+}
+
+/* Window Frame */
+.wm-frame {
+  position: absolute;
+  border: 2px solid var(--wm-border);
+  background: var(--wm-content-bg);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 2px 0 var(--wm-shadow);
+  user-select: none;
+}
+
+.wm-frame--active {
+  border-color: var(--wm-border);
+  box-shadow: 3px 3px 0 var(--wm-shadow);
+}
+
+.wm-frame--inactive {
+  opacity: 0.9;
+}
+
+/* Titlebar */
+.wm-titlebar {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  background: var(--wm-titlebar-active);
+  color: var(--wm-titlebar-text);
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0 2px;
+  cursor: grab;
+  flex-shrink: 0;
+}
+
+.wm-frame--inactive .wm-titlebar {
+  background: var(--wm-titlebar-inactive);
+  color: var(--wm-titlebar-text-inactive);
+}
+
+.wm-titlebar:active {
+  cursor: grabbing;
+}
+
+/* Titlebar sections */
+.wm-titlebar__left {
+  display: flex;
+  align-items: center;
+}
+
+.wm-titlebar__center {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 4px;
+}
+
+.wm-titlebar__right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Gadget buttons (Amiga-style small squares) */
+.wm-gadget {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--wm-gadget-border);
+  background: var(--wm-gadget-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 10px;
+  line-height: 1;
+  color: var(--wm-border);
+}
+
+.wm-gadget:hover {
+  background: var(--wm-gadget-hover);
+}
+
+.wm-gadget:active {
+  border-style: inset;
+}
+
+/* Close gadget: multiplication sign */
+.wm-gadget--close::after {
+  content: "\00D7";
+}
+
+/* Depth gadget: up/down arrows (Amiga diamond pattern) */
+.wm-gadget--depth::after {
+  content: "\21C5";
+}
+
+/* Zoom gadget: expand arrows */
+.wm-gadget--zoom::after {
+  content: "\2922";
+}
+
+/* Content area */
+.wm-content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Resize handle */
+.wm-resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  cursor: nwse-resize;
+  z-index: 1;
+}
+
+.wm-resize-handle::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--wm-border);
+  border-bottom: 2px solid var(--wm-border);
+}
+
+/* Desktop icons (minimized windows) */
+.wm-desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 64px;
+  padding: 4px;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+}
+
+.wm-desktop-icon__graphic {
+  width: 32px;
+  height: 32px;
+  background: var(--wm-icon-bg);
+  border: 1px solid var(--wm-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+.wm-desktop-icon__label {
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--wm-icon-text);
+  word-break: break-all;
+}
+
+.wm-desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* App-level titlebar (custom chrome for Tauri frameless window) */
+.wm-app-titlebar {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  background: var(--wm-titlebar-active);
+  color: var(--wm-titlebar-text);
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 0 4px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  user-select: none;
+}
+
+/* Desktop area below app titlebar */
+.wm-desktop {
+  position: fixed;
+  top: 28px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+/* Icon area on desktop */
+.wm-icon-area {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1;
+}

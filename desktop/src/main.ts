@@ -1,144 +1,104 @@
-import { greet, echoCommand } from "./ipc/commands";
-import { onEchoResponse } from "./ipc/events";
-import { streamEchoData } from "./ipc/channels";
-import { runIpcBenchmark } from "./ipc/benchmark";
 import { Engine } from "./engine";
+import { WindowManager } from "./wm";
+import "./styles/main.css";
 
 async function init(): Promise<void> {
   const app = document.getElementById("app");
   if (!app) return;
 
-  app.innerHTML = `
-    <h1>GSD-OS v0.1.0 -- Tauri IPC Active</h1>
-    <section id="ipc-commands">
-      <h2>Commands (invoke/response)</h2>
-      <p id="greet-msg">Loading...</p>
-    </section>
-    <section id="ipc-events">
-      <h2>Events (emit/listen)</h2>
-      <p id="event-msg">Waiting for echo event...</p>
-    </section>
-    <section id="ipc-channels">
-      <h2>Channels (streaming)</h2>
-      <ul id="channel-log"></ul>
-    </section>
-    <section id="ipc-benchmark">
-      <h2>IPC Benchmark</h2>
-      <button id="run-benchmark">Run Benchmark</button>
-      <pre id="benchmark-results"></pre>
-    </section>
-    <section id="engine-status">
-      <h2>WebGL Engine</h2>
-      <p id="engine-mode">Initializing...</p>
-      <p id="engine-perf"></p>
-    </section>
-  `;
+  // Build DOM structure: app titlebar + desktop + icon area
+  app.innerHTML = "";
 
-  // --- Command demo: invoke greet ---
+  // App-level titlebar (Amiga-style, Tauri frameless drag)
+  const appTitlebar = document.createElement("div");
+  appTitlebar.className = "wm-app-titlebar";
+  appTitlebar.setAttribute("data-tauri-drag-region", "");
+
+  const titleLeft = document.createElement("div");
+  titleLeft.className = "wm-titlebar__left";
+
+  const appCloseBtn = document.createElement("button");
+  appCloseBtn.className = "wm-gadget wm-gadget--close";
+  appCloseBtn.id = "app-close";
+  titleLeft.appendChild(appCloseBtn);
+
+  const titleCenter = document.createElement("div");
+  titleCenter.className = "wm-titlebar__center";
+  titleCenter.setAttribute("data-tauri-drag-region", "");
+  titleCenter.textContent = "GSD-OS v0.1.0";
+
+  const titleRight = document.createElement("div");
+  titleRight.className = "wm-titlebar__right";
+
+  const appDepthBtn = document.createElement("button");
+  appDepthBtn.className = "wm-gadget wm-gadget--depth";
+  appDepthBtn.id = "app-depth";
+
+  const appZoomBtn = document.createElement("button");
+  appZoomBtn.className = "wm-gadget wm-gadget--zoom";
+  appZoomBtn.id = "app-zoom";
+
+  titleRight.appendChild(appDepthBtn);
+  titleRight.appendChild(appZoomBtn);
+
+  appTitlebar.appendChild(titleLeft);
+  appTitlebar.appendChild(titleCenter);
+  appTitlebar.appendChild(titleRight);
+
+  // Desktop area
+  const desktop = document.createElement("div");
+  desktop.className = "wm-desktop";
+  desktop.id = "desktop";
+
+  // Icon area for minimized windows
+  const iconArea = document.createElement("div");
+  iconArea.className = "wm-icon-area";
+  iconArea.id = "icon-area";
+  desktop.appendChild(iconArea);
+
+  app.appendChild(appTitlebar);
+  app.appendChild(desktop);
+
+  // Wire Tauri window controls (only in Tauri runtime)
   try {
-    const response = await greet("World");
-    const greetMsg = document.getElementById("greet-msg");
-    if (greetMsg) {
-      greetMsg.textContent = `${response.message} (ts: ${response.timestamp})`;
-    }
-  } catch (err) {
-    const greetMsg = document.getElementById("greet-msg");
-    if (greetMsg) {
-      greetMsg.textContent = `IPC error: ${err}`;
-    }
+    const { getCurrentWindow } = await import("@tauri-apps/api/window");
+    appCloseBtn.addEventListener("click", () => getCurrentWindow().close());
+    appZoomBtn.addEventListener("click", () => getCurrentWindow().toggleMaximize());
+  } catch {
+    // Not running in Tauri (dev mode or tests)
   }
 
-  // --- Event demo: listen for echo-response, then trigger it ---
-  try {
-    const unlisten = await onEchoResponse((payload) => {
-      const eventMsg = document.getElementById("event-msg");
-      if (eventMsg) {
-        eventMsg.textContent = `Echo: [${payload.status}] ${payload.detail}`;
-      }
-      // Unlisten after first event for demo
-      unlisten();
-    });
-
-    // Trigger the echo event from Rust
-    await echoCommand("Hello via event!");
-  } catch (err) {
-    const eventMsg = document.getElementById("event-msg");
-    if (eventMsg) {
-      eventMsg.textContent = `Event error: ${err}`;
-    }
-  }
-
-  // --- Channel demo: stream 5 small chunks ---
-  try {
-    const channelLog = document.getElementById("channel-log");
-    await streamEchoData(8, 5, (chunk) => {
-      if (channelLog) {
-        const li = document.createElement("li");
-        li.textContent = `Chunk ${chunk.index}: ${chunk.size} bytes`;
-        channelLog.appendChild(li);
-      }
-    });
-  } catch (err) {
-    const channelLog = document.getElementById("channel-log");
-    if (channelLog) {
-      const li = document.createElement("li");
-      li.textContent = `Channel error: ${err}`;
-      channelLog.appendChild(li);
-    }
-  }
-
-  // --- Benchmark demo: run IPC benchmark on button click ---
-  const benchmarkBtn = document.getElementById("run-benchmark");
-  const benchmarkResults = document.getElementById("benchmark-results");
-  if (benchmarkBtn && benchmarkResults) {
-    benchmarkBtn.addEventListener("click", async () => {
-      benchmarkBtn.setAttribute("disabled", "true");
-      benchmarkResults.textContent = "Running benchmark...";
-      try {
-        const report = await runIpcBenchmark();
-        console.log("=== IPC Benchmark Results ===");
-        console.table(report.command_roundtrip);
-        console.table(report.channel_throughput);
-
-        const lines = [
-          "Command Round-Trip (ms):",
-          ...Object.entries(report.command_roundtrip).map(
-            ([k, v]) => `  ${k.padEnd(6)} ${v.toFixed(2)}ms`,
-          ),
-          "",
-          "Channel Throughput (ms):",
-          ...Object.entries(report.channel_throughput).map(
-            ([k, v]) => `  ${k.padEnd(6)} ${v.toFixed(2)}ms`,
-          ),
-          "",
-          `Timestamp: ${new Date(report.timestamp).toISOString()}`,
-        ];
-        benchmarkResults.textContent = lines.join("\n");
-      } catch (err) {
-        benchmarkResults.textContent = `Benchmark error: ${err}`;
-      } finally {
-        benchmarkBtn.removeAttribute("disabled");
-      }
-    });
-  }
-
-  // --- WebGL CRT Engine ---
+  // WebGL CRT Engine -- canvas behind desktop at z-index 0
   const engine = Engine.create(document.body);
-  const engineModeEl = document.getElementById("engine-mode");
-  if (engineModeEl) {
-    engineModeEl.textContent = "Mode: " + engine.mode;
-  }
   engine.start();
 
-  // Update performance display every second
-  const enginePerfEl = document.getElementById("engine-perf");
-  setInterval(() => {
-    if (enginePerfEl) {
-      const perf = engine.getPerformance();
-      enginePerfEl.textContent =
-        "Avg: " + perf.averageMs.toFixed(2) + "ms | Budget: " + (perf.withinBudget ? "OK" : "OVER");
-    }
-  }, 1000);
+  // Window Manager
+  const wm = new WindowManager(desktop, iconArea);
+
+  // Open 3 demo windows staggered
+  const dashboard = wm.openWindow({
+    type: "dashboard",
+    title: "Dashboard",
+    bounds: { x: 20, y: 20, width: 600, height: 400 },
+  });
+  dashboard.content.innerHTML =
+    "<h2>Dashboard</h2><p>Dashboard content will render here in Phase 166</p>";
+
+  const terminal = wm.openWindow({
+    type: "terminal",
+    title: "Terminal",
+    bounds: { x: 80, y: 80, width: 640, height: 480 },
+  });
+  terminal.content.innerHTML =
+    "<h2>Terminal</h2><p>Terminal will attach here in Phase 165</p>";
+
+  const consoleWin = wm.openWindow({
+    type: "console",
+    title: "Console",
+    bounds: { x: 140, y: 140, width: 500, height: 350 },
+  });
+  consoleWin.content.innerHTML =
+    "<h2>Console</h2><p>Console will mount here in Phase 166</p>";
 }
 
 document.addEventListener("DOMContentLoaded", init);
