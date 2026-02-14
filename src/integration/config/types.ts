@@ -57,6 +57,10 @@ export interface TokenBudgetConfig {
   max_percent: number;
   /** Warning threshold as percentage (1-100, should be <= max_percent). */
   warn_at_percent: number;
+  /** Cumulative character budget override (replaces SLASH_COMMAND_TOOL_CHAR_BUDGET env var). */
+  cumulative_char_budget?: number;
+  /** Per-profile cumulative budget overrides. Keys are profile names (e.g. "executor", "planner"). */
+  profile_budgets?: Record<string, number>;
 }
 
 // ============================================================================

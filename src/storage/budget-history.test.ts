@@ -43,7 +43,12 @@ describe('BudgetHistory', () => {
       const entries = await history.read();
 
       expect(entries).toHaveLength(1);
-      expect(entries[0]).toEqual(snapshot);
+      expect(entries[0].timestamp).toBe(snapshot.timestamp);
+      expect(entries[0].totalChars).toBe(snapshot.totalChars);
+      expect(entries[0].skillCount).toBe(snapshot.skillCount);
+      // Migration adds installedTotal/loadedTotal defaulting to totalChars
+      expect(entries[0].installedTotal).toBe(snapshot.totalChars);
+      expect(entries[0].loadedTotal).toBe(snapshot.totalChars);
     });
 
     it('should append multiple snapshots and return all in order', async () => {

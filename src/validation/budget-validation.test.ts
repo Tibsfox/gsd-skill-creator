@@ -1094,7 +1094,7 @@ describe('formatBudgetDisplay with projection', () => {
       severity: 'ok' as const,
       skills: [],
       hiddenCount: 0,
-    } as CumulativeBudgetResult;
+    } as unknown as CumulativeBudgetResult;
 
     const display = formatBudgetDisplay(result);
     expect(display).toContain('Budget:');
