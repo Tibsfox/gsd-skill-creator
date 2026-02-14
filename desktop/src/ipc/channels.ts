@@ -1,9 +1,12 @@
+import { invoke, Channel } from "@tauri-apps/api/core";
 import type { ChannelChunk } from "./types";
 
 export async function streamEchoData(
-  _payloadSize: number,
-  _chunkCount: number,
-  _onChunk: (chunk: ChannelChunk) => void,
+  payloadSize: number,
+  chunkCount: number,
+  onChunk: (chunk: ChannelChunk) => void,
 ): Promise<void> {
-  throw new Error("not implemented");
+  const channel = new Channel<ChannelChunk>();
+  channel.onmessage = onChunk;
+  await invoke("echo_channel", { channel, payloadSize, chunkCount });
 }
