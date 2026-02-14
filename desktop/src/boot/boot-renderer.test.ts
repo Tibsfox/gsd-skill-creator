@@ -18,14 +18,28 @@ const TEST_PALETTE = [
   '#ecf0f1', '#d5dbdb', '#aab7b8', '#f0f0f0', // 28-31
 ];
 
-/** Trigger a requestAnimationFrame callback manually. */
+/** Trigger a requestAnimationFrame callback manually with given timestamp. */
 function triggerRAF(time: number): void {
-  // jsdom mock: requestAnimationFrame callbacks stored; we call them manually
   const callbacks = (globalThis as any).__rafCallbacks as Array<(t: number) => void> | undefined;
   if (callbacks && callbacks.length > 0) {
     const batch = [...callbacks];
     callbacks.length = 0;
     for (const cb of batch) cb(time);
+  }
+}
+
+/**
+ * Drive the animation loop through multiple frames using small incremental
+ * steps. The state machine requires per-frame deltas (it resets elapsedMs
+ * on phase transitions), so we simulate ~16ms frames up to the target time.
+ */
+function advanceToTime(targetMs: number, stepMs = 16): void {
+  let t = 0;
+  // First frame sets prevTimestamp
+  triggerRAF(t);
+  while (t < targetMs) {
+    t = Math.min(t + stepMs, targetMs);
+    triggerRAF(t);
   }
 }
 
@@ -51,7 +65,6 @@ beforeEach(() => {
     return ++rafIdCounter;
   }) as any;
   globalThis.cancelAnimationFrame = vi.fn((_id: number): void => {
-    // Clear all pending -- simplified for tests
     rafCallbacks.length = 0;
   }) as any;
 });
@@ -62,6 +75,15 @@ afterEach(() => {
   delete (globalThis as any).__rafCallbacks;
   container.remove();
 });
+
+// Cumulative timings for convenience
+const INIT_END = BOOT_TIMING.initDurationMs; // 400
+const AGNUS_END = INIT_END + CHIPSETS[0].delayMs; // 400 + 600 = 1000
+const DENISE_END = AGNUS_END + CHIPSETS[1].delayMs; // 1000 + 800 = 1800
+const PAULA_END = DENISE_END + CHIPSETS[2].delayMs; // 1800 + 700 = 2500
+const GARY_END = PAULA_END + CHIPSETS[3].delayMs; // 2500 + 500 = 3000
+const READY_END = GARY_END + BOOT_TIMING.readyDurationMs; // 3000 + 800 = 3800
+const COMPLETE_END = READY_END + BOOT_TIMING.transitionDurationMs; // 3800 + 200 = 4000
 
 // ---------------------------------------------------------------------------
 // Tests
@@ -130,10 +152,7 @@ describe('chipset animation', () => {
   it('after advancing past init phase, first chipset line (Agnus) appears', () => {
     const renderer = createBootRenderer({ container });
     renderer.start();
-    // Start time = 0
-    triggerRAF(0);
-    // Advance past init phase (400ms)
-    triggerRAF(BOOT_TIMING.initDurationMs + CHIPSETS[0].delayMs);
+    advanceToTime(AGNUS_END);
     const lines = container.querySelectorAll('.boot-chipset-line');
     expect(lines.length).toBeGreaterThanOrEqual(1);
     renderer.destroy();
@@ -142,8 +161,7 @@ describe('chipset animation', () => {
   it('Agnus line shows name "Agnus" and role "Graphics DMA"', () => {
     const renderer = createBootRenderer({ container });
     renderer.start();
-    triggerRAF(0);
-    triggerRAF(BOOT_TIMING.initDurationMs + CHIPSETS[0].delayMs);
+    advanceToTime(AGNUS_END);
     const line = container.querySelector('.boot-chipset-line');
     expect(line).not.toBeNull();
     const name = line!.querySelector('.boot-chip-name');
@@ -156,8 +174,7 @@ describe('chipset animation', () => {
   it('after Agnus initializes, status shows "OK"', () => {
     const renderer = createBootRenderer({ container });
     renderer.start();
-    triggerRAF(0);
-    triggerRAF(BOOT_TIMING.initDurationMs + CHIPSETS[0].delayMs);
+    advanceToTime(AGNUS_END);
     const status = container.querySelector('.boot-chip-status');
     expect(status).not.toBeNull();
     expect(status!.textContent).toBe('OK');
@@ -167,13 +184,9 @@ describe('chipset animation', () => {
   it('all 4 chipsets appear in order as sequence advances', () => {
     const renderer = createBootRenderer({ container });
     renderer.start();
-    triggerRAF(0);
-    // Advance through all chipsets + init
-    const totalChipsetTime = CHIPSETS.reduce((sum, c) => sum + c.delayMs, 0);
-    triggerRAF(BOOT_TIMING.initDurationMs + totalChipsetTime);
+    advanceToTime(GARY_END);
     const lines = container.querySelectorAll('.boot-chipset-line');
     expect(lines.length).toBe(4);
-    // Verify order
     const names = Array.from(lines).map(
       (l) => l.querySelector('.boot-chip-name')!.textContent,
     );
@@ -189,15 +202,14 @@ describe('progress bar', () => {
     triggerRAF(0);
 
     const fill = container.querySelector('.boot-progress-fill') as HTMLElement;
-    const initialWidth = fill.style.width;
 
     // Advance partway through init
     triggerRAF(BOOT_TIMING.initDurationMs / 2);
     const midWidth = fill.style.width;
     expect(midWidth).not.toBe('0%');
 
-    // Advance past init + first chipset
-    triggerRAF(BOOT_TIMING.initDurationMs + CHIPSETS[0].delayMs);
+    // Advance further (still incremental delta)
+    triggerRAF(BOOT_TIMING.initDurationMs);
     const laterWidth = fill.style.width;
     expect(parseFloat(laterWidth)).toBeGreaterThan(parseFloat(midWidth));
 
@@ -209,9 +221,7 @@ describe('phase transitions', () => {
   it('when phase reaches ready, boot-message shows "System Ready"', () => {
     const renderer = createBootRenderer({ container });
     renderer.start();
-    triggerRAF(0);
-    const totalChipsetTime = CHIPSETS.reduce((sum, c) => sum + c.delayMs, 0);
-    triggerRAF(BOOT_TIMING.initDurationMs + totalChipsetTime);
+    advanceToTime(GARY_END + 16); // Just past all chipsets -> ready phase
     const msg = container.querySelector('.boot-message');
     expect(msg).not.toBeNull();
     expect(msg!.textContent).toContain('System Ready');
@@ -221,14 +231,8 @@ describe('phase transitions', () => {
   it('when phase reaches complete, boot-screen gets fadeout class', () => {
     const renderer = createBootRenderer({ container });
     renderer.start();
-    triggerRAF(0);
-    const totalChipsetTime = CHIPSETS.reduce((sum, c) => sum + c.delayMs, 0);
-    // Advance past init + chipsets + ready
-    triggerRAF(
-      BOOT_TIMING.initDurationMs +
-        totalChipsetTime +
-        BOOT_TIMING.readyDurationMs,
-    );
+    // Advance past ready phase end (add margin for frame alignment)
+    advanceToTime(READY_END + 32);
     const screen = container.querySelector('.boot-screen');
     expect(screen!.classList.contains('boot-screen--fadeout')).toBe(true);
     renderer.destroy();
@@ -241,22 +245,8 @@ describe('phase transitions', () => {
       resolved = true;
     });
 
-    triggerRAF(0);
-    const totalChipsetTime = CHIPSETS.reduce((sum, c) => sum + c.delayMs, 0);
-    // Advance to complete
-    triggerRAF(
-      BOOT_TIMING.initDurationMs +
-        totalChipsetTime +
-        BOOT_TIMING.readyDurationMs,
-    );
-
-    // Trigger transition end (the renderer waits transitionDurationMs)
-    triggerRAF(
-      BOOT_TIMING.initDurationMs +
-        totalChipsetTime +
-        BOOT_TIMING.readyDurationMs +
-        BOOT_TIMING.transitionDurationMs,
-    );
+    // Advance past transition end (add margin for frame alignment)
+    advanceToTime(COMPLETE_END + 32);
 
     await promise;
     expect(resolved).toBe(true);
@@ -269,7 +259,6 @@ describe('skip handling', () => {
     renderer.start();
     triggerRAF(0);
     renderer.skip();
-    // Need a frame to apply
     triggerRAF(100);
     const screen = container.querySelector('.boot-screen');
     expect(screen!.classList.contains('boot-screen--fadeout')).toBe(true);
@@ -308,9 +297,10 @@ describe('skip handling', () => {
 
     triggerRAF(0);
     renderer.skip();
-    // Trigger frames for skip + transition
-    triggerRAF(BOOT_TIMING.transitionDurationMs);
-    triggerRAF(BOOT_TIMING.transitionDurationMs + 100);
+    // Frame to apply skip -> fadeout
+    triggerRAF(100);
+    // Frame after transition duration
+    triggerRAF(100 + BOOT_TIMING.transitionDurationMs);
 
     await promise;
     expect(resolved).toBe(true);
@@ -331,8 +321,6 @@ describe('destroy()', () => {
     renderer.start();
     triggerRAF(0);
     renderer.destroy();
-    // After destroy, clicking should not cause errors or state changes
-    // Just verify no exceptions thrown
     expect(() => {
       container.dispatchEvent(
         new MouseEvent('click', { bubbles: true }),
@@ -358,7 +346,6 @@ describe('palette colors', () => {
     const renderer = createBootRenderer({ container });
     renderer.start();
     const screen = container.querySelector('.boot-screen') as HTMLElement;
-    // Should have CSS variables set (with default values)
     expect(screen.style.getPropertyValue('--boot-bg')).not.toBe('');
     expect(screen.style.getPropertyValue('--boot-text')).not.toBe('');
     renderer.destroy();
