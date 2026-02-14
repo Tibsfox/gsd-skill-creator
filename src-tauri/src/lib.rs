@@ -44,6 +44,7 @@ pub fn run() {
             commands::claude::claude_stop,
             commands::claude::claude_list,
             commands::claude::claude_status,
+            commands::dashboard::generate_dashboard,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
