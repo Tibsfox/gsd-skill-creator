@@ -58,6 +58,27 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **52. Team-as-Chip Framework** | Amiga-inspired architecture with 4 specialized chips (Agnus, Denise, Paula, Gary), FIFO message ports, 32-bit signals (v1.13) |
 | **53. Exec Kernel** | Prioritized round-robin scheduler with 18 typed message protocols and per-team token budgets with burst mode (v1.13) |
 | **54. Pipeline Learning** | Observation-to-list compiler, Jaccard feedback engine, versioned library with best-match retrieval (v1.13) |
+| **55. Execution Capture** | Pipeline pairing tool_use/tool_result with SHA-256 content hashes for cross-session comparison (v1.14) |
+| **56. Determinism Analysis** | Three-tier classification (deterministic/semi/non) with configurable variance thresholds and cross-session stability (v1.14) |
+| **57. Promotion Pipeline** | Weighted composite scoring, script generation with dry-run validation, F1/MCC gatekeeper, drift monitoring with auto-demotion (v1.14) |
+| **58. Lineage Tracking** | Bidirectional provenance querying from observation through pattern to promotion to script across all pipeline stages (v1.14) |
+| **59. Terminal Integration** | Wetty browser-based terminal with tmux session binding, health checks, dark theme, and config-driven URLs (v1.15) |
+| **60. Unified Dev Launcher** | DevEnvironmentManager composing dashboard + terminal with single start/stop/status API (v1.15) |
+| **61. Filesystem Message Bus** | Bidirectional `.planning/console/` with Zod-validated JSON envelopes, inbox/outbox routing, and pending→acknowledged lifecycle (v1.16) |
+| **62. Upload & Configuration** | Drag-and-drop markdown ingestion, document metadata extraction, and 7-section milestone configuration form (v1.16) |
+| **63. Interactive Questions** | 5 question types (binary, choice, multi-select, text, confirmation) with timeout fallback and urgency escalation (v1.16) |
+| **64. Console Dashboard** | Live session status, hot-configurable settings, activity timeline, and clipboard fallback mode (v1.16) |
+| **65. Staging Pipeline** | 5-state filesystem pipeline (inbox/checking/attention/ready/aside) with structured metadata and trust-aware reporting (v1.17) |
+| **66. Hygiene Engine** | 11 built-in patterns detecting embedded instructions, hidden content, YAML config safety, with familiarity tiers and trust decay (v1.17) |
+| **67. Smart Intake** | Clarity assessment routing (clear/gaps/confused), resource analysis with skill cross-reference, and derived knowledge checking (v1.17) |
+| **68. Staging Queue** | 7-state machine with append-only audit log, cross-queue dependencies, pre-wiring engine, and dashboard queue panel (v1.17) |
+| **69. CSS Design System** | 6 domain colors, 4 signal colors, typography tokens (Inter + JetBrains Mono), spacing scale, and 5 status states (v1.18) |
+| **70. Gantry & Topology** | Persistent status strip with agent circles/phase fractions/budget bar, and subway-map topology with SVG bezier edges (v1.18) |
+| **71. Entity Shapes & Activity** | 6 SVG entity shapes with dual encoding, collapsible legend, activity feed with Unicode indicators and domain colors (v1.18) |
+| **72. Domain Identifiers** | Domain-prefixed encoding (F-1, B-1.api, T-1:rcp) with backward compatibility and SKILL.md metadata persistence (v1.18) |
+| **73. Budget Inventory Model** | LoadingProjection separating installed total from loadable total with tier-aware selection and profile awareness (v1.19) |
+| **74. CLI Status Redesign** | Two-section layout with proportional sizing, loading projection, color-coded budget bar, and JSON output mode (v1.19) |
+| **75. Budget Configuration** | Per-profile cumulative budgets in integration config, env var backward compat, dual-dimension history with migration (v1.19) |
 
 ## Version History
 
@@ -79,3 +100,9 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.12** | GSD Planning Docs Dashboard: markdown-to-HTML generator for `.planning/` artifacts, 5 dashboard pages with dark theme, JSON-LD structured data, Open Graph meta tags, incremental builds with SHA-256 hashing, auto-refresh with scroll preservation, GSD slash command |
 | **v1.12.1** | Live Metrics Dashboard: three-tier sample rate engine (hot/warm/cold), live session pulse, phase velocity analytics, planning quality scores, historical trends, CSS-only visualizations, 460 dashboard tests |
 | **v1.13** | Session Lifecycle & Workflow Coprocessor: message stack (push/pop/poke/drain), session management via tmux, recording/playback with 14 metrics, Pipeline List coprocessor (WAIT/MOVE/SKIP), Offload engine for script promotion, Team-as-Chip framework (Agnus/Denise/Paula/Gary), Exec kernel with prioritized scheduling, Pipeline learning from observations, 1057 tests |
+| **v1.14** | Promotion Pipeline: execution capture with SHA-256 hashes, three-tier determinism analysis, weighted promotion scoring (determinism 40%/frequency 35%/savings 25%), script generation with dry-run, F1/MCC gatekeeper, drift monitoring with auto-demotion, bidirectional lineage tracking, 3 dashboard collectors |
+| **v1.15** | Live Dashboard Terminal: Wetty terminal config with Zod validation, process management with health checks, tmux session binding with auto-detection, themed iframe panel with offline fallback, unified DevEnvironmentManager launcher |
+| **v1.16** | Dashboard Console & Milestone Ingestion: filesystem message bus with Zod-validated JSON envelopes, HTTP helper with path traversal prevention, drag-and-drop upload zone, inbox checking at lifecycle boundaries, 5 interactive question types, console dashboard page with hot-configurable settings |
+| **v1.17** | Staging Layer: 5-state filesystem pipeline (inbox/checking/attention/ready/aside), 11-pattern hygiene engine, trust-aware reporting with familiarity tiers, smart intake with clarity routing, resource analysis with skill cross-reference, derived knowledge checking with provenance chains, 7-state staging queue with audit log, queue pipelining with pre-wiring |
+| **v1.18** | Information Design System: CSS design system (6 domain colors, 4 signal colors, typography tokens), persistent gantry status strip, 6 SVG entity shapes with dual encoding, subway-map topology with bezier edges and click-to-detail, activity feed with Unicode indicators, budget gauge with threshold transitions, domain-prefixed identifiers (F-1, B-1.api, T-1:rcp) |
+| **v1.19** | Budget Display Overhaul: LoadingProjection separating installed from loadable with tier-based selection, two-section CLI status with proportional sizing and color-coded budget bar, JSON output mode, dashboard gauge with deferred tooltip and over-budget clamping, per-profile cumulative budgets in config, dual-dimension budget history with migration |

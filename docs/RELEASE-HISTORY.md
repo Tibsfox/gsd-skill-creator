@@ -1,8 +1,297 @@
 # Release History
 
-Comprehensive release notes for GSD Skill Creator across all 17 milestones.
+Comprehensive release notes for GSD Skill Creator across all 23 milestones.
 
-**Totals:** 17 milestones (v1.0-v1.13 + v1.8.1 patch) | 114 phases | 335 plans | ~150k+ LOC | 356 requirements
+**Totals:** 23 milestones (v1.0-v1.19 + v1.8.1 patch) | 151 phases | 437 plans | ~192k LOC | 548 requirements
+
+---
+
+## v1.19 — Budget Display Overhaul
+
+**Shipped:** 2026-02-14
+**Phases:** 149-151 (3 phases) | **Plans:** 7 | **Requirements:** 27
+
+Fix the budget display across CLI and dashboard by separating the installed skill inventory from loading projection, fixing percentages, and making the budget configurable.
+
+### Key Features
+
+**Budget Inventory Model (Phase 149):**
+- `LoadingProjection` type with `projectLoading()` pure function simulating BudgetStage tier-based selection
+- Tier priority ordering: critical > standard > optional, with profile awareness
+- `CumulativeBudgetResult` extended with `installedTotal` and `loadableTotal` separation
+- Skills exceeding single-skill limit flagged in projection
+- Dual-view `formatBudgetDisplay` showing both dimensions
+
+**CLI Status Redesign (Phase 150):**
+- Two-section layout: "Installed Skills" with proportional percentages and "Loading Projection" with loaded/deferred breakdown
+- Per-skill percentage uses total installed as denominator (not budget limit)
+- Over-budget scenarios show count-based summary ("3 of 14 skills fit") with no negative headroom
+- Color-coded budget bar: green (<60%), cyan (60-79%), yellow (80-99%), red (>=100%)
+- Mini progress bars per skill, relative to largest skill
+- JSON output mode (`--json`) with structured installed array and projection object
+
+**Dashboard Gauge & Budget Configuration (Phase 151):**
+- Dashboard gauge shows loading projection with deferred skills hover tooltip
+- Over-budget state renders filled bar with red outline (clamped to 100%, no overflow)
+- Threshold transitions at 80% warning and 95% critical preserved
+- Configurable per-profile cumulative budgets in integration config
+- Environment variable `SLASH_COMMAND_TOOL_CHAR_BUDGET` backward compatible as fallback
+- Dual-dimension budget history tracking installed total and loaded total separately
+- History format migration handles old single-value snapshots gracefully
+
+### Test Coverage
+
+- 284 tests across 7 test files
+
+---
+
+## v1.18 — Information Design System
+
+**Shipped:** 2026-02-14
+**Phases:** 142-148 (7 phases) | **Plans:** 15 | **Requirements:** 53
+
+Translate proven information design principles into the dashboard with a learnable visual language — shape+color encoding, persistent status gantry, topology views, and three-speed information layering.
+
+### Key Features
+
+**CSS Design System (Phase 142):**
+- 6 domain colors mapped to project facets (skill, agent, team, phase, budget, session)
+- 4 signal colors (success, warning, error, info) with accessible contrast ratios
+- Typography system: Inter for UI text, JetBrains Mono for code/data
+- Spacing tokens on a 4px grid with 5 named sizes
+- 5 status states with consistent visual treatment
+
+**Gantry Status Strip (Phase 143):**
+- Persistent strip visible on all dashboard pages
+- Agent circles showing active/idle state
+- Phase progress fraction (e.g., "3/5")
+- Budget bar with color-coded fill
+- 8-cell maximum with overflow indicator
+
+**Entity Shape System (Phase 144):**
+- 6 SVG shapes: circle (skills), rect (agents), hexagon (teams), chevron (phases), diamond (adapters), dot (events)
+- Shape+color dual encoding for accessibility
+- Collapsible legend panel with all entity types
+
+**Topology View (Phase 145):**
+- Subway-map layout with SVG rendering
+- Bezier curve edges with directional indicators
+- 12-node collapse threshold for large topologies
+- Animated pulses showing data flow
+- Click-to-detail panel for node inspection
+
+**Activity Feed (Phase 146):**
+- Unicode shape indicators matching entity type
+- Domain color coding per entry
+- 8-entry newest-first display
+- Tab toggle between activity feed and terminal view
+
+**Budget Gauge & Silicon Panel (Phase 147):**
+- Stacked bar with green/yellow/red threshold transitions
+- Diamond adapter shapes for silicon panel
+- VRAM gauge for memory-intensive operations
+- Progressive enhancement for browsers without SVG support
+
+**Domain Identifiers (Phase 148):**
+- Domain-prefixed encoding: F-1 (skill), B-1.api (agent), T-1:rcp (team)
+- Backward compatible with existing integer IDs
+- SKILL.md metadata encoding for identifier persistence
+
+### Test Coverage
+
+- 515 tests across 15 test files
+
+---
+
+## v1.17 — Staging Layer
+
+**Shipped:** 2026-02-13
+**Phases:** 134-141 (8 phases) | **Plans:** 35 | **Requirements:** 38
+
+Introduce a staging layer between human ideation and machine execution — where work is analyzed, scanned, resource-planned, and approved before entering the parallel execution queue.
+
+### Key Features
+
+**Staging Foundation (Phase 134):**
+- 5-state filesystem pipeline: inbox → checking → attention → ready → aside
+- Structured metadata per staged item (source, timestamps, state transitions)
+- `.planning/staging/` directory with state-named subdirectories
+
+**Hygiene Engine (Phase 135):**
+- 11 built-in patterns detecting embedded instructions, hidden content, and YAML config safety issues
+- Pattern categories: injection attempts, obfuscated content, unsafe configurations
+- Severity levels with configurable thresholds
+
+**Trust-Aware Reporting (Phase 136):**
+- 4 familiarity tiers: Home (your code), Neighborhood (team), Town (org), Stranger (external)
+- Trust decay over time for infrequently accessed resources
+- Critical pattern lockout preventing untrusted content from reaching execution
+
+**Smart Intake Flow (Phase 137):**
+- Three-path clarity routing: clear (fast-track), gaps (questioning), confused (research)
+- Step tracking with progress indicators
+- Crash recovery with resumable intake state
+
+**Resource Analysis (Phase 138):**
+- Vision document analyzer extracting requirements and scope
+- Skill cross-reference matching existing capabilities
+- Topology recommendation based on work complexity
+- Token budget estimation for execution planning
+
+**Derived Knowledge Checking (Phase 139):**
+- Provenance chain tracking (where did this knowledge come from?)
+- Phantom content detection (claims without supporting evidence)
+- Scope drift detection (gradual requirement expansion)
+- Copying signal detection (verbatim content from external sources)
+
+**Staging Queue (Phase 140):**
+- 7-state machine: pending → analyzing → blocked → ready → executing → done → failed
+- Append-only audit log for full traceability
+- Cross-queue dependency detection
+
+**Queue Pipelining (Phase 141):**
+- Pre-wiring engine connecting queue items to execution plans
+- Retroactive hygiene audit recommender
+- Dashboard staging queue panel with real-time status
+
+### Test Coverage
+
+- 699 tests across 35 test files
+
+---
+
+## v1.16 — Dashboard Console & Milestone Ingestion
+
+**Shipped:** 2026-02-13
+**Phases:** 128-133 (6 phases) | **Plans:** 18 | **Requirements:** 27
+
+Transform the read-only dashboard into a bidirectional control surface where users upload vision documents, configure milestone execution settings, answer structured planning questions, and adjust live settings — all via filesystem message bus.
+
+### Key Features
+
+**Filesystem Message Bus (Phase 128):**
+- `.planning/console/` directory with inbox/outbox structure
+- Zod-validated JSON envelopes with message type discrimination
+- Directional routing: browser writes to inbox, GSD reads from inbox/writes to outbox
+- Message lifecycle: pending → acknowledged with timestamps
+
+**HTTP Helper Endpoint (Phase 129):**
+- Browser→filesystem write bridge for dashboard forms
+- Path traversal prevention with subdirectory allowlist
+- JSONL audit logging of all write operations
+
+**Upload Zone & Configuration (Phase 130):**
+- Drag-and-drop markdown document ingestion
+- Document metadata extraction (title, sections, word count)
+- 7-section milestone configuration form (name, goal, constraints, priorities, etc.)
+
+**Inbox Checking (Phase 131):**
+- GSD skill checking inbox at session-start, phase-boundary, and post-verification
+- Message type dispatch routing to appropriate handlers
+
+**Question Cards (Phase 132):**
+- 5 interactive question types: binary, choice, multi-select, text, confirmation
+- Timeout fallback with sensible defaults
+- Urgency escalation for time-sensitive decisions
+
+**Console Dashboard Page (Phase 133):**
+- Live session status display
+- Hot-configurable settings panel (modify settings without restart)
+- Activity timeline showing recent operations
+- Clipboard fallback mode for environments without HTTP endpoint
+
+### Test Coverage
+
+- 275 tests across 18 test files
+
+---
+
+## v1.15 — Live Dashboard Terminal
+
+**Shipped:** 2026-02-13
+**Phases:** 123-127 (5 phases) | **Plans:** 11 | **Requirements:** 17
+
+Integrate Wetty browser-based terminal into the planning docs dashboard with session binding and unified launcher for a complete dev environment.
+
+### Key Features
+
+**Terminal Configuration (Phase 123):**
+- TerminalConfigSchema with Zod validation
+- Fields: port, base_path, auth_mode, theme, session_name
+- Wired into IntegrationConfig alongside dashboard settings
+
+**Process Management (Phase 124):**
+- Wetty spawn lifecycle with configurable options
+- HTTP health check via native fetch (no axios dependency)
+- Start/stop/status/restart API
+
+**tmux Session Binding (Phase 125):**
+- Auto-detection of existing tmux sessions
+- Compound attach-or-create command
+- Configurable session names matching GSD session naming
+
+**Dashboard Terminal Panel (Phase 126):**
+- Themed iframe with dark CSS matching dashboard
+- JavaScript offline fallback for disconnected state
+- Config-driven URL construction
+
+**Unified Launcher (Phase 127):**
+- DevEnvironmentManager composing dashboard + terminal
+- Promise.allSettled for independent service lifecycle
+- Single start/stop/status API for both services
+
+### Test Coverage
+
+- 211 tests across 11 test files
+
+---
+
+## v1.14 — Promotion Pipeline
+
+**Shipped:** 2026-02-13
+**Phases:** 115-122 (8 phases) | **Plans:** 16 | **Requirements:** 27
+
+Connect 5 isolated subsystems (Blitter, Pipeline Learning, Observation, Calibration, Pattern Detection) into an integrated promotion pipeline — from execution capture through deterministic analysis to automatic script promotion with metrics-driven gatekeeping.
+
+### Key Features
+
+**Execution Capture (Phase 115):**
+- Pipeline pairing tool_use/tool_result events
+- SHA-256 content hashes for cross-session comparison
+- Structured capture format with timestamps and metadata
+
+**Determinism Analyzer (Phase 116):**
+- Three-tier classification: deterministic, semi-deterministic, non-deterministic
+- Configurable variance thresholds per tool type
+- Cross-session comparison for stability assessment
+
+**Promotion Detector (Phase 117):**
+- Weighted composite scoring: determinism (40%), frequency (35%), token savings (25%)
+- Promotion candidate ranking with evidence trails
+
+**Script Generator (Phase 118):**
+- Tool-to-bash mapping for deterministic operations
+- Dry-run validation before script creation
+- Blitter OffloadOperation conformance for execution integration
+
+**Promotion Gatekeeper (Phase 119):**
+- F1/accuracy/MCC calibration metrics as gate criteria
+- Auditable decision trail for all promote/reject decisions
+
+**Drift Monitor & Feedback Bridge (Phase 120):**
+- Post-promotion variance monitoring
+- Automatic demotion when script behavior diverges from expected
+- Feedback bridge connecting user corrections to promotion decisions
+
+**Lineage Tracker (Phase 121):**
+- Bidirectional provenance querying
+- Full lineage from observation → pattern → promotion → script
+- Cross-stage relationship mapping
+
+**Dashboard Collectors (Phase 122):**
+- Pipeline status collector showing promotion pipeline state
+- Determinism scores visualization
+- Lineage views for exploring promotion chains
 
 ---
 
@@ -575,20 +864,26 @@ The foundational 6-step adaptive learning loop.
 ## Timeline
 
 ```
-2026-01-31  v1.0   Core Skill Management
-2026-02-04  v1.1   Semantic Conflict Detection
-2026-02-05  v1.2   Test Infrastructure
-2026-02-05  v1.3   Documentation Overhaul
-2026-02-05  v1.4   Agent Teams
-2026-02-07  v1.5   Pattern Discovery
-2026-02-07  v1.6   Cross-Domain Examples
-2026-02-08  v1.7   GSD Master Orchestration Agent
-2026-02-08  v1.8   Capability-Aware Planning + Token Efficiency
-2026-02-11  v1.8.1 Audit Remediation (Patch)
-2026-02-12  v1.9   Ecosystem Alignment & Advanced Orchestration
-2026-02-12  v1.10  Security Hardening
-2026-02-12  v1.11  GSD Integration Layer
-2026-02-12  v1.12  GSD Planning Docs Dashboard
+2026-01-31  v1.0    Core Skill Management
+2026-02-04  v1.1    Semantic Conflict Detection
+2026-02-05  v1.2    Test Infrastructure
+2026-02-05  v1.3    Documentation Overhaul
+2026-02-05  v1.4    Agent Teams
+2026-02-07  v1.5    Pattern Discovery
+2026-02-07  v1.6    Cross-Domain Examples
+2026-02-08  v1.7    GSD Master Orchestration Agent
+2026-02-08  v1.8    Capability-Aware Planning + Token Efficiency
+2026-02-11  v1.8.1  Audit Remediation (Patch)
+2026-02-12  v1.9    Ecosystem Alignment & Advanced Orchestration
+2026-02-12  v1.10   Security Hardening
+2026-02-12  v1.11   GSD Integration Layer
+2026-02-12  v1.12   GSD Planning Docs Dashboard
 2026-02-12  v1.12.1 Live Metrics Dashboard
-2026-02-12  v1.13  Session Lifecycle & Workflow Coprocessor
+2026-02-12  v1.13   Session Lifecycle & Workflow Coprocessor
+2026-02-13  v1.14   Promotion Pipeline
+2026-02-13  v1.15   Live Dashboard Terminal
+2026-02-13  v1.16   Dashboard Console & Milestone Ingestion
+2026-02-13  v1.17   Staging Layer
+2026-02-14  v1.18   Information Design System
+2026-02-14  v1.19   Budget Display Overhaul
 ```
