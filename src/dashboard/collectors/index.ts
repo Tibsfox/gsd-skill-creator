@@ -11,6 +11,9 @@
 export { collectGitMetrics } from './git-collector.js';
 export { collectSessionMetrics } from './session-collector.js';
 export { collectPlanningMetrics } from './planning-collector.js';
+export { collectTopologyData } from './topology-collector.js';
+export { collectStagingQueue } from './staging-collector.js';
+export { collectActivityFeed } from './activity-collector.js';
 
 // Pipeline collectors
 export { PipelineStatusCollector } from './pipeline-status.js';
@@ -27,6 +30,10 @@ export type {
   SessionCollectorOptions,
   PlanningCollectorResult,
   PlanningCollectorOptions,
+  TopologyCollectorOptions,
+  StagingCollectorOptions,
+  ActivityCollectorOptions,
+  StagingCollectorResult,
   CollectorOptions,
 } from './types.js';
 
