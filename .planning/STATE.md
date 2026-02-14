@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.18 — Information Design System
-Phase: 142 — Design System Foundation (in progress)
-Plan: 02 complete, 03 next
-Status: Executing phase 142 — 2 of 4 plans complete
-Last activity: 2026-02-14 — 142-02 typography system complete
+Phase: 143 — Gantry Status Strip (complete)
+Plan: 02 complete (all plans done)
+Status: Phase 143 complete — 2 of 2 plans complete
+Last activity: 2026-02-14 — 143-02 gantry data pipeline and generator integration complete
 
 ## Project Reference
 
@@ -223,9 +223,27 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 - Renderer test updated to allow font import URLs (strip Google Fonts @import before checking for external URLs)
 - Weight hierarchy uses font-weight only (no font-size) so primary/secondary differ by boldness at same size
 - Case discipline: .case-label is defensive text-transform:none; .case-interrupt is uppercase with letter-spacing
+- Gantry cell ordering: status, agent, phase, budget (importance hierarchy)
+- Active status keywords: executing, active, running, building (case-insensitive matching)
+- Budget color thresholds: green <80%, orange 80-95%, red >95%
+- Post-render gantry injection via html.replace('</header>') pattern (same as refresh script)
+- Token metric detection via keyword matching on metric keys (token, budget, context)
+- 24x24 viewBox for all entity SVG shapes with configurable render size (default 16px)
+- Domain color CSS custom properties (--domain-*) with hex fallbacks for standalone rendering
+- Self-closing SVG shape elements with inline fill attribute for domain color
+- CSS-only <details>/<summary> for legend collapsibility (no JS, REQ-TC-01)
+- Shipped milestones get green fill (#3fb950) via inline style override; in-progress use infrastructure purple
+- Panel header shapes at size 14 for compact headers
+- Budget gauge scan-label hidden via opacity:0 with CSS-only hover reveal (no JS)
+- Budget gauge headroom uses opacity:0.3 on --text-dim for subtle gray fill
+- Budget gauge min-width:2px on segments prevents invisible slivers at very small percentages
+- Silicon panel progressive enhancement gate: null=empty string, false=disabled msg, true=full panel
+- Silicon panel STATE_STYLES constant maps all 5 adapter states to CSS class + diamond color
+- Silicon panel uses Unicode U+25C6 (black diamond) for adapter indicator shape
+- Test helper 'enabled' in overrides check instead of ?? to handle null correctly (nullish coalescing treats null as nullish)
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
 - Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, question-responder, check-inbox integration tests)
@@ -261,10 +279,10 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 
 ## Session Continuity
 
-Last: 2026-02-14 — 142-02 typography system complete
-Stopped at: Completed 142-02-PLAN.md (typography system with fonts, weights, case discipline)
-Next action: Execute 142-03-PLAN.md
-Context: Design system foundation in progress. 142-01 (colors/spacing/status) and 142-02 (typography) complete. 750 dashboard tests passing.
+Last: 2026-02-14 — 143-02 gantry data pipeline and generator integration complete
+Stopped at: Completed phase 143 (both 143-01 and 143-02 plans)
+Next action: Continue with next phase in v1.18 roadmap
+Context: Phase 143 complete. Gantry panel (pure render), gantry data pipeline (STATE.md/ROADMAP.md derivation), and generator integration all implemented. 1002 dashboard tests passing.
 
 ---
-*Last updated: 2026-02-14 (142-02 complete)*
+*Last updated: 2026-02-14 (143-02 complete)*
