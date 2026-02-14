@@ -1,7 +1,10 @@
+import { listen } from "@tauri-apps/api/event";
 import type { EchoPayload } from "./types";
 
 export async function onEchoResponse(
-  _callback: (payload: EchoPayload) => void,
+  callback: (payload: EchoPayload) => void,
 ): Promise<() => void> {
-  throw new Error("not implemented");
+  return listen<EchoPayload>("echo-response", (event) => {
+    callback(event.payload);
+  });
 }
