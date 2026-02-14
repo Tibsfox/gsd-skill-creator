@@ -2,18 +2,18 @@
 
 ## Current Position
 
-Milestone: v1.17 — Staging Layer (SHIPPED)
-Phase: 141 — Queue Pipelining and Dashboard (complete)
-Plan: 141-04 complete
-Status: Milestone v1.17 complete — all 8 phases, 35 plans shipped
-Last activity: 2026-02-13 — Milestone v1.17 archived
+Milestone: v1.18 — Information Design System
+Phase: 142 — Design System Foundation (planned)
+Plan: (none started)
+Status: Milestone v1.18 initialized — 7 phases, 15 plans planned
+Last activity: 2026-02-13 — Milestone v1.18 created from information design guide
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns so they work correctly when loaded by Claude Code
-**Current focus:** Planning next milestone
+**Current focus:** v1.18 Information Design System — design system, gantry, shape/color, topology, activity feed, budget gauge, identifier encoding
 
 ## Accumulated Context
 
