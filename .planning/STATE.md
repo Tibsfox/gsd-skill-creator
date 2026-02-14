@@ -109,9 +109,11 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - Calibration module at desktop/src/calibration/ (user-style, css-bridge, wizard-state, screen-color-picker, screen-crt-settings, screen-theme-mode, wizard, index)
 - CalibrationWizard composes 3 screens via state machine; first-boot gate in main.ts blocks desktop until calibration
 - Wizard clears container innerHTML between screens (simpler than DOM diffing)
-- Boot module at desktop/src/boot/ (types, chipset, desktop-background)
+- Boot module at desktop/src/boot/ (types, chipset, desktop-background, boot-renderer)
 - Chipset delay subtraction model: subtract each chipset's delay from elapsed time, allowing multi-chipset advancement in a single frame
 - Boot progress distribution: init 0-10%, chipset 10-75%, ready 75-100%
+- Boot renderer uses incremental delta timing (not total elapsed) because state machine resets elapsedMs on phase transitions
+- Boot renderer palette via CSS custom properties on boot-screen element (--boot-bg, --boot-text, --boot-accent, --boot-ok, --boot-progress)
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -175,13 +177,14 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 168-02 duration | 1min |
 | 167-04 duration | 4min |
 | 168-01 duration | 3min |
+| 168-03 duration | 5min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Completed 168-02 (desktop background manager with copper list mode switching)
-Stopped at: Completed 168-02-PLAN.md
-Next action: Continue Phase 168 remaining plans (168-03, 168-04).
-Context: Desktop background manager at desktop/src/boot/desktop-background.ts with gradient/flat/disabled modes via engine copper list API. Boot module at desktop/src/boot/. 531 desktop tests passing (10 new + 521 existing).
+Last: 2026-02-14 -- Completed 168-03 (boot renderer with chipset animation and skip handling)
+Stopped at: Completed 168-03-PLAN.md
+Next action: Continue Phase 168 remaining plan (168-04).
+Context: Boot renderer at desktop/src/boot/boot-renderer.ts with fullscreen overlay, chipset animation, progress bar, skip handling, palette theming. 614 desktop tests passing (22 new + 592 existing).
 
 ---
-*Last updated: 2026-02-14 (168-02 complete)*
+*Last updated: 2026-02-14 (168-03 complete)*
