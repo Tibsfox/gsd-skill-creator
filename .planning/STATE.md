@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.20 — Dashboard Assembly
-Phase: 154 — Activity Feed Pipeline (in progress)
-Plan: 02 complete
-Status: Executing phase 154
-Last activity: 2026-02-14 — Completed 154-02 (activity feed generator wiring)
+Phase: 157 — Console Page Assembly (in progress)
+Plan: 01 complete
+Status: Executing phase 157
+Last activity: 2026-02-14 — Completed 157-01 (console page data collector)
 
 ## Project Reference
 
@@ -301,9 +301,13 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 milestone start)
 - Staging queue collector called with basePath=join(planningDir, '..') because collector reads from basePath/.planning/staging/queue-state.json
 - stagingQueueHtml placed after activity feed, before metrics in right column
 - Mock collectStagingQueue in generator tests (temp dir path structure incompatible with collector's basePath convention)
+- Promise.all for parallel independent collection in console collector (status, questions, config, activity)
+- QuestionPoller reuse for question collection in console collector (basePath passed through)
+- MilestoneConfigSchema.safeParse for config validation in console collector (returns null on failure)
+- Line-by-line bridge.jsonl parsing with per-line try/catch for resilience in console collector
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle, topology-renderer, topology-data, topology-integration, budget-silicon-collector)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle, topology-renderer, topology-data, topology-integration, budget-silicon-collector, console-collector)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
 - Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, question-responder, check-inbox integration tests)
@@ -340,10 +344,10 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 milestone start)
 
 ## Session Continuity
 
-Last: 2026-02-14 — Completed 156-02 (staging queue generator wiring)
-Stopped at: Completed 156-02-PLAN.md
-Next action: Continue remaining v1.20 parallel phases (153-156)
-Context: Phase 156 plan 02 complete (staging queue collector and panel wired into generator pipeline). Phases 153-156 can run in parallel.
+Last: 2026-02-14 — Completed 157-01 (console page data collector)
+Stopped at: Completed 157-01-PLAN.md
+Next action: Continue with 157-02 (console page generator wiring)
+Context: Phase 157 plan 01 complete (console page data collector). collectConsoleData() gathers all data for renderConsolePage() from .planning/console/ tree.
 
 ---
-*Last updated: 2026-02-14 (completed 156-02)*
+*Last updated: 2026-02-14 (completed 157-01)*
