@@ -1,0 +1,86 @@
+/* Dashboard Host -- navigation and content area inside GSD-OS window */
+
+.dash-host-nav {
+  display: flex;
+  gap: 0;
+  background: var(--surface, #161b22);
+  border-bottom: 1px solid var(--border, #30363d);
+  padding: 0;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.dash-host-nav__link {
+  padding: 6px 14px;
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  color: var(--text-muted, #8b949e);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  user-select: none;
+}
+
+.dash-host-nav__link:hover {
+  color: var(--text, #e6edf3);
+  background: var(--surface-raised, #1c2128);
+}
+
+.dash-host-nav__link[data-active="true"] {
+  color: var(--accent, #58a6ff);
+  border-bottom-color: var(--accent, #58a6ff);
+}
+
+.dash-host-content {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+  background: var(--bg, #0d1117);
+  color: var(--text, #e6edf3);
+  font-family: var(--font-sans, system-ui, sans-serif);
+}
+
+/* Override dashboard page styles for embedded context */
+.dash-host-content .page-wrapper {
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.dash-host-content header {
+  display: none; /* Hide the standalone dashboard header -- we have the window chrome */
+}
+
+.dash-host-content .sidebar {
+  display: none; /* Hide the standalone sidebar nav -- we have dash-host-nav */
+}
+
+.dash-host-content main {
+  padding: 0;
+  max-width: 100%;
+}
+
+/* Loading indicator */
+.dash-host-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted, #8b949e);
+  font-family: var(--font-mono, monospace);
+  font-size: 14px;
+}
+
+/* Error state */
+.dash-host-error {
+  padding: 16px;
+  color: var(--red, #f85149);
+  background: var(--red-muted, #f8514926);
+  border: 1px solid var(--red, #f85149);
+  border-radius: var(--radius-md, 6px);
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  margin: 16px;
+}
