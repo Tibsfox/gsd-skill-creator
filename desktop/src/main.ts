@@ -1,6 +1,7 @@
 import { greet, echoCommand } from "./ipc/commands";
 import { onEchoResponse } from "./ipc/events";
 import { streamEchoData } from "./ipc/channels";
+import { runIpcBenchmark } from "./ipc/benchmark";
 
 async function init(): Promise<void> {
   const app = document.getElementById("app");
@@ -19,6 +20,11 @@ async function init(): Promise<void> {
     <section id="ipc-channels">
       <h2>Channels (streaming)</h2>
       <ul id="channel-log"></ul>
+    </section>
+    <section id="ipc-benchmark">
+      <h2>IPC Benchmark</h2>
+      <button id="run-benchmark">Run Benchmark</button>
+      <pre id="benchmark-results"></pre>
     </section>
   `;
 
@@ -73,6 +79,41 @@ async function init(): Promise<void> {
       li.textContent = `Channel error: ${err}`;
       channelLog.appendChild(li);
     }
+  }
+
+  // --- Benchmark demo: run IPC benchmark on button click ---
+  const benchmarkBtn = document.getElementById("run-benchmark");
+  const benchmarkResults = document.getElementById("benchmark-results");
+  if (benchmarkBtn && benchmarkResults) {
+    benchmarkBtn.addEventListener("click", async () => {
+      benchmarkBtn.setAttribute("disabled", "true");
+      benchmarkResults.textContent = "Running benchmark...";
+      try {
+        const report = await runIpcBenchmark();
+        console.log("=== IPC Benchmark Results ===");
+        console.table(report.command_roundtrip);
+        console.table(report.channel_throughput);
+
+        const lines = [
+          "Command Round-Trip (ms):",
+          ...Object.entries(report.command_roundtrip).map(
+            ([k, v]) => `  ${k.padEnd(6)} ${v.toFixed(2)}ms`,
+          ),
+          "",
+          "Channel Throughput (ms):",
+          ...Object.entries(report.channel_throughput).map(
+            ([k, v]) => `  ${k.padEnd(6)} ${v.toFixed(2)}ms`,
+          ),
+          "",
+          `Timestamp: ${new Date(report.timestamp).toISOString()}`,
+        ];
+        benchmarkResults.textContent = lines.join("\n");
+      } catch (err) {
+        benchmarkResults.textContent = `Benchmark error: ${err}`;
+      } finally {
+        benchmarkBtn.removeAttribute("disabled");
+      }
+    });
   }
 }
 
