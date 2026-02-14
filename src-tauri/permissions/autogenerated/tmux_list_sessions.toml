@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-tmux-list-sessions"
+description = "Enables the tmux_list_sessions command without any pre-configured scope."
+commands.allow = ["tmux_list_sessions"]
+
+[[permission]]
+identifier = "deny-tmux-list-sessions"
+description = "Denies the tmux_list_sessions command without any pre-configured scope."
+commands.deny = ["tmux_list_sessions"]
