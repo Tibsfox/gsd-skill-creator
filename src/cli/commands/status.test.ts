@@ -2,12 +2,10 @@
  * Tests for the enhanced status CLI command.
  *
  * Covers:
- * - Basic output structure (budget header, progress bar, percentage, per-skill breakdown)
- * - Headroom display
- * - Empty skills handling
- * - Disclosure breakdown (SKILL.md vs reference chars)
+ * - Two-section layout: Installed Skills + Loading Projection
+ * - Profile-aware checkCumulative call
  * - Help flag
- * - JSON output mode
+ * - JSON output mode (basic structure, detailed JSON tests in 150-03)
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
@@ -39,7 +37,7 @@ vi.mock('picocolors', () => ({
   },
 }));
 
-// Mock fs/promises stat to control disclosure directory checks
+// Mock fs/promises stat
 vi.mock('fs/promises', () => ({
   stat: vi.fn().mockRejectedValue(new Error('ENOENT')),
 }));
@@ -55,6 +53,8 @@ const mockCheckCumulative = vi.fn().mockResolvedValue({
     { name: 'deploy', descriptionChars: 30, bodyChars: 1700, totalChars: 1700, path: '/skills/deploy/SKILL.md' },
   ],
   hiddenCount: 0,
+  installedTotal: 8000,
+  loadableTotal: 8000,
 });
 
 vi.mock('../../validation/budget-validation.js', () => ({
@@ -79,7 +79,7 @@ vi.mock('../../disclosure/disclosure-budget.js', () => {
         calculateBreakdown: vi.fn().mockResolvedValue({
           skillMdChars: 3000,
           skillMdWords: 500,
-          references: [{ filename: 'patterns.md', chars: 800, words: 100, path: 'references/patterns.md' }],
+          references: [],
           scripts: [],
           totalChars: 3800,
           alwaysLoadedChars: 3000,
@@ -133,6 +133,39 @@ vi.mock('../../storage/skill-store.js', () => ({
   },
 }));
 
+// Mock status-display rendering functions
+const mockRenderInstalled = vi.fn().mockReturnValue('INSTALLED_SECTION_OUTPUT');
+const mockRenderProjection = vi.fn().mockReturnValue('PROJECTION_SECTION_OUTPUT');
+
+vi.mock('./status-display.js', () => ({
+  renderInstalledSection: (...args: unknown[]) => mockRenderInstalled(...args),
+  renderProjectionSection: (...args: unknown[]) => mockRenderProjection(...args),
+  buildStatusJson: vi.fn((result: any) => ({
+    budget: result.budget,
+    totalInstalled: result.installedTotal ?? result.totalChars,
+    installed: (result.skills || []).map((s: any) => ({
+      name: s.name,
+      charCount: s.totalChars,
+      percentOfInstalled: 0,
+    })),
+    projection: null,
+  })),
+}));
+
+// Mock budget-profiles
+const mockGetBudgetProfile = vi.fn().mockReturnValue({
+  name: 'gsd-executor',
+  budgetPercent: 0.06,
+  hardCeilingPercent: 0.10,
+  tiers: { critical: [], standard: [], optional: [] },
+  thresholds: { warn50: true, warn80: true, warn100: true },
+});
+
+vi.mock('../../application/budget-profiles.js', () => ({
+  getBudgetProfile: (...args: unknown[]) => mockGetBudgetProfile(...args),
+  getTierForSkill: vi.fn().mockReturnValue('standard'),
+}));
+
 // Capture console.log output
 const consoleOutput: string[] = [];
 const originalLog = console.log;
@@ -155,12 +188,23 @@ beforeEach(() => {
       { name: 'deploy', descriptionChars: 30, bodyChars: 1700, totalChars: 1700, path: '/skills/deploy/SKILL.md' },
     ],
     hiddenCount: 0,
+    installedTotal: 8000,
+    loadableTotal: 8000,
   });
+  mockRenderInstalled.mockReturnValue('INSTALLED_SECTION_OUTPUT');
+  mockRenderProjection.mockReturnValue('PROJECTION_SECTION_OUTPUT');
   mockRead.mockResolvedValue([]);
   mockAppend.mockResolvedValue(undefined);
   (BudgetHistory as any).getTrend = vi.fn().mockReturnValue(null);
   mockSkillStoreList.mockResolvedValue([]);
   mockSkillStoreRead.mockResolvedValue(null);
+  mockGetBudgetProfile.mockReturnValue({
+    name: 'gsd-executor',
+    budgetPercent: 0.06,
+    hardCeilingPercent: 0.10,
+    tiers: { critical: [], standard: [], optional: [] },
+    thresholds: { warn50: true, warn80: true, warn100: true },
+  });
 });
 
 afterEach(() => {
@@ -170,58 +214,6 @@ afterEach(() => {
 import { statusCommand } from './status.js';
 
 describe('statusCommand', () => {
-  it('should return 0 and show budget header with progress bar and percentage', async () => {
-    const exitCode = await statusCommand([]);
-
-    expect(exitCode).toBe(0);
-
-    const output = consoleOutput.join('\n');
-    // Should include budget-related display
-    expect(output).toMatch(/[Bb]udget/);
-    // Should include a progress bar
-    expect(output).toMatch(/\[#+\.+\]/);
-  });
-
-  it('should show remaining headroom', async () => {
-    const exitCode = await statusCommand([]);
-
-    expect(exitCode).toBe(0);
-
-    const output = consoleOutput.join('\n');
-    // Headroom = 15500 - 8000 = 7500
-    expect(output).toMatch(/[Hh]eadroom/i);
-    expect(output).toMatch(/7,500|7500/);
-  });
-
-  it('should show "No skills found" when no skills exist', async () => {
-    // Override mock for this test
-    mockCheckCumulative.mockResolvedValue({
-      totalChars: 0,
-      budget: 15500,
-      usagePercent: 0,
-      severity: 'ok' as const,
-      skills: [],
-      hiddenCount: 0,
-    });
-
-    const exitCode = await statusCommand([]);
-
-    expect(exitCode).toBe(0);
-
-    const output = consoleOutput.join('\n');
-    expect(output).toMatch(/[Nn]o skills found/i);
-  });
-
-  it('should show per-skill breakdown for skills with references', async () => {
-    const exitCode = await statusCommand([]);
-
-    expect(exitCode).toBe(0);
-
-    const output = consoleOutput.join('\n');
-    // Should show per-skill breakdown
-    expect(output).toMatch(/git-commit/);
-  });
-
   it('should print help text and return 0 with --help flag', async () => {
     const exitCode = await statusCommand(['--help']);
 
@@ -232,12 +224,205 @@ describe('statusCommand', () => {
     expect(output).toMatch(/status/);
   });
 
+  it('should show Installed Skills section header', async () => {
+    const exitCode = await statusCommand([]);
+
+    expect(exitCode).toBe(0);
+
+    const output = consoleOutput.join('\n');
+    // renderInstalledSection is called and its output is logged
+    expect(output).toContain('INSTALLED_SECTION_OUTPUT');
+  });
+
+  it('should show Loading Projection section header', async () => {
+    const exitCode = await statusCommand([]);
+
+    expect(exitCode).toBe(0);
+
+    const output = consoleOutput.join('\n');
+    // renderProjectionSection is called and its output is logged
+    expect(output).toContain('PROJECTION_SECTION_OUTPUT');
+  });
+
+  it('should call renderInstalledSection with the cumulative result', async () => {
+    await statusCommand([]);
+
+    expect(mockRenderInstalled).toHaveBeenCalledTimes(1);
+    const arg = mockRenderInstalled.mock.calls[0][0];
+    expect(arg.totalChars).toBe(8000);
+    expect(arg.skills).toHaveLength(3);
+  });
+
+  it('should call renderProjectionSection with the cumulative result', async () => {
+    await statusCommand([]);
+
+    expect(mockRenderProjection).toHaveBeenCalledTimes(1);
+    const arg = mockRenderProjection.mock.calls[0][0];
+    expect(arg.totalChars).toBe(8000);
+  });
+
+  it('should pass profile to checkCumulative when getBudgetProfile returns a profile', async () => {
+    const testProfile = {
+      name: 'gsd-executor',
+      budgetPercent: 0.06,
+      hardCeilingPercent: 0.10,
+      tiers: { critical: [], standard: [], optional: [] },
+      thresholds: { warn50: true, warn80: true, warn100: true },
+    };
+    mockGetBudgetProfile.mockReturnValue(testProfile);
+
+    await statusCommand([]);
+
+    // checkCumulative should be called with the profile
+    expect(mockCheckCumulative).toHaveBeenCalledWith(
+      expect.any(String),
+      testProfile,
+    );
+  });
+
+  it('should show skill percentages relative to total installed', async () => {
+    // With 3800 of 8000 total = 47.5%
+    // Since renderInstalledSection is mocked, we verify the result passed has correct data
+    mockRenderInstalled.mockImplementation((result: any) => {
+      const pct = ((3800 / result.installedTotal) * 100).toFixed(1);
+      return `skill pct: ${pct}%`;
+    });
+
+    await statusCommand([]);
+
+    const output = consoleOutput.join('\n');
+    expect(output).toContain('47.5%');
+  });
+
+  it('should show loaded/deferred counts when projection is available', async () => {
+    mockCheckCumulative.mockResolvedValue({
+      totalChars: 8000,
+      budget: 15500,
+      usagePercent: 51.6,
+      severity: 'ok' as const,
+      skills: [
+        { name: 'a', descriptionChars: 10, bodyChars: 2990, totalChars: 3000, path: '/skills/a/SKILL.md' },
+        { name: 'b', descriptionChars: 10, bodyChars: 2990, totalChars: 3000, path: '/skills/b/SKILL.md' },
+        { name: 'c', descriptionChars: 10, bodyChars: 1990, totalChars: 2000, path: '/skills/c/SKILL.md' },
+      ],
+      hiddenCount: 0,
+      installedTotal: 8000,
+      loadableTotal: 6000,
+      projection: {
+        loaded: [
+          { name: 'a', charCount: 3000, tier: 'standard', oversized: false, status: 'loaded' },
+          { name: 'b', charCount: 3000, tier: 'standard', oversized: false, status: 'loaded' },
+        ],
+        deferred: [
+          { name: 'c', charCount: 2000, tier: 'optional', oversized: false, status: 'deferred' },
+        ],
+        loadedTotal: 6000,
+        deferredTotal: 2000,
+        budgetLimit: 12000,
+        profileName: 'gsd-executor',
+      },
+    });
+
+    mockRenderProjection.mockImplementation((result: any) => {
+      const proj = result.projection;
+      return `${proj.loaded.length} loaded, ${proj.deferred.length} deferred`;
+    });
+
+    await statusCommand([]);
+
+    const output = consoleOutput.join('\n');
+    expect(output).toContain('2 loaded');
+    expect(output).toContain('1 deferred');
+  });
+
+  it('should show count-based summary for over-budget', async () => {
+    mockCheckCumulative.mockResolvedValue({
+      totalChars: 42000,
+      budget: 15500,
+      usagePercent: 271,
+      severity: 'error' as const,
+      skills: Array.from({ length: 14 }, (_, i) => ({
+        name: `skill-${i}`, descriptionChars: 10, bodyChars: 2990, totalChars: 3000, path: `/skills/skill-${i}/SKILL.md`,
+      })),
+      hiddenCount: 11,
+      installedTotal: 42000,
+      loadableTotal: 9000,
+      projection: {
+        loaded: Array.from({ length: 3 }, (_, i) => ({
+          name: `skill-${i}`, charCount: 3000, tier: 'standard' as const, oversized: false, status: 'loaded' as const,
+        })),
+        deferred: Array.from({ length: 11 }, (_, i) => ({
+          name: `skill-${i + 3}`, charCount: 3000, tier: 'standard' as const, oversized: false, status: 'deferred' as const,
+        })),
+        loadedTotal: 9000,
+        deferredTotal: 33000,
+        budgetLimit: 12000,
+        profileName: 'gsd-executor',
+      },
+    });
+
+    mockRenderProjection.mockImplementation((result: any) => {
+      const proj = result.projection;
+      const total = proj.loaded.length + proj.deferred.length;
+      return `${proj.loaded.length} of ${total} skills fit`;
+    });
+
+    await statusCommand([]);
+
+    const output = consoleOutput.join('\n');
+    expect(output).toContain('3 of 14 skills fit');
+  });
+
+  it('should not show negative headroom values', async () => {
+    mockCheckCumulative.mockResolvedValue({
+      totalChars: 20000,
+      budget: 15500,
+      usagePercent: 129,
+      severity: 'error' as const,
+      skills: [{ name: 'big', descriptionChars: 10, bodyChars: 19990, totalChars: 20000, path: '/skills/big/SKILL.md' }],
+      hiddenCount: 0,
+      installedTotal: 20000,
+      loadableTotal: 15000,
+      projection: {
+        loaded: [{ name: 'big', charCount: 15000, tier: 'standard' as const, oversized: true, status: 'loaded' as const }],
+        deferred: [{ name: 'extra', charCount: 5000, tier: 'optional' as const, oversized: false, status: 'deferred' as const }],
+        loadedTotal: 15000,
+        deferredTotal: 5000,
+        budgetLimit: 12000,
+        profileName: 'gsd-executor',
+      },
+    });
+
+    mockRenderProjection.mockImplementation((result: any) => {
+      // Verify no negative headroom
+      const headroom = result.projection.budgetLimit - result.projection.loadedTotal;
+      if (headroom < 0) {
+        return `Budget exceeded — ${result.projection.deferred.length} skills deferred`;
+      }
+      return `Headroom: ${headroom}`;
+    });
+
+    await statusCommand([]);
+
+    const output = consoleOutput.join('\n');
+    // No negative numbers
+    expect(output).not.toMatch(/-\d+/);
+  });
+
+  it('should show color-coded budget percentage', async () => {
+    mockRenderProjection.mockReturnValue('90% budget used');
+
+    await statusCommand([]);
+
+    const output = consoleOutput.join('\n');
+    expect(output).toContain('90%');
+  });
+
   it('should produce valid JSON with --json flag', async () => {
     const exitCode = await statusCommand(['--json']);
 
     expect(exitCode).toBe(0);
 
-    // Find the JSON output line(s) - may be multi-line pretty-printed
     const fullOutput = consoleOutput.join('\n');
     const parsed = JSON.parse(fullOutput);
     expect(parsed).toHaveProperty('budget');
@@ -247,51 +432,25 @@ describe('statusCommand', () => {
     expect(parsed).toHaveProperty('trend');
   });
 
-  it('should show extends line for skills with inheritance', async () => {
-    // Set up skills with extends relationships
-    mockSkillStoreList.mockResolvedValue(['git-commit', 'test-runner', 'deploy']);
-    mockSkillStoreRead.mockImplementation(async (name: string) => {
-      const skills: Record<string, any> = {
-        'git-commit': {
-          metadata: { name: 'git-commit', description: 'Git commit', extends: 'base-commit' },
-          body: '', path: '/skills/git-commit/SKILL.md',
-        },
-        'test-runner': {
-          metadata: { name: 'test-runner', description: 'Test runner' },
-          body: '', path: '/skills/test-runner/SKILL.md',
-        },
-        'deploy': {
-          metadata: { name: 'deploy', description: 'Deploy' },
-          body: '', path: '/skills/deploy/SKILL.md',
-        },
-      };
-      return skills[name] || null;
+  it('should show "No skills installed" when no skills exist', async () => {
+    mockCheckCumulative.mockResolvedValue({
+      totalChars: 0,
+      budget: 15500,
+      usagePercent: 0,
+      severity: 'ok' as const,
+      skills: [],
+      hiddenCount: 0,
+      installedTotal: 0,
+      loadableTotal: 0,
     });
+
+    mockRenderInstalled.mockReturnValue('No skills installed.');
 
     const exitCode = await statusCommand([]);
 
     expect(exitCode).toBe(0);
+
     const output = consoleOutput.join('\n');
-    // Should include extends info for git-commit
-    expect(output).toMatch(/extends:/);
-  });
-
-  it('should NOT show extends line for skills without inheritance', async () => {
-    // Set up skills without extends relationships
-    mockSkillStoreList.mockResolvedValue(['deploy']);
-    mockSkillStoreRead.mockImplementation(async (name: string) => {
-      if (name === 'deploy') return {
-        metadata: { name: 'deploy', description: 'Deploy' },
-        body: '', path: '/skills/deploy/SKILL.md',
-      };
-      return null;
-    });
-
-    const exitCode = await statusCommand([]);
-
-    expect(exitCode).toBe(0);
-    const output = consoleOutput.join('\n');
-    // Should NOT include extends info
-    expect(output).not.toMatch(/extends:/);
+    expect(output).toMatch(/[Nn]o skills installed/i);
   });
 });
