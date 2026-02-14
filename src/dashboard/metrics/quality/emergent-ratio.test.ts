@@ -163,4 +163,64 @@ describe('renderEmergentRatio', () => {
 
     expect(phase1Pos).toBeLessThan(phase2Pos);
   });
+
+  // -------------------------------------------------------------------------
+  // 11. Windowing — shows only last N phases
+  // -------------------------------------------------------------------------
+  it('shows all phases when count is within window size', () => {
+    const html = renderEmergentRatio([noEmergent, someEmergent], 5);
+
+    expect(html).toContain('Phase 1');
+    expect(html).toContain('Phase 2');
+    expect(html).not.toContain('earlier phases');
+  });
+
+  it('shows summary row when phases exceed window size', () => {
+    // 3 distinct phases (1, 2, 3), window of 1 => 2 hidden, 1 visible
+    const html = renderEmergentRatio(
+      [noEmergent, someEmergent, phase3Plan1, phase3Plan2],
+      1,
+    );
+
+    expect(html).toContain('2 earlier phases');
+    expect(html).toContain('emergent-summary');
+    // Only last phase (3) visible as individual row
+    expect(html).toContain('Phase 3');
+    // Earlier phases should not have individual rows
+    expect(html).not.toMatch(/emergent-phase">Phase 1</);
+    expect(html).not.toMatch(/emergent-phase">Phase 2</);
+  });
+
+  it('rolling average uses ALL phases even when windowed', () => {
+    // 3 phases with window of 1 — rolling avg should still include all 3
+    const html = renderEmergentRatio(
+      [noEmergent, someEmergent, phase3Plan1, phase3Plan2],
+      1,
+    );
+
+    // Phase 1: 0%, Phase 2: 66.7%, Phase 3: 60%
+    // Full rolling average: (0 + 66.7 + 60) / 3 = 42.2%
+    expect(html).toContain('Rolling Average');
+    expect(html).toContain('42.2%');
+  });
+
+  it('uses default windowSize of 20 when not specified', () => {
+    const html = renderEmergentRatio([noEmergent, someEmergent]);
+
+    expect(html).not.toContain('earlier phases');
+    expect(html).toContain('Phase 1');
+    expect(html).toContain('Phase 2');
+  });
+
+  it('summary row shows average of hidden phases', () => {
+    const html = renderEmergentRatio(
+      [noEmergent, someEmergent, phase3Plan1, phase3Plan2],
+      1,
+    );
+
+    // Hidden phases 1 and 2: avg of 0% and 66.7% = 33.4%
+    const summaryMatch = html.match(/emergent-summary.*?emergent-pct">([\d.]+)%/s);
+    expect(summaryMatch).not.toBeNull();
+    expect(summaryMatch![1]).toBe('33.4');
+  });
 });
