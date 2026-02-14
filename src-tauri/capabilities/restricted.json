@@ -1,0 +1,10 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "gsd-os-restricted",
+  "description": "Restricted capability for testing ACL denial -- only greet allowed",
+  "windows": ["restricted-test"],
+  "permissions": [
+    "core:default",
+    "allow-greet"
+  ]
+}

@@ -125,8 +125,62 @@ export interface SessionCollectorOptions extends CollectorOptions {
   cachePath?: string;
 }
 
+/** Activity-specific collector options. */
+export interface ActivityCollectorOptions extends CollectorOptions {
+  /** Max feed entries to return (default: 50). */
+  maxEntries?: number;
+  /** Max git commits to fetch (default: 30). */
+  maxCommits?: number;
+  /** Path to sessions.jsonl (default: .planning/patterns/sessions.jsonl). */
+  sessionsPath?: string;
+}
+
 /** Planning-specific collector options. */
 export interface PlanningCollectorOptions extends CollectorOptions {
   /** Path to phases directory (default: .planning/phases). */
   phasesDir?: string;
+}
+
+// ============================================================================
+// Staging Collector Types
+// ============================================================================
+
+/** Staging-specific collector options. */
+export interface StagingCollectorOptions {
+  /** Project root directory (default: process.cwd()). */
+  basePath?: string;
+}
+
+/** Result from staging queue collector. */
+export interface StagingCollectorResult {
+  /** Queue entries from queue-state.json. */
+  entries: import('../../staging/queue/types.js').QueueEntry[];
+  /** Dependency edges (empty from collector; generator can enrich). */
+  dependencies: import('../staging-queue-panel.js').StagingQueuePanelData['dependencies'];
+}
+
+// ============================================================================
+// Console Collector Types
+// ============================================================================
+
+/** Console-specific collector options. */
+export interface ConsoleCollectorOptions {
+  /** Project root directory (default: process.cwd()). */
+  basePath?: string;
+  /** URL for the helper endpoint (default: '/api/console/message'). */
+  helperUrl?: string;
+}
+
+// ============================================================================
+// Topology Collector Types
+// ============================================================================
+
+/** Topology-specific collector options. */
+export interface TopologyCollectorOptions extends CollectorOptions {
+  /** Path to commands directory (default: .claude/commands). */
+  commandsDir?: string;
+  /** Path to agents directory (default: .claude/agents). */
+  agentsDir?: string;
+  /** Path to teams directory (default: .claude/teams). */
+  teamsDir?: string;
 }

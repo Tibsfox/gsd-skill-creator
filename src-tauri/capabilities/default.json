@@ -1,0 +1,33 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "gsd-os-default",
+  "description": "Default capabilities for GSD-OS main window",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "core:window:default",
+    "core:event:default",
+    "allow-greet",
+    "allow-echo-event",
+    "allow-echo-channel",
+    "allow-ipc-benchmark",
+    "allow-ipc-benchmark-channel",
+    "allow-start-watcher",
+    "allow-stop-watcher",
+    "allow-watcher-status",
+    "allow-pty-open",
+    "allow-pty-write",
+    "allow-pty-resize",
+    "allow-pty-pause",
+    "allow-pty-resume",
+    "allow-pty-close",
+    "allow-tmux-has-tmux",
+    "allow-tmux-list-sessions",
+    "allow-tmux-ensure-session",
+    "allow-claude-start",
+    "allow-claude-stop",
+    "allow-claude-list",
+    "allow-claude-status",
+    "allow-generate-dashboard"
+  ]
+}

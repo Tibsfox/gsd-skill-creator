@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-watcher-status"
+description = "Enables the watcher_status command without any pre-configured scope."
+commands.allow = ["watcher_status"]
+
+[[permission]]
+identifier = "deny-watcher-status"
+description = "Denies the watcher_status command without any pre-configured scope."
+commands.deny = ["watcher_status"]

@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { renderStyles } from './styles.js';
+import { renderMetricsStyles } from './metrics/metrics-styles.js';
 import { renderNav, renderLayout } from './renderer.js';
 import type { NavPage, LayoutOptions } from './renderer.js';
 
@@ -68,6 +69,33 @@ describe('renderStyles', () => {
 
   it('includes timeline styles', () => {
     expect(css).toContain('.timeline');
+  });
+
+  // -------------------------------------------------------------------------
+  // Layout CSS verification (152-01)
+  // -------------------------------------------------------------------------
+
+  it('includes dashboard two-column grid styles', () => {
+    expect(css).toContain('.dashboard-grid');
+    expect(css).toContain('.dashboard-terminal-col');
+    expect(css).toContain('.dashboard-info-col');
+  });
+
+  it('includes compact card styles', () => {
+    expect(css).toContain('.compact-card');
+    expect(css).toContain('.compact-title');
+  });
+
+  it('quality section has overflow-y auto', () => {
+    const metricsCss = renderMetricsStyles();
+    expect(metricsCss).toContain('.quality-section');
+    expect(metricsCss).toContain('overflow-y');
+  });
+
+  it('history section has overflow-y auto', () => {
+    const metricsCss = renderMetricsStyles();
+    expect(metricsCss).toContain('.history-section');
+    expect(metricsCss).toContain('overflow-y');
   });
 });
 
