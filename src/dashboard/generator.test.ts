@@ -26,6 +26,11 @@ vi.mock('./collectors/topology-collector.js', () => ({
   collectTopologyData: vi.fn(),
 }));
 
+// Mock the activity collector module
+vi.mock('./collectors/activity-collector.js', () => ({
+  collectActivityFeed: vi.fn().mockResolvedValue([]),
+}));
+
 // ---------------------------------------------------------------------------
 // Fixtures — realistic .planning/ content
 // ---------------------------------------------------------------------------
@@ -537,6 +542,107 @@ describe('generate', () => {
       // The topology panel should contain SVG node data from the real source
       expect(content).toContain('data-node-id');
       expect(content).toContain('Builder Agent');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // Activity feed integration tests (154-02)
+  // -------------------------------------------------------------------------
+
+  describe('activity feed integration', () => {
+    beforeEach(async () => {
+      const { collectAndRenderMetrics } = await import('./metrics/integration.js');
+      vi.mocked(collectAndRenderMetrics).mockReset();
+      vi.mocked(collectAndRenderMetrics).mockResolvedValue({
+        html: '',
+        sections: 0,
+        durationMs: 0,
+      });
+
+      const { collectTopologyData } = await import('./collectors/topology-collector.js');
+      vi.mocked(collectTopologyData).mockReset();
+
+      const { collectActivityFeed } = await import('./collectors/activity-collector.js');
+      vi.mocked(collectActivityFeed).mockReset();
+    });
+
+    it('renders activity feed with real entries from collector', async () => {
+      const { collectActivityFeed } = await import('./collectors/activity-collector.js');
+      vi.mocked(collectActivityFeed).mockResolvedValue([
+        {
+          entityType: 'plan',
+          domain: 'infrastructure',
+          identifier: '154-01',
+          description: 'implement activity collector',
+          occurredAt: '2026-02-14T10:00:00Z',
+        },
+      ]);
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      const result = await generate({
+        planningDir,
+        outputDir,
+        force: true,
+      });
+
+      expect(result.errors).toHaveLength(0);
+
+      const indexHtml = await readFile(join(outputDir, 'index.html'), 'utf-8');
+      // Verify the entry appears in the HTML (not the "No activity" empty state)
+      expect(indexHtml).toContain('154-01');
+      expect(indexHtml).toContain('implement activity collector');
+      expect(indexHtml).not.toContain('No activity');
+    });
+
+    it('renders empty activity feed when collector fails', async () => {
+      const { collectActivityFeed } = await import('./collectors/activity-collector.js');
+      vi.mocked(collectActivityFeed).mockRejectedValue(new Error('git not found'));
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      const result = await generate({
+        planningDir,
+        outputDir,
+        force: true,
+      });
+
+      expect(result.errors).toHaveLength(0);
+      const indexHtml = await readFile(join(outputDir, 'index.html'), 'utf-8');
+      expect(indexHtml).toContain('No activity');
+    });
+
+    it('renders entity type shape indicators in activity feed entries', async () => {
+      const { collectActivityFeed } = await import('./collectors/activity-collector.js');
+      vi.mocked(collectActivityFeed).mockResolvedValue([
+        {
+          entityType: 'skill',
+          domain: 'frontend',
+          identifier: 'F-1',
+          description: 'skill activated',
+          occurredAt: '2026-02-14T10:00:00Z',
+        },
+      ]);
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      await generate({
+        planningDir,
+        outputDir,
+        force: true,
+      });
+
+      const indexHtml = await readFile(join(outputDir, 'index.html'), 'utf-8');
+      // Unicode square for skill entity type
+      expect(indexHtml).toContain('\u25A0');
+      // Domain color class
+      expect(indexHtml).toContain('af-domain-frontend');
     });
   });
 });
