@@ -72,10 +72,10 @@ export class AuditLogger {
    * terminated by newline. Serializes writes to prevent interleaving.
    */
   async log(entry: Omit<AuditEntry, 'timestamp'>): Promise<void> {
-    const fullEntry: AuditEntry = {
+    const fullEntry = {
       ...entry,
       timestamp: new Date().toISOString(),
-    };
+    } as AuditEntry;
 
     await this.appendLine(fullEntry);
   }
