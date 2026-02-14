@@ -23,6 +23,10 @@
     "allow-pty-close",
     "allow-tmux-has-tmux",
     "allow-tmux-list-sessions",
-    "allow-tmux-ensure-session"
+    "allow-tmux-ensure-session",
+    "allow-claude-start",
+    "allow-claude-stop",
+    "allow-claude-list",
+    "allow-claude-status"
   ]
 }
