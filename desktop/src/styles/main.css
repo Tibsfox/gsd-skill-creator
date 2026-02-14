@@ -1,0 +1,21 @@
+@import "../wm/wm.css";
+@import "../shell/shell.css";
+@import './dashboard-host.css';
+
+body {
+  background: var(--wm-desktop-bg);
+  color: #e0e0e0;
+  font-family: monospace;
+  margin: 0;
+  overflow: hidden;
+}
+
+h1 {
+  color: #00ff88;
+}
+
+#app {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}

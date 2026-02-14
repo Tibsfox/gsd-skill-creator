@@ -44,6 +44,8 @@ const IntegrationTogglesSchema = z.object({
 const TokenBudgetSchema = z.object({
   max_percent: z.number().min(1).max(100).default(5),
   warn_at_percent: z.number().min(1).max(100).default(4),
+  cumulative_char_budget: z.number().min(1000).optional(),
+  profile_budgets: z.record(z.string(), z.number().min(1000)).optional(),
 });
 
 // ============================================================================

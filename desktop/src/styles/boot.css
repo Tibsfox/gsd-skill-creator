@@ -1,0 +1,124 @@
+/* Boot screen overlay */
+.boot-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--boot-bg, #0a0a0a);
+  color: var(--boot-fg, #e0e0e0);
+  font-family: 'Courier New', monospace;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.boot-screen--fadeout {
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+
+.boot-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--boot-accent, #ffa997);
+  margin-bottom: 2rem;
+  letter-spacing: 2px;
+}
+
+.boot-chipset-list {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 2rem;
+}
+
+.boot-chipset-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+  opacity: 0;
+  animation: boot-line-in 300ms ease-out forwards;
+}
+
+.boot-chip-name {
+  color: var(--boot-accent, #ffa997);
+  font-weight: bold;
+  min-width: 80px;
+}
+
+.boot-chip-role {
+  flex: 1;
+  padding: 0 1rem;
+  color: var(--boot-fg-dim, #888);
+}
+
+.boot-chip-status {
+  color: var(--boot-ok, #6aac6a);
+  font-weight: bold;
+}
+
+.boot-progress {
+  width: 100%;
+  max-width: 500px;
+  height: 4px;
+  background: var(--boot-fg-dim, #333);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.boot-progress-fill {
+  height: 100%;
+  background: var(--boot-accent, #ffa997);
+  width: 0%;
+  transition: width 100ms linear;
+}
+
+.boot-message {
+  font-size: 1.2rem;
+  color: var(--boot-accent, #ffa997);
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
+
+.boot-message--visible {
+  opacity: 1;
+}
+
+.boot-skip-hint {
+  position: absolute;
+  bottom: 2rem;
+  font-size: 0.75rem;
+  color: var(--boot-fg-dim, #555);
+}
+
+@keyframes boot-line-in {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Accessibility mode: disable all animations and transitions */
+.gsd-os--a11y * {
+  animation: none !important;
+  animation-duration: 0s !important;
+  transition: none !important;
+  transition-duration: 0s !important;
+}
+
+.gsd-os--a11y .boot-screen--fadeout {
+  opacity: 0;
+  transition: none !important;
+}
+
+/* High contrast text */
+.gsd-os--a11y {
+  --boot-bg: #000000;
+  --boot-fg: #FFFFFF;
+  --boot-accent: #FFFF00;
+  --boot-ok: #00FF00;
+  --boot-fg-dim: #CCCCCC;
+}

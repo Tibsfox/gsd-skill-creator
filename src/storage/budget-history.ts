@@ -22,6 +22,24 @@ export interface BudgetSnapshot {
   totalChars: number;
   /** Number of skills */
   skillCount: number;
+  /** Total characters of all installed skills (added in v1.19). */
+  installedTotal?: number;
+  /** Total characters of skills that would actually load (added in v1.19). */
+  loadedTotal?: number;
+}
+
+/**
+ * Dual-dimension trend data tracking installed vs loaded budget growth.
+ */
+export interface DualBudgetTrend {
+  /** Change in installed characters over the period */
+  installedCharDelta: number;
+  /** Change in loaded characters over the period */
+  loadedCharDelta: number;
+  /** Change in skill count over the period */
+  skillDelta: number;
+  /** Number of snapshots in the analysis window */
+  periodSnapshots: number;
 }
 
 /**
@@ -103,7 +121,15 @@ export class BudgetHistory {
 
     for (const line of lines) {
       try {
-        entries.push(JSON.parse(line));
+        const entry = JSON.parse(line) as BudgetSnapshot;
+        // Migration: old snapshots lack installedTotal/loadedTotal
+        if (entry.installedTotal === undefined) {
+          entry.installedTotal = entry.totalChars;
+        }
+        if (entry.loadedTotal === undefined) {
+          entry.loadedTotal = entry.totalChars;
+        }
+        entries.push(entry);
       } catch {
         // Skip corrupted lines
       }
@@ -133,6 +159,38 @@ export class BudgetHistory {
 
     return {
       charDelta: last.totalChars - first.totalChars,
+      skillDelta: last.skillCount - first.skillCount,
+      periodSnapshots: recent.length,
+    };
+  }
+
+  /**
+   * Calculate dual-dimension trend from recent snapshots.
+   *
+   * Tracks both installed inventory growth and loading efficiency
+   * trends separately. Uses migrated values (installedTotal/loadedTotal
+   * default to totalChars for old-format snapshots).
+   *
+   * @param snapshots - Array of snapshots (chronological order)
+   * @param recentCount - Number of recent entries to analyze (default: 7)
+   * @returns Dual-dimension trend data, or null if insufficient data (< 2 entries)
+   */
+  static getDualTrend(snapshots: BudgetSnapshot[], recentCount = 7): DualBudgetTrend | null {
+    if (snapshots.length < 2) return null;
+
+    const recent = snapshots.slice(-recentCount);
+    const first = recent[0];
+    const last = recent[recent.length - 1];
+
+    // Use migrated values (installedTotal/loadedTotal default to totalChars)
+    const firstInstalled = first.installedTotal ?? first.totalChars;
+    const lastInstalled = last.installedTotal ?? last.totalChars;
+    const firstLoaded = first.loadedTotal ?? first.totalChars;
+    const lastLoaded = last.loadedTotal ?? last.totalChars;
+
+    return {
+      installedCharDelta: lastInstalled - firstInstalled,
+      loadedCharDelta: lastLoaded - firstLoaded,
       skillDelta: last.skillCount - first.skillCount,
       periodSnapshots: recent.length,
     };

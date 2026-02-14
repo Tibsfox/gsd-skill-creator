@@ -33,6 +33,10 @@ export interface BudgetGaugeData {
   totalUsed: number;
   /** Optional gauge label (e.g. "Token Budget"). */
   label?: string;
+  /** Skills deferred from loading due to budget constraints. */
+  deferredSkills?: string[];
+  /** Whether total loading exceeds the budget limit. */
+  overBudget?: boolean;
 }
 
 // ============================================================================
@@ -46,11 +50,18 @@ export interface BudgetGaugeData {
  * @returns HTML string for the budget gauge.
  */
 export function renderBudgetGauge(data: BudgetGaugeData): string {
+  const isOverBudget = data.overBudget === true;
+
+  // Clamp effective totalUsed for rendering when over-budget
+  const effectiveTotal = isOverBudget ? Math.min(data.totalUsed, 100) : data.totalUsed;
+
   // Compute threshold class
   let thresholdClass = '';
-  if (data.totalUsed >= 95) {
+  if (isOverBudget) {
+    thresholdClass = ' bg-over-budget bg-critical';
+  } else if (effectiveTotal >= 95) {
     thresholdClass = ' bg-critical';
-  } else if (data.totalUsed >= 80) {
+  } else if (effectiveTotal >= 80) {
     thresholdClass = ' bg-warning';
   }
 
@@ -59,22 +70,32 @@ export function renderBudgetGauge(data: BudgetGaugeData): string {
     ? `<div class="bg-label">${data.label}</div>`
     : '';
 
+  // Scale factor for over-budget segment width capping
+  const scaleFactor =
+    isOverBudget && data.totalUsed > 100 ? 100 / data.totalUsed : 1;
+
   // Render segments
   const segmentsHtml = data.segments
-    .map(
-      (seg) =>
-        `<div class="bg-segment" data-domain="${seg.domain}" data-percent="${seg.percentage}" style="width:${seg.percentage}%;background:${seg.color}"><span class="bg-scan-label">${seg.percentage}%</span></div>`,
-    )
+    .map((seg) => {
+      const width = seg.percentage * scaleFactor;
+      return `<div class="bg-segment" data-domain="${seg.domain}" data-percent="${seg.percentage}" style="width:${width}%;background:${seg.color}"><span class="bg-scan-label">${seg.percentage}%</span></div>`;
+    })
     .join('');
 
-  // Headroom segment (only if totalUsed < 100)
+  // Headroom segment (only if effective totalUsed < 100)
   const headroomHtml =
-    data.totalUsed < 100
-      ? `<div class="bg-headroom" style="width:${100 - data.totalUsed}%"></div>`
+    effectiveTotal < 100
+      ? `<div class="bg-headroom" style="width:${100 - effectiveTotal}%"></div>`
       : '';
 
-  return `<div class="budget-gauge${thresholdClass}" role="meter" aria-valuenow="${data.totalUsed}" aria-valuemin="0" aria-valuemax="100">
-  ${labelHtml}<div class="bg-bar">${segmentsHtml}${headroomHtml}</div>
+  // Deferred skills tooltip
+  const tooltipHtml =
+    data.deferredSkills && data.deferredSkills.length > 0
+      ? `<div class="bg-deferred-tooltip"><ul>${data.deferredSkills.map((s) => `<li>${s}</li>`).join('')}</ul></div>`
+      : '';
+
+  return `<div class="budget-gauge${thresholdClass}" role="meter" aria-valuenow="${effectiveTotal}" aria-valuemin="0" aria-valuemax="100">
+  ${labelHtml}<div class="bg-bar">${segmentsHtml}${headroomHtml}${tooltipHtml}</div>
 </div>`;
 }
 
@@ -116,6 +137,7 @@ export function renderBudgetGaugeStyles(): string {
   border-radius: 6px;
   overflow: hidden;
   background: var(--border-muted, #21262d);
+  position: relative;
 }
 
 .bg-segment {
@@ -168,6 +190,51 @@ export function renderBudgetGaugeStyles(): string {
 
 .bg-critical .bg-bar {
   outline: 1px solid color-mix(in srgb, var(--red, #f85149) 40%, transparent);
+}
+
+/* --- Over-budget state --- */
+
+.bg-over-budget {
+  box-shadow: 0 0 0 2px var(--red, #f85149);
+}
+
+.bg-over-budget .bg-bar {
+  outline: 2px solid var(--red, #f85149);
+}
+
+/* --- Deferred skills tooltip --- */
+
+.bg-deferred-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: var(--space-xs, 0.25rem);
+  background: var(--surface-raised, #1c2128);
+  border: 1px solid var(--border-muted, #21262d);
+  border-radius: var(--radius-sm, 4px);
+  padding: var(--space-xs, 0.25rem) var(--space-sm, 0.5rem);
+  font-size: 0.7rem;
+  color: var(--text-muted, #8b949e);
+  white-space: nowrap;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+
+.bg-deferred-tooltip ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bg-deferred-tooltip li {
+  padding: 1px 0;
+}
+
+.bg-bar:hover .bg-deferred-tooltip {
+  opacity: 1;
+  pointer-events: auto;
 }
 `;
 }
