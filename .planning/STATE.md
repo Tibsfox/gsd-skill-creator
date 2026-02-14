@@ -3,10 +3,10 @@
 ## Current Position
 
 Milestone: v1.18 — Information Design System
-Phase: 143 — Gantry Status Strip (complete)
+Phase: 146 — Activity Feed (complete)
 Plan: 02 complete (all plans done)
-Status: Phase 143 complete — 2 of 2 plans complete
-Last activity: 2026-02-14 — 143-02 gantry data pipeline and generator integration complete
+Status: Phase 146 complete — 2 of 2 plans complete
+Last activity: 2026-02-14 — 146-02 activity/terminal tab toggle with event translator complete
 
 ## Project Reference
 
@@ -241,9 +241,16 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 - Silicon panel STATE_STYLES constant maps all 5 adapter states to CSS class + diamond color
 - Silicon panel uses Unicode U+25C6 (black diamond) for adapter indicator shape
 - Test helper 'enabled' in overrides check instead of ?? to handle null correctly (nullish coalescing treats null as nullish)
+- Unicode shape chars for activity feed entity types: agent=circle, skill=square, team=hexagon, phase=chevron, adapter=diamond, plan=dot
+- 6 domain color CSS classes (.af-domain-{domain}) with custom property fallbacks for activity feed
+- occurredAt used for sort only in activity feed, never rendered (REQ-AF-06)
+- EVENT_ENTITY_MAP record for session event-to-entityType mapping (10 event types to 6 entity types)
+- DESCRIPTION_TEMPLATES record with template functions for human-readable activity descriptions
+- Vanilla JS IIFE with event delegation on .activity-tab-panel for tab toggle (REQ-TC-01)
+- Activity tab visible by default, terminal hidden via inline style display:none
 
 ### Architecture Notes
-- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel)
+- Dashboard module: src/dashboard/ (parser, renderer, generator, structured-data, incremental, refresh, collectors, metrics, terminal-panel, terminal-integration, upload-zone, config-form, submit-flow, question-card, question-poller, console-page, console-settings, console-activity, staging-queue-panel, entity-shapes, entity-legend, gantry-panel, gantry-data, budget-gauge, silicon-panel, activity-feed, activity-tab-toggle)
 - Terminal module: src/terminal/ (launcher, health, process-manager, session, types, index)
 - Launcher module: src/launcher/ (dashboard-service, dev-environment, types, index)
 - Console module: src/console/ (message types/schemas, reader, writer, message-handler, status-writer, helper endpoint, bridge-logger, question-schema, question-responder, check-inbox integration tests)
@@ -279,10 +286,10 @@ See: .planning/PROJECT.md (updated 2026-02-13 after v1.17 completion)
 
 ## Session Continuity
 
-Last: 2026-02-14 — 143-02 gantry data pipeline and generator integration complete
-Stopped at: Completed phase 143 (both 143-01 and 143-02 plans)
+Last: 2026-02-14 — 146-02 activity/terminal tab toggle complete
+Stopped at: Completed phase 146 (both 146-01 and 146-02 plans)
 Next action: Continue with next phase in v1.18 roadmap
-Context: Phase 143 complete. Gantry panel (pure render), gantry data pipeline (STATE.md/ROADMAP.md derivation), and generator integration all implemented. 1002 dashboard tests passing.
+Context: Phase 146 complete. Activity feed component (shape/color/identifier format, 8-entry max, no timestamps) and activity/terminal tab toggle (event translator, vanilla JS toggle). 76 new tests, 5 commits.
 
 ---
-*Last updated: 2026-02-14 (143-02 complete)*
+*Last updated: 2026-02-14 (146-02 complete)*
