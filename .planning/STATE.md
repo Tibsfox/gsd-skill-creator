@@ -3,12 +3,12 @@
 ## Current Position
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
-Phase: 165 -- Desktop Shell - Taskbar, Icons, Menus -- COMPLETE
-Plan: 165-01 COMPLETE, 165-02 COMPLETE, 165-03 COMPLETE, 165-04 COMPLETE.
-Status: Phase 165 complete. All 4 plans executed.
-Last activity: 2026-02-14 -- Completed 165-04 (DesktopShell orchestrator, shell CSS, main.ts rewrite)
+Phase: 167 -- Calibration + Personalization -- IN PROGRESS
+Plan: 167-01 COMPLETE, 167-02 COMPLETE.
+Status: Phase 167 in progress. Plans 01 and 02 complete.
+Last activity: 2026-02-14 -- Completed 167-01 (UserStyle types, Zod schema, YAML serialization, CSS bridge)
 
-Progress: [########..] 8/11 phases
+Progress: [#########.] 9/11 phases
 
 ## Project Reference
 
@@ -102,6 +102,11 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - DesktopShell tracks open window types via Map<string, string> for O(1) type-to-id lookup
 - Context menu fires on desktop element or icon column only (not on window frames)
 - Alt+Tab brings second-from-top to front (standard focus cycling behavior)
+- Zod .default().transform() pattern for nested object default cascading (palette/crt/boot)
+- Colors schema uses .catch() for graceful fallback on invalid array length
+- Manual YAML serializer for user-style (no js-yaml dependency)
+- localStorage for webview persistence (future Tauri IPC for filesystem)
+- Calibration module at desktop/src/calibration/ (user-style, css-bridge, wizard-state)
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -158,13 +163,16 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 166-01 duration | 3min |
 | 166-03 duration | 2min |
 | 166-04 duration | 2min |
+| 166-05 duration | 4min |
+| 167-02 duration | 2min |
+| 167-01 duration | 3min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Completed 166-04 (WatcherRefresh: file change events to dashboard re-renders)
-Stopped at: Completed 166-04-PLAN.md
-Next action: Continue Phase 166 remaining plan (166-05).
-Context: WatcherRefresh at desktop/src/dashboard/watcher-refresh.ts bridges native file watcher events to debounced dashboard page invalidation. 166-01, 166-02, 166-03, 166-04 complete. 444 desktop tests passing.
+Last: 2026-02-14 -- Completed 167-01 (UserStyle types, Zod schema, YAML serialization, CSS bridge)
+Stopped at: Completed 167-01-PLAN.md
+Next action: Continue Phase 167 remaining plans (167-03, 167-04).
+Context: UserStyle at desktop/src/calibration/user-style.ts is single source of visual truth with Zod validation. CSS bridge at desktop/src/calibration/css-bridge.ts projects palette to DOM custom properties. Wizard state machine at desktop/src/calibration/wizard-state.ts for three-screen flow. 167-01 and 167-02 complete. 497 desktop tests passing.
 
 ---
-*Last updated: 2026-02-14 (166-04 complete)*
+*Last updated: 2026-02-14 (167-01 complete)*
