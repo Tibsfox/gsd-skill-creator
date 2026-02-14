@@ -20,3 +20,9 @@ export {
   getPaletteColors,
   paletteToUint8,
 } from './palette';
+export {
+  type CopperEntry,
+  type CopperProgram,
+  COPPER_PRESETS,
+  copperListToTexture,
+} from './copper-list';
