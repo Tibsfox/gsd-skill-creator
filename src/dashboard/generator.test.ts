@@ -1024,10 +1024,8 @@ describe('generate', () => {
         activityEntries: [
           {
             timestamp: '2026-02-14T10:00:00Z',
-            label: 'Config',
-            badge: 'config-write',
-            detail: 'config-update.json',
-            relativeTime: '1m ago',
+            type: 'config-write',
+            summary: 'Config update: config-update.json',
           },
         ],
       });
