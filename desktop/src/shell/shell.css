@@ -1,0 +1,237 @@
+/* ===== Shell: Desktop Icons ===== */
+.shell-icon-column {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px;
+  z-index: 2;
+}
+
+.shell-desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 64px;
+  padding: 4px;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  border-radius: 2px;
+}
+
+.shell-desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.shell-desktop-icon:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.shell-desktop-icon canvas {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  margin-bottom: 4px;
+}
+
+.shell-desktop-icon__label {
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--wm-icon-text, #ffffff);
+  word-break: break-all;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* ===== Shell: Taskbar ===== */
+.shell-taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  background: var(--wm-titlebar-active, #6688bb);
+  border-top: 2px solid var(--wm-border, #000000);
+  z-index: 9998;
+  user-select: none;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+.shell-taskbar__left {
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+}
+
+.shell-taskbar__center {
+  display: flex;
+  gap: 2px;
+  flex: 1;
+  overflow-x: auto;
+  padding: 0 4px;
+}
+
+.shell-taskbar__right {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.shell-taskbar__menu-btn {
+  width: 28px;
+  height: 24px;
+  border: 1px solid var(--wm-gadget-border, #000);
+  background: var(--wm-gadget-bg, #aaaaaa);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--wm-border, #000);
+}
+
+.shell-taskbar__menu-btn:hover {
+  background: var(--wm-gadget-hover, #88aadd);
+}
+
+.shell-taskbar__entry {
+  height: 24px;
+  padding: 0 8px;
+  border: 1px solid var(--wm-gadget-border, #000);
+  background: var(--wm-gadget-bg, #aaaaaa);
+  color: var(--wm-border, #000);
+  font-family: monospace;
+  font-size: 11px;
+  cursor: pointer;
+  white-space: nowrap;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shell-taskbar__entry:hover {
+  background: var(--wm-gadget-hover, #88aadd);
+}
+
+.shell-taskbar__entry--active {
+  background: var(--wm-titlebar-active, #6688bb);
+  color: var(--wm-titlebar-text, #ffffff);
+  border-style: inset;
+}
+
+.shell-taskbar__entry--minimized {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* ===== Shell: Process Indicators ===== */
+.shell-indicator {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.shell-indicator__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--wm-border, #000);
+}
+
+.shell-indicator__label {
+  font-family: monospace;
+  font-size: 9px;
+  color: var(--wm-titlebar-text, #ffffff);
+  opacity: 0.8;
+}
+
+.shell-indicator--running .shell-indicator__dot {
+  background: #00cc44;
+}
+
+.shell-indicator--paused .shell-indicator__dot {
+  background: #ccaa00;
+}
+
+.shell-indicator--idle .shell-indicator__dot {
+  background: #888888;
+}
+
+.shell-indicator--stopped .shell-indicator__dot {
+  background: #cc0000;
+}
+
+.shell-indicator--error .shell-indicator__dot {
+  background: #ff0000;
+  animation: shell-indicator-blink 0.5s infinite;
+}
+
+@keyframes shell-indicator-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ===== Shell: System Menu ===== */
+.shell-menu {
+  position: fixed;
+  z-index: 10000;
+  background: var(--wm-content-bg, #bbbbbb);
+  border: 2px solid var(--wm-border, #000);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+  min-width: 200px;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 2px 0;
+  display: none;
+}
+
+.shell-menu__section-title {
+  padding: 4px 8px 2px;
+  font-weight: bold;
+  font-size: 10px;
+  color: var(--wm-titlebar-text-inactive, #444444);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.shell-menu__item {
+  padding: 4px 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--wm-border, #000);
+}
+
+.shell-menu__item:hover {
+  background: var(--wm-titlebar-active, #6688bb);
+  color: var(--wm-titlebar-text, #ffffff);
+}
+
+.shell-menu__item--disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.shell-menu__item--disabled:hover {
+  background: transparent;
+  color: var(--wm-border, #000);
+}
+
+.shell-menu__shortcut {
+  font-size: 10px;
+  opacity: 0.6;
+  margin-left: 16px;
+}
+
+.shell-menu__separator {
+  margin: 2px 4px;
+  border: 0;
+  border-top: 1px solid var(--wm-border, #000);
+}
