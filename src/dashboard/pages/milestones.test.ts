@@ -225,4 +225,58 @@ describe('renderMilestonesPage', () => {
     // No timeline-body div when goal is empty
     expect(html).not.toContain('timeline-body');
   });
+
+  // -------------------------------------------------------------------------
+  // Chevron shape integration (144-02)
+  // -------------------------------------------------------------------------
+
+  describe('chevron shape integration', () => {
+    it('renders chevron SVG before shipped milestone title', () => {
+      const html = renderMilestonesPage(FULL_DATA);
+      expect(html).toContain('entity-shape');
+      expect(html).toContain('entity-milestone');
+    });
+
+    it('shipped milestones have green fill override', () => {
+      const html = renderMilestonesPage(FULL_DATA);
+      // Shipped milestones should have a green fill for success signal
+      expect(html).toContain('fill="#3fb950"');
+    });
+
+    it('in-progress milestones use default domain color', () => {
+      const data: DashboardData = {
+        generatedAt: '2026-02-12T10:00:00Z',
+        milestones: {
+          milestones: [
+            {
+              version: 'v2.0',
+              name: 'WIP Release',
+              goal: 'Still building',
+              shipped: '',
+              stats: { phases: 2 },
+            },
+          ],
+          totals: { milestones: 1, phases: 2, plans: 0 },
+        },
+      };
+      const html = renderMilestonesPage(data);
+      expect(html).toContain('entity-milestone');
+      expect(html).toContain('domain-infrastructure');
+    });
+
+    it('chevron appears before version string in timeline title', () => {
+      const html = renderMilestonesPage(FULL_DATA);
+      // The SVG should come before the version text in the timeline-title
+      const titleMatch = html.match(/timeline-title[^>]*>([^<]*<[^>]*>)*[^<]*/);
+      expect(titleMatch).not.toBeNull();
+      // The entity-shape SVG should be inside the timeline-title
+      expect(html).toMatch(/timeline-title[^>]*>.*?<svg[^>]*entity-shape/s);
+    });
+
+    it('missing milestones data renders no chevrons', () => {
+      const html = renderMilestonesPage(EMPTY_DATA);
+      expect(html).not.toContain('entity-shape');
+      expect(html).not.toContain('entity-milestone');
+    });
+  });
 });
