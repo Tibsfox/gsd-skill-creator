@@ -4,9 +4,9 @@
 
 Milestone: v1.21 -- GSD-OS Desktop Foundation
 Phase: 164 -- Window Manager + Custom Chrome -- IN PROGRESS
-Plan: 164-01 COMPLETE. Next: 164-02.
-Status: Phase 164 in progress. Plan 01 (window state types, CRUD, z-order) complete.
-Last activity: 2026-02-14 -- Completed 164-01 (window state types, CRUD, z-order depth cycling)
+Plan: 164-01 COMPLETE, 164-02 COMPLETE. Next: 164-03.
+Status: Phase 164 in progress. Plans 01-02 complete.
+Last activity: 2026-02-14 -- Completed 164-02 (Amiga window chrome, pointer-event drag/resize)
 
 Progress: [######....] 6/11 phases
 
@@ -86,6 +86,9 @@ See: .planning/PROJECT.md (updated 2026-02-14 after v1.20 shipped)
 - Ctrl-B D detach sequence with 100ms delay before PTY close preserves tmux sessions
 - Z-order convention: index 0 = back, last index = front (maps to CSS z-index)
 - No-op operations return original reference for identity checks (perf optimization)
+- Titlebar three-section layout: left (close), center (title), right (depth+zoom) with data-section/data-gadget attrs
+- Pointer events on window (not handle) for move/up listeners -- reliable tracking when cursor leaves element
+- setPointerCapture on drag/resize start for out-of-bounds cursor tracking
 
 ### Parallelization Plan
 After Phase 158, three independent tracks:
@@ -109,7 +112,7 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | Total plans | 449 complete |
 | Total LOC | ~195k TypeScript + Rust |
 | v1.21 phases | 6/11 complete |
-| v1.21 plans | 22/? complete |
+| v1.21 plans | 23/? complete |
 | v1.21 requirements | 50 total |
 | 158-01 duration | 11min |
 | 158-02 duration | 2min |
@@ -132,13 +135,14 @@ Tracks converge at 164-166 (Desktop + Dashboard)
 | 163-04 duration | 2min |
 | 163-03 duration | 5min |
 | 164-01 duration | 2min |
+| 164-02 duration | 4min |
 
 ## Session Continuity
 
-Last: 2026-02-14 -- Completed 164-01 (window state types, CRUD, z-order depth cycling)
-Stopped at: Completed 164-01-PLAN.md
-Next action: Execute 164-02 (window chrome DOM, title bar, gadgets, drag/resize).
-Context: Phases 158-163 all COMPLETE. Phase 164 in progress (plan 01 done). 217 desktop tests passing (190 existing + 27 new wm tests), 29 Rust tests passing. New wm module: types, window-state CRUD, z-order with Amiga depth cycling. All functions pure/immutable.
+Last: 2026-02-14 -- Completed 164-02 (Amiga window chrome, pointer-event drag/resize)
+Stopped at: Completed 164-02-PLAN.md
+Next action: Execute 164-03 (window manager orchestrator).
+Context: Phases 158-163 all COMPLETE. Phase 164 in progress (plans 01-02 done). 247 desktop tests passing, 29 Rust tests passing. Window manager module: types, window-state CRUD, z-order, window chrome DOM factory, drag/resize handlers. Pointer events for unified touch/mouse.
 
 ---
-*Last updated: 2026-02-14 (164-01 complete)*
+*Last updated: 2026-02-14 (164-02 complete)*
