@@ -6,11 +6,13 @@
  * Pages work when opened directly via file:// protocol.
  */
 
+import { renderDesignSystem } from './design-system.js';
+
 /**
  * Return the full CSS stylesheet as a string.
  */
 export function renderStyles(): string {
-  return `
+  return `${renderDesignSystem()}
 /* -----------------------------------------------------------------------
    CSS Custom Properties — Dark Theme
    ----------------------------------------------------------------------- */
