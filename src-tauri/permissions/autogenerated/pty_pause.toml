@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-pty-pause"
+description = "Enables the pty_pause command without any pre-configured scope."
+commands.allow = ["pty_pause"]
+
+[[permission]]
+identifier = "deny-pty-pause"
+description = "Denies the pty_pause command without any pre-configured scope."
+commands.deny = ["pty_pause"]

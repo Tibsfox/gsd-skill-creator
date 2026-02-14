@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-echo-channel"
+description = "Enables the echo_channel command without any pre-configured scope."
+commands.allow = ["echo_channel"]
+
+[[permission]]
+identifier = "deny-echo-channel"
+description = "Denies the echo_channel command without any pre-configured scope."
+commands.deny = ["echo_channel"]

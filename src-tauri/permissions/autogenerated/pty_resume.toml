@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-pty-resume"
+description = "Enables the pty_resume command without any pre-configured scope."
+commands.allow = ["pty_resume"]
+
+[[permission]]
+identifier = "deny-pty-resume"
+description = "Denies the pty_resume command without any pre-configured scope."
+commands.deny = ["pty_resume"]

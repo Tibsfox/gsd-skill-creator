@@ -15,7 +15,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdir, rm, readFile } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import { BudgetHistory, type BudgetSnapshot } from './budget-history.js';
+import { BudgetHistory, type BudgetSnapshot, type DualBudgetTrend } from './budget-history.js';
 
 describe('BudgetHistory', () => {
   const testDir = join(tmpdir(), `budget-history-test-${Date.now()}-${Math.random().toString(36).slice(2)}`);
@@ -43,7 +43,12 @@ describe('BudgetHistory', () => {
       const entries = await history.read();
 
       expect(entries).toHaveLength(1);
-      expect(entries[0]).toEqual(snapshot);
+      expect(entries[0].timestamp).toBe(snapshot.timestamp);
+      expect(entries[0].totalChars).toBe(snapshot.totalChars);
+      expect(entries[0].skillCount).toBe(snapshot.skillCount);
+      // Migration adds installedTotal/loadedTotal defaulting to totalChars
+      expect(entries[0].installedTotal).toBe(snapshot.totalChars);
+      expect(entries[0].loadedTotal).toBe(snapshot.totalChars);
     });
 
     it('should append multiple snapshots and return all in order', async () => {
@@ -163,6 +168,131 @@ describe('BudgetHistory', () => {
       const entries = await history.read();
       expect(entries).toHaveLength(1);
       expect(entries[0].totalChars).toBe(5000);
+    });
+  });
+
+  // ==========================================================================
+  // Dual-dimension snapshots (BF-03)
+  // ==========================================================================
+
+  describe('dual-dimension snapshots (BF-03)', () => {
+    it('appending snapshot with installedTotal and loadedTotal reads them back', async () => {
+      const history = new BudgetHistory(historyPath);
+      const snapshot: BudgetSnapshot = {
+        timestamp: '2026-02-14T10:00:00Z',
+        totalChars: 8000,
+        skillCount: 5,
+        installedTotal: 8000,
+        loadedTotal: 6000,
+      };
+
+      await history.append(snapshot);
+      const entries = await history.read();
+
+      expect(entries).toHaveLength(1);
+      expect(entries[0].installedTotal).toBe(8000);
+      expect(entries[0].loadedTotal).toBe(6000);
+    });
+
+    it('reading old snapshot (only totalChars/skillCount/timestamp) migrates: installedTotal=totalChars, loadedTotal=totalChars', async () => {
+      const history = new BudgetHistory(historyPath);
+      // Write an old-format snapshot directly
+      const { writeFile: wf } = await import('fs/promises');
+      const oldSnapshot = JSON.stringify({
+        timestamp: '2026-01-01T10:00:00Z',
+        totalChars: 5000,
+        skillCount: 3,
+      });
+      await wf(historyPath, oldSnapshot + '\n', 'utf-8');
+
+      const entries = await history.read();
+
+      expect(entries).toHaveLength(1);
+      expect(entries[0].installedTotal).toBe(5000);
+      expect(entries[0].loadedTotal).toBe(5000);
+    });
+
+    it('mixed old and new snapshots read correctly', async () => {
+      const history = new BudgetHistory(historyPath);
+      const { writeFile: wf } = await import('fs/promises');
+      const oldLine = JSON.stringify({
+        timestamp: '2026-01-01T10:00:00Z',
+        totalChars: 5000,
+        skillCount: 3,
+      });
+      const newLine = JSON.stringify({
+        timestamp: '2026-02-01T10:00:00Z',
+        totalChars: 8000,
+        skillCount: 5,
+        installedTotal: 8000,
+        loadedTotal: 6000,
+      });
+      await wf(historyPath, oldLine + '\n' + newLine + '\n', 'utf-8');
+
+      const entries = await history.read();
+
+      expect(entries).toHaveLength(2);
+      // Old snapshot: migrated
+      expect(entries[0].installedTotal).toBe(5000);
+      expect(entries[0].loadedTotal).toBe(5000);
+      // New snapshot: preserved
+      expect(entries[1].installedTotal).toBe(8000);
+      expect(entries[1].loadedTotal).toBe(6000);
+    });
+  });
+
+  // ==========================================================================
+  // Dual-dimension trend (BF-04)
+  // ==========================================================================
+
+  describe('dual-dimension trend (BF-04)', () => {
+    it('getDualTrend(snapshots) returns object with installedCharDelta and loadedCharDelta', () => {
+      const snapshots: BudgetSnapshot[] = [
+        { timestamp: '2026-02-01T10:00:00Z', totalChars: 5000, skillCount: 3, installedTotal: 5000, loadedTotal: 4000 },
+        { timestamp: '2026-02-02T10:00:00Z', totalChars: 6000, skillCount: 4, installedTotal: 6000, loadedTotal: 4500 },
+        { timestamp: '2026-02-03T10:00:00Z', totalChars: 7000, skillCount: 5, installedTotal: 7000, loadedTotal: 5000 },
+      ];
+
+      const trend = BudgetHistory.getDualTrend(snapshots);
+
+      expect(trend).not.toBeNull();
+      expect(trend!.installedCharDelta).toBe(2000); // 7000 - 5000
+      expect(trend!.loadedCharDelta).toBe(1000);    // 5000 - 4000
+      expect(trend!.skillDelta).toBe(2);             // 5 - 3
+      expect(trend!.periodSnapshots).toBe(3);
+    });
+
+    it('getDualTrend with old-format snapshots uses totalChars for both dimensions', () => {
+      const snapshots: BudgetSnapshot[] = [
+        { timestamp: '2026-02-01T10:00:00Z', totalChars: 5000, skillCount: 3 },
+        { timestamp: '2026-02-02T10:00:00Z', totalChars: 7000, skillCount: 4 },
+      ];
+
+      const trend = BudgetHistory.getDualTrend(snapshots);
+
+      expect(trend).not.toBeNull();
+      expect(trend!.installedCharDelta).toBe(2000); // 7000 - 5000
+      expect(trend!.loadedCharDelta).toBe(2000);    // same, uses totalChars fallback
+    });
+
+    it('getDualTrend with mixed snapshots returns correct deltas', () => {
+      const snapshots: BudgetSnapshot[] = [
+        { timestamp: '2026-02-01T10:00:00Z', totalChars: 5000, skillCount: 3 },
+        { timestamp: '2026-02-02T10:00:00Z', totalChars: 7000, skillCount: 4, installedTotal: 7000, loadedTotal: 5500 },
+      ];
+
+      const trend = BudgetHistory.getDualTrend(snapshots);
+
+      expect(trend).not.toBeNull();
+      expect(trend!.installedCharDelta).toBe(2000); // 7000 - 5000 (old uses totalChars)
+      expect(trend!.loadedCharDelta).toBe(500);      // 5500 - 5000 (old uses totalChars)
+    });
+
+    it('getDualTrend returns null for < 2 entries', () => {
+      expect(BudgetHistory.getDualTrend([])).toBeNull();
+      expect(BudgetHistory.getDualTrend([
+        { timestamp: '2026-02-01T10:00:00Z', totalChars: 5000, skillCount: 3 },
+      ])).toBeNull();
     });
   });
 });

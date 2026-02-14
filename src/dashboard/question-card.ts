@@ -189,11 +189,11 @@ export function renderQuestionCardStyles(): string {
 }
 
 .question-card-urgency-high {
-  border-left-color: #f0883e;
+  border-left-color: var(--signal-warning, #f0883e);
 }
 
 .question-card-urgency-critical {
-  border-left-color: #f85149;
+  border-left-color: var(--red, #f85149);
   background: color-mix(in srgb, #f85149 6%, var(--surface, #1e1e2e));
 }
 

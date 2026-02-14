@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-pty-open"
+description = "Enables the pty_open command without any pre-configured scope."
+commands.allow = ["pty_open"]
+
+[[permission]]
+identifier = "deny-pty-open"
+description = "Denies the pty_open command without any pre-configured scope."
+commands.deny = ["pty_open"]
