@@ -96,19 +96,37 @@ function computeRollingAverage(phases: PhaseEmergentData[]): number {
  * Render per-phase emergent work ratio display with CSS bar visualizations.
  *
  * @param diffs - Plan-vs-summary diff entries from the planning collector
+ * @param windowSize - Maximum number of recent phases to display (default: 20)
  * @returns HTML string with per-phase emergent percentages and rolling average
  */
-export function renderEmergentRatio(diffs: PlanSummaryDiff[]): string {
+export function renderEmergentRatio(diffs: PlanSummaryDiff[], windowSize = 20): string {
   if (diffs.length === 0) {
     return '<div class="quality-card emergent-ratio empty">No planning data available</div>';
   }
 
-  const phases = computePhaseRatios(diffs);
-  const rollingAvg = computeRollingAverage(phases);
+  const allPhases = computePhaseRatios(diffs);
+  // Rolling average always computed from ALL phases
+  const rollingAvg = computeRollingAverage(allPhases);
+
+  // Window to last N phases for display
+  const hiddenCount = Math.max(0, allPhases.length - windowSize);
+  const visiblePhases = hiddenCount > 0 ? allPhases.slice(hiddenCount) : allPhases;
 
   const rows: string[] = [];
 
-  for (const p of phases) {
+  if (hiddenCount > 0) {
+    const hiddenAvg = computeRollingAverage(allPhases.slice(0, hiddenCount));
+    rows.push(
+      `  <div class="emergent-row emergent-summary">` +
+      `<span class="emergent-phase">${hiddenCount} earlier phases</span>` +
+      `<span class="emergent-files">avg</span>` +
+      `<span class="emergent-pct">${hiddenAvg}%</span>` +
+      `<div class="emergent-bar"><div class="emergent-fill" style="width:${Math.min(hiddenAvg, 100)}%"></div></div>` +
+      `</div>`
+    );
+  }
+
+  for (const p of visiblePhases) {
     const clampedWidth = Math.min(p.ratio, 100);
 
     rows.push(
