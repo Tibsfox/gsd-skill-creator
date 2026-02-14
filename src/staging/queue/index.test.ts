@@ -398,7 +398,7 @@ describe('queue barrel: staging queue panel integration', () => {
         to: 'q-1',
         type: 'explicit',
         confidence: 0.85,
-        evidence: 'Beta depends on Alpha',
+        reason: 'Beta depends on Alpha',
       },
     ];
 
