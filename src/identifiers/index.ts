@@ -11,3 +11,7 @@ export {
   parseSkillId,
   parseAdapterId,
 } from './generator.js';
+export type { IdentifierResolution, MigrationSuggestion } from './compat.js';
+export { isLegacyName, resolveIdentifier, suggestMigration } from './compat.js';
+export type { IdentifierMetadata } from './metadata.js';
+export { encodeIdentifierMetadata, decodeIdentifierMetadata, formatForFrontmatter } from './metadata.js';
