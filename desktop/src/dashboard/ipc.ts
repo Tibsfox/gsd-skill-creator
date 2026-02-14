@@ -4,6 +4,8 @@
  * Bridges the webview to the Rust generate_dashboard command via Tauri invoke.
  */
 
+import { invoke } from "@tauri-apps/api/core";
+import { DASHBOARD_PAGES } from "./types";
 import type { DashboardPage, GenerateResponse } from "./types";
 
 /**
@@ -13,10 +15,10 @@ import type { DashboardPage, GenerateResponse } from "./types";
  * Node.js to run the dashboard generator.
  */
 export async function generateDashboard(
-  _page: DashboardPage,
-  _planningDir: string,
+  page: DashboardPage,
+  planningDir: string,
 ): Promise<GenerateResponse> {
-  throw new Error("not implemented");
+  return invoke<GenerateResponse>("generate_dashboard", { page, planningDir });
 }
 
 /**
@@ -25,7 +27,9 @@ export async function generateDashboard(
  * Calls generateDashboard for each page in DASHBOARD_PAGES.
  */
 export async function generateAllPages(
-  _planningDir: string,
+  planningDir: string,
 ): Promise<GenerateResponse[]> {
-  throw new Error("not implemented");
+  return Promise.all(
+    DASHBOARD_PAGES.map((page) => generateDashboard(page, planningDir)),
+  );
 }

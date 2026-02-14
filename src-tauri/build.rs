@@ -24,6 +24,7 @@ fn main() {
         "claude_stop",
         "claude_list",
         "claude_status",
+        "generate_dashboard",
     ]);
 
     tauri_build::try_build(
