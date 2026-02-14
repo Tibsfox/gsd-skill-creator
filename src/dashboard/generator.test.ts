@@ -21,6 +21,11 @@ vi.mock('./metrics/integration.js', () => ({
   collectAndRenderMetrics: vi.fn(),
 }));
 
+// Mock the topology collector module
+vi.mock('./collectors/topology-collector.js', () => ({
+  collectTopologyData: vi.fn(),
+}));
+
 // ---------------------------------------------------------------------------
 // Fixtures — realistic .planning/ content
 // ---------------------------------------------------------------------------
@@ -426,6 +431,111 @@ describe('generate', () => {
     it('generated index.html includes console-page styles', async () => {
       const content = await generateAndReadIndex();
       expect(content).toContain('.console-page');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // Topology and entity legend integration tests (153-02)
+  // -------------------------------------------------------------------------
+
+  describe('topology integration', () => {
+    beforeEach(async () => {
+      const { collectAndRenderMetrics } = await import('./metrics/integration.js');
+      vi.mocked(collectAndRenderMetrics).mockReset();
+      vi.mocked(collectAndRenderMetrics).mockResolvedValue({
+        html: '',
+        sections: 0,
+        durationMs: 0,
+      });
+
+      const { collectTopologyData } = await import('./collectors/topology-collector.js');
+      vi.mocked(collectTopologyData).mockReset();
+    });
+
+    it('includes topology panel content when collector returns data', async () => {
+      const { collectTopologyData } = await import('./collectors/topology-collector.js');
+      vi.mocked(collectTopologyData).mockResolvedValue({
+        agents: [{ id: 'agent-1', name: 'Test Agent', domain: 'backend', skills: [] }],
+        skills: [{ id: 'skill-1', name: 'Test Skill', domain: 'frontend', agentId: undefined }],
+        teams: [],
+        activeAgentIds: [],
+        activeSkillIds: [],
+      });
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      const result = await generate({ planningDir, outputDir, force: true });
+
+      expect(result.pages).toContain('index.html');
+      const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
+      expect(content).toContain('topology-panel');
+    });
+
+    it('includes entity legend in generated index page', async () => {
+      const { collectTopologyData } = await import('./collectors/topology-collector.js');
+      vi.mocked(collectTopologyData).mockResolvedValue({
+        agents: [{ id: 'agent-1', name: 'Test Agent', domain: 'backend', skills: [] }],
+        skills: [],
+        teams: [],
+        activeAgentIds: [],
+        activeSkillIds: [],
+      });
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      await generate({ planningDir, outputDir, force: true });
+
+      const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
+      expect(content).toContain('entity-legend');
+      expect(content).toContain('Shape &amp; Color Legend');
+    });
+
+    it('generates index page successfully when topology collector throws', async () => {
+      const { collectTopologyData } = await import('./collectors/topology-collector.js');
+      vi.mocked(collectTopologyData).mockRejectedValue(
+        new Error('Topology collection failed'),
+      );
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      const result = await generate({ planningDir, outputDir, force: true });
+
+      // Generation should still succeed
+      expect(result.pages).toContain('index.html');
+      expect(result.errors).toHaveLength(0);
+
+      // Index page should exist but without topology content
+      const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
+      expect(content).toBeTruthy();
+      expect(content).not.toContain('topology-panel');
+    });
+
+    it('passes real topologySource to renderIndexContent instead of undefined', async () => {
+      const { collectTopologyData } = await import('./collectors/topology-collector.js');
+      vi.mocked(collectTopologyData).mockResolvedValue({
+        agents: [{ id: 'builder', name: 'Builder Agent', domain: 'infrastructure', skills: ['deploy'] }],
+        skills: [{ id: 'deploy', name: 'Deploy Skill', domain: 'infrastructure', agentId: 'builder' }],
+        teams: [],
+        activeAgentIds: [],
+        activeSkillIds: [],
+      });
+
+      await writeFile(join(planningDir, 'PROJECT.md'), PROJECT_MD);
+      await writeFile(join(planningDir, 'STATE.md'), STATE_MD);
+
+      const { generate } = await import('./generator.js');
+      await generate({ planningDir, outputDir, force: true });
+
+      const content = await readFile(join(outputDir, 'index.html'), 'utf-8');
+      // The topology panel should contain SVG node data from the real source
+      expect(content).toContain('data-node-id');
+      expect(content).toContain('Builder Agent');
     });
   });
 });
