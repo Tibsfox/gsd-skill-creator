@@ -11,3 +11,12 @@ export {
   isEffectEnabled,
 } from './crt-config';
 export { FrameTimeMeasurer } from './performance';
+export { PaletteTexture } from './palette-texture';
+export {
+  type Palette,
+  type PalettePreset,
+  PALETTE_PRESETS,
+  generatePalette,
+  getPaletteColors,
+  paletteToUint8,
+} from './palette';

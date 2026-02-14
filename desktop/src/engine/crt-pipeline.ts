@@ -46,8 +46,13 @@ export class CRTPipeline {
   /**
    * Render the 2-pass CRT effect chain.
    * When config.enabled is false, returns immediately (no GPU work).
+   *
+   * @param config - CRT effect configuration
+   * @param sourceTexture - Optional source texture for pass 1 input
+   *                        (e.g. palette background render target).
+   *                        When provided, binds to TEXTURE0 as u_source.
    */
-  render(config: CRTConfig): void {
+  render(config: CRTConfig, sourceTexture?: WebGLTexture): void {
     if (!config.enabled) return;
 
     const { gl, quad, distortProgram, postProgram, targets, width, height } = this;
@@ -55,6 +60,14 @@ export class CRTPipeline {
     // --- Pass 1: distortion (barrel + chromatic aberration + vignette) ---
     targets[0].bind();
     distortProgram.use();
+
+    // Bind explicit source texture if provided (e.g. scene render target)
+    if (sourceTexture) {
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, sourceTexture);
+      distortProgram.setUniform1i('u_source', 0);
+    }
+
     distortProgram.setUniform2f('u_resolution', width, height);
     distortProgram.setUniform1f('u_barrelDistortion', config.barrelDistortion);
     distortProgram.setUniform1f('u_chromaticAberration', config.chromaticAberration);
