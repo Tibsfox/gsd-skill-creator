@@ -29,6 +29,29 @@ import { renderGantryPanel, renderGantryStyles } from './gantry-panel.js';
 import { buildGantryData } from './gantry-data.js';
 import { renderTopologyStyles } from './topology-renderer.js';
 import { buildTopologyHtml } from './topology-integration.js';
+import { renderMetricsStyles } from './metrics/metrics-styles.js';
+import { buildTerminalHtml } from './terminal-integration.js';
+import { renderActivityTabStyles } from './activity-tab-toggle.js';
+import { renderActivityFeed, renderActivityFeedStyles } from './activity-feed.js';
+import { renderEntityLegend, renderEntityLegendStyles } from './entity-legend.js';
+import { collectTopologyData } from './collectors/topology-collector.js';
+import { collectActivityFeed } from './collectors/activity-collector.js';
+import { renderEntityShapeStyles } from './entity-shapes.js';
+import { renderSiliconPanel, renderSiliconPanelStyles } from './silicon-panel.js';
+import { renderBudgetGauge, renderBudgetGaugeStyles } from './budget-gauge.js';
+import { collectBudgetSiliconData } from './budget-silicon-collector.js';
+import { renderStagingQueuePanel, renderStagingQueueStyles } from './staging-queue-panel.js';
+import { collectStagingQueue } from './collectors/staging-collector.js';
+import { renderQuestionCardStyles } from './question-card.js';
+import { renderUploadZoneStyles } from './upload-zone.js';
+import { renderConfigFormStyles } from './config-form.js';
+import { renderSubmitFlow, renderSubmitFlowStyles } from './submit-flow.js';
+import { renderConsoleSettingsStyles } from './console-settings.js';
+import { renderConsoleActivityStyles } from './console-activity.js';
+import { renderConsolePage, renderConsolePageStyles } from './console-page.js';
+import type { ConsolePageData } from './console-page.js';
+import { collectConsoleData } from './collectors/console-collector.js';
+import type { FeedEntry } from './activity-feed.js';
 import type { TopologySource } from './topology-data.js';
 import type { DashboardData } from './types.js';
 import { mkdir, writeFile, access } from 'node:fs/promises';
@@ -72,6 +95,7 @@ const NAV_PAGES: NavPage[] = [
   { name: 'roadmap', path: 'roadmap.html', label: 'Roadmap' },
   { name: 'milestones', path: 'milestones.html', label: 'Milestones' },
   { name: 'state', path: 'state.html', label: 'State' },
+  { name: 'console', path: 'console.html', label: 'Console' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -81,7 +105,15 @@ const NAV_PAGES: NavPage[] = [
 /**
  * Render the main dashboard index page content.
  */
-function renderIndexContent(data: DashboardData, metricsHtml?: string, topologySource?: TopologySource): string {
+function renderIndexContent(
+  data: DashboardData,
+  metricsHtml?: string,
+  topologySource?: TopologySource,
+  terminalHtml?: string,
+  feedEntries?: FeedEntry[],
+  budgetSiliconHtml?: string,
+  stagingQueueHtml?: string,
+): string {
   const sections: string[] = [];
 
   // Page title
@@ -93,30 +125,56 @@ function renderIndexContent(data: DashboardData, metricsHtml?: string, topologyS
     sections.push(`<p style="color: var(--text-muted); margin-bottom: var(--space-xl);">${escapeHtml(data.project.description)}</p>`);
   }
 
-  // Stats grid
+  // Stats grid (full width above the two-column layout)
   sections.push(renderStatsGrid(data));
+
+  // --- Two-column layout: Terminal (left) | Info cards (right) ---
+  const rightPanels: string[] = [];
 
   // Current milestone status
   if (data.state) {
-    sections.push(renderCurrentStatus(data));
+    rightPanels.push(renderCurrentStatus(data));
+  }
+
+  // Budget & silicon section
+  if (budgetSiliconHtml) {
+    rightPanels.push(budgetSiliconHtml);
+  }
+
+  // Activity feed (compact, standalone)
+  const activityHtml = renderActivityFeed(feedEntries ?? []);
+  rightPanels.push(`<div class="compact-card"><h3 class="compact-title">Activity</h3>${activityHtml}</div>`);
+
+  // Staging queue panel
+  if (stagingQueueHtml) {
+    rightPanels.push(stagingQueueHtml);
   }
 
   // Live metrics sections
   if (metricsHtml) {
-    sections.push(metricsHtml);
+    rightPanels.push(metricsHtml);
   }
 
-  // Route map topology (if source data available)
+  // Route map topology
   if (topologySource) {
-    sections.push(buildTopologyHtml(topologySource));
+    rightPanels.push(buildTopologyHtml(topologySource));
+    rightPanels.push(renderEntityLegend());
   }
 
   // Phase list from roadmap
   if (data.roadmap && data.roadmap.phases.length > 0) {
-    sections.push(renderPhaseList(data));
+    rightPanels.push(renderPhaseList(data));
   }
 
-  // Milestone timeline
+  const terminalCard = terminalHtml
+    ? `<div class="dashboard-terminal-col"><div class="terminal-standalone">${terminalHtml}</div></div>`
+    : '';
+
+  const rightCol = `<div class="dashboard-info-col">${rightPanels.join('\n')}</div>`;
+
+  sections.push(`<div class="dashboard-grid">${terminalCard}${rightCol}</div>`);
+
+  // Milestone timeline (full width below the grid)
   if (data.milestones && data.milestones.milestones.length > 0) {
     sections.push(renderMilestoneTimeline(data));
   }
@@ -315,6 +373,18 @@ function statusToBadgeClass(status: string): string {
   return 'badge-pending';
 }
 
+/**
+ * Render the console page content.
+ *
+ * Combines the console page (status, questions, settings, activity)
+ * with the submit flow section.
+ */
+function renderConsoleContent(data: ConsolePageData): string {
+  const consolePage = renderConsolePage(data);
+  const submitFlow = renderSubmitFlow(data.helperUrl);
+  return consolePage + '\n' + submitFlow;
+}
+
 // ---------------------------------------------------------------------------
 // Main generator
 // ---------------------------------------------------------------------------
@@ -363,6 +433,83 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     // Metrics collection failure never blocks dashboard generation
   }
 
+  // Build terminal panel (graceful — never fails the pipeline)
+  let terminalHtml = '';
+  let terminalStyles = '';
+  try {
+    const terminalResult = await buildTerminalHtml();
+    terminalHtml = terminalResult.html;
+    terminalStyles = terminalResult.styles;
+  } catch {
+    // Terminal failure never blocks dashboard generation
+  }
+
+  // Collect topology data (graceful — never fails the pipeline)
+  let topologySource: TopologySource | undefined;
+  try {
+    const projectRoot = join(options.planningDir, '..');
+    topologySource = await collectTopologyData({
+      commandsDir: join(projectRoot, '.claude', 'commands'),
+      agentsDir: join(projectRoot, '.claude', 'agents'),
+      teamsDir: join(projectRoot, '.claude', 'teams'),
+    });
+  } catch {
+    // Topology collection failure never blocks dashboard generation
+  }
+
+  // Collect activity feed entries (graceful — never fails the pipeline)
+  let feedEntries: FeedEntry[] = [];
+  try {
+    feedEntries = await collectActivityFeed({
+      maxCommits: 30,
+      maxEntries: 50,
+      cwd: process.cwd(),
+    });
+  } catch {
+    // Activity collection failure never blocks dashboard generation
+  }
+
+  // Collect budget & silicon data (graceful — never fails the pipeline)
+  let budgetSiliconHtml = '';
+  try {
+    const bsData = await collectBudgetSiliconData({
+      skillsDir: join(process.cwd(), '.claude', 'commands'),
+      configPath: join(options.planningDir, 'skill-creator.json'),
+    });
+    const gaugeHtml = renderBudgetGauge(bsData.gauge);
+    const siliconHtml = renderSiliconPanel(bsData.silicon);
+    budgetSiliconHtml = `<div class="compact-card"><h3 class="compact-title">Budget</h3>${gaugeHtml}${siliconHtml}</div>`;
+  } catch {
+    // Budget/silicon collection failure never blocks dashboard generation
+  }
+
+  // Collect staging queue data (graceful — never fails the pipeline)
+  let stagingQueueHtml = '';
+  try {
+    const stagingData = await collectStagingQueue({
+      basePath: join(options.planningDir, '..'),
+    });
+    stagingQueueHtml = renderStagingQueuePanel(stagingData);
+  } catch {
+    // Staging queue failure never blocks dashboard generation
+  }
+
+  // Collect console page data (graceful — never fails the pipeline)
+  let consoleData: ConsolePageData = {
+    status: null,
+    questions: [],
+    helperUrl: '/api/console/message',
+    config: null,
+    activityEntries: [],
+  };
+  try {
+    consoleData = await collectConsoleData({
+      basePath: join(options.planningDir, '..'),
+    });
+  } catch {
+    // Console data collection failure never blocks dashboard generation
+  }
+
   // Ensure output directory exists
   try {
     await mkdir(options.outputDir, { recursive: true });
@@ -389,7 +536,28 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
   const gantryHtml = renderGantryPanel(gantryData);
   const gantryStyles = renderGantryStyles();
   const topologyStyles = renderTopologyStyles();
-  const styles = baseStyles + gantryStyles + topologyStyles;
+  const metricsStyles = renderMetricsStyles();
+  const activityTabStyles = renderActivityTabStyles();
+  const activityFeedStyles = renderActivityFeedStyles();
+  const entityLegendStyles = renderEntityLegendStyles();
+  const entityShapeStyles = renderEntityShapeStyles();
+  const siliconPanelStyles = renderSiliconPanelStyles();
+  const budgetGaugeStyles = renderBudgetGaugeStyles();
+  const stagingQueueStyles = renderStagingQueueStyles();
+  const questionCardStyles = renderQuestionCardStyles();
+  const uploadZoneStyles = renderUploadZoneStyles();
+  const configFormStyles = renderConfigFormStyles();
+  const submitFlowStyles = renderSubmitFlowStyles();
+  const consoleSettingsStyles = renderConsoleSettingsStyles();
+  const consoleActivityStyles = renderConsoleActivityStyles();
+  const consolePageStyles = renderConsolePageStyles();
+
+  const styles = baseStyles + gantryStyles + topologyStyles + metricsStyles
+    + activityTabStyles + activityFeedStyles + terminalStyles
+    + entityLegendStyles + entityShapeStyles + siliconPanelStyles
+    + budgetGaugeStyles + stagingQueueStyles + questionCardStyles
+    + uploadZoneStyles + configFormStyles + submitFlowStyles
+    + consoleSettingsStyles + consoleActivityStyles + consolePageStyles;
 
   // Page definitions: name, filename, content renderer, meta, jsonLd
   const pageDefinitions: {
@@ -402,7 +570,7 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
     {
       name: 'index',
       filename: 'index.html',
-      render: () => renderIndexContent(data, metricsHtml),
+      render: () => renderIndexContent(data, metricsHtml, topologySource, terminalHtml, feedEntries, budgetSiliconHtml, stagingQueueHtml),
       meta: {
         description: data.project?.description ?? 'GSD Planning Docs Dashboard',
         ogTitle: projectName,
@@ -454,6 +622,17 @@ export async function generate(options: GenerateOptions): Promise<GenerateResult
         description: 'Current project state and session continuity',
         ogTitle: `${projectName} - State`,
         ogDescription: 'Current project state and session continuity',
+        ogType: 'website',
+      },
+    },
+    {
+      name: 'console',
+      filename: 'console.html',
+      render: () => renderConsoleContent(consoleData),
+      meta: {
+        description: 'Console interface for settings, activity, and milestone submission',
+        ogTitle: `${projectName} - Console`,
+        ogDescription: 'Console interface for settings, activity, and milestone submission',
         ogType: 'website',
       },
     },

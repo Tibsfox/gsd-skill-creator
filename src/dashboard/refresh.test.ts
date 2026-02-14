@@ -42,4 +42,11 @@ describe('generateRefreshScript', () => {
     expect(script).toContain('<script>');
     expect(script).toContain('</script>');
   });
+
+  it('uses design system tokens for overlay colors', () => {
+    const script = generateRefreshScript(5000);
+    const stripped = script.replace(/var\([^)]+\)/g, 'VAR_REPLACED');
+    const hexInColor = stripped.match(/color:\s*#[0-9a-fA-F]{3,8}/g);
+    expect(hexInColor).toBeNull();
+  });
 });

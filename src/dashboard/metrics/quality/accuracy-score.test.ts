@@ -197,4 +197,52 @@ describe('renderAccuracyScores', () => {
     expect(phase1Pos).toBeLessThan(phase2Pos);
     expect(phase2Pos).toBeLessThan(phase4Pos);
   });
+
+  // -------------------------------------------------------------------------
+  // 11. Windowing — shows only last N phases
+  // -------------------------------------------------------------------------
+  it('shows all phases when count is within window size', () => {
+    const html = renderAccuracyScores([onTrackDiff, expandedDiff, contractedDiff], 5);
+
+    expect(html).toContain('Phase 1');
+    expect(html).toContain('Phase 2');
+    expect(html).toContain('Phase 3');
+    expect(html).not.toContain('earlier phases');
+  });
+
+  it('shows summary row when phases exceed window size', () => {
+    // 4 distinct phases, window of 2 => 2 hidden, 2 visible
+    const html = renderAccuracyScores(
+      [onTrackDiff, expandedDiff, contractedDiff, shiftedDiff],
+      2,
+    );
+
+    expect(html).toContain('2 earlier phases');
+    expect(html).toContain('summarized');
+    // Only the last 2 phases (3, 4) should be visible
+    expect(html).toContain('Phase 3');
+    expect(html).toContain('Phase 4');
+    // Earlier phases (1, 2) should not have individual rows
+    expect(html).not.toMatch(/accuracy-phase">Phase 1</);
+    expect(html).not.toMatch(/accuracy-phase">Phase 2</);
+  });
+
+  it('uses default windowSize of 20 when not specified', () => {
+    // With just 4 phases, default window of 20 should show all
+    const html = renderAccuracyScores([onTrackDiff, expandedDiff, contractedDiff, shiftedDiff]);
+
+    expect(html).not.toContain('earlier phases');
+    expect(html).toContain('Phase 1');
+    expect(html).toContain('Phase 4');
+  });
+
+  it('shows summary with ellipsis indicator', () => {
+    const html = renderAccuracyScores(
+      [onTrackDiff, expandedDiff, contractedDiff],
+      1,
+    );
+
+    expect(html).toContain('&#x2026;'); // ellipsis
+    expect(html).toContain('accuracy-summary');
+  });
 });

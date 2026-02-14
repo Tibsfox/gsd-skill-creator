@@ -224,12 +224,12 @@ export function renderConsoleActivityStyles(): string {
 
 .badge-config-write {
   background: rgba(31, 111, 235, 0.15);
-  color: #58a6ff;
+  color: var(--accent, #58a6ff);
 }
 
 .badge-question-response {
   background: rgba(63, 185, 80, 0.15);
-  color: #3fb950;
+  color: var(--green, #3fb950);
 }
 
 .badge-milestone-submit {
@@ -239,12 +239,12 @@ export function renderConsoleActivityStyles(): string {
 
 .badge-upload {
   background: rgba(163, 113, 247, 0.15);
-  color: #a371f7;
+  color: var(--purple, #a371f7);
 }
 
 .badge-error {
   background: rgba(248, 81, 73, 0.15);
-  color: #f85149;
+  color: var(--red, #f85149);
 }
 
 .activity-summary {
@@ -374,8 +374,8 @@ export function renderClipboardFallbackScript(): string {
 
 .helper-offline {
   background: rgba(248, 81, 73, 0.1);
-  border: 1px solid #f85149;
-  color: #f85149;
+  border: 1px solid var(--red, #f85149);
+  color: var(--red, #f85149);
   padding: 8px 12px;
   border-radius: 6px;
   margin-bottom: 12px;

@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-generate-dashboard"
+description = "Enables the generate_dashboard command without any pre-configured scope."
+commands.allow = ["generate_dashboard"]
+
+[[permission]]
+identifier = "deny-generate-dashboard"
+description = "Denies the generate_dashboard command without any pre-configured scope."
+commands.deny = ["generate_dashboard"]
