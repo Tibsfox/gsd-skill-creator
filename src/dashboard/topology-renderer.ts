@@ -394,5 +394,74 @@ export function renderTopologyStyles(): string {
   padding: var(--space-md, 1rem) 0;
   text-align: center;
 }
+
+/* --- Detail panel (click-to-detail) --- */
+
+.tp-detail-panel {
+  position: absolute;
+  top: var(--space-lg, 1.25rem);
+  right: var(--space-lg, 1.25rem);
+  width: 220px;
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-md, 6px);
+  padding: var(--space-md, 1rem);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: tp-slide-in 0.2s ease-out;
+  z-index: 10;
+}
+
+.tp-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+.tp-detail-title {
+  font-weight: 600;
+  color: var(--text-primary, #e0e0e0);
+}
+
+.tp-detail-close {
+  background: none;
+  border: none;
+  color: var(--text-muted, #a0a0a0);
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0 4px;
+}
+
+.tp-detail-close:hover {
+  color: var(--text-primary, #e0e0e0);
+}
+
+.tp-detail-field {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border, #333);
+}
+
+.tp-detail-label {
+  font-size: 0.8rem;
+  color: var(--text-muted, #a0a0a0);
+}
+
+.tp-detail-value {
+  font-size: 0.8rem;
+  color: var(--text-primary, #e0e0e0);
+}
+
+@keyframes tp-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 `;
 }
