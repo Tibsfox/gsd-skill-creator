@@ -2,6 +2,7 @@
 ///
 /// Uses thiserror for ergonomic error definition and implements
 /// Serialize manually (as string via Display) for IPC transit.
+#[allow(dead_code)] // foundation error type, commands still use String
 #[derive(Debug, thiserror::Error)]
 pub enum AppError {
     #[error("Command not found: {0}")]
