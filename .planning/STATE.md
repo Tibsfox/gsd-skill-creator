@@ -4,8 +4,8 @@
 
 Phase: 179 — Distribution Abstraction Layer
 Plan: 02/02 complete
-Status: Wave 2 IN PROGRESS (179 complete, 180-02 done, 171-02 done; 171-01, 172, 180-01, 181 pending)
-Last activity: 2026-02-18 — Completed 179-02 firewall abstraction and integration tests
+Status: Wave 2 IN PROGRESS (179 complete, 180-02 done, 171-02 done, 181-01 done; 171-01, 172, 180-01, 181-02 pending)
+Last activity: 2026-02-18 — Completed 181-01 GPU and audio assessment modules
 
 Progress: [####......................] 4/30 phases (Wave 1 complete: 169, 170, 178; Wave 2: 179 complete, 171/180 in progress)
 
@@ -14,7 +14,7 @@ Progress: [####......................] 4/30 phases (Wave 1 complete: 169, 170, 1
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.22 Minecraft Knowledge World -- Wave 2 execution (Phase 179 in progress)
+**Current focus:** v1.22 Minecraft Knowledge World -- Wave 2 execution (Phase 181 in progress)
 
 ## Current Milestone
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Continue Wave 2 parallels: 171-01, 172, 180-01, 181
-2. Phase 179 complete -- distro abstraction layer fully built and tested
-3. Wave 2 remaining: 171-01, 172 (planning+execution), 180-01, 181 (planning+execution)
+1. Continue Wave 2 parallels: 171-01, 172, 180-01, 181-02
+2. Phase 181-01 complete -- GPU and audio assessment modules built and tested
+3. Wave 2 remaining: 171-01, 172, 180-01, 181-02
 
 ## Decisions
 
@@ -37,6 +37,10 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Dual YAML output: sanitized (git-safe) and local (gitignored) from single script run
 - Minimum requirements threshold: 16GB RAM + CPU virtualization support
 - Runtime-generated hardware-profile.yaml not committed -- example file documents structure instead
+- [Phase 172]: Infrastructure-level backends separate from Phase 180 platform-level abstraction -- 172 handles full provisioning pipeline
+- [Phase 172]: 60-second graceful shutdown timeout with force fallback for infrastructure VMs
+- [Phase 172]: VM_BACKEND environment variable override for explicit backend selection without capabilities YAML
+- [Phase 172]: Parameter validation reports ALL failures at once (not fail-fast on first error)
 
 ### From Phase 169 Plan 02
 - Integer-only arithmetic in bash for resource budget calculations
@@ -90,6 +94,12 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Capability matrix is static hand-maintained YAML for feature gating, not auto-generated
 - Container exit codes match vm-ctl.sh convention (0=ok, 1=error, 2=no runtime, 3=args)
 
+### From Phase 181 Plan 01
+- Subsection-aware awk parsing for nested YAML (audio.midi.present) without external dependencies
+- UAE audio backend: SDL for PipeWire/PulseAudio (auto-detects server), ALSA for direct-only systems
+- Vulkan display for NVIDIA/AMD modern drivers, OpenGL for older, software for no GPU
+- ALSA MIDI backend universal on Linux when MIDI hardware detected
+
 ## Accumulated Context
 
 ### From v1.21 (GSD-OS Desktop Foundation)
@@ -126,8 +136,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T07:19:18Z
-Stopped at: Completed 179-02-PLAN.md (firewall abstraction and integration tests)
+Last session: 2026-02-18T07:27:11Z
+Stopped at: Completed 181-01-PLAN.md (GPU and audio assessment modules)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
