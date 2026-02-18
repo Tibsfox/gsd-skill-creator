@@ -148,6 +148,9 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 2
 - **Dependencies:** Phase 178 (hardware discovery)
 - **Requirements:** PLAT-04, PLAT-05, PLAT-06
+- **Plans:** 2 plans
+  - [ ] 179-01-PLAN.md — Package manager abstraction with name mapping (PLAT-04, PLAT-05)
+  - [ ] 179-02-PLAN.md — Firewall abstraction with port management and integration test (PLAT-06)
 - **Success Criteria:**
   1. Distribution detection correctly identifies OS from /etc/os-release and maps to package manager
   2. Package installation works on all Tier 1 distributions (dnf, apt, pacman)
@@ -474,7 +477,7 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 | 176 | Client Setup & Documentation | 3 | Pending |
 | 177 | Integration Verification | 3 | Pending |
 | 178 | 2/2 | Complete   | 2026-02-18 |
-| 179 | Distribution Abstraction Layer | 2 | Pending |
+| 179 | Distribution Abstraction Layer | 2 | Planned |
 | 180 | Hypervisor Abstraction Layer | 2 | Pending |
 | 181 | Hardware Adaptation Engine | 2 | Pending |
 | 182 | UAE Installation & Configuration | 3 | Pending |
