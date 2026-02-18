@@ -1,0 +1,141 @@
+# Unified Hardware Capabilities: 16GB Laptop with no discrete GPU
+# Fixture for test-assess-gpu.sh and test-assess-audio.sh
+# Full 11-section structure matching hardware-capabilities.example.yaml
+
+metadata:
+  version: 1.0.0
+  generated: "2026-01-01T00:00:00Z"
+  subsystems_discovered:
+    - cpu
+    - memory
+    - storage
+    - gpu
+    - hypervisor
+    - audio
+    - network
+    - usb
+    - distro
+
+cpu:
+  architecture: x86_64
+  family: "Intel Core i5 12th Gen"
+  cores_physical: 4
+  cores_logical: 8
+  virtualization: true
+  virtualization_type: vmx
+
+memory:
+  total_gb: 16
+  swap_gb: 2
+
+storage:
+  devices:
+    - type: ssd
+      size_gb: 256
+  total_gb: 256
+  device_count: 1
+
+gpu:
+  present: false
+  vendor: none
+  family: none
+  vram_gb: 0
+  driver: none
+  iommu_available: false
+
+hypervisor:
+  kvm: true
+  vmware: false
+  virtualbox: false
+  podman: false
+  docker: false
+  nested_virtualization: false
+
+audio:
+  present: true
+  server: none
+  alsa:
+    card_count: 1
+    cards:
+      - index: 0
+        name: "HDA Intel PCH"
+        driver: HDA-Intel
+  midi:
+    present: false
+    port_count: 0
+    ports: []
+  capabilities:
+    has_audio_output: true
+    has_audio_input: false
+    has_midi: false
+
+network:
+  interface_count: 2
+  interfaces:
+    - name: enp0s31f6
+      type: ethernet
+      state: down
+      speed_mbps: -1
+    - name: wlp2s0
+      type: wifi
+      state: up
+      speed_mbps: -1
+  dns:
+    dnsmasq_available: false
+    systemd_resolved: true
+  capabilities:
+    has_ethernet: true
+    has_wifi: true
+    has_bridge_support: false
+    has_bond_support: false
+    has_vlan_support: false
+
+usb:
+  present: true
+  controller_count: 1
+  controllers:
+    - type: xhci
+      usb_version: "3.0"
+  device_count: 3
+  device_classes:
+    - hid
+  capabilities:
+    has_usb3: true
+    has_usb2: true
+    max_version: "3.0"
+
+distro:
+  id: ubuntu
+  version: "22.04"
+  id_like: debian
+  pretty_name: "Ubuntu 22.04.3 LTS"
+  kernel: "5.15.0-91-generic"
+  kernel_major: "5.15"
+  tier: 1
+  package_manager: apt
+  firewall: ufw
+  init_system: systemd
+  init_version: "249"
+  security:
+    selinux: absent
+    apparmor: enabled
+  capabilities:
+    is_tier1: true
+    has_systemd: true
+    has_selinux: false
+    has_apparmor: true
+
+capabilities:
+  can_run_vms: true
+  can_passthrough_gpu: false
+  meets_minimum: true
+  has_audio_output: true
+  has_audio_input: false
+  has_midi: false
+  has_ethernet: true
+  has_wifi: true
+  has_bridge_support: false
+  has_usb3: true
+  is_tier1_distro: true
+  has_systemd: true
+  has_selinux: false
