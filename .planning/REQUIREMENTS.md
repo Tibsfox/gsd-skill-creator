@@ -75,9 +75,9 @@
 - [ ] **WORLD-03**: Wayfinding system uses color-coded paths, beacon landmarks, and consistent sign formatting
 - [x] **WORLD-04**: Spawn plaza welcomes and orients new players within 60 seconds
 - [x] **WORLD-05**: Tutorial path is completable in 5 minutes
-- [ ] **WORLD-06**: Schematic library contains at least 10 reusable architectural templates (meeting room, presentation hall, workshop, server room, library, garden, bridge, gateway, tower, observatory)
+- [x] **WORLD-06**: Schematic library contains at least 10 reusable architectural templates (meeting room, presentation hall, workshop, server room, library, garden, bridge, gateway, tower, observatory)
 - [ ] **WORLD-07**: All schematics load correctly in Litematica and are shareable via Syncmatica
-- [ ] **WORLD-08**: Schematic catalog YAML is valid with accurate metadata and consistent naming convention
+- [x] **WORLD-08**: Schematic catalog YAML is valid with accurate metadata and consistent naming convention
 - [ ] **WORLD-09**: "Visualize a Pipeline" guided build teaches data flow concepts through rooms and corridors
 - [ ] **WORLD-10**: "Build a Network Topology" guided build teaches network concepts through buildings and paths
 - [ ] **WORLD-11**: "Design a Database Schema" guided build teaches relational concepts through rooms and doors
@@ -196,9 +196,9 @@
 | WORLD-03 | Phase 186 | Pending |
 | WORLD-04 | Phase 187 | Complete |
 | WORLD-05 | Phase 187 | Complete |
-| WORLD-06 | Phase 188 | Pending |
+| WORLD-06 | Phase 188 | Complete |
 | WORLD-07 | Phase 188 | Pending |
-| WORLD-08 | Phase 188 | Pending |
+| WORLD-08 | Phase 188 | Complete |
 | WORLD-09 | Phase 189 | Pending |
 | WORLD-10 | Phase 189 | Pending |
 | WORLD-11 | Phase 189 | Pending |
