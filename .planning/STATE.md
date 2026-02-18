@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 175-server-configuration-tuning (Wave 3 in progress)
-Plan: 175-01 complete
-Status: Executing Wave 3 -- Phase 175 Plan 01 complete (server.properties, whitelist management, RCON, perf tuning docs)
-Last activity: 2026-02-18 -- Completed 175-01-PLAN.md
+Phase: 182-uae-installation-configuration (Wave 3 in progress)
+Plan: 182-02 complete (Phase 182 fully complete)
+Status: Executing Wave 3 -- Phase 182 complete (UAE display, audio, scanline shader, config renderer)
+Last activity: 2026-02-18 -- Completed 182-02-PLAN.md
 
-Progress: [###########...............] 11/30 phases (Wave 1: 169, 170, 178; Wave 2: 171, 172, 179, 180, 181 -- all complete; Wave 3: 173, 174-01, 175-01 complete)
+Progress: [############..............] 12/30 phases (Wave 1: 169, 170, 178; Wave 2: 171, 172, 179, 180, 181 -- all complete; Wave 3: 173, 174-01, 175-01, 176-01, 182 complete)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.22 Minecraft Knowledge World -- Wave 3 execution (Phase 175 complete, continuing Wave 3)
+**Current focus:** v1.22 Minecraft Knowledge World -- Wave 3 execution (Phase 182 complete, continuing Wave 3)
 
 ## Current Milestone
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Continue Wave 3 execution: 176, 177 (Minecraft Server), 182, 183 (Amiga)
-2. Wave 3 in progress -- 173 complete (both plans), 174-01, 175-01, 182-01 complete
-3. Phase 175 server configuration ready for Phase 176 (Mod Integration) and Phase 177 (Integration Verification)
+1. Continue Wave 3 execution: 177 (Minecraft Server), 183 (Amiga) remaining
+2. Wave 3 in progress -- 173 (both plans), 174-01, 175-01, 176-01, 182 (both plans) complete
+3. Phase 182 UAE complete: display/audio/render config ready for Phase 183 (Amiga Application Profiles)
 
 ## Decisions
 
@@ -42,6 +42,10 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - [Phase 182]: AROS ROM URLs configurable via AROS_ROM_URL and AROS_SYSTEM_URL env vars for mirror flexibility
 - [Phase 182]: Base config uses {ROM_DIR}/{DATA_DIR} placeholder tokens for render-step substitution in Plan 02
 - [Phase 182]: A1200 model with AGA chipset selected for best AROS compatibility
+- [Phase 176]: Prism Launcher MMC pack format (mmc-pack.json + instance.cfg) for portable instance configuration
+- [Phase 176]: Client mod manifest as single source of truth: all docs reference mods-manifest.yaml for versions and download URLs
+- [Phase 176]: SHA256 checksums deferred to deployment time since JARs not downloaded during doc creation
+- [Phase 176]: Dual-path documentation: Prism Launcher quick path (5 min) plus Vanilla manual fallback (10 min)
 
 ### From Phase 169 Plan 02
 - Integer-only arithmetic in bash for resource budget calculations
@@ -183,8 +187,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T12:19:33Z
-Stopped at: Completed 175-01-PLAN.md (server.properties template, deploy-server-config.sh, manage-whitelist.sh, perf tuning docs)
+Last session: 2026-02-18T12:27:04Z
+Stopped at: Completed 176-01-PLAN.md (client setup guide, mods manifest, Prism Launcher profile, troubleshooting)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
