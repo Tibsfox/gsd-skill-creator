@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 184-asset-conversion-pipeline (Plan 01 complete, Plan 02 pending)
-Plan: 184-01 complete, 184-02 next
-Status: EXECUTING WAVE 4 -- Phase 184 Plan 01 complete (individual converters). Plan 02 pending (batch pipeline).
-Last activity: 2026-02-18 -- Completed 184-01 (IFF/ILBM and MOD/MED converters)
+Phase: 185-amiga-knowledge-world-integration (Plan 01 complete)
+Plan: 185-01 complete
+Status: EXECUTING WAVE 4 -- Phase 185 Plan 01 complete (legal guide and curated collection). Continuing Wave 4 phases.
+Last activity: 2026-02-18 -- Completed 185-01 (legal framework and curated Amiga collection)
 
-Progress: [################..........] 16/30 phases (Wave 1-3 complete; Wave 4 in progress: 184-01 done)
+Progress: [#################.........] 17/30 phases (Wave 1-3 complete; Wave 4 in progress: 184 done, 185-01 done)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.22 Minecraft Knowledge World -- Wave 4 execution (Phase 184 in progress)
+**Current focus:** v1.22 Minecraft Knowledge World -- Wave 4 execution (Phase 185 in progress)
 
 ## Current Milestone
 
@@ -26,9 +26,8 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Execute 184-02 (batch conversion pipeline and asset catalog)
-2. Continue Wave 4 phases: 185, 186, 187, 188, 189, 190
-3. 16/30 phases complete, 184-01 done, 184-02 + 13 more remaining
+1. Continue Wave 4 phases: 186, 187, 188, 189, 190
+2. 17/30 phases complete, 12 remaining in Waves 4-6
 
 ## Decisions
 
@@ -173,6 +172,12 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - WHDLoad HDF formatting requires xdftool (amitools pip package), manual fallback documented
 - Exchange path stored in infra/local/amiga-exchange.path for launcher auto-detection
 
+### From Phase 185 Plan 01
+- Conservative legal approach: exclude when in doubt, only include content with explicit redistribution permission
+- Four allowed license values: public_domain, freeware, scene_production, shareware_free
+- Five trusted source archives: Aminet, Scene.org, ADA, Mod Archive, AMP (metadata only)
+- AROS ROM as recommended default; GSD never distributes Kickstart ROMs
+
 ### From Phase 184 Plan 01
 - Binary IFF parser extracts BMHD, CMAP, CAMG chunks using od for metadata before conversion
 - MOD header parsing prioritized over ffprobe for module-specific metadata (channels, samples, patterns)
@@ -221,8 +226,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T22:41:58Z
-Stopped at: Completed 184-02-PLAN.md (batch conversion and asset catalog)
+Last session: 2026-02-18T22:51:20Z
+Stopped at: Completed 185-01-PLAN.md (legal framework and curated Amiga collection)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments

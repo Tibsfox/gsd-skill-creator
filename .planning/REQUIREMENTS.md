@@ -65,8 +65,8 @@
 - [x] **AMIGA-08**: MOD/MED to WAV/FLAC/OGG renderer produces sample-accurate audio output
 - [x] **AMIGA-09**: Batch conversion processes 100+ files without errors
 - [x] **AMIGA-10**: Asset catalog YAML manifest contains accurate metadata for all converted files
-- [ ] **AMIGA-11**: Curated asset collection (20 artworks, 20 music tracks, 10 demos) is legally distributable
-- [ ] **AMIGA-12**: Legal guide documents ROM acquisition paths and software distribution rights
+- [x] **AMIGA-11**: Curated asset collection (20 artworks, 20 music tracks, 10 demos) is legally distributable
+- [x] **AMIGA-12**: Legal guide documents ROM acquisition paths and software distribution rights
 
 ### Knowledge World Design (Plan 05)
 
@@ -189,8 +189,8 @@
 | AMIGA-08 | Phase 184 | Complete |
 | AMIGA-09 | Phase 184 | Complete |
 | AMIGA-10 | Phase 184 | Complete |
-| AMIGA-11 | Phase 185 | Pending |
-| AMIGA-12 | Phase 185 | Pending |
+| AMIGA-11 | Phase 185 | Complete |
+| AMIGA-12 | Phase 185 | Complete |
 | WORLD-01 | Phase 186 | Pending |
 | WORLD-02 | Phase 186 | Pending |
 | WORLD-03 | Phase 186 | Pending |
