@@ -59,8 +59,8 @@
 - [x] **AMIGA-02**: AROS ROM boots to a usable Amiga Workbench without copyright issues
 - [x] **AMIGA-03**: UAE display output uses GPU acceleration with optional scanline shader
 - [x] **AMIGA-04**: UAE audio output works through host audio subsystem (ALSA/PulseAudio/PipeWire)
-- [ ] **AMIGA-05**: Application-specific UAE profiles exist for Deluxe Paint, OctaMED, ProTracker, and PPaint
-- [ ] **AMIGA-06**: WHDLoad integration allows hard-drive-based software loading
+- [x] **AMIGA-05**: Application-specific UAE profiles exist for Deluxe Paint, OctaMED, ProTracker, and PPaint
+- [x] **AMIGA-06**: WHDLoad integration allows hard-drive-based software loading
 - [ ] **AMIGA-07**: IFF/ILBM to PNG converter preserves palette metadata and dimensions
 - [ ] **AMIGA-08**: MOD/MED to WAV/FLAC/OGG renderer produces sample-accurate audio output
 - [ ] **AMIGA-09**: Batch conversion processes 100+ files without errors
@@ -183,8 +183,8 @@
 | AMIGA-02 | Phase 182 | Complete |
 | AMIGA-03 | Phase 182 | Complete |
 | AMIGA-04 | Phase 182 | Complete |
-| AMIGA-05 | Phase 183 | Pending |
-| AMIGA-06 | Phase 183 | Pending |
+| AMIGA-05 | Phase 183 | Complete |
+| AMIGA-06 | Phase 183 | Complete |
 | AMIGA-07 | Phase 184 | Pending |
 | AMIGA-08 | Phase 184 | Pending |
 | AMIGA-09 | Phase 184 | Pending |

@@ -429,11 +429,7 @@ Wave 2 (Infrastructure):
 
 Wave 4 (Content):
   184 Asset Conversion (needs 183) ---+
-  185 Amiga Integration (needs 184, 186) |
-  186 World Layout (needs 177) ------+
-  187 Spawn Area (needs 186) --------|
-  188 Schematic Library (needs 186) --|
-  189 Curriculum (needs 186, 188) ----|
+  185 Amiga Integration (needs 184, 186) | 1/1 | Complete   | 2026-02-18 |
   190 Amiga Corner (needs 185, 186) --+
 
 Wave 5 (Integration & Ops):
