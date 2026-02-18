@@ -1,0 +1,85 @@
+# Knowledge World Sign Formatting Standards
+# All signs in the Knowledge World MUST follow these rules.
+
+formatting:
+  # Minecraft signs have 4 lines, ~15 chars per line (width depends on font)
+  max_lines: 4
+  max_chars_per_line: 15
+
+  title_signs:
+    # Used for building names, district entrances, landmark labels
+    line_1: "bold"          # Title text, ALL CAPS or Title Case
+    line_2: "standard"      # Subtitle or empty
+    line_3: "standard"      # Additional info or empty
+    line_4: "standard"      # Direction arrow or empty
+    text_color: "district"  # Uses district color code
+
+  info_signs:
+    # Used for explanations, descriptions, instructions
+    line_1: "bold"          # Section title
+    line_2: "standard"      # Body text line 1
+    line_3: "standard"      # Body text line 2
+    line_4: "standard"      # Body text line 3 or "..."
+    text_color: "white"     # White for readability
+
+  direction_signs:
+    # Used for wayfinding arrows and distance indicators
+    line_1: "bold"          # Destination name
+    line_2: "standard"      # Distance (e.g., "< 1 min walk")
+    line_3: "standard"      # Arrow symbol or direction
+    line_4: "standard"      # District color indicator
+    text_color: "district"  # Matches destination district
+
+  wall_text:
+    # Used for longer text on multiple signs in sequence
+    # Read left-to-right, each sign is one "paragraph"
+    format: "sequential"
+    numbering: false        # No page numbers, natural reading flow
+    text_color: "white"
+
+# Minecraft text color codes (section symbol + code)
+district_colors:
+  hardware:
+    primary: "gold"         # Section symbol + 6
+    block_palette: ["gold_block", "orange_concrete", "yellow_terracotta"]
+    description: "Warm metallic tones evoking circuits and copper traces"
+  software:
+    primary: "aqua"         # Section symbol + b
+    block_palette: ["diamond_block", "light_blue_concrete", "cyan_terracotta"]
+    description: "Cool digital tones evoking code and logic"
+  network:
+    primary: "green"        # Section symbol + a
+    block_palette: ["emerald_block", "lime_concrete", "green_terracotta"]
+    description: "Network/data flow green evoking terminal output"
+  creative:
+    primary: "light_purple" # Section symbol + d
+    block_palette: ["purpur_block", "magenta_concrete", "pink_terracotta"]
+    description: "Creative/artistic purple evoking imagination"
+  community:
+    primary: "blue"         # Section symbol + 9
+    block_palette: ["lapis_block", "blue_concrete", "blue_terracotta"]
+    description: "Social/community blue evoking collaboration"
+  workshop:
+    primary: "red"          # Section symbol + c
+    block_palette: ["redstone_block", "red_concrete", "red_terracotta"]
+    description: "Hands-on builder red evoking crafting and making"
+  spawn:
+    primary: "white"        # Section symbol + f
+    block_palette: ["quartz_block", "white_concrete", "smooth_stone"]
+    description: "Neutral spawn area, clean and welcoming"
+
+# Arrow symbols for direction signs
+arrows:
+  north: "^"
+  south: "v"
+  east: ">"
+  west: "<"
+  up: "/\\"
+  down: "\\/"
+
+# Language rules
+language:
+  tone: "welcoming"         # Friendly, not academic
+  person: "second"          # "You can..." not "Players should..."
+  tense: "present"          # "This district shows..." not "This district will show..."
+  jargon: "define_first"    # Technical terms get a plain-English explanation on first use
