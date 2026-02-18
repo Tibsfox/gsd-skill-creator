@@ -79,12 +79,13 @@ assert_contains() {
     fi
 }
 
-# Extract a YAML value by key (simple grep/awk, no yq dependency)
+# Extract YAML values by key (simple grep/awk, no yq dependency)
+# Returns ALL matching lines so callers can use `sed -n 'Np'` or `head -1`
 # Usage: yaml_val "key" "file"
 yaml_val() {
     local key="$1"
     local file="$2"
-    grep -E "^[[:space:]]*${key}:" "${file}" 2>/dev/null | head -1 | sed -E 's/^[^:]+:[[:space:]]*//' | sed 's/[[:space:]]*#.*//' | sed 's/^"//' | sed 's/"$//'
+    grep -E "^[[:space:]]*${key}:" "${file}" 2>/dev/null | sed -E 's/^[^:]+:[[:space:]]*//' | sed 's/[[:space:]]*#.*//' | sed 's/^"//' | sed 's/"$//'
 }
 
 # ---------------------------------------------------------------------------
