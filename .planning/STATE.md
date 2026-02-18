@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 189-educational-curriculum (Plan 01 complete)
-Plan: 189-01 complete
-Status: EXECUTING WAVE 4 -- Phase 189 Plan 01 complete (methodology + pipeline guided build). Continuing Wave 4 phases.
-Last activity: 2026-02-18 -- Completed 189-01 (spatial learning methodology and pipeline guided build)
+Phase: 190-amiga-corner-integration (Plan 01 complete)
+Plan: 190-01 complete
+Status: WAVE 4 COMPLETE -- All 7 Wave 4 phases done (184-190). Ready for Wave 5.
+Last activity: 2026-02-18 -- Completed 190-01 (Amiga Corner exhibit catalogs, schematic spec, and validation)
 
-Progress: [##################........] 18/30 phases (Wave 1-3 complete; Wave 4 in progress: 184-185-186-187-188-189 done)
+Progress: [###################.......] 19/30 phases (Wave 1-4 complete; Wave 5 ready: 191-197)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.22 Minecraft Knowledge World -- Wave 4 execution (Phase 189 complete)
+**Current focus:** v1.22 Minecraft Knowledge World -- Wave 4 complete, Wave 5 ready (Phase 190 complete)
 
 ## Current Milestone
 
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Continue Wave 4 phases: 190
-2. 18/30 phases complete, 12 remaining in Waves 4-6
+1. Begin Wave 5 phases: 191-197
+2. 19/30 phases complete, 11 remaining in Waves 5-6
 
 ## Decisions
 
@@ -197,6 +197,13 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Three-tier RCON fallback: mcrcon CLI, python3 socket protocol, /dev/tcp (graceful degradation)
 - Hardware capabilities grep pattern uses hypervisor:|can_run_vms:|kvm: to match actual discover-all.sh output
 
+### From Phase 190 Plan 01
+- 7 artworks spanning OCS, EHB, HAM6, AGA, and Hi-Res palette modes for comprehensive Amiga display coverage
+- 6 demo productions covering 1986-2003 timeline from Juggler to Starstruck for full scene history
+- 7 tool evolution stations including SoundTracker as separate from ProTracker for audio lineage completeness
+- Schematic spec uses relative coordinates from Creative District origin (Phase 186 provides absolute)
+- All exhibit content legally distributable: public_domain, freeware, or scene_production licenses only
+
 ## Accumulated Context
 
 ### From v1.21 (GSD-OS Desktop Foundation)
@@ -233,8 +240,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T22:51:48Z
-Stopped at: Completed 189-01-PLAN.md (spatial learning methodology and pipeline guided build)
+Last session: 2026-02-18T23:07:27Z
+Stopped at: Completed 190-01-PLAN.md (Amiga Corner exhibit catalogs, schematic spec, and validation)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
