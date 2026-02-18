@@ -310,6 +310,8 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 5
 - **Dependencies:** Phases 169-190 (all implementation phases)
 - **Requirements:** SKILL-01, SKILL-02, SKILL-03
+- **Plans:** 1 plan
+  - [ ] 191-01-PLAN.md — Create 20 SKILL.md files for all Plan 01-05 capabilities with trigger matrix audit
 - **Success Criteria:**
   1. Complete SKILL.md files exist for all 17+ skills identified across Plans 01-05
   2. Each skill has token budget annotation, trigger patterns, and at least one test case
@@ -426,17 +428,45 @@ Wave 2 (Infrastructure):
   171 Kickstart (needs 170) ---+
   172 VM Provisioning (needs 171) |---> Wave 3
   179 Distro Abstraction (needs 178) |
-  180 Hypervisor Abstraction (needs 178) | 2/2 | Complete   | 2026-02-18 |
+  180 Hypervisor Abstraction (needs 178) |
+  181 Hardware Adaptation (needs 178, 179) |
+
+Wave 3 (Services):
+  173 Server Foundation (needs 172) ---+
+  174 Mod Stack (needs 173) ----------|
+  175 Server Config (needs 173) ------|---> Wave 4
+  176 Client Setup (needs 174) -------|
+  177 Integration Verify (needs 174-176) |
+  182 UAE Installation (needs 179, 181) |
   183 App Profiles (needs 182) ------+
 
 Wave 4 (Content):
   184 Asset Conversion (needs 183) ---+
-  185 Amiga Integration (needs 184, 186) | 1/1 | Complete   | 2026-02-18 |
+  185 Amiga Integration (needs 184, 186) |
+  186 World Layout (needs 177) ---------|---> Wave 5
+  187 Spawn Area (needs 186) ----------|
+  188 Schematic Library (needs 186) ---|
+  189 Educational Curriculum (needs 186, 188) |
   190 Amiga Corner (needs 185, 186) --+
 
 Wave 5 (Integration & Ops):
   191 Skill Defs (needs 169-190) ---+
-  192 Agent Defs (needs 191) ------| 1/1 | Complete   | 2026-02-18 | Category | Requirements | Phases | Count |
+  192 Agent Defs (needs 191) ------|
+  193 Team Defs (needs 192) ------|---> Wave 6
+  194 Chipset Assembly (needs 193) |
+  195 Backup System (needs 177) --|
+  196 Monitoring (needs 177) -----|
+  197 Golden Image (needs 177, 172) |
+
+Wave 6 (Polish):
+  198 Runbooks (needs 195-197) -----> COMPLETE
+```
+
+---
+
+## Requirement Coverage
+
+| Category | Requirements | Phases | Count |
 |----------|-------------|--------|-------|
 | Infrastructure | INFRA-01 through INFRA-12 | 169-172 | 12 |
 | Minecraft | MC-01 through MC-13 | 173-177 | 13 |

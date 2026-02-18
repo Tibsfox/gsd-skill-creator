@@ -2,12 +2,12 @@
 
 ## Current Position
 
-Phase: 190-amiga-corner-integration (Plan 01 complete)
-Plan: 190-01 complete
-Status: WAVE 4 COMPLETE -- All 7 Wave 4 phases done (184-190). Ready for Wave 5.
-Last activity: 2026-02-18 -- Completed 190-01 (Amiga Corner exhibit catalogs, schematic spec, and validation)
+Phase: 195-automated-backup-system (Plan 01 complete)
+Plan: 195-01 complete
+Status: Wave 5 in progress -- Phase 195 complete
+Last activity: 2026-02-18 -- Completed 195-01 (Automated backup/restore with RCON quiesce and rotation)
 
-Progress: [###################.......] 19/30 phases (Wave 1-4 complete; Wave 5 ready: 191-197)
+Progress: [####################......] 20/30 phases (Wave 1-4 complete; Wave 5: 195 done)
 
 ## Project Reference
 
@@ -30,6 +30,13 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 2. 19/30 phases complete, 11 remaining in Waves 5-6
 
 ## Decisions
+
+### From Phase 195 Plan 01
+- Shared RCON library extracted as new file (not refactoring existing scripts) to avoid scope creep
+- ERR/EXIT trap guarantees save-on is always sent if save-off was issued, preventing stuck save-off
+- --force flag on restore matches vm-lifecycle.sh destroy convention from Phase 172
+- Exit code 3 for integrity failures distinct from exit code 1 (general error) and 2 (usage)
+- chown skipped when not root with warning; tests run as non-root, production runs as root
 
 ### From Phase 169 Plan 01
 - Sanitized profile excludes MACs, serials, hostnames, PCI slot addresses -- only capability flags and family names
@@ -240,8 +247,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T23:07:27Z
-Stopped at: Completed 190-01-PLAN.md (Amiga Corner exhibit catalogs, schematic spec, and validation)
+Last session: 2026-02-18T23:30:55Z
+Stopped at: Completed 195-01-PLAN.md (Automated backup/restore with RCON quiesce and rotation)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments

@@ -100,9 +100,9 @@
 
 ### Operations (Plan 07)
 
-- [ ] **OPS-01**: Backup script quiesces server (save-all, save-off) before backup with under 5-second interruption
-- [ ] **OPS-02**: Backup rotation keeps 24 hourly, 7 daily, 4 weekly backups
-- [ ] **OPS-03**: Restore script rebuilds from backup to a fresh VM with zero data loss
+- [x] **OPS-01**: Backup script quiesces server (save-all, save-off) before backup with under 5-second interruption
+- [x] **OPS-02**: Backup rotation keeps 24 hourly, 7 daily, 4 weekly backups
+- [x] **OPS-03**: Restore script rebuilds from backup to a fresh VM with zero data loss
 - [ ] **OPS-04**: node_exporter and JMX exporter provide system and JVM metrics to Prometheus
 - [ ] **OPS-05**: Custom metrics collector tracks TPS, player count, world size, chunk count, entity count, and mod status
 - [ ] **OPS-06**: Alert rules fire for TPS degradation, memory pressure, disk usage, backup age, and server unreachability
@@ -215,9 +215,9 @@
 | SKILL-08 | Phase 194 | Pending |
 | SKILL-09 | Phase 194 | Pending |
 | SKILL-10 | Phase 194 | Pending |
-| OPS-01 | Phase 195 | Pending |
-| OPS-02 | Phase 195 | Pending |
-| OPS-03 | Phase 195 | Pending |
+| OPS-01 | Phase 195 | Complete |
+| OPS-02 | Phase 195 | Complete |
+| OPS-03 | Phase 195 | Complete |
 | OPS-04 | Phase 196 | Pending |
 | OPS-05 | Phase 196 | Pending |
 | OPS-06 | Phase 196 | Pending |
