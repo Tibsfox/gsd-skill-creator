@@ -1,0 +1,38 @@
+# Trigger Overlap Matrix
+# Generated during Phase 191 skill definition
+# Purpose: Document that no two skills share ambiguous trigger patterns
+
+skills_count: 20
+total_token_budget: "~31.5%"  # Sum of all 20 skills (well under 40% ceiling)
+
+budget_breakdown:
+  plan_01_infrastructure: "7%"
+  plan_02_minecraft: "7.5%"
+  plan_03_platform: "7.5%"
+  plan_04_amiga: "5%"
+  plan_05_knowledge_world: "4.5%"
+
+disambiguation_rules:
+  - pair: [hardware-discovery, platform-discovery]
+    distinction: "hardware-discovery uses discover-hardware.sh for base CPU/RAM/GPU/storage; platform-discovery uses discover-all.sh for extended subsystems (audio/network/USB/distro)"
+    triggers_unique: "hardware-discovery: 'hardware.*profile'; platform-discovery: 'platform.*discover', 'discover.*(audio|network|usb)'"
+  - pair: [vm-lifecycle, hypervisor-abstraction]
+    distinction: "vm-lifecycle is infrastructure-level provisioning pipeline (provision-vm.sh); hypervisor-abstraction is platform-level backend dispatch (vm-ctl.sh)"
+    triggers_unique: "vm-lifecycle: 'provision.*vm', 'golden.*image'; hypervisor-abstraction: 'hypervisor.*abstract', 'vm.*ctl'"
+  - pair: [minecraft-deployment, server-configuration]
+    distinction: "minecraft-deployment handles Fabric installation and JVM tuning; server-configuration handles server.properties, whitelist, and RCON"
+    triggers_unique: "minecraft-deployment: 'fabric.*server', 'jvm.*tun'; server-configuration: 'server.*propert', 'whitelist', 'rcon'"
+  - pair: [minecraft-deployment, mod-management]
+    distinction: "minecraft-deployment handles base server; mod-management handles Fabric mods lifecycle"
+    triggers_unique: "minecraft-deployment: 'minecraft.*deploy'; mod-management: 'mod.*(install|update)', 'modrinth'"
+  - pair: [asset-conversion, content-curation]
+    distinction: "asset-conversion handles file format conversion (IFF/MOD); content-curation handles legal/licensing assessment"
+    triggers_unique: "asset-conversion: 'convert.*(iff|mod)', 'batch.*convert'; content-curation: 'legal.*(check|guide)', 'curate'"
+  - pair: [world-design, schematic-library]
+    distinction: "world-design handles spatial layout and districts; schematic-library handles individual build specs and catalog"
+    triggers_unique: "world-design: 'district', 'wayfind', 'coordinate'; schematic-library: 'schematic', 'litematica', 'catalog'"
+  - pair: [schematic-library, educational-curriculum]
+    distinction: "schematic-library manages the catalog and naming; educational-curriculum creates guided learning experiences"
+    triggers_unique: "schematic-library: 'schematic.*(catalog|library)'; educational-curriculum: 'curriculum', 'guided.*build', 'spatial.*learn'"
+
+validation_status: "All 20 skills have unique primary trigger patterns. No ambiguous overlaps detected."
