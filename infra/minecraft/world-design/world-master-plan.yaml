@@ -1,0 +1,210 @@
+# Knowledge World Master Plan
+# Generated for Phase 186 -- consumed by Phases 187-190
+# All coordinates are Minecraft (X, Y, Z) where Y is height
+
+version: "1.0"
+world_name: "GSD Knowledge World"
+game_mode: creative
+difficulty: peaceful
+world_border:
+  center: { x: 0, z: 0 }
+  radius: 600  # blocks from center -- encompasses all districts with buffer
+
+spawn_plaza:
+  name: "Spawn Plaza"
+  description: "Central hub and arrival point for all players"
+  center: { x: 0, y: 64, z: 0 }
+  radius: 40  # circular plaza
+  features:
+    - "Welcome center building"
+    - "World map display"
+    - "Tutorial path entrance"
+    - "Six district gateway arches"
+    - "Central beacon (white -- all colors combined)"
+
+districts:
+  - district_id: hardware
+    name: "Hardware District"
+    theme: "Physical computing -- circuits, signals, memory, processors"
+    description: >
+      Where abstract computing becomes tangible. Buildings represent
+      physical hardware components. Redstone circuits demonstrate
+      Boolean logic. The CPU Tower shows fetch-decode-execute.
+    concepts: [circuits, signals, memory, processors, boolean-logic, fetch-decode-execute]
+    bounds:
+      min: { x: -300, z: -250 }
+      max: { x: -100, z: -50 }
+    entrance: { x: -100, y: 64, z: -150 }
+    direction_from_spawn: "northwest"
+    adjacent_districts: [software, network]
+    key_structures:
+      - "CPU Tower (fetch-decode-execute visualization)"
+      - "Memory Palace (RAM as rooms, addresses as doors)"
+      - "Logic Gate Garden (redstone AND, OR, NOT, XOR)"
+      - "Bus Bridge (connects to Software District)"
+
+  - district_id: software
+    name: "Software District"
+    theme: "Abstract computing -- algorithms, data structures, design patterns"
+    description: >
+      Where code concepts have physical form. Buildings represent
+      algorithms and data structures. Walk through a sorting algorithm.
+      Climb a binary tree. Navigate a hash map.
+    concepts: [algorithms, data-structures, design-patterns, sorting, trees, graphs]
+    bounds:
+      min: { x: 100, z: -250 }
+      max: { x: 300, z: -50 }
+    entrance: { x: 100, y: 64, z: -150 }
+    direction_from_spawn: "northeast"
+    adjacent_districts: [hardware, creative]
+    key_structures:
+      - "Algorithm Amphitheater (sorting visualizations)"
+      - "Binary Tree Tower (climb to traverse)"
+      - "Pattern Library (GoF patterns as buildings)"
+      - "Bus Bridge (connects from Hardware District)"
+
+  - district_id: network
+    name: "Network District"
+    theme: "Connected computing -- protocols, servers, security, routing"
+    description: >
+      Where networking becomes walkable. Buildings are servers.
+      Paths are network connections. Firewalls are literal walls
+      with guarded doors. Packets are minecarts on rails.
+    concepts: [protocols, servers, security, routing, dns, http, tcp-ip]
+    bounds:
+      min: { x: -300, z: 50 }
+      max: { x: -100, z: 250 }
+    entrance: { x: -100, y: 64, z: 150 }
+    direction_from_spawn: "west-southwest"
+    adjacent_districts: [hardware, community]
+    key_structures:
+      - "Server Farm (rack buildings with redstone heartbeats)"
+      - "Firewall Fortress (access control demonstration)"
+      - "Protocol Tower (OSI layers as floors)"
+      - "DNS Labyrinth (name resolution as maze navigation)"
+
+  - district_id: creative
+    name: "Creative District"
+    theme: "Digital arts -- pixel art, music, demos, creative tools"
+    description: >
+      Where computing meets art. Home to the Amiga Corner
+      exhibit, music composition spaces, and pixel art studios.
+      Celebrates the creative heritage of personal computing.
+    concepts: [pixel-art, tracker-music, demoscene, creative-computing, amiga-heritage]
+    bounds:
+      min: { x: 100, z: 50 }
+      max: { x: 300, z: 250 }
+    entrance: { x: 100, y: 64, z: 150 }
+    direction_from_spawn: "east-southeast"
+    adjacent_districts: [software, workshop]
+    key_structures:
+      - "Amiga Corner (Phase 190 -- heritage exhibit)"
+      - "Pixel Art Studio (map art gallery)"
+      - "Music Hall (noteblock compositions, tracker history)"
+      - "Demo Theater (demoscene exhibit)"
+
+  - district_id: community
+    name: "Community District"
+    theme: "Collaboration -- galleries, showcases, meeting spaces, shared projects"
+    description: >
+      Where builders share and collaborate. Gallery spaces for
+      showcasing builds, meeting rooms for planning sessions,
+      and open areas for community events.
+    concepts: [collaboration, showcasing, meetings, community-building, events]
+    bounds:
+      min: { x: -200, z: 260 }
+      max: { x: 0, z: 460 }
+    entrance: { x: -100, y: 64, z: 260 }
+    direction_from_spawn: "south-southwest"
+    adjacent_districts: [network, workshop]
+    key_structures:
+      - "Gallery Hall (community build showcases)"
+      - "Meeting Rooms (various sizes)"
+      - "Event Plaza (open-air gathering space)"
+      - "Hall of Fame (notable builds and builders)"
+
+  - district_id: workshop
+    name: "Workshop District"
+    theme: "Hands-on building -- schematic library, build zones, guided projects"
+    description: >
+      Where learning becomes doing. The schematic library lives here,
+      along with guided build zones for educational curriculum
+      (Phases 188-189). Practice areas for new builders.
+    concepts: [schematics, guided-builds, practice, curriculum, building-techniques]
+    bounds:
+      min: { x: 10, z: 260 }
+      max: { x: 210, z: 460 }
+    entrance: { x: 100, y: 64, z: 260 }
+    direction_from_spawn: "south-southeast"
+    adjacent_districts: [creative, community]
+    key_structures:
+      - "Schematic Library (Phase 188 -- browsable templates)"
+      - "Pipeline Build Zone (Phase 189 -- Visualize a Pipeline)"
+      - "Network Build Zone (Phase 189 -- Build a Network Topology)"
+      - "Database Build Zone (Phase 189 -- Design a Database Schema)"
+
+# Connections encode conceptual relationships
+connections:
+  - from: hardware
+    to: software
+    type: bridge
+    name: "The Bus Bridge"
+    concept: "Hardware-software boundary -- the system bus"
+    midpoint: { x: 0, y: 72, z: -150 }
+    width: 15
+
+  - from: hardware
+    to: network
+    type: corridor
+    name: "The NIC Corridor"
+    concept: "Network interface -- where hardware meets the network"
+    midpoint: { x: -200, y: 64, z: 0 }
+    width: 10
+
+  - from: software
+    to: creative
+    type: archway
+    name: "The API Arch"
+    concept: "Software powering creative tools"
+    midpoint: { x: 200, y: 64, z: 0 }
+    width: 10
+
+  - from: community
+    to: workshop
+    type: plaza
+    name: "The Collaboration Commons"
+    concept: "Community knowledge feeds workshop practice"
+    midpoint: { x: 0, y: 64, z: 350 }
+    width: 20
+
+  - from: network
+    to: community
+    type: path
+    name: "The Connection Path"
+    concept: "Networks enable community"
+    midpoint: { x: -150, y: 64, z: 250 }
+    width: 8
+
+  - from: creative
+    to: workshop
+    type: path
+    name: "The Maker's Way"
+    concept: "Creative vision drives hands-on building"
+    midpoint: { x: 150, y: 64, z: 250 }
+    width: 8
+
+# Distance validation data (pre-computed)
+distance_checks:
+  walking_speed_bps: 4.317
+  max_walk_seconds: 120
+  max_walk_blocks: 518
+  spawn_to_entrance_distances:
+    hardware: 180   # sqrt(100^2 + 150^2) = 180 blocks, ~42 seconds
+    software: 180   # sqrt(100^2 + 150^2) = 180 blocks, ~42 seconds
+    network: 180    # sqrt(100^2 + 150^2) = 180 blocks, ~42 seconds
+    creative: 180   # sqrt(100^2 + 150^2) = 180 blocks, ~42 seconds
+    community: 279  # sqrt(100^2 + 260^2) = 279 blocks, ~65 seconds
+    workshop: 279   # sqrt(100^2 + 260^2) = 279 blocks, ~65 seconds
+  max_distance: 279
+  max_walk_time_seconds: 65
+  constraint_met: true
