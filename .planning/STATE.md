@@ -26,10 +26,12 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. `/gsd:execute-phase 170` -- Execute PXE Boot Infrastructure plans (last Wave 1 phase)
-2. After Wave 1 complete: `/gsd:plan-phase 171` through `/gsd:plan-phase 181` (Wave 2)
+1. Wave 1 complete. Start Wave 2 planning:
+2. `/gsd:plan-phase 171` -- Kickstart Automation (Wave 2)
+3. `/gsd:plan-phase 172` -- VM Provisioning (Wave 2)
+4. `/gsd:plan-phase 179` through `/gsd:plan-phase 181` (Wave 2 parallels)
 
-Wave 1 progress: Phase 169 complete, Phase 178 complete, Phase 170 remaining.
+All Wave 1 phases done. Wave 2 phases (171, 172, 179, 180, 181) can now begin.
 
 ## Decisions
 
@@ -45,6 +47,16 @@ Wave 1 progress: Phase 169 complete, Phase 178 complete, Phase 170 remaining.
 - Minecraft VM capped at 16GB RAM and 8 cores (50% of available, whichever is less)
 - Multi-format YAML parsing with companion profile fallback for local-values format
 - Non-negotiable host floor: 4GB RAM + 2 cores reserved before any VM allocation
+
+### From Phase 170 Plan 01
+- DHCP range scoped to 192.168.122.200-250 (small PXE provisioning range)
+- bind-interfaces + specific interface for DHCP/TFTP isolation
+- BIOS/UEFI detection via DHCP option 93 (client-arch)
+
+### From Phase 170 Plan 02
+- Template variable naming: UPPER_SNAKE_CASE in templates, lower_snake_case in values files
+- General-purpose renderer (render-pxe-menu.sh) works for any template/values pair, not PXE-specific
+- Boot menu defaults to local disk on timeout (30 seconds safety)
 
 ### From Phase 178 Plan 01
 - Shared library uses printf-based YAML emission (no external YAML dependency)
@@ -93,8 +105,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T02:18:51Z
-Stopped at: Completed 178-02-PLAN.md (phase 178 fully complete)
+Last session: 2026-02-18T02:18:34Z
+Stopped at: Completed 170-02-PLAN.md (phase 170 fully complete, Wave 1 done)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
