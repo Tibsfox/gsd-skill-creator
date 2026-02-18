@@ -1,0 +1,58 @@
+# Minecraft Knowledge World - Client Mods Manifest
+# Single source of truth for client-side mod versions.
+# Referenced by:
+#   - docs/minecraft/client-setup-guide.md (installation instructions)
+#   - minecraft/client/prism-instance/mmc-pack.json (Prism Launcher profile)
+#   - docs/minecraft/troubleshooting.md (version mismatch diagnostics)
+#
+# All players must install these exact versions for server compatibility.
+# Server-side mod manifest: infra/templates/minecraft/mod-manifest.yaml.template
+
+minecraft_version: "1.21.4"
+fabric_loader_version: "0.16.10"
+java_version: "21"
+
+mods:
+  - name: "Fabric API"
+    slug: fabric-api
+    version: "0.112.0+1.21.4"
+    filename: "fabric-api-0.112.0+1.21.4.jar"
+    source: modrinth
+    url: "https://modrinth.com/mod/fabric-api/version/0.112.0+1.21.4"
+    sha256: "TO_BE_VERIFIED_AT_DEPLOYMENT"
+    required: true
+    side: both
+    note: "Core modding API -- required by all Fabric mods"
+
+  - name: "Litematica"
+    slug: litematica
+    version: "0.19.52"
+    filename: "litematica-fabric-1.21.4-0.19.52.jar"
+    source: curseforge
+    url: "https://www.curseforge.com/minecraft/mc-mods/litematica"
+    sha256: "TO_BE_VERIFIED_AT_DEPLOYMENT"
+    required: true
+    side: client
+    note: "Schematic viewer and builder -- client-side only"
+
+  - name: "MaLiLib"
+    slug: malilib
+    version: "0.21.3"
+    filename: "malilib-fabric-1.21.4-0.21.3.jar"
+    source: curseforge
+    url: "https://www.curseforge.com/minecraft/mc-mods/malilib"
+    sha256: "TO_BE_VERIFIED_AT_DEPLOYMENT"
+    required: true
+    side: client
+    note: "Required dependency for Litematica"
+
+  - name: "Syncmatica"
+    slug: syncmatica
+    version: "0.3.11"
+    filename: "syncmatica-1.21.4-0.3.11.jar"
+    source: modrinth
+    url: "https://modrinth.com/mod/syncmatica"
+    sha256: "TO_BE_VERIFIED_AT_DEPLOYMENT"
+    required: true
+    side: both
+    note: "Must match server-side version exactly -- enables shared schematic placement"
