@@ -1,0 +1,147 @@
+# Schematic Build Specification
+# This file defines what to build in-game before capturing with Litematica.
+
+name: "Observatory"
+id: "observatory"
+filename: "template-observatory-1-0.litematic"
+version: "1.0"
+category: templates
+description: "Multi-level viewing platform with an octagonal footprint for surveying Knowledge World districts and understanding spatial relationships. Features an enclosed entry hall, a partially open viewing gallery, a fully open observation deck, a grand staircase, and a stained glass dome roof. Positioned to overlook spawn plaza."
+
+dimensions:
+  width: 13   # X axis (east-west)
+  height: 15  # Y axis (up-down)
+  depth: 13   # Z axis (north-south)
+
+block_palette:
+  primary:
+    - block: "minecraft:stone_bricks"
+      usage: "Main structure -- walls, pillars, and structural frame on all three floors"
+    - block: "minecraft:dark_oak_planks"
+      usage: "Interior flooring -- warm wood floors on all three levels"
+  accent:
+    - block: "minecraft:dark_oak_stairs"
+      usage: "Grand staircase -- wide 3-block stairs connecting all floors"
+    - block: "minecraft:dark_oak_slab"
+      usage: "Floor trim and staircase landings"
+    - block: "minecraft:stone_brick_wall"
+      usage: "Observation deck railing and decorative wall elements"
+    - block: "minecraft:chiseled_stone_bricks"
+      usage: "Decorative pillar accents at corners and floor transitions"
+  functional:
+    - block: "minecraft:glass"
+      usage: "Viewing gallery walls -- floor-to-ceiling glass panels on second floor"
+    - block: "minecraft:stained_glass"
+      usage: "Dome roof -- colored stained glass dome over the top floor (light blue primary)"
+    - block: "minecraft:oak_sign"
+      usage: "District direction signs -- signs on observation deck pointing to each district"
+    - block: "minecraft:map"
+      usage: "Map displays -- item frames with maps in the ground floor entry hall"
+    - block: "minecraft:item_frame"
+      usage: "Map display frames -- holding maps on entry hall walls"
+    - block: "minecraft:oak_door"
+      usage: "Main entrance -- double doors on south face"
+  lighting:
+    - block: "minecraft:lantern"
+      usage: "Interior and exterior lighting -- wall-mounted and post-mounted lanterns throughout"
+    - block: "minecraft:glowstone"
+      usage: "Hidden lighting in staircase and under dome for ambient glow"
+
+layout:
+  ground_floor: |
+    Octagonal footprint approximated from a 13x13 square:
+    - Cut 3x3 corners from each corner of the square to create the octagonal shape
+    - This leaves an irregular octagon with 7-block flat sides and 3-block diagonal corners
+
+    Ground floor: enclosed entry hall.
+    Stone brick walls on all 8 sides, dark oak plank floor.
+    Main entrance: double oak doors centered on south flat face.
+
+    Entry hall contents:
+    - Wall-mounted item frames with maps showing Knowledge World districts
+    - Oak signs with text explaining what you can see from the observation deck
+    - Directional signs indicating "Staircase to Viewing Gallery" pointing to the stairs
+
+    Grand staircase begins on the east side:
+    - 3 blocks wide (dark oak stairs)
+    - Rises along the east wall heading north
+    - Reaches second floor landing at the northeast section
+  upper_floors: |
+    Three floors total:
+
+    Floor 1 (ground, Y 0-4): Enclosed entry hall (described above)
+
+    Floor 2 (Y 5-9): Partially open viewing gallery
+    - Dark oak plank floor matching ground floor footprint
+    - Glass walls on all 8 faces (stone brick frame with floor-to-ceiling glass panels)
+    - Stone brick structural pillars at each octagonal corner
+    - Panoramic views in all directions through the glass
+    - Grand staircase continues: rises along the north wall heading west
+    - Lanterns on stone brick pillars
+
+    Floor 3 (Y 10-14): Fully open observation deck
+    - Dark oak plank floor
+    - NO walls -- completely open on all 8 sides above waist height
+    - Stone brick wall blocks as railing around the full perimeter (2 blocks tall)
+    - Chiseled stone brick accents at each corner post
+    - Oak signs on the railing pointing to each district with name and direction:
+      - North sign: "Hardware District"
+      - Northeast sign: "Network District"
+      - East sign: "Creative District"
+      - Southeast sign: "Workshop District"
+      - South sign: "Spawn Plaza"
+      - Southwest sign: "Community District"
+      - West sign: "Software District"
+      - Northwest sign: (varies)
+    - Grand staircase arrives from below at the northwest section
+  roof: |
+    Stained glass dome over the top floor:
+    - Dome starts at height 14 (above the observation deck)
+    - Light blue stained glass as the primary dome material
+    - Stone brick ribs running from each corner post to the dome peak
+    - Dome peak at height 15 (1 block above dome start)
+    - The dome provides shelter from rain while maintaining the open, airy feel
+    - Hidden glowstone blocks within the dome structure for ambient lighting at night
+  exterior: |
+    Octagonal stone brick structure, 13x13 footprint, 15 blocks tall.
+    Ground floor: solid stone brick walls with double door entrance on south face.
+    Second floor: glass wall panels between stone brick pillar frames -- visually distinct.
+    Third floor: open observation deck with stone brick wall railing.
+    Top: stained glass dome with stone brick ribs -- distinctive landmark silhouette.
+    Lanterns on exterior wall surfaces at each floor level.
+
+features:
+  - "Octagonal footprint (13x13 with cut corners) for distinctive silhouette"
+  - "Ground floor entry hall with map displays and orientation signage"
+  - "Second floor viewing gallery with floor-to-ceiling glass walls (panoramic views)"
+  - "Third floor fully open observation deck with 360-degree views"
+  - "Stone brick wall railing with district direction signs on observation deck"
+  - "Grand staircase (3 blocks wide) connecting all three floors"
+  - "Stained glass dome roof (light blue) with stone brick ribs"
+  - "Direction signs pointing to each Knowledge World district from observation deck"
+  - "Chiseled stone brick decorative accents at structural corners"
+  - "Designed to overlook spawn plaza for world orientation"
+
+construction_notes:
+  - "Build from the ground up, floor by floor"
+  - "Mark out the 13x13 square first, then cut the 3x3 corners to form the octagon"
+  - "Build ground floor walls (stone brick, solid) to height 5"
+  - "Lay ground floor dark oak plank flooring"
+  - "Build grand staircase first flight (east wall, heading north)"
+  - "Build second floor: dark oak plank floor, stone brick pillar frame, glass panels"
+  - "Build grand staircase second flight (north wall, heading west)"
+  - "Build third floor: dark oak plank floor, stone brick wall railing (2 high)"
+  - "Build grand staircase final flight arriving at northwest"
+  - "Build stained glass dome: stone brick ribs from corners to peak, glass between ribs"
+  - "Hide glowstone blocks within dome structure for lighting"
+  - "Place functional blocks last: doors, signs, item frames, maps, lanterns"
+  - "Place district direction signs last (after orientation is confirmed)"
+  - "Use Litematica selection starting from the northwest ground-level corner"
+  - "Add 1 block of selection padding on all sides"
+  - "Save with orientation: entrance faces south (toward spawn plaza)"
+  - "Test-load the schematic in a flat world before adding to library"
+
+litematica_capture:
+  origin: "Northwest ground-level corner (lowest X, lowest Z, at floor Y level)"
+  selection_padding: 1
+  orientation: "Entrance faces south (toward spawn plaza)"

@@ -1,0 +1,101 @@
+# Schematic Build Specification
+# This file defines what to build in-game before capturing with Litematica.
+
+name: "Presentation Hall"
+id: "presentation-hall"
+filename: "template-presentation-hall-1-0.litematic"
+version: "1.0"
+category: templates
+description: "Large hall with 3 tiers of seating facing a display wall and podium. Designed for Knowledge World presentations, demos, and group learning sessions."
+
+dimensions:
+  width: 21   # X axis (east-west)
+  height: 10  # Y axis (up-down)
+  depth: 15   # Z axis (north-south)
+
+block_palette:
+  primary:
+    - block: "minecraft:stone_bricks"
+      usage: "Walls -- sturdy stone brick exterior and interior walls"
+    - block: "minecraft:dark_oak_planks"
+      usage: "Floor -- dark wood flooring for formal atmosphere"
+  accent:
+    - block: "minecraft:black_concrete"
+      usage: "Display wall -- 7-wide, 5-tall presentation surface at north end for map art or signs"
+    - block: "minecraft:dark_oak_slab"
+      usage: "Stage platform -- raised 1-block platform in front of display wall"
+    - block: "minecraft:polished_andesite"
+      usage: "Tier risers -- the vertical step face between seating tiers"
+  functional:
+    - block: "minecraft:oak_stairs"
+      usage: "Seating -- 3 rows of 6 seats each (18 total), facing north toward display"
+    - block: "minecraft:lectern"
+      usage: "Podium -- single lectern on stage platform, centered in front of display wall"
+    - block: "minecraft:redstone_lamp"
+      usage: "Stage indicators -- 2 redstone lamps flanking the display wall, lever-activated"
+    - block: "minecraft:oak_door"
+      usage: "Entrances -- two doors at rear corners (south wall, east and west ends)"
+  lighting:
+    - block: "minecraft:glowstone"
+      usage: "Ceiling grid -- 3x5 grid of glowstone blocks in ceiling for even overhead light"
+    - block: "minecraft:lantern"
+      usage: "Wall sconces -- lanterns on side walls between tiers for ambient lighting"
+
+layout:
+  ground_floor: |
+    Large rectangular hall with tiered seating rising toward the south (rear).
+    North end: 1-block raised stage platform (dark oak slabs), 7 blocks wide.
+    Display wall above stage: 7 blocks wide, 5 blocks tall, black concrete surface.
+    Lectern centered on stage facing south toward audience.
+    2 redstone lamps flanking display wall (lever-controlled from stage).
+
+    Seating area: 3 tiers of oak stair seats, each tier 1 block higher than the one in front.
+    Tier 1 (front, closest to stage): 6 seats, floor level.
+    Tier 2 (middle): 6 seats, 1 block higher, with polished andesite riser.
+    Tier 3 (rear): 6 seats, 2 blocks higher, with polished andesite riser.
+    Each tier is 3 blocks deep (1 block seating, 2 blocks legroom/passage).
+    Aisles on east and west sides (2 blocks wide) for access to all tiers.
+
+    South wall: 2 oak door entrances at east and west corners.
+  upper_floors: "None -- single story with high ceiling (10 blocks) to accommodate tiers and display wall"
+  roof: |
+    Flat stone brick roof at height 10.
+    3x5 grid of glowstone blocks inset into ceiling for even overhead illumination.
+    Remaining ceiling is solid stone brick.
+  exterior: |
+    Stone brick walls on all four sides.
+    North wall: display wall occupies upper center (black concrete).
+    East and west walls: glass pane windows (3 wide, 3 tall) between tiers for natural light.
+    South wall: two entrance doors at east and west corners.
+
+features:
+  - "7x5 black concrete display wall for map art, signs, or visual presentations"
+  - "Raised stage platform with centered lectern podium"
+  - "2 lever-activated redstone lamps as stage indicator lights"
+  - "3 tiers of seating (18 seats total) with polished andesite risers"
+  - "2-block wide aisles on both sides for tier access"
+  - "Two entrances at rear corners for smooth audience flow"
+  - "High ceiling (10 blocks) for spacious, formal atmosphere"
+  - "Glowstone ceiling grid for bright, even illumination"
+  - "Glass pane windows on side walls for natural light"
+
+construction_notes:
+  - "Build from the ground up, floor by floor"
+  - "Lay the dark oak plank floor first across the full footprint"
+  - "Build the tier risers and stage platform before walls"
+  - "Build stone brick walls, 9 blocks tall above floor level"
+  - "Install the black concrete display wall surface on the north interior wall"
+  - "Place glass pane windows on east and west walls before closing roof"
+  - "Add the flat stone brick roof with glowstone grid"
+  - "Place seating (oak stairs facing north toward stage)"
+  - "Place functional blocks last: doors, lectern, redstone lamps, lanterns, levers"
+  - "Wire redstone lamps to levers behind/beside the stage"
+  - "Use Litematica selection starting from the northwest ground-level corner"
+  - "Add 1 block of selection padding on all sides"
+  - "Save with orientation: entrance faces south"
+  - "Test-load the schematic in a flat world before adding to library"
+
+litematica_capture:
+  origin: "Northwest ground-level corner (lowest X, lowest Z, at floor Y level)"
+  selection_padding: 1
+  orientation: "Entrance faces south"
