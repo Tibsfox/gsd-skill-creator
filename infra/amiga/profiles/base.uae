@@ -1,0 +1,45 @@
+# GSD Amiga Base Configuration
+# Do NOT launch directly -- use launch-amiga-app.sh which merges
+# this base with an application profile and local-values overrides.
+
+# CPU -- 68020 is the best balance of compatibility and speed
+cpu_type=68020
+cpu_speed=real
+
+# Chipset -- overridden per application profile
+chipset=AGA
+chipset_compatible=A1200
+
+# Memory -- generous defaults, override per-app if needed
+chip_ram=2048
+fast_ram=8192
+
+# ROM -- AROS as default fallback (Phase 182 handles ROM detection)
+# kickstart_file is set by launch-amiga-app.sh based on what's available
+use_debugger=false
+log_illegal_mem=false
+
+# Display -- PLACEHOLDER, overridden at launch from local-values gpu.uae_display
+gfx_fullscreen_amiga=false
+gfx_width=720
+gfx_height=568
+gfx_linemode=double
+gfx_filter=1
+gfx_api=__UAE_DISPLAY__
+
+# Audio -- PLACEHOLDER, overridden at launch from local-values audio settings
+sound_output=exact
+sound_frequency=__UAE_SAMPLE_RATE__
+sound_latency=__UAE_BUFFER_SIZE__
+
+# Input
+joyport0=mouse
+joyport1=none
+
+# Floppy drives -- default 1 drive, apps may override
+floppy_speed=800
+floppy0_type=35_dd
+
+# Filesystem -- exchange directory for host file access
+# Path set by launch-amiga-app.sh
+# filesystem2=rw,Exchange:__EXCHANGE_DIR__,0
