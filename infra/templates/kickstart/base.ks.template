@@ -1,0 +1,181 @@
+# GSD Base Image -- CentOS Stream 9 Kickstart
+# Rendered from template by render-pxe-menu.sh at deployment time.
+#
+# This kickstart installs a minimal CentOS Stream 9 with security hardening:
+# SELinux enforcing, firewalld SSH-only, root locked, SSH key-only access.
+# A first-boot service framework handles deferred configuration.
+#
+# Template variables (UPPER_SNAKE_CASE -> local-values lower_snake_case):
+#   CENTOS_MIRROR_URL      -- CentOS Stream 9 network install URL
+#   SYSTEM_TIMEZONE        -- System timezone (e.g., UTC)
+#   NET_DEVICE             -- Primary network interface (e.g., ens3)
+#   VM_HOSTNAME            -- VM hostname
+#   ADMIN_USER             -- Non-root admin username
+#   SSH_PUBLIC_KEY         -- SSH public key for admin user
+#   FIRST_BOOT_SCRIPT_PATH -- Path for the first-boot script
+
+# --- Installation source ---
+url --url=${CENTOS_MIRROR_URL}
+
+# --- Text mode (no GUI installer) ---
+text
+
+# --- Locale / keyboard / timezone ---
+lang en_US.UTF-8
+keyboard us
+timezone ${SYSTEM_TIMEZONE} --utc
+
+# --- Network ---
+network --bootproto=dhcp --device=${NET_DEVICE} --activate --hostname=${VM_HOSTNAME}
+
+# --- Root password (locked -- no root login) ---
+rootpw --lock
+
+# --- Admin user ---
+user --name=${ADMIN_USER} --groups=wheel --shell=/bin/bash
+
+# --- SSH key (the ONLY authentication method) ---
+sshkey --username=${ADMIN_USER} "${SSH_PUBLIC_KEY}"
+
+# --- SELinux (NON-NEGOTIABLE) ---
+selinux --enforcing
+
+# --- Firewall (SSH only by default) ---
+firewall --enabled --ssh
+
+# --- Bootloader ---
+bootloader --location=mbr --append="crashkernel=auto"
+
+# --- Disk partitioning ---
+zerombr
+clearpart --all --initlabel
+autopart --type=lvm
+
+# --- Packages ---
+%packages
+@^minimal-environment
+openssh-server
+sudo
+vim-minimal
+curl
+tar
+bash-completion
+policycoreutils-python-utils
+%end
+
+# --- Post-install ---
+%post --log=/root/ks-post.log
+
+# Configure sudo for wheel group (passwordless for automation)
+echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/wheel-nopasswd
+chmod 440 /etc/sudoers.d/wheel-nopasswd
+
+# Harden sshd_config
+sed -i 's/^#*PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+sed -i 's/^#*PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/^#*PubkeyAuthentication.*/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+
+# --- Install GSD first-boot service ---
+
+# Create directory structure
+mkdir -p "$(dirname ${FIRST_BOOT_SCRIPT_PATH})"
+mkdir -p /opt/gsd/first-boot.d
+
+# Write the systemd unit file
+cat > /etc/systemd/system/gsd-first-boot.service << 'UNIT_EOF'
+[Unit]
+Description=GSD First Boot Configuration
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=!/etc/gsd-first-boot-complete
+
+[Service]
+Type=oneshot
+ExecStart=${FIRST_BOOT_SCRIPT_PATH}
+RemainAfterExit=false
+StandardOutput=journal+console
+
+[Install]
+WantedBy=multi-user.target
+UNIT_EOF
+
+# Write the first-boot script
+cat > ${FIRST_BOOT_SCRIPT_PATH} << 'SCRIPT_EOF'
+#!/usr/bin/env bash
+# GSD First Boot Configuration Script
+# Runs once on first boot via gsd-first-boot.service.
+# Handles deferred configuration that requires network or runtime state.
+
+set -euo pipefail
+
+# Log all output
+exec > >(tee -a /var/log/gsd-first-boot.log) 2>&1
+
+# --- Idempotency guard ---
+if [[ -f /etc/gsd-first-boot-complete ]]; then
+    echo "First boot already completed, exiting."
+    exit 0
+fi
+
+echo "=== GSD First Boot: $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
+
+# --- Wait for network connectivity (up to 30 seconds) ---
+echo "Waiting for network connectivity..."
+network_timeout=30
+network_elapsed=0
+until ping -c1 -W5 8.8.8.8 &>/dev/null; do
+    sleep 2
+    network_elapsed=$((network_elapsed + 2))
+    if [[ ${network_elapsed} -ge ${network_timeout} ]]; then
+        echo "WARNING: Network not available after ${network_timeout}s, continuing anyway"
+        break
+    fi
+done
+if [[ ${network_elapsed} -lt ${network_timeout} ]]; then
+    echo "Network is up (took ~${network_elapsed}s)"
+fi
+
+# --- System updates (optional) ---
+# Uncomment the following line to apply system updates on first boot:
+# dnf -y update
+
+# --- Execute role-specific hooks ---
+# Role kickstarts (e.g., Minecraft) drop scripts into /opt/gsd/first-boot.d/
+# Scripts are executed in lexicographic order (use NN- prefix for ordering)
+hooks_dir="/opt/gsd/first-boot.d"
+if [[ -d "${hooks_dir}" ]]; then
+    for script in "${hooks_dir}"/*.sh; do
+        [[ -f "${script}" ]] || continue
+        echo "--- Running hook: ${script} ---"
+        chmod +x "${script}"
+        if "${script}"; then
+            echo "--- Hook completed: ${script} ---"
+        else
+            echo "WARNING: Hook failed (exit $?): ${script}"
+        fi
+    done
+else
+    echo "No hooks directory found at ${hooks_dir}, skipping"
+fi
+
+# --- Mark first boot complete ---
+echo "GSD First Boot completed $(date -u +%Y-%m-%dT%H:%M:%SZ)" > /etc/gsd-first-boot-complete
+
+# --- Disable this service (no need to run again) ---
+systemctl disable gsd-first-boot.service
+
+echo "=== GSD First Boot Complete: $(date -u) ==="
+SCRIPT_EOF
+
+chmod +x ${FIRST_BOOT_SCRIPT_PATH}
+
+# Enable the first-boot service
+systemctl enable gsd-first-boot.service
+
+# Write build marker
+echo "GSD Base Image built $(date -u +%Y-%m-%dT%H:%M:%SZ)" > /etc/gsd-base-image
+
+%end
+
+# --- Reboot after installation ---
+reboot --eject
