@@ -395,12 +395,12 @@ convert_single_image() {
         printf "[%s/%s] Converted: %s -> %s\n" "${file_num}" "${total}" "${input_basename}" "${output_basename}"
         printf "converted\n" >> "${result_file}"
 
-        # Copy meta sidecar to meta/ directory
+        # Move meta sidecar to meta/ directory (removes original to prevent duplicates)
         local source_meta
         source_meta="$(dirname "${output_path}")/$(basename "${input_file}" | sed 's/\.[^.]*$//').meta.yaml"
         if [[ -f "${source_meta}" ]]; then
             mkdir -p "$(dirname "${meta_dest}")"
-            cp "${source_meta}" "${meta_dest}"
+            mv "${source_meta}" "${meta_dest}"
         fi
     else
         printf "[%s/%s] ERROR: %s (exit code %s)\n" "${file_num}" "${total}" "${input_basename}" "${rc}"
@@ -443,12 +443,12 @@ convert_single_audio() {
         printf "[%s/%s] Converted: %s -> %s\n" "${file_num}" "${total}" "${input_basename}" "${output_basename}"
         printf "converted\n" >> "${result_file}"
 
-        # Copy meta sidecar to meta/ directory
+        # Move meta sidecar to meta/ directory (removes original to prevent duplicates)
         local source_meta
         source_meta="$(dirname "${output_path}")/$(basename "${input_file}" | sed 's/\.[^.]*$//').meta.yaml"
         if [[ -f "${source_meta}" ]]; then
             mkdir -p "$(dirname "${meta_dest}")"
-            cp "${source_meta}" "${meta_dest}"
+            mv "${source_meta}" "${meta_dest}"
         fi
     else
         printf "[%s/%s] ERROR: %s (exit code %s)\n" "${file_num}" "${total}" "${input_basename}" "${rc}"
