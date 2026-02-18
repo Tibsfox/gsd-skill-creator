@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 185-amiga-knowledge-world-integration (Plan 01 complete)
-Plan: 185-01 complete
-Status: EXECUTING WAVE 4 -- Phase 185 Plan 01 complete (legal guide and curated collection). Continuing Wave 4 phases.
-Last activity: 2026-02-18 -- Completed 185-01 (legal framework and curated Amiga collection)
+Phase: 189-educational-curriculum (Plan 01 complete)
+Plan: 189-01 complete
+Status: EXECUTING WAVE 4 -- Phase 189 Plan 01 complete (methodology + pipeline guided build). Continuing Wave 4 phases.
+Last activity: 2026-02-18 -- Completed 189-01 (spatial learning methodology and pipeline guided build)
 
-Progress: [#################.........] 17/30 phases (Wave 1-3 complete; Wave 4 in progress: 184 done, 185-01 done)
+Progress: [##################........] 18/30 phases (Wave 1-3 complete; Wave 4 in progress: 184-185-186-187-188-189 done)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.22 Minecraft Knowledge World -- Wave 4 execution (Phase 185 in progress)
+**Current focus:** v1.22 Minecraft Knowledge World -- Wave 4 execution (Phase 189 complete)
 
 ## Current Milestone
 
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Continue Wave 4 phases: 186, 187, 188, 189, 190
-2. 17/30 phases complete, 12 remaining in Waves 4-6
+1. Continue Wave 4 phases: 190
+2. 18/30 phases complete, 12 remaining in Waves 4-6
 
 ## Decisions
 
@@ -178,6 +178,13 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Five trusted source archives: Aminet, Scene.org, ADA, Mod Archive, AMP (metadata only)
 - AROS ROM as recommended default; GSD never distributes Kickstart ROMs
 
+### From Phase 189 Plan 01
+- 28 computing-to-Minecraft metaphor mappings (15 primary + 13 extended) as the spatial learning foundation
+- Stone brick walls, cyan glazed terracotta corridors, glass interfaces, oak signs as universal block palette
+- 15-character sign line limit with 6 sign types and consistent formatting conventions
+- 9-step guided build creation process from concept identification through Litematica capture
+- 30-60 minute target window: 8-12 build steps at 3-5 minutes each, plus orientation and walkthrough
+
 ### From Phase 184 Plan 01
 - Binary IFF parser extracts BMHD, CMAP, CAMG chunks using od for metadata before conversion
 - MOD header parsing prioritized over ffprobe for module-specific metadata (channels, samples, patterns)
@@ -226,8 +233,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T22:51:20Z
-Stopped at: Completed 185-01-PLAN.md (legal framework and curated Amiga collection)
+Last session: 2026-02-18T22:51:48Z
+Stopped at: Completed 189-01-PLAN.md (spatial learning methodology and pipeline guided build)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
