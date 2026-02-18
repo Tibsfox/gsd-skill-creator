@@ -323,6 +323,8 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 5
 - **Dependencies:** Phase 191 (skill definitions)
 - **Requirements:** SKILL-04, SKILL-05
+- **Plans:** 1 plan
+  - [ ] 192-01-PLAN.md — Create 10 agent definitions across 5 teams with unique skill compositions and inventory
 - **Success Criteria:**
   1. Agent definitions formalize all team roles with explicit skill compositions
   2. Each agent has minimally permissive tool access (no unnecessary tools granted)
@@ -397,6 +399,8 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 6
 - **Dependencies:** Phase 195, Phase 196, Phase 197 (all ops phases)
 - **Requirements:** OPS-10, OPS-11, OPS-12, OPS-13
+- **Plans:** 1 plan
+  - [ ] 198-01-PLAN.md — Day-1 deployment, Day-2 operations, incident response, and server update runbooks
 - **Success Criteria:**
   1. Day-1 runbook enables a new operator to complete full deployment from scratch
   2. Day-2 runbook covers player management, health checks, backup review, and OS updates without deep system knowledge
