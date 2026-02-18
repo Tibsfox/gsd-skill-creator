@@ -1,0 +1,29 @@
+# PXE Boot Local Values
+# Copy to infra/local/pxe-boot.local-values and fill in site-specific values.
+# This file is an EXAMPLE — never commit actual values.
+
+# DHCP range for PXE provisioning (must not overlap existing static IPs)
+# Keep this range small — only needs enough IPs for VMs being provisioned
+dhcp_range_start: "192.168.122.200"
+dhcp_range_end: "192.168.122.250"
+dhcp_netmask: "255.255.255.0"
+dhcp_lease_time: "1h"
+
+# Network settings for PXE-booted clients
+gateway_ip: "192.168.122.1"
+dns_server_ip: "192.168.122.10"
+
+# TFTP root directory (where boot files are served from)
+tftp_root: "/var/lib/tftpboot"
+
+# Network interface for PXE/DHCP services
+pxe_interface: "virbr0"
+
+# PXE prompt timeout in seconds (0 = immediate boot)
+pxe_prompt_timeout: "5"
+
+# CentOS Stream 9 mirror (for boot media download)
+centos_mirror: "https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os"
+
+# Kickstart server URL (where kickstart files will be served via HTTP)
+kickstart_server_url: "http://192.168.122.10:8080/kickstart"
