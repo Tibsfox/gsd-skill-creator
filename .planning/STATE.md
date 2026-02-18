@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: Wave 2 Complete — Starting Wave 3
-Plan: All Wave 2 plans complete
-Status: WAVE 2 COMPLETE — All 8 phases (169-172, 178-181) done. Wave 3 planning begins.
-Last activity: 2026-02-18 — Completed Wave 2 (all 8 phases)
+Phase: 173-server-foundation (Wave 3 in progress)
+Plan: 173-01 complete, 173-02 pending
+Status: Executing Wave 3 -- Phase 173 Plan 01 complete (Minecraft deployment orchestrator + templates)
+Last activity: 2026-02-18 — Completed 173-01-PLAN.md
 
-Progress: [########..................] 8/30 phases (Wave 1: 169, 170, 178; Wave 2: 171, 172, 179, 180, 181 — all complete)
+Progress: [########..................] 8/30 phases (Wave 1: 169, 170, 178; Wave 2: 171, 172, 179, 180, 181 -- all complete; Wave 3: 173 in progress)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.22 Minecraft Knowledge World -- Wave 3 planning (Phases 173-177, 182-183)
+**Current focus:** v1.22 Minecraft Knowledge World -- Wave 3 execution (Phase 173 in progress)
 
 ## Current Milestone
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Plan Wave 3 phases: 173, 174, 175, 176, 177 (Minecraft Server), 182, 183 (Amiga)
-2. Execute Wave 3 plans in dependency order
-3. Wave 2 fully complete — 8/30 phases done, 22 remaining
+1. Execute 173-02-PLAN.md (remaining plan in Phase 173)
+2. Continue Wave 3 execution: 174, 175, 176, 177 (Minecraft Server), 182, 183 (Amiga)
+3. Wave 3 in progress -- 173-01 and 182-01 complete
 
 ## Decisions
 
@@ -37,6 +37,11 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Dual YAML output: sanitized (git-safe) and local (gitignored) from single script run
 - Minimum requirements threshold: 16GB RAM + CPU virtualization support
 - Runtime-generated hardware-profile.yaml not committed -- example file documents structure instead
+- [Phase 182]: Three-tier install strategy: detect existing -> native pkg manager -> Flatpak fallback
+- [Phase 182]: Flatpak wrapper at ~/.local/bin/fs-uae for transparent command access on dnf systems
+- [Phase 182]: AROS ROM URLs configurable via AROS_ROM_URL and AROS_SYSTEM_URL env vars for mirror flexibility
+- [Phase 182]: Base config uses {ROM_DIR}/{DATA_DIR} placeholder tokens for render-step substitution in Plan 02
+- [Phase 182]: A1200 model with AGA chipset selected for best AROS compatibility
 
 ### From Phase 169 Plan 02
 - Integer-only arithmetic in bash for resource budget calculations
@@ -152,8 +157,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T07:40:15Z
-Stopped at: Completed 172-02-PLAN.md (VM lifecycle manager, provisioning orchestrator, test suite)
+Last session: 2026-02-18T12:09:41Z
+Stopped at: Completed 182-01-PLAN.md (FS-UAE install script, AROS ROM setup, base UAE config, test suite)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
