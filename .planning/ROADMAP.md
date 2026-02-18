@@ -473,7 +473,7 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 | 169 | 2/2 | Complete   | 2026-02-18 |
 | 170 | 2/2 | Complete   | 2026-02-18 |
 | 171 | 1/2 | In Progress|  |
-| 172 | 1/2 | In Progress|  |
+| 172 | 2/2 | Complete   | 2026-02-18 |
 | 173 | Server Foundation | 3 | Pending |
 | 174 | Mod Stack Installation | 3 | Pending |
 | 175 | Server Configuration & Tuning | 3 | Pending |

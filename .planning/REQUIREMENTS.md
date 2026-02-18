@@ -19,8 +19,8 @@
 - [x] **INFRA-08**: Minecraft kickstart extends base with Java 21, dedicated user, and game ports
 - [x] **INFRA-09**: All kickstart values use template/local-values pattern with zero secrets in version control
 - [x] **INFRA-10**: Hypervisor-agnostic VM creation scripts support at least VMware Workstation and KVM/libvirt backends
-- [ ] **INFRA-11**: Golden image workflow provisions via kickstart, snapshots, and clones in under 5 minutes
-- [ ] **INFRA-12**: VM lifecycle operations (create, start, stop, snapshot, destroy) are idempotent
+- [x] **INFRA-11**: Golden image workflow provisions via kickstart, snapshots, and clones in under 5 minutes
+- [x] **INFRA-12**: VM lifecycle operations (create, start, stop, snapshot, destroy) are idempotent
 
 ### Minecraft Server (Plan 02)
 
