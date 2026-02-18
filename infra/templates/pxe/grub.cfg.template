@@ -1,13 +1,13 @@
 # GSD PXE Boot Menu (UEFI)
-# Template: ${VAR} replaced at deployment time by render-pxe-menu.sh
+# Placeholders are replaced at deployment time by render-pxe-menu.sh
 #
 # This menu is served by GRUB to UEFI-booting PXE clients.
 # Entries: base image install, Minecraft server install, local disk boot.
 # Default is "Boot from Local Disk" (index 2) for safety on timeout.
 #
-# Template variables:
-#   ${PXE_TIMEOUT_SECONDS}  -- Timeout in seconds (e.g., 30)
-#   ${KICKSTART_SERVER_URL} -- HTTP URL where kickstart files are served
+# Template variables (UPPER_SNAKE_CASE -> local-values lower_snake_case):
+#   PXE_TIMEOUT_SECONDS  -- Timeout in seconds (e.g., 30)
+#   KICKSTART_SERVER_URL -- HTTP URL where kickstart files are served
 #
 # GRUB notes:
 #   - linuxefi/initrdefi are the UEFI-specific GRUB commands

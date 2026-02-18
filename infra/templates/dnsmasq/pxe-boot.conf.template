@@ -1,5 +1,5 @@
 # PXE Boot Configuration for dnsmasq
-# Template: replace ${VAR} with values from local-values
+# Placeholders are replaced with values from local-values at deploy time
 # Include this file via conf-dir or --conf-file alongside existing DNS config
 #
 # DOES NOT configure DNS — that is handled by the existing dnsmasq config.
