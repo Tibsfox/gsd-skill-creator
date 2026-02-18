@@ -345,6 +345,8 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 5
 - **Dependencies:** Phase 193 (team definitions)
 - **Requirements:** SKILL-08, SKILL-09, SKILL-10
+- **Plans:** 1 plan
+  - [ ] 194-01-PLAN.md — Chipset YAML assembly with schema, trigger routing matrix, and validation script
 - **Success Criteria:**
   1. Chipset YAML validates against the chipset schema
   2. Skill loading follows priority order within token budget
