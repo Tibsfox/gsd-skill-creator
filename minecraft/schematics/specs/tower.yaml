@@ -1,0 +1,120 @@
+# Schematic Build Specification
+# This file defines what to build in-game before capturing with Litematica.
+
+name: "Tower"
+id: "tower"
+filename: "template-tower-1-0.litematic"
+version: "1.0"
+category: templates
+description: "Tall landmark beacon structure visible from 100+ blocks away, used for district wayfinding. Features a square base with interior spiral staircase, 5 floors with windows, an open observation platform at the top, and a beacon with glowstone base."
+
+dimensions:
+  width: 7    # X axis (east-west)
+  height: 25  # Y axis (up-down)
+  depth: 7    # Z axis (north-south)
+
+block_palette:
+  primary:
+    - block: "minecraft:stone_bricks"
+      usage: "Tower walls -- the main structural shell on all four sides"
+    - block: "minecraft:stone_brick_stairs"
+      usage: "Interior spiral staircase -- quarter-turn stairs connecting all 5 floors"
+  accent:
+    - block: "minecraft:stone_brick_slab"
+      usage: "Floor surfaces -- slab floors at each level for the staircase landings"
+    - block: "minecraft:stone_brick_wall"
+      usage: "Observation deck railing -- wall blocks around the open top platform"
+    - block: "minecraft:chiseled_stone_bricks"
+      usage: "Decorative accents -- chiseled blocks at corner positions on each floor"
+  functional:
+    - block: "minecraft:glass"
+      usage: "Windows -- 2-wide, 2-tall glass windows on each face per floor (except ground)"
+    - block: "minecraft:beacon"
+      usage: "Beacon block -- single beacon at the very top of the tower for visible beam"
+    - block: "minecraft:glowstone"
+      usage: "Beacon base -- 3x3 glowstone platform supporting the beacon block"
+    - block: "minecraft:oak_door"
+      usage: "Ground floor entrance -- single door on south face"
+  lighting:
+    - block: "minecraft:lantern"
+      usage: "Staircase lanterns -- one lantern at each staircase landing (4 lanterns)"
+    - block: "minecraft:glowstone"
+      usage: "Beacon base doubles as top-level lighting"
+
+layout:
+  ground_floor: |
+    Square tower base, 7x7 footprint, 5x5 interior.
+    Stone brick walls on all four sides.
+    Stone brick slab floor.
+    Single oak door entrance centered on south face.
+    Interior spiral staircase begins in the southeast corner:
+    - Stone brick stairs, quarter-turn pattern (rotates 90 degrees per floor)
+    - First flight goes up along the east wall heading north
+
+    Ground floor is the entrance hall -- no windows on this level for structural solidity.
+    Chiseled stone brick accents at interior corners.
+  upper_floors: |
+    5 floors total, each approximately 5 blocks of height:
+    - Floor 1 (ground, Y 0-4): Entrance hall, staircase start, no windows
+    - Floor 2 (Y 5-9): First windowed level, staircase continues (quarter turn)
+    - Floor 3 (Y 10-14): Second windowed level, staircase continues (quarter turn)
+    - Floor 4 (Y 15-19): Third windowed level, staircase continues (quarter turn)
+    - Floor 5 (Y 20-24): Open observation platform at the top
+
+    Floors 2-4 each have:
+    - Stone brick slab floor (landing)
+    - 2-wide, 2-tall glass windows on each of the 4 faces
+    - Spiral staircase continuing upward (quarter turn per floor)
+    - Lantern at the staircase landing
+    - Chiseled stone brick accents at corners
+
+    Floor 5 (observation platform, Y 20-24):
+    - Open on all 4 sides (no walls, just stone brick wall railing)
+    - Stone brick slab floor
+    - Stone brick wall blocks as waist-high railing around all 4 edges
+    - 3x3 glowstone platform in the center
+    - Beacon block on top of the glowstone platform (visible beam shoots upward)
+  roof: |
+    No enclosed roof -- the top is the open observation platform.
+    The beacon beam extends upward indefinitely, visible from 100+ blocks away.
+    Stone brick wall railing around the platform edge serves as the top border.
+  exterior: |
+    Stone brick tower, 7x7 footprint, 25 blocks tall.
+    Ground floor: solid stone brick walls with single door on south face.
+    Floors 2-4: glass windows (2 wide, 2 tall) centered on each face.
+    Floor 5: open platform with stone brick wall railing, visible beacon beam.
+    Chiseled stone brick corner accents visible on exterior at each floor level.
+
+features:
+  - "Square stone brick tower (7x7), 25 blocks tall -- visible from 100+ blocks"
+  - "Interior spiral staircase connecting all 5 floors (quarter-turn per level)"
+  - "Glass windows on each face per floor (floors 2-4) for panoramic views"
+  - "Open observation platform at top with stone brick wall railing"
+  - "Beacon block on 3x3 glowstone base -- visible beam extends skyward"
+  - "Lanterns at each staircase landing for interior lighting"
+  - "Chiseled stone brick decorative accents at corner positions"
+  - "Single door ground-level entrance on south face"
+  - "Designed as a wayfinding landmark for district identification"
+
+construction_notes:
+  - "Build from the ground up, floor by floor"
+  - "Build the full 7x7 wall perimeter for each floor before adding interior"
+  - "At each floor, build the stone brick slab landing, then the staircase section"
+  - "Staircase pattern: SE corner going north (floor 1), NE going west (floor 2),"
+  - "  NW going south (floor 3), SW going east (floor 4) -- completing the spiral"
+  - "Place glass windows on floors 2-4 before moving to the next floor"
+  - "At the top floor (floor 5), leave all four faces open above railing height"
+  - "Build stone brick wall railing around the observation platform edge"
+  - "Place 3x3 glowstone platform in the center of the observation deck"
+  - "Place beacon block on top of the glowstone (requires clear sky above)"
+  - "Place functional blocks last: door, lanterns at landings"
+  - "Ensure the beacon has a clear vertical path to the sky (no blocks above)"
+  - "Use Litematica selection starting from the northwest ground-level corner"
+  - "Add 1 block of selection padding on all sides"
+  - "Save with orientation: entrance faces south"
+  - "Test-load the schematic in a flat world before adding to library"
+
+litematica_capture:
+  origin: "Northwest ground-level corner (lowest X, lowest Z, at floor Y level)"
+  selection_padding: 1
+  orientation: "Entrance faces south"
