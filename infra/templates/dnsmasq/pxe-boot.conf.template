@@ -1,0 +1,49 @@
+# PXE Boot Configuration for dnsmasq
+# Template: replace ${VAR} with values from local-values
+# Include this file via conf-dir or --conf-file alongside existing DNS config
+#
+# DOES NOT configure DNS — that is handled by the existing dnsmasq config.
+# This file adds DHCP + TFTP + PXE boot services only.
+
+# --- DHCP Configuration ---
+# Enable DHCP only on the provisioning interface/range
+# Scoped to PXE clients only — will NOT hand out leases to existing VMs
+dhcp-range=${DHCP_RANGE_START},${DHCP_RANGE_END},${DHCP_NETMASK},${DHCP_LEASE_TIME}
+
+# Gateway and DNS for PXE clients
+dhcp-option=option:router,${GATEWAY_IP}
+dhcp-option=option:dns-server,${DNS_SERVER_IP}
+
+# --- TFTP Configuration ---
+enable-tftp
+tftp-root=${TFTP_ROOT}
+
+# --- PXE Boot Configuration ---
+# Tag BIOS and UEFI clients differently for correct bootloader selection
+# Architecture detection via DHCP option 93 (client system architecture)
+dhcp-match=set:efi-x86_64,option:client-arch,7
+dhcp-match=set:efi-x86_64,option:client-arch,9
+dhcp-match=set:bios,option:client-arch,0
+
+# BIOS clients get pxelinux.0
+dhcp-boot=tag:bios,pxelinux.0
+
+# UEFI clients get the GRUB EFI bootloader
+dhcp-boot=tag:efi-x86_64,grubx64.efi
+
+# PXE prompt — brief pause before auto-booting
+pxe-prompt="GSD PXE Boot", ${PXE_PROMPT_TIMEOUT}
+
+# PXE service advertisement
+pxe-service=x86PC,"GSD Network Boot (BIOS)",pxelinux
+pxe-service=x86-64_EFI,"GSD Network Boot (UEFI)",grubx64.efi
+
+# --- DHCP Logging ---
+# Log DHCP transactions for debugging PXE issues
+log-dhcp
+
+# --- Safety ---
+# Only act as DHCP server on the provisioning network
+# Bind to the specific interface to prevent rogue DHCP on other networks
+interface=${PXE_INTERFACE}
+bind-interfaces
