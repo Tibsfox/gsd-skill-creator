@@ -9,6 +9,11 @@
 #   5. Firewall rules (game port accessible)
 #   6. Server log analysis (startup complete, no fatal errors)
 #   7. Disk space on /opt/minecraft
+#   8. Node exporter (port 9100, metrics endpoint)
+#   9. JMX exporter (port 9404, JVM metrics)
+#  10. Backup freshness (last-backup-status.yaml age)
+#  11. Metrics freshness (textfile collector staleness)
+#  12. Known failure patterns (OOM, JAR missing, port binding, etc.)
 #
 # Can run locally on the Minecraft VM or remotely via SSH.
 #
@@ -35,6 +40,8 @@ GAME_PORT=25565
 RCON_PORT=25575
 JVM_FLAGS_PATH="/opt/minecraft/server/jvm-flags.conf"
 MINECRAFT_HOME="/opt/minecraft"
+BACKUP_DIR="/opt/minecraft/backups"
+TEXTFILE_DIR="/var/lib/node_exporter/textfile_collector"
 
 # --- Colors (if terminal supports them) ---
 if [[ -t 2 ]] && [[ "${QUIET_MODE}" != true ]]; then
@@ -83,16 +90,19 @@ usage() {
 Usage: ${SCRIPT_NAME} [OPTIONS]
 
 Minecraft server health check. Validates systemd service, Java process,
-JVM heap, network ports, firewall rules, server logs, and disk space.
+JVM heap, network ports, firewall rules, server logs, disk space,
+exporters, backup freshness, metrics freshness, and known failure patterns.
 
 Options:
-  --target-host HOST   SSH to remote host for checks (e.g., gsd@mc-server-01)
-  --local              Run checks on localhost (default)
-  --json               Output results as JSON
-  --quiet              Exit code only, no output (for scripted use)
-  --game-port PORT     Game port to check (default: 25565)
-  --rcon-port PORT     RCON port to check (default: 25575)
-  --help               Show this help message
+  --target-host HOST    SSH to remote host for checks (e.g., gsd@mc-server-01)
+  --local               Run checks on localhost (default)
+  --json                Output results as JSON
+  --quiet               Exit code only, no output (for scripted use)
+  --game-port PORT      Game port to check (default: 25565)
+  --rcon-port PORT      RCON port to check (default: 25575)
+  --backup-dir PATH     Backup directory for freshness check (default: /opt/minecraft/backups)
+  --textfile-dir PATH   Textfile collector directory for metrics freshness (default: /var/lib/node_exporter/textfile_collector)
+  --help                Show this help message
 
 Exit Codes:
   0  All checks pass (healthy)
@@ -101,13 +111,18 @@ Exit Codes:
   3  Usage error
 
 Health Checks:
-  1. systemd service   - minecraft.service active + enabled
-  2. Java process      - Running as minecraft user with correct JAR
-  3. JVM heap          - Actual usage vs configured maximum
-  4. Network ports     - Game (25565) and RCON (25575) listening
-  5. Firewall          - Game port open in firewall
-  6. Server log        - "Done" message, no FATAL/crash/OOM errors
-  7. Disk space        - /opt/minecraft filesystem free space
+  1. systemd service     - minecraft.service active + enabled
+  2. Java process        - Running as minecraft user with correct JAR
+  3. JVM heap            - Actual usage vs configured maximum
+  4. Network ports       - Game (25565) and RCON (25575) listening
+  5. Firewall            - Game port open in firewall
+  6. Server log          - "Done" message, no FATAL/crash/OOM errors
+  7. Disk space          - /opt/minecraft filesystem free space
+  8. Node exporter       - Port 9100 listening, metrics endpoint responding
+  9. JMX exporter        - Port 9404 listening, JVM metrics available
+  10. Backup freshness   - Last backup age < 2 hours
+  11. Metrics freshness  - Textfile collector updated within 120 seconds
+  12. Known failures     - Pattern match against OOM, JAR missing, port binding, etc.
 
 Examples:
   # Local check (on Minecraft VM)
@@ -121,6 +136,9 @@ Examples:
 
   # Scripted health check (exit code only)
   ${SCRIPT_NAME} --quiet --local
+
+  # Custom backup and textfile directories
+  ${SCRIPT_NAME} --local --backup-dir /mnt/backups --textfile-dir /tmp/textfile
 EOF
 }
 
@@ -153,6 +171,14 @@ while [[ $# -gt 0 ]]; do
             ;;
         --rcon-port)
             RCON_PORT="${2:?'--rcon-port requires a port number'}"
+            shift 2
+            ;;
+        --backup-dir)
+            BACKUP_DIR="${2:?'--backup-dir requires a path'}"
+            shift 2
+            ;;
+        --textfile-dir)
+            TEXTFILE_DIR="${2:?'--textfile-dir requires a path'}"
             shift 2
             ;;
         --help|-h)
@@ -386,6 +412,229 @@ check_disk_space() {
 }
 
 # ============================================================
+# Check 8: Node exporter
+# ============================================================
+check_node_exporter() {
+    local port_listening
+
+    port_listening=$(target_cmd "ss -tlnp | grep ':9100 '" || echo "")
+
+    if [[ -n "${port_listening}" ]]; then
+        # Port is listening, try metrics endpoint
+        local metrics_response
+        metrics_response=$(target_cmd "curl -s --connect-timeout 2 http://localhost:9100/metrics | head -1" || echo "")
+
+        if [[ -n "${metrics_response}" ]]; then
+            record_result "node_exporter" "pass" "port 9100 listening, metrics endpoint responding"
+        else
+            record_result "node_exporter" "warn" "port 9100 listening but metrics endpoint not responding"
+        fi
+    else
+        record_result "node_exporter" "fail" "port 9100 not listening (node_exporter not running)"
+    fi
+}
+
+# ============================================================
+# Check 9: JMX exporter
+# ============================================================
+check_jmx_exporter() {
+    local port_listening
+
+    port_listening=$(target_cmd "ss -tlnp | grep ':9404 '" || echo "")
+
+    if [[ -n "${port_listening}" ]]; then
+        # Port is listening, try JVM metrics
+        local metrics_response
+        metrics_response=$(target_cmd "curl -s --connect-timeout 2 http://localhost:9404/metrics | head -1" || echo "")
+
+        if [[ -n "${metrics_response}" ]]; then
+            record_result "jmx_exporter" "pass" "port 9404 listening, JVM metrics available"
+        else
+            record_result "jmx_exporter" "warn" "port 9404 listening but JVM metrics not responding"
+        fi
+    else
+        record_result "jmx_exporter" "warn" "port 9404 not listening (JMX exporter not attached -- restart minecraft.service)"
+    fi
+}
+
+# ============================================================
+# Check 10: Backup freshness
+# ============================================================
+check_backup_freshness() {
+    local status_file="${BACKUP_DIR}/last-backup-status.yaml"
+
+    if [[ ! -f "${status_file}" ]]; then
+        # Try target_cmd for remote checks
+        if ! target_cmd "test -f '${status_file}'" 2>/dev/null; then
+            record_result "backup_freshness" "fail" "no backup status file found (backups may not be configured)"
+            return
+        fi
+    fi
+
+    # Parse last_backup_time from YAML using sed (awk -F splits on colons
+    # inside the timestamp value, so use sed to extract everything after
+    # the first ': ' and strip quotes)
+    local backup_time_str
+    if [[ -f "${status_file}" ]]; then
+        backup_time_str=$(sed -n 's/^last_backup_time:[[:space:]]*//p' "${status_file}" 2>/dev/null | tr -d '"' | tr -d "'" | tr -d ' ' || echo "")
+    else
+        backup_time_str=$(target_cmd "sed -n 's/^last_backup_time:[[:space:]]*//p' '${status_file}'" | tr -d '"' | tr -d "'" | tr -d ' ' || echo "")
+    fi
+
+    if [[ -z "${backup_time_str}" ]]; then
+        record_result "backup_freshness" "fail" "cannot parse backup time from status file"
+        return
+    fi
+
+    # Convert to epoch and compute age
+    local backup_epoch now_epoch age_seconds
+    backup_epoch=$(date -d "${backup_time_str}" +%s 2>/dev/null || echo "")
+    now_epoch=$(date +%s)
+
+    if [[ -z "${backup_epoch}" ]]; then
+        record_result "backup_freshness" "fail" "cannot parse backup timestamp: ${backup_time_str}"
+        return
+    fi
+
+    age_seconds=$(( now_epoch - backup_epoch ))
+
+    # Parse backup filename for detail
+    local backup_filename
+    if [[ -f "${status_file}" ]]; then
+        backup_filename=$(sed -n 's/^last_backup_file:[[:space:]]*//p' "${status_file}" 2>/dev/null | tr -d '"' | tr -d "'" | tr -d ' ' || echo "unknown")
+    else
+        backup_filename="unknown"
+    fi
+
+    # Format age for display
+    local age_display
+    if [[ ${age_seconds} -ge 3600 ]]; then
+        age_display="$(( age_seconds / 3600 ))h $(( (age_seconds % 3600) / 60 ))m"
+    elif [[ ${age_seconds} -ge 60 ]]; then
+        age_display="$(( age_seconds / 60 ))m"
+    else
+        age_display="${age_seconds}s"
+    fi
+
+    if [[ ${age_seconds} -lt 7200 ]]; then
+        record_result "backup_freshness" "pass" "last backup ${age_display} ago (${backup_filename})"
+    else
+        record_result "backup_freshness" "warn" "last backup ${age_display} ago (stale, threshold: 2h)"
+    fi
+}
+
+# ============================================================
+# Check 11: Metrics freshness
+# ============================================================
+check_metrics_freshness() {
+    local metrics_file="${TEXTFILE_DIR}/minecraft.prom"
+
+    if [[ ! -f "${metrics_file}" ]]; then
+        # Try target_cmd for remote checks
+        if ! target_cmd "test -f '${metrics_file}'" 2>/dev/null; then
+            record_result "metrics_freshness" "fail" "no metrics file found (collector may not be configured)"
+            return
+        fi
+    fi
+
+    # Parse minecraft_metrics_update_time_seconds from the metrics file
+    local update_time
+    if [[ -f "${metrics_file}" ]]; then
+        update_time=$(awk '/^minecraft_metrics_update_time_seconds / {print $2}' "${metrics_file}" 2>/dev/null || echo "")
+    else
+        update_time=$(target_cmd "awk '/^minecraft_metrics_update_time_seconds / {print \$2}' '${metrics_file}'" || echo "")
+    fi
+
+    if [[ -z "${update_time}" ]]; then
+        record_result "metrics_freshness" "fail" "cannot parse update time from metrics file"
+        return
+    fi
+
+    # Remove decimal part if present
+    update_time="${update_time%%.*}"
+
+    local now_epoch age_seconds
+    now_epoch=$(date +%s)
+    age_seconds=$(( now_epoch - update_time ))
+
+    if [[ ${age_seconds} -lt 120 ]]; then
+        record_result "metrics_freshness" "pass" "metrics updated ${age_seconds}s ago"
+    else
+        record_result "metrics_freshness" "warn" "metrics last updated ${age_seconds}s ago (stale, threshold: 120s)"
+    fi
+}
+
+# ============================================================
+# Check 12: Known failure patterns
+# ============================================================
+check_known_failures() {
+    local log_output
+    log_output=$(target_cmd "journalctl -u minecraft.service --no-pager -n 200" || echo "")
+
+    if [[ -z "${log_output}" ]]; then
+        record_result "known_failures" "warn" "no journal entries available for pattern matching"
+        return
+    fi
+
+    local failures=()
+    local warnings=()
+
+    # Check for OOM
+    if echo "${log_output}" | grep -qi "java.lang.OutOfMemoryError"; then
+        failures+=("OOM error detected in recent logs")
+    fi
+
+    # Check for missing JAR
+    if echo "${log_output}" | grep -qi "Unable to access jarfile"; then
+        failures+=("server JAR not found")
+    fi
+
+    # Check for port binding failure
+    if echo "${log_output}" | grep -qi "FAILED TO BIND TO PORT"; then
+        failures+=("port binding failure (another process using port?)")
+    fi
+
+    # Check for mod version mismatch
+    if echo "${log_output}" | grep -i "Mismatch" | grep -qi "mod\|fabric\|forge"; then
+        warnings+=("possible mod version mismatch")
+    fi
+
+    # Check for stuck save-off (save-off without subsequent save-on)
+    local last_save_off last_save_on
+    last_save_off=$(echo "${log_output}" | grep -n "save-off" | tail -1 | cut -d: -f1 || echo "0")
+    last_save_on=$(echo "${log_output}" | grep -n "save-on" | tail -1 | cut -d: -f1 || echo "0")
+    if [[ "${last_save_off}" -gt 0 ]] && [[ "${last_save_off}" -gt "${last_save_on}" ]]; then
+        warnings+=("server may be in save-off state (check backup script)")
+    fi
+
+    # Check for ConcurrentModificationException
+    if echo "${log_output}" | grep -qi "ConcurrentModificationException"; then
+        warnings+=("concurrent modification (possible chunk corruption)")
+    fi
+
+    # Build result
+    if [[ ${#failures[@]} -gt 0 ]]; then
+        local fail_detail=""
+        for f in "${failures[@]}"; do
+            fail_detail="${fail_detail}${f}; "
+        done
+        # Also include warnings if any
+        for w in "${warnings[@]}"; do
+            fail_detail="${fail_detail}[WARN] ${w}; "
+        done
+        record_result "known_failures" "fail" "${fail_detail}"
+    elif [[ ${#warnings[@]} -gt 0 ]]; then
+        local warn_detail=""
+        for w in "${warnings[@]}"; do
+            warn_detail="${warn_detail}${w}; "
+        done
+        record_result "known_failures" "warn" "${warn_detail}"
+    else
+        record_result "known_failures" "pass" "no known failure patterns in recent logs"
+    fi
+}
+
+# ============================================================
 # Output formatting
 # ============================================================
 
@@ -398,9 +647,14 @@ display_name() {
         game_port)  echo "Game port" ;;
         rcon_port)  echo "RCON port" ;;
         firewall)   echo "Firewall" ;;
-        server_log) echo "Server log" ;;
-        disk_space) echo "Disk space" ;;
-        *)          echo "$1" ;;
+        server_log)       echo "Server log" ;;
+        disk_space)       echo "Disk space" ;;
+        node_exporter)    echo "Node exporter" ;;
+        jmx_exporter)     echo "JMX exporter" ;;
+        backup_freshness) echo "Backup freshness" ;;
+        metrics_freshness) echo "Metrics freshness" ;;
+        known_failures)   echo "Known failures" ;;
+        *)                echo "$1" ;;
     esac
 }
 
@@ -422,7 +676,7 @@ output_human() {
     echo ""
 
     # Ordered output
-    local check_order=(systemd process jvm_heap game_port rcon_port firewall server_log disk_space)
+    local check_order=(systemd process jvm_heap game_port rcon_port firewall server_log disk_space node_exporter jmx_exporter backup_freshness metrics_freshness known_failures)
 
     for key in "${check_order[@]}"; do
         if [[ -v "CHECK_STATUS[${key}]" ]]; then
@@ -460,7 +714,7 @@ output_json() {
 
     # Build JSON manually (no jq dependency)
     local checks_json=""
-    local check_order=(systemd process jvm_heap game_port rcon_port firewall server_log disk_space)
+    local check_order=(systemd process jvm_heap game_port rcon_port firewall server_log disk_space node_exporter jmx_exporter backup_freshness metrics_freshness known_failures)
     local first=true
 
     for key in "${check_order[@]}"; do
@@ -502,6 +756,7 @@ JSONEOF
 # ============================================================
 
 # Run all checks (each is independent, all run even if some fail)
+# Original checks (1-7)
 check_systemd
 check_process
 check_jvm_heap
@@ -509,6 +764,13 @@ check_network_ports
 check_firewall
 check_server_log
 check_disk_space
+
+# Extended monitoring checks (8-12)
+check_node_exporter
+check_jmx_exporter
+check_backup_freshness
+check_metrics_freshness
+check_known_failures
 
 # Determine exit code
 exit_code=0
