@@ -4,17 +4,17 @@
 
 Phase: 181 — Hardware Adaptation Engine
 Plan: 02/02 complete (Phase 181 COMPLETE)
-Status: Wave 2 IN PROGRESS (179 complete, 181 complete, 180-02 done, 171-02 done, 172-01 done; 171-01, 172-02, 180-01 pending)
-Last activity: 2026-02-18 — Completed 181-02 adaptive configuration generator
+Status: Wave 2 IN PROGRESS (179 complete, 181 complete, 172 complete, 180-02 done, 171-02 done; 171-01, 180-01 pending)
+Last activity: 2026-02-18 — Completed 172-02 VM lifecycle manager and provisioning orchestrator
 
-Progress: [#####.....................] 5/30 phases (Wave 1 complete: 169, 170, 178; Wave 2: 179, 181 complete; 171/172/180 in progress)
+Progress: [######....................] 6/30 phases (Wave 1 complete: 169, 170, 178; Wave 2: 179, 181, 172 complete; 171/180 in progress)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.22 Minecraft Knowledge World -- Wave 2 execution (Phase 181 complete, 171/172/180 remaining)
+**Current focus:** v1.22 Minecraft Knowledge World -- Wave 2 execution (Phases 172, 179, 181 complete; 171/180 remaining)
 
 ## Current Milestone
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Continue Wave 2 parallels: 171-01, 172-02, 180-01
-2. Phase 181 complete -- hardware adaptation engine (GPU/audio assessment + adaptive config generator)
-3. Wave 2 remaining: 171-01, 172-02, 180-01
+1. Continue Wave 2 parallels: 171-01, 180-01
+2. Phase 172 complete -- VM provisioning automation (backends + lifecycle manager + orchestrator)
+3. Wave 2 remaining: 171-01, 180-01
 
 ## Decisions
 
@@ -108,6 +108,14 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Hypervisor preference: KVM > VMware > VirtualBox > container (open standard priority)
 - Assessment failures produce safe defaults rather than errors for generator resilience
 
+### From Phase 172 Plan 02
+- vm-lifecycle.sh uses function-reference dispatch (vm_do_create etc.) for zero-overhead backend switching
+- Backend scripts support --_sourced flag for function-only import without executing main
+- DRY_RUN state saved/restored across backend sourcing to prevent silent dry-run failure
+- provision-vm.sh calls vm-lifecycle.sh exclusively (never backends directly) for single integration point
+- Clone mode explicitly measures and reports against 5-minute INFRA-11 target
+- destroy subcommand requires --force safety flag against accidental VM deletion
+
 ## Accumulated Context
 
 ### From v1.21 (GSD-OS Desktop Foundation)
@@ -144,8 +152,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T07:35:59Z
-Stopped at: Completed 181-02-PLAN.md (adaptive configuration generator)
+Last session: 2026-02-18T07:40:15Z
+Stopped at: Completed 172-02-PLAN.md (VM lifecycle manager, provisioning orchestrator, test suite)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
