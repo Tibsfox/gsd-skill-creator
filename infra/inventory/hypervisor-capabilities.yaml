@@ -1,0 +1,199 @@
+# Hypervisor Capability Matrix
+# Documents supported operations and features per backend
+# Consumed by: Phase 172 (VM provisioning), Phase 173 (server foundation)
+# Updated by: Phase 180 (hypervisor abstraction layer)
+#
+# This file is a static, hand-maintained reference that describes what each
+# VM and container backend supports. It enables downstream automation to
+# gate features, select fallbacks, and validate requirements at plan time.
+
+version: 1.0.0
+
+# ---------------------------------------------------------------------------
+# VM backends -- managed by vm-ctl.sh (Phase 180-01)
+# ---------------------------------------------------------------------------
+capability_matrix:
+  kvm:
+    type: hypervisor
+    tool: virsh
+    tool_package: libvirt-client  # dnf/apt package name varies by distro
+    operations:
+      create: true
+      start: true
+      stop: true
+      snapshot: true
+      destroy: true
+      status: true
+      list: true
+      clone: true           # virsh vol-clone + virt-clone
+      migrate: true          # virsh migrate (live migration)
+      console: true          # virsh console
+      resize_cpu: true       # virsh setvcpus
+      resize_memory: true    # virsh setmem (with balloon driver)
+    features:
+      headless: true
+      gpu_passthrough: true  # requires IOMMU
+      nested_virtualization: true
+      network_bridge: true
+      storage_pool: true
+      cloud_init: true
+      pxe_boot: true
+    resource_overhead:
+      min_ram_mb: 256        # qemu process overhead
+      cpu_overhead_percent: 2
+    notes: "Primary recommended backend. Open standard, best Linux integration."
+
+  vmware:
+    type: hypervisor
+    tool: vmrun
+    tool_package: vmware-workstation  # manual install (no distro package)
+    operations:
+      create: true           # via .vmx generation + vmware-vdiskmanager
+      start: true
+      stop: true
+      snapshot: true
+      destroy: true
+      status: true
+      list: true
+      clone: true            # vmrun clone
+      migrate: false
+      console: false         # GUI only
+      resize_cpu: false      # requires VM shutdown + .vmx edit
+      resize_memory: false   # requires VM shutdown + .vmx edit
+    features:
+      headless: true         # vmrun start nogui
+      gpu_passthrough: false # not supported on Workstation
+      nested_virtualization: true
+      network_bridge: true
+      storage_pool: false
+      cloud_init: false      # manual only
+      pxe_boot: true
+    resource_overhead:
+      min_ram_mb: 512
+      cpu_overhead_percent: 3
+    notes: "Proprietary. Good compatibility, but no live migration or GPU passthrough."
+
+  virtualbox:
+    type: hypervisor
+    tool: VBoxManage
+    tool_package: virtualbox
+    operations:
+      create: true
+      start: true
+      stop: true
+      snapshot: true
+      destroy: true
+      status: true
+      list: true
+      clone: true            # VBoxManage clonevm
+      migrate: false
+      console: false         # GUI or vrde
+      resize_cpu: false      # requires VM shutdown
+      resize_memory: false   # requires VM shutdown
+    features:
+      headless: true         # startvm --type headless
+      gpu_passthrough: false
+      nested_virtualization: true  # VT-x passthrough
+      network_bridge: true
+      storage_pool: false
+      cloud_init: false
+      pxe_boot: true
+    resource_overhead:
+      min_ram_mb: 512
+      cpu_overhead_percent: 5
+    notes: "Cross-platform. Higher overhead than KVM. No GPU passthrough."
+
+# ---------------------------------------------------------------------------
+# Container backends -- managed by container-ctl.sh (Phase 180-02)
+# Used as fallback when no hypervisor is available
+# ---------------------------------------------------------------------------
+  podman:
+    type: container
+    tool: podman
+    tool_package: podman
+    operations:
+      create: true
+      start: true
+      stop: true
+      snapshot: false        # use podman commit for image snapshots
+      destroy: true
+      status: true
+      list: true
+      clone: false
+      migrate: false
+      console: true          # podman exec -it
+      resize_cpu: true       # podman update --cpus
+      resize_memory: true    # podman update --memory
+    features:
+      headless: true
+      gpu_passthrough: false
+      nested_virtualization: false
+      network_bridge: true   # podman network
+      storage_pool: false
+      cloud_init: false
+      pxe_boot: false
+      rootless: true         # key differentiator from Docker
+      daemonless: true       # no daemon required
+      minecraft_image: "itzg/minecraft-server"
+    resource_overhead:
+      min_ram_mb: 64
+      cpu_overhead_percent: 1
+    notes: "Preferred container runtime. Rootless, daemonless, drop-in Docker replacement."
+
+  docker:
+    type: container
+    tool: docker
+    tool_package: docker-ce
+    operations:
+      create: true
+      start: true
+      stop: true
+      snapshot: false
+      destroy: true
+      status: true
+      list: true
+      clone: false
+      migrate: false
+      console: true
+      resize_cpu: true
+      resize_memory: true
+    features:
+      headless: true
+      gpu_passthrough: false
+      nested_virtualization: false
+      network_bridge: true
+      storage_pool: false
+      cloud_init: false
+      pxe_boot: false
+      rootless: false        # rootless mode exists but not default
+      daemonless: false      # requires dockerd
+      minecraft_image: "itzg/minecraft-server"
+    resource_overhead:
+      min_ram_mb: 128        # dockerd overhead
+      cpu_overhead_percent: 1
+    notes: "Fallback container runtime when Podman unavailable."
+
+# ---------------------------------------------------------------------------
+# Backend selection priority (used by vm-ctl.sh and container-ctl.sh)
+# ---------------------------------------------------------------------------
+selection_priority:
+  hypervisors: [kvm, vmware, virtualbox]
+  containers: [podman, docker]
+  fallback_order: [kvm, vmware, virtualbox, podman, docker]
+
+# ---------------------------------------------------------------------------
+# Minimum requirements for Minecraft server deployment
+# Used by Phase 172 (VM provisioning) and Phase 173 (server foundation)
+# for pre-flight validation before deployment
+# ---------------------------------------------------------------------------
+minecraft_requirements:
+  vm:
+    min_ram_mb: 4096
+    min_cpus: 2
+    min_disk_gb: 20
+    required_ports: [25565, 25575]
+  container:
+    min_ram_mb: 2048         # containers are more efficient
+    min_cpus: 2
+    min_disk_gb: 10
+    required_ports: [25565, 25575]
