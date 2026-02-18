@@ -46,6 +46,10 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - [Phase 176]: Client mod manifest as single source of truth: all docs reference mods-manifest.yaml for versions and download URLs
 - [Phase 176]: SHA256 checksums deferred to deployment time since JARs not downloaded during doc creation
 - [Phase 176]: Dual-path documentation: Prism Launcher quick path (5 min) plus Vanilla manual fallback (10 min)
+- [Phase 187]: INFRA_DIR convention: points to infra/ directory, matching existing test patterns
+- [Phase 187]: Syncmatica script reports PENDING for unbuilt schematics instead of failing
+- [Phase 188]: Schematic lifecycle: specified -> built -> captured -> verified (4-stage pipeline)
+- [Phase 188]: Naming convention: category-name-version.litematic with dashes replacing dots in version
 
 ### From Phase 169 Plan 02
 - Integer-only arithmetic in bash for resource budget calculations
@@ -213,8 +217,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T22:27:36Z
-Stopped at: Completed 184-01-PLAN.md (individual converters)
+Last session: 2026-02-18T22:30:00Z
+Stopped at: Completed 187-01-PLAN.md (spawn area welcome experience)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
