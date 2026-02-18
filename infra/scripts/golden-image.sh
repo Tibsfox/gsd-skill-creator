@@ -342,25 +342,30 @@ cmd_create() {
     # --- Step 5: Create golden snapshot ---
     step "Create golden snapshot"
 
-    # Stop source VM for clean snapshot
-    info "Stopping source VM for clean snapshot..."
-    lifecycle stop --name "${SOURCE_VM}"
-    ok "Source VM stopped"
-
     # Generate snapshot name
     local golden_name="golden-$(date -u +"%Y%m%d-%H%M%S")"
     if [[ -n "${SNAPSHOT_NAME}" ]]; then
         golden_name="${SNAPSHOT_NAME}"
     fi
 
-    info "Creating snapshot: ${golden_name}"
-    lifecycle snapshot --name "${SOURCE_VM}" --snapshot "${golden_name}"
-    ok "Golden snapshot '${golden_name}' created"
+    if dry_run_cmd "Would stop VM '${SOURCE_VM}' for clean snapshot"; then
+        dry_run_cmd "Would create snapshot '${golden_name}' from '${SOURCE_VM}'"
+        dry_run_cmd "Would restart VM '${SOURCE_VM}'"
+    else
+        # Stop source VM for clean snapshot
+        info "Stopping source VM for clean snapshot..."
+        lifecycle stop --name "${SOURCE_VM}"
+        ok "Source VM stopped"
 
-    # Restart source VM
-    info "Restarting source VM..."
-    lifecycle start --name "${SOURCE_VM}"
-    ok "Source VM restarted"
+        info "Creating snapshot: ${golden_name}"
+        lifecycle snapshot --name "${SOURCE_VM}" --snapshot "${golden_name}"
+        ok "Golden snapshot '${golden_name}' created"
+
+        # Restart source VM
+        info "Restarting source VM..."
+        lifecycle start --name "${SOURCE_VM}"
+        ok "Source VM restarted"
+    fi
 
     # --- Step 6: Render manifest ---
     step "Render version manifest"
@@ -513,20 +518,24 @@ cmd_clone() {
         clone_args+=(--snapshot "${clone_snapshot}")
     fi
 
-    lifecycle "${clone_args[@]}"
-    ok "VM '${TARGET_NAME}' cloned from '${SOURCE_VM}'"
+    if dry_run_cmd "Would clone VM '${SOURCE_VM}' -> '${TARGET_NAME}' via vm-lifecycle.sh"; then
+        :
+    else
+        lifecycle "${clone_args[@]}"
+        ok "VM '${TARGET_NAME}' cloned from '${SOURCE_VM}'"
+    fi
 
     # --- Step 3: Start cloned VM ---
     step "Start cloned VM"
 
-    lifecycle start --name "${TARGET_NAME}"
-    ok "Cloned VM '${TARGET_NAME}' started"
-
-    # Wait for boot (max 120 seconds, matching provision-vm.sh clone pattern)
-    local boot_timeout=120
-    if dry_run_cmd "Would poll VM state for ${boot_timeout}s until boot completes"; then
+    if dry_run_cmd "Would start VM '${TARGET_NAME}' and wait for boot (up to 120s)"; then
         :
     else
+        lifecycle start --name "${TARGET_NAME}"
+        ok "Cloned VM '${TARGET_NAME}' started"
+
+        # Wait for boot (max 120 seconds, matching provision-vm.sh clone pattern)
+        local boot_timeout=120
         local boot_elapsed=0
         while [[ ${boot_elapsed} -lt ${boot_timeout} ]]; do
             sleep 5
