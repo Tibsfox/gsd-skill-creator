@@ -34,9 +34,9 @@
 - [x] **MC-08**: RCON is configured for remote command execution with random password in local secrets
 - [x] **MC-09**: Client installation guide covers Windows, macOS, and Linux with Fabric Loader and mods
 - [x] **MC-10**: Pre-configured Prism Launcher profile is available for one-click client setup
-- [ ] **MC-11**: End-to-end test verifies PXE boot through running Minecraft server in under 20 minutes
-- [ ] **MC-12**: Two clients can share schematics via Syncmatica within 30 seconds
-- [ ] **MC-13**: Server maintains 20 TPS with 2 connected clients
+- [x] **MC-11**: End-to-end test verifies PXE boot through running Minecraft server in under 20 minutes
+- [x] **MC-12**: Two clients can share schematics via Syncmatica within 30 seconds
+- [x] **MC-13**: Server maintains 20 TPS with 2 connected clients
 
 ### Platform Portability (Plan 03)
 
@@ -164,9 +164,9 @@
 | MC-08 | Phase 175 | Complete |
 | MC-09 | Phase 176 | Complete |
 | MC-10 | Phase 176 | Complete |
-| MC-11 | Phase 177 | Pending |
-| MC-12 | Phase 177 | Pending |
-| MC-13 | Phase 177 | Pending |
+| MC-11 | Phase 177 | Complete |
+| MC-12 | Phase 177 | Complete |
+| MC-13 | Phase 177 | Complete |
 | PLAT-01 | Phase 178 | Pending |
 | PLAT-02 | Phase 178 | Pending |
 | PLAT-03 | Phase 178 | Pending |
