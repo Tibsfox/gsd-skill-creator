@@ -1,0 +1,192 @@
+# Knowledge World Wayfinding System
+# Defines paths, beacons, landmarks, and navigation aids
+
+version: "1.0"
+
+# Design principles
+principles:
+  - "Color consistency: each district's path uses its palette path_block"
+  - "Sight lines: from any path, at least one beacon is visible"
+  - "Progressive disclosure: spawn shows all districts, districts show their contents"
+  - "Redundant cues: color + beacon + signs + landmarks at every decision point"
+
+# Primary paths: spawn plaza to each district entrance
+# All paths are 5 blocks wide, elevated 1 block above terrain, with
+# colored concrete powder matching district palette
+paths:
+  - path_id: spawn-to-hardware
+    from: { x: 0, z: 0, label: "Spawn Plaza" }
+    to: { x: -100, z: -150, label: "Hardware District Entrance" }
+    path_block: "gray_concrete_powder"
+    border_block: "iron_block"
+    width: 5
+    waypoints:
+      - { x: -30, z: 0, sign: "Hardware District -->" }
+      - { x: -60, z: -75, sign: "Hardware District -- Circuits, Signals, Memory" }
+    lighting: "lantern"  # every 8 blocks
+    length_blocks: 180
+
+  - path_id: spawn-to-software
+    from: { x: 0, z: 0, label: "Spawn Plaza" }
+    to: { x: 100, z: -150, label: "Software District Entrance" }
+    path_block: "cyan_concrete_powder"
+    border_block: "prismarine_bricks"
+    width: 5
+    waypoints:
+      - { x: 30, z: 0, sign: "Software District -->" }
+      - { x: 60, z: -75, sign: "Software District -- Algorithms, Data Structures" }
+    lighting: "sea_lantern"
+    length_blocks: 180
+
+  - path_id: spawn-to-network
+    from: { x: 0, z: 0, label: "Spawn Plaza" }
+    to: { x: -100, z: 150, label: "Network District Entrance" }
+    path_block: "lime_concrete_powder"
+    border_block: "moss_block"
+    width: 5
+    waypoints:
+      - { x: -30, z: 0, sign: "Network District -->" }
+      - { x: -60, z: 75, sign: "Network District -- Protocols, Servers, Security" }
+    lighting: "end_rod"
+    length_blocks: 180
+
+  - path_id: spawn-to-creative
+    from: { x: 0, z: 0, label: "Spawn Plaza" }
+    to: { x: 100, z: 150, label: "Creative District Entrance" }
+    path_block: "magenta_concrete_powder"
+    border_block: "purpur_block"
+    width: 5
+    waypoints:
+      - { x: 30, z: 0, sign: "Creative District -->" }
+      - { x: 60, z: 75, sign: "Creative District -- Art, Music, Demos" }
+    lighting: "shroomlight"
+    length_blocks: 180
+
+  - path_id: spawn-to-community
+    from: { x: 0, z: 0, label: "Spawn Plaza" }
+    to: { x: -100, z: 260, label: "Community District Entrance" }
+    path_block: "orange_concrete_powder"
+    border_block: "cut_sandstone"
+    width: 5
+    waypoints:
+      - { x: -15, z: 0, sign: "Community District -->" }
+      - { x: -50, z: 100, sign: "Community District -- Galleries, Events" }
+      - { x: -75, z: 180, sign: "Community District -- Almost there!" }
+    lighting: "lantern"
+    length_blocks: 279
+
+  - path_id: spawn-to-workshop
+    from: { x: 0, z: 0, label: "Spawn Plaza" }
+    to: { x: 100, z: 260, label: "Workshop District Entrance" }
+    path_block: "red_concrete_powder"
+    border_block: "bricks"
+    width: 5
+    waypoints:
+      - { x: 15, z: 0, sign: "Workshop District -->" }
+      - { x: 50, z: 100, sign: "Workshop District -- Schematics, Guided Builds" }
+      - { x: 75, z: 180, sign: "Workshop District -- Almost there!" }
+    lighting: "redstone_lamp"
+    length_blocks: 279
+
+# Secondary paths: inter-district connections
+secondary_paths:
+  - path_id: hardware-to-software
+    follows_connection: "The Bus Bridge"
+    path_block: "polished_blackstone"  # neutral bridge material
+    width: 15  # wide bridge
+    elevated: true  # raised 8 blocks above ground
+
+  - path_id: hardware-to-network
+    follows_connection: "The NIC Corridor"
+    path_block: "polished_deepslate"
+    width: 10
+
+  - path_id: software-to-creative
+    follows_connection: "The API Arch"
+    path_block: "polished_deepslate"
+    width: 10
+
+  - path_id: community-to-workshop
+    follows_connection: "The Collaboration Commons"
+    path_block: "smooth_stone"
+    width: 20  # wide shared plaza
+
+  - path_id: network-to-community
+    follows_connection: "The Connection Path"
+    path_block: "polished_diorite"
+    width: 8
+
+  - path_id: creative-to-workshop
+    follows_connection: "The Maker's Way"
+    path_block: "polished_diorite"
+    width: 8
+
+# Beacons: visible landmarks at key locations
+beacons:
+  - beacon_id: spawn-beacon
+    location: { x: 0, y: 64, z: 0 }
+    beam_color: "white"  # clear glass, no filter
+    glass_layers: 0  # pure white beam
+    purpose: "World center marker, visible from all districts"
+    base_material: "iron_block"
+    base_size: 4  # 4-tier for max range
+
+  - beacon_id: hardware-beacon
+    location: { x: -200, y: 80, z: -150 }
+    beam_color: "gray"
+    glass_stack: ["gray_stained_glass"]
+    purpose: "Hardware District landmark"
+    base_material: "iron_block"
+    base_size: 2
+
+  - beacon_id: software-beacon
+    location: { x: 200, y: 80, z: -150 }
+    beam_color: "light_blue"
+    glass_stack: ["light_blue_stained_glass"]
+    purpose: "Software District landmark"
+    base_material: "diamond_block"
+    base_size: 2
+
+  - beacon_id: network-beacon
+    location: { x: -200, y: 80, z: 150 }
+    beam_color: "green"
+    glass_stack: ["green_stained_glass"]
+    purpose: "Network District landmark"
+    base_material: "emerald_block"
+    base_size: 2
+
+  - beacon_id: creative-beacon
+    location: { x: 200, y: 80, z: 150 }
+    beam_color: "magenta"
+    glass_stack: ["magenta_stained_glass"]
+    purpose: "Creative District landmark"
+    base_material: "amethyst_block"
+    base_size: 2
+
+  - beacon_id: community-beacon
+    location: { x: -100, y: 80, z: 360 }
+    beam_color: "orange"
+    glass_stack: ["orange_stained_glass"]
+    purpose: "Community District landmark"
+    base_material: "gold_block"
+    base_size: 2
+
+  - beacon_id: workshop-beacon
+    location: { x: 110, y: 80, z: 360 }
+    beam_color: "red"
+    glass_stack: ["red_stained_glass"]
+    purpose: "Workshop District landmark"
+    base_material: "redstone_block"
+    base_size: 2
+
+# District entrance gates: archways marking district boundaries
+entrance_gates:
+  style: "Archway with district banner and name sign"
+  height: 7  # blocks tall
+  width: 5   # blocks wide (matches path width)
+  components:
+    - "Two pillars of district primary block"
+    - "Arch of district secondary block"
+    - "District banner on each pillar"
+    - "District name sign on arch keystone"
+    - "Lanterns on pillars"
