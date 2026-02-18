@@ -434,22 +434,7 @@ Wave 4 (Content):
 
 Wave 5 (Integration & Ops):
   191 Skill Defs (needs 169-190) ---+
-  192 Agent Defs (needs 191) ------|
-  193 Team Defs (needs 192) ------|
-  194 Chipset (needs 193) --------+
-  195 Backups (needs 177) ------+
-  196 Monitoring (needs 177) ---|
-  197 Golden Image (needs 177, 172) --+
-
-Wave 6 (Polish):
-  198 Runbooks (needs 195, 196, 197)
-```
-
----
-
-## Coverage
-
-| Category | Requirements | Phases | Count |
+  192 Agent Defs (needs 191) ------| 1/1 | Complete   | 2026-02-18 | Category | Requirements | Phases | Count |
 |----------|-------------|--------|-------|
 | Infrastructure | INFRA-01 through INFRA-12 | 169-172 | 12 |
 | Minecraft | MC-01 through MC-13 | 173-177 | 13 |
