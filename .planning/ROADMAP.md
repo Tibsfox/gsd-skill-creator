@@ -49,6 +49,9 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 2
 - **Dependencies:** Phase 170 (PXE infrastructure)
 - **Requirements:** INFRA-07, INFRA-08, INFRA-09
+- **Plans:** 2 plans
+  - [ ] 171-01-PLAN.md — Base kickstart template with security hardening + first-boot service framework
+  - [ ] 171-02-PLAN.md — Minecraft kickstart extending base + kickstart deployment script
 - **Success Criteria:**
   1. Base kickstart produces a bootable CentOS Stream 9 VM with SELinux enforcing, firewalld active, and SSH key-only access
   2. Minecraft kickstart extends base correctly, adding Java 21 and game-specific configuration
@@ -469,7 +472,7 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 |-------|------|------|--------|
 | 169 | 2/2 | Complete   | 2026-02-18 |
 | 170 | 2/2 | Complete   | 2026-02-18 |
-| 171 | Base Image & Kickstart System | 2 | Pending |
+| 171 | Base Image & Kickstart System | 2 | Planned |
 | 172 | VM Provisioning Automation | 2 | Pending |
 | 173 | Server Foundation | 3 | Pending |
 | 174 | Mod Stack Installation | 3 | Pending |
