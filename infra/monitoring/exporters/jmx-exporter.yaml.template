@@ -1,0 +1,49 @@
+# JMX Exporter Configuration for Minecraft Fabric Server
+# Rendered from template -- do not edit directly
+# Exposes JVM metrics on port {{JMX_EXPORTER_PORT}} (default: 9404)
+#
+# Attached via -javaagent flag in jvm-flags.conf
+
+hostPort: 127.0.0.1:{{JMX_PORT}}
+startDelaySeconds: 30
+ssl: false
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+
+rules:
+  # JVM Memory
+  - pattern: "java.lang<type=Memory><(\\w+)>: (\\w+)"
+    name: "jvm_memory_$2"
+    type: GAUGE
+
+  # JVM GC
+  - pattern: "java.lang<type=GarbageCollector, name=(.+)><(\\w+)>: (\\w+)"
+    name: "jvm_gc_$3"
+    labels:
+      gc: "$1"
+    type: GAUGE
+
+  # JVM GC collection count and time
+  - pattern: "java.lang<type=GarbageCollector, name=(.+)><>(CollectionCount|CollectionTime)"
+    name: "jvm_gc_$2"
+    labels:
+      gc: "$1"
+    type: COUNTER
+
+  # JVM Threading
+  - pattern: "java.lang<type=Threading><>(\\w+Count)"
+    name: "jvm_threads_$1"
+    type: GAUGE
+
+  # JVM Class Loading
+  - pattern: "java.lang<type=ClassLoading><>(\\w+)"
+    name: "jvm_classloading_$1"
+    type: GAUGE
+
+  # JVM Operating System
+  - pattern: "java.lang<type=OperatingSystem><>(\\w+)"
+    name: "jvm_os_$1"
+    type: GAUGE
+
+  # Catch-all for unlabeled beans
+  - pattern: ".*"
