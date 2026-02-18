@@ -18,7 +18,7 @@
 - [ ] **INFRA-07**: Base kickstart template produces a minimal, secure CentOS Stream 9 VM (SELinux enforcing, firewalld active, SSH key-only)
 - [x] **INFRA-08**: Minecraft kickstart extends base with Java 21, dedicated user, and game ports
 - [x] **INFRA-09**: All kickstart values use template/local-values pattern with zero secrets in version control
-- [ ] **INFRA-10**: Hypervisor-agnostic VM creation scripts support at least VMware Workstation and KVM/libvirt backends
+- [x] **INFRA-10**: Hypervisor-agnostic VM creation scripts support at least VMware Workstation and KVM/libvirt backends
 - [ ] **INFRA-11**: Golden image workflow provisions via kickstart, snapshots, and clones in under 5 minutes
 - [ ] **INFRA-12**: VM lifecycle operations (create, start, stop, snapshot, destroy) are idempotent
 
@@ -151,7 +151,7 @@
 | INFRA-07 | Phase 171 | Pending |
 | INFRA-08 | Phase 171 | Complete |
 | INFRA-09 | Phase 171 | Complete |
-| INFRA-10 | Phase 172 | Pending |
+| INFRA-10 | Phase 172 | Complete |
 | INFRA-11 | Phase 172 | Pending |
 | INFRA-12 | Phase 172 | Pending |
 | MC-01 | Phase 173 | Pending |
