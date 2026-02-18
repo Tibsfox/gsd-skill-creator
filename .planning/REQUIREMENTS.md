@@ -48,10 +48,10 @@
 - [x] **PLAT-06**: Firewall abstraction manages ports across firewalld, ufw, and iptables
 - [ ] **PLAT-07**: Hypervisor abstraction provides unified VM operations across VMware, KVM/libvirt, and VirtualBox
 - [x] **PLAT-08**: Container fallback supports Minecraft server deployment via Podman/Docker on resource-constrained environments
-- [ ] **PLAT-09**: Resource allocation calculator adapts VM sizes from 16GB (minimal) to 64GB+ (generous) configurations
+- [x] **PLAT-09**: Resource allocation calculator adapts VM sizes from 16GB (minimal) to 64GB+ (generous) configurations
 - [x] **PLAT-10**: GPU capability assessment detects compute, rendering, and IOMMU passthrough support
 - [x] **PLAT-11**: Audio subsystem detection identifies ALSA/PulseAudio/PipeWire devices and MIDI ports
-- [ ] **PLAT-12**: Adaptive configuration generator produces local-values YAML from hardware profile
+- [x] **PLAT-12**: Adaptive configuration generator produces local-values YAML from hardware profile
 
 ### Amiga Emulation (Plan 04)
 
@@ -175,10 +175,10 @@
 | PLAT-06 | Phase 179 | Complete |
 | PLAT-07 | Phase 180 | Pending |
 | PLAT-08 | Phase 180 | Complete |
-| PLAT-09 | Phase 181 | Pending |
+| PLAT-09 | Phase 181 | Complete |
 | PLAT-10 | Phase 181 | Complete |
 | PLAT-11 | Phase 181 | Complete |
-| PLAT-12 | Phase 181 | Pending |
+| PLAT-12 | Phase 181 | Complete |
 | AMIGA-01 | Phase 182 | Pending |
 | AMIGA-02 | Phase 182 | Pending |
 | AMIGA-03 | Phase 182 | Pending |
