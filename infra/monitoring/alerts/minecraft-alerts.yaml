@@ -1,0 +1,98 @@
+groups:
+  - name: minecraft_server
+    rules:
+
+      # 1. TPS Degradation -- fires when TPS drops below 18 for 2 minutes
+      # 18 threshold (not 20) avoids false positives from momentary tick spikes
+      # during chunk generation or world save
+      - alert: MinecraftTPSDegraded
+        expr: minecraft_tps{server="knowledge-world"} < 18
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Minecraft TPS degraded on {{ $labels.server }}"
+          description: "TPS is {{ $value }} (threshold: 18). Investigate chunk generation, entity count, or plugin lag."
+
+      # Critical: TPS below 15 for 1 minute means severe lag
+      - alert: MinecraftTPSCritical
+        expr: minecraft_tps{server="knowledge-world"} < 15
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Minecraft TPS critically low on {{ $labels.server }}"
+          description: "TPS is {{ $value }} (threshold: 15). Players experiencing severe lag. Check entity count and GC pressure."
+
+      # 2. Memory Pressure -- fires when JVM heap usage exceeds 90%
+      # Uses JMX exporter metrics (jvm_memory_HeapMemoryUsage_used / max)
+      - alert: MinecraftMemoryPressure
+        expr: (jvm_memory_HeapMemoryUsage_used / jvm_memory_HeapMemoryUsage_max) * 100 > 90
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Minecraft JVM memory pressure on {{ $labels.server }}"
+          description: "Heap usage is {{ $value }}% (threshold: 90%). May need heap increase or GC tuning."
+
+      # 3. Disk Usage -- fires when filesystem usage exceeds 85%
+      # Uses node_exporter filesystem metrics
+      - alert: MinecraftDiskUsageHigh
+        expr: (1 - node_filesystem_avail_bytes{mountpoint=~"/opt/minecraft.*"} / node_filesystem_size_bytes{mountpoint=~"/opt/minecraft.*"}) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Disk usage high on Minecraft filesystem"
+          description: "{{ $labels.mountpoint }} is {{ $value }}% full. Check world size growth and backup rotation."
+
+      # Critical: Disk above 95%
+      - alert: MinecraftDiskUsageCritical
+        expr: (1 - node_filesystem_avail_bytes{mountpoint=~"/opt/minecraft.*"} / node_filesystem_size_bytes{mountpoint=~"/opt/minecraft.*"}) * 100 > 95
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Disk critically full on Minecraft filesystem"
+          description: "{{ $labels.mountpoint }} is {{ $value }}% full. Server may crash. Prune backups or expand disk immediately."
+
+      # 4. Backup Age -- fires when last backup is older than 2 hours
+      # Uses custom metric from collect-minecraft-metrics.sh
+      - alert: MinecraftBackupStale
+        expr: (time() - minecraft_last_backup_timestamp{server="knowledge-world"}) > 7200
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Minecraft backup is stale on {{ $labels.server }}"
+          description: "Last backup was {{ $value | humanizeDuration }} ago (threshold: 2h). Check backup cron and disk space."
+
+      # 5. Server Unreachable -- fires when metrics collector reports failure
+      - alert: MinecraftServerUnreachable
+        expr: up{job="minecraft"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Minecraft server is unreachable"
+          description: "Prometheus cannot scrape Minecraft metrics. Server may be down or network issue."
+
+      # Service down -- systemd reports minecraft.service not active
+      - alert: MinecraftServiceDown
+        expr: node_systemd_unit_state{name="minecraft.service",state="active"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "minecraft.service is not active"
+          description: "systemd reports minecraft.service is not in active state. Check journalctl -u minecraft.service."
+
+      # Metrics collection stale -- collector hasn't run recently
+      - alert: MinecraftMetricsStale
+        expr: (time() - minecraft_metrics_update_time_seconds) > 120
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Minecraft custom metrics are stale"
+          description: "Metrics collector hasn't updated in {{ $value | humanizeDuration }}. Check cron/timer and collector health."
