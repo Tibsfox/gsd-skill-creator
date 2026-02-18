@@ -44,3 +44,18 @@ ssh_public_key: "ssh-ed25519 AAAA_REPLACE_WITH_YOUR_ACTUAL_PUBLIC_KEY gsd-admin"
 # Full path where the first-boot script will be installed on the VM
 # The first-boot systemd service ExecStart points to this path
 first_boot_script_path: "/opt/gsd/first-boot.sh"
+
+# --- Minecraft Server ---
+
+# Minecraft VM hostname (FQDN or short name)
+# Used by minecraft.ks.template for the --hostname directive
+minecraft_hostname: "mc-server-01"
+
+# Minecraft game port (clients connect here)
+# Default: 25565 -- change only if running multiple servers or behind a proxy
+minecraft_server_port: "25565"
+
+# Minecraft RCON (Remote Console) port
+# Used for server management commands over the network
+# Default: 25575 -- change only if running multiple servers
+minecraft_rcon_port: "25575"
