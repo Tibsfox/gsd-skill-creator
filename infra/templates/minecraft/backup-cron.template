@@ -1,0 +1,28 @@
+# Minecraft world backup schedule
+# Rendered from template -- do not edit directly
+# Generated: {{GENERATED_DATE}}
+#
+# Backup strategy:
+#   - Hourly: Full world backup every hour (retain 24)
+#   - Daily:  Full world backup once per day at 03:15 (retain 7)
+#   - Weekly: Full world backup on Sunday at 04:15 (retain 4)
+#
+# All backups use RCON quiesce (save-all flush, save-off/save-on)
+# to ensure consistent world state. Server interruption is under 5 seconds.
+#
+# Template variables (UPPER_SNAKE_CASE):
+#   MINECRAFT_USER  -- System user running Minecraft (e.g., minecraft)
+#   BACKUP_SCRIPT   -- Absolute path to backup-world.sh
+#   BACKUP_DIR      -- Backup destination directory
+#   RCON_HOST       -- RCON server hostname/IP
+#   SECRETS_FILE    -- Path to minecraft-secrets.yaml
+#   LOG_DIR         -- Log directory for backup output
+
+# Hourly backups: every hour at minute 15
+15 * * * * {{MINECRAFT_USER}} {{BACKUP_SCRIPT}} --type hourly --backup-dir {{BACKUP_DIR}} --rcon-host {{RCON_HOST}} --secrets {{SECRETS_FILE}} >> {{LOG_DIR}}/backup-hourly.log 2>&1
+
+# Daily backup: promote at 03:15 (during low activity)
+15 3 * * * {{MINECRAFT_USER}} {{BACKUP_SCRIPT}} --type daily --backup-dir {{BACKUP_DIR}} --rcon-host {{RCON_HOST}} --secrets {{SECRETS_FILE}} >> {{LOG_DIR}}/backup-daily.log 2>&1
+
+# Weekly backup: promote on Sunday at 04:15
+15 4 * * 0 {{MINECRAFT_USER}} {{BACKUP_SCRIPT}} --type weekly --backup-dir {{BACKUP_DIR}} --rcon-host {{RCON_HOST}} --secrets {{SECRETS_FILE}} >> {{LOG_DIR}}/backup-weekly.log 2>&1
