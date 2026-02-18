@@ -55,8 +55,8 @@
 
 ### Amiga Emulation (Plan 04)
 
-- [ ] **AMIGA-01**: FS-UAE installs and runs on all Tier 1 distributions via package manager abstraction
-- [ ] **AMIGA-02**: AROS ROM boots to a usable Amiga Workbench without copyright issues
+- [x] **AMIGA-01**: FS-UAE installs and runs on all Tier 1 distributions via package manager abstraction
+- [x] **AMIGA-02**: AROS ROM boots to a usable Amiga Workbench without copyright issues
 - [ ] **AMIGA-03**: UAE display output uses GPU acceleration with optional scanline shader
 - [ ] **AMIGA-04**: UAE audio output works through host audio subsystem (ALSA/PulseAudio/PipeWire)
 - [ ] **AMIGA-05**: Application-specific UAE profiles exist for Deluxe Paint, OctaMED, ProTracker, and PPaint
@@ -179,8 +179,8 @@
 | PLAT-10 | Phase 181 | Complete |
 | PLAT-11 | Phase 181 | Complete |
 | PLAT-12 | Phase 181 | Complete |
-| AMIGA-01 | Phase 182 | Pending |
-| AMIGA-02 | Phase 182 | Pending |
+| AMIGA-01 | Phase 182 | Complete |
+| AMIGA-02 | Phase 182 | Complete |
 | AMIGA-03 | Phase 182 | Pending |
 | AMIGA-04 | Phase 182 | Pending |
 | AMIGA-05 | Phase 183 | Pending |
