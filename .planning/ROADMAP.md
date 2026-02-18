@@ -472,7 +472,7 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 |-------|------|------|--------|
 | 169 | 2/2 | Complete   | 2026-02-18 |
 | 170 | 2/2 | Complete   | 2026-02-18 |
-| 171 | 1/2 | In Progress|  |
+| 171 | 2/2 | Complete   | 2026-02-18 |
 | 172 | 2/2 | Complete   | 2026-02-18 |
 | 173 | Server Foundation | 3 | Pending |
 | 174 | Mod Stack Installation | 3 | Pending |
@@ -481,7 +481,7 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 | 177 | Integration Verification | 3 | Pending |
 | 178 | 2/2 | Complete   | 2026-02-18 |
 | 179 | 2/2 | Complete   | 2026-02-18 |
-| 180 | Hypervisor Abstraction Layer | 2 | Planned |
+| 180 | 2/2 | Complete   | 2026-02-18 |
 | 181 | 2/2 | Complete   | 2026-02-18 |
 | 182 | UAE Installation & Configuration | 3 | Pending |
 | 183 | Amiga Application Profiles | 3 | Pending |

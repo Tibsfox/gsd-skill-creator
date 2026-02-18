@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 181 — Hardware Adaptation Engine
-Plan: 02/02 complete (Phase 181 COMPLETE)
-Status: Wave 2 IN PROGRESS (179 complete, 181 complete, 172 complete, 180-02 done, 171-02 done; 171-01, 180-01 pending)
-Last activity: 2026-02-18 — Completed 172-02 VM lifecycle manager and provisioning orchestrator
+Phase: Wave 2 Complete — Starting Wave 3
+Plan: All Wave 2 plans complete
+Status: WAVE 2 COMPLETE — All 8 phases (169-172, 178-181) done. Wave 3 planning begins.
+Last activity: 2026-02-18 — Completed Wave 2 (all 8 phases)
 
-Progress: [######....................] 6/30 phases (Wave 1 complete: 169, 170, 178; Wave 2: 179, 181, 172 complete; 171/180 in progress)
+Progress: [########..................] 8/30 phases (Wave 1: 169, 170, 178; Wave 2: 171, 172, 179, 180, 181 — all complete)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.22 Minecraft Knowledge World -- Wave 2 execution (Phases 172, 179, 181 complete; 171/180 remaining)
+**Current focus:** v1.22 Minecraft Knowledge World -- Wave 3 planning (Phases 173-177, 182-183)
 
 ## Current Milestone
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Continue Wave 2 parallels: 171-01, 180-01
-2. Phase 172 complete -- VM provisioning automation (backends + lifecycle manager + orchestrator)
-3. Wave 2 remaining: 171-01, 180-01
+1. Plan Wave 3 phases: 173, 174, 175, 176, 177 (Minecraft Server), 182, 183 (Amiga)
+2. Execute Wave 3 plans in dependency order
+3. Wave 2 fully complete — 8/30 phases done, 22 remaining
 
 ## Decisions
 
