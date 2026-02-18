@@ -1,0 +1,63 @@
+# GSD Minecraft Knowledge World -- server.properties
+# Rendered from template by deploy-server-config.sh
+# Source: infra/templates/minecraft/server.properties.template
+# Values: infra/local/local-values.yaml (minecraft.server section)
+#
+# Fixed values: gamemode, difficulty, command blocks, whitelist, world type
+# Tier-adaptive values: view-distance, simulation-distance, max-players,
+#   entity-broadcast-range, network-compression-threshold
+# Site-specific values: server-port, rcon.port, rcon.password
+
+# --- Game mode (Knowledge World is creative/educational) ---
+gamemode=creative
+force-gamemode=true
+difficulty=peaceful
+hardcore=false
+pvp=false
+
+# --- Command blocks (required for educational builds and tutorials) ---
+enable-command-block=true
+function-permission-level=2
+op-permission-level=4
+
+# --- Access control ---
+white-list=true
+enforce-whitelist=true
+max-players=${MAX_PLAYERS}
+online-mode=true
+
+# --- Network ---
+server-port=${SERVER_PORT}
+network-compression-threshold=${NETWORK_COMPRESSION_THRESHOLD}
+
+# --- RCON (remote management) ---
+enable-rcon=true
+rcon.port=${RCON_PORT}
+rcon.password=${RCON_PASSWORD}
+
+# --- Performance (tier-adaptive from local-values.yaml) ---
+view-distance=${VIEW_DISTANCE}
+simulation-distance=${SIMULATION_DISTANCE}
+entity-broadcast-range-percentage=${ENTITY_BROADCAST_RANGE}
+max-tick-time=60000
+spawn-protection=0
+
+# --- World settings ---
+level-name=knowledge-world
+level-type=minecraft\:flat
+generate-structures=false
+allow-nether=false
+spawn-monsters=false
+spawn-animals=false
+spawn-npcs=false
+
+# --- Server identity ---
+motd=GSD Knowledge World - Creative/Educational
+server-name=GSD Knowledge World
+enable-status=true
+enable-query=false
+
+# --- Miscellaneous ---
+allow-flight=true
+player-idle-timeout=0
+max-world-size=10000
