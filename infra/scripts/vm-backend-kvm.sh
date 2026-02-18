@@ -501,4 +501,7 @@ main() {
     esac
 }
 
-main "$@"
+# Allow sourcing without executing main (for vm-lifecycle.sh dispatch)
+if [[ "${1:-}" != "--_sourced" ]]; then
+    main "$@"
+fi
