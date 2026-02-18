@@ -121,6 +121,13 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Clone mode explicitly measures and reports against 5-minute INFRA-11 target
 - destroy subcommand requires --force safety flag against accidental VM deletion
 
+### From Phase 173 Plan 01
+- Security hardening in systemd: ProtectSystem=full, ProtectHome=true, PrivateTmp=true, NoNewPrivileges=true
+- Log4Shell mitigation unconditionally included in JVM flags (-Dlog4j2.formatMsgNoLookups=true)
+- Nested YAML parser via awk for reading minecraft.jvm section from local-values.yaml
+- Dual deployment modes: --local for on-VM and --target-host for remote SSH deployment
+- EULA acceptance conditional on minecraft_eula setting in local-values
+
 ## Accumulated Context
 
 ### From v1.21 (GSD-OS Desktop Foundation)
@@ -157,8 +164,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T12:09:41Z
-Stopped at: Completed 182-01-PLAN.md (FS-UAE install script, AROS ROM setup, base UAE config, test suite)
+Last session: 2026-02-18T12:09:57Z
+Stopped at: Completed 173-01-PLAN.md (Minecraft deployment orchestrator, JVM flags, systemd service, local-values)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
