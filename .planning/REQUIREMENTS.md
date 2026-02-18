@@ -63,8 +63,8 @@
 - [x] **AMIGA-06**: WHDLoad integration allows hard-drive-based software loading
 - [x] **AMIGA-07**: IFF/ILBM to PNG converter preserves palette metadata and dimensions
 - [x] **AMIGA-08**: MOD/MED to WAV/FLAC/OGG renderer produces sample-accurate audio output
-- [ ] **AMIGA-09**: Batch conversion processes 100+ files without errors
-- [ ] **AMIGA-10**: Asset catalog YAML manifest contains accurate metadata for all converted files
+- [x] **AMIGA-09**: Batch conversion processes 100+ files without errors
+- [x] **AMIGA-10**: Asset catalog YAML manifest contains accurate metadata for all converted files
 - [ ] **AMIGA-11**: Curated asset collection (20 artworks, 20 music tracks, 10 demos) is legally distributable
 - [ ] **AMIGA-12**: Legal guide documents ROM acquisition paths and software distribution rights
 
@@ -187,8 +187,8 @@
 | AMIGA-06 | Phase 183 | Complete |
 | AMIGA-07 | Phase 184 | Complete |
 | AMIGA-08 | Phase 184 | Complete |
-| AMIGA-09 | Phase 184 | Pending |
-| AMIGA-10 | Phase 184 | Pending |
+| AMIGA-09 | Phase 184 | Complete |
+| AMIGA-10 | Phase 184 | Complete |
 | AMIGA-11 | Phase 185 | Pending |
 | AMIGA-12 | Phase 185 | Pending |
 | WORLD-01 | Phase 186 | Pending |
