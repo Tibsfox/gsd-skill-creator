@@ -380,6 +380,8 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 5
 - **Dependencies:** Phase 177 (Minecraft server verified), Phase 172 (VM provisioning)
 - **Requirements:** OPS-08, OPS-09
+- **Plans:** 1 plan
+  - [ ] 197-01-PLAN.md — Golden image lifecycle manager, rapid rebuild orchestrator, version manifest, and test suite
 - **Success Criteria:**
   1. Clone from golden image boots a working server in under 5 minutes
   2. PXE rebuild from scratch produces identical server in under 20 minutes
@@ -486,4 +488,4 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 
 ---
 *Roadmap created: 2026-02-17*
-*Last updated: 2026-02-17*
+*Last updated: 2026-02-18*
