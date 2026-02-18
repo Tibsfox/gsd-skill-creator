@@ -78,11 +78,11 @@
 - [x] **WORLD-06**: Schematic library contains at least 10 reusable architectural templates (meeting room, presentation hall, workshop, server room, library, garden, bridge, gateway, tower, observatory)
 - [ ] **WORLD-07**: All schematics load correctly in Litematica and are shareable via Syncmatica
 - [x] **WORLD-08**: Schematic catalog YAML is valid with accurate metadata and consistent naming convention
-- [ ] **WORLD-09**: "Visualize a Pipeline" guided build teaches data flow concepts through rooms and corridors
+- [x] **WORLD-09**: "Visualize a Pipeline" guided build teaches data flow concepts through rooms and corridors
 - [ ] **WORLD-10**: "Build a Network Topology" guided build teaches network concepts through buildings and paths
 - [ ] **WORLD-11**: "Design a Database Schema" guided build teaches relational concepts through rooms and doors
-- [ ] **WORLD-12**: Each guided build is completable in 30-60 minutes
-- [ ] **WORLD-13**: "System Architecture as Buildings" methodology document enables educators to create new builds
+- [x] **WORLD-12**: Each guided build is completable in 30-60 minutes
+- [x] **WORLD-13**: "System Architecture as Buildings" methodology document enables educators to create new builds
 - [ ] **WORLD-14**: Amiga Corner in Creative District displays pixel art gallery, demo scene exhibit, and tool evolution walkthrough
 
 ### Skill-Creator Integration (Plan 06)
@@ -199,11 +199,11 @@
 | WORLD-06 | Phase 188 | Complete |
 | WORLD-07 | Phase 188 | Pending |
 | WORLD-08 | Phase 188 | Complete |
-| WORLD-09 | Phase 189 | Pending |
+| WORLD-09 | Phase 189 | Complete |
 | WORLD-10 | Phase 189 | Pending |
 | WORLD-11 | Phase 189 | Pending |
-| WORLD-12 | Phase 189 | Pending |
-| WORLD-13 | Phase 189 | Pending |
+| WORLD-12 | Phase 189 | Complete |
+| WORLD-13 | Phase 189 | Complete |
 | WORLD-14 | Phase 190 | Pending |
 | SKILL-01 | Phase 191 | Pending |
 | SKILL-02 | Phase 191 | Pending |
