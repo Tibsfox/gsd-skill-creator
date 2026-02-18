@@ -1,0 +1,89 @@
+# Schematic Build Specification
+# This file defines what to build in-game before capturing with Litematica.
+
+name: "Meeting Room"
+id: "meeting-room"
+filename: "template-meeting-room-1-0.litematic"
+version: "1.0"
+category: templates
+description: "Enclosed rectangular room for small group discussions (6-8 people) with central table, seating, and lectern. Designed for collaborative planning sessions within the Knowledge World."
+
+dimensions:
+  width: 11   # X axis (east-west)
+  height: 6   # Y axis (up-down)
+  depth: 9    # Z axis (north-south)
+
+block_palette:
+  primary:
+    - block: "minecraft:quartz_block"
+      usage: "Walls -- clean white surface for a professional meeting space"
+    - block: "minecraft:oak_planks"
+      usage: "Floor -- warm wood flooring throughout the room"
+  accent:
+    - block: "minecraft:oak_slab"
+      usage: "Table surface -- 2x4 arrangement of slabs on fence posts for the central table"
+    - block: "minecraft:oak_fence"
+      usage: "Table legs -- fence posts supporting the slab table surface"
+    - block: "minecraft:stripped_oak_log"
+      usage: "Floor border -- one-block border around room perimeter for visual frame"
+  functional:
+    - block: "minecraft:oak_stairs"
+      usage: "Seating -- placed facing the table on three sides (6-8 seats total)"
+    - block: "minecraft:lectern"
+      usage: "Presentation stand -- one lectern at the head of the table (north side)"
+    - block: "minecraft:oak_door"
+      usage: "Entrance -- single door on the south short wall, centered"
+  lighting:
+    - block: "minecraft:lantern"
+      usage: "Ambient lighting -- 4 lanterns mounted on walls, one per wall midpoint"
+    - block: "minecraft:glowstone"
+      usage: "Ceiling accent -- 2x2 glowstone inset in center of flat ceiling"
+
+layout:
+  ground_floor: |
+    Rectangular room, 9x7 interior (walls take 1 block each side from 11x9).
+    Oak plank floor with stripped oak log border.
+    Central table: 2 blocks wide (east-west) by 4 blocks long (north-south),
+    centered in the room. Made of oak slabs on oak fence posts.
+    Oak stair seating around three sides of the table (east, west, south).
+    6 seats minimum: 2 on east side, 2 on west side, 2 on south end.
+    Lectern at the north end of the table facing south.
+    Door centered on south wall.
+  upper_floors: "None -- single story"
+  roof: |
+    Flat quartz block roof at height 6.
+    2x2 glowstone inset in center of ceiling for overhead light.
+    Remaining ceiling is solid quartz block.
+  exterior: |
+    Quartz block walls on all four sides, 5 blocks tall above floor.
+    Glass pane windows: 2 blocks wide, 2 blocks tall, centered on east and west walls.
+    One window per long wall (east and west). No windows on short walls (north/south).
+    Single oak door entrance centered on south wall.
+
+features:
+  - "Central oak slab table (2x4) on fence post legs, positioned in room center"
+  - "Oak stair seating on three sides of the table (east, west, south) -- 6-8 seats"
+  - "Lectern at north end of table for the presenter/facilitator"
+  - "Glass pane windows on east and west walls for natural light"
+  - "4 wall-mounted lanterns providing warm ambient light"
+  - "2x2 glowstone ceiling accent for overhead illumination"
+  - "Stripped oak log floor border framing the oak plank floor"
+
+construction_notes:
+  - "Build from the ground up, floor by floor"
+  - "Lay the floor first: stripped oak log border, then fill with oak planks"
+  - "Build walls next: quartz blocks, 5 blocks tall above floor level"
+  - "Place glass pane windows before closing the roof"
+  - "Add the flat quartz roof with glowstone inset"
+  - "Place the table (fence posts first, then slabs on top)"
+  - "Place seating (oak stairs facing inward toward table)"
+  - "Place functional blocks last: door, lanterns, lectern"
+  - "Use Litematica selection starting from the northwest ground-level corner"
+  - "Add 1 block of selection padding on all sides"
+  - "Save with orientation: entrance faces south"
+  - "Test-load the schematic in a flat world before adding to library"
+
+litematica_capture:
+  origin: "Northwest ground-level corner (lowest X, lowest Z, at floor Y level)"
+  selection_padding: 1
+  orientation: "Entrance faces south"
