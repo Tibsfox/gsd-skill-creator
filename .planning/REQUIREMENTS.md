@@ -27,8 +27,8 @@
 - [x] **MC-01**: Minecraft Java Edition server runs on Fabric mod loader with systemd service management
 - [x] **MC-02**: Server starts automatically on boot and restarts automatically on crash
 - [x] **MC-03**: JVM flags are templated based on allocated RAM from hardware profile
-- [ ] **MC-04**: Fabric API and Syncmatica server-side mods are installed with version-pinned manifest
-- [ ] **MC-05**: Mod update script checks for newer versions without auto-applying them
+- [x] **MC-04**: Fabric API and Syncmatica server-side mods are installed with version-pinned manifest
+- [x] **MC-05**: Mod update script checks for newer versions without auto-applying them
 - [ ] **MC-06**: server.properties is fully templated with defaults for creative mode, peaceful difficulty, and command blocks enabled
 - [ ] **MC-07**: Whitelist management is automated via script (add/remove players)
 - [ ] **MC-08**: RCON is configured for remote command execution with random password in local secrets
@@ -157,8 +157,8 @@
 | MC-01 | Phase 173 | Complete |
 | MC-02 | Phase 173 | Complete |
 | MC-03 | Phase 173 | Complete |
-| MC-04 | Phase 174 | Pending |
-| MC-05 | Phase 174 | Pending |
+| MC-04 | Phase 174 | Complete |
+| MC-05 | Phase 174 | Complete |
 | MC-06 | Phase 175 | Pending |
 | MC-07 | Phase 175 | Pending |
 | MC-08 | Phase 175 | Pending |

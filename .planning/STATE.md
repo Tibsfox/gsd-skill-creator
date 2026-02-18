@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 173-server-foundation (Wave 3 in progress)
-Plan: 173-01 complete, 173-02 pending
-Status: Executing Wave 3 -- Phase 173 Plan 01 complete (Minecraft deployment orchestrator + templates)
-Last activity: 2026-02-18 — Completed 173-01-PLAN.md
+Phase: 174-mod-stack-installation (Wave 3 in progress)
+Plan: 174-01 complete
+Status: Executing Wave 3 -- Phase 174 Plan 01 complete (Mod deployment pipeline with Modrinth API)
+Last activity: 2026-02-18 -- Completed 174-01-PLAN.md
 
-Progress: [########..................] 8/30 phases (Wave 1: 169, 170, 178; Wave 2: 171, 172, 179, 180, 181 -- all complete; Wave 3: 173 in progress)
+Progress: [##########................] 10/30 phases (Wave 1: 169, 170, 178; Wave 2: 171, 172, 179, 180, 181 -- all complete; Wave 3: 173, 174-01 complete)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.22 Minecraft Knowledge World -- Wave 3 execution (Phase 173 in progress)
+**Current focus:** v1.22 Minecraft Knowledge World -- Wave 3 execution (Phase 174 complete, continuing Wave 3)
 
 ## Current Milestone
 
@@ -27,8 +27,8 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 ## Next Actions
 
 1. Execute 173-02-PLAN.md (remaining plan in Phase 173)
-2. Continue Wave 3 execution: 174, 175, 176, 177 (Minecraft Server), 182, 183 (Amiga)
-3. Wave 3 in progress -- 173-01 and 182-01 complete
+2. Continue Wave 3 execution: 175, 176, 177 (Minecraft Server), 182, 183 (Amiga)
+3. Wave 3 in progress -- 173-01, 174-01, 182-01 complete
 
 ## Decisions
 
@@ -128,6 +128,13 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Dual deployment modes: --local for on-VM and --target-host for remote SSH deployment
 - EULA acceptance conditional on minecraft_eula setting in local-values
 
+### From Phase 174 Plan 01
+- Modrinth API v2 for mod resolution with jq-based JSON parsing and graceful fallback
+- SHA-256 from local-values as authoritative (not API hash) for reproducibility
+- Exit code 2 from check-mod-updates.sh signals updates available for cron/scripted monitoring
+- Read-only update checker never downloads or modifies files (safety by design)
+- Mod manifest at SERVER_DIR/mod-manifest.yaml separate from mods/ jar directory
+
 ## Accumulated Context
 
 ### From v1.21 (GSD-OS Desktop Foundation)
@@ -164,8 +171,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T12:09:57Z
-Stopped at: Completed 173-01-PLAN.md (Minecraft deployment orchestrator, JVM flags, systemd service, local-values)
+Last session: 2026-02-18T12:18:36Z
+Stopped at: Completed 174-01-PLAN.md (Mod deployment pipeline: deploy-mods.sh, check-mod-updates.sh, Syncmatica config)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
