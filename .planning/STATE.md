@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 182-uae-installation-configuration (Wave 3 in progress)
-Plan: 182-02 complete (Phase 182 fully complete)
-Status: Executing Wave 3 -- Phase 182 complete (UAE display, audio, scanline shader, config renderer)
-Last activity: 2026-02-18 -- Completed 182-02-PLAN.md
+Phase: 183-amiga-application-profiles (Wave 3 in progress)
+Plan: 183-01 complete (Phase 183 fully complete)
+Status: Executing Wave 3 -- Phase 183 complete (Amiga profiles, launcher, WHDLoad, exchange)
+Last activity: 2026-02-18 -- Completed 183-01-PLAN.md
 
-Progress: [############..............] 12/30 phases (Wave 1: 169, 170, 178; Wave 2: 171, 172, 179, 180, 181 -- all complete; Wave 3: 173, 174-01, 175-01, 176-01, 182 complete)
+Progress: [#############.............] 13/30 phases (Wave 1: 169, 170, 178; Wave 2: 171, 172, 179, 180, 181 -- all complete; Wave 3: 173, 174-01, 175-01, 176-01, 182, 183 complete)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.22 Minecraft Knowledge World -- Wave 3 execution (Phase 182 complete, continuing Wave 3)
+**Current focus:** v1.22 Minecraft Knowledge World -- Wave 3 execution (Phase 183 complete, continuing Wave 3)
 
 ## Current Milestone
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Continue Wave 3 execution: 177 (Minecraft Server), 183 (Amiga) remaining
-2. Wave 3 in progress -- 173 (both plans), 174-01, 175-01, 176-01, 182 (both plans) complete
-3. Phase 182 UAE complete: display/audio/render config ready for Phase 183 (Amiga Application Profiles)
+1. Continue Wave 3 execution: 177 (Minecraft Server) remaining
+2. Wave 3 in progress -- 173 (both plans), 174-01, 175-01, 176-01, 182 (both plans), 183 complete
+3. Phase 183 Amiga profiles complete: launcher, WHDLoad, exchange ready for Phase 184 asset pipeline
 
 ## Decisions
 
@@ -158,6 +158,13 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - SDL audio backend for PipeWire/PulseAudio, ALSA for direct, sample-accurate Amiga audio mode
 - Config renderer calls display and audio generators as subprocesses, merging output sections
 
+### From Phase 183 Plan 01
+- Profile merge uses awk last-value-wins for duplicate keys (app profile overrides base)
+- Vulkan display mapped to opengl for FS-UAE compatibility (FS-UAE uses OpenGL internally)
+- Default fallback values (opengl, 44100Hz, 512 buffer) when local-values.yaml missing
+- WHDLoad HDF formatting requires xdftool (amitools pip package), manual fallback documented
+- Exchange path stored in infra/local/amiga-exchange.path for launcher auto-detection
+
 ## Accumulated Context
 
 ### From v1.21 (GSD-OS Desktop Foundation)
@@ -194,8 +201,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T12:26:43Z
-Stopped at: Completed 182-02-PLAN.md (UAE display config, audio config, scanline shader, config renderer, test suite)
+Last session: 2026-02-18T12:37:47Z
+Stopped at: Completed 183-01-PLAN.md (Amiga profiles, launcher, WHDLoad, exchange, 56-assertion test suite)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
