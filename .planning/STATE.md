@@ -7,7 +7,7 @@ Plan: 02/02 complete
 Status: Wave 2 IN PROGRESS (179 complete, 180-02 done, 171-02 done; 171-01, 172, 180-01, 181 pending)
 Last activity: 2026-02-18 — Completed 179-02 firewall abstraction and integration tests
 
-Progress: [###.......................] 3/30 phases (Wave 1 complete: 169, 170, 178; Wave 2 in progress: 179)
+Progress: [####......................] 4/30 phases (Wave 1 complete: 169, 170, 178; Wave 2: 179 complete, 171/180 in progress)
 
 ## Project Reference
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Execute 179-02 (distribution abstraction integration tests)
-2. Continue Wave 2 parallels: 171, 172, 180, 181
-3. Wave 2 phases (171, 172, 180, 181) still pending planning/execution
+1. Continue Wave 2 parallels: 171-01, 172, 180-01, 181
+2. Phase 179 complete -- distro abstraction layer fully built and tested
+3. Wave 2 remaining: 171-01, 172 (planning+execution), 180-01, 181 (planning+execution)
 
 ## Decisions
 
@@ -65,6 +65,12 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Unified capabilities section aggregates 13 boolean flags from all modules
 - Tier classification: CentOS 9/Fedora 39+/Ubuntu 22.04+ = Tier 1, Debian 12+/Rocky/Alma/Arch = Tier 2
 - SELinux and AppArmor reported in separate security subsection
+
+### From Phase 179 Plan 02
+- Four-strategy detection cascade mirrors pkg-abstraction.sh pattern for consistency
+- FW_BACKEND=none is a valid state (not an error) for systems without a firewall
+- Idempotency via pre-check: query port state before opening/closing to avoid duplicate rule errors
+- Service-to-port resolution via /etc/services for iptables backend (firewalld/ufw support native service names)
 
 ### From Phase 179 Plan 01
 - Associative arrays for name mapping -- enables O(1) lookup with bash-native data structures
@@ -120,8 +126,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T07:18:37Z
-Stopped at: Completed 171-02-PLAN.md (Minecraft kickstart and deploy script)
+Last session: 2026-02-18T07:19:18Z
+Stopped at: Completed 179-02-PLAN.md (firewall abstraction and integration tests)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments

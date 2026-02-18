@@ -45,7 +45,7 @@
 - [ ] **PLAT-03**: Missing hardware (no GPU, no audio) results in graceful capability flags, not errors
 - [x] **PLAT-04**: Distribution detection identifies OS from /etc/os-release and maps to package manager
 - [x] **PLAT-05**: Package manager abstraction installs packages across dnf, apt, and pacman
-- [ ] **PLAT-06**: Firewall abstraction manages ports across firewalld, ufw, and iptables
+- [x] **PLAT-06**: Firewall abstraction manages ports across firewalld, ufw, and iptables
 - [ ] **PLAT-07**: Hypervisor abstraction provides unified VM operations across VMware, KVM/libvirt, and VirtualBox
 - [x] **PLAT-08**: Container fallback supports Minecraft server deployment via Podman/Docker on resource-constrained environments
 - [ ] **PLAT-09**: Resource allocation calculator adapts VM sizes from 16GB (minimal) to 64GB+ (generous) configurations
@@ -172,7 +172,7 @@
 | PLAT-03 | Phase 178 | Pending |
 | PLAT-04 | Phase 179 | Complete |
 | PLAT-05 | Phase 179 | Complete |
-| PLAT-06 | Phase 179 | Pending |
+| PLAT-06 | Phase 179 | Complete |
 | PLAT-07 | Phase 180 | Pending |
 | PLAT-08 | Phase 180 | Complete |
 | PLAT-09 | Phase 181 | Pending |
