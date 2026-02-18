@@ -140,6 +140,13 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Read-only update checker never downloads or modifies files (safety by design)
 - Mod manifest at SERVER_DIR/mod-manifest.yaml separate from mods/ jar directory
 
+### From Phase 175 Plan 01
+- RCON password stored in infra/local/minecraft-secrets.yaml (gitignored, chmod 600, idempotent)
+- Whitelist script uses jq primary with python3 fallback for JSON manipulation
+- RCON commands: three-tier fallback (mcrcon -> python3 socket -> file-only mode)
+- Offline UUID generation matches Java UUID.nameUUIDFromBytes() using MD5 + UUID v3 bits
+- Merged values file pattern: flatten minecraft.server + network sections + secrets for renderer
+
 ## Accumulated Context
 
 ### From v1.21 (GSD-OS Desktop Foundation)
@@ -176,8 +183,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T12:19:07Z
-Stopped at: Completed 173-02-PLAN.md (Health check script, 61-assertion test suite, 3 tier fixtures)
+Last session: 2026-02-18T12:19:33Z
+Stopped at: Completed 175-01-PLAN.md (server.properties template, deploy-server-config.sh, manage-whitelist.sh, perf tuning docs)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
