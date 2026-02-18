@@ -168,6 +168,9 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 2
 - **Dependencies:** Phase 178 (hardware discovery)
 - **Requirements:** PLAT-07, PLAT-08
+- **Plans:** 2 plans
+  - [ ] 180-01-PLAN.md — Hypervisor abstraction library (KVM/VMware/VBox backends) + unified vm-ctl.sh CLI
+  - [ ] 180-02-PLAN.md — Container fallback (Podman/Docker) for Minecraft deployment + capability matrix
 - **Success Criteria:**
   1. Unified VM operations produce equivalent results across VMware, KVM/libvirt, and VirtualBox
   2. Container fallback supports Minecraft server deployment via Podman/Docker
@@ -487,7 +490,7 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 | 177 | Integration Verification | 3 | Pending |
 | 178 | 2/2 | Complete   | 2026-02-18 |
 | 179 | Distribution Abstraction Layer | 2 | Planned |
-| 180 | Hypervisor Abstraction Layer | 2 | Pending |
+| 180 | Hypervisor Abstraction Layer | 2 | Planned |
 | 181 | Hardware Adaptation Engine | 2 | Planned |
 | 182 | UAE Installation & Configuration | 3 | Pending |
 | 183 | Amiga Application Profiles | 3 | Pending |
