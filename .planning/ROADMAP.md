@@ -142,7 +142,7 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 1
 - **Dependencies:** None (parallel with Phases 169-170)
 - **Requirements:** PLAT-01, PLAT-02, PLAT-03
-- **Plans:** 2/2 plans complete
+- **Plans:** 1/1 plans complete
   - [ ] 178-01-PLAN.md — Audio, network, USB subsystem discovery modules with shared library
   - [ ] 178-02-PLAN.md — Distribution detection and unified discovery orchestrator
 - **Success Criteria:**
@@ -478,7 +478,7 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 | 172 | 2/2 | Complete   | 2026-02-18 |
 | 173 | 2/2 | Complete   | 2026-02-18 |
 | 174 | 1/1 | Complete   | 2026-02-18 |
-| 175 | Server Configuration & Tuning | 3 | Pending |
+| 175 | 1/1 | Complete   | 2026-02-18 |
 | 176 | Client Setup & Documentation | 3 | Pending |
 | 177 | Integration Verification | 3 | Pending |
 | 178 | 2/2 | Complete   | 2026-02-18 |
