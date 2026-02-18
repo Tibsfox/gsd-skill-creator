@@ -51,6 +51,9 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - [Phase 188]: Schematic lifecycle: specified -> built -> captured -> verified (4-stage pipeline)
 - [Phase 188]: Naming convention: category-name-version.litematic with dashes replacing dots in version
 - [Phase 188]: Gateway uses white concrete placeholder stripe -- builders replace with district-specific color during placement
+- [Phase 184]: Move (not copy) meta sidecar files to centralized meta/ directory to prevent catalog duplication
+- [Phase 184]: Awk-based flattened YAML parser (section.key=value) for bash metadata consumption without external dependencies
+- [Phase 184]: LC_ALL=C sort for locale-independent catalog entry ordering across systems
 
 ### From Phase 169 Plan 02
 - Integer-only arithmetic in bash for resource budget calculations
@@ -218,8 +221,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T22:30:17Z
-Stopped at: Completed 188-01-PLAN.md (schematic library foundation)
+Last session: 2026-02-18T22:41:58Z
+Stopped at: Completed 184-02-PLAN.md (batch conversion and asset catalog)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
