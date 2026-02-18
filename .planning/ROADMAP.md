@@ -63,6 +63,9 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 2
 - **Dependencies:** Phase 171 (kickstart system)
 - **Requirements:** INFRA-10, INFRA-11, INFRA-12
+- **Plans:** 2 plans
+  - [ ] 172-01-PLAN.md — Shared VM library + KVM/libvirt and VMware Workstation backend scripts
+  - [ ] 172-02-PLAN.md — Unified VM lifecycle manager, provisioning orchestrator, and test suite
 - **Success Criteria:**
   1. VM creation works on at least VMware Workstation and KVM/libvirt backends
   2. Golden image can be cloned and customized in under 5 minutes
@@ -476,7 +479,7 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 | 169 | 2/2 | Complete   | 2026-02-18 |
 | 170 | 2/2 | Complete   | 2026-02-18 |
 | 171 | Base Image & Kickstart System | 2 | Planned |
-| 172 | VM Provisioning Automation | 2 | Pending |
+| 172 | VM Provisioning Automation | 2 | Planned |
 | 173 | Server Foundation | 3 | Pending |
 | 174 | Mod Stack Installation | 3 | Pending |
 | 175 | Server Configuration & Tuning | 3 | Pending |
