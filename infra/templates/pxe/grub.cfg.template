@@ -1,0 +1,31 @@
+# GSD PXE Boot Menu (UEFI)
+# Template: ${VAR} replaced at deployment time by render-pxe-menu.sh
+#
+# This menu is served by GRUB to UEFI-booting PXE clients.
+# Entries: base image install, Minecraft server install, local disk boot.
+# Default is "Boot from Local Disk" (index 2) for safety on timeout.
+#
+# Template variables:
+#   ${PXE_TIMEOUT_SECONDS}  -- Timeout in seconds (e.g., 30)
+#   ${KICKSTART_SERVER_URL} -- HTTP URL where kickstart files are served
+#
+# GRUB notes:
+#   - linuxefi/initrdefi are the UEFI-specific GRUB commands
+#   - "exit" in the local boot entry returns control to UEFI firmware
+
+set default=2
+set timeout=${PXE_TIMEOUT_SECONDS}
+
+menuentry "GSD Base Image (CentOS Stream 9)" {
+    linuxefi centos-stream-9/vmlinuz inst.ks=${KICKSTART_SERVER_URL}/base.ks ip=dhcp
+    initrdefi centos-stream-9/initrd.img
+}
+
+menuentry "GSD Minecraft Server" {
+    linuxefi centos-stream-9/vmlinuz inst.ks=${KICKSTART_SERVER_URL}/minecraft.ks ip=dhcp
+    initrdefi centos-stream-9/initrd.img
+}
+
+menuentry "Boot from Local Disk" {
+    exit
+}
