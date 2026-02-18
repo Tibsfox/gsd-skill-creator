@@ -1,0 +1,33 @@
+# GSD PXE Boot Menu (BIOS)
+# Template: ${VAR} replaced at deployment time by render-pxe-menu.sh
+#
+# This menu is served by pxelinux to BIOS-booting PXE clients.
+# Entries: base image install, Minecraft server install, local disk boot.
+# Timeout defaults to local disk boot for safety.
+#
+# Template variables:
+#   ${PXE_TIMEOUT_TENTHS}   -- Timeout in tenths of seconds (300 = 30s)
+#   ${KICKSTART_SERVER_URL} -- HTTP URL where kickstart files are served
+
+DEFAULT vesamenu.c32
+PROMPT 0
+TIMEOUT ${PXE_TIMEOUT_TENTHS}
+ONTIMEOUT localboot
+
+MENU TITLE GSD Network Boot Service
+MENU TABMSG Press [Tab] to edit boot options
+
+LABEL base
+    MENU LABEL ^1) GSD Base Image (CentOS Stream 9)
+    KERNEL centos-stream-9/vmlinuz
+    APPEND initrd=centos-stream-9/initrd.img inst.ks=${KICKSTART_SERVER_URL}/base.ks ip=dhcp
+
+LABEL minecraft
+    MENU LABEL ^2) GSD Minecraft Server
+    KERNEL centos-stream-9/vmlinuz
+    APPEND initrd=centos-stream-9/initrd.img inst.ks=${KICKSTART_SERVER_URL}/minecraft.ks ip=dhcp
+
+LABEL localboot
+    MENU LABEL ^3) Boot from Local Disk
+    MENU DEFAULT
+    LOCALBOOT 0
