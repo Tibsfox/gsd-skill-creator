@@ -30,6 +30,13 @@ declare -gA PKG_MAP_DNF=(
     [SDL2]="SDL2"
     [SDL2-devel]="SDL2-devel"
     [openal-soft]="openal-soft"
+    [netpbm]="netpbm-progs"
+    [ImageMagick]="ImageMagick"
+    [ffmpeg]="ffmpeg"
+    [libopenmpt]="libopenmpt"
+    [openmpt123]="libopenmpt-tools"
+    [flac]="flac"
+    [vorbis-tools]="vorbis-tools"
 )
 
 declare -gA PKG_MAP_APT=(
@@ -44,6 +51,13 @@ declare -gA PKG_MAP_APT=(
     [SDL2]="libsdl2-2.0-0"
     [SDL2-devel]="libsdl2-dev"
     [openal-soft]="libopenal1"
+    [netpbm]="netpbm"
+    [ImageMagick]="imagemagick"
+    [ffmpeg]="ffmpeg"
+    [libopenmpt]="libopenmpt-modplug1"
+    [openmpt123]="openmpt123"
+    [flac]="flac"
+    [vorbis-tools]="vorbis-tools"
 )
 
 declare -gA PKG_MAP_PACMAN=(
@@ -59,6 +73,13 @@ declare -gA PKG_MAP_PACMAN=(
     [SDL2]="sdl2"
     [SDL2-devel]="sdl2"
     [openal-soft]="openal"
+    [netpbm]="netpbm"
+    [ImageMagick]="imagemagick"
+    [ffmpeg]="ffmpeg"
+    [libopenmpt]="libopenmpt"
+    [openmpt123]="openmpt123"
+    [flac]="flac"
+    [vorbis-tools]="vorbis-tools"
 )
 
 # ---------------------------------------------------------------------------
