@@ -2,12 +2,12 @@
 
 ## Current Position
 
-Phase: 178 — Hardware Discovery Framework -- COMPLETE
+Phase: 170 — PXE Boot Infrastructure -- COMPLETE
 Plan: 02/02 complete (phase done)
-Status: Phase 178 complete, Wave 1 progress: 169 done, 178 done, 170 remaining
-Last activity: 2026-02-18 — Completed 178-02 unified discovery orchestrator + distro detection
+Status: Wave 1 COMPLETE (phases 169, 170, 178 all done), ready for Wave 2
+Last activity: 2026-02-18 — Completed 170-02 PXE boot menus, template renderer, deploy orchestrator
 
-Progress: [##........................] 2/30 phases (178: 2/2 plans complete)
+Progress: [###.......................] 3/30 phases (Wave 1 complete: 169, 170, 178)
 
 ## Project Reference
 
@@ -46,6 +46,17 @@ Wave 1 progress: Phase 169 complete, Phase 178 complete, Phase 170 remaining.
 - Multi-format YAML parsing with companion profile fallback for local-values format
 - Non-negotiable host floor: 4GB RAM + 2 cores reserved before any VM allocation
 
+### From Phase 178 Plan 01
+- Shared library uses printf-based YAML emission (no external YAML dependency)
+- Each module exits 0 even when hardware is absent (present: false flags)
+- USB device classes reported instead of vendor:product IDs
+
+### From Phase 178 Plan 02
+- Orchestrator uses inline fallback when discover-hardware.sh is absent (self-contained)
+- Unified capabilities section aggregates 13 boolean flags from all modules
+- Tier classification: CentOS 9/Fedora 39+/Ubuntu 22.04+ = Tier 1, Debian 12+/Rocky/Alma/Arch = Tier 2
+- SELinux and AppArmor reported in separate security subsection
+
 ## Accumulated Context
 
 ### From v1.21 (GSD-OS Desktop Foundation)
@@ -82,8 +93,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T02:18:13Z
-Stopped at: Completed 169-02-PLAN.md (phase 169 fully complete)
+Last session: 2026-02-18T02:18:51Z
+Stopped at: Completed 178-02-PLAN.md (phase 178 fully complete)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
