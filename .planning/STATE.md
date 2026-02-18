@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 183-amiga-application-profiles (Wave 3 in progress)
-Plan: 183-01 complete (Phase 183 fully complete)
-Status: Executing Wave 3 -- Phase 183 complete (Amiga profiles, launcher, WHDLoad, exchange)
-Last activity: 2026-02-18 -- Completed 183-01-PLAN.md
+Phase: 177-integration-verification (Wave 3 in progress)
+Plan: 177-01 complete (Phase 177 fully complete)
+Status: Executing Wave 3 -- Phase 177 complete (integration verification, pipeline testing, performance checklist)
+Last activity: 2026-02-18 -- Completed 177-01-PLAN.md
 
-Progress: [#############.............] 13/30 phases (Wave 1: 169, 170, 178; Wave 2: 171, 172, 179, 180, 181 -- all complete; Wave 3: 173, 174-01, 175-01, 176-01, 182, 183 complete)
+Progress: [##############............] 14/30 phases (Wave 1: 169, 170, 178; Wave 2: 171, 172, 179, 180, 181 -- all complete; Wave 3: 173, 174-01, 175-01, 176-01, 177, 182, 183 complete)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.22 Minecraft Knowledge World -- Wave 3 execution (Phase 183 complete, continuing Wave 3)
+**Current focus:** v1.22 Minecraft Knowledge World -- Wave 3 execution (Phase 177 complete, Wave 3 complete)
 
 ## Current Milestone
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Continue Wave 3 execution: 177 (Minecraft Server) remaining
-2. Wave 3 in progress -- 173 (both plans), 174-01, 175-01, 176-01, 182 (both plans), 183 complete
-3. Phase 183 Amiga profiles complete: launcher, WHDLoad, exchange ready for Phase 184 asset pipeline
+1. Wave 3 complete -- all phases (173, 174-01, 175-01, 176-01, 177, 182, 183) finished
+2. Ready for Wave 4 execution (Phases 184-190)
+3. Phase 177 integration verification provides pipeline tooling for MC-11/MC-12/MC-13 validation
 
 ## Decisions
 
@@ -165,6 +165,11 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - WHDLoad HDF formatting requires xdftool (amitools pip package), manual fallback documented
 - Exchange path stored in infra/local/amiga-exchange.path for launcher auto-detection
 
+### From Phase 177 Plan 01
+- INFRA_DIR environment variable override enables test mocking without modifying script internals
+- Three-tier RCON fallback: mcrcon CLI, python3 socket protocol, /dev/tcp (graceful degradation)
+- Hardware capabilities grep pattern uses hypervisor:|can_run_vms:|kvm: to match actual discover-all.sh output
+
 ## Accumulated Context
 
 ### From v1.21 (GSD-OS Desktop Foundation)
@@ -201,8 +206,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T12:37:47Z
-Stopped at: Completed 183-01-PLAN.md (Amiga profiles, launcher, WHDLoad, exchange, 56-assertion test suite)
+Last session: 2026-02-18T12:38:34Z
+Stopped at: Completed 177-01-PLAN.md (integration verification, pipeline testing, performance checklist)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
