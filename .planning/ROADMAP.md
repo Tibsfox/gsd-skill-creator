@@ -168,7 +168,7 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 2
 - **Dependencies:** Phase 178 (hardware discovery)
 - **Requirements:** PLAT-07, PLAT-08
-- **Plans:** 2 plans
+- **Plans:** 2/2 plans complete
   - [ ] 180-01-PLAN.md — Hypervisor abstraction library (KVM/VMware/VBox backends) + unified vm-ctl.sh CLI
   - [ ] 180-02-PLAN.md — Container fallback (Podman/Docker) for Minecraft deployment + capability matrix
 - **Success Criteria:**
@@ -422,16 +422,7 @@ Wave 2 (Infrastructure):
   171 Kickstart (needs 170) ---+
   172 VM Provisioning (needs 171) |---> Wave 3
   179 Distro Abstraction (needs 178) |
-  180 Hypervisor Abstraction (needs 178) |
-  181 Adaptation Engine (needs 178, 179) --+
-
-Wave 3 (Services):
-  173 Server Foundation (needs 172) ---+
-  174 Mod Stack (needs 173) ------+
-  175 Server Config (needs 173) --|---> Wave 4 (after 177)
-  176 Client Setup (needs 174) ---|
-  177 Integration Verify (needs 174, 175, 176) --+
-  182 UAE Install (needs 179, 181) ---|
+  180 Hypervisor Abstraction (needs 178) | 2/2 | Complete   | 2026-02-18 |
   183 App Profiles (needs 182) ------+
 
 Wave 4 (Content):

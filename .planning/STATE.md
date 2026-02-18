@@ -4,8 +4,8 @@
 
 Phase: 179 — Distribution Abstraction Layer
 Plan: 01/02 complete
-Status: Wave 2 IN PROGRESS (179 plan 01 done, 171, 172, 180, 181 pending)
-Last activity: 2026-02-18 — Completed 179-01 package manager abstraction layer
+Status: Wave 2 IN PROGRESS (179 plan 01 done, 180-02 done, 171-02 done; 171-01, 172, 180-01, 181 pending)
+Last activity: 2026-02-18 — Completed 171-02 Minecraft kickstart and deploy script
 
 Progress: [###.......................] 3/30 phases (Wave 1 complete: 169, 170, 178; Wave 2 in progress: 179)
 
@@ -72,6 +72,18 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Four-strategy detection cascade with PKG_BACKEND env override as highest priority for testing and CI
 - apt cache staleness threshold at 1 hour to avoid stale package lists on Debian/Ubuntu
 
+### From Phase 171 Plan 02
+- Complete kickstart file (not %include) -- Anaconda HTTP %include is fragile
+- Minecraft system user with nologin shell at /opt/minecraft for security
+- First-boot hook (50-minecraft-setup.sh) validates Java only -- no server software installed
+- Deploy script renders but does NOT serve HTTP -- operator chooses serving method
+
+### From Phase 180 Plan 02
+- Podman preferred over Docker (rootless, daemonless) with automatic fallback
+- itzg/minecraft-server with Fabric 1.21.4 as standard container image for Minecraft deployment
+- Capability matrix is static hand-maintained YAML for feature gating, not auto-generated
+- Container exit codes match vm-ctl.sh convention (0=ok, 1=error, 2=no runtime, 3=args)
+
 ## Accumulated Context
 
 ### From v1.21 (GSD-OS Desktop Foundation)
@@ -108,8 +120,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T02:42:25Z
-Stopped at: Completed 179-01-PLAN.md (package manager abstraction layer)
+Last session: 2026-02-18T07:18:37Z
+Stopped at: Completed 171-02-PLAN.md (Minecraft kickstart and deploy script)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
