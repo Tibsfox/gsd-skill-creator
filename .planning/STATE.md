@@ -151,6 +151,13 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Offline UUID generation matches Java UUID.nameUUIDFromBytes() using MD5 + UUID v3 bits
 - Merged values file pattern: flatten minecraft.server + network sections + secrets for renderer
 
+### From Phase 182 Plan 02
+- Vulkan/OpenGL/software mapping follows gpu.uae_display from local-values.yaml for FS-UAE display backend
+- VRAM-tier integer scaling: 3x for high (8GB+), 2x for medium/low, 1x for none
+- Scanline shader gated on rendering_capable=true, stderr warning when requested without GPU
+- SDL audio backend for PipeWire/PulseAudio, ALSA for direct, sample-accurate Amiga audio mode
+- Config renderer calls display and audio generators as subprocesses, merging output sections
+
 ## Accumulated Context
 
 ### From v1.21 (GSD-OS Desktop Foundation)
@@ -187,8 +194,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T12:27:04Z
-Stopped at: Completed 176-01-PLAN.md (client setup guide, mods manifest, Prism Launcher profile, troubleshooting)
+Last session: 2026-02-18T12:26:43Z
+Stopped at: Completed 182-02-PLAN.md (UAE display config, audio config, scanline shader, config renderer, test suite)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
