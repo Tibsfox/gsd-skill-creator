@@ -1,0 +1,18 @@
+# Generous tier test fixture (64GB+ machine)
+# ZGC garbage collector with 16GB heap allocation
+# Used by test-deploy-minecraft.sh to validate JVM flag rendering
+fabric_installer_version: "1.0.1"
+minecraft_version: "1.21.4"
+fabric_loader_version: "latest"
+minecraft_home: "/opt/minecraft"
+server_jar: "fabric-server-launch.jar"
+jvm_heap_min_mb: "4096"
+jvm_heap_max_mb: "15872"
+gc_type: "ZGC"
+gc_flags: "-XX:+UseZGC -XX:+ZGenerational"
+extra_jvm_flags: "-XX:+ParallelRefProcEnabled -XX:+DisableExplicitGC -XX:+AlwaysPreTouch"
+jvm_flags_path: "/opt/minecraft/server/jvm-flags.conf"
+minecraft_server_port: "25565"
+minecraft_rcon_port: "25575"
+management_interface: "enp3s0"
+minecraft_eula: "true"
