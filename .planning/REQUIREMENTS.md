@@ -32,8 +32,8 @@
 - [x] **MC-06**: server.properties is fully templated with defaults for creative mode, peaceful difficulty, and command blocks enabled
 - [x] **MC-07**: Whitelist management is automated via script (add/remove players)
 - [x] **MC-08**: RCON is configured for remote command execution with random password in local secrets
-- [ ] **MC-09**: Client installation guide covers Windows, macOS, and Linux with Fabric Loader and mods
-- [ ] **MC-10**: Pre-configured Prism Launcher profile is available for one-click client setup
+- [x] **MC-09**: Client installation guide covers Windows, macOS, and Linux with Fabric Loader and mods
+- [x] **MC-10**: Pre-configured Prism Launcher profile is available for one-click client setup
 - [ ] **MC-11**: End-to-end test verifies PXE boot through running Minecraft server in under 20 minutes
 - [ ] **MC-12**: Two clients can share schematics via Syncmatica within 30 seconds
 - [ ] **MC-13**: Server maintains 20 TPS with 2 connected clients
@@ -162,8 +162,8 @@
 | MC-06 | Phase 175 | Complete |
 | MC-07 | Phase 175 | Complete |
 | MC-08 | Phase 175 | Complete |
-| MC-09 | Phase 176 | Pending |
-| MC-10 | Phase 176 | Pending |
+| MC-09 | Phase 176 | Complete |
+| MC-10 | Phase 176 | Complete |
 | MC-11 | Phase 177 | Pending |
 | MC-12 | Phase 177 | Pending |
 | MC-13 | Phase 177 | Pending |
