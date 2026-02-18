@@ -22,6 +22,12 @@ pxe_interface: "virbr0"
 # PXE prompt timeout in seconds (0 = immediate boot)
 pxe_prompt_timeout: "5"
 
+# PXE boot menu timeouts (used by boot menu templates)
+# pxe_timeout_seconds is the UEFI GRUB menu timeout (in seconds)
+# pxe_timeout_tenths is the BIOS pxelinux menu timeout (in tenths of seconds)
+pxe_timeout_seconds: "30"
+pxe_timeout_tenths: "300"
+
 # CentOS Stream 9 mirror (for boot media download)
 centos_mirror: "https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os"
 
