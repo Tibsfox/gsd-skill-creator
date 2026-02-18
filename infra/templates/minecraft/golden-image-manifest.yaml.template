@@ -1,0 +1,29 @@
+# Golden Image Manifest
+# Generated: ${GENERATED_DATE}
+# Image: ${IMAGE_NAME}
+
+image:
+  name: "${IMAGE_NAME}"
+  created: "${GENERATED_DATE}"
+  source_vm: "${SOURCE_VM}"
+
+versions:
+  centos: "${CENTOS_VERSION}"
+  kernel: "${KERNEL_VERSION}"
+  java: "${JAVA_VERSION}"
+  fabric_loader: "${FABRIC_LOADER_VERSION}"
+  minecraft: "${MINECRAFT_VERSION}"
+
+mods:
+  fabric_api: "${FABRIC_API_VERSION}"
+  syncmatica: "${SYNCMATICA_VERSION}"
+
+world:
+  last_backup: "${LAST_BACKUP_FILE}"
+  last_backup_time: "${LAST_BACKUP_TIME}"
+  last_backup_checksum: "${LAST_BACKUP_CHECKSUM}"
+
+health:
+  verified: ${HEALTH_VERIFIED}
+  tps: "${HEALTH_TPS}"
+  memory_ok: ${HEALTH_MEMORY_OK}
