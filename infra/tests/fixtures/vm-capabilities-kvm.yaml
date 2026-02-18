@@ -1,0 +1,6 @@
+# Test fixture: KVM-only hypervisor capabilities
+# Used by test-vm-lifecycle.sh to test KVM backend detection
+hypervisor:
+  kvm: true
+  vmware: false
+  virtualbox: false
