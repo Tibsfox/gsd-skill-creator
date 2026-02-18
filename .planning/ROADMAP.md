@@ -483,7 +483,7 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 | 181 | 2/2 | Complete   | 2026-02-18 |
 | 182 | 2/2 | Complete   | 2026-02-18 |
 | 183 | Amiga Application Profiles | 3 | Pending |
-| 184 | Asset Conversion Pipeline | 4 | Pending |
+| 184 | 1/2 | In Progress|  |
 | 185 | Integration with Knowledge World | 4 | Pending |
 | 186 | World Layout Design | 4 | Pending |
 | 187 | Spawn Area & Welcome Experience | 4 | Pending |

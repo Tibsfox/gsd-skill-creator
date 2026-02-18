@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 177-integration-verification (Wave 3 in progress)
-Plan: 177-01 complete (Phase 177 fully complete)
-Status: Executing Wave 3 -- Phase 177 complete (integration verification, pipeline testing, performance checklist)
-Last activity: 2026-02-18 -- Completed 177-01-PLAN.md
+Phase: 184-asset-conversion-pipeline (Plan 01 complete, Plan 02 pending)
+Plan: 184-01 complete, 184-02 next
+Status: EXECUTING WAVE 4 -- Phase 184 Plan 01 complete (individual converters). Plan 02 pending (batch pipeline).
+Last activity: 2026-02-18 -- Completed 184-01 (IFF/ILBM and MOD/MED converters)
 
-Progress: [##############............] 14/30 phases (Wave 1: 169, 170, 178; Wave 2: 171, 172, 179, 180, 181 -- all complete; Wave 3: 173, 174-01, 175-01, 176-01, 177, 182, 183 complete)
+Progress: [################..........] 16/30 phases (Wave 1-3 complete; Wave 4 in progress: 184-01 done)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.22 Minecraft Knowledge World -- Wave 3 execution (Phase 177 complete, Wave 3 complete)
+**Current focus:** v1.22 Minecraft Knowledge World -- Wave 4 execution (Phase 184 in progress)
 
 ## Current Milestone
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Wave 3 complete -- all phases (173, 174-01, 175-01, 176-01, 177, 182, 183) finished
-2. Ready for Wave 4 execution (Phases 184-190)
-3. Phase 177 integration verification provides pipeline tooling for MC-11/MC-12/MC-13 validation
+1. Execute 184-02 (batch conversion pipeline and asset catalog)
+2. Continue Wave 4 phases: 185, 186, 187, 188, 189, 190
+3. 16/30 phases complete, 184-01 done, 184-02 + 13 more remaining
 
 ## Decisions
 
@@ -165,6 +165,13 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - WHDLoad HDF formatting requires xdftool (amitools pip package), manual fallback documented
 - Exchange path stored in infra/local/amiga-exchange.path for launcher auto-detection
 
+### From Phase 184 Plan 01
+- Binary IFF parser extracts BMHD, CMAP, CAMG chunks using od for metadata before conversion
+- MOD header parsing prioritized over ffprobe for module-specific metadata (channels, samples, patterns)
+- pipefail-safe ffmpeg demuxer detection: capture to variable first, then grep (avoids SIGPIPE)
+- HAM/EHB mode detection via CAMG chunk flags with 6-bitplane heuristic fallback
+- python3 struct module used for test IFF fixture generation (reliable binary construction)
+
 ### From Phase 177 Plan 01
 - INFRA_DIR environment variable override enables test mocking without modifying script internals
 - Three-tier RCON fallback: mcrcon CLI, python3 socket protocol, /dev/tcp (graceful degradation)
@@ -206,8 +213,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T12:38:34Z
-Stopped at: Completed 177-01-PLAN.md (integration verification, pipeline testing, performance checklist)
+Last session: 2026-02-18T22:27:36Z
+Stopped at: Completed 184-01-PLAN.md (individual converters)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
