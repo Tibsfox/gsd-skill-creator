@@ -35,7 +35,7 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 1
 - **Dependencies:** None (parallel with 169)
 - **Requirements:** INFRA-04, INFRA-05, INFRA-06
-- **Plans:** 1/2 plans executed
+- **Plans:** 2/2 plans complete
   - [ ] 170-01-PLAN.md — dnsmasq PXE/TFTP/DHCP config template + CentOS boot media download
   - [ ] 170-02-PLAN.md — BIOS & UEFI boot menus with GSD branding + deploy orchestrator
 - **Success Criteria:**
@@ -465,7 +465,7 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 | Phase | Name | Wave | Status |
 |-------|------|------|--------|
 | 169 | 2/2 | Complete   | 2026-02-18 |
-| 170 | 1/2 | In Progress|  |
+| 170 | 2/2 | Complete   | 2026-02-18 |
 | 171 | Base Image & Kickstart System | 2 | Pending |
 | 172 | VM Provisioning Automation | 2 | Pending |
 | 173 | Server Foundation | 3 | Pending |
