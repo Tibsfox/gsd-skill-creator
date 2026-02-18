@@ -2,12 +2,12 @@
 
 ## Current Position
 
-Phase: 195-automated-backup-system (Plan 01 complete)
-Plan: 195-01 complete
-Status: Wave 5 in progress -- Phase 195 complete
-Last activity: 2026-02-18 -- Completed 195-01 (Automated backup/restore with RCON quiesce and rotation)
+Phase: 196-monitoring-alerting (Plan 01 complete)
+Plan: 196-01 complete
+Status: Wave 5 in progress -- Phases 191, 195, 196, 197 complete
+Last activity: 2026-02-18 -- Completed 196-01 (Monitoring & alerting: exporters, metrics, alerts, extended health check)
 
-Progress: [####################......] 20/30 phases (Wave 1-4 complete; Wave 5: 195 done)
+Progress: [#######################...] 23/30 phases (Wave 1-4 complete; Wave 5: 191, 195, 196, 197 done)
 
 ## Project Reference
 
@@ -30,6 +30,27 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 2. 19/30 phases complete, 11 remaining in Waves 5-6
 
 ## Decisions
+
+### From Phase 197 Plan 01
+- Golden image manifests stored in infra/local/golden-images/ (gitignored) with latest.manifest.yaml copy for quick access
+- Clone path in rapid-rebuild.sh delegates entirely to golden-image.sh clone (single responsibility)
+- Scratch path calls each script as subprocess (pure orchestration, no logic duplication)
+- SSH target auto-detection: static IP from values file, then virsh domifaddr fallback for scratch mode
+- Exit code 4 for timing target exceeded (warning, not failure) -- rebuild succeeded but slow
+- Dry-run guards wrap all VM mutation operations to ensure zero side effects in preview mode
+
+### From Phase 191 Plan 01
+- Total token budget is 31.5% across 20 skills (plan estimated ~27%), corrected in trigger-matrix.yaml
+- vm-lifecycle vs hypervisor-abstraction distinction documented bidirectionally in both skill files
+- Documentation-only skills explicitly note "no executable scripts" in Key Scripts section
+
+### From Phase 196 Plan 01
+- Textfile collector mode for custom metrics piggybacking on node_exporter port 9100 -- avoids separate HTTP server
+- TPS alert threshold at 18 (not 20) to avoid false positives from momentary dips during chunk generation
+- Memory alert at 90% (not 80%) because JVM GC is designed to use most of heap; 80% would fire constantly
+- JMX exporter check is WARN not FAIL when port 9404 not listening -- activates only after minecraft.service restart
+- sed-based YAML parsing for timestamps (awk -F splits on colons inside ISO-8601 values)
+- Known failure pattern matching catches 6 modes: OOM, JAR missing, port binding, mod mismatch, stuck save-off, ConcurrentModificationException
 
 ### From Phase 195 Plan 01
 - Shared RCON library extracted as new file (not refactoring existing scripts) to avoid scope creep
@@ -247,8 +268,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T23:30:55Z
-Stopped at: Completed 195-01-PLAN.md (Automated backup/restore with RCON quiesce and rotation)
+Last session: 2026-02-18T23:48:07Z
+Stopped at: Completed 196-01-PLAN.md (Monitoring & alerting: exporters, metrics, alerts, extended health check)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments

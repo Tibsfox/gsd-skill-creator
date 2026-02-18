@@ -310,7 +310,7 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 5
 - **Dependencies:** Phases 169-190 (all implementation phases)
 - **Requirements:** SKILL-01, SKILL-02, SKILL-03
-- **Plans:** 1 plan
+- **Plans:** 1/1 plans complete
   - [ ] 191-01-PLAN.md — Create 20 SKILL.md files for all Plan 01-05 capabilities with trigger matrix audit
 - **Success Criteria:**
   1. Complete SKILL.md files exist for all 17+ skills identified across Plans 01-05
@@ -386,7 +386,7 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 5
 - **Dependencies:** Phase 177 (Minecraft server verified), Phase 172 (VM provisioning)
 - **Requirements:** OPS-08, OPS-09
-- **Plans:** 1 plan
+- **Plans:** 1/1 plans complete
   - [ ] 197-01-PLAN.md — Golden image lifecycle manager, rapid rebuild orchestrator, version manifest, and test suite
 - **Success Criteria:**
   1. Clone from golden image boots a working server in under 5 minutes
@@ -461,18 +461,7 @@ Wave 5 (Integration & Ops):
   193 Team Defs (needs 192) ------|---> Wave 6
   194 Chipset Assembly (needs 193) |
   195 Backup System (needs 177) --|
-  196 Monitoring (needs 177) -----|
-  197 Golden Image (needs 177, 172) |
-
-Wave 6 (Polish):
-  198 Runbooks (needs 195-197) -----> COMPLETE
-```
-
----
-
-## Requirement Coverage
-
-| Category | Requirements | Phases | Count |
+  196 Monitoring (needs 177) -----| 1/1 | Complete   | 2026-02-18 | 2026-02-18 | Phases | Count |
 |----------|-------------|--------|-------|
 | Infrastructure | INFRA-01 through INFRA-12 | 169-172 | 12 |
 | Minecraft | MC-01 through MC-13 | 173-177 | 13 |
@@ -513,7 +502,7 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 | 188 | 1/1 | Complete   | 2026-02-18 |
 | 189 | 1/1 | Complete   | 2026-02-18 |
 | 190 | Amiga Corner Integration | 4 | Pending |
-| 191 | Skill Definitions | 5 | Pending |
+| 191 | 1/1 | Complete   | 2026-02-18 |
 | 192 | Agent Definitions | 5 | Pending |
 | 193 | Team Definitions & Topologies | 5 | Pending |
 | 194 | Chipset Assembly | 5 | Pending |

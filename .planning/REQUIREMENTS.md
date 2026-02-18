@@ -87,9 +87,9 @@
 
 ### Skill-Creator Integration (Plan 06)
 
-- [ ] **SKILL-01**: Complete SKILL.md files exist for every skill identified across Plans 01-05 (17+ skills)
-- [ ] **SKILL-02**: Each skill has token budget annotation, trigger patterns, and at least one test case
-- [ ] **SKILL-03**: Trigger patterns do not overlap ambiguously between skills
+- [x] **SKILL-01**: Complete SKILL.md files exist for every skill identified across Plans 01-05 (17+ skills)
+- [x] **SKILL-02**: Each skill has token budget annotation, trigger patterns, and at least one test case
+- [x] **SKILL-03**: Trigger patterns do not overlap ambiguously between skills
 - [ ] **SKILL-04**: Agent definitions formalize all team roles with skill compositions and tool access permissions
 - [ ] **SKILL-05**: No two agents have identical skill sets — each is specialized
 - [ ] **SKILL-06**: Team definitions specify topology (pipeline/map-reduce/swarm/leader-worker) with resource locks and sync points
@@ -103,12 +103,12 @@
 - [x] **OPS-01**: Backup script quiesces server (save-all, save-off) before backup with under 5-second interruption
 - [x] **OPS-02**: Backup rotation keeps 24 hourly, 7 daily, 4 weekly backups
 - [x] **OPS-03**: Restore script rebuilds from backup to a fresh VM with zero data loss
-- [ ] **OPS-04**: node_exporter and JMX exporter provide system and JVM metrics to Prometheus
-- [ ] **OPS-05**: Custom metrics collector tracks TPS, player count, world size, chunk count, entity count, and mod status
-- [ ] **OPS-06**: Alert rules fire for TPS degradation, memory pressure, disk usage, backup age, and server unreachability
-- [ ] **OPS-07**: Health check script validates all systems and catches known failure modes
-- [ ] **OPS-08**: Golden image can be cloned to a working server in under 5 minutes
-- [ ] **OPS-09**: PXE rebuild produces identical server from scratch in under 20 minutes
+- [x] **OPS-04**: node_exporter and JMX exporter provide system and JVM metrics to Prometheus
+- [x] **OPS-05**: Custom metrics collector tracks TPS, player count, world size, chunk count, entity count, and mod status
+- [x] **OPS-06**: Alert rules fire for TPS degradation, memory pressure, disk usage, backup age, and server unreachability
+- [x] **OPS-07**: Health check script validates all systems and catches known failure modes
+- [x] **OPS-08**: Golden image can be cloned to a working server in under 5 minutes
+- [x] **OPS-09**: PXE rebuild produces identical server from scratch in under 20 minutes
 - [ ] **OPS-10**: Day-1 runbook enables new operator to complete full deployment
 - [ ] **OPS-11**: Day-2 runbook covers player management, health checks, backup review, and OS updates
 - [ ] **OPS-12**: Incident response runbook covers server unreachable, performance degradation, world corruption, and mod conflicts
@@ -205,9 +205,9 @@
 | WORLD-12 | Phase 189 | Complete |
 | WORLD-13 | Phase 189 | Complete |
 | WORLD-14 | Phase 190 | Complete |
-| SKILL-01 | Phase 191 | Pending |
-| SKILL-02 | Phase 191 | Pending |
-| SKILL-03 | Phase 191 | Pending |
+| SKILL-01 | Phase 191 | Complete |
+| SKILL-02 | Phase 191 | Complete |
+| SKILL-03 | Phase 191 | Complete |
 | SKILL-04 | Phase 192 | Pending |
 | SKILL-05 | Phase 192 | Pending |
 | SKILL-06 | Phase 193 | Pending |
@@ -218,12 +218,12 @@
 | OPS-01 | Phase 195 | Complete |
 | OPS-02 | Phase 195 | Complete |
 | OPS-03 | Phase 195 | Complete |
-| OPS-04 | Phase 196 | Pending |
-| OPS-05 | Phase 196 | Pending |
-| OPS-06 | Phase 196 | Pending |
-| OPS-07 | Phase 196 | Pending |
-| OPS-08 | Phase 197 | Pending |
-| OPS-09 | Phase 197 | Pending |
+| OPS-04 | Phase 196 | Complete |
+| OPS-05 | Phase 196 | Complete |
+| OPS-06 | Phase 196 | Complete |
+| OPS-07 | Phase 196 | Complete |
+| OPS-08 | Phase 197 | Complete |
+| OPS-09 | Phase 197 | Complete |
 | OPS-10 | Phase 198 | Pending |
 | OPS-11 | Phase 198 | Pending |
 | OPS-12 | Phase 198 | Pending |
