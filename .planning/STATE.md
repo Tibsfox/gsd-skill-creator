@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 172 — VM Provisioning Automation
-Plan: 01/02 complete
-Status: Wave 2 IN PROGRESS (179 complete, 180-02 done, 171-02 done, 181-01 done, 172-01 done; 171-01, 172-02, 180-01, 181-02 pending)
-Last activity: 2026-02-18 — Completed 172-01 VM provisioning backend scripts
+Phase: 181 — Hardware Adaptation Engine
+Plan: 02/02 complete (Phase 181 COMPLETE)
+Status: Wave 2 IN PROGRESS (179 complete, 181 complete, 180-02 done, 171-02 done, 172-01 done; 171-01, 172-02, 180-01 pending)
+Last activity: 2026-02-18 — Completed 181-02 adaptive configuration generator
 
-Progress: [####......................] 4/30 phases (Wave 1 complete: 169, 170, 178; Wave 2: 179 complete, 171/180 in progress)
+Progress: [#####.....................] 5/30 phases (Wave 1 complete: 169, 170, 178; Wave 2: 179, 181 complete; 171/172/180 in progress)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-17)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.22 Minecraft Knowledge World -- Wave 2 execution (Phase 172 in progress)
+**Current focus:** v1.22 Minecraft Knowledge World -- Wave 2 execution (Phase 181 complete, 171/172/180 remaining)
 
 ## Current Milestone
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Continue Wave 2 parallels: 171-01, 172-02, 180-01, 181-02
-2. Phase 172-01 complete -- VM provisioning backend scripts (KVM + VMware)
-3. Wave 2 remaining: 171-01, 172-02, 180-01, 181-02
+1. Continue Wave 2 parallels: 171-01, 172-02, 180-01
+2. Phase 181 complete -- hardware adaptation engine (GPU/audio assessment + adaptive config generator)
+3. Wave 2 remaining: 171-01, 172-02, 180-01
 
 ## Decisions
 
@@ -102,6 +102,12 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Vulkan display for NVIDIA/AMD modern drivers, OpenGL for older, software for no GPU
 - ALSA MIDI backend universal on Linux when MIDI hardware detected
 
+### From Phase 181 Plan 02
+- ZGC selected only when heap >= 8192MB (8GB) to ensure ZGC has enough headroom
+- Management interface: first ethernet with state=up, fallback to first ethernet, then eth0
+- Hypervisor preference: KVM > VMware > VirtualBox > container (open standard priority)
+- Assessment failures produce safe defaults rather than errors for generator resilience
+
 ## Accumulated Context
 
 ### From v1.21 (GSD-OS Desktop Foundation)
@@ -138,8 +144,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T07:28:00Z
-Stopped at: Completed 172-01-PLAN.md (VM provisioning backend scripts)
+Last session: 2026-02-18T07:35:59Z
+Stopped at: Completed 181-02-PLAN.md (adaptive configuration generator)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
