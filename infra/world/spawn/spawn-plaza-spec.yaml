@@ -1,0 +1,127 @@
+# Knowledge World Spawn Plaza Build Specification
+# The first thing every player sees when joining the world.
+
+metadata:
+  name: "Spawn Plaza"
+  version: "1.0"
+  author: "GSD Creative Team"
+  description: "Central hub of the Knowledge World. All districts are visible from here."
+
+dimensions:
+  # Circular plaza centered at world spawn point
+  center: { x: 0, y: 64, z: 0 }   # World spawn point
+  radius: 25                         # 50-block diameter circle
+  height: 8                          # Ground level to canopy/beacon peak
+  total_blocks_estimate: 3500
+
+layout:
+  # The plaza is a circular open area with 6 radial paths leading to districts
+  ground:
+    material: "smooth_quartz"         # Clean, neutral base
+    border: "polished_andesite"       # Subtle edge ring
+    pattern: "radial"                 # Lines radiating from center toward each district
+    path_material_per_district:
+      hardware: "orange_concrete"
+      software: "light_blue_concrete"
+      network: "lime_concrete"
+      creative: "magenta_concrete"
+      community: "blue_concrete"
+      workshop: "red_concrete"
+
+  center_feature:
+    type: "beacon"
+    material: "iron_block_base"       # 3x3 iron block pyramid under beacon
+    beacon_color: "white"             # Neutral white beam visible from all districts
+    height: 5                         # Above plaza floor
+    purpose: "Visible landmark from anywhere in the world"
+
+  compass_rose:
+    # Built into the plaza floor around the beacon
+    material: "quartz_slab"
+    labels:
+      north: "Hardware District"
+      east: "Software District"
+      south: "Workshop District"
+      west: "Community District"
+    size: "9x9 blocks centered on beacon"
+
+  district_gateways:
+    # 6 archways at the plaza perimeter, one per district path
+    count: 6
+    height: 5                         # Blocks tall
+    width: 3                          # Blocks wide
+    material: "district_primary_block" # Uses each district's primary block
+    signs:
+      # Each gateway has a title sign and a direction sign
+      gateway_sign:
+        format: "title_signs"         # References sign-standards.yaml
+        content_template: |
+          Line 1: [DISTRICT NAME]
+          Line 2: [subtitle]
+          Line 3: "< 1 min walk"
+          Line 4: [arrow]
+
+  welcome_signs:
+    # Four large signs at spawn point, one per cardinal direction
+    # Player spawns facing these
+    count: 4
+    positions: ["north_of_spawn", "east_of_spawn", "south_of_spawn", "west_of_spawn"]
+    content:
+      sign_1:
+        title: "WELCOME TO THE"
+        line_2: "KNOWLEDGE WORLD"
+        line_3: ""
+        line_4: "Look around!"
+      sign_2:
+        title: "FIRST TIME?"
+        line_2: "Follow the"
+        line_3: "white path to"
+        line_4: "Welcome Center >"
+      sign_3:
+        title: "DISTRICTS"
+        line_2: "Follow colored"
+        line_3: "paths to explore"
+        line_4: "each area"
+      sign_4:
+        title: "BUILDERS"
+        line_2: "Press E to open"
+        line_3: "Litematica menu"
+        line_4: "for schematics"
+
+  welcome_center_entrance:
+    # Prominent path from spawn to welcome center building
+    direction: "east"                 # East of spawn beacon
+    path_material: "white_concrete"   # Distinct from district paths
+    path_width: 3
+    distance_from_center: 15          # Blocks from beacon to welcome center entrance
+    sign_standard: "direction_signs"
+
+# Material list (quantities are estimates for resource gathering)
+materials:
+  smooth_quartz: 2000
+  polished_andesite: 300
+  iron_block: 9
+  beacon: 1
+  quartz_slab: 81
+  white_concrete: 150
+  orange_concrete: 80
+  light_blue_concrete: 80
+  lime_concrete: 80
+  magenta_concrete: 80
+  blue_concrete: 80
+  red_concrete: 80
+  oak_sign: 30
+  sea_lantern: 24
+
+# Build order (for in-game construction)
+build_order:
+  1: "Flatten terrain to Y=64 within 30-block radius of 0,0"
+  2: "Place smooth quartz ground in circular pattern (radius 25)"
+  3: "Build beacon pyramid at center (iron blocks + beacon)"
+  4: "Lay compass rose pattern around beacon"
+  5: "Build 6 radial paths from center to district gateways"
+  6: "Build district gateway archways at plaza perimeter"
+  7: "Place all welcome signs at spawn point"
+  8: "Build white path to welcome center entrance"
+  9: "Add sea lantern lighting along paths"
+  10: "Place direction signs on each gateway"
