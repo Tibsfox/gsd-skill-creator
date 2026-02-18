@@ -26,6 +26,10 @@ declare -gA PKG_MAP_DNF=(
     [libvirt]="libvirt"
     [virt-install]="virt-install"
     [fs-uae]=""
+    [flatpak]="flatpak"
+    [SDL2]="SDL2"
+    [SDL2-devel]="SDL2-devel"
+    [openal-soft]="openal-soft"
 )
 
 declare -gA PKG_MAP_APT=(
@@ -36,6 +40,10 @@ declare -gA PKG_MAP_APT=(
     [libvirt]="libvirt-daemon-system"
     [virt-install]="virtinst"
     [fs-uae]="fs-uae"
+    [flatpak]="flatpak"
+    [SDL2]="libsdl2-2.0-0"
+    [SDL2-devel]="libsdl2-dev"
+    [openal-soft]="libopenal1"
 )
 
 declare -gA PKG_MAP_PACMAN=(
@@ -47,6 +55,10 @@ declare -gA PKG_MAP_PACMAN=(
     [libvirt]="libvirt"
     [virt-install]="virt-install"
     [fs-uae]="fs-uae"
+    [flatpak]="flatpak"
+    [SDL2]="sdl2"
+    [SDL2-devel]="sdl2"
+    [openal-soft]="openal"
 )
 
 # ---------------------------------------------------------------------------
