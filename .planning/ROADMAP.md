@@ -92,7 +92,7 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 3
 - **Dependencies:** Phase 173 (server foundation)
 - **Requirements:** MC-04, MC-05
-- **Plans:** 1/1 plans complete
+- **Plans:** 2/2 plans complete
   - [ ] 174-01-PLAN.md — Fabric mod downloader + Syncmatica configuration + mod manifest YAML + update checker
 - **Success Criteria:**
   1. Server starts with both Fabric API and Syncmatica loaded (verified in server log)
@@ -476,7 +476,7 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 | 170 | 2/2 | Complete   | 2026-02-18 |
 | 171 | 2/2 | Complete   | 2026-02-18 |
 | 172 | 2/2 | Complete   | 2026-02-18 |
-| 173 | 1/2 | In Progress|  |
+| 173 | 2/2 | Complete   | 2026-02-18 |
 | 174 | 1/1 | Complete   | 2026-02-18 |
 | 175 | Server Configuration & Tuning | 3 | Pending |
 | 176 | Client Setup & Documentation | 3 | Pending |
