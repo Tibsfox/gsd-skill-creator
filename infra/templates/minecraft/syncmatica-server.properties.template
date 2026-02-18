@@ -1,0 +1,19 @@
+# Syncmatica Server Configuration
+# Rendered by deploy-mods.sh from local-values
+#
+# Controls schematic sharing behavior on the GSD Knowledge World server.
+# Syncmatica allows Litematica users to share schematics in real-time.
+#
+# Template variables (rendered by deploy-mods.sh Step 4):
+#   SYNCMATICA_MAX_SCHEMATIC_SIZE_KB  -- from syncmatica.local-values
+#   SYNCMATICA_ALLOW_SHARING          -- from syncmatica.local-values
+
+# Maximum schematic file size in kilobytes
+# Larger schematics use more memory and network bandwidth
+# Default: 10240 (10MB) -- sufficient for most educational builds
+max_schematic_size=${SYNCMATICA_MAX_SCHEMATIC_SIZE_KB}
+
+# Whether players can share schematics with each other
+# true = players can upload and share schematics (recommended for Knowledge World)
+# false = only operator-uploaded schematics are available
+allow_sharing=${SYNCMATICA_ALLOW_SHARING}
