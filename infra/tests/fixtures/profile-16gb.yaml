@@ -1,0 +1,41 @@
+# Hardware profile fixture: 16GB laptop (minimal tier)
+# Used by test-calculate-budget.sh for deterministic testing
+
+cpu:
+  architecture: x86_64
+  family: "Intel Core i5 12th Gen"
+  cores_physical: 4
+  cores_logical: 8
+  virtualization: true
+  virtualization_type: vmx
+
+memory:
+  total_gb: 16
+  swap_gb: 2
+
+storage:
+  devices:
+    - type: ssd
+      size_gb: 256
+  total_gb: 256
+
+gpu:
+  present: false
+  vendor: null
+  family: "none"
+  vram_gb: null
+  driver: null
+  iommu_available: false
+
+hypervisor:
+  kvm: true
+  vmware: false
+  virtualbox: false
+  podman: false
+  docker: false
+  nested_virtualization: false
+
+capabilities:
+  can_run_vms: true
+  can_passthrough_gpu: false
+  meets_minimum: true
