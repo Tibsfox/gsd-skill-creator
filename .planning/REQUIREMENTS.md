@@ -57,8 +57,8 @@
 
 - [x] **AMIGA-01**: FS-UAE installs and runs on all Tier 1 distributions via package manager abstraction
 - [x] **AMIGA-02**: AROS ROM boots to a usable Amiga Workbench without copyright issues
-- [ ] **AMIGA-03**: UAE display output uses GPU acceleration with optional scanline shader
-- [ ] **AMIGA-04**: UAE audio output works through host audio subsystem (ALSA/PulseAudio/PipeWire)
+- [x] **AMIGA-03**: UAE display output uses GPU acceleration with optional scanline shader
+- [x] **AMIGA-04**: UAE audio output works through host audio subsystem (ALSA/PulseAudio/PipeWire)
 - [ ] **AMIGA-05**: Application-specific UAE profiles exist for Deluxe Paint, OctaMED, ProTracker, and PPaint
 - [ ] **AMIGA-06**: WHDLoad integration allows hard-drive-based software loading
 - [ ] **AMIGA-07**: IFF/ILBM to PNG converter preserves palette metadata and dimensions
@@ -181,8 +181,8 @@
 | PLAT-12 | Phase 181 | Complete |
 | AMIGA-01 | Phase 182 | Complete |
 | AMIGA-02 | Phase 182 | Complete |
-| AMIGA-03 | Phase 182 | Pending |
-| AMIGA-04 | Phase 182 | Pending |
+| AMIGA-03 | Phase 182 | Complete |
+| AMIGA-04 | Phase 182 | Complete |
 | AMIGA-05 | Phase 183 | Pending |
 | AMIGA-06 | Phase 183 | Pending |
 | AMIGA-07 | Phase 184 | Pending |
