@@ -1,0 +1,40 @@
+// GSD Amiga Workbench - CRT Scanline Shader
+// Applies horizontal scanlines with configurable intensity
+// for authentic CRT display appearance.
+//
+// Designed for FS-UAE shader pipeline (FS-UAE 3.x+).
+// Enable with: shader = /path/to/scanline.fs-uae-shader
+//
+// FS-UAE shader format: vertex and fragment shaders separated by "---"
+// Uniform names follow FS-UAE conventions:
+//   u_texture   -- the emulated display texture
+//   u_inputSize -- the input texture dimensions in pixels
+
+// Vertex shader (passthrough)
+varying vec2 v_texCoord;
+void main() {
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+    v_texCoord = gl_MultiTexCoord0.xy;
+}
+
+---
+
+// Fragment shader
+varying vec2 v_texCoord;
+uniform sampler2D u_texture;
+uniform vec2 u_inputSize;
+
+void main() {
+    vec4 color = texture2D(u_texture, v_texCoord);
+
+    // Scanline effect: darken every other line
+    float scanline = mod(floor(v_texCoord.y * u_inputSize.y), 2.0);
+    float intensity = 0.85 + 0.15 * scanline;
+    // 0.85 = darkened line, 1.0 = bright line
+    // This gives a subtle but visible CRT effect
+
+    // Slight brightness boost to compensate for average darkening
+    color.rgb *= intensity * 1.08;
+
+    gl_FragColor = color;
+}
