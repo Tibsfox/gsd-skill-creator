@@ -137,4 +137,56 @@
 
 ## T3 Amendments (4 checkpoints)
 
-*To be added in Task 2.*
+### 10. pd-010 -- SEO Metadata
+
+| Field | Value |
+|-------|-------|
+| **Checkpoint** | pd-010 |
+| **Tier** | T3 |
+| **Section** | Structured Data: Open Graph & Meta Tags |
+| **Original claim** | Pages include og:title, og:description, og:type meta tags, robots meta, and canonical URLs |
+| **Actual state** | og:title, og:description, og:type implemented on all 6 pages. Missing: robots meta tag and canonical URLs. 3 of 5 claimed meta tag types implemented. |
+| **Resolution** | 3 of 5 meta tag types implemented. Robots meta and canonical URLs are low-priority for a locally-generated dashboard that is not indexed by search engines. |
+| **Updated specification** | Pages include og:title, og:description, og:type meta tags on all 6 dashboard pages. Robots meta and canonical URLs deferred. |
+
+---
+
+### 11. dc-014 -- Question Card Signage Model
+
+| Field | Value |
+|-------|-------|
+| **Checkpoint** | dc-014 |
+| **Tier** | T3 |
+| **Section** | Dashboard UI Design -- Question Cards |
+| **Original claim** | Question cards use three-tier signage model: guide (green border) for informational, regulatory (neutral border) for confirmations, warning (amber border) for blocking issues |
+| **Actual state** | question-card.ts uses 4-tier urgency model (low=#666, medium=#58a6ff, high=#f0883e amber, critical=#f85149 red) with colored borders. No green guide border. Urgency-based, not signage-based categorization. |
+| **Resolution** | Implementation uses urgency-based categorization instead of signage-based. The 4-tier model provides finer granularity than the claimed 3-tier model and better serves the human-in-the-loop interaction pattern. |
+| **Updated specification** | Question cards use 4-tier urgency model (low, medium, high, critical) with color-coded borders. |
+
+---
+
+### 12. id-008 -- ALL CAPS Discipline
+
+| Field | Value |
+|-------|-------|
+| **Checkpoint** | id-008 |
+| **Tier** | T3 |
+| **Section** | Part 2: Lettering and Typography |
+| **Original claim** | ALL CAPS reserved only for interrupts (error states, blocked milestones, budget overruns), not for navigation chrome |
+| **Actual state** | Design system correctly defines .case-interrupt (uppercase) and .case-label (none). However, uppercase is used in 16+ non-interrupt contexts: badges, compact-title, legend h4, tab toggles, VRAM label, budget label, staging headers. |
+| **Resolution** | The design system infrastructure for interrupt-only caps exists, but the broader dashboard uses uppercase decoratively for small-caps labels, badges, and section headers where emphasis aids scannability. This is a pragmatic design choice. |
+| **Updated specification** | ALL CAPS used for interrupts and decoratively for small-caps labels, badges, and section headers where emphasis aids scannability. |
+
+---
+
+### 13. ds-008 -- Milestone Collapse
+
+| Field | Value |
+|-------|-------|
+| **Checkpoint** | ds-008 |
+| **Tier** | T3 |
+| **Section** | Milestones Grid |
+| **Original claim** | Older milestones are collapsed behind a 'Show N older milestones' link |
+| **Actual state** | No collapse/expand logic exists. All milestones rendered sequentially in full vertical timeline without truncation. |
+| **Resolution** | Full timeline rendering provides complete project history at a glance. At current scale (27 milestones), collapse is unnecessary. The vertical timeline with chevron shapes and status coloring is effective. |
+| **Updated specification** | All milestones rendered in full vertical timeline with chevron shapes and status coloring. |
