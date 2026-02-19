@@ -10,11 +10,12 @@ matrix_metadata:
     T2: 180
     T3: 64
   checkpoints_by_status:
-    pass: 155
-    fail: 93
-    pending: 88
+    pass: 181
+    fail: 106
+    pending: 48
     amended: 0
     deferred: 0
+    partial: 1
 documents:
 - id: skill-creator-analysis
   file: gsd-skill-creator-analysis.md
