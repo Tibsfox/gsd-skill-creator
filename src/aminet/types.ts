@@ -995,3 +995,188 @@ export const ScanGateResultSchema = z.object({
   requiresOverride: z.boolean(),
 });
 export type ScanGateResult = z.infer<typeof ScanGateResultSchema>;
+
+// ============================================================================
+// Emulator types (Phase 241)
+// ============================================================================
+
+/**
+ * Hardware profile identifiers for the 5 supported Amiga configurations.
+ */
+export const HardwareProfileIdSchema = z.enum([
+  'a500',
+  'a1200',
+  'a1200-030',
+  'a4000',
+  'whdload',
+]);
+export type HardwareProfileId = z.infer<typeof HardwareProfileIdSchema>;
+
+/**
+ * A complete hardware profile defining an emulated Amiga configuration.
+ */
+export const HardwareProfileSchema = z.object({
+  /** Profile identifier */
+  id: HardwareProfileIdSchema,
+  /** Human-readable name (e.g., "Amiga 500") */
+  name: z.string(),
+  /** FS-UAE amiga_model value (e.g., "A500", "A1200", "A4000/040") */
+  amigaModel: z.string(),
+  /** Required Kickstart version (e.g., "1.3", "3.1") */
+  kickstartVersion: z.string(),
+  /** Required Kickstart revision (e.g., "34.005", "40.068") */
+  kickstartRevision: z.string(),
+  /** CPU type string (e.g., "68000", "68ec020", "68030", "68040") */
+  cpu: z.string(),
+  /** Chip memory in KB */
+  chipMemoryKb: z.number().int().nonnegative(),
+  /** Slow memory in KB (A500 trapdoor expansion) */
+  slowMemoryKb: z.number().int().nonnegative(),
+  /** Fast memory in KB (Zorro II/III) */
+  fastMemoryKb: z.number().int().nonnegative(),
+  /** Chipset type for documentation/display */
+  chipset: z.enum(['OCS', 'ECS', 'AGA']),
+  /** Display settings */
+  display: z.object({
+    width: z.number().int().positive(),
+    height: z.number().int().positive(),
+  }),
+  /** Audio settings */
+  sound: z.object({
+    stereoSeparation: z.number().int().min(0).max(100),
+  }),
+});
+export type HardwareProfile = z.infer<typeof HardwareProfileSchema>;
+
+/**
+ * A known Kickstart ROM entry for checksum-based identification.
+ * Only checksums and metadata -- no ROM data (EMU-10, NFR-05).
+ */
+export const KnownRomSchema = z.object({
+  /** Kickstart version (e.g., "1.3", "3.1") */
+  version: z.string(),
+  /** Kickstart revision (e.g., "34.005", "40.068") */
+  revision: z.string(),
+  /** Target Amiga model (e.g., "A500", "A1200", "A4000") */
+  model: z.string(),
+  /** CRC32 checksum as unsigned 32-bit integer */
+  crc32: z.number().int().nonnegative(),
+  /** SHA-1 hex string for FS-UAE cross-verification (optional) */
+  sha1: z.string().nullable(),
+  /** Expected file size in bytes (262144 for 256KB, 524288 for 512KB) */
+  size: z.number().int().positive(),
+});
+export type KnownRom = z.infer<typeof KnownRomSchema>;
+
+/**
+ * A validated ROM file found on the user's system.
+ */
+export const DetectedRomSchema = z.object({
+  /** Absolute path to the ROM file */
+  path: z.string(),
+  /** Matched KnownRom entry */
+  rom: KnownRomSchema,
+  /** Whether the ROM was encrypted (Cloanto) and needed decryption */
+  wasEncrypted: z.boolean(),
+});
+export type DetectedRom = z.infer<typeof DetectedRomSchema>;
+
+/**
+ * Flat FS-UAE configuration key-value pairs ready for serialization.
+ * Keys use FS-UAE underscore convention (e.g., amiga_model, chip_memory).
+ */
+export const FsUaeConfigSchema = z.record(z.string(), z.union([z.string(), z.number(), z.boolean()]));
+export type FsUaeConfig = z.infer<typeof FsUaeConfigSchema>;
+
+/**
+ * High-level launch configuration combining profile, ROM, and hard drives.
+ */
+export const LaunchConfigSchema = z.object({
+  /** Hardware profile to use */
+  profileId: HardwareProfileIdSchema,
+  /** Absolute path to Kickstart ROM file */
+  kickstartFile: z.string(),
+  /** Hard drive mounts: array of { path, label, readOnly?, bootPriority? } */
+  hardDrives: z.array(z.object({
+    path: z.string(),
+    label: z.string(),
+    readOnly: z.boolean().optional(),
+    bootPriority: z.number().int().optional(),
+  })).max(10),
+  /** Floppy drive paths (0-3) */
+  floppyDrives: z.array(z.string()).max(4).optional(),
+  /** Optional save states directory */
+  saveStatesDir: z.string().optional(),
+  /** Enable save states (default false -- disabled for directory hard drives) */
+  saveStates: z.boolean().optional(),
+  /** FS-UAE binary path (default: "fs-uae") */
+  fsUaePath: z.string().optional(),
+  /** Additional FS-UAE options to merge (advanced override) */
+  extraOptions: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).optional(),
+});
+export type LaunchConfig = z.infer<typeof LaunchConfigSchema>;
+
+/**
+ * Result of an emulator launch attempt.
+ * Uses graceful degradation pattern: success: false + structured error, never throws.
+ */
+export const LaunchResultSchema = z.object({
+  /** Whether launch succeeded */
+  success: z.boolean(),
+  /** Absolute path to generated .fs-uae config file (present on success) */
+  configPath: z.string().optional(),
+  /** Structured error (present on failure) */
+  error: z.object({
+    code: z.enum(['ROM_MISSING', 'FSUAE_MISSING', 'INVALID_PROFILE', 'LAUNCH_FAILED', 'NO_HARD_DRIVES']),
+    message: z.string(),
+    romRequired: z.object({
+      version: z.string(),
+      crc32: z.string(),
+      model: z.string(),
+    }).optional(),
+    guidance: z.string(),
+  }).optional(),
+});
+export type LaunchResult = z.infer<typeof LaunchResultSchema>;
+
+/**
+ * WHDLoad game/demo database entry with hardware requirements.
+ * Derived from community whdload_db.xml format.
+ */
+export const WhdloadEntrySchema = z.object({
+  /** LHA filename (case-sensitive, e.g., "Doom.lha") */
+  filename: z.string(),
+  /** Clean game/demo name */
+  name: z.string(),
+  /** Default .Slave filename */
+  slaveDefault: z.string(),
+  /** Number of slave files available */
+  slaveCount: z.number().int().nonnegative(),
+  /** Hardware requirements for WHDLoad configuration */
+  hardware: z.object({
+    cpu: z.enum(['68000', '68010', '68020', '68040']).optional(),
+    chipset: z.enum(['OCS', 'ECS', 'AGA']).optional(),
+    fastRamMb: z.number().int().nonnegative().optional(),
+    z3RamMb: z.number().int().nonnegative().optional(),
+    ntsc: z.boolean().optional(),
+    clock: z.enum(['7', '14', '25', '28', 'MAX']).optional(),
+  }),
+});
+export type WhdloadEntry = z.infer<typeof WhdloadEntrySchema>;
+
+/**
+ * Emulator state snapshot metadata.
+ */
+export const EmulatorSnapshotSchema = z.object({
+  /** Snapshot slot number (1-9) */
+  slot: z.number().int().min(1).max(9),
+  /** ISO 8601 timestamp of when the snapshot was saved */
+  savedAt: z.string(),
+  /** Description/label for the snapshot */
+  label: z.string(),
+  /** Hardware profile used when snapshot was taken */
+  profileId: HardwareProfileIdSchema,
+  /** Absolute path to snapshot directory */
+  snapshotDir: z.string(),
+});
+export type EmulatorSnapshot = z.infer<typeof EmulatorSnapshotSchema>;
