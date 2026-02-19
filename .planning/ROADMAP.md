@@ -114,7 +114,7 @@ Phases execute in numeric order: 231 → 232 → 233 → 234 → 235
 | 232. Shared EventDispatcher Specification | 3/3 | Complete    | 2026-02-19 |
 | 233. Dependency Philosophy by Layer | 2/2 | Complete    | 2026-02-19 |
 | 234. Integration Test Strategy | 3/3 | Complete    | 2026-02-19 |
-| 235. Partial-Build Compatibility Matrix | 3/3 | Complete    | 2026-02-19 |
+| 235. Partial-Build Compatibility Matrix | 3/3 | Complete   | 2026-02-19 |
 
 ---
 *Roadmap created: 2026-02-19*
