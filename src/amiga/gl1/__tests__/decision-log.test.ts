@@ -165,10 +165,10 @@ describe('DecisionLog -- append-only guarantee', () => {
 
   it('no remove, delete, clear, or update methods exist on DecisionLog', () => {
     const log = new DecisionLog();
-    expect((log as Record<string, unknown>)['remove']).toBeUndefined();
-    expect((log as Record<string, unknown>)['delete']).toBeUndefined();
-    expect((log as Record<string, unknown>)['clear']).toBeUndefined();
-    expect((log as Record<string, unknown>)['update']).toBeUndefined();
+    expect((log as unknown as Record<string, unknown>)['remove']).toBeUndefined();
+    expect((log as unknown as Record<string, unknown>)['delete']).toBeUndefined();
+    expect((log as unknown as Record<string, unknown>)['clear']).toBeUndefined();
+    expect((log as unknown as Record<string, unknown>)['update']).toBeUndefined();
   });
 
   it('append returns a new object, not a reference to internal state', () => {
@@ -176,7 +176,7 @@ describe('DecisionLog -- append-only guarantee', () => {
     const entry = log.append(makeEvaluationResult(), 'compliance_check', 'Test', 'CE-1');
 
     // Mutate the returned entry
-    (entry as Record<string, unknown>).query_subject = 'MUTATED';
+    (entry as unknown as Record<string, unknown>).query_subject = 'MUTATED';
 
     // Internal state should be unaffected
     const all = log.getAll();

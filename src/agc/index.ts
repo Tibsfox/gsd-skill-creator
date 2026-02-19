@@ -271,7 +271,58 @@ export { createLearnModeState, toggleLearnMode, getAnnotation, getAnnotationsFor
 export * from './tools/index.js';
 
 // Pack (Phase 222 -- GSD-OS Integration)
-export * from './pack/index.js';
+// Explicit re-exports to avoid duplicate `ValidationResult` (also exported by tools/validation.js)
+export type {
+  BlockDefinition,
+  BlockInput,
+  BlockOutput,
+  BlockConfig,
+  WidgetDefinition,
+  PackManifest,
+  AgcBlockType,
+  ValidationResult as PackValidationResult,
+} from './pack/index.js';
+export {
+  AGC_BLOCKS,
+  getBlock,
+  getBlocksByCategory,
+  validateBlockDefinition,
+} from './pack/index.js';
+export {
+  AGC_WIDGETS,
+  getWidget,
+  renderRegisterWidget,
+  renderMemoryMapWidget,
+  renderExecutiveWidget,
+  renderDskyWidget,
+  renderTelemetryWidget,
+  renderInstructionTraceWidget,
+} from './pack/index.js';
+export type {
+  RegisterWidgetData,
+  MemoryMapWidgetData,
+  ExecutiveWidgetData,
+  DskyWidgetData,
+  TelemetryWidgetData,
+  InstructionTraceData,
+} from './pack/index.js';
+export {
+  ROPE_SOURCES,
+  getRopeUrl,
+  locateRopeImage,
+  validateRopeImage,
+} from './pack/index.js';
+export type {
+  RopeImageSource,
+  LocateResult,
+  RopeValidation,
+} from './pack/index.js';
+export {
+  AGC_PACK_MANIFEST,
+  isPackInstalled,
+  getPackBlocks,
+  getPackWidgets,
+} from './pack/index.js';
 
 // Curriculum (Phase 221 -- AGC Curriculum & Exercises)
 export * from './curriculum/index.js';
