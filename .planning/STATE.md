@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 202 of 222 (RFC Reference Skill)
-Plan: 2 of 3 in current phase (IN PROGRESS)
-Status: Executing -- Wave 1 complete (plans 01, 02), Wave 2 pending (plan 03)
-Last activity: 2026-02-19 -- Completed Plans 202-01 and 202-02
+Phase: 201 of 222 (AGC Documentation Archive) -- IN PROGRESS
+Plan: 1 of 2 in current phase (Plan 201-01 complete)
+Status: Executing Phase 201 -- catalog complete, reading paths next
+Last activity: 2026-02-19 -- Completed Plan 201-01 (master catalog)
 
-Progress: [#.......................] 4% (1/24 phases)
+Progress: [###.....................] 13% (3/24 phases)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.23 Project AMIGA -- Phase 202: RFC Reference Skill
+**Current focus:** v1.23 Project AMIGA -- Phase 202 complete, Wave 0 wrapping up
 
 ## Current Milestone
 
@@ -25,9 +25,10 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 
 ## Next Actions
 
-1. Complete Plan 202-03 (agents, skill definition, pack scaffold) -- Wave 2
-2. `/gsd:execute-phase 200` -- Execute ICD schemas (parallel workstream)
-3. `/gsd:plan-phase 201` -- AGC archive (parallel workstream)
+1. Complete Plan 201-02 (reading paths, cross-references, mirror config)
+2. Phase 200 (ICDs) COMPLETE -- 3 plans, 229 tests, 10 event type schemas
+3. Phase 202 (RFC skill) COMPLETE -- 3 plans, 6 commits, 9 requirements
+4. Wave 0 nearing completion: 199 done, 200 done, 201 in progress, 202 done
 
 ## Decisions
 
@@ -42,6 +43,15 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 - OPS agents assigned 'cross-cutting' component (not a specific component ID)
 - Zod v4 z.record() requires two-arg form z.record(z.string(), z.unknown()) -- single-arg crashes
 - Envelope source/destination regex includes MC (component) and bare team names for routing compat
+- ICD event types without routing table entries are warnings not errors (response events use implicit correlation routing)
+- All ICD schemas use .passthrough() for forward compatibility
+- DependencyNodeSchema exported from ICD-02 for reuse; EvidenceItemSchema and AlgorithmAdjustmentSchema exported from ICD-04
+- GovernanceResponse reasoning field mandatory (min 1 char) per FOUND-06
+- DisputeRecord algorithm_adjustment uses nullable+optional pattern
+- RFC index curates 57 RFCs across 9 protocol families with obsolescence chains
+- RFC scripts use pathlib with script-dir-relative resolution for portability
+- Three RFC agents share single rfc-reference skill for unified trigger routing
+- RFC pack follows archive/study/implement model with 3-tier reading paths
 
 ## Accumulated Context
 
@@ -66,10 +76,11 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed Plans 202-01 (RFC index + search/fetch) and 202-02 (parse/save) -- Wave 2 next
+Stopped at: Completed Plan 201-01 (master catalog 210 docs), executing Plan 201-02
 
 ### Key Files
 - `.planning/ROADMAP.md` -- 24 phases across 5 waves
 - `.planning/REQUIREMENTS.md` -- 99 requirements with traceability
-- `infra/packs/rfc/data/rfc-index.yaml` -- 57 curated RFCs
-- `infra/packs/rfc/scripts/` -- rfc-search.py, rfc-fetch.py, rfc-parse.py, rfc-save.py
+- `infra/packs/agc/archive/catalog.yaml` -- 210-entry AGC document catalog
+- `infra/packs/agc/archive/README.md` -- Archive documentation
+- `infra/packs/rfc/` -- Complete RFC skill pack (4 scripts, index, reading paths, README)
