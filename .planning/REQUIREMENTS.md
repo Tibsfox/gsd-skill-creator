@@ -92,10 +92,10 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 
 ### User Interface
 
-- [ ] **UI-01**: Aminet browser panel in GSD-OS with search, category tree, results, and detail pane
+- [x] **UI-01**: Aminet browser panel in GSD-OS with search, category tree, results, and detail pane
 - [ ] **UI-02**: Status indicators: green (clean), yellow (suspicious), red (infected), gray (not mirrored)
 - [ ] **UI-03**: Mirror statistics widget for GSD dashboard
-- [ ] **UI-04**: Workbench-style window aesthetic consistent with GSD-OS design
+- [x] **UI-04**: Workbench-style window aesthetic consistent with GSD-OS design
 
 ### Agent & Team Architecture
 
@@ -113,7 +113,7 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [ ] **NFR-04**: Test suite achieves >=80% code coverage
 - [x] **NFR-05**: No Kickstart ROM files distributed with the pack
 - [x] **NFR-06**: Mirror downloads identify as GSD-Aminet-Pack and respect rate limits
-- [ ] **NFR-07**: All SKILL.md files follow GSD skill format specification
+- [x] **NFR-07**: All SKILL.md files follow GSD skill format specification
 - [x] **NFR-08**: All agent YAML follows GSD chipset architecture conventions
 - [x] **NFR-09**: Virus signature database extensible without code changes
 - [ ] **NFR-10**: Pack functions as standalone skill set — no modifications to GSD core required
@@ -212,10 +212,10 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | EMU-08 | Phase 241 | Complete |
 | EMU-09 | Phase 241 | Complete |
 | EMU-10 | Phase 241 | Complete |
-| UI-01 | Phase 242 | Pending |
+| UI-01 | Phase 242 | Complete |
 | UI-02 | Phase 242 | Pending |
 | UI-03 | Phase 242 | Pending |
-| UI-04 | Phase 242 | Pending |
+| UI-04 | Phase 242 | Complete |
 | AGT-01 | Phase 242 | Complete |
 | AGT-02 | Phase 242 | Pending |
 | AGT-03 | Phase 242 | Pending |
@@ -227,7 +227,7 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | NFR-04 | Phase 242 | Pending |
 | NFR-05 | Phase 241 | Complete |
 | NFR-06 | Phase 237 | Complete |
-| NFR-07 | Phase 242 | Pending |
+| NFR-07 | Phase 242 | Complete |
 | NFR-08 | Phase 242 | Complete |
 | NFR-09 | Phase 239 | Complete |
 | NFR-10 | Phase 242 | Pending |
