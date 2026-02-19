@@ -3433,22 +3433,28 @@ documents:
     claim: A real-time visualization of the Executive and Waitlist shows core set allocation, waitlist queue, priority levels,
       interrupt activity, and restart events
     verification: unit-test
-    status: pending
+    status: pass
     notes: 'File: src/agc/executive-monitor.ts, test: src/agc/__tests__/executive-monitor.test.ts'
     tier: T2
     depends_on:
     - agc-001
-    evidence: ''
+    evidence: '26 tests pass. captureSnapshot produces MonitorSnapshot with: coreSets (8 views: status, priority, jobId),
+      waitlistEntries (timeUntilFire), interrupts (pendingList ordered by priority, isInhibited, isServicing), counters,
+      restartPoints, bailoutCount. computeMetrics returns utilization, activePriority, jobCount. Read-only guarantees:
+      snapshot and all sub-objects are frozen. Snapshot after BAILOUT shows freed core sets.'
   - id: agc-014
     section: Part 3 > The DSKY Interface
     claim: The 1202 alarm scenario can be reproduced, demonstrating the Executive's failsafe response when core sets are exhausted
     verification: unit-test
-    status: pending
+    status: pass
     notes: 'File: src/agc/alarm-scenario.ts, test: src/agc/__tests__/alarm-scenario.test.ts'
     tier: T2
     depends_on:
     - agc-001
-    evidence: ''
+    evidence: '28 tests pass. Apollo 11 1202 scenario: 7 initial jobs + overload jobs exhaust core sets. Event log
+      contains OVERLOAD_DETECTED (alarmCode 1202), BAILOUT_TRIGGERED, RECOVERY_COMPLETE. After BAILOUT: P63/P64
+      (CRITICAL) preserved, DSKY display/Telemetry (DEFERRABLE) discarded. Priority preemption visibility tested.
+      Parameterizable scenarios: all-CRITICAL, all-DEFERRABLE, no-overload variants. Step-by-step execution verified.'
   - id: agc-015
     section: Part 3 > Learn Mode
     claim: 'Learn mode annotation layer connects AGC concepts to three domains: AGC internals, modern computing equivalents,
