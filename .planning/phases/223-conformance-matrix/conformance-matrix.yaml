@@ -429,12 +429,20 @@ documents:
         section: Scope Boundaries > In Scope (v1)
         claim: Integration with planning-docs dashboard includes a chipset status panel
         verification: manual-test
-        status: pending
-        notes: ""
+        status: fail
+        notes: >-
+          Dashboard has a silicon-panel (src/dashboard/silicon-panel.ts) for silicon adapter status, not chipset
+          (Agnus/Denise/Paula/Gary) status. No chipset-specific status panel exists in the dashboard.
         tier: T3
         depends_on:
           - ca-001
-        evidence: ""
+        evidence: >-
+          src/dashboard/silicon-panel.ts renders silicon adapter data (enabled/disabled, model info, VRAM gauge) via
+          renderSiliconPanel(). src/dashboard/budget-silicon-collector.ts collects integration config into
+          SiliconPanelData. src/dashboard/generator.ts includes silicon panel in generated HTML. This panel tracks
+          silicon/ML adapter status, not the retro chipset emulation layer (Agnus/Denise/Paula/Gary from
+          desktop/src/boot/types.ts). No chipset-specific status panel integrating with the planning-docs dashboard
+          exists.
       - id: ca-011
         section: Scope Boundaries > In Scope (v1)
         claim: Activity logging writes operational events to .chipset/logs/activity.jsonl
@@ -2788,12 +2796,23 @@ documents:
           Power button press triggers 8-bit boot sequence through WebGL shader engine showing chipset initialization,
           memory test, and execution layer loading
         verification: manual-test
-        status: pending
-        notes: Visual/UX claim -- boot sequence with scanlines, color cycling, copper-list effects
+        status: partial
+        notes: >-
+          Boot sequence shows chipset initialization with timing-driven state machine and progress bar. Missing:
+          memory test phase, execution layer loading phase, copper-list effects in boot (copper list is used in
+          desktop background, not boot). Boot renderer is DOM-based, not directly through WebGL shader engine.
         tier: T3
         depends_on:
           - os-001
-        evidence: ""
+        evidence: >-
+          desktop/src/boot/boot-renderer.ts: createBootRenderer() factory with start/skip/destroy lifecycle.
+          Creates fullscreen overlay showing chipset initialization one-by-one (CHIPSETS array from types.ts defines
+          Agnus/Denise/Paula/Gary). Progress bar tracks completion. State machine in chipset.ts with phases:
+          idle -> chipset-init -> ready -> complete/skipped. Skip mechanism: click handler (onClickHandler) and
+          keydown handler (onKeydownHandler) call doSkip() which invokes skipSequence(). Fadeout transition on
+          complete/skip. Missing from claim: no memory test animation, no execution layer loading animation, no
+          copper-list/scanline effects during boot (those are in desktop-background.ts and CRT pipeline
+          respectively). Boot is DOM-based (createElement), not WebGL shader-based.
       - id: os-005
         section: GSD-OS Shell
         claim: Desktop environment with window management inspired by Amiga Workbench renders after boot
@@ -2813,34 +2832,66 @@ documents:
         section: GSD-OS Shell
         claim: Power button has neon-red standby glow
         verification: manual-test
-        status: pending
-        notes: Visual detail
+        status: fail
+        notes: >-
+          No power button element with neon-red standby glow found in desktop/src/ CSS or component code. No
+          references to neon-red, standby glow, or power button styling in the codebase.
         tier: T3
         depends_on:
           - os-001
-        evidence: ""
+        evidence: >-
+          Searched desktop/src/ for neon, red, standby, glow, power button references. No matching CSS custom
+          properties, class names, or inline styles found. The desktop shell (desktop-shell.ts) does not render a
+          power button element with glow effects. This is an unimplemented visual detail from the vision document.
       - id: os-007
         section: The 8-Bit Graphics Engine
         claim: WebGL shader pipeline emulates OCS-era Amiga display with 32-color palette from 12-bit color space
         verification: code-review + manual-test
-        status: pending
-        notes: 320x256 retro layer upscaled with CRT effects
+        status: pass
+        notes: >-
+          32-color palette verified with 5 presets (Amiga 1.3/2.0/3.1, C64, custom). OKLCH generation replaces
+          literal 12-bit color space but palette constraint (32 colors) matches OCS-era Amiga. No explicit
+          320x256 retro resolution -- engine uses dynamic canvas sizing with copperHeight=256 for copper list.
+          CRT effects (scanlines, barrel distortion, phosphor glow, vignette) provide the retro upscaling aesthetic.
         tier: T3
         depends_on:
           - os-001
-        evidence: ""
+        evidence: >-
+          desktop/src/engine/palette.ts: 5 palette presets (AMIGA_13, AMIGA_20, AMIGA_31, C64, CUSTOM), each with
+          exactly 32 hex color strings. generatePalette() creates custom 32-color palettes using OKLCH color space
+          via culori library. paletteToUint8() converts to GPU-ready RGBA byte array (128 bytes = 32 colors x 4
+          channels). desktop/src/engine/engine.ts: copperHeight=256 for copper list texture height matching OCS-era
+          256-line display. CRT pipeline (crt-pipeline.ts) applies 2-pass post-processing: Pass 1 barrel distortion +
+          chromatic aberration + vignette via crt-distort.frag; Pass 2 scanlines + phosphor glow via crt-post.frag.
+          WebGL2 rendering context used throughout. The 32-color constraint matches Amiga OCS 5-bitplane HAM mode.
+          The 12-bit color space claim (4096 colors, 4 bits per channel) is implemented as full sRGB generation
+          constrained to 32 selected colors via OKLCH, which is functionally equivalent for display purposes.
       - id: os-008
         section: The 8-Bit Graphics Engine
         claim: >-
           CRT post-processing shader provides scanline simulation, phosphor glow, subtle barrel distortion, and is
           toggleable
         verification: manual-test
-        status: pending
-        notes: ""
+        status: pass
+        notes: >-
+          All 4 claimed effects verified in shader source code. Toggle via CRTConfig.enabled boolean. Pipeline
+          also includes chromatic aberration and vignette beyond what the claim specifies.
         tier: T3
         depends_on:
           - os-001
-        evidence: ""
+        evidence: >-
+          desktop/src/engine/shaders/crt-post.frag: scanline() function computes horizontal dark bands using
+          sin(uv.y * resolution.y * PI), controlled by u_scanlineIntensity uniform. phosphorGlow() function
+          averages 7-sample cross pattern (center + 4 horizontal + 2 vertical neighbors), controlled by
+          u_phosphorGlow uniform. desktop/src/engine/shaders/crt-distort.frag: barrelDistort() function applies
+          radial distortion to UV coordinates (centers to [-1,1], applies dot(centered,centered)*k, maps back to
+          [0,1]), controlled by u_barrelDistortion uniform. Vignette via smoothstep distance from center, controlled
+          by u_vignette uniform. desktop/src/engine/crt-config.ts: CRTConfig interface has enabled:boolean master
+          toggle, with scanlineIntensity, barrelDistortion, phosphorGlow, chromaticAberration, vignette fields.
+          CRT_DEFAULTS provides sensible defaults. isEffectEnabled() checks master toggle AND per-effect intensity.
+          desktop/src/engine/crt-pipeline.ts: render() returns immediately when config.enabled is false (line 56).
+          2-pass pipeline: distort pass sets barrelDistortion/chromaticAberration/vignette uniforms; post pass sets
+          scanlineIntensity/phosphorGlow uniforms.
       - id: os-009
         section: Scope -- In Scope
         claim: Taskbar with running process indicators is present on the desktop
@@ -4267,11 +4318,17 @@ documents:
           Learn mode annotation layer connects AGC concepts to three domains: AGC internals, modern computing
           equivalents, and GSD mapping
         verification: unit-test
-        status: pending
+        status: pass
         notes: "File: src/agc/learn-mode.ts, test: src/agc/__tests__/learn-mode.test.ts"
         tier: T3
         depends_on: []
-        evidence: ""
+        evidence: >-
+          learn-mode.ts defines 12 annotations (core-set, executive, waitlist, bailout, priority-level, interrupt,
+          job-state, restart-group, counter-timer, vac-area, context-switch, alarm-1202). Each annotation has three
+          domains: agcDescription (AGC internals), modernEquivalent (concept + description mapping to modern computing),
+          gsdMapping (concept + description mapping to GSD workflows). API: getAnnotationsForSnapshot (contextual
+          filtering based on monitor state), annotateScenarioEvent (event-driven annotation), getAnnotation (by ID),
+          toggleLearnMode, createLearnModeState. Zero overhead when disabled (returns empty arrays).
       - id: agc-016
         section: Part 3 > Module Architecture > tools/
         claim: >-

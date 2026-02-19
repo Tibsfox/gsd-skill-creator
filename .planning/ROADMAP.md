@@ -106,7 +106,12 @@ Plans:
   3. Dashboard color scheme uses the information design spec (6 domain colors, 4 signal colors); topology view renders SVG bezier edges with click-to-detail; entity shapes use dual encoding (shape+color)
   4. AGC curriculum renders correctly and exercises produce the outcomes described in the curriculum documents
   5. Accessibility mode activates on prefers-reduced-motion and prefers-contrast media queries
-**Plans**: TBD
+**Plans:** 4 plans
+Plans:
+- [ ] 227-01-PLAN.md -- Audit GSD-OS desktop: Tauri build, CRT shader, window manager, boot sequence, accessibility (POLISH-01, POLISH-02, POLISH-03, POLISH-04, POLISH-09)
+- [ ] 227-02-PLAN.md -- Audit dashboard design system: color scheme, topology, entity shapes, gantry, layout (POLISH-05, POLISH-06, POLISH-07)
+- [ ] 227-03-PLAN.md -- Audit educational content: AGC curriculum, RFC, BBS, Creative Suite (POLISH-08)
+- [ ] 227-04-PLAN.md -- Audit peripheral systems: ISA docs, planning docs, console, cloud-ops, Wetty/tmux; finalize T3 tier (POLISH-05, POLISH-06, POLISH-07, POLISH-08, POLISH-09)
 
 ### Phase 228: End-to-End Verification
 **Goal**: A full proof run demonstrates the system working end-to-end -- upload through staging through lifecycle through observation through dashboard through metrics -- with all tier conformance gates met and zero undocumented divergences
@@ -152,8 +157,8 @@ Phases execute in numeric order: 223 → 224 → 225 → 226 → 227 → 228 →
 | 223. Conformance Matrix | 6/6 | Complete    | 2026-02-19 |
 | 224. Foundation Audit (T0) | 3/3 | Complete    | 2026-02-19 |
 | 225. Integration Audit (T1) | 6/6 | Complete    | 2026-02-19 |
-| 226. Behavior Audit (T2) | 7/7 | Complete   | 2026-02-19 |
-| 227. UX/Polish Audit (T3) | 0/TBD | Not started | - |
+| 226. Behavior Audit (T2) | 7/7 | Complete    | 2026-02-19 |
+| 227. UX/Polish Audit (T3) | 0/4 | Planned | - |
 | 228. End-to-End Verification | 0/TBD | Not started | - |
 | 229. Documentation & Amendments | 0/TBD | Not started | - |
 | 230. Verification Environment (Stretch) | 0/TBD | Not started | - |
