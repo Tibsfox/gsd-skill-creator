@@ -87,6 +87,10 @@ Recent decisions affecting current work:
 - [234-02]: 60-day staleness for critical-path boundaries (Console, Staging, AMIGA, Orchestrator)
 - [234-02]: 90-day staleness for standard boundaries (Copper, SessionEventBridge, Collectors, Skill)
 - [234-02]: 4 re-verification triggers: schema change, Zod major bump, milestone completion, new subscriber
+- [234-03]: _fixture_meta field leverages .passthrough() for provenance tracking without schema modification
+- [234-03]: Fixtures are append-only (never deleted) -- old fixtures become regression tests
+- [234-03]: 3 audit exceptions: watcher.rs (permanent), dashboard/refresh.ts (pending migration), test files (permanent)
+- [234-03]: Audit automation via shell script with non-zero exit on unexpected findings
 
 ### Key Context
 
@@ -108,5 +112,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 234-02-PLAN.md (semantic test cases per boundary, freshness policy with producer-side ownership, staleness detection)
+Stopped at: Completed 234-03-PLAN.md (fixture strategy for 6 flows, EventDispatcher compliance audit with 4-category grep detection)
 Resume file: None
