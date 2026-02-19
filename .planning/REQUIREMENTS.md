@@ -50,8 +50,8 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 
 ### Virus Scanning
 
-- [ ] **SCN-01**: Signature-based scanning against a database of >=50 known Amiga virus byte patterns
-- [ ] **SCN-02**: Detect the 20 most common Amiga viruses by signature (SCA, Byte Bandit, Lamer Exterminator, IRQ, BGS9, HNY96, Saddam, DASA, etc.)
+- [x] **SCN-01**: Signature-based scanning against a database of >=50 known Amiga virus byte patterns
+- [x] **SCN-02**: Detect the 20 most common Amiga viruses by signature (SCA, Byte Bandit, Lamer Exterminator, IRQ, BGS9, HNY96, Saddam, DASA, etc.)
 - [x] **SCN-03**: Parse AmigaOS hunk executable format (HUNK_HEADER through HUNK_END)
 - [ ] **SCN-04**: Heuristic analysis detecting anomalous hunk structures and known infection patterns
 - [ ] **SCN-05**: Boot block analysis detecting unauthorized trackdisk.device access patterns
@@ -61,7 +61,7 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [ ] **SCN-09**: Community checksum cross-reference against known-good hashes
 - [ ] **SCN-10**: Configurable scan depth via scan-policy.yaml (fast/standard/thorough)
 - [ ] **SCN-11**: Batch scanning for bulk download processing
-- [ ] **SCN-12**: Signature database stored as extensible JSON — new signatures addable by dropping files
+- [x] **SCN-12**: Signature database stored as extensible JSON — new signatures addable by dropping files
 - [ ] **SCN-13**: Heuristic scanner achieves >=80% boot block virus detection rate vs VirusZ reference
 
 ### Installation
@@ -115,7 +115,7 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [x] **NFR-06**: Mirror downloads identify as GSD-Aminet-Pack and respect rate limits
 - [ ] **NFR-07**: All SKILL.md files follow GSD skill format specification
 - [ ] **NFR-08**: All agent YAML follows GSD chipset architecture conventions
-- [ ] **NFR-09**: Virus signature database extensible without code changes
+- [x] **NFR-09**: Virus signature database extensible without code changes
 - [ ] **NFR-10**: Pack functions as standalone skill set — no modifications to GSD core required
 
 ## Future Requirements
@@ -179,8 +179,8 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | MIR-10 | Phase 237 | Pending |
 | MIR-11 | Phase 237 | Complete |
 | MIR-12 | Phase 237 | Complete |
-| SCN-01 | Phase 239 | Pending |
-| SCN-02 | Phase 239 | Pending |
+| SCN-01 | Phase 239 | Complete |
+| SCN-02 | Phase 239 | Complete |
 | SCN-03 | Phase 236 | Complete |
 | SCN-04 | Phase 239 | Pending |
 | SCN-05 | Phase 239 | Pending |
@@ -190,7 +190,7 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | SCN-09 | Phase 239 | Pending |
 | SCN-10 | Phase 239 | Pending |
 | SCN-11 | Phase 239 | Pending |
-| SCN-12 | Phase 239 | Pending |
+| SCN-12 | Phase 239 | Complete |
 | SCN-13 | Phase 239 | Pending |
 | INS-01 | Phase 240 | Pending |
 | INS-02 | Phase 240 | Pending |
@@ -229,7 +229,7 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | NFR-06 | Phase 237 | Complete |
 | NFR-07 | Phase 242 | Pending |
 | NFR-08 | Phase 242 | Pending |
-| NFR-09 | Phase 239 | Pending |
+| NFR-09 | Phase 239 | Complete |
 | NFR-10 | Phase 242 | Pending |
 
 **Coverage:**
