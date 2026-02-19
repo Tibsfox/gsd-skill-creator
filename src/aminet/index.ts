@@ -217,6 +217,42 @@ export { checkScanGate, installPackage } from './scan-gate.js';
 export type { InstallPackageOptions } from './scan-gate.js';
 
 // ============================================================================
+// Emulator configuration (Phase 241)
+// ============================================================================
+
+export { generateFsUaeConfig, buildFsUaeConfig } from './emulator-config.js';
+
+// ============================================================================
+// Hardware profiles (Phase 241)
+// ============================================================================
+
+export { HARDWARE_PROFILES, getProfile, getAllProfiles, getProfileForModel } from './hardware-profiles.js';
+
+// ============================================================================
+// ROM management (Phase 241)
+// ============================================================================
+
+export { computeCrc32, KNOWN_ROMS, scanRomDirectory, selectRomForProfile, decryptCloantoRom } from './rom-manager.js';
+
+// ============================================================================
+// Emulator launch (Phase 241)
+// ============================================================================
+
+export { selectProfileFromReadme, launchEmulator, writeFsUaeConfig } from './emulator-launch.js';
+
+// ============================================================================
+// WHDLoad integration (Phase 241)
+// ============================================================================
+
+export { detectSlaveFiles, buildWhdloadConfig, WHDLOAD_KICKSTART_MAP } from './whdload.js';
+
+// ============================================================================
+// Emulator state management (Phase 241)
+// ============================================================================
+
+export { saveSnapshot, listSnapshots, deleteSnapshot, buildMissingRomGuidance, shouldDisableSaveStates } from './emulator-state.js';
+
+// ============================================================================
 // Types (inferred from Zod schemas)
 // ============================================================================
 
@@ -266,6 +302,15 @@ export type {
   InstalledFile,
   InstallManifest,
   ScanGateResult,
+  HardwareProfileId,
+  HardwareProfile,
+  KnownRom,
+  DetectedRom,
+  FsUaeConfig,
+  LaunchConfig,
+  LaunchResult,
+  WhdloadEntry,
+  EmulatorSnapshot,
 } from './types.js';
 
 // ============================================================================
@@ -319,6 +364,15 @@ export {
   InstalledFileSchema,
   InstallManifestSchema,
   ScanGateResultSchema,
+  HardwareProfileIdSchema,
+  HardwareProfileSchema,
+  KnownRomSchema,
+  DetectedRomSchema,
+  FsUaeConfigSchema,
+  LaunchConfigSchema,
+  LaunchResultSchema,
+  WhdloadEntrySchema,
+  EmulatorSnapshotSchema,
 } from './types.js';
 
 // ============================================================================
