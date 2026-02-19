@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 232: Shared EventDispatcher Specification** - Unify 6 independent file-watching designs into one canonical spec with subscriber protocol and watch budget
 - [x] **Phase 233: Dependency Philosophy by Layer** - Define external dependency contracts for Core/Middleware/Platform/Educational tiers with enforcement mechanisms (completed 2026-02-19)
 - [x] **Phase 234: Integration Test Strategy** - Establish cross-component contract testing approach with priority test flows and freshness policies (completed 2026-02-19)
-- [ ] **Phase 235: Partial-Build Compatibility Matrix** - Document component-pair behavior at multiple maturity levels with graceful degradation specs
+- [x] **Phase 235: Partial-Build Compatibility Matrix** - Document component-pair behavior at multiple maturity levels with graceful degradation specs (completed 2026-02-19)
 
 ## Phase Details
 
@@ -82,9 +82,9 @@ Plans:
 **Plans:** 3/3 plans complete
 
 Plans:
-- [ ] 234-01-PLAN.md — Contract testing approach (Zod + Vitest, Pact rejection), 6 priority flows with I/O, boundary schema inventory
-- [ ] 234-02-PLAN.md — Semantic test cases per boundary and freshness policies with ownership table
-- [ ] 234-03-PLAN.md — Fixture directory structure and EventDispatcher compliance audit step
+- [x] 234-01-PLAN.md — Contract testing approach (Zod + Vitest, Pact rejection), 6 priority flows with I/O, boundary schema inventory
+- [x] 234-02-PLAN.md — Semantic test cases per boundary and freshness policies with ownership table
+- [x] 234-03-PLAN.md — Fixture directory structure and EventDispatcher compliance audit step
 
 ### Phase 235: Partial-Build Compatibility Matrix
 **Goal**: Any developer building a subset of the ecosystem can look up exactly what works, what degrades gracefully, and what breaks — with user-visible signals and resolution actions for every degradation scenario
@@ -96,7 +96,12 @@ Plans:
   3. The capability probe protocol is defined (structured version + maturity response), so components can detect peers beyond binary filesystem-presence checks
   4. The matrix distinguishes "not built yet" from "permanently deferred" by cross-referencing known-issues.md (32 ISA items, 13 Silicon/ML, 13 hardware-only), and declares a re-evaluation trigger at every milestone completion
   5. Every component has a documented "standalone mode" describing minimum viable behavior without any peers
-**Plans**: TBD
+**Plans:** 3/3 plans complete
+
+Plans:
+- [x] 235-01-PLAN.md — Known-issues cross-reference and component-pair compatibility matrix with maintenance triggers
+- [x] 235-02-PLAN.md — Graceful degradation specifications and per-component standalone modes
+- [x] 235-03-PLAN.md — Capability probe protocol with 3-tier detection hierarchy
 
 ## Progress
 
@@ -108,8 +113,8 @@ Phases execute in numeric order: 231 → 232 → 233 → 234 → 235
 | 231. Ecosystem Dependency Map | 3/3 | Complete    | 2026-02-19 |
 | 232. Shared EventDispatcher Specification | 3/3 | Complete    | 2026-02-19 |
 | 233. Dependency Philosophy by Layer | 2/2 | Complete    | 2026-02-19 |
-| 234. Integration Test Strategy | 3/3 | Complete   | 2026-02-19 |
-| 235. Partial-Build Compatibility Matrix | 0/TBD | Not started | - |
+| 234. Integration Test Strategy | 3/3 | Complete    | 2026-02-19 |
+| 235. Partial-Build Compatibility Matrix | 3/3 | Complete    | 2026-02-19 |
 
 ---
 *Roadmap created: 2026-02-19*
