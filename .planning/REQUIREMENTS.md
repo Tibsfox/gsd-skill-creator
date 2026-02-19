@@ -66,8 +66,8 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 
 ### Installation
 
-- [ ] **INS-01**: Extract LhA archives (methods -lh0- through -lh7-) via `lha` or `lhasa`
-- [ ] **INS-02**: Extract LZX archives via `unlzx`
+- [x] **INS-01**: Extract LhA archives (methods -lh0- through -lh7-) via `lha` or `lhasa`
+- [x] **INS-02**: Extract LZX archives via `unlzx`
 - [ ] **INS-03**: Map extracted files to emulated Amiga filesystem paths (Libs->LIBS:, C->C:, etc.)
 - [ ] **INS-04**: Detect dependencies from .readme `Requires:` field
 - [ ] **INS-05**: Report missing dependencies to user
@@ -75,7 +75,7 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [ ] **INS-07**: Refuse installation of unscanned packages (scan gate)
 - [ ] **INS-08**: Refuse installation of infected packages
 - [ ] **INS-09**: Allow user override for suspicious packages with explicit confirmation
-- [ ] **INS-10**: Check for required extraction tools at initialization, guide user to install if missing
+- [x] **INS-10**: Check for required extraction tools at initialization, guide user to install if missing
 
 ### Emulator Integration
 
@@ -192,8 +192,8 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | SCN-11 | Phase 239 | Complete |
 | SCN-12 | Phase 239 | Complete |
 | SCN-13 | Phase 239 | Complete |
-| INS-01 | Phase 240 | Pending |
-| INS-02 | Phase 240 | Pending |
+| INS-01 | Phase 240 | Complete |
+| INS-02 | Phase 240 | Complete |
 | INS-03 | Phase 240 | Pending |
 | INS-04 | Phase 240 | Pending |
 | INS-05 | Phase 240 | Pending |
@@ -201,7 +201,7 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | INS-07 | Phase 240 | Pending |
 | INS-08 | Phase 240 | Pending |
 | INS-09 | Phase 240 | Pending |
-| INS-10 | Phase 240 | Pending |
+| INS-10 | Phase 240 | Complete |
 | EMU-01 | Phase 241 | Pending |
 | EMU-02 | Phase 241 | Pending |
 | EMU-03 | Phase 241 | Pending |
