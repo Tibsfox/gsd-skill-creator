@@ -124,6 +124,16 @@ export function assembleProgramSource(source: string): Word15[] {
   const maxAddr = 0o10000; // 12-bit address space
   const words: Word15[] = new Array(maxAddr).fill(0);
 
+  // Built-in register symbols (Block II AGC register addresses)
+  symbolTable.set('A',    0o0);
+  symbolTable.set('L',    0o1);
+  symbolTable.set('Q',    0o2);
+  symbolTable.set('EB',   0o3);
+  symbolTable.set('FB',   0o4);
+  symbolTable.set('Z',    0o5);
+  symbolTable.set('BB',   0o6);
+  symbolTable.set('ZERO', 0o7);
+
   // Track which addresses need the EXTEND prefix
   const needsExtend = new Set<number>();
 
