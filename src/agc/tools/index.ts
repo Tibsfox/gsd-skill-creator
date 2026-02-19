@@ -22,3 +22,7 @@ export { assemble, assembleLine } from './assembler.js';
 // Debugger
 export type { BreakReason, DebugEvent, RegisterSnapshot, DebugSnapshot } from './debugger.js';
 export { AgcDebugger } from './debugger.js';
+
+// Validation
+export type { TestCase, TestAssertion, TestResult, ValidationResult } from './validation.js';
+export { runTestCase, runValidationSuite, createTestProgram } from './validation.js';
