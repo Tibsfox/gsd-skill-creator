@@ -99,11 +99,11 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 
 ### Agent & Team Architecture
 
-- [ ] **AGT-01**: Five agents defined: AM-1 Archive, AM-2 Mirror, AM-3 Scanner, AM-4 Installer, AM-5 Emulator
+- [x] **AGT-01**: Five agents defined: AM-1 Archive, AM-2 Mirror, AM-3 Scanner, AM-4 Installer, AM-5 Emulator
 - [ ] **AGT-02**: Team pipeline (aminet-pipeline.yaml) coordinating all agents through the full lifecycle
 - [ ] **AGT-03**: Scan gate enforced — pipeline blocks installation if scan status != clean
-- [ ] **AGT-04**: Resource locks on .mirror-state.json and .quarantine/
-- [ ] **AGT-05**: Filesystem message bus for inter-agent communication
+- [x] **AGT-04**: Resource locks on .mirror-state.json and .quarantine/
+- [x] **AGT-05**: Filesystem message bus for inter-agent communication
 
 ### Non-Functional
 
@@ -114,7 +114,7 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [x] **NFR-05**: No Kickstart ROM files distributed with the pack
 - [x] **NFR-06**: Mirror downloads identify as GSD-Aminet-Pack and respect rate limits
 - [ ] **NFR-07**: All SKILL.md files follow GSD skill format specification
-- [ ] **NFR-08**: All agent YAML follows GSD chipset architecture conventions
+- [x] **NFR-08**: All agent YAML follows GSD chipset architecture conventions
 - [x] **NFR-09**: Virus signature database extensible without code changes
 - [ ] **NFR-10**: Pack functions as standalone skill set — no modifications to GSD core required
 
@@ -216,11 +216,11 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | UI-02 | Phase 242 | Pending |
 | UI-03 | Phase 242 | Pending |
 | UI-04 | Phase 242 | Pending |
-| AGT-01 | Phase 242 | Pending |
+| AGT-01 | Phase 242 | Complete |
 | AGT-02 | Phase 242 | Pending |
 | AGT-03 | Phase 242 | Pending |
-| AGT-04 | Phase 242 | Pending |
-| AGT-05 | Phase 242 | Pending |
+| AGT-04 | Phase 242 | Complete |
+| AGT-05 | Phase 242 | Complete |
 | NFR-01 | Phase 236 | Complete |
 | NFR-02 | Phase 236 | Complete |
 | NFR-03 | Phase 239 | Complete |
@@ -228,7 +228,7 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | NFR-05 | Phase 241 | Complete |
 | NFR-06 | Phase 237 | Complete |
 | NFR-07 | Phase 242 | Pending |
-| NFR-08 | Phase 242 | Pending |
+| NFR-08 | Phase 242 | Complete |
 | NFR-09 | Phase 239 | Complete |
 | NFR-10 | Phase 242 | Pending |
 
