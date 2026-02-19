@@ -82,7 +82,7 @@ Requirements for v1.24 — GSD Conformance Audit & Hardening. Each maps to roadm
 
 - [x] **AMEND-01**: Every vision document divergence is resolved: fixed in code or amended in vision doc
 - [x] **AMEND-02**: Vision doc amendments follow the protocol: checkpoint ID, original claim, actual state, resolution, updated spec
-- [ ] **AMEND-03**: Installation documentation is verified to be accurate and complete (clean-machine test deferred to ENV-05)
+- [x] **AMEND-03**: Installation documentation is verified to be accurate and complete (clean-machine test deferred to ENV-05)
 - [x] **AMEND-04**: Known issues list documents anything deferred, with rationale
 
 ### Verification Environment (Stretch)
@@ -180,7 +180,7 @@ Deferred to future milestones. Tracked but not in current roadmap.
 | E2E-07 | Phase 228 | Complete |
 | AMEND-01 | Phase 229 | Complete |
 | AMEND-02 | Phase 229 | Complete |
-| AMEND-03 | Phase 229 | Pending |
+| AMEND-03 | Phase 229 | Complete |
 | AMEND-04 | Phase 229 | Complete |
 | ENV-01 | Phase 230 | Pending |
 | ENV-02 | Phase 230 | Pending |
