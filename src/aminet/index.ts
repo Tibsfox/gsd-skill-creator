@@ -64,6 +64,34 @@ export {
 } from './mirror-state.js';
 
 // ============================================================================
+// Package downloading
+// ============================================================================
+
+export { fetchPackage } from './package-fetcher.js';
+export type { FetchResult } from './package-fetcher.js';
+
+// ============================================================================
+// Integrity verification
+// ============================================================================
+
+export { computeSha256, verifySizeKb, verifyIntegrity } from './integrity.js';
+export type { IntegrityResult } from './integrity.js';
+
+// ============================================================================
+// Bulk downloading
+// ============================================================================
+
+export { bulkDownload } from './bulk-downloader.js';
+export type { BulkDownloadResult } from './bulk-downloader.js';
+
+// ============================================================================
+// Sync detection
+// ============================================================================
+
+export { detectChanges, detectNewPackages, detectRemovedPackages } from './sync-detector.js';
+export type { SyncReport } from './sync-detector.js';
+
+// ============================================================================
 // Types (inferred from Zod schemas)
 // ============================================================================
 
