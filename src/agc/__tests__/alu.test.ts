@@ -245,9 +245,10 @@ describe('AGC Ones Complement ALU', () => {
       expect(result.overflow).toBe(false);
     });
 
-    it('decrements +0 to -0', () => {
+    it('decrements +0 to -1', () => {
+      // In ones' complement: +0 + (-1) = 0 + 0o77776 = -1 (0o77776)
       const result = onesDecrement(0o00000);
-      expect(result.value).toBe(0o77777); // -0
+      expect(result.value).toBe(0o77776); // -1
       expect(result.overflow).toBe(false);
     });
   });
