@@ -52,12 +52,12 @@ Requirements for v1.25. Each maps to roadmap phases.
 
 ### Partial-Build Compatibility
 
-- [ ] **COMPAT-01**: Component-pair compatibility matrix documents behavior for every pair with at least 3 states (absent, partial, full) and version ranges
+- [x] **COMPAT-01**: Component-pair compatibility matrix documents behavior for every pair with at least 3 states (absent, partial, full) and version ranges
 - [ ] **COMPAT-02**: Graceful degradation specification per component defines technical behavior AND user-visible signal AND resolution action when a peer is missing
 - [x] **COMPAT-03**: Capability probe protocol defines structured readiness signals beyond binary filesystem-presence detection (version + maturity state)
 - [x] **COMPAT-04**: Feature flags via filesystem-presence detection pattern is documented as the standard mechanism for progressive component availability
-- [ ] **COMPAT-05**: Known-issues cross-reference annotates matrix with implementation likelihood, distinguishing "not built yet" from "permanently deferred" (32 ISA items, 13 Silicon/ML, 13 hardware-only)
-- [ ] **COMPAT-06**: Matrix update trigger declares re-evaluation at every milestone completion with last-updated timestamp
+- [x] **COMPAT-05**: Known-issues cross-reference annotates matrix with implementation likelihood, distinguishing "not built yet" from "permanently deferred" (32 ISA items, 13 Silicon/ML, 13 hardware-only)
+- [x] **COMPAT-06**: Matrix update trigger declares re-evaluation at every milestone completion with last-updated timestamp
 - [ ] **COMPAT-07**: Per-component "standalone mode" spec describes minimum viable behavior without any peers
 
 ## Future Requirements
@@ -129,12 +129,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INTTEST-05 | Phase 234 | Complete |
 | INTTEST-06 | Phase 234 | Complete |
 | INTTEST-07 | Phase 234 | Complete |
-| COMPAT-01 | Phase 235 | Pending |
+| COMPAT-01 | Phase 235 | Complete |
 | COMPAT-02 | Phase 235 | Pending |
 | COMPAT-03 | Phase 235 | Complete |
 | COMPAT-04 | Phase 235 | Complete |
-| COMPAT-05 | Phase 235 | Pending |
-| COMPAT-06 | Phase 235 | Pending |
+| COMPAT-05 | Phase 235 | Complete |
+| COMPAT-06 | Phase 235 | Complete |
 | COMPAT-07 | Phase 235 | Pending |
 
 **Coverage:**
