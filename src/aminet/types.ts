@@ -880,3 +880,118 @@ export const ScanPolicyConfigSchema = z.object({
   }).optional(),
 });
 export type ScanPolicyConfig = z.infer<typeof ScanPolicyConfigSchema>;
+
+// ============================================================================
+// Installation types (Phase 240)
+// ============================================================================
+
+/**
+ * Result of extracting an archive to a temp directory.
+ */
+export const ExtractionResultSchema = z.object({
+  /** Relative file paths extracted (relative to extractDir) */
+  files: z.array(z.string()),
+  /** Absolute path to temp extraction directory */
+  extractDir: z.string(),
+  /** Archive format detected */
+  format: z.enum(['lha', 'lzx']),
+});
+export type ExtractionResult = z.infer<typeof ExtractionResultSchema>;
+
+/**
+ * Status of an external extraction tool (lha, unlzx).
+ */
+export const ToolStatusSchema = z.object({
+  /** Tool name */
+  name: z.string(),
+  /** Whether tool is available on the system */
+  available: z.boolean(),
+  /** Tool version string, null if unavailable or no --version */
+  version: z.string().nullable(),
+  /** Platform-specific install instructions */
+  installGuide: z.string(),
+  /** Whether this tool is required (true) or optional with graceful degradation (false) */
+  required: z.boolean(),
+});
+export type ToolStatus = z.infer<typeof ToolStatusSchema>;
+
+/**
+ * Configuration for installing a package into the emulated filesystem.
+ */
+export const InstallConfigSchema = z.object({
+  /** Root of the emulated Amiga filesystem (acts as SYS:) */
+  sysRoot: z.string(),
+  /** Optional custom install path relative to sysRoot (e.g., "Games/MyGame") */
+  customPath: z.string().optional(),
+});
+export type InstallConfig = z.infer<typeof InstallConfigSchema>;
+
+/**
+ * Dependency reference types found in Aminet .readme Requires: field.
+ */
+export const DependencyTypeSchema = z.enum([
+  'package',      // Full Aminet path: "util/libs/mui38usr.lha"
+  'os_version',   // OS requirement: "OS 3.0+", "AmigaOS 2.0"
+  'hardware',     // Hardware requirement: "68020+", "AGA", "RTG"
+  'library',      // Library name without path: "muimaster.library"
+  'unknown',      // Unclassified
+]);
+export type DependencyType = z.infer<typeof DependencyTypeSchema>;
+
+/**
+ * A classified dependency from the .readme Requires: field.
+ */
+export const DependencySchema = z.object({
+  /** Raw string from the Requires: field */
+  raw: z.string(),
+  /** Classified dependency type */
+  type: DependencyTypeSchema,
+  /** For 'package' type: the Aminet fullPath; null for other types */
+  fullPath: z.string().nullable(),
+  /** Whether this dependency is satisfied (package installed or system requirement met) */
+  satisfied: z.boolean(),
+});
+export type Dependency = z.infer<typeof DependencySchema>;
+
+/**
+ * A single file tracked as part of an installation.
+ */
+export const InstalledFileSchema = z.object({
+  /** Path relative to extraction root */
+  sourcePath: z.string(),
+  /** Absolute path where file was placed */
+  destPath: z.string(),
+  /** SHA-256 hash of the placed file */
+  sha256: z.string(),
+});
+export type InstalledFile = z.infer<typeof InstalledFileSchema>;
+
+/**
+ * Per-package installation manifest for tracking and uninstall.
+ */
+export const InstallManifestSchema = z.object({
+  /** Aminet full path (e.g., "mus/edit/ProTracker36.lha") */
+  fullPath: z.string(),
+  /** ISO 8601 timestamp of installation */
+  installedAt: z.string(),
+  /** All files placed during installation */
+  files: z.array(InstalledFileSchema),
+  /** Dependencies detected from .readme */
+  dependencies: z.array(DependencySchema),
+  /** Install path used (sysRoot or custom) */
+  installPath: z.string(),
+});
+export type InstallManifest = z.infer<typeof InstallManifestSchema>;
+
+/**
+ * Result of a scan gate check.
+ */
+export const ScanGateResultSchema = z.object({
+  /** Whether installation is allowed */
+  allowed: z.boolean(),
+  /** Human-readable reason */
+  reason: z.string(),
+  /** Whether the user can override this decision (suspicious packages only) */
+  requiresOverride: z.boolean(),
+});
+export type ScanGateResult = z.infer<typeof ScanGateResultSchema>;
