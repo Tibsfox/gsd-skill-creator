@@ -19,7 +19,7 @@ Progress: [████░░░░░░] 38%
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 20
+- Total plans completed: 22
 - Average duration: 6min
 - Total execution time: 2.1 hours
 
@@ -48,6 +48,7 @@ Progress: [████░░░░░░] 38%
 | 226 P02 | 1 | 7min | 7min |
 | 226 P03 | 1 | 7min | 7min |
 | 226 P01 | 1 | 10min | 10min |
+| 226 P07 | 1 | 10min | 10min |
 
 ## Accumulated Context
 
@@ -102,6 +103,12 @@ Recent decisions affecting current work:
 - [Phase 226]: All 25 staging T2 checkpoints pass: 11 hygiene patterns (4 embedded-instructions, 3 hidden-content, 4 config-safety), trust decay (session->7d->30d->90d), smart intake 3-path routing, scope coherence, provenance propagation, derived content 4 checks
 - [Phase 226]: Safety margin is 5% of context window (MIN_SAFETY_MARGIN_PERCENT=0.05), not 20% as stg-032 claims; marked pass since budget estimation is functionally complete
 - [Phase 226]: Path traversal detects ../ but not ..\ (Windows); YAML bomb uses merge-key count >10 threshold rather than max_depth=5
+- [Phase 226]: GSD ISA vision is largely unimplemented: 21 of 25 ISA T2 checkpoints fail (no GSD-I opcodes, no R0-R7 registers, no FPGA synthesis, no privilege levels, no I/O bridges); AGC is a separate educational ISA
+- [Phase 226]: Pipeline coprocessor (copper/) passes for copper list vision: WAIT/MOVE/SKIP instructions functionally equivalent to vision's copper list concept
+- [Phase 226]: GSD-OS desktop shell passes (DesktopShell, taskbar, process monitor) but block editor UI fails (no typed ports, no blueprint format, no connection validation)
+- [Phase 226]: Hardware workbench checkpoints all fail: no audio/MIDI/camera/GPIO integration code exists; requires physical hardware
+- [Phase 226]: Wetty/tmux checkpoints pass via native PTY: tmux_ensure_session implements attach-or-create; sessions persist across disconnections
+- [Phase 226]: T2 TIER COMPLETE: 180 checkpoints, 104 pass, 76 fail, 0 pending
 
 ### Key Context
 
@@ -121,5 +128,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 226-01-PLAN.md (skill-creator/silicon/AMIGA/agentic T2 behavior audit)
+Stopped at: Completed 226-07-PLAN.md (T2 sweep -- ISA/GSD-OS/workbench/wetty-tmux; T2 tier complete)
 Resume file: None
