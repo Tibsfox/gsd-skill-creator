@@ -2268,14 +2268,20 @@ documents:
           Filesystem message bus uses .planning/console/ directory with inbox/outbox/config/uploads subdirectories for
           bidirectional dashboard-to-session communication
         verification: code-review + integration-test
-        status: pending
-        notes: Foundation of the console architecture
+        status: pass
+        notes: Foundation of the console architecture -- verified at T0 smoke level
         tier: T1
         depends_on:
           - pd-002
           - pd-003
           - stg-006
-        evidence: ""
+        evidence: >-
+          src/console/ module (29 files) implements full filesystem message bus. CONSOLE_DIRS in types.ts defines 8
+          directory paths: root, inboxPending, inboxAcknowledged, outboxQuestions, outboxStatus, outboxNotifications,
+          config, uploads. MessageEnvelope type with id/type/timestamp/source/payload fields. reader.ts reads from
+          inbox, writer.ts writes to outbox, message-handler.ts routes by message type. 221 tests pass across 16 test
+          files. .planning/console/inbox/pending/ directory exists on disk. Dashboard integration test verifies
+          end-to-end message flow.
       - id: dc-002
         section: Architecture -- Message Format
         claim: All messages use JSON with consistent envelope containing id, type, timestamp, source, and payload fields
