@@ -13,7 +13,7 @@ Milestone: v1.26 — Aminet Archive Extension Pack
 Phase: 237 of 242 (Mirror State & Download Engine)
 Plan: 5 of 5 in current phase
 Status: Phase complete
-Last activity: 2026-02-19 — Plan 05 complete (sync detection: detectChanges comparing mirror state vs INDEX, 13 tests)
+Last activity: 2026-02-19 — Plan 04 complete (bulk download engine with concurrency, rate limiting, resume, barrel exports, 11 tests)
 
 Progress: [████████████████████] 100%
 
@@ -31,11 +31,12 @@ Progress: [████████████████████] 100%
 | 237   | 02   | 2min     | 1     | 2     |
 | 237   | 03   | 2min     | 1     | 2     |
 | 237   | 05   | 2min     | 1     | 2     |
+| 237   | 04   | 2min     | 2     | 3     |
 
 **Velocity:**
-- Total plans completed: 10
+- Total plans completed: 11
 - Average duration: 3min
-- Total execution time: 31min
+- Total execution time: 33min
 
 ## Accumulated Context
 
@@ -64,6 +65,7 @@ Progress: [████████████████████] 100%
 - Plan 02: fetchPackage with ordered mirror fallback, directory hierarchy preservation, non-fatal .readme, User-Agent on all requests
 - Plan 03: computeSha256 via node:crypto, verifySizeKb with +/-1 KB tolerance, verifyIntegrity combining both into IntegrityResult
 - Plan 05: detectChanges compares mirror state vs INDEX by sizeKb; only change-eligible statuses (mirrored+) compared; O(1) Map lookup
+- Plan 04: bulkDownload with async semaphore concurrency, global rate limiting gate, resume from interruption, serialized state writes via Promise chain mutex
 
 ### Pending Todos
 
@@ -76,11 +78,11 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 237-05-PLAN.md (sync detection: detectChanges comparing mirror state vs INDEX, 13 tests)
+Stopped at: Completed 237-04-PLAN.md (bulk download engine: concurrency, rate limiting, resume, barrel exports)
 Resume file: None
 
 ## ▶ Next Up
 
-/gsd:execute-phase 237 — continue with plan 04 (bulk download orchestrator)
+Phase 237 complete (all 5 plans shipped). Phase 237 delivered: mirror-state, package-fetcher, integrity, bulk-downloader, sync-detector. 180 total aminet tests, 13 source files in src/aminet/.
 
-Phase 237 plans 01-03+05 shipped, 169 total aminet tests, 12 source files in src/aminet/.
+/gsd:execute-phase 238 — next phase in milestone
