@@ -11,9 +11,9 @@ Requirements for v1.24 — GSD Conformance Audit & Hardening. Each maps to roadm
 
 - [x] **MATRIX-01**: Conformance matrix YAML covers every "In Scope v1" claim from all 18 vision documents
 - [x] **MATRIX-02**: Each checkpoint has a unique ID, source document reference, section reference, verification method, and status field
-- [ ] **MATRIX-03**: Checkpoints are triaged into 4 tiers: T0-Foundation, T1-Integration, T2-Behavior, T3-UX/Polish
-- [ ] **MATRIX-04**: Dependency graph identifies which checkpoints block which other checkpoints
-- [ ] **MATRIX-05**: Estimated effort per tier documented in audit plan
+- [x] **MATRIX-03**: Checkpoints are triaged into 4 tiers: T0-Foundation, T1-Integration, T2-Behavior, T3-UX/Polish
+- [x] **MATRIX-04**: Dependency graph identifies which checkpoints block which other checkpoints
+- [x] **MATRIX-05**: Estimated effort per tier documented in audit plan
 
 ### Foundation Audit (T0)
 
@@ -23,8 +23,8 @@ Requirements for v1.24 — GSD Conformance Audit & Hardening. Each maps to roadm
 - [ ] **FOUND-04**: STATE.md accurately tracks phase position, blockers, and session history
 - [ ] **FOUND-05**: Subagent spawning works for executor, planner, and verifier agents
 - [ ] **FOUND-06**: Filesystem message bus (`.planning/console/` inbox/outbox) writes and reads correctly
-- [ ] **FOUND-07**: All existing unit tests pass on a clean checkout (`npm test` exits 0)
-- [ ] **FOUND-08**: TypeScript compiles with zero errors in strict mode
+- [x] **FOUND-07**: All existing unit tests pass on a clean checkout (`npm test` exits 0)
+- [x] **FOUND-08**: TypeScript compiles with zero errors in strict mode
 
 ### Integration Audit (T1)
 
@@ -127,17 +127,17 @@ Deferred to future milestones. Tracked but not in current roadmap.
 |-------------|-------|--------|
 | MATRIX-01 | Phase 223 | Complete |
 | MATRIX-02 | Phase 223 | Complete |
-| MATRIX-03 | Phase 223 | Pending |
-| MATRIX-04 | Phase 223 | Pending |
-| MATRIX-05 | Phase 223 | Pending |
+| MATRIX-03 | Phase 223 | Complete |
+| MATRIX-04 | Phase 223 | Complete |
+| MATRIX-05 | Phase 223 | Complete |
 | FOUND-01 | Phase 224 | Pending |
 | FOUND-02 | Phase 224 | Pending |
 | FOUND-03 | Phase 224 | Pending |
 | FOUND-04 | Phase 224 | Pending |
 | FOUND-05 | Phase 224 | Pending |
 | FOUND-06 | Phase 224 | Pending |
-| FOUND-07 | Phase 224 | Pending |
-| FOUND-08 | Phase 224 | Pending |
+| FOUND-07 | Phase 224 | Complete |
+| FOUND-08 | Phase 224 | Complete |
 | INTEG-01 | Phase 225 | Pending |
 | INTEG-02 | Phase 225 | Pending |
 | INTEG-03 | Phase 225 | Pending |

@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** Verify the codebase matches its specifications -- then fix every place where it doesn't.
-**Current focus:** Phase 223 - Conformance Matrix
+**Current focus:** Phase 224 - Foundation Audit (T0)
 
 ## Current Position
 
-Phase: 223 (1 of 8) — Conformance Matrix
-Plan: 5 of 6
+Phase: 224 (2 of 8) — Foundation Audit (T0)
+Plan: 1 of 3
 Status: Executing
-Last activity: 2026-02-19 — Completed 223-03 (desktop, console & info design checkpoints)
+Last activity: 2026-02-19 — Completed 224-01 (build health green)
 
-Progress: [█████░░░░░] 50%
+Progress: [██░░░░░░░░] 15%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 2.7min
-- Total execution time: 0.13 hours
+- Total plans completed: 7
+- Average duration: 7min
+- Total execution time: 0.8 hours
 
 **By Phase:**
 
@@ -29,7 +29,11 @@ Progress: [█████░░░░░] 50%
 |-------|-------|-------|----------|
 | 223 P01 | 1 | 3min | 3min |
 | 223 P03 | 1 | 3min | 3min |
+| 223 P04 | 1 | 4min | 4min |
+| 223 P02 | 1 | 4min | 4min |
 | 223 P05 | 1 | 2min | 2min |
+| 223 P06 | 1 | 21min | 21min |
+| 224 P01 | 1 | 14min | 14min |
 
 ## Accumulated Context
 
@@ -45,6 +49,13 @@ Recent decisions affecting current work:
 - [Phase 223]: Cloud ops curriculum limited to structural checkpoints only (scope discipline)
 - [Phase 223]: Wetty/tmux checkpoints include conflict notes for GSD-OS direct PTY approach
 - [Phase 223]: Batch 01 extracted 65 checkpoints from 5 core docs; improvement recommendations included only where they describe implemented features
+- [Phase 223]: Batch 03 extracted 80 checkpoints from 5 docs (desktop, console, info design, screenshot, workbench); info-design/screenshot are almost entirely T3 visual/UX; hardware I/O checkpoints require physical test environment
+- [Phase 223]: Batch 04 extracted 44 checkpoints from 4 educational pack docs; BBS/Creative Suite limited to structural claims (5+6); AGC thorough (25) since fully implemented; RFC pipeline covered (8)
+- [Phase 223]: Batch 02 extracted 102 checkpoints from 3 docs (ISA 42, staging layer 40, planning docs 20); ISA Phase 1 deliverables as T0 audit targets; staging 7-state machine and 11 hygiene patterns individually checkpointed
+- [Phase 223]: Synthesis complete: 336 checkpoints merged into conformance-matrix.yaml (T0=41, T1=51, T2=180, T3=64); audit-plan.md with effort estimates of 43-78 plans for Phases 224-230; 15 high-fan-out nodes and 5 critical paths identified
+- [Phase 224]: Renamed duplicate barrel exports (PackValidationResult, GL1DistributionPlan) rather than removing either
+- [Phase 224]: Excluded desktop/dist/.claude/project-claude from root vitest config (separate test environments)
+- [Phase 224]: Vitest 4.x requires function/class mocks for constructors, not arrow functions (42 mocks fixed)
 
 ### Key Context
 
@@ -64,5 +75,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 223-05-PLAN.md
+Stopped at: Completed 224-01-PLAN.md
 Resume file: None
