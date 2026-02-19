@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 208 of 222 (MC-1/ME-1 Integration) -- COMPLETE
-Plan: 2 of 2 in current phase (COMPLETE)
-Status: Phase 208 complete -- 2 plans, 4 commits, 39 new tests (662 AMIGA tests total)
-Last activity: 2026-02-18 -- Completed Phase 208 (MC-1/ME-1 Integration -- Integration Gate 1)
+Phase: 211 of 222 (Governance Charter & Documentation) -- COMPLETE
+Plan: 3 of 3 in current phase (COMPLETE)
+Status: Phase 211 complete -- 3 plans, 6 commits, 68 new GL-1 tests (829 AMIGA tests total)
+Last activity: 2026-02-19 -- Completed Phase 211 (Governance Charter & Documentation)
 
-Progress: [###########.............] 46% (11/24 phases)
+Progress: [##############..........] 58% (14/24 phases)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.23 Project AMIGA -- Phase 208 complete, Integration Gate 1 cleared
+**Current focus:** v1.23 Project AMIGA -- Phase 211 complete, GL-1 governance charter and documentation shipped
 
 ## Current Milestone
 
@@ -37,6 +37,8 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 8. Phase 208 (MC-1/ME-1 Integration -- Integration Gate 1) COMPLETE -- 2 plans, 4 commits, 39 tests
 9. Integration Gate 1 CLEARED: MC-1 and ME-1 work end-to-end with live telemetry
 10. Full AMIGA test suite: 662 tests passing across 23 test files (zero regressions)
+11. Phase 211 (Governance Charter & Documentation) COMPLETE -- 3 plans, 6 commits, 68 GL-1 tests
+12. Full AMIGA test suite: 829 tests passing across 30 test files (zero regressions)
 
 ## Decisions
 
@@ -82,6 +84,10 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 - MissionController injects gate suspension manually when reaching REVIEW_GATE via single-step engine.transition()
 - Engine re-creation after gate redirect to sync with GateController's internal engine replacement
 - AMIGA barrel exports ME-1 and Integration modules alongside MC-1, ICD, and foundation types
+- Charter uses js-yaml for YAML parsing; ratification hash computed on pre-ratification content via JSON.stringify + SHA-256
+- GovernanceDisputeSchema extends ICD-04 DisputeRecordPayloadSchema via .extend() for schema compatibility
+- Dispute lifecycle is immutable: resolve/reject return new objects, never mutate input
+- GL-1 barrel follows same pattern as MC-1 and ME-1 barrel indexes
 
 ## Accumulated Context
 
@@ -105,8 +111,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18
-Stopped at: Phase 208 (MC-1/ME-1 Integration -- Integration Gate 1) complete -- 2 plans, 4 commits, 39 tests
+Last session: 2026-02-19
+Stopped at: Phase 211 (Governance Charter & Documentation) complete -- 3 plans, 6 commits, 68 GL-1 tests
 
 ### Key Files
 - `.planning/ROADMAP.md` -- 24 phases across 5 waves
@@ -127,4 +133,8 @@ Stopped at: Phase 208 (MC-1/ME-1 Integration -- Integration Gate 1) complete -- 
 - `src/amiga/me1/index.ts` -- ME-1 barrel index (Phase 205 + 206 exports)
 - `src/amiga/integration/mission-controller.ts` -- MissionController wiring real ME-1 to real MC-1 via onEmit bridge
 - `src/amiga/integration/index.ts` -- Integration barrel exports
-- `src/amiga/index.ts` -- AMIGA barrel (types, registry, envelope, ICD, MC-1, ME-1, Integration)
+- `src/amiga/index.ts` -- AMIGA barrel (types, registry, envelope, ICD, MC-1, ME-1, Integration, GL-1)
+- `src/amiga/gl1/charter.ts` -- Commons charter schema, constitutional constraints, ratification with SHA-256
+- `src/amiga/gl1/weighting-docs.ts` -- Weighting algorithm parameter documentation (frequency/critical-path/depth-decay)
+- `src/amiga/gl1/dispute-record.ts` -- Governance dispute record lifecycle extending ICD-04
+- `src/amiga/gl1/index.ts` -- GL-1 barrel exports (Phase 211)
