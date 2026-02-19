@@ -18,3 +18,7 @@ export {
 // Assembler
 export type { AssembledWord, AssemblerResult, AssemblerError } from './assembler.js';
 export { assemble, assembleLine } from './assembler.js';
+
+// Debugger
+export type { BreakReason, DebugEvent, RegisterSnapshot, DebugSnapshot } from './debugger.js';
+export { AgcDebugger } from './debugger.js';
