@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.26 — Aminet Archive Extension Pack, Phase 237
+**Current focus:** v1.26 — Aminet Archive Extension Pack, Phase 238
 
 ## Current Position
 
 Milestone: v1.26 — Aminet Archive Extension Pack
-Phase: 237 of 242 (Mirror State & Download Engine)
-Plan: 5 of 5 in current phase
-Status: Phase complete
-Last activity: 2026-02-19 — Plan 04 complete (bulk download engine with concurrency, rate limiting, resume, barrel exports, 11 tests)
+Phase: 238 of 242 (Search, Browse & Collections)
+Plan: 2 of 5 in current phase
+Status: In progress
+Last activity: 2026-02-19 — Plan 02 complete (category tree browser with architecture/OS filters, 17 tests)
 
-Progress: [████████████████████] 100%
+Progress: [████████░░░░░░░░░░░░] 40%
 
 ## Performance Metrics
 
@@ -32,11 +32,13 @@ Progress: [████████████████████] 100%
 | 237   | 03   | 2min     | 1     | 2     |
 | 237   | 05   | 2min     | 1     | 2     |
 | 237   | 04   | 2min     | 2     | 3     |
+| 238   | 01   | 2min     | 1     | 3     |
+| 238   | 02   | 2min     | 1     | 3     |
 
 **Velocity:**
-- Total plans completed: 11
+- Total plans completed: 13
 - Average duration: 3min
-- Total execution time: 33min
+- Total execution time: 37min
 
 ## Accumulated Context
 
@@ -78,11 +80,11 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 237-04-PLAN.md (bulk download engine: concurrency, rate limiting, resume, barrel exports)
+Stopped at: Completed 238-01-PLAN.md (searchPackages with relevance ranking, 12 tests)
 Resume file: None
 
 ## ▶ Next Up
 
-Phase 237 complete (all 5 plans shipped). Phase 237 delivered: mirror-state, package-fetcher, integrity, bulk-downloader, sync-detector. 180 total aminet tests, 13 source files in src/aminet/.
+Phase 238 Plan 01 complete. Continue executing Phase 238 plans 02-05.
 
-/gsd:execute-phase 238 — next phase in milestone
+/gsd:execute-phase 238 — continue phase

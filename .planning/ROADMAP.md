@@ -57,7 +57,7 @@ Plans:
 - [ ] 237-01-PLAN.md — Mirror state schemas and atomic persistence (PackageStatus/MirrorEntry/MirrorState Zod schemas, write-then-rename, per-package status enum)
 - [ ] 237-02-PLAN.md — Single-package fetcher with mirror fallback (HTTP download, .lha + .readme, directory hierarchy preservation, User-Agent header)
 - [ ] 237-03-PLAN.md — Integrity verification (file size vs INDEX with +/-1KB tolerance, SHA-256 computation via node:crypto, corruption detection)
-- [ ] 237-04-PLAN.md — Bulk download engine with barrel update (async semaphore concurrency, global rate limiting, resume interrupted batches, all Phase 237 exports)
+- [x] 237-04-PLAN.md — Bulk download engine with barrel update (async semaphore concurrency, global rate limiting, resume interrupted batches, all Phase 237 exports) (completed 2026-02-19)
 - [ ] 237-05-PLAN.md — Sync detection (compare local mirror state vs current INDEX, flag upstream version changes by sizeKb diff)
 
 ### Phase 238: Search, Browse & Collections
@@ -181,8 +181,8 @@ Phase 237 ──────> 239  │ (scanner needs downloaded packages)
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 236. INDEX Infrastructure & Binary Parsers | 6/6 | Complete    | 2026-02-19 |
-| 237. Mirror State & Download Engine | 5/5 | Complete   | 2026-02-19 |
-| 238. Search, Browse & Collections | 0/5 | Not started | - |
+| 237. Mirror State & Download Engine | 5/5 | Complete    | 2026-02-19 |
+| 238. Search, Browse & Collections | 2/5 | In Progress|  |
 | 239. Virus Scanner & Quarantine | 0/6 | Not started | - |
 | 240. Installation & Archive Extraction | 0/5 | Not started | - |
 | 241. Emulator Configuration & Launch | 0/6 | Not started | - |
