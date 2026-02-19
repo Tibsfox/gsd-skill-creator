@@ -169,7 +169,7 @@ describe('LedgerSealGuard', () => {
         phase: 'EXECUTION' as const,
         timestamp: '2026-02-18T10:00:00Z',
         context_weight: 0.8,
-        dependency_tree: [] as const,
+        dependency_tree: [] as { contributor_id: string; depth: number; decay_factor: number }[],
       };
       ledger1.append(payload);
       ledger2.append(payload);
