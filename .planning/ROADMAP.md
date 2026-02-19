@@ -323,7 +323,7 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 5
 - **Dependencies:** Phase 191 (skill definitions)
 - **Requirements:** SKILL-04, SKILL-05
-- **Plans:** 1 plan
+- **Plans:** 1/1 plans complete
   - [ ] 192-01-PLAN.md — Create 10 agent definitions across 5 teams with unique skill compositions and inventory
 - **Success Criteria:**
   1. Agent definitions formalize all team roles with explicit skill compositions
@@ -503,7 +503,7 @@ All 73 v1.22 requirements mapped. No orphans. No duplicates.
 | 189 | 1/1 | Complete   | 2026-02-18 |
 | 190 | Amiga Corner Integration | 4 | Pending |
 | 191 | 1/1 | Complete   | 2026-02-18 |
-| 192 | Agent Definitions | 5 | Pending |
+| 192 | 1/1 | Complete   | 2026-02-19 |
 | 193 | Team Definitions & Topologies | 5 | Pending |
 | 194 | Chipset Assembly | 5 | Pending |
 | 195 | Automated Backup System | 5 | Pending |

@@ -1,0 +1,63 @@
+{
+  "name": "mc-ops",
+  "description": "Operations leader-worker: ops lead coordinates backup, monitoring, golden image, and runbook workers for Minecraft Knowledge World operational maturity",
+  "leadAgentId": "ops-lead",
+  "createdAt": "2026-02-19T00:02:32.000Z",
+  "members": [
+    {
+      "agentId": "ops-lead",
+      "name": "Ops Lead",
+      "agentType": "coordinator",
+      "model": "opus",
+      "tools": [
+        "Read", "Write", "Bash", "Glob", "Grep",
+        "TaskCreate", "TaskList", "TaskGet", "TaskUpdate",
+        "SendMessage", "TeammateTool"
+      ],
+      "prompt": "Coordinate operations team. Delegate backup, monitoring, golden image, and runbook tasks to workers. Ensure operational maturity criteria are met: automated backups, health monitoring, rapid rebuild capability, and documented procedures."
+    },
+    {
+      "agentId": "ops-backup-worker",
+      "name": "Ops Backup Worker",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "WebFetch", "WebSearch",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Implement automated backup system. Create backup scripts with RCON quiesce, rotation policies (24 hourly, 7 daily, 4 weekly), restore procedures, and integrity verification."
+    },
+    {
+      "agentId": "ops-monitoring-worker",
+      "name": "Ops Monitoring Worker",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "WebFetch", "WebSearch",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Implement monitoring and alerting. Deploy node_exporter and JMX exporter, create custom metrics collector for TPS/players/world-size, configure alert rules, and write health check scripts."
+    },
+    {
+      "agentId": "ops-golden-image-worker",
+      "name": "Ops Golden Image Worker",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "WebFetch", "WebSearch",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Implement golden image lifecycle and runbooks. Create golden image snapshot/clone workflow, rapid rebuild orchestrator, and write Day-1/Day-2/incident-response operational runbooks."
+    }
+  ],
+  "version": 1,
+  "topology": "leader-worker",
+  "outputTo": [],
+  "inputFrom": [
+    { "teamName": "mc-infra", "description": "Deployed VM and server state for monitoring and backup" },
+    { "teamName": "mc-creative", "description": "World content and schematics for backup scope" }
+  ]
+}

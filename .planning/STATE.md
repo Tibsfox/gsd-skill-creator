@@ -2,12 +2,12 @@
 
 ## Current Position
 
-Phase: 196-monitoring-alerting (Plan 01 complete)
-Plan: 196-01 complete
-Status: Wave 5 in progress -- Phases 191, 195, 196, 197 complete
-Last activity: 2026-02-18 -- Completed 196-01 (Monitoring & alerting: exporters, metrics, alerts, extended health check)
+Phase: 192-agent-definitions (Plan 01 complete)
+Plan: 192-01 complete
+Status: Wave 5 in progress -- Phases 191, 192, 195, 196, 197 complete
+Last activity: 2026-02-18 -- Completed 192-01 (Agent definitions: 10 agents across 5 teams with unique skill compositions)
 
-Progress: [#######################...] 23/30 phases (Wave 1-4 complete; Wave 5: 191, 195, 196, 197 done)
+Progress: [########################..] 24/30 phases (Wave 1-4 complete; Wave 5: 191, 192, 195, 196, 197 done)
 
 ## Project Reference
 
@@ -26,10 +26,15 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Begin Wave 5 phases: 191-197
-2. 19/30 phases complete, 11 remaining in Waves 5-6
+1. Continue Wave 5 phases: 193, 194 remaining
+2. 24/30 phases complete, 6 remaining in Waves 5-6
 
 ## Decisions
+
+### From Phase 192 Plan 01
+- Four tool access tiers: design-only (Read/Write/Glob/Grep), discovery/verification (Read/Bash/Glob/Grep), operational (Read/Write/Bash/Glob/Grep), extended (+WebFetch for mc-deployer only)
+- Each of 20 skills assigned to exactly one agent for unambiguous routing (no shared skills)
+- world-architect and curriculum-designer exclude Bash (design produces documents, not scripts)
 
 ### From Phase 197 Plan 01
 - Golden image manifests stored in infra/local/golden-images/ (gitignored) with latest.manifest.yaml copy for quick access
@@ -268,8 +273,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T23:48:07Z
-Stopped at: Completed 196-01-PLAN.md (Monitoring & alerting: exporters, metrics, alerts, extended health check)
+Last session: 2026-02-18T23:59:18Z
+Stopped at: Completed 192-01-PLAN.md (Agent definitions: 10 agents across 5 teams with unique skill compositions)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
