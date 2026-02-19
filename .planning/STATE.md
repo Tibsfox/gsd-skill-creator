@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Phase: 225 (3 of 8) — Integration Audit (T1)
-Plan: 225-03 complete (1 of 6)
+Plan: 225-04 complete (5 of 6)
 Status: Executing
-Last activity: 2026-02-19 — 225-03 dashboard & planning docs integration audit complete
+Last activity: 2026-02-19 — 225-04 Console/staging T1 integration paths verified (13 checkpoints)
 
 Progress: [███░░░░░░░] 25%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
+- Total plans completed: 13
 - Average duration: 6min
-- Total execution time: 1.1 hours
+- Total execution time: 1.4 hours
 
 **By Phase:**
 
@@ -37,6 +37,10 @@ Progress: [███░░░░░░░] 25%
 | 224 P02 | 1 | 4min | 4min |
 | 224 P03 | 1 | 7min | 7min |
 | 225 P03 | 1 | 3min | 3min |
+| 225 P01 | 1 | 4min | 4min |
+| 225 P05 | 1 | 6min | 6min |
+| 225 P02 | 1 | 7min | 7min |
+| 225 P04 | 1 | 8min | 8min |
 
 ## Accumulated Context
 
@@ -64,6 +68,15 @@ Recent decisions affecting current work:
 - [Phase 224]: dc-001 (T1) verified at T0 smoke level since message bus fully implemented with 221 tests
 - [Phase 225]: pd-011 (skill packaging) and pd-012 (file-change triggers) fail: dashboard generator is standalone module, not GSD skill
 - [Phase 225]: pd-007 (auto-refresh) passes: refresh.ts JS polling injected only in live mode
+- [Phase 225]: pd-006 (build triggers) fails: scanner infrastructure exists but no GSD command invokes it; wrapper commands are stubs
+- [Phase 225]: Observation pipeline verified (302 tests): SessionObserver -> EphemeralStore -> PatternStore -> sessions.jsonl fully wired
+- [Phase 225]: All 6 wrapper/sc commands are Phase 85/86 stubs; feedback loop works if manually invoked but has no GSD event trigger
+- [Phase 225]: AMIGA 4-ICD communication verified (10 event types, 1123 tests); ICD validator cross-refs AGENT_REGISTRY + ROUTING_TABLE
+- [Phase 225]: AGC pack integration verified: 5 blocks, 6 widgets, chipset YAML, 131 tests pass
+- [Phase 225]: 6 conformance matrix checkpoints updated to pass: agc-022/023/024, rfc-001, bbs-003/004
+- [Phase 225]: Chipset YAML (budget.loading_order, teams.topology) is declarative config not consumed by skill pipeline or GSD executor at runtime
+- [Phase 225]: 5 of 7 chipset checkpoints fail: FPGA synthesis, pipeline wiring, agent topology, file triggers, lock files all unimplemented
+- [Phase 225]: 13 console/staging T1 checkpoints verified (dc-002/006/015/016/018, stg-003/005/029/031/033/036/037/040); matrix now at 47 pass / 281 pending / 8 fail
 
 ### Key Context
 
@@ -83,5 +96,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 225-03-PLAN.md (dashboard & planning docs integration audit)
+Stopped at: Completed 225-04-PLAN.md (console/staging T1 integration audit)
 Resume file: None
