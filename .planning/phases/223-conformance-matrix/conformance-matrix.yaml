@@ -1501,24 +1501,41 @@ documents:
           assembly language, machine language, memory hierarchy, instruction pipelining, interrupts/IO, operating
           systems, compilers, digital logic, networking
         verification: code-review
-        status: pending
-        notes: ""
+        status: pass
+        notes: >-
+          Vision document structural claim. The mapping table exists in Part 9 with all 12 topics and their GSD ISA
+          equivalents. No code artifacts needed -- this is a curriculum design document.
         tier: T3
         depends_on:
           - isa-001
-        evidence: ""
+        evidence: >-
+          gsd-instruction-set-architecture-vision.md Part 9 CS Curriculum Mapping contains a complete table mapping
+          12 CS101 topics to GSD ISA hands-on equivalents: (1) binary/hex via bus messages, (2) Boolean algebra via
+          trigger conditions and truth tables, (3) computer architecture via GSD Amiga block diagram, (4) assembly
+          language via GSD assembly, (5) machine language via binary encoding, (6) memory hierarchy via context
+          window/skill cache/filesystem/network, (7) instruction pipelining via observation pipeline stages, (8)
+          interrupts/IO via priority-based bus messages, (9) operating systems via GSD-OS, (10) compilers via Level
+          1-4 progression, (11) digital logic via logic gate instructions/FPGA, (12) networking via bus protocol and
+          agent communication. All 12 mappings present with specific GSD ISA equivalents.
       - id: isa-028
         section: "Part 9: Learning Paths"
         claim: >-
           4 learning paths defined: Path 1 (Application-focused, 12 weeks), Path 2 (Theory-focused, 12 weeks), Path 3
           (Engineering-focused, 12 weeks), Path 4 (The Amiga Path, exploratory)
         verification: code-review
-        status: pending
-        notes: ""
+        status: pass
+        notes: >-
+          Vision document structural claim. All 4 paths defined with weekly breakdowns in Part 9 Learning Paths section.
         tier: T3
         depends_on:
           - isa-001
-        evidence: ""
+        evidence: >-
+          gsd-instruction-set-architecture-vision.md Part 9 Learning Paths defines all 4 paths: Path 1
+          Application-focused (12 weeks: GSD Blocks, reading assembly, writing assembly, chipset config, custom skills,
+          complete project), Path 2 Theory-focused (12 weeks: binary/hex, logic gates, architecture, assembly, memory,
+          OS internals), Path 3 Engineering-focused (12 weeks: blocks+I/O, assembly+I/O, RPi projects, FPGA mode, VHDL,
+          custom SoC), Path 4 The Amiga Path (exploratory: just start using GSD-OS, progressive disclosure reveals
+          levels as needed). All paths have weekly breakdowns and distinct focus areas.
       - id: isa-029
         section: "Part 11: Open Specification Components"
         claim: >-
@@ -2591,12 +2608,21 @@ documents:
         section: "Structured Data: Open Graph & Meta Tags"
         claim: Pages include og:title, og:description, og:type meta tags, robots meta, and canonical URLs
         verification: code-review
-        status: pending
-        notes: ""
+        status: fail
+        notes: >-
+          og:title, og:description, og:type present on all 6 pages. Missing: robots meta tag and canonical URLs.
+          3 of 5 claimed meta tag types implemented.
         tier: T3
         depends_on:
           - pd-002
-        evidence: ""
+        evidence: >-
+          renderer.ts renderLayout() supports optional meta tags: og:title (line 101), og:description (line 104),
+          og:type (line 107) via LayoutOptions.meta parameter. generator.ts populates these for all 6 dashboard pages
+          (index, requirements, roadmap, milestones, state, console) with page-specific values (lines 567-636).
+          However, no robots meta tag is generated anywhere (grep for "robots" in src/dashboard/ returns zero matches),
+          and no canonical URL meta tag or link[rel=canonical] is generated (grep for "canonical" in renderer.ts and
+          generator.ts returns zero matches outside of unrelated hash computation). The claim requires all 5 types:
+          og:title (pass), og:description (pass), og:type (pass), robots (missing), canonical URLs (missing).
       - id: pd-011
         section: "Integration Points: As a GSD Skill"
         claim: >-
@@ -2818,7 +2844,10 @@ documents:
         claim: Desktop environment with window management inspired by Amiga Workbench renders after boot
         verification: manual-test
         status: pass
-        notes: Desktop environment with window management renders after boot sequence
+        notes: >-
+          Desktop environment with window management renders after boot sequence. T3 deep audit confirms: z-order
+          depth cycling (Amiga-style), pointer-event drag/resize, 4 keyboard shortcuts, accessibility mode with
+          prefers-reduced-motion and prefers-contrast media query auto-detection.
         tier: T2
         depends_on:
           - os-001
