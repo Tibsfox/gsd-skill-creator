@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.26 — Aminet Archive Extension Pack, Phase 240
+**Current focus:** v1.26 — Aminet Archive Extension Pack, Phase 241
 
 ## Current Position
 
 Milestone: v1.26 — Aminet Archive Extension Pack
-Phase: 240 of 242 (Installation Archive Extraction)
-Plan: 5 of 5 in current phase (COMPLETE)
-Status: Phase 240 Complete
-Last activity: 2026-02-19 — Plan 05 complete (scan gate enforcement with INS-07/08/09, installPackage orchestrator, barrel exports, 19 tests)
+Phase: 241 of 242 (Emulator Configuration & Launch)
+Plan: 2 of 6 in current phase
+Status: Executing Phase 241 (Wave 1)
+Last activity: 2026-02-19 — Plan 02 complete (5 hardware profiles with frozen-copy lookup functions, 37 tests)
 
-Progress: [████████████████████] 100%
+Progress: [██████░░░░░░░░░░░░░░] 33%
 
 ## Performance Metrics
 
@@ -49,11 +49,13 @@ Progress: [████████████████████] 100%
 | 240   | 03   | 3min     | 1     | 2     |
 | 240   | 04   | 5min     | 2     | 4     |
 | 240   | 05   | 4min     | 2     | 3     |
+| 241   | 01   | 3min     | 1     | 3     |
+| 241   | 02   | 2min     | 1     | 2     |
 
 **Velocity:**
-- Total plans completed: 26
+- Total plans completed: 28
 - Average duration: 3min
-- Total execution time: 81min
+- Total execution time: 86min
 
 ## Accumulated Context
 
@@ -100,6 +102,8 @@ Progress: [████████████████████] 100%
 - Plan 240-03: Filesystem mapper with AMIGA_ASSIGN_MAP (11 assigns), case-insensitive lookup, Software/ default placement, placeFiles with SHA-256 tracking and temp cleanup; 19 tests
 - Plan 240-04: Dependency detector classifying 5 types (package, os_version, hardware, library, unknown) from .readme Requires:; package deps cross-referenced against mirror state; install tracker with atomic manifest persistence, slugified filenames, uninstall with directory cleanup; 39 tests
 - Plan 240-05: Scan gate enforcing INS-07 (refuse unscanned), INS-08 (refuse infected), INS-09 (suspicious override via confirmFn); installPackage orchestrator coordinating gate->extract->place->deps->track->state; barrel exports complete Phase 240 API; 19 tests
+- Plan 241-01: 9 Phase 241 Zod schemas (HardwareProfileId, HardwareProfile, KnownRom, DetectedRom, FsUaeConfig, LaunchConfig, LaunchResult, WhdloadEntry, EmulatorSnapshot) + FS-UAE config generator with buildFsUaeConfig/generateFsUaeConfig, path normalization, sorted keys, boolean 1/0 serialization; 23 tests
+- Plan 241-02: 5 hardware profiles (A500/A1200/A1200+030/A4000/WHDLoad) as embedded TS constants; HardwareProfile types defined locally (241-01 parallel); getProfile/getAllProfiles/getProfileForModel with deep-frozen structuredClone copies; 37 tests
 
 ### Pending Todos
 
@@ -112,11 +116,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 240-05-PLAN.md (scan gate enforcement, installPackage orchestrator, barrel exports, 19 tests)
+Stopped at: Completed 241-02-PLAN.md (5 hardware profiles with frozen-copy lookup functions, 37 tests)
 Resume file: None
 
 ## ▶ Next Up
 
-Phase 240 complete (5/5 plans). All Installation Archive Extraction modules delivered.
-
-Continue /gsd:execute-phase 241 -- next phase
+Phase 241 in progress (Wave 1: plans 01+02 parallel). Continue with remaining plans.

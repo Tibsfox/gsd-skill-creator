@@ -79,8 +79,8 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 
 ### Emulator Integration
 
-- [ ] **EMU-01**: Generate valid FS-UAE configuration files from hardware profile YAML
-- [ ] **EMU-02**: Ship 5 hardware profiles: A500, A1200, A1200+030, A4000, WHDLoad
+- [x] **EMU-01**: Generate valid FS-UAE configuration files from hardware profile YAML
+- [x] **EMU-02**: Ship 5 hardware profiles: A500, A1200, A1200+030, A4000, WHDLoad
 - [ ] **EMU-03**: Detect and validate Kickstart ROM files by CRC32/MD5
 - [ ] **EMU-04**: Select appropriate ROM version for hardware profile
 - [ ] **EMU-05**: Mount emulated hard drive containing installed software
@@ -202,8 +202,8 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | INS-08 | Phase 240 | Complete |
 | INS-09 | Phase 240 | Complete |
 | INS-10 | Phase 240 | Complete |
-| EMU-01 | Phase 241 | Pending |
-| EMU-02 | Phase 241 | Pending |
+| EMU-01 | Phase 241 | Complete |
+| EMU-02 | Phase 241 | Complete |
 | EMU-03 | Phase 241 | Pending |
 | EMU-04 | Phase 241 | Pending |
 | EMU-05 | Phase 241 | Pending |
