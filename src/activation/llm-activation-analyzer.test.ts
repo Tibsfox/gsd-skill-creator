@@ -56,13 +56,13 @@ describe('LLMActivationAnalyzer', () => {
       };
 
       vi.doMock('@anthropic-ai/sdk', () => ({
-        default: vi.fn().mockImplementation(() => ({
-          messages: {
+        default: class MockAnthropic {
+          messages = {
             create: vi.fn().mockResolvedValue({
               content: [{ type: 'text', text: JSON.stringify(mockResponse) }],
             }),
-          },
-        })),
+          };
+        },
       }));
 
       const { LLMActivationAnalyzer } = await import('./llm-activation-analyzer.js');
@@ -84,11 +84,11 @@ describe('LLMActivationAnalyzer', () => {
       process.env.ANTHROPIC_API_KEY = 'test-key';
 
       vi.doMock('@anthropic-ai/sdk', () => ({
-        default: vi.fn().mockImplementation(() => ({
-          messages: {
+        default: class MockAnthropic {
+          messages = {
             create: vi.fn().mockRejectedValue(new Error('API error')),
-          },
-        })),
+          };
+        },
       }));
 
       const { LLMActivationAnalyzer } = await import('./llm-activation-analyzer.js');
@@ -106,13 +106,13 @@ describe('LLMActivationAnalyzer', () => {
       process.env.ANTHROPIC_API_KEY = 'test-key';
 
       vi.doMock('@anthropic-ai/sdk', () => ({
-        default: vi.fn().mockImplementation(() => ({
-          messages: {
+        default: class MockAnthropic {
+          messages = {
             create: vi.fn().mockResolvedValue({
               content: [{ type: 'text', text: 'not valid json' }],
             }),
-          },
-        })),
+          };
+        },
       }));
 
       const { LLMActivationAnalyzer } = await import('./llm-activation-analyzer.js');
@@ -130,8 +130,8 @@ describe('LLMActivationAnalyzer', () => {
       process.env.ANTHROPIC_API_KEY = 'test-key';
 
       vi.doMock('@anthropic-ai/sdk', () => ({
-        default: vi.fn().mockImplementation(() => ({
-          messages: {
+        default: class MockAnthropic {
+          messages = {
             create: vi.fn().mockResolvedValue({
               content: [
                 {
@@ -147,8 +147,8 @@ describe('LLMActivationAnalyzer', () => {
                 },
               ],
             }),
-          },
-        })),
+          };
+        },
       }));
 
       const { LLMActivationAnalyzer } = await import('./llm-activation-analyzer.js');
