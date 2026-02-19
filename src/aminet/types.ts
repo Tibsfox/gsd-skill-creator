@@ -455,3 +455,98 @@ export const FreshnessCheckSchema = z.object({
 });
 
 export type FreshnessCheck = z.infer<typeof FreshnessCheckSchema>;
+
+// ============================================================================
+// PackageStatusSchema
+// ============================================================================
+
+/**
+ * Per-package lifecycle status in the mirror system.
+ *
+ * Tracks a package from initial discovery through download, scanning,
+ * and installation. The 7 states form a linear lifecycle:
+ *   not-mirrored -> downloading -> mirrored -> scan-pending ->
+ *   clean | infected -> installed
+ */
+export const PackageStatusSchema = z.enum([
+  'not-mirrored',
+  'downloading',
+  'mirrored',
+  'scan-pending',
+  'clean',
+  'infected',
+  'installed',
+]);
+
+export type PackageStatus = z.infer<typeof PackageStatusSchema>;
+
+// ============================================================================
+// MirrorEntrySchema
+// ============================================================================
+
+/**
+ * Per-package state entry in the mirror.
+ *
+ * Tracks the download status, integrity hash, local file path, and
+ * timestamps for a single Aminet package in the local mirror.
+ */
+export const MirrorEntrySchema = z.object({
+  /** Full Aminet path (e.g., "mus/edit/ProTracker36.lha") */
+  fullPath: z.string(),
+  /** Current lifecycle status */
+  status: PackageStatusSchema,
+  /** Package size in kilobytes (from INDEX) */
+  sizeKb: z.number(),
+  /** SHA-256 hash of downloaded file, null if not yet computed */
+  sha256: z.string().nullable().default(null),
+  /** Local filesystem path to the downloaded file, null if not mirrored */
+  localPath: z.string().nullable().default(null),
+  /** ISO 8601 timestamp of when the file was downloaded, null if not mirrored */
+  downloadedAt: z.string().nullable().default(null),
+  /** ISO 8601 timestamp of last integrity/status check, null if never checked */
+  lastChecked: z.string().nullable().default(null),
+});
+
+export type MirrorEntry = z.infer<typeof MirrorEntrySchema>;
+
+// ============================================================================
+// MirrorStateSchema
+// ============================================================================
+
+/**
+ * The full .mirror-state.json shape persisted to disk.
+ *
+ * Contains all per-package entries, a last-updated timestamp, and a
+ * version field for future schema migration.
+ */
+export const MirrorStateSchema = z.object({
+  /** Map from fullPath to MirrorEntry */
+  entries: z.record(z.string(), MirrorEntrySchema),
+  /** ISO 8601 timestamp of last state modification */
+  lastUpdated: z.string(),
+  /** Schema version -- always 1 for now */
+  version: z.literal(1),
+});
+
+export type MirrorState = z.infer<typeof MirrorStateSchema>;
+
+// ============================================================================
+// DownloadConfigSchema
+// ============================================================================
+
+/**
+ * Configuration for the download engine.
+ *
+ * Extends AminetMirrorConfigSchema with download-specific settings:
+ * delay between requests, concurrency limit, and local mirror directory.
+ */
+export const DownloadConfigSchema = AminetMirrorConfigSchema.extend({
+  /** Milliseconds to wait between consecutive downloads (rate limiting) */
+  delayMs: z.number().int().nonnegative().default(500),
+  /** Maximum number of concurrent downloads */
+  concurrency: z.number().int().min(1).default(2),
+  /** Local directory for storing mirrored packages */
+  mirrorDir: z.string(),
+});
+
+export type DownloadConfig = z.infer<typeof DownloadConfigSchema>;
