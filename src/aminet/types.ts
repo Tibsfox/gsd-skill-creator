@@ -301,3 +301,129 @@ export const HunkFileSchema = z.object({
 });
 
 export type HunkFile = z.infer<typeof HunkFileSchema>;
+
+// ============================================================================
+// Boot block schemas
+// ============================================================================
+
+/**
+ * AmigaOS filesystem type identified from the DOS magic bytes.
+ *
+ * DOS\0 = OFS (Original File System)
+ * DOS\1 = FFS (Fast File System)
+ * DOS\2 = OFS with international characters
+ * DOS\3 = FFS with international characters
+ * DOS\4 = OFS with directory cache
+ * DOS\5 = FFS with directory cache
+ * UNKNOWN = no recognized DOS magic
+ */
+export const DosTypeSchema = z.enum([
+  'OFS',
+  'FFS',
+  'OFS_INTL',
+  'FFS_INTL',
+  'OFS_DC',
+  'FFS_DC',
+  'UNKNOWN',
+]);
+
+export type DosType = z.infer<typeof DosTypeSchema>;
+
+/**
+ * Suspect pattern flags detected in boot block code area.
+ *
+ * These indicate behaviors commonly associated with boot block viruses:
+ * - trackdisk_access: references to "trackdisk.device" (direct disk I/O)
+ * - custom_bootcode: non-zero bytes in boot code area (offsets 12-1023)
+ * - vector_modification: writes to trap/interrupt vectors in low memory
+ * - resident_install: RTC_MATCHWORD (0x4AFC) for resident module installation
+ * - exec_library_call: movea.l 4.w,a6 opcode pattern (Exec library base access)
+ */
+export const BootBlockFlagSchema = z.enum([
+  'trackdisk_access',
+  'custom_bootcode',
+  'vector_modification',
+  'resident_install',
+  'exec_library_call',
+]);
+
+export type BootBlockFlag = z.infer<typeof BootBlockFlagSchema>;
+
+/**
+ * Parsed boot block from the first 1024 bytes of an Amiga disk image.
+ */
+export const BootBlockSchema = z.object({
+  /** Filesystem type identified from DOS magic bytes */
+  dosType: DosTypeSchema,
+  /** Whether the boot block checksum is valid */
+  isValid: z.boolean(),
+  /** Stored checksum value from offset 4 */
+  checksum: z.number(),
+  /** Root block pointer from offset 8 */
+  rootBlock: z.number(),
+  /** Whether non-zero boot code is present after offset 12 */
+  bootcodePresent: z.boolean(),
+  /** Start offset of boot code area (always 12 if present) */
+  bootcodeOffset: z.number(),
+  /** Length of non-zero boot code in bytes */
+  bootcodeLength: z.number(),
+  /** Suspect pattern flags detected in boot code */
+  suspectFlags: z.array(BootBlockFlagSchema),
+  /** Raw first 1024 bytes (optional, for downstream analysis) */
+  raw: z.instanceof(Uint8Array).optional(),
+});
+
+export type BootBlock = z.infer<typeof BootBlockSchema>;
+
+// ============================================================================
+// AminetPackageSchema
+// ============================================================================
+
+/**
+ * A single package entry parsed from the Aminet INDEX fixed-width file.
+ *
+ * Each line in the INDEX represents one package with filename, directory
+ * path (category/subcategory), size, age in days, and a short description.
+ */
+export const AminetPackageSchema = z.object({
+  /** Archive filename (e.g., "ProTracker36.lha") */
+  filename: z.string(),
+  /** Full Aminet directory path (e.g., "mus/edit") */
+  directory: z.string(),
+  /** Top-level category (e.g., "mus") */
+  category: z.string(),
+  /** Subcategory within the category (e.g., "edit") */
+  subcategory: z.string(),
+  /** Size in kilobytes */
+  sizeKb: z.number(),
+  /** Age in days since upload */
+  ageDays: z.number().int().nonnegative(),
+  /** One-line package description */
+  description: z.string(),
+  /** Full path: directory/filename (e.g., "mus/edit/ProTracker36.lha") */
+  fullPath: z.string(),
+});
+
+export type AminetPackage = z.infer<typeof AminetPackageSchema>;
+
+// ============================================================================
+// AminetIndexSchema
+// ============================================================================
+
+/**
+ * The complete parsed Aminet INDEX, including all packages, error stats,
+ * and the timestamp when parsing occurred. This is the shape written to
+ * the INDEX.json cache file for offline querying.
+ */
+export const AminetIndexSchema = z.object({
+  /** All successfully parsed package entries */
+  packages: z.array(AminetPackageSchema),
+  /** Number of lines that could not be parsed (lenient mode) */
+  parseErrors: z.number().int().nonnegative(),
+  /** Total number of lines in the raw INDEX content */
+  totalLines: z.number().int().nonnegative(),
+  /** ISO 8601 timestamp of when parsing was performed */
+  parsedAt: z.string(),
+});
+
+export type AminetIndex = z.infer<typeof AminetIndexSchema>;
