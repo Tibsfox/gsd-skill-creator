@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.26 — Aminet Archive Extension Pack, Phase 239
+**Current focus:** v1.26 — Aminet Archive Extension Pack, Phase 240
 
 ## Current Position
 
 Milestone: v1.26 — Aminet Archive Extension Pack
-Phase: 239 of 242 (Virus Scanner & Quarantine)
-Plan: 6 of 6 in current phase
-Status: Phase 239 complete
-Last activity: 2026-02-19 — Plan 05 complete (scan orchestrator with policy, verdict merging, batch scan, 28 tests)
+Phase: 240 of 242 (Installation Archive Extraction)
+Plan: 2 of 5 in current phase
+Status: Executing
+Last activity: 2026-02-19 — Plan 02 complete (LZX extractor with cwd workaround, tool validator with platform-specific guidance, 17 tests)
 
-Progress: [████████████████████] 100%
+Progress: [████████████████░░░░] 80%
 
 ## Performance Metrics
 
@@ -44,10 +44,13 @@ Progress: [████████████████████] 100%
 | 239   | 06   | 4min     | 2     | 3     |
 | 239   | 05   | 5min     | 1     | 3     |
 
+| 240   | 01   | 2min     | 1     | 3     |
+| 240   | 02   | 4min     | 2     | 4     |
+
 **Velocity:**
-- Total plans completed: 22
+- Total plans completed: 23
 - Average duration: 3min
-- Total execution time: 67min
+- Total execution time: 69min
 
 ## Accumulated Context
 
@@ -89,6 +92,8 @@ Progress: [████████████████████] 100%
 - Plan 239-04: Quarantine system with atomic file moves, metadata sidecars, path traversal prevention, restore round-trip; 15 tests
 - Plan 239-06: FS-UAE + CheckX emulated scanner with AbortController timeout, community checksum cross-reference, barrel updated with Phase 239 exports; 12 tests
 - Plan 239-05: Scan orchestrator coordinating signature + heuristic scanners into unified ScanReport; configurable depth (fast/standard/thorough); batch processing with auto-quarantine; worst-case verdict merging; YAML policy with Zod; 28 tests
+- Plan 240-01: All Phase 240 Zod schemas (ExtractionResult, ToolStatus, InstallConfig, DependencyType, Dependency, InstalledFile, InstallManifest, ScanGateResult) + LhA extractor via lhasa with Zip-Slip prevention, volume prefix stripping, 30s timeout; 21 tests
+- Plan 240-02: LZX extractor via unlzx with cwd workaround (no output dir flag), tool validator with platform-specific install guidance (apt/brew), unlzx exit-code-2 detection; 17 tests
 
 ### Pending Todos
 
@@ -101,11 +106,11 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 239-05-PLAN.md (scan orchestrator with policy, verdict merging, batch scan, 28 tests)
+Stopped at: Completed 240-02-PLAN.md (LZX extractor with cwd workaround, tool validator with platform-specific guidance, 17 tests)
 Resume file: None
 
 ## ▶ Next Up
 
-Phase 239 fully complete. All 6 plans done (signature DB, signature scanner, heuristic scanner, quarantine, scan orchestrator, emulated scanner). Full scanning pipeline ready. All Phase 239 barrel exports active.
+Phase 240 in progress. Plans 01-02 complete (LhA extractor, LZX extractor, tool validator). Plans 03-05 remaining.
 
-/gsd:execute-phase 240 — next phase
+Continue /gsd:execute-phase 240 -- next plans
