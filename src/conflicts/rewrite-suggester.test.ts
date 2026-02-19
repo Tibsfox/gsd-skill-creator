@@ -167,8 +167,8 @@ describe('RewriteSuggester', () => {
 
       // Mock the Anthropic SDK
       vi.doMock('@anthropic-ai/sdk', () => ({
-        default: vi.fn().mockImplementation(() => ({
-          messages: {
+        default: class MockAnthropic {
+          messages = {
             create: vi.fn().mockResolvedValue({
               content: [
                 {
@@ -190,8 +190,8 @@ describe('RewriteSuggester', () => {
                 },
               ],
             }),
-          },
-        })),
+          };
+        },
       }));
 
       // Re-import to get fresh module with mocked API key
@@ -213,11 +213,11 @@ describe('RewriteSuggester', () => {
 
       // Mock the Anthropic SDK to throw an error
       vi.doMock('@anthropic-ai/sdk', () => ({
-        default: vi.fn().mockImplementation(() => ({
-          messages: {
+        default: class MockAnthropic {
+          messages = {
             create: vi.fn().mockRejectedValue(new Error('API rate limit exceeded')),
-          },
-        })),
+          };
+        },
       }));
 
       const { RewriteSuggester: FreshSuggester } = await import('./rewrite-suggester.js');
@@ -235,8 +235,8 @@ describe('RewriteSuggester', () => {
 
       // Mock the Anthropic SDK to return invalid JSON
       vi.doMock('@anthropic-ai/sdk', () => ({
-        default: vi.fn().mockImplementation(() => ({
-          messages: {
+        default: class MockAnthropic {
+          messages = {
             create: vi.fn().mockResolvedValue({
               content: [
                 {
@@ -245,8 +245,8 @@ describe('RewriteSuggester', () => {
                 },
               ],
             }),
-          },
-        })),
+          };
+        },
       }));
 
       const { RewriteSuggester: FreshSuggester } = await import('./rewrite-suggester.js');
@@ -264,8 +264,8 @@ describe('RewriteSuggester', () => {
 
       // Mock the Anthropic SDK to return JSON without suggestions array
       vi.doMock('@anthropic-ai/sdk', () => ({
-        default: vi.fn().mockImplementation(() => ({
-          messages: {
+        default: class MockAnthropic {
+          messages = {
             create: vi.fn().mockResolvedValue({
               content: [
                 {
@@ -274,8 +274,8 @@ describe('RewriteSuggester', () => {
                 },
               ],
             }),
-          },
-        })),
+          };
+        },
       }));
 
       const { RewriteSuggester: FreshSuggester } = await import('./rewrite-suggester.js');
@@ -293,8 +293,8 @@ describe('RewriteSuggester', () => {
 
       // Mock the Anthropic SDK to return non-text content
       vi.doMock('@anthropic-ai/sdk', () => ({
-        default: vi.fn().mockImplementation(() => ({
-          messages: {
+        default: class MockAnthropic {
+          messages = {
             create: vi.fn().mockResolvedValue({
               content: [
                 {
@@ -303,8 +303,8 @@ describe('RewriteSuggester', () => {
                 },
               ],
             }),
-          },
-        })),
+          };
+        },
       }));
 
       const { RewriteSuggester: FreshSuggester } = await import('./rewrite-suggester.js');

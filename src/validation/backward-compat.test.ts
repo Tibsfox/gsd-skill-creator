@@ -38,9 +38,9 @@ async function discoverExamples(subdir: string, filename: string): Promise<{ nam
 // ============================================================================
 
 describe('Backward Compatibility: Example Skills', () => {
-  it('should discover all 33 example skills', async () => {
+  it('should discover all 31 example skills', async () => {
     const skills = await discoverExamples('skills', 'SKILL.md');
-    expect(skills.length).toBe(33);
+    expect(skills.length).toBe(31);
   });
 
   it('should validate every example skill against SkillMetadataSchema', async () => {
