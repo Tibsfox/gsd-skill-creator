@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 231: Ecosystem Dependency Map** - Resolve all cross-document dependencies into a DAG with critical path analysis and build sequencing
 - [x] **Phase 232: Shared EventDispatcher Specification** - Unify 6 independent file-watching designs into one canonical spec with subscriber protocol and watch budget
-- [ ] **Phase 233: Dependency Philosophy by Layer** - Define external dependency contracts for Core/Middleware/Platform/Educational tiers with enforcement mechanisms
+- [x] **Phase 233: Dependency Philosophy by Layer** - Define external dependency contracts for Core/Middleware/Platform/Educational tiers with enforcement mechanisms (completed 2026-02-19)
 - [ ] **Phase 234: Integration Test Strategy** - Establish cross-component contract testing approach with priority test flows and freshness policies
 - [ ] **Phase 235: Partial-Build Compatibility Matrix** - Document component-pair behavior at multiple maturity levels with graceful degradation specs
 
@@ -63,11 +63,11 @@ Plans:
   2. A reader can trace what each layer provides upward and requires downward through the per-layer contract definitions
   3. The EventDispatcher placement is unambiguous: a reader knows which layer owns the interface and which owns the implementation, and why
   4. An enforcement mechanism exists (at minimum ESLint rules and Rust module visibility constraints) that can catch boundary violations before they reach main, plus a documented exception process for tracking justified violations
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
-- [ ] 233-01-PLAN.md — 4-tier dependency rules, per-layer contracts, and dependency decision tree
-- [ ] 233-02-PLAN.md — EventDispatcher placement, enforcement mechanisms (ESLint + Rust), and exception process
+- [x] 233-01-PLAN.md — 4-tier dependency rules, per-layer contracts, and dependency decision tree
+- [x] 233-02-PLAN.md — EventDispatcher placement, enforcement mechanisms (ESLint + Rust), and exception process
 
 ### Phase 234: Integration Test Strategy
 **Goal**: Cross-component integration boundaries have a defined contract testing approach with priority test flows, schema definitions, semantic test cases, and freshness policies that prevent contract drift
@@ -79,7 +79,12 @@ Plans:
   3. Every cross-component boundary has at least one "structurally valid, semantically invalid" test case documented, preventing schema-only contracts that miss runtime failures
   4. Every contract has an assigned owner, last-verified date, and re-verification trigger — so contract staleness is detectable and preventable
   5. The fixture strategy (`.planning/fixtures/` structure) and spec compliance audit step are defined, enabling future milestones to verify EventDispatcher adoption and contract freshness
-**Plans**: TBD
+**Plans:** 1/3 plans executed
+
+Plans:
+- [ ] 234-01-PLAN.md — Contract testing approach (Zod + Vitest, Pact rejection), 6 priority flows with I/O, boundary schema inventory
+- [ ] 234-02-PLAN.md — Semantic test cases per boundary and freshness policies with ownership table
+- [ ] 234-03-PLAN.md — Fixture directory structure and EventDispatcher compliance audit step
 
 ### Phase 235: Partial-Build Compatibility Matrix
 **Goal**: Any developer building a subset of the ecosystem can look up exactly what works, what degrades gracefully, and what breaks — with user-visible signals and resolution actions for every degradation scenario
@@ -102,8 +107,8 @@ Phases execute in numeric order: 231 → 232 → 233 → 234 → 235
 |-------|----------------|--------|-----------|
 | 231. Ecosystem Dependency Map | 3/3 | Complete    | 2026-02-19 |
 | 232. Shared EventDispatcher Specification | 3/3 | Complete    | 2026-02-19 |
-| 233. Dependency Philosophy by Layer | 0/2 | Planned | - |
-| 234. Integration Test Strategy | 0/TBD | Not started | - |
+| 233. Dependency Philosophy by Layer | 2/2 | Complete    | 2026-02-19 |
+| 234. Integration Test Strategy | 1/3 | In Progress|  |
 | 235. Partial-Build Compatibility Matrix | 0/TBD | Not started | - |
 
 ---
