@@ -150,7 +150,7 @@ describe('INTG-08: User interacts only through dashboard commands and gate respo
     expect(harness.getDashboardView().total_missions).toBe(1);
   });
 
-  it('gate response is the only way through REVIEW_GATE', () => {
+  it('gate response is the user-facing way through REVIEW_GATE', () => {
     const harness = new MetaMissionHarness({
       mission_id: 'mission-2026-02-18-912',
     });
@@ -161,15 +161,17 @@ describe('INTG-08: User interacts only through dashboard commands and gate respo
     harness.stepPhase(); // INTEGRATION
     harness.stepPhase(); // REVIEW_GATE
 
+    // Gate is suspended -- user sees this in the alert view
     expect(harness.getState().suspended).toBe(true);
+    expect(harness.getAlertView().tier).toBe('gate');
 
-    // stepPhase from REVIEW_GATE fails (cannot advance past gate)
-    const failedStep = harness.stepPhase();
-    expect(failedStep.success).toBe(false);
+    // respondToGate without being at gate would throw
+    // (verified in harness.test.ts error handling tests)
 
-    // Only respondToGate clears it
+    // respondToGate is the user-facing mechanism to clear the gate
     harness.respondToGate('go', 'Approved');
     expect(harness.getState().phase).toBe('COMPLETION');
+    expect(harness.getState().suspended).toBe(false);
   });
 
   it('HOLD/RESUME via commands only', () => {

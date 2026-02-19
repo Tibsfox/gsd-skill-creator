@@ -12,6 +12,7 @@
  * - Integration (MissionController -- MC-1/ME-1 cross-component harness)
  * - CE-1 Commons Engine (AttributionLedger, ContributionRegistry, InvocationRecorder, TokenArchitecture)
  * - GL-1 Governance Layer (Charter, Weighting Docs, Dispute Records, Rules Engine, Decision Log, Policy Query)
+ * - Meta-Mission (MetaMissionHarness, SkillCandidateDetector -- M-5 Launch Gate)
  */
 
 // Shared data types
@@ -57,3 +58,6 @@ export * from './ce1/index.js';
 
 // GL-1 Governance Layer
 export * from './gl1/index.js';
+
+// Meta-Mission (AMIGA M-5 Launch Gate)
+export * from './meta-mission/index.js';
