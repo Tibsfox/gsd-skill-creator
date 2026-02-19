@@ -59,8 +59,8 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [x] **SCN-07**: Scan results: clean / suspicious / infected / unscanned status per file
 - [x] **SCN-08**: Emulated scanning via VirusZ III / CheckX inside headless FS-UAE
 - [x] **SCN-09**: Community checksum cross-reference against known-good hashes
-- [ ] **SCN-10**: Configurable scan depth via scan-policy.yaml (fast/standard/thorough)
-- [ ] **SCN-11**: Batch scanning for bulk download processing
+- [x] **SCN-10**: Configurable scan depth via scan-policy.yaml (fast/standard/thorough)
+- [x] **SCN-11**: Batch scanning for bulk download processing
 - [x] **SCN-12**: Signature database stored as extensible JSON — new signatures addable by dropping files
 - [x] **SCN-13**: Heuristic scanner achieves >=80% boot block virus detection rate vs VirusZ reference
 
@@ -188,8 +188,8 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | SCN-07 | Phase 239 | Complete |
 | SCN-08 | Phase 239 | Complete |
 | SCN-09 | Phase 239 | Complete |
-| SCN-10 | Phase 239 | Pending |
-| SCN-11 | Phase 239 | Pending |
+| SCN-10 | Phase 239 | Complete |
+| SCN-11 | Phase 239 | Complete |
 | SCN-12 | Phase 239 | Complete |
 | SCN-13 | Phase 239 | Complete |
 | INS-01 | Phase 240 | Pending |
