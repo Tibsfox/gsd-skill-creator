@@ -285,7 +285,7 @@ All documentation lives in [`docs/`](docs/).
 | [Configuration](docs/CONFIGURATION.md) | Thresholds, retention, and cluster settings |
 | [File Structure](docs/FILE-STRUCTURE.md) | Project and source code layout |
 | [Development](docs/DEVELOPMENT.md) | Building, testing, and contributing |
-| [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 29 milestones |
+| [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 30 milestones |
 | [GSD Teams Guide](docs/GSD-TEAMS.md) | Teams vs subagents for GSD workflows |
 | [Comparison](docs/COMPARISON.md) | Skills vs Agents vs Teams |
 | [Release History](docs/RELEASE-HISTORY.md) | Detailed release notes for all 29 milestones |
