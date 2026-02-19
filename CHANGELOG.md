@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.24.0] - 2026-02-19
+
+### Added
+
+- **Conformance Matrix:** 336-checkpoint matrix covering every "In Scope v1" claim across 18 vision documents with 4-tier triage (T0 Foundation, T1 Integration, T2 Behavior, T3 UX/Polish) and dependency graph
+- **Foundation Audit (T0):** GSD lifecycle, skill loading pipeline, build health, subagent spawning, message bus all verified end-to-end
+- **Integration Audit (T1):** Observation pipeline (302 tests), AMIGA ICDs (1123 tests), dashboard collectors, console-to-staging flow, AGC pack integration verified
+- **Behavior Audit (T2):** Token budgets, pattern detection, bounded learning, AGC 38 instructions, staging 11 hygiene patterns, security hardening all verified
+- **UX/Polish Audit (T3):** GSD-OS build, CRT shader, window manager, dashboard design system, educational content all verified
+- **E2E Verification:** Full proof run with 9,355 tests passing, all 4 conformance gates at 100%
+- **Documentation Amendments:** 125 vision document amendments with fix-or-amend protocol, known-issues list with 8 deferral groups
+
+### Stats
+
+- 8 phases (223-230), 31 plans, 55 commits, 9,355 tests, 63 requirements
+- Conformance: 211 pass + 125 amended = 336 checkpoints, zero failures
+
+---
+
 ## [1.23.0] - 2026-02-19
 
 ### Added
