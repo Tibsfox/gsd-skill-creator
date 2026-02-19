@@ -4,7 +4,10 @@
  * Ties together registers, memory, ALU, decoder, and instructions
  * into a functioning computer that can execute programs from fixed memory.
  *
- * Pure functional: step() returns new state, never mutates.
+ * Phase 214 additions: integrated stepAgc() wraps the inner step() with
+ * interrupt checking, I/O channel routing, counter advancement, and timing.
+ *
+ * Pure functional: step() and stepAgc() return new state, never mutate.
  */
 
 import { RegisterId, ADDRESS12_MASK } from './types.js';
@@ -54,14 +57,41 @@ import {
   execNOOP,
   execRESUME,
 } from './instructions.js';
+import {
+  type InterruptState,
+  InterruptId,
+  createInterruptState,
+  isInterruptPending,
+  serviceNextInterrupt,
+  completeInterrupt,
+  setInhibit,
+  requestInterrupt,
+} from './interrupts.js';
+import {
+  type IoChannelState,
+  createIoChannelState,
+  readChannel,
+  writeChannel,
+} from './io-channels.js';
+import {
+  type CounterState,
+  createCounterState,
+  tickCounters,
+} from './counters.js';
+import {
+  type TimingState,
+  createTimingState,
+  advanceTiming,
+} from './timing.js';
 
 // Re-export CpuState for external consumers
 export type { CpuState } from './instructions.js';
 
-/** Result of a single CPU step. */
+/** Result of a single inner CPU step. */
 export interface StepResult {
   state: CpuState;
   mctsUsed: number;
+  mnemonic: string;
   ioOp?: { channel: number; value: number; type: 'read' | 'write' };
 }
 
@@ -90,9 +120,9 @@ export function createCpuState(): CpuState {
  * 3. DECODE instruction word (basic or extracode based on EXTEND flag)
  * 4. Advance Z to Z+1 (default next PC)
  * 5. EXECUTE the decoded instruction
- * 6. Return new state
+ * 6. Return new state with mnemonic
  */
-export function step(state: CpuState): StepResult {
+export function step(state: CpuState, ioChannelState?: IoChannelState): StepResult {
   // 1. FETCH: read instruction word from memory at Z
   const z = getRegister(state.registers, RegisterId.Z);
   const ebank = getRegister(state.registers, RegisterId.EBANK);
@@ -110,10 +140,25 @@ export function step(state: CpuState): StepResult {
 
   // 4. Advance Z to Z+1 (instructions that branch will override)
   const advancedZ = (z + 1) & ADDRESS12_MASK;
+
+  // If this is a READ instruction and we have IoChannelState, pre-populate
+  // the channel value so the instruction can read it.
+  let cpuIoChannels: ReadonlyMap<number, number> = state.ioChannels;
+  if (ioChannelState && (decoded.mnemonic === 'READ' || decoded.mnemonic === 'RAND' ||
+      decoded.mnemonic === 'ROR' || decoded.mnemonic === 'RXOR' ||
+      decoded.mnemonic === 'WAND' || decoded.mnemonic === 'WOR')) {
+    const channelNum = decoded.address;
+    const channelValue = readChannel(ioChannelState, channelNum);
+    const mutableMap = new Map(cpuIoChannels);
+    mutableMap.set(channelNum, channelValue);
+    cpuIoChannels = mutableMap;
+  }
+
   const stateWithAdvancedZ: CpuState = {
     ...state,
     registers: setRegister(state.registers, RegisterId.Z, advancedZ),
     indexValue: 0, // consumed
+    ioChannels: cpuIoChannels,
   };
 
   // 5. EXECUTE
@@ -132,6 +177,7 @@ export function step(state: CpuState): StepResult {
       inhibitInterrupt: instrResult.inhibitInterrupt,
     },
     mctsUsed: instrResult.mctsUsed,
+    mnemonic: decoded.mnemonic,
     ioOp: instrResult.ioOp,
   };
 }
@@ -188,4 +234,126 @@ function dispatchInstruction(
     // NOOP and unknown
     default: return execNOOP(state);
   }
+}
+
+// ─── Integrated AGC State (Phase 214) ────────────────────────────────────────
+
+/** Complete AGC state including all subsystems. */
+export interface AgcState {
+  readonly cpu: CpuState;
+  readonly interrupts: InterruptState;
+  readonly ioChannels: IoChannelState;
+  readonly counters: CounterState;
+  readonly timing: TimingState;
+}
+
+/** Result of one complete AGC cycle via stepAgc. */
+export interface AgcStepResult {
+  readonly state: AgcState;
+  readonly mctsUsed: number;
+  readonly mnemonic: string;
+  readonly interruptServiced?: InterruptId;
+  readonly ioOps: readonly { channel: number; value: number; type: 'read' | 'write' }[];
+}
+
+/**
+ * Create the initial full AGC state.
+ * CPU starts at Z=0o4000. All subsystems at initial state.
+ */
+export function createAgcState(): AgcState {
+  return {
+    cpu: createCpuState(),
+    interrupts: createInterruptState(),
+    ioChannels: createIoChannelState(),
+    counters: createCounterState(),
+    timing: createTimingState(),
+  };
+}
+
+/**
+ * Execute one complete AGC cycle: interrupt check -> instruction execution ->
+ * I/O routing -> counter advancement -> timing update.
+ *
+ * 1. Check for pending interrupts BEFORE fetching the next instruction
+ * 2. If interrupt pending and not inhibited: service it (save Z/BB, jump to vector)
+ * 3. Otherwise: fetch-decode-execute the next instruction
+ * 4. If the instruction produced an I/O write: route it to the I/O channel state
+ * 5. Handle INHINT/RELINT: sync interrupt inhibit state with CPU
+ * 6. Handle RESUME: complete the interrupt
+ * 7. Advance involuntary counters by MCTs consumed
+ * 8. If counters overflowed: add interrupt requests
+ * 9. Advance timing by MCTs consumed
+ * 10. Return new complete state + step metadata
+ */
+export function stepAgc(state: AgcState): AgcStepResult {
+  let { cpu, interrupts, ioChannels, counters, timing } = state;
+  let mctsUsed = 0;
+  let mnemonic = '';
+  let interruptServiced: InterruptId | undefined;
+  const ioOps: { channel: number; value: number; type: 'read' | 'write' }[] = [];
+
+  // 1. CHECK FOR PENDING INTERRUPTS
+  if (isInterruptPending(interrupts)) {
+    const ruptResult = serviceNextInterrupt(interrupts, cpu.registers);
+    if (ruptResult) {
+      cpu = { ...cpu, registers: ruptResult.registers };
+      interrupts = ruptResult.interruptState;
+      interruptServiced = ruptResult.interruptId;
+      mnemonic = 'RUPT';
+      mctsUsed = 2; // RUPT entry takes approximately 2 MCTs
+    }
+  }
+
+  // 2. If no interrupt was serviced, execute the next instruction
+  if (!interruptServiced) {
+    const stepResult = step(cpu, ioChannels);
+    cpu = stepResult.state;
+    mctsUsed = stepResult.mctsUsed;
+    mnemonic = stepResult.mnemonic;
+
+    // 3. ROUTE I/O OPERATIONS
+    if (stepResult.ioOp) {
+      ioOps.push(stepResult.ioOp);
+      if (stepResult.ioOp.type === 'write') {
+        ioChannels = writeChannel(
+          ioChannels,
+          stepResult.ioOp.channel,
+          stepResult.ioOp.value,
+          timing.totalMCTs,
+        );
+      }
+    }
+
+    // 4. Handle INHINT/RELINT: sync interrupt inhibit state with CPU
+    if (cpu.inhibitInterrupt !== state.cpu.inhibitInterrupt) {
+      interrupts = setInhibit(interrupts, cpu.inhibitInterrupt);
+    }
+
+    // 5. Handle RESUME: if the instruction was RESUME, complete the interrupt
+    if (mnemonic === 'RESUME') {
+      const resumeResult = completeInterrupt(interrupts, cpu.registers);
+      cpu = { ...cpu, registers: resumeResult.registers };
+      interrupts = resumeResult.interruptState;
+    }
+  }
+
+  // 6. ADVANCE INVOLUNTARY COUNTERS
+  const counterResult = tickCounters(counters, mctsUsed);
+  counters = counterResult.counterState;
+
+  // 7. If counters triggered interrupts, request them
+  for (const intId of counterResult.interruptRequests) {
+    interrupts = requestInterrupt(interrupts, intId);
+  }
+
+  // 8. ADVANCE TIMING
+  timing = advanceTiming(timing, mctsUsed);
+
+  return {
+    state: { cpu, interrupts, ioChannels, counters, timing },
+    mctsUsed,
+    mnemonic,
+    interruptServiced,
+    ioOps,
+  };
 }
