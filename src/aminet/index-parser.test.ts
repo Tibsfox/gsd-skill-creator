@@ -195,3 +195,42 @@ describe('index cache I/O', () => {
     expect(result).toBeNull();
   });
 });
+
+describe('performance', () => {
+  it('parses 84,000 entries in under 10 seconds (NFR-02)', () => {
+    // Generate a synthetic INDEX with 84,000 realistic entries
+    const categories = ['util', 'dev', 'mus', 'gfx', 'game', 'comm', 'text', 'biz', 'disk', 'hard'];
+    const subcategories = ['misc', 'edit', 'play', 'show', 'shoot', 'net', 'doc', 'dbase', 'cdrom', 'drivr'];
+    const lineCount = 84_000;
+
+    const lines: string[] = [];
+    // Add header
+    lines.push('| File                  Dir       Size Age Description');
+    lines.push('|---------+----------|---+---+------');
+
+    for (let i = 0; i < lineCount; i++) {
+      const cat = categories[i % categories.length];
+      const sub = subcategories[i % subcategories.length];
+      const size = ((i % 999) + 1);
+      const age = i % 365;
+      lines.push(`pkg${i}.lha  ${cat}/${sub}  ${size}K  ${age} Package number ${i} for Amiga`);
+    }
+
+    const content = lines.join('\n');
+
+    const start = performance.now();
+    const result = parseAminetIndex(content);
+    const elapsed = performance.now() - start;
+
+    // Log for CI visibility
+    console.log(`  INDEX parse: ${lineCount} entries in ${elapsed.toFixed(1)}ms`);
+
+    // All synthetic entries should parse successfully
+    expect(result.packages).toHaveLength(lineCount);
+    expect(result.parseErrors).toBe(0);
+    expect(result.totalLines).toBe(lineCount + 2); // +2 for header lines
+
+    // Must complete in under 10 seconds (NFR-02)
+    expect(elapsed).toBeLessThan(10_000);
+  });
+});
