@@ -221,12 +221,13 @@ npm test
 ### Architecture
 
 ```
-src/           TypeScript library (skill-creator CLI, dashboard generators)
+src/           TypeScript library (skill-creator CLI, dashboard, AMIGA, AGC)
 src-tauri/     Rust backend (PTY, file watcher, tmux, Claude sessions, IPC)
 desktop/       Vite webview frontend (WebGL engine, desktop shell, terminal)
+infra/         Bash infrastructure (PXE, VM provisioning, Minecraft, runbooks)
 ```
 
-Strict module boundaries: `src/` never imports `@tauri-apps/api`; `desktop/` never imports Node.js modules. All communication between Rust and the webview goes through Tauri IPC commands, events, and channels.
+Strict module boundaries: `src/` never imports `@tauri-apps/api`; `desktop/` never imports Node.js modules. All communication between Rust and the webview goes through Tauri IPC commands, events, and channels. `infra/` is self-contained bash scripts with no TypeScript dependencies.
 
 ---
 
@@ -284,10 +285,10 @@ All documentation lives in [`docs/`](docs/).
 | [Configuration](docs/CONFIGURATION.md) | Thresholds, retention, and cluster settings |
 | [File Structure](docs/FILE-STRUCTURE.md) | Project and source code layout |
 | [Development](docs/DEVELOPMENT.md) | Building, testing, and contributing |
-| [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 25 milestones |
+| [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 27 milestones |
 | [GSD Teams Guide](docs/GSD-TEAMS.md) | Teams vs subagents for GSD workflows |
 | [Comparison](docs/COMPARISON.md) | Skills vs Agents vs Teams |
-| [Release History](docs/RELEASE-HISTORY.md) | Detailed release notes for all 25 milestones |
+| [Release History](docs/RELEASE-HISTORY.md) | Detailed release notes for all 27 milestones |
 | [Troubleshooting](docs/TROUBLESHOOTING.md) | Common issues and solutions |
 | [Examples](examples/) | 34 ready-to-use skills, agents, and teams |
 
@@ -301,7 +302,7 @@ See [SECURITY.md](SECURITY.md) for vulnerability reporting, threat model, and se
 
 ## Project Stats
 
-25 milestones shipped (v1.0-v1.21) | 168 phases | 483 plans | ~214k LOC TypeScript, Rust & GLSL
+27 milestones shipped (v1.0-v1.23 + v1.8.1 patch) | 222 phases | 594 plans | ~280k LOC TypeScript, Rust, GLSL, Bash & Python
 
 ---
 
