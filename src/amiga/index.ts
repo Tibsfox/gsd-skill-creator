@@ -57,7 +57,55 @@ export * from './integration/index.js';
 export * from './ce1/index.js';
 
 // GL-1 Governance Layer
-export * from './gl1/index.js';
+// Explicit re-exports to avoid duplicate `DistributionPlan` (also exported by ce1/dividend-calculator.js)
+export {
+  CharterSchema,
+  CharterClauseSchema,
+  ConstitutionalConstraintSchema,
+  CharterVersionSchema,
+  CONSTITUTIONAL_CONSTRAINT_IDS,
+  COMMONS_CHARTER_YAML,
+  parseCharter,
+  ratifyCharter,
+  isRatified,
+} from './gl1/index.js';
+export type { Charter, CharterClause, ConstitutionalConstraint } from './gl1/index.js';
+export {
+  WeightingParameterSchema,
+  WeightingSpecSchema,
+  WEIGHTING_SPEC_YAML,
+  parseWeightingSpec,
+  validateParameterRange,
+} from './gl1/index.js';
+export type { WeightingParameter, WeightingSpec } from './gl1/index.js';
+export {
+  GovernanceDisputeSchema,
+  createDispute,
+  resolveDispute,
+  rejectDispute,
+} from './gl1/index.js';
+export type { GovernanceDispute } from './gl1/index.js';
+export {
+  RulesEngine,
+  DistributionPlanSchema,
+  EvaluationResultSchema,
+  ReasoningStepSchema,
+  VERDICT,
+} from './gl1/index.js';
+export type {
+  DistributionPlan as GL1DistributionPlan,
+  EvaluationResult,
+  ReasoningStep,
+} from './gl1/index.js';
+export {
+  DecisionLog,
+  DecisionEntrySchema,
+} from './gl1/index.js';
+export type { DecisionEntry } from './gl1/index.js';
+export {
+  PolicyQueryHandler,
+  handleGovernanceQuery,
+} from './gl1/index.js';
 
 // Meta-Mission (AMIGA M-5 Launch Gate)
 export * from './meta-mission/index.js';
