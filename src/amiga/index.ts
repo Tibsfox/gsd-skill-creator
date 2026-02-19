@@ -37,3 +37,6 @@ export type { EventEnvelope, CreateEnvelopeInput } from './message-envelope.js';
 
 // ICD payload schemas, metadata, and validation
 export * from './icd/index.js';
+
+// MC-1 Control Surface
+export * from './mc1/index.js';
