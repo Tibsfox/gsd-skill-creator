@@ -67,7 +67,5 @@
     { "teamName": "mc-platform", "description": "Hardware profiles and capability YAML for platform adaptation" },
     { "teamName": "mc-ops", "description": "Deployed VM and server state for monitoring and backup" }
   ],
-  "inputFrom": [
-    { "teamName": "mc-platform", "description": "Distribution abstraction libraries for cross-platform provisioning scripts" }
-  ]
+  "inputFrom": []
 }
