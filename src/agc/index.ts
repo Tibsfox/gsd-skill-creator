@@ -2,8 +2,9 @@
  * AGC Block II simulator -- barrel index.
  *
  * Re-exports all public types and functions from the AGC module.
- * Covers Phase 213 (CPU & Memory) and Phase 214 (Interrupts & Timing).
- * Downstream phases (216 Executive, 217 DSKY) import from here.
+ * Covers Phase 213 (CPU & Memory), Phase 214 (Interrupts & Timing),
+ * and Phase 216 (Executive, Waitlist, Restart Protection).
+ * Downstream phases (217 DSKY, 218 Executive Monitor) import from here.
  */
 
 // Types
@@ -167,3 +168,51 @@ export {
   mctsToSeconds,
   secondsToMCTs,
 } from './timing.js';
+
+// Executive (Phase 216)
+export type { ExecutiveState, CoreSet } from './executive.js';
+export {
+  JobState,
+  createExecutiveState,
+  novac,
+  findvac,
+  endofjob,
+  scheduleNext,
+  changePriority,
+  jobSleep,
+  jobWake,
+  saveContext,
+  restoreContext,
+  CORE_SET_COUNT,
+  MAX_PRIORITY,
+  VAC_AREA_COUNT,
+  VAC_AREA_SIZE,
+  ALARM_1202,
+  ALARM_1201,
+} from './executive.js';
+
+// Waitlist (Phase 216)
+export type { WaitlistState, WaitlistEntry, DispatchResult } from './waitlist.js';
+export {
+  createWaitlistState,
+  addWaitlistEntry,
+  advanceWaitlistTime,
+  dispatchWaitlist,
+  cancelWaitlistEntry,
+  getNextFireTime,
+  getActiveEntryCount,
+  MAX_WAITLIST_ENTRIES,
+  ALARM_1203,
+} from './waitlist.js';
+
+// Restart Protection (Phase 216)
+export type { RestartState, RestartPoint, BailoutResult } from './restart.js';
+export {
+  RestartGroup,
+  RESTART_GROUP,
+  createRestartState,
+  registerRestartPoint,
+  getRestartGroup,
+  getRestartTable,
+  bailout,
+} from './restart.js';
