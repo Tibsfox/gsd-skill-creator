@@ -253,6 +253,13 @@ export { detectSlaveFiles, buildWhdloadConfig, WHDLOAD_KICKSTART_MAP } from './w
 export { saveSnapshot, listSnapshots, deleteSnapshot, buildMissingRomGuidance, shouldDisableSaveStates } from './emulator-state.js';
 
 // ============================================================================
+// Pipeline orchestration (Phase 242)
+// ============================================================================
+
+export { executePipelineStage } from './pipeline.js';
+export type { PipelineStage, PipelineStageResult, StageContext } from './pipeline.js';
+
+// ============================================================================
 // Types (inferred from Zod schemas)
 // ============================================================================
 
