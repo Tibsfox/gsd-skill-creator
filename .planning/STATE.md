@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.26 — Aminet Archive Extension Pack
 Phase: 239 of 242 (Virus Scanner & Quarantine)
-Plan: 1 of 6 in current phase
+Plan: 3 of 6 in current phase
 Status: Executing phase 239
-Last activity: 2026-02-19 — Plan 01 complete (virus signature database, 52 patterns, 10 tests)
+Last activity: 2026-02-19 — Plan 03 complete (heuristic scanner, 8 rules, 21 tests, worst-case verdict)
 
-Progress: [███░░░░░░░░░░░░░░░░░] 17%
+Progress: [██████████░░░░░░░░░░] 50%
 
 ## Performance Metrics
 
@@ -38,11 +38,13 @@ Progress: [███░░░░░░░░░░░░░░░░░] 17%
 | 238   | 04   | 3min     | 2     | 8     |
 | 238   | 05   | 3min     | 2     | 3     |
 | 239   | 01   | 4min     | 1     | 6     |
+| 239   | 02   | 2min     | 1     | 2     |
+| 239   | 03   | 3min     | 1     | 2     |
 
 **Velocity:**
-- Total plans completed: 17
+- Total plans completed: 19
 - Average duration: 3min
-- Total execution time: 50min
+- Total execution time: 55min
 
 ## Accumulated Context
 
@@ -79,6 +81,7 @@ Progress: [███░░░░░░░░░░░░░░░░░] 17%
 - Plan 238-04: CollectionManifest Zod schema, importCollection/exportCollection YAML round-trip, 5 starter collections
 - Plan 238-05: Collection manager CRUD with DI-first pattern (collectionsDir param), atomic write-then-rename, slugified filenames, getCollectionPaths for bulkDownload
 - Plan 239-01: All Phase 239 Zod schemas (VirusSignature, ScanReport, QuarantineEntry, ScanPolicyConfig) + 52 virus signatures in 3 JSON files; last-wins deduplication; extensible via JSON drop-in
+- Plan 239-02: Context-aware scanBuffer with hex pattern matching, wildcard bitmasks, bootblock/hunk dispatch, <2s for 500KB x 50 sigs; 22 tests
 
 ### Pending Todos
 
@@ -91,11 +94,11 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 239-01-PLAN.md (virus signature database, 52 patterns, 10 tests)
+Stopped at: Completed 239-02-PLAN.md (signature scanner engine, 22 tests, context-aware dispatch)
 Resume file: None
 
 ## ▶ Next Up
 
-Plan 239-01 complete. Virus signature database with 52 patterns across 3 JSON files. All Phase 239 Zod schemas in types.ts. Ready for Plan 239-02.
+Plan 239-02 complete. Context-aware signature scanner with hex pattern matching. Ready for Plan 239-03.
 
-/gsd:execute-phase 239 — continue scanning phase (plan 02 next)
+/gsd:execute-phase 239 — continue scanning phase (plan 03 next)

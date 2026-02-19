@@ -109,7 +109,7 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 
 - [x] **NFR-01**: All operations work offline after initial INDEX fetch (search, browse, scan, install from cached data)
 - [x] **NFR-02**: INDEX parsing completes in <10 seconds for full ~84,000 entries
-- [ ] **NFR-03**: Signature scan of a single package completes in <2 seconds
+- [x] **NFR-03**: Signature scan of a single package completes in <2 seconds
 - [ ] **NFR-04**: Test suite achieves >=80% code coverage
 - [ ] **NFR-05**: No Kickstart ROM files distributed with the pack
 - [x] **NFR-06**: Mirror downloads identify as GSD-Aminet-Pack and respect rate limits
@@ -223,7 +223,7 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | AGT-05 | Phase 242 | Pending |
 | NFR-01 | Phase 236 | Complete |
 | NFR-02 | Phase 236 | Complete |
-| NFR-03 | Phase 239 | Pending |
+| NFR-03 | Phase 239 | Complete |
 | NFR-04 | Phase 242 | Pending |
 | NFR-05 | Phase 241 | Pending |
 | NFR-06 | Phase 237 | Complete |
