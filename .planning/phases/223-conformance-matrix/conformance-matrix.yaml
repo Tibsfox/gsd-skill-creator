@@ -4369,33 +4369,58 @@ documents:
           Bare-metal starter programs exist: Hello DSKY, Countdown, Calculator, and Blinker that progressively introduce
           I/O channels, interrupt handling, fixed-point math, and the Waitlist
         verification: build-check
-        status: pending
-        notes: "Files: src/agc/curriculum/programs/hello-dsky.agc, countdown.agc, calculator.agc, blinker.agc"
+        status: pass
+        notes: >-
+          Files: src/agc/curriculum/programs/ contains 8 .agc files (exceeds claim of 4): hello-dsky.agc, countdown.agc,
+          calculator.agc, blinker.agc, scheduler.agc, priority.agc, restart.agc, capstone.agc
         tier: T3
         depends_on: []
-        evidence: ""
+        evidence: >-
+          All 8 .agc program files exist with valid AGC assembly syntax. hello-dsky.agc: CA DISPVAL, EXTEND, WRITE 10
+          (writes display pattern to DSKY channel 10), TC DONE loop. countdown.agc: decrements counter via CCS, writes
+          to channel 10. calculator.agc: loads two values from erasable, adds via AD, writes result to channel 10.
+          blinker.agc: alternates COMP ACTY annunciator on channel 11 with delay loops. scheduler.agc: three job bodies
+          writing identifiers to channel 10. priority.agc: high/low priority job preemption demo. restart.agc: BAILOUT
+          restart group demo. capstone.agc: full Apollo 11 1202 alarm reproduction with P63 guidance, radar, display,
+          background, and filler jobs.
       - id: agc-019
         section: Part 3 > Module Architecture > curriculum/
         claim: >-
           Curriculum has 11 chapters covering orientation, hardware, ISA, assembly, Executive/Waitlist, DSKY,
           interpreter, guidance, failsafe, Apollo 11 case study, and AGC-to-GSD application
         verification: build-check
-        status: pending
+        status: pass
         notes: "Files: src/agc/curriculum/chapters/01-orientation.md through 11-agc-to-gsd.md"
         tier: T3
         depends_on: []
-        evidence: ""
+        evidence: >-
+          All 11 chapter .md files exist with YAML frontmatter and educational content. Topics verified:
+          01-orientation (AGC role, specs, modern equivalents), 02-hardware (core rope, erasable, bank switching),
+          03-isa (15 basic + 18 extracode instructions, ones complement), 04-assembly (writing AGC programs, labels,
+          directives), 05-executive-waitlist (cooperative scheduling, timed tasks), 06-dsky (display, keyboard,
+          VERB/NOUN), 07-interpreter (double-precision on single-precision), 08-guidance (lunar descent P63/P64/P66),
+          09-failsafe (BAILOUT, restart groups), 10-apollo-11 (1202 alarm minute-by-minute), 11-agc-to-gsd (AGC to
+          modern/GSD pattern mapping). Each chapter has prerequisites, learning objectives, estimated minutes, and
+          archive/concept references matching types.ts ChapterMeta schema.
       - id: agc-020
         section: Part 3 > Module Architecture > curriculum/exercises/
         claim: >-
           8 hands-on exercises exist: hello-dsky, countdown, calculator, blinker, scheduler, priority, restart, and
           capstone-1202
         verification: build-check
-        status: pending
+        status: pass
         notes: "Files: src/agc/curriculum/exercises/01-hello-dsky.md through 08-capstone-1202.md"
         tier: T3
         depends_on: []
-        evidence: ""
+        evidence: >-
+          All 8 exercise .md files exist with YAML frontmatter. 01-hello-dsky (beginner, ch4, writes display value to
+          DSKY channel 10), 02-countdown (beginner, ch4, counts 10 to 0 on R1), 03-calculator (intermediate, ch3, add
+          two numbers from erasable), 04-blinker (intermediate, ch5, toggle COMP ACTY with delay), 05-scheduler
+          (intermediate, ch5, 3 jobs at different priorities), 06-priority (advanced, ch5, guidance preempting display),
+          07-restart (advanced, ch9, BAILOUT and restart group preservation), 08-capstone-1202 (advanced, ch10, full
+          Apollo 11 1202 alarm reproduction). Each exercise references its corresponding program via programSlug.
+          Exercises are hands-on with prerequisites, overview, code walkthrough, expected behavior, and verification
+          steps.
       - id: agc-021
         section: Part 3 > Module Architecture > curriculum/
         claim: A curriculum runner and type system exist to drive the educational experience programmatically
