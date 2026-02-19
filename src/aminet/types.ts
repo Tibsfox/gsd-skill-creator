@@ -730,3 +730,153 @@ export const CollectionManifestSchema = z.object({
 }).strict();
 
 export type CollectionManifest = z.infer<typeof CollectionManifestSchema>;
+
+// ============================================================================
+// Virus signature schemas
+// ============================================================================
+
+export const SignaturePatternSchema = z.object({
+  /** Hex string of bytes to match (big-endian, e.g., "536F6D657468696E67") */
+  bytes: z.string(),
+  /** Byte offset: fixed number or 'any' to scan entire region */
+  offset: z.union([z.number().int().nonnegative(), z.literal('any')]).default('any'),
+  /** Optional hex bitmask for wildcard bytes */
+  mask: z.string().optional(),
+  /** Human-readable description of what this pattern matches */
+  description: z.string().optional(),
+});
+export type SignaturePattern = z.infer<typeof SignaturePatternSchema>;
+
+export const VirusSignatureSchema = z.object({
+  /** Virus name (e.g., "SCA", "Byte Bandit") */
+  name: z.string(),
+  /** Signature type: which binary context this applies to */
+  type: z.enum(['bootblock', 'file', 'link']),
+  /** Severity: critical/high/medium/low */
+  severity: z.enum(['critical', 'high', 'medium', 'low']),
+  /** Byte patterns to search for -- ANY match = detection */
+  patterns: z.array(SignaturePatternSchema).min(1),
+  /** Human-readable description */
+  description: z.string(),
+  /** Reference URLs (VHT encyclopedia, Wikipedia, etc.) */
+  references: z.array(z.string()).default([]),
+});
+export type VirusSignature = z.infer<typeof VirusSignatureSchema>;
+
+export const VirusSignatureDatabaseSchema = z.object({
+  /** Schema version */
+  version: z.literal(1),
+  /** Human-readable description of this signature set */
+  description: z.string(),
+  /** Array of virus signatures */
+  signatures: z.array(VirusSignatureSchema),
+});
+export type VirusSignatureDatabase = z.infer<typeof VirusSignatureDatabaseSchema>;
+
+// ============================================================================
+// Scan result schemas
+// ============================================================================
+
+export const ScanMatchSchema = z.object({
+  /** Name of the matched virus signature */
+  signatureName: z.string(),
+  /** Type of the matched signature */
+  signatureType: z.enum(['bootblock', 'file', 'link']),
+  /** Severity of the matched signature */
+  severity: z.enum(['critical', 'high', 'medium', 'low']),
+  /** Byte offset where the pattern was found */
+  matchOffset: z.number().int().nonnegative(),
+  /** Which pattern within the signature matched */
+  patternIndex: z.number().int().nonnegative(),
+});
+export type ScanMatch = z.infer<typeof ScanMatchSchema>;
+
+export const HeuristicFlagSchema = z.object({
+  /** Rule identifier (e.g., "small-first-hunk", "boot-virus-pattern") */
+  rule: z.string(),
+  /** Severity level */
+  severity: z.enum(['info', 'warning', 'critical']),
+  /** Human-readable description */
+  description: z.string(),
+});
+export type HeuristicFlag = z.infer<typeof HeuristicFlagSchema>;
+
+export const ScanVerdictSchema = z.enum(['clean', 'suspicious', 'infected', 'unscanned']);
+export type ScanVerdict = z.infer<typeof ScanVerdictSchema>;
+
+export const ScanDepthSchema = z.enum(['fast', 'standard', 'thorough']);
+export type ScanDepth = z.infer<typeof ScanDepthSchema>;
+
+export const ScanReportSchema = z.object({
+  /** Full Aminet path of the scanned file */
+  fullPath: z.string(),
+  /** Final merged verdict */
+  verdict: ScanVerdictSchema,
+  /** ISO 8601 timestamp of scan completion */
+  scannedAt: z.string(),
+  /** Scan depth used */
+  scanDepth: ScanDepthSchema,
+  /** Signature matches found (empty if clean) */
+  signatureMatches: z.array(ScanMatchSchema),
+  /** Heuristic flags raised (empty if clean) */
+  heuristicFlags: z.array(HeuristicFlagSchema),
+  /** Emulated scan result (only in thorough mode) */
+  emulatedResult: z.object({
+    ran: z.boolean(),
+    verdict: ScanVerdictSchema,
+    tool: z.string(),
+    output: z.string(),
+    timedOut: z.boolean(),
+  }).optional(),
+  /** Community checksum match result */
+  checksumMatch: z.object({
+    sha256: z.string(),
+    knownGood: z.boolean(),
+    source: z.string(),
+  }).optional(),
+});
+export type ScanReport = z.infer<typeof ScanReportSchema>;
+
+// ============================================================================
+// Quarantine schemas
+// ============================================================================
+
+export const QuarantineEntrySchema = z.object({
+  /** Original file path before quarantine */
+  originalPath: z.string(),
+  /** ISO 8601 timestamp of quarantine */
+  quarantinedAt: z.string(),
+  /** Full scan report that triggered quarantine */
+  scanReport: ScanReportSchema,
+  /** SHA-256 hash of the quarantined file */
+  sha256: z.string(),
+});
+export type QuarantineEntry = z.infer<typeof QuarantineEntrySchema>;
+
+// ============================================================================
+// Scan policy schemas
+// ============================================================================
+
+export const ScanDepthConfigSchema = z.object({
+  signatureScan: z.boolean(),
+  heuristicScan: z.boolean(),
+  emulatedScan: z.boolean(),
+  checksumLookup: z.boolean(),
+});
+export type ScanDepthConfig = z.infer<typeof ScanDepthConfigSchema>;
+
+export const ScanPolicyConfigSchema = z.object({
+  version: z.literal(1),
+  defaultDepth: ScanDepthSchema,
+  depths: z.object({
+    fast: ScanDepthConfigSchema,
+    standard: ScanDepthConfigSchema,
+    thorough: ScanDepthConfigSchema,
+  }),
+  emulatedScan: z.object({
+    timeoutMs: z.number().int().positive().default(60000),
+    fsUaePath: z.string().default('fs-uae'),
+    kickstartPath: z.string().nullable().default(null),
+  }).optional(),
+});
+export type ScanPolicyConfig = z.infer<typeof ScanPolicyConfigSchema>;
