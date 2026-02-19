@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.26 — Aminet Archive Extension Pack
 Phase: 241 of 242 (Emulator Configuration & Launch)
-Plan: 2 of 6 in current phase
-Status: Executing Phase 241 (Wave 1)
-Last activity: 2026-02-19 — Plan 02 complete (5 hardware profiles with frozen-copy lookup functions, 37 tests)
+Plan: 4 of 6 in current phase
+Status: Executing Phase 241 (Wave 2)
+Last activity: 2026-02-19 — Plan 04 complete (profile auto-selection + FS-UAE launch orchestrator, 33 tests)
 
-Progress: [██████░░░░░░░░░░░░░░] 33%
+Progress: [█████████████░░░░░░░] 67%
 
 ## Performance Metrics
 
@@ -51,11 +51,13 @@ Progress: [██████░░░░░░░░░░░░░░] 33%
 | 240   | 05   | 4min     | 2     | 3     |
 | 241   | 01   | 3min     | 1     | 3     |
 | 241   | 02   | 2min     | 1     | 2     |
+| 241   | 03   | 5min     | 1     | 2     |
+| 241   | 04   | 3min     | 1     | 2     |
 
 **Velocity:**
-- Total plans completed: 28
+- Total plans completed: 30
 - Average duration: 3min
-- Total execution time: 86min
+- Total execution time: 94min
 
 ## Accumulated Context
 
@@ -104,6 +106,8 @@ Progress: [██████░░░░░░░░░░░░░░] 33%
 - Plan 240-05: Scan gate enforcing INS-07 (refuse unscanned), INS-08 (refuse infected), INS-09 (suspicious override via confirmFn); installPackage orchestrator coordinating gate->extract->place->deps->track->state; barrel exports complete Phase 240 API; 19 tests
 - Plan 241-01: 9 Phase 241 Zod schemas (HardwareProfileId, HardwareProfile, KnownRom, DetectedRom, FsUaeConfig, LaunchConfig, LaunchResult, WhdloadEntry, EmulatorSnapshot) + FS-UAE config generator with buildFsUaeConfig/generateFsUaeConfig, path normalization, sorted keys, boolean 1/0 serialization; 23 tests
 - Plan 241-02: 5 hardware profiles (A500/A1200/A1200+030/A4000/WHDLoad) as embedded TS constants; HardwareProfile types defined locally (241-01 parallel); getProfile/getAllProfiles/getProfileForModel with deep-frozen structuredClone copies; 37 tests
+- Plan 241-03: ROM manager with CRC32 IEEE polynomial (no external deps), 12 known ROM entries (checksums only, no ROM data), scanRomDirectory with Cloanto XOR decryption and overdump handling, selectRomForProfile with WHDLoad-to-A1200 mapping, DI-based crc32Fn for testability; 32 tests
+- Plan 241-04: selectProfileFromReadme with priority-based matching (WHDLoad>040>030>AGA>020>OS3.x>A500 default); writeFsUaeConfig with recursive mkdir; launchEmulator orchestrating config gen+write+execFile with structured errors (NO_HARD_DRIVES, INVALID_PROFILE, FSUAE_MISSING, LAUNCH_FAILED); vi.mock for ESM child_process mocking; 33 tests
 
 ### Pending Todos
 
@@ -116,9 +120,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 241-02-PLAN.md (5 hardware profiles with frozen-copy lookup functions, 37 tests)
+Stopped at: Completed 241-04-PLAN.md (profile auto-selection + FS-UAE launch orchestrator, 33 tests)
 Resume file: None
 
 ## ▶ Next Up
 
-Phase 241 in progress (Wave 1: plans 01+02 parallel). Continue with remaining plans.
+Phase 241 in progress (Wave 2: plans 03+04 parallel). Continue with plans 05+06.
