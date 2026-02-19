@@ -2,10 +2,10 @@
 
 ## Current Position
 
-Phase: 199 of 222 (Foundation Types & Agent Registry)
-Plan: 3 of 3 in current phase (COMPLETE)
-Status: Phase Complete
-Last activity: 2026-02-19 -- Completed 199-03 (message envelope & barrel index)
+Phase: 202 of 222 (RFC Reference Skill)
+Plan: 2 of 3 in current phase (IN PROGRESS)
+Status: Executing -- Wave 1 complete (plans 01, 02), Wave 2 pending (plan 03)
+Last activity: 2026-02-19 -- Completed Plans 202-01 and 202-02
 
 Progress: [#.......................] 4% (1/24 phases)
 
@@ -14,7 +14,7 @@ Progress: [#.......................] 4% (1/24 phases)
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.23 Project AMIGA -- Phase 199: Foundation Types & Agent Registry
+**Current focus:** v1.23 Project AMIGA -- Phase 202: RFC Reference Skill
 
 ## Current Milestone
 
@@ -25,10 +25,9 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 
 ## Next Actions
 
-1. Phase 199 complete -- plan Wave 0 parallel phases (200, 201, 202)
-2. `/gsd:plan-phase 200` -- ICD schemas (depends on 199)
-3. `/gsd:plan-phase 201` -- AGC archive (parallel with 200)
-4. `/gsd:plan-phase 202` -- RFC skill (parallel with 200)
+1. Complete Plan 202-03 (agents, skill definition, pack scaffold) -- Wave 2
+2. `/gsd:execute-phase 200` -- Execute ICD schemas (parallel workstream)
+3. `/gsd:plan-phase 201` -- AGC archive (parallel workstream)
 
 ## Decisions
 
@@ -67,11 +66,10 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 199-03-PLAN.md (message envelope & barrel index) -- Phase 199 complete
+Stopped at: Completed Plans 202-01 (RFC index + search/fetch) and 202-02 (parse/save) -- Wave 2 next
 
 ### Key Files
 - `.planning/ROADMAP.md` -- 24 phases across 5 waves
 - `.planning/REQUIREMENTS.md` -- 99 requirements with traceability
-- `/tmp/v1.23/` -- 9 AMIGA planning documents
-- `/tmp/v1.22/` -- AGC vision, RFC scaffold
-- `/tmp/v1.24/` -- RFC skill definition
+- `infra/packs/rfc/data/rfc-index.yaml` -- 57 curated RFCs
+- `infra/packs/rfc/scripts/` -- rfc-search.py, rfc-fetch.py, rfc-parse.py, rfc-save.py
