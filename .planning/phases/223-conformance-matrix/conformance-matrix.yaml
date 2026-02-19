@@ -357,7 +357,8 @@ documents:
     section: Scope Boundaries > In Scope (v1)
     claim: Lock file generation pins skill versions with integrity hashes in .chipset/chipset.lock
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: lock file generation (.chipset/chipset.lock) with integrity hashes is unimplemented. No skill version pinning or lock file generation code. Deferred to future milestone."
     notes: 'No lock file generation code or .chipset/chipset.lock file exists. T2 cross-ref: SHA-256 integrity checksums exist
       in JSONL safety layer (src/validation/jsonl-safety.ts) but are not applied to chipset lock files.'
     tier: T2
@@ -373,7 +374,8 @@ documents:
     section: Scope Boundaries > In Scope (v1)
     claim: Local override support via .chipset/overrides/local.yaml (gitignored)
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: local override support via .chipset/overrides/local.yaml is unimplemented. No overrides directory or merge logic. Deferred to future milestone."
     notes: No override directory, no override code, no gitignore entry for chipset overrides
     tier: T2
     depends_on:
@@ -401,7 +403,8 @@ documents:
     section: Scope Boundaries > In Scope (v1)
     claim: Activity logging writes operational events to .chipset/logs/activity.jsonl
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: activity logging to .chipset/logs/activity.jsonl is unimplemented. No chipset activity logging code. Deferred to future milestone."
     notes: 'No chipset activity logging exists. T2 cross-ref: observation pipeline logs to .planning/patterns/sessions.jsonl
       with checksums, but no chipset-specific activity log.'
     tier: T2
@@ -416,7 +419,8 @@ documents:
     section: Scope Boundaries > In Scope (v1)
     claim: Three starter ASIC chipsets (web-app, cli-tool, library) exist as proof of concept
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: three starter ASIC chipsets (web-app, cli-tool, library) is unimplemented. Only agc-educational.yaml and minecraft-knowledge-world.yaml exist. Deferred to future milestone."
     notes: Only 2 domain-specific chipsets exist (agc-educational, minecraft-knowledge-world), not the 3 claimed generic starters
       (web-app, cli-tool, library)
     tier: T2
@@ -448,7 +452,8 @@ documents:
     claim: 'Specialist agents are defined but only forked when matching work arrives (lazy activation), with lifecycle: dormant
       > active > idle > dormant'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: lazy activation with lifecycle states for specialist agents is partially implemented. ExecScheduler has TeamState but lazy forking is not fully wired. Deferred to future milestone."
     notes: ExecScheduler has ready/sleeping states, ExecKernel has idle/running/stopped, but no dormant > active > idle >
       dormant lifecycle exists. No lazy activation triggered by matching work.
     tier: T2
@@ -512,7 +517,8 @@ documents:
     claim: Consumer registration is declarative -- each consumer declares interest patterns and dispatcher filters before
       dispatch
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: declarative consumer registration with interest pattern filtering is unimplemented. Rust watcher emits events to single Tauri channel. Deferred to future milestone."
     notes: Watcher emits all events to webview; no declarative consumer registration or interest pattern filtering
     tier: T2
     depends_on:
@@ -525,7 +531,8 @@ documents:
     claim: Backpressure handles consumer lag with configurable depth per-consumer queue; overflow drops oldest events and
       emits catchup signal
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: per-consumer backpressure with configurable queue depth is unimplemented. Watcher uses simple mpsc channel. Deferred to future milestone."
     notes: No backpressure or per-consumer queuing implemented
     tier: T2
     depends_on:
@@ -538,7 +545,8 @@ documents:
     claim: silicon.yaml manifest defines base model, adapters (hot/cold), inference server config, distillation params, hardware
       envelope, fallback thresholds, and bounded learning constraints
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: silicon.yaml manifest (base model, adapters, inference config, distillation) is unimplemented. No silicon.yaml exists. Deferred to future milestone."
     notes: No silicon.yaml manifest exists; chipset.yaml schema covers skills/agents/teams but not silicon-specific fields
     tier: T2
     depends_on:
@@ -552,7 +560,8 @@ documents:
     claim: SessionObserver extracts training pairs (input context + desired output) alongside pattern detection, stored as
       JSONL under .chipset/training/pairs/
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: SessionObserver extracting training pairs alongside pattern detection is unimplemented. SessionObserver captures sessions for pattern detection only. Deferred to future milestone."
     notes: SessionObserver writes pattern detection data to JSONL but not training pairs under .chipset/training/pairs/
     tier: T2
     depends_on:
@@ -566,7 +575,8 @@ documents:
     claim: 'QLoRA distillation pipeline: data validation > QLoRA fine-tuning (Unsloth/PEFT) > adapter evaluation > adapter
       registration > hot-deploy'
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: QLoRA distillation pipeline (Unsloth/PEFT) is unimplemented. No references to QLoRA, Unsloth, or fine-tuning in codebase. Deferred to future milestone."
     notes: QLoRA distillation pipeline is entirely unimplemented
     tier: T2
     depends_on:
@@ -578,7 +588,8 @@ documents:
     section: The Adaptive Loop > Phase 3
     claim: 'Adapter lifecycle follows states: training > quarantine > provisional > confirmed > stable > archived'
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: adapter lifecycle states (training>quarantine>provisional>confirmed>stable>archived) are unimplemented. Staging module has similar concepts for content, not ML adapters. Deferred to future milestone."
     notes: Adapter lifecycle states exist in staging module but not for silicon adapters
     tier: T2
     depends_on:
@@ -592,7 +603,8 @@ documents:
     claim: 'Hybrid routing: high confidence uses local adapter, low confidence queries both local and Claude API and compares,
       no adapter routes to Claude API'
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: hybrid routing (local adapter vs Claude API based on confidence) is unimplemented. No local adapter inference exists. Deferred to future milestone."
     notes: No hybrid routing between local adapter and cloud API implemented
     tier: T2
     depends_on:
@@ -605,7 +617,8 @@ documents:
     claim: 'Bounded learning constraints apply to adapter refinement: max 20% weight delta, min 3 corrections before retrain,
       7-day cooldown, quarantine period of 1 milestone'
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: bounded learning constraints for adapter refinement are unimplemented for adapters. RefinementEngine enforces bounds for skill refinement only, not ML adapter weights. Deferred to future milestone."
     notes: Bounded learning constraints exist for skill refinement but not for adapter refinement
     tier: T2
     depends_on:
@@ -619,7 +632,8 @@ documents:
     claim: 'Silicon layer degrades gracefully: no GPU/no silicon.yaml = pure cloud; GPU + cloud-only = GPU unused; GPU + hybrid
       = best of both; GPU + local-only = full local; no GPU + silicon.yaml = CPU-only inference'
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: silicon layer graceful degradation matrix is unimplemented. No GPU detection or silicon fallback logic exists. Deferred to future milestone."
     notes: No silicon layer graceful degradation implemented; only Tauri native capability detection exists
     tier: T2
     depends_on:
@@ -632,7 +646,8 @@ documents:
     claim: '.chipset/ directory contains: chipset.yaml, silicon.yaml, chipset.lock, adapters/ (with archived/), training/pairs/
       and training/eval/, history/, logs/ (activity/silicon-usage/distillation/refinements/budget-usage), overrides/, scripts/'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: .chipset/ directory with silicon.yaml, chipset.lock, adapters/, logs/ is incomplete. Only chipset YAML configs and schema/ exist. Deferred to future milestone."
     notes: .chipset/ directory structure is minimal; does not match claimed layout
     tier: T2
     depends_on:
@@ -645,7 +660,8 @@ documents:
     claim: 'Training pairs are never shared by default; adapters are opt-in sharing; evaluation datasets anonymized before
       sharing; silicon.yaml supports privacy: strict mode'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: training pair privacy (no sharing by default, opt-in, anonymization) is unimplemented. No community sharing or privacy controls exist. Deferred to future milestone."
     notes: No community sharing or privacy controls implemented
     tier: T2
     depends_on:
@@ -657,7 +673,8 @@ documents:
     claim: 'Adapter security: quarantine + evaluation before promotion to stable; append-only JSONL with integrity hashes;
       sharing: private flag; hard VRAM budget limits; base model checksum verification in silicon.yaml'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: adapter security (quarantine before promotion, integrity checks) is unimplemented for adapters. JSONL integrity exists for observation pipeline only. Deferred to future milestone."
     notes: No adapter security measures implemented
     tier: T2
     depends_on:
@@ -698,7 +715,8 @@ documents:
     claim: 'Level 3 (Locally-Trained Adapters): silicon layer trains LoRA adapters from observed patterns for local inference,
       reducing API dependency'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: Level 3 (Locally-Trained Adapters) requiring silicon layer LoRA training is unimplemented. No LoRA training code exists. Promotion pipeline stages 1-3 work (observe/pattern/skill). Deferred to future milestone."
     notes: Silicon layer LoRA adapter training not implemented; hooks do not exist
     tier: T2
     depends_on:
@@ -712,7 +730,8 @@ documents:
     claim: 'Level 4 (Compiled Compute): proven stable patterns compile to deterministic code (compute shaders, optimized scripts)
       running at native hardware speed with zero inference overhead'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: Level 4 (Compiled Compute) requiring pattern-to-code compilation is unimplemented. No compute shader compilation or deterministic invariant detection. Deferred to future milestone."
     notes: Compiled compute (Level 4) is a frontier concept; no implementation exists
     tier: T2
     depends_on:
@@ -996,7 +1015,8 @@ documents:
     section: 'Part 1: The Same Message, Encoded'
     claim: Assembly-encoded messages achieve at least 70% token reduction compared to equivalent JSON/natural language messages
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: GSD ISA assembly-encoded messages for 70% token reduction is unimplemented. No GSD ISA assembler or encoder exists. AGC module is separate educational ISA. Deferred to Phase 2+ future work."
     notes: GSD ISA message encoding not implemented; AGC is a separate educational ISA
     tier: T2
     depends_on:
@@ -1010,7 +1030,8 @@ documents:
     claim: Phase transitions, skill activations, artifact handoffs, budget updates, verification results, error signals, and
       observation pipeline messages are all encodable in GSD ISA format
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: GSD ISA message encoding for phase transitions, skill activations, artifact handoffs, budget updates, verification results, error conditions, heartbeats is unimplemented. Deferred to Phase 2+."
     notes: GSD ISA message format not implemented for any message category
     tier: T2
     depends_on:
@@ -1089,7 +1110,8 @@ documents:
     section: 'Part 3: The Gate Primitives'
     claim: 'Logic gate instructions defined: AND, OR, NOT, XOR, NAND, NOR operating on register Boolean values (0=false, 1=true)'
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: GSD-L logic gate instructions (AND, OR, NOT, XOR, NAND, NOR) are unimplemented. AGC simulator has its own bitwise ops (MASK, RAND, WAND). Deferred to Phase 2+."
     notes: GSD-L logic gate instructions not implemented; AGC has MASK/RAND/ROR/RXOR but those are AGC-specific
     tier: T2
     depends_on:
@@ -1104,7 +1126,8 @@ documents:
     claim: Combinational logic (stateless triggers) implemented with AND, OR, NOT, CMP, BEQ/BNE; Sequential logic (stateful
       observations) implemented with PUSH, POP, CMP with pipeline registers
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: combinational and sequential logic instructions (AND, OR, NOT, CMP, BEQ/BNE, PUSH, POP) are unimplemented. AGC simulator has its own control flow. Deferred to Phase 2+."
     notes: GSD ISA combinational/sequential logic instructions not implemented
     tier: T2
     depends_on:
@@ -1152,7 +1175,8 @@ documents:
     claim: 'Chipset YAML maps FPGA concepts: LUT=skill activation truth table, CLB=agent block, routing fabric=bus architecture,
       block RAM=skill registry, configuration bitstream=chipset.yaml'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: chipset YAML FPGA concept mapping (LUT=skill activation, CLB=agent block, routing fabric=bus) is unimplemented. Chipset YAML has skills/agents/teams/routing but not FPGA abstractions. Deferred to Phase 2+."
     notes: Chipset YAML has skills/agents/teams/routing/budget but no FPGA concept mapping (LUT, CLB, routing fabric)
     tier: T2
     depends_on:
@@ -1183,7 +1207,8 @@ documents:
     claim: 'FPGA synthesis pipeline has 6 stages: Elaboration, Synthesis, Technology Mapping, Place and Route, Bitstream Generation,
       Simulation'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: FPGA 6-stage synthesis pipeline (Elaboration, Synthesis, Technology Mapping, Place and Route, Bitstream Generation, Programming) is unimplemented. Chipset module has copper/blitter/exec but not FPGA synthesis. Deferred to Phase 2+."
     notes: No FPGA synthesis pipeline exists; chipset has no Elaboration/Synthesis/Technology Mapping/Place and Route/Bitstream
       stages
     tier: T2
@@ -1199,7 +1224,8 @@ documents:
     claim: '5-level abstraction stack defined: Level 1 (Bus Protocol), Level 2 (Machine Language), Level 3 (Assembly Language/THE
       BRIDGE), Level 4 (GSD Workflow), Level 5 (Application)'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: 5-level abstraction stack (Bus Protocol, Machine Language, Assembly, HDL, Application) is unimplemented as explicit layers. Codebase has implicit layering (CLI->orchestrator->executor->skill-applicator). Deferred to Phase 2+."
     notes: 5-level abstraction stack not implemented as described; conceptual mapping only
     tier: T2
     depends_on:
@@ -1214,7 +1240,8 @@ documents:
     claim: 'I/O extension instructions defined: GPIO_SET, GPIO_READ, I2C_WRITE, I2C_READ, SPI_XFER, UART_TX, UART_RX, ADC_READ,
       PWM_SET with mappings to Raspberry Pi Python, Arduino C++, and TI MSP430'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: I/O extension instructions (GPIO_SET, GPIO_READ, I2C_WRITE, I2C_READ, SPI_XFER, UART_TX, UART_RX) are unimplemented. AGC has I/O channels but not GSD ISA I/O. Deferred to Phase 2+."
     notes: No I/O extension instructions (GPIO, I2C, SPI, UART, ADC, PWM) exist in the GSD ISA
     tier: T2
     depends_on:
@@ -1228,7 +1255,8 @@ documents:
     section: 'Part 6: From GSD Blocks to Real FPGA Bitstreams'
     claim: GSD-HDL to VHDL translation produces synthesizable VHDL entity/architecture from chipset agent definitions
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: GSD-HDL to VHDL translation is unimplemented. No HDL code generation exists. Deferred to Phase 2+."
     notes: No GSD-HDL to VHDL translation exists
     tier: T2
     depends_on:
@@ -1275,7 +1303,8 @@ documents:
     section: 'Part 7: Copper Lists for AI'
     claim: Copper list syntax uses .copper/.end blocks with labels (@name), supporting WAIT on PHASE, EVENT, and SIGNAL conditions
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: copper list .copper/.end syntax with labels (@name) is unimplemented. Pipeline system uses JSON-serialized Pipeline objects. Deferred to Phase 2+."
     notes: Pipeline uses YAML/JSON format with WAIT/MOVE/SKIP, not .copper/.end block syntax with @labels
     tier: T2
     depends_on:
@@ -1291,7 +1320,8 @@ documents:
     claim: 'GSD ISA registers map to real architectures: ARM A64 (X0-X7), RISC-V (x10-x17), x86-64 (RAX-R15), 68000 (D0-D7)
       with documented correspondence table'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: GSD ISA register mapping to real architectures (ARM A64, RISC-V, x86-64, 68000) is unimplemented. AGC module has its own fixed registers. Deferred to Phase 2+."
     notes: No GSD ISA register-to-architecture mapping exists in code
     tier: T2
     depends_on:
@@ -1306,7 +1336,8 @@ documents:
     claim: 'Hardware I/O safety layer has 3 stages: Instruction Validator (voltage, current, pin conflict, timing checks),
       Simulation First (virtual hardware), Hardware Bridge (device-specific translation with safety limits)'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: hardware I/O safety layer (Instruction Validator, Simulation First, Hardware Bridge) is unimplemented. Staging layer provides content safety only. Deferred to Phase 2+."
     notes: No hardware I/O safety layer exists
     tier: T2
     depends_on:
@@ -1321,7 +1352,8 @@ documents:
     claim: '4 privilege levels defined: Level 0 KERNEL (GSD core, staging layer), Level 1 SUPERVISOR (skill-creator, chipset
       manager), Level 2 USER (agents, workflows), Level 3 SANDBOX (educational mode). Escalation via SYSCALL instruction'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: 4 privilege levels (KERNEL, SUPERVISOR, USER, SANDBOX) are unimplemented. Staging layer has trust levels but not ISA privilege rings. Deferred to Phase 2+."
     notes: No privilege level system or SYSCALL instruction exists
     tier: T2
     depends_on:
@@ -1371,7 +1403,8 @@ documents:
     claim: '5 open specification components: Instruction Set Reference, Bus Protocol Specification, I/O Bridge Specification,
       Chipset Definition Schema, VHDL/Verilog Generation Rules'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: 5 open specification components (ISA Reference, Bus Protocol, I/O Bridge, HDL Guide, Extension Template) are unimplemented. Deferred to Phase 2+."
     notes: Only Chipset Definition Schema exists of the 5 claimed specification components
     tier: T2
     depends_on:
@@ -1386,7 +1419,8 @@ documents:
     claim: '9 ISA extension categories with naming convention: GSD-I (Integer base), GSD-L (Logic), GSD-F (Fabrication), GSD-S
       (Scientific), GSD-M (Music/Audio), GSD-V (Visual), GSD-N (Networking), GSD-R (Radio), GSD-P (Power)'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: 9 ISA extension categories (GSD-I through GSD-X) with naming conventions are unimplemented. No extension category system exists. Deferred to Phase 2+."
     notes: Extension categories exist only in vision document, not implemented
     tier: T2
     depends_on:
@@ -1450,7 +1484,8 @@ documents:
     claim: Actual bus encoding may use compact text representation for debuggability with binary encoding reserved for performance-critical
       paths (copper lists, DMA)
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: compact text bus encoding with binary reserved for future is unimplemented. Pipeline coprocessor uses JSON/YAML serialization. Deferred to Phase 2+."
     notes: No bus encoding exists (neither compact text nor binary)
     tier: T2
     depends_on:
@@ -1464,7 +1499,8 @@ documents:
     section: Technical Notes
     claim: Register names (R0-R7, SK, BG, etc.) are configurable aliases for domain clarity
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: configurable register name aliases are unimplemented. AGC module has fixed registers. GSD ISA register system is Phase 2+."
     notes: No GSD ISA registers (R0-R7, SK, BG) exist; no configurable alias system
     tier: T2
     depends_on:
@@ -1492,7 +1528,8 @@ documents:
     section: Technical Notes
     claim: 'Safety validation layer is transparent: users can inspect what checks were run and why instructions were flagged'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: transparent safety validation layer for ISA instructions is unimplemented. Staging hygiene provides content validation only. Deferred to Phase 2+."
     notes: No ISA safety validation layer exists to inspect
     tier: T2
     depends_on:
@@ -1521,7 +1558,8 @@ documents:
     section: Technical Notes
     claim: All I/O bridges implementable as skill-creator skills for community device support
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: I/O bridges implementable as skill-creator skills is unimplemented. Skill-creator generates general-purpose skills, not hardware I/O bridges. Deferred to Phase 2+."
     notes: No I/O bridge skills exist; skill-creator generates general skills, not hardware bridges
     tier: T2
     depends_on:
@@ -1536,7 +1574,8 @@ documents:
     claim: Simulation environment uses same instruction set as real system with added visualization and safety nets, no divergent
       toy mode
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: simulation environment using same GSD ISA instruction set is unimplemented. AGC simulator provides educational simulation only. GSD ISA simulation is Phase 2+."
     notes: No GSD ISA simulation environment exists
     tier: T2
     depends_on:
@@ -1552,7 +1591,8 @@ documents:
     claim: Bus messages encoded in GSD ISA use at least 70% fewer tokens than equivalent JSON/natural language, measured across
       100 representative inter-agent communications benchmark
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: 70% token reduction benchmark for GSD ISA bus messages is unimplemented. No GSD ISA encoder or benchmark exists. Deferred to Phase 2+."
     notes: No GSD ISA token reduction benchmark exists
     tier: T2
     depends_on:
@@ -3438,7 +3478,8 @@ documents:
     claim: GSD-OS treats hardware interfaces (audio, MIDI, camera, GPIO) as first-class participants in the agent architecture
       with their own skills, data flows, and place in the block diagram
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: hardware interfaces (audio, MIDI, camera, GPIO) as first-class agentic participants is unimplemented. Type definitions reference hardware concepts but no integration code. Requires physical hardware. Deferred."
     notes: Hardware interfaces are conceptually referenced but not implemented as first-class agent architecture participants
     tier: T2
     depends_on: []
@@ -3450,7 +3491,8 @@ documents:
     section: 'Part 4: The Hardware Ecosystem'
     claim: Scarlett 18i20 audio interface is addressable from GSD-OS for audio routing and remote preamp control
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: Scarlett 18i20 audio interface addressable from GSD-OS is unimplemented. No audio routing or preamp control code. Requires physical hardware. Deferred."
     notes: Scarlett 18i20 integration not implemented; requires physical hardware
     tier: T2
     depends_on: []
@@ -3461,7 +3503,8 @@ documents:
     section: 'Part 4: The Hardware Ecosystem'
     claim: MOTU MIDI Express 128 is usable as a 128-channel bidirectional control bus from GSD-OS agent teams
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: MOTU MIDI Express 128 as 128-channel control bus is unimplemented. No MIDI integration code. Requires physical hardware. Deferred."
     notes: MOTU MIDI Express 128 integration not implemented; requires physical hardware
     tier: T2
     depends_on: []
@@ -3472,7 +3515,8 @@ documents:
     claim: Pentax K-1 camera is controllable over WiFi from GSD-OS for interval shooting parameters, capture timing, and file
       retrieval
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: Pentax K-1 camera control over WiFi is unimplemented. No camera control code. Requires physical hardware. Deferred."
     notes: Pentax K-1 camera integration not implemented; requires physical hardware
     tier: T2
     depends_on: []
@@ -3482,7 +3526,8 @@ documents:
     section: 'Part 4: The Hardware Ecosystem'
     claim: ProFire 2626 in standalone mode converts analog signals to ADAT digital streams that chain into Scarlett
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: ProFire 2626 ADAT chaining into Scarlett is unimplemented. No ADAT integration code. Requires physical hardware. Deferred."
     notes: ProFire 2626 integration not implemented; requires physical hardware
     tier: T2
     depends_on: []
@@ -3493,7 +3538,8 @@ documents:
     claim: Every block shows its internals -- every agent definition is readable YAML, every skill has its SKILL.md, the system
       is transparent at every level
     verification: manual-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: every block shows internals (readable YAML, SKILL.md, config) applies conceptually via AGC block definitions but no interactive block inspector UI. Deferred to future milestone."
     notes: Blocks have definitions but no runtime UI showing internals
     tier: T2
     depends_on: []
@@ -3521,7 +3567,8 @@ documents:
     claim: Block diagrams built by beginners use the same architecture as agent teams managing professional production --
       career pipeline from bedroom to broadcast
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: block diagrams usable by beginners sharing same architecture as production agent teams is unimplemented. AGC blocks provide educational example but no beginner-friendly block editor. Deferred to future milestone."
     notes: Block architecture exists for AGC educational use but not yet for professional production teams
     tier: T2
     depends_on: []
@@ -3534,7 +3581,8 @@ documents:
     claim: GSD-OS provides a single integrated interface where streaming/production capabilities (scene switching, overlays,
       chat moderation, clip generation, multi-platform distribution) are orchestrated by agent teams via block diagrams
     verification: code-review + manual-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: integrated streaming/production capabilities (scene switching, overlays, chat moderation, clip generation) is unimplemented. No streaming features exist. Deferred to future milestone."
     notes: No streaming/production interface exists
     tier: T2
     depends_on: []
@@ -3547,7 +3595,8 @@ documents:
     claim: Trigger-to-Agent-to-Skill block diagrams can output MIDI sequences routed through MOTU to control physical hardware
       (camera rigs, lighting, environmental sensors)
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: trigger-to-agent-to-skill MIDI output pipeline is unimplemented. No MIDI output port or physical device control. Requires physical hardware. Deferred."
     notes: No MIDI output from block diagrams exists; requires hardware
     tier: T2
     depends_on: []
@@ -3574,7 +3623,8 @@ documents:
     claim: Blueprints are shareable, skills are in a registry, and project kits are instruction booklets that anyone can follow
       -- sharing the diagram, not a compiled binary
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: shareable blueprints, skill registry, project kits is partially implemented. Skills stored in .claude/commands/ with SkillIndex but no blueprint sharing or project kit system. Deferred to future milestone."
     notes: Skills have a storage system but no sharing registry; blueprints and project kits not implemented
     tier: T2
     depends_on: []
@@ -3601,7 +3651,8 @@ documents:
     claim: Block editor provides simple composable elements with immediate visual feedback -- users do not need to understand
       internals to produce results, but internals are always accessible
     verification: manual-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: block editor with composable elements and immediate visual feedback is unimplemented. AGC block definitions provide typed ports but no interactive editor. Deferred to future milestone."
     notes: No interactive block editor exists; AGC block definitions exist but no composable block editor UI
     tier: T2
     depends_on: []
@@ -3628,7 +3679,8 @@ documents:
     claim: Raspberry Pi GPIO bridge receives MIDI through MOTU and drives physical outputs (motors, relays, LEDs, sensors)
       controllable via GSD-OS agent teams
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: Raspberry Pi GPIO bridge receiving MIDI driving physical outputs is unimplemented. No GPIO, motor, relay, LED, or sensor control code. Requires physical hardware. Deferred."
     notes: No Raspberry Pi GPIO bridge or MIDI-to-physical control exists; requires hardware
     tier: T2
     depends_on: []
@@ -4186,7 +4238,8 @@ documents:
     claim: The curated index covers essential foundation RFCs including IP (791), TCP (793), UDP (768), DNS (1034/1035), HTTP,
       SMTP, and architectural principles
     verification: build-check
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: RFC index covering UDP (768), DNS concepts (1034), SMTP is incomplete. Index has IP (791), TCP (793), DNS (1035) but missing UDP, DNS concepts, and SMTP entirely. Deferred to content update."
     notes: Index covers IP (791), TCP (793), DNS (1035), HTTP (9110, 9112, 9113, 9114, etc.) but is missing UDP (768), DNS
       concepts (1034), and SMTP entirely. No SMTP RFCs in any protocol family.
     tier: T2
@@ -4280,7 +4333,8 @@ documents:
     section: 'Phase 2: Network Architecture > Templates Generated'
     claim: Template variable substitution supports {{ variable }} syntax with dot-notation paths (e.g., network.management_subnet)
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: Jinja {{ variable }} template syntax with dot-notation paths is unimplemented. Actual state: render-pxe-menu.sh uses ${UPPER_SNAKE_CASE} shell substitution. Architectural divergence: shell templates chosen over Jinja. Deferred."
     notes: Template engine uses ${VAR} syntax (shell-style), NOT {{ variable }} with dot-notation. No Jinja2-style rendering.
       Vision described a Jinja-like engine but implementation is simpler shell substitution.
     tier: T2
@@ -4293,7 +4347,8 @@ documents:
     claim: Template engine supports loop constructs ({% for %}) and conditional sections for list-based configs like DNS records
       and firewall rules
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: Jinja loop constructs ({% for %}) is unimplemented. Template engine is pure ${VAR} substitution. Architectural divergence documented. Deferred."
     notes: Template engine does NOT support {% for %} loops or conditional sections. It is a simple ${VAR} substituter with
       no control flow constructs. dnsmasq template does not use {% for %}.
     tier: T2
@@ -4305,7 +4360,8 @@ documents:
     section: 'Phase 5: Service Configuration Templates'
     claim: Template engine supports filter expressions (e.g., {{ network.management_subnet | network_address }}.1)
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: Jinja filter expressions ({{ x | filter }}) is unimplemented. Template engine does literal value replacement only. Architectural divergence documented. Deferred."
     notes: Template engine does NOT support filter expressions (e.g., | network_address). No pipe/filter mechanism exists.
       No vmnet-management.yaml.template file exists.
     tier: T2
@@ -4370,7 +4426,8 @@ documents:
     claim: 'Network templates define two isolated virtual networks: management (host-only, static IPs, no DHCP) and NAT (outbound
       internet)'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: network templates defining management and NAT virtual networks is unimplemented. infra/templates/vm/ has only example values file. Deferred to infrastructure milestone."
     notes: No network template files define two isolated virtual networks. No vmnet-management or vmnet-nat templates exist.
       Network config is in generate-local-values.sh as hardcoded values, not templates.
     tier: T2
@@ -4383,7 +4440,8 @@ documents:
     section: 'Phase 2: Network Architecture > Templates Generated'
     claim: DNS records template generates per-VM hostname entries from VM definitions
     verification: unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: DNS records template generating per-VM hostname entries is unimplemented. dnsmasq/ has only PXE boot config template. Deferred to infrastructure milestone."
     notes: No dns-records.yaml.template exists. No template iterates a VM list to generate per-VM DNS entries.
     tier: T2
     depends_on: []
@@ -4395,7 +4453,8 @@ documents:
     claim: VM definition templates include resource allocation (CPU, RAM, disk), network assignments (management + NAT), service
       list, and firewall zone rules
     verification: build-check
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: VM definition templates with full resource allocation is unimplemented. vm-provisioning.local-values.example is flat key:value file only. Deferred to infrastructure milestone."
     notes: No VM definition templates (infra-01.yaml.template, service-01.yaml.template) exist. VM config is via local-values
       files + provision-vm.sh CLI flags.
     tier: T2
@@ -4407,7 +4466,8 @@ documents:
     section: 'Phase 3: VM Definitions'
     claim: 'MVP architecture defines exactly 2 VMs: infra-01 (DNS, NTP, monitoring) and service-01 (user workloads)'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: MVP 2-VM architecture (infra-01 + service-01) definition is unimplemented. provision-vm.sh creates one VM per invocation. Deferred to infrastructure milestone."
     notes: No explicit MVP 2-VM architecture definition exists. VM creation is per-invocation via provision-vm.sh --name.
       No configuration enforces exactly 2 VMs.
     tier: T2
@@ -4460,7 +4520,8 @@ documents:
     claim: 'configure-clone.sh sets per-VM identity: regenerates machine-id, regenerates SSH host keys, sets hostname, configures
       management network static IP, assigns firewall zone, and restricts SSH listen address'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: configure-clone.sh for per-VM identity reconfiguration is unimplemented. golden-image.sh has clone command but no identity regeneration script. Deferred to infrastructure milestone."
     notes: No configure-clone.sh script exists. VM cloning is done through vm-lifecycle.sh clone command and golden-image.sh
       clone, but neither includes per-VM identity configuration (machine-id regen, SSH key regen, hostname set, static IP,
       firewall zone, SSH listen address).
@@ -4559,7 +4620,8 @@ documents:
     section: The GSD Workflow > Starting the Project
     claim: GSD creates the project as a private GitHub repository by default using gh repo create --private --clone
     verification: manual-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: GSD creates private GitHub repo via gh repo create is unimplemented. No GSD command runs gh repo create. Deferred to future milestone."
     notes: GSD new-project command does not include gh repo create --private --clone. No GitHub repo creation is wired into
       GSD lifecycle.
     tier: T2
@@ -4572,7 +4634,8 @@ documents:
     claim: Expansion projects (Minecraft, Ceph, OpenStack, reverse proxy) read the existing infrastructure repo's hardware
       profile and VM definitions to check resource availability
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: expansion projects reading infrastructure repo hardware profile is unimplemented. No --infra flag or resource availability checking. Deferred to future milestone."
     notes: No expansion project mechanism exists that reads existing hardware profile for resource availability. calculate-budget.sh
       reads hardware for a single VM budget, not multi-project resource checking.
     tier: T2
@@ -4604,7 +4667,8 @@ documents:
     claim: 'Entry point selection logic exists that lets users choose between three paths: Containers (Podman/Docker), Desktop
       VMs (VMware/VirtualBox/KVM), or OpenStack'
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: entry point selection logic (Containers/Desktop VMs/Bare Metal) is unimplemented. Vision describes 3 paths but no code implements selection logic. Deferred to future content milestone."
     notes: Entry point selection logic does not exist as code. The cloud-ops curriculum is a vision document only -- no scripts,
       templates, or GSD commands implement the 3-path selection (Containers/VMs/OpenStack).
     tier: T2
@@ -4633,7 +4697,8 @@ documents:
     section: The GSD Integration
     claim: Each module is a GSD milestone consumable via gsd new-project --vision cloud-ops/<module-name>
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: each module as GSD milestone via --vision cloud-ops/<module-name> is unimplemented. No GSD command accepts --vision parameter. Deferred to future content milestone."
     notes: Modules are not implemented as GSD milestones. No --vision cloud-ops/<module> flag exists on any GSD command. The
       curriculum is a vision document, not a consumable GSD workflow.
     tier: T2
@@ -4646,7 +4711,8 @@ documents:
     claim: Each module produces configuration templates committed to the user's private gsd-local-cloud repo, git history
       documenting decisions, and working infrastructure the next module builds on
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: module configuration templates committed to user private repo with GSD milestone tracking is unimplemented. infra/templates/ exist but not structured as cloud-ops modules. Deferred to future content milestone."
     notes: No module produces templates committed to a user repo. The local-cloud-provisioning templates exist but are not
       organized as curriculum module outputs. No git history documentation pattern is implemented.
     tier: T2
@@ -4704,7 +4770,8 @@ documents:
     claim: Curriculum adapts to hardware -- never suggests something the user's machine can't handle, shows what becomes possible
       with more resources
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: curriculum adapts to hardware (never suggests unsupported resources) is unimplemented. Vision states minimum requirements but no runtime hardware detection or adaptation. Deferred to future content milestone."
     notes: No curriculum-level hardware adaptation exists. calculate-budget.sh adapts VM sizing to hardware but this is provisioning,
       not curriculum adaptation. No mechanism suggests different curriculum paths based on hardware constraints.
     tier: T2
