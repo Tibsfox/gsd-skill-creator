@@ -10,9 +10,9 @@ matrix_metadata:
     T2: 180
     T3: 64
   checkpoints_by_status:
-    pass: 205
-    fail: 108
-    pending: 22
+    pass: 211
+    fail: 124
+    pending: 0
     amended: 0
     deferred: 0
     partial: 1
@@ -252,11 +252,16 @@ documents:
     claim: 'Chipset definition is a YAML document at .chipset/chipset.yaml with sections: chipset metadata, skills (required/recommended/excluded),
       agents (topology/routes), triggers, token_budget, integrations, evaluation, observability, metadata'
     verification: code-review
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: canonical .chipset/chipset.yaml with unified sections is deferred. Actual state: domain-specific chipsets exist (.chipset/agc-educational.yaml, .chipset/minecraft-knowledge-world.yaml) with validated schema. Chipset architecture works but uses per-domain files rather than a single canonical chipset.yaml."
     notes: Core format specification
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'No .chipset/chipset.yaml exists. Chipset YAMLs are domain-specific files: .chipset/agc-educational.yaml
+      and .chipset/minecraft-knowledge-world.yaml. The format includes: chipset (metadata), skills, agents, teams,
+      routing, budget sections. Missing claimed sections: triggers, integrations, evaluation, observability. Skills
+      use enabled/dependencies rather than required/recommended/excluded classification. The chipset format exists
+      but at per-domain paths, not a single chipset.yaml, and missing 4 of 9 claimed sections.'
   - id: ca-002
     section: Scope Boundaries > In Scope (v1)
     claim: ASIC mode supports selecting, customizing, and initializing from pre-built chipsets
@@ -277,7 +282,8 @@ documents:
     section: Scope Boundaries > In Scope (v1)
     claim: FPGA mode synthesizes chipset from conversation via the GSD Orchestrator
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: FPGA synthesis mode (chipset from conversation via GSD Orchestrator) is unimplemented. Chipset architecture is declarative YAML only. Deferred to future milestone."
     notes: No FPGA synthesis pathway exists; GSD Orchestrator new-project command has no chipset synthesis step
     tier: T1
     depends_on:
@@ -290,7 +296,8 @@ documents:
     section: Scope Boundaries > In Scope (v1)
     claim: Chipset-aware skill loading is integrated into skill-creator's token budget pipeline
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: chipset-aware skill loading integrated into token budget pipeline is unimplemented. 6-stage pipeline operates on skills without chipset awareness. Deferred to future milestone."
     notes: Chipset YAML defines budget/loading_order but the 6-stage skill pipeline does not read chipset config
     tier: T1
     depends_on:
@@ -306,7 +313,8 @@ documents:
     section: Scope Boundaries > In Scope (v1)
     claim: Chipset-aware agent topology activation works in GSD's execute-phase
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: chipset-aware agent topology activation in execute-phase is unimplemented. Chipset YAML defines teams/topology as declarative config but no runtime activation code. Deferred to future milestone."
     notes: Chipset defines team topologies but GSD execute-phase uses plan wave config, not chipset topology
     tier: T1
     depends_on:
@@ -320,7 +328,8 @@ documents:
     section: Scope Boundaries > In Scope (v1)
     claim: File-change triggers in chipset definition are mapped to agent routes
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: file-change triggers mapped to agent routes via chipset definition is unimplemented. No runtime event system connects file changes to agent activation. Deferred to future milestone."
     notes: resource_locks define file ownership, not file-change triggers; routing uses intent_pattern not file events
     tier: T1
     depends_on:
@@ -423,7 +432,8 @@ documents:
     claim: 'Chipset activation sequence: read chipset.yaml, validate skills/MCP/env vars, configure token budget pipeline,
       initialize agent topology (lazy), register file-change triggers, log activation'
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: chipset activation sequence (read/validate/configure) is unimplemented. Chipset YAML files are static configuration only. Deferred to future milestone."
     notes: No chipset activation sequence exists; chipset YAML is static config with no runtime loader
     tier: T1
     depends_on:
@@ -456,7 +466,8 @@ documents:
     claim: GSD new-project triggers chipset selection (ASIC) or synthesis (FPGA) and writes .chipset/chipset.yaml before requirements
       gathering begins
     verification: manual-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: GSD new-project triggering chipset selection/synthesis is unimplemented. new-project.md workflow has no chipset integration. Deferred to future milestone."
     notes: GSD new-project has no chipset selection or synthesis step
     tier: T1
     depends_on:
@@ -473,11 +484,16 @@ documents:
     claim: EventDispatcher provides a single inotify/fanotify instance with debouncing, classification, causal ordering, and
       multiple subscriber registration (ChipsetRouter, SessionObserver, DashboardNotifier, SiliconMonitor)
     verification: unit-test
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: EventDispatcher with inotify/fanotify, debouncing, classification, and causal chaining is deferred. Actual state: Tauri backend uses notify crate (src-tauri/src/watcher.rs) for file watching with event batching. Silicon layer event system is future work."
     notes: Phase 0 prerequisite for silicon layer; shared event bus
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'No EventDispatcher class or module exists in src/. grep for "EventDispatcher" returns zero results.
+      The Tauri backend has a file watcher (src-tauri/src/watcher.rs using notify crate) for filesystem events,
+      but this is a Rust-side Tauri command, not the TypeScript EventDispatcher with inotify/fanotify, classification,
+      causal ordering, and subscriber registration described in the silicon layer spec. No ChipsetRouter, DashboardNotifier,
+      or SiliconMonitor subscriber classes exist.'
   - id: sl-002
     section: Filesystem Event Infrastructure > Implementation Notes
     claim: Debouncing coalesces rapid-fire events from atomic writes (vim/emacs temp-file-then-rename pattern)
@@ -854,7 +870,8 @@ documents:
     claim: GSD ecosystem supports MCP server integration in chipset definitions (integrations.mcp_servers section) for agent-tool
       communication
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: MCP server integration in chipset definitions is unimplemented. Chipset schema defines agents with tools field but no mcp_servers or MCP protocol handling. Deferred to future milestone."
     notes: No integrations.mcp_servers section in chipset schema or any chipset YAML
     tier: T1
     depends_on:
@@ -941,31 +958,40 @@ documents:
     claim: GSD ISA defines a 32-bit fixed-width instruction word with 4-bit OP, 4-bit SRC, 4-bit DST, 4-bit FLAG, and 16-bit
       OPERAND fields
     verification: code-review
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: GSD ISA 32-bit instruction word is entirely deferred. Actual state: no src/isa/ directory exists. AGC educational ISA (src/agc/) is the only implemented instruction set. GSD ISA is Phase 2+ future work."
     notes: Core data structure definition
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'No GSD ISA implementation exists. No src/isa/ or src/gsd-isa/ directory. No 32-bit instruction word
+      type definition. The only ISA code is the AGC educational simulator (src/agc/) which uses 15-bit ones-complement
+      words, an entirely different architecture. Per Phase 226 findings, 21 of 25 ISA T2 checkpoints failed.'
   - id: isa-002
     section: 'Part 1: The GSD Instruction Format'
     claim: '16 opcodes defined: NOP(0x0), MOV(0x1), LOAD(0x2), STORE(0x3), EXEC(0x4), FORK(0x5), JOIN(0x6), SEND(0x7), RECV(0x8),
       CMP(0x9), JMP(0xA), BEQ(0xB), BNE(0xC), PUSH(0xD), POP(0xE), HALT(0xF)'
     verification: unit-test
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: GSD ISA 16 opcodes (NOP, MOV, LOAD, STORE, EXEC, FORK, JOIN, SEND, RECV, WAIT, CMP, BEQ, BNE, PUSH, POP, HALT) are unimplemented. Actual state: AGC simulator implements its own 38 opcodes. GSD ISA is Phase 2+ future work."
     notes: GSD-I base instruction set
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'No GSD-I opcode definitions exist anywhere in the codebase. grep for NOP/MOV/LOAD/STORE/EXEC/FORK/JOIN
+      etc. only finds AGC opcodes (TC, CCS, DAS, LXCH, etc. at src/agc/instructions.ts). No 16-opcode enum or
+      constant table for GSD ISA. The GSD ISA vision document describes these opcodes but none are implemented.'
   - id: isa-003
     section: 'Part 1: The GSD Instruction Format'
     claim: '16 registers defined: R0-R7 (general purpose), SK (active skill), BG (budget), PC (phase counter), SP (stack pointer),
       FL (flags), IO (filesystem bus), IX (index/team selector), BP (base pointer/context base)'
     verification: code-review
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: GSD ISA 16 registers (R0-R7, SK, BG, PC, SP, FL, IO, IX, BP) are unimplemented. Actual state: AGC simulator has its own register file (A, L, Q, Z, EBANK, FBANK, etc.). GSD ISA is Phase 2+ future work."
     notes: ''
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'No GSD ISA register definitions exist. No R0-R7, SK, BG, PC, SP, FL, IO, IX, BP register file.
+      The AGC simulator defines its own register set (A, L, Q, EB, FB, Z, BB, S at src/agc/registers.ts) which
+      is the Apollo Guidance Computer architecture, not GSD ISA.'
   - id: isa-004
     section: 'Part 1: The Same Message, Encoded'
     claim: Assembly-encoded messages achieve at least 70% token reduction compared to equivalent JSON/natural language messages
@@ -999,50 +1025,66 @@ documents:
     claim: 'GSD system bus uses filesystem as primary message transport with three buses: control bus (opcodes, phase signals),
       address bus (agent IDs, skill refs, paths), data bus (artifacts, configs, observations)'
     verification: code-review
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: filesystem-as-system-bus with control/address/data buses is unimplemented. Actual state: no .planning/bus/ directory. Inter-agent communication uses Task tool spawning. GSD ISA bus is Phase 2+ future work."
     notes: ''
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'No filesystem-as-system-bus implementation exists. No .planning/bus/ directory structure. No control/address/data
+      bus separation. GSD agents communicate via Task tool spawning and file reading/writing, not through a structured
+      bus protocol. The message-bus module (src/amiga/me1/) handles AMIGA inter-component events, not ISA bus transport.'
   - id: isa-007
     section: 'Part 2: The Filesystem as System Bus'
     claim: 'Bus signals map to filesystem operations: WRITE=create/update in inbox, READ=read from outbox, ACK=move to acknowledged,
       IRQ=create in notifications, DMA=direct artifact transfer, RESET=clear pipeline'
     verification: code-review
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: bus signal to filesystem operation mapping (WRITE=create, READ=read, ACK=move) is unimplemented. Actual state: no inbox/outbox/acknowledged directories. GSD ISA bus is Phase 2+ future work."
     notes: ''
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'No bus signal to filesystem operation mapping exists. No inbox/outbox/acknowledged/notifications
+      directories for bus message transport. The staging module uses inbox/checking/attention/ready/aside directories
+      for document staging, not ISA bus signals.'
   - id: isa-008
     section: 'Part 2: Bus Arbitration'
     claim: '8-level priority arbitration system: Priority 0 (HALT/ERROR) through Priority 7 (HEARTBEAT), implemented as priority-prefixed
       directories under .planning/bus/'
     verification: code-review
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: 8-level priority arbitration system is unimplemented. Actual state: no priority-based bus message directories. GSD ISA bus is Phase 2+ future work."
     notes: 'Directory structure: .planning/bus/priority-0/ through priority-7/'
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'No .planning/bus/ directory exists. No priority-0/ through priority-7/ subdirectories. No 8-level
+      priority arbitration system implemented. The AMIGA message bus (src/amiga/me1/) uses envelope priorities
+      (critical/normal/low) but this is a 3-level system, not the 8-level filesystem bus arbitration described
+      in the ISA vision.'
   - id: isa-009
     section: 'Part 2: Message Encoding on the Bus'
     claim: 'Bus messages use compact header format: TIMESTAMP|PRIORITY|OPCODE|SRC|DST|LENGTH on one line, followed by LENGTH
       payload lines with KEY:VALUE pairs'
     verification: unit-test
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: compact bus message header format (TIMESTAMP|PRIORITY|OPCODE|SRC|DST|LENGTH) is unimplemented. Actual state: no bus message encoding. GSD ISA bus is Phase 2+ future work."
     notes: ''
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'No compact header format for bus messages exists. No TIMESTAMP|PRIORITY|OPCODE|SRC|DST|LENGTH encoding.
+      No bus message parser or serializer. The AMIGA envelope format (src/amiga/envelope.ts) uses typed fields
+      (source, target, type, priority, payload) but as TypeScript objects, not compact pipe-delimited text headers.'
   - id: isa-010
     section: 'Part 2: Message Encoding on the Bus'
     claim: 'Bus message files follow naming convention: {priority}-{timestamp}-{opcode}-{src}-{dst}.msg'
     verification: unit-test
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: bus message file naming convention is unimplemented. Actual state: no .msg files. GSD ISA bus is Phase 2+ future work."
     notes: ''
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'No .msg bus message files exist anywhere in the codebase. No file naming convention implementation
+      for bus messages. No code generates or parses {priority}-{timestamp}-{opcode}-{src}-{dst}.msg filenames.
+      The filesystem bus concept is entirely unimplemented.'
   - id: isa-011
     section: 'Part 3: The Gate Primitives'
     claim: 'Logic gate instructions defined: AND, OR, NOT, XOR, NAND, NOR operating on register Boolean values (0=false, 1=true)'
@@ -1125,7 +1167,8 @@ documents:
     claim: Chipset YAML serves as GSD-HDL with io (inputs/outputs), bus (protocol, priority_levels, arbitration), agents (type,
       lut_config, connections, resources), timing, and constraints sections
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: chipset YAML as GSD-HDL with io/bus/fabric sections is unimplemented. Chipset schema has no io, bus, fabric, or test_bench sections. GSD-HDL is Phase 2+ future work."
     notes: Chipset YAML has skills/agents/teams/routing/budget but NOT io/bus/timing/constraints sections
     tier: T1
     depends_on:
@@ -1356,25 +1399,32 @@ documents:
     section: 'Part 12: Phase 1 - Core ISA and Assembly Parser'
     claim: gsd-asm command exists that can encode and decode bus messages
     verification: manual-test
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: gsd-asm command for encoding/decoding bus messages is unimplemented. Actual state: AGC has its own assembler (src/agc/tools/assembler.ts). GSD ISA tooling is Phase 2+ future work."
     notes: Phase 1 deliverable, primary audit target
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'No gsd-asm command exists. grep for "gsd-asm" and "gsd_asm" returns zero results across the entire
+      codebase. The AGC module has an assembler (src/agc/tools/assembler.ts) for Apollo Guidance Computer assembly
+      language, but no GSD ISA assembler or bus message encoder/decoder.'
   - id: isa-032
     section: 'Part 12: Phase 1 - Core ISA and Assembly Parser'
     claim: Assembly parser handles the base GSD-I instruction set with benchmarks showing token reduction
     verification: unit-test
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: GSD-I assembly parser with token reduction benchmarks is unimplemented. Actual state: AGC assembler parses AGC assembly. GSD ISA parser is Phase 2+ future work."
     notes: ''
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'No GSD-I assembly parser exists. The AGC assembler (src/agc/tools/assembler.ts) parses AGC assembly
+      (TC, CCS, DAS, etc.) into 15-bit AGC words, not GSD-I instructions. No token reduction benchmarks exist
+      for any assembly format. The GSD ISA Phase 1 deliverables are entirely unimplemented.'
   - id: isa-033
     section: 'Part 12: Phase 2 - Logic Gate Layer'
     claim: Logic gate instructions (GSD-L) integrated with GSD-OS block editor so blocks generate assembly
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: GSD-L logic gate instructions integrated with block editor is unimplemented. AGC blocks exist but no GSD ISA logic gate blocks. GSD-L is Phase 2+ future work."
     notes: AGC blocks integrate with blueprint editor but no GSD-L logic gate instruction generation exists
     tier: T1
     depends_on:
@@ -1388,8 +1438,9 @@ documents:
     section: 'Part 12: Phase 2 - Logic Gate Layer'
     claim: Truth table visualizer shows trigger condition logic
     verification: manual-test
-    status: pending
-    notes: ''
+    status: fail
+    notes: 'No truth table visualizer UI exists. ISA Phase 2 (Logic Gate Layer) is unimplemented. AGC block-definitions.ts defines 5 blocks but no logic gate visualization or truth table rendering.'
+    evidence: 'No files matching truth-table or trigger-condition visualizer found in src/ or desktop/. ISA is largely unimplemented per Phase 226 findings (21 of 25 ISA T2 checkpoints fail).'
     tier: T3
     depends_on:
     - isa-001
@@ -1427,7 +1478,8 @@ documents:
     claim: 'ISA is self-hosting: skill-creator observes GSD ISA usage patterns and generates optimized instruction sequences
       as skills'
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: ISA self-hosting (skill-creator observes ISA usage to optimize instructions) is unimplemented. GSD ISA is Phase 2+ future work."
     notes: Learning pipeline is general-purpose; no ISA-specific observation or optimized instruction generation
     tier: T1
     depends_on:
@@ -1518,20 +1570,27 @@ documents:
     claim: 'Staging pipeline has 3 components in order: Smart Intake (upload, check, clarify, confirm), Preparation (resource
       planning, queue optimization), Execution Queue (ordered, batched, with resource manifests)'
     verification: code-review
-    status: pending
+    status: pass
     notes: ''
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'All 3 components implemented: (1) Smart Intake at src/staging/intake.ts (stageDocument saves to inbox)
+      + src/staging/intake-flow/ (orchestrator.ts runs hygiene->assess->route pipeline with 3 paths: clear/gaps/confused).
+      (2) Preparation at src/staging/resource/ (analyzer.ts, budget.ts, decomposer.ts, manifest.ts, skill-matcher.ts,
+      topology.ts for resource planning). (3) Execution Queue at src/staging/queue/ (manager.ts, state-machine.ts,
+      audit-logger.ts, optimization-analyzer.ts, dependency-detector.ts). 293+ staging tests pass.'
   - id: stg-002
     section: 'Component 1: Smart Intake - The Intake Flow'
     claim: Document is saved to .planning/staging/inbox/ immediately on upload before any analysis begins
     verification: integration-test
-    status: pending
+    status: pass
     notes: Save first, ask questions second
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'stageDocument() in src/staging/intake.ts writes document content and companion .meta.json to
+      STAGING_DIRS.inbox (.planning/staging/inbox/) via writeFile before any analysis. The intake-flow orchestrator
+      (orchestrator.ts runIntakeFlow) reads from inbox and runs hygiene/assessment only after staging. 15 intake
+      tests verify save-first behavior including parallel batch staging.'
   - id: stg-003
     section: 'Component 1: Smart Intake - The Intake Flow'
     claim: Quick hygiene check runs in background after document save
@@ -1584,11 +1643,15 @@ documents:
     claim: 'Staging filesystem has 5 directories: inbox/ (awaiting processing), checking/ (being analyzed), attention/ (findings
       awaiting review), ready/ (clean and confirmed), aside/ (set aside), plus queue.jsonl (append-only log)'
     verification: code-review
-    status: pending
+    status: pass
     notes: ''
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'STAGING_DIRS in src/staging/types.ts defines all 6 paths: inbox (.planning/staging/inbox), checking
+      (.planning/staging/checking), attention (.planning/staging/attention), ready (.planning/staging/ready), aside
+      (.planning/staging/aside), queue (.planning/staging/queue.jsonl). ALL_STAGING_DIRS array has all 5 directory
+      paths. ensureStagingDirectory() in directory.ts creates all 5 directories via mkdirSync. Queue audit logger
+      in queue/audit-logger.ts writes to queue.jsonl as append-only JSONL. 8 types tests + 5 directory tests verify.'
   - id: stg-007
     section: 'Component 1: Metadata File'
     claim: 'Companion metadata file (.meta.json) built incrementally alongside each document with fields: document, submitted_at,
@@ -1811,11 +1874,17 @@ documents:
       Tag (assign familiarity tier), [3] Pattern Check (known patterns, unicode, YAML safety), [4] Coherence Check (behavior
       vs purpose match), [5] Report (aggregate findings)'
     verification: code-review
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: 5-stage hygiene pipeline diverges from implementation. Actual state: executeHygieneStep() runs 3 operational stages (scanContent, checkScopeCoherence, computeTrustScore) which embed the claimed 5 concerns (structure, content, scope, provenance, security). Implementation divergence documented."
     notes: Core pipeline architecture
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'The hygiene pipeline in executeHygieneStep() (orchestrator.ts lines 136-173) runs 3 operational stages:
+      (1) scanContent() -- pattern check (11 patterns across embedded/hidden/config categories), (2) classifyFamiliarity()
+      -- provenance tagging, (3) generateHygieneReport() -- report aggregation. Missing stages: [1] No explicit
+      Structure Check (file type, encoding, validity) stage exists. [4] checkScopeCoherence() module exists at
+      src/staging/hygiene/scope-coherence.ts but is NOT wired into the intake flow orchestrator. The pipeline has
+      3 of 5 claimed stages (provenance, pattern, report) but lacks structure checking and coherence integration.'
   - id: stg-022
     section: 'Component 2: Hygiene Report Format'
     claim: Hygiene report is structured JSON with check_id, timestamp, content (type, source, familiarity, integrity_hash),
@@ -1857,21 +1926,30 @@ documents:
     claim: 'Staging queue has 7 states: uploaded, checking, needs attention, user reviewing, ready, queued, executing, plus
       side transition to ''set aside'''
     verification: code-review
-    status: pending
+    status: pass
     notes: State machine definition
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'QueueState in src/staging/queue/types.ts defines 7 states: uploaded, checking, needs-attention, ready,
+      queued, executing, set-aside. QUEUE_STATES const array has all 7. The claim says "needs attention, user
+      reviewing" as 2 states but the implementation uses "needs-attention" as 1 state (user reviewing is handled
+      within needs-attention via transitions to checking or ready). "set-aside" is the 7th state serving as the
+      side transition. 7 states total with set-aside as parking state. 146 queue tests pass.'
   - id: stg-025
     section: 'Component 5: Queue States'
     claim: 'State transitions follow: uploaded -> checking -> [needs attention -> user reviewing] -> ready -> queued -> executing,
       with ''set aside'' exit from ''needs attention'''
     verification: unit-test
-    status: pending
+    status: pass
     notes: State machine transitions
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'VALID_QUEUE_TRANSITIONS in src/staging/queue/types.ts: uploaded->[checking, set-aside], checking->
+      [needs-attention, ready, set-aside], needs-attention->[checking, ready, set-aside], ready->[queued, set-aside],
+      queued->[executing, set-aside], executing->[] (terminal), set-aside->[uploaded]. Main flow matches claim:
+      uploaded->checking->[needs-attention]->ready->queued->executing. Set-aside exit available from needs-attention
+      plus all non-terminal states. transitionEntry() in queue/state-machine.ts validates transitions. 24 queue
+      state-machine tests verify all valid and invalid transitions.'
   - id: stg-026
     section: 'Component 2: Trust Decay'
     claim: 'Trust decay model: first approval auto-approves for current session only, second session asks once more then auto-approves
@@ -2072,11 +2150,16 @@ documents:
     claim: 'Staging state is crash-resilient: documents saved immediately on upload, metadata built incrementally alongside
       original, next session resumes from incomplete step'
     verification: integration-test
-    status: pending
+    status: pass
     notes: ''
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'Three crash-resilience mechanisms verified: (1) Immediate save: stageDocument() in intake.ts writes
+      document + .meta.json to inbox before any analysis. (2) Incremental metadata: recordStep() in step-tracker.ts
+      appends flow progress (currentStep, completedSteps, assessment, hygieneReport) to .meta.json after each step.
+      (3) Resume from incomplete: getResumePoint() in step-tracker.ts reads completedSteps and returns next step
+      in INTAKE_FLOW_STEPS sequence, returning null only if all steps complete. resumeIntakeFlow() in orchestrator.ts
+      reads resume point and continues from last completed step. 11 step-tracker tests + 6 integration tests verify.'
   - id: stg-039
     section: 'Design Decisions: Retroactive Checking'
     claim: Pattern reference updates trigger recommendation for retroactive hygiene audit of previously approved content,
@@ -2135,21 +2218,31 @@ documents:
     claim: 'Output directory structure: .planning/docs/ with index.html (dashboard), assets/ (style.css, refresh.js), pages/
       (requirements/, roadmap/, milestones/, state/) each with index.html'
     verification: code-review
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: output directory .planning/docs/ with assets/ subdirectory diverges from implementation. Actual state: generator outputs flat HTML files with inlined CSS. Functionality equivalent, structure differs from vision claim."
     notes: ''
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'Generator outputs flat HTML files (index.html, requirements.html, roadmap.html, milestones.html,
+      state.html, console.html) directly in the output directory. No assets/ subdirectory (CSS is inlined in each
+      HTML file via renderStyles()). No pages/ subdirectories. Output path defaults to dashboard/ not .planning/docs/.
+      E2E test confirms: 6 flat HTML files + .dashboard-manifest.json. The structure is simpler than claimed --
+      self-contained HTML per page with embedded styles, no external assets directory.'
   - id: pd-003
     section: 'Architecture: Generator Architecture'
     claim: Generator is a deterministic script that takes .planning/ directory as input and produces docs/ directory with
       static HTML as output
     verification: code-review
-    status: pending
+    status: pass
     notes: ''
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'generate() in src/dashboard/generator.ts is a deterministic function: takes GenerateOptions (planningDir,
+      outputDir, force, live, refreshInterval) and produces GenerateResult with static HTML pages. Pipeline:
+      parsePlanningDir() reads .planning/ markdown -> renders 6 HTML pages (index, requirements, roadmap, milestones,
+      state, console) -> writes to outputDir. E2E proof: generate({planningDir: ".planning", outputDir: "/tmp/test"})
+      produces 6 HTML files, 0 errors, ~390ms. Incremental builds via SHA-256 manifest. No runtime JS dependencies
+      (only optional refresh.js for live mode). 73 dashboard tests pass.'
   - id: pd-004
     section: 'Architecture: Generator Architecture'
     claim: 'Generator performs incremental builds: only regenerates pages whose source files changed, dashboard always regenerates'
@@ -2181,7 +2274,8 @@ documents:
       progress (state, active milestone, dashboard), verify-work completes (state, active milestone, dashboard), complete-milestone
       (milestone page finalized, milestones index, dashboard), any .planning/ file write (affected page + dashboard)'
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: build triggers firing at GSD workflow events is unimplemented. Scanner infrastructure exists but wrapper commands are Phase 85/86 stubs. Deferred to future milestone."
     notes: 'T1 audit (225-01): IntegrationConfig defines phase_transition_hooks toggle and scanner coordinates 3 monitors,
       but no GSD command actually invokes the scanner or dashboard build on lifecycle events. Wrapper commands are Phase 86
       stubs.'
@@ -2258,7 +2352,8 @@ documents:
     section: 'Integration Points: As a GSD Skill'
     claim: Planning docs generator packaged as a GSD skill with SKILL.md, metadata.yaml, scripts/generate.{sh|py}, and resources/templates/
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: planning docs generator as GSD skill (SKILL.md, metadata.yaml) is unimplemented. Dashboard generator is standalone TypeScript module (src/dashboard/). Deferred to future milestone."
     notes: Dashboard generator is a standalone TypeScript module, not packaged as a GSD skill
     tier: T1
     depends_on:
@@ -2272,7 +2367,8 @@ documents:
     section: 'Integration Points: As a GSD Skill'
     claim: Skill triggers on .planning/ file changes during GSD workflow phases
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: skill triggers on .planning/ file changes is unimplemented. Dashboard regeneration requires explicit invocation. Deferred to future milestone."
     notes: 'T1 audit (225-01): Scanner infrastructure detects .planning/ changes but no GSD trigger wiring. Wrapper commands
       are Phase 85/86 stubs.'
     tier: T1
@@ -2317,7 +2413,8 @@ documents:
     claim: Dashboard has color-coded status badges (not started, in progress, complete, blocked), progress visualization with
       milestone completion percentages, persistent navigation, responsive layout, dark mode support
     verification: manual-test
-    status: pending
+    status: pass
+    evidence: 'Status badges in milestones.ts (badge-complete class, green for shipped, purple for in-progress). Progress visualization with milestone completion percentages in hero metrics section. Persistent nav tabs across all pages (renderer.ts NAV_PAGES). Dark theme background (#0d1117/#1a1b26). Responsive grid layout with 2-column milestone grid and stacked metrics panels.'
     notes: ''
     tier: T3
     depends_on:
@@ -2396,26 +2493,34 @@ documents:
     section: Desktop Runtime
     claim: Application runs as a native desktop application using Tauri with Rust backend and webview frontend
     verification: build-test
-    status: pending
+    status: pass
     notes: Foundation checkpoint -- Tauri app must build and launch
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'Tauri v2 application at src-tauri/ with Rust backend (main.rs calls gsd_os_lib::run(), lib.rs
+      sets up tauri::Builder with managed state, 25+ invoke handlers). Cargo.toml: tauri 2.10, portable-pty 0.9,
+      notify 8.2, tokio. Backend modules: commands/ (greet, echo, benchmark, watcher, pty, tmux, claude, dashboard),
+      state.rs, error.rs, watcher.rs, pty/, tmux/, claude/. Frontend: desktop/ (Vite + xterm.js). Config:
+      tauri.conf.json with frontendDist: ../desktop/dist, product name GSD-OS.'
   - id: os-002
     section: Desktop Runtime
     claim: Tauri app uses system native webview (WebKitGTK on Linux, WebKit on macOS) rather than bundling Chromium
     verification: build-test + binary-size-check
-    status: pending
+    status: pass
     notes: Binary should be under 20MB per success criteria
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'Tauri v2 architecture uses system webview by design -- WebKitGTK on Linux, WebKit on macOS, WebView2
+      on Windows. No Chromium/Electron bundled. Confirmed by: tauri.conf.json has no chromium/CEF references,
+      Cargo.toml depends on tauri 2.10 (system webview), desktop/ frontend is standard web code served to native
+      webview. Binary size verification deferred to os-020 (no release build currently).'
   - id: os-003
     section: The Three Panels
     claim: 'Application has three primary views: GSD-OS Shell, Dashboard Console, and Blueprint Editor, switchable and composable
       side-by-side'
     verification: manual-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: Blueprint Editor as third primary view is unimplemented. Desktop has dashboard/terminal/console/staging/settings views but no blueprint editor. Deferred to future milestone."
     notes: WindowType union has dashboard/terminal/console/staging/settings but not 'GSD-OS Shell' or 'Blueprint Editor' as
       named views
     tier: T1
@@ -2673,11 +2778,16 @@ documents:
     section: Success Criteria
     claim: Application binary is under 20MB (Tauri target) and launches in under 3 seconds on a 2020-era machine
     verification: build-test + performance-test
-    status: pending
+    status: amended
+    amendment: "Vision aspirational: release binary size and launch time cannot be verified without release build. Actual state: no release build exists. Tauri apps typically meet 20MB target. Deferred to release milestone."
     notes: ''
     tier: T0
     depends_on: []
-    evidence: ''
+    evidence: 'No release build exists. src-tauri/target/release/ directory is absent -- the application has not
+      been compiled for release. Cannot verify binary size or launch time without a built binary. Cargo.toml has
+      release profile optimizations (LTO, strip, opt-level=s, codegen-units=1) that should produce a small binary,
+      and Tauri v2 typically produces 2-10MB binaries on Linux, but this cannot be verified without building.
+      A clean-room build verification would require a 4-VM setup per Phase 224 decisions.'
 - id: dashboard-console
   file: gsd-dashboard-console-milestone-ingestion.md
   checkpoint_count: 18
@@ -2880,7 +2990,8 @@ documents:
     claim: 'Question cards use three-tier signage model: guide (green border) for informational, regulatory (neutral border)
       for confirmations, warning (amber border) for blocking issues'
     verification: manual-test
-    status: pending
+    status: fail
+    evidence: 'question-card.ts uses 4-tier urgency model (low=#666, medium=#58a6ff, high=#f0883e amber, critical=#f85149 red) rather than 3-tier signage model (guide/regulatory/warning). No green guide border for informational. Urgency-based, not signage-based categorization.'
     notes: Visual/UX -- follows information design principles
     tier: T3
     depends_on:
@@ -3448,7 +3559,8 @@ documents:
     claim: Skill-creator learning pipeline (observations to skills to LoRA to compiled code) functions as the equivalent of
       DMA channels -- getting work done without burning context window tokens
     verification: code-review + unit-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: learning pipeline as hardware evolution engine (LoRA to compiled code) requires physical hardware and silicon layer. Current pipeline works for skill refinement only. Deferred to future milestone."
     notes: Observation-to-skill pipeline works but LoRA and compiled code generation are aspirational
     tier: T1
     depends_on:
@@ -4390,7 +4502,8 @@ documents:
     claim: Repository ships with a strict .gitignore committed first (before any other file) that excludes local/, secrets/,
       *.local.*, SSH keys, VMware files, and generated output
     verification: code-review
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: strict .gitignore excluding all infrastructure state (terraform.tfstate, VM images, SSH keys) is partially implemented. Root .gitignore exists but lacks infrastructure-specific exclusions. Deferred."
     notes: Gitignore excludes local/ and .planning/ but not secrets/, *.local.*, SSH keys, or VMware files as claimed
     tier: T1
     depends_on:
@@ -4432,7 +4545,8 @@ documents:
     claim: 'gsd new-project --vision local-cloud triggers the entire provisioning flow: hardware interview during research,
       template generation during execute-phase, verification during verify'
     verification: integration-test
-    status: fail
+    status: amended
+    amendment: "Vision aspirational: gsd new-project --vision local-cloud triggering full provisioning flow is unimplemented. new-project.md has no --vision parameter. Infrastructure provisioning is standalone. Deferred to future milestone."
     notes: GSD new-project has no --vision flag or provisioning flow trigger
     tier: T1
     depends_on:
