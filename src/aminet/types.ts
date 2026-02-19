@@ -427,3 +427,31 @@ export const AminetIndexSchema = z.object({
 });
 
 export type AminetIndex = z.infer<typeof AminetIndexSchema>;
+
+// ============================================================================
+// FreshnessCheckSchema
+// ============================================================================
+
+/**
+ * Result of an INDEX freshness check.
+ *
+ * Encodes how stale the cached INDEX is and what the recommended update
+ * strategy should be:
+ * - 'current': cache is fresh, no action needed
+ * - 'stale_incremental': cache is old but usable, fetch RECENT to update
+ * - 'stale_full': no cache exists, full INDEX download required
+ */
+export const FreshnessCheckSchema = z.object({
+  /** Whether the cached INDEX is considered stale */
+  isStale: z.boolean(),
+  /** Milliseconds since the INDEX was fetched */
+  ageMs: z.number(),
+  /** Human-readable age in hours */
+  ageHours: z.number(),
+  /** ISO 8601 timestamp of when the INDEX was fetched */
+  cachedAt: z.string(),
+  /** Recommended update strategy */
+  recommendation: z.enum(['current', 'stale_incremental', 'stale_full']),
+});
+
+export type FreshnessCheck = z.infer<typeof FreshnessCheckSchema>;
