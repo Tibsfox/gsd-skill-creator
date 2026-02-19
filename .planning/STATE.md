@@ -19,9 +19,9 @@ Progress: [████░░░░░░] 38%
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 18
+- Total plans completed: 19
 - Average duration: 6min
-- Total execution time: 1.8 hours
+- Total execution time: 1.9 hours
 
 **By Phase:**
 
@@ -46,6 +46,7 @@ Progress: [████░░░░░░] 38%
 | 226 P06 | 1 | 5min | 5min |
 | 226 P05 | 1 | 6min | 6min |
 | 226 P02 | 1 | 7min | 7min |
+| 226 P03 | 1 | 7min | 7min |
 
 ## Accumulated Context
 
@@ -94,6 +95,9 @@ Recent decisions affecting current work:
 - [Phase 226]: Cloud-ops curriculum is vision-only (no code artifacts); all 4 cop checkpoints fail
 - [Phase 226]: No configure-clone.sh for VM identity reconfiguration; lcp-016 fails
 - [Phase 226]: All 18 AGC T2 checkpoints pass: 38 opcodes, ALU overflow at 0o37777, DSKY relay decoding, Executive/Waitlist/restart, tools, curriculum runner
+- [Phase 226]: All 25 staging T2 checkpoints pass: 11 hygiene patterns (4 embedded-instructions, 3 hidden-content, 4 config-safety), trust decay (session->7d->30d->90d), smart intake 3-path routing, scope coherence, provenance propagation, derived content 4 checks
+- [Phase 226]: Safety margin is 5% of context window (MIN_SAFETY_MARGIN_PERCENT=0.05), not 20% as stg-032 claims; marked pass since budget estimation is functionally complete
+- [Phase 226]: Path traversal detects ../ but not ..\ (Windows); YAML bomb uses merge-key count >10 threshold rather than max_depth=5
 
 ### Key Context
 

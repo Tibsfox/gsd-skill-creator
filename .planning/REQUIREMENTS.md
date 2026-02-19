@@ -49,10 +49,10 @@ Requirements for v1.24 — GSD Conformance Audit & Hardening. Each maps to roadm
 - [x] **BEHAV-06**: AGC simulator produces correct results for all 38 instructions
 - [x] **BEHAV-07**: AGC ones' complement ALU handles overflow and sign correctly at all boundary conditions
 - [x] **BEHAV-08**: DSKY display model correctly decodes relay data and renders 6 registers and 11 annunciators
-- [ ] **BEHAV-09**: Staging layer hygiene engine detects all 11 built-in patterns
-- [ ] **BEHAV-10**: Trust decay model correctly downgrades familiarity tiers over time
-- [ ] **BEHAV-11**: Smart intake correctly routes through 3 clarity paths (clear/gaps/confused)
-- [ ] **BEHAV-12**: Staging queue 7-state machine transitions correctly with append-only audit log
+- [x] **BEHAV-09**: Staging layer hygiene engine detects all 11 built-in patterns
+- [x] **BEHAV-10**: Trust decay model correctly downgrades familiarity tiers over time
+- [x] **BEHAV-11**: Smart intake correctly routes through 3 clarity paths (clear/gaps/confused)
+- [x] **BEHAV-12**: Staging queue 7-state machine transitions correctly with append-only audit log
 - [x] **BEHAV-13**: Security hardening: path traversal prevention, YAML safe deserialization, JSONL integrity all function
 - [x] **BEHAV-14**: RFC Reference Skill correctly fetches, parses, and formats RFCs in all 3 output formats
 
@@ -156,10 +156,10 @@ Deferred to future milestones. Tracked but not in current roadmap.
 | BEHAV-06 | Phase 226 | Complete |
 | BEHAV-07 | Phase 226 | Complete |
 | BEHAV-08 | Phase 226 | Complete |
-| BEHAV-09 | Phase 226 | Pending |
-| BEHAV-10 | Phase 226 | Pending |
-| BEHAV-11 | Phase 226 | Pending |
-| BEHAV-12 | Phase 226 | Pending |
+| BEHAV-09 | Phase 226 | Complete |
+| BEHAV-10 | Phase 226 | Complete |
+| BEHAV-11 | Phase 226 | Complete |
+| BEHAV-12 | Phase 226 | Complete |
 | BEHAV-13 | Phase 226 | Complete |
 | BEHAV-14 | Phase 226 | Complete |
 | POLISH-01 | Phase 227 | Pending |
