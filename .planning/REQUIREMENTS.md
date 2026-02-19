@@ -92,8 +92,8 @@
 - [x] **SKILL-03**: Trigger patterns do not overlap ambiguously between skills
 - [x] **SKILL-04**: Agent definitions formalize all team roles with skill compositions and tool access permissions
 - [x] **SKILL-05**: No two agents have identical skill sets — each is specialized
-- [ ] **SKILL-06**: Team definitions specify topology (pipeline/map-reduce/swarm/leader-worker) with resource locks and sync points
-- [ ] **SKILL-07**: Inter-team communication follows filesystem message bus pattern via .planning/artifacts/
+- [x] **SKILL-06**: Team definitions specify topology (pipeline/map-reduce/swarm/leader-worker) with resource locks and sync points
+- [x] **SKILL-07**: Inter-team communication follows filesystem message bus pattern via .planning/artifacts/
 - [ ] **SKILL-08**: Complete chipset definition in .chipset/minecraft-knowledge-world.yaml validates against chipset schema
 - [ ] **SKILL-09**: Chipset trigger routing sends work to correct teams
 - [ ] **SKILL-10**: Total skill token budget stays under 40% (leaving headroom for execution)
@@ -109,10 +109,10 @@
 - [x] **OPS-07**: Health check script validates all systems and catches known failure modes
 - [x] **OPS-08**: Golden image can be cloned to a working server in under 5 minutes
 - [x] **OPS-09**: PXE rebuild produces identical server from scratch in under 20 minutes
-- [ ] **OPS-10**: Day-1 runbook enables new operator to complete full deployment
-- [ ] **OPS-11**: Day-2 runbook covers player management, health checks, backup review, and OS updates
-- [ ] **OPS-12**: Incident response runbook covers server unreachable, performance degradation, world corruption, and mod conflicts
-- [ ] **OPS-13**: Server update procedure is documented and tested on at least one version bump
+- [x] **OPS-10**: Day-1 runbook enables new operator to complete full deployment
+- [x] **OPS-11**: Day-2 runbook covers player management, health checks, backup review, and OS updates
+- [x] **OPS-12**: Incident response runbook covers server unreachable, performance degradation, world corruption, and mod conflicts
+- [x] **OPS-13**: Server update procedure is documented and tested on at least one version bump
 
 ## v2 Requirements
 
@@ -210,8 +210,8 @@
 | SKILL-03 | Phase 191 | Complete |
 | SKILL-04 | Phase 192 | Complete |
 | SKILL-05 | Phase 192 | Complete |
-| SKILL-06 | Phase 193 | Pending |
-| SKILL-07 | Phase 193 | Pending |
+| SKILL-06 | Phase 193 | Complete |
+| SKILL-07 | Phase 193 | Complete |
 | SKILL-08 | Phase 194 | Pending |
 | SKILL-09 | Phase 194 | Pending |
 | SKILL-10 | Phase 194 | Pending |
@@ -224,10 +224,10 @@
 | OPS-07 | Phase 196 | Complete |
 | OPS-08 | Phase 197 | Complete |
 | OPS-09 | Phase 197 | Complete |
-| OPS-10 | Phase 198 | Pending |
-| OPS-11 | Phase 198 | Pending |
-| OPS-12 | Phase 198 | Pending |
-| OPS-13 | Phase 198 | Pending |
+| OPS-10 | Phase 198 | Complete |
+| OPS-11 | Phase 198 | Complete |
+| OPS-12 | Phase 198 | Complete |
+| OPS-13 | Phase 198 | Complete |
 
 **Coverage:**
 - v1.22 requirements: 73 total

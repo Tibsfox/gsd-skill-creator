@@ -2,12 +2,12 @@
 
 ## Current Position
 
-Phase: 192-agent-definitions (Plan 01 complete)
-Plan: 192-01 complete
-Status: Wave 5 in progress -- Phases 191, 192, 195, 196, 197 complete
-Last activity: 2026-02-18 -- Completed 192-01 (Agent definitions: 10 agents across 5 teams with unique skill compositions)
+Phase: 198-operational-runbooks (Plan 01 complete)
+Plan: 198-01 complete
+Status: Wave 6 complete -- all 30 phases complete
+Last activity: 2026-02-19 -- Completed 198-01 (Operational runbooks: Day-1 deployment, Day-2 operations, incident response, server updates)
 
-Progress: [########################..] 24/30 phases (Wave 1-4 complete; Wave 5: 191, 192, 195, 196, 197 done)
+Progress: [##############################] 30/30 phases (All waves complete)
 
 ## Project Reference
 
@@ -26,10 +26,18 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 
 ## Next Actions
 
-1. Continue Wave 5 phases: 193, 194 remaining
-2. 24/30 phases complete, 6 remaining in Waves 5-6
+1. All 30 phases complete -- v1.22 milestone ready for final review
+2. Run /gsd:audit-milestone to verify all requirements satisfied
 
 ## Decisions
+
+### From Phase 198 Plan 01
+- Diagnosis tree format for incident response to minimize operator decision-making time
+- Three severity levels (P1/P2/P3) with clear response time expectations
+- Golden image rebuild as shared nuclear option across all four incident categories
+- Test procedure in update runbook satisfies OPS-13 via real mod redeploy cycle
+- [Phase 193]: Bidirectional infra<->platform link resolved to unidirectional for cycle-free graph; stage-level reverse dependency captured in sync-points.yaml
+- [Phase 193]: Topological order: mc-infra -> mc-platform -> mc-amiga -> mc-creative -> mc-ops
 
 ### From Phase 192 Plan 01
 - Four tool access tiers: design-only (Read/Write/Glob/Grep), discovery/verification (Read/Bash/Glob/Grep), operational (Read/Write/Bash/Glob/Grep), extended (+WebFetch for mc-deployer only)
@@ -273,8 +281,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-18T23:59:18Z
-Stopped at: Completed 192-01-PLAN.md (Agent definitions: 10 agents across 5 teams with unique skill compositions)
+Last session: 2026-02-19T00:05:27Z
+Stopped at: Completed 198-01-PLAN.md (Operational runbooks: Day-1 deployment, Day-2 operations, incident response, server updates)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments

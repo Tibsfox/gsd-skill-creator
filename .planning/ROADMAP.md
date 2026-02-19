@@ -347,7 +347,7 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 5
 - **Dependencies:** Phase 193 (team definitions)
 - **Requirements:** SKILL-08, SKILL-09, SKILL-10
-- **Plans:** 1 plan
+- **Plans:** 1/1 plans complete
   - [ ] 194-01-PLAN.md — Chipset YAML assembly with schema, trigger routing matrix, and validation script
 - **Success Criteria:**
   1. Chipset YAML validates against the chipset schema
@@ -399,7 +399,7 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 - **Wave:** 6
 - **Dependencies:** Phase 195, Phase 196, Phase 197 (all ops phases)
 - **Requirements:** OPS-10, OPS-11, OPS-12, OPS-13
-- **Plans:** 1 plan
+- **Plans:** 1/1 plans complete
   - [ ] 198-01-PLAN.md — Day-1 deployment, Day-2 operations, incident response, and server update runbooks
 - **Success Criteria:**
   1. Day-1 runbook enables a new operator to complete full deployment from scratch
@@ -418,16 +418,7 @@ Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrast
 | 3 | 173, 174, 175, 176, 177, 182, 183 | Services: Minecraft server, mods, client setup, UAE installation | 2 parallel tracks (Minecraft + Amiga) |
 | 4 | 184, 185, 186, 187, 188, 189, 190 | Content: asset conversion, world design, schematics, curriculum, Amiga Corner | Swarm (parallel creative work) |
 | 5 | 191, 192, 193, 194, 195, 196, 197 | Integration & Operations: skills, agents, teams, chipset, backups, monitoring, golden image | 2 parallel tracks (Skill-Creator + Ops) |
-| 6 | 198 | Polish: operational runbooks, final verification | Sequential |
-
----
-
-## Dependency Graph
-
-```
-Wave 1 (Foundation):
-  169 Hardware Discovery ----+
-  170 PXE Boot Infrastructure |---> Wave 2
+| 6 | 198 | 1/1 | Complete   | 2026-02-19 |---> Wave 2
   178 Platform Discovery -----+
 
 Wave 2 (Infrastructure):
@@ -458,10 +449,7 @@ Wave 4 (Content):
 Wave 5 (Integration & Ops):
   191 Skill Defs (needs 169-190) ---+
   192 Agent Defs (needs 191) ------|
-  193 Team Defs (needs 192) ------|---> Wave 6
-  194 Chipset Assembly (needs 193) |
-  195 Backup System (needs 177) --|
-  196 Monitoring (needs 177) -----| 1/1 | Complete   | 2026-02-18 | 2026-02-18 | Phases | Count |
+  193 Team Defs (needs 192) ------| 1/1 | Complete   | 2026-02-19 | 1/1 | Complete   | 2026-02-18 | 2026-02-18 | Phases | Count |
 |----------|-------------|--------|-------|
 | Infrastructure | INFRA-01 through INFRA-12 | 169-172 | 12 |
 | Minecraft | MC-01 through MC-13 | 173-177 | 13 |
