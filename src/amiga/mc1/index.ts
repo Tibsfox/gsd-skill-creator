@@ -1,10 +1,12 @@
 /**
  * Barrel exports for the MC-1 Control Surface module.
  *
- * MC-1 provides three capabilities:
+ * MC-1 provides five capabilities:
  * - Stub ME-1: Test data source emitting valid ICD-01 telemetry events
- * - Dashboard: State manager that consumes telemetry and produces view models
  * - Command Parser: Converts text input to structured ICD-01 command objects
+ * - Dashboard: State manager that consumes telemetry and produces view models
+ * - Alert Renderer: Three-tier alert system (nominal/advisory/gate)
+ * - Telemetry Consumer: Event router bridging ME-1 sources to Dashboard and AlertRenderer
  */
 
 // Stub ME-1 telemetry emitter
@@ -29,3 +31,20 @@ export type {
   TeamStatusView,
   CheckpointView,
 } from './dashboard.js';
+
+// Alert renderer (three-tier alert system)
+export { AlertRenderer } from './alert-renderer.js';
+export type {
+  AlertRendererConfig,
+  AlertView,
+  NominalView,
+  AdvisoryView,
+  GateView,
+} from './alert-renderer.js';
+
+// Telemetry consumer (event router)
+export { TelemetryConsumer } from './telemetry-consumer.js';
+export type {
+  TelemetryConsumerConfig,
+  TelemetryStats,
+} from './telemetry-consumer.js';
