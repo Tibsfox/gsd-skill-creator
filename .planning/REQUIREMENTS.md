@@ -9,15 +9,15 @@ Requirements for v1.25. Each maps to roadmap phases.
 
 ### Dependency Map
 
-- [ ] **DEPMAP-01**: Ecosystem DAG resolves all cross-document dependencies into a directed acyclic graph with every vision document as a node and every declared dependency as a typed edge (hard-blocks, soft-enhances, shares-infrastructure)
-- [ ] **DEPMAP-02**: Circular dependency detection identifies and resolves any cycles in the ecosystem dependency graph with documented resolution rationale
+- [x] **DEPMAP-01**: Ecosystem DAG resolves all cross-document dependencies into a directed acyclic graph with every vision document as a node and every declared dependency as a typed edge (hard-blocks, soft-enhances, shares-infrastructure)
+- [x] **DEPMAP-02**: Circular dependency detection identifies and resolves any cycles in the ecosystem dependency graph with documented resolution rationale
 - [ ] **DEPMAP-03**: Critical path analysis identifies the longest chain that determines minimum ecosystem delivery time
 - [ ] **DEPMAP-04**: Parallel track identification extracts independent tracks that can proceed simultaneously without blocking each other
 - [ ] **DEPMAP-05**: Mermaid DAG diagram renders the full dependency graph in GitHub-compatible Markdown without any build tooling
 - [ ] **DEPMAP-06**: Machine-readable YAML adjacency list (`ecosystem-deps.yaml`) enables future tooling to consume the dependency graph programmatically
 - [x] **DEPMAP-07**: Implementation-status annotations on each DAG node distinguish implemented, partial, aspirational, and permanently-deferred components by cross-referencing known-issues.md
 - [ ] **DEPMAP-08**: Build sequencing recommendation produces a milestone-by-milestone execution order that respects the critical path and maximizes parallel work
-- [ ] **DEPMAP-09**: Every edge in the DAG specifies at least one concrete interface (file path, schema, event name) — not just a document title reference
+- [x] **DEPMAP-09**: Every edge in the DAG specifies at least one concrete interface (file path, schema, event name) — not just a document title reference
 
 ### EventDispatcher Specification
 
@@ -98,15 +98,15 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DEPMAP-01 | Phase 231 | Pending |
-| DEPMAP-02 | Phase 231 | Pending |
+| DEPMAP-01 | Phase 231 | Complete |
+| DEPMAP-02 | Phase 231 | Complete |
 | DEPMAP-03 | Phase 231 | Pending |
 | DEPMAP-04 | Phase 231 | Pending |
 | DEPMAP-05 | Phase 231 | Pending |
 | DEPMAP-06 | Phase 231 | Pending |
 | DEPMAP-07 | Phase 231 | Complete |
 | DEPMAP-08 | Phase 231 | Pending |
-| DEPMAP-09 | Phase 231 | Pending |
+| DEPMAP-09 | Phase 231 | Complete |
 | EVTDSP-01 | Phase 232 | Pending |
 | EVTDSP-02 | Phase 232 | Pending |
 | EVTDSP-03 | Phase 232 | Pending |
