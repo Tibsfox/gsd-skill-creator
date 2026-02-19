@@ -137,6 +137,43 @@ export {
 } from './collection-manager.js';
 
 // ============================================================================
+// Virus signature database (Phase 239)
+// ============================================================================
+
+export { loadSignatureDatabase, loadSignatureFile, mergeSignatures, getBuiltinSignaturesDir } from './signature-db.js';
+
+// ============================================================================
+// Signature scanning (Phase 239) -- created by Plan 239-02
+// ============================================================================
+
+// export { scanBuffer, isBootBlock, isHunkFile, hexToBytes } from './signature-scanner.js';
+
+// ============================================================================
+// Heuristic scanning (Phase 239) -- created by Plan 239-03
+// ============================================================================
+
+// export { analyzeHunkFile, analyzeBootBlock, deriveHeuristicVerdict } from './heuristic-scanner.js';
+
+// ============================================================================
+// Quarantine (Phase 239) -- created by Plan 239-04
+// ============================================================================
+
+// export { quarantineFile, listQuarantined, restoreFile } from './quarantine.js';
+
+// ============================================================================
+// Scan orchestration (Phase 239) -- created by Plan 239-05
+// ============================================================================
+
+// export { scanPackage, batchScan, loadScanPolicy, mergeVerdicts, defaultScanPolicy } from './scan-orchestrator.js';
+
+// ============================================================================
+// Emulated scanning (Phase 239)
+// ============================================================================
+
+export { runEmulatedScan, lookupChecksum, loadKnownGoodHashes } from './emulated-scanner.js';
+export type { EmulatedScanResult, ChecksumMatch, EmulatedScanConfig } from './emulated-scanner.js';
+
+// ============================================================================
 // Types (inferred from Zod schemas)
 // ============================================================================
 
@@ -167,6 +204,17 @@ export type {
   PackageDetail,
   CollectionEntry,
   CollectionManifest,
+  SignaturePattern,
+  VirusSignature,
+  VirusSignatureDatabase,
+  ScanMatch,
+  HeuristicFlag,
+  ScanVerdict,
+  ScanDepth,
+  ScanReport,
+  QuarantineEntry,
+  ScanDepthConfig,
+  ScanPolicyConfig,
 } from './types.js';
 
 // ============================================================================
@@ -201,6 +249,17 @@ export {
   PackageDetailSchema,
   CollectionEntrySchema,
   CollectionManifestSchema,
+  SignaturePatternSchema,
+  VirusSignatureSchema,
+  VirusSignatureDatabaseSchema,
+  ScanMatchSchema,
+  HeuristicFlagSchema,
+  ScanVerdictSchema,
+  ScanDepthSchema,
+  ScanReportSchema,
+  QuarantineEntrySchema,
+  ScanDepthConfigSchema,
+  ScanPolicyConfigSchema,
 } from './types.js';
 
 // ============================================================================
