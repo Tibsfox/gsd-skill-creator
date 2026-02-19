@@ -41,9 +41,9 @@ Requirements for v1.24 — GSD Conformance Audit & Hardening. Each maps to roadm
 
 ### Behavior Audit (T2)
 
-- [ ] **BEHAV-01**: Token budget enforcement stops skill loading when budget is exceeded
-- [ ] **BEHAV-02**: Pattern detection triggers at 3+ occurrences and not before
-- [ ] **BEHAV-03**: Bounded learning constraints enforced: ≤20% change per refinement, ≥3 corrections required, 7-day cooldown
+- [x] **BEHAV-01**: Token budget enforcement stops skill loading when budget is exceeded
+- [x] **BEHAV-02**: Pattern detection triggers at 3+ occurrences and not before
+- [x] **BEHAV-03**: Bounded learning constraints enforced: ≤20% change per refinement, ≥3 corrections required, 7-day cooldown
 - [x] **BEHAV-04**: Dashboard metric calculations are correct (phase velocity, commit stats, accuracy scores)
 - [x] **BEHAV-05**: Template engine renders all variable substitutions correctly in infrastructure templates
 - [x] **BEHAV-06**: AGC simulator produces correct results for all 38 instructions
@@ -148,9 +148,9 @@ Deferred to future milestones. Tracked but not in current roadmap.
 | INTEG-08 | Phase 225 | Complete |
 | INTEG-09 | Phase 225 | Complete |
 | INTEG-10 | Phase 225 | Complete |
-| BEHAV-01 | Phase 226 | Pending |
-| BEHAV-02 | Phase 226 | Pending |
-| BEHAV-03 | Phase 226 | Pending |
+| BEHAV-01 | Phase 226 | Complete |
+| BEHAV-02 | Phase 226 | Complete |
+| BEHAV-03 | Phase 226 | Complete |
 | BEHAV-04 | Phase 226 | Complete |
 | BEHAV-05 | Phase 226 | Complete |
 | BEHAV-06 | Phase 226 | Complete |
