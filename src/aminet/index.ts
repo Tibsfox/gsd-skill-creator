@@ -146,25 +146,25 @@ export { loadSignatureDatabase, loadSignatureFile, mergeSignatures, getBuiltinSi
 // Signature scanning (Phase 239) -- created by Plan 239-02
 // ============================================================================
 
-// export { scanBuffer, isBootBlock, isHunkFile, hexToBytes } from './signature-scanner.js';
+export { scanBuffer, isBootBlock, isHunkFile, hexToBytes } from './signature-scanner.js';
 
 // ============================================================================
 // Heuristic scanning (Phase 239) -- created by Plan 239-03
 // ============================================================================
 
-// export { analyzeHunkFile, analyzeBootBlock, deriveHeuristicVerdict } from './heuristic-scanner.js';
+export { analyzeHunkFile, analyzeBootBlock, deriveHeuristicVerdict } from './heuristic-scanner.js';
 
 // ============================================================================
 // Quarantine (Phase 239) -- created by Plan 239-04
 // ============================================================================
 
-// export { quarantineFile, listQuarantined, restoreFile } from './quarantine.js';
+export { quarantineFile, listQuarantined, restoreFile } from './quarantine.js';
 
 // ============================================================================
 // Scan orchestration (Phase 239) -- created by Plan 239-05
 // ============================================================================
 
-// export { scanPackage, batchScan, loadScanPolicy, mergeVerdicts, defaultScanPolicy } from './scan-orchestrator.js';
+export { scanPackage, batchScan, loadScanPolicy, mergeVerdicts, defaultScanPolicy } from './scan-orchestrator.js';
 
 // ============================================================================
 // Emulated scanning (Phase 239)
