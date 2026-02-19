@@ -61,23 +61,22 @@ describe('AGC Instruction Decoder', () => {
       });
 
       it('decodes LXCH (QC=01)', () => {
-        // LXCH: opcode=010, QC=01, address=...
-        // Word = (2 << 12) | (1 << 10) | addr = 0o21000 | addr
-        const d = decode(0o21100, false);
+        const word = (2 << 12) | (1 << 10) | 0o0100;
+        const d = decode(word, false);
         expect(d.mnemonic).toBe('LXCH');
         expect(d.quarterCode).toBe(1);
       });
 
       it('decodes INCR (QC=10)', () => {
-        // Word = (2 << 12) | (2 << 10) | addr = 0o22000 | addr
-        const d = decode(0o22100, false);
+        const word = (2 << 12) | (2 << 10) | 0o0100;
+        const d = decode(word, false);
         expect(d.mnemonic).toBe('INCR');
         expect(d.quarterCode).toBe(2);
       });
 
       it('decodes ADS (QC=11)', () => {
-        // Word = (2 << 12) | (3 << 10) | addr = 0o23000 | addr
-        const d = decode(0o23100, false);
+        const word = (2 << 12) | (3 << 10) | 0o0100;
+        const d = decode(word, false);
         expect(d.mnemonic).toBe('ADS');
         expect(d.quarterCode).toBe(3);
       });
@@ -119,22 +118,22 @@ describe('AGC Instruction Decoder', () => {
       });
 
       it('decodes DXCH (QC=01)', () => {
-        // Word = (5 << 12) | (1 << 10) | addr
-        const d = decode(0o51100, false);
+        const word = (5 << 12) | (1 << 10) | 0o0100;
+        const d = decode(word, false);
         expect(d.mnemonic).toBe('DXCH');
         expect(d.quarterCode).toBe(1);
       });
 
       it('decodes TS (QC=10)', () => {
-        // Word = (5 << 12) | (2 << 10) | addr
-        const d = decode(0o52100, false);
+        const word = (5 << 12) | (2 << 10) | 0o0100;
+        const d = decode(word, false);
         expect(d.mnemonic).toBe('TS');
         expect(d.quarterCode).toBe(2);
       });
 
       it('decodes XCH (QC=11)', () => {
-        // Word = (5 << 12) | (3 << 10) | addr
-        const d = decode(0o53100, false);
+        const word = (5 << 12) | (3 << 10) | 0o0100;
+        const d = decode(word, false);
         expect(d.mnemonic).toBe('XCH');
         expect(d.quarterCode).toBe(3);
       });
