@@ -31,6 +31,9 @@ const HUNK_HEADER_BYTES = new Uint8Array([0x00, 0x00, 0x03, 0xF3]);
 /** DOS\0 magic bytes for boot blocks */
 const DOS_MAGIC_BYTES = new Uint8Array([0x44, 0x4F, 0x53, 0x00]);
 
+/** "Something wonderful" in bytes -- the real SCA signature pattern */
+const SCA_REAL_BYTES = new TextEncoder().encode('Something wonderful');
+
 /**
  * Build a minimal valid hunk file with a single HUNK_CODE of the given size.
  * The hunk file structure: HUNK_HEADER + header fields + HUNK_CODE + data + HUNK_END.
@@ -93,6 +96,19 @@ function buildMinimalBootBlock(): Uint8Array {
   buf[13] = 0x02;
   buf[14] = 0x00;
   buf[15] = 0x00;
+  return buf;
+}
+
+/**
+ * Build a boot block that matches the real SCA signature from the built-in
+ * database by embedding "Something wonderful" at offset 20.
+ */
+function buildSCABootBlock(): Uint8Array {
+  const buf = buildMinimalBootBlock();
+  // Embed the real SCA pattern: "Something wonderful"
+  for (let i = 0; i < SCA_REAL_BYTES.length; i++) {
+    buf[20 + i] = SCA_REAL_BYTES[i];
+  }
   return buf;
 }
 
@@ -409,10 +425,8 @@ describe('batchScan', () => {
     // Clean file: plain data
     writeFileSync(cleanFile, Buffer.alloc(500));
 
-    // Infected file: boot block with SCA signature
-    const bootBlock = buildMinimalBootBlock();
-    bootBlock[20] = 0x53; bootBlock[21] = 0x43; bootBlock[22] = 0x41; // "SCA"
-    writeFileSync(infectedFile, bootBlock);
+    // Infected file: boot block with real SCA signature ("Something wonderful")
+    writeFileSync(infectedFile, buildSCABootBlock());
 
     // Mirrored file: plain data (should NOT be scanned)
     writeFileSync(mirroredFile, Buffer.alloc(200));
@@ -480,9 +494,7 @@ describe('batchScan', () => {
     const infectedFile = join(mirrorDir, 'game', 'virus.adf');
     mkdirSync(join(mirrorDir, 'game'), { recursive: true });
 
-    const bootBlock = buildMinimalBootBlock();
-    bootBlock[20] = 0x53; bootBlock[21] = 0x43; bootBlock[22] = 0x41; // "SCA"
-    writeFileSync(infectedFile, bootBlock);
+    writeFileSync(infectedFile, buildSCABootBlock());
 
     const state: MirrorState = {
       entries: {
@@ -517,9 +529,7 @@ describe('batchScan', () => {
 
     writeFileSync(join(mirrorDir, 'util', 'safe.lha'), Buffer.alloc(500));
 
-    const bootBlock = buildMinimalBootBlock();
-    bootBlock[20] = 0x53; bootBlock[21] = 0x43; bootBlock[22] = 0x41;
-    writeFileSync(join(mirrorDir, 'game', 'bad.adf'), bootBlock);
+    writeFileSync(join(mirrorDir, 'game', 'bad.adf'), buildSCABootBlock());
 
     const state: MirrorState = {
       entries: {
