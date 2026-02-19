@@ -3,13 +3,16 @@
  *
  * Verifies all GL-1 public API is accessible from the barrel index,
  * the AMIGA barrel includes GL-1, and cross-module schemas work together.
+ *
+ * Phase 211: Charter, Weighting Docs, Dispute Record
+ * Phase 212: Rules Engine, Decision Log, Policy Query Handler
  */
 
 import { describe, it, expect } from 'vitest';
 
 // GL-1 barrel imports
 import {
-  // Charter module
+  // Charter module (Phase 211)
   CharterSchema,
   CharterClauseSchema,
   ConstitutionalConstraintSchema,
@@ -19,17 +22,29 @@ import {
   parseCharter,
   ratifyCharter,
   isRatified,
-  // Weighting module
+  // Weighting module (Phase 211)
   WeightingParameterSchema,
   WeightingSpecSchema,
   WEIGHTING_SPEC_YAML,
   parseWeightingSpec,
   validateParameterRange,
-  // Dispute module
+  // Dispute module (Phase 211)
   GovernanceDisputeSchema,
   createDispute,
   resolveDispute,
   rejectDispute,
+  // Rules engine (Phase 212)
+  RulesEngine,
+  DistributionPlanSchema,
+  EvaluationResultSchema,
+  ReasoningStepSchema,
+  VERDICT,
+  // Decision log (Phase 212)
+  DecisionLog,
+  DecisionEntrySchema,
+  // Policy query handler (Phase 212)
+  PolicyQueryHandler,
+  handleGovernanceQuery,
 } from '../index.js';
 
 // AMIGA barrel imports
@@ -38,6 +53,12 @@ import {
   GovernanceDisputeSchema as AmigaGovernanceDisputeSchema,
   WeightingSpecSchema as AmigaWeightingSpecSchema,
   COMMONS_CHARTER_YAML as AmigaCommonsCharterYaml,
+  // Phase 212 AMIGA barrel imports
+  RulesEngine as AmigaRulesEngine,
+  DecisionLog as AmigaDecisionLog,
+  PolicyQueryHandler as AmigaPolicyQueryHandler,
+  handleGovernanceQuery as AmigaHandleGovernanceQuery,
+  VERDICT as AmigaVERDICT,
 } from '../../index.js';
 
 // ICD-04 for cross-module compatibility
@@ -173,5 +194,197 @@ describe('Cross-module consistency', () => {
 
     const icd04Result = DisputeRecordPayloadSchema.safeParse(dispute);
     expect(icd04Result.success).toBe(true);
+  });
+});
+
+// ============================================================================
+// GL-1 barrel -- Phase 212 exports
+// ============================================================================
+
+describe('GL-1 barrel -- Phase 212 exports', () => {
+  it('exports rules engine public API', () => {
+    expect(RulesEngine).toBeDefined();
+    expect(DistributionPlanSchema).toBeDefined();
+    expect(EvaluationResultSchema).toBeDefined();
+    expect(ReasoningStepSchema).toBeDefined();
+    expect(VERDICT).toBeDefined();
+  });
+
+  it('exports decision log public API', () => {
+    expect(DecisionLog).toBeDefined();
+    expect(DecisionEntrySchema).toBeDefined();
+  });
+
+  it('exports policy query handler public API', () => {
+    expect(PolicyQueryHandler).toBeDefined();
+    expect(handleGovernanceQuery).toBeDefined();
+  });
+
+  it('RulesEngine is constructable', () => {
+    expect(typeof RulesEngine).toBe('function');
+  });
+
+  it('DecisionLog is constructable', () => {
+    expect(typeof DecisionLog).toBe('function');
+  });
+
+  it('PolicyQueryHandler is constructable', () => {
+    expect(typeof PolicyQueryHandler).toBe('function');
+  });
+
+  it('handleGovernanceQuery is callable', () => {
+    expect(typeof handleGovernanceQuery).toBe('function');
+  });
+
+  it('VERDICT has expected values', () => {
+    expect(VERDICT.COMPLIANT).toBe('COMPLIANT');
+    expect(VERDICT.NON_COMPLIANT).toBe('NON_COMPLIANT');
+    expect(VERDICT.ADVISORY).toBe('ADVISORY');
+  });
+});
+
+// ============================================================================
+// AMIGA barrel includes Phase 212 GL-1 exports
+// ============================================================================
+
+describe('AMIGA barrel includes Phase 212 GL-1 exports', () => {
+  it('RulesEngine importable from AMIGA barrel', () => {
+    expect(AmigaRulesEngine).toBeDefined();
+    expect(AmigaRulesEngine).toBe(RulesEngine);
+  });
+
+  it('DecisionLog importable from AMIGA barrel', () => {
+    expect(AmigaDecisionLog).toBeDefined();
+    expect(AmigaDecisionLog).toBe(DecisionLog);
+  });
+
+  it('PolicyQueryHandler importable from AMIGA barrel', () => {
+    expect(AmigaPolicyQueryHandler).toBeDefined();
+    expect(AmigaPolicyQueryHandler).toBe(PolicyQueryHandler);
+  });
+
+  it('handleGovernanceQuery importable from AMIGA barrel', () => {
+    expect(AmigaHandleGovernanceQuery).toBeDefined();
+    expect(AmigaHandleGovernanceQuery).toBe(handleGovernanceQuery);
+  });
+
+  it('VERDICT importable from AMIGA barrel', () => {
+    expect(AmigaVERDICT).toBeDefined();
+    expect(AmigaVERDICT).toBe(VERDICT);
+  });
+});
+
+// ============================================================================
+// End-to-end governance flow via barrel imports
+// ============================================================================
+
+describe('End-to-end governance flow via barrel imports', () => {
+  it('full governance flow: parse charter, evaluate plan, log decision, query policy', () => {
+    // Parse default charter via barrel
+    const charter = parseCharter(COMMONS_CHARTER_YAML);
+    expect(charter).toBeDefined();
+
+    // Create engine, log, and handler via barrel
+    const engine = new RulesEngine(charter);
+    const log = new DecisionLog();
+    const handler = new PolicyQueryHandler(charter, log);
+
+    // compliance_check with a compliant plan
+    const response = handler.handle({
+      query_type: 'compliance_check',
+      subject: 'E2E test plan evaluation',
+      requestor: 'CE-1',
+      context: {
+        distribution_plan: {
+          plan_id: 'plan-e2e-001',
+          mission_id: 'mission-2026-02-18-001',
+          created_at: '2026-02-18T10:00:00Z',
+          total_amount: 1000,
+          tiers: {
+            tier1_direct: {
+              amount: 500,
+              recipients: [
+                { contributor_id: 'contrib-alice-001', share: 300 },
+                { contributor_id: 'contrib-bob-002', share: 200 },
+              ],
+            },
+            tier2_infrastructure: {
+              amount: 200,
+              allocation_percent: 20,
+            },
+            tier3_ubd: {
+              amount: 300,
+              allocation_percent: 30,
+              recipient_count: 50,
+            },
+          },
+        },
+      },
+    });
+
+    expect(response.verdict).toBe('COMPLIANT');
+    expect(response.respondent).toBe('GL-1');
+    expect(log.size).toBe(1);
+  });
+
+  it('policy_lookup after compliance_check accumulates in shared log', () => {
+    const charter = parseCharter(COMMONS_CHARTER_YAML);
+    const log = new DecisionLog();
+    const handler = new PolicyQueryHandler(charter, log);
+
+    // First: compliance_check
+    handler.handle({
+      query_type: 'compliance_check',
+      subject: 'Check plan',
+      requestor: 'CE-1',
+      context: {
+        distribution_plan: {
+          plan_id: 'plan-e2e-002',
+          mission_id: 'mission-2026-02-18-001',
+          created_at: '2026-02-18T10:00:00Z',
+          total_amount: 1000,
+          tiers: {
+            tier1_direct: { amount: 500, recipients: [{ contributor_id: 'contrib-a-1', share: 500 }] },
+            tier2_infrastructure: { amount: 200, allocation_percent: 20 },
+            tier3_ubd: { amount: 300, allocation_percent: 30, recipient_count: 50 },
+          },
+        },
+      },
+    });
+    expect(log.size).toBe(1);
+
+    // Second: policy_lookup
+    handler.handle({
+      query_type: 'policy_lookup',
+      subject: 'UBD policy',
+      requestor: 'human',
+    });
+    expect(log.size).toBe(2);
+  });
+
+  it('all evaluations have non-empty reasoning', () => {
+    const charter = parseCharter(COMMONS_CHARTER_YAML);
+    const log = new DecisionLog();
+    const handler = new PolicyQueryHandler(charter, log);
+
+    const response = handler.handle({
+      query_type: 'compliance_check',
+      subject: 'Reasoning test',
+      requestor: 'CE-1',
+      context: {
+        distribution_plan: {
+          plan_id: 'plan-e2e-003',
+          mission_id: 'mission-2026-02-18-001',
+          created_at: '2026-02-18T10:00:00Z',
+          total_amount: 1000,
+          tiers: {
+            tier1_direct: { amount: 500, recipients: [{ contributor_id: 'contrib-a-1', share: 500 }] },
+            tier2_infrastructure: { amount: 200, allocation_percent: 20 },
+            tier3_ubd: { amount: 300, allocation_percent: 30, recipient_count: 50 },
+          },
+        },
+      },
+    });
+    expect(response.reasoning.length).toBeGreaterThan(0);
   });
 });
