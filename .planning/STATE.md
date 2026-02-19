@@ -5,17 +5,17 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.26 — Aminet Archive Extension Pack, Phase 236
+**Current focus:** v1.26 — Aminet Archive Extension Pack, Phase 237
 
 ## Current Position
 
 Milestone: v1.26 — Aminet Archive Extension Pack
-Phase: 236 of 242 (INDEX Infrastructure & Binary Parsers)
-Plan: 6 of 6 in current phase (COMPLETE)
-Status: Phase 236 complete — all 6 plans shipped
-Last activity: 2026-02-19 — Plan 06 complete (INDEX freshness, RECENT merge, barrel file, 111 tests)
+Phase: 237 of 242 (Mirror State & Download Engine)
+Plan: 1 of 5 in current phase
+Status: In progress
+Last activity: 2026-02-19 — Plan 01 complete (mirror state schemas, atomic persistence, 24 tests)
 
-Progress: [████████████████████] 100%
+Progress: [████░░░░░░░░░░░░░░░░] 20%
 
 ## Performance Metrics
 
@@ -27,11 +27,12 @@ Progress: [████████████████████] 100%
 | 236   | 03   | 3min     | 1     | 3     |
 | 236   | 01   | 7min     | 2     | 5     |
 | 236   | 06   | 3min     | 2     | 4     |
+| 237   | 01   | 3min     | 1     | 4     |
 
 **Velocity:**
-- Total plans completed: 6
+- Total plans completed: 7
 - Average duration: 4min
-- Total execution time: 22min
+- Total execution time: 25min
 
 ## Accumulated Context
 
@@ -55,6 +56,8 @@ Progress: [████████████████████] 100%
 - Plan 04: Token-based regex parsing for INDEX; K=1x M=1000x size suffixes; 84K entries in ~114ms; JSON cache for offline
 - Plan 02: Boot block parser with DOS magic, checksum validation, and 5 suspect pattern detectors for virus scanning
 - Plan 06: 24h freshness detection, RECENT-based incremental merge by fullPath, barrel file exporting complete public API
+- Phase 237 planned: 5 plans, wave 1 (01), then 02-05
+- Plan 01: PackageStatus 7-state enum, MirrorEntry/MirrorState/DownloadConfig Zod schemas, atomic write-then-rename persistence, immutable updateEntry
 
 ### Pending Todos
 
@@ -67,11 +70,11 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 236-06-PLAN.md (INDEX freshness, barrel file, phase 236 complete)
+Stopped at: Completed 237-01-PLAN.md (mirror state schemas, atomic persistence, 24 tests)
 Resume file: None
 
 ## ▶ Next Up
 
-/gsd:plan-phase 237 — next phase in v1.26 roadmap
+/gsd:execute-phase 237 — continue with plan 02 (single-package fetcher)
 
-Phase 236 complete. All 6 plans shipped, 111 tests, 8 source files in src/aminet/.
+Phase 237 in progress. Plan 01 shipped, 135 total aminet tests, 10 source files in src/aminet/.

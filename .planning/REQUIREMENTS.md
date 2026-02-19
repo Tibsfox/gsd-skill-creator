@@ -40,8 +40,8 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [ ] **MIR-03**: Preserve Aminet directory hierarchy in local mirror
 - [ ] **MIR-04**: Verify downloaded file size against INDEX metadata
 - [ ] **MIR-05**: Compute and store SHA-256 hash of all downloaded files
-- [ ] **MIR-06**: Track per-package state: not-mirrored, downloading, mirrored, scan-pending, clean, infected, installed
-- [ ] **MIR-07**: Persist mirror state to `.mirror-state.json` across sessions
+- [x] **MIR-06**: Track per-package state: not-mirrored, downloading, mirrored, scan-pending, clean, infected, installed
+- [x] **MIR-07**: Persist mirror state to `.mirror-state.json` across sessions
 - [ ] **MIR-08**: Bulk download with configurable concurrency limit (default: 2)
 - [ ] **MIR-09**: Resume interrupted downloads
 - [ ] **MIR-10**: Detect upstream version changes via INDEX comparison
@@ -172,8 +172,8 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | MIR-03 | Phase 237 | Pending |
 | MIR-04 | Phase 237 | Pending |
 | MIR-05 | Phase 237 | Pending |
-| MIR-06 | Phase 237 | Pending |
-| MIR-07 | Phase 237 | Pending |
+| MIR-06 | Phase 237 | Complete |
+| MIR-07 | Phase 237 | Complete |
 | MIR-08 | Phase 237 | Pending |
 | MIR-09 | Phase 237 | Pending |
 | MIR-10 | Phase 237 | Pending |
