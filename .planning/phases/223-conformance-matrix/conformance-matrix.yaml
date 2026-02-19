@@ -15,9 +15,9 @@ matrix_metadata:
     T2: 180
     T3: 64
   checkpoints_by_status:
-    pending: 329
-    pass: 7
-    fail: 0
+    pending: 315
+    pass: 19
+    fail: 2
     amended: 0
     deferred: 0
 documents:
@@ -1896,12 +1896,17 @@ documents:
           During active sessions, pages include meta refresh or lightweight JS polling for auto-update; final build
           strips auto-refresh for clean static output
         verification: code-review
-        status: pending
-        notes: ""
+        status: pass
+        notes: "T2 checkpoint verified at T1 level during dashboard integration audit"
         tier: T2
         depends_on:
           - pd-002
-        evidence: ""
+        evidence: >-
+          refresh.ts generateRefreshScript() produces <script> with setInterval-based polling for auto-update.
+          generator.ts injects it only when options.live=true (line: const refreshSnippet = options.live ?
+          generateRefreshScript(...)). Final build without --live flag produces clean static output with no
+          refresh script. Scroll position preserved via sessionStorage. Visual indicator shown briefly after
+          each refresh. Integration test in integration.test.ts confirms 52 tests pass for full pipeline.
       - id: pd-008
         section: "Structured Data: Semantic HTML5"
         claim: "Generated HTML uses semantic elements throughout: article, section, nav, aside, time, progress, details"
@@ -1940,24 +1945,36 @@ documents:
           Planning docs generator packaged as a GSD skill with SKILL.md, metadata.yaml, scripts/generate.{sh|py}, and
           resources/templates/
         verification: code-review
-        status: pending
-        notes: ""
+        status: fail
+        notes: "Dashboard generator is a standalone TypeScript module, not packaged as a GSD skill"
         tier: T1
         depends_on:
           - pd-002
           - sc-002
-        evidence: ""
+        evidence: >-
+          No SKILL.md, metadata.yaml, or scripts/generate.{sh|py} found anywhere in the codebase.
+          The planning docs generator exists as src/dashboard/generator.ts (a TypeScript module with
+          generate() export) but is not packaged with the GSD skill scaffolding (SKILL.md, metadata.yaml,
+          resources/templates/). Glob search for gsd-planning-docs* returned no files. The generator
+          is invoked programmatically, not as a skill trigger.
       - id: pd-012
         section: "Integration Points: As a GSD Skill"
         claim: Skill triggers on .planning/ file changes during GSD workflow phases
         verification: integration-test
-        status: pending
-        notes: ""
+        status: fail
+        notes: "No file-watching or GSD event hook triggers dashboard regeneration"
         tier: T1
         depends_on:
           - pd-002
           - sc-002
-        evidence: ""
+        evidence: >-
+          No file-watching mechanism (chokidar, fs.watch, inotify) found in src/dashboard/.
+          The incremental.ts module provides content-hash based change detection for skipping
+          unchanged pages during explicit builds, but does not watch for changes. The refresh.ts
+          module provides browser-side polling (setInterval page reload) for live mode, not
+          server-side file watching. The heartbeat.ts renderer shows time since last .planning/
+          modification but is a pure renderer with no trigger capability. Dashboard regeneration
+          requires explicit invocation of generate(). No GSD lifecycle hooks found in dashboard code.
       - id: pd-013
         section: "Integration Points: For Hosting"
         claim: >-

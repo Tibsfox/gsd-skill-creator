@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** Verify the codebase matches its specifications -- then fix every place where it doesn't.
-**Current focus:** Phase 224 - Foundation Audit (T0)
+**Current focus:** Phase 225 - Integration Audit (T1)
 
 ## Current Position
 
-Phase: 224 (2 of 8) — Foundation Audit (T0)
-Plan: 3 of 3
-Status: Complete
-Last activity: 2026-02-19 — Completed 224-03 (GSD core, subagent, message bus audit)
+Phase: 225 (3 of 8) — Integration Audit (T1)
+Plan: — (not yet planned)
+Status: Ready to plan
+Last activity: 2026-02-19 — Phase 224 complete, advancing to 225
 
-Progress: [███░░░░░░░] 22%
+Progress: [███░░░░░░░] 25%
 
 ## Performance Metrics
 
