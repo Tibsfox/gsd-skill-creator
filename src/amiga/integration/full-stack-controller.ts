@@ -93,6 +93,8 @@ export interface FullStackConfig {
   }>;
   /** Whether to ratify the charter before mission start (default: true). */
   ratifyCharter?: boolean;
+  /** Contributor IDs that qualify for Tier 2 infrastructure commons. */
+  infrastructureContributorIds?: string[];
 }
 
 /** Complete result from a full stack mission lifecycle. */
@@ -212,7 +214,11 @@ export class FullStackController {
     this.registry = new ContributionRegistry();
     this.recorder = new InvocationRecorder({ ledger: this.ledger });
     this.weightingEngine = new WeightingEngine();
-    this.dividendCalculator = new DividendCalculator();
+    this.dividendCalculator = new DividendCalculator(
+      config.infrastructureContributorIds?.length
+        ? { infrastructureContributorIds: new Set(config.infrastructureContributorIds) }
+        : undefined,
+    );
     this.sealGuard = new LedgerSealGuard(this.ledger);
 
     // Register contributors in CE-1
