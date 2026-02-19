@@ -5,7 +5,7 @@
  * @module rom-manager.test
  */
 
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtempSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -66,14 +66,12 @@ describe('computeCrc32', () => {
 
   it('computes CRC32 of all-0xFF buffer of 4 bytes', () => {
     const data = new Uint8Array([0xFF, 0xFF, 0xFF, 0xFF]);
-    // Known CRC32 of 4 x 0xFF
     const result = computeCrc32(data);
     expect(result).toBe(result >>> 0); // unsigned
     expect(result).toBe(0xFFFFFFFF);
   });
 
   it('returns unsigned 32-bit integer (>>> 0 applied)', () => {
-    // CRC32 should never be negative
     const data = new TextEncoder().encode('test');
     const result = computeCrc32(data);
     expect(result).toBe(result >>> 0);
@@ -193,81 +191,56 @@ describe('scanRomDirectory', () => {
     rmSync(tmpDir, { recursive: true, force: true });
   });
 
-  it('identifies a 256KB ROM file matching A500 KS1.3 by CRC32', async () => {
-    // Create a 256KB file filled with zeros
+  it('identifies a 256KB ROM file matching A500 KS1.3 by CRC32', () => {
     const romPath = join(tmpDir, 'kick.rom');
-    const romData = Buffer.alloc(262144, 0);
-    writeFileSync(romPath, romData);
+    writeFileSync(romPath, Buffer.alloc(262144, 0));
 
-    // Mock computeCrc32 to return A500 KS1.3 CRC for this data
-    const { computeCrc32: realCrc32 } = await import('./rom-manager.js');
-    const crc32Spy = vi.spyOn(
-      await import('./rom-manager.js'),
-      'computeCrc32',
-    );
-    crc32Spy.mockReturnValue(0xC4F0F55F);
+    // Inject mock CRC32 that always returns A500 KS1.3 CRC
+    const mockCrc32 = () => 0xC4F0F55F;
 
-    const results = scanRomDirectory(tmpDir);
+    const results = scanRomDirectory(tmpDir, { crc32Fn: mockCrc32 });
     expect(results.length).toBe(1);
     expect(results[0].path).toBe(romPath);
     expect(results[0].rom.model).toBe('A500');
     expect(results[0].rom.version).toBe('1.3');
     expect(results[0].wasEncrypted).toBe(false);
-
-    crc32Spy.mockRestore();
   });
 
-  it('handles overdumped 512KB ROM via second-half checksum', async () => {
-    // Create a 512KB file
+  it('handles overdumped 512KB ROM via second-half checksum', () => {
     const romPath = join(tmpDir, 'overdump.rom');
-    const romData = Buffer.alloc(524288, 0);
-    writeFileSync(romPath, romData);
+    writeFileSync(romPath, Buffer.alloc(524288, 0));
 
     // First call (full 512KB) returns no match, second call (second 256KB half) matches A1200 KS3.1
-    const crc32Spy = vi.spyOn(
-      await import('./rom-manager.js'),
-      'computeCrc32',
-    );
-    crc32Spy
-      .mockReturnValueOnce(0x00000000) // full file -- no match
-      .mockReturnValueOnce(0x1483A091); // second half -- A1200 KS3.1
+    let callCount = 0;
+    const mockCrc32 = () => {
+      callCount++;
+      if (callCount === 1) return 0x00000000; // full file -- no match
+      return 0x1483A091; // second half -- A1200 KS3.1
+    };
 
-    const results = scanRomDirectory(tmpDir);
+    const results = scanRomDirectory(tmpDir, { crc32Fn: mockCrc32 });
     expect(results.length).toBe(1);
     expect(results[0].rom.model).toBe('A1200');
     expect(results[0].rom.version).toBe('3.1');
-
-    crc32Spy.mockRestore();
   });
 
   it('returns empty array when no matching files', () => {
-    // Create a 256KB file that won't match any CRC
-    const romPath = join(tmpDir, 'unknown.rom');
-    writeFileSync(romPath, Buffer.alloc(262144, 0xAA));
+    writeFileSync(join(tmpDir, 'unknown.rom'), Buffer.alloc(262144, 0xAA));
 
     const results = scanRomDirectory(tmpDir);
     expect(results.length).toBe(0);
   });
 
-  it('detects Cloanto encrypted ROMs via rom.key presence', async () => {
-    // Create rom.key and a ROM file
-    const keyPath = join(tmpDir, 'rom.key');
-    const romPath = join(tmpDir, 'amiga-os-310-a1200.rom');
-    writeFileSync(keyPath, Buffer.from([0x01, 0x02, 0x03]));
-    writeFileSync(romPath, Buffer.alloc(524288, 0));
+  it('detects Cloanto encrypted ROMs via rom.key presence', () => {
+    writeFileSync(join(tmpDir, 'rom.key'), Buffer.from([0x01, 0x02, 0x03]));
+    writeFileSync(join(tmpDir, 'amiga-os-310-a1200.rom'), Buffer.alloc(524288, 0));
 
-    // Mock: after XOR decryption, CRC matches A1200 KS3.1
-    const crc32Spy = vi.spyOn(
-      await import('./rom-manager.js'),
-      'computeCrc32',
-    );
-    crc32Spy.mockReturnValue(0x1483A091);
+    // After XOR decryption, CRC matches A1200 KS3.1
+    const mockCrc32 = () => 0x1483A091;
 
-    const results = scanRomDirectory(tmpDir);
+    const results = scanRomDirectory(tmpDir, { crc32Fn: mockCrc32 });
     expect(results.length).toBe(1);
     expect(results[0].wasEncrypted).toBe(true);
-
-    crc32Spy.mockRestore();
   });
 
   it('skips files with wrong size (not 256KB or 512KB)', () => {
@@ -278,46 +251,33 @@ describe('scanRomDirectory', () => {
     expect(results.length).toBe(0);
   });
 
-  it('does not scan nested subdirectories (single level only)', async () => {
-    // ROM in subdirectory should NOT be found
+  it('does not scan nested subdirectories (single level only)', () => {
     const subDir = join(tmpDir, 'nested');
     mkdirSync(subDir);
     writeFileSync(join(subDir, 'kick.rom'), Buffer.alloc(262144, 0));
 
-    // Mock so any 256KB file would match if scanned
-    const crc32Spy = vi.spyOn(
-      await import('./rom-manager.js'),
-      'computeCrc32',
-    );
-    crc32Spy.mockReturnValue(0xC4F0F55F);
+    // Mock CRC that would match if the file were scanned
+    const mockCrc32 = () => 0xC4F0F55F;
 
-    const results = scanRomDirectory(tmpDir);
+    const results = scanRomDirectory(tmpDir, { crc32Fn: mockCrc32 });
     expect(results.length).toBe(0);
-
-    crc32Spy.mockRestore();
   });
 
-  it('returns multiple DetectedRom entries for multiple ROM files', async () => {
-    // Two ROM files
+  it('returns multiple DetectedRom entries for multiple ROM files', () => {
     writeFileSync(join(tmpDir, 'kick13.rom'), Buffer.alloc(262144, 0));
     writeFileSync(join(tmpDir, 'kick31.rom'), Buffer.alloc(524288, 0));
 
-    const crc32Spy = vi.spyOn(
-      await import('./rom-manager.js'),
-      'computeCrc32',
-    );
-    // First file: A500 KS1.3, second file: A1200 KS3.1
-    crc32Spy
-      .mockReturnValueOnce(0xC4F0F55F) // kick13.rom
-      .mockReturnValueOnce(0x1483A091); // kick31.rom
+    // Return A500 KS1.3 for 256KB data, A1200 KS3.1 for 512KB data
+    const mockCrc32 = (data: Uint8Array) => {
+      if (data.length === 262144) return 0xC4F0F55F; // A500 KS1.3
+      return 0x1483A091; // A1200 KS3.1
+    };
 
-    const results = scanRomDirectory(tmpDir);
+    const results = scanRomDirectory(tmpDir, { crc32Fn: mockCrc32 });
     expect(results.length).toBe(2);
 
     const models = results.map((r) => r.rom.model).sort();
     expect(models).toEqual(['A1200', 'A500']);
-
-    crc32Spy.mockRestore();
   });
 });
 
@@ -326,7 +286,6 @@ describe('scanRomDirectory', () => {
 // ---------------------------------------------------------------------------
 
 describe('selectRomForProfile', () => {
-  // Build test DetectedRom arrays
   const a500Rom: DetectedRom = {
     path: '/roms/kick13.rom',
     rom: {
@@ -393,19 +352,16 @@ describe('selectRomForProfile', () => {
   });
 
   it('returns undefined when no matching ROM exists', () => {
-    // Only A1200 ROM, requesting A500
     const result = selectRomForProfile([a1200Rom], 'a500');
     expect(result).toBeUndefined();
   });
 
   it('does not use A1200 KS3.1 ROM for A4000 even though same version', () => {
-    // Only A1200 ROM available, A4000 profile should NOT match
     const result = selectRomForProfile([a1200Rom], 'a4000');
     expect(result).toBeUndefined();
   });
 
   it('WHDLoad profile accepts A1200 ROMs (same KS requirements)', () => {
-    // Only A1200 ROM, WHDLoad should still match
     const result = selectRomForProfile([a1200Rom], 'whdload');
     expect(result).toBeDefined();
     expect(result!.rom.model).toBe('A1200');
