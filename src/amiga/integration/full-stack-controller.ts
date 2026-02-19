@@ -355,6 +355,25 @@ export class FullStackController {
   }
 
   // --------------------------------------------------------------------------
+  // Alert emission
+  // --------------------------------------------------------------------------
+
+  /**
+   * Emit an ALERT_SURFACE event through ME-1's telemetry emitter.
+   *
+   * Used by higher-level harnesses to surface advisory alerts (e.g., skill
+   * candidate notifications during debrief).
+   */
+  emitAlert(data: {
+    alert_level: 'nominal' | 'advisory' | 'gate';
+    source_agent: string;
+    message: string;
+    category: 'resource' | 'phase' | 'agent' | 'system';
+  }): EventEnvelope {
+    return this.emitter.emitAlert(data);
+  }
+
+  // --------------------------------------------------------------------------
   // Phase control (MC-1/ME-1 delegates)
   // --------------------------------------------------------------------------
 

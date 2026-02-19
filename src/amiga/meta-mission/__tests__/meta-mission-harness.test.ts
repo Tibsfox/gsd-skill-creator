@@ -272,14 +272,26 @@ describe('Skill package draft generation', () => {
     expect(result.skillPackage.provisioning_steps.length).toBeGreaterThanOrEqual(3);
   });
 
-  it('skill package total_events matches event log length', () => {
+  it('skill package total_events reflects pre-debrief event count', () => {
     const harness = new MetaMissionHarness({
       mission_id: 'mission-2026-02-18-035',
     });
     const result = harness.runMetaMission();
     const events = harness.getEventLog();
 
-    expect(result.skillPackage.total_events).toBe(events.length);
+    // Skill package is built before debrief ALERT_SURFACE events are emitted,
+    // so total_events may be less than or equal to final event log length.
+    // Debrief alerts are appended after the skill package snapshot.
+    const debriefAlerts = events.filter(
+      (e) =>
+        e.type === 'ALERT_SURFACE' &&
+        String((e.payload as Record<string, unknown>).message ?? '')
+          .toLowerCase()
+          .includes('skill candidate'),
+    );
+    expect(result.skillPackage.total_events).toBe(
+      events.length - debriefAlerts.length,
+    );
   });
 
   it('skill package governance verdict is COMPLIANT', () => {
