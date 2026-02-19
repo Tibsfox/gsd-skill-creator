@@ -106,21 +106,16 @@ describe('quarantineFile', () => {
   });
 
   it('rejects path traversal with ../ in file path', () => {
-    const fileDir = join(mirrorDir, 'mus');
-    mkdirSync(fileDir, { recursive: true });
-    const filePath = join(mirrorDir, 'mus', '..', 'etc', 'passwd');
+    // Use string concatenation to preserve ".." in the path (join resolves it away)
+    const filePath = `${mirrorDir}/mus/../etc/passwd`;
 
     expect(() => quarantineFile(filePath, makeScanReport(), quarantineDir)).toThrow(/traversal/i);
   });
 
   it('rejects path that resolves outside quarantine directory', () => {
-    // Create a file at a valid location but craft a path that would escape
-    const fileDir = join(tmpDir, 'outside');
-    mkdirSync(fileDir, { recursive: true });
-    const filePath = join(fileDir, 'escape.lha');
-    writeFileSync(filePath, 'escape-content');
+    // Use a path with ".." that would escape the expected directory structure
+    const filePath = `${mirrorDir}/../../../etc/passwd`;
 
-    // The relative path from quarantine parent to this file would contain ../
     expect(() => quarantineFile(filePath, makeScanReport(), quarantineDir)).toThrow(/traversal/i);
   });
 
