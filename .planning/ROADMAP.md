@@ -11,7 +11,7 @@ Build a complete Aminet archive management system across 7 phases and ~40 plans.
 - Integer phases (236, 237, ...): Planned milestone work
 - Decimal phases (237.1, 237.2): Urgent insertions if needed (marked with INSERTED)
 
-- [ ] **Phase 236: INDEX Infrastructure & Binary Parsers** - Parse Aminet's ~84,000-entry INDEX, build AmigaBinaryReader, and implement hunk/bootblock format parsers
+- [x] **Phase 236: INDEX Infrastructure & Binary Parsers** - Parse Aminet's ~84,000-entry INDEX, build AmigaBinaryReader, and implement hunk/bootblock format parsers (completed 2026-02-19)
 - [ ] **Phase 237: Mirror State & Download Engine** - Selective package download with integrity verification, state tracking, and rate-limited HTTP fetching
 - [ ] **Phase 238: Search, Browse & Collections** - Full-text search, category browsing, architecture filtering, and curated collection management
 - [ ] **Phase 239: Virus Scanner & Quarantine** - Signature-based scanning, heuristic hunk analysis, boot block detection, quarantine system, and scan orchestration
@@ -54,11 +54,11 @@ Plans:
 **Plans**: 5 plans
 
 Plans:
-- [ ] 237-01: Mirror state schema and persistence (MirrorState/MirrorEntry Zod schemas, .mirror-state.json read/write, per-package status enum)
-- [ ] 237-02: Single-package fetcher (HTTP download from mirror URL, .lha + .readme, mirror fallback ordering, User-Agent header)
-- [ ] 237-03: Integrity verification (file size vs INDEX, SHA-256 computation and storage, corruption detection)
-- [ ] 237-04: Bulk download engine (p-queue concurrency control, rate limiter token bucket, configurable delay, resume interrupted batches)
-- [ ] 237-05: Sync detection and incremental update (compare local mirror state vs current INDEX, flag upstream version changes, directory hierarchy preservation)
+- [ ] 237-01-PLAN.md — Mirror state schemas and atomic persistence (PackageStatus/MirrorEntry/MirrorState Zod schemas, write-then-rename, per-package status enum)
+- [ ] 237-02-PLAN.md — Single-package fetcher with mirror fallback (HTTP download, .lha + .readme, directory hierarchy preservation, User-Agent header)
+- [ ] 237-03-PLAN.md — Integrity verification (file size vs INDEX with +/-1KB tolerance, SHA-256 computation via node:crypto, corruption detection)
+- [ ] 237-04-PLAN.md — Bulk download engine with barrel update (async semaphore concurrency, global rate limiting, resume interrupted batches, all Phase 237 exports)
+- [ ] 237-05-PLAN.md — Sync detection (compare local mirror state vs current INDEX, flag upstream version changes by sizeKb diff)
 
 ### Phase 238: Search, Browse & Collections
 **Goal**: Users can discover Amiga software through full-text search, category browsing, and curated collections without network access
@@ -180,7 +180,7 @@ Phase 237 ──────> 239  │ (scanner needs downloaded packages)
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 236. INDEX Infrastructure & Binary Parsers | 5/6 | In Progress|  |
+| 236. INDEX Infrastructure & Binary Parsers | 6/6 | Complete    | 2026-02-19 |
 | 237. Mirror State & Download Engine | 0/5 | Not started | - |
 | 238. Search, Browse & Collections | 0/5 | Not started | - |
 | 239. Virus Scanner & Quarantine | 0/6 | Not started | - |
