@@ -326,10 +326,15 @@ describe('Dashboard', () => {
       const stub1 = new StubME1(createNominalSequence('mission-2026-02-18-001'));
       const stub2 = new StubME1(createNominalSequence('mission-2026-02-18-002'));
 
-      // Process mission-001 first
-      dashboard.processEvent(stub1.next()!);
-      // Then mission-002 (most recently updated)
-      dashboard.processEvent(stub2.next()!);
+      // Process mission-001 with an earlier timestamp
+      const event1 = stub1.next()!;
+      event1.timestamp = '2026-02-18T10:00:00.000Z';
+      dashboard.processEvent(event1);
+
+      // Process mission-002 with a later timestamp (most recently updated)
+      const event2 = stub2.next()!;
+      event2.timestamp = '2026-02-18T10:00:01.000Z';
+      dashboard.processEvent(event2);
 
       const view = dashboard.getView();
       expect(view.missions).toHaveLength(2);
