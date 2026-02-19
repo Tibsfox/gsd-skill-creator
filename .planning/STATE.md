@@ -11,24 +11,24 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.25 — GSD Ecosystem Integration
 Phase: 231 (1 of 5) — Ecosystem Dependency Map
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: Executing
-Last activity: 2026-02-19 — Completed 231-01 node inventory (20 nodes, 5 layers, 4 statuses)
+Last activity: 2026-02-19 — Completed 231-02 edge inventory (48 edges, 6 topological levels, 0 cycles)
 
-Progress: [###░░░░░░░] 7%
+Progress: [####░░░░░░] 13%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: 3m
-- Total execution time: 0.06 hours
+- Total plans completed: 2
+- Average duration: 4m
+- Total execution time: 0.14 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 231 | 1 | 3m | 3m |
+| 231 | 2 | 8m | 4m |
 
 *Updated after each plan completion*
 
@@ -45,6 +45,9 @@ Recent decisions affecting current work:
 - [231-01]: Excluded 2 non-vision docs (industry report, screenshot description) from DAG
 - [231-01]: Classified amiga-leverage and info-design as Core layer (design philosophy governing architecture)
 - [231-01]: AGC ISA (educational) is separate from GSD ISA (aspirational workflow engine)
+- [231-02]: 58% hard-blocks edges (higher than research predicted) reflects genuinely deep dependency chains
+- [231-02]: skill-creator is most depended-on node (9 incoming edges); gsd-os is most dependent (8 outgoing)
+- [231-02]: Zero cycles found -- all 5 potential mutual references resolved as unidirectional
 
 ### Key Context
 
@@ -66,5 +69,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 231-01-PLAN.md (node inventory)
+Stopped at: Completed 231-02-PLAN.md (edge inventory)
 Resume file: None

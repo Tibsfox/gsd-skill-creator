@@ -30,7 +30,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. A tool can consume `ecosystem-deps.yaml` and reconstruct the full graph programmatically without parsing prose
   4. Every DAG node is annotated with implementation status (implemented, partial, aspirational, permanently-deferred) cross-referenced against known-issues.md, so a reader knows what exists vs. what is planned
   5. A milestone planner can read the build sequencing recommendation and determine which milestone to build next without consulting any other document
-**Plans:** 1/3 plans executed
+**Plans:** 2/3 plans executed
 
 Plans:
 - [ ] 231-01-PLAN.md — Node inventory with implementation status annotations
@@ -91,7 +91,7 @@ Phases execute in numeric order: 231 → 232 → 233 → 234 → 235
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 231. Ecosystem Dependency Map | 1/3 | In Progress|  |
+| 231. Ecosystem Dependency Map | 2/3 | In Progress|  |
 | 232. Shared EventDispatcher Specification | 0/TBD | Not started | - |
 | 233. Dependency Philosophy by Layer | 0/TBD | Not started | - |
 | 234. Integration Test Strategy | 0/TBD | Not started | - |
