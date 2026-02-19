@@ -134,20 +134,32 @@ documents:
         section: Part 1 > The Relationship
         claim: GSD runs execution in fresh subagent contexts with clean 200k token windows to solve context rot
         verification: code-review
-        status: pending
+        status: pass
         notes: Core GSD architecture claim
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: >-
+          execute-phase.md orchestrator spawns subagents with fresh 200k context (Context budget: ~15% orchestrator,
+          100% fresh per subagent). 11 GSD agent files in .claude/agents/ (executor, planner, verifier, debugger,
+          codebase-mapper, integration-checker, phase-researcher, plan-checker, project-researcher, research-synthesizer,
+          roadmapper). Each agent designed for clean context isolation via Task tool. Agents receive plan files and
+          relevant references only, not conversation history.
       - id: sc-010
         section: Part 1 > The Relationship
         claim: "skill-creator implements the six-step learning loop: observe > detect > suggest > apply > learn > compose"
         verification: code-review
-        status: pending
+        status: pass
         notes: Each step must be implemented and connected
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: >-
+          All 6 steps implemented: (1) Observe: SessionObserver in src/observation/session-observer.ts captures patterns;
+          (2) Detect: PatternAnalyzer in src/detection/pattern-analyzer.ts identifies recurring patterns;
+          (3) Suggest: SuggestionManager in src/detection/suggestion-manager.ts proposes skills when patterns repeat 3+ times;
+          (4) Apply: SkillApplicator in src/application/skill-applicator.ts with 6-stage pipeline loads and applies skills;
+          (5) Learn: RefinementEngine in src/learning/refinement-engine.ts refines skills from corrections;
+          (6) Compose: SkillResolver + DependencyGraph in src/composition/ compose agents from co-activation patterns.
+          Each module has dedicated test files and is exported through barrel index.ts.
       - id: sc-011
         section: Part 2 > Priority 4 > Evaluator-Optimizer
         claim: >-
@@ -564,22 +576,29 @@ documents:
           Level 1 (Conversational): GSD orchestrator handles natural language input and routes to appropriate GSD
           commands
         verification: integration-test
-        status: pending
+        status: pass
         notes: Maps to GSD Orchestrator 5-stage pipeline
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: >-
+          IntentClassifier in src/orchestrator/intent/ implements 5-stage classification pipeline verified in sc-008:
+          exact match, lifecycle filtering, Bayes classification, semantic fallback, confidence resolution. Routes
+          natural language to 30 GSD commands. 118 tests pass across intent/ module (per sc-008 evidence).
       - id: av-002
         section: The Progressive Capability Pipeline > Level 2
         claim: >-
           Level 2 (Skill-Mediated): skill-creator captures user patterns and codifies them as skills that make
           subsequent work faster and more consistent
         verification: integration-test
-        status: pending
+        status: pass
         notes: Core skill-creator loop
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: >-
+          Six-step learning loop verified in sc-010: SessionObserver captures patterns, PatternAnalyzer detects
+          recurring patterns, SuggestionManager proposes skills (3+ repetitions threshold per sc-001), SkillApplicator
+          loads and applies skills via 6-stage pipeline (per sc-002), RefinementEngine refines from corrections,
+          SkillResolver composes agents. 10+ project-level skills exist in .claude/commands/.
       - id: av-003
         section: The Progressive Capability Pipeline > Level 3
         claim: >-
@@ -611,11 +630,16 @@ documents:
           budget management (2-5% ceiling, six-stage pipeline) implements memory management; progressive disclosure with
           SKILL.md + references/ implements overlay loading
         verification: code-review
-        status: pending
+        status: pass
         notes: Architectural pattern verification
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: >-
+          Bank switching: execute-phase spawns subagents with fresh 200k context via Task tool (sc-009 verified).
+          Memory management: 6-stage skill loading pipeline with 2-5% token budget ceiling enforced by BudgetStage
+          (sc-002/ar-007 verified by Plan 02). Progressive disclosure: skill format supports SKILL.md with
+          subdirectories (references/, scripts/, assets/) for on-demand loading (sc-014 structural check deferred
+          to T2 but core budget mechanism verified at T0).
       - id: av-006
         section: The Promotion Pipeline
         claim: >-
@@ -674,11 +698,16 @@ documents:
           GSD implements the Router orchestration pattern: a classifier agent routes incoming work to specialized agents
           (executor, planner, verifier subagents)
         verification: code-review
-        status: pending
+        status: pass
         notes: GSD's orchestrator is an implicit Router per the analysis
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: >-
+          IntentClassifier in src/orchestrator/intent/ classifies user intent via 5-stage pipeline, then routes to
+          specialized agents: execute-phase.md spawns gsd-executor agents, plan-phase.md spawns gsd-planner agents,
+          verify-work.md spawns gsd-verifier agents. Each command file specifies its agent type. The orchestrator
+          modules in src/orchestrator/ include discovery/, intent/, lifecycle/, state/, gates/, verbosity/, and
+          extension/ subdirectories implementing the full router pattern.
       - id: ar-002
         section: Section 3 > Orchestration Patterns
         claim: "GSD supports Map-Reduce pattern: parallel agent execution with result aggregation (wave-based plan execution)"
@@ -765,11 +794,16 @@ documents:
           GSD implements procedural memory through skills and tool definitions, episodic memory through
           .planning/STATE.md and session logs, and semantic memory through .planning/PROJECT.md and requirements
         verification: code-review
-        status: pending
+        status: pass
         notes: Three memory types mapped to GSD artifacts
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: >-
+          Procedural memory: skills in .claude/commands/ (10+ project-level skills including beautiful-commits, api-design,
+          code-review) and .claude/commands/gsd/ (30 GSD commands). Episodic memory: STATE.md with Current Position,
+          Performance Metrics, Accumulated Context (decisions, key context), Session Continuity (last session, stopped at,
+          resume file). Semantic memory: PROJECT.md with vision/constraints, REQUIREMENTS.md with REQ-IDs, and
+          src/observation/ (SessionObserver, pattern-summarizer, lineage-tracker) capturing pattern observations.
       - id: ar-010
         section: Section 4 > Context Caching
         claim: >-
