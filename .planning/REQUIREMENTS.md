@@ -29,9 +29,9 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 
 - [x] **COL-01**: Curated collection format as YAML manifest with package references
 - [x] **COL-02**: Ship 5 starter collections (essential-utils, classic-games, demo-scene, music-mods, dev-tools)
-- [ ] **COL-03**: Users can create, edit, and delete custom collections
-- [ ] **COL-04**: Collections support bulk operations (fetch all, scan all)
-- [ ] **COL-05**: Collections exportable as shareable YAML for other GSD-OS users
+- [x] **COL-03**: Users can create, edit, and delete custom collections
+- [x] **COL-04**: Collections support bulk operations (fetch all, scan all)
+- [x] **COL-05**: Collections exportable as shareable YAML for other GSD-OS users
 
 ### Mirror Management
 
@@ -164,9 +164,9 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | SRH-06 | Phase 238 | Complete |
 | COL-01 | Phase 238 | Complete |
 | COL-02 | Phase 238 | Complete |
-| COL-03 | Phase 238 | Pending |
-| COL-04 | Phase 238 | Pending |
-| COL-05 | Phase 238 | Pending |
+| COL-03 | Phase 238 | Complete |
+| COL-04 | Phase 238 | Complete |
+| COL-05 | Phase 238 | Complete |
 | MIR-01 | Phase 237 | Complete |
 | MIR-02 | Phase 237 | Complete |
 | MIR-03 | Phase 237 | Complete |
