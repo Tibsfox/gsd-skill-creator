@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** Verify the codebase matches its specifications -- then fix every place where it doesn't.
-**Current focus:** Phase 225 - Integration Audit (T1)
+**Current focus:** Phase 226 - Behavior Audit (T2)
 
 ## Current Position
 
-Phase: 225 (3 of 8) — Integration Audit (T1)
-Plan: 225-04 complete (5 of 6)
+Phase: 226 (4 of 8) — Behavior Audit (T2)
+Plan: 226-06 complete, executing Wave 1 (all parallel)
 Status: Executing
-Last activity: 2026-02-19 — 225-04 Console/staging T1 integration paths verified (13 checkpoints)
+Last activity: 2026-02-19 — 226-06 audited 6 chipset T2 checkpoints (1 pass, 5 fail) + 3 security vectors verified
 
-Progress: [███░░░░░░░] 25%
+Progress: [████░░░░░░] 38%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 13
+- Total plans completed: 17
 - Average duration: 6min
-- Total execution time: 1.4 hours
+- Total execution time: 1.7 hours
 
 **By Phase:**
 
@@ -41,6 +41,9 @@ Progress: [███░░░░░░░] 25%
 | 225 P05 | 1 | 6min | 6min |
 | 225 P02 | 1 | 7min | 7min |
 | 225 P04 | 1 | 8min | 8min |
+| 225 P06 | 1 | 5min | 5min |
+| 226 P04 | 1 | 5min | 5min |
+| 226 P06 | 1 | 5min | 5min |
 
 ## Accumulated Context
 
@@ -77,6 +80,13 @@ Recent decisions affecting current work:
 - [Phase 225]: Chipset YAML (budget.loading_order, teams.topology) is declarative config not consumed by skill pipeline or GSD executor at runtime
 - [Phase 225]: 5 of 7 chipset checkpoints fail: FPGA synthesis, pipeline wiring, agent topology, file triggers, lock files all unimplemented
 - [Phase 225]: 13 console/staging T1 checkpoints verified (dc-002/006/015/016/018, stg-003/005/029/031/033/036/037/040); matrix now at 47 pass / 281 pending / 8 fail
+- [Phase 225]: T1 tier COMPLETE: 51 checkpoints audited (34 pass, 17 fail, 0 pending); key passes: Tauri IPC, native PTY, file watching, Map-Reduce execution, Evaluator-Optimizer verify-work; key fails: Blueprint Editor view missing, no GSD-HDL sections, no MCP integration, no LoRA pipeline
+- [Phase 226]: Security hardening verified: path traversal detected by hygiene patterns, YAML uses safe loading everywhere, JSONL has SHA-256 checksums
+- [Phase 226]: Chipset ca-009/011/012/014 all fail: overrides, activity logging, starter chipsets, lazy activation are unimplemented vision features
+- [Phase 226]: pd-008 fail: HTML uses header/main/footer/nav but not article/section/aside/time/progress as vision claims
+- [Phase 226]: pd-009 fail: JSON-LD uses SoftwareSourceCode+ItemList only, not TechArticle/HowTo/CreativeWork/StatusUpdate
+- [Phase 226]: dc-008 fail: 5 question types (binary/choice/multi-select/text/confirmation), not 7 (missing priority/file)
+- [Phase 226]: dc-009 fail: no 3-second question poll; auto-refresh defaults to 5000ms, page-level not question-specific
 
 ### Key Context
 
@@ -96,5 +106,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 225-04-PLAN.md (console/staging T1 integration audit)
+Stopped at: Completed 226-06-PLAN.md (chipset T2 + security hardening audit)
 Resume file: None

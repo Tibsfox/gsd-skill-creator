@@ -13,7 +13,7 @@
 
 - [x] **Phase 223: Conformance Matrix** - Build the YAML matrix covering every "In Scope v1" claim across 18 vision documents with tier triage and dependency graph (completed 2026-02-19)
 - [x] **Phase 224: Foundation Audit (T0)** - Verify core GSD lifecycle, .planning/ structure, skill loading pipeline, state management, and build health (completed 2026-02-19)
-- [ ] **Phase 225: Integration Audit (T1)** - Verify cross-component wiring: chipset-to-skill-creator, dashboard-to-planning, staging-to-execution, AMIGA ICDs, AGC pack
+- [x] **Phase 225: Integration Audit (T1)** - Verify cross-component wiring: chipset-to-skill-creator, dashboard-to-planning, staging-to-execution, AMIGA ICDs, AGC pack (completed 2026-02-19)
 - [ ] **Phase 226: Behavior Audit (T2)** - Verify individual component correctness: token budgets, pattern detection, bounded learning, dashboard metrics, AGC simulator, staging hygiene, security hardening
 - [ ] **Phase 227: UX/Polish Audit (T3)** - Verify user-facing behavior: GSD-OS build/render, window manager, boot sequence, design system compliance, educational content, accessibility
 - [ ] **Phase 228: End-to-End Verification** - Full proof run from upload through dashboard with conformance gate percentages met
@@ -67,7 +67,7 @@ Plans:
   3. The planning docs dashboard renders content that matches the actual `.planning/` directory state, and dashboard data collectors (topology, activity, budget, staging) produce correct output from real files
   4. Console upload zone accepts a markdown document and it arrives in the filesystem message bus outbox; staging layer resource manifest reaches the execution queue
   5. AMIGA ICD-based communication works across MC-1/ME-1/CE-1/GL-1 and AGC simulator integrates with its GSD-OS pack (block definitions, chipset config, dashboard widgets)
-**Plans:** 5/6 plans executed
+**Plans:** 6/6 plans complete
 Plans:
 - [ ] 225-01-PLAN.md -- Verify GSD-to-skill-creator observation wiring, wrapper commands, session hooks (INTEG-01, INTEG-02, INTEG-07)
 - [ ] 225-02-PLAN.md -- Verify chipset-to-skill-loading and agent topology integration (INTEG-03)
@@ -86,7 +86,15 @@ Plans:
   3. AGC simulator produces correct results for all 38 instructions, ones' complement ALU handles all boundary conditions, and DSKY display model correctly decodes relay data
   4. Template engine renders all variable substitutions correctly; staging hygiene engine detects all 11 patterns; staging queue 7-state machine transitions correctly with append-only audit log
   5. Security hardening works: path traversal is blocked, YAML uses safe deserialization only, JSONL integrity checks function; trust decay model correctly downgrades tiers; smart intake routes through all 3 clarity paths; RFC skill fetches/parses/formats correctly in all 3 output formats
-**Plans**: TBD
+**Plans:** 3/7 plans executed
+Plans:
+- [ ] 226-01-PLAN.md -- Verify skill-creator core behaviors: token budget, pattern detection, bounded learning (BEHAV-01, BEHAV-02, BEHAV-03)
+- [ ] 226-02-PLAN.md -- Verify AGC simulator: 38 instructions, ALU boundaries, DSKY display (BEHAV-06, BEHAV-07, BEHAV-08)
+- [ ] 226-03-PLAN.md -- Verify staging layer: 11 hygiene patterns, trust decay, smart intake, queue state machine (BEHAV-09, BEHAV-10, BEHAV-11, BEHAV-12)
+- [ ] 226-04-PLAN.md -- Verify dashboard metrics, planning docs generator, console behaviors (BEHAV-04)
+- [ ] 226-05-PLAN.md -- Verify template engine and RFC Reference Skill (BEHAV-05, BEHAV-14)
+- [ ] 226-06-PLAN.md -- Verify security hardening and chipset behaviors (BEHAV-13)
+- [ ] 226-07-PLAN.md -- T2 sweep: ISA, GSD-OS, workbench, Wetty/tmux, finalize T2 tier (all BEHAV)
 
 ### Phase 227: UX/Polish Audit (T3)
 **Goal**: User-facing behavior matches the vision specifications -- GSD-OS builds and renders correctly, window manager supports all interaction modes, design system colors and shapes are applied consistently, educational content produces described outcomes, and accessibility modes activate correctly
@@ -143,8 +151,8 @@ Phases execute in numeric order: 223 → 224 → 225 → 226 → 227 → 228 →
 |-------|----------------|--------|-----------|
 | 223. Conformance Matrix | 6/6 | Complete    | 2026-02-19 |
 | 224. Foundation Audit (T0) | 3/3 | Complete    | 2026-02-19 |
-| 225. Integration Audit (T1) | 5/6 | In Progress|  |
-| 226. Behavior Audit (T2) | 0/TBD | Not started | - |
+| 225. Integration Audit (T1) | 6/6 | Complete    | 2026-02-19 |
+| 226. Behavior Audit (T2) | 3/7 | In Progress|  |
 | 227. UX/Polish Audit (T3) | 0/TBD | Not started | - |
 | 228. End-to-End Verification | 0/TBD | Not started | - |
 | 229. Documentation & Amendments | 0/TBD | Not started | - |
