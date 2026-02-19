@@ -25,6 +25,7 @@ export interface AgcRegisters {
   readonly [RegisterId.EBANK]: number;
   readonly [RegisterId.FBANK]: number;
   readonly [RegisterId.BB]: number;
+  readonly [RegisterId.ZRUPT]: number;
   readonly [RegisterId.BRUPT]: number;
   readonly [RegisterId.CYR]: number;
   readonly [RegisterId.SR]: number;
@@ -42,6 +43,7 @@ export function createRegisters(): AgcRegisters {
     [RegisterId.EBANK]: 0,
     [RegisterId.FBANK]: 0,
     [RegisterId.BB]: 0,
+    [RegisterId.ZRUPT]: 0,
     [RegisterId.BRUPT]: 0,
     [RegisterId.CYR]: 0,
     [RegisterId.SR]: 0,
@@ -111,6 +113,10 @@ export function setRegister(
       next[RegisterId.FBANK] = (masked >> 10) & FBANK_MASK;
       break;
     }
+
+    case RegisterId.ZRUPT:
+      next[RegisterId.ZRUPT] = value & ADDRESS12_MASK;
+      break;
 
     case RegisterId.BRUPT:
       next[RegisterId.BRUPT] = value & WORD15_MASK;

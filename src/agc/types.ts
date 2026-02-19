@@ -30,6 +30,7 @@ export enum RegisterId {
   FBANK = 5,
   BB = 6,    // Both Banks (composite of FBANK and EBANK)
   // Gap: addresses 7 is unused here
+  ZRUPT = 7,  // Z save during interrupt
   BRUPT = 8,
   CYR = 9,   // Cycle Right
   SR = 10,   // Shift Right
@@ -46,6 +47,7 @@ export const REGISTER_MASKS: Record<RegisterId, number> = {
   [RegisterId.EBANK]: EBANK_MASK,
   [RegisterId.FBANK]: FBANK_MASK,
   [RegisterId.BB]: WORD15_MASK,
+  [RegisterId.ZRUPT]: ADDRESS12_MASK,
   [RegisterId.BRUPT]: WORD15_MASK,
   [RegisterId.CYR]: WORD15_MASK,
   [RegisterId.SR]: WORD15_MASK,
