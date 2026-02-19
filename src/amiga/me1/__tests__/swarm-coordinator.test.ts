@@ -210,7 +210,8 @@ describe('ABORT command', () => {
 describe('REDIRECT command', () => {
   it('targets only the specified team', () => {
     const { coordinator } = makeCoordinator();
-    const result = coordinator.dispatch(buildCommand('REDIRECT', 'ME', { target: 'new-phase' }));
+    // target_agent must be a valid AgentID (e.g., 'ME-1') per ICD-01
+    const result = coordinator.dispatch(buildCommand('REDIRECT', 'ME-1', { target: 'new-phase' }));
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.dispatched_to).toEqual(['ME']);
@@ -224,7 +225,7 @@ describe('REDIRECT command', () => {
       { team_id: 'ME', agent_ids: ['ME-1', 'ME-2', 'ME-3'], status: 'active', onCommand },
     ];
     const coordinator = new SwarmCoordinator({ emitter, teams });
-    coordinator.dispatch(buildCommand('REDIRECT', 'ME', { target: 'new-phase' }));
+    coordinator.dispatch(buildCommand('REDIRECT', 'ME-1', { target: 'new-phase' }));
     expect(onCommand).toHaveBeenCalledWith('REDIRECT', { target: 'new-phase' });
   });
 });
