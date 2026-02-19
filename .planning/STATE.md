@@ -3,11 +3,11 @@
 ## Current Position
 
 Phase: 199 of 222 (Foundation Types & Agent Registry)
-Plan: 2 of 3 in current phase
-Status: Executing
-Last activity: 2026-02-19 -- Completed 199-02 (agent registry & routing table)
+Plan: 3 of 3 in current phase (COMPLETE)
+Status: Phase Complete
+Last activity: 2026-02-19 -- Completed 199-03 (message envelope & barrel index)
 
-Progress: [........................] 0% (0/24 phases)
+Progress: [#.......................] 4% (1/24 phases)
 
 ## Project Reference
 
@@ -25,8 +25,10 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 
 ## Next Actions
 
-1. `/gsd:execute-phase 199` -- Continue with Plan 03 (barrel exports)
-2. Then plan remaining Wave 0 phases (200, 201, 202) for parallel execution
+1. Phase 199 complete -- plan Wave 0 parallel phases (200, 201, 202)
+2. `/gsd:plan-phase 200` -- ICD schemas (depends on 199)
+3. `/gsd:plan-phase 201` -- AGC archive (parallel with 200)
+4. `/gsd:plan-phase 202` -- RFC skill (parallel with 200)
 
 ## Decisions
 
@@ -39,6 +41,8 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 - Agent registry uses ReadonlyMap for frozen immutable data access
 - Route lookup returns sender/receiver/requiresAck without event type key
 - OPS agents assigned 'cross-cutting' component (not a specific component ID)
+- Zod v4 z.record() requires two-arg form z.record(z.string(), z.unknown()) -- single-arg crashes
+- Envelope source/destination regex includes MC (component) and bare team names for routing compat
 
 ## Accumulated Context
 
@@ -63,7 +67,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 199-02-PLAN.md (agent registry & routing table)
+Stopped at: Completed 199-03-PLAN.md (message envelope & barrel index) -- Phase 199 complete
 
 ### Key Files
 - `.planning/ROADMAP.md` -- 24 phases across 5 waves
