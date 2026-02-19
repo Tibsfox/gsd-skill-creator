@@ -1,0 +1,23 @@
+name: Development Tools
+description: Programming tools, compilers, and development utilities for Amiga development
+version: 1
+createdAt: '2026-02-19T00:00:00Z'
+updatedAt: '2026-02-19T00:00:00Z'
+author: GSD Aminet Pack
+tags:
+  - starter
+  - development
+  - programming
+packages:
+  - fullPath: dev/c/VBCC.lha
+    note: VBCC -- free portable C compiler for Amiga
+  - fullPath: dev/c/gcc.lha
+    note: GCC cross-compiler for AmigaOS
+  - fullPath: dev/asm/PhxAss.lha
+    note: PhxAss -- fast 68k macro assembler
+  - fullPath: dev/debug/Enforcer.lha
+    note: Enforcer -- memory access violation detector
+  - fullPath: dev/misc/ixemul.lha
+    note: ixemul.library -- Unix emulation layer
+  - fullPath: dev/gui/MUI.lha
+    note: MUI -- Magic User Interface toolkit

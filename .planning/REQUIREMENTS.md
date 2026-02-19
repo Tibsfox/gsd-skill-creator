@@ -19,9 +19,9 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 ### Search & Browse
 
 - [x] **SRH-01**: Full-text search across package name, description, and author fields
-- [ ] **SRH-02**: Category tree browsing with subcategory navigation and package counts
-- [ ] **SRH-03**: Filter by architecture (m68k-amigaos, ppc-amigaos, etc.)
-- [ ] **SRH-04**: Filter by OS version requirement
+- [x] **SRH-02**: Category tree browsing with subcategory navigation and package counts
+- [x] **SRH-03**: Filter by architecture (m68k-amigaos, ppc-amigaos, etc.)
+- [x] **SRH-04**: Filter by OS version requirement
 - [ ] **SRH-05**: Package detail view showing merged INDEX + .readme metadata
 - [ ] **SRH-06**: Display mirror status, scan status, and install status per package
 
@@ -157,9 +157,9 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | IDX-05 | Phase 236 | Complete |
 | IDX-06 | Phase 236 | Complete |
 | SRH-01 | Phase 238 | Complete |
-| SRH-02 | Phase 238 | Pending |
-| SRH-03 | Phase 238 | Pending |
-| SRH-04 | Phase 238 | Pending |
+| SRH-02 | Phase 238 | Complete |
+| SRH-03 | Phase 238 | Complete |
+| SRH-04 | Phase 238 | Complete |
 | SRH-05 | Phase 238 | Pending |
 | SRH-06 | Phase 238 | Pending |
 | COL-01 | Phase 238 | Pending |
