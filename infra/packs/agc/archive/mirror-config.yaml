@@ -1,0 +1,71 @@
+# AGC Documentation Archive -- Mirror Configuration
+# Download/mirror configuration for representative documents
+# Generated: 2026-02-18
+
+metadata:
+  version: 1
+  generated: "2026-02-18"
+  catalog_ref: "infra/packs/agc/archive/catalog.yaml"
+
+mirror_policy:
+  purpose: "Enable downstream agents to fetch representative documents for analysis"
+  storage_dir: "infra/packs/agc/archive/mirrors/"
+  max_size_mb: 500
+  formats_preferred: ["pdf", "text", "html"]
+  note: "Only metadata and references are stored in git; actual documents are fetched on demand"
+
+test_documents:
+  - doc_id: "agc-arch-001"
+    source_url: "https://www.ibiblio.org/apollo/Documents/R-700.pdf"
+    expected_format: "pdf"
+    expected_size_kb: 15000
+    fetch_verified: false
+    notes: "Selected as test: R-700 is the definitive AGC hardware manual from Virtual AGC (architecture category)"
+
+  - doc_id: "agc-soft-002"
+    source_url: "https://archive.org/details/Comanche55J2k60"
+    expected_format: "scan"
+    expected_size_kb: 50000
+    fetch_verified: false
+    notes: "Selected as test: Apollo 11 CM source code from Internet Archive (software category, scan format)"
+
+  - doc_id: "agc-arch-009"
+    source_url: "https://ntrs.nasa.gov/citations/19750004273"
+    expected_format: "pdf"
+    expected_size_kb: 8000
+    fetch_verified: false
+    notes: "Selected as test: Reliability history from NASA NTRS (architecture category, nasa_ntrs source)"
+
+  - doc_id: "agc-arch-011"
+    source_url: "https://klabs.org/history/ech/agc_schematics/"
+    expected_format: "html"
+    expected_size_kb: 200
+    fetch_verified: false
+    notes: "Selected as test: AGC schematics index from klabs.org (other source, html format)"
+
+  - doc_id: "agc-soft-006"
+    source_url: "https://www.ibiblio.org/apollo/Documents/R-577-sec5-rev14.pdf"
+    expected_format: "pdf"
+    expected_size_kb: 12000
+    fetch_verified: false
+    notes: "Selected as test: CM guidance equations GSOP from Virtual AGC (software category, critical reference)"
+
+  - doc_id: "agc-edu-002"
+    source_url: "https://arxiv.org/abs/2201.08230"
+    expected_format: "pdf"
+    expected_size_kb: 500
+    fetch_verified: false
+    notes: "Selected as test: Modern academic analysis from arXiv (educational category, other source)"
+
+  - doc_id: "agc-ops-003"
+    source_url: "https://www.ibiblio.org/apollo/Documents/Apollo11_MissionReport.pdf"
+    expected_format: "pdf"
+    expected_size_kb: 25000
+    fetch_verified: false
+    notes: "Selected as test: Apollo 11 mission report from Virtual AGC (operations category)"
+
+fetch_config:
+  user_agent: "GSD-AGC-Archive/1.0 (educational; project-amiga)"
+  retry_count: 3
+  timeout_seconds: 30
+  respect_robots_txt: true
