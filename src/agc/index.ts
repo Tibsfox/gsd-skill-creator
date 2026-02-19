@@ -2,7 +2,8 @@
  * AGC Block II simulator -- barrel index.
  *
  * Re-exports all public types and functions from the AGC module.
- * Downstream phases (214 interrupts, 216 Executive) import from here.
+ * Covers Phase 213 (CPU & Memory) and Phase 214 (Interrupts & Timing).
+ * Downstream phases (216 Executive, 217 DSKY) import from here.
  */
 
 // Types
@@ -98,6 +99,71 @@ export {
   execRESUME,
 } from './instructions.js';
 
-// CPU
-export type { CpuState, StepResult } from './cpu.js';
-export { createCpuState, step } from './cpu.js';
+// CPU (Phase 213 inner step + Phase 214 integrated step)
+export type { CpuState, StepResult, AgcState, AgcStepResult } from './cpu.js';
+export { createCpuState, step, createAgcState, stepAgc } from './cpu.js';
+
+// Interrupts (Phase 214)
+export type { InterruptState, ServiceResult, CompleteResult } from './interrupts.js';
+export {
+  InterruptId,
+  INTERRUPT_VECTORS,
+  getVectorAddress,
+  createInterruptState,
+  requestInterrupt,
+  clearInterrupt,
+  isInterruptPending,
+  getHighestPriorityPending,
+  serviceNextInterrupt,
+  completeInterrupt,
+  setInhibit,
+} from './interrupts.js';
+
+// Counters (Phase 214)
+export type { CounterState, IncrementResult, TickResult } from './counters.js';
+export {
+  CounterId,
+  COUNTER_ADDRESSES,
+  COUNTER_INTERRUPTS,
+  createCounterState,
+  incrementCounter,
+  tickCounters,
+  getCounterValue,
+  setCounterValue,
+  setTime6Enable,
+  pulseCounter,
+} from './counters.js';
+
+// I/O Channels (Phase 214)
+export type { IoChannelState, IoWriteEntry, BitwiseResult } from './io-channels.js';
+export {
+  createIoChannelState,
+  readChannel,
+  writeChannel,
+  readAnd,
+  writeAnd,
+  readOr,
+  writeOr,
+  readXor,
+  ChannelGroup,
+  getChannelGroup,
+  configureDsky,
+  configureImu,
+  configureRadar,
+  getDownlinkLog,
+} from './io-channels.js';
+
+// Timing (Phase 214)
+export type { TimingState } from './timing.js';
+export {
+  CLOCK_MHZ,
+  MCT_PERIOD_US,
+  INSTRUCTION_MCTS,
+  getInstructionMCTs,
+  createTimingState,
+  advanceTiming,
+  mctsToMicroseconds,
+  mctsToMilliseconds,
+  mctsToSeconds,
+  secondsToMCTs,
+} from './timing.js';

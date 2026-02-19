@@ -4,17 +4,17 @@
 
 Phase: 213 of 222 (AGC CPU & Memory) -- COMPLETE
 Plan: 4 of 4 in current phase (COMPLETE)
-Status: Phase 210 complete -- 3 plans, 6 commits, 88 new CE-1 tests (1004 AMIGA tests total)
-Last activity: 2026-02-19 -- Completed Phase 210 (Commons Engine Calculation)
+Status: Phase 212 complete -- 3 plans, 6 commits, 67 new GL-1 tests (1020 AMIGA tests total)
+Last activity: 2026-02-19 -- Completed Phase 212 (Governance Engine & Policy)
 
-Progress: [###############.........] 63% (15/24 phases)
+Progress: [################........] 67% (16/24 phases)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.23 Project AMIGA -- Phase 210 complete, CE-1 weighting engine + dividend calculator + seal guard
+**Current focus:** v1.23 Project AMIGA -- Phase 212 complete, GL-1 governance engine with rules evaluation, decision logging, and policy queries
 
 ## Current Milestone
 
@@ -45,6 +45,9 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 16. Phase 210 (Commons Engine Calculation) COMPLETE -- 3 plans, 6 commits, 88 new CE-1 tests
 17. CE-1 calculation: WeightingEngine (frequency/critical-path/depth-decay), DividendCalculator (3-tier distribution), LedgerSealGuard (SHA-256 tamper evidence)
 18. Full AMIGA test suite: 1004 tests passing across 37 test files (zero regressions)
+19. Phase 212 (Governance Engine & Policy) COMPLETE -- 3 plans, 6 commits, 67 new GL-1 tests
+20. GL-1 governance engine: RulesEngine (4 constitutional constraints), DecisionLog (append-only), PolicyQueryHandler (4 query types via ICD-03)
+21. Full AMIGA test suite: 1020 tests passing across 37 test files (zero regressions)
 
 ## Decisions
 
@@ -112,6 +115,12 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 - AGC INDEX adds to full instruction word before decoding (can modify opcode and address)
 - AGC CPU Z advances to Z+1 before instruction execution; branches override Z
 - AGC barrel index at src/agc/index.ts exports all types and functions for downstream phases
+- RulesEngine: no-retroactive-reduction is structural check only (full comparison requires ledger access in Phase 215)
+- Near-boundary thresholds: UBD < 5% allocation is advisory, infrastructure < 10% is advisory
+- Concentration risk: single recipient > 80% of tier1 triggers advisory referencing clause-005
+- DecisionLog returns defensive copies to prevent external mutation of internal state
+- PolicyQueryHandler uses keyword fallback when exact substring match fails for policy_lookup/weight_review
+- AMIGA barrel auto-propagates GL-1 barrel updates via wildcard re-export
 
 ## Accumulated Context
 
@@ -136,7 +145,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Phase 210 (Commons Engine Calculation) complete -- 3 plans, 6 commits, 88 CE-1 tests
+Stopped at: Phase 212 (Governance Engine & Policy) complete -- 3 plans, 6 commits, 67 GL-1 tests
 
 ### Key Files
 - `.planning/ROADMAP.md` -- 24 phases across 5 waves
@@ -169,7 +178,10 @@ Stopped at: Phase 210 (Commons Engine Calculation) complete -- 3 plans, 6 commit
 - `src/amiga/gl1/charter.ts` -- Commons charter schema, constitutional constraints, ratification with SHA-256
 - `src/amiga/gl1/weighting-docs.ts` -- Weighting algorithm parameter documentation (frequency/critical-path/depth-decay)
 - `src/amiga/gl1/dispute-record.ts` -- Governance dispute record lifecycle extending ICD-04
-- `src/amiga/gl1/index.ts` -- GL-1 barrel exports (Phase 211)
+- `src/amiga/gl1/rules-engine.ts` -- Rules engine evaluating distribution plans against 4 constitutional constraints
+- `src/amiga/gl1/decision-log.ts` -- Append-only governance decision log with query capabilities
+- `src/amiga/gl1/policy-query.ts` -- ICD-03 policy query handler for all 4 query types
+- `src/amiga/gl1/index.ts` -- GL-1 barrel exports (Phase 211 + 212)
 - `src/agc/types.ts` -- AGC foundation types (Word15, Word16, Address12, RegisterId, masks)
 - `src/agc/registers.ts` -- Immutable register file with edit register transforms (CYR/SR/CYL/EDOP)
 - `src/agc/memory.ts` -- Memory system with bank switching (EBANK/FBANK/superbank)
