@@ -303,10 +303,10 @@ export function getAnnotationsForSnapshot(
   }
 
   const result: LearnAnnotation[] = [];
-  for (const id of ids) {
+  ids.forEach(id => {
     const ann = ALL_ANNOTATIONS.get(id);
     if (ann) result.push(ann);
-  }
+  });
   return result;
 }
 
