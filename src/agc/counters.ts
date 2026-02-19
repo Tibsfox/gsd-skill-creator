@@ -10,7 +10,7 @@
  */
 
 import { WORD15_MASK } from './types.js';
-import { onesIncrement } from './alu.js';
+// onesIncrement not used: counters use carry-based overflow, not sign-based
 import { InterruptId } from './interrupts.js';
 
 // ─── Counter Definitions ────────────────────────────────────────────────────
@@ -139,9 +139,14 @@ export function incrementCounter(state: CounterState, id: CounterId): IncrementR
     return { counterState: state, overflow: false };
   }
 
-  const currentValue = state.values[id];
-  const result = onesIncrement(currentValue);
-  const overflowed = result.overflow;
+  const currentValue = state.values[id] & WORD15_MASK;
+
+  // AGC counter overflow: counters are effectively unsigned 14-bit values
+  // (bit 14 is the sign bit in 15-bit ones' complement). Overflow occurs when
+  // the counter reaches max positive (0o37777 = all 14 magnitude bits set)
+  // and the next increment would cross the sign boundary.
+  const MAX_POSITIVE = 0o37777; // 16383 = max 14-bit unsigned
+  const overflowed = currentValue === MAX_POSITIVE;
 
   let newValues = { ...state.values };
 
@@ -151,11 +156,16 @@ export function incrementCounter(state: CounterState, id: CounterId): IncrementR
 
     // TIME1 overflow cascades to TIME2
     if (id === CounterId.TIME1) {
-      const time2Result = onesIncrement(newValues[CounterId.TIME2]);
-      newValues[CounterId.TIME2] = time2Result.overflow ? 0 : time2Result.value;
+      const time2Val = newValues[CounterId.TIME2] & WORD15_MASK;
+      if (time2Val === MAX_POSITIVE) {
+        newValues[CounterId.TIME2] = 0;
+      } else {
+        newValues[CounterId.TIME2] = (time2Val + 1) & WORD15_MASK;
+      }
     }
   } else {
-    newValues[id] = result.value;
+    // Normal increment: add 1 within 15-bit space
+    newValues[id] = (currentValue + 1) & WORD15_MASK;
   }
 
   return {
@@ -169,12 +179,12 @@ export function incrementCounter(state: CounterState, id: CounterId): IncrementR
  * Same as incrementCounter but doesn't check TIME6 enable.
  */
 export function pulseCounter(state: CounterState, id: CounterId): IncrementResult {
-  const currentValue = state.values[id];
-  const result = onesIncrement(currentValue);
-  const overflowed = result.overflow;
+  const currentValue = state.values[id] & WORD15_MASK;
+  const MAX_POSITIVE = 0o37777;
+  const overflowed = currentValue === MAX_POSITIVE;
 
   const newValues = { ...state.values };
-  newValues[id] = overflowed ? 0 : result.value;
+  newValues[id] = overflowed ? 0 : (currentValue + 1) & WORD15_MASK;
 
   return {
     counterState: { ...state, values: newValues },
