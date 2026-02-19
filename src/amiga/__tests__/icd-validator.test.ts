@@ -127,7 +127,7 @@ describe('crossReferenceCheck', () => {
     expect(result.errors.some((e) => e.message.includes('UNKNOWN-99'))).toBe(true);
   });
 
-  it('detects when an event type has no routing table entry', () => {
+  it('detects when an event type has no routing table entry (as warning)', () => {
     const badMeta = [{
       id: 'ICD-NOROUTE',
       name: 'No Route',
@@ -136,7 +136,7 @@ describe('crossReferenceCheck', () => {
     }];
     const badSchemas = { NONEXISTENT_EVENT: ICD_01_SCHEMAS.TELEMETRY_UPDATE };
     const result = crossReferenceCheck(badMeta, badSchemas);
-    expect(result.errors.some((e) => e.message.includes('NONEXISTENT_EVENT'))).toBe(true);
+    expect(result.warnings.some((w) => w.message.includes('NONEXISTENT_EVENT'))).toBe(true);
   });
 
   it('verifies all ICD parties map to valid components', () => {
