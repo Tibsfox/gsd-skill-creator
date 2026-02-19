@@ -93,6 +93,7 @@ Recent decisions affecting current work:
 - [Phase 226]: RFC index missing UDP (768), DNS concepts (1034), SMTP entirely; rfc-003 fails
 - [Phase 226]: Cloud-ops curriculum is vision-only (no code artifacts); all 4 cop checkpoints fail
 - [Phase 226]: No configure-clone.sh for VM identity reconfiguration; lcp-016 fails
+- [Phase 226]: All 18 AGC T2 checkpoints pass: 38 opcodes, ALU overflow at 0o37777, DSKY relay decoding, Executive/Waitlist/restart, tools, curriculum runner
 
 ### Key Context
 
