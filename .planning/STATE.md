@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.26 — Aminet Archive Extension Pack
 Phase: 236 of 242 (INDEX Infrastructure & Binary Parsers)
-Plan: 2 of 6 in current phase
-Status: Executing — Wave 1 in progress
-Last activity: 2026-02-19 — Plan 03 complete (INDEX.gz fetcher, 18 tests)
+Plan: 3 of 6 in current phase
+Status: Executing — Wave 1 complete
+Last activity: 2026-02-19 — Plan 01 complete (binary reader + hunk parser, 33 tests)
 
-Progress: [██████░░░░░░░░░░░░░░] 33%
+Progress: [██████████░░░░░░░░░░] 50%
 
 ## Performance Metrics
 
@@ -23,11 +23,12 @@ Progress: [██████░░░░░░░░░░░░░░] 33%
 |-------|------|----------|-------|-------|
 | 236   | 05   | 3min     | 1     | 3     |
 | 236   | 03   | 3min     | 1     | 3     |
+| 236   | 01   | 7min     | 2     | 5     |
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 3min
-- Total execution time: 6min
+- Total plans completed: 3
+- Average duration: 4min
+- Total execution time: 13min
 
 ## Accumulated Context
 
@@ -47,6 +48,7 @@ Progress: [██████░░░░░░░░░░░░░░] 33%
 - Shared types.ts: Wave 2+ plans must READ FIRST then extend
 - Plan 05: rawHeader keys lowercase for consistent lookup; multi-value split on comma+semicolon
 - Plan 03: ISO-8859-1 via TextDecoder for INDEX decoding; cache uses INDEX + INDEX.meta.json sidecar
+- Plan 01: bit30=MEMF_CHIP (flags=1), bit31=MEMF_FAST (flags=2); unknown hunks skipped gracefully
 
 ### Pending Todos
 
@@ -59,7 +61,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 236-03-PLAN.md (INDEX.gz fetcher)
+Stopped at: Completed 236-01-PLAN.md (binary reader + hunk parser)
 Resume file: None
 
 ## ▶ Next Up
