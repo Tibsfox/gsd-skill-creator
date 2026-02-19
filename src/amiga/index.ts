@@ -6,6 +6,7 @@
  * - Agent registry (14 agents across 5 teams)
  * - Event routing table (11 event types)
  * - Message envelope schema + factory
+ * - ICD payload schemas, metadata, and validation utilities
  */
 
 // Shared data types
@@ -33,3 +34,6 @@ export {
 // Message envelope
 export { EventEnvelopeSchema, createEnvelope } from './message-envelope.js';
 export type { EventEnvelope, CreateEnvelopeInput } from './message-envelope.js';
+
+// ICD payload schemas, metadata, and validation
+export * from './icd/index.js';
