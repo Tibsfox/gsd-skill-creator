@@ -14,3 +14,7 @@ export {
   formatAddress,
   formatListing,
 } from './disassembler.js';
+
+// Assembler
+export type { AssembledWord, AssemblerResult, AssemblerError } from './assembler.js';
+export { assemble, assembleLine } from './assembler.js';
