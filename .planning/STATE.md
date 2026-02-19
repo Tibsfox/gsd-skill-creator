@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.26 — Aminet Archive Extension Pack
 Phase: 236 of 242 (INDEX Infrastructure & Binary Parsers)
-Plan: 5 of 6 in current phase
-Status: Executing — Wave 2 complete
-Last activity: 2026-02-19 — Plan 02 complete (boot block parser, 18 tests, 5 pattern detectors)
+Plan: 6 of 6 in current phase (COMPLETE)
+Status: Phase 236 complete — all 6 plans shipped
+Last activity: 2026-02-19 — Plan 06 complete (INDEX freshness, RECENT merge, barrel file, 111 tests)
 
-Progress: [████████████████░░░░] 83%
+Progress: [████████████████████] 100%
 
 ## Performance Metrics
 
@@ -26,11 +26,12 @@ Progress: [████████████████░░░░] 83%
 | 236   | 05   | 3min     | 1     | 3     |
 | 236   | 03   | 3min     | 1     | 3     |
 | 236   | 01   | 7min     | 2     | 5     |
+| 236   | 06   | 3min     | 2     | 4     |
 
 **Velocity:**
-- Total plans completed: 5
+- Total plans completed: 6
 - Average duration: 4min
-- Total execution time: 19min
+- Total execution time: 22min
 
 ## Accumulated Context
 
@@ -53,6 +54,7 @@ Progress: [████████████████░░░░] 83%
 - Plan 01: bit30=MEMF_CHIP (flags=1), bit31=MEMF_FAST (flags=2); unknown hunks skipped gracefully
 - Plan 04: Token-based regex parsing for INDEX; K=1x M=1000x size suffixes; 84K entries in ~114ms; JSON cache for offline
 - Plan 02: Boot block parser with DOS magic, checksum validation, and 5 suspect pattern detectors for virus scanning
+- Plan 06: 24h freshness detection, RECENT-based incremental merge by fullPath, barrel file exporting complete public API
 
 ### Pending Todos
 
@@ -65,11 +67,11 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 236-02-PLAN.md (boot block parser, 18 tests)
+Stopped at: Completed 236-06-PLAN.md (INDEX freshness, barrel file, phase 236 complete)
 Resume file: None
 
 ## ▶ Next Up
 
-/gsd:execute-phase 236
+/gsd:plan-phase 237 — next phase in v1.26 roadmap
 
-Then: /gsd:plan-phase 237 (can plan 237 while 236 executes — they're independent)
+Phase 236 complete. All 6 plans shipped, 111 tests, 8 source files in src/aminet/.
