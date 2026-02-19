@@ -135,9 +135,12 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Every vision document divergence identified during audit is resolved: fixed in code OR amended in the vision document
   2. Every vision document amendment follows the protocol: checkpoint ID, original claim, actual state, resolution, updated specification text
-  3. Installation documentation is verified to work from published instructions on a system that has never run the project
+  3. Installation documentation is verified to be accurate and complete for a system with Node.js and Rust prerequisites installed (clean-machine verification deferred to Phase 230 ENV-05)
   4. A known-issues list documents anything deferred with rationale for deferral
-**Plans**: TBD
+**Plans:** 1/2 plans executed
+Plans:
+- [ ] 229-01-PLAN.md -- Amend 13 remaining failures with protocol + generate known-issues list (AMEND-01, AMEND-02, AMEND-04)
+- [ ] 229-02-PLAN.md -- Verify installation documentation from published instructions (AMEND-03)
 
 ### Phase 230: Verification Environment (Stretch)
 **Goal**: A 4-VM clean-room environment is provisioned and used to verify that GSD + skill-creator installs and runs correctly from published documentation on infrastructure that has never seen the project before
@@ -163,5 +166,5 @@ Phases execute in numeric order: 223 → 224 → 225 → 226 → 227 → 228 →
 | 226. Behavior Audit (T2) | 7/7 | Complete    | 2026-02-19 |
 | 227. UX/Polish Audit (T3) | 4/4 | Complete | 2026-02-19 |
 | 228. End-to-End Verification | 2/2 | Complete   | 2026-02-19 |
-| 229. Documentation & Amendments | 0/TBD | Not started | - |
+| 229. Documentation & Amendments | 1/2 | In Progress|  |
 | 230. Verification Environment (Stretch) | 0/TBD | Not started | - |

@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** Verify the codebase matches its specifications -- then fix every place where it doesn't.
-**Current focus:** Phase 228 - End-to-End Verification
+**Current focus:** Phase 229 - Documentation & Amendments
 
 ## Current Position
 
-Phase: 228 (6 of 8) — End-to-End Verification
-Plan: 2 of 2 (COMPLETE)
-Status: Phase 228 complete
-Last activity: 2026-02-19 — Plan 02 complete (112 amendments, all gates pass, conformance report generated)
+Phase: 229 (7 of 8) — Documentation & Amendments
+Plan: 1 of 2
+Status: In progress
+Last activity: 2026-02-19 — Plan 229-01 complete (13 failures amended, known-issues generated)
 
 Progress: [███████░░░] 75%
 
@@ -55,6 +55,7 @@ Progress: [███████░░░] 75%
 | 227 P02 | 1 | 12min | 12min |
 | Phase 228 P01 | 9min | 4 tasks | 1 files |
 | Phase 228 P02 | 7min | 3 tasks | 2 files |
+| Phase 229 P01 | 7min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -138,6 +139,10 @@ Recent decisions affecting current work:
 - [Phase 228]: 13 genuine failures kept for Phase 229 vision document amendments (pd-008/009/010, os-014..018, dc-008/009/014, id-008, ds-008)
 - [Phase 228]: All 4 conformance gates pass: T0=100%, T1=100%, T2=95.0%, T3=93.8%
 - [Phase 228]: Final matrix: 211 pass, 112 amended, 13 fail, 0 partial across 336 checkpoints
+- [Phase 229]: All 13 fail checkpoints resolved via amendment (vision overstated, not code wrong)
+- [Phase 229]: Amendment protocol applied: checkpoint ID, original claim, actual state, resolution, updated spec
+- [Phase 229]: Known-issues categorizes 99 amended checkpoints into 8 deferral groups with recommended milestones
+- [Phase 229]: Final matrix: 211 pass, 125 amended, 0 fail across 336 checkpoints; all 4 gates at 100%
 
 ### Key Context
 
@@ -157,5 +162,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 228-02-PLAN.md (112 amendments, all gates pass, conformance report)
+Stopped at: Completed 229-01-PLAN.md (Documentation Amendments)
 Resume file: None
