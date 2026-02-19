@@ -7,12 +7,21 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import * as os from 'node:os';
 
 // Mock child_process before importing the module under test
 vi.mock('node:child_process', () => ({
   execFile: vi.fn(),
 }));
+
+// Mock node:os to control platform() return value
+let mockPlatform = 'linux';
+vi.mock('node:os', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('node:os')>();
+  return {
+    ...actual,
+    platform: () => mockPlatform,
+  };
+});
 
 import { validateExtractionTools } from './tool-validator.js';
 import { execFile } from 'node:child_process';
@@ -22,7 +31,7 @@ const mockedExecFile = vi.mocked(execFile);
 describe('validateExtractionTools', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.restoreAllMocks();
+    mockPlatform = 'linux'; // Default to linux
   });
 
   it('returns both tools available when lha and unlzx succeed', async () => {
@@ -137,7 +146,7 @@ describe('validateExtractionTools', () => {
   });
 
   it('provides Linux install guidance on linux platform', async () => {
-    vi.spyOn(os, 'platform').mockReturnValue('linux');
+    mockPlatform = 'linux';
 
     mockedExecFile.mockImplementation((cmd, _args, _opts, callback?) => {
       const cb = typeof _opts === 'function' ? _opts : callback;
@@ -154,7 +163,7 @@ describe('validateExtractionTools', () => {
   });
 
   it('provides macOS install guidance on darwin platform', async () => {
-    vi.spyOn(os, 'platform').mockReturnValue('darwin');
+    mockPlatform = 'darwin';
 
     mockedExecFile.mockImplementation((cmd, _args, _opts, callback?) => {
       const cb = typeof _opts === 'function' ? _opts : callback;
@@ -171,9 +180,6 @@ describe('validateExtractionTools', () => {
   });
 
   it('always includes GitHub URL in unlzx install guide regardless of platform', async () => {
-    // Test on Linux
-    vi.spyOn(os, 'platform').mockReturnValue('linux');
-
     mockedExecFile.mockImplementation((cmd, _args, _opts, callback?) => {
       const cb = typeof _opts === 'function' ? _opts : callback;
       const err = new Error(`spawn ${cmd} ENOENT`) as NodeJS.ErrnoException;
@@ -182,12 +188,14 @@ describe('validateExtractionTools', () => {
       return {} as any;
     });
 
+    // Test on Linux
+    mockPlatform = 'linux';
     let results = await validateExtractionTools();
     let unlzx = results.find(t => t.name === 'unlzx');
     expect(unlzx?.installGuide).toContain('github.com/nhoudelot/unlzx');
 
     // Test on macOS
-    vi.spyOn(os, 'platform').mockReturnValue('darwin');
+    mockPlatform = 'darwin';
     results = await validateExtractionTools();
     unlzx = results.find(t => t.name === 'unlzx');
     expect(unlzx?.installGuide).toContain('github.com/nhoudelot/unlzx');
