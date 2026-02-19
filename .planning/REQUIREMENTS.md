@@ -93,15 +93,15 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 ### User Interface
 
 - [x] **UI-01**: Aminet browser panel in GSD-OS with search, category tree, results, and detail pane
-- [ ] **UI-02**: Status indicators: green (clean), yellow (suspicious), red (infected), gray (not mirrored)
-- [ ] **UI-03**: Mirror statistics widget for GSD dashboard
+- [x] **UI-02**: Status indicators: green (clean), yellow (suspicious), red (infected), gray (not mirrored)
+- [x] **UI-03**: Mirror statistics widget for GSD dashboard
 - [x] **UI-04**: Workbench-style window aesthetic consistent with GSD-OS design
 
 ### Agent & Team Architecture
 
 - [x] **AGT-01**: Five agents defined: AM-1 Archive, AM-2 Mirror, AM-3 Scanner, AM-4 Installer, AM-5 Emulator
-- [ ] **AGT-02**: Team pipeline (aminet-pipeline.yaml) coordinating all agents through the full lifecycle
-- [ ] **AGT-03**: Scan gate enforced — pipeline blocks installation if scan status != clean
+- [x] **AGT-02**: Team pipeline (aminet-pipeline.yaml) coordinating all agents through the full lifecycle
+- [x] **AGT-03**: Scan gate enforced — pipeline blocks installation if scan status != clean
 - [x] **AGT-04**: Resource locks on .mirror-state.json and .quarantine/
 - [x] **AGT-05**: Filesystem message bus for inter-agent communication
 
@@ -213,12 +213,12 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | EMU-09 | Phase 241 | Complete |
 | EMU-10 | Phase 241 | Complete |
 | UI-01 | Phase 242 | Complete |
-| UI-02 | Phase 242 | Pending |
-| UI-03 | Phase 242 | Pending |
+| UI-02 | Phase 242 | Complete |
+| UI-03 | Phase 242 | Complete |
 | UI-04 | Phase 242 | Complete |
 | AGT-01 | Phase 242 | Complete |
-| AGT-02 | Phase 242 | Pending |
-| AGT-03 | Phase 242 | Pending |
+| AGT-02 | Phase 242 | Complete |
+| AGT-03 | Phase 242 | Complete |
 | AGT-04 | Phase 242 | Complete |
 | AGT-05 | Phase 242 | Complete |
 | NFR-01 | Phase 236 | Complete |
