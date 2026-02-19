@@ -143,7 +143,7 @@ Phases execute in numeric order: 223 → 224 → 225 → 226 → 227 → 228 →
 |-------|----------------|--------|-----------|
 | 223. Conformance Matrix | 6/6 | Complete    | 2026-02-19 |
 | 224. Foundation Audit (T0) | 3/3 | Complete    | 2026-02-19 |
-| 225. Integration Audit (T1) | 0/6 | Planned | - |
+| 225. Integration Audit (T1) | 1/6 | Active | - |
 | 226. Behavior Audit (T2) | 0/TBD | Not started | - |
 | 227. UX/Polish Audit (T3) | 0/TBD | Not started | - |
 | 228. End-to-End Verification | 0/TBD | Not started | - |

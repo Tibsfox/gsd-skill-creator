@@ -15,9 +15,9 @@ matrix_metadata:
     T2: 180
     T3: 64
   checkpoints_by_status:
-    pending: 315
+    pending: 314
     pass: 19
-    fail: 2
+    fail: 3
     amended: 0
     deferred: 0
 documents:
@@ -1883,13 +1883,22 @@ documents:
           dashboard), complete-milestone (milestone page finalized, milestones index, dashboard), any .planning/ file
           write (affected page + dashboard)
         verification: integration-test
-        status: pending
-        notes: ""
+        status: fail
+        notes: >-
+          T1 audit (225-01): IntegrationConfig defines phase_transition_hooks toggle and scanner coordinates
+          3 monitors, but no GSD command actually invokes the scanner or dashboard build on lifecycle events.
+          Wrapper commands are Phase 86 stubs.
         tier: T1
         depends_on:
           - pd-002
           - pd-003
-        evidence: ""
+        evidence: >-
+          IntegrationConfig at src/integration/config/types.ts declares phase_transition_hooks toggle (boolean,
+          default true). Scanner at src/integration/monitoring/scanner.ts checks this toggle and coordinates
+          3 monitors for .planning/ changes. ObservationWriter writes to sessions.jsonl. But the bridge from
+          GSD workflow events (plan-phase, execute-phase, verify-work, complete-milestone) to scanner invocation
+          does not exist -- all 4 wrapper commands in .claude/commands/wrap/ are Phase 86 stubs. No post-commit
+          hook or session hook invokes scanner.ts during GSD sessions. The infrastructure is built but not wired.
       - id: pd-007
         section: "Architecture: Auto-Refresh Strategy"
         claim: >-
@@ -1962,19 +1971,21 @@ documents:
         claim: Skill triggers on .planning/ file changes during GSD workflow phases
         verification: integration-test
         status: fail
-        notes: "No file-watching or GSD event hook triggers dashboard regeneration"
+        notes: >-
+          T1 audit (225-01): Scanner infrastructure detects .planning/ changes but no GSD trigger wiring.
+          Wrapper commands are Phase 85/86 stubs.
         tier: T1
         depends_on:
           - pd-002
           - sc-002
         evidence: >-
-          No file-watching mechanism (chokidar, fs.watch, inotify) found in src/dashboard/.
-          The incremental.ts module provides content-hash based change detection for skipping
-          unchanged pages during explicit builds, but does not watch for changes. The refresh.ts
-          module provides browser-side polling (setInterval page reload) for live mode, not
-          server-side file watching. The heartbeat.ts renderer shows time since last .planning/
-          modification but is a pure renderer with no trigger capability. Dashboard regeneration
-          requires explicit invocation of generate(). No GSD lifecycle hooks found in dashboard code.
+          (T0 224-02) No file-watching mechanism found in src/dashboard/. Dashboard regeneration requires
+          explicit invocation. (T1 225-01) Scanner at src/integration/monitoring/scanner.ts coordinates
+          3 monitors (state-transition-detector, roadmap-differ, plan-summary-differ) and writes observations
+          via observation-writer.ts to .planning/patterns/sessions.jsonl -- 67 tests pass. However, all 4
+          wrapper commands in .claude/commands/wrap/ (execute.md, verify.md, plan.md, phase.md) are Phase 86
+          stubs with no implementation. sc/observe.md and sc/wrap.md are also Phase 85 stubs. The scanner
+          exists but is never invoked by GSD commands during normal workflow execution.
       - id: pd-013
         section: "Integration Points: For Hosting"
         claim: >-
@@ -2303,13 +2314,19 @@ documents:
         section: Architecture -- Message Format
         claim: All messages use JSON with consistent envelope containing id, type, timestamp, source, and payload fields
         verification: unit-test
-        status: pending
-        notes: ""
+        status: pass
+        notes: "Zod schema enforces envelope shape; writer validates before write, reader validates on read"
         tier: T1
         depends_on:
           - pd-002
           - pd-003
-        evidence: ""
+        evidence: >-
+          MessageEnvelopeSchema in src/console/schema.ts is a Zod object with 5 fields: id (regex msg-YYYYMMDD-NNN),
+          type (enum: milestone-submit, config-update, question-response, setting-change), timestamp (ISO 8601 validated),
+          source (enum: dashboard, session), payload (Record<string, unknown>). MessageWriter.write() in writer.ts calls
+          MessageEnvelopeSchema.parse() before writing. MessageReader.readPending() in reader.ts calls safeParse() on each
+          file. MessageEnvelope interface in types.ts mirrors the schema. 221 console tests pass including envelope
+          validation tests.
       - id: dc-003
         section: The Upload & Configuration Flow
         claim: >-
