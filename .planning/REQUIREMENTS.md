@@ -70,13 +70,13 @@ Requirements for v1.24 — GSD Conformance Audit & Hardening. Each maps to roadm
 
 ### End-to-End Verification
 
-- [ ] **E2E-01**: Full proof run completes without manual intervention (other than HITL questions)
-- [ ] **E2E-02**: All T0 checkpoints pass (100% required)
-- [ ] **E2E-03**: All T1 checkpoints pass or are amended with justification (100% required)
-- [ ] **E2E-04**: ≥90% of T2 checkpoints pass, remaining documented with deferred justification
-- [ ] **E2E-05**: ≥80% of T3 checkpoints pass, remaining items documented
-- [ ] **E2E-06**: Zero undocumented divergences remain between code and vision documents
-- [ ] **E2E-07**: Conformance matrix is reproducible — another person could follow it to verify system state
+- [x] **E2E-01**: Full proof run completes without manual intervention (other than HITL questions)
+- [x] **E2E-02**: All T0 checkpoints pass (100% required)
+- [x] **E2E-03**: All T1 checkpoints pass or are amended with justification (100% required)
+- [x] **E2E-04**: ≥90% of T2 checkpoints pass, remaining documented with deferred justification
+- [x] **E2E-05**: ≥80% of T3 checkpoints pass, remaining items documented
+- [x] **E2E-06**: Zero undocumented divergences remain between code and vision documents
+- [x] **E2E-07**: Conformance matrix is reproducible — another person could follow it to verify system state
 
 ### Documentation & Amendments
 
@@ -171,13 +171,13 @@ Deferred to future milestones. Tracked but not in current roadmap.
 | POLISH-07 | Phase 227 | Complete |
 | POLISH-08 | Phase 227 | Complete |
 | POLISH-09 | Phase 227 | Complete |
-| E2E-01 | Phase 228 | Pending |
-| E2E-02 | Phase 228 | Pending |
-| E2E-03 | Phase 228 | Pending |
-| E2E-04 | Phase 228 | Pending |
-| E2E-05 | Phase 228 | Pending |
-| E2E-06 | Phase 228 | Pending |
-| E2E-07 | Phase 228 | Pending |
+| E2E-01 | Phase 228 | Complete |
+| E2E-02 | Phase 228 | Complete |
+| E2E-03 | Phase 228 | Complete |
+| E2E-04 | Phase 228 | Complete |
+| E2E-05 | Phase 228 | Complete |
+| E2E-06 | Phase 228 | Complete |
+| E2E-07 | Phase 228 | Complete |
 | AMEND-01 | Phase 229 | Pending |
 | AMEND-02 | Phase 229 | Pending |
 | AMEND-03 | Phase 229 | Pending |

@@ -15,8 +15,8 @@
 - [x] **Phase 224: Foundation Audit (T0)** - Verify core GSD lifecycle, .planning/ structure, skill loading pipeline, state management, and build health (completed 2026-02-19)
 - [x] **Phase 225: Integration Audit (T1)** - Verify cross-component wiring: chipset-to-skill-creator, dashboard-to-planning, staging-to-execution, AMIGA ICDs, AGC pack (completed 2026-02-19)
 - [x] **Phase 226: Behavior Audit (T2)** - Verify individual component correctness: token budgets, pattern detection, bounded learning, dashboard metrics, AGC simulator, staging hygiene, security hardening (completed 2026-02-19)
-- [ ] **Phase 227: UX/Polish Audit (T3)** - Verify user-facing behavior: GSD-OS build/render, window manager, boot sequence, design system compliance, educational content, accessibility
-- [ ] **Phase 228: End-to-End Verification** - Full proof run from upload through dashboard with conformance gate percentages met
+- [x] **Phase 227: UX/Polish Audit (T3)** - Verify user-facing behavior: GSD-OS build/render, window manager, boot sequence, design system compliance, educational content, accessibility (completed 2026-02-19)
+- [x] **Phase 228: End-to-End Verification** - Full proof run from upload through dashboard with conformance gate percentages met (completed 2026-02-19)
 - [ ] **Phase 229: Documentation & Amendments** - Resolve every vision document divergence (fix code or amend spec) and verify installation docs
 - [ ] **Phase 230: Verification Environment (Stretch)** - Provision 4-VM clean-room environment and verify clean install from published docs
 
@@ -123,7 +123,10 @@ Plans:
   3. At least 90% of T2 checkpoints pass (remaining documented with deferred justification) and at least 80% of T3 checkpoints pass (remaining documented)
   4. Zero undocumented divergences remain between code and vision documents
   5. The conformance matrix is reproducible -- another person could follow it to independently verify system state
-**Plans**: TBD
+**Plans:** 2/2 plans complete
+Plans:
+- [ ] 228-01-PLAN.md -- Resolve 24 pending T0 checkpoints + run E2E proof run (E2E-01, E2E-02)
+- [ ] 228-02-PLAN.md -- Amend aspirational failures, calculate gates, generate conformance report (E2E-02..07)
 
 ### Phase 229: Documentation & Amendments
 **Goal**: Every divergence between code and vision documents is formally resolved -- either the code is fixed or the vision document is amended with a paper trail -- and installation documentation is verified to work from published instructions
@@ -158,7 +161,7 @@ Phases execute in numeric order: 223 → 224 → 225 → 226 → 227 → 228 →
 | 224. Foundation Audit (T0) | 3/3 | Complete    | 2026-02-19 |
 | 225. Integration Audit (T1) | 6/6 | Complete    | 2026-02-19 |
 | 226. Behavior Audit (T2) | 7/7 | Complete    | 2026-02-19 |
-| 227. UX/Polish Audit (T3) | 4/4 | Complete    | 2026-02-19 |
-| 228. End-to-End Verification | 0/TBD | Not started | - |
+| 227. UX/Polish Audit (T3) | 4/4 | Complete | 2026-02-19 |
+| 228. End-to-End Verification | 2/2 | Complete   | 2026-02-19 |
 | 229. Documentation & Amendments | 0/TBD | Not started | - |
 | 230. Verification Environment (Stretch) | 0/TBD | Not started | - |
