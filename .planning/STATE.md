@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.26 — Aminet Archive Extension Pack
 Phase: 241 of 242 (Emulator Configuration & Launch)
-Plan: 4 of 6 in current phase
-Status: Executing Phase 241 (Wave 2)
-Last activity: 2026-02-19 — Plan 04 complete (profile auto-selection + FS-UAE launch orchestrator, 33 tests)
+Plan: 6 of 6 in current phase
+Status: Phase 241 Complete
+Last activity: 2026-02-19 — Plan 06 complete (emulator state management + barrel update, 23 tests)
 
-Progress: [█████████████░░░░░░░] 67%
+Progress: [████████████████████] 100%
 
 ## Performance Metrics
 
@@ -53,11 +53,13 @@ Progress: [█████████████░░░░░░░] 67%
 | 241   | 02   | 2min     | 1     | 2     |
 | 241   | 03   | 5min     | 1     | 2     |
 | 241   | 04   | 3min     | 1     | 2     |
+| 241   | 05   | 3min     | 1     | 2     |
+| 241   | 06   | 3min     | 2     | 3     |
 
 **Velocity:**
-- Total plans completed: 30
+- Total plans completed: 32
 - Average duration: 3min
-- Total execution time: 94min
+- Total execution time: 100min
 
 ## Accumulated Context
 
@@ -108,6 +110,8 @@ Progress: [█████████████░░░░░░░] 67%
 - Plan 241-02: 5 hardware profiles (A500/A1200/A1200+030/A4000/WHDLoad) as embedded TS constants; HardwareProfile types defined locally (241-01 parallel); getProfile/getAllProfiles/getProfileForModel with deep-frozen structuredClone copies; 37 tests
 - Plan 241-03: ROM manager with CRC32 IEEE polynomial (no external deps), 12 known ROM entries (checksums only, no ROM data), scanRomDirectory with Cloanto XOR decryption and overdump handling, selectRomForProfile with WHDLoad-to-A1200 mapping, DI-based crc32Fn for testability; 32 tests
 - Plan 241-04: selectProfileFromReadme with priority-based matching (WHDLoad>040>030>AGA>020>OS3.x>A500 default); writeFsUaeConfig with recursive mkdir; launchEmulator orchestrating config gen+write+execFile with structured errors (NO_HARD_DRIVES, INVALID_PROFILE, FSUAE_MISSING, LAUNCH_FAILED); vi.mock for ESM child_process mocking; 33 tests
+- Plan 241-05: WHDLoad integration: detectSlaveFiles (case-insensitive recursive .Slave scanner), WHDLOAD_KICKSTART_MAP (8 revisions), buildWhdloadConfig with per-game CPU/chipset/RAM/NTSC/clock overrides; save_states=0 forced; PRELOAD hint at 4MB+; 25 tests
+- Plan 241-06: Emulator state: 9-slot snapshot metadata (save/list/delete), shouldDisableSaveStates for directory hard drive safety, buildMissingRomGuidance with CRC32 hex + legal sources; barrel updated with all Phase 241 exports (6 modules, 9 types, 9 schemas); 23 tests
 
 ### Pending Todos
 
@@ -120,9 +124,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 241-04-PLAN.md (profile auto-selection + FS-UAE launch orchestrator, 33 tests)
+Stopped at: Completed 241-06-PLAN.md (emulator state management + barrel update, 23 tests)
 Resume file: None
 
 ## ▶ Next Up
 
-Phase 241 in progress (Wave 2: plans 03+04 parallel). Continue with plans 05+06.
+Phase 241 complete (6/6 plans). Proceed to Phase 242 (convergence integration).

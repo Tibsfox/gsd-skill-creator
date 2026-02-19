@@ -16,7 +16,7 @@ Build a complete Aminet archive management system across 7 phases and ~40 plans.
 - [x] **Phase 238: Search, Browse & Collections** - Full-text search, category browsing, architecture filtering, and curated collection management (completed 2026-02-19)
 - [x] **Phase 239: Virus Scanner & Quarantine** - Signature-based scanning, heuristic hunk analysis, boot block detection, quarantine system, and scan orchestration (completed 2026-02-19)
 - [x] **Phase 240: Installation & Archive Extraction** - LhA/LZX extraction, filesystem placement, dependency detection, scan gate enforcement, and tool validation (completed 2026-02-19)
-- [ ] **Phase 241: Emulator Configuration & Launch** - FS-UAE config generation, 5 hardware profiles, ROM management, WHDLoad integration, and state snapshots
+- [x] **Phase 241: Emulator Configuration & Launch** - FS-UAE config generation, 5 hardware profiles, ROM management, WHDLoad integration, and state snapshots (completed 2026-02-19)
 - [ ] **Phase 242: Desktop Panel, Agent Pipeline & Integration** - GSD-OS browser panel, chipset YAML, 5-agent pipeline wiring, dashboard widget, and integration test suite
 
 ## Phase Details
@@ -185,7 +185,7 @@ Phase 237 ──────> 239  │ (scanner needs downloaded packages)
 | 238. Search, Browse & Collections | 5/5 | Complete   | 2026-02-19 |
 | 239. Virus Scanner & Quarantine | 6/6 | Complete   | 2026-02-19 |
 | 240. Installation & Archive Extraction | 5/5 | Complete   | 2026-02-19 |
-| 241. Emulator Configuration & Launch | 4/6 | In Progress|  |
+| 241. Emulator Configuration & Launch | 6/6 | Complete   | 2026-02-19 |
 | 242. Desktop Panel, Agent Pipeline & Integration | 0/7 | Not started | - |
 
 ---

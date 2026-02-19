@@ -85,8 +85,8 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [x] **EMU-04**: Select appropriate ROM version for hardware profile
 - [x] **EMU-05**: Mount emulated hard drive containing installed software
 - [x] **EMU-06**: Auto-select emulator profile from package .readme metadata
-- [ ] **EMU-07**: WHDLoad slave file detection and configuration
-- [ ] **EMU-08**: Save/restore emulator state snapshots
+- [x] **EMU-07**: WHDLoad slave file detection and configuration
+- [x] **EMU-08**: Save/restore emulator state snapshots
 - [x] **EMU-09**: Provide clear guidance when required ROM is missing
 - [x] **EMU-10**: Do NOT distribute Kickstart ROM files
 
@@ -208,8 +208,8 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | EMU-04 | Phase 241 | Complete |
 | EMU-05 | Phase 241 | Complete |
 | EMU-06 | Phase 241 | Complete |
-| EMU-07 | Phase 241 | Pending |
-| EMU-08 | Phase 241 | Pending |
+| EMU-07 | Phase 241 | Complete |
+| EMU-08 | Phase 241 | Complete |
 | EMU-09 | Phase 241 | Complete |
 | EMU-10 | Phase 241 | Complete |
 | UI-01 | Phase 242 | Pending |
