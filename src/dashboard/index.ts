@@ -89,3 +89,10 @@ export type {
   NavPage,
   LayoutOptions,
 } from './renderer.js';
+
+// ============================================================================
+// Aminet mirror widget (Phase 242)
+// ============================================================================
+
+export { renderMirrorWidget, renderMirrorWidgetStyles } from './aminet-widget.js';
+export type { MirrorStats } from './aminet-widget.js';
