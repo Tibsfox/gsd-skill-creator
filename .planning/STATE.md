@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 214 of 222 (AGC Interrupts & Timing) -- COMPLETE
+Phase: 216 of 222 (AGC Executive & Restart) -- COMPLETE
 Plan: 3 of 3 in current phase (COMPLETE)
-Status: Phase 214 complete -- 3 plans, 5 commits, 117 new AGC tests (327 AGC tests total)
-Last activity: 2026-02-19 -- Completed Phase 214 (AGC Interrupts & Timing)
+Status: Phase 216 complete -- 3 plans, 7 commits, 99 new AGC tests (426 AGC tests total)
+Last activity: 2026-02-19 -- Completed Phase 216 (AGC Executive & Restart)
 
-Progress: [#################.......] 71% (17/24 phases)
+Progress: [###################.....] 79% (19/24 phases)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.23 Project AMIGA -- Phase 214 complete, AGC interrupt controller, involuntary counters, I/O channels, timing model, and integrated stepAgc
+**Current focus:** v1.23 Project AMIGA -- Phase 216 complete, AGC Executive (8 core sets, priority scheduling), Waitlist (9-entry timer scheduler), BAILOUT restart protection (3 restart groups)
 
 ## Current Milestone
 
@@ -55,6 +55,16 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 26. AGC timing: 2.048 MHz / 11.72us MCT, instruction timing table, real-time conversion
 27. AGC stepAgc: integrated cycle (interrupts -> execute -> I/O -> counters -> timing)
 28. Total AGC tests: 327 passing across 11 test files (zero regressions from Phase 213)
+29. Phase 215 (Full Stack Integration) COMPLETE -- 2 plans, 3 commits, 43 new integration tests
+30. FullStackController: four-component harness (MC-1, ME-1, CE-1, GL-1) with dual onEmit bridge
+31. Integration Gate 2 acceptance criteria proven: INTG-04 (attribution flow), INTG-05 (governance check), INTG-06 (all four ICDs active)
+32. Full AMIGA test suite: 1063 tests passing across 39 test files (zero regressions)
+33. Phase 216 (AGC Executive & Restart) COMPLETE -- 3 plans, 7 commits, 99 new AGC tests
+34. AGC Executive: 8 core sets, NOVAC/FINDVAC job creation, priority scheduling, context switching
+35. AGC Waitlist: 9-entry timer scheduler, centisecond dispatch, T3RUPT integration
+36. AGC BAILOUT: 3 restart groups (CRITICAL/IMPORTANT/DEFERRABLE), controlled restart with state preservation
+37. Apollo 11 1202 alarm scenario validated: overload -> BAILOUT -> recovery -> scheduling
+38. Total AGC tests: 426 passing across 15 test files (zero regressions from Phase 213/214)
 
 ## Decisions
 
@@ -136,6 +146,19 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 - AGC stepAgc wraps inner step() with subsystem integration (decorator pattern)
 - AGC RUPT entry sets Z to vector address (not vector+1); next step fetches from vector
 - AGC INHINT/RELINT synced via change detection between CPU and InterruptState
+- AGC Executive priority 0 = highest (guidance), priority 7 = lowest (display) matching real AGC convention
+- AGC NOVAC for lightweight jobs, FINDVAC for 44-word VAC area workspace allocation
+- AGC 1202 alarm on core set exhaustion, 1201 on VAC exhaustion, 1203 on Waitlist overflow
+- AGC BAILOUT preserves IMPORTANT jobs when fewer than 4 core sets used by CRITICAL
+- AGC unregistered jobs treated as DEFERRABLE during BAILOUT (safe default: always discarded)
+- AGC Waitlist dispatch one-entry-per-T3RUPT matching real AGC behavior
+- AGC BAILOUT always clears entire Waitlist; timer tasks must re-register after restart
+- FullStackController uses composition (not inheritance) with MissionController pattern -- builds all components directly
+- Dual onEmit bridge: TelemetryConsumer (ICD-01) AND InvocationRecorder (ICD-02) both receive every emitted event
+- emitLedgerEntry routes LEDGER_ENTRY events through emitter.record() to share onEmit pipeline
+- Governance query requestor must be valid AgentID (CS-1) or 'human', not MC-1 (MC is not a team prefix)
+- ACTIVE_PHASES gate: LEDGER_ENTRY only permitted in PLANNING, EXECUTION, INTEGRATION, REVIEW_GATE
+- Cross-ICD validation pattern: map event types to ICD schemas, validate every event in lifecycle
 
 ## Accumulated Context
 
@@ -160,7 +183,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Phase 214 (AGC Interrupts & Timing) complete -- 3 plans, 5 commits, 117 new tests (327 AGC total)
+Stopped at: Phase 216 (AGC Executive & Restart) complete -- 3 plans, 7 commits, 99 new AGC tests (426 AGC total)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- 24 phases across 5 waves
@@ -209,4 +232,9 @@ Stopped at: Phase 214 (AGC Interrupts & Timing) complete -- 3 plans, 5 commits, 
 - `src/agc/io-channels.ts` -- I/O channels: 512 channels, bitwise ops, peripheral stubs, downlink log
 - `src/agc/timing.ts` -- Timing model: 2.048 MHz, 11.72us MCT, instruction timing, time conversion
 - `src/agc/cpu.ts` -- CPU step (inner) + integrated stepAgc (full AGC cycle with all subsystems)
-- `src/agc/index.ts` -- AGC barrel index re-exporting all Phase 213 + 214 public APIs
+- `src/agc/executive.ts` -- Executive scheduler: 8 core sets, NOVAC/FINDVAC, priority scheduling, context switching
+- `src/agc/waitlist.ts` -- Waitlist timer scheduler: 9 entries, centisecond dispatch, cancellation
+- `src/agc/restart.ts` -- BAILOUT restart protection: restart groups, state preservation, controlled restart
+- `src/agc/index.ts` -- AGC barrel index re-exporting all Phase 213 + 214 + 216 public APIs
+- `src/amiga/integration/full-stack-controller.ts` -- FullStackController wiring MC-1, ME-1, CE-1, GL-1 with dual onEmit bridge
+- `src/amiga/integration/index.ts` -- Integration barrel exports (Phase 208 + 215)
