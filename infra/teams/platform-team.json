@@ -56,7 +56,6 @@
   "version": 1,
   "topology": "map-reduce",
   "outputTo": [
-    { "teamName": "mc-infra", "description": "Distribution abstraction libraries for cross-platform provisioning scripts" },
     { "teamName": "mc-amiga", "description": "Hardware adaptation config for UAE display and audio settings" }
   ],
   "inputFrom": [
