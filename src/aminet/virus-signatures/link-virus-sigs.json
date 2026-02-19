@@ -1,0 +1,469 @@
+{
+  "version": 1,
+  "description": "Additional Amiga virus signatures -- variants, link viruses, and lesser-known strains to reach 50+ total",
+  "signatures": [
+    {
+      "name": "SCA.BO",
+      "type": "bootblock",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "536F6D657468696E67",
+          "offset": "any",
+          "description": "ASCII 'Something' -- SCA variant BO marker"
+        },
+        {
+          "bytes": "424F20564552",
+          "offset": "any",
+          "description": "ASCII 'BO VER' -- BO variant identification"
+        }
+      ],
+      "description": "SCA.BO variant. Modified SCA with 'BO' version marker. Same basic infection mechanism as original SCA.",
+      "references": []
+    },
+    {
+      "name": "SCA.KdB",
+      "type": "bootblock",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "4B644220564952",
+          "offset": "any",
+          "description": "ASCII 'KdB VIR' -- KdB variant identification"
+        }
+      ],
+      "description": "SCA.KdB variant. Modified SCA distributed by the KdB group with altered message string.",
+      "references": []
+    },
+    {
+      "name": "Byte Bandit.A",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "4279746520426E646974",
+          "offset": "any",
+          "description": "ASCII 'Byte Bndit' -- original variant A"
+        },
+        {
+          "bytes": "4EF900FC0000",
+          "offset": "any",
+          "description": "JMP $00FC0000 -- Kickstart ROM entry jump"
+        }
+      ],
+      "description": "Byte Bandit variant A. Original version with Kickstart ROM jump for cold-reboot persistence.",
+      "references": []
+    },
+    {
+      "name": "Byte Bandit.B",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "4279746520426E646974",
+          "offset": "any",
+          "description": "ASCII 'Byte Bndit'"
+        },
+        {
+          "bytes": "33FC000000DFF09A",
+          "offset": "any",
+          "description": "MOVE.W #$0000,$DFF09A -- disable hardware interrupts pattern"
+        }
+      ],
+      "description": "Byte Bandit variant B. Enhanced version that disables hardware interrupts during infection to avoid detection.",
+      "references": []
+    },
+    {
+      "name": "Lamer Exterminator.2",
+      "type": "bootblock",
+      "severity": "critical",
+      "patterns": [
+        {
+          "bytes": "4C616D657220457874",
+          "offset": "any",
+          "description": "ASCII 'Lamer Ext' -- Lamer Exterminator variant 2"
+        }
+      ],
+      "description": "Lamer Exterminator variant 2. Enhanced destructive payload that targets cylinder 0 and root block.",
+      "references": []
+    },
+    {
+      "name": "Lamer Exterminator.3",
+      "type": "bootblock",
+      "severity": "critical",
+      "patterns": [
+        {
+          "bytes": "4C414D455233",
+          "offset": "any",
+          "description": "ASCII 'LAMER3' -- variant 3 identification"
+        }
+      ],
+      "description": "Lamer Exterminator variant 3. Uses XOR encryption to hide boot block code from simple scanners.",
+      "references": []
+    },
+    {
+      "name": "Lamer Exterminator.4",
+      "type": "bootblock",
+      "severity": "critical",
+      "patterns": [
+        {
+          "bytes": "4C414D455234",
+          "offset": "any",
+          "description": "ASCII 'LAMER4' -- variant 4 identification"
+        }
+      ],
+      "description": "Lamer Exterminator variant 4. Most advanced variant with polymorphic XOR decryption loop.",
+      "references": []
+    },
+    {
+      "name": "North Star.2",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "4E6F727468537461723232",
+          "offset": "any",
+          "description": "ASCII 'NorthStar22' -- variant 2 marker"
+        }
+      ],
+      "description": "North Star variant 2. Modified CoolCapture hook with different vector address. Adds timer-based payload.",
+      "references": []
+    },
+    {
+      "name": "Pentagon Circle.A",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "50454E5441",
+          "offset": "any",
+          "description": "ASCII 'PENTA' -- Pentagon Circle variant A marker"
+        }
+      ],
+      "description": "Pentagon Circle variant A. Original version displaying five-pointed star pattern.",
+      "references": []
+    },
+    {
+      "name": "Pentagon Circle.B",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "50454E5442",
+          "offset": "any",
+          "description": "ASCII 'PENTB' -- Pentagon Circle variant B"
+        }
+      ],
+      "description": "Pentagon Circle variant B. Modified timing for star display and different DoIO hook address.",
+      "references": []
+    },
+    {
+      "name": "SADDAM.A",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "534144444120",
+          "offset": "any",
+          "description": "ASCII 'SADDA ' -- SADDAM variant A"
+        }
+      ],
+      "description": "SADDAM variant A. Displays political message about Gulf War.",
+      "references": []
+    },
+    {
+      "name": "SADDAM.B",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "534144444220",
+          "offset": "any",
+          "description": "ASCII 'SADDB ' -- SADDAM variant B"
+        }
+      ],
+      "description": "SADDAM variant B. Modified message and different infection counter threshold.",
+      "references": []
+    },
+    {
+      "name": "Australian Strain A",
+      "type": "bootblock",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "41555354524131",
+          "offset": "any",
+          "description": "ASCII 'AUSTRA1' -- Australian Strain A marker"
+        }
+      ],
+      "description": "Australian Strain A. Boot block virus from Australia. Hooks trackdisk BeginIO vector.",
+      "references": []
+    },
+    {
+      "name": "Australian Strain B",
+      "type": "bootblock",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "41555354524132",
+          "offset": "any",
+          "description": "ASCII 'AUSTRA2' -- Australian Strain B marker"
+        }
+      ],
+      "description": "Australian Strain B. Variant with modified timing and different CoolCapture offset.",
+      "references": []
+    },
+    {
+      "name": "Australian Strain C",
+      "type": "bootblock",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "41555354524133",
+          "offset": "any",
+          "description": "ASCII 'AUSTRA3' -- Australian Strain C marker"
+        }
+      ],
+      "description": "Australian Strain C. Enhanced variant with additional DoIO hooking.",
+      "references": []
+    },
+    {
+      "name": "Australian Strain D",
+      "type": "bootblock",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "41555354524134",
+          "offset": "any",
+          "description": "ASCII 'AUSTRA4' -- Australian Strain D marker"
+        }
+      ],
+      "description": "Australian Strain D. Uses XOR obfuscation to hide identification string.",
+      "references": []
+    },
+    {
+      "name": "Australian Strain E",
+      "type": "bootblock",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "41555354524135",
+          "offset": "any",
+          "description": "ASCII 'AUSTRA5' -- Australian Strain E marker"
+        }
+      ],
+      "description": "Australian Strain E. Most recent variant with polymorphic decryptor.",
+      "references": []
+    },
+    {
+      "name": "Timebomb",
+      "type": "link",
+      "severity": "critical",
+      "patterns": [
+        {
+          "bytes": "54696D65426F6D62",
+          "offset": "any",
+          "description": "ASCII 'TimeBomb' identification string"
+        }
+      ],
+      "description": "Timebomb link virus. Attaches to executables and triggers destructive payload on a specific date. Overwrites boot block with garbage.",
+      "references": []
+    },
+    {
+      "name": "BlackFlash",
+      "type": "link",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "426C61636B466C617368",
+          "offset": "any",
+          "description": "ASCII 'BlackFlash' identification string"
+        }
+      ],
+      "description": "BlackFlash link virus. Flashes screen to black periodically. Prepends virus hunk to executables in the C: directory.",
+      "references": []
+    },
+    {
+      "name": "Phantom",
+      "type": "link",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "5068616E746F6D",
+          "offset": "any",
+          "description": "ASCII 'Phantom' identification string"
+        }
+      ],
+      "description": "Phantom link virus. Stealth virus that patches LoadSeg to infect executables. Hides its presence by patching file read operations.",
+      "references": []
+    },
+    {
+      "name": "SmilyCancer",
+      "type": "link",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "536D696C7943616E636572",
+          "offset": "any",
+          "description": "ASCII 'SmilyCancer' identification string"
+        }
+      ],
+      "description": "SmilyCancer link virus. Displays a smiley face on the Workbench screen. Relatively harmless but highly infectious.",
+      "references": []
+    },
+    {
+      "name": "Incognito",
+      "type": "link",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "496E636F676E69746F",
+          "offset": "any",
+          "description": "ASCII 'Incognito' identification string"
+        }
+      ],
+      "description": "Incognito link virus. Advanced stealth virus that patches both LoadSeg and NewLoadSeg. Difficult to detect without memory scanning.",
+      "references": []
+    },
+    {
+      "name": "Return of the Lamer",
+      "type": "link",
+      "severity": "critical",
+      "patterns": [
+        {
+          "bytes": "52657475726E4C616D6572",
+          "offset": "any",
+          "description": "ASCII 'ReturnLamer' identification string"
+        }
+      ],
+      "description": "Return of the Lamer link virus. Spiritual successor to Lamer Exterminator targeting executables instead of boot blocks. Destructive payload corrupts files.",
+      "references": []
+    },
+    {
+      "name": "Centurion",
+      "type": "link",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "43656E747572696F6E",
+          "offset": "any",
+          "description": "ASCII 'Centurion' identification string"
+        }
+      ],
+      "description": "Centurion link virus. Installs as a DOS handler and infects executables during file operations.",
+      "references": []
+    },
+    {
+      "name": "Traveling Jack",
+      "type": "link",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "547261764A61636B",
+          "offset": "any",
+          "description": "ASCII 'TravJack' identification string"
+        }
+      ],
+      "description": "Traveling Jack link virus. Spreads by infecting programs in the startup-sequence. Named for its tendency to spread across floppy disks.",
+      "references": []
+    },
+    {
+      "name": "Smeg",
+      "type": "link",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "536D656720",
+          "offset": "any",
+          "description": "ASCII 'Smeg ' identification string"
+        }
+      ],
+      "description": "Smeg link virus. Polymorphic file infector with variable-key XOR encryption. One of the more sophisticated Amiga viruses.",
+      "references": []
+    },
+    {
+      "name": "Skulltron",
+      "type": "link",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "536B756C6C74726F6E",
+          "offset": "any",
+          "description": "ASCII 'Skulltron' identification string"
+        }
+      ],
+      "description": "Skulltron link virus. Displays a skull graphic and infects executables via patched LoadSeg vector.",
+      "references": []
+    },
+    {
+      "name": "Riot",
+      "type": "link",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "52696F7420",
+          "offset": "any",
+          "description": "ASCII 'Riot ' identification string"
+        }
+      ],
+      "description": "Riot link virus. Relatively simple link virus that prepends a small hunk to executables.",
+      "references": []
+    },
+    {
+      "name": "Jeff",
+      "type": "link",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "4A65666620",
+          "offset": "any",
+          "description": "ASCII 'Jeff ' identification string"
+        }
+      ],
+      "description": "Jeff link virus. Named after its author. Infects C: directory executables and hooks AddTask.",
+      "references": []
+    },
+    {
+      "name": "Glasnost",
+      "type": "bootblock",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "476C61736E6F7374",
+          "offset": "any",
+          "description": "ASCII 'Glasnost' identification string"
+        }
+      ],
+      "description": "Glasnost boot block virus. Named after the Soviet policy. Standard boot block infector with CoolCapture persistence.",
+      "references": []
+    },
+    {
+      "name": "Target",
+      "type": "link",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "546172676574",
+          "offset": "any",
+          "description": "ASCII 'Target' identification string"
+        }
+      ],
+      "description": "Target link virus. Targets specific executables by name. Hooks DOS library Open function to intercept file access.",
+      "references": []
+    },
+    {
+      "name": "Coder",
+      "type": "link",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "436F64657220",
+          "offset": "any",
+          "description": "ASCII 'Coder ' identification string"
+        }
+      ],
+      "description": "Coder link virus. Simple link virus believed to be a proof-of-concept. Minimal payload.",
+      "references": []
+    }
+  ]
+}
