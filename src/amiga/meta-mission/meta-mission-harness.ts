@@ -35,6 +35,8 @@ import type { AlertView } from '../mc1/alert-renderer.js';
 import type { TelemetryStats } from '../mc1/telemetry-consumer.js';
 import type { ParseResult } from '../mc1/command-parser.js';
 import type { EventEnvelope } from '../message-envelope.js';
+import { SkillCandidateDetector } from './skill-candidate-detector.js';
+import type { SkillCandidate, DetectionResult } from './skill-candidate-detector.js';
 
 // ============================================================================
 // Configuration and result types
@@ -72,6 +74,10 @@ export interface SkillPackageDraft {
 export interface MetaMissionResult {
   /** The skill package draft produced by the meta-mission. */
   skillPackage: SkillPackageDraft;
+  /** Skill candidates surfaced during debrief (INTG-09). */
+  skillCandidates: SkillCandidate[];
+  /** Full detection result from the SkillCandidateDetector. */
+  detectionResult: DetectionResult;
   /** The sealed mission archive. */
   archive: MissionArchive;
   /** Full stack result from CE-1/GL-1 pipeline. */
@@ -344,6 +350,16 @@ export class MetaMissionHarness {
     // Step 9: Build skill package draft
     const skillPackage = this.buildSkillPackageDraft(governanceVerdict.verdict);
 
+    // === DEBRIEF: Skill candidate detection (INTG-09) ===
+    const detector = new SkillCandidateDetector();
+    detector.enrichWithAttribution(skillPackage);
+    const detectionResult = detector.analyze(this.controller.getEventLog());
+
+    // Surface skill candidates as advisory alerts through MC-1
+    for (const candidate of detectionResult.candidates) {
+      this.surfaceSkillCandidateAlert(candidate);
+    }
+
     this.completed = true;
 
     const fullStackResult: FullStackResult = {
@@ -357,6 +373,8 @@ export class MetaMissionHarness {
 
     return {
       skillPackage,
+      skillCandidates: detectionResult.candidates,
+      detectionResult,
       archive,
       fullStackResult,
       phasesCompleted: 6,
@@ -450,6 +468,20 @@ export class MetaMissionHarness {
         dependency_tree: [],
       });
     }
+  }
+
+  /**
+   * Surface a skill candidate as an ALERT_SURFACE event through MC-1.
+   *
+   * Creates an advisory alert visible at the control surface during debrief.
+   */
+  private surfaceSkillCandidateAlert(candidate: SkillCandidate): void {
+    this.controller.emitAlert({
+      alert_level: 'advisory',
+      source_agent: 'CE-1',
+      message: `Skill candidate detected: ${candidate.name} (confidence: ${(candidate.confidence * 100).toFixed(0)}%) - ${candidate.description}`,
+      category: 'system',
+    });
   }
 
   /** Detect which ICD channels were exercised from the event log. */
