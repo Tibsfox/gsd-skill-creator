@@ -12,8 +12,8 @@ This milestone makes implicit cross-dependencies between 18 ecosystem vision doc
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 231: Ecosystem Dependency Map** - Resolve all cross-document dependencies into a DAG with critical path analysis and build sequencing
-- [ ] **Phase 232: Shared EventDispatcher Specification** - Unify 6 independent file-watching designs into one canonical spec with subscriber protocol and watch budget
+- [x] **Phase 231: Ecosystem Dependency Map** - Resolve all cross-document dependencies into a DAG with critical path analysis and build sequencing
+- [x] **Phase 232: Shared EventDispatcher Specification** - Unify 6 independent file-watching designs into one canonical spec with subscriber protocol and watch budget
 - [ ] **Phase 233: Dependency Philosophy by Layer** - Define external dependency contracts for Core/Middleware/Platform/Educational tiers with enforcement mechanisms
 - [ ] **Phase 234: Integration Test Strategy** - Establish cross-component contract testing approach with priority test flows and freshness policies
 - [ ] **Phase 235: Partial-Build Compatibility Matrix** - Document component-pair behavior at multiple maturity levels with graceful degradation specs
@@ -30,12 +30,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. A tool can consume `ecosystem-deps.yaml` and reconstruct the full graph programmatically without parsing prose
   4. Every DAG node is annotated with implementation status (implemented, partial, aspirational, permanently-deferred) cross-referenced against known-issues.md, so a reader knows what exists vs. what is planned
   5. A milestone planner can read the build sequencing recommendation and determine which milestone to build next without consulting any other document
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans complete
 
 Plans:
-- [ ] 231-01-PLAN.md — Node inventory with implementation status annotations
-- [ ] 231-02-PLAN.md — Edge extraction with concrete interfaces and cycle resolution
-- [ ] 231-03-PLAN.md — Mermaid diagram, YAML adjacency list, critical path, and build sequencing
+- [x] 231-01-PLAN.md — Node inventory with implementation status annotations
+- [x] 231-02-PLAN.md — Edge extraction with concrete interfaces and cycle resolution
+- [x] 231-03-PLAN.md — Mermaid diagram, YAML adjacency list, critical path, and build sequencing
 
 ### Phase 232: Shared EventDispatcher Specification
 **Goal**: A single canonical EventDispatcher design exists that all ecosystem consumers reference, replacing 6 independent file-watching designs with one shared specification that includes subscriber protocol, watch budgets, and migration paths for existing watchers
@@ -47,7 +47,12 @@ Plans:
   3. An implementer knows exactly how to migrate the 2 existing independent watchers (dashboard auto-refresh, Tauri notify) to the shared EventDispatcher by following the migration plan
   4. A developer adding a new file-watching consumer can follow the envelope format (AMIGA EventEnvelope as ecosystem standard), file naming conventions, and directory structure conventions without inventing new patterns
   5. A reader understands what happens when inotify watches are exhausted (polling fallback behavior, interval, log level, user notification) and why inotify was chosen over fanotify
-**Plans**: TBD
+**Plans:** 3/3 plans complete
+
+Plans:
+- [x] 232-01-PLAN.md — Core EventDispatcher architecture, subscriber protocol, debouncing, and watch budget table
+- [x] 232-02-PLAN.md — Envelope unification (AMIGA EventEnvelope standard, Console adapter) and file naming conventions
+- [x] 232-03-PLAN.md — Migration plan for 2 existing watchers, polling fallback, and inotify-over-fanotify rationale
 
 ### Phase 233: Dependency Philosophy by Layer
 **Goal**: Any developer can get a definitive yes/no answer on whether a proposed external dependency is acceptable at any ecosystem layer, with the EventDispatcher placement question resolved and enforcement mechanisms defined
@@ -58,7 +63,11 @@ Plans:
   2. A reader can trace what each layer provides upward and requires downward through the per-layer contract definitions
   3. The EventDispatcher placement is unambiguous: a reader knows which layer owns the interface and which owns the implementation, and why
   4. An enforcement mechanism exists (at minimum ESLint rules and Rust module visibility constraints) that can catch boundary violations before they reach main, plus a documented exception process for tracking justified violations
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 233-01-PLAN.md — 4-tier dependency rules, per-layer contracts, and dependency decision tree
+- [ ] 233-02-PLAN.md — EventDispatcher placement, enforcement mechanisms (ESLint + Rust), and exception process
 
 ### Phase 234: Integration Test Strategy
 **Goal**: Cross-component integration boundaries have a defined contract testing approach with priority test flows, schema definitions, semantic test cases, and freshness policies that prevent contract drift
@@ -91,9 +100,9 @@ Phases execute in numeric order: 231 → 232 → 233 → 234 → 235
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 231. Ecosystem Dependency Map | 2/3 | In Progress|  |
-| 232. Shared EventDispatcher Specification | 0/TBD | Not started | - |
-| 233. Dependency Philosophy by Layer | 0/TBD | Not started | - |
+| 231. Ecosystem Dependency Map | 3/3 | Complete    | 2026-02-19 |
+| 232. Shared EventDispatcher Specification | 3/3 | Complete    | 2026-02-19 |
+| 233. Dependency Philosophy by Layer | 0/2 | Planned | - |
 | 234. Integration Test Strategy | 0/TBD | Not started | - |
 | 235. Partial-Build Compatibility Matrix | 0/TBD | Not started | - |
 
