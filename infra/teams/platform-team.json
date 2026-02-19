@@ -1,0 +1,65 @@
+{
+  "name": "mc-platform",
+  "description": "Platform portability map-reduce: parallel subsystem discovery modules merged into unified hardware profile and abstraction layers",
+  "leadAgentId": "platform-orchestrator",
+  "createdAt": "2026-02-19T00:02:32.000Z",
+  "members": [
+    {
+      "agentId": "platform-orchestrator",
+      "name": "Platform Orchestrator",
+      "agentType": "orchestrator",
+      "model": "opus",
+      "tools": [
+        "Read", "Write", "Bash", "Glob", "Grep",
+        "TaskCreate", "TaskList", "TaskGet", "TaskUpdate",
+        "SendMessage", "TeammateTool"
+      ],
+      "prompt": "Split platform discovery into parallel subsystem modules (audio, network, USB, distro). Dispatch to workers, then merge results into unified capabilities YAML and abstraction layer configuration."
+    },
+    {
+      "agentId": "platform-subsystem-worker",
+      "name": "Platform Subsystem Worker",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "WebFetch", "WebSearch",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Execute assigned subsystem discovery module. Run discover-audio.sh, discover-network.sh, or discover-usb.sh to produce subsystem-specific YAML output."
+    },
+    {
+      "agentId": "platform-distro-worker",
+      "name": "Platform Distro Worker",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "WebFetch", "WebSearch",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Execute distribution detection and abstraction. Run discover-distro.sh, configure pkg-abstraction.sh and fw-abstraction.sh for detected distribution."
+    },
+    {
+      "agentId": "platform-adaptation-worker",
+      "name": "Platform Adaptation Worker",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "WebFetch", "WebSearch",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Generate adaptive configuration from merged discovery results. Run generate-local-values.sh, assess-gpu.sh, and assess-audio.sh to produce local-values YAML."
+    }
+  ],
+  "version": 1,
+  "topology": "map-reduce",
+  "outputTo": [
+    { "teamName": "mc-infra", "description": "Distribution abstraction libraries for cross-platform provisioning scripts" },
+    { "teamName": "mc-amiga", "description": "Hardware adaptation config for UAE display and audio settings" }
+  ],
+  "inputFrom": [
+    { "teamName": "mc-infra", "description": "Hardware profiles and capability YAML from infrastructure discovery" }
+  ]
+}

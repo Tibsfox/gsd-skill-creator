@@ -90,8 +90,8 @@
 - [x] **SKILL-01**: Complete SKILL.md files exist for every skill identified across Plans 01-05 (17+ skills)
 - [x] **SKILL-02**: Each skill has token budget annotation, trigger patterns, and at least one test case
 - [x] **SKILL-03**: Trigger patterns do not overlap ambiguously between skills
-- [ ] **SKILL-04**: Agent definitions formalize all team roles with skill compositions and tool access permissions
-- [ ] **SKILL-05**: No two agents have identical skill sets — each is specialized
+- [x] **SKILL-04**: Agent definitions formalize all team roles with skill compositions and tool access permissions
+- [x] **SKILL-05**: No two agents have identical skill sets — each is specialized
 - [ ] **SKILL-06**: Team definitions specify topology (pipeline/map-reduce/swarm/leader-worker) with resource locks and sync points
 - [ ] **SKILL-07**: Inter-team communication follows filesystem message bus pattern via .planning/artifacts/
 - [ ] **SKILL-08**: Complete chipset definition in .chipset/minecraft-knowledge-world.yaml validates against chipset schema
@@ -208,8 +208,8 @@
 | SKILL-01 | Phase 191 | Complete |
 | SKILL-02 | Phase 191 | Complete |
 | SKILL-03 | Phase 191 | Complete |
-| SKILL-04 | Phase 192 | Pending |
-| SKILL-05 | Phase 192 | Pending |
+| SKILL-04 | Phase 192 | Complete |
+| SKILL-05 | Phase 192 | Complete |
 | SKILL-06 | Phase 193 | Pending |
 | SKILL-07 | Phase 193 | Pending |
 | SKILL-08 | Phase 194 | Pending |
