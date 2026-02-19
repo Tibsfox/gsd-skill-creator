@@ -174,6 +174,49 @@ export { runEmulatedScan, lookupChecksum, loadKnownGoodHashes } from './emulated
 export type { EmulatedScanResult, ChecksumMatch, EmulatedScanConfig } from './emulated-scanner.js';
 
 // ============================================================================
+// LhA extraction (Phase 240)
+// ============================================================================
+
+export { extractLha, sanitizePath, stripVolumePrefix, walkDirectory } from './lha-extractor.js';
+
+// ============================================================================
+// LZX extraction (Phase 240)
+// ============================================================================
+
+export { extractLzx } from './lzx-extractor.js';
+
+// ============================================================================
+// Tool validation (Phase 240)
+// ============================================================================
+
+export { validateExtractionTools } from './tool-validator.js';
+
+// ============================================================================
+// Filesystem mapping (Phase 240)
+// ============================================================================
+
+export { mapToAmigaPath, placeFiles, AMIGA_ASSIGN_MAP } from './filesystem-mapper.js';
+
+// ============================================================================
+// Dependency detection (Phase 240)
+// ============================================================================
+
+export { detectDependencies, classifyDependency, checkDependencySatisfied } from './dependency-detector.js';
+
+// ============================================================================
+// Install tracking (Phase 240)
+// ============================================================================
+
+export { recordInstall, loadInstallManifest, listInstalled, uninstallPackage } from './install-tracker.js';
+
+// ============================================================================
+// Scan gate and installation (Phase 240)
+// ============================================================================
+
+export { checkScanGate, installPackage } from './scan-gate.js';
+export type { InstallPackageOptions } from './scan-gate.js';
+
+// ============================================================================
 // Types (inferred from Zod schemas)
 // ============================================================================
 
@@ -215,6 +258,14 @@ export type {
   QuarantineEntry,
   ScanDepthConfig,
   ScanPolicyConfig,
+  ExtractionResult,
+  ToolStatus,
+  InstallConfig,
+  DependencyType,
+  Dependency,
+  InstalledFile,
+  InstallManifest,
+  ScanGateResult,
 } from './types.js';
 
 // ============================================================================
@@ -260,6 +311,14 @@ export {
   QuarantineEntrySchema,
   ScanDepthConfigSchema,
   ScanPolicyConfigSchema,
+  ExtractionResultSchema,
+  ToolStatusSchema,
+  InstallConfigSchema,
+  DependencyTypeSchema,
+  DependencySchema,
+  InstalledFileSchema,
+  InstallManifestSchema,
+  ScanGateResultSchema,
 } from './types.js';
 
 // ============================================================================
