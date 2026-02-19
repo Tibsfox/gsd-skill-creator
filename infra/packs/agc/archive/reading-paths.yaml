@@ -1,0 +1,221 @@
+# AGC Documentation Archive -- Reading Paths
+# Curated learning sequences for different study depths
+# Generated: 2026-02-18
+
+metadata:
+  version: 1
+  generated: "2026-02-18"
+  catalog_ref: "infra/packs/agc/archive/catalog.yaml"
+
+paths:
+  quick_start:
+    name: "Quick Start"
+    description: "Essential AGC orientation -- 10 documents covering hardware, software, and operations basics"
+    target_audience: "New learners wanting AGC overview in 2-4 hours of reading"
+    document_count: 10
+    estimated_reading_time: "3-4 hours"
+    sequence:
+      - order: 1
+        doc_id: "agc-arch-010"
+        why: "Modern hardware overview written for contemporary engineers. Provides the big picture of all GNC components before diving into details."
+        reading_notes: "Focus on the AGC section and DSKY description. Skim IMU/optics for now."
+
+      - order: 2
+        doc_id: "agc-arch-005"
+        why: "Block II architecture overview -- the actual flight computer. Establishes memory model, register set, and execution architecture."
+        reading_notes: "Understand fixed vs erasable memory distinction and the 15-bit word length."
+
+      - order: 3
+        doc_id: "agc-arch-004"
+        why: "The instruction set that ran on the Moon. Without understanding the ISA, source code listings are opaque."
+        reading_notes: "Focus on basic instructions (TC, CA, AD, MASK). Extra-codes come later."
+
+      - order: 4
+        doc_id: "agc-iface-002"
+        why: "The DSKY was the astronaut's only interface to the AGC. Understanding verb-noun interaction is key to understanding operations."
+        reading_notes: "Learn the verb-noun paradigm and how the electroluminescent display works."
+
+      - order: 5
+        doc_id: "agc-soft-007"
+        why: "The guidance equations that landed on the Moon. The mathematical core of what the AGC actually computed during descent."
+        reading_notes: "Focus on P63 (braking) and P66 (manual landing) sections. Math-heavy but foundational."
+
+      - order: 6
+        doc_id: "agc-soft-003"
+        why: "The actual Apollo 11 LM source code. Seeing real flight software grounds everything learned so far in concrete code."
+        reading_notes: "Browse the module structure and comments. Do not try to read linearly -- use as reference."
+
+      - order: 7
+        doc_id: "agc-ops-003"
+        why: "What actually happened on Apollo 11. Documents the 1202/1201 alarms and real GNC performance."
+        reading_notes: "Focus on the GNC section and program alarm analysis. Cross-reference with guidance equations."
+
+      - order: 8
+        doc_id: "agc-mgmt-001"
+        why: "Tindallgrams capture the human side -- decisions, debates, tradeoffs. Software engineering before the term existed."
+        reading_notes: "Start with the Apollo 11 alarm memos and software priority discussions."
+
+      - order: 9
+        doc_id: "agc-arch-009"
+        why: "Zero in-flight failures across 17 computers. Understanding why requires understanding the reliability engineering approach."
+        reading_notes: "Focus on the reliability statistics and design-for-reliability philosophy."
+
+      - order: 10
+        doc_id: "agc-edu-005"
+        why: "The Virtual AGC project portal -- your gateway to everything else. Bookmark this for ongoing study."
+        reading_notes: "Explore the document library, source code listings, and simulator downloads."
+
+  deep_dive:
+    name: "Deep Dive"
+    description: "Comprehensive AGC understanding -- 50 documents across all categories"
+    target_audience: "Learners building working knowledge for simulator development or study"
+    document_count: 50
+    estimated_reading_time: "40-60 hours"
+    sections:
+      - name: "Hardware Foundation"
+        description: "AGC hardware architecture from gates to system"
+        docs:
+          - doc_id: "agc-arch-010"
+            notes: "Start with the modern overview"
+          - doc_id: "agc-arch-001"
+            notes: "R-700: The definitive hardware reference by Eldon Hall"
+          - doc_id: "agc-arch-005"
+            notes: "Block II architecture details"
+          - doc_id: "agc-arch-002"
+            notes: "Central processor deep dive"
+          - doc_id: "agc-arch-007"
+            notes: "Priority control and interrupts"
+          - doc_id: "agc-arch-017"
+            notes: "Fresh start and restart -- fault tolerance"
+          - doc_id: "agc-arch-011"
+            notes: "Hall's schematics collection"
+
+      - name: "Software Architecture"
+        description: "AGC instruction set, interpreter, and programming model"
+        docs:
+          - doc_id: "agc-arch-004"
+            notes: "Block II machine instructions -- the flight ISA"
+          - doc_id: "agc-arch-027"
+            notes: "Interpreter architecture"
+          - doc_id: "agc-arch-028"
+            notes: "Interpretive instruction set"
+          - doc_id: "agc-soft-012"
+            notes: "Interpreter user guide"
+          - doc_id: "agc-soft-013"
+            notes: "Block II programming reference"
+          - doc_id: "agc-soft-028"
+            notes: "Modern assembly language manual"
+
+      - name: "Executive and Operating System"
+        description: "The real-time executive, job scheduling, and system utilities"
+        docs:
+          - doc_id: "agc-arch-016"
+            notes: "Job/task control hardware support"
+          - doc_id: "agc-soft-035"
+            notes: "Computer utility programs -- the OS"
+          - doc_id: "agc-arch-019"
+            notes: "KEYRUPT and UPRUPT interrupt handling"
+          - doc_id: "agc-arch-006"
+            notes: "Timer and sequence generator"
+          - doc_id: "agc-test-012"
+            notes: "1202 alarm analysis -- executive overflow"
+          - doc_id: "agc-soft-025"
+            notes: "All major modes (P-programs)"
+
+      - name: "Guidance and Navigation"
+        description: "The math and algorithms that flew to the Moon"
+        docs:
+          - doc_id: "agc-soft-006"
+            notes: "CM guidance equations (GSOP Section 5)"
+          - doc_id: "agc-soft-007"
+            notes: "LM guidance equations (GSOP Section 5)"
+          - doc_id: "agc-soft-008"
+            notes: "CM operational modes"
+          - doc_id: "agc-soft-009"
+            notes: "LM operational modes -- landing programs"
+          - doc_id: "agc-soft-010"
+            notes: "LM digital autopilot"
+          - doc_id: "agc-soft-034"
+            notes: "Astronaut interface during landing"
+
+      - name: "Interface and I/O"
+        description: "How the AGC talked to the spacecraft"
+        docs:
+          - doc_id: "agc-iface-001"
+            notes: "Complete I/O channel map"
+          - doc_id: "agc-iface-002"
+            notes: "DSKY interface specification"
+          - doc_id: "agc-iface-003"
+            notes: "IMU interface"
+          - doc_id: "agc-iface-007"
+            notes: "Landing radar interface"
+          - doc_id: "agc-iface-020"
+            notes: "Verb-noun code reference"
+          - doc_id: "agc-iface-004"
+            notes: "CM I/O control (GSOP Section 6)"
+          - doc_id: "agc-iface-005"
+            notes: "LM I/O control (GSOP Section 6)"
+
+      - name: "Mission Operations"
+        description: "How the AGC was used on actual missions"
+        docs:
+          - doc_id: "agc-ops-001"
+            notes: "Block II spacecraft operations handbook"
+          - doc_id: "agc-ops-002"
+            notes: "Apollo 11 flight plan"
+          - doc_id: "agc-ops-003"
+            notes: "Apollo 11 mission report"
+          - doc_id: "agc-ops-004"
+            notes: "Apollo 13 mission report -- contingency operations"
+          - doc_id: "agc-ops-005"
+            notes: "PGNCS familiarization training"
+          - doc_id: "agc-ops-006"
+            notes: "LM GNC study guide"
+          - doc_id: "agc-ops-019"
+            notes: "Rendezvous navigation techniques"
+
+      - name: "Testing and Reliability"
+        description: "How they knew it would work"
+        docs:
+          - doc_id: "agc-arch-009"
+            notes: "Reliability history -- zero in-flight failures"
+          - doc_id: "agc-test-006"
+            notes: "Software verification methodology"
+          - doc_id: "agc-test-007"
+            notes: "YUL system and AGC simulation"
+          - doc_id: "agc-test-011"
+            notes: "GNC software testing experience report"
+          - doc_id: "agc-test-015"
+            notes: "PGNCS development experience report"
+
+      - name: "Historical Context"
+        description: "Project management, decisions, and the human story"
+        docs:
+          - doc_id: "agc-mgmt-001"
+            notes: "Complete Tindallgrams collection"
+          - doc_id: "agc-mgmt-004"
+            notes: "Tindallgram on 1202 alarm -- key decision"
+          - doc_id: "agc-edu-003"
+            notes: "Leadership lessons from Bill Tindall"
+          - doc_id: "agc-soft-016"
+            notes: "AGC program final report"
+          - doc_id: "agc-edu-001"
+            notes: "O'Brien book -- comprehensive modern reference"
+          - doc_id: "agc-edu-007"
+            notes: "Apollo 11 source code on GitHub"
+
+  complete_study:
+    name: "Complete Study"
+    description: "Full corpus -- all cataloged documents organized by recommended study order"
+    target_audience: "Researchers and developers needing exhaustive reference"
+    document_count: 210
+    category_order:
+      - "architecture"
+      - "software"
+      - "interface"
+      - "operations"
+      - "engineering_drawings"
+      - "testing"
+      - "management"
+      - "educational"
+    note: "Within each category, documents are ordered by relevance (essential first, then important, supplementary, reference). The catalog.yaml file IS the complete study -- this path simply recommends the order of categories for systematic coverage."
