@@ -29,11 +29,15 @@ documents:
         section: Part 1 > Pattern Capture > Skill Codification
         claim: SessionObserver captures patterns and SuggestionManager proposes skills when patterns repeat 3+ times
         verification: unit-test
-        status: pending
+        status: pass
         notes: Core learning loop entry point
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: >-
+          SessionObserver at src/observation/session-observer.ts captures session events via onSessionStart/onSessionEnd,
+          parses transcripts, summarizes patterns, and stores to JSONL. SuggestionManager at src/detection/suggestion-manager.ts
+          runs detection via PatternAnalyzer which uses configurable threshold (DEFAULT_DETECTION_CONFIG.threshold=3) to propose
+          skills only when patterns repeat 3+ times. 35 tests pass across observation/ and detection/ modules.
       - id: sc-002
         section: Part 1 > Token Budget Management
         claim: >-
@@ -198,11 +202,11 @@ documents:
           GSD provides structured workflow: new-project > research > requirements > roadmap > plan-phase > execute-phase
           > verify > complete-milestone
         verification: code-review
-        status: pending
+        status: pass
         notes: Full lifecycle verification
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: "30 GSD command files in .claude/commands/gsd/ including all lifecycle commands: new-project.md (creates PROJECT.md/REQUIREMENTS.md/ROADMAP.md/STATE.md), research-phase.md, plan-phase.md (spawns gsd-planner to create PLAN.md), execute-phase.md (spawns gsd-executor per plan), verify-work.md (spawns gsd-verifier, creates VERIFICATION.md), complete-milestone.md (archives to milestones/). Each command has <objective>, <process>, <success_criteria> sections. Lifecycle chain verified: new-project creates .planning/ structure, plan-phase produces PLAN.md, execute-phase creates SUMMARY.md, verify-work creates VERIFICATION.md. 222 phases and 594 plans successfully executed through this lifecycle."
   - id: chipset-architecture
     file: gsd-chipset-architecture-vision.md
     checkpoint_count: 15
@@ -687,22 +691,22 @@ documents:
         section: Section 1 > Core Architectural Patterns
         claim: "GSD implements the Planning pattern: strategic decomposition of complex tasks into phases, plans, and tasks"
         verification: code-review
-        status: pending
+        status: pass
         notes: plan-phase decomposes work into executable plans
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: "gsd-planner agent decomposes phases into parallel-optimized plans with 2-3 tasks each. Produces PLAN.md files with XML task structure (<task type='auto'> with <name>, <files>, <action>, <verify>, <done>). Task breakdown includes dependency analysis, wave assignment for parallel execution, and must-haves derived via goal-backward methodology. 594 plans created across 222 phases using this pattern."
       - id: ar-005
         section: Section 1 > Core Architectural Patterns
         claim: >-
           GSD implements Human-in-the-Loop pattern via checkpoint system (human-verify, decision, human-action
           checkpoint types)
         verification: code-review
-        status: pending
+        status: pass
         notes: ""
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: "Checkpoint types defined in gsd-planner.md (lines 155-157, 548-635): checkpoint:human-verify (90%, visual/functional verification), checkpoint:decision (9%, implementation choices), checkpoint:human-action (1%, unavoidable manual steps). gsd-executor.md enforces checkpoint gates (STOP immediately on checkpoint, return structured message). execute-phase.md workflow handles checkpoint continuation via fresh subagent spawning. Auth gates dynamically create human-action checkpoints."
       - id: ar-006
         section: Section 1 > The Model Context Protocol
         claim: >-
