@@ -92,6 +92,51 @@ export { detectChanges, detectNewPackages, detectRemovedPackages } from './sync-
 export type { SyncReport } from './sync-detector.js';
 
 // ============================================================================
+// Search
+// ============================================================================
+
+export { searchPackages } from './search.js';
+
+// ============================================================================
+// Category browsing
+// ============================================================================
+
+export {
+  buildCategoryTree,
+  listPackages,
+  filterByArchitecture,
+  filterByOsVersion,
+} from './category-browser.js';
+
+// ============================================================================
+// Package detail
+// ============================================================================
+
+export { buildPackageDetail } from './package-detail.js';
+
+// ============================================================================
+// Collections
+// ============================================================================
+
+export {
+  importCollection,
+  exportCollection,
+  loadStarterCollection,
+  listStarterCollections,
+} from './collection.js';
+
+export {
+  createCollection,
+  saveCollection,
+  loadCollection,
+  listCollections,
+  addPackage,
+  removePackage,
+  deleteCollection,
+  getCollectionPaths,
+} from './collection-manager.js';
+
+// ============================================================================
 // Types (inferred from Zod schemas)
 // ============================================================================
 
@@ -115,6 +160,13 @@ export type {
   MirrorEntry,
   MirrorState,
   DownloadConfig,
+  SearchResult,
+  SearchOptions,
+  CategoryNode,
+  SubcategoryNode,
+  PackageDetail,
+  CollectionEntry,
+  CollectionManifest,
 } from './types.js';
 
 // ============================================================================
@@ -142,6 +194,13 @@ export {
   MirrorEntrySchema,
   MirrorStateSchema,
   DownloadConfigSchema,
+  SearchResultSchema,
+  SearchOptionsSchema,
+  CategoryNodeSchema,
+  SubcategoryNodeSchema,
+  PackageDetailSchema,
+  CollectionEntrySchema,
+  CollectionManifestSchema,
 } from './types.js';
 
 // ============================================================================
