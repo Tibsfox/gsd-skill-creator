@@ -158,7 +158,7 @@ Phases execute in numeric order: 223 → 224 → 225 → 226 → 227 → 228 →
 | 224. Foundation Audit (T0) | 3/3 | Complete    | 2026-02-19 |
 | 225. Integration Audit (T1) | 6/6 | Complete    | 2026-02-19 |
 | 226. Behavior Audit (T2) | 7/7 | Complete    | 2026-02-19 |
-| 227. UX/Polish Audit (T3) | 0/4 | Planned | - |
+| 227. UX/Polish Audit (T3) | 1/4 | In Progress | - |
 | 228. End-to-End Verification | 0/TBD | Not started | - |
 | 229. Documentation & Amendments | 0/TBD | Not started | - |
 | 230. Verification Environment (Stretch) | 0/TBD | Not started | - |

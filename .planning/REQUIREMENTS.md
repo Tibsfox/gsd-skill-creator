@@ -58,15 +58,15 @@ Requirements for v1.24 — GSD Conformance Audit & Hardening. Each maps to roadm
 
 ### UX/Polish Audit (T3)
 
-- [ ] **POLISH-01**: GSD-OS Tauri application builds for Linux without errors
-- [ ] **POLISH-02**: WebGL CRT shader renders with scanlines, barrel distortion, phosphor glow, and vignette
-- [ ] **POLISH-03**: Window manager supports depth cycling, drag/resize, and keyboard shortcuts
-- [ ] **POLISH-04**: Boot sequence animation runs and is skippable
+- [x] **POLISH-01**: GSD-OS Tauri application builds for Linux without errors
+- [x] **POLISH-02**: WebGL CRT shader renders with scanlines, barrel distortion, phosphor glow, and vignette
+- [x] **POLISH-03**: Window manager supports depth cycling, drag/resize, and keyboard shortcuts
+- [x] **POLISH-04**: Boot sequence animation runs and is skippable
 - [ ] **POLISH-05**: Dashboard color scheme follows the information design spec (6 domain colors, 4 signal colors)
 - [ ] **POLISH-06**: Topology view renders with SVG bezier edges and click-to-detail
 - [ ] **POLISH-07**: Entity shapes use dual encoding (shape+color) per the design system
 - [ ] **POLISH-08**: Educational content (AGC curriculum) renders correctly and exercises produce described outcomes
-- [ ] **POLISH-09**: Accessibility mode activates on prefers-reduced-motion and prefers-contrast
+- [x] **POLISH-09**: Accessibility mode activates on prefers-reduced-motion and prefers-contrast
 
 ### End-to-End Verification
 
@@ -162,15 +162,15 @@ Deferred to future milestones. Tracked but not in current roadmap.
 | BEHAV-12 | Phase 226 | Complete |
 | BEHAV-13 | Phase 226 | Complete |
 | BEHAV-14 | Phase 226 | Complete |
-| POLISH-01 | Phase 227 | Pending |
-| POLISH-02 | Phase 227 | Pending |
-| POLISH-03 | Phase 227 | Pending |
-| POLISH-04 | Phase 227 | Pending |
+| POLISH-01 | Phase 227 | Complete |
+| POLISH-02 | Phase 227 | Complete |
+| POLISH-03 | Phase 227 | Complete |
+| POLISH-04 | Phase 227 | Complete |
 | POLISH-05 | Phase 227 | Pending |
 | POLISH-06 | Phase 227 | Pending |
 | POLISH-07 | Phase 227 | Pending |
 | POLISH-08 | Phase 227 | Pending |
-| POLISH-09 | Phase 227 | Pending |
+| POLISH-09 | Phase 227 | Complete |
 | E2E-01 | Phase 228 | Pending |
 | E2E-02 | Phase 228 | Pending |
 | E2E-03 | Phase 228 | Pending |
