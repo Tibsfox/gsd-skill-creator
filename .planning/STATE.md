@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.26 — Aminet Archive Extension Pack
 Phase: 240 of 242 (Installation Archive Extraction)
-Plan: 4 of 5 in current phase
-Status: Executing
-Last activity: 2026-02-19 — Plan 04 complete (dependency detector with 5-type classification, install tracker with manifest persistence and uninstall, 39 tests)
+Plan: 5 of 5 in current phase (COMPLETE)
+Status: Phase 240 Complete
+Last activity: 2026-02-19 — Plan 05 complete (scan gate enforcement with INS-07/08/09, installPackage orchestrator, barrel exports, 19 tests)
 
-Progress: [████████████████░░░░] 80%
+Progress: [████████████████████] 100%
 
 ## Performance Metrics
 
@@ -48,11 +48,12 @@ Progress: [████████████████░░░░] 80%
 | 240   | 02   | 4min     | 2     | 4     |
 | 240   | 03   | 3min     | 1     | 2     |
 | 240   | 04   | 5min     | 2     | 4     |
+| 240   | 05   | 4min     | 2     | 3     |
 
 **Velocity:**
-- Total plans completed: 25
+- Total plans completed: 26
 - Average duration: 3min
-- Total execution time: 77min
+- Total execution time: 81min
 
 ## Accumulated Context
 
@@ -98,6 +99,7 @@ Progress: [████████████████░░░░] 80%
 - Plan 240-02: LZX extractor via unlzx with cwd workaround (no output dir flag), tool validator with platform-specific install guidance (apt/brew), unlzx exit-code-2 detection; 17 tests
 - Plan 240-03: Filesystem mapper with AMIGA_ASSIGN_MAP (11 assigns), case-insensitive lookup, Software/ default placement, placeFiles with SHA-256 tracking and temp cleanup; 19 tests
 - Plan 240-04: Dependency detector classifying 5 types (package, os_version, hardware, library, unknown) from .readme Requires:; package deps cross-referenced against mirror state; install tracker with atomic manifest persistence, slugified filenames, uninstall with directory cleanup; 39 tests
+- Plan 240-05: Scan gate enforcing INS-07 (refuse unscanned), INS-08 (refuse infected), INS-09 (suspicious override via confirmFn); installPackage orchestrator coordinating gate->extract->place->deps->track->state; barrel exports complete Phase 240 API; 19 tests
 
 ### Pending Todos
 
@@ -110,11 +112,11 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 240-04-PLAN.md (dependency detector with 5-type classification, install tracker with manifest persistence and uninstall, 39 tests)
+Stopped at: Completed 240-05-PLAN.md (scan gate enforcement, installPackage orchestrator, barrel exports, 19 tests)
 Resume file: None
 
 ## ▶ Next Up
 
-Phase 240 in progress. Plans 01-04 complete (LhA extractor, LZX extractor, tool validator, filesystem mapper, dependency detector, install tracker). Plan 05 remaining.
+Phase 240 complete (5/5 plans). All Installation Archive Extraction modules delivered.
 
-Continue /gsd:execute-phase 240 -- next plan
+Continue /gsd:execute-phase 241 -- next phase

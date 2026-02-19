@@ -72,9 +72,9 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [x] **INS-04**: Detect dependencies from .readme `Requires:` field
 - [x] **INS-05**: Report missing dependencies to user
 - [x] **INS-06**: Track all installed files per package for clean uninstall
-- [ ] **INS-07**: Refuse installation of unscanned packages (scan gate)
-- [ ] **INS-08**: Refuse installation of infected packages
-- [ ] **INS-09**: Allow user override for suspicious packages with explicit confirmation
+- [x] **INS-07**: Refuse installation of unscanned packages (scan gate)
+- [x] **INS-08**: Refuse installation of infected packages
+- [x] **INS-09**: Allow user override for suspicious packages with explicit confirmation
 - [x] **INS-10**: Check for required extraction tools at initialization, guide user to install if missing
 
 ### Emulator Integration
@@ -198,9 +198,9 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | INS-04 | Phase 240 | Complete |
 | INS-05 | Phase 240 | Complete |
 | INS-06 | Phase 240 | Complete |
-| INS-07 | Phase 240 | Pending |
-| INS-08 | Phase 240 | Pending |
-| INS-09 | Phase 240 | Pending |
+| INS-07 | Phase 240 | Complete |
+| INS-08 | Phase 240 | Complete |
+| INS-09 | Phase 240 | Complete |
 | INS-10 | Phase 240 | Complete |
 | EMU-01 | Phase 241 | Pending |
 | EMU-02 | Phase 241 | Pending |
