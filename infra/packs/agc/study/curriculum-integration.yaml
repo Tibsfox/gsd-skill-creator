@@ -1,0 +1,389 @@
+# AGC Architectural Study -- Curriculum Integration Map
+# Connections between AGC concepts and existing educational packs
+# Phase 207 Plan 02 -- STDY-04
+#
+# This map ensures the AGC educational pack connects to the broader
+# GSD-OS learning ecosystem. Phase 221 (AGC Curriculum & Exercises)
+# will use these connections to build cross-pack exercises.
+
+metadata:
+  version: 1
+  generated: "2026-02-18"
+  mapping_ref: "infra/packs/agc/study/architecture-mapping.yaml"
+  total_connections: 12
+  packs_referenced:
+    - name: "Amiga Corner"
+      path: "infra/knowledge-world/amiga-corner/"
+      content_type: "Creative computing history exhibits"
+    - name: "Knowledge World Curriculum"
+      path: "infra/knowledge-world/curriculum/"
+      content_type: "Minecraft-based computing education methodology and builds"
+    - name: "RFC Reference Skill"
+      path: "infra/packs/rfc/"
+      content_type: "Internet protocol standards reference"
+    - name: "AMIGA Mission Infrastructure"
+      path: "infra/amiga/"
+      content_type: "Amiga emulation profiles and curated collection"
+    - name: "Minecraft Knowledge World"
+      path: "infra/knowledge-world/"
+      content_type: "Block-based educational construction"
+    - name: "GSD-OS Chipset System"
+      path: ".chipset/"
+      content_type: "Skill/agent/team composition"
+
+connections:
+  - id: conn-01
+    title: "Real-Time Scheduling: AGC Executive vs Amiga Exec"
+    agc_concept: "Executive"
+    concept_ref: "agc-concept-01"
+    target_pack: "Amiga Corner"
+    pack_ref: "infra/knowledge-world/amiga-corner/tool-evolution-walkthrough.yaml"
+    shared_theme: "cooperative multitasking in constrained environments"
+    learning_objective: |
+      Both the AGC Executive (1966) and Amiga Exec (1985) implemented cooperative
+      multitasking on hardware with severe constraints. The AGC had 7 core sets and
+      2,048 words of RAM; the Amiga had 256-512 KB of shared memory. Both solved
+      the same fundamental problem -- running multiple tasks on a single CPU without
+      hardware memory protection -- using remarkably similar approaches: priority-
+      based scheduling with voluntary yield. By studying both systems side by side,
+      the learner understands that cooperative multitasking is not a primitive
+      predecessor to preemptive multitasking but a deliberate engineering choice
+      made when resource constraints demand zero-overhead context switching.
+    cross_reference_exercise: |
+      Compare the AGC Executive's NOVAC/FINDVAC job creation with Amiga Exec's
+      CreateTask/AddTask calls. Write a 1-page analysis comparing: priority levels
+      (AGC has 8, Amiga has 256), context save mechanism (core sets vs. task
+      control blocks), and what happens when the scheduler runs out of resources
+      (AGC triggers 1202 BAILOUT, Amiga returns NULL). Bonus: run both scenarios
+      in their respective simulators and screenshot the results.
+    difficulty: "intermediate"
+
+  - id: conn-02
+    title: "Constraint-Driven Creativity: AGC Memory Limits vs Amiga Demo Scene"
+    agc_concept: "Rope Memory"
+    concept_ref: "agc-concept-09"
+    target_pack: "Amiga Corner"
+    pack_ref: "infra/knowledge-world/amiga-corner/demo-scene-exhibit.yaml"
+    shared_theme: "extraordinary achievement within severe hardware constraints"
+    learning_objective: |
+      The AGC's 36,864 words of fixed memory forced MIT/IL programmers to write
+      incredibly compact code -- the lunar landing guidance fit in roughly 2,000
+      words. The Amiga demo scene achieved photorealistic graphics and complex
+      music on 512 KB of memory by exploiting hardware with intimate understanding.
+      Both communities demonstrate that constraints are not obstacles but creative
+      catalysts. The learner sees that deep understanding of a system's limits
+      enables capabilities no specification anticipated -- the same principle that
+      powered both the Apollo 11 landing and the Amiga's Juggler demo.
+    cross_reference_exercise: |
+      Pick one AGC program (P63 braking guidance, ~2,000 words) and one demo scene
+      production from the exhibit (e.g., State of the Art, ~1 MB). For each,
+      document: (a) the total memory available, (b) what the creator achieved
+      within those limits, (c) what tricks or optimizations made it possible
+      (AGC: interpreter double-precision on single-precision hardware; Demo:
+      copper list tricks on custom chipset). Write a reflective paragraph on how
+      constraints shape engineering excellence.
+    difficulty: "intermediate"
+
+  - id: conn-03
+    title: "Visual Interfaces Under Constraint: DSKY vs Amiga Pixel Art"
+    agc_concept: "DSKY (Display/Keyboard)"
+    concept_ref: "agc-concept-05"
+    target_pack: "Amiga Corner"
+    pack_ref: "infra/knowledge-world/amiga-corner/pixel-art-gallery.yaml"
+    shared_theme: "communicating complex information through constrained visual systems"
+    learning_objective: |
+      The DSKY communicates lunar landing guidance through 3 five-digit numeric
+      displays and 11 status lights. Amiga pixel artists created photorealistic
+      images using 32 colors at 320x256 resolution. Both demonstrate that
+      information hierarchy and deliberate design choices matter more than raw
+      display capability. The DSKY's constraint -- no text, no graphics, just
+      numbers and lights -- forced the VERB/NOUN grammar that made it usable.
+      Amiga's 32-color limit forced palette discipline that made pixel art
+      beautiful. The learner understands that constraint-driven interfaces
+      often communicate more effectively than unconstrained ones.
+    cross_reference_exercise: |
+      Design a "DSKY-style" interface for a modern application of your choice
+      (weather app, music player, fitness tracker) using only: 3 numeric registers
+      (5 digits each), 2-digit mode indicators, and 6 status lights. Sketch the
+      layout and define your own VERB/NOUN grammar (at least 5 verb-noun pairs).
+      Compare your design's information density with the actual DSKY's ~15 verbs
+      and ~80 nouns. Reflect on what you gained and lost versus a modern touchscreen.
+    difficulty: "beginner"
+
+  - id: conn-04
+    title: "Pipeline Architecture: AGC Instruction Pipeline vs Data Pipeline Build"
+    agc_concept: "Interpreter"
+    concept_ref: "agc-concept-11"
+    target_pack: "Knowledge World Curriculum"
+    pack_ref: "infra/knowledge-world/curriculum/builds/visualize-a-pipeline/guide.md"
+    shared_theme: "sequential processing stages with buffering and error handling"
+    learning_objective: |
+      The AGC instruction pipeline (fetch -> decode -> execute) and the
+      Interpreter's multi-stage computation (load operands -> compute ->
+      store results) are concrete examples of the pipeline pattern taught
+      in the Visualize a Pipeline curriculum build. The learner builds a
+      Minecraft pipeline (5 rooms connected by corridors) and then maps
+      each room to an AGC pipeline stage: the Intake Room is instruction
+      fetch, the Validation Room is decode, the Transformation Room is
+      the ALU, the Enrichment Room is the Interpreter's extended math,
+      and the Output Room writes back to memory. This grounds the abstract
+      pipeline pattern in a real historical system.
+    cross_reference_exercise: |
+      Build the Visualize a Pipeline guided build in Minecraft. Then, using
+      signs, label each room with its AGC equivalent: Intake = "Instruction
+      Fetch (Z register addresses memory)", Validate = "Decode (sequence
+      generator selects control pulses)", Transform = "Execute (ALU computes
+      result)", Enrich = "Interpreter (if interpretive code, dispatch to
+      virtual machine)", Output = "Writeback (result stored to memory or
+      register)." Add a second error path corridor labeled "1202 Alarm
+      (Executive overflow -- pipeline stall)."
+    difficulty: "beginner"
+
+  - id: conn-05
+    title: "Architecture as Physical Space: AGC Hardware as Building"
+    agc_concept: "I/O Channels"
+    concept_ref: "agc-concept-10"
+    target_pack: "Knowledge World Curriculum"
+    pack_ref: "infra/knowledge-world/curriculum/methodology/system-architecture-as-buildings.md"
+    shared_theme: "mapping computing architecture to physical spatial structures"
+    learning_objective: |
+      The System Architecture as Buildings methodology maps computing concepts
+      to Minecraft structures: components become rooms, data flows become
+      corridors, interfaces become doors. The AGC's physical architecture is a
+      real-world example of this pattern: the CPU module is a room (Tray B),
+      the memory modules are rooms (rope module bays), the I/O channels are
+      corridors (backplane wiring), and the DSKY is a door/window (astronaut
+      interface). By designing an AGC building in Minecraft following the
+      spatial methodology, the learner connects abstract architectural thinking
+      to both computing history and the build methodology.
+    cross_reference_exercise: |
+      Using the spatial metaphor table from System Architecture as Buildings,
+      design a Minecraft building that represents the AGC. Map at least 6
+      AGC subsystems to rooms: CPU (Tray B), Erasable Memory, Fixed Memory
+      (rope bays), Executive (scheduler room), DSKY (interface hall), I/O Bus
+      (corridor connecting all rooms). Use the block palette standards from the
+      methodology. Place signs in each room explaining what it represents and
+      referencing the catalog doc_id for that subsystem. The building should
+      be walkable -- you should be able to "trace an instruction" by walking
+      from CPU room through Memory corridor and back.
+    difficulty: "intermediate"
+
+  - id: conn-06
+    title: "Specification Language: AGC GSOP vs RFC Requirement Keywords"
+    agc_concept: "VERB/NOUN"
+    concept_ref: "agc-concept-06"
+    target_pack: "RFC Reference Skill"
+    pack_ref: "infra/packs/rfc/reading-paths.yaml"
+    shared_theme: "formal specification languages for engineering requirements"
+    learning_objective: |
+      The AGC Guidance System Operations Plan (GSOP) used formal specification
+      language to describe software requirements, with terms like "shall,"
+      "will," and "mandatory" having specific contractual meaning -- predating
+      RFC 2119's MUST/SHOULD/MAY by 30 years. The VERB/NOUN grammar itself is
+      a formal interface specification: Verb 06 always means "display," Noun 43
+      always means "position vector," regardless of mission or program. By
+      comparing AGC GSOP specification style with RFC 2119 requirement keywords,
+      the learner understands that formal specification language is a universal
+      engineering tool that transcends eras and domains.
+    cross_reference_exercise: |
+      Read RFC 2119 (BCP 14) using the RFC Reference Skill. Then read the
+      GSOP Section 4 (agc-soft-008) requirement language. Create a comparison
+      table: RFC 2119 keyword on the left, closest GSOP equivalent on the
+      right, with an example of each from its source document. Write a short
+      analysis: where do the specification styles agree? Where do they diverge?
+      Which style would you prefer for a safety-critical system, and why?
+    difficulty: "advanced"
+
+  - id: conn-07
+    title: "Protocol Interfaces: AGC I/O Channels vs Internet Protocol Stack"
+    agc_concept: "I/O Channels"
+    concept_ref: "agc-concept-10"
+    target_pack: "RFC Reference Skill"
+    pack_ref: "infra/packs/rfc/data/rfc-index.yaml"
+    shared_theme: "layered interface abstractions for system communication"
+    learning_objective: |
+      The AGC I/O channel architecture (512 typed channels connecting software
+      to hardware) parallels the internet protocol stack (layers of abstraction
+      connecting applications to physical networks). Both systems solve the same
+      problem: how to create a stable software interface over diverse, changing
+      hardware. AGC channels abstract away whether the underlying hardware is
+      a DSKY, an IMU, or a radar -- just as TCP abstracts away whether the
+      network is ethernet, WiFi, or fiber. The learner sees that hardware
+      abstraction layers are a universal pattern, not a modern invention.
+    cross_reference_exercise: |
+      Map the AGC I/O channel architecture to the OSI 7-layer model:
+      Physical = AGC backplane wiring, Data Link = channel read/write
+      instructions, Network = channel number addressing, Transport = interrupt-
+      driven data transfer, Session = DSKY relay word protocol, Presentation =
+      VERB/NOUN encoding, Application = P-programs. For 3 AGC subsystems (DSKY,
+      IMU, radar), identify which "layers" they use and compare with 3 internet
+      protocols (HTTP, TCP, IP). Where does the analogy hold? Where does it break?
+    difficulty: "advanced"
+
+  - id: conn-08
+    title: "Mission Control Pattern: AGC Houston vs AMIGA MC-1 Control Surface"
+    agc_concept: "Mission Control"
+    concept_ref: "agc-concept-13"
+    target_pack: "AMIGA Mission Infrastructure"
+    pack_ref: "infra/amiga/curated-collection.yaml"
+    shared_theme: "centralized monitoring and control with human-in-the-loop authority"
+    learning_objective: |
+      Apollo Mission Control Houston and the GSD-OS MC-1 Control Surface both
+      implement the same pattern: a centralized monitoring station that receives
+      telemetry from autonomous systems, processes it for human consumption, and
+      provides command authority to a human operator. The Flight Director's
+      Go/No-Go decisions parallel GSD's human-in-the-loop gates. The GUIDO
+      console's specialized view parallels GSD-OS dashboard widget specialization.
+      By studying both implementations, the learner understands that the Mission
+      Control pattern is a fundamental architectural concept applicable to any
+      system where autonomous agents need human oversight.
+    cross_reference_exercise: |
+      Compare the Apollo Mission Control console positions with GSD-OS dashboard
+      widgets: GUIDO (Guidance Officer) = which widget? FIDO (Flight Dynamics
+      Officer) = which widget? EECOM (Environmental) = which widget? CAPCOM
+      (Communication) = which interface? Create a mapping table of at least 5
+      console positions to dashboard components. Identify one console position
+      that has no GSD-OS equivalent and propose a new dashboard widget to fill
+      that gap.
+    difficulty: "intermediate"
+
+  - id: conn-09
+    title: "Phase Lifecycle: AGC Mission Phases vs AMIGA Mission Lifecycle"
+    agc_concept: "Executive"
+    concept_ref: "agc-concept-01"
+    target_pack: "AMIGA Mission Infrastructure"
+    pack_ref: "infra/amiga/profiles/base.uae"
+    shared_theme: "structured lifecycle phases with transitions and state management"
+    learning_objective: |
+      Apollo missions follow a structured phase lifecycle: prelaunch, launch,
+      translunar injection, lunar orbit insertion, descent, landing, surface
+      operations, ascent, rendezvous, transearth injection, entry, splashdown.
+      Each phase runs specific AGC programs (P11 for earth orbit, P63 for
+      braking, P66 for manual landing). The AMIGA mission lifecycle (M-0
+      Foundation through M-5 Launch) follows the same pattern: each milestone
+      has defined programs (GSD phases), transitions (gates), and state
+      management (STATE.md). By mapping Apollo phases to AMIGA milestones,
+      the learner sees that lifecycle management is a universal engineering
+      pattern.
+    cross_reference_exercise: |
+      Create a timeline mapping Apollo 11 mission phases to AMIGA v1.23 milestone
+      phases. Map at least 5 pairs: Prelaunch = Foundation (M-0), Launch = ICD
+      definition (M-1), Translunar Coast = parallel development (M-2), Lunar
+      Landing = integration (M-3), Splashdown = launch (M-5). For each pair,
+      identify: what AGC program runs (e.g., P11), what GSD phase executes (e.g.,
+      Phase 200), and what state must be preserved across the transition.
+    difficulty: "intermediate"
+
+  - id: conn-10
+    title: "Block-Based Construction: AGC Hardware Modules as Minecraft Blocks"
+    agc_concept: "Bank Switching"
+    concept_ref: "agc-concept-07"
+    target_pack: "Minecraft Knowledge World"
+    pack_ref: "infra/knowledge-world/curriculum/methodology/system-architecture-as-buildings.md"
+    shared_theme: "modular construction from discrete units with defined interfaces"
+    learning_objective: |
+      The AGC is physically constructed from discrete modules: Tray A (timing),
+      Tray B (CPU), erasable core memory modules, fixed core rope modules, and
+      the DSKY -- each connected via backplane wiring. Minecraft Knowledge World
+      uses blocks as the fundamental construction unit. The AGC's module-based
+      construction maps naturally to Minecraft: each AGC module becomes a
+      Minecraft room built from specific block types. Bank switching becomes
+      a redstone-powered mechanism that reveals or hides different sections of
+      a memory building. The learner experiences hardware modularity physically
+      by building an AGC from Minecraft blocks.
+    cross_reference_exercise: |
+      Using the block palette from System Architecture as Buildings, build a
+      simplified AGC memory system in Minecraft: one room for erasable memory
+      (8 sections representing 8 banks, built from blue blocks), one room for
+      fixed memory (use a long corridor with 36 alcoves for 36 banks, built
+      from amber blocks). Add a redstone lever that "switches banks" by lighting
+      up one alcove while darkening others. Place signs explaining bank switching:
+      "Only one bank visible at a time. Lever = EBANK/FBANK register. Lit alcove =
+      active bank."
+    difficulty: "beginner"
+
+  - id: conn-11
+    title: "Telemetry and Observability: AGC Downlink vs GSD-OS Dashboard"
+    agc_concept: "Telemetry (Downlink)"
+    concept_ref: "agc-concept-12"
+    target_pack: "GSD-OS Chipset System"
+    pack_ref: ".chipset/schema/chipset-schema.yaml"
+    shared_theme: "structured state reporting from autonomous systems to monitoring interfaces"
+    learning_objective: |
+      The AGC downlink telemetry system transmits curated state snapshots to
+      Mission Control at defined intervals. The GSD-OS chipset system defines
+      skills, agents, and teams that generate metrics and events consumed by
+      the dashboard. Both systems face the same design challenge: what data to
+      report, how often, and how to prioritize when bandwidth (or context
+      window) is limited. The AGC's phase-aware downlink list selection (different
+      data during descent vs. coast) maps to the chipset's context-aware skill
+      loading (different skills during planning vs. execution). The learner
+      understands telemetry design as a universal system architecture concern.
+    cross_reference_exercise: |
+      Design a "downlink list" for a GSD phase of your choice. Identify: (a) which
+      STATE.md fields are "critical telemetry" (always reported), (b) which are
+      "phase-specific" (only during this phase type), (c) which are "background"
+      (reported only when bandwidth allows). Compare your design with the AGC
+      downlink list structure (GSOP Section 6, agc-iface-004). Calculate the
+      "bandwidth" in tokens: if your STATE.md update is 500 tokens, what fraction
+      of a 200K context window does it consume? How does this compare to the AGC's
+      downlink consuming ~2% of total bandwidth?
+    difficulty: "advanced"
+
+  - id: conn-12
+    title: "Configuration and Customization: AGC Padloads vs Chipset YAML"
+    agc_concept: "Fixed-Point Arithmetic"
+    concept_ref: "agc-concept-08"
+    target_pack: "GSD-OS Chipset System"
+    pack_ref: ".chipset/minecraft-knowledge-world.yaml"
+    shared_theme: "configuration data that customizes generic systems for specific missions"
+    learning_objective: |
+      The AGC flight software is generic -- the same Colossus code runs on Apollo
+      11 through Apollo 17. Mission-specific customization comes from "padloads":
+      constants loaded into erasable memory before launch (landing site coordinates,
+      star catalog, trajectory parameters). Similarly, GSD-OS chipset YAML files
+      customize the generic skill-creator/GSD framework for specific projects.
+      The Minecraft Knowledge World chipset configures skills, agents, and teams
+      for educational content creation, while the AGC educational chipset (Phase
+      222) will configure for Apollo simulation. The learner understands that
+      separating generic logic from mission-specific data is a timeless
+      engineering pattern.
+    cross_reference_exercise: |
+      Compare the AGC padload concept (agc-ops-021, Pre-Launch Erasable Loads)
+      with the Minecraft Knowledge World chipset configuration. Create a mapping:
+      padload field = chipset field. For example: landing_site_latitude =
+      chipset.project (specifies target), star_catalog = chipset.skills (available
+      tools), trajectory_params = chipset.routing (how to get there). Identify at
+      least 5 padload-to-chipset mappings. Then modify one value in the chipset
+      YAML and explain what "mission" change that represents in AGC terms.
+    difficulty: "advanced"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Summary
+# ──────────────────────────────────────────────────────────────────────────────
+
+summary:
+  total_connections: 12
+  packs_used: 6
+  difficulty_distribution:
+    beginner: 3
+    intermediate: 5
+    advanced: 4
+  concepts_covered:
+    - "agc-concept-01"  # Executive (conn-01, conn-09)
+    - "agc-concept-05"  # DSKY (conn-03)
+    - "agc-concept-06"  # VERB/NOUN (conn-06)
+    - "agc-concept-07"  # Bank Switching (conn-10)
+    - "agc-concept-08"  # Fixed-Point (conn-12)
+    - "agc-concept-09"  # Rope Memory (conn-02)
+    - "agc-concept-10"  # I/O Channels (conn-05, conn-07)
+    - "agc-concept-11"  # Interpreter (conn-04)
+    - "agc-concept-12"  # Telemetry (conn-11)
+    - "agc-concept-13"  # Mission Control (conn-08)
+  pack_distribution:
+    "Amiga Corner": 3
+    "Knowledge World Curriculum": 2
+    "RFC Reference Skill": 2
+    "AMIGA Mission Infrastructure": 2
+    "Minecraft Knowledge World": 1
+    "GSD-OS Chipset System": 2
