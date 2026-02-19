@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 213 of 222 (AGC CPU & Memory) -- COMPLETE
-Plan: 4 of 4 in current phase (COMPLETE)
-Status: Phase 212 complete -- 3 plans, 6 commits, 67 new GL-1 tests (1020 AMIGA tests total)
-Last activity: 2026-02-19 -- Completed Phase 212 (Governance Engine & Policy)
+Phase: 214 of 222 (AGC Interrupts & Timing) -- COMPLETE
+Plan: 3 of 3 in current phase (COMPLETE)
+Status: Phase 214 complete -- 3 plans, 5 commits, 117 new AGC tests (327 AGC tests total)
+Last activity: 2026-02-19 -- Completed Phase 214 (AGC Interrupts & Timing)
 
-Progress: [################........] 67% (16/24 phases)
+Progress: [#################.......] 71% (17/24 phases)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.23 Project AMIGA -- Phase 212 complete, GL-1 governance engine with rules evaluation, decision logging, and policy queries
+**Current focus:** v1.23 Project AMIGA -- Phase 214 complete, AGC interrupt controller, involuntary counters, I/O channels, timing model, and integrated stepAgc
 
 ## Current Milestone
 
@@ -48,6 +48,13 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 19. Phase 212 (Governance Engine & Policy) COMPLETE -- 3 plans, 6 commits, 67 new GL-1 tests
 20. GL-1 governance engine: RulesEngine (4 constitutional constraints), DecisionLog (append-only), PolicyQueryHandler (4 query types via ICD-03)
 21. Full AMIGA test suite: 1020 tests passing across 37 test files (zero regressions)
+22. Phase 214 (AGC Interrupts & Timing) COMPLETE -- 3 plans, 5 commits, 117 new AGC tests
+23. AGC interrupts: 10 hardware vectors, priority ordering, RUPT entry/exit, INHINT/RELINT gating
+24. AGC counters: TIME1-TIME6, CDUX/Y/Z, overflow-triggered interrupts, accumulator-based ticking
+25. AGC I/O channels: 512 channels, bitwise ops, 7 peripheral groups, configurable stubs
+26. AGC timing: 2.048 MHz / 11.72us MCT, instruction timing table, real-time conversion
+27. AGC stepAgc: integrated cycle (interrupts -> execute -> I/O -> counters -> timing)
+28. Total AGC tests: 327 passing across 11 test files (zero regressions from Phase 213)
 
 ## Decisions
 
@@ -121,6 +128,14 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 - DecisionLog returns defensive copies to prevent external mutation of internal state
 - PolicyQueryHandler uses keyword fallback when exact substring match fails for policy_lookup/weight_review
 - AMIGA barrel auto-propagates GL-1 barrel updates via wildcard re-export
+- AGC ZRUPT register added at RegisterId address 7 for interrupt return address storage
+- AGC interrupt pending stored as 10-bit bitmask; lowest set bit = highest priority
+- AGC counter tick uses accumulator pattern: fractional MCTs accumulate across calls
+- AGC TIME6 has explicit enable/disable gate (digital autopilot timer only active when needed)
+- AGC IoChannelState uses Map for sparse channel storage; peripheral read map checked first on read
+- AGC stepAgc wraps inner step() with subsystem integration (decorator pattern)
+- AGC RUPT entry sets Z to vector address (not vector+1); next step fetches from vector
+- AGC INHINT/RELINT synced via change detection between CPU and InterruptState
 
 ## Accumulated Context
 
@@ -145,7 +160,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Phase 212 (Governance Engine & Policy) complete -- 3 plans, 6 commits, 67 GL-1 tests
+Stopped at: Phase 214 (AGC Interrupts & Timing) complete -- 3 plans, 5 commits, 117 new tests (327 AGC total)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- 24 phases across 5 waves
@@ -189,4 +204,9 @@ Stopped at: Phase 212 (Governance Engine & Policy) complete -- 3 plans, 6 commit
 - `src/agc/instructions.ts` -- All 38 Block II instructions (15 basic + 18 extracode + 5 special)
 - `src/agc/decoder.ts` -- Instruction decoder for basic/extracode/quarter-code encodings
 - `src/agc/cpu.ts` -- CPU step function (fetch-decode-execute cycle)
-- `src/agc/index.ts` -- AGC barrel index re-exporting all public APIs
+- `src/agc/interrupts.ts` -- Interrupt controller: 10 vectors, priority, RUPT entry/exit, INHINT/RELINT
+- `src/agc/counters.ts` -- Involuntary counters: TIME1-TIME6, CDUX/Y/Z, overflow, accumulator ticking
+- `src/agc/io-channels.ts` -- I/O channels: 512 channels, bitwise ops, peripheral stubs, downlink log
+- `src/agc/timing.ts` -- Timing model: 2.048 MHz, 11.72us MCT, instruction timing, time conversion
+- `src/agc/cpu.ts` -- CPU step (inner) + integrated stepAgc (full AGC cycle with all subsystems)
+- `src/agc/index.ts` -- AGC barrel index re-exporting all Phase 213 + 214 public APIs
