@@ -4,8 +4,8 @@
  * Re-exports all public types and functions from the AGC module.
  * Covers Phase 213 (CPU & Memory), Phase 214 (Interrupts & Timing),
  * Phase 216 (Executive, Waitlist, Restart Protection),
- * and Phase 217 (DSKY Interface).
- * Downstream phases (218 Executive Monitor, 219 Tools, 222 Integration) import from here.
+ * Phase 217 (DSKY Interface), and Phase 218 (Executive Monitor, Alarm Scenario, Learn Mode).
+ * Downstream phases (219 Tools, 222 Integration) import from here.
  */
 
 // Types
@@ -252,3 +252,16 @@ export {
   isDataEntryVerb,
   getDataRegister,
 } from './dsky-commander.js';
+
+// Executive Monitor (Phase 218)
+export type { MonitorSnapshot, CoreSetView, WaitlistEntryView, InterruptView, CounterView, RestartView, MonitorMetrics } from './executive-monitor.js';
+export { captureSnapshot, computeMetrics } from './executive-monitor.js';
+
+// Alarm Scenario (Phase 218)
+export type { AlarmScenario, ScenarioEvent, ScenarioConfig, ScenarioJobConfig } from './alarm-scenario.js';
+export { createApollo11Scenario, createScenario, runScenarioStep, runFullScenario } from './alarm-scenario.js';
+
+// Learn Mode (Phase 218)
+export type { LearnAnnotation, LearnModeState } from './learn-mode.js';
+export type { AnnotationCategory } from './learn-mode.js';
+export { createLearnModeState, toggleLearnMode, getAnnotation, getAnnotationsForSnapshot, annotateScenarioEvent, ALL_ANNOTATIONS } from './learn-mode.js';
