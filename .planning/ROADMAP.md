@@ -12,7 +12,7 @@ Build a complete Aminet archive management system across 7 phases and ~40 plans.
 - Decimal phases (237.1, 237.2): Urgent insertions if needed (marked with INSERTED)
 
 - [x] **Phase 236: INDEX Infrastructure & Binary Parsers** - Parse Aminet's ~84,000-entry INDEX, build AmigaBinaryReader, and implement hunk/bootblock format parsers (completed 2026-02-19)
-- [ ] **Phase 237: Mirror State & Download Engine** - Selective package download with integrity verification, state tracking, and rate-limited HTTP fetching
+- [x] **Phase 237: Mirror State & Download Engine** - Selective package download with integrity verification, state tracking, and rate-limited HTTP fetching (completed 2026-02-19)
 - [ ] **Phase 238: Search, Browse & Collections** - Full-text search, category browsing, architecture filtering, and curated collection management
 - [ ] **Phase 239: Virus Scanner & Quarantine** - Signature-based scanning, heuristic hunk analysis, boot block detection, quarantine system, and scan orchestration
 - [ ] **Phase 240: Installation & Archive Extraction** - LhA/LZX extraction, filesystem placement, dependency detection, scan gate enforcement, and tool validation
@@ -181,7 +181,7 @@ Phase 237 ──────> 239  │ (scanner needs downloaded packages)
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 236. INDEX Infrastructure & Binary Parsers | 6/6 | Complete    | 2026-02-19 |
-| 237. Mirror State & Download Engine | 5/5 | In Progress|  |
+| 237. Mirror State & Download Engine | 5/5 | Complete   | 2026-02-19 |
 | 238. Search, Browse & Collections | 0/5 | Not started | - |
 | 239. Virus Scanner & Quarantine | 0/6 | Not started | - |
 | 240. Installation & Archive Extraction | 0/5 | Not started | - |

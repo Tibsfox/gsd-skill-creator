@@ -42,11 +42,11 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [x] **MIR-05**: Compute and store SHA-256 hash of all downloaded files
 - [x] **MIR-06**: Track per-package state: not-mirrored, downloading, mirrored, scan-pending, clean, infected, installed
 - [x] **MIR-07**: Persist mirror state to `.mirror-state.json` across sessions
-- [ ] **MIR-08**: Bulk download with configurable concurrency limit (default: 2)
-- [ ] **MIR-09**: Resume interrupted downloads
+- [x] **MIR-08**: Bulk download with configurable concurrency limit (default: 2)
+- [x] **MIR-09**: Resume interrupted downloads
 - [x] **MIR-10**: Detect upstream version changes via INDEX comparison
 - [x] **MIR-11**: Include User-Agent identification in HTTP requests
-- [ ] **MIR-12**: Respect rate limiting — configurable request delay between downloads
+- [x] **MIR-12**: Respect rate limiting — configurable request delay between downloads
 
 ### Virus Scanning
 
@@ -112,7 +112,7 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [ ] **NFR-03**: Signature scan of a single package completes in <2 seconds
 - [ ] **NFR-04**: Test suite achieves >=80% code coverage
 - [ ] **NFR-05**: No Kickstart ROM files distributed with the pack
-- [ ] **NFR-06**: Mirror downloads identify as GSD-Aminet-Pack and respect rate limits
+- [x] **NFR-06**: Mirror downloads identify as GSD-Aminet-Pack and respect rate limits
 - [ ] **NFR-07**: All SKILL.md files follow GSD skill format specification
 - [ ] **NFR-08**: All agent YAML follows GSD chipset architecture conventions
 - [ ] **NFR-09**: Virus signature database extensible without code changes
@@ -174,11 +174,11 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | MIR-05 | Phase 237 | Complete |
 | MIR-06 | Phase 237 | Complete |
 | MIR-07 | Phase 237 | Complete |
-| MIR-08 | Phase 237 | Pending |
-| MIR-09 | Phase 237 | Pending |
+| MIR-08 | Phase 237 | Complete |
+| MIR-09 | Phase 237 | Complete |
 | MIR-10 | Phase 237 | Pending |
 | MIR-11 | Phase 237 | Complete |
-| MIR-12 | Phase 237 | Pending |
+| MIR-12 | Phase 237 | Complete |
 | SCN-01 | Phase 239 | Pending |
 | SCN-02 | Phase 239 | Pending |
 | SCN-03 | Phase 236 | Complete |
@@ -226,7 +226,7 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | NFR-03 | Phase 239 | Pending |
 | NFR-04 | Phase 242 | Pending |
 | NFR-05 | Phase 241 | Pending |
-| NFR-06 | Phase 237 | Pending |
+| NFR-06 | Phase 237 | Complete |
 | NFR-07 | Phase 242 | Pending |
 | NFR-08 | Phase 242 | Pending |
 | NFR-09 | Phase 239 | Pending |
