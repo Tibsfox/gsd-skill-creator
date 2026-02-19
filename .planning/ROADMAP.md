@@ -67,7 +67,14 @@ Plans:
   3. The planning docs dashboard renders content that matches the actual `.planning/` directory state, and dashboard data collectors (topology, activity, budget, staging) produce correct output from real files
   4. Console upload zone accepts a markdown document and it arrives in the filesystem message bus outbox; staging layer resource manifest reaches the execution queue
   5. AMIGA ICD-based communication works across MC-1/ME-1/CE-1/GL-1 and AGC simulator integrates with its GSD-OS pack (block definitions, chipset config, dashboard widgets)
-**Plans**: TBD
+**Plans:** 6 plans
+Plans:
+- [ ] 225-01-PLAN.md -- Verify GSD-to-skill-creator observation wiring, wrapper commands, session hooks (INTEG-01, INTEG-02, INTEG-07)
+- [ ] 225-02-PLAN.md -- Verify chipset-to-skill-loading and agent topology integration (INTEG-03)
+- [ ] 225-03-PLAN.md -- Verify dashboard and data collectors reflect real .planning/ state (INTEG-04, INTEG-08)
+- [ ] 225-04-PLAN.md -- Verify console upload → message bus and staging manifest → execution queue (INTEG-05, INTEG-06)
+- [ ] 225-05-PLAN.md -- Verify AMIGA ICD inter-component communication and AGC/RFC pack integration (INTEG-09, INTEG-10)
+- [ ] 225-06-PLAN.md -- Verify remaining T1 checkpoints: GSD-OS, ISA, Workbench, LCP, educational packs (all INTEG)
 
 ### Phase 226: Behavior Audit (T2)
 **Goal**: Individual component behaviors are verified against their specifications -- token budgets enforce limits, pattern detection fires at correct thresholds, bounded learning constraints hold, dashboard metrics calculate correctly, AGC simulator is instruction-accurate, staging hygiene and trust models work, and security hardening prevents known attack vectors
@@ -135,8 +142,8 @@ Phases execute in numeric order: 223 → 224 → 225 → 226 → 227 → 228 →
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 223. Conformance Matrix | 6/6 | Complete    | 2026-02-19 |
-| 224. Foundation Audit (T0) | 3/3 | Complete   | 2026-02-19 |
-| 225. Integration Audit (T1) | 0/TBD | Not started | - |
+| 224. Foundation Audit (T0) | 3/3 | Complete    | 2026-02-19 |
+| 225. Integration Audit (T1) | 0/6 | Planned | - |
 | 226. Behavior Audit (T2) | 0/TBD | Not started | - |
 | 227. UX/Polish Audit (T3) | 0/TBD | Not started | - |
 | 228. End-to-End Verification | 0/TBD | Not started | - |
