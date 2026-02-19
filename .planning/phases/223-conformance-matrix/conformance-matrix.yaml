@@ -3405,23 +3405,29 @@ documents:
     claim: The simulated DSKY implements three 5-digit signed numeric displays (R1, R2, R3), COMP ACTY indicator, PROG/VERB/NOUN
       display registers, and a 19-key keyboard
     verification: unit-test
-    status: pending
+    status: pass
     notes: 'Files: src/agc/dsky-display.ts, dsky-keyboard.ts, dsky-commander.ts. Tests: dsky-display.test.ts, dsky-keyboard.test.ts,
       dsky-commander.test.ts'
     tier: T2
     depends_on:
     - agc-001
-    evidence: ''
+    evidence: '149 DSKY tests pass (display=57, keyboard=46, commander=46). Display: relay decoding for R1/R2/R3 (5-digit
+      signed), PROG/VERB/NOUN registers via channel 10. 11 annunciators via channel 11 (UPLINK_ACTY, TEMP, GIMBAL_LOCK,
+      PROG, RESTART, TRACKER, ALT, VEL, NO_ATT, STBY, OPR_ERR). COMP ACTY via channel 13. Keyboard: all 19 keys (10
+      numeric + 9 function) with correct octal codes. PRO routes to channel 32. KEYRUPT1 on key press.'
   - id: agc-012
     section: Part 3 > The DSKY Interface
     claim: DSKY supports VERB/NOUN command entry and responds with correct display output
     verification: unit-test
-    status: pending
+    status: pass
     notes: The dsky-commander.ts module handles VERB/NOUN command processing.
     tier: T2
     depends_on:
     - agc-001
-    evidence: ''
+    evidence: '46 commander tests pass. Full VERB/NOUN entry state machine: IDLE -> VERB_DIGIT_1 -> VERB_DIGIT_2 ->
+      NOUN_DIGIT_1 -> NOUN_DIGIT_2. VERB-3-5-NOUN-1-6-ENTR produces command {verb:35, noun:16}. Data entry modes
+      for V21/V22/V23 (DATA_SIGN -> DATA_DIGIT_1..5). CLR, RSET, KEY_REL key handling. Display feedback shows digits
+      as typed. Error handling for invalid sequences. Immutability verified.'
   - id: agc-013
     section: Part 3 > The Executive Monitor
     claim: A real-time visualization of the Executive and Waitlist shows core set allocation, waitlist queue, priority levels,
