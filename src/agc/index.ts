@@ -3,8 +3,9 @@
  *
  * Re-exports all public types and functions from the AGC module.
  * Covers Phase 213 (CPU & Memory), Phase 214 (Interrupts & Timing),
- * and Phase 216 (Executive, Waitlist, Restart Protection).
- * Downstream phases (217 DSKY, 218 Executive Monitor) import from here.
+ * Phase 216 (Executive, Waitlist, Restart Protection),
+ * and Phase 217 (DSKY Interface).
+ * Downstream phases (218 Executive Monitor, 219 Tools, 222 Integration) import from here.
  */
 
 // Types
@@ -216,3 +217,38 @@ export {
   getRestartTable,
   bailout,
 } from './restart.js';
+
+// DSKY Display (Phase 217)
+export type { DskyDisplayState, DskyDigit, DskySign, DisplayRegister2, DisplayRegister5, RelayWord } from './dsky-display.js';
+export {
+  createDskyDisplayState,
+  processChannel10,
+  processChannel11,
+  processChannel13,
+  relayCodeToDigit,
+  decodeRelayWord,
+  AnnunciatorId,
+  ANNUNCIATOR_BITS,
+  RELAY_CODE_TABLE,
+} from './dsky-display.js';
+
+// DSKY Keyboard (Phase 217)
+export type { DskyKeyboardState, KeyPressResult, KeyReleaseResult } from './dsky-keyboard.js';
+export {
+  DskyKeyId,
+  DSKY_KEY_CODES,
+  KEY_CODE_MAP,
+  createDskyKeyboardState,
+  pressKey,
+  releaseKey,
+} from './dsky-keyboard.js';
+
+// DSKY Commander (Phase 217)
+export type { DskyCommanderState, DskyCommand, KeyPressProcessResult, DisplayUpdates } from './dsky-commander.js';
+export {
+  DskyInputMode,
+  createDskyCommanderState,
+  processKeyPress,
+  isDataEntryVerb,
+  getDataRegister,
+} from './dsky-commander.js';
