@@ -1,0 +1,708 @@
+metadata:
+  version: 1
+  generated: "2026-02-19"
+  description: "Curated RFC index for the RFC Reference Skill"
+  protocol_families:
+    - http
+    - tls
+    - tcp
+    - dns
+    - ip
+    - quic
+    - oauth
+    - jwt
+    - json
+
+rfcs:
+  # ─── HTTP ───────────────────────────────────────────────────────────
+  - number: 2616
+    title: "Hypertext Transfer Protocol -- HTTP/1.1"
+    status: historic
+    date: "1999-06"
+    protocol_family: http
+    obsoletes: [2068]
+    obsoleted_by: [7230, 7231, 7232, 7233, 7234, 7235]
+    updates: []
+    updated_by: []
+    keywords: ["HTTP", "HTTP/1.1", "web", "request", "response"]
+    abstract_snippet: "Original HTTP/1.1 specification covering request methods, headers, and status codes"
+
+  - number: 5789
+    title: "PATCH Method for HTTP"
+    status: proposed_standard
+    date: "2010-03"
+    protocol_family: http
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["HTTP", "PATCH", "partial update", "method"]
+    abstract_snippet: "Defines the PATCH method for applying partial modifications to a resource"
+
+  - number: 6265
+    title: "HTTP State Management Mechanism"
+    status: proposed_standard
+    date: "2011-04"
+    protocol_family: http
+    obsoletes: [2965]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["HTTP", "cookies", "state management", "Set-Cookie"]
+    abstract_snippet: "Defines the Cookie and Set-Cookie HTTP headers for state management"
+
+  - number: 6455
+    title: "The WebSocket Protocol"
+    status: proposed_standard
+    date: "2011-12"
+    protocol_family: http
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["WebSocket", "bidirectional", "real-time", "upgrade"]
+    abstract_snippet: "Full-duplex communication channel over a single TCP connection via HTTP upgrade"
+
+  - number: 7540
+    title: "Hypertext Transfer Protocol Version 2 (HTTP/2)"
+    status: historic
+    date: "2015-05"
+    protocol_family: http
+    obsoletes: []
+    obsoleted_by: [9113]
+    updates: []
+    updated_by: []
+    keywords: ["HTTP/2", "multiplexing", "binary framing", "server push"]
+    abstract_snippet: "Binary framing protocol with multiplexed streams over a single TCP connection"
+
+  - number: 9110
+    title: "HTTP Semantics"
+    status: proposed_standard
+    date: "2022-06"
+    protocol_family: http
+    obsoletes: [7230, 7231, 7232, 7233, 7235]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["HTTP", "semantics", "methods", "status codes", "headers"]
+    abstract_snippet: "Core HTTP semantics common to all versions including methods, status codes, and header fields"
+
+  - number: 9111
+    title: "HTTP Caching"
+    status: proposed_standard
+    date: "2022-06"
+    protocol_family: http
+    obsoletes: [7234]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["HTTP", "caching", "Cache-Control", "freshness", "validation"]
+    abstract_snippet: "Defines HTTP caches and associated header fields for controlling cache behavior"
+
+  - number: 9112
+    title: "HTTP/1.1"
+    status: proposed_standard
+    date: "2022-06"
+    protocol_family: http
+    obsoletes: [7230]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["HTTP/1.1", "message syntax", "connection management", "chunked"]
+    abstract_snippet: "HTTP/1.1 message syntax and connection management"
+
+  - number: 9113
+    title: "HTTP/2"
+    status: proposed_standard
+    date: "2022-06"
+    protocol_family: http
+    obsoletes: [7540, 8740]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["HTTP/2", "multiplexing", "binary framing", "HPACK"]
+    abstract_snippet: "Revised HTTP/2 specification with binary framing and multiplexed streams"
+
+  - number: 9114
+    title: "HTTP/3"
+    status: proposed_standard
+    date: "2022-06"
+    protocol_family: http
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["HTTP/3", "QUIC", "UDP", "multiplexing", "QPACK"]
+    abstract_snippet: "HTTP mapping over QUIC transport with independent stream multiplexing"
+
+  # ─── TLS ────────────────────────────────────────────────────────────
+  - number: 4346
+    title: "The Transport Layer Security (TLS) Protocol Version 1.1"
+    status: historic
+    date: "2006-04"
+    protocol_family: tls
+    obsoletes: []
+    obsoleted_by: [5246]
+    updates: []
+    updated_by: []
+    keywords: ["TLS", "TLS 1.1", "encryption", "transport security"]
+    abstract_snippet: "TLS 1.1 protocol specification with CBC implicit IV fix"
+
+  - number: 5246
+    title: "The Transport Layer Security (TLS) Protocol Version 1.2"
+    status: proposed_standard
+    date: "2008-08"
+    protocol_family: tls
+    obsoletes: [4346]
+    obsoleted_by: []
+    updates: []
+    updated_by: [8446]
+    keywords: ["TLS", "TLS 1.2", "encryption", "handshake", "cipher suites"]
+    abstract_snippet: "TLS 1.2 protocol with SHA-256 default and authenticated encryption"
+
+  - number: 6066
+    title: "Transport Layer Security (TLS) Extensions: Extension Definitions"
+    status: proposed_standard
+    date: "2011-01"
+    protocol_family: tls
+    obsoletes: [4366]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["TLS", "extensions", "SNI", "server name indication"]
+    abstract_snippet: "Defines TLS extensions including Server Name Indication (SNI)"
+
+  - number: 7301
+    title: "Transport Layer Security (TLS) Application-Layer Protocol Negotiation Extension"
+    status: proposed_standard
+    date: "2014-07"
+    protocol_family: tls
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["TLS", "ALPN", "protocol negotiation", "h2", "HTTP/2"]
+    abstract_snippet: "ALPN extension for negotiating application protocol during TLS handshake"
+
+  - number: 8446
+    title: "The Transport Layer Security (TLS) Protocol Version 1.3"
+    status: proposed_standard
+    date: "2018-08"
+    protocol_family: tls
+    obsoletes: []
+    obsoleted_by: []
+    updates: [5246]
+    updated_by: []
+    keywords: ["TLS", "TLS 1.3", "encryption", "0-RTT", "handshake"]
+    abstract_snippet: "Major TLS revision with 1-RTT handshake, forward secrecy, and removal of legacy algorithms"
+
+  - number: 8740
+    title: "Using TLS 1.3 with HTTP/2"
+    status: historic
+    date: "2020-02"
+    protocol_family: tls
+    obsoletes: []
+    obsoleted_by: [9113]
+    updates: [7540]
+    updated_by: []
+    keywords: ["TLS 1.3", "HTTP/2", "post-handshake authentication"]
+    abstract_snippet: "Constraints for using TLS 1.3 features with HTTP/2"
+
+  - number: 8996
+    title: "Deprecating TLS 1.0 and TLS 1.1"
+    status: best_current_practice
+    date: "2021-03"
+    protocol_family: tls
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["TLS", "deprecation", "TLS 1.0", "TLS 1.1", "security"]
+    abstract_snippet: "Formally deprecates TLS 1.0 and TLS 1.1 due to known security weaknesses"
+
+  # ─── TCP ────────────────────────────────────────────────────────────
+  - number: 793
+    title: "Transmission Control Protocol"
+    status: historic
+    date: "1981-09"
+    protocol_family: tcp
+    obsoletes: []
+    obsoleted_by: [9293]
+    updates: []
+    updated_by: []
+    keywords: ["TCP", "transport", "reliable delivery", "connection-oriented"]
+    abstract_snippet: "Original TCP specification defining reliable, ordered, byte-stream delivery"
+
+  - number: 5681
+    title: "TCP Congestion Control"
+    status: draft_standard
+    date: "2009-09"
+    protocol_family: tcp
+    obsoletes: [2581]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["TCP", "congestion control", "slow start", "congestion avoidance", "fast retransmit"]
+    abstract_snippet: "Defines slow start, congestion avoidance, fast retransmit, and fast recovery for TCP"
+
+  - number: 6298
+    title: "Computing TCP's Retransmission Timer"
+    status: proposed_standard
+    date: "2011-06"
+    protocol_family: tcp
+    obsoletes: [2988]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["TCP", "RTO", "retransmission timer", "round-trip time"]
+    abstract_snippet: "Algorithm for computing TCP retransmission timeout from RTT measurements"
+
+  - number: 7323
+    title: "TCP Extensions for High Performance"
+    status: proposed_standard
+    date: "2014-09"
+    protocol_family: tcp
+    obsoletes: [1323]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["TCP", "window scaling", "timestamps", "PAWS", "high performance"]
+    abstract_snippet: "Window scaling, timestamps, and PAWS for high-bandwidth long-delay TCP paths"
+
+  - number: 8312
+    title: "TCP Prague Congestion Control"
+    status: experimental
+    date: "2023-11"
+    protocol_family: tcp
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["TCP", "Prague", "L4S", "ECN", "congestion control", "low latency"]
+    abstract_snippet: "Scalable congestion control for Low Latency Low Loss Scalable Throughput (L4S)"
+
+  - number: 9293
+    title: "Transmission Control Protocol (TCP)"
+    status: internet_standard
+    date: "2022-08"
+    protocol_family: tcp
+    obsoletes: [793, 879, 2873, 6093, 6429, 6528, 6691]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["TCP", "transport", "reliable delivery", "specification"]
+    abstract_snippet: "Consolidated TCP specification replacing the original RFC 793 and related updates"
+
+  # ─── DNS ────────────────────────────────────────────────────────────
+  - number: 1035
+    title: "Domain Names - Implementation and Specification"
+    status: internet_standard
+    date: "1987-11"
+    protocol_family: dns
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: [3658, 6604, 8553]
+    keywords: ["DNS", "domain names", "resolver", "name server", "zone transfer"]
+    abstract_snippet: "DNS protocol implementation details including message format, transport, and name resolution"
+
+  - number: 4033
+    title: "DNS Security Introduction and Requirements"
+    status: proposed_standard
+    date: "2005-03"
+    protocol_family: dns
+    obsoletes: [2535]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["DNSSEC", "DNS security", "authentication", "data integrity"]
+    abstract_snippet: "Introduction to DNSSEC and its security model for DNS data authentication"
+
+  - number: 6891
+    title: "Extension Mechanisms for DNS (EDNS(0))"
+    status: internet_standard
+    date: "2013-04"
+    protocol_family: dns
+    obsoletes: [2671]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["DNS", "EDNS", "EDNS0", "extension", "OPT record", "larger packets"]
+    abstract_snippet: "OPT pseudo-RR for extending DNS message size and signaling capabilities"
+
+  - number: 7858
+    title: "Specification for DNS over Transport Layer Security (TLS)"
+    status: proposed_standard
+    date: "2016-05"
+    protocol_family: dns
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["DNS", "DoT", "DNS over TLS", "encrypted DNS", "privacy"]
+    abstract_snippet: "DNS query and response transport over TLS for confidentiality"
+
+  - number: 8484
+    title: "DNS Queries over HTTPS (DoH)"
+    status: proposed_standard
+    date: "2018-10"
+    protocol_family: dns
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["DNS", "DoH", "DNS over HTTPS", "encrypted DNS", "privacy"]
+    abstract_snippet: "DNS query and response transport over HTTPS using wire-format DNS messages"
+
+  - number: 8499
+    title: "DNS Terminology"
+    status: best_current_practice
+    date: "2019-01"
+    protocol_family: dns
+    obsoletes: [7719]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["DNS", "terminology", "definitions", "glossary"]
+    abstract_snippet: "Comprehensive glossary of DNS-related terms and definitions"
+
+  - number: 9276
+    title: "Guidance for NSEC3 Parameter Settings"
+    status: best_current_practice
+    date: "2022-08"
+    protocol_family: dns
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["DNSSEC", "NSEC3", "parameters", "hash iterations", "salt"]
+    abstract_snippet: "Operational guidance for NSEC3 parameter selection in DNSSEC deployments"
+
+  # ─── IP ─────────────────────────────────────────────────────────────
+  - number: 791
+    title: "Internet Protocol"
+    status: internet_standard
+    date: "1981-09"
+    protocol_family: ip
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["IPv4", "internet protocol", "datagram", "addressing", "fragmentation"]
+    abstract_snippet: "IPv4 specification defining datagram format, addressing, and fragmentation"
+
+  - number: 1918
+    title: "Address Allocation for Private Internets"
+    status: best_current_practice
+    date: "1996-02"
+    protocol_family: ip
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["private addresses", "RFC 1918", "10.0.0.0", "192.168.0.0", "NAT"]
+    abstract_snippet: "Defines private IPv4 address ranges for use in non-connected networks"
+
+  - number: 4291
+    title: "IP Version 6 Addressing Architecture"
+    status: draft_standard
+    date: "2006-02"
+    protocol_family: ip
+    obsoletes: [3513]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["IPv6", "addressing", "multicast", "link-local", "scope"]
+    abstract_snippet: "IPv6 address types, formats, and assignment policies"
+
+  - number: 4632
+    title: "Classless Inter-domain Routing (CIDR): The Internet Address Assignment and Aggregation Plan"
+    status: best_current_practice
+    date: "2006-08"
+    protocol_family: ip
+    obsoletes: [1519]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["CIDR", "classless", "routing", "address aggregation", "prefix"]
+    abstract_snippet: "CIDR addressing and routing architecture replacing classful network design"
+
+  - number: 6890
+    title: "Special-Purpose IP Address Registries"
+    status: best_current_practice
+    date: "2013-04"
+    protocol_family: ip
+    obsoletes: [5765, 5736, 5737]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["special-purpose", "reserved addresses", "IANA", "documentation"]
+    abstract_snippet: "IANA registries for special-purpose IPv4 and IPv6 address blocks"
+
+  - number: 8200
+    title: "Internet Protocol, Version 6 (IPv6) Specification"
+    status: internet_standard
+    date: "2017-07"
+    protocol_family: ip
+    obsoletes: [2460]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["IPv6", "internet protocol", "extension headers", "flow label"]
+    abstract_snippet: "IPv6 packet format, extension headers, and processing rules"
+
+  # ─── QUIC ───────────────────────────────────────────────────────────
+  - number: 9000
+    title: "QUIC: A UDP-Based Multiplexed and Secure Transport"
+    status: proposed_standard
+    date: "2021-05"
+    protocol_family: quic
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["QUIC", "UDP", "transport", "multiplexing", "encryption"]
+    abstract_snippet: "UDP-based transport with built-in TLS 1.3, stream multiplexing, and connection migration"
+
+  - number: 9001
+    title: "QUIC Loss Detection and Congestion Control"
+    status: proposed_standard
+    date: "2021-05"
+    protocol_family: quic
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["QUIC", "loss detection", "congestion control", "recovery"]
+    abstract_snippet: "Loss detection and congestion control mechanisms for QUIC transport"
+
+  - number: 9002
+    title: "Using TLS to Secure QUIC"
+    status: proposed_standard
+    date: "2021-05"
+    protocol_family: quic
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["QUIC", "TLS", "encryption", "handshake", "key update"]
+    abstract_snippet: "Integration of TLS 1.3 into QUIC for connection security and key management"
+
+  - number: 9221
+    title: "An Unreliable Datagram Extension to QUIC"
+    status: proposed_standard
+    date: "2022-03"
+    protocol_family: quic
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["QUIC", "datagrams", "unreliable", "UDP-like", "real-time"]
+    abstract_snippet: "Extension for sending unreliable datagrams over QUIC connections"
+
+  - number: 9369
+    title: "QUIC Version 2"
+    status: proposed_standard
+    date: "2023-05"
+    protocol_family: quic
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["QUIC", "version 2", "v2", "version negotiation"]
+    abstract_snippet: "QUIC v2 with new version number for improved version negotiation testing"
+
+  # ─── OAuth ──────────────────────────────────────────────────────────
+  - number: 6749
+    title: "The OAuth 2.0 Authorization Framework"
+    status: proposed_standard
+    date: "2012-10"
+    protocol_family: oauth
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["OAuth", "OAuth 2.0", "authorization", "access token", "grant types"]
+    abstract_snippet: "OAuth 2.0 authorization framework for third-party access delegation"
+
+  - number: 6750
+    title: "The OAuth 2.0 Authorization Framework: Bearer Token Usage"
+    status: proposed_standard
+    date: "2012-10"
+    protocol_family: oauth
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["OAuth", "bearer token", "authorization header", "token usage"]
+    abstract_snippet: "How to use bearer tokens in HTTP requests for OAuth 2.0 authorization"
+
+  - number: 7519
+    title: "JSON Web Token (JWT)"
+    status: proposed_standard
+    date: "2015-05"
+    protocol_family: oauth
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["JWT", "JSON Web Token", "claims", "authentication", "authorization"]
+    abstract_snippet: "Compact URL-safe means of representing claims between two parties"
+
+  - number: 7636
+    title: "Proof Key for Code Exchange by OAuth Public Clients"
+    status: proposed_standard
+    date: "2015-09"
+    protocol_family: oauth
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["OAuth", "PKCE", "code verifier", "code challenge", "public client"]
+    abstract_snippet: "PKCE extension to prevent authorization code interception attacks"
+
+  - number: 8414
+    title: "OAuth 2.0 Authorization Server Metadata"
+    status: proposed_standard
+    date: "2018-06"
+    protocol_family: oauth
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["OAuth", "metadata", "discovery", "well-known", "authorization server"]
+    abstract_snippet: "Machine-readable metadata for OAuth 2.0 authorization server discovery"
+
+  - number: 9449
+    title: "OAuth 2.0 Demonstrating Proof of Possession (DPoP)"
+    status: proposed_standard
+    date: "2023-09"
+    protocol_family: oauth
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["OAuth", "DPoP", "proof of possession", "token binding", "sender constraint"]
+    abstract_snippet: "Application-level mechanism for sender-constraining OAuth access and refresh tokens"
+
+  # ─── JWT ────────────────────────────────────────────────────────────
+  - number: 7515
+    title: "JSON Web Signature (JWS)"
+    status: proposed_standard
+    date: "2015-05"
+    protocol_family: jwt
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["JWS", "JSON Web Signature", "digital signature", "HMAC", "integrity"]
+    abstract_snippet: "Data structure for digitally signed or MACed content using JSON-based serialization"
+
+  - number: 7516
+    title: "JSON Web Encryption (JWE)"
+    status: proposed_standard
+    date: "2015-05"
+    protocol_family: jwt
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["JWE", "JSON Web Encryption", "content encryption", "key wrapping"]
+    abstract_snippet: "Data structure for encrypted content using JSON-based serialization"
+
+  - number: 7517
+    title: "JSON Web Key (JWK)"
+    status: proposed_standard
+    date: "2015-05"
+    protocol_family: jwt
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["JWK", "JSON Web Key", "key representation", "key set", "JWKS"]
+    abstract_snippet: "JSON data structure for representing cryptographic keys"
+
+  - number: 7518
+    title: "JSON Web Algorithms (JWA)"
+    status: proposed_standard
+    date: "2015-05"
+    protocol_family: jwt
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["JWA", "JSON Web Algorithms", "RS256", "ES256", "cryptographic algorithms"]
+    abstract_snippet: "Cryptographic algorithms and identifiers for use with JWS, JWE, and JWK"
+
+  - number: 7519
+    title: "JSON Web Token (JWT)"
+    status: proposed_standard
+    date: "2015-05"
+    protocol_family: jwt
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["JWT", "JSON Web Token", "claims", "authentication", "id_token"]
+    abstract_snippet: "Compact URL-safe means of representing claims between two parties"
+
+  # ─── JSON ───────────────────────────────────────────────────────────
+  - number: 6901
+    title: "JavaScript Object Notation (JSON) Pointer"
+    status: proposed_standard
+    date: "2013-04"
+    protocol_family: json
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["JSON", "pointer", "path", "reference", "navigation"]
+    abstract_snippet: "String syntax for identifying specific values within a JSON document"
+
+  - number: 6902
+    title: "JavaScript Object Notation (JSON) Patch"
+    status: proposed_standard
+    date: "2013-04"
+    protocol_family: json
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["JSON", "patch", "operations", "add", "remove", "replace"]
+    abstract_snippet: "Format for expressing a sequence of operations to apply to a JSON document"
+
+  - number: 7396
+    title: "JSON Merge Patch"
+    status: proposed_standard
+    date: "2014-10"
+    protocol_family: json
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["JSON", "merge patch", "partial update", "document modification"]
+    abstract_snippet: "Format for describing changes to a JSON document using merge semantics"
+
+  - number: 8259
+    title: "The JavaScript Object Notation (JSON) Data Interchange Format"
+    status: internet_standard
+    date: "2017-12"
+    protocol_family: json
+    obsoletes: [7159]
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["JSON", "data interchange", "text format", "serialization"]
+    abstract_snippet: "Lightweight text-based data interchange format derived from JavaScript"
+
+  - number: 9535
+    title: "JSONPath: Query Expressions for JSON"
+    status: proposed_standard
+    date: "2024-02"
+    protocol_family: json
+    obsoletes: []
+    obsoleted_by: []
+    updates: []
+    updated_by: []
+    keywords: ["JSON", "JSONPath", "query", "filter", "selector"]
+    abstract_snippet: "Query language for selecting and extracting values from JSON documents"
