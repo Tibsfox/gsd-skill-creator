@@ -2,19 +2,19 @@
 
 ## Current Position
 
-Phase: 211 of 222 (Governance Charter & Documentation) -- COMPLETE
-Plan: 3 of 3 in current phase (COMPLETE)
-Status: Phase 211 complete -- 3 plans, 6 commits, 68 new GL-1 tests (829 AMIGA tests total)
-Last activity: 2026-02-19 -- Completed Phase 211 (Governance Charter & Documentation)
+Phase: 213 of 222 (AGC CPU & Memory) -- COMPLETE
+Plan: 4 of 4 in current phase (COMPLETE)
+Status: Phase 213 complete -- 4 plans, 10 commits, 210 AGC tests (all passing)
+Last activity: 2026-02-19 -- Completed Phase 213 (AGC CPU & Memory)
 
-Progress: [##############..........] 58% (14/24 phases)
+Progress: [###############.........] 63% (15/24 phases)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.23 Project AMIGA -- Phase 211 complete, GL-1 governance charter and documentation shipped
+**Current focus:** v1.23 Project AMIGA -- Phase 213 complete, AGC Block II CPU with 210 tests
 
 ## Current Milestone
 
@@ -40,6 +40,8 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 11. Phase 211 (Governance Charter & Documentation) COMPLETE -- 3 plans, 6 commits, 68 GL-1 tests
 12. Phase 209 (Commons Engine Data & Recording) COMPLETE -- 4 plans, 8 commits, 135 CE-1 tests
 13. Full AMIGA test suite: 865 tests passing across 31 test files (zero regressions)
+14. Phase 213 (AGC CPU & Memory) COMPLETE -- 4 plans, 10 commits, 210 AGC tests
+15. AGC module: types, registers, memory (bank switching), ALU (ones' complement), 38 instructions, decoder, CPU (fetch-decode-execute), barrel index
 
 ## Decisions
 
@@ -95,6 +97,15 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 - InvocationRecorder has NO direct dependency on TelemetryEmitter -- pure event-driven design
 - Token architecture is specification only (not implementation) per Out of Scope
 - CE-1 barrel follows same pattern as MC-1, ME-1, and GL-1 barrel indexes
+- AGC types use branded number types (Word15, Word16, Address12) for type safety without runtime cost
+- AGC registers use immutable pattern: setRegister returns new state, BB/EBANK/FBANK sync on write
+- AGC edit registers (CYR/SR/CYL/EDOP) perform bit manipulation on write, reading returns transformed value
+- AGC memory uses resolveAddress for bank switching: EBANK (3-bit, 8 banks), FBANK (5-bit, 36 banks), superbank
+- AGC ALU uses iterative end-around carry (max 2 passes) for ones' complement addition
+- AGC quarter-code instructions (opcodes 2, 5) use 10-bit effective address (bits 9-0)
+- AGC INDEX adds to full instruction word before decoding (can modify opcode and address)
+- AGC CPU Z advances to Z+1 before instruction execution; branches override Z
+- AGC barrel index at src/agc/index.ts exports all types and functions for downstream phases
 
 ## Accumulated Context
 
@@ -119,7 +130,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Phase 209 (Commons Engine Data & Recording) complete -- 4 plans, 8 commits, 135 CE-1 tests
+Stopped at: Phase 213 (AGC CPU & Memory) complete -- 4 plans, 10 commits, 210 AGC tests
 
 ### Key Files
 - `.planning/ROADMAP.md` -- 24 phases across 5 waves
@@ -150,3 +161,11 @@ Stopped at: Phase 209 (Commons Engine Data & Recording) complete -- 4 plans, 8 c
 - `src/amiga/gl1/weighting-docs.ts` -- Weighting algorithm parameter documentation (frequency/critical-path/depth-decay)
 - `src/amiga/gl1/dispute-record.ts` -- Governance dispute record lifecycle extending ICD-04
 - `src/amiga/gl1/index.ts` -- GL-1 barrel exports (Phase 211)
+- `src/agc/types.ts` -- AGC foundation types (Word15, Word16, Address12, RegisterId, masks)
+- `src/agc/registers.ts` -- Immutable register file with edit register transforms (CYR/SR/CYL/EDOP)
+- `src/agc/memory.ts` -- Memory system with bank switching (EBANK/FBANK/superbank)
+- `src/agc/alu.ts` -- Ones' complement arithmetic (add/sub/mul/div/overflow/diminish)
+- `src/agc/instructions.ts` -- All 38 Block II instructions (15 basic + 18 extracode + 5 special)
+- `src/agc/decoder.ts` -- Instruction decoder for basic/extracode/quarter-code encodings
+- `src/agc/cpu.ts` -- CPU step function (fetch-decode-execute cycle)
+- `src/agc/index.ts` -- AGC barrel index re-exporting all public APIs
