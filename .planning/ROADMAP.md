@@ -67,7 +67,7 @@ Plans:
   3. The planning docs dashboard renders content that matches the actual `.planning/` directory state, and dashboard data collectors (topology, activity, budget, staging) produce correct output from real files
   4. Console upload zone accepts a markdown document and it arrives in the filesystem message bus outbox; staging layer resource manifest reaches the execution queue
   5. AMIGA ICD-based communication works across MC-1/ME-1/CE-1/GL-1 and AGC simulator integrates with its GSD-OS pack (block definitions, chipset config, dashboard widgets)
-**Plans:** 6 plans
+**Plans:** 5/6 plans executed
 Plans:
 - [ ] 225-01-PLAN.md -- Verify GSD-to-skill-creator observation wiring, wrapper commands, session hooks (INTEG-01, INTEG-02, INTEG-07)
 - [ ] 225-02-PLAN.md -- Verify chipset-to-skill-loading and agent topology integration (INTEG-03)
@@ -143,7 +143,7 @@ Phases execute in numeric order: 223 → 224 → 225 → 226 → 227 → 228 →
 |-------|----------------|--------|-----------|
 | 223. Conformance Matrix | 6/6 | Complete    | 2026-02-19 |
 | 224. Foundation Audit (T0) | 3/3 | Complete    | 2026-02-19 |
-| 225. Integration Audit (T1) | 1/6 | Active | - |
+| 225. Integration Audit (T1) | 5/6 | In Progress|  |
 | 226. Behavior Audit (T2) | 0/TBD | Not started | - |
 | 227. UX/Polish Audit (T3) | 0/TBD | Not started | - |
 | 228. End-to-End Verification | 0/TBD | Not started | - |
