@@ -11,7 +11,7 @@
 - Integer phases (1, 2, 3): Planned milestone work
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 223: Conformance Matrix** - Build the YAML matrix covering every "In Scope v1" claim across 18 vision documents with tier triage and dependency graph
+- [x] **Phase 223: Conformance Matrix** - Build the YAML matrix covering every "In Scope v1" claim across 18 vision documents with tier triage and dependency graph (completed 2026-02-19)
 - [ ] **Phase 224: Foundation Audit (T0)** - Verify core GSD lifecycle, .planning/ structure, skill loading pipeline, state management, and build health
 - [ ] **Phase 225: Integration Audit (T1)** - Verify cross-component wiring: chipset-to-skill-creator, dashboard-to-planning, staging-to-execution, AMIGA ICDs, AGC pack
 - [ ] **Phase 226: Behavior Audit (T2)** - Verify individual component correctness: token budgets, pattern detection, bounded learning, dashboard metrics, AGC simulator, staging hygiene, security hardening
@@ -32,7 +32,7 @@
   3. Every checkpoint is assigned to exactly one tier (T0/T1/T2/T3) and the tier assignments match the audit flow logic (foundation before integration before behavior before polish)
   4. The dependency graph is queryable -- given any checkpoint, its blockers can be listed
   5. Per-tier effort estimates exist in a companion audit plan document
-**Plans:** 4/6 plans executed
+**Plans:** 6/6 plans complete
 Plans:
 - [ ] 223-01-PLAN.md -- Extract checkpoints from core architecture docs (skill-creator, chipset, silicon, AMIGA leverage, agentic report)
 - [ ] 223-02-PLAN.md -- Extract checkpoints from ISA, staging layer, and planning docs visions
@@ -51,7 +51,11 @@ Plans:
   3. The 6-stage skill loading pipeline (Score through Load) executes end-to-end and loads the correct skills in the correct order
   4. `npm test` exits 0 on a clean checkout and `tsc --noEmit` reports zero errors
   5. Subagent spawning (executor, planner, verifier) and filesystem message bus (inbox/outbox) both function correctly
-**Plans**: TBD
+**Plans:** 1/3 plans executed
+Plans:
+- [ ] 224-01-PLAN.md -- Build health: fix TypeScript errors and test failures (FOUND-07, FOUND-08)
+- [ ] 224-02-PLAN.md -- Verify skill loading pipeline, pattern detection, orchestrator, bounded learning (FOUND-03)
+- [ ] 224-03-PLAN.md -- Verify GSD lifecycle, .planning/ structure, state tracking, subagents, message bus (FOUND-01, FOUND-02, FOUND-04, FOUND-05, FOUND-06)
 
 ### Phase 225: Integration Audit (T1)
 **Goal**: Cross-component wiring is verified -- GSD triggers skill-creator observations, skill-creator output feeds back into GSD, chipset config affects loading, dashboard reflects real state, console routes through message bus, staging reaches execution, AMIGA ICDs work across components, and AGC integrates with GSD-OS
@@ -130,8 +134,8 @@ Phases execute in numeric order: 223 → 224 → 225 → 226 → 227 → 228 →
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 223. Conformance Matrix | 4/6 | In Progress|  |
-| 224. Foundation Audit (T0) | 0/TBD | Not started | - |
+| 223. Conformance Matrix | 6/6 | Complete    | 2026-02-19 |
+| 224. Foundation Audit (T0) | 1/3 | In Progress|  |
 | 225. Integration Audit (T1) | 0/TBD | Not started | - |
 | 226. Behavior Audit (T2) | 0/TBD | Not started | - |
 | 227. UX/Polish Audit (T3) | 0/TBD | Not started | - |
