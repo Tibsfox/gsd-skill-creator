@@ -11,9 +11,9 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.25 — GSD Ecosystem Integration
 Phase: 235 (5 of 5) — Partial-Build Compatibility Matrix
-Plan: 3 of 3 in current phase
+Plan: 3 of 3 in current phase (all complete)
 Status: Phase 235 complete — all plans done, milestone ready for completion
-Last activity: 2026-02-19 — Plan 235-03 complete (3-tier capability probe protocol with JSON schema and per-component marker paths)
+Last activity: 2026-02-19 — Plan 235-02 complete (degradation specs + standalone modes for all 16 DAG nodes)
 
 Progress: [####################] 100%
 
@@ -21,7 +21,7 @@ Progress: [####################] 100%
 
 **Velocity:**
 - Total plans completed: 15
-- Average duration: 4.8m
+- Average duration: 4.9m
 - Total execution time: 1.2 hours
 
 **By Phase:**
@@ -32,7 +32,7 @@ Progress: [####################] 100%
 | 232 | 3 | 13m | 4.3m |
 | 233 | 2 | 8m | 4.0m |
 | 234 | 3 | 15m | 5.0m |
-| 235 | 3 | 22m | 7.3m |
+| 235 | 3 | 23m | 7.7m |
 
 *Updated after each plan completion*
 
@@ -99,6 +99,9 @@ Recent decisions affecting current work:
 - [235-03]: agc-learning is not a DAG node; AGC lives under gsd-isa; amiga-workbench is the 16th internal node
 - [235-03]: Tier 3 probe implementation via EventDispatcher subscriber registration (no separate mechanism)
 - [235-03]: Aspirational vs absent: aspirational = known + planned; absent = not present in this build
+- [235-02]: Severity deterministic from edge type: hard-blocks = BROKEN, soft-enhances = DEGRADED, superseded = MINIMAL-IMPACT
+- [235-02]: No MEDIUM standalone viability -- sharp divide between self-sufficient (HIGH) and dependent (NONE/LOW)
+- [235-02]: gsd-os rates LOW (Tauri/xterm.js/PTY provides functional terminal without dependencies); lcp rates LOW (hard-blocks are external prereqs)
 
 ### Key Context
 
@@ -120,5 +123,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 235-01-PLAN.md (48-edge compatibility matrix with known-issues cross-reference) — all v1.25 plans complete, milestone ready for completion
+Stopped at: Completed 235-02-PLAN.md (degradation specs + standalone modes) — all v1.25 plans now complete, milestone ready for completion
 Resume file: None
