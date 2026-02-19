@@ -20,9 +20,9 @@ Progress: [####################] 100%
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 14
-- Average duration: 4.4m
-- Total execution time: 1.03 hours
+- Total plans completed: 15
+- Average duration: 4.8m
+- Total execution time: 1.2 hours
 
 **By Phase:**
 
@@ -32,7 +32,7 @@ Progress: [####################] 100%
 | 232 | 3 | 13m | 4.3m |
 | 233 | 2 | 8m | 4.0m |
 | 234 | 3 | 15m | 5.0m |
-| 235 | 3 | 12m | 4.0m |
+| 235 | 3 | 22m | 7.3m |
 
 *Updated after each plan completion*
 
@@ -92,6 +92,9 @@ Recent decisions affecting current work:
 - [234-03]: Fixtures are append-only (never deleted) -- old fixtures become regression tests
 - [234-03]: 3 audit exceptions: watcher.rs (permanent), dashboard/refresh.ts (pending migration), test files (permanent)
 - [234-03]: Audit automation via shell script with non-zero exit on unexpected findings
+- [235-01]: Vision amendments (Group 8, 13 items) classified as Resolved, not deferred -- reconciled documentation, not compatibility concerns
+- [235-01]: 11 edges documentation-only (external/deferred/both-aspirational targets); 37 edges get full degradation tables
+- [235-01]: Edge inventory soft-enhances count corrected from 19 to 20 (edge #46 was undercounted in source summary)
 - [235-03]: Detection tiers are cumulative (3 subsumes 2 subsumes 1), not alternatives
 - [235-03]: agc-learning is not a DAG node; AGC lives under gsd-isa; amiga-workbench is the 16th internal node
 - [235-03]: Tier 3 probe implementation via EventDispatcher subscriber registration (no separate mechanism)
@@ -117,5 +120,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 235-03-PLAN.md (3-tier capability probe protocol with JSON schema and per-component marker paths) — Phase 235 complete, all v1.25 phases done
+Stopped at: Completed 235-01-PLAN.md (48-edge compatibility matrix with known-issues cross-reference) — all v1.25 plans complete, milestone ready for completion
 Resume file: None
