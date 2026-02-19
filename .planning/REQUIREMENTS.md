@@ -52,7 +52,7 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 
 - [ ] **SCN-01**: Signature-based scanning against a database of >=50 known Amiga virus byte patterns
 - [ ] **SCN-02**: Detect the 20 most common Amiga viruses by signature (SCA, Byte Bandit, Lamer Exterminator, IRQ, BGS9, HNY96, Saddam, DASA, etc.)
-- [ ] **SCN-03**: Parse AmigaOS hunk executable format (HUNK_HEADER through HUNK_END)
+- [x] **SCN-03**: Parse AmigaOS hunk executable format (HUNK_HEADER through HUNK_END)
 - [ ] **SCN-04**: Heuristic analysis detecting anomalous hunk structures and known infection patterns
 - [ ] **SCN-05**: Boot block analysis detecting unauthorized trackdisk.device access patterns
 - [ ] **SCN-06**: Quarantine system — move infected files to `.quarantine/` with metadata
@@ -181,7 +181,7 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | MIR-12 | Phase 237 | Pending |
 | SCN-01 | Phase 239 | Pending |
 | SCN-02 | Phase 239 | Pending |
-| SCN-03 | Phase 236 | Pending |
+| SCN-03 | Phase 236 | Complete |
 | SCN-04 | Phase 239 | Pending |
 | SCN-05 | Phase 239 | Pending |
 | SCN-06 | Phase 239 | Pending |
