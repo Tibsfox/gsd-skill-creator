@@ -10,6 +10,7 @@
  * - MC-1 Control Surface (Dashboard, AlertRenderer, TelemetryConsumer, CommandParser)
  * - ME-1 Mission Environment (Manifest, TelemetryEmitter, Provisioner, PhaseEngine, GateController, SwarmCoordinator, ArchiveWriter)
  * - Integration (MissionController -- MC-1/ME-1 cross-component harness)
+ * - CE-1 Commons Engine (AttributionLedger, ContributionRegistry, InvocationRecorder, TokenArchitecture)
  * - GL-1 Governance Layer (Charter, Weighting Docs, Dispute Records)
  */
 
@@ -50,6 +51,9 @@ export * from './me1/index.js';
 
 // Integration (MC-1/ME-1 cross-component)
 export * from './integration/index.js';
+
+// CE-1 Commons Engine
+export * from './ce1/index.js';
 
 // GL-1 Governance Layer
 export * from './gl1/index.js';
