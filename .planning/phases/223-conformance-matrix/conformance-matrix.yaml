@@ -15,8 +15,8 @@ matrix_metadata:
     T2: 180
     T3: 64
   checkpoints_by_status:
-    pending: 336
-    pass: 0
+    pending: 329
+    pass: 7
     fail: 0
     amended: 0
     deferred: 0
@@ -59,11 +59,15 @@ documents:
           Skill-creator supports user-level (~/.claude/) and project-level (.claude/) skill scoping, with project-level
           taking precedence
         verification: unit-test
-        status: pending
-        notes: ""
+        status: pass
+        notes: "Scope system implemented with explicit precedence logic"
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: >-
+          SkillScope type ('user'|'project') at src/types/scope.ts with getSkillsBasePath returning ~/.claude/skills or
+          .claude/skills. resolveSkill() at src/cli/commands/resolve.ts implements precedence: checks project first, marks
+          user as shadowed. listAllScopes() at src/storage/skill-index.ts loads both scopes with hasConflict flags.
+          list-skills-workflow.ts displays project first with "[!] = Same name exists at other scope (project takes precedence)".
       - id: sc-004
         section: Part 1 > Agent Composition from Co-activation
         claim: >-
@@ -116,11 +120,16 @@ documents:
           GSD Orchestrator routes user intent to GSD commands via a 5-stage classification pipeline (exact match >
           lifecycle filtering > Bayes > semantic fallback > confidence resolution)
         verification: unit-test
-        status: pending
-        notes: ""
+        status: pass
+        notes: "All 5 stages plus argument extraction implemented and connected"
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: >-
+          IntentClassifier at src/orchestrator/intent/intent-classifier.ts implements 5-stage pipeline: (1) exactMatch()
+          from exact-match.ts, (2) deriveLifecycleStage()+filterByLifecycle() from lifecycle-filter.ts, (3) GsdBayesClassifier
+          from bayes-classifier.ts, (3.5) SemanticMatcher from semantic-matcher.ts as fallback when Bayes confidence is low,
+          (4) confidence resolution via threshold+gap analysis, (5) extractArguments() from argument-extractor.ts. 34 classifier
+          tests + 84 stage tests = 118 tests pass across intent/ module.
       - id: sc-009
         section: Part 1 > The Relationship
         claim: GSD runs execution in fresh subagent contexts with clean 200k token windows to solve context rot
@@ -191,11 +200,16 @@ documents:
           Bounded learning constraints are enforced: max 20% content change per refinement, min 3 corrections before
           refinement, 7-day cooldown between refinements
         verification: unit-test
-        status: pending
-        notes: Safety constraints - must be enforced
+        status: pass
+        notes: All three constraints enforced in RefinementEngine with DEFAULT_BOUNDED_CONFIG
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: >-
+          RefinementEngine at src/learning/refinement-engine.ts enforces all three constraints: (1) maxContentChangePercent=20
+          checked via validateChange() using diffWords (line 178), (2) minCorrectionsForRefinement=3 checked in checkEligibility()
+          (line 67), (3) cooldownDays=7 checked against learning.lastRefined (line 57). DEFAULT_BOUNDED_CONFIG at
+          src/types/learning.ts confirms values. applyRefinement() requires explicit userConfirmed=true (line 195). 36 tests
+          pass in src/learning/ module.
       - id: sc-016
         section: Part 1 > The Relationship
         claim: >-
