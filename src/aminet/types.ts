@@ -550,3 +550,136 @@ export const DownloadConfigSchema = AminetMirrorConfigSchema.extend({
 });
 
 export type DownloadConfig = z.infer<typeof DownloadConfigSchema>;
+
+// ============================================================================
+// Category browser schemas
+// ============================================================================
+
+/**
+ * A subcategory node in the Aminet category tree.
+ *
+ * Represents a single subcategory (e.g., "shoot" under "game") with
+ * its full directory path and the count of packages it contains.
+ */
+export const SubcategoryNodeSchema = z.object({
+  /** Subcategory name (e.g., "shoot") */
+  name: z.string(),
+  /** Full directory path (e.g., "game/shoot") */
+  path: z.string(),
+  /** Number of packages in this subcategory */
+  packageCount: z.number().int().nonnegative(),
+});
+
+export type SubcategoryNode = z.infer<typeof SubcategoryNodeSchema>;
+
+/**
+ * A top-level category node in the Aminet category tree.
+ *
+ * Represents one of Aminet's ~17 top-level categories (e.g., "game",
+ * "mus", "util") with the total package count across all its
+ * subcategories and the nested subcategory nodes.
+ */
+export const CategoryNodeSchema = z.object({
+  /** Category name (e.g., "game") */
+  name: z.string(),
+  /** Total package count across all subcategories */
+  packageCount: z.number().int().nonnegative(),
+  /** Nested subcategory nodes, sorted alphabetically by name */
+  subcategories: z.array(SubcategoryNodeSchema),
+});
+
+export type CategoryNode = z.infer<typeof CategoryNodeSchema>;
+
+// ============================================================================
+// Search schemas
+// ============================================================================
+
+/**
+ * Options for searching the Aminet package catalog.
+ *
+ * The query string is matched as a case-insensitive substring against
+ * package name, description, and author fields. Optional category and
+ * subcategory filters narrow the search scope before matching.
+ */
+export const SearchOptionsSchema = z.object({
+  /** Search query string (matched as case-insensitive substring) */
+  query: z.string(),
+  /** Optional category filter (e.g., "mus", "game", "util") */
+  category: z.string().optional(),
+  /** Optional subcategory filter (e.g., "edit", "shoot") */
+  subcategory: z.string().optional(),
+  /** Maximum number of results to return (default: 50) */
+  limit: z.number().int().positive().optional(),
+});
+
+export type SearchOptions = z.infer<typeof SearchOptionsSchema>;
+
+/**
+ * A single search result with relevance scoring.
+ *
+ * matchField indicates which field produced the highest-scoring match:
+ * - "name" (score 3): query found in package filename
+ * - "description" (score 2): query found in package description
+ * - "author" (score 1): query found in readme author field
+ */
+export const SearchResultSchema = z.object({
+  /** The matched package */
+  package: AminetPackageSchema,
+  /** Relevance score: 3 = name, 2 = description, 1 = author */
+  score: z.number(),
+  /** Which field produced the match */
+  matchField: z.enum(['name', 'description', 'author']),
+});
+
+export type SearchResult = z.infer<typeof SearchResultSchema>;
+
+// ============================================================================
+// PackageDetailSchema
+// ============================================================================
+
+/**
+ * Unified view of a single Aminet package, merging INDEX metadata,
+ * .readme parsed fields, and mirror lifecycle state.
+ *
+ * Built by `buildPackageDetail()` in package-detail.ts for display
+ * in the package detail view. Readme fields are nullable because
+ * not every package has a .readme, and mirror status defaults to
+ * 'not-mirrored' when the package has no mirror entry.
+ */
+export const PackageDetailSchema = z.object({
+  // From INDEX (AminetPackage)
+  /** Archive filename (e.g., "ProTracker36.lha") */
+  filename: z.string(),
+  /** Full Aminet directory path (e.g., "mus/edit") */
+  directory: z.string(),
+  /** Top-level category (e.g., "mus") */
+  category: z.string(),
+  /** Subcategory within the category (e.g., "edit") */
+  subcategory: z.string(),
+  /** Size in kilobytes */
+  sizeKb: z.number(),
+  /** Age in days since upload */
+  ageDays: z.number().int().nonnegative(),
+  /** One-line package description from INDEX */
+  description: z.string(),
+  /** Full path: directory/filename (e.g., "mus/edit/ProTracker36.lha") */
+  fullPath: z.string(),
+
+  // From .readme (nullable when readme unavailable)
+  /** Author from .readme Author: field */
+  author: z.string().nullable(),
+  /** Version from .readme Version: field */
+  version: z.string().nullable(),
+  /** Requirements parsed from .readme Requires: field */
+  requires: z.array(z.string()),
+  /** Architecture tags from .readme Architecture: field */
+  architecture: z.array(z.string()),
+  /** Free-form description body from .readme */
+  longDescription: z.string().nullable(),
+
+  // From mirror state
+  /** Current lifecycle status from MirrorEntry, or 'not-mirrored' */
+  mirrorStatus: PackageStatusSchema,
+});
+
+export type PackageDetail = z.infer<typeof PackageDetailSchema>;
