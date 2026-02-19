@@ -5,30 +5,33 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Phase 231 — Ecosystem Dependency Map
+**Current focus:** Phase 234 — Integration Test Strategy
 
 ## Current Position
 
 Milestone: v1.25 — GSD Ecosystem Integration
-Phase: 231 (1 of 5) — Ecosystem Dependency Map
-Plan: 2 of 3 in current phase
-Status: Executing
-Last activity: 2026-02-19 — Completed 231-02 edge inventory (48 edges, 6 topological levels, 0 cycles)
+Phase: 234 (4 of 5) — Integration Test Strategy
+Plan: 1 of 3 in current phase
+Status: Plan 234-01 complete
+Last activity: 2026-02-19 — Plan 234-01 complete (contract testing approach: Zod + Vitest, Pact rejection, 6 priority flows, 8 boundary schemas)
 
-Progress: [####░░░░░░] 13%
+Progress: [###############░░░░░] 75%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 4m
-- Total execution time: 0.14 hours
+- Total plans completed: 9
+- Average duration: 4.4m
+- Total execution time: 0.66 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 231 | 2 | 8m | 4m |
+| 231 | 3 | 14m | 4.6m |
+| 232 | 3 | 13m | 4.3m |
+| 233 | 2 | 8m | 4.0m |
+| 234 | 1 | 5m | 5.0m |
 
 *Updated after each plan completion*
 
@@ -48,6 +51,38 @@ Recent decisions affecting current work:
 - [231-02]: 58% hard-blocks edges (higher than research predicted) reflects genuinely deep dependency chains
 - [231-02]: skill-creator is most depended-on node (9 incoming edges); gsd-os is most dependent (8 outgoing)
 - [231-02]: Zero cycles found -- all 5 potential mutual references resolved as unidirectional
+- [231-03]: Critical path is skill-creator -> chipset -> gsd-os -> bbs-pack -> creative-suite (4 hops)
+- [231-03]: 3 parallel tracks (Platform Core, Infrastructure, Observability) can all proceed simultaneously
+- [231-03]: M1 recommended next: chipset + dashboard-console + lcp (maximum downstream unblocking)
+- [231-03]: wetty-tmux excluded from all milestones (permanently deferred, architectural supersession)
+- [232-01]: 250ms base debounce (reduced from existing 500ms) because two-tier design adds subscriber delay on top
+- [232-01]: Hybrid watch strategy -- single recursive in practice, per-consumer budget accounting conceptually
+- [232-01]: WebviewBridge as subscriber -- Tauri event emission is one of 6 subscribers, not core transport
+- [232-01]: All subscribers use skip-on-lag (best-effort notifications, no guaranteed delivery)
+- [232-01]: Watch budget ~1,020 watches (25% of 4,096 target) with scaling analysis to 8,000+ dirs
+- [232-02]: Console msg-* IDs pass through to EventEnvelope (no UUID conversion, schema min 1 char)
+- [232-02]: Console sources use 'broadcast' interim until AGENT_OR_SPECIAL_PATTERN regex extended for subsystem:component
+- [232-02]: Staging retains human-meaningful filenames with companion .meta.json (not timestamp-prefixed)
+- [232-02]: Filename type kebab-case distinct from envelope type SCREAMING_SNAKE_CASE
+- [232-03]: WebviewBridge 250ms additional debounce preserves current 500ms total during migration
+- [232-03]: Event name transition fs:changed -> fs:dispatched with optional dual-emission period
+- [232-03]: PollWatcher 2000ms interval balances latency vs CPU overhead in degraded mode
+- [232-03]: 60-second recovery check interval for automatic inotify restoration
+- [232-03]: WARN log level for polling fallback (degraded but functional, not broken)
+- [232-03]: fanotify rejected -- 9-factor analysis, inotify wins on 5, ties on 2; Linux 5.13+ still insufficient
+- [233-01]: zod declared ecosystem-standard: all TypeScript layers MAY use it (cross-cutting schema validation)
+- [233-01]: @modelcontextprotocol/sdk classified as Middleware (protocol SDK, not native toolchain)
+- [233-01]: @huggingface/transformers passes native-compilation check (WASM is platform-portable, not node-gyp)
+- [233-01]: gray-matter/js-yaml not duplication (different capability levels: frontmatter extraction vs raw YAML)
+- [233-01]: Core layer rule applies to architectural role, not entire src/ directory
+- [233-02]: ESLint no-restricted-imports over eslint-plugin-boundaries (simpler, sufficient for 2-boundary enforcement)
+- [233-02]: All Rust modules already private in lib.rs -- tightening targets items within modules, not declarations
+- [233-02]: Exception process exactly 4 steps with 90-day review cycle (lightweight for solo dev + Claude)
+- [233-02]: Zero current exceptions -- all deps conform via ecosystem-standard clause for zod
+- [234-01]: Zod + Vitest over Pact: 5 reasons (HTTP-focus, broker overhead, MQ mismatch, schema duplication, same-process)
+- [234-01]: .contract.test.ts in __tests__/ not separate __contracts__/ directory
+- [234-01]: expect.schemaMatching deferred: not in Vitest 4.0.18 stable, use .parse() directly
+- [234-01]: Console adapter uses 'broadcast' as interim source until AGENT_OR_SPECIAL_PATTERN regex extended
 
 ### Key Context
 
@@ -63,11 +98,11 @@ None.
 
 ### Blockers/Concerns
 
-- Before Phase 232: 30-min code review of `src-tauri/src/watcher.rs` and `src/console/types.ts` vs. silicon layer EventDispatcher design
+- ~~Before Phase 232: 30-min code review of `src-tauri/src/watcher.rs` and `src/console/types.ts` vs. silicon layer EventDispatcher design~~ (resolved in 232-RESEARCH.md)
 - Before Phase 235: Full read of known-issues.md to categorize all 99 deferred items
 
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 231-02-PLAN.md (edge inventory)
+Stopped at: Completed 234-01-PLAN.md (contract testing approach -- Zod + Vitest, 6 priority flows, 8 boundary schemas)
 Resume file: None
