@@ -4,6 +4,75 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.23.0] - 2026-02-19
+
+### Added
+
+- **AMIGA Mission Infrastructure:** MC-1 Control Surface (dashboard, 8-command parser, 3-tier alerts, Go/No-Go gates), ME-1 Mission Environment (provisioner, phase engine, swarm coordinator, archive writer), CE-1 Commons Engine (attribution ledger, weighting engine, dividend calculator), GL-1 Governance Layer (commons charter, rules engine, policy queries) with 4 typed ICDs and end-to-end meta-mission
+- **Apollo AGC Block II Simulator:** Complete CPU emulation with 38 instructions, ones' complement ALU, bank-switched memory (EBANK/FBANK/superbank), interrupt system (10 vectors), I/O channels (512), and 2.048 MHz timing model
+- **AGC Executive/Waitlist/BAILOUT:** Priority-based cooperative scheduler with 8 core sets, timer-driven task queue (9 entries, centisecond dispatch), restart protection with Apollo 11 1202 alarm reproduction
+- **DSKY Interface:** Authentic display model (relay decoding, 6 registers, 11 annunciators), 19-key keyboard, VERB/NOUN command processor, Executive Monitor with real-time scheduling visualization, and learn mode annotations
+- **AGC Development Tools:** yaYUL-compatible assembler, step debugger with breakpoints/watchpoints, disassembler, rope loader (Virtual AGC format), 54-test validation suite
+- **AGC Curriculum:** 11 chapters from orientation to AGC-to-GSD patterns, 8 hands-on exercises with bare-metal programs culminating in 1202 alarm capstone
+- **RFC Reference Skill:** 3-agent system (retriever, analyzer, citation builder), 5 Python scripts, built-in 57-RFC index covering 9 protocol families with obsolescence awareness, multi-format output (Markdown/JSON/BibTeX)
+
+### Stats
+
+- 24 phases (199-222), 74 plans, 146 commits, 2,164 tests, 99 requirements
+
+---
+
+## [1.22.0] - 2026-02-19
+
+### Added
+
+- **Local Cloud Infrastructure:** PXE boot server, kickstart automation, hypervisor-agnostic VM provisioning across KVM/VMware/VirtualBox
+- **Minecraft Knowledge World:** Fabric server with Syncmatica mod stack, automated deployment pipeline, themed district layout, spawn area with tutorial path, schematic library (10 templates), educational curriculum
+- **Platform Portability:** Hardware discovery, distribution abstraction (dnf/apt/pacman), multi-hypervisor VM operations, container fallback
+- **Amiga Emulation:** FS-UAE with AROS ROM, application profiles (Deluxe Paint, OctaMED, ProTracker, PPaint), IFF/ILBM and MOD/MED format converters, legally curated 50-item content collection
+- **Chipset Formalization:** 20 SKILL.md files, 10 agent definitions across 5 teams, team topologies (pipeline/map-reduce/swarm/leader-worker), unified chipset configuration with trigger routing
+- **Operational Maturity:** Automated RCON-quiesced backups with 24/7/4 rotation, Prometheus monitoring with 9 alert rules, golden image lifecycle (<5min clone, <20min scratch), four operational runbooks
+
+### Stats
+
+- 30 phases (169-198), 37 plans, 108 commits, 73 requirements
+
+---
+
+## [1.21.0] - 2026-02-14
+
+### Added
+
+- **Tauri Desktop Shell:** Native desktop app with Rust backend, Vite webview frontend, and bidirectional IPC (commands, events, channels) with capability ACL security
+- **WebGL CRT Engine:** Multi-pass post-processing with scanlines, barrel distortion, phosphor glow, chromatic aberration, vignette, and CSS fallback
+- **Indexed Palette System:** 32-color system with 5 retro-computing presets (Amiga 1.3/2.0/3.1, C64, custom), OKLCH generation, and copper list raster effects
+- **Native PTY Terminal:** Rust-backed pseudo-terminal with xterm.js emulator, watermark-based flow control, and tmux session binding with detach-on-close
+- **Desktop Environment:** Amiga Workbench-inspired window manager with depth cycling, drag/resize, taskbar with process indicators, pixel-art icons, system menu, keyboard shortcuts
+- **Boot & Calibration:** Three-screen calibration wizard (color picking, CRT tuning, theme selection), Amiga chipset boot sequence animation, accessibility auto-detection
+
+### Stats
+
+- 11 phases (158-168), 34 plans, 83 commits, 636 tests, 50 requirements
+
+---
+
+## [1.20.0] - 2026-02-14
+
+### Added
+
+- **Unified CSS Pipeline:** 18 component style modules wired into generator with design system token compliance (no hardcoded hex colors)
+- **Topology Data Collector:** Reads real skill/agent/team files with gray-matter parsing, domain inference, and entity legend rendering
+- **Activity Feed Collector:** Transforms git commits and session observations into FeedEntry[] with scope classification and domain inference
+- **Budget-Silicon Collector:** Bridges CumulativeBudgetResult and IntegrationConfig to gauge/panel renderers with domain color mapping
+- **Staging Queue Collector:** Reads queue-state.json for dashboard panel visualization with 7-state color badges
+- **Console Page Assembly:** Settings panel, activity timeline, question cards, and submit flow as 6th generated page (console.html)
+
+### Stats
+
+- 6 phases (152-157), 12 plans, 23 commits, 110 tests, 23 requirements
+
+---
+
 ## [1.19.0] - 2026-02-14
 
 ### Added

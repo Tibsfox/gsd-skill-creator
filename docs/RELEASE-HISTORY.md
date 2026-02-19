@@ -1,8 +1,212 @@
 # Release History
 
-Comprehensive release notes for GSD Skill Creator across all 23 milestones.
+Comprehensive release notes for GSD Skill Creator across all 27 milestones.
 
-**Totals:** 23 milestones (v1.0-v1.19 + v1.8.1 patch) | 151 phases | 437 plans | ~192k LOC | 548 requirements
+**Totals:** 27 milestones (v1.0-v1.23 + v1.8.1 patch) | 222 phases | 594 plans | ~280k LOC | 743 requirements
+
+---
+
+## v1.23 — Project AMIGA
+
+**Shipped:** 2026-02-19
+**Phases:** 199-222 (24 phases) | **Plans:** 74 | **Requirements:** 99
+
+Build the complete AMIGA mission infrastructure (Mission Control, Mission Environment, Commons Engine, Governance Layer) with human-in-the-loop gates, the Apollo AGC Educational Pack (documentation archive, architectural study, functioning AGC simulator with DSKY and curriculum), and the RFC Reference Skill — creating the operational backbone and first educational content packs for the GSD-OS platform.
+
+### Key Features
+
+**AMIGA Mission Infrastructure (Phases 199-208):**
+- MC-1 Control Surface: dashboard with 8-command parser, 3-tier alert system (info/warning/critical), Go/No-Go gates for phase transitions
+- ME-1 Mission Environment: environment provisioner, phase engine, swarm coordinator for parallel agent execution, archive writer for immutable mission records
+- CE-1 Commons Engine: attribution ledger tracking contributions, weighting engine with configurable factors, dividend calculator for resource distribution
+- GL-1 Governance Layer: commons charter definition, rules engine for policy enforcement, policy query interface
+- 4 typed Inter-Component Definitions (ICDs) for structured inter-team communication
+- Full-stack controller composing all 4 components, end-to-end meta-mission harness producing skill packages
+
+**Apollo AGC Block II Simulator (Phases 213-214):**
+- Complete CPU emulation: 38 instructions covering arithmetic, logic, control flow, I/O, and special operations
+- Ones' complement ALU with iterative end-around carry matching real Block II hardware
+- Bank-switched memory: EBANK (8 banks × 256 words erasable), FBANK (32 banks × 1024 words fixed), superbank extension
+- Interrupt system: 10 vectors with priority resolution and inhibit/enable control
+- I/O channels: 512 channels for peripheral communication
+- 2.048 MHz timing model with MCT (memory cycle time) accuracy
+
+**AGC Executive/Waitlist/BAILOUT (Phase 216):**
+- Executive: priority-based cooperative scheduler with 8 core sets (register save areas)
+- Waitlist: timer-driven task queue with 9 entries and centisecond dispatch resolution
+- BAILOUT: restart protection with program alarm codes, reproducing the Apollo 11 1202 alarm scenario
+
+**DSKY Interface & Executive Monitor (Phases 217-218):**
+- Authentic display model: electroluminescent relay decoding, 6 data registers, 11 annunciator indicators
+- 19-key keyboard with PRO, KEY REL, VERB, NOUN, +, -, 0-9, CLR, ENTR
+- VERB/NOUN command processor with program-specific routing
+- Executive Monitor: real-time visualization of scheduler state, core set allocation, waitlist queue
+- Learn mode: annotations mapping AGC concepts to modern computing and GSD patterns
+
+**AGC Development Tools (Phase 219):**
+- yaYUL-compatible assembler parsing AGC assembly source into binary
+- Step debugger with breakpoints, watchpoints, register inspection, and memory dumps
+- Disassembler converting binary back to readable assembly
+- Rope loader reading Virtual AGC binary format for loading real Apollo program images
+- 54-test validation suite covering all 38 instructions and subsystems
+
+**AGC Curriculum (Phase 221):**
+- 11 chapters: orientation, number systems, memory architecture, instruction set, Executive scheduling, Waitlist timing, DSKY interface, interrupt handling, I/O channels, 1202 alarm deep dive, AGC-to-GSD pattern mapping
+- 8 hands-on exercises with bare-metal AGC programs
+- Capstone exercise reproducing the 1202 alarm scenario
+
+**RFC Reference Skill (Phase 222):**
+- 3-agent system: Retriever (HTTP fetching with caching), Analyzer (cross-reference and dependency mapping), Citation Builder (formatted output)
+- 5 Python scripts for fetching, parsing, indexing, analyzing, and formatting RFCs
+- Built-in 57-RFC index covering 9 protocol families (HTTP, TLS, DNS, TCP/IP, SMTP, etc.) with obsolescence awareness
+- Multi-format output: Markdown, JSON, and BibTeX
+- RFC Collection Pack scaffold for distributable reference material
+
+### Test Coverage
+
+- 2,164 tests across 74 plans
+
+---
+
+## v1.22 — Minecraft Knowledge World
+
+**Shipped:** 2026-02-19
+**Phases:** 169-198 (30 phases) | **Plans:** 37 | **Requirements:** 73
+
+Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrastructure with PXE boot automation, hypervisor-agnostic VM provisioning, platform portability, Amiga emulation, spatial learning curriculum, formalized skill/agent/team chipset, and operational maturity.
+
+### Key Features
+
+**Local Cloud Infrastructure (Phases 169-175):**
+- PXE boot server with DHCP/TFTP configuration for network-booted installations
+- Kickstart automation for unattended CentOS Stream 9 provisioning
+- Hypervisor-agnostic VM provisioning across KVM/libvirt, VMware Workstation, and VirtualBox
+- Network bridge configuration with firewalld zone management
+
+**Minecraft Knowledge World (Phases 176-180):**
+- Minecraft Java Edition server on Fabric mod loader
+- Syncmatica mod stack for real-time Litematica schematic sharing
+- Automated deployment pipeline from bare VM to running server
+- Themed district layout: Computing History, Networking, Architecture, Creative Workshop
+- Spawn area with tutorial path and orientation signage
+- Schematic library with 10 templates for educational builds
+- Educational curriculum mapping computing concepts to Minecraft mechanics
+- Amiga Corner exhibit within the Knowledge World
+
+**Platform Portability (Phases 181-183):**
+- Comprehensive hardware discovery (CPU, memory, GPU, storage, NIC, virtualization extensions)
+- Distribution abstraction layer supporting dnf (Fedora/CentOS), apt (Debian/Ubuntu), pacman (Arch)
+- Multi-hypervisor VM operations (create, start, stop, snapshot, clone, delete) with unified interface
+- Container fallback for environments without hardware virtualization
+
+**Amiga Emulation (Phases 184-186):**
+- FS-UAE emulator integration with AROS ROM as default (no copyright issues)
+- Application profiles: Deluxe Paint (pixel art), OctaMED (music), ProTracker (modules), PPaint (animation)
+- IFF/ILBM image format converter and MOD/MED audio format converter
+- Legally curated 50-item content collection (public domain, Creative Commons, freeware)
+
+**Chipset Formalization (Phases 191-194):**
+- 20 formalized SKILL.md files covering all infrastructure components
+- 10 agent definitions across 5 teams
+- Team topologies: pipeline (sequential processing), map-reduce (parallel fan-out), swarm (peer coordination), leader-worker (directed delegation)
+- Unified chipset configuration YAML with trigger routing matrix
+- Inter-team ICD specifications for structured communication
+
+**Operational Maturity (Phases 195-198):**
+- Automated RCON-quiesced backups: world save before backup, 24/7/4 rotation (24 hourly, 7 daily, 4 weekly)
+- Prometheus monitoring with 9 alert rules covering server health, TPS, player count, disk usage
+- Golden image lifecycle: rapid rebuild (<5 min from clone, <20 min from scratch)
+- Four operational runbooks: server maintenance, backup/restore, monitoring, incident response
+
+---
+
+## v1.21 — GSD-OS Desktop Foundation
+
+**Shipped:** 2026-02-14
+**Phases:** 158-168 (11 phases) | **Plans:** 34 | **Requirements:** 50
+
+Build the Tauri desktop application shell with WebGL 8-bit graphics engine, first-boot calibration, Amiga-inspired desktop environment, and native system bridges (PTY, file watcher, IPC).
+
+### Key Features
+
+**Tauri Desktop Shell (Phases 158-160):**
+- Tauri v2 application with Rust backend and Vite webview frontend
+- Bidirectional IPC: commands (webview→Rust), events (Rust→webview), channels (streaming)
+- Capability ACL security restricting webview access to specific Rust commands
+- Frameless window with custom chrome for Amiga Workbench aesthetic
+
+**WebGL CRT Engine (Phase 161):**
+- WebGL2 multi-pass post-processing pipeline
+- Scanline effect with configurable intensity and gap ratio
+- Barrel distortion simulating CRT curvature
+- Phosphor glow with bloom radius control
+- Chromatic aberration (RGB channel separation)
+- Vignette darkening at screen edges
+- Per-effect intensity controls with CSS fallback for non-WebGL browsers
+
+**Indexed Palette System (Phase 162):**
+- 32-color indexed palette with configurable slots
+- 5 retro-computing presets: Amiga Kickstart 1.3, Workbench 2.0, Workbench 3.1, Commodore 64, custom
+- OKLCH-based palette generation for perceptually uniform color interpolation
+- Copper list raster effects for per-scanline color manipulation (gradient fills, sky effects)
+
+**Native PTY Terminal (Phase 163):**
+- Rust-backed pseudo-terminal via portable-pty crate
+- xterm.js terminal emulator in webview with full ANSI support
+- Watermark-based flow control (pause at high-water, resume at low-water)
+- tmux session binding with automatic detach-on-close
+
+**Desktop Environment (Phases 164-165):**
+- Amiga Workbench-inspired window manager with depth cycling (click to front/back)
+- Window drag/resize with configurable snap-to-edge
+- Taskbar with process indicators and minimized window chips
+- Pixel-art icon set for file types, applications, and system functions
+- System menu with application launcher and preferences
+- Keyboard shortcuts: Alt+Tab (window cycling), F10 (system menu), Ctrl+Q (quit)
+
+**Boot & Calibration (Phases 166-168):**
+- Three-screen calibration wizard: color picker, CRT effect tuning, theme/palette selection
+- Amiga chipset boot sequence animation (Agnus, Denise, Paula, Gary initialization)
+- Boot sequence skippable with click or keypress
+- Accessibility auto-detection: disables CRT effects on `prefers-reduced-motion`, applies high-contrast palette on `prefers-contrast`
+
+### Test Coverage
+
+- 636 tests across 34 plans
+
+---
+
+## v1.20 — Dashboard Assembly
+
+**Shipped:** 2026-02-14
+**Phases:** 152-157 (6 phases) | **Plans:** 12 | **Requirements:** 23
+
+Wire 13 orphaned dashboard components into the generator pipeline with unified CSS and real data pipelines, so the generated dashboard reflects every feature built across v1.12-v1.19.
+
+### Key Features
+
+**Unified CSS Pipeline (Phase 152):**
+- 18 component style modules wired into the dashboard generator
+- Design system token compliance: all colors reference CSS custom properties (no hardcoded hex values)
+- Component styles: gantry strip, entity shapes, topology view, activity feed, budget gauge, silicon panel, staging queue, console page, question cards, upload zone, submit flow, config form
+
+**Data Collectors (Phases 153-155):**
+- Topology data collector: reads real skill/agent/team files via gray-matter parsing, infers domain from file content, renders entity legend with shape+color encoding
+- Activity feed collector: transforms git commits and session observations into FeedEntry[] with scope classification (skill/agent/team/phase) and domain inference
+- Budget-silicon collector: bridges CumulativeBudgetResult and IntegrationConfig to gauge and panel renderers with domain color mapping
+- Staging queue collector: reads queue-state.json, maps 7-state items to color-coded badges for dashboard panel
+
+**Console Page Assembly (Phases 156-157):**
+- Console assembled as 6th generated dashboard page (console.html)
+- Settings panel with hot-configurable integration options
+- Activity timeline showing recent session operations
+- Question card display with 5 interactive question types
+- Submit flow for milestone configuration
+- Full CSS integration with design system tokens
+
+### Test Coverage
+
+- 110 tests across 12 plans
 
 ---
 
@@ -886,4 +1090,8 @@ The foundational 6-step adaptive learning loop.
 2026-02-13  v1.17   Staging Layer
 2026-02-14  v1.18   Information Design System
 2026-02-14  v1.19   Budget Display Overhaul
+2026-02-14  v1.20   Dashboard Assembly
+2026-02-14  v1.21   GSD-OS Desktop Foundation
+2026-02-19  v1.22   Minecraft Knowledge World
+2026-02-19  v1.23   Project AMIGA
 ```
