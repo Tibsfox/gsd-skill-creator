@@ -394,7 +394,7 @@ export class AgcDebugger {
   /** Snapshot watched memory addresses. */
   private snapshotWatched(): Map<number, number> {
     const snapshot = new Map<number, number>();
-    for (const [addr] of this.watchpoints) {
+    for (const [addr] of Array.from(this.watchpoints)) {
       snapshot.set(addr, this.readMemory(addr));
     }
     return snapshot;
@@ -406,7 +406,7 @@ export class AgcDebugger {
     result: AgcStepResult,
     prevZ: number,
   ): BreakReason | null {
-    for (const [addr, access] of this.watchpoints) {
+    for (const [addr, access] of Array.from(this.watchpoints)) {
       // Write watchpoint: memory value changed
       if (access === 'write' || access === 'readwrite') {
         const oldVal = before.get(addr) ?? 0;

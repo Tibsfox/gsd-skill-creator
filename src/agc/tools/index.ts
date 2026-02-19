@@ -26,3 +26,7 @@ export { AgcDebugger } from './debugger.js';
 // Validation
 export type { TestCase, TestAssertion, TestResult, ValidationResult } from './validation.js';
 export { runTestCase, runValidationSuite, createTestProgram } from './validation.js';
+
+// Rope Loader
+export type { RopeMetadata, LoadedRope } from './rope-loader.js';
+export { loadRopeImage, loadRopeFromBuffer, getRopeBankData } from './rope-loader.js';
