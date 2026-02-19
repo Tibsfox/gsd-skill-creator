@@ -38,7 +38,8 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 9. Integration Gate 1 CLEARED: MC-1 and ME-1 work end-to-end with live telemetry
 10. Full AMIGA test suite: 662 tests passing across 23 test files (zero regressions)
 11. Phase 211 (Governance Charter & Documentation) COMPLETE -- 3 plans, 6 commits, 68 GL-1 tests
-12. Full AMIGA test suite: 829 tests passing across 30 test files (zero regressions)
+12. Phase 209 (Commons Engine Data & Recording) COMPLETE -- 4 plans, 8 commits, 135 CE-1 tests
+13. Full AMIGA test suite: 865 tests passing across 31 test files (zero regressions)
 
 ## Decisions
 
@@ -88,6 +89,12 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 - GovernanceDisputeSchema extends ICD-04 DisputeRecordPayloadSchema via .extend() for schema compatibility
 - Dispute lifecycle is immutable: resolve/reject return new objects, never mutate input
 - GL-1 barrel follows same pattern as MC-1 and ME-1 barrel indexes
+- CE-1 entry IDs use le-NNNNNN format with padded sequential numbers
+- CE-1 query returns defensive copies to prevent external mutation
+- ContributionRegistry uses BFS graph walk for circular dependency detection
+- InvocationRecorder has NO direct dependency on TelemetryEmitter -- pure event-driven design
+- Token architecture is specification only (not implementation) per Out of Scope
+- CE-1 barrel follows same pattern as MC-1, ME-1, and GL-1 barrel indexes
 
 ## Accumulated Context
 
@@ -112,7 +119,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Phase 211 (Governance Charter & Documentation) complete -- 3 plans, 6 commits, 68 GL-1 tests
+Stopped at: Phase 209 (Commons Engine Data & Recording) complete -- 4 plans, 8 commits, 135 CE-1 tests
 
 ### Key Files
 - `.planning/ROADMAP.md` -- 24 phases across 5 waves
@@ -133,7 +140,12 @@ Stopped at: Phase 211 (Governance Charter & Documentation) complete -- 3 plans, 
 - `src/amiga/me1/index.ts` -- ME-1 barrel index (Phase 205 + 206 exports)
 - `src/amiga/integration/mission-controller.ts` -- MissionController wiring real ME-1 to real MC-1 via onEmit bridge
 - `src/amiga/integration/index.ts` -- Integration barrel exports
-- `src/amiga/index.ts` -- AMIGA barrel (types, registry, envelope, ICD, MC-1, ME-1, Integration, GL-1)
+- `src/amiga/index.ts` -- AMIGA barrel (types, registry, envelope, ICD, MC-1, ME-1, Integration, CE-1, GL-1)
+- `src/amiga/ce1/attribution-ledger.ts` -- ICD-02 conforming attribution ledger with queries and seal
+- `src/amiga/ce1/contribution-registry.ts` -- Contributor registry with version tracking and cycle detection
+- `src/amiga/ce1/invocation-recorder.ts` -- Event-driven LEDGER_ENTRY capture from ME-1 telemetry
+- `src/amiga/ce1/token-architecture.ts` -- Token architecture specification with YAML export
+- `src/amiga/ce1/index.ts` -- CE-1 barrel exports (Phase 209)
 - `src/amiga/gl1/charter.ts` -- Commons charter schema, constitutional constraints, ratification with SHA-256
 - `src/amiga/gl1/weighting-docs.ts` -- Weighting algorithm parameter documentation (frequency/critical-path/depth-decay)
 - `src/amiga/gl1/dispute-record.ts` -- Governance dispute record lifecycle extending ICD-04
