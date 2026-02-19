@@ -2,33 +2,41 @@
 
 ## Current Position
 
-Phase: 201 of 222 (AGC Documentation Archive) -- IN PROGRESS
-Plan: 1 of 2 in current phase (Plan 201-01 complete)
-Status: Executing Phase 201 -- catalog complete, reading paths next
-Last activity: 2026-02-19 -- Completed Plan 201-01 (master catalog)
+Phase: 208 of 222 (MC-1/ME-1 Integration) -- COMPLETE
+Plan: 2 of 2 in current phase (COMPLETE)
+Status: Phase 208 complete -- 2 plans, 4 commits, 39 new tests (662 AMIGA tests total)
+Last activity: 2026-02-18 -- Completed Phase 208 (MC-1/ME-1 Integration -- Integration Gate 1)
 
-Progress: [###.....................] 13% (3/24 phases)
+Progress: [###########.............] 46% (11/24 phases)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.23 Project AMIGA -- Phase 202 complete, Wave 0 wrapping up
+**Current focus:** v1.23 Project AMIGA -- Phase 208 complete, Integration Gate 1 cleared
 
 ## Current Milestone
 
 **v1.23 Project AMIGA** -- 24 phases (199-222), 5 waves, 99 requirements
 - Three workstreams: AMIGA mission infrastructure (phases 199-212, 215, 220), Apollo AGC (201, 207, 213-214, 216-219, 221-222), RFC skill (202)
-- Wave 0 next: Foundation types (199) then ICDs (200) + AGC archive (201) + RFC skill (202) in parallel
-- Human-in-the-loop gates: Foundation Gate, Integration Gate 1, Integration Gate 2, Launch Gate
+- Wave 0 COMPLETE: 199, 200, 201, 202
+- Wave 1 COMPLETE: 203, 204, 205, 206, 207
+- Integration Gate 1 (Phase 208) COMPLETE: MC-1/ME-1 integration verified
+- Human-in-the-loop gates: Foundation Gate DONE, Integration Gate 1 DONE, Integration Gate 2, Launch Gate
 
 ## Next Actions
 
-1. Complete Plan 201-02 (reading paths, cross-references, mirror config)
-2. Phase 200 (ICDs) COMPLETE -- 3 plans, 229 tests, 10 event type schemas
-3. Phase 202 (RFC skill) COMPLETE -- 3 plans, 6 commits, 9 requirements
-4. Wave 0 nearing completion: 199 done, 200 done, 201 in progress, 202 done
+1. Wave 0 COMPLETE: 199, 200, 201, 202 all done
+2. Phase 203 (Control Surface Foundation) COMPLETE -- 4 plans, 8 commits, 104 tests
+3. Phase 204 (Control Surface Alerts & Telemetry) COMPLETE -- 3 plans, 6 commits, 42 tests
+4. Phase 205 (Mission Environment Schema & Engine) COMPLETE -- 3 plans, 9 commits, 124 tests
+5. Phase 206 (Mission Environment Coordination & Archive) COMPLETE -- 3 plans, 8 commits, 124 tests
+6. Phase 207 (AGC Architectural Study) COMPLETE -- 2 plans, 2 commits, 4 study documents
+7. Wave 1 COMPLETE: 203, 204, 205, 206, 207 all done
+8. Phase 208 (MC-1/ME-1 Integration -- Integration Gate 1) COMPLETE -- 2 plans, 4 commits, 39 tests
+9. Integration Gate 1 CLEARED: MC-1 and ME-1 work end-to-end with live telemetry
+10. Full AMIGA test suite: 662 tests passing across 23 test files (zero regressions)
 
 ## Decisions
 
@@ -52,6 +60,28 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 - RFC scripts use pathlib with script-dir-relative resolution for portability
 - Three RFC agents share single rfc-reference skill for unified trigger routing
 - RFC pack follows archive/study/implement model with 3-tier reading paths
+- AGC catalog uses stable IDs (agc-{category}-{NNN}) for cross-referencing across 5 YAML files
+- AGC reading paths: Quick Start (10 essential, 3-4 hrs), Deep Dive (50 docs, 8 thematic sections), Complete Study (full 210)
+- ME-1 manifest is machine-parseable (Zod), human-readable (descriptive fields), incrementally writable (createManifest + updateManifest)
+- ME-1 provisioner is in-memory (no filesystem I/O) -- pure and testable without mocking
+- ME-1 phase engine enforces strict transition graph with entry criteria and telemetry emission
+- COMPLETION and ABORT are terminal states in the phase engine
+- ME-1 GateController wraps PhaseEngine; redirect uses engine re-creation at target phase
+- ME-1 SwarmCoordinator extracts team prefix from AgentID for REDIRECT routing (ME-1 -> ME)
+- ME-1 ArchiveWriter uses SHA-256 via node:crypto (synchronous) and deep-freezes all structures
+- ME-1 three-phase integration test validates ALL telemetry against ICD-01 schemas at envelope level
+- MC-1 StubME1 uses pull-based iterator pattern (next/reset/drain) for flexible test data consumption
+- MC-1 command parser validates output against ICD-01 schema as safety net
+- MC-1 dashboard resets alert_level to nominal on fresh telemetry (advisory clears with new data)
+- MC-1 barrel re-exports all components; AMIGA barrel includes MC-1 module
+- AlertRenderer uses discriminated union on `tier` field (nominal/advisory/gate) for type-safe view models
+- Advisory alerts auto-clear on telemetry arrival; gates require explicit respondToGate
+- TelemetryConsumer routes TELEMETRY_UPDATE + ALERT_SURFACE to both Dashboard and AlertRenderer; GATE_SIGNAL to AlertRenderer only
+- Gate response emits valid ICD-01 GATE_RESPONSE envelope via callback, with correlation to original GATE_SIGNAL
+- MissionController bypasses provision() for emitter creation to wire onEmit bridge callback before any emission
+- MissionController injects gate suspension manually when reaching REVIEW_GATE via single-step engine.transition()
+- Engine re-creation after gate redirect to sync with GateController's internal engine replacement
+- AMIGA barrel exports ME-1 and Integration modules alongside MC-1, ICD, and foundation types
 
 ## Accumulated Context
 
@@ -75,12 +105,26 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-19
-Stopped at: Completed Plan 201-01 (master catalog 210 docs), executing Plan 201-02
+Last session: 2026-02-18
+Stopped at: Phase 208 (MC-1/ME-1 Integration -- Integration Gate 1) complete -- 2 plans, 4 commits, 39 tests
 
 ### Key Files
 - `.planning/ROADMAP.md` -- 24 phases across 5 waves
 - `.planning/REQUIREMENTS.md` -- 99 requirements with traceability
-- `infra/packs/agc/archive/catalog.yaml` -- 210-entry AGC document catalog
-- `infra/packs/agc/archive/README.md` -- Archive documentation
-- `infra/packs/rfc/` -- Complete RFC skill pack (4 scripts, index, reading paths, README)
+- `src/amiga/mc1/stub-me1.ts` -- Stub ME-1 telemetry emitter (4 sequence factories)
+- `src/amiga/mc1/command-parser.ts` -- Command parser (8 commands, ICD-01 validated)
+- `src/amiga/mc1/dashboard.ts` -- Dashboard state manager (telemetry + alert processing)
+- `src/amiga/mc1/alert-renderer.ts` -- Three-tier alert renderer (nominal/advisory/gate)
+- `src/amiga/mc1/telemetry-consumer.ts` -- Event router bridging ME-1 to Dashboard + AlertRenderer
+- `src/amiga/mc1/index.ts` -- MC-1 barrel exports (Phase 203 + 204)
+- `src/amiga/me1/manifest.ts` -- Mission manifest schema, factory, update utility
+- `src/amiga/me1/telemetry-emitter.ts` -- ICD-01 event emitter (TELEMETRY_UPDATE, ALERT_SURFACE, GATE_SIGNAL)
+- `src/amiga/me1/provisioner.ts` -- Clean environment creation from mission briefs
+- `src/amiga/me1/phase-engine.ts` -- Lifecycle transition management with criteria enforcement
+- `src/amiga/me1/gate-controller.ts` -- Gate suspension/clearance wrapping PhaseEngine
+- `src/amiga/me1/swarm-coordinator.ts` -- Command dispatch and resource locking for agent teams
+- `src/amiga/me1/archive-writer.ts` -- Sealed immutable mission archive records
+- `src/amiga/me1/index.ts` -- ME-1 barrel index (Phase 205 + 206 exports)
+- `src/amiga/integration/mission-controller.ts` -- MissionController wiring real ME-1 to real MC-1 via onEmit bridge
+- `src/amiga/integration/index.ts` -- Integration barrel exports
+- `src/amiga/index.ts` -- AMIGA barrel (types, registry, envelope, ICD, MC-1, ME-1, Integration)
