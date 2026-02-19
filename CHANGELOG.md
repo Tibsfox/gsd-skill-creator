@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.25.0] - 2026-02-19
+
+### Added
+
+- **Ecosystem Dependency DAG:** 20-node dependency map with 48 typed edges, machine-readable YAML, Mermaid diagram, critical path analysis (4-hop chain), and 5-milestone build sequencing recommendation
+- **EventDispatcher Specification:** Canonical single-inotify watcher with 6 subscriber profiles, 1,020 watch budget (25% of 4,096 target), AMIGA EventEnvelope as ecosystem standard, migration plan for 2 existing watchers, and inotify-over-fanotify rationale
+- **Dependency Philosophy:** 4-tier layering (Core zero deps, Middleware lean npm, Platform native, Educational inherits) with per-layer contracts, numbered decision tree, ESLint 9+ flat config, Rust module visibility strategy, and 4-step exception process
+- **Integration Test Strategy:** Zod `.toJSONSchema()` + Vitest contract testing with Pact rejection rationale, 6 priority flows with specific I/O, 8 semantic test cases per boundary, freshness policies with 3-tier staleness thresholds, fixture directory structure, and EventDispatcher compliance audit
+- **Partial-Build Compatibility Matrix:** 48-edge compatibility matrix with 3-state degradation tables, 99 known-issues classified (51 aspirational, 26 environment-dependent, 9 permanent, 13 resolved), per-component standalone modes, and 3-tier capability probe protocol
+
+### Stats
+
+- 5 phases (231-235), 14 plans, 18 commits, 9,355 tests, 38 requirements, 17 spec documents (~10,558 lines)
+
+---
+
 ## [1.24.0] - 2026-02-19
 
 ### Added
