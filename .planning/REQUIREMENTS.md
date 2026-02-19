@@ -44,7 +44,7 @@ Requirements for v1.24 — GSD Conformance Audit & Hardening. Each maps to roadm
 - [ ] **BEHAV-01**: Token budget enforcement stops skill loading when budget is exceeded
 - [ ] **BEHAV-02**: Pattern detection triggers at 3+ occurrences and not before
 - [ ] **BEHAV-03**: Bounded learning constraints enforced: ≤20% change per refinement, ≥3 corrections required, 7-day cooldown
-- [ ] **BEHAV-04**: Dashboard metric calculations are correct (phase velocity, commit stats, accuracy scores)
+- [x] **BEHAV-04**: Dashboard metric calculations are correct (phase velocity, commit stats, accuracy scores)
 - [ ] **BEHAV-05**: Template engine renders all variable substitutions correctly in infrastructure templates
 - [ ] **BEHAV-06**: AGC simulator produces correct results for all 38 instructions
 - [ ] **BEHAV-07**: AGC ones' complement ALU handles overflow and sign correctly at all boundary conditions
@@ -53,7 +53,7 @@ Requirements for v1.24 — GSD Conformance Audit & Hardening. Each maps to roadm
 - [ ] **BEHAV-10**: Trust decay model correctly downgrades familiarity tiers over time
 - [ ] **BEHAV-11**: Smart intake correctly routes through 3 clarity paths (clear/gaps/confused)
 - [ ] **BEHAV-12**: Staging queue 7-state machine transitions correctly with append-only audit log
-- [ ] **BEHAV-13**: Security hardening: path traversal prevention, YAML safe deserialization, JSONL integrity all function
+- [x] **BEHAV-13**: Security hardening: path traversal prevention, YAML safe deserialization, JSONL integrity all function
 - [ ] **BEHAV-14**: RFC Reference Skill correctly fetches, parses, and formats RFCs in all 3 output formats
 
 ### UX/Polish Audit (T3)
@@ -151,7 +151,7 @@ Deferred to future milestones. Tracked but not in current roadmap.
 | BEHAV-01 | Phase 226 | Pending |
 | BEHAV-02 | Phase 226 | Pending |
 | BEHAV-03 | Phase 226 | Pending |
-| BEHAV-04 | Phase 226 | Pending |
+| BEHAV-04 | Phase 226 | Complete |
 | BEHAV-05 | Phase 226 | Pending |
 | BEHAV-06 | Phase 226 | Pending |
 | BEHAV-07 | Phase 226 | Pending |
@@ -160,7 +160,7 @@ Deferred to future milestones. Tracked but not in current roadmap.
 | BEHAV-10 | Phase 226 | Pending |
 | BEHAV-11 | Phase 226 | Pending |
 | BEHAV-12 | Phase 226 | Pending |
-| BEHAV-13 | Phase 226 | Pending |
+| BEHAV-13 | Phase 226 | Complete |
 | BEHAV-14 | Phase 226 | Pending |
 | POLISH-01 | Phase 227 | Pending |
 | POLISH-02 | Phase 227 | Pending |
