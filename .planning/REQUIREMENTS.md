@@ -22,13 +22,13 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [x] **SRH-02**: Category tree browsing with subcategory navigation and package counts
 - [x] **SRH-03**: Filter by architecture (m68k-amigaos, ppc-amigaos, etc.)
 - [x] **SRH-04**: Filter by OS version requirement
-- [ ] **SRH-05**: Package detail view showing merged INDEX + .readme metadata
-- [ ] **SRH-06**: Display mirror status, scan status, and install status per package
+- [x] **SRH-05**: Package detail view showing merged INDEX + .readme metadata
+- [x] **SRH-06**: Display mirror status, scan status, and install status per package
 
 ### Collections
 
-- [ ] **COL-01**: Curated collection format as YAML manifest with package references
-- [ ] **COL-02**: Ship 5 starter collections (essential-utils, classic-games, demo-scene, music-mods, dev-tools)
+- [x] **COL-01**: Curated collection format as YAML manifest with package references
+- [x] **COL-02**: Ship 5 starter collections (essential-utils, classic-games, demo-scene, music-mods, dev-tools)
 - [ ] **COL-03**: Users can create, edit, and delete custom collections
 - [ ] **COL-04**: Collections support bulk operations (fetch all, scan all)
 - [ ] **COL-05**: Collections exportable as shareable YAML for other GSD-OS users
@@ -160,10 +160,10 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | SRH-02 | Phase 238 | Complete |
 | SRH-03 | Phase 238 | Complete |
 | SRH-04 | Phase 238 | Complete |
-| SRH-05 | Phase 238 | Pending |
-| SRH-06 | Phase 238 | Pending |
-| COL-01 | Phase 238 | Pending |
-| COL-02 | Phase 238 | Pending |
+| SRH-05 | Phase 238 | Complete |
+| SRH-06 | Phase 238 | Complete |
+| COL-01 | Phase 238 | Complete |
+| COL-02 | Phase 238 | Complete |
 | COL-03 | Phase 238 | Pending |
 | COL-04 | Phase 238 | Pending |
 | COL-05 | Phase 238 | Pending |

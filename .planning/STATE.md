@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.26 — Aminet Archive Extension Pack
 Phase: 238 of 242 (Search, Browse & Collections)
-Plan: 2 of 5 in current phase
+Plan: 4 of 5 in current phase
 Status: In progress
-Last activity: 2026-02-19 — Plan 02 complete (category tree browser with architecture/OS filters, 17 tests)
+Last activity: 2026-02-19 — Plan 04 complete (collection manifest schema, import/export, 5 starter collections, 11 tests)
 
-Progress: [████████░░░░░░░░░░░░] 40%
+Progress: [████████████████░░░░] 80%
 
 ## Performance Metrics
 
@@ -34,11 +34,13 @@ Progress: [████████░░░░░░░░░░░░] 40%
 | 237   | 04   | 2min     | 2     | 3     |
 | 238   | 01   | 2min     | 1     | 3     |
 | 238   | 02   | 2min     | 1     | 3     |
+| 238   | 03   | 3min     | 1     | 3     |
+| 238   | 04   | 3min     | 2     | 8     |
 
 **Velocity:**
-- Total plans completed: 13
+- Total plans completed: 15
 - Average duration: 3min
-- Total execution time: 37min
+- Total execution time: 43min
 
 ## Accumulated Context
 
@@ -80,11 +82,11 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 238-02-PLAN.md (category tree browser with architecture/OS filters, 17 tests)
+Stopped at: Completed 238-04-PLAN.md (collection manifest schema, import/export, 5 starter collections)
 Resume file: None
 
 ## ▶ Next Up
 
-Phase 238 Plan 02 complete. Category browser with tree builder, listing, and architecture/OS filters. Continue executing Phase 238 plans 03-05.
+Phase 238 Plan 04 complete. Collection manifest with Zod-validated YAML schema, import/export round-trip, and 5 curated starter collections. One plan remaining: 05 (barrel exports).
 
 /gsd:execute-phase 238 — continue phase
