@@ -5,8 +5,8 @@
  * Covers Phase 213 (CPU & Memory), Phase 214 (Interrupts & Timing),
  * Phase 216 (Executive, Waitlist, Restart Protection),
  * Phase 217 (DSKY Interface), Phase 218 (Executive Monitor, Alarm Scenario, Learn Mode),
- * and Phase 219 (Tools: Disassembler, Assembler, Debugger, Validation, Rope Loader).
- * Downstream phases (221 Curriculum, 222 Integration) import from here.
+ * Phase 219 (Tools: Disassembler, Assembler, Debugger, Validation, Rope Loader),
+ * and Phase 222 (AGC GSD-OS Integration Pack).
  */
 
 // Types
@@ -269,3 +269,6 @@ export { createLearnModeState, toggleLearnMode, getAnnotation, getAnnotationsFor
 
 // Tools (Phase 219)
 export * from './tools/index.js';
+
+// Pack (Phase 222 -- GSD-OS Integration)
+export * from './pack/index.js';
