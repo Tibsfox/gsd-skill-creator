@@ -46,9 +46,9 @@ Requirements for v1.24 — GSD Conformance Audit & Hardening. Each maps to roadm
 - [ ] **BEHAV-03**: Bounded learning constraints enforced: ≤20% change per refinement, ≥3 corrections required, 7-day cooldown
 - [x] **BEHAV-04**: Dashboard metric calculations are correct (phase velocity, commit stats, accuracy scores)
 - [x] **BEHAV-05**: Template engine renders all variable substitutions correctly in infrastructure templates
-- [ ] **BEHAV-06**: AGC simulator produces correct results for all 38 instructions
-- [ ] **BEHAV-07**: AGC ones' complement ALU handles overflow and sign correctly at all boundary conditions
-- [ ] **BEHAV-08**: DSKY display model correctly decodes relay data and renders 6 registers and 11 annunciators
+- [x] **BEHAV-06**: AGC simulator produces correct results for all 38 instructions
+- [x] **BEHAV-07**: AGC ones' complement ALU handles overflow and sign correctly at all boundary conditions
+- [x] **BEHAV-08**: DSKY display model correctly decodes relay data and renders 6 registers and 11 annunciators
 - [ ] **BEHAV-09**: Staging layer hygiene engine detects all 11 built-in patterns
 - [ ] **BEHAV-10**: Trust decay model correctly downgrades familiarity tiers over time
 - [ ] **BEHAV-11**: Smart intake correctly routes through 3 clarity paths (clear/gaps/confused)
@@ -153,9 +153,9 @@ Deferred to future milestones. Tracked but not in current roadmap.
 | BEHAV-03 | Phase 226 | Pending |
 | BEHAV-04 | Phase 226 | Complete |
 | BEHAV-05 | Phase 226 | Complete |
-| BEHAV-06 | Phase 226 | Pending |
-| BEHAV-07 | Phase 226 | Pending |
-| BEHAV-08 | Phase 226 | Pending |
+| BEHAV-06 | Phase 226 | Complete |
+| BEHAV-07 | Phase 226 | Complete |
+| BEHAV-08 | Phase 226 | Complete |
 | BEHAV-09 | Phase 226 | Pending |
 | BEHAV-10 | Phase 226 | Pending |
 | BEHAV-11 | Phase 226 | Pending |
