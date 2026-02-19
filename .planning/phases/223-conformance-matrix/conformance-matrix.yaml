@@ -40,11 +40,15 @@ documents:
           6-stage skill loading pipeline (Score > Resolve > ModelFilter > CacheOrder > Budget > Load) enforces
           configurable 2-5% token budget ceiling
         verification: unit-test
-        status: pending
-        notes: ""
+        status: pass
+        notes: "All 6 stages implemented and connected; budget configurable per-agent"
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: >-
+          6-stage pipeline at src/application/: ScoreStage, ResolveStage, ModelFilterStage, CacheOrderStage, BudgetStage,
+          LoadStage assembled in SkillApplicator constructor (skill-applicator.ts:71-112). BudgetStage enforces tiered
+          budget with configurable budgetPercent (DEFAULT_CONFIG=3%, agent profiles 5-6%) and hardCeilingPercent (8-10%).
+          Skills exceeding budget are dropped to budgetSkipped array. 73 tests pass across 6 test files in src/application/.
       - id: sc-003
         section: Part 1 > Skill Scoping Aligned to GSD's Model
         claim: >-
@@ -717,11 +721,14 @@ documents:
           GSD implements token optimization through skill-creator's 2-5% token budget ceiling and six-stage loading
           pipeline that prevents context bloat
         verification: unit-test
-        status: pending
-        notes: Cross-reference with sc-002
+        status: pass
+        notes: Cross-reference with sc-002; same evidence applies
         tier: T0
         depends_on: []
-        evidence: ""
+        evidence: >-
+          Same evidence as sc-002. Six-stage pipeline (Score > Resolve > ModelFilter > CacheOrder > Budget > Load) in
+          src/application/skill-applicator.ts enforces configurable token budget (3% default, 5-6% per agent profile).
+          BudgetStage partitions skills by priority tier (critical/standard/optional) and drops excess. 73 tests pass.
       - id: ar-008
         section: Section 2 > Agent Skills
         claim: >-
