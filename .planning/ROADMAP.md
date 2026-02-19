@@ -180,7 +180,7 @@ Phase 237 ──────> 239  │ (scanner needs downloaded packages)
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 236. INDEX Infrastructure & Binary Parsers | 3/6 | In Progress|  |
+| 236. INDEX Infrastructure & Binary Parsers | 5/6 | In Progress|  |
 | 237. Mirror State & Download Engine | 0/5 | Not started | - |
 | 238. Search, Browse & Collections | 0/5 | Not started | - |
 | 239. Virus Scanner & Quarantine | 0/6 | Not started | - |

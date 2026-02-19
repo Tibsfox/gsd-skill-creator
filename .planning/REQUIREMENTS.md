@@ -10,9 +10,9 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 ### INDEX Management
 
 - [x] **IDX-01**: System shall download Aminet INDEX.gz from configurable HTTP mirrors, decompress, and validate format
-- [ ] **IDX-02**: INDEX parser shall extract filename, category, subcategory, size, age, and description from all ~84,000 entries
+- [x] **IDX-02**: INDEX parser shall extract filename, category, subcategory, size, age, and description from all ~84,000 entries
 - [x] **IDX-03**: System shall parse `.readme` files extracting Short, Author, Uploader, Type, Version, Requires, and Architecture fields
-- [ ] **IDX-04**: Parsed INDEX data shall be stored as JSON for offline querying
+- [x] **IDX-04**: Parsed INDEX data shall be stored as JSON for offline querying
 - [ ] **IDX-05**: INDEX shall be considered stale after 24 hours; system shall prompt for update
 - [ ] **IDX-06**: System shall support incremental update via RECENT file
 
@@ -108,7 +108,7 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 ### Non-Functional
 
 - [ ] **NFR-01**: All operations work offline after initial INDEX fetch (search, browse, scan, install from cached data)
-- [ ] **NFR-02**: INDEX parsing completes in <10 seconds for full ~84,000 entries
+- [x] **NFR-02**: INDEX parsing completes in <10 seconds for full ~84,000 entries
 - [ ] **NFR-03**: Signature scan of a single package completes in <2 seconds
 - [ ] **NFR-04**: Test suite achieves >=80% code coverage
 - [ ] **NFR-05**: No Kickstart ROM files distributed with the pack
@@ -151,9 +151,9 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | IDX-01 | Phase 236 | Complete |
-| IDX-02 | Phase 236 | Pending |
+| IDX-02 | Phase 236 | Complete |
 | IDX-03 | Phase 236 | Complete |
-| IDX-04 | Phase 236 | Pending |
+| IDX-04 | Phase 236 | Complete |
 | IDX-05 | Phase 236 | Pending |
 | IDX-06 | Phase 236 | Pending |
 | SRH-01 | Phase 238 | Pending |
@@ -222,7 +222,7 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | AGT-04 | Phase 242 | Pending |
 | AGT-05 | Phase 242 | Pending |
 | NFR-01 | Phase 236 | Pending |
-| NFR-02 | Phase 236 | Pending |
+| NFR-02 | Phase 236 | Complete |
 | NFR-03 | Phase 239 | Pending |
 | NFR-04 | Phase 242 | Pending |
 | NFR-05 | Phase 241 | Pending |

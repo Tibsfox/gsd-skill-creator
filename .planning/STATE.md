@@ -11,24 +11,26 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.26 — Aminet Archive Extension Pack
 Phase: 236 of 242 (INDEX Infrastructure & Binary Parsers)
-Plan: 3 of 6 in current phase
-Status: Executing — Wave 1 complete
-Last activity: 2026-02-19 — Plan 01 complete (binary reader + hunk parser, 33 tests)
+Plan: 5 of 6 in current phase
+Status: Executing — Wave 2 complete
+Last activity: 2026-02-19 — Plan 02 complete (boot block parser, 18 tests, 5 pattern detectors)
 
-Progress: [██████████░░░░░░░░░░] 50%
+Progress: [████████████████░░░░] 83%
 
 ## Performance Metrics
 
 | Phase | Plan | Duration | Tasks | Files |
 |-------|------|----------|-------|-------|
+| 236   | 02   | 3min     | 1     | 3     |
+| 236   | 04   | 3min     | 2     | 3     |
 | 236   | 05   | 3min     | 1     | 3     |
 | 236   | 03   | 3min     | 1     | 3     |
 | 236   | 01   | 7min     | 2     | 5     |
 
 **Velocity:**
-- Total plans completed: 3
+- Total plans completed: 5
 - Average duration: 4min
-- Total execution time: 13min
+- Total execution time: 19min
 
 ## Accumulated Context
 
@@ -49,6 +51,8 @@ Progress: [██████████░░░░░░░░░░] 50%
 - Plan 05: rawHeader keys lowercase for consistent lookup; multi-value split on comma+semicolon
 - Plan 03: ISO-8859-1 via TextDecoder for INDEX decoding; cache uses INDEX + INDEX.meta.json sidecar
 - Plan 01: bit30=MEMF_CHIP (flags=1), bit31=MEMF_FAST (flags=2); unknown hunks skipped gracefully
+- Plan 04: Token-based regex parsing for INDEX; K=1x M=1000x size suffixes; 84K entries in ~114ms; JSON cache for offline
+- Plan 02: Boot block parser with DOS magic, checksum validation, and 5 suspect pattern detectors for virus scanning
 
 ### Pending Todos
 
@@ -61,7 +65,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 236-01-PLAN.md (binary reader + hunk parser)
+Stopped at: Completed 236-02-PLAN.md (boot block parser, 18 tests)
 Resume file: None
 
 ## ▶ Next Up
