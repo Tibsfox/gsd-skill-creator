@@ -1,0 +1,301 @@
+# AGC Documentation Archive -- Cross-References
+# Maps relationships between catalog documents
+# Generated: 2026-02-18
+
+metadata:
+  version: 1
+  generated: "2026-02-18"
+  catalog_ref: "infra/packs/agc/archive/catalog.yaml"
+  total_references: 54
+
+relationship_types:
+  explains: "Source document explains concepts implemented in target"
+  implements: "Source document is the implementation of target specification"
+  supersedes: "Source document replaces target (newer version)"
+  supplements: "Source provides additional context for target"
+  references: "Source cites or references target"
+  companion: "Documents designed to be read together"
+  derived_from: "Source was derived from or based on target"
+
+references:
+  # GSOP <-> Source Code (explains/implements)
+  - source: "agc-soft-006"
+    target: "agc-soft-002"
+    type: "explains"
+    description: "GSOP Section 5 CM guidance equations explain the navigation algorithms implemented in Comanche 055 (Apollo 11 CM)"
+
+  - source: "agc-soft-007"
+    target: "agc-soft-003"
+    type: "explains"
+    description: "GSOP Section 5 LM guidance equations explain the landing algorithms implemented in Luminary 099 (Apollo 11 LM)"
+
+  - source: "agc-soft-003"
+    target: "agc-soft-007"
+    type: "implements"
+    description: "Luminary 099 source code implements the LM guidance equations specified in GSOP R-567 Section 5"
+
+  - source: "agc-soft-002"
+    target: "agc-soft-006"
+    type: "implements"
+    description: "Comanche 055 source code implements the CM guidance equations specified in GSOP R-577 Section 5"
+
+  - source: "agc-soft-008"
+    target: "agc-soft-002"
+    type: "explains"
+    description: "GSOP CM operational modes document explains all P-programs implemented in Comanche"
+
+  - source: "agc-soft-009"
+    target: "agc-soft-003"
+    type: "explains"
+    description: "GSOP LM operational modes document explains all P-programs implemented in Luminary"
+
+  # Hardware docs <-> Software docs (companion)
+  - source: "agc-arch-004"
+    target: "agc-soft-013"
+    type: "companion"
+    description: "Block II Machine Instructions (hardware) and AGC4 Memo #9 (programming) are companion references for the same ISA"
+
+  - source: "agc-arch-027"
+    target: "agc-soft-012"
+    type: "companion"
+    description: "Interpreter hardware description and Interpreter User Guide are companion references for the virtual machine"
+
+  - source: "agc-arch-016"
+    target: "agc-soft-035"
+    type: "companion"
+    description: "Job/Task Control hardware and Computer Utility Programs software document the same executive system from different perspectives"
+
+  # Version relationships (supersedes)
+  - source: "agc-arch-004"
+    target: "agc-arch-003"
+    type: "supersedes"
+    description: "Block II machine instructions supersede Block I instructions for all crewed Apollo flights"
+
+  - source: "agc-arch-005"
+    target: "agc-arch-026"
+    type: "supersedes"
+    description: "Block II AGC architecture supersedes Block I computers for all crewed missions"
+
+  - source: "agc-soft-004"
+    target: "agc-soft-002"
+    type: "supersedes"
+    description: "Artemis 072 (J-missions) is the mature evolution of Comanche 055 (Apollo 11) CM software"
+
+  - source: "agc-soft-006"
+    target: "agc-soft-027"
+    type: "supersedes"
+    description: "Final GSOP R-577 Section 5 supersedes the preliminary GSOP lunar landing guidance equations"
+
+  - source: "agc-soft-006"
+    target: "agc-soft-031"
+    type: "supersedes"
+    description: "Colossus 3 GSOP supersedes the original R-477 GSOP for unmanned missions"
+
+  # AGC Information Series relationships (supplements)
+  - source: "agc-arch-006"
+    target: "agc-arch-002"
+    type: "supplements"
+    description: "Timer/Sequence Generator supplements Central Processor by detailing the timing that drives instruction execution"
+
+  - source: "agc-arch-007"
+    target: "agc-arch-002"
+    type: "supplements"
+    description: "Priority Control supplements Central Processor by detailing interrupt handling hardware"
+
+  - source: "agc-arch-008"
+    target: "agc-arch-006"
+    type: "supplements"
+    description: "Sequence Generator supplements Timer by providing microsequence detail for each instruction"
+
+  - source: "agc-arch-019"
+    target: "agc-arch-007"
+    type: "supplements"
+    description: "KEYRUPT/UPRUPT supplements Priority Control with specific keyboard and uplink interrupt details"
+
+  - source: "agc-arch-020"
+    target: "agc-arch-007"
+    type: "supplements"
+    description: "Mode Switching supplements Priority Control with optical mark button interrupt handling"
+
+  - source: "agc-arch-028"
+    target: "agc-arch-027"
+    type: "supplements"
+    description: "Interpretive Instructions supplements Interpreter with the complete interpretive instruction set reference"
+
+  # Tindallgrams <-> Technical decisions (references)
+  - source: "agc-mgmt-004"
+    target: "agc-test-012"
+    type: "references"
+    description: "Tindallgram on lunar landing alarms references the 1202/1201 alarm technical analysis"
+
+  - source: "agc-mgmt-005"
+    target: "agc-ops-008"
+    type: "references"
+    description: "Tindallgram on Apollo 14 abort switch references the mission report documenting the anomaly"
+
+  - source: "agc-mgmt-006"
+    target: "agc-arch-007"
+    type: "references"
+    description: "Tindallgram on software priority concerns references the Priority Control hardware documentation"
+
+  - source: "agc-mgmt-007"
+    target: "agc-draw-010"
+    type: "references"
+    description: "Tindallgram on rope manufacturing schedule references core rope module physical constraints"
+
+  - source: "agc-mgmt-014"
+    target: "agc-arch-005"
+    type: "references"
+    description: "Tindallgram on memory capacity concerns references the 36K-word fixed memory limit in Block II architecture"
+
+  - source: "agc-mgmt-025"
+    target: "agc-ops-004"
+    type: "references"
+    description: "Tindallgram on Apollo 13 software response references the Apollo 13 mission report"
+
+  - source: "agc-mgmt-026"
+    target: "agc-soft-003"
+    type: "references"
+    description: "Tindallgram on software freeze references the Luminary 099 code that was the freeze target"
+
+  # Mission reports <-> Flight software (references)
+  - source: "agc-ops-003"
+    target: "agc-soft-002"
+    type: "references"
+    description: "Apollo 11 mission report documents performance of Comanche 055 CM flight software"
+
+  - source: "agc-ops-003"
+    target: "agc-soft-003"
+    type: "references"
+    description: "Apollo 11 mission report documents performance of Luminary 099 LM flight software including 1202 alarms"
+
+  - source: "agc-ops-004"
+    target: "agc-soft-003"
+    type: "references"
+    description: "Apollo 13 mission report documents contingency use of LM AGC software during lifeboat mode"
+
+  - source: "agc-ops-007"
+    target: "agc-soft-019"
+    type: "references"
+    description: "Apollo 12 mission report references Luminary 1A performance during precision landing"
+
+  # Engineering drawings <-> Hardware docs (companion)
+  - source: "agc-draw-004"
+    target: "agc-arch-001"
+    type: "companion"
+    description: "Block II schematics (Hall Collection) are companion to R-700 hardware manual -- diagrams for the text"
+
+  - source: "agc-draw-005"
+    target: "agc-arch-001"
+    type: "companion"
+    description: "Virtual AGC drawings portal provides visual companion to the R-700 hardware descriptions"
+
+  - source: "agc-draw-006"
+    target: "agc-arch-002"
+    type: "companion"
+    description: "Logic flow diagrams are companion to Central Processor text description"
+
+  - source: "agc-draw-007"
+    target: "agc-iface-002"
+    type: "companion"
+    description: "DSKY electrical schematics are companion to the DSKY Interface Specification"
+
+  - source: "agc-draw-010"
+    target: "agc-soft-029"
+    type: "companion"
+    description: "Core rope module drawings are companion to the AP11ROPE core rope documentation"
+
+  # Interface docs <-> GSOP I/O sections (companion)
+  - source: "agc-iface-001"
+    target: "agc-iface-004"
+    type: "companion"
+    description: "I/O Channel Assignments (hardware) and GSOP I/O Control (software) document the same channels"
+
+  - source: "agc-iface-007"
+    target: "agc-soft-009"
+    type: "supplements"
+    description: "Landing radar interface supplements LM operational modes with radar data format details needed for P63/P64"
+
+  - source: "agc-iface-008"
+    target: "agc-soft-008"
+    type: "supplements"
+    description: "Rendezvous radar interface supplements CM operational modes with tracking data for P20"
+
+  # Modern references <-> Primary sources (derived_from)
+  - source: "agc-edu-001"
+    target: "agc-arch-001"
+    type: "derived_from"
+    description: "O'Brien book draws extensively from R-700 and other primary MIT/IL sources"
+
+  - source: "agc-edu-002"
+    target: "agc-arch-005"
+    type: "derived_from"
+    description: "Averill analysis paper is derived from Block II architecture documentation and Virtual AGC resources"
+
+  - source: "agc-arch-012"
+    target: "agc-arch-001"
+    type: "derived_from"
+    description: "Pultorak's Block I build guide is derived from R-700 hardware descriptions and original schematics"
+
+  - source: "agc-edu-007"
+    target: "agc-soft-002"
+    type: "derived_from"
+    description: "GitHub Apollo 11 repo is derived from the digitized Comanche/Luminary source listings"
+
+  - source: "agc-soft-028"
+    target: "agc-soft-013"
+    type: "derived_from"
+    description: "Modern assembly language manual is derived from AGC4 Memo #9 and other original programming references"
+
+  # Testing and reliability chain
+  - source: "agc-test-001"
+    target: "agc-arch-009"
+    type: "supplements"
+    description: "Acceptance test procedures supplement reliability history by documenting the QA process that achieved zero failures"
+
+  - source: "agc-test-006"
+    target: "agc-test-007"
+    type: "companion"
+    description: "Software verification methodology and YUL system/simulator are companion -- verification relied on YUL simulation"
+
+  - source: "agc-test-011"
+    target: "agc-test-006"
+    type: "supplements"
+    description: "Experience report on software testing supplements verification methodology with lessons learned from actual program"
+
+  - source: "agc-test-015"
+    target: "agc-arch-009"
+    type: "supplements"
+    description: "PGNCS development experience report supplements reliability history with development context"
+
+  # User guides <-> Source code
+  - source: "agc-soft-019"
+    target: "agc-soft-003"
+    type: "companion"
+    description: "User's Guide to Luminary 1A is the companion user manual for the Luminary 099 source code"
+
+  - source: "agc-soft-024"
+    target: "agc-soft-023"
+    type: "companion"
+    description: "Skylark User's Guide is companion to the Skylark GSOP guidance equations"
+
+  - source: "agc-soft-025"
+    target: "agc-soft-008"
+    type: "supplements"
+    description: "Major Modes User Guide supplements GSOP operational modes with crew-facing documentation"
+
+  # Training materials <-> Technical docs
+  - source: "agc-arch-014"
+    target: "agc-arch-004"
+    type: "derived_from"
+    description: "AGC4 Basic Training Manual is derived from Block II machine instructions for teaching purposes"
+
+  - source: "agc-ops-005"
+    target: "agc-arch-010"
+    type: "supplements"
+    description: "PGNCS Familiarization supplements GNC Hardware Overview with hands-on crew training material"
+
+  - source: "agc-ops-012"
+    target: "agc-ops-001"
+    type: "supplements"
+    description: "Mission Simulator Instructor Handbook supplements Operations Handbook with training simulation procedures"
