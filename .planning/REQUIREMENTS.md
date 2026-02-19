@@ -47,8 +47,8 @@ Requirements for v1.25. Each maps to roadmap phases.
 - [x] **INTTEST-03**: Input/output schema definitions per cross-component boundary are specified using Zod schemas with `.passthrough()` for forward compatibility
 - [x] **INTTEST-04**: At least one "structurally valid, semantically invalid" test case is documented per cross-component boundary
 - [x] **INTTEST-05**: Freshness policy per boundary assigns an owner, last-verified date, and re-verification trigger for each contract
-- [ ] **INTTEST-06**: Fixture strategy defines `.planning/fixtures/` structure with per-flow snapshot projects at known pipeline stages
-- [ ] **INTTEST-07**: Spec compliance audit step is defined for subsequent milestone verification phases to check for EventDispatcher bypass
+- [x] **INTTEST-06**: Fixture strategy defines `.planning/fixtures/` structure with per-flow snapshot projects at known pipeline stages
+- [x] **INTTEST-07**: Spec compliance audit step is defined for subsequent milestone verification phases to check for EventDispatcher bypass
 
 ### Partial-Build Compatibility
 
@@ -127,8 +127,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INTTEST-03 | Phase 234 | Complete |
 | INTTEST-04 | Phase 234 | Complete |
 | INTTEST-05 | Phase 234 | Complete |
-| INTTEST-06 | Phase 234 | Pending |
-| INTTEST-07 | Phase 234 | Pending |
+| INTTEST-06 | Phase 234 | Complete |
+| INTTEST-07 | Phase 234 | Complete |
 | COMPAT-01 | Phase 235 | Pending |
 | COMPAT-02 | Phase 235 | Pending |
 | COMPAT-03 | Phase 235 | Pending |
