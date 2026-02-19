@@ -17,12 +17,12 @@ Requirements for v1.24 — GSD Conformance Audit & Hardening. Each maps to roadm
 
 ### Foundation Audit (T0)
 
-- [ ] **FOUND-01**: Full GSD lifecycle runs on clean context: new-project → research → requirements → roadmap → plan-phase → execute-phase → verify-work → complete-milestone
-- [ ] **FOUND-02**: `.planning/` directory structure is created and populated correctly by each GSD command
+- [x] **FOUND-01**: Full GSD lifecycle runs on clean context: new-project → research → requirements → roadmap → plan-phase → execute-phase → verify-work → complete-milestone
+- [x] **FOUND-02**: `.planning/` directory structure is created and populated correctly by each GSD command
 - [x] **FOUND-03**: 6-stage skill loading pipeline (Score → Resolve → ModelFilter → CacheOrder → Budget → Load) executes correctly
-- [ ] **FOUND-04**: STATE.md accurately tracks phase position, blockers, and session history
-- [ ] **FOUND-05**: Subagent spawning works for executor, planner, and verifier agents
-- [ ] **FOUND-06**: Filesystem message bus (`.planning/console/` inbox/outbox) writes and reads correctly
+- [x] **FOUND-04**: STATE.md accurately tracks phase position, blockers, and session history
+- [x] **FOUND-05**: Subagent spawning works for executor, planner, and verifier agents
+- [x] **FOUND-06**: Filesystem message bus (`.planning/console/` inbox/outbox) writes and reads correctly
 - [x] **FOUND-07**: All existing unit tests pass on a clean checkout (`npm test` exits 0)
 - [x] **FOUND-08**: TypeScript compiles with zero errors in strict mode
 
@@ -130,12 +130,12 @@ Deferred to future milestones. Tracked but not in current roadmap.
 | MATRIX-03 | Phase 223 | Complete |
 | MATRIX-04 | Phase 223 | Complete |
 | MATRIX-05 | Phase 223 | Complete |
-| FOUND-01 | Phase 224 | Pending |
-| FOUND-02 | Phase 224 | Pending |
+| FOUND-01 | Phase 224 | Complete |
+| FOUND-02 | Phase 224 | Complete |
 | FOUND-03 | Phase 224 | Complete |
-| FOUND-04 | Phase 224 | Pending |
-| FOUND-05 | Phase 224 | Pending |
-| FOUND-06 | Phase 224 | Pending |
+| FOUND-04 | Phase 224 | Complete |
+| FOUND-05 | Phase 224 | Complete |
+| FOUND-06 | Phase 224 | Complete |
 | FOUND-07 | Phase 224 | Complete |
 | FOUND-08 | Phase 224 | Complete |
 | INTEG-01 | Phase 225 | Pending |
