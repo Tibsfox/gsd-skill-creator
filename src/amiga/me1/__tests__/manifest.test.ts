@@ -353,9 +353,11 @@ describe('updateManifest', () => {
       name: 'Test Mission',
       description: 'Test description',
     });
-    const updated = updateManifest(original, { status: 'active' });
+    // Force a past timestamp so updateManifest will produce a different one
+    const frozen = { ...original, updated_at: '2020-01-01T00:00:00.000Z' };
+    const updated = updateManifest(frozen, { status: 'active' });
     expect(updated.status).toBe('active');
-    expect(updated.updated_at).not.toBe(original.updated_at);
+    expect(updated.updated_at).not.toBe(frozen.updated_at);
   });
 
   it('appends skills without losing existing data', () => {
