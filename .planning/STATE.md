@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.26 — Aminet Archive Extension Pack
 Phase: 238 of 242 (Search, Browse & Collections)
-Plan: 4 of 5 in current phase
-Status: In progress
-Last activity: 2026-02-19 — Plan 04 complete (collection manifest schema, import/export, 5 starter collections, 11 tests)
+Plan: 5 of 5 in current phase (COMPLETE)
+Status: Phase 238 complete
+Last activity: 2026-02-19 — Plan 05 complete (collection manager CRUD, barrel exports, 244 tests)
 
-Progress: [████████████████░░░░] 80%
+Progress: [████████████████████] 100%
 
 ## Performance Metrics
 
@@ -36,11 +36,12 @@ Progress: [████████████████░░░░] 80%
 | 238   | 02   | 2min     | 1     | 3     |
 | 238   | 03   | 3min     | 1     | 3     |
 | 238   | 04   | 3min     | 2     | 8     |
+| 238   | 05   | 3min     | 2     | 3     |
 
 **Velocity:**
-- Total plans completed: 15
+- Total plans completed: 16
 - Average duration: 3min
-- Total execution time: 43min
+- Total execution time: 46min
 
 ## Accumulated Context
 
@@ -70,6 +71,12 @@ Progress: [████████████████░░░░] 80%
 - Plan 03: computeSha256 via node:crypto, verifySizeKb with +/-1 KB tolerance, verifyIntegrity combining both into IntegrityResult
 - Plan 05: detectChanges compares mirror state vs INDEX by sizeKb; only change-eligible statuses (mirrored+) compared; O(1) Map lookup
 - Plan 04: bulkDownload with async semaphore concurrency, global rate limiting gate, resume from interruption, serialized state writes via Promise chain mutex
+- Phase 238 planned: 5 plans, wave 1 (01+02+03 parallel), wave 2 (04+05 sequential)
+- Plan 238-01: searchPackages with case-insensitive substring matching, relevance scoring (name=3, description=2, author=1)
+- Plan 238-02: buildCategoryTree, listPackages, filterByArchitecture, filterByOsVersion for browsing
+- Plan 238-03: buildPackageDetail merging INDEX + readme + mirror state into unified view
+- Plan 238-04: CollectionManifest Zod schema, importCollection/exportCollection YAML round-trip, 5 starter collections
+- Plan 238-05: Collection manager CRUD with DI-first pattern (collectionsDir param), atomic write-then-rename, slugified filenames, getCollectionPaths for bulkDownload
 
 ### Pending Todos
 
@@ -82,11 +89,11 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 238-04-PLAN.md (collection manifest schema, import/export, 5 starter collections)
+Stopped at: Completed 238-05-PLAN.md (collection manager CRUD, barrel exports, Phase 238 complete)
 Resume file: None
 
 ## ▶ Next Up
 
-Phase 238 Plan 04 complete. Collection manifest with Zod-validated YAML schema, import/export round-trip, and 5 curated starter collections. One plan remaining: 05 (barrel exports).
+Phase 238 complete. All 5 plans executed: search, category browser, package detail, collections, collection manager + barrel. 244 tests passing across 17 aminet test files. Ready for Phase 239.
 
-/gsd:execute-phase 238 — continue phase
+/gsd:execute-phase 239 — start scanning phase
