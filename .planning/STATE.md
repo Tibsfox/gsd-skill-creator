@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.26 — Aminet Archive Extension Pack
 Phase: 239 of 242 (Virus Scanner & Quarantine)
-Plan: 3 of 6 in current phase
-Status: Executing phase 239
-Last activity: 2026-02-19 — Plan 03 complete (heuristic scanner, 8 rules, 21 tests, worst-case verdict)
+Plan: 6 of 6 in current phase
+Status: Phase 239 complete
+Last activity: 2026-02-19 — Plan 06 complete (emulated scanner, checksum lookup, barrel update, 12 tests)
 
-Progress: [██████████░░░░░░░░░░] 50%
+Progress: [████████████████████] 100%
 
 ## Performance Metrics
 
@@ -40,11 +40,13 @@ Progress: [██████████░░░░░░░░░░] 50%
 | 239   | 01   | 4min     | 1     | 6     |
 | 239   | 02   | 2min     | 1     | 2     |
 | 239   | 03   | 3min     | 1     | 2     |
+| 239   | 04   | 3min     | 1     | 2     |
+| 239   | 06   | 4min     | 2     | 3     |
 
 **Velocity:**
-- Total plans completed: 19
+- Total plans completed: 21
 - Average duration: 3min
-- Total execution time: 55min
+- Total execution time: 62min
 
 ## Accumulated Context
 
@@ -82,6 +84,9 @@ Progress: [██████████░░░░░░░░░░] 50%
 - Plan 238-05: Collection manager CRUD with DI-first pattern (collectionsDir param), atomic write-then-rename, slugified filenames, getCollectionPaths for bulkDownload
 - Plan 239-01: All Phase 239 Zod schemas (VirusSignature, ScanReport, QuarantineEntry, ScanPolicyConfig) + 52 virus signatures in 3 JSON files; last-wins deduplication; extensible via JSON drop-in
 - Plan 239-02: Context-aware scanBuffer with hex pattern matching, wildcard bitmasks, bootblock/hunk dispatch, <2s for 500KB x 50 sigs; 22 tests
+- Plan 239-03: Heuristic scanner with 8 rules (4 hunk, 4 boot block), worst-case verdict derivation, zero false positives on legitimate files; 21 tests
+- Plan 239-04: Quarantine system with atomic file moves, metadata sidecars, path traversal prevention, restore round-trip; 15 tests
+- Plan 239-06: FS-UAE + CheckX emulated scanner with AbortController timeout, community checksum cross-reference, barrel updated with Phase 239 exports; 12 tests
 
 ### Pending Todos
 
@@ -94,11 +99,11 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 239-02-PLAN.md (signature scanner engine, 22 tests, context-aware dispatch)
+Stopped at: Completed 239-06-PLAN.md (emulated scanner, checksum lookup, barrel update, 12 tests)
 Resume file: None
 
 ## ▶ Next Up
 
-Plan 239-02 complete. Context-aware signature scanner with hex pattern matching. Ready for Plan 239-03.
+Plan 239-06 complete. Emulated scanner with FS-UAE wrapper and community checksum lookup. Barrel updated with Phase 239 exports. Phase 239 scanning complete pending Plan 05 (scan orchestrator).
 
-/gsd:execute-phase 239 — continue scanning phase (plan 03 next)
+/gsd:execute-phase 239 — continue scanning phase (plan 05 next)

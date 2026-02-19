@@ -53,16 +53,16 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [x] **SCN-01**: Signature-based scanning against a database of >=50 known Amiga virus byte patterns
 - [x] **SCN-02**: Detect the 20 most common Amiga viruses by signature (SCA, Byte Bandit, Lamer Exterminator, IRQ, BGS9, HNY96, Saddam, DASA, etc.)
 - [x] **SCN-03**: Parse AmigaOS hunk executable format (HUNK_HEADER through HUNK_END)
-- [ ] **SCN-04**: Heuristic analysis detecting anomalous hunk structures and known infection patterns
-- [ ] **SCN-05**: Boot block analysis detecting unauthorized trackdisk.device access patterns
-- [ ] **SCN-06**: Quarantine system — move infected files to `.quarantine/` with metadata
-- [ ] **SCN-07**: Scan results: clean / suspicious / infected / unscanned status per file
-- [ ] **SCN-08**: Emulated scanning via VirusZ III / CheckX inside headless FS-UAE
-- [ ] **SCN-09**: Community checksum cross-reference against known-good hashes
+- [x] **SCN-04**: Heuristic analysis detecting anomalous hunk structures and known infection patterns
+- [x] **SCN-05**: Boot block analysis detecting unauthorized trackdisk.device access patterns
+- [x] **SCN-06**: Quarantine system — move infected files to `.quarantine/` with metadata
+- [x] **SCN-07**: Scan results: clean / suspicious / infected / unscanned status per file
+- [x] **SCN-08**: Emulated scanning via VirusZ III / CheckX inside headless FS-UAE
+- [x] **SCN-09**: Community checksum cross-reference against known-good hashes
 - [ ] **SCN-10**: Configurable scan depth via scan-policy.yaml (fast/standard/thorough)
 - [ ] **SCN-11**: Batch scanning for bulk download processing
 - [x] **SCN-12**: Signature database stored as extensible JSON — new signatures addable by dropping files
-- [ ] **SCN-13**: Heuristic scanner achieves >=80% boot block virus detection rate vs VirusZ reference
+- [x] **SCN-13**: Heuristic scanner achieves >=80% boot block virus detection rate vs VirusZ reference
 
 ### Installation
 
@@ -182,16 +182,16 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | SCN-01 | Phase 239 | Complete |
 | SCN-02 | Phase 239 | Complete |
 | SCN-03 | Phase 236 | Complete |
-| SCN-04 | Phase 239 | Pending |
-| SCN-05 | Phase 239 | Pending |
-| SCN-06 | Phase 239 | Pending |
-| SCN-07 | Phase 239 | Pending |
-| SCN-08 | Phase 239 | Pending |
-| SCN-09 | Phase 239 | Pending |
+| SCN-04 | Phase 239 | Complete |
+| SCN-05 | Phase 239 | Complete |
+| SCN-06 | Phase 239 | Complete |
+| SCN-07 | Phase 239 | Complete |
+| SCN-08 | Phase 239 | Complete |
+| SCN-09 | Phase 239 | Complete |
 | SCN-10 | Phase 239 | Pending |
 | SCN-11 | Phase 239 | Pending |
 | SCN-12 | Phase 239 | Complete |
-| SCN-13 | Phase 239 | Pending |
+| SCN-13 | Phase 239 | Complete |
 | INS-01 | Phase 240 | Pending |
 | INS-02 | Phase 240 | Pending |
 | INS-03 | Phase 240 | Pending |
