@@ -45,8 +45,8 @@ Requirements for v1.25. Each maps to roadmap phases.
 - [x] **INTTEST-01**: Contract test approach selects Zod `.toJSONSchema()` + Vitest as the ecosystem contract testing mechanism with rationale for rejecting Pact and other HTTP-focused alternatives
 - [x] **INTTEST-02**: Priority test flows document at least 5 cross-component integration scenarios with specific input/output at each boundary
 - [x] **INTTEST-03**: Input/output schema definitions per cross-component boundary are specified using Zod schemas with `.passthrough()` for forward compatibility
-- [ ] **INTTEST-04**: At least one "structurally valid, semantically invalid" test case is documented per cross-component boundary
-- [ ] **INTTEST-05**: Freshness policy per boundary assigns an owner, last-verified date, and re-verification trigger for each contract
+- [x] **INTTEST-04**: At least one "structurally valid, semantically invalid" test case is documented per cross-component boundary
+- [x] **INTTEST-05**: Freshness policy per boundary assigns an owner, last-verified date, and re-verification trigger for each contract
 - [ ] **INTTEST-06**: Fixture strategy defines `.planning/fixtures/` structure with per-flow snapshot projects at known pipeline stages
 - [ ] **INTTEST-07**: Spec compliance audit step is defined for subsequent milestone verification phases to check for EventDispatcher bypass
 
@@ -125,8 +125,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INTTEST-01 | Phase 234 | Complete |
 | INTTEST-02 | Phase 234 | Complete |
 | INTTEST-03 | Phase 234 | Complete |
-| INTTEST-04 | Phase 234 | Pending |
-| INTTEST-05 | Phase 234 | Pending |
+| INTTEST-04 | Phase 234 | Complete |
+| INTTEST-05 | Phase 234 | Complete |
 | INTTEST-06 | Phase 234 | Pending |
 | INTTEST-07 | Phase 234 | Pending |
 | COMPAT-01 | Phase 235 | Pending |

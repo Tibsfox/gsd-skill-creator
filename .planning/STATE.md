@@ -11,18 +11,18 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.25 — GSD Ecosystem Integration
 Phase: 234 (4 of 5) — Integration Test Strategy
-Plan: 1 of 3 in current phase
-Status: Plan 234-01 complete
-Last activity: 2026-02-19 — Plan 234-01 complete (contract testing approach: Zod + Vitest, Pact rejection, 6 priority flows, 8 boundary schemas)
+Plan: 3 of 3 in current phase
+Status: Phase 234 complete
+Last activity: 2026-02-19 — Plan 234-03 complete (fixture strategy for 6 flows, EventDispatcher compliance audit with 4-category grep detection)
 
-Progress: [###############░░░░░] 75%
+Progress: [##################░░] 90%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
-- Average duration: 4.4m
-- Total execution time: 0.66 hours
+- Total plans completed: 11
+- Average duration: 4.5m
+- Total execution time: 0.83 hours
 
 **By Phase:**
 
@@ -31,7 +31,7 @@ Progress: [###############░░░░░] 75%
 | 231 | 3 | 14m | 4.6m |
 | 232 | 3 | 13m | 4.3m |
 | 233 | 2 | 8m | 4.0m |
-| 234 | 1 | 5m | 5.0m |
+| 234 | 3 | 15m | 5.0m |
 
 *Updated after each plan completion*
 
@@ -83,6 +83,10 @@ Recent decisions affecting current work:
 - [234-01]: .contract.test.ts in __tests__/ not separate __contracts__/ directory
 - [234-01]: expect.schemaMatching deferred: not in Vitest 4.0.18 stable, use .parse() directly
 - [234-01]: Console adapter uses 'broadcast' as interim source until AGENT_OR_SPECIAL_PATTERN regex extended
+- [234-02]: Producer-side schema ownership with consumer-adapter exception for dual-export boundaries
+- [234-02]: 60-day staleness for critical-path boundaries (Console, Staging, AMIGA, Orchestrator)
+- [234-02]: 90-day staleness for standard boundaries (Copper, SessionEventBridge, Collectors, Skill)
+- [234-02]: 4 re-verification triggers: schema change, Zod major bump, milestone completion, new subscriber
 
 ### Key Context
 
@@ -104,5 +108,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 234-01-PLAN.md (contract testing approach -- Zod + Vitest, 6 priority flows, 8 boundary schemas)
+Stopped at: Completed 234-02-PLAN.md (semantic test cases per boundary, freshness policy with producer-side ownership, staleness detection)
 Resume file: None
