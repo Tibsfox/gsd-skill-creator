@@ -11,9 +11,9 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.26 — Aminet Archive Extension Pack
 Phase: 240 of 242 (Installation Archive Extraction)
-Plan: 2 of 5 in current phase
+Plan: 3 of 5 in current phase
 Status: Executing
-Last activity: 2026-02-19 — Plan 02 complete (LZX extractor with cwd workaround, tool validator with platform-specific guidance, 17 tests)
+Last activity: 2026-02-19 — Plan 03 complete (filesystem mapper with 11-assign case-insensitive lookup, Software/ default placement, 19 tests)
 
 Progress: [████████████████░░░░] 80%
 
@@ -46,11 +46,12 @@ Progress: [████████████████░░░░] 80%
 
 | 240   | 01   | 2min     | 1     | 3     |
 | 240   | 02   | 4min     | 2     | 4     |
+| 240   | 03   | 3min     | 1     | 2     |
 
 **Velocity:**
-- Total plans completed: 23
+- Total plans completed: 24
 - Average duration: 3min
-- Total execution time: 69min
+- Total execution time: 72min
 
 ## Accumulated Context
 
@@ -94,6 +95,7 @@ Progress: [████████████████░░░░] 80%
 - Plan 239-05: Scan orchestrator coordinating signature + heuristic scanners into unified ScanReport; configurable depth (fast/standard/thorough); batch processing with auto-quarantine; worst-case verdict merging; YAML policy with Zod; 28 tests
 - Plan 240-01: All Phase 240 Zod schemas (ExtractionResult, ToolStatus, InstallConfig, DependencyType, Dependency, InstalledFile, InstallManifest, ScanGateResult) + LhA extractor via lhasa with Zip-Slip prevention, volume prefix stripping, 30s timeout; 21 tests
 - Plan 240-02: LZX extractor via unlzx with cwd workaround (no output dir flag), tool validator with platform-specific install guidance (apt/brew), unlzx exit-code-2 detection; 17 tests
+- Plan 240-03: Filesystem mapper with AMIGA_ASSIGN_MAP (11 assigns), case-insensitive lookup, Software/ default placement, placeFiles with SHA-256 tracking and temp cleanup; 19 tests
 
 ### Pending Todos
 
@@ -106,11 +108,11 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 240-02-PLAN.md (LZX extractor with cwd workaround, tool validator with platform-specific guidance, 17 tests)
+Stopped at: Completed 240-03-PLAN.md (filesystem mapper with 11-assign case-insensitive lookup, Software/ default placement, 19 tests)
 Resume file: None
 
 ## ▶ Next Up
 
-Phase 240 in progress. Plans 01-02 complete (LhA extractor, LZX extractor, tool validator). Plans 03-05 remaining.
+Phase 240 in progress. Plans 01-03 complete (LhA extractor, LZX extractor, tool validator, filesystem mapper). Plans 04-05 remaining.
 
 Continue /gsd:execute-phase 240 -- next plans

@@ -68,7 +68,7 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 
 - [x] **INS-01**: Extract LhA archives (methods -lh0- through -lh7-) via `lha` or `lhasa`
 - [x] **INS-02**: Extract LZX archives via `unlzx`
-- [ ] **INS-03**: Map extracted files to emulated Amiga filesystem paths (Libs->LIBS:, C->C:, etc.)
+- [x] **INS-03**: Map extracted files to emulated Amiga filesystem paths (Libs->LIBS:, C->C:, etc.)
 - [ ] **INS-04**: Detect dependencies from .readme `Requires:` field
 - [ ] **INS-05**: Report missing dependencies to user
 - [ ] **INS-06**: Track all installed files per package for clean uninstall
@@ -194,7 +194,7 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | SCN-13 | Phase 239 | Complete |
 | INS-01 | Phase 240 | Complete |
 | INS-02 | Phase 240 | Complete |
-| INS-03 | Phase 240 | Pending |
+| INS-03 | Phase 240 | Complete |
 | INS-04 | Phase 240 | Pending |
 | INS-05 | Phase 240 | Pending |
 | INS-06 | Phase 240 | Pending |
