@@ -575,6 +575,7 @@ export class FullStackController {
     };
 
     // Emit ICD-03 GOVERNANCE_QUERY event
+    // Note: requestor must be a valid AgentID (CS-1) or 'human', not MC-1
     const queryEnvelope = createEnvelope({
       source: 'MC-1',
       destination: 'GL-1',
@@ -582,7 +583,7 @@ export class FullStackController {
       payload: {
         query_type: 'compliance_check',
         subject: `Distribution plan compliance for ${this.missionId}`,
-        requestor: 'MC-1',
+        requestor: 'CS-1',
         distribution_plan_id: glPlan.plan_id,
         context: { distribution_plan: glPlan },
       } as Record<string, unknown>,
@@ -598,7 +599,7 @@ export class FullStackController {
       evalResult,
       'compliance_check',
       `Distribution plan for ${this.missionId}`,
-      'MC-1',
+      'CS-1',
     );
 
     // Emit ICD-03 GOVERNANCE_RESPONSE event
