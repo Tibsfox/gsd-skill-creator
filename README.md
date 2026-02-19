@@ -199,10 +199,10 @@ Produces platform-specific packages in `src-tauri/target/release/bundle/`:
 ### Test
 
 ```bash
-# Run desktop test suite (636 tests)
+# Run desktop test suite
 npm run desktop:test
 
-# Run skill-creator library tests
+# Run skill-creator library tests (9,355 tests)
 npm test
 ```
 
@@ -285,10 +285,10 @@ All documentation lives in [`docs/`](docs/).
 | [Configuration](docs/CONFIGURATION.md) | Thresholds, retention, and cluster settings |
 | [File Structure](docs/FILE-STRUCTURE.md) | Project and source code layout |
 | [Development](docs/DEVELOPMENT.md) | Building, testing, and contributing |
-| [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 27 milestones |
+| [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 28 milestones |
 | [GSD Teams Guide](docs/GSD-TEAMS.md) | Teams vs subagents for GSD workflows |
 | [Comparison](docs/COMPARISON.md) | Skills vs Agents vs Teams |
-| [Release History](docs/RELEASE-HISTORY.md) | Detailed release notes for all 27 milestones |
+| [Release History](docs/RELEASE-HISTORY.md) | Detailed release notes for all 28 milestones |
 | [Troubleshooting](docs/TROUBLESHOOTING.md) | Common issues and solutions |
 | [Examples](examples/) | 34 ready-to-use skills, agents, and teams |
 
@@ -302,7 +302,7 @@ See [SECURITY.md](SECURITY.md) for vulnerability reporting, threat model, and se
 
 ## Project Stats
 
-27 milestones shipped (v1.0-v1.23 + v1.8.1 patch) | 222 phases | 594 plans | ~280k LOC TypeScript, Rust, GLSL, Bash & Python
+28 milestones shipped (v1.0-v1.24 + v1.8.1 patch) | 230 phases | 625 plans | ~278k LOC TypeScript, Rust, GLSL, Bash & Python | 9,355 tests
 
 ---
 

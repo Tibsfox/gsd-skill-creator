@@ -131,6 +131,50 @@ All 30 requirements implemented: three-tier sample rates, data collectors, live 
 
 All 39 requirements implemented: stack core, message operations, session lifecycle, recording/playback, Pipeline List format, Offload engine, Pipeline executor, team-as-chip framework, exec kernel, Pipeline learning, and chipset integration.
 
+## v1.14 Promotion Pipeline (27 total)
+
+All 27 requirements implemented: execution capture, determinism analysis, promotion detection, script generation, gatekeeper metrics, drift monitoring, lineage tracking, and dashboard collectors.
+
+## v1.15 Live Dashboard Terminal (17 total)
+
+All 17 requirements implemented: terminal configuration, process management, tmux session binding, dashboard terminal panel, and unified launcher.
+
+## v1.16 Dashboard Console & Milestone Ingestion (27 total)
+
+All 27 requirements implemented: filesystem message bus, HTTP helper endpoint, upload zone and configuration, inbox checking, question cards, and console dashboard page.
+
+## v1.17 Staging Layer (38 total)
+
+All 38 requirements implemented: staging foundation, hygiene engine, trust-aware reporting, smart intake flow, resource analysis, derived knowledge checking, staging queue, and queue pipelining.
+
+## v1.18 Information Design System (53 total)
+
+All 53 requirements implemented: CSS design system, gantry status strip, entity shape system, topology view, activity feed, budget gauge and silicon panel, and domain identifiers.
+
+## v1.19 Budget Display Overhaul (27 total)
+
+All 27 requirements implemented: budget inventory model, CLI status redesign, and dashboard gauge with budget configuration.
+
+## v1.20 Dashboard Assembly (23 total)
+
+All 23 requirements implemented: unified CSS pipeline, topology/activity/budget-silicon/staging data collectors, and console page assembly.
+
+## v1.21 GSD-OS Desktop Foundation (50 total)
+
+All 50 requirements implemented: Tauri desktop shell, WebGL CRT engine, indexed palette system, native PTY terminal, desktop environment, and boot/calibration.
+
+## v1.22 Minecraft Knowledge World (73 total)
+
+All 73 requirements implemented: local cloud infrastructure, Minecraft Knowledge World, platform portability, Amiga emulation, chipset formalization, and operational maturity.
+
+## v1.23 Project AMIGA (99 total)
+
+All 99 requirements implemented: AMIGA mission infrastructure (MC-1, ME-1, CE-1, GL-1, ICDs), Apollo AGC Block II simulator, AGC Executive/Waitlist/BAILOUT, DSKY interface, AGC development tools, AGC curriculum, and RFC Reference Skill.
+
+## v1.24 GSD Conformance Audit & Hardening (63 total)
+
+All 63 requirements implemented: conformance matrix (5), foundation audit T0 (8), integration audit T1 (10), behavior audit T2 (14), UX/polish audit T3 (9), end-to-end verification (7), documentation and amendments (4), verification environment stretch (6).
+
 ---
 
-**Total: 356 requirements across 17 milestones, all implemented.**
+**Total: 806 requirements across 28 milestones, all implemented.**
