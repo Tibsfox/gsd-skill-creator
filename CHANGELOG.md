@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.26.0] - 2026-02-19
+
+### Added
+
+- **INDEX Infrastructure:** Aminet INDEX.gz download/decompress/parse for ~84,000 packages, .readme metadata extractor (Short/Author/Uploader/Type/Version/Requires/Architecture), JSON cache with 24h staleness, incremental RECENT updates, AmigaBinaryReader for hunk executables and boot blocks
+- **Mirror State & Download Engine:** 7-state per-package tracking, atomic JSON persistence, rate-limited HTTP fetching with configurable concurrency, SHA-256 integrity verification, configurable mirror list with fallback
+- **Search, Browse & Collections:** 3-tier relevance-ranked full-text search, hierarchical category tree with package counts, architecture/OS filtering, unified PackageDetail view, YAML collection format with 5 starter sets (31 packages), CRUD collection manager
+- **Virus Scanner & Quarantine:** 52 byte-pattern signatures across 3 virus families (boot block, file, link), context-aware signature scanning, 4-rule heuristic hunk analysis, 4-rule boot block analysis, quarantine with atomic file moves and metadata sidecars, 3-layer scan orchestrator with configurable depth policies (fast/standard/thorough), community checksum lookup, emulated scanning via FS-UAE
+- **Installation Pipeline:** LhA extraction via lhasa with path traversal prevention, LZX extraction via unlzx with cwd workaround, 11-assign Amiga filesystem mapper (case-insensitive), dependency detector (5 types from .readme Requires), install tracker with JSON manifests and clean uninstall, scan gate enforcement (INS-07/08/09)
+- **Emulator Integration:** FS-UAE config generator, 5 hardware profiles (A500/A1200/A1200+030/A4000/WHDLoad), self-contained CRC32 ROM scanner with Cloanto encrypted ROM support, priority-based profile auto-selection, WHDLoad slave detection with per-game hardware overrides, 9-slot state snapshot system
+- **GSD-OS Integration:** Chipset YAML (5 agents, 6 skills, pipeline team, 7% token budget), 6 SKILL.md files, 5-stage pipeline orchestrator with scan gate, 4-pane Workbench-style browser panel, 4-color status indicators, mirror statistics dashboard widget, 14-test cross-module integration suite
+
+### Stats
+
+- 7 phases (236-242), 40 plans, 91 commits, 10,032 tests, 81 requirements, ~23,616 LOC
+
+---
+
 ## [1.25.0] - 2026-02-19
 
 ### Added
