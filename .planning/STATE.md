@@ -5,24 +5,24 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Phase 234 — Integration Test Strategy
+**Current focus:** Phase 235 — Partial-Build Compatibility Matrix
 
 ## Current Position
 
 Milestone: v1.25 — GSD Ecosystem Integration
-Phase: 234 (4 of 5) — Integration Test Strategy
+Phase: 235 (5 of 5) — Partial-Build Compatibility Matrix
 Plan: 3 of 3 in current phase
-Status: Phase 234 complete
-Last activity: 2026-02-19 — Plan 234-03 complete (fixture strategy for 6 flows, EventDispatcher compliance audit with 4-category grep detection)
+Status: Phase 235 complete — all plans done, milestone ready for completion
+Last activity: 2026-02-19 — Plan 235-03 complete (3-tier capability probe protocol with JSON schema and per-component marker paths)
 
-Progress: [##################░░] 90%
+Progress: [####################] 100%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 11
-- Average duration: 4.5m
-- Total execution time: 0.83 hours
+- Total plans completed: 14
+- Average duration: 4.4m
+- Total execution time: 1.03 hours
 
 **By Phase:**
 
@@ -32,6 +32,7 @@ Progress: [##################░░] 90%
 | 232 | 3 | 13m | 4.3m |
 | 233 | 2 | 8m | 4.0m |
 | 234 | 3 | 15m | 5.0m |
+| 235 | 3 | 12m | 4.0m |
 
 *Updated after each plan completion*
 
@@ -91,6 +92,10 @@ Recent decisions affecting current work:
 - [234-03]: Fixtures are append-only (never deleted) -- old fixtures become regression tests
 - [234-03]: 3 audit exceptions: watcher.rs (permanent), dashboard/refresh.ts (pending migration), test files (permanent)
 - [234-03]: Audit automation via shell script with non-zero exit on unexpected findings
+- [235-03]: Detection tiers are cumulative (3 subsumes 2 subsumes 1), not alternatives
+- [235-03]: agc-learning is not a DAG node; AGC lives under gsd-isa; amiga-workbench is the 16th internal node
+- [235-03]: Tier 3 probe implementation via EventDispatcher subscriber registration (no separate mechanism)
+- [235-03]: Aspirational vs absent: aspirational = known + planned; absent = not present in this build
 
 ### Key Context
 
@@ -107,10 +112,10 @@ None.
 ### Blockers/Concerns
 
 - ~~Before Phase 232: 30-min code review of `src-tauri/src/watcher.rs` and `src/console/types.ts` vs. silicon layer EventDispatcher design~~ (resolved in 232-RESEARCH.md)
-- Before Phase 235: Full read of known-issues.md to categorize all 99 deferred items
+- ~~Before Phase 235: Full read of known-issues.md to categorize all 99 deferred items~~ (resolved in 235-01 known-issues cross-reference)
 
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 234-03-PLAN.md (fixture strategy for 6 flows, EventDispatcher compliance audit with 4-category grep detection)
+Stopped at: Completed 235-03-PLAN.md (3-tier capability probe protocol with JSON schema and per-component marker paths) — Phase 235 complete, all v1.25 phases done
 Resume file: None
