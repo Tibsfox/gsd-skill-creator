@@ -31,11 +31,11 @@ Requirements for v1.24 — GSD Conformance Audit & Hardening. Each maps to roadm
 - [ ] **INTEG-01**: GSD triggers skill-creator observations during execute-phase and verify-work
 - [ ] **INTEG-02**: Skill-creator's output feeds back into GSD's skill loading via wrapper commands
 - [ ] **INTEG-03**: Active chipset configuration changes skill loading order and agent topology
-- [ ] **INTEG-04**: Planning docs dashboard reflects actual `.planning/` state and updates on changes
+- [x] **INTEG-04**: Planning docs dashboard reflects actual `.planning/` state and updates on changes
 - [ ] **INTEG-05**: Console upload zone accepts markdown documents and routes through filesystem message bus
 - [ ] **INTEG-06**: Staging layer's resource manifest reaches the execution queue
 - [ ] **INTEG-07**: Session observation hooks fire during real GSD sessions (post-commit hook captures metadata)
-- [ ] **INTEG-08**: Dashboard data collectors (topology, activity, budget, staging) produce correct output from real files
+- [x] **INTEG-08**: Dashboard data collectors (topology, activity, budget, staging) produce correct output from real files
 - [ ] **INTEG-09**: AMIGA ICD-based inter-component communication works across MC-1, ME-1, CE-1, GL-1
 - [ ] **INTEG-10**: AGC simulator integrates with GSD-OS pack (block definitions, chipset config, dashboard widgets)
 
@@ -141,11 +141,11 @@ Deferred to future milestones. Tracked but not in current roadmap.
 | INTEG-01 | Phase 225 | Pending |
 | INTEG-02 | Phase 225 | Pending |
 | INTEG-03 | Phase 225 | Pending |
-| INTEG-04 | Phase 225 | Pending |
+| INTEG-04 | Phase 225 | Complete |
 | INTEG-05 | Phase 225 | Pending |
 | INTEG-06 | Phase 225 | Pending |
 | INTEG-07 | Phase 225 | Pending |
-| INTEG-08 | Phase 225 | Pending |
+| INTEG-08 | Phase 225 | Complete |
 | INTEG-09 | Phase 225 | Pending |
 | INTEG-10 | Phase 225 | Pending |
 | BEHAV-01 | Phase 226 | Pending |
