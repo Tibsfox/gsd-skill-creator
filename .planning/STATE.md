@@ -2,16 +2,16 @@
 
 ## Current Position
 
-Phase: 198-operational-runbooks (Plan 01 complete)
-Plan: 198-01 complete
-Status: Wave 6 complete -- all 30 phases complete
-Last activity: 2026-02-19 -- Completed 198-01 (Operational runbooks: Day-1 deployment, Day-2 operations, incident response, server updates)
+Phase: v1.22 COMPLETE — milestone archived
+Plan: None (between milestones)
+Status: v1.22 Minecraft Knowledge World shipped. Ready for /gsd:new-milestone
+Last activity: 2026-02-19 — Archived v1.22, tagged, ready for next milestone
 
-Progress: [##############################] 30/30 phases (All waves complete)
+Progress: v1.22 SHIPPED — 30 phases, 37 plans, 108 commits, 73 requirements
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-17)
+See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
 **Current focus:** v1.22 Minecraft Knowledge World -- Wave 4 complete, Wave 5 ready (Phase 190 complete)
@@ -38,6 +38,8 @@ See: .planning/PROJECT.md (updated 2026-02-17)
 - Test procedure in update runbook satisfies OPS-13 via real mod redeploy cycle
 - [Phase 193]: Bidirectional infra<->platform link resolved to unidirectional for cycle-free graph; stage-level reverse dependency captured in sync-points.yaml
 - [Phase 193]: Topological order: mc-infra -> mc-platform -> mc-amiga -> mc-creative -> mc-ops
+- [Phase 194]: 7-level loading order groups skills by dependency depth rather than flat priority sort
+- [Phase 194]: Chipset total token budget: 31.5% with 8.5% headroom under 40% ceiling
 
 ### From Phase 192 Plan 01
 - Four tool access tiers: design-only (Read/Write/Glob/Grep), discovery/verification (Read/Bash/Glob/Grep), operational (Read/Write/Bash/Glob/Grep), extended (+WebFetch for mc-deployer only)
@@ -281,8 +283,8 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-19T00:05:27Z
-Stopped at: Completed 198-01-PLAN.md (Operational runbooks: Day-1 deployment, Day-2 operations, incident response, server updates)
+Last session: 2026-02-19T00:15:26Z
+Stopped at: Completed 194-01-PLAN.md (Chipset assembly: schema, YAML, routing matrix, validation script)
 
 ### Key Files
 - `.planning/ROADMAP.md` -- Phase structure, success criteria, wave assignments
