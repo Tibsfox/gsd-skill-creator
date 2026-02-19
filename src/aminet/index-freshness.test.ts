@@ -360,3 +360,61 @@ describe('full freshness cycle', () => {
     expect(final!.packages.find((p) => p.fullPath === 'dev/c/NewPkg.lha')).toBeDefined();
   });
 });
+
+// ---------------------------------------------------------------------------
+// Barrel file integration smoke test
+// ---------------------------------------------------------------------------
+
+describe('barrel file (src/aminet/index.ts)', () => {
+  it('exports all expected public API members', async () => {
+    const barrel = await import('./index.js');
+
+    // Binary parsing
+    expect(barrel.AmigaBinaryReader).toBeDefined();
+    expect(barrel.parseHunkFile).toBeDefined();
+    expect(barrel.parseBootBlock).toBeDefined();
+
+    // INDEX management
+    expect(barrel.fetchAminetIndex).toBeDefined();
+    expect(barrel.decompressIndex).toBeDefined();
+    expect(barrel.decodeIndexContent).toBeDefined();
+    expect(barrel.validateIndexFormat).toBeDefined();
+    expect(barrel.isIndexStale).toBeDefined();
+    expect(barrel.loadCachedIndex).toBeDefined();
+    expect(barrel.parseAminetIndex).toBeDefined();
+    expect(barrel.parseIndexLine).toBeDefined();
+    expect(barrel.writeIndexCache).toBeDefined();
+    expect(barrel.readIndexCache).toBeDefined();
+
+    // .readme parsing
+    expect(barrel.parseReadme).toBeDefined();
+
+    // Freshness and incremental updates
+    expect(barrel.checkFreshness).toBeDefined();
+    expect(barrel.fetchRecent).toBeDefined();
+    expect(barrel.mergeRecentIntoIndex).toBeDefined();
+
+    // Zod schemas
+    expect(barrel.AminetMirrorConfigSchema).toBeDefined();
+    expect(barrel.IndexMetadataSchema).toBeDefined();
+    expect(barrel.PackageReadmeSchema).toBeDefined();
+    expect(barrel.MemoryFlagSchema).toBeDefined();
+    expect(barrel.HunkTypeSchema).toBeDefined();
+    expect(barrel.HUNK_TYPE_MAP).toBeDefined();
+    expect(barrel.RelocationEntrySchema).toBeDefined();
+    expect(barrel.SymbolEntrySchema).toBeDefined();
+    expect(barrel.HunkBlockSchema).toBeDefined();
+    expect(barrel.HunkFileSchema).toBeDefined();
+    expect(barrel.DosTypeSchema).toBeDefined();
+    expect(barrel.BootBlockFlagSchema).toBeDefined();
+    expect(barrel.BootBlockSchema).toBeDefined();
+    expect(barrel.AminetPackageSchema).toBeDefined();
+    expect(barrel.AminetIndexSchema).toBeDefined();
+    expect(barrel.FreshnessCheckSchema).toBeDefined();
+
+    // Hunk constants
+    expect(barrel.HUNK_HEADER).toBe(0x000003F3);
+    expect(barrel.HUNK_CODE).toBe(0x000003E9);
+    expect(barrel.HUNK_END).toBe(0x000003F2);
+  });
+});
