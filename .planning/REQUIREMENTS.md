@@ -81,14 +81,14 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 
 - [x] **EMU-01**: Generate valid FS-UAE configuration files from hardware profile YAML
 - [x] **EMU-02**: Ship 5 hardware profiles: A500, A1200, A1200+030, A4000, WHDLoad
-- [ ] **EMU-03**: Detect and validate Kickstart ROM files by CRC32/MD5
-- [ ] **EMU-04**: Select appropriate ROM version for hardware profile
-- [ ] **EMU-05**: Mount emulated hard drive containing installed software
-- [ ] **EMU-06**: Auto-select emulator profile from package .readme metadata
+- [x] **EMU-03**: Detect and validate Kickstart ROM files by CRC32/MD5
+- [x] **EMU-04**: Select appropriate ROM version for hardware profile
+- [x] **EMU-05**: Mount emulated hard drive containing installed software
+- [x] **EMU-06**: Auto-select emulator profile from package .readme metadata
 - [ ] **EMU-07**: WHDLoad slave file detection and configuration
 - [ ] **EMU-08**: Save/restore emulator state snapshots
-- [ ] **EMU-09**: Provide clear guidance when required ROM is missing
-- [ ] **EMU-10**: Do NOT distribute Kickstart ROM files
+- [x] **EMU-09**: Provide clear guidance when required ROM is missing
+- [x] **EMU-10**: Do NOT distribute Kickstart ROM files
 
 ### User Interface
 
@@ -111,7 +111,7 @@ Requirements for the Aminet archive management system. Each maps to roadmap phas
 - [x] **NFR-02**: INDEX parsing completes in <10 seconds for full ~84,000 entries
 - [x] **NFR-03**: Signature scan of a single package completes in <2 seconds
 - [ ] **NFR-04**: Test suite achieves >=80% code coverage
-- [ ] **NFR-05**: No Kickstart ROM files distributed with the pack
+- [x] **NFR-05**: No Kickstart ROM files distributed with the pack
 - [x] **NFR-06**: Mirror downloads identify as GSD-Aminet-Pack and respect rate limits
 - [ ] **NFR-07**: All SKILL.md files follow GSD skill format specification
 - [ ] **NFR-08**: All agent YAML follows GSD chipset architecture conventions
@@ -204,14 +204,14 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | INS-10 | Phase 240 | Complete |
 | EMU-01 | Phase 241 | Complete |
 | EMU-02 | Phase 241 | Complete |
-| EMU-03 | Phase 241 | Pending |
-| EMU-04 | Phase 241 | Pending |
-| EMU-05 | Phase 241 | Pending |
-| EMU-06 | Phase 241 | Pending |
+| EMU-03 | Phase 241 | Complete |
+| EMU-04 | Phase 241 | Complete |
+| EMU-05 | Phase 241 | Complete |
+| EMU-06 | Phase 241 | Complete |
 | EMU-07 | Phase 241 | Pending |
 | EMU-08 | Phase 241 | Pending |
-| EMU-09 | Phase 241 | Pending |
-| EMU-10 | Phase 241 | Pending |
+| EMU-09 | Phase 241 | Complete |
+| EMU-10 | Phase 241 | Complete |
 | UI-01 | Phase 242 | Pending |
 | UI-02 | Phase 242 | Pending |
 | UI-03 | Phase 242 | Pending |
@@ -225,7 +225,7 @@ Deferred beyond v1.26. Tracked but not in current roadmap.
 | NFR-02 | Phase 236 | Complete |
 | NFR-03 | Phase 239 | Complete |
 | NFR-04 | Phase 242 | Pending |
-| NFR-05 | Phase 241 | Pending |
+| NFR-05 | Phase 241 | Complete |
 | NFR-06 | Phase 237 | Complete |
 | NFR-07 | Phase 242 | Pending |
 | NFR-08 | Phase 242 | Pending |
