@@ -4,8 +4,8 @@
 
 Phase: 213 of 222 (AGC CPU & Memory) -- COMPLETE
 Plan: 4 of 4 in current phase (COMPLETE)
-Status: Phase 213 complete -- 4 plans, 10 commits, 210 AGC tests (all passing)
-Last activity: 2026-02-19 -- Completed Phase 213 (AGC CPU & Memory)
+Status: Phase 210 complete -- 3 plans, 6 commits, 88 new CE-1 tests (1004 AMIGA tests total)
+Last activity: 2026-02-19 -- Completed Phase 210 (Commons Engine Calculation)
 
 Progress: [###############.........] 63% (15/24 phases)
 
@@ -14,7 +14,7 @@ Progress: [###############.........] 63% (15/24 phases)
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible
-**Current focus:** v1.23 Project AMIGA -- Phase 213 complete, AGC Block II CPU with 210 tests
+**Current focus:** v1.23 Project AMIGA -- Phase 210 complete, CE-1 weighting engine + dividend calculator + seal guard
 
 ## Current Milestone
 
@@ -42,6 +42,9 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 13. Full AMIGA test suite: 865 tests passing across 31 test files (zero regressions)
 14. Phase 213 (AGC CPU & Memory) COMPLETE -- 4 plans, 10 commits, 210 AGC tests
 15. AGC module: types, registers, memory (bank switching), ALU (ones' complement), 38 instructions, decoder, CPU (fetch-decode-execute), barrel index
+16. Phase 210 (Commons Engine Calculation) COMPLETE -- 3 plans, 6 commits, 88 new CE-1 tests
+17. CE-1 calculation: WeightingEngine (frequency/critical-path/depth-decay), DividendCalculator (3-tier distribution), LedgerSealGuard (SHA-256 tamper evidence)
+18. Full AMIGA test suite: 1004 tests passing across 37 test files (zero regressions)
 
 ## Decisions
 
@@ -97,6 +100,9 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 - InvocationRecorder has NO direct dependency on TelemetryEmitter -- pure event-driven design
 - Token architecture is specification only (not implementation) per Out of Scope
 - CE-1 barrel follows same pattern as MC-1, ME-1, and GL-1 barrel indexes
+- WeightingEngine: critical-path 40%, frequency 30%, depth-decay 30% -- double normalization (per-component then composite)
+- DividendCalculator: Tier 1 (60% direct), Tier 2 (25% infrastructure), Tier 3 (15% UBD) -- Tier 2 redistributes to Tier 1 when empty
+- LedgerSealGuard: SHA-256 sorted-key hash for tamper evidence, deep-freeze for immutability
 - AGC types use branded number types (Word15, Word16, Address12) for type safety without runtime cost
 - AGC registers use immutable pattern: setRegister returns new state, BB/EBANK/FBANK sync on write
 - AGC edit registers (CYR/SR/CYL/EDOP) perform bit manipulation on write, reading returns transformed value
@@ -130,7 +136,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Phase 213 (AGC CPU & Memory) complete -- 4 plans, 10 commits, 210 AGC tests
+Stopped at: Phase 210 (Commons Engine Calculation) complete -- 3 plans, 6 commits, 88 CE-1 tests
 
 ### Key Files
 - `.planning/ROADMAP.md` -- 24 phases across 5 waves
@@ -156,7 +162,10 @@ Stopped at: Phase 213 (AGC CPU & Memory) complete -- 4 plans, 10 commits, 210 AG
 - `src/amiga/ce1/contribution-registry.ts` -- Contributor registry with version tracking and cycle detection
 - `src/amiga/ce1/invocation-recorder.ts` -- Event-driven LEDGER_ENTRY capture from ME-1 telemetry
 - `src/amiga/ce1/token-architecture.ts` -- Token architecture specification with YAML export
-- `src/amiga/ce1/index.ts` -- CE-1 barrel exports (Phase 209)
+- `src/amiga/ce1/weighting-engine.ts` -- Three-component weighting (frequency/critical-path/depth-decay)
+- `src/amiga/ce1/dividend-calculator.ts` -- Three-tier distribution (direct/infrastructure/UBD)
+- `src/amiga/ce1/ledger-seal.ts` -- SHA-256 tamper-evident seal with deep freeze
+- `src/amiga/ce1/index.ts` -- CE-1 barrel exports (Phase 209 + 210)
 - `src/amiga/gl1/charter.ts` -- Commons charter schema, constitutional constraints, ratification with SHA-256
 - `src/amiga/gl1/weighting-docs.ts` -- Weighting algorithm parameter documentation (frequency/critical-path/depth-decay)
 - `src/amiga/gl1/dispute-record.ts` -- Governance dispute record lifecycle extending ICD-04
