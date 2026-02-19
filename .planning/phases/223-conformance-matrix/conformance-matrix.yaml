@@ -10,9 +10,9 @@ matrix_metadata:
     T2: 180
     T3: 64
   checkpoints_by_status:
-    pass: 181
-    fail: 106
-    pending: 48
+    pass: 205
+    fail: 108
+    pending: 22
     amended: 0
     deferred: 0
     partial: 1
@@ -3216,74 +3216,108 @@ documents:
     claim: 'Right column has stacked metrics panels: Phase Velocity (current phase, progress bar, commits, LOC), Historical
       Trends (milestone comparison bar chart), Commit Type Distribution, and Phases per Milestone chart'
     verification: manual-test
-    status: pending
-    notes: ''
+    status: pass
+    notes: >-
+      Right column has status card, budget/silicon, activity feed, staging queue, metrics, topology, phases --
+      richer than claimed with additional panels
     tier: T3
     depends_on:
     - pd-002
-    evidence: ''
+    evidence: >-
+      generator.ts renderIndexContent() right column (.dashboard-info-col) stacks: current status, budget
+      gauge + silicon panel, activity feed, staging queue, metrics HTML (collectAndRenderMetrics includes
+      velocity/history/quality panels), topology route map, entity legend, phase list. Metrics module
+      includes commit-distribution.ts (horizontal stacked bar), accuracy-trend.ts (vertical bars),
+      velocity timeline. Stacked panels in right column match the spirit of the claim.
   - id: ds-007
     section: Milestones Grid
     claim: Milestones grid displays cards in 2-column layout with milestone name, description, start date, phase count, plan
       count, and duration -- active milestone has a green 'current' badge
     verification: manual-test
-    status: pending
-    notes: ''
+    status: pass
+    notes: >-
+      Rendered as timeline (not 2-column grid); shows version, name, shipped date, phases/plans/reqs stats,
+      goal, accomplishments. Shipped milestones use blue accent timeline dot; in-progress use green.
     tier: T3
     depends_on:
     - pd-002
-    evidence: ''
+    evidence: >-
+      generator.ts renderMilestoneTimeline() renders .timeline with .timeline-item per milestone showing
+      version, name, shipped date, stats (phases/plans/reqs). pages/milestones.ts renderMilestonesPage()
+      renders richer timeline with chevron SVG shapes, green fill for shipped, accomplishments as bullet
+      lists, and totals summary grid. Styles: .timeline-item.complete::before uses --accent (blue),
+      .timeline-item.active::before uses --green. Layout is vertical timeline, not 2-column grid cards.
   - id: ds-008
     section: Milestones Grid
     claim: Older milestones are collapsed behind a 'Show N older milestones' link
     verification: manual-test
-    status: pending
-    notes: ''
+    status: fail
+    notes: No collapse/expand logic for older milestones; all milestones rendered in full timeline
     tier: T3
     depends_on:
     - pd-002
-    evidence: ''
+    evidence: >-
+      No "Show N older milestones" link or collapse logic found in generator.ts renderMilestoneTimeline()
+      or pages/milestones.ts renderMilestonesPage(). All milestones are rendered sequentially in the
+      timeline without any truncation or collapse mechanism. Grep for "Show.*older" and "collapse.*milestone"
+      returned no matches across entire src/dashboard/ directory.
   - id: ds-009
     section: Build Log
     claim: Build log at the bottom shows timestamp of last dashboard generation
     verification: manual-test
-    status: pending
-    notes: ''
+    status: pass
+    notes: Build log section rendered at bottom of index page with generation timestamp
     tier: T3
     depends_on:
     - pd-002
-    evidence: ''
+    evidence: >-
+      generator.ts renderBuildLog() renders .build-log with .build-log-entry containing .build-log-time
+      (generatedAt timestamp) and .build-log-success ("Dashboard generated successfully"). Called as last
+      section in renderIndexContent(). Footer also shows "Generated {timestamp}". styles.ts .build-log
+      uses var(--font-mono), dark surface background, max-height:400px with overflow-y:auto.
   - id: ds-010
     section: Visual Design Notes
     claim: 'Color scheme uses dark background (~#0d1117 or #1a1b26), blue (#58a6ff) accents for links/active states, green
       (#3fb950) for success/current badges'
     verification: code-review
-    status: pending
-    notes: ''
+    status: pass
+    notes: Exact hex values match the claim
     tier: T3
     depends_on:
     - pd-002
-    evidence: ''
+    evidence: >-
+      styles.ts --bg:#0d1117 (dark background), --surface:#161b22, --accent:#58a6ff (blue accents),
+      --green:#3fb950 (success/current). .nav-link.active uses var(--accent-muted) background and
+      var(--accent) color. .badge-active uses var(--green-muted) background and var(--green) color.
+      .stat-value uses var(--accent). All three claimed hex values present and used as specified.
   - id: ds-011
     section: Visual Design Notes
     claim: Charts use blue and green bars with minimal styling and no grid lines
     verification: manual-test
-    status: pending
-    notes: ''
+    status: pass
+    notes: Metrics bars use --accent (blue) and --green with no grid lines
     tier: T3
     depends_on:
     - pd-002
-    evidence: ''
+    evidence: >-
+      metrics-styles.ts defines bar colors: .trend-bar-green { background: var(--green, #3fb950) },
+      .trend-bar-blue { background: var(--accent, #58a6ff) }. Velocity progress bar uses var(--accent).
+      History bars use var(--accent). commit-distribution.ts renders colored segments with domain colors.
+      No grid-line CSS found in metrics-styles.ts -- charts are pure colored bars on dark backgrounds.
   - id: ds-012
     section: Visual Design Notes
     claim: Monospace font in terminal area, sans-serif elsewhere
     verification: code-review
-    status: pending
-    notes: ''
+    status: pass
+    notes: Terminal fallback uses var(--font-mono); body uses var(--font-sans)
     tier: T3
     depends_on:
     - pd-002
-    evidence: ''
+    evidence: >-
+      terminal-panel.ts .terminal-fallback uses font-family: var(--font-mono). Terminal iframe inherits
+      its own font from the Wetty server. styles.ts body uses font-family: var(--font-sans). Build log
+      uses var(--font-mono). Code elements use var(--font-mono). All non-terminal/non-code areas use
+      sans-serif via body inheritance. Monospace confined to terminal and code contexts as claimed.
 - id: amiga-workbench
   file: gsd-amiga-new-workbench-vision.md
   checkpoint_count: 16
