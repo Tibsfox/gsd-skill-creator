@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Phase: 227 (5 of 8) — UX/Polish Audit (T3)
-Plan: 1 of 4 complete
+Plan: 3 of 4 complete
 Status: Executing
-Last activity: 2026-02-19 — Plan 227-01 complete (GSD-OS desktop T3 audit)
+Last activity: 2026-02-19 — Plan 227-04 complete (ISA/cloud-ops/wetty-tmux T3 audit)
 
 Progress: [██████░░░░] 53%
 
@@ -50,6 +50,8 @@ Progress: [██████░░░░] 53%
 | 226 P01 | 1 | 10min | 10min |
 | 226 P07 | 1 | 10min | 10min |
 | 227 P01 | 1 | 4min | 4min |
+| 227 P04 | 1 | 9min | 9min |
+| Phase 227 P03 | 10min | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -115,6 +117,11 @@ Recent decisions affecting current work:
 - [Phase 227]: os-008 pass: all 4 claimed CRT effects verified in GLSL shader source plus 2 bonus (chromatic aberration, vignette)
 - [Phase 227]: os-006 fail: no neon-red standby glow power button implemented
 - [Phase 227]: ca-010 fail: silicon-panel exists for ML adapter status, not retro chipset status panel
+- [Phase 227]: ISA isa-027/028 pass: CS curriculum mapping (12 topics) and 4 learning paths are vision document structural claims, verified in Part 9
+- [Phase 227]: pd-010 fail: og:title/description/type implemented on all 6 pages but robots meta and canonical URLs missing (3 of 5 claimed)
+- [Phase 227]: Cloud-ops cop-002/005/006/007 pass: 6 modules, concept mapping table, Podman path, 6-phase structure all defined in vision
+- [Phase 227]: Wetty checkpoints overwhelmingly fail (9 of 11 T3): GSD-OS uses native PTY (Tauri+portable-pty+xterm.js) instead of Wetty; only wtm-004 (tmux -r read-only sharing) passes as standard tmux feature
+- [Phase 227]: agc-018 exceeds claim: 8 programs vs claimed 4; BBS/CS checkpoints are structural vision reviews; rfc-007 reading paths match exactly
 
 ### Key Context
 
@@ -134,5 +141,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 227-01-PLAN.md (GSD-OS desktop T3 audit: Tauri build, CRT shaders, WM, boot, accessibility)
+Stopped at: Completed 227-04-PLAN.md (ISA/cloud-ops/wetty-tmux T3 audit: 17 checkpoints, 7 pass, 10 fail)
 Resume file: None

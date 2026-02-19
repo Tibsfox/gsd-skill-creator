@@ -62,10 +62,10 @@ Requirements for v1.24 — GSD Conformance Audit & Hardening. Each maps to roadm
 - [x] **POLISH-02**: WebGL CRT shader renders with scanlines, barrel distortion, phosphor glow, and vignette
 - [x] **POLISH-03**: Window manager supports depth cycling, drag/resize, and keyboard shortcuts
 - [x] **POLISH-04**: Boot sequence animation runs and is skippable
-- [ ] **POLISH-05**: Dashboard color scheme follows the information design spec (6 domain colors, 4 signal colors)
-- [ ] **POLISH-06**: Topology view renders with SVG bezier edges and click-to-detail
-- [ ] **POLISH-07**: Entity shapes use dual encoding (shape+color) per the design system
-- [ ] **POLISH-08**: Educational content (AGC curriculum) renders correctly and exercises produce described outcomes
+- [x] **POLISH-05**: Dashboard color scheme follows the information design spec (6 domain colors, 4 signal colors)
+- [x] **POLISH-06**: Topology view renders with SVG bezier edges and click-to-detail
+- [x] **POLISH-07**: Entity shapes use dual encoding (shape+color) per the design system
+- [x] **POLISH-08**: Educational content (AGC curriculum) renders correctly and exercises produce described outcomes
 - [x] **POLISH-09**: Accessibility mode activates on prefers-reduced-motion and prefers-contrast
 
 ### End-to-End Verification
@@ -166,10 +166,10 @@ Deferred to future milestones. Tracked but not in current roadmap.
 | POLISH-02 | Phase 227 | Complete |
 | POLISH-03 | Phase 227 | Complete |
 | POLISH-04 | Phase 227 | Complete |
-| POLISH-05 | Phase 227 | Pending |
-| POLISH-06 | Phase 227 | Pending |
-| POLISH-07 | Phase 227 | Pending |
-| POLISH-08 | Phase 227 | Pending |
+| POLISH-05 | Phase 227 | Complete |
+| POLISH-06 | Phase 227 | Complete |
+| POLISH-07 | Phase 227 | Complete |
+| POLISH-08 | Phase 227 | Complete |
 | POLISH-09 | Phase 227 | Complete |
 | E2E-01 | Phase 228 | Pending |
 | E2E-02 | Phase 228 | Pending |
