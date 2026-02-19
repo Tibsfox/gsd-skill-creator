@@ -53,6 +53,17 @@ export {
 } from './index-freshness.js';
 
 // ============================================================================
+// Mirror state management
+// ============================================================================
+
+export {
+  loadMirrorState,
+  saveMirrorState,
+  updateEntry,
+  getEntry,
+} from './mirror-state.js';
+
+// ============================================================================
 // Types (inferred from Zod schemas)
 // ============================================================================
 
@@ -72,6 +83,10 @@ export type {
   AminetPackage,
   AminetIndex,
   FreshnessCheck,
+  PackageStatus,
+  MirrorEntry,
+  MirrorState,
+  DownloadConfig,
 } from './types.js';
 
 // ============================================================================
@@ -95,6 +110,10 @@ export {
   AminetPackageSchema,
   AminetIndexSchema,
   FreshnessCheckSchema,
+  PackageStatusSchema,
+  MirrorEntrySchema,
+  MirrorStateSchema,
+  DownloadConfigSchema,
 } from './types.js';
 
 // ============================================================================
