@@ -4,14 +4,26 @@
  * Covers selectProfileFromReadme (priority-based hardware profile matching),
  * writeFsUaeConfig (config file writing), and launchEmulator (FS-UAE process
  * spawning with structured error handling).
+ *
+ * Uses vi.mock for node:child_process to intercept execFile calls in ESM.
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { mkdtempSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { mkdtempSync, readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import type { LaunchConfig } from './types.js';
+
+// Mock node:child_process at module level for ESM compatibility
+vi.mock('node:child_process', () => ({
+  execFile: vi.fn(),
+}));
+
+// Import after mock declaration
+import { execFile } from 'node:child_process';
 import { selectProfileFromReadme, writeFsUaeConfig, launchEmulator } from './emulator-launch.js';
-import type { LaunchConfig, LaunchResult } from './types.js';
+
+const mockExecFile = vi.mocked(execFile);
 
 // ---------------------------------------------------------------------------
 // selectProfileFromReadme
@@ -163,6 +175,7 @@ describe('launchEmulator', () => {
   beforeEach(() => {
     tmpDir = mkdtempSync(join(tmpdir(), 'emulator-launch-test-'));
     vi.useFakeTimers({ now: new Date('2026-01-15T12:00:00Z') });
+    mockExecFile.mockReset();
   });
 
   afterEach(() => {
@@ -179,16 +192,9 @@ describe('launchEmulator', () => {
   };
 
   it('returns success with configPath on happy path', async () => {
-    const { execFile } = await import('node:child_process');
-    vi.spyOn(await import('node:child_process'), 'execFile').mockImplementation(
-      ((_cmd: string, _args: unknown, _opts: unknown, cb: Function) => {
-        if (typeof _args === 'function') {
-          _args(null, '', '');
-        } else if (typeof _opts === 'function') {
-          _opts(null, '', '');
-        } else if (cb) {
-          cb(null, '', '');
-        }
+    mockExecFile.mockImplementation(
+      ((_cmd: unknown, _args: unknown, cb: unknown) => {
+        (cb as Function)(null, '', '');
       }) as typeof execFile,
     );
 
@@ -200,17 +206,10 @@ describe('launchEmulator', () => {
   });
 
   it('returns FSUAE_MISSING error when execFile throws ENOENT', async () => {
-    const { execFile } = await import('node:child_process');
-    vi.spyOn(await import('node:child_process'), 'execFile').mockImplementation(
-      ((_cmd: string, _args: unknown, _opts: unknown, cb: Function) => {
+    mockExecFile.mockImplementation(
+      ((_cmd: unknown, _args: unknown, cb: unknown) => {
         const err = Object.assign(new Error('spawn fs-uae ENOENT'), { code: 'ENOENT' });
-        if (typeof _args === 'function') {
-          _args(err, '', '');
-        } else if (typeof _opts === 'function') {
-          _opts(err, '', '');
-        } else if (cb) {
-          cb(err, '', '');
-        }
+        (cb as Function)(err, '', '');
       }) as typeof execFile,
     );
 
@@ -234,17 +233,10 @@ describe('launchEmulator', () => {
   });
 
   it('returns LAUNCH_FAILED when execFile exits non-zero', async () => {
-    const { execFile } = await import('node:child_process');
-    vi.spyOn(await import('node:child_process'), 'execFile').mockImplementation(
-      ((_cmd: string, _args: unknown, _opts: unknown, cb: Function) => {
+    mockExecFile.mockImplementation(
+      ((_cmd: unknown, _args: unknown, cb: unknown) => {
         const err = Object.assign(new Error('Process exited with code 1'), { code: 1 });
-        if (typeof _args === 'function') {
-          _args(err, '', '');
-        } else if (typeof _opts === 'function') {
-          _opts(err, '', '');
-        } else if (cb) {
-          cb(err, '', '');
-        }
+        (cb as Function)(err, '', '');
       }) as typeof execFile,
     );
 
@@ -255,16 +247,9 @@ describe('launchEmulator', () => {
   });
 
   it('uses custom fsUaePath when provided', async () => {
-    const { execFile } = await import('node:child_process');
-    const mockExecFile = vi.spyOn(await import('node:child_process'), 'execFile').mockImplementation(
-      ((_cmd: string, _args: unknown, _opts: unknown, cb: Function) => {
-        if (typeof _args === 'function') {
-          _args(null, '', '');
-        } else if (typeof _opts === 'function') {
-          _opts(null, '', '');
-        } else if (cb) {
-          cb(null, '', '');
-        }
+    mockExecFile.mockImplementation(
+      ((_cmd: unknown, _args: unknown, cb: unknown) => {
+        (cb as Function)(null, '', '');
       }) as typeof execFile,
     );
 
@@ -283,16 +268,9 @@ describe('launchEmulator', () => {
   });
 
   it('uses default "fs-uae" when fsUaePath is undefined', async () => {
-    const { execFile } = await import('node:child_process');
-    const mockExecFile = vi.spyOn(await import('node:child_process'), 'execFile').mockImplementation(
-      ((_cmd: string, _args: unknown, _opts: unknown, cb: Function) => {
-        if (typeof _args === 'function') {
-          _args(null, '', '');
-        } else if (typeof _opts === 'function') {
-          _opts(null, '', '');
-        } else if (cb) {
-          cb(null, '', '');
-        }
+    mockExecFile.mockImplementation(
+      ((_cmd: unknown, _args: unknown, cb: unknown) => {
+        (cb as Function)(null, '', '');
       }) as typeof execFile,
     );
 
@@ -306,16 +284,9 @@ describe('launchEmulator', () => {
   });
 
   it('writes config file to configDir before launching', async () => {
-    const { execFile } = await import('node:child_process');
-    vi.spyOn(await import('node:child_process'), 'execFile').mockImplementation(
-      ((_cmd: string, _args: unknown, _opts: unknown, cb: Function) => {
-        if (typeof _args === 'function') {
-          _args(null, '', '');
-        } else if (typeof _opts === 'function') {
-          _opts(null, '', '');
-        } else if (cb) {
-          cb(null, '', '');
-        }
+    mockExecFile.mockImplementation(
+      ((_cmd: unknown, _args: unknown, cb: unknown) => {
+        (cb as Function)(null, '', '');
       }) as typeof execFile,
     );
 
@@ -329,16 +300,9 @@ describe('launchEmulator', () => {
   });
 
   it('config file name includes timestamp for uniqueness', async () => {
-    const { execFile } = await import('node:child_process');
-    vi.spyOn(await import('node:child_process'), 'execFile').mockImplementation(
-      ((_cmd: string, _args: unknown, _opts: unknown, cb: Function) => {
-        if (typeof _args === 'function') {
-          _args(null, '', '');
-        } else if (typeof _opts === 'function') {
-          _opts(null, '', '');
-        } else if (cb) {
-          cb(null, '', '');
-        }
+    mockExecFile.mockImplementation(
+      ((_cmd: unknown, _args: unknown, cb: unknown) => {
+        (cb as Function)(null, '', '');
       }) as typeof execFile,
     );
 
