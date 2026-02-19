@@ -4,8 +4,9 @@
  * Re-exports all public types and functions from the AGC module.
  * Covers Phase 213 (CPU & Memory), Phase 214 (Interrupts & Timing),
  * Phase 216 (Executive, Waitlist, Restart Protection),
- * Phase 217 (DSKY Interface), and Phase 218 (Executive Monitor, Alarm Scenario, Learn Mode).
- * Downstream phases (219 Tools, 222 Integration) import from here.
+ * Phase 217 (DSKY Interface), Phase 218 (Executive Monitor, Alarm Scenario, Learn Mode),
+ * and Phase 219 (Tools: Disassembler, Assembler, Debugger, Validation, Rope Loader).
+ * Downstream phases (221 Curriculum, 222 Integration) import from here.
  */
 
 // Types
@@ -265,3 +266,6 @@ export { createApollo11Scenario, createScenario, runScenarioStep, runFullScenari
 export type { LearnAnnotation, LearnModeState } from './learn-mode.js';
 export type { AnnotationCategory } from './learn-mode.js';
 export { createLearnModeState, toggleLearnMode, getAnnotation, getAnnotationsForSnapshot, annotateScenarioEvent, ALL_ANNOTATIONS } from './learn-mode.js';
+
+// Tools (Phase 219)
+export * from './tools/index.js';
