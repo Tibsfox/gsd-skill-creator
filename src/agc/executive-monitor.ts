@@ -202,13 +202,13 @@ export function captureSnapshot(
 
   // 6. Build restart view
   const restartPoints: { coreSetId: number; group: string; restartAddress: number }[] = [];
-  for (const [, point] of restartState.restartPoints) {
+  restartState.restartPoints.forEach((point) => {
     restartPoints.push({
       coreSetId: point.coreSetId,
       group: restartGroupToString(point.group),
       restartAddress: point.restartAddress,
     });
-  }
+  });
   const restart: RestartView = {
     registeredCount: restartState.restartPoints.size,
     restartPoints,
