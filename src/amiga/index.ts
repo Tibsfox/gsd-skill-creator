@@ -11,7 +11,7 @@
  * - ME-1 Mission Environment (Manifest, TelemetryEmitter, Provisioner, PhaseEngine, GateController, SwarmCoordinator, ArchiveWriter)
  * - Integration (MissionController -- MC-1/ME-1 cross-component harness)
  * - CE-1 Commons Engine (AttributionLedger, ContributionRegistry, InvocationRecorder, TokenArchitecture)
- * - GL-1 Governance Layer (Charter, Weighting Docs, Dispute Records)
+ * - GL-1 Governance Layer (Charter, Weighting Docs, Dispute Records, Rules Engine, Decision Log, Policy Query)
  */
 
 // Shared data types
