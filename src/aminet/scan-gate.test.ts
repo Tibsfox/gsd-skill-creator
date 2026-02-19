@@ -17,22 +17,40 @@ import type { MirrorState, ScanVerdict, InstallConfig } from './types.js';
 import { checkScanGate, installPackage } from './scan-gate.js';
 
 // Mock extraction modules -- we don't want to invoke actual shell tools
-vi.mock('./lha-extractor.js', () => ({
-  extractLha: vi.fn(),
-  sanitizePath: vi.fn((rawPath: string, targetDir: string) => {
-    // Re-implement minimal sanitizePath for filesystem-mapper
-    const { resolve, normalize } = require('node:path');
-    const stripped = rawPath.replace(/^[^/\\]+:/, '');
-    const normalized = normalize(stripped);
-    const resolved = resolve(targetDir, normalized);
-    if (!resolved.startsWith(resolve(targetDir))) {
-      throw new Error(`Path traversal detected`);
+// BUT we need real implementations for sanitizePath, stripVolumePrefix, walkDirectory
+// since filesystem-mapper.ts imports them from lha-extractor.js
+vi.mock('./lha-extractor.js', () => {
+  const { resolve, normalize, join, relative } = require('node:path');
+  const { readdirSync } = require('node:fs');
+
+  function walkDir(dir: string, root: string): string[] {
+    const results: string[] = [];
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const fullPath = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        results.push(...walkDir(fullPath, root));
+      } else {
+        results.push(relative(root, fullPath));
+      }
     }
-    return resolved;
-  }),
-  stripVolumePrefix: vi.fn((p: string) => p.replace(/^[^/\\]+:/, '')),
-  walkDirectory: vi.fn(),
-}));
+    return results.sort();
+  }
+
+  return {
+    extractLha: vi.fn(),
+    sanitizePath: vi.fn((rawPath: string, targetDir: string) => {
+      const stripped = rawPath.replace(/^[^/\\]+:/, '');
+      const normalized = normalize(stripped);
+      const resolved = resolve(targetDir, normalized);
+      if (!resolved.startsWith(resolve(targetDir))) {
+        throw new Error(`Path traversal detected`);
+      }
+      return resolved;
+    }),
+    stripVolumePrefix: vi.fn((p: string) => p.replace(/^[^/\\]+:/, '')),
+    walkDirectory: vi.fn((dir: string, root: string) => walkDir(dir, root)),
+  };
+});
 
 vi.mock('./lzx-extractor.js', () => ({
   extractLzx: vi.fn(),
