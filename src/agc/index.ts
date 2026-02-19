@@ -6,7 +6,7 @@
  * Phase 216 (Executive, Waitlist, Restart Protection),
  * Phase 217 (DSKY Interface), Phase 218 (Executive Monitor, Alarm Scenario, Learn Mode),
  * Phase 219 (Tools: Disassembler, Assembler, Debugger, Validation, Rope Loader),
- * and Phase 222 (AGC GSD-OS Integration Pack).
+ * Phase 221 (Curriculum & Exercises), and Phase 222 (AGC GSD-OS Integration Pack).
  */
 
 // Types
@@ -272,3 +272,6 @@ export * from './tools/index.js';
 
 // Pack (Phase 222 -- GSD-OS Integration)
 export * from './pack/index.js';
+
+// Curriculum (Phase 221 -- AGC Curriculum & Exercises)
+export * from './curriculum/index.js';

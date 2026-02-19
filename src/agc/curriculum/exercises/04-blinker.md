@@ -14,9 +14,9 @@ description: "Toggle the COMP ACTY annunciator on and off with delay loops"
 
 This exercise demonstrates the concept of timed, repeated actions. The
 program toggles the COMP ACTY annunciator on and off by writing alternating
-values to channel 11, with a busy-wait delay between each toggle. The
-exercise guide explains how the real AGC would use Waitlist entries instead
-of busy-wait loops.
+values to channel 11, with a CCS-based busy-wait delay between each toggle.
+The exercise guide explains how the real AGC would use Waitlist entries
+instead of busy-wait loops.
 
 ## Prerequisites
 
@@ -35,27 +35,38 @@ SETLOC   4000
 BLINK    CA     ON           # Load ON pattern
          EXTEND
          WRITE  11           # Channel 11: relay word 2 (COMP ACTY)
-         TC     DELAY        # Busy-wait delay
-         CA     OFF          # Load OFF pattern
+
+# Inline delay loop 1
+         CA     DELCNT
+         TS     TEMP
+DL1LP    CCS    TEMP         # Decrement until zero
+         TC     DL1CN
+         TC     DL1DN        # =0: done
+         TC     DL1DN
+         TC     DL1DN
+DL1CN    TS     TEMP         # CCS stored diminished value in A
+         TC     DL1LP
+
+DL1DN    CA     OFF          # Load OFF pattern
          EXTEND
          WRITE  11
-         TC     DELAY
-         TC     BLINK        # Loop forever
 
-DELAY    CA     DELCNT       # Simple delay loop
+# Inline delay loop 2
+         CA     DELCNT
          TS     TEMP
-DLLOOP   CCS    TEMP         # Decrement until zero
-         TC     CONT
-         TC     DLDONE       # =0: done
-         TC     DLDONE
-         TC     DLDONE
-CONT     TS     TEMP         # CCS stored diminished value in A
-         TC     DLLOOP
-DLDONE   TC     Q            # Return (Q holds return address from TC DELAY)
+DL2LP    CCS    TEMP
+         TC     DL2CN
+         TC     DL2DN
+         TC     DL2DN
+         TC     DL2DN
+DL2CN    TS     TEMP
+         TC     DL2LP
+
+DL2DN    TC     BLINK        # Loop forever
 
 ON       OCT    40000        # Bit 14 set -- COMP ACTY on
 OFF      OCT    00000        # All bits clear -- COMP ACTY off
-DELCNT   DEC    500          # Delay loop iterations
+DELCNT   DEC    50           # Delay loop iterations
 TEMP     ERASE
 ```
 
@@ -70,33 +81,33 @@ The program alternates between two channel 11 writes:
 Channel 11 controls the DSKY relay word 2, which includes the 11 status
 annunciators. Bit 14 corresponds to the COMP ACTY light.
 
-### Step 2: The subroutine call
+### Step 2: The inline delay loops
 
-`TC DELAY` is a subroutine call. TC saves the return address in Q, then jumps
-to DELAY. The DELAY subroutine counts down from DELCNT (500) to zero using
-CCS. When done, `TC Q` returns to the instruction after the TC DELAY call.
+Each toggle is followed by a CCS-based counting loop that burns CPU cycles.
+The pattern is duplicated inline (DL1 and DL2) rather than using a
+subroutine, which keeps the program simple and avoids register management.
 
-This is the AGC's calling convention:
-- **TC target**: saves return address in Q, jumps to target
-- **TC Q**: jumps to the address in Q (returns to caller)
+In a real AGC program, you would use `TC` subroutine calls with careful Q
+register management, but for this introductory exercise the inline approach
+makes the control flow easier to follow.
 
-### Step 3: The delay loop
+### Step 3: The CCS delay pattern
 
 ```
-DELAY    CA     DELCNT       # Load 500 into A
+         CA     DELCNT       # Load 50 into A
          TS     TEMP         # Store in temporary variable
-DLLOOP   CCS    TEMP         # Decrement TEMP; branch on result
-         TC     CONT         # TEMP was > 0: continue loop
-         TC     DLDONE       # TEMP was +0: done
-         TC     DLDONE       # TEMP was < 0: done (safety)
-         TC     DLDONE       # TEMP was -0: done (safety)
-CONT     TS     TEMP         # Store diminished value back
-         TC     DLLOOP       # Loop
+DL1LP    CCS    TEMP         # Decrement TEMP; branch on result
+         TC     DL1CN        # TEMP was > 0: continue loop
+         TC     DL1DN        # TEMP was +0: done
+         TC     DL1DN        # TEMP was < 0: done (safety)
+         TC     DL1DN        # TEMP was -0: done (safety)
+DL1CN    TS     TEMP         # Store diminished value back
+         TC     DL1LP        # Loop
 ```
 
-This counts from 500 down to 0, consuming CPU cycles. Each iteration takes
-about 5 MCTs (58 microseconds). 500 iterations is about 29 milliseconds of
-delay.
+This counts from 50 down to 0, consuming CPU cycles. Each iteration takes
+about 5 MCTs (58 microseconds). 50 iterations is about 2.9 milliseconds
+of delay.
 
 ### Step 4: Run with limited steps
 
@@ -127,8 +138,8 @@ In the real AGC, this pattern would use the Waitlist instead of busy-waiting:
 
 Busy-waiting wastes CPU cycles that other jobs need. The Waitlist approach
 frees the CPU between toggles, allowing guidance and other critical tasks
-to run. In a real mission, busy-waiting for 500 iterations would never be
-acceptable -- but for a learning exercise, it demonstrates the pattern.
+to run. In a real mission, busy-waiting would never be acceptable -- but
+for a learning exercise, it demonstrates the pattern.
 
 ## Expected Output
 
@@ -138,8 +149,8 @@ acceptable -- but for a learning exercise, it demonstrates the pattern.
 
 ## Try It
 
-1. **Change blink speed**: modify `DELCNT DEC 500` to `DEC 100` for faster
-   blinking (shorter delay) or `DEC 2000` for slower blinking.
+1. **Change blink speed**: modify `DELCNT DEC 50` to `DEC 10` for faster
+   blinking (shorter delay) or `DEC 200` for slower blinking.
 
 2. **Blink multiple annunciators**: write patterns with multiple bits set:
    ```agc
@@ -169,5 +180,4 @@ acceptable -- but for a learning exercise, it demonstrates the pattern.
 |---------|-------------|-----|
 | Only one I/O write | maxSteps too low | Increase maxSteps |
 | Delay loop is infinite | CCS branch targets wrong | Check 4-way branch order |
-| TC Q goes to wrong place | Nested TC call overwrites Q | Save Q before nested TC |
 | All writes are same value | ON and OFF are same | Check OCT values |
