@@ -2856,7 +2856,15 @@ documents:
           (icon-registry + desktop-icons), taskbar (window list + process indicators), system menu, keyboard shortcuts,
           process monitor. WindowManager (desktop/src/wm/window-manager.ts) provides z-order management, drag-resize,
           window chrome. Boot sequence (desktop/src/boot/) renders boot screen then transitions to desktop. Amiga
-          Workbench inspiration visible in the shell design with icon grid, taskbar, and system menu pattern.
+          Workbench inspiration visible in the shell design with icon grid, taskbar, and system menu pattern. T3 deep
+          audit: z-order.ts exports bringToFront/sendToBack/depthCycle (Amiga-style: if front send to back, else bring
+          to front)/insertAtFront/removeFromStack/getZIndex/getFront. drag-resize.ts exports enableDrag (pointer capture
+          on titlebar) and enableResize (resize handle with MIN_WINDOW_WIDTH/HEIGHT clamping). keyboard-nav.ts
+          KeyboardManager with register/addBinding/removeBinding/enable/disable. desktop-shell.ts registers 4 shortcuts:
+          Alt+Tab (cycle-focus-forward), Alt+Shift+Tab (cycle-focus-backward), F10 (open-menu), Ctrl+Q (quit).
+          accessibility.ts: detectAccessibilityPreferences() checks matchMedia prefers-reduced-motion and
+          prefers-contrast. applyAccessibilityMode() disables CRT, applies HIGH_CONTRAST_PALETTE (32 colors), sets
+          gsd-os--a11y CSS class. watchAccessibilityChanges() auto-toggles on runtime media query changes.
       - id: os-006
         section: GSD-OS Shell
         claim: Power button has neon-red standby glow
