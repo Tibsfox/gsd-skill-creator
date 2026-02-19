@@ -14,7 +14,7 @@
 - [x] **Phase 223: Conformance Matrix** - Build the YAML matrix covering every "In Scope v1" claim across 18 vision documents with tier triage and dependency graph (completed 2026-02-19)
 - [x] **Phase 224: Foundation Audit (T0)** - Verify core GSD lifecycle, .planning/ structure, skill loading pipeline, state management, and build health (completed 2026-02-19)
 - [x] **Phase 225: Integration Audit (T1)** - Verify cross-component wiring: chipset-to-skill-creator, dashboard-to-planning, staging-to-execution, AMIGA ICDs, AGC pack (completed 2026-02-19)
-- [ ] **Phase 226: Behavior Audit (T2)** - Verify individual component correctness: token budgets, pattern detection, bounded learning, dashboard metrics, AGC simulator, staging hygiene, security hardening
+- [x] **Phase 226: Behavior Audit (T2)** - Verify individual component correctness: token budgets, pattern detection, bounded learning, dashboard metrics, AGC simulator, staging hygiene, security hardening (completed 2026-02-19)
 - [ ] **Phase 227: UX/Polish Audit (T3)** - Verify user-facing behavior: GSD-OS build/render, window manager, boot sequence, design system compliance, educational content, accessibility
 - [ ] **Phase 228: End-to-End Verification** - Full proof run from upload through dashboard with conformance gate percentages met
 - [ ] **Phase 229: Documentation & Amendments** - Resolve every vision document divergence (fix code or amend spec) and verify installation docs
@@ -86,7 +86,7 @@ Plans:
   3. AGC simulator produces correct results for all 38 instructions, ones' complement ALU handles all boundary conditions, and DSKY display model correctly decodes relay data
   4. Template engine renders all variable substitutions correctly; staging hygiene engine detects all 11 patterns; staging queue 7-state machine transitions correctly with append-only audit log
   5. Security hardening works: path traversal is blocked, YAML uses safe deserialization only, JSONL integrity checks function; trust decay model correctly downgrades tiers; smart intake routes through all 3 clarity paths; RFC skill fetches/parses/formats correctly in all 3 output formats
-**Plans:** 5/7 plans executed
+**Plans:** 7/7 plans complete
 Plans:
 - [x] 226-01-PLAN.md -- Verify skill-creator core behaviors: token budget, pattern detection, bounded learning (BEHAV-01, BEHAV-02, BEHAV-03)
 - [x] 226-02-PLAN.md -- Verify AGC simulator: 38 instructions, ALU boundaries, DSKY display (BEHAV-06, BEHAV-07, BEHAV-08)
@@ -152,7 +152,7 @@ Phases execute in numeric order: 223 → 224 → 225 → 226 → 227 → 228 →
 | 223. Conformance Matrix | 6/6 | Complete    | 2026-02-19 |
 | 224. Foundation Audit (T0) | 3/3 | Complete    | 2026-02-19 |
 | 225. Integration Audit (T1) | 6/6 | Complete    | 2026-02-19 |
-| 226. Behavior Audit (T2) | 5/7 | In Progress|  |
+| 226. Behavior Audit (T2) | 7/7 | Complete   | 2026-02-19 |
 | 227. UX/Polish Audit (T3) | 0/TBD | Not started | - |
 | 228. End-to-End Verification | 0/TBD | Not started | - |
 | 229. Documentation & Amendments | 0/TBD | Not started | - |
