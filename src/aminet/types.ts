@@ -683,3 +683,50 @@ export const PackageDetailSchema = z.object({
 });
 
 export type PackageDetail = z.infer<typeof PackageDetailSchema>;
+
+// ============================================================================
+// Collection schemas
+// ============================================================================
+
+/**
+ * A single entry in a collection manifest.
+ *
+ * References an Aminet package by its full path (e.g., "mus/edit/ProTracker36.lha")
+ * with an optional human-readable note explaining why it's included.
+ */
+export const CollectionEntrySchema = z.object({
+  /** Full Aminet path (e.g., "util/dir/DOpus550.lha") */
+  fullPath: z.string(),
+  /** Optional note explaining why this package is in the collection */
+  note: z.string().optional(),
+}).strict();
+
+export type CollectionEntry = z.infer<typeof CollectionEntrySchema>;
+
+/**
+ * A collection manifest -- a curated set of Aminet packages.
+ *
+ * Collections are stored as YAML files and validated at load time.
+ * The version field is always 1 (for future schema migration).
+ * Using strict() to reject unknown fields for safety.
+ */
+export const CollectionManifestSchema = z.object({
+  /** Human-readable collection name */
+  name: z.string(),
+  /** Description of what this collection contains */
+  description: z.string(),
+  /** Schema version -- always 1 */
+  version: z.literal(1),
+  /** ISO 8601 timestamp of collection creation */
+  createdAt: z.string(),
+  /** ISO 8601 timestamp of last modification */
+  updatedAt: z.string(),
+  /** Optional author or curator name */
+  author: z.string().optional(),
+  /** Optional tags for categorization */
+  tags: z.array(z.string()).optional(),
+  /** Package entries in this collection */
+  packages: z.array(CollectionEntrySchema),
+}).strict();
+
+export type CollectionManifest = z.infer<typeof CollectionManifestSchema>;
