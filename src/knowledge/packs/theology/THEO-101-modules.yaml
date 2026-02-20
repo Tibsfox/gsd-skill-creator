@@ -1,0 +1,354 @@
+# THEO-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: "THEO-101"
+pack_name: "Theology & Religion Studies -- Foundational Knowledge Pack"
+
+modules:
+  - id: "THEO-101-M1"
+    name: "Stories & Traditions"
+    description: "Sacred narratives, creation stories, moral tales, and mythological traditions across cultures; the stories that shape how people understand the world, convey moral wisdom, and transmit identity across generations"
+
+    learning_outcomes:
+      - "Retell sacred stories from multiple traditions accurately and respectfully"
+      - "Identify common themes (creation, heroism, morality, sacrifice) across traditions' narratives"
+      - "Understand why stories are central to religious identity and transmission"
+      - "Distinguish between myth (as sacred narrative) and fiction; understand myth as meaning-making"
+      - "Recognize how the same story may carry different meanings in different contexts"
+
+    topics:
+      - "Creation Stories Across Cultures"
+      - "Hero & Prophet Narratives"
+      - "Moral Tales, Parables & Wisdom Literature"
+      - "Flood & Apocalyptic Narratives"
+      - "Trickster & Teaching Stories"
+      - "Oral Traditions & Storytelling"
+      - "Myth as Sacred Narrative (Not Fiction)"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 25
+      elementary: 35
+      middle: 30
+      high: 20
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "Creation Stories Around the World"
+        - "Moral Tales Comparison"
+        - "Sacred Story Retelling Circle"
+        - "Flood Narratives Across Traditions"
+        - "Hero & Prophet Gallery Walk"
+        - "Myth vs. Fiction Discussion"
+        - "Oral Tradition Experiment"
+        - "Parable Interpretation Workshop"
+        - "Trickster Tales Collection"
+        - "Story Theme Mapping"
+
+    assessments:
+      - "Can student retell sacred stories from at least three traditions?"
+      - "Does student identify common themes across traditions' narratives?"
+      - "Can student explain why stories matter to religious communities?"
+      - "Does student treat all traditions' stories with equal respect?"
+
+  - id: "THEO-101-M2"
+    name: "World Religions Survey"
+    description: "The world's major religious traditions -- their origins, core beliefs, practices, and global presence; understanding the diversity of human responses to questions about the sacred, the divine, and the meaning of existence"
+
+    learning_outcomes:
+      - "Name and describe the core teachings of the world's major religious traditions"
+      - "Explain the historical origins and geographical spread of major religions"
+      - "Identify key symbols, practices, and celebrations of each tradition"
+      - "Recognize internal diversity within every tradition (denominations, schools, movements)"
+      - "Discuss non-religious worldviews (atheism, agnosticism, humanism) with equal respect"
+
+    topics:
+      - "Christianity: Origins, Beliefs, Denominations"
+      - "Islam: Origins, Five Pillars, Sunni/Shia"
+      - "Judaism: Covenant, Torah, Diaspora"
+      - "Hinduism: Brahman, Karma, Dharma, Moksha"
+      - "Buddhism: Four Noble Truths, Eightfold Path"
+      - "Sikhism, Baha'i, Jainism"
+      - "Indigenous & Traditional Religions"
+      - "East Asian Traditions: Confucianism, Taoism, Shinto"
+      - "New Religious Movements"
+      - "Non-Religious Worldviews"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 40
+      middle: 50
+      high: 40
+
+    prerequisite_modules: ["THEO-101-M1"]
+
+    activities:
+      count: 10
+      examples:
+        - "World Religions Passport -- Virtual Travel"
+        - "Religion Timeline Builder"
+        - "Symbol Scavenger Hunt"
+        - "Holiday Calendar Mapping"
+        - "Sacred Space Virtual Field Trip"
+        - "Traditions Comparison Chart"
+        - "Interview a Practitioner"
+        - "Religion Geography Mapping"
+        - "Denomination Family Tree"
+        - "Worldview Spectrum Discussion"
+
+    assessments:
+      - "Can student name and describe at least five major world religions?"
+      - "Does student recognize internal diversity within traditions?"
+      - "Can student identify major religious symbols and celebrations?"
+      - "Does student treat non-religious worldviews with equal scholarly respect?"
+
+  - id: "THEO-101-M3"
+    name: "Sacred Texts & Interpretation"
+    description: "Reading religious texts as both literature and as sacred writing; understanding hermeneutics, genre, translation, canon formation, and the relationship between text and tradition"
+
+    learning_outcomes:
+      - "Read excerpts from major sacred texts with attention to genre, context, and meaning"
+      - "Understand that sacred texts include multiple genres (law, poetry, prophecy, narrative, philosophy)"
+      - "Explain how different communities interpret the same text differently"
+      - "Recognize the role of translation, compilation, and canonization in shaping texts"
+      - "Compare passages from different traditions on the same theme (e.g., compassion, justice)"
+
+    topics:
+      - "What Makes a Text 'Sacred' or 'Canonical'"
+      - "Genre Awareness: Law, Poetry, Prophecy, Parable, Hymn"
+      - "The Bible: Composition, Canon, Translations"
+      - "The Quran: Revelation, Compilation, Recitation"
+      - "Torah, Talmud, Midrash: Layers of Interpretation"
+      - "Hindu Scriptures: Shruti and Smriti"
+      - "Buddhist Texts: Pali Canon, Mahayana Sutras"
+      - "Translation Challenges & Interpretation"
+      - "Hermeneutics: The Art of Reading"
+      - "Oral Traditions and Their Written Forms"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 30
+      middle: 45
+      high: 50
+
+    prerequisite_modules: ["THEO-101-M2"]
+
+    activities:
+      count: 10
+      examples:
+        - "Sacred Text Reading Circle"
+        - "Parable & Metaphor Analysis"
+        - "Translation Comparison Exercise"
+        - "Genre Detective: Identify the Text Type"
+        - "Thematic Passage Comparison"
+        - "Oral-to-Written Tradition Simulation"
+        - "Commentary Layer Investigation"
+        - "Canon Formation Timeline"
+        - "Sacred Text Art & Calligraphy"
+        - "Hermeneutics Workshop: Same Text, Different Readings"
+
+    assessments:
+      - "Can student read a passage from a sacred text and identify its genre and context?"
+      - "Does student understand how interpretation varies across communities?"
+      - "Can student compare passages from different traditions on a common theme?"
+      - "Does student recognize translation and compilation as interpretive acts?"
+
+  - id: "THEO-101-M4"
+    name: "Religion, Ethics & Society"
+    description: "How religious ideas shape moral reasoning, social structures, law, art, conflict, and the way people live together; the intersection of faith and the public sphere"
+
+    learning_outcomes:
+      - "Identify the Golden Rule and its equivalents across multiple religious traditions"
+      - "Compare religious and secular approaches to ethical questions"
+      - "Analyze how religion has shaped law, art, and social institutions throughout history"
+      - "Discuss the role of religion in both conflict and peacebuilding with historical evidence"
+      - "Understand the relationship between religion and science as complex, not simply adversarial"
+
+    topics:
+      - "The Golden Rule Across Traditions"
+      - "Religious Ethics vs. Secular Ethics"
+      - "Religion & Law: Sharia, Halakha, Canon Law, Natural Law"
+      - "Religion & Art: Architecture, Music, Visual Art"
+      - "Religion & Conflict: Historical and Contemporary"
+      - "Religion & Peacebuilding: Reconciliation Movements"
+      - "Religion & Science: Models of Relationship"
+      - "Religion & Gender: Roles, Reform, Feminist Theology"
+      - "Religion & Social Justice: Liberation Movements"
+      - "Secularism & Religious Freedom"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 25
+      middle: 45
+      high: 50
+
+    prerequisite_modules: ["THEO-101-M2"]
+
+    activities:
+      count: 10
+      examples:
+        - "Golden Rule Across Traditions"
+        - "Religion in the News"
+        - "Ethics Case Study: Multiple Perspectives"
+        - "Religious Art Gallery Analysis"
+        - "Religion & Conflict Timeline"
+        - "Religion & Science Debate Models"
+        - "Social Justice Across Faiths"
+        - "Religious Law Comparison"
+        - "Peacebuilding Case Study"
+        - "Secularism & Freedom Discussion"
+
+    assessments:
+      - "Can student identify the Golden Rule in at least four traditions?"
+      - "Does student compare religious and secular ethical reasoning?"
+      - "Can student analyze religion's role in a historical conflict or peace process?"
+      - "Does student engage with religion-science relationship with nuance?"
+
+  - id: "THEO-101-M5"
+    name: "Comparative Theology & Interfaith Dialogue"
+    description: "Finding common ground and understanding genuine differences; the capstone module integrating stories, survey knowledge, textual skills, and social analysis into sophisticated comparative thinking and respectful dialogue"
+
+    learning_outcomes:
+      - "Compare theological concepts (God, afterlife, salvation, suffering) across traditions"
+      - "Participate constructively in structured interfaith dialogue"
+      - "Articulate the difference between exclusivism, inclusivism, and pluralism"
+      - "Identify both common ground and genuine, irreducible differences between traditions"
+      - "Evaluate one's own assumptions and biases about religion with intellectual humility"
+
+    topics:
+      - "Comparative Theology: Method and Practice"
+      - "Concepts of God/Divine/Ultimate Reality Across Traditions"
+      - "Afterlife and Eschatology Compared"
+      - "Soteriology: Salvation, Liberation, Enlightenment"
+      - "The Problem of Evil and Suffering"
+      - "Exclusivism, Inclusivism, Pluralism"
+      - "Interfaith Dialogue: Principles and Practice"
+      - "Perennial Philosophy and Universal Themes"
+      - "Religion in a Pluralistic World"
+      - "The Future of Religion and Spirituality"
+
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      middle: 35
+      high: 50
+
+    prerequisite_modules: ["THEO-101-M2", "THEO-101-M3", "THEO-101-M4"]
+
+    activities:
+      count: 10
+      examples:
+        - "Interfaith Panel Simulation"
+        - "Common Ground Mapping"
+        - "Theology Comparison Matrix"
+        - "Dialogue Practice: Listening Across Difference"
+        - "Concept of God Across Traditions"
+        - "Afterlife Beliefs Comparison"
+        - "Problem of Evil Discussion"
+        - "Pluralism Debate"
+        - "Interfaith Action Project"
+        - "Personal Worldview Reflection"
+
+    assessments:
+      - "Can student compare theological concepts across at least three traditions?"
+      - "Does student participate in interfaith dialogue with respect and substance?"
+      - "Can student articulate the differences between exclusivism, inclusivism, and pluralism?"
+      - "Does student demonstrate intellectual humility about their own assumptions?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Religious Literacy"
+    description: "Ability to accurately describe what the world's major religions teach and how they are practiced; the foundation for all other competencies"
+    assessed_in: ["THEO-101-M1", "THEO-101-M2", "THEO-101-M3", "THEO-101-M4", "THEO-101-M5"]
+
+  - name: "Comparative Analysis"
+    description: "Ability to identify similarities and differences across traditions on any topic; the core academic skill of religious studies"
+    assessed_in: ["THEO-101-M1", "THEO-101-M2", "THEO-101-M3", "THEO-101-M4", "THEO-101-M5"]
+
+  - name: "Respectful Engagement"
+    description: "Ability to discuss religious topics without dismissing, trivializing, or proselytizing; treating every tradition with scholarly respect"
+    assessed_in: ["THEO-101-M1", "THEO-101-M2", "THEO-101-M3", "THEO-101-M4", "THEO-101-M5"]
+
+  - name: "Textual Analysis"
+    description: "Ability to read religious texts with attention to genre, context, and interpretation; understanding texts as both literature and sacred writing"
+    assessed_in: ["THEO-101-M1", "THEO-101-M3", "THEO-101-M5"]
+
+  - name: "Historical & Cultural Contextualization"
+    description: "Ability to place religious ideas, practices, and movements in their historical and cultural context; understanding change over time"
+    assessed_in: ["THEO-101-M2", "THEO-101-M3", "THEO-101-M4", "THEO-101-M5"]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 & M4 (parallel) -> M5"
+    rationale: "Stories provide foundation; survey provides map; texts and society can proceed in parallel; comparative theology integrates everything"
+
+  - name: "Stories-First Pathway"
+    description: "M1 (deep dive) -> M3 (texts) -> M2 (survey) -> M4 (society) -> M5 (dialogue)"
+    rationale: "Learner fascinated by narrative moves from stories to texts to broader context"
+
+  - name: "Ethics-First Pathway"
+    description: "M1 -> M2 -> M4 (ethics and society) -> M3 (texts behind the ethics) -> M5 (dialogue)"
+    rationale: "Learner motivated by moral questions explores religious ethics before diving into sacred texts"
+
+  - name: "Dialogue-Oriented Pathway"
+    description: "M1 & M2 (quick survey) -> M5 (comparative dialogue) with M3 & M4 as needed depth"
+    rationale: "Learner in interfaith context needs dialogue skills quickly; deepens textual and social knowledge as needed"
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow same structure: learning outcomes, topics, activities, assessments"
+    cached: true
+
+  - pattern: "Comparative Framework"
+    description: "Every topic is studied across multiple traditions using consistent comparison structure"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "All modules use four-level rubric: Beginning, Developing, Proficient, Advanced"
+    cached: true
+
+  - pattern: "Developmental Progression"
+    description: "Each module shows K-College progression, scaling depth and abstraction by age"
+    cached: true
+
+  - pattern: "Sensitivity Protocol"
+    description: "Every module applies the same content sensitivity and respect standards"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner accurately represents a tradition different from their own background"
+    - "When learner identifies genuine similarities across traditions without flattening differences"
+    - "When learner reads a sacred text passage with appropriate contextual awareness"
+    - "When learner engages respectfully with a challenging or unfamiliar religious idea"
+    - "When learner demonstrates intellectual humility about their own assumptions"
+    - "When learner connects religious concepts to current events or other disciplines"
+
+  pattern_detection:
+    - "Effective comparative analysis techniques that reveal genuine insight"
+    - "Respectful discussion patterns that enable productive dialogue"
+    - "Textual analysis strategies that work across different sacred text genres"
+    - "Cross-curricular connection patterns linking religion to history, art, and ethics"
+    - "Age-appropriate complexity scaling for sensitive topics"
+
+  skill_promotion:
+    - "Promote successful comparative analysis patterns to reusable skills"
+    - "Create respectful engagement frameworks from observed dialogue successes"
+    - "Build textual interpretation toolkits from demonstrated reading strategies"
+    - "Develop interfaith dialogue facilitation skills from participation patterns"
+    - "Create cultural sensitivity checklists from content engagement observations"
