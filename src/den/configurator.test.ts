@@ -78,7 +78,8 @@ describe('Configurator', () => {
     it('should validate each profile through TopologyProfileSchema', () => {
       for (const key of Object.keys(TOPOLOGY_PROFILES) as Array<keyof typeof TOPOLOGY_PROFILES>) {
         const profile = TOPOLOGY_PROFILES[key];
-        const result = TopologyProfileSchema.safeParse(profile);
+        // Spread roles to convert readonly tuple to mutable array for Zod validation
+        const result = TopologyProfileSchema.safeParse({ ...profile, roles: [...profile.roles] });
         expect(result.success).toBe(true);
       }
     });
