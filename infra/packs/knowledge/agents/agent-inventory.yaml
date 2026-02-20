@@ -1,0 +1,120 @@
+# Agent Inventory for Knowledge Pack Ecosystem
+# Generated during Phase 244 agent definitions
+# Purpose: Cross-reference all KP- agents, skills, tools for uniqueness validation
+
+agent_count: 6
+team_count: 1
+skill_count: 7
+
+teams:
+  kp-content-pipeline:
+    color_family: "emerald-gold"
+    agents:
+      - name: kp-coordinator
+        id: KP-01
+        role: coordinator
+        skills: [kp-pipeline-orchestration]
+        tools: "Read, Glob, Grep"
+        tool_count: 3
+      - name: kp-core-author
+        id: KP-02
+        role: content-generator
+        skills: [kp-content-authoring, kp-core-academic-domain]
+        tools: "Read, Write, Glob, Grep"
+        tool_count: 4
+      - name: kp-applied-author
+        id: KP-03
+        role: content-generator
+        skills: [kp-content-authoring, kp-applied-domain]
+        tools: "Read, Write, Glob, Grep"
+        tool_count: 4
+      - name: kp-specialized-author
+        id: KP-04
+        role: content-generator
+        skills: [kp-content-authoring, kp-specialized-domain]
+        tools: "Read, Write, Glob, Grep"
+        tool_count: 4
+      - name: kp-validator
+        id: KP-05
+        role: quality-assurance
+        skills: [kp-content-validation]
+        tools: "Read, Bash, Glob, Grep"
+        tool_count: 4
+      - name: kp-reviewer
+        id: KP-06
+        role: quality-assurance
+        skills: [kp-quality-review]
+        tools: "Read, Glob, Grep"
+        tool_count: 3
+
+# Skill uniqueness validation
+# kp-content-authoring is intentionally shared across 3 author agents (KP-02, KP-03, KP-04)
+# Domain skills are unique per agent
+skill_uniqueness:
+  kp-coordinator: [kp-pipeline-orchestration]
+  kp-core-author: [kp-content-authoring, kp-core-academic-domain]
+  kp-applied-author: [kp-content-authoring, kp-applied-domain]
+  kp-specialized-author: [kp-content-authoring, kp-specialized-domain]
+  kp-validator: [kp-content-validation]
+  kp-reviewer: [kp-quality-review]
+
+# All 7 skills are covered
+skill_coverage:
+  total_skills: 7
+  assigned_skills: 7
+  unassigned: []
+  shared_skills:
+    - skill: kp-content-authoring
+      agents: [kp-core-author, kp-applied-author, kp-specialized-author]
+      rationale: "Same authoring process across all tiers; domain skills differentiate"
+  unique_skills:
+    - kp-pipeline-orchestration    # -> kp-coordinator
+    - kp-core-academic-domain      # -> kp-core-author
+    - kp-applied-domain            # -> kp-applied-author
+    - kp-specialized-domain        # -> kp-specialized-author
+    - kp-content-validation        # -> kp-validator
+    - kp-quality-review            # -> kp-reviewer
+
+# Tool access summary (minimal permission principle)
+tool_access:
+  read_only:
+    agents: [kp-coordinator, kp-reviewer]
+    tools: "Read, Glob, Grep"
+    rationale: "Coordination and review agents read artifacts but do not create content files"
+  read_write:
+    agents: [kp-core-author, kp-applied-author, kp-specialized-author]
+    tools: "Read, Write, Glob, Grep"
+    rationale: "Content generator agents create pack files (vision, modules, activities, etc.)"
+  read_with_bash:
+    agents: [kp-validator]
+    tools: "Read, Bash, Glob, Grep"
+    rationale: "Validator runs schema checks via runtime API (npx vitest, npx tsc)"
+
+# Co-activation patterns
+co_activation:
+  batch_generation_flow:
+    sequence: [kp-coordinator, "kp-{tier}-author", kp-validator, kp-reviewer]
+    trigger: "Pack batch generation -- coordinate, generate, validate, review"
+  parallel_authoring:
+    agents: [kp-core-author, kp-applied-author, kp-specialized-author]
+    trigger: "Multiple tiers can generate in parallel when packs have no cross-tier dependencies"
+  validation_review_chain:
+    sequence: [kp-validator, kp-reviewer]
+    trigger: "Validation passes before review begins -- validator is the gate"
+
+# Pack assignment matrix
+pack_assignments:
+  kp-core-author:
+    tier: core_academic
+    count: 15
+    packs: [MATH-101, SCI-101, TECH-101, ENGR-101, PHYS-101, CHEM-101, READ-101, CRIT-101, PROB-101, COMM-101, HIST-101, GEO-101, MFAB-101, BUS-101, STAT-101]
+  kp-applied-author:
+    tier: applied
+    count: 10
+    packs: [CODE-101, DATA-101, LANG-101, PSYCH-101, ENVR-101, NUTR-101, ECON-101, WRIT-101, LOG-101, DIGLIT-101]
+  kp-specialized-author:
+    tier: specialized
+    count: 10
+    packs: [PHILO-101, THEO-101, PE-101, NATURE-101, DOMESTIC-101, ART-101, MUSIC-101, TRADE-101, ASTRO-101, LEARN-101]
+
+validation_status: "All 6 agents have unique skill profiles (with intentional kp-content-authoring sharing). All 7 skills assigned. Tool access is minimally permissive."
