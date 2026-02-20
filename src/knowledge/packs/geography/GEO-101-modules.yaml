@@ -1,0 +1,308 @@
+---
+# GEO-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: GEO-101
+pack_name: "Geography & Space Science -- Foundational Knowledge Pack"
+
+modules:
+  - id: GEO-101-M1
+    name: "Earth Systems & Physical Geography"
+    description: "Understanding plate tectonics, the rock cycle, water cycle, biomes, weathering, erosion, and natural hazards as interconnected Earth systems"
+
+    learning_outcomes:
+      - "Explain how plate tectonics shapes landforms, drives volcanic activity, and causes earthquakes"
+      - "Trace matter through the rock cycle and connect it to landscape evolution"
+      - "Describe the water cycle and its role in shaping landscapes and sustaining ecosystems"
+      - "Identify major biome types and explain how climate determines their distribution"
+      - "Analyze natural hazards in terms of their causes, spatial distribution, and human impacts"
+
+    topics:
+      - "Plate Tectonics & Continental Drift"
+      - "Rock Cycle & Mineral Identification"
+      - "Water Cycle & Watershed Dynamics"
+      - "Biomes & Ecosystems"
+      - "Weathering, Erosion & Deposition"
+      - "Natural Hazards & Disaster Preparedness"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 35
+      high: 25
+
+    prerequisite_modules: []
+
+    activities:
+      count: 6
+      examples:
+        - "Rock Cycle in a Bag"
+        - "Build a Watershed Model"
+        - "Plate Tectonics Puzzle"
+        - "Biome Climate Graph Matching"
+        - "Earthquake Epicenter Triangulation"
+        - "Erosion Time-Lapse Study"
+
+    assessments:
+      - "Can student explain how Earth systems interact and influence each other?"
+      - "Does student connect plate tectonics to real-world landforms and hazards?"
+      - "Can student trace water through the full hydrological cycle?"
+      - "Does student match climate patterns to biome distributions?"
+
+  - id: GEO-101-M2
+    name: "Human Geography & Cultural Landscapes"
+    description: "Exploring population distribution, migration patterns, urbanization, cultural landscapes, economic geography, and political boundaries"
+
+    learning_outcomes:
+      - "Explain why population is unevenly distributed and identify contributing factors"
+      - "Analyze migration patterns using push-pull factor frameworks"
+      - "Describe how cities form, grow, and face challenges related to their geography"
+      - "Read cultural landscapes for evidence of human modification and historical layers"
+      - "Connect resource distribution to economic patterns and geopolitical tensions"
+
+    topics:
+      - "Population Distribution & Density"
+      - "Migration & Movement"
+      - "Urbanization & City Systems"
+      - "Cultural Landscapes & Place Identity"
+      - "Economic Geography & Trade"
+      - "Borders, Nations & Sovereignty"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 30
+
+    prerequisite_modules: [GEO-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Map Your Neighborhood Demographics"
+        - "Cultural Exchange Fair Planning"
+        - "Migration Story Mapping"
+        - "City Growth Simulation"
+        - "Resource Distribution Challenge"
+        - "Border Drawing Exercise"
+
+    assessments:
+      - "Can student explain factors driving population distribution?"
+      - "Does student analyze migration using push-pull frameworks?"
+      - "Can student read a cultural landscape for human modification?"
+      - "Does student connect physical geography to human settlement patterns?"
+
+  - id: GEO-101-M3
+    name: "Maps, Spatial Analysis & GIS"
+    description: "Building map literacy from reading maps through making maps to questioning maps, including coordinate systems, projections, spatial reasoning, and GIS fundamentals"
+
+    learning_outcomes:
+      - "Read and interpret maps using title, legend, scale, and orientation"
+      - "Use latitude and longitude to locate and communicate positions on Earth"
+      - "Explain how map projections distort reality and evaluate trade-offs"
+      - "Apply spatial reasoning to identify patterns in geographic data"
+      - "Use GIS concepts to layer and analyze spatial information"
+
+    topics:
+      - "Cartographic Fundamentals"
+      - "Coordinate Systems & Navigation"
+      - "Map Projections & Distortion"
+      - "Spatial Reasoning & Pattern Detection"
+      - "GIS Fundamentals & Spatial Queries"
+      - "Critical Cartography & Map Bias"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 30
+      high: 25
+
+    prerequisite_modules: []
+
+    activities:
+      count: 6
+      examples:
+        - "Treasure Hunt with Coordinates"
+        - "Design a Map of Your School"
+        - "Projection Comparison Lab"
+        - "Spatial Pattern Detective"
+        - "GIS Layer Stacking"
+        - "Map Critique Gallery"
+
+    assessments:
+      - "Can student read maps using standard cartographic elements?"
+      - "Does student use coordinates to locate and describe positions?"
+      - "Can student explain projection distortions and their implications?"
+      - "Does student identify spatial patterns in geographic data?"
+
+  - id: GEO-101-M4
+    name: "Astronomy & Our Place in Space"
+    description: "Understanding the Earth-Sun-Moon system, solar system structure, stellar evolution, galactic structure, telescopes, and cosmic scale"
+
+    learning_outcomes:
+      - "Explain day/night, seasons, lunar phases, and eclipses through orbital geometry"
+      - "Describe solar system structure including relative sizes and distances"
+      - "Trace the life cycle of stars and connect it to element formation"
+      - "Locate Earth within the Milky Way and the Milky Way within cosmic structure"
+      - "Develop a quantitative sense of cosmic scale and deep time"
+
+    topics:
+      - "Earth-Sun-Moon System"
+      - "Solar System Structure & Planetary Science"
+      - "Stars & Stellar Evolution"
+      - "Galaxies & Cosmic Structure"
+      - "Telescopes & Observational Astronomy"
+      - "Scale, Distance & Cosmic Perspective"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 30
+      high: 25
+
+    prerequisite_modules: [GEO-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Night Sky Observation Journal"
+        - "Scale Model of the Solar System"
+        - "Season Simulator"
+        - "Constellation Mythology Across Cultures"
+        - "Stellar Life Cycle Sorting"
+        - "Cosmic Address Activity"
+
+    assessments:
+      - "Can student explain seasonal patterns using Earth's axial tilt?"
+      - "Does student demonstrate accurate sense of solar system scale?"
+      - "Can student trace stellar evolution from nebula to remnant?"
+      - "Does student connect astronomical concepts to everyday phenomena?"
+
+  - id: GEO-101-M5
+    name: "Climate, Weather & Environmental Change"
+    description: "Understanding atmospheric circulation, weather systems, climate zones, the greenhouse effect, climate change science, and environmental stewardship"
+
+    learning_outcomes:
+      - "Distinguish weather from climate and explain atmospheric circulation patterns"
+      - "Classify climate zones and connect them to biome and settlement patterns"
+      - "Explain the greenhouse effect and trace carbon through the carbon cycle"
+      - "Evaluate evidence for anthropogenic climate change using scientific data"
+      - "Propose evidence-based strategies for environmental stewardship at multiple scales"
+
+    topics:
+      - "Atmospheric Structure & Circulation"
+      - "Weather Systems & Forecasting"
+      - "Climate Zones & Classification"
+      - "Greenhouse Effect & Carbon Cycle"
+      - "Climate Change Science & Evidence"
+      - "Environmental Stewardship & Sustainability"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 35
+      high: 30
+
+    prerequisite_modules: [GEO-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Weather Station Data Collection"
+        - "Climate Zone Research Project"
+        - "Greenhouse Effect Demonstration"
+        - "Climate Data Analysis"
+        - "Carbon Footprint Calculator"
+        - "Biome in a Jar"
+
+    assessments:
+      - "Can student distinguish weather from climate with examples?"
+      - "Does student connect climate zones to vegetation and human activity?"
+      - "Can student explain greenhouse effect mechanisms?"
+      - "Does student evaluate climate evidence using scientific reasoning?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Spatial Thinking"
+    description: "Ability to reason about location, distance, direction, pattern, and scale across local, regional, global, and cosmic contexts"
+    assessed_in: [GEO-101-M1, GEO-101-M3, GEO-101-M4, GEO-101-M5]
+
+  - name: "Systems Thinking"
+    description: "Habit of seeing interconnections between Earth systems, human activities, and environmental consequences"
+    assessed_in: [GEO-101-M1, GEO-101-M2, GEO-101-M5]
+
+  - name: "Scale Fluency"
+    description: "Ability to shift comfortably between local, regional, global, and cosmic scales of analysis"
+    assessed_in: [GEO-101-M1, GEO-101-M3, GEO-101-M4, GEO-101-M5]
+
+  - name: "Geographic Inquiry"
+    description: "Ability to ask spatial questions, gather geographic data, identify patterns, and communicate geographic findings"
+    assessed_in: [GEO-101-M1, GEO-101-M2, GEO-101-M3, GEO-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Systems Pathway"
+    description: "M1 -> M5 -> M2 -> M3 -> M4: Start with physical Earth, add climate, then human dimensions, mapping skills, and cosmic context"
+    rationale: "Builds from physical foundations through climate to human geography, using maps as tools throughout and ending with cosmic perspective."
+
+  - name: "Spatial Skills Pathway"
+    description: "M3 -> M1 -> M2 -> M5 -> M4: Start with maps and spatial thinking, then apply to physical and human geography, climate, and space"
+    rationale: "Front-loads the spatial reasoning toolkit so learners can apply map skills to every subsequent module."
+
+  - name: "Curiosity-Led Pathway"
+    description: "Any module can be entered after M1 or M3 provides foundational context"
+    rationale: "A learner fascinated by space can start with M4 after basic Earth systems or map skills. Flexibility maintains engagement."
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same introduction structure: What It Teaches, Interactive Elements, Technical Implementation Notes"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Interactive elements follow a consistent template across all modules"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure (Beginning, Developing, Proficient, Advanced) across all modules"
+    cached: true
+
+  - pattern: "Parent Guidance"
+    description: "Parent guidance follows the same question-and-encouragement format throughout"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner connects physical geography to human settlement patterns spontaneously"
+    - "When learner questions map projections or identifies distortion unprompted"
+    - "When learner traces cause-effect chains across Earth systems"
+    - "When learner shifts scale fluently (local to global to cosmic) in reasoning"
+    - "When learner connects weather observations to climate patterns"
+
+  pattern_detection:
+    - "Effective spatial reasoning protocols"
+    - "Successful systems-thinking strategies"
+    - "Clear map interpretation workflows"
+    - "Scale-bridging reasoning techniques"
+
+  skill_promotion:
+    - "Promote spatial reasoning patterns to reusable skills"
+    - "Create Earth systems analysis templates from successful investigations"
+    - "Build map literacy toolkits from observed proficiency patterns"
+    - "Develop climate data analysis workflows from effective learner approaches"
+
+# This YAML defines the modular structure for the GEO-101 pack and enables
+# skill-creator to orchestrate learning experiences centered on spatial thinking.
