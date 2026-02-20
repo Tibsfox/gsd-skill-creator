@@ -222,7 +222,7 @@ Phases 243-244 sequential (infrastructure first). Phases 245-251 parallelizable 
 | 247. Core Academic Packs Batch 3 | 9/9 | Complete    | 2026-02-20 |
 | 248. Applied Packs Batch 1 | 0/5 | Complete    | 2026-02-20 |
 | 249. Applied Packs Batch 2 | 0/5 | Complete    | 2026-02-20 |
-| 250. Specialized Packs Batch 1 | 5/5 | Complete   | 2026-02-20 |
+| 250. Specialized Packs Batch 1 | 5/5 | Complete    | 2026-02-20 |
 | 251. Specialized Packs Batch 2 | 0/5 | Planned | - |
 | 252. Pack Metadata & Validation | 0/TBD | Not started | - |
 | 253. GSD-OS Dashboard | 0/TBD | Not started | - |
