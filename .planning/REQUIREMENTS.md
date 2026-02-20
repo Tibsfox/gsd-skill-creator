@@ -99,10 +99,10 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 
 ### Chipset & Agent Definitions
 
-- [ ] **CHIP-01**: Chipset YAML defining knowledge pack agents, skills, teams, and token budget allocation
-- [ ] **CHIP-02**: SKILL.md files for each knowledge pack agent following infra/skills/ format
+- [x] **CHIP-01**: Chipset YAML defining knowledge pack agents, skills, teams, and token budget allocation
+- [x] **CHIP-02**: SKILL.md files for each knowledge pack agent following infra/skills/ format
 - [ ] **CHIP-03**: Pipeline team YAML for pack content delivery and validation workflow
-- [ ] **CHIP-04**: Agent prefix KP- (Knowledge Pack) for knowledge domain agents following highway numbering convention
+- [x] **CHIP-04**: Agent prefix KP- (Knowledge Pack) for knowledge domain agents following highway numbering convention
 - [ ] **CHIP-05**: Team coordination pattern (map-reduce) for parallel pack content generation
 
 ### Non-Functional Requirements
@@ -111,8 +111,8 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 - [x] **NFR-02**: Pack runtime has zero external npm dependencies (YAML parsing via existing project deps)
 - [ ] **NFR-03**: All pack content CC-BY-SA-4.0 licensed with attribution in each pack directory
 - [ ] **NFR-04**: Pack content validator runs as test suite with per-pack validation (35 test cases minimum)
-- [ ] **NFR-05**: Token budget for knowledge pack skills within 40% ecosystem ceiling
-- [ ] **NFR-06**: Parallel instruction patterns across packs for token caching optimization
+- [x] **NFR-05**: Token budget for knowledge pack skills within 40% ecosystem ceiling
+- [x] **NFR-06**: Parallel instruction patterns across packs for token caching optimization
 
 ## v2 Requirements
 
@@ -211,17 +211,17 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 | META-04 | Phase 252 | Pending |
 | META-05 | Phase 252 | Pending |
 | META-06 | Phase 252 | Pending |
-| CHIP-01 | Phase 244 | Pending |
-| CHIP-02 | Phase 244 | Pending |
+| CHIP-01 | Phase 244 | Complete |
+| CHIP-02 | Phase 244 | Complete |
 | CHIP-03 | Phase 244 | Pending |
-| CHIP-04 | Phase 244 | Pending |
+| CHIP-04 | Phase 244 | Complete |
 | CHIP-05 | Phase 244 | Pending |
 | NFR-01 | Phase 243 | Complete |
 | NFR-02 | Phase 243 | Complete |
 | NFR-03 | Phase 252 | Pending |
 | NFR-04 | Phase 252 | Pending |
-| NFR-05 | Phase 244 | Pending |
-| NFR-06 | Phase 244 | Pending |
+| NFR-05 | Phase 244 | Complete |
+| NFR-06 | Phase 244 | Complete |
 
 **Coverage:**
 - v1 requirements: 80 total
