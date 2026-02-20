@@ -15,7 +15,7 @@
 - [x] **Phase 249: Applied Packs Batch 2** - NUTR-101, ECON-101, WRIT-101, LOG-101, DIGLIT-101 full suites (completed 2026-02-20)
 - [x] **Phase 250: Specialized Packs Batch 1** - PHILO-101, THEO-101, PE-101, NATURE-101, DOMESTIC-101 full suites (completed 2026-02-20)
 - [x] **Phase 251: Specialized Packs Batch 2** - ART-101, MUSIC-101, TRADE-101, ASTRO-101, LEARN-101 full suites (completed 2026-02-20)
-- [ ] **Phase 252: Pack Metadata & Validation** - Cross-pack dependency graph, standards alignment, translation stubs, accessibility, content validation, master INDEX generation
+- 🚧 **Phase 252: Pack Metadata & Validation** - Cross-pack dependency graph, standards alignment, translation stubs, accessibility, content validation, master INDEX generation (in progress: 3/6 plans complete)
 - [ ] **Phase 253: GSD-OS Dashboard** - Knowledge pack browser panel, search, detail view, skill tree, activity suggestions, progress tracking
 - [ ] **Phase 254: skill-creator Integration** - Observation hooks, pattern detection, activity scaffolding, approach promotion, EventEnvelope events, pathway adaptation
 
@@ -187,12 +187,12 @@ Plans:
   - Wave 1: 252-01 (dependency graph YAML + Mermaid), 252-02 (Core Academic metadata enrichment), 252-03 (Applied metadata enrichment), 252-04 (Specialized metadata enrichment) [parallel]
   - Wave 2: 252-05 (license files + validation test suite), 252-06 (INDEX.md + ALL-PACKS-OVERVIEW.md) [parallel, depends on Wave 1]
 Plans:
-- [ ] 252-01-PLAN.md — Cross-pack dependency graph (YAML + Mermaid diagram)
-- [ ] 252-02-PLAN.md — Standards, translation, accessibility metadata for Core Academic (15 packs)
+- [x] 252-01-PLAN.md — Cross-pack dependency graph (YAML + Mermaid diagram)
+- [x] 252-02-PLAN.md — Standards, translation, accessibility metadata for Core Academic (15 packs)
 - [ ] 252-03-PLAN.md — Standards, translation, accessibility metadata for Applied (10 packs)
 - [ ] 252-04-PLAN.md — Standards, translation, accessibility metadata for Specialized (10 packs)
 - [ ] 252-05-PLAN.md — CC-BY-SA-4.0 license files + content validation test suite (35+ tests)
-- [ ] 252-06-PLAN.md — Master INDEX.md + ALL-PACKS-OVERVIEW.md generation
+- [x] 252-06-PLAN.md — Master INDEX.md + ALL-PACKS-OVERVIEW.md generation
 
 ### Phase 253: GSD-OS Dashboard
 **Goal**: Users can browse, search, and explore knowledge packs through a visual panel in the GSD-OS desktop application
