@@ -47,7 +47,7 @@ function makePack(
     tags: ['test'],
     related_packs: opts.related_packs ?? [],
     gsd_integration: {},
-  } as KnowledgePack;
+  } as unknown as KnowledgePack;
 }
 
 // ---------------------------------------------------------------------------
