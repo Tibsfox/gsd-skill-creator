@@ -335,11 +335,34 @@ translations:
       complete: true
 
     - language_code: es
-      name: "Espanol"
+      name: "Español"
       complete: false
       progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
 
-  planned: [fr, zh, ar]
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: [zh, ar, pt, ja]
 
 # Accessibility
 accessibility:
@@ -349,20 +372,62 @@ accessibility:
   keyboard_navigable: true
   alt_text_provided: true
   captions_available: false
-  notes: "Field activities include observation guides and verbal descriptions. Climate data uses data tables alongside graphs. Consider adding video demonstrations of environmental processes with captions."
+  notes: "Field observation alternatives for mobility-limited learners. Climate data uses data tables alongside graphs. Field activities include observation guides and verbal descriptions."
+  pack_specific_concerns:
+    - "Field activities need indoor/virtual alternatives for mobility-limited learners"
+    - "All charts and visualizations require data table alternatives"
+    - "Climate data projections need text descriptions alongside graphs"
+    - "Video demonstrations of environmental processes need captions"
 
 # Standards Alignment
 standards_alignment:
   - framework: "Next Generation Science Standards (NGSS)"
     version: 2013
+    standard_codes:
+      - "LS1.A"
+      - "LS2.A"
+      - "LS2.B"
+      - "ESS2.A"
+      - "ESS3.A"
+      - "ESS3.B"
+      - "ESS3.C"
+      - "ESS3.D"
     alignments:
       LS1: "From Molecules to Organisms: Structures and Processes"
       LS2: "Ecosystems: Interactions, Energy, and Dynamics"
       ESS2: "Earth's Systems"
       ESS3: "Earth and Human Activity"
 
+  - framework: "AP Environmental Science Content"
+    version: "2019"
+    standard_codes:
+      - "ENG-1"
+      - "ENG-2"
+      - "ENG-3"
+      - "ENG-4"
+      - "ENG-5"
+      - "ENG-6"
+    mappings:
+      "Unit 1": "Earth's Systems and Resources"
+      "Unit 2": "The Living World"
+      "Unit 3": "Populations"
+      "Unit 4": "Earth Systems and Resources"
+      "Unit 8": "Global Change"
+
+  - framework: "IB MYP Sciences"
+    version: "2014"
+    standard_codes:
+      - "MYP.ENV.1"
+      - "MYP.ENV.2"
+      - "MYP.ENV.3"
+    mappings:
+      "Grades 6-10": "Ecosystems, Earth systems, human-environment interactions"
+
   - framework: "AAAS Benchmarks for Science Literacy"
     version: 1993
+    standard_codes:
+      - "AAAS.5"
+      - "AAAS.6"
     alignments:
       "Life Processes": true
       "Ecosystems": true

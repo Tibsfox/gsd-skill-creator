@@ -304,7 +304,35 @@ translations:
       name: English
       complete: true
 
-  planned: [es, fr, zh, ar]
+    - language_code: es
+      name: "Español"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -314,12 +342,44 @@ accessibility:
   keyboard_navigable: true
   alt_text_provided: true
   captions_available: false
-  notes: "Emotion activities use multiple modalities (writing, drawing, discussion). Video content will include captions. Consider adding video demonstrations."
+  notes: "Content sensitivity flags (mental health topics) have built-in warnings. Emotion activities use multiple modalities (writing, drawing, discussion). Video content will include captions."
+  pack_specific_concerns:
+    - "Mental health and sensitive content requires clear content warnings and trigger warnings"
+    - "Emotion recognition activities need non-visual alternatives"
+    - "Video demonstrations of psychological phenomena need high-quality captions"
+    - "Reflection activities should accept multiple response modalities (written, visual, spoken)"
 
 # Standards Alignment
 standards_alignment:
+  - framework: "APA National Standards for HS Psychology"
+    version: "2011"
+    standard_codes:
+      - "APA.1.1"
+      - "APA.1.2"
+      - "APA.2.1"
+      - "APA.3.1"
+      - "APA.4.1"
+    mappings:
+      "Scientific Foundations": "Research methods, biological bases"
+      "Individual Differences": "Development, personality, learning"
+      "Social Context": "Group behavior, relationships, culture"
+
+  - framework: "IB MYP Sciences (Human Science)"
+    version: "2014"
+    standard_codes:
+      - "MYP.SCI.1"
+      - "MYP.SCI.2"
+    mappings:
+      "Grades 6-10": "Understanding the human body, behavior, and development"
+
   - framework: "SEL (Social-Emotional Learning) Competencies"
     version: 2020
+    standard_codes:
+      - "SEL.1"
+      - "SEL.2"
+      - "SEL.3"
+      - "SEL.4"
+      - "SEL.5"
     alignments:
       "Self-Awareness": true
       "Self-Management": true
@@ -327,7 +387,26 @@ standards_alignment:
       "Relationship Skills": true
       "Social Awareness": true
 
+  - framework: "AP Psychology Course Content"
+    version: "2019"
+    standard_codes:
+      - "Unit 1"
+      - "Unit 3"
+      - "Unit 4"
+      - "Unit 5"
+      - "Unit 6"
+    mappings:
+      "Scientific Foundations": "Research methods, biology"
+      "Sensation/Perception": "Sensory processing"
+      "Learning/Memory": "Conditioning and memory systems"
+      "Motivation/Emotion": "Drives and emotions"
+      "Personality": "Theories and assessment"
+
   - framework: "21st Century Skills"
+    version: "2015"
+    standard_codes:
+      - "SKILL.4C"
+      - "SKILL.4CL"
     alignments:
       "Critical Thinking": true
       "Collaboration": true

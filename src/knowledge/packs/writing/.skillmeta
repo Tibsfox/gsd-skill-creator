@@ -244,8 +244,31 @@ translations:
       name: "Español"
       complete: false
       progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
 
-  planned: [fr, zh, ar]
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: [zh, ar, pt, ja]
 
 # Accessibility
 accessibility:
@@ -255,32 +278,52 @@ accessibility:
   keyboard_navigable: true
   alt_text_provided: true
   captions_available: false
-  notes: "All texts available in audio format for learners with visual impairments. Discussion and peer workshop can be conducted orally. Consider adding video demonstrations of reading strategies and writing process."
+  notes: "Text-heavy content inherently accessible; peer review tool accessibility. All texts available in audio format for learners with visual impairments. Discussion and peer workshop can be conducted orally."
+  pack_specific_concerns:
+    - "Peer review tools need accessible commenting and feedback interfaces"
+    - "Portfolio platforms need strong keyboard navigation"
+    - "Video demonstrations of reading/writing process need captions"
+    - "Poetry forms notation must be screen reader compatible"
 
 # Standards Alignment
 standards_alignment:
-  - framework: "Common Core State Standards (CCSS)"
+  - framework: "Common Core State Standards (CCSS) ELA"
     version: 2010
+    standard_codes:
+      - "RL.K.1"
+      - "RL.2.1"
+      - "RL.4.3"
+      - "RL.6.2"
+      - "RL.9-10.3"
+      - "W.K.3"
+      - "W.2.3"
+      - "W.4.3"
+      - "W.6.3"
+      - "W.9-10.3"
     alignments:
-      "RL.K.1": "With prompting and support, ask and answer questions about key details in a text"
-      "RL.2.1": "Ask and answer such questions as who, what, where, when, why, and how"
-      "RL.4.3": "Describe characters, settings, and events with relevant details"
-      "RL.6.2": "Determine a theme and/or central idea of a text"
-      "RL.9-10.3": "Analyze complex character development"
-      "W.K.3": "Attempt to write simple stories"
-      "W.2.3": "Write narratives in which they recount a well-elaborated event"
-      "W.4.3": "Write narratives to develop real or imagined experiences"
-      "W.6.3": "Write narratives to develop real or imagined experiences"
-      "W.9-10.3": "Write narratives to develop real or imagined experiences"
+      "Reading Literature": "Key details, characters, themes, analysis"
+      "Writing": "Narratives, development, revision"
 
-  - framework: "National Council of Teachers of English (NCTE)"
+  - framework: "NCTE Standards for English Language Arts"
     version: 2020
+    standard_codes:
+      - "NCTE.1"
+      - "NCTE.3"
+      - "NCTE.4"
     alignments:
       "Close Reading": true
       "Reader Response": true
       "Writing Process": true
       "Peer Review": true
       "Diverse Texts": true
+
+  - framework: "IB MYP Language & Literature"
+    version: "2014"
+    standard_codes:
+      - "IB.LANG.1"
+      - "IB.LANG.2"
+    mappings:
+      "Grades 6-10": "Textual analysis, literary response, writing development"
 
 # Difficulty Rating
 difficulty:

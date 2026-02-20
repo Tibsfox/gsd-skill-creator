@@ -160,9 +160,100 @@ assessments:
 
 # Related Standards
 standards_alignment:
-  - "ACTFL (American Council on the Teaching of Foreign Languages) Standards for Foreign Language Learning"
-  - "CEFR (Common European Framework of Reference for Languages)"
-  - "UNESCO Global Framework on Language Education"
+  - framework: "ACTFL World-Readiness Standards"
+    version: "2015"
+    standard_codes:
+      - "1.1"
+      - "1.2"
+      - "1.3"
+      - "2.1"
+      - "2.2"
+    mappings:
+      "Communication": "Interpersonal, Interpretive, Presentational"
+      "Cultures": "Practices, perspectives, products of target language cultures"
+
+  - framework: "CEFR (Common European Framework of Reference)"
+    version: "2001"
+    standard_codes:
+      - "A1"
+      - "A2"
+      - "B1"
+      - "B2"
+      - "C1"
+      - "C2"
+    mappings:
+      "Proficiency Levels": "Elementary users through Mastery"
+
+  - framework: "IB MYP Language Acquisition"
+    version: "2014"
+    standard_codes:
+      - "AoI.1"
+      - "AoI.2"
+      - "AoI.3"
+    mappings:
+      "Grades 6-10": "Communication, Culture, Communities"
+
+  - framework: "UNESCO Global Framework on Language Education"
+    version: "2017"
+    standard_codes:
+      - "LANG.1"
+      - "LANG.2"
+      - "LANG.3"
+    mappings:
+      "Multilingual Competence": "Communicative language competence"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Español"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: ["zh", "ar", "pt", "ja"]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Audio pronunciation guides need captions; script examples need Unicode support. All audio content should have transcripts."
+  pack_specific_concerns:
+    - "Audio pronunciation examples require high-quality captions and transcripts"
+    - "IPA (International Phonetic Alphabet) symbols need clear visual representation with labels"
+    - "Script examples (for non-Latin scripts) need Unicode rendering and accessibility testing"
+    - "Interactive pronunciation tools need keyboard alternatives"
+    - "Video demonstrations of language production need captions and sign language interpretation"
 
 # Known Issues & Future Enhancements
 known_issues: []
