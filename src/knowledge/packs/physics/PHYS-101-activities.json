@@ -1,0 +1,280 @@
+[
+  {
+    "id": "PHYS-101-A01",
+    "name": "Ramp Race: Exploring Acceleration",
+    "module_id": "PHYS-101-M1",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 45,
+    "description": "Roll different objects down ramps of varying angles and surfaces. Predict which object will reach the bottom first and why. Measure distances and times to calculate speeds. Discover that steeper ramps produce greater acceleration and that mass does not affect the rate of rolling (ignoring air resistance). Connect observations to the concept of acceleration as a change in velocity over time.",
+    "materials": [
+      "Wooden board or stiff cardboard (ramp)",
+      "Books or blocks to prop up one end",
+      "Marbles of different sizes",
+      "Toy cars",
+      "Ruler or tape measure",
+      "Stopwatch or phone timer",
+      "Pencil and graph paper"
+    ],
+    "learning_objectives": [
+      "Define acceleration as the rate of change of velocity",
+      "Predict how ramp angle affects acceleration",
+      "Measure distance and time to calculate average speed",
+      "Create position-time and velocity-time graphs from data"
+    ],
+    "variations": [
+      "K-2: Simply race objects down ramps and describe fast/slow without measuring",
+      "9-12: Calculate theoretical acceleration using a = g * sin(theta) and compare to measured values",
+      "Add different surfaces (sandpaper, cloth, smooth) to explore friction effects"
+    ]
+  },
+  {
+    "id": "PHYS-101-A02",
+    "name": "Marble Momentum Collisions",
+    "module_id": "PHYS-101-M1",
+    "grade_range": ["5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 40,
+    "description": "Set up marble collisions on a flat surface using a ruler track or grooved channel. Roll one marble into a stationary marble and observe what happens. Try collisions between marbles of different sizes. Measure speeds before and after collisions. Discover that momentum (mass times velocity) is conserved: what the first marble loses, the second marble gains. Explore elastic vs. inelastic collisions.",
+    "materials": [
+      "Marbles of at least two different sizes",
+      "Flat smooth surface (table or floor)",
+      "Ruler with groove or cardboard channel",
+      "Tape measure",
+      "Stopwatch or phone timer",
+      "Kitchen scale (to weigh marbles)",
+      "Pencil and paper for recording"
+    ],
+    "learning_objectives": [
+      "Define momentum as mass times velocity",
+      "Observe conservation of momentum in collisions",
+      "Distinguish elastic and inelastic collisions",
+      "Predict collision outcomes based on relative masses"
+    ],
+    "variations": [
+      "3-4: Use toy cars on a flat surface for larger, slower collisions that are easier to observe",
+      "11-12: Calculate momentum before and after collisions numerically and verify conservation law",
+      "Explore 2D collisions by rolling marbles at angles"
+    ]
+  },
+  {
+    "id": "PHYS-101-A03",
+    "name": "Rubber Band Car Energy Conversion",
+    "module_id": "PHYS-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 60,
+    "description": "Build a simple car from a cardboard box, pencils for axles, and bottle caps for wheels, powered by a rubber band wound around the rear axle. Wind the rubber band different numbers of turns and measure how far the car travels each time. Trace the energy transformations: elastic potential energy (stored in the wound rubber band) converts to kinetic energy (car moving) and then to thermal energy (friction stops the car). Plot distance traveled vs. number of winds.",
+    "materials": [
+      "Small cardboard box or milk carton",
+      "4 bottle caps (wheels)",
+      "2 pencils or wooden dowels (axles)",
+      "Rubber band",
+      "Tape",
+      "Scissors",
+      "Tape measure",
+      "Pencil and graph paper"
+    ],
+    "learning_objectives": [
+      "Identify elastic potential energy stored in a rubber band",
+      "Trace energy transformations from potential to kinetic to thermal",
+      "Apply conservation of energy: total energy is constant, just changing form",
+      "Graph the relationship between stored energy and distance traveled"
+    ],
+    "variations": [
+      "K-2: Simply wind and release, observing that more winds means further travel",
+      "9-12: Calculate elastic potential energy using E = 0.5 * k * x^2 and compare to measured kinetic energy",
+      "Design challenge: build the car that travels the farthest on a single rubber band"
+    ]
+  },
+  {
+    "id": "PHYS-101-A04",
+    "name": "Heat Transfer Investigation",
+    "module_id": "PHYS-101-M2",
+    "grade_range": ["4", "5", "6", "7", "8", "9"],
+    "duration_minutes": 45,
+    "description": "Place spoons made of different materials (metal, wood, plastic) in a cup of hot water. Dab a small amount of butter or margarine on the handle end of each spoon. Time how long it takes for the butter to melt on each spoon. The metal spoon transfers heat fastest (high thermal conductivity), wood is slowest. Discuss conduction as heat transfer through direct contact. Extend to convection (hot water rising) and radiation (feeling heat from a lamp without touching it).",
+    "materials": [
+      "Metal spoon",
+      "Wooden spoon or chopstick",
+      "Plastic spoon",
+      "Cup of hot water (adult supervision for younger learners)",
+      "Small dabs of butter or margarine",
+      "Stopwatch or phone timer",
+      "Thermometer (optional)",
+      "Pencil and paper"
+    ],
+    "learning_objectives": [
+      "Define conduction as heat transfer through direct contact",
+      "Compare thermal conductivity of different materials",
+      "Distinguish conduction, convection, and radiation",
+      "Predict which materials make good insulators vs. conductors"
+    ],
+    "variations": [
+      "K-3: Simply feel which spoon handle gets warm first (no butter needed)",
+      "9-12: Measure temperature at handle over time and calculate thermal conductivity",
+      "Design challenge: build the best insulated container to keep ice from melting"
+    ]
+  },
+  {
+    "id": "PHYS-101-A05",
+    "name": "Slinky Wave Explorer",
+    "module_id": "PHYS-101-M3",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 35,
+    "description": "Stretch a Slinky along the floor between two people. Create transverse waves by moving one end side-to-side. Create longitudinal waves by pushing and pulling one end along the length. Measure wavelength (distance between two crests) and count how many waves pass a point in 10 seconds to find frequency. Discover the wave equation: speed equals frequency times wavelength. Explore how tension (stretching the Slinky more) affects wave speed.",
+    "materials": [
+      "Metal Slinky (metal transmits waves better than plastic)",
+      "Smooth floor surface",
+      "Tape or chalk to mark positions",
+      "Tape measure",
+      "Stopwatch or phone timer",
+      "Pencil and paper"
+    ],
+    "learning_objectives": [
+      "Distinguish transverse and longitudinal waves",
+      "Measure wavelength and frequency",
+      "Discover the wave equation: v = f * lambda",
+      "Observe how changing tension affects wave speed"
+    ],
+    "variations": [
+      "K-2: Simply create waves and describe them as fast/slow, big/small",
+      "9-12: Calculate wave speed quantitatively and verify v = f * lambda",
+      "Create standing waves by shaking at just the right frequency"
+    ]
+  },
+  {
+    "id": "PHYS-101-A06",
+    "name": "Build a Pinhole Camera",
+    "module_id": "PHYS-101-M3",
+    "grade_range": ["4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 50,
+    "description": "Construct a simple camera obscura from a small box (shoe box works well). Cut a small square hole in one end and cover it with aluminum foil. Poke a tiny hole in the foil with a pin. Cover the other end with wax paper or tracing paper (the screen). In a dimly lit room, point the pinhole at a bright object (a lamp or window). Observe the inverted image on the screen. Explain using the principle that light travels in straight lines: light from the top of the object passes through the pinhole and hits the bottom of the screen, and vice versa.",
+    "materials": [
+      "Shoe box or similar small box",
+      "Aluminum foil",
+      "Wax paper or tracing paper",
+      "Pin or needle",
+      "Scissors",
+      "Tape",
+      "Dark cloth or towel (to reduce stray light)"
+    ],
+    "learning_objectives": [
+      "Demonstrate that light travels in straight lines",
+      "Explain why the pinhole camera produces an inverted image",
+      "Relate pinhole size to image brightness and sharpness",
+      "Connect the pinhole camera principle to how real cameras and eyes work"
+    ],
+    "variations": [
+      "K-3: Use a pre-made pinhole camera and simply observe the inverted image",
+      "9-12: Vary pinhole diameter and measure image sharpness; discuss diffraction limits",
+      "Build a room-sized camera obscura by darkening a room and making a pinhole in window covering"
+    ]
+  },
+  {
+    "id": "PHYS-101-A07",
+    "name": "Simple Circuit Builder",
+    "module_id": "PHYS-101-M4",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 40,
+    "description": "Use batteries, small light bulbs (or LEDs), and wires to build working circuits. Start with a single bulb and battery. Add a switch. Then build series circuits (bulbs in a line) and parallel circuits (bulbs on separate branches). Predict what happens when you unscrew one bulb in each configuration. Discover that in series circuits, removing one bulb breaks the whole circuit, while in parallel circuits the other bulbs stay lit. Discuss why houses use parallel wiring.",
+    "materials": [
+      "D-cell batteries (1-2)",
+      "Battery holder or tape",
+      "Small flashlight bulbs or LEDs",
+      "Insulated copper wire (stripped at ends)",
+      "Small switches (or use paper clips as switches)",
+      "Electrical tape",
+      "Paper and pencil for drawing circuit diagrams"
+    ],
+    "learning_objectives": [
+      "Build a complete circuit with battery, wire, and load",
+      "Distinguish series and parallel circuit configurations",
+      "Predict circuit behavior when components are added or removed",
+      "Draw simple circuit diagrams using standard symbols"
+    ],
+    "variations": [
+      "K-2: Use snap-circuit kits for easier assembly",
+      "9-12: Measure voltage and current with a multimeter; verify Ohm's law V = IR",
+      "Design challenge: wire a model house with working lights and switches"
+    ]
+  },
+  {
+    "id": "PHYS-101-A08",
+    "name": "Electromagnet Strength Challenge",
+    "module_id": "PHYS-101-M4",
+    "grade_range": ["4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 45,
+    "description": "Wrap insulated wire around a large iron nail to create an electromagnet. Connect the wire ends to a battery. Test the electromagnet by picking up paperclips and counting how many it can hold. Then systematically vary one factor at a time: number of wire coils, number of batteries (voltage), and nail material. Graph paperclips lifted vs. each variable. Discover that more coils and more voltage both increase magnetic strength. Discuss how electromagnets are used in real applications (doorbells, maglev trains, MRI machines).",
+    "materials": [
+      "Large iron nail (6 inch or longer)",
+      "Insulated copper wire (3-4 feet)",
+      "D-cell batteries (1-3)",
+      "Battery holders",
+      "Metal paperclips (many, for counting)",
+      "Ruler",
+      "Pencil and graph paper"
+    ],
+    "learning_objectives": [
+      "Build a working electromagnet and test its strength",
+      "Identify variables that affect electromagnetic strength",
+      "Design and conduct a controlled experiment (changing one variable at a time)",
+      "Connect electromagnets to real-world applications"
+    ],
+    "variations": [
+      "K-3: Simply build the electromagnet and observe that it picks up paperclips when connected",
+      "9-12: Calculate magnetic field strength B = mu_0 * n * I and compare to measured results",
+      "Compare permanent magnets to electromagnets: what are advantages of each?"
+    ]
+  },
+  {
+    "id": "PHYS-101-A09",
+    "name": "Roller Coaster Energy Audit",
+    "module_id": "PHYS-101-M2",
+    "grade_range": ["5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 55,
+    "description": "Build a marble roller coaster from foam pipe insulation tubing (cut in half lengthwise) and tape. Design at least three hills and one loop. Before building, predict the maximum height of the second hill based on the first hill (it must be lower due to energy loss from friction). Roll a marble from the top and observe which hills it clears. Measure the heights and track where energy is lost. Create an energy bar chart showing gravitational potential energy, kinetic energy, and thermal energy (friction losses) at each point along the track.",
+    "materials": [
+      "Foam pipe insulation tubing (cut lengthwise)",
+      "Masking tape",
+      "Marbles",
+      "Ruler or tape measure",
+      "Books or boxes for elevation support",
+      "Pencil and paper for energy diagrams"
+    ],
+    "learning_objectives": [
+      "Apply conservation of energy to predict roller coaster behavior",
+      "Explain why each successive hill must be shorter than the previous one",
+      "Create energy bar charts showing energy transformation at different positions",
+      "Identify where friction converts kinetic energy to thermal energy"
+    ],
+    "variations": [
+      "K-4: Build and observe without measuring; describe which hills the marble clears and why",
+      "9-12: Calculate velocities at each point using mgh = 0.5mv^2 and compare to timed measurements",
+      "Design challenge: build a coaster that completes a loop using the minimum starting height"
+    ]
+  },
+  {
+    "id": "PHYS-101-A10",
+    "name": "Half-Life Coin Simulation",
+    "module_id": "PHYS-101-M5",
+    "grade_range": ["7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 35,
+    "description": "Model radioactive decay using 100 coins. Each coin represents one radioactive atom. Shake all coins in a container and pour them out. Remove every coin showing heads (these atoms have decayed). Count and record the remaining coins. Repeat until all coins have been removed. Plot the number of remaining coins after each round. The resulting curve shows exponential decay with a half-life of one round (since roughly half the coins show heads each time). Compare to real radioactive decay curves and discuss how scientists use half-life to date archaeological and geological samples.",
+    "materials": [
+      "100 coins (any denomination)",
+      "Large container for shaking",
+      "Flat surface for pouring",
+      "Pencil and graph paper",
+      "Calculator (optional)"
+    ],
+    "learning_objectives": [
+      "Model radioactive decay as a random process",
+      "Define half-life as the time for half the atoms to decay",
+      "Create and interpret an exponential decay graph",
+      "Connect half-life to real-world applications like carbon dating"
+    ],
+    "variations": [
+      "6: Use 50 coins for a quicker simulation with the same pattern",
+      "11-12: Derive the decay equation N = N_0 * (1/2)^(t/half-life) from the data",
+      "Compare results from multiple groups to show statistical variation in small samples"
+    ]
+  }
+]
