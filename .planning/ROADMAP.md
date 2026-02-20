@@ -7,7 +7,7 @@
 ## Phases
 
 - [x] **Phase 243: Pack Runtime Infrastructure** - Zod schemas, parsers, registry, loaders, dependency resolver, and barrel exports for the knowledge pack module (completed 2026-02-20)
-- [ ] **Phase 244: Chipset & Agent Definitions** - Chipset YAML, SKILL.md files, pipeline team, agent prefix convention, and map-reduce coordination pattern
+- [x] **Phase 244: Chipset & Agent Definitions** - Chipset YAML, SKILL.md files, pipeline team, agent prefix convention, and map-reduce coordination pattern (completed 2026-02-20)
 - [ ] **Phase 245: Core Academic Packs Batch 1** - MATH-101 (import/adapt), SCI-101, TECH-101, ENGR-101, PHYS-101 full suites
 - [ ] **Phase 246: Core Academic Packs Batch 2** - CHEM-101, READ-101, CRIT-101, PROB-101, COMM-101 full suites
 - [ ] **Phase 247: Core Academic Packs Batch 3** - HIST-101, GEO-101, MFAB-101, BUS-101, STAT-101 full suites
@@ -58,7 +58,13 @@
   2. SCI-101, TECH-101, ENGR-101, and PHYS-101 each contain vision doc (~40 pages), modules YAML, activities JSON, assessment, resources, and updated .skillmeta
   3. All 5 packs pass the runtime content validator with zero schema errors
   4. Each pack's .skillmeta declares correct dependencies, learning outcomes, grade levels, and learning pathways
-**Plans**: TBD
+**Plans**: 5 plans (245-01 through 245-05), 1 wave
+Plans:
+- [ ] 245-01-PLAN.md — MATH-101 import/adapt from delivery + create activities, assessment, resources
+- [ ] 245-02-PLAN.md — SCI-101 full suite from scratch (Science Method & Nature)
+- [ ] 245-03-PLAN.md — TECH-101 full suite from scratch (Technology & Tools)
+- [ ] 245-04-PLAN.md — ENGR-101 full suite from scratch (Engineering & Design)
+- [ ] 245-05-PLAN.md — PHYS-101 full suite from scratch (Physics)
 
 ### Phase 246: Core Academic Packs Batch 2
 **Goal**: The next 5 core academic packs deliver complete humanities and reasoning content suites
@@ -169,8 +175,8 @@ Phases 243-244 sequential (infrastructure first). Phases 245-251 parallelizable 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 243. Pack Runtime Infrastructure | 5/5 | Complete    | 2026-02-20 |
-| 244. Chipset & Agent Definitions | 2/3 | In Progress|  |
-| 245. Core Academic Packs Batch 1 | 0/TBD | Not started | - |
+| 244. Chipset & Agent Definitions | 3/3 | Complete    | 2026-02-20 |
+| 245. Core Academic Packs Batch 1 | 0/5 | Not started | - |
 | 246. Core Academic Packs Batch 2 | 0/TBD | Not started | - |
 | 247. Core Academic Packs Batch 3 | 0/TBD | Not started | - |
 | 248. Applied Packs Batch 1 | 0/TBD | Not started | - |
