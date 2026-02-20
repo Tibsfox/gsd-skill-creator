@@ -121,7 +121,7 @@ async function routeMessage(
   // Broadcast: deliver to all registered handlers
   if (dst === 'all') {
     try {
-      for (const handler of handlers.values()) {
+      for (const handler of Array.from(handlers.values())) {
         await handler(message);
       }
       await acknowledgeMessage(config, messagePath);
@@ -279,7 +279,7 @@ export class Dispatcher {
     return {
       pruned: ackResult.pruned + dlResult.pruned,
       remaining: ackResult.remaining + dlResult.remaining,
-      reasons: [...new Set([...ackResult.reasons, ...dlResult.reasons])],
+      reasons: Array.from(new Set([...ackResult.reasons, ...dlResult.reasons])),
     };
   }
 }
