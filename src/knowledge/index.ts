@@ -157,3 +157,26 @@ export type { PackValidationReport, FileValidationStatus } from './content-valid
 // ============================================================================
 
 export { KnowledgeEventBridge, KNOWLEDGE_EVENT_TYPES } from './event-bridge.js';
+
+// ============================================================================
+// Observation hooks
+// ============================================================================
+
+export {
+  ObservationEmitter,
+  type ObservationSink,
+} from './observation-hooks.js';
+
+export {
+  ActivityCompletionSchema,
+  AssessmentResultSchema,
+  TimeSpentSchema,
+  PackLifecycleSchema,
+  LearnerObservationSchema,
+  ObservationKind,
+  type ActivityCompletion,
+  type AssessmentResult,
+  type TimeSpent,
+  type PackLifecycle,
+  type LearnerObservation,
+} from './observation-types.js';
