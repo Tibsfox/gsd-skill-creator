@@ -1,0 +1,294 @@
+# LANG-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: LANG-101
+pack_name: "World Languages — Foundational Knowledge Pack"
+
+modules:
+  - id: LANG-101-M1
+    name: "Sound Systems & Phonetics"
+    description: "How languages use sound to make meaning, ear training, and pronunciation practice"
+
+    learning_outcomes:
+      - "Understand that different languages use different sets of sounds (phoneme inventories)"
+      - "Learn International Phonetic Alphabet (IPA) notation for describing sounds"
+      - "Develop perception of sounds that don't exist in the learner's first language"
+      - "Produce new sounds accurately in context"
+      - "Understand suprasegmental features (stress, intonation, rhythm) in making meaning"
+
+    topics:
+      - "Phoneme Inventory & Allophones"
+      - "International Phonetic Alphabet (IPA)"
+      - "Place & Manner of Articulation"
+      - "Distinctive Features of Sounds"
+      - "Suprasegmental Features: Stress, Intonation, Rhythm"
+      - "Ear Training & Listening Perception"
+      - "Pronunciation Practice & Feedback"
+      - "Sound Changes in Context"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 20
+      middle: 15
+      high: 20
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "IPA Discovery: Learning to Read and Write Sounds"
+        - "Minimal Pairs Listening Challenge"
+        - "Sound Safari: Identify Sounds Across Languages"
+        - "Phoneme Production Workshop"
+        - "Intonation Pattern Practice"
+        - "Stress & Rhythm Exercises"
+        - "Native Speaker Imitation"
+        - "Record, Listen, Adjust: Self-Feedback Loop"
+        - "Language Comparison: How Different Languages Use Sounds"
+        - "Tongue Twisters & Alliteration Practice"
+
+    assessments:
+      - "Can learner identify individual phonemes in isolation?"
+      - "Can learner produce new sounds in context with acceptable accuracy?"
+      - "Does learner understand IPA notation and its purpose?"
+      - "Can learner perceive minimal pairs (sounds that differ in one feature)?"
+
+  - id: LANG-101-M2
+    name: "Grammar Patterns & Sentence Structure"
+    description: "Understanding grammar as systematic pattern across languages, not arbitrary rules"
+
+    learning_outcomes:
+      - "Understand grammar as consistent, predictable pattern rather than arbitrary rules"
+      - "Recognize word order typology and how it correlates with other language features"
+      - "Learn to analyze morphology: inflection, affixation, and agreement systems"
+      - "Understand syntactic structures: phrases, clauses, complex sentences"
+      - "Develop ability to generate novel grammatical sentences using learned patterns"
+
+    topics:
+      - "Word Order Typology (SVO, SOV, VSO, VOS, OSV, OVS)"
+      - "Morphology: Inflection and Affixation"
+      - "Case, Gender, Number, Tense, Aspect, Mood Systems"
+      - "Agreement and Feature Propagation"
+      - "Syntactic Structures: Phrases and Clauses"
+      - "Argument Structure and Valency"
+      - "Voice Systems: Active, Passive, Middle"
+      - "Question Formation and Negation"
+      - "Language Family Features and Shared Patterns"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 25
+      middle: 30
+      high: 25
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "Word Order Detective: Comparing Sentence Structures Across Languages"
+        - "Grammar Pattern Bingo"
+        - "Morphology Puzzle: Building Words from Roots and Affixes"
+        - "Sentence Assembly Workshop"
+        - "Grammar Transformation: Active to Passive"
+        - "Question Formation Strategies"
+        - "Negation Patterns Across Languages"
+        - "Agreement System Tracking"
+        - "Language Family Comparison: Spotting Patterns"
+        - "Generating Novel Sentences: Applying Rules to New Contexts"
+
+    assessments:
+      - "Can learner identify grammatical patterns and predict exceptions?"
+      - "Does learner understand why patterns exist (not just memorize them)?"
+      - "Can learner use patterns to create correct sentences not previously encountered?"
+      - "Does learner understand how patterns vary across languages and why?"
+
+  - id: LANG-101-M3
+    name: "Vocabulary & Reading Comprehension"
+    description: "Efficient vocabulary acquisition and developing reading ability in the target language"
+
+    learning_outcomes:
+      - "Learn high-frequency vocabulary organized by meaning and use"
+      - "Develop spaced repetition habits for vocabulary retention"
+      - "Recognize word families, cognates, and etymological relationships"
+      - "Read and comprehend texts at age-appropriate complexity"
+      - "Use context and reading strategies to infer unfamiliar words"
+      - "Progress from controlled readers to authentic texts"
+
+    topics:
+      - "Frequency-Based Vocabulary"
+      - "Spaced Repetition & Optimal Review Schedules"
+      - "Cognates & Word Families"
+      - "Etymology & Historical Relationships"
+      - "Semantic Fields: How Languages Carve Up Meaning"
+      - "Collocations & Phrase Patterns"
+      - "Reading Strategies: Prediction, Chunking, Inference"
+      - "Vocabulary for Specific Contexts"
+      - "Progression from Controlled Readers to Authentic Texts"
+      - "Using Dictionaries and Reference Tools"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 30
+      high: 25
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "Cognate Treasure Hunt: Finding English Loans in Target Language"
+        - "Flashcard Factory with Spaced Repetition"
+        - "Semantic Field Mapping: Understanding Related Words"
+        - "Etymology Explorer: Word History and Evolution"
+        - "Guided Reading: Supported Comprehension of Authentic Texts"
+        - "Vocabulary in Context: Word Meaning from Context Clues"
+        - "Reading Progression: Controlled Readers to News Articles"
+        - "Dictionary Skills Workshop"
+        - "Word Family Trees: Building Morphological Relationships"
+        - "Vocabulary by Domain: Subject-Specific Terms"
+
+    assessments:
+      - "Can learner recognize and produce high-frequency vocabulary?"
+      - "Does learner maintain acquired vocabulary over time with spaced repetition?"
+      - "Can learner infer meaning from context and word morphology?"
+      - "Can learner read and comprehend age-appropriate texts independently?"
+
+  - id: LANG-101-M4
+    name: "Speaking & Listening"
+    description: "Developing listening comprehension of natural speech and speaking ability"
+
+    learning_outcomes:
+      - "Develop listening comprehension of authentic, natural speech"
+      - "Use conversation strategies for meaningful interaction"
+      - "Produce speech with acceptable pronunciation and intelligibility"
+      - "Understand formal and informal registers"
+      - "Use repair strategies when communication breaks down"
+      - "Engage in sustained conversation on familiar and some unfamiliar topics"
+
+    topics:
+      - "Listening Comprehension: Natural Speech with All Its Complexity"
+      - "Conversation Scaffolding: Opening, Turn-Taking, Repair, Closing"
+      - "Register & Formality Distinctions"
+      - "Speaking Strategies: Circumlocution, Asking for Clarification"
+      - "Pronunciation & Fluency"
+      - "Authentic Audio Materials & Transcripts"
+      - "Listening to Different Accents and Speakers"
+      - "Nonverbal Communication Across Cultures"
+      - "Interaction & Feedback Mechanisms"
+      - "Building Conversational Competence"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 35
+      high: 30
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "Restaurant Role Play: Authentic Conversation Scenario"
+        - "Listen and Draw: Listening Comprehension through Action"
+        - "Conversation Starter Collection: Building Discourse Competence"
+        - "Accent Awareness: Understanding Language Variation"
+        - "Listening Journals: Authentic Materials with Scaffolding"
+        - "Question Asking Strategies & Practice"
+        - "Telephone Conversation Practice"
+        - "Video Comprehension with Subtitles"
+        - "Storytelling Circle: Speaking with Feedback"
+        - "Interview Practice: Asking and Answering Questions"
+
+    assessments:
+      - "Can learner understand native speaker speech in context?"
+      - "Does learner produce intelligible, comprehensible speech?"
+      - "Can learner sustain conversation and use repair strategies?"
+      - "Does learner understand formality and register distinctions?"
+
+  - id: LANG-101-M5
+    name: "Language, Culture & Identity"
+    description: "Understanding how language reflects and shapes culture, multilingual identity, and linguistic diversity"
+
+    learning_outcomes:
+      - "Understand how language reflects cultural values and ways of thinking"
+      - "Recognize linguistic relativity (Sapir-Whorf hypothesis) and its implications"
+      - "Appreciate multilingual and multicultural identity as strength"
+      - "Understand code-switching and translanguaging as sophisticated linguistic behavior"
+      - "Recognize language diversity and language endangerment globally"
+      - "Understand power relationships between languages"
+
+    topics:
+      - "Sapir-Whorf Hypothesis & Linguistic Relativity"
+      - "How Languages Carve Up Reality Differently"
+      - "Cultural Scripts & Values in Language"
+      - "Heritage Language & Multilingual Identity"
+      - "Code-Switching & Translanguaging"
+      - "Language as Marker of Group Identity"
+      - "History of Languages & Language Families"
+      - "Language Endangerment & Documentation"
+      - "Power & Prestige of Different Languages"
+      - "Global Trends in Language Ecology"
+
+    grade_levels: ["4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 15
+      middle: 20
+      high: 25
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "Cultural Gesture Gallery Walk: Understanding Nonverbal Communication"
+        - "Proverbs Across Languages: What They Reveal About Values"
+        - "Sapir-Whorf in Action: How Language Shapes Perception"
+        - "Heritage Language Exploration: Family Linguistic Stories"
+        - "Code-Switching Analysis: When and Why Bilinguals Mix Languages"
+        - "Language Family Tree: Understanding Linguistic History"
+        - "Global Language Map: Diversity and Distribution"
+        - "Language Endangered Species: Research and Documentation"
+        - "Metaphor Across Languages: Different Ways of Seeing"
+        - "Language & Identity: Personal and Community Language Stories"
+
+    assessments:
+      - "Does learner understand language as cultural and historical product, not neutral tool?"
+      - "Can learner analyze how their own language shapes their thinking?"
+      - "Does learner appreciate linguistic diversity and multilingualism as positive?"
+      - "Can learner recognize cultural values embedded in language?"
+
+cross_module_competencies:
+  - "Metalinguistic Awareness: Understanding language as system"
+  - "Cognitive Flexibility: Switching between linguistic systems"
+  - "Cultural Perspective-Taking: Understanding other worldviews"
+  - "Growth Mindset: Language learning requires time, practice, and patience"
+
+progression_pathways:
+  foundation: ["M1 (phonetic awareness)", "M5 (cultural exposure)"]
+  elementary: ["M1 (pronunciation)", "M2 (basic grammar)", "M3 (vocabulary)"]
+  middle: ["M2 (grammar complexity)", "M3 (reading)", "M4 (speaking/listening)", "M5 (cultural depth)"]
+  high: ["M4 (fluency)", "M5 (cultural nuance)", "All modules deepened"]
+  college: ["All modules at sophisticated level", "specialization options"]
+
+parallel_patterns:
+  - "Sound systems (M1) reinforce speech production in M4"
+  - "Grammar patterns (M2) enable reading (M3) and speaking (M4)"
+  - "Vocabulary (M3) feeds into speaking/listening (M4)"
+  - "Culture (M5) provides context for all communicative modules"
+
+skill_creator_integration:
+  - "Each module includes explicit learning outcomes linked to assessment"
+  - "Modules are sequenceable but not strictly prerequisite-based"
+  - "All modules support communication as ultimate goal"
+  - "Module content is language-agnostic (applies to any target language)"

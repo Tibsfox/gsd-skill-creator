@@ -1,0 +1,182 @@
+# GSD Skill Metadata
+pack_id: LANG-101
+pack_name: "World Languages — Foundational Knowledge Pack"
+version: "1.0.0"
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: applied_practical
+learning_domain: language_acquisition
+
+# Content Description
+description: |
+  Language learning as meta-skill: phonetics and sound systems, grammar patterns,
+  vocabulary acquisition, communication pragmatics, and cultural understanding.
+  Not teaching a single target language, but the principles of how to learn any language.
+  Applicable to learners of any age learning any language.
+
+short_description: "How to learn any language: sound, grammar, vocabulary, communication, culture"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Language Learning Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - READ-101
+  - COMM-101
+
+# What This Pack Enables
+enables: []
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [20, 40]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [60, 90]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [90, 120]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [120, 180]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [180, 240]
+
+# Modules
+modules:
+  - id: LANG-101-M1
+    name: "Sound Systems & Phonetics"
+    description: "How languages use sound to make meaning, ear training, and pronunciation"
+    learning_outcomes:
+      - "Understand phoneme inventories and allophones"
+      - "Use International Phonetic Alphabet for sound description"
+      - "Develop perception of new sounds"
+      - "Produce new sounds accurately"
+      - "Understand suprasegmental features in meaning-making"
+
+  - id: LANG-101-M2
+    name: "Grammar Patterns & Sentence Structure"
+    description: "Understanding grammar as systematic pattern, not arbitrary rules"
+    learning_outcomes:
+      - "Recognize word order typology and patterns"
+      - "Understand morphology and agreement systems"
+      - "Analyze syntactic structures"
+      - "Generate novel grammatical sentences"
+      - "Understand patterns across language families"
+
+  - id: LANG-101-M3
+    name: "Vocabulary & Reading Comprehension"
+    description: "Efficient vocabulary acquisition and reading ability development"
+    learning_outcomes:
+      - "Learn high-frequency vocabulary"
+      - "Use spaced repetition for retention"
+      - "Recognize cognates and word families"
+      - "Read and comprehend age-appropriate texts"
+      - "Progress from controlled to authentic texts"
+
+  - id: LANG-101-M4
+    name: "Speaking & Listening"
+    description: "Listening comprehension and speaking ability development"
+    learning_outcomes:
+      - "Understand natural, authentic speech"
+      - "Use conversation strategies"
+      - "Produce intelligible speech"
+      - "Understand register and formality"
+      - "Sustain conversation with repair strategies"
+
+  - id: LANG-101-M5
+    name: "Language, Culture & Identity"
+    description: "Language as cultural reflection, multilingualism, and linguistic diversity"
+    learning_outcomes:
+      - "Understand how language reflects culture"
+      - "Recognize linguistic relativity"
+      - "Appreciate multilingual identity"
+      - "Understand code-switching as sophisticated behavior"
+      - "Recognize language diversity and power dynamics"
+
+# GSD Integration
+gsd_integration:
+  dashboard_display:
+    icon: globe
+    color: "#00BCD4"
+    position: Applied
+  instructor_support:
+    curriculum_alignment: "Language learning standards (ACTFL, CEFR)"
+    differentiation_notes: "Applicable to any target language and learner age; emphasizes meta-skill over language-specific content"
+    assessment_guidance: "Focus on communicative competence and growth over accuracy; formative feedback over summative judgment"
+  learner_engagement:
+    self_assessment: "Learners can track their progress through proficiency levels (Novice, Intermediate, Advanced, Superior)"
+    peer_interaction: "Emphasizes conversation and interaction as key to language development"
+    cultural_connection: "Connects language learning to cultural understanding and global perspective"
+
+# Learning Outcomes (Pack-level)
+learning_outcomes:
+  - "Understand language as system with discoverable patterns"
+  - "Develop metacognitive awareness of language learning strategies"
+  - "Apply phonetic principles to any target language"
+  - "Recognize grammar patterns across different language families"
+  - "Engage effectively in conversation in target language"
+  - "Appreciate linguistic and cultural diversity"
+
+# Skills Developed
+skills_developed:
+  - "Listening comprehension in target language"
+  - "Speaking and pronunciation skills"
+  - "Reading ability in target language"
+  - "Grammar pattern recognition"
+  - "Vocabulary acquisition and retention"
+  - "Cultural awareness and perspective-taking"
+  - "Communication strategies"
+  - "Metacognitive language learning awareness"
+
+# Assessments
+assessments:
+  - type: "Proficiency-based"
+    description: "Learners assessed on communicative competence (ACTFL-aligned proficiency levels)"
+  - type: "Growth-oriented"
+    description: "Focus on improvement over time rather than absolute performance"
+  - type: "Multidimensional"
+    description: "Listening, speaking, reading, writing, cultural understanding across all modules"
+  - type: "Formative"
+    description: "Ongoing feedback for learning improvement, not just summative judgment"
+
+# Related Standards
+standards_alignment:
+  - "ACTFL (American Council on the Teaching of Foreign Languages) Standards for Foreign Language Learning"
+  - "CEFR (Common European Framework of Reference for Languages)"
+  - "UNESCO Global Framework on Language Education"
+
+# Known Issues & Future Enhancements
+known_issues: []
+future_enhancements:
+  - "Language-specific implementations (Spanish-101, French-101, Mandarin-101, etc.)"
+  - "Integration with language-learning applications and platforms"
+  - "Heritage language-specific pathways"
+  - "Profession-specific language applications"
+
+# Tags
+tags:
+  - language-learning
+  - communication
+  - cultural-awareness
+  - multilingualism
+  - applied-practical
+  - all-ages
