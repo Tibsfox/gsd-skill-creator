@@ -11,9 +11,9 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
 Phase: 253 of 254 (GSD-OS Dashboard)
-Plan: 3 of 5 complete (253-03 Pack detail view with tabbed content)
+Plan: 4 of 5 complete (253-04 Skill tree radial SVG visualization)
 Status: In Progress (dashboard phase executing)
-Last activity: 2026-02-20 — Completed 253-03 (PackDetail with tabs, actions, prerequisite graph)
+Last activity: 2026-02-20 — Completed 253-04 (SkillTree radial SVG visualization with interactive nodes)
 
 Progress: [####################] 87%
 
@@ -74,6 +74,8 @@ Progress: [####################] 87%
 | Phase 252 P05 | 15min | 2 tasks | 36 files |
 | 253 | 01 | 3min | 2 | 6 |
 | 253 | 03 | 3min | 1 | 2 |
+| Phase 253 P02 | 4min | 2 tasks | 4 files |
+| 253 | 04 | 5min | 1 | 2 |
 
 ## Accumulated Context
 
@@ -214,6 +216,11 @@ Progress: [####################] 87%
 - [Phase 253-01]: Desktop view types kept separate from src/knowledge/types.ts Zod schemas (follows aminet-panel pattern)
 - [Phase 253-01]: ProgressTracker uses Map serialized as [key, value] array pairs in localStorage
 - [Phase 253-01]: Corrupt or missing localStorage handled gracefully (start fresh, no errors)
+- [Phase 253]: Search results sorted by topological order (foundational first), not by match score
+- [Phase 253]: 150ms debounce on search input prevents excessive DOM updates during typing
+- [Phase 253-04]: setAttribute('class', ...) over classList for SVG elements (JSDOM compatibility)
+- [Phase 253-04]: Auto-set focusPack from data.centerPack in setData for focused view auto-detection
+- [Phase 253-04]: SVG class helper functions (svgAddClass/svgRemoveClass) for cross-environment DOM manipulation
 
 ### Key Context
 
@@ -239,9 +246,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed 253-03-PLAN.md (Pack detail view with tabbed content)
+Stopped at: Completed 253-04-PLAN.md (Skill tree radial SVG visualization)
 Resume file: None
 
 ## Next Up
 
-Phase 253 in progress (3 of 5 plans complete). Remaining plans: 253-04 (browser panel), 253-05 (skill tree).
+Phase 253 in progress (4 of 5 plans complete). Remaining plan: 253-05 (integration).
