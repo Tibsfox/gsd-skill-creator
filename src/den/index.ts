@@ -3,10 +3,10 @@
  *
  * Single entry point for all Den module functionality: type schemas,
  * ISA encoder/decoder, filesystem bus operations, health metrics,
- * pruning, and the dispatcher agent.
+ * pruning, the dispatcher agent, the coordinator agent, and the relay agent.
  *
  * Usage:
- *   import { createDispatcher, sendMessage, BusConfigSchema } from './den/index.js';
+ *   import { createDispatcher, createRelay, sendMessage, BusConfigSchema } from './den/index.js';
  */
 
 // Types and schemas
@@ -51,3 +51,30 @@ export {
   Dispatcher,
   type DispatchResult, type RouteHandler, type CombinedPruneResult,
 } from './dispatcher.js';
+
+// Coordinator
+export {
+  CoordinatorConfigSchema, DecisionEntrySchema,
+  ReadinessResponseSchema, ReadinessResultSchema,
+  PhaseTransitionResultSchema,
+  EscalationRequestSchema, EscalationResultSchema,
+  appendDecision, readDecisionLog,
+  readinessCheck, phaseTransition, escalate,
+  Coordinator, createCoordinator,
+  type DecisionEntry, type ReadinessResponse, type ReadinessResult,
+  type PhaseTransitionResult, type EscalationRequest, type EscalationResult,
+  type CoordinatorConfig, type ResponseCollector,
+  type ReadinessCheckOptions, type PhaseTransitionOptions, type EscalationOptions,
+} from './coordinator.js';
+
+// Relay
+export {
+  RelayConfigSchema, QuestionEntrySchema, QuestionBatchSchema,
+  PositionStatusSchema, StatusReportSchema,
+  classifyPriority, consolidateQuestions, batchForUser,
+  generateStatusReport, formatReportMarkdown,
+  Relay, createRelay,
+  type QuestionEntry, type QuestionBatch,
+  type PositionStatus, type StatusReport,
+  type RelayConfig, type StatusReportParams,
+} from './relay.js';
