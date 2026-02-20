@@ -1,0 +1,243 @@
+[
+  {
+    "id": "CODE-101-A01",
+    "name": "Unplugged Sorting Challenge",
+    "module_id": "CODE-101-M1",
+    "grade_range": ["K", "1", "2", "3"],
+    "duration_minutes": 20,
+    "description": "Students sort themselves or objects by different criteria without using a computer. Explore different sorting strategies: fastest, simplest, most accurate.",
+    "materials": ["Index cards with numbers", "People or objects to sort", "Whiteboard to record strategies"],
+    "learning_objectives": [
+      "Understand algorithms as sequences of steps",
+      "Compare efficiency of different strategies",
+      "Think before implementing"
+    ],
+    "variations": ["Sort by height, alphabetically, by color; compare algorithms"]
+  },
+  {
+    "id": "CODE-101-A02",
+    "name": "Pattern Detective Game",
+    "module_id": "CODE-101-M1",
+    "grade_range": ["K", "1", "2", "3", "4"],
+    "duration_minutes": 25,
+    "description": "Find and extend patterns in sequences. Develop pattern recognition and ability to generalize rules.",
+    "materials": ["Pattern cards or worksheet", "Pencil", "Optional: blocks or counters"],
+    "learning_objectives": [
+      "Recognize repeating and growing patterns",
+      "Generalize rules from examples",
+      "Predict what comes next"
+    ]
+  },
+  {
+    "id": "CODE-101-A03",
+    "name": "Scratch Animation Story",
+    "module_id": "CODE-101-M2",
+    "grade_range": ["2", "3", "4", "5"],
+    "duration_minutes": 45,
+    "description": "Create an animated story using Scratch block-based programming. Use movement, timing, and sound to tell a story.",
+    "materials": ["Computer with Scratch", "Ideas for story (fairy tale, original, etc.)", "Optional: images or sounds"],
+    "learning_objectives": [
+      "Understand sequences in visual programming",
+      "Use blocks to create movement and interaction",
+      "Debug when things don't work as expected",
+      "Express creativity through code"
+    ]
+  },
+  {
+    "id": "CODE-101-A04",
+    "name": "Python Number Guessing Game",
+    "module_id": "CODE-101-M2",
+    "grade_range": ["4", "5", "6", "7"],
+    "duration_minutes": 50,
+    "description": "Write a text-based game where the computer picks a number and the player guesses. Use loops, conditionals, and user input.",
+    "materials": ["Computer with Python installed", "Text editor or IDE", "Tutorial for reference"],
+    "learning_objectives": [
+      "Use variables to store values",
+      "Understand conditionals (if/else)",
+      "Use loops for repetition",
+      "Handle user input and output"
+    ]
+  },
+  {
+    "id": "CODE-101-A05",
+    "name": "Card Sort Race",
+    "module_id": "CODE-101-M3",
+    "grade_range": ["3", "4", "5", "6"],
+    "duration_minutes": 30,
+    "description": "Sort cards by different algorithms and race them. Compare bubble sort, insertion sort, and merge sort visually.",
+    "materials": ["Decks of numbered cards", "Timer", "Chart to record times", "Optional: computer for visualization"],
+    "learning_objectives": [
+      "Understand different sorting algorithms",
+      "Recognize that some algorithms are faster",
+      "Analyze why certain algorithms work better",
+      "Think about efficiency"
+    ]
+  },
+  {
+    "id": "CODE-101-A06",
+    "name": "Build a Binary Search Tree on Paper",
+    "module_id": "CODE-101-M3",
+    "grade_range": ["5", "6", "7", "8"],
+    "duration_minutes": 40,
+    "description": "Construct a binary search tree by hand, then search it. Understand how data structure choice affects speed.",
+    "materials": ["Paper and pencil", "Numbers to organize", "Optional: cards or nodes to arrange"],
+    "learning_objectives": [
+      "Understand tree data structures",
+      "See how organization affects search speed",
+      "Reason about data structure efficiency",
+      "Build abstract data structures"
+    ]
+  },
+  {
+    "id": "CODE-101-A07",
+    "name": "Code Review Buddy Exercise",
+    "module_id": "CODE-101-M4",
+    "grade_range": ["5", "6", "7", "8"],
+    "duration_minutes": 35,
+    "description": "Review a peer's code. Look for clarity, efficiency, correctness, and suggestions for improvement. Practice giving and receiving feedback.",
+    "materials": ["Another student's code (simple, 20-50 lines)", "Code review checklist", "Feedback template"],
+    "learning_objectives": [
+      "Read and understand others' code",
+      "Recognize clear vs. unclear code",
+      "Suggest improvements tactfully",
+      "Learn from peers"
+    ]
+  },
+  {
+    "id": "CODE-101-A08",
+    "name": "Git Branching Simulation",
+    "module_id": "CODE-101-M4",
+    "grade_range": ["6", "7", "8", "9"],
+    "duration_minutes": 40,
+    "description": "Simulate version control by creating paper branches, merging changes, and handling conflicts. Understand why version control matters.",
+    "materials": ["Paper or whiteboard", "Different colored pens for different branches", "Instructions for branching scenarios"],
+    "learning_objectives": [
+      "Understand version control concepts",
+      "See how teams collaborate on code",
+      "Manage multiple versions safely",
+      "Understand merge conflicts"
+    ]
+  },
+  {
+    "id": "CODE-101-A09",
+    "name": "AI Ethics Debate",
+    "module_id": "CODE-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10"],
+    "duration_minutes": 45,
+    "description": "Debate ethical questions about AI and automation. Should we replace human jobs with software? Who's responsible when algorithms make mistakes?",
+    "materials": ["Debate prompts or real-world examples", "Evidence or case studies", "Structured debate framework"],
+    "learning_objectives": [
+      "Think critically about technology's impact",
+      "Understand multiple perspectives",
+      "Reason through ethical dilemmas",
+      "Consider responsibility in code"
+    ]
+  },
+  {
+    "id": "CODE-101-A10",
+    "name": "Digital Footprint Audit",
+    "module_id": "CODE-101-M5",
+    "grade_range": ["5", "6", "7", "8"],
+    "duration_minutes": 30,
+    "description": "Investigate your digital footprint. What data exists about you online? Who collects it? Is it accurate? How is it used?",
+    "materials": ["Computer with internet access", "Audit checklist", "Privacy settings guide", "Optional: VPN to show IP tracking"],
+    "learning_objectives": [
+      "Understand digital privacy",
+      "Recognize data collection",
+      "Make informed choices about sharing",
+      "Practice digital citizenship"
+    ]
+  },
+  {
+    "id": "CODE-101-A11",
+    "name": "Fix-the-Code Challenge",
+    "module_id": "CODE-101-M2",
+    "grade_range": ["3", "4", "5", "6"],
+    "duration_minutes": 25,
+    "description": "Given code with bugs, identify and fix the errors. Develop debugging skills in a low-pressure environment.",
+    "materials": ["Code with intentional bugs (Scratch or Python)", "Error messages or hints", "Working version to verify fix"],
+    "learning_objectives": [
+      "Read and understand code",
+      "Identify where code is wrong",
+      "Fix syntax and logic errors",
+      "Test to verify fixes"
+    ]
+  },
+  {
+    "id": "CODE-101-A12",
+    "name": "Data Analysis Project",
+    "module_id": "CODE-101-M3",
+    "grade_range": ["5", "6", "7", "8", "9"],
+    "duration_minutes": 90,
+    "description": "Collect data on something you care about, write a program to analyze it, and create visualizations. Complete cycle: question, collection, analysis, presentation.",
+    "materials": ["Computer with Python and matplotlib/plotly", "Dataset or method to collect data", "Presentation tool"],
+    "learning_objectives": [
+      "Plan and execute a complete project",
+      "Work with real data",
+      "Write analysis code",
+      "Communicate findings visually",
+      "Iterate and improve"
+    ]
+  },
+  {
+    "id": "CODE-101-A13",
+    "name": "Trace-the-Code Exercise",
+    "module_id": "CODE-101-M2",
+    "grade_range": ["3", "4", "5", "6"],
+    "duration_minutes": 20,
+    "description": "Step through code line-by-line, predicting what happens at each step. Develop understanding before coding.",
+    "materials": ["Code to trace (Scratch or Python)", "Worksheet with variables to track", "Visual aids if needed"],
+    "learning_objectives": [
+      "Understand code execution order",
+      "Track variable changes",
+      "Predict output",
+      "Build mental models of code"
+    ]
+  },
+  {
+    "id": "CODE-101-A14",
+    "name": "Complexity Analyzer",
+    "module_id": "CODE-101-M4",
+    "grade_range": ["7", "8", "9", "10"],
+    "duration_minutes": 45,
+    "description": "Analyze the time complexity of algorithms. Measure actual runtimes with different input sizes. Predict vs. observe.",
+    "materials": ["Computer with Python or similar", "Algorithms to analyze", "Graphing tool (Excel, matplotlib)", "Large datasets"],
+    "learning_objectives": [
+      "Understand Big-O notation",
+      "Measure algorithm performance",
+      "Predict running time for larger inputs",
+      "Compare algorithm efficiency empirically"
+    ]
+  },
+  {
+    "id": "CODE-101-A15",
+    "name": "Simple Game Creation",
+    "module_id": "CODE-101-M3",
+    "grade_range": ["4", "5", "6", "7"],
+    "duration_minutes": 60,
+    "description": "Create a simple game (Pong, space shooter, or puzzle) with basic game loop, collision detection, and scoring.",
+    "materials": ["Computer with game library (Pygame, p5.js, etc.)", "Game template or tutorial", "Art/sound assets (optional)"],
+    "learning_objectives": [
+      "Understand game loops",
+      "Handle user input",
+      "Manage game state",
+      "Build complete interactive experience",
+      "Debug complex interactions"
+    ]
+  },
+  {
+    "id": "CODE-101-A16",
+    "name": "Open Source Exploration",
+    "module_id": "CODE-101-M5",
+    "grade_range": ["6", "7", "8", "9"],
+    "duration_minutes": 30,
+    "description": "Explore an open source project on GitHub. Read the code, understand the contribution process, maybe make a small fix.",
+    "materials": ["Computer with GitHub account", "Beginner-friendly open source project", "Contribution guidelines"],
+    "learning_objectives": [
+      "Understand open source culture",
+      "Read others' code",
+      "Collaborate on shared projects",
+      "Contribute to community"
+    ]
+  }
+]
