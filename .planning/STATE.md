@@ -10,12 +10,12 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
-Phase: 251 of 254 (Specialized Packs Batch 2)
-Plan: 2 of 5 complete (251-02 MUSIC-101)
-Status: In Progress (batch 2 underway, 5 parallel plans)
-Last activity: 2026-02-20 — Completed 251-02 (MUSIC-101 Music & Sound pack)
+Phase: 252 of 254 (Pack Metadata & Validation)
+Plan: 1 of 6 complete (252-01 Cross-Pack Dependency Graph complete)
+Status: In Progress (pack metadata phase executing)
+Last activity: 2026-02-20 — Completed 252-01 (Cross-pack dependency graph YAML + Mermaid diagram)
 
-Progress: [####################] 80%
+Progress: [####################] 83%
 
 ## Performance Metrics
 
@@ -60,12 +60,19 @@ Progress: [####################] 80%
 | 250 | 01 | 9min | 2 | 7 |
 | 250 | 05 | 11min | 2 | 7 |
 | 250 | 04 | 13min | 2 | 7 |
+| 251 | 01 | 14min | 2 | 7 |
 | 251 | 02 | 8min | 2 | 7 |
+| 251 | 04 | 21min | 2 | 7 |
+| 251 | 05 | 50min | 2 | 7 |
+| 252 | 01 | 8min | 2 | 2 |
+| Phase 251 P01 | 14 | 2 tasks | 7 files |
+| Phase 252 P01 | 8min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
 ### Decisions
 
+- [Phase 251-01]: ART-101 classification: used 'specialized' (schema value) instead of 'specialized_deepening' (not valid in PackClassificationSchema). Aligns with PHILO-101, THEO-101, other specialized packs.
 - Used z.record(z.string(), value) pattern for Zod v4 compatibility (z.union inside z.record not supported)
 - Schema-first approach: Zod schemas define shapes, types inferred via z.infer
 - Discriminated union result types for all parsers (success/failure pattern)
@@ -224,4 +231,4 @@ Resume file: None
 
 ## Next Up
 
-Phase 251 in progress (1 of 5 plans complete: TRADE-101). Batch 2 has 4 remaining parallel plans. Phase 252 (metadata/validation) gates on completion of all pack content.
+Phase 252 in progress (1 of 6 plans complete: cross-pack dependency graph). Remaining plans: standards alignment metadata (252-02), translation/accessibility metadata (252-03), validation test suite (252-04), index generation (252-05), and documentation finalization (252-06).
