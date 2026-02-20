@@ -11,9 +11,9 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
 Phase: 247 of 254 (Core Academic Packs Batch 3)
-Plan: 5 of 5 complete
-Status: Phase 247 complete
-Last activity: 2026-02-20 — Completed 247-03 (MFAB-101 Materials & Manufacturing pack)
+Plan: 8 of 9 complete
+Status: In progress (gap closure)
+Last activity: 2026-02-20 — Completed 247-08 (BUS-101 gap closure)
 
 Progress: [############........] 60%
 
@@ -46,6 +46,9 @@ Progress: [############........] 60%
 | 247 | 02 | 11min | 2 | 7 |
 | 247 | 03 | 11min | 2 | 7 |
 | 247 | 09 | 2min | 1 | 1 |
+| 247 | 06 | 2min | 2 | 2 |
+| 247 | 08 | 2min | 2 | 2 |
+| 247 | 07 | 3min | 2 | 2 |
 
 ## Accumulated Context
 
@@ -126,6 +129,7 @@ Progress: [############........] 60%
 - 10 activities for MFAB-101 (2 per module) emphasizing hands-on testing with everyday materials
 - Sustainability as core module (M5) in MFAB-101, not optional -- lifecycle thinking woven throughout
 - SCI-101 and ENGR-101 as recommended prior knowledge for MFAB-101; enables TRADE-101
+- [Phase 247]: Quoted all grade_levels values (not just numeric) for consistency with GEO-101 exemplar
 
 ### Key Context
 
@@ -151,9 +155,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed 247-09-PLAN.md (STAT-101 module schema gap closure)
+Stopped at: Completed 247-08-PLAN.md (BUS-101 gap closure)
 Resume file: None
 
 ## Next Up
 
-Phase 247 gap closure plans in progress. Continue with remaining gap closure plans (06, 07, 08) or advance to Phase 248.
+Phase 247 gap closure plans in progress. Continue with remaining gap closure plan (07) or advance to Phase 248.
