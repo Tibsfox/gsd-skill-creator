@@ -11,9 +11,9 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
 Phase: 247 of 254 (Core Academic Packs Batch 3)
-Plan: 1 of 5 complete
-Status: Executing
-Last activity: 2026-02-20 — Completed 247-01 (HIST-101 History & Civilization pack)
+Plan: 5 of 5 complete
+Status: Phase 247 complete
+Last activity: 2026-02-20 — Completed 247-03 (MFAB-101 Materials & Manufacturing pack)
 
 Progress: [############........] 60%
 
@@ -42,6 +42,9 @@ Progress: [############........] 60%
 | 246 | 06 | 2min | 1 | 5 |
 | 247 | 01 | 9min | 2 | 7 |
 | 247 | 05 | 9min | 2 | 7 |
+| 247 | 04 | 9min | 2 | 7 |
+| 247 | 02 | 11min | 2 | 7 |
+| 247 | 03 | 11min | 2 | 7 |
 
 ## Accumulated Context
 
@@ -104,6 +107,24 @@ Progress: [############........] 60%
 - 5 modules for HIST-101: Sources & Evidence, Causation & Consequence, Continuity & Change, Perspectives & Empathy, Historical Argumentation
 - 10 activities for HIST-101 (2 per module) emphasizing inquiry, evidence analysis, and perspective-taking
 - READ-101 as recommended prior knowledge for HIST-101; enables PHILO-101, GEO-101
+- 5 modules for STAT-101: Accounting Principles, Financial Statements, Probability, Statistical Analysis, Personal Finance
+- 10 activities for STAT-101 (2 per module) progressing from concrete (coin flips, classroom stores) to analytical
+- MATH-101 as recommended prior knowledge for STAT-101; enables DATA-101, ECON-101
+- Dual-strand assessment for STAT-101: accounting/financial reasoning and statistical/probabilistic thinking
+- 5 modules for BUS-101: Economic Organization, Business Structures, Finance, Contracts/Legal, Ethics/Governance
+- 10 activities for BUS-101 (2 per module) scaling from trading games to mock trials and stakeholder maps
+- MATH-101 and COMM-101 as recommended prior knowledge for BUS-101; enables ECON-101
+- Integrated business and law curriculum rather than separate tracks
+- Assessment evaluates reasoning and judgment, not business terminology memorization
+- 5 modules for GEO-101: Earth Systems, Human Geography, Maps/GIS, Astronomy, Climate/Weather
+- 10 activities for GEO-101 (2 per module) mixing outdoor observation, physical models, and spatial analysis
+- Spatial thinking as primary pedagogy for GEO-101 over place-name memorization
+- Astronomy integrated as GEO-101 Module 4 for cosmic context rather than separate pack
+- SCI-101 and MATH-101 as recommended prior knowledge for GEO-101; enables ENVR-101, ASTRO-101, NATURE-101
+- 5 modules for MFAB-101: Properties & Testing, Materials Families, Fabrication, DFM, Sustainability
+- 10 activities for MFAB-101 (2 per module) emphasizing hands-on testing with everyday materials
+- Sustainability as core module (M5) in MFAB-101, not optional -- lifecycle thinking woven throughout
+- SCI-101 and ENGR-101 as recommended prior knowledge for MFAB-101; enables TRADE-101
 
 ### Key Context
 
@@ -129,9 +150,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed 247-01-PLAN.md (HIST-101 History & Civilization pack)
+Stopped at: Completed 247-03-PLAN.md (MFAB-101 Materials & Manufacturing pack)
 Resume file: None
 
 ## Next Up
 
-Continue Phase 247: plans 02-05 remaining (GEO-101, MFAB-101, BUS-101, STAT-101).
+Phase 247 fully complete (5/5 plans, all verified). Advance to Phase 248.

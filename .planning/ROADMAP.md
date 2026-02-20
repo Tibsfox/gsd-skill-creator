@@ -10,7 +10,7 @@
 - [x] **Phase 244: Chipset & Agent Definitions** - Chipset YAML, SKILL.md files, pipeline team, agent prefix convention, and map-reduce coordination pattern (completed 2026-02-20)
 - [x] **Phase 245: Core Academic Packs Batch 1** - MATH-101 (import/adapt), SCI-101, TECH-101, ENGR-101, PHYS-101 full suites (completed 2026-02-20)
 - [x] **Phase 246: Core Academic Packs Batch 2** - CHEM-101, READ-101, CRIT-101, PROB-101, COMM-101 full suites (completed 2026-02-20)
-- [ ] **Phase 247: Core Academic Packs Batch 3** - HIST-101, GEO-101, MFAB-101, BUS-101, STAT-101 full suites
+- [ ] **Phase 247: Core Academic Packs Batch 3** - HIST-101, GEO-101, MFAB-101, BUS-101, STAT-101 full suites (gap closure in progress)
 - [ ] **Phase 248: Applied Packs Batch 1** - CODE-101 (import/adapt), DATA-101, LANG-101, PSYCH-101, ENVR-101 full suites
 - [ ] **Phase 249: Applied Packs Batch 2** - NUTR-101, ECON-101, WRIT-101, LOG-101, DIGLIT-101 full suites
 - [ ] **Phase 250: Specialized Packs Batch 1** - PHILO-101, THEO-101, PE-101, NATURE-101, DOMESTIC-101 full suites
@@ -93,13 +93,17 @@ Plans:
   2. All 5 packs pass the runtime content validator with zero schema errors
   3. All 15 Core Academic packs are registered in the pack registry and queryable by tier
   4. Grade levels span PreK through College+ appropriately per subject
-**Plans**: 5 plans (247-01 through 247-05), 1 wave
+**Plans**: 9 plans (247-01 through 247-09), 1 wave
 Plans:
-- [ ] 247-01-PLAN.md — HIST-101 full suite from scratch (History & Civilization)
-- [ ] 247-02-PLAN.md — GEO-101 full suite from scratch (Geography & Space Science)
-- [ ] 247-03-PLAN.md — MFAB-101 full suite from scratch (Materials & Manufacturing)
-- [ ] 247-04-PLAN.md — BUS-101 full suite from scratch (Business & Law)
-- [ ] 247-05-PLAN.md — STAT-101 full suite from scratch (Accounting & Statistics)
+- [x] 247-01-PLAN.md — HIST-101 full suite from scratch (History & Civilization)
+- [x] 247-02-PLAN.md — GEO-101 full suite from scratch (Geography & Space Science)
+- [x] 247-03-PLAN.md — MFAB-101 full suite from scratch (Materials & Manufacturing)
+- [x] 247-04-PLAN.md — BUS-101 full suite from scratch (Business & Law)
+- [x] 247-05-PLAN.md — STAT-101 full suite from scratch (Accounting & Statistics)
+- [ ] 247-06-PLAN.md — Fix HIST-101 grade quoting + expand .skillmeta modules (gap closure)
+- [ ] 247-07-PLAN.md — Fix MFAB-101 grade quoting + expand .skillmeta modules (gap closure)
+- [ ] 247-08-PLAN.md — Fix BUS-101 grade quoting + expand .skillmeta modules (gap closure)
+- [ ] 247-09-PLAN.md — Fix STAT-101 .skillmeta modules expansion (gap closure)
 
 ### Phase 248: Applied Packs Batch 1
 **Goal**: The first 5 applied packs deliver practical skills content including the adapted CODE-101 exemplar
@@ -215,7 +219,7 @@ Phases 243-244 sequential (infrastructure first). Phases 245-251 parallelizable 
 | 244. Chipset & Agent Definitions | 3/3 | Complete    | 2026-02-20 |
 | 245. Core Academic Packs Batch 1 | 5/5 | Complete   | 2026-02-20 |
 | 246. Core Academic Packs Batch 2 | 6/6 | Complete    | 2026-02-20 |
-| 247. Core Academic Packs Batch 3 | 3/5 | In Progress|  |
+| 247. Core Academic Packs Batch 3 | 5/9 | Gap closure | - |
 | 248. Applied Packs Batch 1 | 0/5 | Planned | - |
 | 249. Applied Packs Batch 2 | 0/5 | Planned | - |
 | 250. Specialized Packs Batch 1 | 0/5 | Planned | - |
