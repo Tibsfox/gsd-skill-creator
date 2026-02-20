@@ -302,7 +302,7 @@ See [SECURITY.md](SECURITY.md) for vulnerability reporting, threat model, and se
 
 ## Project Stats
 
-29 milestones shipped (v1.0-v1.25 + v1.8.1 patch) | 235 phases | 639 plans | ~278k LOC TypeScript, Rust, GLSL, Bash & Python | 9,355 tests
+31 milestones shipped (v1.0-v1.27 + v1.8.1 patch) | 254 phases | 679 plans | ~302k LOC TypeScript, Rust, GLSL, Bash & Python | 10,032 tests
 
 ---
 
