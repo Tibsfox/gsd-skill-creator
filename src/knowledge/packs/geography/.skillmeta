@@ -335,13 +335,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
       name: "Espanol"
       complete: false
       progress: "0%"
-
-  planned: [fr, zh, ar]
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -358,17 +380,29 @@ standards_alignment:
   - framework: "C3 Framework for Social Studies (Geography)"
     version: 2013
     alignments:
-      D2.Geo.1: "Construct maps and other graphic representations of both familiar and unfamiliar places"
-      D2.Geo.2: "Use maps, satellite images, photographs, and other representations to explain relationships"
-      D2.Geo.3: "Use geographic data to analyze spatial patterns and processes"
-      D2.Geo.4: "Analyze the relationships between physical and human geography"
-
-  - framework: "Next Generation Science Standards (Earth & Space Science)"
+      D2.Geo.1: "Construct maps and graphic representations"
+      D2.Geo.2: "Use maps and images to explain relationships"
+      D2.Geo.3: "Analyze spatial patterns and processes"
+      D2.Geo.4: "Analyze physical and human geography"
+      D2.Geo.5: "Analyze geo-spatial data"
+  - framework: "Next Generation Science Standards (Earth & Space)"
     version: 2013
     alignments:
+      "K-ESS2-1": "Earth systems"
+      "1-ESS1-1": "Day and night"
+      "3-ESS2-1": "Weather and climate"
       ESS1: "Earth's Place in the Universe"
       ESS2: "Earth's Systems"
-      ESS3: "Earth and Human Activity"
+  - framework: "IB Middle Years Programme (Individuals & Societies)"
+    version: "2024"
+    alignments:
+      MYP.IND.B: "Locating sources"
+      MYP.IND.C: "Processing and analysing"
+  - framework: "UK National Curriculum (Geography)"
+    version: "2014"
+    alignments:
+      KS1.GEO: "Locational and place knowledge"
+      KS2.GEO: "Maps, direction, geography skills"
 
 # Difficulty Rating
 difficulty:

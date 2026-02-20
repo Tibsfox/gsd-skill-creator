@@ -170,13 +170,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
-      name: "Espa\xF1ol"
+      name: "Espanol"
       complete: false
       progress: "0%"
-
-  planned: [fr, zh, de]
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -193,16 +215,32 @@ standards_alignment:
   - framework: "ITEEA Standards for Technological and Engineering Literacy"
     version: 2020
     alignments:
-      Core Disciplinary Ideas: true
-      Practices: true
-      Contexts: true
-
+      "1.A": "Characteristics and scope of technology"
+      "2.A": "Core practices of technology"
+      "3.A": "Contexts and applications"
+      "4.A": "Characteristics of systemic design"
   - framework: "Next Generation Science Standards (Engineering)"
     version: 2013
     alignments:
+      "K-2-ETS1-1": "Ask questions and define problems"
+      "3-5-ETS1-1": "Define and delimit engineering problems"
+      "MS-ETS1-1": "Define the criteria and constraints of design problems"
+      "HS-ETS1-1": "Analyze a major global challenge"
       ETS1.A: "Defining and Delimiting Engineering Problems"
       ETS1.B: "Developing Possible Solutions"
       ETS1.C: "Optimizing the Design Solution"
+  - framework: "IB Middle Years Programme (Design)"
+    version: "2024"
+    alignments:
+      MYP.DES.A: "Investigating"
+      MYP.DES.B: "Planning"
+      MYP.DES.C: "Creating"
+  - framework: "UK National Curriculum (Design & Technology)"
+    version: "2014"
+    alignments:
+      KS1.DT: "Design, make, evaluate"
+      KS2.DT: "Design and technology processes"
+      KS3.DT: "Iterative design and making"
 
 # Difficulty Rating
 difficulty:

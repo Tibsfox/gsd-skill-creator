@@ -325,13 +325,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
       name: "Espanol"
       complete: false
       progress: "0%"
-
-  planned: [fr, zh, ar]
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -345,21 +367,32 @@ accessibility:
 
 # Standards Alignment
 standards_alignment:
-  - framework: "C3 Framework for Social Studies State Standards"
+  - framework: "C3 Framework for Social Studies (History)"
     version: 2013
     alignments:
       D1: "Developing Questions and Planning Inquiries"
-      D2: "Applying Disciplinary Concepts and Tools (History)"
+      D2: "Applying Disciplinary Concepts (History)"
       D3: "Evaluating Sources and Using Evidence"
-      D4: "Communicating Conclusions and Taking Informed Action"
-
+      D4: "Communicating Conclusions and Actions"
   - framework: "National Council for the Social Studies (NCSS)"
     version: 2010
     alignments:
-      Time, Continuity, and Change: true
-      People, Places, and Environments: true
-      Power, Authority, and Governance: true
-      Civic Ideals and Practices: true
+      "Time, Continuity, and Change": true
+      "People, Places, and Environments": true
+      "Power, Authority, and Governance": true
+      "Civic Ideals and Practices": true
+  - framework: "IB Middle Years Programme (Individuals & Societies)"
+    version: "2024"
+    alignments:
+      MYP.HIS.A: "Knowing and understanding contexts"
+      MYP.HIS.B: "Investigating"
+      MYP.HIS.D: "Reflecting on impacts"
+  - framework: "UK National Curriculum (History)"
+    version: "2014"
+    alignments:
+      KS1.HIST: "Historical chronology and sources"
+      KS2.HIST: "British history and world history"
+      KS3.HIST: "Medieval, early modern, modern periods"
 
 # Difficulty Rating
 difficulty:
