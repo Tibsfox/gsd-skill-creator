@@ -1,0 +1,493 @@
+# GSD Skill Metadata
+pack_id: MUSIC-101
+pack_name: "Music & Sound — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: specialized_deepening
+learning_domain: music_and_sound
+
+# Content Description
+description: |
+  Music as organized sound and universal human language. Understanding rhythm,
+  melody, harmony, form, and expression. Not about producing virtuosos but about
+  developing musical literacy: the ability to listen actively, create expressively,
+  and understand how sound is organized. From body percussion to digital composition,
+  MUSIC-101 cultivates the capacity for musical thinking.
+
+short_description: "Rhythm, melody, harmony, and musical expression across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Music Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - MATH-101
+
+# What This Pack Enables
+enables: []
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["K", "1", "2"]
+    estimated_hours: [20, 35]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [40, 60]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [45, 70]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [50, 80]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [80, 150]
+
+# Modules
+modules:
+  - id: MUSIC-101-M1
+    name: "Rhythm & Movement"
+    description: "How sound is organized in time through rhythm, pulse, meter, and body movement"
+    learning_outcomes:
+      - "Feel and maintain a steady beat"
+      - "Understand meter and rhythm notation"
+      - "Create rhythmic patterns using body percussion"
+      - "Participate in ensemble rhythm"
+    topics:
+      - "Steady Beat & Pulse"
+      - "Meter Signatures"
+      - "Body Percussion"
+      - "Rhythm Notation"
+      - "Polyrhythm"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 15
+      elementary: 12
+      middle: 10
+      high: 8
+    prerequisite_modules: []
+    activities:
+      count: 10
+      examples:
+        - "Body Percussion Rhythm Chain"
+        - "Bucket Drum Circle"
+        - "Stomp-Clap Pattern Relay"
+        - "Rhythm Notation Game"
+        - "Polyrhythm Exploration"
+    assessments:
+      - "Can the student maintain a steady beat?"
+      - "Do they distinguish rhythm from meter?"
+      - "Can they create and follow a rhythmic pattern?"
+
+  - id: MUSIC-101-M2
+    name: "Melody & Voice"
+    description: "How to think in pitches and express melodies through singing"
+    learning_outcomes:
+      - "Match pitches and sing in tune"
+      - "Understand scale patterns"
+      - "Recognize intervals"
+      - "Compose simple melodies"
+      - "Use solfège syllables"
+    topics:
+      - "Pitch & High/Low"
+      - "Major & Minor Scales"
+      - "Solfège Syllables"
+      - "Intervals"
+      - "Melodic Contour"
+    grade_levels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 12
+      elementary: 15
+      middle: 12
+      high: 10
+    prerequisite_modules: [MUSIC-101-M1]
+    activities:
+      count: 10
+      examples:
+        - "Solfège Scavenger Hunt"
+        - "Melody Composition with Boomwhackers"
+        - "Echo Singing & Pitch Matching"
+        - "Interval Jump Game"
+        - "Singing Rounds & Canons"
+    assessments:
+      - "Can the student match pitches accurately?"
+      - "Do they understand scale patterns?"
+      - "Can they compose an original melody?"
+
+  - id: MUSIC-101-M3
+    name: "Harmony & Ensemble"
+    description: "How multiple pitches combine to create harmony and ensemble coordination"
+    learning_outcomes:
+      - "Understand chord construction"
+      - "Create harmonic accompaniment"
+      - "Sing in parts"
+      - "Arrange melodies for multiple voices"
+      - "Blend voices in ensemble"
+    topics:
+      - "Chord Structure"
+      - "Major & Minor Chords"
+      - "Chord Progressions"
+      - "Consonance & Dissonance"
+      - "Part-Singing & Voice Leading"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 10
+      middle: 12
+      high: 10
+    prerequisite_modules: [MUSIC-101-M1, MUSIC-101-M2]
+    activities:
+      count: 10
+      examples:
+        - "Three-Chord Song Accompaniment"
+        - "Texture Layering Experiment"
+        - "Chord Recognition Game"
+        - "Build a Chord with Voices"
+        - "Arranging for Small Ensemble"
+    assessments:
+      - "Can the student identify chords?"
+      - "Can they create harmonic accompaniment?"
+      - "Do they sing parts accurately?"
+
+  - id: MUSIC-101-M4
+    name: "Listening & Analysis"
+    description: "Active listening strategies for understanding structure, style, and cultural context"
+    learning_outcomes:
+      - "Listen actively with focused strategies"
+      - "Recognize form and structure"
+      - "Identify genres and styles"
+      - "Understand music across cultures"
+      - "Analyze compositional choices"
+    topics:
+      - "Active Listening"
+      - "Form Recognition"
+      - "Genre & Style"
+      - "Music Across Cultures"
+      - "Emotional Response"
+    grade_levels: ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 8
+      elementary: 10
+      middle: 12
+      high: 12
+    prerequisite_modules: []
+    activities:
+      count: 10
+      examples:
+        - "Guided Listening Journal"
+        - "Genre Detective Game"
+        - "Form Recognition Challenge"
+        - "World Music Exploration"
+        - "Music History Timeline"
+    assessments:
+      - "What do they notice during listening?"
+      - "Can they identify form?"
+      - "Do they engage with diverse traditions?"
+
+  - id: MUSIC-101-M5
+    name: "Creation & Technology"
+    description: "Composing, improvising, and using digital audio tools for music-making"
+    learning_outcomes:
+      - "Compose original music"
+      - "Improvise melody and rhythm"
+      - "Use digital audio software"
+      - "Record and edit audio"
+      - "Arrange music for new ensembles"
+      - "Collaborate on musical projects"
+    topics:
+      - "Songwriting Basics"
+      - "Improvisation"
+      - "Digital Audio Software"
+      - "Recording & Editing"
+      - "Arrangement"
+      - "Music Production"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 12
+      middle: 14
+      high: 14
+    prerequisite_modules: [MUSIC-101-M1, MUSIC-101-M2]
+    activities:
+      count: 10
+      examples:
+        - "Songwriting Workshop"
+        - "Improvisation Jam Session"
+        - "GarageBand Beat Lab"
+        - "MuseScore Composition Challenge"
+        - "Recording Studio Project"
+    assessments:
+      - "Can they create something original?"
+      - "Do they use tools effectively?"
+      - "Can they revise based on feedback?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-RHY-001
+    description: "Maintain a steady beat across different tempos"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-PIT-001
+    description: "Match pitches and sing in tune"
+    levels: ["1", "2", "3", "4", "5"]
+
+  - code: LO-HAR-001
+    description: "Identify and create harmonic accompaniment"
+    levels: ["4", "5", "6", "7", "8"]
+
+  - code: LO-LIS-001
+    description: "Listen actively and recognize musical form"
+    levels: ["2", "3", "4", "5", "6", "7", "8"]
+
+  - code: LO-CRE-001
+    description: "Compose original music using various tools"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Listening & Response"
+    frequency: ongoing
+
+  - type: formative
+    name: "Peer Feedback"
+    frequency: weekly
+
+  - type: summative
+    name: "Performance Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Composition Project"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: Chrome Music Lab
+    url: https://musiclab.chromeexperiments.com
+    description: "Interactive music experiments for rhythm, melody, and harmony"
+
+  - name: GarageBand
+    url: null
+    description: "Apple's digital audio workstation for composition and recording"
+
+  - name: MuseScore
+    url: https://musescore.com
+    description: "Free notation software for composition and arrangement"
+
+  - name: Audacity
+    url: https://www.audacityteam.org
+    description: "Free audio editor for recording and mixing"
+
+  - name: Incredibox
+    url: https://www.incredibox.com
+    description: "Interactive music creation with loops and beatboxing"
+
+interactive_elements:
+  - type: activity
+    name: "Rhythm Games"
+
+  - type: activity
+    name: "Listening Journal"
+
+  - type: simulator
+    name: "Music Lab"
+
+  - type: game
+    name: "Genre Detective"
+
+  - type: collaboration
+    name: "Ensemble Performance"
+
+  - type: creation
+    name: "Songwriting Workshop"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+  planned: [es, fr, zh]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "All listening activities include visual supports. Multiple ways to participate: singing, playing, conducting, listening. Rhythm activities accessible to deaf/hard of hearing learners via visual patterns and tactile vibration."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "National Standards for Music Education"
+    version: 2014
+    alignments:
+      "Creating": "Compose, improvise, and arrange music"
+      "Performing": "Sing and play instruments with accuracy and expression"
+      "Responding": "Listen to and analyze music"
+      "Connecting": "Understand music in cultural contexts"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Difficulty scales with age level. Accessible to all learners regardless of prior experience. No expensive equipment required."
+
+# Content Flags
+content_flags:
+  - flag: cultural_sensitivity
+    description: "World music explorations require respectful, deep engagement with traditions"
+    mitigation: "Use expert contributors from communities; avoid stereotyping; provide historical and cultural context"
+
+  - flag: performance_anxiety
+    description: "Some students may have anxiety about singing or performing in front of others"
+    mitigation: "Provide small-group and solo options; celebrate effort over perfection; offer alternative participation modes"
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/music-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "MUSIC-101"
+  looking_for:
+    - "Activities using instruments from diverse cultural traditions"
+    - "Composition examples for different grade levels"
+    - "Digital tool tutorials for GarageBand, MuseScore, and other free software"
+    - "Translations to Spanish, Mandarin, French"
+    - "Connections to other subject areas (math, language, science)"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Music Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - music
+  - rhythm
+  - melody
+  - harmony
+  - composition
+  - digital-audio
+  - voice
+  - ensemble
+  - listening
+  - expression
+  - specialized
+  - deepening
+
+# External Resources
+resources:
+  - type: online_platform
+    title: "Chrome Music Lab"
+    author: "Google"
+    url: "https://musiclab.chromeexperiments.com"
+
+  - type: online_platform
+    title: "Musictheory.net"
+    author: "Musictheory.net"
+    url: "https://www.musictheory.net"
+
+  - type: software
+    title: "MuseScore"
+    author: "MuseScore"
+    url: "https://musescore.com"
+
+  - type: software
+    title: "Incredibox"
+    author: "Incredibox"
+    url: "https://www.incredibox.com"
+
+  - type: youtube_channel
+    title: "Adam Neely"
+    author: "Adam Neely"
+    url: "https://www.youtube.com/c/AdamNeely"
+
+  - type: youtube_channel
+    title: "12tone"
+    author: "12tone"
+    url: "https://www.youtube.com/c/12tonevideos"
+
+# Related Packs
+related_packs:
+  - id: MATH-101
+    relationship: "Mathematics provides the foundation for understanding rhythm, ratios, and intervals"
+
+  - id: COMM-101
+    relationship: "Communication skills apply to music expression and ensemble collaboration"
+
+  - id: PE-101
+    relationship: "Movement and body awareness complement rhythm and expression"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "music"
+    color: "#9C27B0"
+    position: "Specialized"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "MUSIC-101-rhythm-basics"
+    - "MUSIC-101-melody-patterns"
+    - "MUSIC-101-harmony-progressions"
+    - "MUSIC-101-form-recognition"
+    - "MUSIC-101-composition-scaffolds"
+
+# File References
+files:
+  vision_document: "MUSIC-101-vision.md"
+  modules_definition: "MUSIC-101-modules.yaml"
+  activities: "MUSIC-101-activities.json"
+  assessment: "MUSIC-101-assessment.md"
+  resources: "MUSIC-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering rhythm, melody, harmony, listening, and creation"
+      - "Contributed 50 activities across all modules and grade levels"
+      - "Aligned to National Standards for Music Education"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"
