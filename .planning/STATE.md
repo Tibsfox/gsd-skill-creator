@@ -10,10 +10,10 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
-Phase: 246 of 254 (Core Academic Packs Batch 2)
-Plan: 6 of 6 complete
-Status: Phase 246 complete
-Last activity: 2026-02-20 — Completed 246-06 (quote YAML date fields in .skillmeta files)
+Phase: 247 of 254 (Core Academic Packs Batch 3)
+Plan: 1 of 5 complete
+Status: Executing
+Last activity: 2026-02-20 — Completed 247-01 (HIST-101 History & Civilization pack)
 
 Progress: [############........] 60%
 
@@ -40,6 +40,8 @@ Progress: [############........] 60%
 | 246 | 03 | 11min | 2 | 7 |
 | 246 | 01 | 11min | 2 | 7 |
 | 246 | 06 | 2min | 1 | 5 |
+| 247 | 01 | 9min | 2 | 7 |
+| 247 | 05 | 9min | 2 | 7 |
 
 ## Accumulated Context
 
@@ -99,6 +101,9 @@ Progress: [############........] 60%
 - CHEM-101 lists MATH-101 and SCI-101 as recommended prior knowledge; enables ENVR-101, NUTR-101, NATURE-101
 - Kitchen-chemistry-first pedagogy: tangible experience before symbols and formulas
 - YAML date fields must be quoted strings in .skillmeta files to prevent js-yaml Date object coercion
+- 5 modules for HIST-101: Sources & Evidence, Causation & Consequence, Continuity & Change, Perspectives & Empathy, Historical Argumentation
+- 10 activities for HIST-101 (2 per module) emphasizing inquiry, evidence analysis, and perspective-taking
+- READ-101 as recommended prior knowledge for HIST-101; enables PHILO-101, GEO-101
 
 ### Key Context
 
@@ -124,9 +129,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed 246-06-PLAN.md (quote YAML date fields gap closure)
+Stopped at: Completed 247-01-PLAN.md (HIST-101 History & Civilization pack)
 Resume file: None
 
 ## Next Up
 
-Phase 246 fully complete (6/6 plans, 25/25 verification). Advance to Phase 247.
+Continue Phase 247: plans 02-05 remaining (GEO-101, MFAB-101, BUS-101, STAT-101).
