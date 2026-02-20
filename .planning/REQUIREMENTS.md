@@ -101,9 +101,9 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 
 - [x] **CHIP-01**: Chipset YAML defining knowledge pack agents, skills, teams, and token budget allocation
 - [x] **CHIP-02**: SKILL.md files for each knowledge pack agent following infra/skills/ format
-- [ ] **CHIP-03**: Pipeline team YAML for pack content delivery and validation workflow
+- [x] **CHIP-03**: Pipeline team YAML for pack content delivery and validation workflow
 - [x] **CHIP-04**: Agent prefix KP- (Knowledge Pack) for knowledge domain agents following highway numbering convention
-- [ ] **CHIP-05**: Team coordination pattern (map-reduce) for parallel pack content generation
+- [x] **CHIP-05**: Team coordination pattern (map-reduce) for parallel pack content generation
 
 ### Non-Functional Requirements
 
@@ -213,9 +213,9 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 | META-06 | Phase 252 | Pending |
 | CHIP-01 | Phase 244 | Complete |
 | CHIP-02 | Phase 244 | Complete |
-| CHIP-03 | Phase 244 | Pending |
+| CHIP-03 | Phase 244 | Complete |
 | CHIP-04 | Phase 244 | Complete |
-| CHIP-05 | Phase 244 | Pending |
+| CHIP-05 | Phase 244 | Complete |
 | NFR-01 | Phase 243 | Complete |
 | NFR-02 | Phase 243 | Complete |
 | NFR-03 | Phase 252 | Pending |
