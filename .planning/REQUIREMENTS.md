@@ -21,8 +21,8 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 - [x] **RUNTIME-10**: Activity loader parsing activities JSON into typed ActivityDefinition records with validation
 - [x] **RUNTIME-11**: Assessment framework loader parsing assessment markdown into rubric structures per level
 - [x] **RUNTIME-12**: Resource catalog loader parsing resources markdown into categorized, grade-level-aware link collections
-- [ ] **RUNTIME-13**: Pack content validator ensuring all required files exist and pass schema validation for a given pack
-- [ ] **RUNTIME-14**: Barrel exports for complete knowledge pack public API (src/knowledge/index.ts)
+- [x] **RUNTIME-13**: Pack content validator ensuring all required files exist and pass schema validation for a given pack
+- [x] **RUNTIME-14**: Barrel exports for complete knowledge pack public API (src/knowledge/index.ts)
 
 ### Core Academic Foundation Packs
 
@@ -107,7 +107,7 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 
 ### Non-Functional Requirements
 
-- [ ] **NFR-01**: All 35 packs self-contained in src/knowledge/packs/ with no cross-pack file imports
+- [x] **NFR-01**: All 35 packs self-contained in src/knowledge/packs/ with no cross-pack file imports
 - [x] **NFR-02**: Pack runtime has zero external npm dependencies (YAML parsing via existing project deps)
 - [ ] **NFR-03**: All pack content CC-BY-SA-4.0 licensed with attribution in each pack directory
 - [ ] **NFR-04**: Pack content validator runs as test suite with per-pack validation (35 test cases minimum)
@@ -154,8 +154,8 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 | RUNTIME-10 | Phase 243 | Complete |
 | RUNTIME-11 | Phase 243 | Complete |
 | RUNTIME-12 | Phase 243 | Complete |
-| RUNTIME-13 | Phase 243 | Pending |
-| RUNTIME-14 | Phase 243 | Pending |
+| RUNTIME-13 | Phase 243 | Complete |
+| RUNTIME-14 | Phase 243 | Complete |
 | PACK-01 | Phase 245 | Pending |
 | PACK-02 | Phase 245 | Pending |
 | PACK-03 | Phase 245 | Pending |
@@ -216,7 +216,7 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 | CHIP-03 | Phase 244 | Pending |
 | CHIP-04 | Phase 244 | Pending |
 | CHIP-05 | Phase 244 | Pending |
-| NFR-01 | Phase 243 | Pending |
+| NFR-01 | Phase 243 | Complete |
 | NFR-02 | Phase 243 | Complete |
 | NFR-03 | Phase 252 | Pending |
 | NFR-04 | Phase 252 | Pending |
