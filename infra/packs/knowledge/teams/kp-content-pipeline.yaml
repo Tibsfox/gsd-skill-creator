@@ -1,0 +1,216 @@
+# Knowledge Pack Content Pipeline Team Definition
+# Coordinates 6 KP- agents through map-reduce pack generation.
+# Map: distribute packs to tier-specific authors in parallel.
+# Reduce: merge validation results, gate review.
+
+name: kp-content-pipeline
+description: >
+  Map-reduce pipeline for parallel knowledge pack content generation.
+  Coordinator schedules batches of 5 packs, distributes to tier-specific
+  author agents for parallel generation, validates all outputs against
+  runtime schemas, and reviews educational quality before completion.
+
+topology: map-reduce
+coordinator: KP-01
+
+stages:
+  - name: schedule
+    agent: KP-01
+    description: "Read chipset, determine current batch, resolve dependency ordering within batch"
+    output: batch-assignment
+    skills: [kp-pipeline-orchestration]
+
+  - name: generate
+    description: "Parallel content generation by tier-specific author agents (map phase)"
+    topology: parallel
+    agents:
+      - agent: KP-02
+        filter: "pack.tier == 'core_academic'"
+        description: "Generate Core Academic tier packs"
+        skills: [kp-content-authoring, kp-core-academic-domain]
+      - agent: KP-03
+        filter: "pack.tier == 'applied'"
+        description: "Generate Applied & Practical tier packs"
+        skills: [kp-content-authoring, kp-applied-domain]
+      - agent: KP-04
+        filter: "pack.tier == 'specialized'"
+        description: "Generate Specialized & Deepening tier packs"
+        skills: [kp-content-authoring, kp-specialized-domain]
+    input: batch-assignment
+    output: generated-packs
+    sync_point: generation-complete
+    parallel_instructions:
+      description: >
+        All 3 author agents share kp-content-authoring skill which provides
+        identical file structure templates, schema definitions, and quality
+        standards. These shared instructions are loaded once and cached
+        across all 3 parallel agent sessions (NFR-06).
+      cached_patterns:
+        - "Pack file structure template (6-file directory layout)"
+        - "Vision document skeleton (section headings)"
+        - "Modules YAML schema (PackModuleSchema structure)"
+        - "Activities JSON schema (PackActivitySchema structure)"
+        - "Assessment rubric template (4-level rubric)"
+        - "Resource catalog template (4 audience categories)"
+        - ".skillmeta boilerplate (common fields)"
+        - "Grade level bands (5 bands from Foundation to College)"
+
+  - name: validate
+    agent: KP-05
+    description: "Schema validation, cross-pack reference checking, uniqueness enforcement (reduce phase)"
+    input: generated-packs
+    output: validation-results
+    gate:
+      condition: "validation-results.all_packs_valid == true"
+      on_fail: "Return failing packs to respective author agent for correction"
+    sync_point: validation-complete
+    skills: [kp-content-validation]
+
+  - name: review
+    agent: KP-06
+    description: "Educational quality, accessibility, and caching pattern review"
+    input: validation-results
+    output: review-report
+    requires_gate: validate
+    sync_point: review-complete
+    skills: [kp-quality-review]
+
+# Sync points define handoff between stages
+sync_points:
+  - id: "sync-batch-ready"
+    description: "Batch assignment ready for author agents"
+    producer:
+      agent: KP-01
+      stage: schedule
+      artifact: "batch-assignment.yaml"
+    consumer:
+      agents: [KP-02, KP-03, KP-04]
+      stage: generate
+      requires: "batch-assignment.yaml exists with pack list and dependency ordering"
+
+  - id: "sync-generation-complete"
+    description: "All pack content files generated for the current batch"
+    producer:
+      agents: [KP-02, KP-03, KP-04]
+      stage: generate
+      artifact: "src/knowledge/packs/{pack-id}/ (6 files per pack)"
+    consumer:
+      agent: KP-05
+      stage: validate
+      requires: "All assigned pack directories contain vision.md, modules.yaml, activities.json, assessment.md, resources.md, .skillmeta"
+
+  - id: "sync-validation-complete"
+    description: "All packs in batch pass schema validation"
+    producer:
+      agent: KP-05
+      stage: validate
+      artifact: "validation-report.yaml"
+    consumer:
+      agent: KP-06
+      stage: review
+      requires: "validation-report.yaml shows all_packs_valid: true"
+
+  - id: "sync-review-complete"
+    description: "Quality review passes for all packs in batch"
+    producer:
+      agent: KP-06
+      stage: review
+      artifact: "review-report.yaml"
+    consumer:
+      agent: KP-01
+      stage: schedule
+      requires: "review-report.yaml shows all_packs_approved: true (triggers next batch)"
+
+# Resource locks prevent concurrent writes to pack directories
+resource_locks:
+  - path: "src/knowledge/packs/math-101/"
+    owner: KP-02
+    mode: exclusive
+  - path: "src/knowledge/packs/sci-101/"
+    owner: KP-02
+    mode: exclusive
+  - path: "src/knowledge/packs/code-101/"
+    owner: KP-03
+    mode: exclusive
+  - path: "src/knowledge/packs/philo-101/"
+    owner: KP-04
+    mode: exclusive
+  # Pattern: each pack directory is exclusively owned by its tier's author agent
+  # Full list omitted for brevity -- ownership derived from chipset pack_assignments
+  - path: "src/knowledge/packs/*"
+    owner_rule: "chipset.pack_tiers[pack.tier].agent"
+    mode: exclusive
+    description: "Each pack directory is exclusively owned by its tier's author agent during generation"
+
+# Message bus for inter-stage communication
+message_bus:
+  type: filesystem
+  path: ".planning/knowledge/bus/"
+  format: yaml
+  channels:
+    kp-coordinator:
+      path: ".planning/knowledge/bus/kp-coordinator/"
+      produces:
+        - name: "batch-assignment.yaml"
+          format: yaml
+          description: "Current batch: pack list, dependency order, author assignments"
+          consumers: [KP-02, KP-03, KP-04]
+    kp-authors:
+      path: ".planning/knowledge/bus/kp-authors/"
+      produces:
+        - name: "generation-status.yaml"
+          format: yaml
+          description: "Per-pack generation status (pending, in_progress, complete, failed)"
+          consumers: [KP-01, KP-05]
+    kp-validator:
+      path: ".planning/knowledge/bus/kp-validator/"
+      produces:
+        - name: "validation-report.yaml"
+          format: yaml
+          description: "Per-pack validation results with error details"
+          consumers: [KP-01, KP-02, KP-03, KP-04, KP-06]
+    kp-reviewer:
+      path: ".planning/knowledge/bus/kp-reviewer/"
+      produces:
+        - name: "review-report.yaml"
+          format: yaml
+          description: "Per-pack quality review results with recommendations"
+          consumers: [KP-01]
+
+# Execution wave pattern for a single batch
+execution_waves:
+  - wave: 1
+    description: "Coordinator determines batch and resolves dependencies"
+    agents: [KP-01]
+  - wave: 2
+    description: "Author agents generate pack content in parallel (map)"
+    agents: [KP-02, KP-03, KP-04]
+    note: "Only agents with packs in the current batch are active"
+  - wave: 3
+    description: "Validator checks all generated packs (reduce)"
+    agents: [KP-05]
+  - wave: 4
+    description: "Reviewer assesses quality of validated packs"
+    agents: [KP-06]
+  - wave: 5
+    description: "Coordinator marks batch complete, schedules next batch"
+    agents: [KP-01]
+
+# Map-reduce specifics
+map_reduce:
+  map_key: "pack.tier"
+  map_agents:
+    core_academic: KP-02
+    applied: KP-03
+    specialized: KP-04
+  reduce_agent: KP-05
+  reduce_operation: "Merge per-pack validation results into batch-level report"
+  merge_validation:
+    - "All packs pass KnowledgePackSchema validation"
+    - "Cross-pack references resolve (pack_id in dependency lists exist in registry)"
+    - "Learning outcome codes are unique across all packs in batch + registry"
+    - "No circular dependencies in prerequisite chains"
+  retry_policy:
+    max_retries: 2
+    retry_scope: "per-pack"
+    description: "Failed packs are returned to their author agent for correction. Passing packs proceed to review."
