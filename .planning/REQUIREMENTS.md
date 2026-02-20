@@ -72,7 +72,7 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 
 - [ ] **DASH-01**: Knowledge pack browser panel in desktop/src/knowledge/ with pack listing, category filtering, and tier grouping
 - [ ] **DASH-02**: Pack search with relevance-ranked results across pack names, descriptions, and tags
-- [ ] **DASH-03**: Pack detail view displaying vision summary, module list, prerequisites, and grade levels
+- [x] **DASH-03**: Pack detail view displaying vision summary, module list, prerequisites, and grade levels
 - [ ] **DASH-04**: Skill tree visualization showing pack progression paths and prerequisite chains
 - [ ] **DASH-05**: Activity chain suggestions based on learner level and current pack position
 - [x] **DASH-06**: Progress tracking display showing pack completion state per learner
@@ -193,7 +193,7 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 | PACK-35 | Phase 251 | Pending |
 | DASH-01 | Phase 253 | Pending |
 | DASH-02 | Phase 253 | Pending |
-| DASH-03 | Phase 253 | Pending |
+| DASH-03 | Phase 253 | Complete |
 | DASH-04 | Phase 253 | Pending |
 | DASH-05 | Phase 253 | Pending |
 | DASH-06 | Phase 253 | Complete |
