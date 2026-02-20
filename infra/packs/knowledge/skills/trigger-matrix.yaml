@@ -1,0 +1,70 @@
+# Trigger Overlap Matrix for Knowledge Pack Skills
+# Generated during Phase 244 chipset & agent definitions
+# Purpose: Document that no two KP- skills share ambiguous trigger patterns
+
+skills_count: 7
+total_token_budget: "8.0%"  # Sum of all 7 skills (well under 40% ceiling)
+
+budget_breakdown:
+  kp-pipeline-orchestration: "1.0%"
+  kp-content-authoring: "2.0%"
+  kp-core-academic-domain: "1.0%"
+  kp-applied-domain: "1.0%"
+  kp-specialized-domain: "1.0%"
+  kp-content-validation: "1.0%"
+  kp-quality-review: "1.0%"
+
+ecosystem_context:
+  existing_skills_budget: "~31.5%"  # From infra/skills/trigger-matrix.yaml
+  knowledge_pack_budget: "8.0%"
+  combined_total: "~39.5%"
+  ceiling: "40%"
+  headroom: "~0.5%"
+  note: >
+    Combined ecosystem budget is at ~39.5% of the 40% ceiling. This is tight
+    but acceptable because kp-content-authoring (2.0%) is shared across 3
+    agents and loaded once per session, and domain skills are loaded only when
+    their tier is active. In practice, a session loads at most:
+    pipeline-orchestration (1.0%) + content-authoring (2.0%) + one domain (1.0%)
+    + validation (1.0%) + review (1.0%) = 6.0% per session.
+
+disambiguation_rules:
+  - pair: [kp-pipeline-orchestration, kp-content-authoring]
+    distinction: "Pipeline orchestration handles scheduling and coordination; content authoring handles actual file generation"
+    triggers_unique: "kp-pipeline-orchestration: 'pipeline', 'batch', 'schedule', 'orchestrat'; kp-content-authoring: 'create.*pack', 'content', 'vision.*doc', 'module.*yaml'"
+
+  - pair: [kp-core-academic-domain, kp-applied-domain]
+    distinction: "Core academic covers foundational subjects (math, science, reading); applied covers practical skills (coding, data, economics)"
+    triggers_unique: "kp-core-academic-domain: 'core.*academic', '(math|science|physics|chemistry).*pack'; kp-applied-domain: 'applied.*pack', '(coding|data|language|psychology).*pack'"
+
+  - pair: [kp-core-academic-domain, kp-specialized-domain]
+    distinction: "Core academic covers foundational subjects; specialized covers deepening/niche subjects (philosophy, art, music)"
+    triggers_unique: "kp-core-academic-domain: 'core.*tier'; kp-specialized-domain: 'specialized.*tier', '(philosophy|theology|art|music).*pack'"
+
+  - pair: [kp-applied-domain, kp-specialized-domain]
+    distinction: "Applied covers practical skill subjects; specialized covers deepening/enrichment subjects"
+    triggers_unique: "kp-applied-domain: 'applied.*tier'; kp-specialized-domain: 'specialized.*tier'"
+
+  - pair: [kp-content-validation, kp-quality-review]
+    distinction: "Validation checks schema compliance (automated); review checks educational quality (subjective)"
+    triggers_unique: "kp-content-validation: 'validat', 'schema.*check', 'cross.*pack.*ref'; kp-quality-review: 'review', 'quality', 'education.*review', 'accessibility.*check'"
+
+  - pair: [kp-content-authoring, kp-content-validation]
+    distinction: "Authoring creates pack content files; validation checks created files against schemas"
+    triggers_unique: "kp-content-authoring: 'create.*pack', 'vision.*doc', 'activit.*json'; kp-content-validation: 'pack.*validat', 'schema.*check'"
+
+cross_ecosystem_disambiguation:
+  - pair: [kp-content-authoring, educational-curriculum]
+    distinction: "kp-content-authoring generates knowledge pack content files (vision.md, modules.yaml, etc.); educational-curriculum designs Minecraft spatial learning experiences"
+    triggers_unique: "kp-content-authoring: 'pack.*content', 'module.*yaml'; educational-curriculum: 'curriculum.*(create|design)', 'guided.*build', 'spatial.*learn'"
+    note: "Different domains -- knowledge packs vs Minecraft builds"
+
+parallel_instruction_coverage:
+  description: "NFR-06 parallel instruction patterns validation"
+  cached_patterns_count: 8
+  skills_using_cached_patterns:
+    - kp-content-authoring  # Defines the 8 patterns
+    - kp-quality-review     # Checks conformance to the patterns
+  estimated_cache_savings: "~60% reduction in per-pack token overhead"
+
+validation_status: "All 7 knowledge pack skills have unique primary trigger patterns. No ambiguous overlaps detected. Cross-ecosystem overlap with educational-curriculum resolved by domain distinction."
