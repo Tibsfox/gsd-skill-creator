@@ -10,17 +10,17 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 ### Pack Runtime Infrastructure
 
 - [x] **RUNTIME-01**: Zod schemas for KnowledgePack, PackModule, PackActivity, Assessment, LearningOutcome, GradeLevel, LearningPathway, and PackDependency types
-- [ ] **RUNTIME-02**: .skillmeta YAML parser with Zod validation producing typed KnowledgePack records
+- [x] **RUNTIME-02**: .skillmeta YAML parser with Zod validation producing typed KnowledgePack records
 - [ ] **RUNTIME-03**: Pack registry supporting register, lookup by ID, list all, list by category, list by tier, and search by tags
 - [ ] **RUNTIME-04**: Module loader reading vision.md, modules.yaml, activities.json, assessment.md, and resources.md from pack directories
-- [ ] **RUNTIME-05**: Pack dependency resolver computing prerequisite chains via topological sort with cycle detection
-- [ ] **RUNTIME-06**: Prerequisite validator checking if learner meets entry requirements for a given pack or module
-- [ ] **RUNTIME-07**: Grade-level router suggesting appropriate entry point based on learner level and prior knowledge
-- [ ] **RUNTIME-08**: Cross-pack connection mapper building relationship graph from enables/related_packs metadata
-- [ ] **RUNTIME-09**: Vision document parser extracting structured sections (core concepts, modules, assessment, parent guidance) from markdown
-- [ ] **RUNTIME-10**: Activity loader parsing activities JSON into typed ActivityDefinition records with validation
-- [ ] **RUNTIME-11**: Assessment framework loader parsing assessment markdown into rubric structures per level
-- [ ] **RUNTIME-12**: Resource catalog loader parsing resources markdown into categorized, grade-level-aware link collections
+- [x] **RUNTIME-05**: Pack dependency resolver computing prerequisite chains via topological sort with cycle detection
+- [x] **RUNTIME-06**: Prerequisite validator checking if learner meets entry requirements for a given pack or module
+- [x] **RUNTIME-07**: Grade-level router suggesting appropriate entry point based on learner level and prior knowledge
+- [x] **RUNTIME-08**: Cross-pack connection mapper building relationship graph from enables/related_packs metadata
+- [x] **RUNTIME-09**: Vision document parser extracting structured sections (core concepts, modules, assessment, parent guidance) from markdown
+- [x] **RUNTIME-10**: Activity loader parsing activities JSON into typed ActivityDefinition records with validation
+- [x] **RUNTIME-11**: Assessment framework loader parsing assessment markdown into rubric structures per level
+- [x] **RUNTIME-12**: Resource catalog loader parsing resources markdown into categorized, grade-level-aware link collections
 - [ ] **RUNTIME-13**: Pack content validator ensuring all required files exist and pass schema validation for a given pack
 - [ ] **RUNTIME-14**: Barrel exports for complete knowledge pack public API (src/knowledge/index.ts)
 
@@ -143,17 +143,17 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | RUNTIME-01 | Phase 243 | Complete |
-| RUNTIME-02 | Phase 243 | Pending |
+| RUNTIME-02 | Phase 243 | Complete |
 | RUNTIME-03 | Phase 243 | Pending |
 | RUNTIME-04 | Phase 243 | Pending |
-| RUNTIME-05 | Phase 243 | Pending |
-| RUNTIME-06 | Phase 243 | Pending |
-| RUNTIME-07 | Phase 243 | Pending |
-| RUNTIME-08 | Phase 243 | Pending |
-| RUNTIME-09 | Phase 243 | Pending |
-| RUNTIME-10 | Phase 243 | Pending |
-| RUNTIME-11 | Phase 243 | Pending |
-| RUNTIME-12 | Phase 243 | Pending |
+| RUNTIME-05 | Phase 243 | Complete |
+| RUNTIME-06 | Phase 243 | Complete |
+| RUNTIME-07 | Phase 243 | Complete |
+| RUNTIME-08 | Phase 243 | Complete |
+| RUNTIME-09 | Phase 243 | Complete |
+| RUNTIME-10 | Phase 243 | Complete |
+| RUNTIME-11 | Phase 243 | Complete |
+| RUNTIME-12 | Phase 243 | Complete |
 | RUNTIME-13 | Phase 243 | Pending |
 | RUNTIME-14 | Phase 243 | Pending |
 | PACK-01 | Phase 245 | Pending |
