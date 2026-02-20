@@ -1,0 +1,202 @@
+[
+  {
+    "id": "PROB-101-A01",
+    "name": "Problem Translation Challenge",
+    "module_id": "PROB-101-M1",
+    "grade_range": ["K", "1", "2", "3", "4", "5", "6"],
+    "duration_minutes": 30,
+    "description": "Learners receive problems stated in different ways — technical language, everyday language, pictures, and stories — and must restate each problem in their own words. Partners then compare restatements to see if they captured the same essential question. Develops the habit of understanding before solving and reveals how different framings highlight different aspects of the same problem.",
+    "materials": ["Problem cards (15-20 problems at varying difficulty)", "Restatement recording sheets", "Partner matching cards"],
+    "learning_objectives": [
+      "Restate problems accurately in own words",
+      "Identify the essential question beneath surface details",
+      "Recognize that different restatements can highlight different aspects",
+      "Develop the habit of understanding before attempting solutions"
+    ],
+    "variations": [
+      "Cross-language: restate a math problem as a story, or a story problem as a diagram",
+      "Telephone version: restatements pass through three people, check if the core question survives",
+      "Challenge mode: restate a problem in exactly 10 words"
+    ]
+  },
+  {
+    "id": "PROB-101-A02",
+    "name": "What Do We Know / What Do We Need? Sorting Activity",
+    "module_id": "PROB-101-M1",
+    "grade_range": ["K", "1", "2", "3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 25,
+    "description": "Given a problem scenario with multiple pieces of information, learners sort information cards into three categories: Known (information we have), Unknown (information we need to find), and Irrelevant (information that does not help). Develops the critical skill of identifying what matters and what is distraction — essential for tackling complex, real-world problems where not all information is relevant.",
+    "materials": ["Problem scenario cards", "Information cards (10-15 per scenario)", "Sorting mat with three labeled columns", "Discussion prompts"],
+    "learning_objectives": [
+      "Identify known information in a problem",
+      "Identify what information is needed to solve the problem",
+      "Recognize and set aside irrelevant information",
+      "Articulate why certain information is or is not relevant"
+    ],
+    "variations": [
+      "Missing information: some problems deliberately lack a key piece — learners must identify what is missing",
+      "Overload version: add many irrelevant details to test filtering skills",
+      "Create-your-own: learners write problems with hidden irrelevant information for classmates"
+    ]
+  },
+  {
+    "id": "PROB-101-A03",
+    "name": "Strategy Toolkit Rotation",
+    "module_id": "PROB-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 50,
+    "description": "Groups of learners receive the same problem, but each group is assigned a different strategy (work backwards, draw a diagram, make a table, find a pattern, simplify first). Each group solves the problem using only their assigned strategy, then presents their approach to the class. The class compares strategies: Which was easiest? Which revealed the most insight? Which was most efficient? Demonstrates that multiple valid approaches exist and that strategy choice matters.",
+    "materials": ["Problem handout (same problem for all groups)", "Strategy assignment cards", "Large paper or whiteboard for each group", "Markers", "Presentation timer"],
+    "learning_objectives": [
+      "Apply a specific problem-solving strategy deliberately",
+      "Explain how a strategy leads to a solution",
+      "Compare the effectiveness of different strategies on the same problem",
+      "Recognize that multiple valid approaches exist"
+    ],
+    "variations": [
+      "Speed round: which strategy reaches the answer fastest?",
+      "Difficulty scaling: repeat with a harder version of the same problem structure",
+      "Free choice round: after seeing all strategies, choose the best one for a new problem and justify"
+    ]
+  },
+  {
+    "id": "PROB-101-A04",
+    "name": "Work Backwards Mystery Puzzle",
+    "module_id": "PROB-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 35,
+    "description": "Learners receive puzzles where the end state is given and they must figure out the starting conditions. Examples: a number goes through a sequence of operations and ends at 42 — what was the starting number? A maze has an exit marked but no entrance — trace backwards to find the start. A recipe produces a certain dish — given the dish, reconstruct the ingredients. Builds fluency with the work-backwards heuristic through engaging, concrete challenges.",
+    "materials": ["Work-backwards puzzle sheets (8-10 puzzles at varying difficulty)", "Scratch paper for calculations", "Answer verification cards"],
+    "learning_objectives": [
+      "Apply the work-backwards strategy to reverse a sequence of steps",
+      "Recognize problem types where working backwards is more efficient than working forwards",
+      "Verify solutions by checking them in the forward direction",
+      "Explain when and why working backwards is a useful strategy"
+    ],
+    "variations": [
+      "Create-your-own: design a work-backwards puzzle for a classmate",
+      "Real-world version: plan a morning routine backwards from 'arrive at school on time'",
+      "Multi-step: puzzles with 5+ steps that require careful tracking"
+    ]
+  },
+  {
+    "id": "PROB-101-A05",
+    "name": "SCAMPER an Everyday Object",
+    "module_id": "PROB-101-M3",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 40,
+    "description": "Learners select a common everyday object (pencil, chair, backpack, water bottle) and systematically apply all seven SCAMPER prompts: Substitute (what could replace a part?), Combine (what could be merged with it?), Adapt (what else is this like?), Modify (what could be bigger, smaller, or different?), Put to other use (what else could it do?), Eliminate (what could be removed?), Reverse (what if it worked the opposite way?). Each prompt generates 2-3 ideas. Develops creative thinking through structured divergent thinking.",
+    "materials": ["SCAMPER prompt cards", "Everyday objects (or pictures of objects)", "Idea recording sheets with space for each prompt", "Drawing materials for sketching redesigns"],
+    "learning_objectives": [
+      "Apply all seven SCAMPER prompts systematically to generate ideas",
+      "Generate multiple creative variations on an existing design",
+      "Distinguish between divergent thinking (generating ideas) and convergent thinking (evaluating ideas)",
+      "Select the most promising ideas from a larger set using criteria"
+    ],
+    "variations": [
+      "Group SCAMPER: each group member takes one prompt, then combine all ideas",
+      "Competitive SCAMPER: which team generates the most unique ideas in 10 minutes?",
+      "Real innovation: research an actual product redesign that used one of the SCAMPER principles"
+    ]
+  },
+  {
+    "id": "PROB-101-A06",
+    "name": "Analogical Problem Solving",
+    "module_id": "PROB-101-M3",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Learners solve a problem in one domain (e.g., how ants find the shortest path to food), study the solution structure, then apply the same structural solution to a problem in a completely different domain (e.g., how to route network traffic efficiently). The key insight is recognizing that problems with different surface features can share the same deep structure. Builds the transfer skill that is the ultimate goal of problem-solving education.",
+    "materials": ["Paired problem sets (source domain and target domain)", "Solution structure worksheets", "Analogy mapping templates", "Discussion prompts for reflection"],
+    "learning_objectives": [
+      "Identify the structural solution in a source problem",
+      "Map structural elements from one domain to another",
+      "Apply a solution strategy from a familiar domain to an unfamiliar one",
+      "Articulate what makes two problems structurally similar despite surface differences"
+    ],
+    "variations": [
+      "Reverse analogy: given the target problem, find a source analogy from a different domain",
+      "Historical analogies: study real innovations inspired by biological or natural analogies",
+      "Multiple targets: apply the same source solution to three different target domains"
+    ]
+  },
+  {
+    "id": "PROB-101-A07",
+    "name": "Escape Room Team Challenge",
+    "module_id": "PROB-101-M4",
+    "grade_range": ["4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 60,
+    "description": "A multi-puzzle challenge requiring different problem-solving skills: spatial reasoning (physical puzzle), logical deduction (code-breaking), pattern recognition (sequence completion), language play (word puzzle), and mathematical reasoning (calculation challenge). No single person has all skills, so teams must identify each member's strengths, distribute tasks accordingly, and integrate findings. Includes a metacognitive debrief where teams discuss what worked and what they would change.",
+    "materials": ["Escape room puzzle kit (5-6 interconnected puzzles)", "Lock boxes or code-entry system", "Timer", "Team role cards (optional)", "Debrief reflection sheets"],
+    "learning_objectives": [
+      "Identify and leverage different team members' strengths",
+      "Distribute problem-solving tasks effectively within a group",
+      "Communicate findings clearly to teammates under time pressure",
+      "Reflect on group dynamics and collaboration effectiveness"
+    ],
+    "variations": [
+      "Create-your-own: teams design escape rooms for other teams",
+      "Remote version: solve puzzles collaboratively via shared digital workspace",
+      "Themed versions: science escape room, history escape room, literature escape room"
+    ]
+  },
+  {
+    "id": "PROB-101-A08",
+    "name": "Community Problem Identification and Proposal",
+    "module_id": "PROB-101-M4",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 90,
+    "description": "Teams identify a real problem in their school or community (cafeteria waste, playground safety, homework overload, traffic congestion near school). They define the problem clearly, research its causes, generate multiple possible solutions, evaluate each against real constraints (cost, feasibility, stakeholder impact), and present a formal proposal. The process matters more than the polish — assessment focuses on problem definition, strategy use, collaboration quality, and reasoning.",
+    "materials": ["Problem identification worksheet", "Research planning template", "Solution evaluation matrix", "Proposal template", "Presentation materials"],
+    "learning_objectives": [
+      "Identify and define a real-world problem clearly",
+      "Research causes and contributing factors collaboratively",
+      "Generate and evaluate multiple solutions against real constraints",
+      "Present a reasoned proposal to an audience and respond to questions"
+    ],
+    "variations": [
+      "Mini version (45 min): identify problem and brainstorm solutions without full research",
+      "Implementation: actually implement the winning proposal and evaluate results",
+      "Cross-team: two teams work on the same problem and compare their proposals"
+    ]
+  },
+  {
+    "id": "PROB-101-A09",
+    "name": "Systems Mapping",
+    "module_id": "PROB-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Learners take a seemingly simple issue (food waste in the school cafeteria, traffic congestion, student stress) and create a systems map showing all the factors that contribute to it and how they interact. They discover feedback loops, unintended connections, and leverage points where small changes might have large effects. Builds systems thinking — the ability to see problems as networks of interacting factors rather than isolated cause-and-effect chains.",
+    "materials": ["Large paper or whiteboard", "Sticky notes in multiple colors", "Markers", "Connecting string or drawn arrows", "Systems mapping guide sheet"],
+    "learning_objectives": [
+      "Identify multiple contributing factors to a complex problem",
+      "Map relationships and interactions between factors",
+      "Discover feedback loops and unintended connections",
+      "Identify leverage points where intervention might be most effective"
+    ],
+    "variations": [
+      "Digital version: use collaborative mapping software",
+      "Comparison: two groups map the same problem and compare their maps",
+      "Historical: map the factors that led to a historical event or decision"
+    ]
+  },
+  {
+    "id": "PROB-101-A10",
+    "name": "The Unintended Consequences Game",
+    "module_id": "PROB-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 40,
+    "description": "Learners propose a solution to a problem, then systematically explore what new problems the solution might create. Then they propose solutions to those new problems, and explore their consequences in turn. The chain continues for three rounds, building awareness that intervention in complex systems always has side effects and that good problem solvers anticipate these before implementing. Uses real-world examples where well-intentioned solutions created unexpected problems.",
+    "materials": ["Scenario cards with initial problems", "Consequence chain worksheets (3 rounds)", "Real-world case study examples", "Discussion prompts"],
+    "learning_objectives": [
+      "Anticipate unintended consequences of proposed solutions",
+      "Trace second-order and third-order effects of interventions",
+      "Evaluate solutions not just for effectiveness but for side effects",
+      "Develop humility about the limits of simple solutions to complex problems"
+    ],
+    "variations": [
+      "Historical version: trace actual unintended consequences of real policies or inventions",
+      "Positive consequences: explore solutions whose side effects were unexpectedly beneficial",
+      "Debate format: one team proposes a solution, the other team identifies potential unintended consequences"
+    ]
+  }
+]
