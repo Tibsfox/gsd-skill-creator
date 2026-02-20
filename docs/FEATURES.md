@@ -101,6 +101,13 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **95. AGC Development Tools** | yaYUL assembler, step debugger with breakpoints/watchpoints, disassembler, rope loader, 54-test validation suite (v1.23) |
 | **96. AGC Curriculum** | 11 chapters from orientation to AGC-to-GSD patterns, 8 hands-on exercises, 1202 alarm capstone (v1.23) |
 | **97. RFC Reference Skill** | 3-agent system (retriever, analyzer, citation builder), 5 Python scripts, 57-RFC index, multi-format output (v1.23) |
+| **98. Observation Hook System** | Zod-validated learner observation types (activity completion, assessment results, time spent, pack lifecycle), ObservationEmitter with sink registration and error isolation (v1.27) |
+| **99. AMIGA Event Bridge** | KnowledgeEventBridge converting LearnerObservation to AMIGA EventEnvelope with 6 event types (KNOWLEDGE_*), priority escalation for pack_complete, correlation ID tracking (v1.27) |
+| **100. Learning Pattern Detector** | 4-pattern detection engine (sequence, timing, scoring, engagement) with confidence scoring, threshold filtering, and skill suggestion generation for high-confidence patterns (v1.27) |
+| **101. Pathway Adapter** | Personalized learning path adaptation based on learner history: struggle detection (reinforcement), excellence detection (acceleration), traceable adaptation decisions with observation evidence (v1.27) |
+| **102. Activity Scaffolder** | Pattern-to-activity generation creating new PackActivity objects from learning patterns, insertable into existing activity chains, pattern-specific generation for 4 pattern types (v1.27) |
+| **103. Approach Promoter** | Pattern-to-skill promotion converting high-confidence learning patterns to reusable skill definitions with trigger conditions, action steps, and SKILL.md markdown output (v1.27) |
+| **104. Knowledge Pack Integration** | Complete skill-creator integration infrastructure: observation hooks, AMIGA bridge, pattern detection, pathway adaptation, activity scaffolding, approach promotion, barrel exports with 144 new tests (v1.27) |
 
 ## Version History
 
@@ -132,3 +139,7 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.21** | GSD-OS Desktop Foundation: Tauri v2 desktop shell with Rust backend, WebGL CRT shader engine, 32-color indexed palette with 5 presets, native PTY terminal with xterm.js, Amiga Workbench window manager, boot sequence and calibration wizard, 636 tests |
 | **v1.22** | Minecraft Knowledge World: local cloud infrastructure (PXE/kickstart/VM provisioning), Minecraft Fabric server with Syncmatica, platform portability (3 package managers, 3 hypervisors), Amiga emulation (FS-UAE/AROS), chipset formalization (20 skills, 10 agents, 5 teams), operational maturity (backups, monitoring, runbooks) |
 | **v1.23** | Project AMIGA: AMIGA mission infrastructure (MC-1/ME-1/CE-1/GL-1 with 4 ICDs), Apollo AGC Block II simulator (38 instructions, bank-switched memory, interrupts, I/O), AGC Executive/Waitlist/BAILOUT, DSKY interface with Executive Monitor, AGC development tools (assembler, debugger, disassembler, rope loader), AGC curriculum (11 chapters, 8 exercises), RFC Reference Skill (3-agent system, 57-RFC index) |
+| **v1.24** | GSD Conformance Audit & Hardening: 336-checkpoint conformance matrix against 18 vision documents, full 4-tier audit (T0/T1/T2/T3) with 211 pass + 125 amendments, zero-fail conformance achieved |
+| **v1.25** | Ecosystem Integration: dependency DAG (20 nodes, 48 edges), EventDispatcher specification, 4-tier dependency philosophy, integration test strategy, partial-build compatibility matrix with 99 known-issues |
+| **v1.26** | Aminet Archive Extension Pack: INDEX infrastructure (~84K packages), mirror state + download engine, full-text search + collections, pure TypeScript virus scanner (52 signatures), LhA/LZX extraction, FS-UAE integration, GSD-OS desktop panel with 5-agent pipeline |
+| **v1.27** | GSD Foundational Knowledge Packs: 35 knowledge packs (15 Core Academic, 10 Applied, 10 Specialized) with complete vision/modules/activities/assessment/resources, GSD-OS dashboard (browser, search, detail view, skill tree, progress tracking), skill-creator integration (observation hooks, AMIGA bridge, 4-pattern detection, pathway adaptation, activity scaffolding, approach promotion) |
