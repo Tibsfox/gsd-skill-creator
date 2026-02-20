@@ -1,0 +1,329 @@
+# GSD Skill Metadata
+pack_id: STAT-101
+pack_name: "Accounting & Statistics — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: quantitative_reasoning
+
+# Content Description
+description: |
+  Numbers quantify the world: accounting provides the language of business
+  (where money goes, what it does) and statistics provides the language of
+  uncertainty (what data says, how confident we should be). Together they
+  form the quantitative backbone of informed decision-making, from personal
+  budgets to scientific research to civic participation.
+
+short_description: "Accounting, probability, statistics, and financial literacy across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Statistics & Financial Literacy Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - MATH-101
+
+# What This Pack Enables
+enables:
+  - DATA-101
+  - ECON-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [15, 30]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [60, 100]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [100, 165]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [120, 180]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [180, 240]
+
+# Modules
+modules:
+  - id: STAT-101-M1
+    name: "Accounting Principles & Bookkeeping"
+    level: elementary-high
+    duration_hours: 25
+
+  - id: STAT-101-M2
+    name: "Financial Statements & Analysis"
+    level: elementary-high
+    duration_hours: 25
+    prereq_modules: [STAT-101-M1]
+
+  - id: STAT-101-M3
+    name: "Probability & Randomness"
+    level: foundation-high
+    duration_hours: 30
+
+  - id: STAT-101-M4
+    name: "Statistical Analysis & Inference"
+    level: elementary-high
+    duration_hours: 35
+    prereq_modules: [STAT-101-M3]
+
+  - id: STAT-101-M5
+    name: "Financial Literacy & Personal Finance"
+    level: elementary-high
+    duration_hours: 30
+    prereq_modules: [STAT-101-M1]
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-ACCT-001
+    description: "Apply the accounting equation to classify transactions"
+    levels: ["3", "4", "5", "6", "7", "8"]
+
+  - code: LO-FIN-001
+    description: "Read and interpret financial statements"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-PROB-001
+    description: "Calculate and interpret probabilities"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-STAT-001
+    description: "Collect, analyze, and interpret data using appropriate statistical measures"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-FINLIT-001
+    description: "Make informed personal financial decisions"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Quantitative Reasoning Discussions"
+    frequency: ongoing
+
+  - type: formative
+    name: "Financial & Statistical Analysis Exercises"
+    frequency: weekly
+
+  - type: summative
+    name: "Investigation Portfolio"
+    frequency: end_of_unit
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: spreadsheet
+    url: "https://docs.google.com/spreadsheets"
+
+  - name: statistical_calculator
+    url: "https://www.desmos.com"
+    description: "Graphing and statistical visualization"
+
+interactive_elements:
+  - type: simulator
+    name: "Compound Interest Calculator"
+
+  - type: simulator
+    name: "Probability Experiment Runner"
+
+  - type: manipulative
+    name: "Budget Allocation Sliders"
+
+  - type: visualization
+    name: "Data Distribution Viewer"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+
+  planned: ["fr", "zh", "ar"]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "All visual content has text descriptions. Financial statements use accessible table markup."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Common Core State Standards (Math - Statistics & Probability)"
+    version: "2010"
+    alignments:
+      6.SP: "Statistics & Probability"
+      7.SP: "Statistics & Probability"
+      S-ID: "Interpreting Categorical & Quantitative Data"
+      S-IC: "Making Inferences & Justifying Conclusions"
+      S-CP: "Conditional Probability & Rules of Probability"
+
+  - framework: "Jump$tart Financial Literacy Standards"
+    version: "2017"
+    alignments:
+      Spending & Saving: "true"
+      Credit & Debt: "true"
+      Financial Responsibility: "true"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: high
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Difficulty is in understanding what numbers mean, not in performing calculations"
+
+# Content Flags & Warnings
+content_flags:
+  - flag: anxiety_potential
+    description: "Some learners have math anxiety that extends to statistics and financial topics."
+    mitigation: "Focus on meaning and application, not speed or memorization. Normalize uncertainty."
+
+  - flag: socioeconomic_sensitivity
+    description: "Financial literacy topics may surface family economic differences."
+    mitigation: "Use fictional scenarios for budgeting. Never require sharing personal financial information."
+
+  - flag: prior_misconceptions
+    description: "Common statistical misconceptions (gambler's fallacy, correlation/causation) are deeply ingrained."
+    mitigation: "Address misconceptions directly with experiential counterexamples, not just verbal correction."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/stat-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "STAT-101"
+  looking_for:
+    - "Real-world financial datasets for analysis activities"
+    - "Localized financial examples for different countries"
+    - "Interactive probability simulations"
+    - "Translations to Spanish & Mandarin"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Statistics & Financial Literacy Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - statistics
+  - accounting
+  - probability
+  - financial-literacy
+  - quantitative-reasoning
+  - data-analysis
+  - personal-finance
+  - stem
+  - foundational
+  - core-academic
+
+# External Resources
+resources:
+  - type: textbook
+    title: "How to Lie with Statistics"
+    author: "Darrell Huff"
+
+  - type: textbook
+    title: "Naked Statistics"
+    author: "Charles Wheelan"
+
+  - type: online_course
+    title: "Khan Academy Statistics & Probability"
+    author: "Khan Academy"
+    url: "https://www.khanacademy.org/math/statistics-probability"
+
+  - type: interactive
+    title: "Seeing Theory"
+    author: "Brown University"
+    url: "https://seeing-theory.brown.edu/"
+
+# Related Packs
+related_packs:
+  - id: MATH-101
+    relationship: "Arithmetic and algebra provide quantitative foundations for accounting and statistics"
+
+  - id: DATA-101
+    relationship: "Data science extends statistical analysis with computational tools"
+
+  - id: ECON-101
+    relationship: "Economics applies accounting measurement and statistical analysis to markets and policy"
+
+  - id: CRIT-101
+    relationship: "Critical thinking skills strengthen evaluation of statistical and financial claims"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "bar-chart"
+    color: "#9C27B0"
+    position: "Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "STAT-101-core-concepts"
+    - "STAT-101-assessment-patterns"
+    - "STAT-101-parent-guidance"
+
+# File References
+files:
+  vision_document: "STAT-101-vision.md"
+  modules_definition: "STAT-101-modules.yaml"
+  activities: "STAT-101-activities.json"
+  assessment: "STAT-101-assessment.md"
+  resources: "STAT-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules, assessment framework, parent guidance"
+      - "Contributed 10 starter activities"
+      - "Aligned to Common Core Statistics & Probability and Jump$tart Financial Literacy standards"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"
