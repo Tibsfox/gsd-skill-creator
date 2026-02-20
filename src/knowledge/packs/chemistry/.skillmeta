@@ -328,13 +328,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
       name: "Espanol"
       complete: false
       progress: "0%"
-
-  planned: [fr, zh, ar]
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -351,17 +373,31 @@ standards_alignment:
   - framework: "Next Generation Science Standards (NGSS)"
     version: 2013
     alignments:
+      "2-PS1-1": "Different kinds of matter"
+      "5-PS1-1": "Matter and its properties"
+      "MS-PS1-1": "Structure and properties of matter"
+      "HS-PS1-1": "Structure and properties of matter"
+      "HS-PS1-2": "Molecular composition and energy"
       PS1-A: "Structure and Properties of Matter"
       PS1-B: "Chemical Reactions"
-      PS1-C: "Nuclear Processes"
       PS3-A: "Definitions of Energy"
-      PS3-B: "Conservation of Energy and Energy Transfer"
-
   - framework: "AAAS Benchmarks for Science Literacy"
     version: 1993
     alignments:
       "Structure of Matter": true
       "Chemical Reactions": true
+      "Matter and Energy": true
+  - framework: "IB Middle Years Programme (Sciences)"
+    version: "2024"
+    alignments:
+      MYP.CHEM.A: "Knowing and understanding"
+      MYP.CHEM.B: "Investigating"
+      MYP.CHEM.C: "Processing and evaluating"
+  - framework: "UK National Curriculum (Science - Chemistry)"
+    version: "2014"
+    alignments:
+      KS3.CHEM: "Matter and reactions"
+      KS4.CHEM: "Atomic structure and bonding"
       "Energy Transformations": true
 
 # Difficulty Rating

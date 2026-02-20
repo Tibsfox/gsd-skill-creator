@@ -333,13 +333,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
       name: "Espanol"
       complete: false
       progress: "0%"
-
-  planned: [fr, zh, ar]
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -353,25 +375,31 @@ accessibility:
 
 # Standards Alignment
 standards_alignment:
-  - framework: "Council for Economic Education (CEE) Voluntary National Content Standards"
+  - framework: "Council for Economic Education (CEE) Standards"
     version: 2010
     alignments:
-      Standard 1: "Scarcity"
-      Standard 3: "Allocation"
-      Standard 7: "Markets and Prices"
-      Standard 8: "Role of Prices"
-      Standard 14: "Entrepreneurship"
-
-  - framework: "Jump$tart Coalition National Standards in K-12 Personal Finance Education"
+      "Standard 1": "Scarcity and choice"
+      "Standard 3": "Allocation methods"
+      "Standard 7": "Markets and prices"
+      "Standard 8": "Price determination"
+      "Standard 14": "Entrepreneurship"
+  - framework: "Jump$tart Financial Literacy Standards"
     version: 2021
     alignments:
       Spending & Saving: true
       Credit & Debt: true
       Employment & Income: true
       Investing: true
-
-  - framework: "National Standards for Civics and Government"
-    version: 2014
+  - framework: "IB Middle Years Programme (Individuals & Societies)"
+    version: "2024"
+    alignments:
+      MYP.IND.A: "Knowing and understanding"
+      MYP.IND.D: "Reflecting"
+  - framework: "UK National Curriculum (Economics & Enterprise)"
+    version: "2014"
+    alignments:
+      KS2.BUS: "Business and entrepreneurship"
+      KS3.BUS: "Economic principles and enterprise"
     alignments:
       "Civic Life": true
       "Foundations of Government": true
