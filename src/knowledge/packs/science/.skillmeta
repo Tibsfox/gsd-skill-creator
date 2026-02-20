@@ -331,13 +331,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
       name: "Espanol"
       complete: false
       progress: "0%"
-
-  planned: [fr, zh, ar]
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -354,21 +376,32 @@ standards_alignment:
   - framework: "Next Generation Science Standards (NGSS)"
     version: 2013
     alignments:
+      "K-2-ETS1-1": "Ask questions, define problems, design solutions"
+      "3-5-ETS1-1": "Engineering design process"
+      "MS-ETS1-1": "Define design problems"
+      "HS-ETS1-1": "Analyze complex problems"
       SEP-1: "Asking Questions and Defining Problems"
-      SEP-2: "Developing and Using Models"
       SEP-3: "Planning and Carrying Out Investigations"
       SEP-4: "Analyzing and Interpreting Data"
-      SEP-5: "Using Mathematics and Computational Thinking"
-      SEP-6: "Constructing Explanations and Designing Solutions"
       SEP-7: "Engaging in Argument from Evidence"
-      SEP-8: "Obtaining, Evaluating, and Communicating Information"
-
   - framework: "AAAS Benchmarks for Science Literacy"
     version: 1993
     alignments:
       "The Nature of Science": true
       "The Scientific Enterprise": true
       "Scientific Inquiry": true
+  - framework: "IB Middle Years Programme Sciences"
+    version: "2024"
+    alignments:
+      MYP.SCI.A: "Knowing and understanding"
+      MYP.SCI.B: "Investigating"
+      MYP.SCI.C: "Processing and evaluating"
+  - framework: "UK National Curriculum (Science)"
+    version: "2014"
+    alignments:
+      KS1.SC1: "Enquiry and investigation"
+      KS2.SC1: "Scientific enquiry"
+      KS3.SC1: "Scientific enquiry skills"
 
 # Difficulty Rating
 difficulty:

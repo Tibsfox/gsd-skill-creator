@@ -322,13 +322,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
       name: "Espanol"
       complete: false
       progress: "0%"
-
-  planned: [fr, zh, ar]
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -342,23 +364,31 @@ accessibility:
 
 # Standards Alignment
 standards_alignment:
-  - framework: "Common Core State Standards — Mathematical Practice"
+  - framework: "Common Core State Standards (Mathematical Practices)"
     version: 2010
     alignments:
-      MP-1: "Make sense of problems and persevere in solving them"
-      MP-2: "Reason abstractly and quantitatively"
-      MP-3: "Construct viable arguments and critique the reasoning of others"
-      MP-4: "Model with mathematics"
-      MP-7: "Look for and make use of structure"
-      MP-8: "Look for and express regularity in repeated reasoning"
-
+      "CCSS.MATH.MP.1": "Make sense of problems and persevere"
+      "CCSS.MATH.MP.2": "Reason abstractly and quantitatively"
+      "CCSS.MATH.MP.3": "Construct viable arguments"
+      "CCSS.MATH.MP.4": "Model with mathematics"
+      "CCSS.MATH.MP.7": "Look for and make use of structure"
   - framework: "ISTE Standards for Students"
     version: 2016
     alignments:
-      "5a": "Formulate problem definitions suited for technology-assisted methods"
-      "5b": "Collect data or identify relevant data sets"
-      "5c": "Break problems into component parts and extract key information"
-      "5d": "Use algorithmic thinking to develop a sequence of steps"
+      "5a": "Formulate problem definitions"
+      "5b": "Collect and identify data sets"
+      "5c": "Break problems into component parts"
+      "5d": "Use algorithmic thinking"
+  - framework: "IB Middle Years Programme (ATL - Approaches to Learning)"
+    version: "2024"
+    alignments:
+      MYP.ATL.A: "Thinking skills"
+      MYP.ATL.B: "Research skills"
+  - framework: "UK National Curriculum (Problem Solving & Reasoning)"
+    version: "2014"
+    alignments:
+      KS2.PS: "Problem-solving strategies"
+      KS3.PS: "Complex problem decomposition"
 
 # Difficulty Rating
 difficulty:

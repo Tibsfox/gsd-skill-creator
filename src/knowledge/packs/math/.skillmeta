@@ -234,13 +234,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
       name: "Espanol"
       complete: false
       progress: "45%"
-
-  planned: ["fr", "zh", "ar"]
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: ["zh", "ar"]
 
 # Accessibility
 accessibility:
@@ -257,18 +279,36 @@ standards_alignment:
   - framework: "Common Core State Standards (Math)"
     version: "2010"
     alignments:
-      K.CC: "Counting & Cardinality"
-      1.NBT: "Numbers & Operations in Base Ten"
-      2.OA: "Operations & Algebraic Thinking"
-
-  - framework: "NCTM Principles & Standards"
+      CCSS.MATH.K.CC.A.1: "Count to 100 by ones and tens"
+      CCSS.MATH.1.NBT.B.2: "Understand place value"
+      CCSS.MATH.2.OA.A.1: "Use addition and subtraction within 20"
+      CCSS.MATH.3.NF.A.1: "Understand fractions"
+      CCSS.MATH.5.NBT.A.1: "Recognize place value"
+      CCSS.MATH.6.RP.A.1: "Understand ratios"
+      CCSS.MATH.7.EE.A.1: "Use properties of operations"
+      CCSS.MATH.8.EE.A.1: "Laws of exponents"
+  - framework: "NCTM Principles & Standards for School Mathematics"
     version: "2000"
     alignments:
-      Number & Operations: "true"
+      Number and Operations: "true"
       Algebra: "true"
       Geometry: "true"
       Measurement: "true"
-      Data Analysis: "true"
+      Data Analysis and Probability: "true"
+      Problem Solving: "true"
+      Reasoning and Proof: "true"
+  - framework: "IB Middle Years Programme"
+    version: "2024"
+    alignments:
+      MYP.MATH.A: "Knowing and understanding"
+      MYP.MATH.B: "Investigating patterns"
+      MYP.MATH.C: "Communicating"
+  - framework: "UK National Curriculum (Mathematics)"
+    version: "2014"
+    alignments:
+      KS1.Number: "Number and place value"
+      KS2.Algebra: "Patterns, equations, and functions"
+      KS3.Geometry: "Properties and relationships"
 
 # Difficulty Rating
 difficulty:

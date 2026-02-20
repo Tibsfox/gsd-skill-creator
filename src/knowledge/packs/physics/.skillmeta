@@ -182,8 +182,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
-  planned: [es, fr, zh, ar]
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -200,19 +227,35 @@ standards_alignment:
   - framework: "Next Generation Science Standards (NGSS)"
     version: 2013
     alignments:
+      "K-PS2-1": "Objects and motion"
+      "1-PS4-1": "Sound and vibrations"
+      "2-PS1-1": "Matter and its properties"
+      "3-PS2-1": "Forces and motion"
+      "4-PS3-1": "Energy in motion"
+      "5-PS2-1": "Forces and interactions"
       PS1: "Matter and Its Interactions"
       PS2: "Motion and Stability: Forces and Interactions"
       PS3: "Energy"
       PS4: "Waves and Their Applications"
-
   - framework: "AP Physics 1 & 2"
     version: 2024
     alignments:
-      Kinematics: true
-      Dynamics: true
-      Energy: true
-      Waves: true
-      Electricity: true
+      "1.A": "Kinematics"
+      "2.A": "Dynamics"
+      "3.A": "Energy and work"
+      "4.A": "Waves and sound"
+      "5.A": "Electricity and magnetism"
+  - framework: "IB Middle Years Programme (Sciences)"
+    version: "2024"
+    alignments:
+      MYP.PHY.A: "Knowing and understanding"
+      MYP.PHY.B: "Investigating"
+      MYP.PHY.C: "Communicating"
+  - framework: "UK National Curriculum (Science - Physics)"
+    version: "2014"
+    alignments:
+      KS3.PHY: "Forces, energy, waves"
+      KS4.PHY: "Matter and energy"
 
 # Difficulty Rating
 difficulty:
