@@ -1,0 +1,304 @@
+---
+# STAT-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: STAT-101
+pack_name: "Accounting & Statistics — Foundational Knowledge Pack"
+
+modules:
+  - id: STAT-101-M1
+    name: "Accounting Principles & Bookkeeping"
+    description: "Tracking transactions, double-entry bookkeeping basics, the accounting equation (Assets = Liabilities + Equity), journal entries, ledgers, and the purpose of accurate record-keeping"
+
+    learning_outcomes:
+      - "Understand why businesses and individuals track financial transactions"
+      - "Apply the accounting equation (Assets = Liabilities + Equity) to classify transactions"
+      - "Record transactions using double-entry bookkeeping (debit and credit)"
+      - "Maintain a simple ledger and chart of accounts"
+      - "Distinguish between cash-basis and accrual-basis accounting"
+
+    topics:
+      - "Purpose of Accounting"
+      - "The Accounting Equation"
+      - "Double-Entry Bookkeeping"
+      - "Debits & Credits"
+      - "Journal Entries & Ledgers"
+      - "Chart of Accounts"
+      - "Cash vs. Accrual Accounting"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 25
+
+    prerequisite_modules: []
+
+    activities:
+      count: 4
+      examples:
+        - "Run a Classroom Store: Track Every Transaction"
+        - "Lemonade Stand Bookkeeping Challenge"
+        - "Transaction Sorting Game"
+        - "Balance the Books Puzzle"
+
+    assessments:
+      - "Can student explain why every transaction has two sides?"
+      - "Does student correctly classify transactions as affecting assets, liabilities, or equity?"
+      - "Can student record journal entries with appropriate debits and credits?"
+      - "Does student maintain a balanced ledger?"
+
+  - id: STAT-101-M2
+    name: "Financial Statements & Analysis"
+    description: "Reading and interpreting income statements, balance sheets, and cash flow statements; financial ratios; connecting the three statements; distinguishing profit from cash flow"
+
+    learning_outcomes:
+      - "Identify the purpose and structure of each core financial statement"
+      - "Read and interpret an income statement to determine profitability"
+      - "Read and interpret a balance sheet to assess financial position"
+      - "Understand cash flow statements and why profitable companies can run out of cash"
+      - "Calculate and interpret basic financial ratios (liquidity, profitability, leverage)"
+
+    topics:
+      - "Income Statement Structure"
+      - "Balance Sheet Structure"
+      - "Cash Flow Statement"
+      - "How the Three Statements Connect"
+      - "Financial Ratios"
+      - "Profit vs. Cash Flow"
+      - "Comparative Financial Analysis"
+
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 15
+      middle: 30
+      high: 30
+
+    prerequisite_modules: [STAT-101-M1]
+
+    activities:
+      count: 4
+      examples:
+        - "Read a Real Company's Annual Report"
+        - "Build a Personal Income Statement for a Month"
+        - "Financial Health Checkup: Compare Two Companies"
+        - "Three-Statement Connection Map"
+
+    assessments:
+      - "Can student identify what each financial statement reveals?"
+      - "Does student correctly interpret profitability from an income statement?"
+      - "Can student explain why a profitable company might have cash flow problems?"
+      - "Does student calculate and interpret financial ratios appropriately?"
+
+  - id: STAT-101-M3
+    name: "Probability & Randomness"
+    description: "Chance, likelihood, experimental vs. theoretical probability, expected value, conditional probability, independence, Bayes' theorem basics, and common probability misconceptions"
+
+    learning_outcomes:
+      - "Describe probability as a measure of likelihood on a scale from 0 to 1"
+      - "Distinguish experimental probability from theoretical probability"
+      - "Apply the law of large numbers to explain why short-run results can be misleading"
+      - "Calculate expected value for simple random processes"
+      - "Understand conditional probability and the concept of independence"
+
+    topics:
+      - "Chance & Likelihood"
+      - "Experimental vs. Theoretical Probability"
+      - "Law of Large Numbers"
+      - "Expected Value"
+      - "Conditional Probability"
+      - "Independence"
+      - "Bayes' Theorem Basics"
+      - "Common Misconceptions (Gambler's Fallacy, Base Rate Neglect)"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 35
+      high: 30
+
+    prerequisite_modules: []
+
+    activities:
+      count: 4
+      examples:
+        - "Coin Flip Experiment: Predicted vs. Actual"
+        - "Card Game Probability: What Are the Odds?"
+        - "The Monty Hall Problem Challenge"
+        - "Weather Forecast Probability Investigation"
+
+    assessments:
+      - "Can student express probability as a number between 0 and 1?"
+      - "Does student distinguish experimental from theoretical probability?"
+      - "Can student explain why more trials give more reliable estimates?"
+      - "Does student avoid common probability misconceptions?"
+
+  - id: STAT-101-M4
+    name: "Statistical Analysis & Inference"
+    description: "Collecting data, descriptive statistics (mean, median, mode, spread), data visualization, sampling and bias, confidence intervals, hypothesis testing, and correlation vs. causation"
+
+    learning_outcomes:
+      - "Calculate and interpret measures of center (mean, median, mode) and spread (range, IQR, standard deviation)"
+      - "Choose appropriate data visualizations for different types of data"
+      - "Design data collection procedures that minimize bias"
+      - "Understand sampling distributions and the concept of confidence intervals"
+      - "Distinguish correlation from causation and identify confounding variables"
+
+    topics:
+      - "Measures of Center"
+      - "Measures of Spread"
+      - "Data Visualization (Histograms, Box Plots, Scatter Plots)"
+      - "Survey Design & Data Collection"
+      - "Sampling & Bias"
+      - "Confidence Intervals"
+      - "Hypothesis Testing"
+      - "Correlation vs. Causation"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 25
+      middle: 40
+      high: 35
+
+    prerequisite_modules: [STAT-101-M3]
+
+    activities:
+      count: 4
+      examples:
+        - "Survey Your Class and Analyze the Data"
+        - "Misleading Graphs: Spot the Tricks"
+        - "Sampling Simulation with Colored Beads"
+        - "Correlation Detective: Real vs. Spurious"
+
+    assessments:
+      - "Can student choose appropriate measures of center for a given dataset?"
+      - "Does student select effective visualizations and justify the choice?"
+      - "Can student identify potential sources of bias in data collection?"
+      - "Does student correctly distinguish correlation from causation?"
+
+  - id: STAT-101-M5
+    name: "Financial Literacy & Personal Finance"
+    description: "Personal budgeting, compound interest, saving and investing basics, debt management, credit scores, taxes, and consumer protection"
+
+    learning_outcomes:
+      - "Create and maintain a personal budget with income, expenses, and savings goals"
+      - "Explain compound interest and calculate its effects over time"
+      - "Compare saving, investing, and debt repayment strategies"
+      - "Understand credit scores, interest rates, and the cost of debt"
+      - "Identify predatory financial products and consumer protection strategies"
+
+    topics:
+      - "Personal Budgeting"
+      - "Compound Interest"
+      - "Saving Strategies"
+      - "Investing Basics (Stocks, Bonds, Index Funds)"
+      - "Debt Management & Credit Scores"
+      - "Taxes & Payroll Deductions"
+      - "Consumer Protection & Financial Scams"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 30
+
+    prerequisite_modules: [STAT-101-M1]
+
+    activities:
+      count: 4
+      examples:
+        - "Compound Interest Calculator: Watch Money Grow"
+        - "Budget Challenge: Live on a Fixed Income for a Week"
+        - "Credit Card Trap Simulation"
+        - "Investment Comparison: Savings Account vs. Index Fund"
+
+    assessments:
+      - "Can student create a realistic budget with appropriate categories?"
+      - "Does student correctly calculate compound interest effects?"
+      - "Can student compare financial products and identify the better option?"
+      - "Does student recognize predatory lending practices?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Quantitative Reasoning"
+    description: "Ability to interpret numbers in context, choose appropriate measures, and reason about what quantities mean rather than just calculating them"
+    assessed_in: [STAT-101-M1, STAT-101-M2, STAT-101-M3, STAT-101-M4, STAT-101-M5]
+
+  - name: "Financial Decision-Making"
+    description: "Ability to use accounting and financial data to make informed personal and business decisions"
+    assessed_in: [STAT-101-M1, STAT-101-M2, STAT-101-M5]
+
+  - name: "Data Literacy"
+    description: "Ability to collect, analyze, visualize, and critically evaluate data and statistical claims"
+    assessed_in: [STAT-101-M3, STAT-101-M4]
+
+  - name: "Critical Evaluation of Quantitative Claims"
+    description: "Habit of questioning numerical claims, checking assumptions, identifying manipulation, and demanding evidence"
+    assessed_in: [STAT-101-M2, STAT-101-M3, STAT-101-M4, STAT-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4 -> M5"
+    rationale: "Build accounting foundations first, then probability and statistics, finishing with personal finance that integrates both strands"
+
+  - name: "Two-Track Pathway"
+    description: "Track A (M1 -> M2 -> M5) and Track B (M3 -> M4) in parallel"
+    rationale: "Accounting and statistics can be learned independently. M5 integrates both tracks at the end."
+
+  - name: "Interest-Led Pathway"
+    description: "Start with any module; M1 and M3 have no prerequisites"
+    rationale: "A learner interested in probability can start with M3 while another interested in money starts with M1. Both converge on M5."
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same introduction structure: What It Teaches, Interactive Elements, Technical Implementation Notes"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Interactive elements follow a consistent template across all modules"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure (Beginning, Developing, Proficient, Advanced) across all modules"
+    cached: true
+
+  - pattern: "Parent Guidance"
+    description: "Parent guidance follows the same question-and-encouragement format throughout"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner correctly classifies accounting transactions without prompting"
+    - "When learner chooses appropriate statistical measure for a given context"
+    - "When learner identifies misleading graph or statistic in media"
+    - "When learner explains compound interest in their own words"
+    - "When learner questions a numerical claim and asks for evidence"
+
+  pattern_detection:
+    - "Effective budget analysis workflows"
+    - "Successful data investigation sequences"
+    - "Financial statement reading strategies"
+    - "Common misconception patterns and effective corrections"
+
+  skill_promotion:
+    - "Promote successful financial analysis patterns to reusable skills"
+    - "Create statistical investigation templates from successful projects"
+    - "Build data visualization selection guides from observed effective choices"
+    - "Develop budget tracking frameworks from successful student budgets"
+
+# This YAML defines the modular structure for the STAT-101 pack and enables
+# skill-creator to orchestrate learning experiences centered on quantitative
+# reasoning and financial literacy.
