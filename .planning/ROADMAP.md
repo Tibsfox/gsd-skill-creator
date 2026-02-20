@@ -204,7 +204,16 @@ Plans:
   3. Clicking a pack opens a detail view showing vision summary, module list, prerequisites, and grade levels
   4. Skill tree visualization renders pack progression paths showing prerequisite chains as a navigable graph
   5. Progress tracking display shows per-pack completion state for the current learner
-**Plans**: TBD
+**Plans**: 5 plans (253-01 through 253-05), 3 waves
+  - Wave 1: 253-01 (types + WindowType extension + progress tracker)
+  - Wave 2: 253-02 (browser panel + search), 253-03 (detail view), 253-04 (skill tree) [parallel]
+  - Wave 3: 253-05 (activity suggestions + barrel exports) [depends on all Wave 2]
+Plans:
+- [ ] 253-01-PLAN.md — Foundation types, WindowType extension, progress tracker
+- [ ] 253-02-PLAN.md — Knowledge browser panel with tier grouping + pack search engine
+- [ ] 253-03-PLAN.md — Pack detail view with tabbed content and prerequisite graph
+- [ ] 253-04-PLAN.md — Skill tree SVG visualization with radial layout
+- [ ] 253-05-PLAN.md — Activity suggestions engine + barrel index exports
 
 ### Phase 254: skill-creator Integration
 **Goal**: The knowledge pack system feeds learner interaction data into skill-creator for pattern detection, activity generation, and pathway adaptation
@@ -233,6 +242,6 @@ Phases 243-244 sequential (infrastructure first). Phases 245-251 parallelizable 
 | 249. Applied Packs Batch 2 | 0/5 | Complete    | 2026-02-20 |
 | 250. Specialized Packs Batch 1 | 5/5 | Complete    | 2026-02-20 |
 | 251. Specialized Packs Batch 2 | 0/5 | Complete    | 2026-02-20 |
-| 252. Pack Metadata & Validation | 0/6 | Not started | - |
-| 253. GSD-OS Dashboard | 0/TBD | Not started | - |
+| 252. Pack Metadata & Validation | 0/6 | Complete    | 2026-02-20 |
+| 253. GSD-OS Dashboard | 1/5 | In Progress|  |
 | 254. skill-creator Integration | 0/TBD | Not started | - |

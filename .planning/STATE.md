@@ -10,10 +10,10 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
-Phase: 252 of 254 (Pack Metadata & Validation)
-Plan: 3 of 6 complete (252-06 Master INDEX and OVERVIEW generation complete)
-Status: In Progress (pack metadata phase executing)
-Last activity: 2026-02-20 — Completed 252-06 (Master INDEX.md and ALL-PACKS-OVERVIEW.md generated from live metadata)
+Phase: 253 of 254 (GSD-OS Dashboard)
+Plan: 1 of 5 complete (253-01 Foundation types and progress tracker)
+Status: In Progress (dashboard phase executing)
+Last activity: 2026-02-20 — Completed 253-01 (WindowType extended, knowledge view types, ProgressTracker)
 
 Progress: [####################] 87%
 
@@ -71,6 +71,8 @@ Progress: [####################] 87%
 | Phase 252 P02 | ~110min | 2 tasks | 45 files |
 | Phase 252 P06 | 12min | 2 tasks | 2 files |
 | Phase 252 P06 | 12min | 2 tasks | 2 files |
+| Phase 252 P05 | 15min | 2 tasks | 36 files |
+| 253 | 01 | 3min | 2 | 6 |
 
 ## Accumulated Context
 
@@ -205,6 +207,9 @@ Progress: [####################] 87%
 - [Phase 251-03]: Prerequisite structure: M1 foundation for all, M2-M4 require M1, M5 requires M1+M2
 - [Phase 251-03]: Recommended prior knowledge: MATH-101, PHYS-101, ENGR-101; enables nothing (terminal specialization)
 - [Phase 251-03]: 90+ resource links curated across 12 categories (foundational texts, learners, parents, specialists, career, safety)
+- [Phase 253-01]: Desktop view types kept separate from src/knowledge/types.ts Zod schemas (follows aminet-panel pattern)
+- [Phase 253-01]: ProgressTracker uses Map serialized as [key, value] array pairs in localStorage
+- [Phase 253-01]: Corrupt or missing localStorage handled gracefully (start fresh, no errors)
 
 ### Key Context
 
@@ -230,9 +235,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed 250-05-PLAN.md (DOMESTIC-101 Home Economics & Life Skills pack)
+Stopped at: Completed 253-01-PLAN.md (Foundation types and progress tracker)
 Resume file: None
 
 ## Next Up
 
-Phase 252 in progress (1 of 6 plans complete: cross-pack dependency graph). Remaining plans: standards alignment metadata (252-02), translation/accessibility metadata (252-03), validation test suite (252-04), index generation (252-05), and documentation finalization (252-06).
+Phase 253 in progress (1 of 5 plans complete). Remaining plans: 253-02 (pack data adapter), 253-03 (browser panel), 253-04 (detail view), 253-05 (skill tree).
