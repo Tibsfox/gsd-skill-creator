@@ -1,0 +1,519 @@
+# GSD Skill Metadata
+pack_id: ENVR-101
+pack_name: "Environmental Science & Sustainability -- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: applied_practical
+learning_domain: environmental_science
+
+# Content Description
+description: |
+  Environmental science as the disciplined study of interconnected Earth systems:
+  atmosphere, hydrosphere, lithosphere, and biosphere. Understanding how these
+  systems work, how they respond to perturbation, what evidence shows about
+  consequences, and how sustainable solutions integrate knowledge from biology,
+  chemistry, geology, and social science. Emphasizes evidence-based reasoning
+  over activism, systems thinking over alarmism, and informed decision-making
+  grounded in data and recognition of legitimate tradeoffs.
+
+short_description: "Ecosystems, Earth systems, human impacts, climate science, and sustainability across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Environmental Science Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - SCI-101
+  - CHEM-101
+  - GEO-101
+
+# What This Pack Enables
+enables:
+  - NATURE-101
+  - ASTRO-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["K", "1", "2"]
+    estimated_hours: [20, 35]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [40, 70]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [80, 130]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [120, 180]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [150, 250]
+
+# Modules
+modules:
+  - id: ENVR-101-M1
+    name: "Ecosystems & Biodiversity"
+    description: "Understanding how living systems are organized, how energy flows through food webs, how biodiversity provides resilience, and how species interact within ecosystems"
+    learning_outcomes:
+      - "Describe the organization of life from cells to ecosystems"
+      - "Map food webs and explain energy flow through trophic levels"
+      - "Explain why biodiversity provides ecosystem resilience"
+      - "Recognize species interactions: predation, competition, symbiosis"
+      - "Predict how ecosystems respond to disturbance and recover through succession"
+    topics:
+      - "Organization of Life: Cells, Organisms, Populations, Communities, Ecosystems"
+      - "Food Chains and Food Webs"
+      - "Energy Flow and Trophic Pyramids"
+      - "Succession and Ecosystem Resilience"
+      - "Biodiversity and Species Interactions"
+      - "Habitats, Niches, and Carrying Capacity"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 30
+      high: 20
+    prerequisite_modules: []
+    activities:
+      count: 3
+      examples:
+        - "Backyard Biodiversity Survey"
+        - "Food Web Card Game"
+        - "Population Dynamics Simulation"
+    assessments:
+      - "Can students map food webs accurately?"
+      - "Can they predict effects of removing a species?"
+      - "Can they explain energy flow through trophic levels?"
+
+  - id: ENVR-101-M2
+    name: "Earth Systems & Biogeochemical Cycles"
+    description: "Understanding the water, carbon, and nitrogen cycles; how they connect atmosphere, hydrosphere, lithosphere, and biosphere; and how perturbations in cycles propagate through Earth systems"
+    learning_outcomes:
+      - "Trace matter through water, carbon, and nitrogen cycles"
+      - "Explain how cycles connect the atmosphere, hydrosphere, lithosphere, and biosphere"
+      - "Predict consequences of altering a cycle"
+      - "Construct and use models to represent invisible processes"
+      - "Recognize feedback loops, timescales, and system interactions"
+    topics:
+      - "The Water Cycle: Evaporation, Precipitation, Groundwater, Ocean Circulation"
+      - "The Carbon Cycle: Photosynthesis, Respiration, Decomposition, Fossil Fuels, Ocean Absorption"
+      - "The Nitrogen Cycle: Atmospheric Nitrogen, Nitrogen Fixation, Nitrification, Denitrification"
+      - "The Rock Cycle and Geochemical Cycles"
+      - "Feedback Loops and Homeostasis"
+      - "Timescales and System Interactions"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 30
+      middle: 35
+      high: 30
+    prerequisite_modules: [ENVR-101-M1]
+    activities:
+      count: 3
+      examples:
+        - "Water Cycle in a Bag"
+        - "Carbon Cycle Diagram Builder"
+        - "Modeling Atmospheric CO2 Increase"
+    assessments:
+      - "Can students trace elements through cycles?"
+      - "Can they identify feedback loops?"
+      - "Can they predict consequences of cycle disruptions?"
+
+  - id: ENVR-101-M3
+    name: "Human Impact & Environmental Health"
+    description: "Understanding sources of air, water, and soil pollution; pathways from pollution to human exposure; waste management; resource depletion; and environmental justice"
+    learning_outcomes:
+      - "Identify major sources of air, water, and soil pollution"
+      - "Trace pathways from pollution source to human exposure"
+      - "Evaluate environmental health risks and mitigation strategies"
+      - "Understand resource depletion and sustainable alternatives"
+      - "Recognize environmental justice issues and inequitable impacts"
+    topics:
+      - "Air Pollution: Sources, Effects, Remediation"
+      - "Water Pollution: Nutrients, Toxins, Microplastics, Treatment"
+      - "Soil Contamination: Heavy Metals, Pesticides, Remediation"
+      - "Waste Generation, Management, and Disposal"
+      - "Resource Extraction, Depletion, and Sustainability"
+      - "Environmental Health Disparities and Justice"
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 25
+      middle: 35
+      high: 40
+    prerequisite_modules: [ENVR-101-M1, ENVR-101-M2]
+    activities:
+      count: 3
+      examples:
+        - "Trash Audit: What Does Your Family Throw Away?"
+        - "Water Quality Testing"
+        - "Pollution Source Tracking Investigation"
+    assessments:
+      - "Can students identify and trace pollution pathways?"
+      - "Can they propose realistic solutions?"
+      - "Do they recognize environmental justice dimensions?"
+
+  - id: ENVR-101-M4
+    name: "Climate Science & Energy"
+    description: "Understanding the greenhouse effect, evidence for climate change, climate models and projections, energy sources and their tradeoffs, and climate policy"
+    learning_outcomes:
+      - "Explain the greenhouse effect and evidence for human-caused climate change"
+      - "Read, interpret, and critique climate data and models"
+      - "Understand energy sources, benefits, costs, and tradeoffs"
+      - "Evaluate energy policies and emerging technologies"
+      - "Recognize scientific uncertainty, consensus, and legitimate disagreement"
+    topics:
+      - "Greenhouse Effect and Planetary Energy Balance"
+      - "Evidence for Climate Change: Temperature Records, Ice Cores, Sea Level, Phenology"
+      - "Attribution Science: Distinguishing Human Signal from Natural Variability"
+      - "Climate Models, Projections, and Uncertainty"
+      - "Fossil Fuels, Renewables, and Nuclear Energy"
+      - "Energy Efficiency and Conservation"
+      - "Climate Policy and International Agreements"
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 25
+      middle: 40
+      high: 50
+    prerequisite_modules: [ENVR-101-M2]
+    activities:
+      count: 3
+      examples:
+        - "Greenhouse Effect in a Jar Demonstration"
+        - "Climate Data Graphing Challenge"
+        - "Energy Audit of Your Home"
+    assessments:
+      - "Can students explain the greenhouse effect accurately?"
+      - "Can they read and interpret climate graphs and data?"
+      - "Can they evaluate energy options and their tradeoffs?"
+
+  - id: ENVR-101-M5
+    name: "Sustainability & Action"
+    description: "Designing sustainable systems, proposing evidence-based solutions, understanding policy mechanisms, recognizing individual and systemic change, and evaluating circular economy approaches"
+    learning_outcomes:
+      - "Design sustainable systems and identify tradeoffs"
+      - "Propose evidence-based solutions to environmental problems"
+      - "Understand policy mechanisms and their effectiveness"
+      - "Recognize the relationship between individual and systemic change"
+      - "Evaluate approaches to circular economy, conservation, and renewable energy"
+    topics:
+      - "Sustainable Agriculture and Food Systems"
+      - "Renewable Energy and Energy Transition"
+      - "Circular Economy and Waste Reduction"
+      - "Conservation Strategies and Protected Areas"
+      - "Sustainable Cities and Transportation"
+      - "Climate Adaptation and Resilience"
+      - "Environmental Policy and International Cooperation"
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 40
+    prerequisite_modules: [ENVR-101-M2, ENVR-101-M3, ENVR-101-M4]
+    activities:
+      count: 3
+      examples:
+        - "Design a Sustainable Community"
+        - "Energy Audit of Your Home"
+        - "Policy Analysis and Proposal Project"
+    assessments:
+      - "Can students design sustainable systems?"
+      - "Do they recognize and balance tradeoffs?"
+      - "Can they propose feasible policies?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-ECO-001
+    description: "Describe the organization of life from cells to ecosystems and explain food webs"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-ECO-002
+    description: "Explain biodiversity, ecosystem resilience, and species interactions"
+    levels: ["4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-CYC-001
+    description: "Trace water, carbon, and nitrogen cycles and predict consequences of perturbations"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-IMP-001
+    description: "Identify pollution sources, trace pathways to exposure, and evaluate health impacts"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-IMP-002
+    description: "Understand resource depletion, waste management, and environmental justice"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-CLM-001
+    description: "Explain the greenhouse effect and evidence for human-caused climate change"
+    levels: ["7", "8", "9", "10", "11", "12"]
+
+  - code: LO-CLM-002
+    description: "Read, interpret, and evaluate climate data, models, and energy options"
+    levels: ["8", "9", "10", "11", "12"]
+
+  - code: LO-SUS-001
+    description: "Design sustainable systems, recognize tradeoffs, and propose evidence-based solutions"
+    levels: ["7", "8", "9", "10", "11", "12"]
+
+  - code: LO-SYS-001
+    description: "Apply systems thinking to understand interconnections across all environmental topics"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Observation of Systems Thinking"
+    frequency: ongoing
+
+  - type: formative
+    name: "Data Interpretation Check"
+    frequency: weekly
+
+  - type: summative
+    name: "Environmental Investigation Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Systems Modeling or Policy Project"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: nasa_earth_observatory
+    url: https://earthobservatory.nasa.gov
+    description: "Real satellite imagery and data on Earth systems, climate, and environmental changes"
+
+  - name: noaa_climate
+    url: https://www.noaa.gov/climate
+    description: "Official climate data, projections, and educational resources"
+
+  - name: inaturalist
+    integrated: false
+    description: "Crowdsourced biodiversity observation and species identification"
+
+  - name: our_world_in_data
+    url: https://ourworldindata.org/environment
+    description: "Interactive charts and data on environmental indicators globally"
+
+interactive_elements:
+  - type: investigation
+    name: "Field Ecology Study"
+
+  - type: simulator
+    name: "Ecosystem Model"
+
+  - type: visualization
+    name: "Earth Systems Diagram"
+
+  - type: data_tool
+    name: "Climate Data Grapher"
+
+  - type: game
+    name: "Sustainability Challenge"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+
+  planned: [fr, zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Field activities include observation guides and verbal descriptions. Climate data uses data tables alongside graphs. Consider adding video demonstrations of environmental processes with captions."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Next Generation Science Standards (NGSS)"
+    version: 2013
+    alignments:
+      LS1: "From Molecules to Organisms: Structures and Processes"
+      LS2: "Ecosystems: Interactions, Energy, and Dynamics"
+      ESS2: "Earth's Systems"
+      ESS3: "Earth and Human Activity"
+
+  - framework: "AAAS Benchmarks for Science Literacy"
+    version: 1993
+    alignments:
+      "Life Processes": true
+      "Ecosystems": true
+      "Earth Systems": true
+      "Human Interactions with Environment": true
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Environmental systems involve invisible processes (cycles, climate) requiring abstract thinking. However, field observation and hands-on activities make content accessible. Prerequisite knowledge helpful but not required."
+
+# Content Flags
+content_flags:
+  - flag: sensitive_topics
+    description: "Climate change and environmental justice can be emotionally charged topics with different family values."
+    mitigation: "Distinguish science (observable phenomena) from policy (values-based decisions). Acknowledge different perspectives on solutions while maintaining accuracy on evidence."
+
+  - flag: abstract_concepts
+    description: "Food webs, cycles, and feedback loops involve systems students cannot directly observe."
+    mitigation: "Use physical models, diagrams, and simulations before abstract representations. Field observation of actual ecosystems builds intuition."
+
+  - flag: data_interpretation
+    description: "Climate data includes uncertainty ranges and variability that can be misinterpreted."
+    mitigation: "Teach how to read error bars, understand trends vs. noise, and interpret statistical significance. Model critical thinking about data sources."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/envr-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "ENVR-101"
+  looking_for:
+    - "Field investigation guides for different biomes and ecosystems"
+    - "Local environmental case studies from different regions"
+    - "Community science projects linking student learning to real monitoring"
+    - "Translations to Spanish, Mandarin, Arabic, French"
+    - "Curriculum connecting climate science to student lives"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Environmental Science Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - environment
+  - ecosystems
+  - climate-science
+  - sustainability
+  - earth-systems
+  - cycles
+  - biodiversity
+  - pollution
+  - renewable-energy
+  - environmental-justice
+  - stem
+  - foundational
+  - systems-thinking
+
+# External Resources
+resources:
+  - type: educational_organization
+    title: "EPA Environmental Education Resources"
+    author: "U.S. Environmental Protection Agency"
+    url: "https://www.epa.gov/students"
+
+  - type: data_source
+    title: "NASA Earth Observatory"
+    author: "NASA"
+    url: "https://earthobservatory.nasa.gov"
+
+  - type: platform
+    title: "Our World in Data - Environment"
+    author: "Our World in Data"
+    url: "https://ourworldindata.org/environment"
+
+  - type: project
+    title: "iNaturalist: Biodiversity Observation"
+    author: "California Academy of Sciences"
+    url: "https://www.inaturalist.org"
+
+  - type: data_source
+    title: "NOAA Climate Data"
+    author: "National Oceanic and Atmospheric Administration"
+    url: "https://www.noaa.gov/climate"
+
+# Related Packs
+related_packs:
+  - id: SCI-101
+    relationship: "Scientific method and inquiry framework applied to environmental investigation"
+
+  - id: CHEM-101
+    relationship: "Chemistry of atmospheres, water, and reactions underlying environmental processes"
+
+  - id: GEO-101
+    relationship: "Physical geography, Earth systems, and spatial understanding of biomes and climates"
+
+  - id: NATURE-101
+    relationship: "Deepens ecological literacy and field naturalist skills across biomes"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "leaf"
+    color: "#4CAF50"
+    position: "Applied"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "ENVR-101-ecosystems-biodiversity"
+    - "ENVR-101-earth-systems-cycles"
+    - "ENVR-101-human-impact-health"
+    - "ENVR-101-climate-science-energy"
+    - "ENVR-101-sustainability-action"
+
+# File References
+files:
+  vision_document: "ENVR-101-vision.md"
+  modules_definition: "ENVR-101-modules.yaml"
+  activities: "ENVR-101-activities.json"
+  assessment: "ENVR-101-assessment.md"
+  resources: "ENVR-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five modules covering ecosystems, Earth systems, human impacts, climate, and sustainability"
+      - "Developed comprehensive vision doc emphasizing evidence-based environmental reasoning"
+      - "Included 15 concrete learning activities spanning K-College with accessible materials"
+      - "Aligned to NGSS Earth and Life Science standards"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"
