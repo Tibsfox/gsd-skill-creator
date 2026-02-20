@@ -332,11 +332,34 @@ translations:
       complete: true
 
     - language_code: es
-      name: "Espanol"
+      name: "Español"
       complete: false
       progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
 
-  planned: [fr, zh, ar]
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: [zh, ar, pt, ja]
 
 # Accessibility
 accessibility:
@@ -346,12 +369,43 @@ accessibility:
   keyboard_navigable: true
   alt_text_provided: true
   captions_available: false
-  notes: "All visual content has text descriptions. Nutrition activities include adaptations for food allergies and restrictions. Parent guidance supports food-insecure families."
+  notes: "Food preparation safety for various abilities. All visual content has text descriptions. Nutrition activities include adaptations for food allergies and restrictions."
+  pack_specific_concerns:
+    - "Food preparation activities need adaptive equipment suggestions"
+    - "Nutrition label content must be readable at high contrast"
+    - "Meal planning tool needs keyboard navigation"
+    - "Discussion of food restrictions must not stigmatize"
 
 # Standards Alignment
 standards_alignment:
+  - framework: "NHES (National Health Education Standards)"
+    version: "2007"
+    standard_codes:
+      - "NHES.1"
+      - "NHES.5"
+      - "NHES.6"
+    alignments:
+      "Standard 1": "Comprehend concepts related to health promotion and disease prevention"
+      "Standard 5": "Use decision-making skills to enhance health"
+      "Standard 6": "Use goal-setting and decision-making skills"
+
+  - framework: "SHAPE America National Standards"
+    version: "2014"
+    standard_codes:
+      - "SHAPE.5"
+      - "SHAPE.6"
+    mappings:
+      "Health Literacy": "Nutrition and food systems"
+      "Health Behavior": "Making evidence-based food choices"
+
   - framework: "Next Generation Science Standards (NGSS)"
     version: 2013
+    standard_codes:
+      - "SEP-1"
+      - "SEP-3"
+      - "SEP-4"
+      - "SEP-6"
+      - "SEP-7"
     alignments:
       SEP-1: "Asking Questions and Defining Problems"
       SEP-3: "Planning and Carrying Out Investigations"
@@ -359,11 +413,19 @@ standards_alignment:
       SEP-6: "Constructing Explanations and Designing Solutions"
       SEP-7: "Engaging in Argument from Evidence"
 
-  - framework: "Health Education Standards"
-    version: 2007
-    alignments:
-      "Standard 1": "Students will comprehend concepts related to health promotion and disease prevention"
-      "Standard 5": "Students will demonstrate the ability to use decision-making skills to enhance health"
+  - framework: "Common Core Mathematics (Statistics)"
+    version: "2010"
+    standard_codes:
+      - "CCSS.MATH.CONTENT.6.SP"
+    mappings:
+      "Statistics": "Data interpretation in food and nutrition contexts"
+
+  - framework: "IB MYP Individuals & Societies (Food Systems)"
+    version: "2014"
+    standard_codes:
+      - "IB.IAS.1"
+    mappings:
+      "Grades 6-10": "Food systems, sustainability, equity"
 
 # Difficulty Rating
 difficulty:

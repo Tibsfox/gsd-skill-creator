@@ -298,11 +298,34 @@ translations:
       complete: true
 
     - language_code: es
-      name: "Espanol"
+      name: "Español"
       complete: false
       progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
 
-  planned: [fr, zh, ar]
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: [zh, ar, pt, ja]
 
 # Accessibility
 accessibility:
@@ -312,27 +335,62 @@ accessibility:
   keyboard_navigable: true
   alt_text_provided: true
   captions_available: false
-  notes: "All visual content (graphs, tables) has text descriptions. Market simulations include text-based alternatives. Calculations emphasize conceptual understanding over speed."
+  notes: "Financial chart accessibility, calculator tool compatibility. All visual content (graphs, tables) has text descriptions. Market simulations include text-based alternatives."
+  pack_specific_concerns:
+    - "Financial charts and graphs need accessible data tables"
+    - "Calculator tools must be keyboard accessible"
+    - "Interactive simulations need text-based alternatives"
+    - "Budget planning forms need ARIA labels"
 
 # Standards Alignment
 standards_alignment:
+  - framework: "CEE (Council for Economic Education) Voluntary National Content Standards"
+    version: "2010"
+    standard_codes:
+      - "CEE.1"
+      - "CEE.2"
+      - "CEE.3"
+      - "CEE.4"
+      - "CEE.5"
+    mappings:
+      "Scarcity": "Basic economic problem"
+      "Markets": "Price mechanisms, competition"
+      "Economic Growth": "Productivity and innovation"
+      "Role of Government": "Policy and regulation"
+
   - framework: "Common Core State Standards for Mathematics"
     version: 2010
+    standard_codes:
+      - "CCSS.MATH.7.RP"
+      - "CCSS.MATH.8.EE"
     alignments:
       "7.RP": "Ratios and Proportional Relationships (prices, interest calculations)"
       "8.EE": "Expressions and Equations (algebra in financial planning)"
 
-  - framework: "Next Generation Science Standards"
-    version: 2013
-    alignments:
-      "Systems and System Models": true
-      "Stability and Change": true
-
   - framework: "C3 Framework for Social Studies"
     version: 2013
+    standard_codes:
+      - "C3.ECO"
+      - "C3.GOV"
     alignments:
       "Economics": "Earning, Producing, Consuming, and Distributing Goods and Services"
       "Civic and Political Institutions": true
+
+  - framework: "IB MYP Individuals & Societies"
+    version: "2014"
+    standard_codes:
+      - "IB.IAS.EC"
+    mappings:
+      "Economics": "Markets, resources, decision-making"
+
+  - framework: "Next Generation Science Standards"
+    version: 2013
+    standard_codes:
+      - "NGSS.SYS"
+      - "NGSS.CHANGE"
+    alignments:
+      "Systems and System Models": true
+      "Stability and Change": true
 
 # Difficulty Rating
 difficulty:
