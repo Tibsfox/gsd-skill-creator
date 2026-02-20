@@ -8,7 +8,7 @@
 
 - [x] **Phase 243: Pack Runtime Infrastructure** - Zod schemas, parsers, registry, loaders, dependency resolver, and barrel exports for the knowledge pack module (completed 2026-02-20)
 - [x] **Phase 244: Chipset & Agent Definitions** - Chipset YAML, SKILL.md files, pipeline team, agent prefix convention, and map-reduce coordination pattern (completed 2026-02-20)
-- [ ] **Phase 245: Core Academic Packs Batch 1** - MATH-101 (import/adapt), SCI-101, TECH-101, ENGR-101, PHYS-101 full suites
+- [x] **Phase 245: Core Academic Packs Batch 1** - MATH-101 (import/adapt), SCI-101, TECH-101, ENGR-101, PHYS-101 full suites (completed 2026-02-20)
 - [ ] **Phase 246: Core Academic Packs Batch 2** - CHEM-101, READ-101, CRIT-101, PROB-101, COMM-101 full suites
 - [ ] **Phase 247: Core Academic Packs Batch 3** - HIST-101, GEO-101, MFAB-101, BUS-101, STAT-101 full suites
 - [ ] **Phase 248: Applied Packs Batch 1** - CODE-101 (import/adapt), DATA-101, LANG-101, PSYCH-101, ENVR-101 full suites
@@ -60,11 +60,11 @@
   4. Each pack's .skillmeta declares correct dependencies, learning outcomes, grade levels, and learning pathways
 **Plans**: 5 plans (245-01 through 245-05), 1 wave
 Plans:
-- [ ] 245-01-PLAN.md — MATH-101 import/adapt from delivery + create activities, assessment, resources
-- [ ] 245-02-PLAN.md — SCI-101 full suite from scratch (Science Method & Nature)
-- [ ] 245-03-PLAN.md — TECH-101 full suite from scratch (Technology & Tools)
-- [ ] 245-04-PLAN.md — ENGR-101 full suite from scratch (Engineering & Design)
-- [ ] 245-05-PLAN.md — PHYS-101 full suite from scratch (Physics)
+- [x] 245-01-PLAN.md — MATH-101 import/adapt from delivery + create activities, assessment, resources
+- [x] 245-02-PLAN.md — SCI-101 full suite from scratch (Science Method & Nature)
+- [x] 245-03-PLAN.md — TECH-101 full suite from scratch (Technology & Tools)
+- [x] 245-04-PLAN.md — ENGR-101 full suite from scratch (Engineering & Design)
+- [x] 245-05-PLAN.md — PHYS-101 full suite from scratch (Physics)
 
 ### Phase 246: Core Academic Packs Batch 2
 **Goal**: The next 5 core academic packs deliver complete humanities and reasoning content suites
@@ -86,7 +86,13 @@ Plans:
   2. All 5 packs pass the runtime content validator with zero schema errors
   3. All 15 Core Academic packs are registered in the pack registry and queryable by tier
   4. Grade levels span PreK through College+ appropriately per subject
-**Plans**: TBD
+**Plans**: 5 plans (247-01 through 247-05), 1 wave
+Plans:
+- [ ] 247-01-PLAN.md — HIST-101 full suite from scratch (History & Civilization)
+- [ ] 247-02-PLAN.md — GEO-101 full suite from scratch (Geography & Space Science)
+- [ ] 247-03-PLAN.md — MFAB-101 full suite from scratch (Materials & Manufacturing)
+- [ ] 247-04-PLAN.md — BUS-101 full suite from scratch (Business & Law)
+- [ ] 247-05-PLAN.md — STAT-101 full suite from scratch (Accounting & Statistics)
 
 ### Phase 248: Applied Packs Batch 1
 **Goal**: The first 5 applied packs deliver practical skills content including the adapted CODE-101 exemplar
@@ -108,7 +114,13 @@ Plans:
   2. All 5 packs pass the runtime content validator with zero schema errors
   3. All 10 Applied & Practical packs are registered in the pack registry and queryable by tier
   4. Learning pathway diversity covers all 5 pathways across the batch
-**Plans**: TBD
+**Plans**: 5 plans (249-01 through 249-05), 1 wave
+Plans:
+- [ ] 249-01-PLAN.md — NUTR-101 full suite from scratch (Nutrition & Health Sciences)
+- [ ] 249-02-PLAN.md — ECON-101 full suite from scratch (Economics & Personal Finance)
+- [ ] 249-03-PLAN.md — WRIT-101 full suite from scratch (Literature & Creative Writing)
+- [ ] 249-04-PLAN.md — LOG-101 full suite from scratch (Logic & Formal Systems)
+- [ ] 249-05-PLAN.md — DIGLIT-101 full suite from scratch (Digital Literacy & Information Science)
 
 ### Phase 250: Specialized Packs Batch 1
 **Goal**: The first 5 specialized packs deliver deepening content for philosophy, theology, physical education, nature, and domestic skills
@@ -130,7 +142,13 @@ Plans:
   2. All 5 packs pass the runtime content validator with zero schema errors
   3. All 35 packs across all 3 tiers are registered, loaded, and queryable in the pack registry
   4. LEARN-101 (Learning to Learn) serves as the meta-pack with cross-references to study strategies applicable to all other packs
-**Plans**: TBD
+**Plans**: 5 plans (251-01 through 251-05), 1 wave
+Plans:
+- [ ] 251-01-PLAN.md — ART-101 full suite from scratch (Visual Arts)
+- [ ] 251-02-PLAN.md — MUSIC-101 full suite from scratch (Music & Sound)
+- [ ] 251-03-PLAN.md — TRADE-101 full suite from scratch (Trades & Applied Skills)
+- [ ] 251-04-PLAN.md — ASTRO-101 full suite from scratch (Astronomy & Cosmology)
+- [ ] 251-05-PLAN.md — LEARN-101 full suite from scratch (Learning to Learn -- meta-pack)
 
 ### Phase 252: Pack Metadata & Validation
 **Goal**: The complete 35-pack system has cross-pack dependency graphs, standards alignment, accessibility metadata, and automated quality validation
@@ -176,13 +194,13 @@ Phases 243-244 sequential (infrastructure first). Phases 245-251 parallelizable 
 |-------|----------------|--------|-----------|
 | 243. Pack Runtime Infrastructure | 5/5 | Complete    | 2026-02-20 |
 | 244. Chipset & Agent Definitions | 3/3 | Complete    | 2026-02-20 |
-| 245. Core Academic Packs Batch 1 | 2/5 | In Progress|  |
+| 245. Core Academic Packs Batch 1 | 5/5 | Complete   | 2026-02-20 |
 | 246. Core Academic Packs Batch 2 | 0/TBD | Not started | - |
-| 247. Core Academic Packs Batch 3 | 0/TBD | Not started | - |
+| 247. Core Academic Packs Batch 3 | 0/5 | Planned | - |
 | 248. Applied Packs Batch 1 | 0/TBD | Not started | - |
-| 249. Applied Packs Batch 2 | 0/TBD | Not started | - |
+| 249. Applied Packs Batch 2 | 0/5 | Planned | - |
 | 250. Specialized Packs Batch 1 | 0/TBD | Not started | - |
-| 251. Specialized Packs Batch 2 | 0/TBD | Not started | - |
+| 251. Specialized Packs Batch 2 | 0/5 | Planned | - |
 | 252. Pack Metadata & Validation | 0/TBD | Not started | - |
 | 253. GSD-OS Dashboard | 0/TBD | Not started | - |
 | 254. skill-creator Integration | 0/TBD | Not started | - |

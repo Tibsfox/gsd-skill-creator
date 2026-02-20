@@ -11,11 +11,11 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
 Phase: 245 of 254 (Core Academic Packs Batch 1)
-Plan: 1 of 5 complete
+Plan: 3 of 5 complete
 Status: Executing Phase 245
-Last activity: 2026-02-20 — Completed 245-01 (MATH-101 knowledge pack)
+Last activity: 2026-02-20 — Completed 245-03 (TECH-101 technology knowledge pack)
 
-Progress: [####................] 20%
+Progress: [############........] 60%
 
 ## Performance Metrics
 
@@ -31,6 +31,9 @@ Progress: [####................] 20%
 | 244 | 03 | 2min | 2 | 2 |
 | 245 | 01 | 7min | 2 | 7 |
 | 245 | 05 | 9min | 2 | 7 |
+| 245 | 04 | 10min | 2 | 7 |
+| 245 | 02 | 11min | 2 | 7 |
+| 245 | 03 | 11min | 2 | 7 |
 
 ## Accumulated Context
 
@@ -66,6 +69,13 @@ Progress: [####................] 20%
 - Assessment rubric uses H2 headings: Beginning, Developing, Proficient, Advanced
 - PHYS-101 uses 5 modules (not 4) to include Modern Physics & Cosmology capstone
 - Phenomena-first pedagogy: experience before model before math at every level
+- ENGR-101 modules YAML must be single-document (module-loader uses yaml.load not loadAll)
+- Engineering activities emphasize everyday materials over specialized equipment
+- SCI-101 modules YAML uses single-document format (no --- separators) for yaml.load compatibility
+- 5 modules for SCI-101 including History & Nature of Science as explicit module
+- TECH-101 modules YAML uses single-document format (consistent with ENGR-101 and SCI-101 pattern)
+- 5 modules for TECH-101 including Technology & Society as M5
+- 10 activities for TECH-101 (2 per module) matching PackActivitySchema
 
 ### Key Context
 
@@ -91,10 +101,10 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed 245-01-PLAN.md (MATH-101 knowledge pack)
+Stopped at: Completed 245-03-PLAN.md (TECH-101 technology knowledge pack)
 Resume file: None
 
 ## Next Up
 
-Phase 245 plan 01 complete. Continue with 245-02 through 245-05 (remaining Core Academic packs).
-Next: `/gsd:execute-phase 245` (plans 02-05 parallelizable)
+Phase 245 plans 01-03 complete (+ 04-05 parallel). Continue with remaining Phase 245 plans if any incomplete.
+Next: Check 245-04 and 245-05 completion, then advance to Phase 246.
