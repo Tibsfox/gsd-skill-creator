@@ -337,11 +337,34 @@ translations:
       complete: true
 
     - language_code: es
-      name: "Espanol"
+      name: "Español"
       complete: false
       progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
 
-  planned: [fr, zh, ar]
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: [zh, ar, pt, ja]
 
 # Accessibility
 accessibility:
@@ -351,12 +374,24 @@ accessibility:
   keyboard_navigable: true
   alt_text_provided: true
   captions_available: false
-  notes: "All activities have digital and unplugged alternatives. Visual demonstrations include text descriptions. Consider adding video with captions."
+  notes: "Ironic meta-challenge -- a digital literacy pack must model best accessibility practices. All activities have digital and unplugged alternatives. Visual demonstrations include text descriptions."
+  pack_specific_concerns:
+    - "All web-based activities must follow WCAG 2.1 AA standards"
+    - "Interactive tools (password tester, bias detector, etc.) need accessible interfaces"
+    - "Network simulations need text-based alternatives"
+    - "Misinformation examples need context for screen reader users"
 
 # Standards Alignment
 standards_alignment:
   - framework: "ISTE Standards for Students"
     version: 2016
+    standard_codes:
+      - "ISTE.1"
+      - "ISTE.2"
+      - "ISTE.3"
+      - "ISTE.4"
+      - "ISTE.5"
+      - "ISTE.6"
     alignments:
       "Empowered Learner": true
       "Digital Citizen": true
@@ -367,6 +402,13 @@ standards_alignment:
 
   - framework: "Common Sense Media Digital Citizenship"
     version: 2021
+    standard_codes:
+      - "CSM.1"
+      - "CSM.2"
+      - "CSM.3"
+      - "CSM.4"
+      - "CSM.5"
+      - "CSM.6"
     alignments:
       "Balance Online Time": true
       "Privacy & Security": true
@@ -374,6 +416,25 @@ standards_alignment:
       "Critical Thinking": true
       "Cyberbullying": true
       "Digital Communication": true
+
+  - framework: "AASL Standards Framework"
+    version: "2018"
+    standard_codes:
+      - "AASL.I"
+      - "AASL.II"
+      - "AASL.III"
+    mappings:
+      "Inquiry": "Research and information evaluation"
+      "Collaboration": "Digital collaboration practices"
+      "Curation": "Managing and sharing information"
+
+  - framework: "UK Computing Curriculum"
+    version: "2014"
+    standard_codes:
+      - "UK.DL.1"
+      - "UK.DL.2"
+    mappings:
+      "Digital Literacy": "Technology use, safety, online responsibilities"
 
 # Difficulty Rating
 difficulty:
