@@ -2,7 +2,7 @@
 pack_id: CRIT-101
 pack_name: "Critical Thinking -- Foundational Knowledge Pack"
 version: 1.0.0
-release_date: 2026-02-20
+release_date: "2026-02-20"
 
 # Status & Classification
 status: alpha
@@ -389,8 +389,8 @@ community:
 # Maintenance Schedule
 maintenance:
   review_frequency: quarterly
-  last_reviewed: 2026-02-20
-  next_review: 2026-05-20
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
   maintainer: "Critical Thinking Education Working Group"
 
 # Metrics & Usage
@@ -476,7 +476,7 @@ files:
 # Changelog
 changelog:
   - version: 1.0.0
-    date: 2026-02-20
+    date: "2026-02-20"
     changes:
       - "Initial release: Five core modules covering claims, arguments, fallacies, applied thinking, and metacognition"
       - "Contributed 30 starter activities across all modules"
@@ -489,4 +489,4 @@ qa:
   culturally_responsive: true
   bias_audit_completed: false
   accessibility_audit_completed: false
-  next_audit_scheduled: 2026-04-20
+  next_audit_scheduled: "2026-04-20"
