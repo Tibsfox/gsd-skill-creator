@@ -1,0 +1,192 @@
+[
+  {
+    "id": "TECH-101-A1",
+    "name": "Simple Machine Scavenger Hunt",
+    "module_id": "TECH-101-M1",
+    "grade_range": ["K", "1", "2", "3", "4", "5"],
+    "duration_minutes": 30,
+    "description": "Explore your home, school, or neighborhood to find examples of each of the six simple machines (lever, wheel and axle, pulley, inclined plane, wedge, screw). Document each discovery with a drawing or photo and explain what human capability it extends.",
+    "materials": ["notebook or paper", "pencil or crayons", "camera (optional)", "clipboard (optional)"],
+    "learning_objectives": [
+      "Identify the six simple machines in everyday objects",
+      "Explain what human capability each tool extends",
+      "Classify tools by simple machine type"
+    ],
+    "variations": [
+      "For younger learners: focus on just levers and inclined planes",
+      "For older learners: calculate mechanical advantage for each discovery",
+      "Team version: compete to find the most examples in a time limit"
+    ]
+  },
+  {
+    "id": "TECH-101-A2",
+    "name": "Build a Lever to Lift a Book",
+    "module_id": "TECH-101-M1",
+    "grade_range": ["1", "2", "3", "4", "5", "6"],
+    "duration_minutes": 25,
+    "description": "Using a ruler and a pencil (or similar fulcrum), build a lever and experiment with lifting a book. Move the fulcrum to different positions and observe how the force required changes. Record observations about the relationship between fulcrum position, effort, and load.",
+    "materials": ["ruler or flat stick", "pencil or cylindrical object (fulcrum)", "book (load)", "small objects for weights", "paper for recording observations"],
+    "learning_objectives": [
+      "Demonstrate how a lever works",
+      "Explain the relationship between fulcrum position and mechanical advantage",
+      "Predict how changing the fulcrum position will affect the force needed"
+    ],
+    "variations": [
+      "For younger learners: use a seesaw or balance beam for larger-scale exploration",
+      "For older learners: measure and calculate mechanical advantage ratios",
+      "Extension: design a lever system to lift a specific weight with minimal effort"
+    ]
+  },
+  {
+    "id": "TECH-101-A3",
+    "name": "Map a System (Breakfast to Table)",
+    "module_id": "TECH-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 45,
+    "description": "Choose a breakfast item (cereal, toast, orange juice) and trace its journey from origin to your table. Map every step: growing, harvesting, processing, packaging, transporting, storing, purchasing, preparing. Identify inputs, outputs, and processes at each stage. Mark at least one feedback loop and one potential unintended consequence.",
+    "materials": ["large paper or poster board", "colored markers", "sticky notes", "reference materials (optional: internet access for supply chain research)"],
+    "learning_objectives": [
+      "Map a complete real-world system with inputs, outputs, and processes",
+      "Identify feedback loops in supply chain systems",
+      "Recognize that simple products involve complex technological systems"
+    ],
+    "variations": [
+      "For younger learners: trace just three steps (farm, store, kitchen)",
+      "For older learners: add cost, energy, and environmental impact at each stage",
+      "Group version: each student traces a different item, then compare systems"
+    ]
+  },
+  {
+    "id": "TECH-101-A4",
+    "name": "Feedback Loop Identification Game",
+    "module_id": "TECH-101-M2",
+    "grade_range": ["5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 30,
+    "description": "Present scenario cards describing real-world situations (thermostat heating a room, population growth, social media engagement, predator-prey cycles, bank interest). For each scenario, identify whether the feedback loop is positive (amplifying) or negative (stabilizing), draw the loop diagram, and predict what happens if the feedback is removed.",
+    "materials": ["scenario cards (provided or hand-written)", "paper", "colored pencils (two colors for positive/negative loops)", "timer (optional)"],
+    "learning_objectives": [
+      "Distinguish between positive and negative feedback loops",
+      "Diagram feedback loops with correct arrows and labels",
+      "Predict system behavior when feedback is present or absent"
+    ],
+    "variations": [
+      "For younger learners: use only physical/mechanical examples (thermostat, cruise control)",
+      "For older learners: analyze compound feedback systems with multiple interacting loops",
+      "Competition version: teams race to correctly classify and diagram scenarios"
+    ]
+  },
+  {
+    "id": "TECH-101-A5",
+    "name": "Design a Better Backpack Strap",
+    "module_id": "TECH-101-M3",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 60,
+    "description": "Walk through the full engineering design cycle to improve a backpack strap. Research the problem (why do straps hurt shoulders?), brainstorm at least five solutions, sketch three prototypes, build one using available materials, test it with a loaded backpack, evaluate results, and document one improvement for a second iteration.",
+    "materials": ["paper and pencils for sketching", "fabric scraps or foam", "tape", "scissors", "a backpack with books for testing", "ruler or measuring tape"],
+    "learning_objectives": [
+      "Complete a full design cycle from problem identification through iteration",
+      "Generate multiple solutions before committing to one",
+      "Test a prototype and use data to guide improvements"
+    ],
+    "variations": [
+      "For younger learners: redesign a simpler object (pencil grip, bookmark)",
+      "For older learners: add constraints (must cost less than $2 in materials, must be washable)",
+      "Extension: present the design to others and incorporate their feedback"
+    ]
+  },
+  {
+    "id": "TECH-101-A6",
+    "name": "Paper Bridge Engineering Challenge",
+    "module_id": "TECH-101-M3",
+    "grade_range": ["2", "3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 45,
+    "description": "Using only paper and tape, design and build a bridge that spans a 30 cm gap between two stacks of books and holds the most weight possible. Start by brainstorming designs (flat, folded, rolled, arched). Build, test by stacking coins or small weights, record the maximum load, then iterate to improve the design.",
+    "materials": ["5-10 sheets of paper", "tape (limited supply: 50 cm)", "two stacks of books (supports)", "ruler", "coins or small weights for testing", "scale (optional)"],
+    "learning_objectives": [
+      "Apply the design process to a constrained engineering problem",
+      "Understand how shape and structure affect strength",
+      "Iterate on a design based on test results"
+    ],
+    "variations": [
+      "For younger learners: no span requirement, just build the strongest bridge",
+      "For older learners: add constraints (minimum 5 cm clearance underneath, no tape allowed)",
+      "Competition: compare designs across teams and discuss why some performed better"
+    ]
+  },
+  {
+    "id": "TECH-101-A7",
+    "name": "How Does the Internet Work? Trace a Message",
+    "module_id": "TECH-101-M4",
+    "grade_range": ["5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 40,
+    "description": "Follow a text message from the moment you type it to the moment it appears on a friend's screen. Diagram each step: keyboard input, character encoding (ASCII/Unicode), packetization, local network routing, internet routing through multiple hops, destination network delivery, reassembly, and display. Label what happens at each step and what technology makes it possible.",
+    "materials": ["large paper or whiteboard", "colored markers", "printed reference diagram (optional)", "internet access for research (optional)"],
+    "learning_objectives": [
+      "Trace information flow through a digital network from sender to receiver",
+      "Explain the concepts of encoding, packetization, and routing",
+      "Understand why messages can travel across the world in milliseconds"
+    ],
+    "variations": [
+      "For younger learners: simplify to 5 steps (type, send, travel, receive, display)",
+      "For older learners: include error handling, packet loss, retransmission",
+      "Physical version: students act as routers, passing folded-paper packets through the classroom"
+    ]
+  },
+  {
+    "id": "TECH-101-A8",
+    "name": "Binary Number Decoder",
+    "module_id": "TECH-101-M4",
+    "grade_range": ["4", "5", "6", "7", "8"],
+    "duration_minutes": 30,
+    "description": "Learn how computers represent numbers using only 0s and 1s. Start with cards showing powers of 2 (1, 2, 4, 8, 16). Practice converting numbers between decimal and binary. Then decode a secret message by converting binary numbers to ASCII characters. Discover that everything in a computer — text, images, sounds — is represented as numbers.",
+    "materials": ["binary place-value cards (five cards: 16, 8, 4, 2, 1)", "paper and pencil", "ASCII reference chart", "encoded message worksheet"],
+    "learning_objectives": [
+      "Convert numbers between decimal and binary representations",
+      "Understand that computers store all information as binary numbers",
+      "Decode a binary-encoded text message using an ASCII chart"
+    ],
+    "variations": [
+      "For younger learners: focus on binary counting (0-15) with physical cards only",
+      "For older learners: extend to hexadecimal and explore image encoding (pixels as RGB values)",
+      "Team challenge: encode and decode secret messages between teams"
+    ]
+  },
+  {
+    "id": "TECH-101-A9",
+    "name": "Technology Impact Timeline",
+    "module_id": "TECH-101-M5",
+    "grade_range": ["4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 45,
+    "description": "Choose a major technology (wheel, printing press, steam engine, electricity, telephone, internet) and create an annotated timeline showing its effects on society over decades or centuries. For each time period, identify at least one positive effect, one negative effect, and one unexpected consequence. Connect your technology to at least two other technologies it influenced or was influenced by.",
+    "materials": ["large paper or poster board", "colored markers", "ruler", "reference materials (books or internet)", "sticky notes for annotations"],
+    "learning_objectives": [
+      "Trace the societal impact of a technology across time",
+      "Identify both positive and negative consequences of technological change",
+      "Connect technologies to their historical predecessors and successors"
+    ],
+    "variations": [
+      "For younger learners: focus on one technology with three time points (invention, widespread use, today)",
+      "For older learners: compare two technologies and analyze how they amplified each other's impact",
+      "Group version: each student traces a different technology, then connect the timelines"
+    ]
+  },
+  {
+    "id": "TECH-101-A10",
+    "name": "Ethical Dilemma Discussion",
+    "module_id": "TECH-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 35,
+    "description": "Present a technology ethics scenario (self-driving car must choose between two harmful outcomes, facial recognition in public spaces, gene editing for disease prevention vs. enhancement, AI-generated content and authenticity). Using a structured framework, identify all stakeholders, list arguments for and against, consider who benefits and who is harmed, and write a position statement with supporting evidence.",
+    "materials": ["scenario card or printed description", "stakeholder analysis worksheet", "paper and pencils", "debate timer (optional)"],
+    "learning_objectives": [
+      "Identify multiple stakeholders affected by a technology decision",
+      "Construct arguments for and against a technology practice",
+      "Write a nuanced position statement that acknowledges trade-offs"
+    ],
+    "variations": [
+      "For younger learners: use simpler scenarios (should everyone have to wear a tracking device for safety?)",
+      "For older learners: add policy proposal writing (what rules should govern this technology?)",
+      "Debate format: teams argue opposing positions, then switch sides"
+    ]
+  }
+]
