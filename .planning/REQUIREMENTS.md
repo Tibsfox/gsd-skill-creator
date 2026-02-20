@@ -74,10 +74,10 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 - [x] **DASH-02**: Pack search with relevance-ranked results across pack names, descriptions, and tags
 - [x] **DASH-03**: Pack detail view displaying vision summary, module list, prerequisites, and grade levels
 - [x] **DASH-04**: Skill tree visualization showing pack progression paths and prerequisite chains
-- [ ] **DASH-05**: Activity chain suggestions based on learner level and current pack position
+- [x] **DASH-05**: Activity chain suggestions based on learner level and current pack position
 - [x] **DASH-06**: Progress tracking display showing pack completion state per learner
 - [x] **DASH-07**: WindowType extended with "knowledge" type for pack browser panel
-- [ ] **DASH-08**: Dashboard barrel updated with knowledge panel exports
+- [x] **DASH-08**: Dashboard barrel updated with knowledge panel exports
 
 ### skill-creator Integration
 
@@ -85,7 +85,7 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 - [ ] **SC-02**: Pattern detection points identifying successful learning approaches across packs
 - [ ] **SC-03**: Activity scaffolding from skill-creator generating new activities based on observed success patterns
 - [ ] **SC-04**: Successful approach promotion to skill library for reuse across learners
-- [ ] **SC-05**: Pack interaction events emitted as AMIGA EventEnvelope messages for ecosystem consumption
+- [x] **SC-05**: Pack interaction events emitted as AMIGA EventEnvelope messages for ecosystem consumption
 - [ ] **SC-06**: Learning pathway adaptation based on skill-creator observation data
 
 ### Pack Metadata & Standards
@@ -195,15 +195,15 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 | DASH-02 | Phase 253 | Complete |
 | DASH-03 | Phase 253 | Complete |
 | DASH-04 | Phase 253 | Complete |
-| DASH-05 | Phase 253 | Pending |
+| DASH-05 | Phase 253 | Complete |
 | DASH-06 | Phase 253 | Complete |
 | DASH-07 | Phase 253 | Complete |
-| DASH-08 | Phase 253 | Pending |
+| DASH-08 | Phase 253 | Complete |
 | SC-01 | Phase 254 | Pending |
 | SC-02 | Phase 254 | Pending |
 | SC-03 | Phase 254 | Pending |
 | SC-04 | Phase 254 | Pending |
-| SC-05 | Phase 254 | Pending |
+| SC-05 | Phase 254 | Complete |
 | SC-06 | Phase 254 | Pending |
 | META-01 | Phase 252 | Pending |
 | META-02 | Phase 252 | Pending |

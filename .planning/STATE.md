@@ -10,12 +10,12 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
-Phase: 253 of 254 (GSD-OS Dashboard)
-Plan: 4 of 5 complete (253-04 Skill tree radial SVG visualization)
-Status: In Progress (dashboard phase executing)
-Last activity: 2026-02-20 — Completed 253-04 (SkillTree radial SVG visualization with interactive nodes)
+Phase: 254 of 254 (skill-creator Integration)
+Plan: 1 of 5 complete (254-02 AMIGA EventEnvelope bridge)
+Status: Phase 254 In Progress (Wave 1 executing in parallel)
+Last activity: 2026-02-20 — Completed 254-02 (KnowledgeEventBridge + KNOWLEDGE_EVENT_TYPES)
 
-Progress: [####################] 87%
+Progress: [######################] 94%
 
 ## Performance Metrics
 
@@ -76,6 +76,8 @@ Progress: [####################] 87%
 | 253 | 03 | 3min | 1 | 2 |
 | Phase 253 P02 | 4min | 2 tasks | 4 files |
 | 253 | 04 | 5min | 1 | 2 |
+| 253 | 05 | 2min | 2 | 4 |
+| 254 | 02 | 6min | 2 | 3 |
 
 ## Accumulated Context
 
@@ -221,6 +223,13 @@ Progress: [####################] 87%
 - [Phase 253-04]: setAttribute('class', ...) over classList for SVG elements (JSDOM compatibility)
 - [Phase 253-04]: Auto-set focusPack from data.centerPack in setData for focused view auto-detection
 - [Phase 253-04]: SVG class helper functions (svgAddClass/svgRemoveClass) for cross-environment DOM manipulation
+- [Phase 253-05]: Scoring: in-progress base 100, not-started base 50, topological bonus 10*(1-pos/total), favorite +20
+- [Phase 253-05]: Barrel index re-exports all option interfaces for complete API surface
+- [Phase 254-02]: Event type mapping as constant with TypeScript `as const` for full type safety
+- [Phase 254-02]: Priority escalation pattern: pack_complete → 'high', all others → 'normal' (automatic, no API parameter)
+- [Phase 254-02]: Correlation ID for lifecycle tracking: use packId to group all events during learner's pack journey
+- [Phase 254-02]: Full observation as payload: spread entire LearnerObservation record for downstream context without secondary lookups
+- [Phase 254-02]: Synchronous schema validation: validate immediately, throw on failure rather than silently producing invalid messages
 
 ### Key Context
 
@@ -246,9 +255,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed 253-04-PLAN.md (Skill tree radial SVG visualization)
+Stopped at: Completed 254-02-PLAN.md (AMIGA EventEnvelope bridge)
 Resume file: None
 
 ## Next Up
 
-Phase 253 in progress (4 of 5 plans complete). Remaining plan: 253-05 (integration).
+Phase 254 in progress (Wave 1: 254-01 and 254-02 executing in parallel). Remaining: 254-03 (Wave 2), 254-04 (Wave 2), 254-05 (Wave 3).

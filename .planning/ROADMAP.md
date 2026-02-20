@@ -16,7 +16,7 @@
 - [x] **Phase 250: Specialized Packs Batch 1** - PHILO-101, THEO-101, PE-101, NATURE-101, DOMESTIC-101 full suites (completed 2026-02-20)
 - [x] **Phase 251: Specialized Packs Batch 2** - ART-101, MUSIC-101, TRADE-101, ASTRO-101, LEARN-101 full suites (completed 2026-02-20)
 - 🚧 **Phase 252: Pack Metadata & Validation** - Cross-pack dependency graph, standards alignment, translation stubs, accessibility, content validation, master INDEX generation (in progress: 3/6 plans complete)
-- [ ] **Phase 253: GSD-OS Dashboard** - Knowledge pack browser panel, search, detail view, skill tree, activity suggestions, progress tracking
+- [x] **Phase 253: GSD-OS Dashboard** - Knowledge pack browser panel, search, detail view, skill tree, activity suggestions, progress tracking (completed 2026-02-20)
 - [ ] **Phase 254: skill-creator Integration** - Observation hooks, pattern detection, activity scaffolding, approach promotion, EventEnvelope events, pathway adaptation
 
 ## Phase Details
@@ -224,7 +224,16 @@ Plans:
   2. Pattern detection identifies successful learning approaches across packs and surfaces them as pending skill suggestions
   3. Activity scaffolding generates new activities from observed success patterns and inserts them into pack activity chains
   4. Pack interaction events are emitted as AMIGA EventEnvelope messages for ecosystem consumption
-**Plans**: TBD
+**Plans**: 5 plans (254-01 through 254-05), 3 waves
+  - Wave 1: 254-01 (observation types + hooks), 254-02 (AMIGA event bridge) [parallel]
+  - Wave 2: 254-03 (pattern detection), 254-04 (pathway adaptation) [parallel, depends on 254-01]
+  - Wave 3: 254-05 (activity scaffolding + approach promotion + barrel exports) [depends on all]
+Plans:
+- [ ] 254-01-PLAN.md — Observation type schemas, emitter class, and test suite
+- [x] 254-02-PLAN.md — AMIGA EventEnvelope bridge for knowledge events (completed 2026-02-20)
+- [ ] 254-03-PLAN.md — Learning pattern detection engine
+- [ ] 254-04-PLAN.md — Learning pathway adaptation engine
+- [ ] 254-05-PLAN.md — Activity scaffolding, approach promotion, and barrel exports
 
 ## Progress
 
@@ -243,5 +252,5 @@ Phases 243-244 sequential (infrastructure first). Phases 245-251 parallelizable 
 | 250. Specialized Packs Batch 1 | 5/5 | Complete    | 2026-02-20 |
 | 251. Specialized Packs Batch 2 | 0/5 | Complete    | 2026-02-20 |
 | 252. Pack Metadata & Validation | 0/6 | Complete    | 2026-02-20 |
-| 253. GSD-OS Dashboard | 4/5 | In Progress|  |
-| 254. skill-creator Integration | 0/TBD | Not started | - |
+| 253. GSD-OS Dashboard | 5/5 | Complete    | 2026-02-20 |
+| 254. skill-creator Integration | 1/5 | In Progress | 2026-02-20 |
