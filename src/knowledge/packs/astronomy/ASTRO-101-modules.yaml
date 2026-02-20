@@ -1,0 +1,289 @@
+---
+# ASTRO-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: ASTRO-101
+pack_name: "Astronomy & Cosmology — Foundational Knowledge Pack"
+
+modules:
+  - id: ASTRO-101-M1
+    name: "Observing the Sky"
+    description: "The naked-eye universe: learning to find constellations, navigate by stars, track celestial objects, and understand how the night sky changes throughout the year"
+
+    learning_outcomes:
+      - "Identify major constellations and bright stars visible from your location"
+      - "Use celestial coordinates and star charts to systematically locate objects"
+      - "Distinguish stars, planets, and deep-sky objects by observational characteristics"
+      - "Understand why the night sky appears to rotate and how it changes with seasons"
+      - "Use angle estimation and the planisphere as tools for sky navigation"
+      - "Track naked-eye planets and observe their motion relative to background stars"
+
+    topics:
+      - "The Celestial Sphere and Coordinate Systems"
+      - "Constellations and Star Patterns"
+      - "The Ecliptic and Zodiacal Constellations"
+      - "Stellar Magnitude and Brightness"
+      - "Using Star Charts and the Planisphere"
+      - "Planets vs. Fixed Stars"
+      - "Angle Estimation Techniques"
+      - "Seasonal Progression of the Night Sky"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 30
+      elementary: 60
+      middle: 90
+      high: 120
+
+    prerequisite_modules: []
+
+    activities:
+      count: 6
+      examples:
+        - "Constellation Star Chart Scavenger Hunt"
+        - "Build a Planisphere"
+        - "Naked-Eye Planet Tracking (Multi-Month)"
+        - "Angle Estimation Games"
+        - "Star Chart Navigation Challenge"
+        - "Observation Journal for Seasonal Changes"
+
+    assessments:
+      - "Can student systematically find objects using star charts?"
+      - "Does student distinguish stars, planets, and galaxies?"
+      - "Can student track celestial motion and explain seasonal changes?"
+      - "Does student use observational tools effectively?"
+
+  - id: ASTRO-101-M2
+    name: "Earth-Moon-Sun System"
+    description: "The geometry of space: how Earth's rotation creates day/night, revolution creates seasons, why the Moon has phases, and how eclipses and tides work"
+
+    learning_outcomes:
+      - "Explain Earth's rotation and revolution and their observable consequences"
+      - "Predict and explain Moon phases using geometric reasoning"
+      - "Understand solar and lunar eclipses and their visibility conditions"
+      - "Explain tides as gravitational interactions at a distance"
+      - "Apply basic orbital mechanics concepts to understand stable orbits"
+      - "Understand that gravity governs both celestial and terrestrial motion"
+
+    topics:
+      - "Earth's Rotation and the Day-Night Cycle"
+      - "Earth's Revolution and Seasons"
+      - "The Moon's Orbit and Lunar Phases"
+      - "Solar Eclipses: Geometry and Visibility"
+      - "Lunar Eclipses: Geometry and Visibility"
+      - "Tidal Forces and Tidal Locking"
+      - "Orbital Mechanics and Newton's Laws"
+      - "The Three-Body Problem (Simplified)"
+
+    grade_levels: ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 30
+      elementary: 60
+      middle: 90
+      high: 120
+
+    prerequisite_modules: [ASTRO-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Moon Phase Observation Journal (28 days)"
+        - "Scale Model Solar Eclipse"
+        - "Seasons and Axial Tilt Model"
+        - "Tidal Force Demonstrations"
+        - "Planetary Orbit Card Sort"
+        - "Day-Night and Season Simulations"
+
+    assessments:
+      - "Can student explain seasons using Earth's axial tilt and orbit?"
+      - "Can student predict Moon phases and explain eclipses geometrically?"
+      - "Does student understand tides as gravitational effects?"
+      - "Can student apply orbital concepts to explain celestial phenomena?"
+
+  - id: ASTRO-101-M3
+    name: "Solar System Exploration"
+    description: "Comparative planetology: understanding planetary properties, atmospheres, geology, and using mission data to learn about worlds in our cosmic neighborhood"
+
+    learning_outcomes:
+      - "Compare planetary properties and understand their consequences for habitability and geology"
+      - "Explain planetary atmospheres and how they evolve or are lost"
+      - "Interpret mission data and planetary imagery to understand geological history"
+      - "Understand the formation and evolution of the solar system"
+      - "Recognize planets and moons as complex, dynamic worlds with individual histories"
+      - "Understand exoplanet discovery and the search for worlds beyond our solar system"
+
+    topics:
+      - "Planetary Characteristics: Size, Mass, Density, Composition"
+      - "Planetary Atmospheres and Climate"
+      - "Planetary Geology: Volcanism, Tectonics, Erosion"
+      - "Moons and Small Bodies of the Solar System"
+      - "The Nebular Hypothesis and Solar System Formation"
+      - "Impact Processes and Planetary Collisions"
+      - "Spacecraft Missions and Planetary Science"
+      - "Exoplanet Discovery and Detection Methods"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 60
+      middle: 90
+      high: 120
+
+    prerequisite_modules: [ASTRO-101-M1, ASTRO-101-M2]
+
+    activities:
+      count: 6
+      examples:
+        - "Scale Model Solar System Walk"
+        - "Mars Rover Landing Site Analysis"
+        - "Planetary Comparison Data Tables"
+        - "Exoplanet Detection Simulations"
+        - "Asteroid and Comet Observation"
+        - "Moon Geology Image Analysis"
+
+    assessments:
+      - "Can student compare planetary properties and predict consequences?"
+      - "Does student interpret mission data and images accurately?"
+      - "Can student explain planetary evolution and atmosphere loss?"
+      - "Does student understand the formation and structure of the solar system?"
+
+  - id: ASTRO-101-M4
+    name: "Stars & Stellar Astronomy"
+    description: "Understanding the universe's engines: stellar spectroscopy, the Hertzsprung-Russell diagram, stellar evolution from birth through death, and nucleosynthesis"
+
+    learning_outcomes:
+      - "Use spectroscopy to extract physical information about distant stars"
+      - "Read and interpret the Hertzsprung-Russell diagram"
+      - "Trace the lifecycle of stars from formation to various possible endpoints"
+      - "Understand nuclear fusion as the engine of stars and source of heavy elements"
+      - "Predict stellar evolution based on mass and composition"
+      - "Understand supernovae as cosmic crucibles for element synthesis"
+
+    topics:
+      - "Stellar Spectroscopy and Classification"
+      - "The Hertzsprung-Russell Diagram"
+      - "Stellar Structure and Hydrostatic Equilibrium"
+      - "Main Sequence Stars and Energy Generation"
+      - "Stellar Evolution and the HR Diagram"
+      - "Red Giants and Stellar Death"
+      - "Stellar Endpoints: White Dwarfs, Neutron Stars, Black Holes"
+      - "Supernovae and Nucleosynthesis"
+      - "Binary Stars and Mass Transfer"
+
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      middle: 90
+      high: 120
+
+    prerequisite_modules: [ASTRO-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Spectroscopy with Diffraction Gratings"
+        - "HR Diagram Card Sort"
+        - "Stellar Evolution Timeline"
+        - "Star Mass Estimation from Light Curves"
+        - "Supernova Light Curve Analysis"
+        - "Binary Star Orbital Motion Simulations"
+
+    assessments:
+      - "Can student interpret spectra and extract stellar properties?"
+      - "Does student understand the HR diagram and stellar populations?"
+      - "Can student trace stellar evolution and predict outcomes?"
+      - "Does student understand fusion and nucleosynthesis?"
+
+  - id: ASTRO-101-M5
+    name: "Galaxies, Cosmology & the Universe"
+    description: "Zooming out to the largest scales: galaxy types and structure, the Big Bang, cosmic expansion, dark matter and energy, and the ultimate fate of the universe"
+
+    learning_outcomes:
+      - "Classify galaxies and understand their distribution in the cosmic web"
+      - "Understand the major evidence for the Big Bang and cosmic inflation"
+      - "Explain Hubble expansion and the methods used to measure cosmic distances"
+      - "Grapple with the nature of dark matter and dark energy"
+      - "Reason about the ultimate fate of the universe"
+      - "Understand that cosmology remains a frontier with significant unknowns"
+
+    topics:
+      - "Galaxy Types and Classification"
+      - "The Large-Scale Structure of the Universe"
+      - "Measuring Cosmic Distances: Parallax, Standard Candles, Redshift"
+      - "Hubble's Law and Cosmic Expansion"
+      - "The Big Bang Theory and Cosmic Inflation"
+      - "Cosmic Microwave Background Radiation"
+      - "Dark Matter and Galaxy Rotation"
+      - "Dark Energy and the Accelerating Expansion"
+      - "The Cosmological Principle and Isotropy"
+      - "Ultimate Fate Scenarios"
+
+    grade_levels: ["8", "9", "10", "11", "12"]
+
+    time_estimates:
+      middle: 90
+      high: 150
+
+    prerequisite_modules: [ASTRO-101-M3, ASTRO-101-M4]
+
+    activities:
+      count: 6
+      examples:
+        - "Expanding Universe Balloon Model"
+        - "Cosmic Timeline Mural"
+        - "Galaxy Classification from Images"
+        - "Hubble Redshift Data Analysis"
+        - "Dark Matter Evidence Exploration"
+        - "Cosmological Model Debate"
+
+    assessments:
+      - "Can student classify galaxies and describe cosmic structure?"
+      - "Does student understand the evidence for the Big Bang?"
+      - "Can student reason about dark matter and dark energy?"
+      - "Does student think critically about speculative cosmological questions?"
+      - "Can student distinguish evidence-based knowledge from speculation?"
+
+# Cross-Module Competencies
+cross_module_competencies:
+  - "Scale Thinking: Reasoning about cosmic distances, times, and sizes"
+  - "Model Building: Using physical and conceptual models to understand phenomena"
+  - "Evidence Interpretation: Reasoning from indirect observations"
+  - "Observational Skills: Systematic observation and data collection"
+  - "Quantitative Reasoning: Using mathematics to model astronomical phenomena"
+  - "Historical and Philosophical Thinking: Understanding how astronomy shapes human understanding"
+
+# Progression Pathways
+progression_pathways:
+  - name: "Observational Path"
+    description: "M1 → M2 → deep observation and amateur astronomy"
+    target_grades: ["3", "4", "5", "6", "7"]
+
+  - name: "Physics Path"
+    description: "M2 → M4 → M5 → astrophysics and gravitational waves"
+    target_grades: ["8", "9", "10", "11", "12"]
+
+  - name: "Planetary Path"
+    description: "M1 → M3 → planetary geology and astrobiology"
+    target_grades: ["4", "5", "6", "7", "8", "9"]
+
+  - name: "Cosmological Path"
+    description: "M1 → M2 → M4 → M5 → theoretical cosmology"
+    target_grades: ["9", "10", "11", "12"]
+
+# Parallel Learning Patterns
+parallel_patterns:
+  - "Self-Directed Exploration: Using Stellarium and NASA Eyes to investigate personal interests"
+  - "Guided Observation: Structured observation sessions with specific targets and questions"
+  - "Data Analysis: Working with real astronomical spectra, light curves, and images"
+  - "Hands-On Modeling: Building physical and digital models of astronomical phenomena"
+  - "Peer Teaching: Becoming tour guides to the night sky"
+
+# Skill Creator Integration
+skill_creator_integration:
+  - "Observable skill: Ability to systematically find objects in the night sky using tools"
+  - "Observable skill: Ability to interpret spectra and extract physical properties"
+  - "Observable skill: Ability to reason about cosmic scales and model complex systems"
+  - "Observable skill: Ability to analyze astronomical data and draw evidence-based conclusions"
+  - "Transfer skill: Applying scale thinking and modeling to non-astronomical domains"
