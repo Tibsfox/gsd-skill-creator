@@ -504,7 +504,7 @@ describe('barrel export', () => {
 
     // Coordinator exports (from parallel plan 256-01)
     expect(den.CoordinatorConfigSchema).toBeDefined();
-    expect(den.PhaseAssignmentSchema).toBeDefined();
+    expect(den.DecisionEntrySchema).toBeDefined();
     expect(den.Coordinator).toBeDefined();
     expect(den.createCoordinator).toBeDefined();
   });
