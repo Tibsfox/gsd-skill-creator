@@ -180,3 +180,14 @@ export {
   type PackLifecycle,
   type LearnerObservation,
 } from './observation-types.js';
+
+// ============================================================================
+// Learning pathway adaptation
+// ============================================================================
+
+export { PathwayAdapter } from './pathway-adapter.js';
+export type {
+  PathwayAdaptation,
+  AdaptedPathway,
+  AdapterConfig,
+} from './pathway-adapter.js';
