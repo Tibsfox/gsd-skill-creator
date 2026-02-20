@@ -1,0 +1,254 @@
+[
+  {
+    "id": "ENVR-101-A01",
+    "name": "Backyard Biodiversity Survey",
+    "module_id": "ENVR-101-M1",
+    "grade_range": ["K", "1", "2", "3", "4", "5"],
+    "duration_minutes": 45,
+    "description": "Take a walk in your backyard, schoolyard, or park and observe all the living things you can find. Look for plants, insects, birds, spiders, worms, mushrooms, and microorganisms. Use a magnifying glass to examine small creatures. Make a list or drawing of each organism you find. Guess how the organisms depend on each other. What eats what? What provides shelter? Come back on different days or seasons and see how the community changes.",
+    "materials": ["Magnifying glass", "Notebook or camera", "Field guide to local species (optional)", "Hand lens or smartphone magnifier", "Colored pencils for sketching"],
+    "learning_objectives": [
+      "Observe biodiversity in a real ecosystem",
+      "Identify different types of organisms (plants, insects, animals, fungi)",
+      "Begin to recognize species interactions and habitat structure",
+      "Record observations systematically"
+    ],
+    "variations": [
+      "Younger learners: focus on visible animals and plants, use pictures to identify",
+      "Advanced: use field guides to identify species and research their ecology",
+      "Seasonal: repeat survey each season and compare communities"
+    ]
+  },
+  {
+    "id": "ENVR-101-A02",
+    "name": "Food Web Card Game",
+    "module_id": "ENVR-101-M1",
+    "grade_range": ["2", "3", "4", "5", "6", "7"],
+    "duration_minutes": 40,
+    "description": "Create cards for different organisms in an ecosystem: plants, herbivores, carnivores, decomposers. Write energy on one side and arrows showing 'eats' or 'is eaten by' on the other. Play as a game: each organism card has a player. Energy flows from sun to plant to herbivore to carnivore. When a predator 'eats' a prey, energy passes. Players discover that removing one species affects many others. Expand to show multiple food chains connecting into a web.",
+    "materials": ["Index cards", "Markers", "String or yarn to connect organisms", "Pictures of local ecosystems"],
+    "learning_objectives": [
+      "Understand food chains and energy flow",
+      "Build multi-species food webs",
+      "Predict effects of removing one organism",
+      "Recognize interconnections in ecosystems"
+    ],
+    "variations": [
+      "Use a different local ecosystem (pond, forest, ocean)",
+      "Add decomposers and nutrient cycling",
+      "Quantify: herbivores eat 10% of plant energy, carnivores eat 10% of herbivore energy (10% rule)"
+    ]
+  },
+  {
+    "id": "ENVR-101-A03",
+    "name": "Population Dynamics Simulation",
+    "module_id": "ENVR-101-M1",
+    "grade_range": ["5", "6", "7", "8"],
+    "duration_minutes": 50,
+    "description": "Simulate predator-prey dynamics using a game. Rabbits (players with cards) hop around a field (classroom). Foxes (other players) try to tag rabbits. When a rabbit is tagged, it's eaten. Rabbits that survive the round breed (split a token into two). Foxes that didn't eat starve and are removed. Run multiple rounds and graph population changes. Discover cycles: more rabbits → more foxes → fewer rabbits → fewer foxes → more rabbits again.",
+    "materials": ["Playing cards or tokens for rabbits and foxes", "Classroom space for movement", "Graph paper for data recording", "Timer"],
+    "learning_objectives": [
+      "Understand predator-prey population cycles",
+      "Recognize that populations are dynamic and interconnected",
+      "Interpret population graphs",
+      "Predict consequences of removing predators or prey"
+    ],
+    "variations": [
+      "Add disease: some animals get sick and recover or die",
+      "Add environmental stress: periodic 'droughts' reduce food",
+      "Use dice or random events instead of physical chasing"
+    ]
+  },
+  {
+    "id": "ENVR-101-A04",
+    "name": "Water Cycle in a Bag",
+    "module_id": "ENVR-101-M2",
+    "grade_range": ["2", "3", "4", "5", "6"],
+    "duration_minutes": 30,
+    "description": "Fill a ziplock bag with water and a plant cutting (or just water). Draw the water cycle on the bag: sun, evaporation arrows, condensation arrows, precipitation. Seal the bag. Put it in a sunny window. Over days, water evaporates from the soil and plant, rises in the bag, condenses on the plastic (clouds), drips back down (precipitation), and soaks into soil again. Watch the complete water cycle happen in miniature without any outside water being added.",
+    "materials": ["Ziplock bag (gallon size)", "Soil and small plant or just water", "Marker to draw cycle", "Sunny window"],
+    "learning_objectives": [
+      "Understand evaporation, condensation, and precipitation",
+      "Observe the water cycle in action",
+      "Recognize that water is recycled, not consumed",
+      "Connect atmospheric water to ground water"
+    ],
+    "variations": [
+      "Add food coloring to track water movement",
+      "Compare sealed vs. open bags to show water loss",
+      "Create a larger terrarium water cycle"
+    ]
+  },
+  {
+    "id": "ENVR-101-A05",
+    "name": "Carbon Cycle Diagram Builder",
+    "module_id": "ENVR-101-M2",
+    "grade_range": ["4", "5", "6", "7", "8"],
+    "duration_minutes": 45,
+    "description": "Draw or build a large carbon cycle diagram showing: atmosphere (CO₂), plants (photosynthesis captures carbon), animals (eating and respiration release CO₂), decomposers (breaking down dead things, releasing CO₂), fossil fuels (ancient plants and animals), and human activities (burning fossil fuels, releasing CO₂). Use arrows to show carbon moving between reservoirs. Add numbers to show rough timescales: photosynthesis happens in hours, decomposition in months to years, fossilization in millions of years.",
+    "materials": ["Large paper or poster board", "Markers or colored pencils", "Pictures of ecosystems and fossil fuels", "Arrows and labels"],
+    "learning_objectives": [
+      "Trace carbon through multiple reservoirs",
+      "Understand photosynthesis and respiration as inverse processes",
+      "Recognize that fossil fuel burning releases stored carbon",
+      "Understand timescales of different processes",
+      "Predict consequences of fossil fuel burning"
+    ],
+    "variations": [
+      "Compare pre-industrial vs. modern carbon cycle (industrial carbon inputs)",
+      "Quantify: add approximate gigatons of carbon per year",
+      "Extend to ocean carbon (dissolved CO₂, shells, deep sediments)"
+    ]
+  },
+  {
+    "id": "ENVR-101-A06",
+    "name": "Modeling Atmospheric CO2 Increase",
+    "module_id": "ENVR-101-M2",
+    "grade_range": ["6", "7", "8", "9", "10"],
+    "duration_minutes": 50,
+    "description": "Use real data to build a graph of atmospheric CO₂ from 1960 to today. Notice the sawtooth pattern (seasonal cycles as plants grow and decay) and the upward trend (human carbon). Calculate the rate of increase: ~2 ppm per year. Extend the line forward: if the trend continues, what will CO₂ be in 2050? Discuss factors that could change the trend (renewable energy, reforestation). Contrast with ice core data showing CO₂ naturally varied 180-280 ppm over 800,000 years; current increase is 10x faster.",
+    "materials": ["Graph paper or graphing software", "Real CO₂ data (NOAA, Keeling Curve)", "Ruler or computer tools", "Calculator"],
+    "learning_objectives": [
+      "Interpret real atmospheric CO₂ data",
+      "Recognize trends in noisy data",
+      "Make predictions based on trends",
+      "Understand that current change is rapid compared to natural variability",
+      "Understand the basis for climate projections"
+    ],
+    "variations": [
+      "Compare CO₂ to other greenhouse gases (methane, nitrous oxide)",
+      "Relate CO₂ increase to human activities (fossil fuel burning, deforestation)",
+      "Use climate model projections: graph future temperatures under different CO₂ scenarios"
+    ]
+  },
+  {
+    "id": "ENVR-101-A07",
+    "name": "Trash Audit: What Does Your Family Throw Away?",
+    "module_id": "ENVR-101-M3",
+    "grade_range": ["5", "6", "7", "8"],
+    "duration_minutes": 60,
+    "description": "Over one week, collect your family's trash (with permission). Sort each item by category: food, paper, plastic, metal, glass, electronics, etc. Weigh or count items. Create a bar graph showing what makes up most waste. Investigate where items end up: landfill, recycling, compost. Research how long each item takes to decompose. Propose ways to reduce the largest waste categories. Calculate how much waste your family generates per year; scale to your community.",
+    "materials": ["Gloves", "Trash bags for separate categories", "Scale or balance", "Graph paper", "Field guide to waste decomposition times"],
+    "learning_objectives": [
+      "Understand composition of household waste",
+      "Recognize that 'throwing away' doesn't make trash disappear",
+      "Understand decomposition timescales and environmental impacts",
+      "Propose reduction, reuse, and recycling strategies",
+      "Connect individual behavior to community and environmental impacts"
+    ],
+    "variations": [
+      "Audit school waste instead of family waste",
+      "Research what fraction is recyclable vs. landfill vs. compost",
+      "Calculate cost of waste management in your community"
+    ]
+  },
+  {
+    "id": "ENVR-101-A08",
+    "name": "Water Quality Testing",
+    "module_id": "ENVR-101-M3",
+    "grade_range": ["6", "7", "8", "9"],
+    "duration_minutes": 60,
+    "description": "Test water from a local stream, pond, or tap for indicators of quality. Use pH paper to measure acidity. Use turbidity tubes to measure cloudiness (suspended solids). Count macroinvertebrates (aquatic insects) which indicate healthy conditions. Test for nutrients (nitrogen/phosphorus) that cause algae blooms. Record data on a map: pollution correlates with distance from potential sources (factories, farms, sewers). Propose explanations for pollution patterns.",
+    "materials": ["pH paper", "Turbidity tubes (or clear bottles)", "Net for collecting macroinvertebrates", "Field guide to aquatic macroinvertebrates", "Water quality test kit (optional)"],
+    "learning_objectives": [
+      "Understand water quality indicators",
+      "Design a simple scientific investigation",
+      "Collect and analyze data",
+      "Connect land use to water quality",
+      "Recognize sources of pollution",
+      "Propose water protection strategies"
+    ],
+    "variations": [
+      "Test multiple sites and compare quality",
+      "Monitor the same site over weeks to see changes",
+      "Research pollutants in your watershed"
+    ]
+  },
+  {
+    "id": "ENVR-101-A09",
+    "name": "Greenhouse Effect in a Jar Demonstration",
+    "module_id": "ENVR-101-M4",
+    "grade_range": ["4", "5", "6", "7", "8"],
+    "duration_minutes": 40,
+    "description": "Set up two jars in sunlight: one open, one sealed with plastic wrap. Place a thermometer in each. The sealed jar heats up more because trapped air (like greenhouse gases) prevents heat from escaping. Add CO₂ to the sealed jar (breath, or leavened baking soda + vinegar) and it heats even more. This mimics how greenhouse gases trap heat in the atmosphere. Measure temperatures over 15 minutes and graph. Discuss: this is the principle behind climate change, but the atmosphere is much more complex.",
+    "materials": ["2 glass jars", "Plastic wrap", "Thermometers", "Sunlight or heat lamp", "Dry ice or baking soda + vinegar (optional for added CO₂)"],
+    "learning_objectives": [
+      "Understand the greenhouse effect mechanism",
+      "Recognize that CO₂ and other gases trap heat",
+      "Perform a controlled experiment with variables",
+      "Interpret data to support claims",
+      "Understand a simplified model of climate dynamics"
+    ],
+    "variations": [
+      "Compare different gases (CO₂, methane, air) in sealed jars",
+      "Vary jar size or insulation and compare",
+      "Model feedback: ice reflects light (lower temperatures) vs. dark ground absorbs heat (higher temperatures)"
+    ]
+  },
+  {
+    "id": "ENVR-101-A10",
+    "name": "Climate Data Graphing Challenge",
+    "module_id": "ENVR-101-M4",
+    "grade_range": ["6", "7", "8", "9", "10"],
+    "duration_minutes": 50,
+    "description": "Download real climate data: global temperature anomalies, CO₂ levels, sea level rise, ice extent, or sea surface temperature. Graph the data over the past 100+ years. Identify patterns: warming trend, acceleration, variability. Compare multiple datasets and look for correlations. Create a presentation explaining what the data shows, what uncertainties exist, and what it predicts about the future.",
+    "materials": ["Climate data (NASA, NOAA, Berkeley Earth)", "Graphing software (spreadsheet or online tools)", "Graph paper (optional)", "Presentation software"],
+    "learning_objectives": [
+      "Read and interpret large real datasets",
+      "Distinguish correlation from causation",
+      "Understand confidence intervals and error bars",
+      "Recognize patterns in noisy data",
+      "Communicate findings visually",
+      "Understand the strength of multiple independent datasets pointing to the same conclusion"
+    ],
+    "variations": [
+      "Compare regional data to global trends",
+      "Project future trends (with uncertainty ranges)",
+      "Evaluate contrarian claims against the data"
+    ]
+  },
+  {
+    "id": "ENVR-101-A11",
+    "name": "Energy Audit of Your Home",
+    "module_id": "ENVR-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10"],
+    "duration_minutes": 90,
+    "description": "Conduct an energy audit of your home: identify where energy is used (heating/cooling, water heating, appliances, lighting, transportation). Estimate energy consumption of major systems (look at utility bills). Calculate carbon footprint using online calculators. Identify the biggest energy users. Research efficiency improvements: insulation, LED lighting, efficient appliances, renewable energy options, transportation alternatives. Estimate cost and energy savings from each. Propose a prioritized plan for reducing energy use.",
+    "materials": ["Home utility bills", "Energy audit checklist", "Energy calculator software", "Thermometer (to check insulation effectiveness)", "Flashlight (to find air leaks)"],
+    "learning_objectives": [
+      "Understand personal energy consumption patterns",
+      "Calculate carbon footprints",
+      "Identify energy waste and efficiency opportunities",
+      "Evaluate tradeoffs between cost and efficiency",
+      "Understand energy transition and renewable alternatives",
+      "Connect personal choices to community and global impacts"
+    ],
+    "variations": [
+      "Audit your school instead of home",
+      "Compare energy use across homes of different sizes",
+      "Calculate payback period for efficiency upgrades"
+    ]
+  },
+  {
+    "id": "ENVR-101-A12",
+    "name": "Design a Sustainable Community",
+    "module_id": "ENVR-101-M5",
+    "grade_range": ["7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 120,
+    "description": "Design a sustainable community for 10,000 people. Plan for: energy (renewable sources), food (local agriculture), water (conservation and treatment), transportation (walkability, transit, electric vehicles), waste (reduction and recycling), housing (efficient construction), and ecosystem protection (green space, habitat corridors). Use maps and diagrams. Estimate energy, water, and food needs. Identify constraints and tradeoffs: density vs. green space, renewable energy vs. cost, local agriculture vs. food variety. Present your design with justifications for major decisions.",
+    "materials": ["Graph paper or digital design tools", "Maps or aerial photos of a real location", "Sustainability data (energy requirements, water use, etc.)", "Presentation software"],
+    "learning_objectives": [
+      "Apply systems thinking to design real-world sustainability",
+      "Understand resource flows and constraints",
+      "Recognize and articulate tradeoffs",
+      "Consider multiple dimensions of sustainability (environmental, social, economic)",
+      "Communicate complex design decisions",
+      "Appreciate that sustainable solutions require integration across domains"
+    ],
+    "variations": [
+      "Design a sustainable school building or campus",
+      "Redesign your actual community for sustainability",
+      "Compare designs and defend design choices"
+    ]
+  }
+]
