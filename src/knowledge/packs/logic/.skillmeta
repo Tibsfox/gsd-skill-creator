@@ -1,0 +1,430 @@
+# GSD Skill Metadata
+pack_id: LOG-101
+pack_name: "Logic & Formal Systems — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: applied_practical
+learning_domain: logic_reasoning
+
+# Content Description
+description: |
+  Logic is the science of valid reasoning. This pack teaches logical thinking
+  from concrete sorting and pattern recognition through formal proof and symbolic
+  systems. Learners develop the ability to construct sound arguments, recognize
+  fallacies, manipulate logical notation, and understand formal systems. Logic
+  is foundational to clear thinking in mathematics, computer science, philosophy,
+  law, and everyday decision-making.
+
+short_description: "Valid reasoning, arguments, fallacies, and formal proof from K through college"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Logic & Reasoning Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - MATH-101
+  - CRIT-101
+
+# What This Pack Enables
+enables:
+  - CODE-101
+  - PHILO-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [20, 30]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [30, 50]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [50, 80]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [80, 120]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [120, 150]
+
+# Modules
+modules:
+  - id: LOG-101-M1
+    name: "Logical Thinking Foundations"
+    description: "Developing foundational logic skills through sorting, classifying, pattern recognition, and understanding if-then relationships"
+    learning_outcomes:
+      - "Classify objects systematically by properties"
+      - "Understand if-then language in everyday contexts"
+      - "Recognize and predict patterns"
+    topics:
+      - "Sorting & Classification"
+      - "If-Then Relationships"
+      - "Pattern Recognition"
+      - "Rules & Rule-Following"
+    grade_levels: ["PreK", "K", "1", "2", "3", "4", "5"]
+    time_estimates:
+      foundation: 30
+      elementary: 25
+    prerequisite_modules: []
+    activities:
+      count: 3
+      examples:
+        - "Sorting & Classifying Challenge"
+        - "If-Then Chain Reaction Game"
+        - "Pattern Recognition & Prediction"
+    assessments:
+      - "Can student classify objects by multiple properties?"
+      - "Does student understand if-then relationships?"
+
+  - id: LOG-101-M2
+    name: "Arguments & Reasoning"
+    description: "Understanding argument structure, identifying premises and conclusions, and evaluating validity"
+    learning_outcomes:
+      - "Identify premises and conclusions"
+      - "Distinguish deductive from inductive reasoning"
+      - "Evaluate argument validity"
+    topics:
+      - "Premises & Conclusions"
+      - "Deductive Reasoning"
+      - "Inductive Reasoning"
+      - "Validity & Soundness"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9"]
+    time_estimates:
+      elementary: 30
+      middle: 35
+      high: 20
+    prerequisite_modules: [LOG-101-M1]
+    activities:
+      count: 3
+      examples:
+        - "Argument Builder Card Game"
+        - "Valid or Invalid? Reasoning Courtroom"
+        - "Premise & Conclusion Identification"
+    assessments:
+      - "Can student identify premises and conclusions?"
+      - "Does student distinguish valid from invalid reasoning?"
+
+  - id: LOG-101-M3
+    name: "Fallacies & Critical Evaluation"
+    description: "Recognizing and naming fallacies, understanding how they fail, and developing resistance to manipulation"
+    learning_outcomes:
+      - "Name and identify common fallacies"
+      - "Recognize fallacies in real arguments"
+      - "Construct arguments without fallacies"
+    topics:
+      - "Formal Fallacies"
+      - "Ad Hominem"
+      - "False Dilemma"
+      - "Begging the Question"
+      - "Propaganda & Media Literacy"
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      middle: 25
+      high: 20
+    prerequisite_modules: [LOG-101-M1, LOG-101-M2]
+    activities:
+      count: 3
+      examples:
+        - "Fallacy Detective: Ad Campaign Analysis"
+        - "Propaganda Poster Deconstruction"
+        - "Fallacy Sorting Game"
+    assessments:
+      - "Can student name and identify common fallacies?"
+      - "Does student recognize fallacies in real arguments?"
+
+  - id: LOG-101-M4
+    name: "Symbolic Logic & Truth Tables"
+    description: "Mastering propositional logic notation, truth tables, logical equivalences, and symbolic reasoning"
+    learning_outcomes:
+      - "Translate between English and symbolic notation"
+      - "Construct truth tables"
+      - "Identify logical equivalences"
+    topics:
+      - "Propositions & Truth Values"
+      - "Logical Connectives"
+      - "Symbolic Notation"
+      - "Truth Tables"
+      - "Logical Equivalence"
+    grade_levels: ["9", "10", "11", "12", "13", "14"]
+    time_estimates:
+      high: 30
+      middle: 15
+    prerequisite_modules: [LOG-101-M1, LOG-101-M2, LOG-101-M3]
+    activities:
+      count: 3
+      examples:
+        - "Truth Table Construction Workshop"
+        - "Logic Gate Circuit Builder"
+        - "Symbolic Logic Translation Challenge"
+    assessments:
+      - "Can student translate between English and symbolic logic?"
+      - "Does student construct accurate truth tables?"
+
+  - id: LOG-101-M5
+    name: "Proof & Formal Systems"
+    description: "Understanding and constructing proofs, learning proof techniques, and reasoning about formal systems"
+    learning_outcomes:
+      - "Prove statements using direct proof"
+      - "Use proof by contradiction"
+      - "Apply mathematical induction"
+    topics:
+      - "Direct Proof"
+      - "Proof by Contradiction"
+      - "Mathematical Induction"
+      - "Formal Systems"
+      - "Axioms & Inference Rules"
+    grade_levels: ["9", "10", "11", "12", "13", "14", "15", "16"]
+    time_estimates:
+      high: 30
+      middle: 10
+    prerequisite_modules: [LOG-101-M1, LOG-101-M2, LOG-101-M4]
+    activities:
+      count: 3
+      examples:
+        - "Proof by Contradiction Puzzle"
+        - "Mathematical Induction Domino Challenge"
+        - "Proof Construction Workshop"
+    assessments:
+      - "Can student construct a valid proof?"
+      - "Does student understand proof by contradiction?"
+
+# Learning Outcomes (Pack-level)
+learning_outcomes:
+  - code: LO-LOG-001
+    description: "Classify objects and concepts by logical properties"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-LOG-002
+    description: "Identify premises and conclusions in arguments"
+    levels: ["3", "4", "5", "6", "7", "8"]
+
+  - code: LO-LOG-003
+    description: "Recognize and name common fallacies"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-LOG-004
+    description: "Construct and evaluate proofs using symbolic logic"
+    levels: ["9", "10", "11", "12", "13", "14", "15", "16"]
+
+  - code: LO-LOG-005
+    description: "Apply logical reasoning to real-world problems"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Classroom Logic Discussions"
+    frequency: ongoing
+
+  - type: formative
+    name: "Argument Critique & Peer Review"
+    frequency: weekly
+
+  - type: summative
+    name: "Argument Construction Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Fallacy Identification Assessment"
+    frequency: end_of_module
+
+  - type: summative
+    name: "Proof Writing Exam"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: truth_table_generator
+    description: "Interactive tool for constructing and exploring truth tables"
+
+  - name: argument_mapper
+    description: "Visual tool for diagramming arguments and premises"
+
+  - name: logic_puzzle_games
+    description: "Collection of logic puzzles and games"
+
+  - name: proof_checker
+    description: "Tool for verifying proof validity"
+
+# Interactive Elements
+interactive_elements:
+  - type: game
+    name: "Fallacy Detective Game"
+
+  - type: puzzle
+    name: "Logic Puzzle Collection"
+
+  - type: simulator
+    name: "Truth Table Explorer"
+
+  - type: collaboration
+    name: "Argument Courtroom Debate"
+
+  - type: tool
+    name: "Proof Constructor"
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Common Core Mathematics Standards"
+    version: 2010
+    alignments:
+      MP3: "Construct viable arguments and critique the reasoning of others"
+      MP7: "Look for and make use of structure"
+
+  - framework: "C3 Framework (Civics, Government, Economics)"
+    version: 2013
+    alignments:
+      "Dimension 3": "Evaluate sources and use evidence"
+      "Dimension 4": "Construct and defend claims using evidence"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Difficulty increases with age. Foundation level is intuitive; college level requires symbolic fluency."
+
+# Content Flags
+content_flags:
+  - flag: abstraction_leap
+    description: "Transition from concrete to symbolic notation can be challenging"
+    mitigation: "Scaffold carefully. Use multiple modalities. Revisit concepts at higher levels."
+
+  - flag: math_anxiety_trigger
+    description: "Formal notation may trigger math anxiety in some learners"
+    mitigation: "Introduce notation gradually. Emphasize it's shorthand for English ideas."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/log-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "LOG-101"
+  looking_for:
+    - "Additional fallacy examples from current media and politics"
+    - "Proof examples from different mathematical domains"
+    - "Logic games and interactive tools"
+    - "Translations to Spanish & Mandarin"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Logic & Reasoning Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - logic
+  - reasoning
+  - argumentation
+  - fallacies
+  - critical-thinking
+  - formal-systems
+  - proof
+  - symbolic-logic
+  - philosophy
+  - mathematics
+
+# External Resources
+resources:
+  - type: textbook
+    title: "Logic for Dummies"
+    author: "Mark Zegarelli"
+    url: null
+
+  - type: online_course
+    title: "Philosophy of Logic"
+    author: "Stanford University Online"
+    url: "https://online.stanford.edu/courses"
+
+  - type: interactive_tool
+    title: "Truth Table Generator"
+    author: "Web Logic Community"
+    url: "https://www.truth-tables.com"
+
+  - type: game
+    title: "Logic Puzzle Games"
+    author: "Various Publishers"
+    url: "https://www.logic-puzzles.com"
+
+# Related Packs
+related_packs:
+  - id: MATH-101
+    relationship: "Logic is the foundation of mathematical proof and reasoning"
+
+  - id: CODE-101
+    relationship: "Boolean logic and algorithms are pure applied logic"
+
+  - id: CRIT-101
+    relationship: "Critical thinking builds directly on logical reasoning and fallacy detection"
+
+  - id: PHILO-101
+    relationship: "Philosophy uses formal logic to reason about fundamental questions"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "brain"
+    color: "#607D8B"
+    position: "Applied Practical"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "LOG-101-core-logic"
+    - "LOG-101-fallacy-patterns"
+    - "LOG-101-proof-techniques"
+    - "LOG-101-argument-structure"
+
+# File References
+files:
+  vision_document: "LOG-101-vision.md"
+  modules_definition: "LOG-101-modules.yaml"
+  activities: "LOG-101-activities.json"
+  assessment: "LOG-101-assessment.md"
+  resources: "LOG-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering logic foundations, arguments, fallacies, symbolic logic, and proof"
+      - "15 starter activities across all modules"
+      - "Aligned to Common Core and C3 Framework standards"
+
+# Quality Assurance
+qa:
+  peer_reviewed: false
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"
