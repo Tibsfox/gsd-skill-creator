@@ -1,0 +1,512 @@
+# GSD Skill Metadata
+pack_id: GEO-101
+pack_name: "Geography & Space Science -- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: spatial_reasoning
+
+# Content Description
+description: |
+  Geography as spatial thinking and Earth systems understanding: physical
+  geography, human geography, cartography, introductory astronomy, and
+  climate science. Covers spatial reasoning from neighborhood maps to
+  cosmic scale, emphasizing systems thinking and spatial analysis over
+  place-name memorization.
+
+short_description: "Spatial thinking, Earth systems, human geography, astronomy, and climate across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Geography Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - SCI-101
+  - MATH-101
+
+# What This Pack Enables
+enables:
+  - ENVR-101
+  - ASTRO-101
+  - NATURE-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [30, 50]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [50, 80]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [80, 120]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [100, 150]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [150, 200]
+
+# Modules
+modules:
+  - id: GEO-101-M1
+    name: "Earth Systems & Physical Geography"
+    description: "Understanding plate tectonics, the rock cycle, water cycle, biomes, weathering, erosion, and natural hazards as interconnected Earth systems"
+    learning_outcomes:
+      - "Explain how plate tectonics shapes landforms, drives volcanic activity, and causes earthquakes"
+      - "Trace matter through the rock cycle and connect it to landscape evolution"
+      - "Describe the water cycle and its role in shaping landscapes and sustaining ecosystems"
+      - "Identify major biome types and explain how climate determines their distribution"
+      - "Analyze natural hazards in terms of their causes, spatial distribution, and human impacts"
+    topics:
+      - "Plate Tectonics & Continental Drift"
+      - "Rock Cycle & Mineral Identification"
+      - "Water Cycle & Watershed Dynamics"
+      - "Biomes & Ecosystems"
+      - "Weathering, Erosion & Deposition"
+      - "Natural Hazards & Disaster Preparedness"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 35
+      high: 25
+    prerequisite_modules: []
+    activities:
+      count: 6
+      examples:
+        - "Rock Cycle in a Bag"
+        - "Build a Watershed Model"
+        - "Plate Tectonics Puzzle"
+        - "Biome Climate Graph Matching"
+        - "Earthquake Epicenter Triangulation"
+        - "Erosion Time-Lapse Study"
+    assessments:
+      - "Can student explain how Earth systems interact and influence each other?"
+      - "Does student connect plate tectonics to real-world landforms and hazards?"
+      - "Can student trace water through the full hydrological cycle?"
+      - "Does student match climate patterns to biome distributions?"
+
+  - id: GEO-101-M2
+    name: "Human Geography & Cultural Landscapes"
+    description: "Exploring population distribution, migration patterns, urbanization, cultural landscapes, economic geography, and political boundaries"
+    learning_outcomes:
+      - "Explain why population is unevenly distributed and identify contributing factors"
+      - "Analyze migration patterns using push-pull factor frameworks"
+      - "Describe how cities form, grow, and face challenges related to their geography"
+      - "Read cultural landscapes for evidence of human modification and historical layers"
+      - "Connect resource distribution to economic patterns and geopolitical tensions"
+    topics:
+      - "Population Distribution & Density"
+      - "Migration & Movement"
+      - "Urbanization & City Systems"
+      - "Cultural Landscapes & Place Identity"
+      - "Economic Geography & Trade"
+      - "Borders, Nations & Sovereignty"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 30
+    prerequisite_modules: [GEO-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Map Your Neighborhood Demographics"
+        - "Cultural Exchange Fair Planning"
+        - "Migration Story Mapping"
+        - "City Growth Simulation"
+        - "Resource Distribution Challenge"
+        - "Border Drawing Exercise"
+    assessments:
+      - "Can student explain factors driving population distribution?"
+      - "Does student analyze migration using push-pull frameworks?"
+      - "Can student read a cultural landscape for human modification?"
+      - "Does student connect physical geography to human settlement patterns?"
+
+  - id: GEO-101-M3
+    name: "Maps, Spatial Analysis & GIS"
+    description: "Building map literacy from reading maps through making maps to questioning maps, including coordinate systems, projections, spatial reasoning, and GIS fundamentals"
+    learning_outcomes:
+      - "Read and interpret maps using title, legend, scale, and orientation"
+      - "Use latitude and longitude to locate and communicate positions on Earth"
+      - "Explain how map projections distort reality and evaluate trade-offs"
+      - "Apply spatial reasoning to identify patterns in geographic data"
+      - "Use GIS concepts to layer and analyze spatial information"
+    topics:
+      - "Cartographic Fundamentals"
+      - "Coordinate Systems & Navigation"
+      - "Map Projections & Distortion"
+      - "Spatial Reasoning & Pattern Detection"
+      - "GIS Fundamentals & Spatial Queries"
+      - "Critical Cartography & Map Bias"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 30
+      high: 25
+    prerequisite_modules: []
+    activities:
+      count: 6
+      examples:
+        - "Treasure Hunt with Coordinates"
+        - "Design a Map of Your School"
+        - "Projection Comparison Lab"
+        - "Spatial Pattern Detective"
+        - "GIS Layer Stacking"
+        - "Map Critique Gallery"
+    assessments:
+      - "Can student read maps using standard cartographic elements?"
+      - "Does student use coordinates to locate and describe positions?"
+      - "Can student explain projection distortions and their implications?"
+      - "Does student identify spatial patterns in geographic data?"
+
+  - id: GEO-101-M4
+    name: "Astronomy & Our Place in Space"
+    description: "Understanding the Earth-Sun-Moon system, solar system structure, stellar evolution, galactic structure, telescopes, and cosmic scale"
+    learning_outcomes:
+      - "Explain day/night, seasons, lunar phases, and eclipses through orbital geometry"
+      - "Describe solar system structure including relative sizes and distances"
+      - "Trace the life cycle of stars and connect it to element formation"
+      - "Locate Earth within the Milky Way and the Milky Way within cosmic structure"
+      - "Develop a quantitative sense of cosmic scale and deep time"
+    topics:
+      - "Earth-Sun-Moon System"
+      - "Solar System Structure & Planetary Science"
+      - "Stars & Stellar Evolution"
+      - "Galaxies & Cosmic Structure"
+      - "Telescopes & Observational Astronomy"
+      - "Scale, Distance & Cosmic Perspective"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 30
+      high: 25
+    prerequisite_modules: [GEO-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Night Sky Observation Journal"
+        - "Scale Model of the Solar System"
+        - "Season Simulator"
+        - "Constellation Mythology Across Cultures"
+        - "Stellar Life Cycle Sorting"
+        - "Cosmic Address Activity"
+    assessments:
+      - "Can student explain seasonal patterns using Earth's axial tilt?"
+      - "Does student demonstrate accurate sense of solar system scale?"
+      - "Can student trace stellar evolution from nebula to remnant?"
+      - "Does student connect astronomical concepts to everyday phenomena?"
+
+  - id: GEO-101-M5
+    name: "Climate, Weather & Environmental Change"
+    description: "Understanding atmospheric circulation, weather systems, climate zones, the greenhouse effect, climate change science, and environmental stewardship"
+    learning_outcomes:
+      - "Distinguish weather from climate and explain atmospheric circulation patterns"
+      - "Classify climate zones and connect them to biome and settlement patterns"
+      - "Explain the greenhouse effect and trace carbon through the carbon cycle"
+      - "Evaluate evidence for anthropogenic climate change using scientific data"
+      - "Propose evidence-based strategies for environmental stewardship at multiple scales"
+    topics:
+      - "Atmospheric Structure & Circulation"
+      - "Weather Systems & Forecasting"
+      - "Climate Zones & Classification"
+      - "Greenhouse Effect & Carbon Cycle"
+      - "Climate Change Science & Evidence"
+      - "Environmental Stewardship & Sustainability"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 20
+      middle: 35
+      high: 30
+    prerequisite_modules: [GEO-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Weather Station Data Collection"
+        - "Climate Zone Research Project"
+        - "Greenhouse Effect Demonstration"
+        - "Climate Data Analysis"
+        - "Carbon Footprint Calculator"
+        - "Biome in a Jar"
+    assessments:
+      - "Can student distinguish weather from climate with examples?"
+      - "Does student connect climate zones to vegetation and human activity?"
+      - "Can student explain greenhouse effect mechanisms?"
+      - "Does student evaluate climate evidence using scientific reasoning?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-SYS-001
+    description: "Analyze Earth as an interconnected system of atmosphere, hydrosphere, lithosphere, and biosphere"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-HGE-001
+    description: "Explain how physical geography shapes human settlement, migration, and cultural patterns"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-MAP-001
+    description: "Read, create, and critically evaluate maps using cartographic principles"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-AST-001
+    description: "Explain Earth's astronomical context including seasons, lunar phases, and cosmic scale"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-CLI-001
+    description: "Distinguish weather from climate and evaluate evidence for climate change"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-SPT-001
+    description: "Apply spatial reasoning to identify patterns, estimate distances, and reason about scale"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Spatial Reasoning Check"
+    frequency: ongoing
+
+  - type: formative
+    name: "Map Interpretation Review"
+    frequency: weekly
+
+  - type: summative
+    name: "Geographic Investigation Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Spatial Analysis Project"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: google_earth
+    url: https://earth.google.com
+    description: "Virtual globe with satellite imagery, terrain, and data layers for spatial exploration"
+
+  - name: stellarium
+    url: https://stellarium.org
+    description: "Free planetarium software for observing the sky from any location and date"
+
+  - name: qgis
+    url: https://qgis.org
+    description: "Open-source GIS platform for spatial analysis and map creation"
+
+interactive_elements:
+  - type: investigation
+    name: "Watershed Model Builder"
+
+  - type: simulator
+    name: "Plate Tectonics Visualizer"
+
+  - type: visualization
+    name: "Climate Zone Explorer"
+
+  - type: game
+    name: "Coordinate Treasure Hunt"
+
+  - type: collaboration
+    name: "Cultural Landscape Gallery"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+
+  planned: [fr, zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "All maps and spatial content have text descriptions. Observation activities include multi-sensory alternatives. Consider adding tactile map resources for visually impaired learners."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "C3 Framework for Social Studies (Geography)"
+    version: 2013
+    alignments:
+      D2.Geo.1: "Construct maps and other graphic representations of both familiar and unfamiliar places"
+      D2.Geo.2: "Use maps, satellite images, photographs, and other representations to explain relationships"
+      D2.Geo.3: "Use geographic data to analyze spatial patterns and processes"
+      D2.Geo.4: "Analyze the relationships between physical and human geography"
+
+  - framework: "Next Generation Science Standards (Earth & Space Science)"
+    version: 2013
+    alignments:
+      ESS1: "Earth's Place in the Universe"
+      ESS2: "Earth's Systems"
+      ESS3: "Earth and Human Activity"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Conceptual challenge lies in systems thinking and spatial reasoning. Accessible materials and activities at every level."
+
+# Content Flags
+content_flags:
+  - flag: environmental_sensitivity
+    description: "Climate change discussions may intersect with political and economic perspectives."
+    mitigation: "Focus on the scientific evidence and geographic analysis. Present data and mechanisms without political advocacy."
+
+  - flag: geopolitical_sensitivity
+    description: "Border, sovereignty, and migration topics may touch on contested political issues."
+    mitigation: "Use geographic reasoning frameworks. Acknowledge multiple perspectives. Focus on spatial analysis over political positions."
+
+  - flag: cultural_sensitivity
+    description: "Discussion of cultural landscapes, indigenous place names, and colonial borders requires cultural awareness."
+    mitigation: "Include diverse cultural perspectives. Acknowledge that place names and borders reflect power dynamics. Treat all cultural knowledge with respect."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/geo-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "GEO-101"
+  looking_for:
+    - "Additional activities connecting local geography to global patterns"
+    - "Field investigation protocols for different biomes and climates"
+    - "GIS tutorials using free and open-source tools"
+    - "Translations to Spanish & Mandarin"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Geography Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - geography
+  - spatial-thinking
+  - earth-systems
+  - maps
+  - cartography
+  - gis
+  - astronomy
+  - climate
+  - human-geography
+  - foundational
+
+# External Resources
+resources:
+  - type: textbook
+    title: "Prisoners of Geography"
+    author: "Tim Marshall"
+    url: null
+
+  - type: online_platform
+    title: "National Geographic Education"
+    author: "National Geographic Society"
+    url: "https://education.nationalgeographic.org"
+
+  - type: online_platform
+    title: "Google Earth"
+    author: "Google"
+    url: "https://earth.google.com"
+
+  - type: software
+    title: "Stellarium"
+    author: "Stellarium Developers"
+    url: "https://stellarium.org"
+
+# Related Packs
+related_packs:
+  - id: SCI-101
+    relationship: "Scientific method and inquiry skills applied to geographic and astronomical investigation"
+
+  - id: MATH-101
+    relationship: "Quantitative skills for spatial analysis, coordinate systems, and data interpretation"
+
+  - id: ENVR-101
+    relationship: "Environmental science extends geographic understanding of human-environment interactions"
+
+  - id: NATURE-101
+    relationship: "Nature study provides field observation skills applicable to geographic investigation"
+
+  - id: PHYS-101
+    relationship: "Physics explains the forces behind plate tectonics, atmospheric circulation, and orbital mechanics"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "globe"
+    color: "#2196F3"
+    position: "Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "GEO-101-core-concepts"
+    - "GEO-101-spatial-thinking"
+    - "GEO-101-assessment-patterns"
+    - "GEO-101-parent-guidance"
+
+# File References
+files:
+  vision_document: "GEO-101-vision.md"
+  modules_definition: "GEO-101-modules.yaml"
+  activities: "GEO-101-activities.json"
+  assessment: "GEO-101-assessment.md"
+  resources: "GEO-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering Earth systems, human geography, maps, astronomy, and climate"
+      - "Contributed 10 starter activities across all modules"
+      - "Aligned to C3 Framework and NGSS Earth & Space Science standards"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"
