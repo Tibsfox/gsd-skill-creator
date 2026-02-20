@@ -1,0 +1,300 @@
+---
+# PROB-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: PROB-101
+pack_name: "Problem Solving — Foundational Knowledge Pack"
+
+modules:
+  - id: PROB-101-M1
+    name: "Understanding Problems"
+    description: "Developing the foundational skill of problem comprehension — restating problems, identifying knowns and unknowns, clarifying constraints, and distinguishing the stated problem from the real problem"
+
+    learning_outcomes:
+      - "Restate problems accurately in own words"
+      - "Identify known information, unknown information, and irrelevant information"
+      - "Clarify constraints and conditions that limit possible solutions"
+      - "Distinguish between the stated problem and the underlying real problem"
+      - "Describe what a successful solution would look like before attempting one"
+
+    topics:
+      - "Restating Problems in Your Own Words"
+      - "Knowns, Unknowns, and Irrelevant Information"
+      - "Constraints and Conditions"
+      - "Open-Ended vs. Well-Defined Problems"
+      - "Problem Types and Classification"
+      - "Asking Clarifying Questions"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 25
+      elementary: 20
+      middle: 15
+      high: 10
+
+    prerequisite_modules: []
+
+    activities:
+      count: 4
+      examples:
+        - "Problem Translation Challenge"
+        - "What Do We Know / What Do We Need? Sorting Activity"
+        - "The Hidden Question"
+        - "Constraint Cards"
+
+    assessments:
+      - "Can student restate a problem accurately in their own words?"
+      - "Does student identify knowns, unknowns, and irrelevant information?"
+      - "Can student describe what a successful solution would look like?"
+      - "Does student ask clarifying questions before attempting a solution?"
+
+  - id: PROB-101-M2
+    name: "Problem-Solving Strategies"
+    description: "The core strategy toolkit — heuristics including work backwards, find a pattern, simplify first, guess and check, draw a diagram, make a table, use analogy, and consider extreme cases"
+
+    learning_outcomes:
+      - "Name and describe at least five general-purpose problem-solving strategies"
+      - "Select appropriate strategies based on problem characteristics"
+      - "Apply multiple strategies to the same problem and compare approaches"
+      - "Combine two or more strategies when a single approach is insufficient"
+      - "Evaluate which strategy was most effective after solving"
+
+    topics:
+      - "Work Backwards"
+      - "Find a Pattern"
+      - "Simplify First"
+      - "Guess and Check (Systematically)"
+      - "Draw a Diagram"
+      - "Make a Table"
+      - "Use Analogy"
+      - "Consider Extreme Cases"
+      - "Eliminate Possibilities"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 30
+      elementary: 35
+      middle: 30
+      high: 20
+
+    prerequisite_modules: [PROB-101-M1]
+
+    activities:
+      count: 4
+      examples:
+        - "Strategy Toolkit Rotation"
+        - "Work Backwards Mystery Puzzle"
+        - "Strategy Selection Game"
+        - "Multi-Strategy Challenge"
+
+    assessments:
+      - "Can student name and describe multiple problem-solving strategies?"
+      - "Does student select strategies appropriate to the problem type?"
+      - "Can student combine strategies when a single approach is insufficient?"
+      - "Does student evaluate strategy effectiveness after solving?"
+
+  - id: PROB-101-M3
+    name: "Creative & Lateral Thinking"
+    description: "Developing creative problem-solving skills — brainstorming, SCAMPER, reframing, analogical reasoning, lateral thinking, and perspective-taking for problems that resist conventional approaches"
+
+    learning_outcomes:
+      - "Generate multiple ideas without premature judgment using brainstorming techniques"
+      - "Apply SCAMPER prompts to generate creative variations on existing solutions"
+      - "Reframe problems to reveal new solution paths"
+      - "Draw analogies from distant domains to inspire novel approaches"
+      - "Question assumptions systematically to discover unconventional solutions"
+
+    topics:
+      - "Brainstorming and Idea Generation"
+      - "SCAMPER Technique"
+      - "Reframing Problems"
+      - "Analogical Reasoning Across Domains"
+      - "Lateral Thinking and Assumption-Busting"
+      - "Perspective-Taking"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 25
+      high: 20
+
+    prerequisite_modules: [PROB-101-M1]
+
+    activities:
+      count: 4
+      examples:
+        - "SCAMPER an Everyday Object"
+        - "Analogical Problem Solving"
+        - "Reframing Practice"
+        - "Assumption-Busting Challenge"
+
+    assessments:
+      - "Can student generate multiple diverse ideas before evaluating any?"
+      - "Does student apply SCAMPER prompts to produce creative variations?"
+      - "Can student restate a problem in at least three different ways?"
+      - "Does student recognize structural analogies between different domains?"
+
+  - id: PROB-101-M4
+    name: "Collaborative Problem Solving"
+    description: "Combining problem-solving strategies with social skills for group work — active listening, building on ideas, role distribution, constructive disagreement, and integrating diverse contributions"
+
+    learning_outcomes:
+      - "Listen actively and understand others' ideas before evaluating them"
+      - "Build on teammates' ideas constructively"
+      - "Distribute problem-solving tasks based on team members' strengths"
+      - "Disagree constructively about ideas without attacking people"
+      - "Integrate diverse contributions into a coherent group solution"
+
+    topics:
+      - "Active Listening in Problem-Solving Groups"
+      - "Building on Ideas"
+      - "Role Distribution and Task Division"
+      - "Constructive Disagreement"
+      - "Distributed Cognition"
+      - "Consensus Building"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 25
+      high: 20
+
+    prerequisite_modules: [PROB-101-M2, PROB-101-M3]
+
+    activities:
+      count: 4
+      examples:
+        - "Escape Room Team Challenge"
+        - "Community Problem Identification and Proposal"
+        - "Expert Jigsaw"
+        - "Silent Problem Solving"
+
+    assessments:
+      - "Does student listen to and build on teammates' ideas?"
+      - "Can student distribute tasks effectively within a group?"
+      - "Does student disagree constructively and seek consensus?"
+      - "Can student integrate diverse contributions into a coherent solution?"
+
+  - id: PROB-101-M5
+    name: "Complex & Wicked Problems"
+    description: "Engaging with problems characterized by ambiguity, multiple stakeholders, incomplete information, and solutions that create new problems — systems thinking, tradeoff evaluation, and decision under uncertainty"
+
+    learning_outcomes:
+      - "Analyze problems as systems of interacting components rather than isolated variables"
+      - "Identify stakeholders with different perspectives and conflicting interests"
+      - "Evaluate tradeoffs explicitly when choosing among imperfect solutions"
+      - "Make and justify decisions with incomplete or uncertain information"
+      - "Anticipate unintended consequences of proposed solutions"
+
+    topics:
+      - "Systems Thinking"
+      - "Stakeholder Analysis"
+      - "Tradeoff Evaluation"
+      - "Decision Under Uncertainty"
+      - "Iterative Refinement"
+      - "Ethical Reasoning in Problem Solving"
+
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      middle: 20
+      high: 25
+
+    prerequisite_modules: [PROB-101-M2, PROB-101-M3]
+
+    activities:
+      count: 4
+      examples:
+        - "Systems Mapping"
+        - "Stakeholder Debate"
+        - "The Unintended Consequences Game"
+        - "Decision Under Uncertainty"
+
+    assessments:
+      - "Can student map a problem as a system of interacting factors?"
+      - "Does student identify multiple stakeholders with different perspectives?"
+      - "Can student evaluate tradeoffs and justify decisions?"
+      - "Does student anticipate unintended consequences of proposed solutions?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Strategic Flexibility"
+    description: "Ability to select, apply, and switch among multiple problem-solving strategies based on problem characteristics and progress"
+    assessed_in: [PROB-101-M1, PROB-101-M2, PROB-101-M3]
+
+  - name: "Metacognitive Monitoring"
+    description: "Habit of monitoring one's own thinking process — recognizing when stuck, evaluating progress, and adjusting approach"
+    assessed_in: [PROB-101-M1, PROB-101-M2, PROB-101-M4]
+
+  - name: "Transfer Competence"
+    description: "Ability to recognize structural similarities between problems in different domains and apply strategies across contexts"
+    assessed_in: [PROB-101-M2, PROB-101-M3, PROB-101-M5]
+
+  - name: "Productive Struggle"
+    description: "Willingness and ability to persist with difficult problems, treating confusion as information and failure as feedback"
+    assessed_in: [PROB-101-M1, PROB-101-M2, PROB-101-M4, PROB-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4, with M5 as advanced capstone"
+    rationale: "Follows Polya's sequence: understand, plan, execute, reflect. Each module builds directly on the previous one. M5 integrates everything for complex real-world problems."
+
+  - name: "Spiral Pathway"
+    description: "Revisit all five modules repeatedly at increasing depth and complexity"
+    rationale: "Problem-solving skills deepen with practice. A second pass through understanding after learning strategies produces richer problem analysis."
+
+  - name: "Interest-Led Pathway"
+    description: "M1 is prerequisite foundation; then choose modules based on interest and need"
+    rationale: "A learner drawn to creative challenges might go M1 -> M3 -> M2 -> M4. A learner facing group projects might prioritize M4 early."
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same introduction structure: What It Teaches, Core Skills, Interactive Elements, Technical Implementation Notes, Parent Guidance"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Interactive elements follow a consistent template across all modules"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure (Beginning, Developing, Proficient, Advanced) across all modules"
+    cached: true
+
+  - pattern: "Parent Guidance"
+    description: "Parent guidance follows the same question-and-encouragement format throughout"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner spontaneously restates a problem before solving"
+    - "When learner tries a different strategy after getting stuck"
+    - "When learner recognizes structural similarity between problems in different domains"
+    - "When learner explains their reasoning process without being asked"
+    - "When learner helps a peer get unstuck by suggesting a strategy"
+
+  pattern_detection:
+    - "Effective problem-understanding protocols"
+    - "Successful strategy selection patterns"
+    - "Productive struggle sequences (stuck -> new strategy -> progress)"
+    - "Transfer recognition events across domains"
+
+  skill_promotion:
+    - "Promote successful understanding protocols to reusable skills"
+    - "Create strategy selection guides from observed successes"
+    - "Build getting-unstuck toolkits from recovery patterns"
+    - "Develop collaborative problem-solving frameworks from team successes"
+
+# This YAML defines the modular structure for the PROB-101 pack and enables
+# skill-creator to orchestrate learning experiences centered on problem-solving strategies.

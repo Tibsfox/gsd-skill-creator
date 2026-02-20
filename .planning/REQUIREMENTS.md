@@ -27,9 +27,9 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 ### Core Academic Foundation Packs
 
 - [x] **PACK-01**: MATH-101 (Mathematics) — import and adapt delivered vision doc, modules YAML; create activities JSON, assessment, resources
-- [ ] **PACK-02**: SCI-101 (Science Method & Nature) — full suite: vision doc (~40 pages), modules YAML, activities JSON, assessment, resources, .skillmeta
-- [ ] **PACK-03**: TECH-101 (Technology & Tools) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
-- [ ] **PACK-04**: ENGR-101 (Engineering & Design) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
+- [x] **PACK-02**: SCI-101 (Science Method & Nature) — full suite: vision doc (~40 pages), modules YAML, activities JSON, assessment, resources, .skillmeta
+- [x] **PACK-03**: TECH-101 (Technology & Tools) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
+- [x] **PACK-04**: ENGR-101 (Engineering & Design) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 - [x] **PACK-05**: PHYS-101 (Physics) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 - [ ] **PACK-06**: CHEM-101 (Chemistry) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 - [ ] **PACK-07**: READ-101 (Reading & Literacy) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
@@ -157,9 +157,9 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 | RUNTIME-13 | Phase 243 | Complete |
 | RUNTIME-14 | Phase 243 | Complete |
 | PACK-01 | Phase 245 | Complete |
-| PACK-02 | Phase 245 | Pending |
-| PACK-03 | Phase 245 | Pending |
-| PACK-04 | Phase 245 | Pending |
+| PACK-02 | Phase 245 | Complete |
+| PACK-03 | Phase 245 | Complete |
+| PACK-04 | Phase 245 | Complete |
 | PACK-05 | Phase 245 | Complete |
 | PACK-06 | Phase 246 | Pending |
 | PACK-07 | Phase 246 | Pending |
