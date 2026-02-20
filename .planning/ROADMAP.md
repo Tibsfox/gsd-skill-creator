@@ -45,7 +45,9 @@
   2. SKILL.md files exist at infra/skills/ for each knowledge pack agent following established format
   3. Pipeline team YAML defines the pack content delivery and validation workflow
   4. Map-reduce coordination pattern enables parallel pack generation with merge validation
-**Plans**: TBD
+**Plans**: 3 plans (244-01 through 244-03), 2 waves
+  - Wave 1: 244-01 (Chipset YAML + agent inventory), 244-02 (SKILL.md files) [parallel]
+  - Wave 2: 244-03 (Pipeline team YAML + trigger matrix) [depends on 244-01, 244-02]
 
 ### Phase 245: Core Academic Packs Batch 1
 **Goal**: The first 5 core academic packs are complete with full educational content suites ready for learner consumption
@@ -166,8 +168,8 @@ Phases 243-244 sequential (infrastructure first). Phases 245-251 parallelizable 
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 243. Pack Runtime Infrastructure | 5/5 | Complete   | 2026-02-20 |
-| 244. Chipset & Agent Definitions | 0/TBD | Not started | - |
+| 243. Pack Runtime Infrastructure | 5/5 | Complete    | 2026-02-20 |
+| 244. Chipset & Agent Definitions | 2/3 | In Progress|  |
 | 245. Core Academic Packs Batch 1 | 0/TBD | Not started | - |
 | 246. Core Academic Packs Batch 2 | 0/TBD | Not started | - |
 | 247. Core Academic Packs Batch 3 | 0/TBD | Not started | - |

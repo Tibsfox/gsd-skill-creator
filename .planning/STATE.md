@@ -10,12 +10,12 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
-Phase: 243 of 254 (Pack Runtime Infrastructure)
-Plan: 5 of 5 complete (243-01, 243-02, 243-03, 243-04, 243-05 done)
-Status: Phase 243 Complete
-Last activity: 2026-02-20 — 243-05 complete (content validator & barrel exports, 24 tests, 3 commits)
+Phase: 244 of 254 (Chipset & Agent Definitions)
+Plan: 2 of 3 complete
+Status: Phase 244 In Progress
+Last activity: 2026-02-20 — Completed 244-02 (7 SKILL.md files)
 
-Progress: [████████████████████] 100%
+Progress: [#############       ] 67%
 
 ## Performance Metrics
 
@@ -26,6 +26,8 @@ Progress: [████████████████████] 100%
 | 243 | 04 | 4min | 4 | 8 |
 | 243 | 03 | 3min | 4 | 4 |
 | 243 | 05 | 3min | 4 | 4 |
+| 244 | 01 | 2min | 2 | 2 |
+| 244 | 02 | 3min | 3 | 7 |
 
 ## Accumulated Context
 
@@ -45,6 +47,12 @@ Progress: [████████████████████] 100%
 - Content validator uses regex pattern matching for optional file discovery (consistent with module-loader)
 - Lenient markdown parsers always report valid:true; strict schema parsers can report valid:false
 - Barrel exports follow established src/aminet/index.ts pattern with categorized sections
+- 6 KP- agents: 1 coordinator, 3 content-generators (per tier), 2 QA (validator + reviewer)
+- kp-content-authoring shared across 3 author agents; domain skills differentiate per tier
+- 8.0% total token budget (20% of 40% ecosystem ceiling)
+- Token budgets: 1.0% each except kp-content-authoring at 2.0% (8.0% total)
+- 8 parallel instruction patterns defined in content authoring for NFR-06 token caching
+- Domain skills separated by tier (core/applied/specialized) with non-overlapping file triggers
 
 ### Key Context
 
@@ -70,9 +78,12 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed 243-05-PLAN.md (content validator & barrel exports -- Phase 243 complete)
+Stopped at: Completed 244-02-PLAN.md (7 SKILL.md files -- Wave 1 complete)
 Resume file: None
 
 ## Next Up
 
-Phase 243 complete. Next: `/gsd:execute-phase 244` (Pack Content Authoring)
+Phase 244 planned with 3 plans across 2 waves. Next: `/gsd:execute-phase 244` (Chipset & Agent Definitions)
+
+Wave 1 (parallel): 244-01 (chipset YAML + agent inventory), 244-02 (7 SKILL.md files)
+Wave 2: 244-03 (pipeline team YAML + trigger matrix) — depends on 244-01 and 244-02
