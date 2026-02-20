@@ -37,10 +37,10 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 - [x] **PACK-09**: PROB-101 (Problem Solving) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 - [x] **PACK-10**: COMM-101 (Communication & Speech) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 - [x] **PACK-11**: HIST-101 (History & Civilization) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
-- [ ] **PACK-12**: GEO-101 (Geography & Space Science) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
-- [ ] **PACK-13**: MFAB-101 (Materials & Manufacturing) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
-- [ ] **PACK-14**: BUS-101 (Business & Law) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
-- [ ] **PACK-15**: STAT-101 (Accounting & Statistics) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
+- [x] **PACK-12**: GEO-101 (Geography & Space Science) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
+- [x] **PACK-13**: MFAB-101 (Materials & Manufacturing) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
+- [x] **PACK-14**: BUS-101 (Business & Law) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
+- [x] **PACK-15**: STAT-101 (Accounting & Statistics) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 
 ### Applied & Practical Packs
 
@@ -167,10 +167,10 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 | PACK-09 | Phase 246 | Complete |
 | PACK-10 | Phase 246 | Complete |
 | PACK-11 | Phase 247 | Complete |
-| PACK-12 | Phase 247 | Pending |
-| PACK-13 | Phase 247 | Pending |
-| PACK-14 | Phase 247 | Pending |
-| PACK-15 | Phase 247 | Pending |
+| PACK-12 | Phase 247 | Complete |
+| PACK-13 | Phase 247 | Complete |
+| PACK-14 | Phase 247 | Complete |
+| PACK-15 | Phase 247 | Complete |
 | PACK-16 | Phase 248 | Pending |
 | PACK-17 | Phase 248 | Pending |
 | PACK-18 | Phase 248 | Pending |
