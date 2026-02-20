@@ -1,0 +1,202 @@
+[
+  {
+    "id": "CHEM-101-A01",
+    "name": "Kitchen Material Sorting Challenge",
+    "module_id": "CHEM-101-M1",
+    "grade_range": ["K", "1", "2", "3", "4", "5"],
+    "duration_minutes": 40,
+    "description": "Gather 20 common kitchen items (salt, sugar, baking soda, vinegar, oil, water, flour, aluminum foil, plastic wrap, rubber band, wooden spoon, metal spoon, sponge, etc.) and sort them by multiple properties: state of matter (solid/liquid/gas), dissolves in water or not, conducts electricity or not, magnetic or not. Discover that materials that look similar (white powders) behave very differently, and that classification depends on which property you choose. Record results in a properties table.",
+    "materials": ["20 common kitchen items", "Cups of water for dissolving tests", "Small battery and LED for conductivity tests (optional)", "Magnet", "Data recording sheet with properties columns"],
+    "learning_objectives": [
+      "Classify materials by observable properties",
+      "Discover that similar-looking materials can have different properties",
+      "Record and organize property data in tables",
+      "Understand that classification systems depend on chosen criteria"
+    ],
+    "variations": [
+      "Younger learners: sort by only 2-3 properties (state, color, texture)",
+      "Advanced: predict properties before testing and check predictions",
+      "Extension: create a dichotomous key for identifying kitchen materials"
+    ]
+  },
+  {
+    "id": "CHEM-101-A02",
+    "name": "Mystery Substance Properties Lab",
+    "module_id": "CHEM-101-M1",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 45,
+    "description": "Five labeled cups (A through E) contain different white powders: salt, sugar, baking soda, cornstarch, and flour. Using only observation and safe tests — appearance under magnifying glass, texture, dissolving in water, reaction with vinegar, reaction with iodine solution (from a pharmacy), and taste (salt and sugar only, with permission) — learners identify each substance by its unique combination of properties. Emphasizes that identification requires multiple tests, not just one.",
+    "materials": ["5 white powders (salt, sugar, baking soda, cornstarch, flour)", "Small cups and spoons", "Water", "Vinegar", "Iodine solution (optional)", "Magnifying glass", "Data recording sheet"],
+    "learning_objectives": [
+      "Use multiple property tests to identify unknown substances",
+      "Record observations systematically in a data table",
+      "Understand that a single test is insufficient for identification",
+      "Distinguish physical properties from chemical properties"
+    ],
+    "variations": [
+      "Add a sixth mystery powder (cream of tartar, baking powder) as a challenge",
+      "Blind version: learners design their own testing procedure before starting",
+      "Quantitative version: measure the mass that dissolves in a fixed volume of water"
+    ]
+  },
+  {
+    "id": "CHEM-101-A03",
+    "name": "Build an Atom Model with Candy",
+    "module_id": "CHEM-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 35,
+    "description": "Using different colored candies or beads to represent protons (red), neutrons (blue), and electrons (green), learners build physical models of atoms. Start with hydrogen (1 proton, 1 electron), then helium (2 protons, 2 neutrons, 2 electrons), and progress to carbon, oxygen, sodium, and chlorine. Arrange electrons in concentric rings representing energy levels (shells). Compare models and discover patterns: elements in the same column have the same number of outer electrons.",
+    "materials": ["Red candies or beads (protons)", "Blue candies or beads (neutrons)", "Green candies or beads (electrons)", "Paper plates or cardboard circles for shells", "Periodic table reference", "Glue or tape (optional for display)"],
+    "learning_objectives": [
+      "Identify the three subatomic particles and their locations",
+      "Build accurate atomic models for given elements",
+      "Recognize that the number of protons defines the element",
+      "Discover the pattern of electron arrangement in shells"
+    ],
+    "variations": [
+      "Younger learners: build only hydrogen, helium, and carbon",
+      "Advanced: build models showing isotopes of the same element",
+      "Extension: predict what element results from adding or removing protons"
+    ]
+  },
+  {
+    "id": "CHEM-101-A04",
+    "name": "Periodic Table Scavenger Hunt",
+    "module_id": "CHEM-101-M2",
+    "grade_range": ["4", "5", "6", "7", "8", "9"],
+    "duration_minutes": 30,
+    "description": "Given a set of clue cards describing element properties (e.g., 'I am a gas at room temperature and glow orange-red in a discharge tube. I am named after a Greek word meaning new.' Answer: Neon), learners race to find each element on the periodic table and record its symbol, atomic number, and group. Clues range from easy (describing common elements like iron and gold) to challenging (describing lesser-known elements by their properties and history). Builds familiarity with the table as a usable tool.",
+    "materials": ["Printed periodic table (one per learner or pair)", "15-20 clue cards with increasing difficulty", "Answer recording sheet", "Timer (optional for competitive version)"],
+    "learning_objectives": [
+      "Navigate the periodic table to locate elements efficiently",
+      "Connect element descriptions to periodic table positions",
+      "Recognize that element properties relate to their position in the table",
+      "Build familiarity with element names, symbols, and atomic numbers"
+    ],
+    "variations": [
+      "Team competition: first team to correctly identify all elements wins",
+      "Create-your-own: learners write clue cards for classmates",
+      "Digital version: use an interactive periodic table to find elements"
+    ]
+  },
+  {
+    "id": "CHEM-101-A05",
+    "name": "Molecule Building with Toothpicks and Gumdrops",
+    "module_id": "CHEM-101-M3",
+    "grade_range": ["5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 45,
+    "description": "Using gumdrops (atoms of different colors for different elements) and toothpicks (chemical bonds), learners build three-dimensional models of molecules: water (H2O — bent shape), methane (CH4 — tetrahedral), carbon dioxide (CO2 — linear), ammonia (NH3 — pyramidal), and ethanol (C2H5OH). After building, compare shapes and discuss why molecules are not flat. Connect shape to properties: water is bent and polar, which is why it dissolves salt; CO2 is linear and nonpolar, which is why it is a gas.",
+    "materials": ["Gumdrops in multiple colors (assign one color per element)", "Toothpicks (single for single bonds, doubled for double bonds)", "Molecular formula reference cards", "Shape comparison chart"],
+    "learning_objectives": [
+      "Build accurate 3D molecular models from chemical formulas",
+      "Recognize that molecules have specific three-dimensional shapes",
+      "Identify bond types (single, double) in model construction",
+      "Connect molecular shape to physical properties"
+    ],
+    "variations": [
+      "Simpler: build only water, methane, and CO2",
+      "Advanced: predict the shape before building, then check",
+      "Extension: compare a molecule built flat vs. 3D and discuss which is correct"
+    ]
+  },
+  {
+    "id": "CHEM-101-A06",
+    "name": "Ionic vs. Covalent Compound Sort",
+    "module_id": "CHEM-101-M3",
+    "grade_range": ["6", "7", "8", "9", "10", "11"],
+    "duration_minutes": 40,
+    "description": "Given a set of common substances (table salt, sugar, water, baking soda, iron nail, copper wire, diamond, rubbing alcohol, candle wax, glass), learners research the bonding type of each and sort into ionic, covalent, and metallic categories. Then test predictions by observing properties: does it dissolve in water? Does the solution conduct electricity? Is it brittle or malleable? Has it got a high or low melting point? Discover that bond type predicts physical properties.",
+    "materials": ["10 common substances or substance cards", "Cups of water for dissolving tests", "Simple conductivity tester (battery, LED, wires)", "Sorting mat with three columns", "Property prediction sheet"],
+    "learning_objectives": [
+      "Classify substances by bonding type (ionic, covalent, metallic)",
+      "Predict physical properties from bonding type",
+      "Test predictions experimentally using property observations",
+      "Connect atomic-level bonding to macroscopic behavior"
+    ],
+    "variations": [
+      "Simpler: provide bonding type and focus only on property testing",
+      "Advanced: include borderline cases (network covalent like diamond)",
+      "Extension: research an unfamiliar substance and predict its bonding type from properties alone"
+    ]
+  },
+  {
+    "id": "CHEM-101-A07",
+    "name": "Baking Soda and Vinegar Reaction Investigation",
+    "module_id": "CHEM-101-M4",
+    "grade_range": ["K", "1", "2", "3", "4", "5", "6", "7"],
+    "duration_minutes": 45,
+    "description": "Not just 'pour and watch' — a systematic investigation of the baking soda and vinegar reaction. Learners vary the amount of baking soda (1 tsp, 2 tsp, 3 tsp) with a fixed amount of vinegar, capturing the gas produced in a balloon stretched over the bottle opening. Measure balloon circumference to quantify gas production. Weigh the system before and after (in a sealed container) to test conservation of mass. Identify the gas as carbon dioxide by testing whether it extinguishes a flame.",
+    "materials": ["Baking soda", "White vinegar", "Plastic bottles", "Balloons", "Measuring spoons", "Kitchen scale", "String and ruler for balloon measurement", "Small candle for gas identification test (adult supervised)"],
+    "learning_objectives": [
+      "Design a controlled experiment varying one factor at a time",
+      "Collect quantitative data about a chemical reaction",
+      "Test the law of conservation of mass experimentally",
+      "Identify a reaction product (CO2) using a chemical test"
+    ],
+    "variations": [
+      "Younger learners: focus on observation and description of the reaction",
+      "Advanced: calculate the theoretical gas volume and compare with measured",
+      "Extension: test other acids (lemon juice, soda) with baking soda and compare"
+    ]
+  },
+  {
+    "id": "CHEM-101-A08",
+    "name": "Endothermic Ice Cream Making",
+    "module_id": "CHEM-101-M4",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 30,
+    "description": "Make ice cream in a bag using the endothermic process of salt dissolving in ice. Place cream, sugar, and vanilla in a small zip-lock bag inside a larger bag filled with ice and rock salt. Shake vigorously for 10-15 minutes. Measure the temperature of the ice-salt mixture at intervals — discover it drops well below 0 degrees C. The salt disrupts the ice crystal structure, and the endothermic dissolution absorbs heat from the cream mixture, freezing it. Delicious science.",
+    "materials": ["Heavy cream or half-and-half", "Sugar", "Vanilla extract", "Small and large zip-lock bags", "Ice", "Rock salt or table salt", "Thermometer", "Gloves or towel (the bag gets very cold)"],
+    "learning_objectives": [
+      "Experience an endothermic process firsthand",
+      "Measure temperature changes during an endothermic reaction",
+      "Explain why salt makes ice colder (in terms of energy absorption)",
+      "Distinguish endothermic from exothermic processes"
+    ],
+    "variations": [
+      "Compare rock salt vs. table salt: which makes the mixture colder?",
+      "Vary the salt-to-ice ratio and measure temperature differences",
+      "Research other endothermic processes in everyday life"
+    ]
+  },
+  {
+    "id": "CHEM-101-A09",
+    "name": "Red Cabbage pH Indicator Lab",
+    "module_id": "CHEM-101-M4",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 50,
+    "description": "Make a universal pH indicator by boiling chopped red cabbage in water and straining the purple liquid. Test household substances by adding drops of the indicator: lemon juice (red/pink = acidic), vinegar (red/pink), baking soda solution (blue/green = basic), soap solution (green = basic), bleach (yellow = very basic), milk (purple = near neutral), soda (pink = acidic). Create a color-pH reference chart. Discover that acids and bases are everywhere in the kitchen and bathroom.",
+    "materials": ["Red cabbage (half head)", "Boiling water and pot", "Strainer", "Clear cups or test tubes (10+)", "Household substances to test (lemon juice, vinegar, baking soda, soap, milk, soda, etc.)", "pH reference strip (optional for calibration)", "Color chart recording sheet"],
+    "learning_objectives": [
+      "Create a pH indicator from natural materials",
+      "Classify household substances as acidic, basic, or neutral",
+      "Construct a color-pH reference chart from experimental data",
+      "Understand that acids and bases are common in everyday life"
+    ],
+    "variations": [
+      "Test rainwater, tap water, and distilled water to compare pH",
+      "Neutralization experiment: slowly add baking soda to vinegar and watch the color change through the pH spectrum",
+      "Compare cabbage indicator to commercial pH strips for accuracy"
+    ]
+  },
+  {
+    "id": "CHEM-101-A10",
+    "name": "Polymer Lab — Make Your Own Slime",
+    "module_id": "CHEM-101-M5",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 35,
+    "description": "Create polymers by mixing white school glue (polyvinyl acetate) with borax solution (sodium tetraborate). The borax cross-links the polymer chains in the glue, transforming liquid glue into a stretchy, bouncy, semi-solid material. Vary the borax concentration (1 tsp, 2 tsp, 3 tsp per cup of water) and observe how the polymer properties change — from runny slime to firm putty. Connect to polymer chemistry: long molecular chains behave differently when they are free to slide vs. when they are cross-linked.",
+    "materials": ["White school glue (PVA glue)", "Borax powder (sodium tetraborate)", "Water", "Measuring cups and spoons", "Mixing bowls", "Food coloring (optional)", "Zip-lock bags for storage"],
+    "learning_objectives": [
+      "Create a polymer through a cross-linking reaction",
+      "Observe how varying a reactant changes product properties",
+      "Understand the relationship between molecular structure and material behavior",
+      "Connect the concept of polymers to everyday materials (plastic, rubber, nylon)"
+    ],
+    "variations": [
+      "Compare slime made with glue vs. slime made with liquid starch (different cross-linker)",
+      "Measure quantitative properties: how far does it stretch before breaking? How high does a ball bounce?",
+      "Research: identify 5 polymers you use every day and find out what monomers they are made from"
+    ]
+  }
+]
