@@ -306,13 +306,24 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
-      name: "Espanol"
+      name: Español
+      complete: false
+      progress: "0%"
+    - language_code: fr
+      name: Français
+      complete: false
+      progress: "0%"
+    - language_code: de
+      name: Deutsch
+      complete: false
+      progress: "0%"
+    - language_code: it
+      name: Italiano
       complete: false
       progress: "0%"
 
-  planned: [fr, zh, ar]
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -322,17 +333,33 @@ accessibility:
   keyboard_navigable: true
   alt_text_provided: true
   captions_available: false
-  notes: "Field activities include verbal description guides. Nature journaling adapts to any ability level. Consider adding audio field guides and tactile identification methods for visually impaired learners."
+  notes: |
+    Outdoor observation activities need indoor/virtual alternatives (herbarium, preserved specimens, nature videos, museum collections). Field guide images require detailed alt text. Nature journaling adapts to any ability level (sketching, writing, recording audio). Tactile nature kits for blind/low-vision learners. iNaturalist accessible via text description of photos. Citizen science platforms need keyboard-navigable alternatives."
 
 # Standards Alignment
 standards_alignment:
-  - framework: "Next Generation Science Standards (NGSS)"
+  - framework: "Next Generation Science Standards (NGSS) Life Science"
     version: 2013
     alignments:
-      LS1: "From Molecules to Organisms: Structures and Processes"
-      LS2: "Ecosystems: Interactions, Energy, and Dynamics"
-      LS4: "Biological Evolution: Unity and Diversity"
-      ESS3: "Earth and Human Activity"
+      "LS1.A: Structure & Function": "NATURE-101-M2, M3, M4"
+      "LS2.A: Interdependent Relationships": "NATURE-101-M4, M5"
+      "LS2.B: Cycles of Matter": "NATURE-101-M4"
+      "LS2.C: Ecosystem Dynamics": "NATURE-101-M4, M5"
+      "LS4.D: Biodiversity & Humans": "NATURE-101-M2, M3, M5"
+
+  - framework: "NAAEE (North American Association for Environmental Education) Standards"
+    version: 2010
+    alignments:
+      "Strand 1 (Questioning & Analysis)": "NATURE-101-M1, M4"
+      "Strand 2 (Systems & Scale)": "NATURE-101-M4, M5"
+      "Strand 3 (Decision-Making)": "NATURE-101-M5"
+      "Strand 4 (Individual & Social Responsibility)": "NATURE-101-M5"
+
+  - framework: "IB MYP Sciences"
+    version: 2016
+    alignments:
+      "Topic 3: Life Processes": "NATURE-101-M2, M3"
+      "Topic 4: Ecology & Evolution": "NATURE-101-M4, M5"
 
   - framework: "National Science Education Standards"
     version: 1996
