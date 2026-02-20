@@ -1,0 +1,220 @@
+[
+  {
+    "id": "TRADE-101-A01",
+    "name": "Tool Identification Relay",
+    "module_id": "TRADE-101-M1",
+    "grade_range": ["K", "1", "2", "3", "4"],
+    "duration_minutes": 20,
+    "description": "Speed matching game where students match physical tools with names and proper uses. Instructor demonstrates each tool briefly, then students identify by sight. Emphasizes tool names, basic function, and why each tool is designed that way.",
+    "materials": ["Hand tools (hammers, screwdrivers, wrenches, pliers, chisels)", "Whiteboard or paper", "Timer"],
+    "learning_objectives": [
+      "Identify common hand tools by sight",
+      "Match tools to their intended uses",
+      "Remember tool names consistently",
+      "Explain what each tool does in simple terms"
+    ],
+    "variations": [
+      "Add power tools to more advanced version",
+      "Timed relay competition between teams",
+      "Include 'bad uses' — what NOT to do with each tool"
+    ]
+  },
+  {
+    "id": "TRADE-101-A02",
+    "name": "Workshop Safety Scenario Cards",
+    "module_id": "TRADE-101-M1",
+    "grade_range": ["2", "3", "4", "5", "6"],
+    "duration_minutes": 30,
+    "description": "Scenario-based decision making where students respond to workshop hazards. Cards describe dangerous situations (loose clothing near drill press, tool left on edge of workbench, etc.). Students identify the hazard and explain the safe procedure. Emphasizes safety culture over rote memorization.",
+    "materials": ["Scenario cards (printed or digital)", "Workshop images or diagrams", "PPE samples to show"],
+    "learning_objectives": [
+      "Recognize common workshop hazards",
+      "Explain consequences of unsafe practices",
+      "Recommend correct safety procedures",
+      "Understand why safety rules exist (prevention, not rules for rules' sake)"
+    ],
+    "variations": [
+      "Add time pressure — quick response decisions",
+      "Have students create their own scenarios",
+      "Include 'near miss' stories from real tradespeople"
+    ]
+  },
+  {
+    "id": "TRADE-101-A03",
+    "name": "Build a Birdhouse Project",
+    "module_id": "TRADE-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7"],
+    "duration_minutes": 90,
+    "description": "Complete woodworking project from design through assembly and finishing. Students measure, cut wood pieces, assemble with nails or screws, sand, and finish. Emphasizes precision measurement (1/4 inch), reading a plan, executing steps in order, and producing a functional project. Real outcome: a birdhouse that birds might actually use.",
+    "materials": ["1x8 or 1x6 lumber (3 feet per student)", "Saw (hand saw or circular saw)", "Drill with bits", "Nails (1.5 inch) or 1.25 inch screws", "Ruler, square, pencil", "Sandpaper (120 and 220 grit)", "Wood stain or paint", "Nail or screw for hanging"],
+    "learning_objectives": [
+      "Measure lumber accurately to 1/4 inch",
+      "Mark and cut wood to dimensions",
+      "Drill pilot holes for fasteners",
+      "Assemble pieces with proper fastening",
+      "Sand and finish for appearance and durability",
+      "Follow a multi-step project plan independently"
+    ],
+    "variations": [
+      "Younger students: pre-cut pieces, use nails only",
+      "Older students: design custom house, calculate wood needed",
+      "Advanced: dovetail roof, hinged clean-out door"
+    ]
+  },
+  {
+    "id": "TRADE-101-A04",
+    "name": "Dovetail Joint Practice",
+    "module_id": "TRADE-101-M2",
+    "grade_range": ["7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 120,
+    "description": "Advanced woodworking technique: cutting hand-dovetailed joints. Students mark layout, saw by hand, and chisel out waste to create interlocking tails and pins. Produces a joint that's beautiful and incredibly strong. Emphasizes precision, patience, problem-solving, and craftsmanship. This is real woodworking, not a shortcut.",
+    "materials": ["Hardwood scraps (maple or cherry preferred, at least 3/4 inch thick)", "Hand saws (fine-tooth)", "Chisels (1/4 inch and 1/2 inch)", "Mallet", "Ruler, square, pencil", "Sandpaper", "Clamps", "Marking gauge"],
+    "learning_objectives": [
+      "Lay out dovetails accurately with precision",
+      "Saw precisely along marked lines",
+      "Chisel away waste without splitting",
+      "Fit and adjust joint for tight assembly",
+      "Understand why this joint is strong",
+      "Develop fine motor control and spatial reasoning"
+    ],
+    "variations": [
+      "Start with 1/2 pins for easier first attempt",
+      "Progress to mixed tails and pins",
+      "Use jigs (advanced method) vs. pure hand layout",
+      "Combine two joints into a functional box"
+    ]
+  },
+  {
+    "id": "TRADE-101-A05",
+    "name": "Simple Circuit Breadboard Lab",
+    "module_id": "TRADE-101-M3",
+    "grade_range": ["5", "6", "7", "8"],
+    "duration_minutes": 45,
+    "description": "Build working circuits on breadboards with batteries, LEDs, resistors, and switches. Students understand voltage, current, series/parallel, and use multimeters to measure. Safe, no danger of shock. Real outcome: light comes on when you press the switch.",
+    "materials": ["Breadboards", "9V batteries and holders", "LED assortment", "Resistors (220-470 ohm)", "Jumper wires", "Switches", "Multimeters"],
+    "learning_objectives": [
+      "Build series and parallel circuits correctly",
+      "Understand why resistors are needed (protect LEDs)",
+      "Use a multimeter to measure voltage and current",
+      "Troubleshoot a circuit that doesn't work",
+      "Explain what voltage, current, and resistance mean"
+    ],
+    "variations": [
+      "Younger: simple series circuits with one LED",
+      "Older: design a control circuit with multiple switches",
+      "Advanced: PWM dimming control"
+    ]
+  },
+  {
+    "id": "TRADE-101-A06",
+    "name": "Wire a Light Switch (Model)",
+    "module_id": "TRADE-101-M3",
+    "grade_range": ["7", "8", "9", "10"],
+    "duration_minutes": 60,
+    "description": "Safe 12V model of home electrical wiring. Students wire a switch to control a lamp, following proper wiring practices: correct wire gauges, secure connections, proper switch wiring (line in, load out), and safety. Uses low voltage so no shock hazard, but follows real residential standards. Students understand how the light switch in their bedroom actually works.",
+    "materials": ["12V power supply", "12V light fixtures and bulbs", "18-2 or 18-3 low-voltage wire", "Light switches (standard residential style)", "Wire nuts (optional, for teaching)", "Voltage tester", "Multimeter", "Drawings of circuit and wiring diagram"],
+    "learning_objectives": [
+      "Understand switch operation (break and make contact)",
+      "Follow electrical diagrams and schematics",
+      "Strip and secure wire connections properly",
+      "Verify correct wiring with a multimeter",
+      "Explain why a switch must be in the 'hot' line",
+      "Troubleshoot a wiring error"
+    ],
+    "variations": [
+      "Three-way switches (two switches control one light)",
+      "Dimmer switch (demonstrates variable resistance)",
+      "Multiple light circuits with circuit breaker protection"
+    ]
+  },
+  {
+    "id": "TRADE-101-A07",
+    "name": "PVC Pipe Plumbing Assembly",
+    "module_id": "TRADE-101-M4",
+    "grade_range": ["5", "6", "7", "8"],
+    "duration_minutes": 45,
+    "description": "Assemble plumbing using PVC pipe, fittings (elbows, tees, unions), and PVC cement. Students build a small system, test it with water, and identify any leaks. Emphasizes proper fitting selection, primer, cement application, and pressure testing. Real outcome: a system that holds water without leaks.",
+    "materials": ["1/2 inch PVC pipe (cut into pieces)", "Assorted fittings: elbows, tees, unions, adapters", "PVC primer and cement", "Brush for primer and cement", "Tape measure", "Hacksaw or PVC cutter", "End caps and plugs", "Bucket for water testing", "Dry cloth for cleanup"],
+    "learning_objectives": [
+      "Identify pipe and fitting types",
+      "Cut pipe squarely",
+      "Apply primer and cement correctly",
+      "Assemble fittings in proper orientation",
+      "Test system with water",
+      "Identify and fix leaks",
+      "Understand pressure and flow"
+    ],
+    "variations": [
+      "Young: pre-assembled fittings, dry fitting practice",
+      "Older: design a water distribution system",
+      "Advanced: add ball valves and drains"
+    ]
+  },
+  {
+    "id": "TRADE-101-A08",
+    "name": "Water Pressure Experiment",
+    "module_id": "TRADE-101-M4",
+    "grade_range": ["6", "7", "8", "9"],
+    "duration_minutes": 45,
+    "description": "Hands-on demonstration of water pressure principles using containers, tubes, and valves. Students observe that pressure depends on height and depth, understand why dams are thicker at the bottom, understand why tall buildings need pressure tanks, and discover why your shower pressure drops when someone flushes. Turns abstract physics into tangible experience.",
+    "materials": ["Clear containers of different heights", "Water", "Tubes of different sizes", "Pinch clamps or valves", "Buckets for catching water", "Rulers or measuring sticks", "Small objects to demonstrate buoyancy and pressure"],
+    "learning_objectives": [
+      "Understand that water pressure increases with depth",
+      "Explain why pipes need support (weight of water)",
+      "Understand why buildings need pressure regulators",
+      "Predict what happens when you add/remove water from the system",
+      "Explain flow rate and pressure relationship"
+    ],
+    "variations": [
+      "Younger: simple height demonstrations, play with water flow",
+      "Older: calculate pressure at various depths",
+      "Advanced: explore siphoning and trap principles"
+    ]
+  },
+  {
+    "id": "TRADE-101-A09",
+    "name": "Sheet Metal Box Fabrication",
+    "module_id": "TRADE-101-M5",
+    "grade_range": ["8", "9", "10", "11"],
+    "duration_minutes": 120,
+    "description": "Cut, bend, and join sheet metal to create a functional box. Students use metal shears to cut flat stock, a bending brake to create folds, and either rivets or self-tapping screws to assemble. Emphasizes planning before cutting, precision measurement, and understanding how sheet metal behaves. Real outcome: a metal box suitable for holding tools or parts.",
+    "materials": ["22-gauge steel sheet (mild steel preferred)", "Metal shears or tin snips", "Bending brake or fabrication table with clamping", "Drill with metal bits", "Pop rivet tool and rivets OR #6 self-tapping screws and screwdriver", "Ruler, square, marker", "Work gloves and eye protection", "Deburring tool"],
+    "learning_objectives": [
+      "Lay out a box design and calculate material needed",
+      "Measure and mark metal for cutting",
+      "Cut sheet metal safely with proper tools",
+      "Bend metal using a brake without over-bending",
+      "Assemble metal with rivets or screws properly",
+      "Understand grain direction and work hardening in metals"
+    ],
+    "variations": [
+      "Younger: simpler 4-side box, pre-bent sides provided",
+      "Older: custom design, integrated hinges for lid",
+      "Advanced: powder coat or paint the finished box"
+    ]
+  },
+  {
+    "id": "TRADE-101-A10",
+    "name": "Tack Welding Practice (Simulation)",
+    "module_id": "TRADE-101-M5",
+    "grade_range": ["9", "10", "11", "12"],
+    "duration_minutes": 90,
+    "description": "Practice basic welding technique in a safe environment (simulation or supervised low-amperage welding). Students learn proper positioning, correct arc length, travel speed, and bead formation. Emphasis on muscle memory and developing the feel for good technique. Real equipment under expert supervision or high-quality simulator software. Produces practice beads and tack welds.",
+    "materials": ["Welding workstation OR welding simulator software", "Welding helmet, gloves, apron (PPE)", "Practice coupons (steel flat stock, 1/8 inch thick)", "Wire feeder and shielding gas (if real welding) OR simulator system", "Wire brush and chipping hammer", "Safety glasses"],
+    "learning_objectives": [
+      "Don proper PPE without assistance",
+      "Strike an arc safely",
+      "Maintain proper arc length and travel speed",
+      "Produce a straight, clean bead with good fusion",
+      "Understand what causes common defects (porosity, undercut, cold joints)",
+      "Inspect welds for quality",
+      "Respect the dangers of welding (heat, UV, fumes)"
+    ],
+    "variations": [
+      "Start with simulator for technique development",
+      "Progress to real welding under supervision",
+      "Different joint types: flat, vertical, overhead",
+      "Weld actual parts together (small metal box, frame)"
+    ]
+  }
+]
