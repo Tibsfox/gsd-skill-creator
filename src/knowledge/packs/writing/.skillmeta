@@ -1,0 +1,420 @@
+# GSD Skill Metadata
+pack_id: WRIT-101
+pack_name: "Literature & Creative Writing -- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: applied_practical
+learning_domain: literature_writing
+
+# Content Description
+description: |
+  Literature as a window into human experience and creative writing as a means
+  of self-expression, critical thinking, and empathy. Reading deeply and writing
+  boldly, from picture books to novels, from haiku to epic poetry. Moving beyond
+  comprehension questions and five-paragraph essays toward genuine engagement
+  with storytelling, narrative craft, and authentic expression.
+
+short_description: "Close reading, narrative craft, and authentic creative writing across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Literature & Writing Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: [READ-101]
+recommended_prior_knowledge:
+  - READ-101
+  - COMM-101
+
+# What This Pack Enables
+enables:
+  - COMM-101
+  - PHILO-101
+  - HIST-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["K", "1", "2"]
+    estimated_hours: [40, 60]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [60, 90]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [90, 130]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [130, 180]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [180, 240]
+
+# Modules
+modules:
+  - id: WRIT-101-M1
+    name: "Reading as Discovery"
+    description: "Developing close reading skills and learning to ask genuine questions while reading"
+    learning_outcomes:
+      - "Slow down and attend to how authors construct meaning through word choice, imagery, and structure"
+      - "Support interpretations with specific, relevant textual evidence"
+      - "Recognize that multiple valid interpretations can coexist"
+    topics:
+      - "Close Reading Practices & Annotation"
+      - "Word Choice & Connotation"
+      - "Imagery & Sensory Detail"
+      - "Structure, Pacing & Form"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 30
+      high: 25
+    prerequisite_modules: []
+
+  - id: WRIT-101-M2
+    name: "Story & Narrative"
+    description: "Understanding narrative craft -- character, point of view, conflict, dialogue, imagery, pacing"
+    learning_outcomes:
+      - "Trace character development and understand what motivates characters to act"
+      - "Analyze how point of view shapes reader understanding"
+      - "Create original fiction demonstrating understanding of narrative craft"
+    topics:
+      - "Character Development & Motivation"
+      - "Point of View & Narrator Perspective"
+      - "Conflict: External & Internal"
+      - "Dialogue, Imagery & Pacing"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 35
+      middle: 40
+      high: 35
+    prerequisite_modules: [WRIT-101-M1]
+
+  - id: WRIT-101-M3
+    name: "Poetry & Language"
+    description: "Appreciating poetry across forms and understanding how language functions with power"
+    learning_outcomes:
+      - "Recognize and appreciate poetry across different forms and time periods"
+      - "Understand how sound and form contribute to meaning"
+      - "Write original poetry experimenting with forms and language"
+    topics:
+      - "Forms: Haiku, Sonnet, Free Verse & Others"
+      - "Imagery & Sensory Language"
+      - "Figurative Language: Metaphor, Simile, Personification"
+      - "Sound Devices & Rhythm"
+    grade_levels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 30
+      high: 30
+    prerequisite_modules: [WRIT-101-M1]
+
+  - id: WRIT-101-M4
+    name: "The Writing Process"
+    description: "Understanding writing as recursive -- drafting, feedback, revision, editing, and authentic voice development"
+    learning_outcomes:
+      - "Draft regularly and revise substantially based on feedback"
+      - "Participate in peer workshops and give constructive feedback"
+      - "Develop personal voice through repeated practice"
+    topics:
+      - "Drafting & Discovery"
+      - "Workshopping & Peer Feedback"
+      - "Revising & Rethinking"
+      - "Editing & Publishing"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 35
+      high: 40
+    prerequisite_modules: [WRIT-101-M1]
+
+  - id: WRIT-101-M5
+    name: "Literary Analysis & Critical Response"
+    description: "Moving beyond plot summary to interpret meaning and understand how texts work within historical context"
+    learning_outcomes:
+      - "Move beyond plot summary to interpret what texts mean"
+      - "Support interpretations with specific textual evidence and logical reasoning"
+      - "Contextualize texts within history, culture, and literary movements"
+    topics:
+      - "Thematic Analysis"
+      - "Symbolism & Deeper Meanings"
+      - "Historical & Cultural Context"
+      - "Multiple Interpretive Frameworks"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 15
+      middle: 35
+      high: 40
+    prerequisite_modules: [WRIT-101-M1]
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-RD-001
+    description: "Read closely, asking genuine questions and attending to authorial choices"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-NR-001
+    description: "Understand narrative craft and how authors shape reader experience"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-PO-001
+    description: "Appreciate and write poetry in diverse forms"
+    levels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-WR-001
+    description: "Write regularly across forms, revise substantially, and develop personal voice"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-AN-001
+    description: "Analyze literature, moving beyond plot summary to interpret meaning"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Reading Discussions"
+    frequency: ongoing
+
+  - type: formative
+    name: "Annotation Review"
+    frequency: weekly
+
+  - type: summative
+    name: "Portfolio Review"
+    frequency: end_of_module
+
+  - type: summative
+    name: "Literary Analysis Essay"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: annotation_tools
+    description: "Digital tools for marking texts and recording observations (Hypothesis, Google Docs comments)"
+
+  - name: workshop_platform
+    description: "Platforms for sharing and receiving peer feedback (Google Classroom, Padlet, Perusall)"
+
+  - name: portfolio_tools
+    description: "Digital portfolio platforms (Google Drive, Wix, Cargo)"
+
+interactive_elements:
+  - type: discussion
+    name: "Literature Circle"
+
+  - type: workshop
+    name: "Peer Writing Workshop"
+
+  - type: activity
+    name: "Close Reading Annotation"
+
+  - type: project
+    name: "Portfolio Development"
+
+  - type: performance
+    name: "Poetry Reading & Performance"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Español"
+      complete: false
+      progress: "0%"
+
+  planned: [fr, zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "All texts available in audio format for learners with visual impairments. Discussion and peer workshop can be conducted orally. Consider adding video demonstrations of reading strategies and writing process."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Common Core State Standards (CCSS)"
+    version: 2010
+    alignments:
+      "RL.K.1": "With prompting and support, ask and answer questions about key details in a text"
+      "RL.2.1": "Ask and answer such questions as who, what, where, when, why, and how"
+      "RL.4.3": "Describe characters, settings, and events with relevant details"
+      "RL.6.2": "Determine a theme and/or central idea of a text"
+      "RL.9-10.3": "Analyze complex character development"
+      "W.K.3": "Attempt to write simple stories"
+      "W.2.3": "Write narratives in which they recount a well-elaborated event"
+      "W.4.3": "Write narratives to develop real or imagined experiences"
+      "W.6.3": "Write narratives to develop real or imagined experiences"
+      "W.9-10.3": "Write narratives to develop real or imagined experiences"
+
+  - framework: "National Council of Teachers of English (NCTE)"
+    version: 2020
+    alignments:
+      "Close Reading": true
+      "Reader Response": true
+      "Writing Process": true
+      "Peer Review": true
+      "Diverse Texts": true
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Difficulty is in developing habits of thoughtful reading and revision, not in technical content. Accessible to all learners. Foundation level begins with listening and picture books; complexity increases with age."
+
+# Content Flags
+content_flags:
+  - flag: mature_themes
+    description: "Some texts appropriate for older learners address mature themes (loss, discrimination, family conflict) that may be sensitive for younger readers"
+    mitigation: "Carefully select texts appropriate for grade level. Provide content warnings and alternative texts when needed. Create space for processing difficult themes."
+
+  - flag: cultural_sensitivity
+    description: "Literature includes diverse voices and perspectives; ensure respectful engagement with cultures and experiences beyond learner's own"
+    mitigation: "Teach contextual and cultural literacy. Avoid stereotyping or exoticizing texts. Amplify diverse authors and perspectives throughout."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/writ-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "WRIT-101"
+  looking_for:
+    - "Additional picture books and early reader texts for foundation level"
+    - "Contemporary and diverse texts across genres"
+    - "Young adult literature reflecting diverse experiences"
+    - "Poetry collections from underrepresented voices"
+    - "Translations to Spanish & Mandarin"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Literature & Writing Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - literature
+  - reading
+  - writing
+  - narrative
+  - poetry
+  - creative-writing
+  - language-arts
+  - english
+  - foundational
+  - critical-thinking
+  - communication
+
+# External Resources
+resources:
+  - type: organization
+    title: "National Council of Teachers of English"
+    author: "NCTE"
+    url: "https://www.ncte.org"
+
+  - type: platform
+    title: "Goodreads"
+    author: "Goodreads"
+    url: "https://www.goodreads.com"
+
+  - type: online_resource
+    title: "ReadWriteThink"
+    author: "NCTE & IRA"
+    url: "https://www.readwritethink.org"
+
+  - type: textbook
+    title: "The Art of Teaching Writing"
+    author: "Lucy Calkins"
+    url: null
+
+# Related Packs
+related_packs:
+  - id: READ-101
+    relationship: "Reading foundation that WRIT-101 builds upon"
+
+  - id: COMM-101
+    relationship: "WRIT-101 supports communication and expression skills"
+
+  - id: PHILO-101
+    relationship: "Literature analysis develops critical thinking for philosophy"
+
+  - id: HIST-101
+    relationship: "Historical understanding contextualizes literature within time periods"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "pen-nib"
+    color: "#9C27B0"
+    position: "Applied"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "WRIT-101-reading-practices"
+    - "WRIT-101-narrative-craft"
+    - "WRIT-101-poetry-forms"
+    - "WRIT-101-writing-process"
+    - "WRIT-101-literary-analysis"
+
+# File References
+files:
+  vision_document: "WRIT-101-vision.md"
+  modules_definition: "WRIT-101-modules.yaml"
+  activities: "WRIT-101-activities.json"
+  assessment: "WRIT-101-assessment.md"
+  resources: "WRIT-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering reading, narrative, poetry, writing process, and analysis"
+      - "Contributed 30 starter activities across all modules"
+      - "Aligned to Common Core and NCTE standards"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"
