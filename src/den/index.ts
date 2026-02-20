@@ -5,10 +5,10 @@
  * ISA encoder/decoder, filesystem bus operations, health metrics,
  * pruning, the dispatcher agent, the coordinator agent, the configurator
  * agent, the relay agent, the monitor agent, the planner agent,
- * the work intake procedure, and the executor agent.
+ * the work intake procedure, the executor agent, and the verifier agent.
  *
  * Usage:
- *   import { createDispatcher, createRelay, createPlanner, createExecutor, processIntake, sendMessage, BusConfigSchema } from './den/index.js';
+ *   import { createDispatcher, createRelay, createPlanner, createExecutor, createVerifier, processIntake, sendMessage, BusConfigSchema } from './den/index.js';
  */
 
 // Types and schemas
@@ -126,6 +126,17 @@ export {
   type ExecutionContext, type ArtifactHandoff, type ProgressReport,
   type ExecutorEntry, type ExecutorConfig,
 } from './executor.js';
+
+// Verifier
+export {
+  VerifierConfigSchema, VerificationGateSchema,
+  VerdictSchema, VerificationResultSchema, VerifierEntrySchema,
+  createVerificationGates, runGate, renderVerdict, reportVerdict,
+  appendVerifierEntry, readVerifierLog,
+  Verifier, createVerifier,
+  type VerificationGate, type Verdict, type VerificationResult,
+  type VerifierEntry, type VerifierConfig, type GateChecker,
+} from './verifier.js';
 
 // Intake
 export {
