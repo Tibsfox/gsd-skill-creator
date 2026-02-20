@@ -3,8 +3,8 @@
  *
  * Single entry point for all Den module functionality: type schemas,
  * ISA encoder/decoder, filesystem bus operations, health metrics,
- * pruning, the dispatcher agent, the coordinator agent, the relay agent,
- * and the monitor agent.
+ * pruning, the dispatcher agent, the coordinator agent, the configurator
+ * agent, the relay agent, and the monitor agent.
  *
  * Usage:
  *   import { createDispatcher, createRelay, sendMessage, BusConfigSchema } from './den/index.js';
@@ -67,6 +67,18 @@ export {
   type CoordinatorConfig, type ResponseCollector,
   type ReadinessCheckOptions, type PhaseTransitionOptions, type EscalationOptions,
 } from './coordinator.js';
+
+// Configurator
+export {
+  ConfiguratorConfigSchema, TopologyProfileSchema,
+  ChipsetReadinessSchema, SkillRequirementSchema, ConfigEntrySchema,
+  TOPOLOGY_PROFILES,
+  selectTopology, evaluateSkillRequirements, checkChipsetReadiness,
+  appendConfigEntry, readConfigLog,
+  Configurator, createConfigurator,
+  type TopologyProfile, type SkillRequirement, type ChipsetReadiness,
+  type ConfigEntry, type ConfiguratorConfig,
+} from './configurator.js';
 
 // Relay
 export {
