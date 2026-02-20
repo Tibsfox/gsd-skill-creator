@@ -10,12 +10,12 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
-Phase: 250 of 254 (Specialized Packs Batch 1)
-Plan: 5 of 5 complete (250-01 PHILO-101, 250-02 THEO-101, 250-03 PE-101, 250-04 NATURE-101, 250-05 DOMESTIC-101)
-Status: Complete (batch complete, proceeding to next phase)
-Last activity: 2026-02-20 — Completed 250-05 (DOMESTIC-101 Home Economics & Life Skills pack)
+Phase: 251 of 254 (Specialized Packs Batch 2)
+Plan: 2 of 5 complete (251-02 MUSIC-101)
+Status: In Progress (batch 2 underway, 5 parallel plans)
+Last activity: 2026-02-20 — Completed 251-02 (MUSIC-101 Music & Sound pack)
 
-Progress: [###################.] 79%
+Progress: [####################] 80%
 
 ## Performance Metrics
 
@@ -60,6 +60,7 @@ Progress: [###################.] 79%
 | 250 | 01 | 9min | 2 | 7 |
 | 250 | 05 | 11min | 2 | 7 |
 | 250 | 04 | 13min | 2 | 7 |
+| 251 | 02 | 8min | 2 | 7 |
 
 ## Accumulated Context
 
@@ -186,6 +187,13 @@ Progress: [###################.] 79%
 - [Phase 250-04]: Nature journal as primary assessment artifact; assessment tracks observation quality, not memorization
 - [Phase 250-04]: SCI-101 and ENVR-101 as recommended prior knowledge; enables nothing (terminal specialization)
 - [Phase 250-04]: Citizen science integration: iNaturalist, eBird, and GLOBE Observer as real data platforms
+- [Phase 251-03]: TRADE-101 classified as specialized_deepening with trades_and_applied_skills learning domain
+- [Phase 251-03]: 5 modules for TRADE-101: Tools & Safety, Woodworking, Electrical, Plumbing, Welding for comprehensive trades coverage
+- [Phase 251-03]: 10 activities (2 per module) emphasizing real outcomes (working circuits, plumbing without leaks, welded joints)
+- [Phase 251-03]: Assessment competency-based, safety-first: "Can student perform this safely and correctly?"
+- [Phase 251-03]: Prerequisite structure: M1 foundation for all, M2-M4 require M1, M5 requires M1+M2
+- [Phase 251-03]: Recommended prior knowledge: MATH-101, PHYS-101, ENGR-101; enables nothing (terminal specialization)
+- [Phase 251-03]: 90+ resource links curated across 12 categories (foundational texts, learners, parents, specialists, career, safety)
 
 ### Key Context
 
@@ -216,4 +224,4 @@ Resume file: None
 
 ## Next Up
 
-Phase 250 complete (all 5 plans done). Proceed to phase 251 (specialized packs batch 2) or next available phase.
+Phase 251 in progress (1 of 5 plans complete: TRADE-101). Batch 2 has 4 remaining parallel plans. Phase 252 (metadata/validation) gates on completion of all pack content.

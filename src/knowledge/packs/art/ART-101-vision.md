@@ -298,6 +298,53 @@ Many parents grew up in educational systems where art was marginalized or they w
 
 Art is for everyone. Including you.
 
+### What Art Develops That Schools Often Ignore
+
+While standardized testing measures narrow skills, art education develops capacities that research shows are essential for success in every field:
+
+**Observation & Attention** — In a distracted world, art teaches sustained focus. Students who learn to observe closely become more attuned to detail, pattern, and subtlety. This attentional capacity transfers to reading, science, and social awareness.
+
+**Iterative Thinking** — Art is never "done" the first time. The willingness to revise, to see a sketch as a starting point rather than a final product, is the same thinking that engineers, writers, and problem-solvers use. Art normalizes revision as improvement, not failure.
+
+**Creative Confidence** — Students who experience success in art, who are told "there's no right answer" and "your interpretation matters," develop confidence to take intellectual risks in other domains. They become more willing to speak up in class, to propose unconventional solutions, to experiment.
+
+**Visual Literacy** — In an increasingly visual world (social media, film, design, data visualization), the ability to read and create images is literacy itself. Students need to understand how images persuade, what's hidden in visual choices, how to communicate visually.
+
+**Tolerance for Ambiguity** — Unlike math problems with single answers, art teaches comfort with multiple solutions, interpretation, and open-endedness. This capacity is essential for navigating complexity and uncertainty.
+
+**Cross-Disciplinary Thinking** — Art requires understanding history, culture, science, mathematics, and human nature. Artists see patterns across domains. This synthetic thinking is increasingly valuable as problems become more complex.
+
+---
+
+## How ART-101 Integrates with GSD-OS
+
+ART-101 is designed for seamless integration with the broader GSD learning ecosystem. The pack connects to other foundational domains and leverages GSD infrastructure for differentiation and progress tracking.
+
+### Scaffolding & Adaptive Pacing
+
+The modules are structured to allow multiple entry points. A student struggling with observational drawing (M1) can simultaneously explore media and materials (M3) without prerequisite burden. Meanwhile, a confident drawer can dive into art history (M4) while continuing to refine technique.
+
+GSD's adaptive pacing system tracks which modules a student has engaged with and recommends sequences:
+- **Linear Pathway**: M1 → M2 → M3 → M4 → M5 (builds skills sequentially)
+- **Parallel Pathway**: All modules available; depth increases over time
+- **Interest-Driven Pathway**: Student selects modules by interest (M4 art history first, then returns to M1)
+
+### Skill-Creator Integration
+
+The pack includes observation points for the skill-creator adaptive learning system:
+- **Pattern Detection**: Student gravitates toward sculpture over drawing → suggest ENGR-101 design thinking
+- **Pattern Detection**: Student excels at analyzing artworks and cultural context → suggest HIST-101 deeper study
+- **Skill Promotion**: Student develops portfolio and articulates artistic vision → promote to contemporary art and social practice specialization
+- **Performance Tracking**: Monitor growth in observational accuracy, intentional choice-making, and critique quality over time
+
+### Dashboard Integration
+
+ART-101 appears in the GSD dashboard with:
+- Visual Icon: Palette (representing visual expression)
+- Color: Hot pink (#E91E63, distinctive and inviting)
+- Position: Specialized tier (alongside philosophy, theology, nature studies)
+- Quick Access: Link to observational drawing activities, art history resources, critique guides
+
 ---
 
 ## Connection to Other Packs
