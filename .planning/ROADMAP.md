@@ -12,8 +12,8 @@
 - [x] **Phase 246: Core Academic Packs Batch 2** - CHEM-101, READ-101, CRIT-101, PROB-101, COMM-101 full suites (completed 2026-02-20)
 - [x] **Phase 247: Core Academic Packs Batch 3** - HIST-101, GEO-101, MFAB-101, BUS-101, STAT-101 full suites (gap closure in progress) (completed 2026-02-20)
 - [x] **Phase 248: Applied Packs Batch 1** - CODE-101 (import/adapt), DATA-101, LANG-101, PSYCH-101, ENVR-101 full suites (completed 2026-02-20)
-- [ ] **Phase 249: Applied Packs Batch 2** - NUTR-101, ECON-101, WRIT-101, LOG-101, DIGLIT-101 full suites
-- [ ] **Phase 250: Specialized Packs Batch 1** - PHILO-101, THEO-101, PE-101, NATURE-101, DOMESTIC-101 full suites
+- [x] **Phase 249: Applied Packs Batch 2** - NUTR-101, ECON-101, WRIT-101, LOG-101, DIGLIT-101 full suites (completed 2026-02-20)
+- [x] **Phase 250: Specialized Packs Batch 1** - PHILO-101, THEO-101, PE-101, NATURE-101, DOMESTIC-101 full suites (completed 2026-02-20)
 - [ ] **Phase 251: Specialized Packs Batch 2** - ART-101, MUSIC-101, TRADE-101, ASTRO-101, LEARN-101 full suites
 - [ ] **Phase 252: Pack Metadata & Validation** - Cross-pack dependency graph, standards alignment, translation stubs, accessibility, content validation, master INDEX generation
 - [ ] **Phase 253: GSD-OS Dashboard** - Knowledge pack browser panel, search, detail view, skill tree, activity suggestions, progress tracking
@@ -221,8 +221,8 @@ Phases 243-244 sequential (infrastructure first). Phases 245-251 parallelizable 
 | 246. Core Academic Packs Batch 2 | 6/6 | Complete    | 2026-02-20 |
 | 247. Core Academic Packs Batch 3 | 9/9 | Complete    | 2026-02-20 |
 | 248. Applied Packs Batch 1 | 0/5 | Complete    | 2026-02-20 |
-| 249. Applied Packs Batch 2 | 0/5 | Planned | - |
-| 250. Specialized Packs Batch 1 | 0/5 | Planned | - |
+| 249. Applied Packs Batch 2 | 0/5 | Complete    | 2026-02-20 |
+| 250. Specialized Packs Batch 1 | 5/5 | Complete   | 2026-02-20 |
 | 251. Specialized Packs Batch 2 | 0/5 | Planned | - |
 | 252. Pack Metadata & Validation | 0/TBD | Not started | - |
 | 253. GSD-OS Dashboard | 0/TBD | Not started | - |
