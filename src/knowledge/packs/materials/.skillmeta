@@ -1,0 +1,356 @@
+# GSD Skill Metadata
+pack_id: MFAB-101
+pack_name: "Materials & Manufacturing -- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: materials_science
+
+# Content Description
+description: |
+  Understanding how materials are chosen based on properties and how objects
+  are fabricated -- from artisanal craft to industrial processes. Material
+  properties (strength, flexibility, conductivity, durability) determine what
+  can be built and how. This pack bridges science (material properties) and
+  engineering (design for manufacturability), covering material families,
+  fabrication processes, design for manufacturing, and sustainability.
+
+short_description: "Material properties, families, fabrication processes, design for manufacturing, and sustainability across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Materials Science Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - SCI-101
+  - ENGR-101
+
+# What This Pack Enables
+enables:
+  - TRADE-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: [PreK, K, 1, 2]
+    estimated_hours: [25, 40]
+
+  - label: Elementary
+    grades: [3, 4, 5]
+    estimated_hours: [50, 80]
+
+  - label: "Middle School"
+    grades: [6, 7, 8]
+    estimated_hours: [80, 120]
+
+  - label: "High School"
+    grades: [9, 10, 11, 12]
+    estimated_hours: [120, 180]
+
+  - label: College
+    grades: [13, 14, 15, 16]
+    estimated_hours: [180, 240]
+
+# Modules
+modules:
+  - id: MFAB-101-M1
+    name: "Material Properties & Testing"
+    level: foundation
+    duration_hours: 25
+
+  - id: MFAB-101-M2
+    name: "Materials Families"
+    level: foundation-high
+    duration_hours: 25
+    prereq_modules: [MFAB-101-M1]
+
+  - id: MFAB-101-M3
+    name: "Fabrication & Manufacturing Processes"
+    level: foundation-high
+    duration_hours: 30
+    prereq_modules: [MFAB-101-M1]
+
+  - id: MFAB-101-M4
+    name: "Design for Manufacturing"
+    level: elementary-high
+    duration_hours: 25
+    prereq_modules: [MFAB-101-M2, MFAB-101-M3]
+
+  - id: MFAB-101-M5
+    name: "Sustainability & Lifecycle"
+    level: foundation-high
+    duration_hours: 20
+    prereq_modules: [MFAB-101-M1]
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-MPT-001
+    description: "Identify and measure material properties using controlled tests"
+    levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-MFM-001
+    description: "Classify materials into families and predict properties based on family membership"
+    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-FAB-001
+    description: "Match materials to compatible manufacturing processes and perform basic fabrication"
+    levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-DFM-001
+    description: "Select materials and processes for design projects with justified tradeoff reasoning"
+    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-SUS-001
+    description: "Evaluate material lifecycle impact and integrate sustainability into material selection"
+    levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Material Property Test Review"
+    frequency: per_activity
+
+  - type: formative
+    name: "Material Selection Reasoning Check"
+    frequency: per_project
+
+  - type: formative
+    name: "Process Matching Exercise"
+    frequency: per_module
+
+  - type: summative
+    name: "Material Selection Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Material Analysis Report"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: tinkercad
+    url: https://www.tinkercad.com
+    description: "Free browser-based 3D design for designing objects before selecting manufacturing processes"
+
+  - name: materials_database
+    integrated: true
+    description: "Digital materials property database for comparing material characteristics"
+
+interactive_elements:
+  - type: manipulative
+    name: "Material Properties Testing Station"
+
+  - type: manipulative
+    name: "Fabrication Process Demonstrations"
+
+  - type: visualization
+    name: "Material Lifecycle Mapper"
+
+  - type: game
+    name: "Material Mystery Identification Challenge"
+
+  - type: simulator
+    name: "Manufacturing Process Simulator"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+
+  planned: [fr, zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Hands-on material testing activities have text-based alternatives for learners with motor limitations."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Next Generation Science Standards (NGSS)"
+    version: 2013
+    alignments:
+      2-PS1: "Matter and Its Interactions"
+      5-PS1: "Matter and Its Interactions"
+      MS-PS1: "Matter and Its Interactions"
+      HS-PS1: "Matter and Its Interactions"
+      MS-ETS1: "Engineering Design"
+
+  - framework: "ITEEA Standards for Technological and Engineering Literacy"
+    version: 2020
+    alignments:
+      Core Disciplinary Ideas: true
+      Manufacturing Technologies: true
+      Materials Processing: true
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: medium
+  prerequisites_required: low
+  notes: "Hands-on material exploration makes entry accessible; manufacturing complexity scales with grade level"
+
+# Content Flags & Warnings
+content_flags:
+  - flag: safety_considerations
+    description: "Fabrication activities involve tools, heat, and materials that require safety awareness"
+    mitigation: "Safety guidelines provided for every activity. Age-appropriate tool restrictions. All activities have tool-free alternatives for younger learners."
+
+  - flag: environmental_content
+    description: "Pack includes frank discussion of environmental damage from material extraction and manufacturing"
+    mitigation: "Focus on empowerment (what can we do better?) rather than despair. Balance problem awareness with solution-oriented thinking."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/mfab-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "MFAB-101"
+  looking_for:
+    - "Material test data from different regions and material sources"
+    - "Local material alternatives for activities (regional substitutions)"
+    - "Manufacturing process documentation (photos, videos, step-by-step)"
+    - "Cultural material traditions as case studies"
+    - "Translations to Spanish & Mandarin"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Materials Science Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - materials
+  - manufacturing
+  - fabrication
+  - material-properties
+  - metals
+  - plastics
+  - polymers
+  - ceramics
+  - composites
+  - wood
+  - sustainability
+  - lifecycle
+  - recycling
+  - design-for-manufacturing
+  - hands-on
+  - maker
+  - foundational
+  - stem
+
+# External Resources
+resources:
+  - type: textbook
+    title: "Stuff Matters"
+    author: "Mark Miodownik"
+    url: null
+
+  - type: online_platform
+    title: "How It's Made (Discovery)"
+    author: "Discovery Channel"
+    url: "https://www.sciencechannel.com/show/how-its-made"
+
+  - type: online_platform
+    title: "MIT OpenCourseWare: Materials Science"
+    author: "MIT"
+    url: "https://ocw.mit.edu/courses/materials-science-and-engineering/"
+
+  - type: organization
+    title: "ASM International Education"
+    author: "ASM International"
+    url: "https://www.asminternational.org/education"
+
+# Related Packs
+related_packs:
+  - id: SCI-101
+    relationship: "Materials science IS applied science: atomic bonding, forces, and classification"
+
+  - id: ENGR-101
+    relationship: "Engineering provides the design process; materials provide the physical vocabulary"
+
+  - id: CHEM-101
+    relationship: "Chemistry explains why materials have the properties they do"
+
+  - id: MATH-101
+    relationship: "Material properties are quantitative: force, stress, cost analysis"
+
+  - id: TRADE-101
+    relationship: "Every trade works with specific materials using specific processes"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "hammer"
+    color: "#607D8B"
+    position: "Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "MFAB-101-material-properties"
+    - "MFAB-101-material-families"
+    - "MFAB-101-manufacturing-processes"
+    - "MFAB-101-assessment-patterns"
+    - "MFAB-101-parent-guidance"
+
+# File References
+files:
+  vision_document: "MFAB-101-vision.md"
+  modules_definition: "MFAB-101-modules.yaml"
+  activities: "MFAB-101-activities.json"
+  assessment: "MFAB-101-assessment.md"
+  resources: "MFAB-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering properties, families, fabrication, DFM, and sustainability"
+      - "10 starter activities emphasizing hands-on testing with everyday materials"
+      - "Aligned to NGSS Matter and Its Interactions standards"
+      - "Parent guidance for non-specialist families"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-05-20"
