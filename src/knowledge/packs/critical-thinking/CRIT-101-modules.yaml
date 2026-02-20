@@ -1,0 +1,301 @@
+---
+# CRIT-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: CRIT-101
+pack_name: "Critical Thinking -- Foundational Knowledge Pack"
+
+modules:
+  - id: CRIT-101-M1
+    name: "Claims & Evidence"
+    description: "Identifying claims, evaluating evidence quality, assessing source reliability, understanding burden of proof, and developing comfort with degrees of certainty"
+
+    learning_outcomes:
+      - "Distinguish claims from questions, commands, opinions, and definitions"
+      - "Evaluate evidence quality using an evidence hierarchy (anecdote to systematic review)"
+      - "Assess source reliability by examining expertise, bias, and methodology"
+      - "Apply the concept of burden of proof and proportional evidence"
+      - "Express degrees of certainty rather than binary true/false judgments"
+
+    topics:
+      - "Identifying Claims"
+      - "Types of Evidence"
+      - "Evidence Quality & Hierarchy"
+      - "Source Reliability Assessment"
+      - "Burden of Proof"
+      - "Degrees of Certainty & Confidence"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 25
+      middle: 30
+      high: 20
+
+    prerequisite_modules: []
+
+    activities:
+      count: 6
+      examples:
+        - "Claim Sorting Game (Fact vs. Opinion vs. Prediction)"
+        - "Source Reliability Ranking"
+        - "Evidence Strength Spectrum"
+        - "The Skeptic's Challenge"
+        - "Burden of Proof Debates"
+        - "Confidence Calibration"
+
+    assessments:
+      - "Can student distinguish claims from non-claims?"
+      - "Does student evaluate evidence quality rather than just quantity?"
+      - "Can student assess source reliability using specific criteria?"
+      - "Does student apply burden of proof appropriately?"
+
+  - id: CRIT-101-M2
+    name: "Arguments & Logical Reasoning"
+    description: "Understanding argument structure, distinguishing deductive from inductive reasoning, evaluating validity and soundness, identifying hidden assumptions, and constructing counterarguments"
+
+    learning_outcomes:
+      - "Map argument structure: premises, conclusions, and logical connections"
+      - "Distinguish deductive arguments (certainty) from inductive arguments (probability)"
+      - "Evaluate arguments for validity (correct form) and soundness (valid + true premises)"
+      - "Identify hidden assumptions that arguments depend on"
+      - "Construct counterarguments by steelmanning opposing positions"
+
+    topics:
+      - "Argument Structure (Premises & Conclusions)"
+      - "Deductive Reasoning"
+      - "Inductive Reasoning"
+      - "Validity vs. Soundness"
+      - "Hidden Assumptions"
+      - "Counterarguments & Steelmanning"
+
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      middle: 35
+      high: 30
+
+    prerequisite_modules: [CRIT-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Argument Mapping with Sticky Notes"
+        - "Build a Counterargument Challenge"
+        - "Syllogism Sorting"
+        - "Hidden Assumption Detective"
+        - "Deductive vs. Inductive Sorting"
+        - "The Steelmanning Exercise"
+
+    assessments:
+      - "Can student map argument structure from prose?"
+      - "Does student distinguish deductive from inductive reasoning?"
+      - "Can student evaluate validity and soundness independently?"
+      - "Does student identify hidden assumptions in real-world arguments?"
+
+  - id: CRIT-101-M3
+    name: "Fallacies & Biases"
+    description: "Recognizing formal and informal logical fallacies, understanding cognitive biases and heuristics, applying bias mitigation strategies, and analyzing reasoning errors in real-world contexts"
+
+    learning_outcomes:
+      - "Identify common informal fallacies in advertisements, media, and conversation"
+      - "Explain why each fallacy is logically flawed using specific reasoning"
+      - "Recognize cognitive biases in own thinking and in others' reasoning"
+      - "Apply bias mitigation strategies (consider-the-opposite, pre-mortem, checklists)"
+      - "Distinguish the fallacy fallacy from legitimate fallacy identification"
+
+    topics:
+      - "Formal Fallacies"
+      - "Informal Fallacies (Ad Hominem, Straw Man, False Dichotomy, etc.)"
+      - "Cognitive Biases (Confirmation, Availability, Anchoring, Dunning-Kruger)"
+      - "Bias Mitigation Strategies"
+      - "Fallacies in Real-World Contexts"
+      - "The Fallacy Fallacy"
+
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      middle: 30
+      high: 25
+
+    prerequisite_modules: [CRIT-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Fallacy Bingo (Spot Fallacies in Advertisements)"
+        - "Bias Blind Spot Mirror Exercise"
+        - "Fallacy Fix-It Workshop"
+        - "Cognitive Bias Case Studies"
+        - "The Devil's Advocate Game"
+        - "Media Fallacy Hunt"
+
+    assessments:
+      - "Can student identify fallacies in real-world contexts?"
+      - "Does student explain why each fallacy is problematic?"
+      - "Can student recognize biases in own reasoning?"
+      - "Does student apply bias mitigation strategies proactively?"
+
+  - id: CRIT-101-M4
+    name: "Applied Critical Thinking"
+    description: "Applying critical thinking to media literacy, decision making under uncertainty, ethical reasoning, Socratic dialogue, persuasion analysis, and collaborative reasoning"
+
+    learning_outcomes:
+      - "Evaluate news sources and media content for reliability, bias, and reasoning quality"
+      - "Use structured decision frameworks to make choices under uncertainty"
+      - "Analyze ethical dilemmas using multiple reasoning frameworks"
+      - "Facilitate and participate in Socratic dialogue"
+      - "Analyze persuasion techniques in rhetoric and advertising"
+
+    topics:
+      - "Media Literacy & Fact-Checking"
+      - "Decision Making Under Uncertainty"
+      - "Ethical Reasoning Frameworks"
+      - "Socratic Method & Dialogue"
+      - "Persuasion Analysis (Ethos, Pathos, Logos)"
+      - "Collaborative Reasoning"
+
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      middle: 30
+      high: 35
+
+    prerequisite_modules: [CRIT-101-M2, CRIT-101-M3]
+
+    activities:
+      count: 6
+      examples:
+        - "Fake News Detective Workshop"
+        - "Ethical Dilemma Discussion Circle"
+        - "Socratic Seminar"
+        - "Decision Matrix Workshop"
+        - "Persuasion Autopsy"
+        - "Collaborative Problem-Solving Protocol"
+
+    assessments:
+      - "Can student evaluate media sources using structured criteria?"
+      - "Does student use decision frameworks for complex choices?"
+      - "Can student apply multiple ethical frameworks to the same dilemma?"
+      - "Does student facilitate productive Socratic dialogue?"
+
+  - id: CRIT-101-M5
+    name: "Metacognition & Intellectual Humility"
+    description: "Developing awareness of own thinking processes, calibrating confidence accurately, practicing intellectual humility, and cultivating the courage to revise beliefs based on evidence"
+
+    learning_outcomes:
+      - "Monitor and describe own reasoning processes in real time"
+      - "Calibrate confidence to match actual accuracy"
+      - "Identify boundaries of own knowledge accurately"
+      - "Revise positions based on new evidence without defensiveness"
+      - "Demonstrate intellectual courage by following arguments to uncomfortable conclusions"
+
+    topics:
+      - "Thinking About Thinking"
+      - "Intellectual Humility"
+      - "Confidence Calibration"
+      - "Knowing What You Don't Know"
+      - "Growth Mindset for Reasoning"
+      - "Intellectual Courage"
+
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      middle: 20
+      high: 25
+
+    prerequisite_modules: [CRIT-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Thinking Aloud Protocol"
+        - "Calibration Training"
+        - "The Intellectual Humility Journal"
+        - "Pre-Mortem Analysis"
+        - "Perspective Rotation"
+        - "The What Would Change My Mind Exercise"
+
+    assessments:
+      - "Can student describe own reasoning process accurately?"
+      - "Does student's confidence match actual accuracy?"
+      - "Can student identify boundaries of own knowledge?"
+      - "Does student revise beliefs based on new evidence?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Evidence-Based Reasoning"
+    description: "Habit of supporting claims with evidence, evaluating evidence quality, and changing conclusions when evidence warrants"
+    assessed_in: [CRIT-101-M1, CRIT-101-M2, CRIT-101-M4]
+
+  - name: "Logical Analysis"
+    description: "Ability to evaluate argument structure, identify fallacies, recognize biases, and distinguish valid from invalid reasoning"
+    assessed_in: [CRIT-101-M2, CRIT-101-M3, CRIT-101-M4]
+
+  - name: "Intellectual Humility"
+    description: "Consistent recognition that knowledge is limited, biases are real, and conclusions are provisional -- paired with willingness to revise"
+    assessed_in: [CRIT-101-M1, CRIT-101-M3, CRIT-101-M5]
+
+  - name: "Applied Judgment"
+    description: "Ability to apply critical thinking tools to real-world situations: media, ethics, decisions, and collaborative discourse"
+    assessed_in: [CRIT-101-M1, CRIT-101-M4, CRIT-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4, with M5 woven throughout as reflective practice"
+    rationale: "Builds from evidence evaluation to argument analysis to fallacy detection to application. Metacognition develops in parallel as learners reflect on their own reasoning growth."
+
+  - name: "Spiral Pathway"
+    description: "Revisit all five modules repeatedly at increasing depth and sophistication"
+    rationale: "Critical thinking skills deepen with practice. A second pass through fallacies after studying arguments reveals subtleties missed the first time."
+
+  - name: "Issue-Centered Pathway"
+    description: "Choose a real-world issue and apply all five modules to it in sequence"
+    rationale: "A learner passionate about climate change, AI ethics, or media bias can learn all critical thinking skills through the lens of their interest."
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same introduction structure: What It Teaches, Interactive Elements, Technical Implementation Notes"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Interactive elements follow a consistent template across all modules"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure (Beginning, Developing, Proficient, Advanced) across all modules"
+    cached: true
+
+  - pattern: "Parent Guidance"
+    description: "Parent guidance follows the same question-and-encouragement format throughout"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner spontaneously asks for evidence in any context"
+    - "When learner identifies a fallacy in real-world content without prompting"
+    - "When learner recognizes own cognitive bias in real time"
+    - "When learner changes position based on new evidence"
+    - "When learner steelmans opposing view before responding"
+
+  pattern_detection:
+    - "Effective evidence evaluation protocols"
+    - "Successful argument analysis workflows"
+    - "Consistent fallacy detection patterns"
+    - "Productive bias mitigation routines"
+
+  skill_promotion:
+    - "Promote evidence-seeking habits to reusable skills"
+    - "Create argument analysis templates from successful evaluations"
+    - "Build fallacy detection checklists from observed recognition patterns"
+    - "Develop metacognitive reflection frameworks from effective self-monitoring"
+
+# This YAML defines the modular structure for the CRIT-101 pack and enables
+# skill-creator to orchestrate learning experiences centered on critical thinking.
