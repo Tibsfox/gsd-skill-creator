@@ -1,0 +1,167 @@
+[
+  {
+    "id": "LEARN-101-A01",
+    "name": "Working Memory Capacity Test",
+    "module_id": "LEARN-101-M1",
+    "grade_range": ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 15,
+    "description": "Test the limits of your working memory. Show a sequence of numbers: 7, 3, 9, 4, 1. Look away. Recall them. Repeat with longer sequences until you can't hold them. Discover your capacity (usually 5-9 items). Then learn chunking: group items into meaningful patterns (7394 and 1) and you can hold more. This reveals why long explanations are hard to follow and why chunking is powerful.",
+    "materials": ["Numbers written on cards or displayed on screen", "Pen and paper for writing responses", "Optional: math problems or words to test chunking"],
+    "learning_objectives": ["Understand the limits of working memory (5-9 items)", "Experience how chunking increases capacity", "Recognize situations where you exceed working memory limits", "Apply chunking strategies to manage cognitive load"],
+    "variations": ["Repeat with words or images instead of numbers", "Test with and without distraction (noise, video) to see attention effects", "Apply to real studying: break MATH-101 formulas into meaningful chunks"]
+  },
+  {
+    "id": "LEARN-101-A02",
+    "name": "Memory Palace Construction",
+    "module_id": "LEARN-101-M1",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 30,
+    "description": "The memory palace (or method of loci) is an ancient technique used by scholars and performers. Mentally walk through a familiar place (your home, school, route to the store). Associate information you want to remember with specific locations. 'I'll put the photosynthesis equation by the front door, the water cycle in the living room...' Walk through mentally to retrieve. This demonstrates how spatial memory is powerful and how encoding strategy (vivid, spatial associations) affects recall.",
+    "materials": ["Familiar location (mental or drawn map)", "Information to remember (could be MATH-101 formulas, SCI-101 concepts, READ-101 vocabulary)", "Optional: notebook for planning"],
+    "learning_objectives": ["Understand that memory encoding is stronger when vivid and spatial", "Apply the memory palace technique to information you're learning", "Appreciate how organization and association improve retrieval", "Transfer spatial memory to multiple subjects"],
+    "variations": ["Use a room in your home, a familiar route, or a map of your school", "Build progressively: start with 5 locations, expand to 20", "Apply to content from other packs: CHEM-101 atomic structure, HIST-101 timeline, CODE-101 algorithm steps"]
+  },
+  {
+    "id": "LEARN-101-A03",
+    "name": "Forgetting Curve Tracking: Personal Memory Decay",
+    "module_id": "LEARN-101-M1",
+    "grade_range": ["4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 60,
+    "description": "Ebbinghaus discovered the 'forgetting curve' — knowledge decays predictably over time. But strategic retrieval rebuilds memory stronger. Create a list of 20 facts from a pack you're studying (MATH-101, SCI-101, READ-101). Test yourself immediately (100% recall expected). Then test yourself after 1 day, 3 days, 1 week, 2 weeks. Graph the decay. Then study the forgotten items and test again. You'll see: forgetting is normal, strategic retrieval overcomes it.",
+    "materials": ["20 facts from any pack you're studying", "Test yourself (write answers)", "Graph paper or digital graphing tool", "Calendar to schedule reviews"],
+    "learning_objectives": ["Understand the forgetting curve as a natural phenomenon", "Experience how knowledge decays without review", "Learn that strategic retrieval reverses decay", "Apply spaced review to your real studying"],
+    "variations": ["Track multiple lists simultaneously (spacing vs. massing)", "Compare spacing intervals: review after 1 day vs. 3 days vs. 1 week", "Apply to content from PHYS-101 (formulas), CODE-101 (syntax), LANG-101 (vocabulary) — any pack"]
+  },
+  {
+    "id": "LEARN-101-A04",
+    "name": "Sleep Impact on Learning: Design and Document an Experiment",
+    "module_id": "LEARN-101-M1",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 120,
+    "description": "Sleep consolidates learning. Design an experiment: choose a learning target (MATH-101 problem set, SCI-101 concepts). Study it one evening, get full sleep, test yourself the next day. Then study similar material, get minimal sleep (or study in the morning instead), test yourself. Compare recall. Document: time slept, test performance, what you noticed. This demonstrates that sleep is not wasted time — it's when consolidation happens.",
+    "materials": ["Learning material to study (from any pack)", "Time log (when you sleep)", "Test yourself (write answers or solve problems)", "Notebook for observations"],
+    "learning_objectives": ["Understand sleep consolidation", "Design a simple scientific experiment", "Collect and analyze your own learning data", "Apply sleep science to your own study schedule"],
+    "variations": ["Compare different sleep durations (6h vs. 8h vs. 10h)", "Test other variables: sleep timing (night vs. afternoon nap), caffeine, exercise", "Document in a learning journal"]
+  },
+  {
+    "id": "LEARN-101-A05",
+    "name": "Retrieval Practice Quiz Generator",
+    "module_id": "LEARN-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 30,
+    "description": "Retrieval practice is the most powerful learning strategy. But you can't retrieve what you haven't studied. Choose content from any pack (MATH-101 formulas, SCI-101 concepts, READ-101 vocabulary, CRIT-101 fallacies). Create 10 quiz questions that force retrieval without giving away the answer. Take the quiz yourself. The difficulty of retrieval strengthens memory more than reading.",
+    "materials": ["Material from any pack you're studying", "Notebook or digital tool to write questions", "Answers written separately so you can quiz yourself"],
+    "learning_objectives": ["Understand that testing yourself beats reading", "Create retrieval opportunities in your studying", "Experience the difficulty of retrieval as a sign of learning, not failure", "Apply retrieval practice to any subject"],
+    "variations": ["Use flashcards (digital or physical)", "Quiz yourself with a study partner", "Use Anki or similar spaced repetition app", "Mix retrieval types: fill-in-blank, multiple choice, short answer"]
+  },
+  {
+    "id": "LEARN-101-A06",
+    "name": "Flashcard Spacing Schedule Builder",
+    "module_id": "LEARN-101-M2",
+    "grade_range": ["4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Spaced repetition works: review 1-3 days after learning, then 1 week, then 2-3 weeks, then monthly. Design a spacing schedule for material you're learning (MATH-101 formulas, CHEM-101 reactions, LANG-101 vocabulary, CODE-101 syntax). Create flashcards. Review on day 1. Mark which ones are still hard. Review the hard ones on day 3. Review all on day 7. Document what gets retained. Apps like Anki automate this, but building it yourself teaches the principle.",
+    "materials": ["Flashcards (index cards, digital, or Anki)", "Material from any pack you're studying", "Calendar to track review dates", "Notebook for tracking difficulty"],
+    "learning_objectives": ["Understand optimal spacing intervals", "Build a spaced review schedule", "Experience how spacing prevents forgetting", "Use apps like Anki to automate spaced repetition"],
+    "variations": ["Start with 10 cards, expand to 50+", "Compare manual spacing vs. app-based spacing", "Track which spacing intervals work best for you", "Apply to any pack: PHYS-101, HIST-101, BUS-101, etc."]
+  },
+  {
+    "id": "LEARN-101-A07",
+    "name": "Interleaving vs. Blocking Comparison Study",
+    "module_id": "LEARN-101-M2",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 60,
+    "description": "Blocking (solve 10 linear equations, then 10 quadratics, then 10 geometry problems) feels fluent while practicing but produces weak transfer. Interleaving (alternate equation, geometry, quadratic, equation, geometry...) is harder but produces stronger transfer. Design a study session: choose material from MATH-101 or SCI-101. Study half using blocking (feels easier), half using interleaving (feels harder). Test yourself on mixed problems. You'll discover: interleaving is harder while learning but better for retention and transfer.",
+    "materials": ["Math problems, science content, or other subject material", "Two study schedules: blocking and interleaving", "Test yourself on mixed problems", "Notebook for observations"],
+    "learning_objectives": ["Understand the fluency illusion (familiar = understood)", "Experience how interleaving is harder but more effective", "Learn when to block (initial learning) vs. interleave (mastery and transfer)", "Apply to any subject: PHYS-101 forces, CHEM-101 reactions, CODE-101 algorithms"],
+    "variations": ["Compare blocking vs. interleaving systematically on the same material", "Track which approach leads to better test performance", "Discuss why your brain might feel more confident with blocking"]
+  },
+  {
+    "id": "LEARN-101-A08",
+    "name": "Elaboration Practice: Connect New Ideas to What You Know",
+    "module_id": "LEARN-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 30,
+    "description": "Elaboration means connecting new information to existing knowledge. Choose a concept you're learning in any pack (photosynthesis from SCI-101, polynomial equations from MATH-101, historical causation from HIST-101). Ask: 'How is this like something I already know?' 'Why does this work this way?' 'What would happen if...?' These questions force deeper encoding than passive reading. Write connections, draw diagrams, explain to someone else.",
+    "materials": ["Concept from any pack you're studying", "Notebook for connections", "Optional: concept map tool or whiteboard"],
+    "learning_objectives": ["Understand elaboration as a powerful encoding strategy", "Connect new concepts to existing knowledge", "Deepen understanding through questioning", "Apply elaboration to any subject"],
+    "variations": ["Use concept mapping tools (Miro, Obsidian, paper)", "Explain the concept to someone else", "Draw diagrams showing connections", "Connect across multiple packs: how is ecosystems (SCI-101) like a business system (BUS-101)?"]
+  },
+  {
+    "id": "LEARN-101-A09",
+    "name": "Fluency Test: Can You Explain Without Looking?",
+    "module_id": "LEARN-101-M3",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 20,
+    "description": "Fluency (easy to read) is often mistaken for understanding. Choose material you've studied from any pack. Read it — it feels easy. Now close the book. Explain it without looking. Can you? If not, you have fluency but not understanding. This is the fluency illusion. Doing this test regularly catches gaps in understanding before the exam.",
+    "materials": ["Material you've studied from any pack", "Notebook or voice recording to explain", "Optional: someone to explain to"],
+    "learning_objectives": ["Distinguish fluency (easy to read) from understanding (can explain)", "Catch fluency illusions before exams", "Use as a self-assessment tool", "Apply to all your studying"],
+    "variations": ["Explain to someone else (even more revealing)", "Explain at increasing levels of difficulty (basic → complex → teaching someone else)", "Try immediately after reading, then after a day (shows retention too)"]
+  },
+  {
+    "id": "LEARN-101-A10",
+    "name": "Learning Journal Setup: Reflective Daily Practice",
+    "module_id": "LEARN-101-M3",
+    "grade_range": ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 15,
+    "description": "Start a learning journal where you reflect on your learning process, not just content. At the end of each study session, write: 'What did I learn? How did I learn it? What was hard? What strategy would help next time? How does this connect to other things I know?' Over time, patterns emerge. You'll notice what strategies work for you, how you respond to difficulty, whether you're building understanding or just familiarity.",
+    "materials": ["Notebook (physical or digital)", "Reflection prompts", "Regular time commitment (daily or after each study session)"],
+    "learning_objectives": ["Develop metacognitive awareness through reflection", "Track patterns in your learning", "Identify effective strategies", "Build self-regulation", "Connect learning across sessions and packs"],
+    "variations": ["Use structured prompts or free-form reflection", "Include sketches or diagrams", "Record audio reflections", "Share with a learning partner", "Review monthly to see patterns"]
+  },
+  {
+    "id": "LEARN-101-A11",
+    "name": "SMART Goal Workshop: Set and Track Learning Goals",
+    "module_id": "LEARN-101-M4",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 30,
+    "description": "Vague goals ('get better at math') don't work. SMART goals do: Specific, Measurable, Achievable, Relevant, Time-bound. Instead of 'understand SCI-101,' try 'Explain the water cycle without notes by Friday.' Instead of 'improve at CODE-101,' try 'Write and debug 5 programs using loops by two weeks.' Set goals that are specific enough that you can tell when you've achieved them.",
+    "materials": ["Notebook or digital goal tracker", "Calendar for deadlines", "Optional: goal-setting template"],
+    "learning_objectives": ["Understand why vague goals fail", "Set SMART goals for your learning", "Track progress toward goals", "Adjust goals based on progress", "Apply to any subject"],
+    "variations": ["Set daily, weekly, and monthly goals", "Share goals with a learning partner or mentor", "Review and adjust goals regularly", "Create goals for content from specific packs: MATH-101, READ-101, CODE-101, etc."]
+  },
+  {
+    "id": "LEARN-101-A12",
+    "name": "Productive Failure Challenge: Struggle Deliberately and Learn",
+    "module_id": "LEARN-101-M4",
+    "grade_range": ["4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Struggle is when learning happens. Choose something hard from a pack you're studying (PHYS-101 concepts, PROB-101 complex problems, CODE-101 debugging). Try to solve it without looking at the solution. Fail. Try again. Fail differently. After genuine struggle, look at the solution. You'll learn more from this struggle than from easy problems. The struggle updated your mental model.",
+    "materials": ["Difficult problem or concept from any pack", "Notebook for attempts", "Solution (to review after struggling)"],
+    "learning_objectives": ["Reframe struggle as a sign of learning, not failure", "Experience productive failure", "Understand how difficulty strengthens learning", "Build resilience and growth mindset", "Apply to challenging content in any subject"],
+    "variations": ["Document your failed attempts before looking at solution", "Discuss with others how their attempts differed", "Try increasingly difficult problems", "Apply across packs: tackle hard problems in MATH-101, CRIT-101, CODE-101, ENGR-101"]
+  },
+  {
+    "id": "LEARN-101-A13",
+    "name": "Cross-Pack Connection Map: How Does This Idea Apply Everywhere?",
+    "module_id": "LEARN-101-M5",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 60,
+    "description": "Choose a general principle that appears in multiple packs: 'evidence,' 'systems,' 'causation,' 'design,' 'transfer,' 'iteration.' Map how that principle appears across different packs. Example: Evidence appears in SCI-101 (experimental evidence), HIST-101 (primary sources), CRIT-101 (supporting arguments), and READ-101 (author's claims). Understanding evidence at this abstract level means you can recognize and work with evidence anywhere. Create a concept map showing how the principle manifests differently in each context.",
+    "materials": ["Concept map tool (Miro, Obsidian, pen and paper, digital whiteboard)", "2-3 packs to connect", "Specific examples from each pack"],
+    "learning_objectives": ["Identify abstract principles that transfer across domains", "Map concept instances across different contexts", "Build transfer ability through explicit connection", "Understand how metacognition amplifies learning", "Create personal knowledge frameworks"],
+    "variations": ["Start with one principle, expand to multiple", "Work with a partner and explain connections to each other", "Choose principles: systems, causation, design, evidence, iteration, constraints, transfer", "Apply this across all 35 packs over time"]
+  },
+  {
+    "id": "LEARN-101-A14",
+    "name": "Teach-Back Partner Session: Explain Learning to Someone Else",
+    "module_id": "LEARN-101-M5",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 30,
+    "description": "Find a partner who's learning something different (they're studying MATH-101, you're studying READ-101, for example). Explain what you learned to them. They'll ask questions you can't answer, revealing gaps. But more importantly, explaining forces you to organize your thinking, find the essence of what you understand, and transfer it. Teaching is one of the most powerful learning strategies.",
+    "materials": ["Another learner with different content", "Notebook for explaining", "25-30 minutes of uninterrupted time"],
+    "learning_objectives": ["Use teaching as a learning strategy", "Identify gaps in understanding through questions", "Build communication skills", "Deepen understanding through explanation", "Transfer concepts across domains"],
+    "variations": ["Teach a younger student", "Teach a peer learning the same content but needing help", "Record your explanation (reveals what's unclear)", "Teach using only words (no notes) — forces deep understanding"]
+  },
+  {
+    "id": "LEARN-101-A15",
+    "name": "Personal Learning System Design: Build Your Own Integration Framework",
+    "module_id": "LEARN-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 120,
+    "description": "You're learning from 35 different packs. How does it all fit together? Design your personal learning system. (1) How do you currently learn? What strategies do you use? (2) What works and what doesn't? (3) Based on LEARN-101, what improvements would help? (4) How do the packs connect? What principles run through multiple packs? (5) How will you implement? Tools? Schedule? Support? Document your system. Revisit and refine it monthly.",
+    "materials": ["Notebook or digital planning tool", "Calendar", "Optional: mind mapping software (Obsidian, Miro)", "Optional: tracking template for strategies and progress"],
+    "learning_objectives": ["Design a personal learning architecture", "Integrate learning from multiple sources", "Apply metacognitive awareness to system design", "Build coherent knowledge from diverse inputs", "Create sustainable learning habits"],
+    "variations": ["Start small (2-3 packs), expand gradually", "Include time for reflection, spacing, interleaving, elaboration, transfer", "Track which system components work and which don't", "Update your system based on experience", "Share your system with others and get feedback"]
+  }
+]
