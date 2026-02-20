@@ -1,0 +1,389 @@
+# GSD Skill Metadata
+pack_id: MATH-101
+pack_name: "Mathematics — Foundational Knowledge Pack"
+version: "1.0.0"
+release_date: "2026-02-19"
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: quantitative_reasoning
+
+# Content Description
+description: |
+  Mathematics as a way of thinking: pattern recognition, precise reasoning,
+  and building complexity from simple rules. Covers number, algebra, geometry,
+  and statistics from foundation through college level.
+
+short_description: "Pattern, precision, and mathematical thinking across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Mathematics Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge: []
+
+# What This Pack Enables
+enables:
+  - PHYS-101
+  - CODE-101
+  - DATA-101
+  - ECON-101
+  - ASTRO-101
+  - LOG-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [40, 60]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [60, 80]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [80, 120]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [120, 180]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [180, 240]
+
+# Modules
+modules:
+  - id: MATH-101-M1
+    name: "Number & Operations"
+    description: "Understanding quantity, place value, and how to combine/separate quantities"
+    learning_outcomes:
+      - "Recognize quantities without counting (subitizing)"
+      - "Understand what numbers represent"
+      - "Compose and decompose numbers flexibly"
+      - "Apply operations (add, subtract, multiply, divide) meaningfully"
+      - "Develop fluency with operations"
+    topics:
+      - "Subitizing & Cardinality"
+      - "Counting Principles"
+      - "Number Composition & Decomposition"
+      - "Addition & Subtraction"
+      - "Multiplication & Division"
+      - "Place Value"
+      - "Multi-Digit Operations"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 40
+      elementary: 30
+      middle: 20
+      high: 0
+    prerequisite_modules: []
+
+  - id: MATH-101-M2
+    name: "Patterns & Algebraic Thinking"
+    description: "Recognizing patterns, generalizing rules, using variables, solving equations"
+    learning_outcomes:
+      - "Extend and create patterns"
+      - "Describe patterns in multiple ways"
+      - "Understand variables as unknowns and as quantities that change"
+      - "Write and solve equations"
+      - "Understand functional relationships"
+    topics:
+      - "Pattern Recognition & Extension"
+      - "Generalization & Rule-Finding"
+      - "Variables as Unknowns"
+      - "Variables as Varying Quantities"
+      - "Functional Relationships"
+      - "Expressions & Equations"
+      - "Solving Equations"
+      - "Systems of Equations"
+      - "Polynomial Functions"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 30
+      elementary: 40
+      middle: 50
+      high: 40
+    prerequisite_modules: ["MATH-101-M1"]
+
+  - id: MATH-101-M3
+    name: "Geometry & Spatial Thinking"
+    description: "Understanding shapes, space, transformations, and geometric measurement"
+    learning_outcomes:
+      - "Recognize shapes and their properties"
+      - "Understand spatial relationships"
+      - "Apply transformations (rotation, reflection, translation)"
+      - "Measure geometric quantities (area, perimeter, volume)"
+      - "Reason about 3D space"
+    topics:
+      - "Shape Properties & Classification"
+      - "Spatial Relationships & Orientation"
+      - "Symmetry & Patterns"
+      - "Transformations (Rotation, Reflection, Translation)"
+      - "Congruence & Similarity"
+      - "Area & Perimeter"
+      - "Volume & Surface Area"
+      - "Coordinate Geometry"
+      - "Trigonometry"
+      - "3D Visualization"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 40
+      middle: 50
+      high: 40
+    prerequisite_modules: ["MATH-101-M1"]
+
+  - id: MATH-101-M4
+    name: "Data, Probability & Statistics"
+    description: "Collecting data, understanding uncertainty, interpreting information"
+    learning_outcomes:
+      - "Collect and organize data"
+      - "Represent data in multiple ways"
+      - "Understand probability intuitively"
+      - "Calculate and interpret statistics"
+      - "Reason about uncertainty"
+    topics:
+      - "Data Collection Methods"
+      - "Data Organization & Representation"
+      - "Measures of Center (Mean, Median, Mode)"
+      - "Measures of Spread (Range, Standard Deviation)"
+      - "Probability Foundations"
+      - "Experimental vs. Theoretical Probability"
+      - "Sampling & Inference"
+      - "Correlation vs. Causation"
+      - "Statistical Modeling"
+      - "Hypothesis Testing"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 15
+      elementary: 30
+      middle: 50
+      high: 40
+    prerequisite_modules: ["MATH-101-M1"]
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-NUM-001
+    description: "Recognize and describe numerical patterns"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-ALG-001
+    description: "Use variables to represent unknown quantities"
+    levels: ["3", "4", "5", "6", "7", "8"]
+
+  - code: LO-GEO-001
+    description: "Analyze properties of geometric shapes"
+    levels: ["3", "4", "5", "6", "7", "8"]
+
+  - code: LO-STAT-001
+    description: "Collect, organize, and interpret data"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Mathematical Discourse"
+    frequency: ongoing
+
+  - type: formative
+    name: "Problem-Solving Observations"
+    frequency: weekly
+
+  - type: summative
+    name: "Portfolio"
+    frequency: end_of_unit
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: graphing_calculator
+    url: "https://www.desmos.com"
+
+  - name: algebra_manipulatives
+    integrated: true
+    description: "Visual representations of algebraic concepts"
+
+interactive_elements:
+  - type: manipulative
+    name: "Blocks & Counters"
+
+  - type: simulator
+    name: "Balance Scale"
+
+  - type: visualization
+    name: "Function Machine"
+
+  - type: game
+    name: "Number Pattern Puzzles"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "45%"
+
+  planned: ["fr", "zh", "ar"]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "All visual content has text descriptions. Consider adding video lectures with captions."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Common Core State Standards (Math)"
+    version: "2010"
+    alignments:
+      K.CC: "Counting & Cardinality"
+      1.NBT: "Numbers & Operations in Base Ten"
+      2.OA: "Operations & Algebraic Thinking"
+
+  - framework: "NCTM Principles & Standards"
+    version: "2000"
+    alignments:
+      Number & Operations: "true"
+      Algebra: "true"
+      Geometry: "true"
+      Measurement: "true"
+      Data Analysis: "true"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: high
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Difficulty is in thinking, not syntax or tools"
+
+# Content Flags & Warnings
+content_flags:
+  - flag: anxiety_potential
+    description: "Some learners have math anxiety. Pack addresses this explicitly."
+    mitigation: "Focus on understanding, not speed. Celebrate struggles."
+
+  - flag: prior_misconceptions
+    description: "Students bring many misconceptions about math."
+    mitigation: "Pack directly addresses common misconceptions."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/math-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "MATH-101"
+  looking_for:
+    - "Additional activities for middle school algebra"
+    - "Geometry visualizations"
+    - "Translations to Spanish & Mandarin"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-15"
+  next_review: "2026-05-15"
+  maintainer: "Math Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - mathematics
+  - quantitative-reasoning
+  - elementary
+  - middle-school
+  - high-school
+  - college
+  - stem
+  - foundational
+  - patterns
+  - logic
+
+# External Resources
+resources:
+  - type: textbook
+    title: "How Children Learn Mathematics"
+    author: "David Thornton"
+
+  - type: online_course
+    title: "3Blue1Brown Mathematics"
+    author: "3Blue1Brown"
+    url: "https://www.youtube.com/3blue1brown"
+
+# Related Packs
+related_packs:
+  - id: PHYS-101
+    relationship: "Mathematical modeling underlies physics"
+
+  - id: CODE-101
+    relationship: "Algorithms are mathematical structures"
+
+  - id: DATA-101
+    relationship: "Statistics is applied mathematics"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "math-symbol"
+    color: "#4A90E2"
+    position: "Featured - Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "MATH-101-core-concepts"
+    - "MATH-101-assessment-patterns"
+    - "MATH-101-parent-guidance"
+
+# File References
+files:
+  vision_document: "MATH-101-vision.md"
+  modules_definition: "MATH-101-modules.yaml"
+  activities: "MATH-101-activities.json"
+  assessment: "MATH-101-assessment.md"
+  resources: "MATH-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: "1.0.0"
+    date: "2026-02-19"
+    changes:
+      - "Initial release: Four core modules, assessment framework, parent guidance"
+      - "Contributed 12 starter activities"
+      - "Aligned to Common Core Standards"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-15"
