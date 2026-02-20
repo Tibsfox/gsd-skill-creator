@@ -1,0 +1,311 @@
+---
+# DIGLIT-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: DIGLIT-101
+pack_name: "Digital Literacy & Information Science — Foundational Knowledge Pack"
+
+modules:
+  - id: DIGLIT-101-M1
+    name: "Digital Foundations"
+    description: "Understanding how digital systems work: hardware, software, networks, and information representation. Foundational concepts for all digital literacy."
+
+    learning_outcomes:
+      - "Understand basic hardware components and their functions in a computer system"
+      - "Explain the difference between hardware and software and how they interact"
+      - "Describe how networks connect devices and how information travels across the internet"
+      - "Troubleshoot common technology problems and understand when to seek help"
+      - "Understand how computers represent, store, and organize digital information"
+
+    topics:
+      - "Hardware Components & Functions"
+      - "Operating Systems & Software"
+      - "Networks & Internet Connectivity"
+      - "Digital Information Representation"
+      - "Troubleshooting Basics"
+      - "Device Security Foundations"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 20
+      high: 15
+
+    prerequisite_modules: []
+
+    activities:
+      count: 6
+      examples:
+        - "Hardware Scavenger Hunt"
+        - "How the Internet Works: Packet Relay Race"
+        - "Network Mapping Activity"
+        - "Troubleshooting Scenarios"
+        - "Operating System Exploration"
+        - "Device Components Teardown"
+
+    assessments:
+      - "Can student identify and describe hardware components?"
+      - "Does student understand the relationship between hardware and software?"
+      - "Can student trace how information travels on a network?"
+      - "Does student apply troubleshooting steps to solve problems?"
+
+  - id: DIGLIT-101-M2
+    name: "Information Literacy & Research"
+    description: "Finding reliable information and evaluating credibility in digital spaces. Developing critical thinking about sources and media."
+
+    learning_outcomes:
+      - "Use search engines effectively with strategic keywords, filters, and advanced techniques"
+      - "Evaluate source credibility using multiple criteria: authority, accuracy, objectivity, currency, purpose"
+      - "Apply fact-checking techniques to verify claims and identify misinformation"
+      - "Recognize common misinformation tactics and deepfakes"
+      - "Synthesize information from multiple sources to form balanced, evidence-based understanding"
+
+    topics:
+      - "Search Engine Strategies & Algorithms"
+      - "Source Credibility Evaluation"
+      - "Fact-Checking & Verification"
+      - "Misinformation & Disinformation Tactics"
+      - "Media Literacy & Visual Analysis"
+      - "Bias Recognition & Analysis"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 35
+      high: 30
+
+    prerequisite_modules: [DIGLIT-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Search Engine Experiments"
+        - "Source Credibility Evaluation Challenge"
+        - "Fact-Check Investigation Lab"
+        - "Misinformation Pattern Analysis"
+        - "Media Deconstruction Workshop"
+        - "Research Project with Source Evaluation"
+
+    assessments:
+      - "Can student search effectively for information on a topic?"
+      - "Does student apply credibility criteria consistently?"
+      - "Can student identify and explain misinformation tactics?"
+      - "Does student synthesize information from multiple reliable sources?"
+
+  - id: DIGLIT-101-M3
+    name: "Digital Communication & Creation"
+    description: "Communicating responsibly and effectively using digital tools. Creating and sharing content with attention to audience and ethics."
+
+    learning_outcomes:
+      - "Compose clear, professional digital communication appropriate to context and audience"
+      - "Collaborate effectively using shared documents and digital collaboration tools"
+      - "Create digital content (documents, presentations, media) with attention to clarity and audience"
+      - "Understand and apply copyright, citation, and attribution principles"
+      - "Recognize and adapt to communication norms and expectations in different digital communities"
+
+    topics:
+      - "Professional Digital Communication"
+      - "Email Etiquette & Best Practices"
+      - "Collaborative Tools & Document Management"
+      - "Digital Media Creation"
+      - "Copyright & Intellectual Property"
+      - "Citation & Attribution Practices"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 20
+      middle: 25
+      high: 20
+
+    prerequisite_modules: [DIGLIT-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Professional Email Writing Workshop"
+        - "Collaborative Document Creation Project"
+        - "Digital Presentation Design"
+        - "Multimedia Content Creation"
+        - "Copyright & Attribution Practice"
+        - "Digital Etiquette Scenarios"
+
+    assessments:
+      - "Can student write clear, professional digital communication?"
+      - "Does student collaborate effectively and give credit for contributions?"
+      - "Can student create digital content appropriate for intended audience?"
+      - "Does student apply copyright and citation principles correctly?"
+
+  - id: DIGLIT-101-M4
+    name: "Online Safety & Digital Citizenship"
+    description: "Making responsible choices online and protecting personal security. Understanding rights, responsibilities, and digital etiquette."
+
+    learning_outcomes:
+      - "Create and maintain strong passwords and use multi-factor authentication securely"
+      - "Manage privacy settings across devices and platforms and make conscious data-sharing decisions"
+      - "Recognize and respond appropriately to cyberbullying and online harassment"
+      - "Understand the permanence and potential consequences of digital actions"
+      - "Recognize common online scams and malware threats and protect against them"
+      - "Understand digital rights, responsibilities, and ethical online behavior"
+
+    topics:
+      - "Password Security & Authentication"
+      - "Privacy Settings & Data Management"
+      - "Cyberbullying & Online Harassment"
+      - "Digital Footprint & Permanence"
+      - "Scams, Phishing & Malware"
+      - "Digital Rights & Responsibilities"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 20
+      middle: 30
+      high: 25
+
+    prerequisite_modules: [DIGLIT-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Password Strength Tester"
+        - "Privacy Audit Activity"
+        - "Cyberbullying Response Scenarios"
+        - "Digital Footprint Analysis"
+        - "Scam Identification Challenge"
+        - "Digital Citizenship Discussion & Debate"
+
+    assessments:
+      - "Does student maintain secure passwords and authentication?"
+      - "Can student manage privacy settings and make conscious data decisions?"
+      - "Does student recognize and respond appropriately to cyberbullying?"
+      - "Can student identify online scams and protect against threats?"
+
+  - id: DIGLIT-101-M5
+    name: "Data, Algorithms & AI Awareness"
+    description: "Understanding how data and algorithms shape digital experiences. Recognizing algorithmic bias, understanding AI, and thinking critically about data-driven systems."
+
+    learning_outcomes:
+      - "Describe what personal data is collected about them online and how it's used"
+      - "Explain how algorithms make decisions and personalize content"
+      - "Understand the capabilities, limitations, and risks of artificial intelligence systems"
+      - "Recognize how algorithmic bias can cause unfair outcomes"
+      - "Evaluate data-driven claims using statistical and critical thinking skills"
+      - "Understand ethical implications of data collection, algorithmic decision-making, and AI"
+
+    topics:
+      - "Data Collection & Storage"
+      - "Algorithmic Decision-Making"
+      - "Personalization & Recommendation Systems"
+      - "Artificial Intelligence & Machine Learning"
+      - "Algorithmic Bias & Fairness"
+      - "Data Ethics & Privacy"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 15
+      middle: 25
+      high: 30
+
+    prerequisite_modules: [DIGLIT-101-M1, DIGLIT-101-M2]
+
+    activities:
+      count: 6
+      examples:
+        - "Data Collection Tracking Activity"
+        - "Algorithm Analysis: How Recommendations Work"
+        - "Algorithmic Bias Detective"
+        - "AI Experiment & Testing"
+        - "Data-Driven Claim Evaluation"
+        - "Data Ethics Discussion & Debate"
+
+    assessments:
+      - "Can student identify and describe data collection practices?"
+      - "Does student understand how algorithms make decisions and create bias?"
+      - "Can student explain AI capabilities and limitations?"
+      - "Does student evaluate data-driven claims critically?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Digital Thinking"
+    description: "Ability to understand and analyze digital systems, from networks to algorithms, and recognize how digital design affects user experience and outcomes"
+    assessed_in: [DIGLIT-101-M1, DIGLIT-101-M2, DIGLIT-101-M5]
+
+  - name: "Critical Evaluation"
+    description: "Habit of questioning information sources, recognizing bias, and applying evidence-based reasoning before accepting claims"
+    assessed_in: [DIGLIT-101-M2, DIGLIT-101-M5]
+
+  - name: "Responsible Digital Citizenship"
+    description: "Understanding of rights, responsibilities, and ethical implications of digital actions, with ability to make conscious choices and respect others online"
+    assessed_in: [DIGLIT-101-M3, DIGLIT-101-M4]
+
+  - name: "Digital Communication & Collaboration"
+    description: "Ability to communicate clearly and collaborate effectively using digital tools, with awareness of audience and context"
+    assessed_in: [DIGLIT-101-M1, DIGLIT-101-M3, DIGLIT-101-M4]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4 -> M5"
+    rationale: "Builds from foundational understanding of systems, to evaluating information, to communicating responsibly, to staying safe, to understanding the bigger picture of data and algorithms. Each module builds on previous conceptual understanding."
+
+  - name: "Spiral Pathway"
+    description: "Revisit all five modules multiple times at increasing depth"
+    rationale: "Digital literacy concepts deepen with experience. A second pass through information evaluation after learning about algorithms provides richer understanding of how systems are designed to influence perception."
+
+  - name: "Focused Pathway"
+    description: "Select 1-2 modules based on immediate needs or interests"
+    rationale: "Different learners have different entry points. Address immediate concerns while building toward comprehensive literacy."
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same introduction structure: Core Concepts, Essential Questions, Learning Outcomes, Key Topics"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Learning activities follow a consistent template: clear objectives, age-appropriate materials, built-in variations for differentiation"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure (Beginning, Developing, Proficient, Advanced) across all modules"
+    cached: true
+
+  - pattern: "Learner Agency"
+    description: "All modules emphasize understanding implications and making conscious choices, not just following rules"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner asks critical questions about digital systems or information sources"
+    - "When learner catches misinformation or recognizes manipulation attempt"
+    - "When learner applies digital literacy concepts to new situations"
+    - "When learner helps peers understand digital concepts or safety practices"
+    - "When learner demonstrates strong digital citizenship offline and online"
+
+  pattern_detection:
+    - "Effective information evaluation strategies"
+    - "Strong password and security management habits"
+    - "Skillful recognition of algorithmic manipulation"
+    - "Thoughtful digital citizenship and online collaboration"
+
+  skill_promotion:
+    - "Promote information evaluation patterns to reusable research skills"
+    - "Create digital safety checklists from observed security practices"
+    - "Build algorithmic literacy frameworks from recognized manipulation patterns"
+    - "Develop digital citizenship models from effective peer leadership"
+
+# This YAML defines the modular structure for the DIGLIT-101 pack and enables
+# skill-creator to orchestrate learning experiences centered on digital literacy.
