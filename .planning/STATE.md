@@ -10,12 +10,12 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
-Phase: 247 of 254 (Core Academic Packs Batch 3)
-Plan: 8 of 9 complete
-Status: In progress (gap closure)
-Last activity: 2026-02-20 — Completed 247-08 (BUS-101 gap closure)
+Phase: 248 of 254 (Applied Packs Batch 1)
+Plan: 1 of 5 complete
+Status: In progress (pack creation)
+Last activity: 2026-02-20 — Completed 248-01 (CODE-101 knowledge pack)
 
-Progress: [############........] 60%
+Progress: [##############......] 65%
 
 ## Performance Metrics
 
@@ -49,6 +49,7 @@ Progress: [############........] 60%
 | 247 | 06 | 2min | 2 | 2 |
 | 247 | 08 | 2min | 2 | 2 |
 | 247 | 07 | 3min | 2 | 2 |
+| 248 | 01 | 15min | 2 | 7 |
 
 ## Accumulated Context
 
@@ -130,14 +131,17 @@ Progress: [############........] 60%
 - Sustainability as core module (M5) in MFAB-101, not optional -- lifecycle thinking woven throughout
 - SCI-101 and ENGR-101 as recommended prior knowledge for MFAB-101; enables TRADE-101
 - [Phase 247]: Quoted all grade_levels values (not just numeric) for consistency with GEO-101 exemplar
+- [Phase 248-01]: CODE-101 uses 5 modules (M1-M5) to include "Computing & Society" as capstone covering ethics, AI, security, and digital citizenship
+- [Phase 248-01]: CODE-101 classification: applied_practical (skill-focused, not core_academic)
+- [Phase 248-01]: 16 activities (vs 10-12 minimum) for richer coverage; mixed pedagogies (unplugged, visual, text-based, discussion)
 
 ### Key Context
 
 - 30 milestones shipped (v1.0-v1.26 + v1.8.1 patch), 242 phases, 679 plans, ~302k LOC
 - 10,032 tests passing, TypeScript clean
 - Delivery package at /tmp/v128-extract/gsd-foundational-knowledge-packs/ contains complete architecture
-- 2 complete exemplary packs: MATH-101 (vision + modules YAML), CODE-101 (vision)
-- 33 stub packs with README + .skillmeta
+- 3 complete exemplary packs: MATH-101 (full), CODE-101 (full, Phase 248-01), design patterns established
+- 32 remaining stub packs with README + .skillmeta
 - Pack structure: vision.md, modules.yaml, activities.json, assessment.md, resources.md, .skillmeta
 - 3 tiers: Core Academic (15), Applied & Practical (10), Specialized & Deepening (10)
 - Phases 245-251 (7 pack content phases) are parallelizable after 243+244 complete
