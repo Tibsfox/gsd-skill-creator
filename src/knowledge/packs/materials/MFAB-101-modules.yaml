@@ -1,0 +1,304 @@
+# MFAB-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: MFAB-101
+pack_name: "Materials & Manufacturing -- Foundational Knowledge Pack"
+
+modules:
+  - id: MFAB-101-M1
+    name: "Material Properties & Testing"
+    description: "Identifying and measuring material characteristics: mechanical (strength, hardness, elasticity), thermal, electrical, optical, and chemical properties through hands-on testing"
+
+    learning_outcomes:
+      - "Identify common materials by observation and simple property tests"
+      - "Measure mechanical properties: strength, hardness, elasticity, and toughness"
+      - "Test thermal, electrical, and optical properties using simple experiments"
+      - "Record material test data systematically in comparison charts"
+      - "Predict material behavior based on measured properties"
+      - "Understand that every material property involves tradeoffs"
+
+    topics:
+      - "Material Identification by Observation and Touch"
+      - "Mechanical Properties: Strength, Hardness, Elasticity, Toughness"
+      - "Thermal Properties: Conductivity, Insulation, Melting Point"
+      - "Electrical Properties: Conductors, Insulators, Semiconductors"
+      - "Optical Properties: Transparency, Reflectivity, Color"
+      - "Chemical Properties: Corrosion Resistance, Water Resistance"
+      - "Material Testing Methods and Data Recording"
+      - "Property Tradeoffs and Material Comparison Charts"
+
+    grade_levels: [PreK, K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 12
+      elementary: 20
+      middle: 25
+      high: 30
+
+    prerequisite_modules: []
+
+    activities:
+      count: 3
+      examples:
+        - "Material Mystery Boxes: Identify by Properties"
+        - "Strength Testing: Which Material Holds the Most Weight?"
+        - "Conductivity Stations: Conductor or Insulator?"
+
+    assessments:
+      - "Can student identify materials by their properties without labels?"
+      - "Does student measure properties using controlled, repeatable tests?"
+      - "Can student organize test data in a structured comparison chart?"
+      - "Does student understand that materials have tradeoffs, not absolute rankings?"
+
+  - id: MFAB-101-M2
+    name: "Materials Families"
+    description: "Understanding the five major material families -- metals, polymers/plastics, ceramics, composites, and natural materials -- their distinctive properties, common uses, and identification methods"
+
+    learning_outcomes:
+      - "Classify materials into the five major families by properties and tests"
+      - "Name specific members within each material family and their uses"
+      - "Predict material properties based on family membership"
+      - "Understand why certain material families dominate certain applications"
+      - "Identify the internal structure that gives each family its characteristic properties"
+      - "Compare materials across families for specific design requirements"
+
+    topics:
+      - "Metals: Ferrous, Non-Ferrous, Alloys, Conductivity, Malleability"
+      - "Polymers and Plastics: Thermoplastics, Thermosets, Recycling Codes"
+      - "Ceramics: Traditional (Clay, Glass, Brick) and Advanced (Silicon Carbide)"
+      - "Composites: Fiber Reinforcement, Matrix Materials, Synergy"
+      - "Natural Materials: Wood Species, Fibers, Stone, Leather"
+      - "Material Identification Tests: Magnet, Float/Sink, Burn, Scratch"
+      - "Structure-Property Relationships by Family"
+      - "Cross-Family Material Selection and Comparison"
+
+    grade_levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 12
+      elementary: 20
+      middle: 25
+      high: 30
+
+    prerequisite_modules: [MFAB-101-M1]
+
+    activities:
+      count: 3
+      examples:
+        - "Materials Scavenger Hunt: Find All Five Families"
+        - "Plastic Classification Challenge: Sorting by Recycling Number"
+        - "Wood Species Identification and Comparison"
+
+    assessments:
+      - "Can student classify an unfamiliar material into the correct family?"
+      - "Does student predict properties of a new material based on its family?"
+      - "Can student name specific materials within each family and their uses?"
+      - "Does student understand why material families have common properties?"
+
+  - id: MFAB-101-M3
+    name: "Fabrication & Manufacturing Processes"
+    description: "How things are made: subtractive (cutting, drilling, milling), additive (3D printing, welding), formative (bending, molding, casting), joining (glue, screws, welding), and assembly processes"
+
+    learning_outcomes:
+      - "Identify major manufacturing process categories and their capabilities"
+      - "Match materials to compatible manufacturing processes"
+      - "Perform basic fabrication operations safely (cutting, joining, forming)"
+      - "Explain how common products are manufactured step by step"
+      - "Compare manufacturing processes by cost, speed, precision, and material compatibility"
+      - "Understand how production volume affects process selection"
+
+    topics:
+      - "Subtractive Processes: Cutting, Drilling, Milling, Turning, Grinding"
+      - "Additive Processes: 3D Printing (FDM, SLA), Welding, Brazing"
+      - "Formative Processes: Bending, Stamping, Forging, Injection Molding"
+      - "Casting: Sand Casting, Investment Casting, Plaster Casting"
+      - "Joining Methods: Mechanical, Adhesive, Thermal, Textile"
+      - "Assembly: Part Combination, Fastener Selection, Alignment"
+      - "Process Selection: Material Compatibility and Volume Economics"
+      - "Workshop Safety and Tool Protocols"
+
+    grade_levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 30
+      high: 35
+
+    prerequisite_modules: [MFAB-101-M1]
+
+    activities:
+      count: 3
+      examples:
+        - "Build a Joint: Glue vs. Tape vs. Screw vs. Tie"
+        - "Simple Casting with Plaster"
+        - "3D Printing vs. Hand Building Comparison"
+
+    assessments:
+      - "Can student identify which process category was used to make a given object?"
+      - "Does student match materials to compatible processes correctly?"
+      - "Can student perform basic fabrication operations safely?"
+      - "Does student understand how production volume affects process choice?"
+
+  - id: MFAB-101-M4
+    name: "Design for Manufacturing"
+    description: "Selecting materials and processes for a purpose: material-process compatibility, cost analysis, design for assembly, failure prevention, and optimization under real constraints"
+
+    learning_outcomes:
+      - "Select materials based on functional requirements using decision matrices"
+      - "Choose manufacturing processes based on shape, quantity, and budget"
+      - "Analyze cost tradeoffs: material, tooling, labor, and scale economics"
+      - "Design assemblies that minimize part count and simplify fabrication"
+      - "Predict failure modes and design to prevent them"
+      - "Integrate environmental considerations into material-process selection"
+
+    topics:
+      - "Material Selection Methodology: Requirements to Candidates to Selection"
+      - "Material-Process Compatibility Matrices"
+      - "Cost Analysis: Material, Tooling, Labor, Overhead, Scale"
+      - "Design for Assembly: Part Count Reduction, Simplification"
+      - "Failure Mode Analysis and Prevention"
+      - "Decision Matrices and Trade Studies"
+      - "Value Engineering: Performance Per Dollar"
+      - "Environmental Criteria in Material-Process Selection"
+
+    grade_levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      elementary: 20
+      middle: 25
+      high: 35
+
+    prerequisite_modules: [MFAB-101-M2, MFAB-101-M3]
+
+    activities:
+      count: 3
+      examples:
+        - "Design a Better Lunch Container: Material Selection"
+        - "Cost-Performance Tradeoff Analysis: Bicycle Frames"
+        - "Redesign for Fewer Parts: Simplification Challenge"
+
+    assessments:
+      - "Does student consider multiple criteria when selecting materials?"
+      - "Can student use a decision matrix to compare material-process combinations?"
+      - "Does student account for manufacturing constraints in design decisions?"
+      - "Can student justify material choices with evidence and tradeoff reasoning?"
+
+  - id: MFAB-101-M5
+    name: "Sustainability & Lifecycle"
+    description: "Environmental impact of materials: lifecycle analysis, recyclability, biodegradability, bio-based alternatives, circular economy principles, and critical evaluation of sustainability claims"
+
+    learning_outcomes:
+      - "Trace a material lifecycle from extraction through end-of-life"
+      - "Compare the environmental impact of different materials for the same application"
+      - "Evaluate recyclability, biodegradability, and reusability of common materials"
+      - "Identify bio-based alternatives to conventional materials"
+      - "Apply lifecycle analysis thinking to material selection decisions"
+      - "Critically evaluate greenwashing and unsupported environmental claims"
+
+    topics:
+      - "Material Lifecycle: Extraction, Processing, Manufacturing, Use, End-of-Life"
+      - "Environmental Impact of Material Extraction and Processing"
+      - "Recyclability: What Can Be Recycled, Quality Loss, Infrastructure Limits"
+      - "Biodegradability: Timescales and Conditions for Decomposition"
+      - "Bio-Based Materials: Alternatives to Petroleum-Based Products"
+      - "Lifecycle Analysis (LCA): Quantifying Environmental Impact"
+      - "Circular Economy: Reuse, Repair, Remanufacture, Recycle"
+      - "Greenwashing: Evaluating Environmental Claims Critically"
+
+    grade_levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 20
+      high: 25
+
+    prerequisite_modules: [MFAB-101-M1]
+
+    activities:
+      count: 3
+      examples:
+        - "Decomposition Race: Which Material Breaks Down?"
+        - "Product Lifecycle Map: From Extraction to End-of-Life"
+        - "Recycling Audit: What Actually Gets Recycled?"
+
+    assessments:
+      - "Can student trace the lifecycle of a material from extraction to disposal?"
+      - "Does student compare environmental impact across material alternatives?"
+      - "Can student identify greenwashing in product marketing?"
+      - "Does student integrate sustainability criteria into material selection?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Material Literacy"
+    description: "Ability to identify materials, describe their properties, and explain why they were chosen for a given application"
+    assessed_in: [MFAB-101-M1, MFAB-101-M2, MFAB-101-M4]
+
+  - name: "Process-Material Integration"
+    description: "Ability to match materials to compatible manufacturing processes and select appropriate methods for a given design"
+    assessed_in: [MFAB-101-M2, MFAB-101-M3, MFAB-101-M4]
+
+  - name: "Evidence-Based Selection"
+    description: "Ability to justify material and process choices using measured data, comparison matrices, and tradeoff analysis"
+    assessed_in: [MFAB-101-M1, MFAB-101-M4, MFAB-101-M5]
+
+  - name: "Sustainability Reasoning"
+    description: "Ability to evaluate materials through an environmental lifecycle lens and integrate sustainability into design decisions"
+    assessed_in: [MFAB-101-M2, MFAB-101-M4, MFAB-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Sequential Pathway"
+    description: "M1 -> M2 -> M3 -> M4 -> M5"
+    rationale: "Properties first, then families as organized knowledge, then processes as shaping capability, then DFM as integrated decision-making, then sustainability as evaluation lens"
+
+  - name: "Project-Based Pathway"
+    description: "M1 -> (M2 & M3 in parallel) -> M4, with M5 woven throughout"
+    rationale: "Start with properties, learn families and processes as needed for projects, integrate through DFM, and consider sustainability at every stage"
+
+  - name: "Sustainability-First Pathway"
+    description: "M5 -> M1 -> M2 -> M3 -> M4"
+    rationale: "For environmentally motivated learners: start with why materials choices matter for the planet, then build the technical knowledge to make better choices"
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Property-Based Reasoning"
+    description: "All five modules use measured properties as the basis for material decisions"
+    cached: true
+
+  - pattern: "Grade-Level Scaffolding"
+    description: "Each module follows the same Foundation through College+ progression structure"
+    cached: true
+
+  - pattern: "Hands-On Testing"
+    description: "Activities follow consistent template with accessible everyday materials"
+    cached: true
+
+  - pattern: "Tradeoff Analysis"
+    description: "Every module reinforces that no material is universally best -- only best for a purpose"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner identifies materials by properties rather than appearance"
+    - "When learner considers multiple criteria in material selection"
+    - "When learner spontaneously considers sustainability without prompting"
+    - "When learner matches materials to compatible manufacturing processes"
+    - "When learner uses decision matrices for material-process selection"
+
+  pattern_detection:
+    - "Default material preferences (always choosing the same material)"
+    - "Property consideration breadth (number of properties evaluated per selection)"
+    - "Sustainability integration (unprompted vs. prompted environmental thinking)"
+    - "Process-material matching accuracy (correct pairings vs. mismatches)"
+
+  skill_promotion:
+    - "Promote effective material testing procedures as reusable skills"
+    - "Create material selection templates from successful decision matrices"
+    - "Build sustainability checklists from observed best practices"
