@@ -42,77 +42,237 @@ enables:
 # Level & Time Estimates
 grade_levels:
   - label: Foundation
-    grades: [PreK, K, 1, 2]
+    grades: ["PreK", "K", "1", "2"]
     estimated_hours: [20, 40]
 
   - label: Elementary
-    grades: [3, 4, 5]
+    grades: ["3", "4", "5"]
     estimated_hours: [40, 60]
 
   - label: "Middle School"
-    grades: [6, 7, 8]
+    grades: ["6", "7", "8"]
     estimated_hours: [60, 100]
 
   - label: "High School"
-    grades: [9, 10, 11, 12]
+    grades: ["9", "10", "11", "12"]
     estimated_hours: [100, 160]
 
   - label: College
-    grades: [13, 14, 15, 16]
+    grades: ["13", "14", "15", "16"]
     estimated_hours: [160, 220]
 
 # Modules
 modules:
   - id: BUS-101-M1
     name: "Economic Organization & Markets"
-    level: foundation
-    duration_hours: 25
+    description: "How trade works, supply and demand, the role of money, market structures, specialization, and the economic systems that organize human cooperation"
+    learning_outcomes:
+      - "Explain why people specialize and trade rather than producing everything themselves"
+      - "Describe how supply and demand interact to determine prices"
+      - "Understand the role of money as a medium of exchange, store of value, and unit of account"
+      - "Compare different market structures: competition, monopoly, oligopoly"
+      - "Identify how government regulation addresses market failures"
+      - "Trace the flow of goods, services, and money through a simple economy"
+    topics:
+      - "Specialization & Trade"
+      - "Supply & Demand"
+      - "The Role of Money & Currency"
+      - "Market Structures (Competition, Monopoly, Oligopoly)"
+      - "Economic Indicators (GDP, Inflation, Unemployment)"
+      - "Government Roles in Markets (Regulation, Taxation, Public Goods)"
+      - "International Trade & Comparative Advantage"
+      - "Barter, Trade, and the History of Exchange"
+    grade_levels: ["PreK", "K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 20
+      high: 30
+    prerequisite_modules: []
+    activities:
+      count: 2
+      examples:
+        - "Classroom Market Day: Supply and Demand in Action"
+        - "Barter vs. Money: Trading Game"
+    assessments:
+      - "Can student explain why prices change when supply or demand shifts?"
+      - "Does student understand why specialization increases total output?"
+      - "Can student identify the role money plays vs. direct barter?"
+      - "Does student recognize examples of market structures in real life?"
 
   - id: BUS-101-M2
     name: "Business Structures & Entrepreneurship"
-    level: foundation-high
-    duration_hours: 25
-    prereq_modules: [BUS-101-M1]
+    description: "Types of business organizations, their ownership and liability characteristics, how businesses start, grow, and sometimes fail, and the entrepreneurial process"
+    learning_outcomes:
+      - "Describe the key features of sole proprietorships, partnerships, corporations, LLCs, and nonprofits"
+      - "Explain how liability differs across business structures"
+      - "Create a basic business plan with product, market, costs, and revenue model"
+      - "Understand how businesses raise money (revenue, loans, investment)"
+      - "Analyze why businesses succeed or fail using real examples"
+      - "Compare cooperative, nonprofit, and for-profit organizational models"
+    topics:
+      - "Sole Proprietorship"
+      - "Partnership & Partnership Agreements"
+      - "Corporation (C-Corp, S-Corp)"
+      - "Limited Liability Company (LLC)"
+      - "Nonprofit & Cooperative Structures"
+      - "Starting a Business: Idea to Launch"
+      - "Business Plans & Market Research"
+      - "Growth, Scaling, and Fundraising"
+      - "Why Businesses Fail: Case Studies"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 20
+      high: 25
+    prerequisite_modules: [BUS-101-M1]
+    activities:
+      count: 2
+      examples:
+        - "Lemonade Stand Business Plan"
+        - "Compare Business Types: Research and Present"
+    assessments:
+      - "Can student match business structures to appropriate scenarios?"
+      - "Does student understand the concept of limited liability?"
+      - "Can student create a realistic simple business plan?"
+      - "Does student recognize why business structure choice matters?"
 
   - id: BUS-101-M3
     name: "Finance & Accounting Fundamentals"
-    level: foundation-high
-    duration_hours: 30
-    prereq_modules: [BUS-101-M1]
+    description: "Revenue, expenses, profit, budgeting, financial statements, personal finance, saving, credit, debt, compound interest, and investment basics"
+    learning_outcomes:
+      - "Calculate profit as revenue minus expenses"
+      - "Create and manage a personal or household budget"
+      - "Read and interpret a simple income statement and balance sheet"
+      - "Understand the difference between cash flow and profitability"
+      - "Explain how compound interest works for both savings and debt"
+      - "Describe basic investment concepts: risk, return, and diversification"
+    topics:
+      - "Revenue, Expenses & Profit"
+      - "Budgeting & Financial Planning"
+      - "The Income Statement"
+      - "The Balance Sheet (Assets, Liabilities, Equity)"
+      - "Cash Flow Management"
+      - "Personal Finance: Saving, Spending, Credit"
+      - "Compound Interest & Time Value of Money"
+      - "Investment Basics: Stocks, Bonds, Mutual Funds"
+      - "Taxes: What They Are and How They Work"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 25
+      high: 30
+    prerequisite_modules: [BUS-101-M1]
+    activities:
+      count: 2
+      examples:
+        - "Personal Budget Challenge: Track Spending for a Week"
+        - "Read a Simple Income Statement"
+    assessments:
+      - "Can student calculate profit from revenue and expense data?"
+      - "Does student create a budget that distinguishes needs from wants?"
+      - "Can student extract key information from a financial statement?"
+      - "Does student understand how compound interest grows over time?"
 
   - id: BUS-101-M4
     name: "Contracts, Rights & Legal Systems"
-    level: foundation-high
-    duration_hours: 28
-    prereq_modules: [BUS-101-M1]
+    description: "How contracts work, what makes agreements enforceable, rights and obligations, the court system, consumer protection, employment law, property rights, and constitutional rights"
+    learning_outcomes:
+      - "Identify the essential elements of a contract: offer, acceptance, consideration, capacity"
+      - "Recognize everyday agreements as contracts with legal force"
+      - "Understand basic rights as a consumer, employee, and citizen"
+      - "Describe how courts resolve disputes when agreements break down"
+      - "Read and interpret a basic legal document in plain language"
+      - "Distinguish between criminal and civil law and their different processes"
+    topics:
+      - "Contract Essentials: Offer, Acceptance, Consideration"
+      - "Capacity & Legality in Contracts"
+      - "Consumer Protection & Warranty Law"
+      - "Employment Law: Wages, Safety, Discrimination"
+      - "Property Rights: Real, Personal, and Intellectual"
+      - "The Court System: Trial Courts, Appeals, Supreme Court"
+      - "Constitutional Rights: Speech, Due Process, Equal Protection"
+      - "Dispute Resolution: Negotiation, Mediation, Arbitration, Litigation"
+      - "Reading & Understanding Legal Documents"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 20
+      high: 30
+    prerequisite_modules: [BUS-101-M1]
+    activities:
+      count: 2
+      examples:
+        - "Draft a Simple Contract Between Friends"
+        - "Mock Trial: Breach of Contract"
+    assessments:
+      - "Can student identify offer, acceptance, and consideration in an agreement?"
+      - "Does student recognize that clicking 'I agree' is a contractual action?"
+      - "Can student describe the basic structure of the court system?"
+      - "Does student understand basic constitutional rights and their limits?"
 
   - id: BUS-101-M5
     name: "Ethics, Governance & Social Responsibility"
-    level: elementary-high
-    duration_hours: 22
-    prereq_modules: [BUS-101-M1]
+    description: "Corporate responsibility, stakeholder theory, regulation, transparency, advertising ethics, data privacy, whistleblowing, and doing business in ways that create value without destroying trust"
+    learning_outcomes:
+      - "Identify stakeholders affected by business decisions beyond just owners and customers"
+      - "Evaluate business decisions using ethical frameworks: utilitarian, rights-based, stakeholder"
+      - "Understand why regulation exists and how it balances innovation with protection"
+      - "Analyze real business ethics cases for ethical principles and lessons"
+      - "Distinguish between legal compliance and ethical responsibility"
+      - "Assess corporate social responsibility claims for substance vs. greenwashing"
+    topics:
+      - "Stakeholder Theory: Who Is Affected?"
+      - "Corporate Governance: Boards, Accountability, Transparency"
+      - "Business Ethics Frameworks"
+      - "Regulation & Government Agencies"
+      - "Advertising Ethics: Persuasion vs. Deception"
+      - "Data Privacy & Digital Ethics"
+      - "Whistleblowing: Ethics and Consequences"
+      - "Corporate Social Responsibility & ESG"
+      - "Environmental Responsibility in Business"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 8
+      elementary: 12
+      middle: 18
+      high: 25
+    prerequisite_modules: [BUS-101-M1]
+    activities:
+      count: 2
+      examples:
+        - "Ethics Dilemma Discussion: Business Scenarios"
+        - "Stakeholder Map for a Local Business"
+    assessments:
+      - "Does student consider multiple stakeholders in business decisions?"
+      - "Can student identify ethical dimensions beyond legal compliance?"
+      - "Does student recognize greenwashing vs. genuine responsibility?"
+      - "Can student articulate why business ethics matter for long-term success?"
 
 # Learning Outcomes
 learning_outcomes:
   - code: LO-ECON-001
     description: "Explain how supply and demand determine prices in markets"
-    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
 
   - code: LO-BIZ-001
     description: "Compare business structures and select appropriate types for given scenarios"
-    levels: [5, 6, 7, 8, 9, 10, 11, 12]
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
 
   - code: LO-FIN-001
     description: "Create and manage a budget and interpret basic financial statements"
-    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
 
   - code: LO-LAW-001
     description: "Identify essential contract elements and understand basic legal rights"
-    levels: [5, 6, 7, 8, 9, 10, 11, 12]
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
 
   - code: LO-ETH-001
     description: "Evaluate business decisions for ethical dimensions and stakeholder impact"
-    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
 
 # Assessment Methods
 assessment_methods:
