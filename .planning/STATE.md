@@ -11,9 +11,9 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
 Phase: 246 of 254 (Core Academic Packs Batch 2)
-Plan: 5 of 5 complete
-Status: Executing Phase 246
-Last activity: 2026-02-20 — Completed 246-05 (COMM-101 communication & speech knowledge pack)
+Plan: 6 of 6 complete
+Status: Phase 246 complete
+Last activity: 2026-02-20 — Completed 246-06 (quote YAML date fields in .skillmeta files)
 
 Progress: [############........] 60%
 
@@ -39,6 +39,7 @@ Progress: [############........] 60%
 | 246 | 05 | 10min | 2 | 7 |
 | 246 | 03 | 11min | 2 | 7 |
 | 246 | 01 | 11min | 2 | 7 |
+| 246 | 06 | 2min | 1 | 5 |
 
 ## Accumulated Context
 
@@ -97,6 +98,7 @@ Progress: [############........] 60%
 - 10 activities for CHEM-101 (2 per module) emphasizing kitchen chemistry and household materials
 - CHEM-101 lists MATH-101 and SCI-101 as recommended prior knowledge; enables ENVR-101, NUTR-101, NATURE-101
 - Kitchen-chemistry-first pedagogy: tangible experience before symbols and formulas
+- YAML date fields must be quoted strings in .skillmeta files to prevent js-yaml Date object coercion
 
 ### Key Context
 
@@ -122,10 +124,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed 246-01-PLAN.md (CHEM-101 chemistry knowledge pack)
+Stopped at: Completed 246-06-PLAN.md (quote YAML date fields gap closure)
 Resume file: None
 
 ## Next Up
 
-Phase 246 plans all complete (01-05). Advance to Phase 247.
-Next: Check 246-01, 246-02, 246-03 completion, then advance to Phase 247.
+Phase 246 fully complete (6/6 plans, 25/25 verification). Advance to Phase 247.

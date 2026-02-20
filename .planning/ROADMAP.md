@@ -75,7 +75,14 @@ Plans:
   2. All 5 packs pass the runtime content validator with zero schema errors
   3. Cross-pack references (e.g., CRIT-101 linking to PROB-101) are valid IDs that resolve in the registry
   4. Activities span multiple learning pathways (Maker, Academic, Curiosity, Social, Parent-Guided) per pack
-**Plans**: TBD
+**Plans**: 6 plans (246-01 through 246-06), 1 wave
+Plans:
+- [x] 246-01-PLAN.md — CHEM-101 full suite from scratch (Chemistry)
+- [x] 246-02-PLAN.md — READ-101 full suite from scratch (Reading & Literacy)
+- [x] 246-03-PLAN.md — CRIT-101 full suite from scratch (Critical Thinking)
+- [x] 246-04-PLAN.md — PROB-101 full suite from scratch (Problem Solving)
+- [x] 246-05-PLAN.md — COMM-101 full suite from scratch (Communication & Speech)
+- [ ] 246-06-PLAN.md — Quote YAML date fields in all 5 .skillmeta files (gap closure)
 
 ### Phase 247: Core Academic Packs Batch 3
 **Goal**: The final 5 core academic packs complete the entire Core Academic tier
@@ -207,7 +214,7 @@ Phases 243-244 sequential (infrastructure first). Phases 245-251 parallelizable 
 | 243. Pack Runtime Infrastructure | 5/5 | Complete    | 2026-02-20 |
 | 244. Chipset & Agent Definitions | 3/3 | Complete    | 2026-02-20 |
 | 245. Core Academic Packs Batch 1 | 5/5 | Complete   | 2026-02-20 |
-| 246. Core Academic Packs Batch 2 | 5/5 | Complete   | 2026-02-20 |
+| 246. Core Academic Packs Batch 2 | 6/6 | Complete   | 2026-02-20 |
 | 247. Core Academic Packs Batch 3 | 0/5 | Planned | - |
 | 248. Applied Packs Batch 1 | 0/5 | Planned | - |
 | 249. Applied Packs Batch 2 | 0/5 | Planned | - |
