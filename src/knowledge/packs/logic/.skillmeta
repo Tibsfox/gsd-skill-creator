@@ -281,19 +281,92 @@ interactive_elements:
   - type: tool
     name: "Proof Constructor"
 
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Español"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: [zh, ar, pt, ja]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Symbolic logic notation needs MathML; truth table accessibility. Logic games and interactive tools need accessible alternatives."
+  pack_specific_concerns:
+    - "Symbolic logic notation requires MathML rendering with speech support"
+    - "Truth tables need semantic HTML structure for screen readers"
+    - "Logic gate circuits need text-based representations"
+    - "Logic puzzles need text-based alternatives to visual representations"
+
 # Standards Alignment
 standards_alignment:
   - framework: "Common Core Mathematics Standards"
     version: 2010
+    standard_codes:
+      - "MP3"
+      - "MP7"
     alignments:
       MP3: "Construct viable arguments and critique the reasoning of others"
       MP7: "Look for and make use of structure"
 
-  - framework: "C3 Framework (Civics, Government, Economics)"
+  - framework: "C3 Framework for Social Studies"
     version: 2013
+    standard_codes:
+      - "C3.D3"
+      - "C3.D4"
     alignments:
       "Dimension 3": "Evaluate sources and use evidence"
       "Dimension 4": "Construct and defend claims using evidence"
+
+  - framework: "ACM Discrete Structures"
+    version: "2013"
+    standard_codes:
+      - "DM/Logic"
+      - "DM/Proof"
+    mappings:
+      "Foundations": "Propositional logic, proofs"
+
+  - framework: "IB MYP Mathematics"
+    version: "2014"
+    standard_codes:
+      - "IB.MATH.LOG"
+    mappings:
+      "Grades 6-10": "Logic, reasoning, formal systems"
 
 # Difficulty Rating
 difficulty:

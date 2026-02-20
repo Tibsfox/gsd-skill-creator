@@ -304,11 +304,34 @@ translations:
       complete: true
 
     - language_code: es
-      name: "Espanol"
+      name: "Español"
       complete: false
       progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
 
-  planned: [fr, zh, ar]
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -318,19 +341,62 @@ accessibility:
   keyboard_navigable: true
   alt_text_provided: true
   captions_available: false
-  notes: "All visualizations include text descriptions. Data tables include headers and clear structure. Consider adding audio explanations for visualizations."
+  notes: "Data visualizations (charts, graphs) need text descriptions and data tables. All visualizations include text descriptions. Data tables include headers and clear structure. Consider adding audio explanations for visualizations."
+  pack_specific_concerns:
+    - "All charts and graphs must have accessible equivalents (data tables, text descriptions)"
+    - "Color-blind safe color palettes required for all visualizations"
+    - "Dashboard interactive elements need keyboard navigation"
+    - "Statistical concepts need non-visual explanations"
 
 # Standards Alignment
 standards_alignment:
   - framework: "Common Core Mathematics Standards"
     version: 2010
-    alignments:
-      "Statistics & Probability": "MD.A, MD.B (elem); SP.A, SP.B, SP.C (secondary)"
+    standard_codes:
+      - "CCSS.MATH.CONTENT.3.MD.B.3"
+      - "CCSS.MATH.CONTENT.5.MD.B.2"
+      - "CCSS.MATH.CONTENT.6.SP.A"
+      - "CCSS.MATH.CONTENT.7.SP.A"
+      - "CCSS.MATH.CONTENT.HS.S.ID.A"
+    mappings:
+      "Elementary": "MD.A, MD.B (data representation)"
+      "Secondary": "SP.A, SP.B, SP.C (probability and statistics)"
+
+  - framework: "NCTM Data Analysis & Probability Standards"
+    version: 2000
+    standard_codes:
+      - "NCTM.DATA.1"
+      - "NCTM.DATA.2"
+      - "NCTM.DATA.3"
+      - "NCTM.PROB.1"
+    mappings:
+      "K-12": "Formulate questions, collect/display data, select/use appropriate statistical methods"
+
+  - framework: "GAISE Framework (Statistics Education)"
+    version: "2016"
+    standard_codes:
+      - "GAISE.1"
+      - "GAISE.2"
+      - "GAISE.3"
+    mappings:
+      "Foundation": "Formulating questions, data collection"
+      "Intermediate": "Data analysis, interpretation, inference"
+
+  - framework: "IB MYP Mathematics"
+    version: "2014"
+    standard_codes:
+      - "MYP.STAT.1"
+      - "MYP.STAT.2"
+    mappings:
+      "Grades 6-10": "Organizing and displaying data, interpreting statistical representations"
 
   - framework: "NGSS Science Standards"
     version: 2013
-    alignments:
-      "Science and Engineering Practices": "SEP-4 (Analyzing and Interpreting Data), SEP-5 (Using Mathematics)"
+    standard_codes:
+      - "SEP-4"
+      - "SEP-5"
+    mappings:
+      "K-12": "Analyzing and Interpreting Data, Using Mathematics and Computational Thinking"
 
 # Difficulty Rating
 difficulty:

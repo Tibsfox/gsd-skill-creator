@@ -267,7 +267,35 @@ translations:
       name: English
       complete: true
 
-  planned: ["es", "fr", "zh", "ar"]
+    - language_code: es
+      name: "Español"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: ["zh", "ar"]
 
 # Accessibility
 accessibility:
@@ -277,21 +305,59 @@ accessibility:
   keyboard_navigable: true
   alt_text_provided: true
   captions_available: false
-  notes: "Code examples have text descriptions. Consider adding video explanations with captions."
+  notes: "Code editors need syntax highlighting accessibility; terminal output needs screen reader support. All code examples have text descriptions. Consider adding video explanations with captions."
+  pack_specific_concerns:
+    - "Code syntax highlighting must support high contrast modes"
+    - "Code blocks require ARIA labels describing what code demonstrates"
+    - "Terminal/console output needs semantic markup for screen reader users"
+    - "Visual debugging tools need text-based alternatives"
 
 # Standards Alignment
 standards_alignment:
   - framework: "Computer Science Standards (CSTA)"
     version: "2017"
-    alignments:
-      "K-2": "Algorithms & Programming"
-      "3-5": "Algorithms & Programming, Data & Analysis"
+    standard_codes:
+      - "1A-AP-08"
+      - "1B-AP-09"
+      - "2-AP-10"
+      - "2-AP-13"
+      - "3A-AP-13"
+      - "3B-AP-08"
+    mappings:
+      "K-2": "Algorithms & Programming, Computing Systems"
+      "3-5": "Algorithms & Programming, Data & Analysis, Computing Systems"
       "6-8": "Algorithms & Programming, Computing Systems, Networks & Internet"
+      "9-12": "Algorithms & Programming, Computing Systems, Networks & Internet, Impact of Computing"
 
-  - framework: "NGSS Science Standards"
+  - framework: "IB MYP Design"
+    version: "2014"
+    standard_codes:
+      - "Design 1"
+      - "Design 2"
+      - "Design 3"
+    mappings:
+      "Grades 6-10": "Develop designs, Use materials and tools, Create solutions"
+
+  - framework: "UK Computing National Curriculum"
+    version: "2014"
+    standard_codes:
+      - "KS2-5"
+      - "KS3-2"
+      - "KS4-2"
+    mappings:
+      "KS2": "Understand sequences, patterns, and algorithms"
+      "KS3": "Understand fundamentals of programming"
+      "KS4": "Understand computing systems, cybersecurity"
+
+  - framework: "ACM/IEEE CS2013"
     version: "2013"
-    alignments:
-      "K-12": "Engineering Design, System Models"
+    standard_codes:
+      - "AL/Algorithms"
+      - "PL/Programming Languages"
+      - "SE/Software Engineering"
+    mappings:
+      "Foundation": "Algorithms, problem decomposition"
+      "Core Tier 1": "Programming fundamentals, debugging"
 
 # Difficulty Rating
 difficulty:
