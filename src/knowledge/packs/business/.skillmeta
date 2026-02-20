@@ -1,0 +1,369 @@
+# GSD Skill Metadata
+pack_id: BUS-101
+pack_name: "Business & Law -- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: business_and_law
+
+# Content Description
+description: |
+  Business and law as interconnected systems of human organization. Covers
+  economic organization, business structures, finance and accounting basics,
+  contracts and legal systems, and ethics and governance -- from running a
+  lemonade stand to understanding constitutional rights.
+
+short_description: "Economic organization, business structures, finance, legal systems, and ethics across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Business & Law Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - MATH-101
+  - COMM-101
+
+# What This Pack Enables
+enables:
+  - ECON-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: [PreK, K, 1, 2]
+    estimated_hours: [20, 40]
+
+  - label: Elementary
+    grades: [3, 4, 5]
+    estimated_hours: [40, 60]
+
+  - label: "Middle School"
+    grades: [6, 7, 8]
+    estimated_hours: [60, 100]
+
+  - label: "High School"
+    grades: [9, 10, 11, 12]
+    estimated_hours: [100, 160]
+
+  - label: College
+    grades: [13, 14, 15, 16]
+    estimated_hours: [160, 220]
+
+# Modules
+modules:
+  - id: BUS-101-M1
+    name: "Economic Organization & Markets"
+    level: foundation
+    duration_hours: 25
+
+  - id: BUS-101-M2
+    name: "Business Structures & Entrepreneurship"
+    level: foundation-high
+    duration_hours: 25
+    prereq_modules: [BUS-101-M1]
+
+  - id: BUS-101-M3
+    name: "Finance & Accounting Fundamentals"
+    level: foundation-high
+    duration_hours: 30
+    prereq_modules: [BUS-101-M1]
+
+  - id: BUS-101-M4
+    name: "Contracts, Rights & Legal Systems"
+    level: foundation-high
+    duration_hours: 28
+    prereq_modules: [BUS-101-M1]
+
+  - id: BUS-101-M5
+    name: "Ethics, Governance & Social Responsibility"
+    level: elementary-high
+    duration_hours: 22
+    prereq_modules: [BUS-101-M1]
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-ECON-001
+    description: "Explain how supply and demand determine prices in markets"
+    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-BIZ-001
+    description: "Compare business structures and select appropriate types for given scenarios"
+    levels: [5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-FIN-001
+    description: "Create and manage a budget and interpret basic financial statements"
+    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-LAW-001
+    description: "Identify essential contract elements and understand basic legal rights"
+    levels: [5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-ETH-001
+    description: "Evaluate business decisions for ethical dimensions and stakeholder impact"
+    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Economic Reasoning Check"
+    frequency: ongoing
+
+  - type: formative
+    name: "Budget Review"
+    frequency: per_project
+
+  - type: formative
+    name: "Contract Element Identification"
+    frequency: per_project
+
+  - type: summative
+    name: "Business Plan Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Legal Document Analysis"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: spreadsheet
+    url: https://sheets.google.com
+    description: "Spreadsheet for budgeting, financial statements, and calculations"
+
+  - name: stock_simulator
+    url: https://www.investopedia.com/simulator/
+    description: "Virtual stock market for practicing investment concepts"
+
+  - name: contract_builder
+    integrated: true
+    description: "Interactive contract builder for learning agreement elements"
+
+interactive_elements:
+  - type: simulator
+    name: "Market Trading Floor"
+
+  - type: simulator
+    name: "Stock Market Simulator"
+
+  - type: game
+    name: "Business Structure Decision Tree"
+
+  - type: manipulative
+    name: "Budget Builder"
+
+  - type: visualization
+    name: "Supply and Demand Curves"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+
+  planned: [fr, zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Discussion-based activities have text-based alternatives for learners with speech or hearing limitations."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Council for Economic Education (CEE) Voluntary National Content Standards"
+    version: 2010
+    alignments:
+      Standard 1: "Scarcity"
+      Standard 3: "Allocation"
+      Standard 7: "Markets and Prices"
+      Standard 8: "Role of Prices"
+      Standard 14: "Entrepreneurship"
+
+  - framework: "Jump$tart Coalition National Standards in K-12 Personal Finance Education"
+    version: 2021
+    alignments:
+      Spending & Saving: true
+      Credit & Debt: true
+      Employment & Income: true
+      Investing: true
+
+  - framework: "National Standards for Civics and Government"
+    version: 2014
+    alignments:
+      "Civic Life": true
+      "Foundations of Government": true
+      "Role of the Citizen": true
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Concepts are abstract but grounded in everyday experience; entry is accessible at every level"
+
+# Content Flags & Warnings
+content_flags:
+  - flag: value_judgments
+    description: "Business and legal topics involve value judgments about fairness, justice, and economic systems"
+    mitigation: "Pack presents multiple perspectives. Encourages critical thinking over prescribed answers. Explicitly notes when topics are debated."
+
+  - flag: financial_anxiety
+    description: "Discussions of money, debt, and financial difficulty may trigger anxiety for learners from financially stressed families"
+    mitigation: "Activities use fictional or simulation money. Sensitivity guidance for facilitators. Focus on skills and empowerment, not judgment."
+
+  - flag: legal_variation
+    description: "Laws vary significantly by jurisdiction. Pack teaches general principles, not jurisdiction-specific rules."
+    mitigation: "Clear disclaimers that laws differ by location. Activities encourage learners to research their local laws."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/bus-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "BUS-101"
+  looking_for:
+    - "Real-world business case studies for classroom discussion"
+    - "Anonymized contract examples for legal literacy exercises"
+    - "Translations to Spanish & Mandarin"
+    - "Financial literacy activities using local currency and contexts"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Business & Law Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - business
+  - law
+  - economics
+  - finance
+  - accounting
+  - contracts
+  - legal-literacy
+  - entrepreneurship
+  - ethics
+  - governance
+  - personal-finance
+  - budgeting
+  - investing
+  - corporate-responsibility
+  - foundational
+
+# External Resources
+resources:
+  - type: curriculum
+    title: "Junior Achievement (JA)"
+    author: "Junior Achievement Worldwide"
+    url: "https://www.juniorachievement.org"
+
+  - type: online_platform
+    title: "Khan Academy Economics & Finance"
+    author: "Khan Academy"
+    url: "https://www.khanacademy.org/economics-finance-domain"
+
+  - type: curriculum
+    title: "Street Law: A Course in Practical Law"
+    author: "Street Law Inc."
+    url: "https://www.streetlaw.org"
+
+  - type: organization
+    title: "SCORE Business Mentoring"
+    author: "SCORE"
+    url: "https://www.score.org"
+
+# Related Packs
+related_packs:
+  - id: MATH-101
+    relationship: "Mathematical reasoning enables financial analysis and economic modeling"
+
+  - id: COMM-101
+    relationship: "Communication skills drive negotiation, persuasion, and legal argumentation"
+
+  - id: CRIT-101
+    relationship: "Critical thinking powers ethical analysis and business judgment"
+
+  - id: ECON-101
+    relationship: "Advanced economics builds on business and market foundations"
+
+  - id: CODE-101
+    relationship: "Technology products operate within business and legal contexts"
+
+  - id: READ-101
+    relationship: "Legal and financial documents require strong reading comprehension"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "briefcase"
+    color: "#FF9800"
+    position: "Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "BUS-101-economic-organization"
+    - "BUS-101-business-structures"
+    - "BUS-101-finance-fundamentals"
+    - "BUS-101-legal-systems"
+    - "BUS-101-ethics-governance"
+
+# File References
+files:
+  vision_document: "BUS-101-vision.md"
+  modules_definition: "BUS-101-modules.yaml"
+  activities: "BUS-101-activities.json"
+  assessment: "BUS-101-assessment.md"
+  resources: "BUS-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering economic organization, business structures, finance, legal systems, and ethics"
+      - "10 starter activities emphasizing real-world application and reasoning"
+      - "Aligned to CEE, Jump$tart, and National Civics standards"
+      - "Parent guidance for non-business and non-legal families"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-05-20"
