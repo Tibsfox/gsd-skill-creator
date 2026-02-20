@@ -1,0 +1,238 @@
+# Knowledge Pack Chipset Definition
+# Defines KP- prefixed agents, skills, teams, and token budget
+# for the GSD Foundational Knowledge Pack system.
+# Phase 244 - Chipset & Agent Definitions
+
+name: knowledge-packs
+description: >
+  Agent infrastructure for generating, validating, and reviewing
+  35 foundational knowledge packs across 3 tiers (Core Academic,
+  Applied, Specialized). Uses map-reduce coordination for parallel
+  content generation with merge validation.
+
+prefix: KP
+prefix_convention: "highway numbering (KP-01 through KP-06)"
+
+agents:
+  - id: KP-01
+    name: kp-coordinator
+    role: coordinator
+    description: >
+      Orchestrates the 35-pack content generation pipeline.
+      Manages batch scheduling (7 batches of 5 packs), tracks
+      completion state, resolves cross-pack dependency ordering,
+      and triggers validation after each batch.
+    skills: [kp-pipeline-orchestration]
+    tools: "Read, Glob, Grep"
+
+  - id: KP-02
+    name: kp-core-author
+    role: content-generator
+    description: >
+      Generates Core Academic tier packs (PACK-01 through PACK-15).
+      Creates vision documents, modules YAML, activities JSON,
+      assessment frameworks, and resource catalogs for foundational
+      subjects: math, science, technology, engineering, physics,
+      chemistry, reading, critical thinking, problem solving,
+      communication, history, geography, materials, business, statistics.
+    skills: [kp-content-authoring, kp-core-academic-domain]
+    tools: "Read, Write, Glob, Grep"
+    pack_assignments:
+      - MATH-101
+      - SCI-101
+      - TECH-101
+      - ENGR-101
+      - PHYS-101
+      - CHEM-101
+      - READ-101
+      - CRIT-101
+      - PROB-101
+      - COMM-101
+      - HIST-101
+      - GEO-101
+      - MFAB-101
+      - BUS-101
+      - STAT-101
+
+  - id: KP-03
+    name: kp-applied-author
+    role: content-generator
+    description: >
+      Generates Applied & Practical tier packs (PACK-16 through PACK-25).
+      Creates full content suites for practical skills: coding,
+      data science, languages, psychology, environmental science,
+      nutrition, economics, writing, logic, digital literacy.
+    skills: [kp-content-authoring, kp-applied-domain]
+    tools: "Read, Write, Glob, Grep"
+    pack_assignments:
+      - CODE-101
+      - DATA-101
+      - LANG-101
+      - PSYCH-101
+      - ENVR-101
+      - NUTR-101
+      - ECON-101
+      - WRIT-101
+      - LOG-101
+      - DIGLIT-101
+
+  - id: KP-04
+    name: kp-specialized-author
+    role: content-generator
+    description: >
+      Generates Specialized & Deepening tier packs (PACK-26 through PACK-35).
+      Creates full content suites for deepening subjects: philosophy,
+      theology, physical education, nature studies, home economics,
+      visual arts, music, trades, astronomy, learning to learn.
+    skills: [kp-content-authoring, kp-specialized-domain]
+    tools: "Read, Write, Glob, Grep"
+    pack_assignments:
+      - PHILO-101
+      - THEO-101
+      - PE-101
+      - NATURE-101
+      - DOMESTIC-101
+      - ART-101
+      - MUSIC-101
+      - TRADE-101
+      - ASTRO-101
+      - LEARN-101
+
+  - id: KP-05
+    name: kp-validator
+    role: quality-assurance
+    description: >
+      Validates pack content against runtime schemas. Checks
+      .skillmeta YAML against KnowledgePackSchema, modules YAML
+      against ModulesFileSchema, activities JSON against
+      PackActivitySchema. Verifies cross-pack dependency references
+      resolve and learning outcome codes are unique.
+    skills: [kp-content-validation]
+    tools: "Read, Bash, Glob, Grep"
+
+  - id: KP-06
+    name: kp-reviewer
+    role: quality-assurance
+    description: >
+      Reviews pack quality: educational accuracy, grade-level
+      appropriateness, accessibility compliance, learning pathway
+      coherence, and assessment alignment with stated outcomes.
+      Checks parallel instruction patterns for token caching
+      optimization across packs.
+    skills: [kp-quality-review]
+    tools: "Read, Glob, Grep"
+
+skills:
+  - name: kp-pipeline-orchestration
+    skill_file: "infra/packs/knowledge/skills/kp-pipeline-orchestration/SKILL.md"
+    token_budget: "1.0%"
+    description: "Pack generation pipeline coordination and batch scheduling"
+
+  - name: kp-content-authoring
+    skill_file: "infra/packs/knowledge/skills/kp-content-authoring/SKILL.md"
+    token_budget: "2.0%"
+    description: "Pack content generation: vision docs, modules, activities, assessments, resources"
+    shared_by: [KP-02, KP-03, KP-04]
+
+  - name: kp-core-academic-domain
+    skill_file: "infra/packs/knowledge/skills/kp-core-academic-domain/SKILL.md"
+    token_budget: "1.0%"
+    description: "Domain knowledge for 15 core academic subjects"
+
+  - name: kp-applied-domain
+    skill_file: "infra/packs/knowledge/skills/kp-applied-domain/SKILL.md"
+    token_budget: "1.0%"
+    description: "Domain knowledge for 10 applied & practical subjects"
+
+  - name: kp-specialized-domain
+    skill_file: "infra/packs/knowledge/skills/kp-specialized-domain/SKILL.md"
+    token_budget: "1.0%"
+    description: "Domain knowledge for 10 specialized & deepening subjects"
+
+  - name: kp-content-validation
+    skill_file: "infra/packs/knowledge/skills/kp-content-validation/SKILL.md"
+    token_budget: "1.0%"
+    description: "Schema validation, cross-pack reference checking, uniqueness enforcement"
+
+  - name: kp-quality-review
+    skill_file: "infra/packs/knowledge/skills/kp-quality-review/SKILL.md"
+    token_budget: "1.0%"
+    description: "Educational quality, accessibility, and caching pattern review"
+
+token_budget_summary:
+  total: "8.0%"
+  ecosystem_ceiling: "40%"
+  utilization: "20% of ceiling"
+  breakdown:
+    kp-pipeline-orchestration: "1.0%"
+    kp-content-authoring: "2.0%"
+    kp-core-academic-domain: "1.0%"
+    kp-applied-domain: "1.0%"
+    kp-specialized-domain: "1.0%"
+    kp-content-validation: "1.0%"
+    kp-quality-review: "1.0%"
+  note: >
+    kp-content-authoring is shared across 3 author agents (KP-02, KP-03, KP-04)
+    and loaded once per session. Domain skills are agent-specific and loaded
+    only when the respective tier's packs are being generated.
+
+teams:
+  - name: kp-content-pipeline
+    team_file: "infra/packs/knowledge/teams/kp-content-pipeline.yaml"
+    description: "Map-reduce pipeline for parallel pack content generation"
+    topology: map-reduce
+    agents: [KP-01, KP-02, KP-03, KP-04, KP-05, KP-06]
+
+pack_tiers:
+  core_academic:
+    count: 15
+    agent: KP-02
+    phases: [245, 246, 247]
+    packs:
+      - { id: MATH-101, name: "Mathematics", phase: 245, req: PACK-01 }
+      - { id: SCI-101, name: "Science Method & Nature", phase: 245, req: PACK-02 }
+      - { id: TECH-101, name: "Technology & Tools", phase: 245, req: PACK-03 }
+      - { id: ENGR-101, name: "Engineering & Design", phase: 245, req: PACK-04 }
+      - { id: PHYS-101, name: "Physics", phase: 245, req: PACK-05 }
+      - { id: CHEM-101, name: "Chemistry", phase: 246, req: PACK-06 }
+      - { id: READ-101, name: "Reading & Literacy", phase: 246, req: PACK-07 }
+      - { id: CRIT-101, name: "Critical Thinking", phase: 246, req: PACK-08 }
+      - { id: PROB-101, name: "Problem Solving", phase: 246, req: PACK-09 }
+      - { id: COMM-101, name: "Communication & Speech", phase: 246, req: PACK-10 }
+      - { id: HIST-101, name: "History & Civilization", phase: 247, req: PACK-11 }
+      - { id: GEO-101, name: "Geography & Space Science", phase: 247, req: PACK-12 }
+      - { id: MFAB-101, name: "Materials & Manufacturing", phase: 247, req: PACK-13 }
+      - { id: BUS-101, name: "Business & Law", phase: 247, req: PACK-14 }
+      - { id: STAT-101, name: "Accounting & Statistics", phase: 247, req: PACK-15 }
+
+  applied:
+    count: 10
+    agent: KP-03
+    phases: [248, 249]
+    packs:
+      - { id: CODE-101, name: "Computer Science & Coding", phase: 248, req: PACK-16 }
+      - { id: DATA-101, name: "Data Science & Analysis", phase: 248, req: PACK-17 }
+      - { id: LANG-101, name: "World Languages", phase: 248, req: PACK-18 }
+      - { id: PSYCH-101, name: "Psychology & Human Development", phase: 248, req: PACK-19 }
+      - { id: ENVR-101, name: "Environmental Science & Sustainability", phase: 248, req: PACK-20 }
+      - { id: NUTR-101, name: "Nutrition & Health Sciences", phase: 249, req: PACK-21 }
+      - { id: ECON-101, name: "Economics & Personal Finance", phase: 249, req: PACK-22 }
+      - { id: WRIT-101, name: "Literature & Creative Writing", phase: 249, req: PACK-23 }
+      - { id: LOG-101, name: "Logic & Formal Systems", phase: 249, req: PACK-24 }
+      - { id: DIGLIT-101, name: "Digital Literacy & Information Science", phase: 249, req: PACK-25 }
+
+  specialized:
+    count: 10
+    agent: KP-04
+    phases: [250, 251]
+    packs:
+      - { id: PHILO-101, name: "Philosophy", phase: 250, req: PACK-26 }
+      - { id: THEO-101, name: "Theology & Religion Studies", phase: 250, req: PACK-27 }
+      - { id: PE-101, name: "Physical Education & Movement", phase: 250, req: PACK-28 }
+      - { id: NATURE-101, name: "Nature Studies & Naturalism", phase: 250, req: PACK-29 }
+      - { id: DOMESTIC-101, name: "Home Economics & Life Skills", phase: 250, req: PACK-30 }
+      - { id: ART-101, name: "Visual Arts", phase: 251, req: PACK-31 }
+      - { id: MUSIC-101, name: "Music & Sound", phase: 251, req: PACK-32 }
+      - { id: TRADE-101, name: "Trades & Applied Skills", phase: 251, req: PACK-33 }
+      - { id: ASTRO-101, name: "Astronomy & Cosmology", phase: 251, req: PACK-34 }
+      - { id: LEARN-101, name: "Learning to Learn", phase: 251, req: PACK-35 }
