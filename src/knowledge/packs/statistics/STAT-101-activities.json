@@ -1,0 +1,202 @@
+[
+  {
+    "id": "STAT-101-A01",
+    "name": "Run a Classroom Store: Track Every Transaction",
+    "module_id": "STAT-101-M1",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 90,
+    "description": "Students set up and operate a small store selling school supplies or snacks. Every sale, purchase, and expense is recorded in a physical or digital journal using the accounting equation. Students experience bookkeeping as a real need, not an abstract exercise. They track inventory, calculate costs, record revenue, and determine profit or loss. The activity runs over several days, with daily reconciliation of the books, building habits of accurate record-keeping and revealing why every transaction has two sides.",
+    "materials": ["Items to sell (school supplies, snacks)", "Cash box with starting change", "Accounting journal or spreadsheet", "Receipt pad", "Calculator", "Price tags"],
+    "learning_objectives": [
+      "Record transactions using the accounting equation (Assets = Liabilities + Equity)",
+      "Maintain a daily journal of all business transactions",
+      "Reconcile cash on hand with recorded transactions",
+      "Understand the difference between revenue and profit"
+    ],
+    "variations": [
+      "Digital version: use a spreadsheet instead of paper journal for older learners",
+      "Multi-day operation: run the store for a full week with daily reconciliation",
+      "Competition: two student teams run competing stores and compare financial results"
+    ]
+  },
+  {
+    "id": "STAT-101-A02",
+    "name": "Lemonade Stand Bookkeeping Challenge",
+    "module_id": "STAT-101-M1",
+    "grade_range": ["3", "4", "5", "6"],
+    "duration_minutes": 60,
+    "description": "Students design, fund, operate, and close a lemonade stand business in a simulation. They track startup costs (lemons, sugar, cups, table rental), calculate cost per cup, set a selling price, record each sale, and compute total profit or loss at the end. The entire business cycle is compressed into one session, introducing the concept that every business starts with investment, incurs ongoing costs, and succeeds only if revenue exceeds total costs. Students create a simple income statement showing revenue minus expenses equals profit.",
+    "materials": ["Lemonade stand simulation worksheet", "Play money or transaction cards", "Calculator", "Pencil and paper for journaling"],
+    "learning_objectives": [
+      "Track startup costs and ongoing expenses separately",
+      "Calculate cost per unit (cost per cup of lemonade)",
+      "Set prices that cover costs and generate profit",
+      "Create a simple income statement from transaction records"
+    ],
+    "variations": [
+      "Real lemonade stand: actually make and sell lemonade with real money tracking",
+      "Variable pricing: experiment with different prices and track how volume changes",
+      "Partnership: two students pool resources and must divide profits fairly"
+    ]
+  },
+  {
+    "id": "STAT-101-A03",
+    "name": "Read a Real Company's Annual Report",
+    "module_id": "STAT-101-M2",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 75,
+    "description": "Students receive simplified but authentic financial statements from a publicly traded company (simplified for clarity but preserving real numbers). They answer guided questions: Is this company making money? Can it pay its short-term debts? Where is its cash going? How has performance changed year-over-year? Students work through the income statement first (profitability), then the balance sheet (financial position), then cash flow (actual money movement). The activity reveals that these three documents tell different parts of the same story and that a company can be profitable on paper while struggling with cash flow.",
+    "materials": ["Simplified annual report printout", "Guided question worksheet", "Calculator", "Highlighters for marking key figures"],
+    "learning_objectives": [
+      "Identify key components of an income statement, balance sheet, and cash flow statement",
+      "Interpret profitability from revenue and expense data",
+      "Assess financial health using basic ratios (current ratio, profit margin)",
+      "Explain how the three financial statements connect to each other"
+    ],
+    "variations": [
+      "Compare two companies in the same industry (e.g., two fast food chains)",
+      "Track one company over three years to identify trends",
+      "Student choice: pick a company they know and find its real annual report online"
+    ]
+  },
+  {
+    "id": "STAT-101-A04",
+    "name": "Build a Personal Income Statement for a Month",
+    "module_id": "STAT-101-M2",
+    "grade_range": ["5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 45,
+    "description": "Students track their own income (allowance, gifts, earnings from chores or jobs) and expenses (snacks, games, entertainment, savings deposits) for one month, then create a personal income statement. They categorize expenses into needs and wants, calculate total income minus total expenses, and analyze their spending patterns. The activity makes abstract accounting concepts viscerally personal and reveals spending habits that learners may not have been aware of. A follow-up discussion addresses what changes they might make based on what the numbers reveal.",
+    "materials": ["Personal income/expense tracking sheet", "One month of transaction records (or recall)", "Calculator", "Categories worksheet (needs vs. wants)"],
+    "learning_objectives": [
+      "Track income and expenses over a defined period",
+      "Categorize expenses into meaningful groups",
+      "Create a personal income statement showing net income or loss",
+      "Analyze spending patterns and identify opportunities for change"
+    ],
+    "variations": [
+      "Family version: track household expenses with a parent for deeper complexity",
+      "Digital tracking: use a simple app or spreadsheet for real-time recording",
+      "Hypothetical: create an income statement for a fictional character in different life stages"
+    ]
+  },
+  {
+    "id": "STAT-101-A05",
+    "name": "Coin Flip Experiment: Predicted vs. Actual",
+    "module_id": "STAT-101-M3",
+    "grade_range": ["K", "1", "2", "3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 40,
+    "description": "Students predict what will happen when they flip a coin 10 times, then 50 times, then 200 times. At each stage, they record actual results and compare to predictions. Young learners use physical coins; older learners can use digital simulators for larger sample sizes. The activity viscerally demonstrates the law of large numbers: short-run results can be wildly different from the theoretical 50/50 probability, but as the sample size grows, the experimental probability converges toward the theoretical value. Students graph their cumulative results to see the convergence visually.",
+    "materials": ["Coins (one per student or pair)", "Tally sheet or recording worksheet", "Graph paper or charting tool", "Digital coin flip simulator (optional, for large samples)"],
+    "learning_objectives": [
+      "Distinguish between predicted (theoretical) and actual (experimental) probability",
+      "Observe that short-run results can differ significantly from long-run expectations",
+      "Apply the law of large numbers to explain convergence of experimental probability",
+      "Create and interpret a graph showing cumulative experimental probability"
+    ],
+    "variations": [
+      "Unfair coin: use a weighted object and determine if it is truly 50/50",
+      "Class aggregate: combine all students' results for a very large sample",
+      "Dice version: predict and test outcomes with six-sided dice for non-50/50 probabilities"
+    ]
+  },
+  {
+    "id": "STAT-101-A06",
+    "name": "Card Game Probability: What Are the Odds?",
+    "module_id": "STAT-101-M3",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 50,
+    "description": "Using a standard 52-card deck, students explore probability questions of increasing complexity. They start with simple questions (What is the probability of drawing a heart?) and progress to compound events (What is the probability of drawing two hearts in a row without replacement?) and conditional probability (Given that the first card was red, what is the probability the second card is also red?). Students calculate theoretical probabilities, then test them experimentally by drawing cards many times and recording results. The familiar, tactile nature of playing cards makes abstract probability concepts concrete and engaging.",
+    "materials": ["Standard 52-card deck (one per pair)", "Probability question cards (scaffolded by difficulty)", "Recording sheet for experimental results", "Calculator"],
+    "learning_objectives": [
+      "Calculate the probability of simple events from a known sample space",
+      "Understand how removing cards changes subsequent probabilities (without replacement)",
+      "Apply conditional probability to dependent events",
+      "Compare theoretical and experimental probabilities"
+    ],
+    "variations": [
+      "Poker hand probabilities: calculate odds of specific poker hands (advanced)",
+      "Design your own game: create a card game where understanding probability gives an advantage",
+      "Simulation: use a computer to draw thousands of hands and check theoretical calculations"
+    ]
+  },
+  {
+    "id": "STAT-101-A07",
+    "name": "Survey Your Class and Analyze the Data",
+    "module_id": "STAT-101-M4",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 90,
+    "description": "Students design a survey question, administer it to their class or school, tabulate results, compute descriptive statistics (mean, median, mode where applicable), create appropriate visualizations (bar chart, histogram, or pie chart), and present their findings. The full statistical investigation cycle is compressed into one extended session or split across two sessions. At higher levels, students also address sampling limitations, potential biases in their question wording, and whether their class represents a broader population. The activity teaches that statistics is a process of inquiry, not just a set of calculations.",
+    "materials": ["Survey design worksheet", "Tally sheets or digital survey tool", "Graph paper or charting software", "Calculator", "Presentation materials (poster or slides)"],
+    "learning_objectives": [
+      "Design a clear, unbiased survey question",
+      "Collect and organize data systematically",
+      "Calculate appropriate measures of center and spread",
+      "Choose and create effective data visualizations"
+    ],
+    "variations": [
+      "Online survey: use Google Forms for larger samples beyond the classroom",
+      "Longitudinal: survey the same group twice (weeks apart) and compare results",
+      "Cross-class comparison: coordinate with another class and compare populations"
+    ]
+  },
+  {
+    "id": "STAT-101-A08",
+    "name": "Misleading Graphs: Spot the Tricks",
+    "module_id": "STAT-101-M4",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "A gallery of real-world graphs that distort, mislead, or manipulate data. Students examine each graph, identify the specific technique used to mislead (truncated y-axis, cherry-picked time range, area distortion, 3D effects that obscure proportions, inconsistent scales, missing context), and redraw the graph honestly. Then students create their own deliberately misleading graph from honest data to demonstrate how easy it is to manipulate visual information. The activity develops critical visual literacy that extends far beyond statistics class into media consumption, advertising, and political communication.",
+    "materials": ["Collection of misleading graphs (printed or projected)", "Analysis worksheet with checklist of common tricks", "Graph paper for redrawing", "Honest data set for creating their own misleading graph"],
+    "learning_objectives": [
+      "Identify common techniques used to create misleading data visualizations",
+      "Explain how specific graph design choices distort the viewer's interpretation",
+      "Redraw misleading graphs using honest, standard visualization practices",
+      "Apply critical evaluation skills to graphs encountered in media and advertising"
+    ],
+    "variations": [
+      "Media hunt: find misleading graphs in current news articles or social media",
+      "Debate format: one team defends a misleading graph while the other critiques it",
+      "Design challenge: create the most misleading graph possible from a given dataset (then fix it)"
+    ]
+  },
+  {
+    "id": "STAT-101-A09",
+    "name": "Compound Interest Calculator: Watch Money Grow",
+    "module_id": "STAT-101-M5",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 50,
+    "description": "Students build a simple compound interest calculator using a spreadsheet or paper table. They enter a starting amount, an interest rate, and a time period, then calculate the balance year by year. The key comparison: saving $100/month starting at age 18 versus starting at age 28. The visual shock of the difference -- often tens of thousands of dollars -- is one of the most powerful lessons in personal finance. Students graph the growth curves and see the exponential nature of compounding. The activity extends to credit card debt: what happens when compound interest works against you? Students calculate the true cost of carrying a $1,000 balance at 20% APR.",
+    "materials": ["Spreadsheet software or paper calculation table", "Compound interest formula reference", "Graph paper or charting tool", "Calculator", "Comparison scenarios worksheet"],
+    "learning_objectives": [
+      "Calculate compound interest over multiple periods",
+      "Visualize exponential growth through graphing",
+      "Compare the impact of starting to save early vs. late",
+      "Understand how compound interest applies to both savings and debt"
+    ],
+    "variations": [
+      "Code version: write a simple program to calculate compound interest",
+      "Rule of 72: discover the shortcut for estimating doubling time",
+      "Real rates: research current savings account and credit card rates for realistic calculations"
+    ]
+  },
+  {
+    "id": "STAT-101-A10",
+    "name": "Budget Challenge: Live on a Fixed Income for a Week",
+    "module_id": "STAT-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 60,
+    "description": "Given a fixed monthly income based on an entry-level salary for their region, students create a realistic monthly budget covering rent, food, transportation, insurance, utilities, savings, and entertainment. They must make real trade-offs: a nicer apartment means less for food; a car means insurance and gas; saving for emergencies means less discretionary spending. Students discover that budgeting is fundamentally about values and priorities, not just arithmetic. The activity includes unexpected expenses (car repair, medical bill, broken phone) that force budget adjustments mid-month, teaching resilience and the importance of emergency funds.",
+    "materials": ["Budget worksheet with regional cost data", "Fixed income scenario card", "Unexpected expense cards (drawn randomly)", "Calculator", "Decision tracking sheet"],
+    "learning_objectives": [
+      "Create a realistic monthly budget with appropriate categories",
+      "Make informed trade-offs between competing financial priorities",
+      "Adjust a budget in response to unexpected expenses",
+      "Understand the importance of emergency savings and financial planning"
+    ],
+    "variations": [
+      "Different incomes: compare budgets at minimum wage, median wage, and high income",
+      "Life stages: budget for a single person, a couple, a family with children",
+      "Regional comparison: budget the same income in a high-cost vs. low-cost city"
+    ]
+  }
+]
