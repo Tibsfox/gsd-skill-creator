@@ -1,0 +1,305 @@
+# CODE-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: CODE-101
+pack_name: "Computer Science & Coding — Foundational Knowledge Pack"
+
+modules:
+  - id: CODE-101-M1
+    name: "Computational Thinking & Algorithms"
+    description: "Breaking problems into steps, recognizing patterns, designing algorithms before code"
+
+    learning_outcomes:
+      - "Understand sequential thinking and algorithm design"
+      - "Decompose complex problems into manageable parts"
+      - "Recognize and generalize patterns"
+      - "Design algorithms before implementation"
+      - "Evaluate algorithm efficiency conceptually"
+
+    topics:
+      - "Sequential Thinking & Step-by-Step Logic"
+      - "Algorithm Design & Problem Decomposition"
+      - "Pattern Recognition & Generalization"
+      - "Abstraction & Representation"
+      - "Debugging Mindset"
+      - "Unplugged Programming Activities"
+      - "Flowchart Design & Pseudocode"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 25
+      high: 20
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "Unplugged Sorting Challenges"
+        - "Pattern Detective Games"
+        - "Algorithm Design on Paper"
+        - "Human Computer Activities"
+        - "Flowchart Design Exercises"
+
+    assessments:
+      - "Can student explain algorithm logic?"
+      - "Does student break problems into steps?"
+      - "Can student recognize and generalize patterns?"
+      - "Does student understand decomposition?"
+
+  - id: CODE-101-M2
+    name: "Programming Fundamentals"
+    description: "Variables, data types, control flow, input/output in visual and text-based environments"
+
+    learning_outcomes:
+      - "Use variables to store and change values"
+      - "Understand different data types and their purposes"
+      - "Use control structures (if/else, loops, functions) appropriately"
+      - "Read input and produce output"
+      - "Write syntactically correct code"
+      - "Transition from visual to text-based programming"
+
+    topics:
+      - "Variables & Data Storage"
+      - "Data Types (Numbers, Strings, Lists, Objects)"
+      - "Control Flow (If/Else, Loops, Functions)"
+      - "Input & Output"
+      - "Syntax & Grammar"
+      - "Block-Based Programming (Scratch, Blockly)"
+      - "Text-Based Programming (Python, JavaScript)"
+      - "Code Organization & Style"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 30
+      elementary: 40
+      middle: 35
+      high: 25
+
+    prerequisite_modules: ["CODE-101-M1"]
+
+    activities:
+      count: 10
+      examples:
+        - "Scratch Animation Stories"
+        - "Python Number Guessing Games"
+        - "Fix-the-Code Challenges"
+        - "Trace-Code Exercises"
+        - "Interactive Input/Output Projects"
+
+    assessments:
+      - "Can student write working programs?"
+      - "Does student understand variable scope?"
+      - "Can student choose appropriate control structures?"
+      - "Is student developing code clarity?"
+
+  - id: CODE-101-M3
+    name: "Building Projects & Problem-Solving"
+    description: "Planning projects, iterative development, data analysis, game design, systematic debugging"
+
+    learning_outcomes:
+      - "Plan and scope projects effectively"
+      - "Build projects iteratively: basic version → test → improve"
+      - "Work with data: collect, analyze, visualize"
+      - "Design interactive experiences (games, tools)"
+      - "Debug systematically using appropriate tools"
+      - "Organize code for maintainability"
+      - "Collaborate on code (peer review)"
+
+    topics:
+      - "Project Planning & Scoping"
+      - "Iterative Development Process"
+      - "Data Analysis & Visualization"
+      - "Game Development Fundamentals"
+      - "Testing & Debugging Tools"
+      - "Code Organization (Functions, Modules, Classes)"
+      - "Peer Code Review"
+      - "Documentation & Comments"
+
+    grade_levels: ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 35
+      middle: 40
+      high: 35
+
+    prerequisite_modules: ["CODE-101-M2"]
+
+    activities:
+      count: 10
+      examples:
+        - "Scaffolded Project Building"
+        - "Data Collection & Analysis Projects"
+        - "Simple Game Creation"
+        - "Creative Output Programs"
+        - "Real-World Tool Building"
+
+    assessments:
+      - "Does student follow project process?"
+      - "Can student test their own code?"
+      - "Does student debug systematically?"
+      - "Is student producing working projects?"
+
+  - id: CODE-101-M4
+    name: "Algorithms & Efficiency"
+    description: "Sorting, searching, complexity analysis, and understanding why some solutions are better than others"
+
+    learning_outcomes:
+      - "Understand classic algorithms (sorting, searching)"
+      - "Analyze algorithm efficiency (Big-O notation)"
+      - "Recognize when efficiency matters"
+      - "Choose appropriate algorithms for problems"
+      - "Understand trade-offs in algorithm design"
+      - "Optimize code for performance"
+
+    topics:
+      - "Sorting Algorithms (Bubble Sort, Merge Sort, etc.)"
+      - "Searching Algorithms (Linear, Binary Search)"
+      - "Time Complexity & Big-O Notation"
+      - "Space Complexity"
+      - "Greedy Algorithms"
+      - "Dynamic Programming Concepts"
+      - "Graph Algorithms & Pathfinding"
+      - "Algorithm Trade-offs & Optimization"
+
+    grade_levels: ["4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 0
+      elementary: 20
+      middle: 30
+      high: 40
+
+    prerequisite_modules: ["CODE-101-M2", "CODE-101-M3"]
+
+    activities:
+      count: 10
+      examples:
+        - "Sorting Algorithm Visualizations & Races"
+        - "Binary Search Exploration"
+        - "Complexity Analysis Exercises"
+        - "Algorithm Comparison Projects"
+        - "Pathfinding Simulations"
+
+    assessments:
+      - "Can student analyze algorithm efficiency?"
+      - "Does student understand complexity notation?"
+      - "Can student choose appropriate algorithms?"
+      - "Does student optimize code effectively?"
+
+  - id: CODE-101-M5
+    name: "Computing & Society"
+    description: "Ethics, AI, security, digital citizenship, open source, and computing's impact on society"
+
+    learning_outcomes:
+      - "Understand computing's impact on society"
+      - "Think critically about AI and automation"
+      - "Recognize digital security basics"
+      - "Practice digital citizenship responsibly"
+      - "Understand open source philosophy"
+      - "Consider ethical implications of code"
+
+    topics:
+      - "Computing Ethics & Responsibility"
+      - "Artificial Intelligence & Machine Learning Basics"
+      - "Cybersecurity & Privacy"
+      - "Digital Citizenship"
+      - "Open Source Software & Collaboration"
+      - "Accessibility in Software"
+      - "Environmental Impact of Computing"
+      - "Bias in Algorithms"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 0
+      elementary: 15
+      middle: 20
+      high: 25
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "AI Ethics Debates"
+        - "Digital Footprint Audits"
+        - "Security & Password Practices"
+        - "Open Source Exploration"
+        - "Algorithmic Bias Investigation"
+
+    assessments:
+      - "Does student think critically about technology?"
+      - "Can student identify ethical issues?"
+      - "Does student practice digital citizenship?"
+      - "Is student aware of computing's societal impact?"
+
+# Cross-module competencies that integrate concepts
+cross_module_competencies:
+  - name: "Problem-Solving"
+    description: "Breaking complex problems into manageable pieces across all domains"
+    modules: ["CODE-101-M1", "CODE-101-M2", "CODE-101-M3", "CODE-101-M4"]
+
+  - name: "Computational Thinking"
+    description: "Algorithmic thinking applied to real-world problems"
+    modules: ["CODE-101-M1", "CODE-101-M2", "CODE-101-M3", "CODE-101-M4"]
+
+  - name: "Debugging & Systematic Reasoning"
+    description: "Finding and fixing errors through logical deduction"
+    modules: ["CODE-101-M1", "CODE-101-M2", "CODE-101-M3"]
+
+  - name: "Ethical Computing"
+    description: "Considering impact and responsibility in all code"
+    modules: ["CODE-101-M2", "CODE-101-M3", "CODE-101-M4", "CODE-101-M5"]
+
+# Progression pathways showing how modules build on each other
+progression_pathways:
+  - name: "Visual to Text Programming"
+    description: "Foundation through visual environments, then text-based"
+    sequence: ["CODE-101-M1", "CODE-101-M2", "CODE-101-M3"]
+
+  - name: "Algorithm Focus Track"
+    description: "For students interested in computer science depth"
+    sequence: ["CODE-101-M1", "CODE-101-M2", "CODE-101-M4"]
+
+  - name: "Applied & Practical Track"
+    description: "Focus on building useful projects"
+    sequence: ["CODE-101-M1", "CODE-101-M2", "CODE-101-M3"]
+
+  - name: "Ethics-Aware Track"
+    description: "Integrating ethical considerations throughout"
+    sequence: ["CODE-101-M1", "CODE-101-M2", "CODE-101-M5", "CODE-101-M3"]
+
+# Patterns that appear across multiple modules (for skill-creator)
+parallel_patterns:
+  - pattern: "Abstraction & Decomposition"
+    levels: ["Foundation understanding (M1)", "Code organization (M2)", "Project structure (M3)", "Algorithm design (M4)"]
+
+  - pattern: "Testing & Verification"
+    levels: ["Algorithm correctness (M1)", "Code correctness (M2)", "Project testing (M3)", "Complexity verification (M4)"]
+
+  - pattern: "Efficiency Thinking"
+    levels: ["Step optimization (M1)", "Loop efficiency (M2)", "Project optimization (M3)", "Algorithm complexity (M4)"]
+
+# Integration with GSD skill-creator
+skill_creator_integration:
+  - trigger: "Student traces through code"
+    skill: "Understanding precedes coding"
+    observation: "Track time spent reading vs. writing code"
+
+  - trigger: "Student refactors code"
+    skill: "Code clarity and maintainability"
+    observation: "Note frequency of refactoring; quality improvements"
+
+  - trigger: "Student tests edge cases"
+    skill: "Comprehensive testing practices"
+    observation: "Track test coverage and systematic thinking"
+
+  - trigger: "Student debugs systematically"
+    skill: "Logical debugging strategies"
+    observation: "Note use of print statements, debuggers, and tracing"
