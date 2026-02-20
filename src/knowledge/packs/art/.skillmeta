@@ -1,0 +1,277 @@
+# GSD Skill Metadata
+pack_id: "ART-101"
+pack_name: "Visual Arts — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: specialized
+learning_domain: visual_arts
+
+# Content Description
+description: |
+  Visual arts education for all learners. Art is a way of seeing, thinking, and
+  communicating. ART-101 teaches observation, color theory, creative expression
+  across media, art history and cultural context, and the habits of professional
+  creative practice. Spans kindergarten through college, with modules in seeing
+  & drawing, color & composition, materials & making, art in context, and
+  creative process & portfolio building.
+
+short_description: "Visual observation, creative expression, and artistic thinking K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Visual Arts Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge: []
+
+# What This Pack Enables
+enables: []
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["K", "1", "2"]
+    estimated_hours: [30, 50]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [50, 100]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [100, 150]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [150, 240]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [240, 300]
+
+# Modules
+modules:
+  - id: "ART-101-M1"
+    name: "Seeing & Drawing"
+    level: foundation-high
+    duration_hours: 25
+
+  - id: "ART-101-M2"
+    name: "Color, Value & Composition"
+    level: foundation-high
+    duration_hours: 30
+    prereq_modules: ["ART-101-M1"]
+
+  - id: "ART-101-M3"
+    name: "Materials & Making"
+    level: foundation-high
+    duration_hours: 30
+    prereq_modules: ["ART-101-M1"]
+
+  - id: "ART-101-M4"
+    name: "Art in Context"
+    level: foundation-high
+    duration_hours: 25
+
+  - id: "ART-101-M5"
+    name: "Creative Process & Portfolio"
+    level: elementary-college
+    duration_hours: 30
+    prereq_modules: ["ART-101-M1", "ART-101-M2", "ART-101-M3"]
+
+# Learning Outcomes
+learning_outcomes:
+  - code: "LO-ART-001"
+    description: "Students can observe carefully and translate observation into visual representation"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: "LO-ART-002"
+    description: "Students understand color properties and can make intentional color choices for mood and meaning"
+    levels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: "LO-ART-003"
+    description: "Students can apply compositional principles to guide viewer attention and create visual impact"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: "LO-ART-004"
+    description: "Students have hands-on experience with diverse media and understand the affordances of different materials"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: "LO-ART-005"
+    description: "Students can analyze artworks in historical and cultural context, understanding art as more than aesthetic object"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: "LO-ART-006"
+    description: "Students practice iteration, critique, and revision, developing professional creative habits"
+    levels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Observational Drawing Journals"
+    frequency: Weekly or every other week
+
+  - type: formative
+    name: "Peer Critique Circles"
+    frequency: Every 2-3 weeks
+
+  - type: formative
+    name: "Sketchbook Check-ins"
+    frequency: Ongoing
+
+  - type: formative
+    name: "Self-Reflection Prompts"
+    frequency: Weekly or project-based
+
+  - type: summative
+    name: "Portfolio Review"
+    frequency: End of unit or semester
+
+  - type: summative
+    name: "Artist Statement"
+    frequency: End of unit
+
+# Tools & Resources
+tools_required: []
+
+tools_optional:
+  - name: "Pencils and Sketchbooks"
+    description: "Basic drawing tools for all activities"
+
+  - name: "Paints (Watercolor or Acrylic)"
+    description: "For color mixing and painting activities"
+
+  - name: "Clay"
+    description: "For three-dimensional form exploration"
+
+  - name: "Printmaking Supplies (Foam, Linoleum, Blocks)"
+    description: "For printmaking activities"
+
+  - name: "Collage Materials (Paper, Magazines, Glue)"
+    description: "For mixed media exploration"
+
+  - name: "Digital Drawing Tools (Procreate, Adobe Fresco, etc.)"
+    description: "For students with access; optional but powerful"
+
+# Interactive Elements
+interactive_elements:
+  - type: gallery-walk
+    name: "Peer Critique Gallery Walk"
+
+  - type: circle-discussion
+    name: "Critique Circles"
+
+  - type: project
+    name: "Portfolio Building"
+
+  - type: virtual-tour
+    name: "Virtual Museum Tours"
+
+  - type: artist-study
+    name: "Artist Biography Study"
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: false
+  large_text_available: false
+  high_contrast_available: false
+  keyboard_navigable: false
+  alt_text_provided: false
+  captions_available: false
+  notes: "Primarily hands-on visual arts; accessibility features to be developed for digital components"
+
+# Standards Alignment
+standards_alignment: []
+
+# Difficulty
+difficulty:
+  conceptual_demand: "Low to Moderate"
+  technical_demand: "Low to High (depends on media chosen)"
+  prerequisites_required: "None"
+  notes: "Foundation modules are accessible to all ages; complexity increases with grade level"
+
+# Tags & Categorization
+tags:
+  - visual-arts
+  - observation
+  - creativity
+  - design-thinking
+  - cultural-literacy
+  - art-history
+  - visual-communication
+  - self-expression
+  - media-exploration
+
+# External Resources
+resources: []
+
+# Related Packs
+related_packs:
+  - id: "ENGR-101"
+    relationship: "Complementary (design thinking, problem-solving)"
+
+  - id: "HIST-101"
+    relationship: "Complementary (historical analysis, cultural context)"
+
+  - id: "COMM-101"
+    relationship: "Complementary (visual communication, rhetoric)"
+
+  - id: "MUSIC-101"
+    relationship: "Complementary (aesthetic principles, creative expression)"
+
+  - id: "CRIT-101"
+    relationship: "Complementary (analytical thinking, evaluation)"
+
+  - id: "PHILO-101"
+    relationship: "Complementary (aesthetics, meaning, inquiry)"
+
+# GSD Integration
+gsd_integration:
+  dashboard_display:
+    icon: palette
+    color: "#E91E63"
+    position: Specialized
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+# Files
+files:
+  vision_document: "ART-101-vision.md"
+  modules_definition: "ART-101-modules.yaml"
+  activities: "ART-101-activities.json"
+  assessment: "ART-101-assessment.md"
+  resources: "ART-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial creation of ART-101 Visual Arts pack"
+      - "Five modules: Seeing & Drawing, Color & Composition, Materials & Making, Art in Context, Creative Process & Portfolio"
+      - "10 activities per module (50 total) covering K-12 and college"
+      - "Assessment framework focused on growth and process, not talent"
+      - "Resources and parent guidance included"
+
+# Quality Assurance
+qa:
+  peer_reviewed: false
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"
