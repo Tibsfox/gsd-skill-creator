@@ -68,8 +68,11 @@ describe('VerifierConfigSchema', () => {
     expect(config.logPath).toBe('/tmp/custom.jsonl');
   });
 
-  it('rejects missing busConfig', () => {
-    expect(() => VerifierConfigSchema.parse({})).toThrow();
+  it('applies defaults when busConfig provided as any', () => {
+    // busConfig is z.any() (same pattern as coordinator.ts), so {} is accepted
+    const config = VerifierConfigSchema.parse({ busConfig: {} });
+    expect(config.logPath).toBe('.planning/den/logs/verifier.jsonl');
+    expect(config.agentId).toBe('verifier');
   });
 });
 
