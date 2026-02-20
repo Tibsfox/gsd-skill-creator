@@ -1,0 +1,491 @@
+# GSD Skill Metadata
+pack_id: PROB-101
+pack_name: "Problem Solving — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: 2026-02-20
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: problem_solving
+
+# Content Description
+description: |
+  Problem solving as the universal skill of turning "stuck" into "solved."
+  Teaches general-purpose strategies — decomposition, pattern recognition,
+  abstraction, working backwards, analogy — that transfer across every domain.
+  Not domain-specific problem types, but the meta-strategies that make someone
+  a better problem solver everywhere.
+
+short_description: "General-purpose problem-solving strategies, heuristics, and transfer skills across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Problem Solving Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - MATH-101
+
+# What This Pack Enables
+enables:
+  - CODE-101
+  - ENGR-101
+  - DATA-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [25, 45]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [45, 65]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [60, 90]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [80, 120]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [100, 150]
+
+# Modules
+modules:
+  - id: PROB-101-M1
+    name: "Understanding Problems"
+    description: "Developing the foundational skill of problem comprehension — restating problems, identifying knowns and unknowns, clarifying constraints, and distinguishing the stated problem from the real problem"
+    learning_outcomes:
+      - "Restate problems accurately in own words"
+      - "Identify known information, unknown information, and irrelevant information"
+      - "Clarify constraints and conditions that limit possible solutions"
+      - "Distinguish between the stated problem and the underlying real problem"
+      - "Describe what a successful solution would look like before attempting one"
+    topics:
+      - "Restating Problems in Your Own Words"
+      - "Knowns, Unknowns, and Irrelevant Information"
+      - "Constraints and Conditions"
+      - "Open-Ended vs. Well-Defined Problems"
+      - "Problem Types and Classification"
+      - "Asking Clarifying Questions"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 25
+      elementary: 20
+      middle: 15
+      high: 10
+    prerequisite_modules: []
+    activities:
+      count: 4
+      examples:
+        - "Problem Translation Challenge"
+        - "What Do We Know / What Do We Need? Sorting Activity"
+        - "The Hidden Question"
+        - "Constraint Cards"
+    assessments:
+      - "Can student restate a problem accurately in their own words?"
+      - "Does student identify knowns, unknowns, and irrelevant information?"
+      - "Can student describe what a successful solution would look like?"
+      - "Does student ask clarifying questions before attempting a solution?"
+
+  - id: PROB-101-M2
+    name: "Problem-Solving Strategies"
+    description: "The core strategy toolkit — heuristics including work backwards, find a pattern, simplify first, guess and check, draw a diagram, make a table, use analogy, and consider extreme cases"
+    learning_outcomes:
+      - "Name and describe at least five general-purpose problem-solving strategies"
+      - "Select appropriate strategies based on problem characteristics"
+      - "Apply multiple strategies to the same problem and compare approaches"
+      - "Combine two or more strategies when a single approach is insufficient"
+      - "Evaluate which strategy was most effective after solving"
+    topics:
+      - "Work Backwards"
+      - "Find a Pattern"
+      - "Simplify First"
+      - "Guess and Check (Systematically)"
+      - "Draw a Diagram"
+      - "Make a Table"
+      - "Use Analogy"
+      - "Consider Extreme Cases"
+      - "Eliminate Possibilities"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 30
+      elementary: 35
+      middle: 30
+      high: 20
+    prerequisite_modules: [PROB-101-M1]
+    activities:
+      count: 4
+      examples:
+        - "Strategy Toolkit Rotation"
+        - "Work Backwards Mystery Puzzle"
+        - "Strategy Selection Game"
+        - "Multi-Strategy Challenge"
+    assessments:
+      - "Can student name and describe multiple problem-solving strategies?"
+      - "Does student select strategies appropriate to the problem type?"
+      - "Can student combine strategies when a single approach is insufficient?"
+      - "Does student evaluate strategy effectiveness after solving?"
+
+  - id: PROB-101-M3
+    name: "Creative & Lateral Thinking"
+    description: "Developing creative problem-solving skills — brainstorming, SCAMPER, reframing, analogical reasoning, lateral thinking, and perspective-taking for problems that resist conventional approaches"
+    learning_outcomes:
+      - "Generate multiple ideas without premature judgment using brainstorming techniques"
+      - "Apply SCAMPER prompts to generate creative variations on existing solutions"
+      - "Reframe problems to reveal new solution paths"
+      - "Draw analogies from distant domains to inspire novel approaches"
+      - "Question assumptions systematically to discover unconventional solutions"
+    topics:
+      - "Brainstorming and Idea Generation"
+      - "SCAMPER Technique"
+      - "Reframing Problems"
+      - "Analogical Reasoning Across Domains"
+      - "Lateral Thinking and Assumption-Busting"
+      - "Perspective-Taking"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 25
+      high: 20
+    prerequisite_modules: [PROB-101-M1]
+    activities:
+      count: 4
+      examples:
+        - "SCAMPER an Everyday Object"
+        - "Analogical Problem Solving"
+        - "Reframing Practice"
+        - "Assumption-Busting Challenge"
+    assessments:
+      - "Can student generate multiple diverse ideas before evaluating any?"
+      - "Does student apply SCAMPER prompts to produce creative variations?"
+      - "Can student restate a problem in at least three different ways?"
+      - "Does student recognize structural analogies between different domains?"
+
+  - id: PROB-101-M4
+    name: "Collaborative Problem Solving"
+    description: "Combining problem-solving strategies with social skills for group work — active listening, building on ideas, role distribution, constructive disagreement, and integrating diverse contributions"
+    learning_outcomes:
+      - "Listen actively and understand others' ideas before evaluating them"
+      - "Build on teammates' ideas constructively"
+      - "Distribute problem-solving tasks based on team members' strengths"
+      - "Disagree constructively about ideas without attacking people"
+      - "Integrate diverse contributions into a coherent group solution"
+    topics:
+      - "Active Listening in Problem-Solving Groups"
+      - "Building on Ideas"
+      - "Role Distribution and Task Division"
+      - "Constructive Disagreement"
+      - "Distributed Cognition"
+      - "Consensus Building"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 20
+      middle: 25
+      high: 20
+    prerequisite_modules: [PROB-101-M2, PROB-101-M3]
+    activities:
+      count: 4
+      examples:
+        - "Escape Room Team Challenge"
+        - "Community Problem Identification and Proposal"
+        - "Expert Jigsaw"
+        - "Silent Problem Solving"
+    assessments:
+      - "Does student listen to and build on teammates' ideas?"
+      - "Can student distribute tasks effectively within a group?"
+      - "Does student disagree constructively and seek consensus?"
+      - "Can student integrate diverse contributions into a coherent solution?"
+
+  - id: PROB-101-M5
+    name: "Complex & Wicked Problems"
+    description: "Engaging with problems characterized by ambiguity, multiple stakeholders, incomplete information, and solutions that create new problems — systems thinking, tradeoff evaluation, and decision under uncertainty"
+    learning_outcomes:
+      - "Analyze problems as systems of interacting components rather than isolated variables"
+      - "Identify stakeholders with different perspectives and conflicting interests"
+      - "Evaluate tradeoffs explicitly when choosing among imperfect solutions"
+      - "Make and justify decisions with incomplete or uncertain information"
+      - "Anticipate unintended consequences of proposed solutions"
+    topics:
+      - "Systems Thinking"
+      - "Stakeholder Analysis"
+      - "Tradeoff Evaluation"
+      - "Decision Under Uncertainty"
+      - "Iterative Refinement"
+      - "Ethical Reasoning in Problem Solving"
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      middle: 20
+      high: 25
+    prerequisite_modules: [PROB-101-M2, PROB-101-M3]
+    activities:
+      count: 4
+      examples:
+        - "Systems Mapping"
+        - "Stakeholder Debate"
+        - "The Unintended Consequences Game"
+        - "Decision Under Uncertainty"
+    assessments:
+      - "Can student map a problem as a system of interacting factors?"
+      - "Does student identify multiple stakeholders with different perspectives?"
+      - "Can student evaluate tradeoffs and justify decisions?"
+      - "Does student anticipate unintended consequences of proposed solutions?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-UND-001
+    description: "Restate and analyze problems to identify knowns, unknowns, and constraints"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-STR-001
+    description: "Select and apply appropriate general-purpose problem-solving strategies"
+    levels: ["3", "4", "5", "6", "7", "8"]
+
+  - code: LO-CRE-001
+    description: "Generate creative solutions through brainstorming, reframing, and analogical reasoning"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-COL-001
+    description: "Solve problems collaboratively through active listening, idea building, and constructive disagreement"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-CMP-001
+    description: "Analyze complex problems as systems, evaluate tradeoffs, and make decisions under uncertainty"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-TRN-001
+    description: "Transfer problem-solving strategies across domains and contexts"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Think-Aloud Protocols"
+    frequency: ongoing
+
+  - type: formative
+    name: "Strategy Journal Review"
+    frequency: weekly
+
+  - type: summative
+    name: "Problem-Solving Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Novel Problem Challenge"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: strategy_cards
+    integrated: true
+    description: "Digital strategy reference cards with heuristic descriptions and examples"
+
+  - name: problem_journal
+    integrated: true
+    description: "Structured digital journal for recording strategy use, reflections, and growth"
+
+interactive_elements:
+  - type: puzzle
+    name: "Strategy Rotation Challenge"
+
+  - type: simulation
+    name: "Systems Mapping Tool"
+
+  - type: game
+    name: "Escape Room Builder"
+
+  - type: collaboration
+    name: "Group Problem-Solving Workspace"
+
+  - type: reflection
+    name: "Strategy Journal"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+
+  planned: [fr, zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "All strategy descriptions have text alternatives. Diagram-based activities include verbal description options. Collaborative activities include written and gesture-based alternatives."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Common Core State Standards — Mathematical Practice"
+    version: 2010
+    alignments:
+      MP-1: "Make sense of problems and persevere in solving them"
+      MP-2: "Reason abstractly and quantitatively"
+      MP-3: "Construct viable arguments and critique the reasoning of others"
+      MP-4: "Model with mathematics"
+      MP-7: "Look for and make use of structure"
+      MP-8: "Look for and express regularity in repeated reasoning"
+
+  - framework: "ISTE Standards for Students"
+    version: 2016
+    alignments:
+      "5a": "Formulate problem definitions suited for technology-assisted methods"
+      "5b": "Collect data or identify relevant data sets"
+      "5c": "Break problems into component parts and extract key information"
+      "5d": "Use algorithmic thinking to develop a sequence of steps"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Difficulty is in developing habits of mind and strategic flexibility, not in technical content. Accessible to all learners with appropriate scaffolding."
+
+# Content Flags
+content_flags:
+  - flag: frustration_potential
+    description: "Genuinely novel problems can cause frustration in learners accustomed to exercises with clear procedures."
+    mitigation: "Scaffold difficulty carefully. Celebrate strategy use and effort, not just correct answers. Normalize productive struggle explicitly."
+
+  - flag: growth_mindset_dependency
+    description: "Learners with fixed-mindset beliefs may resist the emphasis on effort and strategy over innate ability."
+    mitigation: "Introduce growth mindset concepts early. Share research on how problem-solving skills improve with practice. Avoid labeling students as good or bad problem solvers."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/prob-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "PROB-101"
+  looking_for:
+    - "Domain-specific problem sets that illustrate general strategies"
+    - "Cross-cultural problem-solving traditions and approaches"
+    - "Puzzle and game resources for strategy practice"
+    - "Translations to Spanish & Mandarin"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: 2026-02-20
+  next_review: 2026-05-20
+  maintainer: "Problem Solving Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - problem-solving
+  - heuristics
+  - strategies
+  - decomposition
+  - pattern-recognition
+  - critical-thinking
+  - transfer
+  - metacognition
+  - polya
+  - computational-thinking
+  - foundational
+
+# External Resources
+resources:
+  - type: textbook
+    title: "How to Solve It"
+    author: "George Polya"
+    url: null
+
+  - type: textbook
+    title: "Mathematical Problem Solving"
+    author: "Alan Schoenfeld"
+    url: null
+
+  - type: online_platform
+    title: "Art of Problem Solving"
+    author: "AoPS"
+    url: "https://artofproblemsolving.com"
+
+# Related Packs
+related_packs:
+  - id: CRIT-101
+    relationship: "Critical thinking evaluates the quality of solutions that problem solving produces"
+
+  - id: MATH-101
+    relationship: "Mathematics is the most developed domain-specific application of general problem-solving strategies"
+
+  - id: ENGR-101
+    relationship: "Engineering design applies problem solving with physical constraints and design thinking"
+
+  - id: CODE-101
+    relationship: "Computational thinking formalizes decomposition, pattern recognition, and algorithm design"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "puzzle-piece"
+    color: "#FF9800"
+    position: "Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "PROB-101-core-strategies"
+    - "PROB-101-heuristics-toolkit"
+    - "PROB-101-assessment-patterns"
+    - "PROB-101-parent-guidance"
+
+# File References
+files:
+  vision_document: "PROB-101-vision.md"
+  modules_definition: "PROB-101-modules.yaml"
+  activities: "PROB-101-activities.json"
+  assessment: "PROB-101-assessment.md"
+  resources: "PROB-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: 2026-02-20
+    changes:
+      - "Initial release: Five core modules covering understanding, strategies, creativity, collaboration, and complex problems"
+      - "Contributed 20 starter activities across all modules"
+      - "Aligned to Common Core Mathematical Practice Standards and ISTE Standards"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: 2026-04-20
