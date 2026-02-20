@@ -66,31 +66,186 @@ grade_levels:
 modules:
   - id: STAT-101-M1
     name: "Accounting Principles & Bookkeeping"
-    level: elementary-high
-    duration_hours: 25
+    description: "Tracking transactions, double-entry bookkeeping basics, the accounting equation (Assets = Liabilities + Equity), journal entries, ledgers, and the purpose of accurate record-keeping"
+    learning_outcomes:
+      - "Understand why businesses and individuals track financial transactions"
+      - "Apply the accounting equation (Assets = Liabilities + Equity) to classify transactions"
+      - "Record transactions using double-entry bookkeeping (debit and credit)"
+      - "Maintain a simple ledger and chart of accounts"
+      - "Distinguish between cash-basis and accrual-basis accounting"
+    topics:
+      - "Purpose of Accounting"
+      - "The Accounting Equation"
+      - "Double-Entry Bookkeeping"
+      - "Debits & Credits"
+      - "Journal Entries & Ledgers"
+      - "Chart of Accounts"
+      - "Cash vs. Accrual Accounting"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 25
+    prerequisite_modules: []
+    activities:
+      count: 4
+      examples:
+        - "Run a Classroom Store: Track Every Transaction"
+        - "Lemonade Stand Bookkeeping Challenge"
+        - "Transaction Sorting Game"
+        - "Balance the Books Puzzle"
+    assessments:
+      - "Can student explain why every transaction has two sides?"
+      - "Does student correctly classify transactions as affecting assets, liabilities, or equity?"
+      - "Can student record journal entries with appropriate debits and credits?"
+      - "Does student maintain a balanced ledger?"
 
   - id: STAT-101-M2
     name: "Financial Statements & Analysis"
-    level: elementary-high
-    duration_hours: 25
-    prereq_modules: [STAT-101-M1]
+    description: "Reading and interpreting income statements, balance sheets, and cash flow statements; financial ratios; connecting the three statements; distinguishing profit from cash flow"
+    learning_outcomes:
+      - "Identify the purpose and structure of each core financial statement"
+      - "Read and interpret an income statement to determine profitability"
+      - "Read and interpret a balance sheet to assess financial position"
+      - "Understand cash flow statements and why profitable companies can run out of cash"
+      - "Calculate and interpret basic financial ratios (liquidity, profitability, leverage)"
+    topics:
+      - "Income Statement Structure"
+      - "Balance Sheet Structure"
+      - "Cash Flow Statement"
+      - "How the Three Statements Connect"
+      - "Financial Ratios"
+      - "Profit vs. Cash Flow"
+      - "Comparative Financial Analysis"
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 15
+      middle: 30
+      high: 30
+    prerequisite_modules: [STAT-101-M1]
+    activities:
+      count: 4
+      examples:
+        - "Read a Real Company's Annual Report"
+        - "Build a Personal Income Statement for a Month"
+        - "Financial Health Checkup: Compare Two Companies"
+        - "Three-Statement Connection Map"
+    assessments:
+      - "Can student identify what each financial statement reveals?"
+      - "Does student correctly interpret profitability from an income statement?"
+      - "Can student explain why a profitable company might have cash flow problems?"
+      - "Does student calculate and interpret financial ratios appropriately?"
 
   - id: STAT-101-M3
     name: "Probability & Randomness"
-    level: foundation-high
-    duration_hours: 30
+    description: "Chance, likelihood, experimental vs. theoretical probability, expected value, conditional probability, independence, Bayes' theorem basics, and common probability misconceptions"
+    learning_outcomes:
+      - "Describe probability as a measure of likelihood on a scale from 0 to 1"
+      - "Distinguish experimental probability from theoretical probability"
+      - "Apply the law of large numbers to explain why short-run results can be misleading"
+      - "Calculate expected value for simple random processes"
+      - "Understand conditional probability and the concept of independence"
+    topics:
+      - "Chance & Likelihood"
+      - "Experimental vs. Theoretical Probability"
+      - "Law of Large Numbers"
+      - "Expected Value"
+      - "Conditional Probability"
+      - "Independence"
+      - "Bayes' Theorem Basics"
+      - "Common Misconceptions (Gambler's Fallacy, Base Rate Neglect)"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 35
+      high: 30
+    prerequisite_modules: []
+    activities:
+      count: 4
+      examples:
+        - "Coin Flip Experiment: Predicted vs. Actual"
+        - "Card Game Probability: What Are the Odds?"
+        - "The Monty Hall Problem Challenge"
+        - "Weather Forecast Probability Investigation"
+    assessments:
+      - "Can student express probability as a number between 0 and 1?"
+      - "Does student distinguish experimental from theoretical probability?"
+      - "Can student explain why more trials give more reliable estimates?"
+      - "Does student avoid common probability misconceptions?"
 
   - id: STAT-101-M4
     name: "Statistical Analysis & Inference"
-    level: elementary-high
-    duration_hours: 35
-    prereq_modules: [STAT-101-M3]
+    description: "Collecting data, descriptive statistics (mean, median, mode, spread), data visualization, sampling and bias, confidence intervals, hypothesis testing, and correlation vs. causation"
+    learning_outcomes:
+      - "Calculate and interpret measures of center (mean, median, mode) and spread (range, IQR, standard deviation)"
+      - "Choose appropriate data visualizations for different types of data"
+      - "Design data collection procedures that minimize bias"
+      - "Understand sampling distributions and the concept of confidence intervals"
+      - "Distinguish correlation from causation and identify confounding variables"
+    topics:
+      - "Measures of Center"
+      - "Measures of Spread"
+      - "Data Visualization (Histograms, Box Plots, Scatter Plots)"
+      - "Survey Design & Data Collection"
+      - "Sampling & Bias"
+      - "Confidence Intervals"
+      - "Hypothesis Testing"
+      - "Correlation vs. Causation"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 25
+      middle: 40
+      high: 35
+    prerequisite_modules: [STAT-101-M3]
+    activities:
+      count: 4
+      examples:
+        - "Survey Your Class and Analyze the Data"
+        - "Misleading Graphs: Spot the Tricks"
+        - "Sampling Simulation with Colored Beads"
+        - "Correlation Detective: Real vs. Spurious"
+    assessments:
+      - "Can student choose appropriate measures of center for a given dataset?"
+      - "Does student select effective visualizations and justify the choice?"
+      - "Can student identify potential sources of bias in data collection?"
+      - "Does student correctly distinguish correlation from causation?"
 
   - id: STAT-101-M5
     name: "Financial Literacy & Personal Finance"
-    level: elementary-high
-    duration_hours: 30
-    prereq_modules: [STAT-101-M1]
+    description: "Personal budgeting, compound interest, saving and investing basics, debt management, credit scores, taxes, and consumer protection"
+    learning_outcomes:
+      - "Create and maintain a personal budget with income, expenses, and savings goals"
+      - "Explain compound interest and calculate its effects over time"
+      - "Compare saving, investing, and debt repayment strategies"
+      - "Understand credit scores, interest rates, and the cost of debt"
+      - "Identify predatory financial products and consumer protection strategies"
+    topics:
+      - "Personal Budgeting"
+      - "Compound Interest"
+      - "Saving Strategies"
+      - "Investing Basics (Stocks, Bonds, Index Funds)"
+      - "Debt Management & Credit Scores"
+      - "Taxes & Payroll Deductions"
+      - "Consumer Protection & Financial Scams"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 30
+    prerequisite_modules: [STAT-101-M1]
+    activities:
+      count: 4
+      examples:
+        - "Compound Interest Calculator: Watch Money Grow"
+        - "Budget Challenge: Live on a Fixed Income for a Week"
+        - "Credit Card Trap Simulation"
+        - "Investment Comparison: Savings Account vs. Index Fund"
+    assessments:
+      - "Can student create a realistic budget with appropriate categories?"
+      - "Does student correctly calculate compound interest effects?"
+      - "Can student compare financial products and identify the better option?"
+      - "Does student recognize predatory lending practices?"
 
 # Learning Outcomes
 learning_outcomes:
