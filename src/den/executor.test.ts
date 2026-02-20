@@ -77,8 +77,11 @@ describe('ExecutorConfigSchema', () => {
     expect(config.agentId).toBe('executor');
   });
 
-  it('rejects missing busConfig', () => {
-    expect(() => ExecutorConfigSchema.parse({})).toThrow();
+  it('accepts config without busConfig (z.any pattern)', () => {
+    // busConfig uses z.any() per coordinator.ts pattern -- no rejection on missing
+    const config = ExecutorConfigSchema.parse({});
+    expect(config.logPath).toBe('.planning/den/logs/executor.jsonl');
+    expect(config.agentId).toBe('executor');
   });
 });
 
