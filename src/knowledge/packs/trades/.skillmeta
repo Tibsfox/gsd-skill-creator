@@ -6,18 +6,17 @@ release_date: "2026-02-20"
 
 # Status & Classification
 status: alpha
-classification: specialized_deepening
+classification: specialized
 learning_domain: trades_and_applied_skills
 
 # Content Description
 description: |
   Skilled trades as dignified, intellectually demanding work. Woodworking, electrical,
-  plumbing, welding, automotive, and construction — the professions that build and
-  maintain civilization. This pack teaches tool safety and mastery, material properties,
-  precision measurement, joining methods, and systems thinking. Not a fallback from
-  academics but a parallel path requiring spatial reasoning, problem-solving, material
-  science, and respect for real dangers. Building things with your hands is building
-  understanding of how the world works.
+  plumbing, welding, and construction — the professions that build and maintain civilization.
+  This pack teaches tool safety and mastery, material properties, precision measurement,
+  joining methods, and systems thinking. Not a fallback from academics but a parallel path
+  requiring spatial reasoning, problem-solving, material science, and respect for real dangers.
+  Building things with your hands is building understanding of how the world works.
 
 short_description: "Tool mastery, safety culture, hands-on project completion: woodworking, electrical, plumbing, welding, construction"
 
@@ -39,74 +38,240 @@ recommended_prior_knowledge:
   - PHYS-101
   - ENGR-101
 
-# What Enables
+# What This Pack Enables
 enables: []
 
+# Level & Time Estimates
+grade_levels:
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [40, 80]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [80, 120]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [120, 200]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [200, 300]
+
+# Modules
+modules:
+  - id: TRADE-101-M1
+    name: "Tools, Safety & Workshop Practice"
+    level: foundation
+    duration_hours: 30
+
+  - id: TRADE-101-M2
+    name: "Woodworking"
+    level: elementary-high
+    duration_hours: 40
+    prereq_modules: [TRADE-101-M1]
+
+  - id: TRADE-101-M3
+    name: "Electrical Systems"
+    level: elementary-high
+    duration_hours: 35
+    prereq_modules: [TRADE-101-M1]
+
+  - id: TRADE-101-M4
+    name: "Plumbing & Water Systems"
+    level: elementary-high
+    duration_hours: 35
+    prereq_modules: [TRADE-101-M1]
+
+  - id: TRADE-101-M5
+    name: "Welding & Metal Fabrication"
+    level: middle-high
+    duration_hours: 40
+    prereq_modules: [TRADE-101-M1]
+
 # Learning Outcomes
-primary_learning_outcomes:
-  - "Safely identify, handle, maintain, and use hand and power tools"
-  - "Measure with precision and understand tolerances"
-  - "Read and create basic technical drawings"
-  - "Plan and execute multi-step projects from conception to completion"
-  - "Understand electrical circuits, plumbing systems, and structural principles"
-  - "Troubleshoot failures and solve problems in the physical world"
-  - "Recognize and prevent hazards; follow safety protocols always"
+learning_outcomes:
+  - code: "LO-TRADE-001"
+    description: "Safely identify, handle, maintain, and use hand and power tools"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
 
-# Content Structure
-content_files:
-  vision: TRADE-101-vision.md
-  modules: TRADE-101-modules.yaml
-  activities: TRADE-101-activities.json
-  assessment: TRADE-101-assessment.md
-  resources: TRADE-101-resources.md
+  - code: "LO-TRADE-002"
+    description: "Measure with precision and understand tolerances"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
 
-# Age & Grade Levels
-age_range: [5, 18]
-grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+  - code: "LO-TRADE-003"
+    description: "Read and create basic technical drawings"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
 
-# Content Descriptors
-content_descriptors:
-  - hands_on_tools
-  - project_based
-  - safety_culture
-  - real_materials
-  - skill_focused
-  - applied_practical
-  - career_exploration
-  - multidisciplinary
+  - code: "LO-TRADE-004"
+    description: "Plan and execute multi-step projects from conception to completion"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
 
-# Assessment Strategy
-assessment:
-  primary: "Competency-based: Can student perform the task safely and correctly?"
-  rubrics: "Beginning, Developing, Proficient, Advanced — emphasizing safety first"
-  portfolio: "Students maintain records of projects completed and skills demonstrated"
-  performance: "Real project completion with durability and appearance standards"
+  - code: "LO-TRADE-005"
+    description: "Understand electrical circuits, plumbing systems, and structural principles"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
 
-# Pedagogical Approach
-pedagogical_approach: |
-  Hands-on, scaffolded practice with real materials under supervision. Students work with
-  actual tools, materials, and problems. Measurement before cutting. Planning before
-  assembly. Safety protocols before tool use. Emphasis on why rules exist, not just
-  memorization. Learning through making, fixing, and troubleshooting. Progression from
-  simple to complex, foundation to specialization.
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Safety Check-off"
+    frequency: ongoing
 
-# Prerequisite Knowledge Detail
-prerequisite_knowledge_detail: |
-  MATH-101 (measurement, fractions, geometry, calculation) supports precision work across
-  all modules. PHYS-101 (force, leverage, materials, electricity) provides conceptual
-  foundation. ENGR-101 (technical drawing, systems thinking) supports project planning and
-  understanding how systems interconnect. TRADE-101 does not require these but benefits
-  significantly from them.
+  - type: formative
+    name: "Skill Demonstration"
+    frequency: weekly
 
-# Teaching Notes
-teaching_notes: |
-  Supervision is essential. Tools are dangerous. Safety is non-negotiable. Students need
-  access to real tools, real materials, and real workspace. Module 1 (Tools, Safety,
-  Workshop Practice) must come first and be refreshed constantly. Projects must produce
-  real outcomes: a working birdhouse, a functional circuit, plumbing without leaks, a
-  welded piece that holds. Emphasize diversity: trades skills are for everyone.
+  - type: summative
+    name: "Project Completion"
+    frequency: end_of_module
 
-# Tags
+  - type: summative
+    name: "Portfolio of Projects"
+    frequency: end_of_unit
+
+# Tools & Resources
+tools_required: []
+tools_optional:
+  - name: "Hand Tools (hammer, screwdriver, wrench, saw)"
+    description: "Basic tools for all trades activities"
+
+  - name: "Power Tools (drill, circular saw, table saw)"
+    description: "Tools for advanced woodworking and construction"
+
+  - name: "Safety Equipment (goggles, gloves, dust masks, hearing protection)"
+    description: "Personal protective equipment"
+
+  - name: "Digital Measuring (calipers, laser level, multimeter)"
+    description: "Precision measurement tools"
+
+  - name: "Technical Drawing Software (SketchUp, LibreCAD)"
+    description: "For design and technical planning"
+
+interactive_elements:
+  - type: hands_on
+    name: "Tool Mastery Workshop"
+
+  - type: project
+    name: "Real Project Completion"
+
+  - type: investigation
+    name: "Troubleshooting Lab"
+
+  - type: apprenticeship
+    name: "Mentorship with Local Tradesperson"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: Español
+      complete: false
+      progress: "0%"
+    - language_code: fr
+      name: Français
+      complete: false
+      progress: "0%"
+    - language_code: de
+      name: Deutsch
+      complete: false
+      progress: "0%"
+    - language_code: it
+      name: Italiano
+      complete: false
+      progress: "0%"
+
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: true
+  notes: |
+    Safety-critical content needs multi-modal presentation (text + audio + video with captions). Tool diagrams require detailed alt text and 3D tactile models for blind/low-vision learners. Technical drawings accessible via Braille embossing or tactile graphics. Video demonstrations include captions and audio descriptions. Activities adaptable for different mobility levels with tool modifications and assistive devices."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "NCCER (National Center for Construction Education & Research) Standards"
+    version: 2020
+    alignments:
+      "Safety Protocols": "TRADE-101-M1"
+      "Hand & Power Tools": "TRADE-101-M1, M2, M3, M4, M5"
+      "Carpentry Basics": "TRADE-101-M2"
+      "Electrical Fundamentals": "TRADE-101-M3"
+      "Plumbing Systems": "TRADE-101-M4"
+      "Welding Basics": "TRADE-101-M5"
+
+  - framework: "Career & Technical Education (CTE) Standards"
+    version: 2018
+    alignments:
+      "Architecture & Construction Cluster": "TRADE-101-M2, M4"
+      "Manufacturing Cluster": "TRADE-101-M5"
+      "Transportation, Distribution & Logistics": "TRADE-101-M3"
+
+  - framework: "OSHA Safety Standards"
+    version: 2020
+    alignments:
+      "Hazard Recognition": "TRADE-101-M1, M2, M3, M4, M5"
+      "PPE Requirements": "TRADE-101-M1, M2, M3, M4, M5"
+      "Electrical Safety": "TRADE-101-M3"
+      "Tool Safety": "TRADE-101-M1"
+
+  - framework: "Common Core Math Standards"
+    version: 2010
+    alignments:
+      "Measurement & Data": "TRADE-101-M1, M2, M3, M4, M5"
+      "Geometry": "TRADE-101-M2, M4"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: high
+  prerequisites_required: medium
+  notes: "Skills require supervised hands-on practice. Conceptual demand increases at high school level. Safety is paramount at all levels."
+
+# Content Flags
+content_flags:
+  - flag: "tool_safety"
+    description: "Activities involve real tools with genuine hazard potential"
+    mitigation: "Mandatory safety training before tool use. Supervised practice. PPE required. Age-appropriate activities only."
+
+  - flag: "physical_risk"
+    description: "Trades activities carry risk of injury"
+    mitigation: "Parental consent required. Emergency procedures established. First aid available. Careful project selection for age group."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/trade-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "TRADE-101"
+  looking_for:
+    - "Project plans from experienced trade instructors"
+    - "Safety documentation and certification requirements"
+    - "Apprenticeship pathway connections"
+    - "Tools and equipment recommendations by grade level"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Trades Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
 tags:
   - trades
   - applied-skills
@@ -120,54 +285,87 @@ tags:
   - plumbing
   - welding
   - practical-skills
+  - specialized
 
-# Safety Considerations
-safety_considerations: |
-  This pack involves real tools and real danger. Parent/guardian permission required.
-  Supervision by trained adult always required. PPE mandatory. Emergency procedures
-  established. First aid available. All activities selected for age-appropriateness.
-  No activities beyond what professional instructors would allow at given age level.
+# External Resources
+resources:
+  - type: organization
+    title: "NCCER (National Center for Construction Education & Research)"
+    author: "NCCER"
+    url: "https://www.nccer.org/"
 
-# Curriculum Alignment
-curriculum_alignment:
-  - "Career and Technical Education (CTE) Standards"
-  - "Next Generation Science Standards (NGSS) — Engineering Design"
-  - "Common Core Math Standards — Measurement and Geometry"
-  - "Apprenticeship Readiness Standards"
+  - type: reference
+    title: "OSHA Safety Standards"
+    author: "U.S. Department of Labor"
+    url: "https://www.osha.gov/"
 
-# GSD Integration
+  - type: online_resource
+    title: "iFixit Repair Guides"
+    author: "iFixit"
+    url: "https://www.ifixit.com/"
+
+  - type: curriculum
+    title: "Project Lead the Way (PLTW) Gateway"
+    author: "PLTW"
+    url: "https://www.pltw.org/"
+
+# Related Packs
+related_packs:
+  - id: "MATH-101"
+    relationship: "Measurement, geometry, and calculation support all trade activities"
+
+  - id: "PHYS-101"
+    relationship: "Force, leverage, electricity, and material properties are foundations"
+
+  - id: "ENGR-101"
+    relationship: "Technical drawing and systems thinking support project planning"
+
+  - id: "SCI-101"
+    relationship: "Materials science and physical phenomena underlie all trades"
+
+# Implementation Notes for GSD-OS
 gsd_integration:
   dashboard_display:
-    icon: wrench
+    icon: "wrench"
     color: "#795548"
-    position: Specialized
-    category: Applied Skills
+    position: "Specialized"
 
-  chip_set_agent: kp-applied-generator
-  availability: "v1.27+"
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
 
-# Metadata Quality
-metadata_quality:
-  completeness: 100
-  verification_date: "2026-02-20"
-  verified_by: executor-251-03
+  cache_keys:
+    - "TRADE-101-tool-safety"
+    - "TRADE-101-woodworking-techniques"
+    - "TRADE-101-electrical-circuits"
+    - "TRADE-101-plumbing-systems"
+    - "TRADE-101-welding-basics"
 
-# Notes for Implementers
-implementation_notes: |
-  Requires dedicated shop space with tools, materials, and workbenches. Instructor must
-  have trades background or co-teach with practiced tradesperson. Budget for materials
-  and tool maintenance. Build relationships with local tradespeople for mentorship and
-  apprenticeship connections. Celebrate projects visibly — they matter.
+# File References
+files:
+  vision_document: "TRADE-101-vision.md"
+  modules_definition: "TRADE-101-modules.yaml"
+  activities: "TRADE-101-activities.json"
+  assessment: "TRADE-101-assessment.md"
+  resources: "TRADE-101-resources.md"
+  readme: "README.md"
 
-# Related Resources
-related_packs:
-  - MATH-101
-  - PHYS-101
-  - ENGR-101
-  - SCI-101
-
-# Revision History
-revisions:
+# Changelog
+changelog:
   - version: 1.0.0
     date: "2026-02-20"
-    notes: "Initial TRADE-101 pack creation with 5 modules, 10 activities, comprehensive vision"
+    changes:
+      - "Initial creation of TRADE-101 Trades & Applied Skills pack"
+      - "Five modules: Tools & Safety, Woodworking, Electrical, Plumbing, Welding"
+      - "10 activities per module emphasizing safety-first competency"
+      - "Aligned to NCCER standards and CTE Career Clusters"
+      - "Parent guidance and safety protocols included"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"

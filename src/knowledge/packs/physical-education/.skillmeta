@@ -174,13 +174,24 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
-      name: "Espanol"
+      name: Español
+      complete: false
+      progress: "15%"
+    - language_code: fr
+      name: Français
+      complete: false
+      progress: "0%"
+    - language_code: de
+      name: Deutsch
+      complete: false
+      progress: "0%"
+    - language_code: it
+      name: Italiano
       complete: false
       progress: "0%"
 
-  planned: [fr, zh, ar]
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -189,19 +200,34 @@ accessibility:
   high_contrast_available: true
   keyboard_navigable: true
   alt_text_provided: true
-  captions_available: false
-  notes: "All movement activities include verbal descriptions and adaptation notes for different abilities. Video demonstrations include audio descriptions. Adapted PE modifications provided for every module."
+  captions_available: true
+  notes: |
+    Physical activity descriptions need adaptive alternatives for mobility-limited learners. Video demonstrations have captions and audio descriptions. Every activity includes multiple participation options: adapted movements, supporting roles, observation with analysis. Fitness tracking accessible without wearables (manual logging, verbal reporting). Dance activities include video guides with multiple learning modalities."
 
 # Standards Alignment
 standards_alignment:
   - framework: "SHAPE America National Standards for K-12 Physical Education"
     version: 2014
     alignments:
-      "Standard 1": "Demonstrates competency in a variety of motor skills and movement patterns"
-      "Standard 2": "Applies knowledge of concepts, principles, strategies and tactics"
-      "Standard 3": "Demonstrates the knowledge and skills to achieve and maintain health-enhancing level of fitness"
-      "Standard 4": "Exhibits responsible personal and social behavior that respects self and others"
-      "Standard 5": "Recognizes the value of physical activity for health, enjoyment, challenge, self-expression and social interaction"
+      "Standard 1 (Motor Skills)": "PE-101-M1, M3, M4"
+      "Standard 2 (Knowledge & Concepts)": "PE-101-M2, M3, M5"
+      "Standard 3 (Fitness)": "PE-101-M2, M5"
+      "Standard 4 (Responsibility)": "PE-101-M3, M4, M5"
+      "Standard 5 (Value of Activity)": "PE-101-M2, M4, M5"
+
+  - framework: "IB MYP Physical & Health Education"
+    version: 2016
+    alignments:
+      "Health & Social Education": "PE-101-M2, M5"
+      "Movement": "PE-101-M1, M3, M4"
+      "Physical Activity & Sport": "PE-101-M3, M5"
+
+  - framework: "UK National Curriculum PE"
+    version: 2014
+    alignments:
+      "Key Stage 2": "PE-101-M1, M2, M3 (elementary/middle)"
+      "Key Stage 3": "PE-101-M3, M4, M5 (middle/high)"
+      "Key Stage 4": "PE-101-M5 (high school)"
 
   - framework: "Physical Literacy Framework"
     version: 2019

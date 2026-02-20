@@ -167,8 +167,24 @@ translations:
     - language_code: en
       name: English
       complete: true
+    - language_code: es
+      name: Español
+      complete: false
+      progress: "0%"
+    - language_code: fr
+      name: Français
+      complete: false
+      progress: "0%"
+    - language_code: de
+      name: Deutsch
+      complete: false
+      progress: "0%"
+    - language_code: it
+      name: Italiano
+      complete: false
+      progress: "0%"
 
-  planned: [es, fr, zh, ar]
+  planned: [zh, ar, hi]
 
 # Accessibility
 accessibility:
@@ -178,16 +194,34 @@ accessibility:
   keyboard_navigable: true
   alt_text_provided: true
   captions_available: false
-  notes: "All visual content has text descriptions. Sacred text excerpts provided in multiple formats. Consider adding audio recordings of sacred texts."
+  notes: |
+    Content sensitivity warnings need accessible presentation (not visually-only). Sacred text excerpts require proper Unicode support for non-Latin scripts (Arabic, Hebrew, Devanagari, Chinese). All visual content (religious art, architecture) has detailed text descriptions. Audio recordings of sacred texts in original languages recommended. Interfaith dialogue activities support text-based participation for deaf/HoH learners."
 
 # Standards Alignment
 standards_alignment:
-  - framework: "American Academy of Religion Religious Literacy Guidelines"
+  - framework: "American Academy of Religion (AAR) Religious Literacy Guidelines"
     version: 2010
     alignments:
       "Religious Literacy": true
       "Comparative Analysis": true
       "Historical Context": true
+      "Tradition-Specific Content": "THEO-101-M2, M3"
+      "Interfaith Dialogue": "THEO-101-M5"
+
+  - framework: "NCSS Religious Studies Standards"
+    version: 2016
+    alignments:
+      "Culture": "THEO-101-M1, M2, M4, M5"
+      "Beliefs and Values": "THEO-101-M3, M4, M5"
+      "Power, Authority, Governance": "THEO-101-M4, M5"
+      "Global Connections": "THEO-101-M2, M5"
+
+  - framework: "IB MYP Individuals & Societies"
+    version: 2016
+    alignments:
+      "Key Concept: Beliefs": "THEO-101-M1, M2, M3, M4, M5"
+      "Key Concept: Identities": "THEO-101-M1, M2, M5"
+      "Key Concept: Culture": "THEO-101-M1, M2, M4"
 
   - framework: "21st Century Skills"
     alignments:
@@ -195,6 +229,7 @@ standards_alignment:
       "Communication": true
       "Cultural Literacy": true
       "Global Awareness": true
+      "Perspective-Taking": true
 
 # Difficulty Rating
 difficulty:

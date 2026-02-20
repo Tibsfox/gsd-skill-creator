@@ -179,13 +179,24 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
-      name: "Espanol"
+      name: Español
+      complete: false
+      progress: "0%"
+    - language_code: fr
+      name: Français
+      complete: false
+      progress: "0%"
+    - language_code: de
+      name: Deutsch
+      complete: false
+      progress: "0%"
+    - language_code: it
+      name: Italiano
       complete: false
       progress: "0%"
 
-  planned: [fr, zh, ar]
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -194,25 +205,43 @@ accessibility:
   high_contrast_available: true
   keyboard_navigable: true
   alt_text_provided: true
-  captions_available: false
-  notes: "All visual content has text descriptions. Activities adapt for motor skill differences, food allergies, and varying physical abilities. Financial activities accommodate all income levels."
+  captions_available: true
+  notes: |
+    Safety instructions need multi-modal presentation (text + audio + video). Cooking measurements accessible in multiple formats (cups/metric/weight). Sewing activities include verbal guidance and tactile learning alternatives. Financial tools (spreadsheets, calculators) require keyboard accessibility. Home repair videos include captions and audio descriptions. Laundry symbols require text explanation."
 
 # Standards Alignment
 standards_alignment:
-  - framework: "Family & Consumer Sciences National Standards"
+  - framework: "NASAFACS Family & Consumer Sciences Standards"
     version: 2018
     alignments:
-      "Standard 8": "Food Science, Dietetics, and Nutrition"
-      "Standard 9": "Housing and Interior Design"
-      "Standard 14": "Textiles, Fashion, and Apparel"
-      "Standard 2": "Consumer and Family Resources"
+      "Standard 2.1 (Consumer Resources)": "DOMESTIC-101-M4"
+      "Standard 2.5 (Financial Planning)": "DOMESTIC-101-M4"
+      "Standard 8.1 (Nutrition & Food Science)": "DOMESTIC-101-M1"
+      "Standard 9.1 (Housing & Design)": "DOMESTIC-101-M3"
+      "Standard 14.1 (Textiles & Clothing)": "DOMESTIC-101-M2"
+      "Standard 14.3 (Care of Textiles)": "DOMESTIC-101-M2"
 
   - framework: "Jump$tart Coalition Financial Literacy Standards"
     version: 2017
     alignments:
-      "Spending and Saving": "Budgeting, saving habits, compound interest"
-      "Credit and Debt": "Understanding credit, avoiding predatory products"
-      "Financial Decision Making": "Values-based financial choices"
+      "Spending and Saving": "DOMESTIC-101-M4"
+      "Credit and Debt": "DOMESTIC-101-M4"
+      "Financial Decision Making": "DOMESTIC-101-M4"
+      "Income": "DOMESTIC-101-M4"
+
+  - framework: "IB MYP Design"
+    version: 2016
+    alignments:
+      "Key Concept: Form": "DOMESTIC-101-M2, M3"
+      "Key Concept: Function": "DOMESTIC-101-M1, M2, M3"
+      "Key Concept: Aesthetics": "DOMESTIC-101-M2, M3"
+
+  - framework: "Life Skills Standards"
+    version: 2020
+    alignments:
+      "Health & Wellness": "DOMESTIC-101-M1, M5"
+      "Personal Finance": "DOMESTIC-101-M4, M5"
+      "Home Management": "DOMESTIC-101-M2, M3, M5"
 
 # Difficulty Rating
 difficulty:

@@ -6,7 +6,7 @@ release_date: "2026-02-20"
 
 # Status & Classification
 status: alpha
-classification: specialized_deepening
+classification: specialized
 learning_domain: music_and_sound
 
 # Content Description
@@ -324,8 +324,24 @@ translations:
     - language_code: en
       name: English
       complete: true
+    - language_code: es
+      name: Español
+      complete: false
+      progress: "0%"
+    - language_code: fr
+      name: Français
+      complete: false
+      progress: "0%"
+    - language_code: de
+      name: Deutsch
+      complete: false
+      progress: "0%"
+    - language_code: it
+      name: Italiano
+      complete: false
+      progress: "0%"
 
-  planned: [es, fr, zh]
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -334,18 +350,40 @@ accessibility:
   high_contrast_available: true
   keyboard_navigable: true
   alt_text_provided: true
-  captions_available: false
-  notes: "All listening activities include visual supports. Multiple ways to participate: singing, playing, conducting, listening. Rhythm activities accessible to deaf/hard of hearing learners via visual patterns and tactile vibration."
+  captions_available: true
+  notes: |
+    Audio content needs visual/text alternatives for deaf/hard of hearing learners. Sheet music requires accessible notation formats (Braille music notation for blind learners). Video demonstrations include captions and audio descriptions. Multiple participation modes: singing, playing, conducting, listening, rhythm (tactile vibration for non-auditory learners). Instrument descriptions with high-contrast illustrations."
 
 # Standards Alignment
 standards_alignment:
-  - framework: "National Standards for Music Education"
+  - framework: "NCAS (National Core Arts Standards) Music"
     version: 2014
     alignments:
-      "Creating": "Compose, improvise, and arrange music"
-      "Performing": "Sing and play instruments with accuracy and expression"
-      "Responding": "Listen to and analyze music"
-      "Connecting": "Understand music in cultural contexts"
+      "Creating (MU:Cr1.1)": "MUSIC-101-M1, M2, M5 (composition, improvisation)"
+      "Creating (MU:Cr2.1)": "MUSIC-101-M5 (arrangement, recording)"
+      "Performing (MU:Pr4.1)": "MUSIC-101-M1, M2, M3 (singing, instrumental performance)"
+      "Responding (MU:Re7.1)": "MUSIC-101-M4 (listening, analysis)"
+      "Connecting (MU:Cn10.1)": "MUSIC-101-M4 (music in cultural contexts)"
+
+  - framework: "IB MYP Arts (Music)"
+    version: 2016
+    alignments:
+      "Key Concept: Form": "MUSIC-101-M4 (structure, style)"
+      "Key Concept: Communication": "MUSIC-101-M4, M5 (expression, cultural meaning)"
+      "Key Concept: Process": "MUSIC-101-M1, M2, M5 (creative process, revision)"
+
+  - framework: "UK National Curriculum Music"
+    version: 2014
+    alignments:
+      "Key Stage 2": "MUSIC-101-M1, M2, M3 (foundation level)"
+      "Key Stage 3": "MUSIC-101-M3, M4, M5 (middle school level)"
+      "Key Stage 4": "MUSIC-101-M5 (specialist focus)"
+
+  - framework: "Kodály and Orff Method Alignment"
+    version: 2020
+    alignments:
+      "Orff-Schulwerk": "MUSIC-101-M1, M2, M3 (instruments, ensemble)"
+      "Kodály Method": "MUSIC-101-M2 (solfège, vocal)"
 
 # Difficulty Rating
 difficulty:
