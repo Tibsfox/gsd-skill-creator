@@ -11,9 +11,9 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
 Phase: 246 of 254 (Core Academic Packs Batch 2)
-Plan: 4 of 5 complete
+Plan: 5 of 5 complete
 Status: Executing Phase 246
-Last activity: 2026-02-20 — Completed 246-04 (PROB-101 problem solving knowledge pack)
+Last activity: 2026-02-20 — Completed 246-05 (COMM-101 communication & speech knowledge pack)
 
 Progress: [############........] 60%
 
@@ -34,7 +34,11 @@ Progress: [############........] 60%
 | 245 | 04 | 10min | 2 | 7 |
 | 245 | 02 | 11min | 2 | 7 |
 | 245 | 03 | 11min | 2 | 7 |
+| 246 | 02 | 11min | 2 | 7 |
 | 246 | 04 | 9min | 2 | 7 |
+| 246 | 05 | 10min | 2 | 7 |
+| 246 | 03 | 11min | 2 | 7 |
+| 246 | 01 | 11min | 2 | 7 |
 
 ## Accumulated Context
 
@@ -80,6 +84,19 @@ Progress: [############........] 60%
 - 5 modules for PROB-101 including Complex & Wicked Problems as M5 capstone
 - 10 activities for PROB-101 (2 per module) domain-agnostic for maximum transferability
 - Assessment rubric evaluates problem-solving process, not answer correctness
+- 5 modules for COMM-101: Speaking & Listening, Nonverbal, Presentation, Discussion/Debate, Cross-Context
+- 10 activities for COMM-101 (2 per module) interactive and performance-based
+- READ-101 as recommended prior knowledge for COMM-101; enables WRIT-101, BUS-101, LANG-101
+- 5 modules for READ-101: Foundations, Vocabulary, Comprehension, Critical Reading, Reading Across Curriculum
+- 10 activities for READ-101 (2 per module) spanning phonics through primary source analysis
+- Reading Across the Curriculum as dedicated M5 module for discipline-specific reading strategies
+- 5 modules for CRIT-101: Claims & Evidence, Arguments & Logical Reasoning, Fallacies & Biases, Applied Critical Thinking, Metacognition & Intellectual Humility
+- 10 activities for CRIT-101 (2 per module) emphasizing discussion, debate, and analytical exercises
+- CRIT-101 modules YAML uses single-document format (consistent with SCI-101, ENGR-101, TECH-101)
+- 5 modules for CHEM-101: Matter & Properties, Atoms & Periodic Table, Bonds & Molecular Structure, Chemical Reactions & Energy, Applied Chemistry
+- 10 activities for CHEM-101 (2 per module) emphasizing kitchen chemistry and household materials
+- CHEM-101 lists MATH-101 and SCI-101 as recommended prior knowledge; enables ENVR-101, NUTR-101, NATURE-101
+- Kitchen-chemistry-first pedagogy: tangible experience before symbols and formulas
 
 ### Key Context
 
@@ -105,10 +122,10 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed 246-04-PLAN.md (PROB-101 problem solving knowledge pack)
+Stopped at: Completed 246-01-PLAN.md (CHEM-101 chemistry knowledge pack)
 Resume file: None
 
 ## Next Up
 
-Phase 246 plan 04 complete. Continue with remaining Phase 246 plans.
-Next: Execute remaining 246 plans (01, 02, 03, 05).
+Phase 246 plans all complete (01-05). Advance to Phase 247.
+Next: Check 246-01, 246-02, 246-03 completion, then advance to Phase 247.
