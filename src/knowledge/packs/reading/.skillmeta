@@ -335,13 +335,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
       name: "Espanol"
       complete: false
       progress: "0%"
-
-  planned: [fr, zh, ar]
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -358,17 +380,33 @@ standards_alignment:
   - framework: "Common Core State Standards (ELA)"
     version: 2010
     alignments:
+      "CCSS.ELA-LITERACY.RF.K.1": "Demonstrate phonemic awareness"
+      "CCSS.ELA-LITERACY.RF.1.2": "Demonstrate phonics knowledge"
+      "CCSS.ELA-LITERACY.RF.2.3": "Know and apply phonics"
+      "CCSS.ELA-LITERACY.RL.3.1": "Ask and answer questions"
+      "CCSS.ELA-LITERACY.RI.4.1": "Refer to details and examples"
       RF: "Reading: Foundational Skills"
       RI: "Reading: Informational Text"
       RL: "Reading: Literature"
       L: "Language"
-      SL: "Speaking and Listening"
-
   - framework: "Science of Reading Research Base"
     version: 2020
     alignments:
       "Phonemic Awareness": true
       "Phonics": true
+      "Fluency": true
+      "Comprehension": true
+  - framework: "IB Middle Years Programme (Language & Literature)"
+    version: "2024"
+    alignments:
+      MYP.LANG.A: "Knowing and understanding"
+      MYP.LANG.B: "Comprehending spoken and visual text"
+      MYP.LANG.C: "Producing text"
+  - framework: "UK National Curriculum (English - Reading)"
+    version: "2014"
+    alignments:
+      KS1.READ: "Word reading and comprehension"
+      KS2.READ: "Reading skills and comprehension"
       "Fluency": true
       "Vocabulary": true
       "Comprehension": true

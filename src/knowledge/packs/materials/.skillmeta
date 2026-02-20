@@ -331,13 +331,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
       name: "Espanol"
       complete: false
       progress: "0%"
-
-  planned: [fr, zh, ar]
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -354,18 +376,29 @@ standards_alignment:
   - framework: "Next Generation Science Standards (NGSS)"
     version: 2013
     alignments:
-      2-PS1: "Matter and Its Interactions"
-      5-PS1: "Matter and Its Interactions"
-      MS-PS1: "Matter and Its Interactions"
-      HS-PS1: "Matter and Its Interactions"
+      "K-PS2-1": "Objects and forces"
+      "2-PS1-1": "Properties of materials"
+      "5-PS1-1": "Matter properties"
+      "MS-PS1-1": "Structure of matter"
+      "HS-PS1-1": "Matter composition"
       MS-ETS1: "Engineering Design"
-
-  - framework: "ITEEA Standards for Technological and Engineering Literacy"
+  - framework: "ITEEA Standards for Technological Engineering"
     version: 2020
     alignments:
-      Core Disciplinary Ideas: true
-      Manufacturing Technologies: true
-      Materials Processing: true
+      "1.A": "Characteristics and scope"
+      "2.A": "Core practices"
+      "3.A": "Material applications"
+  - framework: "IB Middle Years Programme (Design & Sciences)"
+    version: "2024"
+    alignments:
+      MYP.MAT.A: "Knowing material properties"
+      MYP.MAT.B: "Testing and analysing"
+      MYP.MAT.C: "Creating solutions"
+  - framework: "UK National Curriculum (Design & Technology)"
+    version: "2014"
+    alignments:
+      KS2.DES: "Design and materials"
+      KS3.DES: "Material selection and properties"
 
 # Difficulty Rating
 difficulty:

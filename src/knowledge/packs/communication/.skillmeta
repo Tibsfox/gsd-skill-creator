@@ -332,13 +332,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
       name: "Espanol"
       complete: false
       progress: "0%"
-
-  planned: [fr, zh, ar]
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -352,22 +374,31 @@ accessibility:
 
 # Standards Alignment
 standards_alignment:
-  - framework: "Common Core State Standards — Speaking and Listening"
+  - framework: "Common Core State Standards (Speaking & Listening)"
     version: 2010
     alignments:
+      "CCSS.ELA-LITERACY.SL.1.1": "Participate in conversations"
+      "CCSS.ELA-LITERACY.SL.2.4": "Tell stories sequentially"
+      "CCSS.ELA-LITERACY.SL.3.4": "Report on a topic or text"
+      "CCSS.ELA-LITERACY.SL.6.6": "Adapt speech to context and task"
       SL.1: "Comprehension and Collaboration"
-      SL.2: "Presentation of Knowledge and Ideas"
-      SL.3: "Evaluation of Speaker's Reasoning"
       SL.4: "Present Information Clearly"
-      SL.5: "Strategic Use of Digital Media"
-      SL.6: "Adapt Speech to Context and Task"
-
   - framework: "National Communication Association K-12 Standards"
     version: 1998
     alignments:
       NCA-1: "Knowledge of communication processes"
       NCA-2: "Ability to accomplish communicative purposes"
       NCA-3: "Application to diverse contexts"
+  - framework: "IB Middle Years Programme (Language & Literature)"
+    version: "2024"
+    alignments:
+      MYP.LANG.B: "Listening and speaking"
+      MYP.LANG.C: "Producing text"
+  - framework: "UK National Curriculum (English - Speaking & Listening)"
+    version: "2014"
+    alignments:
+      KS1.SPL: "Listening and speaking"
+      KS2.SPL: "Oral communication"
 
 # Difficulty Rating
 difficulty:
