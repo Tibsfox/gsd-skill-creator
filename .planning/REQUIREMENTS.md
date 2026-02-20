@@ -34,7 +34,7 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 - [ ] **PACK-06**: CHEM-101 (Chemistry) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 - [ ] **PACK-07**: READ-101 (Reading & Literacy) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 - [ ] **PACK-08**: CRIT-101 (Critical Thinking) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
-- [ ] **PACK-09**: PROB-101 (Problem Solving) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
+- [x] **PACK-09**: PROB-101 (Problem Solving) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 - [ ] **PACK-10**: COMM-101 (Communication & Speech) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 - [ ] **PACK-11**: HIST-101 (History & Civilization) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 - [ ] **PACK-12**: GEO-101 (Geography & Space Science) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
@@ -164,7 +164,7 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 | PACK-06 | Phase 246 | Pending |
 | PACK-07 | Phase 246 | Pending |
 | PACK-08 | Phase 246 | Pending |
-| PACK-09 | Phase 246 | Pending |
+| PACK-09 | Phase 246 | Complete |
 | PACK-10 | Phase 246 | Pending |
 | PACK-11 | Phase 247 | Pending |
 | PACK-12 | Phase 247 | Pending |

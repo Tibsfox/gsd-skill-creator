@@ -10,10 +10,10 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
-Phase: 245 of 254 (Core Academic Packs Batch 1)
-Plan: 3 of 5 complete
-Status: Executing Phase 245
-Last activity: 2026-02-20 — Completed 245-03 (TECH-101 technology knowledge pack)
+Phase: 246 of 254 (Core Academic Packs Batch 2)
+Plan: 4 of 5 complete
+Status: Executing Phase 246
+Last activity: 2026-02-20 — Completed 246-04 (PROB-101 problem solving knowledge pack)
 
 Progress: [############........] 60%
 
@@ -34,6 +34,7 @@ Progress: [############........] 60%
 | 245 | 04 | 10min | 2 | 7 |
 | 245 | 02 | 11min | 2 | 7 |
 | 245 | 03 | 11min | 2 | 7 |
+| 246 | 04 | 9min | 2 | 7 |
 
 ## Accumulated Context
 
@@ -76,6 +77,9 @@ Progress: [############........] 60%
 - TECH-101 modules YAML uses single-document format (consistent with ENGR-101 and SCI-101 pattern)
 - 5 modules for TECH-101 including Technology & Society as M5
 - 10 activities for TECH-101 (2 per module) matching PackActivitySchema
+- 5 modules for PROB-101 including Complex & Wicked Problems as M5 capstone
+- 10 activities for PROB-101 (2 per module) domain-agnostic for maximum transferability
+- Assessment rubric evaluates problem-solving process, not answer correctness
 
 ### Key Context
 
@@ -101,10 +105,10 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed 245-03-PLAN.md (TECH-101 technology knowledge pack)
+Stopped at: Completed 246-04-PLAN.md (PROB-101 problem solving knowledge pack)
 Resume file: None
 
 ## Next Up
 
-Phase 245 plans 01-03 complete (+ 04-05 parallel). Continue with remaining Phase 245 plans if any incomplete.
-Next: Check 245-04 and 245-05 completion, then advance to Phase 246.
+Phase 246 plan 04 complete. Continue with remaining Phase 246 plans.
+Next: Execute remaining 246 plans (01, 02, 03, 05).

@@ -103,7 +103,13 @@ Plans:
   2. DATA-101, LANG-101, PSYCH-101, and ENVR-101 each contain vision doc, modules YAML, activities JSON, assessment, resources, and .skillmeta
   3. All 5 packs pass the runtime content validator with zero schema errors
   4. Prerequisites referencing Core Academic packs resolve correctly in the dependency graph
-**Plans**: TBD
+**Plans**: 5 plans (248-01 through 248-05), 1 wave
+Plans:
+- [ ] 248-01-PLAN.md — CODE-101 import/adapt vision from delivery + create modules, activities, assessment, resources
+- [ ] 248-02-PLAN.md — DATA-101 full suite from scratch (Data Science & Analysis)
+- [ ] 248-03-PLAN.md — LANG-101 full suite from scratch (World Languages)
+- [ ] 248-04-PLAN.md — PSYCH-101 full suite from scratch (Psychology & Human Development)
+- [ ] 248-05-PLAN.md — ENVR-101 full suite from scratch (Environmental Science & Sustainability)
 
 ### Phase 249: Applied Packs Batch 2
 **Goal**: The remaining 5 applied packs complete the entire Applied & Practical tier
@@ -131,7 +137,13 @@ Plans:
   2. All 5 packs pass the runtime content validator with zero schema errors
   3. Specialized packs correctly reference their prerequisite Core and Applied packs
   4. Assessment frameworks use age-independent, level-aware rubrics appropriate to each domain
-**Plans**: TBD
+**Plans**: 5 plans (250-01 through 250-05), 1 wave
+Plans:
+- [ ] 250-01-PLAN.md — PHILO-101 full suite from scratch (Philosophy)
+- [ ] 250-02-PLAN.md — THEO-101 full suite from scratch (Theology & Religion Studies)
+- [ ] 250-03-PLAN.md — PE-101 full suite from scratch (Physical Education & Movement)
+- [ ] 250-04-PLAN.md — NATURE-101 full suite from scratch (Nature Studies & Naturalism)
+- [ ] 250-05-PLAN.md — DOMESTIC-101 full suite from scratch (Home Economics & Life Skills)
 
 ### Phase 251: Specialized Packs Batch 2
 **Goal**: The final 5 specialized packs complete all 35 packs in the knowledge system
@@ -195,11 +207,11 @@ Phases 243-244 sequential (infrastructure first). Phases 245-251 parallelizable 
 | 243. Pack Runtime Infrastructure | 5/5 | Complete    | 2026-02-20 |
 | 244. Chipset & Agent Definitions | 3/3 | Complete    | 2026-02-20 |
 | 245. Core Academic Packs Batch 1 | 5/5 | Complete   | 2026-02-20 |
-| 246. Core Academic Packs Batch 2 | 0/TBD | Not started | - |
+| 246. Core Academic Packs Batch 2 | 2/5 | In Progress|  |
 | 247. Core Academic Packs Batch 3 | 0/5 | Planned | - |
-| 248. Applied Packs Batch 1 | 0/TBD | Not started | - |
+| 248. Applied Packs Batch 1 | 0/5 | Planned | - |
 | 249. Applied Packs Batch 2 | 0/5 | Planned | - |
-| 250. Specialized Packs Batch 1 | 0/TBD | Not started | - |
+| 250. Specialized Packs Batch 1 | 0/5 | Planned | - |
 | 251. Specialized Packs Batch 2 | 0/5 | Planned | - |
 | 252. Pack Metadata & Validation | 0/TBD | Not started | - |
 | 253. GSD-OS Dashboard | 0/TBD | Not started | - |
