@@ -1,0 +1,313 @@
+# ENGR-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: ENGR-101
+pack_name: "Engineering & Design -- Foundational Knowledge Pack"
+
+modules:
+  - id: ENGR-101-M1
+    name: "The Engineering Design Process"
+    description: "Problem definition, requirements gathering, constraint identification, brainstorming, solution evaluation, and decision-making"
+
+    learning_outcomes:
+      - "Identify and articulate a problem worth solving"
+      - "Write clear requirements and measurable success criteria"
+      - "Catalog constraints including budget, time, materials, safety, and user needs"
+      - "Generate multiple diverse solutions through structured brainstorming"
+      - "Evaluate solutions against constraints using decision matrices"
+      - "Select and justify a solution choice with evidence"
+
+    topics:
+      - "Problem Identification & Needs Analysis"
+      - "User Research & Empathy Interviews"
+      - "Requirements & Success Criteria"
+      - "Constraint Cataloging"
+      - "Brainstorming & Divergent Thinking"
+      - "Feasibility Analysis"
+      - "Decision Matrices & Weighted Criteria"
+      - "Design Brief Documentation"
+
+    grade_levels: [PreK, K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 15
+      elementary: 20
+      middle: 25
+      high: 30
+
+    prerequisite_modules: []
+
+    activities:
+      count: 4
+      examples:
+        - "Marshmallow Challenge Design Brief"
+        - "Customer Needs Interview for a Better Lunchbox"
+        - "Egg Drop Challenge Design Brief"
+        - "Decision Matrix Workshop"
+
+    assessments:
+      - "Can student define a problem with measurable success criteria?"
+      - "Does student identify relevant constraints before brainstorming?"
+      - "Can student generate multiple distinct solution approaches?"
+      - "Does student use evidence to justify solution selection?"
+
+  - id: ENGR-101-M2
+    name: "Materials & Structures"
+    description: "Properties of materials, structural principles, load paths, failure modes, and material selection for design"
+
+    learning_outcomes:
+      - "Identify properties of common engineering materials"
+      - "Understand compression, tension, torsion, and shear forces"
+      - "Trace load paths through simple structures"
+      - "Select materials based on design constraints and tradeoffs"
+      - "Test materials for strength, flexibility, and durability"
+      - "Analyze structural failures and identify root causes"
+
+    topics:
+      - "Material Properties (Strength, Weight, Cost, Workability)"
+      - "Compression & Tension"
+      - "Structural Shapes (Triangles, Arches, Trusses)"
+      - "Load Paths & Force Distribution"
+      - "Material Testing Methods"
+      - "Failure Modes & Analysis"
+      - "Material Selection & Tradeoffs"
+      - "Composites & Advanced Materials"
+
+    grade_levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 30
+      high: 35
+
+    prerequisite_modules: [ENGR-101-M1]
+
+    activities:
+      count: 4
+      examples:
+        - "Strongest Bridge from 100 Popsicle Sticks"
+        - "Material Strength Testing Lab"
+        - "Earthquake-Resistant Tower Challenge"
+        - "Material Selection Matrix for a Real Product"
+
+    assessments:
+      - "Can student describe key properties of common materials?"
+      - "Does student understand how forces act on structures?"
+      - "Can student predict where a structure will fail and why?"
+      - "Does student select materials with justified tradeoff reasoning?"
+
+  - id: ENGR-101-M3
+    name: "Mechanisms & Systems"
+    description: "Simple machines, gears, linkages, circuits, control systems, and systems thinking for engineering design"
+
+    learning_outcomes:
+      - "Identify and explain all six simple machines"
+      - "Calculate mechanical advantage and gear ratios"
+      - "Build functional circuits with series and parallel components"
+      - "Understand feedback loops and basic control systems"
+      - "Decompose complex systems into interacting subsystems"
+      - "Design mechanism combinations to achieve specified behaviors"
+
+    topics:
+      - "Six Simple Machines (Lever, Wheel & Axle, Pulley, Inclined Plane, Wedge, Screw)"
+      - "Mechanical Advantage & Efficiency"
+      - "Gears & Gear Ratios"
+      - "Linkages & Motion Transmission"
+      - "Basic Circuits (Voltage, Current, Resistance)"
+      - "Series & Parallel Circuits"
+      - "Sensors & Actuators"
+      - "Feedback Loops & Control Systems"
+      - "Systems Decomposition"
+
+    grade_levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 35
+      high: 40
+
+    prerequisite_modules: [ENGR-101-M1]
+
+    activities:
+      count: 4
+      examples:
+        - "Build a Simple Machine Chain Reaction"
+        - "Design a Gear Train"
+        - "Circuit Challenge Progression"
+        - "Feedback Loop Thermostat Build"
+
+    assessments:
+      - "Can student identify simple machines in everyday objects?"
+      - "Does student understand speed-torque tradeoffs in gears?"
+      - "Can student build a working circuit to specification?"
+      - "Does student recognize feedback loops in real systems?"
+
+  - id: ENGR-101-M4
+    name: "Prototyping & Testing"
+    description: "Rapid prototyping techniques, test design, data collection, failure analysis, systematic iteration, and engineering documentation"
+
+    learning_outcomes:
+      - "Build quick prototypes that answer specific design questions"
+      - "Distinguish between proof-of-concept, functional, and production prototypes"
+      - "Design tests that measure against stated success criteria"
+      - "Collect and analyze test data systematically"
+      - "Perform failure analysis using structured methods"
+      - "Iterate designs based on evidence rather than guesses"
+
+    topics:
+      - "Prototype Types & Fidelity Levels"
+      - "Rapid Prototyping Techniques"
+      - "Test Design & Variable Control"
+      - "Measurement & Data Collection"
+      - "Failure Analysis Methods"
+      - "Data-Driven Iteration"
+      - "Engineering Notebooks & Documentation"
+      - "Design Reviews & Peer Critique"
+      - "Knowing When to Stop Iterating"
+
+    grade_levels: [PreK, K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 30
+      high: 35
+
+    prerequisite_modules: [ENGR-101-M1]
+
+    activities:
+      count: 4
+      examples:
+        - "Paper Airplane Redesign Iteration"
+        - "Crash Test Dummy Safety Improvement"
+        - "Prototype Sprint (Three Prototypes in 30 Minutes)"
+        - "Failure Museum Exhibition"
+
+    assessments:
+      - "Can student build a prototype that tests a specific question?"
+      - "Does student collect data systematically during testing?"
+      - "Can student analyze why a prototype failed?"
+      - "Does student make targeted changes based on test data?"
+
+  - id: ENGR-101-M5
+    name: "Engineering Ethics & Impact"
+    description: "Safety responsibility, environmental impact, human factors, accessibility, equity in engineering, and professional ethics"
+
+    learning_outcomes:
+      - "Recognize that engineering decisions affect public safety and welfare"
+      - "Assess environmental impact of engineering projects"
+      - "Design for accessibility and diverse user populations"
+      - "Analyze engineering failures for ethical dimensions"
+      - "Distinguish between 'can we build it' and 'should we build it'"
+      - "Apply stakeholder analysis to engineering decisions"
+
+    topics:
+      - "Engineer Responsibility to the Public"
+      - "Safety Factors & Risk Assessment"
+      - "Environmental Impact Assessment"
+      - "Human Factors & Accessibility"
+      - "Stakeholder Analysis"
+      - "Case Studies of Engineering Failures"
+      - "Professional Ethics Codes"
+      - "Equity & Justice in Engineering"
+      - "Technology & Unintended Consequences"
+
+    grade_levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 20
+      high: 25
+
+    prerequisite_modules: [ENGR-101-M1]
+
+    activities:
+      count: 4
+      examples:
+        - "Accessibility Audit of a Real Space"
+        - "Environmental Impact Report for a Proposed Project"
+        - "Engineering Failure Case Study Analysis"
+        - "The Trolley Problem, Engineering Edition"
+
+    assessments:
+      - "Does student consider safety in design decisions?"
+      - "Can student identify environmental impacts of engineering?"
+      - "Does student design with diverse users in mind?"
+      - "Can student articulate ethical dimensions of engineering choices?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Design Process Fluency"
+    description: "Ability to apply the full define-ideate-prototype-test-iterate cycle independently"
+    assessed_in: [ENGR-101-M1, ENGR-101-M2, ENGR-101-M3, ENGR-101-M4]
+
+  - name: "Constraint-Based Thinking"
+    description: "Ability to identify, prioritize, and design within real-world constraints"
+    assessed_in: [ENGR-101-M1, ENGR-101-M2, ENGR-101-M3, ENGR-101-M5]
+
+  - name: "Failure Resilience"
+    description: "Ability to treat failure as data, perform root cause analysis, and iterate productively"
+    assessed_in: [ENGR-101-M2, ENGR-101-M3, ENGR-101-M4]
+
+  - name: "Engineering Communication"
+    description: "Ability to document designs, explain tradeoffs, and present engineering reasoning clearly"
+    assessed_in: [ENGR-101-M1, ENGR-101-M4, ENGR-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Sequential Pathway"
+    description: "M1 -> M2 -> M3 -> M4 -> M5"
+    rationale: "Design process first, then materials and mechanisms as building blocks, then prototyping as integration, then ethics as capstone reflection"
+
+  - name: "Project-Based Pathway"
+    description: "M1 -> (M2 & M3 in parallel) -> M4, with M5 woven throughout"
+    rationale: "Start with design process, learn materials and mechanisms as needed for projects, integrate through prototyping, reflect on ethics at every stage"
+
+  - name: "Challenge-Driven Pathway"
+    description: "Start with M4 (build and test), pull in M1-M3 as needed, conclude with M5"
+    rationale: "For hands-on learners who want to build immediately -- start with doing, then formalize the process and deepen technical knowledge"
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Design Process Application"
+    description: "All five modules apply the same define-ideate-prototype-test-iterate cycle"
+    cached: true
+
+  - pattern: "Grade-Level Scaffolding"
+    description: "Each module follows the same Foundation through College+ progression structure"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Activities follow consistent template with materials, objectives, and variations"
+    cached: true
+
+  - pattern: "Assessment Rubric"
+    description: "Assessment uses parallel competency-based rubric across modules"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner completes full design cycle independently"
+    - "When learner identifies constraints before brainstorming"
+    - "When learner performs structured failure analysis"
+    - "When learner makes data-driven iteration decisions"
+    - "When learner considers ethical implications of design choices"
+
+  pattern_detection:
+    - "Effective prototyping strategies (quick and dirty vs. over-polished)"
+    - "Successful brainstorming techniques (quantity and diversity of ideas)"
+    - "Strong failure analysis habits (root cause vs. symptom)"
+    - "Productive iteration patterns (targeted changes vs. random rebuilds)"
+
+  skill_promotion:
+    - "Promote effective design brief templates as reusable skills"
+    - "Create failure analysis toolkits from observed best practices"
+    - "Build materials selection heuristics from successful projects"
