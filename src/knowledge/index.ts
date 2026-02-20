@@ -191,3 +191,23 @@ export type {
   AdaptedPathway,
   AdapterConfig,
 } from './pathway-adapter.js';
+
+// ============================================================================
+// Activity scaffolding (Phase 254)
+// ============================================================================
+
+export { ActivityScaffolder } from './activity-scaffolder.js';
+export type {
+  ScaffoldedActivity,
+  ScaffolderConfig,
+} from './activity-scaffolder.js';
+
+// ============================================================================
+// Approach promotion (Phase 254)
+// ============================================================================
+
+export { ApproachPromoter } from './approach-promoter.js';
+export type {
+  PromotedApproach,
+  PromoterConfig,
+} from './approach-promoter.js';
