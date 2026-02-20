@@ -4,11 +4,11 @@
  * Single entry point for all Den module functionality: type schemas,
  * ISA encoder/decoder, filesystem bus operations, health metrics,
  * pruning, the dispatcher agent, the coordinator agent, the configurator
- * agent, the relay agent, the monitor agent, the planner agent, and
- * the work intake procedure.
+ * agent, the relay agent, the monitor agent, the planner agent,
+ * the work intake procedure, and the executor agent.
  *
  * Usage:
- *   import { createDispatcher, createRelay, createPlanner, processIntake, sendMessage, BusConfigSchema } from './den/index.js';
+ *   import { createDispatcher, createRelay, createPlanner, createExecutor, processIntake, sendMessage, BusConfigSchema } from './den/index.js';
  */
 
 // Types and schemas
@@ -115,6 +115,17 @@ export {
   type Trajectory, type PhaseEstimate, type TrajectoryReport,
   type TrajectoryEntry, type PlannerConfig,
 } from './planner.js';
+
+// Executor
+export {
+  ExecutorConfigSchema, ExecutionContextSchema,
+  ArtifactHandoffSchema, ProgressReportSchema, ExecutorEntrySchema,
+  loadExecutionContext, reportProgress, handoffToVerifier,
+  reportBlocker, appendExecutorEntry, readExecutorLog,
+  Executor, createExecutor,
+  type ExecutionContext, type ArtifactHandoff, type ProgressReport,
+  type ExecutorEntry, type ExecutorConfig,
+} from './executor.js';
 
 // Intake
 export {
