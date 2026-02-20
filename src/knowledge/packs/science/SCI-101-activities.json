@@ -1,0 +1,202 @@
+[
+  {
+    "id": "SCI-101-A01",
+    "name": "Nature Walk Observation Journal",
+    "module_id": "SCI-101-M1",
+    "grade_range": ["K", "1", "2", "3", "4", "5"],
+    "duration_minutes": 45,
+    "description": "Structured outdoor observation activity where learners spend 15 minutes in silent observation using all senses, then record what they noticed in a journal. Afterward, learners compare notes with partners to discover what they missed and what they noticed differently. Develops attention, systematic recording, and awareness that different observers notice different things.",
+    "materials": ["Observation journal or notebook", "Pencil or crayons", "Magnifying glass (optional)", "Clipboard"],
+    "learning_objectives": [
+      "Use multiple senses intentionally during observation",
+      "Record observations with detail and accuracy",
+      "Distinguish between what was observed and what was inferred",
+      "Recognize that different observers notice different things"
+    ],
+    "variations": [
+      "Seasonal comparison: repeat the same walk in different seasons and compare journals",
+      "Sensory focus: one walk emphasizing sound, another emphasizing touch or smell",
+      "Urban variation: observe a city block instead of a natural area"
+    ]
+  },
+  {
+    "id": "SCI-101-A02",
+    "name": "Mystery Box Sensory Investigation",
+    "module_id": "SCI-101-M1",
+    "grade_range": ["K", "1", "2", "3", "4", "5", "6"],
+    "duration_minutes": 30,
+    "description": "Sealed boxes containing unknown objects. Learners must determine what is inside using only indirect evidence: shaking, weighing, tilting, listening, and smelling. They record observations, form hypotheses about contents, and discuss the difference between evidence and guessing. Models the scientific challenge of investigating things that cannot be directly seen.",
+    "materials": ["Sealed cardboard boxes (6-10)", "Various small objects to place inside", "Observation recording sheets", "Scale or balance (optional)"],
+    "learning_objectives": [
+      "Gather evidence using indirect methods",
+      "Distinguish between observation and inference",
+      "Form hypotheses based on available evidence",
+      "Understand that some questions require indirect investigation"
+    ],
+    "variations": [
+      "Difficulty levels: single objects vs. multiple objects in one box",
+      "Competitive version: teams race to identify contents with fewest observations",
+      "Create-your-own: learners prepare mystery boxes for classmates"
+    ]
+  },
+  {
+    "id": "SCI-101-A03",
+    "name": "Paper Airplane Hypothesis Test",
+    "module_id": "SCI-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 60,
+    "description": "Learners design paper airplanes with systematic variations (wing shape, paper weight, fold count, nose style) and test how each variable affects flight distance. They formulate specific hypotheses before each test, identify variables to control, conduct multiple trials, and analyze results. Demonstrates the full hypothesis-experiment-analysis cycle with tangible, engaging materials.",
+    "materials": ["Paper of different weights and sizes", "Ruler or measuring tape", "Tape or paper clips for weight adjustment", "Data recording sheets", "Open space for testing"],
+    "learning_objectives": [
+      "Formulate specific, testable hypotheses about flight performance",
+      "Identify independent, dependent, and controlled variables",
+      "Conduct multiple trials for reliability",
+      "Analyze results to evaluate hypotheses"
+    ],
+    "variations": [
+      "Target accuracy challenge: test distance vs. accuracy as dependent variables",
+      "Advanced: add wing flaps or tail modifications as additional variables",
+      "Engineering extension: optimize for maximum distance using experimental results"
+    ]
+  },
+  {
+    "id": "SCI-101-A04",
+    "name": "Plant Growth Experiment Design",
+    "module_id": "SCI-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9"],
+    "duration_minutes": 90,
+    "description": "Learners design a controlled experiment comparing plant growth under different conditions (light levels, water amounts, soil types, or fertilizer concentrations). They must identify all variables, explain what they will control and why, predict outcomes, and create a data collection plan. The design phase is the primary learning activity; actual growing extends over weeks with periodic data collection.",
+    "materials": ["Bean or radish seeds", "Small pots or cups", "Soil", "Ruler for measuring growth", "Water and measuring cup", "Data collection sheets", "Optional: grow lights, fertilizer"],
+    "learning_objectives": [
+      "Design a controlled experiment with one independent variable",
+      "Identify and plan controls for confounding variables",
+      "Create a detailed data collection plan before beginning",
+      "Make specific predictions about expected outcomes"
+    ],
+    "variations": [
+      "Quick version: use fast-germinating seeds like radish for 2-week experiments",
+      "Advanced: compare two variables across multiple experimental groups",
+      "Hydroponic variation: grow in water with different nutrient solutions"
+    ]
+  },
+  {
+    "id": "SCI-101-A05",
+    "name": "Weather Data Collection Week",
+    "module_id": "SCI-101-M3",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 20,
+    "description": "Over five consecutive days, learners collect weather data at the same time each day: temperature, cloud cover (estimated percentage), precipitation (yes/no and amount), wind direction, and wind speed (estimated scale). They organize data in tables, create graphs showing trends, and compare their measurements with official weather service data to assess accuracy. Teaches systematic data collection, organization, and graphing.",
+    "materials": ["Thermometer (outdoor)", "Wind vane or compass", "Rain gauge or measuring cup", "Data collection sheets", "Graph paper or graphing software", "Access to official weather data for comparison"],
+    "learning_objectives": [
+      "Collect data systematically over multiple days",
+      "Organize data in structured tables",
+      "Create appropriate graphs to visualize trends",
+      "Compare personal measurements with official data to assess accuracy"
+    ],
+    "variations": [
+      "Extended: collect data for a full month and analyze longer-term patterns",
+      "Cross-location: compare data with a partner class in a different region",
+      "Prediction component: predict next day's weather based on observed patterns"
+    ]
+  },
+  {
+    "id": "SCI-101-A06",
+    "name": "Pendulum Period Measurement",
+    "module_id": "SCI-101-M3",
+    "grade_range": ["6", "7", "8", "9", "10"],
+    "duration_minutes": 50,
+    "description": "Learners build a simple pendulum (string and weight) and measure its period under systematically varied conditions: string length, mass of weight, and release angle. They discover which variable actually affects the period (length) and which do not (mass, small-amplitude changes). Emphasizes multiple trials, averaging, precision in measurement, and the power of controlled experimentation to reveal unexpected results.",
+    "materials": ["String (various lengths)", "Weights of different masses", "Stopwatch or timer", "Ruler or measuring tape", "Ring stand or support", "Protractor for measuring angle", "Data recording sheets"],
+    "learning_objectives": [
+      "Measure time intervals with precision using multiple trials",
+      "Calculate averages and assess variability in measurements",
+      "Distinguish which variables affect an outcome and which do not",
+      "Draw conclusions that may contradict initial expectations"
+    ],
+    "variations": [
+      "Graphing extension: plot period vs. length and discover the square-root relationship",
+      "Prediction challenge: predict the period for an untested length based on the pattern",
+      "Historical connection: discuss Galileo's pendulum observations and their significance"
+    ]
+  },
+  {
+    "id": "SCI-101-A07",
+    "name": "Science Fair Poster Creation",
+    "module_id": "SCI-101-M4",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 90,
+    "description": "Learners create a poster summarizing a completed investigation, focusing on visual hierarchy, clear data presentation, and concise writing. The poster must include: title, question, hypothesis, method summary, data display (graph or table), conclusion, and reflection on limitations. After creation, a structured peer review round provides constructive feedback. Develops scientific communication and visual literacy.",
+    "materials": ["Poster board or large paper", "Markers, colored pencils", "Printed graphs and data tables", "Rubric for peer review", "Sticky notes for feedback"],
+    "learning_objectives": [
+      "Organize scientific information in a clear visual layout",
+      "Present data effectively using appropriate graphs and tables",
+      "Write concise summaries of methods and conclusions",
+      "Give and receive constructive peer feedback"
+    ],
+    "variations": [
+      "Digital version: create an electronic poster or infographic",
+      "Gallery walk: display all posters and have learners evaluate three peers using a rubric",
+      "Lightning talk: present the poster in a 3-minute oral presentation"
+    ]
+  },
+  {
+    "id": "SCI-101-A08",
+    "name": "Peer Review Practice",
+    "module_id": "SCI-101-M4",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Learners receive anonymous investigation reports (from partners or provided examples) and provide structured feedback using a review rubric. They evaluate: clarity of question and hypothesis, quality of experimental design, appropriateness of data analysis, strength of conclusions, and acknowledgment of limitations. The original author then revises based on feedback. Teaches that peer review improves science and that revision is a strength.",
+    "materials": ["Investigation reports (anonymous copies)", "Peer review rubric with scoring criteria", "Feedback forms with structured prompts", "Highlighters for annotation"],
+    "learning_objectives": [
+      "Evaluate scientific work using specific quality criteria",
+      "Provide constructive, evidence-based feedback",
+      "Distinguish between helpful critique and personal opinion",
+      "Revise own work in response to peer feedback"
+    ],
+    "variations": [
+      "Double-blind review: both author and reviewer are anonymous",
+      "Review published studies: apply the rubric to a simplified real research paper",
+      "Meta-review: evaluate the quality of peer reviews themselves"
+    ]
+  },
+  {
+    "id": "SCI-101-A09",
+    "name": "Science vs. Not-Science Sorting",
+    "module_id": "SCI-101-M5",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 40,
+    "description": "Learners receive cards with various claims (homeopathy, evolution, flat earth, germ theory, astrology, vaccine safety, crystal healing, plate tectonics, climate change) and sort them into scientific vs. non-scientific categories. They must justify each placement using specific demarcation criteria: testability, falsifiability, peer review, reproducibility, and self-correction. Develops critical evaluation skills and understanding of what makes science distinct.",
+    "materials": ["Claim cards (15-20 diverse claims)", "Sorting mat with 'Scientific' and 'Not Scientific' columns", "Demarcation criteria reference sheet", "Discussion prompts"],
+    "learning_objectives": [
+      "Apply demarcation criteria to evaluate real-world claims",
+      "Articulate what makes a claim scientific vs. non-scientific",
+      "Discuss borderline cases with nuance and evidence",
+      "Understand that science is defined by method, not by topic"
+    ],
+    "variations": [
+      "Current events version: sort claims from recent news articles",
+      "Historical version: evaluate claims that were once considered scientific but are no longer",
+      "Create-your-own: learners write ambiguous claims for classmates to evaluate"
+    ]
+  },
+  {
+    "id": "SCI-101-A10",
+    "name": "Claim-Evidence-Reasoning Exercises",
+    "module_id": "SCI-101-M4",
+    "grade_range": ["4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 35,
+    "description": "Given a scientific question and a data set, learners construct written arguments using the CER framework: make a Claim that answers the question, cite specific Evidence from the data, and provide Reasoning that explains why the evidence supports the claim. Examples range from simple ('Does ice melt faster in water or air?') to complex ('Is this pattern in the data evidence of a correlation?'). Scaffolds scientific argumentation skills.",
+    "materials": ["CER framework template", "Data sets (printed or digital)", "Scientific questions at varying difficulty levels", "Example CER arguments for modeling"],
+    "learning_objectives": [
+      "Construct claims that directly answer scientific questions",
+      "Cite specific evidence from data to support claims",
+      "Write reasoning that logically connects evidence to claims",
+      "Evaluate the strength of CER arguments"
+    ],
+    "variations": [
+      "Jigsaw CER: different groups analyze different data sets about the same question",
+      "Counter-argument: write a CER, then write a counterargument and rebuttal",
+      "Visual CER: present the argument as a diagram with linked claim-evidence-reasoning boxes"
+    ]
+  }
+]
