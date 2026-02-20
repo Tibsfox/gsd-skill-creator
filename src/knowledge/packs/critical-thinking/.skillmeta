@@ -323,13 +323,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
       name: "Espanol"
       complete: false
       progress: "0%"
-
-  planned: [fr, zh, ar]
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -343,20 +365,31 @@ accessibility:
 
 # Standards Alignment
 standards_alignment:
-  - framework: "Common Core ELA (Argumentation)"
+  - framework: "Common Core ELA (Argumentation & Reasoning)"
     version: 2010
     alignments:
-      CCRA.R.8: "Evaluate arguments and specific claims in a text"
-      CCRA.W.1: "Write arguments to support claims with valid reasoning and evidence"
-      CCRA.SL.3: "Evaluate a speaker's reasoning and use of evidence and rhetoric"
-
+      "CCSS.ELA-LITERACY.CCRA.R.8": "Evaluate arguments and claims"
+      "CCSS.ELA-LITERACY.CCRA.W.1": "Write arguments with evidence"
+      "CCSS.ELA-LITERACY.CCRA.SL.3": "Evaluate speaker's reasoning"
+      "CCSS.ELA-LITERACY.L.3.5.B": "Identify real-life connections"
   - framework: "Philosophy for Children (P4C) Framework"
     version: 2020
     alignments:
       "Critical Thinking": true
       "Creative Thinking": true
       "Caring Thinking": true
-      "Collaborative Thinking": true
+      "Collaborative Inquiry": true
+  - framework: "IB Middle Years Programme (Individuals & Societies)"
+    version: "2024"
+    alignments:
+      MYP.IND.A: "Knowing and understanding"
+      MYP.IND.B: "Developing sources"
+      MYP.IND.C: "Processing"
+  - framework: "UK National Curriculum (Thinking Skills)"
+    version: "2014"
+    alignments:
+      KS3.THINK: "Critical thinking skills"
+      KS4.THINK: "Reasoned argument and debate"
 
 # Difficulty Rating
 difficulty:

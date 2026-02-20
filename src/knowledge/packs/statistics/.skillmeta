@@ -312,13 +312,35 @@ translations:
     - language_code: en
       name: English
       complete: true
-
     - language_code: es
       name: "Espanol"
       complete: false
       progress: "0%"
-
-  planned: ["fr", "zh", "ar"]
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
 
 # Accessibility
 accessibility:
@@ -332,21 +354,30 @@ accessibility:
 
 # Standards Alignment
 standards_alignment:
-  - framework: "Common Core State Standards (Math - Statistics & Probability)"
+  - framework: "Common Core State Standards (Math - Statistics)"
     version: "2010"
     alignments:
-      6.SP: "Statistics & Probability"
-      7.SP: "Statistics & Probability"
-      S-ID: "Interpreting Categorical & Quantitative Data"
-      S-IC: "Making Inferences & Justifying Conclusions"
+      "CCSS.MATH.6.SP.A": "Develop understanding of statistics"
+      "CCSS.MATH.7.SP.A": "Use random sampling"
+      "CCSS.MATH.S-ID.A": "Summarize, represent, interpret data"
+      "CCSS.MATH.S-IC.A": "Understand and evaluate random processes"
       S-CP: "Conditional Probability & Rules of Probability"
-
   - framework: "Jump$tart Financial Literacy Standards"
     version: "2017"
     alignments:
       Spending & Saving: "true"
       Credit & Debt: "true"
       Financial Responsibility: "true"
+  - framework: "IB Middle Years Programme (Mathematics)"
+    version: "2024"
+    alignments:
+      MYP.STAT.A: "Knowing and understanding"
+      MYP.STAT.B: "Investigating"
+  - framework: "UK National Curriculum (Statistics & Probability)"
+    version: "2014"
+    alignments:
+      KS2.STAT: "Data handling and probability"
+      KS3.STAT: "Statistical averages and spread"
 
 # Difficulty Rating
 difficulty:
