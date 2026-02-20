@@ -1,0 +1,495 @@
+# GSD Skill Metadata
+pack_id: NATURE-101
+pack_name: "Nature Studies & Naturalism -- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: specialized_deepening
+learning_domain: natural_history
+
+# Content Description
+description: |
+  Nature studies as the art and science of paying attention to the natural world:
+  observing, identifying, and understanding living things and ecosystems through
+  direct outdoor experience. In the tradition of naturalists like Darwin, Muir,
+  and Carson, building deep connection to the natural world through patient
+  observation, nature journaling, species identification, ecological thinking,
+  and citizen science contribution.
+
+short_description: "Field observation, species identification, ecological literacy, and naturalist skills across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Nature Studies Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - SCI-101
+  - ENVR-101
+
+# What This Pack Enables
+enables: []
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["K", "1", "2"]
+    estimated_hours: [20, 40]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [40, 80]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [80, 140]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [120, 200]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [150, 300]
+
+# Modules
+modules:
+  - id: NATURE-101-M1
+    name: "Outdoor Observation"
+    description: "Field skills, nature journaling, using senses, weather awareness, and the discipline of patient outdoor observation"
+    learning_outcomes:
+      - "Observe natural phenomena systematically using all five senses"
+      - "Maintain a nature journal with accurate sketches, measurements, and questions"
+      - "Demonstrate patience and sustained attention during outdoor observation"
+      - "Record weather conditions and connect them to biological activity"
+    topics:
+      - "Sensory Observation"
+      - "Nature Journaling"
+      - "The Sit Spot Practice"
+      - "Weather Awareness"
+      - "Orientation and Field Safety"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 20
+      high: 15
+    prerequisite_modules: []
+    activities:
+      count: 3
+      examples:
+        - "Sit Spot -- 15 Minutes of Silence"
+        - "Nature Journal First Entry"
+        - "Sensory Walk"
+    assessments:
+      - "Can the learner sit still and observe productively for 15+ minutes?"
+      - "Does the nature journal show accurate sketches with labels and questions?"
+
+  - id: NATURE-101-M2
+    name: "Plants & Fungi"
+    description: "Identification of trees, wildflowers, grasses, and fungi; understanding life cycles, seasonal changes, and seed dispersal"
+    learning_outcomes:
+      - "Identify local tree species by bark, leaf, and silhouette"
+      - "Identify local wildflowers by petal count, color, and habitat"
+      - "Recognize major fungal groups and explain their ecological role"
+      - "Describe seasonal plant cycles from dormancy through fruiting"
+    topics:
+      - "Tree Identification"
+      - "Wildflower Identification"
+      - "Fungi as Decomposers"
+      - "Seeds and Dispersal"
+      - "Seasonal Plant Cycles"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 30
+      high: 25
+    prerequisite_modules: [NATURE-101-M1]
+    activities:
+      count: 3
+      examples:
+        - "Tree Identification Walk"
+        - "Seed Collection & Sprouting"
+        - "Fungus Hunt"
+    assessments:
+      - "Can the learner identify 10+ local trees and wildflowers?"
+      - "Does the learner understand the role of fungi in ecosystems?"
+
+  - id: NATURE-101-M3
+    name: "Animals & Insects"
+    description: "Bird watching, insect study, mammal tracking, animal behavior observation, and wildlife ethics"
+    learning_outcomes:
+      - "Identify local bird species by sight and sound"
+      - "Recognize major insect orders and understand metamorphosis"
+      - "Read mammal tracks and signs in the field"
+      - "Practice ethical wildlife observation"
+    topics:
+      - "Bird Identification and Behavior"
+      - "Insect Orders and Life Cycles"
+      - "Mammal Tracking"
+      - "Reptiles and Amphibians"
+      - "Nocturnal Animals"
+      - "Ethics of Wildlife Observation"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 35
+      high: 25
+    prerequisite_modules: [NATURE-101-M1]
+    activities:
+      count: 3
+      examples:
+        - "Backyard Bird Count"
+        - "Bug Hotel Builder"
+        - "Night Walk"
+    assessments:
+      - "Can the learner identify 15+ local bird species?"
+      - "Can the learner read mammal tracks and signs?"
+
+  - id: NATURE-101-M4
+    name: "Ecosystems & Connections"
+    description: "Food webs, water and nutrient cycling, soil ecology, biomes, ecological relationships, and how living things interconnect"
+    learning_outcomes:
+      - "Construct food webs showing producers, herbivores, predators, and decomposers"
+      - "Describe the water cycle and nutrient cycling at the local level"
+      - "Identify ecological relationships: predation, mutualism, parasitism"
+      - "Understand succession and how ecosystems change after disturbance"
+    topics:
+      - "Food Webs and Trophic Levels"
+      - "Energy Flow"
+      - "Water and Nutrient Cycling"
+      - "Soil Ecology"
+      - "Ecological Relationships"
+      - "Succession"
+      - "Keystone Species"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 25
+      middle: 35
+      high: 30
+    prerequisite_modules: [NATURE-101-M1, NATURE-101-M2, NATURE-101-M3]
+    activities:
+      count: 3
+      examples:
+        - "Food Web Card Game"
+        - "Decomposition Observation Station"
+        - "Stream Study"
+    assessments:
+      - "Can the learner construct an accurate food web?"
+      - "Does the learner recognize ecological relationships in the field?"
+
+  - id: NATURE-101-M5
+    name: "Conservation & Citizen Science"
+    description: "Habitat stewardship, invasive species management, citizen science data collection, and contributing to real conservation research"
+    learning_outcomes:
+      - "Identify major threats to local ecosystems"
+      - "Contribute quality data to citizen science platforms"
+      - "Identify invasive species and explain their impacts"
+      - "Articulate an evidence-based land ethic"
+    topics:
+      - "Threats to Ecosystems"
+      - "Invasive Species"
+      - "Citizen Science Platforms"
+      - "Habitat Restoration"
+      - "Environmental Ethics"
+      - "Career Paths in Natural History"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 35
+    prerequisite_modules: [NATURE-101-M4]
+    activities:
+      count: 3
+      examples:
+        - "Citizen Science Data Submission"
+        - "Trail Clean-Up & Habitat Survey"
+        - "Invasive Species Survey"
+    assessments:
+      - "Can the learner submit quality citizen science observations?"
+      - "Does the learner articulate stewardship responsibility?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-OBS-001
+    description: "Observe natural phenomena systematically and maintain a detailed nature journal"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-OBS-002
+    description: "Apply advanced field observation techniques including transects, quadrats, and phenology"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-PLT-001
+    description: "Identify local trees, wildflowers, and fungi; describe seasonal plant cycles"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8"]
+
+  - code: LO-ANI-001
+    description: "Identify local birds by sight and sound; recognize major insect orders; read mammal tracks"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8"]
+
+  - code: LO-ECO-001
+    description: "Construct food webs, explain energy flow, and identify ecological relationships"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-CON-001
+    description: "Contribute to citizen science, identify invasive species, and articulate stewardship ethics"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Nature Journal Review"
+    frequency: ongoing
+
+  - type: formative
+    name: "Field Observation Check"
+    frequency: weekly
+
+  - type: summative
+    name: "Species Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Ecosystem Investigation"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: inaturalist
+    url: https://www.inaturalist.org
+    description: "AI-powered species identification from photos; community science platform"
+
+  - name: merlin_bird_id
+    url: https://merlin.allaboutbirds.org
+    description: "Identifies birds by photo or sound; free from Cornell Lab of Ornithology"
+
+  - name: seek_by_inaturalist
+    url: https://www.inaturalist.org/pages/seek_app
+    description: "Family-friendly nature identification app for plants and animals"
+
+  - name: ebird
+    url: https://ebird.org
+    description: "Global bird observation database for community science"
+
+interactive_elements:
+  - type: field_activity
+    name: "Sit Spot Observation"
+
+  - type: investigation
+    name: "Ecosystem Survey"
+
+  - type: game
+    name: "Food Web Card Game"
+
+  - type: journal
+    name: "Nature Journal"
+
+  - type: citizen_science
+    name: "iNaturalist Observation"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+
+  planned: [fr, zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Field activities include verbal description guides. Nature journaling adapts to any ability level. Consider adding audio field guides and tactile identification methods for visually impaired learners."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Next Generation Science Standards (NGSS)"
+    version: 2013
+    alignments:
+      LS1: "From Molecules to Organisms: Structures and Processes"
+      LS2: "Ecosystems: Interactions, Energy, and Dynamics"
+      LS4: "Biological Evolution: Unity and Diversity"
+      ESS3: "Earth and Human Activity"
+
+  - framework: "National Science Education Standards"
+    version: 1996
+    alignments:
+      "Life Science": true
+      "Science as Inquiry": true
+      "Science in Personal and Social Perspectives": true
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Nature study is accessible at any age. Conceptual depth increases with ecological concepts (food webs, succession, biogeography). No special equipment required beyond notebook and pencil."
+
+# Content Flags
+content_flags:
+  - flag: outdoor_safety
+    description: "Activities require outdoor time. Learners must be aware of local hazards (ticks, venomous snakes, poison ivy/oak, weather)."
+    mitigation: "Include safety guidelines for each activity. Teach hazard identification as part of field skills. Supervise younger learners."
+
+  - flag: animal_welfare
+    description: "Observing animals requires ethical guidelines to prevent disturbance."
+    mitigation: "Teach observation distance, no-chase rules, nest protection, and 'leave it as you found it' principles. Model respectful wildlife interaction."
+
+  - flag: plant_safety
+    description: "Some wild plants are toxic. Edible plant identification carries risk."
+    mitigation: "Never eat wild plants without expert verification. Teach 'look but don't taste' as default. Include poison ivy/oak/sumac identification early."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/nature-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "NATURE-101"
+  looking_for:
+    - "Regional species lists and field guides for different biomes"
+    - "Seasonal phenology calendars for different climate zones"
+    - "Nature journal exemplars showing progression over time"
+    - "Indigenous ecological knowledge resources (with appropriate attribution)"
+    - "Urban naturalism activities and species lists"
+    - "Translations to Spanish, Mandarin, Arabic, French"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Nature Studies Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - nature-studies
+  - naturalism
+  - field-observation
+  - bird-watching
+  - plant-identification
+  - insect-study
+  - ecology
+  - nature-journaling
+  - citizen-science
+  - conservation
+  - outdoor-education
+  - wildlife
+  - botany
+  - ornithology
+  - entomology
+
+# External Resources
+resources:
+  - type: educational_platform
+    title: "iNaturalist"
+    author: "California Academy of Sciences"
+    url: "https://www.inaturalist.org"
+
+  - type: educational_platform
+    title: "Cornell Lab of Ornithology"
+    author: "Cornell University"
+    url: "https://www.birds.cornell.edu"
+
+  - type: educational_platform
+    title: "National Audubon Society"
+    author: "Audubon"
+    url: "https://www.audubon.org"
+
+  - type: book
+    title: "The Laws Guide to Nature Drawing and Journaling"
+    author: "John Muir Laws"
+    url: "https://johnmuirlaws.com"
+
+  - type: educational_platform
+    title: "National Wildlife Federation"
+    author: "NWF"
+    url: "https://www.nwf.org"
+
+# Related Packs
+related_packs:
+  - id: SCI-101
+    relationship: "Scientific inquiry framework applied to naturalist observation and investigation"
+
+  - id: ENVR-101
+    relationship: "Environmental science provides systems-level context; nature study provides species-level field knowledge"
+
+  - id: GEO-101
+    relationship: "Geography provides physical context (landforms, climate, soil) for ecosystems"
+
+  - id: CHEM-101
+    relationship: "Chemistry explains soil, nutrient cycling, and decomposition processes"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "leaf"
+    color: "#4CAF50"
+    position: "Specialized"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "NATURE-101-outdoor-observation"
+    - "NATURE-101-plants-fungi"
+    - "NATURE-101-animals-insects"
+    - "NATURE-101-ecosystems-connections"
+    - "NATURE-101-conservation-citizen-science"
+
+# File References
+files:
+  vision_document: "NATURE-101-vision.md"
+  modules_definition: "NATURE-101-modules.yaml"
+  activities: "NATURE-101-activities.json"
+  assessment: "NATURE-101-assessment.md"
+  resources: "NATURE-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five modules covering observation, plants, animals, ecosystems, and conservation"
+      - "Developed comprehensive vision doc emphasizing outdoor-first naturalist pedagogy"
+      - "Included 15 concrete outdoor activities using freely available natural materials"
+      - "Integrated citizen science platforms (iNaturalist, eBird, GLOBE Observer)"
+      - "Aligned to NGSS Life Science and Earth Science standards"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"
