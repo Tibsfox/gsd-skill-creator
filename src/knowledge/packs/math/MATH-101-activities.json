@@ -1,0 +1,241 @@
+[
+  {
+    "id": "MATH-101-A01",
+    "name": "Subitizing Flash Cards",
+    "module_id": "MATH-101-M1",
+    "grade_range": ["PreK", "K", "1", "2"],
+    "duration_minutes": 15,
+    "description": "Show dot arrangements briefly (1-2 seconds) and ask learners to identify the quantity without counting. Progress from arrangements of 1-4 to structured arrangements of 5-10 using familiar patterns (dice faces, ten frames). Builds instant quantity recognition and number sense.",
+    "materials": ["Dot cards or printed flash cards", "Ten frames", "Whiteboard for recording responses"],
+    "learning_objectives": [
+      "Recognize quantities up to 5 without counting",
+      "Recognize structured arrangements up to 10",
+      "Develop automatic number recognition"
+    ],
+    "variations": [
+      "Use finger patterns instead of dot cards",
+      "Show arrangements on a ten frame for quantities 5-10",
+      "Challenge: flash two cards and ask for the total"
+    ]
+  },
+  {
+    "id": "MATH-101-A02",
+    "name": "Multi-Step Word Problems Workshop",
+    "module_id": "MATH-101-M1",
+    "grade_range": ["3", "4", "5", "6"],
+    "duration_minutes": 45,
+    "description": "Present real-world scenarios requiring multiple operations to solve. Learners identify what information is given, what is asked, and plan a solution strategy. Emphasis on explaining reasoning and checking answers for reasonableness rather than speed.",
+    "materials": ["Problem cards with real-world scenarios", "Scratch paper", "Calculator (optional for checking)"],
+    "learning_objectives": [
+      "Identify relevant information in word problems",
+      "Select appropriate operations for each step",
+      "Verify answers for reasonableness",
+      "Explain solution strategy to peers"
+    ],
+    "variations": [
+      "Learners write their own multi-step problems for classmates",
+      "Remove one piece of information and ask what else is needed",
+      "Present problems with extraneous information to identify"
+    ]
+  },
+  {
+    "id": "MATH-101-A03",
+    "name": "Function Machine Game",
+    "module_id": "MATH-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7"],
+    "duration_minutes": 30,
+    "description": "A machine takes an input number and produces an output. Learners observe several input-output pairs, deduce the rule, then predict outputs for new inputs. Start with single operations (add 3, multiply by 2) and progress to compound rules (multiply by 2 then subtract 1). Builds algebraic reasoning and pattern recognition.",
+    "materials": ["Function machine cards or digital simulation", "Input-output recording sheet", "Whiteboard"],
+    "learning_objectives": [
+      "Identify a rule from input-output pairs",
+      "Express rules using words and symbols",
+      "Predict outputs for new inputs",
+      "Understand functions as consistent rules"
+    ],
+    "variations": [
+      "Learners create their own function machines for peers to solve",
+      "Use two-step rules for advanced learners",
+      "Reverse: given the output, find the input"
+    ]
+  },
+  {
+    "id": "MATH-101-A04",
+    "name": "Pattern Extension Puzzles",
+    "module_id": "MATH-101-M2",
+    "grade_range": ["K", "1", "2", "3", "4"],
+    "duration_minutes": 25,
+    "description": "Present visual patterns using shapes, colors, or numbers with missing elements. Learners identify the repeating unit, describe the rule, and extend the pattern. Progress from simple AB patterns (red-blue-red-blue) to complex patterns involving size, rotation, or numeric sequences.",
+    "materials": ["Pattern blocks or colored tiles", "Pattern worksheets", "Blank paper for creating patterns"],
+    "learning_objectives": [
+      "Identify the repeating unit in a pattern",
+      "Describe patterns using words",
+      "Extend patterns by predicting next elements",
+      "Create original patterns with clear rules"
+    ],
+    "variations": [
+      "Use sound patterns (clap-snap-clap-snap) for kinesthetic learners",
+      "Growing patterns where each term increases (1, 3, 6, 10...)",
+      "Find the error in a given pattern sequence"
+    ]
+  },
+  {
+    "id": "MATH-101-A05",
+    "name": "Tangram Challenge",
+    "module_id": "MATH-101-M3",
+    "grade_range": ["K", "1", "2", "3", "4", "5"],
+    "duration_minutes": 30,
+    "description": "Using the seven tangram pieces, learners create specific shapes (square, rectangle, parallelogram, animal silhouettes). Explores geometric properties, spatial reasoning, and area conservation. All seven pieces have the same total area regardless of arrangement.",
+    "materials": ["Tangram set (7 pieces)", "Outline cards showing target shapes", "Grid paper for recording solutions"],
+    "learning_objectives": [
+      "Compose and decompose geometric shapes",
+      "Understand that area is conserved through rearrangement",
+      "Develop spatial visualization skills",
+      "Recognize geometric properties through manipulation"
+    ],
+    "variations": [
+      "Use only 3-4 pieces to make simpler shapes",
+      "Create your own silhouette for others to solve",
+      "Use two tangram sets to build larger shapes"
+    ]
+  },
+  {
+    "id": "MATH-101-A06",
+    "name": "Symmetry Explorer",
+    "module_id": "MATH-101-M3",
+    "grade_range": ["2", "3", "4", "5", "6"],
+    "duration_minutes": 35,
+    "description": "Investigate symmetry in shapes, letters, and natural objects. Learners fold paper shapes to find lines of symmetry, predict the result of reflecting shapes across a line, and classify objects by their number of symmetry lines. Extend to rotational symmetry for advanced learners.",
+    "materials": ["Paper shapes for folding", "Mirrors or reflective surfaces", "Grid paper", "Colored pencils"],
+    "learning_objectives": [
+      "Identify lines of symmetry in 2D shapes",
+      "Predict the result of a reflection",
+      "Classify shapes by symmetry properties",
+      "Connect symmetry to real-world objects and art"
+    ],
+    "variations": [
+      "Create symmetric designs using paint and folding",
+      "Explore rotational symmetry with pattern blocks",
+      "Find symmetry in alphabet letters and classify them"
+    ]
+  },
+  {
+    "id": "MATH-101-A07",
+    "name": "Data Collection Survey Project",
+    "module_id": "MATH-101-M4",
+    "grade_range": ["3", "4", "5", "6", "7"],
+    "duration_minutes": 60,
+    "description": "Learners design a survey question, collect data from at least 20 respondents, organize results into a frequency table, and create multiple representations (bar graph, pie chart, pictograph). They write a short report describing what the data shows, including measures of center.",
+    "materials": ["Survey forms", "Graph paper", "Colored pencils or markers", "Calculator"],
+    "learning_objectives": [
+      "Design a clear survey question with categorical or numerical responses",
+      "Organize raw data into a frequency table",
+      "Create appropriate graphical representations",
+      "Calculate and interpret mean, median, and mode"
+    ],
+    "variations": [
+      "Compare results between two groups (boys vs. girls, grade 3 vs. grade 5)",
+      "Investigate whether the sample represents the larger population",
+      "Present findings to classmates and take questions"
+    ]
+  },
+  {
+    "id": "MATH-101-A08",
+    "name": "Probability Dice Experiment",
+    "module_id": "MATH-101-M4",
+    "grade_range": ["4", "5", "6", "7", "8"],
+    "duration_minutes": 40,
+    "description": "Roll two dice repeatedly (at least 50 trials), record the sum each time, and build a frequency distribution. Compare observed frequencies to theoretical probabilities. Discover why 7 is the most common sum and why 2 and 12 are rare. Introduces the law of large numbers.",
+    "materials": ["Two standard dice per pair", "Recording sheet with tally marks", "Graph paper for histogram", "Calculator"],
+    "learning_objectives": [
+      "Conduct a probability experiment with repeated trials",
+      "Record and organize experimental data",
+      "Compare experimental results to theoretical probability",
+      "Understand why some outcomes are more likely than others"
+    ],
+    "variations": [
+      "Use three dice and predict the most common sum",
+      "Compare results after 20, 50, and 100 trials to see convergence",
+      "Design a fair game and an unfair game using dice sums"
+    ]
+  },
+  {
+    "id": "MATH-101-A09",
+    "name": "Number Talks: Mental Math Strategies",
+    "module_id": "MATH-101-M1",
+    "grade_range": ["1", "2", "3", "4", "5"],
+    "duration_minutes": 20,
+    "description": "Present a computation problem (e.g., 27 + 38) and ask learners to solve it mentally, then share strategies. Record different approaches on the board. Celebrate multiple valid methods: counting on, decomposing, compensating, using known facts. Builds computational fluency and mathematical discourse.",
+    "materials": ["Whiteboard or chart paper", "Markers"],
+    "learning_objectives": [
+      "Develop flexible mental computation strategies",
+      "Explain mathematical reasoning clearly",
+      "Recognize that problems can be solved multiple ways",
+      "Listen to and evaluate others' strategies"
+    ],
+    "variations": [
+      "Use subtraction, multiplication, or division problems",
+      "Present estimation challenges (Is 48 x 21 closer to 1000 or 500?)",
+      "String related problems to build on each strategy (20+30, 25+35, 27+38)"
+    ]
+  },
+  {
+    "id": "MATH-101-A10",
+    "name": "Equation Balance Scale Simulation",
+    "module_id": "MATH-101-M2",
+    "grade_range": ["5", "6", "7", "8"],
+    "duration_minutes": 35,
+    "description": "Use a physical or digital balance scale to model equations. Place weights on both sides to represent expressions (e.g., 2x + 3 on the left, 11 on the right). Remove equal amounts from both sides to isolate the unknown. Builds intuition for algebraic manipulation as maintaining balance.",
+    "materials": ["Balance scale (physical or digital)", "Labeled weights or blocks", "Recording sheet for equations"],
+    "learning_objectives": [
+      "Model equations as balanced systems",
+      "Apply inverse operations to isolate unknowns",
+      "Understand that equal operations preserve equality",
+      "Translate between physical models and symbolic equations"
+    ],
+    "variations": [
+      "Solve equations with variables on both sides",
+      "Create your own balance puzzle for a partner",
+      "Progress to inequalities (what keeps the scale tipping one way?)"
+    ]
+  },
+  {
+    "id": "MATH-101-A11",
+    "name": "Area and Perimeter Optimization",
+    "module_id": "MATH-101-M3",
+    "grade_range": ["4", "5", "6", "7", "8"],
+    "duration_minutes": 40,
+    "description": "Given a fixed length of string (perimeter), learners explore what shape encloses the maximum area. Start with rectangles on grid paper, measure areas for different dimensions with the same perimeter. Extend to irregular shapes. Discover that a circle maximizes area for a given perimeter.",
+    "materials": ["String cut to fixed length", "Grid paper", "Rulers", "Scissors"],
+    "learning_objectives": [
+      "Distinguish between area and perimeter",
+      "Investigate the relationship between shape and enclosed area",
+      "Record and compare measurements systematically",
+      "Make and test conjectures about optimal shapes"
+    ],
+    "variations": [
+      "Reverse: fix the area and minimize perimeter",
+      "Explore 3D analogs (fixed surface area, maximize volume)",
+      "Connect to real-world fencing or packaging problems"
+    ]
+  },
+  {
+    "id": "MATH-101-A12",
+    "name": "Graph Critique and Bias Detection",
+    "module_id": "MATH-101-M4",
+    "grade_range": ["6", "7", "8", "9", "10"],
+    "duration_minutes": 35,
+    "description": "Examine graphs from news articles, advertisements, and social media that use misleading techniques: truncated axes, cherry-picked time ranges, 3D effects that distort proportions, or missing labels. Learners identify the misleading element, explain how it distorts the message, and redraw the graph accurately.",
+    "materials": ["Collection of misleading graphs (printed or projected)", "Graph paper", "Colored pencils", "Rulers"],
+    "learning_objectives": [
+      "Identify common techniques used to create misleading graphs",
+      "Explain how axis manipulation distorts data perception",
+      "Redraw misleading graphs with accurate representations",
+      "Critically evaluate data visualizations in media"
+    ],
+    "variations": [
+      "Create intentionally misleading graphs and challenge peers to spot the trick",
+      "Compare two graphs of the same data that tell different stories",
+      "Analyze political or commercial graphs and write a critique"
+    ]
+  }
+]
