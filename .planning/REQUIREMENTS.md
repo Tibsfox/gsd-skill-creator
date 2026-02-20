@@ -57,11 +57,11 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 
 ### Specialized & Deepening Packs
 
-- [ ] **PACK-26**: PHILO-101 (Philosophy) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
-- [ ] **PACK-27**: THEO-101 (Theology & Religion Studies) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
-- [ ] **PACK-28**: PE-101 (Physical Education & Movement) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
-- [ ] **PACK-29**: NATURE-101 (Nature Studies & Naturalism) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
-- [ ] **PACK-30**: DOMESTIC-101 (Home Economics & Life Skills) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
+- [x] **PACK-26**: PHILO-101 (Philosophy) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
+- [x] **PACK-27**: THEO-101 (Theology & Religion Studies) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
+- [x] **PACK-28**: PE-101 (Physical Education & Movement) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
+- [x] **PACK-29**: NATURE-101 (Nature Studies & Naturalism) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
+- [x] **PACK-30**: DOMESTIC-101 (Home Economics & Life Skills) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 - [ ] **PACK-31**: ART-101 (Visual Arts) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 - [ ] **PACK-32**: MUSIC-101 (Music & Sound) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
 - [ ] **PACK-33**: TRADE-101 (Trades & Applied Skills) — full suite: vision doc, modules YAML, activities JSON, assessment, resources, .skillmeta
@@ -181,11 +181,11 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 | PACK-23 | Phase 249 | Pending |
 | PACK-24 | Phase 249 | Pending |
 | PACK-25 | Phase 249 | Pending |
-| PACK-26 | Phase 250 | Pending |
-| PACK-27 | Phase 250 | Pending |
-| PACK-28 | Phase 250 | Pending |
-| PACK-29 | Phase 250 | Pending |
-| PACK-30 | Phase 250 | Pending |
+| PACK-26 | Phase 250 | Complete |
+| PACK-27 | Phase 250 | Complete |
+| PACK-28 | Phase 250 | Complete |
+| PACK-29 | Phase 250 | Complete |
+| PACK-30 | Phase 250 | Complete |
 | PACK-31 | Phase 251 | Pending |
 | PACK-32 | Phase 251 | Pending |
 | PACK-33 | Phase 251 | Pending |

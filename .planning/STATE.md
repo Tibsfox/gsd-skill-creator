@@ -10,12 +10,12 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 ## Current Position
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
-Phase: 248 of 254 (Applied Packs Batch 1)
-Plan: 4 of 5 complete (248-01, 248-02, 248-03, 248-04, 248-05)
-Status: In progress (pack creation)
-Last activity: 2026-02-20 — Completed 248-02 (DATA-101 Data Science & Analysis pack)
+Phase: 250 of 254 (Specialized Packs Batch 1)
+Plan: 5 of 5 complete (250-01 PHILO-101, 250-02 THEO-101, 250-03 PE-101, 250-04 NATURE-101, 250-05 DOMESTIC-101)
+Status: Complete (batch complete, proceeding to next phase)
+Last activity: 2026-02-20 — Completed 250-05 (DOMESTIC-101 Home Economics & Life Skills pack)
 
-Progress: [#################.] 76%
+Progress: [###################.] 79%
 
 ## Performance Metrics
 
@@ -54,6 +54,12 @@ Progress: [#################.] 76%
 | 248 | 03 | 45min | 2 | 7 |
 | 248 | 04 | 8min | 2 | 7 |
 | 248 | 05 | 6min | 2 | 7 |
+| 249 | 05 | 18min | 2 | 7 |
+| 250 | 02 | 10min | 2 | 7 |
+| 250 | 03 | 9min | 2 | 7 |
+| 250 | 01 | 9min | 2 | 7 |
+| 250 | 05 | 11min | 2 | 7 |
+| 250 | 04 | 13min | 2 | 7 |
 
 ## Accumulated Context
 
@@ -148,6 +154,38 @@ Progress: [#################.] 76%
 - [Phase 248-03]: 10 activities (2 per module) applicable to any target language; emphasizes authentic scenarios and real communication
 - [Phase 248-03]: Assessment framework uses ACTFL-aligned proficiency levels (Novice, Intermediate, Advanced, Superior) for consistency with language education standards
 - [Phase 248-03]: Prerequisite references: READ-101, COMM-101; enables future language-specific packs (Spanish-101, French-101, Mandarin-101, etc.)
+- [Phase 249-05]: DIGLIT-101 is applied_practical (not core_academic) — digital literacy is practical 21st-century competency
+- [Phase 249-05]: 5 modules for DIGLIT-101 (Digital Foundations, Information Literacy, Communication, Online Safety, Data & Algorithms) for comprehensive coverage
+- [Phase 249-05]: 20 activities (4 per module) emphasize judgment and critical thinking over tool proficiency
+- [Phase 249-05]: Prerequisite: READ-101; enables: CODE-101, DATA-101 (foundation for technical literacy)
+- [Phase 250-03]: PE-101 classification set to 'specialized' (not 'specialized_deepening' which is invalid in PackClassificationSchema)
+- [Phase 250-03]: 5 modules for PE-101: Movement Foundations, Fitness & Body Science, Sports/Games/Teamwork, Rhythm/Dance/Expression, Lifetime Wellness
+- [Phase 250-03]: 10 activities (2 per module) emphasizing inclusion, minimal equipment, and universal participation
+- [Phase 250-03]: Assessment focuses on personal growth and effort, never athletic ranking or body metrics
+- [Phase 250-02]: THEO-101 classified as specialized_deepening with theological_studies learning domain
+- [Phase 250-02]: 5 modules for THEO-101: Stories & Traditions, World Religions Survey, Sacred Texts & Interpretation, Religion Ethics & Society, Comparative Theology & Interfaith Dialogue
+- [Phase 250-02]: 12 activities (2-3 per module) all comparative and non-proselytizing; academic approach throughout
+- [Phase 250-02]: Content sensitivity protocol: sensitive_topic, diverse_beliefs, historical_conflict flags with mitigation strategies
+- [Phase 250-03]: NUTR-101 as recommended prior knowledge; enables nothing (terminal specialization)
+- [Phase 250-01]: PHILO-101 classified as specialized_deepening with philosophical_inquiry learning domain
+- [Phase 250-01]: 5 modules for PHILO-101: Wonder & Questioning, Logic & Reasoning, Ethics & Values, Knowledge & Truth, Aesthetics & Meaning
+- [Phase 250-01]: 12 activities (2-3 per module) emphasizing Socratic dialogue, discussion, and inquiry over memorization
+- [Phase 250-01]: Assessment values reasoning quality and process; never penalizes for reaching unpopular conclusions
+- [Phase 250-01]: CRIT-101 and READ-101 as recommended prior knowledge; enables THEO-101, LOG-101
+- [Phase 250-01]: Dedicated non-Western philosophy resource section covering Chinese, Indian, African, Indigenous, Islamic traditions
+- [Phase 250-05]: DOMESTIC-101 classified as specialized_deepening with life_skills learning domain
+- [Phase 250-05]: 5 modules for DOMESTIC-101: Kitchen Skills, Textiles & Clothing, Home Care & Organization, Money Management, Self-Sufficiency
+- [Phase 250-05]: M1-M4 as independent entry points; M5 (Self-Sufficiency) integrates skills from M1 and M3
+- [Phase 250-05]: 12 activities (2-4 per module) emphasizing common household materials and age-appropriate safety
+- [Phase 250-05]: Gender-neutral throughout: domestic competency as universal human requirement, not gendered role
+- [Phase 250-05]: NUTR-101 and ECON-101 as recommended prior knowledge; enables nothing (terminal specialization)
+- [Phase 250-05]: Assessment focused on practical competency (can you do it?) not theoretical knowledge
+- [Phase 250-04]: NATURE-101 classified as specialized_deepening with natural_history learning domain
+- [Phase 250-04]: 5 modules for NATURE-101: Outdoor Observation, Plants & Fungi, Animals & Insects, Ecosystems & Connections, Conservation & Citizen Science
+- [Phase 250-04]: 15 activities (3 per module) all outdoor-first using freely available natural materials
+- [Phase 250-04]: Nature journal as primary assessment artifact; assessment tracks observation quality, not memorization
+- [Phase 250-04]: SCI-101 and ENVR-101 as recommended prior knowledge; enables nothing (terminal specialization)
+- [Phase 250-04]: Citizen science integration: iNaturalist, eBird, and GLOBE Observer as real data platforms
 
 ### Key Context
 
@@ -173,9 +211,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed 248-03-PLAN.md (LANG-101 World Languages knowledge pack)
+Stopped at: Completed 250-05-PLAN.md (DOMESTIC-101 Home Economics & Life Skills pack)
 Resume file: None
 
 ## Next Up
 
-Phase 248 in progress: 248-01, 248-03, 248-04, 248-05 complete. Continue with 248-02 (WRITE-101 or other applied pack) or move to next phase.
+Phase 250 complete (all 5 plans done). Proceed to phase 251 (specialized packs batch 2) or next available phase.
