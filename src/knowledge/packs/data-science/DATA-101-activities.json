@@ -1,0 +1,286 @@
+[
+  {
+    "id": "DATA-101-A01",
+    "name": "Classroom Census Data Collection",
+    "module_id": "DATA-101-M1",
+    "grade_range": ["1", "2", "3", "4", "5"],
+    "duration_minutes": 30,
+    "description": "Conduct a classroom census: collect data about students' favorite color, number of pets, hours of sleep last night, distance from school, or any other attribute. Create a list or table with student names and data. Discuss how you decided what to measure. Did anyone refuse to answer? Did anyone give a silly answer? What does that tell us? Graph the results and describe patterns: which color is most popular? How much do our sleep hours vary? Discuss: Why collect census data instead of asking a few students?",
+    "materials": ["recording sheet or spreadsheet", "pencils", "sample questions list"],
+    "learning_objectives": [
+      "Collect data using a systematic method",
+      "Record data in a table",
+      "Identify patterns in a census",
+      "Understand advantages of complete data"
+    ],
+    "variations": [
+      "Preschool/K: Use pictures instead of words (colors, favorite animals)",
+      "Middle School: Add structured survey with multiple questions and discuss response rate"
+    ]
+  },
+  {
+    "id": "DATA-101-A02",
+    "name": "Weather Data Logger Project",
+    "module_id": "DATA-101-M1",
+    "grade_range": ["3", "4", "5", "6", "7"],
+    "duration_minutes": 15,
+    "description": "Over two weeks, record daily weather data: temperature (high and low), weather condition (sunny, cloudy, rainy), and one student observation (e.g., 'Did you need a jacket?'). Create a table with rows for dates and columns for each variable. At the end, create a graph showing temperature change over time. Calculate average temperature. Identify the warmest and coldest days. Look for patterns: did rainy days tend to be cooler? Did weekend weather differ from weekday weather? Discuss: how do weather services collect temperature data? Why measure it at a standard time each day?",
+    "materials": ["weather log sheet or spreadsheet", "thermometer (optional)", "link to weather service online", "graph paper"],
+    "learning_objectives": [
+      "Collect data over time systematically",
+      "Organize time-series data",
+      "Describe patterns in temporal data",
+      "Understand importance of consistent measurement"
+    ],
+    "variations": [
+      "Foundation: Record just one variable (sunny or rainy) daily",
+      "High School: Compare recorded data to official meteorological data; discuss measurement discrepancies"
+    ]
+  },
+  {
+    "id": "DATA-101-A03",
+    "name": "Survey Design & Bias Detection",
+    "module_id": "DATA-101-M1",
+    "grade_range": ["5", "6", "7", "8"],
+    "duration_minutes": 45,
+    "description": "Design a survey to answer a question: 'What's the favorite recess activity?' or 'How much homework is too much?' Write 5-10 questions. Administer to classmates. Then discuss: Who answered? Who didn't? Did the wording of questions influence answers? (Test this: ask half the class 'Do you like homework?' and the other half 'Homework is important — agree or disagree?' Compare responses.) Were there options we missed? Create a chart of responses. Discuss bias: would the results be different if we surveyed a different group (younger kids, teachers, parents)? What bias might exist in our survey?",
+    "materials": ["survey template", "pencils", "ways to administer (paper or digital)", "response collection sheet"],
+    "learning_objectives": [
+      "Design a survey with clear, unbiased questions",
+      "Administer survey to a group",
+      "Recognize how question wording influences answers",
+      "Identify potential sources of bias in surveys"
+    ],
+    "variations": [
+      "Elementary: Design simple yes/no questions",
+      "College: Add sampling strategy, confidence intervals, and hypothesis testing"
+    ]
+  },
+  {
+    "id": "DATA-101-A04",
+    "name": "Population vs. Sample Simulation",
+    "module_id": "DATA-101-M1",
+    "grade_range": ["6", "7", "8", "9"],
+    "duration_minutes": 45,
+    "description": "Fill a large jar with colored beads or balls (mixture of colors, e.g., 200 red, 100 blue, 50 green). This is the 'population.' Without opening the jar, students try to estimate the color distribution. Divide class into groups. Each group draws 20 beads without looking, records colors, and puts them back (sampling with replacement). Each group estimates the population distribution from their sample. Compare samples: do they all show the same colors? The same proportions? Why does the true population have 200 red, 100 blue, 50 green, but samples might show different proportions? Discuss: why sample instead of counting all beads? When is sampling the only option (e.g., polling voters, testing product quality)?",
+    "materials": ["large jar or container", "colored beads or balls (or buttons, candies, etc.)", "small cups for sampling", "recording sheet"],
+    "learning_objectives": [
+      "Understand sampling as a method to estimate population characteristics",
+      "Recognize sample variation",
+      "Compare sample results to known population",
+      "Understand when and why sampling is used"
+    ],
+    "variations": [
+      "Elementary: Use smaller jar, larger sample size for more stable results",
+      "High School: Calculate confidence interval from sample; discuss margin of error"
+    ]
+  },
+  {
+    "id": "DATA-101-A05",
+    "name": "Data Quality Audit",
+    "module_id": "DATA-101-M1",
+    "grade_range": ["5", "6", "7", "8"],
+    "duration_minutes": 40,
+    "description": "Given a data set (real or realistic), audit its quality. Look for: missing values (blanks), outliers (values that seem wrong), inconsistent entries (e.g., 'USA', 'US', 'united states' for the same country), typos, impossible values (age = 999, salary = 'N/A' where we need numbers). Create a report listing issues found. For each issue, discuss: is it a real problem or just unusual? How would we fix it? What decisions might be affected if we ignore these issues? Reflect: why is data quality important? Can 'dirty data' lead to wrong conclusions?",
+    "materials": ["data set (spreadsheet with deliberate quality issues)", "audit checklist", "tools to clean data if available"],
+    "learning_objectives": [
+      "Identify common data quality issues",
+      "Recognize how data quality affects analysis",
+      "Develop systematic approaches to data cleaning",
+      "Understand importance of data quality"
+    ],
+    "variations": [
+      "Elementary: Simpler data set with obvious errors",
+      "College: Use real data from open sources; teach data cleaning code"
+    ]
+  },
+  {
+    "id": "DATA-101-A06",
+    "name": "Mean vs. Median Explorer",
+    "module_id": "DATA-101-M2",
+    "grade_range": ["4", "5", "6", "7"],
+    "duration_minutes": 40,
+    "description": "Give students a data set: ages of students in a class (e.g., all 8th graders, all 9-10 years old, so 9,9,9,9,9,9,9,10,10,10). Calculate both mean and median. They should be similar. Now add one outlier: a 30-year-old substitute teacher is included in the 'class' data set. Recalculate mean and median. The mean jumps (from ~9.5 to ~12), but the median barely changes. Discuss: which measure better describes a typical student age? When would you use mean vs. median? Show another example where one is dramatically different from the other (e.g., salaries in a company where the CEO earns much more). Graph both data sets side by side.",
+    "materials": ["data set examples", "calculator or spreadsheet", "instructions for calculating mean and median", "graph paper or graphing tool"],
+    "learning_objectives": [
+      "Understand the difference between mean and median",
+      "Recognize when outliers affect mean more than median",
+      "Choose appropriate measures of center for different data sets"
+    ],
+    "variations": [
+      "Foundation: Use smaller data sets and very obvious outliers",
+      "High School: Add mode and calculate all three; discuss when to use each"
+    ]
+  },
+  {
+    "id": "DATA-101-A07",
+    "name": "Outlier Detective Challenge",
+    "module_id": "DATA-101-M2",
+    "grade_range": ["5", "6", "7", "8"],
+    "duration_minutes": 35,
+    "description": "Show a scatter plot or list of data values with one or more outliers: e.g., class test scores of 75, 78, 76, 72, 81, 77, 15 (one student scored 15). Challenge: identify the outlier(s). For each outlier, hypothesize why: Is it an error in recording? A student who didn't study? Someone who was sick? Is it a genuine rare event or a mistake? Discuss: should we remove outliers from analysis? Sometimes they're just errors; sometimes they're real and important. How would you investigate? What would happen to the mean, median, and range if we removed the 15? Emphasize: outliers require investigation, not automatic deletion.",
+    "materials": ["data set with clear outliers", "scatter plot or list", "investigation checklist"],
+    "learning_objectives": [
+      "Identify outliers in data",
+      "Hypothesize reasons for outliers",
+      "Understand when outliers are errors vs. genuine",
+      "Recognize impact of outliers on summaries"
+    ],
+    "variations": [
+      "Elementary: Very obvious outliers in small data sets",
+      "High School: Use box plots to formally identify outliers using 1.5 × IQR rule"
+    ]
+  },
+  {
+    "id": "DATA-101-A08",
+    "name": "Distribution Shape Investigation",
+    "module_id": "DATA-101-M2",
+    "grade_range": ["6", "7", "8", "9"],
+    "duration_minutes": 45,
+    "description": "Collect or analyze several different data sets and graph them as histograms or dot plots. Look for shapes: symmetric/normal (bell-shaped), skewed left (tail on left), skewed right (tail on right), bimodal (two peaks), uniform (flat). Examples: heights of students in a grade (probably roughly symmetric); test scores when most students do well but a few struggle (right-skewed); salaries in a company (right-skewed, with one CEO earning much more); number of siblings (possibly bimodal if some students are only children and others have many siblings). For each distribution, discuss: what does the shape tell us? Why might it have this shape? How does shape affect whether mean or median is better?",
+    "materials": ["multiple data sets", "graphing tools or graph paper", "distribution shape guide", "examples of different distributions"],
+    "learning_objectives": [
+      "Recognize different distribution shapes",
+      "Relate distribution shape to real-world context",
+      "Understand why distribution shape matters",
+      "Use shape to choose appropriate summaries"
+    ],
+    "variations": [
+      "Elementary: Compare just two simple distributions",
+      "College: Fit normal distributions and calculate standardized scores"
+    ]
+  },
+  {
+    "id": "DATA-101-A09",
+    "name": "Build a Dashboard from Survey Data",
+    "module_id": "DATA-101-M3",
+    "grade_range": ["5", "6", "7", "8"],
+    "duration_minutes": 60,
+    "description": "Conduct a class survey about favorite foods, hobbies, or reading preferences (or use existing survey data). Create a dashboard showing the results: multiple graphs on one page. Include: a bar chart (favorite food), a pie chart (reading preference), a line graph if applicable (how preferences vary by grade). Arrange graphs logically on the page. Add title and brief legend. Make design choices: what colors communicate the data effectively? Is the layout easy to follow? Share the dashboard and get feedback: does someone seeing it for the first time understand the results? Redesign based on feedback.",
+    "materials": ["survey data", "graphing tools (spreadsheet, Tableau, or online visualization tool)", "design principles guide", "feedback template"],
+    "learning_objectives": [
+      "Choose appropriate graph types for different variables",
+      "Combine multiple visualizations in one dashboard",
+      "Apply design principles to data visualization",
+      "Get and incorporate feedback on visual design"
+    ],
+    "variations": [
+      "Elementary: Single simple graph with title",
+      "High School: Add interactivity and drill-down capabilities"
+    ]
+  },
+  {
+    "id": "DATA-101-A10",
+    "name": "Misleading Graph Makeover",
+    "module_id": "DATA-101-M3",
+    "grade_range": ["5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 50,
+    "description": "Show students a misleading graph (or a collection of them). Examples: a graph with y-axis starting at 50 instead of 0 (makes small changes look dramatic); a pie chart with 3D effects (distorts areas); dual axes with different scales (makes unrelated trends look correlated). Challenge: identify what's misleading. Explain the problem. Then redesign the graph to show the data honestly. What changed? How does the redesigned version communicate differently? Discuss: is the misleading version always intentional? Sometimes it's careless. Why does choice of starting point matter? How can responsible visualization help instead of deceive?",
+    "materials": ["collection of misleading graphs (real-world examples)", "identification checklist", "redesign tools (paper and pencil, or software)"],
+    "learning_objectives": [
+      "Identify misleading visualization techniques",
+      "Understand why visualization choices affect perception",
+      "Redesign to communicate data honestly",
+      "Recognize intentional vs. unintentional misleading"
+    ],
+    "variations": [
+      "Elementary: Obvious misleading choices (missing labels, mislabeled axes)",
+      "College: Analyze why media outlets use misleading graphs"
+    ]
+  },
+  {
+    "id": "DATA-101-A11",
+    "name": "Coin Flip Probability Experiment",
+    "module_id": "DATA-101-M4",
+    "grade_range": ["4", "5", "6", "7"],
+    "duration_minutes": 30,
+    "description": "Flip a coin 10 times. Record heads vs. tails. Did you get exactly 5 and 5? Probably not. Flip 10 more times. Pool results with classmates. With 300 flips total, did you get closer to 50/50? Flip 100 more times (as a class). What proportion of flips were heads? Graph the cumulative proportion of heads as the number of flips increases. Does it settle toward 50%? This is the law of large numbers: randomness in small samples; consistency in large samples. Discuss: why would 100 flips give a more reliable estimate than 10? Does fairness mean exactly 50/50 in 10 flips?",
+    "materials": ["coins", "recording sheet", "graph paper or graphing tool"],
+    "learning_objectives": [
+      "Understand probability through experimentation",
+      "Observe randomness in small samples",
+      "Understand the law of large numbers",
+      "Graph and interpret probability results"
+    ],
+    "variations": [
+      "Foundation: Shorter flipping experiment; focus on unlikely vs. likely",
+      "High School: Calculate confidence intervals for true probability estimate"
+    ]
+  },
+  {
+    "id": "DATA-101-A12",
+    "name": "Taste Test Hypothesis Challenge",
+    "module_id": "DATA-101-M4",
+    "grade_range": ["6", "7", "8", "9"],
+    "duration_minutes": 45,
+    "description": "Formulate a hypothesis: 'Students can taste the difference between brand-name and generic cola.' Design a blind taste test. Have each student try two cups labeled A and B (one brand-name, one generic; order randomized). Ask: which tastes better? Or: can you identify which is which? Tally results. If it was pure guessing, how many would guess correctly by chance alone? (50% if two options.) Did more students guess correctly than chance would predict? Compute the percentage. Did students reliably distinguish? Discuss: why does the number of students matter? Is 7 out of 10 different from 70 out of 100? This is the beginning of hypothesis testing.",
+    "materials": ["two colas (brand and generic, or equivalent)", "small cups", "labels", "taste tester form", "statistical guide for interpretation"],
+    "learning_objectives": [
+      "Formulate a testable hypothesis",
+      "Design a controlled taste test",
+      "Analyze results and compare to chance",
+      "Understand the basis of hypothesis testing"
+    ],
+    "variations": [
+      "Elementary: Simpler comparison (prefer A or B)",
+      "High School: Teach formal hypothesis test and p-value"
+    ]
+  },
+  {
+    "id": "DATA-101-A13",
+    "name": "Privacy Audit of Your Apps",
+    "module_id": "DATA-101-M5",
+    "grade_range": ["7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 60,
+    "description": "Choose an app or website you use (social media, gaming, messaging). Read its privacy policy (or summary). Identify: what data does it collect? (Location? Messages? Photos? How long is it stored?) Who can access this data? (Company employees? Advertisers? Law enforcement?) What can the company do with your data? (Sell to advertisers? Use for recommendations?) Is your use of the app actually voluntary if you don't accept these terms? Create a report: what data does this app collect, and is that reasonable? Would you change your behavior knowing how your data is used? Discuss: is collecting location data without asking consent ever ethical? Should there be laws limiting what apps can collect?",
+    "materials": ["app privacy policy (link or printed)", "analysis worksheet", "comparison table of policies from similar apps"],
+    "learning_objectives": [
+      "Read and understand privacy policies",
+      "Identify data collection practices",
+      "Evaluate ethics of data collection",
+      "Consider privacy trade-offs in app use"
+    ],
+    "variations": [
+      "Middle School: Simpler privacy policies; focus on what data is collected",
+      "College: Add legal framework and regulatory context"
+    ]
+  },
+  {
+    "id": "DATA-101-A14",
+    "name": "Algorithmic Bias Case Study",
+    "module_id": "DATA-101-M5",
+    "grade_range": ["8", "9", "10", "11", "12"],
+    "duration_minutes": 60,
+    "description": "Study a real-world case of algorithmic bias: facial recognition accuracy varies by race; hiring algorithms discriminate against certain groups; predictive policing targets specific neighborhoods. Read background information. Identify: how did the bias enter the algorithm? (Training data was biased? The algorithm optimized for the wrong metric? Feedback loops reinforced bias?) Who was harmed? What should have been done differently? Discuss: can algorithms be 'fair'? What does fairness mean? Should biased algorithms be used even if they're more 'efficient' than human judgment? Write a position statement: if you were in charge, how would you address this bias?",
+    "materials": ["case study (ProPublica COMPAS algorithm, Google Photos, or Amazon hiring algorithm)", "background reading", "analysis guide", "position statement template"],
+    "learning_objectives": [
+      "Recognize how bias enters algorithms",
+      "Evaluate fairness in data-driven systems",
+      "Understand impact of algorithmic bias on individuals and groups",
+      "Propose solutions to algorithmic fairness"
+    ],
+    "variations": [
+      "Middle School: Simpler example, focus on recognizing bias",
+      "College: Deep technical dive into fairness metrics and trade-offs"
+    ]
+  },
+  {
+    "id": "DATA-101-A15",
+    "name": "Data Ownership Scenario Analysis",
+    "module_id": "DATA-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10"],
+    "duration_minutes": 50,
+    "description": "Present scenarios about data ownership: A fitness app collects your heart rate, steps, and sleep. Does *it* own this data about *your* body? A company conducts a survey; does it own the responses? Genetic testing companies store DNA data; who owns your genetic information? A hospital combines patient data for research; is that ethical without asking each patient? For each scenario, discuss: who should own the data? Who benefits from it? What could go wrong if it's misused? What rules or laws might be needed? Debate: should companies be allowed to sell anonymized data they collect?",
+    "materials": ["scenario cards or handouts", "stakeholder diagram template", "discussion guide", "laws/policies reference if available"],
+    "learning_objectives": [
+      "Identify stakeholders in data collection",
+      "Recognize tensions between different parties' interests",
+      "Evaluate data ownership and control",
+      "Propose fair data governance models"
+    ],
+    "variations": [
+      "Elementary: Simpler ownership questions (who owns class data?)",
+      "College: Add intellectual property and contractual frameworks"
+    ]
+  }
+]
