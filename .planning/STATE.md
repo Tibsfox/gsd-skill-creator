@@ -30,6 +30,7 @@ Progress: [####................] 20%
 | 244 | 02 | 3min | 3 | 7 |
 | 244 | 03 | 2min | 2 | 2 |
 | 245 | 01 | 7min | 2 | 7 |
+| 245 | 05 | 9min | 2 | 7 |
 
 ## Accumulated Context
 
@@ -63,6 +64,8 @@ Progress: [####................] 20%
 - Pack grade_levels stored as string arrays for Zod schema compatibility
 - 12 activities per pack (3 per module) exceeds 8-activity minimum for better coverage
 - Assessment rubric uses H2 headings: Beginning, Developing, Proficient, Advanced
+- PHYS-101 uses 5 modules (not 4) to include Modern Physics & Cosmology capstone
+- Phenomena-first pedagogy: experience before model before math at every level
 
 ### Key Context
 

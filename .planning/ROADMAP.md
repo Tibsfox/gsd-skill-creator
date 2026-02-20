@@ -176,7 +176,7 @@ Phases 243-244 sequential (infrastructure first). Phases 245-251 parallelizable 
 |-------|----------------|--------|-----------|
 | 243. Pack Runtime Infrastructure | 5/5 | Complete    | 2026-02-20 |
 | 244. Chipset & Agent Definitions | 3/3 | Complete    | 2026-02-20 |
-| 245. Core Academic Packs Batch 1 | 1/5 | In Progress|  |
+| 245. Core Academic Packs Batch 1 | 2/5 | In Progress|  |
 | 246. Core Academic Packs Batch 2 | 0/TBD | Not started | - |
 | 247. Core Academic Packs Batch 3 | 0/TBD | Not started | - |
 | 248. Applied Packs Batch 1 | 0/TBD | Not started | - |
