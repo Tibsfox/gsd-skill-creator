@@ -11,9 +11,9 @@ See: .planning/PROJECT.md (updated 2026-02-19)
 
 Milestone: v1.27 — GSD Foundational Knowledge Packs
 Phase: 254 of 254 (skill-creator Integration)
-Plan: 1 of 5 complete (254-02 AMIGA EventEnvelope bridge)
+Plan: 2 of 5 complete (254-01 Observation Types & Hooks, 254-02 AMIGA EventEnvelope bridge)
 Status: Phase 254 In Progress (Wave 1 executing in parallel)
-Last activity: 2026-02-20 — Completed 254-02 (KnowledgeEventBridge + KNOWLEDGE_EVENT_TYPES)
+Last activity: 2026-02-20 — Completed 254-01 (LearnerObservationSchema + ObservationEmitter)
 
 Progress: [######################] 94%
 
@@ -78,6 +78,7 @@ Progress: [######################] 94%
 | 253 | 04 | 5min | 1 | 2 |
 | 253 | 05 | 2min | 2 | 4 |
 | 254 | 02 | 6min | 2 | 3 |
+| 254 | 01 | 3min | 1 | 5 |
 
 ## Accumulated Context
 
@@ -230,6 +231,10 @@ Progress: [######################] 94%
 - [Phase 254-02]: Correlation ID for lifecycle tracking: use packId to group all events during learner's pack journey
 - [Phase 254-02]: Full observation as payload: spread entire LearnerObservation record for downstream context without secondary lookups
 - [Phase 254-02]: Synchronous schema validation: validate immediately, throw on failure rather than silently producing invalid messages
+- [Phase 254-01]: Discriminated union for observation types via Zod `z.discriminatedUnion('kind', [...])` for full type narrowing
+- [Phase 254-01]: ObservationEmitter auto-generates UUIDs and ISO timestamps on every emit for consistency
+- [Phase 254-01]: Error isolation in dispatch: one bad sink caught and logged, doesn't prevent other sinks from receiving events
+- [Phase 254-01]: Zod default values for assessment strengths/areasForGrowth; optional in input, guaranteed present in validated observation
 
 ### Key Context
 
