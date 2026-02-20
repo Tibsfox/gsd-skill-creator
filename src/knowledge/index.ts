@@ -151,3 +151,9 @@ export type { ConnectionEdge } from './connection-mapper.js';
 
 export { validatePackContent } from './content-validator.js';
 export type { PackValidationReport, FileValidationStatus } from './content-validator.js';
+
+// ============================================================================
+// AMIGA event bridge
+// ============================================================================
+
+export { KnowledgeEventBridge, KNOWLEDGE_EVENT_TYPES } from './event-bridge.js';
