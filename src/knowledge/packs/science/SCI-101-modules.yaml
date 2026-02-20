@@ -1,0 +1,309 @@
+---
+# SCI-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: SCI-101
+pack_name: "Science Method & Nature — Foundational Knowledge Pack"
+
+modules:
+  - id: SCI-101-M1
+    name: "Observation & Inquiry"
+    description: "Developing scientific observation skills, distinguishing observation from inference, asking testable questions, and recording findings systematically"
+
+    learning_outcomes:
+      - "Use multiple senses intentionally and systematically to notice details"
+      - "Distinguish observation (what I see) from inference (what I think it means)"
+      - "Create detailed, accurate records of observations"
+      - "Transform curiosity into structured, testable questions"
+      - "Classify and group observations by shared properties"
+
+    topics:
+      - "Sensory Awareness & Intentional Observation"
+      - "Observation vs. Inference"
+      - "Recording & Organizing Observations"
+      - "Asking Scientific Questions"
+      - "Classification & Taxonomy"
+      - "Quantitative vs. Qualitative Observation"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 30
+      elementary: 25
+      middle: 20
+      high: 10
+
+    prerequisite_modules: []
+
+    activities:
+      count: 6
+      examples:
+        - "Nature Walk Observation Journal"
+        - "Mystery Box Sensory Investigation"
+        - "Spot the Difference Challenge"
+        - "Classification Games"
+        - "Question Refinement Workshop"
+        - "Observation vs. Inference Sorting"
+
+    assessments:
+      - "Can student observe systematically using multiple senses?"
+      - "Does student distinguish observation from inference?"
+      - "Can student transform curiosity into testable questions?"
+      - "Does student record observations with sufficient detail?"
+
+  - id: SCI-101-M2
+    name: "Hypothesis & Experimental Design"
+    description: "Formulating testable hypotheses, identifying variables, designing controlled experiments, and understanding falsifiability"
+
+    learning_outcomes:
+      - "Craft testable, falsifiable hypotheses from observations"
+      - "Identify independent, dependent, and controlled variables"
+      - "Design fair tests with appropriate controls"
+      - "Make specific, measurable predictions"
+      - "Understand and apply the concept of falsifiability"
+
+    topics:
+      - "Hypothesis Formulation"
+      - "Variables & Controls"
+      - "Fair Testing & Experimental Design"
+      - "Prediction Specificity"
+      - "Falsifiability"
+      - "Experimental Ethics"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 35
+      high: 25
+
+    prerequisite_modules: [SCI-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Paper Airplane Hypothesis Test"
+        - "Plant Growth Experiment Design"
+        - "Hypothesis Sorting Activity"
+        - "The Unfair Experiment Detector"
+        - "Prediction Precision Practice"
+        - "Design Your Own Experiment"
+
+    assessments:
+      - "Can student formulate a testable hypothesis?"
+      - "Does student identify all relevant variables?"
+      - "Can student design a controlled experiment?"
+      - "Does student make specific, falsifiable predictions?"
+
+  - id: SCI-101-M3
+    name: "Data Collection & Analysis"
+    description: "Gathering evidence through measurement, organizing data in tables and graphs, identifying patterns, drawing conclusions, and understanding uncertainty"
+
+    learning_outcomes:
+      - "Use measurement tools correctly with appropriate precision"
+      - "Organize data in tables, charts, and graphs"
+      - "Calculate and interpret measures of central tendency"
+      - "Identify patterns, trends, and outliers in data"
+      - "Draw evidence-based conclusions with awareness of uncertainty"
+
+    topics:
+      - "Measurement Skills & Precision"
+      - "Data Organization & Representation"
+      - "Central Tendency & Variability"
+      - "Pattern Identification"
+      - "Drawing Conclusions from Data"
+      - "Uncertainty & Error Analysis"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 40
+      high: 30
+
+    prerequisite_modules: [SCI-101-M1, SCI-101-M2]
+
+    activities:
+      count: 6
+      examples:
+        - "Weather Data Collection Week"
+        - "Pendulum Period Measurement"
+        - "Graph Matching Challenge"
+        - "Outlier Detective"
+        - "The Multiple Trials Argument"
+        - "Data Story Construction"
+
+    assessments:
+      - "Can student collect data with appropriate precision?"
+      - "Does student choose appropriate data representations?"
+      - "Can student identify patterns and outliers?"
+      - "Does student draw evidence-based conclusions?"
+
+  - id: SCI-101-M4
+    name: "Scientific Communication & Argumentation"
+    description: "Sharing findings through writing, visual communication, oral presentation, peer review, and evidence-based argumentation"
+
+    learning_outcomes:
+      - "Write structured scientific reports with clear sections"
+      - "Create effective graphs, diagrams, and models"
+      - "Present findings clearly to diverse audiences"
+      - "Provide constructive, evidence-based peer review"
+      - "Construct CER (Claim-Evidence-Reasoning) arguments"
+
+    topics:
+      - "Scientific Writing"
+      - "Visual Communication"
+      - "Oral Presentation"
+      - "Peer Review"
+      - "Scientific Argumentation (CER)"
+      - "Revision as Strength"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 30
+      high: 25
+
+    prerequisite_modules: [SCI-101-M1, SCI-101-M3]
+
+    activities:
+      count: 6
+      examples:
+        - "Science Fair Poster Creation"
+        - "Peer Review Practice"
+        - "Claim-Evidence-Reasoning Exercises"
+        - "The Translation Challenge"
+        - "Graph Interpretation Gallery Walk"
+        - "Debate Format Investigation"
+
+    assessments:
+      - "Can student write a structured scientific report?"
+      - "Does student create clear, effective visualizations?"
+      - "Can student provide constructive peer review?"
+      - "Does student construct evidence-based arguments?"
+
+  - id: SCI-101-M5
+    name: "History & Nature of Science"
+    description: "Understanding how scientific knowledge evolves, distinguishing science from pseudoscience, exploring ethics in research, and recognizing diverse contributions"
+
+    learning_outcomes:
+      - "Explain how scientific knowledge changes through paradigm shifts"
+      - "Apply demarcation criteria to evaluate claims as scientific or not"
+      - "Discuss ethical responsibilities in scientific research"
+      - "Recognize diverse contributions to scientific progress"
+      - "Understand the role of failure and revision in science"
+
+    topics:
+      - "Science as a Human Endeavor"
+      - "How Scientific Knowledge Changes"
+      - "The Role of Failure in Science"
+      - "Science vs. Pseudoscience"
+      - "Ethics & Responsibility in Science"
+      - "Diverse Contributions to Science"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 15
+      middle: 25
+      high: 30
+
+    prerequisite_modules: [SCI-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "What Changed? Case Studies"
+        - "Science vs. Not-Science Sorting"
+        - "The Replication Challenge"
+        - "Scientist Biography Research"
+        - "Ethics Scenario Discussions"
+        - "Timeline of Understanding"
+
+    assessments:
+      - "Can student explain how scientific understanding evolves?"
+      - "Does student apply demarcation criteria consistently?"
+      - "Can student discuss ethics in science thoughtfully?"
+      - "Does student recognize diverse contributions to science?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Scientific Inquiry"
+    description: "Ability to move through the full inquiry cycle: observe, question, hypothesize, test, analyze, conclude, communicate"
+    assessed_in: [SCI-101-M1, SCI-101-M2, SCI-101-M3, SCI-101-M4]
+
+  - name: "Evidence-Based Reasoning"
+    description: "Habit of supporting claims with evidence, acknowledging uncertainty, and changing conclusions when warranted"
+    assessed_in: [SCI-101-M2, SCI-101-M3, SCI-101-M4, SCI-101-M5]
+
+  - name: "Critical Evaluation"
+    description: "Ability to evaluate claims, experimental designs, and data analyses for validity, bias, and reliability"
+    assessed_in: [SCI-101-M2, SCI-101-M3, SCI-101-M4, SCI-101-M5]
+
+  - name: "Scientific Communication"
+    description: "Ability to explain scientific ideas clearly in writing, visually, and orally to diverse audiences"
+    assessed_in: [SCI-101-M1, SCI-101-M3, SCI-101-M4]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4, with M5 as enrichment throughout"
+    rationale: "Follows the natural inquiry cycle: observe, hypothesize, collect data, communicate. History of science adds depth at any stage."
+
+  - name: "Spiral Pathway"
+    description: "Revisit all five modules repeatedly at increasing depth and sophistication"
+    rationale: "Scientific skills deepen with practice. A second pass through observation after learning data analysis produces richer observations."
+
+  - name: "Interest-Led Pathway"
+    description: "Choose module based on interest; M1 is prerequisite foundation only"
+    rationale: "A learner fascinated by the history of science might start with M5 while building observation skills through M1 as needed."
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same introduction structure: What It Teaches, Interactive Elements, Technical Implementation Notes"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Interactive elements follow a consistent template across all modules"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure (Beginning, Developing, Proficient, Advanced) across all modules"
+    cached: true
+
+  - pattern: "Parent Guidance"
+    description: "Parent guidance follows the same question-and-encouragement format throughout"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner distinguishes observation from inference spontaneously"
+    - "When learner identifies variables in everyday situations"
+    - "When learner asks 'How could we test that?' without prompting"
+    - "When learner changes conclusions based on new evidence"
+    - "When learner provides constructive peer review"
+
+  pattern_detection:
+    - "Effective observation protocols"
+    - "Successful experimental design strategies"
+    - "Clear data analysis workflows"
+    - "Constructive peer review techniques"
+
+  skill_promotion:
+    - "Promote systematic observation patterns to reusable skills"
+    - "Create experimental design templates from successful investigations"
+    - "Build data analysis toolkits from observed successes"
+    - "Develop peer review frameworks from effective feedback patterns"
+
+# This YAML defines the modular structure for the SCI-101 pack and enables
+# skill-creator to orchestrate learning experiences centered on scientific inquiry.
