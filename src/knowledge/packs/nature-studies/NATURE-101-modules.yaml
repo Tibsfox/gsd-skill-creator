@@ -1,0 +1,306 @@
+# NATURE-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: NATURE-101
+pack_name: "Nature Studies & Naturalism -- Foundational Knowledge Pack"
+
+modules:
+  - id: NATURE-101-M1
+    name: "Outdoor Observation"
+    description: "Field skills, nature journaling, using all senses systematically, weather awareness, and the discipline of patient outdoor observation"
+
+    learning_outcomes:
+      - "Observe natural phenomena systematically using all five senses"
+      - "Maintain a nature journal with accurate sketches, measurements, and questions"
+      - "Demonstrate patience and sustained attention during outdoor observation"
+      - "Record weather conditions and connect them to biological activity"
+      - "Distinguish between looking and seeing -- notice details others miss"
+
+    topics:
+      - "Sensory Observation: Sight, Sound, Touch, Smell, and Taste (where safe)"
+      - "Nature Journaling: Sketching, Labeling, Measuring, Questioning"
+      - "The Sit Spot Practice: Patient Sustained Observation"
+      - "Weather Awareness: Clouds, Wind, Temperature, Precipitation"
+      - "Orientation: Compass, Sun Position, Landmarks"
+      - "Seasonal Awareness: Phenological Cycles"
+      - "Field Safety and Outdoor Ethics"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 20
+      high: 15
+
+    prerequisite_modules: []
+
+    activities:
+      count: 3
+      examples:
+        - "Sit Spot -- 15 Minutes of Silence"
+        - "Nature Journal First Entry"
+        - "Sensory Walk"
+
+    assessments:
+      - "Can the learner sit still and observe productively for 15+ minutes?"
+      - "Does the nature journal contain accurate sketches with labels and questions?"
+      - "Can the learner describe weather conditions and connect them to animal/plant activity?"
+      - "Does the learner notice details that others miss?"
+
+  - id: NATURE-101-M2
+    name: "Plants & Fungi"
+    description: "Identification of trees, wildflowers, grasses, and fungi; understanding life cycles, seasonal changes, seed dispersal, and the ecological roles of the green world"
+
+    learning_outcomes:
+      - "Identify at least 10 local tree species by bark, leaf, and silhouette"
+      - "Identify at least 10 local wildflowers by petal count, color, and habitat"
+      - "Recognize major fungal groups and explain their role as decomposers"
+      - "Describe the seasonal cycle of plants: dormancy, growth, flowering, fruiting, senescence"
+      - "Understand seed dispersal mechanisms and explain why they matter"
+
+    topics:
+      - "Tree Identification: Bark, Leaf Shape, Branching, Silhouette"
+      - "Wildflower Identification: Petal Count, Color, Habitat, Bloom Time"
+      - "Grasses, Ferns, Mosses, and Lichens"
+      - "Fungi: Mushrooms, Bracket Fungi, Molds, Yeasts"
+      - "Seeds, Fruits, and Dispersal Mechanisms"
+      - "Seasonal Plant Cycles: Bud Break, Flowering, Fruiting, Leaf Drop, Dormancy"
+      - "Basic Plant Anatomy: Roots, Stems, Leaves, Flowers"
+      - "Edible and Medicinal Plants (with Safety)"
+      - "Invasive Plants and Ecological Impacts"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 30
+      high: 25
+
+    prerequisite_modules: [NATURE-101-M1]
+
+    activities:
+      count: 3
+      examples:
+        - "Tree Identification Walk"
+        - "Seed Collection & Sprouting"
+        - "Fungus Hunt"
+
+    assessments:
+      - "Can the learner identify 10+ local trees and explain their seasonal cycles?"
+      - "Can the learner identify 10+ wildflowers and describe their habitat preferences?"
+      - "Does the learner understand the ecological role of fungi as decomposers?"
+      - "Can the learner describe seed dispersal mechanisms and their adaptive significance?"
+
+  - id: NATURE-101-M3
+    name: "Animals & Insects"
+    description: "Bird watching, insect study, mammal tracking, animal behavior observation, and the ethics of wildlife study"
+
+    learning_outcomes:
+      - "Identify at least 15 local bird species by sight and sound"
+      - "Recognize major insect orders and understand complete vs. incomplete metamorphosis"
+      - "Read mammal tracks and signs: footprints, scat, trails, dens, feeding marks"
+      - "Observe and describe animal behavior: feeding, nesting, territory, migration"
+      - "Practice ethical wildlife observation: appropriate distance, minimal disturbance"
+
+    topics:
+      - "Bird Identification: Sight, Sound, Flight Pattern, Habitat"
+      - "Bird Behavior: Singing, Nesting, Feeding, Migration, Territory"
+      - "Insect Orders: Beetles, Butterflies, Bees, Flies, Dragonflies, Ants"
+      - "Insect Life Cycles: Complete and Incomplete Metamorphosis"
+      - "Mammal Tracking: Footprints, Scat, Trails, Dens, Feeding Signs"
+      - "Reptiles and Amphibians: Snakes, Lizards, Turtles, Frogs, Salamanders"
+      - "Nocturnal Animals: Owls, Bats, Moths, Fireflies"
+      - "Animal Behavior Observation: Ethograms and Field Notes"
+      - "Ethics of Wildlife Observation: Distance, Disturbance, Respect"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 35
+      high: 25
+
+    prerequisite_modules: [NATURE-101-M1]
+
+    activities:
+      count: 3
+      examples:
+        - "Backyard Bird Count"
+        - "Bug Hotel Builder"
+        - "Night Walk"
+
+    assessments:
+      - "Can the learner identify 15+ local bird species by sight and sound?"
+      - "Can the learner recognize major insect orders and explain their life cycles?"
+      - "Can the learner read mammal tracks and signs in the field?"
+      - "Does the learner practice ethical observation (distance, minimal disturbance)?"
+
+  - id: NATURE-101-M4
+    name: "Ecosystems & Connections"
+    description: "Food webs, water and nutrient cycling, soil ecology, biomes, ecological relationships, succession, and the interconnection of all living things"
+
+    learning_outcomes:
+      - "Construct food webs showing producers, herbivores, predators, and decomposers"
+      - "Explain energy flow through trophic levels and the role of decomposition"
+      - "Describe the water cycle and nutrient cycling at the local ecosystem level"
+      - "Identify ecological relationships: predation, mutualism, parasitism, competition"
+      - "Understand ecological succession and how ecosystems change after disturbance"
+
+    topics:
+      - "Food Webs and Trophic Levels"
+      - "Energy Flow Through Ecosystems"
+      - "Water Cycle at the Local Level"
+      - "Soil Ecology: Organisms, Decomposition, Nutrient Cycling"
+      - "Biomes and Habitats: What Makes Each Ecosystem Unique"
+      - "Ecological Relationships: Predation, Competition, Mutualism, Parasitism, Commensalism"
+      - "Succession: How Ecosystems Change Over Time"
+      - "Keystone Species and Their Outsized Effects"
+      - "Seasonal Cycles and Ecological Drivers"
+      - "Microhabitats: Under Rocks, Inside Logs, at Pond Edges"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 25
+      middle: 35
+      high: 30
+
+    prerequisite_modules: [NATURE-101-M1, NATURE-101-M2, NATURE-101-M3]
+
+    activities:
+      count: 3
+      examples:
+        - "Food Web Card Game"
+        - "Decomposition Observation Station"
+        - "Stream Study"
+
+    assessments:
+      - "Can the learner construct an accurate food web for a local ecosystem?"
+      - "Can the learner explain energy flow and the role of decomposers?"
+      - "Does the learner recognize ecological relationships in the field?"
+      - "Can the learner describe how ecosystems change through succession?"
+
+  - id: NATURE-101-M5
+    name: "Conservation & Citizen Science"
+    description: "Habitat stewardship, invasive species management, citizen science data collection, restoration techniques, and contributing real data to real conservation science"
+
+    learning_outcomes:
+      - "Identify major threats to local ecosystems: habitat loss, pollution, invasives, climate change"
+      - "Contribute quality data to citizen science platforms (iNaturalist, eBird, GLOBE)"
+      - "Identify at least 3-5 invasive species in the local area and explain their impacts"
+      - "Participate in habitat restoration activities"
+      - "Articulate an evidence-based land ethic connecting knowledge to responsibility"
+
+    topics:
+      - "Threats to Ecosystems: Habitat Loss, Fragmentation, Pollution, Climate Change"
+      - "Invasive Species: Identification, Impacts, Management"
+      - "Citizen Science Platforms: iNaturalist, eBird, GLOBE Observer"
+      - "Data Collection Protocols: Standardized Methods, Repeatable Observations"
+      - "Habitat Restoration: Native Planting, Invasive Removal, Corridor Creation"
+      - "Environmental Ethics: The Land Ethic, Indigenous Knowledge, Intergenerational Responsibility"
+      - "Local Conservation: Watershed Health, Protected Areas, Land Trusts"
+      - "Career Paths in Natural History and Conservation"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 35
+
+    prerequisite_modules: [NATURE-101-M4]
+
+    activities:
+      count: 3
+      examples:
+        - "Citizen Science Data Submission"
+        - "Trail Clean-Up & Habitat Survey"
+        - "Invasive Species Survey"
+
+    assessments:
+      - "Can the learner submit quality observations to citizen science platforms?"
+      - "Can the learner identify local invasive species and explain their impacts?"
+      - "Has the learner participated in habitat restoration or conservation activities?"
+      - "Does the learner articulate why ecological knowledge carries stewardship responsibility?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Naturalist Observation"
+    description: "Ability to observe carefully, notice details, and record findings accurately"
+    assessed_in: [NATURE-101-M1, NATURE-101-M2, NATURE-101-M3, NATURE-101-M4, NATURE-101-M5]
+
+  - name: "Species Identification"
+    description: "Ability to identify plants, animals, fungi, and insects using field marks and guides"
+    assessed_in: [NATURE-101-M2, NATURE-101-M3, NATURE-101-M5]
+
+  - name: "Ecological Thinking"
+    description: "Ability to see connections between organisms and understand ecosystem-level patterns"
+    assessed_in: [NATURE-101-M3, NATURE-101-M4, NATURE-101-M5]
+
+  - name: "Nature Journaling"
+    description: "Ability to maintain a detailed, accurate, and reflective nature journal"
+    assessed_in: [NATURE-101-M1, NATURE-101-M2, NATURE-101-M3, NATURE-101-M4]
+
+  - name: "Stewardship Ethic"
+    description: "Understanding that ecological knowledge carries responsibility to protect wild places"
+    assessed_in: [NATURE-101-M4, NATURE-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 (Observation) -> M2 (Plants) & M3 (Animals) in parallel -> M4 (Ecosystems) -> M5 (Conservation)"
+    rationale: "Observation skills are foundational; plants and animals can be studied in parallel; ecosystems require knowledge of both; conservation requires ecosystem understanding"
+
+  - name: "Seasonal Pathway"
+    description: "Follow the seasons: spring M2 (plants emerging), summer M3 (animals active), autumn M4 (ecosystem cycles), winter M5 (conservation planning), year-round M1 (journaling)"
+    rationale: "Aligns learning with what is observable outdoors at each time of year"
+
+  - name: "Interest-Led Pathway"
+    description: "Start with the learner's passion (birds, trees, bugs, mushrooms) and branch outward"
+    rationale: "A child fascinated by birds dives into M3, naturally extends into M4 (food webs), then M5 (bird conservation), revisiting M1 skills throughout"
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow same introduction structure: What It Teaches, Interactive Elements, Exploration Point"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "All activities follow consistent template: outdoor-first, natural materials, journal-integrated"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure: Beginning, Developing, Proficient, Advanced"
+    cached: true
+
+  - pattern: "Field Guide Integration"
+    description: "Every module integrates field guide usage and species identification skills"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner notices ecological details others miss"
+    - "When learner makes accurate field identifications without guidance"
+    - "When learner connects individual observations to ecosystem patterns"
+    - "When learner's nature journal shows increasing detail and sophistication"
+    - "When learner asks investigable questions about natural phenomena"
+
+  pattern_detection:
+    - "Developing naturalist eye: observation depth increasing over time"
+    - "Identification confidence: species repertoire growth trajectory"
+    - "Ecological thinking: connections between species-level and system-level observations"
+    - "Seasonal awareness: learner tracking phenological patterns"
+
+  skill_promotion:
+    - "Promote effective journaling techniques to reusable habits"
+    - "Create species identification toolkits for different taxonomic groups"
+    - "Build observation protocols from successful field methods"
+    - "Capture seasonal awareness patterns as calendar-triggered skills"
