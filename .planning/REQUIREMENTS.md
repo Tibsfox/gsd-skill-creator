@@ -11,8 +11,8 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 
 - [x] **RUNTIME-01**: Zod schemas for KnowledgePack, PackModule, PackActivity, Assessment, LearningOutcome, GradeLevel, LearningPathway, and PackDependency types
 - [x] **RUNTIME-02**: .skillmeta YAML parser with Zod validation producing typed KnowledgePack records
-- [ ] **RUNTIME-03**: Pack registry supporting register, lookup by ID, list all, list by category, list by tier, and search by tags
-- [ ] **RUNTIME-04**: Module loader reading vision.md, modules.yaml, activities.json, assessment.md, and resources.md from pack directories
+- [x] **RUNTIME-03**: Pack registry supporting register, lookup by ID, list all, list by category, list by tier, and search by tags
+- [x] **RUNTIME-04**: Module loader reading vision.md, modules.yaml, activities.json, assessment.md, and resources.md from pack directories
 - [x] **RUNTIME-05**: Pack dependency resolver computing prerequisite chains via topological sort with cycle detection
 - [x] **RUNTIME-06**: Prerequisite validator checking if learner meets entry requirements for a given pack or module
 - [x] **RUNTIME-07**: Grade-level router suggesting appropriate entry point based on learner level and prior knowledge
@@ -144,8 +144,8 @@ Requirements for v1.27 — GSD Foundational Knowledge Packs. Each maps to roadma
 |-------------|-------|--------|
 | RUNTIME-01 | Phase 243 | Complete |
 | RUNTIME-02 | Phase 243 | Complete |
-| RUNTIME-03 | Phase 243 | Pending |
-| RUNTIME-04 | Phase 243 | Pending |
+| RUNTIME-03 | Phase 243 | Complete |
+| RUNTIME-04 | Phase 243 | Complete |
 | RUNTIME-05 | Phase 243 | Complete |
 | RUNTIME-06 | Phase 243 | Complete |
 | RUNTIME-07 | Phase 243 | Complete |
