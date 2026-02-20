@@ -1,0 +1,173 @@
+# GSD Skill Metadata
+pack_id: TRADE-101
+pack_name: "Trades & Applied Skills — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: specialized_deepening
+learning_domain: trades_and_applied_skills
+
+# Content Description
+description: |
+  Skilled trades as dignified, intellectually demanding work. Woodworking, electrical,
+  plumbing, welding, automotive, and construction — the professions that build and
+  maintain civilization. This pack teaches tool safety and mastery, material properties,
+  precision measurement, joining methods, and systems thinking. Not a fallback from
+  academics but a parallel path requiring spatial reasoning, problem-solving, material
+  science, and respect for real dangers. Building things with your hands is building
+  understanding of how the world works.
+
+short_description: "Tool mastery, safety culture, hands-on project completion: woodworking, electrical, plumbing, welding, construction"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Trades Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - MATH-101
+  - PHYS-101
+  - ENGR-101
+
+# What Enables
+enables: []
+
+# Learning Outcomes
+primary_learning_outcomes:
+  - "Safely identify, handle, maintain, and use hand and power tools"
+  - "Measure with precision and understand tolerances"
+  - "Read and create basic technical drawings"
+  - "Plan and execute multi-step projects from conception to completion"
+  - "Understand electrical circuits, plumbing systems, and structural principles"
+  - "Troubleshoot failures and solve problems in the physical world"
+  - "Recognize and prevent hazards; follow safety protocols always"
+
+# Content Structure
+content_files:
+  vision: TRADE-101-vision.md
+  modules: TRADE-101-modules.yaml
+  activities: TRADE-101-activities.json
+  assessment: TRADE-101-assessment.md
+  resources: TRADE-101-resources.md
+
+# Age & Grade Levels
+age_range: [5, 18]
+grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Content Descriptors
+content_descriptors:
+  - hands_on_tools
+  - project_based
+  - safety_culture
+  - real_materials
+  - skill_focused
+  - applied_practical
+  - career_exploration
+  - multidisciplinary
+
+# Assessment Strategy
+assessment:
+  primary: "Competency-based: Can student perform the task safely and correctly?"
+  rubrics: "Beginning, Developing, Proficient, Advanced — emphasizing safety first"
+  portfolio: "Students maintain records of projects completed and skills demonstrated"
+  performance: "Real project completion with durability and appearance standards"
+
+# Pedagogical Approach
+pedagogical_approach: |
+  Hands-on, scaffolded practice with real materials under supervision. Students work with
+  actual tools, materials, and problems. Measurement before cutting. Planning before
+  assembly. Safety protocols before tool use. Emphasis on why rules exist, not just
+  memorization. Learning through making, fixing, and troubleshooting. Progression from
+  simple to complex, foundation to specialization.
+
+# Prerequisite Knowledge Detail
+prerequisite_knowledge_detail: |
+  MATH-101 (measurement, fractions, geometry, calculation) supports precision work across
+  all modules. PHYS-101 (force, leverage, materials, electricity) provides conceptual
+  foundation. ENGR-101 (technical drawing, systems thinking) supports project planning and
+  understanding how systems interconnect. TRADE-101 does not require these but benefits
+  significantly from them.
+
+# Teaching Notes
+teaching_notes: |
+  Supervision is essential. Tools are dangerous. Safety is non-negotiable. Students need
+  access to real tools, real materials, and real workspace. Module 1 (Tools, Safety,
+  Workshop Practice) must come first and be refreshed constantly. Projects must produce
+  real outcomes: a working birdhouse, a functional circuit, plumbing without leaks, a
+  welded piece that holds. Emphasize diversity: trades skills are for everyone.
+
+# Tags
+tags:
+  - trades
+  - applied-skills
+  - hands-on
+  - project-based
+  - safety-focused
+  - career-pathway
+  - skill-development
+  - woodworking
+  - electrical
+  - plumbing
+  - welding
+  - practical-skills
+
+# Safety Considerations
+safety_considerations: |
+  This pack involves real tools and real danger. Parent/guardian permission required.
+  Supervision by trained adult always required. PPE mandatory. Emergency procedures
+  established. First aid available. All activities selected for age-appropriateness.
+  No activities beyond what professional instructors would allow at given age level.
+
+# Curriculum Alignment
+curriculum_alignment:
+  - "Career and Technical Education (CTE) Standards"
+  - "Next Generation Science Standards (NGSS) — Engineering Design"
+  - "Common Core Math Standards — Measurement and Geometry"
+  - "Apprenticeship Readiness Standards"
+
+# GSD Integration
+gsd_integration:
+  dashboard_display:
+    icon: wrench
+    color: "#795548"
+    position: Specialized
+    category: Applied Skills
+
+  chip_set_agent: kp-applied-generator
+  availability: "v1.27+"
+
+# Metadata Quality
+metadata_quality:
+  completeness: 100
+  verification_date: "2026-02-20"
+  verified_by: executor-251-03
+
+# Notes for Implementers
+implementation_notes: |
+  Requires dedicated shop space with tools, materials, and workbenches. Instructor must
+  have trades background or co-teach with practiced tradesperson. Budget for materials
+  and tool maintenance. Build relationships with local tradespeople for mentorship and
+  apprenticeship connections. Celebrate projects visibly — they matter.
+
+# Related Resources
+related_packs:
+  - MATH-101
+  - PHYS-101
+  - ENGR-101
+  - SCI-101
+
+# Revision History
+revisions:
+  - version: 1.0.0
+    date: "2026-02-20"
+    notes: "Initial TRADE-101 pack creation with 5 modules, 10 activities, comprehensive vision"
