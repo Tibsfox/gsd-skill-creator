@@ -3,7 +3,8 @@
  *
  * Single entry point for all Den module functionality: type schemas,
  * ISA encoder/decoder, filesystem bus operations, health metrics,
- * pruning, the dispatcher agent, the coordinator agent, and the relay agent.
+ * pruning, the dispatcher agent, the coordinator agent, the relay agent,
+ * and the monitor agent.
  *
  * Usage:
  *   import { createDispatcher, createRelay, sendMessage, BusConfigSchema } from './den/index.js';
@@ -78,3 +79,15 @@ export {
   type PositionStatus, type StatusReport,
   type RelayConfig, type StatusReportParams,
 } from './relay.js';
+
+// Monitor
+export {
+  MonitorConfigSchema, BudgetSnapshotSchema, AlertLevelSchema,
+  ConsumptionRateSchema, BudgetAlertSchema, MonitorEntrySchema,
+  ALERT_THRESHOLDS,
+  trackConsumption, calculateAlertLevel, calculateConsumptionRate,
+  checkBudget, appendMonitorEntry, readMonitorLog,
+  Monitor, createMonitor,
+  type AlertLevel, type BudgetSnapshot, type ConsumptionRate,
+  type BudgetAlert, type MonitorEntry, type MonitorConfig,
+} from './monitor.js';
