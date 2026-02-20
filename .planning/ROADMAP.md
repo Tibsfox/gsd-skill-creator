@@ -229,10 +229,10 @@ Plans:
   - Wave 2: 254-03 (pattern detection), 254-04 (pathway adaptation) [parallel, depends on 254-01]
   - Wave 3: 254-05 (activity scaffolding + approach promotion + barrel exports) [depends on all]
 Plans:
-- [ ] 254-01-PLAN.md — Observation type schemas, emitter class, and test suite
+- [x] 254-01-PLAN.md — Observation type schemas, emitter class, and test suite (completed 2026-02-20)
 - [x] 254-02-PLAN.md — AMIGA EventEnvelope bridge for knowledge events (completed 2026-02-20)
-- [ ] 254-03-PLAN.md — Learning pattern detection engine
-- [ ] 254-04-PLAN.md — Learning pathway adaptation engine
+- [x] 254-03-PLAN.md — Learning pattern detection engine (completed 2026-02-20)
+- [x] 254-04-PLAN.md — Learning pathway adaptation engine (completed 2026-02-20)
 - [ ] 254-05-PLAN.md — Activity scaffolding, approach promotion, and barrel exports
 
 ## Progress
@@ -253,4 +253,4 @@ Phases 243-244 sequential (infrastructure first). Phases 245-251 parallelizable 
 | 251. Specialized Packs Batch 2 | 0/5 | Complete    | 2026-02-20 |
 | 252. Pack Metadata & Validation | 0/6 | Complete    | 2026-02-20 |
 | 253. GSD-OS Dashboard | 5/5 | Complete    | 2026-02-20 |
-| 254. skill-creator Integration | 1/5 | In Progress | 2026-02-20 |
+| 254. skill-creator Integration | 4/5 | In Progress | 2026-02-20 |
