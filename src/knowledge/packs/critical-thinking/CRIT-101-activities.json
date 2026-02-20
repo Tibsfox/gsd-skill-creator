@@ -1,0 +1,202 @@
+[
+  {
+    "id": "CRIT-101-A01",
+    "name": "Claim Sorting Game (Fact vs. Opinion vs. Prediction)",
+    "module_id": "CRIT-101-M1",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 30,
+    "description": "Learners receive cards with statements and sort them into three categories: fact (can be verified with evidence), opinion (personal preference or value judgment), and prediction (claim about the future based on evidence). Includes deliberately ambiguous edge cases that generate productive disagreement and discussion. After sorting, learners compare their categorizations with partners and must justify each placement using specific criteria.",
+    "materials": ["Statement cards (30-40 diverse claims)", "Sorting mat with three columns: Fact, Opinion, Prediction", "Discussion prompt sheet", "Pencils for recording reasoning"],
+    "learning_objectives": [
+      "Distinguish factual claims from opinions and predictions",
+      "Recognize that some statements are difficult to categorize and explain why",
+      "Justify categorization decisions using specific criteria",
+      "Understand that facts are verifiable, opinions are evaluative, and predictions are evidence-based expectations"
+    ],
+    "variations": [
+      "Add a fourth category: 'Uncertain / Needs More Information' for ambiguous claims",
+      "Use statements from current news headlines instead of prepared cards",
+      "Competitive version: teams race to sort 20 cards correctly with justifications"
+    ]
+  },
+  {
+    "id": "CRIT-101-A02",
+    "name": "Source Reliability Ranking",
+    "module_id": "CRIT-101-M1",
+    "grade_range": ["5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 40,
+    "description": "Given a specific claim (e.g., 'Vitamin C prevents colds' or 'Video games cause violence'), learners receive 6-8 sources of varying quality: a friend's anecdote, a celebrity endorsement, a health blog, a newspaper article, a doctor's recommendation, a single study, a randomized controlled trial, and a meta-analysis. They rank sources from least to most reliable, write justifications for their ranking, and discuss in small groups. Reveals that evidence quality matters more than quantity.",
+    "materials": ["Source description cards (6-8 per claim)", "Ranking worksheet with justification space", "Evidence hierarchy reference poster", "Discussion prompts"],
+    "learning_objectives": [
+      "Evaluate source reliability using specific criteria (expertise, methodology, peer review, bias)",
+      "Understand the evidence hierarchy from anecdote to systematic review",
+      "Recognize that the same claim can be supported by evidence of very different quality",
+      "Articulate why some sources are more trustworthy than others"
+    ],
+    "variations": [
+      "Use a controversial current topic where students may have strong prior opinions",
+      "Include a deliberately misleading source that looks authoritative but has hidden bias",
+      "Create-your-own: learners design a set of sources for a claim they choose"
+    ]
+  },
+  {
+    "id": "CRIT-101-A03",
+    "name": "Argument Mapping with Sticky Notes",
+    "module_id": "CRIT-101-M2",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Learners take a paragraph of persuasive text (editorial, speech excerpt, advertisement) and decompose it into individual claims, writing each on a separate sticky note. They arrange the notes on a large surface, drawing arrows from supporting reasons (premises) to the conclusions they support. This reveals the logical structure hidden in prose: which claims depend on other claims, which are unsupported, and where hidden assumptions lurk. Groups compare their maps and discuss differences.",
+    "materials": ["Persuasive text excerpts (3-4 options at different difficulty levels)", "Sticky notes (multiple colors for premises, conclusions, assumptions)", "Large paper or whiteboard", "Markers for drawing connections", "Argument structure reference sheet"],
+    "learning_objectives": [
+      "Identify premises and conclusions in natural language arguments",
+      "Visualize the logical structure of persuasive text",
+      "Discover hidden assumptions by finding gaps between premises and conclusions",
+      "Recognize that the same text can be mapped differently by different readers"
+    ],
+    "variations": [
+      "Digital version: use an online argument mapping tool instead of sticky notes",
+      "Start with simple two-premise arguments and progress to multi-layered texts",
+      "Reverse mapping: given an argument map, reconstruct the original prose"
+    ]
+  },
+  {
+    "id": "CRIT-101-A04",
+    "name": "Build a Counterargument Challenge",
+    "module_id": "CRIT-101-M2",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 50,
+    "description": "Learners receive a position statement (e.g., 'School uniforms should be mandatory' or 'Social media should be banned for children under 16'). They must first build the STRONGEST possible argument FOR the position, then build the STRONGEST possible argument AGAINST it. Both arguments must be genuine efforts -- no strawmanning allowed. After building both sides, learners write a brief reflection: which argument did they find more persuasive, and why? The exercise develops the ability to understand positions you disagree with.",
+    "materials": ["Position statement cards", "Argument builder worksheet (two sections: For and Against)", "Reflection prompt sheet", "Timer for structured phases"],
+    "learning_objectives": [
+      "Construct persuasive arguments for positions regardless of personal agreement",
+      "Practice steelmanning: presenting the opposing view in its strongest form",
+      "Recognize that most positions have legitimate supporting reasons",
+      "Evaluate competing arguments by comparing the quality of reasoning, not personal preference"
+    ],
+    "variations": [
+      "Pair debate: one learner argues for, the other against, then they switch sides",
+      "Written version: formal essay presenting both sides with a reasoned conclusion",
+      "Speed round: 5 minutes per side, forcing concise argumentation"
+    ]
+  },
+  {
+    "id": "CRIT-101-A05",
+    "name": "Fallacy Bingo (Spot Fallacies in Advertisements)",
+    "module_id": "CRIT-101-M3",
+    "grade_range": ["5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 35,
+    "description": "Each learner receives a bingo card with common fallacies in the squares: ad hominem, appeal to emotion, bandwagon, false authority, red herring, false dichotomy, slippery slope, appeal to tradition, etc. The class watches or reads a curated collection of advertisements, political clips, and persuasive texts. When a learner spots a fallacy, they mark the corresponding square and write a brief note explaining why it qualifies. First to complete a line wins. Discussion follows: which fallacies appeared most often, and why are they effective despite being logically flawed?",
+    "materials": ["Fallacy bingo cards (randomized layouts)", "Curated advertisement and media collection (print, video, or audio)", "Fallacy reference sheet with definitions and examples", "Markers or chips for bingo squares", "Discussion prompts"],
+    "learning_objectives": [
+      "Identify common logical fallacies in real-world persuasive content",
+      "Explain why each identified instance qualifies as a specific fallacy",
+      "Understand why fallacies are effective despite being logically flawed",
+      "Develop the habit of analyzing persuasive content for reasoning quality"
+    ],
+    "variations": [
+      "Social media version: analyze posts and comments from curated social media feeds",
+      "Create-your-own: learners write advertisements that deliberately use specific fallacies",
+      "Advanced version: include formal fallacies alongside informal ones"
+    ]
+  },
+  {
+    "id": "CRIT-101-A06",
+    "name": "Bias Blind Spot Mirror Exercise",
+    "module_id": "CRIT-101-M3",
+    "grade_range": ["7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "A series of carefully designed scenarios that trigger specific cognitive biases without learners knowing which bias is being tested. Scenario 1 (anchoring): estimate a quantity after seeing an irrelevant high or low number. Scenario 2 (framing): choose between options described as gains vs. losses. Scenario 3 (confirmation): evaluate evidence for and against a belief they hold. After all scenarios, the biases are revealed and learners see their own susceptibility. Discussion: knowing about biases does not make you immune -- what strategies can help?",
+    "materials": ["Scenario worksheets (one per bias, 4-5 scenarios)", "Answer recording sheets", "Bias explanation cards (revealed after exercise)", "Mitigation strategy reference sheet", "Discussion prompts"],
+    "learning_objectives": [
+      "Experience cognitive biases firsthand rather than just learning about them theoretically",
+      "Recognize that intellectual knowledge of biases does not prevent them from operating",
+      "Identify specific biases in own reasoning through structured self-observation",
+      "Develop concrete strategies for mitigating biases in future reasoning"
+    ],
+    "variations": [
+      "Partner version: pairs predict each other's susceptibility to specific biases",
+      "Longitudinal: repeat the exercise monthly and track whether awareness reduces bias over time",
+      "Design-a-bias-test: learners create scenarios that test a specific bias for classmates"
+    ]
+  },
+  {
+    "id": "CRIT-101-A07",
+    "name": "Fake News Detective Workshop",
+    "module_id": "CRIT-101-M4",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 50,
+    "description": "Learners receive a carefully curated mix of 8-10 articles: some from reliable sources, some from unreliable sources with accurate information, some from reliable-looking sources with false information, and some satire. Using a structured evaluation rubric (source reputation, evidence cited, corroboration with other sources, writing quality indicators, emotional manipulation), they determine which articles are trustworthy and which are not. The exercise includes sophisticated fakes that require careful analysis to detect, teaching that surface features alone are unreliable indicators.",
+    "materials": ["Curated article collection (8-10 articles, mix of real and fabricated)", "Media evaluation rubric with scoring criteria", "Fact-checking reference guide", "Scoring sheets", "Access to fact-checking websites for verification"],
+    "learning_objectives": [
+      "Apply structured evaluation criteria to assess media reliability",
+      "Recognize that surface features (professional design, authoritative tone) can be misleading",
+      "Use lateral reading and corroboration to verify claims",
+      "Distinguish between different types of unreliable content (misinformation, disinformation, satire)"
+    ],
+    "variations": [
+      "Live version: evaluate articles from today's actual news feeds in real time",
+      "Create a fake: learners create a convincing-looking but false article to test classmates",
+      "Social media adaptation: evaluate a feed of mixed-reliability social media posts"
+    ]
+  },
+  {
+    "id": "CRIT-101-A08",
+    "name": "Ethical Dilemma Discussion Circle",
+    "module_id": "CRIT-101-M4",
+    "grade_range": ["7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Learners sit in a circle and discuss a carefully chosen ethical dilemma (classic: trolley problem variants; contemporary: AI decision-making, privacy vs. security, environmental trade-offs, medical resource allocation). Using structured protocols, each learner must: (1) state their initial position, (2) identify the strongest argument against their position, (3) explain which ethical framework supports their view (consequentialism, deontology, virtue ethics), and (4) articulate what would change their mind. There are no right answers -- the goal is quality of moral reasoning.",
+    "materials": ["Ethical dilemma scenario cards (4-6 options at varying complexity)", "Ethical framework reference sheet (consequentialism, deontology, virtue ethics)", "Discussion protocol guide", "Reflection journal prompts"],
+    "learning_objectives": [
+      "Analyze ethical dilemmas using multiple reasoning frameworks",
+      "Articulate moral positions with explicit reasoning rather than just intuition",
+      "Consider the strongest counterarguments to own ethical positions",
+      "Recognize that reasonable people can reach different conclusions using different frameworks"
+    ],
+    "variations": [
+      "Fishbowl format: inner circle discusses while outer circle observes and evaluates reasoning quality",
+      "Written version: essay arguing for a position using at least two ethical frameworks",
+      "Role-play: learners are assigned perspectives (utilitarian, rights-based, care-based) to argue from"
+    ]
+  },
+  {
+    "id": "CRIT-101-A09",
+    "name": "Calibration Training",
+    "module_id": "CRIT-101-M5",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 30,
+    "description": "Learners answer 20 factual questions across diverse topics (geography, science, history, current events) and rate their confidence for each answer on a scale: 50% (coin flip), 60%, 70%, 80%, 90%, or 99% sure. After checking answers, they plot their calibration curve: for questions they rated 80% confident, were they right about 80% of the time? Most people discover they are systematically overconfident. Discussion focuses on why overconfidence occurs and how to improve calibration through practice.",
+    "materials": ["Calibration quiz (20 diverse factual questions)", "Confidence rating sheets", "Answer key", "Calibration curve plotting template", "Discussion prompts on overconfidence"],
+    "learning_objectives": [
+      "Assess own confidence calibration: does stated confidence match actual accuracy?",
+      "Discover systematic overconfidence as a universal cognitive tendency",
+      "Practice assigning nuanced confidence levels rather than binary certain/uncertain",
+      "Develop strategies for improving calibration through regular practice"
+    ],
+    "variations": [
+      "Longitudinal: repeat monthly with new questions and track calibration improvement over time",
+      "Domain-specific: use questions from a subject the learner is studying to calibrate domain knowledge",
+      "Competitive: predict calibration scores for classmates based on their stated confidence levels"
+    ]
+  },
+  {
+    "id": "CRIT-101-A10",
+    "name": "The What Would Change My Mind Exercise",
+    "module_id": "CRIT-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 35,
+    "description": "Each learner identifies a belief they hold strongly (can be factual, ethical, or about policy). They must then write a detailed answer to: 'What specific evidence, argument, or experience would cause me to change my mind about this?' If they cannot answer this question, they explore why: is it because the position is genuinely unfalsifiable, or because they have not considered what would count as counter-evidence? Partners then evaluate each other's criteria: are they genuinely reachable, or are they set impossibly high? The exercise develops intellectual humility and reveals the difference between positions held based on evidence and positions held regardless of evidence.",
+    "materials": ["Reflection worksheet with structured prompts", "Partner evaluation guide", "Examples of well-specified and poorly-specified mind-changing criteria", "Discussion prompts"],
+    "learning_objectives": [
+      "Articulate specific conditions under which a strongly held belief would be revised",
+      "Distinguish between evidence-based positions and unfalsifiable commitments",
+      "Recognize when mind-changing criteria are set impossibly high as a defense mechanism",
+      "Practice intellectual humility by genuinely engaging with the possibility of being wrong"
+    ],
+    "variations": [
+      "Historical version: research a scientist or thinker who changed their mind and analyze what convinced them",
+      "Group version: the whole class identifies shared beliefs and collectively specifies mind-changing criteria",
+      "Follow-up: revisit the exercise after studying a topic and note if mind-changing criteria have shifted"
+    ]
+  }
+]
