@@ -1,0 +1,356 @@
+# PSYCH-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: "PSYCH-101"
+pack_name: "Psychology & Human Development -- Foundational Knowledge Pack"
+
+modules:
+  - id: "PSYCH-101-M1"
+    name: "Brain, Perception & Cognition"
+    description: "How the brain processes sensory information, attention, memory, and cognitive biases; understanding the biological basis of mental processes"
+
+    learning_outcomes:
+      - "Explain how perception is active, not passive; understand that the brain constructs what we perceive"
+      - "Describe attention as selective filtering; recognize the limitations of attention (inattentional blindness)"
+      - "Understand memory systems: sensory, working, and long-term memory; explain why we forget"
+      - "Identify common cognitive biases and heuristics; apply to real-world decision-making"
+      - "Connect brain structure to function; understand impact of brain injury on behavior"
+
+    topics:
+      - "Sensory Processing & Perception"
+      - "Attention & Selective Focus"
+      - "Memory Systems (Sensory, Working, Long-Term)"
+      - "Forgetting & Memory Distortion"
+      - "Cognitive Biases & Heuristics"
+      - "Brain Structure & Function"
+      - "Neuroplasticity"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 40
+      high: 35
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "Optical Illusion Gallery"
+        - "Attention Blindness Challenge"
+        - "Memory Systems Experiment"
+        - "Cognitive Bias Detector"
+        - "Brain Function Scavenger Hunt"
+        - "Sensory Adaptation Lab"
+        - "False Memory Investigation"
+        - "Pattern Recognition Challenge"
+        - "Perception vs. Reality Discussion"
+        - "Neuroscience Case Studies"
+
+    assessments:
+      - "Can student explain how perception is constructed by the brain?"
+      - "Does student recognize cognitive biases in their own and others' thinking?"
+      - "Can student explain why memory is fallible and how to work with that?"
+      - "Does student understand the relationship between brain structure and behavior?"
+
+  - id: "PSYCH-101-M2"
+    name: "Learning, Memory & Study Skills"
+    description: "Classical and operant conditioning, observational learning, metacognition, memory techniques, and evidence-based study strategies"
+
+    learning_outcomes:
+      - "Explain classical conditioning with personal examples; understand conditioned responses"
+      - "Describe operant conditioning; identify reward and punishment patterns in own behavior"
+      - "Understand observational learning; recognize how modeling shapes behavior"
+      - "Develop metacognition; reflect on own learning processes and how you know you understand"
+      - "Apply evidence-based study strategies: spaced repetition, active recall, interleaving"
+
+    topics:
+      - "Classical Conditioning"
+      - "Operant Conditioning"
+      - "Reinforcement & Punishment"
+      - "Observational Learning & Modeling"
+      - "Memory Techniques (Chunking, Visualization, Mnemonics)"
+      - "Metacognition & Self-Awareness in Learning"
+      - "Study Strategies Backed by Research"
+      - "Spaced Repetition & Active Recall"
+      - "Procrastination & Self-Regulation"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 30
+      middle: 40
+      high: 40
+
+    prerequisite_modules: ["PSYCH-101-M1"]
+
+    activities:
+      count: 10
+      examples:
+        - "Study Strategy Experiment"
+        - "Memory Palace Construction"
+        - "Operant Conditioning in Your Life"
+        - "Learning from Models & Observation"
+        - "Metacognition Journal"
+        - "Spaced Repetition Challenge"
+        - "Procrastination Analysis"
+        - "Chunking Practice"
+        - "Retrieval Practice Lab"
+        - "Self-Regulated Learning Plan"
+
+    assessments:
+      - "Can student explain classical vs. operant conditioning with personal examples?"
+      - "Does student apply effective study strategies to new material?"
+      - "Can student reflect on their own learning process?"
+      - "Can student design and test a study method?"
+
+  - id: "PSYCH-101-M3"
+    name: "Emotion, Motivation & Well-being"
+    description: "Understanding emotions as information, emotional regulation, intrinsic vs. extrinsic motivation, self-efficacy, resilience, and growth mindset"
+
+    learning_outcomes:
+      - "Name and recognize emotions; understand what emotions communicate"
+      - "Apply emotion regulation strategies in response to difficult feelings"
+      - "Distinguish intrinsic and extrinsic motivation; understand what sustains effort"
+      - "Understand self-efficacy and its role in persistence and achievement"
+      - "Develop growth mindset; view challenges and failure as learning opportunities"
+
+    topics:
+      - "Emotion Recognition & Labeling"
+      - "Emotion Regulation Strategies"
+      - "The Neurobiology of Emotion"
+      - "Stress & Coping"
+      - "Intrinsic vs. Extrinsic Motivation"
+      - "Self-Efficacy & Beliefs About Ability"
+      - "Goal Setting & Achievement"
+      - "Resilience & Bouncing Back"
+      - "Growth Mindset vs. Fixed Mindset"
+      - "Well-being & Happiness"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 40
+      high: 40
+
+    prerequisite_modules: ["PSYCH-101-M1"]
+
+    activities:
+      count: 10
+      examples:
+        - "Emotion Thermometer Journal"
+        - "Motivation Mapping"
+        - "Emotion Regulation Toolkit"
+        - "Resilience Challenge"
+        - "Growth Mindset Reframing"
+        - "Self-Efficacy Builder"
+        - "Stress Management Lab"
+        - "Gratitude & Positive Psychology"
+        - "Values Clarification"
+        - "Well-being Audit"
+
+    assessments:
+      - "Can student identify and locate emotions in their body?"
+      - "Does student apply emotion regulation strategies when facing challenges?"
+      - "Can student articulate intrinsic vs. extrinsic motivation?"
+      - "Does student demonstrate growth mindset in facing difficulty?"
+
+  - id: "PSYCH-101-M4"
+    name: "Human Development Across the Lifespan"
+    description: "Cognitive, social, emotional, and moral development from infancy through aging; attachment theory; identity formation; understanding developmental stages"
+
+    learning_outcomes:
+      - "Describe major developmental stages from infancy through aging; understand characteristics of each"
+      - "Explain attachment theory and its lifelong impact on relationships"
+      - "Understand how cognitive abilities change across development; apply Piaget's stages"
+      - "Describe identity formation, especially during adolescence"
+      - "Recognize developmental tasks and challenges at each life stage"
+
+    topics:
+      - "Infancy & Early Childhood Development"
+      - "Attachment & Early Relationships"
+      - "Piaget's Cognitive Development Stages"
+      - "Erikson's Psychosocial Development"
+      - "Middle Childhood Social & Cognitive Growth"
+      - "Adolescent Brain Development & Identity Formation"
+      - "Adulthood: Relationships, Work, Generativity"
+      - "Aging: Wisdom, Integrity, Cognitive Vitality"
+      - "Moral Development"
+      - "Resilience & Adversity Across Development"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 25
+      middle: 40
+      high: 45
+
+    prerequisite_modules: ["PSYCH-101-M1"]
+
+    activities:
+      count: 10
+      examples:
+        - "Interview Across Generations"
+        - "Piaget's Task Investigations"
+        - "Adolescent Brain Video & Discussion"
+        - "Perspective-Taking Story Rewrite"
+        - "Life Timeline Reflection"
+        - "Attachment Style Assessment"
+        - "Identity & Values Exploration"
+        - "Developmental Milestones Mapping"
+        - "Intergenerational Conversation"
+        - "Life Stage Case Studies"
+
+    assessments:
+      - "Can student describe developmental stages and their characteristics?"
+      - "Does student apply developmental understanding to explain behavior?"
+      - "Can student recognize attachment patterns in relationships?"
+      - "Does student understand their own position in development?"
+
+  - id: "PSYCH-101-M5"
+    name: "Social Psychology & Relationships"
+    description: "Conformity and obedience, group behavior, prejudice and stereotyping, attraction and attachment, conflict resolution, empathy, and prosocial behavior"
+
+    learning_outcomes:
+      - "Understand conformity and obedience; explain why people go along with others"
+      - "Describe group dynamics: groupthink, social facilitation, bystander effect"
+      - "Explain how stereotypes and prejudices form; apply strategies to counter bias"
+      - "Understand factors in attraction and relationship development"
+      - "Apply empathy and perspective-taking to conflicts; practice communication skills"
+
+    topics:
+      - "Conformity & Compliance"
+      - "Obedience & Authority"
+      - "Group Behavior & Dynamics"
+      - "Groupthink & Social Facilitation"
+      - "Bystander Effect & Prosocial Behavior"
+      - "Stereotypes & Prejudice"
+      - "Bias, Discrimination & Intergroup Relations"
+      - "Attraction & Romantic Relationships"
+      - "Attachment in Relationships"
+      - "Conflict Resolution & Communication"
+      - "Empathy & Compassion"
+      - "Cooperation & Helping"
+
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      middle: 35
+      high: 45
+
+    prerequisite_modules: ["PSYCH-101-M1"]
+
+    activities:
+      count: 10
+      examples:
+        - "Conformity Observation Challenge"
+        - "Empathy Circle Discussion"
+        - "Stereotype Interrupt"
+        - "Bystander Intervention Scenarios"
+        - "Relationship Health Audit"
+        - "Group Dynamics Experiment"
+        - "Perspective-Taking Exercise"
+        - "Social Influence Detector"
+        - "Conflict Resolution Role Play"
+        - "Prosocial Behavior Investigation"
+
+    assessments:
+      - "Can student explain conformity and social influence with examples?"
+      - "Does student recognize stereotypes and biases in media and self?"
+      - "Can student apply empathy to social conflicts?"
+      - "Does student understand prosocial behavior and what motivates helping?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Self-Awareness & Reflection"
+    description: "Ability to observe own thoughts, emotions, and behavior; understanding how psychology applies to oneself"
+    assessed_in: ["PSYCH-101-M1", "PSYCH-101-M2", "PSYCH-101-M3", "PSYCH-101-M4", "PSYCH-101-M5"]
+
+  - name: "Empathy & Perspective-Taking"
+    description: "Ability to understand others' emotions, motivations, and viewpoints; compassion for human experience"
+    assessed_in: ["PSYCH-101-M1", "PSYCH-101-M4", "PSYCH-101-M5"]
+
+  - name: "Evidence-Based Reasoning"
+    description: "Evaluating psychological claims critically; understanding research methods and evidence"
+    assessed_in: ["PSYCH-101-M1", "PSYCH-101-M2", "PSYCH-101-M3", "PSYCH-101-M4", "PSYCH-101-M5"]
+
+  - name: "Emotional & Social Intelligence"
+    description: "Understanding and managing emotions; navigating relationships and groups effectively"
+    assessed_in: ["PSYCH-101-M3", "PSYCH-101-M4", "PSYCH-101-M5"]
+
+  - name: "Self-Regulation & Agency"
+    description: "Managing behavior, emotions, and motivation; taking responsibility for learning and growth"
+    assessed_in: ["PSYCH-101-M2", "PSYCH-101-M3", "PSYCH-101-M4"]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4 -> M5"
+    rationale: "Module 1 (brain basics) is foundational; modules can build in sequence from individual to social psychology"
+
+  - name: "Self-Understanding Pathway"
+    description: "M1 & M3 & M2 (focus on personal cognition and emotion) then M4 & M5 (developmental and social context)"
+    rationale: "Learner interested in self-awareness starts with how they think and feel, then expands to development and relationships"
+
+  - name: "Relationship-Focused Pathway"
+    description: "M4 (development) & M5 (social) with M1 & M3 as background (how minds work and emotions operate)"
+    rationale: "Learner focused on understanding others and relationships; development and social psychology first"
+
+  - name: "Research-Oriented Pathway"
+    description: "All modules with emphasis on understanding research methods, evidence, and critical evaluation"
+    rationale: "Learner interested in how we know what we know in psychology; investigating experiments and evidence throughout"
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow similar structure: learning outcomes, topics, activities"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Interactive elements consistently offer observation, reflection, and application"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "All modules use four-level rubric: Beginning, Developing, Proficient, Advanced"
+    cached: true
+
+  - pattern: "Developmental Progression"
+    description: "Each module shows K-College progression, scaling depth and abstraction"
+    cached: true
+
+  - pattern: "Real-World Application"
+    description: "Every topic connects to learners' own experience, not abstract theory"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner recognizes their own cognitive bias in decision-making"
+    - "When learner successfully regulates a difficult emotion"
+    - "When learner applies psychological concept to understand relationship dynamics"
+    - "When learner shifts from fixed mindset to growth mindset about capability"
+    - "When learner demonstrates empathy or perspective-taking breakthrough"
+    - "When learner uses effective study strategy or memory technique"
+
+  pattern_detection:
+    - "Effective emotion regulation techniques that work for this learner"
+    - "Study methods that lead to retention and understanding"
+    - "Successful communication patterns in conflict resolution"
+    - "Perspective-taking breakthroughs and empathy triggers"
+    - "Growth mindset reframes and resilience strategies"
+
+  skill_promotion:
+    - "Promote successful emotion regulation patterns to reusable skills"
+    - "Create study strategy libraries based on what works for this learner"
+    - "Build empathy and perspective-taking skill sets from observed successes"
+    - "Develop resilience and growth mindset toolkit"
+    - "Create decision-making frameworks to counter personal cognitive biases"
