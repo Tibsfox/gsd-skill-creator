@@ -1,0 +1,274 @@
+# GSD Skill Metadata
+pack_id: ASTRO-101
+pack_name: "Astronomy & Cosmology — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: specialized_deepening
+learning_domain: astronomy_and_cosmology
+
+# Content Description
+description: |
+  Astronomy as humanity's oldest science and our most humbling perspective. Understanding
+  our place in the cosmos through observation, physics, and wonder. From identifying
+  constellations to understanding stellar evolution, black holes, and the expanding
+  universe. The night sky is the most accessible laboratory in existence — free,
+  universal, and infinitely vast.
+
+short_description: "Observing the cosmos: sky navigation, planetary science, stellar evolution, and cosmology"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Astronomy Education Consortium"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - PHYS-101
+  - MATH-101
+  - SCI-101
+
+# What This Pack Enables
+enables: []
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["K", "1", "2"]
+    estimated_hours: [25, 40]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [50, 80]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [80, 120]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [120, 180]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [180, 240]
+
+# Modules
+modules:
+  - id: ASTRO-101-M1
+    name: "Observing the Sky"
+    description: "The naked-eye universe: learning to find constellations, navigate by stars, track celestial objects, and understand how the night sky changes throughout the year"
+    learning_outcomes:
+      - "Identify major constellations and bright stars"
+      - "Use celestial coordinates and star charts to find objects"
+      - "Distinguish stars, planets, and deep-sky objects"
+      - "Understand seasonal progression of the night sky"
+      - "Use the planisphere and angle estimation tools"
+    topics:
+      - "The Celestial Sphere and Coordinates"
+      - "Constellations and Star Patterns"
+      - "The Ecliptic and Zodiacal Constellations"
+      - "Planets vs. Fixed Stars"
+      - "Seasonal Changes"
+
+  - id: ASTRO-101-M2
+    name: "Earth-Moon-Sun System"
+    description: "The geometry of space: rotation, revolution, seasons, Moon phases, eclipses, and tides"
+    learning_outcomes:
+      - "Explain Earth's rotation and revolution"
+      - "Predict and explain Moon phases"
+      - "Understand solar and lunar eclipses"
+      - "Explain tides as gravitational interactions"
+      - "Apply basic orbital mechanics"
+    topics:
+      - "Earth's Rotation and Day-Night Cycle"
+      - "Earth's Revolution and Seasons"
+      - "Moon Phases and Orbital Motion"
+      - "Eclipses: Geometry and Visibility"
+      - "Tidal Forces and Tidal Locking"
+
+  - id: ASTRO-101-M3
+    name: "Solar System Exploration"
+    description: "Comparative planetology: planetary properties, atmospheres, geology, and mission science"
+    learning_outcomes:
+      - "Compare planetary properties and habitability"
+      - "Understand planetary atmospheres and evolution"
+      - "Interpret mission data and imagery"
+      - "Understand solar system formation"
+      - "Learn about exoplanets and world diversity"
+    topics:
+      - "Planetary Characteristics"
+      - "Planetary Atmospheres and Climate"
+      - "Planetary Geology and Evolution"
+      - "Moons and Small Bodies"
+      - "Solar System Formation"
+      - "Exoplanet Discovery"
+
+  - id: ASTRO-101-M4
+    name: "Stars & Stellar Astronomy"
+    description: "Understanding stars: spectroscopy, the HR diagram, stellar evolution, fusion, and endpoints"
+    learning_outcomes:
+      - "Use spectroscopy to analyze stars"
+      - "Interpret the Hertzsprung-Russell diagram"
+      - "Trace stellar life cycles"
+      - "Understand nuclear fusion"
+      - "Predict stellar evolution based on mass"
+      - "Understand stellar endpoints"
+    topics:
+      - "Stellar Spectroscopy and Classification"
+      - "The Hertzsprung-Russell Diagram"
+      - "Stellar Structure and Fusion"
+      - "Main Sequence Evolution"
+      - "Red Giants and Stellar Death"
+      - "White Dwarfs, Neutron Stars, Black Holes"
+      - "Supernovae and Element Synthesis"
+
+  - id: ASTRO-101-M5
+    name: "Galaxies, Cosmology & the Universe"
+    description: "The largest scales: galaxy structure, the Big Bang, expansion, dark matter/energy, cosmic fate"
+    learning_outcomes:
+      - "Classify galaxies and understand cosmic structure"
+      - "Understand evidence for the Big Bang"
+      - "Explain Hubble expansion"
+      - "Grapple with dark matter and dark energy"
+      - "Reason about cosmic fate"
+      - "Think critically about speculative science"
+    topics:
+      - "Galaxy Types and Classification"
+      - "Large-Scale Cosmic Structure"
+      - "Measuring Cosmic Distances"
+      - "Hubble's Law and Expansion"
+      - "The Big Bang and Inflation"
+      - "Cosmic Microwave Background"
+      - "Dark Matter and Dark Energy"
+      - "Cosmological Models and Fate"
+
+# Learning Outcomes (Pack-Level)
+learning_outcomes:
+  - "Systematically observe the night sky and navigate using stars"
+  - "Understand the geometry of space: rotation, revolution, phases, and eclipses"
+  - "Reason about comparative planetology and planetary evolution"
+  - "Interpret stellar data and understand stellar life cycles"
+  - "Think about cosmic structure, the Big Bang, and the fate of the universe"
+  - "Apply scale thinking to vast distances and times"
+  - "Use evidence-based reasoning about astronomical phenomena"
+
+# Assessment Approach
+assessment:
+  method: "Observational and analytical skills, not fact memorization"
+  focus:
+    - "Can learners systematically observe and use tools?"
+    - "Do they understand scales and model concepts?"
+    - "Can they interpret data and reason from evidence?"
+    - "Do they engage with genuine astronomical questions?"
+
+# Pedagogy
+pedagogy:
+  approach: "Phenomena-first: observation and wonder before models"
+  emphasis:
+    - "Scale thinking as a fundamental competency"
+    - "Model building from physical to mathematical"
+    - "Real tools and real data (Stellarium, NASA data)"
+    - "Historical thinking about how astronomy evolved"
+    - "Preservation of wonder through understanding"
+
+# Resources and Tools
+resources:
+  free_software:
+    - name: "Stellarium"
+      description: "Free, open-source planetarium software"
+      url: "https://stellarium.org/"
+
+    - name: "NASA Eyes"
+      description: "Interactive exploration of the solar system and universe"
+      url: "https://eyes.nasa.gov/"
+
+    - name: "WorldWide Telescope"
+      description: "Browse real astronomical data and images"
+      url: "https://www.worldwidetelescope.org/"
+
+  educational_platforms:
+    - name: "Crash Course Astronomy"
+      description: "Comprehensive YouTube series on astronomy topics"
+      url: "https://www.youtube.com/playlist?list=PL8dPuuaLjXtOzrV4XfW87qH6Gk5OJf2y9"
+
+    - name: "ESA Kids Space Portal"
+      description: "Age-appropriate astronomy content and activities"
+      url: "https://www.esa.int/kids/en/"
+
+    - name: "Space.com"
+      description: "Daily astronomy news and educational articles"
+      url: "https://www.space.com/"
+
+  data_archives:
+    - name: "Exoplanet.eu"
+      description: "Database of discovered exoplanets"
+      url: "https://exoplanet.eu/"
+
+    - name: "Zooniverse"
+      description: "Citizen science projects in astronomy"
+      url: "https://www.zooniverse.org/"
+
+    - name: "Universe Today"
+      description: "Astronomy news and images"
+      url: "https://www.universetoday.com/"
+
+# Dashboard Display Configuration
+gsd_integration:
+  dashboard_display:
+    icon: "telescope"
+    color: "#1A237E"
+    position: "Specialized"
+    featured_image: "night_sky_starfield"
+
+  skill_creator_hooks:
+    - trigger: "observing_session_logged"
+      action: "analyze_observation_patterns"
+
+    - trigger: "spectral_data_analyzed"
+      action: "track_analytical_skill_progression"
+
+    - trigger: "model_created"
+      action: "assess_conceptual_understanding"
+
+# Pack Health Metrics
+pack_health:
+  content_completeness: 100
+  activity_count: 10
+  assessment_rubric_levels: 4
+  resource_link_count: 15
+  module_progression_clarity: "Clear, well-sequenced modules with explicit prerequisites"
+
+# Testing Information
+testing:
+  test_file: "src/knowledge/test-packs/ASTRO-101.test.ts"
+  validators:
+    - "PackMetadataValidator"
+    - "ModulesStructureValidator"
+    - "ActivitiesSchemaValidator"
+    - "AssessmentFrameworkValidator"
+    - "ResourceLinkValidator"
+
+# Content Warnings (None for ASTRO-101)
+content_flags: []
+
+# Tags for Discovery
+tags:
+  - astronomy
+  - cosmology
+  - space
+  - physics
+  - observation
+  - scale-thinking
+  - wonder
+  - specialized-deepening
+  - science
