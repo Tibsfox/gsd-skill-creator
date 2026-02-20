@@ -1,0 +1,483 @@
+# GSD Skill Metadata
+pack_id: "PSYCH-101"
+pack_name: "Psychology & Human Development -- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: applied_practical
+learning_domain: behavioral_science
+
+# Content Description
+description: |
+  Understanding how humans think, feel, develop, and behave. Psychology is
+  the science of the mind and human behavior. Human development traces how
+  cognition, emotion, and social awareness evolve across the lifespan. This
+  pack builds self-awareness, empathy, and evidence-based understanding of
+  why people do what they do.
+
+short_description: "Psychology, human development, and behavioral understanding across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Psychology & Development Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - SCI-101
+  - COMM-101
+
+# What This Pack Enables
+enables:
+  - LEARN-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["K", "1", "2"]
+    estimated_hours: [20, 40]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [50, 70]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [70, 100]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [100, 150]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [150, 200]
+
+# Modules
+modules:
+  - id: "PSYCH-101-M1"
+    name: "Brain, Perception & Cognition"
+    description: "How the brain processes sensory information, attention, memory, and cognitive biases"
+    learning_outcomes:
+      - "Explain how perception is constructed by the brain"
+      - "Understand attention as selective filtering"
+      - "Describe memory systems and why we forget"
+      - "Identify cognitive biases and heuristics"
+      - "Connect brain structure to behavior"
+    topics:
+      - "Sensory Processing & Perception"
+      - "Attention & Memory"
+      - "Cognitive Biases"
+      - "Brain Structure & Function"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 40
+      high: 35
+    prerequisite_modules: []
+    activities:
+      count: 10
+      examples:
+        - "Optical Illusion Gallery"
+        - "Attention Blindness Challenge"
+        - "Memory Systems Experiment"
+        - "Cognitive Bias Detector"
+        - "Brain Function Scavenger Hunt"
+    assessments:
+      - "Can student explain perception construction?"
+      - "Does student recognize cognitive biases?"
+
+  - id: "PSYCH-101-M2"
+    name: "Learning, Memory & Study Skills"
+    description: "Classical and operant conditioning, observational learning, metacognition, and study strategies"
+    learning_outcomes:
+      - "Explain classical and operant conditioning"
+      - "Understand observational learning"
+      - "Develop metacognition"
+      - "Apply evidence-based study strategies"
+    topics:
+      - "Classical Conditioning"
+      - "Operant Conditioning"
+      - "Observational Learning"
+      - "Memory Techniques"
+      - "Study Strategies"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 15
+      elementary: 30
+      middle: 40
+      high: 40
+    prerequisite_modules: ["PSYCH-101-M1"]
+    activities:
+      count: 10
+      examples:
+        - "Study Strategy Experiment"
+        - "Memory Palace Construction"
+        - "Operant Conditioning in Your Life"
+        - "Learning from Models"
+        - "Metacognition Journal"
+    assessments:
+      - "Can student explain conditioning types?"
+      - "Does student apply effective study strategies?"
+
+  - id: "PSYCH-101-M3"
+    name: "Emotion, Motivation & Well-being"
+    description: "Understanding emotions, emotional regulation, motivation, resilience, and growth mindset"
+    learning_outcomes:
+      - "Name and recognize emotions"
+      - "Apply emotion regulation strategies"
+      - "Distinguish intrinsic and extrinsic motivation"
+      - "Understand self-efficacy"
+      - "Develop growth mindset"
+    topics:
+      - "Emotion Recognition"
+      - "Emotion Regulation"
+      - "Motivation"
+      - "Self-Efficacy"
+      - "Resilience & Growth Mindset"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 40
+      high: 40
+    prerequisite_modules: ["PSYCH-101-M1"]
+    activities:
+      count: 10
+      examples:
+        - "Emotion Thermometer Journal"
+        - "Motivation Mapping"
+        - "Emotion Regulation Toolkit"
+        - "Resilience Challenge"
+        - "Growth Mindset Reframing"
+    assessments:
+      - "Can student identify emotions?"
+      - "Does student apply regulation strategies?"
+
+  - id: "PSYCH-101-M4"
+    name: "Human Development Across the Lifespan"
+    description: "Cognitive, social, emotional, and moral development from infancy through aging"
+    learning_outcomes:
+      - "Describe major developmental stages"
+      - "Explain attachment theory"
+      - "Understand cognitive development"
+      - "Describe identity formation"
+      - "Recognize developmental tasks at each stage"
+    topics:
+      - "Infancy & Early Childhood"
+      - "Attachment"
+      - "Piaget's Stages"
+      - "Erikson's Stages"
+      - "Adolescent Development"
+      - "Adulthood & Aging"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 25
+      middle: 40
+      high: 45
+    prerequisite_modules: ["PSYCH-101-M1"]
+    activities:
+      count: 10
+      examples:
+        - "Interview Across Generations"
+        - "Piaget's Task Investigations"
+        - "Adolescent Brain Video"
+        - "Perspective-Taking Stories"
+        - "Life Timeline Reflection"
+    assessments:
+      - "Can student describe developmental stages?"
+      - "Does student apply development understanding?"
+
+  - id: "PSYCH-101-M5"
+    name: "Social Psychology & Relationships"
+    description: "Conformity, group behavior, prejudice, attraction, conflict resolution, and prosocial behavior"
+    learning_outcomes:
+      - "Understand conformity and obedience"
+      - "Describe group behavior and dynamics"
+      - "Explain stereotypes and prejudice"
+      - "Understand relationship development"
+      - "Apply empathy and perspective-taking"
+    topics:
+      - "Conformity & Compliance"
+      - "Group Behavior"
+      - "Stereotypes & Prejudice"
+      - "Relationships & Attraction"
+      - "Conflict Resolution"
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      middle: 35
+      high: 45
+    prerequisite_modules: ["PSYCH-101-M1"]
+    activities:
+      count: 10
+      examples:
+        - "Conformity Observation Challenge"
+        - "Empathy Circle Discussion"
+        - "Stereotype Interrupt"
+        - "Bystander Intervention Scenarios"
+        - "Relationship Health Audit"
+    assessments:
+      - "Can student explain conformity?"
+      - "Does student recognize stereotypes?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-PSY-001
+    description: "Understand perception as active construction by the brain"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-PSY-002
+    description: "Apply learning principles to own study and behavior"
+    levels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-PSY-003
+    description: "Recognize and manage own emotions"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-PSY-004
+    description: "Understand human development across lifespan"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-PSY-005
+    description: "Apply empathy and perspective-taking in social situations"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Self-Reflection Journals"
+    frequency: ongoing
+
+  - type: formative
+    name: "Psychology in Daily Life Discussion"
+    frequency: weekly
+
+  - type: summative
+    name: "Psychology Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Application Project"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: emotion_tracking_journal
+    integrated: true
+    description: "Digital journaling tool for emotion recognition and regulation practice"
+
+  - name: study_strategy_tracker
+    integrated: true
+    description: "Tool to design and test study methods"
+
+interactive_elements:
+  - type: activity
+    name: "Optical Illusion Gallery"
+
+  - type: activity
+    name: "Memory Palace Construction"
+
+  - type: discussion
+    name: "Empathy Circle"
+
+  - type: reflection
+    name: "Emotion Thermometer"
+
+  - type: investigation
+    name: "Cognitive Bias Detector"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+  planned: [es, fr, zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Emotion activities use multiple modalities (writing, drawing, discussion). Video content will include captions. Consider adding video demonstrations."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "SEL (Social-Emotional Learning) Competencies"
+    version: 2020
+    alignments:
+      "Self-Awareness": true
+      "Self-Management": true
+      "Responsible Decision-Making": true
+      "Relationship Skills": true
+      "Social Awareness": true
+
+  - framework: "21st Century Skills"
+    alignments:
+      "Critical Thinking": true
+      "Collaboration": true
+      "Communication": true
+      "Creativity": true
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Difficulty increases with age; foundation activities are concrete and experiential. High school activities engage research methods and ethical analysis."
+
+# Content Flags
+content_flags:
+  - flag: "sensitive_topics"
+    description: "Development module includes adolescent brain development and may touch on puberty, identity, mental health"
+    mitigation: "Content is age-appropriate; parents notified; sensitive discussions facilitated with care"
+
+  - flag: "historical_research_ethics"
+    description: "References to unethical psychology experiments (Milgram, Stanford Prison Experiment)"
+    mitigation: "Frame as 'what not to do'; emphasize modern research ethics protections; discuss historical context"
+
+  - flag: "mental_health_awareness"
+    description: "Emotional intelligence module may raise awareness of mental health challenges"
+    mitigation: "Resources for support provided; focus on resilience and seeking help; parent guidance included"
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/psych-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "PSYCH-101"
+  looking_for:
+    - "Additional activities in emotional intelligence and resilience"
+    - "Case studies of human development across diverse cultures"
+    - "Video interviews with people at different life stages"
+    - "Translations to Spanish, Mandarin, and Arabic"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Psychology & Development Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - psychology
+  - human-development
+  - emotional-intelligence
+  - behavioral-science
+  - self-awareness
+  - cognitive-science
+  - relationships
+  - well-being
+  - learning
+  - neuroscience
+
+# External Resources
+resources:
+  - type: online_platform
+    title: "CrashCourse Psychology"
+    author: "CrashCourse"
+    url: "https://www.youtube.com/playlist?list=PL8dPuuaLjXtOPRKzVLY0jJY-uHOH9KVJ5"
+
+  - type: online_resource
+    title: "APA Help Center"
+    author: "American Psychological Association"
+    url: "https://www.apa.org/helpcenter"
+
+  - type: online_resource
+    title: "Greater Good Science Center"
+    author: "UC Berkeley"
+    url: "https://greatergood.berkeley.edu"
+
+  - type: online_resource
+    title: "Understood.org"
+    author: "Understood"
+    url: "https://www.understood.org"
+
+  - type: online_course
+    title: "The Science of Well-Being"
+    author: "Yale University"
+    url: "https://www.coursera.org/learn/the-science-of-well-being"
+
+# Related Packs
+related_packs:
+  - id: SCI-101
+    relationship: "Psychology is a science; research methods and evidence evaluation are foundational"
+
+  - id: COMM-101
+    relationship: "Communication skills and empathy are central to psychology"
+
+  - id: READ-101
+    relationship: "Reading comprehension helps interpret characters' psychological motivations"
+
+  - id: CRIT-101
+    relationship: "Critical thinking helps evaluate psychological claims and recognize biases"
+
+  - id: LEARN-101
+    relationship: "Learning theory and study strategies are direct applications of psychology"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "brain"
+    color: "#E91E63"
+    position: "Applied & Practical"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "PSYCH-101-core-concepts"
+    - "PSYCH-101-emotion-regulation"
+    - "PSYCH-101-learning-strategies"
+    - "PSYCH-101-social-understanding"
+    - "PSYCH-101-developmental-stages"
+
+# File References
+files:
+  vision_document: "PSYCH-101-vision.md"
+  modules_definition: "PSYCH-101-modules.yaml"
+  activities: "PSYCH-101-activities.json"
+  assessment: "PSYCH-101-assessment.md"
+  resources: "PSYCH-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five modules covering brain/cognition, learning, emotion, development, and social psychology"
+      - "50+ activities across K-College levels"
+      - "Parent guidance framework and assessment rubrics"
+      - "Aligned to SEL competencies and 21st century skills"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"
