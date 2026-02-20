@@ -6,7 +6,7 @@ release_date: "2026-02-20"
 
 # Status & Classification
 status: alpha
-classification: specialized_deepening
+classification: specialized
 learning_domain: metacognition_and_learning_science
 
 # Content Description
@@ -172,22 +172,76 @@ accessibility:
   captions_available: false
   notes: "All content includes text alternatives. Reflection activities provide multiple modalities (written, visual, oral). Spaced repetition tools are accessible across platforms."
 
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: Español
+      complete: false
+      progress: "0%"
+    - language_code: fr
+      name: Français
+      complete: false
+      progress: "0%"
+    - language_code: de
+      name: Deutsch
+      complete: false
+      progress: "0%"
+    - language_code: it
+      name: Italiano
+      complete: false
+      progress: "0%"
+
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: true
+  notes: |
+    As a meta-pack about learning itself, LEARN-101 should model best accessibility practices. Study strategy descriptions need multi-modal presentation (text, audio, video). Concept mapping tools require keyboard-accessible alternatives. Video content includes captions and audio descriptions. Metacognitive reflection supports multiple formats (writing, audio recording, visual portfolio). Growth mindset messaging never equates disability with fixed traits."
+
 # Standards Alignment
 standards_alignment:
+  - framework: "IB Approaches to Learning (ATL)"
+    version: 2015
+    alignments:
+      "Thinking Skills": "LEARN-101-M1, M3 (critical thinking, metacognition)"
+      "Communication Skills": "LEARN-101-M2, M5 (teaching others, explaining learning)"
+      "Social Skills": "LEARN-101-M2, M4 (collaboration, growth mindset)"
+      "Self-Management Skills": "LEARN-101-M3, M4 (self-regulation, goal-setting)"
+      "Research Skills": "LEARN-101-M5 (learning across domains, transfer)"
+
+  - framework: "CASEL Social-Emotional Learning (SEL) Competencies"
+    version: 2020
+    alignments:
+      "Self-Awareness": "LEARN-101-M1, M3 (understanding how you learn)"
+      "Self-Management": "LEARN-101-M2, M4 (study strategies, mindset, goals)"
+      "Responsible Decision-Making": "LEARN-101-M2, M3 (choosing strategies based on metacognition)"
+      "Social Awareness": "LEARN-101-M5 (learning from and with others)"
+      "Relationship Skills": "LEARN-101-M5 (peer learning, teaching)"
+
   - framework: "Metacognitive Learning Standards"
     version: 2020
     alignments:
-      "Self-Awareness": "Understanding your own learning processes"
-      "Strategy Selection": "Choosing appropriate strategies based on task"
-      "Self-Regulation": "Monitoring and adjusting your learning in real-time"
-      "Transfer": "Applying learning across contexts"
+      "Self-Awareness": "LEARN-101-M1, M3"
+      "Strategy Selection": "LEARN-101-M2, M3, M5"
+      "Self-Regulation": "LEARN-101-M3, M4"
+      "Transfer": "LEARN-101-M5"
 
   - framework: "Growth Mindset Standards"
     version: 2015
     alignments:
-      "Productive Struggle": "Viewing difficulty as an opportunity for growth"
-      "Resilience": "Persisting through challenges"
-      "Learning from Failure": "Using mistakes as information"
+      "Productive Struggle": "LEARN-101-M4 (difficulty as opportunity)"
+      "Resilience": "LEARN-101-M4 (persisting through challenges)"
+      "Learning from Failure": "LEARN-101-M4 (mistakes as information)"
 
 # Difficulty Rating
 difficulty:

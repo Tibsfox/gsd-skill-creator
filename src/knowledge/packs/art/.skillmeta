@@ -181,18 +181,73 @@ interactive_elements:
   - type: artist-study
     name: "Artist Biography Study"
 
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: Español
+      complete: false
+      progress: "0%"
+    - language_code: fr
+      name: Français
+      complete: false
+      progress: "0%"
+    - language_code: de
+      name: Deutsch
+      complete: false
+      progress: "0%"
+    - language_code: it
+      name: Italiano
+      complete: false
+      progress: "0%"
+
+  planned: [zh, ar]
+
 # Accessibility
 accessibility:
-  screen_reader_compatible: false
-  large_text_available: false
-  high_contrast_available: false
-  keyboard_navigable: false
-  alt_text_provided: false
-  captions_available: false
-  notes: "Primarily hands-on visual arts; accessibility features to be developed for digital components"
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: true
+  notes: |
+    Visual art is inherently accessible through tactile exploration. Detailed verbal descriptions for all artworks, techniques, and demonstrations required for blind/low-vision learners. Color-blind friendly instruction with texture and pattern emphasis. Digital components (museum tours, artist videos) include captions and audio descriptions. Printmaking and clay accessible to all mobility levels."
 
 # Standards Alignment
-standards_alignment: []
+standards_alignment:
+  - framework: "NCAS (National Core Arts Standards) Visual Arts"
+    version: 2014
+    alignments:
+      "Creating (VA:Cr1.1)": "Making informed artistic decisions about subjects, materials, processes, and purposes"
+      "Creating (VA:Cr2.1)": "Making art and design by combining materials, processes, and ideas"
+      "Presenting (VA:Pr4.1)": "Presenting artwork in a manner that enhances the viewer's understanding of the work"
+      "Responding (VA:Re7.1)": "Analyzing artworks to understand their historical context"
+      "Connecting (VA:Cn10.1)": "Identifying connections between visual arts and other disciplines"
+
+  - framework: "IB MYP Arts (Visual Arts)"
+    version: 2016
+    alignments:
+      "Key Concept: Form": "ART-101-M2, M3 (composition, material properties)"
+      "Key Concept: Communication": "ART-101-M4, M5 (art history, artist intention)"
+      "Key Concept: Process": "ART-101-M1, M5 (creative process, iteration)"
+
+  - framework: "UK National Curriculum Art & Design"
+    version: 2014
+    alignments:
+      "Key Stage 2": "ART-101-M1, M2, M3"
+      "Key Stage 3": "ART-101-M2, M3, M4, M5"
+      "Key Stage 4": "ART-101-M4, M5 (specialist focus)"
+
+  - framework: "21st Century Arts Skills"
+    alignments:
+      "Creativity & Innovation": true
+      "Visual Communication": true
+      "Critical Thinking": true
+      "Collaboration": true
 
 # Difficulty
 difficulty:
