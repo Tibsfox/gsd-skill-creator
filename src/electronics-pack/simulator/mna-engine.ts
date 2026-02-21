@@ -270,6 +270,59 @@ export function dcAnalysis(
 }
 
 // ============================================================================
+// Nonlinear Solution Result
+// ============================================================================
+
+/** Result from nonlinear solver (Newton-Raphson) */
+export interface NonlinearSolution extends MNASolution {
+  converged: boolean;
+  iterations: number;
+  stampLog: StampLogEntry[];
+}
+
+/** AC analysis point: one frequency sweep result */
+export interface ACAnalysisPoint {
+  frequency: number;
+  magnitudes: Record<string, number>;  // node name -> magnitude in dB
+  phases: Record<string, number>;      // node name -> phase in degrees
+}
+
+// ============================================================================
+// Nonlinear Solver (Newton-Raphson) — Stub (Plan 263-02)
+// ============================================================================
+
+/**
+ * Solve a nonlinear circuit using Newton-Raphson iteration.
+ * Stub — to be implemented in Plan 263-02 GREEN phase.
+ */
+export function solveNonlinear(
+  _components: Component[],
+  _groundNode: string = '0',
+  _maxIter: number = 50,
+  _tolerance: number = 1e-6,
+): NonlinearSolution {
+  throw new Error('solveNonlinear not yet implemented');
+}
+
+// ============================================================================
+// AC Analysis — Stub (Plan 263-02)
+// ============================================================================
+
+/**
+ * Run AC frequency-sweep analysis on a circuit.
+ * Stub — to be implemented in Plan 263-02 GREEN phase.
+ */
+export function acAnalysis(
+  _components: Component[],
+  _freqStart: number,
+  _freqStop: number,
+  _pointsPerDecade: number,
+  _groundNode: string = '0',
+): ACAnalysisPoint[] {
+  throw new Error('acAnalysis not yet implemented');
+}
+
+// ============================================================================
 // MNAEngine class (convenience wrapper)
 // ============================================================================
 

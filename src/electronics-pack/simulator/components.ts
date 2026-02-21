@@ -315,6 +315,18 @@ export function stampInductor(target: StampTarget, ind: Inductor): void {
 }
 
 /**
+ * Stamp a diode into the MNA matrix using piecewise-linear model.
+ * Stub — to be implemented in Plan 263-02 GREEN phase.
+ */
+export function stampDiode(
+  _target: StampTarget,
+  _diode: Diode,
+  _nodeVoltages?: Record<string, number>,
+): void {
+  throw new Error('stampDiode not yet implemented');
+}
+
+/**
  * Dispatch stamping to the correct function based on component type.
  * Analysis type determines how reactive components (C, L) are treated.
  */
