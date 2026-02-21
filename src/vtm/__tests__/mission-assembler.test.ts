@@ -15,7 +15,7 @@
 
 import { describe, it, expect } from 'vitest';
 import type { VisionDocument, ResearchReference, MissionPackage } from '../types.js';
-import { MissionPackageSchema } from '../types.js';
+import { MissionPackageSchema, WaveExecutionPlanSchema, TestPlanSchema } from '../types.js';
 import { assembleMissionPackage } from '../mission-assembler.js';
 
 // ---------------------------------------------------------------------------
@@ -321,7 +321,6 @@ describe('assembleMissionPackage', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
-      const { WaveExecutionPlanSchema } = require('../types.js');
       const parsed = WaveExecutionPlanSchema.safeParse(result.waveExecutionPlan);
       expect(parsed.success).toBe(true);
     });
@@ -406,7 +405,6 @@ describe('assembleMissionPackage', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
-      const { TestPlanSchema } = require('../types.js');
       const parsed = TestPlanSchema.safeParse(result.testPlan);
       expect(parsed.success).toBe(true);
     });
