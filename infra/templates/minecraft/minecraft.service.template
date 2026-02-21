@@ -1,0 +1,60 @@
+# Minecraft Server systemd Service
+# Generated from template by deploy-minecraft.sh
+# Template: infra/templates/minecraft/minecraft.service.template
+# Rendered by: infra/scripts/render-pxe-menu.sh
+#
+# MC-02: Automatic start on boot (WantedBy=multi-user.target)
+# MC-02: Automatic restart on crash (Restart=on-failure, RestartSec=10)
+
+[Unit]
+Description=Minecraft Fabric Server (GSD Managed)
+Documentation=https://fabricmc.net/wiki/
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=minecraft
+Group=minecraft
+WorkingDirectory=${MINECRAFT_HOME}/server
+
+# JVM flags from hardware profile (rendered by deploy-minecraft.sh)
+EnvironmentFile=${JVM_FLAGS_PATH}
+
+# Launch the Fabric server in headless mode
+ExecStart=/usr/bin/java $JVM_FLAGS -jar ${SERVER_JAR} nogui
+
+# --- Restart policy (MC-02) ---
+Restart=on-failure
+RestartSec=10
+
+# --- Shutdown ---
+# Minecraft needs time to save chunks on shutdown
+TimeoutStopSec=90
+# Clean shutdown via SIGINT (Minecraft handles gracefully) or SIGTERM
+SuccessExitStatus=0 130 143
+
+# --- I/O ---
+# Server runs headless -- no console input
+StandardInput=null
+# Logs go to journald for centralized logging
+StandardOutput=journal
+StandardError=journal
+
+# --- Resource limits ---
+# Minecraft opens many chunk region files simultaneously
+LimitNOFILE=65536
+
+# --- Security hardening ---
+# Prevent writing to /usr, /boot, /etc (server only needs /opt/minecraft)
+ProtectSystem=full
+# Prevent access to /home (server runs as minecraft user at /opt/minecraft)
+ProtectHome=true
+# Private /tmp for isolation
+PrivateTmp=true
+# No new privileges via setuid/setgid binaries
+NoNewPrivileges=true
+
+[Install]
+# MC-02: Start on boot
+WantedBy=multi-user.target

@@ -1,0 +1,61 @@
+# Kickstart Local Values
+# Copy to infra/local/kickstart.local-values and fill in site-specific values.
+# This file is an EXAMPLE -- never commit actual values or secrets.
+#
+# Used by: infra/templates/kickstart/base.ks.template (and role-specific kickstarts)
+# Rendered by: infra/scripts/render-pxe-menu.sh --template ... --values ... --output ...
+#
+# Variable mapping: lower_snake_case here -> UPPER_SNAKE_CASE in templates
+# Example: centos_mirror_url -> ${CENTOS_MIRROR_URL}
+
+# --- Installation source ---
+
+# CentOS Stream 9 network install mirror URL
+# Must point to a valid BaseOS repository with install tree
+centos_mirror_url: "https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os"
+
+# --- Network configuration ---
+
+# Primary network interface name
+# Common values: ens3 (virtio), ens192 (VMware), eth0 (legacy)
+net_device: "ens3"
+
+# VM hostname (FQDN or short name)
+vm_hostname: "gsd-base"
+
+# --- Timezone ---
+
+# System timezone (from tzdata, e.g., UTC, America/New_York, Europe/London)
+system_timezone: "UTC"
+
+# --- Security / access ---
+
+# Non-root admin username (added to wheel group for sudo)
+admin_user: "gsd"
+
+# SSH public key for the admin user -- the ONLY authentication method
+# REPLACE THIS with your actual public key before deploying!
+# Generate one with: ssh-keygen -t ed25519 -C "gsd-admin"
+# Then paste the contents of ~/.ssh/id_ed25519.pub here
+ssh_public_key: "ssh-ed25519 AAAA_REPLACE_WITH_YOUR_ACTUAL_PUBLIC_KEY gsd-admin"
+
+# --- Paths ---
+
+# Full path where the first-boot script will be installed on the VM
+# The first-boot systemd service ExecStart points to this path
+first_boot_script_path: "/opt/gsd/first-boot.sh"
+
+# --- Minecraft Server ---
+
+# Minecraft VM hostname (FQDN or short name)
+# Used by minecraft.ks.template for the --hostname directive
+minecraft_hostname: "mc-server-01"
+
+# Minecraft game port (clients connect here)
+# Default: 25565 -- change only if running multiple servers or behind a proxy
+minecraft_server_port: "25565"
+
+# Minecraft RCON (Remote Console) port
+# Used for server management commands over the network
+# Default: 25575 -- change only if running multiple servers
+minecraft_rcon_port: "25575"

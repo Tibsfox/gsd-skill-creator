@@ -1,0 +1,305 @@
+---
+# CHEM-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: CHEM-101
+pack_name: "Chemistry — Foundational Knowledge Pack"
+
+modules:
+  - id: CHEM-101-M1
+    name: "Matter & Properties"
+    description: "Exploring states of matter, physical vs chemical properties, mixtures and pure substances, physical vs chemical changes, and systematic measurement of material properties"
+
+    learning_outcomes:
+      - "Classify matter by state (solid, liquid, gas) and type (element, compound, mixture)"
+      - "Distinguish physical properties from chemical properties"
+      - "Distinguish physical changes from chemical changes using observable evidence"
+      - "Measure and record material properties systematically (mass, volume, density, solubility)"
+      - "Design separation procedures for mixtures based on property differences"
+
+    topics:
+      - "States of Matter & Particle Behavior"
+      - "Physical Properties (density, melting point, solubility, conductivity)"
+      - "Chemical Properties (flammability, reactivity, oxidation tendency)"
+      - "Physical vs. Chemical Changes"
+      - "Mixtures, Solutions & Pure Substances"
+      - "Separation Techniques (filtration, evaporation, distillation, magnetism)"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 20
+      high: 10
+
+    prerequisite_modules: []
+
+    activities:
+      count: 6
+      examples:
+        - "Kitchen Material Sorting Challenge"
+        - "Mystery Substance Properties Lab"
+        - "States of Matter Kitchen Experiments"
+        - "Density Column Tower"
+        - "Separation Challenge"
+        - "Physical vs. Chemical Change Detective"
+
+    assessments:
+      - "Can student classify materials by state and type?"
+      - "Does student distinguish physical from chemical properties?"
+      - "Can student identify physical vs. chemical changes with evidence?"
+      - "Does student measure properties systematically and accurately?"
+
+  - id: CHEM-101-M2
+    name: "Atoms & the Periodic Table"
+    description: "Understanding atomic structure, element identity, periodic table organization, element families and periodic trends, and building progressively accurate atomic models"
+
+    learning_outcomes:
+      - "Describe basic atomic structure (protons, neutrons, electrons)"
+      - "Explain how the number of protons defines element identity"
+      - "Use the periodic table to predict element properties and behavior"
+      - "Identify element families and explain their shared characteristics"
+      - "Build atomic models at appropriate levels of complexity"
+
+    topics:
+      - "The Particle Model of Matter"
+      - "Atomic Structure (protons, neutrons, electrons, shells)"
+      - "The Periodic Table as an Organizing Tool"
+      - "Element Families (alkali metals, halogens, noble gases, transition metals)"
+      - "Periodic Trends (electronegativity, atomic radius, ionization energy)"
+      - "Isotopes & Atomic Mass"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 25
+      middle: 30
+      high: 25
+
+    prerequisite_modules: [CHEM-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Build an Atom Model with Candy"
+        - "Periodic Table Scavenger Hunt"
+        - "Flame Test Exploration"
+        - "Element Trading Cards"
+        - "Periodic Trends Graphing Activity"
+        - "History of the Periodic Table"
+
+    assessments:
+      - "Can student describe the structure of an atom?"
+      - "Does student use the periodic table to predict element behavior?"
+      - "Can student explain why elements in the same group behave similarly?"
+      - "Does student build accurate atomic models for given elements?"
+
+  - id: CHEM-101-M3
+    name: "Bonds & Molecular Structure"
+    description: "Understanding why atoms combine, distinguishing ionic from covalent bonding, exploring molecular geometry and polarity, and connecting molecular structure to macroscopic properties"
+
+    learning_outcomes:
+      - "Explain why atoms form chemical bonds (stability through full electron shells)"
+      - "Distinguish ionic, covalent, and metallic bonding by electron behavior"
+      - "Predict bond type from element positions on the periodic table"
+      - "Build and interpret three-dimensional molecular models"
+      - "Connect molecular structure and bonding to observable substance properties"
+
+    topics:
+      - "Why Atoms Bond (octet rule, stability)"
+      - "Ionic Bonding & Ionic Compounds"
+      - "Covalent Bonding & Molecular Compounds"
+      - "Metallic Bonding"
+      - "Molecular Shape (VSEPR theory)"
+      - "Polarity & Intermolecular Forces"
+
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 15
+      middle: 30
+      high: 30
+
+    prerequisite_modules: [CHEM-101-M2]
+
+    activities:
+      count: 6
+      examples:
+        - "Molecule Building with Toothpicks and Gumdrops"
+        - "Ionic vs. Covalent Compound Sort"
+        - "Crystal Growing Lab"
+        - "Polarity and Dissolving Experiment"
+        - "Bond Energy Card Game"
+        - "Soap and Surface Tension Investigation"
+
+    assessments:
+      - "Can student explain why atoms form bonds?"
+      - "Does student distinguish ionic from covalent bonding?"
+      - "Can student predict molecular shapes using VSEPR?"
+      - "Does student connect bond type to substance properties?"
+
+  - id: CHEM-101-M4
+    name: "Chemical Reactions & Energy"
+    description: "Understanding conservation of mass, balancing equations, classifying reaction types, analyzing energy changes in reactions, exploring reaction rates, and investigating acids, bases, and pH"
+
+    learning_outcomes:
+      - "Apply the law of conservation of mass to chemical reactions"
+      - "Balance simple chemical equations"
+      - "Classify reactions by type (synthesis, decomposition, replacement, combustion)"
+      - "Distinguish exothermic from endothermic reactions and measure energy changes"
+      - "Explain how temperature, concentration, surface area, and catalysts affect reaction rates"
+
+    topics:
+      - "Conservation of Mass"
+      - "Balancing Chemical Equations"
+      - "Reaction Types (synthesis, decomposition, single/double replacement, combustion)"
+      - "Energy in Reactions (exothermic, endothermic, activation energy)"
+      - "Reaction Rates & Collision Theory"
+      - "Acids, Bases & pH"
+
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 15
+      middle: 35
+      high: 30
+
+    prerequisite_modules: [CHEM-101-M2, CHEM-101-M3]
+
+    activities:
+      count: 6
+      examples:
+        - "Baking Soda and Vinegar Reaction Investigation"
+        - "Endothermic Ice Cream Making"
+        - "Red Cabbage pH Indicator Lab"
+        - "Rust Investigation"
+        - "Conservation of Mass Balance Challenge"
+        - "Reaction Rate Races"
+
+    assessments:
+      - "Can student demonstrate conservation of mass experimentally?"
+      - "Does student balance chemical equations correctly?"
+      - "Can student classify reactions and predict products?"
+      - "Does student explain energy changes and rate factors?"
+
+  - id: CHEM-101-M5
+    name: "Applied Chemistry"
+    description: "Connecting chemical principles to materials science, biochemistry, environmental chemistry, food chemistry, medicine, and energy technology"
+
+    learning_outcomes:
+      - "Explain how molecular structure determines material properties (polymers, ceramics, metals)"
+      - "Identify the four major biomolecule families and their roles in living systems"
+      - "Apply chemical principles to understand environmental processes and problems"
+      - "Connect chemical reactions to everyday cooking and food preservation"
+      - "Evaluate real-world chemical claims using evidence and chemical reasoning"
+
+    topics:
+      - "Materials Science (polymers, ceramics, composites, metals)"
+      - "Biochemistry Foundations (carbohydrates, lipids, proteins, nucleic acids)"
+      - "Environmental Chemistry (carbon cycle, acid rain, water treatment)"
+      - "Food Chemistry (Maillard reaction, fermentation, preservation)"
+      - "Medicine & Pharmacology Foundations"
+      - "Energy Chemistry (batteries, fuels, solar cells)"
+
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      middle: 25
+      high: 30
+
+    prerequisite_modules: [CHEM-101-M2, CHEM-101-M3]
+
+    activities:
+      count: 6
+      examples:
+        - "Polymer Lab - Make Your Own Slime"
+        - "Enzyme Investigation with Pineapple and Gelatin"
+        - "Water Purification Challenge"
+        - "Battery Building from Lemons"
+        - "Food Chemistry Kitchen Lab"
+        - "Biodegradability Experiment"
+
+    assessments:
+      - "Can student explain material properties from molecular structure?"
+      - "Does student identify biomolecules and their functions?"
+      - "Can student apply chemistry to environmental or food science problems?"
+      - "Does student evaluate real-world chemical claims critically?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Chemical Reasoning"
+    description: "Ability to explain macroscopic observations using atomic and molecular models"
+    assessed_in: [CHEM-101-M1, CHEM-101-M2, CHEM-101-M3, CHEM-101-M4]
+
+  - name: "Structure-Property Thinking"
+    description: "Habit of connecting a substance's molecular structure to its observable properties and behavior"
+    assessed_in: [CHEM-101-M2, CHEM-101-M3, CHEM-101-M4, CHEM-101-M5]
+
+  - name: "Conservation & Transformation"
+    description: "Understanding that matter is conserved through all changes — atoms rearrange but are never created or destroyed"
+    assessed_in: [CHEM-101-M1, CHEM-101-M4, CHEM-101-M5]
+
+  - name: "Real-World Application"
+    description: "Ability to connect chemical principles to everyday phenomena in cooking, materials, environment, and health"
+    assessed_in: [CHEM-101-M1, CHEM-101-M4, CHEM-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4, with M5 as applied enrichment throughout"
+    rationale: "Follows the logical hierarchy: observe matter, learn what it is made of, understand how atoms combine, then study how combinations change. Applied chemistry adds context at any stage."
+
+  - name: "Spiral Pathway"
+    description: "Revisit all five modules repeatedly at increasing depth and sophistication"
+    rationale: "Chemical understanding deepens with maturity. A second pass through bonding after studying reactions reveals connections invisible the first time."
+
+  - name: "Interest-Led Pathway"
+    description: "Choose module based on interest; M1 is prerequisite foundation only"
+    rationale: "A learner fascinated by cooking might start with M5 (food chemistry) while building matter fundamentals through M1 as needed. A learner curious about explosions might start with M4 (reactions)."
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same introduction structure: What It Teaches, Interactive Elements, Technical Implementation Notes"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Interactive elements follow a consistent template across all modules: name, description, materials, connection to chemical principle"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure (Beginning, Developing, Proficient, Advanced) across all modules"
+    cached: true
+
+  - pattern: "Parent Guidance"
+    description: "Parent guidance follows the same kitchen-chemistry-first format throughout"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner classifies materials by properties without prompting"
+    - "When learner uses periodic table to predict behavior"
+    - "When learner explains substance properties from molecular structure"
+    - "When learner predicts reaction products from reactant types"
+    - "When learner connects chemistry to everyday observations"
+
+  pattern_detection:
+    - "Systematic property identification protocols"
+    - "Periodic table prediction strategies"
+    - "Structure-property reasoning chains"
+    - "Reaction prediction frameworks"
+
+  skill_promotion:
+    - "Promote property identification patterns to reusable skills"
+    - "Create periodic table prediction templates from successful reasoning"
+    - "Build structure-property analysis toolkits from observed successes"
+    - "Develop kitchen chemistry investigation patterns from effective experiments"
+
+# This YAML defines the modular structure for the CHEM-101 pack and enables
+# skill-creator to orchestrate learning experiences centered on chemical understanding.

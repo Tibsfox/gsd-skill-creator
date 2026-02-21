@@ -1,0 +1,345 @@
+# DATA-101 Module Definitions
+# Defines the five core modules for data literacy and skill-creator
+
+pack_id: DATA-101
+pack_name: "Data Science & Analysis — Foundational Knowledge Pack"
+
+modules:
+  - id: DATA-101-M1
+    name: "Data Collection & Organization"
+    description: "Understanding data sources, sampling, bias, quality, and organization in tables and spreadsheets"
+
+    learning_outcomes:
+      - "Understand different data sources (observation, measurement, surveys, counting)"
+      - "Distinguish population from sample and recognize sampling bias"
+      - "Identify how data collection choices affect data quality"
+      - "Organize data in tables and spreadsheets"
+      - "Recognize missing data and its implications"
+
+    topics:
+      - "Data Sources & Collection Methods"
+      - "Population vs. Sample"
+      - "Sampling Bias & Representativeness"
+      - "Measurement Error & Precision"
+      - "Missing Data & Data Quality"
+      - "Data Organization & Tables"
+      - "Spreadsheet Basics"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 30
+      elementary: 40
+      middle: 40
+      high: 30
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "Classroom Census Data Collection"
+        - "Weather Data Logger Project"
+        - "Survey Design & Bias Detection"
+        - "Population vs. Sample Simulation"
+        - "Data Quality Audit"
+        - "Spreadsheet Data Entry & Formatting"
+        - "Sampling Methods Comparison"
+        - "Missing Data Investigation"
+        - "Data Source Credibility Ranking"
+        - "Real-World Data Set Exploration"
+
+    assessments:
+      - "Can student identify different data sources and their strengths?"
+      - "Does student recognize potential bias in data collection?"
+      - "Can student organize data in a table or spreadsheet?"
+      - "Does student understand why data quality matters?"
+
+  - id: DATA-101-M2
+    name: "Exploratory Data Analysis"
+    description: "Summarizing, describing, visualizing, and finding patterns in data"
+
+    learning_outcomes:
+      - "Calculate and interpret mean, median, mode, range, and standard deviation"
+      - "Understand percentiles, quartiles, and five-number summary"
+      - "Identify and investigate outliers"
+      - "Create and interpret frequency distributions and histograms"
+      - "Explore relationships between two variables"
+
+    topics:
+      - "Measures of Center (Mean, Median, Mode)"
+      - "Measures of Spread (Range, Variance, Standard Deviation)"
+      - "Percentiles & Quartiles"
+      - "Five-Number Summary & Box Plots"
+      - "Frequency Distributions & Histograms"
+      - "Outliers & Anomalies"
+      - "Correlation & Association"
+      - "Patterns & Trends"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 40
+      high: 35
+
+    prerequisite_modules: [DATA-101-M1]
+
+    activities:
+      count: 10
+      examples:
+        - "Mean vs. Median Explorer"
+        - "Outlier Detective Challenge"
+        - "Distribution Shape Investigation"
+        - "Five-Number Summary Construction"
+        - "Box Plot Interpretation"
+        - "Correlation Scatterplot Analysis"
+        - "Real Data Set Description"
+        - "Comparing Two Data Distributions"
+        - "Finding Patterns in Large Data Sets"
+        - "Statistical Anomaly Detection"
+
+    assessments:
+      - "Can student choose and calculate appropriate summary statistics?"
+      - "Does student understand what a distribution shape tells us?"
+      - "Can student identify and explain outliers?"
+      - "Does student recognize correlation vs. causation?"
+
+  - id: DATA-101-M3
+    name: "Data Visualization & Communication"
+    description: "Creating, interpreting, and critiquing visualizations; telling stories with data"
+
+    learning_outcomes:
+      - "Choose appropriate visualization types for different questions and data"
+      - "Create graphs using digital tools and paper-and-pencil methods"
+      - "Read and interpret graphs, recognizing misleading choices"
+      - "Explain findings to an audience, both verbally and in writing"
+      - "Create dashboards or interactive visualizations for exploration"
+
+    topics:
+      - "Chart Types (Bar, Line, Scatter, Histogram, Box Plot, Heatmap)"
+      - "Axes, Scales, and Their Effects"
+      - "Color, Design, and Visual Encoding"
+      - "Misleading Graphs & Chart Crimes"
+      - "Dashboard Design"
+      - "Data Storytelling"
+      - "Interactive Visualization"
+      - "Presenting Data to Audiences"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 35
+      high: 30
+
+    prerequisite_modules: [DATA-101-M2]
+
+    activities:
+      count: 10
+      examples:
+        - "Build a Dashboard from Survey Data"
+        - "Misleading Graph Makeover"
+        - "Chart Type Selection Challenge"
+        - "Data Visualization Critique"
+        - "Interactive Dashboard Creation"
+        - "Data Storytelling Presentation"
+        - "Graph Design for Different Audiences"
+        - "Color & Design Impact Study"
+        - "Dashboard Usability Testing"
+        - "Recreating Published Visualizations"
+
+    assessments:
+      - "Does student choose appropriate visualizations?"
+      - "Can student create clear, accurate graphs?"
+      - "Does student recognize and critique misleading visualizations?"
+      - "Can student explain findings to an audience?"
+
+  - id: DATA-101-M4
+    name: "Statistical Inference & Reasoning"
+    description: "Reasoning about uncertainty, probability, hypothesis testing, and confidence intervals"
+
+    learning_outcomes:
+      - "Understand and apply probability concepts"
+      - "Conduct probability experiments and interpret results"
+      - "Know properties of the normal distribution"
+      - "Conduct hypothesis tests and interpret p-values"
+      - "Construct and interpret confidence intervals"
+      - "Distinguish statistically significant from practically significant"
+      - "Understand sampling error and the Central Limit Theorem"
+
+    topics:
+      - "Probability Foundations & Experiments"
+      - "Randomness & the Law of Large Numbers"
+      - "Normal Distribution & Z-scores"
+      - "Sampling Distributions"
+      - "Central Limit Theorem"
+      - "Hypothesis Testing & P-values"
+      - "Confidence Intervals"
+      - "Type I & Type II Errors"
+      - "Significance vs. Effect Size"
+
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 20
+      middle: 40
+      high: 45
+
+    prerequisite_modules: [DATA-101-M1, DATA-101-M2]
+
+    activities:
+      count: 10
+      examples:
+        - "Coin Flip Probability Experiment"
+        - "Taste Test Hypothesis Challenge"
+        - "Dice Roll Simulation"
+        - "Normal Distribution Explorer"
+        - "Hypothesis Test Design & Interpretation"
+        - "Confidence Interval Construction"
+        - "P-value Interpretation"
+        - "Sample Size & Power Exploration"
+        - "Type I Error vs. Type II Error Scenario"
+        - "Real Research Paper Hypothesis Test Review"
+
+    assessments:
+      - "Can student conduct a probability experiment?"
+      - "Does student understand hypothesis testing?"
+      - "Can student interpret p-values and confidence intervals?"
+      - "Does student understand sampling error?"
+
+  - id: DATA-101-M5
+    name: "Data Ethics & Real-World Applications"
+    description: "Examining ethical dimensions of data work, bias, privacy, and responsible practice"
+
+    learning_outcomes:
+      - "Identify privacy and consent issues in data collection"
+      - "Recognize algorithmic bias and fairness concerns"
+      - "Discuss data ownership and who benefits from data"
+      - "Critically evaluate data claims in news and research"
+      - "Consider ethical implications of data-driven decisions"
+      - "Propose responsible uses of data in a given context"
+
+    topics:
+      - "Privacy & Consent"
+      - "Data Ownership & Property Rights"
+      - "Algorithmic Bias & Fairness"
+      - "Transparency & Explainability"
+      - "Data Misuse & Manipulation"
+      - "Responsible Data Practice"
+      - "Ethical Frameworks for Data"
+      - "Real-World Case Studies"
+
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 20
+      middle: 30
+      high: 35
+
+    prerequisite_modules: [DATA-101-M1]
+
+    activities:
+      count: 10
+      examples:
+        - "Privacy Audit of Your Apps"
+        - "Algorithmic Bias Case Study"
+        - "Data Ownership Scenario Analysis"
+        - "Misleading Data Claims Investigation"
+        - "Ethics Dilemma Discussion"
+        - "Stakeholder Impact Map"
+        - "Historical Data Bias Examples"
+        - "Consent Form Analysis"
+        - "Ethical Decision Framework Application"
+        - "Responsible Data Policy Proposal"
+
+    assessments:
+      - "Can student identify ethical issues in data scenarios?"
+      - "Does student understand privacy and consent concerns?"
+      - "Can student propose responsible data practices?"
+      - "Does student critically evaluate data claims?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Data Reasoning"
+    description: "Ability to draw conclusions from data with appropriate uncertainty"
+    assessed_in: ["DATA-101-M1", "DATA-101-M2", "DATA-101-M4", "DATA-101-M5"]
+
+  - name: "Skeptical Thinking"
+    description: "Tendency to question data sources, methods, and claims"
+    assessed_in: ["DATA-101-M1", "DATA-101-M4", "DATA-101-M5"]
+
+  - name: "Communication with Evidence"
+    description: "Ability to explain findings using data and visualizations"
+    assessed_in: ["DATA-101-M2", "DATA-101-M3", "DATA-101-M4"]
+
+  - name: "Ethical Reasoning"
+    description: "Ability to recognize and address ethical issues in data work"
+    assessed_in: ["DATA-101-M1", "DATA-101-M5"]
+
+  - name: "Visual Literacy"
+    description: "Ability to create and interpret data visualizations"
+    assessed_in: ["DATA-101-M2", "DATA-101-M3", "DATA-101-M4"]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Foundational Pathway"
+    description: "M1 -> M2 -> M3, then M4 and M5 as deepening"
+    rationale: "Collection and organization are foundational; exploration and visualization follow naturally; inference and ethics can develop in parallel and deepen over time"
+
+  - name: "Question-Driven Pathway"
+    description: "Start with M5 (What ethical questions do we have?), then M1-M2 (How do we collect and explore data?), then M3-M4 (How do we communicate and reason about findings?)"
+    rationale: "Motivating students with real-world ethical questions can drive interest in the mechanics"
+
+  - name: "Spiral Pathway"
+    description: "Return to all five modules repeatedly at increasing depth across grade levels"
+    rationale: "Data literacy deepens over time; students revisit collection, exploration, visualization, inference, and ethics each year with more sophistication"
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow similar learning structures: foundations, exploration, and application"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Each module includes hands-on activities with data"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment focuses on reasoning and critical thinking, not formula memorization"
+    cached: true
+
+  - pattern: "Real-World Grounding"
+    description: "All modules use or reference real data and real decisions"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner asks a good question about data"
+    - "When learner notices a pattern others missed"
+    - "When learner catches a misleading visualization"
+    - "When learner reasons carefully about uncertainty"
+    - "When learner identifies an ethical issue in data use"
+    - "When learner applies data thinking to a new domain"
+
+  pattern_detection:
+    - "Effective data exploration strategies"
+    - "Successful visualization choices"
+    - "Good hypothesis formulation"
+    - "Critical questions about data sources"
+    - "Ethical frameworks applied to real scenarios"
+
+  skill_promotion:
+    - "Promote successful data analysis patterns to reusable skills"
+    - "Create visualization design libraries"
+    - "Build ethical reasoning toolkits"
+    - "Create domain-specific data literacy skills"

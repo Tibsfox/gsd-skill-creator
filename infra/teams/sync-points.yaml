@@ -1,0 +1,101 @@
+# Sync Points: Cross-team dependency chains
+# Defines execution ordering between teams
+# Each sync point has a producer (team + stage) and consumer (team + stage)
+
+sync_points:
+  # Infra produces hardware profiles that Platform needs
+  - id: "sync-hw-profile"
+    description: "Hardware profile available for platform adaptation"
+    producer:
+      team: "mc-infra"
+      stage: "discover"
+      artifact: "infra/inventory/hardware-profile.yaml"
+    consumer:
+      team: "mc-platform"
+      stage: "discover"
+      requires: "Hardware profile YAML must exist and contain cpu, memory, storage, gpu sections"
+    wave_constraint: "Infra discover completes before Platform discover begins"
+
+  # Platform produces abstraction libraries that Infra provisioning needs
+  - id: "sync-distro-abstraction"
+    description: "Distribution abstraction ready for provisioning scripts"
+    producer:
+      team: "mc-platform"
+      stage: "abstraction"
+      artifact: "infra/scripts/lib/pkg-abstraction.sh"
+    consumer:
+      team: "mc-infra"
+      stage: "provision"
+      requires: "pkg-abstraction.sh and fw-abstraction.sh must be sourceable with valid backend detection"
+    wave_constraint: "Platform abstraction completes before Infra provisioning begins"
+
+  # Platform produces local-values that Amiga needs
+  - id: "sync-local-values"
+    description: "Adaptive local-values available for UAE configuration"
+    producer:
+      team: "mc-platform"
+      stage: "adaptation"
+      artifact: "infra/local/local-values.yaml"
+    consumer:
+      team: "mc-amiga"
+      stage: "install"
+      requires: "local-values.yaml must contain gpu.uae_display, audio.uae_backend, and display.scaling sections"
+    wave_constraint: "Platform adaptation completes before Amiga installation begins"
+
+  # Infra produces deployed server that Ops needs
+  - id: "sync-server-deployed"
+    description: "Minecraft server deployed and running for operations setup"
+    producer:
+      team: "mc-infra"
+      stage: "deploy"
+      artifact: "Minecraft server running as systemd service"
+    consumer:
+      team: "mc-ops"
+      stage: "all"
+      requires: "Minecraft server responding to RCON, systemd service active, world directory exists"
+    wave_constraint: "Infra deployment completes before Ops work begins"
+
+  # Amiga produces curated assets that Creative needs
+  - id: "sync-amiga-assets"
+    description: "Curated Amiga assets available for Knowledge World integration"
+    producer:
+      team: "mc-amiga"
+      stage: "curate"
+      artifact: "infra/amiga/curated-collection.yaml"
+    consumer:
+      team: "mc-creative"
+      stage: "amiga-corner"
+      requires: "curated-collection.yaml exists with 50 entries, converted PNG/audio assets accessible"
+    wave_constraint: "Amiga curation completes before Creative Amiga Corner work begins"
+
+  # Creative produces world content that Ops backup needs to scope
+  - id: "sync-world-content"
+    description: "World content exists for backup scope definition"
+    producer:
+      team: "mc-creative"
+      stage: "world-design"
+      artifact: "infra/minecraft/world-design/master-plan.yaml"
+    consumer:
+      team: "mc-ops"
+      stage: "backup"
+      requires: "World layout defined so backup script knows which directories to include"
+    wave_constraint: "Advisory -- Ops backup works without world content but benefits from it"
+
+execution_order:
+  description: "Topological sort of team execution based on sync points"
+  order:
+    - wave: 1
+      teams: ["mc-infra (discover)", "mc-platform (discover)"]
+      note: "Infra hardware discovery and Platform subsystem discovery can run in parallel"
+    - wave: 2
+      teams: ["mc-platform (abstraction, adaptation)", "mc-infra (budget)"]
+      note: "Platform produces abstraction libraries; Infra budgets from hardware profile"
+    - wave: 3
+      teams: ["mc-infra (provision, deploy)", "mc-amiga (install, configure)"]
+      note: "Infra provisions VMs; Amiga installs UAE using Platform's local-values"
+    - wave: 4
+      teams: ["mc-amiga (convert, curate)", "mc-creative (all tasks)"]
+      note: "Amiga converts assets; Creative designs world (Amiga Corner waits for curated assets)"
+    - wave: 5
+      teams: ["mc-ops (all tasks)"]
+      note: "Ops sets up backup, monitoring, golden image after server is deployed"

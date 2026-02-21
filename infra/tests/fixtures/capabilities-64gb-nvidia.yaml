@@ -1,0 +1,158 @@
+# Unified Hardware Capabilities: 64GB Workstation with NVIDIA RTX 4070
+# Fixture for test-assess-gpu.sh and test-assess-audio.sh
+# Full 11-section structure matching hardware-capabilities.example.yaml
+
+metadata:
+  version: 1.0.0
+  generated: "2026-01-01T00:00:00Z"
+  subsystems_discovered:
+    - cpu
+    - memory
+    - storage
+    - gpu
+    - hypervisor
+    - audio
+    - network
+    - usb
+    - distro
+
+cpu:
+  architecture: x86_64
+  family: "Intel Core i7 13th Gen"
+  cores_physical: 16
+  cores_logical: 32
+  virtualization: true
+  virtualization_type: vmx
+
+memory:
+  total_gb: 64
+  swap_gb: 8
+
+storage:
+  devices:
+    - type: ssd
+      size_gb: 1000
+    - type: hdd
+      size_gb: 2000
+  total_gb: 3000
+  device_count: 2
+
+gpu:
+  present: true
+  vendor: nvidia
+  family: "GeForce RTX 4070"
+  vram_gb: 12
+  driver: nvidia
+  iommu_available: true
+
+hypervisor:
+  kvm: true
+  vmware: false
+  virtualbox: false
+  podman: true
+  docker: false
+  nested_virtualization: true
+
+audio:
+  present: true
+  server: pipewire
+  alsa:
+    card_count: 2
+    cards:
+      - index: 0
+        name: "HDA Intel PCH"
+        driver: HDA-Intel
+      - index: 1
+        name: "HDA NVidia"
+        driver: HDA-Intel
+  midi:
+    present: true
+    port_count: 1
+    ports:
+      - "Midi Through - Midi Through Port-0"
+  capabilities:
+    has_audio_output: true
+    has_audio_input: true
+    has_midi: true
+
+network:
+  interface_count: 3
+  interfaces:
+    - name: enp3s0
+      type: ethernet
+      state: up
+      speed_mbps: 1000
+    - name: wlp4s0
+      type: wifi
+      state: up
+      speed_mbps: -1
+    - name: virbr0
+      type: bridge
+      state: up
+      speed_mbps: -1
+  dns:
+    dnsmasq_available: true
+    systemd_resolved: true
+  capabilities:
+    has_ethernet: true
+    has_wifi: true
+    has_bridge_support: true
+    has_bond_support: true
+    has_vlan_support: true
+
+usb:
+  present: true
+  controller_count: 3
+  controllers:
+    - type: xhci
+      usb_version: "3.0"
+    - type: ehci
+      usb_version: "2.0"
+    - type: ehci
+      usb_version: "2.0"
+  device_count: 8
+  device_classes:
+    - hid
+    - storage
+    - audio
+    - wireless
+  capabilities:
+    has_usb3: true
+    has_usb2: true
+    max_version: "3.2"
+
+distro:
+  id: centos
+  version: "9"
+  id_like: rhel
+  pretty_name: "CentOS Stream 9"
+  kernel: "5.14.0-362.el9"
+  kernel_major: "5.14"
+  tier: 1
+  package_manager: dnf
+  firewall: firewalld
+  init_system: systemd
+  init_version: "252"
+  security:
+    selinux: enforcing
+    apparmor: absent
+  capabilities:
+    is_tier1: true
+    has_systemd: true
+    has_selinux: true
+    has_apparmor: false
+
+capabilities:
+  can_run_vms: true
+  can_passthrough_gpu: true
+  meets_minimum: true
+  has_audio_output: true
+  has_audio_input: true
+  has_midi: true
+  has_ethernet: true
+  has_wifi: true
+  has_bridge_support: true
+  has_usb3: true
+  is_tier1_distro: true
+  has_systemd: true
+  has_selinux: true

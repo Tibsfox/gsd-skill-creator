@@ -1,0 +1,525 @@
+# GSD Skill Metadata
+pack_id: CRIT-101
+pack_name: "Critical Thinking -- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: critical_thinking
+
+# Content Description
+description: |
+  Critical thinking as the discipline of thinking well: analyzing arguments,
+  evaluating evidence, recognizing fallacies, identifying cognitive biases,
+  and making reasoned judgments. Not what to think, but HOW to think. Covers
+  critical thinking skills from foundation through college level, emphasizing
+  the meta-skill that improves performance in every other domain.
+
+short_description: "Argument analysis, evidence evaluation, fallacy detection, and metacognition across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Critical Thinking Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - READ-101
+
+# What This Pack Enables
+enables:
+  - LOG-101
+  - PHILO-101
+  - PROB-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [20, 40]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [40, 60]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [60, 90]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [90, 130]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [130, 180]
+
+# Modules
+modules:
+  - id: CRIT-101-M1
+    name: "Claims & Evidence"
+    description: "Identifying claims, evaluating evidence quality, assessing source reliability, understanding burden of proof, and developing comfort with degrees of certainty"
+    learning_outcomes:
+      - "Distinguish claims from questions, commands, opinions, and definitions"
+      - "Evaluate evidence quality using an evidence hierarchy"
+      - "Assess source reliability by examining expertise, bias, and methodology"
+      - "Apply the concept of burden of proof and proportional evidence"
+      - "Express degrees of certainty rather than binary true/false judgments"
+    topics:
+      - "Identifying Claims"
+      - "Types of Evidence"
+      - "Evidence Quality & Hierarchy"
+      - "Source Reliability Assessment"
+      - "Burden of Proof"
+      - "Degrees of Certainty & Confidence"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 25
+      middle: 30
+      high: 20
+    prerequisite_modules: []
+    activities:
+      count: 6
+      examples:
+        - "Claim Sorting Game"
+        - "Source Reliability Ranking"
+        - "Evidence Strength Spectrum"
+        - "The Skeptic's Challenge"
+        - "Burden of Proof Debates"
+        - "Confidence Calibration"
+    assessments:
+      - "Can student distinguish claims from non-claims?"
+      - "Does student evaluate evidence quality?"
+      - "Can student assess source reliability?"
+      - "Does student apply burden of proof appropriately?"
+
+  - id: CRIT-101-M2
+    name: "Arguments & Logical Reasoning"
+    description: "Understanding argument structure, distinguishing deductive from inductive reasoning, evaluating validity and soundness, identifying hidden assumptions, and constructing counterarguments"
+    learning_outcomes:
+      - "Map argument structure: premises, conclusions, and logical connections"
+      - "Distinguish deductive from inductive arguments"
+      - "Evaluate arguments for validity and soundness"
+      - "Identify hidden assumptions"
+      - "Construct counterarguments by steelmanning opposing positions"
+    topics:
+      - "Argument Structure"
+      - "Deductive Reasoning"
+      - "Inductive Reasoning"
+      - "Validity vs. Soundness"
+      - "Hidden Assumptions"
+      - "Counterarguments & Steelmanning"
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      middle: 35
+      high: 30
+    prerequisite_modules: [CRIT-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Argument Mapping with Sticky Notes"
+        - "Build a Counterargument Challenge"
+        - "Syllogism Sorting"
+        - "Hidden Assumption Detective"
+        - "Deductive vs. Inductive Sorting"
+        - "The Steelmanning Exercise"
+    assessments:
+      - "Can student map argument structure?"
+      - "Does student distinguish deductive from inductive reasoning?"
+      - "Can student evaluate validity and soundness?"
+      - "Does student identify hidden assumptions?"
+
+  - id: CRIT-101-M3
+    name: "Fallacies & Biases"
+    description: "Recognizing formal and informal logical fallacies, understanding cognitive biases, applying bias mitigation strategies, and analyzing reasoning errors in real-world contexts"
+    learning_outcomes:
+      - "Identify common informal fallacies in real-world contexts"
+      - "Explain why each fallacy is logically flawed"
+      - "Recognize cognitive biases in own thinking and in others"
+      - "Apply bias mitigation strategies proactively"
+      - "Distinguish the fallacy fallacy from legitimate fallacy identification"
+    topics:
+      - "Formal Fallacies"
+      - "Informal Fallacies"
+      - "Cognitive Biases"
+      - "Bias Mitigation Strategies"
+      - "Fallacies in Real-World Contexts"
+      - "The Fallacy Fallacy"
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      middle: 30
+      high: 25
+    prerequisite_modules: [CRIT-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Fallacy Bingo"
+        - "Bias Blind Spot Mirror Exercise"
+        - "Fallacy Fix-It Workshop"
+        - "Cognitive Bias Case Studies"
+        - "The Devil's Advocate Game"
+        - "Media Fallacy Hunt"
+    assessments:
+      - "Can student identify fallacies in real-world contexts?"
+      - "Does student explain why fallacies are problematic?"
+      - "Can student recognize biases in own reasoning?"
+      - "Does student apply mitigation strategies?"
+
+  - id: CRIT-101-M4
+    name: "Applied Critical Thinking"
+    description: "Applying critical thinking to media literacy, decision making, ethical reasoning, Socratic dialogue, persuasion analysis, and collaborative reasoning"
+    learning_outcomes:
+      - "Evaluate news and media for reliability, bias, and reasoning quality"
+      - "Use structured decision frameworks under uncertainty"
+      - "Analyze ethical dilemmas using multiple frameworks"
+      - "Facilitate and participate in Socratic dialogue"
+      - "Analyze persuasion techniques in rhetoric and advertising"
+    topics:
+      - "Media Literacy & Fact-Checking"
+      - "Decision Making Under Uncertainty"
+      - "Ethical Reasoning Frameworks"
+      - "Socratic Method & Dialogue"
+      - "Persuasion Analysis"
+      - "Collaborative Reasoning"
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      middle: 30
+      high: 35
+    prerequisite_modules: [CRIT-101-M2, CRIT-101-M3]
+    activities:
+      count: 6
+      examples:
+        - "Fake News Detective Workshop"
+        - "Ethical Dilemma Discussion Circle"
+        - "Socratic Seminar"
+        - "Decision Matrix Workshop"
+        - "Persuasion Autopsy"
+        - "Collaborative Problem-Solving Protocol"
+    assessments:
+      - "Can student evaluate media sources using structured criteria?"
+      - "Does student use decision frameworks?"
+      - "Can student apply multiple ethical frameworks?"
+      - "Does student facilitate productive dialogue?"
+
+  - id: CRIT-101-M5
+    name: "Metacognition & Intellectual Humility"
+    description: "Developing awareness of own thinking processes, calibrating confidence, practicing intellectual humility, and cultivating the courage to revise beliefs"
+    learning_outcomes:
+      - "Monitor and describe own reasoning processes"
+      - "Calibrate confidence to match actual accuracy"
+      - "Identify boundaries of own knowledge accurately"
+      - "Revise positions based on new evidence without defensiveness"
+      - "Demonstrate intellectual courage by following arguments to uncomfortable conclusions"
+    topics:
+      - "Thinking About Thinking"
+      - "Intellectual Humility"
+      - "Confidence Calibration"
+      - "Knowing What You Don't Know"
+      - "Growth Mindset for Reasoning"
+      - "Intellectual Courage"
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      middle: 20
+      high: 25
+    prerequisite_modules: [CRIT-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Thinking Aloud Protocol"
+        - "Calibration Training"
+        - "Intellectual Humility Journal"
+        - "Pre-Mortem Analysis"
+        - "Perspective Rotation"
+        - "What Would Change My Mind Exercise"
+    assessments:
+      - "Can student describe own reasoning process?"
+      - "Does student's confidence match accuracy?"
+      - "Can student identify knowledge boundaries?"
+      - "Does student revise beliefs based on evidence?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-CLM-001
+    description: "Evaluate claims by assessing evidence quality, source reliability, and burden of proof"
+    levels: ["3", "4", "5", "6", "7", "8"]
+
+  - code: LO-ARG-001
+    description: "Analyze argument structure, identify premises and conclusions, and evaluate validity"
+    levels: ["5", "6", "7", "8", "9", "10"]
+
+  - code: LO-FAL-001
+    description: "Identify logical fallacies and cognitive biases in real-world contexts"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-DEC-001
+    description: "Apply critical thinking frameworks to media evaluation, ethical reasoning, and decision making"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-MET-001
+    description: "Monitor own thinking processes and calibrate confidence accurately"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-HUM-001
+    description: "Demonstrate intellectual humility by revising positions based on evidence"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Reasoning Discourse"
+    frequency: ongoing
+
+  - type: formative
+    name: "Argument Analysis Review"
+    frequency: weekly
+
+  - type: summative
+    name: "Critical Thinking Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Argument Evaluation Essay"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: yourlogicalfallacyis
+    url: https://yourlogicalfallacyis.com
+    description: "Visual reference for common logical fallacies with examples and explanations"
+
+  - name: argument_mapper
+    integrated: true
+    description: "Structured argument mapping tool with premises, conclusions, and inference visualization"
+
+interactive_elements:
+  - type: investigation
+    name: "Claim Evaluation Challenge"
+
+  - type: game
+    name: "Fallacy Bingo"
+
+  - type: simulator
+    name: "Bias Blind Spot Demonstrator"
+
+  - type: collaboration
+    name: "Socratic Seminar"
+
+  - type: visualization
+    name: "Argument Mapper"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "All visual content has text descriptions. Discussion-based activities include written alternatives. Argument mapping tools support keyboard navigation."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Common Core ELA (Argumentation & Reasoning)"
+    version: 2010
+    alignments:
+      "CCSS.ELA-LITERACY.CCRA.R.8": "Evaluate arguments and claims"
+      "CCSS.ELA-LITERACY.CCRA.W.1": "Write arguments with evidence"
+      "CCSS.ELA-LITERACY.CCRA.SL.3": "Evaluate speaker's reasoning"
+      "CCSS.ELA-LITERACY.L.3.5.B": "Identify real-life connections"
+  - framework: "Philosophy for Children (P4C) Framework"
+    version: 2020
+    alignments:
+      "Critical Thinking": true
+      "Creative Thinking": true
+      "Caring Thinking": true
+      "Collaborative Inquiry": true
+  - framework: "IB Middle Years Programme (Individuals & Societies)"
+    version: "2024"
+    alignments:
+      MYP.IND.A: "Knowing and understanding"
+      MYP.IND.B: "Developing sources"
+      MYP.IND.C: "Processing"
+  - framework: "UK National Curriculum (Thinking Skills)"
+    version: "2014"
+    alignments:
+      KS3.THINK: "Critical thinking skills"
+      KS4.THINK: "Reasoned argument and debate"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium-high
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Conceptual demand increases significantly at middle and high school levels. Technical demand remains low -- critical thinking requires no special equipment, only disciplined practice."
+
+# Content Flags
+content_flags:
+  - flag: worldview_sensitivity
+    description: "Discussion of logical fallacies in religious, political, and cultural arguments may intersect with personal beliefs."
+    mitigation: "Focus on the quality of reasoning rather than the truth of conclusions. Emphasize that fallacies are about HOW arguments are made, not WHAT is being argued. Apply the same analytical standards to all positions."
+
+  - flag: emotional_difficulty
+    description: "Discovering one's own cognitive biases and reasoning errors can be uncomfortable."
+    mitigation: "Normalize bias as a universal human trait, not a personal failing. Frame bias awareness as empowerment. Use humor and self-deprecation to reduce defensiveness."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/crit-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "CRIT-101"
+  looking_for:
+    - "Real-world fallacy examples from current media and advertising"
+    - "Ethical dilemma scenarios for various age levels"
+    - "Cross-cultural reasoning traditions and examples"
+    - "Translations to Spanish & Mandarin"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Critical Thinking Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - critical-thinking
+  - logic
+  - reasoning
+  - fallacies
+  - cognitive-biases
+  - argument-analysis
+  - media-literacy
+  - metacognition
+  - evidence-evaluation
+  - foundational
+
+# External Resources
+resources:
+  - type: textbook
+    title: "Thinking, Fast and Slow"
+    author: "Daniel Kahneman"
+    url: null
+
+  - type: online_platform
+    title: "Your Logical Fallacy Is"
+    author: "School of Thought"
+    url: "https://yourlogicalfallacyis.com"
+
+  - type: online_platform
+    title: "CriticalThinking.org"
+    author: "Foundation for Critical Thinking"
+    url: "https://www.criticalthinking.org"
+
+# Related Packs
+related_packs:
+  - id: PROB-101
+    relationship: "Problem solving applies critical thinking to structured challenges; CRIT-101 provides the reasoning foundation"
+
+  - id: COMM-101
+    relationship: "Communication is how critical thinking is expressed; argument construction meets persuasive writing"
+
+  - id: READ-101
+    relationship: "Critical reading is critical thinking applied to texts; evidence evaluation meets textual analysis"
+
+  - id: LOG-101
+    relationship: "Formal logic is the mathematical backbone of critical thinking"
+
+  - id: SCI-101
+    relationship: "Scientific thinking is critical thinking applied to empirical questions"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "brain"
+    color: "#FF5722"
+    position: "Featured - Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "CRIT-101-core-concepts"
+    - "CRIT-101-argument-structure"
+    - "CRIT-101-fallacy-library"
+    - "CRIT-101-assessment-patterns"
+    - "CRIT-101-parent-guidance"
+
+# File References
+files:
+  vision_document: "CRIT-101-vision.md"
+  modules_definition: "CRIT-101-modules.yaml"
+  activities: "CRIT-101-activities.json"
+  assessment: "CRIT-101-assessment.md"
+  resources: "CRIT-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering claims, arguments, fallacies, applied thinking, and metacognition"
+      - "Contributed 30 starter activities across all modules"
+      - "Aligned to Common Core ELA argumentation standards and P4C framework"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"

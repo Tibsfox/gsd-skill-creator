@@ -1,0 +1,315 @@
+# amiga-corner-schematic-spec.yaml -- Master spatial specification for Amiga Corner build
+#
+# This is the blueprint a Minecraft builder follows to construct the Amiga Corner
+# exhibit in-game. It defines rooms, dimensions, block palettes, sign placements,
+# item frame positions, and pathway connections.
+#
+# Part of: Knowledge World > Creative District > Amiga Corner
+# Depends on: Phase 186 world-master-plan.yaml for absolute coordinates
+# References: pixel-art-gallery.yaml, demo-scene-exhibit.yaml, tool-evolution-walkthrough.yaml
+
+schematic:
+  name: "Amiga Corner"
+  version: "1.0"
+  parent_district: "Creative District"
+  # Coordinates are RELATIVE to Creative District origin (Phase 186 defines absolute)
+  relative_origin:
+    x: 0
+    z: 0
+    note: "Offset from Creative District origin -- Phase 186 world-master-plan.yaml provides absolute coordinates"
+
+  dimensions:
+    width: 64    # blocks east-west
+    depth: 80    # blocks north-south
+    height: 16   # blocks floor to ceiling max
+    total_area: 5120  # square blocks
+
+  color_palette:
+    primary: "light_gray_concrete"       # Amiga beige/gray aesthetic (Amiga case color)
+    secondary: "white_concrete"          # Clean walls and highlights
+    accent: "blue_concrete"              # Amiga blue (Workbench 1.x title bar)
+    floor: "smooth_stone_slab"           # Clean, neutral floor surface
+    trim: "dark_oak_planks"              # Warm wood accents (furniture, frames)
+    highlight: "orange_concrete"         # Amiga checkered disk icon orange
+    sign_background: "dark_oak_planks"   # Readable dark background for all signs
+    ceiling: "smooth_stone"              # Neutral ceiling base
+    lighting: "sea_lantern"              # Primary ambient lighting block
+    accent_lighting: "glowstone"         # Hidden behind ceilings for even glow
+    notes: >
+      The Amiga Corner uses blue and orange as its identity colors -- blue from the
+      Workbench 1.x operating system title bar, orange from the iconic Amiga checkered
+      disk logo. Light gray concrete represents the Amiga's beige/gray case color.
+      Dark oak provides warmth and contrast for signs and frames.
+
+  entry:
+    direction: "north"  # players enter from north (Creative District hub)
+    gateway:
+      width: 5
+      height: 4
+      arch_blocks: "blue_concrete"
+      accent_blocks: "orange_concrete"
+      description: >
+        Blue concrete arch (3 blocks across top, 1 block columns on each side)
+        with orange concrete Amiga checkball logo pattern inset in the arch face.
+        The checkball pattern is a 3x3 alternating blue/orange grid centered
+        in the arch's top section.
+      signs:
+        - position: "above entry, centered"
+          text:
+            - "Amiga Corner"
+            - "Creative Heritage"
+            - "1985 - Present"
+            - ""
+        - position: "left column, eye level"
+          text:
+            - "-> Pixel Art"
+            - "-> Demo Scene"
+            - "-> Tool Evolution"
+            - ""
+      beacon:
+        position: "directly above gateway arch"
+        color: "orange"
+        beam_visible: true
+        glass_color: "orange_stained_glass"
+        note: "Orange beacon visible from Creative District hub, matches wayfinding system"
+
+  rooms:
+    - id: "pixel-art-gallery"
+      name: "Pixel Art Gallery"
+      position:
+        relative_x: 17
+        relative_z: 10
+      dimensions:
+        width: 30
+        depth: 20
+        height: 6
+      wall_material: "light_gray_concrete"
+      floor_material: "smooth_stone_slab"
+      ceiling_material: "smooth_stone with hidden glowstone above"
+      purpose: "Display Amiga pixel art as Minecraft map art in item frames"
+      layout: |
+        Rectangular gallery hall oriented east-west.
+        Map art displayed in item frames on both long walls (north and south).
+        7 artworks total: 4 on the north wall, 3 on the south wall.
+        Item frames placed at eye level (Y+2 from floor, centered in 6-high wall).
+        Below each item frame: 2 signs on dark_oak_planks (title + description).
+        Center of room: lectern on dark_oak_planks podium with book describing
+        pixel art history and the OCS/EHB/HAM/AGA palette progression.
+        Floor: smooth_stone_slab throughout.
+        Lighting: glowstone hidden behind smooth_stone ceiling for even illumination.
+        No shadows on map art -- consistent lighting is critical for map color accuracy.
+      item_frames:
+        count: 7
+        placement: "eye level (Y+2 from floor), centered on wall section per artwork"
+        content: "Map art items created from 128x128 block canvases per pixel-art-gallery.yaml"
+        spacing: "4 blocks between frame centers on each wall"
+      signs:
+        per_artwork: 2  # title sign (4 lines) + technique sign (4 lines)
+        total: 14
+        content_source: "pixel-art-gallery.yaml sign_text field per artwork"
+        mount: "dark_oak_planks wall, directly below item frame"
+      special_features:
+        - "Lectern with signed book: 'The Amiga Pixel Art Tradition' -- DPaint to map art"
+        - "Floor-level comparison: 32-color palette strip in concrete showing all OCS colors mapped to blocks"
+      references: "pixel-art-gallery.yaml"
+
+    - id: "demo-scene-exhibit"
+      name: "Demo Scene Exhibit"
+      position:
+        relative_x: 17
+        relative_z: 32
+      dimensions:
+        width: 30
+        depth: 24
+        height: 8
+      wall_material: "black_concrete with blue_concrete trim"
+      floor_material: "smooth_stone_slab"
+      ceiling_material: "black_concrete (dark, theatrical)"
+      purpose: "Spatial representations of landmark demo scene productions"
+      layout: |
+        Dark-themed exhibit hall with theatrical lighting.
+        Six alcoves (3 per side) along the east and west walls.
+        Each alcove: 6 wide x 4 deep x 8 tall -- a mini stage.
+        Central walkway: 6 blocks wide, running north-south.
+        Alcoves separated by blue_concrete pillars (1 block wide).
+        Each alcove contains a concept build representing the demo's key achievement:
+          - Alcove 1 (NE): Juggler -- armor stands + glass + glowstone
+          - Alcove 2 (E):  Enigma -- redstone lamp cascade
+          - Alcove 3 (SE): State of the Art -- item frame flipbook hallway
+          - Alcove 4 (NW): Planet Potion -- miniature terrain + stained glass fog
+          - Alcove 5 (W):  Starstruck -- end rod star ceiling + beacon
+          - Alcove 6 (SW): 9 Fingers -- armor stand polygon display
+        Signs in each alcove: 4 per production (title, tech, significance, links).
+        Ceiling: black_concrete with sea_lantern spotlights above each alcove.
+      alcoves:
+        count: 6
+        width: 6
+        depth: 4
+        height: 8
+        separation: "1-block blue_concrete pillar between alcoves"
+      signs:
+        per_production: 4  # title, technical, significance, links/watch
+        total: 24
+        content_source: "demo-scene-exhibit.yaml sign_text field per production"
+        mount: "dark_oak_planks panel at back of each alcove"
+      special_features:
+        - "Sea lantern spotlight above each alcove, recessed into black ceiling"
+        - "Blue concrete trim lines running along the floor edge of each alcove"
+        - "Entry arch with sign: 'The Demo Scene -- Architectural Leverage Made Visible'"
+      references: "demo-scene-exhibit.yaml"
+
+    - id: "tool-evolution-corridor"
+      name: "Tool Evolution Walkthrough"
+      position:
+        relative_x: 26
+        relative_z: 58
+      dimensions:
+        width: 12
+        depth: 22
+        height: 5
+      wall_material: "split -- west: terracotta/oak (retro), east: quartz/glass (modern)"
+      floor_material: "concrete gradient (dark_gray -> light_gray, south to north)"
+      ceiling_material: "smooth_stone_slab"
+      purpose: "Corridor mapping Amiga creative tools to their modern equivalents"
+      layout: |
+        Linear corridor, 12 blocks wide, 22 blocks long, oriented north-south.
+        West wall (left entering from south): Amiga-era stations.
+          Block palette: orange_terracotta, oak_planks, note_block, dark_oak -- warm, retro.
+        East wall (right entering from south): Modern-era stations.
+          Block palette: quartz_block, glass, sea_lantern, light_blue_concrete -- clean, modern.
+        Floor: concrete timeline gradient from dark_gray_concrete (south/past) to
+          white_concrete (north/present). Arrow pattern in orange_concrete pointing north.
+        Center: 2-block glass pane divider running the corridor length.
+        7 stations, each 3 blocks wide per side, separated by 0 blocks (continuous wall).
+        Each station has:
+          - 1 wall sign on left (Amiga tool: name, year, 1-line description)
+          - 1 wall sign on right (Modern tool: name, what it inherited)
+          - 1 floor sign between stations (creative insight connecting the pair)
+        Station numbering south to north: DPaint, ProTracker, LightWave, Scala,
+          Video Toaster, AMOS, SoundTracker.
+      stations:
+        count: 7
+        width_per_station: 3
+        layout_direction: "south to north (chronological: 1985 -> 1990)"
+      signs:
+        per_station: 3  # left wall, right wall, floor
+        total: 21
+        content_source: "tool-evolution-walkthrough.yaml sign_text field per station"
+        mount_left: "dark_oak_planks on terracotta wall"
+        mount_right: "quartz_slab on glass/quartz wall"
+        mount_floor: "oak_sign on floor between stations"
+      special_features:
+        - "Glass pane center divider: visual connection between past and present"
+        - "Floor gradient: dark_gray -> gray -> light_gray -> white concrete south to north"
+        - "Orange concrete arrow pattern embedded in floor pointing north (toward the future)"
+        - "Entry sign: 'Walk Through Time -- 1985 to 2025'"
+      references: "tool-evolution-walkthrough.yaml"
+
+  pathways:
+    - id: "entry-to-gallery"
+      from: "entry"
+      to: "pixel-art-gallery"
+      width: 3
+      floor: "smooth_stone_slab"
+      length: 10
+      lighting: "sea_lantern under slabs (every 4 blocks)"
+      walls: "light_gray_concrete, 2 blocks high on each side"
+      signs: []
+
+    - id: "gallery-to-exhibit"
+      from: "pixel-art-gallery"
+      to: "demo-scene-exhibit"
+      width: 3
+      floor: "smooth_stone_slab"
+      length: 2
+      lighting: "sea_lantern under slabs"
+      walls: "open archway transition"
+      signs:
+        - text: ["-> Demo Scene", "Exhibit ahead", "", ""]
+
+    - id: "exhibit-to-corridor"
+      from: "demo-scene-exhibit"
+      to: "tool-evolution-corridor"
+      width: 3
+      floor: "smooth_stone_slab"
+      length: 2
+      lighting: "sea_lantern under slabs"
+      walls: "open archway transition"
+      signs:
+        - text: ["-> Tool Evolution", "Walkthrough ahead", "", ""]
+
+  wayfinding:
+    beacon:
+      position: "above entry gateway"
+      color: "orange"
+      base: "iron_block 3x3 + obsidian top"
+      glass: "orange_stained_glass above beacon"
+      note: "Visible from Creative District hub, color-coded per Phase 186 wayfinding system"
+    signs:
+      - position: "Creative District hub (external)"
+        text:
+          - "-> Amiga Corner"
+          - "Pixel Art | Demos"
+          - "Tool Evolution"
+          - ""
+      - position: "inside entry gateway"
+        text:
+          - "v Pixel Art Gallery"
+          - "vv Demo Scene"
+          - "vvv Tool Evolution"
+          - "Welcome!"
+      - position: "gallery exit (south wall)"
+        text:
+          - "-> Demo Scene"
+          - "Exhibit"
+          - ""
+          - ""
+      - position: "exhibit exit (south wall)"
+        text:
+          - "-> Tool Evolution"
+          - "Walkthrough"
+          - ""
+          - ""
+      - position: "corridor exit (north end)"
+        text:
+          - "<- Back to"
+          - "Amiga Corner"
+          - ""
+          - ""
+
+  build_notes:
+    construction_order:
+      - "1. Mark out the 64x80 footprint from the Creative District origin offset"
+      - "2. Build the entry gateway with blue/orange arch and beacon"
+      - "3. Lay the entry-to-gallery pathway (10 blocks, smooth stone slabs)"
+      - "4. Build the Pixel Art Gallery shell (30x20x6, light gray concrete)"
+      - "5. Install gallery interior: item frames, signs, lectern, hidden lighting"
+      - "6. Build the gallery-to-exhibit transition archway"
+      - "7. Build the Demo Scene Exhibit shell (30x24x8, black/blue concrete)"
+      - "8. Build the 6 alcoves with concept builds per demo-scene-exhibit.yaml"
+      - "9. Install exhibit signs and sea lantern spotlights"
+      - "10. Build the exhibit-to-corridor transition archway"
+      - "11. Build the Tool Evolution Corridor shell (12x22x5, split palette)"
+      - "12. Install the 7 stations with wall/floor signs per tool-evolution-walkthrough.yaml"
+      - "13. Lay the floor gradient and orange arrow pattern"
+      - "14. Install glass pane center divider"
+      - "15. Install all wayfinding signs"
+      - "16. Final lighting pass: verify no dark spots, all map art evenly lit"
+      - "17. Capture as Litematica schematic for Syncmatica distribution"
+    material_estimate:
+      light_gray_concrete: "~2000 blocks"
+      black_concrete: "~800 blocks"
+      blue_concrete: "~200 blocks"
+      orange_concrete: "~100 blocks"
+      smooth_stone_slab: "~1600 blocks"
+      dark_oak_planks: "~400 blocks"
+      sea_lantern: "~60 blocks"
+      glowstone: "~40 blocks"
+      glass_pane: "~30 blocks"
+      signs: "~59 signs total (14 gallery + 24 exhibit + 21 corridor)"
+      item_frames: "~7 gallery + 6 exhibit concept = ~13 minimum"
+    litematica_capture:
+      selection: "Full 64x80x16 bounding box"
+      filename: "education-amiga-corner-1-0.litematic"
+      naming_convention: "category-name-version.litematic (per Phase 188 convention)"
+      syncmatica_share: true

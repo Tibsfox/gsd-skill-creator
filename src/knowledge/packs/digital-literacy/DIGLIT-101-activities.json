@@ -1,0 +1,407 @@
+[
+  {
+    "id": "DIGLIT-101-A01",
+    "name": "Hardware Scavenger Hunt",
+    "module_id": "DIGLIT-101-M1",
+    "grade_range": ["K", "1", "2", "3", "4", "5"],
+    "duration_minutes": 30,
+    "description": "Learners explore devices to identify internal and external hardware components. Using a labeled diagram, they locate and name components like CPU, RAM, storage, ports, and peripherals. Develops understanding that devices contain different parts with different functions.",
+    "materials": ["Desktop or laptop computer", "Smartphone or tablet", "Component identification poster", "Magnifying glass (optional)", "Worksheet with labeled diagrams"],
+    "learning_objectives": [
+      "Identify common hardware components",
+      "Understand that devices contain different parts",
+      "Recognize that different components serve different functions",
+      "Use vocabulary to describe what they observe"
+    ],
+    "variations": [
+      "External only: focus on ports, buttons, and visible features for younger learners",
+      "Teardown activity: take apart an old device to see internal components (with supervision)",
+      "Comparison: compare hardware inside phone vs. laptop vs. tablet"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A02",
+    "name": "How the Internet Works: Packet Relay Race",
+    "module_id": "DIGLIT-101-M1",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 45,
+    "description": "Hands-on activity where learners physically simulate how data travels across the internet. Groups represent routers, messages are broken into 'packets', and teams relay packets to destination. Afterward, learners map their path and discuss how real internet routing works.",
+    "materials": ["Index cards", "Markers", "Clipboards", "Gym or large indoor space", "Poster showing packet structure"],
+    "learning_objectives": [
+      "Understand that large messages are broken into packets",
+      "Recognize that packets may take different paths to destination",
+      "Understand the role of routers in directing traffic",
+      "Compare physical relay to digital packet transmission"
+    ],
+    "variations": [
+      "Add packet corruption: some packets are damaged and must be resent",
+      "Add congestion: simulate network traffic with many packets",
+      "Chain order: packets arrive out of order and must be reassembled"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A03",
+    "name": "Network Mapping Activity",
+    "module_id": "DIGLIT-101-M1",
+    "grade_range": ["4", "5", "6", "7", "8", "9"],
+    "duration_minutes": 40,
+    "description": "Learners draw maps of networks they're connected to: home network (devices connecting to router), school network (classrooms and servers), internet (their location in the global network). Discusses how information travels from device to device.",
+    "materials": ["Large paper", "Markers or colored pencils", "Network diagram examples", "Wireless router (to examine)"],
+    "learning_objectives": [
+      "Understand that networks connect multiple devices",
+      "Recognize different types of networks (home, school, internet)",
+      "Trace paths that data might take",
+      "Understand the role of routers and servers"
+    ],
+    "variations": [
+      "Trace a journey: follow how data travels from their device to a website and back",
+      "Compare networks: map home vs. school vs. public wifi networks",
+      "Add latency: mark how long data takes to travel between points"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A04",
+    "name": "Troubleshooting Scenarios",
+    "module_id": "DIGLIT-101-M1",
+    "grade_range": ["4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 35,
+    "description": "Learners receive scenarios describing technology problems and must propose solutions using a systematic troubleshooting approach: identify the problem, gather information, propose solutions, test, and document results. Builds problem-solving skills beyond 'turn it off and on again'.",
+    "materials": ["Scenario cards with realistic problems", "Troubleshooting flowchart", "Documentation worksheet"],
+    "learning_objectives": [
+      "Apply systematic troubleshooting approach",
+      "Gather relevant information about a problem",
+      "Propose multiple possible solutions",
+      "Understand when to seek professional help"
+    ],
+    "variations": [
+      "Real device problems: troubleshoot actual devices in classroom",
+      "Written vs. demonstrated: students write solutions vs. show them step-by-step",
+      "Network problems: focus on connectivity issues (wifi, internet, device connection)"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A05",
+    "name": "Search Engine Experiments",
+    "module_id": "DIGLIT-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 50,
+    "description": "Learners run the same search query on multiple search engines and compare results. They investigate how search algorithms work, how results are ranked, and how sponsored results appear. Builds understanding that search engines make decisions about what to show.",
+    "materials": ["Computers with internet", "Search engine comparison worksheet", "Sample search queries on different topics"],
+    "learning_objectives": [
+      "Understand that search algorithms rank results",
+      "Recognize sponsored results vs. organic results",
+      "Understand that different search engines may return different results",
+      "Recognize that no search engine shows everything"
+    ],
+    "variations": [
+      "Advanced searches: use operators like AND, OR, NOT, site: to narrow results",
+      "Topic bias: search divisive topics and notice how results differ by engine and region",
+      "Personalization: log in with different accounts and compare personalized results"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A06",
+    "name": "Source Credibility Evaluation Challenge",
+    "module_id": "DIGLIT-101-M2",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Learners evaluate the credibility of various sources using criteria: author expertise, publication reputation, currency, bias, and citations. They rate sources from very credible to questionable and discuss their reasoning. Includes legitimate sources and deliberate misinformation.",
+    "materials": ["Source evaluation rubric", "Sample sources (articles, websites, videos, social posts)", "Credibility rating worksheet"],
+    "learning_objectives": [
+      "Apply multiple criteria to evaluate credibility",
+      "Recognize bias and determine if it compromises reliability",
+      "Understand author expertise and credentials",
+      "Distinguish between credible and questionable sources"
+    ],
+    "variations": [
+      "Peer review: students propose sources and peers evaluate them",
+      "Current events: evaluate sources discussing real news stories",
+      "Deep dive: research one source fully to understand its reputation and bias"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A07",
+    "name": "Fact-Check Investigation Lab",
+    "module_id": "DIGLIT-101-M2",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 60,
+    "description": "Learners investigate whether specific claims are true, false, or somewhere in between. They use fact-checking websites, cross-reference sources, and trace claims to original sources. Develops skills for evaluating viral claims and urban legends.",
+    "materials": ["Claims cards (mix of true, false, partly true)", "Computers with internet", "Fact-checking websites list", "Investigation worksheet"],
+    "learning_objectives": [
+      "Use fact-checking websites and tools",
+      "Trace claims to original sources",
+      "Understand that claims can be partly true or misleading even if technically accurate",
+      "Recognize common fact-checking challenges"
+    ],
+    "variations": [
+      "Viral claims: investigate trending claims on social media",
+      "Historical misinformation: research false claims that spread widely in the past",
+      "Create-your-own: students write plausible-sounding false claims for peers to investigate"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A08",
+    "name": "Misinformation Pattern Analysis",
+    "module_id": "DIGLIT-101-M2",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Learners analyze examples of misinformation and disinformation to identify common tactics: emotional manipulation, false authority, oversimplification, missing context, and appeal to tribal identity. Helps them recognize these patterns in future encounters.",
+    "materials": ["Examples of misinformation from various sources", "Pattern analysis worksheet", "Tactic identification guide"],
+    "learning_objectives": [
+      "Identify common misinformation tactics",
+      "Recognize emotional manipulation and appeals to identity",
+      "Understand how context is used to mislead",
+      "Predict how similar tactics might appear in different contexts"
+    ],
+    "variations": [
+      "Historical analysis: examine famous misinformation campaigns",
+      "Media creation: students create exaggerated or misleading content to demonstrate tactics",
+      "Vulnerability assessment: reflect on which tactics they find most convincing"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A09",
+    "name": "Professional Email Writing Workshop",
+    "module_id": "DIGLIT-101-M3",
+    "grade_range": ["5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 45,
+    "description": "Learners study examples of professional and unprofessional emails, then write emails appropriate to different contexts and audiences. They learn about subject lines, tone, formatting, and when to use email vs. other communication. Develops practical communication skills.",
+    "materials": ["Email example collection (good and poor)", "Professional email template", "Scenario cards", "Email editing checklist"],
+    "learning_objectives": [
+      "Compose clear, concise email messages",
+      "Choose appropriate tone for different audiences",
+      "Write effective subject lines",
+      "Format and organize email content logically",
+      "Know when email is appropriate communication method"
+    ],
+    "variations": [
+      "Role play: email to teachers, employers, peers, customer service",
+      "Peer review: exchange drafts and provide feedback using rubric",
+      "Problem-solving: rewrite poor emails to make them professional"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A10",
+    "name": "Collaborative Document Creation Project",
+    "module_id": "DIGLIT-101-M3",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 50,
+    "description": "Learners work together using Google Docs, Office 365, or similar to create a shared document. They practice leaving comments, suggesting changes, managing versions, and coordinating their work. Develops collaborative and project management skills essential in modern work.",
+    "materials": ["Computers with collaborative software", "Project instructions", "Role assignments (writer, editor, organizer)", "Collaboration rubric"],
+    "learning_objectives": [
+      "Use collaborative document tools effectively",
+      "Leave constructive comments and suggestions",
+      "Manage version control and document history",
+      "Coordinate work with multiple contributors",
+      "Give and receive feedback on shared work"
+    ],
+    "variations": [
+      "Asynchronous collaboration: team members work at different times",
+      "Real-time collaboration: all work simultaneously and see changes",
+      "Project types: research paper, presentation, shared syllabus"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A11",
+    "name": "Password Strength Tester",
+    "module_id": "DIGLIT-101-M4",
+    "grade_range": ["4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 30,
+    "description": "Learners use online tools to test password strength and understand why some passwords are stronger than others. They learn about length, complexity, uniqueness, and common mistakes. Creates passwords and tests them. Builds understanding of how passwords protect accounts.",
+    "materials": ["Computers with internet", "Password tester websites (HowSecureIsMyPassword.net, etc.)", "Password creation worksheet", "Password strength criteria guide"],
+    "learning_objectives": [
+      "Understand what makes a password strong",
+      "Create passwords that are both secure and memorable",
+      "Recognize common weak password patterns",
+      "Understand the relationship between password strength and account security"
+    ],
+    "variations": [
+      "Time-to-crack: discuss how long it would take to guess different passwords",
+      "Passphrase method: explore using memorable phrases as passwords",
+      "Password manager: research how password managers help with secure passwords"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A12",
+    "name": "Privacy Audit Activity",
+    "module_id": "DIGLIT-101-M4",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 50,
+    "description": "Learners examine privacy settings on social media accounts, apps, and devices. They identify what information is public, private, or shared with third parties. They make intentional choices about what information to share. Develops awareness of digital footprint.",
+    "materials": ["Devices with social media accounts", "Privacy audit checklist", "Settings screenshots or tutorials", "Privacy policy summaries"],
+    "learning_objectives": [
+      "Locate and understand privacy settings",
+      "Identify what information is public vs. private",
+      "Understand data-sharing practices of platforms",
+      "Make conscious choices about information sharing",
+      "Understand permanence of information shared online"
+    ],
+    "variations": [
+      "Parent involvement: audit privacy settings together as family",
+      "Data download: request and examine data that companies have collected",
+      "Policy analysis: read privacy policies and discuss implications"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A13",
+    "name": "Cyberbullying Response Scenarios",
+    "module_id": "DIGLIT-101-M4",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 40,
+    "description": "Learners respond to realistic cyberbullying scenarios. They discuss what happened, why it's harmful, who should be involved, what the target should do, what bystanders should do, and how to prevent. Develops empathy and practical response skills.",
+    "materials": ["Scenario cards describing cyberbullying situations", "Response planning worksheet", "Resources for targets and supporters"],
+    "learning_objectives": [
+      "Recognize cyberbullying in various forms",
+      "Understand harm caused by cyberbullying",
+      "Plan supportive responses",
+      "Understand the role of bystanders",
+      "Know resources for targets"
+    ],
+    "variations": [
+      "Role play: act out scenarios and practice responses",
+      "Different contexts: cyberbullying in gaming, social media, texting, comments",
+      "Historical case studies: examine real cyberbullying cases and outcomes"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A14",
+    "name": "Digital Footprint Analysis",
+    "module_id": "DIGLIT-101-M4",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Learners search for themselves online to discover what information is publicly available. They identify embarrassing posts, photos, or information and discuss implications. They plan how to manage their digital presence. Develops awareness of permanence and searchability.",
+    "materials": ["Computers with internet", "Search engines", "Search tracking worksheet", "Digital footprint management guide"],
+    "learning_objectives": [
+      "Understand what information is discoverable about them",
+      "Recognize consequences of past online actions",
+      "Understand the permanence of online information",
+      "Plan strategies to manage digital presence",
+      "Recognize implications for future opportunities"
+    ],
+    "variations": [
+      "Future perspective: discuss how digital footprint affects college/job applications",
+      "Positive footprint: plan what you want to be searchable",
+      "Removal: research how to request removal of embarrassing content"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A15",
+    "name": "Scam Identification Challenge",
+    "module_id": "DIGLIT-101-M4",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 35,
+    "description": "Learners receive examples of common scams: phishing emails, fake websites, too-good-to-be-true offers, and fake customer service. They identify red flags and discuss why they work. Develops awareness of manipulation tactics.",
+    "materials": ["Scam example collection (emails, screenshots, messages)", "Red flag checklist", "Scam identification worksheet"],
+    "learning_objectives": [
+      "Recognize common online scams",
+      "Identify red flags (urgency, requests for money/info, too-good-to-be-true)",
+      "Understand how scams manipulate psychology",
+      "Know appropriate responses (report, don't engage, tell adults)"
+    ],
+    "variations": [
+      "Create-your-own: students design realistic scams (without sharing how to execute them)",
+      "Generational differences: show older and younger target scams",
+      "Prevention: plan how to protect account against phishing"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A16",
+    "name": "Algorithm Analysis: How Recommendations Work",
+    "module_id": "DIGLIT-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Learners examine how recommendation algorithms work in Netflix, Spotify, YouTube, and social media. They track what they watch/listen/interact with and notice patterns in recommendations. They discuss whether recommendations are helpful or whether algorithms trap them in echo chambers.",
+    "materials": ["Access to various platforms with recommendations", "Tracking worksheet", "Algorithm behavior observation sheet"],
+    "learning_objectives": [
+      "Understand that algorithms personalize content",
+      "Recognize that algorithms are designed to maximize engagement",
+      "Understand concepts of echo chambers and filter bubbles",
+      "Evaluate whether personalization is helpful or limiting"
+    ],
+    "variations": [
+      "Comparative study: clear history and see what recommendations change",
+      "Deliberate deviation: intentionally watch different types of content and observe recommendations",
+      "Multiple users: compare recommendations across different accounts"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A17",
+    "name": "Algorithmic Bias Detective",
+    "module_id": "DIGLIT-101-M5",
+    "grade_range": ["7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 50,
+    "description": "Learners investigate examples of algorithmic bias: hiring tools that discriminate, facial recognition that fails on certain groups, loan algorithms that perpetuate inequality. They discuss why bias occurs and what fairness might look like.",
+    "materials": ["Case studies of algorithmic bias", "Bias analysis worksheet", "Research articles", "Discussion prompts"],
+    "learning_objectives": [
+      "Understand that algorithms can perpetuate human bias",
+      "Recognize bias in training data, algorithm design, and outcomes",
+      "Understand concept of fairness in algorithmic systems",
+      "Recognize that 'objective' algorithms can have subjective effects"
+    ],
+    "variations": [
+      "Real-world impact: research actual lawsuits related to algorithmic bias",
+      "Design challenge: propose ways to make algorithms more fair",
+      "Interactive tools: use online bias detection tools"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A18",
+    "name": "Data Collection Tracking Activity",
+    "module_id": "DIGLIT-101-M5",
+    "grade_range": ["5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 40,
+    "description": "Learners track what data is collected about them for one day: websites visited, apps used, searches performed, location data, purchases, social media interactions. They identify who is collecting data and what it's being used for. Develops awareness of data practices.",
+    "materials": ["Tracking template or worksheet", "Browser history review", "App permission lists", "Privacy policy summaries"],
+    "learning_objectives": [
+      "Identify what data is collected in everyday activities",
+      "Understand who has access to personal data",
+      "Recognize that data collection is often invisible",
+      "Understand how data is used for personalization and profit"
+    ],
+    "variations": [
+      "Multiple days: extend tracking over a week to notice patterns",
+      "Device comparison: compare data collection across phone, computer, tablet",
+      "Opt-out challenge: attempt to reduce data collection and document what's possible"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A19",
+    "name": "AI Experiment & Testing",
+    "module_id": "DIGLIT-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 50,
+    "description": "Learners interact with AI systems (chatbots, image generation, translation, game AI) and explore their capabilities and limitations. They ask it tricky questions, test biases, and discuss when AI works well vs. poorly.",
+    "materials": ["Access to various AI tools (ChatGPT, Claude, DALL-E, Google Translate, etc.)", "Interaction observation worksheet", "Limitation documentation"],
+    "learning_objectives": [
+      "Understand what AI can and cannot do",
+      "Recognize AI limitations and failure modes",
+      "Understand that AI training reflects training data",
+      "Evaluate claims about AI capabilities critically"
+    ],
+    "variations": [
+      "Comparative testing: test same question across multiple AI systems",
+      "Adversarial testing: deliberately try to make AI fail or act inappropriately",
+      "Bias testing: ask AI about sensitive topics and examine bias"
+    ]
+  },
+  {
+    "id": "DIGLIT-101-A20",
+    "name": "Data-Driven Claim Evaluation",
+    "module_id": "DIGLIT-101-M5",
+    "grade_range": ["7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Learners evaluate claims that use data as evidence. They examine graphs, statistics, and study results. They learn to spot misleading graphs, understand correlation vs. causation, and recognize when data supports or doesn't support claims.",
+    "materials": ["Collection of data-driven claims (news articles, studies, misleading graphs)", "Data evaluation checklist", "Graph analysis worksheet"],
+    "learning_objectives": [
+      "Understand difference between correlation and causation",
+      "Recognize misleading graphs and statistics",
+      "Evaluate whether data actually supports the claimed conclusion",
+      "Understand limitations of data and studies"
+    ],
+    "variations": [
+      "Misleading graphs: identify what's misleading in graphs and suggest improvements",
+      "Research paper analysis: evaluate a simplified academic study",
+      "Statistical literacy: understand confidence intervals, p-values, and study limitations"
+    ]
+  }
+]

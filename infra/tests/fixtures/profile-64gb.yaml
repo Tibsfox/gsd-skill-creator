@@ -1,0 +1,43 @@
+# Hardware profile fixture: 64GB workstation (generous tier)
+# Used by test-calculate-budget.sh for deterministic testing
+
+cpu:
+  architecture: x86_64
+  family: "Intel Core i7 13th Gen"
+  cores_physical: 16
+  cores_logical: 32
+  virtualization: true
+  virtualization_type: vmx
+
+memory:
+  total_gb: 64
+  swap_gb: 8
+
+storage:
+  devices:
+    - type: ssd
+      size_gb: 1000
+    - type: hdd
+      size_gb: 2000
+  total_gb: 3000
+
+gpu:
+  present: true
+  vendor: nvidia
+  family: "GeForce RTX 40 Series"
+  vram_gb: 8
+  driver: nvidia
+  iommu_available: true
+
+hypervisor:
+  kvm: true
+  vmware: false
+  virtualbox: false
+  podman: true
+  docker: false
+  nested_virtualization: true
+
+capabilities:
+  can_run_vms: true
+  can_passthrough_gpu: true
+  meets_minimum: true

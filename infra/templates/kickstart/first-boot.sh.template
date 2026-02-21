@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+# GSD First Boot Configuration Script (Template Reference)
+#
+# This template documents the first-boot script that runs on initial VM startup
+# via the gsd-first-boot.service systemd unit.
+#
+# INSTALLATION: The actual script is written to disk by the kickstart %post
+# section in base.ks.template. This file serves as a standalone reference
+# and documentation of the first-boot framework.
+#
+# The first-boot service handles deferred configuration that cannot happen
+# during kickstart installation (requires network, runtime state, or
+# role-specific setup that varies by VM purpose).
+#
+# Framework:
+#   1. Idempotency guard (marker file prevents re-execution)
+#   2. Network wait (up to 30 seconds)
+#   3. Optional system updates
+#   4. Role-specific hooks from /opt/gsd/first-boot.d/*.sh
+#   5. Completion marker + self-disable
+#
+# Role extensions (e.g., Minecraft server) drop scripts into:
+#   /opt/gsd/first-boot.d/NN-description.sh
+# where NN is a numeric prefix for execution ordering.
+#
+# Systemd unit installed at: /etc/systemd/system/gsd-first-boot.service
+# Script installed at: ${FIRST_BOOT_SCRIPT_PATH} (default /opt/gsd/first-boot.sh)
+
+set -euo pipefail
+
+# Log all output to both journal and log file
+exec > >(tee -a /var/log/gsd-first-boot.log) 2>&1
+
+# --- Idempotency guard ---
+# If first boot already completed, exit immediately.
+# This makes the script safe to call multiple times.
+if [[ -f /etc/gsd-first-boot-complete ]]; then
+    echo "First boot already completed, exiting."
+    exit 0
+fi
+
+echo "=== GSD First Boot: $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
+
+# --- Wait for network connectivity (up to 30 seconds) ---
+# The systemd unit has After=network-online.target, but we double-check
+# with an active connectivity test before proceeding.
+echo "Waiting for network connectivity..."
+network_timeout=30
+network_elapsed=0
+until ping -c1 -W5 8.8.8.8 &>/dev/null; do
+    sleep 2
+    network_elapsed=$((network_elapsed + 2))
+    if [[ ${network_elapsed} -ge ${network_timeout} ]]; then
+        echo "WARNING: Network not available after ${network_timeout}s, continuing anyway"
+        break
+    fi
+done
+if [[ ${network_elapsed} -lt ${network_timeout} ]]; then
+    echo "Network is up (took ~${network_elapsed}s)"
+fi
+
+# --- System updates (optional) ---
+# Uncomment the following line to apply system updates on first boot:
+# dnf -y update
+
+# --- Execute role-specific hooks ---
+# Role kickstarts (e.g., Minecraft) drop scripts into /opt/gsd/first-boot.d/
+# Scripts are executed in lexicographic order (use NN- prefix for ordering).
+#
+# Hook naming convention:
+#   10-install-java.sh      -- Early setup (runtimes, dependencies)
+#   50-configure-server.sh  -- Main configuration
+#   90-start-services.sh    -- Service activation
+#
+# Each hook should:
+#   - Use set -euo pipefail
+#   - Log to stdout/stderr (captured by the parent exec redirect)
+#   - Exit 0 on success, non-zero on failure
+#   - Be idempotent (safe to re-run if first-boot is retried)
+hooks_dir="/opt/gsd/first-boot.d"
+if [[ -d "${hooks_dir}" ]]; then
+    for script in "${hooks_dir}"/*.sh; do
+        [[ -f "${script}" ]] || continue
+        echo "--- Running hook: ${script} ---"
+        chmod +x "${script}"
+        if "${script}"; then
+            echo "--- Hook completed: ${script} ---"
+        else
+            echo "WARNING: Hook failed (exit $?): ${script}"
+        fi
+    done
+else
+    echo "No hooks directory found at ${hooks_dir}, skipping"
+fi
+
+# --- Mark first boot complete ---
+# This file prevents re-execution (checked by both the script guard
+# and the systemd ConditionPathExists directive).
+echo "GSD First Boot completed $(date -u +%Y-%m-%dT%H:%M:%SZ)" > /etc/gsd-first-boot-complete
+
+# --- Disable this service (no need to run again) ---
+systemctl disable gsd-first-boot.service
+
+echo "=== GSD First Boot Complete: $(date -u) ==="
