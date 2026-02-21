@@ -65,7 +65,7 @@ describe('Lab 1: BJT Switch (m5-lab-01)', () => {
     expect(labs[0].steps.length).toBeGreaterThanOrEqual(3);
   });
 
-  it('verify() returns true -- BJT saturates, V_collector < 0.5V', () => {
+  it('verify() returns true -- BJT saturates, V_collector near ground', () => {
     expect(labs[0].verify()).toBe(true);
   });
 });
