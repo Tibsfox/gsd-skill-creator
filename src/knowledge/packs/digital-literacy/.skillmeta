@@ -1,0 +1,573 @@
+# GSD Skill Metadata
+pack_id: DIGLIT-101
+pack_name: "Digital Literacy & Information Science — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: applied_practical
+learning_domain: digital_literacy
+
+# Content Description
+description: |
+  Digital literacy as a foundational competency for the 21st century: understanding
+  how digital systems work, evaluating information critically, communicating responsibly,
+  staying safe online, and understanding how data and algorithms shape digital experiences.
+  Not "how to use apps" but how to think critically about information systems.
+
+short_description: "Digital systems, information evaluation, online safety, and algorithmic awareness across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Digital Literacy Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - READ-101
+
+# What This Pack Enables
+enables:
+  - CODE-101
+  - DATA-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [25, 40]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [40, 60]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [60, 90]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [80, 120]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [100, 150]
+
+# Modules
+modules:
+  - id: DIGLIT-101-M1
+    name: "Digital Foundations"
+    description: "Understanding how digital systems work: hardware, software, networks, and information representation"
+    learning_outcomes:
+      - "Understand basic hardware components and their functions"
+      - "Explain the difference between hardware and software"
+      - "Describe how networks connect devices and information travels"
+      - "Troubleshoot common technology problems"
+      - "Understand how computers represent and store information"
+    topics:
+      - "Hardware Components & Functions"
+      - "Operating Systems & Software"
+      - "Networks & Internet Connectivity"
+      - "Digital Information Representation"
+      - "Troubleshooting Basics"
+      - "Device Security Foundations"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 20
+      high: 15
+    prerequisite_modules: []
+    activities:
+      count: 6
+      examples:
+        - "Hardware Scavenger Hunt"
+        - "How the Internet Works: Packet Relay Race"
+        - "Network Mapping Activity"
+        - "Troubleshooting Scenarios"
+        - "Operating System Exploration"
+        - "Device Components Teardown"
+    assessments:
+      - "Can student identify and describe hardware components?"
+      - "Does student understand the relationship between hardware and software?"
+      - "Can student trace how information travels on a network?"
+      - "Does student apply troubleshooting steps?"
+
+  - id: DIGLIT-101-M2
+    name: "Information Literacy & Research"
+    description: "Finding reliable information and evaluating credibility in digital spaces"
+    learning_outcomes:
+      - "Use search engines effectively with strategic keywords and filters"
+      - "Evaluate source credibility using multiple criteria"
+      - "Apply fact-checking techniques to verify claims"
+      - "Recognize common misinformation tactics"
+      - "Synthesize information from multiple sources"
+    topics:
+      - "Search Engine Strategies & Algorithms"
+      - "Source Credibility Evaluation"
+      - "Fact-Checking & Verification"
+      - "Misinformation & Disinformation Tactics"
+      - "Media Literacy & Visual Analysis"
+      - "Bias Recognition & Analysis"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 35
+      high: 30
+    prerequisite_modules: [DIGLIT-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Search Engine Experiments"
+        - "Source Credibility Evaluation Challenge"
+        - "Fact-Check Investigation Lab"
+        - "Misinformation Pattern Analysis"
+        - "Media Deconstruction Workshop"
+        - "Research Project with Source Evaluation"
+    assessments:
+      - "Can student search effectively for information?"
+      - "Does student apply credibility criteria?"
+      - "Can student identify misinformation tactics?"
+      - "Does student synthesize information from reliable sources?"
+
+  - id: DIGLIT-101-M3
+    name: "Digital Communication & Creation"
+    description: "Communicating responsibly and effectively using digital tools"
+    learning_outcomes:
+      - "Compose clear, professional digital communication"
+      - "Collaborate effectively using shared documents"
+      - "Create digital content with attention to audience"
+      - "Understand and apply copyright principles"
+      - "Recognize norms of different digital communities"
+    topics:
+      - "Professional Digital Communication"
+      - "Email Etiquette & Best Practices"
+      - "Collaborative Tools & Document Management"
+      - "Digital Media Creation"
+      - "Copyright & Intellectual Property"
+      - "Citation & Attribution Practices"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 15
+      elementary: 20
+      middle: 25
+      high: 20
+    prerequisite_modules: [DIGLIT-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Professional Email Writing Workshop"
+        - "Collaborative Document Creation Project"
+        - "Digital Presentation Design"
+        - "Multimedia Content Creation"
+        - "Copyright & Attribution Practice"
+        - "Digital Etiquette Scenarios"
+    assessments:
+      - "Can student write clear professional communication?"
+      - "Does student collaborate effectively?"
+      - "Can student create appropriate digital content?"
+      - "Does student apply copyright correctly?"
+
+  - id: DIGLIT-101-M4
+    name: "Online Safety & Digital Citizenship"
+    description: "Making responsible choices online and protecting personal security"
+    learning_outcomes:
+      - "Create and maintain strong passwords and use multi-factor authentication"
+      - "Manage privacy settings and make conscious data-sharing decisions"
+      - "Recognize and respond to cyberbullying and harassment"
+      - "Understand permanence and consequences of digital actions"
+      - "Recognize online scams and protect against malware"
+      - "Understand digital rights and responsibilities"
+    topics:
+      - "Password Security & Authentication"
+      - "Privacy Settings & Data Management"
+      - "Cyberbullying & Online Harassment"
+      - "Digital Footprint & Permanence"
+      - "Scams, Phishing & Malware"
+      - "Digital Rights & Responsibilities"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 15
+      elementary: 20
+      middle: 30
+      high: 25
+    prerequisite_modules: [DIGLIT-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Password Strength Tester"
+        - "Privacy Audit Activity"
+        - "Cyberbullying Response Scenarios"
+        - "Digital Footprint Analysis"
+        - "Scam Identification Challenge"
+        - "Digital Citizenship Discussion & Debate"
+    assessments:
+      - "Does student maintain secure passwords?"
+      - "Can student manage privacy settings?"
+      - "Does student respond appropriately to cyberbullying?"
+      - "Can student identify online scams?"
+
+  - id: DIGLIT-101-M5
+    name: "Data, Algorithms & AI Awareness"
+    description: "Understanding how data and algorithms shape digital experiences and recognizing algorithmic bias"
+    learning_outcomes:
+      - "Describe what personal data is collected and how it's used"
+      - "Explain how algorithms make decisions and personalize content"
+      - "Understand capabilities and limitations of AI systems"
+      - "Recognize how algorithmic bias causes unfair outcomes"
+      - "Evaluate data-driven claims using critical thinking"
+      - "Understand ethical implications of data and algorithms"
+    topics:
+      - "Data Collection & Storage"
+      - "Algorithmic Decision-Making"
+      - "Personalization & Recommendation Systems"
+      - "Artificial Intelligence & Machine Learning"
+      - "Algorithmic Bias & Fairness"
+      - "Data Ethics & Privacy"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 15
+      middle: 25
+      high: 30
+    prerequisite_modules: [DIGLIT-101-M1, DIGLIT-101-M2]
+    activities:
+      count: 6
+      examples:
+        - "Data Collection Tracking Activity"
+        - "Algorithm Analysis: How Recommendations Work"
+        - "Algorithmic Bias Detective"
+        - "AI Experiment & Testing"
+        - "Data-Driven Claim Evaluation"
+        - "Data Ethics Discussion & Debate"
+    assessments:
+      - "Can student identify data collection practices?"
+      - "Does student understand algorithmic decision-making?"
+      - "Can student explain AI capabilities and limitations?"
+      - "Does student evaluate data-driven claims critically?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-DIG-001
+    description: "Understand basic hardware components and how they function together"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-NET-001
+    description: "Understand how networks connect devices and information travels across the internet"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-INFO-001
+    description: "Evaluate source credibility and identify reliable information"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-COMM-001
+    description: "Communicate clearly and responsibly using digital tools"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-SAFE-001
+    description: "Make safe and responsible choices online"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-DATA-001
+    description: "Understand how data and algorithms are used and their implications"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Digital Citizenship Discussion"
+    frequency: ongoing
+
+  - type: formative
+    name: "Information Evaluation Review"
+    frequency: weekly
+
+  - type: summative
+    name: "Digital Literacy Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Problem-Solving Scenarios"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: web_browser
+    integrated: true
+    description: "For searching, evaluating sources, and exploring digital systems"
+
+  - name: email_client
+    integrated: true
+    description: "For practicing professional communication"
+
+  - name: collaborative_documents
+    integrated: true
+    description: "Google Docs, Office 365, or similar for practicing collaboration"
+
+interactive_elements:
+  - type: simulation
+    name: "Network Packet Tracer"
+
+  - type: game
+    name: "Fact-Check Challenge"
+
+  - type: interactive
+    name: "Password Strength Tester"
+
+  - type: visualization
+    name: "Algorithm Bias Detector"
+
+  - type: collaboration
+    name: "Peer Source Evaluation"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Español"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: [zh, ar, pt, ja]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Ironic meta-challenge -- a digital literacy pack must model best accessibility practices. All activities have digital and unplugged alternatives. Visual demonstrations include text descriptions."
+  pack_specific_concerns:
+    - "All web-based activities must follow WCAG 2.1 AA standards"
+    - "Interactive tools (password tester, bias detector, etc.) need accessible interfaces"
+    - "Network simulations need text-based alternatives"
+    - "Misinformation examples need context for screen reader users"
+
+# Standards Alignment
+standards_alignment:
+  - framework: "ISTE Standards for Students"
+    version: 2016
+    standard_codes:
+      - "ISTE.1"
+      - "ISTE.2"
+      - "ISTE.3"
+      - "ISTE.4"
+      - "ISTE.5"
+      - "ISTE.6"
+    alignments:
+      "Empowered Learner": true
+      "Digital Citizen": true
+      "Knowledge Constructor": true
+      "Innovative Designer": true
+      "Computational Thinker": true
+      "Creative Communicator": true
+
+  - framework: "Common Sense Media Digital Citizenship"
+    version: 2021
+    standard_codes:
+      - "CSM.1"
+      - "CSM.2"
+      - "CSM.3"
+      - "CSM.4"
+      - "CSM.5"
+      - "CSM.6"
+    alignments:
+      "Balance Online Time": true
+      "Privacy & Security": true
+      "Digital Footprint": true
+      "Critical Thinking": true
+      "Cyberbullying": true
+      "Digital Communication": true
+
+  - framework: "AASL Standards Framework"
+    version: "2018"
+    standard_codes:
+      - "AASL.I"
+      - "AASL.II"
+      - "AASL.III"
+    mappings:
+      "Inquiry": "Research and information evaluation"
+      "Collaboration": "Digital collaboration practices"
+      "Curation": "Managing and sharing information"
+
+  - framework: "UK Computing Curriculum"
+    version: "2014"
+    standard_codes:
+      - "UK.DL.1"
+      - "UK.DL.2"
+    mappings:
+      "Digital Literacy": "Technology use, safety, online responsibilities"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Difficulty is in developing judgment and critical thinking, not technical complexity. Accessible to all learners with age-appropriate adaptation."
+
+# Content Flags
+content_flags:
+  - flag: online_safety_sensitivity
+    description: "Discussion of cyberbullying, online predators, and digital footprint may touch on sensitive topics"
+    mitigation: "Frame discussions around agency and empowerment rather than fear. Provide resources for support."
+
+  - flag: privacy_concern
+    description: "Discussion of data collection may raise privacy concerns for families with different technology philosophies"
+    mitigation: "Present factual information about how systems work. Respect family choices about technology use. Focus on informed decision-making."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/diglit-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "DIGLIT-101"
+  looking_for:
+    - "Activities using unplugged (no-technology) approaches to digital concepts"
+    - "Case studies of real misinformation and how it spreads"
+    - "Interviews with cybersecurity professionals and digital ethicists"
+    - "Translations to Spanish, French, Mandarin, and Arabic"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Digital Literacy Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - digital-literacy
+  - information-literacy
+  - online-safety
+  - digital-citizenship
+  - data-literacy
+  - algorithmic-literacy
+  - critical-thinking
+  - 21st-century-skills
+  - foundational
+  - applied-practical
+
+# External Resources
+resources:
+  - type: online_platform
+    title: "Common Sense Media Education"
+    author: "Common Sense Media"
+    url: "https://www.commonsensemedia.org/articles/teach-digital-citizenship"
+
+  - type: online_platform
+    title: "Be Internet Awesome"
+    author: "Google"
+    url: "https://beinternetawesome.withgoogle.com"
+
+  - type: online_resource
+    title: "Khan Academy's Digital Citizenship"
+    author: "Khan Academy"
+    url: "https://www.khanacademy.org/"
+
+  - type: textbook
+    title: "The Art of Critical Thinking"
+    author: "Various"
+    url: null
+
+# Related Packs
+related_packs:
+  - id: READ-101
+    relationship: "Reading foundations enable critical evaluation of written information online"
+
+  - id: CODE-101
+    relationship: "Understanding coding complements understanding of digital systems and algorithms"
+
+  - id: DATA-101
+    relationship: "Advanced data literacy and analysis builds on digital data awareness"
+
+  - id: CRIT-101
+    relationship: "Critical thinking skills are essential for evaluating information"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "globe"
+    color: "#00BCD4"
+    position: "Applied"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "DIGLIT-101-digital-foundations"
+    - "DIGLIT-101-information-literacy"
+    - "DIGLIT-101-online-safety"
+    - "DIGLIT-101-digital-citizenship"
+    - "DIGLIT-101-algorithmic-literacy"
+
+# File References
+files:
+  vision_document: "DIGLIT-101-vision.md"
+  modules_definition: "DIGLIT-101-modules.yaml"
+  activities: "DIGLIT-101-activities.json"
+  assessment: "DIGLIT-101-assessment.md"
+  resources: "DIGLIT-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five comprehensive modules covering digital foundations, information literacy, communication, online safety, and algorithmic awareness"
+      - "Contributed 30+ starter activities across all modules with age-appropriate variations"
+      - "Aligned to ISTE Standards, Common Sense Media Digital Citizenship framework, and 21st Century Skills"
+      - "Integrated unplugged alternatives and accessibility features throughout"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"

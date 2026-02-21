@@ -1,0 +1,113 @@
+# Schematic Build Specification
+# This file defines what to build in-game before capturing with Litematica.
+
+name: "Library"
+id: "library"
+filename: "template-library-1-0.litematic"
+version: "1.0"
+category: templates
+description: "Knowledge repository with floor-to-ceiling bookshelves, reading nooks with lecterns, and a second-floor mezzanine. Represents organized knowledge and learning within the Software District."
+
+dimensions:
+  width: 15   # X axis (east-west)
+  height: 9   # Y axis (up-down)
+  depth: 15   # Z axis (north-south)
+
+block_palette:
+  primary:
+    - block: "minecraft:bookshelf"
+      usage: "Knowledge walls -- 3-high bookshelves lining all four interior walls"
+    - block: "minecraft:dark_oak_planks"
+      usage: "Floor -- rich dark wood flooring on both ground and mezzanine levels"
+    - block: "minecraft:stone_bricks"
+      usage: "Exterior walls -- sturdy stone brick shell around the wooden interior"
+  accent:
+    - block: "minecraft:dark_oak_slab"
+      usage: "Reading tables -- slab surfaces on fence post legs for study desks"
+    - block: "minecraft:dark_oak_fence"
+      usage: "Table legs and mezzanine railing"
+    - block: "minecraft:carpet"
+      usage: "Seating areas -- colored carpet squares marking reading nook positions"
+    - block: "minecraft:dark_oak_stairs"
+      usage: "Decorative trim along bookshelf tops and mezzanine edge"
+  functional:
+    - block: "minecraft:lectern"
+      usage: "Reading stands -- 4 lecterns on tables in central reading area"
+    - block: "minecraft:ladder"
+      usage: "Mezzanine access -- ladders on east wall connecting ground to second floor"
+    - block: "minecraft:oak_door"
+      usage: "Main entrance -- double door on south wall, centered"
+  lighting:
+    - block: "minecraft:lantern"
+      usage: "Wall sconces -- lanterns in wall brackets above bookshelves (8 total)"
+    - block: "minecraft:glass"
+      usage: "Skylight -- large glass panel roof section over central reading area"
+
+layout:
+  ground_floor: |
+    Square room, 13x13 interior.
+    Dark oak plank floor throughout.
+
+    Bookshelves line all four interior walls, 3 blocks high, starting at floor level.
+    2-block gap above bookshelves to the ceiling/mezzanine for visual openness.
+
+    Central reading area (7x7 centered space, clear of bookshelves):
+    - 4 reading desks arranged in a square pattern, each with:
+      - Dark oak slab table surface on dark oak fence legs
+      - 1 lectern on each table
+      - Carpet square seating area adjacent to each desk
+    - Reading desks face inward toward room center.
+
+    Main entrance: double oak doors centered on south wall.
+    Ladder access to mezzanine on east wall (between bookshelves).
+  upper_floors: |
+    Second floor mezzanine at height 5 (halfway up the room).
+    Partial floor: U-shaped platform around three walls (north, east, west),
+    4 blocks deep from each wall, open in center overlooking ground floor reading area.
+    Dark oak plank floor with dark oak fence railing on the inner edge.
+    Additional bookshelves on mezzanine walls (2 blocks high).
+    Dark oak stair trim along mezzanine edge for decorative finish.
+  roof: |
+    Stone brick roof at height 9.
+    Central glass skylight: 5x5 glass panel section over the reading area
+    (aligned with the open center of the mezzanine below).
+    Remaining roof is solid stone brick.
+  exterior: |
+    Stone brick walls on all four sides, 8 blocks tall above floor.
+    No exterior windows -- light comes from the glass skylight above.
+    Double oak door entrance centered on south wall.
+
+features:
+  - "Floor-to-ceiling bookshelves (3 blocks high) lining all four walls"
+  - "Central reading area with 4 lectern-equipped study desks"
+  - "Carpet seating nooks at each reading desk"
+  - "Second floor mezzanine (U-shaped) overlooking central reading area"
+  - "Mezzanine accessible via ladders on east wall"
+  - "Dark oak fence railing along mezzanine edge with stair trim"
+  - "Additional bookshelves on mezzanine level walls"
+  - "5x5 glass skylight in roof flooding reading area with natural light"
+  - "Wall-mounted lanterns in sconces above ground floor bookshelves"
+  - "Double door entrance for welcoming entry"
+
+construction_notes:
+  - "Build from the ground up, floor by floor"
+  - "Lay the dark oak plank ground floor first"
+  - "Build stone brick exterior walls, 8 blocks tall above floor"
+  - "Place ground floor bookshelves (3 high) against all interior walls"
+  - "Build mezzanine floor at height 5: dark oak planks in U-shape (open center)"
+  - "Add mezzanine railing (dark oak fence + stair trim)"
+  - "Place mezzanine-level bookshelves (2 high) against walls"
+  - "Build stone brick roof with 5x5 glass skylight centered"
+  - "Place ladders on east wall from ground to mezzanine"
+  - "Build reading desks: fence legs, slab tops, place lecterns"
+  - "Lay carpet squares at reading positions"
+  - "Place functional blocks last: doors, lanterns in wall sconces"
+  - "Use Litematica selection starting from the northwest ground-level corner"
+  - "Add 1 block of selection padding on all sides"
+  - "Save with orientation: entrance faces south"
+  - "Test-load the schematic in a flat world before adding to library"
+
+litematica_capture:
+  origin: "Northwest ground-level corner (lowest X, lowest Z, at floor Y level)"
+  selection_padding: 1
+  orientation: "Entrance faces south"

@@ -1,0 +1,32 @@
+schematic:
+  name: "spawn-plaza"
+  category: "spawn"
+  version: "1.0"
+  format: "litematic"
+  filename: "spawn-spawn-plaza-v1.0.litematic"
+
+  dimensions:
+    x: 51    # 50-block diameter + 1
+    y: 10    # Ground preparation through beacon peak
+    z: 51
+
+  origin:
+    x: -25
+    y: 60    # 4 blocks below Y=64 for ground prep
+    z: -25
+
+  description: "Central spawn plaza with beacon, compass rose, 6 district gateways, and welcome signage"
+
+  tags: ["spawn", "hub", "wayfinding", "gateway"]
+
+  dependencies: []   # No other schematics required first
+
+  build_notes: |
+    Place this schematic first before any district builds.
+    Center block (0,64,0) is the world spawn point.
+    Beacon requires clear sky above for beam visibility.
+
+  syncmatica:
+    share: true
+    placement_locked: true   # Prevent accidental repositioning
+    priority: "high"         # Load first on server

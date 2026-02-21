@@ -1,0 +1,329 @@
+# tool-evolution-walkthrough.yaml -- Amiga creative tools mapped to modern equivalents
+#
+# Each station pairs an Amiga-era tool with its modern descendant, documenting
+# what survived, what was lost, and what was gained in the evolution. Structured
+# as a physical corridor: left wall is the past, right wall is the present,
+# floor signs connect them with creative insights.
+#
+# Part of: Knowledge World > Creative District > Amiga Corner > Tool Evolution Corridor
+# Consumed by: amiga-corner-schematic-spec.yaml (corridor station layout)
+
+walkthrough:
+  name: "Tool Evolution Walkthrough"
+  description: "A corridor connecting Amiga creative tools to their modern equivalents"
+  concept: "Walk from 1985 to 2025 -- each station pairs an Amiga tool with its modern descendant"
+  philosophy: >
+    Tools don't just evolve -- they carry forward the creative DNA of their ancestors.
+    Every modern creative application contains design decisions inherited from tools
+    that ran on 7 MHz processors with 512 KB of RAM. The constraints that shaped
+    those original tools shaped the mental models of the people who used them, and
+    those mental models shaped the next generation of tools. This corridor makes
+    that lineage visible and walkable.
+
+  stations:
+    - id: station-01
+      amiga_tool:
+        name: "Deluxe Paint"
+        developer: "Electronic Arts / Dan Silva"
+        years_active: "1985-1994"
+        category: "pixel art"
+        key_innovation: >
+          First affordable bitmap paint program with animation, palette cycling,
+          stencil masking, and perspective distortion. Defined the pixel art
+          workflow used by an entire generation of game artists and digital painters.
+        constraints: >
+          32 colors from 4096-color OCS palette. 320x200 or 320x256 resolution.
+          No undo history (DPaint II added single undo). No layers. No anti-aliasing.
+          Every pixel placed manually or via geometric primitives.
+      modern_equivalent:
+        name: "Aseprite / Photoshop"
+        category: "pixel art / image editing"
+        what_survived: >
+          Palette-based editing, frame-by-frame animation timeline, onion skinning,
+          pixel-level control, indexed color modes, animation preview. Aseprite
+          specifically preserves DPaint's constraint-first approach.
+        what_was_lost: >
+          The enforced discipline of limited palette selection. DPaint forced you
+          to commit to 32 colors before painting. Modern tools offer unlimited
+          colors, making deliberate palette design optional rather than mandatory.
+          Palette cycling as a creative technique has largely disappeared.
+        what_was_gained: >
+          Unlimited undo, layer compositing, alpha transparency, vector shapes,
+          automated color matching, real-time collaboration, GPU-accelerated
+          rendering, plugin ecosystems.
+      sign_text:
+        left_sign: "Deluxe Paint (1985) | 32 colors, no layers | Every pixel deliberate"
+        right_sign: "Aseprite / Photoshop | Unlimited colors + layers | DPaint's DNA lives here"
+        floor_sign: "Constraint breeds mastery -- voluntary limits produce better art"
+      build:
+        left_side: "orange_terracotta, oak_planks, yellow_concrete -- warm Amiga palette"
+        right_side: "light_gray_concrete, white_concrete, glass -- modern clean aesthetic"
+        connecting: "item_frame with map art showing palette gradient from 32 to millions"
+
+    - id: station-02
+      amiga_tool:
+        name: "OctaMED / ProTracker"
+        developer: "Teijo Kinnunen / Lars Hamre et al."
+        years_active: "1987-1995"
+        category: "music"
+        key_innovation: >
+          Tracker interface: vertical columns of note data, samples triggered by
+          pattern position. ProTracker standardized the 4-channel MOD format.
+          OctaMED extended to 8+ channels with MIDI support. Made music composition
+          accessible without musical notation literacy.
+        constraints: >
+          4 channels of 8-bit audio (ProTracker). 8-bit sample resolution.
+          Pattern-based composition: 64 rows per pattern, one note per row per channel.
+          Limited sample memory. No real-time effects processing.
+      modern_equivalent:
+        name: "Renoise / FL Studio"
+        category: "music production (DAW)"
+        what_survived: >
+          Tracker interface (Renoise is a direct descendant), sample-based
+          composition, pattern sequencing, keyboard-driven workflow. The MOD/XM/IT
+          format family still active. Chiptune and lo-fi genres directly preserve
+          tracker aesthetics and voluntary 4-channel constraints.
+        what_was_lost: >
+          The forced economy of 4 channels. When you have only 4 simultaneous
+          voices, every note competes for space. This constraint produced
+          compositions of extraordinary efficiency -- melodies that imply harmony,
+          bass lines that double as rhythm. Modern 128-track DAWs rarely demand
+          this compositional discipline.
+        what_was_gained: >
+          Unlimited tracks, real-time effects (reverb, compression, EQ),
+          VST plugin instruments, MIDI sequencing, audio recording, mastering
+          tools, cloud collaboration, AI-assisted composition.
+      sign_text:
+        left_sign: "ProTracker (1987) | 4 channels, 8-bit | Every note earns its place"
+        right_sign: "Renoise / FL Studio | Unlimited tracks + FX | Tracker spirit endures"
+        floor_sign: "Economy of expression -- fewer voices demand stronger melodies"
+      build:
+        left_side: "note_block, dark_oak_planks, redstone_lamp -- music production retro"
+        right_side: "quartz_block, sea_lantern, light_blue_concrete -- modern studio"
+        connecting: "note_block playing a 4-note sequence audible from both sides"
+
+    - id: station-03
+      amiga_tool:
+        name: "LightWave 3D"
+        developer: "NewTek (Allen Hastings)"
+        years_active: "1990-present (started on Amiga)"
+        category: "3D modeling and rendering"
+        key_innovation: >
+          Professional 3D modeling, animation, and rendering on a consumer platform.
+          Split modeler/layout architecture. Originally a Video Toaster plugin that
+          became an industry-standard standalone application. Used for Babylon 5,
+          SeaQuest, early Battlestar Galactica -- broadcast television produced on
+          Amiga hardware.
+        constraints: >
+          No GPU acceleration (all software rendering). Limited polygon counts.
+          Split modeler/layout workflow (model in one app, animate in another).
+          Rendering times measured in hours per frame for broadcast quality.
+      modern_equivalent:
+        name: "Blender / Cinema 4D"
+        category: "3D modeling and rendering"
+        what_survived: >
+          Node-based material systems, keyframe animation, subdivision surfaces,
+          procedural modeling concepts. LightWave's influence is visible in every
+          modern 3D app's animation timeline and rendering pipeline. Blender's
+          community-driven development mirrors LightWave's Amiga-era community.
+        what_was_lost: >
+          The direct hardware feedback loop. LightWave artists on the Amiga
+          understood exactly what their hardware could render and composed accordingly.
+          Modern 3D artists rarely consider rendering cost during composition --
+          GPU power abstracts the constraint away, sometimes producing technically
+          impressive but artistically unfocused work.
+        what_was_gained: >
+          Real-time GPU rendering (Cycles, Eevee), physically-based materials,
+          fluid simulation, particle systems, sculpting, motion capture,
+          VR/AR export, open-source access (Blender).
+      sign_text:
+        left_sign: "LightWave 3D (1990) | Software rendering | Babylon 5 on an Amiga"
+        right_sign: "Blender / Cinema 4D | GPU real-time render | LightWave's legacy"
+        floor_sign: "Democratization -- pro tools that anyone can access"
+      build:
+        left_side: "iron_block, gray_concrete, anvil -- industrial, metallic"
+        right_side: "smooth_quartz, glass, end_rod -- clean, modern rendering"
+        connecting: "armor_stand representing a 3D model visible from both eras"
+
+    - id: station-04
+      amiga_tool:
+        name: "Scala Multimedia / AmigaVision"
+        developer: "Scala Inc. / Commodore"
+        years_active: "1992-present (started on Amiga)"
+        category: "multimedia presentations"
+        key_innovation: >
+          First accessible multimedia authoring tool on a consumer platform.
+          Combined text, graphics, animation, sound, and video into interactive
+          presentations without programming. AmigaVision came bundled with
+          Amiga 3000. Scala was used commercially for kiosk systems, digital
+          signage, and interactive training throughout the 1990s.
+        constraints: >
+          Limited to Amiga display capabilities (320x200 to 640x512).
+          No network connectivity for remote presentations. Storage limited
+          to floppy and hard disk. Video playback required specialized hardware
+          (CDTV, CD32) for full-motion.
+      modern_equivalent:
+        name: "PowerPoint / Keynote / Canva"
+        category: "presentations and visual communication"
+        what_survived: >
+          Slide-based sequential presentation, transition effects between slides,
+          embedded multimedia (audio, video), template systems, non-programmer
+          authoring. The fundamental model of "screens with content and transitions"
+          originated in Amiga multimedia tools.
+        what_was_lost: >
+          True interactivity. Scala and AmigaVision supported branching paths,
+          user input, and conditional logic -- they were closer to HyperCard than
+          PowerPoint. Modern presentation tools linearized the experience, trading
+          interactivity for simplicity. The Amiga tools treated presentations as
+          programs; modern tools treat them as slideshows.
+        what_was_gained: >
+          Cloud collaboration, real-time co-editing, AI-generated content,
+          responsive layouts, web embedding, analytics, accessibility features,
+          mobile creation and viewing.
+      sign_text:
+        left_sign: "Scala (1992) | Interactive multimedia | Presentations as programs"
+        right_sign: "PowerPoint / Keynote | Cloud slides | Scala simplified"
+        floor_sign: "Interactivity lost -- modern slides linearized what Amiga branched"
+      build:
+        left_side: "bookshelf, lectern, oak_sign -- knowledge display, retro"
+        right_side: "white_concrete, item_frame, glow_item_frame -- modern display"
+        connecting: "lectern with book on each side, representing the presentation medium"
+
+    - id: station-05
+      amiga_tool:
+        name: "Video Toaster / DigiView"
+        developer: "NewTek / NewTek"
+        years_active: "1986-1994"
+        category: "video production"
+        key_innovation: >
+          Broadcast-quality video production on a consumer computer. DigiView (1986)
+          was the first affordable video digitizer. The Video Toaster (1990) combined
+          video switching, effects, character generation, and 3D animation (LightWave)
+          in a single Amiga expansion card. It democratized television production --
+          public access TV stations, churches, schools, and independent producers
+          could create broadcast-quality content for under $5000.
+        constraints: >
+          NTSC/PAL analog video only. Real-time effects limited to hardware
+          switcher capabilities. No non-linear editing (linear tape-to-tape workflow).
+          LightWave renders were offline (not real-time).
+      modern_equivalent:
+        name: "OBS Studio / After Effects"
+        category: "video production and streaming"
+        what_survived: >
+          Real-time video mixing, overlay graphics, scene switching, character
+          generation. OBS Studio's scene/source model directly descends from
+          the Video Toaster's switcher paradigm. The concept of "broadcast-quality
+          production on consumer hardware" that NewTek pioneered is now the
+          foundation of the entire streaming industry.
+        what_was_lost: >
+          The integrated hardware-software experience. The Video Toaster was a
+          complete production studio in one card. Modern solutions require
+          assembling software components (OBS + plugins + virtual cameras +
+          stream services). The Amiga's tight hardware-software integration
+          made the Video Toaster feel like a single instrument rather than a
+          toolkit.
+        what_was_gained: >
+          Digital video (infinite generations), non-linear editing, 4K/8K
+          resolution, real-time GPU compositing, live streaming to millions,
+          AI-powered effects, motion tracking, virtual sets.
+      sign_text:
+        left_sign: "Video Toaster (1990) | $5000 TV studio | Democratized broadcast"
+        right_sign: "OBS / After Effects | Free streaming | Toaster's grandchild"
+        floor_sign: "Democratization repeats -- each era makes the previous era's luxury free"
+      build:
+        left_side: "observer, comparator, redstone_lamp -- broadcast equipment aesthetic"
+        right_side: "tinted_glass, sea_lantern, smooth_quartz -- modern streaming studio"
+        connecting: "redstone signal path from left to right representing video signal flow"
+
+    - id: station-06
+      amiga_tool:
+        name: "AMOS / Blitz Basic"
+        developer: "Francois Lionet / Mark Sibly"
+        years_active: "1990-1994"
+        category: "game creation"
+        key_innovation: >
+          Made game development accessible on the Amiga. AMOS provided a BASIC
+          dialect with direct access to Amiga custom chips -- sprites, bobs,
+          scrolling, copper lists, audio -- without requiring assembly language.
+          Blitz Basic compiled to native 68000 code for near-assembly performance.
+          Thousands of games, demos, and educational programs were created by
+          hobbyists and teenagers using these tools.
+        constraints: >
+          BASIC language limitations (no true OOP, limited data structures).
+          Single-threaded execution. Direct hardware access meant programs were
+          Amiga-specific (no portability). Performance ceiling below hand-tuned
+          assembly for demanding applications.
+      modern_equivalent:
+        name: "Unity / Godot"
+        category: "game creation engines"
+        what_survived: >
+          The mission of democratizing game creation. Visual editors, scripting
+          languages (GDScript, C#), asset pipelines, built-in physics. The AMOS
+          community's culture of sharing source code and teaching programming
+          through game creation lives on in game jam culture and open-source
+          game engines. Godot's community-driven approach particularly echoes
+          the AMOS community spirit.
+        what_was_lost: >
+          Direct hardware understanding. AMOS programmers learned how sprites
+          worked at the hardware level -- DMA channels, color registers, collision
+          detection via hardware flags. Modern game engine users interact with
+          abstraction layers that hide the hardware entirely. The creative
+          possibilities of hardware exploitation are invisible behind the API.
+        what_was_gained: >
+          Cross-platform deployment, 3D engines, physics simulation, visual
+          scripting, asset stores, network multiplayer, VR/AR support, profiling
+          tools, collaboration features.
+      sign_text:
+        left_sign: "AMOS Basic (1990) | Game dev for all | Hardware visible"
+        right_sign: "Unity / Godot | Game dev for all | Hardware abstracted"
+        floor_sign: "Same mission, different depth -- accessibility vs understanding"
+      build:
+        left_side: "crafting_table, chest, furnace -- workshop tools, hands-on"
+        right_side: "command_block, structure_block, jigsaw -- modern building system"
+        connecting: "item_frame with game controller (or written book) bridging both sides"
+
+    - id: station-07
+      amiga_tool:
+        name: "SoundTracker / AudioMaster"
+        developer: "Karsten Obarski / Aegis"
+        years_active: "1987-1993"
+        category: "audio sampling and editing"
+        key_innovation: >
+          SoundTracker invented the tracker music format -- the most influential
+          music creation paradigm outside conventional notation. AudioMaster was
+          the first affordable digital audio editor on a home computer, enabling
+          sample recording, editing, and processing. Together they gave the Amiga
+          the ability to both capture and compose digital audio -- capabilities
+          that professional studios charged tens of thousands of dollars for.
+        constraints: >
+          8-bit sample resolution (256 levels). 4 hardware DMA audio channels.
+          28 kHz maximum mixing rate. Sample memory shared with chip RAM (used
+          by graphics). No real-time effects processing -- all processing was
+          destructive and offline.
+      modern_equivalent:
+        name: "Audacity / Ableton Live"
+        category: "audio editing and production"
+        what_survived: >
+          Waveform visualization, cut/copy/paste editing, sample rate conversion,
+          format export. Audacity preserves AudioMaster's direct waveform
+          manipulation approach. Ableton Live's session view with clip launching
+          echoes the tracker's pattern-trigger model. The concept of "affordable
+          audio production for everyone" that the Amiga pioneered is now universal.
+        what_was_lost: >
+          Intimate understanding of digital audio fundamentals. Working in 8-bit
+          with 4 channels taught sample aliasing, Nyquist limits, and channel
+          mixing by direct experience. Modern 32-bit float audio with unlimited
+          channels abstracts these fundamentals away -- users can produce music
+          without understanding why samples alias or how mixing works mathematically.
+        what_was_gained: >
+          32-bit float processing, unlimited channels, real-time non-destructive
+          effects, VST plugins, surround/spatial audio, AI-assisted mastering,
+          cloud collaboration, streaming integration.
+      sign_text:
+        left_sign: "SoundTracker (1987) | Invented tracking | 8-bit, 4 channels"
+        right_sign: "Audacity / Ableton | Universal audio | SoundTracker's descendant"
+        floor_sign: "The tracker format survives -- constraints created a genre"
+      build:
+        left_side: "note_block, jukebox, dark_oak_planks -- analog studio warmth"
+        right_side: "daylight_detector, redstone_comparator, quartz_block -- digital precision"
+        connecting: "note_block sequence playing the same melody on both sides at different fidelity"

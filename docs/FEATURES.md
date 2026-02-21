@@ -79,6 +79,35 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **73. Budget Inventory Model** | LoadingProjection separating installed total from loadable total with tier-aware selection and profile awareness (v1.19) |
 | **74. CLI Status Redesign** | Two-section layout with proportional sizing, loading projection, color-coded budget bar, and JSON output mode (v1.19) |
 | **75. Budget Configuration** | Per-profile cumulative budgets in integration config, env var backward compat, dual-dimension history with migration (v1.19) |
+| **76. Unified CSS Pipeline** | 18 component style modules wired into dashboard generator with design system token compliance, no hardcoded hex (v1.20) |
+| **77. Dashboard Data Collectors** | Topology, activity feed, budget-silicon, and staging queue collectors bridging real data to dashboard panels (v1.20) |
+| **78. Console Page Assembly** | Console as 6th dashboard page with settings panel, activity timeline, question cards, and submit flow (v1.20) |
+| **79. Tauri Desktop Shell** | Native app with Rust backend, Vite webview, bidirectional IPC (commands, events, channels), and capability ACL security (v1.21) |
+| **80. WebGL CRT Engine** | Multi-pass post-processing with scanlines, barrel distortion, phosphor glow, chromatic aberration, vignette, and CSS fallback (v1.21) |
+| **81. Indexed Palette System** | 32-color system with 5 retro-computing presets, OKLCH generation, and copper list raster effects (v1.21) |
+| **82. Native PTY Terminal** | Rust-backed pseudo-terminal with xterm.js, watermark-based flow control, and tmux session binding (v1.21) |
+| **83. Desktop Environment** | Amiga Workbench-inspired window manager with depth cycling, drag/resize, taskbar, pixel-art icons, system menu (v1.21) |
+| **84. Boot & Calibration** | Three-screen calibration wizard, Amiga chipset boot sequence animation, accessibility auto-detection (v1.21) |
+| **85. Local Cloud Infrastructure** | PXE boot server, kickstart automation, hypervisor-agnostic VM provisioning across KVM/VMware/VirtualBox (v1.22) |
+| **86. Minecraft Knowledge World** | Fabric server with Syncmatica mod stack, themed districts, spawn tutorial, schematic library, educational curriculum (v1.22) |
+| **87. Platform Portability** | Hardware discovery, distribution abstraction (dnf/apt/pacman), multi-hypervisor VM operations, container fallback (v1.22) |
+| **88. Amiga Emulation** | FS-UAE with AROS ROM, application profiles (Deluxe Paint, OctaMED, ProTracker, PPaint), format converters (v1.22) |
+| **89. Chipset Formalization** | 20 SKILL.md files, 10 agents, 5 teams, 4 topologies, unified chipset YAML with trigger routing (v1.22) |
+| **90. Operational Maturity** | RCON-quiesced backups with 24/7/4 rotation, Prometheus monitoring, golden image lifecycle, 4 runbooks (v1.22) |
+| **91. AMIGA Mission Infrastructure** | MC-1 Control Surface, ME-1 Mission Environment, CE-1 Commons Engine, GL-1 Governance Layer with 4 typed ICDs (v1.23) |
+| **92. Apollo AGC Simulator** | Complete Block II CPU emulation: 38 instructions, ones' complement ALU, bank-switched memory, interrupts, I/O channels (v1.23) |
+| **93. AGC Executive/Waitlist** | Priority-based cooperative scheduler with 8 core sets, timer-driven task queue, BAILOUT restart protection (v1.23) |
+| **94. DSKY Interface** | Authentic display model with relay decoding, 19-key keyboard, VERB/NOUN processor, Executive Monitor, learn mode (v1.23) |
+| **95. AGC Development Tools** | yaYUL assembler, step debugger with breakpoints/watchpoints, disassembler, rope loader, 54-test validation suite (v1.23) |
+| **96. AGC Curriculum** | 11 chapters from orientation to AGC-to-GSD patterns, 8 hands-on exercises, 1202 alarm capstone (v1.23) |
+| **97. RFC Reference Skill** | 3-agent system (retriever, analyzer, citation builder), 5 Python scripts, 57-RFC index, multi-format output (v1.23) |
+| **98. Observation Hook System** | Zod-validated learner observation types (activity completion, assessment results, time spent, pack lifecycle), ObservationEmitter with sink registration and error isolation (v1.27) |
+| **99. AMIGA Event Bridge** | KnowledgeEventBridge converting LearnerObservation to AMIGA EventEnvelope with 6 event types (KNOWLEDGE_*), priority escalation for pack_complete, correlation ID tracking (v1.27) |
+| **100. Learning Pattern Detector** | 4-pattern detection engine (sequence, timing, scoring, engagement) with confidence scoring, threshold filtering, and skill suggestion generation for high-confidence patterns (v1.27) |
+| **101. Pathway Adapter** | Personalized learning path adaptation based on learner history: struggle detection (reinforcement), excellence detection (acceleration), traceable adaptation decisions with observation evidence (v1.27) |
+| **102. Activity Scaffolder** | Pattern-to-activity generation creating new PackActivity objects from learning patterns, insertable into existing activity chains, pattern-specific generation for 4 pattern types (v1.27) |
+| **103. Approach Promoter** | Pattern-to-skill promotion converting high-confidence learning patterns to reusable skill definitions with trigger conditions, action steps, and SKILL.md markdown output (v1.27) |
+| **104. Knowledge Pack Integration** | Complete skill-creator integration infrastructure: observation hooks, AMIGA bridge, pattern detection, pathway adaptation, activity scaffolding, approach promotion, barrel exports with 144 new tests (v1.27) |
 
 ## Version History
 
@@ -106,3 +135,11 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.17** | Staging Layer: 5-state filesystem pipeline (inbox/checking/attention/ready/aside), 11-pattern hygiene engine, trust-aware reporting with familiarity tiers, smart intake with clarity routing, resource analysis with skill cross-reference, derived knowledge checking with provenance chains, 7-state staging queue with audit log, queue pipelining with pre-wiring |
 | **v1.18** | Information Design System: CSS design system (6 domain colors, 4 signal colors, typography tokens), persistent gantry status strip, 6 SVG entity shapes with dual encoding, subway-map topology with bezier edges and click-to-detail, activity feed with Unicode indicators, budget gauge with threshold transitions, domain-prefixed identifiers (F-1, B-1.api, T-1:rcp) |
 | **v1.19** | Budget Display Overhaul: LoadingProjection separating installed from loadable with tier-based selection, two-section CLI status with proportional sizing and color-coded budget bar, JSON output mode, dashboard gauge with deferred tooltip and over-budget clamping, per-profile cumulative budgets in config, dual-dimension budget history with migration |
+| **v1.20** | Dashboard Assembly: unified CSS pipeline (18 component style modules), 4 data collectors (topology, activity, budget-silicon, staging queue), console page assembly as 6th dashboard page |
+| **v1.21** | GSD-OS Desktop Foundation: Tauri v2 desktop shell with Rust backend, WebGL CRT shader engine, 32-color indexed palette with 5 presets, native PTY terminal with xterm.js, Amiga Workbench window manager, boot sequence and calibration wizard, 636 tests |
+| **v1.22** | Minecraft Knowledge World: local cloud infrastructure (PXE/kickstart/VM provisioning), Minecraft Fabric server with Syncmatica, platform portability (3 package managers, 3 hypervisors), Amiga emulation (FS-UAE/AROS), chipset formalization (20 skills, 10 agents, 5 teams), operational maturity (backups, monitoring, runbooks) |
+| **v1.23** | Project AMIGA: AMIGA mission infrastructure (MC-1/ME-1/CE-1/GL-1 with 4 ICDs), Apollo AGC Block II simulator (38 instructions, bank-switched memory, interrupts, I/O), AGC Executive/Waitlist/BAILOUT, DSKY interface with Executive Monitor, AGC development tools (assembler, debugger, disassembler, rope loader), AGC curriculum (11 chapters, 8 exercises), RFC Reference Skill (3-agent system, 57-RFC index) |
+| **v1.24** | GSD Conformance Audit & Hardening: 336-checkpoint conformance matrix against 18 vision documents, full 4-tier audit (T0/T1/T2/T3) with 211 pass + 125 amendments, zero-fail conformance achieved |
+| **v1.25** | Ecosystem Integration: dependency DAG (20 nodes, 48 edges), EventDispatcher specification, 4-tier dependency philosophy, integration test strategy, partial-build compatibility matrix with 99 known-issues |
+| **v1.26** | Aminet Archive Extension Pack: INDEX infrastructure (~84K packages), mirror state + download engine, full-text search + collections, pure TypeScript virus scanner (52 signatures), LhA/LZX extraction, FS-UAE integration, GSD-OS desktop panel with 5-agent pipeline |
+| **v1.27** | GSD Foundational Knowledge Packs: 35 knowledge packs (15 Core Academic, 10 Applied, 10 Specialized) with complete vision/modules/activities/assessment/resources, GSD-OS dashboard (browser, search, detail view, skill tree, progress tracking), skill-creator integration (observation hooks, AMIGA bridge, 4-pattern detection, pathway adaptation, activity scaffolding, approach promotion) |

@@ -1,0 +1,329 @@
+---
+# PHYS-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: PHYS-101
+pack_name: "Physics --- Foundational Knowledge Pack"
+
+modules:
+  - id: PHYS-101-M1
+    name: "Motion & Forces"
+    description: "Describing and predicting how objects move, what causes motion to change, and Newton's three laws as the organizing framework for all mechanical phenomena"
+
+    learning_outcomes:
+      - "Describe the position, velocity, and acceleration of objects qualitatively and quantitatively"
+      - "Identify forces acting on an object and represent them with free body diagrams"
+      - "Apply Newton's three laws to predict and explain motion"
+      - "Analyze projectile motion as independent horizontal and vertical components"
+      - "Understand circular motion and the role of centripetal force"
+
+    topics:
+      - "Position, Distance & Displacement"
+      - "Speed & Velocity"
+      - "Acceleration"
+      - "Graphing Motion (position-time, velocity-time)"
+      - "Forces & Free Body Diagrams"
+      - "Newton's First Law (Inertia)"
+      - "Newton's Second Law (F=ma)"
+      - "Newton's Third Law (Action-Reaction)"
+      - "Friction (Static & Kinetic)"
+      - "Gravity & Weight"
+      - "Projectile Motion"
+      - "Circular Motion & Centripetal Force"
+
+    grade_levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 30
+      elementary: 40
+      middle: 50
+      high: 40
+
+    prerequisite_modules: []
+
+    activities:
+      count: 4
+      examples:
+        - "Ramp Race: Exploring Acceleration"
+        - "Marble Momentum Collisions"
+        - "Parachute Drop: Air Resistance"
+        - "Elevator Scale: Apparent Weight"
+
+    assessments:
+      - "Can student describe motion using position, velocity, and acceleration?"
+      - "Can student identify and draw forces acting on an object?"
+      - "Can student apply Newton's laws to predict outcomes?"
+      - "Can student analyze projectile and circular motion?"
+
+  - id: PHYS-101-M2
+    name: "Energy & Work"
+    description: "Understanding energy as the universal currency of change, conservation laws, work as energy transfer, and the basics of thermodynamics"
+
+    learning_outcomes:
+      - "Identify forms of energy and describe transformations between them"
+      - "Apply conservation of energy to predict outcomes"
+      - "Calculate work as force times displacement"
+      - "Understand power as the rate of energy transfer"
+      - "Describe heat transfer mechanisms: conduction, convection, radiation"
+
+    topics:
+      - "Kinetic Energy"
+      - "Potential Energy (Gravitational & Elastic)"
+      - "Conservation of Energy"
+      - "Work & the Work-Energy Theorem"
+      - "Power & Efficiency"
+      - "Thermal Energy & Temperature"
+      - "Heat Transfer: Conduction, Convection, Radiation"
+      - "Laws of Thermodynamics"
+      - "Entropy"
+
+    grade_levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 25
+      elementary: 35
+      middle: 45
+      high: 40
+
+    prerequisite_modules: [PHYS-101-M1]
+
+    activities:
+      count: 4
+      examples:
+        - "Rubber Band Car Energy Conversion"
+        - "Heat Transfer Investigation"
+        - "Roller Coaster Energy Audit"
+        - "Insulation Design Challenge"
+
+    assessments:
+      - "Can student identify energy forms and trace transformations?"
+      - "Does student apply conservation reasoning spontaneously?"
+      - "Can student calculate work and power in context?"
+      - "Does student understand heat transfer mechanisms?"
+
+  - id: PHYS-101-M3
+    name: "Waves, Sound & Light"
+    description: "Periodic motion, wave properties, sound as mechanical waves, light as electromagnetic waves, and the full electromagnetic spectrum"
+
+    learning_outcomes:
+      - "Describe waves using frequency, wavelength, amplitude, and speed"
+      - "Distinguish transverse and longitudinal waves"
+      - "Explain sound production, propagation, and perception"
+      - "Describe light behavior: reflection, refraction, diffraction, interference"
+      - "Identify regions of the electromagnetic spectrum and their applications"
+
+    topics:
+      - "Periodic Motion & Oscillation"
+      - "Transverse vs Longitudinal Waves"
+      - "Wave Speed, Frequency & Wavelength"
+      - "Amplitude & Energy"
+      - "Sound: Production & Propagation"
+      - "Pitch, Volume & Timbre"
+      - "Reflection & Refraction"
+      - "Interference & Diffraction"
+      - "Electromagnetic Spectrum"
+      - "Optics: Lenses & Mirrors"
+      - "Color & Perception"
+
+    grade_levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 45
+      high: 35
+
+    prerequisite_modules: [PHYS-101-M1]
+
+    activities:
+      count: 4
+      examples:
+        - "Slinky Wave Explorer"
+        - "Build a Pinhole Camera"
+        - "Resonance Tube Experiment"
+        - "Spectrum Analysis with Diffraction Grating"
+
+    assessments:
+      - "Can student describe waves using correct terminology?"
+      - "Does student understand the relationship v = f * lambda?"
+      - "Can student explain reflection and refraction?"
+      - "Can student identify electromagnetic spectrum regions?"
+
+  - id: PHYS-101-M4
+    name: "Electricity & Magnetism"
+    description: "Electric charge, circuits, magnetic fields, electromagnetic induction, and the deep connection between electricity and magnetism"
+
+    learning_outcomes:
+      - "Describe electric charge and the forces between charges"
+      - "Build and analyze series and parallel circuits"
+      - "Apply Ohm's law to calculate voltage, current, and resistance"
+      - "Describe magnetic fields from permanent magnets and electric currents"
+      - "Explain electromagnetic induction and its applications"
+
+    topics:
+      - "Electric Charge & Static Electricity"
+      - "Current, Voltage & Resistance"
+      - "Ohm's Law"
+      - "Series & Parallel Circuits"
+      - "Electrical Power & Energy"
+      - "Permanent Magnets & Magnetic Fields"
+      - "Electromagnetism"
+      - "Electromagnetic Induction"
+      - "Motors & Generators"
+      - "Transformers & Power Distribution"
+
+    grade_levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 20
+      elementary: 35
+      middle: 50
+      high: 45
+
+    prerequisite_modules: [PHYS-101-M1, PHYS-101-M2]
+
+    activities:
+      count: 4
+      examples:
+        - "Simple Circuit Builder"
+        - "Electromagnet Strength Challenge"
+        - "Motor & Generator Discovery"
+        - "Static Electricity Investigations"
+
+    assessments:
+      - "Can student build working circuits and predict behavior?"
+      - "Does student apply Ohm's law correctly?"
+      - "Can student explain the relationship between electricity and magnetism?"
+      - "Does student understand electromagnetic induction?"
+
+  - id: PHYS-101-M5
+    name: "Modern Physics & Cosmology"
+    description: "Atomic structure, radioactivity, special relativity, quantum mechanics, nuclear physics, and the large-scale structure of the universe"
+
+    learning_outcomes:
+      - "Describe atomic structure and quantum energy levels"
+      - "Explain radioactive decay and calculate half-life"
+      - "Describe special relativity: time dilation, length contraction, E=mc^2"
+      - "Explain wave-particle duality and the uncertainty principle"
+      - "Describe the Big Bang model and evidence for an expanding universe"
+
+    topics:
+      - "Atomic Structure & Electron Configuration"
+      - "Quantum Energy Levels"
+      - "Radioactivity: Alpha, Beta, Gamma"
+      - "Half-Life & Decay Curves"
+      - "Nuclear Fission & Fusion"
+      - "Special Relativity"
+      - "Mass-Energy Equivalence"
+      - "Wave-Particle Duality"
+      - "Uncertainty Principle"
+      - "The Big Bang & Cosmic Expansion"
+      - "Dark Matter & Dark Energy"
+      - "Standard Model of Particle Physics"
+
+    grade_levels: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+
+    time_estimates:
+      middle: 30
+      high: 45
+
+    prerequisite_modules: [PHYS-101-M1, PHYS-101-M2, PHYS-101-M3, PHYS-101-M4]
+
+    activities:
+      count: 4
+      examples:
+        - "Half-Life Coin Simulation"
+        - "Relativity Thought Experiments"
+        - "Spectral Analysis Lab"
+        - "Cosmic Expansion Balloon Model"
+
+    assessments:
+      - "Can student describe atomic structure and energy levels?"
+      - "Does student understand radioactive decay quantitatively?"
+      - "Can student explain relativistic effects conceptually?"
+      - "Does student understand evidence for the Big Bang?"
+
+---
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Scientific Reasoning"
+    description: "Ability to form hypotheses, design experiments, analyze data, and draw conclusions"
+    assessed_in: [PHYS-101-M1, PHYS-101-M2, PHYS-101-M3, PHYS-101-M4, PHYS-101-M5]
+
+  - name: "Quantitative Modeling"
+    description: "Ability to translate physical situations into mathematical models and interpret results"
+    assessed_in: [PHYS-101-M1, PHYS-101-M2, PHYS-101-M3, PHYS-101-M4]
+
+  - name: "Conceptual Transfer"
+    description: "Ability to apply principles learned in one context to novel situations"
+    assessed_in: [PHYS-101-M1, PHYS-101-M2, PHYS-101-M3, PHYS-101-M4, PHYS-101-M5]
+
+  - name: "Experimental Design"
+    description: "Ability to design fair tests, control variables, and evaluate measurement uncertainty"
+    assessed_in: [PHYS-101-M1, PHYS-101-M2, PHYS-101-M3, PHYS-101-M4]
+
+---
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4 -> M5"
+    rationale: "Each module builds on the previous; motion and forces are prerequisite to energy, which feeds into waves and E&M"
+
+  - name: "Branching Pathway"
+    description: "M1 -> (M2 & M3 in parallel) -> M4 -> M5"
+    rationale: "Energy and waves can be studied simultaneously after motion; electricity & magnetism benefits from both"
+
+  - name: "Interest-Led Pathway"
+    description: "Start with the module that most excites the learner; backfill prerequisites as needed"
+    rationale: "A student fascinated by space might start with M5 concepts and work backward to fill gaps"
+
+---
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same introduction structure: phenomena first, model second, math third"
+    cached: true
+
+  - pattern: "Experiment Format"
+    description: "Activities follow consistent structure: predict, observe, explain, connect"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure across all modules"
+    cached: true
+
+  - pattern: "Parent Guidance"
+    description: "Parent guidance follows same question-and-encouragement format per module"
+    cached: true
+
+---
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner predicts experimental outcomes correctly"
+    - "When learner traces energy or force through a system"
+    - "When learner draws diagrams spontaneously (free body, circuit, ray)"
+    - "When learner connects concepts across modules"
+    - "When learner self-corrects after unexpected results"
+
+  pattern_detection:
+    - "Effective prediction strategies before experiments"
+    - "Successful approaches to multi-step physics problems"
+    - "Clear explanation techniques for physical phenomena"
+    - "Diagram-drawing habits that correlate with correct solutions"
+
+  skill_promotion:
+    - "Promote successful problem-solving templates to reusable skills"
+    - "Create experiment design checklists from observed successes"
+    - "Build conceptual explanation frameworks from clear peer teaching"
+
+# This YAML defines the modular structure for the PHYS-101 pack
+# and enables skill-creator to orchestrate physics learning experiences.

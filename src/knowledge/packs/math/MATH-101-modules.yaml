@@ -1,0 +1,283 @@
+# MATH-101 Module Definitions
+# Defines the four core modules and their structure for skill-creator
+
+pack_id: MATH-101
+pack_name: "Mathematics — Foundational Knowledge Pack"
+
+modules:
+  - id: MATH-101-M1
+    name: "Number & Operations"
+    description: "Understanding quantity, place value, and how to combine/separate quantities"
+
+    learning_outcomes:
+      - "Recognize quantities without counting (subitizing)"
+      - "Understand what numbers represent"
+      - "Compose and decompose numbers flexibly"
+      - "Apply operations (add, subtract, multiply, divide) meaningfully"
+      - "Develop fluency with operations"
+
+    topics:
+      - "Subitizing & Cardinality"
+      - "Counting Principles"
+      - "Number Composition & Decomposition"
+      - "Addition & Subtraction"
+      - "Multiplication & Division"
+      - "Place Value"
+      - "Multi-Digit Operations"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 40
+      elementary: 30
+      middle: 20
+      high: 0
+
+    prerequisite_modules: []
+
+    activities:
+      count: 8
+      examples:
+        - "Finger Counting & Subitizing Games"
+        - "Number Composition with Manipulatives"
+        - "Operation Stories & Narratives"
+        - "Place Value Games"
+        - "Multi-Step Problem Solving"
+        - "Number Talks & Strategy Discussion"
+        - "Speed & Accuracy Challenges"
+        - "Real-World Applications of Operations"
+
+    assessments:
+      - "Can student recognize quantities instantly?"
+      - "Does student understand operation meaning?"
+      - "Can student solve multi-step problems?"
+      - "Is student developing computational fluency?"
+
+  - id: MATH-101-M2
+    name: "Patterns & Algebraic Thinking"
+    description: "Recognizing patterns, generalizing rules, using variables, solving equations"
+
+    learning_outcomes:
+      - "Extend and create patterns"
+      - "Describe patterns in multiple ways"
+      - "Understand variables as unknowns and as quantities that change"
+      - "Write and solve equations"
+      - "Understand functional relationships"
+
+    topics:
+      - "Pattern Recognition & Extension"
+      - "Generalization & Rule-Finding"
+      - "Variables as Unknowns"
+      - "Variables as Varying Quantities"
+      - "Functional Relationships"
+      - "Expressions & Equations"
+      - "Solving Equations"
+      - "Systems of Equations"
+      - "Polynomial Functions"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 30
+      elementary: 40
+      middle: 50
+      high: 40
+
+    prerequisite_modules: ["MATH-101-M1"]
+
+    activities:
+      count: 10
+      examples:
+        - "Visual Pattern Extension Puzzles"
+        - "Function Machine Input-Output"
+        - "Equation Balance Scale Simulations"
+        - "Graphing Stories"
+        - "Reverse-Engineering Patterns"
+        - "Equivalence Exploration"
+        - "Real-World Function Investigations"
+        - "Multi-Variable Problem Solving"
+        - "Proof & Justification Exercises"
+        - "Systems of Equations Challenges"
+
+    assessments:
+      - "Can student describe patterns in multiple ways?"
+      - "Does student understand variable meaning?"
+      - "Can student write equations to represent situations?"
+      - "Can student solve equations and justify solutions?"
+
+  - id: MATH-101-M3
+    name: "Geometry & Spatial Thinking"
+    description: "Understanding shapes, space, transformations, and geometric measurement"
+
+    learning_outcomes:
+      - "Recognize shapes and their properties"
+      - "Understand spatial relationships"
+      - "Apply transformations (rotation, reflection, translation)"
+      - "Measure geometric quantities (area, perimeter, volume)"
+      - "Reason about 3D space"
+
+    topics:
+      - "Shape Properties & Classification"
+      - "Spatial Relationships & Orientation"
+      - "Symmetry & Patterns"
+      - "Transformations (Rotation, Reflection, Translation)"
+      - "Congruence & Similarity"
+      - "Area & Perimeter"
+      - "Volume & Surface Area"
+      - "Coordinate Geometry"
+      - "Trigonometry"
+      - "3D Visualization"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 40
+      middle: 50
+      high: 40
+
+    prerequisite_modules: ["MATH-101-M1"]
+
+    activities:
+      count: 9
+      examples:
+        - "Tangram & Dissection Puzzles"
+        - "Symmetry & Transformation Exploration"
+        - "Area & Perimeter Optimization"
+        - "Net-Folding Predictions"
+        - "Coordinate Geometry Graphing"
+        - "Construction with Constraints"
+        - "3D Visualization & Mental Rotation"
+        - "Proof of Geometric Properties"
+        - "Real-World Measurement Projects"
+
+    assessments:
+      - "Can student identify shape properties?"
+      - "Does student understand area/perimeter distinction?"
+      - "Can student visualize 3D from 2D representations?"
+      - "Can student apply geometric reasoning to problems?"
+
+  - id: MATH-101-M4
+    name: "Data, Probability & Statistics"
+    description: "Collecting data, understanding uncertainty, interpreting information"
+
+    learning_outcomes:
+      - "Collect and organize data"
+      - "Represent data in multiple ways"
+      - "Understand probability intuitively"
+      - "Calculate and interpret statistics"
+      - "Reason about uncertainty"
+
+    topics:
+      - "Data Collection Methods"
+      - "Data Organization & Representation"
+      - "Measures of Center (Mean, Median, Mode)"
+      - "Measures of Spread (Range, Standard Deviation)"
+      - "Probability Foundations"
+      - "Experimental vs. Theoretical Probability"
+      - "Sampling & Inference"
+      - "Correlation vs. Causation"
+      - "Statistical Modeling"
+      - "Hypothesis Testing"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 30
+      middle: 50
+      high: 40
+
+    prerequisite_modules: ["MATH-101-M1"]
+
+    activities:
+      count: 8
+      examples:
+        - "Data Collection Mini-Studies"
+        - "Graph Representation Exploration"
+        - "Probability Experiments"
+        - "Sampling Simulations"
+        - "Statistical Analysis Projects"
+        - "Graph Critique & Bias Recognition"
+        - "Story from Data Narratives"
+        - "Real-World Statistical Investigations"
+
+    assessments:
+      - "Can student choose appropriate representations?"
+      - "Does student interpret statistics accurately?"
+      - "Can student design fair probability experiments?"
+      - "Can student recognize bias in data/analysis?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Mathematical Communication"
+    description: "Ability to explain thinking clearly in writing and verbally"
+    assessed_in: ["MATH-101-M1", "MATH-101-M2", "MATH-101-M3", "MATH-101-M4"]
+
+  - name: "Problem-Solving Flexibility"
+    description: "Ability to solve problems using multiple approaches"
+    assessed_in: ["MATH-101-M1", "MATH-101-M2", "MATH-101-M3", "MATH-101-M4"]
+
+  - name: "Precision & Reasoning"
+    description: "Careful, logical thinking; justification of claims"
+    assessed_in: ["MATH-101-M2", "MATH-101-M3", "MATH-101-M4"]
+
+  - name: "Error Analysis"
+    description: "Ability to find and fix mistakes; learning from errors"
+    assessed_in: ["MATH-101-M1", "MATH-101-M2", "MATH-101-M3", "MATH-101-M4"]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 & M4"
+    rationale: "Number & operations are foundational; algebra and geometry can proceed in parallel"
+
+  - name: "Spiral Pathway"
+    description: "Revisit all four modules repeatedly at increasing depth"
+    rationale: "Each module deepens understanding of others"
+
+  - name: "Interest-Led Pathway"
+    description: "Choose module based on interest; M1 is prerequisite foundation only"
+    rationale: "A student fascinated by shapes might dive into M3 while reviewing M1 as needed"
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All four modules follow same introduction structure"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Interactive elements follow consistent template"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure"
+    cached: true
+
+  - pattern: "Parent Guidance"
+    description: "Parent guidance follows same question format"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner solves problems multiple ways"
+    - "When learner explains reasoning clearly"
+    - "When learner recognizes patterns"
+    - "When learner catches own errors"
+    - "When learner applies concepts to novel problems"
+
+  pattern_detection:
+    - "Effective debugging strategies"
+    - "Successful problem representations"
+    - "Clear communication techniques"
+    - "Efficient algorithms or approaches"
+
+  skill_promotion:
+    - "Promote successful explanation patterns to reusable skills"
+    - "Create strategy libraries for different problem types"
+    - "Build debugging toolkits from observed successes"

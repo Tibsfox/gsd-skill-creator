@@ -1,0 +1,363 @@
+---
+# MUSIC-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: MUSIC-101
+pack_name: "Music & Sound — Foundational Knowledge Pack"
+
+modules:
+  - id: MUSIC-101-M1
+    name: "Rhythm & Movement"
+    description: "How sound is organized in time through rhythm, pulse, meter, and body movement. Understanding the steady beat that underlies all music."
+
+    learning_outcomes:
+      - "Feel and maintain a steady beat across different tempos"
+      - "Distinguish between pulse (steady beat) and rhythm (the pattern)"
+      - "Respond to rhythm through body percussion and movement"
+      - "Understand and use meter (duple, triple, and compound time)"
+      - "Create and follow rhythmic patterns, including polyrhythm"
+      - "Use body percussion (claps, stomps, snaps, taps) expressively"
+      - "Read and write basic rhythmic notation"
+
+    topics:
+      - "Steady Beat & Pulse"
+      - "Rhythm vs. Meter"
+      - "Tempo & Acceleration"
+      - "Body Percussion Techniques"
+      - "Rhythmic Notation (quarter notes, eighth notes, rests)"
+      - "Meter Signatures (2/4, 3/4, 4/4, 6/8)"
+      - "Syncopation & Unexpected Accents"
+      - "Polyrhythm & Layered Patterns"
+      - "Drum Circles & Ensemble Rhythm"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 12
+      middle: 10
+      high: 8
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "Body Percussion Rhythm Chain"
+        - "Bucket Drum Circle"
+        - "Stomp-Clap Pattern Relay"
+        - "Rhythm Notation Game"
+        - "Polyrhythm Exploration"
+        - "Movement to Different Tempos"
+        - "Rhythmic Echo Singing"
+        - "Meter Signature Hunt"
+        - "Drum Circle Leadership"
+        - "Rhythmic Improvisation"
+
+    assessments:
+      - "Can the student maintain a steady beat?"
+      - "Do they distinguish rhythm from meter?"
+      - "Can they create and follow a rhythmic pattern?"
+      - "Do they participate respectfully in ensemble rhythm activities?"
+
+    cross_module_competencies:
+      - "Pattern Recognition"
+      - "Fine Motor Control"
+      - "Ensemble Participation"
+      - "Collaborative Problem-Solving"
+
+  - id: MUSIC-101-M2
+    name: "Melody & Voice"
+    description: "How to think in pitches and express melodies through singing. Developing vocal control, scale understanding, and melodic creativity."
+
+    learning_outcomes:
+      - "Match pitches and sing in tune"
+      - "Identify and sing scale patterns (major, minor, pentatonic)"
+      - "Understand intervals and how pitches relate to each other"
+      - "Recognize melodic contour (direction, shape, phrasing)"
+      - "Compose simple melodies"
+      - "Sing expressively with appropriate phrasing and dynamics"
+      - "Read and write notation on a staff"
+      - "Use solfège syllables (do-re-mi) for pitch thinking"
+
+    topics:
+      - "Pitch & High/Low"
+      - "Major & Minor Scales"
+      - "Solfège Syllables (do-re-mi-fa-sol-la-ti-do)"
+      - "Intervals (unison, second, third, etc.)"
+      - "Melodic Contour & Shape"
+      - "Phrasing & Breathing"
+      - "Dynamics & Expression"
+      - "Staff Notation (treble clef)"
+      - "Melodic Dictation & Singing by Ear"
+      - "Vocal Technique (posture, breath support, resonance)"
+
+    grade_levels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 12
+      elementary: 15
+      middle: 12
+      high: 10
+
+    prerequisite_modules: [MUSIC-101-M1]
+
+    activities:
+      count: 10
+      examples:
+        - "Solfège Scavenger Hunt"
+        - "Melody Composition with Boomwhackers"
+        - "Echo Singing & Pitch Matching"
+        - "Interval Jump Game"
+        - "Melodic Contour Drawing"
+        - "Singing Rounds & Canons"
+        - "Melodic Dictation Challenge"
+        - "Create a Song (3 Pitches)"
+        - "Sing Different Scales"
+        - "Melody Variation Workshop"
+
+    assessments:
+      - "Can the student match pitches accurately?"
+      - "Do they understand and use scale patterns?"
+      - "Can they compose an original melody?"
+      - "Do they sing with expression and control?"
+
+    cross_module_competencies:
+      - "Pitch Discrimination"
+      - "Creative Expression"
+      - "Listening & Feedback Integration"
+      - "Fine Motor Control (vocal)"
+
+  - id: MUSIC-101-M3
+    name: "Harmony & Ensemble"
+    description: "How multiple pitches combine to create harmony. Building skill in creating accompaniment, part-singing, and ensemble coordination."
+
+    learning_outcomes:
+      - "Understand chord construction (root, third, fifth)"
+      - "Recognize and name major and minor chords"
+      - "Create harmonic accompaniment using chords"
+      - "Sing in parts (duets, three-part harmony, rounds)"
+      - "Understand consonance (stable) and dissonance (tension)"
+      - "Arrange melodies for multiple voices or instruments"
+      - "Blend voices in ensemble settings"
+      - "Lead and follow in group music-making"
+
+    topics:
+      - "Chord Structure (root, third, fifth)"
+      - "Major & Minor Chords"
+      - "Chord Progressions (I-IV-V, etc.)"
+      - "Consonance & Dissonance"
+      - "Harmonic Function (tonic, dominant, subdominant)"
+      - "Part-Singing & Voice Leading"
+      - "Rounds & Canons"
+      - "Texture (monophonic, homophonic, polyphonic)"
+      - "Orchestration & Arrangement"
+      - "Blend & Balance in Ensembles"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 10
+      middle: 12
+      high: 10
+
+    prerequisite_modules: [MUSIC-101-M1, MUSIC-101-M2]
+
+    activities:
+      count: 10
+      examples:
+        - "Three-Chord Song Accompaniment"
+        - "Texture Layering Experiment"
+        - "Chord Recognition Game"
+        - "Build a Chord with Voices"
+        - "Arranging for Small Ensemble"
+        - "Part-Singing in Rounds"
+        - "Create a Harmony for a Melody"
+        - "Consonance vs. Dissonance Listening"
+        - "Orchestration Choices"
+        - "Ensemble Blend Workshop"
+
+    assessments:
+      - "Can the student identify and name chords?"
+      - "Can they create a harmonic accompaniment?"
+      - "Do they sing parts accurately and blend with others?"
+      - "Can they make thoughtful arrangement choices?"
+
+    cross_module_competencies:
+      - "Harmonic Thinking"
+      - "Collaborative Music-Making"
+      - "Listening to Parts"
+      - "Arrangement & Problem-Solving"
+
+  - id: MUSIC-101-M4
+    name: "Listening & Analysis"
+    description: "Active listening strategies for understanding music structure, style, and cultural context. Building critical listening and analytical skills."
+
+    learning_outcomes:
+      - "Listen actively using focused listening strategies"
+      - "Recognize form and structure (verse/chorus, ABA, sonata, theme & variations)"
+      - "Identify genres, styles, and historical periods"
+      - "Understand music across cultures and traditions"
+      - "Discuss emotional and expressive meaning in music"
+      - "Analyze compositional choices and their effects"
+      - "Compare different interpretations and arrangements"
+      - "Construct informed opinions about music with evidence"
+
+    topics:
+      - "Active Listening Strategies"
+      - "Form Recognition (verse/chorus, ABA, ABACA, etc.)"
+      - "Genre & Style Identification"
+      - "Historical Periods (Renaissance, Baroque, Classical, Romantic, 20th Century, Contemporary)"
+      - "Cultural Traditions in Music"
+      - "Emotional Response to Music"
+      - "Musical Elements in Context"
+      - "Music Across Cultures"
+      - "The Maker's Choices (why did the composer do this?)"
+      - "Interpretation & Performance Choices"
+
+    grade_levels: ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 8
+      elementary: 10
+      middle: 12
+      high: 12
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "Guided Listening Journal"
+        - "Genre Detective Game"
+        - "Form Recognition Challenge"
+        - "World Music Exploration"
+        - "Music History Timeline"
+        - "Emotional Response Discussions"
+        - "Arrangement Comparison"
+        - "Listening Bingo"
+        - "Story-Driven Listening"
+        - "Interpretive Choices Workshop"
+
+    assessments:
+      - "What do they notice during active listening?"
+      - "Can they identify form and structure?"
+      - "Do they engage thoughtfully with diverse styles and traditions?"
+      - "Can they explain musical choices and their effects?"
+
+    cross_module_competencies:
+      - "Critical Thinking"
+      - "Cultural Awareness"
+      - "Analytical Reasoning"
+      - "Informed Judgment"
+
+  - id: MUSIC-101-M5
+    name: "Creation & Technology"
+    description: "Composing original music, improvising, and using digital audio tools. Making music through songwriting, production, and creative expression."
+
+    learning_outcomes:
+      - "Compose an original song or piece"
+      - "Improvise melody and rhythm"
+      - "Use digital audio software and music tools"
+      - "Record, edit, and share audio"
+      - "Arrange existing music for new ensembles"
+      - "Understand basic music production concepts"
+      - "Collaborate with others on musical projects"
+      - "Revise work based on feedback"
+
+    topics:
+      - "Songwriting Basics (melody, rhythm, structure)"
+      - "Improvisation Techniques"
+      - "Digital Audio Software (GarageBand, Audacity, MuseScore, Incredibox)"
+      - "Recording & Microphone Technique"
+      - "Audio Editing"
+      - "Arrangement for New Ensembles"
+      - "Music Production Concepts"
+      - "Sharing & Publication"
+      - "Peer Critique & Feedback"
+      - "Iteration & Refinement"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 12
+      middle: 14
+      high: 14
+
+    prerequisite_modules: [MUSIC-101-M1, MUSIC-101-M2]
+
+    activities:
+      count: 10
+      examples:
+        - "Songwriting Workshop"
+        - "Improvisation Jam Session"
+        - "GarageBand Beat Lab"
+        - "MuseScore Composition Challenge"
+        - "Arrangement for Small Group"
+        - "Recording Studio Project"
+        - "Incredibox Loop Creation"
+        - "Podcast Music Creation"
+        - "Remixing & Mashup"
+        - "Peer Critique & Revision"
+
+    assessments:
+      - "Can the student create something original?"
+      - "Do they use tools effectively to realize their vision?"
+      - "Can they revise and improve based on feedback?"
+      - "Do they reflect on their creative choices?"
+
+    cross_module_competencies:
+      - "Creative Thinking"
+      - "Technical Problem-Solving"
+      - "Collaboration & Communication"
+      - "Reflection & Self-Assessment"
+
+# Cross-module competencies that span multiple modules
+cross_module_competencies:
+  - name: "Pattern Recognition"
+    description: "Identifying, creating, and extending patterns in rhythm, melody, and form"
+    assessed_in: [MUSIC-101-M1, MUSIC-101-M2, MUSIC-101-M4]
+
+  - name: "Collaborative Music-Making"
+    description: "Working respectfully and productively with others in ensemble settings"
+    assessed_in: [MUSIC-101-M1, MUSIC-101-M3, MUSIC-101-M5]
+
+  - name: "Active Listening"
+    description: "Paying intentional attention to music with specific focus tools"
+    assessed_in: [MUSIC-101-M2, MUSIC-101-M3, MUSIC-101-M4]
+
+  - name: "Creative Expression"
+    description: "Using music to communicate ideas, emotions, and individual voice"
+    assessed_in: [MUSIC-101-M2, MUSIC-101-M5]
+
+  - name: "Musical Communication"
+    description: "Explaining musical ideas, choices, and responses with evidence"
+    assessed_in: [MUSIC-101-M3, MUSIC-101-M4, MUSIC-101-M5]
+
+# Learning pathways through the pack
+progression_pathways:
+  - name: "Foundations First (Sequential)"
+    description: "M1 → M2 → M3 → M4 & M5"
+    rationale: "Rhythm before pitch; pitch before harmony. Listening (M4) can happen anywhere. Creation (M5) is richest after understanding rhythm, melody, and harmony."
+
+  - name: "Listening & Creating (Parallel)"
+    description: "M1 & M4 in parallel, then M2, then M3, then M5"
+    rationale: "For learners who are most motivated by understanding how music works; listening and rhythm can develop together."
+
+  - name: "Creation-Driven (Discovery)"
+    description: "Start with M5, pull in M1-M4 as needed"
+    rationale: "For older students and those who learn best through making; composition projects naturally introduce rhythm, melody, harmony, and analysis."
+
+# Skill-creator integration notes
+skill_creator_integration:
+  adaptive_focus: "Modules 1-3 have clear progression; Modules 4-5 can be accessed in any order"
+  remediation_entry_points:
+    - "If student struggles with rhythm: go back to M1 with simpler activities"
+    - "If student struggles with pitch: extra time in M2 with individual singing and listening"
+    - "If student struggles with harmony: extend M3 with more chord listening and simpler progressions"
+  acceleration_pathways:
+    - "M1: Move to complex polyrhythms and notation"
+    - "M2: Move to improvisation and composition"
+    - "M3: Move to advanced harmony, modulation, chromaticism"
+    - "M4: Move to complex forms, advanced style analysis"
+    - "M5: Move to multi-track composition, advanced production"

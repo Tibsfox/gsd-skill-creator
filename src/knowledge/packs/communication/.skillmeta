@@ -1,0 +1,527 @@
+# GSD Skill Metadata
+pack_id: COMM-101
+pack_name: "Communication & Speech — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: communication_skills
+
+# Content Description
+description: |
+  Communication as the skill of making ideas travel between minds: speaking
+  clearly, listening deeply, reading nonverbal signals, presenting ideas,
+  and collaborating through dialogue. Covers the full communication spectrum
+  from one-on-one conversation to formal presentation, from active listening
+  to constructive feedback, from storytelling to argumentation.
+
+short_description: "Speaking, listening, presenting, and collaborating across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Communication Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - READ-101
+
+# What This Pack Enables
+enables:
+  - WRIT-101
+  - BUS-101
+  - LANG-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [25, 40]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [40, 60]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [60, 90]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [80, 120]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [100, 150]
+
+# Modules
+modules:
+  - id: COMM-101-M1
+    name: "Foundations of Speaking & Listening"
+    description: "Building the fundamental communication loop: expressing ideas clearly, listening actively, taking turns, asking good questions, and responding to show understanding"
+    learning_outcomes:
+      - "Organize thoughts before speaking to communicate clearly"
+      - "Listen actively by attending, paraphrasing, and questioning"
+      - "Take turns in conversation equitably and respectfully"
+      - "Ask open-ended and clarifying questions to deepen understanding"
+      - "Respond to others in ways that demonstrate comprehension"
+    topics:
+      - "Organizing Thoughts Before Speaking"
+      - "Clear & Complete Expression"
+      - "Turn-Taking & Conversational Flow"
+      - "Active Listening Techniques"
+      - "Asking Good Questions"
+      - "Paraphrasing & Reflective Response"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 30
+      elementary: 25
+      middle: 15
+      high: 10
+    prerequisite_modules: []
+    activities:
+      count: 6
+      examples:
+        - "Two-Minute Expert Talk"
+        - "Active Listening Pair Exercise"
+        - "Question Quality Competition"
+        - "Paraphrase Relay"
+        - "Telephone Variations"
+        - "Partner Interview & Introduction"
+    assessments:
+      - "Can student organize thoughts before speaking?"
+      - "Does student demonstrate active listening through paraphrasing?"
+      - "Can student ask open-ended, clarifying questions?"
+      - "Does student take turns and share speaking time equitably?"
+
+  - id: COMM-101-M2
+    name: "Nonverbal Communication & Presence"
+    description: "Understanding and using the silent language of body posture, facial expression, gesture, tone of voice, eye contact, and spatial awareness"
+    learning_outcomes:
+      - "Identify and interpret common nonverbal cues in others"
+      - "Use body language intentionally to reinforce verbal messages"
+      - "Control voice qualities for clarity and impact"
+      - "Maintain culturally appropriate eye contact"
+      - "Recognize congruence and incongruence between verbal and nonverbal messages"
+    topics:
+      - "Body Language & Posture"
+      - "Voice Control & Vocal Variety"
+      - "Eye Contact & Gaze"
+      - "Gesture & Movement"
+      - "Spatial Awareness & Proxemics"
+      - "Emotional Regulation & Presence"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 20
+      middle: 15
+      high: 10
+    prerequisite_modules: [COMM-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Emotion Charades"
+        - "Mirror Exercise"
+        - "Voice-Only Expression"
+        - "Video Sound-Off Analysis"
+        - "Spatial Awareness Game"
+        - "Congruence Detective"
+    assessments:
+      - "Can student identify emotions from nonverbal cues?"
+      - "Does student use body language intentionally?"
+      - "Can student control voice qualities for different effects?"
+      - "Does student recognize verbal-nonverbal incongruence?"
+
+  - id: COMM-101-M3
+    name: "Structured Presentation"
+    description: "Designing, preparing, and delivering organized talks to audiences of various sizes"
+    learning_outcomes:
+      - "Analyze an audience to determine appropriate content and style"
+      - "Organize a presentation with clear structure"
+      - "Create visual aids that enhance the spoken message"
+      - "Deliver presentations with confident voice, posture, and eye contact"
+      - "Manage presentation anxiety through preparation and cognitive strategies"
+    topics:
+      - "Audience Analysis"
+      - "Structural Design & Organization"
+      - "Visual Aid Creation"
+      - "Storytelling in Presentations"
+      - "Delivery Techniques"
+      - "Managing Presentation Anxiety"
+    grade_levels: ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 25
+      middle: 30
+      high: 25
+    prerequisite_modules: [COMM-101-M1, COMM-101-M2]
+    activities:
+      count: 6
+      examples:
+        - "My Passion Presentation"
+        - "Teach-Back Challenge"
+        - "Slide Surgery Workshop"
+        - "Sixty-Second Pitch"
+        - "Rehearsal Partner Feedback"
+        - "Anxiety Management Workshop"
+    assessments:
+      - "Can student organize a presentation with clear structure?"
+      - "Does student adapt content and style to the audience?"
+      - "Can student deliver with confident voice and posture?"
+      - "Does student use visual aids that enhance the message?"
+
+  - id: COMM-101-M4
+    name: "Discussion, Debate & Collaboration"
+    description: "Engaging in structured discussions, formal debates, and collaborative dialogue"
+    learning_outcomes:
+      - "Participate equitably in group discussions"
+      - "Build on others' ideas constructively"
+      - "Disagree respectfully using evidence"
+      - "Give and receive constructive feedback"
+      - "Facilitate group discussions and consensus-building"
+    topics:
+      - "Structured Discussion Protocols"
+      - "Building on Others' Ideas"
+      - "Constructive Disagreement"
+      - "Evidence-Based Argumentation"
+      - "Giving & Receiving Feedback"
+      - "Facilitation & Consensus Building"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 30
+    prerequisite_modules: [COMM-101-M3]
+    activities:
+      count: 6
+      examples:
+        - "Fishbowl Discussion"
+        - "Structured Debate"
+        - "Think-Pair-Share with Accountability"
+        - "Socratic Seminar"
+        - "Feedback Workshop"
+        - "Devil's Advocate Exercise"
+    assessments:
+      - "Can student participate equitably in structured discussion?"
+      - "Does student build on others' ideas constructively?"
+      - "Can student disagree respectfully with evidence?"
+      - "Does student give specific, actionable feedback?"
+
+  - id: COMM-101-M5
+    name: "Communication Across Contexts"
+    description: "Adapting communication skills to different situations, audiences, cultures, and media"
+    learning_outcomes:
+      - "Shift register appropriately between formal and informal contexts"
+      - "Communicate effectively across digital media"
+      - "Navigate cross-cultural communication differences"
+      - "Apply communication skills in professional contexts"
+      - "Practice communication ethics"
+    topics:
+      - "Register Shifting"
+      - "Digital Communication Literacy"
+      - "Cross-Cultural Communication"
+      - "Media Literacy & Message Shaping"
+      - "Professional Communication"
+      - "Communication Ethics"
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      middle: 20
+      high: 25
+    prerequisite_modules: [COMM-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Same Message Different Audience"
+        - "Medium Selection Challenge"
+        - "Cross-Cultural Role Play"
+        - "Professional Scenario Simulation"
+        - "Media Analysis Exercise"
+        - "Conflict Resolution Simulation"
+    assessments:
+      - "Can student adapt communication register to different contexts?"
+      - "Does student choose appropriate media for different situations?"
+      - "Can student navigate cross-cultural communication differences?"
+      - "Does student apply communication ethics consistently?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-SPK-001
+    description: "Express ideas clearly with organized structure and appropriate vocabulary"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-LST-001
+    description: "Listen actively and demonstrate comprehension through paraphrasing and questioning"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8"]
+
+  - code: LO-NVB-001
+    description: "Use and interpret nonverbal communication intentionally"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-PRS-001
+    description: "Design and deliver structured presentations to varied audiences"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-DIS-001
+    description: "Participate in structured discussions with equitable contribution and constructive engagement"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-CTX-001
+    description: "Adapt communication across contexts, cultures, and media"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Active Listening Check"
+    frequency: ongoing
+
+  - type: formative
+    name: "Peer Feedback Practice"
+    frequency: weekly
+
+  - type: summative
+    name: "Communication Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Presentation Performance"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: audio_recorder
+    integrated: true
+    description: "Audio recording for self-assessment of speaking and listening activities"
+
+  - name: video_recorder
+    integrated: true
+    description: "Optional video recording for nonverbal communication self-review"
+
+  - name: timer
+    integrated: true
+    description: "Timer for structured speaking turns and presentation practice"
+
+interactive_elements:
+  - type: practice
+    name: "Partner Share Exercise"
+
+  - type: performance
+    name: "Presentation Simulator"
+
+  - type: discussion
+    name: "Socratic Seminar Tool"
+
+  - type: game
+    name: "Emotion Charades"
+
+  - type: collaboration
+    name: "Fishbowl Discussion"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Activities accommodate diverse communication modalities including sign language. Listening activities include visual alternatives. Speaking assessments can be adapted for learners with speech differences."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Common Core State Standards (Speaking & Listening)"
+    version: 2010
+    alignments:
+      "CCSS.ELA-LITERACY.SL.1.1": "Participate in conversations"
+      "CCSS.ELA-LITERACY.SL.2.4": "Tell stories sequentially"
+      "CCSS.ELA-LITERACY.SL.3.4": "Report on a topic or text"
+      "CCSS.ELA-LITERACY.SL.6.6": "Adapt speech to context and task"
+      SL.1: "Comprehension and Collaboration"
+      SL.4: "Present Information Clearly"
+  - framework: "National Communication Association K-12 Standards"
+    version: 1998
+    alignments:
+      NCA-1: "Knowledge of communication processes"
+      NCA-2: "Ability to accomplish communicative purposes"
+      NCA-3: "Application to diverse contexts"
+  - framework: "IB Middle Years Programme (Language & Literature)"
+    version: "2024"
+    alignments:
+      MYP.LANG.B: "Listening and speaking"
+      MYP.LANG.C: "Producing text"
+  - framework: "UK National Curriculum (English - Speaking & Listening)"
+    version: "2014"
+    alignments:
+      KS1.SPL: "Listening and speaking"
+      KS2.SPL: "Oral communication"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Difficulty is in developing habits of mind and behavioral skills, not technical content. Accessible to all learners. Communication anxiety is explicitly addressed."
+
+# Content Flags
+content_flags:
+  - flag: anxiety_potential
+    description: "Public speaking and performance activities may trigger anxiety in some learners."
+    mitigation: "Graduated exposure: start with partner sharing, build to small groups, then larger audiences. Explicit anxiety management instruction included."
+
+  - flag: cultural_sensitivity
+    description: "Communication norms vary across cultures. Eye contact, personal space, directness, and silence are culturally regulated."
+    mitigation: "All culturally variable activities include notes on cultural differences. No single culture's norms are presented as correct."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/comm-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "COMM-101"
+  looking_for:
+    - "Additional activities for digital communication contexts"
+    - "Cross-cultural communication case studies"
+    - "Activities adapted for English Language Learners"
+    - "Translations to Spanish & Mandarin"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Communication Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - communication
+  - speaking
+  - listening
+  - presentation
+  - public-speaking
+  - discussion
+  - debate
+  - nonverbal
+  - collaboration
+  - foundational
+
+# External Resources
+resources:
+  - type: textbook
+    title: "Talk Like TED"
+    author: "Carmine Gallo"
+    url: null
+
+  - type: organization
+    title: "Toastmasters International"
+    author: "Toastmasters"
+    url: "https://www.toastmasters.org/"
+
+  - type: online_platform
+    title: "TED-Ed"
+    author: "TED"
+    url: "https://ed.ted.com/"
+
+# Related Packs
+related_packs:
+  - id: READ-101
+    relationship: "Reading builds vocabulary and comprehension that support verbal communication"
+
+  - id: CRIT-101
+    relationship: "Critical thinking provides logical infrastructure for argumentation and persuasion"
+
+  - id: WRIT-101
+    relationship: "Writing is the written complement to oral communication skills"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "message-circle"
+    color: "#00BCD4"
+    position: "Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "COMM-101-core-concepts"
+    - "COMM-101-communication-loop"
+    - "COMM-101-assessment-patterns"
+    - "COMM-101-parent-guidance"
+
+# File References
+files:
+  vision_document: "COMM-101-vision.md"
+  modules_definition: "COMM-101-modules.yaml"
+  activities: "COMM-101-activities.json"
+  assessment: "COMM-101-assessment.md"
+  resources: "COMM-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering speaking, listening, nonverbal, presentation, and collaboration"
+      - "Contributed 30 starter activities across all modules"
+      - "Aligned to CCSS Speaking and Listening and NCA standards"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"

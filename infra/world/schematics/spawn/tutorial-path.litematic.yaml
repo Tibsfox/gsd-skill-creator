@@ -1,0 +1,35 @@
+schematic:
+  name: "tutorial-path"
+  category: "spawn"
+  version: "1.0"
+  format: "litematic"
+  filename: "spawn-tutorial-path-v1.0.litematic"
+
+  dimensions:
+    x: 80    # Approximate bounding box of the loop
+    y: 8     # Path level through demo build peaks
+    z: 80
+
+  origin:
+    x: 15    # Starts at welcome center east exit
+    y: 63
+    z: -20   # Extends south and west
+
+  description: "5-minute guided tutorial path with 6 waypoints demonstrating spatial learning concepts"
+
+  tags: ["spawn", "tutorial", "guided", "educational"]
+
+  dependencies:
+    - "spawn-plaza"
+    - "welcome-center"
+
+  build_notes: |
+    Place after both spawn-plaza and welcome-center.
+    Path exits welcome center east side and loops back to plaza from south.
+    Verify path connects cleanly to welcome center exit and plaza south entry.
+    6 waypoints with small demo builds along the route.
+
+  syncmatica:
+    share: true
+    placement_locked: true
+    priority: "high"

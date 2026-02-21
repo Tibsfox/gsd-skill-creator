@@ -1,0 +1,74 @@
+# vm-provisioning.local-values.example
+#
+# Example local-values file for VM provisioning backends.
+# Copy to infra/local/vm-provisioning.local-values and edit for your site.
+#
+# Used by: vm-backend-kvm.sh, vm-backend-vmware.sh
+# Loaded by: vm_load_values() in lib/vm-common.sh
+#
+# Values here override defaults from resource-budget.yaml (Phase 169-02).
+# If vm_ram_mb, vm_vcpus, or vm_disk_gb are omitted, the loader will
+# fall back to the minecraft_vm allocation from resource-budget.yaml.
+
+# ---------------------------------------------------------------------------
+# VM identity
+# ---------------------------------------------------------------------------
+
+# VM name (alphanumeric + hyphens only, safe for virsh and vmrun)
+vm_name: minecraft-server
+
+# ---------------------------------------------------------------------------
+# Resource sizing
+# ---------------------------------------------------------------------------
+
+# RAM in megabytes (minimum 512)
+vm_ram_mb: 8192
+
+# Number of virtual CPUs (minimum 1)
+vm_vcpus: 4
+
+# Disk size in gigabytes (minimum 10)
+# For KVM: creates qcow2 disk at vm_storage_dir/vm_name.qcow2
+# For VMware: creates VMDK at vm_storage_dir/vm_name/vm_name.vmdk
+vm_disk_gb: 50
+
+# ---------------------------------------------------------------------------
+# Boot source
+# ---------------------------------------------------------------------------
+
+# Path to ISO image for CDROM boot (leave empty for PXE boot)
+# Example: /var/lib/libvirt/images/CentOS-Stream-9-latest-x86_64-dvd1.iso
+vm_iso_path: ""
+
+# Kickstart URL for automated installation via PXE
+# Served by the PXE infrastructure from Phase 170
+# Example: http://192.168.122.1:8080/kickstart/minecraft.ks
+kickstart_url: ""
+
+# ---------------------------------------------------------------------------
+# Network configuration
+# ---------------------------------------------------------------------------
+
+# Network bridge or virtual network name
+# KVM:    virbr0 (default libvirt NAT bridge)
+#         br0    (bridged to physical interface)
+# VMware: vmnet8 (default NAT network)
+#         vmnet1 (host-only)
+vm_network: virbr0
+
+# ---------------------------------------------------------------------------
+# Storage location
+# ---------------------------------------------------------------------------
+
+# Directory where VM disk images are stored
+# KVM default:    /var/lib/libvirt/images
+# VMware default: ~/vmware
+vm_storage_dir: /var/lib/libvirt/images
+
+# ---------------------------------------------------------------------------
+# OS variant (used by virt-install for KVM)
+# ---------------------------------------------------------------------------
+
+# OS variant for KVM optimization (run: virt-install --os-variant list)
+# centos-stream9, fedora39, rhel9, ubuntu22.04, etc.
+vm_os_variant: centos-stream9

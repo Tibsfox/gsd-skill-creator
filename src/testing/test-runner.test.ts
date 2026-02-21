@@ -94,16 +94,17 @@ describe('TestRunner', () => {
     });
 
     // Mock BatchSimulator
-    vi.mocked(BatchSimulator).mockImplementation(() => ({
-      runTestSuite: vi.fn().mockResolvedValue({
+    vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+      this.runTestSuite = vi.fn().mockResolvedValue({
         results: [],
         stats: { total: 0, activations: 0, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
-      }),
-      runCrossSkill: vi.fn(),
-      filterResults: vi.fn(),
-      runTestSuiteWithProgress: vi.fn(),
-    } as unknown as BatchSimulator));
+      });
+      this.runCrossSkill = vi.fn();
+      this.filterResults = vi.fn();
+      this.runTestSuiteWithProgress = vi.fn();
+      return this;
+    } as any);
 
     runner = new TestRunner(mockTestStore, mockSkillStore, mockResultStore, 'user');
   });
@@ -126,9 +127,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       await runner.runForSkill('test-skill');
 
@@ -152,9 +154,10 @@ describe('TestRunner', () => {
         stats: { total: 3, activations: 1, closeCompetitions: 0, noActivations: 2 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -178,9 +181,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       await runner.runForSkill('test-skill');
 
@@ -196,9 +200,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       await runner.runForSkill('test-skill', { storeResults: false });
 
@@ -214,12 +219,11 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       });
-      vi.mocked(BatchSimulator).mockImplementation((config) => {
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any, config: any) {
         expect(config?.threshold).toBe(0.5);
-        return {
-          runTestSuite: mockRunTestSuite,
-        } as unknown as BatchSimulator;
-      });
+        this.runTestSuite = mockRunTestSuite;
+        return this;
+      } as any);
 
       await runner.runForSkill('test-skill', { threshold: 0.5 });
 
@@ -238,12 +242,13 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockImplementation(async () => {
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockImplementation(async () => {
           await new Promise(resolve => setTimeout(resolve, 10));
           return batchResult;
-        }),
-      } as unknown as BatchSimulator));
+        });
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -261,9 +266,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -281,9 +287,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 0, closeCompetitions: 0, noActivations: 1 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -301,9 +308,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -320,9 +328,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 0, closeCompetitions: 0, noActivations: 1 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -340,9 +349,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -360,9 +370,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -379,9 +390,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -399,9 +411,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 0, closeCompetitions: 0, noActivations: 1 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -427,9 +440,10 @@ describe('TestRunner', () => {
         stats: { total: 2, activations: 1, closeCompetitions: 0, noActivations: 1 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -453,9 +467,10 @@ describe('TestRunner', () => {
         stats: { total: 2, activations: 1, closeCompetitions: 0, noActivations: 1 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -483,9 +498,10 @@ describe('TestRunner', () => {
         stats: { total: 4, activations: 2, closeCompetitions: 0, noActivations: 2 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -509,9 +525,10 @@ describe('TestRunner', () => {
         stats: { total: 2, activations: 2, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -536,9 +553,10 @@ describe('TestRunner', () => {
         stats: { total: 2, activations: 1, closeCompetitions: 0, noActivations: 1 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -559,9 +577,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -587,9 +606,10 @@ describe('TestRunner', () => {
         stats: { total: 4, activations: 2, closeCompetitions: 0, noActivations: 2 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -614,9 +634,10 @@ describe('TestRunner', () => {
         stats: { total: 2, activations: 1, closeCompetitions: 0, noActivations: 1 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -647,9 +668,10 @@ describe('TestRunner', () => {
         stats: { total: 4, activations: 2, closeCompetitions: 0, noActivations: 2 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -673,9 +695,10 @@ describe('TestRunner', () => {
         stats: { total: 2, activations: 0, closeCompetitions: 0, noActivations: 2 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -699,9 +722,10 @@ describe('TestRunner', () => {
         stats: { total: 2, activations: 1, closeCompetitions: 0, noActivations: 1 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -723,9 +747,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 0, closeCompetitions: 0, noActivations: 1 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -744,9 +769,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -769,9 +795,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 0, closeCompetitions: 1, noActivations: 1 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -790,9 +817,10 @@ describe('TestRunner', () => {
         stats: { total: 2, activations: 0, closeCompetitions: 0, noActivations: 2 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -812,9 +840,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -832,9 +861,10 @@ describe('TestRunner', () => {
         stats: { total: 1, activations: 0, closeCompetitions: 0, noActivations: 1 },
         duration: 100,
       };
-      vi.mocked(BatchSimulator).mockImplementation(() => ({
-        runTestSuite: vi.fn().mockResolvedValue(batchResult),
-      } as unknown as BatchSimulator));
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
+        this.runTestSuite = vi.fn().mockResolvedValue(batchResult);
+        return this;
+      } as any);
 
       const result = await runner.runForSkill('test-skill');
 
@@ -848,16 +878,15 @@ describe('TestRunner', () => {
       vi.mocked(mockTestStore.list).mockResolvedValue(testCases);
 
       let capturedCallback: ((p: { current: number; total: number }) => void) | undefined;
-      vi.mocked(BatchSimulator).mockImplementation((config) => {
+      vi.mocked(BatchSimulator).mockImplementation(function (this: any, config: any) {
         capturedCallback = config?.onProgress as any;
-        return {
-          runTestSuite: vi.fn().mockResolvedValue({
-            results: [createSimResult(0.8)],
-            stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
-            duration: 100,
-          }),
-        } as unknown as BatchSimulator;
-      });
+        this.runTestSuite = vi.fn().mockResolvedValue({
+          results: [createSimResult(0.8)],
+          stats: { total: 1, activations: 1, closeCompetitions: 0, noActivations: 0 },
+          duration: 100,
+        });
+        return this;
+      } as any);
 
       const progressUpdates: Array<{ current: number; total: number }> = [];
       await runner.runForSkill('test-skill', {

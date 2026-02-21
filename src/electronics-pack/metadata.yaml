@@ -1,0 +1,41 @@
+name: electronics
+version: 0.1.0
+title: "Electronics Educational Pack"
+description: "Comprehensive electronics curriculum from Ohm's law through DSP and PLC"
+textbook: "The Art of Electronics, 3rd Edition (Horowitz & Hill)"
+status: scaffold
+
+dependencies:
+  packs: []
+  skills: []
+
+triggers:
+  - electronics
+  - circuit
+  - voltage
+  - current
+  - resistor
+  - capacitor
+  - inductor
+  - amplifier
+  - transistor
+  - diode
+  - op-amp
+  - digital logic
+  - PCB
+  - power supply
+
+modules:
+  count: 15
+  tiers:
+    1: [01-the-circuit, 02-passive-components, 03-the-signal]
+    2: [04-diodes, 05-transistors, 06-op-amps, 07-power-supplies]
+    3: [07a-logic-gates, 08-sequential-logic, 09-data-conversion, 10-dsp]
+    4: [11-microcontrollers, 12-sensors-actuators, 13-plc, 14-off-grid-power, 15-pcb-design]
+
+agents:
+  count: 5
+  ids: [EL-1, EL-2, EL-3, EL-4, EL-5]
+
+skills:
+  count: 14

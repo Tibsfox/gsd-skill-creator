@@ -1,0 +1,536 @@
+# GSD Skill Metadata
+pack_id: HIST-101
+pack_name: "History & Civilization -- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: historical_thinking
+
+# Content Description
+description: |
+  History as a way of thinking: analyzing sources, understanding causation,
+  recognizing multiple perspectives, and constructing evidence-based arguments
+  about the past. Covers source analysis, causal reasoning, continuity and
+  change, perspective-taking, and historical argumentation from foundation
+  through college level.
+
+short_description: "Source analysis, causation, perspectives, and historical argumentation across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "History Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - READ-101
+
+# What This Pack Enables
+enables:
+  - PHILO-101
+  - GEO-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [30, 50]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [50, 80]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [80, 120]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [120, 180]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [180, 240]
+
+# Modules
+modules:
+  - id: HIST-101-M1
+    name: "Sources & Evidence"
+    description: "Identifying, evaluating, and interpreting primary and secondary sources as the foundation of all historical thinking"
+    learning_outcomes:
+      - "Distinguish between primary and secondary sources"
+      - "Evaluate the reliability and perspective of a historical source"
+      - "Extract information from documents, images, artifacts, and oral testimony"
+      - "Corroborate claims by comparing multiple sources"
+      - "Contextualize a source within its time and place"
+      - "Recognize the difference between what a source says and what it reveals"
+    topics:
+      - "Primary Sources (Letters, Diaries, Photographs, Records, Artifacts)"
+      - "Secondary Sources (Textbooks, Documentaries, Scholarly Articles)"
+      - "Source Identification & Classification"
+      - "Author, Audience, and Purpose Analysis"
+      - "Reliability & Bias Evaluation"
+      - "Corroboration Across Multiple Sources"
+      - "Contextualization (Time, Place, Circumstances)"
+      - "Close Reading of Historical Texts"
+    grade_levels: ["PreK", "K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 30
+      high: 35
+    prerequisite_modules: []
+    activities:
+      count: 2
+      examples:
+        - "Family History Interview Project"
+        - "Artifact Detective: What Can This Object Tell Us?"
+    assessments:
+      - "Can student distinguish between primary and secondary sources?"
+      - "Does student evaluate author purpose and audience when analyzing a source?"
+      - "Can student corroborate claims using multiple sources?"
+      - "Does student contextualize sources within their historical period?"
+
+  - id: HIST-101-M2
+    name: "Causation & Consequence"
+    description: "Understanding why events happen, tracing chains of cause and effect, and evaluating the roles of contingency and structural conditions"
+    learning_outcomes:
+      - "Identify both immediate triggers and long-term conditions leading to events"
+      - "Distinguish between necessary and sufficient causes"
+      - "Trace chains of cause and effect across time"
+      - "Understand unintended consequences of historical decisions"
+      - "Evaluate counterfactual claims with evidence-based reasoning"
+      - "Recognize that historical causation is almost always multi-causal"
+    topics:
+      - "Immediate Triggers vs. Long-Term Conditions"
+      - "Necessary vs. Sufficient Causes"
+      - "Chains of Cause and Effect"
+      - "Unintended Consequences"
+      - "Structural Causation (Economic, Social, Political)"
+      - "Contingency and the Role of Chance"
+      - "Counterfactual Reasoning"
+      - "Correlation vs. Causation in History"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 10
+      elementary: 20
+      middle: 30
+      high: 35
+    prerequisite_modules: [HIST-101-M1]
+    activities:
+      count: 2
+      examples:
+        - "Cause-and-Effect Chain Mapping"
+        - "What If? Counterfactual History Debate"
+    assessments:
+      - "Can student identify multiple causes for a historical event?"
+      - "Does student distinguish between triggers and underlying conditions?"
+      - "Can student trace consequences beyond the immediate aftermath?"
+      - "Does student use evidence to support counterfactual reasoning?"
+
+  - id: HIST-101-M3
+    name: "Continuity & Change"
+    description: "Recognizing patterns across time, understanding periodization as interpretation, identifying turning points, and evaluating the pace and unevenness of historical change"
+    learning_outcomes:
+      - "Identify what changes and what stays the same across time periods"
+      - "Understand periodization as an interpretive choice rather than a natural fact"
+      - "Recognize and evaluate turning points in history"
+      - "Compare institutions, ideas, and practices across time"
+      - "Understand that change happens at different speeds in different domains"
+      - "Apply the concept of historical contingency to explain why change occurs"
+    topics:
+      - "Continuity: What Persists Across Time"
+      - "Change: What Transforms and Why"
+      - "Periodization and Era Boundaries"
+      - "Turning Points and Their Significance"
+      - "Rates of Change (Gradual vs. Revolutionary)"
+      - "Uneven Change Across Domains"
+      - "Comparing Across Time Periods"
+      - "Historical Contingency and Alternative Paths"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 10
+      elementary: 20
+      middle: 25
+      high: 30
+    prerequisite_modules: [HIST-101-M1]
+    activities:
+      count: 2
+      examples:
+        - "Timeline Construction: My Community Through the Centuries"
+        - "Before and After: Comparing Eras"
+    assessments:
+      - "Can student identify both continuity and change in a given period?"
+      - "Does student understand that periodization is an interpretive choice?"
+      - "Can student evaluate whether an event qualifies as a turning point?"
+      - "Does student recognize that change is uneven across different domains?"
+
+  - id: HIST-101-M4
+    name: "Perspectives & Empathy"
+    description: "Understanding historical actors in their own context, identifying whose perspectives are represented and whose are missing, and holding multiple viewpoints without collapsing into relativism"
+    learning_outcomes:
+      - "Understand historical actors within the context of their own time"
+      - "Identify whose perspective is represented in a source and whose is absent"
+      - "Reconstruct experiences of people who left few written records"
+      - "Hold multiple perspectives simultaneously without false equivalence"
+      - "Distinguish between empathy and endorsement in historical study"
+      - "Analyze how power and identity shape which histories are recorded"
+    topics:
+      - "Historical Empathy vs. Presentism"
+      - "Perspective Identification in Sources"
+      - "Marginalized and Silenced Voices"
+      - "Power and the Historical Record"
+      - "Empathy vs. Endorsement"
+      - "Reconstructing Unrecorded Experiences"
+      - "Multiple Perspectives on Shared Events"
+      - "The Ethics of Speaking for the Past"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 10
+      elementary: 20
+      middle: 25
+      high: 35
+    prerequisite_modules: [HIST-101-M1]
+    activities:
+      count: 2
+      examples:
+        - "Walking in Their Shoes: Historical Perspective Writing"
+        - "Voices of History: Same Event, Different Accounts"
+    assessments:
+      - "Can student describe a historical actor's reasoning in context?"
+      - "Does student identify whose perspectives are missing from an account?"
+      - "Can student compare multiple perspectives on the same event?"
+      - "Does student distinguish between understanding and endorsing actions?"
+
+  - id: HIST-101-M5
+    name: "Historical Argumentation"
+    description: "Constructing and defending evidence-based historical claims, engaging with counterarguments, and understanding historiography as the study of how interpretations change over time"
+    learning_outcomes:
+      - "Construct an evidence-based historical argument with thesis, evidence, and analysis"
+      - "Evaluate the strength of historical claims against available evidence"
+      - "Use primary and secondary sources as evidence in an argument"
+      - "Engage with counterarguments and alternative interpretations"
+      - "Write clear, well-organized historical essays"
+      - "Distinguish between description, analysis, and evaluation in historical writing"
+    topics:
+      - "Thesis Formulation for Historical Questions"
+      - "Evidence Selection and Attribution"
+      - "Argument Structure (Claim, Evidence, Analysis)"
+      - "Counterarguments and Rebuttal"
+      - "Historiography: Changing Interpretations Over Time"
+      - "Description vs. Analysis vs. Evaluation"
+      - "Peer Review and Critique of Historical Arguments"
+      - "Research Methods for Historical Inquiry"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 15
+      middle: 25
+      high: 35
+    prerequisite_modules: [HIST-101-M1, HIST-101-M2]
+    activities:
+      count: 2
+      examples:
+        - "Build Your Own Historical Argument"
+        - "Historiography Comparison: How Interpretations Change"
+    assessments:
+      - "Can student formulate a debatable historical thesis?"
+      - "Does student support claims with properly attributed evidence?"
+      - "Can student address counterarguments in their writing?"
+      - "Does student distinguish between description and analysis?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-SRC-001
+    description: "Evaluate primary and secondary sources for reliability, perspective, and purpose"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-CAU-001
+    description: "Trace multi-causal explanations for historical events"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-CHG-001
+    description: "Identify continuity and change across time periods"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-PER-001
+    description: "Analyze events from multiple perspectives including marginalized voices"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-ARG-001
+    description: "Construct and defend evidence-based historical arguments"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Source Analysis Check"
+    frequency: per_activity
+
+  - type: formative
+    name: "Causal Reasoning Observation"
+    frequency: weekly
+
+  - type: formative
+    name: "Perspective-Taking Reflection"
+    frequency: per_activity
+
+  - type: summative
+    name: "Historical Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Research Project"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: digital_archives
+    url: https://www.loc.gov
+    description: "Library of Congress digital collections for primary source access"
+
+  - name: timeline_tool
+    integrated: true
+    description: "Interactive timeline builder for visualizing historical events and patterns"
+
+interactive_elements:
+  - type: document_viewer
+    name: "Primary Source Analyzer"
+
+  - type: visualization
+    name: "Causal Chain Mapper"
+
+  - type: comparison_tool
+    name: "Perspective Matrix"
+
+  - type: writing_tool
+    name: "Argument Builder"
+
+  - type: timeline
+    name: "Interactive Timeline"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "All primary source images include detailed text descriptions. Audio sources include transcripts."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "C3 Framework for Social Studies (History)"
+    version: 2013
+    alignments:
+      D1: "Developing Questions and Planning Inquiries"
+      D2: "Applying Disciplinary Concepts (History)"
+      D3: "Evaluating Sources and Using Evidence"
+      D4: "Communicating Conclusions and Actions"
+  - framework: "National Council for the Social Studies (NCSS)"
+    version: 2010
+    alignments:
+      "Time, Continuity, and Change": true
+      "People, Places, and Environments": true
+      "Power, Authority, and Governance": true
+      "Civic Ideals and Practices": true
+  - framework: "IB Middle Years Programme (Individuals & Societies)"
+    version: "2024"
+    alignments:
+      MYP.HIS.A: "Knowing and understanding contexts"
+      MYP.HIS.B: "Investigating"
+      MYP.HIS.D: "Reflecting on impacts"
+  - framework: "UK National Curriculum (History)"
+    version: "2014"
+    alignments:
+      KS1.HIST: "Historical chronology and sources"
+      KS2.HIST: "British history and world history"
+      KS3.HIST: "Medieval, early modern, modern periods"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: high
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Difficulty is in thinking skills, not content volume. Foundation levels are accessible to all learners."
+
+# Content Flags & Warnings
+content_flags:
+  - flag: sensitive_topics
+    description: "History includes violence, injustice, oppression, and suffering. Some primary sources contain disturbing content."
+    mitigation: "Age-appropriate source selection at each level. Context and debriefing provided for difficult topics. Learner agency in choosing which topics to explore in depth."
+
+  - flag: multiple_narratives
+    description: "Pack explicitly challenges single-narrative history. Learners may encounter perspectives that conflict with family or cultural narratives."
+    mitigation: "Frame multiple perspectives as enriching understanding, not attacking existing beliefs. Encourage family dialogue about different viewpoints."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/hist-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "HIST-101"
+  looking_for:
+    - "Local history activities adapted to specific communities"
+    - "Primary source sets from non-Western traditions"
+    - "Translations with culturally localized historical examples"
+    - "Oral history methodology guides"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "History Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - history
+  - historical-thinking
+  - source-analysis
+  - causation
+  - perspectives
+  - argumentation
+  - historiography
+  - civilization
+  - social-studies
+  - humanities
+  - foundational
+  - inquiry-based
+  - evidence-based
+
+# External Resources
+resources:
+  - type: curriculum
+    title: "Stanford History Education Group (SHEG)"
+    author: "Stanford University"
+    url: "https://sheg.stanford.edu"
+
+  - type: archive
+    title: "Library of Congress Primary Source Sets"
+    author: "Library of Congress"
+    url: "https://www.loc.gov/programs/teachers/classroom-materials/primary-source-sets/"
+
+  - type: video_series
+    title: "Crash Course World History"
+    author: "CrashCourse"
+    url: "https://www.youtube.com/playlist?list=PLBDA2E52FB1EF80C9"
+
+  - type: textbook
+    title: "Thinking Historically"
+    author: "Sam Wineburg"
+    url: null
+
+# Related Packs
+related_packs:
+  - id: READ-101
+    relationship: "Historical thinking depends on close reading and source analysis skills"
+
+  - id: CRIT-101
+    relationship: "Historical argumentation is a domain-specific application of critical thinking"
+
+  - id: GEO-101
+    relationship: "Geography provides the spatial context for understanding where and why events occurred"
+
+  - id: PHILO-101
+    relationship: "Historical case studies raise philosophical questions about justice, power, and meaning"
+
+  - id: COMM-101
+    relationship: "Historical argumentation requires clear communication of complex ideas"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "scroll"
+    color: "#8D6E63"
+    position: "Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "HIST-101-source-analysis"
+    - "HIST-101-causal-reasoning"
+    - "HIST-101-assessment-patterns"
+    - "HIST-101-parent-guidance"
+
+# File References
+files:
+  vision_document: "HIST-101-vision.md"
+  modules_definition: "HIST-101-modules.yaml"
+  activities: "HIST-101-activities.json"
+  assessment: "HIST-101-assessment.md"
+  resources: "HIST-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering source analysis, causation, continuity and change, perspectives, and argumentation"
+      - "10 starter activities emphasizing inquiry-based historical thinking"
+      - "Aligned to C3 Framework for Social Studies State Standards"
+      - "Parent guidance for non-historian families"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-05-20"

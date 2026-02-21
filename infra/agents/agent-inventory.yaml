@@ -1,0 +1,160 @@
+# Agent Inventory for Minecraft Knowledge World
+# Generated during Phase 192 agent definitions
+# Purpose: Cross-reference all agents, skills, tools for uniqueness validation
+
+agent_count: 10
+team_count: 5
+skill_count: 20  # From Phase 191
+
+teams:
+  infra:
+    color_family: "blue-orange"
+    agents:
+      - name: infra-scout
+        role: specialist
+        skills: [hardware-discovery, resource-budgeting]
+        tools: "Read, Bash, Glob, Grep"
+        tool_count: 4
+      - name: infra-provisioner
+        role: worker
+        skills: [pxe-boot, kickstart-provisioning, vm-lifecycle]
+        tools: "Read, Write, Bash, Glob, Grep"
+        tool_count: 5
+
+  platform:
+    color_family: "cyan-purple"
+    agents:
+      - name: platform-scout
+        role: specialist
+        skills: [platform-discovery, distro-abstraction]
+        tools: "Read, Bash, Glob, Grep"
+        tool_count: 4
+      - name: platform-engineer
+        role: worker
+        skills: [hypervisor-abstraction, hardware-adaptation]
+        tools: "Read, Write, Bash, Glob, Grep"
+        tool_count: 5
+
+  amiga:
+    color_family: "pink-red"
+    agents:
+      - name: amiga-emulator
+        role: specialist
+        skills: [uae-emulation]
+        tools: "Read, Write, Bash, Glob, Grep"
+        tool_count: 5
+      - name: amiga-archivist
+        role: worker
+        skills: [asset-conversion, content-curation]
+        tools: "Read, Write, Bash, Glob, Grep"
+        tool_count: 5
+
+  creative:
+    color_family: "green"
+    agents:
+      - name: world-architect
+        role: leader
+        skills: [world-design, schematic-library]
+        tools: "Read, Write, Glob, Grep"
+        tool_count: 4
+      - name: curriculum-designer
+        role: specialist
+        skills: [educational-curriculum]
+        tools: "Read, Write, Glob, Grep"
+        tool_count: 4
+
+  ops:
+    color_family: "brown-grey"
+    agents:
+      - name: mc-deployer
+        role: worker
+        skills: [minecraft-deployment, mod-management, server-configuration]
+        tools: "Read, Write, Bash, Glob, Grep, WebFetch"
+        tool_count: 6
+      - name: mc-verifier
+        role: specialist
+        skills: [integration-verification, client-setup]
+        tools: "Read, Bash, Glob, Grep"
+        tool_count: 4
+
+# Skill uniqueness validation
+# Every row must have a unique set of skills
+skill_uniqueness:
+  infra-scout: [hardware-discovery, resource-budgeting]
+  infra-provisioner: [pxe-boot, kickstart-provisioning, vm-lifecycle]
+  platform-scout: [platform-discovery, distro-abstraction]
+  platform-engineer: [hypervisor-abstraction, hardware-adaptation]
+  amiga-emulator: [uae-emulation]
+  amiga-archivist: [asset-conversion, content-curation]
+  world-architect: [world-design, schematic-library]
+  curriculum-designer: [educational-curriculum]
+  mc-deployer: [minecraft-deployment, mod-management, server-configuration]
+  mc-verifier: [integration-verification, client-setup]
+
+# All 20 skills from Phase 191 are covered
+skill_coverage:
+  total_skills: 20
+  assigned_skills: 20
+  unassigned: []
+  skills_by_agent_count:
+    # Skills assigned to exactly 1 agent (good -- no ambiguity)
+    single_assignment:
+      - hardware-discovery        # -> infra-scout
+      - resource-budgeting        # -> infra-scout
+      - pxe-boot                  # -> infra-provisioner
+      - kickstart-provisioning    # -> infra-provisioner
+      - vm-lifecycle              # -> infra-provisioner
+      - platform-discovery        # -> platform-scout
+      - distro-abstraction        # -> platform-scout
+      - hypervisor-abstraction    # -> platform-engineer
+      - hardware-adaptation       # -> platform-engineer
+      - uae-emulation             # -> amiga-emulator
+      - asset-conversion          # -> amiga-archivist
+      - content-curation          # -> amiga-archivist
+      - world-design              # -> world-architect
+      - schematic-library         # -> world-architect
+      - educational-curriculum    # -> curriculum-designer
+      - minecraft-deployment      # -> mc-deployer
+      - mod-management            # -> mc-deployer
+      - server-configuration      # -> mc-deployer
+      - integration-verification  # -> mc-verifier
+      - client-setup              # -> mc-verifier
+
+# Tool access summary (minimal permission principle)
+tool_access:
+  most_restricted:
+    agents: [world-architect, curriculum-designer]
+    tools: "Read, Write, Glob, Grep"
+    rationale: "Design agents produce documents, not execute scripts"
+  read_only_with_bash:
+    agents: [infra-scout, platform-scout, mc-verifier]
+    tools: "Read, Bash, Glob, Grep"
+    rationale: "Discovery/verification agents run scripts but don't create artifacts"
+  standard_with_write:
+    agents: [infra-provisioner, platform-engineer, amiga-emulator, amiga-archivist]
+    tools: "Read, Write, Bash, Glob, Grep"
+    rationale: "Operational agents that create configs, render templates, or convert files"
+  extended:
+    agents: [mc-deployer]
+    tools: "Read, Write, Bash, Glob, Grep, WebFetch"
+    rationale: "Only agent needing external API access (Modrinth mod version checks)"
+
+# Co-activation patterns (from implementation history)
+co_activation:
+  infra_provisioning_flow:
+    sequence: [infra-scout, infra-provisioner]
+    trigger: "New VM provisioning -- discover first, then provision"
+  platform_adaptation_flow:
+    sequence: [platform-scout, platform-engineer]
+    trigger: "Hardware adaptation -- detect platform, then generate config"
+  amiga_pipeline:
+    sequence: [amiga-emulator, amiga-archivist]
+    trigger: "Amiga content pipeline -- emulate, then convert/curate"
+  minecraft_deployment_flow:
+    sequence: [mc-deployer, mc-verifier]
+    trigger: "Server deployment -- deploy, then verify"
+  creative_design_flow:
+    sequence: [world-architect, curriculum-designer]
+    trigger: "Educational content -- design world, then create curriculum"
+
+validation_status: "All 10 agents have unique skill sets. All 20 skills assigned. No unassigned skills. Tool access is minimally permissive."

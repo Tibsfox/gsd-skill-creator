@@ -1,0 +1,267 @@
+# pixel-art-gallery.yaml -- Amiga pixel art catalog for Minecraft map art recreation
+#
+# Each artwork is selected for legal distribtability and suitability for
+# 128x128 Minecraft map art conversion. Sources: Aminet, scene.org, public domain.
+#
+# Part of: Knowledge World > Creative District > Amiga Corner > Pixel Art Gallery
+# Consumed by: amiga-corner-schematic-spec.yaml (item frame placements)
+
+gallery:
+  name: "Amiga Pixel Art Gallery"
+  description: "Iconic Amiga artwork recreated as Minecraft map art -- constraint-driven creativity made physical"
+  map_art_notes: >
+    Each piece is converted to a 128x128 Minecraft map using the closest block color
+    palette. Maps are created by building a 128x128 flat canvas of blocks at map scale,
+    then using a cartography table to create the map item. The map item is placed in an
+    item frame on the gallery wall.
+  color_philosophy: >
+    Amiga OCS limited artists to 32 simultaneous colors from a 4096-color palette.
+    EHB doubled this to 64 via half-brightness copies. HAM mode achieved near-photographic
+    results by modifying one RGB component per pixel. These constraints forced artists
+    to make every color choice deliberate -- the same discipline Minecraft map art demands
+    with its ~60 base block colors.
+
+  artworks:
+    - id: artwork-01
+      title: "Tutankhamun"
+      artist: "Wepl (Werner Pluta)"
+      year: 1991
+      platform: "Amiga 500"
+      application: "Deluxe Paint III"
+      resolution: "320x256"
+      colors: 32
+      palette_mode: "OCS 32-color"
+      legal_status: "freeware"
+      source_url: "https://aminet.net/pix/misc"
+      map_art:
+        dimensions: "128x128 blocks"
+        orientation: "vertical"
+        block_palette: >
+          gold_block, orange_concrete, yellow_concrete, brown_concrete,
+          dark_oak_planks, black_concrete, blue_concrete, cyan_terracotta,
+          white_concrete, light_gray_concrete
+        conversion_notes: >
+          OCS 32-color palette maps well to Minecraft blocks. Gold and warm earth
+          tones dominate. Dither pattern using alternating gold_block and orange_concrete
+          for the gradient transitions on the mask. Black concrete outlines preserve
+          the sharp pixel art linework.
+      why_significant: >
+        Exemplifies the OCS era mastery: 32 colors from 4096, hand-placed pixel by pixel
+        in Deluxe Paint. The warm palette and precise shading demonstrate that color
+        limitation drove artistic discipline, not artistic compromise.
+      sign_text: |
+        Tutankhamun (1991)
+        by Wepl - Deluxe Paint III
+        32 colors, 320x256
+        OCS palette mastery
+
+    - id: artwork-02
+      title: "Scarab"
+      artist: "Cougar (Grzegorz Bielanowski)"
+      year: 1996
+      platform: "Amiga 1200"
+      application: "Personal Paint (PPaint)"
+      resolution: "320x256"
+      colors: 256
+      palette_mode: "AGA 256-color"
+      legal_status: "scene_production"
+      source_url: "https://scene.org"
+      map_art:
+        dimensions: "128x128 blocks"
+        orientation: "vertical"
+        block_palette: >
+          emerald_block, green_concrete, lime_concrete, green_terracotta,
+          dark_oak_planks, spruce_planks, black_concrete, gold_block,
+          yellow_concrete, white_concrete, brown_concrete
+        conversion_notes: >
+          AGA 256-color piece requires aggressive palette reduction for Minecraft's
+          ~60 block colors. Focus on preserving the dominant green-gold color regions.
+          Use ordered dithering with 4x4 block patterns to simulate smooth gradients.
+          Detail areas use single-block placement for sharpness.
+      why_significant: >
+        AGA chipset art pushed the Amiga to 256 simultaneous colors, enabling
+        smoother gradients and richer detail. Scene competition entries like this
+        demonstrated that the Amiga art community kept innovating even as the
+        platform's commercial fortunes declined.
+      sign_text: |
+        Scarab (1996)
+        by Cougar - PPaint
+        256 colors AGA
+        Scene art lives on
+
+    - id: artwork-03
+      title: "Klondike"
+      artist: "Facet (Thomas Kessler)"
+      year: 1994
+      platform: "Amiga 500"
+      application: "Deluxe Paint IV"
+      resolution: "320x256"
+      colors: 64
+      palette_mode: "EHB 64-color"
+      legal_status: "scene_production"
+      source_url: "https://scene.org"
+      map_art:
+        dimensions: "128x128 blocks"
+        orientation: "horizontal"
+        block_palette: >
+          light_blue_concrete, blue_concrete, cyan_concrete, white_concrete,
+          light_gray_concrete, gray_concrete, brown_concrete, green_concrete,
+          dark_oak_planks, spruce_planks, sand, sandstone
+        conversion_notes: >
+          EHB mode generates 32 extra half-brightness copies automatically.
+          For map art conversion, treat the bright and dim versions as separate
+          palette entries. Use smooth_stone and cobblestone variants to represent
+          the half-brightness shadow tones. Landscape elements benefit from
+          Minecraft's natural block variety.
+      why_significant: >
+        Extra Half-Brite mode was unique to the Amiga -- a hardware trick that doubled
+        the palette by generating half-brightness copies of each color. Artists learned
+        to compose with this constraint, planning which colors would serve dual duty.
+        This is hardware-software creative co-design.
+      sign_text: |
+        Klondike (1994)
+        by Facet - DPaint IV
+        64 colors EHB mode
+        Hardware-aided palette
+
+    - id: artwork-04
+      title: "Desert Dream Title"
+      artist: "Uno (Mikael Balle)"
+      year: 1993
+      platform: "Amiga 500"
+      application: "Deluxe Paint IV"
+      resolution: "320x256"
+      colors: 32
+      palette_mode: "OCS 32-color with copper gradients"
+      legal_status: "scene_production"
+      source_url: "https://scene.org/file.php?47:demos"
+      map_art:
+        dimensions: "128x128 blocks"
+        orientation: "horizontal"
+        block_palette: >
+          orange_concrete, red_concrete, yellow_concrete, magenta_concrete,
+          purple_concrete, black_concrete, brown_concrete, dark_oak_planks,
+          gold_block, nether_bricks
+        conversion_notes: >
+          The original uses copper palette cycling for animated gradient backgrounds.
+          Since Minecraft maps are static, capture the most representative frame.
+          The warm sunset palette maps naturally to Minecraft's terracotta and
+          concrete range. Use nether blocks for the deep red-purple tones.
+      why_significant: >
+        Part of the legendary Desert Dream demo by Kefrens. The title screen
+        demonstrates copper gradient technique -- the Amiga's copper coprocessor
+        changed palette entries per scanline, creating smooth gradients impossible
+        with the base 32-color OCS palette. Hardware and art merged.
+      sign_text: |
+        Desert Dream Title (1993)
+        by Uno / Kefrens
+        Copper gradient art
+        Scanline palette magic
+
+    - id: artwork-05
+      title: "Vstrk"
+      artist: "H7 (Hannu Helminen)"
+      year: 1993
+      platform: "Amiga 500"
+      application: "Deluxe Paint IV"
+      resolution: "320x256"
+      colors: 32
+      palette_mode: "OCS 32-color"
+      legal_status: "scene_production"
+      source_url: "https://scene.org"
+      map_art:
+        dimensions: "128x128 blocks"
+        orientation: "vertical"
+        block_palette: >
+          gray_concrete, light_gray_concrete, white_concrete, black_concrete,
+          cyan_concrete, blue_concrete, light_blue_concrete, dark_oak_planks,
+          iron_block, smooth_stone
+        conversion_notes: >
+          Monochrome-dominant palette with accent colors. Map art benefits from
+          Minecraft's range of gray blocks (concrete, stone, iron). The limited
+          color approach translates well -- fewer source colors means less palette
+          reduction loss. Strong linework preserved at 128x128 scale.
+      why_significant: >
+        Demonstrates that 32 colors was not a limitation but a choice of
+        vocabulary. This minimalist approach influenced a generation of pixel
+        artists who learned that restricting palette forces stronger composition
+        and value control -- the same principle that makes Minecraft builds
+        more readable when you limit your block palette.
+      sign_text: |
+        Vstrk (1993)
+        by H7 - DPaint IV
+        32 colors, OCS
+        Less is more
+
+    - id: artwork-06
+      title: "Zeus"
+      artist: "Danny (Daniel Kottmair)"
+      year: 1994
+      platform: "Amiga 500"
+      application: "Deluxe Paint IV"
+      resolution: "320x200"
+      colors: 4096
+      palette_mode: "HAM6 (Hold-And-Modify)"
+      legal_status: "scene_production"
+      source_url: "https://scene.org"
+      map_art:
+        dimensions: "128x128 blocks"
+        orientation: "vertical"
+        block_palette: >
+          white_concrete, light_gray_concrete, gray_concrete, smooth_stone,
+          oak_planks, birch_planks, sand, terracotta, brown_concrete,
+          orange_terracotta, red_terracotta, cyan_terracotta, blue_concrete,
+          green_concrete, lime_concrete, pink_concrete, magenta_concrete
+        conversion_notes: >
+          HAM6 achieves near-photographic color by modifying one RGB component
+          per pixel, accessing the full 4096-color OCS palette. Conversion to
+          128x128 map art requires aggressive quantization. Use the full range
+          of Minecraft block colors and rely on spatial dithering. HAM's
+          characteristic horizontal color fringing actually helps at low
+          resolution -- it creates natural color transitions.
+      why_significant: >
+        Hold-And-Modify was the Amiga's most exotic display mode. By changing
+        one color component per pixel, it accessed all 4096 OCS colors in a single
+        image. The tradeoff was horizontal color fringing, which artists learned to
+        hide through careful composition. Pure architectural leverage -- exploiting
+        hardware behavior the designers never intended for art.
+      sign_text: |
+        Zeus (1994)
+        by Danny - HAM6 mode
+        4096 colors from 32
+        Hardware alchemy
+
+    - id: artwork-07
+      title: "Transformer"
+      artist: "Mack (Michael Knoth)"
+      year: 1992
+      platform: "Amiga 500"
+      application: "Deluxe Paint III"
+      resolution: "640x512"
+      colors: 16
+      palette_mode: "OCS Hi-Res 16-color"
+      legal_status: "freeware"
+      source_url: "https://aminet.net/pix/illu"
+      map_art:
+        dimensions: "128x128 blocks"
+        orientation: "horizontal"
+        block_palette: >
+          gray_concrete, light_gray_concrete, white_concrete, black_concrete,
+          blue_concrete, cyan_concrete, iron_block, smooth_stone,
+          dark_oak_planks, oak_planks
+        conversion_notes: >
+          Hi-res Amiga mode doubled horizontal resolution to 640 pixels but halved
+          the color count to 16. The original's fine detail is lost at 128x128 scale
+          but the strong value structure survives. Use high-contrast block pairs
+          (white/black concrete, iron/dark oak) to preserve the linework character.
+      why_significant: >
+        Hi-res mode forced the hardest tradeoff: double the pixels, half the colors.
+        Artists who chose this mode valued linework and detail over color richness.
+        The discipline of working in 16 colors at 640x512 produced art with
+        extraordinary clarity and structure -- proof that resolution without color
+        can be as expressive as color without resolution.
+      sign_text: |
+        Transformer (1992)
+        by Mack - Hi-Res OCS
+        16 colors at 640x512
+        Resolution over color

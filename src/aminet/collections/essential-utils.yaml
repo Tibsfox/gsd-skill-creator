@@ -1,0 +1,23 @@
+name: Essential Utilities
+description: Must-have Amiga utilities for every setup -- file management, system tools, and productivity
+version: 1
+createdAt: '2026-02-19T00:00:00Z'
+updatedAt: '2026-02-19T00:00:00Z'
+author: GSD Aminet Pack
+tags:
+  - starter
+  - utilities
+  - essential
+packages:
+  - fullPath: util/dir/DOpus550.lha
+    note: Directory Opus 5.5 - the definitive Amiga file manager
+  - fullPath: util/shell/KingCON.lha
+    note: Enhanced console handler with scroll-back and command history
+  - fullPath: util/wb/MagicWB.lha
+    note: Workbench beautification -- 8-color icon set
+  - fullPath: util/arc/lha.lha
+    note: LhA archiver -- essential for Aminet packages
+  - fullPath: util/libs/ReqTools.lha
+    note: ReqTools library -- enhanced file/font/screen requesters
+  - fullPath: util/sys/SysInspector.lha
+    note: System information and diagnostics tool

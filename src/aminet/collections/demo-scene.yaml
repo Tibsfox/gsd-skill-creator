@@ -1,0 +1,21 @@
+name: Demo Scene
+description: Iconic Amiga demoscene productions -- pushing hardware to the limit
+version: 1
+createdAt: '2026-02-19T00:00:00Z'
+updatedAt: '2026-02-19T00:00:00Z'
+author: GSD Aminet Pack
+tags:
+  - starter
+  - demos
+  - demoscene
+packages:
+  - fullPath: demo/aga/StateOfTheArt.lha
+    note: Spaceballs - State of the Art (1992 Assembly winner)
+  - fullPath: demo/aga/JesusonEs.lha
+    note: Silents - Jesus on E's (legendary AGA demo)
+  - fullPath: demo/ecs/Hardwired.lha
+    note: Crionics & The Silents - Hardwired
+  - fullPath: demo/aga/Nexus7.lha
+    note: Andromeda - Nexus 7 (AGA showcase)
+  - fullPath: demo/intro/Interference.lha
+    note: Sanity - Interference (64K intro)

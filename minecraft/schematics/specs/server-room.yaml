@@ -1,0 +1,110 @@
+# Schematic Build Specification
+# This file defines what to build in-game before capturing with Litematica.
+
+name: "Server Room"
+id: "server-room"
+filename: "template-server-room-1-0.litematic"
+version: "1.0"
+category: templates
+description: "Rack-inspired room with iron block server racks, redstone circuit 'hardware', and status indicator lamps. Represents physical server infrastructure as a walkable Minecraft space within the Hardware District."
+
+dimensions:
+  width: 13   # X axis (east-west)
+  height: 8   # Y axis (up-down)
+  depth: 11   # Z axis (north-south)
+
+block_palette:
+  primary:
+    - block: "minecraft:iron_block"
+      usage: "Server racks -- 2-wide, 6-tall iron block columns representing server cabinets"
+    - block: "minecraft:gray_concrete"
+      usage: "Walls -- gray concrete for a data center aesthetic"
+    - block: "minecraft:iron_block"
+      usage: "Floor -- iron block floor for industrial server room feel"
+  accent:
+    - block: "minecraft:light_blue_concrete"
+      usage: "Cable runs -- colored strips along floor between racks representing network cables"
+    - block: "minecraft:blue_concrete"
+      usage: "Cable runs -- alternating color for visual distinction between cable paths"
+    - block: "minecraft:black_concrete"
+      usage: "Rack bases -- 1-block base under each server rack for visual grounding"
+  functional:
+    - block: "minecraft:redstone_lamp"
+      usage: "Status indicators -- one per rack face (8 total), powered by hidden redstone"
+    - block: "minecraft:repeater"
+      usage: "Circuit elements -- visible between racks representing data bus connections"
+    - block: "minecraft:comparator"
+      usage: "Circuit elements -- visible between racks representing logic processing"
+    - block: "minecraft:observer"
+      usage: "Monitoring sensors -- on end walls facing inward, representing system monitors"
+    - block: "minecraft:iron_door"
+      usage: "Secure entrance -- button-activated iron door on south wall"
+    - block: "minecraft:stone_button"
+      usage: "Door activation -- buttons on both sides of the iron door"
+  lighting:
+    - block: "minecraft:glowstone"
+      usage: "Ceiling lighting -- recessed glowstone grid in ceiling for bright, even light"
+    - block: "minecraft:redstone_torch"
+      usage: "Rack indicators -- small redstone torches on rack faces as additional status LEDs"
+
+layout:
+  ground_floor: |
+    Rectangular room, 11x9 interior.
+    Iron block floor throughout.
+
+    4 server rack rows running north-south through the room:
+    - Row 1: 2 blocks from west wall, 2 blocks wide, 6 blocks tall, 7 blocks deep
+    - Row 2: 5 blocks from west wall, 2 blocks wide, 6 blocks tall, 7 blocks deep
+    - Row 3: 8 blocks from west wall (mirrors row pattern)
+    Note: Rows arranged to leave 2-block wide aisles between them for walkthrough access.
+
+    Each rack row is made of iron blocks (2 wide, 6 tall).
+    Redstone lamps on the front face of each rack (2 per row, at heights 2 and 5).
+    Repeaters and comparators placed on the floor between racks as visible "circuitry".
+    Light blue and blue concrete "cable runs" along the floor between and under racks.
+
+    Observer blocks on north and south end walls (2 per wall) facing inward as "monitoring sensors".
+
+    South wall: single iron door entrance, centered, button-activated from both sides.
+  upper_floors: "None -- single story with high ceiling (8 blocks) for tall server racks"
+  roof: |
+    Gray concrete ceiling at height 8.
+    Recessed glowstone grid: 3x4 arrangement of glowstone blocks inset into ceiling.
+    Remaining ceiling is gray concrete (no visible exterior light -- windowless data center).
+  exterior: |
+    Gray concrete walls on all four sides, 7 blocks tall above floor.
+    No windows -- server rooms are windowless for security and temperature control.
+    Single iron door entrance centered on south wall with stone buttons on both sides.
+    Observer blocks visible on interior end walls as monitoring sensors.
+
+features:
+  - "4 iron block server rack rows (2 wide, 6 tall) representing server cabinets"
+  - "Redstone lamp status indicators on each rack face, powered by hidden redstone"
+  - "Repeaters and comparators as visible 'circuitry' between racks on the floor"
+  - "Observer blocks as 'monitoring sensors' on end walls"
+  - "Light blue and blue concrete 'cable runs' along floor between racks"
+  - "Iron door entrance with button activation (security theme)"
+  - "Recessed glowstone ceiling grid for bright, even data center lighting"
+  - "Windowless design reflecting real server room architecture"
+  - "Redstone torches on rack faces as additional status LED indicators"
+
+construction_notes:
+  - "Build from the ground up, floor by floor"
+  - "Lay the iron block floor first, then the cable run patterns (colored concrete strips)"
+  - "Build gray concrete walls, 7 blocks tall above floor level"
+  - "Build server rack rows from bottom up: black concrete base, then iron blocks 6 tall"
+  - "Place redstone circuitry (repeaters, comparators) on the floor between racks"
+  - "Wire redstone lamps: run redstone dust behind/inside racks to power lamps"
+  - "Place observer blocks on end walls facing inward"
+  - "Add the gray concrete ceiling with glowstone grid"
+  - "Place functional blocks last: iron door, buttons, redstone torches"
+  - "Test redstone lamp circuits are powered correctly before capture"
+  - "Use Litematica selection starting from the northwest ground-level corner"
+  - "Add 1 block of selection padding on all sides"
+  - "Save with orientation: entrance faces south"
+  - "Test-load the schematic in a flat world before adding to library"
+
+litematica_capture:
+  origin: "Northwest ground-level corner (lowest X, lowest Z, at floor Y level)"
+  selection_padding: 1
+  orientation: "Entrance faces south"

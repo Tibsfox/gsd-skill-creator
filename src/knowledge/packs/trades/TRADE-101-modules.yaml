@@ -1,0 +1,316 @@
+---
+# TRADE-101 Module Definitions
+# Defines the five core modules for trades and applied skills
+
+pack_id: TRADE-101
+pack_name: "Trades & Applied Skills — Foundational Knowledge Pack"
+
+modules:
+  - id: TRADE-101-M1
+    name: "Tools, Safety & Workshop Practice"
+    description: "Tool identification, proper use, maintenance, safety protocols, PPE, workshop organization, and safety culture. The foundation for all trades work: understanding what tools do, how to use them correctly, and why safety rules exist."
+
+    learning_outcomes:
+      - "Identify common hand tools and explain their proper use and maintenance"
+      - "Demonstrate safe practices with hand and power tools appropriate to age and task"
+      - "Explain why safety rules exist and consequences of violations"
+      - "Select and properly use personal protective equipment (PPE) for specific tasks"
+      - "Organize a workspace for safety and efficiency"
+      - "Respond appropriately to tool-related injuries and know when to seek help"
+
+    topics:
+      - "Hand Tool Identification: Hammers, Screwdrivers, Wrenches, Pliers, Chisels"
+      - "Basic Power Tools: Drill, Circular Saw, Angle Grinder, Safety Principles"
+      - "Personal Protective Equipment: Eye, Ear, Hand, Foot, Respiratory"
+      - "Tool Maintenance and Storage"
+      - "Workshop Safety: Fire, Electrical Hazards, Tool Guards, Workspace"
+      - "First Aid for Tool-Related Injuries"
+      - "Safety Culture and Personal Responsibility"
+      - "Tool Safety for Different Age Groups"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 20
+      middle: 25
+      high: 20
+
+    prerequisite_modules: []
+
+    activities:
+      count: 2
+      examples:
+        - "Tool Identification Relay — speed matching tools with names and uses"
+        - "Workshop Safety Scenario Cards — respond to hazardous situations"
+
+    assessments:
+      - "Can student identify and name common tools by sight?"
+      - "Does student demonstrate safe handling practices consistently?"
+      - "Can student explain why specific safety rules matter?"
+      - "Does student use PPE appropriately for different tools?"
+
+  - id: TRADE-101-M2
+    name: "Woodworking & Fabrication"
+    description: "Working with wood: properties, measurement, cutting, joining, finishing, and design. Building real projects from conception through completion, learning how materials behave and why precision matters."
+
+    learning_outcomes:
+      - "Identify wood types and understand grain direction and its impact on cutting and strength"
+      - "Measure and mark with precision (to 1/4 inch elementary, 1/16 inch high school)"
+      - "Safely cut wood with hand saws and power saws, making precise cuts"
+      - "Join wood using nails, screws, dowels, or advanced techniques"
+      - "Finish wood with sanding and staining for durability and appearance"
+      - "Plan and execute multi-step woodworking projects independently"
+
+    topics:
+      - "Wood Types: Softwood, Hardwood, Plywood, Engineered Materials"
+      - "Grain Direction and Its Effects on Cutting and Strength"
+      - "Measuring Tools: Rulers, Tape Measures, Squares, Levels"
+      - "Marking Techniques: Pencil, Chalk, Layout Tools"
+      - "Cutting Techniques: Hand Saws, Circular Saws, Band Saws"
+      - "Joining Methods: Nails, Screws, Dowels, Mortise & Tenon, Glue"
+      - "Finishing: Sanding, Staining, Sealing, Paint"
+      - "Project Planning and Technical Drawing"
+      - "Multi-Step Project Execution"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 35
+      middle: 45
+      high: 40
+
+    prerequisite_modules: [TRADE-101-M1]
+
+    activities:
+      count: 2
+      examples:
+        - "Build a Birdhouse Project — simple house with roof, measuring, cutting, joining, finishing"
+        - "Dovetail Joint Practice — hand-cut joinery demonstrating precision and craftsmanship"
+
+    assessments:
+      - "Can student measure to required precision and mark for cutting?"
+      - "Does student make straight cuts and clean joins?"
+      - "Can student explain why grain direction matters?"
+      - "Does student complete projects with good appearance and durability?"
+
+  - id: TRADE-101-M3
+    name: "Electrical Fundamentals"
+    description: "Understanding electricity, circuits, wiring, and safe electrical practices. From breadboard circuits to household wiring, learning how electricity powers our world and respecting its dangers."
+
+    learning_outcomes:
+      - "Explain fundamental electrical concepts: voltage, current, resistance, power"
+      - "Design and build working circuits with sources, loads, and protection"
+      - "Understand how household electrical systems work and follow safety codes"
+      - "Use a multimeter to measure voltage, current, and resistance safely"
+      - "Wire basic circuits and understand proper grounding and protection"
+      - "Troubleshoot electrical problems safely and systematically"
+
+    topics:
+      - "Electrical Concepts: Voltage, Current (Amps), Resistance (Ohms), Power (Watts)"
+      - "Circuits: Series, Parallel, Switches, Protection"
+      - "Conductors and Insulators"
+      - "Circuit Breakers and Fuses"
+      - "Wiring Codes and Safety Standards"
+      - "Residential Electrical: Outlets, Switches, Panel"
+      - "Using a Multimeter"
+      - "Grounding and Shock Prevention"
+      - "Troubleshooting Electrical Problems"
+
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 35
+
+    prerequisite_modules: [TRADE-101-M1]
+
+    activities:
+      count: 2
+      examples:
+        - "Simple Circuit Breadboard Lab — light LEDs, understand series/parallel, measure with multimeter"
+        - "Wire a Light Switch (Model) — safe household wiring practice with safe 12V systems"
+
+    assessments:
+      - "Can student explain voltage, current, and resistance in simple terms?"
+      - "Does student understand why grounding and circuit protection matter?"
+      - "Can student use a multimeter safely and correctly?"
+      - "Can student troubleshoot why a circuit doesn't work?"
+
+  - id: TRADE-101-M4
+    name: "Plumbing & Mechanical Systems"
+    description: "Understanding water, drainage, and mechanical systems. From assembling pipes to understanding pressure and flow, learning how buildings get water and remove waste safely."
+
+    learning_outcomes:
+      - "Understand water properties, pressure, and flow principles"
+      - "Identify pipe materials and sizing principles"
+      - "Assemble pipe fittings correctly without leaks"
+      - "Understand drainage principles and proper slope"
+      - "Explain venting and why it matters in drainage systems"
+      - "Understand basic HVAC concepts and maintenance"
+
+    topics:
+      - "Water Properties and Pressure"
+      - "Pipe Materials: Copper, PVC, PEX"
+      - "Fitting Types and Connections"
+      - "Valves: Ball, Gate, Check, Pressure Relief"
+      - "Drainage Systems and Required Slopes"
+      - "Venting and Trap Principles"
+      - "Water Shut-Off and Emergency Procedures"
+      - "Basic HVAC: Heating, Cooling, Ventilation"
+      - "Maintenance and Troubleshooting"
+      - "Codes and Safety Standards"
+
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 35
+      high: 30
+
+    prerequisite_modules: [TRADE-101-M1]
+
+    activities:
+      count: 2
+      examples:
+        - "PVC Pipe Plumbing Assembly — assemble fittings, test for leaks, understand pressure"
+        - "Water Pressure Experiment — demonstrate pressure with height differences and flow rates"
+
+    assessments:
+      - "Can student assemble pipes with proper fittings without leaks?"
+      - "Does student understand why slope matters in drainage?"
+      - "Can student explain what trap and vent do?"
+      - "Can student troubleshoot a leak or blockage?"
+
+  - id: TRADE-101-M5
+    name: "Welding, Metalwork & Construction"
+    description: "Joining metal and understanding structure. From welding practice to understanding how buildings stand, learning that metal is both beautiful and demanding in its requirements."
+
+    learning_outcomes:
+      - "Understand metal properties and types and how they affect working and strength"
+      - "Safely cut and shape metal using hand and power tools"
+      - "Perform basic welding or soldering joining metal pieces reliably"
+      - "Use mechanical fasteners (bolts, rivets) correctly"
+      - "Understand structural concepts: load paths, stress, deflection"
+      - "Read technical drawings for metal fabrication"
+
+    topics:
+      - "Metal Types: Steel, Aluminum, Copper, Stainless Steel"
+      - "Metal Properties: Strength, Ductility, Hardness, Conductivity"
+      - "Cutting Metal: Hacksaws, Angle Grinders, Shears"
+      - "Welding Fundamentals: Arc, Gas, Safety"
+      - "Welding Techniques and Practice"
+      - "Soldering and Brazing Basics"
+      - "Mechanical Fasteners: Bolts, Rivets, Press Fits"
+      - "Structural Concepts: Load Paths, Stress, Deflection"
+      - "Building Codes and Standards"
+      - "Cost Estimation and Material Selection"
+
+    grade_levels: ["7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      middle: 30
+      high: 40
+
+    prerequisite_modules: [TRADE-101-M1, TRADE-101-M2]
+
+    activities:
+      count: 2
+      examples:
+        - "Sheet Metal Box Fabrication — cut, bend, join metal into functional box"
+        - "Tack Welding Practice (Simulation) — practice basic welding technique safely"
+
+    assessments:
+      - "Can student cut metal safely and accurately?"
+      - "Does student produce strong, clean welds or solder joints?"
+      - "Can student explain why metal choice matters?"
+      - "Can student understand structural safety requirements?"
+
+# ============================================================================
+# Cross-Module Competencies
+# ============================================================================
+
+cross_module_competencies:
+  - name: "Safety Culture"
+    description: "Recognizing hazards, understanding consequences, following protocols, asking questions"
+    modules: [TRADE-101-M1, TRADE-101-M2, TRADE-101-M3, TRADE-101-M4, TRADE-101-M5]
+
+  - name: "Precision & Measurement"
+    description: "Accurate measurement, tolerance understanding, checking work"
+    modules: [TRADE-101-M2, TRADE-101-M3, TRADE-101-M4, TRADE-101-M5]
+
+  - name: "Systems Thinking"
+    description: "Understanding how components connect, predicting failure modes, troubleshooting"
+    modules: [TRADE-101-M3, TRADE-101-M4, TRADE-101-M5]
+
+  - name: "Problem-Solving & Troubleshooting"
+    description: "Diagnosing issues, testing hypotheses, implementing solutions"
+    modules: [TRADE-101-M2, TRADE-101-M3, TRADE-101-M4, TRADE-101-M5]
+
+# ============================================================================
+# Progression Pathways
+# ============================================================================
+
+progression_pathways:
+  - name: "Foundation Track (K-5)"
+    description: "Tool literacy, basic safety, simple projects"
+    modules: [TRADE-101-M1, TRADE-101-M2]
+
+  - name: "Exploration Track (5-8)"
+    description: "Multiple trade exposure, basic competency across domains"
+    modules: [TRADE-101-M1, TRADE-101-M2, TRADE-101-M3, TRADE-101-M4]
+
+  - name: "Specialization Track (8-12)"
+    description: "Deep specialization in chosen trade discipline"
+    modules: [TRADE-101-M1, TRADE-101-M2, TRADE-101-M3, TRADE-101-M4, TRADE-101-M5]
+
+# ============================================================================
+# Parallel Patterns
+# ============================================================================
+
+parallel_patterns:
+  - name: "Real Materials & Projects"
+    description: "All activities use real materials and tools, not simulations"
+
+  - name: "Hands-On Supervised Practice"
+    description: "Direct experience with guidance, scaffold complexity over time"
+
+  - name: "Tangible Outcomes"
+    description: "Projects produce something real: a birdhouse, a working circuit, plumbing without leaks, a welded piece"
+
+  - name: "Safety-First Culture"
+    description: "Every activity rooted in preventing injury; safety never compromised for speed or convenience"
+
+# ============================================================================
+# skill-creator Integration
+# ============================================================================
+
+skill_creator_integration:
+  observation_points:
+    - "Student safely identifies tools without hesitation"
+    - "Student measures with required precision consistently"
+    - "Student plans before cutting/joining instead of trial-and-error"
+    - "Student recognizes hazards and corrects unsafe practices proactively"
+    - "Student troubleshoots failures systematically rather than randomly"
+    - "Student completes projects with durability and good appearance"
+
+  success_indicators:
+    - "All safety protocols followed in every session"
+    - "Precision measurements achieved 90%+ of time"
+    - "Projects function as intended without rework"
+    - "Student explains reasoning for material/method choices"
+    - "Student mentors peers on safety and technique"
+
+  learning_acceleration:
+    - "Advanced students lead project teams"
+    - "Advanced students teach tool safety to peers"
+    - "Advanced students design custom projects"
+    - "Advanced students troubleshoot real problems in the workshop"
+
+  intervention_triggers:
+    - "Safety protocol violations"
+    - "Consistent measurement errors >1/4 inch"
+    - "Projects failing repeatedly"
+    - "Student reluctance to use tools or ask questions"
+    - "Lack of progress on assigned tasks"

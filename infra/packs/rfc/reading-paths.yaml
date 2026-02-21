@@ -1,0 +1,81 @@
+metadata:
+  version: 1
+  description: "Curated RFC reading paths for the RFC Reference Skill"
+
+reading_paths:
+  quickstart:
+    name: "Quick Start"
+    description: "Essential internet standards every developer should know"
+    estimated_time: "2-3 hours"
+    rfcs:
+      - number: 2119
+        reason: "RFC 2119 keywords -- how to read any RFC"
+      - number: 8259
+        reason: "JSON -- the universal data interchange format"
+      - number: 7519
+        reason: "JWT -- tokens for web authentication"
+      - number: 9110
+        reason: "Core HTTP semantics -- the foundation of web communication"
+      - number: 8446
+        reason: "TLS 1.3 -- how encryption protects internet traffic"
+      - number: 9293
+        reason: "TCP -- the reliable transport layer"
+      - number: 1035
+        reason: "DNS -- how domain names become IP addresses"
+      - number: 791
+        reason: "IPv4 -- the original internet protocol"
+
+  deep_dive:
+    name: "Deep Dive"
+    description: "Modern internet protocol stack with security and performance"
+    estimated_time: "8-12 hours"
+    protocol_tracks:
+      - name: "Web Stack"
+        description: "HTTP evolution from 1.1 through HTTP/3"
+        rfcs: [9110, 9111, 9112, 9113, 9114, 6265, 6455]
+      - name: "Security"
+        description: "Transport security and authorization"
+        rfcs: [8446, 5246, 8996, 7301, 6749, 6750, 7636]
+      - name: "Transport"
+        description: "Reliable and next-gen transport protocols"
+        rfcs: [9293, 9000, 9001, 5681, 7323]
+      - name: "Infrastructure"
+        description: "IP addressing and name resolution"
+        rfcs: [791, 8200, 1035, 8484, 7858, 4033]
+      - name: "Data Formats"
+        description: "JSON ecosystem and token formats"
+        rfcs: [8259, 7519, 7515, 6901, 6902]
+
+  complete:
+    name: "Complete Study"
+    description: "Full coverage of all indexed RFCs with historical context"
+    estimated_time: "40+ hours"
+    note: "Covers all RFCs in the built-in index, organized by protocol family with obsolescence chains showing how standards evolved"
+    protocol_families:
+      - family: http
+        description: "HTTP evolution from 1.1 to 3"
+        rfc_count: 10
+      - family: tls
+        description: "Transport security from SSL through TLS 1.3"
+        rfc_count: 7
+      - family: tcp
+        description: "Reliable transport and congestion control"
+        rfc_count: 6
+      - family: dns
+        description: "Name resolution and DNSSEC"
+        rfc_count: 7
+      - family: ip
+        description: "Internet Protocol v4 and v6"
+        rfc_count: 6
+      - family: quic
+        description: "Next-generation transport"
+        rfc_count: 5
+      - family: oauth
+        description: "Authorization and token-based security"
+        rfc_count: 6
+      - family: jwt
+        description: "JSON-based tokens and cryptographic operations"
+        rfc_count: 5
+      - family: json
+        description: "Data interchange and manipulation"
+        rfc_count: 5

@@ -1,0 +1,46 @@
+name: visualize-a-pipeline
+category: education
+subcategory: guided-build
+concept: "Data pipelines and stream processing"
+difficulty: beginner
+estimated_time_minutes: 35
+district: software
+coordinates:
+  origin: "TBD by Phase 186 world layout"
+  dimensions: "50x15x20 blocks"
+prerequisites:
+  - "Minecraft creative mode basics"
+learning_objectives:
+  - "Understand data flow through sequential processing stages"
+  - "Recognize bottlenecks as stages that limit overall throughput"
+  - "Understand buffering as physical queues between processing stages"
+  - "Map error handling to branching paths with dead letter queues"
+  - "Connect spatial pipeline experience to real-world data processing systems"
+schematics:
+  - name: education-pipeline-starter.litematic
+    description: "Foundation floor plan with room outlines and corridor markers"
+    blocks_approx: 800
+  - name: education-pipeline-complete.litematic
+    description: "Fully built pipeline with all rooms, corridors, signs, and redstone"
+    blocks_approx: 2500
+materials:
+  walls: "stone_bricks, stone_brick_stairs"
+  corridors: "cyan_glazed_terracotta"
+  processing: "redstone_block, redstone_repeater, comparator"
+  storage: "chest, barrel, hopper"
+  signage: "oak_sign, oak_wall_sign"
+  glass: "glass, glass_pane"
+  error_path: "red_concrete, red_glazed_terracotta"
+  foundations: "smooth_stone, polished_andesite"
+  roofing: "dark_oak_slab, dark_oak_stairs"
+  enrichment: "bookshelf, lectern"
+  status: "green_concrete, redstone_lamp"
+build_steps: 10
+tags:
+  - data-pipeline
+  - etl
+  - stream-processing
+  - beginner
+  - buffering
+  - error-handling
+  - backpressure

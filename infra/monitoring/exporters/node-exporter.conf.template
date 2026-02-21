@@ -1,0 +1,29 @@
+[Unit]
+Description=Prometheus Node Exporter (GSD Managed)
+Documentation=https://github.com/prometheus/node_exporter
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=node_exporter
+Group=node_exporter
+ExecStart=/usr/local/bin/node_exporter \
+    --web.listen-address=:9100 \
+    --collector.systemd \
+    --collector.processes \
+    --collector.filesystem.mount-points-exclude="^/(sys|proc|dev|run)($|/)" \
+    --no-collector.infiniband \
+    --no-collector.nfs \
+    --no-collector.nfsd
+Restart=on-failure
+RestartSec=5
+
+# Security hardening (matching minecraft.service.template pattern)
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

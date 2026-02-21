@@ -1,0 +1,226 @@
+# Aminet Archive Chipset Configuration
+# Assembles 6 skills, 5 agents, and 1 team into a unified routing configuration.
+# Generated during Phase 242 (Desktop Panel, Agent Pipeline & Integration).
+#
+# Note: Chipsets are project-scoped (loaded one at a time), so the 40% ceiling
+# applies per-project, not across all defined chipsets. This chipset and
+# agc-educational (6.0%) or minecraft-knowledge-world (31.5%) would never be
+# loaded simultaneously.
+
+schema_version: "1.0"
+
+chipset:
+  name: aminet-archive
+  description: >
+    Aminet archive management for GSD-OS. Selective mirroring, browsing,
+    virus scanning, installation, and FS-UAE emulator integration for real
+    Amiga software from the world's largest Amiga software archive.
+    5 agents, 6 skills, 1 pipeline team. Token budget: 7.0%.
+  version: "1.0.0"
+  project: gsd-skill-creator
+  created: "2026-02-19"
+  updated: "2026-02-19"
+
+skills:
+  - name: aminet-index
+    source: infra/packs/aminet/skills/aminet-index/SKILL.md
+    token_budget: "1.5%"
+    priority: 80
+    team: aminet-pipeline
+    agents: [am-archive]
+    plan_origin: "242-aminet-integration"
+    phase_origin: "242"
+    enabled: true
+    dependencies: []
+
+  - name: aminet-browser
+    source: infra/packs/aminet/skills/aminet-browser/SKILL.md
+    token_budget: "1.0%"
+    priority: 75
+    team: aminet-pipeline
+    agents: [am-archive]
+    plan_origin: "242-aminet-integration"
+    phase_origin: "242"
+    enabled: true
+    dependencies: [aminet-index]
+
+  - name: aminet-mirror
+    source: infra/packs/aminet/skills/aminet-mirror/SKILL.md
+    token_budget: "1.0%"
+    priority: 70
+    team: aminet-pipeline
+    agents: [am-mirror]
+    plan_origin: "242-aminet-integration"
+    phase_origin: "242"
+    enabled: true
+    dependencies: [aminet-index]
+
+  - name: aminet-scanner
+    source: infra/packs/aminet/skills/aminet-scanner/SKILL.md
+    token_budget: "1.5%"
+    priority: 85
+    team: aminet-pipeline
+    agents: [am-scanner]
+    plan_origin: "242-aminet-integration"
+    phase_origin: "242"
+    enabled: true
+    dependencies: [aminet-mirror]
+
+  - name: aminet-installer
+    source: infra/packs/aminet/skills/aminet-installer/SKILL.md
+    token_budget: "1.0%"
+    priority: 65
+    team: aminet-pipeline
+    agents: [am-installer]
+    plan_origin: "242-aminet-integration"
+    phase_origin: "242"
+    enabled: true
+    dependencies: [aminet-scanner]
+
+  - name: aminet-emulator
+    source: infra/packs/aminet/skills/aminet-emulator/SKILL.md
+    token_budget: "1.0%"
+    priority: 60
+    team: aminet-pipeline
+    agents: [am-emulator]
+    plan_origin: "242-aminet-integration"
+    phase_origin: "242"
+    enabled: true
+    dependencies: [aminet-installer]
+
+agents:
+  - name: am-archive
+    description: "Index management, search, and package discovery"
+    skills: [aminet-index, aminet-browser]
+    team: aminet-pipeline
+    model: opus
+    tools: "Read, Bash, Glob, Grep"
+
+  - name: am-mirror
+    description: "Selective download, integrity verification, mirror management"
+    skills: [aminet-mirror]
+    team: aminet-pipeline
+    model: opus
+    tools: "Read, Write, Bash, Glob"
+
+  - name: am-scanner
+    description: "Multi-layer virus scanning and quarantine management"
+    skills: [aminet-scanner]
+    team: aminet-pipeline
+    model: opus
+    tools: "Read, Write, Bash, Glob, Grep"
+
+  - name: am-installer
+    description: "Archive extraction, dependency resolution, filesystem installation"
+    skills: [aminet-installer]
+    team: aminet-pipeline
+    model: opus
+    tools: "Read, Write, Bash, Glob"
+
+  - name: am-emulator
+    description: "Emulator configuration, profile management, software launch"
+    skills: [aminet-emulator]
+    team: aminet-pipeline
+    model: opus
+    tools: "Read, Write, Bash, Glob"
+
+teams:
+  - name: aminet-pipeline
+    description: "End-to-end Aminet package lifecycle: discover -> fetch -> scan -> install -> launch"
+    topology: pipeline
+    lead_agent: am-archive
+    members: [am-archive, am-mirror, am-scanner, am-installer, am-emulator]
+    resource_locks:
+      - "mirror/.mirror-state.json"
+      - "mirror/.quarantine/"
+    sync_points:
+      - event: "download-complete"
+        action: "Signal scanner that packages are ready for scanning"
+      - event: "scan-complete"
+        action: "Signal installer that scan-cleared packages are ready"
+      - event: "install-complete"
+        action: "Signal emulator that software is installed and ready to launch"
+    message_bus: ".planning/aminet/bus/"
+
+routing:
+  rules:
+    - intent_pattern: "aminet.*index|aminet.*update"
+      team: aminet-pipeline
+      agents: [am-archive]
+      skills: [aminet-index]
+      priority: 80
+      description: "Aminet INDEX management and freshness updates"
+
+    - intent_pattern: "aminet.*search|aminet.*browse|aminet.*show"
+      team: aminet-pipeline
+      agents: [am-archive]
+      skills: [aminet-browser]
+      priority: 75
+      description: "Package search, category browsing, and detail viewing"
+
+    - intent_pattern: "aminet.*fetch|aminet.*download|mirror"
+      team: aminet-pipeline
+      agents: [am-mirror]
+      skills: [aminet-mirror]
+      priority: 70
+      description: "Selective mirror download with integrity verification"
+
+    - intent_pattern: "aminet.*scan|virus.*check|quarantine"
+      team: aminet-pipeline
+      agents: [am-scanner]
+      skills: [aminet-scanner]
+      priority: 85
+      description: "Multi-layer virus scanning and quarantine management"
+
+    - intent_pattern: "aminet.*install|aminet.*extract"
+      team: aminet-pipeline
+      agents: [am-installer]
+      skills: [aminet-installer]
+      priority: 65
+      description: "Archive extraction and filesystem installation"
+
+    - intent_pattern: "aminet.*run|aminet.*launch|emulat|fs-uae"
+      team: aminet-pipeline
+      agents: [am-emulator]
+      skills: [aminet-emulator]
+      priority: 60
+      description: "FS-UAE emulator configuration and software launch"
+
+  default_team: aminet-pipeline
+
+  disambiguation:
+    - patterns: ["scan|virus", "install|extract"]
+      strategy: specificity
+      winner: "aminet-scanner for security checks, aminet-installer for filesystem ops"
+      rationale: "aminet-scanner handles virus detection and quarantine; aminet-installer handles LhA/LZX extraction and filesystem placement"
+
+    - patterns: ["index|update", "search|browse"]
+      strategy: specificity
+      winner: "aminet-index for data management, aminet-browser for discovery"
+      rationale: "aminet-index handles INDEX parsing, caching, and freshness; aminet-browser handles search, category trees, and package detail"
+
+budget:
+  ceiling_percent: 40
+  headroom_percent: 33
+  skill_budgets:
+    aminet-index: "1.5%"
+    aminet-browser: "1.0%"
+    aminet-mirror: "1.0%"
+    aminet-scanner: "1.5%"
+    aminet-installer: "1.0%"
+    aminet-emulator: "1.0%"
+  team_budgets:
+    aminet-pipeline: "7%"
+  loading_order:
+    # Level 0: No dependencies (loaded first)
+    - aminet-index
+    # Level 1: Depends on aminet-index
+    - aminet-browser
+    - aminet-mirror
+    # Level 2: Depends on aminet-mirror
+    - aminet-scanner
+    # Level 3: Depends on aminet-scanner
+    - aminet-installer
+    # Level 4: Depends on aminet-installer
+    - aminet-emulator
+  total_allocated: "7.0%"

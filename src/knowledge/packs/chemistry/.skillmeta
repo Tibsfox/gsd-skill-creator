@@ -1,0 +1,542 @@
+# GSD Skill Metadata
+pack_id: CHEM-101
+pack_name: "Chemistry — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: chemical_science
+
+# Content Description
+description: |
+  Chemistry as the central science: understanding what things are made of, how
+  atoms combine into molecules, why chemical reactions happen, and how chemistry
+  connects the microscopic world of atoms to the macroscopic world of materials,
+  food, medicine, and the environment. Emphasizes hands-on kitchen chemistry and
+  building chemical intuition through observation before formalism.
+
+short_description: "Matter, atoms, bonds, reactions, and applied chemistry across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Chemistry Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - MATH-101
+  - SCI-101
+
+# What This Pack Enables
+enables:
+  - ENVR-101
+  - NUTR-101
+  - NATURE-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [25, 40]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [40, 60]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [60, 90]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [90, 140]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [140, 200]
+
+# Modules
+modules:
+  - id: CHEM-101-M1
+    name: "Matter & Properties"
+    description: "Exploring states of matter, physical vs chemical properties, mixtures and pure substances, physical vs chemical changes, and systematic measurement of material properties"
+    learning_outcomes:
+      - "Classify matter by state and type"
+      - "Distinguish physical properties from chemical properties"
+      - "Distinguish physical changes from chemical changes"
+      - "Measure and record material properties systematically"
+      - "Design separation procedures for mixtures"
+    topics:
+      - "States of Matter & Particle Behavior"
+      - "Physical Properties"
+      - "Chemical Properties"
+      - "Physical vs. Chemical Changes"
+      - "Mixtures, Solutions & Pure Substances"
+      - "Separation Techniques"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 20
+      high: 10
+    prerequisite_modules: []
+    activities:
+      count: 6
+      examples:
+        - "Kitchen Material Sorting Challenge"
+        - "Mystery Substance Properties Lab"
+        - "States of Matter Kitchen Experiments"
+        - "Density Column Tower"
+        - "Separation Challenge"
+        - "Physical vs. Chemical Change Detective"
+    assessments:
+      - "Can student classify materials by state and type?"
+      - "Does student distinguish physical from chemical properties?"
+      - "Can student identify physical vs. chemical changes with evidence?"
+      - "Does student measure properties systematically and accurately?"
+
+  - id: CHEM-101-M2
+    name: "Atoms & the Periodic Table"
+    description: "Understanding atomic structure, element identity, periodic table organization, element families and periodic trends, and building progressively accurate atomic models"
+    learning_outcomes:
+      - "Describe basic atomic structure"
+      - "Explain how protons define element identity"
+      - "Use the periodic table to predict element properties"
+      - "Identify element families and shared characteristics"
+      - "Build atomic models at appropriate complexity"
+    topics:
+      - "The Particle Model of Matter"
+      - "Atomic Structure"
+      - "The Periodic Table as Organizing Tool"
+      - "Element Families"
+      - "Periodic Trends"
+      - "Isotopes & Atomic Mass"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 25
+      middle: 30
+      high: 25
+    prerequisite_modules: [CHEM-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Build an Atom Model with Candy"
+        - "Periodic Table Scavenger Hunt"
+        - "Flame Test Exploration"
+        - "Element Trading Cards"
+        - "Periodic Trends Graphing Activity"
+        - "History of the Periodic Table"
+    assessments:
+      - "Can student describe the structure of an atom?"
+      - "Does student use the periodic table to predict behavior?"
+      - "Can student explain group similarity?"
+      - "Does student build accurate atomic models?"
+
+  - id: CHEM-101-M3
+    name: "Bonds & Molecular Structure"
+    description: "Understanding why atoms combine, distinguishing ionic from covalent bonding, exploring molecular geometry and polarity, and connecting molecular structure to macroscopic properties"
+    learning_outcomes:
+      - "Explain why atoms form chemical bonds"
+      - "Distinguish ionic, covalent, and metallic bonding"
+      - "Predict bond type from element positions"
+      - "Build and interpret 3D molecular models"
+      - "Connect molecular structure to substance properties"
+    topics:
+      - "Why Atoms Bond"
+      - "Ionic Bonding & Ionic Compounds"
+      - "Covalent Bonding & Molecular Compounds"
+      - "Metallic Bonding"
+      - "Molecular Shape (VSEPR)"
+      - "Polarity & Intermolecular Forces"
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 15
+      middle: 30
+      high: 30
+    prerequisite_modules: [CHEM-101-M2]
+    activities:
+      count: 6
+      examples:
+        - "Molecule Building with Toothpicks and Gumdrops"
+        - "Ionic vs. Covalent Compound Sort"
+        - "Crystal Growing Lab"
+        - "Polarity and Dissolving Experiment"
+        - "Bond Energy Card Game"
+        - "Soap and Surface Tension Investigation"
+    assessments:
+      - "Can student explain why atoms form bonds?"
+      - "Does student distinguish ionic from covalent bonding?"
+      - "Can student predict molecular shapes?"
+      - "Does student connect bond type to properties?"
+
+  - id: CHEM-101-M4
+    name: "Chemical Reactions & Energy"
+    description: "Understanding conservation of mass, balancing equations, classifying reaction types, analyzing energy changes, exploring reaction rates, and investigating acids, bases, and pH"
+    learning_outcomes:
+      - "Apply conservation of mass to reactions"
+      - "Balance simple chemical equations"
+      - "Classify reactions by type"
+      - "Distinguish exothermic from endothermic reactions"
+      - "Explain reaction rate factors"
+    topics:
+      - "Conservation of Mass"
+      - "Balancing Chemical Equations"
+      - "Reaction Types"
+      - "Energy in Reactions"
+      - "Reaction Rates & Collision Theory"
+      - "Acids, Bases & pH"
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 15
+      middle: 35
+      high: 30
+    prerequisite_modules: [CHEM-101-M2, CHEM-101-M3]
+    activities:
+      count: 6
+      examples:
+        - "Baking Soda and Vinegar Reaction Investigation"
+        - "Endothermic Ice Cream Making"
+        - "Red Cabbage pH Indicator Lab"
+        - "Rust Investigation"
+        - "Conservation of Mass Balance Challenge"
+        - "Reaction Rate Races"
+    assessments:
+      - "Can student demonstrate conservation of mass?"
+      - "Does student balance equations correctly?"
+      - "Can student classify reactions and predict products?"
+      - "Does student explain energy changes and rate factors?"
+
+  - id: CHEM-101-M5
+    name: "Applied Chemistry"
+    description: "Connecting chemical principles to materials science, biochemistry, environmental chemistry, food chemistry, medicine, and energy technology"
+    learning_outcomes:
+      - "Explain material properties from molecular structure"
+      - "Identify major biomolecule families and their roles"
+      - "Apply chemistry to environmental processes"
+      - "Connect reactions to cooking and food preservation"
+      - "Evaluate real-world chemical claims"
+    topics:
+      - "Materials Science"
+      - "Biochemistry Foundations"
+      - "Environmental Chemistry"
+      - "Food Chemistry"
+      - "Medicine & Pharmacology Foundations"
+      - "Energy Chemistry"
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      middle: 25
+      high: 30
+    prerequisite_modules: [CHEM-101-M2, CHEM-101-M3]
+    activities:
+      count: 6
+      examples:
+        - "Polymer Lab - Make Your Own Slime"
+        - "Enzyme Investigation with Pineapple and Gelatin"
+        - "Water Purification Challenge"
+        - "Battery Building from Lemons"
+        - "Food Chemistry Kitchen Lab"
+        - "Biodegradability Experiment"
+    assessments:
+      - "Can student explain material properties from structure?"
+      - "Does student identify biomolecules and functions?"
+      - "Can student apply chemistry to real-world problems?"
+      - "Does student evaluate chemical claims critically?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-MAT-001
+    description: "Classify and characterize matter by properties, state, and composition"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-ATM-001
+    description: "Describe atomic structure and use the periodic table as a predictive tool"
+    levels: ["3", "4", "5", "6", "7", "8"]
+
+  - code: LO-BND-001
+    description: "Explain chemical bonding and connect molecular structure to properties"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-RXN-001
+    description: "Predict, balance, and classify chemical reactions with energy analysis"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-APP-001
+    description: "Apply chemical principles to materials, environment, food, and health"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-INV-001
+    description: "Design and conduct chemical investigations using scientific method"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Property Investigation"
+    frequency: ongoing
+
+  - type: formative
+    name: "Reaction Prediction Check"
+    frequency: weekly
+
+  - type: summative
+    name: "Chemistry Investigation Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Applied Chemistry Project"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: phet_simulations
+    url: https://phet.colorado.edu
+    description: "Interactive chemistry simulations for building atoms, exploring molecules, and investigating reactions"
+
+  - name: molecular_viewer
+    integrated: true
+    description: "3D molecular visualization tool for exploring structure-property relationships"
+
+interactive_elements:
+  - type: investigation
+    name: "Kitchen Chemistry Lab"
+
+  - type: simulator
+    name: "Atom Builder"
+
+  - type: visualization
+    name: "Molecular Viewer"
+
+  - type: game
+    name: "Bond Energy Card Game"
+
+  - type: collaboration
+    name: "Element Trading Cards"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "All visual content has text descriptions. Molecular models include textual descriptions of geometry. Kitchen chemistry activities use common, accessible materials. Consider adding video demonstrations with captions."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Next Generation Science Standards (NGSS)"
+    version: 2013
+    alignments:
+      "2-PS1-1": "Different kinds of matter"
+      "5-PS1-1": "Matter and its properties"
+      "MS-PS1-1": "Structure and properties of matter"
+      "HS-PS1-1": "Structure and properties of matter"
+      "HS-PS1-2": "Molecular composition and energy"
+      PS1-A: "Structure and Properties of Matter"
+      PS1-B: "Chemical Reactions"
+      PS3-A: "Definitions of Energy"
+  - framework: "AAAS Benchmarks for Science Literacy"
+    version: 1993
+    alignments:
+      "Structure of Matter": true
+      "Chemical Reactions": true
+      "Matter and Energy": true
+  - framework: "IB Middle Years Programme (Sciences)"
+    version: "2024"
+    alignments:
+      MYP.CHEM.A: "Knowing and understanding"
+      MYP.CHEM.B: "Investigating"
+      MYP.CHEM.C: "Processing and evaluating"
+  - framework: "UK National Curriculum (Science - Chemistry)"
+    version: "2014"
+    alignments:
+      KS3.CHEM: "Matter and reactions"
+      KS4.CHEM: "Atomic structure and bonding"
+      "Energy Transformations": true
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium-high
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Chemistry requires abstract thinking about invisible particles, which increases conceptual demand. However, kitchen chemistry activities make it tangible and accessible."
+
+# Content Flags
+content_flags:
+  - flag: misconception_potential
+    description: "Learners may think 'chemical' means 'dangerous' or 'artificial' due to everyday language."
+    mitigation: "Explicitly teach that everything is made of chemicals. Water is a chemical. Oxygen is a chemical."
+
+  - flag: safety_considerations
+    description: "Some activities involve mild acids, bases, or heating. All activities use household materials but require supervision."
+    mitigation: "Every activity includes safety guidelines. Dangerous reactions are excluded. Never mix bleach with ammonia or acids."
+
+  - flag: abstract_concepts
+    description: "Atomic structure and molecular bonding involve invisible entities that require abstract reasoning."
+    mitigation: "Use physical models (candy atoms, gumdrop molecules) and simulations before introducing abstract representations."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/chem-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "CHEM-101"
+  looking_for:
+    - "Additional kitchen chemistry experiments with clear chemical explanations"
+    - "Element stories and periodic table activities"
+    - "Cross-cultural chemistry contributions (historical alchemy, metallurgy, dye-making)"
+    - "Translations to Spanish & Mandarin"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Chemistry Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - chemistry
+  - matter
+  - atoms
+  - molecules
+  - reactions
+  - periodic-table
+  - bonding
+  - kitchen-chemistry
+  - stem
+  - foundational
+  - materials-science
+
+# External Resources
+resources:
+  - type: textbook
+    title: "The Disappearing Spoon"
+    author: "Sam Kean"
+    url: null
+
+  - type: online_platform
+    title: "Khan Academy Chemistry"
+    author: "Khan Academy"
+    url: "https://www.khanacademy.org/science/chemistry"
+
+  - type: interactive_simulation
+    title: "PhET Chemistry Simulations"
+    author: "University of Colorado Boulder"
+    url: "https://phet.colorado.edu/en/simulations/filter?subjects=chemistry"
+
+# Related Packs
+related_packs:
+  - id: MATH-101
+    relationship: "Mathematics provides quantitative tools for stoichiometry, concentration, and data analysis"
+
+  - id: SCI-101
+    relationship: "Scientific method provides the inquiry framework applied to chemical investigation"
+
+  - id: PHYS-101
+    relationship: "Physics explains the fundamental forces governing atomic behavior and bonding"
+
+  - id: ENVR-101
+    relationship: "Environmental science applies chemistry to understand pollution, climate, and water treatment"
+
+  - id: NUTR-101
+    relationship: "Nutrition is applied biochemistry — understanding food at the molecular level"
+
+  - id: NATURE-101
+    relationship: "Natural substances (minerals, pigments, soils) are understood through chemistry"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "flask"
+    color: "#9C27B0"
+    position: "Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "CHEM-101-matter-properties"
+    - "CHEM-101-atomic-structure"
+    - "CHEM-101-bonding-molecules"
+    - "CHEM-101-reactions-energy"
+    - "CHEM-101-applied-chemistry"
+
+# File References
+files:
+  vision_document: "CHEM-101-vision.md"
+  modules_definition: "CHEM-101-modules.yaml"
+  activities: "CHEM-101-activities.json"
+  assessment: "CHEM-101-assessment.md"
+  resources: "CHEM-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering matter, atoms, bonds, reactions, and applied chemistry"
+      - "Contributed 30 starter activities across all modules emphasizing kitchen chemistry"
+      - "Aligned to NGSS Physical Science standards"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"

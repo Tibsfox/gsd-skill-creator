@@ -1,0 +1,328 @@
+---
+# DOMESTIC-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: DOMESTIC-101
+pack_name: "Home Economics & Life Skills — Foundational Knowledge Pack"
+
+modules:
+  - id: DOMESTIC-101-M1
+    name: "Kitchen Skills & Cooking"
+    description: "From boiling water to meal planning: kitchen safety, basic cooking techniques, following and adapting recipes, meal planning, food safety, cooking on a budget, cultural foodways, and the joy of feeding yourself and others well"
+
+    learning_outcomes:
+      - "Demonstrate safe kitchen practices appropriate to age and task"
+      - "Prepare increasingly complex meals independently"
+      - "Plan meals for a defined period considering nutrition, budget, and time"
+      - "Follow and adapt recipes for different needs and ingredient availability"
+      - "Practice food safety from shopping through storage through preparation through cleanup"
+      - "Appreciate diverse food traditions and cooking methods from multiple cultures"
+
+    topics:
+      - "Kitchen Safety: Knives, Heat, Allergens, Hygiene"
+      - "Basic Cooking Techniques: Boiling, Sauteing, Baking, Roasting"
+      - "Following Recipes and Measuring Ingredients"
+      - "Adapting Recipes: Substitutions, Scaling, Dietary Needs"
+      - "Meal Planning and Grocery Shopping"
+      - "Food Safety and Storage"
+      - "Cooking on a Budget"
+      - "Cultural Foodways and Diverse Cuisines"
+      - "Cooking for Others: Sharing Food and Hospitality"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 25
+      elementary: 35
+      middle: 40
+      high: 30
+
+    prerequisite_modules: []
+
+    activities:
+      count: 4
+      examples:
+        - "First Recipe: No-Cook Snacks"
+        - "Meal Planning for a Week"
+        - "Mystery Basket Cooking Challenge"
+        - "Cultural Food Exchange"
+
+    assessments:
+      - "Can student prepare a safe, nutritious meal appropriate to their age?"
+      - "Does student follow food safety practices consistently?"
+      - "Can student plan meals for multiple days considering budget and nutrition?"
+      - "Does student adapt recipes for different needs and available ingredients?"
+
+  - id: DOMESTIC-101-M2
+    name: "Textiles, Clothing & Care"
+    description: "Sewing buttons, mending tears, laundry from sorting to folding, care labels, stain treatment, wardrobe management, and sustainable fashion awareness -- the skills that keep you dressed well without waste"
+
+    learning_outcomes:
+      - "Thread a needle and perform basic hand stitches (running stitch, backstitch)"
+      - "Sew on a button, hook, or snap securely"
+      - "Mend a tear or hole using appropriate technique"
+      - "Complete the full laundry process from sorting through folding"
+      - "Read and follow garment care labels"
+      - "Treat common stains before washing"
+      - "Evaluate clothing quality and make informed purchasing decisions"
+
+    topics:
+      - "Hand Sewing Basics: Threading, Running Stitch, Backstitch"
+      - "Sewing on Buttons, Hooks, and Snaps"
+      - "Mending Tears, Patching Holes, Repairing Seams"
+      - "Laundry: Sorting, Washing, Drying, Folding, Ironing"
+      - "Reading Care Labels and Understanding Fabric Types"
+      - "Stain Treatment and Garment Care"
+      - "Wardrobe Management and Capsule Wardrobe Concepts"
+      - "Sustainable Fashion: Quality, Repair, Reuse"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 30
+      high: 20
+
+    prerequisite_modules: []
+
+    activities:
+      count: 4
+      examples:
+        - "Sew a Button Challenge"
+        - "Laundry Sorting & Care Labels"
+        - "Mending Workshop: Bring Your Damaged Clothes"
+        - "Cost-Per-Wear Wardrobe Audit"
+
+    assessments:
+      - "Can student sew a button that stays securely attached?"
+      - "Does student correctly sort laundry and follow care labels?"
+      - "Can student identify and treat common stains?"
+      - "Does student understand the lifecycle of clothing and make repair-first decisions?"
+
+  - id: DOMESTIC-101-M3
+    name: "Home Care & Organization"
+    description: "Cleaning routines, organizing spaces, basic home maintenance, seasonal tasks, and shared living responsibilities -- the systems that keep a living space functional, healthy, and comfortable"
+
+    learning_outcomes:
+      - "Clean different rooms and surfaces using appropriate methods and products"
+      - "Develop and follow a regular cleaning routine"
+      - "Organize personal and shared spaces using practical systems"
+      - "Perform basic home maintenance tasks safely"
+      - "Create and follow a seasonal maintenance calendar"
+      - "Communicate about shared living responsibilities"
+      - "Understand cleaning product safety and environmental options"
+
+    topics:
+      - "Cleaning Surfaces: Counters, Floors, Glass, Bathroom, Kitchen"
+      - "Cleaning Products: Purposes, Safety, Green Alternatives"
+      - "Cleaning Routines and Schedules"
+      - "Organization Systems: Everything Has a Place"
+      - "Decluttering: Keep, Donate, Discard, Repair"
+      - "Basic Home Maintenance: Filters, Hardware, Drains, Bulbs"
+      - "Seasonal Tasks: Deep Cleaning, Weatherizing"
+      - "Shared Living: Dividing Responsibilities and Communication"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 30
+      high: 25
+
+    prerequisite_modules: []
+
+    activities:
+      count: 4
+      examples:
+        - "Room Deep Clean Challenge"
+        - "Weekly Chore Chart Creator"
+        - "Organization Systems Workshop"
+        - "Cleaning Product Investigation"
+
+    assessments:
+      - "Can student clean a room thoroughly using appropriate methods?"
+      - "Does student maintain a regular cleaning and organization routine?"
+      - "Can student perform basic maintenance tasks (tightening, unclogging, replacing)?"
+      - "Does student contribute to shared living responsibilities?"
+
+  - id: DOMESTIC-101-M4
+    name: "Money Management"
+    description: "Budgeting, saving, smart shopping, understanding credit and debt, insurance and tax basics, and financial planning -- the financial literacy that transforms money from a source of stress into a tool for building the life you want"
+
+    learning_outcomes:
+      - "Create and maintain a personal budget"
+      - "Develop and practice regular saving habits"
+      - "Compare prices and assess value before purchasing"
+      - "Understand how credit and interest work"
+      - "Identify and avoid predatory financial products"
+      - "Plan financially for short-term and long-term goals"
+      - "Make informed financial decisions aligned with personal values"
+
+    topics:
+      - "What Money Is and How It Works"
+      - "Budgeting: Income, Expenses, and Saving"
+      - "Saving Habits: Emergency Funds, Goal-Based Saving, Compound Interest"
+      - "Smart Shopping: Price Comparison, Value Assessment, Marketing Resistance"
+      - "Credit and Debt: How They Work, When They Help, When They Harm"
+      - "Insurance Basics: What It Is, What You Need"
+      - "Taxes: What They Are, How They Work"
+      - "Financial Planning: Goals, Timelines, Starting Early"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 35
+      high: 35
+
+    prerequisite_modules: []
+
+    activities:
+      count: 4
+      examples:
+        - "Budget Simulation Game"
+        - "Grocery Price Comparison"
+        - "Savings Goal Calculator"
+        - "Credit Card Interest Simulation"
+
+    assessments:
+      - "Can student create and maintain a realistic budget?"
+      - "Does student practice saving and explain compound interest?"
+      - "Can student compare prices and assess value rather than price alone?"
+      - "Does student understand credit, interest, and the cost of debt?"
+
+  - id: DOMESTIC-101-M5
+    name: "Self-Sufficiency & Practical Skills"
+    description: "Basic repairs, gardening, food preservation, emergency preparedness, and the resourcefulness mindset -- seeing possibilities rather than problems, fixing rather than discarding, preparing rather than scrambling"
+
+    learning_outcomes:
+      - "Identify and safely use basic household tools"
+      - "Perform simple repairs appropriate to age and context"
+      - "Evaluate repair vs. replace decisions based on cost, time, and skill"
+      - "Grow food in available space"
+      - "Preserve food using basic methods"
+      - "Assemble and maintain an emergency preparedness kit"
+      - "Develop a problem-solving mindset that asks 'can I fix this?' first"
+
+    topics:
+      - "Basic Tool Use: Hammer, Screwdriver, Pliers, Measuring Tape, Level"
+      - "Simple Repairs: Tightening, Replacing, Patching, Unclogging"
+      - "When to DIY and When to Call a Professional"
+      - "Container and Small-Space Gardening"
+      - "Food Preservation: Freezing, Drying, Simple Canning"
+      - "Emergency Preparedness: Kit Assembly, Planning, Communication"
+      - "Bicycle and Vehicle Basic Maintenance"
+      - "Resourcefulness: Repair vs. Replace, Creative Reuse, Making Do"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 35
+
+    prerequisite_modules: [DOMESTIC-101-M1, DOMESTIC-101-M3]
+
+    activities:
+      count: 4
+      examples:
+        - "Fix-It Workshop: Simple Repairs"
+        - "Emergency Kit Assembly"
+        - "Container Garden Project"
+        - "Repair vs. Replace Debate"
+
+    assessments:
+      - "Can student identify and safely use basic household tools?"
+      - "Does student perform age-appropriate repairs independently?"
+      - "Can student evaluate repair vs. replace decisions with reasoning?"
+      - "Does student approach problems with a resourcefulness mindset?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Practical Competency"
+    description: "Ability to actually perform domestic tasks: cooking, sewing, cleaning, budgeting, repairing. The proof is in the doing, not the describing."
+    assessed_in: [DOMESTIC-101-M1, DOMESTIC-101-M2, DOMESTIC-101-M3, DOMESTIC-101-M4, DOMESTIC-101-M5]
+
+  - name: "Safety Awareness"
+    description: "Consistent attention to safety in kitchen work, cleaning product use, tool operation, and financial decision-making."
+    assessed_in: [DOMESTIC-101-M1, DOMESTIC-101-M3, DOMESTIC-101-M5]
+
+  - name: "Planning & Organization"
+    description: "Ability to plan ahead: meal planning, cleaning schedules, budgets, maintenance calendars, emergency kits."
+    assessed_in: [DOMESTIC-101-M1, DOMESTIC-101-M3, DOMESTIC-101-M4, DOMESTIC-101-M5]
+
+  - name: "Resourcefulness"
+    description: "Mindset of capability and problem-solving: repair before replace, adapt before discard, find alternatives when resources are limited."
+    assessed_in: [DOMESTIC-101-M1, DOMESTIC-101-M2, DOMESTIC-101-M4, DOMESTIC-101-M5]
+
+  - name: "Sustainability Thinking"
+    description: "Awareness of environmental and economic impact of domestic choices: food waste, textile disposal, cleaning chemicals, energy use, consumerism."
+    assessed_in: [DOMESTIC-101-M1, DOMESTIC-101-M2, DOMESTIC-101-M3, DOMESTIC-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Independent Entry Points"
+    description: "M1, M2, M3, and M4 are independent entry points. Start with whichever skill area is most needed or most interesting."
+    rationale: "Cooking, sewing, cleaning, and budgeting do not depend on each other. A learner interested in cooking can start with M1 while a learner struggling with finances starts with M4."
+
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4 -> M5, building from kitchen through textile through household through money to integrated self-sufficiency."
+    rationale: "Natural progression from the most immediately practical skills (feeding yourself) to the integrative capstone (self-sufficiency)."
+
+  - name: "Spiral Pathway"
+    description: "Revisit all five modules at increasing depth, from basic awareness to independent competency to mastery."
+    rationale: "Domestic skills deepen with practice. Returning to cooking after learning budgeting adds the dimension of cost. Returning to cleaning after learning about sustainability adds environmental awareness."
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same structure: What It Teaches, Why It Matters, Key Learning Outcomes, Interactive Elements, Technical Implementation Notes"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Activities follow consistent template: hands-on practice, safety guidance, materials list, age adaptations, real-life application"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure (Beginning, Developing, Proficient, Advanced) focused on practical competency"
+    cached: true
+
+  - pattern: "Safety Protocol"
+    description: "Safety guidance follows consistent pattern across cooking, cleaning, tools, and financial decisions"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner spontaneously applies cooking techniques to new recipes"
+    - "When learner repairs something instead of discarding it"
+    - "When learner creates and follows a budget without prompting"
+    - "When learner identifies and solves a household problem independently"
+    - "When learner teaches a domestic skill to someone else"
+    - "When learner makes purchasing decisions based on value rather than impulse"
+    - "When learner maintains cleaning or organization routines independently"
+
+  pattern_detection:
+    - "Effective meal planning and shopping strategies"
+    - "Successful repair and mending approaches"
+    - "Consistent budgeting and saving habits"
+    - "Efficient cleaning routines and systems"
+    - "Problem-solving approaches for household challenges"
+
+  skill_promotion:
+    - "Promote successful cooking patterns to reusable meal-preparation skills"
+    - "Create repair decision frameworks from successful fix-it experiences"
+    - "Build budgeting templates from proven personal finance workflows"
+    - "Develop cleaning routine templates from effective household management"
+    - "Extract resourcefulness patterns from creative problem-solving examples"
+
+# This YAML defines the modular structure for the DOMESTIC-101 pack and enables
+# skill-creator to orchestrate learning experiences centered on practical life
+# skills and household management.

@@ -1,0 +1,94 @@
+# Schematic Build Specification
+# This file defines what to build in-game before capturing with Litematica.
+
+name: "Bridge"
+id: "bridge"
+filename: "template-bridge-1-0.litematic"
+version: "1.0"
+category: templates
+description: "Linear span structure connecting districts at potentially different elevations. Stone brick deck with stair railings, iron bar accents, arch supports, and lantern lighting. Symbolizes conceptual transitions between Knowledge World districts."
+
+dimensions:
+  width: 5    # X axis (east-west)
+  height: 7   # Y axis (up-down)
+  depth: 25   # Z axis (north-south)
+
+block_palette:
+  primary:
+    - block: "minecraft:stone_bricks"
+      usage: "Deck surface and structural elements -- the walking surface and main structure"
+    - block: "minecraft:stone_brick_stairs"
+      usage: "Railings and entry/exit ramps -- decorative stair railings on both sides, ramp transitions at ends"
+  accent:
+    - block: "minecraft:iron_bars"
+      usage: "Decorative railing -- iron bar fence above the stair railing for safety and visual detail"
+    - block: "minecraft:stone_brick_wall"
+      usage: "Railing posts -- wall blocks as vertical posts between iron bar sections"
+  functional:
+    - block: "minecraft:stone_brick_slab"
+      usage: "Deck surface detail -- slabs for smooth walking surface transitions"
+  lighting:
+    - block: "minecraft:lantern"
+      usage: "Path lighting -- lanterns on railing posts every 4 blocks along both sides"
+
+layout:
+  ground_floor: |
+    Linear span structure, 25 blocks long (north-south), 5 blocks wide (east-west).
+
+    Deck: 5-wide stone brick walkway running the full 25-block length.
+    Center 3 blocks are stone brick slabs (smooth walking surface).
+    Outer 1 block on each side is the railing base (stone brick full blocks).
+
+    Railings on both sides (east and west):
+    - Base: stone brick blocks (1 high) along the full length
+    - Above base: stone brick stairs (upside-down) for decorative profile
+    - Above stairs: iron bars (1 high) for see-through safety railing
+    - Stone brick wall posts every 4 blocks, rising 1 block above iron bars
+
+    Entry/exit ramps at both ends (north and south):
+    - 3-block long ramp made of stone brick stairs
+    - Rising 3 blocks from ground level to deck height
+    - Railings continue down the ramp sides
+
+    Arch supports underneath, every 8 blocks along the span:
+    - Stone brick arch: 5 wide at top (flush with deck), curving down 4 blocks
+    - 3 arches total (at blocks 4, 12, and 20 from the south end)
+    - Each arch is 1 block thick (north-south)
+  upper_floors: "None -- single-level span structure"
+  roof: "None -- open-air bridge"
+  exterior: |
+    Open structure -- no walls or enclosure.
+    Visible from sides: stone brick deck, stair railings, iron bar fence, arch supports underneath.
+    Railing posts with lanterns visible as landmark lighting from a distance.
+    Designed to span between districts at different elevations (ramps accommodate 3-block height changes).
+
+features:
+  - "5-wide stone brick deck providing comfortable walking surface"
+  - "Stone brick stair railings with iron bar fencing on both sides"
+  - "Stone brick wall posts every 4 blocks with lanterns on top"
+  - "3 stone brick arch supports underneath at regular intervals"
+  - "Entry/exit ramps at both ends (3-block rise over 3-block run)"
+  - "Lanterns on railing posts for nighttime visibility (12+ lanterns total)"
+  - "Clean stone brick slab center deck for smooth walking"
+  - "Designed to span between districts at varying elevations"
+
+construction_notes:
+  - "Build from the ground up, floor by floor"
+  - "Build the arch supports first -- these define the bridge height and position"
+  - "Place arch supports at positions 4, 12, and 20 blocks from the south end"
+  - "Build the deck surface across the full 25-block span, connecting arches"
+  - "Build railings: base blocks, then upside-down stairs, then iron bars"
+  - "Place stone brick wall railing posts every 4 blocks"
+  - "Build entry/exit ramps at both ends using stone brick stairs"
+  - "Extend railings down along the ramps"
+  - "Place functional blocks last: lanterns on railing posts"
+  - "Verify the bridge is walkable end-to-end without jumping"
+  - "Use Litematica selection starting from the northwest ground-level corner"
+  - "Add 1 block of selection padding on all sides"
+  - "Save with orientation: bridge spans north-south, entry ramp faces south"
+  - "Test-load the schematic in a flat world before adding to library"
+
+litematica_capture:
+  origin: "Northwest corner at the lowest Y level (bottom of arch supports or ramp base)"
+  selection_padding: 1
+  orientation: "Bridge spans north-south, primary entry ramp at south end"

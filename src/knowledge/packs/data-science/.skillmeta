@@ -1,0 +1,564 @@
+# GSD Skill Metadata
+pack_id: DATA-101
+pack_name: "Data Science & Analysis — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: applied_practical
+learning_domain: data_literacy
+
+# Content Description
+description: |
+  Data literacy as the ability to read, work with, analyze, and argue with data.
+  Foundational pack covering data collection, exploratory analysis, visualization,
+  statistical reasoning, and ethical practice. Emphasizes reasoning with evidence,
+  critical thinking, and responsible data use across all grade levels.
+
+short_description: "Data literacy, analysis, visualization, and ethics from K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Data Science Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - MATH-101
+  - STAT-101
+
+# What This Pack Enables
+enables:
+  - ECON-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [20, 40]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [50, 70]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [70, 100]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [100, 150]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [150, 200]
+
+# Modules
+modules:
+  - id: DATA-101-M1
+    name: "Data Collection & Organization"
+    description: "Understanding data sources, sampling, bias, quality, and organization"
+    learning_outcomes:
+      - "Understand different data sources"
+      - "Distinguish population from sample"
+      - "Identify data collection choices and bias"
+      - "Organize data in tables and spreadsheets"
+    topics:
+      - "Data Sources & Methods"
+      - "Population vs. Sample"
+      - "Sampling Bias"
+      - "Data Quality"
+      - "Data Organization"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 30
+      elementary: 40
+      middle: 40
+      high: 30
+    prerequisite_modules: []
+    activities:
+      count: 10
+      examples:
+        - "Classroom Census Data Collection"
+        - "Weather Data Logger"
+        - "Survey Design & Bias"
+        - "Population vs. Sample"
+        - "Data Quality Audit"
+
+  - id: DATA-101-M2
+    name: "Exploratory Data Analysis"
+    description: "Summarizing, describing, visualizing, and finding patterns in data"
+    learning_outcomes:
+      - "Calculate and interpret summary statistics"
+      - "Identify and investigate outliers"
+      - "Create frequency distributions"
+      - "Explore relationships between variables"
+    topics:
+      - "Measures of Center & Spread"
+      - "Percentiles & Quartiles"
+      - "Distributions & Histograms"
+      - "Outliers"
+      - "Correlation"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 40
+      high: 35
+    prerequisite_modules: [DATA-101-M1]
+    activities:
+      count: 10
+      examples:
+        - "Mean vs. Median Explorer"
+        - "Outlier Detective"
+        - "Distribution Shape"
+        - "Five-Number Summary"
+        - "Correlation Analysis"
+
+  - id: DATA-101-M3
+    name: "Data Visualization & Communication"
+    description: "Creating, interpreting, and critiquing visualizations; telling stories with data"
+    learning_outcomes:
+      - "Choose appropriate visualization types"
+      - "Create accurate and honest graphs"
+      - "Interpret and critique visualizations"
+      - "Explain findings clearly"
+    topics:
+      - "Chart Types"
+      - "Visual Design"
+      - "Misleading Graphs"
+      - "Dashboards"
+      - "Data Storytelling"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 35
+      high: 30
+    prerequisite_modules: [DATA-101-M2]
+    activities:
+      count: 10
+      examples:
+        - "Build a Dashboard"
+        - "Misleading Graph Makeover"
+        - "Chart Type Selection"
+        - "Visualization Critique"
+        - "Interactive Dashboard"
+
+  - id: DATA-101-M4
+    name: "Statistical Inference & Reasoning"
+    description: "Reasoning about uncertainty, probability, hypothesis testing, and confidence intervals"
+    learning_outcomes:
+      - "Apply probability concepts"
+      - "Understand the normal distribution"
+      - "Conduct hypothesis tests"
+      - "Interpret confidence intervals"
+    topics:
+      - "Probability"
+      - "Normal Distribution"
+      - "Hypothesis Testing"
+      - "Confidence Intervals"
+      - "Sampling Error"
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 15
+      elementary: 20
+      middle: 40
+      high: 45
+    prerequisite_modules: [DATA-101-M1, DATA-101-M2]
+    activities:
+      count: 10
+      examples:
+        - "Coin Flip Probability"
+        - "Taste Test Hypothesis"
+        - "Dice Roll Simulation"
+        - "Normal Distribution"
+        - "Hypothesis Test Design"
+
+  - id: DATA-101-M5
+    name: "Data Ethics & Real-World Applications"
+    description: "Examining ethical dimensions of data work, bias, privacy, and responsible practice"
+    learning_outcomes:
+      - "Identify privacy and consent issues"
+      - "Recognize algorithmic bias"
+      - "Discuss data ownership"
+      - "Evaluate data claims critically"
+    topics:
+      - "Privacy & Consent"
+      - "Data Ownership"
+      - "Algorithmic Bias"
+      - "Transparency"
+      - "Responsible Practice"
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 15
+      elementary: 20
+      middle: 30
+      high: 35
+    prerequisite_modules: [DATA-101-M1]
+    activities:
+      count: 10
+      examples:
+        - "Privacy Audit"
+        - "Bias Case Study"
+        - "Data Ownership"
+        - "Misleading Claims"
+        - "Ethics Dilemma"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-COL-001
+    description: "Collect data thoughtfully using appropriate methods"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-EXP-001
+    description: "Explore data to identify patterns and describe distributions"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-VIS-001
+    description: "Create visualizations that reveal patterns and communicate findings"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-INF-001
+    description: "Reason about uncertainty and make inferences from data"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-ETH-001
+    description: "Recognize and address ethical issues in data work"
+    levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Data Exploration"
+    frequency: ongoing
+
+  - type: formative
+    name: "Visualization Review"
+    frequency: weekly
+
+  - type: summative
+    name: "Data Analysis Project"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Hypothesis Test Report"
+    frequency: end_of_module
+
+  - type: summative
+    name: "Ethics Case Study"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: google_sheets
+    url: https://sheets.google.com
+    description: "Free web-based spreadsheet tool for data entry and graphing"
+
+  - name: gapminder
+    url: https://www.gapminder.org
+    description: "Interactive visualizations of global data with narrative context"
+
+  - name: our_world_in_data
+    url: https://ourworldindata.org
+    description: "Beautifully designed data visualizations on global topics"
+
+  - name: data_gov
+    url: https://www.data.gov
+    description: "Government data sets available for download and analysis"
+
+  - name: kaggle
+    url: https://www.kaggle.com
+    description: "Data science platform with tutorials and data sets"
+
+interactive_elements:
+  - type: simulation
+    name: "Probability Experiment Simulator"
+
+  - type: tool
+    name: "Interactive Dashboard Builder"
+
+  - type: visualization
+    name: "Graph Type Comparison"
+
+  - type: collaboration
+    name: "Peer Data Critique"
+
+  - type: game
+    name: "Misleading Graph Challenge"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Español"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Data visualizations (charts, graphs) need text descriptions and data tables. All visualizations include text descriptions. Data tables include headers and clear structure. Consider adding audio explanations for visualizations."
+  pack_specific_concerns:
+    - "All charts and graphs must have accessible equivalents (data tables, text descriptions)"
+    - "Color-blind safe color palettes required for all visualizations"
+    - "Dashboard interactive elements need keyboard navigation"
+    - "Statistical concepts need non-visual explanations"
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Common Core Mathematics Standards"
+    version: 2010
+    standard_codes:
+      - "CCSS.MATH.CONTENT.3.MD.B.3"
+      - "CCSS.MATH.CONTENT.5.MD.B.2"
+      - "CCSS.MATH.CONTENT.6.SP.A"
+      - "CCSS.MATH.CONTENT.7.SP.A"
+      - "CCSS.MATH.CONTENT.HS.S.ID.A"
+    mappings:
+      "Elementary": "MD.A, MD.B (data representation)"
+      "Secondary": "SP.A, SP.B, SP.C (probability and statistics)"
+
+  - framework: "NCTM Data Analysis & Probability Standards"
+    version: 2000
+    standard_codes:
+      - "NCTM.DATA.1"
+      - "NCTM.DATA.2"
+      - "NCTM.DATA.3"
+      - "NCTM.PROB.1"
+    mappings:
+      "K-12": "Formulate questions, collect/display data, select/use appropriate statistical methods"
+
+  - framework: "GAISE Framework (Statistics Education)"
+    version: "2016"
+    standard_codes:
+      - "GAISE.1"
+      - "GAISE.2"
+      - "GAISE.3"
+    mappings:
+      "Foundation": "Formulating questions, data collection"
+      "Intermediate": "Data analysis, interpretation, inference"
+
+  - framework: "IB MYP Mathematics"
+    version: "2014"
+    standard_codes:
+      - "MYP.STAT.1"
+      - "MYP.STAT.2"
+    mappings:
+      "Grades 6-10": "Organizing and displaying data, interpreting statistical representations"
+
+  - framework: "NGSS Science Standards"
+    version: 2013
+    standard_codes:
+      - "SEP-4"
+      - "SEP-5"
+    mappings:
+      "K-12": "Analyzing and Interpreting Data, Using Mathematics and Computational Thinking"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Difficulty is in developing reasoning habits, not in technical content. Accessible to all learners; deepens over time."
+
+# Content Flags
+content_flags:
+  - flag: bias_potential
+    description: "Learners may not initially recognize bias in data collection or visualization"
+    mitigation: "Explicit instruction and practice in identifying bias; multiple examples with discussion"
+
+  - flag: misconception_potential
+    description: "Learners may confuse correlation with causation"
+    mitigation: "Repeated emphasis with memorable examples; drilling on 'correlation does not imply causation'"
+
+  - flag: ethics_sensitivity
+    description: "Discussion of algorithmic bias may touch on sensitive topics like discrimination"
+    mitigation: "Use historical examples first; frame in terms of fairness and responsibility; create safe space for discussion"
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/data-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "DATA-101"
+  looking_for:
+    - "Data sets for classroom use with strong pedagogical examples"
+    - "Interactive visualization tools suited for various age levels"
+    - "Case studies of data misuse and bias in real-world contexts"
+    - "Translations to Spanish, French, Mandarin, and Arabic"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Data Science Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - data
+  - data-science
+  - statistics
+  - visualization
+  - literacy
+  - critical-thinking
+  - stem
+  - applied
+  - foundational
+  - ethics
+
+# External Resources
+resources:
+  - type: online_platform
+    title: "Khan Academy Statistics & Probability"
+    author: "Khan Academy"
+    url: "https://www.khanacademy.org/math/statistics-probability"
+
+  - type: online_platform
+    title: "Gapminder"
+    author: "Gapminder Foundation"
+    url: "https://www.gapminder.org"
+
+  - type: website
+    title: "Our World in Data"
+    author: "Max Roser"
+    url: "https://ourworldindata.org"
+
+  - type: data_repository
+    title: "Data.gov"
+    author: "U.S. General Services Administration"
+    url: "https://www.data.gov"
+
+  - type: online_platform
+    title: "Kaggle Learn"
+    author: "Kaggle"
+    url: "https://www.kaggle.com/learn"
+
+  - type: software
+    title: "Google Sheets"
+    author: "Google"
+    url: "https://sheets.google.com"
+
+  - type: software
+    title: "LibreOffice Calc"
+    author: "The Document Foundation"
+    url: "https://www.libreoffice.org"
+
+  - type: software
+    title: "R"
+    author: "R Foundation"
+    url: "https://www.r-project.org"
+
+  - type: software
+    title: "Python (pandas, matplotlib)"
+    author: "Python Community"
+    url: "https://www.python.org"
+
+# Related Packs
+related_packs:
+  - id: MATH-101
+    relationship: "Mathematics provides foundational numeracy and quantitative reasoning"
+
+  - id: STAT-101
+    relationship: "Statistics provides advanced probabilistic foundations for data inference"
+
+  - id: CRIT-101
+    relationship: "Critical thinking skills apply to evaluating data claims and methods"
+
+  - id: ECON-101
+    relationship: "Economics applies data analysis to understand markets and systems"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "chart-bar"
+    color: "#9C27B0"
+    position: Applied
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "DATA-101-data-collection"
+    - "DATA-101-exploratory-analysis"
+    - "DATA-101-visualization-patterns"
+    - "DATA-101-statistical-reasoning"
+    - "DATA-101-ethics-framework"
+
+# File References
+files:
+  vision_document: "DATA-101-vision.md"
+  modules_definition: "DATA-101-modules.yaml"
+  activities: "DATA-101-activities.json"
+  assessment: "DATA-101-assessment.md"
+  resources: "DATA-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five modules covering collection, exploration, visualization, inference, and ethics"
+      - "Contributed 50 activities across all modules and grade levels"
+      - "Aligned to Common Core and NGSS standards"
+      - "Emphasis on reasoning, critical thinking, and responsibility"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"

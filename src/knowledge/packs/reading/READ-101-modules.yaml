@@ -1,0 +1,309 @@
+---
+# READ-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: READ-101
+pack_name: "Reading & Literacy -- Foundational Knowledge Pack"
+
+modules:
+  - id: READ-101-M1
+    name: "Foundations of Reading"
+    description: "Phonemic awareness, phonics, decoding, sight word recognition, fluency building, and print concepts -- the essential building blocks that enable all subsequent reading"
+
+    learning_outcomes:
+      - "Identify and manipulate individual sounds (phonemes) in spoken words"
+      - "Apply systematic phonics knowledge to decode unfamiliar words"
+      - "Recognize high-frequency sight words automatically"
+      - "Read grade-level text with appropriate fluency, accuracy, and expression"
+      - "Demonstrate understanding of basic print concepts and text directionality"
+
+    topics:
+      - "Phonemic Awareness & Sound Manipulation"
+      - "Systematic Phonics & Decoding Strategies"
+      - "Sight Word Recognition & Automaticity"
+      - "Fluency Development & Prosody"
+      - "Print Concepts & Text Features"
+      - "Listening Comprehension & Retelling"
+
+    grade_levels: ["PreK", "K", "1", "2", "3", "4", "5"]
+
+    time_estimates:
+      foundation: 40
+      elementary: 25
+      middle: 10
+
+    prerequisite_modules: []
+
+    activities:
+      count: 6
+      examples:
+        - "Phonics Sound Safari"
+        - "Sight Word Memory Match"
+        - "Decoding Detective"
+        - "Fluency Performance Theater"
+        - "Read-Aloud Listening Lab"
+        - "Letter-Sound Construction"
+
+    assessments:
+      - "Can student segment and blend individual phonemes?"
+      - "Does student apply decoding strategies to unfamiliar words?"
+      - "Can student read grade-level text fluently with expression?"
+      - "Does student recognize high-frequency sight words automatically?"
+
+  - id: READ-101-M2
+    name: "Vocabulary & Language"
+    description: "Building word knowledge through context clues, morphological analysis, academic vocabulary, word relationships, and dictionary skills -- expanding the word knowledge that fuels comprehension"
+
+    learning_outcomes:
+      - "Use context clues systematically to determine word meaning"
+      - "Analyze word structure using roots, prefixes, and suffixes"
+      - "Acquire and use academic vocabulary across disciplines"
+      - "Understand word relationships including synonyms, antonyms, and connotation"
+      - "Use reference tools to confirm and extend word knowledge"
+
+    topics:
+      - "Context Clue Strategies"
+      - "Morphological Awareness (Roots, Prefixes, Suffixes)"
+      - "Academic & Domain-Specific Vocabulary"
+      - "Word Relationships & Connotation"
+      - "Dictionary & Reference Skills"
+      - "Word Consciousness & Language Play"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 30
+      high: 20
+
+    prerequisite_modules: [READ-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Context Clue Detective"
+        - "Word Root Explorer"
+        - "Vocabulary Concept Map"
+        - "Academic Word Wall"
+        - "Shades of Meaning Spectrum"
+        - "Word Collection Journal"
+
+    assessments:
+      - "Can student use context clues to determine unfamiliar word meanings?"
+      - "Does student analyze word parts to infer meaning?"
+      - "Can student use academic vocabulary appropriately in speech and writing?"
+      - "Does student demonstrate understanding of word relationships and connotation?"
+
+  - id: READ-101-M3
+    name: "Comprehension & Meaning-Making"
+    description: "Explicit instruction in comprehension strategies: predicting, questioning, summarizing, visualizing, making connections, monitoring understanding, and recognizing text structure"
+
+    learning_outcomes:
+      - "Apply multiple comprehension strategies flexibly while reading"
+      - "Monitor own comprehension and apply fix-up strategies when understanding breaks down"
+      - "Summarize texts accurately, distinguishing main ideas from supporting details"
+      - "Make meaningful connections between text, self, other texts, and the world"
+      - "Recognize and use text structure to guide comprehension and prediction"
+
+    topics:
+      - "Predicting & Anticipating"
+      - "Questioning Before, During, and After Reading"
+      - "Summarizing & Determining Importance"
+      - "Visualizing & Mental Imagery"
+      - "Making Connections (Text-to-Self, Text-to-Text, Text-to-World)"
+      - "Comprehension Monitoring & Fix-Up Strategies"
+      - "Text Structure Recognition"
+
+    grade_levels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 35
+      middle: 40
+      high: 25
+
+    prerequisite_modules: [READ-101-M1, READ-101-M2]
+
+    activities:
+      count: 7
+      examples:
+        - "Story Map Construction"
+        - "Think-Aloud Reading Walk"
+        - "Question Generation Challenge"
+        - "Summarize in Six Words"
+        - "Connection Web"
+        - "Comprehension Repair Workshop"
+        - "Text Structure Sort"
+
+    assessments:
+      - "Can student summarize a text accurately and concisely?"
+      - "Does student generate meaningful questions while reading?"
+      - "Can student identify when comprehension breaks down and apply fix-up strategies?"
+      - "Does student recognize and use text structure to aid comprehension?"
+
+  - id: READ-101-M4
+    name: "Critical Reading & Analysis"
+    description: "Evaluating author's purpose, detecting bias, assessing evidence quality, analyzing arguments, comparing sources, and developing the habits of critical, thoughtful readers"
+
+    learning_outcomes:
+      - "Identify author's purpose, audience, and perspective in diverse texts"
+      - "Evaluate the quality and relevance of evidence in nonfiction texts"
+      - "Detect bias in word choice, framing, and selection of information"
+      - "Analyze the logical structure of arguments and identify common fallacies"
+      - "Compare multiple sources on the same topic to develop nuanced understanding"
+
+    topics:
+      - "Author's Purpose & Audience Awareness"
+      - "Bias Detection & Perspective Analysis"
+      - "Evidence Evaluation & Claim Assessment"
+      - "Logical Reasoning & Fallacy Recognition"
+      - "Comparative Reading & Source Synthesis"
+      - "Source Credibility Evaluation"
+
+    grade_levels: ["4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 15
+      middle: 35
+      high: 40
+
+    prerequisite_modules: [READ-101-M3]
+
+    activities:
+      count: 6
+      examples:
+        - "News Article Bias Detective"
+        - "Compare Two Versions of a Story"
+        - "Argument Mapping"
+        - "Source Credibility Evaluation"
+        - "Fact-Check Challenge"
+        - "Perspective-Taking Exercise"
+
+    assessments:
+      - "Can student identify author's purpose and intended audience?"
+      - "Does student evaluate evidence quality in nonfiction texts?"
+      - "Can student detect bias and explain how framing shapes meaning?"
+      - "Does student compare multiple sources and synthesize findings?"
+
+  - id: READ-101-M5
+    name: "Reading Across the Curriculum"
+    description: "Discipline-specific reading strategies for science, history, mathematics, technical texts, and digital media -- adapting reading approach to match the demands of different text types"
+
+    learning_outcomes:
+      - "Apply appropriate reading strategies for science texts, including integration of figures, tables, and captions"
+      - "Analyze historical primary sources using sourcing, contextualization, and corroboration"
+      - "Read mathematical texts with precision, translating between verbal and symbolic representations"
+      - "Follow procedural and technical texts accurately, cross-referencing diagrams and instructions"
+      - "Evaluate digital sources for credibility, navigating online information environments critically"
+
+    topics:
+      - "Reading Science Texts"
+      - "Reading Historical & Social Studies Texts"
+      - "Reading Mathematical Texts"
+      - "Reading Technical & Procedural Texts"
+      - "Digital & Online Reading"
+      - "Cross-Discipline Vocabulary Awareness"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 15
+      middle: 30
+      high: 35
+
+    prerequisite_modules: [READ-101-M3]
+
+    activities:
+      count: 6
+      examples:
+        - "Science Text Anatomy"
+        - "Primary Source Analysis"
+        - "Math Word Problem Translation"
+        - "Follow the Instructions Challenge"
+        - "Website Evaluation Workshop"
+        - "Cross-Discipline Vocabulary Comparison"
+
+    assessments:
+      - "Can student adjust reading strategies for different disciplines?"
+      - "Does student integrate visual and textual information in science texts?"
+      - "Can student analyze historical sources with appropriate sourcing questions?"
+      - "Does student evaluate digital sources for credibility effectively?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Active Meaning Construction"
+    description: "Ability to build understanding from text through strategic, purposeful reading -- not passive word pronunciation but active thinking"
+    assessed_in: [READ-101-M1, READ-101-M2, READ-101-M3, READ-101-M4]
+
+  - name: "Vocabulary Independence"
+    description: "Ability to determine the meaning of unfamiliar words through context, morphology, and reference tools without external help"
+    assessed_in: [READ-101-M1, READ-101-M2, READ-101-M3, READ-101-M5]
+
+  - name: "Critical Evaluation"
+    description: "Habit of questioning texts rather than passively accepting them -- evaluating evidence, detecting bias, and comparing perspectives"
+    assessed_in: [READ-101-M3, READ-101-M4, READ-101-M5]
+
+  - name: "Adaptive Reading"
+    description: "Ability to adjust reading strategies, pace, and approach based on text type, purpose, and difficulty"
+    assessed_in: [READ-101-M1, READ-101-M3, READ-101-M4, READ-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Sequential Pathway"
+    description: "M1 -> M2 -> M3 -> M4 -> M5, building systematically from foundations to application"
+    rationale: "Follows the natural development of reading skills: decode first, build vocabulary, develop comprehension, add critical analysis, then apply across disciplines."
+
+  - name: "Integrated Pathway"
+    description: "Begin M1 and M2 simultaneously; add M3 as fluency develops; integrate M4 and M5 as comprehension strengthens"
+    rationale: "Vocabulary and decoding develop in parallel. Comprehension strategies can be taught alongside fluency. Critical reading and cross-disciplinary skills emerge from strong comprehension."
+
+  - name: "Remediation Pathway"
+    description: "Start with M1 assessment to identify gaps; focus on weakest area; spiral through M2-M3 before advancing to M4-M5"
+    rationale: "For older learners who missed foundational skills. Diagnose specific gaps (phonics? fluency? vocabulary?) and target instruction to fill them before building higher-order skills."
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same introduction structure: What It Teaches, Interactive Elements, Technical Implementation Notes"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Interactive elements follow a consistent template across all modules"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure (Beginning, Developing, Proficient, Advanced) across all modules"
+    cached: true
+
+  - pattern: "Parent Guidance"
+    description: "Parent guidance follows the same practical-advice format throughout"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner spontaneously applies decoding strategies to unfamiliar words"
+    - "When learner asks questions about a text without prompting"
+    - "When learner identifies bias or author's purpose independently"
+    - "When learner adjusts reading strategy for different text types"
+    - "When learner monitors own comprehension and applies fix-up strategies"
+
+  pattern_detection:
+    - "Effective decoding strategy sequences"
+    - "Successful vocabulary inference workflows"
+    - "Productive comprehension monitoring patterns"
+    - "Critical reading evaluation protocols"
+
+  skill_promotion:
+    - "Promote systematic word attack patterns to reusable skills"
+    - "Create comprehension strategy templates from successful reading sessions"
+    - "Build critical reading checklists from observed evaluation patterns"
+    - "Develop cross-disciplinary reading guides from adaptive reading behaviors"
+
+# This YAML defines the modular structure for the READ-101 pack and enables
+# skill-creator to orchestrate learning experiences centered on reading and literacy.

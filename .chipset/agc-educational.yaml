@@ -1,0 +1,181 @@
+# AGC Educational Chipset Configuration
+# Assembles 5 skills, 3 agents, and 1 team into a unified routing configuration.
+# Generated during Phase 222 (AGC GSD-OS Integration).
+
+schema_version: "1.0"
+
+chipset:
+  name: agc-educational
+  description: >
+    Educational Apollo Guidance Computer chipset for GSD-OS.
+    Provides AGC simulation, DSKY interface, assembly editor,
+    and executive monitor as composable blocks within the
+    blueprint editor. 5 skills, 3 agents, 1 team.
+    Total token budget: 6.0% (under 40% ceiling).
+  version: "1.0.0"
+  project: gsd-skill-creator
+  created: "2026-02-19"
+  updated: "2026-02-19"
+
+skills:
+  - name: agc-architecture-reference
+    source: infra/packs/agc/skills/agc-architecture-reference/SKILL.md
+    token_budget: "2.0%"
+    priority: 70
+    team: agc-education
+    agents: [agc-study-guide]
+    plan_origin: "222-agc-gsdos-integration"
+    phase_origin: "222"
+    enabled: true
+    dependencies: []
+
+  - name: agc-executive-guide
+    source: infra/packs/agc/skills/agc-executive-guide/SKILL.md
+    token_budget: "1.0%"
+    priority: 65
+    team: agc-education
+    agents: [agc-study-guide]
+    plan_origin: "222-agc-gsdos-integration"
+    phase_origin: "222"
+    enabled: true
+    dependencies: [agc-architecture-reference]
+
+  - name: agc-assembler
+    source: infra/packs/agc/skills/agc-assembler/SKILL.md
+    token_budget: "1.5%"
+    priority: 60
+    team: agc-education
+    agents: [agc-simulator]
+    plan_origin: "222-agc-gsdos-integration"
+    phase_origin: "222"
+    enabled: true
+    dependencies: []
+
+  - name: agc-debugger
+    source: infra/packs/agc/skills/agc-debugger/SKILL.md
+    token_budget: "1.0%"
+    priority: 55
+    team: agc-education
+    agents: [agc-simulator]
+    plan_origin: "222-agc-gsdos-integration"
+    phase_origin: "222"
+    enabled: true
+    dependencies: [agc-assembler]
+
+  - name: agc-dsky-commands
+    source: infra/packs/agc/skills/agc-dsky-commands/SKILL.md
+    token_budget: "0.5%"
+    priority: 50
+    team: agc-education
+    agents: [agc-exercise-runner]
+    plan_origin: "222-agc-gsdos-integration"
+    phase_origin: "222"
+    enabled: true
+    dependencies: []
+
+agents:
+  - name: agc-simulator
+    description: "Manages AGC simulation execution: loading programs, running, stepping, breakpoints"
+    skills: [agc-assembler, agc-debugger]
+    team: agc-education
+    model: opus
+    tools: "Read, Write, Bash, Glob, Grep"
+
+  - name: agc-study-guide
+    description: "Guides learners through AGC concepts using the architecture mapping and catalog"
+    skills: [agc-architecture-reference, agc-executive-guide]
+    team: agc-education
+    model: opus
+    tools: "Read, Glob, Grep"
+
+  - name: agc-exercise-runner
+    description: "Manages educational exercises: presents challenges, validates solutions, provides hints"
+    skills: [agc-assembler, agc-dsky-commands, agc-executive-guide]
+    team: agc-education
+    model: opus
+    tools: "Read, Write, Bash, Glob, Grep"
+
+teams:
+  - name: agc-education
+    description: "Apollo Guidance Computer educational simulation team"
+    topology: sequential
+    lead_agent: agc-study-guide
+    members: [agc-simulator, agc-study-guide, agc-exercise-runner]
+    resource_locks:
+      - "src/agc/**"
+      - "infra/packs/agc/**"
+    sync_points:
+      - event: "simulation-ready"
+        action: "Signal that AGC simulator is loaded and ready for exercises"
+    message_bus: ".planning/artifacts/agc-education/"
+
+routing:
+  rules:
+    - intent_pattern: "agc|apollo.*guidance|guidance.*computer"
+      team: agc-education
+      agents: [agc-study-guide]
+      skills: [agc-architecture-reference]
+      priority: 70
+      description: "AGC hardware and software architecture reference"
+
+    - intent_pattern: "assemble|assembly.*agc|agc.*instruction|write.*agc"
+      team: agc-education
+      agents: [agc-simulator]
+      skills: [agc-assembler]
+      priority: 60
+      description: "AGC assembly language reference and assistance"
+
+    - intent_pattern: "debug.*agc|breakpoint|step.*through|register.*inspect"
+      team: agc-education
+      agents: [agc-simulator]
+      skills: [agc-debugger]
+      priority: 55
+      description: "AGC program debugging with register and memory inspection"
+
+    - intent_pattern: "verb.*noun|dsky|display.*keyboard|key.*enter"
+      team: agc-education
+      agents: [agc-exercise-runner]
+      skills: [agc-dsky-commands]
+      priority: 50
+      description: "DSKY VERB/NOUN command reference and guidance"
+
+    - intent_pattern: "executive|scheduler|waitlist|core.*set|bailout|1202.*alarm"
+      team: agc-education
+      agents: [agc-study-guide]
+      skills: [agc-executive-guide]
+      priority: 65
+      description: "AGC Executive scheduler educational guide"
+
+  default_team: agc-education
+
+  disambiguation:
+    - patterns: ["assemble|assembly", "debug|breakpoint"]
+      strategy: specificity
+      winner: "agc-assembler for writing code, agc-debugger for runtime inspection"
+      rationale: "agc-assembler handles source code writing and assembly; agc-debugger handles runtime register/memory inspection and breakpoints"
+
+    - patterns: ["executive|scheduler", "agc|apollo"]
+      strategy: specificity
+      winner: "agc-executive-guide for scheduler-specific, agc-architecture-reference for general"
+      rationale: "agc-executive-guide covers scheduler internals (core sets, waitlist, alarms); agc-architecture-reference covers general AGC hardware and software architecture"
+
+budget:
+  ceiling_percent: 40
+  headroom_percent: 34
+  skill_budgets:
+    agc-architecture-reference: "2.0%"
+    agc-executive-guide: "1.0%"
+    agc-assembler: "1.5%"
+    agc-debugger: "1.0%"
+    agc-dsky-commands: "0.5%"
+  team_budgets:
+    agc-education: "6%"
+  loading_order:
+    # Level 0: No dependencies (loaded first, ordered by priority)
+    - agc-architecture-reference
+    - agc-assembler
+    - agc-dsky-commands
+    # Level 1: Dependencies on Level 0 skills
+    - agc-executive-guide
+    - agc-debugger
+  total_allocated: "6.0%"

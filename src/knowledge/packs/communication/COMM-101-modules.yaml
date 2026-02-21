@@ -1,0 +1,306 @@
+---
+# COMM-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: COMM-101
+pack_name: "Communication & Speech — Foundational Knowledge Pack"
+
+modules:
+  - id: COMM-101-M1
+    name: "Foundations of Speaking & Listening"
+    description: "Building the fundamental communication loop: expressing ideas clearly, listening actively, taking turns, asking good questions, and responding to show understanding"
+
+    learning_outcomes:
+      - "Organize thoughts before speaking to communicate clearly"
+      - "Listen actively by attending, paraphrasing, and questioning"
+      - "Take turns in conversation equitably and respectfully"
+      - "Ask open-ended and clarifying questions to deepen understanding"
+      - "Respond to others in ways that demonstrate comprehension"
+
+    topics:
+      - "Organizing Thoughts Before Speaking"
+      - "Clear & Complete Expression"
+      - "Turn-Taking & Conversational Flow"
+      - "Active Listening Techniques"
+      - "Asking Good Questions"
+      - "Paraphrasing & Reflective Response"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 30
+      elementary: 25
+      middle: 15
+      high: 10
+
+    prerequisite_modules: []
+
+    activities:
+      count: 6
+      examples:
+        - "Two-Minute Expert Talk"
+        - "Active Listening Pair Exercise"
+        - "Question Quality Competition"
+        - "Paraphrase Relay"
+        - "Telephone Variations"
+        - "Partner Interview & Introduction"
+
+    assessments:
+      - "Can student organize thoughts before speaking?"
+      - "Does student demonstrate active listening through paraphrasing?"
+      - "Can student ask open-ended, clarifying questions?"
+      - "Does student take turns and share speaking time equitably?"
+
+  - id: COMM-101-M2
+    name: "Nonverbal Communication & Presence"
+    description: "Understanding and using the silent language of body posture, facial expression, gesture, tone of voice, eye contact, and spatial awareness to reinforce verbal messages and read others accurately"
+
+    learning_outcomes:
+      - "Identify and interpret common nonverbal cues in others"
+      - "Use body language intentionally to reinforce verbal messages"
+      - "Control voice qualities (volume, pace, pitch, tone) for clarity and impact"
+      - "Maintain culturally appropriate eye contact with awareness of variation"
+      - "Recognize congruence and incongruence between verbal and nonverbal messages"
+
+    topics:
+      - "Body Language & Posture"
+      - "Voice Control & Vocal Variety"
+      - "Eye Contact & Gaze"
+      - "Gesture & Movement"
+      - "Spatial Awareness & Proxemics"
+      - "Emotional Regulation & Presence"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 20
+      middle: 15
+      high: 10
+
+    prerequisite_modules: [COMM-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Emotion Charades"
+        - "Mirror Exercise"
+        - "Voice-Only Expression"
+        - "Video Sound-Off Analysis"
+        - "Spatial Awareness Game"
+        - "Congruence Detective"
+
+    assessments:
+      - "Can student identify emotions from nonverbal cues?"
+      - "Does student use body language intentionally to support messages?"
+      - "Can student control voice qualities for different effects?"
+      - "Does student recognize when verbal and nonverbal messages conflict?"
+
+  - id: COMM-101-M3
+    name: "Structured Presentation"
+    description: "Designing, preparing, and delivering organized talks to audiences of various sizes, including audience analysis, structural design, visual aids, delivery techniques, and managing presentation anxiety"
+
+    learning_outcomes:
+      - "Analyze an audience to determine appropriate content, style, and depth"
+      - "Organize a presentation with clear structure (opening, body, conclusion)"
+      - "Create visual aids that enhance rather than replace the spoken message"
+      - "Deliver presentations with confident voice, posture, and eye contact"
+      - "Manage presentation anxiety through preparation and cognitive strategies"
+
+    topics:
+      - "Audience Analysis"
+      - "Structural Design & Organization"
+      - "Visual Aid Creation"
+      - "Storytelling in Presentations"
+      - "Delivery Techniques"
+      - "Managing Presentation Anxiety"
+
+    grade_levels: ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 25
+      middle: 30
+      high: 25
+
+    prerequisite_modules: [COMM-101-M1, COMM-101-M2]
+
+    activities:
+      count: 6
+      examples:
+        - "My Passion Presentation"
+        - "Teach-Back Challenge"
+        - "Slide Surgery Workshop"
+        - "Sixty-Second Pitch"
+        - "Rehearsal Partner Feedback"
+        - "Anxiety Management Workshop"
+
+    assessments:
+      - "Can student organize a presentation with clear structure?"
+      - "Does student adapt content and style to the audience?"
+      - "Can student deliver with confident voice and posture?"
+      - "Does student use visual aids that enhance the message?"
+
+  - id: COMM-101-M4
+    name: "Discussion, Debate & Collaboration"
+    description: "Engaging in structured discussions, formal debates, and collaborative dialogue with skills in turn-taking, building on others' ideas, constructive disagreement, evidence-based argumentation, and consensus building"
+
+    learning_outcomes:
+      - "Participate equitably in group discussions using structured protocols"
+      - "Build on others' ideas and connect contributions constructively"
+      - "Disagree respectfully using evidence rather than personal attacks"
+      - "Give and receive constructive, specific, actionable feedback"
+      - "Facilitate group discussions and guide consensus-building processes"
+
+    topics:
+      - "Structured Discussion Protocols"
+      - "Building on Others' Ideas"
+      - "Constructive Disagreement"
+      - "Evidence-Based Argumentation"
+      - "Giving & Receiving Feedback"
+      - "Facilitation & Consensus Building"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 30
+
+    prerequisite_modules: [COMM-101-M3]
+
+    activities:
+      count: 6
+      examples:
+        - "Fishbowl Discussion"
+        - "Structured Debate"
+        - "Think-Pair-Share with Accountability"
+        - "Socratic Seminar"
+        - "Feedback Workshop"
+        - "Devil's Advocate Exercise"
+
+    assessments:
+      - "Can student participate equitably in structured discussion?"
+      - "Does student build on others' ideas constructively?"
+      - "Can student disagree respectfully with evidence?"
+      - "Does student give specific, actionable feedback?"
+
+  - id: COMM-101-M5
+    name: "Communication Across Contexts"
+    description: "Adapting communication skills to different situations, audiences, cultures, and media including digital communication, cross-cultural awareness, professional contexts, and communication ethics"
+
+    learning_outcomes:
+      - "Shift register and style appropriately between formal and informal contexts"
+      - "Communicate effectively across digital media (email, messaging, video)"
+      - "Navigate cross-cultural communication differences with awareness and respect"
+      - "Apply communication skills in professional contexts (interviews, meetings)"
+      - "Practice communication ethics including honesty, attribution, and consent"
+
+    topics:
+      - "Register Shifting (Formal vs. Informal)"
+      - "Digital Communication Literacy"
+      - "Cross-Cultural Communication"
+      - "Media Literacy & Message Shaping"
+      - "Professional Communication"
+      - "Communication Ethics"
+
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      middle: 20
+      high: 25
+
+    prerequisite_modules: [COMM-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Same Message Different Audience"
+        - "Medium Selection Challenge"
+        - "Cross-Cultural Role Play"
+        - "Professional Scenario Simulation"
+        - "Media Analysis Exercise"
+        - "Conflict Resolution Simulation"
+
+    assessments:
+      - "Can student adapt communication register to different contexts?"
+      - "Does student choose appropriate media for different situations?"
+      - "Can student navigate cross-cultural communication differences?"
+      - "Does student apply communication ethics consistently?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Expressive Clarity"
+    description: "Ability to organize and deliver ideas clearly across verbal, nonverbal, and visual channels"
+    assessed_in: [COMM-101-M1, COMM-101-M2, COMM-101-M3]
+
+  - name: "Receptive Understanding"
+    description: "Ability to listen actively, interpret nonverbal cues, and comprehend messages accurately across contexts"
+    assessed_in: [COMM-101-M1, COMM-101-M2, COMM-101-M4]
+
+  - name: "Audience Awareness"
+    description: "Ability to analyze and adapt to different audiences, contexts, cultures, and media"
+    assessed_in: [COMM-101-M3, COMM-101-M4, COMM-101-M5]
+
+  - name: "Collaborative Communication"
+    description: "Ability to engage in productive group dialogue, give and receive feedback, and build shared understanding"
+    assessed_in: [COMM-101-M1, COMM-101-M4, COMM-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4, with M5 as enrichment throughout"
+    rationale: "Follows the natural communication development sequence: speak and listen, then add nonverbal awareness, then structured presentation, then collaborative dialogue. Contextual adaptation deepens at any stage."
+
+  - name: "Spiral Pathway"
+    description: "Revisit all five modules repeatedly at increasing depth and sophistication"
+    rationale: "Communication skills deepen with practice. A second pass through active listening after learning presentation skills produces more nuanced listening."
+
+  - name: "Interest-Led Pathway"
+    description: "Choose module based on interest; M1 is prerequisite foundation only"
+    rationale: "A learner drawn to debate might start with M4 while building fundamentals through M1 as needed."
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same introduction structure: What It Teaches, Key Skills, Why It Matters, Interactive Elements, Technical Implementation Notes"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Interactive elements follow a consistent template across all modules"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure (Beginning, Developing, Proficient, Advanced) across all modules"
+    cached: true
+
+  - pattern: "Parent Guidance"
+    description: "Parent guidance follows the same conversation-and-practice format throughout"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner paraphrases accurately without prompting"
+    - "When learner adjusts communication style to match the audience"
+    - "When learner gives specific, constructive feedback spontaneously"
+    - "When learner facilitates a discussion effectively"
+    - "When learner manages presentation anxiety independently"
+
+  pattern_detection:
+    - "Effective active listening sequences"
+    - "Successful audience adaptation strategies"
+    - "Constructive feedback patterns"
+    - "Discussion facilitation techniques"
+
+  skill_promotion:
+    - "Promote effective listening patterns to reusable skills"
+    - "Create presentation preparation templates from successful workflows"
+    - "Build feedback frameworks from observed best practices"
+    - "Develop discussion facilitation protocols from effective sessions"
+
+# This YAML defines the modular structure for the COMM-101 pack and enables
+# skill-creator to orchestrate learning experiences centered on communication mastery.

@@ -1,0 +1,210 @@
+# GSD Knowledge World Schematic Catalog
+# Authoritative index of all schematics in the library.
+# Every .litematic file MUST have an entry here.
+#
+# Naming convention: category-name-version.litematic
+#   category: template | architecture | education | amiga | community
+#   name: lowercase-hyphenated descriptive name
+#   version: semantic version with dashes (1-0, 1-1, 2-0)
+
+catalog_version: "1.0"
+naming_convention: "category-name-version.litematic"
+generated_at: null  # Updated when validate-schematics.sh runs
+
+categories:
+  templates:
+    description: "Reusable building templates for Knowledge World construction"
+    directory: "templates/"
+  architecture:
+    description: "System architecture visualizations (pipelines, topologies, schemas)"
+    directory: "architecture/"
+  education:
+    description: "Concept-teaching builds from the educational curriculum"
+    directory: "education/"
+  amiga:
+    description: "Amiga-inspired designs and pixel art recreations"
+    directory: "amiga/"
+  community:
+    description: "User-contributed schematics"
+    directory: "community/"
+
+schematics:
+  - name: "Meeting Room"
+    id: meeting-room
+    filename: "template-meeting-room-1-0.litematic"
+    file_path: "templates/template-meeting-room-1-0.litematic"
+    spec_file: "specs/meeting-room.yaml"
+    category: templates
+    version: "1.0"
+    description: "Enclosed room for small group discussions with seating and table"
+    dimensions:
+      width: 11
+      height: 6
+      depth: 9
+    block_count_estimate: 350
+    primary_blocks: ["quartz_block", "oak_planks", "glass_pane", "oak_stairs"]
+    tags: ["interior", "collaborative", "small"]
+    district: "Community"
+    status: "specified"
+
+  - name: "Presentation Hall"
+    id: presentation-hall
+    filename: "template-presentation-hall-1-0.litematic"
+    file_path: "templates/template-presentation-hall-1-0.litematic"
+    spec_file: "specs/presentation-hall.yaml"
+    category: templates
+    version: "1.0"
+    description: "Large hall with tiered seating, display wall, and podium for presentations"
+    dimensions:
+      width: 21
+      height: 10
+      depth: 15
+    block_count_estimate: 1200
+    primary_blocks: ["stone_bricks", "dark_oak_planks", "glowstone", "oak_stairs", "black_concrete"]
+    tags: ["interior", "presentation", "large"]
+    district: "Community"
+    status: "specified"
+
+  - name: "Workshop"
+    id: workshop
+    filename: "template-workshop-1-0.litematic"
+    file_path: "templates/template-workshop-1-0.litematic"
+    spec_file: "specs/workshop.yaml"
+    category: templates
+    version: "1.0"
+    description: "Open-plan workspace with crafting stations, storage, and materials access"
+    dimensions:
+      width: 17
+      height: 7
+      depth: 13
+    block_count_estimate: 800
+    primary_blocks: ["spruce_planks", "crafting_table", "chest", "barrel", "lantern"]
+    tags: ["interior", "workshop", "medium"]
+    district: "Workshop"
+    status: "specified"
+
+  - name: "Server Room"
+    id: server-room
+    filename: "template-server-room-1-0.litematic"
+    file_path: "templates/template-server-room-1-0.litematic"
+    spec_file: "specs/server-room.yaml"
+    category: templates
+    version: "1.0"
+    description: "Rack-inspired room with redstone circuits representing server hardware"
+    dimensions:
+      width: 13
+      height: 8
+      depth: 11
+    block_count_estimate: 600
+    primary_blocks: ["iron_block", "redstone_lamp", "repeater", "comparator", "observer"]
+    tags: ["interior", "technical", "redstone", "medium"]
+    district: "Hardware"
+    status: "specified"
+
+  - name: "Library"
+    id: library
+    filename: "template-library-1-0.litematic"
+    file_path: "templates/template-library-1-0.litematic"
+    spec_file: "specs/library.yaml"
+    category: templates
+    version: "1.0"
+    description: "Knowledge repository with bookshelves, reading areas, and lecterns"
+    dimensions:
+      width: 15
+      height: 9
+      depth: 15
+    block_count_estimate: 900
+    primary_blocks: ["bookshelf", "dark_oak_planks", "lectern", "lantern", "carpet"]
+    tags: ["interior", "knowledge", "medium"]
+    district: "Software"
+    status: "specified"
+
+  - name: "Garden"
+    id: garden
+    filename: "template-garden-1-0.litematic"
+    file_path: "templates/template-garden-1-0.litematic"
+    spec_file: "specs/garden.yaml"
+    category: templates
+    version: "1.0"
+    description: "Outdoor collaboration space with paths, seating, water features, and vegetation"
+    dimensions:
+      width: 21
+      height: 5
+      depth: 21
+    block_count_estimate: 700
+    primary_blocks: ["grass_block", "oak_leaves", "stone_brick_slab", "water", "lantern"]
+    tags: ["exterior", "collaborative", "large", "nature"]
+    district: "Community"
+    status: "specified"
+
+  - name: "Bridge"
+    id: bridge
+    filename: "template-bridge-1-0.litematic"
+    file_path: "templates/template-bridge-1-0.litematic"
+    spec_file: "specs/bridge.yaml"
+    category: templates
+    version: "1.0"
+    description: "Connecting structure between districts, symbolizing conceptual transitions"
+    dimensions:
+      width: 5
+      height: 7
+      depth: 25
+    block_count_estimate: 450
+    primary_blocks: ["stone_bricks", "stone_brick_stairs", "iron_bars", "lantern", "stone_brick_wall"]
+    tags: ["exterior", "connection", "structural"]
+    district: "Pathways"
+    status: "specified"
+
+  - name: "Gateway"
+    id: gateway
+    filename: "template-gateway-1-0.litematic"
+    file_path: "templates/template-gateway-1-0.litematic"
+    spec_file: "specs/gateway.yaml"
+    category: templates
+    version: "1.0"
+    description: "District entrance archway with signage and color-coded identity"
+    dimensions:
+      width: 9
+      height: 11
+      depth: 5
+    block_count_estimate: 300
+    primary_blocks: ["stone_bricks", "colored_concrete", "oak_sign", "lantern", "banner"]
+    tags: ["exterior", "entrance", "wayfinding"]
+    district: "All"
+    status: "specified"
+
+  - name: "Tower"
+    id: tower
+    filename: "template-tower-1-0.litematic"
+    file_path: "templates/template-tower-1-0.litematic"
+    spec_file: "specs/tower.yaml"
+    category: templates
+    version: "1.0"
+    description: "Landmark beacon structure visible from distance, used for wayfinding"
+    dimensions:
+      width: 7
+      height: 25
+      depth: 7
+    block_count_estimate: 550
+    primary_blocks: ["stone_bricks", "glass", "beacon", "glowstone", "stone_brick_stairs"]
+    tags: ["exterior", "landmark", "wayfinding", "tall"]
+    district: "All"
+    status: "specified"
+
+  - name: "Observatory"
+    id: observatory
+    filename: "template-observatory-1-0.litematic"
+    file_path: "templates/template-observatory-1-0.litematic"
+    spec_file: "specs/observatory.yaml"
+    category: templates
+    version: "1.0"
+    description: "Elevated viewing platform for surveying districts and understanding spatial relationships"
+    dimensions:
+      width: 13
+      height: 15
+      depth: 13
+    block_count_estimate: 700
+    primary_blocks: ["stone_bricks", "glass", "dark_oak_stairs", "lantern", "stone_brick_wall"]
+    tags: ["exterior", "viewing", "landmark", "tall"]
+    district: "Spawn"
+    status: "specified"

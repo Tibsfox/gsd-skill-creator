@@ -16,6 +16,7 @@ pub fn detect_tmux() -> Option<String> {
 }
 
 /// Return the tmux version string (e.g., "tmux 3.4").
+#[allow(dead_code)] // awaiting tmux info command
 pub fn tmux_version() -> Option<String> {
     let output = Command::new("tmux").arg("-V").output().ok()?;
     if output.status.success() {
