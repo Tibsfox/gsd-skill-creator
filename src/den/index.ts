@@ -6,10 +6,11 @@
  * pruning, the dispatcher agent, the coordinator agent, the configurator
  * agent, the relay agent, the monitor agent, the planner agent,
  * the work intake procedure, the executor agent, the verifier agent,
- * the sentinel agent, and the chipset configuration module.
+ * the sentinel agent, the chipset configuration module, the chronicler
+ * agent, the dashboard data model, and the communication log visualizer.
  *
  * Usage:
- *   import { createDispatcher, createRelay, createPlanner, createExecutor, createVerifier, createSentinel, createChipset, processIntake, sendMessage, BusConfigSchema } from './den/index.js';
+ *   import { createDispatcher, createRelay, createPlanner, createExecutor, createVerifier, createSentinel, createChipset, createChronicler, createDashboard, createCommsLog, processIntake, sendMessage, BusConfigSchema } from './den/index.js';
  */
 
 // Types and schemas
@@ -168,3 +169,32 @@ export {
   type ChipsetConfig, type StaffPosition, type TopologyDefinition,
   type ReproducibilityResult,
 } from './chipset.js';
+
+// Chronicler
+export {
+  ChroniclerConfigSchema, ChroniclerEntrySchema, BriefingSchema,
+  appendChroniclerEntry, readChroniclerLog,
+  generateBriefing, formatBriefingMarkdown,
+  Chronicler, createChronicler,
+  type ChroniclerEntry, type Briefing, type ChroniclerConfig,
+} from './chronicler.js';
+
+// Dashboard
+export {
+  DashboardConfigSchema, PositionStateSchema, StaffIndicatorsSchema,
+  PositionHealthSchema, DenSnapshotSchema,
+  STAFF_AGENT_IDS,
+  collectPositionStates, collectStaffIndicators, collectPositionHealth,
+  assembleDenSnapshot, formatDenSnapshotMarkdown,
+  Dashboard, createDashboard,
+  type PositionState, type StaffIndicators, type PositionHealth,
+  type DenSnapshot, type DashboardConfig,
+} from './dashboard.js';
+
+// Communication Log
+export {
+  CommsLogConfigSchema, TimelineEntrySchema, CommsTimelineSchema,
+  scanBusMessages, buildTimeline, filterTimeline, formatTimelineMarkdown,
+  CommsLog, createCommsLog,
+  type TimelineEntry, type CommsTimeline, type CommsLogConfig,
+} from './comms-log.js';
