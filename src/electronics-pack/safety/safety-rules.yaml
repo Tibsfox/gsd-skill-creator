@@ -1,0 +1,51 @@
+# Safety Rules Configuration
+#
+# Defines voltage thresholds, safety modes, and module assignments.
+# To be fully implemented in Phase 266.
+
+modes:
+  annotate:
+    description: "Safety notes displayed alongside content — no blocking"
+    action: "Display safety annotation"
+  gate:
+    description: "Acknowledgment required before proceeding"
+    action: "Show safety gate, require user confirmation"
+  redirect:
+    description: "Safety assessment required before access"
+    action: "Redirect to safety assessment, block until passed"
+
+voltage_thresholds:
+  - range: [0, 12]
+    mode: annotate
+    label: "Extra-low voltage (ELV)"
+    requires_assessment: false
+  - range: [12, 48]
+    mode: gate
+    label: "Safe extra-low voltage (SELV)"
+    requires_assessment: false
+  - range: [48, 120]
+    mode: gate
+    label: "Low voltage"
+    requires_assessment: true
+  - range: [120, 100000]
+    mode: redirect
+    label: "Hazardous voltage"
+    requires_assessment: true
+
+module_assignments:
+  01-the-circuit: annotate
+  02-passive-components: annotate
+  03-the-signal: annotate
+  04-diodes: gate
+  05-transistors: gate
+  06-op-amps: gate
+  07-power-supplies: gate
+  07a-logic-gates: annotate
+  08-sequential-logic: annotate
+  09-data-conversion: gate
+  10-dsp: gate
+  11-microcontrollers: gate
+  12-sensors-actuators: gate
+  13-plc: redirect
+  14-off-grid-power: redirect
+  15-pcb-design: gate
