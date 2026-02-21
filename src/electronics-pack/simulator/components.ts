@@ -601,6 +601,152 @@ export function stampDiode(
 }
 
 // ============================================================================
+// BJT Stamp (Ebers-Moll Simplified Piecewise-Linear Model)
+// ============================================================================
+
+/** BJT model parameters (shared with diode) */
+const BJT_V_THRESHOLD = 0.6;   // Forward voltage threshold for BE/EB junction
+const BJT_R_ON = 10;           // Forward resistance (ohms) for base junction
+const BJT_R_OFF = 10e6;        // Reverse resistance (ohms) for base junction
+
+/**
+ * Stamp a BJT transistor into the MNA matrix using simplified Ebers-Moll model.
+ *
+ * The BJT is modeled as two coupled elements:
+ *   1. Base-emitter junction: piecewise-linear diode (conductance g_be)
+ *   2. Collector current source: VCCS with I_C = beta * I_B
+ *
+ * The VCCS is stamped as transconductance gm = beta * g_be:
+ *   For NPN: I_C = gm * (V_B - V_E), current enters collector
+ *   For PNP: I_C = gm * (V_E - V_B), current enters collector
+ *
+ * @param target - MNA stamp target
+ * @param bjt - BJT component (nodes[0]=collector, nodes[1]=emitter)
+ * @param nodeVoltages - Current voltage estimates for region selection
+ */
+export function stampBJT(
+  target: StampTarget,
+  bjt: BJT,
+  nodeVoltages?: Record<string, number>,
+): void {
+  const nc = target.nodeIndex(bjt.nodes[0]);  // collector
+  const ne = target.nodeIndex(bjt.nodes[1]);  // emitter
+  const nb = target.nodeIndex(bjt.baseNode);  // base
+
+  // Get current voltage estimates
+  const vEmitter = nodeVoltages?.[bjt.nodes[1]] ?? 0;
+  const vBase = nodeVoltages?.[bjt.baseNode] ?? 0;
+
+  // Determine junction voltage and forward bias state
+  const isNPN = bjt.polarity === 'NPN';
+  const vJunction = isNPN ? (vBase - vEmitter) : (vEmitter - vBase);
+  const isForward = vJunction >= BJT_V_THRESHOLD;
+
+  const R_be = isForward ? BJT_R_ON : BJT_R_OFF;
+  const g_be = 1 / R_be;
+  const region = isForward ? 'forward-biased' : 'off';
+
+  target.stampLog.push({
+    component: bjt.id,
+    row: -1, col: -1, value: 0,
+    explanation: `${bjt.id} (${bjt.polarity}, beta=${bjt.beta}): ${region} (Vj=${vJunction.toFixed(4)}V)`,
+  });
+
+  // ---- Step 1: Stamp BE junction as piecewise-linear diode ----
+  // Conductance g_be between base and emitter (same pattern as resistor stamp)
+  if (nb >= 0 && ne >= 0) {
+    target.matrix[nb][nb] += g_be;
+    target.matrix[ne][ne] += g_be;
+    target.matrix[nb][ne] -= g_be;
+    target.matrix[ne][nb] -= g_be;
+  } else if (nb >= 0) {
+    target.matrix[nb][nb] += g_be;
+  } else if (ne >= 0) {
+    target.matrix[ne][ne] += g_be;
+  }
+
+  target.stampLog.push({
+    component: bjt.id,
+    row: nb, col: ne, value: g_be,
+    explanation: `${bjt.id}: BE junction G_be=${g_be} S (R=${R_be} Ohm)`,
+  });
+
+  // Forward-bias threshold offset for BE junction
+  if (isForward) {
+    const iOffset_be = BJT_V_THRESHOLD * g_be;
+    if (isNPN) {
+      // NPN forward: diode current = g_be*(V_B - V_E - Vth)
+      // Move -g_be*Vth to RHS: rhs[B] += g_be*Vth, rhs[E] -= g_be*Vth
+      if (nb >= 0) target.rhs[nb] += iOffset_be;
+      if (ne >= 0) target.rhs[ne] -= iOffset_be;
+    } else {
+      // PNP forward: diode current = g_be*(V_E - V_B - Vth)
+      if (ne >= 0) target.rhs[ne] += iOffset_be;
+      if (nb >= 0) target.rhs[nb] -= iOffset_be;
+    }
+    target.stampLog.push({
+      component: bjt.id,
+      row: -1, col: -1, value: iOffset_be,
+      explanation: `${bjt.id}: BE threshold offset ${iOffset_be.toFixed(6)} A`,
+    });
+  }
+
+  // ---- Step 2: Stamp collector-emitter path as beta-scaled conductance ----
+  //
+  // The collector current is modeled as: I_C = G_ce * (V_C - V_E)
+  // where G_ce = beta * G_be. When the BE junction is forward-biased,
+  // G_ce is large (low resistance = transistor ON). When off, G_ce is
+  // very small (high resistance = transistor OFF).
+  //
+  // This is stamped as a resistor between collector and emitter, with the
+  // same threshold offset pattern scaled by beta.
+  //
+  // For PNP: the collector-emitter conductance is the same, but the
+  // threshold offset direction reverses (current flows emitter to collector).
+
+  const g_ce = bjt.beta * g_be;
+
+  // Stamp G_ce as resistor between collector and emitter
+  if (nc >= 0 && ne >= 0) {
+    target.matrix[nc][nc] += g_ce;
+    target.matrix[ne][ne] += g_ce;
+    target.matrix[nc][ne] -= g_ce;
+    target.matrix[ne][nc] -= g_ce;
+  } else if (nc >= 0) {
+    target.matrix[nc][nc] += g_ce;
+  } else if (ne >= 0) {
+    target.matrix[ne][ne] += g_ce;
+  }
+
+  target.stampLog.push({
+    component: bjt.id,
+    row: nc, col: ne, value: g_ce,
+    explanation: `${bjt.id}: CE path G_ce=beta*G_be=${g_ce} S`,
+  });
+
+  // Threshold offset for collector current (same pattern as diode threshold)
+  if (isForward) {
+    const iOffset_ce = BJT_V_THRESHOLD * g_ce;
+    if (isNPN) {
+      // NPN: collector current flows from collector to emitter
+      // Offset: rhs[C] += g_ce*Vth, rhs[E] -= g_ce*Vth
+      if (nc >= 0) target.rhs[nc] += iOffset_ce;
+      if (ne >= 0) target.rhs[ne] -= iOffset_ce;
+    } else {
+      // PNP: collector current flows from emitter to collector
+      // Offset: rhs[E] += g_ce*Vth, rhs[C] -= g_ce*Vth
+      if (ne >= 0) target.rhs[ne] += iOffset_ce;
+      if (nc >= 0) target.rhs[nc] -= iOffset_ce;
+    }
+    target.stampLog.push({
+      component: bjt.id,
+      row: -1, col: -1, value: iOffset_ce,
+      explanation: `${bjt.id}: collector threshold offset ${iOffset_ce.toFixed(6)} A`,
+    });
+  }
+}
+
+// ============================================================================
 // AC Stamp Functions
 // ============================================================================
 
@@ -775,8 +921,13 @@ export function stampComponent(
       }
       // AC stamping will be added in later plans
       break;
+    case 'bjt':
+      // BJT in DC stampComponent: stamp with no voltage estimates (initial)
+      // Actual BJT circuits should use solveNonlinear for Newton-Raphson
+      stampBJT(target, component);
+      break;
     default:
-      // Diode, BJT, MOSFET, Regulator — to be implemented in later phases
+      // Diode, MOSFET, Regulator — to be implemented in later phases
       break;
   }
 }
