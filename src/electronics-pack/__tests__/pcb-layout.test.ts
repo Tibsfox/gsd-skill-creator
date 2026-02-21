@@ -28,18 +28,21 @@ import {
   type DRCViolation,
   type GerberLayer,
   type EMIResult,
-} from '../../simulator/pcb-layout';
+} from '../simulator/pcb-layout';
 
 // ============================================================================
 // Group 1: Microstrip impedance calculator
 // ============================================================================
 
 describe('calcMicrostripImpedance', () => {
-  it('calculates ~50 ohm for standard FR4 stackup', () => {
+  it('calculates impedance for standard FR4 stackup', () => {
     // w=10 mil, h=62 mil (standard 4-layer), t=1.4 mil (1 oz Cu), er=4.4 (FR4)
+    // Simplified H&H formula: Z0 = (87/sqrt(er+1.41)) * ln(5.98*h/(0.8*w+t))
+    // = (87/sqrt(5.81)) * ln(370.76/9.4) = 36.09 * 3.674 ~ 133 ohms
+    // (10-mil trace on 62-mil dielectric is narrow -- high impedance is correct)
     const z0 = calcMicrostripImpedance(10, 62, 1.4, 4.4);
-    expect(z0).toBeGreaterThan(40);
-    expect(z0).toBeLessThan(65);
+    expect(z0).toBeGreaterThan(110);
+    expect(z0).toBeLessThan(155);
   });
 
   it('wider trace lowers impedance', () => {
