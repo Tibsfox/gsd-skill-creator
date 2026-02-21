@@ -352,6 +352,96 @@ export type ResearchReference = z.infer<typeof ResearchReferenceSchema>;
 // VTM_SCHEMAS convenience object
 // ============================================================================
 
+// ============================================================================
+// ComponentSpec (stub — Plan 02)
+// ============================================================================
+
+/** Stub schema for ComponentSpec. Replaced in Plan 02 Task 2. */
+export const ComponentSpecSchema = z.never();
+
+/** Component spec type inferred from schema. */
+export type ComponentSpec = z.infer<typeof ComponentSpecSchema>;
+
+// ============================================================================
+// WaveExecutionPlan sub-schemas (stubs — Plan 02)
+// ============================================================================
+
+/** Stub schema for WaveSummaryEntry. */
+export const WaveSummaryEntrySchema = z.never();
+
+/** Wave summary entry type inferred from schema. */
+export type WaveSummaryEntry = z.infer<typeof WaveSummaryEntrySchema>;
+
+/** Stub schema for WaveTask. */
+export const WaveTaskSchema = z.never();
+
+/** Wave task type inferred from schema. */
+export type WaveTask = z.infer<typeof WaveTaskSchema>;
+
+/** Stub schema for Track. */
+export const TrackSchema = z.never();
+
+/** Track type inferred from schema. */
+export type Track = z.infer<typeof TrackSchema>;
+
+/** Stub schema for Wave. */
+export const WaveSchema = z.never();
+
+/** Wave type inferred from schema. */
+export type Wave = z.infer<typeof WaveSchema>;
+
+/** Stub schema for WaveExecutionPlan. */
+export const WaveExecutionPlanSchema = z.never();
+
+/** Wave execution plan type inferred from schema. */
+export type WaveExecutionPlan = z.infer<typeof WaveExecutionPlanSchema>;
+
+// ============================================================================
+// TestPlan sub-schemas (stubs — Plan 02)
+// ============================================================================
+
+/** Stub schema for TestCategory. */
+export const TestCategorySchema = z.never();
+
+/** Test category type inferred from schema. */
+export type TestCategory = z.infer<typeof TestCategorySchema>;
+
+/** Stub schema for TestSpec. */
+export const TestSpecSchema = z.never();
+
+/** Test spec type inferred from schema. */
+export type TestSpec = z.infer<typeof TestSpecSchema>;
+
+/** Stub schema for TestPlan. */
+export const TestPlanSchema = z.never();
+
+/** Test plan type inferred from schema. */
+export type TestPlan = z.infer<typeof TestPlanSchema>;
+
+// ============================================================================
+// MilestoneSpec (stub — Plan 02)
+// ============================================================================
+
+/** Stub schema for MilestoneSpec. */
+export const MilestoneSpecSchema = z.never();
+
+/** Milestone spec type inferred from schema. */
+export type MilestoneSpec = z.infer<typeof MilestoneSpecSchema>;
+
+// ============================================================================
+// MissionPackage (stub — Plan 02)
+// ============================================================================
+
+/** Stub schema for MissionPackage. */
+export const MissionPackageSchema = z.never();
+
+/** Mission package type inferred from schema. */
+export type MissionPackage = z.infer<typeof MissionPackageSchema>;
+
+// ============================================================================
+// VTM_SCHEMAS convenience object
+// ============================================================================
+
 /**
  * Maps type name strings to their Zod schemas for programmatic
  * iteration and validation.
@@ -363,4 +453,9 @@ export const VTM_SCHEMAS = {
   VisionDocument: VisionDocumentSchema,
   ResearchReference: ResearchReferenceSchema,
   ChipsetConfig: ChipsetConfigSchema,
+  ComponentSpec: ComponentSpecSchema,
+  WaveExecutionPlan: WaveExecutionPlanSchema,
+  TestPlan: TestPlanSchema,
+  MilestoneSpec: MilestoneSpecSchema,
+  MissionPackage: MissionPackageSchema,
 } as const;
