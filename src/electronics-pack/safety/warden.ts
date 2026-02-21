@@ -5,6 +5,9 @@
  * Three operating modes: Annotate (informational), Gate (acknowledgment),
  * Redirect (assessment required). Module assignments and voltage thresholds
  * derived from safety-rules.yaml (IEC 60449).
+ *
+ * All safety messages use positive framing — no negative/prohibitive language.
+ * Professional context detection streamlines access for experienced users.
  */
 
 /** Safety operating modes */
@@ -43,6 +46,12 @@ export interface SafetyCheckResult {
   message: string;
   voltageRange?: VoltageRange;
   assessmentRequired: boolean;
+}
+
+/** Professional context signal detected in user input */
+export interface ProfessionalSignal {
+  type: 'equipment' | 'workplace' | 'compliance' | 'ratings';
+  matched: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -88,6 +97,69 @@ const MODE_SEVERITY: Record<SafetyMode, number> = {
 };
 
 // ---------------------------------------------------------------------------
+// Module topic names — human-readable names derived from module IDs
+// ---------------------------------------------------------------------------
+
+const MODULE_TOPICS: Record<string, string> = {
+  '01-the-circuit': 'basic circuits',
+  '02-passive-components': 'passive components',
+  '03-the-signal': 'signal fundamentals',
+  '04-diodes': 'diode circuits',
+  '05-transistors': 'transistor circuits',
+  '06-op-amps': 'operational amplifiers',
+  '07-power-supplies': 'power supply design',
+  '07a-logic-gates': 'logic gates',
+  '08-sequential-logic': 'sequential logic',
+  '09-data-conversion': 'data conversion',
+  '10-dsp': 'digital signal processing',
+  '11-microcontrollers': 'microcontroller systems',
+  '12-sensors-actuators': 'sensors and actuators',
+  '13-plc': 'programmable logic controllers',
+  '14-off-grid-power': 'off-grid power systems',
+  '15-pcb-design': 'PCB design and assembly',
+};
+
+// ---------------------------------------------------------------------------
+// Professional context signal patterns
+// ---------------------------------------------------------------------------
+
+const PROFESSIONAL_PATTERNS: Array<{
+  type: ProfessionalSignal['type'];
+  terms: string[];
+}> = [
+  {
+    type: 'equipment',
+    terms: [
+      'oscilloscope',
+      'bench power supply',
+      'multimeter',
+      'function generator',
+      'logic analyzer',
+      'soldering station',
+    ],
+  },
+  {
+    type: 'workplace',
+    terms: ['lab', 'workshop', 'workbench', 'company', 'facility', 'production'],
+  },
+  {
+    type: 'compliance',
+    terms: ['NEC', 'IEC', 'UL', 'CE marking', 'OSHA', 'RoHS', 'ISO'],
+  },
+  {
+    type: 'ratings',
+    terms: [
+      'rated for',
+      'voltage rating',
+      'current capacity',
+      'power dissipation',
+      'derating',
+      'breakdown voltage',
+    ],
+  },
+];
+
+// ---------------------------------------------------------------------------
 // Public API
 // ---------------------------------------------------------------------------
 
@@ -122,11 +194,72 @@ export function classifyVoltage(voltage: number): VoltageRange {
 }
 
 /**
+ * Detect professional context signals in user input text.
+ * Scans for equipment, workplace, compliance, and ratings terminology.
+ * Returns an empty array if no professional signals are found.
+ */
+export function detectProfessionalContext(input: string): ProfessionalSignal[] {
+  const lower = input.toLowerCase();
+  const signals: ProfessionalSignal[] = [];
+
+  for (const pattern of PROFESSIONAL_PATTERNS) {
+    for (const term of pattern.terms) {
+      if (lower.includes(term.toLowerCase())) {
+        signals.push({ type: pattern.type, matched: term });
+      }
+    }
+  }
+
+  return signals;
+}
+
+/**
+ * Generate a positive-framed safety message for a given mode and module.
+ * Messages guide and empower — they use positive language exclusively.
+ *
+ * @param mode - the safety mode (Annotate, Gate, or Redirect)
+ * @param moduleId - the module identifier for topic-specific messaging
+ * @param professional - whether professional context was detected
+ */
+export function generateSafetyMessage(
+  mode: SafetyMode,
+  moduleId: string,
+  professional: boolean,
+): string {
+  const topic = MODULE_TOPICS[moduleId] ?? moduleId;
+
+  let message: string;
+
+  switch (mode) {
+    case SafetyMode.Annotate:
+      message = `Here's how to work with ${topic} safely. You're in a safe voltage range for hands-on exploration.`;
+      break;
+    case SafetyMode.Gate:
+      message = `You can proceed with ${topic} safely by following these guidelines. Please review and acknowledge the key practices before continuing.`;
+      break;
+    case SafetyMode.Redirect:
+      message = `This ${topic} content involves voltages that require verified safety knowledge. Complete a brief safety check to unlock this content — it ensures you have the foundation to work safely.`;
+      break;
+  }
+
+  if (professional) {
+    message += ` Your professional background is noted — the safety check covers ${topic}-specific practices.`;
+  }
+
+  return message;
+}
+
+/**
  * Combined safety check: module mode + optional voltage classification.
  * Uses the MORE restrictive mode when voltage suggests a higher severity
- * than the module default.
+ * than the module default. Optionally detects professional context from
+ * user input text.
  */
-export function checkSafety(moduleId: string, voltage?: number): SafetyCheckResult {
+export function checkSafety(
+  moduleId: string,
+  voltage?: number,
+  userContext?: string,
+): SafetyCheckResult {
   const moduleMode = getModuleMode(moduleId);
   let effectiveMode = moduleMode;
   let assessmentRequired = moduleMode === SafetyMode.Redirect;
@@ -141,8 +274,12 @@ export function checkSafety(moduleId: string, voltage?: number): SafetyCheckResu
     assessmentRequired = voltageRange.requiresAssessment;
   }
 
+  const professional = userContext
+    ? detectProfessionalContext(userContext).length >= 2
+    : false;
+
   const allowed = effectiveMode !== SafetyMode.Redirect;
-  const message = buildMessage(effectiveMode);
+  const message = generateSafetyMessage(effectiveMode, moduleId, professional);
 
   return {
     allowed,
@@ -151,19 +288,4 @@ export function checkSafety(moduleId: string, voltage?: number): SafetyCheckResu
     voltageRange,
     assessmentRequired,
   };
-}
-
-// ---------------------------------------------------------------------------
-// Internal helpers
-// ---------------------------------------------------------------------------
-
-function buildMessage(mode: SafetyMode): string {
-  switch (mode) {
-    case SafetyMode.Annotate:
-      return 'Safe to proceed';
-    case SafetyMode.Gate:
-      return 'Review safety guidelines before proceeding';
-    case SafetyMode.Redirect:
-      return 'Complete safety assessment to access this content';
-  }
 }
