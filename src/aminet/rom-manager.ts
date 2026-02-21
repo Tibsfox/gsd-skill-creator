@@ -278,7 +278,7 @@ export function scanRomDirectory(dirPath: string, options?: ScanRomOptions): Det
 
     // Decrypt if Cloanto rom.key is present
     if (wasEncrypted) {
-      data = decryptCloantoRom(data, romKey!);
+      data = decryptCloantoRom(data, romKey!) as Uint8Array<ArrayBuffer>;
     }
 
     // Try full-file CRC32
