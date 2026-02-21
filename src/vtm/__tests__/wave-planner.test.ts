@@ -360,7 +360,7 @@ describe('wave 0 enforcement', () => {
     const result = planWaves(milestone, specs);
 
     const wave0Tasks = result.waves[0].tracks.flatMap(t => t.tasks);
-    expect(wave0Tasks.some(t => t.description.includes('TypeDefs'))).toBe(true);
+    expect(wave0Tasks.some(t => t.id.includes('typedefs'))).toBe(true);
   });
 
   it('spec with "schema" in produces goes to Wave 0', () => {
@@ -373,7 +373,7 @@ describe('wave 0 enforcement', () => {
     const result = planWaves(milestone, specs);
 
     const wave0Tasks = result.waves[0].tracks.flatMap(t => t.tasks);
-    expect(wave0Tasks.some(t => t.description.includes('SchemaGen'))).toBe(true);
+    expect(wave0Tasks.some(t => t.id.includes('schemagen'))).toBe(true);
   });
 
   it('spec with "interfaces" in objective goes to Wave 0', () => {
@@ -386,7 +386,7 @@ describe('wave 0 enforcement', () => {
     const result = planWaves(milestone, specs);
 
     const wave0Tasks = result.waves[0].tracks.flatMap(t => t.tasks);
-    expect(wave0Tasks.some(t => t.description.includes('Contracts'))).toBe(true);
+    expect(wave0Tasks.some(t => t.id.includes('contracts'))).toBe(true);
   });
 
   it('spec with "config" in objective goes to Wave 0', () => {
@@ -399,7 +399,7 @@ describe('wave 0 enforcement', () => {
     const result = planWaves(milestone, specs);
 
     const wave0Tasks = result.waves[0].tracks.flatMap(t => t.tasks);
-    expect(wave0Tasks.some(t => t.description.includes('ConfigSetup'))).toBe(true);
+    expect(wave0Tasks.some(t => t.id.includes('configsetup'))).toBe(true);
   });
 
   it('non-type spec without dependencies is NOT forced to Wave 0 if others depend on it', () => {
@@ -444,6 +444,6 @@ describe('wave 0 enforcement', () => {
     const result = planWaves(milestone, specs);
 
     const wave0Tasks = result.waves[0].tracks.flatMap(t => t.tasks);
-    expect(wave0Tasks.some(t => t.description.includes('TypeDefs'))).toBe(true);
+    expect(wave0Tasks.some(t => t.id.includes('typedefs'))).toBe(true);
   });
 });
