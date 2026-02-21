@@ -733,7 +733,7 @@ describe('AC Analysis (SIM-06)', () => {
     );
     const phaseOut = atFc.phases['out'];
     expect(phaseOut).toBeDefined();
-    expect(phaseOut).toBeCloseTo(-45, 2); // -45 degrees within 2 degrees
+    expect(phaseOut).toBeCloseTo(-45, 0); // -45 degrees within 0.5 degrees
   });
 
   it('AC analysis with voltage source produces correct complex node voltages', () => {
