@@ -12,7 +12,10 @@
  * documents into structured research references, research utilities
  * for knowledge chunking, safety extraction, and necessity detection,
  * the mission assembly generators for milestone specs and component specs,
- * and the mission package assembler for top-level orchestration.
+ * the mission package assembler for top-level orchestration, the wave
+ * planner for dependency-ordered wave decomposition with parallel tracks,
+ * and the wave analysis functions for dependency graphs, savings
+ * calculation, and risk factor identification.
  *
  * @module vtm
  */
@@ -23,3 +26,5 @@ export * from './research-compiler.js';
 export * from './research-utils.js';
 export * from './mission-assembly.js';
 export * from './mission-assembler.js';
+export * from './wave-planner.js';
+export * from './wave-analysis.js';
