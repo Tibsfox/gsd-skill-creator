@@ -19,6 +19,7 @@ import type { Component } from './components';
 import {
   stampComponent,
   stampDiode,
+  stampBJT,
   stampComponentAC,
   cAbs,
   cAngle,
@@ -96,6 +97,11 @@ function collectNodes(
           nodeSet.add(node);
         }
       }
+    }
+
+    // Collect BJT base node (third terminal)
+    if ('baseNode' in comp && typeof comp.baseNode === 'string' && comp.baseNode !== groundNode) {
+      nodeSet.add(comp.baseNode);
     }
 
     // Track voltage sources (explicit and inductor-as-DC-short)
@@ -322,6 +328,12 @@ function collectNodesNonlinear(
         }
       }
     }
+
+    // Collect BJT base node (third terminal)
+    if ('baseNode' in comp && typeof comp.baseNode === 'string' && comp.baseNode !== groundNode) {
+      nodeSet.add(comp.baseNode);
+    }
+
     // Only voltage sources get extra rows (not inductors in nonlinear mode,
     // but we keep inductors as VS for DC compatibility)
     if (comp.type === 'voltage-source') {
@@ -380,6 +392,8 @@ function buildMatrixNonlinear(
   for (const comp of components) {
     if (comp.type === 'diode') {
       stampDiode(target, comp, nodeVoltages);
+    } else if (comp.type === 'bjt') {
+      stampBJT(target, comp, nodeVoltages);
     } else {
       stampComponent(target, comp, 'dc');
     }
@@ -560,6 +574,12 @@ function collectNodesAC(
         }
       }
     }
+
+    // Collect BJT base node (third terminal)
+    if ('baseNode' in comp && typeof comp.baseNode === 'string' && comp.baseNode !== groundNode) {
+      nodeSet.add(comp.baseNode);
+    }
+
     // In AC, only voltage sources get extra rows
     // Inductors are stamped as admittances Y = 1/(j*omega*L)
     if (comp.type === 'voltage-source') {
