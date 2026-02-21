@@ -1,0 +1,107 @@
+# Resource Locks: Exclusive file ownership per team
+# Prevents concurrent write conflicts between teams
+# Read access is unrestricted; only write locks are enforced
+
+resource_locks:
+  mc-infra:
+    description: "Infrastructure provisioning scripts and configurations"
+    write_exclusive:
+      - "infra/scripts/discover-hardware.sh"
+      - "infra/scripts/calculate-budget.sh"
+      - "infra/scripts/deploy-pxe.sh"
+      - "infra/scripts/deploy-kickstart.sh"
+      - "infra/scripts/vm-lifecycle.sh"
+      - "infra/scripts/provision-vm.sh"
+      - "infra/scripts/deploy-minecraft.sh"
+      - "infra/scripts/vm-backend-*.sh"
+      - "infra/templates/pxe/**"
+      - "infra/templates/dnsmasq/**"
+      - "infra/templates/kickstart/**"
+      - "infra/templates/minecraft/minecraft-*.template"
+      - "infra/templates/minecraft/server-*.template"
+      - "infra/inventory/hardware-profile.yaml"
+      - "infra/local/resource-budget.yaml"
+    read_shared:
+      - "infra/inventory/hardware-capabilities.yaml"
+      - "infra/local/local-values.yaml"
+
+  mc-platform:
+    description: "Platform discovery, abstraction, and adaptation"
+    write_exclusive:
+      - "infra/scripts/discover-all.sh"
+      - "infra/scripts/discover-audio.sh"
+      - "infra/scripts/discover-network.sh"
+      - "infra/scripts/discover-usb.sh"
+      - "infra/scripts/discover-distro.sh"
+      - "infra/scripts/lib/discovery-common.sh"
+      - "infra/scripts/lib/pkg-abstraction.sh"
+      - "infra/scripts/lib/pkg-names.sh"
+      - "infra/scripts/lib/fw-abstraction.sh"
+      - "infra/scripts/vm-ctl.sh"
+      - "infra/scripts/container-ctl.sh"
+      - "infra/scripts/lib/hypervisor-common.sh"
+      - "infra/scripts/lib/hv-*.sh"
+      - "infra/scripts/lib/container-fallback.sh"
+      - "infra/scripts/generate-local-values.sh"
+      - "infra/scripts/assess-gpu.sh"
+      - "infra/scripts/assess-audio.sh"
+      - "infra/inventory/hardware-capabilities.yaml"
+      - "infra/local/local-values.yaml"
+    read_shared:
+      - "infra/inventory/hardware-profile.yaml"
+
+  mc-amiga:
+    description: "Amiga emulation, asset conversion, and content curation"
+    write_exclusive:
+      - "infra/scripts/install-fs-uae.sh"
+      - "infra/scripts/setup-aros-rom.sh"
+      - "infra/scripts/configure-uae-display.sh"
+      - "infra/scripts/configure-uae-audio.sh"
+      - "infra/scripts/render-uae-config.sh"
+      - "infra/scripts/launch-amiga-app.sh"
+      - "infra/scripts/setup-whdload.sh"
+      - "infra/scripts/setup-amiga-exchange.sh"
+      - "infra/scripts/convert-ilbm.sh"
+      - "infra/scripts/convert-tracker.sh"
+      - "infra/scripts/batch-convert.sh"
+      - "infra/scripts/generate-asset-catalog.sh"
+      - "infra/config/uae/**"
+      - "infra/amiga/**"
+    read_shared:
+      - "infra/local/local-values.yaml"
+
+  mc-creative:
+    description: "Knowledge World design, schematics, curriculum, and exhibits"
+    write_exclusive:
+      - "infra/minecraft/world-design/**"
+      - "infra/world/**"
+      - "minecraft/schematics/**"
+      - "infra/knowledge-world/**"
+      - "infra/scripts/validate-world-layout.sh"
+    read_shared:
+      - "infra/amiga/curated-collection.yaml"
+      - "infra/amiga/legal-guide.md"
+
+  mc-ops:
+    description: "Backup, monitoring, golden image, and operational runbooks"
+    write_exclusive:
+      - "infra/scripts/backup-world.sh"
+      - "infra/scripts/restore-world.sh"
+      - "infra/scripts/check-minecraft-health.sh"
+      - "infra/scripts/monitor-*.sh"
+      - "infra/scripts/golden-image.sh"
+      - "infra/scripts/rapid-rebuild.sh"
+      - "infra/templates/monitoring/**"
+      - "infra/templates/alerting/**"
+      - "infra/docs/runbook-*.md"
+      - "infra/docs/day-*.md"
+      - "infra/docs/incident-response.md"
+    read_shared:
+      - "infra/local/local-values.yaml"
+      - "infra/inventory/hardware-capabilities.yaml"
+
+conflict_detection:
+  mode: "pre-execution"
+  description: "Before a team modifies a file, check that the file matches the team's write_exclusive patterns. If the file matches another team's write_exclusive, the modification is BLOCKED."
+  shared_files:
+    description: "Files that appear in read_shared for multiple teams may be READ by any team but WRITTEN only by the team that lists them in write_exclusive."

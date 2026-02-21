@@ -1,0 +1,72 @@
+{
+  "name": "mc-amiga",
+  "description": "Amiga emulation pipeline: UAE installation, application profile configuration, asset format conversion, and content curation",
+  "leadAgentId": "amiga-orchestrator",
+  "createdAt": "2026-02-19T00:02:32.000Z",
+  "members": [
+    {
+      "agentId": "amiga-orchestrator",
+      "name": "Amiga Orchestrator",
+      "agentType": "orchestrator",
+      "model": "opus",
+      "tools": [
+        "Read", "Write", "Bash", "Glob", "Grep",
+        "TaskCreate", "TaskList", "TaskGet", "TaskUpdate",
+        "SendMessage", "TeammateTool"
+      ],
+      "prompt": "Orchestrate the Amiga emulation pipeline. Sequence stages from FS-UAE installation through content curation. Ensure ROM setup completes before application profiling, and conversion completes before curation."
+    },
+    {
+      "agentId": "amiga-installer",
+      "name": "Amiga Installer",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Execute UAE installation stage. Run install-fs-uae.sh, setup-aros-rom.sh, and configure display/audio backends from local-values.yaml."
+    },
+    {
+      "agentId": "amiga-configurator",
+      "name": "Amiga Configurator",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Execute application profile configuration stage. Create FS-UAE profiles for Deluxe Paint, OctaMED, ProTracker, and PPaint. Set up WHDLoad and exchange directory."
+    },
+    {
+      "agentId": "amiga-converter",
+      "name": "Amiga Converter",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Execute asset conversion stage. Run convert-ilbm.sh for IFF/ILBM to PNG, convert-tracker.sh for MOD/MED to audio, and batch-convert.sh for bulk processing."
+    },
+    {
+      "agentId": "amiga-curator",
+      "name": "Amiga Curator",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Execute content curation stage. Build curated collection with legal assessment, generate asset catalog YAML, and produce legal guide documentation."
+    }
+  ],
+  "version": 1,
+  "topology": "pipeline",
+  "outputTo": [
+    { "teamName": "mc-creative", "description": "Curated Amiga assets for Knowledge World integration" }
+  ],
+  "inputFrom": [
+    { "teamName": "mc-platform", "description": "Hardware adaptation config for UAE display and audio settings" }
+  ]
+}

@@ -1,0 +1,6 @@
+# Test fixture: No hypervisor available
+# Used by test-vm-lifecycle.sh to test error paths when no backend is found
+hypervisor:
+  kvm: false
+  vmware: false
+  virtualbox: false

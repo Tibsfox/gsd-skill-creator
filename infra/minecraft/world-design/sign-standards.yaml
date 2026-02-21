@@ -1,0 +1,139 @@
+# Knowledge World Sign Formatting Standards
+# Consistent signage across all districts and pathways
+
+version: "1.0"
+
+# Minecraft sign limitations:
+# - 4 lines per sign face
+# - ~15 characters per line (depends on character width)
+# - Color codes via section symbol (but in creative, use dye on sign)
+# - Oak/birch/spruce/jungle/acacia/dark_oak/mangrove/cherry/bamboo/crimson/warped sign types
+# - Hanging signs available (1.20+)
+
+sign_types:
+  district_marker:
+    description: "Large sign at district entrance identifying the district"
+    sign_block: "oak_wall_sign"  # neutral wood for all districts
+    format:
+      line1: "== {DISTRICT NAME} =="
+      line2: ""
+      line3: "{Theme tagline}"
+      line4: ""
+    text_color: "Use district accent color via dye"
+    placement: "On entrance gate arch, both sides"
+    example:
+      line1: "== HARDWARE =="
+      line2: ""
+      line3: "Circuits, Signals, Memory"
+      line4: ""
+
+  directional_sign:
+    description: "Arrow sign pointing toward a district"
+    sign_block: "oak_sign"  # on post
+    format:
+      line1: "{District Name}"
+      line2: "---->"
+      line3: "{distance} blocks"
+      line4: ""
+    text_color: "Match district palette color"
+    placement: "At path junctions and waypoints, facing the direction of travel"
+    example:
+      line1: "Hardware District"
+      line2: "---->"
+      line3: "~120 blocks"
+      line4: ""
+
+  info_board:
+    description: "Multi-sign information display (2x2 or 3x1 sign grid)"
+    sign_block: "birch_wall_sign"
+    format:
+      header_sign:
+        line1: "--- INFO ---"
+        line2: "{Title}"
+        line3: ""
+        line4: ""
+      body_signs:
+        line1: "{Content line 1}"
+        line2: "{Content line 2}"
+        line3: "{Content line 3}"
+        line4: "{Content line 4}"
+    text_color: "White text on birch sign (high contrast)"
+    placement: "On walls at key locations, eye level (Y+1 from ground)"
+
+  building_label:
+    description: "Sign identifying a specific building or structure"
+    sign_block: "{district wood_type}_wall_sign"
+    format:
+      line1: "{Building Name}"
+      line2: ""
+      line3: "{Brief description}"
+      line4: ""
+    text_color: "Default (black on light wood, white on dark wood)"
+    placement: "On building facade, centered above entrance"
+    example:
+      line1: "CPU Tower"
+      line2: ""
+      line3: "Fetch-Decode-Execute"
+      line4: ""
+
+  waypoint_marker:
+    description: "Small sign along paths confirming you are going the right way"
+    sign_block: "oak_hanging_sign"
+    format:
+      line1: "{District} -->"
+      line2: ""
+      line3: ""
+      line4: ""
+    text_color: "Match path color"
+    placement: "Hanging from posts every ~50 blocks along paths"
+
+  rules_sign:
+    description: "Server rules and guidelines at spawn"
+    sign_block: "dark_oak_wall_sign"
+    format:
+      line1: "KNOWLEDGE WORLD"
+      line2: "GUIDELINES"
+      line3: ""
+      line4: ""
+    text_color: "Gold/yellow for headers, white for body"
+    placement: "Welcome center interior walls"
+
+# Sign templates for common patterns
+sign_templates:
+  you_are_here:
+    description: "Orientation sign showing current location"
+    format:
+      line1: "You are in:"
+      line2: "{District Name}"
+      line3: ""
+      line4: "Spawn: {direction}"
+    placement: "Inside each district, near entrance"
+
+  under_construction:
+    description: "Placeholder for areas not yet built"
+    format:
+      line1: "Coming Soon"
+      line2: ""
+      line3: "{Feature name}"
+      line4: ""
+    sign_block: "bamboo_wall_sign"
+
+  credits:
+    description: "Attribution sign for builds"
+    format:
+      line1: "Built by:"
+      line2: "{Builder name}"
+      line3: "{Date}"
+      line4: ""
+
+# Formatting rules
+rules:
+  - "ALL CAPS for district names on markers"
+  - "Title Case for building names and directions"
+  - "Sentence case for descriptions and info text"
+  - "No abbreviations except cardinal directions (N, S, E, W, NE, NW, SE, SW)"
+  - "Arrow symbols: -->, <--, /\\ (up), \\/ (down)"
+  - "Separator lines: === for major, --- for minor, ... for continuation"
+  - "Numbers: use ~ prefix for approximate distances (~120 blocks)"
+  - "Each sign must be readable in 3 seconds or less"
+  - "Maximum 2 sign types visible from any single position (avoid sign clutter)"

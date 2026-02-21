@@ -1,0 +1,241 @@
+# Knowledge World Welcome Center Build Specification
+# The orientation hub for new players. Contains all essential information.
+
+metadata:
+  name: "Welcome Center"
+  version: "1.0"
+  author: "GSD Creative Team"
+  description: "Orientation building east of spawn. Four panels teach players what this world is and how to explore it."
+
+dimensions:
+  # Rectangular building with open-plan interior
+  origin: { x: 15, y: 64, z: -8 }   # 15 blocks east of spawn center
+  width: 16                            # x-axis (east-west)
+  depth: 16                            # z-axis (north-south)
+  height: 7                            # Floor to roof peak
+  interior_height: 5                   # Usable interior clearance
+
+layout:
+  # Open-plan interior with 4 information panels on walls
+  # Player enters from the west (facing spawn plaza)
+  entrance:
+    wall: "west"
+    width: 3
+    door_type: "none"                  # Open archway, always accessible
+    sign_above:
+      format: "title_signs"
+      content:
+        line_1: "WELCOME CENTER"
+        line_2: "Start Here"
+        line_3: ""
+        line_4: ""
+
+  panels:
+    # Each panel is a section of wall with multiple signs arranged in reading order
+    # Signs placed left-to-right, each sign is one thought/paragraph
+
+    panel_1:
+      name: "What is the Knowledge World?"
+      wall: "north"
+      position: "left_half"
+      sign_count: 6
+      sign_standard: "wall_text"
+      content:
+        sign_1:
+          line_1: "WHAT IS THE"
+          line_2: "KNOWLEDGE"
+          line_3: "WORLD?"
+          line_4: ""
+        sign_2:
+          line_1: "A place where"
+          line_2: "computing ideas"
+          line_3: "become buildings"
+          line_4: "you can walk thru"
+        sign_3:
+          line_1: "Each district"
+          line_2: "covers a topic:"
+          line_3: "hardware, code,"
+          line_4: "networks & more"
+        sign_4:
+          line_1: "Buildings show"
+          line_2: "how systems work."
+          line_3: "Rooms are parts."
+          line_4: "Doors are links."
+        sign_5:
+          line_1: "You can explore"
+          line_2: "freely, or follow"
+          line_3: "guided builds to"
+          line_4: "learn by making."
+        sign_6:
+          line_1: "Everything here"
+          line_2: "is open source"
+          line_3: "and collaborative."
+          line_4: "Build with us!"
+
+    panel_2:
+      name: "How to Use Litematica"
+      wall: "north"
+      position: "right_half"
+      sign_count: 5
+      sign_standard: "wall_text"
+      content:
+        sign_1:
+          line_1: "USING"
+          line_2: "LITEMATICA"
+          line_3: ""
+          line_4: ""
+        sign_2:
+          line_1: "Litematica shows"
+          line_2: "building guides"
+          line_3: "as ghost blocks"
+          line_4: "you build over."
+        sign_3:
+          line_1: "Press M to open"
+          line_2: "the Litematica"
+          line_3: "main menu."
+          line_4: ""
+        sign_4:
+          line_1: "Load schematics"
+          line_2: "from the shared"
+          line_3: "library via the"
+          line_4: "Syncmatica menu."
+        sign_5:
+          line_1: "Place a ghost"
+          line_2: "guide, then build"
+          line_3: "block-by-block."
+          line_4: "Learn by doing!"
+
+    panel_3:
+      name: "District Map"
+      wall: "south"
+      position: "left_half"
+      sign_count: 8
+      sign_standard: "wall_text"
+      content:
+        sign_1:
+          line_1: "DISTRICT MAP"
+          line_2: ""
+          line_3: "Six areas to"
+          line_4: "explore:"
+        sign_2:
+          line_1: "HARDWARE"
+          line_2: "(gold)"
+          line_3: "North"
+          line_4: "Circuits & chips"
+        sign_3:
+          line_1: "SOFTWARE"
+          line_2: "(aqua)"
+          line_3: "East"
+          line_4: "Code & patterns"
+        sign_4:
+          line_1: "NETWORK"
+          line_2: "(green)"
+          line_3: "Northwest"
+          line_4: "Protocols & data"
+        sign_5:
+          line_1: "CREATIVE"
+          line_2: "(purple)"
+          line_3: "Northeast"
+          line_4: "Art & music"
+        sign_6:
+          line_1: "COMMUNITY"
+          line_2: "(blue)"
+          line_3: "West"
+          line_4: "Sharing & collab"
+        sign_7:
+          line_1: "WORKSHOP"
+          line_2: "(red)"
+          line_3: "South"
+          line_4: "Build & learn"
+        sign_8:
+          line_1: "Follow the"
+          line_2: "colored paths"
+          line_3: "from Spawn Plaza"
+          line_4: "to each district"
+
+    panel_4:
+      name: "Server Rules & Guidelines"
+      wall: "south"
+      position: "right_half"
+      sign_count: 5
+      sign_standard: "wall_text"
+      content:
+        sign_1:
+          line_1: "GUIDELINES"
+          line_2: ""
+          line_3: ""
+          line_4: ""
+        sign_2:
+          line_1: "1. Creative mode"
+          line_2: "only. No PvP,"
+          line_3: "no griefing."
+          line_4: ""
+        sign_3:
+          line_1: "2. Build in the"
+          line_2: "right district."
+          line_3: "Check the map!"
+          line_4: ""
+        sign_4:
+          line_1: "3. Use schematics"
+          line_2: "to share designs."
+          line_3: "Save your work!"
+          line_4: ""
+        sign_5:
+          line_1: "4. This is a"
+          line_2: "learning space."
+          line_3: "Ask questions."
+          line_4: "Help others."
+
+  # Central floor feature: miniature world map using colored wool blocks
+  floor_map:
+    position: "center_of_room"
+    size: "8x8 blocks"
+    description: "Birds-eye representation of the world layout using colored wool matching district palettes"
+    materials:
+      center: "white_wool"          # Spawn plaza
+      north: "orange_wool"          # Hardware
+      east: "light_blue_wool"       # Software
+      northwest: "lime_wool"        # Network
+      northeast: "magenta_wool"     # Creative
+      west: "blue_wool"             # Community
+      south: "red_wool"             # Workshop
+
+  # Lighting
+  lighting:
+    type: "sea_lantern"
+    placement: "ceiling_recessed"    # Flush with ceiling for clean look
+    count: 8
+    spacing: "every 4 blocks"
+
+# Exterior design
+exterior:
+  walls: "quartz_block"              # Matches spawn plaza material
+  roof: "quartz_slab"                # Flat roof with slight overhang
+  trim: "polished_andesite"          # Matches plaza border
+  windows: "glass_pane"              # Clear glass, no staining
+  window_count: 4                    # One per wall except entrance
+
+materials:
+  quartz_block: 400
+  quartz_slab: 80
+  polished_andesite: 60
+  glass_pane: 16
+  sea_lantern: 8
+  oak_sign: 24
+  colored_wool: 64
+  smooth_stone: 50
+
+build_order:
+  1: "Clear area at origin coordinates (15,64,-8) for 16x16 footprint"
+  2: "Lay floor in smooth quartz"
+  3: "Build walls in quartz block with polished andesite trim"
+  4: "Cut entrance archway on west wall (facing spawn)"
+  5: "Install windows on north, east, south walls"
+  6: "Build flat roof with quartz slabs"
+  7: "Place ceiling sea lantern lighting"
+  8: "Build floor map in center using colored wool"
+  9: "Place Panel 1 signs (north wall, left): What is Knowledge World"
+  10: "Place Panel 2 signs (north wall, right): How to Use Litematica"
+  11: "Place Panel 3 signs (south wall, left): District Map"
+  12: "Place Panel 4 signs (south wall, right): Server Rules"
+  13: "Place entrance title sign"

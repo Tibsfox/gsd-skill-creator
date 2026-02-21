@@ -1,0 +1,22 @@
+# Personal Paint (PPaint) -- AGA hi-color profile
+#
+# Hi-color and HAM8 modes for advanced pixel art with larger canvas
+# support. AGA chipset enables 256-color and HAM8 modes that PPaint
+# leverages for its extended color capabilities. Higher resolution
+# display mode (640x512 doubled) for detailed work.
+
+# Chipset -- AGA for 256-color and HAM8 modes
+chipset=AGA
+chipset_compatible=A1200
+
+# CPU -- 68020 for PPaint's rendering operations
+cpu_type=68020
+
+# Memory -- generous for hi-color framebuffers
+chip_ram=2048
+fast_ram=4096
+
+# Display -- 640x512 doubled for hi-res canvas work
+gfx_width=1440
+gfx_height=1136
+gfx_linemode=double

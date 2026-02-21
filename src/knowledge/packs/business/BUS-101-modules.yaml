@@ -1,0 +1,304 @@
+# BUS-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: BUS-101
+pack_name: "Business & Law -- Foundational Knowledge Pack"
+
+modules:
+  - id: BUS-101-M1
+    name: "Economic Organization & Markets"
+    description: "How trade works, supply and demand, the role of money, market structures, specialization, and the economic systems that organize human cooperation"
+
+    learning_outcomes:
+      - "Explain why people specialize and trade rather than producing everything themselves"
+      - "Describe how supply and demand interact to determine prices"
+      - "Understand the role of money as a medium of exchange, store of value, and unit of account"
+      - "Compare different market structures: competition, monopoly, oligopoly"
+      - "Identify how government regulation addresses market failures"
+      - "Trace the flow of goods, services, and money through a simple economy"
+
+    topics:
+      - "Specialization & Trade"
+      - "Supply & Demand"
+      - "The Role of Money & Currency"
+      - "Market Structures (Competition, Monopoly, Oligopoly)"
+      - "Economic Indicators (GDP, Inflation, Unemployment)"
+      - "Government Roles in Markets (Regulation, Taxation, Public Goods)"
+      - "International Trade & Comparative Advantage"
+      - "Barter, Trade, and the History of Exchange"
+
+    grade_levels: ["PreK", "K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 20
+      high: 30
+
+    prerequisite_modules: []
+
+    activities:
+      count: 2
+      examples:
+        - "Classroom Market Day: Supply and Demand in Action"
+        - "Barter vs. Money: Trading Game"
+
+    assessments:
+      - "Can student explain why prices change when supply or demand shifts?"
+      - "Does student understand why specialization increases total output?"
+      - "Can student identify the role money plays vs. direct barter?"
+      - "Does student recognize examples of market structures in real life?"
+
+  - id: BUS-101-M2
+    name: "Business Structures & Entrepreneurship"
+    description: "Types of business organizations, their ownership and liability characteristics, how businesses start, grow, and sometimes fail, and the entrepreneurial process"
+
+    learning_outcomes:
+      - "Describe the key features of sole proprietorships, partnerships, corporations, LLCs, and nonprofits"
+      - "Explain how liability differs across business structures"
+      - "Create a basic business plan with product, market, costs, and revenue model"
+      - "Understand how businesses raise money (revenue, loans, investment)"
+      - "Analyze why businesses succeed or fail using real examples"
+      - "Compare cooperative, nonprofit, and for-profit organizational models"
+
+    topics:
+      - "Sole Proprietorship"
+      - "Partnership & Partnership Agreements"
+      - "Corporation (C-Corp, S-Corp)"
+      - "Limited Liability Company (LLC)"
+      - "Nonprofit & Cooperative Structures"
+      - "Starting a Business: Idea to Launch"
+      - "Business Plans & Market Research"
+      - "Growth, Scaling, and Fundraising"
+      - "Why Businesses Fail: Case Studies"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 20
+      high: 25
+
+    prerequisite_modules: [BUS-101-M1]
+
+    activities:
+      count: 2
+      examples:
+        - "Lemonade Stand Business Plan"
+        - "Compare Business Types: Research and Present"
+
+    assessments:
+      - "Can student match business structures to appropriate scenarios?"
+      - "Does student understand the concept of limited liability?"
+      - "Can student create a realistic simple business plan?"
+      - "Does student recognize why business structure choice matters?"
+
+  - id: BUS-101-M3
+    name: "Finance & Accounting Fundamentals"
+    description: "Revenue, expenses, profit, budgeting, financial statements, personal finance, saving, credit, debt, compound interest, and investment basics"
+
+    learning_outcomes:
+      - "Calculate profit as revenue minus expenses"
+      - "Create and manage a personal or household budget"
+      - "Read and interpret a simple income statement and balance sheet"
+      - "Understand the difference between cash flow and profitability"
+      - "Explain how compound interest works for both savings and debt"
+      - "Describe basic investment concepts: risk, return, and diversification"
+
+    topics:
+      - "Revenue, Expenses & Profit"
+      - "Budgeting & Financial Planning"
+      - "The Income Statement"
+      - "The Balance Sheet (Assets, Liabilities, Equity)"
+      - "Cash Flow Management"
+      - "Personal Finance: Saving, Spending, Credit"
+      - "Compound Interest & Time Value of Money"
+      - "Investment Basics: Stocks, Bonds, Mutual Funds"
+      - "Taxes: What They Are and How They Work"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 25
+      high: 30
+
+    prerequisite_modules: [BUS-101-M1]
+
+    activities:
+      count: 2
+      examples:
+        - "Personal Budget Challenge: Track Spending for a Week"
+        - "Read a Simple Income Statement"
+
+    assessments:
+      - "Can student calculate profit from revenue and expense data?"
+      - "Does student create a budget that distinguishes needs from wants?"
+      - "Can student extract key information from a financial statement?"
+      - "Does student understand how compound interest grows over time?"
+
+  - id: BUS-101-M4
+    name: "Contracts, Rights & Legal Systems"
+    description: "How contracts work, what makes agreements enforceable, rights and obligations, the court system, consumer protection, employment law, property rights, and constitutional rights"
+
+    learning_outcomes:
+      - "Identify the essential elements of a contract: offer, acceptance, consideration, capacity"
+      - "Recognize everyday agreements as contracts with legal force"
+      - "Understand basic rights as a consumer, employee, and citizen"
+      - "Describe how courts resolve disputes when agreements break down"
+      - "Read and interpret a basic legal document in plain language"
+      - "Distinguish between criminal and civil law and their different processes"
+
+    topics:
+      - "Contract Essentials: Offer, Acceptance, Consideration"
+      - "Capacity & Legality in Contracts"
+      - "Consumer Protection & Warranty Law"
+      - "Employment Law: Wages, Safety, Discrimination"
+      - "Property Rights: Real, Personal, and Intellectual"
+      - "The Court System: Trial Courts, Appeals, Supreme Court"
+      - "Constitutional Rights: Speech, Due Process, Equal Protection"
+      - "Dispute Resolution: Negotiation, Mediation, Arbitration, Litigation"
+      - "Reading & Understanding Legal Documents"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 10
+      elementary: 15
+      middle: 20
+      high: 30
+
+    prerequisite_modules: [BUS-101-M1]
+
+    activities:
+      count: 2
+      examples:
+        - "Draft a Simple Contract Between Friends"
+        - "Mock Trial: Breach of Contract"
+
+    assessments:
+      - "Can student identify offer, acceptance, and consideration in an agreement?"
+      - "Does student recognize that clicking 'I agree' is a contractual action?"
+      - "Can student describe the basic structure of the court system?"
+      - "Does student understand basic constitutional rights and their limits?"
+
+  - id: BUS-101-M5
+    name: "Ethics, Governance & Social Responsibility"
+    description: "Corporate responsibility, stakeholder theory, regulation, transparency, advertising ethics, data privacy, whistleblowing, and doing business in ways that create value without destroying trust"
+
+    learning_outcomes:
+      - "Identify stakeholders affected by business decisions beyond just owners and customers"
+      - "Evaluate business decisions using ethical frameworks: utilitarian, rights-based, stakeholder"
+      - "Understand why regulation exists and how it balances innovation with protection"
+      - "Analyze real business ethics cases for ethical principles and lessons"
+      - "Distinguish between legal compliance and ethical responsibility"
+      - "Assess corporate social responsibility claims for substance vs. greenwashing"
+
+    topics:
+      - "Stakeholder Theory: Who Is Affected?"
+      - "Corporate Governance: Boards, Accountability, Transparency"
+      - "Business Ethics Frameworks"
+      - "Regulation & Government Agencies"
+      - "Advertising Ethics: Persuasion vs. Deception"
+      - "Data Privacy & Digital Ethics"
+      - "Whistleblowing: Ethics and Consequences"
+      - "Corporate Social Responsibility & ESG"
+      - "Environmental Responsibility in Business"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 8
+      elementary: 12
+      middle: 18
+      high: 25
+
+    prerequisite_modules: [BUS-101-M1]
+
+    activities:
+      count: 2
+      examples:
+        - "Ethics Dilemma Discussion: Business Scenarios"
+        - "Stakeholder Map for a Local Business"
+
+    assessments:
+      - "Does student consider multiple stakeholders in business decisions?"
+      - "Can student identify ethical dimensions beyond legal compliance?"
+      - "Does student recognize greenwashing vs. genuine responsibility?"
+      - "Can student articulate why business ethics matter for long-term success?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Economic Reasoning"
+    description: "Ability to analyze decisions through the lens of costs, benefits, tradeoffs, and incentives"
+    assessed_in: [BUS-101-M1, BUS-101-M2, BUS-101-M3]
+
+  - name: "Legal Literacy"
+    description: "Ability to identify legal dimensions of everyday situations and understand basic rights and obligations"
+    assessed_in: [BUS-101-M4, BUS-101-M5]
+
+  - name: "Financial Literacy"
+    description: "Ability to manage money, read financial documents, and make informed financial decisions"
+    assessed_in: [BUS-101-M1, BUS-101-M3]
+
+  - name: "Ethical Judgment"
+    description: "Ability to recognize ethical dimensions, consider stakeholders, and reason through dilemmas"
+    assessed_in: [BUS-101-M2, BUS-101-M4, BUS-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Sequential Pathway"
+    description: "M1 -> M2 -> M3 -> M4 -> M5"
+    rationale: "Economics first as foundation, then business structures, then finance, then legal systems, then ethics as capstone reflection tying everything together"
+
+  - name: "Entrepreneur Pathway"
+    description: "M1 -> M2 -> M3, with M4 and M5 woven in as needed"
+    rationale: "For learners motivated by starting something: understand markets, choose a structure, manage finances, and pull in legal and ethical knowledge as business situations demand it"
+
+  - name: "Civic Engagement Pathway"
+    description: "M1 -> M4 -> M5 -> M2 -> M3"
+    rationale: "For learners interested in rights, justice, and governance: start with economic context, learn legal systems and ethics first, then apply to business structures and finance"
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Real-World Application"
+    description: "All five modules connect concepts to everyday situations students can observe and analyze"
+    cached: true
+
+  - pattern: "Grade-Level Scaffolding"
+    description: "Each module follows the same Foundation through College+ progression structure"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Activities follow consistent template with materials, objectives, and grade-level variations"
+    cached: true
+
+  - pattern: "Assessment Rubric"
+    description: "Assessment uses parallel reasoning-based rubric across modules"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner correctly predicts price changes from supply/demand shifts"
+    - "When learner identifies all essential contract elements in a real document"
+    - "When learner considers multiple stakeholders in ethical reasoning"
+    - "When learner creates a realistic budget with appropriate tradeoffs"
+    - "When learner distinguishes legal compliance from ethical responsibility"
+
+  pattern_detection:
+    - "Effective business plan structures (clear problem, realistic financials)"
+    - "Strong contract reading habits (identifying obligations and risks)"
+    - "Mature ethical reasoning (stakeholder awareness, complexity acknowledgment)"
+    - "Sound financial decision-making (needs vs. wants, long-term thinking)"
+
+  skill_promotion:
+    - "Promote effective stakeholder analysis frameworks as reusable skills"
+    - "Create budget templates from observed best practices"
+    - "Build contract review checklists from successful analysis patterns"

@@ -1,0 +1,545 @@
+# GSD Skill Metadata
+pack_id: READ-101
+pack_name: "Reading & Literacy -- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: literacy
+
+# Content Description
+description: |
+  Reading as the master skill that unlocks all other learning: phonemic
+  awareness, decoding, vocabulary, comprehension strategies, critical
+  analysis, and discipline-specific reading. Covers literacy development
+  from pre-reading through academic research, emphasizing meaning-making
+  over mere word pronunciation.
+
+short_description: "Reading comprehension, literacy development, and textual analysis across PreK-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Literacy Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge: []
+
+# What This Pack Enables
+enables:
+  - WRIT-101
+  - CRIT-101
+  - HIST-101
+  - COMM-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [40, 60]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [50, 70]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [60, 90]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [80, 120]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [120, 180]
+
+# Modules
+modules:
+  - id: READ-101-M1
+    name: "Foundations of Reading"
+    description: "Phonemic awareness, phonics, decoding, sight word recognition, fluency building, and print concepts"
+    learning_outcomes:
+      - "Identify and manipulate individual sounds (phonemes) in spoken words"
+      - "Apply systematic phonics knowledge to decode unfamiliar words"
+      - "Recognize high-frequency sight words automatically"
+      - "Read grade-level text with appropriate fluency and expression"
+      - "Demonstrate understanding of basic print concepts"
+    topics:
+      - "Phonemic Awareness & Sound Manipulation"
+      - "Systematic Phonics & Decoding"
+      - "Sight Word Recognition"
+      - "Fluency Development"
+      - "Print Concepts"
+      - "Listening Comprehension"
+    grade_levels: ["PreK", "K", "1", "2", "3", "4", "5"]
+    time_estimates:
+      foundation: 40
+      elementary: 25
+      middle: 10
+    prerequisite_modules: []
+    activities:
+      count: 6
+      examples:
+        - "Phonics Sound Safari"
+        - "Sight Word Memory Match"
+        - "Decoding Detective"
+        - "Fluency Performance Theater"
+        - "Read-Aloud Listening Lab"
+        - "Letter-Sound Construction"
+    assessments:
+      - "Can student segment and blend individual phonemes?"
+      - "Does student apply decoding strategies to unfamiliar words?"
+      - "Can student read grade-level text fluently?"
+      - "Does student recognize high-frequency sight words automatically?"
+
+  - id: READ-101-M2
+    name: "Vocabulary & Language"
+    description: "Context clues, morphological analysis, academic vocabulary, word relationships, and dictionary skills"
+    learning_outcomes:
+      - "Use context clues systematically to determine word meaning"
+      - "Analyze word structure using roots, prefixes, and suffixes"
+      - "Acquire and use academic vocabulary across disciplines"
+      - "Understand word relationships including synonyms, antonyms, and connotation"
+      - "Use reference tools to confirm and extend word knowledge"
+    topics:
+      - "Context Clue Strategies"
+      - "Morphological Awareness"
+      - "Academic Vocabulary"
+      - "Word Relationships"
+      - "Dictionary & Reference Skills"
+      - "Word Consciousness"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 30
+      high: 20
+    prerequisite_modules: [READ-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Context Clue Detective"
+        - "Word Root Explorer"
+        - "Vocabulary Concept Map"
+        - "Academic Word Wall"
+        - "Shades of Meaning Spectrum"
+        - "Word Collection Journal"
+    assessments:
+      - "Can student use context clues to determine unfamiliar word meanings?"
+      - "Does student analyze word parts to infer meaning?"
+      - "Can student use academic vocabulary appropriately?"
+      - "Does student demonstrate understanding of word relationships?"
+
+  - id: READ-101-M3
+    name: "Comprehension & Meaning-Making"
+    description: "Predicting, questioning, summarizing, visualizing, making connections, monitoring comprehension, and text structure recognition"
+    learning_outcomes:
+      - "Apply multiple comprehension strategies flexibly while reading"
+      - "Monitor own comprehension and apply fix-up strategies"
+      - "Summarize texts accurately, distinguishing main ideas from details"
+      - "Make meaningful connections between text, self, other texts, and the world"
+      - "Recognize and use text structure to guide comprehension"
+    topics:
+      - "Predicting & Anticipating"
+      - "Questioning"
+      - "Summarizing & Determining Importance"
+      - "Visualizing"
+      - "Making Connections"
+      - "Comprehension Monitoring"
+      - "Text Structure Recognition"
+    grade_levels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 35
+      middle: 40
+      high: 25
+    prerequisite_modules: [READ-101-M1, READ-101-M2]
+    activities:
+      count: 7
+      examples:
+        - "Story Map Construction"
+        - "Think-Aloud Reading Walk"
+        - "Question Generation Challenge"
+        - "Summarize in Six Words"
+        - "Connection Web"
+        - "Comprehension Repair Workshop"
+        - "Text Structure Sort"
+    assessments:
+      - "Can student summarize a text accurately and concisely?"
+      - "Does student generate meaningful questions while reading?"
+      - "Can student identify when comprehension breaks down?"
+      - "Does student recognize and use text structure?"
+
+  - id: READ-101-M4
+    name: "Critical Reading & Analysis"
+    description: "Author's purpose, bias detection, evidence evaluation, argument analysis, comparative reading, and source credibility"
+    learning_outcomes:
+      - "Identify author's purpose, audience, and perspective"
+      - "Evaluate evidence quality and relevance in nonfiction"
+      - "Detect bias in word choice, framing, and information selection"
+      - "Analyze argument structure and identify logical fallacies"
+      - "Compare multiple sources to develop nuanced understanding"
+    topics:
+      - "Author's Purpose & Audience"
+      - "Bias Detection"
+      - "Evidence Evaluation"
+      - "Logical Reasoning & Fallacies"
+      - "Comparative Reading"
+      - "Source Credibility"
+    grade_levels: ["4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 15
+      middle: 35
+      high: 40
+    prerequisite_modules: [READ-101-M3]
+    activities:
+      count: 6
+      examples:
+        - "News Article Bias Detective"
+        - "Compare Two Versions of a Story"
+        - "Argument Mapping"
+        - "Source Credibility Evaluation"
+        - "Fact-Check Challenge"
+        - "Perspective-Taking Exercise"
+    assessments:
+      - "Can student identify author's purpose and audience?"
+      - "Does student evaluate evidence quality?"
+      - "Can student detect bias and explain framing effects?"
+      - "Does student compare and synthesize multiple sources?"
+
+  - id: READ-101-M5
+    name: "Reading Across the Curriculum"
+    description: "Discipline-specific reading strategies for science, history, mathematics, technical texts, and digital media"
+    learning_outcomes:
+      - "Apply appropriate strategies for reading science texts with figures and tables"
+      - "Analyze historical primary sources with sourcing and contextualization"
+      - "Read mathematical texts precisely, translating between verbal and symbolic forms"
+      - "Follow procedural and technical texts accurately"
+      - "Evaluate digital sources critically in online environments"
+    topics:
+      - "Reading Science Texts"
+      - "Reading Historical Texts"
+      - "Reading Mathematical Texts"
+      - "Reading Technical Texts"
+      - "Digital & Online Reading"
+      - "Cross-Discipline Vocabulary"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 15
+      middle: 30
+      high: 35
+    prerequisite_modules: [READ-101-M3]
+    activities:
+      count: 6
+      examples:
+        - "Science Text Anatomy"
+        - "Primary Source Analysis"
+        - "Math Word Problem Translation"
+        - "Follow the Instructions Challenge"
+        - "Website Evaluation Workshop"
+        - "Cross-Discipline Vocabulary Comparison"
+    assessments:
+      - "Can student adjust reading strategies for different disciplines?"
+      - "Does student integrate visual and textual information?"
+      - "Can student analyze historical sources appropriately?"
+      - "Does student evaluate digital sources for credibility?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-PHO-001
+    description: "Identify and manipulate individual phonemes in spoken words"
+    levels: ["PreK", "K", "1", "2"]
+
+  - code: LO-DEC-001
+    description: "Apply systematic decoding strategies to read unfamiliar words"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-VOC-001
+    description: "Use context clues and morphological analysis to determine word meanings"
+    levels: ["3", "4", "5", "6", "7", "8"]
+
+  - code: LO-COM-001
+    description: "Apply multiple comprehension strategies flexibly across text types"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-CRT-001
+    description: "Evaluate texts critically for author's purpose, bias, and evidence quality"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-XDS-001
+    description: "Adjust reading strategies for discipline-specific text demands"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Running Records"
+    frequency: ongoing
+
+  - type: formative
+    name: "Comprehension Check-Ins"
+    frequency: weekly
+
+  - type: summative
+    name: "Reading Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Critical Analysis Essay"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: readworks
+    url: https://www.readworks.org
+    description: "Research-based reading comprehension passages with aligned activities"
+
+  - name: commonlit
+    url: https://www.commonlit.org
+    description: "Free digital library of literary and nonfiction texts"
+
+  - name: newsela
+    url: https://newsela.com
+    description: "Current events articles at multiple reading levels"
+
+interactive_elements:
+  - type: assessment
+    name: "Fluency Tracker"
+
+  - type: tool
+    name: "Vocabulary Builder"
+
+  - type: visualization
+    name: "Story Map Creator"
+
+  - type: game
+    name: "Context Clue Detective"
+
+  - type: collaboration
+    name: "Peer Reading Conference"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "All visual content has text descriptions. Phonics activities include audio components. Dyslexia-friendly font options available. Consider adding text-to-speech support for struggling decoders."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Common Core State Standards (ELA)"
+    version: 2010
+    alignments:
+      "CCSS.ELA-LITERACY.RF.K.1": "Demonstrate phonemic awareness"
+      "CCSS.ELA-LITERACY.RF.1.2": "Demonstrate phonics knowledge"
+      "CCSS.ELA-LITERACY.RF.2.3": "Know and apply phonics"
+      "CCSS.ELA-LITERACY.RL.3.1": "Ask and answer questions"
+      "CCSS.ELA-LITERACY.RI.4.1": "Refer to details and examples"
+      RF: "Reading: Foundational Skills"
+      RI: "Reading: Informational Text"
+      RL: "Reading: Literature"
+      L: "Language"
+  - framework: "Science of Reading Research Base"
+    version: 2020
+    alignments:
+      "Phonemic Awareness": true
+      "Phonics": true
+      "Fluency": true
+      "Comprehension": true
+  - framework: "IB Middle Years Programme (Language & Literature)"
+    version: "2024"
+    alignments:
+      MYP.LANG.A: "Knowing and understanding"
+      MYP.LANG.B: "Comprehending spoken and visual text"
+      MYP.LANG.C: "Producing text"
+  - framework: "UK National Curriculum (English - Reading)"
+    version: "2014"
+    alignments:
+      KS1.READ: "Word reading and comprehension"
+      KS2.READ: "Reading skills and comprehension"
+      "Fluency": true
+      "Vocabulary": true
+      "Comprehension": true
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Difficulty scales with content complexity. Foundational skills are concrete and accessible; critical reading demands grow with text complexity. Accessible to all learners with appropriate scaffolding."
+
+# Content Flags
+content_flags:
+  - flag: developmental_variation
+    description: "Reading development varies enormously among children. Age-based expectations should be used as guidelines, not rigid benchmarks."
+    mitigation: "Emphasize progress over milestones. Provide multiple pathways and pacing options. Normalize variation in reading development timelines."
+
+  - flag: learning_difference_sensitivity
+    description: "Dyslexia and other reading-related learning differences affect 5-10% of learners. Activities should be inclusive and not shame struggling readers."
+    mitigation: "Offer multi-sensory options for all activities. Avoid timed reading as assessment. Separate decoding ability from intelligence or effort."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/read-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "READ-101"
+  looking_for:
+    - "Multi-sensory phonics activities for diverse learners"
+    - "Text sets at multiple complexity levels on the same topics"
+    - "Bilingual vocabulary resources and reading activities"
+    - "Assessment tools for running records and fluency scoring"
+    - "Translations to Spanish & Mandarin"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Literacy Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - reading
+  - literacy
+  - phonics
+  - comprehension
+  - vocabulary
+  - critical-reading
+  - decoding
+  - fluency
+  - foundational
+  - language-arts
+
+# External Resources
+resources:
+  - type: textbook
+    title: "Proust and the Squid"
+    author: "Maryanne Wolf"
+    url: null
+
+  - type: online_platform
+    title: "ReadWorks"
+    author: "ReadWorks Inc."
+    url: "https://www.readworks.org"
+
+  - type: online_platform
+    title: "CommonLit"
+    author: "CommonLit Inc."
+    url: "https://www.commonlit.org"
+
+# Related Packs
+related_packs:
+  - id: WRIT-101
+    relationship: "Writing is the reciprocal of reading -- extensive reading builds writing skill"
+
+  - id: CRIT-101
+    relationship: "Critical thinking builds directly on critical reading skills"
+
+  - id: HIST-101
+    relationship: "History requires reading primary and secondary sources analytically"
+
+  - id: COMM-101
+    relationship: "Communication skills rest on the literacy foundation reading provides"
+
+  - id: SCI-101
+    relationship: "Scientific literacy includes reading and evaluating research texts"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "book-open"
+    color: "#E91E63"
+    position: "Featured - Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "READ-101-core-concepts"
+    - "READ-101-comprehension-strategies"
+    - "READ-101-assessment-patterns"
+    - "READ-101-parent-guidance"
+
+# File References
+files:
+  vision_document: "READ-101-vision.md"
+  modules_definition: "READ-101-modules.yaml"
+  activities: "READ-101-activities.json"
+  assessment: "READ-101-assessment.md"
+  resources: "READ-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering foundations, vocabulary, comprehension, critical reading, and cross-disciplinary reading"
+      - "Contributed 31 starter activities across all modules"
+      - "Aligned to Common Core ELA and Science of Reading research"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"

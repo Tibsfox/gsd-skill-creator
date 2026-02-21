@@ -1,0 +1,296 @@
+# TECH-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: TECH-101
+pack_name: "Technology & Tools — Foundational Knowledge Pack"
+
+modules:
+  - id: TECH-101-M1
+    name: "Tools & Simple Machines"
+    description: "Understanding tools as extensions of human capability, the six simple machines, mechanical advantage, and compound machines"
+
+    learning_outcomes:
+      - "Identify tools and explain what human capability each extends"
+      - "Name and describe the six simple machines"
+      - "Explain mechanical advantage as a trade-off between force and distance"
+      - "Identify simple machines within compound machines"
+      - "Select appropriate tools for specific tasks with reasoning"
+
+    topics:
+      - "Tools as Extensions of Human Capability"
+      - "The Six Simple Machines (Lever, Wheel & Axle, Pulley, Inclined Plane, Wedge, Screw)"
+      - "Mechanical Advantage"
+      - "Compound Machines"
+      - "Tool Selection & Fitness for Purpose"
+      - "Safe Tool Use"
+      - "Historical Development of Tools"
+
+    grade_levels: [PreK, K, 1, 2, 3, 4, 5, 6, 7, 8]
+
+    time_estimates:
+      foundation: 30
+      elementary: 25
+      middle: 15
+
+    prerequisite_modules: []
+
+    activities:
+      count: 4
+      examples:
+        - "Simple Machine Scavenger Hunt"
+        - "Build a Lever to Lift a Book"
+        - "Pulley Power Challenge"
+        - "Compound Machine Dissection"
+
+    assessments:
+      - "Can student identify simple machines in everyday objects?"
+      - "Does student explain mechanical advantage accurately?"
+      - "Can student select appropriate tools for a given task?"
+      - "Can student identify all simple machines in a compound machine?"
+
+  - id: TECH-101-M2
+    name: "Systems & Processes"
+    description: "Understanding systems as interconnected parts, mapping inputs/outputs, feedback loops, and unintended consequences"
+
+    learning_outcomes:
+      - "Identify the components of a system and explain how they interact"
+      - "Map inputs, outputs, and processes in real-world systems"
+      - "Distinguish between positive and negative feedback loops"
+      - "Predict unintended consequences of changes to a system"
+      - "Analyze manufacturing and supply chain processes"
+
+    topics:
+      - "Systems as Connected Parts"
+      - "Inputs, Outputs, and Processes"
+      - "Positive and Negative Feedback Loops"
+      - "Unintended Consequences & Side Effects"
+      - "Manufacturing & Supply Chains"
+      - "System Optimization"
+      - "System Failure Modes"
+
+    grade_levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      elementary: 25
+      middle: 35
+      high: 30
+
+    prerequisite_modules: [TECH-101-M1]
+
+    activities:
+      count: 4
+      examples:
+        - "Map a System (Breakfast to Table)"
+        - "Feedback Loop Identification Game"
+        - "Factory Flow Simulation"
+        - "Side Effect Detective"
+
+    assessments:
+      - "Can student map a complete system with inputs, outputs, and feedback?"
+      - "Does student distinguish positive from negative feedback?"
+      - "Can student predict consequences of changing system components?"
+      - "Can student optimize a system for multiple variables?"
+
+  - id: TECH-101-M3
+    name: "Design & Engineering Process"
+    description: "The iterative design cycle: identifying needs, prototyping, testing, and improving solutions under real-world constraints"
+
+    learning_outcomes:
+      - "Follow the design cycle from problem identification through iteration"
+      - "Define problems clearly and identify relevant constraints"
+      - "Generate multiple solution ideas and evaluate them against criteria"
+      - "Build prototypes and test them systematically"
+      - "Iterate designs based on test results and user feedback"
+
+    topics:
+      - "The Design Cycle (Define, Research, Brainstorm, Prototype, Test, Iterate)"
+      - "Constraints & Trade-offs"
+      - "Prototyping Methods"
+      - "Systematic Testing"
+      - "Human-Centered Design"
+      - "Failure Analysis & Iteration"
+      - "Design Documentation"
+
+    grade_levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 40
+      high: 35
+
+    prerequisite_modules: []
+
+    activities:
+      count: 4
+      examples:
+        - "Design a Better Backpack Strap"
+        - "Paper Bridge Engineering Challenge"
+        - "Constraint Cards Design Game"
+        - "Failure Analysis Case Study"
+
+    assessments:
+      - "Can student complete a full design cycle independently?"
+      - "Does student consider constraints and trade-offs in design?"
+      - "Can student iterate based on testing data?"
+      - "Does student incorporate user needs into design decisions?"
+
+  - id: TECH-101-M4
+    name: "Digital Technology Foundations"
+    description: "Conceptual understanding of how computers work, data representation, networks, algorithms, and security"
+
+    learning_outcomes:
+      - "Explain how computers store and process information at a conceptual level"
+      - "Understand binary encoding and data representation"
+      - "Trace how information travels through networks"
+      - "Describe what algorithms are and why some are better than others"
+      - "Reason about security and privacy trade-offs in digital systems"
+
+    topics:
+      - "How Computers Work (Input, Processing, Storage, Output)"
+      - "Binary & Data Representation"
+      - "Networks & Communication Protocols"
+      - "Algorithms & Computational Thinking"
+      - "Security, Encryption & Privacy"
+      - "The Internet Architecture"
+      - "Digital Information Lifecycle"
+
+    grade_levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    time_estimates:
+      elementary: 20
+      middle: 35
+      high: 40
+
+    prerequisite_modules: [TECH-101-M1]
+
+    activities:
+      count: 4
+      examples:
+        - "How Does the Internet Work? Trace a Message"
+        - "Binary Number Decoder"
+        - "Algorithm Sorting Race"
+        - "Network Packet Relay"
+
+    assessments:
+      - "Can student trace data through a digital system?"
+      - "Does student understand binary encoding conceptually?"
+      - "Can student compare algorithm efficiency?"
+      - "Can student reason about security trade-offs?"
+
+  - id: TECH-101-M5
+    name: "Technology & Society"
+    description: "Understanding how technology shapes culture and culture shapes technology, including ethics, environmental impact, and innovation history"
+
+    learning_outcomes:
+      - "Describe how specific technologies changed societies"
+      - "Evaluate technologies from ethical, environmental, and equity perspectives"
+      - "Trace the lifecycle of a product from raw materials to disposal"
+      - "Connect modern technologies to their historical predecessors"
+      - "Practice responsible digital citizenship"
+
+    topics:
+      - "Technology as Cultural Force"
+      - "Ethics of Technology"
+      - "Environmental Impact & Sustainability"
+      - "Innovation History & Predecessors"
+      - "Responsible Use & Digital Citizenship"
+      - "Technology Policy & Governance"
+      - "Stakeholder Analysis"
+
+    grade_levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+
+    time_estimates:
+      elementary: 15
+      middle: 25
+      high: 35
+
+    prerequisite_modules: [TECH-101-M2]
+
+    activities:
+      count: 4
+      examples:
+        - "Technology Impact Timeline"
+        - "Ethical Dilemma Discussion"
+        - "Product Lifecycle Analysis"
+        - "Innovation Archaeology"
+
+    assessments:
+      - "Can student identify multiple stakeholder perspectives?"
+      - "Does student connect historical patterns to current technologies?"
+      - "Can student evaluate environmental trade-offs?"
+      - "Can student construct balanced ethical arguments?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Systems Thinking"
+    description: "Ability to see technology as interconnected systems rather than isolated objects"
+    assessed_in: [TECH-101-M1, TECH-101-M2, TECH-101-M3, TECH-101-M4, TECH-101-M5]
+
+  - name: "Design Reasoning"
+    description: "Ability to identify needs, generate solutions, evaluate trade-offs, and iterate"
+    assessed_in: [TECH-101-M1, TECH-101-M3, TECH-101-M4]
+
+  - name: "Critical Evaluation"
+    description: "Ability to evaluate technology against multiple criteria: effectiveness, efficiency, safety, ethics, sustainability"
+    assessed_in: [TECH-101-M2, TECH-101-M3, TECH-101-M5]
+
+  - name: "Technical Communication"
+    description: "Ability to explain how technology works to different audiences using appropriate language and diagrams"
+    assessed_in: [TECH-101-M1, TECH-101-M2, TECH-101-M3, TECH-101-M4, TECH-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 (Tools) → M2 (Systems) → M3 (Design) → M4 (Digital) → M5 (Society)"
+    rationale: "Builds from concrete (simple machines) through abstraction (systems, design) to digital and societal contexts"
+
+  - name: "Maker Pathway"
+    description: "M1 (Tools) → M3 (Design) → M2 (Systems) → M4 (Digital) → M5 (Society)"
+    rationale: "Prioritizes hands-on building; systems thinking emerges from design experience"
+
+  - name: "Digital-First Pathway"
+    description: "M4 (Digital) → M2 (Systems) → M3 (Design) → M1 (Tools) → M5 (Society)"
+    rationale: "For learners already comfortable with digital technology; works backward to physical principles"
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow same introduction structure: what it teaches, interactive elements, technical notes"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Activities follow consistent template: name, materials, grade range, duration, objectives"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure across all modules"
+    cached: true
+
+  - pattern: "Design Cycle Integration"
+    description: "The design cycle pattern (define, brainstorm, prototype, test, iterate) appears across modules"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner correctly identifies what capability a tool extends"
+    - "When learner maps a system completely with feedback loops"
+    - "When learner iterates on a design after testing"
+    - "When learner traces data through a digital system"
+    - "When learner evaluates technology from multiple perspectives"
+
+  pattern_detection:
+    - "Effective prototyping strategies"
+    - "System analysis methods that identify feedback loops"
+    - "Design critique patterns that improve iteration quality"
+    - "Debugging strategies for digital systems"
+
+  skill_promotion:
+    - "Promote successful design iteration patterns to reusable skills"
+    - "Create system analysis templates from observed successes"
+    - "Build technology evaluation frameworks from learner reasoning"

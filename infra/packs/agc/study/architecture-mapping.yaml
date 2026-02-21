@@ -1,0 +1,739 @@
+# AGC Architectural Study -- Architecture Mapping
+# Maps Apollo Guidance Computer concepts to GSD/skill-creator/GSD-OS parallels
+# Phase 207 Plan 01 -- STDY-01
+#
+# This document extracts actionable engineering patterns from the AGC architecture
+# (1960s aerospace real-time software) and translates them into improvements for
+# the GSD ecosystem. Each of the 13 concepts includes the original AGC design,
+# its modern computing equivalent, the specific GSD parallel, and concrete
+# recommendations for adoption.
+#
+# References: infra/packs/agc/archive/catalog.yaml (doc_id citations)
+
+metadata:
+  version: 1
+  generated: "2026-02-18"
+  catalog_ref: "infra/packs/agc/archive/catalog.yaml"
+  total_concepts: 13
+  purpose: "Extract actionable engineering patterns from AGC architecture for GSD ecosystem improvement"
+  downstream_consumers:
+    - "Phase 213: AGC CPU & Memory (implements CPU and memory blocks)"
+    - "Phase 214: AGC Interrupts & Timing (implements interrupt system)"
+    - "Phase 216: Executive & Restart (implements scheduler and BAILOUT)"
+    - "Phase 217: DSKY Interface (implements display/keyboard)"
+    - "Phase 222: AGC GSD-OS Integration (assembles full chipset)"
+
+concepts:
+  - id: agc-concept-01
+    name: "Executive"
+    category: "scheduling"
+    agc_description: |
+      The AGC Executive is a priority-based cooperative job scheduler that manages
+      all computational tasks aboard the spacecraft. It supports 8 priority levels
+      (0-7, with 7 being highest) and maintains a pool of 7 core sets (register
+      save areas) for concurrent jobs. Jobs are created via NOVAC (no VAC area
+      needed -- lightweight) or FINDVAC (allocate a full VAC area for extended
+      computation), and priority can be changed mid-execution via CHANG1/CHANG2.
+
+      Unlike preemptive schedulers, the Executive relies on cooperative yielding.
+      Jobs voluntarily release the CPU by calling TC BANKCALL to invoke system
+      services, or by executing a JOBSLEEP/JOBWAKE pair to defer until a condition
+      is met. The highest-priority runnable job always executes next when the
+      current job yields. This cooperative model eliminates the need for hardware
+      context switching or memory protection, saving precious gates in the AGC's
+      ~5,600 NOR-gate architecture.
+
+      The Executive also manages the interface between jobs and the Waitlist (timer-
+      driven tasks). When a Waitlist task completes, it can wake a sleeping job or
+      create a new job via NOVAC. This job-task hierarchy -- long-running jobs
+      scheduled by priority, short-lived tasks triggered by timers -- is the
+      fundamental scheduling primitive of all AGC flight software.
+    doc_refs:
+      - "agc-arch-016"
+      - "agc-soft-035"
+      - "agc-arch-007"
+      - "agc-edu-001"
+    modern_equivalent: |
+      The AGC Executive maps directly to modern OS process schedulers, particularly
+      cooperative multitasking systems like classic Mac OS, Windows 3.1, and early
+      Amiga Exec. In modern terms, it resembles a thread pool with priority queues
+      and voluntary yield points. The NOVAC/FINDVAC distinction parallels the
+      difference between lightweight coroutines and full threads (green threads vs.
+      OS threads). Modern equivalents include Go's goroutine scheduler, Tokio's
+      task runtime in Rust, and Node.js's event loop -- all of which use cooperative
+      scheduling within a constrained execution environment.
+    gsd_parallel: |
+      skill-creator's 6-stage skill loading pipeline (Score -> Resolve -> ModelFilter
+      -> CacheOrder -> Budget -> Load) is a priority-based scheduler: skills compete
+      for limited token budget the way AGC jobs compete for core sets. GSD executor
+      agents are "jobs" with implicit priority based on phase ordering and wave
+      assignment. The AMIGA ME-1 phase engine manages task lifecycle (create, run,
+      pause, resume, complete) much like the Executive manages job states (dormant,
+      runnable, sleeping, running). The wave-based parallel execution model in GSD
+      milestones mirrors the Executive's priority-level grouping -- Wave 1 jobs run
+      before Wave 2, just as priority-7 AGC jobs preempt priority-3 jobs.
+    actionable_recommendations:
+      - "Add explicit priority levels (1-8) to GSD executor agents, allowing critical-path phases to preempt lower-priority background work when context budget is constrained"
+      - "Implement cooperative yield points in long-running GSD phases: after each plan completes within a phase, check if a higher-priority task has been queued and yield if so"
+      - "Model the skill loading pipeline as an Executive-style scheduler with formal job states (queued, loading, active, deferred) and transition logging for observability"
+
+  - id: agc-concept-02
+    name: "Waitlist"
+    category: "scheduling"
+    agc_description: |
+      The Waitlist is the AGC's timer-driven deferred task scheduler. Unlike the
+      Executive (which schedules CPU-bound jobs by priority), the Waitlist schedules
+      short-duration tasks triggered by elapsed time. Tasks are registered with a
+      delay (in centiseconds) and a start address. When the delay expires, the
+      hardware timer generates a T3RUPT interrupt, and the Waitlist dispatch code
+      transfers control to the task.
+
+      Waitlist tasks are designed to be short (typically under 5ms) because they
+      run at interrupt level and block all other processing. For longer work, a
+      Waitlist task creates an Executive job (via NOVAC) and returns. This two-tier
+      model -- time-triggered Waitlist tasks spawning priority-scheduled Executive
+      jobs -- provides both precision timing and sustained computation without
+      either mechanism overloading the other.
+
+      The Waitlist maintains a sorted list of pending tasks, and T3RUPT fires at
+      the earliest pending time. After dispatching a task, the hardware timer is
+      reprogrammed for the next pending event. This is the AGC equivalent of a
+      timer wheel or hierarchical timing wheel used in modern network stacks.
+    doc_refs:
+      - "agc-arch-016"
+      - "agc-soft-035"
+      - "agc-arch-006"
+    modern_equivalent: |
+      The Waitlist maps to timer wheels (Hashed/Hierarchical) used in Linux kernel
+      networking and event-driven frameworks. It is functionally equivalent to
+      setTimeout/setInterval in JavaScript, tokio::time::sleep in Rust, or
+      time.AfterFunc in Go. The sorted-list approach with hardware timer
+      reprogramming is precisely how modern HRTIMER (high-resolution timer)
+      subsystems work in Linux. The two-tier design (timer task spawns long-running
+      job) is the standard pattern in async runtimes: a timer fires, enqueues a
+      future, and the runtime scheduler picks it up.
+    gsd_parallel: |
+      GSD phase sequencing operates as a Waitlist: phases are ordered by number,
+      and each "fires" when its dependencies complete. Wave-based scheduling is
+      a coarser version -- Wave N fires after Wave N-1 completes, like a Waitlist
+      with group timers. The GSD pause/resume mechanism (pause-work -> clear ->
+      resume-work) mirrors JOBSLEEP/JOBWAKE: defer execution until the context
+      window is refreshed. Deferred plan execution (plans that depend on prior
+      plans within the same phase) follows the Waitlist's "short task spawns longer
+      job" pattern -- the dependency check is the "timer" that gates execution.
+    actionable_recommendations:
+      - "Implement explicit timer-based triggers in GSD workflows: 'execute phase N after X minutes of idle' or 'remind user about pending verification after 24 hours'"
+      - "Add a two-tier scheduling model to GSD: lightweight dependency checks (Waitlist-equivalent) that gate heavier execution tasks (Executive-equivalent), reducing overhead for dependency resolution"
+
+  - id: agc-concept-03
+    name: "BAILOUT (Restart Protection)"
+    category: "fault-tolerance"
+    agc_description: |
+      BAILOUT is the AGC's graceful degradation mechanism, triggered when the
+      Executive runs out of core sets (no room for another job) or when the system
+      detects an unrecoverable state. Rather than crashing, BAILOUT performs a
+      controlled restart: it preserves critical navigation state (the RESTART
+      tables in erasable memory), terminates all non-essential jobs, and re-
+      initializes the Executive with only mission-critical tasks.
+
+      The famous 1202 and 1201 program alarms during Apollo 11's lunar landing
+      were BAILOUT restarts caused by the rendezvous radar stealing CPU cycles
+      from the Executive. The system shed low-priority tasks (display updates,
+      background navigation) while preserving P63 braking guidance -- the one
+      job that absolutely could not be interrupted. The landing succeeded because
+      BAILOUT was designed to protect the most important work, not all work.
+
+      Every AGC job registers its "restart group" -- a classification that tells
+      BAILOUT which restart point to use when recovering that job. Jobs can
+      register multiple restart points for different phases of their execution.
+      This restart protection mechanism ensures that even after a full system
+      reset, the software can resume meaningful operation within one scheduling
+      cycle (~20ms).
+    doc_refs:
+      - "agc-arch-017"
+      - "agc-test-012"
+      - "agc-mgmt-004"
+      - "agc-edu-001"
+    modern_equivalent: |
+      BAILOUT maps to modern circuit breaker patterns, Kubernetes pod eviction
+      under resource pressure, Linux OOM killer, and Erlang/OTP supervisor
+      strategies. The restart-group mechanism is analogous to systemd service
+      dependencies with restart policies. The concept of shedding low-priority
+      work to preserve critical operations appears in TCP congestion control
+      (dropping non-essential packets), load shedder patterns in microservices,
+      and priority-based memory reclamation in garbage collectors.
+    gsd_parallel: |
+      GSD's pause/resume workflow (STATE.md persistence) is a manual BAILOUT: when
+      context fills up, the user clears and resumes from saved state. The skill
+      loading pipeline's Budget stage is a soft BAILOUT -- skills that exceed token
+      budget are shed (deferred) to protect the execution context. However, GSD
+      currently lacks automatic graceful degradation: there is no mechanism to
+      automatically shed lower-priority context when the window fills. The
+      STATE.md file functions as the AGC's RESTART tables -- preserving critical
+      session state across context resets.
+    actionable_recommendations:
+      - "Implement automatic BAILOUT for context overflow: when token usage exceeds 80%, automatically shed low-priority loaded skills and background context to preserve the active phase's execution state"
+      - "Add restart groups to GSD artifacts: classify STATE.md sections by criticality (critical: current position and blockers, important: decisions, deferrable: accumulated context) so automated context trimming knows what to preserve"
+      - "Add a BAILOUT telemetry event (like the 1202 alarm) that fires when context shedding occurs, so the user knows what was dropped and can restore it if needed"
+
+  - id: agc-concept-04
+    name: "Core Sets"
+    category: "memory-management"
+    agc_description: |
+      Core Sets are the AGC's register save areas -- 7 fixed-size blocks of
+      erasable memory that store the complete CPU state (registers, return address,
+      bank selectors) for each concurrent job. When the Executive switches from
+      one job to another, the current job's registers are saved to its assigned
+      core set, and the new job's registers are restored from its core set. This
+      is hardware-assisted context switching without virtual memory or MMU.
+
+      The 7-core-set limit (one is reserved for the idle job) imposes a hard
+      ceiling on concurrency: the AGC can have at most 7 jobs in flight
+      simultaneously. If all core sets are allocated and a new job tries to start,
+      the system triggers a 1202 BAILOUT alarm. This is exactly what happened
+      during Apollo 11 -- the rendezvous radar task consumed a core set that the
+      landing guidance needed. The fixed pool size forces the system designer to
+      think carefully about concurrent job budgets.
+
+      Each core set is 12 words (180 bits) of erasable memory. The total overhead
+      for all 7 core sets is 84 words -- less than 0.05% of total erasable memory.
+      This extreme efficiency reflects the AGC's zero-overhead philosophy: context
+      switching costs exactly 12 word transfers, every time, with no variability.
+    doc_refs:
+      - "agc-arch-016"
+      - "agc-arch-005"
+      - "agc-test-012"
+    modern_equivalent: |
+      Core Sets map to thread control blocks (TCBs) in operating systems, goroutine
+      stacks in Go, and the fixed-size actor mailboxes in Erlang/Elixir. The fixed
+      pool of 7 parallels thread pool sizing in Java's ExecutorService or Rust's
+      Rayon work-stealing pool. The concept of a hard concurrency ceiling is
+      reflected in Kubernetes resource limits, database connection pooling, and
+      semaphore-bounded concurrency in async runtimes. Container-based isolation
+      (Docker, Firecracker) also echoes core sets: each container gets a fixed
+      resource allocation that cannot be exceeded.
+    gsd_parallel: |
+      GSD executor subagents are the modern equivalent of core set consumers: each
+      forked subagent for /gsd:execute-phase occupies a context window (the "core
+      set") with fixed capacity. The GSD constraint of "don't make changes that span
+      multiple phases in one session" is a core-set-style concurrency limit --
+      each session handles one phase, just as each core set handles one job. The
+      skill-creator's maximum 20% content change per refinement is another fixed-
+      resource allocation: each refinement gets a bounded "save area" for changes.
+    actionable_recommendations:
+      - "Formalize executor agent slots as a numbered pool (like 7 core sets): define a maximum number of concurrent subagents and track allocation/deallocation with pool-exhaustion warnings"
+      - "Implement core-set-style context snapshots for subagent handoff: when one executor completes and another starts, transfer exactly the needed state (like 12 words) rather than the entire accumulated context"
+
+  - id: agc-concept-05
+    name: "DSKY (Display/Keyboard)"
+    category: "human-interface"
+    agc_description: |
+      The DSKY (Display and Keyboard, pronounced "disky") is the astronaut's sole
+      interface to the AGC -- a panel-mounted unit with an electroluminescent
+      numeric display, status indicators, and a 19-key keyboard. The display shows
+      three 5-digit signed numbers (R1, R2, R3), plus PROG, VERB, and NOUN
+      indicators. Eleven annunciator lights signal system conditions (COMP ACTY,
+      UPLINK ACTY, PROG alarm, etc.).
+
+      The DSKY communicates with the AGC via I/O channels -- the keyboard sends
+      scan codes on channel 015, and the display receives relay words on channels
+      010-013. All interaction follows the VERB/NOUN command grammar (see concept
+      06). The DSKY has no text display, no graphics, no cursor -- it communicates
+      entirely through numbers and status lights. Yet astronauts performed lunar
+      landings, orbital rendezvous, and emergency recoveries through this minimal
+      interface.
+
+      Each spacecraft had two DSKYs: one on the main instrument panel and one at
+      the navigator's station (or LM commander's station). Both connect to the
+      same AGC, providing redundant access. The electroluminescent segments can
+      display digits 0-9, a plus/minus sign, and blank. This is the most
+      constrained human-computer interface ever used for a mission-critical system.
+    doc_refs:
+      - "agc-iface-002"
+      - "agc-iface-020"
+      - "agc-draw-007"
+      - "agc-soft-034"
+    modern_equivalent: |
+      The DSKY maps to embedded system displays (LCD character displays, LED
+      matrices), industrial HMI panels, and terminal-based interfaces. In the
+      modern computing world, its closest analog is a command-line terminal with
+      a status bar -- numeric output, keyboard input, and status indicators.
+      The concept of communicating complex state through minimal display elements
+      lives on in heads-up displays (HUDs), smartwatch interfaces, and the
+      "progressive disclosure" design pattern. The DSKY's constraint-driven
+      design anticipated the principles of information hierarchy that modern
+      dashboard design follows.
+    gsd_parallel: |
+      The MC-1 Control Surface dashboard in GSD-OS is the modern DSKY: a visual
+      interface showing project state, metrics, and controls. The GSD-OS terminal
+      panel (src/terminal/) provides the keyboard equivalent. The console activity
+      feed (src/console/) mirrors the DSKY's COMP ACTY light -- showing when the
+      system is working. The GSD-OS dashboard widgets (budget gauge, silicon panel,
+      activity feed) are modernized DSKY annunciators. The constraint-driven
+      information hierarchy of the DSKY -- showing only what matters most in the
+      current mode -- is exactly what GSD-OS's context-aware dashboard should do.
+    actionable_recommendations:
+      - "Design GSD-OS dashboard widgets with DSKY discipline: each widget shows at most 3 primary values (like R1/R2/R3) plus a status indicator, forcing information hierarchy"
+      - "Implement a 'COMP ACTY' equivalent in GSD-OS: a persistent activity indicator showing when any executor agent is actively working, with a tooltip showing which phase/plan is executing"
+
+  - id: agc-concept-06
+    name: "VERB/NOUN"
+    category: "command-interface"
+    agc_description: |
+      The VERB/NOUN command grammar is the AGC's structured interaction language.
+      Every DSKY command consists of two parts: a VERB (action to perform, 2
+      digits) and a NOUN (data target, 2 digits). VERB 06 NOUN 43, for example,
+      means "display (V06) the current position vector (N43)." VERB 37 NOUN 63
+      means "run program (V37) P63 braking guidance (N63)."
+
+      This two-part grammar provides 100 verbs x 100 nouns = 10,000 possible
+      commands in just 4 keystrokes. The actual AGC uses roughly 40 verbs and 80
+      nouns. Verbs group into categories: display (V01-V06), monitor (V11-V16),
+      load (V21-V25), execute (V37, V46, V82-V96). Nouns reference data
+      structures: state vectors (N42-N44), time values (N34-N36), orbital
+      elements (N50-N55), and system parameters (N01-N08).
+
+      The grammar is self-documenting: reference cards list every VN combination.
+      Astronauts memorized the most common combinations (V16N68 = monitor
+      range-to-go during landing) while carrying reference cards for rare ones.
+      The regularity of the grammar reduced training time and error rates despite
+      the minimal display.
+    doc_refs:
+      - "agc-iface-002"
+      - "agc-iface-020"
+      - "agc-ops-001"
+      - "agc-ops-022"
+    modern_equivalent: |
+      VERB/NOUN maps to subject-verb-object grammars in command interfaces:
+      RESTful APIs (HTTP verb + resource path), SQL (SELECT/INSERT + table),
+      vim commands (operator + motion), and CLI tools (command + subcommand).
+      The two-part structure provides the same combinatorial power: a small
+      vocabulary of actions multiplied by a larger vocabulary of targets covers
+      a vast interaction space. Git's "git <verb> <noun>" pattern (git add file,
+      git commit message, git push remote) is a direct spiritual descendant.
+    gsd_parallel: |
+      GSD slash commands follow a partial VERB/NOUN pattern: /gsd:plan-phase N
+      is VERB(plan) + NOUN(phase N). However, the grammar is not fully regular --
+      /gsd:progress has no noun, /gsd:debug takes a freeform string, and
+      /gsd:new-project is a compound verb. Skill invocation in skill-creator
+      uses a similar pattern but lacks the strict 2-part structure. The GSD
+      orchestrator's 5-stage classification pipeline attempts to parse natural
+      language into structured intents, but a formal VERB/NOUN grammar would
+      make routing deterministic rather than probabilistic.
+    actionable_recommendations:
+      - "Standardize GSD-OS command grammar around a strict VERB + NOUN structure: 'gsd plan phase-3' not '/gsd:plan-phase 3', enabling combinatorial command coverage and easier discovery"
+      - "Create a reference card (YAML file) listing all VERB/NOUN combinations, their effects, and prerequisites -- mirroring the astronaut reference cards that made the DSKY usable"
+      - "Implement VERB/NOUN auto-completion in GSD-OS terminal: typing a verb shows valid nouns, typing a noun shows valid verbs, reducing the need for memorization"
+
+  - id: agc-concept-07
+    name: "Bank Switching"
+    category: "memory-management"
+    agc_description: |
+      Bank switching is the AGC's solution to a fundamental address space problem:
+      the 12-bit address field in AGC instructions can only directly address 4,096
+      words, but the Block II AGC has 36,864 words of fixed (ROM) memory and
+      2,048 words of erasable (RAM) memory. The solution is memory banking: the
+      address space is divided into banks of 1,024 words each, and special bank
+      registers (EBANK for erasable, FBANK and superbank bits for fixed) select
+      which bank is currently addressable.
+
+      Fixed memory has 36 banks (plus 2 fixed-fixed banks always visible) addressed
+      through FBANK (5 bits selecting one of 32 banks) and a superbank bit for the
+      remaining 4 banks. Erasable memory has 8 banks addressed through EBANK (3
+      bits). Software must explicitly switch banks before accessing code or data in
+      a different bank, using instructions like TC BANKCALL (call subroutine in
+      another bank) or TC POSTJUMP (jump to another bank).
+
+      Bank switching adds complexity and bug potential -- calling a subroutine in
+      the wrong bank is a silent, catastrophic error. The AGC assembler (YUL)
+      performs bank validation at assembly time, but runtime bank management
+      remains the programmer's responsibility. The FBANK/EBANK registers add 2
+      instructions of overhead per cross-bank call.
+    doc_refs:
+      - "agc-arch-005"
+      - "agc-arch-004"
+      - "agc-soft-013"
+      - "agc-mgmt-014"
+    modern_equivalent: |
+      Bank switching maps to virtual memory paging (where the page table serves
+      as the "bank register"), segmented memory models (x86 real mode), and
+      overlays used in DOS-era software. Modern equivalents include memory-mapped
+      I/O regions, NUMA memory zones, and GPU memory tiers (global/shared/local).
+      In higher-level systems, bank switching appears as lazy loading of modules,
+      code splitting in web applications (webpack chunks), and dynamic library
+      loading. The fundamental problem -- more data than can be addressed at
+      once -- is universal and eternal.
+    gsd_parallel: |
+      The GSD context window is a bank-switched address space: Claude can "see"
+      at most ~200K tokens at once, but projects may span millions of tokens of
+      relevant information. Skill-creator's token budget management performs
+      bank switching: loading and unloading skills based on phase relevance is
+      equivalent to switching FBANK to access different code. The /clear ->
+      /gsd:resume-work pattern is a manual bank switch: flush the current bank
+      (context) and load a new one from STATE.md. The ModelFilter stage in
+      skill loading decides which "bank" of skills is visible for the current
+      model/task combination.
+    actionable_recommendations:
+      - "Implement explicit context banking for GSD-OS: define named 'banks' of project knowledge (architecture, testing, deployment, domain) that can be loaded/unloaded as a unit, replacing ad-hoc context management"
+      - "Add bank-switch validation: before executing a phase, verify that required context banks are loaded (like YUL validating FBANK at assembly time), preventing silent failures from missing context"
+
+  - id: agc-concept-08
+    name: "Fixed-Point Arithmetic"
+    category: "computation"
+    agc_description: |
+      The AGC uses ones' complement fixed-point arithmetic with 15-bit precision
+      (single precision) or 30-bit precision (double, via the Interpreter). There
+      is no floating-point hardware. Numbers are represented as signed fractions
+      in the range [-1, +1) with an implied binary point after the sign bit.
+      Programmers must manually track scaling factors to prevent overflow.
+
+      For navigation computations requiring higher precision or trigonometric
+      functions, the Interpreter virtual machine provides double-precision
+      arithmetic, vector/matrix operations, and transcendental functions --
+      but at roughly 10x the execution time of native instructions. The choice
+      between native fixed-point and Interpreter operations is a fundamental
+      performance/precision tradeoff that pervades all AGC software design.
+
+      The ones' complement representation means there are two representations
+      for zero (+0 and -0), which the software must handle. Overflow detection
+      uses the "overflow corrector" -- hardware that traps overflow into an
+      extra bit, allowing software to detect and correct arithmetic errors.
+      This is not elegant by modern standards, but it provided deterministic
+      behavior in all cases, which is critical for real-time navigation.
+    doc_refs:
+      - "agc-arch-004"
+      - "agc-soft-012"
+      - "agc-arch-027"
+    modern_equivalent: |
+      Fixed-point arithmetic persists in DSP processors, audio processing,
+      embedded systems, and financial computation (where decimal fixed-point
+      avoids floating-point rounding). Modern GPU shaders use fixed-point
+      formats (half-float, normalized integers) for similar precision/performance
+      tradeoffs. The AGC's manual scaling discipline anticipates modern numerical
+      analysis practices: understanding and controlling precision at every step.
+      In web development, CSS uses fixed-point internally, and JavaScript's
+      BigInt provides arbitrary precision when IEEE 754 doubles are insufficient.
+    gsd_parallel: |
+      Token budget arithmetic in skill-creator uses percentage-based allocation
+      ("2-5% of context window") which is a form of fixed-point accounting --
+      budgets are fractions of a fixed total. The dashboard metrics calculations
+      (test coverage percentages, phase completion ratios, attribution scores)
+      all perform fraction arithmetic that could accumulate rounding errors if
+      not handled carefully. The skill activation simulator's scoring uses
+      floating-point but could benefit from deterministic fixed-point scoring
+      for reproducible test results.
+    actionable_recommendations:
+      - "Use integer-based token accounting in the skill loading pipeline instead of floating-point percentages: track actual token counts, not fractions, to eliminate rounding-induced budget overflows"
+      - "Document the precision model for all GSD metrics: how are percentages calculated, what rounding is applied, and where can accumulated error cause incorrect behavior"
+
+  - id: agc-concept-09
+    name: "Rope Memory"
+    category: "storage"
+    agc_description: |
+      Core rope memory is the AGC's read-only storage technology -- a hand-woven
+      non-volatile memory where each bit is stored as a wire either passing through
+      (1) or bypassing (0) a magnetic core. The Block II AGC stores 36,864 words
+      (553 kilobits) in 6 rope modules. Manufacturing a rope module takes 8
+      weeks of skilled hand-weaving by factory workers (the "LOL" -- little old
+      ladies -- at Raytheon).
+
+      The 8-week manufacturing lead time means flight software must be frozen
+      (code-complete) at least 2 months before launch. Any post-freeze changes
+      require erasable memory programs (EMPs) -- patches loaded into RAM at
+      startup. The rope-vs-EMP distinction creates a natural separation between
+      stable code (rope) and mission-specific adaptations (erasable). This
+      constraint forced extreme discipline in software development: every line
+      of code in rope was reviewed, tested, and verified because changing it
+      after weaving was physically impossible.
+
+      Rope memory achieves extraordinary reliability: zero bit-flip failures
+      across all Apollo missions. The physical encoding (wire geometry) is
+      inherently resistant to radiation, vibration, and power interruptions.
+      A woven rope module is, quite literally, software made physical.
+    doc_refs:
+      - "agc-arch-001"
+      - "agc-edu-001"
+      - "agc-draw-010"
+      - "agc-mgmt-007"
+    modern_equivalent: |
+      Rope memory maps to ROM/firmware in embedded systems, immutable container
+      images in Docker/OCI, compiled binaries (the source is the "weaving" and
+      the binary is the "rope"), and immutable infrastructure patterns. The
+      freeze-then-manufacture pipeline parallels CI/CD release processes: code
+      freeze -> build -> deploy, with the same tension between wanting to make
+      last-minute changes and needing stable, tested artifacts. Git's immutable
+      commit objects are conceptual rope memory: once committed, the content
+      is cryptographically fixed.
+    gsd_parallel: |
+      Committed skill definitions in .claude/commands/*.md are the rope memory
+      of the skill-creator ecosystem: once installed and committed, they are the
+      stable "flight software" that agents execute against. The chipset YAML
+      configuration (.chipset/*.yaml) is another rope analog -- it defines the
+      fixed configuration that cannot change during a session. GSD's atomic
+      commits (one commit per plan task) create rope-like immutability: each
+      commit is a frozen snapshot that can be returned to. The skill-creator's
+      7-day cooldown between refinements enforces a "rope manufacturing lead
+      time" that prevents constant rewrites.
+    actionable_recommendations:
+      - "Treat committed skills as formally immutable 'rope': modifications create a new version file rather than editing in place, preserving the full history of skill evolution"
+      - "Implement a 'code freeze' workflow for skill-creator: before major milestone execution, lock all skills to their current versions, allowing only EMP-style runtime patches (context injections) during execution"
+
+  - id: agc-concept-10
+    name: "I/O Channels"
+    category: "interface"
+    agc_description: |
+      The AGC communicates with all spacecraft hardware through a system of
+      I/O channels -- a hardware abstraction layer providing 512 addressable
+      channels that connect the computer to sensors, actuators, displays, and
+      communication equipment. Channels are read/written using WRITE/READ
+      instructions with channel numbers. Each channel is 15 bits wide.
+
+      Key channel groups include: channels 010-013 (DSKY display output),
+      channel 015 (DSKY keyboard input), channels 030-033 (IMU CDU angles),
+      channels 034-035 (hand controller), channel 077 (engine on/off).
+      The channel system creates a clean boundary between software and hardware:
+      software never manipulates hardware directly, only through the channel
+      abstraction. This allowed hardware to be redesigned (Block I to Block II)
+      without changing the software interface.
+
+      The I/O channel architecture also serves as a security boundary: software
+      cannot bypass the channel system to access hardware directly, preventing
+      a software bug from physically damaging spacecraft systems. The channel
+      abstraction made the AGC's software portable between the Command Module
+      and Lunar Module despite different physical hardware configurations.
+    doc_refs:
+      - "agc-iface-001"
+      - "agc-arch-004"
+      - "agc-iface-004"
+      - "agc-iface-005"
+    modern_equivalent: |
+      I/O channels map directly to hardware abstraction layers (HAL) in embedded
+      systems, device driver interfaces in operating systems, and port-mapped I/O
+      in x86 architecture. Modern equivalents include USB/PCIe endpoint
+      abstractions, REST API endpoints (each URL is a "channel"), and message
+      broker topics (Kafka, RabbitMQ). The clean hardware/software boundary
+      that I/O channels enforce is the same principle behind interface contracts,
+      API versioning, and the adapter pattern in software architecture.
+    gsd_parallel: |
+      The ICD interfaces in AMIGA (ICD-01 through ICD-04) are the GSD equivalent
+      of I/O channels: typed, versioned contracts between components that prevent
+      direct coupling. The message bus event channels in AMIGA's coordination
+      infrastructure (sync points, resource locks) mirror the AGC's channel-based
+      communication. The console bridge (src/console/) connects the dashboard to
+      backend systems through a channel-like abstraction. GSD-OS's IPC layer
+      (desktop/src/ipc/) provides the Tauri equivalent of I/O channels: a typed
+      boundary between Rust backend and webview frontend.
+    actionable_recommendations:
+      - "Define a formal channel map for GSD-OS: enumerate all data flows between components (planner -> executor, executor -> verifier, dashboard -> backend) with typed schemas, channel numbers, and update frequencies"
+      - "Implement channel-level logging for GSD-OS IPC: log every cross-boundary message with timestamp and channel ID, enabling the same kind of telemetry analysis that AGC channel data provided to Mission Control"
+
+  - id: agc-concept-11
+    name: "Interpreter"
+    category: "computation"
+    agc_description: |
+      The AGC Interpreter is a virtual machine that runs on top of the native
+      AGC instruction set, providing double-precision (30-bit) arithmetic,
+      trigonometric functions, vector and matrix operations, and a more
+      programmer-friendly instruction format. Interpreter instructions are
+      encoded as pairs of 15-bit words, interpreted at runtime by a dispatch
+      loop in the Executive.
+
+      The Interpreter exists because the native AGC instruction set is too
+      primitive for navigation mathematics. Computing a state vector update
+      requires trigonometry, matrix multiplication, and double-precision
+      arithmetic -- operations that would take hundreds of native instructions
+      each. The Interpreter provides these as single pseudo-instructions
+      (VXSC for vector cross scalar, UNIT for vector normalization, ACOS
+      for arc cosine), reducing code size and programmer error at the cost
+      of ~10x execution time.
+
+      Navigation programs (P20 rendezvous, P63 braking, P40 thrusting) are
+      written primarily in Interpreter code. Time-critical inner loops
+      (autopilot, interrupt handlers) use native code. This dual-language
+      architecture is a conscious design decision: expressiveness where
+      correctness matters most (navigation math), performance where timing
+      matters most (control loops).
+    doc_refs:
+      - "agc-arch-027"
+      - "agc-soft-012"
+      - "agc-arch-028"
+    modern_equivalent: |
+      The Interpreter maps to bytecode virtual machines: the JVM, Python's
+      CPython interpreter, WebAssembly, and Lua. The native/interpreted duality
+      mirrors JIT compilation strategies (interpret first, compile hot paths),
+      Python/C extension modules, and JavaScript's V8 engine (interpreted
+      baseline, optimized machine code for hot functions). The AGC's choice to
+      write navigation in interpretive code and control loops in native code
+      is exactly the modern pattern of writing business logic in Python and
+      performance-critical code in Rust or C.
+    gsd_parallel: |
+      skill-creator's pattern detection pipeline is an interpreter: it takes
+      raw session observations (the "native data"), processes them through a
+      multi-stage pipeline (pattern matching, co-activation analysis, confidence
+      scoring), and produces higher-level outputs (skill suggestions). The GSD
+      orchestrator's 5-stage classification pipeline (exact match, lifecycle
+      filter, Bayesian, semantic, confidence) is another interpreter: it
+      translates natural language input into structured GSD commands, trading
+      execution speed for expressive power. The Interpreter's dual-language
+      philosophy (high-level for correctness, low-level for speed) maps to
+      GSD's YAML plans (high-level, human-readable) vs. executor agent code
+      (optimized for machine execution).
+    actionable_recommendations:
+      - "Formalize the GSD plan language as a defined instruction set with documented semantics: each task type (auto, checkpoint, verify) is an 'instruction' with specified inputs, outputs, and side effects"
+      - "Implement a plan interpreter/validator that can dry-run a plan file and report issues (missing files, unresolvable references, circular dependencies) before execution, the way the Interpreter validates operand types at runtime"
+
+  - id: agc-concept-12
+    name: "Telemetry (Downlink)"
+    category: "observability"
+    agc_description: |
+      The AGC continuously transmits telemetry to Mission Control Houston via
+      the spacecraft's S-band communication system. The downlink contains a
+      snapshot of AGC state: program number, verb/noun in effect, register
+      contents, alarm codes, guidance parameters, and navigation state. Downlink
+      lists are assembled by I/O control software (GSOP Section 6) and
+      transmitted at 51.2 kbps (high bit rate) or 1.6 kbps (low bit rate).
+
+      The downlink format is not a live stream of all AGC memory -- it is a
+      curated selection of the most important variables, chosen by the software
+      designers for each mission phase. During powered descent, the downlink
+      emphasizes altitude, velocity, fuel remaining, and guidance errors. During
+      coast, it shifts to orbital elements and navigation updates. This phase-
+      aware telemetry selection ensures Mission Control always sees the most
+      relevant data without overwhelming the limited bandwidth.
+
+      Houston's RTCC (Real-Time Computer Complex) processes the downlink in
+      real time, driving displays at the flight controller consoles. The GUIDO
+      (Guidance Officer) and FIDO (Flight Dynamics Officer) consoles display
+      derived parameters computed from raw telemetry. The telemetry architecture
+      -- spacecraft generates, ground processes, consoles display -- is a three-
+      tier observability pipeline.
+    doc_refs:
+      - "agc-arch-001"
+      - "agc-ops-003"
+      - "agc-soft-020"
+      - "agc-iface-004"
+    modern_equivalent: |
+      AGC telemetry maps to modern observability stacks: Prometheus/Grafana for
+      metrics, OpenTelemetry for distributed tracing, and structured logging
+      pipelines (ELK stack). The curated downlink lists are equivalent to
+      custom metrics dashboards -- not dumping all data, but selecting the key
+      indicators for each operational context. The three-tier architecture
+      (generate -> process -> display) maps to the standard observability
+      pipeline (instrument -> aggregate -> visualize).
+    gsd_parallel: |
+      The ME-1 telemetry emitter in AMIGA generates events analogous to the
+      AGC downlink -- structured state updates at key execution points. The
+      GSD-OS dashboard metrics (test counts, coverage, phase completion) are
+      the GSD equivalent of flight controller displays. The console activity
+      feed (src/console/activity-feed) streams execution events like the GUIDO
+      console streamed guidance telemetry. STATE.md updates after each phase
+      are batch telemetry -- periodic snapshots rather than continuous streams.
+      The dashboard's budget gauge and silicon panel are specific "console
+      positions" displaying curated data subsets.
+    actionable_recommendations:
+      - "Implement phase-aware telemetry selection for GSD-OS: during planning phases, dashboard emphasizes requirement coverage and task decomposition metrics; during execution, it shifts to test results, commit frequency, and error rates"
+      - "Add a 'downlink list' configuration per GSD phase: let plan authors specify which metrics should be prominently displayed during that phase's execution, customizing the dashboard view"
+
+  - id: agc-concept-13
+    name: "Mission Control"
+    category: "operations"
+    agc_description: |
+      Mission Control Houston (MCC-H) is the ground-based command and monitoring
+      center that oversees all Apollo mission operations. Staffed by flight
+      controllers organized by discipline (GUIDO for guidance, FIDO for dynamics,
+      EECOM for life support, CAPCOM for crew communication), Mission Control
+      has the authority to approve or reject major mission events ("Go/No-Go"
+      decisions). The Flight Director has ultimate authority over mission
+      operations.
+
+      Mission Control receives AGC telemetry, processes it through the RTCC
+      (Real-Time Computer Complex -- an IBM 360 system), and displays derived
+      parameters on flight controller consoles. Controllers can send commands
+      to the AGC via uplink (the reverse channel). The Go/No-Go decision gates
+      are the critical human-in-the-loop mechanism: the AGC can compute the
+      optimal trajectory, but only Mission Control (and the crew) can authorize
+      its execution.
+
+      The Tindallgrams (1,100+ memos from Bill Tindall) document how Mission
+      Control's software management worked: tracking progress, debating tradeoffs,
+      making feature-cut decisions, and coordinating between MIT/IL engineers
+      and NASA operations. Tindall's role as "the man who orchestrated Apollo
+      software" is the prototype for modern technical program management.
+    doc_refs:
+      - "agc-ops-003"
+      - "agc-mgmt-001"
+      - "agc-ops-020"
+      - "agc-edu-003"
+    modern_equivalent: |
+      Mission Control maps to modern operations centers: NOCs (Network Operations
+      Centers), SRE team rooms, DevOps war rooms, and incident command structures.
+      The flight controller discipline specialization mirrors SRE team roles
+      (oncall, incident commander, communication lead). Go/No-Go decisions appear
+      in deployment pipelines as approval gates, change advisory boards, and
+      feature flags. The RTCC's role as a telemetry processor maps to modern
+      SIEM systems, APM tools, and CI/CD pipeline dashboards. Tindall's
+      management style anticipates agile technical leadership.
+    gsd_parallel: |
+      The MC-1 Control Surface in GSD-OS is explicitly named after Mission Control.
+      The GSD user is the Flight Director -- the human with ultimate authority
+      over all operations. Human-in-the-loop gates in the AMIGA roadmap
+      (Foundation Gate, Integration Gates, Launch Gate) are Go/No-Go decisions.
+      The /gsd:verify-work command is the user acting as a flight controller:
+      reviewing execution telemetry and deciding whether to proceed. The
+      skill-creator's requirement for user confirmation on all skill suggestions
+      is a Go/No-Go gate -- the system recommends, the human authorizes.
+      Tindallgrams map to GSD's STATE.md decisions section: recording why
+      choices were made for future reference.
+    actionable_recommendations:
+      - "Implement formal Go/No-Go ceremony in GSD milestone workflow: before each wave of execution, display a summary dashboard showing all precondition statuses and require explicit user 'Go' to proceed"
+      - "Create a 'Flight Director' role in GSD-OS that provides a unified view across all active executor agents, their status, and their outputs -- the equivalent of the Flight Director's overview display"
+      - "Capture decision rationale in structured format (like Tindallgrams) for every major scope change, priority shift, or technical tradeoff, stored in .planning/decisions/ for posterity"
+
+# Summary Statistics
+summary:
+  total_concepts: 13
+  categories:
+    scheduling: 2
+    fault-tolerance: 1
+    memory-management: 2
+    human-interface: 1
+    command-interface: 1
+    computation: 2
+    storage: 1
+    interface: 1
+    observability: 1
+    operations: 1
+  total_actionable_recommendations: 27
+  doc_refs_used:
+    - "agc-arch-001"
+    - "agc-arch-004"
+    - "agc-arch-005"
+    - "agc-arch-006"
+    - "agc-arch-007"
+    - "agc-arch-016"
+    - "agc-arch-017"
+    - "agc-arch-027"
+    - "agc-arch-028"
+    - "agc-draw-007"
+    - "agc-draw-010"
+    - "agc-edu-001"
+    - "agc-edu-003"
+    - "agc-iface-001"
+    - "agc-iface-002"
+    - "agc-iface-004"
+    - "agc-iface-005"
+    - "agc-iface-020"
+    - "agc-mgmt-001"
+    - "agc-mgmt-004"
+    - "agc-mgmt-007"
+    - "agc-mgmt-014"
+    - "agc-ops-001"
+    - "agc-ops-003"
+    - "agc-ops-020"
+    - "agc-ops-022"
+    - "agc-soft-012"
+    - "agc-soft-013"
+    - "agc-soft-020"
+    - "agc-soft-034"
+    - "agc-soft-035"
+    - "agc-test-012"

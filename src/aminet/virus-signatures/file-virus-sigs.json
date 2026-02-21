@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "description": "Amiga file virus signatures -- viruses that infect executable hunk files",
+  "signatures": [
+    {
+      "name": "IRQ",
+      "type": "file",
+      "severity": "critical",
+      "patterns": [
+        {
+          "bytes": "4EAEFE6826004EAE",
+          "offset": "any",
+          "description": "JSR _LVOSetFunction(A6) + MOVE.L D0 + JSR _LVO -- OldOpenLibrary hook chain"
+        },
+        {
+          "bytes": "4952512056495255",
+          "offset": "any",
+          "description": "ASCII 'IRQ VIRU' identification string"
+        }
+      ],
+      "description": "IRQ file virus. Hooks OldOpenLibrary via SetFunction to infect executables when they are loaded. Prepends a new HUNK_CODE to infected files.",
+      "references": []
+    },
+    {
+      "name": "BGS9",
+      "type": "file",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "A0A0A020",
+          "offset": "any",
+          "description": "Obfuscated filename with high-bit-set characters + space"
+        },
+        {
+          "bytes": "54545631",
+          "offset": "any",
+          "description": "ASCII 'TTV1' -- task name used by virus process"
+        }
+      ],
+      "description": "BGS9 file virus. Creates a task named 'TTV1' and uses obfuscated filenames ($A0A0A0 space). Links itself to executables.",
+      "references": []
+    },
+    {
+      "name": "HNY96",
+      "type": "file",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "65772059",
+          "offset": "any",
+          "description": "Partial ASCII marker ($65772059) -- part of 'New Year' message"
+        },
+        {
+          "bytes": "484E593936",
+          "offset": "any",
+          "description": "ASCII 'HNY96' identification string"
+        }
+      ],
+      "description": "HNY96 (Happy New Year 1996) file virus. Infects executables and displays a New Year message. Uses Filepart for path handling.",
+      "references": []
+    },
+    {
+      "name": "HNY97",
+      "type": "file",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "484E593937",
+          "offset": "any",
+          "description": "ASCII 'HNY97' identification string"
+        },
+        {
+          "bytes": "4E4F4F5020",
+          "offset": "any",
+          "description": "ASCII 'NOOP ' -- NOP sled marker in HNY97 variant"
+        }
+      ],
+      "description": "HNY97 (Happy New Year 1997) file virus. Variant of HNY96 with updated date trigger and slightly different infection routine.",
+      "references": []
+    },
+    {
+      "name": "DASA",
+      "type": "file",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "44415341",
+          "offset": "any",
+          "description": "ASCII 'DASA' identification string"
+        },
+        {
+          "bytes": "2C780004207C",
+          "offset": "any",
+          "description": "MOVEA.L $0004.W,A6; MOVEA.L # -- ExecBase access pattern"
+        }
+      ],
+      "description": "DASA file virus. Infects executables by prepending a virus hunk. Accesses ExecBase directly for system calls.",
+      "references": []
+    },
+    {
+      "name": "Xeno",
+      "type": "file",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "58656E6F",
+          "offset": "any",
+          "description": "ASCII 'Xeno' identification string"
+        },
+        {
+          "bytes": "4AFC0001",
+          "offset": "any",
+          "description": "RTC_MATCHWORD (ILLEGAL) + RT_FLAGS -- resident structure marker"
+        }
+      ],
+      "description": "Xeno file virus. Installs itself as a resident module using RTC_MATCHWORD. Infects executables loaded from disk.",
+      "references": []
+    }
+  ]
+}

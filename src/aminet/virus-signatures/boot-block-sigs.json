@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "description": "Amiga boot block virus signatures -- the 14 most common boot sector viruses",
+  "signatures": [
+    {
+      "name": "SCA",
+      "type": "bootblock",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "536F6D657468696E6720776F6E64657266756C",
+          "offset": "any",
+          "description": "ASCII 'Something wonderful' message string"
+        }
+      ],
+      "description": "First Amiga boot block virus (1987). Displays 'Something wonderful has happened' after 16th reboot. Hooks CoolCapture to survive warm reboots.",
+      "references": ["https://en.wikipedia.org/wiki/SCA_(computer_virus)"]
+    },
+    {
+      "name": "Byte Bandit",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "5669727573206279204279746520426E646974",
+          "offset": "any",
+          "description": "ASCII 'Virus by Byte Bndit' identification string"
+        }
+      ],
+      "description": "Byte Bandit (1988). Stealth boot block virus that intercepts trackdisk.device calls to hide from reading. Contains encrypted payload.",
+      "references": []
+    },
+    {
+      "name": "Lamer Exterminator",
+      "type": "bootblock",
+      "severity": "critical",
+      "patterns": [
+        {
+          "bytes": "48E7FFFE2C780004",
+          "offset": "any",
+          "description": "MOVEM.L D0-D7/A0-A6,-(SP); MOVEA.L $0004.W,A6 -- common decrypt routine entry"
+        },
+        {
+          "bytes": "4EAEFDD8",
+          "offset": "any",
+          "description": "JSR _LVODoIO(A6) -- direct trackdisk DoIO call for block writes"
+        }
+      ],
+      "description": "Lamer Exterminator (1989). Destructive virus that slowly corrupts disk blocks. Multiple variants exist (1-4). Uses DoIO to write random data to disk blocks.",
+      "references": []
+    },
+    {
+      "name": "SADDAM",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "534144444150",
+          "offset": "any",
+          "description": "ASCII 'SADDAP' -- variant marker string"
+        },
+        {
+          "bytes": "534144440041",
+          "offset": "any",
+          "description": "ASCII 'SADD' + null + 'A' -- SADDAM identification"
+        }
+      ],
+      "description": "SADDAM virus (1991). Named after Saddam Hussein, infects boot blocks and displays political message. Multiple variants (A/B).",
+      "references": []
+    },
+    {
+      "name": "Byte Warrior",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "42797465205761727269",
+          "offset": "any",
+          "description": "ASCII 'Byte Warri' identification string"
+        }
+      ],
+      "description": "Byte Warrior (1988). Boot block virus by the Byte Warriors group. Hooks DoIO to intercept disk reads and infect clean disks.",
+      "references": []
+    },
+    {
+      "name": "North Star",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "23C00000002E",
+          "offset": "any",
+          "description": "MOVE.L D0,$0000002E -- CoolCapture vector hook for warm-reboot survival"
+        },
+        {
+          "bytes": "4E6F727468205374",
+          "offset": "any",
+          "description": "ASCII 'North St' identification"
+        }
+      ],
+      "description": "North Star virus (1989). Hooks CoolCapture vector at $2E to survive warm reboots. Infects boot blocks of inserted disks via trackdisk.device.",
+      "references": []
+    },
+    {
+      "name": "Pentagon Circle",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "50656E7461676F6E",
+          "offset": "any",
+          "description": "ASCII 'Pentagon' identification string"
+        },
+        {
+          "bytes": "4EAEFDD8227C0000",
+          "offset": "any",
+          "description": "JSR _LVODoIO(A6); MOVEA.L -- DoIO hook pattern for disk interception"
+        }
+      ],
+      "description": "Pentagon Circle virus. Hooks DoIO to intercept disk reads and writes. Displays a star pattern on screen after infection count threshold.",
+      "references": []
+    },
+    {
+      "name": "Revenge",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "526576656E6765",
+          "offset": "any",
+          "description": "ASCII 'Revenge' identification string"
+        }
+      ],
+      "description": "Revenge boot block virus. Infects boot sectors and hooks system vectors to persist across reboots.",
+      "references": []
+    },
+    {
+      "name": "Obelisk",
+      "type": "bootblock",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "4F62656C69736B",
+          "offset": "any",
+          "description": "ASCII 'Obelisk' identification string"
+        }
+      ],
+      "description": "Obelisk boot block virus. Displays a graphical obelisk pattern after a set number of reboots.",
+      "references": []
+    },
+    {
+      "name": "SystemZ",
+      "type": "bootblock",
+      "severity": "high",
+      "patterns": [
+        {
+          "bytes": "53797374656D5A",
+          "offset": "any",
+          "description": "ASCII 'SystemZ' identification string"
+        }
+      ],
+      "description": "SystemZ boot block virus. Hooks CoolCapture and KickTag vectors for persistence. Infects disks inserted after boot.",
+      "references": []
+    },
+    {
+      "name": "CCCP",
+      "type": "bootblock",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "43434350",
+          "offset": "any",
+          "description": "ASCII 'CCCP' identification string"
+        },
+        {
+          "bytes": "23C0000000AE",
+          "offset": "any",
+          "description": "MOVE.L D0,$000000AE -- KickTag vector modification for persistence"
+        }
+      ],
+      "description": "CCCP boot block virus. Named after the Soviet Union. Modifies KickTag vector for cold-reboot persistence.",
+      "references": []
+    },
+    {
+      "name": "Graffiti",
+      "type": "bootblock",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "313642697443726577",
+          "offset": "any",
+          "description": "ASCII '16BitCrew' -- author group identification"
+        }
+      ],
+      "description": "Graffiti / 16BitCrew boot block virus. Replaces boot block with custom code and displays graffiti-style message.",
+      "references": []
+    },
+    {
+      "name": "Disk-Doktor",
+      "type": "bootblock",
+      "severity": "critical",
+      "patterns": [
+        {
+          "bytes": "4469736B2D446F6B746F72",
+          "offset": "any",
+          "description": "ASCII 'Disk-Doktor' identification string"
+        }
+      ],
+      "description": "Disk-Doktor boot block virus. Pretends to be a disk repair utility while corrupting file system structures. Destructive payload targets root block.",
+      "references": []
+    },
+    {
+      "name": "Australian Parasite",
+      "type": "bootblock",
+      "severity": "medium",
+      "patterns": [
+        {
+          "bytes": "4175737472616C69616E",
+          "offset": "any",
+          "description": "ASCII 'Australian' identification string"
+        }
+      ],
+      "description": "Australian Parasite boot block virus. One of several Australian-origin boot viruses. Hooks trackdisk.device for disk infection.",
+      "references": []
+    }
+  ]
+}

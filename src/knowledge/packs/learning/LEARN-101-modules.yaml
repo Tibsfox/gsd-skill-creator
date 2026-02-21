@@ -1,0 +1,297 @@
+---
+# LEARN-101 Module Definitions
+# Learning to Learn — Foundational Knowledge Pack
+# Meta-pack that teaches the science of learning itself
+
+pack_id: LEARN-101
+pack_name: "Learning to Learn — Foundational Knowledge Pack"
+
+modules:
+  - id: LEARN-101-M1
+    name: "Your Learning Brain"
+    description: "How memory works, attention, sleep and learning, brain myths debunked. Understanding the biological foundations of learning."
+
+    learning_outcomes:
+      - "Understand how the brain encodes, stores, and retrieves information"
+      - "Recognize the limits of working memory and strategies to overcome them"
+      - "Explain why sleep is essential for learning and memory consolidation"
+      - "Identify common brain myths and understand the actual neuroscience"
+      - "Apply memory principles to improve your own learning strategies"
+
+    topics:
+      - "How Memory Works: Encoding, Storage, Retrieval"
+      - "Working Memory: Capacity, Limitations, Chunking"
+      - "Long-Term Memory Formation and Consolidation"
+      - "The Forgetting Curve and Memory Decay"
+      - "Sleep and Learning: Consolidation and Cognitive Rest"
+      - "Attention and Distraction"
+      - "Brain Myths: What's Real and What's Fiction"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 40
+      elementary: 45
+      middle: 40
+      high: 35
+
+    prerequisite_modules: []
+
+    activities:
+      count: 3
+      examples:
+        - "Working Memory Capacity Experiment"
+        - "Forgetting Curve Tracking: Personal Memory Decay"
+        - "Sleep Impact on Learning: Design and Document a Sleep Experiment"
+
+    assessments:
+      - "Can student explain the difference between working and long-term memory?"
+      - "Does student understand why spaced repetition works?"
+      - "Can student apply memory science to their own learning?"
+
+  - id: LEARN-101-M2
+    name: "Study Strategies That Work"
+    description: "Retrieval practice, spaced repetition, interleaving, elaboration, concept mapping. Evidence-based strategies that build lasting knowledge."
+
+    learning_outcomes:
+      - "Understand why retrieval practice outperforms re-reading"
+      - "Apply spaced repetition to learn material durably"
+      - "Use interleaving to build transfer and flexible knowledge"
+      - "Elaborate new information by connecting it to existing knowledge"
+      - "Create concept maps to visualize relationships between ideas"
+
+    topics:
+      - "Retrieval Practice: Testing vs. Studying"
+      - "Spaced Repetition: Timing and Spacing of Reviews"
+      - "Interleaving vs. Blocking: Building Transfer"
+      - "Elaboration: Connecting to Prior Knowledge"
+      - "Concept Mapping and Visual Organization"
+      - "What Doesn't Work: Re-reading, Highlighting, Massed Practice"
+      - "Dual Coding: Words and Pictures Together"
+
+    grade_levels: ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 50
+      middle: 50
+      high: 40
+
+    prerequisite_modules: [LEARN-101-M1]
+
+    activities:
+      count: 3
+      examples:
+        - "Build a Spaced Repetition Schedule"
+        - "Interleaving vs. Blocking Comparison: Test Both, Compare Results"
+        - "Elaboration Practice: Connect New Ideas to What You Know"
+
+    assessments:
+      - "Can student design a study plan using multiple evidence-based strategies?"
+      - "Does student understand why interleaving produces better transfer?"
+      - "Can student create a concept map that shows relationships between ideas?"
+
+  - id: LEARN-101-M3
+    name: "Thinking About Thinking"
+    description: "Metacognition, self-assessment, strategy selection, learning journals. Awareness of your own learning process."
+
+    learning_outcomes:
+      - "Distinguish between fluency (easy to read) and understanding (can apply)"
+      - "Assess your own understanding accurately"
+      - "Select strategies based on task type and learning goals"
+      - "Monitor progress and adjust strategies when needed"
+      - "Use reflection tools to improve your learning"
+
+    topics:
+      - "What is Metacognition? Thinking About Thinking"
+      - "Fluency Heuristic: When You Feel You Know But Don't"
+      - "Accurate Self-Assessment: Recognizing What You Don't Know"
+      - "Strategy Selection Based on Task Type"
+      - "Monitoring Comprehension While Learning"
+      - "Learning Journals and Reflection Practices"
+      - "Feynman Technique: Explaining Without Notes"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 40
+      middle: 50
+      high: 45
+
+    prerequisite_modules: [LEARN-101-M1]
+
+    activities:
+      count: 3
+      examples:
+        - "Fluency Test: Can You Explain Without Looking?"
+        - "Learning Journal Setup: Reflective Daily Practice"
+        - "Strategy Selection Matrix: Choosing the Right Approach"
+
+    assessments:
+      - "Can student accurately assess what they understand and don't?"
+      - "Does student select appropriate strategies for different tasks?"
+      - "Can student use reflection to identify and fix learning problems?"
+
+  - id: LEARN-101-M4
+    name: "Motivation, Mindset & Goals"
+    description: "Growth mindset, goal setting, dealing with difficulty, productive struggle. The beliefs and habits that sustain learning."
+
+    learning_outcomes:
+      - "Develop and maintain growth mindset beliefs"
+      - "Set specific, measurable, achievable, relevant, time-bound goals"
+      - "Recognize productive struggle and push through difficulty"
+      - "Learn from failure and mistakes productively"
+      - "Build resilience and persistence in the face of challenges"
+
+    topics:
+      - "Fixed vs. Growth Mindset"
+      - "How Mindset Shapes Learning and Achievement"
+      - "SMART Goals: Specific, Measurable, Achievable, Relevant, Time-bound"
+      - "The Difference Between Productive Struggle and Being Lost"
+      - "Failure as Data: Learning From Mistakes"
+      - "Resilience and Persistence"
+      - "Intrinsic vs. Extrinsic Motivation"
+
+    grade_levels: ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 45
+      middle: 50
+      high: 40
+
+    prerequisite_modules: []
+
+    activities:
+      count: 3
+      examples:
+        - "Growth Mindset Scenarios: What Does Productive Struggle Look Like?"
+        - "SMART Goal Workshop: Set and Track Specific Learning Goals"
+        - "Productive Failure Challenge: Struggle Deliberately and Learn"
+
+    assessments:
+      - "Does student demonstrate growth mindset in response to difficulty?"
+      - "Can student set and work toward SMART learning goals?"
+      - "Does student view failure as information rather than judgment?"
+
+  - id: LEARN-101-M5
+    name: "Learning Across Domains"
+    description: "Transfer, analogies, teaching others, connecting packs, building a personal learning system. Seeing learning as interconnected."
+
+    learning_outcomes:
+      - "Apply learning strategies across different subjects and contexts"
+      - "Use analogies to abstract and transfer principles"
+      - "Teach others to deepen your own understanding"
+      - "Map connections between concepts across different packs"
+      - "Design a personal learning system that integrates all your learning"
+
+    topics:
+      - "Near vs. Far Transfer"
+      - "Surface Learning vs. Deep Learning"
+      - "Analogies: Abstracting Principles for Transfer"
+      - "Teaching Others as a Learning Strategy"
+      - "Cross-Pack Connection Mapping"
+      - "Personal Learning System Design"
+      - "Integrating Learning Across 35 Different Packs"
+
+    grade_levels: ["4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 45
+      middle: 55
+      high: 50
+
+    prerequisite_modules: [LEARN-101-M1, LEARN-101-M2, LEARN-101-M3]
+
+    activities:
+      count: 3
+      examples:
+        - "Cross-Pack Connection Map: How Does This Idea Apply Everywhere?"
+        - "Teach-Back Partner Session: Explain Learning to Someone Else"
+        - "Personal Learning System Design: Build Your Own Integration Framework"
+
+    assessments:
+      - "Can student identify and apply principles across different contexts?"
+      - "Does student effectively teach learning strategies to others?"
+      - "Can student articulate how learning from different packs connects?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Metacognitive Awareness"
+    description: "Ability to observe your own learning, assess understanding accurately, and adjust strategies"
+    assessed_in: [LEARN-101-M1, LEARN-101-M2, LEARN-101-M3, LEARN-101-M4, LEARN-101-M5]
+
+  - name: "Evidence-Based Strategy Selection"
+    description: "Using learning science to choose strategies that match the task and goal"
+    assessed_in: [LEARN-101-M2, LEARN-101-M3, LEARN-101-M4]
+
+  - name: "Growth Mindset and Resilience"
+    description: "Viewing challenges as opportunities and persisting through difficulty"
+    assessed_in: [LEARN-101-M1, LEARN-101-M3, LEARN-101-M4, LEARN-101-M5]
+
+  - name: "Transfer and Integration"
+    description: "Applying learning across subjects and building coherent understanding systems"
+    assessed_in: [LEARN-101-M2, LEARN-101-M3, LEARN-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Neuroscience-First Pathway"
+    description: "M1 (understand your brain) -> M2 (strategies that work) -> M3 (monitor yourself) -> M4 (mindset) -> M5 (integration)"
+    rationale: "Foundational understanding of how memory works provides the why for all strategies"
+
+  - name: "Practice-First Pathway"
+    description: "Parallel M2 and M3 (do the strategies while learning to monitor) -> M1 (understand the why) -> M4 (build resilience) -> M5 (integrate)"
+    rationale: "Some learners prefer doing before understanding; they can go back to the science later"
+
+  - name: "Metacognitive-First Pathway"
+    description: "M3 (understand yourself as a learner) -> M1 (understand your brain) -> M2 (choose strategies) -> M4 (mindset) -> M5 (integration)"
+    rationale: "Self-awareness can drive interest in the science and strategy selection"
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction Structure"
+    description: "All five modules follow: Learning Outcomes, Topics, Time Estimates, Activities, Assessments"
+    cached: true
+
+  - pattern: "Strategy Application Across Packs"
+    description: "Each module discusses how its content applies when studying other packs (MATH-101, SCI-101, READ-101, etc.)"
+    cached: true
+
+  - pattern: "Assessment through Application"
+    description: "Assessment in all modules focuses on: Can you *do* this? Can you apply it? Can you teach it?"
+    cached: true
+
+  - pattern: "Reflection and Integration"
+    description: "Throughout all modules: connect to prior learning, reflect on your progress, design personal learning systems"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner uses spaced repetition successfully"
+    - "When learner catches themselves confusing fluency with understanding"
+    - "When learner adjusts strategies mid-learning because something isn't working"
+    - "When learner explains a strategy to a peer or younger student"
+    - "When learner designs a multi-pack learning system"
+    - "When learner transfers a strategy from one pack to another"
+
+  pattern_detection:
+    - "Effective spacing schedules"
+    - "Successful elaboration techniques"
+    - "Accurate self-assessment patterns"
+    - "Strategy adjustment responses to difficulty"
+    - "Cross-pack transfer patterns"
+
+  skill_promotion:
+    - "Promote personalized spacing schedules to reusable skills"
+    - "Create elaboration techniques from successful connections"
+    - "Build self-assessment frameworks from accurate evaluations"
+    - "Develop strategy adjustment heuristics from observed patterns"
+    - "Formalize cross-pack transfer patterns as composable skills"
+
+# This YAML defines the modular structure for the LEARN-101 meta-pack.
+# LEARN-101 teaches how to learn more effectively, which amplifies the effectiveness
+# of all other packs in the system. Understanding your own cognition is foundational
+# to mastery in any domain.

@@ -1,0 +1,215 @@
+# Knowledge World Tutorial Path Build Specification
+# A 5-minute guided walk demonstrating key world concepts.
+
+metadata:
+  name: "Tutorial Path"
+  version: "1.0"
+  author: "GSD Creative Team"
+  description: "Guided first experience for new players. Starts at Welcome Center east exit, loops through concept samples, returns to Spawn Plaza."
+
+route:
+  # Total path length: approximately 300 blocks (5 min at normal walk speed of ~4.3 blocks/sec with stops)
+  # Walking speed: 4.317 blocks/second. 300 blocks = ~70 seconds pure walking.
+  # Remaining ~230 seconds = reading signs at 6 waypoints (~38 seconds each)
+  start: "Welcome Center east exit"
+  end: "Spawn Plaza (from south)"
+  shape: "loop"
+  total_length_blocks: 300
+  estimated_time_minutes: 5
+  path_material: "white_concrete_powder"  # Textured, distinct from plaza's smooth white
+  path_width: 2
+  border: "stone_brick_slab"              # Low border to guide without blocking
+
+waypoints:
+  # 6 stops along the path. Each has 2-3 signs and a small demonstration build.
+  # Waypoints are numbered and signed so players know progress.
+
+  waypoint_1:
+    name: "The Spatial Idea"
+    position_along_path: 30             # Blocks from start
+    theme: "spawn"
+    time_from_start: "30 seconds"
+    sign_standard: "info_signs"
+    signs:
+      sign_1:
+        line_1: "STOP 1 of 6"
+        line_2: "THE SPATIAL"
+        line_3: "IDEA"
+        line_4: ""
+      sign_2:
+        line_1: "In this world,"
+        line_2: "ideas have shape."
+        line_3: "Systems become"
+        line_4: "buildings."
+      sign_3:
+        line_1: "The building on"
+        line_2: "your right shows"
+        line_3: "a simple program"
+        line_4: "as rooms."
+    demo_build:
+      description: "Tiny 3-room structure: Input Room -> Process Room -> Output Room, connected by doorways"
+      dimensions: { x: 9, y: 5, z: 5 }
+      materials: ["stone_brick", "glass_pane", "oak_door"]
+      concept: "A program as input -> process -> output"
+
+  waypoint_2:
+    name: "Color Means Something"
+    position_along_path: 80
+    theme: "wayfinding"
+    time_from_start: "1 minute"
+    sign_standard: "info_signs"
+    signs:
+      sign_1:
+        line_1: "STOP 2 of 6"
+        line_2: "COLOR MEANS"
+        line_3: "SOMETHING"
+        line_4: ""
+      sign_2:
+        line_1: "See the colored"
+        line_2: "paths? Each goes"
+        line_3: "to a different"
+        line_4: "district."
+      sign_3:
+        line_1: "Gold = Hardware"
+        line_2: "Aqua = Software"
+        line_3: "Green = Network"
+        line_4: "& more..."
+    demo_build:
+      description: "6 colored concrete pillars (one per district color) in a row, each with a small sign"
+      dimensions: { x: 12, y: 4, z: 3 }
+      materials: ["orange_concrete", "light_blue_concrete", "lime_concrete", "magenta_concrete", "blue_concrete", "red_concrete"]
+      concept: "Visual wayfinding through consistent color coding"
+
+  waypoint_3:
+    name: "Connections Are Paths"
+    position_along_path: 130
+    theme: "network"
+    time_from_start: "2 minutes"
+    sign_standard: "info_signs"
+    signs:
+      sign_1:
+        line_1: "STOP 3 of 6"
+        line_2: "CONNECTIONS"
+        line_3: "ARE PATHS"
+        line_4: ""
+      sign_2:
+        line_1: "In computing,"
+        line_2: "things connect."
+        line_3: "Here, connections"
+        line_4: "are walkways."
+      sign_3:
+        line_1: "Wide path ="
+        line_2: "fast connection."
+        line_3: "Narrow path ="
+        line_4: "slow connection."
+    demo_build:
+      description: "Two small buildings connected by one wide path (4 blocks) and one narrow path (1 block)"
+      dimensions: { x: 15, y: 5, z: 8 }
+      materials: ["stone_brick", "lime_concrete", "lime_concrete_powder"]
+      concept: "Bandwidth as physical path width"
+
+  waypoint_4:
+    name: "Rooms Are Components"
+    position_along_path: 180
+    theme: "software"
+    time_from_start: "3 minutes"
+    sign_standard: "info_signs"
+    signs:
+      sign_1:
+        line_1: "STOP 4 of 6"
+        line_2: "ROOMS ARE"
+        line_3: "COMPONENTS"
+        line_4: ""
+      sign_2:
+        line_1: "Each room is a"
+        line_2: "part of a system."
+        line_3: "Doors between"
+        line_4: "rooms = APIs."
+      sign_3:
+        line_1: "Big room ="
+        line_2: "complex part."
+        line_3: "Small room ="
+        line_4: "simple part."
+    demo_build:
+      description: "Three rooms of different sizes connected by doors: small (storage), medium (logic), large (display)"
+      dimensions: { x: 12, y: 5, z: 10 }
+      materials: ["light_blue_concrete", "glass_pane", "oak_door", "chest", "redstone_lamp"]
+      concept: "Software components as rooms with interfaces as doors"
+
+  waypoint_5:
+    name: "Build to Learn"
+    position_along_path: 240
+    theme: "workshop"
+    time_from_start: "4 minutes"
+    sign_standard: "info_signs"
+    signs:
+      sign_1:
+        line_1: "STOP 5 of 6"
+        line_2: "BUILD TO"
+        line_3: "LEARN"
+        line_4: ""
+      sign_2:
+        line_1: "The best way to"
+        line_2: "understand is"
+        line_3: "to build it"
+        line_4: "yourself."
+      sign_3:
+        line_1: "Visit Workshop"
+        line_2: "District for"
+        line_3: "guided builds"
+        line_4: "and schematics."
+    demo_build:
+      description: "Open-air workbench with a Litematica-style ghost outline (glass blocks) and partially completed wall"
+      dimensions: { x: 8, y: 5, z: 8 }
+      materials: ["glass", "red_concrete", "red_concrete_powder", "crafting_table"]
+      concept: "Learning through construction using Litematica schematics"
+
+  waypoint_6:
+    name: "You're Ready"
+    position_along_path: 290
+    theme: "spawn"
+    time_from_start: "4.5 minutes"
+    sign_standard: "info_signs"
+    signs:
+      sign_1:
+        line_1: "STOP 6 of 6"
+        line_2: "YOU'RE READY!"
+        line_3: ""
+        line_4: ""
+      sign_2:
+        line_1: "Spawn Plaza is"
+        line_2: "just ahead."
+        line_3: "Pick a colored"
+        line_4: "path and go!"
+      sign_3:
+        line_1: "Or press M for"
+        line_2: "Litematica and"
+        line_3: "load a guided"
+        line_4: "build schematic."
+    demo_build: null  # No demo at final stop, just encouragement and view back to plaza
+
+materials:
+  white_concrete_powder: 600       # Path surface (300 length x 2 width)
+  stone_brick_slab: 650            # Path border (both sides + waypoint rings)
+  stone_brick: 200                 # Demo builds
+  glass_pane: 40                   # Demo builds
+  glass: 30                        # Demo builds
+  oak_door: 6                      # Demo builds
+  oak_sign: 24                     # 6 waypoints x ~3 signs + extras
+  sea_lantern: 20                  # Path lighting every 15 blocks
+  various_concrete: 100            # Demo build materials
+  chest: 2                         # Demo build props
+  redstone_lamp: 2                 # Demo build props
+
+build_order:
+  1: "Lay path from Welcome Center east exit, curving south then west back to plaza"
+  2: "Place stone brick slab borders along both sides of path"
+  3: "Mark 6 waypoint positions with wider path areas (4x4 platforms)"
+  4: "Build Waypoint 1 demo: Input -> Process -> Output rooms"
+  5: "Build Waypoint 2 demo: 6 colored district pillars"
+  6: "Build Waypoint 3 demo: Two buildings with wide/narrow connections"
+  7: "Build Waypoint 4 demo: Three rooms of different sizes with doors"
+  8: "Build Waypoint 5 demo: Ghost outline workbench"
+  9: "Place all waypoint signs (3 per stop)"
+  10: "Add sea lantern lighting along path every 15 blocks"
+  11: "Place final sign at path re-entry to Spawn Plaza"

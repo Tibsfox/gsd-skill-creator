@@ -4,6 +4,128 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.26.0] - 2026-02-19
+
+### Added
+
+- **INDEX Infrastructure:** Aminet INDEX.gz download/decompress/parse for ~84,000 packages, .readme metadata extractor (Short/Author/Uploader/Type/Version/Requires/Architecture), JSON cache with 24h staleness, incremental RECENT updates, AmigaBinaryReader for hunk executables and boot blocks
+- **Mirror State & Download Engine:** 7-state per-package tracking, atomic JSON persistence, rate-limited HTTP fetching with configurable concurrency, SHA-256 integrity verification, configurable mirror list with fallback
+- **Search, Browse & Collections:** 3-tier relevance-ranked full-text search, hierarchical category tree with package counts, architecture/OS filtering, unified PackageDetail view, YAML collection format with 5 starter sets (31 packages), CRUD collection manager
+- **Virus Scanner & Quarantine:** 52 byte-pattern signatures across 3 virus families (boot block, file, link), context-aware signature scanning, 4-rule heuristic hunk analysis, 4-rule boot block analysis, quarantine with atomic file moves and metadata sidecars, 3-layer scan orchestrator with configurable depth policies (fast/standard/thorough), community checksum lookup, emulated scanning via FS-UAE
+- **Installation Pipeline:** LhA extraction via lhasa with path traversal prevention, LZX extraction via unlzx with cwd workaround, 11-assign Amiga filesystem mapper (case-insensitive), dependency detector (5 types from .readme Requires), install tracker with JSON manifests and clean uninstall, scan gate enforcement (INS-07/08/09)
+- **Emulator Integration:** FS-UAE config generator, 5 hardware profiles (A500/A1200/A1200+030/A4000/WHDLoad), self-contained CRC32 ROM scanner with Cloanto encrypted ROM support, priority-based profile auto-selection, WHDLoad slave detection with per-game hardware overrides, 9-slot state snapshot system
+- **GSD-OS Integration:** Chipset YAML (5 agents, 6 skills, pipeline team, 7% token budget), 6 SKILL.md files, 5-stage pipeline orchestrator with scan gate, 4-pane Workbench-style browser panel, 4-color status indicators, mirror statistics dashboard widget, 14-test cross-module integration suite
+
+### Stats
+
+- 7 phases (236-242), 40 plans, 91 commits, 10,032 tests, 81 requirements, ~23,616 LOC
+
+---
+
+## [1.25.0] - 2026-02-19
+
+### Added
+
+- **Ecosystem Dependency DAG:** 20-node dependency map with 48 typed edges, machine-readable YAML, Mermaid diagram, critical path analysis (4-hop chain), and 5-milestone build sequencing recommendation
+- **EventDispatcher Specification:** Canonical single-inotify watcher with 6 subscriber profiles, 1,020 watch budget (25% of 4,096 target), AMIGA EventEnvelope as ecosystem standard, migration plan for 2 existing watchers, and inotify-over-fanotify rationale
+- **Dependency Philosophy:** 4-tier layering (Core zero deps, Middleware lean npm, Platform native, Educational inherits) with per-layer contracts, numbered decision tree, ESLint 9+ flat config, Rust module visibility strategy, and 4-step exception process
+- **Integration Test Strategy:** Zod `.toJSONSchema()` + Vitest contract testing with Pact rejection rationale, 6 priority flows with specific I/O, 8 semantic test cases per boundary, freshness policies with 3-tier staleness thresholds, fixture directory structure, and EventDispatcher compliance audit
+- **Partial-Build Compatibility Matrix:** 48-edge compatibility matrix with 3-state degradation tables, 99 known-issues classified (51 aspirational, 26 environment-dependent, 9 permanent, 13 resolved), per-component standalone modes, and 3-tier capability probe protocol
+
+### Stats
+
+- 5 phases (231-235), 14 plans, 18 commits, 9,355 tests, 38 requirements, 17 spec documents (~10,558 lines)
+
+---
+
+## [1.24.0] - 2026-02-19
+
+### Added
+
+- **Conformance Matrix:** 336-checkpoint matrix covering every "In Scope v1" claim across 18 vision documents with 4-tier triage (T0 Foundation, T1 Integration, T2 Behavior, T3 UX/Polish) and dependency graph
+- **Foundation Audit (T0):** GSD lifecycle, skill loading pipeline, build health, subagent spawning, message bus all verified end-to-end
+- **Integration Audit (T1):** Observation pipeline (302 tests), AMIGA ICDs (1123 tests), dashboard collectors, console-to-staging flow, AGC pack integration verified
+- **Behavior Audit (T2):** Token budgets, pattern detection, bounded learning, AGC 38 instructions, staging 11 hygiene patterns, security hardening all verified
+- **UX/Polish Audit (T3):** GSD-OS build, CRT shader, window manager, dashboard design system, educational content all verified
+- **E2E Verification:** Full proof run with 9,355 tests passing, all 4 conformance gates at 100%
+- **Documentation Amendments:** 125 vision document amendments with fix-or-amend protocol, known-issues list with 8 deferral groups
+
+### Stats
+
+- 8 phases (223-230), 31 plans, 55 commits, 9,355 tests, 63 requirements
+- Conformance: 211 pass + 125 amended = 336 checkpoints, zero failures
+
+---
+
+## [1.23.0] - 2026-02-19
+
+### Added
+
+- **AMIGA Mission Infrastructure:** MC-1 Control Surface (dashboard, 8-command parser, 3-tier alerts, Go/No-Go gates), ME-1 Mission Environment (provisioner, phase engine, swarm coordinator, archive writer), CE-1 Commons Engine (attribution ledger, weighting engine, dividend calculator), GL-1 Governance Layer (commons charter, rules engine, policy queries) with 4 typed ICDs and end-to-end meta-mission
+- **Apollo AGC Block II Simulator:** Complete CPU emulation with 38 instructions, ones' complement ALU, bank-switched memory (EBANK/FBANK/superbank), interrupt system (10 vectors), I/O channels (512), and 2.048 MHz timing model
+- **AGC Executive/Waitlist/BAILOUT:** Priority-based cooperative scheduler with 8 core sets, timer-driven task queue (9 entries, centisecond dispatch), restart protection with Apollo 11 1202 alarm reproduction
+- **DSKY Interface:** Authentic display model (relay decoding, 6 registers, 11 annunciators), 19-key keyboard, VERB/NOUN command processor, Executive Monitor with real-time scheduling visualization, and learn mode annotations
+- **AGC Development Tools:** yaYUL-compatible assembler, step debugger with breakpoints/watchpoints, disassembler, rope loader (Virtual AGC format), 54-test validation suite
+- **AGC Curriculum:** 11 chapters from orientation to AGC-to-GSD patterns, 8 hands-on exercises with bare-metal programs culminating in 1202 alarm capstone
+- **RFC Reference Skill:** 3-agent system (retriever, analyzer, citation builder), 5 Python scripts, built-in 57-RFC index covering 9 protocol families with obsolescence awareness, multi-format output (Markdown/JSON/BibTeX)
+
+### Stats
+
+- 24 phases (199-222), 74 plans, 146 commits, 2,164 tests, 99 requirements
+
+---
+
+## [1.22.0] - 2026-02-19
+
+### Added
+
+- **Local Cloud Infrastructure:** PXE boot server, kickstart automation, hypervisor-agnostic VM provisioning across KVM/VMware/VirtualBox
+- **Minecraft Knowledge World:** Fabric server with Syncmatica mod stack, automated deployment pipeline, themed district layout, spawn area with tutorial path, schematic library (10 templates), educational curriculum
+- **Platform Portability:** Hardware discovery, distribution abstraction (dnf/apt/pacman), multi-hypervisor VM operations, container fallback
+- **Amiga Emulation:** FS-UAE with AROS ROM, application profiles (Deluxe Paint, OctaMED, ProTracker, PPaint), IFF/ILBM and MOD/MED format converters, legally curated 50-item content collection
+- **Chipset Formalization:** 20 SKILL.md files, 10 agent definitions across 5 teams, team topologies (pipeline/map-reduce/swarm/leader-worker), unified chipset configuration with trigger routing
+- **Operational Maturity:** Automated RCON-quiesced backups with 24/7/4 rotation, Prometheus monitoring with 9 alert rules, golden image lifecycle (<5min clone, <20min scratch), four operational runbooks
+
+### Stats
+
+- 30 phases (169-198), 37 plans, 108 commits, 73 requirements
+
+---
+
+## [1.21.0] - 2026-02-14
+
+### Added
+
+- **Tauri Desktop Shell:** Native desktop app with Rust backend, Vite webview frontend, and bidirectional IPC (commands, events, channels) with capability ACL security
+- **WebGL CRT Engine:** Multi-pass post-processing with scanlines, barrel distortion, phosphor glow, chromatic aberration, vignette, and CSS fallback
+- **Indexed Palette System:** 32-color system with 5 retro-computing presets (Amiga 1.3/2.0/3.1, C64, custom), OKLCH generation, and copper list raster effects
+- **Native PTY Terminal:** Rust-backed pseudo-terminal with xterm.js emulator, watermark-based flow control, and tmux session binding with detach-on-close
+- **Desktop Environment:** Amiga Workbench-inspired window manager with depth cycling, drag/resize, taskbar with process indicators, pixel-art icons, system menu, keyboard shortcuts
+- **Boot & Calibration:** Three-screen calibration wizard (color picking, CRT tuning, theme selection), Amiga chipset boot sequence animation, accessibility auto-detection
+
+### Stats
+
+- 11 phases (158-168), 34 plans, 83 commits, 636 tests, 50 requirements
+
+---
+
+## [1.20.0] - 2026-02-14
+
+### Added
+
+- **Unified CSS Pipeline:** 18 component style modules wired into generator with design system token compliance (no hardcoded hex colors)
+- **Topology Data Collector:** Reads real skill/agent/team files with gray-matter parsing, domain inference, and entity legend rendering
+- **Activity Feed Collector:** Transforms git commits and session observations into FeedEntry[] with scope classification and domain inference
+- **Budget-Silicon Collector:** Bridges CumulativeBudgetResult and IntegrationConfig to gauge/panel renderers with domain color mapping
+- **Staging Queue Collector:** Reads queue-state.json for dashboard panel visualization with 7-state color badges
+- **Console Page Assembly:** Settings panel, activity timeline, question cards, and submit flow as 6th generated page (console.html)
+
+### Stats
+
+- 6 phases (152-157), 12 plans, 23 commits, 110 tests, 23 requirements
+
+---
+
 ## [1.19.0] - 2026-02-14
 
 ### Added

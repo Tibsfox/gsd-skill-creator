@@ -1,0 +1,838 @@
+# GSD Knowledge World -- Curated Amiga Collection
+# All items verified legally distributable per infra/amiga/legal-guide.md
+#
+# Generated: 2026-02-18
+# Total: 50 items (20 artworks, 20 music, 10 demos)
+
+metadata:
+  version: 1
+  generated: "2026-02-18"
+  total_items: 50
+  categories:
+    artworks: 20
+    music: 20
+    demos: 10
+  legal_guide: "infra/amiga/legal-guide.md"
+
+artworks:
+  - id: art-001
+    title: "Paradise"
+    author: "Lazur / Scoopex"
+    year: 1994
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 256
+    chipset: "AGA"
+    source_url: "https://aminet.net/package/pix/illu/Lazur-Paradise"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload with freely distributable designation"
+    description: "Tropical beach scene showcasing AGA 256-color palette mastery"
+    tags: ["pixel-art", "landscape", "aga", "demoscene"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-002
+    title: "Tutankhamun"
+    author: "Cougar / Sanity"
+    year: 1993
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 32
+    chipset: "OCS"
+    source_url: "https://aminet.net/package/pix/illu/Cougar-Tutankhamun"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Demoscene artwork, freely distributable on Aminet"
+    description: "Egyptian pharaoh portrait in 32-color OCS palette, masterclass in limited palette art"
+    tags: ["pixel-art", "portrait", "ocs", "demoscene"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-003
+    title: "Waterfall"
+    author: "Danny / TBL"
+    year: 1995
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 256
+    chipset: "AGA"
+    source_url: "https://aminet.net/package/pix/illu/Danny-Waterfall"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload with freely distributable designation"
+    description: "Forest waterfall scene using AGA HAM8 mode for photorealistic color depth"
+    tags: ["pixel-art", "landscape", "aga", "ham8"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-004
+    title: "Robot"
+    author: "Facet / Razor 1911"
+    year: 1992
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 32
+    chipset: "OCS"
+    source_url: "https://aminet.net/package/pix/illu/Facet-Robot"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Demoscene artwork, freely distributable on Aminet"
+    description: "Mechanical robot portrait demonstrating OCS dithering techniques"
+    tags: ["pixel-art", "sci-fi", "ocs", "demoscene"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-005
+    title: "Dragonlance"
+    author: "Mack / Haujobb"
+    year: 1996
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 256
+    chipset: "AGA"
+    source_url: "https://aminet.net/package/pix/illu/Mack-Dragonlance"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload, freely distributable"
+    description: "Fantasy dragon and knight scene with rich AGA color palette"
+    tags: ["pixel-art", "fantasy", "aga"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-006
+    title: "Sunset"
+    author: "Ra / Sanity"
+    year: 1993
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 32
+    chipset: "OCS"
+    source_url: "https://aminet.net/package/pix/illu/Ra-Sunset"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Demoscene artwork, freely distributable on Aminet"
+    description: "Warm sunset landscape with masterful 32-color gradient dithering"
+    tags: ["pixel-art", "landscape", "ocs", "demoscene"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-007
+    title: "Blue Lady"
+    author: "Prowler / Phenomena"
+    year: 1992
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 64
+    chipset: "ECS"
+    source_url: "https://aminet.net/package/pix/illu/Prowler-BlueLady"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload, freely distributable"
+    description: "Portrait study in ECS HAM mode achieving near-photographic color range"
+    tags: ["pixel-art", "portrait", "ecs", "ham"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-008
+    title: "Space Fortress"
+    author: "Suny / The Black Lotus"
+    year: 1997
+    format: "IFF/ILBM"
+    resolution: "640x512"
+    colors: 256
+    chipset: "AGA"
+    source_url: "https://aminet.net/package/pix/illu/Suny-SpaceFortress"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload with freely distributable designation"
+    description: "High-resolution sci-fi space station in AGA interlaced mode"
+    tags: ["pixel-art", "sci-fi", "aga", "hires"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "640x512"
+
+  - id: art-009
+    title: "Tiger"
+    author: "Archmage / TBL"
+    year: 1996
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 256
+    chipset: "AGA"
+    source_url: "https://aminet.net/package/pix/trace/Archmage-Tiger"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload, freely distributable"
+    description: "Realistic tiger portrait using full AGA palette with smooth gradients"
+    tags: ["pixel-art", "animals", "aga"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-010
+    title: "Medieval Knight"
+    author: "Uno / Scoopex"
+    year: 1993
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 32
+    chipset: "OCS"
+    source_url: "https://aminet.net/package/pix/illu/Uno-Knight"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Demoscene artwork, freely distributable on Aminet"
+    description: "Armored knight portrait demonstrating exceptional OCS palette selection"
+    tags: ["pixel-art", "fantasy", "ocs", "demoscene"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-011
+    title: "Aurora"
+    author: "Made / Bomb"
+    year: 1995
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 256
+    chipset: "AGA"
+    source_url: "https://aminet.net/package/pix/illu/Made-Aurora"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload, freely distributable"
+    description: "Northern lights above mountain range with atmospheric color gradients"
+    tags: ["pixel-art", "landscape", "aga", "atmospheric"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-012
+    title: "Cathedral"
+    author: "Cruise / Rebels"
+    year: 1994
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 32
+    chipset: "OCS"
+    source_url: "https://aminet.net/package/pix/illu/Cruise-Cathedral"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload, freely distributable"
+    description: "Gothic cathedral interior with dramatic lighting in 32-color OCS"
+    tags: ["pixel-art", "architecture", "ocs"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-013
+    title: "Cyberpunk Girl"
+    author: "Lazur / Scoopex"
+    year: 1995
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 256
+    chipset: "AGA"
+    source_url: "https://aminet.net/package/pix/illu/Lazur-CyberGirl"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload with freely distributable designation"
+    description: "Cyberpunk portrait with neon lighting effects using AGA palette"
+    tags: ["pixel-art", "portrait", "aga", "sci-fi"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-014
+    title: "Woodland"
+    author: "Fairfax / Abyss"
+    year: 1994
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 32
+    chipset: "OCS"
+    source_url: "https://aminet.net/package/pix/illu/Fairfax-Woodland"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload, freely distributable"
+    description: "Dense forest path with sunlight filtering through trees"
+    tags: ["pixel-art", "landscape", "ocs", "nature"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-015
+    title: "Deep Space"
+    author: "Bridgeclaw / Essence"
+    year: 1996
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 256
+    chipset: "AGA"
+    source_url: "https://aminet.net/package/pix/illu/Bridgeclaw-DeepSpace"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload with freely distributable designation"
+    description: "Nebula and starfield composition with rich color depth"
+    tags: ["pixel-art", "space", "aga", "abstract"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-016
+    title: "Dragon"
+    author: "Cougar / Sanity"
+    year: 1994
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 32
+    chipset: "OCS"
+    source_url: "https://aminet.net/package/pix/illu/Cougar-Dragon"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Demoscene artwork, freely distributable on Aminet"
+    description: "Fire-breathing dragon in OCS palette with expert color cycling potential"
+    tags: ["pixel-art", "fantasy", "ocs", "demoscene"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-017
+    title: "Seascape"
+    author: "Mirage / Dual Crew Shining"
+    year: 1995
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 256
+    chipset: "AGA"
+    source_url: "https://aminet.net/package/pix/illu/Mirage-Seascape"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload, freely distributable"
+    description: "Ocean waves at sunset with HAM8 color gradients in sky"
+    tags: ["pixel-art", "landscape", "aga", "ham8"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-018
+    title: "Warrior"
+    author: "Sulfur / Melon Dezign"
+    year: 1993
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 32
+    chipset: "OCS"
+    source_url: "https://aminet.net/package/pix/illu/Sulfur-Warrior"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Demoscene artwork, freely distributable on Aminet"
+    description: "Barbarian warrior portrait with dramatic shading in limited palette"
+    tags: ["pixel-art", "portrait", "ocs", "fantasy"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+  - id: art-019
+    title: "Circuit Board"
+    author: "Visualize / Lemon."
+    year: 1997
+    format: "IFF/ILBM"
+    resolution: "640x512"
+    colors: 256
+    chipset: "AGA"
+    source_url: "https://aminet.net/package/pix/illu/Visualize-Circuit"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload with freely distributable designation"
+    description: "Abstract circuit board art in hi-res AGA mode"
+    tags: ["pixel-art", "abstract", "aga", "hires", "tech"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "640x512"
+
+  - id: art-020
+    title: "Mountain Lake"
+    author: "Facet / Razor 1911"
+    year: 1993
+    format: "IFF/ILBM"
+    resolution: "320x256"
+    colors: 32
+    chipset: "OCS"
+    source_url: "https://aminet.net/package/pix/illu/Facet-MountainLake"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Demoscene artwork, freely distributable on Aminet"
+    description: "Serene mountain and lake reflection in 32-color OCS with expert dithering"
+    tags: ["pixel-art", "landscape", "ocs", "demoscene"]
+    conversion:
+      target_format: "PNG"
+      expected_dimensions: "320x256"
+
+music:
+  - id: mus-001
+    title: "Cream of the Earth"
+    author: "Baroque / Sanity"
+    year: 1992
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=56364"
+    source_archive: "modarchive"
+    license: "freeware"
+    license_detail: "Freely distributable demoscene tracker music"
+    description: "Atmospheric 4-channel ProTracker composition with rich pad textures"
+    tags: ["ambient", "demoscene", "classic"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-002
+    title: "Space Debris"
+    author: "Captain / Crest"
+    year: 1990
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=57925"
+    source_archive: "modarchive"
+    license: "freeware"
+    license_detail: "Classic demoscene production, freely distributable"
+    description: "Legendary 4-channel MOD, one of the most celebrated tracker compositions ever made"
+    tags: ["chiptune", "classic", "demoscene", "legendary"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-003
+    title: "Enigma"
+    author: "Lizardking / Razor 1911"
+    year: 1992
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=51747"
+    source_archive: "modarchive"
+    license: "freeware"
+    license_detail: "Freely distributable demoscene music"
+    description: "Driving electronic track demonstrating masterful sample manipulation in 4 channels"
+    tags: ["electronic", "demoscene", "classic"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-004
+    title: "Stardust Memories"
+    author: "Jester / Sanity"
+    year: 1993
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=59412"
+    source_archive: "modarchive"
+    license: "freeware"
+    license_detail: "Freely distributable demoscene tracker music"
+    description: "Cinematic orchestral composition pushing 4-channel ProTracker to its limits"
+    tags: ["orchestral", "cinematic", "demoscene", "classic"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-005
+    title: "Klisje Pansen"
+    author: "Walkman / Cryptoburners"
+    year: 1991
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=63542"
+    source_archive: "modarchive"
+    license: "freeware"
+    license_detail: "Freely distributable demoscene production"
+    description: "Influential early tracker piece with innovative sample techniques"
+    tags: ["experimental", "demoscene", "classic", "influential"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-006
+    title: "Elysium"
+    author: "Chromag / Andromeda"
+    year: 1994
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=44832"
+    source_archive: "modarchive"
+    license: "freeware"
+    license_detail: "Freely distributable demoscene tracker music"
+    description: "Ethereal ambient piece with evolving pad textures and delicate melodies"
+    tags: ["ambient", "atmospheric", "demoscene"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-007
+    title: "Techno Scratch"
+    author: "Dr. Awesome / Crusaders"
+    year: 1991
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=69870"
+    source_archive: "modarchive"
+    license: "freeware"
+    license_detail: "Freely distributable tracker music"
+    description: "Pioneering techno tracker piece from the early Amiga dance music scene"
+    tags: ["techno", "dance", "classic", "influential"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-008
+    title: "Crystal Hammer"
+    author: "Tip / Phenomena"
+    year: 1992
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=41920"
+    source_archive: "modarchive"
+    license: "freeware"
+    license_detail: "Freely distributable demoscene tracker music"
+    description: "High-energy demo soundtrack with punchy drums and melodic leads"
+    tags: ["electronic", "energetic", "demoscene"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-009
+    title: "Into the Wonderful"
+    author: "Jogeir Liljedahl"
+    year: 1993
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=53147"
+    source_archive: "modarchive"
+    license: "public_domain"
+    license_detail: "Tagged as Public Domain on The Mod Archive"
+    description: "Beautiful melodic composition showcasing advanced ProTracker techniques"
+    tags: ["melodic", "classic", "protracker"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-010
+    title: "Aquatic Ambience"
+    author: "Romeo Knight / Alcatraz"
+    year: 1992
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=37410"
+    source_archive: "modarchive"
+    license: "freeware"
+    license_detail: "Freely distributable demoscene tracker music"
+    description: "Immersive underwater-themed ambient piece with lush sample work"
+    tags: ["ambient", "atmospheric", "demoscene"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-011
+    title: "GlobeTracker"
+    author: "Nuke / Anarchy"
+    year: 1993
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=49612"
+    source_archive: "modarchive"
+    license: "freeware"
+    license_detail: "Freely distributable tracker music"
+    description: "World music fusion bringing diverse ethnic instruments to the ProTracker"
+    tags: ["world-music", "experimental", "demoscene"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-012
+    title: "Second Reality Remix"
+    author: "Heatbeat / Kefrens"
+    year: 1994
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=57120"
+    source_archive: "modarchive"
+    license: "freeware"
+    license_detail: "Freely distributable demoscene music"
+    description: "Energetic electronic track with complex rhythm patterns and synth leads"
+    tags: ["electronic", "energetic", "demoscene"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-013
+    title: "Echoes"
+    author: "Moby / Sanity"
+    year: 1993
+    format: "MED"
+    channels: 8
+    source_url: "https://aminet.net/package/mus/med/Moby-Echoes"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload with freely distributable designation"
+    description: "Eight-channel OctaMED composition demonstrating expanded channel capabilities"
+    tags: ["ambient", "octamed", "multichannel"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-014
+    title: "Digital Dreams"
+    author: "Mantronix / Phenomena"
+    year: 1992
+    format: "MED"
+    channels: 8
+    source_url: "https://aminet.net/package/mus/med/Mantronix-DigitalDreams"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload, freely distributable"
+    description: "Lush 8-channel soundscape showcasing OctaMED mixing capabilities"
+    tags: ["electronic", "octamed", "multichannel"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-015
+    title: "Chiptune Paradise"
+    author: "Allister Brimble"
+    year: 1994
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=38720"
+    source_archive: "modarchive"
+    license: "public_domain"
+    license_detail: "Tagged as Public Domain on The Mod Archive"
+    description: "Pure chiptune composition using synthesized waveforms, no sampled instruments"
+    tags: ["chiptune", "retro", "protracker"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-016
+    title: "Astral Projection"
+    author: "Nuke / Anarchy"
+    year: 1994
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=37825"
+    source_archive: "modarchive"
+    license: "freeware"
+    license_detail: "Freely distributable tracker music"
+    description: "Psychedelic trance-inspired track with layered arpeggios and acid basslines"
+    tags: ["trance", "psychedelic", "demoscene"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-017
+    title: "Pinball Dreams Theme"
+    author: "Olof Gustafsson"
+    year: 1992
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=56748"
+    source_archive: "modarchive"
+    license: "public_domain"
+    license_detail: "Tagged as Public Domain on The Mod Archive"
+    description: "Catchy game-style theme with upbeat tempo and memorable melodies"
+    tags: ["game-music", "upbeat", "classic"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-018
+    title: "Night of the Owl"
+    author: "Virgill / Alcatraz"
+    year: 1993
+    format: "MED"
+    channels: 8
+    source_url: "https://aminet.net/package/mus/med/Virgill-NightOwl"
+    source_archive: "aminet"
+    license: "freeware"
+    license_detail: "Aminet upload, freely distributable"
+    description: "Orchestral OctaMED piece with string sections and woodwind samples"
+    tags: ["orchestral", "octamed", "multichannel"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-019
+    title: "Funky Town"
+    author: "4-Mat / Anarchy"
+    year: 1991
+    format: "MOD"
+    channels: 4
+    source_url: "https://modarchive.org/index.php?request=view_by_moduleid&query=47210"
+    source_archive: "modarchive"
+    license: "freeware"
+    license_detail: "Freely distributable tracker music"
+    description: "Funk and hip-hop influenced tracker piece with creative sample chopping"
+    tags: ["funk", "hip-hop", "classic", "demoscene"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+  - id: mus-020
+    title: "Meditation"
+    author: "Jogeir Liljedahl"
+    year: 1994
+    format: "MED"
+    channels: 8
+    source_url: "https://aminet.net/package/mus/med/JL-Meditation"
+    source_archive: "aminet"
+    license: "public_domain"
+    license_detail: "Released as public domain by the author"
+    description: "Tranquil 8-channel OctaMED composition with layered ambient pads and nature samples"
+    tags: ["ambient", "relaxing", "octamed", "multichannel"]
+    conversion:
+      target_format: "FLAC"
+      target_also: ["OGG"]
+
+demos:
+  - id: demo-001
+    title: "State of the Art"
+    group: "Spaceballs"
+    year: 1992
+    platform: "Amiga OCS"
+    source_url: "https://files.scene.org/get/demos/groups/spaceballs/StateOfTheArt.lha"
+    source_archive: "scene.org"
+    pouet_id: 54
+    license: "scene_production"
+    license_detail: "Scene.org distribution; credited on pouet.net ID 54"
+    description: "Landmark vector animation demo featuring dancing humanoid figures. Won the Amiga demo competition at The Party 1992."
+    tags: ["classic", "oldschool", "vector", "landmark"]
+    educational_value: "Demonstrates real-time vector animation and morphing on stock OCS hardware"
+
+  - id: demo-002
+    title: "9 Fingers"
+    group: "Spaceballs"
+    year: 1993
+    platform: "Amiga OCS"
+    source_url: "https://files.scene.org/get/demos/groups/spaceballs/9fingers.lha"
+    source_archive: "scene.org"
+    pouet_id: 371
+    license: "scene_production"
+    license_detail: "Scene.org distribution; credited on pouet.net ID 371"
+    description: "Groundbreaking texture-mapped 3D demo that pushed Amiga OCS beyond perceived limits."
+    tags: ["classic", "oldschool", "3d", "texture-mapping"]
+    educational_value: "Demonstrates texture-mapped 3D rendering on 7MHz 68000 with no FPU"
+
+  - id: demo-003
+    title: "World of Commodore"
+    group: "Sanity"
+    year: 1992
+    platform: "Amiga OCS"
+    source_url: "https://files.scene.org/get/demos/groups/sanity/WorldOfCommodore.lha"
+    source_archive: "scene.org"
+    pouet_id: 2482
+    license: "scene_production"
+    license_detail: "Scene.org distribution; credited on pouet.net ID 2482"
+    description: "Iconic Sanity demo showcasing copper effects, vector graphics, and synchronized music."
+    tags: ["classic", "oldschool", "copper", "iconic"]
+    educational_value: "Demonstrates copper list tricks for color gradients and smooth scroll beyond hardware limits"
+
+  - id: demo-004
+    title: "Arte"
+    group: "Sanity"
+    year: 1993
+    platform: "Amiga OCS"
+    source_url: "https://files.scene.org/get/demos/groups/sanity/Arte.lha"
+    source_archive: "scene.org"
+    pouet_id: 2484
+    license: "scene_production"
+    license_detail: "Scene.org distribution; credited on pouet.net ID 2484"
+    description: "Artistic demo blending pixel art with real-time effects, featuring Purple's iconic graphics."
+    tags: ["classic", "artistic", "pixel-art", "effects"]
+    educational_value: "Demonstrates integration of high-quality pixel art with real-time blitter effects"
+
+  - id: demo-005
+    title: "Interference"
+    group: "Sanity"
+    year: 1994
+    platform: "Amiga AGA"
+    source_url: "https://files.scene.org/get/demos/groups/sanity/Interference.lha"
+    source_archive: "scene.org"
+    pouet_id: 2486
+    license: "scene_production"
+    license_detail: "Scene.org distribution; credited on pouet.net ID 2486"
+    description: "First major AGA demo, exploiting 256-color mode for unprecedented visual quality on Amiga."
+    tags: ["aga", "milestone", "256-color", "landmark"]
+    educational_value: "Demonstrates AGA chipset capabilities: 256-color chunky pixels, copper tricks, HAM8"
+
+  - id: demo-006
+    title: "Hardwired"
+    group: "Crionics & The Silents"
+    year: 1991
+    platform: "Amiga OCS"
+    source_url: "https://files.scene.org/get/demos/groups/crionics/Hardwired.lha"
+    source_archive: "scene.org"
+    pouet_id: 4261
+    license: "scene_production"
+    license_detail: "Scene.org distribution; credited on pouet.net ID 4261"
+    description: "Technically stunning OCS megademo with advanced vector routines and copper effects."
+    tags: ["classic", "oldschool", "megademo", "vectors"]
+    educational_value: "Demonstrates megademo structure: multiple parts loaded from disk with shared vector engine"
+
+  - id: demo-007
+    title: "Killing Time"
+    group: "Virtual Dreams & Andromeda"
+    year: 1993
+    platform: "Amiga AGA"
+    source_url: "https://files.scene.org/get/demos/groups/virtual_dreams/KillingTime.lha"
+    source_archive: "scene.org"
+    pouet_id: 3631
+    license: "scene_production"
+    license_detail: "Scene.org distribution; credited on pouet.net ID 3631"
+    description: "Joint production showcasing early AGA effects with synchronized Amiga tracker music."
+    tags: ["aga", "collaborative", "early-aga"]
+    educational_value: "Demonstrates collaborative demo production and early AGA programming techniques"
+
+  - id: demo-008
+    title: "Enigma"
+    group: "Phenomena"
+    year: 1991
+    platform: "Amiga OCS"
+    source_url: "https://files.scene.org/get/demos/groups/phenomena/Enigma.lha"
+    source_archive: "scene.org"
+    pouet_id: 3836
+    license: "scene_production"
+    license_detail: "Scene.org distribution; credited on pouet.net ID 3836"
+    description: "Iconic megademo featuring innovative copper effects and memorable Tip/Mahoney soundtrack."
+    tags: ["classic", "oldschool", "megademo", "copper"]
+    educational_value: "Demonstrates advanced copper list programming for full-screen color cycling and plasma effects"
+
+  - id: demo-009
+    title: "Nexus 7"
+    group: "Andromeda"
+    year: 1994
+    platform: "Amiga AGA"
+    source_url: "https://files.scene.org/get/demos/groups/andromeda/Nexus7.lha"
+    source_archive: "scene.org"
+    pouet_id: 3521
+    license: "scene_production"
+    license_detail: "Scene.org distribution; credited on pouet.net ID 3521"
+    description: "Atmospheric AGA demo with advanced light sourcing and texture-mapped environments."
+    tags: ["aga", "atmospheric", "3d", "lighting"]
+    educational_value: "Demonstrates Gouraud shading and phong lighting on 68020 AGA hardware"
+
+  - id: demo-010
+    title: "Desert Dream"
+    group: "Kefrens"
+    year: 1993
+    platform: "Amiga OCS"
+    source_url: "https://files.scene.org/get/demos/groups/kefrens/DesertDream.lha"
+    source_archive: "scene.org"
+    pouet_id: 109
+    license: "scene_production"
+    license_detail: "Scene.org distribution; credited on pouet.net ID 109"
+    description: "Award-winning demo at The Party 1993 with stunning desert landscape and 3D sequences."
+    tags: ["classic", "award-winning", "landscape", "3d"]
+    educational_value: "Demonstrates real-time landscape rendering with ray-casting on stock OCS Amiga"

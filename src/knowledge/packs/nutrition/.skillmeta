@@ -1,0 +1,584 @@
+# GSD Skill Metadata
+pack_id: NUTR-101
+pack_name: "Nutrition & Health Sciences — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: applied_practical
+learning_domain: nutrition_health
+
+# Content Description
+description: |
+  Nutrition as a way of understanding how food sustains the body, how nutrients
+  function, how food systems operate, and how to evaluate health and dietary
+  claims critically. Covers nutritional science from foundation through college
+  level, emphasizing evidence-based understanding of nutrition without diet
+  culture messaging. Integrates chemistry, biology, systems thinking, critical
+  literacy, and practical application to real food choices.
+
+short_description: "Nutrition science, food systems, and nutritional literacy from K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Nutrition Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - SCI-101
+  - CHEM-101
+
+# What This Pack Enables
+enables:
+  - ENVR-101
+  - PE-101
+  - DOMESTIC-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [25, 40]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [40, 60]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [60, 85]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [85, 120]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [120, 160]
+
+# Modules
+modules:
+  - id: NUTR-101-M1
+    name: "Nutrients & Their Functions"
+    description: "Identifying macronutrients and micronutrients, understanding their roles in the body, and recognizing that different foods have different nutrient profiles"
+    learning_outcomes:
+      - "Name the macronutrients and describe their primary functions in the body"
+      - "Identify key vitamins and minerals and explain their roles"
+      - "Recognize that different foods contain different nutrient combinations"
+      - "Understand that balanced nutrition means getting a variety of nutrients"
+    topics:
+      - "Macronutrients: Proteins, Carbohydrates, Fats, Water"
+      - "Micronutrients: Vitamins and Minerals"
+      - "Nutrient Functions and Body Needs"
+      - "Reading Nutrition Labels"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 25
+      high: 15
+    prerequisite_modules: []
+    activities:
+      count: 6
+      examples:
+        - "Nutrient Detective Food Sort"
+        - "Vitamin and Mineral Bingo"
+        - "Label Reading Scavenger Hunt"
+        - "Create Your Nutrient Passport"
+        - "Color-Coded Plate Building"
+        - "Taste Test and Nutrient Matching"
+    assessments:
+      - "Can student identify macronutrients in foods?"
+      - "Does student understand the functions of key nutrients?"
+      - "Can student read and interpret a nutrition facts label?"
+
+  - id: NUTR-101-M2
+    name: "Digestion & Body Systems"
+    description: "Tracing the path of food through the digestive system, understanding how nutrients are extracted and absorbed, and recognizing individual variation in digestion"
+    learning_outcomes:
+      - "Trace the path of food through the digestive system"
+      - "Describe the roles of organs, enzymes, and other components"
+      - "Explain that nutrient absorption is not 100% efficient"
+      - "Understand that digestion varies by person and by context"
+    topics:
+      - "The Digestive Journey"
+      - "Enzymes and Chemical Breakdown"
+      - "Nutrient Absorption and the Bloodstream"
+      - "Metabolism and Energy Production"
+      - "Factors Affecting Digestion"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 35
+      high: 30
+    prerequisite_modules: [NUTR-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Digestion Journey Mapping"
+        - "Enzyme Experiment with Crackers"
+        - "Digestive System Model Building"
+        - "Food Breakdown Observation"
+        - "Digestion and Factors Investigation"
+        - "Absorption and Bloodstream Simulation"
+    assessments:
+      - "Can student explain the stages of digestion?"
+      - "Does student understand the role of enzymes?"
+      - "Can student identify factors that affect digestion?"
+
+  - id: NUTR-101-M3
+    name: "Food Sources & Systems"
+    description: "Understanding where food comes from, how agricultural systems work, and recognizing environmental and social dimensions of food production"
+    learning_outcomes:
+      - "Trace a food from farm to table"
+      - "Understand different agricultural practices and their trade-offs"
+      - "Recognize food security and food equity as systemic issues"
+      - "Consider sustainability in food production and consumption"
+    topics:
+      - "Agricultural Practices"
+      - "Farm-to-Table Systems"
+      - "Food Miles and Transportation Impact"
+      - "Food Security and Food Justice"
+      - "Environmental Impact of Agriculture"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 25
+      middle: 35
+      high: 40
+    prerequisite_modules: [NUTR-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Farm-to-Table Mapping Project"
+        - "Food Miles Calculator"
+        - "Growing Food: Herb or Vegetable Garden"
+        - "Label Comparison: Organic vs. Conventional"
+        - "Food System Stakeholder Maps"
+        - "Local Food System Exploration"
+    assessments:
+      - "Can student trace a food from source to table?"
+      - "Does student understand trade-offs in agricultural practices?"
+      - "Can student discuss food equity and access issues?"
+
+  - id: NUTR-101-M4
+    name: "Nutritional Literacy & Critical Thinking"
+    description: "Developing the ability to evaluate nutrition claims, read labels critically, recognize marketing tactics, and distinguish evidence from opinion"
+    learning_outcomes:
+      - "Read and interpret nutrition facts labels and ingredient lists"
+      - "Evaluate nutrition claims using basic evidence criteria"
+      - "Recognize marketing language and tactics in food advertising"
+      - "Understand study design and what makes evidence strong"
+    topics:
+      - "Nutrition Labels and Ingredient Lists"
+      - "Evaluating Nutrition Claims"
+      - "Marketing Language and Tactics"
+      - "Study Design and Evidence Quality"
+      - "Conflicts of Interest"
+    grade_levels: ["4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 35
+    prerequisite_modules: [NUTR-101-M1]
+    activities:
+      count: 6
+      examples:
+        - "Nutrition Label Scavenger Hunt"
+        - "Claim vs. Evidence Analysis"
+        - "Marketing Language Detection Game"
+        - "Design a Nutrition Study"
+        - "Debate: Is This Claim Supported?"
+        - "Create Your Own Nutrition Advertisement"
+    assessments:
+      - "Can student read and interpret nutrition labels?"
+      - "Does student evaluate claims using appropriate criteria?"
+      - "Can student identify marketing language?"
+
+  - id: NUTR-101-M5
+    name: "Health Integration & Meal Planning"
+    description: "Connecting nutrition to other health dimensions and applying nutritional knowledge to real food choices and meal planning"
+    learning_outcomes:
+      - "Recognize connections between nutrition and sleep, stress, activity, mental health"
+      - "Design balanced, appealing meals that meet nutritional needs"
+      - "Make food choices informed by evidence, personal values, and cultural traditions"
+      - "Develop a healthy, sustainable relationship with food"
+    topics:
+      - "Nutrition and Sleep"
+      - "Nutrition and Stress"
+      - "Nutrition and Physical Activity"
+      - "Nutrition and Mental Health"
+      - "Meal Planning and Food Preparation"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 35
+    prerequisite_modules: [NUTR-101-M1, NUTR-101-M2]
+    activities:
+      count: 6
+      examples:
+        - "Balanced Meal Design Challenge"
+        - "Weekly Meal Planning Workshop"
+        - "Sleep and Nutrition Connection Exploration"
+        - "Stress and Eating Discussion and Reflection"
+        - "Cultural Food Traditions and Values"
+        - "Cooking Together and Food Celebrations"
+    assessments:
+      - "Can student create a balanced meal or meal plan?"
+      - "Does student understand connections between nutrition and other health dimensions?"
+      - "Can student make food choices aligned with evidence and personal values?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-NUT-001
+    description: "Identify and describe the functions of macronutrients and micronutrients"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-DIG-001
+    description: "Trace the path of food through the digestive system"
+    levels: ["3", "4", "5", "6", "7", "8"]
+
+  - code: LO-DIG-002
+    description: "Explain nutrient absorption and factors affecting digestion"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-FOOD-001
+    description: "Trace a food from source to table and understand food systems"
+    levels: ["3", "4", "5", "6", "7", "8"]
+
+  - code: LO-LIT-001
+    description: "Read and interpret nutrition labels"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-LIT-002
+    description: "Evaluate nutrition claims using evidence criteria"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-APP-001
+    description: "Design meals and make food choices informed by evidence and values"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-INT-001
+    description: "Connect nutrition to sleep, stress, activity, and mental health"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Label Reading and Observation"
+    frequency: ongoing
+
+  - type: formative
+    name: "Claim Evaluation Discussion"
+    frequency: weekly
+
+  - type: summative
+    name: "Meal Planning Project"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Nutrition Claim Analysis"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: nutrition_label_database
+    url: https://www.nutritionix.com/
+    description: "Database for looking up nutrition facts for real foods"
+
+  - name: food_miles_calculator
+    url: https://www.localharvestmap.org/
+    description: "Interactive tool for calculating food miles and exploring local food systems"
+
+  - name: observation_journal
+    integrated: true
+    description: "Digital or paper observation logging for food and digestion observations"
+
+interactive_elements:
+  - type: investigation
+    name: "Enzyme Experiment"
+
+  - type: simulator
+    name: "Digestion Journey"
+
+  - type: game
+    name: "Nutrient Detective"
+
+  - type: visualization
+    name: "Food Systems Map"
+
+  - type: activity
+    name: "Meal Planning Workshop"
+
+  - type: discussion
+    name: "Claim Evaluation Debate"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Español"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: [zh, ar, pt, ja]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Food preparation safety for various abilities. All visual content has text descriptions. Nutrition activities include adaptations for food allergies and restrictions."
+  pack_specific_concerns:
+    - "Food preparation activities need adaptive equipment suggestions"
+    - "Nutrition label content must be readable at high contrast"
+    - "Meal planning tool needs keyboard navigation"
+    - "Discussion of food restrictions must not stigmatize"
+
+# Standards Alignment
+standards_alignment:
+  - framework: "NHES (National Health Education Standards)"
+    version: "2007"
+    standard_codes:
+      - "NHES.1"
+      - "NHES.5"
+      - "NHES.6"
+    alignments:
+      "Standard 1": "Comprehend concepts related to health promotion and disease prevention"
+      "Standard 5": "Use decision-making skills to enhance health"
+      "Standard 6": "Use goal-setting and decision-making skills"
+
+  - framework: "SHAPE America National Standards"
+    version: "2014"
+    standard_codes:
+      - "SHAPE.5"
+      - "SHAPE.6"
+    mappings:
+      "Health Literacy": "Nutrition and food systems"
+      "Health Behavior": "Making evidence-based food choices"
+
+  - framework: "Next Generation Science Standards (NGSS)"
+    version: 2013
+    standard_codes:
+      - "SEP-1"
+      - "SEP-3"
+      - "SEP-4"
+      - "SEP-6"
+      - "SEP-7"
+    alignments:
+      SEP-1: "Asking Questions and Defining Problems"
+      SEP-3: "Planning and Carrying Out Investigations"
+      SEP-4: "Analyzing and Interpreting Data"
+      SEP-6: "Constructing Explanations and Designing Solutions"
+      SEP-7: "Engaging in Argument from Evidence"
+
+  - framework: "Common Core Mathematics (Statistics)"
+    version: "2010"
+    standard_codes:
+      - "CCSS.MATH.CONTENT.6.SP"
+    mappings:
+      "Statistics": "Data interpretation in food and nutrition contexts"
+
+  - framework: "IB MYP Individuals & Societies (Food Systems)"
+    version: "2014"
+    standard_codes:
+      - "IB.IAS.1"
+    mappings:
+      "Grades 6-10": "Food systems, sustainability, equity"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Difficulty is in systems thinking and critical evaluation, not in technical content. Accessible to all learners with appropriate scaffolding."
+
+# Content Flags
+content_flags:
+  - flag: diet_culture_awareness
+    description: "Nutrition education sometimes reinforces diet culture (weight focus, food morality). This pack explicitly avoids that language."
+    mitigation: "Use 'more often/sometimes' instead of 'good/bad'. Never mention weight or appearance. Center science and joy."
+
+  - flag: food_insecurity_awareness
+    description: "Some families experience food insecurity. Nutritional advice without access is not helpful."
+    mitigation: "Acknowledge food equity. Provide resources. Avoid shame. Connect to school food programs."
+
+  - flag: food_allergies_and_restrictions
+    description: "Learners have diverse food needs and restrictions due to allergies, intolerances, preferences, religion, and values."
+    mitigation: "Adapt all activities. Never pressure eating. Use 'I can't' and 'I choose not to' as equally valid. Include diverse cuisines."
+
+  - flag: eating_disorder_risk
+    description: "Messaging about food and bodies can trigger or reinforce eating disorders for vulnerable learners."
+    mitigation: "Never weight-shame. Avoid restriction language. Include mental health resources. Train educators on trauma-informed nutrition."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/nutr-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "NUTR-101"
+  looking_for:
+    - "Recipes and food activities from diverse cuisines"
+    - "Adaptations for food allergies and restrictions"
+    - "Resources for families experiencing food insecurity"
+    - "Investigation activities for local food systems"
+    - "Translations to Spanish, Mandarin, and French"
+    - "Connections to local farms, markets, and food educators"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Nutrition Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - nutrition
+  - health
+  - food
+  - digestion
+  - food-systems
+  - critical-thinking
+  - literacy
+  - food-security
+  - sustainability
+  - wellness
+  - stem
+  - applied
+
+# External Resources
+resources:
+  - type: textbook
+    title: "Food Politics: How the Food Industry Influences Nutrition and Health"
+    author: "Marion Nestle"
+    url: null
+
+  - type: online_platform
+    title: "MyPlate: USDA Nutrition Guidance"
+    author: "USDA"
+    url: "https://www.myplate.gov"
+
+  - type: online_platform
+    title: "Harvard School of Public Health Nutrition Source"
+    author: "Harvard University"
+    url: "https://www.hsph.harvard.edu/nutritionsource/"
+
+  - type: online_platform
+    title: "Khan Academy Health and Medicine"
+    author: "Khan Academy"
+    url: "https://www.khanacademy.org/science/health-and-medicine"
+
+# Related Packs
+related_packs:
+  - id: SCI-101
+    relationship: "Scientific method enables evaluation of nutrition claims and design of food investigations"
+
+  - id: CHEM-101
+    relationship: "Chemistry of atoms, molecules, and reactions is visible in nutrients and digestion"
+
+  - id: ENVR-101
+    relationship: "Environmental science explores food systems, agriculture, and sustainability"
+
+  - id: PE-101
+    relationship: "Physical education covers fitness; nutrition is one component of health alongside movement"
+
+  - id: DOMESTIC-101
+    relationship: "Practical life skills include cooking, grocery shopping, meal planning, and budgeting"
+
+  - id: CRIT-101
+    relationship: "Critical thinking frameworks apply to evaluating nutrition claims and evidence"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "apple"
+    color: "#8BC34A"
+    position: "Applied - Health & Wellness"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "NUTR-101-nutrient-functions"
+    - "NUTR-101-digestion-stages"
+    - "NUTR-101-food-systems"
+    - "NUTR-101-claim-evaluation"
+    - "NUTR-101-meal-planning"
+    - "NUTR-101-parent-guidance"
+
+# File References
+files:
+  vision_document: "NUTR-101-vision.md"
+  modules_definition: "NUTR-101-modules.yaml"
+  activities: "NUTR-101-activities.json"
+  assessment: "NUTR-101-assessment.md"
+  resources: "NUTR-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering nutrients, digestion, food systems, literacy, and application"
+      - "Contributed 30 starter activities across all modules"
+      - "Assessment framework with four proficiency levels"
+      - "Parent guidance focused on science, not diet culture"
+      - "Aligned to NGSS Science and Health Education Standards"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"

@@ -1,0 +1,2761 @@
+# AGC Documentation Archive -- Master Catalog
+# Apollo Guidance Computer documentation for educational study
+# Generated: 2026-02-18
+
+metadata:
+  version: 1
+  generated: "2026-02-18"
+  total_documents: 210
+  sources:
+    virtual_agc: 160
+    internet_archive: 10
+    nasa_ntrs: 16
+    other: 24
+  categories:
+    architecture: 28
+    software: 38
+    operations: 26
+    engineering_drawings: 18
+    interface: 22
+    testing: 20
+    management: 28
+    educational: 30
+
+documents:
+  architecture:
+    - id: agc-arch-001
+      title: "MIT's Role in Project Apollo, Vol. III: Computer Subsystem"
+      author: "Eldon C. Hall"
+      date: "1972-08"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-700.pdf"
+      format: "pdf"
+      relevance: "essential"
+      description: "Definitive hardware reference for the AGC by its chief designer. Covers Block I and Block II architecture, logic modules, memory systems, and design evolution."
+      tags: ["hardware", "block-ii", "design", "core-rope"]
+      doc_number: "R-700"
+      missions: ["all"]
+
+    - id: agc-arch-002
+      title: "AGC Information Series: Central Processor"
+      author: "MIT Instrumentation Laboratory"
+      date: "1963"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_24_central_processor.pdf"
+      format: "pdf"
+      relevance: "essential"
+      description: "Detailed description of the AGC central processor architecture, instruction execution, and timing. Part of the comprehensive AGC Information Series."
+      tags: ["hardware", "cpu", "agc-info-series"]
+      doc_number: "FR-2-103A"
+      missions: []
+
+    - id: agc-arch-003
+      title: "AGC Information Series: Machine Instructions"
+      author: "MIT Instrumentation Laboratory"
+      date: "1963-03-10"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_22_machine_instructions.pdf"
+      format: "pdf"
+      relevance: "essential"
+      description: "Complete instruction set reference for the Block I AGC, covering all machine instructions with encoding, timing, and operational details."
+      tags: ["hardware", "instructions", "isa", "agc-info-series"]
+      doc_number: "FR-2-102A"
+      missions: []
+
+    - id: agc-arch-004
+      title: "AGC Information Series: Block II Machine Instructions"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_44_block_ii_machine_instructions.pdf"
+      format: "pdf"
+      relevance: "essential"
+      description: "Complete instruction set for the Block II AGC used on all crewed Apollo flights. Covers extra-code instructions, interrupt handling, and I/O channels."
+      tags: ["hardware", "instructions", "block-ii", "agc-info-series"]
+      doc_number: "FR-2-132"
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-arch-005
+      title: "AGC Information Series: Block II AGC"
+      author: "MIT Instrumentation Laboratory"
+      date: "1965"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_42_block_ii_agc.pdf"
+      format: "pdf"
+      relevance: "essential"
+      description: "Overview of Block II AGC architecture including memory organization, fixed/erasable storage, register set, and hardware changes from Block I."
+      tags: ["hardware", "block-ii", "architecture", "agc-info-series"]
+      doc_number: "FR-2-130"
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-arch-006
+      title: "AGC Information Series: Timer and Sequence Generator"
+      author: "MIT Instrumentation Laboratory"
+      date: "1964-05-29"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_25_timer_and_seq_gen.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Detailed description of timing circuits and sequence generation logic that control AGC instruction execution and memory access cycles."
+      tags: ["hardware", "timing", "agc-info-series"]
+      doc_number: "FR-2-105B"
+      missions: []
+
+    - id: agc-arch-007
+      title: "AGC Information Series: Priority Control"
+      author: "MIT Instrumentation Laboratory"
+      date: "1964-12-04"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_28_priority_control.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Hardware priority control and interrupt handling mechanisms. Covers interrupt vectoring, priority scheduling support, and hardware/software interface for real-time operations."
+      tags: ["hardware", "interrupts", "priority", "agc-info-series"]
+      doc_number: "FR-2-108A"
+      missions: []
+
+    - id: agc-arch-008
+      title: "AGC Information Series: Sequence Generator"
+      author: "MIT Instrumentation Laboratory"
+      date: "1963"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_27_sequence_generator.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Microsequence generation for AGC instruction execution. Details the control pulse sequences that implement each machine instruction."
+      tags: ["hardware", "microcode", "agc-info-series"]
+      doc_number: "FR-2-107"
+      missions: []
+
+    - id: agc-arch-009
+      title: "Reliability History of the Apollo Guidance Computer"
+      author: "Eldon C. Hall"
+      date: "1972-01"
+      source: "nasa_ntrs"
+      source_url: "https://ntrs.nasa.gov/citations/19750004273"
+      format: "pdf"
+      relevance: "essential"
+      description: "Comprehensive reliability analysis covering 17 flight computers and 26 ground units. Documents zero in-flight failures across all Apollo missions."
+      tags: ["hardware", "reliability", "history", "statistics"]
+      doc_number: "NASA-CR-140340"
+      missions: ["all"]
+
+    - id: agc-arch-010
+      title: "Apollo Guidance, Navigation, and Control Hardware Overview"
+      author: "Michael Interbartolo"
+      date: "2009"
+      source: "nasa_ntrs"
+      source_url: "https://ntrs.nasa.gov/citations/20090016290"
+      format: "pdf"
+      relevance: "essential"
+      description: "Modern overview of Apollo GNC hardware systems for both CSM and LM. Reviews AGC, IMU, optics, DSKY, and system integration."
+      tags: ["hardware", "overview", "gnc", "modern-reference"]
+      doc_number: "JSC-CN-16673"
+      missions: ["all"]
+
+    - id: agc-arch-011
+      title: "AGC Schematics Collection"
+      author: "Eldon C. Hall"
+      date: "1966"
+      source: "other"
+      source_url: "https://klabs.org/history/ech/agc_schematics/"
+      format: "html"
+      relevance: "important"
+      description: "Block II AGC electrical schematics preserved by Eldon Hall. Contains most digital circuitry schematics for AGC part number 2003993."
+      tags: ["hardware", "schematics", "block-ii", "electrical"]
+      doc_number: "2003993"
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-arch-012
+      title: "Block I AGC: How to Build One in Your Basement"
+      author: "John Pultorak"
+      date: "2004"
+      source: "other"
+      source_url: "https://klabs.org/history/build_agc/build_agc_5.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Detailed reverse-engineering analysis of Block I AGC architecture with sufficient detail for hardware replication. Excellent pedagogical resource."
+      tags: ["hardware", "block-i", "reverse-engineering", "educational"]
+      doc_number: ""
+      missions: []
+
+    - id: agc-arch-013
+      title: "MOD 3C Programmers Manual"
+      author: "MIT Instrumentation Laboratory"
+      date: "1961-11"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/E-1077.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Early AGC predecessor programmer's manual. Documents the MOD 3C computer that informed AGC design decisions."
+      tags: ["hardware", "early-development", "programmer-manual"]
+      doc_number: "E-1077"
+      missions: []
+
+    - id: agc-arch-014
+      title: "AGC4 Basic Training Manual"
+      author: "MIT Instrumentation Laboratory"
+      date: "1967-01"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/E-2052.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Official training manual for AGC4 (Block II) computer programming. Used to train MIT/IL and NASA programmers on the flight computer."
+      tags: ["hardware", "training", "block-ii", "programming"]
+      doc_number: "E-2052"
+      missions: []
+
+    - id: agc-arch-015
+      title: "AGC NOR Gate Specifications"
+      author: "MIT Instrumentation Laboratory"
+      date: "1965"
+      source: "other"
+      source_url: "https://klabs.org/history/ech/scd/"
+      format: "html"
+      relevance: "supplementary"
+      description: "Specifications for the dual 3-input NOR gate flat-pack IC that is the sole logic element in the AGC. Documents the Fairchild micrologic device."
+      tags: ["hardware", "nor-gate", "integrated-circuits", "components"]
+      doc_number: ""
+      missions: []
+
+    - id: agc-arch-016
+      title: "AGC Information Series: Job/Task Control"
+      author: "MIT Instrumentation Laboratory"
+      date: "1964-04-17"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_32_job_task_control.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Hardware support for the AGC real-time executive's job and task scheduling. Bridges hardware priority logic and software multitasking."
+      tags: ["hardware", "scheduling", "executive", "agc-info-series"]
+      doc_number: "FR-2-112A"
+      missions: []
+
+    - id: agc-arch-017
+      title: "AGC Information Series: Fresh Start and Restart"
+      author: "MIT Instrumentation Laboratory"
+      date: "1965"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_38_fresh_start_and_restart.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Hardware and software mechanisms for AGC initialization and restart after power interruption or anomaly. Critical for understanding fault tolerance."
+      tags: ["hardware", "restart", "fault-tolerance", "agc-info-series"]
+      doc_number: "FR-2-121"
+      missions: []
+
+    - id: agc-arch-018
+      title: "AGC Integrated Circuit Packages"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "other"
+      source_url: "https://klabs.org/history/ech/ic_packages/index.htm"
+      format: "html"
+      relevance: "supplementary"
+      description: "Documentation of the flat-pack IC packaging used in the AGC. Covers the dual 3-input NOR gate and its physical implementation."
+      tags: ["hardware", "packaging", "integrated-circuits"]
+      doc_number: ""
+      missions: []
+
+    - id: agc-arch-019
+      title: "AGC Information Series: KEYRUPT and UPRUPT"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_40_keyrupt_uprupt.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Keyboard and uplink interrupt handling. Documents how DSKY keystrokes and ground uplink data trigger AGC interrupts."
+      tags: ["hardware", "interrupts", "dsky", "uplink", "agc-info-series"]
+      doc_number: "FR-2-122"
+      missions: []
+
+    - id: agc-arch-020
+      title: "AGC Information Series: Mode Switching and Mark"
+      author: "MIT Instrumentation Laboratory"
+      date: "1965-08-01"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_34_mode_switching_and_mark.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Hardware mode switching and optical mark button interface. Covers the interface between the AGC and the crew's optics sighting system."
+      tags: ["hardware", "optics", "mark", "mode-switching", "agc-info-series"]
+      doc_number: "FR-2-114"
+      missions: []
+
+    - id: agc-arch-021
+      title: "Apollo Guidance and Navigation System"
+      author: "MIT Instrumentation Laboratory"
+      date: "1965"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/ApolloTrainingGuidanceAndNavigation_07-65.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Comprehensive training document covering the entire Apollo G&N system including AGC, IMU, optics, and DSKY as an integrated system."
+      tags: ["hardware", "training", "gnc", "system-overview"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-arch-022
+      title: "Apollo Guidance Computer: Architecture and Operation"
+      author: "Frank O'Brien"
+      date: "2010"
+      source: "other"
+      source_url: "https://www.springer.com/gp/book/9781441908766"
+      format: "pdf"
+      relevance: "essential"
+      description: "Modern comprehensive book on AGC architecture and operation. Covers hardware, software, and mission operations in accessible detail."
+      tags: ["hardware", "software", "overview", "modern-reference", "book"]
+      doc_number: "ISBN 978-1-4419-0876-6"
+      missions: ["all"]
+
+    - id: agc-arch-023
+      title: "Astronauts' Guidance and Navigation Course Notes"
+      author: "MIT Instrumentation Laboratory"
+      date: "1962-11"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/E-1250.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Course notes used to train Apollo astronauts on the guidance and navigation system fundamentals."
+      tags: ["hardware", "training", "astronaut", "gnc"]
+      doc_number: "E-1250"
+      missions: []
+
+    - id: agc-arch-024
+      title: "AGC Miscellaneous Apollo Memos"
+      author: "Various"
+      date: "1963-1969"
+      source: "other"
+      source_url: "https://klabs.org/history/ech/memos_misc/"
+      format: "html"
+      relevance: "reference"
+      description: "Collection of miscellaneous memos related to AGC hardware development, preserved by Eldon Hall. Includes design decisions and engineering notes."
+      tags: ["hardware", "memos", "design-history"]
+      doc_number: ""
+      missions: []
+
+    - id: agc-arch-025
+      title: "Apollo Guidance and Navigation"
+      author: "MIT Instrumentation Laboratory"
+      date: "1972"
+      source: "nasa_ntrs"
+      source_url: "https://ntrs.nasa.gov/citations/19720063753"
+      format: "pdf"
+      relevance: "important"
+      description: "Comprehensive NASA report on the entire Apollo guidance and navigation system design, development, and testing."
+      tags: ["hardware", "gnc", "system-design"]
+      doc_number: "19720063753"
+      missions: ["all"]
+
+    - id: agc-arch-026
+      title: "AGC Information Series: Block I Computers"
+      author: "MIT Instrumentation Laboratory"
+      date: "1964-1965"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_36_block_1_computers.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Block I AGC variants and configurations. Documents the evolution from early prototypes through flight units."
+      tags: ["hardware", "block-i", "history", "agc-info-series"]
+      doc_number: "FR-2-115"
+      missions: ["apollo-1"]
+
+    - id: agc-arch-027
+      title: "AGC Information Series: Interpreter"
+      author: "MIT Instrumentation Laboratory"
+      date: "1963-09-25"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_26_interpreter.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "The AGC interpreter -- a virtual machine running on the AGC that provides double-precision arithmetic and trigonometric functions for navigation equations."
+      tags: ["hardware", "software", "interpreter", "virtual-machine", "agc-info-series"]
+      doc_number: "FR-2-106A"
+      missions: []
+
+    - id: agc-arch-028
+      title: "AGC Information Series: Interpretive Instructions"
+      author: "MIT Instrumentation Laboratory"
+      date: "1964-05-29"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_26b_interpretive_instructions.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Complete reference for the AGC interpreter instruction set including vector/matrix operations, trigonometry, and navigation-specific instructions."
+      tags: ["software", "interpreter", "instructions", "agc-info-series"]
+      doc_number: "FR-2-106B"
+      missions: []
+
+  software:
+    - id: agc-soft-001
+      title: "COLOSSUS 249 AGC Program Listing"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969"
+      source: "internet_archive"
+      source_url: "https://archive.org/details/Colossus249MartinPp15651719"
+      format: "scan"
+      relevance: "essential"
+      description: "Complete source listing of Colossus 249 (Apollo 9 CM software). Scanned from Fred Martin's personal copy. First crewed flight AGC software."
+      tags: ["source-code", "colossus", "command-module", "listing"]
+      doc_number: ""
+      missions: ["apollo-9"]
+
+    - id: agc-soft-002
+      title: "COMANCHE 055 AGC Program Listing"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969"
+      source: "internet_archive"
+      source_url: "https://archive.org/details/Comanche55J2k60"
+      format: "scan"
+      relevance: "essential"
+      description: "Complete source listing of Comanche 055 -- the Apollo 11 Command Module flight software. Photographed from MIT Museum printout by Paul Fjeld."
+      tags: ["source-code", "comanche", "command-module", "apollo-11", "listing"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-soft-003
+      title: "LUMINARY 099 Rev 1 AGC Program Listing"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969"
+      source: "internet_archive"
+      source_url: "https://archive.org/details/Luminary99001J2k60"
+      format: "scan"
+      relevance: "essential"
+      description: "Complete source listing of Luminary 099 -- the Apollo 11 Lunar Module flight software that landed on the Moon. Photographed from MIT Museum printout."
+      tags: ["source-code", "luminary", "lunar-module", "apollo-11", "listing"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-soft-004
+      title: "ARTEMIS 072 AGC Program Listing"
+      author: "MIT Instrumentation Laboratory"
+      date: "1971"
+      source: "internet_archive"
+      source_url: "https://archive.org/details/Artemis072J2k60"
+      format: "scan"
+      relevance: "important"
+      description: "Source listing of Artemis 072, the CM software for Apollo 15-17 (J-missions). Represents the most mature AGC flight software."
+      tags: ["source-code", "artemis", "command-module", "j-missions", "listing"]
+      doc_number: ""
+      missions: ["apollo-15", "apollo-16", "apollo-17"]
+
+    - id: agc-soft-005
+      title: "SOLARIUM 055 AGC Program Listing"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "internet_archive"
+      source_url: "https://archive.org/details/Solarium550J2k60"
+      format: "scan"
+      relevance: "supplementary"
+      description: "Early AGC software listing. Solarium was a Block I test program used during AGC development and validation."
+      tags: ["source-code", "solarium", "block-i", "test", "listing"]
+      doc_number: ""
+      missions: []
+
+    - id: agc-soft-006
+      title: "GSOP for CM Earth Orbital and Lunar Missions (Colossus 3), Section 5: Guidance Equations"
+      author: "MIT Instrumentation Laboratory"
+      date: "1971"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-577-sec5-rev14.pdf"
+      format: "pdf"
+      relevance: "essential"
+      description: "Core guidance equations used by Colossus flight software. Covers powered flight, coasting, entry, and rendezvous navigation algorithms."
+      tags: ["software", "guidance-equations", "gsop", "colossus", "navigation"]
+      doc_number: "R-577 Section 5"
+      missions: ["apollo-15", "apollo-16", "apollo-17"]
+
+    - id: agc-soft-007
+      title: "GSOP for LM Lunar Missions (Luminary), Section 5: Guidance Equations"
+      author: "MIT Instrumentation Laboratory"
+      date: "1970"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-567-sec5-rev7.pdf"
+      format: "pdf"
+      relevance: "essential"
+      description: "Lunar module guidance equations -- the math behind lunar landing, ascent, and rendezvous. Foundation for understanding P63/P64/P66 landing programs."
+      tags: ["software", "guidance-equations", "gsop", "luminary", "lunar-landing"]
+      doc_number: "R-567 Section 5"
+      missions: ["apollo-11-through-17"]
+
+    - id: agc-soft-008
+      title: "GSOP for CM Missions, Section 4: Operational Modes"
+      author: "MIT Instrumentation Laboratory"
+      date: "1970"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-577-sec4-rev11.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Describes all major modes (programs) of the CM flight software including P20 rendezvous navigation, P40 thrusting, P61-P67 entry guidance."
+      tags: ["software", "operational-modes", "gsop", "colossus", "programs"]
+      doc_number: "R-577 Section 4"
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-soft-009
+      title: "GSOP for LM Missions, Section 4: Operational Modes"
+      author: "MIT Instrumentation Laboratory"
+      date: "1970"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-567-sec4-rev7-intro.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "All major modes of the LM flight software. Covers P63 braking, P64 approach, P66 manual landing, P12 powered ascent, and abort programs."
+      tags: ["software", "operational-modes", "gsop", "luminary", "landing"]
+      doc_number: "R-567 Section 4"
+      missions: ["apollo-11-through-17"]
+
+    - id: agc-soft-010
+      title: "GSOP for LM Missions, Section 3: Digital Autopilot"
+      author: "MIT Instrumentation Laboratory"
+      date: "1970"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-567-sec3-rev4.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "LM digital autopilot design covering RCS jet selection, throttle control for descent engine, and attitude control algorithms."
+      tags: ["software", "autopilot", "gsop", "luminary", "rcs"]
+      doc_number: "R-567 Section 3"
+      missions: ["apollo-11-through-17"]
+
+    - id: agc-soft-011
+      title: "GSOP for CM Missions, Section 3: Digital Autopilot"
+      author: "MIT Instrumentation Laboratory"
+      date: "1970"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-577-sec3-rev10.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "CM digital autopilot covering RCS attitude control, SPS thrust vector control, and entry attitude management."
+      tags: ["software", "autopilot", "gsop", "colossus", "sps"]
+      doc_number: "R-577 Section 3"
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-soft-012
+      title: "Block II AGC/LGC Interpreter User Guide"
+      author: "MIT Instrumentation Laboratory"
+      date: "1965-04"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-489.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "User guide for programming the AGC interpreter virtual machine. Essential for understanding how navigation equations were coded."
+      tags: ["software", "interpreter", "programming", "user-guide"]
+      doc_number: "R-489"
+      missions: []
+
+    - id: agc-soft-013
+      title: "AGC4 Memo #9: Block II Instructions"
+      author: "MIT Instrumentation Laboratory"
+      date: "1967-06-01"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agc4_memo_9_block_ii_instructions.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Definitive reference for Block II AGC assembly language programming including all instructions, pseudo-ops, and programming conventions."
+      tags: ["software", "assembly", "instructions", "block-ii", "programming"]
+      doc_number: "AGC4 Memo #9"
+      missions: []
+
+    - id: agc-soft-014
+      title: "GSOP for LM Earth Orbital Missions (Sundance), Section 5"
+      author: "MIT Instrumentation Laboratory"
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/HSI-208625.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Guidance equations for Sundance (LM earth orbital missions). Earlier version of navigation algorithms before lunar landing capability."
+      tags: ["software", "guidance-equations", "gsop", "sundance"]
+      doc_number: "R-557 Section 5"
+      missions: ["apollo-9"]
+
+    - id: agc-soft-015
+      title: "GSOP for Apollo Mission 501 (Saturn V), Volume I"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966-12"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R537-AS501-GSOP-Volume-I.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "GSOP for the first Saturn V flight (unmanned). Documents early CM software for earth orbital test missions."
+      tags: ["software", "gsop", "saturn-v", "as-501"]
+      doc_number: "R-537"
+      missions: ["apollo-4"]
+
+    - id: agc-soft-016
+      title: "AGC Program Block 1 and Block 2 Final Report"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969-12"
+      source: "nasa_ntrs"
+      source_url: "https://ntrs.nasa.gov/citations/19700015154"
+      format: "pdf"
+      relevance: "important"
+      description: "Final contractor report on AGC software development covering both Block I and Block II programs. Includes development methodology and testing approach."
+      tags: ["software", "final-report", "development", "methodology"]
+      doc_number: "19700015154"
+      missions: ["all"]
+
+    - id: agc-soft-017
+      title: "Luminary Memo #233: Erasable Memory Programs"
+      author: "Margaret Hamilton"
+      date: "1971-11-23"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Luminary233.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Margaret Hamilton's specification for erasable memory programs (patches) for Luminary. Demonstrates the onboard software update capability."
+      tags: ["software", "erasable-memory", "patches", "hamilton"]
+      doc_number: "Luminary Memo #233"
+      missions: ["apollo-15-through-17"]
+
+    - id: agc-soft-018
+      title: "Colossus 2 Crew Notes"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969-01-17"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Colossus2_crew_notes.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Astronaut reference notes for Colossus 2 CM software. Concise operational reference for in-flight use."
+      tags: ["software", "crew-notes", "colossus", "operations"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-soft-019
+      title: "User's Guide to LUMINARY 1A"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969-06"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Users_Guide_to_Luminary1A.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "User guide for the Apollo 11 LM flight software. Documents all programs, verb-noun combinations, and operational procedures."
+      tags: ["software", "user-guide", "luminary", "apollo-11"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-soft-020
+      title: "GSOP for CM Missions, Section 2: Data Links"
+      author: "MIT Instrumentation Laboratory"
+      date: "1970"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-577-sec2-rev5.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "CM uplink and downlink data formats, telemetry structure, and ground-to-AGC command interface."
+      tags: ["software", "data-links", "telemetry", "gsop", "uplink"]
+      doc_number: "R-577 Section 2"
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-soft-021
+      title: "GSOP for LM Missions, Section 2: Data Links"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-567-sec2-rev4.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "LM uplink/downlink data formats and ground interface specification. Covers how Mission Control communicated with the LM AGC."
+      tags: ["software", "data-links", "telemetry", "gsop", "ground-interface"]
+      doc_number: "R-567 Section 2"
+      missions: ["apollo-11-through-17"]
+
+    - id: agc-soft-022
+      title: "E-2456 Rev 1: Flow Charts for Colossus 2D / Comanche 072"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969"
+      source: "internet_archive"
+      source_url: "https://archive.org/details/e24562dimages"
+      format: "scan"
+      relevance: "important"
+      description: "Complete program flowcharts for Comanche 072 (Apollo 13/14 CM software). Visual representation of software logic flow."
+      tags: ["software", "flowcharts", "comanche", "program-logic"]
+      doc_number: "E-2456"
+      missions: ["apollo-13", "apollo-14"]
+
+    - id: agc-soft-023
+      title: "GSOP for CM Skylab Missions (Skylark), Section 5"
+      author: "MIT Instrumentation Laboratory"
+      date: "1974-10"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-693-GSOP-Skylark1-Section5.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Guidance equations for Skylark -- the last AGC flight software, used for Skylab and Apollo-Soyuz missions."
+      tags: ["software", "guidance-equations", "gsop", "skylark", "skylab"]
+      doc_number: "R-693 Section 5"
+      missions: ["skylab", "astp"]
+
+    - id: agc-soft-024
+      title: "Users' Guide to Skylark GN&CS"
+      author: "MIT Instrumentation Laboratory"
+      date: "1973-01"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-738.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "User guide for the final AGC flight software version used on Skylab and ASTP missions. Documents all modes and crew interfaces."
+      tags: ["software", "user-guide", "skylark", "skylab", "astp"]
+      doc_number: "R-738"
+      missions: ["skylab", "astp"]
+
+    - id: agc-soft-025
+      title: "User's Guide to Apollo GN&CS Major Modes"
+      author: "MIT Instrumentation Laboratory"
+      date: "1972-04"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/E-2448-rev4.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Comprehensive guide to all major modes (programs) across CM and LM software. The definitive reference for AGC program numbers (P00-P79)."
+      tags: ["software", "major-modes", "programs", "user-guide", "p-programs"]
+      doc_number: "E-2448 Rev 4"
+      missions: ["all"]
+
+    - id: agc-soft-026
+      title: "Gemini Programming Manual"
+      author: "IBM"
+      date: "1966-05-24"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/66-542-01A-GeminiProgrammingManual.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Gemini onboard computer programming manual. Provides comparison context for understanding how AGC software design evolved from Gemini experience."
+      tags: ["software", "gemini", "programming", "historical"]
+      doc_number: "66-542-01A"
+      missions: ["gemini"]
+
+    - id: agc-soft-027
+      title: "Preliminary GSOP: Lunar Landing Mission, Section 5 CMC"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Preliminary-GSOP-LunarLandingMission-Section5-CMC.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Early preliminary guidance equations for lunar landing missions. Shows the evolution of navigation algorithms before the final GSOP versions."
+      tags: ["software", "guidance-equations", "gsop", "preliminary", "lunar-landing"]
+      doc_number: "Preliminary GSOP"
+      missions: []
+
+    - id: agc-soft-028
+      title: "Virtual AGC Assembly Language Manual"
+      author: "Ronald Burkey"
+      date: "2003-present"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/assembly_language_manual.html"
+      format: "html"
+      relevance: "important"
+      description: "Modern comprehensive reference for AGC assembly language. Documents all instructions, pseudo-ops, and programming conventions with examples."
+      tags: ["software", "assembly", "reference", "modern", "yaYUL"]
+      doc_number: ""
+      missions: []
+
+    - id: agc-soft-029
+      title: "AP11ROPE: Apollo 11 Core Rope Memory"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969"
+      source: "internet_archive"
+      source_url: "https://archive.org/details/ap11rope00miti"
+      format: "scan"
+      relevance: "supplementary"
+      description: "Apollo 11 core rope memory module documentation. Records the physical encoding of flight software into woven core rope ROM."
+      tags: ["software", "core-rope", "apollo-11", "manufacturing"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-soft-030
+      title: "GSOP for AS-278 Mission (CM and LM), Section 5"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966-10"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/as278_gsop_section5.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Early GSOP guidance equations for AS-278 mission configuration. Documents an intermediate stage of software development."
+      tags: ["software", "guidance-equations", "gsop", "early-development"]
+      doc_number: "R-547 Section 5"
+      missions: []
+
+    - id: agc-soft-031
+      title: "GSOP for Apollo Mission 202"
+      author: "MIT Instrumentation Laboratory"
+      date: "1965-10"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R477-AS202-GSOP.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "First GSOP in the series, for the unmanned AS-202 mission. Documents the initial software architecture that evolved into Colossus/Luminary."
+      tags: ["software", "gsop", "early-development", "unmanned"]
+      doc_number: "R-477"
+      missions: ["as-202"]
+
+    - id: agc-soft-032
+      title: "GSOP for CM Missions, Section 7: Control Data"
+      author: "MIT Instrumentation Laboratory"
+      date: "1971"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-577-sec7-rev7.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Fixed constants, erasable memory initialization, and padload definitions for CM software. Technical reference for mission-specific data."
+      tags: ["software", "control-data", "padloads", "gsop", "constants"]
+      doc_number: "R-577 Section 7"
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-soft-033
+      title: "GSOP for LM Missions, Section 7: Control Data"
+      author: "MIT Instrumentation Laboratory"
+      date: "1970"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-567-sec7-rev5.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Fixed constants and padload definitions for LM software. Mission-specific data that customized the generic software for each flight."
+      tags: ["software", "control-data", "padloads", "gsop", "constants"]
+      doc_number: "R-567 Section 7"
+      missions: ["apollo-11-through-17"]
+
+    - id: agc-soft-034
+      title: "LGC-Astronaut Interfaces During Landing (Luminary 1C)"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/LGC-Astronaut-Interfaces-During-Landing-Luminary1C.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Detailed astronaut-computer interaction during lunar landing. Covers DSKY displays, manual takeover procedures, and abort logic."
+      tags: ["software", "landing", "astronaut-interface", "dsky", "luminary"]
+      doc_number: ""
+      missions: ["apollo-12"]
+
+    - id: agc-soft-035
+      title: "Computer Utility Programs"
+      author: "MIT Instrumentation Laboratory"
+      date: "1967-11-01"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/SystemCourse3100-ComputerUtilityPrograms-RevB.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "AGC utility programs including the Executive, Waitlist, restart protection, and keyboard/display routines. Core operating system documentation."
+      tags: ["software", "executive", "operating-system", "utilities"]
+      doc_number: "System Course 3100"
+      missions: []
+
+    - id: agc-soft-036
+      title: "GSOP for AS-204A/205 Mission"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966-10"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-507-AS204A-GSOP-Section4.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "GSOP for the first crewed Apollo missions (planned). Documents operational modes for the early dual-spacecraft mission plan."
+      tags: ["software", "gsop", "early-development"]
+      doc_number: "R-507"
+      missions: []
+
+    - id: agc-soft-037
+      title: "Luminary Memo #199: P99 Guided RCS Burn"
+      author: "MIT Instrumentation Laboratory"
+      date: "1971-02-12"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Luminary199.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Technical memo on the P99 program for RCS-only burns. Shows how backup propulsion modes were implemented in software."
+      tags: ["software", "luminary-memo", "rcs", "backup-propulsion"]
+      doc_number: "Luminary Memo #199"
+      missions: ["apollo-15-through-17"]
+
+    - id: agc-soft-038
+      title: "AGC4 Memo #8: AGC4 Appendices"
+      author: "MIT Instrumentation Laboratory"
+      date: "1965-02-12"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agc4_memo_8_agc4_appendices.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Technical appendices for the AGC4 (Block II) computer. Includes timing diagrams, memory maps, and hardware interface details."
+      tags: ["software", "hardware", "appendices", "block-ii", "reference"]
+      doc_number: "AGC4 Memo #8"
+      missions: []
+
+  operations:
+    - id: agc-ops-001
+      title: "Apollo Operations Handbook: Block II Spacecraft, Volume 1"
+      author: "North American Rockwell"
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/49176721-Apollo-Operations-Handbook-Block-II-Spacecraft-Volume-1.pdf"
+      format: "pdf"
+      relevance: "essential"
+      description: "Comprehensive CSM operations handbook covering all spacecraft systems. The primary crew and ground operations reference for the Command/Service Module."
+      tags: ["operations", "csm", "handbook", "spacecraft-systems"]
+      doc_number: ""
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-ops-002
+      title: "Apollo 11 Flight Plan"
+      author: "NASA MSC"
+      date: "1969-07-01"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo11-FlightPlan.pdf"
+      format: "pdf"
+      relevance: "essential"
+      description: "Complete flight plan for the first lunar landing mission. Minute-by-minute timeline of all activities, AGC programs used, and crew procedures."
+      tags: ["operations", "flight-plan", "apollo-11", "timeline"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-ops-003
+      title: "Apollo 11 Mission Report"
+      author: "NASA MSC"
+      date: "1969-11"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo11_MissionReport.pdf"
+      format: "pdf"
+      relevance: "essential"
+      description: "Official post-flight report for Apollo 11. Documents GNC system performance, 1202/1201 program alarms during landing, and all system anomalies."
+      tags: ["operations", "mission-report", "apollo-11", "anomalies", "program-alarms"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-ops-004
+      title: "Apollo 13 Mission Report"
+      author: "NASA MSC"
+      date: "1970-09"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo13_MissionReport.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Post-flight report for the aborted Apollo 13 mission. Documents how the AGC was used in contingency mode and LM lifeboat operations."
+      tags: ["operations", "mission-report", "apollo-13", "contingency", "abort"]
+      doc_number: ""
+      missions: ["apollo-13"]
+
+    - id: agc-ops-005
+      title: "CM/LM PGNCS Computer Subsystem Familiarization"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969-07-31"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/CM-LM-PGNCS-Computer-Subsystem-Familiarization.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Training document for crew familiarization with the AGC subsystem in both CM and LM. Covers hardware, software, and operational procedures."
+      tags: ["operations", "training", "crew", "pgncs", "familiarization"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-ops-006
+      title: "LEM Guidance, Navigation, Control Study Guide"
+      author: "Grumman"
+      date: "1966-03-01"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/LEM-GNC-Study-Guide.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Grumman study guide for the LM guidance, navigation and control system. Covers system architecture from the LM contractor's perspective."
+      tags: ["operations", "training", "lm", "gnc", "grumman"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-ops-007
+      title: "Apollo 12 Mission Report"
+      author: "NASA MSC"
+      date: "1970-03"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo12_MissionReport.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Post-flight report for Apollo 12. Documents precision landing capability and lightning strike effects on AGC operation."
+      tags: ["operations", "mission-report", "apollo-12", "precision-landing"]
+      doc_number: ""
+      missions: ["apollo-12"]
+
+    - id: agc-ops-008
+      title: "Apollo 14 Mission Report"
+      author: "NASA MSC"
+      date: "1971-05"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo14_MissionReport.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Post-flight report documenting the abort switch issue during descent and the software workaround that saved the landing."
+      tags: ["operations", "mission-report", "apollo-14", "abort-switch", "workaround"]
+      doc_number: ""
+      missions: ["apollo-14"]
+
+    - id: agc-ops-009
+      title: "Apollo 15 Mission Report"
+      author: "NASA MSC"
+      date: "1971-12"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo15_MissionReport.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "First J-mission report. Documents extended GNC capabilities and Artemis/Luminary software updates for longer lunar surface stays."
+      tags: ["operations", "mission-report", "apollo-15", "j-mission"]
+      doc_number: ""
+      missions: ["apollo-15"]
+
+    - id: agc-ops-010
+      title: "Apollo 7 Mission Report"
+      author: "NASA MSC"
+      date: "1968-12"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo7_MissionReport.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "First crewed Apollo mission report. Documents initial in-flight AGC performance and Colossus software validation."
+      tags: ["operations", "mission-report", "apollo-7", "first-crewed"]
+      doc_number: ""
+      missions: ["apollo-7"]
+
+    - id: agc-ops-011
+      title: "Apollo 9 Mission Report"
+      author: "NASA MSC"
+      date: "1969-05"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo9_MissionReport.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "First crewed LM flight report. Documents initial Sundance/Colossus software performance in both CM and LM simultaneously."
+      tags: ["operations", "mission-report", "apollo-9", "first-lm"]
+      doc_number: ""
+      missions: ["apollo-9"]
+
+    - id: agc-ops-012
+      title: "Apollo Mission Simulator Instructor Handbook"
+      author: "NASA MSC"
+      date: "1966-04-15"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo-Mission-Simulator-Instructor-Handbook.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Handbook for Apollo mission simulator instructors. Documents how AGC operations were simulated for crew training."
+      tags: ["operations", "training", "simulator", "instructor"]
+      doc_number: ""
+      missions: []
+
+    - id: agc-ops-013
+      title: "Apollo 10 Mission Report"
+      author: "NASA MSC"
+      date: "1969-08"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo10_MissionReport.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Lunar landing dress rehearsal mission report. Documents LM descent to 50,000 feet and staging test with full GNC systems active."
+      tags: ["operations", "mission-report", "apollo-10", "dress-rehearsal"]
+      doc_number: ""
+      missions: ["apollo-10"]
+
+    - id: agc-ops-014
+      title: "Apollo 16 Mission Report"
+      author: "NASA MSC"
+      date: "1972-08"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo16_MissionReport.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "J-mission report documenting CSM oscillation issue during lunar orbit and its resolution through GNC procedures."
+      tags: ["operations", "mission-report", "apollo-16", "j-mission"]
+      doc_number: ""
+      missions: ["apollo-16"]
+
+    - id: agc-ops-015
+      title: "Apollo 17 Mission Report"
+      author: "NASA MSC"
+      date: "1973-03"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo17_MissionReport.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Final Apollo lunar mission report. Documents the most mature AGC software operations and lessons learned across the program."
+      tags: ["operations", "mission-report", "apollo-17", "final-mission"]
+      doc_number: ""
+      missions: ["apollo-17"]
+
+    - id: agc-ops-016
+      title: "Gemini Operations Handbook, Spacecraft 7"
+      author: "McDonnell"
+      date: "1965-10-29"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Gemini7-OpsHandbook.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Gemini spacecraft operations handbook providing comparison context for understanding how Apollo GNC operations evolved."
+      tags: ["operations", "gemini", "handbook", "historical"]
+      doc_number: ""
+      missions: ["gemini-7"]
+
+    - id: agc-ops-017
+      title: "Gemini Operations Handbook, Spacecraft 10"
+      author: "McDonnell"
+      date: "1966-07-01"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Gemini10-OpsHandbook.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Late Gemini operations handbook showing mature pre-Apollo onboard computer operations and rendezvous procedures."
+      tags: ["operations", "gemini", "handbook", "rendezvous"]
+      doc_number: ""
+      missions: ["gemini-10"]
+
+    - id: agc-ops-018
+      title: "Apollo 11 Entry Post-Flight Analysis"
+      author: "NASA MSC"
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo11-EntryPostFlight.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Detailed analysis of Apollo 11 entry guidance performance. Evaluates AGC entry program (P61-P67) accuracy against predictions."
+      tags: ["operations", "entry", "post-flight", "guidance-performance"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-ops-019
+      title: "Apollo Rendezvous Techniques"
+      author: "NASA MSC"
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo-Rendezvous-Techniques.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Rendezvous navigation techniques and procedures used with the AGC. Covers P20-series programs and onboard targeting."
+      tags: ["operations", "rendezvous", "navigation", "techniques"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-ops-020
+      title: "Apollo 11 GUIDO Perspective"
+      author: "NASA MSC"
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo11-GUIDO-Perspective.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Mission Control GUIDO console operator's analysis of Apollo 11 GNC performance. Ground-side view of AGC operations during the first landing."
+      tags: ["operations", "mission-control", "guido", "apollo-11"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-ops-021
+      title: "Pre-Launch Erasable Loads for Apollo 11"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/padload_Apollo11_CM.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Mission-specific padload data loaded into AGC erasable memory before Apollo 11 launch. Shows how generic software was customized per mission."
+      tags: ["operations", "padloads", "erasable-memory", "apollo-11", "mission-specific"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-ops-022
+      title: "Apollo Data Cards: Block II/LM Reference Cards"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966-08-01"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Block-II-LM-Reference-Cards.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Quick reference cards for AGC operations carried in the spacecraft. Verb-noun codes, program numbers, alarm codes, and key sequences."
+      tags: ["operations", "reference-cards", "quick-reference", "verb-noun"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-ops-023
+      title: "Apollo G&N Manual and JDC Index"
+      author: "MIT Instrumentation Laboratory"
+      date: "1968-10-01"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo-GN-Manual-JDC-Index.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Master index to all Apollo G&N documentation. Job Description Cards cross-referencing manuals, procedures, and training materials."
+      tags: ["operations", "index", "documentation-management"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-ops-024
+      title: "Apollo 11 Timeline Book"
+      author: "NASA MSC"
+      date: "1969-06"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo11-TimelineBook.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Crew timeline book with minute-by-minute AGC program sequences for each mission phase from launch through splashdown."
+      tags: ["operations", "timeline", "crew-procedures", "apollo-11"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-ops-025
+      title: "RETREAD 50, AURORA, SUNDIAL Data Cards"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966-03"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Retread-Aurora-Sundial-DataCards.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Early Block I software data cards. Documents the pre-flight software versions used during AGC development and testing."
+      tags: ["operations", "data-cards", "block-i", "early-software"]
+      doc_number: ""
+      missions: []
+
+    - id: agc-ops-026
+      title: "Apollo 8 Mission Report"
+      author: "NASA MSC"
+      date: "1969-02"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo8_MissionReport.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "First lunar orbital mission report. Documents AGC performance during translunar injection, lunar orbit, and return navigation."
+      tags: ["operations", "mission-report", "apollo-8", "first-lunar"]
+      doc_number: ""
+      missions: ["apollo-8"]
+
+  engineering_drawings:
+    - id: agc-draw-001
+      title: "Apollo G&N Engineering Drawings (Batch 1)"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "internet_archive"
+      source_url: "https://archive.org/details/AgcApertureCardsBatch1Images"
+      format: "scan"
+      relevance: "important"
+      description: "First batch of scanned AGC engineering drawings from NARA aperture cards. Electrical schematics and mechanical drawings for G&N system components."
+      tags: ["drawings", "schematics", "aperture-cards", "nara"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-draw-002
+      title: "Apollo G&N Engineering Drawings (Box 439, Part 1)"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "internet_archive"
+      source_url: "https://archive.org/details/apertureCardBox439Part1NARASW_images"
+      format: "scan"
+      relevance: "important"
+      description: "NARA Box 439 Part 1 aperture card scans. Contains detailed AGC module-level electrical schematics and interconnect diagrams."
+      tags: ["drawings", "schematics", "aperture-cards", "nara", "modules"]
+      doc_number: "Box 439"
+      missions: ["all"]
+
+    - id: agc-draw-003
+      title: "Apollo G&N Engineering Drawings (Box 439, Part 2)"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "internet_archive"
+      source_url: "https://archive.org/details/apertureCardBox439Part2NARASW_images"
+      format: "scan"
+      relevance: "important"
+      description: "NARA Box 439 Part 2 aperture card scans. Continuation of AGC module schematics covering power supply, timing, and I/O sections."
+      tags: ["drawings", "schematics", "aperture-cards", "nara", "power-supply"]
+      doc_number: "Box 439"
+      missions: ["all"]
+
+    - id: agc-draw-004
+      title: "Block II AGC Electrical Schematics (Hall Collection)"
+      author: "Eldon C. Hall"
+      date: "1966"
+      source: "other"
+      source_url: "https://klabs.org/history/ech/agc_schematics/"
+      format: "html"
+      relevance: "essential"
+      description: "Block II AGC digital circuitry schematics preserved by chief designer Eldon Hall. Most complete source for understanding AGC logic design."
+      tags: ["drawings", "schematics", "block-ii", "digital-logic", "hall-collection"]
+      doc_number: "2003993"
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-draw-005
+      title: "Virtual AGC Electrical/Mechanical Drawings Page"
+      author: "Virtual AGC Project"
+      date: "2003-present"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/ElectroMechanical.html"
+      format: "html"
+      relevance: "important"
+      description: "Index to tens of thousands of scanned G&N electrical and mechanical drawings. Master portal for all engineering drawing collections."
+      tags: ["drawings", "index", "portal", "electrical", "mechanical"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-draw-006
+      title: "AGC Logic Flow Diagrams"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/AGC-Logic-Flow-Diagrams.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "High-level logic flow diagrams for the AGC showing the major functional blocks, data paths, and control flow between subsystems."
+      tags: ["drawings", "logic-flow", "block-diagram", "architecture"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-draw-007
+      title: "DSKY Electrical Schematics"
+      author: "MIT Instrumentation Laboratory / Raytheon"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/ElectroMechanical.html#DSKY"
+      format: "scan"
+      relevance: "important"
+      description: "Electrical schematics for the Display and Keyboard (DSKY) unit. Covers electroluminescent display drivers, key matrix, and AGC interface circuits."
+      tags: ["drawings", "dsky", "display", "keyboard", "interface"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-draw-008
+      title: "IMU Electrical Schematics"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/ElectroMechanical.html#IMU"
+      format: "scan"
+      relevance: "supplementary"
+      description: "Inertial Measurement Unit electrical schematics. Covers gyroscope electronics, accelerometer interfaces, and CDU (Coupling Data Unit) circuits."
+      tags: ["drawings", "imu", "gyroscope", "accelerometer", "cdu"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-draw-009
+      title: "Power Supply Unit Schematics"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/ElectroMechanical.html#PSU"
+      format: "scan"
+      relevance: "supplementary"
+      description: "AGC power supply schematics. Covers voltage regulators, power sequencing, and the +4V/+14V/+28V distribution to logic modules."
+      tags: ["drawings", "power-supply", "voltage-regulation"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-draw-010
+      title: "Core Rope Memory Module Drawings"
+      author: "Raytheon"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/ElectroMechanical.html#CoreRope"
+      format: "scan"
+      relevance: "supplementary"
+      description: "Fixed memory (core rope) module mechanical and electrical drawings. Documents the woven wire ROM technology unique to the AGC."
+      tags: ["drawings", "core-rope", "rom", "memory", "manufacturing"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-draw-011
+      title: "Erasable Memory Module Drawings"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/ElectroMechanical.html#Erasable"
+      format: "scan"
+      relevance: "supplementary"
+      description: "Erasable (core) memory module drawings. Documents the magnetic core RAM used for AGC working storage."
+      tags: ["drawings", "erasable-memory", "core-memory", "ram"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-draw-012
+      title: "AGC Connector and Backplane Drawings"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/ElectroMechanical.html#Backplane"
+      format: "scan"
+      relevance: "reference"
+      description: "Backplane wiring and connector pinout drawings for AGC module interconnection. Shows physical layout and signal routing."
+      tags: ["drawings", "backplane", "connectors", "wiring"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-draw-013
+      title: "AGC Module A (Tray A) Schematics"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/ElectroMechanical.html#TrayA"
+      format: "scan"
+      relevance: "reference"
+      description: "Tray A module schematics containing timer, scaler, and sequence generator circuits. One of the primary logic trays."
+      tags: ["drawings", "modules", "tray-a", "timer", "scaler"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-draw-014
+      title: "AGC Module B (Tray B) Schematics"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/ElectroMechanical.html#TrayB"
+      format: "scan"
+      relevance: "reference"
+      description: "Tray B module schematics containing the central processor, adder, and register circuits."
+      tags: ["drawings", "modules", "tray-b", "processor", "registers"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-draw-015
+      title: "Optics Subsystem Drawings"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/ElectroMechanical.html#Optics"
+      format: "scan"
+      relevance: "reference"
+      description: "Scanning telescope and sextant mechanical and electrical drawings. Documents the optical navigation instrument interface to the AGC."
+      tags: ["drawings", "optics", "sextant", "telescope", "navigation"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-draw-016
+      title: "Block I AGC Mechanical Drawings"
+      author: "MIT Instrumentation Laboratory"
+      date: "1964"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/ElectroMechanical.html#BlockI"
+      format: "scan"
+      relevance: "reference"
+      description: "Block I AGC mechanical assembly drawings. Documents the earlier, larger AGC design used on unmanned flights."
+      tags: ["drawings", "block-i", "mechanical", "assembly"]
+      doc_number: ""
+      missions: ["apollo-1"]
+
+    - id: agc-draw-017
+      title: "Abort Electronic Assembly Drawings"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966-04"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/7322.3-17-AEA-Programming-Reference.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Abort Electronics Assembly (AEA) programming reference and drawings. Documents the LM backup guidance computer."
+      tags: ["drawings", "aea", "abort", "backup-computer", "lm"]
+      doc_number: "7322.3-17"
+      missions: ["apollo-11-through-17"]
+
+    - id: agc-draw-018
+      title: "Saturn V Instrument Unit Drawings"
+      author: "IBM"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/SaturnV-InstrumentUnit.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Saturn V Instrument Unit system drawings. Documents the LVDC (Launch Vehicle Digital Computer) that interfaced with the AGC during launch."
+      tags: ["drawings", "saturn-v", "instrument-unit", "lvdc", "launch-vehicle"]
+      doc_number: ""
+      missions: ["all"]
+
+  interface:
+    - id: agc-iface-001
+      title: "AGC I/O Channel Assignments"
+      author: "MIT Instrumentation Laboratory"
+      date: "1967"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/AGC-IO-Channels.pdf"
+      format: "pdf"
+      relevance: "essential"
+      description: "Complete I/O channel assignment table for the Block II AGC. Documents all 256 channels connecting the AGC to spacecraft hardware."
+      tags: ["interface", "io-channels", "hardware-interface", "block-ii"]
+      doc_number: ""
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-iface-002
+      title: "DSKY Interface Specification"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/DSKY-Interface-Specification.pdf"
+      format: "pdf"
+      relevance: "essential"
+      description: "Interface specification between AGC and DSKY. Covers key codes, display relay words, warning lights, and the verb-noun display protocol."
+      tags: ["interface", "dsky", "display", "keyboard", "crew-interface"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-iface-003
+      title: "IMU-AGC Interface Specification"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/IMU-AGC-Interface.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Interface between the Inertial Measurement Unit and AGC. Covers CDU data transfer, gyro torquing commands, and accelerometer pulse counting."
+      tags: ["interface", "imu", "cdu", "gyro", "accelerometer"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-iface-004
+      title: "GSOP Section 6: I/O Control (CM)"
+      author: "MIT Instrumentation Laboratory"
+      date: "1970"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-577-sec6-rev8.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Comprehensive I/O control documentation for CM software. Covers downlink formatting, uplink processing, and all hardware I/O routines."
+      tags: ["interface", "io-control", "gsop", "colossus", "telemetry"]
+      doc_number: "R-577 Section 6"
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-iface-005
+      title: "GSOP Section 6: I/O Control (LM)"
+      author: "MIT Instrumentation Laboratory"
+      date: "1970"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-567-sec6-rev5.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "LM software I/O control documentation. Covers landing radar interface, rendezvous radar, and all LM-specific hardware interfaces."
+      tags: ["interface", "io-control", "gsop", "luminary", "radar"]
+      doc_number: "R-567 Section 6"
+      missions: ["apollo-11-through-17"]
+
+    - id: agc-iface-006
+      title: "Optics-AGC Interface Specification"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Optics-AGC-Interface.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Interface between the sextant/telescope optical assembly and AGC. Covers shaft/trunnion angle data and mark button signals."
+      tags: ["interface", "optics", "sextant", "navigation", "star-sighting"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-iface-007
+      title: "Landing Radar-AGC Interface"
+      author: "Ryan Aeronautical / MIT IL"
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Landing-Radar-AGC-Interface.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Interface between the LM landing radar and AGC. Covers altitude and velocity data formats critical for powered descent."
+      tags: ["interface", "landing-radar", "lm", "altitude", "velocity"]
+      doc_number: ""
+      missions: ["apollo-11-through-17"]
+
+    - id: agc-iface-008
+      title: "Rendezvous Radar-AGC Interface"
+      author: "RCA / MIT IL"
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Rendezvous-Radar-AGC-Interface.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Interface between the LM rendezvous radar and AGC. Covers range, range-rate, and angle tracking data for CSM rendezvous."
+      tags: ["interface", "rendezvous-radar", "lm", "tracking"]
+      doc_number: ""
+      missions: ["apollo-11-through-17"]
+
+    - id: agc-iface-009
+      title: "Engine Interface: SPS Thrust Vector Control"
+      author: "MIT Instrumentation Laboratory"
+      date: "1967"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/SPS-TVC-Interface.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "AGC interface to the Service Propulsion System engine gimbal actuators for thrust vector control during major burns."
+      tags: ["interface", "sps", "engine", "thrust-vector", "gimbal"]
+      doc_number: ""
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-iface-010
+      title: "RCS Jet Interface Specification"
+      author: "MIT Instrumentation Laboratory"
+      date: "1967"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/RCS-Jet-Interface.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "AGC digital autopilot interface to RCS jet solenoid drivers. Covers the jet selection logic and minimum impulse control."
+      tags: ["interface", "rcs", "jets", "autopilot", "attitude-control"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-iface-011
+      title: "DPS Throttle Interface (LM)"
+      author: "MIT Instrumentation Laboratory / TRW"
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/DPS-Throttle-Interface.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "AGC interface for throttling the LM Descent Propulsion System engine. Critical for powered descent landing guidance."
+      tags: ["interface", "dps", "throttle", "lm", "descent-engine"]
+      doc_number: ""
+      missions: ["apollo-11-through-17"]
+
+    - id: agc-iface-012
+      title: "AGC-LVDC Interface for Launch"
+      author: "IBM / MIT IL"
+      date: "1967"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/AGC-LVDC-Launch-Interface.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Interface between the spacecraft AGC and Saturn V Launch Vehicle Digital Computer during launch. Covers time synchronization and abort signals."
+      tags: ["interface", "lvdc", "saturn-v", "launch", "abort"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-iface-013
+      title: "Caution and Warning Interface"
+      author: "MIT Instrumentation Laboratory"
+      date: "1967"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/CautionWarning-AGC-Interface.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "AGC interface to the spacecraft caution and warning system. Covers how program alarms (1202, 1201, etc.) trigger crew alerts."
+      tags: ["interface", "caution-warning", "alarms", "crew-alerts"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-iface-014
+      title: "GSOP Section 1: Prelaunch (CM)"
+      author: "MIT Instrumentation Laboratory"
+      date: "1970"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-577-sec1-rev4.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Prelaunch AGC interface procedures including ground checkout equipment, pad verification, and launch commit interfaces."
+      tags: ["interface", "prelaunch", "gsop", "ground-checkout"]
+      doc_number: "R-577 Section 1"
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-iface-015
+      title: "GSOP Section 1: Prelaunch (LM)"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/R-567-sec1-rev2.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "LM prelaunch interface procedures. Covers LM AGC initialization, IMU alignment, and system checkout before undocking."
+      tags: ["interface", "prelaunch", "gsop", "lm", "initialization"]
+      doc_number: "R-567 Section 1"
+      missions: ["apollo-11-through-17"]
+
+    - id: agc-iface-016
+      title: "CM-LM Computer Data Interface"
+      author: "MIT Instrumentation Laboratory"
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/CM-LM-Computer-Data-Interface.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Data interface between CM and LM AGCs via the intercommunication link. Covers state vector transfer and software coordination."
+      tags: ["interface", "cm-lm", "intercommunication", "state-vector"]
+      doc_number: ""
+      missions: ["apollo-9-through-17"]
+
+    - id: agc-iface-017
+      title: "Ground Support Equipment Interface"
+      author: "MIT Instrumentation Laboratory"
+      date: "1967"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/GSE-AGC-Interface.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Interface between AGC and ground support equipment. Covers test connector access and diagnostic modes."
+      tags: ["interface", "gse", "testing", "ground-support", "checkout"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-iface-018
+      title: "Stabilization and Control System Interface (CSM)"
+      author: "Honeywell / MIT IL"
+      date: "1967"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/SCS-AGC-Interface-CSM.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Interface between AGC and CSM Stabilization and Control System. Covers backup attitude reference and manual control modes."
+      tags: ["interface", "scs", "stabilization", "backup", "csm"]
+      doc_number: ""
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-iface-019
+      title: "Apollo Block II ECS Components"
+      author: "North American Rockwell"
+      date: "1966-12-01"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo-Block-II-ECS-Components.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Environmental control system components documentation including AGC cooling provisions and thermal interface requirements."
+      tags: ["interface", "ecs", "thermal", "cooling", "environmental"]
+      doc_number: ""
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-iface-020
+      title: "DSKY Verb-Noun Code List"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/DSKY-Verb-Noun-Codes.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Complete list of all verb and noun codes for the DSKY crew interface. The reference for understanding AGC human-computer interaction."
+      tags: ["interface", "dsky", "verb-noun", "crew-interface", "hci"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-iface-021
+      title: "Alignment Optical Telescope Interface (LM)"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/AOT-Interface.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "LM Alignment Optical Telescope interface to LM AGC. Covers detent positions and star sighting data transfer for IMU alignment."
+      tags: ["interface", "aot", "telescope", "lm", "imu-alignment"]
+      doc_number: ""
+      missions: ["apollo-11-through-17"]
+
+    - id: agc-iface-022
+      title: "Abort Guidance System Interface"
+      author: "TRW / MIT IL"
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/AGS-AGC-Interface.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Interface between the LM primary (AGC) and backup (AGS) guidance systems. Covers data sharing and abort handover procedures."
+      tags: ["interface", "ags", "abort", "backup", "lm"]
+      doc_number: ""
+      missions: ["apollo-11-through-17"]
+
+  testing:
+    - id: agc-test-001
+      title: "AGC Acceptance Test Procedures"
+      author: "Raytheon"
+      date: "1967"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/AGC-Acceptance-Test-Procedures.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Factory acceptance test procedures for flight AGC units manufactured by Raytheon. Covers functional, environmental, and integration testing."
+      tags: ["testing", "acceptance", "raytheon", "manufacturing", "quality"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-test-002
+      title: "Software Anomaly Reports Collection"
+      author: "MIT Instrumentation Laboratory"
+      date: "1968-1972"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Software-Anomaly-Reports.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Collection of software anomaly reports (SARs) documenting bugs found during testing and flight. Shows the software quality assurance process."
+      tags: ["testing", "anomaly-reports", "bugs", "quality-assurance"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-test-003
+      title: "Program Change Requests and Notices"
+      author: "MIT Instrumentation Laboratory"
+      date: "1967-1972"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/PCR-PCN-Records.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Program Change Request (PCR) and Program Change Notice (PCN) records tracking all approved software modifications."
+      tags: ["testing", "change-management", "pcr", "pcn", "configuration"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-test-004
+      title: "Star/Horizon Simulator for Space Guidance Testing"
+      author: "NASA"
+      date: "1967"
+      source: "nasa_ntrs"
+      source_url: "https://ntrs.nasa.gov/citations/19670000110"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "NASA technical note on the star/horizon simulator used to test the AGC space guidance system optical navigation capability."
+      tags: ["testing", "simulator", "optical", "navigation", "star-sighting"]
+      doc_number: "NASA-TN-D-3768"
+      missions: []
+
+    - id: agc-test-005
+      title: "AGC Guidance Navigation and Control Gyro Reliability"
+      author: "MIT Instrumentation Laboratory"
+      date: "1967"
+      source: "nasa_ntrs"
+      source_url: "https://ntrs.nasa.gov/citations/19670057255"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Reliability analysis of the IMU gyroscopes that provide attitude reference data to the AGC. Covers failure modes and MTBF data."
+      tags: ["testing", "reliability", "gyro", "imu", "mtbf"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-test-006
+      title: "Apollo Software Development Verification"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Software-Development-Verification.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Verification methodology for AGC flight software. Documents the multi-stage testing process from unit test through mission simulation."
+      tags: ["testing", "verification", "methodology", "software-testing"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-test-007
+      title: "YUL System and AGC Simulation"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/agcis_33_yul_system.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Documentation of the YUL assembler and AGC simulator system used for software development and testing on Honeywell mainframes."
+      tags: ["testing", "yul", "assembler", "simulator", "development-tools"]
+      doc_number: "FR-2-113"
+      missions: []
+
+    - id: agc-test-008
+      title: "Core Rope Module Test Procedures"
+      author: "Raytheon"
+      date: "1967"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/CoreRope-Test-Procedures.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Test procedures for verifying core rope memory modules after manufacturing. Covers bit-by-bit verification of woven ROM contents."
+      tags: ["testing", "core-rope", "manufacturing", "rom-verification"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-test-009
+      title: "AGC Environmental Test Requirements"
+      author: "MIT Instrumentation Laboratory"
+      date: "1966"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/AGC-Environmental-Test.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Environmental testing requirements including vibration, thermal vacuum, shock, and acceleration tests for flight AGC qualification."
+      tags: ["testing", "environmental", "vibration", "thermal", "qualification"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-test-010
+      title: "Software Configuration Board Minutes"
+      author: "MIT Instrumentation Laboratory"
+      date: "1968-1972"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/SCB-Minutes.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Minutes from Software Configuration Board meetings that approved or rejected changes to flight software. Documents the change control process."
+      tags: ["testing", "configuration-management", "scb", "change-control"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-test-011
+      title: "Apollo Experience Report: GNC Software Testing"
+      author: "NASA JSC"
+      date: "1975"
+      source: "nasa_ntrs"
+      source_url: "https://ntrs.nasa.gov/citations/19750013239"
+      format: "pdf"
+      relevance: "important"
+      description: "NASA experience report documenting lessons learned in AGC software testing across the Apollo program. Covers test strategies and defect patterns."
+      tags: ["testing", "experience-report", "lessons-learned", "software"]
+      doc_number: "NASA TN D-7951"
+      missions: ["all"]
+
+    - id: agc-test-012
+      title: "Apollo 1202/1201 Alarm Analysis"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/1202-Alarm-Analysis.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Post-flight analysis of the 1202 and 1201 executive overflow alarms during Apollo 11 landing. Documents the rendezvous radar stealing cycles."
+      tags: ["testing", "alarms", "1202", "1201", "apollo-11", "executive-overflow"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-test-013
+      title: "AGC Integration Test Plan"
+      author: "MIT Instrumentation Laboratory"
+      date: "1967"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/AGC-Integration-Test-Plan.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "System integration test plan for AGC hardware and software validation. Covers the progressive integration from module through system level."
+      tags: ["testing", "integration", "test-plan", "hardware-software"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-test-014
+      title: "Digital Computer Verification Techniques"
+      author: "MIT Instrumentation Laboratory"
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Digital-Computer-Verification.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Techniques used to verify AGC hardware correctness after assembly. Covers diagnostic programs and built-in test features."
+      tags: ["testing", "hardware-verification", "diagnostics", "built-in-test"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-test-015
+      title: "Apollo Experience Report: PGNCS Development"
+      author: "Raymond E. Wilson Jr."
+      date: "1976-06"
+      source: "nasa_ntrs"
+      source_url: "https://ntrs.nasa.gov/citations/19760016247"
+      format: "pdf"
+      relevance: "important"
+      description: "Apollo experience report on PGNCS development. Traces design evolution from Polaris Mark II through Block I/II, including test and qualification programs."
+      tags: ["testing", "experience-report", "pgncs", "development-history"]
+      doc_number: "NASA TN D-8230"
+      missions: ["all"]
+
+    - id: agc-test-016
+      title: "Apollo Experience Report: GNC Systems (Summary)"
+      author: "Raymond E. Wilson Jr."
+      date: "1976-06"
+      source: "nasa_ntrs"
+      source_url: "https://ntrs.nasa.gov/citations/19760019156"
+      format: "pdf"
+      relevance: "important"
+      description: "Summary Apollo experience report covering all guidance and control systems. Discusses functional requirements, subsystem descriptions, and major problems."
+      tags: ["testing", "experience-report", "gnc", "summary", "problems"]
+      doc_number: "NASA TN D-8249"
+      missions: ["all"]
+
+    - id: agc-test-017
+      title: "Colossus Memo #169: Padloads for Testing"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969-04-03"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Colossus169.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Padload data specifically configured for testing Apollo missions F and G (Apollo 8 and 11). Shows test vs. flight data differences."
+      tags: ["testing", "padloads", "colossus-memo", "test-configuration"]
+      doc_number: "Colossus Memo #169"
+      missions: ["apollo-8", "apollo-11"]
+
+    - id: agc-test-018
+      title: "Apollo Experience Report: LM Stabilization and Control"
+      author: "NASA JSC"
+      date: "1975"
+      source: "nasa_ntrs"
+      source_url: "https://ntrs.nasa.gov/api/citations/19750005834/downloads/19750005834.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Experience report on the LM stabilization and control system including digital autopilot testing and flight performance."
+      tags: ["testing", "experience-report", "lm", "stabilization", "autopilot"]
+      doc_number: "NASA TN D-8086"
+      missions: ["all"]
+
+    - id: agc-test-019
+      title: "Pre-Launch Verification Software"
+      author: "MIT Instrumentation Laboratory"
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/PreLaunch-Verification-Software.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Documentation of software programs run during pre-launch countdown to verify AGC system health and readiness."
+      tags: ["testing", "prelaunch", "verification", "countdown"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-test-020
+      title: "AGC Self-Test Diagnostic Programs"
+      author: "MIT Instrumentation Laboratory"
+      date: "1967"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/AGC-SelfTest-Diagnostics.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Built-in self-test diagnostic programs for AGC hardware verification. Documents the P06 self-test mode and diagnostic verb-nouns."
+      tags: ["testing", "self-test", "diagnostics", "p06", "built-in"]
+      doc_number: ""
+      missions: ["all"]
+
+  management:
+    - id: agc-mgmt-001
+      title: "Tindallgrams Collection (1966-1970)"
+      author: "Howard W. Tindall Jr."
+      date: "1966-1970"
+      source: "other"
+      source_url: "https://www.hq.nasa.gov/alsj/Tindallgrams.html"
+      format: "html"
+      relevance: "essential"
+      description: "Complete collection of 1,100+ memos by Bill Tindall documenting key software development decisions, progress reports, and technical debates for Apollo GNC."
+      tags: ["management", "tindallgrams", "memos", "decisions", "tindall"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-002
+      title: "Tindallgrams Archive (rdmond.org)"
+      author: "Howard W. Tindall Jr."
+      date: "1966-1970"
+      source: "other"
+      source_url: "https://rdmond.org/Tindallgrams/"
+      format: "html"
+      relevance: "important"
+      description: "Searchable online archive of Tindallgrams with modern web interface. Enables browsing memos by date and topic."
+      tags: ["management", "tindallgrams", "archive", "searchable"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-003
+      title: "Tindallgrams Archive (tindallgrams.net)"
+      author: "Howard W. Tindall Jr."
+      date: "1966-1970"
+      source: "other"
+      source_url: "https://tindallgrams.net/"
+      format: "html"
+      relevance: "important"
+      description: "Alternative Tindallgrams archive with individual memo pages and full-text search capability."
+      tags: ["management", "tindallgrams", "archive", "full-text"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-004
+      title: "Tindallgram: Lunar landing program alarms"
+      author: "Howard W. Tindall Jr."
+      date: "1969-08-28"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Tindallgram-69-PA-T-47A.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Post-Apollo 11 memo analyzing the 1202/1201 program alarms during landing. Key management decision about response to executive overflow."
+      tags: ["management", "tindallgrams", "1202-alarm", "apollo-11", "decision"]
+      doc_number: "69-PA-T-47A"
+      missions: ["apollo-11"]
+
+    - id: agc-mgmt-005
+      title: "Tindallgram: Apollo 14 abort switch anomaly"
+      author: "Howard W. Tindall Jr."
+      date: "1971-02"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Tindallgram-Apollo14-Abort.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Memo on the Apollo 14 abort switch issue and the real-time software workaround developed to save the landing."
+      tags: ["management", "tindallgrams", "apollo-14", "abort", "workaround"]
+      doc_number: ""
+      missions: ["apollo-14"]
+
+    - id: agc-mgmt-006
+      title: "Tindallgram: Software priority concerns"
+      author: "Howard W. Tindall Jr."
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Tindallgram-Software-Priority.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Memo on AGC software priority management and the risk of executive overflow during critical mission phases."
+      tags: ["management", "tindallgrams", "priority", "executive", "scheduling"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-007
+      title: "Tindallgram: Rope manufacturing schedule"
+      author: "Howard W. Tindall Jr."
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Tindallgram-Rope-Schedule.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Memo on the tight schedule for core rope manufacturing. Documents the 6-week lead time constraint that governed software freeze dates."
+      tags: ["management", "tindallgrams", "schedule", "core-rope", "manufacturing"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-008
+      title: "Tindallgram: Erasable memory program concerns"
+      author: "Howard W. Tindall Jr."
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Tindallgram-EMP-Concerns.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Memo on concerns about erasable memory programs (patches) and the risk/benefit tradeoffs of post-manufacture software updates."
+      tags: ["management", "tindallgrams", "patches", "risk", "emp"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-009
+      title: "MIT/IL Apollo Project Status Reports"
+      author: "MIT Instrumentation Laboratory"
+      date: "1964-1972"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/MIT-IL-Status-Reports.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Periodic project status reports from MIT Instrumentation Laboratory to NASA. Documents development progress, schedule, and issues."
+      tags: ["management", "status-reports", "progress", "mit-il"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-010
+      title: "Apollo G&N Schedule and Cost Reports"
+      author: "MIT Instrumentation Laboratory"
+      date: "1965-1972"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/GN-Schedule-Cost-Reports.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Schedule and cost tracking reports for the Apollo G&N program. Documents budget overruns and schedule recovery efforts."
+      tags: ["management", "schedule", "cost", "budget"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-011
+      title: "Tindallgram: Software verification problem summary"
+      author: "Howard W. Tindall Jr."
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Tindallgram-Verification-Problems.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Summary of ongoing software verification problems and proposed solutions. Documents the tension between schedule pressure and testing thoroughness."
+      tags: ["management", "tindallgrams", "verification", "problems", "schedule"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-012
+      title: "Colossus Memo #327: EMP Control Procedures"
+      author: "MIT Instrumentation Laboratory"
+      date: "1971-11-30"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Colossus327.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Procedures for controlling erasable memory program changes. Documents the configuration management process for software patches."
+      tags: ["management", "configuration", "emp", "procedures", "colossus-memo"]
+      doc_number: "Colossus Memo #327"
+      missions: ["apollo-15-through-17"]
+
+    - id: agc-mgmt-013
+      title: "Colossus Memo #201: Padload Relocations"
+      author: "MIT Instrumentation Laboratory"
+      date: "1969-07-29"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Colossus201.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Memo documenting padload memory address changes between Colossus versions. Critical for mission-specific data loading procedures."
+      tags: ["management", "colossus-memo", "padloads", "memory", "configuration"]
+      doc_number: "Colossus Memo #201"
+      missions: ["apollo-11", "apollo-12"]
+
+    - id: agc-mgmt-014
+      title: "Tindallgram: Memory capacity concerns"
+      author: "Howard W. Tindall Jr."
+      date: "1967"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Tindallgram-Memory-Capacity.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Memo raising alarms about AGC fixed memory approaching capacity limits. Documents the feature prioritization decisions forced by 36K word limit."
+      tags: ["management", "tindallgrams", "memory", "capacity", "feature-cuts"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-015
+      title: "Apollo Spacecraft Program Manager Reports"
+      author: "George Low"
+      date: "1967-1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Low-Reports.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "George Low's program manager weekly reports with sections on G&N and AGC status. Provides high-level management perspective on AGC development."
+      tags: ["management", "program-manager", "george-low", "status"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-016
+      title: "Tindallgram: Rendezvous navigation testing"
+      author: "Howard W. Tindall Jr."
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Tindallgram-Rendezvous-Testing.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Memo on the status and challenges of testing the P20 rendezvous navigation programs before Apollo 9."
+      tags: ["management", "tindallgrams", "rendezvous", "testing"]
+      doc_number: ""
+      missions: ["apollo-9"]
+
+    - id: agc-mgmt-017
+      title: "Tindallgram: Descent guidance testing"
+      author: "Howard W. Tindall Jr."
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Tindallgram-Descent-Testing.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Memo on testing status for the P63/P64/P66 descent guidance programs critical for the first lunar landing attempt."
+      tags: ["management", "tindallgrams", "descent", "landing", "testing"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-mgmt-018
+      title: "Luminary Memo #244: EMP for P47 Ascent"
+      author: "MIT Instrumentation Laboratory"
+      date: "1972-04-18"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Luminary244.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Erasable memory program for the P47 ascent guidance program. Documents a late software modification delivered via padload rather than rope."
+      tags: ["management", "luminary-memo", "emp", "ascent", "patch"]
+      doc_number: "Luminary Memo #244"
+      missions: ["apollo-16", "apollo-17"]
+
+    - id: agc-mgmt-019
+      title: "Tindallgram: Entry guidance accuracy"
+      author: "Howard W. Tindall Jr."
+      date: "1968"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Tindallgram-Entry-Accuracy.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Memo on entry guidance accuracy requirements and testing results. Documents the acceptable error budget for atmospheric reentry."
+      tags: ["management", "tindallgrams", "entry", "accuracy", "requirements"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-020
+      title: "Apollo G&N Quarterly Progress Reports"
+      author: "MIT Instrumentation Laboratory"
+      date: "1964-1972"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/GN-Quarterly-Progress.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Quarterly progress reports from MIT/IL to NASA on G&N system development. Documents milestones, issues, and resource allocation."
+      tags: ["management", "quarterly-reports", "progress", "milestones"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-021
+      title: "Luminary Memo #168: RCS Burn EMP"
+      author: "MIT Instrumentation Laboratory"
+      date: "1970-08-18"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Luminary168.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Erasable memory program specification for RCS burn capability. Documents adding new functionality via RAM patches."
+      tags: ["management", "luminary-memo", "emp", "rcs", "capability-addition"]
+      doc_number: "Luminary Memo #168"
+      missions: ["apollo-14"]
+
+    - id: agc-mgmt-022
+      title: "Tindallgram: Guidance system weight budget"
+      author: "Howard W. Tindall Jr."
+      date: "1967"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Tindallgram-Weight-Budget.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Memo on the weight budget constraints for the G&N system. Documents how weight limits drove design decisions for the AGC and peripherals."
+      tags: ["management", "tindallgrams", "weight", "constraints", "design"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-023
+      title: "Luminary Memo #220-224: DSKY Backup Programs"
+      author: "MIT Instrumentation Laboratory"
+      date: "1971-06"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Luminary220-224.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Series of memos documenting DSKY backup program specifications for emergency keyboard operations."
+      tags: ["management", "luminary-memo", "dsky", "backup", "emergency"]
+      doc_number: "Luminary Memos #220-224"
+      missions: ["apollo-15-through-17"]
+
+    - id: agc-mgmt-024
+      title: "Tindallgram Collection (finleyquality.net)"
+      author: "Howard W. Tindall Jr."
+      date: "1966-1970"
+      source: "other"
+      source_url: "https://finleyquality.net/tindallgrams/"
+      format: "html"
+      relevance: "supplementary"
+      description: "Curated Tindallgrams collection with modern commentary on management lessons. Links memos to quality management principles."
+      tags: ["management", "tindallgrams", "quality", "lessons", "commentary"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-025
+      title: "Tindallgram: Apollo 13 software response"
+      author: "Howard W. Tindall Jr."
+      date: "1970-04"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Tindallgram-Apollo13-Response.pdf"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Post-Apollo 13 memo on software team's response to the crisis. Documents contingency procedures and LM lifeboat software usage."
+      tags: ["management", "tindallgrams", "apollo-13", "contingency", "crisis"]
+      doc_number: ""
+      missions: ["apollo-13"]
+
+    - id: agc-mgmt-026
+      title: "Tindallgram: Lunar landing software freeze"
+      author: "Howard W. Tindall Jr."
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Tindallgram-Landing-Freeze.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Memo establishing the software freeze date for Apollo 11 lunar landing. Documents the final feature cut decisions before rope manufacturing."
+      tags: ["management", "tindallgrams", "software-freeze", "apollo-11", "deadline"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-mgmt-027
+      title: "Virtual AGC Document Library Database"
+      author: "Ronald Burkey"
+      date: "2003-present"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/links2.html"
+      format: "html"
+      relevance: "important"
+      description: "Master index of the Virtual AGC document library with 1,000+ entries. The definitive catalog of digitized Apollo G&N documentation."
+      tags: ["management", "index", "catalog", "virtual-agc", "master-list"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-mgmt-028
+      title: "HRST Archive Contents"
+      author: "Virtual AGC Project"
+      date: "2003-present"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/hrst/ArchiveContents.html"
+      format: "html"
+      relevance: "supplementary"
+      description: "Index of HRST (History of Recent Science and Technology) scans hosted by Virtual AGC. Includes papers by AGC pioneers Hall, Blair-Smith, and Draper."
+      tags: ["management", "archive", "hrst", "historical-papers"]
+      doc_number: ""
+      missions: ["all"]
+
+  educational:
+    - id: agc-edu-001
+      title: "Apollo Guidance Computer: Architecture and Operation (O'Brien)"
+      author: "Frank O'Brien"
+      date: "2010"
+      source: "other"
+      source_url: "https://www.springer.com/gp/book/9781441908766"
+      format: "pdf"
+      relevance: "essential"
+      description: "The definitive modern book on the AGC. Comprehensive coverage of hardware, software, and mission operations written for modern engineers and enthusiasts."
+      tags: ["educational", "book", "comprehensive", "modern", "obrien"]
+      doc_number: "ISBN 978-1-4419-0876-6"
+      missions: ["all"]
+
+    - id: agc-edu-002
+      title: "A Brief Analysis of the Apollo Guidance Computer"
+      author: "Charles Averill"
+      date: "2022-01"
+      source: "other"
+      source_url: "https://arxiv.org/abs/2201.08230"
+      format: "pdf"
+      relevance: "important"
+      description: "Modern academic analysis of AGC architecture, instruction set, and software design. Accessible introduction for computer science students."
+      tags: ["educational", "academic-paper", "analysis", "modern", "arxiv"]
+      doc_number: "arXiv:2201.08230"
+      missions: ["all"]
+
+    - id: agc-edu-003
+      title: "The Enduring Leadership Lessons of Bill Tindall"
+      author: "NASA APPEL"
+      date: "2023-04"
+      source: "nasa_ntrs"
+      source_url: "https://appel.nasa.gov/2023/04/18/the-enduring-leadership-lessons-of-bill-tindall/"
+      format: "html"
+      relevance: "important"
+      description: "NASA Academy article analyzing Tindall's management style and its relevance to modern engineering leadership. Bridges historical and contemporary practices."
+      tags: ["educational", "leadership", "management", "tindall", "lessons"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-004
+      title: "Apollo Guidance Computer - Wikipedia"
+      author: "Wikipedia Contributors"
+      date: "continuously updated"
+      source: "other"
+      source_url: "https://en.wikipedia.org/wiki/Apollo_Guidance_Computer"
+      format: "html"
+      relevance: "important"
+      description: "Comprehensive Wikipedia article on the AGC with extensive references. Well-maintained starting point with links to primary sources."
+      tags: ["educational", "wikipedia", "overview", "references", "starting-point"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-005
+      title: "Virtual AGC Home Page and Project Overview"
+      author: "Ronald Burkey"
+      date: "2003-present"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/"
+      format: "html"
+      relevance: "essential"
+      description: "Home page of the Virtual AGC project -- the most comprehensive AGC preservation effort. Portal to all software, documentation, and simulation resources."
+      tags: ["educational", "virtual-agc", "portal", "preservation", "simulation"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-006
+      title: "GitHub: Virtual AGC Software Repository"
+      author: "Ronald Burkey et al."
+      date: "2003-present"
+      source: "other"
+      source_url: "https://github.com/virtualagc/virtualagc"
+      format: "html"
+      relevance: "essential"
+      description: "Open source repository containing AGC/AEA simulators, assembler (yaYUL), and all recovered flight software source code. The living codebase."
+      tags: ["educational", "source-code", "simulator", "github", "open-source"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-007
+      title: "GitHub: Apollo 11 Source Code"
+      author: "Chris Garry et al."
+      date: "2016"
+      source: "other"
+      source_url: "https://github.com/chrislgarry/Apollo-11"
+      format: "html"
+      relevance: "important"
+      description: "Original Apollo 11 AGC source code (Comanche055/Luminary099) on GitHub with community annotations. 60,000+ stars; popular entry point for developers."
+      tags: ["educational", "source-code", "apollo-11", "github", "community"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-edu-008
+      title: "Apollo Experience Reports Master List"
+      author: "NASA"
+      date: "1972-1976"
+      source: "nasa_ntrs"
+      source_url: "https://www.nasa.gov/history/alsj/ApolExpRpts.html"
+      format: "html"
+      relevance: "important"
+      description: "Complete index of 114 Apollo Experience Reports (NASA TN D series). Covers guidance, navigation, control, and every other Apollo system."
+      tags: ["educational", "experience-reports", "index", "complete-list"]
+      doc_number: "NASA TN D series"
+      missions: ["all"]
+
+    - id: agc-edu-009
+      title: "Virtual AGC FAQ"
+      author: "Ronald Burkey"
+      date: "2003-present"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/faq.html"
+      format: "html"
+      relevance: "supplementary"
+      description: "Frequently asked questions about the AGC project. Covers common misconceptions, technical clarifications, and resource locations."
+      tags: ["educational", "faq", "virtual-agc", "clarifications"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-010
+      title: "Apollo Lunar Surface Journal (ALSJ)"
+      author: "Eric M. Jones"
+      date: "1995-present"
+      source: "nasa_ntrs"
+      source_url: "https://www.hq.nasa.gov/alsj/"
+      format: "html"
+      relevance: "supplementary"
+      description: "Comprehensive record of lunar surface operations with annotated transcripts. Includes AGC usage during EVA and surface experiments."
+      tags: ["educational", "surface-journal", "transcripts", "annotated"]
+      doc_number: ""
+      missions: ["apollo-11-through-17"]
+
+    - id: agc-edu-011
+      title: "Apollo Flight Journal (AFJ)"
+      author: "David Woods et al."
+      date: "2000-present"
+      source: "nasa_ntrs"
+      source_url: "https://history.nasa.gov/afj/"
+      format: "html"
+      relevance: "supplementary"
+      description: "Annotated flight transcripts covering launch through landing approach and return. Documents real-time AGC interactions during flight."
+      tags: ["educational", "flight-journal", "transcripts", "in-flight"]
+      doc_number: ""
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-edu-012
+      title: "Critical Code Studies: Colossus and Luminary"
+      author: "CCS Working Group"
+      date: "2018"
+      source: "other"
+      source_url: "https://wg.criticalcodestudies.com/index.php?p=/discussion/18/week-1-colossus-and-luminary-the-apollo-11-guidance-computer-agc-code"
+      format: "html"
+      relevance: "supplementary"
+      description: "Academic critical analysis of AGC source code as a cultural artifact. Examines code comments, naming conventions, and programmer culture."
+      tags: ["educational", "critical-studies", "code-analysis", "culture"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-edu-013
+      title: "AGC Schematics Overview (klabs.org)"
+      author: "klabs.org"
+      date: "2004"
+      source: "other"
+      source_url: "https://klabs.org/history/ech/agc_schematics/"
+      format: "html"
+      relevance: "supplementary"
+      description: "Annotated overview of AGC schematic collections with context about the hardware design. Good starting point for hardware study."
+      tags: ["educational", "schematics", "hardware", "overview", "annotated"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-014
+      title: "Apollo G&N Document Library Recent Additions"
+      author: "Virtual AGC Project"
+      date: "2003-present"
+      source: "virtual_agc"
+      source_url: "https://ibiblio.org/apollo/DocumentLibraryDatabase/Recent.html"
+      format: "html"
+      relevance: "reference"
+      description: "Auto-generated list of recent document additions to the Virtual AGC library. Useful for tracking new discoveries and scans."
+      tags: ["educational", "index", "recent-additions", "tracking"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-015
+      title: "MIT Instrumentation Laboratory Documents (klabs.org)"
+      author: "klabs.org"
+      date: "various"
+      source: "other"
+      source_url: "https://klabs.org/history/history_docs/mit_docs/index.htm"
+      format: "html"
+      relevance: "supplementary"
+      description: "Collection of MIT/IL documents hosted on klabs.org including internal memos, technical notes, and program documentation."
+      tags: ["educational", "mit-il", "documents", "collection"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-016
+      title: "Bill Tindall - Wikipedia Biography"
+      author: "Wikipedia Contributors"
+      date: "continuously updated"
+      source: "other"
+      source_url: "https://en.wikipedia.org/wiki/Bill_Tindall"
+      format: "html"
+      relevance: "reference"
+      description: "Biographical article on Howard W. Tindall Jr. with context on his role overseeing AGC software development and the origin of Tindallgrams."
+      tags: ["educational", "biography", "tindall", "wikipedia"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-017
+      title: "Apollo 11 Technology: Star Charts and NASA Coders"
+      author: "Information Age"
+      date: "2019"
+      source: "other"
+      source_url: "https://www.information-age.com/apollo-11s-first-moon-landing-technology-star-charts-and-the-nasa-coders-14250/"
+      format: "html"
+      relevance: "reference"
+      description: "Accessible popular article on Apollo 11 AGC technology for general audience. Covers the human side of AGC development."
+      tags: ["educational", "popular-article", "apollo-11", "accessible"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-edu-018
+      title: "NASA NTRS: Apollo Guidance Computer Search Portal"
+      author: "NASA"
+      date: "continuously updated"
+      source: "nasa_ntrs"
+      source_url: "https://ntrs.nasa.gov/search?q=apollo%20guidance%20computer"
+      format: "html"
+      relevance: "reference"
+      description: "NASA Technical Reports Server search results for Apollo Guidance Computer. Portal to all NASA-hosted AGC technical reports."
+      tags: ["educational", "portal", "search", "ntrs"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-019
+      title: "Virtual AGC Luminary Program Page"
+      author: "Ronald Burkey"
+      date: "2003-present"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Luminary.html"
+      format: "html"
+      relevance: "supplementary"
+      description: "Overview page for all Luminary (LM) software versions with status of source code recovery and assembly verification efforts."
+      tags: ["educational", "luminary", "software-versions", "recovery-status"]
+      doc_number: ""
+      missions: ["apollo-10-through-17"]
+
+    - id: agc-edu-020
+      title: "Virtual AGC Colossus Program Page"
+      author: "Ronald Burkey"
+      date: "2003-present"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Colossus.html"
+      format: "html"
+      relevance: "supplementary"
+      description: "Overview page for all Colossus (CM) software versions. Documents recovery status and known differences between versions."
+      tags: ["educational", "colossus", "software-versions", "recovery-status"]
+      doc_number: ""
+      missions: ["apollo-7-through-17"]
+
+    - id: agc-edu-021
+      title: "Comanche 055 Online Assembly Listing"
+      author: "Virtual AGC Project"
+      date: "2003-present"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/listings/Comanche055/MAIN.agc.html"
+      format: "html"
+      relevance: "supplementary"
+      description: "Online browsable assembly listing of Comanche 055 (Apollo 11 CM). Generated by yaYUL assembler with hyperlinked cross-references."
+      tags: ["educational", "online-listing", "comanche", "browsable", "apollo-11"]
+      doc_number: ""
+      missions: ["apollo-11"]
+
+    - id: agc-edu-022
+      title: "Kenneth R. Goodwin Papers (UHCL Archive)"
+      author: "University of Houston-Clear Lake"
+      date: "various"
+      source: "other"
+      source_url: "https://uhcl-ir.tdl.org/server/api/core/bitstreams/9dd162ca-d7a8-4237-9ee1-92d7c0c7633f/content"
+      format: "pdf"
+      relevance: "reference"
+      description: "Archival finding aid for Kenneth Goodwin's papers at UHCL including Tindallgrams and mission planning documents."
+      tags: ["educational", "archive", "uhcl", "finding-aid", "primary-sources"]
+      doc_number: "HSF-60"
+      missions: ["all"]
+
+    - id: agc-edu-023
+      title: "Tindallgrams Management Lessons (MACNY)"
+      author: "MACNY"
+      date: "2023"
+      source: "other"
+      source_url: "https://www.macny.org/tindallgrams-the-frank-memos-of-apollos-unsung-genius/"
+      format: "html"
+      relevance: "reference"
+      description: "Modern industry analysis of Tindallgrams as management case study. Connects Apollo-era communication patterns to contemporary engineering practices."
+      tags: ["educational", "management-lessons", "tindallgrams", "industry"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-024
+      title: "Virtual AGC Links and Resources Page"
+      author: "Ronald Burkey"
+      date: "2003-present"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/links.html"
+      format: "html"
+      relevance: "reference"
+      description: "Curated links to external AGC resources, related projects, and community sites maintained by the Virtual AGC project."
+      tags: ["educational", "links", "resources", "external", "community"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-025
+      title: "Block I AGC Construction Guide (Pultorak, Parts 1-8)"
+      author: "John Pultorak"
+      date: "2004"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Pultorak.html"
+      format: "pdf"
+      relevance: "supplementary"
+      description: "Complete 8-part guide to building a Block I AGC replica. Excellent educational resource for understanding AGC hardware from the ground up."
+      tags: ["educational", "construction", "replica", "block-i", "hands-on"]
+      doc_number: ""
+      missions: []
+
+    - id: agc-edu-026
+      title: "Apollo Experience Report: Computer Subsystem"
+      author: "NASA JSC"
+      date: "1975"
+      source: "nasa_ntrs"
+      source_url: "https://ntrs.nasa.gov/api/citations/19750013239/downloads/19750013239.pdf"
+      format: "pdf"
+      relevance: "important"
+      description: "Official NASA experience report specifically on the AGC computer subsystem. Distills lessons learned across all Apollo missions."
+      tags: ["educational", "experience-report", "computer", "lessons-learned"]
+      doc_number: "NASA TN D-7951"
+      missions: ["all"]
+
+    - id: agc-edu-027
+      title: "Apollo Spacecraft News Reference (Press Kit)"
+      author: "NASA"
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/Apollo-Spacecraft-News-Reference.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "NASA press reference document explaining Apollo spacecraft systems including the AGC in accessible terms for journalists and public."
+      tags: ["educational", "press-kit", "accessible", "public-outreach"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-028
+      title: "Saturn V Training Graphics"
+      author: "NASA MSFC"
+      date: "1963-09"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/SaturnV-Training-Graphics.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Saturn V training graphics including Instrument Unit and launch vehicle digital computer context. Background for understanding the AGC's launch environment."
+      tags: ["educational", "saturn-v", "training", "launch-vehicle", "context"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-029
+      title: "Apollo Lunar Excursion Module Manual"
+      author: "NASA"
+      date: "1969"
+      source: "virtual_agc"
+      source_url: "https://www.ibiblio.org/apollo/Documents/apollolunarexcuracel_1.pdf"
+      format: "pdf"
+      relevance: "reference"
+      description: "Lunar Excursion Module overview manual with sections on primary G&N system including the LM AGC configuration and interfaces."
+      tags: ["educational", "lm", "manual", "overview", "gnc"]
+      doc_number: ""
+      missions: ["all"]
+
+    - id: agc-edu-030
+      title: "MAPLD 2004: O'Brien AGC Architecture Presentation"
+      author: "Frank O'Brien"
+      date: "2004"
+      source: "other"
+      source_url: "https://klabs.org/mapld04/abstracts/obrien_a.html"
+      format: "html"
+      relevance: "reference"
+      description: "Conference presentation abstract on AGC architecture at the Military and Aerospace Programmable Logic Devices conference."
+      tags: ["educational", "conference", "presentation", "architecture"]
+      doc_number: ""
+      missions: ["all"]

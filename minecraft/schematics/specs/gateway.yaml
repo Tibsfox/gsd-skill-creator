@@ -1,0 +1,107 @@
+# Schematic Build Specification
+# This file defines what to build in-game before capturing with Litematica.
+
+name: "Gateway"
+id: "gateway"
+filename: "template-gateway-1-0.litematic"
+version: "1.0"
+category: templates
+description: "District entrance archway marking boundaries between Knowledge World districts. Features a central pointed arch, flanking pillars with color-coded identity stripes, sign slots for district names, and banner display positions. Shallow depth (5 blocks) reads as a threshold, not a tunnel."
+
+dimensions:
+  width: 9    # X axis (east-west)
+  height: 11  # Y axis (up-down)
+  depth: 5    # Z axis (north-south)
+
+block_palette:
+  primary:
+    - block: "minecraft:stone_bricks"
+      usage: "Main structure -- arch, pillars, and base blocks"
+    - block: "minecraft:stone_brick_stairs"
+      usage: "Arch detailing -- stairs forming the pointed arch curve at the top"
+  accent:
+    - block: "minecraft:white_concrete"
+      usage: "District identity stripe -- vertical colored band on each pillar (placeholder: white; builders replace with district-specific color)"
+    - block: "minecraft:stone_brick_wall"
+      usage: "Pillar caps -- wall blocks on top of each pillar for decorative finish"
+  functional:
+    - block: "minecraft:oak_sign"
+      usage: "District signage -- sign slots on both arch faces (front and back) for district name and directional information"
+    - block: "minecraft:banner"
+      usage: "District banners -- banner display positions on top of each pillar (2 banners total)"
+  lighting:
+    - block: "minecraft:lantern"
+      usage: "Arch lighting -- lanterns recessed into the interior ceiling of the arch (2 lanterns)"
+
+layout:
+  ground_floor: |
+    Shallow structure, 9 blocks wide, 5 blocks deep, 11 blocks tall.
+
+    Central arch opening: 5 blocks wide, 8 blocks tall.
+    The opening runs through the full 5-block depth (walk-through passage).
+    Arch shape: straight sides up to height 7, then pointed arch using stone brick stairs
+    converging to a peak at height 11.
+
+    Flanking pillars (one on each side of the arch):
+    - Each pillar is 2 blocks wide (east-west) and 5 blocks deep (north-south)
+    - 11 blocks tall (full height)
+    - Stone brick primary with a 1-block wide vertical stripe of colored concrete
+      running the full height on the outward-facing side of each pillar
+    - The colored concrete stripe is white by default (placeholder) --
+      builders replace with the district's identity color:
+      - Hardware District: orange_concrete
+      - Software District: light_blue_concrete
+      - Network District: green_concrete
+      - Creative District: magenta_concrete
+      - Community District: yellow_concrete
+      - Workshop District: brown_concrete
+
+    Stone brick wall caps on top of each pillar.
+    Banner display positions on top of each pillar (banners hang from the caps).
+  upper_floors: "None -- the arch is a single open structure"
+  roof: |
+    The arch peak reaches height 11.
+    Stone brick stairs form the pointed arch converging at the top.
+    No flat roof -- the top is the arch peak itself.
+  exterior: |
+    Both faces (north and south) are identical:
+    - Central arch opening (5 wide, 8 tall)
+    - Flanking pillars with colored concrete identity stripes
+    - Oak sign slots on the arch face above the opening
+    - Lanterns visible inside the arch passage
+
+    The gateway reads the same from both directions -- it marks a boundary,
+    not a one-way entrance.
+
+features:
+  - "5-wide, 8-tall central arch opening for comfortable walk-through"
+  - "Pointed arch top using stone brick stairs converging at height 11"
+  - "Flanking pillars (2 wide, 11 tall) with color-coded district identity stripes"
+  - "White concrete placeholder stripes (replace with district color during placement)"
+  - "Oak sign slots on both faces for district name and directional info"
+  - "Banner display positions on top of each pillar"
+  - "Stone brick wall pillar caps for decorative finish"
+  - "Recessed lanterns inside the arch passage for nighttime visibility"
+  - "Shallow depth (5 blocks) reads as a threshold, not a tunnel"
+  - "Symmetrical design -- identical from both directions"
+
+construction_notes:
+  - "Build from the ground up, floor by floor"
+  - "Build the two flanking pillars first: stone brick with colored concrete stripes"
+  - "Build pillars to full height (11 blocks), including the colored identity stripe"
+  - "Connect pillars at the top with the pointed arch (stone brick stairs)"
+  - "Work the arch from both sides inward, meeting at the peak"
+  - "Add stone brick wall caps on top of each pillar"
+  - "Place sign slots on both arch faces (north and south)"
+  - "Place functional blocks last: lanterns inside arch, banners on pillar tops"
+  - "The white concrete stripe is a placeholder -- when placing the gateway at a district,"
+  - "  replace with the appropriate colored concrete for that district"
+  - "Use Litematica selection starting from the northwest ground-level corner"
+  - "Add 1 block of selection padding on all sides"
+  - "Save with orientation: arch passage runs north-south (walk through north to south)"
+  - "Test-load the schematic in a flat world before adding to library"
+
+litematica_capture:
+  origin: "Northwest ground-level corner (lowest X, lowest Z, at floor Y level)"
+  selection_padding: 1
+  orientation: "Arch passage runs north-south (walk through from either direction)"

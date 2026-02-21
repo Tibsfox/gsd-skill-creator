@@ -1,0 +1,316 @@
+---
+# NUTR-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: NUTR-101
+pack_name: "Nutrition & Health Sciences — Foundational Knowledge Pack"
+
+modules:
+  - id: NUTR-101-M1
+    name: "Nutrients & Their Functions"
+    description: "Identifying macronutrients and micronutrients, understanding their roles in the body, and recognizing that different foods have different nutrient profiles"
+
+    learning_outcomes:
+      - "Name the macronutrients and describe their primary functions in the body"
+      - "Identify key vitamins and minerals and explain their roles"
+      - "Recognize that different foods contain different nutrient combinations"
+      - "Understand that balanced nutrition means getting a variety of nutrients in appropriate amounts"
+      - "Read and interpret basic nutrition information from food labels"
+
+    topics:
+      - "Macronutrients: Proteins, Carbohydrates, Fats, Water"
+      - "Micronutrients: Vitamins and Minerals"
+      - "Phytonutrients and Antioxidants"
+      - "Nutrient Functions and Body Needs"
+      - "Variety in Food and Diets"
+      - "Reading Nutrition Labels"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 25
+      high: 15
+
+    prerequisite_modules: []
+
+    activities:
+      count: 6
+      examples:
+        - "Nutrient Detective Food Sort"
+        - "Vitamin and Mineral Bingo"
+        - "Label Reading Scavenger Hunt"
+        - "Create Your Nutrient Passport"
+        - "Color-Coded Plate Building"
+        - "Taste Test and Nutrient Matching"
+
+    assessments:
+      - "Can student identify macronutrients in foods?"
+      - "Does student understand the functions of key nutrients?"
+      - "Can student read and interpret a nutrition facts label?"
+      - "Does student recognize that different people have different nutritional needs?"
+
+  - id: NUTR-101-M2
+    name: "Digestion & Body Systems"
+    description: "Tracing the path of food through the digestive system, understanding how nutrients are extracted and absorbed, and recognizing individual variation in digestion"
+
+    learning_outcomes:
+      - "Trace the path of food through the digestive system from mouth to elimination"
+      - "Describe the roles of organs, enzymes, and other components in breaking down food"
+      - "Explain that nutrient absorption is not 100% efficient"
+      - "Understand that digestion varies by person and by context"
+      - "Connect digestion to other body systems (bloodstream, cells, metabolism)"
+
+    topics:
+      - "The Digestive Journey: Mouth, Stomach, Small Intestine, Large Intestine"
+      - "Enzymes and Chemical Breakdown"
+      - "Nutrient Absorption and the Bloodstream"
+      - "Metabolism and Energy Production"
+      - "Factors Affecting Digestion"
+      - "Individual Variation in Digestive Health"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 35
+      high: 30
+
+    prerequisite_modules: [NUTR-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Digestion Journey Mapping"
+        - "Enzyme Experiment with Crackers"
+        - "Digestive System Model Building"
+        - "Food Breakdown Observation"
+        - "Digestion and Factors Investigation"
+        - "Absorption and Bloodstream Simulation"
+
+    assessments:
+      - "Can student explain the stages of digestion?"
+      - "Does student understand the role of enzymes in breaking down food?"
+      - "Can student identify factors that affect digestion?"
+      - "Does student recognize individual variation in digestive health?"
+
+  - id: NUTR-101-M3
+    name: "Food Sources & Systems"
+    description: "Understanding where food comes from, how agricultural systems work, and recognizing environmental and social dimensions of food production"
+
+    learning_outcomes:
+      - "Trace a food from farm (or source) to table"
+      - "Understand different agricultural practices and their environmental trade-offs"
+      - "Recognize food security and food equity as systemic issues"
+      - "Consider sustainability in food production and consumption"
+      - "Appreciate the labor and systems behind the food we eat"
+
+    topics:
+      - "Agricultural Practices: Conventional, Organic, Regenerative, Local"
+      - "Farm-to-Table Systems"
+      - "Food Miles and Transportation Impact"
+      - "Food Security and Food Justice"
+      - "Environmental Impact of Agriculture"
+      - "Sustainability and Trade-Offs"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 25
+      middle: 35
+      high: 40
+
+    prerequisite_modules: [NUTR-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Farm-to-Table Mapping Project"
+        - "Food Miles Calculator"
+        - "Growing Food: Herb or Vegetable Garden"
+        - "Label Comparison: Organic vs. Conventional"
+        - "Food System Stakeholder Maps"
+        - "Local Food System Exploration"
+
+    assessments:
+      - "Can student trace a food from source to table?"
+      - "Does student understand trade-offs in agricultural practices?"
+      - "Can student discuss food equity and access issues?"
+      - "Does student consider environmental and social impacts in food choices?"
+
+  - id: NUTR-101-M4
+    name: "Nutritional Literacy & Critical Thinking"
+    description: "Developing the ability to evaluate nutrition claims, read labels critically, recognize marketing tactics, and distinguish evidence from opinion"
+
+    learning_outcomes:
+      - "Read and interpret nutrition facts labels and ingredient lists"
+      - "Evaluate nutrition claims using basic evidence criteria"
+      - "Recognize marketing language and tactics in food advertising"
+      - "Understand study design and what makes evidence strong"
+      - "Identify and discuss conflicts of interest in nutrition claims"
+
+    topics:
+      - "Nutrition Labels and Ingredient Lists"
+      - "Evaluating Nutrition Claims"
+      - "Marketing Language and Tactics"
+      - "Study Design and Evidence Quality"
+      - "Conflicts of Interest"
+      - "Media Literacy and Nutrition Information"
+
+    grade_levels: ["4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 35
+
+    prerequisite_modules: [NUTR-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Nutrition Label Scavenger Hunt"
+        - "Claim vs. Evidence Analysis"
+        - "Marketing Language Detection Game"
+        - "Design a Nutrition Study"
+        - "Debate: Is This Claim Supported?"
+        - "Create Your Own Nutrition Advertisement"
+
+    assessments:
+      - "Can student read and interpret nutrition labels?"
+      - "Does student evaluate claims using appropriate evidence criteria?"
+      - "Can student identify marketing language?"
+      - "Does student understand basic research design and limitations?"
+
+  - id: NUTR-101-M5
+    name: "Health Integration & Meal Planning"
+    description: "Connecting nutrition to other health dimensions (sleep, stress, activity, mental health) and applying nutritional knowledge to real food choices and meal planning"
+
+    learning_outcomes:
+      - "Recognize connections between nutrition and sleep, stress, physical activity, and mental health"
+      - "Design balanced, appealing meals that meet nutritional needs"
+      - "Make food choices informed by evidence, personal values, and cultural traditions"
+      - "Develop a healthy, sustainable relationship with food"
+      - "Reflect on food practices without judgment or diet culture language"
+
+    topics:
+      - "Nutrition and Sleep"
+      - "Nutrition and Stress"
+      - "Nutrition and Physical Activity"
+      - "Nutrition and Mental Health"
+      - "Meal Planning and Food Preparation"
+      - "Food Values, Culture, and Joy"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 35
+
+    prerequisite_modules: [NUTR-101-M1, NUTR-101-M2]
+
+    activities:
+      count: 6
+      examples:
+        - "Balanced Meal Design Challenge"
+        - "Weekly Meal Planning Workshop"
+        - "Sleep and Nutrition Connection Exploration"
+        - "Stress and Eating Discussion and Reflection"
+        - "Cultural Food Traditions and Values"
+        - "Cooking Together and Food Celebrations"
+
+    assessments:
+      - "Can student create a balanced meal or meal plan?"
+      - "Does student understand connections between nutrition and other health dimensions?"
+      - "Can student make food choices aligned with evidence and personal values?"
+      - "Does student demonstrate a healthy relationship with food?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Nutritional Reasoning"
+    description: "Ability to think through nutrition questions systematically: What nutrient is involved? How does the body process it? What does evidence say?"
+    assessed_in: [NUTR-101-M1, NUTR-101-M2, NUTR-101-M4, NUTR-101-M5]
+
+  - name: "Evidence-Based Evaluation"
+    description: "Habit of supporting claims with evidence, acknowledging uncertainty, and recognizing the difference between correlation and causation"
+    assessed_in: [NUTR-101-M1, NUTR-101-M4]
+
+  - name: "Systems Thinking"
+    description: "Ability to see how nutrients, digestion, agriculture, food systems, and health dimensions interact"
+    assessed_in: [NUTR-101-M1, NUTR-101-M2, NUTR-101-M3, NUTR-101-M5]
+
+  - name: "Critical Literacy"
+    description: "Ability to read labels, evaluate claims, recognize marketing, and make informed choices"
+    assessed_in: [NUTR-101-M1, NUTR-101-M4]
+
+  - name: "Practical Application"
+    description: "Ability to translate nutrition knowledge into real food choices, cooking, and meal planning"
+    assessed_in: [NUTR-101-M1, NUTR-101-M2, NUTR-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4 -> M5, building from foundational concepts through application"
+    rationale: "Teaches nutrients first, then how the body uses them, then where they come from, then how to evaluate claims, then how to apply learning. Natural progression."
+
+  - name: "Spiral Pathway"
+    description: "Revisit all five modules repeatedly at increasing depth and sophistication"
+    rationale: "Nutritional understanding deepens with practice. A second exploration of nutrients after learning about digestion produces richer understanding."
+
+  - name: "Interest-Led Pathway"
+    description: "Choose module based on interest; M1 is foundation but M3 or M4 could start depending on learner interests"
+    rationale: "A learner interested in food systems might start with M3 while building nutrient knowledge through M1 in parallel."
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same structure: What It Teaches, Why It Matters, Key Learning Outcomes, Interactive Elements, Technical Implementation Notes"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Interactive elements follow a consistent template: core experience, reflection prompts, extension options, accessibility notes"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure (Beginning, Developing, Proficient, Advanced) across all modules"
+    cached: true
+
+  - pattern: "Label Reading Template"
+    description: "Label reading follows the same process across all relevant modules: find nutrition facts → identify nutrients → interpret → compare to recommendations"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner spontaneously notices nutrient content in foods"
+    - "When learner asks questions about food choices they or others make"
+    - "When learner reads and correctly interprets a nutrition label"
+    - "When learner evaluates a nutrition claim using evidence criteria"
+    - "When learner identifies a factor affecting digestion or absorption"
+    - "When learner connects nutrition to another health dimension"
+    - "When learner makes food choices aligned with their own values"
+
+  pattern_detection:
+    - "Effective label-reading strategies"
+    - "Successful claim evaluation approaches"
+    - "Food system tracing techniques"
+    - "Meal-planning and preparation workflows"
+    - "Connections between nutrition and other health dimensions"
+
+  skill_promotion:
+    - "Promote systematic label-reading patterns to reusable skills"
+    - "Create claim-evaluation frameworks from successful analyses"
+    - "Build food systems thinking from traced examples"
+    - "Develop meal-planning templates from successful plans"
+    - "Extract connections between nutrition and health for integration across domains"
+
+# This YAML defines the modular structure for the NUTR-101 pack and enables
+# skill-creator to orchestrate learning experiences centered on nutrition science
+# and health literacy.
