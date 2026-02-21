@@ -1,0 +1,356 @@
+# PE-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: PE-101
+pack_name: "Physical Education & Movement — Foundational Knowledge Pack"
+
+modules:
+  - id: PE-101-M1
+    name: "Movement Foundations"
+    description: "Fundamental motor skills — locomotor, non-locomotor, and manipulative — plus spatial awareness, body awareness, and movement concepts that form the building blocks of all physical activity"
+
+    learning_outcomes:
+      - "Perform locomotor skills (running, jumping, hopping, skipping, galloping, sliding, leaping) with control"
+      - "Perform non-locomotor skills (bending, stretching, twisting, balancing, pushing, pulling) with stability"
+      - "Perform manipulative skills (throwing, catching, kicking, striking, dribbling) with increasing accuracy"
+      - "Demonstrate spatial awareness: personal space, general space, levels, pathways, and directions"
+      - "Combine movements in sequences with smooth transitions"
+
+    topics:
+      - "Locomotor Skills: Run, Jump, Hop, Skip, Gallop, Slide, Leap"
+      - "Non-Locomotor Skills: Bend, Stretch, Twist, Turn, Balance, Push, Pull"
+      - "Manipulative Skills: Throw, Catch, Kick, Strike, Dribble, Volley"
+      - "Spatial Awareness: Personal Space, General Space, Levels, Pathways"
+      - "Body Awareness: Body Parts, Joints, Center of Gravity"
+      - "Movement Concepts: Speed, Force, Flow, Relationships"
+      - "Coordination and Agility"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 40
+      elementary: 30
+      middle: 15
+      high: 5
+
+    prerequisite_modules: []
+
+    activities:
+      count: 6
+      examples:
+        - "Obstacle Course Builder"
+        - "Animal Movement Safari"
+        - "Movement Vocabulary Bingo"
+        - "Balance Challenge Stations"
+        - "Throwing and Catching Progression"
+        - "Spatial Awareness Maze"
+
+    assessments:
+      - "Can student perform fundamental locomotor skills with control?"
+      - "Does student demonstrate spatial awareness during activities?"
+      - "Can student combine movements in sequences?"
+      - "Does student show improving coordination over time?"
+
+  - id: PE-101-M2
+    name: "Fitness & Body Science"
+    description: "Understanding how muscles, heart, and lungs work during exercise, the components of health-related fitness, training principles, and the FITT framework for designing fitness programs"
+
+    learning_outcomes:
+      - "Identify and describe the five components of health-related fitness"
+      - "Explain how the cardiovascular system responds to exercise"
+      - "Describe how muscles produce movement and adapt to training"
+      - "Apply the FITT principle to design basic fitness activities"
+      - "Distinguish between healthy discomfort and pain during exercise"
+
+    topics:
+      - "Components of Fitness: Cardiovascular, Strength, Endurance, Flexibility, Body Composition"
+      - "Heart and Lung Function During Exercise"
+      - "Muscle Groups and How They Work"
+      - "The FITT Principle: Frequency, Intensity, Time, Type"
+      - "Training Principles: Overload, Specificity, Reversibility, Recovery"
+      - "Warm-Up and Cool-Down Science"
+      - "Understanding Fatigue, Soreness, and Pain"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 35
+      high: 30
+
+    prerequisite_modules: [PE-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Heart Rate Explorer"
+        - "Muscle Map - Name That Muscle"
+        - "FITT Principle Workout Builder"
+        - "Fitness Component Stations"
+        - "Warm-Up Science Investigation"
+        - "Recovery and Rest Experiment"
+
+    assessments:
+      - "Can student identify the five components of fitness?"
+      - "Does student understand how exercise affects heart rate?"
+      - "Can student use the FITT principle to plan an activity?"
+      - "Does student distinguish between healthy challenge and risk?"
+
+  - id: PE-101-M3
+    name: "Sports, Games & Teamwork"
+    description: "Individual and team sports fundamentals, game strategy, rules-based play, sportsmanship, adapted sports for all abilities, and conflict resolution in competitive settings"
+
+    learning_outcomes:
+      - "Participate in individual and team sports with appropriate skill and strategy"
+      - "Understand and follow rules, and explain why rules exist in games"
+      - "Demonstrate sportsmanship: respect for opponents, officials, and teammates"
+      - "Adapt games to include players of different abilities"
+      - "Use strategy and tactical thinking to solve game problems"
+
+    topics:
+      - "Individual Sports: Running, Swimming, Gymnastics, Martial Arts"
+      - "Team Sports: Soccer, Basketball, Volleyball, Ultimate"
+      - "Game Strategy: Offense, Defense, Positioning, Decision-Making"
+      - "Rules and Officiating"
+      - "Sportsmanship and Fair Play"
+      - "Adapted Sports and Inclusive Games"
+      - "Conflict Resolution in Competition"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 25
+      elementary: 35
+      middle: 40
+      high: 30
+
+    prerequisite_modules: [PE-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Modified Kickball for All"
+        - "Team Strategy Challenge"
+        - "Sportsmanship Scenarios Discussion"
+        - "Design an Inclusive Game"
+        - "Officiate a Game"
+        - "Sports Around the World"
+
+    assessments:
+      - "Can student participate in team activities with cooperation?"
+      - "Does student demonstrate sportsmanship consistently?"
+      - "Can student explain game strategies and tactical decisions?"
+      - "Can student adapt a game to include someone with different abilities?"
+
+  - id: PE-101-M4
+    name: "Rhythm, Dance & Creative Movement"
+    description: "Expressive movement through rhythm, dance, and creative challenges — including cultural dance forms, choreography, coordination, and movement as artistic expression"
+
+    learning_outcomes:
+      - "Move in rhythm with music, matching beat, tempo, and accent"
+      - "Create original movement sequences expressing ideas or emotions"
+      - "Perform basic steps from multiple cultural dance traditions with respect"
+      - "Demonstrate improved coordination through dance and rhythm activities"
+      - "Perform simple choreography individually and in groups"
+
+    topics:
+      - "Rhythm Fundamentals: Beat, Tempo, Accent, Meter"
+      - "Creative Movement: Improvisation, Movement Quality, Expression"
+      - "Cultural Dance Forms: Folk, Social, Ceremonial, Contemporary"
+      - "Choreography: Sequences, Spatial Patterns, Formations, Transitions"
+      - "Coordination Through Dance: Footwork, Partner Work, Group Sync"
+      - "Performance and Expression"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 25
+      elementary: 25
+      middle: 20
+      high: 15
+
+    prerequisite_modules: [PE-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Rhythm and Freeze Dance"
+        - "Cultural Dance Sampler"
+        - "Choreography Workshop"
+        - "Movement Story Telling"
+        - "Partner Mirror Dance"
+        - "Dance Styles Around the World"
+
+    assessments:
+      - "Can student move in rhythm with music?"
+      - "Does student create expressive movement sequences?"
+      - "Can student perform basic steps from at least two cultural dance traditions?"
+      - "Does student show improved coordination through dance?"
+
+  - id: PE-101-M5
+    name: "Lifetime Wellness & Active Living"
+    description: "Bridging school PE to lifelong health — personal fitness planning, nutrition-movement connections, sleep and recovery, stress management, injury prevention, and building sustainable active living habits"
+
+    learning_outcomes:
+      - "Design a personal fitness plan using the FITT principle"
+      - "Explain how movement connects to nutrition, sleep, stress management, and mental health"
+      - "Identify strategies for injury prevention and knowing when to rest"
+      - "Find and evaluate community resources for physical activity"
+      - "Develop a realistic plan for staying active beyond school"
+
+    topics:
+      - "Personal Fitness Planning and Goal Setting"
+      - "Nutrition and Movement Connection"
+      - "Sleep, Recovery, and Overtraining"
+      - "Stress Management Through Movement"
+      - "Injury Prevention and First Aid Basics"
+      - "Active Living Beyond School: Community Resources"
+      - "Aging and Movement Across the Lifespan"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 40
+
+    prerequisite_modules: [PE-101-M1, PE-101-M2]
+
+    activities:
+      count: 6
+      examples:
+        - "Personal Fitness Plan Builder"
+        - "Healthy Habits Tracker"
+        - "Stress Relief Movement Toolkit"
+        - "Injury Prevention Workshop"
+        - "Community Active Living Map"
+        - "Lifetime Activity Exploration"
+
+    assessments:
+      - "Can student create a realistic personal fitness plan?"
+      - "Does student understand connections between movement and other health dimensions?"
+      - "Can student identify injury prevention strategies?"
+      - "Does student have a plan for staying active beyond school?"
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-MOV-001
+    description: "Perform fundamental locomotor, non-locomotor, and manipulative skills with control"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-MOV-002
+    description: "Demonstrate spatial awareness and combine movements in sequences"
+    levels: ["K", "1", "2", "3", "4", "5", "6"]
+
+  - code: LO-FIT-001
+    description: "Identify components of health-related fitness and explain exercise physiology basics"
+    levels: ["3", "4", "5", "6", "7", "8"]
+
+  - code: LO-FIT-002
+    description: "Apply FITT principle and training principles to design fitness programs"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-SPT-001
+    description: "Participate in sports with strategy, sportsmanship, and inclusivity"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-DNC-001
+    description: "Move rhythmically, create expressive sequences, and perform cultural dances"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8"]
+
+  - code: LO-WEL-001
+    description: "Design personal fitness plans and connect movement to lifetime wellness"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Movement Observation"
+    frequency: ongoing
+
+  - type: formative
+    name: "Fitness Tracking and Self-Assessment"
+    frequency: weekly
+
+  - type: summative
+    name: "Personal Fitness Plan Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Movement Skills Demonstration"
+    frequency: end_of_module
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Body Awareness & Control"
+    description: "Understanding how the body moves in space and controlling movements with intention"
+    assessed_in: [PE-101-M1, PE-101-M2, PE-101-M4]
+
+  - name: "Effort & Persistence"
+    description: "Continuing to work at challenging physical tasks, embracing productive struggle"
+    assessed_in: [PE-101-M1, PE-101-M2, PE-101-M3, PE-101-M5]
+
+  - name: "Cooperation & Respect"
+    description: "Working with others, respecting differences in ability, and supporting teammates"
+    assessed_in: [PE-101-M3, PE-101-M4, PE-101-M5]
+
+  - name: "Self-Assessment & Goal Setting"
+    description: "Evaluating personal performance honestly and setting realistic improvement goals"
+    assessed_in: [PE-101-M2, PE-101-M3, PE-101-M5]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 & M4 -> M5"
+    rationale: "Movement foundations are prerequisite; fitness science and sports/dance can proceed in parallel; wellness is the integration capstone"
+
+  - name: "Interest-Led Pathway"
+    description: "M1 -> choose M3 (sports) OR M4 (dance) based on interest -> M2 -> M5"
+    rationale: "Some learners are motivated by sports, others by dance; start with what excites, then build scientific understanding"
+
+  - name: "Wellness-First Pathway"
+    description: "M1 -> M2 -> M5 -> M3 & M4"
+    rationale: "For learners primarily interested in personal health and fitness, the wellness module is a stronger motivator than team sports or dance"
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same introduction structure: what, why, how"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Interactive elements follow consistent template across modules"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment uses parallel rubric structure: Beginning, Developing, Proficient, Advanced"
+    cached: true
+
+  - pattern: "Parent Guidance"
+    description: "Parent guidance follows same encouragement and misconception format"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner attempts new movements and shows willingness to try"
+    - "When learner demonstrates improved coordination over time"
+    - "When learner shows good sportsmanship during competitive activities"
+    - "When learner creates quality fitness plans using FITT principle"
+    - "When learner expresses themselves creatively through movement"
+
+  pattern_detection:
+    - "Effective warm-up and cool-down routines"
+    - "Successful team coordination strategies"
+    - "Personal fitness plan designs that are realistic and followed"
+    - "Creative movement patterns and choreography"
+
+  skill_promotion:
+    - "Promote successful coaching and peer teaching patterns to reusable skills"
+    - "Create activity modification libraries for different ability levels"
+    - "Build fitness plan templates from observed effective designs"

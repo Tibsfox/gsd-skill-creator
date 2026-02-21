@@ -1,0 +1,71 @@
+{
+  "name": "mc-infra",
+  "description": "Infrastructure pipeline: hardware discovery, resource budgeting, PXE provisioning, and VM deployment for Minecraft Knowledge World",
+  "leadAgentId": "infra-orchestrator",
+  "createdAt": "2026-02-19T00:02:32.000Z",
+  "members": [
+    {
+      "agentId": "infra-orchestrator",
+      "name": "Infra Orchestrator",
+      "agentType": "orchestrator",
+      "model": "opus",
+      "tools": [
+        "Read", "Write", "Bash", "Glob", "Grep",
+        "TaskCreate", "TaskList", "TaskGet", "TaskUpdate",
+        "SendMessage", "TeammateTool"
+      ],
+      "prompt": "Orchestrate the infrastructure pipeline. Sequence stages from hardware discovery through VM deployment. Ensure each stage completes and produces valid artifacts before the next begins."
+    },
+    {
+      "agentId": "infra-discoverer",
+      "name": "Infra Discoverer",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Execute hardware discovery stage. Run discover-hardware.sh and discover-all.sh to produce hardware-profile.yaml and hardware-capabilities.yaml."
+    },
+    {
+      "agentId": "infra-budgeter",
+      "name": "Infra Budgeter",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Execute resource budgeting stage. Run calculate-budget.sh against hardware profile to produce resource-budget.yaml with VM allocations."
+    },
+    {
+      "agentId": "infra-provisioner",
+      "name": "Infra Provisioner",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Execute PXE/kickstart provisioning stage. Deploy PXE boot infrastructure and render kickstart templates for VM installation."
+    },
+    {
+      "agentId": "infra-deployer",
+      "name": "Infra Deployer",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Execute VM deployment stage. Create VMs via vm-lifecycle.sh and deploy Minecraft server via deploy-minecraft.sh."
+    }
+  ],
+  "version": 1,
+  "topology": "pipeline",
+  "outputTo": [
+    { "teamName": "mc-platform", "description": "Hardware profiles and capability YAML for platform adaptation" },
+    { "teamName": "mc-ops", "description": "Deployed VM and server state for monitoring and backup" }
+  ],
+  "inputFrom": []
+}

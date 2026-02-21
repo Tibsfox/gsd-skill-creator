@@ -1,0 +1,112 @@
+# Schematic Build Specification
+# This file defines what to build in-game before capturing with Litematica.
+
+name: "Garden"
+id: "garden"
+filename: "template-garden-1-0.litematic"
+version: "1.0"
+category: templates
+description: "Outdoor collaboration space with radiating pathways, a central water feature, oak trees, stone bench seating, and flower beds. An open-air gathering place within the Community District."
+
+dimensions:
+  width: 21   # X axis (east-west)
+  height: 5   # Y axis (up-down)
+  depth: 21   # Z axis (north-south)
+
+block_palette:
+  primary:
+    - block: "minecraft:grass_block"
+      usage: "Ground cover -- base terrain for the entire garden area"
+    - block: "minecraft:dirt"
+      usage: "Underground -- dirt layer beneath grass blocks"
+  accent:
+    - block: "minecraft:stone_brick_slab"
+      usage: "Pathways -- 2-block wide paths radiating from center to cardinal directions"
+    - block: "minecraft:stone_bricks"
+      usage: "Path borders -- single-block border along pathway edges"
+    - block: "minecraft:oak_leaves"
+      usage: "Tree canopies -- small oak tree canopies (4 trees, one per quadrant)"
+    - block: "minecraft:oak_log"
+      usage: "Tree trunks -- 4-5 block tall trunks for each oak tree"
+  functional:
+    - block: "minecraft:water"
+      usage: "Central water feature -- circular pool (5-block diameter) with lily pads"
+    - block: "minecraft:lily_pad"
+      usage: "Water decoration -- 3-4 lily pads floating on the central pool"
+    - block: "minecraft:stone_brick_stairs"
+      usage: "Bench seating -- stairs placed as benches along pathways"
+  lighting:
+    - block: "minecraft:lantern"
+      usage: "Path lighting -- lanterns on fence posts at path intersections (4 posts)"
+    - block: "minecraft:oak_fence"
+      usage: "Lantern posts -- fence post pillars (3 blocks tall) supporting lanterns"
+
+layout:
+  ground_floor: |
+    Open-air outdoor space, 21x21, no enclosing walls.
+    Grass block base across the entire area with dirt underneath.
+
+    Central water feature: circular pool approximated in blocks.
+    5-block diameter circle (using water source blocks) at exact center (10,10).
+    Pool is 1 block deep, stone brick border around the edge.
+    3-4 lily pads floating on the water surface.
+
+    4 radiating pathways (stone brick slabs, 2 blocks wide):
+    - North path: from pool edge to north border
+    - South path: from pool edge to south border
+    - East path: from pool edge to east border
+    - West path: from pool edge to west border
+    Stone brick border blocks flanking each pathway.
+
+    4 quadrants (between pathways), each containing:
+    - 1 small oak tree (oak log trunk 4-5 blocks tall, oak leaf canopy 3x3x2)
+    - Flower bed: mix of poppies, dandelions, azure bluets, and oxeye daisies
+    - Tall grass patches for natural texture
+
+    Stone brick stair benches along pathways:
+    - 2 benches per pathway (8 total), placed facing the path
+    - Each bench is 3 blocks long (3 stone brick stairs in a row)
+
+    Lantern posts at the 4 path intersections nearest the center:
+    - Oak fence posts, 3 blocks tall, topped with lanterns
+    - Positioned where each pathway meets the pool border
+  upper_floors: "None -- open-air structure, maximum height is tree canopies (4-5 blocks)"
+  roof: "None -- open-air outdoor space"
+  exterior: |
+    No walls -- the garden is an open-air space.
+    Pathways extend to the edges of the 21x21 footprint.
+    Grass block ground blends into surrounding terrain.
+
+features:
+  - "Circular central water feature (5-block diameter) with lily pads"
+  - "4 radiating stone brick slab pathways to cardinal directions"
+  - "1 small oak tree in each quadrant (4 trees total, 4-5 blocks tall)"
+  - "Stone brick stair bench seating along pathways (8 benches)"
+  - "Mixed flower beds in each quadrant (poppies, dandelions, azure bluets, oxeye daisies)"
+  - "Tall grass patches for natural texture between plantings"
+  - "Lantern posts on fence pillars at path-pool intersections (4 posts)"
+  - "Stone brick path borders for clean edge definition"
+  - "Open-air design blending with surrounding Knowledge World terrain"
+
+construction_notes:
+  - "Build from the ground up, floor by floor"
+  - "Lay the grass block base and dirt layer first (21x21)"
+  - "Dig the central water pool (1 block deep, circular 5-block diameter)"
+  - "Line the pool with stone bricks, fill with water source blocks"
+  - "Place lily pads on the water surface"
+  - "Build the 4 radiating pathways: stone brick slabs with stone brick borders"
+  - "Plant oak trees in each quadrant: place logs (4-5 tall), then leaf canopies"
+  - "Place flower beds: mix of flower types in natural-looking clusters"
+  - "Add tall grass between flowers for texture"
+  - "Build bench seating: stone brick stairs facing pathways"
+  - "Build lantern posts: 3-tall oak fence, lantern on top"
+  - "Place functional blocks last: lily pads, lanterns"
+  - "Use Litematica selection starting from the northwest ground-level corner"
+  - "Add 1 block of selection padding on all sides"
+  - "Save with orientation: north pathway points north"
+  - "Test-load the schematic in a flat world before adding to library"
+
+litematica_capture:
+  origin: "Northwest ground-level corner (lowest X, lowest Z, at ground Y level)"
+  selection_padding: 1
+  orientation: "Pathways align with cardinal directions (north/south/east/west)"

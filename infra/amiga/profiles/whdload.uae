@@ -1,0 +1,26 @@
+# WHDLoad -- hard-drive boot profile
+#
+# Configuration for WHDLoad-based hard-drive software loading. WHDLoad
+# replaces floppy-disk-based software with hard-drive installations
+# using "slave" files that patch games and applications to run from HD.
+#
+# The hardfile path is injected by launch-amiga-app.sh via --hdf flag.
+# Run setup-whdload.sh first to create the HDF image.
+
+# Chipset -- AGA for maximum WHDLoad compatibility
+chipset=AGA
+chipset_compatible=A1200
+
+# CPU -- 68020 for WHDLoad's patching engine
+cpu_type=68020
+
+# Memory -- generous allocation for WHDLoad + loaded software
+chip_ram=2048
+fast_ram=8192
+
+# Hard drive image -- set by setup-whdload.sh, path injected by launcher
+# Use --hdf flag with launch-amiga-app.sh to specify the HDF path
+# hardfile2=rw,DH0:<path_to_hdf>,32,1,2,512,,
+
+# Boot from hard drive, not floppy
+boot_priority=0

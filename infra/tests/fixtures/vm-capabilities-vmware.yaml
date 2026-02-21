@@ -1,0 +1,6 @@
+# Test fixture: VMware-only hypervisor capabilities
+# Used by test-vm-lifecycle.sh to test VMware backend detection
+hypervisor:
+  kvm: false
+  vmware: true
+  virtualbox: false

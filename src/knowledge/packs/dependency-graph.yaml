@@ -1,0 +1,461 @@
+# Cross-Pack Dependency Graph
+# Generated from .skillmeta files across all 35 knowledge packs
+# Format: bidirectional matrix (each pack lists requires + enables)
+generated: "2026-02-20"
+pack_count: 35
+
+tiers:
+  core_academic:
+    - MATH-101
+    - SCI-101
+    - READ-101
+    - COMM-101
+    - CRIT-101
+    - PHYS-101
+    - CHEM-101
+    - GEO-101
+    - HIST-101
+    - PROB-101
+    - STAT-101
+    - BUS-101
+    - ENGR-101
+    - MFAB-101
+    - TECH-101
+  applied_practical:
+    - CODE-101
+    - DATA-101
+    - DIGLIT-101
+    - WRIT-101
+    - LANG-101
+    - LOG-101
+    - ECON-101
+    - ENVR-101
+    - PSYCH-101
+    - NUTR-101
+  specialized_deepening:
+    - ASTRO-101
+    - LEARN-101
+    - MUSIC-101
+    - TRADE-101
+
+packs:
+  MATH-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge: []
+    enables:
+      - PHYS-101
+      - CODE-101
+      - DATA-101
+      - ECON-101
+      - ASTRO-101
+      - LOG-101
+    enabled_by: []
+
+  SCI-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - MATH-101
+    enables:
+      - PHYS-101
+      - CHEM-101
+      - ENVR-101
+      - NATURE-101
+    enabled_by: []
+
+  READ-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge: []
+    enables:
+      - WRIT-101
+      - CRIT-101
+      - HIST-101
+      - COMM-101
+    enabled_by: []
+
+  COMM-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - READ-101
+    enables:
+      - WRIT-101
+      - BUS-101
+      - LANG-101
+    enabled_by:
+      - READ-101
+
+  CRIT-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - READ-101
+    enables:
+      - LOG-101
+      - PHILO-101
+      - PROB-101
+    enabled_by:
+      - READ-101
+
+  PHYS-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - MATH-101
+      - SCI-101
+    enables:
+      - ASTRO-101
+      - ENGR-101
+      - CHEM-101
+    enabled_by:
+      - MATH-101
+      - SCI-101
+
+  CHEM-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - MATH-101
+      - SCI-101
+    enables:
+      - ENVR-101
+      - NUTR-101
+      - NATURE-101
+    enabled_by:
+      - PHYS-101
+      - SCI-101
+
+  GEO-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - SCI-101
+      - MATH-101
+    enables:
+      - ENVR-101
+      - ASTRO-101
+      - NATURE-101
+    enabled_by: []
+
+  HIST-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - READ-101
+    enables:
+      - PHILO-101
+      - GEO-101
+    enabled_by:
+      - READ-101
+
+  PROB-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - MATH-101
+    enables:
+      - CODE-101
+      - ENGR-101
+      - DATA-101
+    enabled_by:
+      - CRIT-101
+
+  STAT-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - MATH-101
+    enables:
+      - DATA-101
+      - ECON-101
+    enabled_by: []
+
+  BUS-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - MATH-101
+      - COMM-101
+    enables:
+      - ECON-101
+    enabled_by:
+      - COMM-101
+
+  ENGR-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - MATH-101
+      - SCI-101
+    enables:
+      - MFAB-101
+      - TRADE-101
+    enabled_by:
+      - PHYS-101
+      - PROB-101
+
+  MFAB-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - SCI-101
+      - ENGR-101
+    enables:
+      - TRADE-101
+    enabled_by:
+      - ENGR-101
+
+  TECH-101:
+    tier: core_academic
+    hard_prerequisites: []
+    recommended_prior_knowledge: []
+    enables:
+      - CODE-101
+      - ENGR-101
+      - DIGLIT-101
+      - TRADE-101
+    enabled_by: []
+
+  CODE-101:
+    tier: applied_practical
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - MATH-101
+      - PROB-101
+    enables:
+      - DATA-101
+      - DIGLIT-101
+    enabled_by:
+      - MATH-101
+      - PROB-101
+      - DIGLIT-101
+      - LOG-101
+      - TECH-101
+
+  DATA-101:
+    tier: applied_practical
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - MATH-101
+      - STAT-101
+    enables:
+      - ECON-101
+    enabled_by:
+      - MATH-101
+      - CODE-101
+      - PROB-101
+      - STAT-101
+      - DIGLIT-101
+
+  DIGLIT-101:
+    tier: applied_practical
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - READ-101
+    enables:
+      - CODE-101
+      - DATA-101
+    enabled_by:
+      - CODE-101
+      - TECH-101
+
+  WRIT-101:
+    tier: applied_practical
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - READ-101
+      - COMM-101
+    enables:
+      - COMM-101
+      - PHILO-101
+      - HIST-101
+    enabled_by:
+      - READ-101
+      - COMM-101
+
+  LANG-101:
+    tier: applied_practical
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - READ-101
+      - COMM-101
+    enables: []
+    enabled_by:
+      - COMM-101
+
+  LOG-101:
+    tier: applied_practical
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - MATH-101
+      - CRIT-101
+    enables:
+      - CODE-101
+      - PHILO-101
+    enabled_by:
+      - CRIT-101
+      - PHILO-101
+
+  ECON-101:
+    tier: applied_practical
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - MATH-101
+    enables:
+      - BUS-101
+    enabled_by:
+      - MATH-101
+      - BUS-101
+      - DATA-101
+      - STAT-101
+
+  ENVR-101:
+    tier: applied_practical
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - SCI-101
+      - CHEM-101
+      - GEO-101
+    enables:
+      - NATURE-101
+      - ASTRO-101
+    enabled_by:
+      - SCI-101
+      - CHEM-101
+      - GEO-101
+
+  PSYCH-101:
+    tier: applied_practical
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - SCI-101
+      - COMM-101
+    enables:
+      - LEARN-101
+    enabled_by: []
+
+  NUTR-101:
+    tier: applied_practical
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - SCI-101
+      - CHEM-101
+    enables:
+      - ENVR-101
+      - PE-101
+      - DOMESTIC-101
+    enabled_by:
+      - CHEM-101
+
+  ART-101:
+    tier: specialized
+    hard_prerequisites: []
+    recommended_prior_knowledge: []
+    enables: []
+    enabled_by: []
+
+  PHILO-101:
+    tier: specialized
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - CRIT-101
+      - READ-101
+    enables:
+      - THEO-101
+      - LOG-101
+    enabled_by:
+      - CRIT-101
+      - HIST-101
+      - WRIT-101
+      - LOG-101
+
+  NATURE-101:
+    tier: specialized
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - SCI-101
+      - ENVR-101
+    enables: []
+    enabled_by:
+      - SCI-101
+      - CHEM-101
+      - GEO-101
+      - ENVR-101
+
+  PE-101:
+    tier: specialized
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - NUTR-101
+    enables: []
+    enabled_by:
+      - NUTR-101
+
+  DOMESTIC-101:
+    tier: specialized
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - NUTR-101
+      - ECON-101
+    enables: []
+    enabled_by:
+      - NUTR-101
+
+  THEO-101:
+    tier: specialized
+    hard_prerequisites: []
+    recommended_prior_knowledge: []
+    enables: []
+    enabled_by:
+      - PHILO-101
+
+  ASTRO-101:
+    tier: specialized_deepening
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - PHYS-101
+      - MATH-101
+      - SCI-101
+    enables: []
+    enabled_by:
+      - MATH-101
+      - PHYS-101
+      - GEO-101
+      - ENVR-101
+
+  LEARN-101:
+    tier: specialized_deepening
+    hard_prerequisites: []
+    recommended_prior_knowledge: []
+    enables: []
+    enabled_by:
+      - PSYCH-101
+
+  MUSIC-101:
+    tier: specialized_deepening
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - MATH-101
+    enables: []
+    enabled_by: []
+
+  TRADE-101:
+    tier: specialized_deepening
+    hard_prerequisites: []
+    recommended_prior_knowledge:
+      - MATH-101
+      - PHYS-101
+      - ENGR-101
+    enables: []
+    enabled_by:
+      - ENGR-101
+      - MFAB-101
+      - TECH-101
+
+# Notes on relationship types:
+# - hard_prerequisites: Prerequisites that must be completed before starting (merged from dependencies + prerequisite_packs)
+# - recommended_prior_knowledge: Helpful background but not strictly required
+# - enables: What this pack unlocks or makes easier
+# - enabled_by: Computed field showing which packs list this pack in their enables array

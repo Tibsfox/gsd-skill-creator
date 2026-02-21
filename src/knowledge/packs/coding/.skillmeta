@@ -1,0 +1,484 @@
+# GSD Skill Metadata
+pack_id: CODE-101
+pack_name: "Computer Science & Coding — Foundational Knowledge Pack"
+version: "1.0.0"
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: applied_practical
+learning_domain: computational_thinking
+
+# Content Description
+description: |
+  Computer science and coding as tools for thinking, problem-solving, and creating.
+  Covers computational thinking, programming in visual and text-based environments,
+  building projects, analyzing algorithms, and understanding computing's role in society.
+  Designed for all learners from age 6 through professional, with entry points at every level.
+
+short_description: "Problem-solving and clear thinking through code, from foundations to complexity analysis"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Computer Science & Coding Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - MATH-101
+  - PROB-101
+
+# What This Pack Enables
+enables:
+  - DATA-101
+  - DIGLIT-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [30, 50]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [50, 80]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [80, 120]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [100, 150]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [120, 180]
+
+# Modules
+modules:
+  - id: CODE-101-M1
+    name: "Computational Thinking & Algorithms"
+    description: "Breaking problems into steps, recognizing patterns, designing algorithms before code"
+    learning_outcomes:
+      - "Understand sequential thinking and algorithm design"
+      - "Decompose complex problems into manageable parts"
+      - "Recognize and generalize patterns"
+      - "Design algorithms before implementation"
+      - "Evaluate algorithm efficiency conceptually"
+    topics:
+      - "Sequential Thinking & Step-by-Step Logic"
+      - "Algorithm Design & Problem Decomposition"
+      - "Pattern Recognition & Generalization"
+      - "Abstraction & Representation"
+      - "Debugging Mindset"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 25
+      high: 20
+    prerequisite_modules: []
+
+  - id: CODE-101-M2
+    name: "Programming Fundamentals"
+    description: "Variables, data types, control flow, input/output in visual and text-based environments"
+    learning_outcomes:
+      - "Use variables to store and change values"
+      - "Understand different data types and their purposes"
+      - "Use control structures (if/else, loops, functions) appropriately"
+      - "Read input and produce output"
+      - "Write syntactically correct code"
+      - "Transition from visual to text-based programming"
+    topics:
+      - "Variables & Data Storage"
+      - "Data Types (Numbers, Strings, Lists, Objects)"
+      - "Control Flow (If/Else, Loops, Functions)"
+      - "Input & Output"
+      - "Syntax & Grammar"
+      - "Block-Based Programming (Scratch, Blockly)"
+      - "Text-Based Programming (Python, JavaScript)"
+      - "Code Organization & Style"
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 30
+      elementary: 40
+      middle: 35
+      high: 25
+    prerequisite_modules: ["CODE-101-M1"]
+
+  - id: CODE-101-M3
+    name: "Building Projects & Problem-Solving"
+    description: "Planning projects, iterative development, data analysis, game design, systematic debugging"
+    learning_outcomes:
+      - "Plan and scope projects effectively"
+      - "Build projects iteratively: basic version → test → improve"
+      - "Work with data: collect, analyze, visualize"
+      - "Design interactive experiences (games, tools)"
+      - "Debug systematically using appropriate tools"
+      - "Organize code for maintainability"
+      - "Collaborate on code (peer review)"
+    topics:
+      - "Project Planning & Scoping"
+      - "Iterative Development Process"
+      - "Data Analysis & Visualization"
+      - "Game Development Fundamentals"
+      - "Testing & Debugging Tools"
+      - "Code Organization (Functions, Modules, Classes)"
+      - "Peer Code Review"
+      - "Documentation & Comments"
+    grade_levels: ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 20
+      elementary: 35
+      middle: 40
+      high: 35
+    prerequisite_modules: ["CODE-101-M2"]
+
+  - id: CODE-101-M4
+    name: "Algorithms & Efficiency"
+    description: "Sorting, searching, complexity analysis, and understanding why some solutions are better than others"
+    learning_outcomes:
+      - "Understand classic algorithms (sorting, searching)"
+      - "Analyze algorithm efficiency (Big-O notation)"
+      - "Recognize when efficiency matters"
+      - "Choose appropriate algorithms for problems"
+      - "Understand trade-offs in algorithm design"
+      - "Optimize code for performance"
+    topics:
+      - "Sorting Algorithms (Bubble Sort, Merge Sort, etc.)"
+      - "Searching Algorithms (Linear, Binary Search)"
+      - "Time Complexity & Big-O Notation"
+      - "Space Complexity"
+      - "Greedy Algorithms"
+      - "Dynamic Programming Concepts"
+      - "Graph Algorithms & Pathfinding"
+      - "Algorithm Trade-offs & Optimization"
+    grade_levels: ["4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 0
+      elementary: 20
+      middle: 30
+      high: 40
+    prerequisite_modules: ["CODE-101-M2", "CODE-101-M3"]
+
+  - id: CODE-101-M5
+    name: "Computing & Society"
+    description: "Ethics, AI, security, digital citizenship, open source, and computing's impact on society"
+    learning_outcomes:
+      - "Understand computing's impact on society"
+      - "Think critically about AI and automation"
+      - "Recognize digital security basics"
+      - "Practice digital citizenship responsibly"
+      - "Understand open source philosophy"
+      - "Consider ethical implications of code"
+    topics:
+      - "Computing Ethics & Responsibility"
+      - "Artificial Intelligence & Machine Learning Basics"
+      - "Cybersecurity & Privacy"
+      - "Digital Citizenship"
+      - "Open Source Software & Collaboration"
+      - "Accessibility in Software"
+      - "Environmental Impact of Computing"
+      - "Bias in Algorithms"
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    time_estimates:
+      foundation: 0
+      elementary: 15
+      middle: 20
+      high: 25
+    prerequisite_modules: []
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-CT-001
+    description: "Decompose problems into algorithmic steps"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-PF-001
+    description: "Write and understand control structures"
+    levels: ["1", "2", "3", "4", "5", "6", "7", "8"]
+
+  - code: LO-CS-001
+    description: "Build complete projects with testing and iteration"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-AE-001
+    description: "Analyze and compare algorithm efficiency"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Code Explanation & Tracing"
+    frequency: ongoing
+
+  - type: formative
+    name: "Project Progress Observation"
+    frequency: weekly
+
+  - type: summative
+    name: "Working Projects Portfolio"
+    frequency: end_of_unit
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: "Scratch"
+    url: "https://scratch.mit.edu"
+    for_level: "Foundation & Elementary"
+
+  - name: "Python"
+    for_level: "Elementary & Middle"
+
+  - name: "JavaScript"
+    for_level: "Middle & High School"
+
+  - name: "GitHub"
+    for_level: "High School & College"
+
+interactive_elements:
+  - type: "algorithm_visualizer"
+    name: "Sorting & Searching Animations"
+
+  - type: "code_editor"
+    name: "Block-Based Programming Environment"
+
+  - type: "code_editor"
+    name: "Text-Based IDE"
+
+  - type: "project_scaffold"
+    name: "Game Template Starter Packs"
+
+  - type: "game"
+    name: "Unplugged Algorithm Challenges"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+    - language_code: es
+      name: "Español"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: fr
+      name: "Français"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator_contact: "TBD"
+      target_completion_date: null
+
+  planned: ["zh", "ar"]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Code editors need syntax highlighting accessibility; terminal output needs screen reader support. All code examples have text descriptions. Consider adding video explanations with captions."
+  pack_specific_concerns:
+    - "Code syntax highlighting must support high contrast modes"
+    - "Code blocks require ARIA labels describing what code demonstrates"
+    - "Terminal/console output needs semantic markup for screen reader users"
+    - "Visual debugging tools need text-based alternatives"
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Computer Science Standards (CSTA)"
+    version: "2017"
+    standard_codes:
+      - "1A-AP-08"
+      - "1B-AP-09"
+      - "2-AP-10"
+      - "2-AP-13"
+      - "3A-AP-13"
+      - "3B-AP-08"
+    mappings:
+      "K-2": "Algorithms & Programming, Computing Systems"
+      "3-5": "Algorithms & Programming, Data & Analysis, Computing Systems"
+      "6-8": "Algorithms & Programming, Computing Systems, Networks & Internet"
+      "9-12": "Algorithms & Programming, Computing Systems, Networks & Internet, Impact of Computing"
+
+  - framework: "IB MYP Design"
+    version: "2014"
+    standard_codes:
+      - "Design 1"
+      - "Design 2"
+      - "Design 3"
+    mappings:
+      "Grades 6-10": "Develop designs, Use materials and tools, Create solutions"
+
+  - framework: "UK Computing National Curriculum"
+    version: "2014"
+    standard_codes:
+      - "KS2-5"
+      - "KS3-2"
+      - "KS4-2"
+    mappings:
+      "KS2": "Understand sequences, patterns, and algorithms"
+      "KS3": "Understand fundamentals of programming"
+      "KS4": "Understand computing systems, cybersecurity"
+
+  - framework: "ACM/IEEE CS2013"
+    version: "2013"
+    standard_codes:
+      - "AL/Algorithms"
+      - "PL/Programming Languages"
+      - "SE/Software Engineering"
+    mappings:
+      "Foundation": "Algorithms, problem decomposition"
+      "Core Tier 1": "Programming fundamentals, debugging"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: high
+  technical_demand: low_to_medium
+  prerequisites_required: low
+  notes: "Difficulty scales from 'thinking clearly' (foundation) to 'complexity analysis' (advanced)"
+
+# Content Flags & Warnings
+content_flags:
+  - flag: "frustration_potential"
+    description: "Debugging and error resolution can be frustrating for beginners"
+    mitigation: "Emphasize that all programmers encounter errors. Model productive debugging strategies."
+
+  - flag: "prerequisite_skills"
+    description: "Some learners need foundational numeracy and reading skills"
+    mitigation: "Offer visual and unplugged alternatives for all core concepts"
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/code-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "CODE-101"
+  looking_for:
+    - "Project ideas for different domains"
+    - "Algorithm visualizations"
+    - "Accessibility improvements for visual learners"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Computer Science & Coding Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - computer-science
+  - programming
+  - computational-thinking
+  - coding
+  - algorithms
+  - problem-solving
+  - computational-literacy
+  - digital-skills
+  - applied
+
+# External Resources
+resources:
+  - type: "foundational_text"
+    title: "Structure and Interpretation of Computer Programs (SICP)"
+    author: "Sussman & Abelson"
+
+  - type: "foundational_text"
+    title: "Algorithm Design Manual"
+    author: "Steven Skiena"
+
+  - type: "online_course"
+    title: "Crash Course Computer Science"
+    url: "https://www.youtube.com/playlist?list=PLME-KWdxI8dcKn2QY4tVU32-8S-0RJhTN"
+
+# Related Packs
+related_packs:
+  - id: MATH-101
+    relationship: "Algorithms use mathematical reasoning; data structures use set theory"
+
+  - id: PROB-101
+    relationship: "Probability algorithms; simulation and modeling"
+
+  - id: DATA-101
+    relationship: "Programming is how data is collected, cleaned, and analyzed"
+
+  - id: DIGLIT-101
+    relationship: "Digital literacy grounded in computational understanding"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "code"
+    color: "#2196F3"
+    position: "Featured - Applied"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "CODE-101-core-concepts"
+    - "CODE-101-debugging-patterns"
+    - "CODE-101-project-templates"
+
+# File References
+files:
+  vision_document: "CODE-101-vision.md"
+  modules_definition: "CODE-101-modules.yaml"
+  activities: "CODE-101-activities.json"
+  assessment: "CODE-101-assessment.md"
+  resources: "CODE-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: "1.0.0"
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering computational thinking through ethics"
+      - "Contributed 50+ learning activities across all modules"
+      - "Project scaffolding for game design and data analysis"
+      - "Assessment framework with portfolio examples"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"

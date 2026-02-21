@@ -1,0 +1,33 @@
+schematic:
+  name: "welcome-center"
+  category: "spawn"
+  version: "1.0"
+  format: "litematic"
+  filename: "spawn-welcome-center-v1.0.litematic"
+
+  dimensions:
+    x: 18    # 16 + 2 buffer
+    y: 9     # Floor prep through roof
+    z: 18
+
+  origin:
+    x: 14    # 1 block buffer west of building
+    y: 63    # 1 block below floor for foundation
+    z: -9    # 1 block buffer north
+
+  description: "Welcome center with 4 information panels: Knowledge World intro, Litematica guide, district map, server rules"
+
+  tags: ["spawn", "welcome", "orientation", "information"]
+
+  dependencies:
+    - "spawn-plaza"   # Must be placed after spawn plaza
+
+  build_notes: |
+    Place after spawn-plaza schematic.
+    Entrance faces west toward the plaza.
+    Verify white path connects to plaza's east path.
+
+  syncmatica:
+    share: true
+    placement_locked: true
+    priority: "high"

@@ -1,0 +1,41 @@
+# Hardware profile fixture: 8GB, no virtualization (below minimum)
+# Used by test-calculate-budget.sh for rejection testing
+
+cpu:
+  architecture: x86_64
+  family: "Intel Celeron N5100"
+  cores_physical: 2
+  cores_logical: 4
+  virtualization: false
+  virtualization_type: null
+
+memory:
+  total_gb: 8
+  swap_gb: 2
+
+storage:
+  devices:
+    - type: ssd
+      size_gb: 128
+  total_gb: 128
+
+gpu:
+  present: false
+  vendor: null
+  family: "none"
+  vram_gb: null
+  driver: null
+  iommu_available: false
+
+hypervisor:
+  kvm: false
+  vmware: false
+  virtualbox: false
+  podman: false
+  docker: false
+  nested_virtualization: false
+
+capabilities:
+  can_run_vms: false
+  can_passthrough_gpu: false
+  meets_minimum: false

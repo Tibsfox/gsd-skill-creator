@@ -1,0 +1,65 @@
+# Aminet Pipeline Team Definition
+# Coordinates 5 agents through the full package lifecycle.
+
+name: aminet-pipeline
+description: >
+  End-to-end Aminet package lifecycle management. Coordinates
+  discover -> fetch -> scan -> install -> launch pipeline with
+  scan gate enforcement and resource locking.
+
+topology: pipeline
+coordinator: am-archive
+
+stages:
+  - name: discover
+    agent: am-archive
+    description: "Search INDEX, browse categories, select packages"
+    output: package-selection
+    skills: [aminet-index, aminet-browser]
+
+  - name: fetch
+    agent: am-mirror
+    description: "Download selected packages with integrity verification"
+    input: package-selection
+    output: downloaded-packages
+    sync_point: download-complete
+    skills: [aminet-mirror]
+
+  - name: scan
+    agent: am-scanner
+    description: "Multi-layer virus scanning of downloaded packages"
+    input: downloaded-packages
+    output: scan-results
+    gate:
+      condition: "scan-result.status == 'clean'"
+      on_fail: "Block pipeline, quarantine infected packages"
+    sync_point: scan-complete
+    skills: [aminet-scanner]
+
+  - name: install
+    agent: am-installer
+    description: "Extract archives and install to emulated filesystem"
+    input: scan-results
+    output: installed-packages
+    requires_gate: scan
+    sync_point: install-complete
+    skills: [aminet-installer]
+
+  - name: launch
+    agent: am-emulator
+    description: "Configure emulator and launch installed software"
+    input: installed-packages
+    skills: [aminet-emulator]
+
+resource_locks:
+  - path: "mirror/.mirror-state.json"
+    owner: am-mirror
+    mode: exclusive
+  - path: "mirror/.quarantine/"
+    owner: am-scanner
+    mode: exclusive
+
+message_bus:
+  type: filesystem
+  path: ".planning/aminet/bus/"
+  format: jsonl

@@ -1,0 +1,61 @@
+{
+  "name": "mc-creative",
+  "description": "Knowledge World creative swarm: parallel world design, schematic creation, curriculum development, and Amiga Corner integration",
+  "leadAgentId": "creative-coordinator",
+  "createdAt": "2026-02-19T00:02:32.000Z",
+  "members": [
+    {
+      "agentId": "creative-coordinator",
+      "name": "Creative Coordinator",
+      "agentType": "coordinator",
+      "model": "opus",
+      "tools": [
+        "Read", "Write", "Bash", "Glob", "Grep",
+        "TaskCreate", "TaskList", "TaskGet", "TaskUpdate",
+        "SendMessage", "TeammateTool"
+      ],
+      "prompt": "Coordinate creative swarm for Knowledge World content. Publish tasks for world layout, schematics, curriculum, and Amiga Corner. Workers self-claim tasks based on availability. Resolve conflicts when multiple workers touch adjacent content areas."
+    },
+    {
+      "agentId": "creative-world-builder",
+      "name": "Creative World Builder",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "TaskList", "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Design and build Knowledge World spatial content. Create district layouts, coordinate systems, color palettes, wayfinding systems, and spawn area. Claim world-design and spatial-planning tasks."
+    },
+    {
+      "agentId": "creative-schematic-author",
+      "name": "Creative Schematic Author",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "TaskList", "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Create and catalog Minecraft schematics. Build architectural templates, write build specifications, manage schematic catalog YAML, and configure Syncmatica sharing."
+    },
+    {
+      "agentId": "creative-curriculum-designer",
+      "name": "Creative Curriculum Designer",
+      "agentType": "worker",
+      "model": "sonnet",
+      "tools": [
+        "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+        "TaskList", "TaskGet", "TaskUpdate", "SendMessage"
+      ],
+      "prompt": "Design educational curriculum and exhibits. Create guided builds (pipeline, network, database), write methodology documentation, and integrate Amiga Corner content into the Creative District."
+    }
+  ],
+  "version": 1,
+  "topology": "swarm",
+  "outputTo": [
+    { "teamName": "mc-ops", "description": "World content and schematics for backup scope" }
+  ],
+  "inputFrom": [
+    { "teamName": "mc-amiga", "description": "Curated Amiga assets for Knowledge World integration" }
+  ]
+}

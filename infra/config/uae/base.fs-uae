@@ -1,0 +1,46 @@
+# Base FS-UAE configuration for AROS Workbench
+# Generated for GSD Minecraft Knowledge World - Phase 182
+#
+# This configuration boots AROS (open-source Amiga OS) to Workbench.
+# GPU display and audio settings are applied by the overlay config
+# generated in Plan 02 (182-02) from local-values.yaml.
+#
+# Path placeholder tokens:
+#   {ROM_DIR}  - FS-UAE ROMs directory (default: ~/.local/share/fs-uae/ROMs)
+#   {DATA_DIR} - FS-UAE data directory (default: ~/.local/share/fs-uae)
+#
+# The setup-aros-rom.sh script (or a future render step in Plan 02)
+# replaces these placeholders with actual paths before use.
+
+[fs-uae]
+# --- Amiga Model ---
+amiga_model = A1200
+# A1200 provides AGA chipset (best AROS compatibility)
+
+# --- ROM ---
+kickstart_rom_file = {ROM_DIR}/aros-amiga-m68k-rom.bin
+# AROS ROM -- open source, no copyright issues
+
+# --- Memory ---
+chip_memory = 2048
+# 2MB Chip RAM (AGA standard)
+fast_memory = 8192
+# 8MB Fast RAM for comfortable Workbench use
+
+# --- Floppy / Hard Drive ---
+# If AROS system HDF exists, mount it
+hard_drive_0 = {DATA_DIR}/Hard Drives/AROS-System.hdf
+# AROS system partition
+
+# --- Display defaults (overridden by Plan 02 GPU config) ---
+fullscreen = 0
+window_width = 720
+window_height = 568
+# PAL resolution with borders: 720x568
+
+# --- Input ---
+joystick_port_0_mode = mouse
+# Mouse on port 0 (standard Workbench input)
+
+# --- Logging ---
+log_file = {DATA_DIR}/Logs/fs-uae.log

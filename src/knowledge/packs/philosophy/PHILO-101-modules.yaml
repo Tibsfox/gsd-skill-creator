@@ -1,0 +1,627 @@
+# PHILO-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: "PHILO-101"
+pack_name: "Philosophy -- Foundational Knowledge Pack"
+
+modules:
+  - id: "PHILO-101-M1"
+    name: "Wonder & Questioning"
+    description: "Developing the habit of philosophical inquiry: asking why, challenging assumptions, Socratic method, maintaining intellectual curiosity and humility"
+
+    learning_outcomes:
+      - "Ask persistent, probing questions that go beyond surface-level understanding"
+      - "Distinguish between factual questions, opinion questions, and philosophical questions"
+      - "Use the Socratic method to uncover assumptions and deepen understanding"
+      - "Maintain intellectual humility and comfort with not knowing the answer"
+      - "Recognize philosophical dimensions in everyday situations and experiences"
+
+    topics:
+      - "The Art of Asking Why"
+      - "Philosophical vs. Factual vs. Opinion Questions"
+      - "The Socratic Method"
+      - "Thought Experiments"
+      - "Intellectual Curiosity & Wonder"
+      - "Intellectual Humility"
+      - "Philosophical Traditions of Inquiry"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 30
+      high: 25
+
+    prerequisite_modules: []
+
+    activities:
+      count: 10
+      examples:
+        - "Question of the Day Circle"
+        - "Wonder Wall -- Big Questions Board"
+        - "Socratic Seminar Practice"
+        - "Thought Experiment Workshop"
+        - "Philosophical Interviews"
+        - "Why Chain Game"
+        - "Question Quality Evaluation"
+        - "Philosophical Picture Book Discussion"
+        - "Question Journal Reflection"
+        - "Cross-Cultural Inquiry Exploration"
+
+    assessments:
+      - "Does the student ask probing, open-ended questions regularly?"
+      - "Can the student distinguish philosophical from factual questions?"
+      - "Does the student demonstrate intellectual humility?"
+      - "Can the student use Socratic questioning to deepen discussion?"
+
+  - id: "PHILO-101-M2"
+    name: "Logic & Reasoning"
+    description: "Building sound arguments, identifying premises and conclusions, deductive and inductive reasoning, common fallacies, argument evaluation"
+
+    learning_outcomes:
+      - "Construct arguments with clear premises and conclusions"
+      - "Distinguish between valid and sound arguments"
+      - "Apply deductive and inductive reasoning appropriately"
+      - "Identify common logical fallacies in everyday reasoning"
+      - "Evaluate the strength of arguments fairly and accurately"
+
+    topics:
+      - "Premises & Conclusions"
+      - "Validity & Soundness"
+      - "Deductive Reasoning"
+      - "Inductive Reasoning"
+      - "Common Logical Fallacies"
+      - "Argument Construction & Evaluation"
+      - "Symbolic Logic (advanced)"
+      - "Paradoxes & Puzzles"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 30
+      middle: 40
+      high: 45
+
+    prerequisite_modules: ["PHILO-101-M1"]
+
+    activities:
+      count: 10
+      examples:
+        - "Argument Building Blocks"
+        - "Fallacy Detective Game"
+        - "Logic Puzzle Challenge"
+        - "Debate with Rules"
+        - "Truth Table Workshop"
+        - "Media Argument Analysis"
+        - "Counterexample Hunt"
+        - "If-Then Reasoning Game"
+        - "Argument Mapping Exercise"
+        - "Paradox Exploration"
+
+    assessments:
+      - "Can the student construct a valid argument with identified premises?"
+      - "Does the student spot fallacies in real-world reasoning?"
+      - "Can the student distinguish deductive from inductive arguments?"
+      - "Can the student evaluate argument strength fairly?"
+
+  - id: "PHILO-101-M3"
+    name: "Ethics & Values"
+    description: "Moral reasoning, ethical frameworks (consequentialism, deontology, virtue ethics), moral dilemmas, applied ethics, fairness and justice"
+
+    learning_outcomes:
+      - "Recognize moral questions as genuine questions requiring careful reasoning"
+      - "Apply three major ethical frameworks to real-world dilemmas"
+      - "Reason through moral dilemmas considering multiple perspectives"
+      - "Distinguish between moral intuitions, principles, and reasoned positions"
+      - "Apply ethical reasoning to contemporary issues in technology, environment, and society"
+
+    topics:
+      - "Fairness & Justice"
+      - "Consequentialism & Utilitarianism"
+      - "Deontology & Duty-Based Ethics"
+      - "Virtue Ethics & Character"
+      - "Care Ethics & Relationships"
+      - "Moral Dilemmas & Conflicting Values"
+      - "Applied Ethics (Bioethics, Technology, Environment)"
+      - "Social Contract Theory"
+      - "Cross-Cultural Moral Traditions"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 30
+      middle: 40
+      high: 45
+
+    prerequisite_modules: ["PHILO-101-M1"]
+
+    activities:
+      count: 10
+      examples:
+        - "The Fairness Challenge"
+        - "Ethical Dilemma Discussions"
+        - "Framework Application Exercise"
+        - "Moral Reasoning Case Studies"
+        - "The Trolley Problem & Variations"
+        - "Technology Ethics Debate"
+        - "Environmental Ethics Scenarios"
+        - "Virtues Inventory"
+        - "Justice & Equality Simulation"
+        - "Ethics of Everyday Life Journal"
+
+    assessments:
+      - "Can the student identify moral dimensions of everyday situations?"
+      - "Does the student apply ethical frameworks consistently?"
+      - "Can the student reason through dilemmas considering multiple perspectives?"
+      - "Does the student distinguish moral intuition from reasoned argument?"
+
+  - id: "PHILO-101-M4"
+    name: "Knowledge & Truth"
+    description: "Epistemology: what knowledge is, sources of knowledge, skepticism as a tool, certainty vs. belief, relationship between philosophy and science"
+
+    learning_outcomes:
+      - "Explain the difference between knowing, believing, and guessing"
+      - "Evaluate different sources of knowledge (perception, reason, testimony, memory)"
+      - "Use skepticism constructively to test and strengthen beliefs"
+      - "Understand the relationship between evidence, justification, and knowledge"
+      - "Analyze how scientific knowledge differs from other knowledge types"
+
+    topics:
+      - "Knowing vs. Believing vs. Guessing"
+      - "Sources of Knowledge"
+      - "Justified True Belief & Its Problems"
+      - "Skepticism as a Tool"
+      - "Evidence & Justification"
+      - "The Problem of Induction"
+      - "Philosophy of Science"
+      - "Epistemic Virtues"
+      - "Social Epistemology"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 35
+      high: 40
+
+    prerequisite_modules: ["PHILO-101-M1", "PHILO-101-M2"]
+
+    activities:
+      count: 10
+      examples:
+        - "How Do You Know? Evidence Game"
+        - "Optical Illusions & Reliable Senses"
+        - "The Certainty Spectrum"
+        - "Conspiracy Theory Anatomy"
+        - "Source Evaluation Challenge"
+        - "Gettier Problem Workshop"
+        - "Science vs. Pseudoscience Sorting"
+        - "Justified True Belief Scenarios"
+        - "Epistemic Humility Reflection"
+        - "Knowledge Chain Tracing"
+
+    assessments:
+      - "Can the student distinguish between knowledge, belief, and opinion?"
+      - "Does the student evaluate sources critically?"
+      - "Can the student use skepticism constructively?"
+      - "Does the student understand how evidence supports or undermines claims?"
+
+  - id: "PHILO-101-M5"
+    name: "Aesthetics & Meaning"
+    description: "Beauty, art, taste, purpose, meaning of life, philosophy of mind, consciousness, narrative and imagination in human experience"
+
+    learning_outcomes:
+      - "Give reasoned aesthetic judgments beyond 'I like it' or 'I don't like it'"
+      - "Engage with philosophical questions about art, beauty, and taste"
+      - "Explore questions of meaning, purpose, and what makes a life worth living"
+      - "Understand basic positions on the mind-body problem and consciousness"
+      - "Appreciate the role of narrative and imagination in philosophical thinking"
+
+    topics:
+      - "Beauty & Aesthetic Judgment"
+      - "Philosophy of Art"
+      - "Taste & Criticism"
+      - "Meaning & Purpose in Life"
+      - "Philosophy of Mind & Consciousness"
+      - "The Mind-Body Problem"
+      - "Existentialism & Authenticity"
+      - "Eastern Aesthetics & Contemplation"
+      - "Narrative, Story & Imagination"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 35
+      high: 40
+
+    prerequisite_modules: ["PHILO-101-M1"]
+
+    activities:
+      count: 10
+      examples:
+        - "Beautiful vs. Pretty: Art Discussion"
+        - "What Makes a Good Story?"
+        - "The Consciousness Question"
+        - "Meaning Mapping"
+        - "Is This Art? Gallery Walk"
+        - "Philosophy Through Film"
+        - "Nature Contemplation Journal"
+        - "The Ship of Theseus Debate"
+        - "Happiness vs. Meaning Discussion"
+        - "Cross-Cultural Aesthetics Exploration"
+
+    assessments:
+      - "Can the student give reasons for aesthetic judgments?"
+      - "Does the student engage seriously with questions about meaning and purpose?"
+      - "Can the student articulate different perspectives on consciousness?"
+      - "Does the student appreciate diverse aesthetic traditions?"
+
+# Learning Outcomes
+
+learning_outcomes:
+  - code: "LO-PHIL-001"
+    description: "Ask probing philosophical questions that reveal assumptions and deepen inquiry"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: "LO-PHIL-002"
+    description: "Construct and evaluate logical arguments with identified premises and conclusions"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: "LO-PHIL-003"
+    description: "Apply ethical frameworks to moral dilemmas and real-world issues"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: "LO-PHIL-004"
+    description: "Evaluate knowledge claims by tracing evidence and justification"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: "LO-PHIL-005"
+    description: "Engage with questions of beauty, meaning, and consciousness with reasoned reflection"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+
+assessment_methods:
+  - type: formative
+    name: "Socratic Discussion Participation"
+    frequency: ongoing
+
+  - type: formative
+    name: "Philosophical Question Journal"
+    frequency: weekly
+
+  - type: summative
+    name: "Philosophical Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Applied Ethics Project"
+    frequency: end_of_module
+
+# Technologies & Tools
+
+tools_required: []
+tools_optional:
+  - name: argument_mapper
+    integrated: true
+    description: "Visual tool for mapping argument structure: premises, inferences, conclusions"
+
+  - name: ethics_lab
+    integrated: true
+    description: "Interactive ethical dilemma explorer with framework comparison"
+
+  - name: question_journal
+    integrated: true
+    description: "Digital journal for recording and revisiting philosophical questions"
+
+interactive_elements:
+  - type: discussion
+    name: "Socratic Seminar"
+
+  - type: activity
+    name: "Thought Experiment Workshop"
+
+  - type: game
+    name: "Fallacy Detective"
+
+  - type: reflection
+    name: "Philosophical Question Journal"
+
+  - type: investigation
+    name: "Ethics Case Study"
+
+# Translations
+
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+
+  planned: [es, fr, zh, ar]
+
+# Accessibility
+
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Philosophy activities are primarily discussion-based and text-based, making them inherently accessible. Visual art activities include text descriptions. Consider adding recorded Socratic dialogues with captions."
+
+# Standards Alignment
+
+standards_alignment:
+  - framework: "Philosophy for Children (P4C) Standards"
+    version: 2020
+    alignments:
+      "Community of Inquiry": true
+      "Reasoning Skills": true
+      "Ethical Reasoning": true
+      "Creative Thinking": true
+
+  - framework: "21st Century Skills"
+    alignments:
+      "Critical Thinking": true
+      "Communication": true
+      "Collaboration": true
+      "Creativity": true
+
+# Difficulty Rating
+
+difficulty:
+  conceptual_demand: high
+  technical_demand: low
+  prerequisites_required: low
+  notes: "Philosophy demands deep thinking but requires no special tools or technical knowledge. Difficulty lies in reasoning, not prerequisites. Foundation activities are concrete and discussion-based; advanced activities engage with abstract concepts and primary texts."
+
+# Content Flags
+
+content_flags:
+  - flag: "existential_questions"
+    description: "Modules on meaning and consciousness may raise existential concerns (death, purpose, suffering)"
+    mitigation: "Age-appropriate framing; focus on constructive exploration; parent guidance provided; connections to support resources if needed"
+
+  - flag: "moral_disagreement"
+    description: "Ethics module intentionally presents dilemmas where reasonable people disagree"
+    mitigation: "Emphasis on reasoning quality, not arriving at particular conclusions; respect for diverse moral traditions; no indoctrination"
+
+  - flag: "religious_intersection"
+    description: "Some philosophical questions overlap with religious concerns (existence of God, nature of reality, morality)"
+    mitigation: "Pack teaches philosophical methods (reason, argument, evidence), not religious doctrines; respects all traditions while maintaining philosophical rigor"
+
+# Community & Contribution
+
+community:
+  discussion_forum: "https://community.gsd.edu/philo-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "PHILO-101"
+  looking_for:
+    - "Discussion prompts that work well with specific age groups"
+    - "Non-Western philosophical traditions and thought experiments"
+    - "Applied ethics case studies for contemporary issues"
+    - "Translations and culturally adapted content"
+    - "Video and audio resources for Socratic dialogue modeling"
+
+# Maintenance Schedule
+
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Philosophy Education Working Group"
+
+# Metrics & Usage
+
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+
+tags:
+  - philosophy
+  - critical-thinking
+  - ethics
+  - logic
+  - epistemology
+  - aesthetics
+  - reasoning
+  - socratic-method
+  - inquiry
+  - meaning
+
+# External Resources
+
+resources:
+  - type: reference
+    title: "Stanford Encyclopedia of Philosophy"
+    author: "Stanford University"
+    url: "https://plato.stanford.edu"
+
+  - type: organization
+    title: "Philosophy for Children (SAPERE)"
+    author: "SAPERE"
+    url: "https://www.sapere.org.uk"
+
+  - type: online_resource
+    title: "The School of Life"
+    author: "The School of Life"
+    url: "https://www.theschooloflife.com"
+
+  - type: video
+    title: "Wireless Philosophy (Wi-Phi)"
+    author: "Wi-Phi"
+    url: "https://www.wi-phi.com"
+
+  - type: podcast
+    title: "Philosophy Bites"
+    author: "David Edmonds & Nigel Warburton"
+    url: "https://philosophybites.com"
+
+# Related Packs
+
+related_packs:
+  - id: "CRIT-101"
+    relationship: "Critical thinking skills are grounded in philosophical logic, epistemology, and argumentation"
+
+  - id: "READ-101"
+    relationship: "Close reading and textual analysis are essential tools for philosophical inquiry"
+
+  - id: "HIST-101"
+    relationship: "History and philosophy illuminate each other: philosophical ideas shape history, historical context shapes philosophy"
+
+  - id: "SCI-101"
+    relationship: "Philosophy of science examines the foundations and methods of scientific knowledge"
+
+  - id: "PSYCH-101"
+    relationship: "Philosophy of mind intersects with psychology; moral psychology connects ethics and human behavior"
+
+# Implementation Notes for GSD-OS
+
+gsd_integration:
+  dashboard_display:
+    icon: "thought-bubble"
+    color: "#9C27B0"
+    position: "Specialized"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "PHILO-101-questioning-methods"
+    - "PHILO-101-logic-reasoning"
+    - "PHILO-101-ethical-frameworks"
+    - "PHILO-101-epistemology"
+    - "PHILO-101-aesthetics-meaning"
+
+# File References
+
+files:
+  vision_document: "PHILO-101-vision.md"
+  modules_definition: "PHILO-101-modules.yaml"
+  activities: "PHILO-101-activities.json"
+  assessment: "PHILO-101-assessment.md"
+  resources: "PHILO-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five modules covering wonder, logic, ethics, epistemology, and aesthetics"
+      - "10+ activities spanning discussion, investigation, and creative exploration"
+      - "Parent guidance framework and assessment rubrics"
+      - "Aligned to P4C standards and 21st century skills"
+
+# Quality Assurance
+
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Philosophical Questioning"
+    description: "Ability to ask probing questions that reveal assumptions and open new lines of inquiry"
+    assessed_in: ["PHILO-101-M1", "PHILO-101-M2", "PHILO-101-M3", "PHILO-101-M4", "PHILO-101-M5"]
+
+  - name: "Logical Reasoning"
+    description: "Ability to construct, evaluate, and critique arguments using valid reasoning"
+    assessed_in: ["PHILO-101-M1", "PHILO-101-M2", "PHILO-101-M3", "PHILO-101-M4"]
+
+  - name: "Perspective-Taking"
+    description: "Ability to understand and engage seriously with viewpoints different from one's own"
+    assessed_in: ["PHILO-101-M1", "PHILO-101-M3", "PHILO-101-M4", "PHILO-101-M5"]
+
+  - name: "Intellectual Honesty"
+    description: "Commitment to following arguments where they lead, even when conclusions are uncomfortable"
+    assessed_in: ["PHILO-101-M1", "PHILO-101-M2", "PHILO-101-M3", "PHILO-101-M4", "PHILO-101-M5"]
+
+  - name: "Reflective Judgment"
+    description: "Ability to make reasoned judgments under conditions of uncertainty and genuine disagreement"
+    assessed_in: ["PHILO-101-M3", "PHILO-101-M4", "PHILO-101-M5"]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4 -> M5"
+    rationale: "Wonder and questioning are foundational; logic enables deeper work in ethics and epistemology; aesthetics builds on all prior modules"
+
+  - name: "Ethics-First Pathway"
+    description: "M1 -> M3 -> M2 -> M4 -> M5"
+    rationale: "For learners drawn to moral questions; ethics motivates learning logic and epistemology as tools for better moral reasoning"
+
+  - name: "Knowledge-Focused Pathway"
+    description: "M1 -> M2 -> M4 -> M3 -> M5"
+    rationale: "For learners interested in science and truth; logic and epistemology before ethics and aesthetics"
+
+  - name: "Creative-Contemplative Pathway"
+    description: "M1 -> M5 -> M3 -> M4 -> M2"
+    rationale: "For learners drawn to art, beauty, and meaning; aesthetics motivates deeper inquiry into ethics, knowledge, and logic"
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow consistent structure: learning outcomes, topics, grade-level progression"
+    cached: true
+
+  - pattern: "Discussion Format"
+    description: "Philosophical discussions follow consistent facilitation structure across all modules"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "All modules use four-level rubric: Beginning, Developing, Proficient, Advanced"
+    cached: true
+
+  - pattern: "Developmental Progression"
+    description: "Each module shows K-College progression, scaling abstraction and independence"
+    cached: true
+
+  - pattern: "Cross-Cultural Integration"
+    description: "Every module includes non-Western philosophical perspectives and traditions"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner asks increasingly sophisticated philosophical questions"
+    - "When learner identifies a logical fallacy in everyday reasoning"
+    - "When learner applies an ethical framework to a personal decision"
+    - "When learner expresses intellectual humility about uncertainty"
+    - "When learner engages seriously with a viewpoint they disagree with"
+    - "When learner gives reasoned aesthetic judgments beyond mere preference"
+
+  pattern_detection:
+    - "Question types the learner gravitates toward (ethical, metaphysical, epistemological)"
+    - "Reasoning patterns that are strongest and weakest"
+    - "Philosophical traditions that resonate most with this learner"
+    - "Contexts where the learner applies philosophical thinking spontaneously"
+    - "Growth in argument construction and evaluation over time"
+
+  skill_promotion:
+    - "Promote successful questioning patterns into reusable inquiry skills"
+    - "Create argument templates based on the learner's strongest reasoning"
+    - "Build ethical reasoning frameworks from successful dilemma analyses"
+    - "Develop a personal philosophical toolkit of the learner's best strategies"
+    - "Create discussion facilitation guides from successful Socratic seminars"

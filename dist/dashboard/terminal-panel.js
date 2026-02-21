@@ -98,7 +98,8 @@ export function renderTerminalStyles() {
 
 .terminal-iframe {
   width: 100%;
-  height: 500px;
+  height: 100%;
+  min-height: 400px;
   border: none;
   background: var(--bg);
   display: none;

@@ -1,0 +1,22 @@
+# Deluxe Paint IV -- OCS/ECS optimized profile
+#
+# Optimized for pixel art with 32-color OCS palette, mouse-driven workflow.
+# DPaint was designed for OCS and runs best with 68000 timing for palette
+# cycling effects. PAL 320x256 doubled to 720x568 for crisp pixel display.
+
+# Chipset -- OCS for authentic DPaint behavior
+chipset=OCS
+chipset_compatible=A500
+
+# CPU -- 68000 for accurate DPaint timing (palette cycling depends on it)
+cpu_type=68000
+
+# Memory -- 1MB chip (512KB minimum, 1MB comfortable for DPaint IV)
+# Minimal fast RAM since DPaint doesn't use it much
+chip_ram=1024
+fast_ram=512
+
+# Display -- PAL 320x256 doubled for crisp pixels
+gfx_width=720
+gfx_height=568
+gfx_linemode=double

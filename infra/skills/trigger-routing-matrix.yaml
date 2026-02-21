@@ -1,0 +1,205 @@
+# Trigger Routing Matrix
+# Maps every intent pattern to its complete routing chain:
+#   intent -> team -> agent -> skill
+#
+# Generated during Phase 194 (Chipset Assembly).
+# Extends trigger-matrix.yaml (Phase 191) with routing paths.
+
+routing_rules:
+  # Infrastructure Foundation routes
+  - intent: "discover.*hardware|hardware.*profile|hardware.*capabilit|system.*inventory|what.*hardware"
+    team: mc-infra
+    agent: infra-scout
+    skill: hardware-discovery
+    priority: 95
+    description: "Hardware capability discovery and profiling"
+
+  - intent: "resource.*budget|vm.*allocat|calculate.*budget|how much.*ram|vm.*sizing"
+    team: mc-infra
+    agent: infra-scout
+    skill: resource-budgeting
+    priority: 90
+    description: "VM resource allocation and budget calculation"
+
+  - intent: "pxe.*boot|network.*boot|dnsmasq.*config|tftp.*setup|boot.*menu"
+    team: mc-infra
+    agent: infra-provisioner
+    skill: pxe-boot
+    priority: 80
+    description: "PXE network boot infrastructure deployment"
+
+  - intent: "kickstart.*deploy|provision.*centos|install.*os|base.*image|kickstart.*template"
+    team: mc-infra
+    agent: infra-provisioner
+    skill: kickstart-provisioning
+    priority: 75
+    description: "CentOS kickstart automated provisioning"
+
+  - intent: "vm.*(create|start|stop|snapshot|clone|destroy)|provision.*vm|virtual.*machine|golden.*image"
+    team: mc-infra
+    agent: infra-provisioner
+    skill: vm-lifecycle
+    priority: 70
+    description: "VM lifecycle management and provisioning pipeline"
+
+  # Platform Portability routes
+  - intent: "platform.*discover|full.*discover|discover.*(audio|network|usb|distro)|capabilit.*database|subsystem.*detect"
+    team: mc-platform
+    agent: platform-scout
+    skill: platform-discovery
+    priority: 90
+    description: "Extended subsystem discovery and unified capabilities"
+
+  - intent: "package.*(install|remove|manage)|firewall.*(open|close|rule|manage)|cross.*distro|pkg.*abstract|distro.*abstract"
+    team: mc-platform
+    agent: platform-scout
+    skill: distro-abstraction
+    priority: 82
+    description: "Cross-distribution package and firewall abstraction"
+
+  - intent: "hypervisor.*(abstract|detect|manage)|container.*(fallback|deploy)|vm.*ctl|podman.*minecraft|unified.*vm"
+    team: mc-platform
+    agent: platform-engineer
+    skill: hypervisor-abstraction
+    priority: 78
+    description: "Unified VM/container operations across hypervisors"
+
+  - intent: "hardware.*adapt|generate.*local.values|adaptive.*config|assess.*(gpu|audio)|tier.*classif"
+    team: mc-platform
+    agent: platform-engineer
+    skill: hardware-adaptation
+    priority: 74
+    description: "Hardware-adaptive configuration generation"
+
+  # Minecraft Server routes
+  - intent: "minecraft.*deploy|fabric.*server|jvm.*tun|minecraft.*health|server.*deploy"
+    team: mc-ops
+    agent: mc-deployer
+    skill: minecraft-deployment
+    priority: 65
+    description: "Minecraft Fabric server deployment with JVM tuning"
+
+  - intent: "mod.*(install|update|check|deploy)|fabric.*mod|syncmatica|modrinth|mod.*manifest"
+    team: mc-ops
+    agent: mc-deployer
+    skill: mod-management
+    priority: 60
+    description: "Fabric mod lifecycle and Modrinth API integration"
+
+  - intent: "server.*propert|whitelist.*(add|remove|manage)|rcon.*(config|setup|password)|server.*config|player.*manage"
+    team: mc-ops
+    agent: mc-deployer
+    skill: server-configuration
+    priority: 60
+    description: "Server properties, whitelist, and RCON management"
+
+  - intent: "client.*setup|prism.*launcher|connect.*minecraft|fabric.*client|troubleshoot.*connect"
+    team: mc-ops
+    agent: mc-verifier
+    skill: client-setup
+    priority: 45
+    description: "Cross-platform Minecraft client setup and onboarding"
+
+  - intent: "integration.*test|verify.*pipeline|end.to.end|pipeline.*check|deployment.*verify"
+    team: mc-ops
+    agent: mc-verifier
+    skill: integration-verification
+    priority: 40
+    description: "End-to-end pipeline verification across 7 stages"
+
+  # Amiga Emulation routes
+  - intent: "uae.*(install|config|setup)|amiga.*(emulat|run|launch)|fs-uae|aros.*rom|whdload"
+    team: mc-amiga
+    agent: amiga-emulator
+    skill: uae-emulation
+    priority: 50
+    description: "FS-UAE installation and Amiga emulation configuration"
+
+  - intent: "convert.*(iff|ilbm|mod|med|amiga)|asset.*(convert|catalog|batch)|batch.*convert|amiga.*file"
+    team: mc-amiga
+    agent: amiga-archivist
+    skill: asset-conversion
+    priority: 48
+    description: "Amiga file format conversion and catalog generation"
+
+  - intent: "curate.*content|legal.*(check|guide|status)|amiga.*(legal|license|collection)|content.*catalog"
+    team: mc-amiga
+    agent: amiga-archivist
+    skill: content-curation
+    priority: 45
+    description: "Legally distributable Amiga content curation"
+
+  # Knowledge World routes
+  - intent: "world.*(design|layout|plan)|district.*(create|palette|plan)|wayfind|sign.*standard|coordinate.*range"
+    team: mc-creative
+    agent: world-architect
+    skill: world-design
+    priority: 35
+    description: "Spatial layout with themed districts and wayfinding"
+
+  - intent: "schematic.*(create|catalog|share|library)|litematica|syncmatica.*share|build.*spec"
+    team: mc-creative
+    agent: world-architect
+    skill: schematic-library
+    priority: 30
+    description: "Litematica schematic catalog and lifecycle management"
+
+  - intent: "curriculum.*(create|design)|guided.*build|spatial.*learn|education.*content|amiga.*corner"
+    team: mc-creative
+    agent: curriculum-designer
+    skill: educational-curriculum
+    priority: 25
+    description: "Spatial learning experiences and Amiga Corner exhibit"
+
+disambiguation:
+  - pair: [hardware-discovery, platform-discovery]
+    strategy: specificity
+    rule: "hardware-discovery handles base CPU/RAM/GPU via discover-hardware.sh; platform-discovery handles extended subsystems (audio/network/USB/distro) via discover-all.sh"
+    routing: "If intent mentions audio/network/usb/distro -> platform-discovery; otherwise -> hardware-discovery"
+
+  - pair: [vm-lifecycle, hypervisor-abstraction]
+    strategy: context
+    rule: "vm-lifecycle is infrastructure-level provisioning pipeline (provision-vm.sh); hypervisor-abstraction is platform-level backend dispatch (vm-ctl.sh)"
+    routing: "If intent mentions provision/golden-image -> vm-lifecycle; if intent mentions vm-ctl/backend/container -> hypervisor-abstraction"
+
+  - pair: [minecraft-deployment, server-configuration]
+    strategy: specificity
+    rule: "minecraft-deployment handles Fabric installation and JVM tuning; server-configuration handles server.properties, whitelist, and RCON"
+    routing: "If intent mentions fabric/jvm/deploy -> minecraft-deployment; if intent mentions properties/whitelist/rcon -> server-configuration"
+
+  - pair: [minecraft-deployment, mod-management]
+    strategy: specificity
+    rule: "minecraft-deployment handles base server; mod-management handles Fabric mods lifecycle via Modrinth"
+    routing: "If intent mentions deploy/fabric-server -> minecraft-deployment; if intent mentions mod/modrinth/update -> mod-management"
+
+  - pair: [asset-conversion, content-curation]
+    strategy: specificity
+    rule: "asset-conversion handles IFF/MOD binary file format conversion; content-curation handles legal/licensing assessment"
+    routing: "If intent mentions convert/iff/mod/batch -> asset-conversion; if intent mentions legal/license/curate -> content-curation"
+
+  - pair: [world-design, schematic-library]
+    strategy: specificity
+    rule: "world-design handles spatial layout and district-level design; schematic-library handles individual build specs and catalog"
+    routing: "If intent mentions district/wayfind/coordinate -> world-design; if intent mentions schematic/litematica/catalog -> schematic-library"
+
+  - pair: [schematic-library, educational-curriculum]
+    strategy: specificity
+    rule: "schematic-library manages the catalog and naming conventions; educational-curriculum creates guided learning experiences"
+    routing: "If intent mentions schematic/catalog/library -> schematic-library; if intent mentions curriculum/guided-build/spatial-learn -> educational-curriculum"
+
+coverage_validation:
+  total_skills: 20
+  total_intent_patterns: 100
+  skills_without_routes: []
+  teams_without_routes: []
+  orphan_agents: []
+
+budget_validation:
+  plan_01_total: "7%"
+  plan_02_total: "7.5%"
+  plan_03_total: "7.5%"
+  plan_04_total: "5%"
+  plan_05_total: "4.5%"
+  grand_total: "31.5%"
+  under_ceiling: true
+  headroom_available: "8.5%"

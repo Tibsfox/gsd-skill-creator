@@ -1,0 +1,192 @@
+[
+  {
+    "id": "ENGR-101-A01",
+    "name": "Egg Drop Challenge Design Brief",
+    "module_id": "ENGR-101-M1",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 120,
+    "description": "Design a protective enclosure for a raw egg that survives a drop from increasing heights. Start by writing a complete design brief: define the problem, identify constraints (materials budget, weight limit, size limit), establish success criteria (egg survives, minimum height), and brainstorm at least 5 different approaches before selecting one. Build, test from 1 meter, analyze results, iterate, and test from 2 meters. Document the full design cycle in an engineering notebook.",
+    "materials": ["raw eggs", "cardboard", "tape", "bubble wrap", "newspaper", "string", "rubber bands", "plastic bags", "cotton balls", "paper towels", "ruler", "scale"],
+    "learning_objectives": [
+      "Write a complete design brief with requirements and constraints",
+      "Generate multiple solution approaches before selecting one",
+      "Use a decision matrix to evaluate options against criteria",
+      "Document the design process in an engineering notebook"
+    ],
+    "variations": [
+      "Foundation (K-2): Drop a toy figure from table height using only paper and tape",
+      "High School: Add budget constraints (each material has a cost) and optimize cost-to-performance ratio"
+    ]
+  },
+  {
+    "id": "ENGR-101-A02",
+    "name": "Customer Needs Interview for a Better Lunchbox",
+    "module_id": "ENGR-101-M1",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 90,
+    "description": "Interview 3-5 real people about their frustrations with lunchboxes or lunch containers. Practice empathy as an engineering skill: listen for needs behind complaints, distinguish between stated wants and underlying problems. Translate interview findings into engineering requirements with measurable success criteria. Create a design brief for an improved lunchbox that addresses the top 3 needs identified across all interviews.",
+    "materials": ["notebook", "pen", "interview question template", "design brief template", "sticky notes", "markers"],
+    "learning_objectives": [
+      "Conduct user research interviews to identify real needs",
+      "Distinguish between stated wants and underlying problems",
+      "Translate user needs into measurable engineering requirements",
+      "Synthesize findings from multiple interviews into a design brief"
+    ],
+    "variations": [
+      "Elementary: Interview family members about one frustrating object in the house",
+      "High School: Add stakeholder analysis covering manufacturer, retailer, and end-user perspectives"
+    ]
+  },
+  {
+    "id": "ENGR-101-A03",
+    "name": "Strongest Bridge from 100 Popsicle Sticks",
+    "module_id": "ENGR-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 180,
+    "description": "Design and build a bridge spanning 30 centimeters using exactly 100 popsicle sticks and white glue. The bridge must support weight placed at its center. Start by researching structural shapes (triangles, arches, trusses). Sketch at least 3 different bridge designs. Build your chosen design and test to failure by gradually adding weight. Record the maximum load. Perform failure analysis: where did it break and why? Identify the load path and the weakest point. Write a one-page report on what you would change in version 2.",
+    "materials": ["100 popsicle sticks", "white glue", "wax paper", "ruler", "pencil", "weights or coins for testing", "scale", "engineering notebook"],
+    "learning_objectives": [
+      "Understand how triangulation strengthens structures",
+      "Trace load paths through a structure",
+      "Test a structure to failure and analyze the failure point",
+      "Propose data-driven improvements based on failure analysis"
+    ],
+    "variations": [
+      "Foundation (K-2): Build the tallest tower from 50 popsicle sticks that stands on its own",
+      "High School: Calculate theoretical load capacity using beam equations before building"
+    ]
+  },
+  {
+    "id": "ENGR-101-A04",
+    "name": "Material Strength Testing Lab",
+    "module_id": "ENGR-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 90,
+    "description": "Test 5 common materials (paper, cardboard, aluminum foil, balsa wood, fabric) for tension, compression, and bending strength using simple, repeatable tests. For tension: hang weights from strips until they tear. For compression: stack weights on columns until they buckle. For bending: support strips at two points and load the center until failure. Record all data in a materials comparison chart. Rank materials by each property. Discuss tradeoffs: which material is strongest overall? Which is lightest? Which is cheapest? Is there a single best material?",
+    "materials": ["paper strips", "cardboard strips", "aluminum foil strips", "balsa wood strips", "fabric strips", "small weights or coins", "ruler", "tape", "two books for supports", "data recording sheet", "pencil"],
+    "learning_objectives": [
+      "Measure material properties using controlled, repeatable tests",
+      "Organize test data in a structured comparison chart",
+      "Understand that materials have different strengths in different modes",
+      "Recognize that material selection involves tradeoffs with no single best answer"
+    ],
+    "variations": [
+      "Foundation (K-2): Sort materials into strong/weak, bendy/stiff, heavy/light categories by feel",
+      "High School: Calculate stress and strain values and plot stress-strain curves"
+    ]
+  },
+  {
+    "id": "ENGR-101-A05",
+    "name": "Build a Simple Machine Chain Reaction",
+    "module_id": "ENGR-101-M3",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 150,
+    "description": "Design and build a Rube Goldberg chain reaction machine that uses at least 4 of the 6 simple machines (lever, wheel and axle, pulley, inclined plane, wedge, screw). The machine must complete a simple task such as popping a balloon, ringing a bell, or turning on a flashlight. Each stage triggers the next through energy transfer. The machine must work reliably 3 out of 5 attempts. Document each stage with a sketch showing which simple machine is used and how energy transfers between stages.",
+    "materials": ["cardboard", "tape", "string", "dominoes", "marbles", "toy cars", "ramps", "cups", "rubber bands", "pencils", "rulers", "small pulleys or spools", "books for support structures"],
+    "learning_objectives": [
+      "Identify and apply at least 4 of the 6 simple machines",
+      "Understand how energy transfers between mechanical stages",
+      "Design for reliability through testing and adjustment",
+      "Document a system showing component interactions"
+    ],
+    "variations": [
+      "Foundation (K-2): Build a 3-stage chain reaction using dominoes, a ramp, and a ball",
+      "High School: Calculate the mechanical advantage of each stage and the overall system efficiency"
+    ]
+  },
+  {
+    "id": "ENGR-101-A06",
+    "name": "Design a Gear Train",
+    "module_id": "ENGR-101-M3",
+    "grade_range": ["5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 90,
+    "description": "Using physical gears (LEGO Technic, K'NEX, or printed cardboard gears) or a virtual gear simulator, design a gear train that achieves a specified speed change. Challenge 1: reduce input speed by 4x (4:1 reduction). Challenge 2: increase output speed by 3x (1:3 increase). For each challenge, calculate the required gear ratios, predict the torque tradeoff, build the gear train, and test by turning the input and observing the output. Record predicted vs. actual behavior. Explain the speed-torque tradeoff in your own words.",
+    "materials": ["gear set (LEGO Technic, K'NEX, or cardboard gears)", "axles or pencils", "base plate or cardboard", "ruler", "protractor", "engineering notebook"],
+    "learning_objectives": [
+      "Calculate gear ratios for specified speed changes",
+      "Understand the speed-torque tradeoff in gear systems",
+      "Build a working gear train from a calculated design",
+      "Compare predicted behavior to actual measured behavior"
+    ],
+    "variations": [
+      "Elementary: Explore gears freely and observe which combinations make things go faster or slower",
+      "High School: Design a multi-stage compound gear train for a specific application like a clock mechanism"
+    ]
+  },
+  {
+    "id": "ENGR-101-A07",
+    "name": "Paper Airplane Redesign Iteration",
+    "module_id": "ENGR-101-M4",
+    "grade_range": ["K", "1", "2", "3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 60,
+    "description": "Fold a standard paper airplane. Fly it 5 times and measure the average distance. Identify one specific thing to change (wing angle, nose weight, wing size, tail shape). Make that single change, refold, and fly 5 more times. Measure the new average. Repeat for 5 iterations, changing only one variable each time. Graph all results showing distance vs. iteration number. Analyze: which change helped the most? Which hurt? What would you try next? This activity teaches that systematic single-variable iteration beats random changes.",
+    "materials": ["paper (multiple sheets)", "ruler or measuring tape", "pencil", "data recording sheet", "graph paper", "tape", "paper clips (for nose weight experiments)"],
+    "learning_objectives": [
+      "Apply systematic single-variable iteration to improve a design",
+      "Collect and graph quantitative test data across multiple iterations",
+      "Distinguish between changes that improve performance and those that do not",
+      "Understand that iteration is a cycle of test, analyze, and change"
+    ],
+    "variations": [
+      "Foundation (K-2): Fold, fly, and describe what happened without formal measurement",
+      "High School: Add aerodynamic analysis and predict how each change should affect flight"
+    ]
+  },
+  {
+    "id": "ENGR-101-A08",
+    "name": "Crash Test Dummy Safety Improvement",
+    "module_id": "ENGR-101-M4",
+    "grade_range": ["3", "4", "5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 120,
+    "description": "Build a small car from cardboard with an egg as the passenger. Roll the car down a ramp into a wall. Assess egg damage (cracked, broken, intact). Design and build safety features: crumple zones, seat belts (tape), airbags (balloons), roll cage. Add one safety feature at a time, testing after each addition. Record which features helped most. Calculate the improvement percentage after each iteration. Produce a final design that protects the egg from a ramp height of at least 50 centimeters. Write a safety engineering report documenting your iterations.",
+    "materials": ["cardboard", "tape", "scissors", "raw eggs", "balloons", "cotton balls", "rubber bands", "string", "small wheels or dowels", "ramp (board)", "ruler", "engineering notebook"],
+    "learning_objectives": [
+      "Apply iterative design to improve safety features systematically",
+      "Test each design change independently to measure its contribution",
+      "Perform failure analysis after each crash test",
+      "Document engineering iterations with quantitative improvement data"
+    ],
+    "variations": [
+      "Foundation (K-2): Wrap a toy figure in different materials and drop from table height",
+      "High School: Add energy calculations and analyze force distribution through crumple zones"
+    ]
+  },
+  {
+    "id": "ENGR-101-A09",
+    "name": "Accessibility Audit of a Real Space",
+    "module_id": "ENGR-101-M5",
+    "grade_range": ["5", "6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 90,
+    "description": "Audit a real public space (school, park, library, store) for accessibility barriers. Use a wheelchair user checklist (door widths, ramp grades, counter heights, signage), a vision impairment checklist (contrast, tactile markers, audio signals), and a hearing impairment checklist (visual alerts, captions, noise levels). Document each barrier found with a photo or sketch and a proposed engineering solution with rough cost estimate. Prioritize barriers by impact (how many people affected) and feasibility (cost and difficulty to fix). Present your top 3 recommended improvements.",
+    "materials": ["clipboard", "accessibility audit checklist", "measuring tape", "camera or phone", "notebook", "pencil"],
+    "learning_objectives": [
+      "Identify accessibility barriers in real environments",
+      "Propose engineering solutions for accessibility problems",
+      "Prioritize improvements using impact and feasibility criteria",
+      "Understand that design choices include or exclude people"
+    ],
+    "variations": [
+      "Elementary: Walk through the school and find 5 things that would be hard to use from a wheelchair",
+      "High School: Research ADA compliance standards and audit against specific code requirements"
+    ]
+  },
+  {
+    "id": "ENGR-101-A10",
+    "name": "Engineering Failure Case Study Analysis",
+    "module_id": "ENGR-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 90,
+    "description": "Research a famous engineering failure (Tacoma Narrows Bridge, Challenger disaster, Hyatt Regency walkway collapse, Therac-25 radiation machine, or Boeing 737 MAX). Answer four questions: (1) What happened technically? Describe the engineering failure mode. (2) What were the contributing human factors? Describe the organizational, communication, or decision-making failures. (3) What were the consequences for people and society? (4) What changes were made afterward to prevent recurrence? Present findings in a 5-minute oral report or a 2-page written report. Discuss: could this have been prevented, and whose responsibility was it?",
+    "materials": ["computer with internet access for research", "notebook", "presentation materials or paper for written report"],
+    "learning_objectives": [
+      "Analyze engineering failures for both technical and human factors",
+      "Understand that engineering decisions have real consequences for people",
+      "Recognize the role of organizational culture in engineering safety",
+      "Articulate ethical responsibilities of engineers to the public"
+    ],
+    "variations": [
+      "Middle School: Use a pre-selected simplified case study with guided questions",
+      "High School: Compare two failures and identify common patterns in engineering ethics breakdowns"
+    ]
+  }
+]

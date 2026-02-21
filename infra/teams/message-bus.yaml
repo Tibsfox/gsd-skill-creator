@@ -1,0 +1,93 @@
+# Inter-Team Message Bus: Filesystem-based communication
+# Teams exchange information by writing artifacts to .planning/artifacts/{team}/
+# Consumers poll or read artifacts when their sync point is reached
+
+message_bus:
+  base_path: ".planning/artifacts"
+  description: "Filesystem-based inter-team communication. Each team writes to its own directory. Other teams read (never write) from directories they don't own."
+
+  channels:
+    mc-infra:
+      path: ".planning/artifacts/mc-infra/"
+      produces:
+        - name: "hardware-profile-ready.signal"
+          format: "empty file"
+          description: "Signal that hardware-profile.yaml is complete and valid"
+          consumers: ["mc-platform"]
+        - name: "server-deployed.signal"
+          format: "empty file"
+          description: "Signal that Minecraft server is deployed and responding"
+          consumers: ["mc-ops"]
+        - name: "deployment-manifest.yaml"
+          format: "yaml"
+          description: "Summary of deployed infrastructure: VM name, IP, ports, service status"
+          consumers: ["mc-ops"]
+
+    mc-platform:
+      path: ".planning/artifacts/mc-platform/"
+      produces:
+        - name: "abstraction-ready.signal"
+          format: "empty file"
+          description: "Signal that pkg-abstraction.sh and fw-abstraction.sh are ready"
+          consumers: ["mc-infra"]
+        - name: "local-values-ready.signal"
+          format: "empty file"
+          description: "Signal that local-values.yaml is generated and valid"
+          consumers: ["mc-amiga"]
+        - name: "capabilities-summary.yaml"
+          format: "yaml"
+          description: "Aggregated hardware capabilities for downstream teams"
+          consumers: ["mc-amiga", "mc-ops"]
+
+    mc-amiga:
+      path: ".planning/artifacts/mc-amiga/"
+      produces:
+        - name: "assets-curated.signal"
+          format: "empty file"
+          description: "Signal that curated collection is complete with legal review"
+          consumers: ["mc-creative"]
+        - name: "asset-manifest.yaml"
+          format: "yaml"
+          description: "List of converted assets with paths, formats, and metadata"
+          consumers: ["mc-creative"]
+
+    mc-creative:
+      path: ".planning/artifacts/mc-creative/"
+      produces:
+        - name: "world-layout-ready.signal"
+          format: "empty file"
+          description: "Signal that master world plan is defined with district coordinates"
+          consumers: ["mc-ops"]
+        - name: "content-inventory.yaml"
+          format: "yaml"
+          description: "Inventory of world content, schematics, and educational builds for backup scoping"
+          consumers: ["mc-ops"]
+
+    mc-ops:
+      path: ".planning/artifacts/mc-ops/"
+      produces:
+        - name: "ops-ready.signal"
+          format: "empty file"
+          description: "Signal that all operational systems are in place"
+          consumers: []
+        - name: "health-report.yaml"
+          format: "yaml"
+          description: "Current system health status from monitoring checks"
+          consumers: []
+
+  protocol:
+    write_rule: "A team ONLY writes to .planning/artifacts/{own-team-name}/"
+    read_rule: "A team may read from ANY .planning/artifacts/{team}/ directory"
+    signal_convention: "Empty .signal files indicate a sync point is reached. Consumers poll for existence."
+    manifest_convention: "YAML manifests carry structured data between teams. Schema is defined by producer."
+    cleanup: "Artifacts persist until milestone completion. No mid-execution cleanup."
+    conflict_prevention: "Each directory is exclusively owned by one team. No cross-team writes."
+
+  directory_structure:
+    description: "Create these directories at milestone start"
+    paths:
+      - ".planning/artifacts/mc-infra/"
+      - ".planning/artifacts/mc-platform/"
+      - ".planning/artifacts/mc-amiga/"
+      - ".planning/artifacts/mc-creative/"
+      - ".planning/artifacts/mc-ops/"

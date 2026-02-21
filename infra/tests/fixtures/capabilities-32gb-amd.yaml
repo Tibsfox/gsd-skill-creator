@@ -1,0 +1,146 @@
+# Unified Hardware Capabilities: 32GB Desktop with AMD Radeon RX 6700
+# Fixture for test-assess-gpu.sh and test-assess-audio.sh
+# Full 11-section structure matching hardware-capabilities.example.yaml
+
+metadata:
+  version: 1.0.0
+  generated: "2026-01-01T00:00:00Z"
+  subsystems_discovered:
+    - cpu
+    - memory
+    - storage
+    - gpu
+    - hypervisor
+    - audio
+    - network
+    - usb
+    - distro
+
+cpu:
+  architecture: x86_64
+  family: "AMD Ryzen 7 5800X"
+  cores_physical: 8
+  cores_logical: 16
+  virtualization: true
+  virtualization_type: svm
+
+memory:
+  total_gb: 32
+  swap_gb: 4
+
+storage:
+  devices:
+    - type: ssd
+      size_gb: 512
+    - type: hdd
+      size_gb: 1000
+  total_gb: 1512
+  device_count: 2
+
+gpu:
+  present: true
+  vendor: amd
+  family: "Radeon RX 6700"
+  vram_gb: 12
+  driver: amdgpu
+  iommu_available: true
+
+hypervisor:
+  kvm: true
+  vmware: false
+  virtualbox: false
+  podman: true
+  docker: false
+  nested_virtualization: true
+
+audio:
+  present: true
+  server: pulseaudio
+  alsa:
+    card_count: 1
+    cards:
+      - index: 0
+        name: "HDA ATI HDMI"
+        driver: HDA-Intel
+  midi:
+    present: false
+    port_count: 0
+    ports: []
+  capabilities:
+    has_audio_output: true
+    has_audio_input: false
+    has_midi: false
+
+network:
+  interface_count: 2
+  interfaces:
+    - name: enp5s0
+      type: ethernet
+      state: up
+      speed_mbps: 1000
+    - name: virbr0
+      type: bridge
+      state: up
+      speed_mbps: -1
+  dns:
+    dnsmasq_available: true
+    systemd_resolved: false
+  capabilities:
+    has_ethernet: true
+    has_wifi: false
+    has_bridge_support: true
+    has_bond_support: true
+    has_vlan_support: true
+
+usb:
+  present: true
+  controller_count: 2
+  controllers:
+    - type: xhci
+      usb_version: "3.0"
+    - type: ehci
+      usb_version: "2.0"
+  device_count: 5
+  device_classes:
+    - hid
+    - storage
+  capabilities:
+    has_usb3: true
+    has_usb2: true
+    max_version: "3.1"
+
+distro:
+  id: fedora
+  version: "39"
+  id_like: fedora
+  pretty_name: "Fedora Linux 39"
+  kernel: "6.6.8-200.fc39"
+  kernel_major: "6.6"
+  tier: 1
+  package_manager: dnf
+  firewall: firewalld
+  init_system: systemd
+  init_version: "254"
+  security:
+    selinux: enforcing
+    apparmor: absent
+  capabilities:
+    is_tier1: true
+    has_systemd: true
+    has_selinux: true
+    has_apparmor: false
+
+capabilities:
+  can_run_vms: true
+  can_passthrough_gpu: true
+  meets_minimum: true
+  has_audio_output: true
+  has_audio_input: false
+  has_midi: false
+  has_ethernet: true
+  has_wifi: false
+  has_bridge_support: true
+  has_usb3: true
+  is_tier1_distro: true
+  has_systemd: true
+  has_selinux: true

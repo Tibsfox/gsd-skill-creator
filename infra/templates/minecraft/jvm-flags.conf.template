@@ -1,0 +1,28 @@
+# Minecraft Server JVM Flags
+# Generated from hardware profile by deploy-minecraft.sh
+# Template: infra/templates/minecraft/jvm-flags.conf.template
+# Rendered by: infra/scripts/render-pxe-menu.sh
+#
+# This file is sourced by the minecraft.service systemd unit via EnvironmentFile.
+# It defines $JVM_FLAGS which is expanded in the ExecStart command line.
+#
+# GC Type: ${GC_TYPE}
+# Heap: ${JVM_HEAP_MIN_MB}MB - ${JVM_HEAP_MAX_MB}MB
+#
+# Values sourced from:
+#   - infra/local/local-values.yaml (minecraft.jvm section)
+#   - infra/local/minecraft.local-values (overrides)
+#
+# GC selection guide:
+#   ZGC (-XX:+UseZGC -XX:+ZGenerational):
+#     Recommended for heap >= 8GB. Low-pause GC with generational mode
+#     for better throughput. Ideal for Minecraft's allocation-heavy workload.
+#   G1GC (-XX:+UseG1GC):
+#     Recommended for heap < 8GB. Good balance of pause times and throughput.
+#     Default GC for most Java workloads.
+#
+# Security: -Dlog4j2.formatMsgNoLookups=true is a MANDATORY mitigation
+# for CVE-2021-44228 (Log4Shell). Included unconditionally regardless of
+# Minecraft version or Log4j version present in the server JAR.
+
+JVM_FLAGS="-Xms${JVM_HEAP_MIN_MB}m -Xmx${JVM_HEAP_MAX_MB}m ${GC_FLAGS} ${EXTRA_JVM_FLAGS} -Dlog4j2.formatMsgNoLookups=true"

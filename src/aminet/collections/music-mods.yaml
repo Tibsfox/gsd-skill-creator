@@ -1,0 +1,24 @@
+name: Music & MODs
+description: Music creation tools and classic tracker modules for the Amiga
+version: 1
+createdAt: '2026-02-19T00:00:00Z'
+updatedAt: '2026-02-19T00:00:00Z'
+author: GSD Aminet Pack
+tags:
+  - starter
+  - music
+  - tracker
+  - mods
+packages:
+  - fullPath: mus/edit/ProTracker36.lha
+    note: ProTracker 3.6 -- the definitive 4-channel MOD tracker
+  - fullPath: mus/edit/OctaMED.lha
+    note: OctaMED -- 8-channel tracker with MIDI support
+  - fullPath: mus/play/DeliTracker.lha
+    note: DeliTracker -- universal module player
+  - fullPath: mus/play/EaglePlayer.lha
+    note: Eagle Player -- alternative module player with many formats
+  - fullPath: mus/misc/ModArchive.lha
+    note: Collection of classic MOD files
+  - fullPath: mus/edit/AHI.lha
+    note: AHI retargetable audio -- hardware abstraction for sound

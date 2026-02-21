@@ -1,0 +1,392 @@
+# GSD Skill Metadata
+pack_id: ENGR-101
+pack_name: "Engineering & Design -- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: 2026-02-20
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: engineering_design
+
+# Content Description
+description: |
+  Engineering as systematic problem-solving under constraints. Covers the
+  engineering design process -- define problems, brainstorm solutions, prototype,
+  test, iterate -- as a universal approach to creating things that work in the
+  real world. Includes materials and structures, mechanisms and systems,
+  prototyping and testing, and engineering ethics.
+
+short_description: "Design process, materials, mechanisms, prototyping, and engineering ethics across K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Engineering Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - MATH-101
+  - SCI-101
+
+# What This Pack Enables
+enables:
+  - MFAB-101
+  - TRADE-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: [PreK, K, 1, 2]
+    estimated_hours: [30, 50]
+
+  - label: Elementary
+    grades: [3, 4, 5]
+    estimated_hours: [50, 80]
+
+  - label: "Middle School"
+    grades: [6, 7, 8]
+    estimated_hours: [80, 120]
+
+  - label: "High School"
+    grades: [9, 10, 11, 12]
+    estimated_hours: [120, 180]
+
+  - label: College
+    grades: [13, 14, 15, 16]
+    estimated_hours: [180, 240]
+
+# Modules
+modules:
+  - id: ENGR-101-M1
+    name: "The Engineering Design Process"
+    level: foundation
+    duration_hours: 25
+
+  - id: ENGR-101-M2
+    name: "Materials & Structures"
+    level: foundation-high
+    duration_hours: 30
+    prereq_modules: [ENGR-101-M1]
+
+  - id: ENGR-101-M3
+    name: "Mechanisms & Systems"
+    level: foundation-high
+    duration_hours: 35
+    prereq_modules: [ENGR-101-M1]
+
+  - id: ENGR-101-M4
+    name: "Prototyping & Testing"
+    level: foundation-high
+    duration_hours: 30
+    prereq_modules: [ENGR-101-M1]
+
+  - id: ENGR-101-M5
+    name: "Engineering Ethics & Impact"
+    level: elementary-high
+    duration_hours: 20
+    prereq_modules: [ENGR-101-M1]
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-EDP-001
+    description: "Apply the engineering design process to solve real-world problems"
+    levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-MAT-001
+    description: "Select and justify materials based on properties and constraints"
+    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-MEC-001
+    description: "Design mechanisms to achieve specified behaviors"
+    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-PRO-001
+    description: "Build prototypes, test systematically, and iterate based on data"
+    levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-ETH-001
+    description: "Consider safety, environmental impact, and equity in engineering decisions"
+    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Design Brief Review"
+    frequency: per_project
+
+  - type: formative
+    name: "Engineering Notebook Check"
+    frequency: weekly
+
+  - type: formative
+    name: "Prototype Critique"
+    frequency: per_project
+
+  - type: summative
+    name: "Engineering Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Design Challenge"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: tinkercad
+    url: https://www.tinkercad.com
+    description: "Free browser-based 3D design and circuit simulation"
+
+  - name: engineering_notebook
+    integrated: true
+    description: "Digital engineering notebook for documenting design cycles"
+
+interactive_elements:
+  - type: simulator
+    name: "Gear Train Designer"
+
+  - type: simulator
+    name: "Virtual Breadboard"
+
+  - type: manipulative
+    name: "Materials Testing Lab"
+
+  - type: game
+    name: "Bridge Building Challenge"
+
+  - type: visualization
+    name: "Load Path Tracer"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "Hands-on activities have text-based alternatives for learners with motor limitations."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Next Generation Science Standards (NGSS)"
+    version: 2013
+    alignments:
+      "K-2-ETS1-1": "Ask questions and define problems"
+      "3-5-ETS1-1": "Define and delimit engineering problems"
+      "MS-ETS1-1": "Define design problems systematically"
+      "HS-ETS1-1": "Analyze major global challenges"
+      K-2-ETS1: "Engineering Design"
+      3-5-ETS1: "Engineering Design"
+      MS-ETS1: "Engineering Design"
+      HS-ETS1: "Engineering Design"
+  - framework: "ITEEA Standards for Technological and Engineering Literacy"
+    version: 2020
+    alignments:
+      "1.A": "Characteristics and scope of technology"
+      "2.A": "Core practices of technology"
+      "3.A": "Engineering design processes"
+      "4.A": "Systemic design and systems"
+      Core Disciplinary Ideas: true
+      Engineering Design: true
+  - framework: "IB Middle Years Programme"
+    version: "2024"
+    alignments:
+      MYP.DES.A: "Investigating and analysing"
+      MYP.DES.B: "Developing ideas"
+      MYP.DES.C: "Creating the solution"
+  - framework: "UK National Curriculum (Design & Technology)"
+    version: "2014"
+    alignments:
+      KS1.DT: "Design and technology curriculum"
+      KS2.DT: "Iterative design process"
+      KS3.DT: "Engineering and design thinking"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: medium
+  prerequisites_required: low
+  notes: "Hands-on focus makes entry accessible; complexity scales with grade level"
+
+# Content Flags & Warnings
+content_flags:
+  - flag: safety_considerations
+    description: "Building activities involve tools, materials, and testing that require safety awareness"
+    mitigation: "Safety guidelines provided for every activity. Age-appropriate tool restrictions."
+
+  - flag: failure_normalization
+    description: "Pack explicitly celebrates failure as data. Learners accustomed to perfection-oriented environments may need adjustment."
+    mitigation: "Gradual introduction. Frame failure as 'data collection' not 'mistakes'. Failure Museum activity normalizes the concept."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/engr-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "ENGR-101"
+  looking_for:
+    - "Design challenges using locally available materials"
+    - "Case studies of engineering failures for ethics module"
+    - "Translations to Spanish & Mandarin"
+    - "Video demonstrations of activities"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: 2026-02-20
+  next_review: 2026-05-20
+  maintainer: "Engineering Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - engineering
+  - design-process
+  - prototyping
+  - materials
+  - mechanisms
+  - structures
+  - circuits
+  - ethics
+  - stem
+  - hands-on
+  - maker
+  - foundational
+  - problem-solving
+  - iteration
+
+# External Resources
+resources:
+  - type: curriculum
+    title: "Engineering is Elementary (EiE)"
+    author: "Museum of Science, Boston"
+    url: "https://eie.org"
+
+  - type: online_platform
+    title: "PBS Design Squad Nation"
+    author: "PBS"
+    url: "https://pbskids.org/designsquad"
+
+  - type: organization
+    title: "FIRST Robotics"
+    author: "FIRST"
+    url: "https://www.firstinspires.org"
+
+  - type: textbook
+    title: "To Engineer Is Human"
+    author: "Henry Petroski"
+    url: null
+
+# Related Packs
+related_packs:
+  - id: MATH-101
+    relationship: "Mathematical reasoning underlies engineering analysis"
+
+  - id: SCI-101
+    relationship: "Science discovers principles that engineering applies"
+
+  - id: CODE-101
+    relationship: "Software engineering applies the same design process"
+
+  - id: ART-101
+    relationship: "Design thinking and visualization shared between disciplines"
+
+  - id: MFAB-101
+    relationship: "Engineering design process enables advanced fabrication"
+
+  - id: TRADE-101
+    relationship: "Engineering thinking applies to all skilled trades"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "wrench"
+    color: "#795548"
+    position: "Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "ENGR-101-design-process"
+    - "ENGR-101-materials-structures"
+    - "ENGR-101-assessment-patterns"
+    - "ENGR-101-parent-guidance"
+
+# File References
+files:
+  vision_document: "ENGR-101-vision.md"
+  modules_definition: "ENGR-101-modules.yaml"
+  activities: "ENGR-101-activities.json"
+  assessment: "ENGR-101-assessment.md"
+  resources: "ENGR-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: 2026-02-20
+    changes:
+      - "Initial release: Five core modules covering design process, materials, mechanisms, prototyping, and ethics"
+      - "20 starter activities emphasizing hands-on building with everyday materials"
+      - "Aligned to NGSS Engineering Design standards"
+      - "Parent guidance for non-engineer families"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: 2026-05-20

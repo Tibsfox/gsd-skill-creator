@@ -1,0 +1,412 @@
+# GSD Skill Metadata
+pack_id: PHYS-101
+pack_name: "Physics --- Foundational Knowledge Pack"
+version: 1.0.0
+release_date: 2026-02-20
+
+# Status & Classification
+status: alpha
+classification: core_academic
+learning_domain: physical_science
+
+# Content Description
+description: |
+  Physics as the study of how the universe works at its most fundamental level:
+  motion, forces, energy, waves, and matter. Building intuition about physical
+  phenomena before formalism, then connecting intuition to mathematical models.
+  Covers K through college level with experiment-heavy, everyday-materials approach.
+
+short_description: "Motion, forces, energy, waves, and matter from K through College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Physics Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - MATH-101
+  - SCI-101
+
+# What This Pack Enables
+enables:
+  - ASTRO-101
+  - ENGR-101
+  - CHEM-101
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: [PreK, K, 1, 2]
+    estimated_hours: [30, 50]
+
+  - label: Elementary
+    grades: [3, 4, 5]
+    estimated_hours: [50, 80]
+
+  - label: "Middle School"
+    grades: [6, 7, 8]
+    estimated_hours: [80, 120]
+
+  - label: "High School"
+    grades: [9, 10, 11, 12]
+    estimated_hours: [120, 180]
+
+  - label: College
+    grades: [13, 14, 15, 16]
+    estimated_hours: [200, 300]
+
+# Modules
+modules:
+  - id: PHYS-101-M1
+    name: "Motion & Forces"
+    level: foundation-high
+    duration_hours: 50
+
+  - id: PHYS-101-M2
+    name: "Energy & Work"
+    level: foundation-high
+    duration_hours: 45
+    prereq_modules: [PHYS-101-M1]
+
+  - id: PHYS-101-M3
+    name: "Waves, Sound & Light"
+    level: foundation-high
+    duration_hours: 40
+    prereq_modules: [PHYS-101-M1]
+
+  - id: PHYS-101-M4
+    name: "Electricity & Magnetism"
+    level: foundation-high
+    duration_hours: 45
+    prereq_modules: [PHYS-101-M1, PHYS-101-M2]
+
+  - id: PHYS-101-M5
+    name: "Modern Physics & Cosmology"
+    level: middle-college
+    duration_hours: 40
+    prereq_modules: [PHYS-101-M1, PHYS-101-M2, PHYS-101-M3, PHYS-101-M4]
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-MOT-001
+    description: "Describe and predict motion using position, velocity, and acceleration"
+    levels: [K, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-FOR-001
+    description: "Identify forces and apply Newton's laws to explain changes in motion"
+    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-ENR-001
+    description: "Trace energy transformations and apply conservation of energy"
+    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-WAV-001
+    description: "Describe wave properties and explain sound and light phenomena"
+    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-ELM-001
+    description: "Build and analyze circuits; explain electromagnetic phenomena"
+    levels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  - code: LO-MOD-001
+    description: "Describe atomic structure, relativity, and quantum concepts"
+    levels: [9, 10, 11, 12, 13, 14, 15, 16]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Prediction Journals"
+    frequency: ongoing
+
+  - type: formative
+    name: "Conceptual Questions"
+    frequency: weekly
+
+  - type: formative
+    name: "Peer Explanation"
+    frequency: per_module
+
+  - type: summative
+    name: "Lab Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Design Challenges"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: phet_simulations
+    url: https://phet.colorado.edu
+    description: "Free interactive physics simulations"
+
+  - name: multimeter
+    integrated: false
+    description: "For measuring voltage, current, and resistance in circuit activities"
+
+  - name: stopwatch
+    integrated: true
+    description: "Phone timer works; for measuring motion and timing experiments"
+
+interactive_elements:
+  - type: simulator
+    name: "Motion Simulator"
+
+  - type: simulator
+    name: "Energy Skate Park"
+
+  - type: simulator
+    name: "Wave Interference"
+
+  - type: simulator
+    name: "Circuit Builder"
+
+  - type: manipulative
+    name: "Free Body Diagram Tool"
+
+  - type: visualization
+    name: "Electromagnetic Spectrum Explorer"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: "Espanol"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: fr
+      name: "Francais"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: de
+      name: "Deutsch"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+    - language_code: it
+      name: "Italiano"
+      complete: false
+      progress: "0%"
+      translator: "TBD"
+      contact: ""
+      target_date: ""
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: false
+  notes: "All visual content has text descriptions. Experiment instructions include verbal/tactile alternatives. Video captions planned."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "Next Generation Science Standards (NGSS)"
+    version: 2013
+    alignments:
+      "K-PS2-1": "Objects and motion"
+      "1-PS4-1": "Sound and vibrations"
+      "2-PS1-1": "Matter and its properties"
+      "3-PS2-1": "Forces and motion"
+      "4-PS3-1": "Energy in motion"
+      "5-PS2-1": "Forces and interactions"
+      PS1: "Matter and Its Interactions"
+      PS2: "Motion and Stability: Forces and Interactions"
+      PS3: "Energy"
+      PS4: "Waves and Their Applications"
+  - framework: "AP Physics 1 & 2"
+    version: 2024
+    alignments:
+      "1.A": "Kinematics"
+      "2.A": "Dynamics"
+      "3.A": "Energy and work"
+      "4.A": "Waves and sound"
+      "5.A": "Electricity and magnetism"
+  - framework: "IB Middle Years Programme (Sciences)"
+    version: "2024"
+    alignments:
+      MYP.PHY.A: "Knowing and understanding"
+      MYP.PHY.B: "Investigating"
+      MYP.PHY.C: "Communicating"
+  - framework: "UK National Curriculum (Science - Physics)"
+    version: "2014"
+    alignments:
+      KS3.PHY: "Forces, energy, waves"
+      KS4.PHY: "Matter and energy"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: high
+  technical_demand: moderate
+  prerequisites_required: low
+  notes: "Conceptually deep but uses everyday materials; math demand scales with grade level"
+
+# Content Flags & Warnings
+content_flags:
+  - flag: physics_anxiety
+    description: "Some learners have physics or math anxiety that may surface during quantitative work"
+    mitigation: "Pack emphasizes conceptual understanding before formalism; qualitative reasoning always precedes equations"
+
+  - flag: counterintuitive_results
+    description: "Several physics concepts contradict everyday intuition (e.g., objects fall at the same rate regardless of mass)"
+    mitigation: "Misconceptions are addressed explicitly with hands-on demonstrations"
+
+  - flag: modern_physics_concepts
+    description: "Module 5 covers topics like relativity and quantum mechanics that challenge classical intuition"
+    mitigation: "Presented as extensions of classical physics with clear connections to evidence and observation"
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/phys-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "PHYS-101"
+  looking_for:
+    - "Hands-on experiments using everyday materials"
+    - "Simulations for electromagnetic phenomena"
+    - "Translations to Spanish & Mandarin"
+    - "Video demonstrations of key experiments"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: 2026-02-20
+  next_review: 2026-05-20
+  maintainer: "Physics Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - physics
+  - physical-science
+  - motion
+  - forces
+  - energy
+  - waves
+  - electricity
+  - magnetism
+  - elementary
+  - middle-school
+  - high-school
+  - college
+  - stem
+  - foundational
+  - experiments
+
+# External Resources
+resources:
+  - type: textbook
+    title: "The Feynman Lectures on Physics"
+    author: "Feynman, Leighton, Sands"
+    url: "https://feynmanlectures.caltech.edu"
+
+  - type: textbook
+    title: "Conceptual Physics"
+    author: "Paul Hewitt"
+    url: null
+
+  - type: simulation
+    title: "PhET Interactive Simulations"
+    author: "University of Colorado Boulder"
+    url: "https://phet.colorado.edu"
+
+  - type: online_reference
+    title: "HyperPhysics"
+    author: "Georgia State University"
+    url: "https://hyperphysics.phy-astr.gsu.edu"
+
+  - type: online_course
+    title: "MIT OpenCourseWare Physics"
+    author: "Massachusetts Institute of Technology"
+    url: "https://ocw.mit.edu/courses/physics/"
+
+# Related Packs
+related_packs:
+  - id: MATH-101
+    relationship: "Mathematics is the language of physics; algebra and calculus enable quantitative modeling"
+
+  - id: SCI-101
+    relationship: "Scientific method and experimental reasoning are the methodological backbone"
+
+  - id: CHEM-101
+    relationship: "Chemistry extends atomic structure and thermodynamics from physics"
+
+  - id: ASTRO-101
+    relationship: "Astronomy applies gravity, light, and nuclear physics on cosmic scales"
+
+  - id: ENGR-101
+    relationship: "Engineering is applied physics; every structure and device uses physics principles"
+
+  - id: CODE-101
+    relationship: "Physics simulations deepen understanding of both physics and programming"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "atom"
+    color: "#2196F3"
+    position: "Core"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "PHYS-101-core-concepts"
+    - "PHYS-101-experiment-patterns"
+    - "PHYS-101-assessment-rubrics"
+
+# File References
+files:
+  vision_document: "PHYS-101-vision.md"
+  modules_definition: "PHYS-101-modules.yaml"
+  activities: "PHYS-101-activities.json"
+  assessment: "PHYS-101-assessment.md"
+  resources: "PHYS-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: 2026-02-20
+    changes:
+      - "Initial release: Five core modules covering motion, energy, waves, E&M, and modern physics"
+      - "20 hands-on activities using everyday materials"
+      - "Aligned to NGSS and AP Physics frameworks"
+      - "Parent guidance with misconception corrections"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: 2026-05-20

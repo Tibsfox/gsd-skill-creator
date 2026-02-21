@@ -1,0 +1,82 @@
+# Knowledge World District Color Palettes
+# Each district uses a unique color family for instant visual identification
+# Block names use Minecraft Java Edition identifiers
+
+version: "1.0"
+
+palettes:
+  hardware:
+    color_family: "Iron/Gray -- industrial, metallic, mechanical"
+    primary: ["iron_block", "gray_concrete", "polished_andesite"]
+    secondary: ["stone_bricks", "smooth_stone", "dark_prismarine"]
+    accent: ["gold_block", "redstone_block", "copper_block"]
+    path_block: "gray_concrete_powder"
+    glass: "gray_stained_glass"
+    beacon_color: "gray"  # iron ingot beam
+    banner_base: "gray_banner"
+    wood_type: "spruce"  # dark wood complements iron/gray
+
+  software:
+    color_family: "Blue/Cyan -- digital, abstract, logical"
+    primary: ["blue_concrete", "cyan_concrete", "prismarine_bricks"]
+    secondary: ["dark_prismarine", "warped_planks", "blue_terracotta"]
+    accent: ["diamond_block", "lapis_block", "sea_lantern"]
+    path_block: "cyan_concrete_powder"
+    glass: "light_blue_stained_glass"
+    beacon_color: "light_blue"  # diamond beam
+    banner_base: "blue_banner"
+    wood_type: "warped"  # blue-tinted nether wood
+
+  network:
+    color_family: "Green/Lime -- connections, data flow, alive"
+    primary: ["green_concrete", "lime_concrete", "moss_block"]
+    secondary: ["dark_oak_planks", "green_terracotta", "mossy_stone_bricks"]
+    accent: ["emerald_block", "glowstone", "end_rod"]
+    path_block: "lime_concrete_powder"
+    glass: "green_stained_glass"
+    beacon_color: "green"  # emerald beam
+    banner_base: "green_banner"
+    wood_type: "dark_oak"  # deep green complement
+
+  creative:
+    color_family: "Magenta/Purple -- artistic, expressive, creative"
+    primary: ["magenta_concrete", "purple_concrete", "purpur_block"]
+    secondary: ["purpur_pillar", "end_stone_bricks", "magenta_terracotta"]
+    accent: ["amethyst_block", "crying_obsidian", "shroomlight"]
+    path_block: "magenta_concrete_powder"
+    glass: "magenta_stained_glass"
+    beacon_color: "magenta"  # N/A direct, use pink
+    banner_base: "purple_banner"
+    wood_type: "cherry"  # pink/magenta blossom wood
+
+  community:
+    color_family: "Orange/Warm -- welcoming, social, inclusive"
+    primary: ["orange_concrete", "terracotta", "cut_sandstone"]
+    secondary: ["smooth_sandstone", "orange_terracotta", "acacia_planks"]
+    accent: ["jack_o_lantern", "shroomlight", "honeycomb_block"]
+    path_block: "orange_concrete_powder"
+    glass: "orange_stained_glass"
+    beacon_color: "orange"  # N/A direct, use no filter
+    banner_base: "orange_banner"
+    wood_type: "acacia"  # warm orange-toned wood
+
+  workshop:
+    color_family: "Red/Brown -- workbench, crafting, hands-on"
+    primary: ["red_concrete", "bricks", "polished_granite"]
+    secondary: ["granite", "red_terracotta", "mangrove_planks"]
+    accent: ["redstone_lamp", "nether_bricks", "smithing_table"]
+    path_block: "red_concrete_powder"
+    glass: "red_stained_glass"
+    beacon_color: "red"  # redstone beam (no dye, just red glass)
+    banner_base: "red_banner"
+    wood_type: "mangrove"  # reddish-brown wood
+
+# Spawn plaza uses white/quartz -- neutral, welcoming, all-colors-combined
+spawn_plaza:
+  color_family: "White/Quartz -- neutral hub connecting all districts"
+  primary: ["quartz_block", "white_concrete", "smooth_quartz"]
+  secondary: ["quartz_pillar", "calcite", "white_terracotta"]
+  accent: ["glowstone", "sea_lantern", "beacon"]
+  path_block: "white_concrete_powder"
+  glass: "glass"  # clear glass -- transparent, open
+  wood_type: "birch"  # lightest wood

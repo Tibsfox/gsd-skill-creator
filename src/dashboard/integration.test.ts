@@ -127,6 +127,7 @@ const EXPECTED_PAGES = [
   'roadmap.html',
   'milestones.html',
   'state.html',
+  'console.html',
 ];
 
 // ---------------------------------------------------------------------------
@@ -163,12 +164,12 @@ describe('dashboard integration', () => {
   // Generation result checks
   // -------------------------------------------------------------------------
 
-  it('generates all 5 expected pages', () => {
+  it('generates all 6 expected pages', () => {
     expect(result.errors).toHaveLength(0);
     for (const page of EXPECTED_PAGES) {
       expect(result.pages).toContain(page);
     }
-    expect(result.pages).toHaveLength(5);
+    expect(result.pages).toHaveLength(6);
   });
 
   it('reports a positive duration', () => {
@@ -303,6 +304,6 @@ describe('dashboard integration', () => {
 
     // Pages regenerate because the embedded timestamp changes the content hash
     expect(result2.errors).toHaveLength(0);
-    expect(result2.pages.length + result2.skipped.length).toBe(5);
+    expect(result2.pages.length + result2.skipped.length).toBe(6);
   });
 });

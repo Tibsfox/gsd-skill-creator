@@ -1,0 +1,730 @@
+# AGC Architectural Study -- Design Recommendations
+# Concrete system design changes for GSD/skill-creator/GSD-OS
+# Phase 207 Plan 01 -- STDY-02
+#
+# Each recommendation derives from one or more AGC architectural concepts
+# mapped in architecture-mapping.yaml. These are implementation-ready
+# proposals that downstream phases can build directly from.
+
+metadata:
+  version: 1
+  generated: "2026-02-18"
+  mapping_ref: "infra/packs/agc/study/architecture-mapping.yaml"
+  total_recommendations: 7
+  target_systems: ["gsd", "skill-creator", "gsd-os"]
+
+recommendations:
+  - id: rec-01
+    title: "Priority-Based Skill Scheduling with BAILOUT"
+    concept_refs: ["agc-concept-01", "agc-concept-03"]
+    target_system: "skill-creator"
+    problem: |
+      The skill loading pipeline (Score -> Resolve -> ModelFilter -> CacheOrder ->
+      Budget -> Load) treats budget overflow as a hard stop: skills that exceed
+      the token budget are simply not loaded. There is no concept of graceful
+      degradation under pressure. When multiple high-value skills compete for
+      limited budget, the system has no mechanism to shed low-priority loaded
+      skills to make room, nor to signal what was dropped. This means that during
+      complex phases requiring many skills, critical skills may be silently
+      excluded while less important ones occupy budget space.
+
+      Additionally, there is no feedback loop: when budget is exceeded, the user
+      is not informed which skills were deferred, why they were deprioritized,
+      or what impact their absence might have on the current phase.
+    proposed_change: |
+      Implement a two-tier scheduling model inspired by the AGC Executive and
+      BAILOUT systems:
+
+      1. **Priority Preemption**: Assign explicit priority levels (1-8) to each
+         skill based on phase relevance, activation history, and user preference.
+         During the Budget stage, if a higher-priority skill cannot fit, evict
+         the lowest-priority currently-loaded skill to make room.
+
+      2. **BAILOUT Shedding**: When total skill demand exceeds 120% of available
+         budget, trigger a BAILOUT event that:
+         a. Preserves skills in the "critical" tier (priority 7-8)
+         b. Sheds skills in the "deferrable" tier (priority 1-3)
+         c. Emits a telemetry event listing what was shed
+         d. Records the shed event in STATE.md for user awareness
+
+      3. **Restart Groups**: Each skill declares a "restart group" that determines
+         whether it can be safely shed mid-session. Skills marked "no-restart"
+         (e.g., those tracking accumulated session state) are never shed.
+    affected_components:
+      - path: "src/skills/loader.ts"
+        change: "Add priority field to SkillLoadRequest, implement preemption logic in Budget stage"
+      - path: "src/skills/budget.ts"
+        change: "Add BAILOUT threshold check (120% overcommit triggers shedding), implement priority-based eviction"
+      - path: "src/skills/types.ts"
+        change: "Add priority (1-8), restart_group, and shed_policy fields to skill metadata"
+      - path: "src/console/status-writer.ts"
+        change: "Emit BAILOUT telemetry events when skills are shed, include shed list"
+      - path: ".claude/commands/*.md"
+        change: "Add priority and restart_group frontmatter to skill definitions"
+    implementation_sketch: |
+      // In budget.ts -- the Budget stage of the loading pipeline
+      interface SkillBudgetEntry {
+        skill: SkillDefinition;
+        priority: number; // 1-8
+        tokenCost: number;
+        restartGroup: 'critical' | 'important' | 'deferrable';
+        shedPolicy: 'never' | 'on-bailout' | 'always';
+      }
+
+      function allocateBudget(entries: SkillBudgetEntry[], budgetTokens: number): BudgetResult {
+        // Sort by priority descending
+        const sorted = entries.sort((a, b) => b.priority - a.priority);
+        const loaded: SkillBudgetEntry[] = [];
+        const deferred: SkillBudgetEntry[] = [];
+        let used = 0;
+
+        for (const entry of sorted) {
+          if (used + entry.tokenCost <= budgetTokens) {
+            loaded.push(entry);
+            used += entry.tokenCost;
+          } else if (entry.priority >= 7 && canEvictLowerPriority(loaded, entry)) {
+            // Preempt: evict lowest-priority loaded skill to fit this one
+            const evicted = evictLowest(loaded, entry.tokenCost - (budgetTokens - used));
+            deferred.push(...evicted);
+            loaded.push(entry);
+            used = loaded.reduce((sum, s) => sum + s.tokenCost, 0);
+          } else {
+            deferred.push(entry);
+          }
+        }
+
+        // BAILOUT check: if total demand > 120% budget, shed deferrable tier
+        const totalDemand = entries.reduce((sum, e) => sum + e.tokenCost, 0);
+        if (totalDemand > budgetTokens * 1.2) {
+          emitBailoutEvent({ totalDemand, budgetTokens, shedCount: deferred.length });
+        }
+
+        return { loaded, deferred, bailoutTriggered: totalDemand > budgetTokens * 1.2 };
+      }
+    expected_benefit: |
+      Critical skills are always loaded during their relevant phases, even under
+      extreme budget pressure. Users receive clear notification when skills are
+      shed, eliminating silent exclusion. The restart-group mechanism prevents
+      shedding of skills that track session state. Expected reduction in "skill
+      not loaded when needed" incidents: 80%+.
+    complexity: "medium"
+    phase_target: "future"
+
+  - id: rec-02
+    title: "Core Set Isolation for Executor Agents"
+    concept_refs: ["agc-concept-04", "agc-concept-01"]
+    target_system: "gsd"
+    problem: |
+      GSD executor agents (subagents forked for /gsd:execute-phase) share context
+      implicitly through file system state and .planning/ artifacts, but have no
+      formal isolation boundaries. When multiple agents execute in parallel (wave-
+      based execution), they can step on each other's file modifications, read stale
+      state, or consume more context than intended. There is no mechanism to track
+      how many agents are active, what resources each is consuming, or when the
+      concurrency limit is reached.
+
+      The GSD memory/MEMORY.md documents warn about this: "Plans that modify same
+      files must be sequential." But enforcement is manual -- the plan author must
+      know which files overlap. There is no automated detection.
+    proposed_change: |
+      Formalize executor agent isolation using the Core Set model:
+
+      1. **Agent Pool**: Define a fixed pool of N agent slots (e.g., 7, matching
+         the AGC). Each active executor occupies one slot. When all slots are
+         full, new execution requests queue until a slot is freed.
+
+      2. **Context Snapshot**: Each agent slot stores a fixed-size "core set" of
+         context state: current phase, current plan, key files read, pending
+         changes. When an agent completes, its core set is serialized to the
+         plan summary. When a new agent starts, it loads only the minimal core
+         set from its plan file (not the full accumulated context).
+
+      3. **File Conflict Detection**: Before starting a new agent, scan its plan's
+         files_modified against all active agents' files_modified. If overlap exists,
+         queue the new agent until the conflicting agent completes (or warn and
+         proceed if the user overrides).
+
+      4. **Pool Exhaustion Alarm**: If all N slots are active and a new execution
+         is requested, emit a "1202-style" alarm and offer options: wait, cancel a
+         low-priority agent, or override the limit.
+    affected_components:
+      - path: ".planning/STATE.md"
+        change: "Add active_agents section tracking slot allocation: [{slot: 1, phase: 207, plan: 01, started: timestamp, files: [...]}]"
+      - path: ".claude/commands/gsd/execute-phase.md"
+        change: "Add pre-execution slot allocation check, file conflict detection, and pool exhaustion handling"
+      - path: ".claude/commands/gsd/verify-work.md"
+        change: "Deallocate agent slot on phase verification completion"
+    implementation_sketch: |
+      # In STATE.md -- new section
+      ## Active Agents (Core Sets)
+      Pool: 7 slots
+      | Slot | Phase | Plan | Status | Files Modified | Started |
+      |------|-------|------|--------|----------------|---------|
+      | 1    | 207   | 01   | running | architecture-mapping.yaml, design-recommendations.yaml | 2026-02-18T10:00 |
+      | 2    | 207   | 02   | queued  | simulation-architecture.yaml (CONFLICT: none) | -- |
+      | 3-7  | --    | --   | free   | -- | -- |
+
+      # In execute-phase.md -- pre-execution check
+      Before forking executor:
+      1. Read STATE.md active_agents section
+      2. Find first free slot (status == 'free')
+      3. If no free slots: emit pool-exhaustion alarm, offer options
+      4. Scan plan.files_modified against all running agents' files
+      5. If conflict: warn user, suggest sequential execution
+      6. Allocate slot, update STATE.md, fork executor
+      7. On completion: update slot status to 'complete', write SUMMARY
+    expected_benefit: |
+      Eliminates file modification conflicts between parallel agents. Provides
+      visibility into concurrent agent activity. Prevents unbounded parallelism
+      that can overwhelm the project. The fixed pool size forces intentional
+      concurrency planning, just as the AGC's 7 core sets forced MIT/IL to
+      carefully budget concurrent jobs.
+    complexity: "medium"
+    phase_target: "future"
+
+  - id: rec-03
+    title: "VERB/NOUN Command Grammar for GSD-OS"
+    concept_refs: ["agc-concept-06", "agc-concept-05"]
+    target_system: "gsd-os"
+    problem: |
+      GSD commands use inconsistent syntax patterns:
+      - /gsd:plan-phase N (verb-noun with parameter)
+      - /gsd:progress (verb only, no noun)
+      - /gsd:debug "description" (verb with freeform string)
+      - /gsd:new-project (compound verb, no noun)
+      - /gsd:add-todo (compound verb with implicit noun)
+
+      This heterogeneity makes it difficult to:
+      - Auto-complete commands (no predictable grammar)
+      - Route natural language to commands (orchestrator needs per-command logic)
+      - Generate help text (no uniform structure)
+      - Extend the command set (each new command defines its own syntax)
+
+      The lack of a regular grammar means the 5-stage classification pipeline
+      in the orchestrator must handle each command as a special case rather
+      than parsing against a formal grammar.
+    proposed_change: |
+      Standardize all GSD commands around a two-part VERB + TARGET grammar,
+      inspired by the AGC VERB/NOUN system:
+
+      Verbs (actions):
+        plan    - Create or modify a plan
+        execute - Run a plan or phase
+        verify  - Check completeness
+        show    - Display information
+        add     - Create new items
+        remove  - Delete items
+        pause   - Suspend work
+        resume  - Continue work
+        debug   - Investigate issues
+
+      Targets (nouns):
+        phase N     - A specific phase
+        milestone   - Current milestone
+        project     - The whole project
+        plan N-M    - A specific plan
+        todo        - Todo list items
+        state       - Current state
+        progress    - Progress summary
+        roadmap     - Phase structure
+
+      Examples:
+        gsd show progress    (was: /gsd:progress)
+        gsd plan phase 3     (was: /gsd:plan-phase 3)
+        gsd execute phase 3  (was: /gsd:execute-phase 3)
+        gsd verify phase 3   (was: /gsd:verify-work 3)
+        gsd add todo "text"  (was: /gsd:add-todo)
+        gsd show roadmap     (was: read ROADMAP.md directly)
+        gsd debug state      (was: /gsd:debug)
+        gsd pause work       (was: /gsd:pause-work)
+        gsd resume work      (was: /gsd:resume-work)
+
+      The grammar is: gsd <verb> <target> [parameter]
+      Every command fits this pattern. No exceptions.
+    affected_components:
+      - path: ".claude/commands/gsd/"
+        change: "Refactor all GSD command files to follow verb-target naming: plan-phase.md -> plan_phase.md, progress.md -> show_progress.md, etc."
+      - path: "src/orchestrator/classifier.ts"
+        change: "Replace 5-stage probabilistic classification with grammar parser: extract verb and target from input, look up in command registry"
+      - path: "src/orchestrator/command-registry.ts"
+        change: "New file: maps verb+target pairs to command files, provides auto-completion and validation"
+      - path: "infra/packs/agc/study/verb-noun-reference.yaml"
+        change: "New file: reference card listing all verb/target combinations (like the astronaut DSKY reference cards)"
+    implementation_sketch: |
+      # command-registry.yaml -- the GSD VERB/NOUN reference card
+      verbs:
+        plan: { description: "Create or modify a plan", requires_target: true }
+        execute: { description: "Run a plan or phase", requires_target: true }
+        verify: { description: "Check completeness", requires_target: true }
+        show: { description: "Display information", requires_target: true }
+        add: { description: "Create new items", requires_target: true }
+        remove: { description: "Delete items", requires_target: true }
+        pause: { description: "Suspend work", requires_target: true }
+        resume: { description: "Continue work", requires_target: true }
+        debug: { description: "Investigate issues", requires_target: false }
+
+      targets:
+        phase: { parameter: "number", description: "A specific phase" }
+        milestone: { parameter: null, description: "Current milestone" }
+        project: { parameter: null, description: "The whole project" }
+        plan: { parameter: "phase-plan", description: "A specific plan (e.g., 3-01)" }
+        todo: { parameter: "text?", description: "Todo list items" }
+        state: { parameter: null, description: "Current state" }
+        progress: { parameter: null, description: "Progress summary" }
+        roadmap: { parameter: null, description: "Phase structure" }
+        work: { parameter: null, description: "Current work session" }
+
+      # Parser: input -> {verb, target, parameter}
+      # "plan phase 3" -> {verb: "plan", target: "phase", parameter: "3"}
+      # "show progress" -> {verb: "show", target: "progress", parameter: null}
+    expected_benefit: |
+      Eliminates per-command special-case logic in the orchestrator. Auto-
+      completion becomes trivial (type verb, show valid targets). New commands
+      are added by registering a verb/target pair, not writing custom routing
+      logic. Natural language parsing simplifies to verb extraction + target
+      extraction, reducing orchestrator error rates. Estimated 60% reduction
+      in orchestrator misrouting.
+    complexity: "high"
+    phase_target: "future"
+
+  - id: rec-04
+    title: "Memory Banking for Context Windows"
+    concept_refs: ["agc-concept-07", "agc-concept-09"]
+    target_system: "skill-creator"
+    problem: |
+      Large projects exceed the Claude context window. Currently, context
+      management is ad-hoc: the user manually decides what to include,
+      /clear resets everything, and resume-work reloads from STATE.md. There
+      is no systematic way to "page in" a specific knowledge domain (e.g.,
+      "load the testing context" or "switch to the architecture context")
+      without rebuilding from scratch.
+
+      The token budget system for skills manages a small fraction of context
+      (2-5%), but the vast majority of context is unmanaged -- it accumulates
+      through conversation and file reads without any structure. When context
+      fills, the only option is a full reset, losing everything.
+    proposed_change: |
+      Implement context banking inspired by the AGC's FBANK/EBANK system:
+
+      1. **Named Banks**: Define knowledge banks -- named, versioned sets of
+         context that can be loaded and unloaded as a unit:
+         - Bank "architecture": PROJECT.md, REQUIREMENTS.md, key source files
+         - Bank "testing": test files, coverage reports, CI config
+         - Bank "execution": current phase plan, STATE.md, recent diffs
+         - Bank "domain": project-specific reference material
+
+      2. **Bank Manifest**: Each bank has a manifest listing its contents and
+         total token cost. The manifest is always in context (it is the "bank
+         register" that tells the system what is loaded).
+
+      3. **Bank Switching**: Commands to load/unload banks:
+         - `context load architecture` -- load architecture bank
+         - `context switch testing` -- unload current bank, load testing
+         - `context status` -- show which banks are loaded and token usage
+
+      4. **Phase-Bank Mapping**: Plans declare which banks they need. The
+         execute-phase workflow auto-loads the right banks before starting.
+
+      5. **Erasable Bank (EBank)**: A small, persistent bank that survives
+         across switches -- contains STATE.md position, active blockers,
+         and the bank manifest itself. This mirrors the AGC's erasable memory
+         that persists across fixed-memory bank switches.
+    affected_components:
+      - path: ".planning/context-banks/"
+        change: "New directory containing bank manifest files: architecture.yaml, testing.yaml, execution.yaml, domain.yaml"
+      - path: "src/skills/budget.ts"
+        change: "Extend budget system to account for bank token costs alongside skill token costs"
+      - path: ".claude/commands/gsd/execute-phase.md"
+        change: "Add bank-loading step before executor fork: read plan's required_banks, load them"
+      - path: ".planning/STATE.md"
+        change: "Add loaded_banks section tracking which context banks are currently active"
+    implementation_sketch: |
+      # .planning/context-banks/architecture.yaml
+      bank:
+        name: "architecture"
+        version: 1
+        token_estimate: 8000
+        contents:
+          - path: ".planning/PROJECT.md"
+            token_estimate: 2000
+          - path: ".planning/REQUIREMENTS.md"
+            token_estimate: 3000
+          - path: "src/index.ts"
+            token_estimate: 500
+          - path: ".chipset/schema/chipset-schema.yaml"
+            token_estimate: 2500
+        dependencies: []
+        auto_load_for_phases: [199, 200, 207]
+
+      # Context switching workflow:
+      # 1. Read STATE.md to find current banks
+      # 2. Calculate token budget remaining
+      # 3. If switching: serialize current bank state, unload
+      # 4. Load new bank: read all files in manifest
+      # 5. Update STATE.md loaded_banks section
+      # 6. Proceed with phase execution
+    expected_benefit: |
+      Eliminates ad-hoc context management. Phase execution starts with exactly
+      the right knowledge loaded. Bank switching preserves work state across
+      domain transitions. Token usage becomes predictable and budgetable. The
+      bank manifest provides a "table of contents" for the project's knowledge,
+      making it discoverable even when not loaded. Expected 40% reduction in
+      "missing context" errors during phase execution.
+    complexity: "high"
+    phase_target: "future"
+
+  - id: rec-05
+    title: "Immutable Rope Memory for Skill Definitions"
+    concept_refs: ["agc-concept-09", "agc-concept-03"]
+    target_system: "skill-creator"
+    problem: |
+      Skill files in .claude/commands/*.md can be modified at any time without
+      version tracking. When a skill is refined (bounded learning's 20% content
+      change limit), the original version is overwritten. There is no way to:
+      - See the evolution of a skill over time
+      - Roll back to a previous version of a skill
+      - Diff two versions to understand what changed
+      - Determine which version was active during a specific session
+      - Audit whether refinement limits were respected
+
+      The git commit history provides some protection, but it requires knowing
+      exactly which commits touched a skill file and reconstructing the version
+      manually. There is no skill-level version tracking.
+    proposed_change: |
+      Treat committed skills as immutable "rope" -- once a version is finalized,
+      it is never modified. New versions create new files:
+
+      1. **Versioned Skill Files**: Skill files include a version number in
+         their frontmatter. Refinements create a new file with incremented version:
+         - `skill-name.md` (v1 -- original rope)
+         - `skill-name.v2.md` (v2 -- first refinement)
+         - `skill-name.v3.md` (v3 -- second refinement)
+
+      2. **Active Version Pointer**: The chipset config or a skill manifest file
+         tracks which version of each skill is active. Switching versions is a
+         pointer update, not a file modification.
+
+      3. **Rope Freeze**: Before major milestone execution, a "rope freeze"
+         command locks all skill versions. Any changes during execution must use
+         "erasable memory programs" -- temporary context injections that supplement
+         but don't modify the frozen skill.
+
+      4. **Audit Trail**: Each version's frontmatter records: parent version,
+         change date, change summary, correction count that triggered refinement,
+         and the bounded learning metrics (content change %).
+    affected_components:
+      - path: ".claude/commands/*.md"
+        change: "Add version, parent_version, frozen, and audit fields to frontmatter"
+      - path: "src/skills/loader.ts"
+        change: "Version-aware loading: resolve skill name to active version, support version pinning"
+      - path: "src/skills/refiner.ts"
+        change: "Create new version file instead of modifying in place, update active version pointer"
+      - path: ".chipset/minecraft-knowledge-world.yaml"
+        change: "Add version field to skill entries in chipset config"
+    implementation_sketch: |
+      # .claude/commands/beautiful-commits.md (v1 -- rope)
+      ---
+      name: beautiful-commits
+      version: 1
+      frozen: true
+      created: "2025-11-01"
+      audit:
+        corrections_before_refinement: 0
+        content_change_pct: 0
+        parent_version: null
+      ---
+      [skill content...]
+
+      # .claude/commands/beautiful-commits.v2.md (v2 -- refinement)
+      ---
+      name: beautiful-commits
+      version: 2
+      frozen: false
+      created: "2026-01-15"
+      audit:
+        corrections_before_refinement: 5
+        content_change_pct: 12
+        parent_version: 1
+        change_summary: "Added scope guidance for multi-component changes"
+      ---
+      [refined skill content...]
+
+      # Skill manifest (.claude/skill-manifest.yaml)
+      skills:
+        beautiful-commits:
+          active_version: 2
+          versions: [1, 2]
+          rope_frozen: false
+        gsd-orchestrator:
+          active_version: 1
+          versions: [1]
+          rope_frozen: true  # frozen for v1.23 execution
+    expected_benefit: |
+      Complete audit trail for skill evolution. Safe rollback to any previous
+      version. Verifiable compliance with bounded learning limits. Rope freeze
+      prevents skill instability during critical milestone execution. The
+      version history enables analysis of which refinements improved vs.
+      degraded skill quality.
+    complexity: "medium"
+    phase_target: "future"
+
+  - id: rec-06
+    title: "ICD-Style Interface Contracts Between GSD Components"
+    concept_refs: ["agc-concept-10", "agc-concept-12"]
+    target_system: "gsd"
+    problem: |
+      GSD components (planner, executor, verifier, skill-creator, dashboard)
+      communicate through implicit contracts: the planner writes plan files in
+      an expected format, the executor reads them, and the verifier reads summary
+      files. But these contracts are not formally defined:
+      - No schema for plan file format (YAML structure is documented in examples
+        but not validated)
+      - No schema for summary file format
+      - No typed contract for STATE.md sections
+      - No versioning for inter-component data formats
+      - No validation that data flowing between components is well-formed
+
+      When a component changes its output format, downstream consumers may silently
+      break. This is the GSD equivalent of the AGC writing to an I/O channel with
+      an unexpected format.
+    proposed_change: |
+      Define ICD-style (Interface Control Document) schemas for every data flow
+      between GSD components, following the AGC I/O channel model:
+
+      1. **Plan ICD**: YAML schema defining the required structure of plan files
+         (frontmatter fields, task structure, verification section, output section).
+         Validate all plans against this schema before execution.
+
+      2. **Summary ICD**: Schema for summary files produced by executors.
+         Ensures verifiers can parse any executor's output.
+
+      3. **STATE ICD**: Schema for STATE.md sections (position, decisions,
+         blockers, accumulated context). Enables automated state parsing.
+
+      4. **Event ICD**: Schema for telemetry events emitted during execution
+         (phase-started, plan-completed, error-encountered, commit-created).
+         Enables dashboard integration.
+
+      5. **Channel Registry**: A single YAML file mapping every component pair
+         to their ICD: planner->executor uses Plan ICD v2, executor->verifier
+         uses Summary ICD v1, etc. This is the GSD channel map.
+    affected_components:
+      - path: ".planning/icds/"
+        change: "New directory containing ICD schema files: plan-icd.yaml, summary-icd.yaml, state-icd.yaml, event-icd.yaml"
+      - path: ".planning/icds/channel-registry.yaml"
+        change: "New file mapping component pairs to ICD schemas with version numbers"
+      - path: ".claude/commands/gsd/plan-phase.md"
+        change: "Add ICD validation step: validate generated plan against plan-icd.yaml schema"
+      - path: ".claude/commands/gsd/execute-phase.md"
+        change: "Validate plan input against Plan ICD before execution, validate summary output against Summary ICD after"
+    implementation_sketch: |
+      # .planning/icds/channel-registry.yaml
+      channels:
+        - id: ch-001
+          from: "planner"
+          to: "executor"
+          icd: "plan-icd"
+          version: 2
+          data_flow: "Plan YAML files"
+          update_frequency: "per-phase"
+
+        - id: ch-002
+          from: "executor"
+          to: "verifier"
+          icd: "summary-icd"
+          version: 1
+          data_flow: "Summary markdown files"
+          update_frequency: "per-plan"
+
+        - id: ch-003
+          from: "executor"
+          to: "state-manager"
+          icd: "state-icd"
+          version: 1
+          data_flow: "STATE.md updates"
+          update_frequency: "per-plan"
+
+        - id: ch-004
+          from: "all"
+          to: "dashboard"
+          icd: "event-icd"
+          version: 1
+          data_flow: "Telemetry events"
+          update_frequency: "real-time"
+
+      # .planning/icds/plan-icd.yaml (JSON Schema in YAML)
+      $schema: "http://json-schema.org/draft-07/schema#"
+      title: "GSD Plan File ICD"
+      type: object
+      required: [phase, plan, type, wave, files_modified, autonomous]
+      properties:
+        phase:
+          type: string
+          pattern: "^[0-9]+-[a-z-]+$"
+        plan:
+          type: string
+          pattern: "^[0-9]+$"
+        type:
+          type: string
+          enum: [code, docs, test, refactor, infra]
+        wave:
+          type: integer
+          minimum: 1
+        files_modified:
+          type: array
+          items: { type: string }
+          minItems: 1
+    expected_benefit: |
+      Formal validation catches data format mismatches before they cause
+      downstream failures. The channel registry provides a single-source-of-truth
+      map of all component interactions. ICD versioning enables backward-
+      compatible format evolution. Automated validation reduces manual review
+      burden. Expected 70% reduction in "plan file format error" issues.
+    complexity: "medium"
+    phase_target: "future"
+
+  - id: rec-07
+    title: "Telemetry-First Observability for GSD Execution"
+    concept_refs: ["agc-concept-12", "agc-concept-13"]
+    target_system: "gsd-os"
+    problem: |
+      GSD execution state is primarily visible through STATE.md snapshots --
+      batch updates written after each plan completes. There is no real-time
+      observability during execution. The user cannot see:
+      - Which task within a plan is currently executing
+      - How long each task is taking vs. estimate
+      - Whether the executor is stuck, making progress, or idle
+      - What files have been modified but not yet committed
+      - Whether test suites are passing or failing as code is written
+
+      The GSD-OS dashboard exists but receives data passively (file watches,
+      git log). There is no structured telemetry protocol between executors
+      and the dashboard. This is like running the AGC without a downlink --
+      Mission Control can only see what happens after the fact.
+    proposed_change: |
+      Implement a structured telemetry pipeline inspired by the AGC downlink,
+      with phase-aware telemetry selection inspired by Mission Control consoles:
+
+      1. **Telemetry Events**: Define a standard event format emitted by
+         executors at key execution points:
+         - plan-started: {phase, plan, task_count, estimated_duration}
+         - task-started: {phase, plan, task_id, task_name, task_type}
+         - task-completed: {phase, plan, task_id, status, duration, files_changed}
+         - commit-created: {phase, plan, hash, message, files}
+         - test-result: {phase, plan, suite, passed, failed, coverage}
+         - error-encountered: {phase, plan, task_id, error, severity}
+         - plan-completed: {phase, plan, status, duration, commits, summary_path}
+
+      2. **Downlink List per Phase**: Plan files include a `telemetry` section
+         that specifies which metrics to emphasize during execution:
+         - During "code" phases: test results, commit frequency, file changes
+         - During "docs" phases: file sizes, YAML validity, reference completeness
+         - During "test" phases: coverage delta, assertion counts, regression detection
+
+      3. **Console Positions**: Dashboard widgets subscribe to specific event
+         types, like flight controller consoles subscribe to specific telemetry
+         channels:
+         - Activity Feed: all events (the CAPCOM view)
+         - Execution Progress: plan-started/completed, task-started/completed
+         - Quality Metrics: test-result, commit-created
+         - Alert Panel: error-encountered (the GUIDO alarm view)
+
+      4. **Event Persistence**: All events are appended to a JSONL file for
+         post-execution analysis, enabling the same kind of post-flight review
+         that Apollo mission reports provided.
+    affected_components:
+      - path: "src/console/message-handler.ts"
+        change: "Add telemetry event types to message schema, implement event routing to dashboard"
+      - path: "src/dashboard/activity-feed.ts"
+        change: "Subscribe to telemetry events, render real-time execution progress"
+      - path: ".planning/telemetry/"
+        change: "New directory for event JSONL files: {phase}-{plan}.events.jsonl"
+      - path: ".claude/commands/gsd/execute-phase.md"
+        change: "Add telemetry emission at each task boundary: emit plan-started, task-started, task-completed, plan-completed"
+      - path: "src/dashboard/metrics/execution-metrics.ts"
+        change: "New collector: parse telemetry JSONL to compute execution velocity, error rates, time-per-task"
+    implementation_sketch: |
+      // Telemetry event schema
+      interface TelemetryEvent {
+        timestamp: string;     // ISO 8601
+        event_type: string;    // from enum: plan-started, task-started, etc.
+        phase: number;
+        plan: number;
+        data: Record<string, unknown>;
+      }
+
+      // Downlink list configuration in plan YAML
+      // telemetry:
+      //   emphasis: ["test-result", "commit-created"]
+      //   suppress: ["task-started"]  # reduce noise for simple plans
+      //   alert_on: ["error-encountered"]
+      //   dashboard_layout: "execution"  # pre-configured widget arrangement
+
+      // Event emission in executor workflow
+      async function executeTask(task: PlanTask, ctx: ExecutionContext): Promise<void> {
+        emitTelemetry({
+          event_type: 'task-started',
+          phase: ctx.phase,
+          plan: ctx.plan,
+          data: { task_id: task.id, task_name: task.name, task_type: task.type }
+        });
+
+        try {
+          await task.execute(ctx);
+          emitTelemetry({
+            event_type: 'task-completed',
+            phase: ctx.phase,
+            plan: ctx.plan,
+            data: { task_id: task.id, status: 'success', duration: elapsed() }
+          });
+        } catch (error) {
+          emitTelemetry({
+            event_type: 'error-encountered',
+            phase: ctx.phase,
+            plan: ctx.plan,
+            data: { task_id: task.id, error: error.message, severity: 'high' }
+          });
+          throw error;
+        }
+      }
+
+      // JSONL persistence
+      function emitTelemetry(event: TelemetryEvent): void {
+        const line = JSON.stringify({ ...event, timestamp: new Date().toISOString() });
+        appendFileSync(`.planning/telemetry/${event.phase}-${String(event.plan).padStart(2, '0')}.events.jsonl`, line + '\n');
+        // Also emit to dashboard WebSocket if connected
+        dashboardBridge.send(event);
+      }
+    expected_benefit: |
+      Real-time visibility into execution progress for the first time. Phase-
+      aware telemetry selection reduces noise and highlights relevant metrics.
+      Post-execution analysis via JSONL enables retrospectives on execution
+      patterns (which tasks are slow, which fail frequently, where time is
+      spent). The structured event format enables automated alerting and
+      dashboard integration. Expected to reduce "is it stuck?" user queries
+      by 90%.
+    complexity: "high"
+    phase_target: "future"
+
+# Summary
+summary:
+  total_recommendations: 7
+  by_target_system:
+    skill-creator: 3
+    gsd: 2
+    gsd-os: 2
+  by_complexity:
+    low: 0
+    medium: 4
+    high: 3
+  concepts_referenced:
+    - "agc-concept-01"
+    - "agc-concept-03"
+    - "agc-concept-04"
+    - "agc-concept-05"
+    - "agc-concept-06"
+    - "agc-concept-07"
+    - "agc-concept-09"
+    - "agc-concept-10"
+    - "agc-concept-12"
+    - "agc-concept-13"

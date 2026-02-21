@@ -1,0 +1,400 @@
+# GSD Skill Metadata
+pack_id: DOMESTIC-101
+pack_name: "Home Economics & Life Skills — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: specialized
+learning_domain: life_skills
+
+# Content Description
+description: |
+  Home economics as essential life competency: cooking nutritious meals,
+  managing a household budget, basic sewing and repair, cleaning and
+  organization, and the practical skills that make independent living
+  possible. Not gendered or old-fashioned, but essential knowledge that
+  everyone needs and few schools still teach. Covers kitchen skills,
+  textiles, household management, personal finance, and self-sufficiency
+  from foundation through adult level.
+
+short_description: "Practical life skills: cooking, sewing, cleaning, budgeting, and self-sufficiency for everyone"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Home Economics Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - NUTR-101
+  - ECON-101
+
+# What This Pack Enables
+enables: []
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [30, 50]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [50, 80]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [80, 120]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [100, 150]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [120, 180]
+
+# Modules
+modules:
+  - id: DOMESTIC-101-M1
+    name: "Kitchen Skills & Cooking"
+    level: foundation
+    duration_hours: 35
+
+  - id: DOMESTIC-101-M2
+    name: "Textiles, Clothing & Care"
+    level: foundation
+    duration_hours: 25
+
+  - id: DOMESTIC-101-M3
+    name: "Home Care & Organization"
+    level: foundation
+    duration_hours: 25
+
+  - id: DOMESTIC-101-M4
+    name: "Money Management"
+    level: foundation
+    duration_hours: 30
+
+  - id: DOMESTIC-101-M5
+    name: "Self-Sufficiency & Practical Skills"
+    level: intermediate
+    duration_hours: 30
+    prereq_modules: [DOMESTIC-101-M1, DOMESTIC-101-M3]
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-COOK-001
+    description: "Prepare safe, nutritious meals with increasing independence"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-TEXT-001
+    description: "Perform basic sewing, mending, and garment care"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-HOME-001
+    description: "Maintain a clean, organized, functional living space"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-FIN-001
+    description: "Create and follow a personal budget"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-FIN-002
+    description: "Understand credit, debt, and compound interest"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-SELF-001
+    description: "Perform basic household repairs and practice emergency preparedness"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-SELF-002
+    description: "Approach problems with resourcefulness and repair-first thinking"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Practical Skill Demonstration"
+    frequency: ongoing
+
+  - type: formative
+    name: "Planning and Organization Review"
+    frequency: weekly
+
+  - type: summative
+    name: "Life Skills Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Independent Living Project"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: budgeting_app
+    url: https://www.mint.com/
+    description: "Free budgeting tool for tracking income and expenses"
+
+  - name: recipe_database
+    url: https://www.allrecipes.com/
+    description: "Recipe database with reviews and cooking instructions"
+
+  - name: repair_guides
+    url: https://www.ifixit.com/
+    description: "Free repair guides for electronics, appliances, and household items"
+
+interactive_elements:
+  - type: workshop
+    name: "Cooking Lab"
+
+  - type: workshop
+    name: "Sewing & Mending Station"
+
+  - type: simulation
+    name: "Budget Simulator"
+
+  - type: project
+    name: "Container Garden"
+
+  - type: challenge
+    name: "Fix-It Workshop"
+
+  - type: activity
+    name: "Deep Clean Challenge"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: Español
+      complete: false
+      progress: "0%"
+    - language_code: fr
+      name: Français
+      complete: false
+      progress: "0%"
+    - language_code: de
+      name: Deutsch
+      complete: false
+      progress: "0%"
+    - language_code: it
+      name: Italiano
+      complete: false
+      progress: "0%"
+
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: true
+  notes: |
+    Safety instructions need multi-modal presentation (text + audio + video). Cooking measurements accessible in multiple formats (cups/metric/weight). Sewing activities include verbal guidance and tactile learning alternatives. Financial tools (spreadsheets, calculators) require keyboard accessibility. Home repair videos include captions and audio descriptions. Laundry symbols require text explanation."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "NASAFACS Family & Consumer Sciences Standards"
+    version: 2018
+    alignments:
+      "Standard 2.1 (Consumer Resources)": "DOMESTIC-101-M4"
+      "Standard 2.5 (Financial Planning)": "DOMESTIC-101-M4"
+      "Standard 8.1 (Nutrition & Food Science)": "DOMESTIC-101-M1"
+      "Standard 9.1 (Housing & Design)": "DOMESTIC-101-M3"
+      "Standard 14.1 (Textiles & Clothing)": "DOMESTIC-101-M2"
+      "Standard 14.3 (Care of Textiles)": "DOMESTIC-101-M2"
+
+  - framework: "Jump$tart Coalition Financial Literacy Standards"
+    version: 2017
+    alignments:
+      "Spending and Saving": "DOMESTIC-101-M4"
+      "Credit and Debt": "DOMESTIC-101-M4"
+      "Financial Decision Making": "DOMESTIC-101-M4"
+      "Income": "DOMESTIC-101-M4"
+
+  - framework: "IB MYP Design"
+    version: 2016
+    alignments:
+      "Key Concept: Form": "DOMESTIC-101-M2, M3"
+      "Key Concept: Function": "DOMESTIC-101-M1, M2, M3"
+      "Key Concept: Aesthetics": "DOMESTIC-101-M2, M3"
+
+  - framework: "Life Skills Standards"
+    version: 2020
+    alignments:
+      "Health & Wellness": "DOMESTIC-101-M1, M5"
+      "Personal Finance": "DOMESTIC-101-M4, M5"
+      "Home Management": "DOMESTIC-101-M2, M3, M5"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: medium
+  prerequisites_required: low
+  notes: "Difficulty is in practice and consistency, not in theory. Conceptually simple but requires hands-on skill development over time."
+
+# Content Flags
+content_flags:
+  - flag: safety_awareness
+    description: "Cooking involves knives and heat. Cleaning involves chemicals. Repairs involve tools. All activities include age-appropriate safety guidance."
+    mitigation: "Clear safety protocols for every activity. Younger learners work with adults. Supervision requirements stated explicitly."
+
+  - flag: financial_sensitivity
+    description: "Financial activities may surface family financial stress or hardship."
+    mitigation: "Activities accommodate all income levels. No shame, no assumptions. Include resources for financial hardship. Simulated money for younger learners."
+
+  - flag: gender_neutrality
+    description: "Home economics historically reinforced gender roles. DOMESTIC-101 explicitly rejects gendered domestic expectations."
+    mitigation: "Gender-neutral language throughout. All skills taught to all learners. Avoid gendered examples. Celebrate diverse models of domestic competency."
+
+  - flag: food_allergy_awareness
+    description: "Cooking activities must accommodate food allergies and dietary restrictions."
+    mitigation: "All activities include allergen alternatives. No pressure to eat. Diverse dietary practices respected."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/domestic-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "DOMESTIC-101"
+  looking_for:
+    - "Cooking activities from diverse cultural traditions"
+    - "Repair and mending techniques for common household items"
+    - "Financial literacy activities for different age groups"
+    - "Cleaning and organization systems that work in small spaces"
+    - "Translations to Spanish, Mandarin, and French"
+    - "Gardening activities adapted for different climates and spaces"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Home Economics Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - home-economics
+  - life-skills
+  - cooking
+  - sewing
+  - cleaning
+  - budgeting
+  - personal-finance
+  - self-sufficiency
+  - repair
+  - household
+  - practical
+  - independence
+  - sustainability
+  - gender-neutral
+  - specialized
+
+# External Resources
+resources:
+  - type: curriculum
+    title: "Family & Consumer Sciences Education Standards"
+    author: "NASAFACS"
+    url: "https://www.nasafacs.org/"
+
+  - type: online_platform
+    title: "America's Test Kitchen Kids"
+    author: "America's Test Kitchen"
+    url: "https://www.americastestkitchen.com/kids"
+
+  - type: online_platform
+    title: "iFixit Repair Guides"
+    author: "iFixit"
+    url: "https://www.ifixit.com/"
+
+  - type: curriculum
+    title: "Jump$tart Coalition for Financial Literacy"
+    author: "Jump$tart"
+    url: "https://www.jumpstart.org/"
+
+# Related Packs
+related_packs:
+  - id: NUTR-101
+    relationship: "Nutrition science connects directly to cooking, meal planning, and food safety"
+
+  - id: ECON-101
+    relationship: "Economic thinking connects to budgeting, smart shopping, and financial planning"
+
+  - id: CHEM-101
+    relationship: "Chemistry of cooking, cleaning products, and fabric care"
+
+  - id: MATH-101
+    relationship: "Measurement, budgeting math, unit pricing, and recipe scaling"
+
+  - id: ENVR-101
+    relationship: "Sustainability, waste reduction, gardening, and food systems"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "home"
+    color: "#FF9800"
+    position: "Specialized"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "DOMESTIC-101-cooking-techniques"
+    - "DOMESTIC-101-sewing-basics"
+    - "DOMESTIC-101-cleaning-routines"
+    - "DOMESTIC-101-budgeting-framework"
+    - "DOMESTIC-101-repair-skills"
+    - "DOMESTIC-101-parent-guidance"
+
+# File References
+files:
+  vision_document: "DOMESTIC-101-vision.md"
+  modules_definition: "DOMESTIC-101-modules.yaml"
+  activities: "DOMESTIC-101-activities.json"
+  assessment: "DOMESTIC-101-assessment.md"
+  resources: "DOMESTIC-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering cooking, textiles, household management, money, and self-sufficiency"
+      - "Contributed 10+ starter activities across all modules"
+      - "Assessment framework with four proficiency levels focused on practical competency"
+      - "Gender-neutral throughout: all skills taught to all learners"
+      - "Aligned to FCS National Standards and Jump$tart Financial Literacy Standards"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"
