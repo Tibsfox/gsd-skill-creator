@@ -16,7 +16,18 @@
  */
 
 import type { Component } from './components';
-import { stampComponent, type StampTarget } from './components';
+import {
+  stampComponent,
+  stampDiode,
+  stampComponentAC,
+  cAbs,
+  cAngle,
+  cDiv,
+  cSub,
+  type StampTarget,
+  type ACStampTarget,
+  type Complex,
+} from './components';
 
 // ============================================================================
 // Interfaces (preserved from stub — used by other phases)
@@ -288,38 +299,404 @@ export interface ACAnalysisPoint {
 }
 
 // ============================================================================
-// Nonlinear Solver (Newton-Raphson) — Stub (Plan 263-02)
+// Nonlinear Solver (Newton-Raphson)
 // ============================================================================
+
+/**
+ * Collect nodes for nonlinear analysis.
+ * Unlike DC, diodes do NOT create extra VS rows -- they stamp as resistors.
+ * Only explicit voltage sources get VS rows.
+ */
+function collectNodesNonlinear(
+  components: Component[],
+  groundNode: string,
+): { nodeNames: string[]; vsNames: string[] } {
+  const nodeSet = new Set<string>();
+  const vsNames: string[] = [];
+
+  for (const comp of components) {
+    if ('nodes' in comp) {
+      for (const node of comp.nodes) {
+        if (node !== groundNode) {
+          nodeSet.add(node);
+        }
+      }
+    }
+    // Only voltage sources get extra rows (not inductors in nonlinear mode,
+    // but we keep inductors as VS for DC compatibility)
+    if (comp.type === 'voltage-source') {
+      vsNames.push(comp.id);
+    } else if (comp.type === 'inductor') {
+      vsNames.push(comp.id);
+    }
+  }
+
+  return { nodeNames: Array.from(nodeSet), vsNames };
+}
+
+/**
+ * Build the MNA matrix for nonlinear analysis with current voltage estimates.
+ * Diodes are stamped using piecewise-linear model based on nodeVoltages.
+ */
+function buildMatrixNonlinear(
+  components: Component[],
+  groundNode: string,
+  nodeNames: string[],
+  vsNames: string[],
+  nodeVoltages: Record<string, number>,
+): { matrix: number[][]; rhs: number[]; stampLog: StampLogEntry[] } {
+  const n = nodeNames.length;
+  const m = vsNames.length;
+  const size = n + m;
+
+  const matrix: number[][] = [];
+  for (let i = 0; i < size; i++) {
+    matrix.push(new Array(size).fill(0));
+  }
+  const rhs = new Array(size).fill(0);
+  const stampLog: StampLogEntry[] = [];
+
+  const nodeMap = new Map<string, number>();
+  for (let i = 0; i < n; i++) {
+    nodeMap.set(nodeNames[i], i);
+  }
+  const vsMap = new Map<string, number>();
+  for (let i = 0; i < m; i++) {
+    vsMap.set(vsNames[i], i);
+  }
+
+  const target: StampTarget = {
+    matrix,
+    rhs,
+    stampLog,
+    nodeIndex: (node: string) => {
+      if (node === groundNode) return -1;
+      return nodeMap.get(node) ?? -1;
+    },
+    vsIndex: (id: string) => vsMap.get(id) ?? -1,
+    n,
+  };
+
+  for (const comp of components) {
+    if (comp.type === 'diode') {
+      stampDiode(target, comp, nodeVoltages);
+    } else {
+      stampComponent(target, comp, 'dc');
+    }
+  }
+
+  return { matrix, rhs, stampLog };
+}
 
 /**
  * Solve a nonlinear circuit using Newton-Raphson iteration.
- * Stub — to be implemented in Plan 263-02 GREEN phase.
+ *
+ * Uses piecewise-linear diode model and iterates until convergence:
+ * 1. Initial guess: all node voltages = 0
+ * 2. Each iteration: rebuild matrix with current estimates, solve, check convergence
+ * 3. Convergence: max |v_new - v_old| < tolerance
+ *
+ * @param components - Array of circuit components (may include diodes)
+ * @param groundNode - Ground node name
+ * @param maxIter - Maximum Newton-Raphson iterations (default 50)
+ * @param tolerance - Convergence tolerance in volts (default 1e-6)
+ * @returns NonlinearSolution with convergence info
  */
 export function solveNonlinear(
-  _components: Component[],
-  _groundNode: string = '0',
-  _maxIter: number = 50,
-  _tolerance: number = 1e-6,
+  components: Component[],
+  groundNode: string = '0',
+  maxIter: number = 50,
+  tolerance: number = 1e-6,
 ): NonlinearSolution {
-  throw new Error('solveNonlinear not yet implemented');
+  const { nodeNames, vsNames } = collectNodesNonlinear(components, groundNode);
+  const n = nodeNames.length;
+
+  // Initial guess: all node voltages = 0
+  let voltageEstimates: Record<string, number> = {};
+  for (const name of nodeNames) {
+    voltageEstimates[name] = 0;
+  }
+
+  let lastSolution: number[] = new Array(n + vsNames.length).fill(0);
+  let allStampLog: StampLogEntry[] = [];
+  let converged = false;
+  let iterations = 0;
+
+  for (let iter = 0; iter < maxIter; iter++) {
+    iterations = iter + 1;
+
+    // Build matrix with current voltage estimates
+    const { matrix, rhs, stampLog } = buildMatrixNonlinear(
+      components, groundNode, nodeNames, vsNames, voltageEstimates,
+    );
+    allStampLog = stampLog;
+
+    // Solve the linear system
+    const solution = solve(matrix, rhs);
+
+    // Check convergence: max |v_new - v_old| < tolerance
+    let maxDiff = 0;
+    for (let i = 0; i < n; i++) {
+      const diff = Math.abs(solution[i] - lastSolution[i]);
+      if (diff > maxDiff) maxDiff = diff;
+    }
+
+    // Update voltage estimates
+    for (let i = 0; i < n; i++) {
+      voltageEstimates[nodeNames[i]] = solution[i];
+    }
+    lastSolution = solution;
+
+    if (maxDiff < tolerance && iter > 0) {
+      converged = true;
+      break;
+    }
+  }
+
+  // Map solution to named results
+  const nodeVoltageResults: NodeVoltage[] = nodeNames.map((name, i) => ({
+    node: name,
+    voltage: lastSolution[i],
+  }));
+
+  const branchCurrents: BranchCurrent[] = vsNames.map((name, i) => ({
+    branch: name,
+    current: lastSolution[n + i],
+  }));
+
+  return {
+    nodeVoltages: nodeVoltageResults,
+    branchCurrents,
+    converged,
+    iterations,
+    stampLog: allStampLog,
+  };
 }
 
 // ============================================================================
-// AC Analysis — Stub (Plan 263-02)
+// Complex Gaussian Elimination
 // ============================================================================
 
 /**
+ * Solve a complex-valued linear system Ax = b using Gaussian elimination
+ * with partial pivoting.
+ *
+ * @param A - Complex coefficient matrix (n x n)
+ * @param b - Complex right-hand side vector (length n)
+ * @returns Complex solution vector x (length n)
+ */
+function solveComplex(A: Complex[][], b: Complex[]): Complex[] {
+  const n = A.length;
+  if (n === 0) return [];
+
+  // Deep clone
+  const M: Complex[][] = A.map((row) => row.map((c) => ({ re: c.re, im: c.im })));
+  const rhs: Complex[] = b.map((c) => ({ re: c.re, im: c.im }));
+
+  // Forward elimination with partial pivoting
+  for (let k = 0; k < n; k++) {
+    // Find pivot: row with maximum |M[row][k]| for row >= k
+    let maxVal = cAbs(M[k][k]);
+    let pivotRow = k;
+    for (let row = k + 1; row < n; row++) {
+      const absVal = cAbs(M[row][k]);
+      if (absVal > maxVal) {
+        maxVal = absVal;
+        pivotRow = row;
+      }
+    }
+
+    // Swap rows
+    if (pivotRow !== k) {
+      [M[k], M[pivotRow]] = [M[pivotRow], M[k]];
+      [rhs[k], rhs[pivotRow]] = [rhs[pivotRow], rhs[k]];
+    }
+
+    // Eliminate column k for all rows below k
+    const pivot = M[k][k];
+    for (let i = k + 1; i < n; i++) {
+      const factor = cDiv(M[i][k], pivot);
+      for (let j = k; j < n; j++) {
+        M[i][j] = cSub(M[i][j], { re: factor.re * M[k][j].re - factor.im * M[k][j].im, im: factor.re * M[k][j].im + factor.im * M[k][j].re });
+      }
+      rhs[i] = cSub(rhs[i], { re: factor.re * rhs[k].re - factor.im * rhs[k].im, im: factor.re * rhs[k].im + factor.im * rhs[k].re });
+    }
+  }
+
+  // Back-substitution
+  const x: Complex[] = new Array(n).fill(null).map(() => ({ re: 0, im: 0 }));
+  for (let i = n - 1; i >= 0; i--) {
+    let sum: Complex = { re: rhs[i].re, im: rhs[i].im };
+    for (let j = i + 1; j < n; j++) {
+      sum = cSub(sum, { re: M[i][j].re * x[j].re - M[i][j].im * x[j].im, im: M[i][j].re * x[j].im + M[i][j].im * x[j].re });
+    }
+    x[i] = cDiv(sum, M[i][i]);
+  }
+
+  return x;
+}
+
+// ============================================================================
+// AC Analysis
+// ============================================================================
+
+/**
+ * Collect nodes for AC analysis.
+ * Voltage sources get extra VS rows. Inductors are treated as admittances
+ * (not as VS rows like in DC) so they do NOT add extra rows.
+ */
+function collectNodesAC(
+  components: Component[],
+  groundNode: string,
+): { nodeNames: string[]; vsNames: string[] } {
+  const nodeSet = new Set<string>();
+  const vsNames: string[] = [];
+
+  for (const comp of components) {
+    if ('nodes' in comp) {
+      for (const node of comp.nodes) {
+        if (node !== groundNode) {
+          nodeSet.add(node);
+        }
+      }
+    }
+    // In AC, only voltage sources get extra rows
+    // Inductors are stamped as admittances Y = 1/(j*omega*L)
+    if (comp.type === 'voltage-source') {
+      vsNames.push(comp.id);
+    }
+  }
+
+  return { nodeNames: Array.from(nodeSet), vsNames };
+}
+
+/**
+ * Generate logarithmically-spaced frequencies.
+ *
+ * @param freqStart - Start frequency (Hz)
+ * @param freqStop - Stop frequency (Hz)
+ * @param pointsPerDecade - Number of points per decade
+ * @returns Array of frequencies
+ */
+function generateLogFrequencies(
+  freqStart: number,
+  freqStop: number,
+  pointsPerDecade: number,
+): number[] {
+  const logStart = Math.log10(freqStart);
+  const logStop = Math.log10(freqStop);
+  const numDecades = logStop - logStart;
+  const totalPoints = Math.round(numDecades * pointsPerDecade) + 1;
+
+  const frequencies: number[] = [];
+  for (let i = 0; i < totalPoints; i++) {
+    const logF = logStart + (i / (totalPoints - 1)) * (logStop - logStart);
+    frequencies.push(Math.pow(10, logF));
+  }
+
+  return frequencies;
+}
+
+/**
  * Run AC frequency-sweep analysis on a circuit.
- * Stub — to be implemented in Plan 263-02 GREEN phase.
+ *
+ * For each frequency point:
+ * 1. Build complex MNA matrix using AC stamp functions
+ * 2. Solve complex linear system
+ * 3. Extract magnitude (dB) and phase (degrees) for each node
+ *
+ * Magnitudes are relative to the source voltage (assumed to be 1V for transfer
+ * function measurements, or normalized to the actual source voltage).
+ *
+ * @param components - Array of circuit components
+ * @param freqStart - Start frequency in Hz
+ * @param freqStop - Stop frequency in Hz
+ * @param pointsPerDecade - Points per frequency decade
+ * @param groundNode - Ground node name
+ * @returns Array of ACAnalysisPoint with frequency, magnitudes (dB), phases (degrees)
  */
 export function acAnalysis(
-  _components: Component[],
-  _freqStart: number,
-  _freqStop: number,
-  _pointsPerDecade: number,
-  _groundNode: string = '0',
+  components: Component[],
+  freqStart: number,
+  freqStop: number,
+  pointsPerDecade: number,
+  groundNode: string = '0',
 ): ACAnalysisPoint[] {
-  throw new Error('acAnalysis not yet implemented');
+  const { nodeNames, vsNames } = collectNodesAC(components, groundNode);
+  const n = nodeNames.length;
+  const m = vsNames.length;
+  const size = n + m;
+
+  // Build lookup maps
+  const nodeMap = new Map<string, number>();
+  for (let i = 0; i < n; i++) {
+    nodeMap.set(nodeNames[i], i);
+  }
+  const vsMap = new Map<string, number>();
+  for (let i = 0; i < m; i++) {
+    vsMap.set(vsNames[i], i);
+  }
+
+  // Find the source voltage for normalization
+  // Use the first voltage source's magnitude as reference
+  let vRef = 1;
+  for (const comp of components) {
+    if (comp.type === 'voltage-source') {
+      vRef = Math.abs(comp.voltage);
+      break;
+    }
+  }
+
+  const frequencies = generateLogFrequencies(freqStart, freqStop, pointsPerDecade);
+  const results: ACAnalysisPoint[] = [];
+
+  for (const freq of frequencies) {
+    const omega = 2 * Math.PI * freq;
+
+    // Create complex zero matrix and RHS
+    const matrix: Complex[][] = [];
+    for (let i = 0; i < size; i++) {
+      matrix.push(new Array(size).fill(null).map(() => ({ re: 0, im: 0 })));
+    }
+    const rhs: Complex[] = new Array(size).fill(null).map(() => ({ re: 0, im: 0 }));
+
+    const acTarget: ACStampTarget = {
+      matrix,
+      rhs,
+      nodeIndex: (node: string) => {
+        if (node === groundNode) return -1;
+        return nodeMap.get(node) ?? -1;
+      },
+      vsIndex: (id: string) => vsMap.get(id) ?? -1,
+      n,
+    };
+
+    // Stamp each component using AC stamp functions
+    for (const comp of components) {
+      stampComponentAC(acTarget, comp, omega);
+    }
+
+    // Solve the complex system
+    const solution = solveComplex(matrix, rhs);
+
+    // Extract magnitudes and phases for each node
+    const magnitudes: Record<string, number> = {};
+    const phases: Record<string, number> = {};
+
+    for (let i = 0; i < n; i++) {
+      const nodeName = nodeNames[i];
+      const nodeValue = solution[i];
+      const mag = cAbs(nodeValue);
+      // Magnitude in dB relative to source voltage
+      magnitudes[nodeName] = 20 * Math.log10(mag / vRef);
+      // Phase in degrees
+      phases[nodeName] = cAngle(nodeValue) * (180 / Math.PI);
+    }
+
+    results.push({ frequency: freq, magnitudes, phases });
+  }
+
+  return results;
 }
 
 // ============================================================================
