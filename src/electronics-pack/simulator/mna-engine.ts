@@ -15,11 +15,14 @@
  * i = known current injections, e = known source voltages.
  */
 
-import type { Component } from './components';
+import type { Component, OpAmp } from './components';
 import {
   stampComponent,
   stampDiode,
   stampBJT,
+  stampMOSFET,
+  stampOpAmp,
+  stampRegulator,
   stampComponentAC,
   cAbs,
   cAngle,
@@ -104,11 +107,19 @@ function collectNodes(
       nodeSet.add(comp.baseNode);
     }
 
+    // Collect MOSFET gate node (third terminal)
+    if ('gateNode' in comp && typeof comp.gateNode === 'string' && comp.gateNode !== groundNode) {
+      nodeSet.add(comp.gateNode);
+    }
+
     // Track voltage sources (explicit and inductor-as-DC-short)
     if (comp.type === 'voltage-source') {
       vsNames.push(comp.id);
     } else if (comp.type === 'inductor') {
       // Inductor stamps as zero-volt VS in DC
+      vsNames.push(comp.id);
+    } else if (comp.type === 'regulator') {
+      // Regulator stamps as constrained voltage source at output
       vsNames.push(comp.id);
     }
   }
@@ -334,11 +345,19 @@ function collectNodesNonlinear(
       nodeSet.add(comp.baseNode);
     }
 
+    // Collect MOSFET gate node (third terminal)
+    if ('gateNode' in comp && typeof comp.gateNode === 'string' && comp.gateNode !== groundNode) {
+      nodeSet.add(comp.gateNode);
+    }
+
     // Only voltage sources get extra rows (not inductors in nonlinear mode,
     // but we keep inductors as VS for DC compatibility)
     if (comp.type === 'voltage-source') {
       vsNames.push(comp.id);
     } else if (comp.type === 'inductor') {
+      vsNames.push(comp.id);
+    } else if (comp.type === 'regulator') {
+      // Regulator stamps as constrained voltage source at output
       vsNames.push(comp.id);
     }
   }
@@ -349,6 +368,7 @@ function collectNodesNonlinear(
 /**
  * Build the MNA matrix for nonlinear analysis with current voltage estimates.
  * Diodes are stamped using piecewise-linear model based on nodeVoltages.
+ * Op-amps (if provided) are stamped as VCVS constraints.
  */
 function buildMatrixNonlinear(
   components: Component[],
@@ -356,6 +376,7 @@ function buildMatrixNonlinear(
   nodeNames: string[],
   vsNames: string[],
   nodeVoltages: Record<string, number>,
+  opamps?: OpAmp[],
 ): { matrix: number[][]; rhs: number[]; stampLog: StampLogEntry[] } {
   const n = nodeNames.length;
   const m = vsNames.length;
@@ -394,8 +415,19 @@ function buildMatrixNonlinear(
       stampDiode(target, comp, nodeVoltages);
     } else if (comp.type === 'bjt') {
       stampBJT(target, comp, nodeVoltages);
+    } else if (comp.type === 'mosfet') {
+      stampMOSFET(target, comp, nodeVoltages);
+    } else if (comp.type === 'regulator') {
+      stampRegulator(target, comp, nodeVoltages);
     } else {
       stampComponent(target, comp, 'dc');
+    }
+  }
+
+  // Stamp op-amps (separate from Component union since OpAmp has 3 named pins)
+  if (opamps) {
+    for (const oa of opamps) {
+      stampOpAmp(target, oa, nodeVoltages);
     }
   }
 
@@ -414,6 +446,7 @@ function buildMatrixNonlinear(
  * @param groundNode - Ground node name
  * @param maxIter - Maximum Newton-Raphson iterations (default 50)
  * @param tolerance - Convergence tolerance in volts (default 1e-6)
+ * @param opamps - Optional array of OpAmp components (handled separately from Component union)
  * @returns NonlinearSolution with convergence info
  */
 export function solveNonlinear(
@@ -421,8 +454,25 @@ export function solveNonlinear(
   groundNode: string = '0',
   maxIter: number = 50,
   tolerance: number = 1e-6,
+  opamps?: OpAmp[],
 ): NonlinearSolution {
-  const { nodeNames, vsNames } = collectNodesNonlinear(components, groundNode);
+  const { nodeNames, vsNames: baseVsNames } = collectNodesNonlinear(components, groundNode);
+
+  // Collect op-amp nodes and VS entries
+  const vsNames = [...baseVsNames];
+  if (opamps) {
+    for (const oa of opamps) {
+      // Add op-amp pin nodes
+      for (const pin of [oa.invertingInput, oa.nonInvertingInput, oa.output]) {
+        if (pin !== groundNode && !nodeNames.includes(pin)) {
+          nodeNames.push(pin);
+        }
+      }
+      // Each op-amp needs a VS row for its constraint equation
+      vsNames.push(oa.id);
+    }
+  }
+
   const n = nodeNames.length;
 
   // Initial guess: all node voltages = 0
@@ -441,7 +491,7 @@ export function solveNonlinear(
 
     // Build matrix with current voltage estimates
     const { matrix, rhs, stampLog } = buildMatrixNonlinear(
-      components, groundNode, nodeNames, vsNames, voltageEstimates,
+      components, groundNode, nodeNames, vsNames, voltageEstimates, opamps,
     );
     allStampLog = stampLog;
 
@@ -578,6 +628,11 @@ function collectNodesAC(
     // Collect BJT base node (third terminal)
     if ('baseNode' in comp && typeof comp.baseNode === 'string' && comp.baseNode !== groundNode) {
       nodeSet.add(comp.baseNode);
+    }
+
+    // Collect MOSFET gate node (third terminal)
+    if ('gateNode' in comp && typeof comp.gateNode === 'string' && comp.gateNode !== groundNode) {
+      nodeSet.add(comp.gateNode);
     }
 
     // In AC, only voltage sources get extra rows
