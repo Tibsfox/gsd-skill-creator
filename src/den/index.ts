@@ -5,10 +5,11 @@
  * ISA encoder/decoder, filesystem bus operations, health metrics,
  * pruning, the dispatcher agent, the coordinator agent, the configurator
  * agent, the relay agent, the monitor agent, the planner agent,
- * the work intake procedure, the executor agent, and the verifier agent.
+ * the work intake procedure, the executor agent, the verifier agent,
+ * the sentinel agent, and the chipset configuration module.
  *
  * Usage:
- *   import { createDispatcher, createRelay, createPlanner, createExecutor, createVerifier, processIntake, sendMessage, BusConfigSchema } from './den/index.js';
+ *   import { createDispatcher, createRelay, createPlanner, createExecutor, createVerifier, createSentinel, createChipset, processIntake, sendMessage, BusConfigSchema } from './den/index.js';
  */
 
 // Types and schemas
@@ -145,3 +146,25 @@ export {
   Intake, createIntake,
   type IntakeResult, type HygieneCheck, type IntakeConfig,
 } from './intake.js';
+
+// Sentinel
+export {
+  SentinelConfigSchema, FailureTypeSchema, RecoveryActionSchema,
+  RollbackPlanSchema, DamageAssessmentSchema, SentinelEntrySchema,
+  assessFailure, issueHalt, clearHalt, planRollback, assessCrashDamage,
+  appendSentinelEntry, readSentinelLog,
+  Sentinel, createSentinel,
+  type FailureType, type RecoveryAction, type RollbackPlan,
+  type DamageAssessment, type SentinelEntry, type SentinelConfig,
+} from './sentinel.js';
+
+// Chipset
+export {
+  ChipsetConfigSchema, StaffPositionSchema, TopologyDefinitionSchema,
+  DEN_STAFF_POSITIONS,
+  parseChipsetConfig, extractStaffRoster, validateReproducibility,
+  createDefaultChipsetConfig,
+  Chipset, createChipset,
+  type ChipsetConfig, type StaffPosition, type TopologyDefinition,
+  type ReproducibilityResult,
+} from './chipset.js';
