@@ -5,6 +5,7 @@
  * (Motorola) byte order, matching the Amiga's 68000 architecture.
  */
 
+import { describe, it, expect } from 'vitest';
 import { AmigaBinaryReader } from './binary-reader.js';
 
 // ============================================================================

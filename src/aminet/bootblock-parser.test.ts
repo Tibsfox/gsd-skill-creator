@@ -286,7 +286,7 @@ describe('parseBootBlock', () => {
     computeAndWriteChecksum(buf);
 
     // Pass the underlying ArrayBuffer, not the Uint8Array
-    const result = parseBootBlock(buf.buffer);
+    const result = parseBootBlock(buf.buffer as ArrayBuffer);
 
     expect(result.dosType).toBe('FFS');
     expect(result.isValid).toBe(true);
