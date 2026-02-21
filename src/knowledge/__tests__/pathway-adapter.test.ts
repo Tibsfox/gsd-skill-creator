@@ -277,7 +277,7 @@ describe('PathwayAdapter', () => {
       });
 
       const modules = [makeModule('M1', 'Foundations')];
-      const activities = [];
+      const activities: PackActivity[] = [];
       const obs1 = makeAssessmentObs('M1', 40);
       const obs2 = makeAssessmentObs('M1', 45);
       const observations = [obs1, obs2];
@@ -409,7 +409,7 @@ describe('PathwayAdapter', () => {
       });
 
       const modules = [makeModule('M1', 'Foundations')];
-      const activities = [];
+      const activities: PackActivity[] = [];
       const observations = [
         makeAssessmentObs('M1', 70),
         makeAssessmentObs('M1', 75),
@@ -439,7 +439,7 @@ describe('PathwayAdapter', () => {
         makeModule('M2', 'Intermediate'),
         makeModule('M3', 'Advanced'),
       ];
-      const activities = [];
+      const activities: PackActivity[] = [];
       const observations = [
         makeAssessmentObs('M1', 70),
         makeAssessmentObs('M1', 75),
@@ -601,7 +601,7 @@ describe('PathwayAdapter', () => {
       });
 
       const modules = [makeModule('M1', 'Foundations')];
-      const activities = [];
+      const activities: PackActivity[] = [];
       const observations = [
         makeAssessmentObs('M1', 40),
         makeAssessmentObs('M1', 45),
@@ -628,7 +628,7 @@ describe('PathwayAdapter', () => {
         makeModule('M1', 'Foundations'),
         makeModule('M2', 'Intermediate'),
       ];
-      const activities = [];
+      const activities: PackActivity[] = [];
       const observations: LearnerObservation[] = [];
 
       const result = adapter.adapt({
@@ -649,7 +649,7 @@ describe('PathwayAdapter', () => {
       const adapter = new PathwayAdapter();
 
       const modules = [makeModule('M1', 'Foundations')];
-      const activities = [];
+      const activities: PackActivity[] = [];
       const observations = [
         makeAssessmentObs('M1', 95, 'other-learner', 'pack-1'), // different learner
         makeAssessmentObs('M1', 95, 'learner-1', 'other-pack'), // different pack
@@ -683,7 +683,7 @@ describe('PathwayAdapter', () => {
       });
 
       const modules = [makeModule('M1', 'Foundations')];
-      const activities = [];
+      const activities: PackActivity[] = [];
       const obs1 = makeAssessmentObs('M1', 40);
       const obs2 = makeAssessmentObs('M1', 45);
       const observations = [obs1, obs2];
@@ -708,7 +708,7 @@ describe('PathwayAdapter', () => {
 
       // Many observations = higher confidence
       const modules = [makeModule('M1', 'Foundations')];
-      const activities = [];
+      const activities: PackActivity[] = [];
       const observations = [
         makeAssessmentObs('M1', 40),
         makeAssessmentObs('M1', 45),
@@ -772,7 +772,7 @@ describe('PathwayAdapter', () => {
       const adapter = new PathwayAdapter();
 
       const modules = [makeModule('M1', 'Foundations')];
-      const activities = [];
+      const activities: PackActivity[] = [];
       const observations = [
         makeAssessmentObs('M1', 40),
         makeAssessmentObs('M1', 45),
@@ -794,7 +794,7 @@ describe('PathwayAdapter', () => {
       const adapter = new PathwayAdapter();
 
       const modules = [makeModule('M1', 'Foundations')];
-      const activities = [];
+      const activities: PackActivity[] = [];
       const observations = [
         makeAssessmentObs('M1', 40),
         makeAssessmentObs('M1', 45),
