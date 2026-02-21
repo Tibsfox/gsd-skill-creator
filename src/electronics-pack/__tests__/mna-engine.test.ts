@@ -14,6 +14,8 @@ import {
   buildMatrix,
   solve,
   dcAnalysis,
+  solveNonlinear,
+  acAnalysis,
 } from '../simulator/mna-engine';
 import {
   stampResistor,
@@ -22,14 +24,16 @@ import {
   stampVoltageSource,
   stampCurrentSource,
   stampComponent,
+  stampDiode,
 } from '../simulator/components';
-import type { StampLogEntry, MNASolution } from '../simulator/mna-engine';
+import type { StampLogEntry, MNASolution, ACAnalysisPoint } from '../simulator/mna-engine';
 import type {
   Resistor,
   Capacitor,
   Inductor,
   VoltageSource,
   CurrentSource,
+  Diode,
   Component,
 } from '../simulator/components';
 
@@ -55,6 +59,10 @@ function voltageSource(id: string, nPlus: string, nMinus: string, v: number): Vo
 
 function currentSource(id: string, nFrom: string, nTo: string, i: number): CurrentSource {
   return { id, type: 'current-source', nodes: [nFrom, nTo], current: i };
+}
+
+function diode(id: string, anode: string, cathode: string): Diode {
+  return { id, type: 'diode', nodes: [anode, cathode], saturationCurrent: 1e-12, thermalVoltage: 0.026 };
 }
 
 // ============================================================================
@@ -497,5 +505,293 @@ describe('Stamp Log (SIM-08)', () => {
     const result = buildMatrix(components, '0');
     const l1Entries = result.stampLog.filter((e) => e.component === 'L1');
     expect(l1Entries.length).toBeGreaterThanOrEqual(1);
+  });
+});
+
+// ============================================================================
+// Group 6: Diode Model / Newton-Raphson (SIM-03)
+// ============================================================================
+
+describe('Diode Model / Newton-Raphson (SIM-03)', () => {
+  it('forward-biased diode (V > 0.6V) uses R_on ~10 Ohm equivalent', () => {
+    // Simple circuit: 5V source, 1k resistor, diode to ground
+    // The diode forward-biased should behave roughly as 10 Ohm
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 5),
+      resistor('R1', 'in', 'out', 1000),
+      diode('D1', 'out', '0'),
+    ];
+    const result = solveNonlinear(components, '0');
+    expect(result.converged).toBe(true);
+    // With R_on=10 Ohm, Vout ~= 5 * 10/(1000+10) + 0.6 threshold ~= 0.65V
+    // Current ~= (5 - 0.65) / 1000 ~= 4.35mA
+    const outNode = result.nodeVoltages.find((nv) => nv.node === 'out');
+    expect(outNode).toBeDefined();
+    // Diode drop should be roughly 0.6-0.7V
+    expect(outNode!.voltage).toBeGreaterThan(0.5);
+    expect(outNode!.voltage).toBeLessThan(1.0);
+  });
+
+  it('reverse-biased diode (V < 0.6V) uses R_off ~10M Ohm equivalent', () => {
+    // Diode reverse-biased: cathode at higher potential than anode
+    // 5V source, diode reversed, 1k load to ground
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 5),
+      resistor('R1', 'in', 'out', 1000),
+      diode('D1', '0', 'out'), // reversed: anode=ground, cathode=out
+    ];
+    const result = solveNonlinear(components, '0');
+    expect(result.converged).toBe(true);
+    // With R_off=10M Ohm, virtually no current flows
+    // Vout should be very close to 5V (no load current)
+    const outNode = result.nodeVoltages.find((nv) => nv.node === 'out');
+    expect(outNode).toBeDefined();
+    expect(outNode!.voltage).toBeGreaterThan(4.9);
+  });
+
+  it('simple diode circuit: 5V, 1k, diode -- diode drop ~0.6-0.7V, current ~4.35mA', () => {
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 5),
+      resistor('R1', 'in', 'out', 1000),
+      diode('D1', 'out', '0'),
+    ];
+    const result = solveNonlinear(components, '0');
+    expect(result.converged).toBe(true);
+    const outNode = result.nodeVoltages.find((nv) => nv.node === 'out');
+    expect(outNode).toBeDefined();
+    // Diode drop ~0.65V
+    expect(outNode!.voltage).toBeCloseTo(0.65, 0);
+    // Current through R1: (5 - Vout) / 1000
+    const current = (5 - outNode!.voltage) / 1000;
+    expect(current).toBeCloseTo(0.00435, 3);
+  });
+
+  it('Newton-Raphson converges within 50 iterations for forward-biased diode', () => {
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 5),
+      resistor('R1', 'in', 'out', 1000),
+      diode('D1', 'out', '0'),
+    ];
+    const result = solveNonlinear(components, '0', 50, 1e-6);
+    expect(result.converged).toBe(true);
+    expect(result.iterations).toBeLessThanOrEqual(50);
+  });
+
+  it('Newton-Raphson converges within 50 iterations for reverse-biased diode', () => {
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 5),
+      resistor('R1', 'in', 'out', 1000),
+      diode('D1', '0', 'out'), // reversed
+    ];
+    const result = solveNonlinear(components, '0', 50, 1e-6);
+    expect(result.converged).toBe(true);
+    expect(result.iterations).toBeLessThanOrEqual(50);
+  });
+
+  it('convergence tolerance is 1uV (1e-6 V) between iterations', () => {
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 5),
+      resistor('R1', 'in', 'out', 1000),
+      diode('D1', 'out', '0'),
+    ];
+    // With tight tolerance, result should be precise
+    const result = solveNonlinear(components, '0', 50, 1e-6);
+    expect(result.converged).toBe(true);
+    // Run again with same tolerance, verify same answer
+    const result2 = solveNonlinear(components, '0', 50, 1e-6);
+    const v1 = result.nodeVoltages.find((nv) => nv.node === 'out')!.voltage;
+    const v2 = result2.nodeVoltages.find((nv) => nv.node === 'out')!.voltage;
+    expect(Math.abs(v1 - v2)).toBeLessThan(1e-6);
+  });
+
+  it('diode stamp log shows piecewise-linear region selection', () => {
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 5),
+      resistor('R1', 'in', 'out', 1000),
+      diode('D1', 'out', '0'),
+    ];
+    const result = solveNonlinear(components, '0');
+    expect(result.converged).toBe(true);
+    // The stamp log should mention forward-biased or reverse-biased
+    const diodeEntries = result.stampLog.filter((e) => e.component === 'D1');
+    expect(diodeEntries.length).toBeGreaterThan(0);
+    const hasBiasInfo = diodeEntries.some(
+      (e) => e.explanation.includes('forward') || e.explanation.includes('reverse')
+    );
+    expect(hasBiasInfo).toBe(true);
+  });
+});
+
+// ============================================================================
+// Group 7: AC Analysis (SIM-06)
+// ============================================================================
+
+describe('AC Analysis (SIM-06)', () => {
+  it('RC low-pass filter at f_c (159.15Hz) has magnitude -3dB (0.707 of DC)', () => {
+    // RC LPF: R=1k, C=1uF, f_c = 1/(2*pi*R*C) = 159.15 Hz
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 1),
+      resistor('R1', 'in', 'out', 1000),
+      capacitor('C1', 'out', '0', 1e-6),
+    ];
+    const fc = 1 / (2 * Math.PI * 1000 * 1e-6); // ~159.15 Hz
+    const result = acAnalysis(components, fc * 0.99, fc * 1.01, 100, '0');
+    expect(result.length).toBeGreaterThan(0);
+    // Find the point closest to f_c
+    const atFc = result.reduce((closest, point) =>
+      Math.abs(point.frequency - fc) < Math.abs(closest.frequency - fc) ? point : closest
+    );
+    // Magnitude at f_c should be approximately -3dB
+    const magOut = atFc.magnitudes['out'];
+    expect(magOut).toBeDefined();
+    expect(magOut).toBeCloseTo(-3, 0); // -3dB within 1dB
+  });
+
+  it('RC low-pass filter: magnitude approaches 0dB at f << f_c', () => {
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 1),
+      resistor('R1', 'in', 'out', 1000),
+      capacitor('C1', 'out', '0', 1e-6),
+    ];
+    // f << f_c: use 1 Hz (f_c ~= 159 Hz)
+    const result = acAnalysis(components, 1, 2, 10, '0');
+    expect(result.length).toBeGreaterThan(0);
+    const magOut = result[0].magnitudes['out'];
+    expect(magOut).toBeDefined();
+    // Should be close to 0dB (full pass)
+    expect(magOut).toBeCloseTo(0, 0); // 0dB within 1dB
+  });
+
+  it('RC low-pass filter: magnitude rolls off at -20dB/decade at f >> f_c', () => {
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 1),
+      resistor('R1', 'in', 'out', 1000),
+      capacitor('C1', 'out', '0', 1e-6),
+    ];
+    // f >> f_c: compare 10kHz and 100kHz (both well above f_c ~= 159 Hz)
+    const result = acAnalysis(components, 10000, 100000, 10, '0');
+    expect(result.length).toBeGreaterThanOrEqual(2);
+    const at10k = result.reduce((closest, point) =>
+      Math.abs(point.frequency - 10000) < Math.abs(closest.frequency - 10000) ? point : closest
+    );
+    const at100k = result.reduce((closest, point) =>
+      Math.abs(point.frequency - 100000) < Math.abs(closest.frequency - 100000) ? point : closest
+    );
+    // Difference should be ~20dB per decade
+    const magDiff = at10k.magnitudes['out'] - at100k.magnitudes['out'];
+    expect(magDiff).toBeCloseTo(20, 1); // ~20dB per decade
+  });
+
+  it('RC high-pass filter: at f_c, magnitude is -3dB', () => {
+    // RC HPF: C in series, R to ground
+    // V1 -> C1 -> out -> R1 -> ground
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 1),
+      capacitor('C1', 'in', 'out', 1e-6),
+      resistor('R1', 'out', '0', 1000),
+    ];
+    const fc = 1 / (2 * Math.PI * 1000 * 1e-6); // ~159.15 Hz
+    const result = acAnalysis(components, fc * 0.99, fc * 1.01, 100, '0');
+    expect(result.length).toBeGreaterThan(0);
+    const atFc = result.reduce((closest, point) =>
+      Math.abs(point.frequency - fc) < Math.abs(closest.frequency - fc) ? point : closest
+    );
+    const magOut = atFc.magnitudes['out'];
+    expect(magOut).toBeDefined();
+    expect(magOut).toBeCloseTo(-3, 0); // -3dB within 1dB
+  });
+
+  it('AC analysis returns array of { frequency, magnitudes, phases } objects', () => {
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 1),
+      resistor('R1', 'in', 'out', 1000),
+      capacitor('C1', 'out', '0', 1e-6),
+    ];
+    const result = acAnalysis(components, 100, 1000, 10, '0');
+    expect(Array.isArray(result)).toBe(true);
+    expect(result.length).toBeGreaterThan(0);
+    for (const point of result) {
+      expect(point).toHaveProperty('frequency');
+      expect(point).toHaveProperty('magnitudes');
+      expect(point).toHaveProperty('phases');
+      expect(typeof point.frequency).toBe('number');
+      expect(typeof point.magnitudes).toBe('object');
+      expect(typeof point.phases).toBe('object');
+    }
+  });
+
+  it('phase at f_c of RC LPF is approximately -45 degrees', () => {
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 1),
+      resistor('R1', 'in', 'out', 1000),
+      capacitor('C1', 'out', '0', 1e-6),
+    ];
+    const fc = 1 / (2 * Math.PI * 1000 * 1e-6);
+    const result = acAnalysis(components, fc * 0.99, fc * 1.01, 100, '0');
+    const atFc = result.reduce((closest, point) =>
+      Math.abs(point.frequency - fc) < Math.abs(closest.frequency - fc) ? point : closest
+    );
+    const phaseOut = atFc.phases['out'];
+    expect(phaseOut).toBeDefined();
+    expect(phaseOut).toBeCloseTo(-45, 2); // -45 degrees within 2 degrees
+  });
+
+  it('AC analysis with voltage source produces correct complex node voltages', () => {
+    // Simple circuit: V1(1V) -> R1(1k) -> ground
+    // At any frequency, node voltage at 'in' should be exactly 1V (0dB)
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 1),
+      resistor('R1', 'in', '0', 1000),
+    ];
+    const result = acAnalysis(components, 100, 1000, 10, '0');
+    expect(result.length).toBeGreaterThan(0);
+    for (const point of result) {
+      const magIn = point.magnitudes['in'];
+      expect(magIn).toBeDefined();
+      // Source node should always be at 0dB (1V magnitude)
+      expect(magIn).toBeCloseTo(0, 1);
+    }
+  });
+
+  it('AC analysis uses complex impedances: Z_C = 1/(j*2*pi*f*C), Z_L = j*2*pi*f*L', () => {
+    // RL circuit: V1 -> R1(1k) -> L1(100mH) -> ground
+    // At f_c = R/(2*pi*L) = 1000/(2*pi*0.1) = 1591.5 Hz, magnitude is -3dB
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 1),
+      resistor('R1', 'in', 'out', 1000),
+      inductor('L1', 'out', '0', 0.1),
+    ];
+    const fc = 1000 / (2 * Math.PI * 0.1); // ~1591.5 Hz
+    const result = acAnalysis(components, fc * 0.99, fc * 1.01, 100, '0');
+    expect(result.length).toBeGreaterThan(0);
+    const atFc = result.reduce((closest, point) =>
+      Math.abs(point.frequency - fc) < Math.abs(closest.frequency - fc) ? point : closest
+    );
+    const magOut = atFc.magnitudes['out'];
+    expect(magOut).toBeDefined();
+    // At f_c, RL divider magnitude should be -3dB
+    expect(magOut).toBeCloseTo(-3, 0);
+  });
+
+  it('frequency sweep with logarithmic spacing (10 points per decade from 1Hz to 1MHz)', () => {
+    const components: Component[] = [
+      voltageSource('V1', 'in', '0', 1),
+      resistor('R1', 'in', 'out', 1000),
+      capacitor('C1', 'out', '0', 1e-6),
+    ];
+    // 1 Hz to 1 MHz = 6 decades, 10 points per decade = 60 points + endpoints
+    const result = acAnalysis(components, 1, 1e6, 10, '0');
+    // Should have approximately 61 points (6 decades * 10 + 1)
+    expect(result.length).toBeGreaterThanOrEqual(55);
+    expect(result.length).toBeLessThanOrEqual(70);
+    // Frequencies should be logarithmically spaced
+    expect(result[0].frequency).toBeCloseTo(1, 0);
+    expect(result[result.length - 1].frequency).toBeCloseTo(1e6, -3);
+    // Check log spacing: ratio between consecutive points should be roughly constant
+    if (result.length >= 3) {
+      const ratio1 = result[1].frequency / result[0].frequency;
+      const ratio2 = result[2].frequency / result[1].frequency;
+      expect(ratio1).toBeCloseTo(ratio2, 1);
+    }
   });
 });
