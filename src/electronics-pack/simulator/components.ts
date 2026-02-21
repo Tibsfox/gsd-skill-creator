@@ -582,14 +582,15 @@ export function stampDiode(
   }
 
   // For forward-biased: add current source to model the 0.6V threshold
-  // I_offset = V_threshold / R_on, flowing from cathode to anode
+  // The diode current is I = G*(Va - Vc - Vth), so the -G*Vth constant
+  // moves to the RHS: rhs[anode] += G*Vth, rhs[cathode] -= G*Vth
   if (isForward) {
-    const iOffset = DIODE_V_THRESHOLD / R;
+    const iOffset = DIODE_V_THRESHOLD * g;
     if (ni >= 0) {
-      target.rhs[ni] -= iOffset;
+      target.rhs[ni] += iOffset;
     }
     if (nj >= 0) {
-      target.rhs[nj] += iOffset;
+      target.rhs[nj] -= iOffset;
     }
     target.stampLog.push({
       component: diode.id,
