@@ -8,6 +8,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { KnowledgeEventBridge, KNOWLEDGE_EVENT_TYPES } from '../event-bridge.js';
+import type { LearnerObservation } from '../observation-types.js';
 import { EventEnvelopeSchema } from '../../amiga/message-envelope.js';
 
 // ============================================================================
@@ -20,21 +21,12 @@ import { EventEnvelopeSchema } from '../../amiga/message-envelope.js';
  * in the parallel 254-01 plan.
  */
 
-interface TestObservation {
-  id: string;
-  timestamp: string;
-  learnerId: string;
-  packId: string;
-  kind: string;
-  [key: string]: unknown;
-}
-
-const createActivityCompletion = (): TestObservation => ({
+const createActivityCompletion = (): LearnerObservation => ({
   id: 'obs-ac-001',
   timestamp: new Date().toISOString(),
   learnerId: 'learner-001',
   packId: 'MATH-101',
-  kind: 'activity_completion',
+  kind: 'activity_completion' as const,
   activityId: 'activity-m1-a1',
   moduleId: 'MATH-M1',
   durationMinutes: 25,
@@ -42,55 +34,55 @@ const createActivityCompletion = (): TestObservation => ({
   score: 85,
 });
 
-const createAssessmentResult = (): TestObservation => ({
+const createAssessmentResult = (): LearnerObservation => ({
   id: 'obs-ar-001',
   timestamp: new Date().toISOString(),
   learnerId: 'learner-001',
   packId: 'MATH-101',
-  kind: 'assessment_result',
+  kind: 'assessment_result' as const,
   moduleId: 'MATH-M1',
-  rubricLevel: 'proficient',
+  rubricLevel: 'proficient' as const,
   score: 78,
   timeSpentMinutes: 15,
   strengths: ['pattern recognition'],
   areasForGrowth: ['symbolic notation'],
 });
 
-const createTimeSpent = (): TestObservation => ({
+const createTimeSpent = (): LearnerObservation => ({
   id: 'obs-ts-001',
   timestamp: new Date().toISOString(),
   learnerId: 'learner-001',
   packId: 'MATH-101',
-  kind: 'time_spent',
+  kind: 'time_spent' as const,
   moduleId: 'MATH-M1',
   activityId: 'activity-m1-a1',
   minutes: 45,
   sessionDate: '2026-02-20',
 });
 
-const createModuleStart = (): TestObservation => ({
-  id: 'obs-ms-001',
-  timestamp: new Date().toISOString(),
-  learnerId: 'learner-001',
-  packId: 'MATH-101',
-  kind: 'module_start',
-  moduleId: 'MATH-M1',
-});
+const createModuleStart = (): LearnerObservation =>
+  ({
+    id: 'obs-ms-001',
+    timestamp: new Date().toISOString(),
+    learnerId: 'learner-001',
+    packId: 'MATH-101',
+    kind: 'module_start',
+  }) as LearnerObservation;
 
-const createPackStart = (): TestObservation => ({
+const createPackStart = (): LearnerObservation => ({
   id: 'obs-ps-001',
   timestamp: new Date().toISOString(),
   learnerId: 'learner-001',
   packId: 'MATH-101',
-  kind: 'pack_start',
+  kind: 'pack_start' as const,
 });
 
-const createPackComplete = (): TestObservation => ({
+const createPackComplete = (): LearnerObservation => ({
   id: 'obs-pc-001',
   timestamp: new Date().toISOString(),
   learnerId: 'learner-001',
   packId: 'MATH-101',
-  kind: 'pack_complete',
+  kind: 'pack_complete' as const,
 });
 
 // ============================================================================

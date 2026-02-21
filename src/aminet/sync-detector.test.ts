@@ -6,6 +6,7 @@
  * states, empty INDEX, and not-mirrored entries.
  */
 
+import { describe, it, expect } from 'vitest';
 import type { MirrorState, MirrorEntry, AminetPackage } from './types.js';
 import { MirrorEntrySchema } from './types.js';
 import {

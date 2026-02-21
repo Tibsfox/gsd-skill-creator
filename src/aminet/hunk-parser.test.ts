@@ -6,6 +6,7 @@
  * All values are big-endian, matching the Amiga 68000 architecture.
  */
 
+import { describe, it, expect } from 'vitest';
 import { parseHunkFile } from './hunk-parser.js';
 import {
   HUNK_HEADER,
@@ -318,7 +319,7 @@ describe('parseHunkFile', () => {
 
     it('handles ArrayBuffer input as well as Uint8Array', () => {
       const data = buildMinimalHunk();
-      const result = parseHunkFile(data.buffer);
+      const result = parseHunkFile(data.buffer as ArrayBuffer);
       expect(result.magic).toBe(HUNK_HEADER);
     });
   });
