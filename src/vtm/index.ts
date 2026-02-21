@@ -6,12 +6,14 @@
  * wave execution plans, test plans, milestone specs, and mission packages.
  *
  * Also provides the vision document parser and dependency extractor for
- * converting raw markdown into typed VisionDocument objects, plus the
+ * converting raw markdown into typed VisionDocument objects, the
  * validator, quality checker, and archetype classifier for post-parse
- * document analysis.
+ * document analysis, and the research compiler for transforming vision
+ * documents into structured research references.
  *
  * @module vtm
  */
 export * from './types.js';
 export * from './vision-parser.js';
 export * from './vision-validator.js';
+export * from './research-compiler.js';
