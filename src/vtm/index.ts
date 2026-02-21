@@ -8,8 +8,9 @@
  * Also provides the vision document parser and dependency extractor for
  * converting raw markdown into typed VisionDocument objects, the
  * validator, quality checker, and archetype classifier for post-parse
- * document analysis, and the research compiler for transforming vision
- * documents into structured research references.
+ * document analysis, the research compiler for transforming vision
+ * documents into structured research references, and research utilities
+ * for knowledge chunking, safety extraction, and necessity detection.
  *
  * @module vtm
  */
@@ -17,3 +18,4 @@ export * from './types.js';
 export * from './vision-parser.js';
 export * from './vision-validator.js';
 export * from './research-compiler.js';
+export * from './research-utils.js';
