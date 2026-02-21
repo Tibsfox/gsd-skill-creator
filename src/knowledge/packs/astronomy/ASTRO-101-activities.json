@@ -1,0 +1,219 @@
+[
+  {
+    "id": "ASTRO-101-A01",
+    "name": "Constellation Star Chart Scavenger Hunt",
+    "module_id": "ASTRO-101-M1",
+    "grade_range": ["2", "3", "4", "5", "6"],
+    "duration_minutes": 45,
+    "description": "Using printed star charts or Stellarium, learners locate 5-10 major constellations visible from their location at a specific time. They record the constellations they find, sketch the star patterns, and note which constellations are highest/lowest in the sky. This activity develops systematic observation skills and familiarity with the major constellations.",
+    "materials": ["Printed star charts or access to Stellarium", "Clipboard and paper", "Pencil or colored pencils", "Red flashlight (optional, for night observation)", "Clear night sky or computer with planetarium software"],
+    "learning_objectives": [
+      "Locate major constellations using star charts",
+      "Distinguish constellations from random star groupings",
+      "Understand relative positions of constellations in the sky",
+      "Develop systematic observation strategies"
+    ],
+    "variations": [
+      "Summer vs. winter constellations: compare which constellations are visible in different seasons",
+      "Difficulty levels: younger students locate 5 bright constellations; older students locate 10+ and track Polaris",
+      "Urban adaptation: use Stellarium to identify constellations despite light pollution",
+      "Challenge version: find constellations by date/time without looking at charts first"
+    ]
+  },
+  {
+    "id": "ASTRO-101-A02",
+    "name": "Build a Planisphere",
+    "module_id": "ASTRO-101-M1",
+    "grade_range": ["4", "5", "6", "7", "8"],
+    "duration_minutes": 60,
+    "description": "Learners construct a planisphere (rotating sky map) using printed templates. They assemble the map wheel showing constellations and the frame showing latitude/date. By rotating the wheel to the current date and time, they can see exactly what constellations are visible from their location. This becomes a powerful tool for ongoing sky observation.",
+    "materials": ["Planisphere template (printed or downloaded)", "Two brass fasteners or paper brads", "Scissors", "Clear plastic sheet (optional, for durability)"],
+    "learning_objectives": [
+      "Understand how planispheres encode sky visibility at different dates and times",
+      "Use a planisphere to predict what's visible tonight",
+      "Recognize that different latitudes see different skies",
+      "Develop independent star-finding skills"
+    ],
+    "variations": [
+      "Customize for different latitudes: create planispheres for different locations around the world",
+      "Digital planisphere: use Stellarium to explore how the sky changes at different dates/times/locations",
+      "Comparison: observe with the physical planisphere, then verify with actual observation or Stellarium"
+    ]
+  },
+  {
+    "id": "ASTRO-101-A03",
+    "name": "Moon Phase Observation Journal (28 days)",
+    "module_id": "ASTRO-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 10,
+    "description": "Over a lunar month (approximately 28-29 days), learners observe and record the Moon's phase and position in the sky each night (or every few nights). They sketch the Moon's shape, note its location relative to stars/planets, estimate its brightness, and record the time of observation. By the end, they see the complete cycle and understand Moon phases through direct observation rather than diagrams.",
+    "materials": ["Observation notebook or journal", "Pencil and colored pencils", "Binoculars (optional)", "Moon phase wheel or calendar", "Clear skies (or Stellarium for cloudy nights)"],
+    "learning_objectives": [
+      "Observe and record systematic changes in the Moon's appearance",
+      "Understand the 28-day lunar cycle",
+      "Predict upcoming Moon phases based on observations",
+      "Develop patience and persistence in long-term investigation",
+      "Distinguish observation (what the Moon looks like) from theory (why it looks that way)"
+    ],
+    "variations": [
+      "Enhanced observation: note lunar features (craters, seas) visible on different nights; craters are most visible near the terminator (edge between light and dark)",
+      "Measurement component: estimate Moon diameter using hand-span angle measurement",
+      "Comparison: sketch the Moon alongside predictions from Moon phase wheels to check accuracy",
+      "Mythology connection: research how different cultures interpreted Moon phases and seasonal changes"
+    ]
+  },
+  {
+    "id": "ASTRO-101-A04",
+    "name": "Scale Model Solar Eclipse",
+    "module_id": "ASTRO-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7"],
+    "duration_minutes": 45,
+    "description": "Using a lamp (Sun), basketball or large ball (Moon), and a smaller ball or head (Earth), learners construct a scale model of a solar eclipse. They position the Moon in front of the Sun from Earth's perspective, observing the shadow cast by the Moon. They explore how the Moon's shadow creates a total eclipse (where the Sun is completely blocked) and partial eclipses (where the Moon is off to the side). They then understand why solar eclipses don't happen every month — the Moon's orbital plane is tilted relative to Earth's orbital plane.",
+    "materials": ["Lamp or overhead light (Sun)", "Basketball or large ball (Moon)", "Small ball or head model (Earth)", "Dark room", "Shadow screen or white surface", "Meter stick or measuring tape"],
+    "learning_objectives": [
+      "Understand the geometry of solar eclipses",
+      "Explain why solar eclipses don't occur every month",
+      "Recognize that shadow size depends on distance and object size",
+      "Predict eclipse visibility from different locations",
+      "Understand that the Sun and Moon have similar angular sizes in our sky (coincidence!)"
+    ],
+    "variations": [
+      "Lunar eclipse model: add another light to model Earth's shadow falling on the Moon",
+      "Partial eclipse: move the Moon off-center to show partial eclipse geometry",
+      "Duration exploration: how fast does the Moon's shadow move across Earth? How long is totality?",
+      "Total eclipse path: on a globe, trace where totality is visible from your model setup"
+    ]
+  },
+  {
+    "id": "ASTRO-101-A05",
+    "name": "Scale Model Solar System Walk",
+    "module_id": "ASTRO-101-M3",
+    "grade_range": ["4", "5", "6", "7", "8", "9"],
+    "duration_minutes": 60,
+    "description": "Using a long outdoor space (school field, park path, or street), learners create a scale model of the solar system using a chosen scale (e.g., 1 inch = 10 million km, or 1 pace = 100 million km). They position the Sun, then place each planet at its correct distance. The vastness of the solar system becomes strikingly apparent: the Sun and inner planets are clustered in a small region, while the outer planets are spread across enormous distances. This activity viscerally teaches scale.",
+    "materials": ["Meter stick or measuring tape", "Chalk or markers", "Index cards or signs", "Open space 100+ meters long (or more for true scale)", "Calculator", "Scale model reference (could use Stellarium to look up distances)"],
+    "learning_objectives": [
+      "Grasp the vast scales of the solar system",
+      "Understand why the inner vs. outer solar system look so different",
+      "Predict relative distances using scale reasoning",
+      "Recognize that planets are tiny compared to their orbital distances",
+      "Develop intuition about how far apart solar system objects really are"
+    ],
+    "variations": [
+      "Comparative size: include relative sizes of planets (not just distances); Jupiter is 11x Earth's diameter",
+      "Different scales: create two versions with different scales to compare",
+      "Oort Cloud extension: how far would the Oort Cloud be at your scale? (It would extend miles beyond your walking path!)",
+      "Speed component: calculate orbital speeds and travel times to show why space exploration takes time"
+    ]
+  },
+  {
+    "id": "ASTRO-101-A06",
+    "name": "Mars Rover Landing Site Analysis",
+    "module_id": "ASTRO-101-M3",
+    "grade_range": ["6", "7", "8", "9", "10"],
+    "duration_minutes": 90,
+    "description": "Using real images from NASA Mars rovers (Curiosity, Perseverance) or the Mars Reconnaissance Orbiter, learners analyze landing sites and geological features. They examine images showing rocks, dunes, layered geology, and evidence of water. They answer questions: What does this terrain tell us about Mars' geology? Why would scientists choose this landing site? What rock types do you observe? Learners become planetary geologists reasoning from visual evidence.",
+    "materials": ["Real NASA Mars rover images (freely available online)", "Printed images or access to NASA's website", "Magnifying glass (optional)", "Colored pencils for annotation", "Guide questions about geological interpretation"],
+    "learning_objectives": [
+      "Interpret geological features in planetary images",
+      "Reason about planetary history from surface evidence",
+      "Understand why scientists choose specific landing sites",
+      "Recognize that geology on other worlds follows the same principles as Earth",
+      "Develop skills in visual evidence interpretation"
+    ],
+    "variations": [
+      "Before/after: compare old and new images from the same rover location to see geological change",
+      "Rock identification: use color, texture, and layering to classify rocks observed by rovers",
+      "Mission planning: 'design' a rover path given constraints (power, wheel durability, scientific interest)",
+      "Other worlds: repeat analysis with images from the Moon, Europa, Titan, or other bodies"
+    ]
+  },
+  {
+    "id": "ASTRO-101-A07",
+    "name": "Spectroscopy with Diffraction Gratings",
+    "module_id": "ASTRO-101-M4",
+    "grade_range": ["7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Using diffraction grating cards (inexpensive, widely available), learners observe the light spectrum from different sources: incandescent bulbs, fluorescent lights, LED lights, and if possible, a street lamp or neon sign. They sketch the spectra they observe, noting bright emission lines (where light is present) and dark absorption lines (where light is missing). They learn that different light sources have distinctive spectral patterns — a fingerprint that reveals what elements are emitting or absorbing light.",
+    "materials": ["Diffraction grating cards or sheets (can order cheaply online)", "Various light sources: incandescent bulb, fluorescent light, LED, neon (if available)", "Dark room (or shaded space)", "Notebook or paper for sketching", "Optional: hand spectroscope for easier observation"],
+    "learning_objectives": [
+      "Observe that different light sources produce different spectra",
+      "Understand that spectral patterns are unique to elements",
+      "Begin to see how astronomers determine stellar composition from light",
+      "Recognize emission vs. absorption lines",
+      "Understand that 'color' is more complex than what our eyes perceive"
+    ],
+    "variations": [
+      "Element identification: given a mystery light source, use reference spectra to identify elements",
+      "Temperature correlation: compare spectra of light sources at different temperatures (hotter sources show different line patterns)",
+      "Sunlight spectrum: observe sunlight through diffraction gratings to see the Sun's absorption lines",
+      "Advanced: relate observed spectra to hydrogen, helium, and other elements using reference data"
+    ]
+  },
+  {
+    "id": "ASTRO-101-A08",
+    "name": "HR Diagram Card Sort",
+    "module_id": "ASTRO-101-M4",
+    "grade_range": ["8", "9", "10", "11", "12"],
+    "duration_minutes": 60,
+    "description": "Learners receive cards describing individual stars with properties: surface temperature (color), luminosity (brightness), and spectral type. They arrange the cards on a large version of the Hertzsprung-Russell (HR) diagram, placing stars in their correct positions. As they place stars, patterns emerge: main sequence stars form a diagonal line; red giants cluster in the upper right; white dwarfs in the lower left. They then learn to read the HR diagram as a tool for understanding stellar properties and stellar evolution.",
+    "materials": ["HR diagram template (printed or drawn on poster board)", "Cards with star properties", "Tape or reusable adhesive", "Colored pencils to mark star types", "Reference guide matching star properties to HR diagram positions"],
+    "learning_objectives": [
+      "Understand how the HR diagram organizes stellar properties",
+      "Recognize stellar populations: main sequence, giants, dwarfs",
+      "Predict stellar properties from HR diagram position",
+      "Understand why stars move through the HR diagram as they evolve",
+      "Develop visual reasoning about abstract (non-pictorial) data displays"
+    ],
+    "variations": [
+      "Evolution tracks: draw arrows showing how stars move through the HR diagram as they age",
+      "Brightness vs. distance: compare apparent magnitude with absolute magnitude to understand distance",
+      "Spectral classification: use observed spectra to place stars on the HR diagram",
+      "Modern data: plot actual star positions from real stellar surveys"
+    ]
+  },
+  {
+    "id": "ASTRO-101-A09",
+    "name": "Expanding Universe Balloon Model",
+    "module_id": "ASTRO-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10", "11"],
+    "duration_minutes": 45,
+    "description": "On a balloon, learners draw dots representing galaxies and lines connecting them representing distances. As they inflate the balloon, all distances increase, but there is no 'center of expansion' — observers on any dot see all other dots moving away. This simple model captures the essence of cosmic expansion: the universe isn't expanding into space; space itself is expanding. The activity helps learners understand Hubble's law and why the Big Bang happened everywhere, not at one point.",
+    "materials": ["Balloon", "Marker (permanent or balloon-safe)", "Measuring ruler or string", "Tape measure", "Optional: different colored markers for different galaxy types"],
+    "learning_objectives": [
+      "Understand cosmic expansion without a center",
+      "Grasp Hubble's law: farther objects move away faster",
+      "Recognize that different observers in the universe see similar expansion",
+      "Understand that the Big Bang happened everywhere, not at a point",
+      "Develop metaphorical reasoning about abstract cosmological concepts"
+    ],
+    "variations": [
+      "Hubble constant calculation: measure how galaxy separations change with inflation; calculate 'Hubble constant' for the balloon",
+      "Lookback time: note that galaxies at different distances show different ages of expansion",
+      "Flatness and curvature: discuss whether expansion continues forever or reverses (flat vs. closed universe)",
+      "Horizon analogy: beyond a certain distance, do we see galaxies moving away fast enough that light never reaches us?"
+    ]
+  },
+  {
+    "id": "ASTRO-101-A10",
+    "name": "Cosmic Timeline Mural",
+    "module_id": "ASTRO-101-M5",
+    "grade_range": ["7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 120,
+    "description": "Learners create a visual timeline of the universe from the Big Bang (13.8 billion years ago) to today, marked on a long paper strip or hallway wall. They place key events: Big Bang, first stars (380 million years), galaxies form, Milky Way forms (13 billion years ago), Solar system forms (4.6 billion years ago), life on Earth (3.8 billion years ago), dinosaurs, humans (a tiny fraction of a percent of cosmic time). The logarithmic scale becomes apparent: the universe spends billions of years as 'just hydrogen,' then galaxies and stars form, then complex structures emerge. Humans are a recent addition.",
+    "materials": ["Long paper strip or hallway wall space (20+ meters)", "Markers or colored tape", "Timeline reference showing key cosmic events", "Ruler or measuring tape", "Optional: images of astronomical objects at different times", "Optional: colored tape or string to mark time periods"],
+    "learning_objectives": [
+      "Understand the vast timescale of cosmic history",
+      "Recognize that stars and galaxies took billions of years to form",
+      "Grasp human insignificance on cosmic timescales",
+      "Connect cosmology to Earth history and biology",
+      "Develop logarithmic thinking about time"
+    ],
+    "variations": [
+      "Detail-rich: add more events (first galaxies, reionization, metal enrichment, etc.)",
+      "Comparative scales: show on one timeline Earth history, biological history, human history side-by-side to show compression",
+      "Zooming in: once the timeline is complete, zoom into the last 4.6 billion years to show solar system formation in detail",
+      "Personal reflection: where does your lifetime fit on this timeline? Your city? Your country?"
+    ]
+  }
+]

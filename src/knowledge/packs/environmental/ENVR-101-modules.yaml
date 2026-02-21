@@ -1,0 +1,278 @@
+---
+# ENVR-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: ENVR-101
+pack_name: "Environmental Science & Sustainability -- Foundational Knowledge Pack"
+
+modules:
+  - id: ENVR-101-M1
+    name: "Ecosystems & Biodiversity"
+    description: "Understanding how living systems are organized, how energy flows through food webs, how biodiversity provides resilience, and how species interact within ecosystems"
+
+    learning_outcomes:
+      - "Describe the organization of life from cells to ecosystems"
+      - "Map food webs and explain energy flow through trophic levels"
+      - "Explain why biodiversity provides ecosystem resilience"
+      - "Recognize species interactions: predation, competition, symbiosis"
+      - "Predict how ecosystems respond to disturbance and recover through succession"
+
+    topics:
+      - "Organization of Life: Cells, Organisms, Populations, Communities, Ecosystems"
+      - "Food Chains and Food Webs"
+      - "Energy Flow and Trophic Pyramids"
+      - "Succession and Ecosystem Resilience"
+      - "Biodiversity and Species Interactions"
+      - "Habitats, Niches, and Carrying Capacity"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 30
+      high: 20
+
+    prerequisite_modules: []
+
+    activities:
+      count: 3
+      examples:
+        - "Backyard Biodiversity Survey"
+        - "Food Web Card Game"
+        - "Population Dynamics Simulation"
+
+    assessments:
+      - "Can students map food webs accurately?"
+      - "Can they predict effects of removing a species?"
+      - "Can they explain energy flow through trophic levels?"
+      - "Do they understand ecosystem resilience and succession?"
+
+  - id: ENVR-101-M2
+    name: "Earth Systems & Biogeochemical Cycles"
+    description: "Understanding the water, carbon, and nitrogen cycles; how they connect atmosphere, hydrosphere, lithosphere, and biosphere; and how perturbations in cycles propagate through Earth systems"
+
+    learning_outcomes:
+      - "Trace matter through water, carbon, and nitrogen cycles"
+      - "Explain how cycles connect the atmosphere, hydrosphere, lithosphere, and biosphere"
+      - "Predict consequences of altering a cycle"
+      - "Construct and use models to represent invisible processes"
+      - "Recognize feedback loops, timescales, and system interactions"
+
+    topics:
+      - "The Water Cycle: Evaporation, Precipitation, Groundwater, Ocean Circulation"
+      - "The Carbon Cycle: Photosynthesis, Respiration, Decomposition, Fossil Fuels, Ocean Absorption"
+      - "The Nitrogen Cycle: Atmospheric Nitrogen, Nitrogen Fixation, Nitrification, Denitrification"
+      - "The Rock Cycle and Geochemical Cycles"
+      - "Feedback Loops and Homeostasis"
+      - "Timescales and System Interactions"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 30
+      middle: 35
+      high: 30
+
+    prerequisite_modules: [ENVR-101-M1]
+
+    activities:
+      count: 3
+      examples:
+        - "Water Cycle in a Bag"
+        - "Carbon Cycle Diagram Builder"
+        - "Modeling Atmospheric CO2 Increase"
+
+    assessments:
+      - "Can students trace elements through cycles with arrows and descriptions?"
+      - "Can they identify feedback loops?"
+      - "Can they predict consequences of cycle disruptions?"
+      - "Do they understand timescale differences?"
+
+  - id: ENVR-101-M3
+    name: "Human Impact & Environmental Health"
+    description: "Understanding sources of air, water, and soil pollution; pathways from pollution to human exposure; waste management; resource depletion; and environmental justice"
+
+    learning_outcomes:
+      - "Identify major sources of air, water, and soil pollution"
+      - "Trace pathways from pollution source to human exposure"
+      - "Evaluate environmental health risks and mitigation strategies"
+      - "Understand resource depletion and sustainable alternatives"
+      - "Recognize environmental justice issues and inequitable impacts"
+
+    topics:
+      - "Air Pollution: Sources, Effects, Remediation"
+      - "Water Pollution: Nutrients, Toxins, Microplastics, Treatment"
+      - "Soil Contamination: Heavy Metals, Pesticides, Remediation"
+      - "Waste Generation, Management, and Disposal"
+      - "Resource Extraction, Depletion, and Sustainability"
+      - "Environmental Health Disparities and Justice"
+
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 25
+      middle: 35
+      high: 40
+
+    prerequisite_modules: [ENVR-101-M1, ENVR-101-M2]
+
+    activities:
+      count: 3
+      examples:
+        - "Trash Audit: What Does Your Family Throw Away?"
+        - "Water Quality Testing"
+        - "Pollution Source Tracking Investigation"
+
+    assessments:
+      - "Can students identify and trace pollution pathways?"
+      - "Can they propose realistic solutions?"
+      - "Do they recognize equity and environmental justice dimensions?"
+      - "Can they evaluate tradeoffs in waste management?"
+
+  - id: ENVR-101-M4
+    name: "Climate Science & Energy"
+    description: "Understanding the greenhouse effect, evidence for climate change, climate models and projections, energy sources and their tradeoffs, and climate policy"
+
+    learning_outcomes:
+      - "Explain the greenhouse effect and evidence for human-caused climate change"
+      - "Read, interpret, and critique climate data and models"
+      - "Understand energy sources, benefits, costs, and tradeoffs"
+      - "Evaluate energy policies and emerging technologies"
+      - "Recognize scientific uncertainty, consensus, and legitimate disagreement"
+
+    topics:
+      - "Greenhouse Effect and Planetary Energy Balance"
+      - "Evidence for Climate Change: Temperature Records, Ice Cores, Sea Level, Phenology"
+      - "Attribution Science: Distinguishing Human Signal from Natural Variability"
+      - "Climate Models, Projections, and Uncertainty"
+      - "Fossil Fuels, Renewables, and Nuclear Energy"
+      - "Energy Efficiency and Conservation"
+      - "Climate Policy and International Agreements"
+
+    grade_levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 25
+      middle: 40
+      high: 50
+
+    prerequisite_modules: [ENVR-101-M2]
+
+    activities:
+      count: 3
+      examples:
+        - "Greenhouse Effect in a Jar Demonstration"
+        - "Climate Data Graphing Challenge"
+        - "Energy Audit of Your Home"
+
+    assessments:
+      - "Can students explain the greenhouse effect accurately?"
+      - "Can they read and interpret climate graphs and data?"
+      - "Can they evaluate energy options and their tradeoffs?"
+      - "Do they understand uncertainty in climate science?"
+
+  - id: ENVR-101-M5
+    name: "Sustainability & Action"
+    description: "Designing sustainable systems, proposing evidence-based solutions, understanding policy mechanisms, recognizing individual and systemic change, and evaluating circular economy approaches"
+
+    learning_outcomes:
+      - "Design sustainable systems and identify tradeoffs"
+      - "Propose evidence-based solutions to environmental problems"
+      - "Understand policy mechanisms and their effectiveness"
+      - "Recognize the relationship between individual and systemic change"
+      - "Evaluate approaches to circular economy, conservation, and renewable energy"
+
+    topics:
+      - "Sustainable Agriculture and Food Systems"
+      - "Renewable Energy and Energy Transition"
+      - "Circular Economy and Waste Reduction"
+      - "Conservation Strategies and Protected Areas"
+      - "Sustainable Cities and Transportation"
+      - "Climate Adaptation and Resilience"
+      - "Environmental Policy and International Cooperation"
+
+    grade_levels: ["5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 20
+      middle: 30
+      high: 40
+
+    prerequisite_modules: [ENVR-101-M2, ENVR-101-M3, ENVR-101-M4]
+
+    activities:
+      count: 3
+      examples:
+        - "Design a Sustainable Community"
+        - "Energy Audit of Your Home"
+        - "Policy Analysis and Proposal Project"
+
+    assessments:
+      - "Can students design sustainable systems?"
+      - "Do they recognize and balance tradeoffs?"
+      - "Can they propose feasible policies?"
+      - "Do they understand scale and systems implications?"
+
+cross_module_competencies:
+  - name: "Systems Thinking"
+    description: "Understanding how parts interact and how changes propagate through interconnected systems"
+    assessed_in: ["ENVR-101-M1", "ENVR-101-M2", "ENVR-101-M5"]
+
+  - name: "Evidence Evaluation"
+    description: "Reading data, assessing source credibility, recognizing uncertainty, and distinguishing evidence from opinion"
+    assessed_in: ["ENVR-101-M2", "ENVR-101-M3", "ENVR-101-M4"]
+
+  - name: "Quantitative Reasoning"
+    description: "Using numbers, models, and mathematics to understand environmental processes and evaluate proposals"
+    assessed_in: ["ENVR-101-M2", "ENVR-101-M3", "ENVR-101-M4"]
+
+  - name: "Perspective-Taking"
+    description: "Understanding different values and recognizing legitimate tradeoffs in environmental decisions"
+    assessed_in: ["ENVR-101-M3", "ENVR-101-M4", "ENVR-101-M5"]
+
+  - name: "Design Thinking"
+    description: "Proposing solutions, testing ideas, and iterating based on constraints and feedback"
+    assessed_in: ["ENVR-101-M3", "ENVR-101-M5"]
+
+progression_pathways:
+  - name: "Foundation → Earth Systems"
+    description: "Grades 3-8: Observe ecosystems, trace water and carbon cycles, understand human impacts"
+    rationale: "Builds from concrete observation to abstract systems understanding"
+
+  - name: "Foundation → Energy & Sustainability"
+    description: "Grades 5-12: Energy flow in ecosystems → human energy use → renewable energy → sustainability"
+    rationale: "Connects environmental science to student energy and action"
+
+  - name: "Foundation → Climate & Policy"
+    description: "Grades 6-12: Weather observations → greenhouse effect → climate data → policy evaluation"
+    rationale: "Builds from immediate experience to global systems and decision-making"
+
+  - name: "Integrated: All Modules"
+    description: "Grades 7-12: Complete sequence through all five modules"
+    rationale: "Builds comprehensive environmental literacy and systems thinking"
+
+parallel_patterns:
+  - modules: ["ENVR-101-M1", "ENVR-101-M2"]
+    pattern: "Living systems and physical systems are interconnected; changes in one affect the other"
+    integration_point: "ENVR-101-M3 (human impacts on both)"
+
+  - modules: ["ENVR-101-M3", "ENVR-101-M4"]
+    pattern: "Human activities (energy use, pollution) affect Earth systems (climate, water cycles)"
+    integration_point: "ENVR-101-M5 (solutions and sustainability)"
+
+skill_creator_integration:
+  observation_hooks:
+    - "How do students connect food webs to their own food consumption?"
+    - "Can students recognize feedback loops in familiar systems (boomerangs, echo chambers)?"
+    - "How do students respond to uncertainty in climate projections?"
+
+  pattern_triggers:
+    - "Students who model well (M2) tend to propose better solutions (M5)"
+    - "Students who observe carefully (M1) evaluate policies more critically (M4)"
+    - "Cross-domain: students transfer systems thinking from ecology to energy to economics"
+
+  adaptive_scaffolds:
+    - "For M1-M2: Use physical models and diagrams before abstract equations"
+    - "For M3-M4: Provide structured data interpretation templates"
+    - "For M5: Use decision matrices to help weigh tradeoffs"

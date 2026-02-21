@@ -1,0 +1,238 @@
+# Den v1.28 Chipset Configuration
+# Complete declarative configuration for the 10-position GSD Den staff.
+# Parsed through ChipsetConfigSchema (core fields) and extended with
+# skill requirements, trigger definitions, and observability settings.
+
+name: den-v1.28
+version: 1.0.0
+totalBudget: 0.59
+
+# ==========================================================================
+# Staff Positions (CHIP-01)
+# ==========================================================================
+# Each position defines identity, role, execution context, token budget,
+# lifecycle mode, activation trigger, and skill requirements.
+
+positions:
+  - id: coordinator
+    role: orchestrator
+    context: main
+    tokenBudget: 0.08
+    lifecycle: persistent
+    activationTrigger: session_start
+    skillRequirements:
+      required:
+        - workflow-orchestration
+        - conflict-resolution
+      recommended:
+        - state-management
+
+  - id: relay
+    role: interface
+    context: main
+    tokenBudget: 0.05
+    lifecycle: persistent
+    activationTrigger: session_start
+    skillRequirements:
+      required:
+        - agent-routing
+        - question-consolidation
+      recommended:
+        - report-generation
+
+  - id: planner
+    role: planner
+    context: fork
+    tokenBudget: 0.06
+    lifecycle: task
+    activationTrigger: on_phase_enter
+    skillRequirements:
+      required:
+        - phase-decomposition
+        - resource-estimation
+      recommended:
+        - trajectory-analysis
+
+  - id: configurator
+    role: configurator
+    context: fork
+    tokenBudget: 0.05
+    lifecycle: task
+    activationTrigger: on_phase_enter
+    skillRequirements:
+      required:
+        - topology-management
+        - skill-evaluation
+      recommended:
+        - chipset-validation
+
+  - id: monitor
+    role: monitor
+    context: main
+    tokenBudget: 0.03
+    lifecycle: persistent
+    activationTrigger: session_start
+    skillRequirements:
+      required:
+        - budget-tracking
+        - alert-management
+      recommended:
+        - consumption-analysis
+
+  - id: dispatcher
+    role: infrastructure
+    context: main
+    tokenBudget: 0.03
+    lifecycle: persistent
+    activationTrigger: session_start
+    skillRequirements:
+      required:
+        - message-routing
+        - priority-arbitration
+      recommended:
+        - queue-health
+
+  - id: verifier
+    role: verifier
+    context: fork
+    tokenBudget: 0.06
+    lifecycle: task
+    activationTrigger: on_verification
+    skillRequirements:
+      required:
+        - verification-gates
+        - quality-assessment
+      recommended:
+        - coverage-analysis
+
+  - id: chronicler
+    role: documenter
+    context: fork
+    tokenBudget: 0.04
+    lifecycle: task
+    activationTrigger: on_phase_exit
+    skillRequirements:
+      required:
+        - audit-logging
+        - narrative-generation
+      recommended:
+        - briefing-formatting
+
+  - id: sentinel
+    role: recovery
+    context: fork
+    tokenBudget: 0.04
+    lifecycle: task
+    activationTrigger: on_error
+    skillRequirements:
+      required:
+        - failure-assessment
+        - halt-protocol
+      recommended:
+        - crash-recovery
+
+  - id: executor
+    role: executor
+    context: fork
+    tokenBudget: 0.15
+    lifecycle: task
+    activationTrigger: on_execution
+    skillRequirements:
+      required:
+        - plan-execution
+        - artifact-handoff
+      recommended:
+        - progress-reporting
+
+# ==========================================================================
+# Topology (CHIP-01)
+# ==========================================================================
+
+topology:
+  type: squadron
+  agents:
+    coordinator:
+      role: orchestrator
+      context: main
+    relay:
+      role: interface
+      context: main
+    planner:
+      role: planner
+      context: fork
+    configurator:
+      role: configurator
+      context: fork
+    monitor:
+      role: monitor
+      context: main
+    dispatcher:
+      role: infrastructure
+      context: main
+    verifier:
+      role: verifier
+      context: fork
+    chronicler:
+      role: documenter
+      context: fork
+    sentinel:
+      role: recovery
+      context: fork
+    executor:
+      role: executor
+      context: fork
+  fallback: coordinator
+
+# ==========================================================================
+# Trigger Definitions (CHIP-03)
+# ==========================================================================
+
+triggerDefinitions:
+  session_start:
+    description: Fires at session initialization
+    targets:
+      - coordinator
+      - relay
+      - monitor
+      - dispatcher
+  on_phase_enter:
+    description: Fires when a new phase begins
+    targets:
+      - planner
+      - configurator
+  on_verification:
+    description: Fires when executor handoff completes
+    targets:
+      - verifier
+  on_phase_exit:
+    description: Fires when a phase completes
+    targets:
+      - chronicler
+  on_error:
+    description: Fires when a failure is detected
+    targets:
+      - sentinel
+  on_execution:
+    description: Fires when plan execution begins
+    targets:
+      - executor
+
+# ==========================================================================
+# Observability (CHIP-05)
+# ==========================================================================
+
+observability:
+  dashboard:
+    refreshIntervalMs: 3000
+  logging:
+    format: jsonl
+    retentionDays: 7
+    directory: .planning/den/logs
+  busMonitoring:
+    alertThresholds:
+      queueDepthWarning: 50
+      queueDepthCritical: 80
+      deadLetterWarning: 5
+      deadLetterCritical: 10
+      oldestUnackedWarningMs: 3000
+      oldestUnackedCriticalMs: 5000

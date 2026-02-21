@@ -1,0 +1,41 @@
+# Hardware profile fixture: 32GB desktop (comfortable tier)
+# Used by test-calculate-budget.sh for deterministic testing
+
+cpu:
+  architecture: x86_64
+  family: "AMD Ryzen 5 5600X"
+  cores_physical: 8
+  cores_logical: 16
+  virtualization: true
+  virtualization_type: svm
+
+memory:
+  total_gb: 32
+  swap_gb: 4
+
+storage:
+  devices:
+    - type: ssd
+      size_gb: 500
+  total_gb: 500
+
+gpu:
+  present: true
+  vendor: amd
+  family: "Radeon RX 6700"
+  vram_gb: 12
+  driver: amdgpu
+  iommu_available: true
+
+hypervisor:
+  kvm: true
+  vmware: false
+  virtualbox: false
+  podman: false
+  docker: true
+  nested_virtualization: false
+
+capabilities:
+  can_run_vms: true
+  can_passthrough_gpu: true
+  meets_minimum: true

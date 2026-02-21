@@ -1,0 +1,262 @@
+# demo-scene-exhibit.yaml -- Landmark Amiga demo scene productions for spatial exhibit
+#
+# Each production is selected for historical significance, technical achievement,
+# and legal distribtability (scene.org standard free distribution). Exhibit builds
+# describe how to represent each demo's key achievement spatially in Minecraft.
+#
+# Part of: Knowledge World > Creative District > Amiga Corner > Demo Scene Exhibit
+# Consumed by: amiga-corner-schematic-spec.yaml (alcove builds and sign content)
+
+exhibit:
+  name: "Amiga Demo Scene Exhibit"
+  description: >
+    Landmark productions that defined what computers could do with creative engineering.
+    The demo scene is the art of architectural leverage -- tiny programs producing
+    extraordinary audiovisual output by exploiting hardware with intimate understanding.
+  philosophy: >
+    Every demo in this exhibit achieved something that the hardware's designers
+    considered impossible. That gap between intended capability and actual output
+    is the demo scene's contribution to computing culture: proof that deep
+    understanding of a system unlocks capabilities no specification describes.
+
+  productions:
+    - id: demo-01
+      title: "Juggler"
+      group: "Eric Graham (independent)"
+      year: 1986
+      platform: "Amiga 1000"
+      type: "animation"
+      size: "~50 KB animation data"
+      party: "N/A -- independent release"
+      placement: "N/A"
+      legal_status: "public_domain"
+      source_url: "https://aminet.net/gfx/anim"
+      technical_achievements:
+        - "First real-time raytraced animation on a personal computer"
+        - "Smooth shading and reflections on 7.16 MHz 68000 processor"
+        - "Pre-computed frames using custom raytracer, played back at animation speed"
+        - "Demonstrated Amiga's multimedia capability to the computing world"
+      why_landmark: >
+        The Juggler was the Amiga's calling card. Shown at trade shows and dealer
+        demos, it single-handedly convinced thousands of people that the Amiga was
+        a different kind of computer. The smooth, reflective spheres bouncing in
+        the hands of a chrome juggler -- rendered on a $1295 home computer -- made
+        the IBM PC and Macintosh look like toys. It wasn't real-time raytracing
+        (the frames were pre-computed), but the playback was seamless, and the
+        visual quality was unprecedented for a personal computer.
+      sign_text:
+        - "Juggler (1986)"
+        - "by Eric Graham"
+        - "First raytraced animation"
+        - "on a personal computer"
+      exhibit_build:
+        concept: >
+          Three armor stands arranged in a triangular juggling pattern, holding
+          golden helmets (representing the reflective spheres). Glass blocks
+          behind them create a reflective backdrop. Glowstone lighting from above
+          simulates the raytraced lighting model. A lectern holds a book
+          describing the technical achievement.
+        blocks: "gold_block, glass, glowstone, smooth_stone, armor_stands"
+        features: "armor stands with golden helmets, lectern with signed book, glass reflective wall"
+
+    - id: demo-02
+      title: "Enigma"
+      group: "Phenomena"
+      year: 1991
+      platform: "Amiga 500"
+      type: "trackmo"
+      size: "1 floppy disk (880 KB)"
+      party: "The Party 1991"
+      placement: "1st place demo competition"
+      legal_status: "scene_production"
+      source_url: "https://scene.org/file.php?47:demos"
+      technical_achievements:
+        - "Pioneered the trackmo format: continuous music-synchronized visual flow"
+        - "Seamless transitions between effects without loading pauses"
+        - "Vector graphics, plasma effects, and raster bars in continuous sequence"
+        - "Music and visuals tightly coupled -- effects change on beat"
+      why_landmark: >
+        Before Enigma, demos were collections of separate effects with loading
+        breaks between them. Phenomena invented the trackmo -- a continuous
+        audiovisual experience where music drove the visual transitions.
+        Watch Enigma and you see a proto-music-video, a multimedia presentation
+        years before PowerPoint existed, created by teenagers in their bedrooms.
+        The trackmo format became the standard for all subsequent Amiga demos
+        and influenced digital art tools, VJ software, and music visualization
+        for decades.
+      sign_text:
+        - "Enigma (1991)"
+        - "Phenomena - The Party"
+        - "Invented the trackmo"
+        - "Music drives the visuals"
+      exhibit_build:
+        concept: >
+          A narrow corridor with redstone lamps on alternating walls, pulsing in
+          a cascading pattern using repeater chains. This represents music
+          synchronization -- the core innovation of the trackmo format. Signs
+          along the corridor describe the sequence of effects. The redstone
+          timing creates a rhythmic pulse visible as the player walks through.
+        blocks: "redstone_lamp, redstone_repeater, note_block, dark_oak_planks, black_concrete"
+        features: "cascading redstone lamp sequence, repeater timing chain, note_block rhythm"
+
+    - id: demo-03
+      title: "State of the Art"
+      group: "Spaceballs"
+      year: 1992
+      platform: "Amiga 500"
+      type: "demo"
+      size: "3 floppy disks (2.6 MB)"
+      party: "The Party 1992"
+      placement: "1st place demo competition"
+      legal_status: "scene_production"
+      source_url: "https://scene.org/file.php?47:demos"
+      technical_achievements:
+        - "Full-screen video-quality animation on stock Amiga 500 hardware"
+        - "Custom delta-compression codec achieving TV-like motion at 25 fps"
+        - "Rotoscoped human figures moving fluidly across the screen"
+        - "Considered technically impossible by the Amiga community before release"
+      why_landmark: >
+        State of the Art broke the Amiga demo scene wide open. Full-screen,
+        full-motion animation of rotoscoped human dancers on a stock Amiga 500
+        with 1 MB of RAM. The demo community had declared this impossible --
+        the bandwidth required to update every pixel at 25 fps exceeded the
+        chip RAM throughput. Spaceballs achieved it through a custom delta
+        compression codec that only updated changed pixels, combined with
+        precise DMA timing that squeezed every cycle from the custom chips.
+        It won The Party 1992 by a landslide and remains one of the most
+        celebrated demos ever created on any platform.
+      sign_text:
+        - "State of the Art (1992)"
+        - "Spaceballs - The Party"
+        - "Full-screen video on A500"
+        - "The impossible demo"
+      exhibit_build:
+        concept: >
+          A hallway of item frames, each containing a slightly different map art
+          image representing sequential animation frames. Walking down the hallway
+          creates a flipbook effect -- the player's movement becomes the playback
+          mechanism, just as State of the Art used DMA timing as its codec.
+          Signs describe the delta compression technique.
+        blocks: "item_frame, white_concrete, sea_lantern, smooth_stone_slab"
+        features: "6+ sequential item frames with map art frames, sea_lantern backlighting"
+
+    - id: demo-04
+      title: "Planet Potion"
+      group: "Potion"
+      year: 1995
+      platform: "Amiga 1200"
+      type: "demo"
+      size: "3 floppy disks (2.6 MB)"
+      party: "The Gathering 1995"
+      placement: "1st place demo competition"
+      legal_status: "scene_production"
+      source_url: "https://scene.org/file.php?47:demos"
+      technical_achievements:
+        - "Raytraced 3D environments rendered in real-time on AGA hardware"
+        - "Texture-mapped landscapes with distance fog and lighting"
+        - "Combined chunky-to-planar conversion with AGA 256-color mode"
+        - "Pushed the AGA chipset further than any commercial application"
+      why_landmark: >
+        By 1995, the Amiga was commercially dying, but the demo scene refused
+        to accept the hardware's retirement. Planet Potion demonstrated that the
+        AGA chipset could produce visuals rivaling early Pentium PCs -- textured
+        3D environments with lighting and atmosphere -- through pure optimization.
+        The chunky-to-planar conversion (AGA stored pixels in bitplanes, not
+        bytes) was the critical bottleneck, and Potion's custom converter ran
+        2-3x faster than any known implementation. This demo proved that
+        understanding architecture matters more than clock speed.
+      sign_text:
+        - "Planet Potion (1995)"
+        - "Potion - The Gathering"
+        - "Raytraced 3D on AGA"
+        - "Architecture over MHz"
+      exhibit_build:
+        concept: >
+          A terrain-like structure inside the alcove using stacked blocks at
+          varying heights to create a miniature landscape. Green, brown, and
+          blue blocks represent the textured environments. Glass panes at the
+          front create a viewport effect. Fog represented by light_gray stained
+          glass layers receding into the build.
+        blocks: "green_concrete, brown_concrete, blue_concrete, light_gray_stained_glass, glass_pane"
+        features: "miniature terrain build, stained glass fog layers, viewport glass panes"
+
+    - id: demo-05
+      title: "Starstruck"
+      group: "The Black Lotus"
+      year: 2003
+      platform: "Amiga 1200 (68060)"
+      type: "demo"
+      size: "4 floppy disks (3.5 MB)"
+      party: "Breakpoint 2003"
+      placement: "1st place Amiga demo competition"
+      legal_status: "scene_production"
+      source_url: "https://scene.org/file.php?47:demos"
+      technical_achievements:
+        - "Full 3D engine with texture mapping, lighting, and particle effects on 68060"
+        - "Real-time scene transitions rivaling contemporary PC demos"
+        - "Music engine with 16+ channels of mixed sample/synthesis audio"
+        - "Proved the Amiga demo scene was alive and competitive 20 years after launch"
+      why_landmark: >
+        In 2003, PCs had 3D accelerators, gigahertz processors, and gigabytes of RAM.
+        The Amiga 1200 with a 68060 accelerator had none of these. And yet The Black
+        Lotus produced a demo that held its own visually against PC productions of the
+        era -- through pure software optimization on hardware designed in 1992. Starstruck
+        won Breakpoint's Amiga competition and earned the respect of the entire cross-
+        platform demo scene. It proved that the community and the creative spirit
+        mattered more than the hardware generation -- the scene never dies.
+      sign_text:
+        - "Starstruck (2003)"
+        - "The Black Lotus"
+        - "3D engine on 68060"
+        - "The scene never dies"
+      exhibit_build:
+        concept: >
+          A dark alcove with a ceiling of end rods and sea lanterns arranged in
+          a star pattern -- representing both the demo's title and its particle
+          effects. The darkness of the alcove (black concrete walls) contrasts
+          with the bright points of light, mirroring how the demo created
+          visual spectacle from minimal hardware. A beacon beam through the
+          center represents the enduring spirit of the scene.
+        blocks: "end_rod, sea_lantern, black_concrete, beacon, obsidian"
+        features: "star-pattern ceiling lights, central beacon beam, dark contrast walls"
+
+    - id: demo-06
+      title: "9 Fingers"
+      group: "Spaceballs"
+      year: 1993
+      platform: "Amiga 500"
+      type: "demo"
+      size: "2 floppy disks (1.7 MB)"
+      party: "The Gathering 1993"
+      placement: "1st place demo competition"
+      legal_status: "scene_production"
+      source_url: "https://scene.org/file.php?47:demos"
+      technical_achievements:
+        - "First Amiga demo with real-time texture-mapped 3D objects"
+        - "Gouraud-shaded polygons on stock 68000 at playable framerates"
+        - "Seamless integration of 3D engine with 2D raster effects"
+        - "Raised the technical bar for all subsequent Amiga demos"
+      why_landmark: >
+        9 Fingers arrived one year after State of the Art and pushed in a
+        completely different direction: real-time 3D. While PCs were just
+        getting Doom, Spaceballs demonstrated texture-mapped 3D objects
+        rotating smoothly on a 7 MHz 68000 -- a processor with no hardware
+        multiply instruction. Every 3D calculation was done in software
+        using lookup tables and bit shifts. The demo didn't just show 3D;
+        it integrated it seamlessly with traditional 2D effects, creating
+        a language of mixed-dimensional visual storytelling that became
+        standard in later demos.
+      sign_text:
+        - "9 Fingers (1993)"
+        - "Spaceballs - Gathering"
+        - "Real-time 3D on 68000"
+        - "Software beats hardware"
+      exhibit_build:
+        concept: >
+          A rotating display using armor stands on a clock-driven turntable
+          mechanism. Four armor stands at cardinal points represent 3D vertices,
+          connected by colored wool lines suggesting polygon edges. The slow
+          rotation (daylight sensor + redstone) evokes the real-time 3D rendering
+          that defined this demo.
+        blocks: "armor_stand, colored_wool, daylight_detector, redstone, smooth_stone"
+        features: "4 armor stands in polygon formation, daylight-driven rotation hint, wool edge lines"

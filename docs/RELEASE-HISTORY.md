@@ -1,8 +1,492 @@
 # Release History
 
-Comprehensive release notes for GSD Skill Creator across all 23 milestones.
+Comprehensive release notes for GSD Skill Creator across all 31 milestones.
 
-**Totals:** 23 milestones (v1.0-v1.19 + v1.8.1 patch) | 151 phases | 437 plans | ~192k LOC | 548 requirements
+**Totals:** 31 milestones (v1.0-v1.27 + v1.8.1 patch) | 254 phases | 679 plans | ~302k LOC | 1,006 requirements
+
+---
+
+## v1.27 — GSD Foundational Knowledge Packs
+
+**Shipped:** 2026-02-20
+**Phases:** 243-254 (12 phases) | **Plans:** 79 | **Commits:** ~8 hours execution | **Requirements:** 81 | **Tests:** 10,032 total (144 new) | **LOC:** ~23.6K
+
+Build the foundational knowledge pack system with 35 complete educational packs across 3 tiers, GSD-OS dashboard for browsing and progress tracking, and complete skill-creator integration with learner observation infrastructure, AMIGA event bridge, multi-pattern learning detection, personalized pathway adaptation, automated activity generation, and approach promotion.
+
+### Key Features
+
+**Pack Runtime Infrastructure (Phase 243):**
+- Zod schemas for pack types, registry, loaders, dependency resolver with circular detection
+- Pack registry with lookup, filtering by tier/category, tag search
+- Content loader reading 5 files per pack into typed objects
+- Barrel exports for complete API surface
+
+**Chipset & Agent Definitions (Phase 244):**
+- KP- agent definitions with map-reduce topology for parallel pack generation
+- 8.0% token budget (2.0% for content authoring)
+- SKILL.md files following GSD spec format
+
+**35 Complete Knowledge Packs (Phases 245-251):**
+- Core Academic Tier (15): MATH-101 (adapted), SCI-101, TECH-101, ENGR-101, PHYS-101, CHEM-101, READ-101, CRIT-101, PROB-101, COMM-101, HIST-101, GEO-101, MFAB-101, BUS-101, STAT-101
+- Applied & Practical Tier (10): CODE-101 (adapted), DATA-101, LANG-101, PSYCH-101, ENVR-101, NUTR-101, ECON-101, WRIT-101, LOG-101, DIGLIT-101
+- Specialized & Deepening Tier (10): PHILO-101, THEO-101, PE-101, NATURE-101, DOMESTIC-101, ART-101, MUSIC-101, TRADE-101, ASTRO-101, LEARN-101 (meta-pack)
+- Each pack: vision doc, modules YAML, activities JSON, assessment rubric, resources list, .skillmeta
+
+**Pack Metadata & Validation (Phase 252):**
+- Cross-pack dependency graph (YAML + Mermaid diagram)
+- Standards alignment (Common Core, NCTM, NGSS), translation stubs, accessibility metadata
+- Content validation test suite (35+ tests), master INDEX.md, ALL-PACKS-OVERVIEW.md
+
+**GSD-OS Dashboard (Phase 253):**
+- Pack browser panel with tier grouping and category filtering
+- Full-text search with relevance ranking
+- Pack detail view with modules, prerequisites, grade levels
+- Skill tree visualization showing prerequisite chains
+- Progress tracking per-pack completion state
+- Activity suggestion engine with progress-aware ranking
+
+**skill-creator Integration (Phase 254):**
+- **Observation Types & Hooks (254-01):** Activity completion, assessment results, time spent, pack lifecycle events with ObservationEmitter (47 tests)
+- **AMIGA Event Bridge (254-02):** KnowledgeEventBridge converting to AMIGA EventEnvelope with 6 event types, priority escalation for pack_complete (20 tests)
+- **Learning Pattern Detector (254-03):** 4-pattern detection (sequence, timing, scoring, engagement) with confidence scoring, threshold filtering, skill suggestions (19 tests)
+- **Pathway Adapter (254-04):** Personalized pathways based on learner history, struggle/excel detection, reinforcement/acceleration logic (24 tests)
+- **Activity Scaffolder (254-05):** Pattern-to-activity generation, chain insertion, pattern-specific activity types (15 tests)
+- **Approach Promoter (254-05):** Pattern-to-skill promotion with triggers, actions, SKILL.md markdown output (19 tests)
+
+### Test Coverage
+
+- 144 new tests across 23 test files
+- All 10,032 knowledge module tests passing
+- Complete pipeline integration verified end-to-end
+
+### Statistics
+
+| Metric | Value |
+|--------|-------|
+| Total knowledge packs | 35 |
+| Total activities | 408 (12 per pack) |
+| Total assessments | 35 (1 per pack) |
+| Core Academic modules | 15 x 5 = 75 |
+| Applied modules | 10 x 5 = 50 |
+| Specialized modules | 10 x 5 = 50 |
+| Resource entries | 3,000+ |
+| Unique learning outcomes | 500+ |
+
+---
+
+## v1.26 — Aminet Archive Extension Pack
+
+**Shipped:** 2026-02-19
+**Phases:** 236-242 (7 phases) | **Plans:** 40 | **Commits:** 91 | **Requirements:** 81 | **Tests:** 10,032 | **LOC:** ~23,616
+
+Build a complete Aminet archive management system — INDEX parsing for ~84,000 packages, selective mirroring with integrity verification, full-text search and curated collections, pure TypeScript virus scanning, LhA/LZX extraction with Amiga filesystem mapping, FS-UAE emulator integration, and GSD-OS desktop panel with 5-agent pipeline orchestration.
+
+### Key Features
+
+**INDEX Infrastructure & Binary Parsers (Phase 236):**
+- Aminet INDEX.gz download, decompression, and fixed-width column parsing for ~84,000 entries
+- .readme metadata extractor (Short, Author, Uploader, Type, Version, Requires, Architecture)
+- JSON cache with 24-hour staleness detection and RECENT-based incremental updates
+- AmigaBinaryReader for big-endian hunk executables (HUNK_HEADER through HUNK_END)
+- Boot block parser with trackdisk.device detection patterns
+
+**Mirror State & Download Engine (Phase 237):**
+- 7-state per-package lifecycle (not-mirrored → downloading → mirrored → scan-pending → clean/infected → installed)
+- Atomic JSON persistence with write-then-rename pattern
+- Rate-limited HTTP fetching with configurable concurrency and User-Agent identification
+- SHA-256 integrity verification for all downloaded files
+- Configurable mirror list with fallback ordering
+
+**Search, Browse & Collections (Phase 238):**
+- 3-tier relevance-ranked full-text search (name=3x, description=2x, author=1x)
+- Hierarchical category tree with subcategory navigation and package counts
+- Architecture and OS version filtering
+- Unified PackageDetail view merging INDEX + .readme + mirror state
+- YAML collection format with 5 starter sets (31 packages total)
+- CRUD collection manager with atomic persistence and bulk operations
+
+**Virus Scanner & Quarantine (Phase 239):**
+- 52 byte-pattern signatures across 3 families (14 boot block, 6 file, 32 link virus)
+- Context-aware scanning: bootblock sigs scan first 1024 bytes, file/link sigs scan hunk files
+- 4-rule heuristic hunk analysis (small first hunk, anomalous ordering, excessive relocations, suspicious entry point)
+- 4-rule boot block analysis (virus pattern, suspicious bootcode, resident install, trackdisk without vector)
+- Quarantine with atomic file moves and JSON metadata sidecars
+- 3-layer scan orchestrator with configurable depth policies (fast/standard/thorough)
+- Emulated scanning via FS-UAE and community checksum cross-reference
+
+**Installation & Archive Extraction (Phase 240):**
+- LhA extraction via lhasa with path traversal prevention (Zip-Slip)
+- LZX extraction via unlzx with cwd workaround (no output directory flag)
+- 11-assign Amiga filesystem mapper (case-insensitive C:/LIBS:/DEVS:/S:/L:/FONTS:/T:/LOCALE:/CLASSES:/REXX:/PREFS:)
+- Dependency detector classifying 5 types from .readme Requires (package, os_version, hardware, library, unknown)
+- Install tracker with per-package JSON manifests and clean uninstall
+- Scan gate enforcing security policy (refuse unscanned, refuse infected, user override for suspicious)
+- Tool validator with platform-specific install guidance
+
+**Emulator Configuration & Launch (Phase 241):**
+- FS-UAE config generator with sorted key-value output and path normalization
+- 5 hardware profiles: A500 (OCS/68000/KS1.3), A1200 (AGA/68EC020/KS3.1), A1200+030 (68030/8MB fast), A4000 (68040/8MB fast), WHDLoad (A1200+8MB fast)
+- Self-contained CRC32 ROM scanner (IEEE polynomial, no npm dependency)
+- Cloanto encrypted ROM support (cyclic XOR decryption)
+- Priority-based profile auto-selection from .readme metadata
+- WHDLoad slave detection with per-game hardware overrides
+- 9-slot state snapshot system with directory hard drive safety detection
+
+**Desktop Panel, Agent Pipeline & Integration (Phase 242):**
+- Chipset YAML defining 5 agents (AM-1 through AM-5), 6 skills, pipeline team, 7% token budget
+- 6 SKILL.md files following GSD pack format specification
+- 5-stage pipeline orchestrator with scan gate enforcement
+- 4-pane Workbench-style browser panel (search bar, category tree, results, detail)
+- 4-color status indicators (green/yellow/red/gray)
+- Mirror statistics dashboard widget
+- 14-test cross-module integration suite
+- Standalone pack compliance verified (no GSD core modifications)
+
+---
+
+## v1.25 — Ecosystem Integration
+
+**Shipped:** 2026-02-19
+**Phases:** 231-235 (5 phases) | **Plans:** 14 | **Requirements:** 38 | **Spec documents:** 17 (~10,558 lines)
+
+Make implicit cross-dependencies between 18 ecosystem vision documents explicit through 5 analytical deliverables — a dependency DAG, a shared EventDispatcher specification, a dependency philosophy by layer, an integration test strategy, and a partial-build compatibility matrix.
+
+### Key Features
+
+**Ecosystem Dependency Map (Phases 231-232):**
+- 20-node dependency DAG with 48 typed edges (requires/enhances/extends/conflicts)
+- Machine-readable YAML with Mermaid diagram rendering
+- Critical path analysis identifying 4-hop longest chain
+- 5-milestone build sequencing recommendation (chipset + dashboard-console + lcp as maximum downstream unblocking)
+- Node inventory with implementation status and edge classification
+
+**EventDispatcher Specification (Phase 232):**
+- Canonical single-inotify watcher design with fan-out to 6 subscriber profiles
+- 1,020 watch budget (25% of 4,096 system target) with per-subscriber allocation
+- AMIGA EventEnvelope adopted as ecosystem-wide standard
+- Migration plan for 2 existing filesystem watchers (dashboard refresh, staging)
+- 9-factor inotify-over-fanotify rationale (fanotify requires CAP_SYS_ADMIN)
+
+**Dependency Philosophy (Phase 233):**
+- 4-tier layering: Core (zero deps), Middleware (lean npm), Platform (native), Educational (inherits)
+- Per-layer provides/requires contracts with numbered decision tree
+- Ready-to-paste ESLint 9+ flat config for import boundary enforcement
+- Rust module visibility strategy with `pub(crate)` conventions
+- 4-step exception process for justified boundary crossings
+
+**Integration Test Strategy (Phase 234):**
+- Zod `.toJSONSchema()` + Vitest contract testing (Pact rejected: HTTP-focused, wrong boundary type)
+- 6 priority integration flows with specific input/output contracts
+- 8 semantic test cases per boundary with pass/fail criteria
+- 3-tier freshness policies (contract: CI, semantic: weekly, fixture: monthly)
+- Fixture directory structure and EventDispatcher compliance audit
+
+**Partial-Build Compatibility Matrix (Phase 235):**
+- 48-edge compatibility matrix with 3-state degradation tables (full/degraded/unavailable)
+- 99 known-issues cross-referenced: 51 aspirational, 26 environment-dependent, 9 permanent, 13 resolved
+- Per-component standalone mode specifications with graceful degradation behavior
+- 3-tier capability probe protocol: filesystem presence (Tier 1), import check (Tier 2), structured probe (Tier 3)
+
+### Spec Documents Produced
+
+| Area | Documents | Lines |
+|------|-----------|-------|
+| Dependency Map | node-inventory, edge-inventory | ~2,400 |
+| EventDispatcher | eventdispatcher-spec | ~1,200 |
+| Dependency Philosophy | dependency-rules, enforcement-spec | ~1,100 |
+| Integration Tests | contract-testing-approach, semantic-tests-and-freshness, fixture-strategy-and-audit | ~2,400 |
+| Compatibility Matrix | compatibility-matrix, degradation-specs, standalone-modes, capability-probe-protocol, known-issues-cross-reference | ~3,500 |
+
+---
+
+## v1.24 — GSD Conformance Audit & Hardening
+
+**Shipped:** 2026-02-19
+**Phases:** 223-230 (8 phases) | **Plans:** 31 | **Requirements:** 63
+
+Systematically verify the entire GSD ecosystem codebase against 18 vision documents (~760K of specifications), fix every divergence, and prove the system works end-to-end — achieving zero-fail conformance across all 336 checkpoints.
+
+### Key Features
+
+**Conformance Matrix (Phase 223):**
+- 336-checkpoint matrix covering every "In Scope v1" claim across 18 vision documents
+- 4-tier triage: T0 Foundation (41), T1 Integration (51), T2 Behavior (180), T3 UX/Polish (64)
+- Dependency graph with 15 high-fan-out nodes and 5 critical paths
+- Per-tier effort estimates in companion audit plan document
+
+**Foundation Audit — T0 (Phase 224):**
+- Full GSD lifecycle verified: new-project through complete-milestone
+- 6-stage skill loading pipeline confirmed end-to-end (Score → Resolve → ModelFilter → CacheOrder → Budget → Load)
+- Build health: zero TypeScript errors, all tests passing
+- Subagent spawning, filesystem message bus, state tracking all verified
+
+**Integration Audit — T1 (Phase 225):**
+- GSD-to-skill-creator observation pipeline verified (302 tests)
+- AMIGA 4-ICD inter-component communication verified (10 event types, 1123 tests)
+- Dashboard data collectors reading real filesystem data confirmed
+- Console upload → message bus → staging manifest → execution queue traced end-to-end
+- AGC pack integration verified (5 blocks, 6 widgets, chipset YAML)
+
+**Behavior Audit — T2 (Phase 226):**
+- Token budget enforcement, pattern detection thresholds, bounded learning constraints all verified
+- AGC simulator: all 38 Block II opcodes behaviorally verified, ALU overflow at 0o37777
+- Staging: all 11 hygiene patterns, trust decay model, smart intake 3-path routing, 7-state queue machine confirmed
+- Security hardening: path traversal prevention, YAML safe deserialization, JSONL integrity checksums
+- 180 checkpoints audited: 104 pass, 76 fail (aspirational vision items)
+
+**UX/Polish Audit — T3 (Phase 227):**
+- GSD-OS Tauri build verified, CRT shader effects confirmed in GLSL source
+- Window manager depth cycling, drag/resize, keyboard shortcuts verified
+- Dashboard design system: 6 domain colors, 4 signal colors, entity shape dual encoding
+- Educational content: AGC curriculum and RFC reading paths verified
+- 64 checkpoints audited: 45 pass, 18 fail, 1 partial
+
+**End-to-End Verification (Phase 228):**
+- E2E proof run: 9,355 tests passing, TypeScript clean (tsc --noEmit zero errors)
+- All 4 conformance gates passing: T0 100%, T1 100%, T2 95.0%, T3 93.8%
+- 112 checkpoint amendments with documented justifications
+- Zero undocumented divergences between code and vision documents
+
+**Documentation & Amendments (Phase 229):**
+- All 13 remaining failures resolved via vision document amendment
+- Fix-or-amend protocol applied: checkpoint ID, original claim, actual state, resolution, updated spec
+- Known-issues list categorizing 99 amended checkpoints into 8 deferral groups
+- Installation documentation verified accurate and complete
+
+**Verification Environment — Stretch (Phase 230):**
+- Environment readiness assessed for 4-VM clean-room verification
+- Hardware inventory: Intel i7-6700K VT-x, 60GB RAM, KVM, 27.5TB storage
+- IaC gap analysis: ~60% covered, ~4-6h work for multi-VM orchestration
+- Deferred to future milestone (core requirements complete)
+
+### Conformance Results
+
+| Tier | Checkpoints | Pass | Amended | Gate |
+|------|-------------|------|---------|------|
+| T0 Foundation | 41 | 41 | 0 | 100% |
+| T1 Integration | 51 | 34 | 17 | 100% |
+| T2 Behavior | 180 | 104 | 76 | 95.0% |
+| T3 UX/Polish | 64 | 45 | 19 | 93.8% |
+| **Total** | **336** | **211** | **125** | **100%** |
+
+### Amendment Categories (99 deferred items)
+
+1. GSD ISA — entirely unimplemented; AGC is the educational ISA (32 checkpoints)
+2. Wetty web terminal — superseded by native PTY architecture (9 checkpoints)
+3. Hardware workbench — requires physical audio/MIDI/camera/GPIO (13 checkpoints)
+4. Silicon layer — hooks exist, training pipeline is future (12 checkpoints)
+5. BBS/Creative Suite — vision docs scope as future (11 checkpoints)
+6. Cloud ops curriculum — structure exists, content delivery is future (4 checkpoints)
+7. Chipset runtime — declarative config, not runtime pipeline (5 checkpoints)
+8. Block editor UI — vision exceeds current implementation (4 checkpoints)
+
+### Test Coverage
+
+- 9,355 tests across 31 plans (482 test files)
+
+---
+
+## v1.23 — Project AMIGA
+
+**Shipped:** 2026-02-19
+**Phases:** 199-222 (24 phases) | **Plans:** 74 | **Requirements:** 99
+
+Build the complete AMIGA mission infrastructure (Mission Control, Mission Environment, Commons Engine, Governance Layer) with human-in-the-loop gates, the Apollo AGC Educational Pack (documentation archive, architectural study, functioning AGC simulator with DSKY and curriculum), and the RFC Reference Skill — creating the operational backbone and first educational content packs for the GSD-OS platform.
+
+### Key Features
+
+**AMIGA Mission Infrastructure (Phases 199-208):**
+- MC-1 Control Surface: dashboard with 8-command parser, 3-tier alert system (info/warning/critical), Go/No-Go gates for phase transitions
+- ME-1 Mission Environment: environment provisioner, phase engine, swarm coordinator for parallel agent execution, archive writer for immutable mission records
+- CE-1 Commons Engine: attribution ledger tracking contributions, weighting engine with configurable factors, dividend calculator for resource distribution
+- GL-1 Governance Layer: commons charter definition, rules engine for policy enforcement, policy query interface
+- 4 typed Inter-Component Definitions (ICDs) for structured inter-team communication
+- Full-stack controller composing all 4 components, end-to-end meta-mission harness producing skill packages
+
+**Apollo AGC Block II Simulator (Phases 213-214):**
+- Complete CPU emulation: 38 instructions covering arithmetic, logic, control flow, I/O, and special operations
+- Ones' complement ALU with iterative end-around carry matching real Block II hardware
+- Bank-switched memory: EBANK (8 banks × 256 words erasable), FBANK (32 banks × 1024 words fixed), superbank extension
+- Interrupt system: 10 vectors with priority resolution and inhibit/enable control
+- I/O channels: 512 channels for peripheral communication
+- 2.048 MHz timing model with MCT (memory cycle time) accuracy
+
+**AGC Executive/Waitlist/BAILOUT (Phase 216):**
+- Executive: priority-based cooperative scheduler with 8 core sets (register save areas)
+- Waitlist: timer-driven task queue with 9 entries and centisecond dispatch resolution
+- BAILOUT: restart protection with program alarm codes, reproducing the Apollo 11 1202 alarm scenario
+
+**DSKY Interface & Executive Monitor (Phases 217-218):**
+- Authentic display model: electroluminescent relay decoding, 6 data registers, 11 annunciator indicators
+- 19-key keyboard with PRO, KEY REL, VERB, NOUN, +, -, 0-9, CLR, ENTR
+- VERB/NOUN command processor with program-specific routing
+- Executive Monitor: real-time visualization of scheduler state, core set allocation, waitlist queue
+- Learn mode: annotations mapping AGC concepts to modern computing and GSD patterns
+
+**AGC Development Tools (Phase 219):**
+- yaYUL-compatible assembler parsing AGC assembly source into binary
+- Step debugger with breakpoints, watchpoints, register inspection, and memory dumps
+- Disassembler converting binary back to readable assembly
+- Rope loader reading Virtual AGC binary format for loading real Apollo program images
+- 54-test validation suite covering all 38 instructions and subsystems
+
+**AGC Curriculum (Phase 221):**
+- 11 chapters: orientation, number systems, memory architecture, instruction set, Executive scheduling, Waitlist timing, DSKY interface, interrupt handling, I/O channels, 1202 alarm deep dive, AGC-to-GSD pattern mapping
+- 8 hands-on exercises with bare-metal AGC programs
+- Capstone exercise reproducing the 1202 alarm scenario
+
+**RFC Reference Skill (Phase 222):**
+- 3-agent system: Retriever (HTTP fetching with caching), Analyzer (cross-reference and dependency mapping), Citation Builder (formatted output)
+- 5 Python scripts for fetching, parsing, indexing, analyzing, and formatting RFCs
+- Built-in 57-RFC index covering 9 protocol families (HTTP, TLS, DNS, TCP/IP, SMTP, etc.) with obsolescence awareness
+- Multi-format output: Markdown, JSON, and BibTeX
+- RFC Collection Pack scaffold for distributable reference material
+
+### Test Coverage
+
+- 2,164 tests across 74 plans
+
+---
+
+## v1.22 — Minecraft Knowledge World
+
+**Shipped:** 2026-02-19
+**Phases:** 169-198 (30 phases) | **Plans:** 37 | **Requirements:** 73
+
+Build a Minecraft Java Edition Knowledge World server on GSD local cloud infrastructure with PXE boot automation, hypervisor-agnostic VM provisioning, platform portability, Amiga emulation, spatial learning curriculum, formalized skill/agent/team chipset, and operational maturity.
+
+### Key Features
+
+**Local Cloud Infrastructure (Phases 169-175):**
+- PXE boot server with DHCP/TFTP configuration for network-booted installations
+- Kickstart automation for unattended CentOS Stream 9 provisioning
+- Hypervisor-agnostic VM provisioning across KVM/libvirt, VMware Workstation, and VirtualBox
+- Network bridge configuration with firewalld zone management
+
+**Minecraft Knowledge World (Phases 176-180):**
+- Minecraft Java Edition server on Fabric mod loader
+- Syncmatica mod stack for real-time Litematica schematic sharing
+- Automated deployment pipeline from bare VM to running server
+- Themed district layout: Computing History, Networking, Architecture, Creative Workshop
+- Spawn area with tutorial path and orientation signage
+- Schematic library with 10 templates for educational builds
+- Educational curriculum mapping computing concepts to Minecraft mechanics
+- Amiga Corner exhibit within the Knowledge World
+
+**Platform Portability (Phases 181-183):**
+- Comprehensive hardware discovery (CPU, memory, GPU, storage, NIC, virtualization extensions)
+- Distribution abstraction layer supporting dnf (Fedora/CentOS), apt (Debian/Ubuntu), pacman (Arch)
+- Multi-hypervisor VM operations (create, start, stop, snapshot, clone, delete) with unified interface
+- Container fallback for environments without hardware virtualization
+
+**Amiga Emulation (Phases 184-186):**
+- FS-UAE emulator integration with AROS ROM as default (no copyright issues)
+- Application profiles: Deluxe Paint (pixel art), OctaMED (music), ProTracker (modules), PPaint (animation)
+- IFF/ILBM image format converter and MOD/MED audio format converter
+- Legally curated 50-item content collection (public domain, Creative Commons, freeware)
+
+**Chipset Formalization (Phases 191-194):**
+- 20 formalized SKILL.md files covering all infrastructure components
+- 10 agent definitions across 5 teams
+- Team topologies: pipeline (sequential processing), map-reduce (parallel fan-out), swarm (peer coordination), leader-worker (directed delegation)
+- Unified chipset configuration YAML with trigger routing matrix
+- Inter-team ICD specifications for structured communication
+
+**Operational Maturity (Phases 195-198):**
+- Automated RCON-quiesced backups: world save before backup, 24/7/4 rotation (24 hourly, 7 daily, 4 weekly)
+- Prometheus monitoring with 9 alert rules covering server health, TPS, player count, disk usage
+- Golden image lifecycle: rapid rebuild (<5 min from clone, <20 min from scratch)
+- Four operational runbooks: server maintenance, backup/restore, monitoring, incident response
+
+---
+
+## v1.21 — GSD-OS Desktop Foundation
+
+**Shipped:** 2026-02-14
+**Phases:** 158-168 (11 phases) | **Plans:** 34 | **Requirements:** 50
+
+Build the Tauri desktop application shell with WebGL 8-bit graphics engine, first-boot calibration, Amiga-inspired desktop environment, and native system bridges (PTY, file watcher, IPC).
+
+### Key Features
+
+**Tauri Desktop Shell (Phases 158-160):**
+- Tauri v2 application with Rust backend and Vite webview frontend
+- Bidirectional IPC: commands (webview→Rust), events (Rust→webview), channels (streaming)
+- Capability ACL security restricting webview access to specific Rust commands
+- Frameless window with custom chrome for Amiga Workbench aesthetic
+
+**WebGL CRT Engine (Phase 161):**
+- WebGL2 multi-pass post-processing pipeline
+- Scanline effect with configurable intensity and gap ratio
+- Barrel distortion simulating CRT curvature
+- Phosphor glow with bloom radius control
+- Chromatic aberration (RGB channel separation)
+- Vignette darkening at screen edges
+- Per-effect intensity controls with CSS fallback for non-WebGL browsers
+
+**Indexed Palette System (Phase 162):**
+- 32-color indexed palette with configurable slots
+- 5 retro-computing presets: Amiga Kickstart 1.3, Workbench 2.0, Workbench 3.1, Commodore 64, custom
+- OKLCH-based palette generation for perceptually uniform color interpolation
+- Copper list raster effects for per-scanline color manipulation (gradient fills, sky effects)
+
+**Native PTY Terminal (Phase 163):**
+- Rust-backed pseudo-terminal via portable-pty crate
+- xterm.js terminal emulator in webview with full ANSI support
+- Watermark-based flow control (pause at high-water, resume at low-water)
+- tmux session binding with automatic detach-on-close
+
+**Desktop Environment (Phases 164-165):**
+- Amiga Workbench-inspired window manager with depth cycling (click to front/back)
+- Window drag/resize with configurable snap-to-edge
+- Taskbar with process indicators and minimized window chips
+- Pixel-art icon set for file types, applications, and system functions
+- System menu with application launcher and preferences
+- Keyboard shortcuts: Alt+Tab (window cycling), F10 (system menu), Ctrl+Q (quit)
+
+**Boot & Calibration (Phases 166-168):**
+- Three-screen calibration wizard: color picker, CRT effect tuning, theme/palette selection
+- Amiga chipset boot sequence animation (Agnus, Denise, Paula, Gary initialization)
+- Boot sequence skippable with click or keypress
+- Accessibility auto-detection: disables CRT effects on `prefers-reduced-motion`, applies high-contrast palette on `prefers-contrast`
+
+### Test Coverage
+
+- 636 tests across 34 plans
+
+---
+
+## v1.20 — Dashboard Assembly
+
+**Shipped:** 2026-02-14
+**Phases:** 152-157 (6 phases) | **Plans:** 12 | **Requirements:** 23
+
+Wire 13 orphaned dashboard components into the generator pipeline with unified CSS and real data pipelines, so the generated dashboard reflects every feature built across v1.12-v1.19.
+
+### Key Features
+
+**Unified CSS Pipeline (Phase 152):**
+- 18 component style modules wired into the dashboard generator
+- Design system token compliance: all colors reference CSS custom properties (no hardcoded hex values)
+- Component styles: gantry strip, entity shapes, topology view, activity feed, budget gauge, silicon panel, staging queue, console page, question cards, upload zone, submit flow, config form
+
+**Data Collectors (Phases 153-155):**
+- Topology data collector: reads real skill/agent/team files via gray-matter parsing, infers domain from file content, renders entity legend with shape+color encoding
+- Activity feed collector: transforms git commits and session observations into FeedEntry[] with scope classification (skill/agent/team/phase) and domain inference
+- Budget-silicon collector: bridges CumulativeBudgetResult and IntegrationConfig to gauge and panel renderers with domain color mapping
+- Staging queue collector: reads queue-state.json, maps 7-state items to color-coded badges for dashboard panel
+
+**Console Page Assembly (Phases 156-157):**
+- Console assembled as 6th generated dashboard page (console.html)
+- Settings panel with hot-configurable integration options
+- Activity timeline showing recent session operations
+- Question card display with 5 interactive question types
+- Submit flow for milestone configuration
+- Full CSS integration with design system tokens
+
+### Test Coverage
+
+- 110 tests across 12 plans
 
 ---
 
@@ -886,4 +1370,9 @@ The foundational 6-step adaptive learning loop.
 2026-02-13  v1.17   Staging Layer
 2026-02-14  v1.18   Information Design System
 2026-02-14  v1.19   Budget Display Overhaul
+2026-02-14  v1.20   Dashboard Assembly
+2026-02-14  v1.21   GSD-OS Desktop Foundation
+2026-02-19  v1.22   Minecraft Knowledge World
+2026-02-19  v1.23   Project AMIGA
+2026-02-19  v1.24   GSD Conformance Audit & Hardening
 ```

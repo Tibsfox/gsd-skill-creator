@@ -1,0 +1,6 @@
+# Local values -- never commit actual hardware data or secrets
+local/*
+!local/.gitkeep
+
+# Runtime-generated inventory (actual values live in local/)
+# The sanitized profile IS safe for git, but the raw values are not

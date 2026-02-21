@@ -1,0 +1,246 @@
+[
+  {
+    "id": "NUTR-101-A01",
+    "name": "Nutrient Detective Food Sort",
+    "module_id": "NUTR-101-M1",
+    "grade_range": ["K", "1", "2", "3", "4", "5"],
+    "duration_minutes": 30,
+    "description": "Learners examine a variety of foods (pictures or actual items with safety considerations) and sort them by nutrient type: proteins, carbohydrates, fats, and water-rich foods. Uses color coding, handling foods when safe, and discussing why variety matters. Develops observational skills and introduces nutrient categories in a concrete, sensory way.",
+    "materials": ["Food pictures or safe food samples", "Color-coded sorting mats", "Labels for nutrient types", "Magnifying glasses (optional)"],
+    "learning_objectives": [
+      "Recognize that different foods contain different nutrients",
+      "Sort foods by primary nutrient type",
+      "Understand that most foods contain multiple nutrients",
+      "Appreciate variety in foods"
+    ],
+    "variations": [
+      "Use only pictures if food allergies are a concern",
+      "Expand to micronutrient categories (vitamin C foods, calcium foods, etc.)",
+      "Older learners: read nutrition labels to verify their sorting"
+    ]
+  },
+  {
+    "id": "NUTR-101-A02",
+    "name": "Vitamin & Mineral Bingo",
+    "module_id": "NUTR-101-M1",
+    "grade_range": ["3", "4", "5", "6"],
+    "duration_minutes": 25,
+    "description": "Bingo game where each square contains a vitamin or mineral and its function (e.g., 'Calcium - builds strong bones'). Caller reads function descriptions; learners find matching nutrient on their card. Combines game fun with learning micronutrient functions. Can be adapted for complexity.",
+    "materials": ["Bingo cards with vitamins/minerals", "Tokens or markers", "Answer key with function descriptions", "Sample foods rich in each nutrient"],
+    "learning_objectives": [
+      "Name key vitamins and minerals",
+      "Describe the role of each micronutrient in the body",
+      "Connect micronutrients to food sources",
+      "Recognize importance of variety"
+    ],
+    "variations": [
+      "Advanced: include actual nutrient names (calciferol for Vitamin D) for older learners",
+      "Foods version: caller says function, learners match to foods that contain it",
+      "Crossover: connect to digestion or health integration modules"
+    ]
+  },
+  {
+    "id": "NUTR-101-A03",
+    "name": "Digestion Journey Map",
+    "module_id": "NUTR-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7"],
+    "duration_minutes": 45,
+    "description": "Learners trace the path of a specific food (e.g., a peanut butter sandwich) through the digestive system. They draw or map the journey with stations: mouth (mechanical + chemical breakdown), stomach (churning, acid), small intestine (major absorption), large intestine (water absorption, elimination). At each station, they note what happens and which nutrients are affected. Can include time estimates or enzyme demonstrations.",
+    "materials": ["Large paper or digital template", "Markers or digital drawing tools", "Diagram of digestive system (optional)", "Scientific labels for organs and enzymes"],
+    "learning_objectives": [
+      "Trace the path of food through digestive organs in order",
+      "Describe what happens at each stage of digestion",
+      "Understand the role of enzymes in breakdown",
+      "Recognize that different nutrients are processed differently"
+    ],
+    "variations": [
+      "Follow different foods: banana vs. cheese vs. chicken for different nutrient types",
+      "Time-based: add timestamps for how long food spends at each stage",
+      "Interactive: learners physically move through a life-sized digestive system setup"
+    ]
+  },
+  {
+    "id": "NUTR-101-A04",
+    "name": "Enzyme Experiment with Crackers",
+    "module_id": "NUTR-101-M2",
+    "grade_range": ["3", "4", "5", "6", "7", "8"],
+    "duration_minutes": 30,
+    "description": "Learners place a plain cracker in their mouth without chewing and observe how the taste changes as saliva (containing amylase enzyme) breaks down starch into sugar. They record observations: sweet taste develops, texture changes, time taken. Discusses how mechanical and chemical digestion happen simultaneously. Concrete demonstration of enzyme action at work in their own mouths.",
+    "materials": ["Plain crackers (unsalted)", "Observation sheets", "Optional: iodine solution to test for starch before/after"],
+    "learning_objectives": [
+      "Observe enzyme action in real time",
+      "Understand that chemical breakdown starts in the mouth",
+      "Recognize that starches become simpler sugars through enzyme action",
+      "Appreciate the role of saliva in digestion"
+    ],
+    "variations": [
+      "Younger learners: focus on taste change observation only",
+      "Older learners: add iodine test (blue-black with starch, clear with sugars) to show chemical change",
+      "Protein variation: enzyme experiment with gelatin and pineapple juice (bromelain enzyme)"
+    ]
+  },
+  {
+    "id": "NUTR-101-A05",
+    "name": "Farm-to-Table Mapping",
+    "module_id": "NUTR-101-M3",
+    "grade_range": ["4", "5", "6", "7", "8"],
+    "duration_minutes": 60,
+    "description": "Learners choose a food they like and trace its journey from farm/source to their table. They research: Where is it grown? How is it transported? Who handles it? What's involved in each step? They create a visual map or infographic showing the journey, key people/processes, and environmental/social considerations. Develops systems thinking and food literacy.",
+    "materials": ["Research resources (books, websites, local farmer interviews)", "Poster paper or digital design tool", "Maps showing growing regions", "Images for visual representation"],
+    "learning_objectives": [
+      "Trace a food from source to consumption",
+      "Understand the complexity of food systems",
+      "Recognize people and labor in food production",
+      "Consider environmental and social impacts"
+    ],
+    "variations": [
+      "Local focus: research a food from a nearby farm or producer",
+      "Comparison: trace two versions of same food (organic vs. conventional, local vs. imported)",
+      "Interview: if possible, visit a farm or interview a farmer/grocer to add real voices"
+    ]
+  },
+  {
+    "id": "NUTR-101-A06",
+    "name": "Food Miles Calculator",
+    "module_id": "NUTR-101-M3",
+    "grade_range": ["4", "5", "6", "7", "8"],
+    "duration_minutes": 30,
+    "description": "Using a food miles calculator (online or paper-based) and a map, learners calculate how far their food travels from farm to table. They explore: produce from different countries, seasons, and farming methods. They discuss trade-offs: local strawberries in season vs. imported strawberries year-round. Creates awareness of environmental impact of food choices without judgment.",
+    "materials": ["Food miles calculator (website or printed)", "Nutrition labels showing country of origin", "Map or globe", "Sample foods from different sources"],
+    "learning_objectives": [
+      "Calculate distance food travels",
+      "Understand transportation as environmental impact",
+      "Recognize seasonal variation and availability",
+      "Discuss trade-offs in food choices"
+    ],
+    "variations": [
+      "Younger learners: focus on near/far concept with maps",
+      "Carbon footprint: extend to calculate estimated emissions from transportation",
+      "Comparative analysis: create charts showing miles for different foods or sources"
+    ]
+  },
+  {
+    "id": "NUTR-101-A07",
+    "name": "Nutrition Label Scavenger Hunt",
+    "module_id": "NUTR-101-M4",
+    "grade_range": ["4", "5", "6", "7", "8", "9"],
+    "duration_minutes": 30,
+    "description": "Learners search real nutrition labels (from home, school, or printed examples) to answer specific questions: How much protein? What's the ingredient list? Where's the fiber? Are there added sugars? Teaches label literacy in an engaging, game-like format. Can include comparing similar foods to notice differences.",
+    "materials": ["Real nutrition labels or printed examples", "Question cards", "Magnifying glasses for small text"],
+    "learning_objectives": [
+      "Locate key information on nutrition facts labels",
+      "Interpret numbers and percentages",
+      "Read ingredient lists",
+      "Compare similar foods using labels"
+    ],
+    "variations": [
+      "Speed challenge: first to find the answer wins",
+      "Comparison: hunt for same food from different brands and compare",
+      "Advanced: calculate total carbohydrates from individual sources, interpret % Daily Value"
+    ]
+  },
+  {
+    "id": "NUTR-101-A08",
+    "name": "Claim vs. Evidence Analysis",
+    "module_id": "NUTR-101-M4",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 45,
+    "description": "Learners receive real nutrition claims from products, social media, or advertising (e.g., 'This supplement boosts immunity', 'Organic is always healthier'). They research to find (or fail to find) scientific evidence. They evaluate: Is there a study? Who paid for it? How big was the study? What do independent reviews say? Develops critical thinking and media literacy.",
+    "materials": ["Real nutrition claims (printed or screenshots)", "Research resources", "Evidence evaluation rubric", "Access to databases like PubMed if available"],
+    "learning_objectives": [
+      "Distinguish between claims and evidence",
+      "Research the support (or lack thereof) for claims",
+      "Identify potential conflicts of interest",
+      "Develop healthy skepticism toward marketing",
+      "Communicate findings clearly"
+    ],
+    "variations": [
+      "Younger learners: simple claims with clear evidence or lack thereof",
+      "Debate: divide into pro/con teams and argue based on evidence",
+      "Create your own: learners write a nutrition claim and explain what evidence would be needed"
+    ]
+  },
+  {
+    "id": "NUTR-101-A09",
+    "name": "Balanced Meal Design Challenge",
+    "module_id": "NUTR-101-M5",
+    "grade_range": ["5", "6", "7", "8", "9", "10"],
+    "duration_minutes": 45,
+    "description": "Learners design a meal (breakfast, lunch, dinner, or snack) that includes protein, carbohydrates, fat, and vegetables/fruits. They can use food pictures, menu planning tools, or actual cooking. Can include constraints (budget, allergies, preferences, available ingredients) to make it realistic. Teaches practical application of nutrition knowledge without restriction or judgment.",
+    "materials": ["Food pictures, menus, or recipes", "Plate template or digital tool", "Sample meals for reference", "Optional: actual ingredients for cooking"],
+    "learning_objectives": [
+      "Create balanced meals including multiple food groups",
+      "Consider nutritional variety in food choices",
+      "Apply knowledge of nutrients to real meals",
+      "Adapt meals for different preferences and constraints"
+    ],
+    "variations": [
+      "Culture-specific: design meals featuring cuisines from learners' cultures",
+      "Budget constraint: design nutritious meals with limited budget",
+      "Allergy-friendly: design meals avoiding specific allergens",
+      "Cooking: if possible, actually prepare and eat one designed meal together"
+    ]
+  },
+  {
+    "id": "NUTR-101-A10",
+    "name": "Weekly Meal Planning Workshop",
+    "module_id": "NUTR-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 60,
+    "description": "Learners plan meals for a week, considering nutritional balance, budget, time, preferences, and family needs. If possible, coordinate with families to use this as actual planning for real meals. Includes grocery list creation and consideration of food preparation time. Teaches practical life skills: nutrition, budgeting, time management, cooking.",
+    "materials": ["Meal planning template", "Recipe resources", "Budget tracking tool", "Grocery store ads or price lists", "Optional: family input"],
+    "learning_objectives": [
+      "Plan nutritionally balanced meals for multiple days",
+      "Consider budget and food access",
+      "Account for time and cooking skills available",
+      "Incorporate personal/family preferences and cultural foods",
+      "Create efficient grocery lists"
+    ],
+    "variations": [
+      "Family involvement: learners conduct interviews about family food preferences, budget, and time",
+      "Shopping trip: learners purchase ingredients and prepare one planned meal together",
+      "Restaurant menu planning: learners plan balanced meals when eating out",
+      "Cooking together: learners prepare one or more meals from their plan"
+    ]
+  },
+  {
+    "id": "NUTR-101-A11",
+    "name": "Sleep and Nutrition Connection Exploration",
+    "module_id": "NUTR-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10"],
+    "duration_minutes": 45,
+    "description": "Learners explore how nutrition affects sleep and sleep affects food choices. Topics: foods that promote sleep (tryptophan, magnesium), caffeine timing, meals close to bedtime, impact of poor sleep on hunger hormones and food cravings. They track their own sleep and food for several days, noting patterns (if willing and comfortable). Discussion of how to support good sleep through nutrition.",
+    "materials": ["Sleep and food tracking journals", "Research articles on sleep and nutrition", "Information on foods supporting sleep", "Discussion prompts"],
+    "learning_objectives": [
+      "Understand how sleep quality affects eating patterns",
+      "Recognize foods and timing that support sleep",
+      "Appreciate the bi-directional relationship between nutrition and sleep",
+      "Apply understanding to personal choices"
+    ],
+    "variations": [
+      "Younger learners: focus on simple connections (heavy meals before bed make sleep hard)",
+      "Tracking: optional personal data collection and pattern identification",
+      "Science focus: discuss hormones (melatonin, ghrelin, leptin) involved in sleep and hunger"
+    ]
+  },
+  {
+    "id": "NUTR-101-A12",
+    "name": "Stress and Eating Discussion and Reflection",
+    "module_id": "NUTR-101-M5",
+    "grade_range": ["6", "7", "8", "9", "10", "11", "12"],
+    "duration_minutes": 40,
+    "description": "Learners discuss how stress affects eating: emotional eating, stress-induced appetite loss, comfort foods, cravings under pressure. They explore mindfulness strategies, stress management through food (nutrition supporting stress resilience), and self-compassion around food choices under stress. Avoids judgment; centers on understanding and support. May include personal reflection journaling.",
+    "materials": ["Discussion prompts", "Optional: journaling or reflection sheets", "Mindfulness or stress-management resources", "Sample coping strategies"],
+    "learning_objectives": [
+      "Recognize connections between stress and eating",
+      "Understand physiological responses to stress",
+      "Develop self-compassion around food choices under stress",
+      "Explore stress-management strategies including nutrition"
+    ],
+    "variations": [
+      "Younger learners: focus on recognizing stress and simple coping strategies",
+      "Older learners: discuss hunger hormones (cortisol) and physiological impacts of chronic stress",
+      "Action-focused: develop personal stress-management plan including nutrition, movement, sleep"
+    ]
+  }
+]

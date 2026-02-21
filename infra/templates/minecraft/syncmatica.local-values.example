@@ -1,0 +1,83 @@
+# Syncmatica / Mod Deployment Local Values
+# Copy to infra/local/syncmatica.local-values and fill in site-specific values.
+# This file is an EXAMPLE -- never commit actual values to version control.
+#
+# Used by: infra/scripts/deploy-mods.sh
+# Also read by: infra/scripts/check-mod-updates.sh (via mod-manifest.yaml)
+#
+# Variable mapping: lower_snake_case here -> script configuration
+# Example: minecraft_version -> MINECRAFT_VERSION in deploy-mods.sh
+#
+# Templates consumed:
+#   - infra/templates/minecraft/syncmatica-server.properties.template
+#   - infra/templates/minecraft/mod-manifest.yaml.template (reference only)
+
+# ============================================================
+# Minecraft Version
+# ============================================================
+
+# Minecraft game version -- must match the version your Fabric loader targets.
+# All mod downloads are filtered to this game version via the Modrinth API.
+# Find current versions at: https://fabricmc.net/develop/
+minecraft_version: "1.21.4"
+
+# ============================================================
+# Fabric API
+# ============================================================
+
+# Fabric API version string (must match exactly as listed on Modrinth)
+# Find versions at: https://modrinth.com/mod/fabric-api/versions
+# Filter by your Minecraft version to see compatible releases.
+fabric_api_version: "0.114.0+1.21.4"
+
+# SHA-256 checksum of the Fabric API jar
+# How to get this value:
+#   Option 1: Modrinth API -- query the version endpoint and read files[0].hashes.sha256
+#     curl -s 'https://api.modrinth.com/v2/project/P7dR8mSH/version?game_versions=["1.21.4"]&loaders=["fabric"]' | jq '.[0].files[0].hashes.sha256'
+#   Option 2: Download the jar and hash it locally
+#     sha256sum fabric-api-0.114.0+1.21.4.jar
+fabric_api_sha256: "REPLACE_WITH_ACTUAL_SHA256_HASH"
+
+# ============================================================
+# Syncmatica
+# ============================================================
+
+# Syncmatica version string (must match exactly as listed on Modrinth)
+# Syncmatica enables Litematica schematic sharing between players.
+# Find versions at: https://modrinth.com/mod/syncmatica/versions
+# Filter by your Minecraft version and Fabric loader.
+syncmatica_version: "1.4.2"
+
+# SHA-256 checksum of the Syncmatica jar
+# How to get this value:
+#   Option 1: Modrinth API -- query the version endpoint and read files[0].hashes.sha256
+#     curl -s 'https://api.modrinth.com/v2/project/oNMIuGg5/version?game_versions=["1.21.4"]&loaders=["fabric"]' | jq '.[0].files[0].hashes.sha256'
+#   Option 2: Download the jar and hash it locally
+#     sha256sum syncmatica-1.4.2.jar
+syncmatica_sha256: "REPLACE_WITH_ACTUAL_SHA256_HASH"
+
+# ============================================================
+# Syncmatica Configuration
+# ============================================================
+
+# Maximum schematic file size in kilobytes
+# Larger schematics use more memory and network bandwidth when shared.
+# Default: 10240 (10MB) -- sufficient for most educational builds.
+# Increase for large-scale builds; decrease on memory-constrained servers.
+syncmatica_max_schematic_size_kb: "10240"
+
+# Whether players can share schematics with each other
+# true  = players can upload and share schematics (recommended for Knowledge World)
+# false = only operator-uploaded schematics are available
+syncmatica_allow_sharing: "true"
+
+# ============================================================
+# Modrinth API
+# ============================================================
+
+# Modrinth v2 API base URL
+# The Modrinth API is used to resolve download URLs for version-pinned mods.
+# You should not need to change this unless using a self-hosted Modrinth instance
+# or the API URL changes in the future.
+# API documentation: https://docs.modrinth.com/
+modrinth_base_url: "https://api.modrinth.com/v2"

@@ -7,7 +7,9 @@ export type WindowType =
   | "terminal"
   | "console"
   | "staging"
-  | "settings";
+  | "settings"
+  | "aminet"
+  | "knowledge";
 
 /** Window position and dimensions */
 export interface WindowBounds {

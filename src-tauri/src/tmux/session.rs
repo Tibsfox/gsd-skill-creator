@@ -97,6 +97,7 @@ pub fn create_session(name: &str) -> Result<(), String> {
 }
 
 /// Kill a tmux session by name.
+#[allow(dead_code)] // awaiting session lifecycle command
 pub fn kill_session(name: &str) -> Result<(), String> {
     let output = Command::new("tmux")
         .args(["kill-session", "-t", name])

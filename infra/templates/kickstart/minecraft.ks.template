@@ -1,0 +1,266 @@
+# GSD Minecraft Server -- CentOS Stream 9 Kickstart
+# Rendered from template by render-pxe-menu.sh at deployment time.
+#
+# This kickstart installs a CentOS Stream 9 VM configured as a Minecraft
+# server host with security hardening, Java 21, and the GSD first-boot
+# framework for deferred server setup.
+#
+# Built on the same security foundation as base.ks.template:
+# SELinux enforcing, firewalld, root locked, SSH key-only access.
+# Extends with: Java 21 (headless), minecraft system user, game/RCON
+# firewall ports, first-boot hook for Minecraft environment validation.
+#
+# NOTE: This is a COMPLETE kickstart file (not %include-based). Anaconda's
+# %include over HTTP is fragile, so all base directives are repeated here
+# with Minecraft-specific additions.
+#
+# Template variables (UPPER_SNAKE_CASE -> local-values lower_snake_case):
+#   CENTOS_MIRROR_URL      -- CentOS Stream 9 network install URL
+#   SYSTEM_TIMEZONE        -- System timezone (e.g., UTC)
+#   NET_DEVICE             -- Primary network interface (e.g., ens3)
+#   MINECRAFT_HOSTNAME     -- Minecraft VM hostname
+#   ADMIN_USER             -- Non-root admin username
+#   SSH_PUBLIC_KEY         -- SSH public key for admin user
+#   FIRST_BOOT_SCRIPT_PATH -- Path for the first-boot script
+#   MINECRAFT_SERVER_PORT  -- Game port (default: 25565)
+#   MINECRAFT_RCON_PORT    -- RCON port (default: 25575)
+
+# --- Installation source ---
+url --url=${CENTOS_MIRROR_URL}
+
+# --- Text mode (no GUI installer) ---
+text
+
+# --- Locale / keyboard / timezone ---
+lang en_US.UTF-8
+keyboard us
+timezone ${SYSTEM_TIMEZONE} --utc
+
+# --- Network ---
+network --bootproto=dhcp --device=${NET_DEVICE} --activate --hostname=${MINECRAFT_HOSTNAME}
+
+# --- Root password (locked -- no root login) ---
+rootpw --lock
+
+# --- Admin user ---
+user --name=${ADMIN_USER} --groups=wheel --shell=/bin/bash
+
+# --- SSH key (the ONLY authentication method) ---
+sshkey --username=${ADMIN_USER} "${SSH_PUBLIC_KEY}"
+
+# --- SELinux (NON-NEGOTIABLE) ---
+selinux --enforcing
+
+# --- Firewall (SSH + Minecraft game port + RCON port) ---
+firewall --enabled --ssh --port=${MINECRAFT_SERVER_PORT}:tcp --port=${MINECRAFT_RCON_PORT}:tcp
+
+# --- Bootloader ---
+bootloader --location=mbr --append="crashkernel=auto"
+
+# --- Disk partitioning ---
+zerombr
+clearpart --all --initlabel
+autopart --type=lvm
+
+# --- Packages ---
+%packages
+@^minimal-environment
+openssh-server
+sudo
+vim-minimal
+curl
+tar
+bash-completion
+policycoreutils-python-utils
+java-21-openjdk-headless
+screen
+jq
+firewalld
+%end
+
+# --- Post-install ---
+%post --log=/root/ks-post.log
+
+# ============================================================
+# Base security hardening (same as base.ks.template)
+# ============================================================
+
+# Configure sudo for wheel group (passwordless for automation)
+echo '%wheel ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/wheel-nopasswd
+chmod 440 /etc/sudoers.d/wheel-nopasswd
+
+# Harden sshd_config
+sed -i 's/^#*PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+sed -i 's/^#*PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/^#*PubkeyAuthentication.*/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+
+# ============================================================
+# GSD first-boot service framework (same as base.ks.template)
+# ============================================================
+
+# Create directory structure
+mkdir -p "$(dirname ${FIRST_BOOT_SCRIPT_PATH})"
+mkdir -p /opt/gsd/first-boot.d
+
+# Write the systemd unit file
+cat > /etc/systemd/system/gsd-first-boot.service << 'UNIT_EOF'
+[Unit]
+Description=GSD First Boot Configuration
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=!/etc/gsd-first-boot-complete
+
+[Service]
+Type=oneshot
+ExecStart=${FIRST_BOOT_SCRIPT_PATH}
+RemainAfterExit=false
+StandardOutput=journal+console
+
+[Install]
+WantedBy=multi-user.target
+UNIT_EOF
+
+# Write the first-boot script
+cat > ${FIRST_BOOT_SCRIPT_PATH} << 'SCRIPT_EOF'
+#!/usr/bin/env bash
+# GSD First Boot Configuration Script
+# Runs once on first boot via gsd-first-boot.service.
+# Handles deferred configuration that requires network or runtime state.
+
+set -euo pipefail
+
+# Log all output
+exec > >(tee -a /var/log/gsd-first-boot.log) 2>&1
+
+# --- Idempotency guard ---
+if [[ -f /etc/gsd-first-boot-complete ]]; then
+    echo "First boot already completed, exiting."
+    exit 0
+fi
+
+echo "=== GSD First Boot: $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
+
+# --- Wait for network connectivity (up to 30 seconds) ---
+echo "Waiting for network connectivity..."
+network_timeout=30
+network_elapsed=0
+until ping -c1 -W5 8.8.8.8 &>/dev/null; do
+    sleep 2
+    network_elapsed=$((network_elapsed + 2))
+    if [[ ${network_elapsed} -ge ${network_timeout} ]]; then
+        echo "WARNING: Network not available after ${network_timeout}s, continuing anyway"
+        break
+    fi
+done
+if [[ ${network_elapsed} -lt ${network_timeout} ]]; then
+    echo "Network is up (took ~${network_elapsed}s)"
+fi
+
+# --- System updates (optional) ---
+# Uncomment the following line to apply system updates on first boot:
+# dnf -y update
+
+# --- Execute role-specific hooks ---
+# Role kickstarts (e.g., Minecraft) drop scripts into /opt/gsd/first-boot.d/
+# Scripts are executed in lexicographic order (use NN- prefix for ordering)
+hooks_dir="/opt/gsd/first-boot.d"
+if [[ -d "${hooks_dir}" ]]; then
+    for script in "${hooks_dir}"/*.sh; do
+        [[ -f "${script}" ]] || continue
+        echo "--- Running hook: ${script} ---"
+        chmod +x "${script}"
+        if "${script}"; then
+            echo "--- Hook completed: ${script} ---"
+        else
+            echo "WARNING: Hook failed (exit $?): ${script}"
+        fi
+    done
+else
+    echo "No hooks directory found at ${hooks_dir}, skipping"
+fi
+
+# --- Mark first boot complete ---
+echo "GSD First Boot completed $(date -u +%Y-%m-%dT%H:%M:%SZ)" > /etc/gsd-first-boot-complete
+
+# --- Disable this service (no need to run again) ---
+systemctl disable gsd-first-boot.service
+
+echo "=== GSD First Boot Complete: $(date -u) ==="
+SCRIPT_EOF
+
+chmod +x ${FIRST_BOOT_SCRIPT_PATH}
+
+# Enable the first-boot service
+systemctl enable gsd-first-boot.service
+
+# ============================================================
+# Minecraft-specific configuration
+# ============================================================
+
+# --- Create Minecraft system user ---
+# No login shell (nologin) -- the server process is managed, not interactive
+useradd --system --create-home --home-dir /opt/minecraft --shell /sbin/nologin minecraft
+
+# --- Create server directories ---
+mkdir -p /opt/minecraft/{server,backups,logs}
+chown -R minecraft:minecraft /opt/minecraft
+
+# --- Write Minecraft first-boot hook ---
+# This hook runs during first boot to validate the Java environment
+# and prepare the Minecraft server directory structure.
+# Actual Minecraft server software installation is handled by Phase 173.
+cat > /opt/gsd/first-boot.d/50-minecraft-setup.sh << 'HOOK_EOF'
+#!/usr/bin/env bash
+# GSD First-Boot Hook: Minecraft Server Environment Setup
+# Validates Java 21 installation, sets SELinux contexts, and
+# prepares the Minecraft server directory for software deployment.
+#
+# This hook does NOT install Minecraft server software -- that is
+# handled by Phase 173 (Minecraft Server Deployment).
+
+set -euo pipefail
+
+echo "Minecraft setup hook: starting"
+
+# --- Verify Java 21 is installed ---
+if java -version 2>&1 | grep -q "21\."; then
+    echo "Minecraft setup hook: Java 21 verified"
+    java -version 2>&1 | head -1
+else
+    echo "ERROR: Java 21 not found! Minecraft server requires Java 21."
+    exit 1
+fi
+
+# --- Create server.properties placeholder ---
+# The actual server.properties is deployed by Phase 175 (Server Configuration).
+# This marker indicates the directory is ready for server deployment.
+if [[ ! -f /opt/minecraft/server/server.properties ]]; then
+    echo "# Placeholder -- deploy server.properties via Phase 175" > /opt/minecraft/server/.gsd-ready
+    chown minecraft:minecraft /opt/minecraft/server/.gsd-ready
+    echo "Minecraft setup hook: server directory marked ready for deployment"
+fi
+
+# --- Set SELinux contexts ---
+if command -v restorecon &>/dev/null; then
+    restorecon -Rv /opt/minecraft
+    echo "Minecraft setup hook: SELinux contexts restored on /opt/minecraft"
+else
+    echo "Minecraft setup hook: restorecon not available, skipping SELinux context restore"
+fi
+
+echo "Minecraft setup hook: complete"
+HOOK_EOF
+
+chmod +x /opt/gsd/first-boot.d/50-minecraft-setup.sh
+chown root:root /opt/gsd/first-boot.d/50-minecraft-setup.sh
+
+# --- Write the Minecraft build marker ---
+echo "GSD Minecraft Server built $(date -u +%Y-%m-%dT%H:%M:%SZ)" > /etc/gsd-minecraft-server
+
+# Write base image marker too (Minecraft images are a superset of base)
+echo "GSD Base Image built $(date -u +%Y-%m-%dT%H:%M:%SZ)" > /etc/gsd-base-image
+
+%end
+
+# --- Reboot after installation ---
+reboot --eject

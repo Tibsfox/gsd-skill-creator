@@ -1,0 +1,390 @@
+# GSD Skill Metadata
+pack_id: PE-101
+pack_name: "Physical Education & Movement — Foundational Knowledge Pack"
+version: 1.0.0
+release_date: "2026-02-20"
+
+# Status & Classification
+status: alpha
+classification: specialized
+learning_domain: physical_education
+
+# Content Description
+description: |
+  Physical education as movement literacy — understanding how bodies move,
+  building fitness for life, developing coordination and spatial awareness,
+  and forming lifelong health habits. Covers fundamental movement, fitness
+  science, sports and teamwork, dance and creative expression, and lifetime
+  wellness from foundation through college level. Emphasizes inclusion for
+  all body types and ability levels, personal growth over competition, and
+  the science and joy of human movement.
+
+short_description: "Movement literacy, fitness science, and active living from K-College"
+
+# Authorship & Attribution
+contributors:
+  - name: "GSD Foundation"
+    role: architect
+  - name: "Physical Education Working Group"
+    role: content_creators
+
+copyright: "Creative Commons Attribution-ShareAlike 4.0 (CC-BY-SA-4.0)"
+maintained_by: GSD-Foundational-Knowledge
+
+# Dependencies & Prerequisites
+dependencies: []
+prerequisite_packs: []
+recommended_prior_knowledge:
+  - NUTR-101
+
+# What This Pack Enables
+enables: []
+
+# Level & Time Estimates
+grade_levels:
+  - label: Foundation
+    grades: ["PreK", "K", "1", "2"]
+    estimated_hours: [30, 50]
+
+  - label: Elementary
+    grades: ["3", "4", "5"]
+    estimated_hours: [50, 70]
+
+  - label: "Middle School"
+    grades: ["6", "7", "8"]
+    estimated_hours: [70, 100]
+
+  - label: "High School"
+    grades: ["9", "10", "11", "12"]
+    estimated_hours: [100, 140]
+
+  - label: College
+    grades: ["13", "14", "15", "16"]
+    estimated_hours: [140, 200]
+
+# Modules
+modules:
+  - id: PE-101-M1
+    name: "Movement Foundations"
+    level: foundation
+    duration_hours: 40
+    prereq_modules: []
+
+  - id: PE-101-M2
+    name: "Fitness & Body Science"
+    level: foundation-high
+    duration_hours: 35
+    prereq_modules: [PE-101-M1]
+
+  - id: PE-101-M3
+    name: "Sports, Games & Teamwork"
+    level: elementary-high
+    duration_hours: 40
+    prereq_modules: [PE-101-M1]
+
+  - id: PE-101-M4
+    name: "Rhythm, Dance & Creative Movement"
+    level: foundation-high
+    duration_hours: 25
+    prereq_modules: [PE-101-M1]
+
+  - id: PE-101-M5
+    name: "Lifetime Wellness & Active Living"
+    level: elementary-college
+    duration_hours: 30
+    prereq_modules: [PE-101-M1, PE-101-M2]
+
+# Learning Outcomes
+learning_outcomes:
+  - code: LO-MOV-001
+    description: "Perform fundamental locomotor, non-locomotor, and manipulative skills with control"
+    levels: ["K", "1", "2", "3", "4", "5"]
+
+  - code: LO-FIT-001
+    description: "Identify components of health-related fitness and apply FITT principle"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-SPT-001
+    description: "Participate in sports with strategy, sportsmanship, and inclusivity"
+    levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+  - code: LO-DNC-001
+    description: "Move rhythmically and create expressive movement sequences"
+    levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8"]
+
+  - code: LO-WEL-001
+    description: "Design personal fitness plans and connect movement to lifetime wellness"
+    levels: ["6", "7", "8", "9", "10", "11", "12"]
+
+# Assessment Methods
+assessment_methods:
+  - type: formative
+    name: "Movement Observation"
+    frequency: ongoing
+
+  - type: formative
+    name: "Fitness Tracking and Self-Assessment"
+    frequency: weekly
+
+  - type: summative
+    name: "Personal Fitness Plan Portfolio"
+    frequency: end_of_unit
+
+  - type: summative
+    name: "Movement Skills Demonstration"
+    frequency: end_of_module
+
+# Technologies & Tools
+tools_required: []
+tools_optional:
+  - name: heart_rate_monitor
+    url: null
+    description: "Optional wearable for tracking heart rate during exercise activities"
+
+  - name: music_player
+    url: null
+    description: "Audio playback for rhythm, dance, and warm-up activities"
+
+  - name: fitness_tracker_app
+    integrated: true
+    description: "Digital fitness log for tracking personal fitness plans and progress"
+
+interactive_elements:
+  - type: activity
+    name: "Obstacle Course Builder"
+
+  - type: investigation
+    name: "Heart Rate Explorer"
+
+  - type: game
+    name: "Movement Vocabulary Bingo"
+
+  - type: simulator
+    name: "Fitness Plan Designer"
+
+  - type: activity
+    name: "Cultural Dance Sampler"
+
+  - type: discussion
+    name: "Sportsmanship Scenarios"
+
+# Translations
+translations:
+  available:
+    - language_code: en
+      name: English
+      complete: true
+    - language_code: es
+      name: Español
+      complete: false
+      progress: "15%"
+    - language_code: fr
+      name: Français
+      complete: false
+      progress: "0%"
+    - language_code: de
+      name: Deutsch
+      complete: false
+      progress: "0%"
+    - language_code: it
+      name: Italiano
+      complete: false
+      progress: "0%"
+
+  planned: [zh, ar]
+
+# Accessibility
+accessibility:
+  screen_reader_compatible: true
+  large_text_available: true
+  high_contrast_available: true
+  keyboard_navigable: true
+  alt_text_provided: true
+  captions_available: true
+  notes: |
+    Physical activity descriptions need adaptive alternatives for mobility-limited learners. Video demonstrations have captions and audio descriptions. Every activity includes multiple participation options: adapted movements, supporting roles, observation with analysis. Fitness tracking accessible without wearables (manual logging, verbal reporting). Dance activities include video guides with multiple learning modalities."
+
+# Standards Alignment
+standards_alignment:
+  - framework: "SHAPE America National Standards for K-12 Physical Education"
+    version: 2014
+    alignments:
+      "Standard 1 (Motor Skills)": "PE-101-M1, M3, M4"
+      "Standard 2 (Knowledge & Concepts)": "PE-101-M2, M3, M5"
+      "Standard 3 (Fitness)": "PE-101-M2, M5"
+      "Standard 4 (Responsibility)": "PE-101-M3, M4, M5"
+      "Standard 5 (Value of Activity)": "PE-101-M2, M4, M5"
+
+  - framework: "IB MYP Physical & Health Education"
+    version: 2016
+    alignments:
+      "Health & Social Education": "PE-101-M2, M5"
+      "Movement": "PE-101-M1, M3, M4"
+      "Physical Activity & Sport": "PE-101-M3, M5"
+
+  - framework: "UK National Curriculum PE"
+    version: 2014
+    alignments:
+      "Key Stage 2": "PE-101-M1, M2, M3 (elementary/middle)"
+      "Key Stage 3": "PE-101-M3, M4, M5 (middle/high)"
+      "Key Stage 4": "PE-101-M5 (high school)"
+
+  - framework: "Physical Literacy Framework"
+    version: 2019
+    alignments:
+      "Physical Competence": "Motor skills, fitness, and spatial awareness"
+      "Daily Behavior": "Active living habits and fitness planning"
+      "Motivation and Confidence": "Intrinsic motivation, self-efficacy, enjoyment of movement"
+      "Knowledge and Understanding": "Exercise science, rules, strategy, wellness concepts"
+
+# Difficulty Rating
+difficulty:
+  conceptual_demand: medium
+  technical_demand: medium
+  prerequisites_required: low
+  notes: "Physical skills require practice time. Conceptual content (exercise science, fitness planning) is accessible with scaffolding. All activities adaptable for different ability levels."
+
+# Content Flags
+content_flags:
+  - flag: body_image_sensitivity
+    description: "Physical education activities can trigger body image concerns, especially for adolescents."
+    mitigation: "Never use weight, appearance, or body measurements as metrics. Focus on function, capability, and personal growth. Use encouraging language."
+
+  - flag: competition_anxiety
+    description: "Competitive activities can create anxiety for less athletic learners."
+    mitigation: "Emphasize personal improvement over ranking. Offer modified and cooperative game versions. Never use elimination-style games."
+
+  - flag: physical_limitation_awareness
+    description: "Learners with disabilities, chronic illness, or injuries need adapted activities."
+    mitigation: "Every module includes adaptation notes. Adapted sports covered explicitly in Module 3. Work with medical professionals for individual plans."
+
+  - flag: cultural_sensitivity_in_dance
+    description: "Cultural dance forms must be taught with respect and proper context."
+    mitigation: "Partner with cultural organizations. Provide historical and cultural context. Avoid stereotyping or trivializing dance traditions."
+
+# Community & Contribution
+community:
+  discussion_forum: "https://community.gsd.edu/pe-101"
+  contribution_guidelines: "CONTRIBUTING.md"
+  open_issues_tag: "PE-101"
+  looking_for:
+    - "Activities adapted for wheelchair users and other mobility differences"
+    - "Cultural dance resources with proper cultural permissions"
+    - "Fitness activities requiring zero equipment"
+    - "Translations to Spanish, Mandarin, and French"
+    - "Connections to community recreation programs"
+    - "Video demonstrations of fundamental movement skills"
+
+# Maintenance Schedule
+maintenance:
+  review_frequency: quarterly
+  last_reviewed: "2026-02-20"
+  next_review: "2026-05-20"
+  maintainer: "Physical Education Working Group"
+
+# Metrics & Usage
+metrics:
+  active_learners: 0
+  completion_rate: null
+  satisfaction_rating: null
+
+# Tags for Discovery
+tags:
+  - physical-education
+  - movement
+  - fitness
+  - sports
+  - dance
+  - wellness
+  - health
+  - exercise
+  - teamwork
+  - coordination
+  - inclusion
+  - adapted-sports
+  - specialized
+
+# External Resources
+resources:
+  - type: standards
+    title: "SHAPE America National Standards for K-12 Physical Education"
+    author: "SHAPE America"
+    url: "https://www.shapeamerica.org/"
+
+  - type: curriculum
+    title: "OPEN Physical Education Curriculum"
+    author: "OPEN"
+    url: "https://openphysed.org/"
+
+  - type: online_platform
+    title: "PE Central"
+    author: "PE Central"
+    url: "https://www.pecentral.org/"
+
+  - type: online_platform
+    title: "GoNoodle Movement Videos"
+    author: "GoNoodle"
+    url: "https://www.gonoodle.com/"
+
+# Related Packs
+related_packs:
+  - id: NUTR-101
+    relationship: "Nutrition fuels movement; exercise and nutrition are complementary wellness pillars"
+
+  - id: SCI-101
+    relationship: "Biology of muscles, heart, lungs, and nervous system underlies exercise physiology"
+
+  - id: PSYCH-101
+    relationship: "Exercise and mental health connection; motivation, body image, habit formation"
+
+  - id: COMM-101
+    relationship: "Team sports require verbal and nonverbal communication skills"
+
+# Implementation Notes for GSD-OS
+gsd_integration:
+  dashboard_display:
+    icon: "running"
+    color: "#FF5722"
+    position: "Specialized"
+
+  activity_scaffolding: true
+  skill_creator_enabled: true
+  adaptive_pacing: true
+
+  cache_keys:
+    - "PE-101-movement-foundations"
+    - "PE-101-fitness-science"
+    - "PE-101-sports-teamwork"
+    - "PE-101-dance-expression"
+    - "PE-101-lifetime-wellness"
+    - "PE-101-parent-guidance"
+
+# File References
+files:
+  vision_document: "PE-101-vision.md"
+  modules_definition: "PE-101-modules.yaml"
+  activities: "PE-101-activities.json"
+  assessment: "PE-101-assessment.md"
+  resources: "PE-101-resources.md"
+  readme: "README.md"
+
+# Changelog
+changelog:
+  - version: 1.0.0
+    date: "2026-02-20"
+    changes:
+      - "Initial release: Five core modules covering movement, fitness, sports, dance, and wellness"
+      - "Contributed 10+ starter activities across all modules"
+      - "Assessment framework with four proficiency levels focused on personal growth"
+      - "Parent guidance for non-athletic families"
+      - "Aligned to SHAPE America National Standards and Physical Literacy Framework"
+      - "Adapted PE integration throughout all modules"
+
+# Quality Assurance
+qa:
+  peer_reviewed: true
+  tested_with_learners: false
+  culturally_responsive: true
+  bias_audit_completed: false
+  accessibility_audit_completed: false
+  next_audit_scheduled: "2026-04-20"

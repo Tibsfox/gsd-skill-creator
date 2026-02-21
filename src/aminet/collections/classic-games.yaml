@@ -1,0 +1,23 @@
+name: Classic Games
+description: Legendary Amiga games spanning multiple genres
+version: 1
+createdAt: '2026-02-19T00:00:00Z'
+updatedAt: '2026-02-19T00:00:00Z'
+author: GSD Aminet Pack
+tags:
+  - starter
+  - games
+  - classic
+packages:
+  - fullPath: game/shoot/DGalaga.lha
+    note: Deluxe Galaga - polished arcade shooter
+  - fullPath: game/misc/Worms.lha
+    note: Worms -- turn-based artillery classic
+  - fullPath: game/board/Settlers.lha
+    note: The Settlers of Catan board game
+  - fullPath: game/shoot/TZero.lha
+    note: T-Zero -- fast-paced space shooter
+  - fullPath: game/jump/GianaSisters.lha
+    note: The Great Giana Sisters remake
+  - fullPath: game/2play/Skidmarks.lha
+    note: Skid Marks -- top-down racing

@@ -1,0 +1,313 @@
+---
+# WRIT-101 Module Definitions
+# Defines the five core modules and their structure for skill-creator
+
+pack_id: WRIT-101
+pack_name: "Literature & Creative Writing -- Foundational Knowledge Pack"
+
+modules:
+  - id: WRIT-101-M1
+    name: "Reading as Discovery"
+    description: "Developing close reading skills -- paying attention to how authors construct meaning through specific choices of words, structure, and form. Learning to ask genuine questions while reading and support interpretations with textual evidence."
+
+    learning_outcomes:
+      - "Slow down and attend to how authors construct meaning through word choice, imagery, and structure"
+      - "Ask genuine questions while reading and distinguish observation from interpretation"
+      - "Create detailed, accurate records of observations about texts"
+      - "Support interpretations with specific, relevant textual evidence"
+      - "Recognize that multiple valid interpretations can coexist"
+
+    topics:
+      - "Close Reading Practices & Annotation"
+      - "Word Choice & Connotation"
+      - "Imagery & Sensory Detail"
+      - "Structure, Pacing & Form"
+      - "Reading Across Genres"
+      - "Discussion & Textual Argumentation"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 25
+      elementary: 30
+      middle: 30
+      high: 25
+
+    prerequisite_modules: []
+
+    activities:
+      count: 6
+      examples:
+        - "Annotation Station: Close Reading Practice"
+        - "Genre Detective: Story Elements Investigation"
+        - "Word Choice Workshop: Finding the Perfect Word"
+        - "Imagery Scavenger Hunt"
+        - "Discussion Practice: Defending Interpretations"
+        - "Rereading for Deeper Understanding"
+
+    assessments:
+      - "Can student identify specific words or phrases that reveal meaning?"
+      - "Do annotations show genuine questioning, not just highlighting?"
+      - "Can student support interpretations with relevant textual evidence?"
+      - "Is student willing to consider multiple interpretations?"
+
+  - id: WRIT-101-M2
+    name: "Story & Narrative"
+    description: "Understanding how narrative works -- character development, point of view, conflict, dialogue, imagery, and pacing. Analyzing how authors make deliberate choices to shape reader experience. Creating original fiction that demonstrates understanding of narrative craft."
+
+    learning_outcomes:
+      - "Trace character development and understand what motivates characters to act"
+      - "Analyze how point of view shapes what readers know and how they judge characters"
+      - "Identify and create conflict that drives narrative forward"
+      - "Write realistic dialogue that reveals character and advances plot"
+      - "Use vivid imagery and sensory detail to anchor readers in the story world"
+
+    topics:
+      - "Character Development & Motivation"
+      - "Point of View & Narrator Perspective"
+      - "Conflict: External & Internal"
+      - "Dialogue as Character & Plot Tool"
+      - "Imagery, Setting & Atmosphere"
+      - "Pacing, Structure & Timing"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 35
+      middle: 40
+      high: 35
+
+    prerequisite_modules: [WRIT-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Flash Fiction Challenge (500 Words)"
+        - "Character Interview Workshop"
+        - "Point of View Experiment"
+        - "Dialogue Practice: Creating Realistic Conversations"
+        - "Setting & Atmosphere Building"
+        - "Story Structure Mapping"
+
+    assessments:
+      - "Does the student show understanding of how character motivations drive action?"
+      - "Can the student explain how point of view affects reader understanding?"
+      - "Is dialogue realistic and does it reveal character?"
+      - "Does the story have clear conflict and resolution?"
+
+  - id: WRIT-101-M3
+    name: "Poetry & Language"
+    description: "Appreciating poetry across forms and understanding how language functions in poetry. Learning that in poetry, every word carries weight. Experimenting with sound, imagery, figurative language, and form. Writing original poetry in different forms."
+
+    learning_outcomes:
+      - "Recognize and appreciate poetry across different forms and time periods"
+      - "Understand how sound and form contribute to meaning, not decoration"
+      - "Use imagery and figurative language intentionally to create specific effects"
+      - "Experiment with poetic forms from rigid structures (haiku, sonnet) to free verse"
+      - "Develop voice and personal style in poetry writing"
+
+    topics:
+      - "Forms: Haiku, Acrostic, Sonnet, Free Verse, Villanelle & Others"
+      - "Imagery: Precise, Vivid Sensory Language"
+      - "Figurative Language: Metaphor, Simile, Personification"
+      - "Sound Devices: Alliteration, Assonance, Rhyme, Rhythm"
+      - "Voice, Tone & Compression"
+      - "Reading & Performing Poetry"
+
+    grade_levels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 15
+      elementary: 25
+      middle: 30
+      high: 30
+
+    prerequisite_modules: [WRIT-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Found Poetry Collage"
+        - "Haiku Nature Walk"
+        - "Metaphor Laboratory: Experimenting with Imagery"
+        - "Sound Devices Exploration"
+        - "Poetry Reading & Performance Circle"
+        - "Sonnet or Free Verse Creation"
+
+    assessments:
+      - "Can student recognize diverse poetic forms?"
+      - "Do they understand how sound and form contribute to meaning?"
+      - "Is their original poetry intentional and meaningful?"
+      - "Can they explain the effects of specific language choices?"
+
+  - id: WRIT-101-M4
+    name: "The Writing Process"
+    description: "Understanding that writing is recursive -- drafting, receiving feedback, revising substantially, and editing. Developing authentic voice through practice and feedback. Learning that revision is at the heart of all meaningful writing, not a punishment for poor first drafts."
+
+    learning_outcomes:
+      - "Draft regularly without judgment, discovering meaning as ideas emerge"
+      - "Participate in peer workshops, giving and receiving constructive feedback"
+      - "Revise substantially based on feedback, focusing on clarity and impact"
+      - "Edit at the sentence level for grammar, word choice, and style"
+      - "Develop personal voice and style through repeated practice"
+
+    topics:
+      - "Drafting: Getting Ideas Down"
+      - "Workshopping & Peer Feedback"
+      - "Revising: Rethinking Content & Structure"
+      - "Editing: Sentence-Level Refinement"
+      - "Voice & Personal Style"
+      - "Publishing & Sharing Work"
+
+    grade_levels: ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      foundation: 20
+      elementary: 25
+      middle: 35
+      high: 40
+
+    prerequisite_modules: [WRIT-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Peer Workshop Circle"
+        - "Revision Surgery: Before & After Analysis"
+        - "Portfolio Development & Reflection"
+        - "Editing Practice: Mechanics & Style"
+        - "Drafting & Feedback Marathon"
+        - "Publication Project: Sharing Finished Work"
+
+    assessments:
+      - "Does student write regularly and across multiple forms?"
+      - "Do they revise substantially, not just mechanically?"
+      - "Can they respond thoughtfully to peer feedback?"
+      - "Is there evidence of growth in their portfolio?"
+
+  - id: WRIT-101-M5
+    name: "Literary Analysis & Critical Response"
+    description: "Moving beyond plot summary to interpret what texts mean and how they work. Supporting analysis with evidence. Understanding texts within historical and cultural context. Applying multiple interpretive frameworks to deepen understanding."
+
+    learning_outcomes:
+      - "Identify and explore recurring themes and what texts are really about"
+      - "Explain how specific elements (character, imagery, structure) develop theme"
+      - "Support interpretations with specific, relevant textual evidence"
+      - "Contextualize texts within history, culture, and literary movements"
+      - "Apply multiple interpretive frameworks (feminist, postcolonial, psychological, etc.)"
+
+    topics:
+      - "Thematic Analysis: What Is This Text Really About?"
+      - "Symbolism & Deeper Meanings"
+      - "Historical & Cultural Context"
+      - "Multiple Interpretive Frameworks"
+      - "Evidence-Based Literary Argumentation"
+      - "Comparative Literature & Intertextuality"
+
+    grade_levels: ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+    time_estimates:
+      elementary: 15
+      middle: 35
+      high: 40
+
+    prerequisite_modules: [WRIT-101-M1]
+
+    activities:
+      count: 6
+      examples:
+        - "Theme Tracker Reading Journal"
+        - "Comparative Essay: Two Texts in Conversation"
+        - "Historical Context Research & Analysis"
+        - "Critical Lens Application"
+        - "Literary Analysis Essay Writing"
+        - "Close Reading Seminar Discussion"
+
+    assessments:
+      - "Can student move beyond plot summary to interpret meaning?"
+      - "Do they support interpretations with relevant textual evidence?"
+      - "Can they consider historical/cultural context thoughtfully?"
+      - "Do their analyses explore complexity rather than settling on simple conclusions?"
+
+# Cross-Module Competencies
+
+cross_module_competencies:
+  - name: "Engaged Reading"
+    description: "Ability to read with genuine curiosity, asking real questions and attending to how texts are constructed"
+    assessed_in: [WRIT-101-M1, WRIT-101-M2, WRIT-101-M3, WRIT-101-M5]
+
+  - name: "Literary Thinking"
+    description: "Habit of interpreting texts, supporting ideas with evidence, and recognizing multiple valid readings"
+    assessed_in: [WRIT-101-M1, WRIT-101-M2, WRIT-101-M3, WRIT-101-M5]
+
+  - name: "Authorial Perspective"
+    description: "Understanding that authors make deliberate choices and learning to recognize and appreciate those choices"
+    assessed_in: [WRIT-101-M1, WRIT-101-M2, WRIT-101-M3]
+
+  - name: "Writing Craft"
+    description: "Ability to express ideas clearly and intentionally, making deliberate choices about structure, word choice, and style"
+    assessed_in: [WRIT-101-M2, WRIT-101-M3, WRIT-101-M4]
+
+  - name: "Revision & Feedback"
+    description: "Willingness to revise substantially based on feedback and understanding revision as rethinking, not just correction"
+    assessed_in: [WRIT-101-M2, WRIT-101-M3, WRIT-101-M4]
+
+# Progression Pathways
+
+progression_pathways:
+  - name: "Linear Pathway"
+    description: "M1 -> M2 -> M3 -> M4, with M5 as enrichment throughout"
+    rationale: "Follows natural progression: learn to read closely, then understand how stories work, then appreciate poetry, then develop your own voice, then analyze deeply. History of literature and analysis can enrich any stage."
+
+  - name: "Spiral Pathway"
+    description: "Revisit all five modules repeatedly at increasing depth and sophistication"
+    rationale: "Reading skills deepen with practice. A second pass through narrative analysis after learning about writing process produces deeper understanding. Poetry and analysis skills build on stronger close reading."
+
+  - name: "Genre-Led Pathway"
+    description: "Choose module based on interest; M1 is prerequisite foundation only"
+    rationale: "A learner fascinated by poetry might start with M3 while building close reading through M1 as needed. A story lover might focus on M2 and M4."
+
+# Parallel Learning Patterns for Token Caching
+
+parallel_patterns:
+  - pattern: "Module Introduction"
+    description: "All five modules follow the same introduction structure: Core Concepts, Key Practices, Learning Outcomes, Assessment Questions"
+    cached: true
+
+  - pattern: "Activity Format"
+    description: "Activities follow a consistent template across all modules: name, description, materials, learning objectives, variations"
+    cached: true
+
+  - pattern: "Assessment Framework"
+    description: "Assessment evaluates thinking and craft, not terminology. Rubric structure is parallel across all modules"
+    cached: true
+
+  - pattern: "Prerequisite Logic"
+    description: "M1 is foundational; M2, M3, and M5 build on M1; M4 (writing process) can be integrated throughout"
+    cached: true
+
+# Skill-Creator Integration Points
+
+skill_creator_integration:
+  observation_points:
+    - "When learner asks genuine questions about texts without prompting"
+    - "When learner supports interpretations with specific textual evidence"
+    - "When learner notices authorial choices and discusses their effects"
+    - "When learner revises substantially based on feedback"
+    - "When learner experiments with new forms or techniques"
+
+  pattern_detection:
+    - "Effective close reading annotation strategies"
+    - "Successful narrative techniques in student writing"
+    - "Poetic devices used intentionally and effectively"
+    - "Peer feedback and revision patterns that produce growth"
+
+  skill_promotion:
+    - "Promote effective annotation patterns to reusable close reading skills"
+    - "Create narrative technique templates from successful student stories"
+    - "Build poetry and figurative language toolkits from successful experiments"
+    - "Develop writing process frameworks from observed peer feedback and revision patterns"
+
+# This YAML defines the modular structure for the WRIT-101 pack and enables
+# skill-creator to orchestrate learning experiences centered on literature and writing.

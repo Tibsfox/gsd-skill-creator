@@ -1,0 +1,18 @@
+# Comfortable tier test fixture (32GB machine)
+# G1GC garbage collector with 14GB heap allocation
+# Used by test-deploy-minecraft.sh to validate JVM flag rendering
+fabric_installer_version: "1.0.1"
+minecraft_version: "1.21.4"
+fabric_loader_version: "latest"
+minecraft_home: "/opt/minecraft"
+server_jar: "fabric-server-launch.jar"
+jvm_heap_min_mb: "2048"
+jvm_heap_max_mb: "13824"
+gc_type: "G1GC"
+gc_flags: "-XX:+UseG1GC"
+extra_jvm_flags: "-XX:+ParallelRefProcEnabled -XX:+DisableExplicitGC -XX:+AlwaysPreTouch"
+jvm_flags_path: "/opt/minecraft/server/jvm-flags.conf"
+minecraft_server_port: "25565"
+minecraft_rcon_port: "25575"
+management_interface: "ens3"
+minecraft_eula: "true"

@@ -1,0 +1,20 @@
+# OctaMED SoundStudio -- AGA audio-priority profile
+#
+# Audio-priority configuration supporting 8+ channels with MIDI output
+# when available. AGA chipset for OctaMED SoundStudio UI features.
+# Generous RAM allocation for sample storage and mixing.
+
+# Chipset -- AGA for OctaMED SoundStudio features
+chipset=AGA
+chipset_compatible=A1200
+
+# CPU -- 68020 benefits OctaMED's multi-channel mixing engine
+cpu_type=68020
+
+# Memory -- generous for sample storage
+chip_ram=2048
+fast_ram=8192
+
+# Audio -- sample-accurate output critical for tracker playback
+sound_output=exact
+sound_stereo_separation=7
