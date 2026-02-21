@@ -541,3 +541,210 @@ export class LogicSimulator {
     );
   }
 }
+
+// ---------------------------------------------------------------------------
+// Truth Table -- combinational circuit analysis
+// ---------------------------------------------------------------------------
+
+/** Single row in a truth table */
+export interface TruthTableRow {
+  inputs: boolean[];
+  outputs: boolean[];
+}
+
+/** Truth table for a combinational circuit */
+export interface TruthTable {
+  inputs: string[];
+  outputs: string[];
+  rows: TruthTableRow[];
+  render(): string;
+}
+
+/**
+ * Generate a truth table for a combinational circuit.
+ * Enumerates all 2^N input combinations in binary counting order,
+ * evaluates the circuit for each, and records the output values.
+ *
+ * @param sim - LogicSimulator with gates already added
+ * @param inputNames - input signal names (order determines binary counting)
+ * @param outputNames - output signal names to read after evaluation
+ * @returns TruthTable with rows in binary counting order and ASCII render()
+ */
+export function generateTruthTable(
+  sim: LogicSimulator,
+  inputNames: string[],
+  outputNames: string[],
+): TruthTable {
+  const totalRows = 1 << inputNames.length; // 2^N
+  const rows: TruthTableRow[] = [];
+
+  for (let rowIdx = 0; rowIdx < totalRows; rowIdx++) {
+    sim.reset();
+
+    // Convert row index to binary -> boolean array for inputs
+    // MSB first: bit (inputNames.length - 1) down to bit 0
+    const inputValues: boolean[] = [];
+    for (let bit = inputNames.length - 1; bit >= 0; bit--) {
+      inputValues.push(((rowIdx >> bit) & 1) === 1);
+    }
+
+    // Set input signals on the simulator
+    for (let i = 0; i < inputNames.length; i++) {
+      sim.setSignal(inputNames[i], inputValues[i]);
+    }
+
+    // Evaluate circuit to steady state
+    sim.evaluate();
+
+    // Read output signals
+    const outputValues: boolean[] = outputNames.map((name) =>
+      sim.getSignal(name),
+    );
+
+    rows.push({ inputs: inputValues, outputs: outputValues });
+  }
+
+  return {
+    inputs: [...inputNames],
+    outputs: [...outputNames],
+    rows,
+    render(): string {
+      const allNames = [...inputNames, ...outputNames];
+
+      // Calculate column widths (minimum width = name length, at least 1)
+      const colWidths = allNames.map((name) => Math.max(name.length, 1));
+
+      // Helper to pad a value centered in a column
+      const padCenter = (val: string, width: number): string => {
+        const padding = width - val.length;
+        const left = Math.floor(padding / 2);
+        const right = padding - left;
+        return ' '.repeat(left) + val + ' '.repeat(right);
+      };
+
+      // Header row
+      const header =
+        '| ' +
+        allNames.map((name, i) => padCenter(name, colWidths[i])).join(' | ') +
+        ' |';
+
+      // Separator row
+      const separator =
+        '|' +
+        colWidths.map((w) => '-'.repeat(w + 2)).join('|') +
+        '|';
+
+      // Data rows
+      const dataLines = rows.map((row) => {
+        const allValues = [...row.inputs, ...row.outputs];
+        return (
+          '| ' +
+          allValues
+            .map((v, i) => padCenter(v ? '1' : '0', colWidths[i]))
+            .join(' | ') +
+          ' |'
+        );
+      });
+
+      return [header, separator, ...dataLines].join('\n');
+    },
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Timing Diagram -- ASCII waveform visualization
+// ---------------------------------------------------------------------------
+
+/** Timing diagram for signal waveform visualization */
+export interface TimingDiagram {
+  signals: string[];
+  waveforms: Record<string, boolean[]>;
+  timeSteps: number;
+  render(): string;
+}
+
+/** Options for timing diagram generation */
+export interface TimingDiagramOptions {
+  stepsPerUnit?: number; // default 1
+  maxTime?: number; // default 100
+}
+
+/**
+ * Generate a timing diagram showing signal values over time.
+ * Models propagation delay: at each time step, inputs are set first,
+ * then the current signal values (before gate evaluation) are recorded,
+ * then sim.step() advances gate outputs for the next time step.
+ *
+ * This produces a 1-step delay between input changes and output responses,
+ * accurately modeling real propagation delay behavior.
+ *
+ * @param sim - LogicSimulator with gates already added
+ * @param inputSequence - array of input signal values for each time step
+ * @param signalNames - names of all signals to record (inputs + outputs)
+ * @param options - optional timing parameters
+ * @returns TimingDiagram with waveforms and ASCII render()
+ */
+export function generateTimingDiagram(
+  sim: LogicSimulator,
+  inputSequence: Record<string, boolean>[],
+  signalNames: string[],
+  options?: TimingDiagramOptions,
+): TimingDiagram {
+  const _maxTime = options?.maxTime ?? 100;
+  const _stepsPerUnit = options?.stepsPerUnit ?? 1;
+
+  // Initialize waveforms
+  const waveforms: Record<string, boolean[]> = {};
+  for (const name of signalNames) {
+    waveforms[name] = [];
+  }
+
+  // Reset simulator to clean state
+  sim.reset();
+
+  // Process each time step
+  for (let t = 0; t < inputSequence.length; t++) {
+    const inputs = inputSequence[t];
+
+    // Set input signals for this time step
+    for (const [name, value] of Object.entries(inputs)) {
+      sim.setSignal(name, value);
+    }
+
+    // Record current signal values BEFORE stepping
+    // (outputs still reflect previous evaluation, showing propagation delay)
+    for (const name of signalNames) {
+      waveforms[name].push(sim.getSignal(name));
+    }
+
+    // Step the simulator -- gate outputs now update for next time step
+    sim.step();
+  }
+
+  const timeSteps = inputSequence.length;
+
+  return {
+    signals: [...signalNames],
+    waveforms,
+    timeSteps,
+    render(): string {
+      if (timeSteps === 0) {
+        return '';
+      }
+
+      // Find the longest signal name for left-padding
+      const maxNameLen = Math.max(...signalNames.map((n) => n.length));
+
+      const lines: string[] = [];
+
+      for (const name of signalNames) {
+        const wave = waveforms[name];
+        const waveStr = wave.map((v) => (v ? '^' : '_')).join('');
+        const paddedName = name.padStart(maxNameLen);
+        lines.push(`${paddedName}: ${waveStr}`);
+      }
+
+      return lines.join('\n');
+    },
+  };
+}
