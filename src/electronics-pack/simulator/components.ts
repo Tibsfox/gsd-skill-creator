@@ -747,6 +747,198 @@ export function stampBJT(
 }
 
 // ============================================================================
+// MOSFET Stamp (Piecewise-Linear Switch Model)
+// ============================================================================
+
+/** MOSFET off-state resistance */
+const MOSFET_R_OFF = 10e6;
+
+/**
+ * Stamp a MOSFET into the MNA matrix using piecewise-linear switch model.
+ *
+ * The MOSFET is modeled as a voltage-controlled switch between drain and source:
+ *   - N-channel: ON when Vgs >= Vth (gate above source), OFF otherwise
+ *   - P-channel: ON when Vsg >= |Vth| (source above gate), OFF otherwise
+ *
+ * When ON: conductance G_ds = 1/Rds_on between drain and source.
+ * When OFF: conductance G_ds = 1/R_off (10M ohm leakage).
+ *
+ * @param target - MNA stamp target
+ * @param mosfet - MOSFET component (nodes[0]=drain, nodes[1]=source)
+ * @param nodeVoltages - Current voltage estimates for region selection
+ */
+export function stampMOSFET(
+  target: StampTarget,
+  mosfet: MOSFET,
+  nodeVoltages?: Record<string, number>,
+): void {
+  const nd = target.nodeIndex(mosfet.nodes[0]); // drain
+  const ns = target.nodeIndex(mosfet.nodes[1]); // source
+  const ng = target.nodeIndex(mosfet.gateNode); // gate (for logging only)
+
+  // Get voltage estimates
+  const vGate = nodeVoltages?.[mosfet.gateNode] ?? 0;
+  const vSource = nodeVoltages?.[mosfet.nodes[1]] ?? 0;
+
+  // Determine ON/OFF region
+  let isOn: boolean;
+  if (mosfet.channel === 'N') {
+    // N-channel: ON when Vgs >= Vth
+    const vgs = vGate - vSource;
+    isOn = vgs >= mosfet.thresholdVoltage;
+  } else {
+    // P-channel: ON when Vsg >= |Vth|
+    const vsg = vSource - vGate;
+    isOn = vsg >= mosfet.thresholdVoltage;
+  }
+
+  const R = isOn ? mosfet.onResistance : MOSFET_R_OFF;
+  const g = 1 / R;
+  const region = isOn ? 'ON' : 'OFF';
+  const rLabel = isOn ? `Rds_on=${mosfet.onResistance}` : `R_off=${MOSFET_R_OFF}`;
+
+  target.stampLog.push({
+    component: mosfet.id,
+    row: -1, col: -1, value: 0,
+    explanation: `${mosfet.id} (${mosfet.channel}-ch MOSFET, Vth=${mosfet.thresholdVoltage}V): ${region} (${rLabel} Ohm)`,
+  });
+
+  // Stamp G_ds as resistor pattern between drain and source
+  if (nd >= 0 && ns >= 0) {
+    target.matrix[nd][nd] += g;
+    target.matrix[ns][ns] += g;
+    target.matrix[nd][ns] -= g;
+    target.matrix[ns][nd] -= g;
+    target.stampLog.push({
+      component: mosfet.id,
+      row: nd, col: ns, value: g,
+      explanation: `${mosfet.id} (${region}): G_ds += ${g} S between drain and source`,
+    });
+  } else if (nd >= 0) {
+    target.matrix[nd][nd] += g;
+    target.stampLog.push({
+      component: mosfet.id,
+      row: nd, col: nd, value: g,
+      explanation: `${mosfet.id} (${region}): G_ds[${nd}][${nd}] += ${g} S (source is ground)`,
+    });
+  } else if (ns >= 0) {
+    target.matrix[ns][ns] += g;
+    target.stampLog.push({
+      component: mosfet.id,
+      row: ns, col: ns, value: g,
+      explanation: `${mosfet.id} (${region}): G_ds[${ns}][${ns}] += ${g} S (drain is ground)`,
+    });
+  }
+  // No threshold offset current needed (MOSFET is purely voltage-controlled)
+}
+
+// ============================================================================
+// Op-Amp Stamp (VCVS Model)
+// ============================================================================
+
+/**
+ * Stamp an op-amp into the MNA matrix as a voltage-controlled voltage source.
+ *
+ * The op-amp constraint equation:
+ *   V_out - A * (V_nonInv - V_inv) = A * inputOffset
+ *
+ * where A = openLoopGain.
+ *
+ * This requires one VS row/column in the MNA matrix (like a voltage source).
+ *
+ * @param target - MNA stamp target
+ * @param opamp - OpAmp component (3 named pins, not in Component union)
+ * @param nodeVoltages - Current voltage estimates (unused for linear op-amp model)
+ */
+export function stampOpAmp(
+  target: StampTarget,
+  opamp: OpAmp,
+  nodeVoltages?: Record<string, number>,
+): void {
+  const nOut = target.nodeIndex(opamp.output);
+  const nInv = target.nodeIndex(opamp.invertingInput);
+  const nNonInv = target.nodeIndex(opamp.nonInvertingInput);
+  const k = target.vsIndex(opamp.id);
+  const row = target.n + k;
+  const A = opamp.openLoopGain;
+
+  // VS row equation: V_out - A * V_nonInv + A * V_inv = A * inputOffset
+  if (nOut >= 0) {
+    target.matrix[row][nOut] += 1;
+  }
+  if (nNonInv >= 0) {
+    target.matrix[row][nNonInv] -= A;
+  }
+  if (nInv >= 0) {
+    target.matrix[row][nInv] += A;
+  }
+  target.rhs[row] = A * opamp.inputOffset;
+
+  // Column stamps (B matrix -- output current)
+  if (nOut >= 0) {
+    target.matrix[nOut][row] += 1;
+  }
+
+  target.stampLog.push({
+    component: opamp.id,
+    row: row, col: -1, value: A,
+    explanation: `${opamp.id} (op-amp, A=${A}): VCVS constraint V_out = A*(V+ - V-) + A*Vos, Vos=${opamp.inputOffset}V`,
+  });
+}
+
+// ============================================================================
+// Regulator Stamp (Constrained Voltage Source Model)
+// ============================================================================
+
+/**
+ * Stamp a voltage regulator into the MNA matrix as a constrained output voltage source.
+ *
+ * The regulator output is modeled as a fixed voltage source between the output
+ * node and ground:
+ *   - Linear: V_eff = min(outputVoltage, V_in - dropoutVoltage)
+ *   - Buck: V_eff = outputVoltage (steps down)
+ *   - Boost: V_eff = outputVoltage (steps up)
+ *   - Buck-boost: V_eff = outputVoltage
+ *
+ * @param target - MNA stamp target
+ * @param reg - Regulator component (nodes[0]=input, nodes[1]=output)
+ * @param nodeVoltages - Current voltage estimates for dropout calculation
+ */
+export function stampRegulator(
+  target: StampTarget,
+  reg: Regulator,
+  nodeVoltages?: Record<string, number>,
+): void {
+  const nOut = target.nodeIndex(reg.nodes[1]); // output node
+  const k = target.vsIndex(reg.id);
+  const row = target.n + k;
+
+  // Determine effective output voltage
+  let vEff = reg.outputVoltage;
+
+  if (reg.topology === 'linear') {
+    const vIn = nodeVoltages?.[reg.nodes[0]] ?? (reg.outputVoltage + reg.dropoutVoltage + 1);
+    const vMaxOut = vIn - reg.dropoutVoltage;
+    vEff = Math.min(reg.outputVoltage, vMaxOut);
+  }
+  // Buck, boost, buck-boost: vEff = outputVoltage (normal operating condition)
+
+  // Stamp as voltage source: V_out = vEff (relative to ground)
+  // Constraint row: V_out = vEff
+  if (nOut >= 0) {
+    target.matrix[row][nOut] += 1;
+    target.matrix[nOut][row] += 1;
+  }
+  target.rhs[row] = vEff;
+
+  target.stampLog.push({
+    component: reg.id,
+    row: row, col: -1, value: vEff,
+    explanation: `${reg.id} (${reg.topology} regulator): V_out = ${vEff}V`,
+  });
+}
+
+// ============================================================================
 // AC Stamp Functions
 // ============================================================================
 
@@ -926,8 +1118,17 @@ export function stampComponent(
       // Actual BJT circuits should use solveNonlinear for Newton-Raphson
       stampBJT(target, component);
       break;
+    case 'mosfet':
+      // MOSFET in DC stampComponent: stamp with no voltage estimates (initial)
+      // Actual MOSFET circuits should use solveNonlinear for Newton-Raphson
+      stampMOSFET(target, component);
+      break;
+    case 'regulator':
+      // Regulator stamps as constrained voltage source
+      stampRegulator(target, component);
+      break;
     default:
-      // Diode, MOSFET, Regulator — to be implemented in later phases
+      // Diode — handled via nonlinear solver path
       break;
   }
 }
