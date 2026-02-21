@@ -45,6 +45,12 @@ export interface FlipFlop {
   outputInverted: string;
 }
 
+/** Flip-flop output state */
+export interface FlipFlopState {
+  Q: boolean;
+  Qbar: boolean;
+}
+
 /** Logic simulation state */
 export interface LogicState {
   signals: Record<string, boolean>;
@@ -199,6 +205,205 @@ export function getGateInternals(type: GateType): GateInternals {
     throw new Error(`Unknown gate type: ${type}`);
   }
   return { ...internals };
+}
+
+// ---------------------------------------------------------------------------
+// detectClockEdge -- rising/falling/none detection
+// ---------------------------------------------------------------------------
+
+/**
+ * Detect clock edge transition between two consecutive clock samples.
+ *
+ * @param prevClock - Clock value at previous time step
+ * @param currClock - Clock value at current time step
+ * @returns 'rising' if 0->1, 'falling' if 1->0, 'none' if unchanged
+ */
+export function detectClockEdge(
+  prevClock: boolean,
+  currClock: boolean,
+): 'rising' | 'falling' | 'none' {
+  if (!prevClock && currClock) return 'rising';
+  if (prevClock && !currClock) return 'falling';
+  return 'none';
+}
+
+// ---------------------------------------------------------------------------
+// evaluateFlipFlop -- pure function for clocked sequential element evaluation
+// ---------------------------------------------------------------------------
+
+/**
+ * Evaluate a flip-flop given its type, current inputs, previous output state,
+ * and the clock edge. All flip-flops are positive-edge-triggered: they only
+ * update on a rising clock edge; otherwise they hold their previous state.
+ *
+ * @param type - SR, D, JK, or T
+ * @param inputs - Named inputs (e.g. { S, R } for SR, { D } for D)
+ * @param prevState - Previous Q and Qbar values
+ * @param clockEdge - 'rising', 'falling', or 'none'
+ * @returns New FlipFlopState
+ */
+export function evaluateFlipFlop(
+  type: FlipFlopType,
+  inputs: Record<string, boolean>,
+  prevState: FlipFlopState,
+  clockEdge: 'rising' | 'falling' | 'none',
+): FlipFlopState {
+  // Only update on rising edge; otherwise hold
+  if (clockEdge !== 'rising') {
+    return { ...prevState };
+  }
+
+  switch (type) {
+    case FlipFlopType.SR: {
+      const S = inputs.S ?? false;
+      const R = inputs.R ?? false;
+      if (S && !R) return { Q: true, Qbar: false };
+      if (!S && R) return { Q: false, Qbar: true };
+      if (S && R) return { Q: true, Qbar: true }; // NAND-based: both high
+      return { ...prevState }; // S=0, R=0: hold
+    }
+
+    case FlipFlopType.D: {
+      const D = inputs.D ?? false;
+      return { Q: D, Qbar: !D };
+    }
+
+    case FlipFlopType.JK: {
+      const J = inputs.J ?? false;
+      const K = inputs.K ?? false;
+      if (J && !K) return { Q: true, Qbar: false };
+      if (!J && K) return { Q: false, Qbar: true };
+      if (J && K) return { Q: !prevState.Q, Qbar: prevState.Q }; // toggle
+      return { ...prevState }; // J=0, K=0: hold
+    }
+
+    case FlipFlopType.T: {
+      const T = inputs.T ?? false;
+      if (T) return { Q: !prevState.Q, Qbar: prevState.Q }; // toggle
+      return { ...prevState }; // hold
+    }
+
+    default:
+      throw new Error(`Unknown flip-flop type: ${type}`);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// buildRippleCarryAdder -- 4-bit adder from gates
+// ---------------------------------------------------------------------------
+
+/**
+ * Build a 4-bit ripple-carry adder inside the given LogicSimulator.
+ * Creates 20 gates (5 per bit: 2 XOR, 2 AND, 1 OR) implementing
+ * four cascaded full adders.
+ *
+ * Carry-in (C0) is set to false (ground).
+ *
+ * @returns Signal names for inputs, outputs, and carry-out
+ */
+export function buildRippleCarryAdder(sim: LogicSimulator): {
+  inputA: string[];
+  inputB: string[];
+  sum: string[];
+  carryOut: string;
+} {
+  const inputA = ['A0', 'A1', 'A2', 'A3'];
+  const inputB = ['B0', 'B1', 'B2', 'B3'];
+  const sum = ['S0', 'S1', 'S2', 'S3'];
+
+  // Ground carry-in
+  sim.setSignal('C0', false);
+
+  for (let i = 0; i < 4; i++) {
+    const carry = `C${i}`;
+    const carryNext = `C${i + 1}`;
+    const prefix = `FA${i}`;
+
+    // Half adder 1: A[i] XOR B[i] -> P[i] (partial sum)
+    sim.addGate({
+      id: `${prefix}_XOR1`,
+      type: GateType.XOR,
+      inputs: [inputA[i], inputB[i]],
+      output: `${prefix}_P`,
+      propagationDelay: 10,
+    });
+
+    // Full sum: P[i] XOR C[i] -> S[i]
+    sim.addGate({
+      id: `${prefix}_XOR2`,
+      type: GateType.XOR,
+      inputs: [`${prefix}_P`, carry],
+      output: sum[i],
+      propagationDelay: 10,
+    });
+
+    // Generate: A[i] AND B[i] -> G[i]
+    sim.addGate({
+      id: `${prefix}_AND1`,
+      type: GateType.AND,
+      inputs: [inputA[i], inputB[i]],
+      output: `${prefix}_G`,
+      propagationDelay: 10,
+    });
+
+    // Propagate-carry: P[i] AND C[i] -> PC[i]
+    sim.addGate({
+      id: `${prefix}_AND2`,
+      type: GateType.AND,
+      inputs: [`${prefix}_P`, carry],
+      output: `${prefix}_PC`,
+      propagationDelay: 10,
+    });
+
+    // Carry out: G[i] OR PC[i] -> C[i+1]
+    sim.addGate({
+      id: `${prefix}_OR`,
+      type: GateType.OR,
+      inputs: [`${prefix}_G`, `${prefix}_PC`],
+      output: carryNext,
+      propagationDelay: 10,
+    });
+  }
+
+  return { inputA, inputB, sum, carryOut: 'C4' };
+}
+
+/**
+ * Convenience function: add two 4-bit numbers using a gate-level
+ * ripple-carry adder simulation.
+ *
+ * @param a - First operand (0..15)
+ * @param b - Second operand (0..15)
+ * @returns 4-bit sum and carry-out flag
+ */
+export function rippleCarryAdd(
+  a: number,
+  b: number,
+): { sum: number; carry: boolean } {
+  const sim = new LogicSimulator();
+  const adder = buildRippleCarryAdder(sim);
+
+  // Set input bits from binary decomposition
+  for (let i = 0; i < 4; i++) {
+    sim.setSignal(adder.inputA[i], ((a >> i) & 1) === 1);
+    sim.setSignal(adder.inputB[i], ((b >> i) & 1) === 1);
+  }
+
+  // Evaluate to steady state
+  sim.evaluate();
+
+  // Read back 4-bit sum
+  let sumValue = 0;
+  for (let i = 0; i < 4; i++) {
+    if (sim.getSignal(adder.sum[i])) {
+      sumValue |= 1 << i;
+    }
+  }
+
+  return {
+    sum: sumValue,
+    carry: sim.getSignal(adder.carryOut),
+  };
 }
 
 // ---------------------------------------------------------------------------
