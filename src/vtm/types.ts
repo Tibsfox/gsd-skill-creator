@@ -1,11 +1,11 @@
 /**
- * VTM foundation data type system.
+ * VTM (Vision-to-Mission) complete type system.
  *
- * Defines Zod schemas for the foundation types used across all VTM
- * (Vision-to-Mission) pipeline components. Every downstream module
- * (parsers, validators, assemblers, pipeline) imports these types.
+ * Defines Zod schemas for the entire VTM document hierarchy used across
+ * all pipeline components. Every downstream module (parsers, validators,
+ * assemblers, pipeline orchestrator) imports these types.
  *
- * Schemas:
+ * Foundation schemas (Plan 01):
  * - ModelAssignmentSchema: 3-value enum for model tier (opus, sonnet, haiku)
  * - TokenEstimateSchema: model + estimated tokens + context windows
  * - TokenBudgetConstraintSchema: min/max ranges per model tier (60/40 principle)
@@ -16,6 +16,15 @@
  * - VisionDocumentSchema: full vision document structure with all sections
  * - ResearchTopicSchema: research topic with safety concerns and cross-references
  * - ResearchReferenceSchema: research reference with topics and bibliography
+ *
+ * Composite schemas (Plan 02):
+ * - ComponentSpecSchema: self-contained build instruction for one component
+ * - WaveSummaryEntrySchema, WaveTaskSchema, TrackSchema, WaveSchema: wave sub-schemas
+ * - WaveExecutionPlanSchema: multi-wave parallel execution plan
+ * - TestCategorySchema, TestSpecSchema: test classification sub-schemas
+ * - TestPlanSchema: categorized test plan with verification matrix
+ * - MilestoneSpecSchema: milestone specification with component breakdown
+ * - MissionPackageSchema: top-level aggregate composing all sub-documents
  *
  * All schemas use Zod for runtime validation with inferred TypeScript types
  * (zero type duplication).
@@ -349,91 +358,393 @@ export const ResearchReferenceSchema = z.object({
 export type ResearchReference = z.infer<typeof ResearchReferenceSchema>;
 
 // ============================================================================
-// VTM_SCHEMAS convenience object
+// ComponentSpec
 // ============================================================================
 
-// ============================================================================
-// ComponentSpec (stub — Plan 02)
-// ============================================================================
-
-/** Stub schema for ComponentSpec. Replaced in Plan 02 Task 2. */
-export const ComponentSpecSchema = z.never();
+/**
+ * Validates component specification objects.
+ *
+ * Each component spec is a self-contained build instruction for a single
+ * pipeline component. References ModelAssignmentSchema for model tier.
+ *
+ * Schema fields derived from component-spec-template.md:
+ * - name: component name
+ * - milestone: parent milestone name
+ * - wave: wave/track placement (e.g., "Wave 1, Track A")
+ * - modelAssignment: opus/sonnet/haiku tier
+ * - estimatedTokens: positive token count
+ * - dependencies: prior tasks/artifacts this needs
+ * - produces: artifacts this creates
+ * - objective: what this component does
+ * - context: self-contained background for implementing agent
+ * - technicalSpec: interface definitions and specs (min 1)
+ * - implementationSteps: ordered atomic steps (min 1)
+ * - testCases: tests that must pass before handoff (min 1)
+ * - verificationGate: completion conditions and handoff instruction
+ * - safetyBoundaries: optional must/mustNot/boundaryType constraints
+ */
+export const ComponentSpecSchema = z.object({
+  name: z.string().min(1),
+  milestone: z.string().min(1),
+  wave: z.string().min(1),
+  modelAssignment: ModelAssignmentSchema,
+  estimatedTokens: z.number().positive(),
+  dependencies: z.array(z.string()),
+  produces: z.array(z.string()),
+  objective: z.string().min(1),
+  context: z.string().min(1),
+  technicalSpec: z.array(z.object({
+    name: z.string(),
+    spec: z.string(),
+  })).min(1),
+  implementationSteps: z.array(z.object({
+    name: z.string(),
+    description: z.string(),
+  })).min(1),
+  testCases: z.array(z.object({
+    name: z.string(),
+    input: z.string(),
+    expected: z.string(),
+  })).min(1),
+  verificationGate: z.object({
+    conditions: z.array(z.string()).min(1),
+    handoff: z.string(),
+  }),
+  safetyBoundaries: z.object({
+    must: z.array(z.string()),
+    mustNot: z.array(z.string()),
+    boundaryType: z.enum(['annotate', 'gate', 'redirect']),
+  }).optional(),
+});
 
 /** Component spec type inferred from schema. */
 export type ComponentSpec = z.infer<typeof ComponentSpecSchema>;
 
 // ============================================================================
-// WaveExecutionPlan sub-schemas (stubs — Plan 02)
+// WaveExecutionPlan sub-schemas
 // ============================================================================
 
-/** Stub schema for WaveSummaryEntry. */
-export const WaveSummaryEntrySchema = z.never();
+/**
+ * Validates wave summary table entries.
+ *
+ * Each entry provides an overview row for one wave:
+ * - wave: wave number
+ * - tasks: task count in this wave
+ * - parallelTracks: number of parallel tracks
+ * - estimatedTime: human-readable time estimate
+ * - cacheDependencies: what prior waves this depends on
+ */
+export const WaveSummaryEntrySchema = z.object({
+  wave: z.number(),
+  tasks: z.number(),
+  parallelTracks: z.number(),
+  estimatedTime: z.string(),
+  cacheDependencies: z.string(),
+});
 
 /** Wave summary entry type inferred from schema. */
 export type WaveSummaryEntry = z.infer<typeof WaveSummaryEntrySchema>;
 
-/** Stub schema for WaveTask. */
-export const WaveTaskSchema = z.never();
+/**
+ * Validates individual wave task entries.
+ *
+ * Each task has an ID, description, produces artifact, model assignment,
+ * token estimate, and dependency list.
+ */
+export const WaveTaskSchema = z.object({
+  id: z.string(),
+  description: z.string(),
+  produces: z.string(),
+  model: ModelAssignmentSchema,
+  estimatedTokens: z.number(),
+  dependsOn: z.array(z.string()),
+});
 
 /** Wave task type inferred from schema. */
 export type WaveTask = z.infer<typeof WaveTaskSchema>;
 
-/** Stub schema for Track. */
-export const TrackSchema = z.never();
+/**
+ * Validates parallel track entries within a wave.
+ *
+ * Each track groups tasks that share no mutable state.
+ */
+export const TrackSchema = z.object({
+  name: z.string(),
+  tasks: z.array(WaveTaskSchema).min(1),
+});
 
 /** Track type inferred from schema. */
 export type Track = z.infer<typeof TrackSchema>;
 
-/** Stub schema for Wave. */
-export const WaveSchema = z.never();
+/**
+ * Validates wave entries in a wave execution plan.
+ *
+ * Each wave has a number, name, purpose, sequential flag,
+ * at least one track, and an optional verification gate.
+ */
+export const WaveSchema = z.object({
+  number: z.number(),
+  name: z.string(),
+  purpose: z.string(),
+  isSequential: z.boolean(),
+  tracks: z.array(TrackSchema).min(1),
+  verificationGate: z.string().optional(),
+});
 
 /** Wave type inferred from schema. */
 export type Wave = z.infer<typeof WaveSchema>;
 
-/** Stub schema for WaveExecutionPlan. */
-export const WaveExecutionPlanSchema = z.never();
+/**
+ * Validates complete wave execution plan objects.
+ *
+ * Schema fields derived from wave-execution-plan-template.md:
+ * - milestoneName: parent milestone
+ * - milestoneSpec: spec filename
+ * - totalTasks: positive integer task count
+ * - parallelTracks: non-negative track count
+ * - sequentialDepth: positive integer wave count
+ * - estimatedWallTime: human-readable time
+ * - criticalPath: critical path description
+ * - waveSummary: overview table (min 1)
+ * - waves: detailed wave definitions (min 1)
+ * - cacheOptimization: optional cache strategy
+ * - dependencyGraph: optional ASCII DAG
+ * - riskFactors: optional risk analysis
+ */
+export const WaveExecutionPlanSchema = z.object({
+  milestoneName: z.string().min(1),
+  milestoneSpec: z.string().min(1),
+  totalTasks: z.number().int().positive(),
+  parallelTracks: z.number().int().nonnegative(),
+  sequentialDepth: z.number().int().positive(),
+  estimatedWallTime: z.string().min(1),
+  criticalPath: z.string().min(1),
+  waveSummary: z.array(WaveSummaryEntrySchema).min(1),
+  waves: z.array(WaveSchema).min(1),
+  cacheOptimization: z.object({
+    sharedSkillLoads: z.array(z.record(z.string(), z.unknown())),
+    schemaReuse: z.array(z.record(z.string(), z.unknown())),
+    preComputedKnowledge: z.array(z.record(z.string(), z.unknown())),
+    tokenSavings: z.array(z.record(z.string(), z.unknown())),
+  }).optional(),
+  dependencyGraph: z.string().optional(),
+  riskFactors: z.array(z.object({
+    risk: z.string(),
+    impact: z.string(),
+    mitigation: z.string(),
+  })).optional(),
+});
 
 /** Wave execution plan type inferred from schema. */
 export type WaveExecutionPlan = z.infer<typeof WaveExecutionPlanSchema>;
 
 // ============================================================================
-// TestPlan sub-schemas (stubs — Plan 02)
+// TestPlan sub-schemas
 // ============================================================================
 
-/** Stub schema for TestCategory. */
-export const TestCategorySchema = z.never();
+/**
+ * Validates test category entries.
+ *
+ * Categories classify tests by severity and handling:
+ * - name: category enum (safety-critical, core, integration, edge-case)
+ * - count: number of tests in this category
+ * - priority: handling priority (mandatory-pass, required, best-effort)
+ * - failureAction: what to do on failure (block, log)
+ */
+export const TestCategorySchema = z.object({
+  name: z.enum(['safety-critical', 'core', 'integration', 'edge-case']),
+  count: z.number(),
+  priority: z.enum(['mandatory-pass', 'required', 'best-effort']),
+  failureAction: z.enum(['block', 'log']),
+});
 
 /** Test category type inferred from schema. */
 export type TestCategory = z.infer<typeof TestCategorySchema>;
 
-/** Stub schema for TestSpec. */
-export const TestSpecSchema = z.never();
+/**
+ * Validates individual test specification entries.
+ *
+ * Test IDs follow the categorized pattern:
+ * - S-NNN: safety-critical tests
+ * - C-NNN: core functionality tests
+ * - I-NNN: integration tests
+ * - E-NNN: edge case tests
+ */
+export const TestSpecSchema = z.object({
+  id: z.string().regex(/^[SCIE]-\d{3}$/),
+  category: z.enum(['safety-critical', 'core', 'integration', 'edge-case']),
+  verifies: z.string(),
+  expectedBehavior: z.string(),
+  component: z.string().optional(),
+});
 
 /** Test spec type inferred from schema. */
 export type TestSpec = z.infer<typeof TestSpecSchema>;
 
-/** Stub schema for TestPlan. */
-export const TestPlanSchema = z.never();
+/**
+ * Validates complete test plan objects.
+ *
+ * Schema fields derived from test-plan-template.md:
+ * - milestoneName: parent milestone
+ * - milestoneSpec: spec filename
+ * - visionDocument: vision doc filename
+ * - totalTests: positive integer test count
+ * - safetyCriticalCount: non-negative safety test count
+ * - targetCoverage: 0-100 percentage
+ * - categories: test category definitions (min 1)
+ * - tests: individual test specs (min 1)
+ * - verificationMatrix: criterion-to-test mapping (min 1)
+ */
+export const TestPlanSchema = z.object({
+  milestoneName: z.string().min(1),
+  milestoneSpec: z.string().min(1),
+  visionDocument: z.string().min(1),
+  totalTests: z.number().int().positive(),
+  safetyCriticalCount: z.number().int().nonnegative(),
+  targetCoverage: z.number().min(0).max(100),
+  categories: z.array(TestCategorySchema).min(1),
+  tests: z.array(TestSpecSchema).min(1),
+  verificationMatrix: z.array(z.object({
+    criterion: z.string(),
+    testIds: z.array(z.string()).min(1),
+    component: z.string().optional(),
+  })).min(1),
+});
 
 /** Test plan type inferred from schema. */
 export type TestPlan = z.infer<typeof TestPlanSchema>;
 
 // ============================================================================
-// MilestoneSpec (stub — Plan 02)
+// MilestoneSpec
 // ============================================================================
 
-/** Stub schema for MilestoneSpec. */
-export const MilestoneSpecSchema = z.never();
+/**
+ * Validates complete milestone specification objects.
+ *
+ * Schema fields derived from milestone-spec-template.md:
+ * - name: milestone name
+ * - date: YYYY-MM-DD format
+ * - visionDocument: vision doc filename
+ * - researchReference: optional research reference filename
+ * - estimatedExecution: context windows, sessions, hours
+ * - missionObjective: concrete "done" description
+ * - architectureOverview: ASCII diagram and description
+ * - systemLayers: optional named responsibility layers
+ * - deliverables: numbered deliverables with acceptance criteria
+ * - componentBreakdown: components with model assignments and token estimates
+ * - modelRationale: percentage/component/reason per model tier
+ * - crossComponentInterfaces: optional shared types/events/filesystem
+ * - safetyBoundaries: optional non-negotiable constraints
+ * - preComputedKnowledge: optional tiered knowledge loading strategy
+ */
+export const MilestoneSpecSchema = z.object({
+  name: z.string().min(1),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  visionDocument: z.string().min(1),
+  researchReference: z.string().optional(),
+  estimatedExecution: z.object({
+    contextWindows: z.number(),
+    sessions: z.number(),
+    hours: z.number(),
+  }),
+  missionObjective: z.string().min(1),
+  architectureOverview: z.string().min(1),
+  systemLayers: z.array(z.object({
+    name: z.string(),
+    responsibility: z.string(),
+  })).optional(),
+  deliverables: z.array(z.object({
+    number: z.number().int().positive(),
+    deliverable: z.string(),
+    acceptanceCriteria: z.string(),
+    componentSpec: z.string(),
+  })),
+  componentBreakdown: z.array(z.object({
+    component: z.string(),
+    specDocument: z.string(),
+    dependencies: z.array(z.string()),
+    model: ModelAssignmentSchema,
+    estimatedTokens: z.number().positive(),
+  })),
+  modelRationale: z.object({
+    opus: z.object({
+      percentage: z.number(),
+      components: z.array(z.string()),
+      reason: z.string(),
+    }),
+    sonnet: z.object({
+      percentage: z.number(),
+      components: z.array(z.string()),
+      reason: z.string(),
+    }),
+    haiku: z.object({
+      percentage: z.number(),
+      components: z.array(z.string()),
+      reason: z.string(),
+    }),
+  }),
+  crossComponentInterfaces: z.object({
+    sharedTypes: z.string().optional(),
+    eventSchema: z.string().optional(),
+    filesystemContracts: z.string().optional(),
+  }).optional(),
+  safetyBoundaries: z.array(z.object({
+    boundary: z.string(),
+    reason: z.string(),
+  })).optional(),
+  preComputedKnowledge: z.array(z.object({
+    tier: z.enum(['summary', 'active', 'reference']),
+    size: z.string(),
+    loadingStrategy: z.string(),
+  })).optional(),
+});
 
 /** Milestone spec type inferred from schema. */
 export type MilestoneSpec = z.infer<typeof MilestoneSpecSchema>;
 
 // ============================================================================
-// MissionPackage (stub — Plan 02)
+// MissionPackage
 // ============================================================================
 
-/** Stub schema for MissionPackage. */
-export const MissionPackageSchema = z.never();
+/**
+ * Validates complete mission package objects.
+ *
+ * The top-level aggregate that composes all VTM sub-documents:
+ * - name: mission package name
+ * - date: YYYY-MM-DD format
+ * - status: ready/draft/in-progress
+ * - visionDocument: vision doc filename
+ * - researchReference: optional research reference filename
+ * - milestoneSpec: composed MilestoneSpec object
+ * - componentSpecs: array of composed ComponentSpec objects (min 1)
+ * - waveExecutionPlan: composed WaveExecutionPlan object
+ * - testPlan: composed TestPlan object
+ * - executionSummary: aggregate metrics for the mission
+ */
+export const MissionPackageSchema = z.object({
+  name: z.string().min(1),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  status: z.enum(['ready', 'draft', 'in-progress']),
+  visionDocument: z.string().min(1),
+  researchReference: z.string().optional(),
+  milestoneSpec: MilestoneSpecSchema,
+  componentSpecs: z.array(ComponentSpecSchema).min(1),
+  waveExecutionPlan: WaveExecutionPlanSchema,
+  testPlan: TestPlanSchema,
+  executionSummary: z.object({
+    totalTasks: z.number(),
+    parallelTracks: z.number(),
+    sequentialDepth: z.number(),
+    opusTasks: z.object({ count: z.number(), percentage: z.number() }),
+    sonnetTasks: z.object({ count: z.number(), percentage: z.number() }),
+    haikuTasks: z.object({ count: z.number(), percentage: z.number() }),
+    estimatedContextWindows: z.number(),
+    estimatedWallTime: z.string(),
+    criticalPathSessions: z.number(),
+    totalTests: z.number(),
+    safetyCriticalTests: z.number(),
+  }),
+});
 
 /** Mission package type inferred from schema. */
 export type MissionPackage = z.infer<typeof MissionPackageSchema>;
