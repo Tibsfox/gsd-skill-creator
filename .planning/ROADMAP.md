@@ -134,7 +134,14 @@ Plans:
   3. Situation-to-pathway matching recommends "Problem-Solving" for input containing "how might we reduce" and "Creative Exploration" for input containing "imagine new possibilities"; Free-Form pathway accepts any technique on demand
   4. Mid-session resequencing triggers on low energy signal and replaces remaining technique queue without losing completed technique output
   5. Session transcript renders as Markdown with phase headers, technique labels, and timestamps; action plan includes ownership and priorities for top ideas; JSON export contains complete session state
-**Plans**: TBD
+**Plans**: 6 plans
+Plans:
+- [ ] 308-01-PLAN.md — Technique Engine core + 4 individual techniques (TECH-01, TECH-02)
+- [ ] 308-02-PLAN.md — 5 collaborative techniques + Artifact Generator (TECH-03, ARTIF-01..04)
+- [ ] 308-03-PLAN.md — 4 analytical techniques with Black Hat phase constraint (TECH-04, TECH-06)
+- [ ] 308-04-PLAN.md — 3 visual techniques including Lotus Blossom 64-idea (TECH-05, TECH-07)
+- [ ] 308-05-PLAN.md — Pathway Router + 5 JSON configs + complete engine registry (PATH-01..04)
+- [ ] 308-06-PLAN.md — TDD: technique fidelity, pathway signal routing, artifact output (TECH-07, PATH-02..04)
 
 ### Phase 309: Facilitator Agent
 **Goal**: The Facilitator agent can assess a problem, recommend a pathway, manage energy levels, and guide phase transitions with confidence scoring -- all in a non-judgmental facilitation voice
@@ -178,7 +185,7 @@ Plans:
 | 305. Foundation Types & Bus | 3/3 | Complete    | 2026-02-22 | - |
 | 306. Rules Engine | v1.32 | 0/2 | Not started | - |
 | 307. Session Manager & Phase Controller | v1.32 | 0/TBD | Not started | - |
-| 308. Technique Engine, Pathway Router & Artifact Generator | v1.32 | 0/TBD | Not started | - |
+| 308. Technique Engine, Pathway Router & Artifact Generator | v1.32 | 0/6 | Not started | - |
 | 309. Facilitator Agent | v1.32 | 0/TBD | Not started | - |
 | 310. Technique Agents | v1.32 | 0/TBD | Not started | - |
 | 311. Integration Wiring & System Tests | v1.32 | 0/TBD | Not started | - |
