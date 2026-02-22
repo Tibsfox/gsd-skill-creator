@@ -55,10 +55,10 @@ Requirements for Brainstorm Session Support milestone. Each maps to roadmap phas
 - [x] **AGENT-01**: Facilitator agent — problem assessment, pathway recommendation, energy management, transition confidence scoring, adaptive technique sequencing, non-judgmental facilitation voice
 - [x] **AGENT-02**: Ideator agent — idea generation across individual and collaborative techniques, never evaluates own output
 - [x] **AGENT-03**: Questioner agent — question generation only, redirects answers to questions
-- [ ] **AGENT-04**: Analyst agent — SCAMPER lens management, Six Thinking Hats coordination with hat-color broadcast to all agents
-- [ ] **AGENT-05**: Mapper agent — mind mapping, affinity mapping, lotus blossom, storyboarding — organizes without evaluating quality
-- [ ] **AGENT-06**: Critic agent — Converge-only activation, 4-dimension evaluation (feasibility/impact/alignment/risk), prioritization methods (dot voting, star rating, weighted scoring)
-- [ ] **AGENT-07**: Persona agent — rolestorming and figure storming with genuine perspective fidelity, constructive personas only
+- [x] **AGENT-04**: Analyst agent — SCAMPER lens management, Six Thinking Hats coordination with hat-color broadcast to all agents
+- [x] **AGENT-05**: Mapper agent — mind mapping, affinity mapping, lotus blossom, storyboarding — organizes without evaluating quality
+- [x] **AGENT-06**: Critic agent — Converge-only activation, 4-dimension evaluation (feasibility/impact/alignment/risk), prioritization methods (dot voting, star rating, weighted scoring)
+- [x] **AGENT-07**: Persona agent — rolestorming and figure storming with genuine perspective fidelity, constructive personas only
 - [x] **AGENT-08**: Scribe agent — always-on capture across all phases, generates transcript/action plan/export, never generates ideas
 
 ### Artifacts
@@ -150,10 +150,10 @@ Deferred to future release. Tracked but not in current roadmap.
 | AGENT-01 | Phase 309 | Complete |
 | AGENT-02 | Phase 310 | Complete |
 | AGENT-03 | Phase 310 | Complete |
-| AGENT-04 | Phase 310 | Pending |
-| AGENT-05 | Phase 310 | Pending |
-| AGENT-06 | Phase 310 | Pending |
-| AGENT-07 | Phase 310 | Pending |
+| AGENT-04 | Phase 310 | Complete |
+| AGENT-05 | Phase 310 | Complete |
+| AGENT-06 | Phase 310 | Complete |
+| AGENT-07 | Phase 310 | Complete |
 | AGENT-08 | Phase 310 | Complete |
 | ARTIF-01 | Phase 308 | Complete |
 | ARTIF-02 | Phase 308 | Complete |

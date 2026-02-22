@@ -84,6 +84,19 @@ Progress: [██████████░░░░░░] 64% (v1.32)
 - Scribe capture methods validate with Zod schemas at the agent boundary -- never trust unvalidated data from across a boundary
 - captureClusters skips Zod validation since clusters arrive as arrays already validated by the Mapper
 - Scribe generateIdea()/generateQuestion() throw unconditionally as documented architectural constraints
+- Analyst fires-and-generates after hat broadcast -- does NOT wait for acknowledgments (synchronization enforced at integration time in Phase 311)
+- broadcastHatChange imports SIX_HATS_PHASE_CONSTRAINT from six-thinking-hats.ts (single source of truth for Black Hat forbidden phases)
+- organizeAffinity defensive 3-layer clustering: technique clusters + cluster-count clamping (2-8) + unassigned-idea sweep to last cluster
+- Critic activate() is second defense-in-depth point -- local phase check PLUS RulesEngine.canActivateAgent() double-check
+- Composite score formula: (feasibility + impact + alignment) - risk, range [-2, 14]
+- formatSuggestion() ends with 'signal, not verdict' per PITFALLS.md UX pitfall prevention
+- Perspective fidelity via non-null perspective field on all Persona-generated ideas (v1.32 measurable check)
+- recommendPathway returns assessment.recommended_pathway directly -- assessProblem already resolved the pathway
+- adaptTechniqueQueue maps energy_low and saturation_detected to saturation AdaptationSignal type
+- PRESSURE_PHRASES safety constant with 6 banned phrases checked at runtime in handleEnergySignal
+- TECHNIQUE_HINTS as Partial<Record<TechniqueId, string>> with only 4 technique hints (scamper, six-hats, five-whys, brainwriting)
+- redirectEvaluation uses static message text -- no agent name or content interpolation (non-shaming principle)
+- generateSessionSummary uses Math.round(elapsed_ms / 60_000) for human-readable duration minutes
 
 ### Key Constraints
 
@@ -101,5 +114,5 @@ Progress: [██████████░░░░░░] 64% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 310-04-PLAN.md (Scribe agent with capture-only constraint and artifact generation)
+Stopped at: Completed 309-02-PLAN.md (FacilitatorAgent guidance, energy management, session summary -- all 8 methods, 55 tests)
 Resume file: None
