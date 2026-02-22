@@ -22,6 +22,7 @@ import {
 } from './tools/skill-tools.js';
 import { registerResourceProviders } from './resources/resource-providers.js';
 import type { ResourceProviders } from './resources/types.js';
+import { registerPromptTemplates } from './prompts/prompt-templates.js';
 import type { McpServerFactory } from './server.js';
 
 // ============================================================================
@@ -120,6 +121,9 @@ export function createGsdGatewayFactory(
 
     // Register resource providers
     registerResourceProviders(server, providers);
+
+    // Register prompt templates
+    registerPromptTemplates(server);
 
     return server;
   };
