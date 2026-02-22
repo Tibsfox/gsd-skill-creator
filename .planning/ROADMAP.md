@@ -207,7 +207,10 @@ Plans:
   3. Component spec generation uses Phase 284's signal-based assignModel instead of primitive 3-rule heuristic
   4. Dead imports in mission-assembly.ts are cleaned up
   5. Existing tests updated and passing with real implementations
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 288-01-PLAN.md — Wire planWaves, generateTestPlan, and signal-based assignModel into mission assembly (replace placeholders)
+- [ ] 288-02-PLAN.md — Update tests for real implementations (multi-wave plans, categorized tests, signal-based model assignment)
 
 ### Phase 289: Pipeline Orchestrator
 **Goal**: Users can run the complete vision-to-mission transformation as a single pipeline call with configurable stage skipping, typed intermediate artifacts, and structured error reporting
@@ -248,7 +251,7 @@ Phases execute in numeric order: 279 -> 280 -> 281 -> 282 -> 283 -> 284 -> 285 -
 | 285. Cache Optimization | 2/2 | Complete    | 2026-02-22 |
 | 286. Test Plan Generation | 2/2 | Complete    | 2026-02-22 |
 | 287. Template System | 2/2 | Complete    | 2026-02-22 |
-| 288. Mission Assembly Integration Wiring | 0/TBD | Not started | - |
+| 288. Mission Assembly Integration Wiring | 0/2 | Not started | - |
 | 289. Pipeline Orchestrator | 0/TBD | Not started | - |
 | 290. Integration & Testing | 0/TBD | Not started | - |
 
