@@ -21,7 +21,10 @@
  * and the cache optimization analyzers for shared load detection, schema
  * reuse analysis, knowledge tier sizing, TTL validation at every wave
  * boundary, token savings estimation with per-category breakdowns, and
- * the CacheReport aggregate composing all analyzers into a single report.
+ * the CacheReport aggregate composing all analyzers into a single report,
+ * and the test plan generator for converting vision success criteria into
+ * categorized test plans with safety-critical classification, keyword
+ * heuristics, bidirectional overrides, and S/C/I/E-NNN test ID generation.
  *
  * @module vtm
  */
@@ -37,3 +40,4 @@ export * from './wave-analysis.js';
 export * from './model-assignment.js';
 export * from './model-budget.js';
 export * from './cache-optimizer.js';
+export * from './test-plan-generator.js';
