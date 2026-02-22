@@ -23,7 +23,7 @@
 - ✅ **v1.28** — GSD Den Operations (Phases 255-261, shipped 2026-02-21)
 - ✅ **v1.29** — Electronics Educational Pack (Phases 262-278, shipped 2026-02-21)
 - ✅ **v1.30** — Vision-to-Mission Pipeline (Phases 279-292, shipped 2026-02-22)
-- 🚧 **v1.31** — GSD-OS MCP Integration (Phases 293-303, in progress)
+- 🔧 **v1.31** — GSD-OS MCP Integration (Phases 293-304, gap closure in progress)
 
 ## Phases
 
@@ -47,7 +47,7 @@
 
 </details>
 
-### 🚧 v1.31 GSD-OS MCP Integration (Phases 293-303)
+### 🔧 v1.31 GSD-OS MCP Integration (Phases 293-304) — Gap Closure
 
 **Milestone Goal:** Make GSD-OS a first-class MCP citizen -- both as a Host (managing MCP server connections from the Tauri backend) and as a Server (exposing GSD-OS to external AI agents via 19+ tools). Includes template skills, agent bridge adapters, staging security gates, dashboard integration, and a 95-test verification suite.
 
@@ -60,8 +60,9 @@
 - [x] **Phase 299: MCP Templates** - Server, host, and client project scaffold generators (completed 2026-02-22)
 - [x] **Phase 300: Agent Bridge** - Agent-Server and Agent-Client adapters with SCOUT, VERIFY, and EXEC wiring (completed 2026-02-22)
 - [x] **Phase 301: Security Gates** - Hash verification, trust decay, invocation validation, audit logging (completed 2026-02-22)
-- [ ] **Phase 302: Presentation** - Blueprint Editor blocks, trace panel, security dashboard, boot sequence, Tauri IPC
-- [ ] **Phase 303: Integration Testing** - End-to-end tests, performance verification, safety-critical tests, coverage validation
+- [x] **Phase 302: Presentation** - Blueprint Editor blocks, trace panel, security dashboard, boot sequence, Tauri IPC (completed 2026-02-22)
+- [x] **Phase 303: Integration Testing** - End-to-end tests, performance verification, safety-critical tests, coverage validation (completed 2026-02-22)
+- [ ] **Phase 304: MCP Integration Wiring** - Gap closure: gateway factory assembly, scope enforcement, staging pipeline wiring
 
 ## Phase Details
 
@@ -205,7 +206,11 @@ Plans:
   3. MCP Trace Panel displays real-time JSON-RPC message flow with latency sparklines and server/tool filtering
   4. Security Dashboard shows trust state per server, hash change alerts, and a log of blocked calls
   5. Boot sequence displays MCP servers as peripherals with connection status and tool counts, and Tauri IPC commands (connect, disconnect, invoke_tool, get_trace, get_trust_state) are callable from the frontend
-**Plans**: TBD
+**Plans:** 3/3 plans complete
+Plans:
+- [x] 302-01-PLAN.md -- Blueprint Editor block types, renderers, and wiring engine (PRES-01 through PRES-04, 43 tests)
+- [x] 302-02-PLAN.md -- Trace panel and security dashboard (PRES-05, PRES-06, 50 tests)
+- [x] 302-03-PLAN.md -- Boot peripherals, Tauri IPC bridge, mcp_get_trust_state (PRES-07, PRES-08, 32 tests)
 
 ### Phase 303: Integration Testing
 **Goal**: The complete MCP stack works end-to-end -- from blueprint blocks through Tauri IPC to host manager to servers and back, with security gates enforced at every boundary
@@ -217,24 +222,43 @@ Plans:
   3. A template-generated server builds, registers with the host manager, and handles tool calls end-to-end
   4. SCOUT server communicates with EXEC client via MCP and returns results
   5. All 18 safety-critical security tests pass, MCP overhead adds less than 50ms latency, and test coverage across all MCP components exceeds 85%
-**Plans**: TBD
+**Plans:** 2/2 plans complete
+Plans:
+- [x] 303-01-PLAN.md -- End-to-end integration tests: presentation+security, gateway, templates, agent bridge (30 tests)
+- [x] 303-02-PLAN.md -- Performance benchmarks, 18 safety-critical security tests, coverage validation (27 tests)
+
+### Phase 304: MCP Integration Wiring
+**Goal**: Close all integration wiring gaps found by milestone audit -- gateway factory registers all 19 tools, per-tool scope enforcement is active, and staging gates cover the Rust host manager path
+**Depends on**: Phase 295, Phase 297, Phase 301
+**Requirements**: GATE-03, GATE-11, GATE-12, GATE-13, GATE-14, GATE-15, GATE-16, GATE-17, GATE-18, GATE-19, SECR-12, SECR-13, TEST-03
+**Gap Closure**: Closes gaps from v1.31 audit
+**Success Criteria** (what must be TRUE):
+  1. `createGsdGatewayFactory()` exposes all 19 MCP tools including agent.*, workflow.*, session.* -- verified by E2E test calling at least one tool from each group
+  2. `canInvokeTool()` is called before every tool dispatch; a read-only token cannot invoke chipset.modify
+  3. Rust `mcp_call_tool` validates tool invocations through staging gates before dispatching to the server
+  4. Agent bridge tool calls pass through the staging pipeline with source='agent-to-agent'
+  5. Gateway E2E integration test discovers and invokes tools from all 6 groups (chipset, project, skill, agent, workflow, session)
+Plans:
+- [ ] 304-01-PLAN.md -- Gateway factory assembly + scope enforcement (GATE-03, GATE-11..19, TEST-03)
+- [ ] 304-02-PLAN.md -- Staging pipeline wiring for Rust host manager + agent bridge (SECR-12, SECR-13)
 
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 293. Foundation Types | 2/2 | Complete    | 2026-02-22 | - |
-| 294. Host Manager & Server Registry | 3/3 | Complete    | 2026-02-22 | - |
-| 295. Gateway Server Core | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
-| 296. Gateway Project & Skill Tools | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
-| 297. Gateway Agent, Workflow & Session Tools | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
-| 298. Gateway Chipset, Resources & Prompts | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
-| 299. MCP Templates | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
-| 300. Agent Bridge | v1.31 | Complete    | 2026-02-22 | - |
-| 301. Security Gates | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
-| 302. Presentation | v1.31 | 0/TBD | Not started | - |
-| 303. Integration Testing | v1.31 | 0/TBD | Not started | - |
+| 293. Foundation Types | v1.31 | 2/2 | Complete | 2026-02-22 |
+| 294. Host Manager & Server Registry | v1.31 | 3/3 | Complete | 2026-02-22 |
+| 295. Gateway Server Core | v1.31 | 2/2 | Complete | 2026-02-22 |
+| 296. Gateway Project & Skill Tools | v1.31 | 2/2 | Complete | 2026-02-22 |
+| 297. Gateway Agent, Workflow & Session Tools | v1.31 | 3/3 | Complete | 2026-02-22 |
+| 298. Gateway Chipset, Resources & Prompts | v1.31 | 2/2 | Complete | 2026-02-22 |
+| 299. MCP Templates | v1.31 | 3/3 | Complete | 2026-02-22 |
+| 300. Agent Bridge | v1.31 | 1/1 | Complete | 2026-02-22 |
+| 301. Security Gates | v1.31 | 3/3 | Complete | 2026-02-22 |
+| 302. Presentation | v1.31 | 3/3 | Complete | 2026-02-22 |
+| 303. Integration Testing | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
+| 304. MCP Integration Wiring | v1.31 | 0/2 | Planned | — |
 
 ---
-*33 milestones shipped. 292 phases complete, 11 phases planned (293-303). 766 plans completed.*
-*v1.31 in progress: 2026-02-22*
+*34 milestones shipped. 303 phases complete, 1 phase planned. 770 plans completed.*
+*v1.31 gap closure in progress*
