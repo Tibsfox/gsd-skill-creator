@@ -3,12 +3,12 @@
  *
  * Covers:
  * - assembleMissionPackage(): orchestrates all generators into a complete,
- *   schema-valid MissionPackage with placeholder wave plan and test plan
+ *   schema-valid MissionPackage with real wave plan and test plan
  * - Execution summary model split percentages computed from component assignments
- * - Placeholder wave plan is minimal but schema-valid
- * - Placeholder test plan is minimal but schema-valid
+ * - Wave execution plan via planWaves with multi-wave decomposition
+ * - Test plan via generateTestPlan with categorized test specs
  * - With and without research reference
- * - Safety components assigned to opus
+ * - Safety components assigned to opus via signal-based classifier
  *
  * @module vtm/__tests__/mission-assembler
  */
@@ -206,7 +206,7 @@ describe('assembleMissionPackage', () => {
       expect(result.executionSummary.opusTasks.percentage).toBeGreaterThan(0);
     });
 
-    it('counts haiku tasks from single-concept modules', () => {
+    it('assigns sonnet by default for modules without strong tier signals', () => {
       const visionDoc = createValidVisionDoc({
         modules: [
           { name: 'Simple Module', concepts: ['one-concept'] },
@@ -218,7 +218,10 @@ describe('assembleMissionPackage', () => {
 
       const result = assembleMissionPackage(visionDoc);
 
-      expect(result.executionSummary.haikuTasks.count).toBe(1);
+      // Signal-based classifier defaults to sonnet when no strong signals match
+      // (haiku requires scaffold/boilerplate/config keywords, not just low concept count)
+      expect(result.executionSummary.sonnetTasks.count).toBe(2);
+      expect(result.executionSummary.haikuTasks.count).toBe(0);
     });
 
     it('includes estimatedContextWindows from milestoneSpec', () => {
@@ -229,11 +232,12 @@ describe('assembleMissionPackage', () => {
       expect(result.executionSummary.estimatedContextWindows).toBe(5);
     });
 
-    it('includes estimatedWallTime as hours string', () => {
+    it('includes estimatedWallTime from milestoneSpec', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
-      expect(result.executionSummary.estimatedWallTime).toMatch(/hours$/);
+      // milestoneSpec.estimatedExecution.hours produces "N hours" format
+      expect(result.executionSummary.estimatedWallTime).toMatch(/\d+ hours$/);
     });
 
     it('includes criticalPathSessions', () => {
@@ -247,8 +251,8 @@ describe('assembleMissionPackage', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
-      // 3 success criteria -> 3 tests
-      expect(result.executionSummary.totalTests).toBe(3);
+      // 3 success criteria x densityRange.min (2) = 6 tests
+      expect(result.executionSummary.totalTests).toBe(6);
     });
 
     it('includes safetyCriticalTests from test plan', () => {
@@ -259,9 +263,9 @@ describe('assembleMissionPackage', () => {
     });
   });
 
-  // --- Placeholder wave plan ---
+  // --- Wave execution plan (real planWaves output) ---
 
-  describe('placeholder waveExecutionPlan', () => {
+  describe('waveExecutionPlan', () => {
     it('has milestoneName matching milestoneSpec name', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
@@ -276,45 +280,55 @@ describe('assembleMissionPackage', () => {
       expect(result.waveExecutionPlan.totalTasks).toBe(result.componentSpecs.length);
     });
 
-    it('has parallelTracks of 1 (placeholder)', () => {
+    it('has parallelTracks >= 1', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
-      expect(result.waveExecutionPlan.parallelTracks).toBe(1);
+      // Linear chain A->B->C produces 1 track per wave
+      expect(result.waveExecutionPlan.parallelTracks).toBeGreaterThanOrEqual(1);
     });
 
-    it('has sequentialDepth of 1 (placeholder)', () => {
+    it('has sequentialDepth matching dependency chain depth', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
-      expect(result.waveExecutionPlan.sequentialDepth).toBe(1);
+      // A (no deps) -> Wave 0, B (deps on A) -> Wave 1, C (deps on B) -> Wave 2
+      // sequentialDepth = 3 waves
+      expect(result.waveExecutionPlan.sequentialDepth).toBe(3);
     });
 
-    it('mentions placeholder in criticalPath', () => {
+    it('has real critical path through dependency chain', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
-      expect(result.waveExecutionPlan.criticalPath).toContain('placeholder');
+      // Real planWaves traces the longest dependency chain
+      expect(result.waveExecutionPlan.criticalPath).toContain('Module A');
+      expect(result.waveExecutionPlan.criticalPath).toContain('Module B');
+      expect(result.waveExecutionPlan.criticalPath).toContain('Module C');
+      expect(result.waveExecutionPlan.criticalPath).toContain('->');
     });
 
-    it('has single wave with all tasks', () => {
+    it('has multiple waves for linear dependency chain', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
-      expect(result.waveExecutionPlan.waves).toHaveLength(1);
-      const wave = result.waveExecutionPlan.waves[0];
-      expect(wave.tracks).toHaveLength(1);
-      expect(wave.tracks[0].tasks).toHaveLength(3);
+      // 3 modules in linear chain = 3 waves
+      expect(result.waveExecutionPlan.waves.length).toBeGreaterThanOrEqual(1);
+      expect(result.waveExecutionPlan.waves.length).toBe(3);
     });
 
-    it('uses task-NNN IDs for wave tasks', () => {
+    it('uses sanitized spec name IDs for wave tasks', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
-      const tasks = result.waveExecutionPlan.waves[0].tracks[0].tasks;
-      expect(tasks[0].id).toBe('task-001');
-      expect(tasks[1].id).toBe('task-002');
-      expect(tasks[2].id).toBe('task-003');
+      // Real planWaves uses task-{sanitized-spec-name} IDs
+      const allTasks = result.waveExecutionPlan.waves.flatMap(
+        w => w.tracks.flatMap(t => t.tasks),
+      );
+      for (const task of allTasks) {
+        expect(task.id).toMatch(/^task-/);
+      }
+      expect(allTasks).toHaveLength(3);
     });
 
     it('validates against WaveExecutionPlanSchema', () => {
@@ -326,9 +340,9 @@ describe('assembleMissionPackage', () => {
     });
   });
 
-  // --- Placeholder test plan ---
+  // --- Test plan (real generateTestPlan output) ---
 
-  describe('placeholder testPlan', () => {
+  describe('testPlan', () => {
     it('has milestoneName matching milestoneSpec name', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
@@ -336,17 +350,19 @@ describe('assembleMissionPackage', () => {
       expect(result.testPlan.milestoneName).toBe(result.milestoneSpec.name);
     });
 
-    it('has totalTests equal to successCriteria count', () => {
+    it('has totalTests equal to criteria count times densityRange.min', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
-      expect(result.testPlan.totalTests).toBe(3);
+      // 3 criteria x densityRange.min (2) = 6 tests
+      expect(result.testPlan.totalTests).toBe(6);
     });
 
-    it('has safetyCriticalCount of 0 (placeholder)', () => {
+    it('has safetyCriticalCount reflecting keyword classification', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
+      // None of the 3 criteria contain safety keywords ("must not", "safety", etc.)
       expect(result.testPlan.safetyCriticalCount).toBe(0);
     });
 
@@ -357,40 +373,45 @@ describe('assembleMissionPackage', () => {
       expect(result.testPlan.targetCoverage).toBe(100);
     });
 
-    it('has single core category', () => {
+    it('has exactly 4 categories (safety-critical, core, integration, edge-case)', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
-      expect(result.testPlan.categories).toHaveLength(1);
-      expect(result.testPlan.categories[0].name).toBe('core');
+      expect(result.testPlan.categories).toHaveLength(4);
+      const names = result.testPlan.categories.map(c => c.name);
+      expect(names).toContain('safety-critical');
+      expect(names).toContain('core');
+      expect(names).toContain('integration');
+      expect(names).toContain('edge-case');
     });
 
-    it('has one C-NNN test per success criterion', () => {
+    it('has categorized test IDs matching S/C/I/E-NNN pattern', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
-      expect(result.testPlan.tests).toHaveLength(3);
-      expect(result.testPlan.tests[0].id).toBe('C-001');
-      expect(result.testPlan.tests[1].id).toBe('C-002');
-      expect(result.testPlan.tests[2].id).toBe('C-003');
+      expect(result.testPlan.tests.length).toBeGreaterThanOrEqual(6);
+      for (const test of result.testPlan.tests) {
+        expect(test.id).toMatch(/^[SCIE]-\d{3}$/);
+      }
     });
 
-    it('uses core category for all test specs', () => {
+    it('uses core category for all test specs when no safety keywords present', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
+      // All 3 success criteria in the fixture lack safety/integration/edge-case keywords
       for (const test of result.testPlan.tests) {
         expect(test.category).toBe('core');
       }
     });
 
-    it('has verification matrix mapping each criterion to its test', () => {
+    it('has verification matrix with each criterion mapping to at least 1 test ID', () => {
       const visionDoc = createValidVisionDoc();
       const result = assembleMissionPackage(visionDoc);
 
       expect(result.testPlan.verificationMatrix).toHaveLength(3);
-      for (let i = 0; i < 3; i++) {
-        expect(result.testPlan.verificationMatrix[i].testIds).toContain(`C-${String(i + 1).padStart(3, '0')}`);
+      for (const entry of result.testPlan.verificationMatrix) {
+        expect(entry.testIds.length).toBeGreaterThanOrEqual(1);
       }
     });
 
