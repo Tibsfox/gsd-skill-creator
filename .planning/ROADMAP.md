@@ -107,7 +107,10 @@ Plans:
   3. Black Hat technique messages from non-Critic agents are blocked during Diverge phase via phase constraint enforcement
   4. Rule violations are logged as `RuleViolation` records that persist across phase transitions and are queryable by phase, agent, and rule type
   5. Phase-appropriate rule reminders are generated for Facilitator display at each phase entry (e.g., "All ideas welcome -- no evaluation" for Diverge)
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 306-01-PLAN.md — RulesEngine scaffold: Critic gate, phase rules, rule reminders (RULES-01, RULES-02, RULES-06)
+- [ ] 306-02-PLAN.md — Two-stage evaluative detection, Black Hat constraint, violation logging, 50-sentence corpus (RULES-03, RULES-04, RULES-05)
 
 ### Phase 307: Session Manager & Phase Controller
 **Goal**: A brainstorming session can be created, run through all 5 phases with correct agent gating, paused/resumed, and persisted to disk
@@ -172,8 +175,8 @@ Plans:
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 305. Foundation Types & Bus | 3/3 | Complete   | 2026-02-22 | - |
-| 306. Rules Engine | v1.32 | 0/TBD | Not started | - |
+| 305. Foundation Types & Bus | 3/3 | Complete    | 2026-02-22 | - |
+| 306. Rules Engine | v1.32 | 0/2 | Not started | - |
 | 307. Session Manager & Phase Controller | v1.32 | 0/TBD | Not started | - |
 | 308. Technique Engine, Pathway Router & Artifact Generator | v1.32 | 0/TBD | Not started | - |
 | 309. Facilitator Agent | v1.32 | 0/TBD | Not started | - |
