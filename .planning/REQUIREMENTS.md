@@ -70,12 +70,12 @@ Requirements for Brainstorm Session Support milestone. Each maps to roadmap phas
 
 ### Integration
 
-- [ ] **INTEG-01**: Session bus wiring connecting all 8 agents through 4 communication loops (session, capture, user, energy)
-- [ ] **INTEG-02**: Bus load test — 4 concurrent writers, 12 messages in 200ms, 0 loss
+- [x] **INTEG-01**: Session bus wiring connecting all 8 agents through 4 communication loops (session, capture, user, energy)
+- [x] **INTEG-02**: Bus load test — 4 concurrent writers, 12 messages in 200ms, 0 loss
 - [ ] **INTEG-03**: End-to-end session flow for each pathway (Creative Exploration, Problem-Solving, Free-Form at minimum)
 - [ ] **INTEG-04**: All 18 safety-critical tests passing (SC-01 through SC-18)
-- [ ] **INTEG-05**: Chipset YAML and activation profiles (solo_quick, guided_exploration, full_workshop, analysis_sprint)
-- [ ] **INTEG-06**: skill-creator observation hooks registered for `.brainstorm/sessions/*/`
+- [x] **INTEG-05**: Chipset YAML and activation profiles (solo_quick, guided_exploration, full_workshop, analysis_sprint)
+- [x] **INTEG-06**: skill-creator observation hooks registered for `.brainstorm/sessions/*/`
 
 ## v2 Requirements
 
@@ -159,12 +159,12 @@ Deferred to future release. Tracked but not in current roadmap.
 | ARTIF-02 | Phase 308 | Complete |
 | ARTIF-03 | Phase 308 | Complete |
 | ARTIF-04 | Phase 308 | Complete |
-| INTEG-01 | Phase 311 | Pending |
-| INTEG-02 | Phase 311 | Pending |
+| INTEG-01 | Phase 311 | Complete |
+| INTEG-02 | Phase 311 | Complete |
 | INTEG-03 | Phase 311 | Pending |
 | INTEG-04 | Phase 311 | Pending |
-| INTEG-05 | Phase 311 | Pending |
-| INTEG-06 | Phase 311 | Pending |
+| INTEG-05 | Phase 311 | Complete |
+| INTEG-06 | Phase 311 | Complete |
 
 **Coverage:**
 - v1.32 requirements: 46 total (FOUND: 5, RULES: 6, SESS: 6, TECH: 7, PATH: 4, AGENT: 8, ARTIF: 4, INTEG: 6)

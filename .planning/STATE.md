@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.32 Brainstorm Session Support -- Phase 310 COMPLETE (5 of 5 plans done)
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 311 IN PROGRESS (2 of 4 plans done)
 
 ## Current Position
 
-Phase: 310 (4 of 7 in v1.32) (Technique Agents) -- COMPLETE
-Plan: 5 of 5 complete
-Status: Complete
-Last activity: 2026-02-22 -- Completed 310-05 (71 technique agent behavioral constraint tests)
+Phase: 311 (5 of 7 in v1.32) (Integration Wiring + System Tests)
+Plan: 2 of 4 complete
+Status: In Progress
+Last activity: 2026-02-22 -- Completed 311-02 (Barrel export and chipset YAML)
 
-Progress: [███████████░░░░░] 68% (v1.32)
+Progress: [████████████░░░░] 75% (v1.32)
 
 ## Accumulated Context
 
@@ -100,6 +100,13 @@ Progress: [███████████░░░░░] 68% (v1.32)
 - 71 technique agent tests pass with real TechniqueEngine + RulesEngine (no mocks) -- all 7 agents verified
 - Error message matching in tests uses actual implementation text ('not assigned technique') not plan's paraphrase
 - Mind-mapping round 1 is first meaningful round (round 0 produces empty for branching structure)
+- MESSAGE_ROUTE as Record<MessageType, BusLoop> for compile-time exhaustive routing -- adding a MessageType without a route causes TypeScript error
+- drain() reads then deletes individual files (not directory removal) for atomicity during concurrent access
+- poll() silently skips corrupted .msg files instead of throwing -- bus resilience over strict validation on read
+- poll(since) filters by timestamp prefix in the filename using first underscore-delimited segment as millisecond timestamp
+- Barrel export (index.ts) organized by layer: shared -> core -> techniques -> pathways -> artifacts -> agents -> integration
+- SessionBus export commented out pending 311-01 file creation -- ready to uncomment when integration module exists
+- Chipset YAML mirrors electronics-pack structural conventions (skills, agents, topology) for cross-module consistency
 
 ### Key Constraints
 
@@ -117,5 +124,5 @@ Progress: [███████████░░░░░] 68% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 310-05-PLAN.md (71 technique agent behavioral constraint tests -- Phase 310 complete)
+Stopped at: Completed 311-02-PLAN.md (Barrel export and chipset YAML with 4 activation profiles)
 Resume file: None
