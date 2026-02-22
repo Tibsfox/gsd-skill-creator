@@ -139,3 +139,46 @@ pub struct TraceEvent {
     pub payload: Option<serde_json::Value>,
     pub error: Option<String>,
 }
+
+// ============================================================================
+// Tests
+// ============================================================================
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn tool_serializes_to_camel_case_json() {
+        let tool = Tool {
+            name: "test-tool".to_string(),
+            description: "A test tool".to_string(),
+            input_schema: serde_json::json!({"type": "object"}),
+        };
+        let json = serde_json::to_string(&tool).unwrap();
+        assert!(json.contains("inputSchema"));
+        assert!(!json.contains("input_schema"));
+    }
+
+    #[test]
+    fn transport_config_stdio_round_trips() {
+        let config = TransportConfig::Stdio {
+            command: "node".to_string(),
+            args: vec!["server.js".to_string()],
+            env: HashMap::new(),
+        };
+        let json = serde_json::to_string(&config).unwrap();
+        let parsed: TransportConfig = serde_json::from_str(&json).unwrap();
+        match parsed {
+            TransportConfig::Stdio { command, .. } => assert_eq!(command, "node"),
+            _ => panic!("Expected Stdio variant"),
+        }
+    }
+
+    #[test]
+    fn trust_state_serializes_as_lowercase() {
+        let state = super::super::security::TrustState::Quarantine;
+        let json = serde_json::to_string(&state).unwrap();
+        assert_eq!(json, "\"quarantine\"");
+    }
+}
