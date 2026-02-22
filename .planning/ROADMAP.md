@@ -257,7 +257,7 @@ Plans:
 | 301. Security Gates | v1.31 | 3/3 | Complete | 2026-02-22 |
 | 302. Presentation | v1.31 | 3/3 | Complete | 2026-02-22 |
 | 303. Integration Testing | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
-| 304. MCP Integration Wiring | v1.31 | 0/2 | Planned | — |
+| 304. MCP Integration Wiring | 1/2 | In Progress|  | — |
 
 ---
 *34 milestones shipped. 303 phases complete, 1 phase planned. 770 plans completed.*

@@ -208,8 +208,8 @@ Deferred to future release. Tracked but not in current roadmap.
 | SECR-09 | Phase 301 | Complete |
 | SECR-10 | Phase 301 | Complete |
 | SECR-11 | Phase 301 | Complete |
-| SECR-12 | Phase 304 | Pending |
-| SECR-13 | Phase 304 | Pending |
+| SECR-12 | Phase 304 | Complete |
+| SECR-13 | Phase 304 | Complete |
 | SECR-14 | Phase 301 | Complete |
 | PRES-01 | Phase 302 | Complete |
 | PRES-02 | Phase 302 | Complete |
