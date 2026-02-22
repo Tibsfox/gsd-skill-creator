@@ -75,7 +75,7 @@
 - [x] **Phase 306: Rules Engine** - Osborn's 4 rules enforcement, architectural Critic gate, evaluative content detection, violation logging (completed 2026-02-22)
 - [x] **Phase 307: Session Manager & Phase Controller** - Session lifecycle state machine, 5-phase controller, agent activation matrix, timer system, JSONL persistence (completed 2026-02-22)
 - [x] **Phase 308: Technique Engine, Pathway Router & Artifact Generator** - 15 technique implementations, 5 pathway definitions with situation matching, session artifact generation (completed 2026-02-22)
-- [ ] **Phase 309: Facilitator Agent** - Problem assessment, pathway recommendation, energy management, transition confidence scoring, adaptive facilitation
+- [x] **Phase 309: Facilitator Agent** - Problem assessment, pathway recommendation, energy management, transition confidence scoring, adaptive facilitation (completed 2026-02-22)
 - [ ] **Phase 310: Technique Agents** - Ideator, Questioner, Analyst, Mapper, Persona, Critic, Scribe with per-role behavioral constraints
 - [ ] **Phase 311: Integration Wiring & System Tests** - Session bus connecting all agents, bus load testing, end-to-end pathway flows, safety-critical tests, chipset YAML
 
@@ -199,8 +199,8 @@ Plans:
 | 306. Rules Engine | 2/2 | Complete    | 2026-02-22 | - |
 | 307. Session Manager & Phase Controller | 3/3 | Complete    | 2026-02-22 | - |
 | 308. Technique Engine, Pathway Router & Artifact Generator | 6/6 | Complete    | 2026-02-22 | - |
-| 309. Facilitator Agent | 1/2 | In Progress|  | - |
-| 310. Technique Agents | 2/5 | In Progress|  | - |
+| 309. Facilitator Agent | 2/2 | Complete   | 2026-02-22 | - |
+| 310. Technique Agents | 4/5 | In Progress|  | - |
 | 311. Integration Wiring & System Tests | v1.32 | 0/TBD | Not started | - |
 
 See `.planning/milestones/v1.31-ROADMAP.md` for v1.31 phase details.
