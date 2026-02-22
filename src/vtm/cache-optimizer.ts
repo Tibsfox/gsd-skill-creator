@@ -1,13 +1,13 @@
 /**
  * Cache optimization analyzers for wave execution plans.
  *
- * Provides three pure analysis functions for cache optimization reporting:
+ * Provides six pure analysis functions for cache optimization reporting:
  * - detectSharedLoads(): identifies skill loads shareable within each wave
  * - analyzeSchemaReuse(): identifies schema reuse across ALL wave boundaries
  * - calculateKnowledgeTiers(): computes current vs optimal tier with token savings
- *
- * These analyzers produce per-category data that Plan 02 will aggregate into
- * the final CacheReport with TTL validation and token savings estimation.
+ * - validateTTL(): validates cache TTL at every wave boundary using cumulative timing
+ * - estimateTokenSavings(): reports per-category token savings with aggregate total
+ * - generateCacheReport(): composes all analyzers into a structured CacheReport
  *
  * Uses gpt-tokenizer for accurate token counting rather than char/4 heuristic.
  *
@@ -69,6 +69,68 @@ export interface KnowledgeTierEntry {
   savings: number;
 }
 
+/** A single TTL violation at a wave boundary. */
+export interface TTLViolation {
+  /** Wave number where the violation is detected (consumer wave). */
+  wave: number;
+  /** Cumulative minutes from Wave 0 through the stale producer wave. */
+  cumulativeMinutes: number;
+  /** TTL threshold in minutes that was exceeded. */
+  ttlMinutes: number;
+  /** Severity: warning if <1min over, error if >=1min over. */
+  severity: 'warning' | 'error';
+  /** Task IDs in this wave depending on stale caches from earlier waves. */
+  affectedConsumers: string[];
+  /** Actionable suggestion for resolving the violation. */
+  mitigation: string;
+}
+
+/** Result of TTL validation across all wave boundaries. */
+export interface TTLValidationResult {
+  /** True when no violations detected. */
+  valid: boolean;
+  /** Array of TTL violations found. */
+  violations: TTLViolation[];
+  /** Cumulative time at each wave boundary. */
+  cumulativeTimes: Array<{ wave: number; cumulativeMinutes: number }>;
+}
+
+/** Per-category token savings report. */
+export interface TokenSavingsReport {
+  /** Savings from caching shared skill loads. */
+  skillCaching: { entries: number; tokensSaved: number };
+  /** Savings from reusing schema definitions across waves. */
+  schemaReuse: { entries: number; tokensSaved: number };
+  /** Savings from downgrading knowledge tiers. */
+  knowledgeTierOptimization: { entries: number; tokensSaved: number };
+  /** Sum of all three categories. */
+  totalTokensSaved: number;
+}
+
+/** Complete cache optimization report aggregating all analyzers. */
+export interface CacheReport {
+  /** Shared skill loads detected within waves. */
+  sharedLoads: SharedLoadEntry[];
+  /** Schema reuse entries across wave boundaries. */
+  schemaReuse: SchemaReuseEntry[];
+  /** Knowledge tier sizing entries for each task. */
+  knowledgeTiers: KnowledgeTierEntry[];
+  /** TTL validation result with cumulative timing. */
+  ttlValidation: TTLValidationResult;
+  /** Token savings breakdown by category. */
+  tokenSavings: TokenSavingsReport;
+  /** Actionable recommendations for cache optimization. */
+  recommendations: string[];
+  /** Per-wave summary of optimization opportunities. */
+  waveSummaries: Array<{
+    wave: number;
+    sharedLoadCount: number;
+    schemaReuseCount: number;
+    tierOptimizations: number;
+    waveSavings: number;
+  }>;
+}
+
 // ---------------------------------------------------------------------------
 // Constants
 // ---------------------------------------------------------------------------
@@ -95,6 +157,12 @@ const SUMMARY_TOKEN_THRESHOLD = 2000;
 
 /** Active tier token target (~10K). */
 const ACTIVE_TOKEN_THRESHOLD = 10000;
+
+/** Tokens per minute estimation rate, consistent with wave-analysis.ts. */
+const TOKENS_PER_MINUTE = 1000;
+
+/** Default TTL threshold in minutes (per CONTEXT.md decision). */
+const DEFAULT_TTL_MINUTES = 5;
 
 // ---------------------------------------------------------------------------
 // detectSharedLoads
@@ -274,6 +342,297 @@ export function calculateKnowledgeTiers(
   }
 
   return entries;
+}
+
+// ---------------------------------------------------------------------------
+// validateTTL
+// ---------------------------------------------------------------------------
+
+/**
+ * Validate cache TTL at every wave boundary using cumulative timing.
+ *
+ * For each wave, computes cumulative time from Wave 0 forward. At each
+ * wave boundary (N+1), checks whether caches produced by any prior wave
+ * have expired based on the TTL threshold.
+ *
+ * Per CONTEXT.md: TTL validation covers ALL wave boundaries using
+ * cumulative timing, not just Wave 0 -> Wave 1.
+ *
+ * @param plan - Wave execution plan to analyze
+ * @param specs - Component specs for dependency resolution
+ * @param options - Optional TTL configuration (default 5 minutes)
+ * @returns TTLValidationResult with validity, violations, and cumulative times
+ */
+export function validateTTL(
+  plan: WaveExecutionPlan,
+  specs: ComponentSpec[],
+  options?: { ttlMinutes?: number },
+): TTLValidationResult {
+  const ttlMinutes = options?.ttlMinutes ?? DEFAULT_TTL_MINUTES;
+  const violations: TTLViolation[] = [];
+  const cumulativeTimes: Array<{ wave: number; cumulativeMinutes: number }> = [];
+
+  // Compute per-wave time and cumulative time
+  const waveTimes: Array<{ wave: number; minutes: number; cumulativeMinutes: number }> = [];
+  let cumulative = 0;
+
+  for (const wave of plan.waves) {
+    const waveTokens = wave.tracks.reduce(
+      (sum, track) => sum + track.tasks.reduce((s, t) => s + t.estimatedTokens, 0),
+      0,
+    );
+    const waveMinutes = waveTokens / TOKENS_PER_MINUTE;
+    cumulative += waveMinutes;
+
+    waveTimes.push({
+      wave: wave.number,
+      minutes: waveMinutes,
+      cumulativeMinutes: cumulative,
+    });
+
+    cumulativeTimes.push({
+      wave: wave.number,
+      cumulativeMinutes: cumulative,
+    });
+  }
+
+  // Build task -> wave map for dependency resolution
+  const taskWaveMap = new Map<string, number>();
+  for (const wave of plan.waves) {
+    for (const track of wave.tracks) {
+      for (const task of track.tasks) {
+        taskWaveMap.set(task.id, wave.number);
+      }
+    }
+  }
+
+  // Check each wave boundary for TTL violations
+  for (let consumerIdx = 1; consumerIdx < plan.waves.length; consumerIdx++) {
+    const consumerWave = plan.waves[consumerIdx];
+    const consumerTasks = consumerWave.tracks.flatMap(t => t.tasks);
+
+    // Check each prior wave as potential stale producer
+    for (let producerIdx = 0; producerIdx < consumerIdx; producerIdx++) {
+      const producerWave = plan.waves[producerIdx];
+      const producerWaveTime = waveTimes[producerIdx];
+
+      // Cumulative time at the consumer wave boundary = sum of waves 0..consumerIdx-1
+      // (time elapsed before this consumer wave starts executing)
+      const cumulativeAtBoundary = waveTimes[consumerIdx - 1].cumulativeMinutes;
+
+      // Time since producer wave completed = cumulative at consumer boundary - cumulative at producer end + producer time
+      // But more simply: how long ago did producer wave finish?
+      // Producer finished at waveTimes[producerIdx].cumulativeMinutes
+      // Consumer starts at waveTimes[consumerIdx-1].cumulativeMinutes
+      const timeSinceProducerFinished = cumulativeAtBoundary - waveTimes[producerIdx].cumulativeMinutes;
+      // The cache was produced at the end of producerWave, so staleness = timeSinceProducerFinished
+      // But for Wave 0's cache used at Wave 1: the cumulative time through Wave 0 is what matters
+      // because the cache was produced at the START of Wave 0 execution.
+      // Actually: cache is loaded at Wave 0 start. By the time we reach Wave 1,
+      // the elapsed time is cumulative through Wave 0 = waveTimes[0].cumulativeMinutes.
+      // For Wave 2, the elapsed time since Wave 0's cache = waveTimes[1].cumulativeMinutes (through Wave 0 + Wave 1).
+      // So the staleness = cumulativeAtBoundary for Wave 0's cache at consumer wave.
+      // More generally: staleness of producerWave's cache at consumerWave start
+      // = cumulative time from producerWave start to consumerWave start
+      // = sum of wave times from producerIdx to consumerIdx-1
+
+      // Recalculate: The cache from producerWave was loaded at the beginning of producerWave.
+      // By the time consumerWave starts, time elapsed = sum(waveTimes[producerIdx..consumerIdx-1])
+      const staleness = waveTimes.slice(producerIdx, consumerIdx).reduce(
+        (sum, wt) => sum + wt.minutes, 0,
+      );
+
+      if (staleness > ttlMinutes) {
+        // Find tasks in consumer wave that depend on tasks in producer wave
+        const producerTaskIds = new Set(
+          producerWave.tracks.flatMap(t => t.tasks.map(task => task.id)),
+        );
+
+        const affectedConsumers: string[] = [];
+        for (const task of consumerTasks) {
+          const dependsOnProducer = task.dependsOn.some(dep => producerTaskIds.has(dep));
+          if (dependsOnProducer) {
+            affectedConsumers.push(task.id);
+          }
+        }
+
+        // Only create a violation if there are actual consumers depending on stale cache
+        if (affectedConsumers.length > 0) {
+          const overage = staleness - ttlMinutes;
+          const severity: TTLViolation['severity'] = overage >= 1 ? 'error' : 'warning';
+
+          violations.push({
+            wave: consumerWave.number,
+            cumulativeMinutes: staleness,
+            ttlMinutes,
+            severity,
+            affectedConsumers,
+            mitigation: `Split wave ${producerWave.number} to reduce cumulative completion time below ${ttlMinutes}min TTL, or move non-critical tasks to a later wave`,
+          });
+        }
+      }
+    }
+  }
+
+  return {
+    valid: violations.length === 0,
+    violations,
+    cumulativeTimes,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// estimateTokenSavings
+// ---------------------------------------------------------------------------
+
+/**
+ * Estimate token savings across three optimization categories.
+ *
+ * Computes absolute token counts saved by:
+ * 1. Skill caching: reusing shared loads (cache once, reuse N-1 times)
+ * 2. Schema reuse: avoiding re-parsing schemas across wave boundaries
+ * 3. Knowledge tier optimization: downgrading to actual tier needed
+ *
+ * @param sharedLoads - Shared load entries from detectSharedLoads
+ * @param schemaReuse - Schema reuse entries from analyzeSchemaReuse
+ * @param knowledgeTiers - Knowledge tier entries from calculateKnowledgeTiers
+ * @returns TokenSavingsReport with per-category breakdowns and aggregate total
+ */
+export function estimateTokenSavings(
+  sharedLoads: SharedLoadEntry[],
+  schemaReuse: SchemaReuseEntry[],
+  knowledgeTiers: KnowledgeTierEntry[],
+): TokenSavingsReport {
+  // Skill caching: for each cacheable entry, savings = estimatedTokens * (tasks.length - 1)
+  let skillCachingTokens = 0;
+  let skillCachingEntries = 0;
+  for (const entry of sharedLoads) {
+    if (entry.cacheable && entry.tasks.length >= 2) {
+      skillCachingTokens += entry.estimatedTokens * (entry.tasks.length - 1);
+      skillCachingEntries++;
+    }
+  }
+
+  // Schema reuse: for each entry, savings = encode(schema name).length * consumerTasks.length
+  let schemaReuseTokens = 0;
+  let schemaReuseEntries = 0;
+  for (const entry of schemaReuse) {
+    const schemaTokens = encode(entry.schema).length;
+    schemaReuseTokens += schemaTokens * entry.consumerTasks.length;
+    schemaReuseEntries++;
+  }
+
+  // Knowledge tier: sum of all entry savings
+  let tierTokens = 0;
+  let tierEntries = 0;
+  for (const entry of knowledgeTiers) {
+    tierTokens += entry.savings;
+    tierEntries++;
+  }
+
+  return {
+    skillCaching: { entries: skillCachingEntries, tokensSaved: skillCachingTokens },
+    schemaReuse: { entries: schemaReuseEntries, tokensSaved: schemaReuseTokens },
+    knowledgeTierOptimization: { entries: tierEntries, tokensSaved: tierTokens },
+    totalTokensSaved: skillCachingTokens + schemaReuseTokens + tierTokens,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// generateCacheReport
+// ---------------------------------------------------------------------------
+
+/**
+ * Generate a complete cache optimization report by composing all analyzers.
+ *
+ * Orchestrates detectSharedLoads, analyzeSchemaReuse, calculateKnowledgeTiers,
+ * validateTTL, and estimateTokenSavings into a single structured CacheReport
+ * with per-wave summaries and actionable recommendations.
+ *
+ * @param plan - Wave execution plan to analyze
+ * @param specs - Component specs for dependency resolution
+ * @param options - Optional TTL configuration
+ * @returns CacheReport with all analysis results, summaries, and recommendations
+ */
+export function generateCacheReport(
+  plan: WaveExecutionPlan,
+  specs: ComponentSpec[],
+  options?: { ttlMinutes?: number },
+): CacheReport {
+  // Run all analyzers
+  const sharedLoads = detectSharedLoads(plan);
+  const schemaReuseEntries = analyzeSchemaReuse(plan, specs);
+  const knowledgeTierEntries = calculateKnowledgeTiers(plan, specs);
+  const ttlValidation = validateTTL(plan, specs, options);
+  const tokenSavings = estimateTokenSavings(sharedLoads, schemaReuseEntries, knowledgeTierEntries);
+
+  // Build per-wave summaries
+  const waveNumbers = plan.waves.map(w => w.number);
+  const waveSummaries = waveNumbers.map(waveNum => {
+    const waveSharedLoads = sharedLoads.filter(e => e.wave === waveNum);
+    const waveSchemaReuse = schemaReuseEntries.filter(e => e.producerWave === waveNum);
+    const waveTiers = knowledgeTierEntries.filter(e => e.wave === waveNum && e.savings > 0);
+
+    // Calculate wave-level savings
+    let waveSavings = 0;
+    for (const entry of waveSharedLoads) {
+      if (entry.cacheable && entry.tasks.length >= 2) {
+        waveSavings += entry.estimatedTokens * (entry.tasks.length - 1);
+      }
+    }
+    for (const entry of waveSchemaReuse) {
+      waveSavings += encode(entry.schema).length * entry.consumerTasks.length;
+    }
+    for (const entry of waveTiers) {
+      waveSavings += entry.savings;
+    }
+
+    return {
+      wave: waveNum,
+      sharedLoadCount: waveSharedLoads.length,
+      schemaReuseCount: waveSchemaReuse.length,
+      tierOptimizations: waveTiers.length,
+      waveSavings,
+    };
+  });
+
+  // Generate recommendations
+  const recommendations: string[] = [];
+
+  // Recommendation for schema reuse across adjacent waves
+  for (const entry of schemaReuseEntries) {
+    for (const consumerTask of entry.consumerTasks) {
+      recommendations.push(
+        `Move task ${consumerTask} to wave ${entry.producerWave} to share cache with ${entry.producerTask}`,
+      );
+    }
+  }
+
+  // Recommendations for TTL violations
+  for (const violation of ttlValidation.violations) {
+    recommendations.push(
+      `Split wave ${violation.wave - 1} to reduce cumulative completion time below ${violation.ttlMinutes}min TTL`,
+    );
+  }
+
+  // Recommendations for knowledge tier downgrades
+  for (const entry of knowledgeTierEntries) {
+    if (entry.optimalTier !== entry.currentTier) {
+      recommendations.push(
+        `Downgrade knowledge tier for task ${entry.task} from ${entry.currentTier} to ${entry.optimalTier}`,
+      );
+    }
+  }
+
+  return {
+    sharedLoads,
+    schemaReuse: schemaReuseEntries,
+    knowledgeTiers: knowledgeTierEntries,
+    ttlValidation,
+    tokenSavings,
+    recommendations,
+    waveSummaries,
+  };
 }
 
 // ---------------------------------------------------------------------------
