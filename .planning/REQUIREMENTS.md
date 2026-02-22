@@ -15,20 +15,20 @@ Requirements for GSD-OS MCP Integration milestone. Each maps to roadmap phases.
 
 ### MCP Host Manager
 
-- [ ] **HOST-01**: Host Manager can spawn stdio MCP server child processes and complete MCP handshake
-- [ ] **HOST-02**: Host Manager manages 3+ concurrent server connections independently
-- [ ] **HOST-03**: Host Manager detects server crashes and restarts with exponential backoff
-- [ ] **HOST-04**: Host Manager gracefully disconnects servers with cleanup
-- [ ] **HOST-05**: Host Manager discovers server capabilities via tools/list, resources/list, prompts/list and caches results
-- [ ] **HOST-06**: Tool Router routes tool calls to the correct server by name and handles timeouts
-- [ ] **HOST-07**: Server Registry persists config across restarts, tracks health status, and manages quarantine state
-- [ ] **HOST-08**: Trace Emitter emits structured TraceEvent for every MCP message via Tauri events with timestamps and latency
+- [x] **HOST-01**: Host Manager can spawn stdio MCP server child processes and complete MCP handshake
+- [x] **HOST-02**: Host Manager manages 3+ concurrent server connections independently
+- [x] **HOST-03**: Host Manager detects server crashes and restarts with exponential backoff
+- [x] **HOST-04**: Host Manager gracefully disconnects servers with cleanup
+- [x] **HOST-05**: Host Manager discovers server capabilities via tools/list, resources/list, prompts/list and caches results
+- [x] **HOST-06**: Tool Router routes tool calls to the correct server by name and handles timeouts
+- [x] **HOST-07**: Server Registry persists config across restarts, tracks health status, and manages quarantine state
+- [x] **HOST-08**: Trace Emitter emits structured TraceEvent for every MCP message via Tauri events with timestamps and latency
 
 ### Gateway Server
 
-- [ ] **GATE-01**: Gateway server starts on configurable port with Streamable HTTP transport
-- [ ] **GATE-02**: Gateway authenticates requests via pre-shared bearer token from ~/.gsd/gateway-token
-- [ ] **GATE-03**: Gateway rejects unauthorized requests with 401 and enforces role-based scopes
+- [x] **GATE-01**: Gateway server starts on configurable port with Streamable HTTP transport
+- [x] **GATE-02**: Gateway authenticates requests via pre-shared bearer token from ~/.gsd/gateway-token
+- [x] **GATE-03**: Gateway rejects unauthorized requests with 401 and enforces role-based scopes
 - [ ] **GATE-04**: project:list returns all projects with name, status, phase count, and last activity
 - [ ] **GATE-05**: project:get returns full project config, phase state, and deliverables for a named project
 - [ ] **GATE-06**: project:create creates a new project from a vision document
@@ -50,18 +50,18 @@ Requirements for GSD-OS MCP Integration milestone. Each maps to roadmap phases.
 - [ ] **GATE-22**: chipset:synthesize produces FPGA-synthesized chipset from natural language description
 - [ ] **GATE-23**: Resource providers expose project configs, skill registry, agent telemetry, and chipset state via URI templates
 - [ ] **GATE-24**: Prompt templates exist for create-project, diagnose-agent, and optimize-chipset workflows
-- [ ] **GATE-25**: Gateway handles concurrent tool calls correctly and returns structured errors (never crashes)
+- [x] **GATE-25**: Gateway handles concurrent tool calls correctly and returns structured errors (never crashes)
 
 ### MCP Templates
 
-- [ ] **TMPL-01**: MCP Server Template generates a complete project with package.json, tsconfig.json, SDK setup, example tool/resource/prompt, tests, CLAUDE.md, and chipset.yaml
-- [ ] **TMPL-02**: Generated server project installs, builds, and type-checks with zero errors
-- [ ] **TMPL-03**: Generated server completes MCP handshake via MCP Inspector and example tool is invocable
-- [ ] **TMPL-04**: Generated test suite passes
-- [ ] **TMPL-05**: Total generation time from command to buildable project is under 120 seconds
-- [ ] **TMPL-06**: Custom project name is applied everywhere (package.json, server name, bin name)
-- [ ] **TMPL-07**: MCP Host Template generates valid host scaffold with client pool, lifecycle management, transport abstraction, and approval gates
-- [ ] **TMPL-08**: MCP Client Template generates valid client scaffold with tool discovery, resource subscription, and typed responses
+- [x] **TMPL-01**: MCP Server Template generates a complete project with package.json, tsconfig.json, SDK setup, example tool/resource/prompt, tests, CLAUDE.md, and chipset.yaml
+- [x] **TMPL-02**: Generated server project installs, builds, and type-checks with zero errors
+- [x] **TMPL-03**: Generated server completes MCP handshake via MCP Inspector and example tool is invocable
+- [x] **TMPL-04**: Generated test suite passes
+- [x] **TMPL-05**: Total generation time from command to buildable project is under 120 seconds
+- [x] **TMPL-06**: Custom project name is applied everywhere (package.json, server name, bin name)
+- [x] **TMPL-07**: MCP Host Template generates valid host scaffold with client pool, lifecycle management, transport abstraction, and approval gates
+- [x] **TMPL-08**: MCP Client Template generates valid client scaffold with tool discovery, resource subscription, and typed responses
 
 ### Agent Bridge
 
@@ -76,20 +76,20 @@ Requirements for GSD-OS MCP Integration milestone. Each maps to roadmap phases.
 
 ### MCP Security
 
-- [ ] **SECR-01**: Tool Definition Hash Gate computes SHA-256 of tool definitions on connect and detects changes
-- [ ] **SECR-02**: Hash Gate ignores benign reconnects (same definitions) without false alarms
-- [ ] **SECR-03**: Tool definition change triggers quarantine, user alert, and invocation pause
-- [ ] **SECR-04**: New servers enter quarantine period with all invocations requiring human approval
-- [ ] **SECR-05**: Trust decays after 30 days of inactivity, reverting to quarantine
-- [ ] **SECR-06**: Trust resets immediately on tool definition change regardless of established status
-- [ ] **SECR-07**: Invocation Validator blocks prompt injection patterns in tool parameters
-- [ ] **SECR-08**: Invocation Validator blocks path traversal attempts in file parameters
-- [ ] **SECR-09**: Invocation Validator enforces rate limiting per server and per tool
-- [ ] **SECR-10**: Audit Logger captures all tool invocations with caller, tool, sanitized params, response status, and timing
-- [ ] **SECR-11**: Audit Logger redacts sensitive parameters (API keys, tokens) in log entries
-- [ ] **SECR-12**: No staging gate bypass path exists -- all MCP tool invocations pass through staging
-- [ ] **SECR-13**: Agent-to-agent MCP calls pass through staging gates (same as external calls)
-- [ ] **SECR-14**: Concurrent security checks are thread-safe (no race conditions under parallel validation)
+- [x] **SECR-01**: Tool Definition Hash Gate computes SHA-256 of tool definitions on connect and detects changes
+- [x] **SECR-02**: Hash Gate ignores benign reconnects (same definitions) without false alarms
+- [x] **SECR-03**: Tool definition change triggers quarantine, user alert, and invocation pause
+- [x] **SECR-04**: New servers enter quarantine period with all invocations requiring human approval
+- [x] **SECR-05**: Trust decays after 30 days of inactivity, reverting to quarantine
+- [x] **SECR-06**: Trust resets immediately on tool definition change regardless of established status
+- [x] **SECR-07**: Invocation Validator blocks prompt injection patterns in tool parameters
+- [x] **SECR-08**: Invocation Validator blocks path traversal attempts in file parameters
+- [x] **SECR-09**: Invocation Validator enforces rate limiting per server and per tool
+- [x] **SECR-10**: Audit Logger captures all tool invocations with caller, tool, sanitized params, response status, and timing
+- [x] **SECR-11**: Audit Logger redacts sensitive parameters (API keys, tokens) in log entries
+- [x] **SECR-12**: No staging gate bypass path exists -- all MCP tool invocations pass through staging
+- [x] **SECR-13**: Agent-to-agent MCP calls pass through staging gates (same as external calls)
+- [x] **SECR-14**: Concurrent security checks are thread-safe (no race conditions under parallel validation)
 
 ### MCP Presentation
 
@@ -148,17 +148,17 @@ Deferred to future release. Tracked but not in current roadmap.
 | MCPF-01 | Phase 293 | Complete |
 | MCPF-02 | Phase 293 | Complete |
 | MCPF-03 | Phase 293 | Complete |
-| HOST-01 | Phase 294 | Pending |
-| HOST-02 | Phase 294 | Pending |
-| HOST-03 | Phase 294 | Pending |
-| HOST-04 | Phase 294 | Pending |
-| HOST-05 | Phase 294 | Pending |
-| HOST-06 | Phase 294 | Pending |
-| HOST-07 | Phase 294 | Pending |
-| HOST-08 | Phase 294 | Pending |
-| GATE-01 | Phase 295 | Pending |
-| GATE-02 | Phase 295 | Pending |
-| GATE-03 | Phase 295 | Pending |
+| HOST-01 | Phase 294 | Complete |
+| HOST-02 | Phase 294 | Complete |
+| HOST-03 | Phase 294 | Complete |
+| HOST-04 | Phase 294 | Complete |
+| HOST-05 | Phase 294 | Complete |
+| HOST-06 | Phase 294 | Complete |
+| HOST-07 | Phase 294 | Complete |
+| HOST-08 | Phase 294 | Complete |
+| GATE-01 | Phase 295 | Complete |
+| GATE-02 | Phase 295 | Complete |
+| GATE-03 | Phase 295 | Complete |
 | GATE-04 | Phase 296 | Pending |
 | GATE-05 | Phase 296 | Pending |
 | GATE-06 | Phase 296 | Pending |
@@ -180,15 +180,15 @@ Deferred to future release. Tracked but not in current roadmap.
 | GATE-22 | Phase 298 | Pending |
 | GATE-23 | Phase 298 | Pending |
 | GATE-24 | Phase 298 | Pending |
-| GATE-25 | Phase 295 | Pending |
-| TMPL-01 | Phase 299 | Pending |
-| TMPL-02 | Phase 299 | Pending |
-| TMPL-03 | Phase 299 | Pending |
-| TMPL-04 | Phase 299 | Pending |
-| TMPL-05 | Phase 299 | Pending |
-| TMPL-06 | Phase 299 | Pending |
-| TMPL-07 | Phase 299 | Pending |
-| TMPL-08 | Phase 299 | Pending |
+| GATE-25 | Phase 295 | Complete |
+| TMPL-01 | Phase 299 | Complete |
+| TMPL-02 | Phase 299 | Complete |
+| TMPL-03 | Phase 299 | Complete |
+| TMPL-04 | Phase 299 | Complete |
+| TMPL-05 | Phase 299 | Complete |
+| TMPL-06 | Phase 299 | Complete |
+| TMPL-07 | Phase 299 | Complete |
+| TMPL-08 | Phase 299 | Complete |
 | BRDG-01 | Phase 300 | Pending |
 | BRDG-02 | Phase 300 | Pending |
 | BRDG-03 | Phase 300 | Pending |
@@ -197,20 +197,20 @@ Deferred to future release. Tracked but not in current roadmap.
 | BRDG-06 | Phase 300 | Pending |
 | BRDG-07 | Phase 300 | Pending |
 | BRDG-08 | Phase 300 | Pending |
-| SECR-01 | Phase 301 | Pending |
-| SECR-02 | Phase 301 | Pending |
-| SECR-03 | Phase 301 | Pending |
-| SECR-04 | Phase 301 | Pending |
-| SECR-05 | Phase 301 | Pending |
-| SECR-06 | Phase 301 | Pending |
-| SECR-07 | Phase 301 | Pending |
-| SECR-08 | Phase 301 | Pending |
-| SECR-09 | Phase 301 | Pending |
-| SECR-10 | Phase 301 | Pending |
-| SECR-11 | Phase 301 | Pending |
-| SECR-12 | Phase 301 | Pending |
-| SECR-13 | Phase 301 | Pending |
-| SECR-14 | Phase 301 | Pending |
+| SECR-01 | Phase 301 | Complete |
+| SECR-02 | Phase 301 | Complete |
+| SECR-03 | Phase 301 | Complete |
+| SECR-04 | Phase 301 | Complete |
+| SECR-05 | Phase 301 | Complete |
+| SECR-06 | Phase 301 | Complete |
+| SECR-07 | Phase 301 | Complete |
+| SECR-08 | Phase 301 | Complete |
+| SECR-09 | Phase 301 | Complete |
+| SECR-10 | Phase 301 | Complete |
+| SECR-11 | Phase 301 | Complete |
+| SECR-12 | Phase 301 | Complete |
+| SECR-13 | Phase 301 | Complete |
+| SECR-14 | Phase 301 | Complete |
 | PRES-01 | Phase 302 | Pending |
 | PRES-02 | Phase 302 | Pending |
 | PRES-03 | Phase 302 | Pending |
