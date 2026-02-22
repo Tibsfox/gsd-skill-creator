@@ -122,7 +122,11 @@ Plans:
   3. Agent activation matrix is enforced per phase -- Critic only activates during Converge, Scribe activates in every phase, Ideator is blocked during Converge
   4. Ideas and questions append to JSONL streams that grow monotonically and never lose entries across pause/resume cycles
   5. Timer system supports technique-specific defaults (60s for Rapid Ideation, 35min for full workshop), pauses when session pauses, and resets to technique default on `TechniqueTransition`
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 307-01-PLAN.md — SessionManager: state machine, JSONL persistence, timer (SESS-01, SESS-04, SESS-05)
+- [ ] 307-02-PLAN.md — PhaseController: phase transitions, agent matrix, announcements (SESS-02, SESS-03, SESS-05, SESS-06)
+- [ ] 307-03-PLAN.md — TDD: all 6 SESS requirements verified with test suites (SESS-01..06)
 
 ### Phase 308: Technique Engine, Pathway Router & Artifact Generator
 **Goal**: All 15 brainstorming techniques produce structurally correct and semantically faithful output, pathways route users to appropriate technique sequences, and sessions produce exportable artifacts
@@ -184,8 +188,8 @@ Plans:
 |-------|-----------|----------------|--------|-----------|
 | 305. Foundation Types & Bus | 3/3 | Complete    | 2026-02-22 | - |
 | 306. Rules Engine | 2/2 | Complete    | 2026-02-22 | - |
-| 307. Session Manager & Phase Controller | v1.32 | 0/TBD | Not started | - |
-| 308. Technique Engine, Pathway Router & Artifact Generator | 6/6 | Complete   | 2026-02-22 | - |
+| 307. Session Manager & Phase Controller | v1.32 | 0/3 | Not started | - |
+| 308. Technique Engine, Pathway Router & Artifact Generator | 6/6 | Complete    | 2026-02-22 | - |
 | 309. Facilitator Agent | v1.32 | 0/TBD | Not started | - |
 | 310. Technique Agents | v1.32 | 0/TBD | Not started | - |
 | 311. Integration Wiring & System Tests | v1.32 | 0/TBD | Not started | - |
