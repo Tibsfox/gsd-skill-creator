@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Phase 287 in progress — Template System
+**Current focus:** Phase 287 complete — Template System
 
 ## Current Position
 
 Phase: 287 of 289 (Template System) — 9 of 11 in milestone
-Plan: 1 of 2 in current phase
-Status: 287-01 complete
-Last activity: 2026-02-22 — 287-01 complete (template loader, renderer, registry, 35 tests)
+Plan: 2 of 2 in current phase
+Status: 287-02 complete (phase complete)
+Last activity: 2026-02-22 — 287-02 complete (template validator, barrel export, 52 tests)
 
-Progress: [########░░] 77% (8.5/11 phases)
+Progress: [#########░] 82% (9/11 phases)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 17
+- Total plans completed: 18
 - Average duration: 4min
-- Total execution time: 60min
+- Total execution time: 63min
 
 **By Phase:**
 
@@ -35,7 +35,7 @@ Progress: [########░░] 77% (8.5/11 phases)
 | 284 Model Assignment | 2 | 6min | 3min |
 | 285 Cache Optimization | 2 | 10min | 5min |
 | 286 Test Plan Generation | 2 | 6min | 3min |
-| 287 Template System | 1 | 3min | 3min |
+| 287 Template System | 2 | 6min | 3min |
 
 ## Accumulated Context
 
@@ -105,6 +105,10 @@ Progress: [########░░] 77% (8.5/11 phases)
 - 2026-02-22: Factory function createTemplateRegistry() following existing VTM functional patterns
 - 2026-02-22: wave-plan maps to wave-execution-plan-template.md on disk via explicit filename map
 - 2026-02-22: Custom templates override built-in templates of same name via register()
+- 2026-02-22: TEMPLATE_SCHEMA_MAP maps all 7 template names to Zod schemas, readme maps to null (freeform markdown)
+- 2026-02-22: Warnings (unresolved placeholders, block tokens) do not affect validity -- valid: true when only warnings present
+- 2026-02-22: Block tokens ({{#if}}, {{#each}}, etc.) detected as warnings alongside simple placeholders
+- 2026-02-22: Line numbers for unresolved tokens computed by counting newlines before match position (1-based)
 
 ### Key Constraints
 
@@ -120,5 +124,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 287-01-PLAN.md
+Stopped at: Completed 287-02-PLAN.md
 Resume file: None
