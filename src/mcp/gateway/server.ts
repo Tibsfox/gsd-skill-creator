@@ -5,6 +5,10 @@
  * MCP SDK's StreamableHTTPServerTransport for protocol compliance and adds
  * bearer token authentication with role-based scope enforcement.
  *
+ * Handles concurrent sessions safely via per-session transport isolation.
+ * All failures produce structured JSON-RPC error responses -- the server
+ * never crashes on malformed input.
+ *
  * CRITICAL: Never use console.log in this file -- use console.error for
  * server-side logging to avoid polluting potential stdio channels.
  */
@@ -16,10 +20,12 @@ import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/
 import { authenticateRequest } from './auth.js';
 import { readOrCreateToken } from './token-manager.js';
 import {
+  formatJsonRpcError,
+  INTERNAL_ERROR,
+  PARSE_ERROR,
+} from './errors.js';
+import {
   GatewayConfigSchema,
-  DEFAULT_GATEWAY_PORT,
-  DEFAULT_GATEWAY_HOST,
-  DEFAULT_TOKEN_PATH,
   type GatewayConfig,
   type TokenInfo,
 } from './types.js';
@@ -43,7 +49,9 @@ export interface GatewayHandle {
   config: GatewayConfig;
   /** The loaded token info. */
   tokenInfo: TokenInfo;
-  /** Stop the gateway server. */
+  /** Number of active sessions. */
+  activeSessions: () => number;
+  /** Stop the gateway server gracefully. */
   stop: () => Promise<void>;
 }
 
@@ -67,6 +75,13 @@ function defaultServerFactory(): McpServer {
 /**
  * Create and start the GSD-OS MCP gateway server.
  *
+ * The server:
+ * 1. Listens on a configurable host:port (default 127.0.0.1:3100)
+ * 2. Authenticates all requests via bearer token from ~/.gsd/gateway-token
+ * 3. Creates per-session StreamableHTTPServerTransport instances
+ * 4. Dispatches authenticated requests to the correct session transport
+ * 5. Handles errors gracefully with structured JSON-RPC responses
+ *
  * @param config - Partial gateway configuration (defaults applied via schema)
  * @param serverFactory - Optional factory for creating MCP server instances per session
  * @returns A handle to the running gateway server
@@ -81,25 +96,21 @@ export async function startGateway(
   // Load or create the authentication token
   const { tokenInfo } = await readOrCreateToken(resolvedConfig.tokenPath);
 
-  // Active sessions keyed by session ID
+  // Active sessions keyed by session ID -- concurrent access is safe because
+  // Node.js is single-threaded; Map operations are atomic within a tick.
   const sessions = new Map<string, SessionEntry>();
 
   const httpServer = createServer(async (req: IncomingMessage, res: ServerResponse) => {
     try {
       await handleRequest(req, res, resolvedConfig, tokenInfo, sessions, factory);
     } catch (err) {
-      // Last-resort error handler -- must never crash the server
+      // Last-resort error handler -- must never crash the server (GATE-25)
       console.error('[gateway] Unhandled error in request handler:', err);
       if (!res.headersSent) {
         res.writeHead(500, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          jsonrpc: '2.0',
-          error: {
-            code: -32603,
-            message: 'Internal server error',
-          },
-          id: null,
-        }));
+        res.end(JSON.stringify(
+          formatJsonRpcError(null, INTERNAL_ERROR, 'Internal server error'),
+        ));
       }
     }
   });
@@ -119,14 +130,20 @@ export async function startGateway(
 
   const stop = async () => {
     // Close all active sessions
+    const closePromises: Promise<void>[] = [];
     for (const [, entry] of sessions) {
-      try {
-        await entry.transport.close();
-        await entry.server.close();
-      } catch {
-        // Ignore cleanup errors
-      }
+      closePromises.push(
+        (async () => {
+          try {
+            await entry.transport.close();
+            await entry.server.close();
+          } catch {
+            // Ignore cleanup errors during shutdown
+          }
+        })(),
+      );
     }
+    await Promise.all(closePromises);
     sessions.clear();
 
     // Close the HTTP server
@@ -142,6 +159,7 @@ export async function startGateway(
     httpServer,
     config: resolvedConfig,
     tokenInfo,
+    activeSessions: () => sessions.size,
     stop,
   };
 }
@@ -151,8 +169,14 @@ export async function startGateway(
 /**
  * Handle an incoming HTTP request to the gateway.
  *
- * Routes through authentication, then dispatches to the appropriate
- * StreamableHTTPServerTransport based on session ID.
+ * Request pipeline:
+ * 1. Route check (only /mcp endpoint)
+ * 2. Authentication (bearer token validation)
+ * 3. Session routing (existing session or new session creation)
+ * 4. Transport dispatch (StreamableHTTPServerTransport handles MCP protocol)
+ *
+ * All errors at every stage produce structured responses -- HTTP errors for
+ * pre-protocol failures, JSON-RPC errors for protocol-level failures.
  */
 async function handleRequest(
   req: IncomingMessage,
@@ -171,10 +195,23 @@ async function handleRequest(
     return;
   }
 
+  // Reject unsupported HTTP methods early
+  if (req.method && !['GET', 'POST', 'DELETE'].includes(req.method)) {
+    res.writeHead(405, {
+      'Content-Type': 'application/json',
+      'Allow': 'GET, POST, DELETE',
+    });
+    res.end(JSON.stringify({ error: `Method ${req.method} not allowed` }));
+    return;
+  }
+
   // Authenticate the request
   const authResult = authenticateRequest(req, tokenInfo);
   if (!authResult.authenticated) {
-    res.writeHead(authResult.statusCode ?? 401, { 'Content-Type': 'application/json' });
+    res.writeHead(authResult.statusCode ?? 401, {
+      'Content-Type': 'application/json',
+      'WWW-Authenticate': 'Bearer',
+    });
     res.end(JSON.stringify({ error: authResult.errorMessage }));
     return;
   }
@@ -203,7 +240,7 @@ async function handleRequest(
     return;
   }
 
-  // Handle GET for non-existent session (SSE standalone stream not valid without session)
+  // Handle GET for non-existent session
   if (req.method === 'GET' && sessionId) {
     res.writeHead(404, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ error: 'Session not found' }));
@@ -215,19 +252,24 @@ async function handleRequest(
     sessionIdGenerator: () => randomUUID(),
     enableJsonResponse: config.enableJsonResponse,
     onsessioninitialized: (newSessionId: string) => {
-      // Register the session
+      // Register the session in the concurrent-safe sessions map
       sessions.set(newSessionId, { transport, server, createdAt: Date.now() });
     },
   });
 
   const server = serverFactory();
 
-  // Clean up session when transport closes
+  // Clean up session when transport closes (handles disconnect/cleanup)
   transport.onclose = () => {
     const sid = transport.sessionId;
     if (sid) {
       sessions.delete(sid);
     }
+  };
+
+  // Log transport errors without crashing (GATE-25)
+  transport.onerror = (err: Error) => {
+    console.error(`[gateway] Transport error for session ${transport.sessionId}:`, err.message);
   };
 
   // Connect MCP server to transport
