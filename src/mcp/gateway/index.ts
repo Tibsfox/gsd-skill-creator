@@ -107,6 +107,9 @@ export {
   type ResourceProviders,
 } from './resources/index.js';
 
+// Prompt templates
+export { registerPromptTemplates } from './prompts/index.js';
+
 // Gateway server factory
 export {
   createGsdGatewayFactory,
