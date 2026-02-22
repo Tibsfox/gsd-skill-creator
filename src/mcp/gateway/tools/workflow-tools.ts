@@ -1,6 +1,6 @@
 /**
- * Workflow gateway tools — workflow:research, workflow:requirements,
- * workflow:plan, workflow:execute.
+ * Workflow gateway tools — workflow.research, workflow.requirements,
+ * workflow.plan, workflow.execute.
  *
  * Registers four MCP tools on a gateway server that allow external clients
  * to trigger GSD pipeline stages and receive structured results.
@@ -27,11 +27,11 @@ export function registerWorkflowTools(server: McpServer, engine: WorkflowEngine)
   registerExecuteTool(server, engine);
 }
 
-// ── workflow:research ───────────────────────────────────────────────────────
+// ── workflow.research ───────────────────────────────────────────────────────
 
 function registerResearchTool(server: McpServer, engine: WorkflowEngine): void {
   server.tool(
-    'workflow:research',
+    'workflow.research',
     'Trigger the GSD research phase for a project and return findings summary',
     {
       project: z.string().min(1).describe('Project name to research'),
@@ -51,11 +51,11 @@ function registerResearchTool(server: McpServer, engine: WorkflowEngine): void {
   );
 }
 
-// ── workflow:requirements ───────────────────────────────────────────────────
+// ── workflow.requirements ───────────────────────────────────────────────────
 
 function registerRequirementsTool(server: McpServer, engine: WorkflowEngine): void {
   server.tool(
-    'workflow:requirements',
+    'workflow.requirements',
     'Generate a requirements document for a project',
     {
       project: z.string().min(1).describe('Project name'),
@@ -74,11 +74,11 @@ function registerRequirementsTool(server: McpServer, engine: WorkflowEngine): vo
   );
 }
 
-// ── workflow:plan ───────────────────────────────────────────────────────────
+// ── workflow.plan ───────────────────────────────────────────────────────────
 
 function registerPlanTool(server: McpServer, engine: WorkflowEngine): void {
   server.tool(
-    'workflow:plan',
+    'workflow.plan',
     'Create an execution plan with wave assignments for a project',
     {
       project: z.string().min(1).describe('Project name'),
@@ -97,11 +97,11 @@ function registerPlanTool(server: McpServer, engine: WorkflowEngine): void {
   );
 }
 
-// ── workflow:execute ────────────────────────────────────────────────────────
+// ── workflow.execute ────────────────────────────────────────────────────────
 
 function registerExecuteTool(server: McpServer, engine: WorkflowEngine): void {
   server.tool(
-    'workflow:execute',
+    'workflow.execute',
     'Trigger full GSD pipeline execution for a project',
     {
       project: z.string().min(1).describe('Project name'),

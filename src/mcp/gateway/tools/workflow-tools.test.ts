@@ -1,6 +1,6 @@
 /**
- * Unit tests for workflow gateway tools (workflow:research, workflow:requirements,
- * workflow:plan, workflow:execute).
+ * Unit tests for workflow gateway tools (workflow.research, workflow.requirements,
+ * workflow.plan, workflow.execute).
  *
  * Tests the workflow engine and end-to-end tool invocation through MCP.
  */
@@ -208,9 +208,9 @@ describe('Workflow Tools (MCP)', () => {
     registerWorkflowTools(server, engine);
   });
 
-  describe('workflow:research', () => {
+  describe('workflow.research', () => {
     it('returns structured findings for a domain', async () => {
-      const { result } = await callTool(server, 'workflow:research', {
+      const { result } = await callTool(server, 'workflow.research', {
         project: 'my-project',
         domain: 'mcp-integration',
         depth: 2,
@@ -224,7 +224,7 @@ describe('Workflow Tools (MCP)', () => {
     });
 
     it('uses default depth of 1', async () => {
-      const { result } = await callTool(server, 'workflow:research', {
+      const { result } = await callTool(server, 'workflow.research', {
         project: 'my-project',
         domain: 'testing',
       });
@@ -234,9 +234,9 @@ describe('Workflow Tools (MCP)', () => {
     });
   });
 
-  describe('workflow:requirements', () => {
+  describe('workflow.requirements', () => {
     it('generates requirements without scope filter', async () => {
-      const { result } = await callTool(server, 'workflow:requirements', {
+      const { result } = await callTool(server, 'workflow.requirements', {
         project: 'my-project',
       });
 
@@ -247,7 +247,7 @@ describe('Workflow Tools (MCP)', () => {
     });
 
     it('filters requirements by scope', async () => {
-      const { result } = await callTool(server, 'workflow:requirements', {
+      const { result } = await callTool(server, 'workflow.requirements', {
         project: 'my-project',
         scope: 'testing',
       });
@@ -258,9 +258,9 @@ describe('Workflow Tools (MCP)', () => {
     });
   });
 
-  describe('workflow:plan', () => {
+  describe('workflow.plan', () => {
     it('creates plan for all phases', async () => {
-      const { result } = await callTool(server, 'workflow:plan', {
+      const { result } = await callTool(server, 'workflow.plan', {
         project: 'my-project',
       });
 
@@ -270,7 +270,7 @@ describe('Workflow Tools (MCP)', () => {
     });
 
     it('creates plan for a specific phase', async () => {
-      const { result } = await callTool(server, 'workflow:plan', {
+      const { result } = await callTool(server, 'workflow.plan', {
         project: 'my-project',
         phaseNumber: 2,
       });
@@ -281,9 +281,9 @@ describe('Workflow Tools (MCP)', () => {
     });
   });
 
-  describe('workflow:execute', () => {
+  describe('workflow.execute', () => {
     it('executes full pipeline', async () => {
-      const { result } = await callTool(server, 'workflow:execute', {
+      const { result } = await callTool(server, 'workflow.execute', {
         project: 'my-project',
       });
 
@@ -294,7 +294,7 @@ describe('Workflow Tools (MCP)', () => {
     });
 
     it('performs dry run without executing', async () => {
-      const { result } = await callTool(server, 'workflow:execute', {
+      const { result } = await callTool(server, 'workflow.execute', {
         project: 'my-project',
         dryRun: true,
       });
@@ -305,7 +305,7 @@ describe('Workflow Tools (MCP)', () => {
     });
 
     it('accepts phase filter', async () => {
-      const { result } = await callTool(server, 'workflow:execute', {
+      const { result } = await callTool(server, 'workflow.execute', {
         project: 'my-project',
         phaseFilter: 3,
       });

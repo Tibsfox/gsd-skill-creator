@@ -52,21 +52,21 @@ export function registerAllTools(server: McpServer, config: GatewayToolsConfig):
   registerProjectReadTools(server, config.projects);
   registerProjectWriteTools(server, config.projects);
 
-  // Skill tools (skill:search, skill:inspect, skill:activate)
+  // Skill tools (skill.search, skill.inspect, skill.activate)
   if (config.skills) {
     registerSkillReadTools(server, config.skills);
     registerSkillWriteTools(server, config.skills);
   }
 
-  // Agent tools (agent:spawn, agent:status, agent:logs)
+  // Agent tools (agent.spawn, agent.status, agent.logs)
   const registry = config.agentRegistry ?? new AgentRegistry();
   registerAgentTools(server, registry);
 
-  // Workflow tools (workflow:research, workflow:requirements, workflow:plan, workflow:execute)
+  // Workflow tools (workflow.research, workflow.requirements, workflow.plan, workflow.execute)
   const engine = config.workflowEngine ?? new WorkflowEngine();
   registerWorkflowTools(server, engine);
 
-  // Session tools (session:query, session:patterns)
+  // Session tools (session.query, session.patterns)
   const store = config.sessionStore ?? new SessionStore();
   registerSessionTools(server, store);
 }

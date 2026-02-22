@@ -1,5 +1,5 @@
 /**
- * Unit tests for session gateway tools (session:query, session:patterns).
+ * Unit tests for session gateway tools (session.query, session.patterns).
  *
  * Tests the session store and end-to-end tool invocation through MCP.
  */
@@ -244,9 +244,9 @@ describe('Session Tools (MCP)', () => {
     registerSessionTools(server, store);
   });
 
-  describe('session:query', () => {
+  describe('session.query', () => {
     it('returns matches for a search query', async () => {
-      const { result } = await callTool(server, 'session:query', {
+      const { result } = await callTool(server, 'session.query', {
         query: 'MCP integration',
       });
 
@@ -256,7 +256,7 @@ describe('Session Tools (MCP)', () => {
     });
 
     it('filters by project', async () => {
-      const { result } = await callTool(server, 'session:query', {
+      const { result } = await callTool(server, 'session.query', {
         query: 'MCP',
         project: 'project-beta',
       });
@@ -266,7 +266,7 @@ describe('Session Tools (MCP)', () => {
     });
 
     it('returns empty matches for no results', async () => {
-      const { result } = await callTool(server, 'session:query', {
+      const { result } = await callTool(server, 'session.query', {
         query: 'completely-nonexistent-term-xyz',
       });
 
@@ -278,7 +278,7 @@ describe('Session Tools (MCP)', () => {
       // Empty string should be rejected by Zod min(1)
       // The MCP SDK will handle the validation error
       // We test with a valid but no-match query instead
-      const { result } = await callTool(server, 'session:query', {
+      const { result } = await callTool(server, 'session.query', {
         query: '.',
       });
 
@@ -287,9 +287,9 @@ describe('Session Tools (MCP)', () => {
     });
   });
 
-  describe('session:patterns', () => {
+  describe('session.patterns', () => {
     it('returns patterns above default minOccurrences threshold', async () => {
-      const { result } = await callTool(server, 'session:patterns', {});
+      const { result } = await callTool(server, 'session.patterns', {});
 
       // Default minOccurrences is 3, so lint-fix-cycle (occurrences=2) is excluded
       expect(result.patternCount).toBe(2);
@@ -298,7 +298,7 @@ describe('Session Tools (MCP)', () => {
     });
 
     it('returns all patterns when minOccurrences is 1', async () => {
-      const { result } = await callTool(server, 'session:patterns', {
+      const { result } = await callTool(server, 'session.patterns', {
         minOccurrences: 1,
       });
 
@@ -306,7 +306,7 @@ describe('Session Tools (MCP)', () => {
     });
 
     it('filters by domain', async () => {
-      const { result } = await callTool(server, 'session:patterns', {
+      const { result } = await callTool(server, 'session.patterns', {
         domain: 'testing',
         minOccurrences: 1,
       });
@@ -317,7 +317,7 @@ describe('Session Tools (MCP)', () => {
     });
 
     it('respects minOccurrences threshold', async () => {
-      const { result } = await callTool(server, 'session:patterns', {
+      const { result } = await callTool(server, 'session.patterns', {
         minOccurrences: 5,
       });
 
@@ -326,7 +326,7 @@ describe('Session Tools (MCP)', () => {
     });
 
     it('returns empty patterns for unknown domain', async () => {
-      const { result } = await callTool(server, 'session:patterns', {
+      const { result } = await callTool(server, 'session.patterns', {
         domain: 'nonexistent',
       });
 
@@ -335,7 +335,7 @@ describe('Session Tools (MCP)', () => {
     });
 
     it('sorts by confidence descending', async () => {
-      const { result } = await callTool(server, 'session:patterns', {});
+      const { result } = await callTool(server, 'session.patterns', {});
 
       const patterns = result.patterns as PatternRecord[];
       for (let i = 1; i < patterns.length; i++) {

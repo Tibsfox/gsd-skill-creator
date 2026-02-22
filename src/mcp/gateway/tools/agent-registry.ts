@@ -2,7 +2,7 @@
  * In-memory agent registry for the GSD-OS MCP gateway.
  *
  * Tracks spawned agents, their lifecycle state, token usage, and log entries.
- * The registry provides query methods for the agent:status and agent:logs
+ * The registry provides query methods for the agent.status and agent.logs
  * gateway tools.
  *
  * Thread safety: Node.js is single-threaded, so Map operations are atomic
