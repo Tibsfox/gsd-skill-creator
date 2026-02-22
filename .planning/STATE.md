@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.32 Brainstorm Session Support -- Phase 310 IN PROGRESS (plan 01 of 5 complete)
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 310 IN PROGRESS (plan 04 of 5 complete)
 
 ## Current Position
 
 Phase: 310 (4 of 7 in v1.32) (Technique Agents) -- IN PROGRESS
-Plan: 1 of 5 complete
+Plan: 4 of 5 complete
 Status: In Progress
-Last activity: 2026-02-22 -- Completed 310-01 (TechniqueAgent base, Ideator, Questioner)
+Last activity: 2026-02-22 -- Completed 310-04 (Scribe agent with capture-only constraint and artifact generation)
 
-Progress: [████████░░░░░░░░] 54% (v1.32)
+Progress: [██████████░░░░░░] 64% (v1.32)
 
 ## Accumulated Context
 
@@ -81,6 +81,9 @@ Progress: [████████░░░░░░░░] 54% (v1.32)
 - Complexity threshold: < 50 chars simple, > 200 chars complex, with keyword priority (complex keywords override simple)
 - Transition confidence formula: timer*0.2 + saturation*0.3 + user_signal*0.4 + minimum_threshold*0.1
 - Dominant factor detection thresholds: 0.35 user_request, 0.25 saturation_detected, 0.18 timer_expiry
+- Scribe capture methods validate with Zod schemas at the agent boundary -- never trust unvalidated data from across a boundary
+- captureClusters skips Zod validation since clusters arrive as arrays already validated by the Mapper
+- Scribe generateIdea()/generateQuestion() throw unconditionally as documented architectural constraints
 
 ### Key Constraints
 
@@ -98,5 +101,5 @@ Progress: [████████░░░░░░░░] 54% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 309-01-PLAN.md (assessProblem + evaluateTransitionReadiness TDD, 25 tests)
+Stopped at: Completed 310-04-PLAN.md (Scribe agent with capture-only constraint and artifact generation)
 Resume file: None

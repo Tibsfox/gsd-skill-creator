@@ -200,7 +200,7 @@ Plans:
 | 307. Session Manager & Phase Controller | 3/3 | Complete    | 2026-02-22 | - |
 | 308. Technique Engine, Pathway Router & Artifact Generator | 6/6 | Complete    | 2026-02-22 | - |
 | 309. Facilitator Agent | 1/2 | In Progress|  | - |
-| 310. Technique Agents | 1/5 | In Progress|  | - |
+| 310. Technique Agents | 2/5 | In Progress|  | - |
 | 311. Integration Wiring & System Tests | v1.32 | 0/TBD | Not started | - |
 
 See `.planning/milestones/v1.31-ROADMAP.md` for v1.31 phase details.
