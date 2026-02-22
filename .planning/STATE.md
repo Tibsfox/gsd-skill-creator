@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Phase 286 in progress — Test Plan Generation
+**Current focus:** Phase 286 complete — Test Plan Generation
 
 ## Current Position
 
 Phase: 286 of 289 (Test Plan Generation) — 8 of 11 in milestone
-Plan: 1 of 2 in current phase
-Status: 286 in progress
-Last activity: 2026-02-22 — 286-01 complete (test plan generator, safety classifier, 53 tests)
+Plan: 2 of 2 in current phase
+Status: 286 complete
+Last activity: 2026-02-22 — 286-02 complete (verification matrix, density checker, 90 tests)
 
-Progress: [#######░░░] 68% (7.5/11 phases)
+Progress: [########░░] 73% (8/11 phases)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15
+- Total plans completed: 16
 - Average duration: 4min
-- Total execution time: 54min
+- Total execution time: 57min
 
 **By Phase:**
 
@@ -34,7 +34,7 @@ Progress: [#######░░░] 68% (7.5/11 phases)
 | 283 Wave Planning | 2 | 7min | 3.5min |
 | 284 Model Assignment | 2 | 6min | 3min |
 | 285 Cache Optimization | 2 | 10min | 5min |
-| 286 Test Plan Generation | 1 | 3min | 3min |
+| 286 Test Plan Generation | 2 | 6min | 3min |
 
 ## Accumulated Context
 
@@ -95,6 +95,10 @@ Progress: [#######░░░] 68% (7.5/11 phases)
 - 2026-02-22: nonSafetyOverrides checked before safetyOverrides in override logic for predictable downgrade behavior
 - 2026-02-22: Safety-critical criteria get safetyDensityMin (3) tests, others get densityRange.min (2) tests
 - 2026-02-22: Categories array always has exactly 4 entries even when count is 0 for deterministic output shape
+- 2026-02-22: coveragePercent reflects only originally mapped criteria (stubs not counted as coverage)
+- 2026-02-22: Stub ID generation starts from max existing core ID to avoid collisions
+- 2026-02-22: Safety-critical determination for density uses per-test category check (any test with safety-critical triggers elevated threshold)
+- 2026-02-22: SAFETY_DENSITY_LOW uses plan.safetyCriticalCount / plan.totalTests for global safety percentage
 
 ### Key Constraints
 
@@ -110,5 +114,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 286-01-PLAN.md
+Stopped at: Completed 286-02-PLAN.md
 Resume file: None
