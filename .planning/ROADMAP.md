@@ -23,6 +23,7 @@
 - ✅ **v1.28** — GSD Den Operations (Phases 255-261, shipped 2026-02-21)
 - ✅ **v1.29** — Electronics Educational Pack (Phases 262-278, shipped 2026-02-21)
 - ✅ **v1.30** — Vision-to-Mission Pipeline (Phases 279-292, shipped 2026-02-22)
+- 🚧 **v1.31** — GSD-OS MCP Integration (Phases 293-303, in progress)
 
 ## Phases
 
@@ -46,48 +47,170 @@
 
 </details>
 
-<details>
-<summary>v1.29 Electronics Educational Pack (Phases 262-278) — SHIPPED 2026-02-21</summary>
+### 🚧 v1.31 GSD-OS MCP Integration (Phases 293-303)
 
-- [x] Phase 262: Pack Scaffold (2/2 plans) — completed 2026-02-21
-- [x] Phase 263: MNA Circuit Simulator Core (3/3 plans) — completed 2026-02-21
-- [x] Phase 264: Instruments and Reference Tests (3/3 plans) — completed 2026-02-21
-- [x] Phase 265: Digital Logic Simulator (3/3 plans) — completed 2026-02-21
-- [x] Phase 266: Safety Warden (2/2 plans) — completed 2026-02-21
-- [x] Phase 267: Learn Mode System (2/2 plans) — completed 2026-02-21
-- [x] Phase 268: Tier 1 Foundations Modules 1-3 (3/3 plans) — completed 2026-02-21
-- [x] Phase 269: Tier 2 Modules 4-5 (3/3 plans) — completed 2026-02-21
-- [x] Phase 270: Tier 2 Modules 6-7 (3/3 plans) — completed 2026-02-21
-- [x] Phase 271: Tier 3 Module 7A (1/1 plans) — completed 2026-02-21
-- [x] Phase 272: Tier 3 Module 8 (1/1 plans) — completed 2026-02-21
-- [x] Phase 273: Tier 3 Modules 9-10 (3/3 plans) — completed 2026-02-21
-- [x] Phase 274: Tier 4 Modules 11-12 (3/3 plans) — completed 2026-02-21
-- [x] Phase 275: Tier 4 Module 13 PLC (2/2 plans) — completed 2026-02-21
-- [x] Phase 276: Tier 4 Module 14 Off-Grid Power (2/2 plans) — completed 2026-02-21
-- [x] Phase 277: Tier 4 Module 15 PCB Design (2/2 plans) — completed 2026-02-21
-- [x] Phase 278: Integration Testing (1/1 plans) — completed 2026-02-21
+**Milestone Goal:** Make GSD-OS a first-class MCP citizen -- both as a Host (managing MCP server connections from the Tauri backend) and as a Server (exposing GSD-OS to external AI agents via 19+ tools). Includes template skills, agent bridge adapters, staging security gates, dashboard integration, and a 95-test verification suite.
 
-</details>
+- [ ] **Phase 293: Foundation Types** - Shared TypeScript + Rust type definitions for all MCP structures
+- [ ] **Phase 294: Host Manager & Server Registry** - Rust server lifecycle, client pool, tool routing, trace emission, config persistence
+- [ ] **Phase 295: Gateway Server Core** - Streamable HTTP server with authentication and error handling
+- [ ] **Phase 296: Gateway Project & Skill Tools** - project:* and skill:* tool implementations (10 tools)
+- [ ] **Phase 297: Gateway Agent, Workflow & Session Tools** - agent:*, workflow:*, session:* tool implementations (9 tools)
+- [ ] **Phase 298: Gateway Chipset, Resources & Prompts** - chipset:* tools, 4 resource providers, 3 prompt templates
+- [ ] **Phase 299: MCP Templates** - Server, host, and client project scaffold generators
+- [ ] **Phase 300: Agent Bridge** - Agent-Server and Agent-Client adapters with SCOUT, VERIFY, and EXEC wiring
+- [ ] **Phase 301: Security Gates** - Hash verification, trust decay, invocation validation, audit logging
+- [ ] **Phase 302: Presentation** - Blueprint Editor blocks, trace panel, security dashboard, boot sequence, Tauri IPC
+- [ ] **Phase 303: Integration Testing** - End-to-end tests, performance verification, safety-critical tests, coverage validation
+
+## Phase Details
+
+### Phase 293: Foundation Types
+**Goal**: All MCP components share a single source of truth for types -- TypeScript interfaces, Rust FFI counterparts, and staging gate contracts
+**Depends on**: Nothing (first phase of v1.31)
+**Requirements**: MCPF-01, MCPF-02, MCPF-03
+**Success Criteria** (what must be TRUE):
+  1. TypeScript code can import Tool, Resource, Prompt, ServerCapability, TransportConfig, McpMessage, and TraceEvent types from a shared module
+  2. Rust code compiles with matching FFI types that serialize/deserialize via serde and expose Tauri IPC command shapes
+  3. Staging gate interfaces (TrustState enum, SecurityGate trait, HashRecord, ValidationResult) are importable by both TypeScript and Rust consumers
+**Plans:** 1/2 plans executed
+Plans:
+- [ ] 293-01-PLAN.md — TypeScript MCP and staging gate types with Zod schemas
+- [ ] 293-02-PLAN.md — Rust FFI types mirroring TypeScript, wired into Tauri
+
+### Phase 294: Host Manager & Server Registry
+**Goal**: GSD-OS can manage MCP server processes from its Tauri backend -- spawning, monitoring, restarting, disconnecting, discovering capabilities, routing tool calls, persisting config, and emitting trace events
+**Depends on**: Phase 293
+**Requirements**: HOST-01, HOST-02, HOST-03, HOST-04, HOST-05, HOST-06, HOST-07, HOST-08
+**Success Criteria** (what must be TRUE):
+  1. Host Manager spawns a stdio MCP server, completes handshake, and the server appears as connected with discovered capabilities
+  2. Three independent servers run concurrently -- crashing one does not affect the others, and the crashed server restarts automatically with backoff
+  3. Tool calls route to the correct server by tool name and return results (or timeout errors) to the caller
+  4. Server configs persist across Tauri app restarts, and a previously-quarantined server remains quarantined after restart
+  5. Every MCP message produces a TraceEvent with timestamp and latency, observable via Tauri event subscription
+**Plans**: TBD
+
+### Phase 295: Gateway Server Core
+**Goal**: External MCP clients can connect to GSD-OS over HTTP, authenticate, and receive proper error responses
+**Depends on**: Phase 293
+**Requirements**: GATE-01, GATE-02, GATE-03, GATE-25
+**Success Criteria** (what must be TRUE):
+  1. Gateway server starts on a configurable port and accepts Streamable HTTP MCP connections
+  2. Requests with a valid bearer token from ~/.gsd/gateway-token succeed; requests without it receive 401
+  3. Role-based scopes restrict tool access -- a read-only token cannot invoke write tools
+  4. Concurrent tool calls execute without crashes, and malformed requests produce structured JSON-RPC errors
+**Plans**: TBD
+
+### Phase 296: Gateway Project & Skill Tools
+**Goal**: External agents can discover, inspect, and manage GSD projects and skills through MCP tool calls
+**Depends on**: Phase 295
+**Requirements**: GATE-04, GATE-05, GATE-06, GATE-07, GATE-08, GATE-09, GATE-10
+**Success Criteria** (what must be TRUE):
+  1. project:list returns all projects with name, status, phase count, and last activity -- and the list updates when a new project is created via project:create
+  2. project:get returns full config, phase state, and deliverables for a named project
+  3. project:execute-phase triggers phase execution and returns a result indicating success or failure
+  4. skill:search returns relevance-scored results for a query, and skill:inspect returns the full SKILL.md content for a named skill
+  5. skill:activate loads a skill into the chipset and reports the token budget impact
+**Plans**: TBD
+
+### Phase 297: Gateway Agent, Workflow & Session Tools
+**Goal**: External agents can spawn and monitor GSD agents, trigger workflow stages, and query cross-project intelligence
+**Depends on**: Phase 295
+**Requirements**: GATE-11, GATE-12, GATE-13, GATE-14, GATE-15, GATE-16, GATE-17, GATE-18, GATE-19
+**Success Criteria** (what must be TRUE):
+  1. agent:spawn creates an agent with the specified role and skills, and agent:status returns its current state including token usage
+  2. agent:logs returns recent log entries for a running agent
+  3. workflow:research, workflow:requirements, workflow:plan, and workflow:execute each trigger their respective GSD pipeline stage and return structured results
+  4. session:query returns cross-project intelligence matches for a search query, and session:patterns returns detected patterns for a domain
+**Plans**: TBD
+
+### Phase 298: Gateway Chipset, Resources & Prompts
+**Goal**: External agents can read and modify chipset state, browse GSD resources via URI templates, and use prompt templates for common workflows
+**Depends on**: Phase 295
+**Requirements**: GATE-20, GATE-21, GATE-22, GATE-23, GATE-24
+**Success Criteria** (what must be TRUE):
+  1. chipset:get returns the current chipset YAML as a structured object, and chipset:modify updates it and returns a diff
+  2. chipset:synthesize produces a valid chipset from a natural language description
+  3. Resource providers expose project configs, skill registry, agent telemetry, and chipset state via MCP resource protocol with URI templates
+  4. Prompt templates for create-project, diagnose-agent, and optimize-chipset return structured prompts with user-provided arguments filled in
+**Plans**: TBD
+
+### Phase 299: MCP Templates
+**Goal**: Users can scaffold complete, working MCP server, host, and client projects from templates -- each generated project builds, type-checks, and passes its own tests
+**Depends on**: Phase 293
+**Requirements**: TMPL-01, TMPL-02, TMPL-03, TMPL-04, TMPL-05, TMPL-06, TMPL-07, TMPL-08
+**Success Criteria** (what must be TRUE):
+  1. Generated MCP server project has package.json, tsconfig.json, SDK setup, example tool/resource/prompt, tests, CLAUDE.md, and chipset.yaml -- and builds with zero errors
+  2. Generated server completes MCP handshake via MCP Inspector, and the example tool is invocable and returns a result
+  3. Custom project name propagates to package.json name, server name, and bin name
+  4. MCP Host template generates a valid scaffold with client pool, lifecycle management, and approval gates; MCP Client template generates a valid scaffold with tool discovery and typed responses
+  5. Total generation time from command to buildable project is under 120 seconds
+**Plans**: TBD
+
+### Phase 300: Agent Bridge
+**Goal**: GSD agents communicate through MCP -- SCOUT and VERIFY are accessible as MCP servers, and EXEC can invoke tools on other agents as an MCP client
+**Depends on**: Phase 293
+**Requirements**: BRDG-01, BRDG-02, BRDG-03, BRDG-04, BRDG-05, BRDG-06, BRDG-07, BRDG-08
+**Success Criteria** (what must be TRUE):
+  1. SCOUT is accessible as an MCP server with scout:research, scout:evaluate-dependency, scout:survey-landscape tools and 2 resources
+  2. VERIFY is accessible as an MCP server with verify:run-tests, verify:check-types, verify:audit, verify:coverage tools and 2 resources
+  3. EXEC can invoke SCOUT tools through MCP and receive structured results (inter-agent round-trip works)
+  4. Concurrency limiting enforced -- exceeding maxConcurrency returns a retry error, and handler errors produce structured MCP errors without crashing the process
+  5. Context isolation maintained between concurrent invocations on the same agent server
+**Plans**: TBD
+
+### Phase 301: Security Gates
+**Goal**: All MCP tool invocations pass through staging gates that verify tool definitions, manage trust state, validate invocations, and produce an audit trail -- with no bypass path
+**Depends on**: Phase 293
+**Requirements**: SECR-01, SECR-02, SECR-03, SECR-04, SECR-05, SECR-06, SECR-07, SECR-08, SECR-09, SECR-10, SECR-11, SECR-12, SECR-13, SECR-14
+**Success Criteria** (what must be TRUE):
+  1. Connecting to a server computes SHA-256 of its tool definitions; reconnecting with the same definitions produces no alerts, but changing a definition triggers quarantine and invocation pause
+  2. New servers start in quarantine with human approval required for every invocation; trust decays to quarantine after 30 days of inactivity and resets immediately on tool definition change
+  3. Prompt injection patterns and path traversal attempts in tool parameters are blocked; rate limiting enforced per server and per tool
+  4. Every tool invocation is logged with caller, tool, sanitized params (API keys/tokens redacted), response status, and timing
+  5. Agent-to-agent MCP calls pass through the same staging gates as external calls, and concurrent security checks are thread-safe
+**Plans**: TBD
+
+### Phase 302: Presentation
+**Goal**: The GSD-OS desktop displays MCP infrastructure visually -- servers as blueprint blocks, real-time message traces, security status, and boot sequence peripherals -- all driven by Tauri IPC from the Rust host manager
+**Depends on**: Phase 294, Phase 301
+**Requirements**: PRES-01, PRES-02, PRES-03, PRES-04, PRES-05, PRES-06, PRES-07, PRES-08
+**Success Criteria** (what must be TRUE):
+  1. Blueprint Editor displays MCP Server, Tool, and Resource block types with ports, status indicators, and parameter previews
+  2. Block wiring enforces type-safe connections and shows error messages for invalid wiring attempts
+  3. MCP Trace Panel displays real-time JSON-RPC message flow with latency sparklines and server/tool filtering
+  4. Security Dashboard shows trust state per server, hash change alerts, and a log of blocked calls
+  5. Boot sequence displays MCP servers as peripherals with connection status and tool counts, and Tauri IPC commands (connect, disconnect, invoke_tool, get_trace, get_trust_state) are callable from the frontend
+**Plans**: TBD
+
+### Phase 303: Integration Testing
+**Goal**: The complete MCP stack works end-to-end -- from blueprint blocks through Tauri IPC to host manager to servers and back, with security gates enforced at every boundary
+**Depends on**: Phase 294, Phase 295, Phase 299, Phase 300, Phase 301, Phase 302
+**Requirements**: TEST-01, TEST-02, TEST-03, TEST-04, TEST-05, TEST-06, TEST-07, TEST-08
+**Success Criteria** (what must be TRUE):
+  1. Blueprint Editor block connects through Tauri IPC to Host Manager to a real server, and a tool invocation flows through staging gates to the server and back to the trace panel
+  2. An external MCP client connects to the gateway, discovers tools, invokes one, and receives a structured result
+  3. A template-generated server builds, registers with the host manager, and handles tool calls end-to-end
+  4. SCOUT server communicates with EXEC client via MCP and returns results
+  5. All 18 safety-critical security tests pass, MCP overhead adds less than 50ms latency, and test coverage across all MCP components exceeds 85%
+**Plans**: TBD
 
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 279. Types & Schemas | v1.30 | 2/2 | Complete | 2026-02-21 |
-| 280. Vision Document Processing | v1.30 | 2/2 | Complete | 2026-02-21 |
-| 281. Research Reference Compilation | v1.30 | 2/2 | Complete | 2026-02-21 |
-| 282. Mission Package Assembly | v1.30 | 2/2 | Complete | 2026-02-21 |
-| 283. Wave Planning | v1.30 | 2/2 | Complete | 2026-02-21 |
-| 284. Model Assignment | v1.30 | 2/2 | Complete | 2026-02-22 |
-| 285. Cache Optimization | v1.30 | 2/2 | Complete | 2026-02-22 |
-| 286. Test Plan Generation | v1.30 | 2/2 | Complete | 2026-02-22 |
-| 287. Template System | v1.30 | 2/2 | Complete | 2026-02-22 |
-| 288. Mission Assembly Integration Wiring | v1.30 | 2/2 | Complete | 2026-02-22 |
-| 289. Pipeline Orchestrator | v1.30 | 2/2 | Complete | 2026-02-22 |
-| 290. Integration & Testing | v1.30 | 2/2 | Complete | 2026-02-22 |
-| 291. Template System Pipeline Integration | v1.30 | 1/1 | Complete | 2026-02-22 |
-| 292. Pipeline Output Enrichment | v1.30 | 1/1 | Complete | 2026-02-22 |
+| 293. Foundation Types | 1/2 | In Progress|  | - |
+| 294. Host Manager & Server Registry | v1.31 | 0/TBD | Not started | - |
+| 295. Gateway Server Core | v1.31 | 0/TBD | Not started | - |
+| 296. Gateway Project & Skill Tools | v1.31 | 0/TBD | Not started | - |
+| 297. Gateway Agent, Workflow & Session Tools | v1.31 | 0/TBD | Not started | - |
+| 298. Gateway Chipset, Resources & Prompts | v1.31 | 0/TBD | Not started | - |
+| 299. MCP Templates | v1.31 | 0/TBD | Not started | - |
+| 300. Agent Bridge | v1.31 | 0/TBD | Not started | - |
+| 301. Security Gates | v1.31 | 0/TBD | Not started | - |
+| 302. Presentation | v1.31 | 0/TBD | Not started | - |
+| 303. Integration Testing | v1.31 | 0/TBD | Not started | - |
 
 ---
-*33 milestones shipped. 292 phases, 766 plans. Full archive: `.planning/milestones/`*
-*v1.30 shipped: 2026-02-22*
+*33 milestones shipped. 292 phases complete, 11 phases planned (293-303). 766 plans completed.*
+*v1.31 in progress: 2026-02-22*
