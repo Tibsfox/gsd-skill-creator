@@ -10,7 +10,7 @@ Requirements for GSD-OS MCP Integration milestone. Each maps to roadmap phases.
 ### MCP Foundation Types
 
 - [x] **MCPF-01**: Shared TypeScript interfaces exist for Tool, Resource, Prompt, ServerCapability, TransportConfig, McpMessage, and TraceEvent
-- [ ] **MCPF-02**: Rust FFI types exist matching TypeScript types with serde serialization and Tauri IPC command shapes
+- [x] **MCPF-02**: Rust FFI types exist matching TypeScript types with serde serialization and Tauri IPC command shapes
 - [x] **MCPF-03**: Staging gate interfaces exist with TrustState enum, SecurityGate trait, HashRecord, and ValidationResult types
 
 ### MCP Host Manager
@@ -146,7 +146,7 @@ Deferred to future release. Tracked but not in current roadmap.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | MCPF-01 | Phase 293 | Complete |
-| MCPF-02 | Phase 293 | Pending |
+| MCPF-02 | Phase 293 | Complete |
 | MCPF-03 | Phase 293 | Complete |
 | HOST-01 | Phase 294 | Pending |
 | HOST-02 | Phase 294 | Pending |
