@@ -1,8 +1,234 @@
 # Release History
 
-Comprehensive release notes for GSD Skill Creator across all 31 milestones.
+Comprehensive release notes for GSD Skill Creator across all 35 milestones.
 
-**Totals:** 31 milestones (v1.0-v1.27 + v1.8.1 patch) | 254 phases | 679 plans | ~302k LOC | 1,006 requirements
+**Totals:** 35 milestones (v1.0-v1.31 + v1.8.1 patch) | 304 phases | 794 plans | ~394k LOC | 1,139 requirements
+
+---
+
+## v1.31 — GSD-OS MCP Integration
+
+**Shipped:** 2026-02-22
+**Phases:** 293-304 (12 phases) | **Plans:** 28 | **Commits:** 37 | **Requirements:** 80 | **Tests:** 838 (771 TS + 67 Rust) | **LOC:** ~24K
+
+Make GSD-OS a first-class MCP citizen — both as an MCP Host (Rust backend managing server processes) and as an MCP Server (exposing 19 tools to external AI agents). Includes template skills, agent bridge adapters, staging security gates, blueprint editor integration, and comprehensive integration testing.
+
+### Key Features
+
+**Foundation Types (Phase 293):**
+- Shared TypeScript + Rust type definitions for all MCP structures
+- Zod v4 schemas for runtime validation, serde round-trip parity for Rust FFI
+- Staging gate interfaces: TrustState enum, SecurityGate trait, HashRecord, ValidationResult
+
+**Rust MCP Host Manager (Phase 294):**
+- ServerConnection: stdio process spawn, MCP handshake, crash detection, exponential backoff restart
+- HostManager: multi-server orchestration, concurrent connection management
+- ToolRouter: tool-name-to-server dispatch with timeout handling
+- ServerRegistry: JSON persistence, health tracking, quarantine state
+- TraceEmitter: ring buffer, Tauri event emission for every MCP message
+- 5 Tauri IPC commands: connect, disconnect, list, call_tool, get_trace
+
+**Gateway Server (Phases 295-298):**
+- Streamable HTTP transport with per-session isolation
+- Bearer token auth from ~/.gsd/gateway-token with timing-safe comparison
+- 19 tools across 6 groups: project (list/get/create/execute-phase), skill (search/inspect/activate), agent (spawn/status/logs), workflow (research/requirements/plan/execute), session (query/patterns), chipset (get/modify/synthesize)
+- 4 resource providers via URI templates (project configs, skill registry, agent telemetry, chipset state)
+- 3 prompt templates (create-project, diagnose-agent, optimize-chipset)
+- Per-tool scope enforcement: admin > write > read, deny by default for unknown tools
+
+**MCP Templates (Phase 299):**
+- Server template: package.json, tsconfig.json, SDK setup, example tool/resource/prompt, tests, CLAUDE.md, chipset.yaml
+- Host template: client pool, lifecycle management, transport abstraction, approval gates
+- Client template: tool discovery, resource subscription, typed responses
+- Custom project name propagation, sub-120s generation time
+
+**Agent Bridge (Phase 300):**
+- Generic AgentServerAdapter factory creating MCP servers from config
+- SCOUT exposed with scout.research, scout.evaluate-dependency, scout.survey-landscape tools + 2 resources
+- VERIFY exposed with verify.run-tests, verify.check-types, verify.audit, verify.coverage tools + 2 resources
+- AgentClientAdapter giving EXEC MCP client capability
+- Counting semaphore for concurrency limiting, per-invocation context isolation
+
+**Security Pipeline (Phase 301):**
+- Hash gate: SHA-256 tool definition hashing with deterministic sorting, drift detection
+- Trust manager: quarantine → provisional → trusted lifecycle, 30-day decay, immediate reset on change
+- Invocation validator: prompt injection blocking, path traversal prevention
+- Rate limiter: per-server and per-tool limits
+- Audit logger: full invocation logging with API key/token redaction
+- StagingPipeline as single unbypassable SecurityGate implementation
+- Per-server promise queues for thread-safe concurrent validation
+
+**Presentation (Phase 302):**
+- Blueprint Editor: MCP Server, Tool, Resource block types with port rendering and status indicators
+- Wiring engine with type-safe connections and deny-by-default rules
+- MCP Trace Panel: real-time JSON-RPC flow with SVG sparklines and server/tool filtering
+- Security Dashboard: trust state per server, hash change alerts, blocked call log
+- Boot peripherals: Amiga POST aesthetic, green monospace, trust abbreviations [Q/P/T/S]
+- Tauri IPC bridge with dynamic import for non-Tauri environment safety
+
+**Integration Testing (Phase 303):**
+- 30 end-to-end tests across all MCP subsystems
+- 18 safety-critical security tests (mandatory-pass)
+- Performance verification: MCP overhead < 50ms
+- Coverage validation: 85%+ across all MCP components
+
+**Integration Wiring (Phase 304 — Gap Closure):**
+- Production gateway factory registering all 19 tools across 6 groups
+- Per-tool scope enforcement via canInvokeTool at HTTP level with body buffering
+- Rust StagingGate: zero-size struct, string-contains injection detection, validates before mcp_call_tool
+- Agent bridge staging: optional StagingPipeline with source='agent-to-agent'
+- E2E test discovering and invoking tools from all 6 groups
+
+---
+
+## v1.30 — Vision-to-Mission Pipeline
+
+**Shipped:** 2026-02-22
+**Phases:** 279-292 (14 phases) | **Plans:** 26 | **Commits:** 65 | **Requirements:** 58 | **Tests:** 679 | **LOC:** ~20K
+
+Complete vision-to-mission transformation pipeline as TypeScript modules — turning vision documents into structured mission packages with wave planning, model assignment, and deployment-ready output.
+
+### Key Features
+
+**Types & Schemas (Phase 279):**
+- Zod schemas for all 8 VTM document structures with inferred TypeScript types
+- 60/40 principle budget constraints and programmatic schema iteration
+
+**Vision Document Processing (Phase 280):**
+- Regex-based section extraction, archetype classifier (Educational/Infrastructure/Organizational/Creative)
+- Quality checker with section completeness validation, dependency extractor
+
+**Research Reference Compilation (Phase 281):**
+- Tiered knowledge chunking: summary (always loaded), active (when relevant), reference (on demand)
+- Source quality checker, safety extractor with boundary classification
+
+**Mission Package Assembly (Phase 282):**
+- Self-contained component specs, milestone spec generator
+- Wave planning integration, model assignment, test plan generation, file count scaling
+
+**Wave Planning (Phase 283):**
+- Parallel track detection via greedy graph coloring
+- Dependency graph generator with critical path marking, sequential savings calculator
+- Risk factor analyzer (cache TTL, interface mismatch, model capacity)
+
+**Model Assignment (Phase 284):**
+- Weighted signal registry for Opus/Sonnet/Haiku assignment
+- Confidence scoring, budget validator enforcing 60/40 principle
+- Downgrade-only auto-rebalance (Opus→Sonnet→Haiku, never upgrade)
+
+**Cache Optimization (Phase 285):**
+- Shared load detection, schema reuse analysis, knowledge tier calculation
+- TTL validation, token savings estimation using gpt-tokenizer
+
+**Test Plan Generation (Phase 286):**
+- Categorized specs with S/C/I/E IDs, verification matrix builder
+- Safety-critical classifier, test density checker
+
+**Template System (Phase 287):**
+- Mustache-style {{name}} renderer, Zod schema validation
+- Memory-cached loader, 7-template registry
+
+**Pipeline Orchestrator (Phases 288-292):**
+- End-to-end vision → research → mission with configurable stage skipping
+- Template rendering as additive layer, wave analysis enrichment
+- Budget auto-rebalance, structured error reporting with recoverable/unrecoverable classification
+
+---
+
+## v1.29 — Electronics Educational Pack
+
+**Shipped:** 2026-02-21
+**Phases:** 262-278 (17 phases) | **Plans:** 39 | **Commits:** 92 | **Requirements:** 95 | **Tests:** 10,707 | **LOC:** ~29K
+
+Comprehensive electronics curriculum from Ohm's law through DSP and PLC, with circuit and logic simulators, safety warden, and 77 interactive labs grounded in *The Art of Electronics*.
+
+### Key Features
+
+**MNA Circuit Simulator (Phases 262-265):**
+- DC, AC, and transient analysis with Newton-Raphson nonlinear solver
+- Gaussian elimination with partial pivoting
+- 7 component models: R, C, L, diode, BJT, MOSFET, op-amp (+ regulator)
+- Stamp logging for educational visibility into matrix construction
+- Backward Euler companion models for C and L in transient analysis
+
+**Digital Logic Simulator (Phases 266-267):**
+- 8 gate types with CMOS internal structure
+- Truth table generation, ASCII timing diagrams with propagation delay
+- Flip-flops: SR, D, JK, T with clock edge detection
+- 4-bit ripple-carry adder with 256 exhaustive combination verification
+
+**Safety Warden (Phase 268):**
+- 3 operating modes: annotate, gate, redirect
+- IEC 60449 voltage classification for mode escalation
+- Positive framing with 8 prohibited words enforced
+- Professional context detection, per-module safety assessments
+
+**Learn Mode (Phase 269):**
+- 3-level depth: L1 practical, L2 reference, L3 mathematical
+- H&H (Art of Electronics) citation lookup with 3-level system
+- Sidebar UI component, depth markers in all 15 module content files
+
+**15 Educational Modules (Phases 270-273):**
+- Tier 1: Circuits, Passives, Signals
+- Tier 2: Diodes, Transistors, Op-Amps, Power
+- Tier 3: Logic Gates, Sequential Logic, Data Conversion, DSP
+- Tier 4: MCU, Sensors, PLC, Off-Grid Power, PCB Design
+- 77 interactive labs with structured LabStep format
+
+**5 Specialized Engines (Phases 274-276):**
+- DSP: FFT, FIR filter design, convolution, quantization
+- GPIO: UART, SPI, I2C, PWM, ADC, timer simulation
+- PLC: Ladder logic, PID control, Modbus, scan cycle
+- Solar: Single-diode model, MPPT, battery simulation, inverter
+- PCB: Impedance calculation, DRC, EMI analysis, trace routing, Gerber output
+
+**Integration & Testing (Phases 277-278):**
+- Cross-module MNA/logic sim validation
+- Content quality checks (word counts, H&H citations, LabStep structure)
+- Chipset routing verification, safety mode transition testing
+
+---
+
+## v1.28 — GSD Den Operations
+
+**Shipped:** 2026-02-21
+**Phases:** 255-261 (7 phases) | **Plans:** 22 | **Commits:** 51 | **Requirements:** 81 | **Tests:** 675 | **LOC:** ~18.9K
+
+Complete multi-agent coordination system with filesystem message bus, 10 core staff positions, hierarchical topology profiles, and end-to-end integration exercise.
+
+### Key Features
+
+**Filesystem Message Bus (Phase 255):**
+- 8 priority levels (0=HALT through 7=background)
+- ISA compact encoding for efficient message representation
+- Dispatcher routing with queue health metrics
+- Dead-letter handling, message pruning
+
+**Command Division (Phase 256):**
+- Coordinator: go/no-go readiness checks, atomic phase transitions, 4-level escalation
+- Relay: question consolidation, priority classification, user-facing reports
+
+**Planning Division (Phase 257):**
+- Planner: phase decomposition, resource estimation, trajectory tracking
+- Configurator: 4 topology profiles (Scout 3/Patrol 5/Squadron 7/Fleet 10)
+- Monitor: token budget tracking with 75%/95%/100% alert thresholds
+
+**Execution Division (Phase 258):**
+- Executor: fresh-context plan execution with artifact handoff
+- Verifier: 4 independent quality gates (tests-pass, new-coverage, code-review, artifact-integrity)
+
+**Safety & Operations Division (Phase 259):**
+- Sentinel: 9-type recovery decision matrix, Priority 0 HALT/CLEAR protocol
+- Chronicler: append-only JSONL audit trail, mission briefing generation
+
+**Dashboard & Chipset (Phase 260):**
+- Dashboard: 10-position status tracking, staff indicators, health metrics
+- Chipset: deterministic YAML parsing with reproducibility proof
+
+**Integration Exercise (Phase 261):**
+- Full lifecycle flow with 10-position chipset
+- 4 topology profile validation, 7 recovery scenarios
+- Overhead verification (<1% of context), end-to-end reproducibility
 
 ---
 
@@ -1375,4 +1601,11 @@ The foundational 6-step adaptive learning loop.
 2026-02-19  v1.22   Minecraft Knowledge World
 2026-02-19  v1.23   Project AMIGA
 2026-02-19  v1.24   GSD Conformance Audit & Hardening
+2026-02-19  v1.25   Ecosystem Integration
+2026-02-19  v1.26   Aminet Archive Extension Pack
+2026-02-20  v1.27   GSD Foundational Knowledge Packs
+2026-02-21  v1.28   GSD Den Operations
+2026-02-21  v1.29   Electronics Educational Pack
+2026-02-22  v1.30   Vision-to-Mission Pipeline
+2026-02-22  v1.31   GSD-OS MCP Integration
 ```

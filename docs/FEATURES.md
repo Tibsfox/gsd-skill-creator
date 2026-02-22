@@ -108,6 +108,29 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **102. Activity Scaffolder** | Pattern-to-activity generation creating new PackActivity objects from learning patterns, insertable into existing activity chains, pattern-specific generation for 4 pattern types (v1.27) |
 | **103. Approach Promoter** | Pattern-to-skill promotion converting high-confidence learning patterns to reusable skill definitions with trigger conditions, action steps, and SKILL.md markdown output (v1.27) |
 | **104. Knowledge Pack Integration** | Complete skill-creator integration infrastructure: observation hooks, AMIGA bridge, pattern detection, pathway adaptation, activity scaffolding, approach promotion, barrel exports with 144 new tests (v1.27) |
+| **105. Filesystem Message Bus** | 8-priority ISA-encoded message bus with Dispatcher routing, queue health metrics, dead-letter handling, and message pruning (v1.28) |
+| **106. 10-Position Staff Topology** | Coordinator, Relay, Planner, Configurator, Monitor, Executor, Verifier, Sentinel, Chronicler, Dashboard organized into 5 operational divisions (v1.28) |
+| **107. Topology Profiles** | 4 auto-selected profiles (Scout/Patrol/Squadron/Fleet) based on phase count, with role subset hierarchy (v1.28) |
+| **108. HALT/CLEAR Protocol** | Priority 0 emergency stop via bus message, 9-type recovery decision matrix in Sentinel position (v1.28) |
+| **109. MNA Circuit Simulator** | DC/AC/transient analysis with Newton-Raphson solver, 7 component models, stamp logging for educational visibility (v1.29) |
+| **110. Digital Logic Simulator** | 8 gate types with CMOS internals, truth tables, ASCII timing diagrams, flip-flops (SR/D/JK/T), ripple-carry adder (v1.29) |
+| **111. Safety Warden** | 3 operating modes (annotate/gate/redirect), IEC 60449 voltage classification, positive framing with 8 prohibited words (v1.29) |
+| **112. Electronics Learn Mode** | 3-level depth (practical/reference/mathematical), H&H citation lookup, depth markers in all 15 modules (v1.29) |
+| **113. 77 Interactive Labs** | Hands-on electronics experiments across 15 modules in 4 tiers grounded in *The Art of Electronics* (v1.29) |
+| **114. 5 Specialized Engines** | DSP (FFT/FIR), GPIO (UART/SPI/I2C), PLC (ladder logic/PID), Solar (MPPT/battery), PCB (impedance/DRC/Gerber) (v1.29) |
+| **115. Vision-to-Mission Types** | Zod schemas for all 8 VTM document structures with inferred TypeScript types and 60/40 budget constraints (v1.30) |
+| **116. Vision Document Parser** | Regex section extraction, archetype classifier (Educational/Infrastructure/Organizational/Creative), quality checker (v1.30) |
+| **117. Wave Planner** | Parallel track detection via graph coloring, dependency graphs with critical path, sequential savings calculator (v1.30) |
+| **118. Model Assignment Engine** | Weighted signal scoring for Opus/Sonnet/Haiku, budget validator, downgrade-only auto-rebalance (v1.30) |
+| **119. Pipeline Orchestrator** | End-to-end vision → research → mission with stage skipping, template rendering, enrichment, structured errors (v1.30) |
+| **120. MCP Foundation Types** | Shared TypeScript + Rust types for MCP structures with Zod schemas and serde round-trip parity (v1.31) |
+| **121. Rust MCP Host Manager** | Server lifecycle with stdio transport, crash detection, exponential backoff, tool routing, capability caching, trace emission (v1.31) |
+| **122. Gateway MCP Server** | 19 tools across 6 groups, 4 resource providers, 3 prompt templates, Streamable HTTP with bearer auth and scope enforcement (v1.31) |
+| **123. MCP Template Generators** | Server, host, and client project scaffolds generating complete, buildable TypeScript projects (v1.31) |
+| **124. Agent Bridge** | SCOUT and VERIFY as MCP servers, EXEC as MCP client, inter-agent communication with staging gates and context isolation (v1.31) |
+| **125. MCP Security Pipeline** | Hash verification, trust lifecycle with 30-day decay, invocation validation, rate limiting, audit logging, staging gates on all paths (v1.31) |
+| **126. Blueprint Editor MCP Blocks** | Server/Tool/Resource block types with port rendering, type-safe wiring engine, deny-by-default rules (v1.31) |
+| **127. MCP Trace & Security Panels** | Real-time JSON-RPC trace with sparklines, Security Dashboard with trust states and blocked call log (v1.31) |
 
 ## Version History
 
@@ -143,3 +166,7 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.25** | Ecosystem Integration: dependency DAG (20 nodes, 48 edges), EventDispatcher specification, 4-tier dependency philosophy, integration test strategy, partial-build compatibility matrix with 99 known-issues |
 | **v1.26** | Aminet Archive Extension Pack: INDEX infrastructure (~84K packages), mirror state + download engine, full-text search + collections, pure TypeScript virus scanner (52 signatures), LhA/LZX extraction, FS-UAE integration, GSD-OS desktop panel with 5-agent pipeline |
 | **v1.27** | GSD Foundational Knowledge Packs: 35 knowledge packs (15 Core Academic, 10 Applied, 10 Specialized) with complete vision/modules/activities/assessment/resources, GSD-OS dashboard (browser, search, detail view, skill tree, progress tracking), skill-creator integration (observation hooks, AMIGA bridge, 4-pattern detection, pathway adaptation, activity scaffolding, approach promotion) |
+| **v1.28** | GSD Den Operations: filesystem message bus (8 priorities, ISA encoding), 10-position staff topology (5 divisions), 4 topology profiles (Scout/Patrol/Squadron/Fleet), HALT/CLEAR protocol, Sentinel recovery matrix, Chronicler audit trail, chipset YAML reproducibility, 675 tests |
+| **v1.29** | Electronics Educational Pack: MNA circuit simulator (7 components, DC/AC/transient), digital logic simulator (8 gates, flip-flops, timing), safety warden (IEC 60449, positive framing), learn mode (3-level H&H), 15 modules across 4 tiers with 77 labs, 5 specialized engines (DSP/GPIO/PLC/solar/PCB), 10,707 tests |
+| **v1.30** | Vision-to-Mission Pipeline: Zod-validated VTM types, vision parser with archetype classification, research compiler with tiered chunking, mission assembler, wave planner with graph coloring, model assignment (Opus/Sonnet/Haiku), cache optimizer, test plan generator, 7-template system, pipeline orchestrator with enrichment, 679 tests |
+| **v1.31** | GSD-OS MCP Integration: Rust MCP Host Manager (server lifecycle, tool routing, trace emission), Gateway Server (19 tools, Streamable HTTP, scope enforcement), MCP templates (server/host/client scaffolds), Agent Bridge (SCOUT/VERIFY servers, EXEC client), security pipeline (hash verification, trust lifecycle, staging gates), Blueprint Editor blocks with wiring engine, Trace Panel, Security Dashboard, 838 tests |
