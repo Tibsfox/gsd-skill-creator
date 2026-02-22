@@ -4,6 +4,7 @@ mod error;
 mod pty;
 mod state;
 mod tmux;
+mod mcp_host;
 mod watcher;
 
 use std::sync::Mutex;
