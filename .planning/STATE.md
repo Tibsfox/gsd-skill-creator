@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.32 Brainstorm Session Support -- Phase 306 in progress (Plan 01 of 2 complete)
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 308 in progress (Plan 03 of 6 complete)
 
 ## Current Position
 
-Phase: 306 (2 of 7 in v1.32) (Rules Engine)
-Plan: 1 of 2 complete
+Phase: 308 (4 of 7 in v1.32) (Technique Engine, Pathway Router & Artifact Generator)
+Plan: 3 of 6 complete
 Status: In Progress
-Last activity: 2026-02-22 -- Completed 306-01 (RulesEngine critic gate, phase rules, rule reminders -- 24 tests)
+Last activity: 2026-02-22 -- Completed 308-03 (4 analytical techniques with Black Hat phase constraint)
 
-Progress: [█████░░░░░░░░░░░] 21% (v1.32)
+Progress: [██████░░░░░░░░░░] 28% (v1.32)
 
 ## Accumulated Context
 
@@ -35,6 +35,10 @@ Progress: [█████░░░░░░░░░░░] 21% (v1.32)
 - Critic gate checked BEFORE general AGENT_PHASE_RULES lookup -- defense-in-depth ordering
 - PHASE_RULE_MAP is module-private (not exported) -- consumers use getActiveRules() API
 - PHASE_REMINDERS as module-private constant with pre-composed strings per phase
+- Black Hat safety enforced at technique level with both phase_constraint config and runtime skip logic
+- SIX_HATS_PHASE_CONSTRAINT exported as standalone constant for Rules Engine/Phase Controller
+- TechniqueInstance/TechniqueOutput interfaces defined locally in each module (engine.ts pending)
+- Five Whys seed questions at depth 0 contain problem statement; depth 5 categorized as root-cause
 
 ### Key Constraints
 
@@ -52,5 +56,5 @@ Progress: [█████░░░░░░░░░░░] 21% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 306-01-PLAN.md (RulesEngine critic gate, phase rules, rule reminders)
+Stopped at: Completed 308-03-PLAN.md (4 analytical techniques with Black Hat phase constraint)
 Resume file: None
