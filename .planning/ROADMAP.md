@@ -51,7 +51,7 @@
 
 **Milestone Goal:** Make GSD-OS a first-class MCP citizen -- both as a Host (managing MCP server connections from the Tauri backend) and as a Server (exposing GSD-OS to external AI agents via 19+ tools). Includes template skills, agent bridge adapters, staging security gates, dashboard integration, and a 95-test verification suite.
 
-- [ ] **Phase 293: Foundation Types** - Shared TypeScript + Rust type definitions for all MCP structures
+- [x] **Phase 293: Foundation Types** - Shared TypeScript + Rust type definitions for all MCP structures (completed 2026-02-22)
 - [ ] **Phase 294: Host Manager & Server Registry** - Rust server lifecycle, client pool, tool routing, trace emission, config persistence
 - [ ] **Phase 295: Gateway Server Core** - Streamable HTTP server with authentication and error handling
 - [ ] **Phase 296: Gateway Project & Skill Tools** - project:* and skill:* tool implementations (10 tools)
@@ -73,7 +73,7 @@
   1. TypeScript code can import Tool, Resource, Prompt, ServerCapability, TransportConfig, McpMessage, and TraceEvent types from a shared module
   2. Rust code compiles with matching FFI types that serialize/deserialize via serde and expose Tauri IPC command shapes
   3. Staging gate interfaces (TrustState enum, SecurityGate trait, HashRecord, ValidationResult) are importable by both TypeScript and Rust consumers
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 Plans:
 - [ ] 293-01-PLAN.md — TypeScript MCP and staging gate types with Zod schemas
 - [ ] 293-02-PLAN.md — Rust FFI types mirroring TypeScript, wired into Tauri
@@ -199,7 +199,7 @@ Plans:
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 293. Foundation Types | 1/2 | In Progress|  | - |
+| 293. Foundation Types | 2/2 | Complete   | 2026-02-22 | - |
 | 294. Host Manager & Server Registry | v1.31 | 0/TBD | Not started | - |
 | 295. Gateway Server Core | v1.31 | 0/TBD | Not started | - |
 | 296. Gateway Project & Skill Tools | v1.31 | 0/TBD | Not started | - |
