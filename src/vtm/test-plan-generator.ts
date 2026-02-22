@@ -1,11 +1,17 @@
 /**
- * VTM test plan generator with categorized test spec creation.
+ * VTM test plan generator with categorized test spec creation, verification
+ * matrix builder, and test density checker.
  *
  * Converts vision document success criteria into structured, categorized test
  * plans. Uses configurable keyword heuristics to classify criteria into
  * safety-critical, core, integration, and edge-case categories, assigns
  * categorized test IDs (S/C/I/E-NNN), and marks safety-critical tests as
  * mandatory-pass deployment blockers.
+ *
+ * Verification matrix provides dual criterion-centric and test-centric views
+ * with auto-stub generation for unmapped criteria. Density checker enforces
+ * 2-4 tests per criterion with elevated 3-4 for safety-critical domains,
+ * emitting diagnostics based on enforcement mode.
  *
  * Pure functional API — all functions are stateless and composable.
  * Generator config is standalone and reusable across vision documents.
@@ -415,5 +421,315 @@ export function generateTestPlan(
     categories,
     tests: allTests,
     verificationMatrix,
+  };
+}
+
+// ============================================================================
+// Verification Matrix Types
+// ============================================================================
+
+/** Criterion-centric view: one row per criterion with all mapped test IDs. */
+export interface CriterionViewEntry {
+  criterion: string;
+  testIds: string[];
+}
+
+/** Test-centric view: one row per test with all criteria it covers. */
+export interface TestViewEntry {
+  testId: string;
+  criteria: string[];
+}
+
+/** Coverage statistics for the verification matrix. */
+export interface CoverageStats {
+  totalCriteria: number;
+  mappedCriteria: number;
+  unmappedCriteria: number;
+  coveragePercent: number;
+  gaps: string[];
+}
+
+/** Complete verification matrix with dual views. */
+export interface VerificationMatrix {
+  criterionView: CriterionViewEntry[];
+  testView: TestViewEntry[];
+  coverageStats: CoverageStats;
+  stubTests: TestSpec[];
+}
+
+// ============================================================================
+// Density Report Types
+// ============================================================================
+
+/** Per-criterion density breakdown entry. */
+export interface CriterionDensity {
+  criterion: string;
+  testCount: number;
+  categories: Record<string, number>;
+  status: 'pass' | 'under' | 'over';
+}
+
+/** Density diagnostic entry. */
+export interface DensityDiagnostic {
+  severity: 'warning' | 'error' | 'info';
+  code: 'UNDER_DENSITY' | 'OVER_DENSITY' | 'SAFETY_DENSITY_LOW';
+  message: string;
+  criterion?: string;
+}
+
+/** Global density statistics. */
+export interface DensityGlobalStats {
+  totalCriteria: number;
+  totalTests: number;
+  averageDensity: number;
+  underCount: number;
+  overCount: number;
+  passCount: number;
+}
+
+/** Complete density report. */
+export interface DensityReport {
+  perCriterion: CriterionDensity[];
+  globalStats: DensityGlobalStats;
+  diagnostics: DensityDiagnostic[];
+}
+
+// ============================================================================
+// buildVerificationMatrix
+// ============================================================================
+
+/**
+ * Builds a verification matrix mapping every success criterion to test IDs.
+ *
+ * Provides dual views:
+ * - criterionView: one entry per criterion with all mapped test IDs
+ * - testView: one entry per test with all criteria it covers
+ *
+ * Criteria with no mapped tests are auto-stubbed with TODO test specs.
+ * Coverage statistics report mapped vs unmapped criteria counts and gaps.
+ *
+ * @param plan - The test plan containing tests and verificationMatrix
+ * @param successCriteria - Array of criterion strings to map
+ * @returns A complete VerificationMatrix with dual views and coverage stats
+ */
+export function buildVerificationMatrix(
+  plan: TestPlan,
+  successCriteria: string[],
+): VerificationMatrix {
+  // Build criterion-to-testIds map from plan's verificationMatrix
+  const criterionToTestIds = new Map<string, string[]>();
+  for (const entry of plan.verificationMatrix) {
+    criterionToTestIds.set(entry.criterion, [...entry.testIds]);
+  }
+
+  // Track which criteria were originally mapped (before stubs)
+  const originallyMapped = new Set<string>();
+  for (const criterion of successCriteria) {
+    if (criterionToTestIds.has(criterion)) {
+      originallyMapped.add(criterion);
+    }
+  }
+
+  // Counter for stub test ID generation
+  const stubCounters = new Map<string, number>();
+  // Initialize counter to avoid ID conflicts with existing tests
+  let maxCoreId = 0;
+  for (const test of plan.tests) {
+    if (test.category === 'core') {
+      const num = parseInt(test.id.replace('C-', ''), 10);
+      if (num > maxCoreId) maxCoreId = num;
+    }
+  }
+  stubCounters.set('core', maxCoreId);
+
+  const stubTests: TestSpec[] = [];
+  const gaps: string[] = [];
+
+  // Build criterionView, auto-stubbing gaps
+  const criterionView: CriterionViewEntry[] = [];
+  for (const criterion of successCriteria) {
+    let testIds = criterionToTestIds.get(criterion);
+
+    if (!testIds || testIds.length === 0) {
+      // Auto-generate stub
+      const stubId = generateTestId('core', stubCounters);
+      const stub: TestSpec = {
+        id: stubId,
+        category: 'core',
+        verifies: criterion,
+        expectedBehavior: `TODO: Define expected behavior for: ${criterion}`,
+      };
+      stubTests.push(stub);
+      testIds = [stubId];
+      gaps.push(criterion);
+    }
+
+    criterionView.push({ criterion, testIds: [...testIds] });
+  }
+
+  // Build test-to-criteria reverse map
+  const testToCriteria = new Map<string, string[]>();
+  for (const entry of criterionView) {
+    for (const testId of entry.testIds) {
+      const existing = testToCriteria.get(testId) ?? [];
+      existing.push(entry.criterion);
+      testToCriteria.set(testId, existing);
+    }
+  }
+
+  // Build testView
+  const testView: TestViewEntry[] = [];
+  for (const [testId, criteria] of testToCriteria) {
+    testView.push({ testId, criteria: [...criteria] });
+  }
+
+  // Compute coverage stats
+  const totalCriteria = successCriteria.length;
+  const mappedCriteria = originallyMapped.size;
+  const unmappedCriteria = totalCriteria - mappedCriteria;
+  const coveragePercent = totalCriteria === 0 ? 0 : (mappedCriteria / totalCriteria) * 100;
+
+  return {
+    criterionView,
+    testView,
+    coverageStats: {
+      totalCriteria,
+      mappedCriteria,
+      unmappedCriteria,
+      coveragePercent,
+      gaps,
+    },
+    stubTests,
+  };
+}
+
+// ============================================================================
+// checkTestDensity
+// ============================================================================
+
+/**
+ * Checks test density per criterion against configurable benchmarks.
+ *
+ * Enforces 2-4 tests per regular criterion and 3-4 for safety-critical
+ * criteria. Produces per-criterion breakdown with category distribution,
+ * global statistics, and diagnostics with severity based on enforcement mode.
+ *
+ * For safety-sensitive domains, checks that safety-critical tests make up
+ * at least safetyTestThreshold% of total tests.
+ *
+ * @param plan - The test plan to analyze
+ * @param successCriteria - Array of criterion strings
+ * @param domain - Domain string for safety sensitivity detection
+ * @param config - Optional generator config (defaults to DEFAULT_GENERATOR_CONFIG)
+ * @returns A complete DensityReport
+ */
+export function checkTestDensity(
+  plan: TestPlan,
+  successCriteria: string[],
+  domain: string,
+  config?: GeneratorConfig,
+): DensityReport {
+  const cfg = config ?? DEFAULT_GENERATOR_CONFIG;
+  const perCriterion: CriterionDensity[] = [];
+  const diagnostics: DensityDiagnostic[] = [];
+
+  // Build test lookup by ID for fast access
+  const testById = new Map<string, TestSpec>();
+  for (const test of plan.tests) {
+    testById.set(test.id, test);
+  }
+
+  for (const criterion of successCriteria) {
+    // Find matching verificationMatrix entry
+    const matrixEntry = plan.verificationMatrix.find(e => e.criterion === criterion);
+    const testIds = matrixEntry?.testIds ?? [];
+
+    // Collect actual tests for this criterion
+    const criterionTests: TestSpec[] = [];
+    for (const id of testIds) {
+      const test = testById.get(id);
+      if (test) criterionTests.push(test);
+    }
+
+    const testCount = criterionTests.length;
+
+    // Build category distribution
+    const categories: Record<string, number> = {};
+    for (const test of criterionTests) {
+      categories[test.category] = (categories[test.category] ?? 0) + 1;
+    }
+
+    // Determine if safety-critical: any test has category 'safety-critical'
+    const isSafetyCritical = criterionTests.some(t => t.category === 'safety-critical');
+
+    // Determine status
+    const minRequired = isSafetyCritical ? cfg.safetyDensityMin : cfg.densityRange.min;
+    const maxAllowed = cfg.densityRange.max;
+
+    let status: 'pass' | 'under' | 'over';
+    if (testCount < minRequired) {
+      status = 'under';
+    } else if (testCount > maxAllowed) {
+      status = 'over';
+    } else {
+      status = 'pass';
+    }
+
+    perCriterion.push({ criterion, testCount, categories, status });
+
+    // Emit diagnostics
+    if (status === 'under') {
+      diagnostics.push({
+        severity: cfg.enforcementMode === 'strict' ? 'error' : 'warning',
+        code: 'UNDER_DENSITY',
+        message: `Criterion "${criterion}" has ${testCount} test(s), minimum required is ${minRequired}`,
+        criterion,
+      });
+    } else if (status === 'over') {
+      diagnostics.push({
+        severity: 'info',
+        code: 'OVER_DENSITY',
+        message: `Criterion "${criterion}" has ${testCount} test(s), maximum recommended is ${maxAllowed}`,
+        criterion,
+      });
+    }
+  }
+
+  // Check global safety density for safety-sensitive domains
+  const normalizedDomain = domain.toLowerCase();
+  const isSafetyDomain = cfg.safetyDomains.some(
+    sd => normalizedDomain.includes(sd.toLowerCase()),
+  );
+
+  if (isSafetyDomain && plan.totalTests > 0) {
+    const safetyPercent = (plan.safetyCriticalCount / plan.totalTests) * 100;
+    if (safetyPercent < cfg.safetyTestThreshold) {
+      diagnostics.push({
+        severity: 'warning',
+        code: 'SAFETY_DENSITY_LOW',
+        message: `Domain "${domain}" is safety-sensitive but only ${safetyPercent.toFixed(1)}% of tests are safety-critical (threshold: ${cfg.safetyTestThreshold}%)`,
+      });
+    }
+  }
+
+  // Compute global stats
+  const totalCriteria = perCriterion.length;
+  const totalTests = plan.totalTests;
+  const averageDensity = totalCriteria === 0 ? 0 : totalTests / totalCriteria;
+  const underCount = perCriterion.filter(e => e.status === 'under').length;
+  const overCount = perCriterion.filter(e => e.status === 'over').length;
+  const passCount = perCriterion.filter(e => e.status === 'pass').length;
+
+  return {
+    perCriterion,
+    globalStats: {
+      totalCriteria,
+      totalTests,
+      averageDensity,
+      underCount,
+      overCount,
+      passCount,
+    },
+    diagnostics,
   };
 }
