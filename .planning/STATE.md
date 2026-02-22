@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.32 Brainstorm Session Support -- Phase 307 IN PROGRESS (plan 02 of 3 complete)
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 307 COMPLETE (plan 03 of 3 complete)
 
 ## Current Position
 
-Phase: 307 (3 of 7 in v1.32) (Session Manager & Phase Controller) -- IN PROGRESS
-Plan: 2 of 3 complete
-Status: Executing
-Last activity: 2026-02-22 -- Completed 307-02 (PhaseController: phase transitions, agent matrix, facilitator announcements)
+Phase: 307 (3 of 7 in v1.32) (Session Manager & Phase Controller) -- COMPLETE
+Plan: 3 of 3 complete
+Status: Complete
+Last activity: 2026-02-22 -- Completed 307-03 (TDD test suites: 29 new tests, 149 total, setActiveTechnique bug fix)
 
-Progress: [████████░░░░░░░░] 47% (v1.32)
+Progress: [████████░░░░░░░░] 50% (v1.32)
 
 ## Accumulated Context
 
@@ -70,6 +70,9 @@ Progress: [████████░░░░░░░░] 47% (v1.32)
 - Diverge-to-diverge self-transition allowed for technique loops within diverge phase
 - Free-form pathway returns only facilitator+scribe (all other agents on-demand)
 - TechniqueTransition.timer_behavior typed as union literal, not plain string
+- TDD revealed missing status guard in setActiveTechnique() -- completed sessions could silently accept technique changes (fixed)
+- Integration tests use real SessionManager + RulesEngine (no mocks) for PhaseController test suite
+- tmpdir isolation pattern: every filesystem test creates fresh temp dir in beforeEach, removes in afterEach
 
 ### Key Constraints
 
@@ -87,5 +90,5 @@ Progress: [████████░░░░░░░░] 47% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 307-02-PLAN.md (PhaseController: 524 lines, 9 methods, 120 brainstorm tests passing)
+Stopped at: Completed 307-03-PLAN.md (TDD suites: 29 new tests, 149 total brainstorm tests, setActiveTechnique bug fix)
 Resume file: None
