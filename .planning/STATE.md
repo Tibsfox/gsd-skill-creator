@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-22)
 Phase: 311 (5 of 7 in v1.32) (Integration Wiring + System Tests)
 Plan: 3 of 4 complete
 Status: In Progress
-Last activity: 2026-02-22 -- Completed 311-04 (Safety-critical tests SC-01 through SC-18)
+Last activity: 2026-02-22 -- Completed 311-03 (E2E pathway session tests -- 19 tests covering Creative Exploration, Problem-Solving, Free-Form)
 
 Progress: [████████████░░░░] 75% (v1.32)
 
@@ -112,6 +112,11 @@ Progress: [████████████░░░░] 75% (v1.32)
 - SC-07 uses combined evaluative + constructive content to exercise Stage 2 false-positive prevention
 - ALLOWED_FIGURES validated directly as exported constant (no getAvailablePersonas() method needed)
 - 302 total brainstorm tests pass with zero regressions after SC test addition
+- INT-12 adaptation tests verify saturation signal type (energy_low and saturation_detected both map to saturation AdaptationSignal)
+- Artifact disk verification uses fs.stat() + readFile roundtrip (not just in-memory check)
+- Five-whys chain verified by parent_id linkage across 6 depth levels (depth 0 through depth 5)
+- E2E pathway test pattern: createSession -> drivePhases -> generate content per agent -> verify artifacts on disk
+- 321 total brainstorm tests pass with zero regressions after E2E test addition
 
 ### Key Constraints
 
@@ -129,5 +134,5 @@ Progress: [████████████░░░░] 75% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 311-04-PLAN.md (All 18 safety-critical tests SC-01 through SC-18)
+Stopped at: Completed 311-03-PLAN.md (E2E pathway session tests -- 19 tests for Creative Exploration, Problem-Solving, Free-Form)
 Resume file: None

@@ -77,7 +77,7 @@
 - [x] **Phase 308: Technique Engine, Pathway Router & Artifact Generator** - 15 technique implementations, 5 pathway definitions with situation matching, session artifact generation (completed 2026-02-22)
 - [x] **Phase 309: Facilitator Agent** - Problem assessment, pathway recommendation, energy management, transition confidence scoring, adaptive facilitation (completed 2026-02-22)
 - [x] **Phase 310: Technique Agents** - Ideator, Questioner, Analyst, Mapper, Persona, Critic, Scribe with per-role behavioral constraints (completed 2026-02-22)
-- [ ] **Phase 311: Integration Wiring & System Tests** - Session bus connecting all agents, bus load testing, end-to-end pathway flows, safety-critical tests, chipset YAML
+- [x] **Phase 311: Integration Wiring & System Tests** - Session bus connecting all agents, bus load testing, end-to-end pathway flows, safety-critical tests, chipset YAML (completed 2026-02-22)
 
 ## Phase Details
 
@@ -206,7 +206,7 @@ Plans:
 | 308. Technique Engine, Pathway Router & Artifact Generator | 6/6 | Complete    | 2026-02-22 | - |
 | 309. Facilitator Agent | 2/2 | Complete    | 2026-02-22 | - |
 | 310. Technique Agents | 5/5 | Complete    | 2026-02-22 | - |
-| 311. Integration Wiring & System Tests | 3/4 | In Progress|  | - |
+| 311. Integration Wiring & System Tests | 4/4 | Complete   | 2026-02-22 | - |
 
 See `.planning/milestones/v1.31-ROADMAP.md` for v1.31 phase details.
 
