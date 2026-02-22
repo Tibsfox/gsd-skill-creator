@@ -185,7 +185,7 @@ Plans:
 | 305. Foundation Types & Bus | 3/3 | Complete    | 2026-02-22 | - |
 | 306. Rules Engine | 1/2 | In Progress|  | - |
 | 307. Session Manager & Phase Controller | v1.32 | 0/TBD | Not started | - |
-| 308. Technique Engine, Pathway Router & Artifact Generator | v1.32 | 1/6 | In Progress | - |
+| 308. Technique Engine, Pathway Router & Artifact Generator | 4/6 | In Progress|  | - |
 | 309. Facilitator Agent | v1.32 | 0/TBD | Not started | - |
 | 310. Technique Agents | v1.32 | 0/TBD | Not started | - |
 | 311. Integration Wiring & System Tests | v1.32 | 0/TBD | Not started | - |
