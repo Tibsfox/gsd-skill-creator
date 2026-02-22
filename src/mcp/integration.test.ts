@@ -480,8 +480,12 @@ describe('TEST-03: Gateway End-to-End with Real Tools', () => {
     const tokenPath = join(tempDir, 'gateway-token');
     await writeToken(tokenPath, storedToken);
 
-    // Start gateway with the full GSD factory (chipset tools, resources, prompts)
-    const factory = createGsdGatewayFactory();
+    // Start gateway with the full GSD factory -- all 19 tools across 6 groups
+    // Pass projects and skills config so those tool groups register
+    const factory = createGsdGatewayFactory({
+      projects: { projectsRoot: tempDir },
+      skills: { skillsDir: tempDir },
+    });
 
     gateway = await startGateway(
       {
@@ -538,6 +542,117 @@ describe('TEST-03: Gateway End-to-End with Real Tools', () => {
     // Response should be parseable
     const parsed = JSON.parse(content[0].text);
     expect(parsed).toBeDefined();
+
+    await client.close();
+  });
+
+  it('discovers all 19 tools across 6 groups', async () => {
+    const transport = createClientTransport(storedToken.token);
+    const client = new Client({ name: 'tool-discovery-client', version: '1.0.0' });
+
+    await client.connect(transport);
+
+    const toolsResult = await client.listTools();
+    const toolNames = toolsResult.tools.map((t) => t.name);
+
+    // Verify at least one tool from each of the 6 groups
+    // Chipset group (3 tools)
+    expect(toolNames).toContain('chipset.get');
+    expect(toolNames).toContain('chipset.modify');
+    expect(toolNames).toContain('chipset.synthesize');
+
+    // Project group (4 tools)
+    expect(toolNames).toContain('project.list');
+    expect(toolNames).toContain('project.get');
+    expect(toolNames).toContain('project.create');
+    expect(toolNames).toContain('project.execute-phase');
+
+    // Skill group (3 tools)
+    expect(toolNames).toContain('skill.search');
+    expect(toolNames).toContain('skill.inspect');
+    expect(toolNames).toContain('skill.activate');
+
+    // Agent group (3 tools)
+    expect(toolNames).toContain('agent.spawn');
+    expect(toolNames).toContain('agent.status');
+    expect(toolNames).toContain('agent.logs');
+
+    // Workflow group (4 tools)
+    expect(toolNames).toContain('workflow.research');
+    expect(toolNames).toContain('workflow.requirements');
+    expect(toolNames).toContain('workflow.plan');
+    expect(toolNames).toContain('workflow.execute');
+
+    // Session group (2 tools)
+    expect(toolNames).toContain('session.query');
+    expect(toolNames).toContain('session.patterns');
+
+    // Verify total: 3 + 4 + 3 + 3 + 4 + 2 = 19
+    expect(toolNames.length).toBe(19);
+
+    await client.close();
+  });
+
+  it('invokes one tool from each of the 6 groups', async () => {
+    const transport = createClientTransport(storedToken.token);
+    const client = new Client({ name: 'all-groups-client', version: '1.0.0' });
+
+    await client.connect(transport);
+
+    // 1. Chipset group: chipset.get
+    const chipsetResult = await client.callTool({
+      name: 'chipset.get',
+      arguments: {},
+    });
+    expect(chipsetResult.isError).toBeFalsy();
+
+    // 2. Project group: project.list
+    const projectResult = await client.callTool({
+      name: 'project.list',
+      arguments: {},
+    });
+    expect(projectResult.isError).toBeFalsy();
+
+    // 3. Skill group: skill.search
+    const skillResult = await client.callTool({
+      name: 'skill.search',
+      arguments: { query: 'test' },
+    });
+    expect(skillResult.isError).toBeFalsy();
+
+    // 4. Agent group: agent.spawn
+    const agentResult = await client.callTool({
+      name: 'agent.spawn',
+      arguments: { role: 'scout', skills: ['research'] },
+    });
+    expect(agentResult.isError).toBeFalsy();
+    const agentParsed = JSON.parse(
+      (agentResult.content as Array<{ type: string; text: string }>)[0].text,
+    );
+    expect(agentParsed.agentId).toBeDefined();
+    expect(agentParsed.role).toBe('scout');
+
+    // 5. Workflow group: workflow.research
+    const workflowResult = await client.callTool({
+      name: 'workflow.research',
+      arguments: { project: 'test', domain: 'integration' },
+    });
+    expect(workflowResult.isError).toBeFalsy();
+    const workflowParsed = JSON.parse(
+      (workflowResult.content as Array<{ type: string; text: string }>)[0].text,
+    );
+    expect(workflowParsed.project).toBe('test');
+
+    // 6. Session group: session.query
+    const sessionResult = await client.callTool({
+      name: 'session.query',
+      arguments: { query: 'test' },
+    });
+    expect(sessionResult.isError).toBeFalsy();
+    const sessionParsed = JSON.parse(
+      (sessionResult.content as Array<{ type: string; text: string }>)[0].text,
+    );
+    expect(sessionParsed.query).toBe('test');
 
     await client.close();
   });
@@ -606,7 +721,7 @@ describe('TEST-03: Gateway End-to-End with Real Tools', () => {
     const readTokenPath = join(tempDir, 'read-token');
     await writeToken(readTokenPath, readToken);
 
-    // Stop current gateway and restart with read token
+    // Stop current gateway and restart with read token + all tools
     await gateway.stop();
 
     gateway = await startGateway(
@@ -616,7 +731,10 @@ describe('TEST-03: Gateway End-to-End with Real Tools', () => {
         tokenPath: readTokenPath,
         enableJsonResponse: true,
       },
-      createGsdGatewayFactory(),
+      createGsdGatewayFactory({
+        projects: { projectsRoot: tempDir },
+        skills: { skillsDir: tempDir },
+      }),
     );
 
     const transport = createClientTransport(readToken.token);
@@ -630,6 +748,30 @@ describe('TEST-03: Gateway End-to-End with Real Tools', () => {
       arguments: {},
     });
     expect(readResult.isError).toBeFalsy();
+
+    // Write tool should be REJECTED (chipset.modify requires write scope)
+    // The scope check happens at the HTTP level (server.ts), which returns
+    // a 403 with JSON-RPC PERMISSION_DENIED error. The MCP client SDK
+    // will throw a transport error for 403 responses.
+    try {
+      await client.callTool({
+        name: 'chipset.modify',
+        arguments: { path: '/test', value: 'x' },
+      });
+      // If we get here, the call didn't throw -- check for error response
+      expect.unreachable('Expected chipset.modify to be rejected for read-only token');
+    } catch (err: unknown) {
+      // The MCP SDK throws on non-200 responses.
+      // The error message should reference permission/scope or the 403 status.
+      const message = err instanceof Error ? err.message : String(err);
+      expect(
+        message.includes('scope') ||
+        message.includes('permission') ||
+        message.includes('403') ||
+        message.includes('Insufficient') ||
+        message.includes('PERMISSION_DENIED'),
+      ).toBe(true);
+    }
 
     await client.close();
   });
