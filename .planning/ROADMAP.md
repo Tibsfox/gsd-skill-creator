@@ -172,7 +172,7 @@ Plans:
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 305. Foundation Types & Bus | 1/3 | In Progress|  | - |
+| 305. Foundation Types & Bus | 2/3 | In Progress|  | - |
 | 306. Rules Engine | v1.32 | 0/TBD | Not started | - |
 | 307. Session Manager & Phase Controller | v1.32 | 0/TBD | Not started | - |
 | 308. Technique Engine, Pathway Router & Artifact Generator | v1.32 | 0/TBD | Not started | - |
