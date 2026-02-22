@@ -159,14 +159,14 @@ Requirements for v1.30. Each maps to roadmap phases.
 | WAVE-01 | Phase 283 | Complete |
 | WAVE-02 | Phase 283 | Complete |
 | WAVE-03 | Phase 283 | Complete |
-| WAVE-04 | Phase 283 → 292 | Integration Pending |
-| WAVE-05 | Phase 283 → 292 | Integration Pending |
-| WAVE-06 | Phase 283 → 292 | Integration Pending |
+| WAVE-04 | Phase 283 → 292 | Complete |
+| WAVE-05 | Phase 283 → 292 | Complete |
+| WAVE-06 | Phase 283 → 292 | Complete |
 | MODL-01 | Phase 284 | Complete |
 | MODL-02 | Phase 284 | Complete |
 | MODL-03 | Phase 284 | Complete |
 | MODL-04 | Phase 284 | Complete |
-| MODL-05 | Phase 284 → 292 | Integration Pending |
+| MODL-05 | Phase 284 → 292 | Complete |
 | CACH-01 | Phase 285 | Complete |
 | CACH-02 | Phase 285 | Complete |
 | CACH-03 | Phase 285 | Complete |
