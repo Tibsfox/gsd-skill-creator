@@ -209,29 +209,29 @@ describe('rebalanceAssignments', () => {
     expect(changes[0].taskIndex).toBe(0);
   });
 
-  it('upgrades smallest haiku tasks to sonnet when haiku is over budget', () => {
-    // haiku=25%, sonnet=50%, opus=25% -> haiku way over
+  it('returns warning when haiku is over budget (lowest tier cannot be downgraded further)', () => {
+    // haiku=25%, sonnet=50%, opus=25% -> haiku way over (25% > 15% max)
+    // Since haiku is the lowest tier and rebalance only DOWNGRADES,
+    // haiku tokens cannot be reduced. The rebalancer addresses what it can
+    // (e.g., opus->sonnet for under-budget sonnet) but haiku stays over.
     const tasks: BudgetTask[] = [
       task('sonnet', 200),
       task('sonnet', 200),
       task('sonnet', 100),
       task('opus', 125),
       task('opus', 125),
-      task('haiku', 50),  // small haiku
+      task('haiku', 50),
       task('haiku', 100),
       task('haiku', 100),
     ];
     const result = rebalanceAssignments(tasks);
 
-    // Haiku tasks should be downgraded ... but wait, the plan says rebalance only DOWNGRADES
-    // Actually, for haiku over: haiku tasks would need to go... hmm, haiku is already lowest tier.
-    // The plan says: downgrade direction: opus -> sonnet -> haiku (never upgrade during rebalance)
-    // For haiku-heavy, the under-tier would be sonnet or opus. We'd downgrade opus to sonnet or sonnet to haiku.
-    // Actually the plan says for 'under' violations, find non-pinned tasks in a HIGHER tier
-    // that are contributing to an 'over' violation, and downgrade those.
-    // This test expects some tasks to move -- let's just verify the budget becomes valid.
-    const validation = validateBudget(result.tasks);
-    expect(validation.valid).toBe(true);
+    // Should have a warning since haiku-over is unresolvable with downgrade-only
+    expect(result.warning).toBeDefined();
+    // Total tokens preserved
+    const totalBefore = tasks.reduce((s, t) => s + t.estimatedTokens, 0);
+    const totalAfter = result.tasks.reduce((s, t) => s + t.estimatedTokens, 0);
+    expect(totalAfter).toBe(totalBefore);
   });
 
   it('downgrades smallest opus tasks to sonnet when sonnet is under budget', () => {
