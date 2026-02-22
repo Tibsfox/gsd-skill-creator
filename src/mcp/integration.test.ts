@@ -311,7 +311,7 @@ describe('TEST-02: Security Pipeline End-to-End', () => {
 
   beforeEach(() => {
     pipeline = new StagingPipeline({
-      rateLimiter: { perServerLimit: 10, perToolLimit: 5, windowMs: 1000 },
+      rateLimiter: { maxPerServer: 100, maxPerTool: 50, windowMs: 60000 },
     });
   });
 
