@@ -73,7 +73,7 @@
 
 - [x] **Phase 305: Foundation Types & Bus** - Shared types, Zod schemas, session-scoped filesystem bus, `.brainstorm/` directory setup, constants (completed 2026-02-22)
 - [x] **Phase 306: Rules Engine** - Osborn's 4 rules enforcement, architectural Critic gate, evaluative content detection, violation logging (completed 2026-02-22)
-- [ ] **Phase 307: Session Manager & Phase Controller** - Session lifecycle state machine, 5-phase controller, agent activation matrix, timer system, JSONL persistence
+- [x] **Phase 307: Session Manager & Phase Controller** - Session lifecycle state machine, 5-phase controller, agent activation matrix, timer system, JSONL persistence (completed 2026-02-22)
 - [x] **Phase 308: Technique Engine, Pathway Router & Artifact Generator** - 15 technique implementations, 5 pathway definitions with situation matching, session artifact generation (completed 2026-02-22)
 - [ ] **Phase 309: Facilitator Agent** - Problem assessment, pathway recommendation, energy management, transition confidence scoring, adaptive facilitation
 - [ ] **Phase 310: Technique Agents** - Ideator, Questioner, Analyst, Mapper, Persona, Critic, Scribe with per-role behavioral constraints
@@ -188,7 +188,7 @@ Plans:
 |-------|-----------|----------------|--------|-----------|
 | 305. Foundation Types & Bus | 3/3 | Complete    | 2026-02-22 | - |
 | 306. Rules Engine | 2/2 | Complete    | 2026-02-22 | - |
-| 307. Session Manager & Phase Controller | 2/3 | In Progress|  | - |
+| 307. Session Manager & Phase Controller | 3/3 | Complete   | 2026-02-22 | - |
 | 308. Technique Engine, Pathway Router & Artifact Generator | 6/6 | Complete    | 2026-02-22 | - |
 | 309. Facilitator Agent | v1.32 | 0/TBD | Not started | - |
 | 310. Technique Agents | v1.32 | 0/TBD | Not started | - |
