@@ -54,9 +54,9 @@
 - [x] **Phase 293: Foundation Types** - Shared TypeScript + Rust type definitions for all MCP structures (completed 2026-02-22)
 - [x] **Phase 294: Host Manager & Server Registry** - Rust server lifecycle, client pool, tool routing, trace emission, config persistence (completed 2026-02-22)
 - [x] **Phase 295: Gateway Server Core** - Streamable HTTP server with authentication and error handling (completed 2026-02-22)
-- [ ] **Phase 296: Gateway Project & Skill Tools** - project:* and skill:* tool implementations (10 tools)
-- [ ] **Phase 297: Gateway Agent, Workflow & Session Tools** - agent:*, workflow:*, session:* tool implementations (9 tools)
-- [ ] **Phase 298: Gateway Chipset, Resources & Prompts** - chipset:* tools, 4 resource providers, 3 prompt templates
+- [x] **Phase 296: Gateway Project & Skill Tools** - project:* and skill:* tool implementations (7 tools) (completed 2026-02-22)
+- [x] **Phase 297: Gateway Agent, Workflow & Session Tools** - agent:*, workflow:*, session:* tool implementations (9 tools) (completed 2026-02-22)
+- [x] **Phase 298: Gateway Chipset, Resources & Prompts** - chipset:* tools, 4 resource providers, 3 prompt templates (completed 2026-02-22)
 - [x] **Phase 299: MCP Templates** - Server, host, and client project scaffold generators (completed 2026-02-22)
 - [x] **Phase 300: Agent Bridge** - Agent-Server and Agent-Client adapters with SCOUT, VERIFY, and EXEC wiring (completed 2026-02-22)
 - [x] **Phase 301: Security Gates** - Hash verification, trust decay, invocation validation, audit logging (completed 2026-02-22)
@@ -118,7 +118,10 @@ Plans:
   3. project:execute-phase triggers phase execution and returns a result indicating success or failure
   4. skill:search returns relevance-scored results for a query, and skill:inspect returns the full SKILL.md content for a named skill
   5. skill:activate loads a skill into the chipset and reports the token budget impact
-**Plans**: TBD
+**Plans:** 2/2 plans complete
+Plans:
+- [x] 296-01-PLAN.md -- Project tool implementations (project:list, project:get, project:create, project:execute-phase)
+- [x] 296-02-PLAN.md -- Skill tool implementations (skill:search, skill:inspect, skill:activate)
 
 ### Phase 297: Gateway Agent, Workflow & Session Tools
 **Goal**: External agents can spawn and monitor GSD agents, trigger workflow stages, and query cross-project intelligence
@@ -129,7 +132,11 @@ Plans:
   2. agent:logs returns recent log entries for a running agent
   3. workflow:research, workflow:requirements, workflow:plan, and workflow:execute each trigger their respective GSD pipeline stage and return structured results
   4. session:query returns cross-project intelligence matches for a search query, and session:patterns returns detected patterns for a domain
-**Plans**: TBD
+**Plans:** 3/3 plans complete
+Plans:
+- [x] 297-01-PLAN.md — Agent tools: spawn, status, logs (24 tests)
+- [x] 297-02-PLAN.md — Workflow tools: research, requirements, plan, execute (23 tests)
+- [x] 297-03-PLAN.md — Session tools: query, patterns (23 tests)
 
 ### Phase 298: Gateway Chipset, Resources & Prompts
 **Goal**: External agents can read and modify chipset state, browse GSD resources via URI templates, and use prompt templates for common workflows
@@ -140,7 +147,10 @@ Plans:
   2. chipset:synthesize produces a valid chipset from a natural language description
   3. Resource providers expose project configs, skill registry, agent telemetry, and chipset state via MCP resource protocol with URI templates
   4. Prompt templates for create-project, diagnose-agent, and optimize-chipset return structured prompts with user-provided arguments filled in
-**Plans**: TBD
+**Plans:** 2/2 plans complete
+Plans:
+- [x] 298-01-PLAN.md -- Chipset tools (get, modify, synthesize), resource providers, gateway factory (47 tests)
+- [x] 298-02-PLAN.md -- Prompt templates (create-project, diagnose-agent, optimize-chipset) and integration tests (30 tests)
 
 ### Phase 299: MCP Templates
 **Goal**: Users can scaffold complete, working MCP server, host, and client projects from templates -- each generated project builds, type-checks, and passes its own tests
@@ -216,9 +226,9 @@ Plans:
 | 293. Foundation Types | 2/2 | Complete    | 2026-02-22 | - |
 | 294. Host Manager & Server Registry | 3/3 | Complete    | 2026-02-22 | - |
 | 295. Gateway Server Core | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
-| 296. Gateway Project & Skill Tools | v1.31 | 0/TBD | Not started | - |
-| 297. Gateway Agent, Workflow & Session Tools | v1.31 | 0/TBD | Not started | - |
-| 298. Gateway Chipset, Resources & Prompts | v1.31 | 0/TBD | Not started | - |
+| 296. Gateway Project & Skill Tools | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
+| 297. Gateway Agent, Workflow & Session Tools | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
+| 298. Gateway Chipset, Resources & Prompts | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
 | 299. MCP Templates | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
 | 300. Agent Bridge | v1.31 | Complete    | 2026-02-22 | - |
 | 301. Security Gates | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
