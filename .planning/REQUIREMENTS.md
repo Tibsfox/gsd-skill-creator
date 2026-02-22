@@ -19,9 +19,9 @@ Requirements for Brainstorm Session Support milestone. Each maps to roadmap phas
 
 - [x] **RULES-01**: Osborn's 4 rules enforced per phase — all active during Diverge, build-combine primary during Organize, relaxed during Converge
 - [x] **RULES-02**: Critic agent architecturally blocked during all non-Converge phases via `canActivateAgent()`
-- [ ] **RULES-03**: Two-stage evaluative content detection — pattern match then constructive-context check — with <5% false positive rate verified against 50-sentence corpus
-- [ ] **RULES-04**: Black Hat technique constraint prevents evaluative content from non-Critic agents during Diverge
-- [ ] **RULES-05**: Violation logging with `RuleViolation` records persisting across phase transitions
+- [x] **RULES-03**: Two-stage evaluative content detection — pattern match then constructive-context check — with <5% false positive rate verified against 50-sentence corpus
+- [x] **RULES-04**: Black Hat technique constraint prevents evaluative content from non-Critic agents during Diverge
+- [x] **RULES-05**: Violation logging with `RuleViolation` records persisting across phase transitions
 - [x] **RULES-06**: Phase-appropriate rule reminders generated for Facilitator display
 
 ### Session Management
@@ -126,9 +126,9 @@ Deferred to future release. Tracked but not in current roadmap.
 | FOUND-05 | Phase 305 | Complete |
 | RULES-01 | Phase 306 | Complete |
 | RULES-02 | Phase 306 | Complete |
-| RULES-03 | Phase 306 | Pending |
-| RULES-04 | Phase 306 | Pending |
-| RULES-05 | Phase 306 | Pending |
+| RULES-03 | Phase 306 | Complete |
+| RULES-04 | Phase 306 | Complete |
+| RULES-05 | Phase 306 | Complete |
 | RULES-06 | Phase 306 | Complete |
 | SESS-01 | Phase 307 | Pending |
 | SESS-02 | Phase 307 | Pending |

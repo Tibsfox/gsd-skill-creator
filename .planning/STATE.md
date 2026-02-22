@@ -49,6 +49,10 @@ Progress: [██████░░░░░░░░░░] 36% (v1.32)
 - Lazy factory registry: Map<TechniqueId, () => TechniqueInstance> creates fresh instances per loadTechnique() call
 - generation_context encoded in config.parameters per Pitfall 5 to prevent fidelity erosion across techniques
 - listBySituation uses simple keyword matching (not NLP) -- Pathway Router handles sophisticated signal analysis
+- Two-stage evaluative detection: Stage 1 hard-block pattern match, Stage 2 constructive-context allowlist (<5% false positive rate)
+- Black Hat timing constraint checked BEFORE evaluative content check -- timing violation takes precedence
+- Per-session violation storage via Map<string, RuleViolation[]> -- accumulates, never resets
+- system sender resolved to facilitator AgentRole in violation records as fallback
 
 ### Key Constraints
 
@@ -66,5 +70,5 @@ Progress: [██████░░░░░░░░░░] 36% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 308-02-PLAN.md (5 collaborative techniques + Artifact Generator)
+Stopped at: Completed 306-02-PLAN.md (evaluative detection, Black Hat constraint, violation logging)
 Resume file: None
