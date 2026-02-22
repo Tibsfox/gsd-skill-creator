@@ -45,7 +45,7 @@ export class ExecClient extends AgentClientAdapter {
     if (depth) {
       params.depth = depth;
     }
-    return this.invokeTool('scout:research', params);
+    return this.invokeTool('scout.research', params);
   }
 
   /**
@@ -63,7 +63,7 @@ export class ExecClient extends AgentClientAdapter {
     if (version) {
       params.version = version;
     }
-    return this.invokeTool('scout:evaluate-dependency', params);
+    return this.invokeTool('scout.evaluate-dependency', params);
   }
 
   /**
@@ -75,7 +75,7 @@ export class ExecClient extends AgentClientAdapter {
   async execSurveyLandscape(
     domain: string,
   ): Promise<AgentToolResult> {
-    return this.invokeTool('scout:survey-landscape', { domain });
+    return this.invokeTool('scout.survey-landscape', { domain });
   }
 }
 

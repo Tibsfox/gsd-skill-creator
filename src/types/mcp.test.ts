@@ -26,7 +26,9 @@ describe('TransportConfigSchema', () => {
     };
     const result = TransportConfigSchema.parse(data);
     expect(result.type).toBe('stdio');
-    expect(result.command).toBe('node');
+    if (result.type === 'stdio') {
+      expect(result.command).toBe('node');
+    }
   });
 
   it('should parse a valid streamable-http config', () => {
@@ -37,7 +39,9 @@ describe('TransportConfigSchema', () => {
     };
     const result = TransportConfigSchema.parse(data);
     expect(result.type).toBe('streamable-http');
-    expect(result.url).toBe('https://mcp.example.com/v1');
+    if (result.type === 'streamable-http') {
+      expect(result.url).toBe('https://mcp.example.com/v1');
+    }
   });
 
   it('should reject a config with missing type', () => {

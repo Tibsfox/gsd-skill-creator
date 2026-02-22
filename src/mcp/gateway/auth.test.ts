@@ -127,20 +127,20 @@ describe('hasScope', () => {
 
 describe('getToolScope', () => {
   it('returns read for read-only tools', () => {
-    expect(getToolScope('project:list')).toBe('read');
-    expect(getToolScope('skill:search')).toBe('read');
-    expect(getToolScope('agent:status')).toBe('read');
+    expect(getToolScope('project.list')).toBe('read');
+    expect(getToolScope('skill.search')).toBe('read');
+    expect(getToolScope('agent.status')).toBe('read');
     expect(getToolScope('list_skills')).toBe('read');
   });
 
   it('returns write for write tools', () => {
-    expect(getToolScope('project:create')).toBe('write');
-    expect(getToolScope('workflow:execute')).toBe('write');
+    expect(getToolScope('project.create')).toBe('write');
+    expect(getToolScope('workflow.execute')).toBe('write');
     expect(getToolScope('install_skill')).toBe('write');
   });
 
   it('returns admin for unknown tools (deny by default)', () => {
-    expect(getToolScope('unknown:tool')).toBe('admin');
+    expect(getToolScope('unknown.tool')).toBe('admin');
     expect(getToolScope('')).toBe('admin');
   });
 });
@@ -148,28 +148,28 @@ describe('getToolScope', () => {
 describe('canInvokeTool', () => {
   it('allows read tools with read scope', () => {
     const authInfo: AuthInfo = { token: 'x', clientId: 'c', scopes: ['read'] };
-    expect(canInvokeTool(authInfo, 'project:list')).toBe(true);
+    expect(canInvokeTool(authInfo, 'project.list')).toBe(true);
   });
 
   it('denies write tools with read scope', () => {
     const authInfo: AuthInfo = { token: 'x', clientId: 'c', scopes: ['read'] };
-    expect(canInvokeTool(authInfo, 'project:create')).toBe(false);
+    expect(canInvokeTool(authInfo, 'project.create')).toBe(false);
   });
 
   it('allows write tools with write scope', () => {
     const authInfo: AuthInfo = { token: 'x', clientId: 'c', scopes: ['write'] };
-    expect(canInvokeTool(authInfo, 'project:create')).toBe(true);
+    expect(canInvokeTool(authInfo, 'project.create')).toBe(true);
   });
 
   it('allows all tools with admin scope', () => {
     const authInfo: AuthInfo = { token: 'x', clientId: 'c', scopes: ['admin'] };
-    expect(canInvokeTool(authInfo, 'project:list')).toBe(true);
-    expect(canInvokeTool(authInfo, 'project:create')).toBe(true);
-    expect(canInvokeTool(authInfo, 'unknown:tool')).toBe(true);
+    expect(canInvokeTool(authInfo, 'project.list')).toBe(true);
+    expect(canInvokeTool(authInfo, 'project.create')).toBe(true);
+    expect(canInvokeTool(authInfo, 'unknown.tool')).toBe(true);
   });
 
   it('denies unknown tools without admin scope', () => {
     const authInfo: AuthInfo = { token: 'x', clientId: 'c', scopes: ['write'] };
-    expect(canInvokeTool(authInfo, 'unknown:tool')).toBe(false);
+    expect(canInvokeTool(authInfo, 'unknown.tool')).toBe(false);
   });
 });
