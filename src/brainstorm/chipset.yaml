@@ -1,0 +1,176 @@
+# Brainstorm Session Support — Chipset Configuration
+# 8 specialized agents, 15 brainstorming techniques, 5 educational pathways.
+# Session-scoped filesystem bus with 4 communication loops.
+
+name: brainstorm-session-support
+version: 1.0.0
+description: "AI-facilitated brainstorming with structured techniques and adaptive pathways"
+
+skills:
+  - id: session-facilitation
+    domain: brainstorm-facilitation
+    description: "Session orchestration, technique selection, energy management"
+    triggers: [brainstorm, ideation, session, facilitate, explore, diverge, organize, converge]
+
+  - id: technique-library
+    domain: brainstorm-techniques
+    description: "15 brainstorming technique implementations"
+    triggers: [freewriting, mindmap, scamper, six-hats, five-whys, brainwriting, starbursting, lotus-blossom, affinity, rolestorm]
+
+  - id: idea-organization
+    domain: brainstorm-organization
+    description: "Clustering, affinity mapping, prioritization"
+    triggers: [cluster, organize, affinity, prioritize, group, theme]
+
+  - id: artifact-generation
+    domain: brainstorm-artifacts
+    description: "Session transcripts, action plans, export formats"
+    triggers: [transcript, action-plan, export, summary, artifact]
+
+  - id: pathway-routing
+    domain: brainstorm-pathways
+    description: "Educational pathway selection and adaptation"
+    triggers: [pathway, creative-exploration, problem-solving, product-innovation, decision-making, free-form]
+
+  - id: osborn-rules
+    domain: brainstorm-rules
+    description: "Osborn's four foundational rules enforcement engine"
+    triggers: [osborn, no-criticism, diverge, rules, critic-gate]
+
+agents:
+  topology: leader-worker
+  leader: facilitator
+
+  roster:
+    - id: facilitator
+      role: "Session orchestration, technique selection, phase management"
+      model: opus
+      active_phases: [explore, diverge, organize, converge, act]
+      always_on: true
+
+    - id: ideator
+      role: "Idea generation across individual and collaborative techniques"
+      model: sonnet
+      active_phases: [diverge]
+      always_on: false
+
+    - id: questioner
+      role: "Question generation, problem exploration, root cause analysis"
+      model: sonnet
+      active_phases: [diverge]
+      always_on: false
+
+    - id: analyst
+      role: "SCAMPER, Six Thinking Hats, structured analytical frameworks"
+      model: opus
+      active_phases: [diverge]
+      always_on: false
+
+    - id: mapper
+      role: "Mind mapping, affinity mapping, lotus blossom, storyboarding"
+      model: sonnet
+      active_phases: [diverge, organize]
+      always_on: false
+
+    - id: critic
+      role: "Evaluation, prioritization, convergence facilitation"
+      model: opus
+      active_phases: [converge]
+      always_on: false
+      gated: true
+      gate_rule: "Converge-only -- Osborn Rule 2 (No Criticism) prevents activation in all other phases"
+
+    - id: persona
+      role: "Rolestorming, figure storming, perspective shifting"
+      model: sonnet
+      active_phases: [diverge]
+      always_on: false
+
+    - id: scribe
+      role: "Capture, organization, artifact generation, export"
+      model: sonnet
+      active_phases: [explore, diverge, organize, converge, act]
+      always_on: true
+
+  activation_profiles:
+    solo_quick:
+      agents: [facilitator, ideator, scribe]
+      topology: pipeline
+      description: "Quick solo ideation -- freewriting, rapid ideation"
+      recommended_techniques: [freewriting, rapid-ideation]
+      typical_duration_ms: 900000
+
+    guided_exploration:
+      agents: [facilitator, ideator, questioner, mapper, scribe]
+      topology: router
+      description: "Guided pathway with multiple technique types"
+      recommended_pathways: [creative-exploration, problem-solving]
+      typical_duration_ms: 2700000
+
+    full_workshop:
+      agents: [facilitator, ideator, questioner, analyst, mapper, critic, persona, scribe]
+      topology: leader-worker
+      description: "Complete facilitated session with all techniques"
+      recommended_pathways: [product-innovation, decision-making]
+      typical_duration_ms: 5400000
+
+    analysis_sprint:
+      agents: [facilitator, analyst, critic, scribe]
+      topology: pipeline
+      description: "Focused analytical framework session"
+      recommended_techniques: [scamper, six-thinking-hats, five-whys]
+      typical_duration_ms: 3600000
+
+bus:
+  type: filesystem
+  loops:
+    session:
+      priority: 1
+      description: "Facilitator <-> all technique agents -- phase transitions, technique events"
+    capture:
+      priority: 2
+      description: "All agents -> Scribe -- ideas, questions, clusters, evaluations"
+    user:
+      priority: 0
+      description: "CAPCOM <-> human user -- problem statements, feedback"
+    energy:
+      priority: 4
+      description: "Energy signals -> Facilitator -- fatigue, momentum, switch triggers"
+  filename_strategy: "monotonic_counter"
+  session_scoped: true
+  base_path: ".brainstorm/sessions/{session_id}/bus/{loop}/"
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: test_coverage
+        threshold: 85
+        action: block
+      - check: type_check
+        command: "npx tsc --noEmit"
+        action: block
+      - check: osborn_rules_enforcement
+        description: "Verify Critic gate -- canActivateAgent('critic', 'diverge') returns false"
+        action: block
+      - check: safety_critical_tests
+        description: "All 18 SC-01 through SC-18 tests must pass"
+        action: block
+
+# skill-creator observation hooks
+# Registers .brainstorm/sessions/*/ as a high-value pattern observation target.
+# Brainstorm sessions generate multi-agent coordination patterns that skill-creator
+# can analyze to improve GSD workflows. See RESEARCH.md gap: "skill-creator
+# observation of brainstorm sessions" -- explicitly adding here per Phase 7 scope.
+skill_creator:
+  observation_hooks:
+    - path: ".brainstorm/sessions/*/"
+      description: "Brainstorm session output -- multi-agent coordination patterns"
+      content_types: [ideas, questions, clusters, evaluations, transcripts]
+      watch_files:
+        - "ideas.jsonl"
+        - "questions.jsonl"
+        - "state.json"
+        - "transcript.md"
+        - "action-plan.md"
+      privacy: "session_scoped"
+      note: "Sessions may contain personal brainstorming content -- honor .gitignore exclusion"
