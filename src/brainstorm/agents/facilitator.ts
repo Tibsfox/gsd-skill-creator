@@ -1,15 +1,16 @@
 /**
- * Facilitator Agent -- problem assessment and transition scoring.
+ * Facilitator Agent -- session orchestration, guidance, and energy management.
  *
  * The Facilitator is the session orchestrator (FLIGHT director). This module
- * contains the core pure-function logic: assessProblem() classifies user
- * problem statements by nature/complexity and recommends a pathway;
- * evaluateTransitionReadiness() computes a weighted confidence score for
- * phase/technique transitions.
- *
- * Plan 309-01 delivers these two tested functions plus the IFacilitatorAgent
- * interface and FacilitatorAgent class stub. Plan 309-02 fills in the
- * remaining 6 methods.
+ * contains:
+ * - assessProblem(): classifies problem statements by nature/complexity (Plan 309-01)
+ * - evaluateTransitionReadiness(): weighted confidence scoring for transitions (Plan 309-01)
+ * - recommendPathway(): delegates pathway selection from assessment (Plan 309-02)
+ * - adaptTechniqueQueue(): maps transition signals to PathwayRouter adaptation (Plan 309-02)
+ * - generateGuidance(): phase-aware encouraging guidance messages (Plan 309-02)
+ * - handleEnergySignal(): energy-responsive messages with no pressure language (Plan 309-02)
+ * - redirectEvaluation(): gentle non-shaming redirects for evaluative content (Plan 309-02)
+ * - generateSessionSummary(): markdown session summary with statistics (Plan 309-02)
  *
  * Only imports from ../shared/types.js, ../shared/constants.js,
  * ../pathways/router.js, ../core/session-manager.js, ../core/phase-controller.js.
@@ -26,7 +27,7 @@ import type {
   BrainstormMessage,
 } from '../shared/types.js';
 import { PHASE_ORDER, TECHNIQUE_DEFAULTS } from '../shared/constants.js';
-import type { IPathwayRouter } from '../pathways/router.js';
+import type { IPathwayRouter, AdaptationSignal } from '../pathways/router.js';
 import type { ISessionManager } from '../core/session-manager.js';
 import type { IPhaseController } from '../core/phase-controller.js';
 
@@ -424,6 +425,58 @@ export function evaluateTransitionReadiness(
 }
 
 // ============================================================================
+// Technique contextual hints
+// ============================================================================
+
+/**
+ * Technique-specific hints appended to guidance messages when a technique
+ * is active. Only the listed techniques have hints; others get no addition.
+ */
+const TECHNIQUE_HINTS: Partial<Record<TechniqueId, string>> = {
+  'scamper': ' Remember, each lens is a different lens to look through -- what could you Substitute?',
+  'six-thinking-hats': " Stay in the current hat's mode -- what does this perspective tell you?",
+  'five-whys': " Keep asking 'why' -- each answer brings us closer to the root.",
+  'brainwriting-635': ' Build on the ideas above -- take one and push it further.',
+};
+
+// ============================================================================
+// Facilitation voice safety check
+// ============================================================================
+
+/**
+ * Pressure phrases that must NEVER appear in any facilitator message.
+ *
+ * This is a development-time safety net. If any of these phrases leak
+ * into generated messages, the method throws immediately so the violation
+ * is caught during testing.
+ */
+const PRESSURE_PHRASES: string[] = [
+  'you need to',
+  'you must',
+  'you should have',
+  'not enough',
+  'try harder',
+  'more ideas',
+];
+
+/**
+ * Assert that a message contains no pressure language.
+ *
+ * Throws Error if any PRESSURE_PHRASES appear in the message.
+ * Called as a built-in safety check at development time.
+ */
+function assertNoPresureLanguage(message: string, methodName: string): void {
+  const lower = message.toLowerCase();
+  for (const phrase of PRESSURE_PHRASES) {
+    if (lower.includes(phrase)) {
+      throw new Error(
+        `Facilitation voice violation: pressure language detected in ${methodName}: "${phrase}"`,
+      );
+    }
+  }
+}
+
+// ============================================================================
 // FacilitatorAgent class
 // ============================================================================
 
@@ -431,8 +484,9 @@ export function evaluateTransitionReadiness(
  * FacilitatorAgent -- the session FLIGHT director.
  *
  * Wraps the standalone pure functions and provides the full
- * IFacilitatorAgent interface. Methods not implemented in Plan 309-01
- * throw Error('not implemented').
+ * IFacilitatorAgent interface. All 8 methods implemented across
+ * Plan 309-01 (assessProblem, evaluateTransitionReadiness) and
+ * Plan 309-02 (remaining 6 methods).
  */
 export class FacilitatorAgent implements IFacilitatorAgent {
   private readonly sessionManager: ISessionManager;
@@ -457,27 +511,252 @@ export class FacilitatorAgent implements IFacilitatorAgent {
     return evaluateTransitionReadiness(session);
   }
 
-  recommendPathway(_assessment: ProblemAssessment): PathwayId {
-    throw new Error('not implemented -- Plan 309-02');
+  /**
+   * Recommend a pathway based on a completed problem assessment.
+   *
+   * The assessment already resolved the pathway via assessProblem(),
+   * so this method simply returns the recommended_pathway from the
+   * assessment. This is intentionally simple -- assessProblem() already
+   * calls the signal analysis logic internally.
+   */
+  recommendPathway(assessment: ProblemAssessment): PathwayId {
+    return assessment.recommended_pathway;
   }
 
-  adaptTechniqueQueue(_session: SessionState, _signal: TransitionSignal): TechniqueId[] {
-    throw new Error('not implemented -- Plan 309-02');
+  /**
+   * Adapt the technique queue based on a transition signal.
+   *
+   * Maps the TransitionSignal type to an AdaptationSignal for PathwayRouter:
+   * - energy_low / saturation_detected -> saturation signal
+   * - user_request -> user_request signal with recommended technique
+   * - default -> low_energy signal
+   *
+   * Delegates to pathwayRouter.adaptTechniqueQueue() for the actual resequencing.
+   */
+  adaptTechniqueQueue(session: SessionState, signal: TransitionSignal): TechniqueId[] {
+    let adaptSignal: AdaptationSignal;
+
+    if (signal.type === 'energy_low' || signal.type === 'saturation_detected') {
+      adaptSignal = {
+        type: 'saturation',
+        current_technique: session.active_technique ?? 'freewriting',
+      };
+    } else if (signal.type === 'user_request') {
+      adaptSignal = {
+        type: 'user_request',
+        requested_technique: signal.recommendation as TechniqueId,
+      };
+    } else {
+      adaptSignal = {
+        type: 'low_energy',
+        completed_techniques: session.metadata.techniques_used,
+      };
+    }
+
+    return this.pathwayRouter.adaptTechniqueQueue(session.technique_queue, adaptSignal, session);
   }
 
-  generateGuidance(_session: SessionState): FacilitatorGuidance {
-    throw new Error('not implemented -- Plan 309-02');
+  /**
+   * Generate phase-aware guidance using encouraging language only.
+   *
+   * No urgency, no pressure, no "you need to", no "you should have",
+   * no "not enough". All messages are process-oriented, not content-oriented.
+   *
+   * If a technique is active, appends a technique-contextual hint.
+   */
+  generateGuidance(session: SessionState): FacilitatorGuidance {
+    const { phase, energy_level, active_technique } = session;
+
+    let guidance: FacilitatorGuidance;
+
+    switch (phase) {
+      case 'explore':
+        guidance = {
+          message: "Let's explore the problem space. What aspects feel most important to you?",
+          urgency: 'advisory',
+        };
+        break;
+
+      case 'diverge':
+        switch (energy_level) {
+          case 'high':
+            guidance = {
+              message: 'Great flow -- keep going! All ideas are welcome here.',
+              urgency: 'advisory',
+            };
+            break;
+          case 'medium':
+            guidance = {
+              message: 'What about approaching it from a completely different angle?',
+              urgency: 'advisory',
+            };
+            break;
+          case 'low':
+            guidance = {
+              message: "Let's try a fresh angle. How about switching to a new approach?",
+              internal_action: 'suggest_technique_switch',
+              urgency: 'next-pause',
+            };
+            break;
+          case 'flagging':
+            guidance = {
+              message: "You've built a solid idea base. Ready to start organizing them?",
+              internal_action: 'suggest_phase_transition',
+              urgency: 'next-pause',
+            };
+            break;
+          default:
+            guidance = {
+              message: 'Great flow -- keep going! All ideas are welcome here.',
+              urgency: 'advisory',
+            };
+        }
+        break;
+
+      case 'organize':
+        guidance = {
+          message: 'Look for natural groupings -- what themes keep appearing?',
+          urgency: 'advisory',
+        };
+        break;
+
+      case 'converge':
+        guidance = {
+          message: "Let's find the most promising directions. What stands out to you?",
+          urgency: 'advisory',
+        };
+        break;
+
+      case 'act':
+        guidance = {
+          message: 'Time to turn ideas into actions. Which ones feel most actionable?',
+          urgency: 'advisory',
+        };
+        break;
+
+      default:
+        guidance = {
+          message: "Let's explore the problem space. What aspects feel most important to you?",
+          urgency: 'advisory',
+        };
+    }
+
+    // Append technique-contextual hint if a technique is active
+    if (active_technique) {
+      const hint = TECHNIQUE_HINTS[active_technique];
+      if (hint) {
+        guidance = { ...guidance, message: guidance.message + hint };
+      }
+    }
+
+    return guidance;
   }
 
-  handleEnergySignal(_level: EnergyLevel, _session: SessionState): FacilitatorGuidance {
-    throw new Error('not implemented -- Plan 309-02');
+  /**
+   * Handle an energy level signal with encouraging, non-pressuring response.
+   *
+   * NEVER uses pressure language. The built-in safety check at the end
+   * throws if any pressure phrase leaks into the message.
+   */
+  handleEnergySignal(level: EnergyLevel, session: SessionState): FacilitatorGuidance {
+    let guidance: FacilitatorGuidance;
+
+    switch (level) {
+      case 'high':
+        guidance = {
+          message: 'Great flow -- keep going!',
+          urgency: 'advisory',
+        };
+        break;
+
+      case 'medium':
+        guidance = {
+          message: 'What about trying a completely different angle?',
+          urgency: 'advisory',
+        };
+        break;
+
+      case 'low':
+        guidance = {
+          message: "Let's try approaching this differently. How about switching things up?",
+          internal_action: 'suggest_technique_switch',
+          urgency: 'next-pause',
+        };
+        break;
+
+      case 'flagging': {
+        const ideaCount = session.ideas.length;
+        guidance = {
+          message: `You've generated ${ideaCount} ideas -- that's a solid foundation. Ready to start organizing them?`,
+          internal_action: 'suggest_phase_transition',
+          urgency: 'next-pause',
+        };
+        break;
+      }
+
+      default:
+        guidance = {
+          message: 'Great flow -- keep going!',
+          urgency: 'advisory',
+        };
+    }
+
+    // Built-in safety check: pressure language must never appear
+    assertNoPresureLanguage(guidance.message, 'handleEnergySignal');
+
+    return guidance;
   }
 
+  /**
+   * Redirect evaluative content during diverge phase.
+   *
+   * Always returns advisory-urgency guidance. Never judgmental.
+   * The agent and content parameters are accepted but NOT included in
+   * the message (privacy/non-shaming principle). Does NOT name the
+   * agent or quote the content back.
+   */
   redirectEvaluation(_agent: AgentRole, _content: string): FacilitatorGuidance {
-    throw new Error('not implemented -- Plan 309-02');
+    return {
+      message: "Let's save that thought for the Converge phase -- right now, the wilder the better. What other directions could we explore?",
+      urgency: 'advisory',
+    };
   }
 
-  generateSessionSummary(_session: SessionState): string {
-    throw new Error('not implemented -- Plan 309-02');
+  /**
+   * Generate a markdown session summary with statistics.
+   *
+   * Pure function: takes session state, returns a formatted Markdown string.
+   * Uses template literals. The output is valid Markdown.
+   */
+  generateSessionSummary(session: SessionState): string {
+    const durationMinutes = Math.round(session.timer.session_timer.elapsed_ms / 60_000);
+    const techniquesUsed = session.metadata.techniques_used;
+    const techniquesList = techniquesUsed.length > 0
+      ? techniquesUsed.map(t => `- ${t}`).join('\n')
+      : '- None yet';
+    const clustersList = session.clusters.length > 0
+      ? session.clusters.map(c => `- **${c.label}** (${c.idea_ids.length} ideas)`).join('\n')
+      : '- No clusters formed yet';
+    const topIdeas = session.ideas.length > 0
+      ? session.ideas.slice(0, 5).map((idea, i) => `${i + 1}. ${idea.content}`).join('\n')
+      : 'No ideas captured yet';
+
+    return `## Session Summary
+
+**Problem:** ${session.problem_statement}
+**Status:** ${session.status} | **Phase reached:** ${session.phase}
+**Duration:** ${durationMinutes} minutes
+
+### Ideas Generated
+${session.ideas.length} total ideas across ${techniquesUsed.length} technique(s)
+
+### Techniques Used
+${techniquesList}
+
+### Clusters Formed
+${clustersList}
+
+### Top Ideas
+${topIdeas}`;
   }
 }
