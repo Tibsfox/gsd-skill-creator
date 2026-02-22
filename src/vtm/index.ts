@@ -16,7 +16,8 @@
  * planner for dependency-ordered wave decomposition with parallel tracks,
  * the wave analysis functions for dependency graphs, savings
  * calculation, and risk factor identification, and the model assignment
- * classifier with data-driven signal registry and weighted scoring.
+ * classifier with data-driven signal registry and weighted scoring, and
+ * the budget validator with auto-rebalance for 60/40 principle enforcement.
  *
  * @module vtm
  */
@@ -30,3 +31,4 @@ export * from './mission-assembler.js';
 export * from './wave-planner.js';
 export * from './wave-analysis.js';
 export * from './model-assignment.js';
+export * from './model-budget.js';
