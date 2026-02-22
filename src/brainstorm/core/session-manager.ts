@@ -436,6 +436,14 @@ export class SessionManager implements ISessionManager {
   ): Promise<void> {
     const state = await this.readState(session_id);
 
+    // Reject if session is completed or abandoned -- no further mutations
+    if (state.status === 'completed' || state.status === 'abandoned') {
+      throw new SessionManagerError(
+        `Cannot set technique on a '${state.status}' session`,
+        'INVALID_TRANSITION',
+      );
+    }
+
     if (technique !== null) {
       const defaults = TECHNIQUE_DEFAULTS[technique];
       const durationMs = defaults.duration_ms;
