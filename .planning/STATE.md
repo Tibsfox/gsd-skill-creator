@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.32 Brainstorm Session Support -- Phase 308 COMPLETE (all 6 plans executed)
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 307 IN PROGRESS (plan 01 of 3 complete)
 
 ## Current Position
 
-Phase: 308 (4 of 7 in v1.32) (Technique Engine, Pathway Router & Artifact Generator) -- COMPLETE
-Plan: 6 of 6 complete
-Status: Phase Complete
-Last activity: 2026-02-22 -- Completed 308-06 (TDD verification suite: 29 tests for engine, router, artifact generator)
+Phase: 307 (3 of 7 in v1.32) (Session Manager & Phase Controller) -- IN PROGRESS
+Plan: 1 of 3 complete
+Status: Executing
+Last activity: 2026-02-22 -- Completed 307-01 (SessionManager: state machine, JSONL persistence, timer)
 
-Progress: [████████░░░░░░░░] 43% (v1.32)
+Progress: [████████░░░░░░░░] 47% (v1.32)
 
 ## Accumulated Context
 
@@ -60,6 +60,11 @@ Progress: [████████░░░░░░░░] 43% (v1.32)
 - HIGH_EFFORT_TECHNIQUES and HIGH_ENERGY_TECHNIQUES as module-level constants for adaptation signal handling
 - All 29 TDD tests pass without implementation changes -- plans 01-05 implementations are correct and complete
 - mockSessionState helper kept inline per plan guidance (no shared test infrastructure yet)
+- SessionManager constructor takes { brainstormDir } only -- session_id passed per-method for test reuse across sessions
+- VALID_TRANSITIONS as module-private Record<SessionStatus, SessionStatus[]> for readable state machine rules
+- readState() always uses SessionStateSchema.parse() on disk reads -- never cast from filesystem data
+- updatePhase() and setActiveTechnique() both auto-transition status from 'created' to 'active'
+- Timer resume sets totalMs = remainingMs so elapsed tracking works correctly after resume
 
 ### Key Constraints
 
@@ -77,5 +82,5 @@ Progress: [████████░░░░░░░░] 43% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 308-06-PLAN.md (TDD verification suite: 29 tests, 120 total brainstorm tests passing)
+Stopped at: Completed 307-01-PLAN.md (SessionManager: 630 lines, 15 async methods, 120 brainstorm tests passing)
 Resume file: None
