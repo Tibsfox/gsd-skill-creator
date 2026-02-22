@@ -19,7 +19,9 @@
  * classifier with data-driven signal registry and weighted scoring, and
  * the budget validator with auto-rebalance for 60/40 principle enforcement,
  * and the cache optimization analyzers for shared load detection, schema
- * reuse analysis, and knowledge tier sizing.
+ * reuse analysis, knowledge tier sizing, TTL validation at every wave
+ * boundary, token savings estimation with per-category breakdowns, and
+ * the CacheReport aggregate composing all analyzers into a single report.
  *
  * @module vtm
  */
