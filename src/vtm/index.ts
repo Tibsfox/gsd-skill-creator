@@ -14,8 +14,9 @@
  * the mission assembly generators for milestone specs and component specs,
  * the mission package assembler for top-level orchestration, the wave
  * planner for dependency-ordered wave decomposition with parallel tracks,
- * and the wave analysis functions for dependency graphs, savings
- * calculation, and risk factor identification.
+ * the wave analysis functions for dependency graphs, savings
+ * calculation, and risk factor identification, and the model assignment
+ * classifier with data-driven signal registry and weighted scoring.
  *
  * @module vtm
  */
@@ -28,3 +29,4 @@ export * from './mission-assembly.js';
 export * from './mission-assembler.js';
 export * from './wave-planner.js';
 export * from './wave-analysis.js';
+export * from './model-assignment.js';
