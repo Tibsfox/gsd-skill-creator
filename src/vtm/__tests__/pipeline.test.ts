@@ -451,14 +451,17 @@ describe('runPipeline', () => {
   });
 
   it('pipeline speed auto-detection delegates to selectPipelineSpeed', () => {
-    // No speed override -- should auto-detect
+    // No speed override -- should auto-detect based on document content.
+    // The test fixture has "learning system" keywords and modules,
+    // so classifyArchetype yields educational-pack, and
+    // detectResearchNecessity recommends 'full' for educational packs.
     const markdown = createVisionMarkdown();
     const result = runPipeline(markdown);
 
     expect(result.success).toBe(true);
-    // The infrastructure archetype with 2 modules and no safety -> skip-research
-    expect(result.speed).toBe('skip-research');
-    expect(result.stages.research).toBeUndefined();
+    // Educational-pack archetype with 2 modules -> full research
+    expect(result.speed).toBe('full');
+    expect(result.stages.research).toBeDefined();
   });
 
   it('durationMs is a positive number', () => {
