@@ -62,9 +62,9 @@ Requirements for v1.30. Each maps to roadmap phases.
 
 ### Cache Optimization (CACH)
 
-- [ ] **CACH-01**: Cache optimizer identifies shared skill loads that can be cached across agents within a wave
-- [ ] **CACH-02**: Schema reuse analyzer documents producer→consumer timing for types/interfaces defined in Wave 0 and consumed in Wave 1+
-- [ ] **CACH-03**: Knowledge tier calculator computes token sizes for summary/active/reference tiers and identifies which agents load which tier
+- [x] **CACH-01**: Cache optimizer identifies shared skill loads that can be cached across agents within a wave
+- [x] **CACH-02**: Schema reuse analyzer documents producer→consumer timing for types/interfaces defined in Wave 0 and consumed in Wave 1+
+- [x] **CACH-03**: Knowledge tier calculator computes token sizes for summary/active/reference tiers and identifies which agents load which tier
 - [ ] **CACH-04**: TTL validator ensures Wave 0 estimated completion time is under 5 minutes to stay within cache TTL for Wave 1 consumers
 - [ ] **CACH-05**: Token savings estimator calculates total tokens saved from skill load caching, schema reuse, and knowledge pre-chunking
 
@@ -167,9 +167,9 @@ Requirements for v1.30. Each maps to roadmap phases.
 | MODL-03 | Phase 284 | Complete |
 | MODL-04 | Phase 284 | Complete |
 | MODL-05 | Phase 284 | Complete |
-| CACH-01 | Phase 285 | Pending |
-| CACH-02 | Phase 285 | Pending |
-| CACH-03 | Phase 285 | Pending |
+| CACH-01 | Phase 285 | Complete |
+| CACH-02 | Phase 285 | Complete |
+| CACH-03 | Phase 285 | Complete |
 | CACH-04 | Phase 285 | Pending |
 | CACH-05 | Phase 285 | Pending |
 | TPLN-01 | Phase 286 | Pending |

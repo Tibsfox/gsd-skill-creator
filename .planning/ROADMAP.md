@@ -59,7 +59,7 @@
 - [x] **Phase 282: Mission Package Assembly** - Assembler, spec generators, self-containment validator (completed 2026-02-21)
 - [x] **Phase 283: Wave Planning** - Wave planner, parallel track detection, dependency graph (completed 2026-02-21)
 - [x] **Phase 284: Model Assignment** - Model assignment engine with Opus/Sonnet/Haiku classification (completed 2026-02-22)
-- [ ] **Phase 285: Cache Optimization** - Cache optimizer, TTL validator, token savings estimator
+- [ ] **Phase 285: Cache Optimization** - Cache optimizer, TTL validator, token savings estimator (2 plans)
 - [ ] **Phase 286: Test Plan Generation** - Test plan generator, verification matrix, safety classification
 - [ ] **Phase 287: Template System** - Template loader, renderer, validator, registry
 - [ ] **Phase 288: Pipeline Orchestrator** - End-to-end three-stage pipeline management
@@ -162,7 +162,10 @@ Plans:
   2. Schema reuse analyzer documents producer-to-consumer timing for Wave 0 types consumed in Wave 1+
   3. TTL validator flags when Wave 0 estimated completion exceeds 5 minutes (cache TTL for Wave 1 consumers)
   4. Token savings estimator calculates and reports total tokens saved from skill load caching, schema reuse, and knowledge pre-chunking
-**Plans**: TBD
+**Plans:** 1/2 plans executed
+Plans:
+- [ ] 285-01-PLAN.md — Shared load detector, schema reuse analyzer, knowledge tier calculator (TDD)
+- [ ] 285-02-PLAN.md — TTL validator, token savings estimator, CacheReport aggregate, and barrel export (TDD)
 
 ### Phase 286: Test Plan Generation
 **Goal**: Users get a categorized test plan with verification matrix mapping every success criterion to test IDs, safety-critical classification, and density benchmarks
@@ -222,8 +225,8 @@ Phases execute in numeric order: 279 -> 280 -> 281 -> 282 -> 283 -> 284 -> 285 -
 | 281. Research Reference Compilation | 2/2 | Complete    | 2026-02-21 |
 | 282. Mission Package Assembly | 2/2 | Complete    | 2026-02-21 |
 | 283. Wave Planning | 2/2 | Complete    | 2026-02-21 |
-| 284. Model Assignment | 2/2 | Complete   | 2026-02-22 |
-| 285. Cache Optimization | 0/TBD | Not started | - |
+| 284. Model Assignment | 2/2 | Complete    | 2026-02-22 |
+| 285. Cache Optimization | 1/2 | In Progress|  |
 | 286. Test Plan Generation | 0/TBD | Not started | - |
 | 287. Template System | 0/TBD | Not started | - |
 | 288. Pipeline Orchestrator | 0/TBD | Not started | - |
