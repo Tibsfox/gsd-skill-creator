@@ -1,11 +1,15 @@
 /**
- * Pipeline orchestrator types and speed selector.
+ * Pipeline orchestrator types, speed selector, and runPipeline function.
  *
  * Defines the typed contract for the three-stage VTM pipeline
- * (vision -> research -> mission). The speed selector wraps
- * `detectResearchNecessity` from research-utils with manual override
- * support, providing automatic pipeline speed detection with
- * explicit override capability.
+ * (vision -> research -> mission) and provides the capstone `runPipeline`
+ * function that composes all prior phases (280-288) into a single call.
+ *
+ * `runPipeline` transforms a vision document markdown string (or pre-parsed
+ * VisionDocument) into a complete mission package with configurable stage
+ * skipping, auto-speed selection, typed stage transitions, file manifest,
+ * execution metrics, and structured error reporting with partial output
+ * recovery.
  *
  * Types:
  * - PipelineSpeed: re-exported from research-utils ('full' | 'skip-research' | 'mission-only')
@@ -19,18 +23,26 @@
  *
  * Functions:
  * - selectPipelineSpeed(): pure function returning manual override or auto-detected speed
+ * - runPipeline(): three-stage pipeline orchestrator with error wrapping
  *
  * @module vtm/pipeline
  */
 
 import type { VisionDocument, ResearchReference, MissionPackage } from './types.js';
 import type { VisionDiagnostic, Archetype } from './vision-validator.js';
+import { validateVisionDocument, checkQuality, classifyArchetype } from './vision-validator.js';
 import type { KnowledgeTiers, SafetySection } from './research-utils.js';
-import { detectResearchNecessity } from './research-utils.js';
+import { detectResearchNecessity, chunkKnowledge, extractSafety } from './research-utils.js';
+import { parseVisionDocument, extractDependencies } from './vision-parser.js';
+import { compileResearch, checkSourceQuality } from './research-compiler.js';
 import type { SourceDiagnostic } from './research-compiler.js';
+import { assembleMissionPackage } from './mission-assembler.js';
+import { validateSelfContainment, generateReadme } from './mission-assembly.js';
 import type { SelfContainmentDiagnostic } from './mission-assembly.js';
+import { generateCacheReport } from './cache-optimizer.js';
 import type { CacheReport } from './cache-optimizer.js';
-import type { BudgetValidationResult } from './model-budget.js';
+import { validateBudget } from './model-budget.js';
+import type { BudgetValidationResult, BudgetTask } from './model-budget.js';
 
 // Re-export PipelineSpeed from research-utils for downstream consumers
 export type { PipelineSpeed } from './research-utils.js';
@@ -224,4 +236,344 @@ export function selectPipelineSpeed(
 
   const recommendation = detectResearchNecessity(visionDoc);
   return recommendation.speed;
+}
+
+// ---------------------------------------------------------------------------
+// Internal helpers
+// ---------------------------------------------------------------------------
+
+/**
+ * Create an empty PipelineResult shell for error cases.
+ *
+ * When the pipeline fails before completing, this provides the minimum
+ * structure for a failure response with the given speed and error.
+ */
+function createErrorResult(
+  speed: PipelineSpeed,
+  error: PipelineError,
+  visionStage?: VisionStageResult,
+  durationMs: number = 0,
+): PipelineResult {
+  return {
+    success: false,
+    speed,
+    stages: {
+      vision: visionStage ?? {
+        visionDoc: {} as VisionDocument,
+        diagnostics: [],
+        archetype: 'infrastructure-component',
+        dependencies: [],
+      },
+    },
+    error,
+    fileManifest: [],
+    executionSummary: {
+      totalTasks: 0,
+      parallelTracks: 0,
+      sequentialDepth: 0,
+      modelSplit: {
+        opus: { count: 0, percentage: 0 },
+        sonnet: { count: 0, percentage: 0 },
+        haiku: { count: 0, percentage: 0 },
+      },
+      estimatedWallTime: '0min',
+      totalTests: 0,
+      safetyCriticalTests: 0,
+    },
+    durationMs,
+  };
+}
+
+/**
+ * Build the file manifest from a MissionPackage.
+ *
+ * Lists each component spec, the milestone spec, wave plan, test plan, and
+ * README as entries with { name, type, size } where size is a human-readable
+ * estimated token count.
+ */
+function buildFileManifest(
+  missionPackage: MissionPackage,
+): Array<{ name: string; type: string; size: string }> {
+  const manifest: Array<{ name: string; type: string; size: string }> = [];
+
+  // Milestone spec
+  manifest.push({
+    name: `${missionPackage.milestoneSpec.name.toLowerCase().replace(/\s+/g, '-')}.md`,
+    type: 'milestone-spec',
+    size: `~${Math.ceil(JSON.stringify(missionPackage.milestoneSpec).length / 4)} tokens`,
+  });
+
+  // Component specs
+  for (const spec of missionPackage.componentSpecs) {
+    manifest.push({
+      name: `${spec.name.toLowerCase().replace(/\s+/g, '-')}-spec.md`,
+      type: 'component-spec',
+      size: `~${spec.estimatedTokens} tokens`,
+    });
+  }
+
+  // Wave execution plan
+  manifest.push({
+    name: 'wave-plan.md',
+    type: 'wave-plan',
+    size: `~${Math.ceil(JSON.stringify(missionPackage.waveExecutionPlan).length / 4)} tokens`,
+  });
+
+  // Test plan
+  manifest.push({
+    name: 'test-plan.md',
+    type: 'test-plan',
+    size: `~${Math.ceil(JSON.stringify(missionPackage.testPlan).length / 4)} tokens`,
+  });
+
+  // README
+  manifest.push({
+    name: 'README.md',
+    type: 'readme',
+    size: '~500 tokens',
+  });
+
+  return manifest;
+}
+
+/**
+ * Map MissionPackage.executionSummary to PipelineResult.executionSummary.
+ *
+ * Converts the flat opusTasks/sonnetTasks/haikuTasks shape from the
+ * MissionPackage into the nested modelSplit shape used by PipelineResult.
+ */
+function mapExecutionSummary(execSummary: MissionPackage['executionSummary']): PipelineResult['executionSummary'] {
+  return {
+    totalTasks: execSummary.totalTasks,
+    parallelTracks: execSummary.parallelTracks,
+    sequentialDepth: execSummary.sequentialDepth,
+    modelSplit: {
+      opus: { count: execSummary.opusTasks.count, percentage: execSummary.opusTasks.percentage },
+      sonnet: { count: execSummary.sonnetTasks.count, percentage: execSummary.sonnetTasks.percentage },
+      haiku: { count: execSummary.haikuTasks.count, percentage: execSummary.haikuTasks.percentage },
+    },
+    estimatedWallTime: execSummary.estimatedWallTime,
+    totalTests: execSummary.totalTests,
+    safetyCriticalTests: execSummary.safetyCriticalTests,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// runPipeline
+// ---------------------------------------------------------------------------
+
+/**
+ * Run the three-stage VTM pipeline: vision -> research -> mission.
+ *
+ * This is the capstone function for the VTM module. It composes all prior
+ * phases (280-288) into a single call that transforms a vision document
+ * markdown string (or pre-parsed VisionDocument) into a complete mission
+ * package.
+ *
+ * Features:
+ * - Configurable stage skipping via PipelineConfig.speed or auto-detection
+ * - String input: full pipeline from raw markdown
+ * - VisionDocument input: skip parsing, run from validation onward
+ * - Structured error reporting with partial output recovery
+ * - File manifest listing all output artifacts
+ * - Execution summary with model split percentages
+ * - Duration tracking via Date.now() delta
+ *
+ * @param input - Raw vision document markdown string or pre-parsed VisionDocument
+ * @param config - Optional pipeline configuration (speed, skip flags, cache toggle)
+ * @returns PipelineResult with success status, stages, manifest, summary, and timing
+ */
+export function runPipeline(
+  input: string | VisionDocument,
+  config?: PipelineConfig,
+): PipelineResult {
+  const startTime = Date.now();
+  const cfg: PipelineConfig = config ?? {};
+
+  // ---- Stage 1: Vision ----
+  let visionDoc: VisionDocument;
+  let visionDiagnostics: VisionDiagnostic[] = [];
+  let dependencies: string[] = [];
+  let rawInput: string | undefined;
+
+  try {
+    if (typeof input === 'string') {
+      rawInput = input;
+
+      // Parse the markdown
+      const parseResult = parseVisionDocument(input);
+      if (!parseResult.success) {
+        const durationMs = Date.now() - startTime;
+        return createErrorResult(
+          cfg.speed ?? 'full',
+          {
+            stage: 'vision',
+            error: new Error(`Vision parsing failed: ${parseResult.errors.map(e => e.message).join('; ')}`),
+            partialOutput: {},
+            recoverable: false,
+          },
+          undefined,
+          durationMs,
+        );
+      }
+
+      visionDoc = parseResult.data;
+    } else {
+      visionDoc = input;
+    }
+
+    // Validation (unless skipped)
+    if (!cfg.skipValidation) {
+      const validationDiags = validateVisionDocument(visionDoc);
+      visionDiagnostics = [...visionDiagnostics, ...validationDiags];
+    }
+
+    // Quality check (unless skipped)
+    if (!cfg.skipQualityCheck) {
+      const qualityDiags = checkQuality(visionDoc);
+      visionDiagnostics = [...visionDiagnostics, ...qualityDiags];
+    }
+
+    // Classify archetype
+    const archetype = classifyArchetype(visionDoc);
+
+    // Extract dependencies
+    if (rawInput !== undefined) {
+      dependencies = extractDependencies(rawInput);
+    } else {
+      dependencies = [...visionDoc.dependsOn];
+    }
+
+    var visionStage: VisionStageResult = {
+      visionDoc,
+      diagnostics: visionDiagnostics,
+      archetype,
+      dependencies,
+    };
+  } catch (e) {
+    const durationMs = Date.now() - startTime;
+    return createErrorResult(
+      cfg.speed ?? 'full',
+      {
+        stage: 'vision',
+        error: e instanceof Error ? e : new Error(String(e)),
+        partialOutput: {},
+        recoverable: false,
+      },
+      undefined,
+      durationMs,
+    );
+  }
+
+  // ---- Speed selection ----
+  const speed = selectPipelineSpeed(visionDoc, cfg);
+
+  // ---- Stage 2: Research (skipped when speed != 'full') ----
+  let researchStage: ResearchStageResult | undefined;
+  let research: ResearchReference | undefined;
+
+  if (speed === 'full') {
+    try {
+      // Compile research
+      const compiledResearch = compileResearch(visionDoc);
+      research = compiledResearch;
+
+      // Check source quality
+      const sourceDiags = checkSourceQuality(compiledResearch);
+
+      // Chunk knowledge
+      const knowledgeTiers = chunkKnowledge(compiledResearch);
+
+      // Extract safety
+      const safety = extractSafety(compiledResearch);
+
+      researchStage = {
+        research: compiledResearch,
+        knowledgeTiers,
+        safety,
+        sourceDiagnostics: sourceDiags,
+      };
+    } catch (e) {
+      const durationMs = Date.now() - startTime;
+      return createErrorResult(
+        speed,
+        {
+          stage: 'research',
+          error: e instanceof Error ? e : new Error(String(e)),
+          partialOutput: { vision: visionStage },
+          recoverable: true,
+        },
+        visionStage,
+        durationMs,
+      );
+    }
+  }
+
+  // ---- Stage 3: Mission ----
+  let missionStage: MissionStageResult;
+
+  try {
+    // Assemble mission package
+    const missionPackage = assembleMissionPackage(visionDoc, research);
+
+    // Validate self-containment
+    const selfContainmentDiags = validateSelfContainment(missionPackage.componentSpecs);
+
+    // Cache report (default true)
+    let cacheReport: CacheReport | undefined;
+    const includeCache = cfg.includeCache !== false;
+    if (includeCache) {
+      cacheReport = generateCacheReport(
+        missionPackage.waveExecutionPlan,
+        missionPackage.componentSpecs,
+      );
+    }
+
+    // Budget validation
+    const budgetTasks: BudgetTask[] = missionPackage.componentSpecs.map(spec => ({
+      model: spec.modelAssignment,
+      estimatedTokens: spec.estimatedTokens,
+    }));
+    const budgetValidation = validateBudget(budgetTasks);
+
+    missionStage = {
+      missionPackage,
+      selfContainmentDiagnostics: selfContainmentDiags,
+      cacheReport,
+      budgetValidation,
+    };
+  } catch (e) {
+    const durationMs = Date.now() - startTime;
+    return createErrorResult(
+      speed,
+      {
+        stage: 'mission',
+        error: e instanceof Error ? e : new Error(String(e)),
+        partialOutput: {
+          vision: visionStage,
+          research: researchStage,
+        },
+        recoverable: true,
+      },
+      visionStage,
+      durationMs,
+    );
+  }
+
+  // ---- Result assembly ----
+  const durationMs = Date.now() - startTime;
+  const missionPackage = missionStage.missionPackage;
+
+  return {
+    success: true,
+    speed,
+    stages: {
+      vision: visionStage,
+      research: researchStage,
+      mission: missionStage,
+    },
+    fileManifest: buildFileManifest(missionPackage),
+    executionSummary: mapExecutionSummary(missionPackage.executionSummary),
+    durationMs,
+  };
 }
