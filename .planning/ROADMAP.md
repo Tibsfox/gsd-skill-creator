@@ -156,7 +156,10 @@ Plans:
   2. Energy monitoring detects declining idea velocity and novelty, and the Facilitator recommends a technique switch before the user runs dry
   3. Transition confidence scoring produces a numeric score that must exceed a threshold before the Facilitator proposes moving to the next phase; premature transitions are blocked
   4. Facilitation voice uses encouraging, non-judgmental language -- no productivity pressure, no urgency framing, no guilt messaging (e.g., "Let's explore another angle" not "You need to generate more ideas")
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 309-01-PLAN.md — TDD: assessProblem signal matching + evaluateTransitionReadiness confidence formula (AGENT-01)
+- [ ] 309-02-PLAN.md — FacilitatorAgent class: 6 remaining methods, facilitation voice, energy management, session summary (AGENT-01)
 
 ### Phase 310: Technique Agents
 **Goal**: All 7 technique agents (Ideator, Questioner, Analyst, Mapper, Persona, Critic, Scribe) implement their assigned techniques with correct behavioral constraints and role boundaries
@@ -188,9 +191,9 @@ Plans:
 |-------|-----------|----------------|--------|-----------|
 | 305. Foundation Types & Bus | 3/3 | Complete    | 2026-02-22 | - |
 | 306. Rules Engine | 2/2 | Complete    | 2026-02-22 | - |
-| 307. Session Manager & Phase Controller | 3/3 | Complete   | 2026-02-22 | - |
+| 307. Session Manager & Phase Controller | 3/3 | Complete    | 2026-02-22 | - |
 | 308. Technique Engine, Pathway Router & Artifact Generator | 6/6 | Complete    | 2026-02-22 | - |
-| 309. Facilitator Agent | v1.32 | 0/TBD | Not started | - |
+| 309. Facilitator Agent | v1.32 | 0/2 | Not started | - |
 | 310. Technique Agents | v1.32 | 0/TBD | Not started | - |
 | 311. Integration Wiring & System Tests | v1.32 | 0/TBD | Not started | - |
 
