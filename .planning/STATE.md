@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Phase 285 in progress — Cache Optimization
+**Current focus:** Phase 285 complete — Cache Optimization
 
 ## Current Position
 
 Phase: 285 of 289 (Cache Optimization) — 7 of 11 in milestone
-Plan: 1 of 2 in current phase
-Status: 285-01 complete
-Last activity: 2026-02-22 — 285-01 complete (cache optimization analyzers, 21 tests)
+Plan: 2 of 2 in current phase
+Status: 285 complete
+Last activity: 2026-02-22 — 285-02 complete (TTL validator, savings estimator, CacheReport, 45 tests)
 
-Progress: [######░░░░] 59% (6.5/11 phases)
+Progress: [#######░░░] 64% (7/11 phases)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 13
-- Average duration: 3min
-- Total execution time: 46min
+- Total plans completed: 14
+- Average duration: 4min
+- Total execution time: 51min
 
 **By Phase:**
 
@@ -33,7 +33,7 @@ Progress: [######░░░░] 59% (6.5/11 phases)
 | 282 Mission Package Assembly | 2 | 7min | 3.5min |
 | 283 Wave Planning | 2 | 7min | 3.5min |
 | 284 Model Assignment | 2 | 6min | 3min |
-| 285 Cache Optimization | 1 | 5min | 5min |
+| 285 Cache Optimization | 2 | 10min | 5min |
 
 ## Accumulated Context
 
@@ -86,6 +86,10 @@ Progress: [######░░░░] 59% (6.5/11 phases)
 - 2026-02-22: Jaccard similarity on significant words (>3 chars, no stopwords) at >50% threshold for content overlap
 - 2026-02-22: Multi-strategy spec-to-task matching: sanitized name, produces artifact, word overlap
 - 2026-02-22: cacheOptimization.schemaReuse as primary source with produces/dependsOn fallback
+- 2026-02-22: Cumulative timing staleness: cache age = sum of wave times from producer to consumer
+- 2026-02-22: TTL violations only created when actual dependent consumers exist in the consumer wave
+- 2026-02-22: generateCacheReport composes all 6 analyzers into structured CacheReport with recommendations
+- 2026-02-22: Recommendations auto-generated for schema reuse, TTL violations, and tier downgrades
 
 ### Key Constraints
 
@@ -101,5 +105,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 285-01-PLAN.md
+Stopped at: Completed 285-02-PLAN.md
 Resume file: None
