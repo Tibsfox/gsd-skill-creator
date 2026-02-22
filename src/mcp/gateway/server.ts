@@ -17,12 +17,13 @@ import { createServer, type Server, type IncomingMessage, type ServerResponse } 
 import { randomUUID } from 'node:crypto';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
-import { authenticateRequest } from './auth.js';
+import { authenticateRequest, canInvokeTool, getToolScope } from './auth.js';
 import { readOrCreateToken } from './token-manager.js';
 import {
   formatJsonRpcError,
   INTERNAL_ERROR,
   PARSE_ERROR,
+  PERMISSION_DENIED,
 } from './errors.js';
 import {
   GatewayConfigSchema,
@@ -164,6 +165,62 @@ export async function startGateway(
   };
 }
 
+// ── Scope Enforcement Helpers ─────────────────────────────────────────────
+
+/**
+ * Extended IncomingMessage with rawBody property.
+ * The Hono/node-server adapter recognizes rawBody and uses it directly
+ * instead of re-reading the stream, enabling body pre-processing.
+ */
+interface IncomingMessageWithRawBody extends IncomingMessage {
+  rawBody?: Buffer;
+}
+
+/**
+ * Buffer the entire request body into a single Buffer.
+ */
+function bufferBody(req: IncomingMessage): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = [];
+    req.on('data', (chunk: Buffer) => chunks.push(chunk));
+    req.on('end', () => resolve(Buffer.concat(chunks)));
+    req.on('error', reject);
+  });
+}
+
+/**
+ * Extract the tool name from a JSON-RPC request body if it is a tools/call.
+ * Returns null if the body is not a tools/call or cannot be parsed.
+ * For batch requests, returns the first tools/call tool name found.
+ */
+function extractToolCallName(body: Buffer): { id: string | number | null; toolName: string } | null {
+  try {
+    const parsed = JSON.parse(body.toString('utf-8'));
+
+    // Single request
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+      if (parsed.method === 'tools/call' && parsed.params?.name) {
+        return { id: parsed.id ?? null, toolName: parsed.params.name };
+      }
+      return null;
+    }
+
+    // Batch request -- check each item
+    if (Array.isArray(parsed)) {
+      for (const item of parsed) {
+        if (item && typeof item === 'object' && item.method === 'tools/call' && item.params?.name) {
+          return { id: item.id ?? null, toolName: item.params.name };
+        }
+      }
+    }
+
+    return null;
+  } catch {
+    // If JSON parsing fails, let it pass through -- MCP server handles protocol errors
+    return null;
+  }
+}
+
 // ── Request Handling ───────────────────────────────────────────────────────
 
 /**
@@ -172,8 +229,9 @@ export async function startGateway(
  * Request pipeline:
  * 1. Route check (only /mcp endpoint)
  * 2. Authentication (bearer token validation)
- * 3. Session routing (existing session or new session creation)
- * 4. Transport dispatch (StreamableHTTPServerTransport handles MCP protocol)
+ * 3. Per-tool scope enforcement for tools/call requests via canInvokeTool
+ * 4. Session routing (existing session or new session creation)
+ * 5. Transport dispatch (StreamableHTTPServerTransport handles MCP protocol)
  *
  * All errors at every stage produce structured responses -- HTTP errors for
  * pre-protocol failures, JSON-RPC errors for protocol-level failures.
@@ -214,6 +272,33 @@ async function handleRequest(
     });
     res.end(JSON.stringify({ error: authResult.errorMessage }));
     return;
+  }
+
+  // For POST requests, buffer the body for scope enforcement.
+  // After buffering, set rawBody on the request so the Hono adapter
+  // (used internally by StreamableHTTPServerTransport) can re-read
+  // the body without consuming the stream again.
+  if (req.method === 'POST') {
+    const body = await bufferBody(req);
+    (req as IncomingMessageWithRawBody).rawBody = body;
+
+    // Per-tool scope enforcement: check canInvokeTool for tools/call requests
+    const toolCall = extractToolCallName(body);
+    if (toolCall && authResult.authInfo) {
+      if (!canInvokeTool(authResult.authInfo, toolCall.toolName)) {
+        const requiredScope = getToolScope(toolCall.toolName);
+        const grantedScopes = authResult.authInfo.scopes.join(', ');
+        res.writeHead(403, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(
+          formatJsonRpcError(
+            toolCall.id,
+            PERMISSION_DENIED,
+            `Insufficient scope for tool "${toolCall.toolName}". Required: ${requiredScope}, granted: ${grantedScopes}`,
+          ),
+        ));
+        return;
+      }
+    }
   }
 
   // Check for existing session
