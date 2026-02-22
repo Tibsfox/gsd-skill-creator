@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.31 GSD-OS MCP Integration -- Phase 298 Gateway Chipset, Resources & Prompts complete.
+**Current focus:** v1.31 GSD-OS MCP Integration -- SHIPPED. Phase 304 gap closure in progress.
 
 ## Current Position
 
-Phase: 298 (Gateway Chipset, Resources & Prompts) — complete
-Plan: 02 of 2 (all complete)
-Status: Complete
-Last activity: 2026-02-22 — Completed 298-02 (Prompt templates and integration tests, 77 total tests)
+Phase: 304 (MCP Integration Wiring) — Gap closure from milestone audit
+Plan: 02 of 02 -- ALL COMPLETE
+Status: Phase complete
+Last activity: 2026-02-22 — Completed 304-02 (Rust StagingGate + agent bridge staging wiring)
 
-Progress: [#############░] 91%
+Progress: [################] 100%
 
 ## Accumulated Context
 
@@ -56,6 +56,12 @@ Progress: [#############░] 91%
 - Per-server promise queues for thread-safe concurrent validation (no global lock)
 - Audit redaction uses both key-name matching and value-pattern matching (dual approach)
 - Pipeline stages short-circuit on failure: trust -> rate limit -> param validation -> audit
+- Presentation follows silicon-panel.ts pattern: pure render functions returning HTML strings, no I/O
+- Wiring rules default to NOT ALLOWED for unlisted port type combinations (deny by default)
+- Sparkline uses SVG polyline for lightweight rendering (no chart library dependency)
+- Boot peripherals use Amiga POST aesthetic: green monospace on black, trust abbreviations [Q/P/T/S]
+- Tauri IPC bridge uses dynamic import of @tauri-apps/api/core for non-Tauri environment safety
+- mcp_get_trust_state reads from ServerRegistry (persisted state) not computed dynamically
 - AgentRegistry uses in-memory ring buffer for logs (max 100, configurable) -- evicts oldest on overflow
 - WorkflowEngine as simulation layer -- produces realistic structured output, will delegate to real GSD pipeline later
 - SessionStore text-based query: substring (0.5) + keyword (0.3) + tag (0.2) scoring, case-insensitive
@@ -70,6 +76,9 @@ Progress: [#############░] 91%
 - ResourceTemplate class for URI template resources -- MCP SDK v1.26+ requires explicit template objects
 - Deep clone on chipset get() -- prevents callers from mutating internal state
 - Shared ChipsetStateManager across sessions -- single source of truth for chipset state
+- String-contains injection detection in Rust StagingGate (no regex crate for gap closure)
+- Staging validation before mutable connection acquisition to avoid borrow checker conflicts
+- StagingGate as zero-size struct with const patterns for minimal memory footprint
 
 ### Key Constraints
 
@@ -89,5 +98,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 298-02 (Gateway Chipset, Resources & Prompts, GATE-20 through GATE-24, 77 tests)
+Stopped at: Completed 304-02-PLAN.md (Rust StagingGate + agent bridge staging, both SECR-12 and SECR-13 closed)
 Resume file: None
