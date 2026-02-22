@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.32 Brainstorm Session Support -- Phase 307 COMPLETE (plan 03 of 3 complete)
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 310 IN PROGRESS (plan 01 of 5 complete)
 
 ## Current Position
 
-Phase: 307 (3 of 7 in v1.32) (Session Manager & Phase Controller) -- COMPLETE
-Plan: 3 of 3 complete
-Status: Complete
-Last activity: 2026-02-22 -- Completed 307-03 (TDD test suites: 29 new tests, 149 total, setActiveTechnique bug fix)
+Phase: 310 (4 of 7 in v1.32) (Technique Agents) -- IN PROGRESS
+Plan: 1 of 5 complete
+Status: In Progress
+Last activity: 2026-02-22 -- Completed 310-01 (TechniqueAgent base, Ideator, Questioner)
 
-Progress: [████████░░░░░░░░] 50% (v1.32)
+Progress: [████████░░░░░░░░] 54% (v1.32)
 
 ## Accumulated Context
 
@@ -73,6 +73,14 @@ Progress: [████████░░░░░░░░] 50% (v1.32)
 - TDD revealed missing status guard in setActiveTechnique() -- completed sessions could silently accept technique changes (fixed)
 - Integration tests use real SessionManager + RulesEngine (no mocks) for PhaseController test suite
 - tmpdir isolation pattern: every filesystem test creates fresh temp dir in beforeEach, removes in afterEach
+- Drain-pattern outboxes: getCaptureMessages() and getEnergySignals() return and clear internal arrays
+- Behavioral constraint methods (evaluateIdea, generateAnswer) throw unconditionally -- exist to document and enforce
+- Assigned techniques stored as static readonly arrays with runtime validation in generation methods
+- redirectAnswerToQuestion uses W-word prefix detection with word boundary check, fallback to 'What if' prepend
+- Facilitator assessProblem uses hardcoded PATHWAY_TECHNIQUES mapping (not PathwayRouter) to keep function pure
+- Complexity threshold: < 50 chars simple, > 200 chars complex, with keyword priority (complex keywords override simple)
+- Transition confidence formula: timer*0.2 + saturation*0.3 + user_signal*0.4 + minimum_threshold*0.1
+- Dominant factor detection thresholds: 0.35 user_request, 0.25 saturation_detected, 0.18 timer_expiry
 
 ### Key Constraints
 
@@ -90,5 +98,5 @@ Progress: [████████░░░░░░░░] 50% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 307-03-PLAN.md (TDD suites: 29 new tests, 149 total brainstorm tests, setActiveTechnique bug fix)
+Stopped at: Completed 309-01-PLAN.md (assessProblem + evaluateTransitionReadiness TDD, 25 tests)
 Resume file: None
