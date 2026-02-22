@@ -72,7 +72,7 @@ Requirements for Brainstorm Session Support milestone. Each maps to roadmap phas
 
 - [x] **INTEG-01**: Session bus wiring connecting all 8 agents through 4 communication loops (session, capture, user, energy)
 - [x] **INTEG-02**: Bus load test — 4 concurrent writers, 12 messages in 200ms, 0 loss
-- [ ] **INTEG-03**: End-to-end session flow for each pathway (Creative Exploration, Problem-Solving, Free-Form at minimum)
+- [x] **INTEG-03**: End-to-end session flow for each pathway (Creative Exploration, Problem-Solving, Free-Form at minimum)
 - [x] **INTEG-04**: All 18 safety-critical tests passing (SC-01 through SC-18)
 - [x] **INTEG-05**: Chipset YAML and activation profiles (solo_quick, guided_exploration, full_workshop, analysis_sprint)
 - [x] **INTEG-06**: skill-creator observation hooks registered for `.brainstorm/sessions/*/`
@@ -161,7 +161,7 @@ Deferred to future release. Tracked but not in current roadmap.
 | ARTIF-04 | Phase 308 | Complete |
 | INTEG-01 | Phase 311 | Complete |
 | INTEG-02 | Phase 311 | Complete |
-| INTEG-03 | Phase 311 | Pending |
+| INTEG-03 | Phase 311 | Complete |
 | INTEG-04 | Phase 311 | Complete |
 | INTEG-05 | Phase 311 | Complete |
 | INTEG-06 | Phase 311 | Complete |
