@@ -62,7 +62,7 @@
 - [x] **Phase 285: Cache Optimization** - Cache optimizer, TTL validator, token savings estimator (2 plans) (completed 2026-02-22)
 - [x] **Phase 286: Test Plan Generation** - Test plan generator, verification matrix, safety classification (completed 2026-02-22)
 - [x] **Phase 287: Template System** - Template loader, renderer, validator, registry (2 plans) (completed 2026-02-22)
-- [ ] **Phase 288: Mission Assembly Integration Wiring** - Wire Phases 283/284/286 into mission-assembly, replace placeholders (Gap Closure)
+- [x] **Phase 288: Mission Assembly Integration Wiring** - Wire Phases 283/284/286 into mission-assembly, replace placeholders (Gap Closure) (completed 2026-02-22)
 - [ ] **Phase 289: Pipeline Orchestrator** - End-to-end three-stage pipeline management
 - [ ] **Phase 290: Integration & Testing** - Barrel exports, chipset, eval harness, integration tests
 
@@ -207,7 +207,7 @@ Plans:
   3. Component spec generation uses Phase 284's signal-based assignModel instead of primitive 3-rule heuristic
   4. Dead imports in mission-assembly.ts are cleaned up
   5. Existing tests updated and passing with real implementations
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 Plans:
 - [ ] 288-01-PLAN.md — Wire planWaves, generateTestPlan, and signal-based assignModel into mission assembly (replace placeholders)
 - [ ] 288-02-PLAN.md — Update tests for real implementations (multi-wave plans, categorized tests, signal-based model assignment)
@@ -221,7 +221,10 @@ Plans:
   2. Speed selector automatically determines pipeline speed from input assessment, with manual override capability
   3. Pipeline result includes complete file manifest, execution summary, model assignment split, and estimated execution metrics
   4. When a stage fails, error report identifies which stage failed, what was produced before failure, and whether partial output is usable
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 289-01-PLAN.md — Pipeline types, configuration, speed selector, and stage error types (TDD)
+- [ ] 289-02-PLAN.md — Pipeline orchestrator core with three-stage flow, file manifest, and execution metrics (TDD)
 
 ### Phase 290: Integration & Testing
 **Goal**: The VTM module is fully integrated into the skill-creator ecosystem with barrel exports, chipset YAML, functional API pattern, eval harness, and cross-component integration tests
@@ -251,8 +254,8 @@ Phases execute in numeric order: 279 -> 280 -> 281 -> 282 -> 283 -> 284 -> 285 -
 | 285. Cache Optimization | 2/2 | Complete    | 2026-02-22 |
 | 286. Test Plan Generation | 2/2 | Complete    | 2026-02-22 |
 | 287. Template System | 2/2 | Complete    | 2026-02-22 |
-| 288. Mission Assembly Integration Wiring | 1/2 | In Progress|  |
-| 289. Pipeline Orchestrator | 0/TBD | Not started | - |
+| 288. Mission Assembly Integration Wiring | 2/2 | Complete   | 2026-02-22 |
+| 289. Pipeline Orchestrator | 0/2 | Not started | - |
 | 290. Integration & Testing | 0/TBD | Not started | - |
 
 ---
