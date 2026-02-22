@@ -24,6 +24,7 @@ import {
   type MissionStageResult,
   type PipelineError,
   type PipelineResult,
+  type AnalysisReport,
 } from '../pipeline.js';
 
 // ---------------------------------------------------------------------------
@@ -543,5 +544,106 @@ describe('template integration', () => {
     expect(result.stages.mission).toBeDefined();
     // renderedDocuments exists (may be empty) but pipeline did not fail
     expect(result.stages.mission!.renderedDocuments).toBeDefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Pipeline enrichment tests
+// ---------------------------------------------------------------------------
+
+describe('pipeline enrichment', () => {
+  it('full pipeline result includes analysisReport with dependencyGraph', async () => {
+    const markdown = createVisionMarkdown();
+    const result = await runPipeline(markdown, { speed: 'full' });
+
+    expect(result.success).toBe(true);
+    expect(result.analysisReport).toBeDefined();
+    expect(result.analysisReport!.dependencyGraph).not.toBeNull();
+    expect(result.analysisReport!.dependencyGraph!.ascii).toBeTruthy();
+    expect(typeof result.analysisReport!.dependencyGraph!.ascii).toBe('string');
+  });
+
+  it('full pipeline result includes sequentialSavings with speedupFactor', async () => {
+    const markdown = createVisionMarkdown();
+    const result = await runPipeline(markdown, { speed: 'full' });
+
+    expect(result.success).toBe(true);
+    const savings = result.analysisReport!.sequentialSavings;
+    expect(savings).not.toBeNull();
+    expect(typeof savings!.sequentialTime).toBe('string');
+    expect(typeof savings!.parallelTime).toBe('string');
+    expect(typeof savings!.savedTime).toBe('string');
+    expect(typeof savings!.speedupFactor).toBe('number');
+    expect(savings!.speedupFactor).toBeGreaterThanOrEqual(1.0);
+  });
+
+  it('full pipeline result includes riskFactors array', async () => {
+    const markdown = createVisionMarkdown();
+    const result = await runPipeline(markdown, { speed: 'full' });
+
+    expect(result.success).toBe(true);
+    const risks = result.analysisReport!.riskFactors;
+    expect(risks).not.toBeNull();
+    expect(Array.isArray(risks)).toBe(true);
+    // If non-empty, each entry has risk, impact, mitigation string fields
+    for (const entry of risks!) {
+      expect(typeof entry.risk).toBe('string');
+      expect(typeof entry.impact).toBe('string');
+      expect(typeof entry.mitigation).toBe('string');
+    }
+  });
+
+  it('full pipeline result includes budgetSummary', async () => {
+    const markdown = createVisionMarkdown();
+    const result = await runPipeline(markdown, { speed: 'full' });
+
+    expect(result.success).toBe(true);
+    const budget = result.analysisReport!.budgetSummary;
+    expect(budget).not.toBeNull();
+    expect(typeof budget!.valid).toBe('boolean');
+    expect(typeof budget!.allocation.opus).toBe('number');
+    expect(typeof budget!.allocation.sonnet).toBe('number');
+    expect(typeof budget!.allocation.haiku).toBe('number');
+    expect(typeof budget!.rebalanced).toBe('boolean');
+    expect(Array.isArray(budget!.rebalanceChanges)).toBe(true);
+  });
+
+  it('mission-only speed mode does not include analysisReport', async () => {
+    const visionDoc = createValidVisionDoc();
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
+
+    expect(result.success).toBe(true);
+    expect(result.analysisReport).toBeUndefined();
+  });
+
+  it('skip-research pipeline still includes analysisReport', async () => {
+    const markdown = createVisionMarkdown();
+    const result = await runPipeline(markdown, { speed: 'skip-research' });
+
+    expect(result.success).toBe(true);
+    expect(result.analysisReport).toBeDefined();
+    expect(result.analysisReport!.dependencyGraph).not.toBeNull();
+  });
+
+  it('analysisReport.errors is empty array when all enrichments succeed', async () => {
+    const markdown = createVisionMarkdown();
+    const result = await runPipeline(markdown, { speed: 'full' });
+
+    expect(result.success).toBe(true);
+    expect(result.analysisReport).toBeDefined();
+    expect(result.analysisReport!.errors).toBeDefined();
+    expect(result.analysisReport!.errors.length).toBe(0);
+  });
+
+  it('executionSummary.modelSplit percentages are numbers that sum to ~100', async () => {
+    const markdown = createVisionMarkdown();
+    const result = await runPipeline(markdown, { speed: 'full' });
+
+    expect(result.success).toBe(true);
+    const { modelSplit } = result.executionSummary;
+    const sum = modelSplit.opus.percentage + modelSplit.sonnet.percentage + modelSplit.haiku.percentage;
+    // Allow tolerance for rounding
+    expect(sum).toBeGreaterThanOrEqual(95);
+    expect(sum).toBeLessThanOrEqual(105);
   });
 });
