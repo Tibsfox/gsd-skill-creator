@@ -81,7 +81,5 @@ export { Scribe } from './agents/scribe.js';
 // ============================================================================
 // Integration (added by Plan 311-01)
 // ============================================================================
-// NOTE: SessionBus and SessionBusConfig are exported by Plan 311-01
-// (session-bus.ts). When 311-01 completes, uncomment the line below.
-// export { SessionBus } from './integration/session-bus.js';
-// export type { SessionBusConfig } from './integration/session-bus.js';
+export { SessionBus } from './integration/session-bus.js';
+export type { SessionBusConfig } from './integration/session-bus.js';
