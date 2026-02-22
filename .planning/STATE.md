@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.32 Brainstorm Session Support -- Phase 308 in progress (Plan 03 of 6 complete)
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 308 in progress (Plan 05 of 6 complete)
 
 ## Current Position
 
 Phase: 308 (4 of 7 in v1.32) (Technique Engine, Pathway Router & Artifact Generator)
-Plan: 3 of 6 complete
+Plan: 5 of 6 complete
 Status: In Progress
-Last activity: 2026-02-22 -- Completed 308-03 (4 analytical techniques with Black Hat phase constraint)
+Last activity: 2026-02-22 -- Completed 308-02 (5 collaborative techniques + Artifact Generator)
 
-Progress: [██████░░░░░░░░░░] 28% (v1.32)
+Progress: [██████░░░░░░░░░░] 36% (v1.32)
 
 ## Accumulated Context
 
@@ -37,8 +37,15 @@ Progress: [██████░░░░░░░░░░] 28% (v1.32)
 - PHASE_REMINDERS as module-private constant with pre-composed strings per phase
 - Black Hat safety enforced at technique level with both phase_constraint config and runtime skip logic
 - SIX_HATS_PHASE_CONSTRAINT exported as standalone constant for Rules Engine/Phase Controller
-- TechniqueInstance/TechniqueOutput interfaces defined locally in each module (engine.ts pending)
+- TechniqueInstance/TechniqueOutput interfaces defined in engine.ts, imported by all technique modules
 - Five Whys seed questions at depth 0 contain problem statement; depth 5 categorized as root-cause
+- Visual techniques use natural.TfIdf for affinity mapping clustering with cosine similarity fallback
+- Lotus Blossom semantic duplicate detection: redirect prompt when last 3 ideas share first word or under 3 words
+- Affinity Mapping returns empty ideas[] and populates visualization field with cluster hierarchy
+- ALLOWED_FIGURES: 9 constructive historical figures (deduplicated from plan's 10-entry list)
+- Artifact renderers are pure functions (data in, string out) -- Scribe handles filesystem writes
+- Cluster map rendered inline in ArtifactGenerator (no separate template) due to simpler structure
+- Action plan source_idea_ids tracing: always lookup original idea content (UX pitfall prevention)
 
 ### Key Constraints
 
@@ -56,5 +63,5 @@ Progress: [██████░░░░░░░░░░] 28% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 308-03-PLAN.md (4 analytical techniques with Black Hat phase constraint)
+Stopped at: Completed 308-02-PLAN.md (5 collaborative techniques + Artifact Generator)
 Resume file: None
