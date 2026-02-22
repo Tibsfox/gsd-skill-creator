@@ -65,14 +65,14 @@ Requirements for GSD-OS MCP Integration milestone. Each maps to roadmap phases.
 
 ### Agent Bridge
 
-- [ ] **BRDG-01**: Generic Agent-Server Adapter creates valid MCP server from any AgentServerConfig
-- [ ] **BRDG-02**: SCOUT agent exposed as MCP server with scout:research, scout:evaluate-dependency, and scout:survey-landscape tools plus 2 resources
-- [ ] **BRDG-03**: VERIFY agent exposed as MCP server with verify:run-tests, verify:check-types, verify:audit, and verify:coverage tools plus 2 resources
-- [ ] **BRDG-04**: Agent-Client Adapter gives agents MCP client capability with connection management and tool invocation helpers
-- [ ] **BRDG-05**: EXEC agent can invoke SCOUT tools through MCP and receive results (inter-agent communication)
-- [ ] **BRDG-06**: Concurrency limiting enforced per agent server (maxConcurrency exceeded returns retry error)
-- [ ] **BRDG-07**: Agent handler errors produce structured MCP errors, never process crashes
-- [ ] **BRDG-08**: Agent context isolation maintained between concurrent invocations
+- [x] **BRDG-01**: Generic Agent-Server Adapter creates valid MCP server from any AgentServerConfig
+- [x] **BRDG-02**: SCOUT agent exposed as MCP server with scout.research, scout.evaluate-dependency, and scout.survey-landscape tools plus 2 resources
+- [x] **BRDG-03**: VERIFY agent exposed as MCP server with verify.run-tests, verify.check-types, verify.audit, and verify.coverage tools plus 2 resources
+- [x] **BRDG-04**: Agent-Client Adapter gives agents MCP client capability with connection management and tool invocation helpers
+- [x] **BRDG-05**: EXEC agent can invoke SCOUT tools through MCP and receive results (inter-agent communication)
+- [x] **BRDG-06**: Concurrency limiting enforced per agent server (maxConcurrency exceeded returns retry error)
+- [x] **BRDG-07**: Agent handler errors produce structured MCP errors, never process crashes
+- [x] **BRDG-08**: Agent context isolation maintained between concurrent invocations
 
 ### MCP Security
 
@@ -93,25 +93,25 @@ Requirements for GSD-OS MCP Integration milestone. Each maps to roadmap phases.
 
 ### MCP Presentation
 
-- [ ] **PRES-01**: MCP Server block type exists in Blueprint Editor with tool/resource port rendering and status indicators
-- [ ] **PRES-02**: MCP Tool block type exists with parameter preview and wireable to agent input ports
-- [ ] **PRES-03**: MCP Resource block type exists with subscription visualization and wireable to context inputs
-- [ ] **PRES-04**: Block wiring rules enforce type-safe connections with error messages for invalid wiring
-- [ ] **PRES-05**: MCP Trace Panel displays real-time JSON-RPC message flow with latency sparklines and server/tool filtering
-- [ ] **PRES-06**: Security Dashboard panel shows trust state per server, hash change alerts, and blocked call log
-- [ ] **PRES-07**: Boot sequence displays MCP servers as peripherals with connection status and tool counts
-- [ ] **PRES-08**: Tauri IPC commands expose host manager operations to frontend (connect, disconnect, invoke_tool, get_trace, get_trust_state)
+- [x] **PRES-01**: MCP Server block type exists in Blueprint Editor with tool/resource port rendering and status indicators
+- [x] **PRES-02**: MCP Tool block type exists with parameter preview and wireable to agent input ports
+- [x] **PRES-03**: MCP Resource block type exists with subscription visualization and wireable to context inputs
+- [x] **PRES-04**: Block wiring rules enforce type-safe connections with error messages for invalid wiring
+- [x] **PRES-05**: MCP Trace Panel displays real-time JSON-RPC message flow with latency sparklines and server/tool filtering
+- [x] **PRES-06**: Security Dashboard panel shows trust state per server, hash change alerts, and blocked call log
+- [x] **PRES-07**: Boot sequence displays MCP servers as peripherals with connection status and tool counts
+- [x] **PRES-08**: Tauri IPC commands expose host manager operations to frontend (connect, disconnect, invoke_tool, get_trace, get_trust_state)
 
 ### MCP Integration Testing
 
-- [ ] **TEST-01**: End-to-end: Blueprint Editor block -> Tauri IPC -> Host Manager -> Server connection
-- [ ] **TEST-02**: End-to-end: tool invocation -> staging gates -> server -> response -> trace panel
-- [ ] **TEST-03**: End-to-end: external MCP client connects to gateway, discovers tools, invokes one, gets result
-- [ ] **TEST-04**: End-to-end: template generates server -> build -> register with host -> tool calls work
-- [ ] **TEST-05**: End-to-end: SCOUT server -> EXEC client -> result returned via MCP
-- [ ] **TEST-06**: MCP overhead (host manager + staging gates) adds less than 50ms latency to tool invocations
-- [ ] **TEST-07**: All 18 safety-critical security tests pass
-- [ ] **TEST-08**: Test coverage across all MCP components exceeds 85%
+- [x] **TEST-01**: End-to-end: Blueprint Editor block -> Tauri IPC -> Host Manager -> Server connection
+- [x] **TEST-02**: End-to-end: tool invocation -> staging gates -> server -> response -> trace panel
+- [x] **TEST-03**: End-to-end: external MCP client connects to gateway, discovers tools, invokes one, gets result
+- [x] **TEST-04**: End-to-end: template generates server -> build -> register with host -> tool calls work
+- [x] **TEST-05**: End-to-end: SCOUT server -> EXEC client -> result returned via MCP
+- [x] **TEST-06**: MCP overhead (host manager + staging gates) adds less than 50ms latency to tool invocations
+- [x] **TEST-07**: All 18 safety-critical security tests pass
+- [x] **TEST-08**: Test coverage across all MCP components exceeds 85%
 
 ## v2 Requirements
 
@@ -158,7 +158,7 @@ Deferred to future release. Tracked but not in current roadmap.
 | HOST-08 | Phase 294 | Complete |
 | GATE-01 | Phase 295 | Complete |
 | GATE-02 | Phase 295 | Complete |
-| GATE-03 | Phase 295 | Complete |
+| GATE-03 | Phase 304 | Pending |
 | GATE-04 | Phase 296 | Complete |
 | GATE-05 | Phase 296 | Complete |
 | GATE-06 | Phase 296 | Complete |
@@ -166,15 +166,15 @@ Deferred to future release. Tracked but not in current roadmap.
 | GATE-08 | Phase 296 | Complete |
 | GATE-09 | Phase 296 | Complete |
 | GATE-10 | Phase 296 | Complete |
-| GATE-11 | Phase 297 | Complete |
-| GATE-12 | Phase 297 | Complete |
-| GATE-13 | Phase 297 | Complete |
-| GATE-14 | Phase 297 | Complete |
-| GATE-15 | Phase 297 | Complete |
-| GATE-16 | Phase 297 | Complete |
-| GATE-17 | Phase 297 | Complete |
-| GATE-18 | Phase 297 | Complete |
-| GATE-19 | Phase 297 | Complete |
+| GATE-11 | Phase 304 | Pending |
+| GATE-12 | Phase 304 | Pending |
+| GATE-13 | Phase 304 | Pending |
+| GATE-14 | Phase 304 | Pending |
+| GATE-15 | Phase 304 | Pending |
+| GATE-16 | Phase 304 | Pending |
+| GATE-17 | Phase 304 | Pending |
+| GATE-18 | Phase 304 | Pending |
+| GATE-19 | Phase 304 | Pending |
 | GATE-20 | Phase 298 | Complete |
 | GATE-21 | Phase 298 | Complete |
 | GATE-22 | Phase 298 | Complete |
@@ -189,14 +189,14 @@ Deferred to future release. Tracked but not in current roadmap.
 | TMPL-06 | Phase 299 | Complete |
 | TMPL-07 | Phase 299 | Complete |
 | TMPL-08 | Phase 299 | Complete |
-| BRDG-01 | Phase 300 | Pending |
-| BRDG-02 | Phase 300 | Pending |
-| BRDG-03 | Phase 300 | Pending |
-| BRDG-04 | Phase 300 | Pending |
-| BRDG-05 | Phase 300 | Pending |
-| BRDG-06 | Phase 300 | Pending |
-| BRDG-07 | Phase 300 | Pending |
-| BRDG-08 | Phase 300 | Pending |
+| BRDG-01 | Phase 300 | Complete |
+| BRDG-02 | Phase 300 | Complete |
+| BRDG-03 | Phase 300 | Complete |
+| BRDG-04 | Phase 300 | Complete |
+| BRDG-05 | Phase 300 | Complete |
+| BRDG-06 | Phase 300 | Complete |
+| BRDG-07 | Phase 300 | Complete |
+| BRDG-08 | Phase 300 | Complete |
 | SECR-01 | Phase 301 | Complete |
 | SECR-02 | Phase 301 | Complete |
 | SECR-03 | Phase 301 | Complete |
@@ -208,25 +208,25 @@ Deferred to future release. Tracked but not in current roadmap.
 | SECR-09 | Phase 301 | Complete |
 | SECR-10 | Phase 301 | Complete |
 | SECR-11 | Phase 301 | Complete |
-| SECR-12 | Phase 301 | Complete |
-| SECR-13 | Phase 301 | Complete |
+| SECR-12 | Phase 304 | Pending |
+| SECR-13 | Phase 304 | Pending |
 | SECR-14 | Phase 301 | Complete |
-| PRES-01 | Phase 302 | Pending |
-| PRES-02 | Phase 302 | Pending |
-| PRES-03 | Phase 302 | Pending |
-| PRES-04 | Phase 302 | Pending |
-| PRES-05 | Phase 302 | Pending |
-| PRES-06 | Phase 302 | Pending |
-| PRES-07 | Phase 302 | Pending |
-| PRES-08 | Phase 302 | Pending |
-| TEST-01 | Phase 303 | Pending |
-| TEST-02 | Phase 303 | Pending |
-| TEST-03 | Phase 303 | Pending |
-| TEST-04 | Phase 303 | Pending |
-| TEST-05 | Phase 303 | Pending |
-| TEST-06 | Phase 303 | Pending |
-| TEST-07 | Phase 303 | Pending |
-| TEST-08 | Phase 303 | Pending |
+| PRES-01 | Phase 302 | Complete |
+| PRES-02 | Phase 302 | Complete |
+| PRES-03 | Phase 302 | Complete |
+| PRES-04 | Phase 302 | Complete |
+| PRES-05 | Phase 302 | Complete |
+| PRES-06 | Phase 302 | Complete |
+| PRES-07 | Phase 302 | Complete |
+| PRES-08 | Phase 302 | Complete |
+| TEST-01 | Phase 303 | Complete |
+| TEST-02 | Phase 303 | Complete |
+| TEST-03 | Phase 304 | Pending |
+| TEST-04 | Phase 303 | Complete |
+| TEST-05 | Phase 303 | Complete |
+| TEST-06 | Phase 303 | Complete |
+| TEST-07 | Phase 303 | Complete |
+| TEST-08 | Phase 303 | Complete |
 
 **Coverage:**
 - v1.31 requirements: 80 total

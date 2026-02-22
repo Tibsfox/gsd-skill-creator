@@ -6,7 +6,7 @@
 use super::manager::ServerInfo;
 use super::registry::{ServerRegistry, ServerRegistryEntry};
 use super::router::{ToolCallResult, ToolRouter};
-use super::security::TrustState;
+use super::security::{StagingGate, TrustState};
 use super::trace::TraceEmitter;
 use super::types::{TraceEvent, TransportConfig};
 use super::manager::HostManager;
@@ -29,6 +29,7 @@ pub struct McpHostState {
     pub router: ToolRouter,
     pub registry: ServerRegistry,
     pub trace: TraceEmitter,
+    pub staging_gate: StagingGate,
 }
 
 impl McpHostState {
@@ -39,6 +40,7 @@ impl McpHostState {
             router: ToolRouter::new(),
             registry: ServerRegistry::new(ServerRegistry::default_path()),
             trace: TraceEmitter::new(1000),
+            staging_gate: StagingGate::new(),
         }
     }
 
@@ -173,6 +175,27 @@ pub async fn mcp_call_tool(
         .resolve(&tool_name)
         .ok_or_else(|| format!("Unknown tool: {}", tool_name))?
         .to_string();
+
+    // ── Staging Gate Validation ──────────────────────────────────────
+    // Validate BEFORE acquiring the mutable connection reference to avoid
+    // borrow checker conflicts between manager, registry, and staging_gate.
+    let trust_state = host
+        .registry
+        .get(&server_id_for_call)
+        .map(|entry| entry.trust_state)
+        .unwrap_or(TrustState::Quarantine); // Unknown servers default to quarantine
+
+    if let Err(reason) = host.staging_gate.validate(&trust_state, &tool_name, &params) {
+        // Record blocked invocation in trace
+        host.trace.record_incoming(
+            &server_id_for_call,
+            &format!("tools/call:{}", tool_name),
+            request_ts,
+            None,
+            Some(reason.clone()),
+        );
+        return Err(format!("Staging gate blocked: {}", reason));
+    }
 
     let conn = host.manager.get_connection_mut(&server_id_for_call).ok_or_else(|| {
         format!("Server unavailable: {}", server_id_for_call)
