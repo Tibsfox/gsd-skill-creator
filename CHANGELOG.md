@@ -4,6 +4,101 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.31.0] - 2026-02-22
+
+### Added
+
+- **MCP Foundation Types:** Shared TypeScript interfaces and Rust FFI types with Zod schemas for Tool, Resource, Prompt, ServerCapability, TransportConfig, McpMessage, TraceEvent, and staging gate contracts (TrustState, SecurityGate, HashRecord, ValidationResult)
+- **Rust MCP Host Manager:** Server lifecycle management with stdio transport, MCP handshake, crash detection with exponential backoff restart, multi-server orchestration, tool routing by name, capability caching, trace emission via Tauri events
+- **Server Registry:** JSON file persistence for server configs across Tauri restarts, health status tracking, quarantine state management
+- **Gateway MCP Server:** 19 tools across 6 groups (project, skill, agent, workflow, session, chipset), 4 resource providers (project configs, skill registry, agent telemetry, chipset state), 3 prompt templates, Streamable HTTP transport with bearer token auth and per-tool scope enforcement
+- **MCP Template Generators:** Server, host, and client project scaffolds producing complete TypeScript projects with package.json, tsconfig.json, SDK setup, example tools/resources/prompts, tests, CLAUDE.md, and chipset.yaml
+- **Agent Bridge:** Generic Agent-Server Adapter wrapping agents as MCP servers, SCOUT (3 tools, 2 resources) and VERIFY (4 tools, 2 resources) exposed as MCP servers, Agent-Client Adapter giving EXEC MCP client capability with concurrency limiting and context isolation
+- **MCP Security Pipeline:** Tool definition hash gate (SHA-256 with drift detection), trust manager (quarantine/provisional/trusted lifecycle with 30-day decay), invocation validator (injection and traversal blocking), rate limiter (per-server and per-tool), audit logger (with secret redaction), staging pipeline as single unbypassable entry point
+- **Blueprint Editor MCP Blocks:** Server, Tool, and Resource block types with port rendering, status indicators, and type-safe wiring engine with deny-by-default rules
+- **MCP Trace Panel:** Real-time JSON-RPC message flow display with latency sparklines, server/tool filtering
+- **Security Dashboard:** Trust state per server, hash change alerts, blocked call log
+- **Boot Sequence MCP Peripherals:** Amiga POST aesthetic display of MCP servers with connection status and tool counts
+- **Tauri IPC Bridge:** 5 commands (connect, disconnect, invoke_tool, get_trace, get_trust_state) exposing host manager to frontend
+- **Integration Wiring:** All 19 tools registered in production gateway factory, per-tool scope enforcement at HTTP level, Rust StagingGate before mcp_call_tool, agent bridge staging with source tracking
+
+### Stats
+
+- 12 phases (293-304), 28 plans, 37 commits, 838 tests (771 TS + 67 Rust), 80 requirements, ~24K LOC
+
+---
+
+## [1.30.0] - 2026-02-22
+
+### Added
+
+- **VTM Foundation Types:** Zod schemas for all 8 vision-to-mission document structures with inferred TypeScript types, 60/40 principle budget constraints, and programmatic schema iteration
+- **Vision Document Parser:** Regex-based section extraction, archetype classifier (Educational/Infrastructure/Organizational/Creative), quality checker, and dependency extractor
+- **Research Reference Compiler:** Tiered knowledge chunking (summary/active/reference), source quality checker, safety extractor with boundary classification, and research necessity detector
+- **Mission Package Assembler:** Self-contained component specs, milestone spec generator, wave planning integration, model assignment, test plan generation, and file count scaling
+- **Wave Planner:** Parallel track detection via graph coloring, dependency graph generator with critical path marking, sequential savings calculator, and risk factor analyzer
+- **Model Assignment Engine:** Weighted signal registry (Opus/Sonnet/Haiku), confidence scoring, budget validator enforcing 60/40 principle, and downgrade-only auto-rebalance
+- **Cache Optimizer:** Shared load detection, schema reuse analysis, knowledge tier calculation, TTL validation, and token savings estimation
+- **Test Plan Generator:** Categorized specs (S/C/I/E IDs), verification matrix builder, safety-critical classifier, and test density checker
+- **Template System:** Mustache-style renderer with Zod schema validation, memory-cached loader, and 7-template registry
+- **Pipeline Orchestrator:** End-to-end vision → research → mission with configurable stage skipping, template rendering, wave analysis enrichment, budget auto-rebalance, and structured error reporting
+
+### Stats
+
+- 14 phases (279-292), 26 plans, 65 commits, 679 tests, 58 requirements, ~20K LOC
+
+---
+
+## [1.29.0] - 2026-02-21
+
+### Added
+
+- **MNA Circuit Simulator:** DC/AC/transient analysis, Newton-Raphson nonlinear solver, Gaussian elimination with partial pivoting, 7 component models (R/C/L/diode/BJT/MOSFET/op-amp), stamp logging, circuit file format round-trip
+- **Digital Logic Simulator:** 8 gate types, CMOS gate internals, truth table generation, ASCII timing diagrams with propagation delay, flip-flops (SR/D/JK/T), 4-bit ripple-carry adder
+- **Safety Warden:** 3 operating modes (annotate/gate/redirect), IEC 60449 voltage classification, positive framing (8 prohibited words), professional context detection, per-module safety assessments
+- **Learn Mode System:** 3-level depth (practical/reference/mathematical), H&H citation lookup, sidebar UI component, depth markers in all 15 modules
+- **15 Educational Modules:** 4 tiers — Tier 1 (circuits/passives/signals), Tier 2 (diodes/transistors/op-amps/power), Tier 3 (logic/sequential/data-conversion/DSP), Tier 4 (MCU/sensors/PLC/off-grid/PCB)
+- **5 Specialized Engines:** DSP (FFT/FIR/convolution/quantization), GPIO (UART/SPI/I2C/PWM/ADC/timer), PLC (ladder logic/PID/Modbus/scan cycle), Solar (single-diode/MPPT/battery/inverter), PCB (impedance/DRC/EMI/trace routing/Gerber)
+- **77 Interactive Labs:** Hands-on experiments across all 15 modules grounded in *The Art of Electronics*
+
+### Stats
+
+- 17 phases (262-278), 39 plans, 92 commits, 10,707 tests, 95 requirements, ~29K LOC
+
+---
+
+## [1.28.0] - 2026-02-21
+
+### Added
+
+- **Filesystem Message Bus:** 8 priority levels, ISA compact encoding, Dispatcher routing, queue health metrics, dead-letter handling, message pruning
+- **10-Position Staff Topology:** Coordinator, Relay, Planner, Configurator, Monitor, Executor, Verifier, Sentinel, Chronicler, Dashboard — organized into 5 operational divisions
+- **4 Topology Profiles:** Scout (3 positions), Patrol (5), Squadron (7), Fleet (10) with phase-count-based auto-selection
+- **HALT/CLEAR Protocol:** Priority 0 emergency stop via bus message, 9-type recovery decision matrix in Sentinel
+- **Chipset YAML Reproducibility:** Deterministic parsing and startup from single config file
+- **Independent Verification:** Verifier operates independently of Executor with no context bleed
+
+### Stats
+
+- 7 phases (255-261), 22 plans, 51 commits, 675 tests, 81 requirements, ~18.9K LOC
+
+---
+
+## [1.27.0] - 2026-02-20
+
+### Added
+
+- **35 Foundational Knowledge Packs:** 15 Core Academic, 10 Applied, 10 Specialized — each with vision doc, modules YAML, activities JSON, assessment, and resources
+- **Pack Runtime Infrastructure:** Zod schemas for pack types, registry with filtering, dependency resolver with circular detection, content loader, barrel exports
+- **GSD-OS Knowledge Pack Dashboard:** Browser panel with tier grouping, full-text search, detail view with prerequisites/grade levels, skill tree visualization, progress tracking, activity suggestion engine
+- **Observation Infrastructure:** 6 learner observation types with ObservationEmitter, AMIGA Event Bridge with 6 event types, 4-pattern learning detector, pathway adapter, activity scaffolder, approach promoter
+
+### Stats
+
+- 12 phases (243-254), 79 plans, 144 tests, 81 requirements, ~23.6K LOC
+
+---
+
 ## [1.26.0] - 2026-02-19
 
 ### Added
