@@ -244,3 +244,20 @@ pub async fn mcp_get_trace(
 
     Ok(events)
 }
+
+/// Returns the trust state for a specific server from the registry.
+///
+/// Reads the persisted trust state that survives app restarts.
+/// Returns an error if the server is not found in the registry.
+#[tauri::command]
+pub async fn mcp_get_trust_state(
+    server_id: String,
+    state: tauri::State<'_, tokio::sync::Mutex<McpHostState>>,
+) -> Result<TrustState, String> {
+    let host = state.lock().await;
+    let entry = host
+        .registry
+        .get(&server_id)
+        .ok_or_else(|| format!("Server '{}' not found in registry", server_id))?;
+    Ok(entry.trust_state)
+}
