@@ -171,7 +171,13 @@ Plans:
   3. Critic activates only during Converge phase, applies 4-dimension evaluation (feasibility, impact, alignment, risk), and supports dot voting, star rating, and weighted scoring prioritization methods
   4. Mapper organizes ideas into mind maps, affinity clusters (2-8 clusters), lotus blossom grids, and storyboard sequences without evaluating idea quality
   5. Scribe captures output across all phases, generates session transcript with phase/technique metadata, creates action plans with ownership and deadlines, and never generates ideas of its own
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+- [ ] 310-01-PLAN.md — TechniqueAgent base class + Ideator + Questioner (AGENT-02, AGENT-03)
+- [ ] 310-02-PLAN.md — Analyst (SCAMPER + Hats coordination) + Mapper (AGENT-04, AGENT-05)
+- [ ] 310-03-PLAN.md — Persona (constructive figures) + Critic (Converge-only evaluation) (AGENT-06, AGENT-07)
+- [ ] 310-04-PLAN.md — Scribe (always-on capture + artifact generation) (AGENT-08)
+- [ ] 310-05-PLAN.md — TDD: behavioral constraint verification suite for all 7 agents (AGENT-02..08)
 
 ### Phase 311: Integration Wiring & System Tests
 **Goal**: All 8 agents communicate through the session bus, end-to-end brainstorming sessions complete successfully for each pathway, and all safety-critical tests pass
@@ -194,7 +200,7 @@ Plans:
 | 307. Session Manager & Phase Controller | 3/3 | Complete    | 2026-02-22 | - |
 | 308. Technique Engine, Pathway Router & Artifact Generator | 6/6 | Complete    | 2026-02-22 | - |
 | 309. Facilitator Agent | v1.32 | 0/2 | Not started | - |
-| 310. Technique Agents | v1.32 | 0/TBD | Not started | - |
+| 310. Technique Agents | v1.32 | 0/5 | Not started | - |
 | 311. Integration Wiring & System Tests | v1.32 | 0/TBD | Not started | - |
 
 See `.planning/milestones/v1.31-ROADMAP.md` for v1.31 phase details.
