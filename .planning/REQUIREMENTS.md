@@ -45,10 +45,10 @@ Requirements for Brainstorm Session Support milestone. Each maps to roadmap phas
 
 ### Pathways
 
-- [ ] **PATH-01**: 5 pathway definitions with complete technique sequences: Creative Exploration, Problem-Solving, Product Innovation, Decision-Making, Free-Form
-- [ ] **PATH-02**: Situation-to-pathway matching from problem statement signal words
-- [ ] **PATH-03**: Mid-session resequencing on low energy, user request, saturation, or unexpected depth
-- [ ] **PATH-04**: Free-form pathway supports any technique on demand
+- [x] **PATH-01**: 5 pathway definitions with complete technique sequences: Creative Exploration, Problem-Solving, Product Innovation, Decision-Making, Free-Form
+- [x] **PATH-02**: Situation-to-pathway matching from problem statement signal words
+- [x] **PATH-03**: Mid-session resequencing on low energy, user request, saturation, or unexpected depth
+- [x] **PATH-04**: Free-form pathway supports any technique on demand
 
 ### Agents
 
@@ -143,10 +143,10 @@ Deferred to future release. Tracked but not in current roadmap.
 | TECH-05 | Phase 308 | Complete |
 | TECH-06 | Phase 308 | Complete |
 | TECH-07 | Phase 308 | Complete |
-| PATH-01 | Phase 308 | Pending |
-| PATH-02 | Phase 308 | Pending |
-| PATH-03 | Phase 308 | Pending |
-| PATH-04 | Phase 308 | Pending |
+| PATH-01 | Phase 308 | Complete |
+| PATH-02 | Phase 308 | Complete |
+| PATH-03 | Phase 308 | Complete |
+| PATH-04 | Phase 308 | Complete |
 | AGENT-01 | Phase 309 | Pending |
 | AGENT-02 | Phase 310 | Pending |
 | AGENT-03 | Phase 310 | Pending |
