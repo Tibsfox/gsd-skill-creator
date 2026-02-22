@@ -22,7 +22,7 @@
 - ✅ **v1.27** — Foundational Knowledge Packs (Phases 243-254, shipped 2026-02-20)
 - ✅ **v1.28** — GSD Den Operations (Phases 255-261, shipped 2026-02-21)
 - ✅ **v1.29** — Electronics Educational Pack (Phases 262-278, shipped 2026-02-21)
-- [ ] **v1.30** — Vision-to-Mission Pipeline (Phases 279-290, in progress)
+- [ ] **v1.30** — Vision-to-Mission Pipeline (Phases 279-292, in progress)
 
 ## Phases
 
@@ -65,6 +65,8 @@
 - [x] **Phase 288: Mission Assembly Integration Wiring** - Wire Phases 283/284/286 into mission-assembly, replace placeholders (Gap Closure) (completed 2026-02-22)
 - [x] **Phase 289: Pipeline Orchestrator** - End-to-end three-stage pipeline management (completed 2026-02-22)
 - [x] **Phase 290: Integration & Testing** - Barrel exports, chipset, eval harness, integration tests (completed 2026-02-22)
+- [ ] **Phase 291: Template System Pipeline Integration** - Wire template system into mission assembly and pipeline (Gap Closure)
+- [ ] **Phase 292: Pipeline Output Enrichment** - Wire wave analysis, budget rebalance into pipeline result (Gap Closure)
 
 ## Phase Details
 
@@ -241,10 +243,37 @@ Plans:
 - [ ] 290-01-PLAN.md — Barrel export audit, chipset YAML, VTMPipeline class wrapper, tech debt fixes
 - [ ] 290-02-PLAN.md — Eval harness for 5 scenarios and integration tests for 3 E2E flows (TDD)
 
+### Phase 291: Template System Pipeline Integration
+**Goal**: Mission assembly and pipeline generate output using the template system (loadTemplate, renderTemplate, validateRenderedTemplate) instead of direct string builders, completing the template integration path
+**Depends on**: Phase 287, Phase 289
+**Requirements**: TMPL-01, TMPL-02, TMPL-03, TMPL-04
+**Gap Closure**: Closes integration gaps from v1.30 audit (template system unwired from pipeline)
+**Success Criteria** (what must be TRUE):
+  1. Mission assembly generates milestone-spec, component-spec, wave-plan, test-plan, and readme output through the template system rather than direct string builders
+  2. Pipeline initialization creates a template registry via createTemplateRegistry
+  3. Rendered templates pass validateRenderedTemplate against their corresponding Zod schemas
+  4. All existing tests continue to pass (zero regressions)
+**Plans:** 1 plan
+Plans:
+- [ ] 291-01-PLAN.md — Wire template system into mission assembly and pipeline, update tests for async
+
+### Phase 292: Pipeline Output Enrichment
+**Goal**: Pipeline result includes wave analysis (dependency graph, sequential savings, risk factors) and auto-rebalances budget violations, completing all VTM utility integrations
+**Depends on**: Phase 283, Phase 284, Phase 291
+**Requirements**: WAVE-04, WAVE-05, WAVE-06, MODL-05
+**Gap Closure**: Closes integration gaps from v1.30 audit (wave analysis + budget rebalance unwired)
+**Success Criteria** (what must be TRUE):
+  1. Pipeline result includes dependency graph from generateDependencyGraph in executionSummary or a new analysisReport field
+  2. Pipeline result includes sequential savings from computeSequentialSavings
+  3. Pipeline result includes risk factors from analyzeRiskFactors
+  4. Pipeline calls rebalanceAssignments when validateBudget returns valid=false, and the rebalanced assignments replace the originals in the result
+  5. All existing tests continue to pass (zero regressions)
+Plans: 0/0 plans
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 279 -> 280 -> 281 -> 282 -> 283 -> 284 -> 285 -> 286 -> 287 -> 288 -> 289 -> 290
+Phases execute in numeric order: 279 -> 280 -> 281 -> 282 -> 283 -> 284 -> 285 -> 286 -> 287 -> 288 -> 289 -> 290 -> 291 -> 292
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -259,7 +288,9 @@ Phases execute in numeric order: 279 -> 280 -> 281 -> 282 -> 283 -> 284 -> 285 -
 | 287. Template System | 2/2 | Complete    | 2026-02-22 |
 | 288. Mission Assembly Integration Wiring | 2/2 | Complete   | 2026-02-22 |
 | 289. Pipeline Orchestrator | 2/2 | Complete    | 2026-02-22 |
-| 290. Integration & Testing | 2/2 | Complete   | 2026-02-22 |
+| 290. Integration & Testing | 2/2 | Complete    | 2026-02-22 |
+| 291. Template System Pipeline Integration | 0/1 | Planned   | — |
+| 292. Pipeline Output Enrichment | 0/0 | Pending   | — |
 
 ---
 *32 milestones shipped. 278 phases, 740 plans. Full archive: `.planning/milestones/`*
