@@ -35,9 +35,9 @@ Requirements for Brainstorm Session Support milestone. Each maps to roadmap phas
 
 ### Technique Engine
 
-- [ ] **TECH-01**: Pluggable engine with `loadTechnique()`, `getConfig()`, `listByCategory()` interface
-- [ ] **TECH-02**: 4 individual techniques: freewriting (stream ≥3 ideas/min), mind mapping (parent-child tree), rapid ideation (≥10 in 60s), question brainstorming (≥15 questions)
-- [ ] **TECH-03**: 5 collaborative techniques: brainwriting 6-3-5 (6 rounds, parent_id chains, progressive building), round robin (rotation pattern), brain-netting (async prompts), rolestorming (perspective field), figure storming (constructive personas only)
+- [x] **TECH-01**: Pluggable engine with `loadTechnique()`, `getConfig()`, `listByCategory()` interface
+- [x] **TECH-02**: 4 individual techniques: freewriting (stream ≥3 ideas/min), mind mapping (parent-child tree), rapid ideation (≥10 in 60s), question brainstorming (≥15 questions)
+- [x] **TECH-03**: 5 collaborative techniques: brainwriting 6-3-5 (6 rounds, parent_id chains, progressive building), round robin (rotation pattern), brain-netting (async prompts), rolestorming (perspective field), figure storming (constructive personas only)
 - [x] **TECH-04**: 4 analytical techniques: SCAMPER (all 7 lenses, scamper_lens field), Six Thinking Hats (all 6 colors, hat_color field, synchronized mode), starbursting (6 W-categories), Five Whys (depth 5, chain links)
 - [x] **TECH-05**: 3 visual techniques: storyboarding (sequential cards), affinity mapping (clusters existing ideas, 2-8 clusters), lotus blossom (8 themes × 8 ideas = 64)
 - [x] **TECH-06**: Technique-specific generation context as required TechniqueConfig field — prevents fidelity erosion
@@ -63,10 +63,10 @@ Requirements for Brainstorm Session Support milestone. Each maps to roadmap phas
 
 ### Artifacts
 
-- [ ] **ARTIF-01**: Session transcript in Markdown with phase headers, technique labels, timestamps
-- [ ] **ARTIF-02**: Action plan with ownership, deadlines, priorities for top ideas
-- [ ] **ARTIF-03**: JSON export with complete session state
-- [ ] **ARTIF-04**: Cluster map generated during Organize phase
+- [x] **ARTIF-01**: Session transcript in Markdown with phase headers, technique labels, timestamps
+- [x] **ARTIF-02**: Action plan with ownership, deadlines, priorities for top ideas
+- [x] **ARTIF-03**: JSON export with complete session state
+- [x] **ARTIF-04**: Cluster map generated during Organize phase
 
 ### Integration
 
@@ -136,9 +136,9 @@ Deferred to future release. Tracked but not in current roadmap.
 | SESS-04 | Phase 307 | Pending |
 | SESS-05 | Phase 307 | Pending |
 | SESS-06 | Phase 307 | Pending |
-| TECH-01 | Phase 308 | Pending |
-| TECH-02 | Phase 308 | Pending |
-| TECH-03 | Phase 308 | Pending |
+| TECH-01 | Phase 308 | Complete |
+| TECH-02 | Phase 308 | Complete |
+| TECH-03 | Phase 308 | Complete |
 | TECH-04 | Phase 308 | Complete |
 | TECH-05 | Phase 308 | Complete |
 | TECH-06 | Phase 308 | Complete |
@@ -155,10 +155,10 @@ Deferred to future release. Tracked but not in current roadmap.
 | AGENT-06 | Phase 310 | Pending |
 | AGENT-07 | Phase 310 | Pending |
 | AGENT-08 | Phase 310 | Pending |
-| ARTIF-01 | Phase 308 | Pending |
-| ARTIF-02 | Phase 308 | Pending |
-| ARTIF-03 | Phase 308 | Pending |
-| ARTIF-04 | Phase 308 | Pending |
+| ARTIF-01 | Phase 308 | Complete |
+| ARTIF-02 | Phase 308 | Complete |
+| ARTIF-03 | Phase 308 | Complete |
+| ARTIF-04 | Phase 308 | Complete |
 | INTEG-01 | Phase 311 | Pending |
 | INTEG-02 | Phase 311 | Pending |
 | INTEG-03 | Phase 311 | Pending |

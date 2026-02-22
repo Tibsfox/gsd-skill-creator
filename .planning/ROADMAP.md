@@ -137,7 +137,7 @@ Plans:
 **Plans**: 6 plans
 Plans:
 - [ ] 308-01-PLAN.md — Technique Engine core + 4 individual techniques (TECH-01, TECH-02)
-- [ ] 308-02-PLAN.md — 5 collaborative techniques + Artifact Generator (TECH-03, ARTIF-01..04)
+- [x] 308-02-PLAN.md — 5 collaborative techniques + Artifact Generator (TECH-03, ARTIF-01..04)
 - [x] 308-03-PLAN.md — 4 analytical techniques with Black Hat phase constraint (TECH-04, TECH-06)
 - [ ] 308-04-PLAN.md — 3 visual techniques including Lotus Blossom 64-idea (TECH-05, TECH-07)
 - [ ] 308-05-PLAN.md — Pathway Router + 5 JSON configs + complete engine registry (PATH-01..04)
