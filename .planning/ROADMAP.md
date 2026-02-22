@@ -138,7 +138,7 @@ Plans:
 Plans:
 - [ ] 308-01-PLAN.md — Technique Engine core + 4 individual techniques (TECH-01, TECH-02)
 - [ ] 308-02-PLAN.md — 5 collaborative techniques + Artifact Generator (TECH-03, ARTIF-01..04)
-- [ ] 308-03-PLAN.md — 4 analytical techniques with Black Hat phase constraint (TECH-04, TECH-06)
+- [x] 308-03-PLAN.md — 4 analytical techniques with Black Hat phase constraint (TECH-04, TECH-06)
 - [ ] 308-04-PLAN.md — 3 visual techniques including Lotus Blossom 64-idea (TECH-05, TECH-07)
 - [ ] 308-05-PLAN.md — Pathway Router + 5 JSON configs + complete engine registry (PATH-01..04)
 - [ ] 308-06-PLAN.md — TDD: technique fidelity, pathway signal routing, artifact output (TECH-07, PATH-02..04)
@@ -185,7 +185,7 @@ Plans:
 | 305. Foundation Types & Bus | 3/3 | Complete    | 2026-02-22 | - |
 | 306. Rules Engine | 1/2 | In Progress|  | - |
 | 307. Session Manager & Phase Controller | v1.32 | 0/TBD | Not started | - |
-| 308. Technique Engine, Pathway Router & Artifact Generator | v1.32 | 0/6 | Not started | - |
+| 308. Technique Engine, Pathway Router & Artifact Generator | v1.32 | 1/6 | In Progress | - |
 | 309. Facilitator Agent | v1.32 | 0/TBD | Not started | - |
 | 310. Technique Agents | v1.32 | 0/TBD | Not started | - |
 | 311. Integration Wiring & System Tests | v1.32 | 0/TBD | Not started | - |
