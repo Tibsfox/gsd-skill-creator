@@ -54,3 +54,48 @@ export {
   type McpServerFactory,
   startGateway,
 } from './server.js';
+
+// Project tools
+export {
+  type GatewayToolsConfig,
+  type ProjectToolsConfig,
+  type ProjectSummary,
+  type ProjectDetails,
+  type CreateProjectResult,
+  type ExecutePhaseResult,
+  registerAllTools,
+  createGatewayServerFactory,
+  discoverProjects,
+  getProjectDetails,
+  createProject,
+  triggerPhaseExecution,
+} from './tools/index.js';
+
+// Chipset tools and state management
+export {
+  registerChipsetTools,
+  synthesizeChipset,
+  ChipsetStateManager,
+  createChipsetStateManager,
+  type ChipsetModifyResult,
+  type ChipsetUpdate,
+} from './tools/index.js';
+
+// Resource providers
+export {
+  registerResourceProviders,
+  type ProjectConfigData,
+  type SkillRegistryEntry,
+  type AgentTelemetryData,
+  type ProjectConfigProvider,
+  type SkillRegistryProvider,
+  type AgentTelemetryProvider,
+  type ChipsetStateProvider,
+  type ResourceProviders,
+} from './resources/index.js';
+
+// Gateway server factory
+export {
+  createGsdGatewayFactory,
+  type GatewayFactoryOptions,
+} from './create-gateway-server.js';
