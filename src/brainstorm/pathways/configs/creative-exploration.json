@@ -1,0 +1,16 @@
+{
+  "id": "creative-exploration",
+  "name": "Creative Exploration",
+  "description": "Open-ended discovery from scratch — no clear direction required",
+  "situation": "Starting from scratch with no clear direction or existing constraints",
+  "technique_sequence": [
+    { "technique": "freewriting", "duration_ms": 600000, "notes": "Warm up, get ideas flowing without editing" },
+    { "technique": "mind-mapping", "duration_ms": 900000, "notes": "Explore branches from best freewriting themes" },
+    { "technique": "rapid-ideation", "duration_ms": 60000, "notes": "Sprint on most promising branch" },
+    { "technique": "rapid-ideation", "duration_ms": 60000, "notes": "Sprint on second most promising branch" },
+    { "technique": "rapid-ideation", "duration_ms": 60000, "notes": "Sprint on third branch" },
+    { "technique": "affinity-mapping", "duration_ms": 900000, "notes": "Cluster all ideas into themes" }
+  ],
+  "required_agents": ["facilitator", "ideator", "mapper", "scribe"],
+  "recommended_for": ["open-ended exploration", "new product ideas", "creative projects", "starting from scratch", "no clear direction", "brainstorm", "imagine", "explore", "possibilities", "discover", "create", "new ideas", "starting fresh"]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "decision-making",
+  "name": "Decision-Making",
+  "description": "Complex decision requiring multiple perspectives",
+  "situation": "Complex decision where you need to consider multiple angles before choosing",
+  "technique_sequence": [
+    { "technique": "six-thinking-hats", "duration_ms": 2100000, "notes": "Full hat cycle — all perspectives on the decision" },
+    { "technique": "storyboarding", "duration_ms": 900000, "notes": "Visualize outcomes of top 2-3 options" }
+  ],
+  "required_agents": ["facilitator", "analyst", "ideator", "mapper", "critic", "scribe"],
+  "recommended_for": ["decide", "decision", "choose", "options", "compare", "which", "trade-off", "complex choice", "multiple perspectives"]
+}
