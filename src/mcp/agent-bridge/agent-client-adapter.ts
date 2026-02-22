@@ -12,6 +12,7 @@ import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import type { Tool } from '../../types/mcp.js';
 import type { AgentClientConfig, AgentToolResult } from './types.js';
+import type { StagingPipeline } from '../security/staging-pipeline.js';
 
 /** Default timeout for tool invocations (30 seconds). */
 const DEFAULT_TIMEOUT_MS = 30000;
@@ -27,11 +28,13 @@ const DEFAULT_TIMEOUT_MS = 30000;
  */
 export class AgentClientAdapter {
   private readonly config: AgentClientConfig;
+  private readonly stagingPipeline?: StagingPipeline;
   private client: Client | null = null;
   private connected = false;
 
-  constructor(config: AgentClientConfig) {
+  constructor(config: AgentClientConfig, stagingPipeline?: StagingPipeline) {
     this.config = config;
+    this.stagingPipeline = stagingPipeline;
   }
 
   /**
@@ -92,6 +95,29 @@ export class AgentClientAdapter {
     params: Record<string, unknown>,
   ): Promise<AgentToolResult> {
     this.assertConnected();
+
+    // Pass through staging pipeline if configured (SECR-13: agent-to-agent staging)
+    if (this.stagingPipeline) {
+      const stagingResult = await this.stagingPipeline.validateAndExecute({
+        caller: this.config.agentId,
+        serverId: this.config.targetServer,
+        toolName,
+        params,
+        source: 'agent-to-agent',
+      });
+
+      if (!stagingResult.allowed) {
+        return {
+          content: [{ type: 'text' as const, text: JSON.stringify({
+            code: -32000,
+            message: `Staging gate blocked: ${stagingResult.reason}`,
+            source: 'agent-to-agent',
+            auditEntryId: stagingResult.auditEntryId,
+          })}],
+          isError: true,
+        };
+      }
+    }
 
     const timeoutMs = this.config.timeoutMs ?? DEFAULT_TIMEOUT_MS;
 

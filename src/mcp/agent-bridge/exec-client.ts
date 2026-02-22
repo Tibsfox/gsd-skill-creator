@@ -10,6 +10,7 @@
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { AgentClientAdapter } from './agent-client-adapter.js';
 import type { AgentClientConfig, AgentToolResult } from './types.js';
+import type { StagingPipeline } from '../security/staging-pipeline.js';
 
 /** Default EXEC client configuration. */
 const EXEC_CLIENT_CONFIG: AgentClientConfig = {
@@ -26,8 +27,8 @@ const EXEC_CLIENT_CONFIG: AgentClientConfig = {
  * removing the need for callers to know tool names or parameter shapes.
  */
 export class ExecClient extends AgentClientAdapter {
-  constructor(config?: Partial<AgentClientConfig>) {
-    super({ ...EXEC_CLIENT_CONFIG, ...config });
+  constructor(config?: Partial<AgentClientConfig>, stagingPipeline?: StagingPipeline) {
+    super({ ...EXEC_CLIENT_CONFIG, ...config }, stagingPipeline);
   }
 
   /**
@@ -83,12 +84,14 @@ export class ExecClient extends AgentClientAdapter {
  * Create a pre-configured EXEC client.
  *
  * @param scoutServer - Optional SCOUT server to auto-connect to
+ * @param stagingPipeline - Optional StagingPipeline for agent-to-agent security (SECR-13)
  * @returns ExecClient instance (call connectToServer if server not provided)
  */
 export async function createExecClient(
   scoutServer?: McpServer,
+  stagingPipeline?: StagingPipeline,
 ): Promise<ExecClient> {
-  const client = new ExecClient();
+  const client = new ExecClient(undefined, stagingPipeline);
   if (scoutServer) {
     await client.connectToServer(scoutServer);
   }
