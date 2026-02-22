@@ -1,12 +1,15 @@
 /**
- * Tests for VTM template loader, renderer, and registry.
+ * Tests for VTM template loader, renderer, registry, and validator.
  *
- * Covers three subsystems:
+ * Covers four subsystems:
  * - loadTemplate(): reads .md files from disk with memory caching
  * - renderTemplate(): mustache-style {{placeholder}} substitution with
  *   {{#if}}...{{/if}} conditionals and {{#each}}...{{/each}} loops
  * - createTemplateRegistry(): factory returning a registry with listAll(),
  *   get(), getNames(), and register() for all 7 VTM templates
+ * - validateRenderedTemplate(): validates rendered output against Zod schemas
+ *   with structured diagnostics (errors for schema violations, warnings for
+ *   unresolved placeholders)
  */
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
@@ -17,8 +20,10 @@ import {
   loadTemplate,
   renderTemplate,
   createTemplateRegistry,
+  validateRenderedTemplate,
   VTM_TEMPLATE_NAMES,
 } from '../template-system.js';
+import type { TemplateDiagnostic, ValidationResult } from '../template-system.js';
 
 // ---------------------------------------------------------------------------
 // Temp directory for test templates
@@ -518,5 +523,353 @@ describe('VTM_TEMPLATE_NAMES', () => {
     expect(VTM_TEMPLATE_NAMES).toContain('readme');
     expect(VTM_TEMPLATE_NAMES).toContain('research-reference');
     expect(VTM_TEMPLATE_NAMES.length).toBe(7);
+  });
+});
+
+// ===========================================================================
+// validateRenderedTemplate
+// ===========================================================================
+
+describe('validateRenderedTemplate', () => {
+  // --- Helper: minimal valid VisionDocument data ---
+  const validVisionData = {
+    name: 'test-pack',
+    date: '2026-01-01',
+    status: 'initial-vision',
+    dependsOn: [],
+    context: 'Test context',
+    vision: 'Test vision',
+    problemStatement: [{ name: 'P1', description: 'Problem 1' }],
+    coreConcept: {
+      interactionModel: 'Test model',
+      description: 'Test description',
+    },
+    architecture: {
+      connections: [{ from: 'A', to: 'B', relationship: 'uses' }],
+    },
+    modules: [{ name: 'core', concepts: ['types'] }],
+    chipsetConfig: {
+      name: 'test-chip',
+      version: '1.0.0',
+      description: 'Test chipset',
+      skills: { 'skill-a': { domain: 'test', description: 'Test skill' } },
+      agents: {
+        topology: 'pipeline',
+        agents: [{ name: 'agent-a', role: 'builder' }],
+      },
+      evaluation: {
+        gates: {
+          preDeploy: [{ check: 'test_coverage', action: 'block' }],
+        },
+      },
+    },
+    successCriteria: ['All tests pass'],
+    throughLine: 'Test alignment',
+  };
+
+  it('validates a fully-populated VisionDocument and returns valid: true', () => {
+    const result = validateRenderedTemplate(
+      'vision',
+      '# Rendered vision document content',
+      validVisionData,
+    );
+    expect(result.valid).toBe(true);
+    expect(result.errors).toEqual([]);
+    expect(result.warnings).toEqual([]);
+  });
+
+  it('reports missing required fields as errors with severity error', () => {
+    const incomplete = { ...validVisionData, name: undefined };
+    // Remove the name field entirely
+    delete (incomplete as Record<string, unknown>).name;
+
+    const result = validateRenderedTemplate(
+      'vision',
+      '# Vision doc',
+      incomplete,
+    );
+    expect(result.valid).toBe(false);
+    expect(result.errors.length).toBeGreaterThanOrEqual(1);
+
+    const nameError = result.errors.find((e) => e.section === 'name');
+    expect(nameError).toBeDefined();
+    expect(nameError!.severity).toBe('error');
+  });
+
+  it('reports multiple missing required fields collecting ALL errors', () => {
+    const incomplete: Record<string, unknown> = { ...validVisionData };
+    delete incomplete.name;
+    delete incomplete.date;
+    delete incomplete.vision;
+
+    const result = validateRenderedTemplate(
+      'vision',
+      '# Vision doc',
+      incomplete,
+    );
+    expect(result.valid).toBe(false);
+    // Should have at least 3 errors (one for each deleted field)
+    expect(result.errors.length).toBeGreaterThanOrEqual(3);
+
+    const sections = result.errors.map((e) => e.section);
+    expect(sections).toContain('name');
+    expect(sections).toContain('date');
+    expect(sections).toContain('vision');
+  });
+
+  it('reports invalid field values (e.g., invalid enum) as errors', () => {
+    const invalid = { ...validVisionData, status: 'invalid-status-value' };
+    const result = validateRenderedTemplate(
+      'vision',
+      '# Vision doc',
+      invalid,
+    );
+    expect(result.valid).toBe(false);
+    expect(result.errors.length).toBeGreaterThanOrEqual(1);
+
+    const statusError = result.errors.find((e) => e.section === 'status');
+    expect(statusError).toBeDefined();
+    expect(statusError!.severity).toBe('error');
+  });
+
+  it('reports unresolved {{placeholder}} tokens as warnings', () => {
+    const result = validateRenderedTemplate(
+      'vision',
+      '# {{title}}\n\nContent with {{unresolved}} placeholders',
+      validVisionData,
+    );
+    expect(result.warnings.length).toBeGreaterThanOrEqual(2);
+
+    const titleWarning = result.warnings.find((w) => w.section === 'title');
+    expect(titleWarning).toBeDefined();
+    expect(titleWarning!.severity).toBe('warning');
+    expect(titleWarning!.message).toContain('{{title}}');
+  });
+
+  it('reports one warning per unique placeholder, not per occurrence', () => {
+    const result = validateRenderedTemplate(
+      'vision',
+      '{{foo}} and {{foo}} and {{bar}}',
+      validVisionData,
+    );
+    const fooWarnings = result.warnings.filter((w) => w.section === 'foo');
+    expect(fooWarnings.length).toBe(1);
+
+    const barWarnings = result.warnings.filter((w) => w.section === 'bar');
+    expect(barWarnings.length).toBe(1);
+  });
+
+  it('reports both schema errors AND unresolved placeholders together', () => {
+    const incomplete: Record<string, unknown> = { ...validVisionData };
+    delete incomplete.name;
+
+    const result = validateRenderedTemplate(
+      'vision',
+      '# {{unresolved}} content',
+      incomplete,
+    );
+    expect(result.valid).toBe(false);
+    expect(result.errors.length).toBeGreaterThanOrEqual(1); // schema error
+    expect(result.warnings.length).toBeGreaterThanOrEqual(1); // placeholder warning
+  });
+
+  it('returns valid: true when no errors exist even if warnings present', () => {
+    const result = validateRenderedTemplate(
+      'vision',
+      '# {{placeholder}} in content',
+      validVisionData,
+    );
+    // No schema errors since data is valid, but has placeholder warnings
+    expect(result.valid).toBe(true);
+    expect(result.errors).toEqual([]);
+    expect(result.warnings.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('validates ComponentSpec against ComponentSpecSchema', () => {
+    const validComponentSpec = {
+      name: 'test-component',
+      milestone: 'v1',
+      wave: 'Wave 1, Track A',
+      modelAssignment: 'sonnet',
+      estimatedTokens: 5000,
+      dependencies: [],
+      produces: ['output.ts'],
+      objective: 'Build test component',
+      context: 'Self-contained context',
+      technicalSpec: [{ name: 'API', spec: 'REST interface' }],
+      implementationSteps: [{ name: 'Step 1', description: 'Do thing' }],
+      testCases: [{ name: 'Test 1', input: 'x', expected: 'y' }],
+      verificationGate: {
+        conditions: ['All tests pass'],
+        handoff: 'Ready for review',
+      },
+    };
+
+    const result = validateRenderedTemplate(
+      'component-spec',
+      '# Component spec',
+      validComponentSpec,
+    );
+    expect(result.valid).toBe(true);
+    expect(result.errors).toEqual([]);
+  });
+
+  it('validates TestPlan against TestPlanSchema', () => {
+    const validTestPlan = {
+      milestoneName: 'v1',
+      milestoneSpec: 'v1-spec.md',
+      visionDocument: 'vision.md',
+      totalTests: 5,
+      safetyCriticalCount: 1,
+      targetCoverage: 80,
+      categories: [
+        { name: 'safety-critical', count: 1, priority: 'mandatory-pass', failureAction: 'block' },
+      ],
+      tests: [
+        { id: 'S-001', category: 'safety-critical', verifies: 'Safety check', expectedBehavior: 'Blocks unsafe input' },
+      ],
+      verificationMatrix: [
+        { criterion: 'Safety', testIds: ['S-001'] },
+      ],
+    };
+
+    const result = validateRenderedTemplate(
+      'test-plan',
+      '# Test plan',
+      validTestPlan,
+    );
+    expect(result.valid).toBe(true);
+    expect(result.errors).toEqual([]);
+  });
+
+  it('validates WaveExecutionPlan against WaveExecutionPlanSchema', () => {
+    const validWavePlan = {
+      milestoneName: 'v1',
+      milestoneSpec: 'v1-spec.md',
+      totalTasks: 3,
+      parallelTracks: 2,
+      sequentialDepth: 1,
+      estimatedWallTime: '2 hours',
+      criticalPath: 'A -> B -> C',
+      waveSummary: [
+        { wave: 1, tasks: 3, parallelTracks: 2, estimatedTime: '1h', cacheDependencies: 'none' },
+      ],
+      waves: [
+        {
+          number: 1,
+          name: 'Foundation',
+          purpose: 'Build core',
+          isSequential: false,
+          tracks: [
+            {
+              name: 'Track A',
+              tasks: [
+                { id: 'task-a', description: 'Build A', produces: 'a.ts', model: 'sonnet', estimatedTokens: 1000, dependsOn: [] },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    const result = validateRenderedTemplate(
+      'wave-plan',
+      '# Wave plan',
+      validWavePlan,
+    );
+    expect(result.valid).toBe(true);
+    expect(result.errors).toEqual([]);
+  });
+
+  it('returns error diagnostic for unknown template name', () => {
+    const result = validateRenderedTemplate(
+      'nonexistent-template',
+      '# Some content',
+      {},
+    );
+    expect(result.valid).toBe(false);
+    expect(result.errors.length).toBe(1);
+    expect(result.errors[0].section).toBe('templateName');
+    expect(result.errors[0].severity).toBe('error');
+    expect(result.errors[0].message).toContain('nonexistent-template');
+  });
+
+  it('each diagnostic has section field pointing to the Zod path', () => {
+    // Invalid chipsetConfig.agents (empty agents array violates .min(1))
+    const invalid = {
+      ...validVisionData,
+      chipsetConfig: {
+        ...validVisionData.chipsetConfig,
+        agents: {
+          topology: 'pipeline',
+          agents: [], // violates .min(1)
+        },
+      },
+    };
+
+    const result = validateRenderedTemplate(
+      'vision',
+      '# Vision doc',
+      invalid,
+    );
+    expect(result.valid).toBe(false);
+
+    // Should have a deep path like "chipsetConfig.agents.agents"
+    const deepError = result.errors.find((e) =>
+      e.section.startsWith('chipsetConfig.agents'),
+    );
+    expect(deepError).toBeDefined();
+    expect(deepError!.severity).toBe('error');
+  });
+
+  it('computes line number for unresolved placeholder in rendered content', () => {
+    const content = [
+      'Line 1: resolved',
+      'Line 2: also resolved',
+      'Line 3: {{unresolvedHere}}',
+      'Line 4: done',
+    ].join('\n');
+
+    const result = validateRenderedTemplate('vision', content, validVisionData);
+    const warning = result.warnings.find((w) => w.section === 'unresolvedHere');
+    expect(warning).toBeDefined();
+    expect(warning!.line).toBe(3);
+  });
+
+  it('detects unresolved block tokens as warnings', () => {
+    const content = '# Title\n{{#if condition}}block content{{/if}}\n{{#each items}}item{{/each}}\n{{else}}';
+    const result = validateRenderedTemplate('vision', content, validVisionData);
+
+    // Should detect unresolved block tokens
+    expect(result.warnings.length).toBeGreaterThanOrEqual(1);
+    const blockWarnings = result.warnings.filter(
+      (w) => w.message.includes('Unresolved block token'),
+    );
+    expect(blockWarnings.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('handles readme template (no schema) gracefully', () => {
+    const result = validateRenderedTemplate(
+      'readme',
+      '# README content',
+      {},
+    );
+    // readme has no structured schema -- should succeed (no schema to validate against)
+    expect(result.valid).toBe(true);
+    expect(result.errors).toEqual([]);
+  });
+});
+
+// ===========================================================================
+// Barrel export
+// ===========================================================================
+
+describe('barrel export', () => {
+  it('exports loadTemplate, renderTemplate, createTemplateRegistry, validateRenderedTemplate from index', async () => {
+    const barrel = await import('../index.js');
+    expect(typeof barrel.loadTemplate).toBe('function');
+    expect(typeof barrel.renderTemplate).toBe('function');
+    expect(typeof barrel.createTemplateRegistry).toBe('function');
+    expect(typeof barrel.validateRenderedTemplate).toBe('function');
   });
 });
