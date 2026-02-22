@@ -18,3 +18,14 @@ export {
   type RateLimiterConfig,
   type RateLimitResult,
 } from './rate-limiter.js';
+export {
+  AuditLogger,
+  type AuditEntry,
+  type AuditLoggerConfig,
+} from './audit-logger.js';
+export {
+  StagingPipeline,
+  type StagingPipelineConfig,
+  type StagingResult,
+  type StagingRequest,
+} from './staging-pipeline.js';
