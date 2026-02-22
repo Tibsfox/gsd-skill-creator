@@ -35,7 +35,7 @@
 - [x] Phase 281: Research Reference Compilation (2/2 plans) — completed 2026-02-21
 - [x] Phase 282: Mission Package Assembly (2/2 plans) — completed 2026-02-21
 - [x] Phase 283: Wave Planning (2/2 plans) — completed 2026-02-21
-- [x] Phase 284: Model Assignment (2/2 plans) — completed 2026-02-22
+- [x] Phase 284: Model Assignment (2/2 plans) — completed 2026-02-21
 - [x] Phase 285: Cache Optimization (2/2 plans) — completed 2026-02-22
 - [x] Phase 286: Test Plan Generation (2/2 plans) — completed 2026-02-22
 - [x] Phase 287: Template System (2/2 plans) — completed 2026-02-22
@@ -189,7 +189,12 @@ Plans:
   3. End-to-end session flow completes for Creative Exploration, Problem-Solving, and Free-Form pathways -- from problem statement input through all 5 phases to artifact export
   4. All 18 safety-critical tests (SC-01 through SC-18) pass, including Critic gate enforcement, evaluative content blocking during Diverge, and Black Hat phase constraint
   5. Chipset YAML defines activation profiles (solo_quick, guided_exploration, full_workshop, analysis_sprint) and skill-creator observation hooks are registered for `.brainstorm/sessions/*/`
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+- [ ] 311-01-PLAN.md — SessionBus implementation (4-loop filesystem router) + bus load test (INTEG-01, INTEG-02)
+- [ ] 311-02-PLAN.md — Barrel export (index.ts) + chipset YAML with activation profiles and skill-creator hooks (INTEG-05, INTEG-06)
+- [ ] 311-03-PLAN.md — End-to-end pathway tests: Creative Exploration, Problem-Solving, Free-Form (INTEG-03)
+- [ ] 311-04-PLAN.md — Safety-critical tests SC-01 through SC-18 (INTEG-04)
 
 ## Progress
 
@@ -200,8 +205,8 @@ Plans:
 | 307. Session Manager & Phase Controller | 3/3 | Complete    | 2026-02-22 | - |
 | 308. Technique Engine, Pathway Router & Artifact Generator | 6/6 | Complete    | 2026-02-22 | - |
 | 309. Facilitator Agent | 2/2 | Complete    | 2026-02-22 | - |
-| 310. Technique Agents | 5/5 | Complete   | 2026-02-22 | - |
-| 311. Integration Wiring & System Tests | v1.32 | 0/TBD | Not started | - |
+| 310. Technique Agents | 5/5 | Complete    | 2026-02-22 | - |
+| 311. Integration Wiring & System Tests | v1.32 | 0/4 | Not started | - |
 
 See `.planning/milestones/v1.31-ROADMAP.md` for v1.31 phase details.
 
