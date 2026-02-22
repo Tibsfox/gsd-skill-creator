@@ -28,7 +28,7 @@
  * @module vtm/pipeline
  */
 
-import type { VisionDocument, ResearchReference, MissionPackage } from './types.js';
+import type { VisionDocument, ResearchReference, MissionPackage, ComponentSpec } from './types.js';
 import type { VisionDiagnostic, Archetype } from './vision-validator.js';
 import { validateVisionDocument, checkQuality, classifyArchetype } from './vision-validator.js';
 import type { KnowledgeTiers, SafetySection } from './research-utils.js';
@@ -41,8 +41,9 @@ import { validateSelfContainment, generateReadme, renderMissionDocuments } from 
 import type { SelfContainmentDiagnostic, RenderedDocument } from './mission-assembly.js';
 import { generateCacheReport } from './cache-optimizer.js';
 import type { CacheReport } from './cache-optimizer.js';
-import { validateBudget } from './model-budget.js';
-import type { BudgetValidationResult, BudgetTask } from './model-budget.js';
+import { validateBudget, rebalanceAssignments } from './model-budget.js';
+import type { BudgetValidationResult, BudgetTask, RebalanceResult, RebalanceChange } from './model-budget.js';
+import { generateDependencyGraph, computeSequentialSavings, analyzeRiskFactors } from './wave-analysis.js';
 
 // Re-export PipelineSpeed from research-utils for downstream consumers
 export type { PipelineSpeed } from './research-utils.js';
@@ -144,6 +145,63 @@ export interface MissionStageResult {
 }
 
 // ---------------------------------------------------------------------------
+// EnrichmentError
+// ---------------------------------------------------------------------------
+
+/**
+ * Describes a single enrichment failure.
+ *
+ * When an analysis utility (dependency graph, sequential savings, risk factors)
+ * or the budget rebalancer throws, the pipeline records the failure here
+ * instead of aborting.
+ */
+export interface EnrichmentError {
+  /** Which analysisReport field failed (e.g. 'dependencyGraph', 'rebalance'). */
+  field: string;
+  /** Human-readable error message. */
+  error: string;
+}
+
+// ---------------------------------------------------------------------------
+// AnalysisReport
+// ---------------------------------------------------------------------------
+
+/**
+ * Rich analysis report produced by the pipeline enrichment step.
+ *
+ * Contains dependency graph visualization, sequential savings metrics,
+ * risk factor analysis, and budget summary with optional rebalance trace.
+ * Individual fields are nullable -- a null value means the corresponding
+ * utility threw an error (see `errors` array for details).
+ */
+export interface AnalysisReport {
+  /** ASCII dependency graph from generateDependencyGraph(). */
+  dependencyGraph: {
+    ascii: string;
+  } | null;
+  /** Wall-time savings from parallel execution. */
+  sequentialSavings: {
+    sequentialTime: string;
+    parallelTime: string;
+    savedTime: string;
+    speedupFactor: number;
+  } | null;
+  /** Execution risk factors identified by analyzeRiskFactors(). */
+  riskFactors: Array<{ risk: string; impact: string; mitigation: string }> | null;
+  /** Budget validation summary with optional rebalance trace. */
+  budgetSummary: {
+    valid: boolean;
+    violations: BudgetValidationResult['violations'];
+    allocation: BudgetValidationResult['allocation'];
+    rebalanced: boolean;
+    rebalanceChanges: RebalanceChange[];
+    rebalanceWarning?: string;
+  } | null;
+  /** Errors from enrichment utilities that failed (empty when all succeed). */
+  errors: EnrichmentError[];
+}
+
+// ---------------------------------------------------------------------------
 // PipelineError
 // ---------------------------------------------------------------------------
 
@@ -207,6 +265,8 @@ export interface PipelineResult {
     totalTests: number;
     safetyCriticalTests: number;
   };
+  /** Rich analysis report with dependency graph, savings, risks, and budget. */
+  analysisReport?: AnalysisReport;
   /** Total pipeline execution time in milliseconds. */
   durationMs: number;
 }
@@ -358,6 +418,103 @@ function mapExecutionSummary(execSummary: MissionPackage['executionSummary']): P
     estimatedWallTime: execSummary.estimatedWallTime,
     totalTests: execSummary.totalTests,
     safetyCriticalTests: execSummary.safetyCriticalTests,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// enrichPipelineResult (internal)
+// ---------------------------------------------------------------------------
+
+/**
+ * Run enrichment analysis and optional budget rebalancing.
+ *
+ * Three analysis utilities run independently -- each is wrapped in its own
+ * try/catch so a failure in one does not affect the others. The rebalancer
+ * runs only when `budgetValidation.valid` is false.
+ *
+ * @returns The assembled AnalysisReport and optional RebalanceResult
+ */
+function enrichPipelineResult(
+  missionPackage: MissionPackage,
+  componentSpecs: ComponentSpec[],
+  budgetValidation: BudgetValidationResult,
+  budgetTasks: BudgetTask[],
+): { analysisReport: AnalysisReport; rebalanceResult: RebalanceResult | null } {
+  const errors: EnrichmentError[] = [];
+
+  // --- Analysis utilities (independent, failure-isolated) ---
+
+  let dependencyGraph: AnalysisReport['dependencyGraph'] = null;
+  try {
+    const ascii = generateDependencyGraph(missionPackage.waveExecutionPlan);
+    dependencyGraph = { ascii };
+  } catch (e) {
+    errors.push({
+      field: 'dependencyGraph',
+      error: e instanceof Error ? e.message : String(e),
+    });
+  }
+
+  let sequentialSavings: AnalysisReport['sequentialSavings'] = null;
+  try {
+    sequentialSavings = computeSequentialSavings(missionPackage.waveExecutionPlan);
+  } catch (e) {
+    errors.push({
+      field: 'sequentialSavings',
+      error: e instanceof Error ? e.message : String(e),
+    });
+  }
+
+  let riskFactors: AnalysisReport['riskFactors'] = null;
+  try {
+    riskFactors = analyzeRiskFactors(missionPackage.waveExecutionPlan, componentSpecs);
+  } catch (e) {
+    errors.push({
+      field: 'riskFactors',
+      error: e instanceof Error ? e.message : String(e),
+    });
+  }
+
+  // --- Budget summary ---
+
+  let budgetSummary: AnalysisReport['budgetSummary'] = {
+    valid: budgetValidation.valid,
+    violations: budgetValidation.violations,
+    allocation: budgetValidation.allocation,
+    rebalanced: false,
+    rebalanceChanges: [],
+  };
+
+  // --- Conditional rebalancing ---
+
+  let rebalanceResult: RebalanceResult | null = null;
+
+  if (!budgetValidation.valid) {
+    try {
+      rebalanceResult = rebalanceAssignments(budgetTasks);
+      budgetSummary = {
+        ...budgetSummary,
+        rebalanced: true,
+        rebalanceChanges: rebalanceResult.changes,
+        rebalanceWarning: rebalanceResult.warning,
+      };
+    } catch (e) {
+      errors.push({
+        field: 'rebalance',
+        error: e instanceof Error ? e.message : String(e),
+      });
+    }
+  }
+
+  return {
+    analysisReport: {
+      dependencyGraph,
+      sequentialSavings,
+      riskFactors,
+      budgetSummary,
+      errors,
+    },
+    rebalanceResult,
   };
 }
 
@@ -515,8 +672,8 @@ export async function runPipeline(
 
   // ---- Stage 3: Mission ----
   let missionStage: MissionStageResult;
-
   let readmeContent: string;
+  let enrichmentResult: { analysisReport: AnalysisReport; rebalanceResult: RebalanceResult | null } | undefined;
 
   try {
     // Assemble mission package
@@ -550,6 +707,16 @@ export async function runPipeline(
       estimatedTokens: spec.estimatedTokens,
     }));
     const budgetValidation = validateBudget(budgetTasks);
+
+    // Enrichment (analysis + optional rebalance) -- skipped in mission-only mode
+    if (speed !== 'mission-only') {
+      enrichmentResult = enrichPipelineResult(
+        missionPackage,
+        missionPackage.componentSpecs,
+        budgetValidation,
+        budgetTasks,
+      );
+    }
 
     // Template rendering (additive layer -- failures do not fail the pipeline)
     let renderedDocuments: RenderedDocument[] = [];
@@ -590,6 +757,37 @@ export async function runPipeline(
   const durationMs = Date.now() - startTime;
   const missionPackage = missionStage.missionPackage;
 
+  // Compute execution summary -- if rebalancing happened, override modelSplit
+  const executionSummary = mapExecutionSummary(missionPackage.executionSummary);
+
+  if (enrichmentResult?.rebalanceResult) {
+    // Recompute modelSplit from the rebalanced task array
+    const rebalancedTasks = enrichmentResult.rebalanceResult.tasks;
+    const totalTokens = rebalancedTasks.reduce((sum, t) => sum + t.estimatedTokens, 0);
+    const counts = { opus: 0, sonnet: 0, haiku: 0 };
+    const tokens = { opus: 0, sonnet: 0, haiku: 0 };
+    for (const task of rebalancedTasks) {
+      counts[task.model]++;
+      tokens[task.model] += task.estimatedTokens;
+    }
+    if (totalTokens > 0) {
+      executionSummary.modelSplit = {
+        opus: {
+          count: counts.opus,
+          percentage: Math.round((tokens.opus / totalTokens) * 1000) / 10,
+        },
+        sonnet: {
+          count: counts.sonnet,
+          percentage: Math.round((tokens.sonnet / totalTokens) * 1000) / 10,
+        },
+        haiku: {
+          count: counts.haiku,
+          percentage: Math.round((tokens.haiku / totalTokens) * 1000) / 10,
+        },
+      };
+    }
+  }
+
   return {
     success: true,
     speed,
@@ -599,7 +797,8 @@ export async function runPipeline(
       mission: missionStage,
     },
     fileManifest: buildFileManifest(missionPackage, Math.ceil(readmeContent.length / 4)),
-    executionSummary: mapExecutionSummary(missionPackage.executionSummary),
+    executionSummary,
+    analysisReport: enrichmentResult?.analysisReport,
     durationMs,
   };
 }
