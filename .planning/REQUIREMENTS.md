@@ -181,16 +181,16 @@ Requirements for v1.30. Each maps to roadmap phases.
 | TMPL-02 | Phase 287 | Complete |
 | TMPL-03 | Phase 287 | Complete |
 | TMPL-04 | Phase 287 | Complete |
-| PIPE-01 | Phase 288 | Pending |
-| PIPE-02 | Phase 288 | Pending |
-| PIPE-03 | Phase 288 | Pending |
-| PIPE-04 | Phase 288 | Pending |
-| PIPE-05 | Phase 288 | Pending |
-| INTG-01 | Phase 289 | Pending |
-| INTG-02 | Phase 289 | Pending |
-| INTG-03 | Phase 289 | Pending |
-| INTG-04 | Phase 289 | Pending |
-| INTG-05 | Phase 289 | Pending |
+| PIPE-01 | Phase 289 | Pending |
+| PIPE-02 | Phase 289 | Pending |
+| PIPE-03 | Phase 289 | Pending |
+| PIPE-04 | Phase 289 | Pending |
+| PIPE-05 | Phase 289 | Pending |
+| INTG-01 | Phase 290 | Pending |
+| INTG-02 | Phase 290 | Pending |
+| INTG-03 | Phase 290 | Pending |
+| INTG-04 | Phase 290 | Pending |
+| INTG-05 | Phase 290 | Pending |
 
 **Coverage:**
 - v1 requirements: 58 total

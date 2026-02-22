@@ -22,7 +22,7 @@
 - ✅ **v1.27** — Foundational Knowledge Packs (Phases 243-254, shipped 2026-02-20)
 - ✅ **v1.28** — GSD Den Operations (Phases 255-261, shipped 2026-02-21)
 - ✅ **v1.29** — Electronics Educational Pack (Phases 262-278, shipped 2026-02-21)
-- [ ] **v1.30** — Vision-to-Mission Pipeline (Phases 279-289, in progress)
+- [ ] **v1.30** — Vision-to-Mission Pipeline (Phases 279-290, in progress)
 
 ## Phases
 
@@ -49,7 +49,7 @@
 
 </details>
 
-### v1.30 — Vision-to-Mission Pipeline (Phases 279-289)
+### v1.30 — Vision-to-Mission Pipeline (Phases 279-290)
 
 **Milestone Goal:** Implement the vision-to-mission transformation pipeline as TypeScript modules — turning the prompt-based Claude Code skill into a proper code implementation with Zod-validated types, document parsers, wave planner, model assignment engine, cache optimizer, test plan generator, template system, and end-to-end pipeline orchestrator.
 
@@ -62,8 +62,9 @@
 - [x] **Phase 285: Cache Optimization** - Cache optimizer, TTL validator, token savings estimator (2 plans) (completed 2026-02-22)
 - [x] **Phase 286: Test Plan Generation** - Test plan generator, verification matrix, safety classification (completed 2026-02-22)
 - [x] **Phase 287: Template System** - Template loader, renderer, validator, registry (2 plans) (completed 2026-02-22)
-- [ ] **Phase 288: Pipeline Orchestrator** - End-to-end three-stage pipeline management
-- [ ] **Phase 289: Integration & Testing** - Barrel exports, chipset, eval harness, integration tests
+- [ ] **Phase 288: Mission Assembly Integration Wiring** - Wire Phases 283/284/286 into mission-assembly, replace placeholders (Gap Closure)
+- [ ] **Phase 289: Pipeline Orchestrator** - End-to-end three-stage pipeline management
+- [ ] **Phase 290: Integration & Testing** - Barrel exports, chipset, eval harness, integration tests
 
 ## Phase Details
 
@@ -196,9 +197,21 @@ Plans:
 - [ ] 287-01-PLAN.md — Template loader, mustache-style renderer with conditionals/loops, and singleton registry (TDD)
 - [ ] 287-02-PLAN.md — Template validator against Zod schemas with structured diagnostics and barrel export (TDD)
 
-### Phase 288: Pipeline Orchestrator
+### Phase 288: Mission Assembly Integration Wiring
+**Goal**: Mission assembly produces real output by using actual implementations from Phases 283, 284, and 286 instead of placeholder functions
+**Depends on**: Phase 283, Phase 284, Phase 286, Phase 287
+**Gap Closure**: Closes integration gaps from v1.30 audit (Phase 283→282, Phase 284→282, Phase 286→282 wiring + tech debt)
+**Success Criteria** (what must be TRUE):
+  1. assembleMissionPackage calls planWaves() from Phase 283 instead of buildPlaceholderWavePlan
+  2. assembleMissionPackage calls generateTestPlan() from Phase 286 instead of buildPlaceholderTestPlan
+  3. Component spec generation uses Phase 284's signal-based assignModel instead of primitive 3-rule heuristic
+  4. Dead imports in mission-assembly.ts are cleaned up
+  5. Existing tests updated and passing with real implementations
+**Plans**: TBD
+
+### Phase 289: Pipeline Orchestrator
 **Goal**: Users can run the complete vision-to-mission transformation as a single pipeline call with configurable stage skipping, typed intermediate artifacts, and structured error reporting
-**Depends on**: Phase 280, Phase 281, Phase 282, Phase 283, Phase 284, Phase 285, Phase 286, Phase 287
+**Depends on**: Phase 280, Phase 281, Phase 282, Phase 283, Phase 284, Phase 285, Phase 286, Phase 287, Phase 288
 **Requirements**: PIPE-01, PIPE-02, PIPE-03, PIPE-04, PIPE-05
 **Success Criteria** (what must be TRUE):
   1. Pipeline orchestrator manages the three-stage flow (vision, research, mission) with configurable stage skipping
@@ -207,9 +220,9 @@ Plans:
   4. When a stage fails, error report identifies which stage failed, what was produced before failure, and whether partial output is usable
 **Plans**: TBD
 
-### Phase 289: Integration & Testing
+### Phase 290: Integration & Testing
 **Goal**: The VTM module is fully integrated into the skill-creator ecosystem with barrel exports, chipset YAML, functional API pattern, eval harness, and cross-component integration tests
-**Depends on**: Phase 288
+**Depends on**: Phase 289
 **Requirements**: INTG-01, INTG-02, INTG-03, INTG-04, INTG-05
 **Success Criteria** (what must be TRUE):
   1. Barrel exports from src/vtm/index.ts expose the complete public API for all VTM components
@@ -222,7 +235,7 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 279 -> 280 -> 281 -> 282 -> 283 -> 284 -> 285 -> 286 -> 287 -> 288 -> 289
+Phases execute in numeric order: 279 -> 280 -> 281 -> 282 -> 283 -> 284 -> 285 -> 286 -> 287 -> 288 -> 289 -> 290
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -234,9 +247,10 @@ Phases execute in numeric order: 279 -> 280 -> 281 -> 282 -> 283 -> 284 -> 285 -
 | 284. Model Assignment | 2/2 | Complete    | 2026-02-22 |
 | 285. Cache Optimization | 2/2 | Complete    | 2026-02-22 |
 | 286. Test Plan Generation | 2/2 | Complete    | 2026-02-22 |
-| 287. Template System | 2/2 | Complete   | 2026-02-22 |
-| 288. Pipeline Orchestrator | 0/TBD | Not started | - |
-| 289. Integration & Testing | 0/TBD | Not started | - |
+| 287. Template System | 2/2 | Complete    | 2026-02-22 |
+| 288. Mission Assembly Integration Wiring | 0/TBD | Not started | - |
+| 289. Pipeline Orchestrator | 0/TBD | Not started | - |
+| 290. Integration & Testing | 0/TBD | Not started | - |
 
 ---
 *32 milestones shipped. 278 phases, 740 plans. Full archive: `.planning/milestones/`*
