@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Phase 290 complete — Integration Testing (milestone complete)
+**Current focus:** Phase 291 complete — template system wired into pipeline. Next: phase 292 pipeline enrichment
 
 ## Current Position
 
-Phase: 290 of 290 (Integration Testing) — 12 of 12 in milestone
-Plan: 2 of 2 in current phase
-Status: 290-02 complete (phase complete, milestone complete)
-Last activity: 2026-02-22 — 290-02 complete (eval harness + integration tests)
+Phase: 291 of 292 (Template System Pipeline Integration) — 13 of 14 in milestone
+Plan: 1 of 1 in current phase (complete)
+Status: Phase 291 complete
+Last activity: 2026-02-22 — executed 291-01 template pipeline integration
 
-Progress: [############] 100% (12/12 phases)
+Progress: [#############░] 93% (13/14 phases)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 24
+- Total plans completed: 25
 - Average duration: 4min
-- Total execution time: 88min
+- Total execution time: 93min
 
 **By Phase:**
 
@@ -39,6 +39,7 @@ Progress: [############] 100% (12/12 phases)
 | 288 Mission Assembly Integration | 2 | 8min | 4min |
 | 289 Pipeline Orchestrator | 2 | 7min | 3.5min |
 | 290 Integration Testing | 2 | 10min | 5min |
+| 291 Template Pipeline Integration | 1 | 5min | 5min |
 
 ## Accumulated Context
 
@@ -132,6 +133,9 @@ Progress: [############] 100% (12/12 phases)
 - 2026-02-22: Domain-themed fixtures per eval scenario matching evals.json prompt themes
 - 2026-02-22: MissionPackageSchema.safeParse() for Zod schema validation in integration tests
 - 2026-02-22: Reference identity check (===) confirms mission-only VisionDocument passthrough
+- 2026-02-22: Template rendering wrapped in try/catch inside pipeline -- failures produce empty renderedDocuments, never fail pipeline
+- 2026-02-22: runPipeline and VTMPipeline.run() made async to support template system disk I/O
+- 2026-02-22: renderedDocuments is optional on MissionStageResult for backward compatibility
 
 ### Key Constraints
 
@@ -147,5 +151,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 290-02-PLAN.md (v1.30 milestone complete)
+Stopped at: Completed 291-01-PLAN.md (template system pipeline integration). Next: plan/execute phase 292.
 Resume file: None

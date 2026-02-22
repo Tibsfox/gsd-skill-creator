@@ -159,14 +159,14 @@ Requirements for v1.30. Each maps to roadmap phases.
 | WAVE-01 | Phase 283 | Complete |
 | WAVE-02 | Phase 283 | Complete |
 | WAVE-03 | Phase 283 | Complete |
-| WAVE-04 | Phase 283 | Complete |
-| WAVE-05 | Phase 283 | Complete |
-| WAVE-06 | Phase 283 | Complete |
+| WAVE-04 | Phase 283 → 292 | Integration Pending |
+| WAVE-05 | Phase 283 → 292 | Integration Pending |
+| WAVE-06 | Phase 283 → 292 | Integration Pending |
 | MODL-01 | Phase 284 | Complete |
 | MODL-02 | Phase 284 | Complete |
 | MODL-03 | Phase 284 | Complete |
 | MODL-04 | Phase 284 | Complete |
-| MODL-05 | Phase 284 | Complete |
+| MODL-05 | Phase 284 → 292 | Integration Pending |
 | CACH-01 | Phase 285 | Complete |
 | CACH-02 | Phase 285 | Complete |
 | CACH-03 | Phase 285 | Complete |
@@ -177,10 +177,10 @@ Requirements for v1.30. Each maps to roadmap phases.
 | TPLN-03 | Phase 286 | Complete |
 | TPLN-04 | Phase 286 | Complete |
 | TPLN-05 | Phase 286 | Complete |
-| TMPL-01 | Phase 287 | Complete |
-| TMPL-02 | Phase 287 | Complete |
-| TMPL-03 | Phase 287 | Complete |
-| TMPL-04 | Phase 287 | Complete |
+| TMPL-01 | Phase 287 → 291 | Complete |
+| TMPL-02 | Phase 287 → 291 | Complete |
+| TMPL-03 | Phase 287 → 291 | Complete |
+| TMPL-04 | Phase 287 → 291 | Complete |
 | PIPE-01 | Phase 289 | Complete |
 | PIPE-02 | Phase 289 | Complete |
 | PIPE-03 | Phase 289 | Complete |
@@ -199,4 +199,4 @@ Requirements for v1.30. Each maps to roadmap phases.
 
 ---
 *Requirements defined: 2026-02-21*
-*Last updated: 2026-02-21 after roadmap creation*
+*Last updated: 2026-02-22 after gap closure phase creation*

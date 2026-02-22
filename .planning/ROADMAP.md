@@ -65,7 +65,7 @@
 - [x] **Phase 288: Mission Assembly Integration Wiring** - Wire Phases 283/284/286 into mission-assembly, replace placeholders (Gap Closure) (completed 2026-02-22)
 - [x] **Phase 289: Pipeline Orchestrator** - End-to-end three-stage pipeline management (completed 2026-02-22)
 - [x] **Phase 290: Integration & Testing** - Barrel exports, chipset, eval harness, integration tests (completed 2026-02-22)
-- [ ] **Phase 291: Template System Pipeline Integration** - Wire template system into mission assembly and pipeline (Gap Closure)
+- [x] **Phase 291: Template System Pipeline Integration** - Wire template system into mission assembly and pipeline (Gap Closure) (completed 2026-02-22)
 - [ ] **Phase 292: Pipeline Output Enrichment** - Wire wave analysis, budget rebalance into pipeline result (Gap Closure)
 
 ## Phase Details
@@ -253,7 +253,7 @@ Plans:
   2. Pipeline initialization creates a template registry via createTemplateRegistry
   3. Rendered templates pass validateRenderedTemplate against their corresponding Zod schemas
   4. All existing tests continue to pass (zero regressions)
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 Plans:
 - [ ] 291-01-PLAN.md — Wire template system into mission assembly and pipeline, update tests for async
 
@@ -289,7 +289,7 @@ Phases execute in numeric order: 279 -> 280 -> 281 -> 282 -> 283 -> 284 -> 285 -
 | 288. Mission Assembly Integration Wiring | 2/2 | Complete   | 2026-02-22 |
 | 289. Pipeline Orchestrator | 2/2 | Complete    | 2026-02-22 |
 | 290. Integration & Testing | 2/2 | Complete    | 2026-02-22 |
-| 291. Template System Pipeline Integration | 0/1 | Planned   | — |
+| 291. Template System Pipeline Integration | 1/1 | Complete   | 2026-02-22 |
 | 292. Pipeline Output Enrichment | 0/0 | Pending   | — |
 
 ---
