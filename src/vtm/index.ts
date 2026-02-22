@@ -17,7 +17,9 @@
  * the wave analysis functions for dependency graphs, savings
  * calculation, and risk factor identification, and the model assignment
  * classifier with data-driven signal registry and weighted scoring, and
- * the budget validator with auto-rebalance for 60/40 principle enforcement.
+ * the budget validator with auto-rebalance for 60/40 principle enforcement,
+ * and the cache optimization analyzers for shared load detection, schema
+ * reuse analysis, and knowledge tier sizing.
  *
  * @module vtm
  */
@@ -32,3 +34,4 @@ export * from './wave-planner.js';
 export * from './wave-analysis.js';
 export * from './model-assignment.js';
 export * from './model-budget.js';
+export * from './cache-optimizer.js';
