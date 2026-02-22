@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.32 Brainstorm Session Support -- Phase 305 complete, ready for Phase 306
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 306 in progress (Plan 01 of 2 complete)
 
 ## Current Position
 
-Phase: 305 (1 of 7 in v1.32) (Foundation Types & Bus)
-Plan: 3 of 3 complete
-Status: Phase Complete
-Last activity: 2026-02-22 -- Completed 305-03 (foundation verification tests, 38 passing)
+Phase: 306 (2 of 7 in v1.32) (Rules Engine)
+Plan: 1 of 2 complete
+Status: In Progress
+Last activity: 2026-02-22 -- Completed 306-01 (RulesEngine critic gate, phase rules, rule reminders -- 24 tests)
 
-Progress: [████░░░░░░░░░░░░] 14% (v1.32)
+Progress: [█████░░░░░░░░░░░] 21% (v1.32)
 
 ## Accumulated Context
 
@@ -32,6 +32,9 @@ Progress: [████░░░░░░░░░░░░] 14% (v1.32)
 - SessionConfig.brainstormDir is required (no default) -- prevents accidental production path in tests
 - lotus-blossom included as 16th technique in TechniqueId (spec-specified, despite docs saying 15)
 - MESSAGE_PRIORITIES has 10 entries (not 9 as originally specced) -- HEARTBEAT added as 10th
+- Critic gate checked BEFORE general AGENT_PHASE_RULES lookup -- defense-in-depth ordering
+- PHASE_RULE_MAP is module-private (not exported) -- consumers use getActiveRules() API
+- PHASE_REMINDERS as module-private constant with pre-composed strings per phase
 
 ### Key Constraints
 
@@ -49,5 +52,5 @@ Progress: [████░░░░░░░░░░░░] 14% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 305-03-PLAN.md (foundation verification tests -- Phase 305 complete)
+Stopped at: Completed 306-01-PLAN.md (RulesEngine critic gate, phase rules, rule reminders)
 Resume file: None
