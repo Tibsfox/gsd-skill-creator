@@ -29,7 +29,9 @@
  * validating mustache-style markdown templates with Zod schema validation
  * and structured diagnostics, and the pipeline orchestrator for composing
  * all stages into a single runPipeline call with configurable speed,
- * file manifest, execution summary, and structured error reporting.
+ * file manifest, execution summary, and structured error reporting,
+ * and the VTMPipeline class wrapper providing a stateful OOP interface
+ * around the functional API with createVTMPipeline factory construction.
  *
  * @module vtm
  */
@@ -48,3 +50,4 @@ export * from './cache-optimizer.js';
 export * from './test-plan-generator.js';
 export * from './template-system.js';
 export * from './pipeline.js';
+export * from './vtm-pipeline.js';
