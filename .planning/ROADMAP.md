@@ -206,7 +206,7 @@ Plans:
 | 308. Technique Engine, Pathway Router & Artifact Generator | 6/6 | Complete    | 2026-02-22 | - |
 | 309. Facilitator Agent | 2/2 | Complete    | 2026-02-22 | - |
 | 310. Technique Agents | 5/5 | Complete    | 2026-02-22 | - |
-| 311. Integration Wiring & System Tests | 2/4 | In Progress|  | - |
+| 311. Integration Wiring & System Tests | 3/4 | In Progress|  | - |
 
 See `.planning/milestones/v1.31-ROADMAP.md` for v1.31 phase details.
 

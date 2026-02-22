@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.32 Brainstorm Session Support -- Phase 311 IN PROGRESS (2 of 4 plans done)
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 311 IN PROGRESS (3 of 4 plans done)
 
 ## Current Position
 
 Phase: 311 (5 of 7 in v1.32) (Integration Wiring + System Tests)
-Plan: 2 of 4 complete
+Plan: 3 of 4 complete
 Status: In Progress
-Last activity: 2026-02-22 -- Completed 311-02 (Barrel export and chipset YAML)
+Last activity: 2026-02-22 -- Completed 311-04 (Safety-critical tests SC-01 through SC-18)
 
 Progress: [████████████░░░░] 75% (v1.32)
 
@@ -107,6 +107,11 @@ Progress: [████████████░░░░] 75% (v1.32)
 - Barrel export (index.ts) organized by layer: shared -> core -> techniques -> pathways -> artifacts -> agents -> integration
 - SessionBus export commented out pending 311-01 file creation -- ready to uncomment when integration module exists
 - Chipset YAML mirrors electronics-pack structural conventions (skills, agents, topology) for cross-module consistency
+- All 18 safety-critical tests (SC-01 through SC-18) pass -- Osborn no-criticism rule verified end-to-end
+- buildTestSession() helper creates sessions at arbitrary phases for integration tests
+- SC-07 uses combined evaluative + constructive content to exercise Stage 2 false-positive prevention
+- ALLOWED_FIGURES validated directly as exported constant (no getAvailablePersonas() method needed)
+- 302 total brainstorm tests pass with zero regressions after SC test addition
 
 ### Key Constraints
 
@@ -124,5 +129,5 @@ Progress: [████████████░░░░] 75% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 311-02-PLAN.md (Barrel export and chipset YAML with 4 activation profiles)
+Stopped at: Completed 311-04-PLAN.md (All 18 safety-critical tests SC-01 through SC-18)
 Resume file: None
