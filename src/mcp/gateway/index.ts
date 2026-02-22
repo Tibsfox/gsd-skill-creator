@@ -71,6 +71,19 @@ export {
   triggerPhaseExecution,
 } from './tools/index.js';
 
+// Skill tools
+export {
+  type SkillToolsConfig,
+  type SkillSearchResult,
+  type SkillInspectResult,
+  type SkillActivateResult,
+  searchSkills,
+  inspectSkill,
+  activateSkill,
+  registerSkillReadTools,
+  registerSkillWriteTools,
+} from './tools/index.js';
+
 // Chipset tools and state management
 export {
   registerChipsetTools,

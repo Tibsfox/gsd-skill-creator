@@ -15,6 +15,11 @@ import {
   registerProjectWriteTools,
   type ProjectToolsConfig,
 } from './tools/project-tools.js';
+import {
+  registerSkillReadTools,
+  registerSkillWriteTools,
+  type SkillToolsConfig,
+} from './tools/skill-tools.js';
 import { registerResourceProviders } from './resources/resource-providers.js';
 import type { ResourceProviders } from './resources/types.js';
 import type { McpServerFactory } from './server.js';
@@ -61,6 +66,8 @@ export interface GatewayFactoryOptions {
   chipsetState?: ChipsetStateManager;
   /** Project tools configuration (root directory for GSD projects). */
   projects?: ProjectToolsConfig;
+  /** Skill tools configuration (path to skills directory). */
+  skills?: SkillToolsConfig;
 }
 
 // ============================================================================
@@ -103,6 +110,12 @@ export function createGsdGatewayFactory(
     if (options?.projects) {
       registerProjectReadTools(server, options.projects);
       registerProjectWriteTools(server, options.projects);
+    }
+
+    // Register skill tools if config provided
+    if (options?.skills) {
+      registerSkillReadTools(server, options.skills);
+      registerSkillWriteTools(server, options.skills);
     }
 
     // Register resource providers

@@ -12,6 +12,11 @@ import {
   registerProjectWriteTools,
   type ProjectToolsConfig,
 } from './project-tools.js';
+import {
+  registerSkillReadTools,
+  registerSkillWriteTools,
+  type SkillToolsConfig,
+} from './skill-tools.js';
 import { registerAgentTools } from './agent-tools.js';
 import { AgentRegistry } from './agent-registry.js';
 import { registerWorkflowTools } from './workflow-tools.js';
@@ -24,6 +29,8 @@ import { SessionStore } from './session-store.js';
 export interface GatewayToolsConfig {
   /** Project tool configuration. */
   projects: ProjectToolsConfig;
+  /** Skill tool configuration. */
+  skills?: SkillToolsConfig;
   /** Shared agent registry (optional -- created internally if not provided). */
   agentRegistry?: AgentRegistry;
   /** Shared workflow engine (optional -- created internally if not provided). */
@@ -44,6 +51,12 @@ export function registerAllTools(server: McpServer, config: GatewayToolsConfig):
   // Project tools
   registerProjectReadTools(server, config.projects);
   registerProjectWriteTools(server, config.projects);
+
+  // Skill tools (skill:search, skill:inspect, skill:activate)
+  if (config.skills) {
+    registerSkillReadTools(server, config.skills);
+    registerSkillWriteTools(server, config.skills);
+  }
 
   // Agent tools (agent:spawn, agent:status, agent:logs)
   const registry = config.agentRegistry ?? new AgentRegistry();
@@ -89,6 +102,19 @@ export {
   createProject,
   triggerPhaseExecution,
 } from './project-tools.js';
+
+// Skill tools
+export type { SkillToolsConfig } from './skill-tools.js';
+export {
+  type SkillSearchResult,
+  type SkillInspectResult,
+  type SkillActivateResult,
+  searchSkills,
+  inspectSkill,
+  activateSkill,
+  registerSkillReadTools,
+  registerSkillWriteTools,
+} from './skill-tools.js';
 
 export {
   registerChipsetTools,
