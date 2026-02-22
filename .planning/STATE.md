@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.32 Brainstorm Session Support -- Phase 305: Foundation Types & Bus
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 305 complete, ready for Phase 306
 
 ## Current Position
 
 Phase: 305 (1 of 7 in v1.32) (Foundation Types & Bus)
-Plan: 2 of 3 complete
-Status: Executing
-Last activity: 2026-02-22 -- Completed 305-02 (bus schemas, filename generator, session init)
+Plan: 3 of 3 complete
+Status: Phase Complete
+Last activity: 2026-02-22 -- Completed 305-03 (foundation verification tests, 38 passing)
 
-Progress: [███░░░░░░░░░░░░░] 10% (v1.32)
+Progress: [████░░░░░░░░░░░░] 14% (v1.32)
 
 ## Accumulated Context
 
@@ -31,6 +31,7 @@ Progress: [███░░░░░░░░░░░░░] 10% (v1.32)
 - .brainstorm/ at project root, in .gitignore, excluded from EventDispatcher
 - SessionConfig.brainstormDir is required (no default) -- prevents accidental production path in tests
 - lotus-blossom included as 16th technique in TechniqueId (spec-specified, despite docs saying 15)
+- MESSAGE_PRIORITIES has 10 entries (not 9 as originally specced) -- HEARTBEAT added as 10th
 
 ### Key Constraints
 
@@ -48,5 +49,5 @@ Progress: [███░░░░░░░░░░░░░] 10% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 305-02-PLAN.md (bus schemas, filename generator, session init)
+Stopped at: Completed 305-03-PLAN.md (foundation verification tests -- Phase 305 complete)
 Resume file: None
