@@ -293,6 +293,7 @@ function createErrorResult(
  */
 function buildFileManifest(
   missionPackage: MissionPackage,
+  readmeTokens: number,
 ): Array<{ name: string; type: string; size: string }> {
   const manifest: Array<{ name: string; type: string; size: string }> = [];
 
@@ -326,11 +327,11 @@ function buildFileManifest(
     size: `~${Math.ceil(JSON.stringify(missionPackage.testPlan).length / 4)} tokens`,
   });
 
-  // README
+  // README (token size from generateReadme output)
   manifest.push({
     name: 'README.md',
     type: 'readme',
-    size: '~500 tokens',
+    size: `~${readmeTokens} tokens`,
   });
 
   return manifest;
@@ -395,6 +396,7 @@ export function runPipeline(
   let visionDiagnostics: VisionDiagnostic[] = [];
   let dependencies: string[] = [];
   let rawInput: string | undefined;
+  let visionStage: VisionStageResult;
 
   try {
     if (typeof input === 'string') {
@@ -444,7 +446,7 @@ export function runPipeline(
       dependencies = [...visionDoc.dependsOn];
     }
 
-    var visionStage: VisionStageResult = {
+    visionStage = {
       visionDoc,
       diagnostics: visionDiagnostics,
       archetype,
@@ -512,9 +514,20 @@ export function runPipeline(
   // ---- Stage 3: Mission ----
   let missionStage: MissionStageResult;
 
+  let readmeContent: string;
+
   try {
     // Assemble mission package
     const missionPackage = assembleMissionPackage(visionDoc, research);
+
+    // Generate README from mission package
+    const fileCount = 2 + missionPackage.componentSpecs.length + 2; // README + milestone-spec + component-specs + wave-plan + test-plan
+    readmeContent = generateReadme(
+      visionDoc,
+      missionPackage.milestoneSpec,
+      missionPackage.componentSpecs,
+      fileCount,
+    );
 
     // Validate self-containment
     const selfContainmentDiags = validateSelfContainment(missionPackage.componentSpecs);
@@ -572,7 +585,7 @@ export function runPipeline(
       research: researchStage,
       mission: missionStage,
     },
-    fileManifest: buildFileManifest(missionPackage),
+    fileManifest: buildFileManifest(missionPackage, Math.ceil(readmeContent.length / 4)),
     executionSummary: mapExecutionSummary(missionPackage.executionSummary),
     durationMs,
   };

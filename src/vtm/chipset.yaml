@@ -1,0 +1,88 @@
+# VTM (Vision-to-Mission) Pipeline -- Chipset Configuration
+# Defines 8 domain skills and 3 agents for the VTM pipeline.
+
+name: vtm
+version: 0.1.0
+description: "Vision-to-Mission Pipeline -- transforms vision documents into GSD-ready mission packages"
+
+skills:
+  - id: vision-parsing
+    name: Vision Document Processing
+    description: "Parse, validate, classify, and extract dependencies from vision documents"
+    triggers: [vision, parse, validate, archetype, classify, quality check]
+
+  - id: research-compilation
+    name: Research Reference Compilation
+    description: "Compile structured research references with knowledge chunking and safety extraction"
+    triggers: [research, compile, safety, knowledge tier, chunk, source quality]
+
+  - id: mission-assembly
+    name: Mission Package Assembly
+    description: "Assemble complete mission packages with milestone specs, component specs, and self-containment validation"
+    triggers: [mission, assemble, component spec, milestone, self-containment]
+
+  - id: wave-planning
+    name: Wave Planning & Analysis
+    description: "Decompose missions into dependency-ordered waves with parallel tracks and risk analysis"
+    triggers: [wave, plan, parallel track, dependency, critical path, risk]
+
+  - id: model-assignment
+    name: Model Assignment & Budget
+    description: "Classify tasks into Opus/Sonnet/Haiku tiers with budget validation and auto-rebalance"
+    triggers: [model, assign, opus, sonnet, haiku, budget, signal, rebalance]
+
+  - id: cache-optimization
+    name: Cache Optimization
+    description: "Analyze shared loads, schema reuse, TTL compliance, and token savings"
+    triggers: [cache, TTL, token savings, schema reuse, shared load]
+
+  - id: test-plan-generation
+    name: Test Plan Generation
+    description: "Generate categorized test plans with safety classification and verification matrices"
+    triggers: [test plan, safety, verification matrix, density, categorize]
+
+  - id: template-rendering
+    name: Template System
+    description: "Load, render, validate, and register mustache-style markdown templates"
+    triggers: [template, render, mustache, validate template, registry]
+
+agents:
+  - id: VTM-1
+    name: vision-processor
+    role: "Parses and validates vision documents, classifies archetypes"
+    skills: [vision-parsing]
+
+  - id: VTM-2
+    name: research-compiler
+    role: "Compiles research references from vision documents"
+    skills: [research-compilation]
+
+  - id: VTM-3
+    name: mission-assembler
+    role: "Assembles complete mission packages from vision and research"
+    skills: [mission-assembly, wave-planning, model-assignment, cache-optimization, test-plan-generation, template-rendering]
+
+topology:
+  type: pipeline
+  description: "Three-stage pipeline: VTM-1 (vision) -> VTM-2 (research, optional) -> VTM-3 (mission assembly)"
+  flow:
+    - from: VTM-1
+      to: [VTM-2, VTM-3]
+    - from: VTM-2
+      to: [VTM-3]
+
+evaluation:
+  gates:
+    preDeploy:
+      - check: barrel_export_completeness
+        description: "All public API symbols are re-exported from index.ts"
+        action: block
+      - check: self_containment
+        description: "Component specs pass self-containment validation"
+        action: block
+      - check: budget_compliance
+        description: "Model assignments satisfy 60/40 principle"
+        action: warn
+      - check: test_coverage
+        threshold: 90
+        action: block
