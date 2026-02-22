@@ -37,8 +37,8 @@ import { parseVisionDocument, extractDependencies } from './vision-parser.js';
 import { compileResearch, checkSourceQuality } from './research-compiler.js';
 import type { SourceDiagnostic } from './research-compiler.js';
 import { assembleMissionPackage } from './mission-assembler.js';
-import { validateSelfContainment, generateReadme } from './mission-assembly.js';
-import type { SelfContainmentDiagnostic } from './mission-assembly.js';
+import { validateSelfContainment, generateReadme, renderMissionDocuments } from './mission-assembly.js';
+import type { SelfContainmentDiagnostic, RenderedDocument } from './mission-assembly.js';
 import { generateCacheReport } from './cache-optimizer.js';
 import type { CacheReport } from './cache-optimizer.js';
 import { validateBudget } from './model-budget.js';
@@ -139,6 +139,8 @@ export interface MissionStageResult {
   cacheReport?: CacheReport;
   /** Model budget validation result. */
   budgetValidation: BudgetValidationResult;
+  /** Rendered documents from template system (may be empty if templates not on disk). */
+  renderedDocuments?: RenderedDocument[];
 }
 
 // ---------------------------------------------------------------------------
@@ -384,10 +386,10 @@ function mapExecutionSummary(execSummary: MissionPackage['executionSummary']): P
  * @param config - Optional pipeline configuration (speed, skip flags, cache toggle)
  * @returns PipelineResult with success status, stages, manifest, summary, and timing
  */
-export function runPipeline(
+export async function runPipeline(
   input: string | VisionDocument,
   config?: PipelineConfig,
-): PipelineResult {
+): Promise<PipelineResult> {
   const startTime = Date.now();
   const cfg: PipelineConfig = config ?? {};
 
@@ -549,11 +551,22 @@ export function runPipeline(
     }));
     const budgetValidation = validateBudget(budgetTasks);
 
+    // Template rendering (additive layer -- failures do not fail the pipeline)
+    let renderedDocuments: RenderedDocument[] = [];
+    try {
+      const rendered = await renderMissionDocuments(missionPackage);
+      renderedDocuments = rendered.documents;
+    } catch {
+      // Template rendering is optional; swallow errors gracefully
+      renderedDocuments = [];
+    }
+
     missionStage = {
       missionPackage,
       selfContainmentDiagnostics: selfContainmentDiags,
       cacheReport,
       budgetValidation,
+      renderedDocuments,
     };
   } catch (e) {
     const durationMs = Date.now() - startTime;

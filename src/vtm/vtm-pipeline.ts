@@ -47,9 +47,9 @@ export class VTMPipeline {
   }
 
   /** Run the full pipeline (delegates to runPipeline). */
-  run(input: string | VisionDocument, configOverride?: PipelineConfig): PipelineResult {
+  async run(input: string | VisionDocument, configOverride?: PipelineConfig): Promise<PipelineResult> {
     const mergedConfig = { ...this.config, ...configOverride };
-    this.lastResult = runPipeline(input, mergedConfig);
+    this.lastResult = await runPipeline(input, mergedConfig);
     return this.lastResult;
   }
 

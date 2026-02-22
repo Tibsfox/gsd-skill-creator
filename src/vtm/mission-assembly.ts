@@ -22,10 +22,18 @@ import type {
   ResearchReference,
   MilestoneSpec,
   ComponentSpec,
+  MissionPackage,
   ModelAssignment,
 } from './types.js';
 import { assignModel as classifyModel } from './model-assignment.js';
 import type { AssignmentInput } from './model-assignment.js';
+import {
+  createTemplateRegistry,
+  renderTemplate,
+  validateRenderedTemplate,
+  type TemplateRegistry,
+  type ValidationResult,
+} from './template-system.js';
 
 // ---------------------------------------------------------------------------
 // Public types
@@ -653,4 +661,223 @@ export function estimateFileCount(
   }
 
   return { count, complexity };
+}
+
+// ---------------------------------------------------------------------------
+// Template-based document rendering
+// ---------------------------------------------------------------------------
+
+/** A single rendered document produced by the template system. */
+export interface RenderedDocument {
+  name: string;
+  templateName: string;
+  content: string;
+  validation: ValidationResult;
+}
+
+/** Result of rendering all mission documents via templates. */
+export interface RenderedDocuments {
+  documents: RenderedDocument[];
+  registry: TemplateRegistry;
+}
+
+/**
+ * Stringify a value for use as a template variable.
+ *
+ * Arrays are joined with ", ". Objects are JSON.stringified.
+ * Primitives are converted via String().
+ */
+function toTemplateVar(value: unknown): string {
+  if (value === null || value === undefined) return '';
+  if (Array.isArray(value)) {
+    return value.map(v => typeof v === 'object' ? JSON.stringify(v) : String(v)).join(', ');
+  }
+  if (typeof value === 'object') return JSON.stringify(value);
+  return String(value);
+}
+
+/**
+ * Render mission documents using the template system.
+ *
+ * This is an additive layer alongside the existing string builders.
+ * For each document type in the mission package (readme, milestone-spec,
+ * component-spec, wave-plan, test-plan), it attempts to load a template,
+ * render it with variables from the typed objects, and validate the result
+ * against the corresponding Zod schema.
+ *
+ * If a template is not found on disk (e.g. in test environments), the
+ * document falls back to a generated representation using the existing
+ * string builders (for README) or JSON.stringify (for typed objects).
+ *
+ * Wires all 4 TMPL requirements:
+ * - TMPL-01: loadTemplate (via registry.get which calls loadTemplate)
+ * - TMPL-02: renderTemplate (substitutes variables into template content)
+ * - TMPL-03: validateRenderedTemplate (validates against Zod schemas)
+ * - TMPL-04: createTemplateRegistry (creates and uses the registry)
+ *
+ * @param missionPackage - Assembled MissionPackage with all sub-documents
+ * @param basePath - Optional base directory for template files
+ * @returns RenderedDocuments with array of rendered documents and the registry
+ */
+export async function renderMissionDocuments(
+  missionPackage: MissionPackage,
+  basePath?: string,
+): Promise<RenderedDocuments> {
+  // TMPL-04: Create template registry
+  const registry = createTemplateRegistry(basePath);
+  const documents: RenderedDocument[] = [];
+
+  // --- README ---
+  {
+    const templateEntry = await registry.get('readme');
+    let content: string;
+    if (templateEntry) {
+      const variables: Record<string, string> = {
+        milestoneName: missionPackage.milestoneSpec.name,
+        date: missionPackage.date,
+        status: missionPackage.status,
+        visionDocument: missionPackage.visionDocument,
+        contents: missionPackage.componentSpecs.map(s => s.name).join(', '),
+        howToUse: 'Load component specs in wave order. Each spec is self-contained.',
+        executionSummary: `${missionPackage.executionSummary.totalTasks} tasks, ${missionPackage.executionSummary.sequentialDepth} waves`,
+        researchReference: missionPackage.researchReference ?? '',
+        dependencies: missionPackage.componentSpecs.flatMap(s => s.dependencies).join(', '),
+        notes: '',
+      };
+      // TMPL-02: Render template
+      content = renderTemplate(templateEntry.content, variables);
+    } else {
+      // Fallback: generate via string builder
+      const fileCount = 2 + missionPackage.componentSpecs.length + 2;
+      content = generateReadme(
+        { name: missionPackage.visionDocument, date: missionPackage.date, context: `Mission package for ${missionPackage.name}` } as VisionDocument,
+        missionPackage.milestoneSpec,
+        missionPackage.componentSpecs,
+        fileCount,
+      );
+    }
+    // TMPL-03: Validate rendered template (readme has null schema, so no parsedData needed)
+    const validation = validateRenderedTemplate('readme', content);
+    documents.push({ name: 'readme', templateName: 'readme', content, validation });
+  }
+
+  // --- Milestone Spec ---
+  {
+    const ms = missionPackage.milestoneSpec;
+    const templateEntry = await registry.get('milestone-spec');
+    let content: string;
+    if (templateEntry) {
+      const variables: Record<string, string> = {
+        name: ms.name,
+        date: ms.date,
+        visionDocument: ms.visionDocument,
+        researchReference: ms.researchReference ?? '',
+        estimatedExecution: JSON.stringify(ms.estimatedExecution),
+        missionObjective: ms.missionObjective,
+        architectureOverview: ms.architectureOverview,
+        systemLayers: toTemplateVar(ms.systemLayers),
+        deliverables: toTemplateVar(ms.deliverables),
+        componentBreakdown: toTemplateVar(ms.componentBreakdown),
+        modelRationale: JSON.stringify(ms.modelRationale),
+        crossComponentInterfaces: toTemplateVar(ms.crossComponentInterfaces),
+        safetyBoundaries: toTemplateVar(ms.safetyBoundaries),
+        preComputedKnowledge: toTemplateVar(ms.preComputedKnowledge),
+      };
+      content = renderTemplate(templateEntry.content, variables);
+    } else {
+      content = JSON.stringify(ms, null, 2);
+    }
+    // TMPL-03: parsedData is the original typed object for Zod validation
+    const validation = validateRenderedTemplate('milestone-spec', content, ms);
+    documents.push({ name: 'milestone-spec', templateName: 'milestone-spec', content, validation });
+  }
+
+  // --- Component Specs ---
+  for (const spec of missionPackage.componentSpecs) {
+    const templateEntry = await registry.get('component-spec');
+    let content: string;
+    if (templateEntry) {
+      const variables: Record<string, string> = {
+        name: spec.name,
+        milestone: spec.milestone,
+        wave: spec.wave,
+        modelAssignment: spec.modelAssignment,
+        estimatedTokens: String(spec.estimatedTokens),
+        dependencies: toTemplateVar(spec.dependencies),
+        produces: toTemplateVar(spec.produces),
+        objective: spec.objective,
+        context: spec.context,
+        technicalSpec: toTemplateVar(spec.technicalSpec),
+        implementationSteps: toTemplateVar(spec.implementationSteps),
+        testCases: toTemplateVar(spec.testCases),
+        verificationGate: JSON.stringify(spec.verificationGate),
+        safetyBoundaries: toTemplateVar(spec.safetyBoundaries),
+      };
+      content = renderTemplate(templateEntry.content, variables);
+    } else {
+      content = JSON.stringify(spec, null, 2);
+    }
+    const validation = validateRenderedTemplate('component-spec', content, spec);
+    documents.push({
+      name: `component-spec-${spec.name.toLowerCase().replace(/\s+/g, '-')}`,
+      templateName: 'component-spec',
+      content,
+      validation,
+    });
+  }
+
+  // --- Wave Plan ---
+  {
+    const wp = missionPackage.waveExecutionPlan;
+    const templateEntry = await registry.get('wave-plan');
+    let content: string;
+    if (templateEntry) {
+      const variables: Record<string, string> = {
+        milestoneName: wp.milestoneName,
+        milestoneSpec: wp.milestoneSpec,
+        totalTasks: String(wp.totalTasks),
+        parallelTracks: String(wp.parallelTracks),
+        sequentialDepth: String(wp.sequentialDepth),
+        estimatedWallTime: wp.estimatedWallTime,
+        criticalPath: wp.criticalPath,
+        waveSummary: toTemplateVar(wp.waveSummary),
+        waves: toTemplateVar(wp.waves),
+        cacheOptimization: toTemplateVar(wp.cacheOptimization),
+        dependencyGraph: wp.dependencyGraph ?? '',
+        riskFactors: toTemplateVar(wp.riskFactors),
+      };
+      content = renderTemplate(templateEntry.content, variables);
+    } else {
+      content = JSON.stringify(wp, null, 2);
+    }
+    const validation = validateRenderedTemplate('wave-plan', content, wp);
+    documents.push({ name: 'wave-plan', templateName: 'wave-plan', content, validation });
+  }
+
+  // --- Test Plan ---
+  {
+    const tp = missionPackage.testPlan;
+    const templateEntry = await registry.get('test-plan');
+    let content: string;
+    if (templateEntry) {
+      const variables: Record<string, string> = {
+        milestoneName: tp.milestoneName,
+        milestoneSpec: tp.milestoneSpec,
+        visionDocument: tp.visionDocument,
+        totalTests: String(tp.totalTests),
+        safetyCriticalCount: String(tp.safetyCriticalCount),
+        targetCoverage: String(tp.targetCoverage),
+        categories: toTemplateVar(tp.categories),
+        tests: toTemplateVar(tp.tests),
+        verificationMatrix: toTemplateVar(tp.verificationMatrix),
+      };
+      content = renderTemplate(templateEntry.content, variables);
+    } else {
+      content = JSON.stringify(tp, null, 2);
+    }
+    const validation = validateRenderedTemplate('test-plan', content, tp);
+    documents.push({ name: 'test-plan', templateName: 'test-plan', content, validation });
+  }
+
+  return { documents, registry };
 }

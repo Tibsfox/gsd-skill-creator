@@ -575,17 +575,17 @@ describe('eval-01-vision-from-idea', () => {
 // ---------------------------------------------------------------------------
 
 describe('eval-02-mission-from-vision', () => {
-  it('runPipeline with mission-only produces a complete MissionPackage', () => {
+  it('runPipeline with mission-only produces a complete MissionPackage', async () => {
     const visionDoc = createMusicVisionDoc();
-    const result = runPipeline(visionDoc, { speed: 'mission-only' });
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
 
     expect(result.success).toBe(true);
     expect(result.stages.mission).toBeDefined();
   });
 
-  it('MissionPackage has milestoneSpec, componentSpecs, waveExecutionPlan, testPlan', () => {
+  it('MissionPackage has milestoneSpec, componentSpecs, waveExecutionPlan, testPlan', async () => {
     const visionDoc = createMusicVisionDoc();
-    const result = runPipeline(visionDoc, { speed: 'mission-only' });
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
 
     expect(result.success).toBe(true);
     const mission = result.stages.mission!;
@@ -597,9 +597,9 @@ describe('eval-02-mission-from-vision', () => {
     expect(pkg.testPlan).toBeDefined();
   });
 
-  it('fileManifest includes milestone-spec, component-spec, wave-plan, test-plan, readme types', () => {
+  it('fileManifest includes milestone-spec, component-spec, wave-plan, test-plan, readme types', async () => {
     const visionDoc = createMusicVisionDoc();
-    const result = runPipeline(visionDoc, { speed: 'mission-only' });
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
 
     expect(result.success).toBe(true);
     const types = result.fileManifest.map(f => f.type);
@@ -610,9 +610,9 @@ describe('eval-02-mission-from-vision', () => {
     expect(types).toContain('readme');
   });
 
-  it('executionSummary has model split with opus/sonnet/haiku', () => {
+  it('executionSummary has model split with opus/sonnet/haiku', async () => {
     const visionDoc = createMusicVisionDoc();
-    const result = runPipeline(visionDoc, { speed: 'mission-only' });
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
 
     expect(result.success).toBe(true);
     const summary = result.executionSummary;
@@ -621,9 +621,9 @@ describe('eval-02-mission-from-vision', () => {
     expect(summary.modelSplit.haiku).toBeDefined();
   });
 
-  it('component specs have non-empty modelAssignment', () => {
+  it('component specs have non-empty modelAssignment', async () => {
     const visionDoc = createMusicVisionDoc();
-    const result = runPipeline(visionDoc, { speed: 'mission-only' });
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
 
     expect(result.success).toBe(true);
     const specs = result.stages.mission!.missionPackage.componentSpecs;
@@ -633,9 +633,9 @@ describe('eval-02-mission-from-vision', () => {
     }
   });
 
-  it('test plan has tests array with length > 0', () => {
+  it('test plan has tests array with length > 0', async () => {
     const visionDoc = createMusicVisionDoc();
-    const result = runPipeline(visionDoc, { speed: 'mission-only' });
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
 
     expect(result.success).toBe(true);
     const testPlan = result.stages.mission!.missionPackage.testPlan;
@@ -705,17 +705,17 @@ describe('eval-03-research-compilation', () => {
 // ---------------------------------------------------------------------------
 
 describe('eval-04-full-pipeline', () => {
-  it('runPipeline with full speed executes all three stages', () => {
+  it('runPipeline with full speed executes all three stages', async () => {
     const markdown = createHomeRepairMarkdown();
-    const result = runPipeline(markdown, { speed: 'full' });
+    const result = await runPipeline(markdown, { speed: 'full' });
 
     expect(result.success).toBe(true);
     expect(result.speed).toBe('full');
   });
 
-  it('vision stage produces visionDoc, archetype, and diagnostics', () => {
+  it('vision stage produces visionDoc, archetype, and diagnostics', async () => {
     const markdown = createHomeRepairMarkdown();
-    const result = runPipeline(markdown, { speed: 'full' });
+    const result = await runPipeline(markdown, { speed: 'full' });
 
     expect(result.success).toBe(true);
     expect(result.stages.vision).toBeDefined();
@@ -724,9 +724,9 @@ describe('eval-04-full-pipeline', () => {
     expect(result.stages.vision.diagnostics).toBeDefined();
   });
 
-  it('research stage produces research, knowledgeTiers, and safety', () => {
+  it('research stage produces research, knowledgeTiers, and safety', async () => {
     const markdown = createHomeRepairMarkdown();
-    const result = runPipeline(markdown, { speed: 'full' });
+    const result = await runPipeline(markdown, { speed: 'full' });
 
     expect(result.success).toBe(true);
     expect(result.stages.research).toBeDefined();
@@ -735,18 +735,18 @@ describe('eval-04-full-pipeline', () => {
     expect(result.stages.research!.safety).toBeDefined();
   });
 
-  it('mission stage produces missionPackage', () => {
+  it('mission stage produces missionPackage', async () => {
     const markdown = createHomeRepairMarkdown();
-    const result = runPipeline(markdown, { speed: 'full' });
+    const result = await runPipeline(markdown, { speed: 'full' });
 
     expect(result.success).toBe(true);
     expect(result.stages.mission).toBeDefined();
     expect(result.stages.mission!.missionPackage).toBeDefined();
   });
 
-  it('fileManifest has entries and executionSummary has non-zero metrics', () => {
+  it('fileManifest has entries and executionSummary has non-zero metrics', async () => {
     const markdown = createHomeRepairMarkdown();
-    const result = runPipeline(markdown, { speed: 'full' });
+    const result = await runPipeline(markdown, { speed: 'full' });
 
     expect(result.success).toBe(true);
     expect(result.fileManifest.length).toBeGreaterThan(0);
@@ -774,17 +774,17 @@ describe('eval-05-infrastructure-vision', () => {
     expect(speed).toBe('skip-research');
   });
 
-  it('runPipeline without speed override skips research stage', () => {
+  it('runPipeline without speed override skips research stage', async () => {
     const visionDoc = createPluginSystemVisionDoc();
-    const result = runPipeline(visionDoc);
+    const result = await runPipeline(visionDoc);
 
     expect(result.success).toBe(true);
     expect(result.stages.research).toBeUndefined();
   });
 
-  it('runPipeline produces a mission stage with missionPackage', () => {
+  it('runPipeline produces a mission stage with missionPackage', async () => {
     const visionDoc = createPluginSystemVisionDoc();
-    const result = runPipeline(visionDoc);
+    const result = await runPipeline(visionDoc);
 
     expect(result.success).toBe(true);
     expect(result.stages.mission).toBeDefined();
