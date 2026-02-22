@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Phase 290 in progress — Integration Testing
+**Current focus:** Phase 290 complete — Integration Testing (milestone complete)
 
 ## Current Position
 
 Phase: 290 of 290 (Integration Testing) — 12 of 12 in milestone
-Plan: 1 of 2 in current phase
-Status: 290-01 complete
-Last activity: 2026-02-22 — 290-01 complete (barrel exports, chipset YAML, VTMPipeline class wrapper)
+Plan: 2 of 2 in current phase
+Status: 290-02 complete (phase complete, milestone complete)
+Last activity: 2026-02-22 — 290-02 complete (eval harness + integration tests)
 
-Progress: [###########] 96% (11.5/12 phases)
+Progress: [############] 100% (12/12 phases)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 23
+- Total plans completed: 24
 - Average duration: 4min
-- Total execution time: 83min
+- Total execution time: 88min
 
 **By Phase:**
 
@@ -38,6 +38,7 @@ Progress: [###########] 96% (11.5/12 phases)
 | 287 Template System | 2 | 6min | 3min |
 | 288 Mission Assembly Integration | 2 | 8min | 4min |
 | 289 Pipeline Orchestrator | 2 | 7min | 3.5min |
+| 290 Integration Testing | 2 | 10min | 5min |
 
 ## Accumulated Context
 
@@ -127,6 +128,10 @@ Progress: [###########] 96% (11.5/12 phases)
 - 2026-02-22: generateReadme wired into mission stage with computed file count and token sizing
 - 2026-02-22: visionStage declared outside try block for block scoping after var->let fix
 - 2026-02-22: Chipset YAML includes evaluation gates section beyond electronics-pack pattern per INTG-02
+- 2026-02-22: Eval harness tests structural/programmatic properties (not LLM-as-judge qualitative expectations)
+- 2026-02-22: Domain-themed fixtures per eval scenario matching evals.json prompt themes
+- 2026-02-22: MissionPackageSchema.safeParse() for Zod schema validation in integration tests
+- 2026-02-22: Reference identity check (===) confirms mission-only VisionDocument passthrough
 
 ### Key Constraints
 
@@ -142,5 +147,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 290-01-PLAN.md
+Stopped at: Completed 290-02-PLAN.md (v1.30 milestone complete)
 Resume file: None
