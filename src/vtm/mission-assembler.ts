@@ -8,13 +8,10 @@
  * Flow:
  * 1. generateMilestoneSpec(visionDoc, research) -> milestoneSpec
  * 2. generateComponentSpecs(visionDoc, milestoneSpec, research) -> componentSpecs
- * 3. Build placeholder WaveExecutionPlan (single wave, all tasks)
- * 4. Build placeholder TestPlan (one C-NNN test per success criterion)
+ * 3. planWaves(milestoneSpec, componentSpecs) -> WaveExecutionPlan
+ * 4. generateTestPlan(input) -> TestPlan
  * 5. Compute executionSummary from milestoneSpec and componentSpecs
  * 6. Compose and return MissionPackage
- *
- * Placeholder wave plan and test plan are minimal valid structures that will be
- * replaced by real implementations in Phases 283 and 286.
  *
  * @module vtm/mission-assembler
  */
@@ -25,130 +22,23 @@ import type {
   MissionPackage,
   MilestoneSpec,
   ComponentSpec,
-  WaveExecutionPlan,
-  TestPlan,
-  WaveTask,
-  TestSpec,
 } from './types.js';
-import { MissionPackageSchema } from './types.js';
 import {
   generateMilestoneSpec,
   generateComponentSpecs,
 } from './mission-assembly.js';
+import { planWaves } from './wave-planner.js';
+import { generateTestPlan } from './test-plan-generator.js';
 
 // ---------------------------------------------------------------------------
 // Internal helpers
 // ---------------------------------------------------------------------------
 
 /**
- * Zero-pad a number to 3 digits: 1 -> "001", 12 -> "012".
- */
-function pad3(n: number): string {
-  return String(n).padStart(3, '0');
-}
-
-/**
  * Round to 1 decimal place.
  */
 function round1(n: number): number {
   return Math.round(n * 10) / 10;
-}
-
-/**
- * Build a placeholder WaveExecutionPlan with all tasks in a single wave.
- *
- * This is a minimal valid structure that satisfies WaveExecutionPlanSchema.
- * Phase 283 (Wave Planning) will replace it with a real multi-wave plan.
- */
-function buildPlaceholderWavePlan(
-  milestoneSpec: MilestoneSpec,
-  componentSpecs: ComponentSpec[],
-): WaveExecutionPlan {
-  const tasks: WaveTask[] = componentSpecs.map((spec, i) => ({
-    id: `task-${pad3(i + 1)}`,
-    description: spec.objective,
-    produces: spec.produces[0] ?? `${spec.name} implementation`,
-    model: spec.modelAssignment,
-    estimatedTokens: spec.estimatedTokens,
-    dependsOn: [],
-  }));
-
-  return {
-    milestoneName: milestoneSpec.name,
-    milestoneSpec: 'milestone-spec.md',
-    totalTasks: componentSpecs.length,
-    parallelTracks: 1,
-    sequentialDepth: 1,
-    estimatedWallTime: `${milestoneSpec.estimatedExecution.hours} hours`,
-    criticalPath: 'All tasks in single wave (placeholder -- see Phase 283)',
-    waveSummary: [
-      {
-        wave: 0,
-        tasks: componentSpecs.length,
-        parallelTracks: 1,
-        estimatedTime: `${milestoneSpec.estimatedExecution.hours} hours`,
-        cacheDependencies: 'None (single wave)',
-      },
-    ],
-    waves: [
-      {
-        number: 0,
-        name: 'All Tasks',
-        purpose: 'Placeholder wave containing all tasks (see Phase 283 for real wave planning)',
-        isSequential: true,
-        tracks: [
-          {
-            name: 'Track A',
-            tasks,
-          },
-        ],
-      },
-    ],
-  };
-}
-
-/**
- * Build a placeholder TestPlan with one C-NNN test per success criterion.
- *
- * This is a minimal valid structure that satisfies TestPlanSchema.
- * Phase 286 (Test Plan Generation) will replace it with a categorized plan.
- */
-function buildPlaceholderTestPlan(
-  visionDoc: VisionDocument,
-  milestoneSpec: MilestoneSpec,
-): TestPlan {
-  const criteria = visionDoc.successCriteria;
-
-  const tests: TestSpec[] = criteria.map((criterion, i) => ({
-    id: `C-${pad3(i + 1)}`,
-    category: 'core' as const,
-    verifies: criterion,
-    expectedBehavior: criterion,
-  }));
-
-  const verificationMatrix = criteria.map((criterion, i) => ({
-    criterion,
-    testIds: [`C-${pad3(i + 1)}`],
-  }));
-
-  return {
-    milestoneName: milestoneSpec.name,
-    milestoneSpec: 'milestone-spec.md',
-    visionDocument: visionDoc.name,
-    totalTests: criteria.length,
-    safetyCriticalCount: 0,
-    targetCoverage: 100,
-    categories: [
-      {
-        name: 'core' as const,
-        count: criteria.length,
-        priority: 'required' as const,
-        failureAction: 'block' as const,
-      },
-    ],
-    tests,
-    verificationMatrix,
-  };
 }
 
 /**
@@ -200,8 +90,8 @@ function computeModelSplits(
  * Orchestrates all generators in sequence:
  * 1. Generate milestone spec from vision doc and optional research
  * 2. Generate self-contained component specs from vision doc and milestone spec
- * 3. Build placeholder wave execution plan (single wave, all tasks)
- * 4. Build placeholder test plan (one test per success criterion)
+ * 3. Plan waves via planWaves() for dependency-ordered wave decomposition
+ * 4. Generate test plan via generateTestPlan() for categorized test specs
  * 5. Compute execution summary with model split percentages
  * 6. Compose MissionPackage and validate against schema
  *
@@ -219,11 +109,17 @@ export function assembleMissionPackage(
   // 2. Generate component specs
   const componentSpecs = generateComponentSpecs(visionDoc, milestoneSpec, research);
 
-  // 3. Build placeholder wave plan
-  const waveExecutionPlan = buildPlaceholderWavePlan(milestoneSpec, componentSpecs);
+  // 3. Plan waves via real wave planner
+  const waveExecutionPlan = planWaves(milestoneSpec, componentSpecs);
 
-  // 4. Build placeholder test plan
-  const testPlan = buildPlaceholderTestPlan(visionDoc, milestoneSpec);
+  // 4. Generate test plan via real test plan generator
+  const testPlan = generateTestPlan({
+    name: visionDoc.name,
+    successCriteria: visionDoc.successCriteria,
+    milestoneName: milestoneSpec.name,
+    milestoneSpec: 'milestone-spec.md',
+    visionDocument: visionDoc.name,
+  });
 
   // 5. Compute execution summary
   const modelSplits = computeModelSplits(componentSpecs);
