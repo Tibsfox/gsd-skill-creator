@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.31 GSD-OS MCP Integration -- SHIPPED. Phase 304 gap closure in progress.
+**Current focus:** v1.31 GSD-OS MCP Integration -- SHIPPED. Phase 304 gap closure COMPLETE.
 
 ## Current Position
 
 Phase: 304 (MCP Integration Wiring) — Gap closure from milestone audit
 Plan: 02 of 02 -- ALL COMPLETE
 Status: Phase complete
-Last activity: 2026-02-22 — Completed 304-02 (Rust StagingGate + agent bridge staging wiring)
+Last activity: 2026-02-22 — Completed 304-01 (all 19 gateway tools wired + per-tool scope enforcement)
 
 Progress: [################] 100%
 
@@ -79,6 +79,8 @@ Progress: [################] 100%
 - String-contains injection detection in Rust StagingGate (no regex crate for gap closure)
 - Staging validation before mutable connection acquisition to avoid borrow checker conflicts
 - StagingGate as zero-size struct with const patterns for minimal memory footprint
+- rawBody property for body buffering in gateway -- Hono adapter recognizes it, avoids IncomingMessage stream recreation
+- Scope enforcement at HTTP level (server.ts) not McpServer tool handler level -- auth info only available at HTTP layer
 
 ### Key Constraints
 
@@ -98,5 +100,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 304-02-PLAN.md (Rust StagingGate + agent bridge staging, both SECR-12 and SECR-13 closed)
+Stopped at: Completed 304-01-PLAN.md (19 tools wired into production gateway, per-tool scope enforcement, E2E tests for all 6 groups)
 Resume file: None

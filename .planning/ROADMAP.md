@@ -62,7 +62,7 @@
 - [x] **Phase 301: Security Gates** - Hash verification, trust decay, invocation validation, audit logging (completed 2026-02-22)
 - [x] **Phase 302: Presentation** - Blueprint Editor blocks, trace panel, security dashboard, boot sequence, Tauri IPC (completed 2026-02-22)
 - [x] **Phase 303: Integration Testing** - End-to-end tests, performance verification, safety-critical tests, coverage validation (completed 2026-02-22)
-- [ ] **Phase 304: MCP Integration Wiring** - Gap closure: gateway factory assembly, scope enforcement, staging pipeline wiring
+- [x] **Phase 304: MCP Integration Wiring** - Gap closure: gateway factory assembly, scope enforcement, staging pipeline wiring (completed 2026-02-22)
 
 ## Phase Details
 
@@ -257,7 +257,7 @@ Plans:
 | 301. Security Gates | v1.31 | 3/3 | Complete | 2026-02-22 |
 | 302. Presentation | v1.31 | 3/3 | Complete | 2026-02-22 |
 | 303. Integration Testing | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
-| 304. MCP Integration Wiring | 1/2 | In Progress|  | — |
+| 304. MCP Integration Wiring | 2/2 | Complete   | 2026-02-22 | — |
 
 ---
 *34 milestones shipped. 303 phases complete, 1 phase planned. 770 plans completed.*
