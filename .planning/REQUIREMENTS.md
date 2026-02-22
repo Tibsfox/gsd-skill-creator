@@ -70,11 +70,11 @@ Requirements for v1.30. Each maps to roadmap phases.
 
 ### Test Plan Generation (TPLN)
 
-- [ ] **TPLN-01**: Test plan generator creates categorized test specifications (safety-critical, core functionality, integration, edge cases) from vision success criteria
+- [x] **TPLN-01**: Test plan generator creates categorized test specifications (safety-critical, core functionality, integration, edge cases) from vision success criteria
 - [ ] **TPLN-02**: Verification matrix builder maps every vision document success criterion to at least one test ID, flagging unmapped criteria
-- [ ] **TPLN-03**: Safety-critical classifier identifies tests that must block deployment and marks them mandatory-pass
+- [x] **TPLN-03**: Safety-critical classifier identifies tests that must block deployment and marks them mandatory-pass
 - [ ] **TPLN-04**: Test density checker enforces 2-4 tests per success criterion benchmark, with safety domains having at least 15% safety-critical tests
-- [ ] **TPLN-05**: Test ID generator produces unique, categorized IDs: S-NNN (safety), C-NNN (core), I-NNN (integration), E-NNN (edge case)
+- [x] **TPLN-05**: Test ID generator produces unique, categorized IDs: S-NNN (safety), C-NNN (core), I-NNN (integration), E-NNN (edge case)
 
 ### Template System (TMPL)
 
@@ -172,11 +172,11 @@ Requirements for v1.30. Each maps to roadmap phases.
 | CACH-03 | Phase 285 | Complete |
 | CACH-04 | Phase 285 | Complete |
 | CACH-05 | Phase 285 | Complete |
-| TPLN-01 | Phase 286 | Pending |
+| TPLN-01 | Phase 286 | Complete |
 | TPLN-02 | Phase 286 | Pending |
-| TPLN-03 | Phase 286 | Pending |
+| TPLN-03 | Phase 286 | Complete |
 | TPLN-04 | Phase 286 | Pending |
-| TPLN-05 | Phase 286 | Pending |
+| TPLN-05 | Phase 286 | Complete |
 | TMPL-01 | Phase 287 | Pending |
 | TMPL-02 | Phase 287 | Pending |
 | TMPL-03 | Phase 287 | Pending |
