@@ -214,14 +214,14 @@ Plans:
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 293. Foundation Types | 2/2 | Complete    | 2026-02-22 | - |
-| 294. Host Manager & Server Registry | 3/3 | Complete   | 2026-02-22 | - |
+| 294. Host Manager & Server Registry | 3/3 | Complete    | 2026-02-22 | - |
 | 295. Gateway Server Core | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
 | 296. Gateway Project & Skill Tools | v1.31 | 0/TBD | Not started | - |
 | 297. Gateway Agent, Workflow & Session Tools | v1.31 | 0/TBD | Not started | - |
 | 298. Gateway Chipset, Resources & Prompts | v1.31 | 0/TBD | Not started | - |
 | 299. MCP Templates | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
 | 300. Agent Bridge | v1.31 | Complete    | 2026-02-22 | - |
-| 301. Security Gates | v1.31 | 3/3 | Complete | 2026-02-22 |
+| 301. Security Gates | v1.31 | Complete    | 2026-02-22 | 2026-02-22 |
 | 302. Presentation | v1.31 | 0/TBD | Not started | - |
 | 303. Integration Testing | v1.31 | 0/TBD | Not started | - |
 
