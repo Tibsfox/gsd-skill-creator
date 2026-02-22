@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.32 Brainstorm Session Support -- Phase 307 IN PROGRESS (plan 01 of 3 complete)
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 307 IN PROGRESS (plan 02 of 3 complete)
 
 ## Current Position
 
 Phase: 307 (3 of 7 in v1.32) (Session Manager & Phase Controller) -- IN PROGRESS
-Plan: 1 of 3 complete
+Plan: 2 of 3 complete
 Status: Executing
-Last activity: 2026-02-22 -- Completed 307-01 (SessionManager: state machine, JSONL persistence, timer)
+Last activity: 2026-02-22 -- Completed 307-02 (PhaseController: phase transitions, agent matrix, facilitator announcements)
 
 Progress: [████████░░░░░░░░] 47% (v1.32)
 
@@ -65,6 +65,11 @@ Progress: [████████░░░░░░░░] 47% (v1.32)
 - readState() always uses SessionStateSchema.parse() on disk reads -- never cast from filesystem data
 - updatePhase() and setActiveTechnique() both auto-transition status from 'created' to 'active'
 - Timer resume sets totalMs = remainingMs so elapsed tracking works correctly after resume
+- PhaseController is a pure orchestrator with zero persistent state -- all reads/writes delegate to SessionManager
+- PHASE_AGENT_MATRIX kept module-private (not exported) -- consumers use getActiveAgents() API
+- Diverge-to-diverge self-transition allowed for technique loops within diverge phase
+- Free-form pathway returns only facilitator+scribe (all other agents on-demand)
+- TechniqueTransition.timer_behavior typed as union literal, not plain string
 
 ### Key Constraints
 
@@ -82,5 +87,5 @@ Progress: [████████░░░░░░░░] 47% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 307-01-PLAN.md (SessionManager: 630 lines, 15 async methods, 120 brainstorm tests passing)
+Stopped at: Completed 307-02-PLAN.md (PhaseController: 524 lines, 9 methods, 120 brainstorm tests passing)
 Resume file: None

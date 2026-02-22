@@ -27,11 +27,11 @@ Requirements for Brainstorm Session Support milestone. Each maps to roadmap phas
 ### Session Management
 
 - [x] **SESS-01**: Session lifecycle state machine: created → active → paused → completed/abandoned
-- [ ] **SESS-02**: 5-phase controller: Explore → Diverge → Organize → Converge → Act with strict ordering
-- [ ] **SESS-03**: Agent activation matrix enforced per phase — Critic only during Converge, Scribe always active
+- [x] **SESS-02**: 5-phase controller: Explore → Diverge → Organize → Converge → Act with strict ordering
+- [x] **SESS-03**: Agent activation matrix enforced per phase — Critic only during Converge, Scribe always active
 - [x] **SESS-04**: Append-only idea/question JSONL streams with session persistence
 - [x] **SESS-05**: Timer system with technique-specific defaults, pause/resume, and `TechniqueTransition` type with mandatory timer reset
-- [ ] **SESS-06**: Phase transition announcements for Facilitator to present to user
+- [x] **SESS-06**: Phase transition announcements for Facilitator to present to user
 
 ### Technique Engine
 
@@ -131,11 +131,11 @@ Deferred to future release. Tracked but not in current roadmap.
 | RULES-05 | Phase 306 | Complete |
 | RULES-06 | Phase 306 | Complete |
 | SESS-01 | Phase 307 | Complete |
-| SESS-02 | Phase 307 | Pending |
-| SESS-03 | Phase 307 | Pending |
+| SESS-02 | Phase 307 | Complete |
+| SESS-03 | Phase 307 | Complete |
 | SESS-04 | Phase 307 | Complete |
 | SESS-05 | Phase 307 | Complete |
-| SESS-06 | Phase 307 | Pending |
+| SESS-06 | Phase 307 | Complete |
 | TECH-01 | Phase 308 | Complete |
 | TECH-02 | Phase 308 | Complete |
 | TECH-03 | Phase 308 | Complete |
