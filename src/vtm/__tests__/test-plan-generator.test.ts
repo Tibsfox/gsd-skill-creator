@@ -1,5 +1,6 @@
 /**
- * Tests for VTM test plan generator, safety classifier, and test ID generator.
+ * Tests for VTM test plan generator, safety classifier, test ID generator,
+ * verification matrix builder, and test density checker.
  *
  * Covers:
  * - DEFAULT_GENERATOR_CONFIG: generator config structure with keyword sets
@@ -8,6 +9,8 @@
  * - classifySafetyCritical(): safety-critical marking with domain-aware diagnostics
  * - generateTestId(): categorized test ID generation (S/C/I/E-NNN pattern)
  * - generateTestPlan(): full test plan generation from vision success criteria
+ * - buildVerificationMatrix(): dual-view criterion-to-test mapping with auto-stub
+ * - checkTestDensity(): per-criterion density enforcement with safety-aware thresholds
  *
  * All functions are pure functional API. Generator config is standalone and
  * reusable across vision documents.
@@ -22,9 +25,13 @@ import {
   classifySafetyCritical,
   generateTestId,
   generateTestPlan,
+  buildVerificationMatrix,
+  checkTestDensity,
   type GeneratorConfig,
   type ClassificationOverrides,
   type SafetyDiagnostic,
+  type VerificationMatrix,
+  type DensityReport,
 } from '../test-plan-generator.js';
 
 // ---------------------------------------------------------------------------
@@ -487,5 +494,494 @@ describe('generateTestPlan', () => {
       // expectedBehavior should reference the criterion
       expect(test.expectedBehavior.toLowerCase()).toContain('must not lose data');
     }
+  });
+});
+
+// ---------------------------------------------------------------------------
+// buildVerificationMatrix -- verification matrix builder
+// ---------------------------------------------------------------------------
+
+describe('buildVerificationMatrix', () => {
+  const config = createGeneratorConfig();
+
+  /** Helper to build a simple plan with known criteria and tests. */
+  function makePlan(criteria: string[], overrides?: ClassificationOverrides): TestPlan {
+    return generateTestPlan(
+      { name: 'test-component', successCriteria: criteria },
+      config,
+      overrides,
+    );
+  }
+
+  it('accepts a TestPlan and successCriteria string array, returns VerificationMatrix', () => {
+    const criteria = ['user can log in', 'user can log out'];
+    const plan = makePlan(criteria);
+    const matrix = buildVerificationMatrix(plan, criteria);
+    expect(matrix).toHaveProperty('criterionView');
+    expect(matrix).toHaveProperty('testView');
+    expect(matrix).toHaveProperty('coverageStats');
+    expect(matrix).toHaveProperty('stubTests');
+  });
+
+  it('criterionView has one entry per criterion in successCriteria', () => {
+    const criteria = ['user can log in', 'user can log out', 'user can reset password'];
+    const plan = makePlan(criteria);
+    const matrix = buildVerificationMatrix(plan, criteria);
+    expect(matrix.criterionView).toHaveLength(3);
+    expect(matrix.criterionView.map(e => e.criterion)).toEqual(criteria);
+  });
+
+  it('criterionView entries have testIds arrays populated from verificationMatrix', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    const matrix = buildVerificationMatrix(plan, criteria);
+    expect(matrix.criterionView[0].testIds.length).toBeGreaterThan(0);
+    // All test IDs should match the IDs in plan.verificationMatrix
+    const planTestIds = plan.verificationMatrix.find(e => e.criterion === criteria[0])?.testIds ?? [];
+    expect(matrix.criterionView[0].testIds).toEqual(planTestIds);
+  });
+
+  it('testView groups by test ID and lists all criteria that test covers', () => {
+    const criteria = ['user can log in', 'user can log out'];
+    const plan = makePlan(criteria);
+    const matrix = buildVerificationMatrix(plan, criteria);
+    // Each test should map to exactly one criterion (generated plans have 1:1 mapping)
+    for (const entry of matrix.testView) {
+      expect(entry.testId).toBeTruthy();
+      expect(entry.criteria.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('a test covering multiple criteria appears in multiple criterionView entries', () => {
+    // Create a plan and manually add a test that covers two criteria
+    const criteria = ['user can log in', 'user can log out'];
+    const plan = makePlan(criteria);
+    // Manually make the first test cover both criteria
+    const sharedTestId = plan.tests[0].id;
+    plan.verificationMatrix[1].testIds.push(sharedTestId);
+
+    const matrix = buildVerificationMatrix(plan, criteria);
+    const entriesWithSharedTest = matrix.criterionView.filter(e => e.testIds.includes(sharedTestId));
+    expect(entriesWithSharedTest.length).toBe(2);
+  });
+
+  it('a criterion with multiple tests lists all test IDs', () => {
+    const criteria = ['must not lose data under any circumstances']; // safety -> 3 tests
+    const plan = makePlan(criteria);
+    const matrix = buildVerificationMatrix(plan, criteria);
+    expect(matrix.criterionView[0].testIds.length).toBe(3); // safetyDensityMin = 3
+  });
+
+  it('testView entry for a shared test lists all criteria it covers (many-to-many)', () => {
+    const criteria = ['user can log in', 'user can log out'];
+    const plan = makePlan(criteria);
+    const sharedTestId = plan.tests[0].id;
+    plan.verificationMatrix[1].testIds.push(sharedTestId);
+
+    const matrix = buildVerificationMatrix(plan, criteria);
+    const sharedEntry = matrix.testView.find(e => e.testId === sharedTestId);
+    expect(sharedEntry).toBeDefined();
+    expect(sharedEntry!.criteria).toContain(criteria[0]);
+    expect(sharedEntry!.criteria).toContain(criteria[1]);
+  });
+
+  it('coverageStats includes totalCriteria, mappedCriteria, unmappedCriteria, coveragePercent', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    const matrix = buildVerificationMatrix(plan, criteria);
+    expect(matrix.coverageStats).toHaveProperty('totalCriteria');
+    expect(matrix.coverageStats).toHaveProperty('mappedCriteria');
+    expect(matrix.coverageStats).toHaveProperty('unmappedCriteria');
+    expect(matrix.coverageStats).toHaveProperty('coveragePercent');
+    expect(matrix.coverageStats).toHaveProperty('gaps');
+  });
+
+  it('when all criteria have at least one test: coveragePercent is 100, unmappedCriteria is 0', () => {
+    const criteria = ['user can log in', 'user can log out'];
+    const plan = makePlan(criteria);
+    const matrix = buildVerificationMatrix(plan, criteria);
+    expect(matrix.coverageStats.coveragePercent).toBe(100);
+    expect(matrix.coverageStats.unmappedCriteria).toBe(0);
+    expect(matrix.coverageStats.mappedCriteria).toBe(2);
+    expect(matrix.coverageStats.totalCriteria).toBe(2);
+  });
+
+  it('when a criterion has no mapped tests, auto-generates a stub TestSpec with category core', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    // Add an extra criterion not in the plan
+    const allCriteria = [...criteria, 'user can export data'];
+    const matrix = buildVerificationMatrix(plan, allCriteria);
+    expect(matrix.stubTests.length).toBe(1);
+    expect(matrix.stubTests[0].category).toBe('core');
+  });
+
+  it('auto-generated stub has ID following C-NNN pattern', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    const allCriteria = [...criteria, 'user can export data'];
+    const matrix = buildVerificationMatrix(plan, allCriteria);
+    expect(matrix.stubTests[0].id).toMatch(/^C-\d{3}$/);
+  });
+
+  it('auto-generated stub has verifies set to criterion text', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    const allCriteria = [...criteria, 'unmapped criterion text'];
+    const matrix = buildVerificationMatrix(plan, allCriteria);
+    expect(matrix.stubTests[0].verifies).toBe('unmapped criterion text');
+  });
+
+  it('auto-generated stub has expectedBehavior prefixed with "TODO: "', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    const allCriteria = [...criteria, 'unmapped criterion'];
+    const matrix = buildVerificationMatrix(plan, allCriteria);
+    expect(matrix.stubTests[0].expectedBehavior).toMatch(/^TODO: /);
+  });
+
+  it('stub tests are added to the returned stubTests array', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    const allCriteria = [...criteria, 'unmapped A', 'unmapped B'];
+    const matrix = buildVerificationMatrix(plan, allCriteria);
+    expect(matrix.stubTests).toHaveLength(2);
+  });
+
+  it('coverageStats.gaps lists the text of originally unmapped criteria', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    const allCriteria = [...criteria, 'unmapped criterion X'];
+    const matrix = buildVerificationMatrix(plan, allCriteria);
+    expect(matrix.coverageStats.gaps).toContain('unmapped criterion X');
+  });
+
+  it('unmapped criteria still appear in criterionView with stub test IDs', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    const allCriteria = [...criteria, 'unmapped criterion Y'];
+    const matrix = buildVerificationMatrix(plan, allCriteria);
+    const unmappedEntry = matrix.criterionView.find(e => e.criterion === 'unmapped criterion Y');
+    expect(unmappedEntry).toBeDefined();
+    expect(unmappedEntry!.testIds.length).toBe(1);
+    expect(unmappedEntry!.testIds[0]).toMatch(/^C-\d{3}$/);
+  });
+
+  it('coverageStats with partial mapping shows correct percentages', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    // 1 mapped + 1 unmapped = 50% coverage
+    const allCriteria = [...criteria, 'unmapped criterion'];
+    const matrix = buildVerificationMatrix(plan, allCriteria);
+    expect(matrix.coverageStats.totalCriteria).toBe(2);
+    expect(matrix.coverageStats.mappedCriteria).toBe(1);
+    expect(matrix.coverageStats.unmappedCriteria).toBe(1);
+    expect(matrix.coverageStats.coveragePercent).toBe(50);
+  });
+
+  it('empty successCriteria array produces empty matrix with 0% coverage', () => {
+    const plan = makePlan(['user can log in']);
+    const matrix = buildVerificationMatrix(plan, []);
+    expect(matrix.criterionView).toHaveLength(0);
+    expect(matrix.testView).toHaveLength(0);
+    expect(matrix.coverageStats.totalCriteria).toBe(0);
+    expect(matrix.coverageStats.coveragePercent).toBe(0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// checkTestDensity -- test density enforcement
+// ---------------------------------------------------------------------------
+
+describe('checkTestDensity', () => {
+  const config = createGeneratorConfig();
+
+  /** Helper to build a simple plan with known criteria and tests. */
+  function makePlan(criteria: string[], cfg?: GeneratorConfig, overrides?: ClassificationOverrides): TestPlan {
+    return generateTestPlan(
+      { name: 'test-component', successCriteria: criteria },
+      cfg ?? config,
+      overrides,
+    );
+  }
+
+  it('returns DensityReport with perCriterion, globalStats, and diagnostics', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    expect(report).toHaveProperty('perCriterion');
+    expect(report).toHaveProperty('globalStats');
+    expect(report).toHaveProperty('diagnostics');
+  });
+
+  it('perCriterion has one entry per criterion with testCount, categories, and status', () => {
+    const criteria = ['user can log in', 'user can log out'];
+    const plan = makePlan(criteria);
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    expect(report.perCriterion).toHaveLength(2);
+    for (const entry of report.perCriterion) {
+      expect(entry).toHaveProperty('criterion');
+      expect(entry).toHaveProperty('testCount');
+      expect(entry).toHaveProperty('categories');
+      expect(entry).toHaveProperty('status');
+    }
+  });
+
+  it('regular criteria with 2-4 tests: status pass', () => {
+    // Default generates 2 core tests per criterion (densityRange.min = 2)
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    expect(report.perCriterion[0].testCount).toBe(2);
+    expect(report.perCriterion[0].status).toBe('pass');
+  });
+
+  it('regular criteria with <2 tests: status under', () => {
+    // Create a plan then remove one test to make it under-density
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    // Remove one test from the criterion so it only has 1
+    const testIdToKeep = plan.verificationMatrix[0].testIds[0];
+    plan.tests = plan.tests.filter(t => t.id === testIdToKeep);
+    plan.verificationMatrix[0].testIds = [testIdToKeep];
+    plan.totalTests = plan.tests.length;
+
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    expect(report.perCriterion[0].testCount).toBe(1);
+    expect(report.perCriterion[0].status).toBe('under');
+  });
+
+  it('regular criteria with >4 tests: status over', () => {
+    // Create a plan then add extra tests to make it over-density
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    // Add 3 more core tests manually (2 existing + 3 = 5)
+    for (let i = 0; i < 3; i++) {
+      const id = `C-0${plan.tests.length + 1 + i}`;
+      plan.tests.push({
+        id,
+        category: 'core',
+        verifies: criteria[0],
+        expectedBehavior: 'test',
+        component: 'test-component',
+      });
+      plan.verificationMatrix[0].testIds.push(id);
+    }
+    plan.totalTests = plan.tests.length;
+
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    expect(report.perCriterion[0].testCount).toBe(5);
+    expect(report.perCriterion[0].status).toBe('over');
+  });
+
+  it('safety-critical criteria with 3-4 tests: status pass', () => {
+    // "must not" triggers safety-critical classification, generates 3 tests
+    const criteria = ['must not lose data'];
+    const plan = makePlan(criteria);
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    expect(report.perCriterion[0].testCount).toBe(3);
+    expect(report.perCriterion[0].status).toBe('pass');
+  });
+
+  it('safety-critical criteria with <3 tests: status under', () => {
+    const criteria = ['must not lose data'];
+    const plan = makePlan(criteria);
+    // Remove tests to get only 2
+    plan.verificationMatrix[0].testIds = plan.verificationMatrix[0].testIds.slice(0, 2);
+    plan.tests = plan.tests.slice(0, 2);
+    plan.totalTests = plan.tests.length;
+
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    expect(report.perCriterion[0].testCount).toBe(2);
+    expect(report.perCriterion[0].status).toBe('under');
+  });
+
+  it('safety-critical criteria with >4 tests: status over', () => {
+    const criteria = ['must not lose data'];
+    const plan = makePlan(criteria);
+    // Add 2 more safety tests (3 existing + 2 = 5)
+    for (let i = 0; i < 2; i++) {
+      const id = `S-0${plan.tests.length + 1 + i}`;
+      plan.tests.push({
+        id,
+        category: 'safety-critical',
+        verifies: criteria[0],
+        expectedBehavior: 'test',
+        component: 'test-component',
+      });
+      plan.verificationMatrix[0].testIds.push(id);
+    }
+    plan.totalTests = plan.tests.length;
+
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    expect(report.perCriterion[0].testCount).toBe(5);
+    expect(report.perCriterion[0].status).toBe('over');
+  });
+
+  it('globalStats includes totalCriteria, totalTests, averageDensity, underCount, overCount, passCount', () => {
+    const criteria = ['user can log in', 'user can log out'];
+    const plan = makePlan(criteria);
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    expect(report.globalStats).toHaveProperty('totalCriteria');
+    expect(report.globalStats).toHaveProperty('totalTests');
+    expect(report.globalStats).toHaveProperty('averageDensity');
+    expect(report.globalStats).toHaveProperty('underCount');
+    expect(report.globalStats).toHaveProperty('overCount');
+    expect(report.globalStats).toHaveProperty('passCount');
+  });
+
+  it('globalStats averageDensity equals totalTests / totalCriteria', () => {
+    const criteria = ['user can log in', 'user can log out'];
+    const plan = makePlan(criteria);
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    expect(report.globalStats.averageDensity).toBe(
+      report.globalStats.totalTests / report.globalStats.totalCriteria,
+    );
+  });
+
+  it('globalStats counts match perCriterion statuses', () => {
+    const criteria = ['user can log in', 'must not lose data'];
+    const plan = makePlan(criteria);
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    const underCount = report.perCriterion.filter(e => e.status === 'under').length;
+    const overCount = report.perCriterion.filter(e => e.status === 'over').length;
+    const passCount = report.perCriterion.filter(e => e.status === 'pass').length;
+    expect(report.globalStats.underCount).toBe(underCount);
+    expect(report.globalStats.overCount).toBe(overCount);
+    expect(report.globalStats.passCount).toBe(passCount);
+  });
+
+  it('for safety-sensitive domain: if safety-critical tests < 15% of total tests, diagnostics includes SAFETY_DENSITY_LOW', () => {
+    // Build a plan with mostly core tests and very few safety tests
+    const criteria = [
+      'user can log in',
+      'user can log out',
+      'user can view profile',
+      'user can edit profile',
+      'user can delete account',
+      'user can change password',
+      'must not expose tokens', // safety - 3 tests out of 15 total = 20%
+    ];
+    // Actually we need safety < 15%. With 7 criteria, 6 core (12 tests) + 1 safety (3 tests) = 15/15 = 20%.
+    // Need more core criteria. Use 10 core (20 tests) + 1 safety (3 tests) = 23 tests. 3/23 = 13% < 15%.
+    const manyCriteria = [
+      'user can log in',
+      'user can log out',
+      'user can view profile',
+      'user can edit profile',
+      'user can delete account',
+      'user can change password',
+      'user can upload avatar',
+      'user can search',
+      'user can filter results',
+      'user can sort results',
+      'must not expose tokens',
+    ];
+    const plan = makePlan(manyCriteria);
+    const report = checkTestDensity(plan, manyCriteria, 'medical device');
+    const safetyDiag = report.diagnostics.find(d => d.code === 'SAFETY_DENSITY_LOW');
+    expect(safetyDiag).toBeDefined();
+    expect(safetyDiag!.severity).toBe('warning');
+  });
+
+  it('for non-safety domain: no SAFETY_DENSITY_LOW diagnostic even if 0 safety tests', () => {
+    const criteria = ['user can log in', 'user can log out'];
+    const plan = makePlan(criteria);
+    const report = checkTestDensity(plan, criteria, 'blog platform');
+    const safetyDiag = report.diagnostics.find(d => d.code === 'SAFETY_DENSITY_LOW');
+    expect(safetyDiag).toBeUndefined();
+  });
+
+  it('over-density generates OVER_DENSITY informational note in diagnostics', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    // Add extra tests to exceed max
+    for (let i = 0; i < 3; i++) {
+      const id = `C-0${plan.tests.length + 1 + i}`;
+      plan.tests.push({
+        id,
+        category: 'core',
+        verifies: criteria[0],
+        expectedBehavior: 'test',
+        component: 'test-component',
+      });
+      plan.verificationMatrix[0].testIds.push(id);
+    }
+    plan.totalTests = plan.tests.length;
+
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    const overDiag = report.diagnostics.find(d => d.code === 'OVER_DENSITY');
+    expect(overDiag).toBeDefined();
+    expect(overDiag!.severity).toBe('info');
+  });
+
+  it('under-density generates UNDER_DENSITY warning in diagnostics', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    // Remove tests to make under-density
+    plan.verificationMatrix[0].testIds = [plan.verificationMatrix[0].testIds[0]];
+    plan.tests = [plan.tests[0]];
+    plan.totalTests = 1;
+
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    const underDiag = report.diagnostics.find(d => d.code === 'UNDER_DENSITY');
+    expect(underDiag).toBeDefined();
+    expect(underDiag!.severity).toBe('warning');
+  });
+
+  it('in strict enforcement mode: under-density diagnostics have severity error', () => {
+    const strictConfig = createGeneratorConfig({ enforcementMode: 'strict' });
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria, strictConfig);
+    // Remove tests to make under-density
+    plan.verificationMatrix[0].testIds = [plan.verificationMatrix[0].testIds[0]];
+    plan.tests = [plan.tests[0]];
+    plan.totalTests = 1;
+
+    const report = checkTestDensity(plan, criteria, 'web-app', strictConfig);
+    const underDiag = report.diagnostics.find(d => d.code === 'UNDER_DENSITY');
+    expect(underDiag).toBeDefined();
+    expect(underDiag!.severity).toBe('error');
+  });
+
+  it('in default warning mode: all density diagnostics have severity warning or info', () => {
+    const criteria = ['user can log in'];
+    const plan = makePlan(criteria);
+    // Make over-density
+    for (let i = 0; i < 3; i++) {
+      const id = `C-0${plan.tests.length + 1 + i}`;
+      plan.tests.push({
+        id,
+        category: 'core',
+        verifies: criteria[0],
+        expectedBehavior: 'test',
+        component: 'test-component',
+      });
+      plan.verificationMatrix[0].testIds.push(id);
+    }
+    plan.totalTests = plan.tests.length;
+
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    for (const diag of report.diagnostics) {
+      expect(['warning', 'info']).toContain(diag.severity);
+    }
+  });
+
+  it('perCriterion categories shows per-category test count distribution', () => {
+    const criteria = ['must not lose data'];
+    const plan = makePlan(criteria);
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    // All tests for "must not lose data" are safety-critical
+    expect(report.perCriterion[0].categories['safety-critical']).toBe(3);
+  });
+
+  it('mixed criteria plan produces correct per-criterion breakdown', () => {
+    const criteria = ['must not lose data', 'user can log in'];
+    const plan = makePlan(criteria);
+    const report = checkTestDensity(plan, criteria, 'web-app');
+    expect(report.perCriterion).toHaveLength(2);
+    expect(report.globalStats.totalCriteria).toBe(2);
+    expect(report.globalStats.totalTests).toBe(5); // 3 safety + 2 core
+    expect(report.globalStats.passCount).toBe(2); // Both pass
   });
 });
