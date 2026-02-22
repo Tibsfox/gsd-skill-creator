@@ -21,6 +21,7 @@ pub fn run() {
             app.manage(Mutex::new(state::WatcherState::default()));
             app.manage(Mutex::new(PtyManager::default()));
             app.manage(Mutex::new(ClaudeSessionManager::default()));
+            app.manage(tokio::sync::Mutex::new(mcp_host::McpHostState::new()));
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -46,6 +47,11 @@ pub fn run() {
             commands::claude::claude_list,
             commands::claude::claude_status,
             commands::dashboard::generate_dashboard,
+            mcp_host::commands::mcp_connect,
+            mcp_host::commands::mcp_disconnect,
+            mcp_host::commands::mcp_list_servers,
+            mcp_host::commands::mcp_call_tool,
+            mcp_host::commands::mcp_get_trace,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
