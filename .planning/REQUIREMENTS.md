@@ -85,11 +85,11 @@ Requirements for v1.30. Each maps to roadmap phases.
 
 ### Pipeline Orchestrator (PIPE)
 
-- [ ] **PIPE-01**: Pipeline orchestrator manages the three-stage flow: vision → research → mission with configurable stage skipping
-- [ ] **PIPE-02**: Speed selector automatically determines pipeline speed (full/skip-research/mission-only) based on input assessment, with override capability
-- [ ] **PIPE-03**: Stage transition produces typed intermediate artifacts that downstream stages consume
+- [x] **PIPE-01**: Pipeline orchestrator manages the three-stage flow: vision → research → mission with configurable stage skipping
+- [x] **PIPE-02**: Speed selector automatically determines pipeline speed (full/skip-research/mission-only) based on input assessment, with override capability
+- [x] **PIPE-03**: Stage transition produces typed intermediate artifacts that downstream stages consume
 - [ ] **PIPE-04**: Pipeline result includes complete file manifest, execution summary, model assignment split, and estimated execution metrics
-- [ ] **PIPE-05**: Error handling reports which stage failed, what was produced before failure, and whether partial output is usable
+- [x] **PIPE-05**: Error handling reports which stage failed, what was produced before failure, and whether partial output is usable
 
 ### Integration (INTG)
 
@@ -181,11 +181,11 @@ Requirements for v1.30. Each maps to roadmap phases.
 | TMPL-02 | Phase 287 | Complete |
 | TMPL-03 | Phase 287 | Complete |
 | TMPL-04 | Phase 287 | Complete |
-| PIPE-01 | Phase 289 | Pending |
-| PIPE-02 | Phase 289 | Pending |
-| PIPE-03 | Phase 289 | Pending |
+| PIPE-01 | Phase 289 | Complete |
+| PIPE-02 | Phase 289 | Complete |
+| PIPE-03 | Phase 289 | Complete |
 | PIPE-04 | Phase 289 | Pending |
-| PIPE-05 | Phase 289 | Pending |
+| PIPE-05 | Phase 289 | Complete |
 | INTG-01 | Phase 290 | Pending |
 | INTG-02 | Phase 290 | Pending |
 | INTG-03 | Phase 290 | Pending |

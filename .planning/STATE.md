@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Phase 288 complete — Mission Assembly Integration Wiring
+**Current focus:** Phase 289 in progress — Pipeline Orchestrator
 
 ## Current Position
 
-Phase: 288 of 290 (Mission Assembly Integration Wiring) — 10 of 12 in milestone
-Plan: 2 of 2 in current phase
-Status: 288-02 complete (phase complete)
-Last activity: 2026-02-22 — 288-02 complete (test updates for real wave plan, test plan, signal-based model assignment)
+Phase: 289 of 290 (Pipeline Orchestrator) — 11 of 12 in milestone
+Plan: 1 of 2 in current phase
+Status: 289-01 complete
+Last activity: 2026-02-22 — 289-01 complete (pipeline types and speed selector)
 
-Progress: [#########░] 85% (10/12 phases)
+Progress: [#########░] 88% (10.5/12 phases)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 20
+- Total plans completed: 21
 - Average duration: 4min
-- Total execution time: 71min
+- Total execution time: 74min
 
 **By Phase:**
 
@@ -37,6 +37,7 @@ Progress: [#########░] 85% (10/12 phases)
 | 286 Test Plan Generation | 2 | 6min | 3min |
 | 287 Template System | 2 | 6min | 3min |
 | 288 Mission Assembly Integration | 2 | 8min | 4min |
+| 289 Pipeline Orchestrator | 1 | 3min | 3min |
 
 ## Accumulated Context
 
@@ -114,6 +115,9 @@ Progress: [#########░] 85% (10/12 phases)
 - 2026-02-22: Kept MissionPackage status as draft since schema only allows ready/draft/in-progress
 - 2026-02-22: Haiku task test replaced with sonnet-default: signal-based classifier requires scaffold/boilerplate keywords, not just low concept count
 - 2026-02-22: Test flexibility pattern: assert structural invariants (regex, range) over exact values for classifier-dependent output
+- 2026-02-22: Re-export PipelineSpeed from research-utils rather than redefining to maintain single source of truth
+- 2026-02-22: PipelineResult.executionSummary uses modelSplit with count+percentage per tier (matches MissionPackage shape)
+- 2026-02-22: PipelineError.recoverable is structural: true when vision stage completed, enabling partial-output recovery
 
 ### Key Constraints
 
@@ -129,5 +133,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 288-02-PLAN.md (Phase 288 complete)
+Stopped at: Completed 289-01-PLAN.md
 Resume file: None
