@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Phase 286 complete — Test Plan Generation
+**Current focus:** Phase 287 in progress — Template System
 
 ## Current Position
 
-Phase: 286 of 289 (Test Plan Generation) — 8 of 11 in milestone
-Plan: 2 of 2 in current phase
-Status: 286 complete
-Last activity: 2026-02-22 — 286-02 complete (verification matrix, density checker, 90 tests)
+Phase: 287 of 289 (Template System) — 9 of 11 in milestone
+Plan: 1 of 2 in current phase
+Status: 287-01 complete
+Last activity: 2026-02-22 — 287-01 complete (template loader, renderer, registry, 35 tests)
 
-Progress: [########░░] 73% (8/11 phases)
+Progress: [########░░] 77% (8.5/11 phases)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 16
+- Total plans completed: 17
 - Average duration: 4min
-- Total execution time: 57min
+- Total execution time: 60min
 
 **By Phase:**
 
@@ -35,6 +35,7 @@ Progress: [########░░] 73% (8/11 phases)
 | 284 Model Assignment | 2 | 6min | 3min |
 | 285 Cache Optimization | 2 | 10min | 5min |
 | 286 Test Plan Generation | 2 | 6min | 3min |
+| 287 Template System | 1 | 3min | 3min |
 
 ## Accumulated Context
 
@@ -99,6 +100,11 @@ Progress: [########░░] 73% (8/11 phases)
 - 2026-02-22: Stub ID generation starts from max existing core ID to avoid collisions
 - 2026-02-22: Safety-critical determination for density uses per-test category check (any test with safety-critical triggers elevated threshold)
 - 2026-02-22: SAFETY_DENSITY_LOW uses plan.safetyCriticalCount / plan.totalTests for global safety percentage
+- 2026-02-22: Mustache {{name}} syntax for template placeholders — zero conflicts with markdown or TypeScript template literals
+- 2026-02-22: Module-level Map cache for templates keyed by resolved absolute path
+- 2026-02-22: Factory function createTemplateRegistry() following existing VTM functional patterns
+- 2026-02-22: wave-plan maps to wave-execution-plan-template.md on disk via explicit filename map
+- 2026-02-22: Custom templates override built-in templates of same name via register()
 
 ### Key Constraints
 
@@ -114,5 +120,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 286-02-PLAN.md
+Stopped at: Completed 287-01-PLAN.md
 Resume file: None

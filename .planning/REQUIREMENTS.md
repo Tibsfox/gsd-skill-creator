@@ -78,10 +78,10 @@ Requirements for v1.30. Each maps to roadmap phases.
 
 ### Template System (TMPL)
 
-- [ ] **TMPL-01**: Template loader reads and parses all 7 vision-to-mission templates (vision, milestone-spec, component-spec, wave-plan, test-plan, readme, research-reference)
-- [ ] **TMPL-02**: Template renderer substitutes placeholder tokens in templates with provided values, preserving markdown structure
+- [x] **TMPL-01**: Template loader reads and parses all 7 vision-to-mission templates (vision, milestone-spec, component-spec, wave-plan, test-plan, readme, research-reference)
+- [x] **TMPL-02**: Template renderer substitutes placeholder tokens in templates with provided values, preserving markdown structure
 - [ ] **TMPL-03**: Template validator checks rendered output against corresponding Zod schema to ensure all required sections are present
-- [ ] **TMPL-04**: Template registry provides lookup by template name with metadata (purpose, required variables, output format)
+- [x] **TMPL-04**: Template registry provides lookup by template name with metadata (purpose, required variables, output format)
 
 ### Pipeline Orchestrator (PIPE)
 
@@ -177,10 +177,10 @@ Requirements for v1.30. Each maps to roadmap phases.
 | TPLN-03 | Phase 286 | Complete |
 | TPLN-04 | Phase 286 | Complete |
 | TPLN-05 | Phase 286 | Complete |
-| TMPL-01 | Phase 287 | Pending |
-| TMPL-02 | Phase 287 | Pending |
+| TMPL-01 | Phase 287 | Complete |
+| TMPL-02 | Phase 287 | Complete |
 | TMPL-03 | Phase 287 | Pending |
-| TMPL-04 | Phase 287 | Pending |
+| TMPL-04 | Phase 287 | Complete |
 | PIPE-01 | Phase 288 | Pending |
 | PIPE-02 | Phase 288 | Pending |
 | PIPE-03 | Phase 288 | Pending |
