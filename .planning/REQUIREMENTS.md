@@ -52,9 +52,9 @@ Requirements for Brainstorm Session Support milestone. Each maps to roadmap phas
 
 ### Agents
 
-- [ ] **AGENT-01**: Facilitator agent — problem assessment, pathway recommendation, energy management, transition confidence scoring, adaptive technique sequencing, non-judgmental facilitation voice
-- [ ] **AGENT-02**: Ideator agent — idea generation across individual and collaborative techniques, never evaluates own output
-- [ ] **AGENT-03**: Questioner agent — question generation only, redirects answers to questions
+- [x] **AGENT-01**: Facilitator agent — problem assessment, pathway recommendation, energy management, transition confidence scoring, adaptive technique sequencing, non-judgmental facilitation voice
+- [x] **AGENT-02**: Ideator agent — idea generation across individual and collaborative techniques, never evaluates own output
+- [x] **AGENT-03**: Questioner agent — question generation only, redirects answers to questions
 - [ ] **AGENT-04**: Analyst agent — SCAMPER lens management, Six Thinking Hats coordination with hat-color broadcast to all agents
 - [ ] **AGENT-05**: Mapper agent — mind mapping, affinity mapping, lotus blossom, storyboarding — organizes without evaluating quality
 - [ ] **AGENT-06**: Critic agent — Converge-only activation, 4-dimension evaluation (feasibility/impact/alignment/risk), prioritization methods (dot voting, star rating, weighted scoring)
@@ -147,9 +147,9 @@ Deferred to future release. Tracked but not in current roadmap.
 | PATH-02 | Phase 308 | Complete |
 | PATH-03 | Phase 308 | Complete |
 | PATH-04 | Phase 308 | Complete |
-| AGENT-01 | Phase 309 | Pending |
-| AGENT-02 | Phase 310 | Pending |
-| AGENT-03 | Phase 310 | Pending |
+| AGENT-01 | Phase 309 | Complete |
+| AGENT-02 | Phase 310 | Complete |
+| AGENT-03 | Phase 310 | Complete |
 | AGENT-04 | Phase 310 | Pending |
 | AGENT-05 | Phase 310 | Pending |
 | AGENT-06 | Phase 310 | Pending |
