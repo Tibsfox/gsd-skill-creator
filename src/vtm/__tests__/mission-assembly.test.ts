@@ -187,20 +187,21 @@ describe('generateMilestoneSpec', () => {
     expect(result.systemLayers![0].name).toBe('ModuleA');
   });
 
-  it('assigns model tiers correctly (opus for safety, sonnet default, haiku for single-concept)', () => {
+  it('assigns model tiers via signal-based classifier', () => {
     const vision = createValidVisionDoc();
     const result = generateMilestoneSpec(vision);
 
     const breakdown = result.componentBreakdown;
-    // ModuleA: 2 concepts, no safety -> sonnet
+    // ModuleA: context "concept-a1 concept-a2" -- no strong signals -> sonnet (default)
     const moduleA = breakdown.find(c => c.component === 'ModuleA');
     expect(moduleA?.model).toBe('sonnet');
 
-    // ModuleB: has safetyConcerns -> opus
+    // ModuleB: context includes "safety: Handle high voltages with caution"
+    // which triggers opus "safety" keyword (weight 3) -> opus
     const moduleB = breakdown.find(c => c.component === 'ModuleB');
     expect(moduleB?.model).toBe('opus');
 
-    // ModuleC: 3 concepts, no safety -> sonnet (not single-concept)
+    // ModuleC: context "concept-c1 concept-c2 concept-c3" -- no strong signals -> sonnet
     const moduleC = breakdown.find(c => c.component === 'ModuleC');
     expect(moduleC?.model).toBe('sonnet');
   });
