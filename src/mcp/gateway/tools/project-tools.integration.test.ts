@@ -112,23 +112,23 @@ describe('Project Tools Integration', () => {
     const toolsResult = await client.listTools();
     const toolNames = toolsResult.tools.map((t) => t.name).sort();
 
-    expect(toolNames).toContain('project:list');
-    expect(toolNames).toContain('project:get');
-    expect(toolNames).toContain('project:create');
-    expect(toolNames).toContain('project:execute-phase');
+    expect(toolNames).toContain('project.list');
+    expect(toolNames).toContain('project.get');
+    expect(toolNames).toContain('project.create');
+    expect(toolNames).toContain('project.execute-phase');
 
     await client.close();
   });
 
-  // ── project:list ──────────────────────────────────────────────────
+  // ── project.list ──────────────────────────────────────────────────
 
-  it('project:list returns empty array for clean directory', async () => {
+  it('project.list returns empty array for clean directory', async () => {
     const transport = createClientTransport(port, storedToken.token);
     const client = new Client({ name: 'list-empty-test', version: '1.0.0' });
 
     await client.connect(transport);
     const result = await client.callTool({
-      name: 'project:list',
+      name: 'project.list',
       arguments: {},
     });
 
@@ -139,7 +139,7 @@ describe('Project Tools Integration', () => {
     await client.close();
   });
 
-  it('project:list returns projects after creation', async () => {
+  it('project.list returns projects after creation', async () => {
     await createMockProject(projectsRoot, 'test-alpha');
 
     const transport = createClientTransport(port, storedToken.token);
@@ -147,7 +147,7 @@ describe('Project Tools Integration', () => {
 
     await client.connect(transport);
     const result = await client.callTool({
-      name: 'project:list',
+      name: 'project.list',
       arguments: {},
     });
 
@@ -159,9 +159,9 @@ describe('Project Tools Integration', () => {
     await client.close();
   });
 
-  // ── project:get ───────────────────────────────────────────────────
+  // ── project.get ───────────────────────────────────────────────────
 
-  it('project:get returns full details for existing project', async () => {
+  it('project.get returns full details for existing project', async () => {
     await createMockProject(projectsRoot, 'detailed-project');
 
     const transport = createClientTransport(port, storedToken.token);
@@ -169,7 +169,7 @@ describe('Project Tools Integration', () => {
 
     await client.connect(transport);
     const result = await client.callTool({
-      name: 'project:get',
+      name: 'project.get',
       arguments: { name: 'detailed-project' },
     });
 
@@ -181,13 +181,13 @@ describe('Project Tools Integration', () => {
     await client.close();
   });
 
-  it('project:get returns error for nonexistent project', async () => {
+  it('project.get returns error for nonexistent project', async () => {
     const transport = createClientTransport(port, storedToken.token);
     const client = new Client({ name: 'get-error-test', version: '1.0.0' });
 
     await client.connect(transport);
     const result = await client.callTool({
-      name: 'project:get',
+      name: 'project.get',
       arguments: { name: 'nonexistent' },
     });
 
@@ -198,9 +198,9 @@ describe('Project Tools Integration', () => {
     await client.close();
   });
 
-  // ── project:create ────────────────────────────────────────────────
+  // ── project.create ────────────────────────────────────────────────
 
-  it('project:create creates a new project', async () => {
+  it('project.create creates a new project', async () => {
     const transport = createClientTransport(port, storedToken.token);
     const client = new Client({ name: 'create-test', version: '1.0.0' });
 
@@ -208,7 +208,7 @@ describe('Project Tools Integration', () => {
 
     // Create the project
     const createResult = await client.callTool({
-      name: 'project:create',
+      name: 'project.create',
       arguments: { name: 'new-proj', vision: 'Build something amazing' },
     });
 
@@ -217,9 +217,9 @@ describe('Project Tools Integration', () => {
     expect(created.created).toBe(true);
     expect(created.name).toBe('new-proj');
 
-    // Verify it shows up in project:list
+    // Verify it shows up in project.list
     const listResult = await client.callTool({
-      name: 'project:list',
+      name: 'project.list',
       arguments: {},
     });
 
@@ -231,9 +231,9 @@ describe('Project Tools Integration', () => {
     await client.close();
   });
 
-  // ── project:execute-phase ─────────────────────────────────────────
+  // ── project.execute-phase ─────────────────────────────────────────
 
-  it('project:execute-phase returns acknowledgment', async () => {
+  it('project.execute-phase returns acknowledgment', async () => {
     await createMockProject(projectsRoot, 'exec-project');
 
     const transport = createClientTransport(port, storedToken.token);
@@ -241,7 +241,7 @@ describe('Project Tools Integration', () => {
 
     await client.connect(transport);
     const result = await client.callTool({
-      name: 'project:execute-phase',
+      name: 'project.execute-phase',
       arguments: { name: 'exec-project', phase: 1 },
     });
 
@@ -253,7 +253,7 @@ describe('Project Tools Integration', () => {
     await client.close();
   });
 
-  it('project:execute-phase returns error for invalid phase', async () => {
+  it('project.execute-phase returns error for invalid phase', async () => {
     await createMockProject(projectsRoot, 'limited-project');
 
     const transport = createClientTransport(port, storedToken.token);
@@ -261,7 +261,7 @@ describe('Project Tools Integration', () => {
 
     await client.connect(transport);
     const result = await client.callTool({
-      name: 'project:execute-phase',
+      name: 'project.execute-phase',
       arguments: { name: 'limited-project', phase: 99 },
     });
 

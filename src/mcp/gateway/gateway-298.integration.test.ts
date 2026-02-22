@@ -41,9 +41,9 @@ function createClientTransport(port: number, token: string): StreamableHTTPClien
   );
 }
 
-function parseToolResult(result: { content: unknown[] }): unknown {
-  const textContent = result.content as Array<{ type: string; text: string }>;
-  return JSON.parse(textContent[0]!.text);
+function parseToolResult(result: unknown): unknown {
+  const r = result as { content: Array<{ type: string; text: string }> };
+  return JSON.parse(r.content[0]!.text);
 }
 
 // ── Test Suite ──────────────────────────────────────────────────────────
@@ -112,14 +112,14 @@ describe('Gateway 298 Integration', () => {
   // ── Chipset Tools ─────────────────────────────────────────────────
 
   describe('chipset tools end-to-end', () => {
-    it('chipset:get returns valid chipset config', async () => {
+    it('chipset.get returns valid chipset config', async () => {
       const transport = createClientTransport(port, storedToken.token);
       const client = new Client({ name: 'chipset-get', version: '1.0.0' });
 
       await client.connect(transport);
 
       const result = await client.callTool({
-        name: 'chipset:get',
+        name: 'chipset.get',
         arguments: {},
       });
 
@@ -131,14 +131,14 @@ describe('Gateway 298 Integration', () => {
       await client.close();
     });
 
-    it('chipset:modify updates config and returns diff', async () => {
+    it('chipset.modify updates config and returns diff', async () => {
       const transport = createClientTransport(port, storedToken.token);
       const client = new Client({ name: 'chipset-modify', version: '1.0.0' });
 
       await client.connect(transport);
 
       const result = await client.callTool({
-        name: 'chipset:modify',
+        name: 'chipset.modify',
         arguments: { name: 'modified-via-http' },
       });
 
@@ -150,14 +150,14 @@ describe('Gateway 298 Integration', () => {
       await client.close();
     });
 
-    it('chipset:synthesize produces valid config from description', async () => {
+    it('chipset.synthesize produces valid config from description', async () => {
       const transport = createClientTransport(port, storedToken.token);
       const client = new Client({ name: 'chipset-synth', version: '1.0.0' });
 
       await client.connect(transport);
 
       const result = await client.callTool({
-        name: 'chipset:synthesize',
+        name: 'chipset.synthesize',
         arguments: {
           description: 'A sequential pipeline with stages for building, testing, and documenting code',
         },
@@ -171,7 +171,7 @@ describe('Gateway 298 Integration', () => {
       await client.close();
     });
 
-    it('chipset:get reflects modifications', async () => {
+    it('chipset.get reflects modifications', async () => {
       const transport = createClientTransport(port, storedToken.token);
       const client = new Client({ name: 'chipset-persist', version: '1.0.0' });
 
@@ -179,13 +179,13 @@ describe('Gateway 298 Integration', () => {
 
       // Modify
       await client.callTool({
-        name: 'chipset:modify',
+        name: 'chipset.modify',
         arguments: { name: 'persistent-change' },
       });
 
       // Verify with get
       const result = await client.callTool({
-        name: 'chipset:get',
+        name: 'chipset.get',
         arguments: {},
       });
 
@@ -239,7 +239,7 @@ describe('Gateway 298 Integration', () => {
 
       expect(result.contents).toHaveLength(1);
       expect(result.contents[0]!.mimeType).toBe('text/yaml');
-      const parsed = JSON.parse(result.contents[0]!.text as string);
+      const parsed = JSON.parse((result.contents[0] as { text: string }).text);
       expect(parsed.name).toBe('den-v1.28');
 
       await client.close();
@@ -255,7 +255,7 @@ describe('Gateway 298 Integration', () => {
         uri: 'gsd://skills/registry',
       });
 
-      const skills = JSON.parse(result.contents[0]!.text as string);
+      const skills = JSON.parse((result.contents[0] as { text: string }).text);
       expect(skills).toHaveLength(1);
       expect(skills[0].name).toBe('test-skill');
 
@@ -272,7 +272,7 @@ describe('Gateway 298 Integration', () => {
         uri: 'gsd://projects/my-project/config',
       });
 
-      const data = JSON.parse(result.contents[0]!.text as string);
+      const data = JSON.parse((result.contents[0] as { text: string }).text);
       expect(data.name).toBe('my-project');
       expect(data.status).toBe('active');
 
@@ -289,7 +289,7 @@ describe('Gateway 298 Integration', () => {
         uri: 'gsd://agents/executor-1/telemetry',
       });
 
-      const data = JSON.parse(result.contents[0]!.text as string);
+      const data = JSON.parse((result.contents[0] as { text: string }).text);
       expect(data.agentId).toBe('executor-1');
       expect(data.role).toBe('executor');
 
@@ -383,7 +383,7 @@ describe('Gateway 298 Integration', () => {
   // ── Concurrent Access ─────────────────────────────────────────────
 
   describe('concurrent access', () => {
-    it('concurrent chipset:modify calls do not corrupt state', async () => {
+    it('concurrent chipset.modify calls do not corrupt state', async () => {
       // Create 3 concurrent clients
       const clients: Client[] = [];
       for (let i = 0; i < 3; i++) {
@@ -397,7 +397,7 @@ describe('Gateway 298 Integration', () => {
       const results = await Promise.all(
         clients.map((client, i) =>
           client.callTool({
-            name: 'chipset:modify',
+            name: 'chipset.modify',
             arguments: { name: `concurrent-${i}` },
           }),
         ),
@@ -414,7 +414,7 @@ describe('Gateway 298 Integration', () => {
 
       // Final state should be one of the concurrent values
       const getResult = await clients[0]!.callTool({
-        name: 'chipset:get',
+        name: 'chipset.get',
         arguments: {},
       });
       const config = parseToolResult(getResult) as any;
@@ -435,7 +435,7 @@ describe('Gateway 298 Integration', () => {
 
       // Modify chipset via tool
       await client.callTool({
-        name: 'chipset:modify',
+        name: 'chipset.modify',
         arguments: { name: 'resource-sync-test' },
       });
 
@@ -444,7 +444,7 @@ describe('Gateway 298 Integration', () => {
         uri: 'gsd://chipset/state',
       });
 
-      const state = JSON.parse(resource.contents[0]!.text as string);
+      const state = JSON.parse((resource.contents[0] as { text: string }).text);
       expect(state.name).toBe('resource-sync-test');
 
       await client.close();
