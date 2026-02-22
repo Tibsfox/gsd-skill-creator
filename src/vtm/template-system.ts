@@ -17,6 +17,15 @@
 
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import type { z } from 'zod';
+import {
+  VisionDocumentSchema,
+  MilestoneSpecSchema,
+  ComponentSpecSchema,
+  WaveExecutionPlanSchema,
+  TestPlanSchema,
+  ResearchReferenceSchema,
+} from './types.js';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -428,5 +437,142 @@ export function createTemplateRegistry(basePath?: string): TemplateRegistry {
     register(meta: TemplateMeta, content: string): void {
       customTemplates.set(meta.name, { meta, content });
     },
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Template validator
+// ---------------------------------------------------------------------------
+
+/** A single diagnostic produced by template validation. */
+export interface TemplateDiagnostic {
+  severity: 'error' | 'warning';
+  /** Field path (e.g. "name", "chipsetConfig.skills") or placeholder name. */
+  section: string;
+  message: string;
+  /** Line number in rendered output where issue found, if determinable. */
+  line?: number;
+}
+
+/** Result returned by validateRenderedTemplate. */
+export interface ValidationResult {
+  valid: boolean;
+  errors: TemplateDiagnostic[];
+  warnings: TemplateDiagnostic[];
+}
+
+/**
+ * Maps template names to their corresponding Zod schemas.
+ *
+ * 'readme' maps to null because README is freeform markdown with no
+ * structured schema to validate against.
+ */
+const TEMPLATE_SCHEMA_MAP: Record<string, z.ZodTypeAny | null> = {
+  'vision': VisionDocumentSchema,
+  'milestone-spec': MilestoneSpecSchema,
+  'component-spec': ComponentSpecSchema,
+  'wave-plan': WaveExecutionPlanSchema,
+  'test-plan': TestPlanSchema,
+  'readme': null,
+  'research-reference': ResearchReferenceSchema,
+};
+
+/**
+ * Validates rendered template output against the corresponding Zod schema.
+ *
+ * Produces structured diagnostics:
+ * - Schema violations are errors (severity 'error')
+ * - Unresolved {{placeholder}} tokens are warnings (severity 'warning')
+ * - Unresolved block tokens ({{#if}}, {{#each}}, {{/if}}, {{/each}}, {{else}})
+ *   are warnings
+ *
+ * Warnings do not affect validity — a result with only warnings is still valid.
+ *
+ * @param templateName - Logical template name (e.g. 'vision', 'component-spec')
+ * @param renderedContent - The rendered template output to scan for unresolved tokens
+ * @param parsedData - Optional parsed data object to validate against the Zod schema
+ * @returns ValidationResult with valid flag, errors array, and warnings array
+ */
+export function validateRenderedTemplate(
+  templateName: string,
+  renderedContent: string,
+  parsedData?: unknown,
+): ValidationResult {
+  const errors: TemplateDiagnostic[] = [];
+  const warnings: TemplateDiagnostic[] = [];
+
+  // Step 1: Look up schema. Unknown template name is an error.
+  if (!(templateName in TEMPLATE_SCHEMA_MAP)) {
+    return {
+      valid: false,
+      errors: [
+        {
+          severity: 'error',
+          section: 'templateName',
+          message: `Unknown template name: ${templateName}`,
+        },
+      ],
+      warnings: [],
+    };
+  }
+
+  const schema = TEMPLATE_SCHEMA_MAP[templateName];
+
+  // Step 2: If parsedData is provided and schema exists, run Zod safeParse.
+  if (parsedData !== undefined && schema !== null) {
+    const result = schema.safeParse(parsedData);
+    if (!result.success) {
+      for (const issue of result.error.issues) {
+        errors.push({
+          severity: 'error',
+          section: issue.path.map(String).join('.') || templateName,
+          message: issue.message,
+        });
+      }
+    }
+  }
+
+  // Step 3: Scan renderedContent for unresolved {{placeholder}} tokens.
+  const placeholderRegex = /\{\{(\w+)\}\}/g;
+  const seenPlaceholders = new Set<string>();
+  let match: RegExpExecArray | null;
+
+  while ((match = placeholderRegex.exec(renderedContent)) !== null) {
+    const name = match[1];
+    if (!seenPlaceholders.has(name)) {
+      seenPlaceholders.add(name);
+      // Compute line number (1-based) by counting newlines before match position
+      const textBefore = renderedContent.slice(0, match.index);
+      const line = textBefore.split('\n').length;
+      warnings.push({
+        severity: 'warning',
+        section: name,
+        message: `Unresolved placeholder: {{${name}}}`,
+        line,
+      });
+    }
+  }
+
+  // Step 4: Detect unresolved block tokens in rendered content.
+  const blockTokenRegex = /(\{\{#if\s+\w+\}\}|\{\{#each\s+\w+\}\}|\{\{\/if\}\}|\{\{\/each\}\}|\{\{else\}\})/g;
+  let blockMatch: RegExpExecArray | null;
+
+  while ((blockMatch = blockTokenRegex.exec(renderedContent)) !== null) {
+    const token = blockMatch[1];
+    const textBefore = renderedContent.slice(0, blockMatch.index);
+    const line = textBefore.split('\n').length;
+    warnings.push({
+      severity: 'warning',
+      section: 'block-token',
+      message: `Unresolved block token: ${token}`,
+      line,
+    });
+  }
+
+  // Step 5: Return result. Valid when no errors, regardless of warnings.
+  return {
+    valid: errors.length === 0,
+    errors,
+    warnings,
   };
 }
