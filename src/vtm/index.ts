@@ -24,7 +24,10 @@
  * the CacheReport aggregate composing all analyzers into a single report,
  * and the test plan generator for converting vision success criteria into
  * categorized test plans with safety-critical classification, keyword
- * heuristics, bidirectional overrides, and S/C/I/E-NNN test ID generation.
+ * heuristics, bidirectional overrides, and S/C/I/E-NNN test ID generation,
+ * and the template system for loading, rendering, registering, and
+ * validating mustache-style markdown templates with Zod schema validation
+ * and structured diagnostics.
  *
  * @module vtm
  */
@@ -41,3 +44,4 @@ export * from './model-assignment.js';
 export * from './model-budget.js';
 export * from './cache-optimizer.js';
 export * from './test-plan-generator.js';
+export * from './template-system.js';
