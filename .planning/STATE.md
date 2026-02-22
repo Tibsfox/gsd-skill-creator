@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.32 Brainstorm Session Support -- Phase 308 in progress (Plan 05 of 6 complete)
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 308 in progress (Plan 06 of 6 remaining)
 
 ## Current Position
 
 Phase: 308 (4 of 7 in v1.32) (Technique Engine, Pathway Router & Artifact Generator)
-Plan: 5 of 6 complete
+Plan: 6 of 6 remaining
 Status: In Progress
-Last activity: 2026-02-22 -- Completed 308-02 (5 collaborative techniques + Artifact Generator)
+Last activity: 2026-02-22 -- Completed 308-05 (PathwayRouter + 5 pathway configs + 16-technique engine registry)
 
 Progress: [██████░░░░░░░░░░] 36% (v1.32)
 
@@ -53,6 +53,11 @@ Progress: [██████░░░░░░░░░░] 36% (v1.32)
 - Black Hat timing constraint checked BEFORE evaluative content check -- timing violation takes precedence
 - Per-session violation storage via Map<string, RuleViolation[]> -- accumulates, never resets
 - system sender resolved to facilitator AgentRole in violation records as fallback
+- Signal word matching uses phrase inclusion (inputLower.includes(phrase)) not token splitting -- preserves multi-word phrases
+- Tie-breaking: creative-exploration wins ties (broadest applicability); free-form fallback when no signals match
+- creative-exploration recommended_for expanded with 'imagine', 'explore', 'possibilities', etc. for broader signal coverage
+- adaptTechniqueQueue works on copy -- never mutates input array; only modifies remaining queue, not completed techniques
+- HIGH_EFFORT_TECHNIQUES and HIGH_ENERGY_TECHNIQUES as module-level constants for adaptation signal handling
 
 ### Key Constraints
 
@@ -70,5 +75,5 @@ Progress: [██████░░░░░░░░░░] 36% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 306-02-PLAN.md (evaluative detection, Black Hat constraint, violation logging)
+Stopped at: Completed 308-05-PLAN.md (PathwayRouter + 5 pathway configs + 16-technique engine registry)
 Resume file: None
