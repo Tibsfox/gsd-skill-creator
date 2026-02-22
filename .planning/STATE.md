@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.32 Brainstorm Session Support -- Phase 310 IN PROGRESS (plan 04 of 5 complete)
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 310 COMPLETE (5 of 5 plans done)
 
 ## Current Position
 
-Phase: 310 (4 of 7 in v1.32) (Technique Agents) -- IN PROGRESS
-Plan: 4 of 5 complete
-Status: In Progress
-Last activity: 2026-02-22 -- Completed 310-04 (Scribe agent with capture-only constraint and artifact generation)
+Phase: 310 (4 of 7 in v1.32) (Technique Agents) -- COMPLETE
+Plan: 5 of 5 complete
+Status: Complete
+Last activity: 2026-02-22 -- Completed 310-05 (71 technique agent behavioral constraint tests)
 
-Progress: [██████████░░░░░░] 64% (v1.32)
+Progress: [███████████░░░░░] 68% (v1.32)
 
 ## Accumulated Context
 
@@ -97,6 +97,9 @@ Progress: [██████████░░░░░░] 64% (v1.32)
 - TECHNIQUE_HINTS as Partial<Record<TechniqueId, string>> with only 4 technique hints (scamper, six-hats, five-whys, brainwriting)
 - redirectEvaluation uses static message text -- no agent name or content interpolation (non-shaming principle)
 - generateSessionSummary uses Math.round(elapsed_ms / 60_000) for human-readable duration minutes
+- 71 technique agent tests pass with real TechniqueEngine + RulesEngine (no mocks) -- all 7 agents verified
+- Error message matching in tests uses actual implementation text ('not assigned technique') not plan's paraphrase
+- Mind-mapping round 1 is first meaningful round (round 0 produces empty for branching structure)
 
 ### Key Constraints
 
@@ -114,5 +117,5 @@ Progress: [██████████░░░░░░] 64% (v1.32)
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 309-02-PLAN.md (FacilitatorAgent guidance, energy management, session summary -- all 8 methods, 55 tests)
+Stopped at: Completed 310-05-PLAN.md (71 technique agent behavioral constraint tests -- Phase 310 complete)
 Resume file: None
