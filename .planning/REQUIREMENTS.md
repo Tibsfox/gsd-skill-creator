@@ -1,202 +1,238 @@
-# Requirements: GSD Skill Creator — v1.30 Vision-to-Mission Pipeline
+# Requirements: GSD Skill Creator
 
-**Defined:** 2026-02-21
-**Core Value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
+**Defined:** 2026-02-22
+**Core Value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
 
-## v1 Requirements
+## v1.31 Requirements
 
-Requirements for v1.30. Each maps to roadmap phases.
+Requirements for GSD-OS MCP Integration milestone. Each maps to roadmap phases.
 
-### Types & Schemas (TYPE)
+### MCP Foundation Types
 
-- [x] **TYPE-01**: Vision document structure validated by Zod schema covering all required sections (Vision, Problem Statement, Core Concept, Architecture, Chipset, Success Criteria, Through-Line)
-- [x] **TYPE-02**: Research reference structure validated by Zod schema covering source sections, safety considerations, cross-references, and bibliography
-- [x] **TYPE-03**: Mission package structure validated by Zod schema covering milestone spec, component specs, wave plan, test plan, and README
-- [x] **TYPE-04**: Component spec structure validated by Zod schema covering objective, context, technical spec, implementation steps, test cases, and verification gate
-- [x] **TYPE-05**: Wave execution plan structure validated by Zod schema covering wave summary, tasks with dependencies, cache contracts, and risk factors
-- [x] **TYPE-06**: Test plan structure validated by Zod schema covering test categories, safety-critical tests, verification matrix, and coverage check
-- [x] **TYPE-07**: Chipset YAML configuration validated by Zod schema covering skills, agents, topology, and evaluation gates
-- [x] **TYPE-08**: Model assignment enum (Opus/Sonnet/Haiku) with token estimation types and the 60/40 principle constraint
+- [x] **MCPF-01**: Shared TypeScript interfaces exist for Tool, Resource, Prompt, ServerCapability, TransportConfig, McpMessage, and TraceEvent
+- [ ] **MCPF-02**: Rust FFI types exist matching TypeScript types with serde serialization and Tauri IPC command shapes
+- [x] **MCPF-03**: Staging gate interfaces exist with TrustState enum, SecurityGate trait, HashRecord, and ValidationResult types
 
-### Vision Document Processing (VDOC)
+### MCP Host Manager
 
-- [x] **VDOC-01**: Parser extracts all structured sections from a vision document markdown file into a typed object
-- [x] **VDOC-02**: Validator reports missing required sections, empty sections, and sections that fail quality checks
-- [x] **VDOC-03**: Quality checker verifies success criteria are testable (not vague), chipset YAML is valid, dependencies are listed, and through-line references an ecosystem principle
-- [x] **VDOC-04**: Archetype classifier identifies document as Educational Pack, Infrastructure Component, Organizational System, or Creative Tool based on content analysis
-- [x] **VDOC-05**: Dependency extractor parses the "Depends on" header and "Relationship to Other Vision Documents" table into a dependency list
+- [ ] **HOST-01**: Host Manager can spawn stdio MCP server child processes and complete MCP handshake
+- [ ] **HOST-02**: Host Manager manages 3+ concurrent server connections independently
+- [ ] **HOST-03**: Host Manager detects server crashes and restarts with exponential backoff
+- [ ] **HOST-04**: Host Manager gracefully disconnects servers with cleanup
+- [ ] **HOST-05**: Host Manager discovers server capabilities via tools/list, resources/list, prompts/list and caches results
+- [ ] **HOST-06**: Tool Router routes tool calls to the correct server by name and handles timeouts
+- [ ] **HOST-07**: Server Registry persists config across restarts, tracks health status, and manages quarantine state
+- [ ] **HOST-08**: Trace Emitter emits structured TraceEvent for every MCP message via Tauri events with timestamps and latency
 
-### Research Reference Compilation (RREF)
+### Gateway Server
 
-- [x] **RREF-01**: Research compiler accepts a vision document and produces a structured research reference with per-module sections
-- [x] **RREF-02**: Knowledge chunker splits research content into three tiers: summary (~2K tokens), active (~10K tokens), and reference (full) with token count estimates
-- [x] **RREF-03**: Source quality checker flags entertainment media sources and requires professional/organizational sources
-- [x] **RREF-04**: Safety extractor identifies and collects all safety considerations into a consolidated safety section with boundary classifications
-- [x] **RREF-05**: Research necessity detector determines pipeline speed (full/skip-research/mission-only) based on domain analysis of the vision document
+- [ ] **GATE-01**: Gateway server starts on configurable port with Streamable HTTP transport
+- [ ] **GATE-02**: Gateway authenticates requests via pre-shared bearer token from ~/.gsd/gateway-token
+- [ ] **GATE-03**: Gateway rejects unauthorized requests with 401 and enforces role-based scopes
+- [ ] **GATE-04**: project:list returns all projects with name, status, phase count, and last activity
+- [ ] **GATE-05**: project:get returns full project config, phase state, and deliverables for a named project
+- [ ] **GATE-06**: project:create creates a new project from a vision document
+- [ ] **GATE-07**: project:execute-phase triggers execution of a specific phase for a named project
+- [ ] **GATE-08**: skill:search returns matching skills with relevance scores for a query
+- [ ] **GATE-09**: skill:inspect returns full SKILL.md content plus metadata for a named skill
+- [ ] **GATE-10**: skill:activate loads a skill into the current chipset with token budget impact
+- [ ] **GATE-11**: agent:spawn creates an agent with role, skills, and optional team assignment
+- [ ] **GATE-12**: agent:status returns role, current task, token usage, and last activity for an agent
+- [ ] **GATE-13**: agent:logs returns recent log entries for an agent
+- [ ] **GATE-14**: workflow:research triggers research phase and returns findings summary
+- [ ] **GATE-15**: workflow:requirements generates requirements document for a project
+- [ ] **GATE-16**: workflow:plan creates execution plan with wave assignments
+- [ ] **GATE-17**: workflow:execute triggers full GSD pipeline for a project
+- [ ] **GATE-18**: session:query returns cross-project intelligence matches for a search query
+- [ ] **GATE-19**: session:patterns returns detected patterns from skill-creator for an optional domain
+- [ ] **GATE-20**: chipset:get returns current chipset YAML as structured object
+- [ ] **GATE-21**: chipset:modify updates chipset and returns diff from previous
+- [ ] **GATE-22**: chipset:synthesize produces FPGA-synthesized chipset from natural language description
+- [ ] **GATE-23**: Resource providers expose project configs, skill registry, agent telemetry, and chipset state via URI templates
+- [ ] **GATE-24**: Prompt templates exist for create-project, diagnose-agent, and optimize-chipset workflows
+- [ ] **GATE-25**: Gateway handles concurrent tool calls correctly and returns structured errors (never crashes)
 
-### Mission Package Assembly (MPKG)
+### MCP Templates
 
-- [x] **MPKG-01**: Assembler produces a complete mission package (README, milestone spec, component specs, wave plan, test plan) from vision document and optional research reference
-- [x] **MPKG-02**: Milestone spec generator creates the master document with architecture overview, deliverables table, component breakdown, model rationale, and cross-component interfaces
-- [x] **MPKG-03**: Component spec generator creates self-contained specs that include all necessary context copied inline (not referenced from other files)
-- [x] **MPKG-04**: Self-containment validator verifies each component spec contains all shared types, interface contracts, and architectural context needed for independent execution
-- [x] **MPKG-05**: README generator produces the package overview with file manifest, execution summary (task/track/wave counts, model split percentages), and usage instructions
-- [x] **MPKG-06**: File count scales with complexity: 4-5 files for simple features, 6-8 for medium packs, 8-12 for complex systems
+- [ ] **TMPL-01**: MCP Server Template generates a complete project with package.json, tsconfig.json, SDK setup, example tool/resource/prompt, tests, CLAUDE.md, and chipset.yaml
+- [ ] **TMPL-02**: Generated server project installs, builds, and type-checks with zero errors
+- [ ] **TMPL-03**: Generated server completes MCP handshake via MCP Inspector and example tool is invocable
+- [ ] **TMPL-04**: Generated test suite passes
+- [ ] **TMPL-05**: Total generation time from command to buildable project is under 120 seconds
+- [ ] **TMPL-06**: Custom project name is applied everywhere (package.json, server name, bin name)
+- [ ] **TMPL-07**: MCP Host Template generates valid host scaffold with client pool, lifecycle management, transport abstraction, and approval gates
+- [ ] **TMPL-08**: MCP Client Template generates valid client scaffold with tool discovery, resource subscription, and typed responses
 
-### Wave Planning (WAVE)
+### Agent Bridge
 
-- [x] **WAVE-01**: Wave planner decomposes mission components into waves respecting dependency ordering (foundation → parallel → integration → polish)
-- [x] **WAVE-02**: Parallel track detector identifies components with no shared mutable state and groups them into concurrent tracks within the same wave
-- [x] **WAVE-03**: Wave 0 contains only shared type definitions, interface contracts, schema definitions, and configuration scaffolds
-- [x] **WAVE-04**: Sequential depth minimizer pushes work to parallel tracks wherever possible, reporting wall-time savings over fully sequential execution
-- [x] **WAVE-05**: Dependency graph generator produces an ASCII-art directed acyclic graph showing task dependencies and marking the critical path
-- [x] **WAVE-06**: Risk factor analyzer identifies cache TTL exceedance, interface mismatch, and model capacity risks with mitigations
+- [ ] **BRDG-01**: Generic Agent-Server Adapter creates valid MCP server from any AgentServerConfig
+- [ ] **BRDG-02**: SCOUT agent exposed as MCP server with scout:research, scout:evaluate-dependency, and scout:survey-landscape tools plus 2 resources
+- [ ] **BRDG-03**: VERIFY agent exposed as MCP server with verify:run-tests, verify:check-types, verify:audit, and verify:coverage tools plus 2 resources
+- [ ] **BRDG-04**: Agent-Client Adapter gives agents MCP client capability with connection management and tool invocation helpers
+- [ ] **BRDG-05**: EXEC agent can invoke SCOUT tools through MCP and receive results (inter-agent communication)
+- [ ] **BRDG-06**: Concurrency limiting enforced per agent server (maxConcurrency exceeded returns retry error)
+- [ ] **BRDG-07**: Agent handler errors produce structured MCP errors, never process crashes
+- [ ] **BRDG-08**: Agent context isolation maintained between concurrent invocations
 
-### Model Assignment (MODL)
+### MCP Security
 
-- [x] **MODL-01**: Model assigner classifies tasks as Opus (judgment/creativity), Sonnet (structural implementation), or Haiku (scaffold/boilerplate) based on content analysis
-- [x] **MODL-02**: Opus signal detector matches keywords: personality, persona, character, safety warden, architectural decision, factory, meta, calibration, cultural sensitivity
-- [x] **MODL-03**: Sonnet signal detector matches keywords: schema, type system, interface, pipeline, registry, test suite, API surface, documentation, content generation
-- [x] **MODL-04**: Haiku signal detector matches keywords: directory structure, configuration file, type stub, file template, simple transformation
-- [x] **MODL-05**: Budget validator enforces the 60/40 principle: ~55-65% Sonnet, ~25-35% Opus, ~5-15% Haiku by token volume, flagging violations
+- [ ] **SECR-01**: Tool Definition Hash Gate computes SHA-256 of tool definitions on connect and detects changes
+- [ ] **SECR-02**: Hash Gate ignores benign reconnects (same definitions) without false alarms
+- [ ] **SECR-03**: Tool definition change triggers quarantine, user alert, and invocation pause
+- [ ] **SECR-04**: New servers enter quarantine period with all invocations requiring human approval
+- [ ] **SECR-05**: Trust decays after 30 days of inactivity, reverting to quarantine
+- [ ] **SECR-06**: Trust resets immediately on tool definition change regardless of established status
+- [ ] **SECR-07**: Invocation Validator blocks prompt injection patterns in tool parameters
+- [ ] **SECR-08**: Invocation Validator blocks path traversal attempts in file parameters
+- [ ] **SECR-09**: Invocation Validator enforces rate limiting per server and per tool
+- [ ] **SECR-10**: Audit Logger captures all tool invocations with caller, tool, sanitized params, response status, and timing
+- [ ] **SECR-11**: Audit Logger redacts sensitive parameters (API keys, tokens) in log entries
+- [ ] **SECR-12**: No staging gate bypass path exists -- all MCP tool invocations pass through staging
+- [ ] **SECR-13**: Agent-to-agent MCP calls pass through staging gates (same as external calls)
+- [ ] **SECR-14**: Concurrent security checks are thread-safe (no race conditions under parallel validation)
 
-### Cache Optimization (CACH)
+### MCP Presentation
 
-- [x] **CACH-01**: Cache optimizer identifies shared skill loads that can be cached across agents within a wave
-- [x] **CACH-02**: Schema reuse analyzer documents producer→consumer timing for types/interfaces defined in Wave 0 and consumed in Wave 1+
-- [x] **CACH-03**: Knowledge tier calculator computes token sizes for summary/active/reference tiers and identifies which agents load which tier
-- [x] **CACH-04**: TTL validator ensures Wave 0 estimated completion time is under 5 minutes to stay within cache TTL for Wave 1 consumers
-- [x] **CACH-05**: Token savings estimator calculates total tokens saved from skill load caching, schema reuse, and knowledge pre-chunking
+- [ ] **PRES-01**: MCP Server block type exists in Blueprint Editor with tool/resource port rendering and status indicators
+- [ ] **PRES-02**: MCP Tool block type exists with parameter preview and wireable to agent input ports
+- [ ] **PRES-03**: MCP Resource block type exists with subscription visualization and wireable to context inputs
+- [ ] **PRES-04**: Block wiring rules enforce type-safe connections with error messages for invalid wiring
+- [ ] **PRES-05**: MCP Trace Panel displays real-time JSON-RPC message flow with latency sparklines and server/tool filtering
+- [ ] **PRES-06**: Security Dashboard panel shows trust state per server, hash change alerts, and blocked call log
+- [ ] **PRES-07**: Boot sequence displays MCP servers as peripherals with connection status and tool counts
+- [ ] **PRES-08**: Tauri IPC commands expose host manager operations to frontend (connect, disconnect, invoke_tool, get_trace, get_trust_state)
 
-### Test Plan Generation (TPLN)
+### MCP Integration Testing
 
-- [x] **TPLN-01**: Test plan generator creates categorized test specifications (safety-critical, core functionality, integration, edge cases) from vision success criteria
-- [x] **TPLN-02**: Verification matrix builder maps every vision document success criterion to at least one test ID, flagging unmapped criteria
-- [x] **TPLN-03**: Safety-critical classifier identifies tests that must block deployment and marks them mandatory-pass
-- [x] **TPLN-04**: Test density checker enforces 2-4 tests per success criterion benchmark, with safety domains having at least 15% safety-critical tests
-- [x] **TPLN-05**: Test ID generator produces unique, categorized IDs: S-NNN (safety), C-NNN (core), I-NNN (integration), E-NNN (edge case)
+- [ ] **TEST-01**: End-to-end: Blueprint Editor block -> Tauri IPC -> Host Manager -> Server connection
+- [ ] **TEST-02**: End-to-end: tool invocation -> staging gates -> server -> response -> trace panel
+- [ ] **TEST-03**: End-to-end: external MCP client connects to gateway, discovers tools, invokes one, gets result
+- [ ] **TEST-04**: End-to-end: template generates server -> build -> register with host -> tool calls work
+- [ ] **TEST-05**: End-to-end: SCOUT server -> EXEC client -> result returned via MCP
+- [ ] **TEST-06**: MCP overhead (host manager + staging gates) adds less than 50ms latency to tool invocations
+- [ ] **TEST-07**: All 18 safety-critical security tests pass
+- [ ] **TEST-08**: Test coverage across all MCP components exceeds 85%
 
-### Template System (TMPL)
+## v2 Requirements
 
-- [x] **TMPL-01**: Template loader reads and parses all 7 vision-to-mission templates (vision, milestone-spec, component-spec, wave-plan, test-plan, readme, research-reference)
-- [x] **TMPL-02**: Template renderer substitutes placeholder tokens in templates with provided values, preserving markdown structure
-- [x] **TMPL-03**: Template validator checks rendered output against corresponding Zod schema to ensure all required sections are present
-- [x] **TMPL-04**: Template registry provides lookup by template name with metadata (purpose, required variables, output format)
+Deferred to future release. Tracked but not in current roadmap.
 
-### Pipeline Orchestrator (PIPE)
+### Remote & Advanced MCP
 
-- [x] **PIPE-01**: Pipeline orchestrator manages the three-stage flow: vision → research → mission with configurable stage skipping
-- [x] **PIPE-02**: Speed selector automatically determines pipeline speed (full/skip-research/mission-only) based on input assessment, with override capability
-- [x] **PIPE-03**: Stage transition produces typed intermediate artifacts that downstream stages consume
-- [x] **PIPE-04**: Pipeline result includes complete file manifest, execution summary, model assignment split, and estimated execution metrics
-- [x] **PIPE-05**: Error handling reports which stage failed, what was produced before failure, and whether partial output is usable
-
-### Integration (INTG)
-
-- [x] **INTG-01**: Barrel exports expose complete public API from src/vtm/index.ts
-- [x] **INTG-02**: Chipset YAML for the vtm module defines skills, agents (pipeline topology), and evaluation gates
-- [x] **INTG-03**: All functions follow functional API primary + class wrapper pattern consistent with existing modules (MNA, logic sim, etc.)
-- [x] **INTG-04**: Eval harness validates the 5 evaluation scenarios from evals.json (vision-from-idea, mission-from-vision, research-compilation, full-pipeline, infrastructure-vision)
-- [x] **INTG-05**: Integration test suite validates cross-component flows: vision→research→mission, vision→mission (skip research), mission-only from existing vision
-
-## Future Requirements
-
-### Enhanced Pipeline
-
-- **EPIP-01**: Interactive mode with AskUserQuestion integration for guided vision capture
-- **EPIP-02**: Incremental refinement: modify existing mission packages without full regeneration
-- **EPIP-03**: Multi-milestone planning: decompose large visions into milestone sequences
-
-### GSD-OS Dashboard
-
-- **DASH-01**: VTM dashboard panel showing pipeline stage progress
-- **DASH-02**: Mission package browser with component spec viewer
-- **DASH-03**: Wave execution visualization with dependency graph rendering
-
-### Web Research Integration
-
-- **WRES-01**: Automated web research for research stage using WebSearch/WebFetch
-- **WRES-02**: Source credibility scoring for research reference quality
+- **RMCP-01**: Remote MCP server hosting via Streamable HTTP client connections
+- **RMCP-02**: MCP server marketplace / community registry
+- **RMCP-03**: Visual MCP server builder (drag-and-drop tool creation)
+- **RMCP-04**: OAuth 2.1 for remote gateway access
+- **RMCP-05**: MCP sampling primitive support
+- **RMCP-06**: Agent2Agent (A2A) protocol integration
+- **RMCP-07**: MCP server hot-reload without restart
+- **RMCP-08**: Cross-machine agent MCP topologies
+- **RMCP-09**: MCP server performance profiling in Dashboard
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| Vision document authoring UI | Requires interactive UI beyond current CLI/agent scope |
-| Real-time pipeline execution monitoring | Dashboard integration deferred to future milestone |
-| Multi-user collaborative vision editing | Single-user CLI tool; collaboration via git |
-| Natural language vision generation from voice | Requires speech-to-text integration not in current stack |
-| Automated research via external APIs | Research compilation uses Claude's training knowledge; web integration deferred |
+| Remote server hosting (HTTP host connections) | v1.0 host is stdio-only for local servers; gateway uses HTTP outbound only |
+| MCP sampling primitive | Security risk -- prevents conversation hijacking attacks per research |
+| OAuth 2.1 remote auth | Local pre-shared token sufficient for v1; remote auth deferred |
+| A2A protocol | Separate spec; MCP covers the inter-agent communication need |
+| Visual server builder | Block system connects existing servers; building new ones uses templates |
+| Server hot-reload | Restart with backoff sufficient for v1; hot-reload adds complexity |
+| Cross-machine topologies | Local-first architecture constraint; network agents are future |
 
 ## Traceability
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TYPE-01 | Phase 279 | Complete |
-| TYPE-02 | Phase 279 | Complete |
-| TYPE-03 | Phase 279 | Complete |
-| TYPE-04 | Phase 279 | Complete |
-| TYPE-05 | Phase 279 | Complete |
-| TYPE-06 | Phase 279 | Complete |
-| TYPE-07 | Phase 279 | Complete |
-| TYPE-08 | Phase 279 | Complete |
-| VDOC-01 | Phase 280 | Complete |
-| VDOC-02 | Phase 280 | Complete |
-| VDOC-03 | Phase 280 | Complete |
-| VDOC-04 | Phase 280 | Complete |
-| VDOC-05 | Phase 280 | Complete |
-| RREF-01 | Phase 281 | Complete |
-| RREF-02 | Phase 281 | Complete |
-| RREF-03 | Phase 281 | Complete |
-| RREF-04 | Phase 281 | Complete |
-| RREF-05 | Phase 281 | Complete |
-| MPKG-01 | Phase 282 | Complete |
-| MPKG-02 | Phase 282 | Complete |
-| MPKG-03 | Phase 282 | Complete |
-| MPKG-04 | Phase 282 | Complete |
-| MPKG-05 | Phase 282 | Complete |
-| MPKG-06 | Phase 282 | Complete |
-| WAVE-01 | Phase 283 | Complete |
-| WAVE-02 | Phase 283 | Complete |
-| WAVE-03 | Phase 283 | Complete |
-| WAVE-04 | Phase 283 → 292 | Complete |
-| WAVE-05 | Phase 283 → 292 | Complete |
-| WAVE-06 | Phase 283 → 292 | Complete |
-| MODL-01 | Phase 284 | Complete |
-| MODL-02 | Phase 284 | Complete |
-| MODL-03 | Phase 284 | Complete |
-| MODL-04 | Phase 284 | Complete |
-| MODL-05 | Phase 284 → 292 | Complete |
-| CACH-01 | Phase 285 | Complete |
-| CACH-02 | Phase 285 | Complete |
-| CACH-03 | Phase 285 | Complete |
-| CACH-04 | Phase 285 | Complete |
-| CACH-05 | Phase 285 | Complete |
-| TPLN-01 | Phase 286 | Complete |
-| TPLN-02 | Phase 286 | Complete |
-| TPLN-03 | Phase 286 | Complete |
-| TPLN-04 | Phase 286 | Complete |
-| TPLN-05 | Phase 286 | Complete |
-| TMPL-01 | Phase 287 → 291 | Complete |
-| TMPL-02 | Phase 287 → 291 | Complete |
-| TMPL-03 | Phase 287 → 291 | Complete |
-| TMPL-04 | Phase 287 → 291 | Complete |
-| PIPE-01 | Phase 289 | Complete |
-| PIPE-02 | Phase 289 | Complete |
-| PIPE-03 | Phase 289 | Complete |
-| PIPE-04 | Phase 289 | Complete |
-| PIPE-05 | Phase 289 | Complete |
-| INTG-01 | Phase 290 | Complete |
-| INTG-02 | Phase 290 | Complete |
-| INTG-03 | Phase 290 | Complete |
-| INTG-04 | Phase 290 | Complete |
-| INTG-05 | Phase 290 | Complete |
+| MCPF-01 | Phase 293 | Complete |
+| MCPF-02 | Phase 293 | Pending |
+| MCPF-03 | Phase 293 | Complete |
+| HOST-01 | Phase 294 | Pending |
+| HOST-02 | Phase 294 | Pending |
+| HOST-03 | Phase 294 | Pending |
+| HOST-04 | Phase 294 | Pending |
+| HOST-05 | Phase 294 | Pending |
+| HOST-06 | Phase 294 | Pending |
+| HOST-07 | Phase 294 | Pending |
+| HOST-08 | Phase 294 | Pending |
+| GATE-01 | Phase 295 | Pending |
+| GATE-02 | Phase 295 | Pending |
+| GATE-03 | Phase 295 | Pending |
+| GATE-04 | Phase 296 | Pending |
+| GATE-05 | Phase 296 | Pending |
+| GATE-06 | Phase 296 | Pending |
+| GATE-07 | Phase 296 | Pending |
+| GATE-08 | Phase 296 | Pending |
+| GATE-09 | Phase 296 | Pending |
+| GATE-10 | Phase 296 | Pending |
+| GATE-11 | Phase 297 | Pending |
+| GATE-12 | Phase 297 | Pending |
+| GATE-13 | Phase 297 | Pending |
+| GATE-14 | Phase 297 | Pending |
+| GATE-15 | Phase 297 | Pending |
+| GATE-16 | Phase 297 | Pending |
+| GATE-17 | Phase 297 | Pending |
+| GATE-18 | Phase 297 | Pending |
+| GATE-19 | Phase 297 | Pending |
+| GATE-20 | Phase 298 | Pending |
+| GATE-21 | Phase 298 | Pending |
+| GATE-22 | Phase 298 | Pending |
+| GATE-23 | Phase 298 | Pending |
+| GATE-24 | Phase 298 | Pending |
+| GATE-25 | Phase 295 | Pending |
+| TMPL-01 | Phase 299 | Pending |
+| TMPL-02 | Phase 299 | Pending |
+| TMPL-03 | Phase 299 | Pending |
+| TMPL-04 | Phase 299 | Pending |
+| TMPL-05 | Phase 299 | Pending |
+| TMPL-06 | Phase 299 | Pending |
+| TMPL-07 | Phase 299 | Pending |
+| TMPL-08 | Phase 299 | Pending |
+| BRDG-01 | Phase 300 | Pending |
+| BRDG-02 | Phase 300 | Pending |
+| BRDG-03 | Phase 300 | Pending |
+| BRDG-04 | Phase 300 | Pending |
+| BRDG-05 | Phase 300 | Pending |
+| BRDG-06 | Phase 300 | Pending |
+| BRDG-07 | Phase 300 | Pending |
+| BRDG-08 | Phase 300 | Pending |
+| SECR-01 | Phase 301 | Pending |
+| SECR-02 | Phase 301 | Pending |
+| SECR-03 | Phase 301 | Pending |
+| SECR-04 | Phase 301 | Pending |
+| SECR-05 | Phase 301 | Pending |
+| SECR-06 | Phase 301 | Pending |
+| SECR-07 | Phase 301 | Pending |
+| SECR-08 | Phase 301 | Pending |
+| SECR-09 | Phase 301 | Pending |
+| SECR-10 | Phase 301 | Pending |
+| SECR-11 | Phase 301 | Pending |
+| SECR-12 | Phase 301 | Pending |
+| SECR-13 | Phase 301 | Pending |
+| SECR-14 | Phase 301 | Pending |
+| PRES-01 | Phase 302 | Pending |
+| PRES-02 | Phase 302 | Pending |
+| PRES-03 | Phase 302 | Pending |
+| PRES-04 | Phase 302 | Pending |
+| PRES-05 | Phase 302 | Pending |
+| PRES-06 | Phase 302 | Pending |
+| PRES-07 | Phase 302 | Pending |
+| PRES-08 | Phase 302 | Pending |
+| TEST-01 | Phase 303 | Pending |
+| TEST-02 | Phase 303 | Pending |
+| TEST-03 | Phase 303 | Pending |
+| TEST-04 | Phase 303 | Pending |
+| TEST-05 | Phase 303 | Pending |
+| TEST-06 | Phase 303 | Pending |
+| TEST-07 | Phase 303 | Pending |
+| TEST-08 | Phase 303 | Pending |
 
 **Coverage:**
-- v1 requirements: 58 total
-- Mapped to phases: 58
+- v1.31 requirements: 80 total
+- Mapped to phases: 80
 - Unmapped: 0
 
 ---
-*Requirements defined: 2026-02-21*
-*Last updated: 2026-02-22 after gap closure phase creation*
+*Requirements defined: 2026-02-22*
+*Last updated: 2026-02-22 after roadmap creation*
