@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Phase 289 complete — Pipeline Orchestrator
+**Current focus:** Phase 290 in progress — Integration Testing
 
 ## Current Position
 
-Phase: 289 of 290 (Pipeline Orchestrator) — 11 of 12 in milestone
-Plan: 2 of 2 in current phase
-Status: 289-02 complete (phase complete)
-Last activity: 2026-02-22 — 289-02 complete (runPipeline orchestrator implementation)
+Phase: 290 of 290 (Integration Testing) — 12 of 12 in milestone
+Plan: 1 of 2 in current phase
+Status: 290-01 complete
+Last activity: 2026-02-22 — 290-01 complete (barrel exports, chipset YAML, VTMPipeline class wrapper)
 
-Progress: [##########] 92% (11/12 phases)
+Progress: [###########] 96% (11.5/12 phases)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 22
+- Total plans completed: 23
 - Average duration: 4min
-- Total execution time: 78min
+- Total execution time: 83min
 
 **By Phase:**
 
@@ -123,6 +123,10 @@ Progress: [##########] 92% (11/12 phases)
 - 2026-02-22: File manifest derived from MissionPackage structure (milestone-spec, component-specs, wave-plan, test-plan, readme)
 - 2026-02-22: Execution summary maps flat opusTasks/sonnetTasks/haikuTasks to nested modelSplit.opus/sonnet/haiku
 - 2026-02-22: includeCache defaults to true; set false to omit cache optimization report from mission stage
+- 2026-02-22: VTMPipeline synchronous constructor (no async init) since PipelineConfig is all optional fields
+- 2026-02-22: generateReadme wired into mission stage with computed file count and token sizing
+- 2026-02-22: visionStage declared outside try block for block scoping after var->let fix
+- 2026-02-22: Chipset YAML includes evaluation gates section beyond electronics-pack pattern per INTG-02
 
 ### Key Constraints
 
@@ -138,5 +142,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 289-02-PLAN.md
+Stopped at: Completed 290-01-PLAN.md
 Resume file: None
