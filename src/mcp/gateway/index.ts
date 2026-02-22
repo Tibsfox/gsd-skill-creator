@@ -37,6 +37,19 @@ export {
 } from './auth.js';
 
 export {
+  GatewayError,
+  formatJsonRpcError,
+  toJsonRpcError,
+  PARSE_ERROR,
+  INVALID_REQUEST,
+  METHOD_NOT_FOUND,
+  INVALID_PARAMS,
+  INTERNAL_ERROR,
+  PERMISSION_DENIED,
+  RATE_LIMITED,
+} from './errors.js';
+
+export {
   type GatewayHandle,
   type McpServerFactory,
   startGateway,
