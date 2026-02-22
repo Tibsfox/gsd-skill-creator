@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Phase 288 in progress — Mission Assembly Integration Wiring
+**Current focus:** Phase 288 complete — Mission Assembly Integration Wiring
 
 ## Current Position
 
 Phase: 288 of 290 (Mission Assembly Integration Wiring) — 10 of 12 in milestone
-Plan: 1 of 2 in current phase
-Status: 288-01 complete
-Last activity: 2026-02-22 — 288-01 complete (wire planWaves, generateTestPlan, signal-based assignModel)
+Plan: 2 of 2 in current phase
+Status: 288-02 complete (phase complete)
+Last activity: 2026-02-22 — 288-02 complete (test updates for real wave plan, test plan, signal-based model assignment)
 
 Progress: [#########░] 85% (10/12 phases)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 19
+- Total plans completed: 20
 - Average duration: 4min
-- Total execution time: 67min
+- Total execution time: 71min
 
 **By Phase:**
 
@@ -36,7 +36,7 @@ Progress: [#########░] 85% (10/12 phases)
 | 285 Cache Optimization | 2 | 10min | 5min |
 | 286 Test Plan Generation | 2 | 6min | 3min |
 | 287 Template System | 2 | 6min | 3min |
-| 288 Mission Assembly Integration | 1 | 4min | 4min |
+| 288 Mission Assembly Integration | 2 | 8min | 4min |
 
 ## Accumulated Context
 
@@ -112,6 +112,8 @@ Progress: [#########░] 85% (10/12 phases)
 - 2026-02-22: Line numbers for unresolved tokens computed by counting newlines before match position (1-based)
 - 2026-02-22: Adapter function assignModelForModule bridges module interface to AssignmentInput for signal-based classifier
 - 2026-02-22: Kept MissionPackage status as draft since schema only allows ready/draft/in-progress
+- 2026-02-22: Haiku task test replaced with sonnet-default: signal-based classifier requires scaffold/boilerplate keywords, not just low concept count
+- 2026-02-22: Test flexibility pattern: assert structural invariants (regex, range) over exact values for classifier-dependent output
 
 ### Key Constraints
 
@@ -127,5 +129,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 288-01-PLAN.md
+Stopped at: Completed 288-02-PLAN.md (Phase 288 complete)
 Resume file: None
