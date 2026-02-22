@@ -1,14 +1,14 @@
 /**
- * Gateway skill:* tool implementations.
+ * Gateway skill.* tool implementations.
  *
  * Provides MCP tools for searching, inspecting, and activating skills
  * in the GSD skill ecosystem. Tools use SkillStore and SkillIndex for
  * disk access and are registered on an McpServer instance via the
  * registration functions.
  *
- * GATE-08: skill:search returns relevance-scored results
- * GATE-09: skill:inspect returns full SKILL.md content and metadata
- * GATE-10: skill:activate loads a skill and reports token budget impact
+ * GATE-08: skill.search returns relevance-scored results
+ * GATE-09: skill.inspect returns full SKILL.md content and metadata
+ * GATE-10: skill.activate loads a skill and reports token budget impact
  */
 
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -180,11 +180,11 @@ export async function activateSkill(
 // ── Tool Registration ───────────────────────────────────────────────────
 
 /**
- * Register skill:search and skill:inspect tools (read scope) on an McpServer.
+ * Register skill.search and skill.inspect tools (read scope) on an McpServer.
  */
 export function registerSkillReadTools(server: McpServer, config: SkillToolsConfig): void {
   server.tool(
-    'skill:search',
+    'skill.search',
     'Search for skills matching a query and return relevance-scored results',
     {
       query: z.string().min(1).describe('Search query (name or description substring)'),
@@ -201,7 +201,7 @@ export function registerSkillReadTools(server: McpServer, config: SkillToolsConf
   );
 
   server.tool(
-    'skill:inspect',
+    'skill.inspect',
     'Get full SKILL.md content and metadata for a named skill',
     {
       name: z.string().min(1).describe('Skill name to inspect'),
@@ -220,11 +220,11 @@ export function registerSkillReadTools(server: McpServer, config: SkillToolsConf
 }
 
 /**
- * Register skill:activate tool (write scope) on an McpServer.
+ * Register skill.activate tool (write scope) on an McpServer.
  */
 export function registerSkillWriteTools(server: McpServer, config: SkillToolsConfig): void {
   server.tool(
-    'skill:activate',
+    'skill.activate',
     'Load a skill into the chipset and report the token budget impact',
     {
       name: z.string().min(1).describe('Skill name to activate'),

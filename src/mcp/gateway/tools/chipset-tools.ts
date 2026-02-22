@@ -1,13 +1,13 @@
 /**
  * Chipset MCP tools for the gateway server.
  *
- * Registers chipset:get, chipset:modify, and chipset:synthesize tools
+ * Registers chipset.get, chipset.modify, and chipset.synthesize tools
  * on an MCP server instance. These tools allow external agents to read,
  * modify, and synthesize chipset configurations through the gateway.
  *
- * GATE-20: chipset:get returns current chipset as structured object
- * GATE-21: chipset:modify updates chipset and returns diff
- * GATE-22: chipset:synthesize produces valid chipset from description
+ * GATE-20: chipset.get returns current chipset as structured object
+ * GATE-21: chipset.modify updates chipset and returns diff
+ * GATE-22: chipset.synthesize produces valid chipset from description
  */
 
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -35,17 +35,17 @@ export function registerChipsetTools(
 }
 
 // ============================================================================
-// chipset:get
+// chipset.get
 // ============================================================================
 
 /**
- * Register chipset:get tool.
+ * Register chipset.get tool.
  * Returns the current chipset configuration as a structured JSON object.
  * Read scope -- no parameters required.
  */
 function registerChipsetGet(server: McpServer, state: ChipsetStateManager): void {
   server.tool(
-    'chipset:get',
+    'chipset.get',
     'Return the current chipset configuration as a structured JSON object',
     {},
     async () => {
@@ -61,10 +61,10 @@ function registerChipsetGet(server: McpServer, state: ChipsetStateManager): void
 }
 
 // ============================================================================
-// chipset:modify
+// chipset.modify
 // ============================================================================
 
-/** Input schema for chipset:modify. */
+/** Input schema for chipset.modify. */
 const ChipsetModifyInputSchema = {
   name: z.string().optional().describe('New chipset name'),
   version: z.string().optional().describe('New version string'),
@@ -83,13 +83,13 @@ const ChipsetModifyInputSchema = {
 };
 
 /**
- * Register chipset:modify tool.
+ * Register chipset.modify tool.
  * Accepts a partial update, applies it, and returns a unified diff.
  * Write scope required.
  */
 function registerChipsetModify(server: McpServer, state: ChipsetStateManager): void {
   server.tool(
-    'chipset:modify',
+    'chipset.modify',
     'Update the chipset configuration and return a diff of changes',
     ChipsetModifyInputSchema,
     async (args) => {
@@ -131,18 +131,18 @@ function registerChipsetModify(server: McpServer, state: ChipsetStateManager): v
 }
 
 // ============================================================================
-// chipset:synthesize
+// chipset.synthesize
 // ============================================================================
 
 /**
- * Register chipset:synthesize tool.
+ * Register chipset.synthesize tool.
  * Produces a valid ChipsetConfig from a natural language description.
  * Uses keyword matching for topology selection and role extraction.
  * Write scope required.
  */
 function registerChipsetSynthesize(server: McpServer, state: ChipsetStateManager): void {
   server.tool(
-    'chipset:synthesize',
+    'chipset.synthesize',
     'Produce a valid chipset configuration from a natural language description',
     {
       description: z.string().min(1).describe('Natural language description of the desired chipset'),

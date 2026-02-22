@@ -104,7 +104,7 @@ describe('TEST-07: Safety-Critical Security Tests', () => {
     let manager: TrustManager;
 
     beforeEach(() => {
-      manager = new TrustManager({ inactivityDecayDays: 30 });
+      manager = new TrustManager({ inactivityDecayMs: 30 * 24 * 60 * 60 * 1000 });
     });
 
     it('SC-04: new server registration enters quarantine state', () => {
@@ -293,7 +293,7 @@ describe('TEST-07: Safety-Critical Security Tests', () => {
       const entry = logger.log({
         caller: 'exec-agent',
         serverId: 'scout-server',
-        toolName: 'scout:research',
+        toolName: 'scout.research',
         params: { topic: 'test' },
         responseStatus: 'success',
         durationMs: 15,
@@ -302,7 +302,7 @@ describe('TEST-07: Safety-Critical Security Tests', () => {
       });
 
       expect(entry.caller).toBe('exec-agent');
-      expect(entry.toolName).toBe('scout:research');
+      expect(entry.toolName).toBe('scout.research');
       expect(entry.serverId).toBe('scout-server');
       expect(entry.responseStatus).toBe('success');
       expect(entry.durationMs).toBe(15);
@@ -507,25 +507,25 @@ describe('TEST-08: Requirement Coverage Validation', () => {
     'GATE-01': 'src/mcp/gateway/gateway.integration.test.ts: server starts, accepts HTTP',
     'GATE-02': 'src/mcp/gateway/auth.test.ts + gateway.integration.test.ts: bearer token auth',
     'GATE-03': 'src/mcp/gateway/auth.test.ts: role-based scopes, 401 rejection',
-    'GATE-04': 'src/mcp/gateway/tools/project-tools.test.ts: project:list',
-    'GATE-05': 'src/mcp/gateway/tools/project-tools.test.ts: project:get',
-    'GATE-06': 'src/mcp/gateway/tools/project-tools.test.ts: project:create',
-    'GATE-07': 'src/mcp/gateway/tools/project-tools.test.ts: project:execute-phase',
-    'GATE-08': 'src/mcp/gateway/tools/skill-tools.test.ts: skill:search',
-    'GATE-09': 'src/mcp/gateway/tools/skill-tools.test.ts: skill:inspect',
-    'GATE-10': 'src/mcp/gateway/tools/skill-tools.test.ts: skill:activate',
-    'GATE-11': 'src/mcp/gateway/tools/agent-tools.test.ts: agent:spawn',
-    'GATE-12': 'src/mcp/gateway/tools/agent-tools.test.ts: agent:status',
-    'GATE-13': 'src/mcp/gateway/tools/agent-tools.test.ts: agent:logs',
-    'GATE-14': 'src/mcp/gateway/tools/workflow-tools.test.ts: workflow:research',
-    'GATE-15': 'src/mcp/gateway/tools/workflow-tools.test.ts: workflow:requirements',
-    'GATE-16': 'src/mcp/gateway/tools/workflow-tools.test.ts: workflow:plan',
-    'GATE-17': 'src/mcp/gateway/tools/workflow-tools.test.ts: workflow:execute',
-    'GATE-18': 'src/mcp/gateway/tools/session-tools.test.ts: session:query',
-    'GATE-19': 'src/mcp/gateway/tools/session-tools.test.ts: session:patterns',
-    'GATE-20': 'src/mcp/gateway/tools/chipset-tools.test.ts: chipset:get',
-    'GATE-21': 'src/mcp/gateway/tools/chipset-tools.test.ts: chipset:modify',
-    'GATE-22': 'src/mcp/gateway/tools/chipset-tools.test.ts: chipset:synthesize',
+    'GATE-04': 'src/mcp/gateway/tools/project-tools.test.ts: project.list',
+    'GATE-05': 'src/mcp/gateway/tools/project-tools.test.ts: project.get',
+    'GATE-06': 'src/mcp/gateway/tools/project-tools.test.ts: project.create',
+    'GATE-07': 'src/mcp/gateway/tools/project-tools.test.ts: project.execute-phase',
+    'GATE-08': 'src/mcp/gateway/tools/skill-tools.test.ts: skill.search',
+    'GATE-09': 'src/mcp/gateway/tools/skill-tools.test.ts: skill.inspect',
+    'GATE-10': 'src/mcp/gateway/tools/skill-tools.test.ts: skill.activate',
+    'GATE-11': 'src/mcp/gateway/tools/agent-tools.test.ts: agent.spawn',
+    'GATE-12': 'src/mcp/gateway/tools/agent-tools.test.ts: agent.status',
+    'GATE-13': 'src/mcp/gateway/tools/agent-tools.test.ts: agent.logs',
+    'GATE-14': 'src/mcp/gateway/tools/workflow-tools.test.ts: workflow.research',
+    'GATE-15': 'src/mcp/gateway/tools/workflow-tools.test.ts: workflow.requirements',
+    'GATE-16': 'src/mcp/gateway/tools/workflow-tools.test.ts: workflow.plan',
+    'GATE-17': 'src/mcp/gateway/tools/workflow-tools.test.ts: workflow.execute',
+    'GATE-18': 'src/mcp/gateway/tools/session-tools.test.ts: session.query',
+    'GATE-19': 'src/mcp/gateway/tools/session-tools.test.ts: session.patterns',
+    'GATE-20': 'src/mcp/gateway/tools/chipset-tools.test.ts: chipset.get',
+    'GATE-21': 'src/mcp/gateway/tools/chipset-tools.test.ts: chipset.modify',
+    'GATE-22': 'src/mcp/gateway/tools/chipset-tools.test.ts: chipset.synthesize',
     'GATE-23': 'src/mcp/gateway/resources/resource-providers.test.ts: URI template resources',
     'GATE-24': 'src/mcp/gateway/prompts/prompt-templates.test.ts: 3 prompt templates',
     'GATE-25': 'src/mcp/gateway/gateway.integration.test.ts: concurrent calls + structured errors',

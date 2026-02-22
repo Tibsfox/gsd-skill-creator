@@ -2,7 +2,7 @@
  * VERIFY Agent MCP Server.
  *
  * Exposes the VERIFY agent's validation capabilities as an MCP server with:
- * - 4 tools: verify:run-tests, verify:check-types, verify:audit, verify:coverage
+ * - 4 tools: verify.run-tests, verify.check-types, verify.audit, verify.coverage
  * - 2 resources: verify://results/latest, verify://capabilities
  *
  * Tool handlers are stub implementations returning structured placeholder
@@ -20,7 +20,7 @@ import type { AgentServerConfig, AgentToolDef, AgentResourceDef } from './types.
 // ============================================================================
 
 const verifyRunTests: AgentToolDef = {
-  name: 'verify:run-tests',
+  name: 'verify.run-tests',
   description: 'Run test suite and return structured results including pass/fail counts and failure details',
   inputSchema: {
     type: 'object',
@@ -50,7 +50,7 @@ const verifyRunTests: AgentToolDef = {
 };
 
 const verifyCheckTypes: AgentToolDef = {
-  name: 'verify:check-types',
+  name: 'verify.check-types',
   description: 'Run TypeScript type checker and return diagnostic results',
   inputSchema: {
     type: 'object',
@@ -74,7 +74,7 @@ const verifyCheckTypes: AgentToolDef = {
 };
 
 const verifyAudit: AgentToolDef = {
-  name: 'verify:audit',
+  name: 'verify.audit',
   description: 'Run security and quality audit returning findings categorized by severity',
   inputSchema: {
     type: 'object',
@@ -104,7 +104,7 @@ const verifyAudit: AgentToolDef = {
 };
 
 const verifyCoverage: AgentToolDef = {
-  name: 'verify:coverage',
+  name: 'verify.coverage',
   description: 'Compute code coverage and return report with per-file and aggregate metrics',
   inputSchema: {
     type: 'object',
@@ -151,7 +151,7 @@ const verifyCapabilitiesResource: AgentResourceDef = {
     agentId: 'verify',
     agentName: 'VERIFY',
     capabilities: ['test-runner', 'type-checker', 'auditor', 'coverage-reporter'],
-    tools: ['verify:run-tests', 'verify:check-types', 'verify:audit', 'verify:coverage'],
+    tools: ['verify.run-tests', 'verify.check-types', 'verify.audit', 'verify.coverage'],
     resources: ['verify://results/latest', 'verify://capabilities'],
   }),
 };

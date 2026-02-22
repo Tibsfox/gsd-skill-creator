@@ -1,5 +1,5 @@
 /**
- * Agent gateway tools — agent:spawn, agent:status, agent:logs.
+ * Agent gateway tools — agent.spawn, agent.status, agent.logs.
  *
  * Registers three MCP tools on a gateway server that allow external clients
  * to create GSD agents, query their runtime state, and retrieve log entries.
@@ -26,11 +26,11 @@ export function registerAgentTools(server: McpServer, registry: AgentRegistry): 
   registerLogsTool(server, registry);
 }
 
-// ── agent:spawn ─────────────────────────────────────────────────────────────
+// ── agent.spawn ─────────────────────────────────────────────────────────────
 
 function registerSpawnTool(server: McpServer, registry: AgentRegistry): void {
   server.tool(
-    'agent:spawn',
+    'agent.spawn',
     'Create a new GSD agent with a specified role, skills, and optional team assignment',
     {
       role: AgentRoleSchema.describe('Agent role (researcher, planner, executor, verifier, scout, coordinator, custom)'),
@@ -61,11 +61,11 @@ function registerSpawnTool(server: McpServer, registry: AgentRegistry): void {
   );
 }
 
-// ── agent:status ────────────────────────────────────────────────────────────
+// ── agent.status ────────────────────────────────────────────────────────────
 
 function registerStatusTool(server: McpServer, registry: AgentRegistry): void {
   server.tool(
-    'agent:status',
+    'agent.status',
     'Get the current status of a GSD agent including role, state, token usage, and last activity',
     {
       agentId: z.string().describe('The agent ID to query'),
@@ -106,11 +106,11 @@ function registerStatusTool(server: McpServer, registry: AgentRegistry): void {
   );
 }
 
-// ── agent:logs ──────────────────────────────────────────────────────────────
+// ── agent.logs ──────────────────────────────────────────────────────────────
 
 function registerLogsTool(server: McpServer, registry: AgentRegistry): void {
   server.tool(
-    'agent:logs',
+    'agent.logs',
     'Get recent log entries for a GSD agent',
     {
       agentId: z.string().describe('The agent ID to query'),

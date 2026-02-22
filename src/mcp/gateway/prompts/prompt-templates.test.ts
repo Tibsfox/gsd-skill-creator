@@ -276,7 +276,7 @@ describe('Prompt Templates', () => {
       expect(result.messages.length).toBeGreaterThanOrEqual(1);
       const text = getMessageText(result.messages as any);
       expect(text).toContain('Simplify topology');
-      expect(text).toContain('chipset:get');
+      expect(text).toContain('chipset.get');
 
       await client.close();
     });

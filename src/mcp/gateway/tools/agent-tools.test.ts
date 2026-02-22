@@ -1,5 +1,5 @@
 /**
- * Unit tests for agent gateway tools (agent:spawn, agent:status, agent:logs).
+ * Unit tests for agent gateway tools (agent.spawn, agent.status, agent.logs).
  *
  * Tests the agent registry, tool registration, and end-to-end tool invocation
  * through the MCP protocol.
@@ -207,9 +207,9 @@ describe('Agent Tools (MCP)', () => {
     registerAgentTools(server, registry);
   });
 
-  describe('agent:spawn', () => {
+  describe('agent.spawn', () => {
     it('creates an agent and returns its ID and state', async () => {
-      const { result } = await callTool(server, 'agent:spawn', {
+      const { result } = await callTool(server, 'agent.spawn', {
         role: 'executor',
         skills: ['code-review', 'testing'],
       });
@@ -223,7 +223,7 @@ describe('Agent Tools (MCP)', () => {
     });
 
     it('creates an agent with team assignment', async () => {
-      const { result } = await callTool(server, 'agent:spawn', {
+      const { result } = await callTool(server, 'agent.spawn', {
         role: 'researcher',
         skills: ['search'],
         team: 'beta-squad',
@@ -234,9 +234,9 @@ describe('Agent Tools (MCP)', () => {
 
     it('handles concurrent spawns', async () => {
       const results = await Promise.all([
-        callTool(server, 'agent:spawn', { role: 'executor', skills: ['a'] }),
-        callTool(server, 'agent:spawn', { role: 'planner', skills: ['b'] }),
-        callTool(server, 'agent:spawn', { role: 'verifier', skills: ['c'] }),
+        callTool(server, 'agent.spawn', { role: 'executor', skills: ['a'] }),
+        callTool(server, 'agent.spawn', { role: 'planner', skills: ['b'] }),
+        callTool(server, 'agent.spawn', { role: 'verifier', skills: ['c'] }),
       ]);
 
       const ids = results.map((r) => r.result.agentId);
@@ -245,14 +245,14 @@ describe('Agent Tools (MCP)', () => {
     });
   });
 
-  describe('agent:status', () => {
+  describe('agent.status', () => {
     it('returns full agent info for valid ID', async () => {
-      const { result: spawnResult } = await callTool(server, 'agent:spawn', {
+      const { result: spawnResult } = await callTool(server, 'agent.spawn', {
         role: 'executor',
         skills: ['testing'],
       });
 
-      const { result } = await callTool(server, 'agent:status', {
+      const { result } = await callTool(server, 'agent.status', {
         agentId: spawnResult.agentId as string,
       });
 
@@ -265,7 +265,7 @@ describe('Agent Tools (MCP)', () => {
     });
 
     it('returns error for unknown agent ID', async () => {
-      const { result, isError } = await callTool(server, 'agent:status', {
+      const { result, isError } = await callTool(server, 'agent.status', {
         agentId: 'nonexistent-agent-id',
       });
 
@@ -274,7 +274,7 @@ describe('Agent Tools (MCP)', () => {
     });
 
     it('reflects token usage updates', async () => {
-      const { result: spawnResult } = await callTool(server, 'agent:spawn', {
+      const { result: spawnResult } = await callTool(server, 'agent.spawn', {
         role: 'executor',
         skills: [],
       });
@@ -284,7 +284,7 @@ describe('Agent Tools (MCP)', () => {
         completion: 200,
       });
 
-      const { result } = await callTool(server, 'agent:status', {
+      const { result } = await callTool(server, 'agent.status', {
         agentId: spawnResult.agentId as string,
       });
 
@@ -292,14 +292,14 @@ describe('Agent Tools (MCP)', () => {
     });
   });
 
-  describe('agent:logs', () => {
+  describe('agent.logs', () => {
     it('returns spawn log entry for new agent', async () => {
-      const { result: spawnResult } = await callTool(server, 'agent:spawn', {
+      const { result: spawnResult } = await callTool(server, 'agent.spawn', {
         role: 'executor',
         skills: ['lint'],
       });
 
-      const { result } = await callTool(server, 'agent:logs', {
+      const { result } = await callTool(server, 'agent.logs', {
         agentId: spawnResult.agentId as string,
       });
 
@@ -309,7 +309,7 @@ describe('Agent Tools (MCP)', () => {
     });
 
     it('returns error for unknown agent ID', async () => {
-      const { result, isError } = await callTool(server, 'agent:logs', {
+      const { result, isError } = await callTool(server, 'agent.logs', {
         agentId: 'nonexistent-agent-id',
       });
 
@@ -318,7 +318,7 @@ describe('Agent Tools (MCP)', () => {
     });
 
     it('respects limit parameter', async () => {
-      const { result: spawnResult } = await callTool(server, 'agent:spawn', {
+      const { result: spawnResult } = await callTool(server, 'agent.spawn', {
         role: 'executor',
         skills: [],
       });
@@ -328,7 +328,7 @@ describe('Agent Tools (MCP)', () => {
         registry.addLog(spawnResult.agentId as string, 'info', `Work item ${i}`);
       }
 
-      const { result } = await callTool(server, 'agent:logs', {
+      const { result } = await callTool(server, 'agent.logs', {
         agentId: spawnResult.agentId as string,
         limit: 5,
       });
@@ -337,12 +337,12 @@ describe('Agent Tools (MCP)', () => {
     });
 
     it('returns empty array for agent with no additional logs', async () => {
-      const { result: spawnResult } = await callTool(server, 'agent:spawn', {
+      const { result: spawnResult } = await callTool(server, 'agent.spawn', {
         role: 'executor',
         skills: [],
       });
 
-      const { result } = await callTool(server, 'agent:logs', {
+      const { result } = await callTool(server, 'agent.logs', {
         agentId: spawnResult.agentId as string,
         limit: 50,
       });

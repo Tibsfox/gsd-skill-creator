@@ -1,5 +1,5 @@
 /**
- * Unit tests for project:* gateway tools.
+ * Unit tests for project.* gateway tools.
  *
  * Tests project discovery, detail retrieval, creation, and phase
  * execution triggering against temp directories with mock GSD structures.

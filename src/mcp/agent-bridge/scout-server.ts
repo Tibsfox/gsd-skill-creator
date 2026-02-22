@@ -2,7 +2,7 @@
  * SCOUT Agent MCP Server.
  *
  * Exposes the SCOUT agent's research capabilities as an MCP server with:
- * - 3 tools: scout:research, scout:evaluate-dependency, scout:survey-landscape
+ * - 3 tools: scout.research, scout.evaluate-dependency, scout.survey-landscape
  * - 2 resources: scout://findings/latest, scout://capabilities
  *
  * Tool handlers are stub implementations returning structured placeholder
@@ -20,7 +20,7 @@ import type { AgentServerConfig, AgentToolDef, AgentResourceDef } from './types.
 // ============================================================================
 
 const scoutResearch: AgentToolDef = {
-  name: 'scout:research',
+  name: 'scout.research',
   description: 'Research a topic and return structured findings with sources, confidence, and recommendations',
   inputSchema: {
     type: 'object',
@@ -53,7 +53,7 @@ const scoutResearch: AgentToolDef = {
 };
 
 const scoutEvaluateDependency: AgentToolDef = {
-  name: 'scout:evaluate-dependency',
+  name: 'scout.evaluate-dependency',
   description: 'Evaluate a dependency for suitability including license, maintenance, security, and alternatives',
   inputSchema: {
     type: 'object',
@@ -83,7 +83,7 @@ const scoutEvaluateDependency: AgentToolDef = {
 };
 
 const scoutSurveyLandscape: AgentToolDef = {
-  name: 'scout:survey-landscape',
+  name: 'scout.survey-landscape',
   description: 'Survey the ecosystem landscape for a domain including major tools, trends, and recommendations',
   inputSchema: {
     type: 'object',
@@ -131,7 +131,7 @@ const scoutCapabilitiesResource: AgentResourceDef = {
     agentId: 'scout',
     agentName: 'SCOUT',
     capabilities: ['research', 'dependency-evaluation', 'landscape-survey'],
-    tools: ['scout:research', 'scout:evaluate-dependency', 'scout:survey-landscape'],
+    tools: ['scout.research', 'scout.evaluate-dependency', 'scout.survey-landscape'],
     resources: ['scout://findings/latest', 'scout://capabilities'],
   }),
 };

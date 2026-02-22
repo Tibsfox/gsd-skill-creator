@@ -108,22 +108,22 @@ describe('Skill Tools Integration', () => {
     const toolsResult = await client.listTools();
     const toolNames = toolsResult.tools.map((t) => t.name).sort();
 
-    expect(toolNames).toContain('skill:search');
-    expect(toolNames).toContain('skill:inspect');
-    expect(toolNames).toContain('skill:activate');
+    expect(toolNames).toContain('skill.search');
+    expect(toolNames).toContain('skill.inspect');
+    expect(toolNames).toContain('skill.activate');
 
     await client.close();
   });
 
-  // ── skill:search ──────────────────────────────────────────────────
+  // ── skill.search ──────────────────────────────────────────────────
 
-  it('skill:search returns empty array for unknown query', async () => {
+  it('skill.search returns empty array for unknown query', async () => {
     const transport = createClientTransport(port, storedToken.token);
     const client = new Client({ name: 'search-empty-test', version: '1.0.0' });
 
     await client.connect(transport);
     const result = await client.callTool({
-      name: 'skill:search',
+      name: 'skill.search',
       arguments: { query: 'nonexistent-query-xyz' },
     });
 
@@ -134,7 +134,7 @@ describe('Skill Tools Integration', () => {
     await client.close();
   });
 
-  it('skill:search finds a matching skill', async () => {
+  it('skill.search finds a matching skill', async () => {
     await createMockSkill(skillsDir, 'typescript-helper', 'Helps with TypeScript', 'TS helper body.');
 
     const transport = createClientTransport(port, storedToken.token);
@@ -142,7 +142,7 @@ describe('Skill Tools Integration', () => {
 
     await client.connect(transport);
     const result = await client.callTool({
-      name: 'skill:search',
+      name: 'skill.search',
       arguments: { query: 'typescript' },
     });
 
@@ -155,9 +155,9 @@ describe('Skill Tools Integration', () => {
     await client.close();
   });
 
-  // ── skill:inspect ─────────────────────────────────────────────────
+  // ── skill.inspect ─────────────────────────────────────────────────
 
-  it('skill:inspect returns full content for existing skill', async () => {
+  it('skill.inspect returns full content for existing skill', async () => {
     await createMockSkill(
       skillsDir,
       'inspectable',
@@ -170,7 +170,7 @@ describe('Skill Tools Integration', () => {
 
     await client.connect(transport);
     const result = await client.callTool({
-      name: 'skill:inspect',
+      name: 'skill.inspect',
       arguments: { name: 'inspectable' },
     });
 
@@ -183,13 +183,13 @@ describe('Skill Tools Integration', () => {
     await client.close();
   });
 
-  it('skill:inspect returns error for nonexistent skill', async () => {
+  it('skill.inspect returns error for nonexistent skill', async () => {
     const transport = createClientTransport(port, storedToken.token);
     const client = new Client({ name: 'inspect-error-test', version: '1.0.0' });
 
     await client.connect(transport);
     const result = await client.callTool({
-      name: 'skill:inspect',
+      name: 'skill.inspect',
       arguments: { name: 'nonexistent' },
     });
 
@@ -202,9 +202,9 @@ describe('Skill Tools Integration', () => {
     await client.close();
   });
 
-  // ── skill:activate ────────────────────────────────────────────────
+  // ── skill.activate ────────────────────────────────────────────────
 
-  it('skill:activate returns token budget impact', async () => {
+  it('skill.activate returns token budget impact', async () => {
     const body = 'X'.repeat(800); // 800 chars -> 200 tokens
     await createMockSkill(skillsDir, 'activatable', 'Activatable skill', body);
 
@@ -213,7 +213,7 @@ describe('Skill Tools Integration', () => {
 
     await client.connect(transport);
     const result = await client.callTool({
-      name: 'skill:activate',
+      name: 'skill.activate',
       arguments: { name: 'activatable' },
     });
 
@@ -232,13 +232,13 @@ describe('Skill Tools Integration', () => {
     await client.close();
   });
 
-  it('skill:activate returns error for nonexistent skill', async () => {
+  it('skill.activate returns error for nonexistent skill', async () => {
     const transport = createClientTransport(port, storedToken.token);
     const client = new Client({ name: 'activate-error-test', version: '1.0.0' });
 
     await client.connect(transport);
     const result = await client.callTool({
-      name: 'skill:activate',
+      name: 'skill.activate',
       arguments: { name: 'nonexistent' },
     });
 

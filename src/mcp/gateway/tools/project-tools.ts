@@ -307,11 +307,11 @@ export async function triggerPhaseExecution(
 // ── Tool Registration ───────────────────────────────────────────────────
 
 /**
- * Register project:list and project:get tools (read scope) on an McpServer.
+ * Register project.list and project.get tools (read scope) on an McpServer.
  */
 export function registerProjectReadTools(server: McpServer, config: ProjectToolsConfig): void {
   server.tool(
-    'project:list',
+    'project.list',
     'List all GSD projects with name, status, phase count, and last activity',
     {},
     async () => {
@@ -326,7 +326,7 @@ export function registerProjectReadTools(server: McpServer, config: ProjectTools
   );
 
   server.tool(
-    'project:get',
+    'project.get',
     'Get full project details including config, phase state, and deliverables',
     {
       name: z.string().describe('Project directory name'),
@@ -357,11 +357,11 @@ export function registerProjectReadTools(server: McpServer, config: ProjectTools
 }
 
 /**
- * Register project:create and project:execute-phase tools (write scope) on an McpServer.
+ * Register project.create and project.execute-phase tools (write scope) on an McpServer.
  */
 export function registerProjectWriteTools(server: McpServer, config: ProjectToolsConfig): void {
   server.tool(
-    'project:create',
+    'project.create',
     'Create a new GSD project from a vision document',
     {
       name: z.string().describe('Project name (used as directory name)'),
@@ -380,7 +380,7 @@ export function registerProjectWriteTools(server: McpServer, config: ProjectTool
   );
 
   server.tool(
-    'project:execute-phase',
+    'project.execute-phase',
     'Trigger execution of a specific phase for a named project',
     {
       name: z.string().describe('Project directory name'),

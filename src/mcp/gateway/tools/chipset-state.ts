@@ -62,7 +62,7 @@ export interface ChipsetUpdate {
  *
  * Each gateway server gets its own state manager instance. The state
  * is initialized from the default Den chipset config and can be
- * modified via the chipset:modify tool.
+ * modified via the chipset.modify tool.
  */
 export class ChipsetStateManager {
   private config: ChipsetConfig;
@@ -164,7 +164,7 @@ export class ChipsetStateManager {
 
   /**
    * Replace the entire chipset configuration.
-   * Used by chipset:synthesize to set a freshly generated config.
+   * Used by chipset.synthesize to set a freshly generated config.
    */
   replace(config: ChipsetConfig): void {
     const result = ChipsetConfigSchema.safeParse(config);

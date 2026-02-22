@@ -40,7 +40,7 @@ export const ResearchFindingSchema = z.object({
 /** Research finding. */
 export type ResearchFinding = z.infer<typeof ResearchFindingSchema>;
 
-/** Result from workflow:research. */
+/** Result from workflow.research. */
 export const ResearchResultSchema = z.object({
   /** Project name. */
   project: z.string(),
@@ -82,7 +82,7 @@ export const RequirementItemSchema = z.object({
 /** Requirement item. */
 export type RequirementItem = z.infer<typeof RequirementItemSchema>;
 
-/** Result from workflow:requirements. */
+/** Result from workflow.requirements. */
 export const RequirementsResultSchema = z.object({
   /** Project name. */
   project: z.string(),
@@ -91,7 +91,7 @@ export const RequirementsResultSchema = z.object({
   /** Generated requirements. */
   requirements: z.array(RequirementItemSchema),
   /** Category summary counts. */
-  categories: z.record(z.number()),
+  categories: z.record(z.string(), z.number()),
   /** When the requirements were generated (epoch ms). */
   completedAt: z.number(),
 });
@@ -118,7 +118,7 @@ export const PlanPhaseSchema = z.object({
 /** Plan phase. */
 export type PlanPhase = z.infer<typeof PlanPhaseSchema>;
 
-/** Result from workflow:plan. */
+/** Result from workflow.plan. */
 export const PlanResultSchema = z.object({
   /** Project name. */
   project: z.string(),
@@ -154,7 +154,7 @@ export const StageExecutionSchema = z.object({
 /** Stage execution result. */
 export type StageExecution = z.infer<typeof StageExecutionSchema>;
 
-/** Result from workflow:execute. */
+/** Result from workflow.execute. */
 export const ExecuteResultSchema = z.object({
   /** Project name. */
   project: z.string(),
