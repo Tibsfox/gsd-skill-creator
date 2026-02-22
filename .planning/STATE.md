@@ -46,6 +46,9 @@ Progress: [██████░░░░░░░░░░] 36% (v1.32)
 - Artifact renderers are pure functions (data in, string out) -- Scribe handles filesystem writes
 - Cluster map rendered inline in ArtifactGenerator (no separate template) due to simpler structure
 - Action plan source_idea_ids tracing: always lookup original idea content (UX pitfall prevention)
+- Lazy factory registry: Map<TechniqueId, () => TechniqueInstance> creates fresh instances per loadTechnique() call
+- generation_context encoded in config.parameters per Pitfall 5 to prevent fidelity erosion across techniques
+- listBySituation uses simple keyword matching (not NLP) -- Pathway Router handles sophisticated signal analysis
 
 ### Key Constraints
 
