@@ -207,7 +207,7 @@ describe('assessProblem', () => {
   // Complexity: moderate for typical input
   // --------------------------------------------------------------------------
   it('detects moderate complexity for typical input', () => {
-    const result = assessProblem('How can we make our onboarding better?');
+    const result = assessProblem('How can we make our onboarding experience better for new users who sign up through the website?');
     expect(result.complexity).toBe('moderate');
   });
 });
