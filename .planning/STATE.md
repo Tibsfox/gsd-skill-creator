@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.31 GSD-OS MCP Integration -- Phase 301 Security Gates complete, Phase 302 next.
+**Current focus:** v1.31 GSD-OS MCP Integration -- Phase 298 Gateway Chipset, Resources & Prompts complete.
 
 ## Current Position
 
-Phase: 302 (Presentation) — tenth of 11 phases (293-303)
-Plan: 01 of TBD
-Status: Ready
-Last activity: 2026-02-22 — Completed 301-03 (Staging pipeline and audit logger, 101 total security tests)
+Phase: 298 (Gateway Chipset, Resources & Prompts) — complete
+Plan: 02 of 2 (all complete)
+Status: Complete
+Last activity: 2026-02-22 — Completed 298-02 (Prompt templates and integration tests, 77 total tests)
 
-Progress: [############░░] 82%
+Progress: [#############░] 91%
 
 ## Accumulated Context
 
@@ -56,6 +56,20 @@ Progress: [############░░] 82%
 - Per-server promise queues for thread-safe concurrent validation (no global lock)
 - Audit redaction uses both key-name matching and value-pattern matching (dual approach)
 - Pipeline stages short-circuit on failure: trust -> rate limit -> param validation -> audit
+- AgentRegistry uses in-memory ring buffer for logs (max 100, configurable) -- evicts oldest on overflow
+- WorkflowEngine as simulation layer -- produces realistic structured output, will delegate to real GSD pipeline later
+- SessionStore text-based query: substring (0.5) + keyword (0.3) + tag (0.2) scoring, case-insensitive
+- Pattern detection default threshold: minOccurrences=3 per skill-creator convention
+- Gateway tool names use colon convention (agent:spawn) matching project pattern despite MCP naming warnings
+- Project discovery scans root dir for subdirs with .planning/ROADMAP.md -- filesystem-based, no central registry
+- Tool registration pattern: domain modules export registerXxxReadTools/registerXxxWriteTools for scope separation
+- Skill search relevance scoring: exact name match (1.0) > name contains (0.7) > description contains (0.3)
+- skill:activate token estimation reuses SkillInjector heuristic: ceil(body.length / 4) for consistency
+- Chipset tools operate on Den chipset (staff positions, topology, budget) -- runtime state external agents inspect
+- Keyword-based chipset synthesis -- pure deterministic, no LLM calls
+- ResourceTemplate class for URI template resources -- MCP SDK v1.26+ requires explicit template objects
+- Deep clone on chipset get() -- prevents callers from mutating internal state
+- Shared ChipsetStateManager across sessions -- single source of truth for chipset state
 
 ### Key Constraints
 
@@ -75,5 +89,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 294-03 (Host Manager & Server Registry, all 8 HOST requirements, 32 tests)
+Stopped at: Completed 298-02 (Gateway Chipset, Resources & Prompts, GATE-20 through GATE-24, 77 tests)
 Resume file: None

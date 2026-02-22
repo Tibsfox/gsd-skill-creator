@@ -29,27 +29,27 @@ Requirements for GSD-OS MCP Integration milestone. Each maps to roadmap phases.
 - [x] **GATE-01**: Gateway server starts on configurable port with Streamable HTTP transport
 - [x] **GATE-02**: Gateway authenticates requests via pre-shared bearer token from ~/.gsd/gateway-token
 - [x] **GATE-03**: Gateway rejects unauthorized requests with 401 and enforces role-based scopes
-- [ ] **GATE-04**: project:list returns all projects with name, status, phase count, and last activity
-- [ ] **GATE-05**: project:get returns full project config, phase state, and deliverables for a named project
-- [ ] **GATE-06**: project:create creates a new project from a vision document
-- [ ] **GATE-07**: project:execute-phase triggers execution of a specific phase for a named project
-- [ ] **GATE-08**: skill:search returns matching skills with relevance scores for a query
-- [ ] **GATE-09**: skill:inspect returns full SKILL.md content plus metadata for a named skill
-- [ ] **GATE-10**: skill:activate loads a skill into the current chipset with token budget impact
-- [ ] **GATE-11**: agent:spawn creates an agent with role, skills, and optional team assignment
-- [ ] **GATE-12**: agent:status returns role, current task, token usage, and last activity for an agent
-- [ ] **GATE-13**: agent:logs returns recent log entries for an agent
-- [ ] **GATE-14**: workflow:research triggers research phase and returns findings summary
-- [ ] **GATE-15**: workflow:requirements generates requirements document for a project
-- [ ] **GATE-16**: workflow:plan creates execution plan with wave assignments
-- [ ] **GATE-17**: workflow:execute triggers full GSD pipeline for a project
-- [ ] **GATE-18**: session:query returns cross-project intelligence matches for a search query
-- [ ] **GATE-19**: session:patterns returns detected patterns from skill-creator for an optional domain
-- [ ] **GATE-20**: chipset:get returns current chipset YAML as structured object
-- [ ] **GATE-21**: chipset:modify updates chipset and returns diff from previous
-- [ ] **GATE-22**: chipset:synthesize produces FPGA-synthesized chipset from natural language description
-- [ ] **GATE-23**: Resource providers expose project configs, skill registry, agent telemetry, and chipset state via URI templates
-- [ ] **GATE-24**: Prompt templates exist for create-project, diagnose-agent, and optimize-chipset workflows
+- [x] **GATE-04**: project:list returns all projects with name, status, phase count, and last activity
+- [x] **GATE-05**: project:get returns full project config, phase state, and deliverables for a named project
+- [x] **GATE-06**: project:create creates a new project from a vision document
+- [x] **GATE-07**: project:execute-phase triggers execution of a specific phase for a named project
+- [x] **GATE-08**: skill:search returns matching skills with relevance scores for a query
+- [x] **GATE-09**: skill:inspect returns full SKILL.md content plus metadata for a named skill
+- [x] **GATE-10**: skill:activate loads a skill into the current chipset with token budget impact
+- [x] **GATE-11**: agent:spawn creates an agent with role, skills, and optional team assignment
+- [x] **GATE-12**: agent:status returns role, current task, token usage, and last activity for an agent
+- [x] **GATE-13**: agent:logs returns recent log entries for an agent
+- [x] **GATE-14**: workflow:research triggers research phase and returns findings summary
+- [x] **GATE-15**: workflow:requirements generates requirements document for a project
+- [x] **GATE-16**: workflow:plan creates execution plan with wave assignments
+- [x] **GATE-17**: workflow:execute triggers full GSD pipeline for a project
+- [x] **GATE-18**: session:query returns cross-project intelligence matches for a search query
+- [x] **GATE-19**: session:patterns returns detected patterns from skill-creator for an optional domain
+- [x] **GATE-20**: chipset:get returns current chipset YAML as structured object
+- [x] **GATE-21**: chipset:modify updates chipset and returns diff from previous
+- [x] **GATE-22**: chipset:synthesize produces FPGA-synthesized chipset from natural language description
+- [x] **GATE-23**: Resource providers expose project configs, skill registry, agent telemetry, and chipset state via URI templates
+- [x] **GATE-24**: Prompt templates exist for create-project, diagnose-agent, and optimize-chipset workflows
 - [x] **GATE-25**: Gateway handles concurrent tool calls correctly and returns structured errors (never crashes)
 
 ### MCP Templates
@@ -159,27 +159,27 @@ Deferred to future release. Tracked but not in current roadmap.
 | GATE-01 | Phase 295 | Complete |
 | GATE-02 | Phase 295 | Complete |
 | GATE-03 | Phase 295 | Complete |
-| GATE-04 | Phase 296 | Pending |
-| GATE-05 | Phase 296 | Pending |
-| GATE-06 | Phase 296 | Pending |
-| GATE-07 | Phase 296 | Pending |
-| GATE-08 | Phase 296 | Pending |
-| GATE-09 | Phase 296 | Pending |
-| GATE-10 | Phase 296 | Pending |
-| GATE-11 | Phase 297 | Pending |
-| GATE-12 | Phase 297 | Pending |
-| GATE-13 | Phase 297 | Pending |
-| GATE-14 | Phase 297 | Pending |
-| GATE-15 | Phase 297 | Pending |
-| GATE-16 | Phase 297 | Pending |
-| GATE-17 | Phase 297 | Pending |
-| GATE-18 | Phase 297 | Pending |
-| GATE-19 | Phase 297 | Pending |
-| GATE-20 | Phase 298 | Pending |
-| GATE-21 | Phase 298 | Pending |
-| GATE-22 | Phase 298 | Pending |
-| GATE-23 | Phase 298 | Pending |
-| GATE-24 | Phase 298 | Pending |
+| GATE-04 | Phase 296 | Complete |
+| GATE-05 | Phase 296 | Complete |
+| GATE-06 | Phase 296 | Complete |
+| GATE-07 | Phase 296 | Complete |
+| GATE-08 | Phase 296 | Complete |
+| GATE-09 | Phase 296 | Complete |
+| GATE-10 | Phase 296 | Complete |
+| GATE-11 | Phase 297 | Complete |
+| GATE-12 | Phase 297 | Complete |
+| GATE-13 | Phase 297 | Complete |
+| GATE-14 | Phase 297 | Complete |
+| GATE-15 | Phase 297 | Complete |
+| GATE-16 | Phase 297 | Complete |
+| GATE-17 | Phase 297 | Complete |
+| GATE-18 | Phase 297 | Complete |
+| GATE-19 | Phase 297 | Complete |
+| GATE-20 | Phase 298 | Complete |
+| GATE-21 | Phase 298 | Complete |
+| GATE-22 | Phase 298 | Complete |
+| GATE-23 | Phase 298 | Complete |
+| GATE-24 | Phase 298 | Complete |
 | GATE-25 | Phase 295 | Complete |
 | TMPL-01 | Phase 299 | Complete |
 | TMPL-02 | Phase 299 | Complete |

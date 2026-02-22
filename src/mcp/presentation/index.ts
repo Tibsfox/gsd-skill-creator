@@ -19,3 +19,12 @@ export {
   renderBlockedCallLog, renderSecurityDashboardStyles,
   type ServerTrustDisplay, type HashChangeAlert, type BlockedCallEntry,
 } from './security-dashboard.js';
+export {
+  renderBootPeripherals, renderBootPeripheral, renderBootPeripheralStyles,
+  type BootPeripheralData,
+} from './boot-peripherals.js';
+export {
+  mcpConnect, mcpDisconnect, mcpListServers, mcpInvokeTool,
+  mcpGetTrace, mcpGetTrustState,
+  type ServerInfo, type ToolCallResult,
+} from './tauri-ipc-bridge.js';
