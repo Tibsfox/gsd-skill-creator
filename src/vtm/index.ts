@@ -27,7 +27,9 @@
  * heuristics, bidirectional overrides, and S/C/I/E-NNN test ID generation,
  * and the template system for loading, rendering, registering, and
  * validating mustache-style markdown templates with Zod schema validation
- * and structured diagnostics.
+ * and structured diagnostics, and the pipeline orchestrator for composing
+ * all stages into a single runPipeline call with configurable speed,
+ * file manifest, execution summary, and structured error reporting.
  *
  * @module vtm
  */
@@ -45,3 +47,4 @@ export * from './model-budget.js';
 export * from './cache-optimizer.js';
 export * from './test-plan-generator.js';
 export * from './template-system.js';
+export * from './pipeline.js';
