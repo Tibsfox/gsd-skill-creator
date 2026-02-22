@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Phase 284 complete — Model Assignment
+**Current focus:** Phase 285 in progress — Cache Optimization
 
 ## Current Position
 
-Phase: 284 of 289 (Model Assignment) — 6 of 11 in milestone
-Plan: 2 of 2 in current phase
-Status: 284-02 complete (phase complete)
-Last activity: 2026-02-21 — 284-02 complete (budget validator with auto-rebalance, 26 tests)
+Phase: 285 of 289 (Cache Optimization) — 7 of 11 in milestone
+Plan: 1 of 2 in current phase
+Status: 285-01 complete
+Last activity: 2026-02-22 — 285-01 complete (cache optimization analyzers, 21 tests)
 
-Progress: [######░░░░] 55% (6/11 phases)
+Progress: [######░░░░] 59% (6.5/11 phases)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 12
+- Total plans completed: 13
 - Average duration: 3min
-- Total execution time: 41min
+- Total execution time: 46min
 
 **By Phase:**
 
@@ -33,6 +33,7 @@ Progress: [######░░░░] 55% (6/11 phases)
 | 282 Mission Package Assembly | 2 | 7min | 3.5min |
 | 283 Wave Planning | 2 | 7min | 3.5min |
 | 284 Model Assignment | 2 | 6min | 3min |
+| 285 Cache Optimization | 1 | 5min | 5min |
 
 ## Accumulated Context
 
@@ -81,6 +82,10 @@ Progress: [######░░░░] 55% (6/11 phases)
 - 2026-02-21: Haiku-over violations are unresolvable with downgrade-only, returns warning
 - 2026-02-21: Iterative violation resolution tries all violations in priority order before giving up
 - 2026-02-21: Stable sort tiebreaker by original array index for equal-token-size determinism
+- 2026-02-22: gpt-tokenizer encode for accurate token counting (not char/4 heuristic)
+- 2026-02-22: Jaccard similarity on significant words (>3 chars, no stopwords) at >50% threshold for content overlap
+- 2026-02-22: Multi-strategy spec-to-task matching: sanitized name, produces artifact, word overlap
+- 2026-02-22: cacheOptimization.schemaReuse as primary source with produces/dependsOn fallback
 
 ### Key Constraints
 
@@ -95,6 +100,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-21
-Stopped at: Completed 284-02-PLAN.md
+Last session: 2026-02-22
+Stopped at: Completed 285-01-PLAN.md
 Resume file: None
