@@ -96,8 +96,8 @@ Requirements for v1.30. Each maps to roadmap phases.
 - [x] **INTG-01**: Barrel exports expose complete public API from src/vtm/index.ts
 - [x] **INTG-02**: Chipset YAML for the vtm module defines skills, agents (pipeline topology), and evaluation gates
 - [x] **INTG-03**: All functions follow functional API primary + class wrapper pattern consistent with existing modules (MNA, logic sim, etc.)
-- [ ] **INTG-04**: Eval harness validates the 5 evaluation scenarios from evals.json (vision-from-idea, mission-from-vision, research-compilation, full-pipeline, infrastructure-vision)
-- [ ] **INTG-05**: Integration test suite validates cross-component flows: vision→research→mission, vision→mission (skip research), mission-only from existing vision
+- [x] **INTG-04**: Eval harness validates the 5 evaluation scenarios from evals.json (vision-from-idea, mission-from-vision, research-compilation, full-pipeline, infrastructure-vision)
+- [x] **INTG-05**: Integration test suite validates cross-component flows: vision→research→mission, vision→mission (skip research), mission-only from existing vision
 
 ## Future Requirements
 
@@ -189,8 +189,8 @@ Requirements for v1.30. Each maps to roadmap phases.
 | INTG-01 | Phase 290 | Complete |
 | INTG-02 | Phase 290 | Complete |
 | INTG-03 | Phase 290 | Complete |
-| INTG-04 | Phase 290 | Pending |
-| INTG-05 | Phase 290 | Pending |
+| INTG-04 | Phase 290 | Complete |
+| INTG-05 | Phase 290 | Complete |
 
 **Coverage:**
 - v1 requirements: 58 total

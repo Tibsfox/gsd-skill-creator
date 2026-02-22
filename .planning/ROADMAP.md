@@ -64,7 +64,7 @@
 - [x] **Phase 287: Template System** - Template loader, renderer, validator, registry (2 plans) (completed 2026-02-22)
 - [x] **Phase 288: Mission Assembly Integration Wiring** - Wire Phases 283/284/286 into mission-assembly, replace placeholders (Gap Closure) (completed 2026-02-22)
 - [x] **Phase 289: Pipeline Orchestrator** - End-to-end three-stage pipeline management (completed 2026-02-22)
-- [ ] **Phase 290: Integration & Testing** - Barrel exports, chipset, eval harness, integration tests
+- [x] **Phase 290: Integration & Testing** - Barrel exports, chipset, eval harness, integration tests (completed 2026-02-22)
 
 ## Phase Details
 
@@ -236,7 +236,7 @@ Plans:
   3. All functions follow the functional API primary + class wrapper pattern consistent with existing modules (MNA, logic sim, etc.)
   4. Eval harness validates the 5 evaluation scenarios (vision-from-idea, mission-from-vision, research-compilation, full-pipeline, infrastructure-vision)
   5. Integration tests validate cross-component flows: vision-to-research-to-mission, vision-to-mission (skip research), and mission-only from existing vision
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 Plans:
 - [ ] 290-01-PLAN.md — Barrel export audit, chipset YAML, VTMPipeline class wrapper, tech debt fixes
 - [ ] 290-02-PLAN.md — Eval harness for 5 scenarios and integration tests for 3 E2E flows (TDD)
@@ -259,7 +259,7 @@ Phases execute in numeric order: 279 -> 280 -> 281 -> 282 -> 283 -> 284 -> 285 -
 | 287. Template System | 2/2 | Complete    | 2026-02-22 |
 | 288. Mission Assembly Integration Wiring | 2/2 | Complete   | 2026-02-22 |
 | 289. Pipeline Orchestrator | 2/2 | Complete    | 2026-02-22 |
-| 290. Integration & Testing | 1/2 | In Progress|  |
+| 290. Integration & Testing | 2/2 | Complete   | 2026-02-22 |
 
 ---
 *32 milestones shipped. 278 phases, 740 plans. Full archive: `.planning/milestones/`*
