@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns — and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Phase 289 in progress — Pipeline Orchestrator
+**Current focus:** Phase 289 complete — Pipeline Orchestrator
 
 ## Current Position
 
 Phase: 289 of 290 (Pipeline Orchestrator) — 11 of 12 in milestone
-Plan: 1 of 2 in current phase
-Status: 289-01 complete
-Last activity: 2026-02-22 — 289-01 complete (pipeline types and speed selector)
+Plan: 2 of 2 in current phase
+Status: 289-02 complete (phase complete)
+Last activity: 2026-02-22 — 289-02 complete (runPipeline orchestrator implementation)
 
-Progress: [#########░] 88% (10.5/12 phases)
+Progress: [##########] 92% (11/12 phases)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 21
+- Total plans completed: 22
 - Average duration: 4min
-- Total execution time: 74min
+- Total execution time: 78min
 
 **By Phase:**
 
@@ -37,7 +37,7 @@ Progress: [#########░] 88% (10.5/12 phases)
 | 286 Test Plan Generation | 2 | 6min | 3min |
 | 287 Template System | 2 | 6min | 3min |
 | 288 Mission Assembly Integration | 2 | 8min | 4min |
-| 289 Pipeline Orchestrator | 1 | 3min | 3min |
+| 289 Pipeline Orchestrator | 2 | 7min | 3.5min |
 
 ## Accumulated Context
 
@@ -118,6 +118,11 @@ Progress: [#########░] 88% (10.5/12 phases)
 - 2026-02-22: Re-export PipelineSpeed from research-utils rather than redefining to maintain single source of truth
 - 2026-02-22: PipelineResult.executionSummary uses modelSplit with count+percentage per tier (matches MissionPackage shape)
 - 2026-02-22: PipelineError.recoverable is structural: true when vision stage completed, enabling partial-output recovery
+- 2026-02-22: runPipeline string input runs full parse; VisionDocument input skips parsing and runs from validation onward
+- 2026-02-22: Error wrapping per try/catch stage: vision recoverable=false, research/mission recoverable=true
+- 2026-02-22: File manifest derived from MissionPackage structure (milestone-spec, component-specs, wave-plan, test-plan, readme)
+- 2026-02-22: Execution summary maps flat opusTasks/sonnetTasks/haikuTasks to nested modelSplit.opus/sonnet/haiku
+- 2026-02-22: includeCache defaults to true; set false to omit cache optimization report from mission stage
 
 ### Key Constraints
 
@@ -133,5 +138,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 289-01-PLAN.md
+Stopped at: Completed 289-02-PLAN.md
 Resume file: None
