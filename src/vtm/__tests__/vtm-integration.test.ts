@@ -544,9 +544,9 @@ describe('Flow 1: vision -> research -> mission (full pipeline)', () => {
     expect(Array.isArray(budgetResult.violations)).toBe(true);
   });
 
-  it('end-to-end via runPipeline with full speed passes MissionPackageSchema', () => {
+  it('end-to-end via runPipeline with full speed passes MissionPackageSchema', async () => {
     const markdown = createEducationalMarkdown();
-    const result = runPipeline(markdown, { speed: 'full' });
+    const result = await runPipeline(markdown, { speed: 'full' });
 
     expect(result.success).toBe(true);
     expect(result.stages.mission).toBeDefined();
@@ -586,18 +586,18 @@ describe('Flow 2: vision -> mission (skip research)', () => {
     expect(zodResult.success).toBe(true);
   });
 
-  it('runPipeline with skip-research has undefined research stage and defined mission stage', () => {
+  it('runPipeline with skip-research has undefined research stage and defined mission stage', async () => {
     const markdown = createInfrastructureMarkdown();
-    const result = runPipeline(markdown, { speed: 'skip-research' });
+    const result = await runPipeline(markdown, { speed: 'skip-research' });
 
     expect(result.success).toBe(true);
     expect(result.stages.research).toBeUndefined();
     expect(result.stages.mission).toBeDefined();
   });
 
-  it('skip-research pipeline MissionPackage passes Zod schema validation', () => {
+  it('skip-research pipeline MissionPackage passes Zod schema validation', async () => {
     const markdown = createInfrastructureMarkdown();
-    const result = runPipeline(markdown, { speed: 'skip-research' });
+    const result = await runPipeline(markdown, { speed: 'skip-research' });
 
     expect(result.success).toBe(true);
     expect(result.stages.mission).toBeDefined();
@@ -612,44 +612,44 @@ describe('Flow 2: vision -> mission (skip research)', () => {
 // ---------------------------------------------------------------------------
 
 describe('Flow 3: mission-only from existing VisionDocument', () => {
-  it('runPipeline with VisionDocument input uses the provided doc without re-parsing', () => {
+  it('runPipeline with VisionDocument input uses the provided doc without re-parsing', async () => {
     const visionDoc = createDirectVisionDoc();
-    const result = runPipeline(visionDoc, { speed: 'mission-only' });
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
 
     expect(result.success).toBe(true);
     // The vision stage should use the same reference
     expect(result.stages.vision.visionDoc).toBe(visionDoc);
   });
 
-  it('research stage is skipped in mission-only mode', () => {
+  it('research stage is skipped in mission-only mode', async () => {
     const visionDoc = createDirectVisionDoc();
-    const result = runPipeline(visionDoc, { speed: 'mission-only' });
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
 
     expect(result.success).toBe(true);
     expect(result.stages.research).toBeUndefined();
   });
 
-  it('mission stage completed with missionPackage', () => {
+  it('mission stage completed with missionPackage', async () => {
     const visionDoc = createDirectVisionDoc();
-    const result = runPipeline(visionDoc, { speed: 'mission-only' });
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
 
     expect(result.success).toBe(true);
     expect(result.stages.mission).toBeDefined();
     expect(result.stages.mission!.missionPackage).toBeDefined();
   });
 
-  it('MissionPackage passes Zod schema validation', () => {
+  it('MissionPackage passes Zod schema validation', async () => {
     const visionDoc = createDirectVisionDoc();
-    const result = runPipeline(visionDoc, { speed: 'mission-only' });
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
 
     expect(result.success).toBe(true);
     const zodResult = MissionPackageSchema.safeParse(result.stages.mission!.missionPackage);
     expect(zodResult.success).toBe(true);
   });
 
-  it('executionSummary has non-zero totalTasks', () => {
+  it('executionSummary has non-zero totalTasks', async () => {
     const visionDoc = createDirectVisionDoc();
-    const result = runPipeline(visionDoc, { speed: 'mission-only' });
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
 
     expect(result.success).toBe(true);
     expect(result.executionSummary.totalTasks).toBeGreaterThan(0);

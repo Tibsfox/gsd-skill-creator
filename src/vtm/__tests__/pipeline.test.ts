@@ -345,9 +345,9 @@ function createVisionMarkdown(): string {
 // ---------------------------------------------------------------------------
 
 describe('runPipeline', () => {
-  it('full pipeline with valid vision markdown produces success=true with all three stages', () => {
+  it('full pipeline with valid vision markdown produces success=true with all three stages', async () => {
     const markdown = createVisionMarkdown();
-    const result = runPipeline(markdown, { speed: 'full' });
+    const result = await runPipeline(markdown, { speed: 'full' });
 
     expect(result.success).toBe(true);
     expect(result.speed).toBe('full');
@@ -358,9 +358,9 @@ describe('runPipeline', () => {
     expect(result.stages.mission).toBeDefined();
   });
 
-  it('full pipeline fileManifest includes milestone-spec, component-spec, wave-plan, test-plan, readme entries', () => {
+  it('full pipeline fileManifest includes milestone-spec, component-spec, wave-plan, test-plan, readme entries', async () => {
     const markdown = createVisionMarkdown();
-    const result = runPipeline(markdown, { speed: 'full' });
+    const result = await runPipeline(markdown, { speed: 'full' });
 
     expect(result.success).toBe(true);
     expect(result.fileManifest.length).toBeGreaterThan(0);
@@ -380,9 +380,9 @@ describe('runPipeline', () => {
     }
   });
 
-  it('full pipeline executionSummary has modelSplit with opus/sonnet/haiku percentages', () => {
+  it('full pipeline executionSummary has modelSplit with opus/sonnet/haiku percentages', async () => {
     const markdown = createVisionMarkdown();
-    const result = runPipeline(markdown, { speed: 'full' });
+    const result = await runPipeline(markdown, { speed: 'full' });
 
     expect(result.success).toBe(true);
     const { executionSummary } = result;
@@ -408,9 +408,9 @@ describe('runPipeline', () => {
     expect(executionSummary.totalTests).toBeGreaterThan(0);
   });
 
-  it('skip-research pipeline skips research stage, stages.research is undefined', () => {
+  it('skip-research pipeline skips research stage, stages.research is undefined', async () => {
     const markdown = createVisionMarkdown();
-    const result = runPipeline(markdown, { speed: 'skip-research' });
+    const result = await runPipeline(markdown, { speed: 'skip-research' });
 
     expect(result.success).toBe(true);
     expect(result.speed).toBe('skip-research');
@@ -419,9 +419,9 @@ describe('runPipeline', () => {
     expect(result.stages.mission).toBeDefined();
   });
 
-  it('mission-only pipeline with VisionDocument input skips parsing and research', () => {
+  it('mission-only pipeline with VisionDocument input skips parsing and research', async () => {
     const visionDoc = createValidVisionDoc();
-    const result = runPipeline(visionDoc, { speed: 'mission-only' });
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
 
     expect(result.success).toBe(true);
     expect(result.speed).toBe('mission-only');
@@ -431,8 +431,8 @@ describe('runPipeline', () => {
     expect(result.stages.mission).toBeDefined();
   });
 
-  it('invalid markdown input returns success=false, error.stage=vision, error.recoverable=false', () => {
-    const result = runPipeline('not a valid vision document');
+  it('invalid markdown input returns success=false, error.stage=vision, error.recoverable=false', async () => {
+    const result = await runPipeline('not a valid vision document');
 
     expect(result.success).toBe(false);
     expect(result.error).toBeDefined();
@@ -441,22 +441,22 @@ describe('runPipeline', () => {
     expect(result.error!.partialOutput.vision).toBeUndefined();
   });
 
-  it('pipeline with includeCache=false omits cacheReport from mission stage', () => {
+  it('pipeline with includeCache=false omits cacheReport from mission stage', async () => {
     const markdown = createVisionMarkdown();
-    const result = runPipeline(markdown, { speed: 'full', includeCache: false });
+    const result = await runPipeline(markdown, { speed: 'full', includeCache: false });
 
     expect(result.success).toBe(true);
     expect(result.stages.mission).toBeDefined();
     expect(result.stages.mission!.cacheReport).toBeUndefined();
   });
 
-  it('pipeline speed auto-detection delegates to selectPipelineSpeed', () => {
+  it('pipeline speed auto-detection delegates to selectPipelineSpeed', async () => {
     // No speed override -- should auto-detect based on document content.
     // The test fixture has "learning system" keywords and modules,
     // so classifyArchetype yields educational-pack, and
     // detectResearchNecessity recommends 'full' for educational packs.
     const markdown = createVisionMarkdown();
-    const result = runPipeline(markdown);
+    const result = await runPipeline(markdown);
 
     expect(result.success).toBe(true);
     // Educational-pack archetype with 2 modules -> full research
@@ -464,16 +464,16 @@ describe('runPipeline', () => {
     expect(result.stages.research).toBeDefined();
   });
 
-  it('durationMs is a positive number', () => {
+  it('durationMs is a positive number', async () => {
     const markdown = createVisionMarkdown();
-    const result = runPipeline(markdown, { speed: 'full' });
+    const result = await runPipeline(markdown, { speed: 'full' });
 
     expect(result.success).toBe(true);
     expect(typeof result.durationMs).toBe('number');
     expect(result.durationMs).toBeGreaterThanOrEqual(0);
   });
 
-  it('error in mission stage returns partialOutput with vision and research', () => {
+  it('error in mission stage returns partialOutput with vision and research', async () => {
     // To trigger a mission stage error, we use a VisionDocument with
     // no modules (which will cause issues in mission assembly).
     // The pipeline should catch the error and provide partial output.
@@ -481,7 +481,7 @@ describe('runPipeline', () => {
       modules: [],
     });
 
-    const result = runPipeline(emptyModulesDoc, { speed: 'full' });
+    const result = await runPipeline(emptyModulesDoc, { speed: 'full' });
 
     // If it succeeds despite empty modules, that's also valid behavior.
     // But if it fails, the error should have the right shape.
@@ -494,12 +494,54 @@ describe('runPipeline', () => {
     }
   });
 
-  it('full pipeline with includeCache=true (default) produces cacheReport', () => {
+  it('full pipeline with includeCache=true (default) produces cacheReport', async () => {
     const markdown = createVisionMarkdown();
-    const result = runPipeline(markdown, { speed: 'full' });
+    const result = await runPipeline(markdown, { speed: 'full' });
 
     expect(result.success).toBe(true);
     expect(result.stages.mission).toBeDefined();
     expect(result.stages.mission!.cacheReport).toBeDefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Template integration tests
+// ---------------------------------------------------------------------------
+
+describe('template integration', () => {
+  it('runPipeline produces renderedDocuments in mission stage result', async () => {
+    const visionDoc = createValidVisionDoc();
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
+
+    expect(result.success).toBe(true);
+    expect(result.stages.mission).toBeDefined();
+    // renderedDocuments field must exist (may be empty if templates not on disk)
+    expect(result.stages.mission!.renderedDocuments).toBeDefined();
+    expect(Array.isArray(result.stages.mission!.renderedDocuments)).toBe(true);
+  });
+
+  it('renderedDocuments includes readme entry when templates available', async () => {
+    const visionDoc = createValidVisionDoc();
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
+
+    expect(result.success).toBe(true);
+    const docs = result.stages.mission!.renderedDocuments ?? [];
+    // If renderedDocuments is non-empty, verify at least one has templateName 'readme'
+    if (docs.length > 0) {
+      const readmeDoc = docs.find(d => d.templateName === 'readme');
+      expect(readmeDoc).toBeDefined();
+    }
+  });
+
+  it('template rendering failure does not fail pipeline', async () => {
+    // In test environments, template files are typically not on disk.
+    // The pipeline should still return success=true with graceful degradation.
+    const visionDoc = createValidVisionDoc();
+    const result = await runPipeline(visionDoc, { speed: 'mission-only' });
+
+    expect(result.success).toBe(true);
+    expect(result.stages.mission).toBeDefined();
+    // renderedDocuments exists (may be empty) but pipeline did not fail
+    expect(result.stages.mission!.renderedDocuments).toBeDefined();
   });
 });
