@@ -88,7 +88,11 @@ Plans:
   3. Tool calls route to the correct server by tool name and return results (or timeout errors) to the caller
   4. Server configs persist across Tauri app restarts, and a previously-quarantined server remains quarantined after restart
   5. Every MCP message produces a TraceEvent with timestamp and latency, observable via Tauri event subscription
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 294-01-PLAN.md — Server lifecycle: ServerConnection (spawn, handshake, disconnect) and HostManager (multi-server, crash detection, restart)
+- [ ] 294-02-PLAN.md — Tool routing and config persistence: ToolRouter (name-to-server dispatch) and ServerRegistry (JSON file persistence, quarantine state)
+- [ ] 294-03-PLAN.md — Trace emission and Tauri IPC: TraceEmitter (ring buffer, event emission) and 5 IPC commands (connect, disconnect, list, call_tool, get_trace)
 
 ### Phase 295: Gateway Server Core
 **Goal**: External MCP clients can connect to GSD-OS over HTTP, authenticate, and receive proper error responses
@@ -199,8 +203,8 @@ Plans:
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 293. Foundation Types | 2/2 | Complete   | 2026-02-22 | - |
-| 294. Host Manager & Server Registry | v1.31 | 0/TBD | Not started | - |
+| 293. Foundation Types | 2/2 | Complete    | 2026-02-22 | - |
+| 294. Host Manager & Server Registry | v1.31 | 0/3 | In progress | - |
 | 295. Gateway Server Core | v1.31 | 0/TBD | Not started | - |
 | 296. Gateway Project & Skill Tools | v1.31 | 0/TBD | Not started | - |
 | 297. Gateway Agent, Workflow & Session Tools | v1.31 | 0/TBD | Not started | - |
