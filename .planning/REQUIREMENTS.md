@@ -59,7 +59,7 @@ Requirements for Brainstorm Session Support milestone. Each maps to roadmap phas
 - [ ] **AGENT-05**: Mapper agent — mind mapping, affinity mapping, lotus blossom, storyboarding — organizes without evaluating quality
 - [ ] **AGENT-06**: Critic agent — Converge-only activation, 4-dimension evaluation (feasibility/impact/alignment/risk), prioritization methods (dot voting, star rating, weighted scoring)
 - [ ] **AGENT-07**: Persona agent — rolestorming and figure storming with genuine perspective fidelity, constructive personas only
-- [ ] **AGENT-08**: Scribe agent — always-on capture across all phases, generates transcript/action plan/export, never generates ideas
+- [x] **AGENT-08**: Scribe agent — always-on capture across all phases, generates transcript/action plan/export, never generates ideas
 
 ### Artifacts
 
@@ -154,7 +154,7 @@ Deferred to future release. Tracked but not in current roadmap.
 | AGENT-05 | Phase 310 | Pending |
 | AGENT-06 | Phase 310 | Pending |
 | AGENT-07 | Phase 310 | Pending |
-| AGENT-08 | Phase 310 | Pending |
+| AGENT-08 | Phase 310 | Complete |
 | ARTIF-01 | Phase 308 | Complete |
 | ARTIF-02 | Phase 308 | Complete |
 | ARTIF-03 | Phase 308 | Complete |
