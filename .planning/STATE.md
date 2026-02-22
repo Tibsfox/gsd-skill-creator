@@ -5,36 +5,48 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.31 shipped. Planning next milestone.
+**Current focus:** v1.32 Brainstorm Session Support -- Phase 305: Foundation Types & Bus
 
 ## Current Position
 
-Phase: None (between milestones)
-Plan: —
-Status: v1.31 complete, next milestone not yet defined
-Last activity: 2026-02-22 — v1.31 milestone archived and tagged
+Phase: 305 (1 of 7 in v1.32) (Foundation Types & Bus)
+Plan: 1 of 3 complete
+Status: Executing
+Last activity: 2026-02-22 -- Completed 305-01 (shared types and constants)
 
-Progress: [################] 100% (v1.31)
+Progress: [██░░░░░░░░░░░░░░] 5% (v1.32)
 
 ## Accumulated Context
 
 ### Decision Log
 
-(Cleared at milestone boundary — see .planning/milestones/v1.31-ROADMAP.md for v1.31 decisions, or PROJECT.md Key Decisions for persistent decisions)
+- Mission package provided as pre-built spec documents (10 files) -- research phase unnecessary
+- Amiga Principle applied: specialized agents (coprocessors) for each cognitive mode
+- Osborn's rules enforced architecturally, not by policy -- Critic agent not instantiated during Diverge
+- Filesystem message bus for inter-agent communication (consistent with Den/AMIGA patterns)
+- Functional API + class wrapper pattern continues from existing codebase
+- Zero new npm dependencies -- all capabilities from existing stack (Zod, natural, node:fs/promises, node:crypto)
+- src/brainstorm/ is a peer module with zero imports from src/den/, src/vtm/, src/knowledge/
+- Session-scoped filesystem bus with monotonic counter filenames (not timestamp-only)
+- .brainstorm/ at project root, in .gitignore, excluded from EventDispatcher
+- SessionConfig.brainstormDir is required (no default) -- prevents accidental production path in tests
+- lotus-blossom included as 16th technique in TechniqueId (spec-specified, despite docs saying 15)
 
 ### Key Constraints
 
 - Must follow existing project patterns: Zod schemas, functional API + class wrapper, TDD
-- MCP SDK v2.x with Zod v4 peer dependency
 - Strict module boundaries: src/ never imports desktop/@tauri-apps/api; desktop/ never imports Node.js modules
 - Local-first architecture: no cloud dependencies for core functionality
+- Brainstorm source files under src/brainstorm/
+- No real personal data in brainstorming examples -- fictional scenarios only
+- Humane Flow principle: encouraging, never shaming; "Welcome back" not guilt
 
 ### Blockers
 
-None.
+- Research flags: Phase 308 (Brainwriting 6-3-5, Six Thinking Hats) and Phase 310 (Hats synchronization handshake) may benefit from `/gsd:research-phase` before planning
 
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: v1.31 milestone completion — archived, tagged, ready for /gsd:new-milestone
+Stopped at: Completed 305-01-PLAN.md (shared types and constants)
 Resume file: None
