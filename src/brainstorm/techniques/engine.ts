@@ -30,6 +30,24 @@ import { createMindMappingTechnique } from './individual/mind-mapping.js';
 import { createRapidIdeationTechnique } from './individual/rapid-ideation.js';
 import { createQuestionBrainstormingTechnique } from './individual/question-brainstorming.js';
 
+// Collaborative techniques (5)
+import { createBrainwriting635Technique } from './collaborative/brainwriting-635.js';
+import { createRoundRobinTechnique } from './collaborative/round-robin.js';
+import { createBrainNettingTechnique } from './collaborative/brain-netting.js';
+import { createRolestormingTechnique } from './collaborative/rolestorming.js';
+import { createFigureStormingTechnique } from './collaborative/figure-storming.js';
+
+// Analytical techniques (4)
+import { createScamperTechnique } from './analytical/scamper.js';
+import { createSixThinkingHatsTechnique } from './analytical/six-thinking-hats.js';
+import { createStarburstingTechnique } from './analytical/starbursting.js';
+import { createFiveWhysTechnique } from './analytical/five-whys.js';
+
+// Visual techniques (3)
+import { createStoryboardingTechnique } from './visual/storyboarding.js';
+import { createAffinityMappingTechnique } from './visual/affinity-mapping.js';
+import { createLotusBlossomTechnique } from './visual/lotus-blossom.js';
+
 // ============================================================================
 // Interfaces
 // ============================================================================
@@ -131,11 +149,29 @@ export class TechniqueEngine implements ITechniqueEngine {
   constructor() {
     this.registry = new Map<TechniqueId, () => TechniqueInstance>();
 
-    // Register individual techniques
+    // Individual techniques (4)
     this.register('freewriting', createFreewritingTechnique);
     this.register('mind-mapping', createMindMappingTechnique);
     this.register('rapid-ideation', createRapidIdeationTechnique);
     this.register('question-brainstorming', createQuestionBrainstormingTechnique);
+
+    // Collaborative techniques (5)
+    this.register('brainwriting-635', createBrainwriting635Technique);
+    this.register('round-robin', createRoundRobinTechnique);
+    this.register('brain-netting', createBrainNettingTechnique);
+    this.register('rolestorming', createRolestormingTechnique);
+    this.register('figure-storming', createFigureStormingTechnique);
+
+    // Analytical techniques (4)
+    this.register('scamper', createScamperTechnique);
+    this.register('six-thinking-hats', createSixThinkingHatsTechnique);
+    this.register('starbursting', createStarburstingTechnique);
+    this.register('five-whys', createFiveWhysTechnique);
+
+    // Visual techniques (3)
+    this.register('storyboarding', createStoryboardingTechnique);
+    this.register('affinity-mapping', createAffinityMappingTechnique);
+    this.register('lotus-blossom', createLotusBlossomTechnique);
   }
 
   /**

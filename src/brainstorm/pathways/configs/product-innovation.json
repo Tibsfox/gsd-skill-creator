@@ -1,0 +1,13 @@
+{
+  "id": "product-innovation",
+  "name": "Product Innovation",
+  "description": "Improve an existing product or process",
+  "situation": "You have an existing product, feature, or process to improve",
+  "technique_sequence": [
+    { "technique": "scamper", "duration_ms": 1800000, "notes": "Full SCAMPER sweep — all 7 lenses on the existing product" },
+    { "technique": "rolestorming", "duration_ms": 900000, "notes": "Customer, competitor, first-time-user perspectives" },
+    { "technique": "lotus-blossom", "duration_ms": 900000, "notes": "Expand top 3 ideas into 8 themes x 8 ideas" }
+  ],
+  "required_agents": ["facilitator", "analyst", "persona", "mapper", "ideator", "scribe"],
+  "recommended_for": ["improve", "existing product", "feature", "process", "better", "enhance", "optimize", "product", "service"]
+}
