@@ -127,7 +127,7 @@ function registerDiagnoseAgentPrompt(server: McpServer): void {
                 ``,
                 `## Diagnostic Steps`,
                 ``,
-                `1. **Check Agent Status** -- Use chipset:get to verify the agent's position in the chipset topology`,
+                `1. **Check Agent Status** -- Use chipset.get to verify the agent's position in the chipset topology`,
                 `2. **Review Telemetry** -- Check token usage, task count, and last activity`,
                 `3. **Examine Logs** -- Look for error patterns, repeated failures, or stuck states`,
                 `4. **Verify Dependencies** -- Check if the agent's dependencies (other agents, resources) are healthy`,
@@ -177,7 +177,7 @@ function registerOptimizeChipsetPrompt(server: McpServer): void {
 
       const configSection = args.currentConfig
         ? `\n\n## Current Configuration\n\n\`\`\`yaml\n${args.currentConfig}\n\`\`\``
-        : '\n\n*No current configuration provided. Use chipset:get to retrieve the current state.*';
+        : '\n\n*No current configuration provided. Use chipset.get to retrieve the current state.*';
 
       return {
         messages: [
@@ -201,8 +201,8 @@ function registerOptimizeChipsetPrompt(server: McpServer): void {
                 `   - Context mode changes (main vs fork)`,
                 `   - Lifecycle adjustments (persistent vs task)`,
                 `4. **Evaluate Trade-offs** -- For each change, describe what improves and what might degrade`,
-                `5. **Apply Changes** -- Use chipset:modify to apply the optimized configuration`,
-                `6. **Validate** -- Use chipset:get to verify the changes and review the diff`,
+                `5. **Apply Changes** -- Use chipset.modify to apply the optimized configuration`,
+                `6. **Validate** -- Use chipset.get to verify the changes and review the diff`,
                 ``,
                 `## Budget Rules`,
                 ``,

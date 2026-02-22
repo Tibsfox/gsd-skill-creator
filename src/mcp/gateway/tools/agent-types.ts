@@ -66,7 +66,7 @@ export const AgentLogEntrySchema = z.object({
   /** Log message. */
   message: z.string(),
   /** Optional structured data. */
-  data: z.record(z.unknown()).optional(),
+  data: z.record(z.string(), z.unknown()).optional(),
 });
 
 /** Agent log entry. */

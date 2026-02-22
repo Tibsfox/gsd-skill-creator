@@ -16,6 +16,11 @@ import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { registerResourceProviders } from './resource-providers.js';
 import type { ResourceProviders } from './types.js';
 
+/** Narrow text/blob resource union to extract text content. */
+function resourceText(contents: Array<Record<string, unknown>>, index = 0): string {
+  return (contents[index] as { text: string }).text;
+}
+
 // ── Helpers ─────────────────────────────────────────────────────────────
 
 function createMockProviders(overrides?: Partial<ResourceProviders>): ResourceProviders {
@@ -107,7 +112,7 @@ describe('Resource Providers', () => {
 
       expect(result.contents).toHaveLength(1);
       expect(result.contents[0]!.mimeType).toBe('application/json');
-      const data = JSON.parse(result.contents[0]!.text as string);
+      const data = JSON.parse(resourceText(result.contents));
       expect(data.name).toBe('my-project');
       expect(data.status).toBe('active');
       expect(data.phaseCount).toBe(5);
@@ -125,7 +130,7 @@ describe('Resource Providers', () => {
         uri: 'gsd://projects/nonexistent/config',
       });
 
-      const data = JSON.parse(result.contents[0]!.text as string);
+      const data = JSON.parse(resourceText(result.contents));
       expect(data.error).toContain('not found');
 
       await client.close();
@@ -144,7 +149,7 @@ describe('Resource Providers', () => {
 
       expect(result.contents).toHaveLength(1);
       expect(result.contents[0]!.mimeType).toBe('application/json');
-      const data = JSON.parse(result.contents[0]!.text as string);
+      const data = JSON.parse(resourceText(result.contents));
       expect(Array.isArray(data)).toBe(true);
       expect(data).toHaveLength(2);
       expect(data[0].name).toBe('test-skill');
@@ -163,7 +168,7 @@ describe('Resource Providers', () => {
         uri: 'gsd://skills/registry',
       });
 
-      const data = JSON.parse(result.contents[0]!.text as string);
+      const data = JSON.parse(resourceText(result.contents));
       expect(data).toEqual([]);
 
       await client.close();
@@ -182,7 +187,7 @@ describe('Resource Providers', () => {
 
       expect(result.contents).toHaveLength(1);
       expect(result.contents[0]!.mimeType).toBe('application/json');
-      const data = JSON.parse(result.contents[0]!.text as string);
+      const data = JSON.parse(resourceText(result.contents));
       expect(data.agentId).toBe('executor-1');
       expect(data.role).toBe('executor');
       expect(data.tokenUsage).toBe(12500);
@@ -198,7 +203,7 @@ describe('Resource Providers', () => {
         uri: 'gsd://agents/unknown-agent/telemetry',
       });
 
-      const data = JSON.parse(result.contents[0]!.text as string);
+      const data = JSON.parse(resourceText(result.contents));
       expect(data.error).toContain('not found');
 
       await client.close();
@@ -217,7 +222,7 @@ describe('Resource Providers', () => {
 
       expect(result.contents).toHaveLength(1);
       expect(result.contents[0]!.mimeType).toBe('text/yaml');
-      const text = result.contents[0]!.text as string;
+      const text = resourceText(result.contents);
       expect(text).toContain('den-v1.28');
 
       await client.close();
@@ -230,7 +235,7 @@ describe('Resource Providers', () => {
         uri: 'gsd://chipset/state',
       });
 
-      const parsed = JSON.parse(result.contents[0]!.text as string);
+      const parsed = JSON.parse(resourceText(result.contents));
       expect(parsed.name).toBe('den-v1.28');
 
       await client.close();
@@ -255,7 +260,7 @@ describe('Resource Providers', () => {
       });
 
       expect(calledWith).toBe('injected-test');
-      const data = JSON.parse(result.contents[0]!.text as string);
+      const data = JSON.parse(resourceText(result.contents));
       expect(data.status).toBe('injected');
       expect(data.phaseCount).toBe(99);
 

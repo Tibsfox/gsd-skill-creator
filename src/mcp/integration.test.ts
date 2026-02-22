@@ -166,7 +166,7 @@ describe('TEST-01: Presentation + Security Integration', () => {
       toolCount: 2,
       resourceCount: 1,
       promptCount: 0,
-      tools: [{ name: 'test:tool', description: 'A tool' }],
+      tools: [{ name: 'test.tool', description: 'A tool' }],
       resources: [{ name: 'res', uri: 'resource://test' }],
     };
 
@@ -211,7 +211,7 @@ describe('TEST-01: Presentation + Security Integration', () => {
       serverId: 'sec-server',
       serverName: 'Security Server',
       trustState: (await pipeline.getTrustState('sec-server')) as TrustState,
-      lastActivity: new Date().toISOString(),
+      lastActivity: Date.now(),
       toolCount: 2,
     };
 
@@ -248,6 +248,7 @@ describe('TEST-01: Presentation + Security Integration', () => {
     const bootData: BootPeripheralData = {
       serverId: 'boot-server',
       serverName: 'Boot Test Server',
+      transportType: 'stdio',
       status: 'connected',
       trustState: 'provisional',
       toolCount: 5,
@@ -513,7 +514,7 @@ describe('TEST-03: Gateway End-to-End with Real Tools', () => {
     );
   }
 
-  it('connects, discovers tools including chipset:get, and invokes it', async () => {
+  it('connects, discovers tools including chipset.get, and invokes it', async () => {
     const transport = createClientTransport(storedToken.token);
     const client = new Client({ name: 'integration-client', version: '1.0.0' });
 
@@ -522,11 +523,11 @@ describe('TEST-03: Gateway End-to-End with Real Tools', () => {
     // Discover tools
     const toolsResult = await client.listTools();
     const toolNames = toolsResult.tools.map((t) => t.name);
-    expect(toolNames).toContain('chipset:get');
+    expect(toolNames).toContain('chipset.get');
 
-    // Invoke chipset:get
+    // Invoke chipset.get
     const result = await client.callTool({
-      name: 'chipset:get',
+      name: 'chipset.get',
       arguments: {},
     });
 
@@ -584,10 +585,10 @@ describe('TEST-03: Gateway End-to-End with Real Tools', () => {
     const connectedClients = await Promise.all(connectPromises);
     expect(connectedClients).toHaveLength(3);
 
-    // All invoke chipset:get concurrently
+    // All invoke chipset.get concurrently
     const results = await Promise.all(
       connectedClients.map((c) =>
-        c.callTool({ name: 'chipset:get', arguments: {} }),
+        c.callTool({ name: 'chipset.get', arguments: {} }),
       ),
     );
 
@@ -623,9 +624,9 @@ describe('TEST-03: Gateway End-to-End with Real Tools', () => {
 
     await client.connect(transport);
 
-    // Read tool should succeed (chipset:get is a read tool)
+    // Read tool should succeed (chipset.get is a read tool)
     const readResult = await client.callTool({
-      name: 'chipset:get',
+      name: 'chipset.get',
       arguments: {},
     });
     expect(readResult.isError).toBeFalsy();
@@ -766,9 +767,9 @@ describe('TEST-05: Agent Bridge Full Round-Trip', () => {
     expect(tools.length).toBe(3);
     const toolNames = tools.map((t) => t.name).sort();
     expect(toolNames).toEqual([
-      'scout:evaluate-dependency',
-      'scout:research',
-      'scout:survey-landscape',
+      'scout.evaluate-dependency',
+      'scout.research',
+      'scout.survey-landscape',
     ]);
 
     // Invoke each tool
@@ -802,8 +803,8 @@ describe('TEST-05: Agent Bridge Full Round-Trip', () => {
     const tools = await adapter.listTools();
     expect(tools.length).toBe(4);
 
-    // Invoke verify:coverage
-    const coverageResult = await adapter.invokeTool('verify:coverage', { threshold: 85 });
+    // Invoke verify.coverage
+    const coverageResult = await adapter.invokeTool('verify.coverage', { threshold: 85 });
     expect(coverageResult.isError).toBeFalsy();
     const parsed = JSON.parse(coverageResult.content[0].text);
     expect(parsed.threshold).toBe(85);
@@ -821,9 +822,9 @@ describe('TEST-05: Agent Bridge Full Round-Trip', () => {
     const capabilities = await exec.readResource('scout://capabilities');
     const parsed = JSON.parse(capabilities);
     expect(parsed.agentId).toBe('scout');
-    expect(parsed.tools).toContain('scout:research');
-    expect(parsed.tools).toContain('scout:evaluate-dependency');
-    expect(parsed.tools).toContain('scout:survey-landscape');
+    expect(parsed.tools).toContain('scout.research');
+    expect(parsed.tools).toContain('scout.evaluate-dependency');
+    expect(parsed.tools).toContain('scout.survey-landscape');
     expect(parsed.tools.length).toBe(3);
 
     // Read findings resource
@@ -856,7 +857,7 @@ describe('TEST-05: Agent Bridge Full Round-Trip', () => {
     const scoutResult = await scoutClient.execResearch('dual-agent-test');
     expect(scoutResult.isError).toBeFalsy();
 
-    const verifyResult = await verifyClient.invokeTool('verify:run-tests', { pattern: '*.test.ts' });
+    const verifyResult = await verifyClient.invokeTool('verify.run-tests', { pattern: '*.test.ts' });
     expect(verifyResult.isError).toBeFalsy();
 
     await scoutClient.disconnect();
@@ -873,7 +874,7 @@ describe('TEST-05: Agent Bridge Full Round-Trip', () => {
     expect(goodResult.isError).toBeFalsy();
 
     // Invoke a non-existent tool (should get error, not crash)
-    const badResult = await exec.invokeTool('nonexistent:tool', {});
+    const badResult = await exec.invokeTool('nonexistent.tool', {});
     // The MCP SDK may throw or return error -- either way, process survives
     expect(badResult.isError === true || badResult.content.length === 0 || true).toBe(true);
 

@@ -33,22 +33,22 @@ async function createTestSetup(state?: ChipsetStateManager) {
   return { client, server, chipsetState };
 }
 
-function parseToolResult(result: { content: unknown[] }): unknown {
-  const textContent = result.content as Array<{ type: string; text: string }>;
-  return JSON.parse(textContent[0]!.text);
+function parseToolResult(result: unknown): unknown {
+  const r = result as { content: Array<{ type: string; text: string }> };
+  return JSON.parse(r.content[0]!.text);
 }
 
 // ── Tests ───────────────────────────────────────────────────────────────
 
 describe('Chipset Tools', () => {
-  // ── chipset:get ─────────────────────────────────────────────────────
+  // ── chipset.get ─────────────────────────────────────────────────────
 
-  describe('chipset:get', () => {
+  describe('chipset.get', () => {
     it('returns the current chipset configuration as JSON', async () => {
       const { client } = await createTestSetup();
 
       const result = await client.callTool({
-        name: 'chipset:get',
+        name: 'chipset.get',
         arguments: {},
       });
 
@@ -66,7 +66,7 @@ describe('Chipset Tools', () => {
       const { client } = await createTestSetup();
 
       const result = await client.callTool({
-        name: 'chipset:get',
+        name: 'chipset.get',
         arguments: {},
       });
 
@@ -81,14 +81,14 @@ describe('Chipset Tools', () => {
     });
   });
 
-  // ── chipset:modify ──────────────────────────────────────────────────
+  // ── chipset.modify ──────────────────────────────────────────────────
 
-  describe('chipset:modify', () => {
+  describe('chipset.modify', () => {
     it('updates chipset name and returns diff', async () => {
       const { client } = await createTestSetup();
 
       const result = await client.callTool({
-        name: 'chipset:modify',
+        name: 'chipset.modify',
         arguments: { name: 'modified-chipset' },
       });
 
@@ -104,7 +104,7 @@ describe('Chipset Tools', () => {
       const { client } = await createTestSetup();
 
       const result = await client.callTool({
-        name: 'chipset:modify',
+        name: 'chipset.modify',
         arguments: {
           positions: [{ id: 'executor', tokenBudget: 0.25 }],
         },
@@ -121,7 +121,7 @@ describe('Chipset Tools', () => {
       const { client } = await createTestSetup();
 
       const result = await client.callTool({
-        name: 'chipset:modify',
+        name: 'chipset.modify',
         arguments: { removePositions: ['sentinel'] },
       });
 
@@ -136,7 +136,7 @@ describe('Chipset Tools', () => {
       const { client } = await createTestSetup();
 
       const result = await client.callTool({
-        name: 'chipset:modify',
+        name: 'chipset.modify',
         arguments: { topologyType: 'pipeline' },
       });
 
@@ -150,7 +150,7 @@ describe('Chipset Tools', () => {
       const { client } = await createTestSetup();
 
       const result = await client.callTool({
-        name: 'chipset:modify',
+        name: 'chipset.modify',
         arguments: {},
       });
 
@@ -164,12 +164,12 @@ describe('Chipset Tools', () => {
       const { client } = await createTestSetup();
 
       await client.callTool({
-        name: 'chipset:modify',
+        name: 'chipset.modify',
         arguments: { name: 'persisted-name' },
       });
 
       const getResult = await client.callTool({
-        name: 'chipset:get',
+        name: 'chipset.get',
         arguments: {},
       });
 
@@ -180,14 +180,14 @@ describe('Chipset Tools', () => {
     });
   });
 
-  // ── chipset:synthesize ──────────────────────────────────────────────
+  // ── chipset.synthesize ──────────────────────────────────────────────
 
-  describe('chipset:synthesize', () => {
+  describe('chipset.synthesize', () => {
     it('synthesizes chipset from description with executor keyword', async () => {
       const { client } = await createTestSetup();
 
       const result = await client.callTool({
-        name: 'chipset:synthesize',
+        name: 'chipset.synthesize',
         arguments: { description: 'A team that executes and verifies code changes' },
       });
 
@@ -205,7 +205,7 @@ describe('Chipset Tools', () => {
       const { client } = await createTestSetup();
 
       const result = await client.callTool({
-        name: 'chipset:synthesize',
+        name: 'chipset.synthesize',
         arguments: { description: 'A sequential pipeline for building and testing' },
       });
 
@@ -219,12 +219,12 @@ describe('Chipset Tools', () => {
       const { client } = await createTestSetup();
 
       await client.callTool({
-        name: 'chipset:synthesize',
+        name: 'chipset.synthesize',
         arguments: { description: 'A monitoring and planning team' },
       });
 
       const getResult = await client.callTool({
-        name: 'chipset:get',
+        name: 'chipset.get',
         arguments: {},
       });
 
@@ -239,7 +239,7 @@ describe('Chipset Tools', () => {
       const { client } = await createTestSetup();
 
       const result = await client.callTool({
-        name: 'chipset:synthesize',
+        name: 'chipset.synthesize',
         arguments: { description: 'A simple documentation team' },
       });
 
@@ -307,9 +307,9 @@ describe('Chipset Tools', () => {
 
       const tools = await client.listTools();
       const names = tools.tools.map((t) => t.name);
-      expect(names).toContain('chipset:get');
-      expect(names).toContain('chipset:modify');
-      expect(names).toContain('chipset:synthesize');
+      expect(names).toContain('chipset.get');
+      expect(names).toContain('chipset.modify');
+      expect(names).toContain('chipset.synthesize');
 
       await client.close();
     });

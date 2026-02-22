@@ -1,5 +1,5 @@
 /**
- * Unit tests for skill:* gateway tools.
+ * Unit tests for skill.* gateway tools.
  *
  * Tests skill search, inspection, and activation against temp directories
  * with mock skill structures using SkillStore and SkillIndex.

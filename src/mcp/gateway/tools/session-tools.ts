@@ -1,5 +1,5 @@
 /**
- * Session gateway tools — session:query, session:patterns.
+ * Session gateway tools — session.query, session.patterns.
  *
  * Registers two MCP tools on a gateway server that allow external clients
  * to query cross-project intelligence and retrieve detected patterns
@@ -25,11 +25,11 @@ export function registerSessionTools(server: McpServer, store: SessionStore): vo
   registerPatternsTool(server, store);
 }
 
-// ── session:query ───────────────────────────────────────────────────────────
+// ── session.query ───────────────────────────────────────────────────────────
 
 function registerQueryTool(server: McpServer, store: SessionStore): void {
   server.tool(
-    'session:query',
+    'session.query',
     'Search cross-project intelligence for relevant matches',
     {
       query: z.string().min(1).describe('Search query string'),
@@ -54,11 +54,11 @@ function registerQueryTool(server: McpServer, store: SessionStore): void {
   );
 }
 
-// ── session:patterns ────────────────────────────────────────────────────────
+// ── session.patterns ────────────────────────────────────────────────────────
 
 function registerPatternsTool(server: McpServer, store: SessionStore): void {
   server.tool(
-    'session:patterns',
+    'session.patterns',
     'Get detected patterns from skill-creator analysis, optionally filtered by domain',
     {
       domain: z.string().optional().describe('Optional domain to filter patterns (e.g., "testing", "debugging", "deployment")'),
