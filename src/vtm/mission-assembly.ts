@@ -24,8 +24,8 @@ import type {
   ComponentSpec,
   ModelAssignment,
 } from './types.js';
-import { classifyArchetype } from './vision-validator.js';
-import { extractSafety } from './research-utils.js';
+import { assignModel as classifyModel } from './model-assignment.js';
+import type { AssignmentInput } from './model-assignment.js';
 
 // ---------------------------------------------------------------------------
 // Public types
@@ -44,16 +44,23 @@ export interface SelfContainmentDiagnostic {
 // ---------------------------------------------------------------------------
 
 /**
- * Assign a model tier to a module based on heuristics.
+ * Assign a model tier to a module via Phase 284's signal-based classifier.
  *
- * - Modules with safetyConcerns -> opus
- * - Modules with exactly 1 concept -> haiku
- * - All other modules -> sonnet
+ * Bridges the module interface ({ name, concepts, safetyConcerns }) to the
+ * AssignmentInput interface ({ objective, produces, context }) expected by
+ * the signal-based classifier from model-assignment.ts.
  */
-function assignModel(mod: { concepts: string[]; safetyConcerns?: string }): ModelAssignment {
-  if (mod.safetyConcerns) return 'opus';
-  if (mod.concepts.length === 1) return 'haiku';
-  return 'sonnet';
+function assignModelForModule(mod: { name: string; concepts: string[]; safetyConcerns?: string }): ModelAssignment {
+  const input: AssignmentInput = {
+    objective: `Implement ${mod.name} covering ${mod.concepts.join(', ')}`,
+    produces: [`${mod.name} implementation`],
+    context: [
+      ...mod.concepts,
+      mod.safetyConcerns ? `safety: ${mod.safetyConcerns}` : '',
+    ].filter(Boolean).join(' '),
+  };
+  const result = classifyModel(input);
+  return result.model;
 }
 
 /**
@@ -184,7 +191,7 @@ export function generateMilestoneSpec(
     dependencies: visionDoc.architecture.connections
       .filter(c => c.to === mod.name)
       .map(c => c.from),
-    model: assignModel(mod),
+    model: assignModelForModule(mod),
     estimatedTokens: estimateModuleTokens(mod),
   }));
 
