@@ -78,8 +78,8 @@ Requirements for the OpenStack Cloud Platform milestone. Each maps to roadmap ph
 
 - [ ] **INTEG-01**: GSD-OS dashboard panel displays cloud operations status (service health, alerts) alongside mission telemetry
 - [ ] **INTEG-02**: Documentation console renders sysadmin guide, ops manual, and runbooks within GSD-OS
-- [ ] **INTEG-03**: Staging layer handles intake for OpenStack configurations and community chipset variants
-- [ ] **INTEG-04**: skill-creator observation pipeline captures deployment patterns and identifies promotion candidates
+- [x] **INTEG-03**: Staging layer handles intake for OpenStack configurations and community chipset variants
+- [x] **INTEG-04**: skill-creator observation pipeline captures deployment patterns and identifies promotion candidates
 - [ ] **INTEG-05**: Git history documents every deployment decision with configuration change rationale
 - [ ] **INTEG-06**: Knowledge tier loading meets performance targets: summary <2s, active <5s
 - [ ] **INTEG-07**: Lessons learned document captures mission retrospective in NASA LLIS format with ≥3 actionable improvements
@@ -177,8 +177,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VERIF-07 | Phase 324 | Pending |
 | INTEG-01 | Phase 323 | Pending |
 | INTEG-02 | Phase 323 | Pending |
-| INTEG-03 | Phase 323 | Pending |
-| INTEG-04 | Phase 323 | Pending |
+| INTEG-03 | Phase 323 | Complete |
+| INTEG-04 | Phase 323 | Complete |
 | INTEG-05 | Phase 323 | Pending |
 | INTEG-06 | Phase 323 | Pending |
 | INTEG-07 | Phase 325 | Pending |
