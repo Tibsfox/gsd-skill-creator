@@ -10,10 +10,10 @@ Requirements for the OpenStack Cloud Platform milestone. Each maps to roadmap ph
 
 ### Foundation (FOUND)
 
-- [ ] **FOUND-01**: Shared TypeScript interfaces defined for OpenStackService, Requirement, Runbook, NASASEPhase, and CommunicationLoop types with Zod schemas
-- [ ] **FOUND-02**: NASA SE Methodology skill maps all 7 SE phases to cloud operations equivalents with cross-references to SP-6105 and NPR 7123.1
-- [ ] **FOUND-03**: Communication loop schemas define all 9 loops (command, execution, specialist, user, observation, health, budget, cloud-ops, doc-sync) with priority levels
-- [ ] **FOUND-04**: Filesystem contracts established for skills/, docs/, configs/, .chipset/, and .planning/bus/ directories
+- [x] **FOUND-01**: Shared TypeScript interfaces defined for OpenStackService, Requirement, Runbook, NASASEPhase, and CommunicationLoop types with Zod schemas
+- [x] **FOUND-02**: NASA SE Methodology skill maps all 7 SE phases to cloud operations equivalents with cross-references to SP-6105 and NPR 7123.1
+- [x] **FOUND-03**: Communication loop schemas define all 9 loops (command, execution, specialist, user, observation, health, budget, cloud-ops, doc-sync) with priority levels
+- [x] **FOUND-04**: Filesystem contracts established for skills/, docs/, configs/, .chipset/, and .planning/bus/ directories
 
 ### Core OpenStack Skills (SKILL)
 
@@ -127,10 +127,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 312 | Pending |
-| FOUND-02 | Phase 312 | Pending |
-| FOUND-03 | Phase 312 | Pending |
-| FOUND-04 | Phase 312 | Pending |
+| FOUND-01 | Phase 312 | Complete |
+| FOUND-02 | Phase 312 | Complete |
+| FOUND-03 | Phase 312 | Complete |
+| FOUND-04 | Phase 312 | Complete |
 | SKILL-01 | Phase 313 | Pending |
 | SKILL-02 | Phase 313 | Pending |
 | SKILL-03 | Phase 314 | Pending |
