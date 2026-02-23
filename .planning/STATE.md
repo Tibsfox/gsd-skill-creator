@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.33 Phase 319 — Systems Administrator's Guide
+**Current focus:** v1.33 Phase 321 — Runbook Library and Reference Library
 
 ## Current Position
 
-Phase: 319 of 325 (Systems Administrator's Guide) — IN PROGRESS
-Plan: 3 of 3 in Phase 319
-Status: Phases 312-318 complete (Wave 0-2 complete), Wave 3 in progress (319-03 complete)
-Last activity: 2026-02-23 — Phase 319 Plan 03 executed (2 tasks, Phase E ops + Phase F closeout chapters)
+Phase: 321 of 325 (Runbook Library and Reference Library) — IN PROGRESS
+Plan: 4 of 4 in Phase 321
+Status: Phases 312-319 complete (Wave 0-3 complete), Wave 4 in progress (321-04 complete)
+Last activity: 2026-02-23 — Phase 321 Plan 04 executed (2 tasks, dual runbook indexes + 3-tier reference library)
 
-Progress: ████████░░░░░░░░ 54% (v1.33)
+Progress: █████████░░░░░░░ 58% (v1.33)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15 (v1.33)
+- Total plans completed: 16 (v1.33)
 - Average duration: ~4 min
-- Total execution time: ~63 min
+- Total execution time: ~69 min
 
 **By Phase:**
 
@@ -35,10 +35,10 @@ Progress: ████████░░░░░░░░ 54% (v1.33)
 | 317 | 2 | ~6 min | ~3 min |
 | 318 | 2 | ~8 min | ~4 min |
 | 319 | 2 | ~10 min | ~5 min |
-| 321 | 1 | ~5 min | ~5 min |
+| 321 | 2 | ~11 min | ~6 min |
 
 **Recent Trend:**
-- Last 5 plans: 318-02 (4m), 319-02 (5m), 319-03 (5m), 321-01 (5m)
+- Last 5 plans: 319-02 (5m), 319-03 (5m), 321-01 (5m), 321-04 (6m)
 - Trend: Documentation chapters ~5 min each
 
 *Updated after each plan completion*
@@ -57,6 +57,7 @@ Recent decisions affecting current work:
 - Post-deploy gates split block/warn: critical services block, optional services warn
 - [Phase 319]: Phase F service decommissioning order follows exact reverse of Phase D deployment order (Heat->Horizon->Swift->Cinder->Neutron->Nova->Glance->Keystone)
 - [Phase 321]: Dual PROCEDURE sections for scheduled vs emergency Fernet key rotation in RB-KEYSTONE-005
+- [Phase 321]: Dual-index pattern for runbook discovery (task intent + failure symptom), 3-tier reference loading
 
 ### Pending Todos
 
@@ -69,5 +70,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-23
-Stopped at: Completed 319-03-PLAN.md (Phase E ops + Phase F closeout chapters)
+Stopped at: Completed 321-04-PLAN.md (dual runbook indexes + 3-tier reference library)
 Resume file: None
