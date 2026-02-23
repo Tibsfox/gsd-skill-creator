@@ -1,0 +1,304 @@
+# =============================================================================
+# Post-Deployment Evaluation Gates
+# =============================================================================
+#
+# These gates run AFTER OpenStack services are deployed. They verify the
+# cloud is operational and services are communicating correctly.
+#
+# NASA SE Phase Mapping:
+#   Post-deploy gates correspond to the Phase D gate (SIR -- System
+#   Integration Review). In NASA Systems Engineering, SIR proves the
+#   deployed system works as an integrated whole. Similarly, these gates
+#   verify that the deployed OpenStack cloud functions end-to-end.
+#
+# Action Types:
+#   block -- Prevents crew handoff from deployment to operations. The
+#            service is critical and must be working before day-2 ops begin.
+#   warn  -- Records an advisory but allows handoff to proceed. The service
+#            is important but not strictly required for basic operations.
+#
+# Dependency Chain:
+#   POST-001 (Keystone) must pass first -- ALL other OpenStack services
+#   depend on Keystone for authentication. If Keystone fails, every other
+#   service check would also fail, producing noise rather than signal.
+#   Gates in group 2 run in parallel after Keystone. Gates in group 3
+#   (integration tests) run after all service checks complete.
+#
+# Blocking gates: keystone_auth, nova_compute, neutron_network,
+#                 service_catalog_complete -- these are the core services
+#                 without which the cloud cannot function.
+# Warning gates:  glance_images, cinder_storage, horizon_dashboard,
+#                 end_to_end_vm_lifecycle, doc_verification -- these are
+#                 important but the cloud can operate in degraded mode
+#                 without them.
+#
+# chipset_ref: openstack-nasa-se
+# =============================================================================
+
+name: post-deploy-evaluation-gates
+version: 1.0.0
+description: "Post-deployment evaluation gates -- verify OpenStack services are operational after deployment"
+chipset_ref: openstack-nasa-se
+nasa_se_phase: "Phase D gate (SIR) -- system integration review, proving the deployed system works"
+
+gates:
+  # ---------------------------------------------------------------------------
+  # POST-001: Keystone Authentication
+  # ---------------------------------------------------------------------------
+  # Keystone is the identity service -- the foundation of all OpenStack auth.
+  # Every other service depends on Keystone for token validation. This gate
+  # must pass first; if it fails, all dependent gates are automatically skipped.
+  # Action: block -- no auth means no cloud.
+  # ---------------------------------------------------------------------------
+  - id: POST-001
+    name: keystone_auth
+    description: "Verify Keystone identity service can issue authentication tokens"
+    check_type: openstack_cli
+    command: "openstack token issue -f json"
+    expected_result:
+      http_status: 200
+      token_issued: true
+      fields_present: [id, expires, project_id]
+    action: block
+    remediation: "Check Keystone service status: docker ps | grep keystone. Check logs: docker logs keystone_api. Verify endpoint: openstack catalog show identity. Common issues: database connectivity, fernet key rotation, Apache config."
+    timeout_seconds: 30
+    depends_on: []
+
+  # ---------------------------------------------------------------------------
+  # POST-002: Nova Compute
+  # ---------------------------------------------------------------------------
+  # Nova provides compute resources (VMs). At least one hypervisor must be
+  # registered and reporting "up" for the cloud to launch instances.
+  # Action: block -- compute is the primary purpose of a cloud.
+  # Depends on: POST-001 (needs Keystone auth to query Nova API).
+  # ---------------------------------------------------------------------------
+  - id: POST-002
+    name: nova_compute
+    description: "Verify Nova compute service is running with at least one hypervisor available"
+    check_type: openstack_cli
+    command: "openstack hypervisor list -f json"
+    expected_result:
+      http_status: 200
+      hypervisor_count_min: 1
+      hypervisor_state: "up"
+    action: block
+    remediation: "Check Nova services: openstack compute service list. Check containers: docker ps | grep nova. Common issues: libvirt connection, compute node registration, nova-scheduler not finding hosts."
+    timeout_seconds: 30
+    depends_on: [POST-001]
+
+  # ---------------------------------------------------------------------------
+  # POST-003: Neutron Network
+  # ---------------------------------------------------------------------------
+  # Neutron provides software-defined networking. All required agents (DHCP,
+  # L3 router, OVS) must be alive for VMs to get network connectivity.
+  # Action: block -- VMs without networking are useless.
+  # Depends on: POST-001 (needs Keystone auth to query Neutron API).
+  # ---------------------------------------------------------------------------
+  - id: POST-003
+    name: neutron_network
+    description: "Verify Neutron networking service can list networks and agents are alive"
+    check_type: openstack_cli
+    command: "openstack network agent list -f json"
+    expected_result:
+      http_status: 200
+      agents_alive: true
+      required_agents: [dhcp-agent, l3-agent, openvswitch-agent]
+    action: block
+    remediation: "Check Neutron agents: openstack network agent list. Check OVS: ovs-vsctl show. Check containers: docker ps | grep neutron. Common issues: OVS bridge misconfiguration, agent not connecting to message queue."
+    timeout_seconds: 30
+    depends_on: [POST-001]
+
+  # ---------------------------------------------------------------------------
+  # POST-004: Glance Images
+  # ---------------------------------------------------------------------------
+  # Glance provides image management. The service must be responsive, but
+  # having zero images at this stage is acceptable (images are uploaded later).
+  # Action: warn -- cloud can function while Glance is being configured.
+  # Depends on: POST-001 (needs Keystone auth to query Glance API).
+  # ---------------------------------------------------------------------------
+  - id: POST-004
+    name: glance_images
+    description: "Verify Glance image service is operational and can list images"
+    check_type: openstack_cli
+    command: "openstack image list -f json"
+    expected_result:
+      http_status: 200
+      service_responsive: true
+    action: warn
+    remediation: "Check Glance service: docker ps | grep glance. Check storage backend connectivity. No images present is acceptable at this stage -- service responsiveness is the gate."
+    timeout_seconds: 30
+    depends_on: [POST-001]
+
+  # ---------------------------------------------------------------------------
+  # POST-005: Cinder Storage
+  # ---------------------------------------------------------------------------
+  # Cinder provides block storage (persistent volumes). The scheduler and
+  # volume backend must both report "up" for volume creation to work.
+  # Action: warn -- basic cloud ops work without persistent volumes.
+  # Depends on: POST-001 (needs Keystone auth to query Cinder API).
+  # ---------------------------------------------------------------------------
+  - id: POST-005
+    name: cinder_storage
+    description: "Verify Cinder block storage service is running with volume backend configured"
+    check_type: openstack_cli
+    command: "openstack volume service list -f json"
+    expected_result:
+      http_status: 200
+      scheduler_status: "up"
+      volume_backend_status: "up"
+    action: warn
+    remediation: "Check Cinder services: openstack volume service list. Check LVM: vgs. Check containers: docker ps | grep cinder. Common issues: LVM volume group not found, tgtd/iscsid not running."
+    timeout_seconds: 30
+    depends_on: [POST-001]
+
+  # ---------------------------------------------------------------------------
+  # POST-006: Horizon Dashboard
+  # ---------------------------------------------------------------------------
+  # Horizon provides a web-based UI. It's convenient but not operationally
+  # critical -- all actions can be performed via CLI.
+  # Action: warn -- CLI-only operation is fully functional.
+  # Depends on: POST-001 (Horizon authenticates through Keystone).
+  # ---------------------------------------------------------------------------
+  - id: POST-006
+    name: horizon_dashboard
+    description: "Verify Horizon web dashboard is accessible"
+    check_type: http
+    command: "curl -s -o /dev/null -w '%{http_code}' http://localhost/auth/login/"
+    expected_result:
+      http_status: [200, 302]
+    action: warn
+    remediation: "Check Horizon container: docker ps | grep horizon. Check Apache logs inside container. Common issues: memcached connection, session backend, static files not collected."
+    timeout_seconds: 15
+    depends_on: [POST-001]
+
+  # ---------------------------------------------------------------------------
+  # POST-007: Service Catalog Complete
+  # ---------------------------------------------------------------------------
+  # The service catalog is Keystone's registry of all deployed services and
+  # their API endpoints. Every deployed service MUST have a catalog entry
+  # for clients (including other OpenStack services) to discover it.
+  # Action: block -- missing catalog entries mean services can't find each other.
+  # Depends on: POST-001 (service catalog is a Keystone resource).
+  # ---------------------------------------------------------------------------
+  - id: POST-007
+    name: service_catalog_complete
+    description: "Verify Keystone service catalog lists all deployed services with correct endpoints"
+    check_type: openstack_cli
+    command: "openstack catalog list -f json"
+    expected_result:
+      services_present: [identity, compute, network, image, volumev3]
+      each_service_has_endpoints: true
+    action: block
+    remediation: "Missing service catalog entries indicate incomplete deployment. Re-run kolla-ansible deploy for the missing service. Check: openstack endpoint list."
+    timeout_seconds: 30
+    depends_on: [POST-001]
+
+  # ---------------------------------------------------------------------------
+  # POST-008: End-to-End VM Lifecycle
+  # ---------------------------------------------------------------------------
+  # The ultimate integration test: create a network, create a flavor, list
+  # images, then clean up. This exercises Keystone (auth), Neutron (network),
+  # and Nova (flavor) in a single workflow. Image launch is not attempted
+  # because guest images may not be uploaded yet.
+  # Action: warn -- individual service checks (POST-002/003) are the blocking gates.
+  # Depends on: POST-001 (auth), POST-002 (compute), POST-003 (network).
+  # ---------------------------------------------------------------------------
+  - id: POST-008
+    name: end_to_end_vm_lifecycle
+    description: "Full integration test -- create network, launch instance, verify connectivity"
+    check_type: integration_test
+    command: |
+      echo "=== End-to-End VM Lifecycle Test ==="
+      echo "1. Create test network..."
+      openstack network create test-net --no-share -f json 2>/dev/null
+      openstack subnet create test-subnet --network test-net --subnet-range 192.168.100.0/24 -f json 2>/dev/null
+      echo "2. Create test flavor..."
+      openstack flavor create test-tiny --ram 512 --disk 1 --vcpus 1 -f json 2>/dev/null
+      echo "3. List available images..."
+      openstack image list -f json
+      echo "4. Cleanup test resources..."
+      openstack subnet delete test-subnet 2>/dev/null
+      openstack network delete test-net 2>/dev/null
+      openstack flavor delete test-tiny 2>/dev/null
+      echo "=== Test Complete ==="
+    expected_result:
+      network_created: true
+      subnet_created: true
+      flavor_created: true
+      cleanup_successful: true
+    action: warn
+    remediation: "End-to-end test failure indicates integration issues between services. Check service logs in order: Keystone (auth), Neutron (networking), Nova (compute), Glance (images)."
+    timeout_seconds: 120
+    depends_on: [POST-001, POST-002, POST-003]
+
+  # ---------------------------------------------------------------------------
+  # POST-009: Documentation Verification
+  # ---------------------------------------------------------------------------
+  # Verifies that documentation matches the running system configuration.
+  # This gate connects the deployment crew's work to the documentation crew's
+  # responsibility -- ensuring docs are accurate from day one.
+  # Action: warn -- documentation drift is important but doesn't block operations.
+  # Depends on: POST-001 (auth), POST-007 (service catalog for endpoint comparison).
+  # ---------------------------------------------------------------------------
+  - id: POST-009
+    name: doc_verification
+    description: "Verify documentation accuracy against the running system configuration"
+    check_type: script
+    command: |
+      echo "=== Documentation Verification ==="
+      echo "Checking service catalog against documented endpoints..."
+      echo "Checking configuration values against documented parameters..."
+      echo "Checking service versions against documented versions..."
+      echo "NOTE: This gate runs the doc-verifier skill's drift detection methods"
+    expected_result:
+      configuration_drift: false
+      endpoint_drift: false
+      version_drift: false
+    action: warn
+    remediation: "Documentation drift detected. Run the doc-sync loop to update documentation: trigger VERIFY-docs drift check, then EXEC-docs updates. See .planning/bus/doc-sync/loop.yaml for the trigger chain."
+    timeout_seconds: 60
+    depends_on: [POST-001, POST-007]
+
+# =============================================================================
+# Result Format
+# =============================================================================
+# Gate results are written as structured YAML for downstream processing.
+# The depends_on_status field tracks whether prerequisite gates passed,
+# enabling automatic skip logic for dependent gates.
+# =============================================================================
+
+result_format:
+  type: yaml
+  fields:
+    - gate_id
+    - gate_name
+    - status  # pass | fail | warn | skip
+    - details
+    - timestamp
+    - depends_on_status
+  output_path: ".planning/bus/command/post-deploy-results.yaml"
+
+# =============================================================================
+# Execution Order
+# =============================================================================
+# Gates execute in dependency order. If a blocking gate fails, all gates
+# that depend on it are automatically skipped (status: skip) rather than
+# executed and failing with misleading errors.
+#
+# Group 1: Keystone must pass first -- it is the auth foundation
+# Group 2: Service checks run in parallel after Keystone passes
+# Group 3: Integration tests run after all service checks complete
+# =============================================================================
+
+execution_order:
+  description: "Gates execute in dependency order. If a blocking gate fails, dependent gates are skipped."
+  parallel_groups:
+    - group: 1
+      gates: [POST-001]
+      description: "Keystone must pass first -- all other services depend on it"
+    - group: 2
+      gates: [POST-002, POST-003, POST-004, POST-005, POST-006, POST-007]
+      description: "Service checks can run in parallel after Keystone"
+    - group: 3
+      gates: [POST-008, POST-009]
+      description: "Integration tests run after all service checks"

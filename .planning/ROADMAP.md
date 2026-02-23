@@ -245,7 +245,12 @@ Plans:
   3. Reference library provides 3-tier structure (summary ~6K always-loaded, active ~20K on-demand, reference ~40K deep dives)
   4. Cross-cloud translation tables (OpenStack to AWS/GCP/Azure) cover all core service equivalents
   5. Quick reference card (service names, ports, log locations, CLI commands) is complete and accurate
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+- [ ] 321-01-PLAN.md -- Keystone and Nova runbooks (identity + compute, 11 entries)
+- [ ] 321-02-PLAN.md -- Neutron, Cinder, and Glance runbooks (networking + storage + images, 15 entries)
+- [ ] 321-03-PLAN.md -- Swift, Heat, Horizon, Kolla, and General runbooks (remaining services, 18 entries)
+- [ ] 321-04-PLAN.md -- Runbook indexes (task + symptom) and 3-tier reference library
 **Model**: Sonnet (runbooks), Haiku (reference library)
 
 ### Phase 322: V&V Plan & Compliance
@@ -318,7 +323,7 @@ Phases 312 through 325. Parallel tracks within waves:
 | 318. Chipset Definition | 0/2 | Not started | - |
 | 319. Systems Administrator's Guide | 0/3 | Not started | - |
 | 320. Operations Manual | 0/3 | Not started | - |
-| 321. Runbook Library & Reference Library | 0/TBD | Not started | - |
+| 321. Runbook Library & Reference Library | 0/4 | Not started | - |
 | 322. V&V Plan & Compliance | 0/TBD | Not started | - |
 | 323. Dashboard & Integration | 0/TBD | Not started | - |
 | 324. Integration Verification | 0/TBD | Not started | - |
