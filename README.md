@@ -202,7 +202,7 @@ Produces platform-specific packages in `src-tauri/target/release/bundle/`:
 # Run desktop test suite
 npm run desktop:test
 
-# Run skill-creator library tests (9,355 tests)
+# Run skill-creator library tests (12,545 tests)
 npm test
 ```
 
@@ -221,8 +221,8 @@ npm test
 ### Architecture
 
 ```
-src/           TypeScript library (skill-creator CLI, dashboard, AMIGA, AGC)
-src-tauri/     Rust backend (PTY, file watcher, tmux, Claude sessions, IPC)
+src/           TypeScript library (skill-creator CLI, dashboard, AMIGA, AGC, brainstorm)
+src-tauri/     Rust backend (PTY, file watcher, tmux, Claude sessions, MCP host, IPC)
 desktop/       Vite webview frontend (WebGL engine, desktop shell, terminal)
 infra/         Bash infrastructure (PXE, VM provisioning, Minecraft, runbooks)
 ```
@@ -285,10 +285,10 @@ All documentation lives in [`docs/`](docs/).
 | [Configuration](docs/CONFIGURATION.md) | Thresholds, retention, and cluster settings |
 | [File Structure](docs/FILE-STRUCTURE.md) | Project and source code layout |
 | [Development](docs/DEVELOPMENT.md) | Building, testing, and contributing |
-| [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 30 milestones |
+| [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 36 milestones |
 | [GSD Teams Guide](docs/GSD-TEAMS.md) | Teams vs subagents for GSD workflows |
 | [Comparison](docs/COMPARISON.md) | Skills vs Agents vs Teams |
-| [Release History](docs/RELEASE-HISTORY.md) | Detailed release notes for all 29 milestones |
+| [Release History](docs/RELEASE-HISTORY.md) | Detailed release notes for all 36 milestones |
 | [Troubleshooting](docs/TROUBLESHOOTING.md) | Common issues and solutions |
 | [Examples](examples/) | 34 ready-to-use skills, agents, and teams |
 
@@ -302,7 +302,7 @@ See [SECURITY.md](SECURITY.md) for vulnerability reporting, threat model, and se
 
 ## Project Stats
 
-31 milestones shipped (v1.0-v1.27 + v1.8.1 patch) | 254 phases | 679 plans | ~302k LOC TypeScript, Rust, GLSL, Bash & Python | 10,032 tests
+36 milestones shipped (v1.0-v1.32 + v1.8.1 patch) | 311 phases | 819 plans | ~410k LOC TypeScript, Rust, GLSL, Bash & Python | 12,545 tests
 
 ---
 
