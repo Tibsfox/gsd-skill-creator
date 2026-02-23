@@ -1039,31 +1039,35 @@ crews:
 # Post-deploy gates must pass before crew handoff from deployment to operations.
 # Action "block" prevents continuation; "warn" logs an advisory but allows it.
 #
-# Detailed gate implementations are defined in Plan 318-02.
+# Detailed gate implementations are defined in the evaluation gate config files.
 # =============================================================================
 
 evaluation:
   gates:
     pre_deploy:
-      - check: hardware_inventory
-        description: "Verify hardware meets minimum requirements"
-        action: block
-      - check: network_connectivity
-        description: "Verify management and external network interfaces"
-        action: block
-      - check: resource_sufficiency
-        description: "Verify 16GB+ RAM, 100GB+ disk"
-        action: block
+      config: "configs/evaluation/pre-deploy-gates.yaml"
+      gates:
+        - check: hardware_inventory
+          description: "Verify hardware meets minimum requirements"
+          action: block
+        - check: network_connectivity
+          description: "Verify management and external network interfaces"
+          action: block
+        - check: resource_sufficiency
+          description: "Verify 16GB+ RAM, 100GB+ disk"
+          action: block
     post_deploy:
-      - check: keystone_auth
-        description: "Verify Keystone token issuance"
-        action: block
-      - check: nova_compute
-        description: "Verify Nova hypervisor availability"
-        action: block
-      - check: neutron_network
-        description: "Verify Neutron network operations"
-        action: block
-      - check: doc_verification
-        description: "Verify documentation accuracy against running system"
-        action: warn
+      config: "configs/evaluation/post-deploy-gates.yaml"
+      gates:
+        - check: keystone_auth
+          description: "Verify Keystone token issuance"
+          action: block
+        - check: nova_compute
+          description: "Verify Nova hypervisor availability"
+          action: block
+        - check: neutron_network
+          description: "Verify Neutron network operations"
+          action: block
+        - check: doc_verification
+          description: "Verify documentation accuracy against running system"
+          action: warn
