@@ -1,0 +1,121 @@
+name: e2e-user-scenario-verification
+version: 1.0.0
+description: "End-to-end user scenario verification results"
+id: user_scenario_verification
+requirement: VERIF-07
+nasa_se_phase: "Phase E -- Operational Readiness Review (ORR)"
+chipset_ref: openstack-nasa-se
+
+# =============================================================================
+# This file is a results template.
+# It is populated by: scripts/e2e-user-scenario-verification.sh
+# Reference procedure: docs/vv/e2e-user-scenario-verification.md
+#
+# Usage:
+#   ./scripts/e2e-user-scenario-verification.sh --results configs/evaluation/e2e-user-scenario-results.yaml
+#
+# After a test run, commit this file to record the execution result:
+#   git add configs/evaluation/e2e-user-scenario-results.yaml
+#   git commit -m "test(e2e-test): record e2e user scenario verification results"
+# =============================================================================
+
+execution:
+  timestamp: ""
+  git_commit: ""
+  dry_run: false
+  operator: ""
+  external_network: ""
+  image_used: ""
+
+stages:
+  - stage: 1
+    name: "Authentication"
+    services: [keystone]
+    status: pending
+    details:
+      token_issued: false
+      project_created: false
+      user_created: false
+      role_assigned: false
+    duration_seconds: 0
+  - stage: 2
+    name: "Project Setup"
+    services: [keystone]
+    status: pending
+    details:
+      project_accessible: false
+      catalog_available: false
+    duration_seconds: 0
+  - stage: 3
+    name: "Network Configuration"
+    services: [neutron]
+    status: pending
+    details:
+      network_created: false
+      subnet_created: false
+      router_created: false
+      gateway_set: false
+      subnet_added: false
+    duration_seconds: 0
+  - stage: 4
+    name: "Security Group Configuration"
+    services: [neutron]
+    status: pending
+    details:
+      sg_created: false
+      ssh_rule_added: false
+      icmp_rule_added: false
+    duration_seconds: 0
+  - stage: 5
+    name: "Instance Launch"
+    services: [nova, glance, neutron]
+    status: pending
+    details:
+      image_found: false
+      flavor_available: false
+      keypair_created: false
+      instance_launched: false
+      instance_active: false
+    duration_seconds: 0
+  - stage: 6
+    name: "Storage Attachment"
+    services: [cinder, nova]
+    status: pending
+    details:
+      volume_created: false
+      volume_available: false
+      volume_attached: false
+    duration_seconds: 0
+  - stage: 7
+    name: "Floating IP Access"
+    services: [neutron, nova]
+    status: pending
+    details:
+      floating_ip_allocated: false
+      floating_ip_associated: false
+      ping_successful: false
+      ssh_successful: false
+    duration_seconds: 0
+  - stage: 8
+    name: "Cleanup"
+    services: [all]
+    status: pending
+    details:
+      all_resources_deleted: false
+      no_orphans: false
+    duration_seconds: 0
+
+service_coverage:
+  keystone: [1, 2]
+  neutron: [3, 4, 5, 7]
+  nova: [5, 6, 7]
+  glance: [5]
+  cinder: [6]
+
+summary:
+  total_stages: 8
+  passed: 0
+  failed: 0
+  skipped: 0
+  services_exercised: []
+  verdict: pending
