@@ -320,7 +320,7 @@ Phases 312 through 325. Parallel tracks within waves:
 | 315. Documentation & Methodology Skills | 2/2 | Complete   | 2026-02-23 |
 | 316. Deployment & Operations Crews | 2/2 | Complete   | 2026-02-23 |
 | 317. Documentation Crew & Communication Framework | 2/2 | Complete   | 2026-02-23 |
-| 318. Chipset Definition | 0/2 | Not started | - |
+| 318. Chipset Definition | 2/2 | Complete   | 2026-02-23 |
 | 319. Systems Administrator's Guide | 0/3 | Not started | - |
 | 320. Operations Manual | 0/3 | Not started | - |
 | 321. Runbook Library & Reference Library | 0/4 | Not started | - |
