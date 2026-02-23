@@ -1,0 +1,198 @@
+# ==========================================================================
+# Operations Crew Configuration
+# ==========================================================================
+# Day-2 operations crew for OpenStack cloud sustainment.
+# Activates after deployment crew completes and handoff context is transferred.
+#
+# Role Hierarchy:
+#   Tier 1: FLIGHT (mission control, day-2 orchestration)
+#   Tier 2: SURGEON, EXEC, VERIFY, CAPCOM (core operations)
+#   Tier 3: CRAFT-monitoring, LOG, GUARD (specialist/support)
+#
+# Key differences from Deployment Crew:
+#   - Single EXEC (ops tasks are sequential) vs three parallel EXECs
+#   - SURGEON replaces SCOUT/INTEG (health monitoring vs pre-deployment survey)
+#   - GUARD for ongoing security monitoring vs CRAFT-security for deployment hardening
+#   - LOG for persistent audit trail (not present in deployment crew)
+#   - No PLAN, BUDGET, TOPO (operations are procedural, not planned-from-scratch)
+
+name: operations-crew
+version: 1.0.0
+description: "OpenStack operations crew -- 8 roles for day-2 operations and sustainment with SURGEON health monitoring"
+mission_phase: "Operations and Sustainment (NASA SE Phase E)"
+
+# ==========================================================================
+# Agent Positions (8 roles)
+# ==========================================================================
+
+positions:
+
+  # --------------------------------------------------------------------------
+  # Tier 1: Mission Control
+  # --------------------------------------------------------------------------
+
+  - id: flight
+    role: FLIGHT
+    context: main
+    lifecycle: persistent
+    tier: 1
+    communication_loop: command
+    description: "Day-2 operations orchestration -- directs maintenance, upgrades, and incident response"
+    skills:
+      - nasa-se-methodology
+
+  # --------------------------------------------------------------------------
+  # Tier 2: Core Operations
+  # --------------------------------------------------------------------------
+
+  - id: surgeon
+    role: SURGEON
+    context: main
+    lifecycle: persistent
+    tier: 2
+    domain: health
+    communication_loop: health
+    description: "Cloud health monitoring and drift detection -- advisory reporting to FLIGHT"
+    skills:
+      - openstack-monitoring
+    health_monitoring:
+      polling_interval_seconds: 60
+      api_endpoints:
+        - service: keystone
+          endpoint: "/v3/auth/tokens"
+          method: POST
+        - service: nova
+          endpoint: "/v2.1/os-hypervisors"
+          method: GET
+        - service: neutron
+          endpoint: "/v2.0/networks"
+          method: GET
+        - service: cinder
+          endpoint: "/v3/volumes"
+          method: GET
+        - service: glance
+          endpoint: "/v2/images"
+          method: GET
+      drift_detection:
+        config_watch_paths:
+          - "/etc/kolla/*/config.json"
+          - "/etc/kolla/globals.yml"
+        check_interval_seconds: 300
+      advisory:
+        report_to: flight
+        severity_levels: [info, warning, critical, emergency]
+
+  - id: exec
+    role: EXEC
+    context: fork
+    lifecycle: task
+    tier: 2
+    communication_loop: execution
+    description: "Executes maintenance procedures and applies updates -- single EXEC since ops tasks are typically sequential"
+    skills:
+      - openstack-kolla-ansible
+      - openstack-kolla-ansible-ops
+
+  - id: verify
+    role: VERIFY
+    context: fork
+    lifecycle: task
+    tier: 2
+    communication_loop: execution
+    description: "Validates operations against runbook procedures -- independent from EXEC"
+    skills:
+      - doc-verifier
+
+  - id: capcom
+    role: CAPCOM
+    context: main
+    lifecycle: persistent
+    tier: 2
+    communication_loop: user
+    human_interface: true
+    description: "Sole human interface for operational decisions -- all operator communication flows through CAPCOM"
+    skills: []
+
+  # --------------------------------------------------------------------------
+  # Tier 3: Specialist / Support
+  # --------------------------------------------------------------------------
+
+  - id: craft-monitoring
+    role: CRAFT
+    context: fork
+    lifecycle: on-demand
+    tier: 3
+    domain: monitoring
+    communication_loop: specialist
+    description: "Prometheus/Grafana configuration specialist -- activated for monitoring and alerting tasks"
+    skills:
+      - openstack-monitoring
+    triggers:
+      - monitoring
+      - alerting
+      - prometheus
+      - grafana
+      - metric
+      - dashboard
+      - alert rule
+
+  - id: log
+    role: LOG
+    context: main
+    lifecycle: persistent
+    tier: 3
+    communication_loop: command
+    description: "Audit trail for all operational changes -- records every EXEC action, VERIFY result, and SURGEON advisory"
+    skills: []
+
+  - id: guard
+    role: GUARD
+    context: fork
+    lifecycle: on-demand
+    tier: 3
+    domain: security
+    communication_loop: health
+    description: "Security monitoring and vulnerability scanning -- ongoing threat detection for the running cloud"
+    skills:
+      - openstack-security
+    triggers:
+      - CVE
+      - vulnerability
+      - intrusion
+      - unauthorized
+      - breach
+      - audit
+
+# ==========================================================================
+# Activation Profiles
+# ==========================================================================
+# Three operational profiles matching the mission crew manifest pattern.
+# Scout: minimal crew for quick checks. Patrol: standard operations.
+# Squadron: full response for incidents or major upgrades.
+
+activation_profiles:
+  scout:
+    description: "Quick operational check or single-service restart"
+    roles: [FLIGHT, EXEC, VERIFY]
+    positions: [flight, exec, verify]
+
+  patrol:
+    description: "Standard maintenance operation with full logging"
+    roles: [FLIGHT, EXEC, VERIFY, CAPCOM, SURGEON, LOG, GUARD]
+    positions: [flight, exec, verify, capcom, surgeon, log, guard]
+
+  squadron:
+    description: "Full operations response -- incident management or major upgrade"
+    roles: all
+    positions: all
+
+# ==========================================================================
+# Human Interface Isolation
+# ==========================================================================
+# CAPCOM is the sole channel crossing the human-machine boundary.
+# No other agent may communicate directly with the human operator.
+# All operational decisions requiring human input are routed through CAPCOM.
+
+human_interface:
+  sole_agent: capcom
+  rule: "No agent other than CAPCOM may send messages directly to the human operator"
