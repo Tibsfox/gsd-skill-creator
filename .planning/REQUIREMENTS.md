@@ -127,13 +127,67 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (populated by roadmapper) | | |
+| FOUND-01 | Phase 312 | Pending |
+| FOUND-02 | Phase 312 | Pending |
+| FOUND-03 | Phase 312 | Pending |
+| FOUND-04 | Phase 312 | Pending |
+| SKILL-01 | Phase 313 | Pending |
+| SKILL-02 | Phase 313 | Pending |
+| SKILL-03 | Phase 314 | Pending |
+| SKILL-04 | Phase 315 | Pending |
+| SKILL-05 | Phase 315 | Pending |
+| SKILL-06 | Phase 313 | Pending |
+| SKILL-07 | Phase 313 | Pending |
+| CREW-01 | Phase 316 | Pending |
+| CREW-02 | Phase 316 | Pending |
+| CREW-03 | Phase 317 | Pending |
+| CREW-04 | Phase 316 | Pending |
+| CREW-05 | Phase 316 | Pending |
+| CREW-06 | Phase 316 | Pending |
+| CREW-07 | Phase 316 | Pending |
+| CREW-08 | Phase 316 | Pending |
+| COMM-01 | Phase 317 | Pending |
+| COMM-02 | Phase 317 | Pending |
+| COMM-03 | Phase 317 | Pending |
+| COMM-04 | Phase 317 | Pending |
+| COMM-05 | Phase 317 | Pending |
+| COMM-06 | Phase 317 | Pending |
+| COMM-07 | Phase 317 | Pending |
+| COMM-08 | Phase 317 | Pending |
+| COMM-09 | Phase 318 | Pending |
+| COMM-10 | Phase 318 | Pending |
+| COMM-11 | Phase 317 | Pending |
+| DOCS-01 | Phase 319 | Pending |
+| DOCS-02 | Phase 319 | Pending |
+| DOCS-03 | Phase 320 | Pending |
+| DOCS-04 | Phase 320 | Pending |
+| DOCS-05 | Phase 321 | Pending |
+| DOCS-06 | Phase 321 | Pending |
+| DOCS-07 | Phase 321 | Pending |
+| DOCS-08 | Phase 319 | Pending |
+| DOCS-09 | Phase 320 | Pending |
+| DOCS-10 | Phase 321 | Pending |
+| DOCS-11 | Phase 321 | Pending |
+| VERIF-01 | Phase 322 | Pending |
+| VERIF-02 | Phase 322 | Pending |
+| VERIF-03 | Phase 322 | Pending |
+| VERIF-04 | Phase 322 | Pending |
+| VERIF-05 | Phase 322 | Pending |
+| VERIF-06 | Phase 324 | Pending |
+| VERIF-07 | Phase 324 | Pending |
+| INTEG-01 | Phase 323 | Pending |
+| INTEG-02 | Phase 323 | Pending |
+| INTEG-03 | Phase 323 | Pending |
+| INTEG-04 | Phase 323 | Pending |
+| INTEG-05 | Phase 323 | Pending |
+| INTEG-06 | Phase 323 | Pending |
+| INTEG-07 | Phase 325 | Pending |
 
 **Coverage:**
-- v1.33 requirements: 60 total
-- Mapped to phases: 0
-- Unmapped: 60 ⚠️
+- v1.33 requirements: 55 total
+- Mapped to phases: 55
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-22*
-*Last updated: 2026-02-22 after initial definition*
+*Last updated: 2026-02-22 — traceability populated by roadmapper*
