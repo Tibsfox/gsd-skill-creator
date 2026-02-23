@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A TypeScript + Rust + GLSL toolkit for creating, validating, and orchestrating Claude Code skills, agents, and teams — with a Tauri desktop application (GSD-OS), planning document dashboard, live terminal, staging layer, and information design system. Extended with a Minecraft Knowledge World, local cloud infrastructure, Amiga emulation, and formalized chipset definitions. Includes Project AMIGA mission infrastructure, a functioning Apollo AGC Block II simulator, RFC reference tooling, an Aminet archive management system, a GSD Den multi-agent coordination system, a comprehensive electronics educational pack, a vision-to-mission transformation pipeline, MCP integration (host + gateway + agent bridge), and an AI-facilitated brainstorming support system with 8 specialized agents and 16 techniques.
+A TypeScript + Rust + GLSL toolkit for creating, validating, and orchestrating Claude Code skills, agents, and teams — with a Tauri desktop application (GSD-OS), planning document dashboard, live terminal, staging layer, and information design system. Extended with a Minecraft Knowledge World, local cloud infrastructure, Amiga emulation, and formalized chipset definitions. Includes Project AMIGA mission infrastructure, a functioning Apollo AGC Block II simulator, RFC reference tooling, an Aminet archive management system, a GSD Den multi-agent coordination system, a comprehensive electronics educational pack, a vision-to-mission transformation pipeline, MCP integration (host + gateway + agent bridge), an AI-facilitated brainstorming support system with 8 specialized agents and 16 techniques, and a NASA SE-structured OpenStack cloud platform with 19 skills, 31 agents, 3 crew configurations, and comprehensive educational documentation.
 
 ## Core Value
 
@@ -64,24 +64,11 @@ Skills, agents, and teams must match official Claude Code patterns so they work 
 
 - Brainstorm Session Support: 8 specialized agents (Facilitator, Ideator, Questioner, Analyst, Mapper, Critic, Persona, Scribe) with leader-worker topology, 16 brainstorming techniques across 4 categories (individual, collaborative, analytical, visual), 5 educational pathways, Osborn's 4 rules enforcement with architectural Critic gate, session bus with 4 communication loops, adaptive pathway routing, session artifacts (transcript, action plan, JSON export, cluster map), 46 requirements, 321 tests, ~16K LOC (v1.32)
 
+- GSD OpenStack Cloud Platform (NASA SE Edition): 19 skills (8 core OpenStack + 6 operations + 4 documentation/methodology + kolla-ansible), 3 crew configurations (deployment 12 roles, operations 8 roles, documentation 8 roles) with Scout/Patrol/Squadron activation profiles, 9 communication loops with priority-based bus arbitration, complete ASIC chipset (19 skills, 31 agents, 9 loops, evaluation gates), 7-chapter NASA SE sysadmin guide, 8-service operations manual (80 procedures), 44 runbooks with dual indexes, 3-tier reference library with cross-cloud translation, V&V plan with NPR 7123.1 compliance matrix, 22 safety-critical test procedures, cloud-ops TypeScript modules (dashboard, staging, observation, git, knowledge), 55 requirements, 216 tests, ~5.9K LOC + 113 documentation files (v1.33)
+
 ### Active
 
-## Current Milestone: v1.33 GSD OpenStack Cloud Platform (NASA SE Edition)
-
-**Goal:** Deploy a fully functional single-node OpenStack cloud through GSD-OS using the complete mission crew manifest, produce a NASA SE-structured educational documentation pack that accompanies the functional system, and verify that every document is accurate against the running infrastructure.
-
-**Target features:**
-- 18 GSD skills (8 core OpenStack + 6 operations + 4 documentation/methodology)
-- 3 agent crew configurations (deployment 12 roles, operations 8 roles, documentation 8 roles) with full Squadron activation
-- 9 communication loops with priority-based bus arbitration
-- Complete ASIC chipset definition for cloud infrastructure
-- Systems Administrator's Guide (7 chapters mapping NASA SE phases)
-- Operations Manual with per-service verified procedures
-- Runbook Library (40+ entries, task-indexed and symptom-indexed)
-- Reference Library (3-tier: NASA SE + OpenStack + cross-cloud translation)
-- V&V Plan with requirements verification matrix
-- GSD-OS dashboard panel for cloud operations and documentation browsing
-- Lessons learned document in NASA LLIS format
+(No active milestone — run `/gsd:new-milestone` to start next)
 
 ### Out of Scope
 
@@ -101,10 +88,15 @@ Skills, agents, and teams must match official Claude Code patterns so they work 
 - Visual mind map rendering — GSD-OS visual component dependency; VisualizationData stored for later
 - Brainstorm PPTX/DOCX export — Markdown covers 80% of use case
 - Custom brainstorming technique creation — requires technique DSL and validation system
+- Multi-node OpenStack HA deployment — requires additional hardware; v2.0 scope
+- Ceph distributed storage — separate milestone; single-node uses LVM
+- Advanced networking (BGP, VXLAN multi-site) — multi-site scope
+- Bare-metal provisioning (Ironic), container orchestration (Magnum/Zun) — v3.0 scope
+- Cross-cloud hands-on exercises — requires AWS/GCP free tier accounts
 
-## Last Shipped: v1.32 — Brainstorm Session Support (2026-02-22)
+## Last Shipped: v1.33 — GSD OpenStack Cloud Platform (NASA SE Edition) (2026-02-23)
 
-**Delivered:** AI-facilitated brainstorming support system with 8 specialized agents in leader-worker topology — Facilitator (problem assessment, confidence-scored transitions, energy management), Ideator, Questioner, Analyst (SCAMPER + Six Hats coordination), Mapper (4 organizational techniques), Persona (constructive figures), Critic (Converge-only with 4-dimension evaluation), Scribe (always-on capture). 16 brainstorming techniques across 4 categories, 5 educational pathways with adaptive routing, Osborn's 4 rules enforced architecturally (Critic gate, two-stage evaluative detection), session lifecycle (Explore→Diverge→Organize→Converge→Act), SessionBus 4-loop message router, artifact generation (transcript, action plan, JSON export, cluster map). 7 phases, 25 plans, 63 commits, 46 requirements, 321 tests (~16K LOC).
+**Delivered:** NASA SE-structured OpenStack cloud platform with complete educational documentation. 19 GSD skills (8 core OpenStack services + 6 operations domains + 4 documentation/methodology + kolla-ansible deployment), 3 mission crew configurations (31 agents: deployment 12, operations 8, documentation 8) with Scout/Patrol/Squadron activation profiles, 9 communication loops with priority-based bus arbitration, ASIC chipset integrating entire operational environment (118/118 validation checks). Documentation pack: 7-chapter sysadmin guide mapping NASA SE phases, 8-service operations manual (80 procedures), 44 runbooks with task and symptom indexes, 3-tier reference library with cross-cloud translation tables. V&V infrastructure: requirements verification matrix, NPR 7123.1 compliance matrix, 22 safety-critical tests, E2E verification scripts. Cloud-ops TypeScript modules: dashboard panel, staging pipeline, deployment observer, git commit rationale formatter, 3-tier knowledge loader. 14 phases, 33 plans, 124 commits, 55 requirements, 216 tests (~5.9K LOC + 113 docs).
 
 **Design Principles (proven):**
 1. Calm by Default — Control surface quiet under nominal conditions
@@ -120,9 +112,9 @@ Skills, agents, and teams must match official Claude Code patterns so they work 
 
 ## Context
 
-35 milestones shipped (v1.0-v1.32 + v1.8.1 patch). 311 phases, 819 plans, ~410k LOC. 12,545 tests passing.
+35 milestones shipped (v1.0-v1.33 + v1.8.1 patch). 325 phases, 852 plans, ~416k LOC. 12,761 tests passing.
 
-Architecture: `src/` (TypeScript lib/CLI) + `src-tauri/` (Rust backend) + `desktop/` (Vite webview) + `infra/` (bash infrastructure scripts). Knowledge modules: `src/knowledge/` (electronics pack with MNA/logic simulators, safety warden, 15 modules, 77 labs). Den modules: `src/den/` (24 files, ~18.9K LOC, 675 tests). VTM modules: `src/vtm/` (35 files, ~20K LOC, 679 tests). MCP modules: `src/mcp/` (98 TS files, ~14.7K LOC, 771 tests — gateway, templates, agent bridge, staging gates) + `src-tauri/src/mcp_host/` (9 Rust files, 67 tests — host manager, server registry, staging gate). Brainstorm modules: `src/brainstorm/` (40 TS files, ~16K LOC, 321 tests — 8 agents, 16 techniques, session bus, pathway router).
+Architecture: `src/` (TypeScript lib/CLI) + `src-tauri/` (Rust backend) + `desktop/` (Vite webview) + `infra/` (bash infrastructure scripts). Knowledge modules: `src/knowledge/` (electronics pack with MNA/logic simulators, safety warden, 15 modules, 77 labs). Den modules: `src/den/` (24 files, ~18.9K LOC, 675 tests). VTM modules: `src/vtm/` (35 files, ~20K LOC, 679 tests). MCP modules: `src/mcp/` (98 TS files, ~14.7K LOC, 771 tests — gateway, templates, agent bridge, staging gates) + `src-tauri/src/mcp_host/` (9 Rust files, 67 tests — host manager, server registry, staging gate). Brainstorm modules: `src/brainstorm/` (40 TS files, ~16K LOC, 321 tests — 8 agents, 16 techniques, session bus, pathway router). Cloud-ops modules: `src/cloud-ops/` (dashboard, staging, observation, git, knowledge — ~5.9K LOC, 216 tests).
 
 Stack: TypeScript, Rust, GLSL, Bash, Python, Tauri v2, xterm.js, WebGL, Vite, CentOS Stream 9, Fabric mod loader, FS-UAE, dnsmasq, KVM/libvirt, @modelcontextprotocol/sdk, Zod v4.
 
@@ -212,6 +204,15 @@ Stack: TypeScript, Rust, GLSL, Bash, Python, Tauri v2, xterm.js, WebGL, Vite, Ce
 | Constructive figures only for Persona | ALLOWED_FIGURES: 9 positive historical figures; hostile perspectives blocked | ✓ Good |
 | Humane Flow principle in Facilitator | PRESSURE_PHRASES runtime guard; encouraging voice, never shaming | ✓ Good |
 | 4-loop bus router (session/capture/user/energy) | MESSAGE_ROUTE Record<MessageType, BusLoop> with compile-time exhaustive routing | ✓ Good |
+| Skip research for v1.33 | Complete ~126K mission package provided; no new domain investigation needed | ✓ Good |
+| 6-wave execution with parallel tracks | Maximized throughput: 33 plans in ~45 min wall clock (vs ~135 min sequential) | ✓ Good |
+| Model assignment by content type | Opus for methodology/crews/chipset, Sonnet for skills/docs, Haiku for reference library | ✓ Good |
+| Pre-deploy gates all 'block' action | Host must meet hardware minimums before any deployment attempt | ✓ Good |
+| Post-deploy gates split block/warn | Critical services (Keystone/Nova) block; optional services (Swift/Horizon) warn only | ✓ Good |
+| Reverse-order decommissioning (Phase F) | Heat→Horizon→Swift→Cinder→Neutron→Nova→Glance→Keystone: exact reverse of deploy | ✓ Good |
+| Dual-index runbook discovery | Task intent + failure symptom indexes; operators find runbooks by what or why | ✓ Good |
+| Sliding window deployment observation | DeploymentObserver uses sub-sequence detection, not service-boundary segmentation | ✓ Good |
+| Config staging intake-first | Staging does not block on validation failure — intake first, assess second | ✓ Good |
 
 ## Constraints
 
@@ -234,4 +235,4 @@ Stack: TypeScript, Rust, GLSL, Bash, Python, Tauri v2, xterm.js, WebGL, Vite, Ce
 | Write-only FS-UAE configs | Generate, never parse — string template sufficient | ✓ Good |
 
 ---
-*Last updated: 2026-02-22 after v1.33 milestone started*
+*Last updated: 2026-02-23 after v1.33 milestone shipped*
