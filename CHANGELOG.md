@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.32.0] - 2026-02-22
+
+### Added
+
+- **Brainstorm Foundation Types:** 23 Zod schemas (AgentRole, SessionPhase, TechniqueId, PathwayId, HatColor, ScamperLens, OsbornRule, EnergyLevel, SessionStatus + 12 object schemas), session-scoped filesystem bus with monotonic counter filenames, 16 technique defaults, 8 agent phase rules, 10 message priorities
+- **Rules Engine:** Osborn's 4 rules enforced architecturally — Critic agent blocked at instantiation during non-Converge phases, two-stage evaluative content detection (hard-block patterns + constructive-context allowlist, <5% false positive rate verified against 50-sentence corpus), Black Hat phase constraint, per-session violation logging
+- **Session Manager:** 5-status state machine (created → active → paused → completed/abandoned), append-only JSONL persistence for ideas and questions, timer system with technique-specific defaults and pause/resume, `SessionStateSchema.parse()` on every disk read
+- **Phase Controller:** Strict Explore → Diverge → Organize → Converge → Act ordering with rejection of skip attempts, per-phase agent activation matrix, phase transition announcements, technique transitions with mandatory timer reset
+- **Technique Engine:** Pluggable engine with lazy factory registry for 16 techniques — 4 individual (freewriting, mind mapping, rapid ideation, question brainstorming), 5 collaborative (brainwriting 6-3-5, round robin, brain-netting, rolestorming, figure storming), 4 analytical (SCAMPER, Six Thinking Hats, starbursting, Five Whys), 3 visual (storyboarding, affinity mapping, lotus blossom)
+- **Pathway Router:** 5 pathway definitions (Creative Exploration, Problem-Solving, Product Innovation, Decision-Making, Free-Form) with signal-word situation matching and mid-session adaptive resequencing on low energy, saturation, or user request
+- **Artifact Generator:** Session transcript (Markdown with phase headers and timestamps), action plan (ownership, deadlines, priorities), JSON export (complete session state), cluster map (Organize phase output)
+- **Facilitator Agent:** Problem assessment with 5-nature classification, pathway recommendation, transition confidence scoring (timer×0.2 + saturation×0.3 + user_signal×0.4 + min_threshold×0.1), energy management with PRESSURE_PHRASES guard, adaptive technique sequencing, non-judgmental Humane Flow voice
+- **Technique Agents:** 7 specialized agents — Ideator (5 techniques, never evaluates), Questioner (3 techniques, redirects answers to questions), Analyst (SCAMPER lens cycling, Six Hats coordination with hat-color broadcast), Mapper (4 organizational techniques, quality-evaluation constraint), Persona (constructive figures only, 9 ALLOWED_FIGURES), Critic (Converge-only with 4-dimension evaluation and 3 prioritization methods), Scribe (always-on capture, Zod validation at agent boundary)
+- **SessionBus:** 4-loop filesystem message router (session, capture, user, energy) with MESSAGE_ROUTE Record<MessageType, BusLoop> for compile-time exhaustive routing, drain-pattern for atomic concurrent access
+- **Integration Testing:** 18 safety-critical tests (SC-01 through SC-18), 3 end-to-end pathway tests (Creative Exploration, Problem-Solving, Free-Form), bus load test (4 concurrent writers, 12 messages, <200ms)
+- **Chipset YAML:** 6 skills, 8-agent roster, 4 activation profiles (solo_quick, guided_exploration, full_workshop, analysis_sprint), skill-creator observation hooks for `.brainstorm/sessions/*/`
+
+### Stats
+
+- 7 phases (305-311), 25 plans, 63 commits, 321 tests, 46 requirements, ~16K LOC
+
+---
+
 ## [1.31.0] - 2026-02-22
 
 ### Added
