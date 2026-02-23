@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.33.0] - 2026-02-23
+
+### Added
+
+- **Foundation Types & NASA SE:** Shared TypeScript interfaces with Zod schemas for OpenStackService, Requirement, Runbook, NASASEPhase, CommunicationLoop; NASA SE Methodology skill mapping 7 SE phases to cloud operations; 9 communication loop schemas with priority levels; filesystem contracts for skills/, docs/, configs/, .chipset/, .planning/bus/
+- **19 OpenStack Skills:** 8 core service skills (keystone, nova, neutron, cinder, glance, swift, heat, horizon) with deploy/configure/operate/troubleshoot; kolla-ansible deployment skill; 6 operations skills (monitoring, backup, security, networking-debug, capacity, kolla-ansible-ops); 3 documentation skills (ops-manual-writer, runbook-generator, doc-verifier); NASA SE methodology enhancement
+- **3 Mission Crews (31 Agents):** Deployment crew (12 roles at Squadron profile), Operations crew (8 roles with SURGEON health monitoring), Documentation crew (8 roles with CRAFT-techwriter); Scout/Patrol/Squadron activation profiles; CRAFT agents triggered by domain keywords; CAPCOM as sole human interface; crew handoff with full context
+- **Communication Framework:** 9 communication loops (command, execution, specialist, user, observation, health, budget, cloud-ops, doc-sync) with priority-based bus arbitration; HALT signal propagation within 1 cycle; budget agent with token tracking (warn 90%, block 95%)
+- **ASIC Chipset:** Complete chipset.yaml integrating 19 skills, 31 agents, 9 communication loops; pre-deploy evaluation gates (hardware, network, resources); post-deploy evaluation gates (keystone, nova, neutron, docs); 118/118 validation checks
+- **Systems Administrator's Guide:** 7 chapters mapping NASA SE phases (Pre-Phase A through Phase F) with cross-references to SP-6105 and NPR 7123.1; Phase F decommissioning in exact reverse of Phase D deployment order
+- **Operations Manual:** Per-service procedures for all 8 OpenStack services in NASA procedure format (80 total procedures with preconditions, safety, verification, rollback)
+- **Runbook Library:** 44 runbooks with dual indexes (task intent + failure symptom); standard format (preconditions, procedure, verification, rollback, references); 3-tier reference library (summary/active/reference); cross-cloud translation tables (OpenStack → AWS/GCP/Azure); quick reference card
+- **V&V Plan & Compliance:** Requirements verification matrix mapping 55 requirements to TAID methods; NPR 7123.1 Appendix H compliance matrix with tailoring rationale; VERIFY agent independence from EXEC; 8 drift detection scenarios; 22 safety-critical test procedures
+- **Dashboard & Integration:** Cloud ops dashboard panel with service health and alert rendering; documentation console; config staging for OpenStack and chipset variants; deployment observation pipeline with sliding window pattern detection; git commit rationale formatter; 3-tier knowledge loader
+- **Integration Verification:** E2E deployment verification (7-stage procedure with pre/post-deploy gates); E2E user scenario verification (8-stage authentication through floating IP); executable scripts with --dry-run
+- **Lessons Learned:** 15 LLIS entries across 4 categories; mission phase assessment; 10-item prioritized recommendations
+
+### Stats
+
+- 14 phases (312-325), 33 plans, 124 commits, 216 tests, 55 requirements, ~5.9K TypeScript LOC + 113 documentation files
+
+---
+
 ## [1.32.0] - 2026-02-22
 
 ### Added
