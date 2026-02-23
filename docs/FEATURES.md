@@ -131,6 +131,12 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **125. MCP Security Pipeline** | Hash verification, trust lifecycle with 30-day decay, invocation validation, rate limiting, audit logging, staging gates on all paths (v1.31) |
 | **126. Blueprint Editor MCP Blocks** | Server/Tool/Resource block types with port rendering, type-safe wiring engine, deny-by-default rules (v1.31) |
 | **127. MCP Trace & Security Panels** | Real-time JSON-RPC trace with sparklines, Security Dashboard with trust states and blocked call log (v1.31) |
+| **128. Brainstorm Rules Engine** | Osborn's 4 rules enforced architecturally with Critic gate, two-stage evaluative detection (<5% FP), Black Hat constraint, violation logging (v1.32) |
+| **129. Session Manager & Phase Controller** | 5-status state machine, strict 5-phase ordering (Explore→Diverge→Organize→Converge→Act), agent activation matrix, timer system (v1.32) |
+| **130. 16 Brainstorming Techniques** | Individual (freewriting, mind mapping, rapid ideation, question brainstorming), collaborative (brainwriting 6-3-5, round robin, brain-netting, rolestorming, figure storming), analytical (SCAMPER, Six Hats, starbursting, Five Whys), visual (storyboarding, affinity mapping, lotus blossom) (v1.32) |
+| **131. Pathway Router** | 5 educational pathways with signal-word matching, mid-session adaptive resequencing on energy/saturation/user signals (v1.32) |
+| **132. 8 Specialized Agents** | Facilitator (assessment, transitions, energy), Ideator, Questioner, Analyst (SCAMPER/Hats), Mapper, Persona (constructive figures), Critic (Converge-only), Scribe (always-on capture) (v1.32) |
+| **133. SessionBus & Integration** | 4-loop filesystem message router, 18 safety-critical tests, 3 E2E pathway tests, chipset YAML with 4 activation profiles (v1.32) |
 
 ## Version History
 
@@ -170,3 +176,4 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.29** | Electronics Educational Pack: MNA circuit simulator (7 components, DC/AC/transient), digital logic simulator (8 gates, flip-flops, timing), safety warden (IEC 60449, positive framing), learn mode (3-level H&H), 15 modules across 4 tiers with 77 labs, 5 specialized engines (DSP/GPIO/PLC/solar/PCB), 10,707 tests |
 | **v1.30** | Vision-to-Mission Pipeline: Zod-validated VTM types, vision parser with archetype classification, research compiler with tiered chunking, mission assembler, wave planner with graph coloring, model assignment (Opus/Sonnet/Haiku), cache optimizer, test plan generator, 7-template system, pipeline orchestrator with enrichment, 679 tests |
 | **v1.31** | GSD-OS MCP Integration: Rust MCP Host Manager (server lifecycle, tool routing, trace emission), Gateway Server (19 tools, Streamable HTTP, scope enforcement), MCP templates (server/host/client scaffolds), Agent Bridge (SCOUT/VERIFY servers, EXEC client), security pipeline (hash verification, trust lifecycle, staging gates), Blueprint Editor blocks with wiring engine, Trace Panel, Security Dashboard, 838 tests |
+| **v1.32** | Brainstorm Session Support: 8 specialized agents (Facilitator, Ideator, Questioner, Analyst, Mapper, Persona, Critic, Scribe), 16 techniques across 4 categories, 5 educational pathways with adaptive routing, Osborn's rules engine with architectural Critic gate, SessionBus 4-loop message router, session lifecycle (Explore→Diverge→Organize→Converge→Act), artifact generation, 321 tests |
