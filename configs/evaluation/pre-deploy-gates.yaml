@@ -1,0 +1,176 @@
+# =============================================================================
+# Pre-Deployment Evaluation Gates
+# =============================================================================
+#
+# These gates run BEFORE any OpenStack services are deployed. They verify the
+# host system is physically and logically ready for deployment.
+#
+# NASA SE Phase Mapping:
+#   Pre-deploy gates correspond to the Phase C gate (CDR -- Critical Design
+#   Review). In NASA Systems Engineering, CDR is the last gate before
+#   fabrication begins. Similarly, these gates are the last check before
+#   the deployment crew begins "fabricating" the cloud infrastructure.
+#
+# Action Types:
+#   block -- Prevents deployment from starting. The system is NOT ready.
+#   warn  -- Records an advisory but allows deployment to proceed.
+#
+# All pre-deploy gates use action "block" because the host system MUST
+# meet minimum requirements before OpenStack deployment can succeed.
+# Deploying to an inadequate host wastes time and produces a broken cloud.
+#
+# chipset_ref: openstack-nasa-se
+# =============================================================================
+
+name: pre-deploy-evaluation-gates
+version: 1.0.0
+description: "Pre-deployment evaluation gates -- verify host system readiness before OpenStack deployment begins"
+chipset_ref: openstack-nasa-se
+nasa_se_phase: "Phase C gate (CDR) -- system must be ready for fabrication"
+
+gates:
+  # ---------------------------------------------------------------------------
+  # PRE-001: Hardware Inventory
+  # ---------------------------------------------------------------------------
+  # Surveys physical hardware and compares against minimum requirements.
+  # Single-node OpenStack requires substantial resources -- skimping on
+  # hardware leads to OOM kills, disk pressure, and service instability.
+  # Action: block -- deployment on inadequate hardware always fails.
+  # ---------------------------------------------------------------------------
+  - id: PRE-001
+    name: hardware_inventory
+    description: "Survey physical hardware and verify it meets minimum requirements for single-node OpenStack"
+    check_type: script
+    command: |
+      echo "=== Hardware Inventory ==="
+      echo "CPU cores: $(nproc)"
+      echo "RAM total: $(free -g | awk '/^Mem:/{print $2}')GB"
+      echo "Disk available: $(df -BG / | awk 'NR==2{print $4}')"
+      echo "CPU model: $(grep 'model name' /proc/cpuinfo | head -1 | cut -d: -f2 | xargs)"
+      echo "Virtualization: $(grep -cw 'vmx\|svm' /proc/cpuinfo 2>/dev/null || echo 0) cores with virt support"
+    expected_result:
+      cpu_cores_min: 4
+      ram_gb_min: 16
+      disk_gb_min: 100
+      virtualization_required: true
+    action: block
+    remediation: "Upgrade hardware to meet minimum requirements. Single-node OpenStack requires at least 4 CPU cores, 16GB RAM, 100GB disk, and hardware virtualization support (VT-x/AMD-V)."
+    timeout_seconds: 30
+
+  # ---------------------------------------------------------------------------
+  # PRE-002: Network Connectivity
+  # ---------------------------------------------------------------------------
+  # Verifies that management and external network interfaces are configured.
+  # OpenStack needs network access for container image pulls during deployment
+  # and for service endpoints after deployment.
+  # Action: block -- no network means no deployment.
+  # ---------------------------------------------------------------------------
+  - id: PRE-002
+    name: network_connectivity
+    description: "Verify management and external network interfaces are configured and reachable"
+    check_type: script
+    command: |
+      echo "=== Network Connectivity ==="
+      echo "Interfaces:"
+      ip -br addr show
+      echo ""
+      echo "Default route:"
+      ip route show default
+      echo ""
+      echo "DNS resolution:"
+      host -t A docs.openstack.org 2>/dev/null && echo "DNS: OK" || echo "DNS: FAIL"
+      echo ""
+      echo "Internet connectivity:"
+      curl -s --connect-timeout 5 -o /dev/null -w "%{http_code}" https://releases.openstack.org/ || echo "FAIL"
+    expected_result:
+      management_interface_up: true
+      default_route_exists: true
+      dns_resolution: true
+      internet_connectivity: true
+    action: block
+    remediation: "Configure network interfaces. At minimum, one interface must have an IP address, a default route must exist, DNS must resolve external hostnames, and internet access is required for container image pulls."
+    timeout_seconds: 30
+
+  # ---------------------------------------------------------------------------
+  # PRE-003: Resource Sufficiency
+  # ---------------------------------------------------------------------------
+  # Checks that enough free resources exist for deployment. Even if hardware
+  # meets minimums, existing services may consume resources that OpenStack needs.
+  # Port conflicts are checked because OpenStack services bind to well-known
+  # ports -- a conflict means either the service won't start or it will
+  # shadow an existing service.
+  # Action: block -- insufficient free resources cause deployment failures.
+  # ---------------------------------------------------------------------------
+  - id: PRE-003
+    name: resource_sufficiency
+    description: "Verify sufficient free resources for deployment -- disk space, memory, and no conflicting services"
+    check_type: script
+    command: |
+      echo "=== Resource Sufficiency ==="
+      echo "Free RAM: $(free -g | awk '/^Mem:/{print $7}')GB"
+      echo "Free disk: $(df -BG / | awk 'NR==2{print $4}')"
+      echo ""
+      echo "Port conflicts:"
+      for port in 5000 8774 9696 8776 9292 6080 8004 80 443; do
+        ss -tlnp | grep -q ":${port} " && echo "CONFLICT: port ${port} in use" || echo "OK: port ${port} available"
+      done
+      echo ""
+      echo "Docker status:"
+      docker --version 2>/dev/null && echo "Docker: installed" || echo "Docker: NOT INSTALLED"
+      systemctl is-active docker 2>/dev/null && echo "Docker service: running" || echo "Docker service: not running"
+    expected_result:
+      free_ram_gb_min: 8
+      free_disk_gb_min: 50
+      no_port_conflicts: true
+      docker_installed: true
+      docker_running: true
+    action: block
+    remediation: "Free up resources: stop unnecessary services, clear disk space, resolve port conflicts. Docker must be installed and running. Key OpenStack ports: 5000 (Keystone), 8774 (Nova), 9696 (Neutron), 8776 (Cinder), 9292 (Glance)."
+    timeout_seconds: 60
+
+  # ---------------------------------------------------------------------------
+  # PRE-004: OS Compatibility
+  # ---------------------------------------------------------------------------
+  # Verifies the operating system is a supported distribution and that
+  # required packages are available. Kolla-Ansible has specific OS requirements
+  # and depends on Python 3, Ansible, Docker, and Git being present.
+  # Action: block -- unsupported OS or missing packages will fail kolla-ansible.
+  # ---------------------------------------------------------------------------
+  - id: PRE-004
+    name: os_compatibility
+    description: "Verify operating system version and required packages for Kolla-Ansible"
+    check_type: script
+    command: |
+      echo "=== OS Compatibility ==="
+      echo "OS: $(cat /etc/os-release | grep PRETTY_NAME | cut -d= -f2 | tr -d '"')"
+      echo "Kernel: $(uname -r)"
+      echo ""
+      echo "Required packages:"
+      for pkg in python3 pip3 ansible docker git; do
+        which $pkg 2>/dev/null && echo "OK: $pkg found" || echo "MISSING: $pkg"
+      done
+    expected_result:
+      os_supported: true
+      kernel_version_min: "4.18"
+      python3_available: true
+      ansible_available: true
+    action: block
+    remediation: "Install required packages: python3, pip3, ansible-core >= 2.14, docker-ce, git. Supported OS: CentOS Stream 9, Ubuntu 22.04, Rocky Linux 9, Debian 12."
+    timeout_seconds: 30
+
+# =============================================================================
+# Result Format
+# =============================================================================
+# Gate results are written as structured YAML for downstream processing.
+# The output_path is relative to the project root.
+# =============================================================================
+
+result_format:
+  type: yaml
+  fields:
+    - gate_id
+    - gate_name
+    - status  # pass | fail | warn | skip
+    - details
+    - timestamp
+  output_path: ".planning/bus/command/pre-deploy-results.yaml"
