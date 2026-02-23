@@ -17,7 +17,7 @@ function makeContainer(): HTMLElement {
   return el;
 }
 
-function makeHost(overrides: Partial<Parameters<typeof DashboardHost>[0]> = {}): {
+function makeHost(overrides: Partial<ConstructorParameters<typeof DashboardHost>[0]> = {}): {
   host: DashboardHost;
   container: HTMLElement;
 } {

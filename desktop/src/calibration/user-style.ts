@@ -56,9 +56,12 @@ const PaletteInnerSchema = z.object({
 /**
  * Palette uses .default() then .transform() to ensure nested defaults
  * cascade through the inner schema even when given an empty object.
+ *
+ * Zod v4 requires .default() values to match the full output type, so we
+ * supply a factory function and let the inner schema fill in field defaults.
  */
-const PaletteSchema = PaletteInnerSchema.default({}).transform((val) =>
-  PaletteInnerSchema.parse(val),
+const PaletteSchema = PaletteInnerSchema.default(() => PaletteInnerSchema.parse({})).transform(
+  (val) => PaletteInnerSchema.parse(val),
 );
 
 const CrtInnerSchema = z.object({
@@ -70,7 +73,7 @@ const CrtInnerSchema = z.object({
   vignette: z.number().default(CRT_DEFAULTS.vignette),
 });
 
-const CrtSchema = CrtInnerSchema.default({}).transform((val) =>
+const CrtSchema = CrtInnerSchema.default(() => CrtInnerSchema.parse({})).transform((val) =>
   CrtInnerSchema.parse(val),
 );
 
@@ -79,7 +82,7 @@ const BootInnerSchema = z.object({
   background: z.enum(['gradient', 'flat', 'disabled']).default('gradient'),
 });
 
-const BootSchema = BootInnerSchema.default({}).transform((val) =>
+const BootSchema = BootInnerSchema.default(() => BootInnerSchema.parse({})).transform((val) =>
   BootInnerSchema.parse(val),
 );
 
