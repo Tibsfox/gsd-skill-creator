@@ -18,8 +18,8 @@ import {
   routeTrace,
   placeComponent,
   describeGerberLayers,
-} from '../../simulator/pcb-layout';
-import type { DesignRule, PCBComponent } from '../../simulator/pcb-layout';
+} from '../../simulator/pcb-layout.js';
+import type { DesignRule, PCBComponent } from '../../simulator/pcb-layout.js';
 
 export interface LabStep {
   instruction: string;

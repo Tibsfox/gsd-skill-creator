@@ -15,13 +15,13 @@ import {
   filterByDepth,
   getModuleMarkers,
   MODULE_MARKERS,
-} from '../shared/learn-mode';
+} from '../shared/learn-mode.js';
 import {
   renderSidebar,
   SidebarState,
   SidebarPanel,
   SidebarSection,
-} from '../shared/learn-mode-ui';
+} from '../shared/learn-mode-ui.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

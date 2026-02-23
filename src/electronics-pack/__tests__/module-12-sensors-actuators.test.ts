@@ -13,7 +13,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/12-sensors-actuators/labs';
+import { labs } from '../modules/12-sensors-actuators/labs.js';
 
 // ============================================================================
 // General structure tests

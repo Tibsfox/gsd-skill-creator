@@ -15,7 +15,7 @@
  * i = known current injections, e = known source voltages.
  */
 
-import type { Component, OpAmp } from './components';
+import type { Component, OpAmp } from './components.js';
 import {
   stampComponent,
   stampDiode,
@@ -31,7 +31,7 @@ import {
   type StampTarget,
   type ACStampTarget,
   type Complex,
-} from './components';
+} from './components.js';
 
 // ============================================================================
 // Interfaces (preserved from stub — used by other phases)

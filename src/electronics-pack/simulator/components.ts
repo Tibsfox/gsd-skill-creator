@@ -106,7 +106,7 @@ export type Component =
 // Stamp Target — interface for MNA matrix stamping
 // ============================================================================
 
-import type { StampLogEntry } from './mna-engine';
+import type { StampLogEntry } from './mna-engine.js';
 
 /** Target that stamping functions write into */
 export interface StampTarget {

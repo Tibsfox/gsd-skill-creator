@@ -12,8 +12,8 @@
  * Lab 4 uses dcAnalysis (MOSFET modeled as low-R resistor).
  */
 
-import { solveNonlinear, dcAnalysis } from '../../simulator/mna-engine';
-import type { Component, Resistor, VoltageSource, BJT } from '../../simulator/components';
+import { solveNonlinear, dcAnalysis } from '../../simulator/mna-engine.js';
+import type { Component, Resistor, VoltageSource, BJT } from '../../simulator/components.js';
 
 export interface LabStep {
   instruction: string;

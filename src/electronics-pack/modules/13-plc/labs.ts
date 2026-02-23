@@ -19,7 +19,7 @@ import {
   writeCoil,
   readHoldingRegister,
   writeHoldingRegister,
-} from '../../simulator/plc-engine';
+} from '../../simulator/plc-engine.js';
 
 export interface LabStep {
   instruction: string;

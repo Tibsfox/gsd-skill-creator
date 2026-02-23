@@ -17,7 +17,7 @@ import {
   batteryModel,
   chargeControllerSim,
   inverterEfficiency,
-} from '../simulator/solar-engine';
+} from '../simulator/solar-engine.js';
 
 // ===========================================================================
 // Group 1: solarCellIV -- Solar cell I-V curve generator

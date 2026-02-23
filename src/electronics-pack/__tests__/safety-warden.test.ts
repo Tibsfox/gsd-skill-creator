@@ -4,7 +4,7 @@ import {
   getModuleMode,
   classifyVoltage,
   checkSafety,
-} from '../safety/warden';
+} from '../safety/warden.js';
 
 describe('Safety Warden', () => {
   describe('getModuleMode — module-to-mode mapping', () => {

@@ -13,7 +13,7 @@ import {
   lookupCitation,
   MODULE_MARKERS,
   HHCitation,
-} from '../shared/learn-mode';
+} from '../shared/learn-mode.js';
 
 // ---------------------------------------------------------------------------
 // 1. DepthLevel enum values

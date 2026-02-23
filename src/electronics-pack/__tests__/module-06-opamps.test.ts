@@ -7,8 +7,8 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/06-op-amps/labs';
-import type { Lab, LabStep } from '../modules/06-op-amps/labs';
+import { labs } from '../modules/06-op-amps/labs.js';
+import type { Lab, LabStep } from '../modules/06-op-amps/labs.js';
 
 // ============================================================================
 // Structural Tests

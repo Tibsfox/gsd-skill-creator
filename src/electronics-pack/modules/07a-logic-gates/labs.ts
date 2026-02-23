@@ -14,7 +14,7 @@ import {
   generateTruthTable,
   generateTimingDiagram,
   buildRippleCarryAdder,
-} from '../../simulator/logic-sim';
+} from '../../simulator/logic-sim.js';
 
 export interface LabStep {
   instruction: string;

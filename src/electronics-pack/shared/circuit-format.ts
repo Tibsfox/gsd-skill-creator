@@ -8,7 +8,7 @@
  * circuitToComponents conversion for MNA engine consumption.
  */
 
-import type { Component } from '../simulator/components';
+import type { Component } from '../simulator/components.js';
 
 /** A connection between component pins and circuit nodes */
 export interface Connection {
