@@ -1,226 +1,188 @@
 #!/usr/bin/env bash
-# validate-chipset.sh -- Validate a GSD chipset YAML configuration.
+# validate-chipset.sh -- Validate ASIC chipset.yaml internal consistency
+# Usage: ./scripts/validate-chipset.sh [path/to/chipset.yaml]
 #
-# Usage: validate-chipset.sh [chipset-file]
-#   Default: .chipset/minecraft-knowledge-world.yaml
-#
-# Checks:
-#   1. File exists and is readable
-#   2. Required top-level sections present
-#   3. Skill count matches expected (20)
-#   4. Token budget sum under 40% ceiling
-#   5. Team references valid (skills reference existing teams)
-#   6. Routing team references valid
-#   7. Agent skill references valid (each agent's skills exist in skills section)
-#   8. No duplicate skill names
-#   9. Loading order respects dependencies
-#
-# Exit codes:
-#   0 = all checks pass
-#   1 = one or more checks failed
-#   2 = usage error
+# Validates:
+#   1. YAML syntax
+#   2. Required top-level keys
+#   3. Skill source paths exist
+#   4. Agent skill references resolve
+#   5. Team member references resolve
+#   6. Crew config paths exist (warns if Phase 316/317 not yet executed)
+#   7. Bus loop config paths exist (warns if Phase 317 not yet executed)
+#   8. Budget ceiling not exceeded
 
 set -euo pipefail
 
-CHIPSET_FILE="${1:-.chipset/minecraft-knowledge-world.yaml}"
+CHIPSET_PATH="${1:-.chipset/openstack-nasa-se/chipset.yaml}"
 PASS=0
 FAIL=0
 WARN=0
 
-# Color output helpers
-if [[ -t 1 ]]; then
-  GREEN='\033[0;32m'
-  RED='\033[0;31m'
-  YELLOW='\033[0;33m'
-  BOLD='\033[1m'
-  NC='\033[0m'
-else
-  GREEN=''
-  RED=''
-  YELLOW=''
-  BOLD=''
-  NC=''
-fi
+# Color output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
 
-pass() {
-  PASS=$((PASS + 1))
-  printf "${GREEN}PASS${NC}: %s\n" "$1"
-}
+pass() { echo -e "${GREEN}PASS${NC}: $1"; PASS=$((PASS + 1)); }
+fail() { echo -e "${RED}FAIL${NC}: $1"; FAIL=$((FAIL + 1)); }
+warn() { echo -e "${YELLOW}WARN${NC}: $1"; WARN=$((WARN + 1)); }
 
-fail() {
-  FAIL=$((FAIL + 1))
-  printf "${RED}FAIL${NC}: %s\n" "$1"
-}
-
-warn() {
-  WARN=$((WARN + 1))
-  printf "${YELLOW}WARN${NC}: %s\n" "$1"
-}
-
-# ── Check 1: File exists and is readable ──
-if [[ ! -f "$CHIPSET_FILE" ]]; then
-  fail "Chipset file not found: $CHIPSET_FILE"
-  echo ""
-  echo "=== Chipset Validation Summary ==="
-  echo "PASS: $PASS  FAIL: $FAIL  WARN: $WARN"
-  echo "STATUS: FAILED"
-  exit 1
-fi
-pass "Chipset file exists: $CHIPSET_FILE"
-
-# ── Check 2: Required top-level sections ──
-REQUIRED_SECTIONS="schema_version chipset skills agents teams routing budget"
-MISSING_SECTIONS=""
-for section in $REQUIRED_SECTIONS; do
-  if ! grep -q "^${section}:" "$CHIPSET_FILE"; then
-    MISSING_SECTIONS="$MISSING_SECTIONS $section"
-  fi
-done
-
-if [[ -z "$MISSING_SECTIONS" ]]; then
-  pass "All 7 required top-level sections present"
-else
-  fail "Missing top-level sections:$MISSING_SECTIONS"
-fi
-
-# ── Check 3: Skill count ──
-# Count skills within the skills section only (between "^skills:" and "^agents:")
-SKILL_COUNT=$(awk '/^skills:/{flag=1;next} /^agents:/{flag=0} flag && /^  - name:/{count++} END{print count+0}' "$CHIPSET_FILE")
-if [[ "$SKILL_COUNT" -eq 20 ]]; then
-  pass "Skill count is 20"
-else
-  fail "Skill count is $SKILL_COUNT (expected 20)"
-fi
-
-# ── Check 4: Token budget sum under 40% ──
-# Extract token_budget values from the skill_budgets section
-BUDGET_SUM=$(awk '/^  skill_budgets:/{flag=1;next} /^  team_budgets:/{flag=0} flag && /: "/{gsub(/[^0-9.]/, "", $2); sum+=$2} END{printf "%.1f", sum}' "$CHIPSET_FILE")
-CEILING=$(grep 'ceiling_percent:' "$CHIPSET_FILE" | head -1 | awk '{print $2}')
-
-if awk "BEGIN{exit !($BUDGET_SUM < $CEILING)}"; then
-  pass "Token budget sum ${BUDGET_SUM}% is under ${CEILING}% ceiling"
-else
-  fail "Token budget sum ${BUDGET_SUM}% exceeds ${CEILING}% ceiling"
-fi
-
-# ── Check 5: Skill team references valid ──
-# Extract team names from teams section
-TEAM_NAMES=$(awk '/^teams:/{flag=1} /^routing:/{flag=0} flag && /^  - name:/{gsub(/^  - name: /, ""); print}' "$CHIPSET_FILE")
-
-# Extract team references from skills section
-SKILL_TEAMS=$(awk '/^skills:/{flag=1} /^agents:/{flag=0} flag && /^    team:/{gsub(/^    team: /, ""); print}' "$CHIPSET_FILE")
-
-INVALID_TEAM_REFS=""
-for team_ref in $SKILL_TEAMS; do
-  if ! echo "$TEAM_NAMES" | grep -q "^${team_ref}$"; then
-    INVALID_TEAM_REFS="$INVALID_TEAM_REFS $team_ref"
-  fi
-done
-
-if [[ -z "$INVALID_TEAM_REFS" ]]; then
-  pass "All skill team references are valid"
-else
-  fail "Invalid skill team references:$INVALID_TEAM_REFS"
-fi
-
-# ── Check 6: Routing team references valid ──
-ROUTING_TEAMS=$(awk '/^  rules:/{flag=1} /^  default_team:/{flag=0} flag && /^      team:/{gsub(/^      team: /, ""); print}' "$CHIPSET_FILE")
-
-INVALID_ROUTING_REFS=""
-for team_ref in $ROUTING_TEAMS; do
-  if ! echo "$TEAM_NAMES" | grep -q "^${team_ref}$"; then
-    INVALID_ROUTING_REFS="$INVALID_ROUTING_REFS $team_ref"
-  fi
-done
-
-if [[ -z "$INVALID_ROUTING_REFS" ]]; then
-  pass "All routing team references are valid"
-else
-  fail "Invalid routing team references:$INVALID_ROUTING_REFS"
-fi
-
-# ── Check 7: Agent skill references valid ──
-# Extract skill names from skills section
-SKILL_NAMES=$(awk '/^skills:/{flag=1} /^agents:/{flag=0} flag && /^  - name:/{gsub(/^  - name: /, ""); print}' "$CHIPSET_FILE")
-
-# Extract agent skill references from agents section
-AGENT_SKILLS=$(awk '/^agents:/{flag=1} /^teams:/{flag=0} flag && /^    skills:/{gsub(/^    skills: \[/, ""); gsub(/\]/, ""); gsub(/, /, "\n"); print}' "$CHIPSET_FILE")
-
-INVALID_SKILL_REFS=""
-for skill_ref in $AGENT_SKILLS; do
-  if ! echo "$SKILL_NAMES" | grep -q "^${skill_ref}$"; then
-    INVALID_SKILL_REFS="$INVALID_SKILL_REFS $skill_ref"
-  fi
-done
-
-if [[ -z "$INVALID_SKILL_REFS" ]]; then
-  pass "All agent skill references are valid"
-else
-  fail "Invalid agent skill references:$INVALID_SKILL_REFS"
-fi
-
-# ── Check 8: No duplicate skill names ──
-DUPLICATES=$(echo "$SKILL_NAMES" | sort | uniq -d)
-if [[ -z "$DUPLICATES" ]]; then
-  pass "No duplicate skill names"
-else
-  fail "Duplicate skill names: $DUPLICATES"
-fi
-
-# ── Check 9: Loading order respects dependencies ──
-# Extract loading order
-LOADING_ORDER=$(awk '/^  loading_order:/{flag=1;next} /^  total_allocated:/{flag=0} flag && /^    - /{gsub(/^    - /, ""); print}' "$CHIPSET_FILE")
-
-# Build a simple dependency check: for each skill in loading order,
-# verify that all its dependencies appear before it
-DEPENDENCY_VIOLATIONS=""
-ORDER_INDEX=0
-declare -A LOADED_SKILLS
-
-while IFS= read -r skill; do
-  LOADED_SKILLS["$skill"]=$ORDER_INDEX
-
-  # Extract dependencies for this skill
-  DEPS=$(awk -v name="$skill" '
-    /^skills:/{flag=1}
-    /^agents:/{flag=0}
-    flag && /^  - name: / && $NF == name {found=1; next}
-    found && /^  - name:/{found=0}
-    found && /^    dependencies:/{
-      gsub(/^    dependencies: \[/, "")
-      gsub(/\]/, "")
-      gsub(/, /, "\n")
-      print
-      found=0
-    }
-  ' "$CHIPSET_FILE")
-
-  for dep in $DEPS; do
-    if [[ -z "$dep" ]]; then
-      continue
-    fi
-    if [[ -z "${LOADED_SKILLS[$dep]+x}" ]]; then
-      DEPENDENCY_VIOLATIONS="$DEPENDENCY_VIOLATIONS $skill(needs $dep)"
-    fi
-  done
-
-  ORDER_INDEX=$((ORDER_INDEX + 1))
-done <<< "$LOADING_ORDER"
-
-if [[ -z "$DEPENDENCY_VIOLATIONS" ]]; then
-  pass "Loading order respects all dependencies"
-else
-  fail "Loading order violations:$DEPENDENCY_VIOLATIONS"
-fi
-
-# ── Summary ──
+echo "=========================================="
+echo "  Chipset Validation: ${CHIPSET_PATH}"
+echo "=========================================="
 echo ""
-echo "=== Chipset Validation Summary ==="
-echo "PASS: $PASS  FAIL: $FAIL  WARN: $WARN"
-if [[ $FAIL -gt 0 ]]; then
-  echo "STATUS: FAILED"
+
+# 1. File exists and parses
+if [ ! -f "$CHIPSET_PATH" ]; then
+  fail "Chipset file not found: $CHIPSET_PATH"
+  echo ""
+  echo "Results: $PASS passed, $FAIL failed, $WARN warnings"
   exit 1
-else
-  echo "STATUS: PASSED"
-  exit 0
 fi
+
+python3 -c "import yaml; yaml.safe_load(open('$CHIPSET_PATH'))" 2>/dev/null
+if [ $? -eq 0 ]; then
+  pass "YAML syntax valid"
+else
+  fail "YAML syntax invalid"
+  exit 1
+fi
+
+# 2-8. Use Python for structured validation
+export CHIPSET_PATH
+python3 << 'PYEOF'
+import yaml
+import os
+import sys
+
+chipset_path = os.environ.get("CHIPSET_PATH", ".chipset/openstack-nasa-se/chipset.yaml")
+
+with open(chipset_path) as f:
+    chipset = yaml.safe_load(f)
+
+passes = 0
+fails = 0
+warns = 0
+
+def ok(msg):
+    global passes
+    print(f"\033[0;32mPASS\033[0m: {msg}")
+    passes += 1
+
+def bad(msg):
+    global fails
+    print(f"\033[0;31mFAIL\033[0m: {msg}")
+    fails += 1
+
+def warning(msg):
+    global warns
+    print(f"\033[0;33mWARN\033[0m: {msg}")
+    warns += 1
+
+# Required top-level keys
+print("\n--- Required Keys ---")
+required_keys = ["schema_version", "chipset", "skills", "agents", "teams", "routing", "budget"]
+for key in required_keys:
+    if key in chipset:
+        ok(f"Top-level key '{key}' present")
+    else:
+        bad(f"Top-level key '{key}' missing")
+
+# Skill source paths
+print("\n--- Skill Source Paths ---")
+skill_names = set()
+for skill in chipset.get("skills", []):
+    name = skill.get("name", "unknown")
+    source = skill.get("source", "")
+    skill_names.add(name)
+    if os.path.exists(source):
+        ok(f"Skill '{name}' source exists: {source}")
+    else:
+        bad(f"Skill '{name}' source NOT FOUND: {source}")
+
+print(f"\n  Total skills: {len(skill_names)}")
+
+# Agent skill references
+print("\n--- Agent Skill References ---")
+agent_names = set()
+for agent in chipset.get("agents", []):
+    aname = agent.get("name", "unknown")
+    agent_names.add(aname)
+    for skill_ref in agent.get("skills", []):
+        if skill_ref in skill_names:
+            ok(f"Agent '{aname}' skill '{skill_ref}' resolves")
+        else:
+            bad(f"Agent '{aname}' references undefined skill '{skill_ref}'")
+
+print(f"\n  Total agents: {len(agent_names)}")
+
+# Team member references
+print("\n--- Team Member References ---")
+for team in chipset.get("teams", []):
+    tname = team.get("name", "unknown")
+    for member in team.get("members", []):
+        if member in agent_names:
+            ok(f"Team '{tname}' member '{member}' resolves")
+        else:
+            bad(f"Team '{tname}' references undefined agent '{member}'")
+
+# Crew config paths
+print("\n--- Crew Config Paths ---")
+for crew_name, crew_path in chipset.get("crews", {}).items():
+    if os.path.exists(crew_path):
+        ok(f"Crew config '{crew_name}' exists: {crew_path}")
+    else:
+        warning(f"Crew config '{crew_name}' not yet created: {crew_path} (expected from Phase 316/317)")
+
+# Bus loop config paths
+print("\n--- Communication Loop Paths ---")
+comm = chipset.get("communication", {})
+for loop in comm.get("loops", []):
+    lname = loop.get("name", "unknown")
+    config = loop.get("config", "")
+    if os.path.exists(config):
+        ok(f"Loop '{lname}' config exists: {config}")
+    else:
+        warning(f"Loop '{lname}' config not yet created: {config} (expected from Phase 317)")
+
+for extra in ["arbitration", "halt"]:
+    path = comm.get(extra, "")
+    if path and os.path.exists(path):
+        ok(f"Bus '{extra}' config exists: {path}")
+    elif path:
+        warning(f"Bus '{extra}' config not yet created: {path} (expected from Phase 317)")
+
+# Budget validation
+print("\n--- Budget Validation ---")
+budget = chipset.get("budget", {})
+ceiling = budget.get("ceiling_percent", 0)
+total_str = budget.get("total_allocated", "0%")
+total = float(total_str.replace("%", ""))
+if total <= ceiling:
+    ok(f"Total allocated ({total_str}) within ceiling ({ceiling}%)")
+else:
+    bad(f"Total allocated ({total_str}) EXCEEDS ceiling ({ceiling}%)")
+
+# Summary
+print("\n==========================================")
+print(f"  Results: {passes} passed, {fails} failed, {warns} warnings")
+print("==========================================")
+
+if fails > 0:
+    sys.exit(1)
+else:
+    sys.exit(0)
+PYEOF
+
+RESULT=$?
+
+echo ""
+if [ $RESULT -eq 0 ]; then
+  echo "Chipset validation: PASSED (warnings may exist for Phase 316/317 artifacts not yet created)"
+else
+  echo "Chipset validation: FAILED -- fix errors above"
+fi
+
+exit $RESULT
