@@ -85,7 +85,7 @@
 
 - [x] **Phase 312: Foundation Types & NASA SE Methodology** - Shared TypeScript interfaces, Zod schemas, NASA SE phase mapping, communication loop schemas, and filesystem contracts (completed 2026-02-23)
 - [x] **Phase 313: Core OpenStack Skills** - 8 core service skills + kolla-ansible deployment skill with deploy/configure/operate/troubleshoot knowledge (completed 2026-02-23)
-- [ ] **Phase 314: Operations Skills** - 6 operations domain skills for monitoring, backup, security, networking debug, capacity, and kolla-ansible ops
+- [x] **Phase 314: Operations Skills** - 6 operations domain skills for monitoring, backup, security, networking debug, capacity, and kolla-ansible ops (completed 2026-02-23)
 - [x] **Phase 315: Documentation & Methodology Skills** - 3 documentation skills (ops-manual-writer, runbook-generator, doc-verifier) and NASA SE methodology extensions (completed 2026-02-23)
 - [ ] **Phase 316: Deployment & Operations Crews** - Deployment crew (12 roles) and operations crew (8 roles) with activation profiles and skill loadouts
 - [ ] **Phase 317: Documentation Crew & Communication Framework** - Documentation crew (8 roles) and all 9 communication loops with priority-based bus arbitration
@@ -297,7 +297,7 @@ Phases 312 through 325. Parallel tracks within waves:
 |-------|----------------|--------|-----------|
 | 312. Foundation Types & NASA SE Methodology | 2/2 | Complete   | 2026-02-23 |
 | 313. Core OpenStack Skills | 3/3 | Complete   | 2026-02-23 |
-| 314. Operations Skills | 0/2 | Not started | - |
+| 314. Operations Skills | 2/2 | Complete   | 2026-02-23 |
 | 315. Documentation & Methodology Skills | 2/2 | Complete   | 2026-02-23 |
 | 316. Deployment & Operations Crews | 0/2 | Not started | - |
 | 317. Documentation Crew & Communication Framework | 0/TBD | Not started | - |
