@@ -87,7 +87,7 @@
 - [x] **Phase 313: Core OpenStack Skills** - 8 core service skills + kolla-ansible deployment skill with deploy/configure/operate/troubleshoot knowledge (completed 2026-02-23)
 - [x] **Phase 314: Operations Skills** - 6 operations domain skills for monitoring, backup, security, networking debug, capacity, and kolla-ansible ops (completed 2026-02-23)
 - [x] **Phase 315: Documentation & Methodology Skills** - 3 documentation skills (ops-manual-writer, runbook-generator, doc-verifier) and NASA SE methodology extensions (completed 2026-02-23)
-- [ ] **Phase 316: Deployment & Operations Crews** - Deployment crew (12 roles) and operations crew (8 roles) with activation profiles and skill loadouts
+- [x] **Phase 316: Deployment & Operations Crews** - Deployment crew (12 roles) and operations crew (8 roles) with activation profiles and skill loadouts (completed 2026-02-23)
 - [ ] **Phase 317: Documentation Crew & Communication Framework** - Documentation crew (8 roles) and all 9 communication loops with priority-based bus arbitration
 - [ ] **Phase 318: Chipset Definition** - Complete ASIC chipset.yaml integrating all skills, crews, activation profiles, and evaluation gates
 - [ ] **Phase 319: Systems Administrator's Guide** - 7-chapter guide mapping NASA SE phases to cloud operations with SP-6105 and NPR 7123.1 cross-references
@@ -302,7 +302,7 @@ Phases 312 through 325. Parallel tracks within waves:
 | 313. Core OpenStack Skills | 3/3 | Complete   | 2026-02-23 |
 | 314. Operations Skills | 2/2 | Complete   | 2026-02-23 |
 | 315. Documentation & Methodology Skills | 2/2 | Complete   | 2026-02-23 |
-| 316. Deployment & Operations Crews | 0/2 | Not started | - |
+| 316. Deployment & Operations Crews | 2/2 | Complete   | 2026-02-23 |
 | 317. Documentation Crew & Communication Framework | 0/2 | Not started | - |
 | 318. Chipset Definition | 0/TBD | Not started | - |
 | 319. Systems Administrator's Guide | 0/TBD | Not started | - |

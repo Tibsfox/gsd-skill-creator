@@ -1,0 +1,27 @@
+name: health
+description: "Health loop for SURGEON to monitor agent and cloud service health with advisories to FLIGHT"
+priority: 2
+direction: bidirectional
+participants:
+  - role: SURGEON
+    direction: receive-and-send
+    message_types: [health-advisory, status-check]
+  - role: "all agents"
+    direction: send
+    message_types: [telemetry, heartbeat]
+  - role: FLIGHT
+    direction: receive
+    message_types: [health-advisory]
+
+config:
+  telemetry_interval_seconds: 30
+  heartbeat_interval_seconds: 60
+  advisory_levels: [info, warning, critical, emergency]
+  missed_heartbeat_threshold: 3
+  escalation_on_emergency: true
+  escalation_target: FLIGHT
+
+routing:
+  pattern: "hub-and-spoke"
+  description: "SURGEON is the hub. All agents send telemetry to SURGEON. SURGEON analyzes and sends advisories to FLIGHT. FLIGHT decides on action."
+  cloud_integration: "SURGEON also receives data from cloud-ops loop"

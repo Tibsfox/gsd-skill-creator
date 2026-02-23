@@ -1,0 +1,36 @@
+name: doc-sync
+description: "Documentation sync loop detecting configuration drift between running system and documentation"
+priority: 4
+direction: bidirectional
+participants:
+  - role: "VERIFY-docs"
+    direction: send-and-receive
+    message_types: [drift-detection, verification-request]
+  - role: "EXEC-docs"
+    direction: receive
+    message_types: [update-trigger]
+  - role: "running system"
+    direction: send
+    message_types: [config-snapshot]
+
+config:
+  drift_detection_methods:
+    - type: configuration
+      description: "Compare documented config values against actual config files"
+      watch_paths: ["/etc/kolla/*/config.json", "/etc/kolla/globals.yml"]
+    - type: endpoint
+      description: "Compare documented API endpoints against Keystone service catalog"
+      source: "openstack catalog list"
+    - type: procedure
+      description: "Execute read-only verification steps from procedures against live system"
+      safety: "read-only commands only -- never modify system state"
+    - type: version
+      description: "Compare documented service versions against running container tags"
+      source: "docker ps --format"
+  check_interval_seconds: 300
+  drift_severity_levels: [critical, warning, info]
+
+routing:
+  pattern: "detect-and-trigger"
+  description: "VERIFY-docs periodically checks documentation against running system. Drift detected -> VERIFY-docs sends drift-detection to doc FLIGHT. Doc FLIGHT assigns update-trigger to EXEC-docs. EXEC-docs updates documentation and commits."
+  trigger_chain: "system change -> SURGEON detects via cloud-ops loop -> notifies doc FLIGHT -> VERIFY-docs runs targeted check -> drift confirmed -> EXEC-docs updates"
