@@ -4,12 +4,12 @@ import {
   generateSafetyMessage,
   detectProfessionalContext,
   type ProfessionalSignal,
-} from '../safety/warden';
+} from '../safety/warden.js';
 import {
   getAssessment,
   AssessmentTracker,
   type ModuleAssessment,
-} from '../safety/safety-assessments/assessments';
+} from '../safety/safety-assessments/assessments.js';
 
 // ---------------------------------------------------------------------------
 // Prohibited words — must NEVER appear in any safety message (SAFE-05)

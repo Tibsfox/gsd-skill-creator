@@ -12,7 +12,7 @@ import { describe, it, expect } from 'vitest';
 import {
   stampCapacitorTransient,
   stampInductorTransient,
-} from '../simulator/components';
+} from '../simulator/components.js';
 import type {
   Resistor,
   Capacitor,
@@ -20,17 +20,17 @@ import type {
   VoltageSource,
   Component,
   StampTarget,
-} from '../simulator/components';
-import type { StampLogEntry } from '../simulator/mna-engine';
-import { buildMatrix, solve, dcAnalysis } from '../simulator/mna-engine';
-import { transientAnalysis } from '../simulator/transient';
-import type { BackwardEulerConfig } from '../simulator/transient';
+} from '../simulator/components.js';
+import type { StampLogEntry } from '../simulator/mna-engine.js';
+import { buildMatrix, solve, dcAnalysis } from '../simulator/mna-engine.js';
+import { transientAnalysis } from '../simulator/transient.js';
+import type { BackwardEulerConfig } from '../simulator/transient.js';
 import {
   saveCircuit,
   loadCircuit,
   circuitToComponents,
-} from '../shared/circuit-format';
-import type { CircuitDefinition, SavedCircuit } from '../shared/circuit-format';
+} from '../shared/circuit-format.js';
+import type { CircuitDefinition, SavedCircuit } from '../shared/circuit-format.js';
 
 // ============================================================================
 // Helpers

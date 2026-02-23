@@ -28,7 +28,7 @@ import {
   type DRCViolation,
   type GerberLayer,
   type EMIResult,
-} from '../simulator/pcb-layout';
+} from '../simulator/pcb-layout.js';
 
 // ============================================================================
 // Group 1: Microstrip impedance calculator

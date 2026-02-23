@@ -21,7 +21,7 @@ import {
   type ADCConfig,
   type TimerConfig,
   type InterruptHandler,
-} from '../simulator/gpio-sim';
+} from '../simulator/gpio-sim.js';
 
 // ===========================================================================
 // Group 1: GPIO Pin Tests

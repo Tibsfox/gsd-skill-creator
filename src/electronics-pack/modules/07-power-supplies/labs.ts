@@ -9,8 +9,8 @@
  * on input voltage region) and dcAnalysis (simple linear circuits).
  */
 
-import { solveNonlinear, dcAnalysis } from '../../simulator/mna-engine';
-import type { Component, Resistor, VoltageSource, Regulator } from '../../simulator/components';
+import { solveNonlinear, dcAnalysis } from '../../simulator/mna-engine.js';
+import type { Component, Resistor, VoltageSource, Regulator } from '../../simulator/components.js';
 
 export interface LabStep {
   instruction: string;

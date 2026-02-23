@@ -13,7 +13,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/08-sequential-logic/labs';
+import { labs } from '../modules/08-sequential-logic/labs.js';
 
 // ============================================================================
 // Structural tests -- lab array shape and metadata

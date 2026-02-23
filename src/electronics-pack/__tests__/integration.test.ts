@@ -32,7 +32,7 @@ const TESTS_DIR = path.resolve(__dirname);
 
 describe('INTG-01: MNA Simulator Engine', () => {
   it('exports all core stamp functions', async () => {
-    const components = await import('../simulator/components');
+    const components = await import('../simulator/components.js');
     expect(typeof components.stampResistor).toBe('function');
     expect(typeof components.stampCapacitor).toBe('function');
     expect(typeof components.stampInductor).toBe('function');
@@ -42,7 +42,7 @@ describe('INTG-01: MNA Simulator Engine', () => {
   });
 
   it('runs a voltage divider through DC analysis', async () => {
-    const { dcAnalysis } = await import('../simulator/mna-engine');
+    const { dcAnalysis } = await import('../simulator/mna-engine.js');
     const result = dcAnalysis([
       { id: 'V1', type: 'voltage-source', nodes: ['1', '0'], voltage: 10 },
       { id: 'R1', type: 'resistor', nodes: ['1', '2'], resistance: 2000 },
@@ -55,7 +55,7 @@ describe('INTG-01: MNA Simulator Engine', () => {
   });
 
   it('exports buildMatrix and solve for matrix-level access', async () => {
-    const engine = await import('../simulator/mna-engine');
+    const engine = await import('../simulator/mna-engine.js');
     expect(typeof engine.buildMatrix).toBe('function');
     expect(typeof engine.solve).toBe('function');
   });
@@ -67,7 +67,7 @@ describe('INTG-01: MNA Simulator Engine', () => {
 
 describe('INTG-02: Logic Simulator Engine', () => {
   it('evaluates a simple AND gate circuit', async () => {
-    const { LogicSimulator, GateType } = await import('../simulator/logic-sim');
+    const { LogicSimulator, GateType } = await import('../simulator/logic-sim.js');
     const sim = new LogicSimulator();
     sim.addGate({
       id: 'AND1',
@@ -89,7 +89,7 @@ describe('INTG-02: Logic Simulator Engine', () => {
   });
 
   it('simulates a D flip-flop with sequential behavior', async () => {
-    const { evaluateFlipFlop, FlipFlopType } = await import('../simulator/logic-sim');
+    const { evaluateFlipFlop, FlipFlopType } = await import('../simulator/logic-sim.js');
 
     let state = { Q: false, Qbar: true };
 
@@ -115,7 +115,7 @@ describe('INTG-02: Logic Simulator Engine', () => {
 
 describe('INTG-03: Safety Warden Module Assignments', () => {
   it('assigns correct safety modes to all 16 module directories', async () => {
-    const { getModuleMode, SafetyMode } = await import('../safety/warden');
+    const { getModuleMode, SafetyMode } = await import('../safety/warden.js');
 
     const expectedAnnotate = [
       '01-the-circuit', '02-passive-components', '03-the-signal',
@@ -140,7 +140,7 @@ describe('INTG-03: Safety Warden Module Assignments', () => {
   });
 
   it('classifies voltage ranges correctly', async () => {
-    const { classifyVoltage, SafetyMode } = await import('../safety/warden');
+    const { classifyVoltage, SafetyMode } = await import('../safety/warden.js');
 
     // 5V -> ELV -> Annotate
     const r5 = classifyVoltage(5);
@@ -170,7 +170,7 @@ describe('INTG-03: Safety Warden Module Assignments', () => {
 
 describe('INTG-04: Learn Mode Citations', () => {
   it('resolves H&H 1.2 to a valid citation referencing module 01', async () => {
-    const { lookupCitation } = await import('../shared/learn-mode');
+    const { lookupCitation } = await import('../shared/learn-mode.js');
     const citation = lookupCitation('1.2');
     expect(citation).not.toBeNull();
     expect(citation!.chapter).toBe(1);
@@ -178,7 +178,7 @@ describe('INTG-04: Learn Mode Citations', () => {
   });
 
   it('has chapter map entries covering all 15 modules', async () => {
-    const { lookupCitation } = await import('../shared/learn-mode');
+    const { lookupCitation } = await import('../shared/learn-mode.js');
 
     // All chapter map refs that should cover all modules
     const refs = [
@@ -207,7 +207,7 @@ describe('INTG-04: Learn Mode Citations', () => {
   });
 
   it('returns null for invalid citations', async () => {
-    const { lookupCitation } = await import('../shared/learn-mode');
+    const { lookupCitation } = await import('../shared/learn-mode.js');
     expect(lookupCitation('99.99')).toBeNull();
     expect(lookupCitation('')).toBeNull();
   });
@@ -235,7 +235,7 @@ describe('INTG-05: Cross-Pack Documentation', () => {
 
 describe('INTG-06: Circuit Format', () => {
   it('has circuit-format.ts in shared/', async () => {
-    const circuitFormat = await import('../shared/circuit-format');
+    const circuitFormat = await import('../shared/circuit-format.js');
     expect(circuitFormat).toBeDefined();
   });
 });
@@ -246,7 +246,7 @@ describe('INTG-06: Circuit Format', () => {
 
 describe('INTG-07: Assessment Scoring', () => {
   it('safety warden exports checkSafety for assessment gating', async () => {
-    const warden = await import('../safety/warden');
+    const warden = await import('../safety/warden.js');
     expect(typeof warden.checkSafety).toBe('function');
 
     // Verify it returns assessmentRequired field

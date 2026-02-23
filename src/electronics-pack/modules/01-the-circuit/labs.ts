@@ -7,8 +7,8 @@
  * expected values against MNA results.
  */
 
-import { dcAnalysis } from '../../simulator/mna-engine';
-import type { Component, Resistor, VoltageSource } from '../../simulator/components';
+import { dcAnalysis } from '../../simulator/mna-engine.js';
+import type { Component, Resistor, VoltageSource } from '../../simulator/components.js';
 
 export interface LabStep {
   instruction: string;
