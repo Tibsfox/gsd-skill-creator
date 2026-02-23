@@ -139,7 +139,10 @@ Plans:
   1. All 6 operations skills (monitoring, backup, security, networking-debug, capacity, kolla-ansible-ops) are loadable and handle their specific ops domains
   2. Each operations skill documents integration points with related core skills and other ops skills
   3. Operations skills stay within the 8K individual / 30K combined token budget
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 314-01-PLAN.md -- Monitoring, backup, and security operations skills (infrastructure protection)
+- [ ] 314-02-PLAN.md -- Networking-debug, capacity, and kolla-ansible-ops skills (operational domains)
 **Model**: Sonnet
 
 ### Phase 315: Documentation & Methodology Skills
@@ -150,7 +153,10 @@ Plans:
   1. The 3 documentation skills (ops-manual-writer, runbook-generator, doc-verifier) follow NASA document standards and provide templates, format requirements, and verification methods
   2. NASA SE methodology skill provides process mapping, phase gate criteria, and document templates for all cloud operations phases
   3. Doc-verifier skill defines verification methods that can detect documentation drift against a running system
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 315-01-PLAN.md -- ops-manual-writer and runbook-generator documentation skills
+- [ ] 315-02-PLAN.md -- doc-verifier skill and NASA SE methodology enhancement
 **Model**: Opus
 
 ### Phase 316: Deployment & Operations Crews
@@ -288,8 +294,8 @@ Phases 312 through 325. Parallel tracks within waves:
 |-------|----------------|--------|-----------|
 | 312. Foundation Types & NASA SE Methodology | 2/2 | Complete   | 2026-02-23 |
 | 313. Core OpenStack Skills | 0/3 | Not started | - |
-| 314. Operations Skills | 0/TBD | Not started | - |
-| 315. Documentation & Methodology Skills | 0/TBD | Not started | - |
+| 314. Operations Skills | 0/2 | Not started | - |
+| 315. Documentation & Methodology Skills | 0/2 | Not started | - |
 | 316. Deployment & Operations Crews | 0/TBD | Not started | - |
 | 317. Documentation Crew & Communication Framework | 0/TBD | Not started | - |
 | 318. Chipset Definition | 0/TBD | Not started | - |
