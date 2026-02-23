@@ -276,7 +276,11 @@ Plans:
   3. Staging layer handles intake for OpenStack configurations and community chipset variants
   4. skill-creator observation pipeline captures deployment patterns and identifies promotion candidates
   5. Knowledge tier loading meets performance targets: summary loads in under 2 seconds, active loads in under 5 seconds
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 323-01-PLAN.md -- Cloud ops dashboard panel and documentation console (pure render functions)
+- [ ] 323-02-PLAN.md -- Staging intake for OpenStack configs/chipset variants and deployment observation pipeline
+- [ ] 323-03-PLAN.md -- Git commit rationale formatter and 3-tier knowledge loader with performance targets
 **Model**: Sonnet
 
 ### Phase 324: Integration Verification
@@ -327,7 +331,7 @@ Phases 312 through 325. Parallel tracks within waves:
 | 320. Operations Manual | 0/3 | Not started | - |
 | 321. Runbook Library & Reference Library | 1/4 | In Progress|  |
 | 322. V&V Plan & Compliance | 0/TBD | Not started | - |
-| 323. Dashboard & Integration | 0/TBD | Not started | - |
+| 323. Dashboard & Integration | 0/3 | Not started | - |
 | 324. Integration Verification | 0/TBD | Not started | - |
 | 325. Lessons Learned & Mission Retrospective | 0/1 | Not started | - |
 
