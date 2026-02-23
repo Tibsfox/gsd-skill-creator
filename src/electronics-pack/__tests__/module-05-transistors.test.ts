@@ -13,8 +13,8 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/05-transistors/labs';
-import type { Lab, LabStep } from '../modules/05-transistors/labs';
+import { labs } from '../modules/05-transistors/labs.js';
+import type { Lab, LabStep } from '../modules/05-transistors/labs.js';
 
 // ============================================================================
 // Structure tests

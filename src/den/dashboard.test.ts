@@ -677,7 +677,7 @@ describe('formatDenSnapshotMarkdown', () => {
   const snapshot = {
     timestamp: '20260220-150000',
     positions: STAFF_AGENT_IDS.map((id) => ({
-      position: id as string,
+      position: id,
       status: 'dormant' as const,
       lastAction: 'none',
       lastSeen: 'never',
@@ -689,7 +689,7 @@ describe('formatDenSnapshotMarkdown', () => {
       sentinelRecoveryState: 'clear' as const,
     },
     positionHealth: STAFF_AGENT_IDS.map((id) => ({
-      position: id as string,
+      position: id,
       eventCount: 0,
       lastEventAge: 0,
       errorCount: 0,
@@ -794,7 +794,7 @@ describe('Dashboard class', () => {
     const snapshot = {
       timestamp: '20260220-150000',
       positions: STAFF_AGENT_IDS.map((id) => ({
-        position: id as string,
+        position: id,
         status: 'dormant' as const,
         lastAction: 'none',
         lastSeen: 'never',
@@ -806,7 +806,7 @@ describe('Dashboard class', () => {
         sentinelRecoveryState: 'clear' as const,
       },
       positionHealth: STAFF_AGENT_IDS.map((id) => ({
-        position: id as string,
+        position: id,
         eventCount: 0,
         lastEventAge: 0,
         errorCount: 0,

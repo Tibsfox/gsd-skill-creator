@@ -14,16 +14,16 @@ import {
   stampOpAmp,
   stampRegulator,
   stampComponent,
-} from '../simulator/components';
-import { solveNonlinear } from '../simulator/mna-engine';
+} from '../simulator/components.js';
+import { solveNonlinear } from '../simulator/mna-engine.js';
 import type {
   Component,
   MOSFET,
   OpAmp,
   Regulator,
   StampTarget,
-} from '../simulator/components';
-import type { StampLogEntry } from '../simulator/mna-engine';
+} from '../simulator/components.js';
+import type { StampLogEntry } from '../simulator/mna-engine.js';
 
 // ============================================================================
 // MOSFET Tests (SIM-16)

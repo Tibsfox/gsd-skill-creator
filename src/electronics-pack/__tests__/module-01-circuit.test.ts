@@ -8,9 +8,9 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/01-the-circuit/labs';
-import { dcAnalysis } from '../simulator/mna-engine';
-import type { Component, Resistor, VoltageSource } from '../simulator/components';
+import { labs } from '../modules/01-the-circuit/labs.js';
+import { dcAnalysis } from '../simulator/mna-engine.js';
+import type { Component, Resistor, VoltageSource } from '../simulator/components.js';
 
 // ============================================================================
 // Component factory helpers

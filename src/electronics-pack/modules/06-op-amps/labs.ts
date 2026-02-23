@@ -6,8 +6,8 @@
  * and a verify() function that checks expected values against MNA results.
  */
 
-import { solveNonlinear } from '../../simulator/mna-engine';
-import type { Component, Resistor, VoltageSource, Capacitor, OpAmp } from '../../simulator/components';
+import { solveNonlinear } from '../../simulator/mna-engine.js';
+import type { Component, Resistor, VoltageSource, Capacitor, OpAmp } from '../../simulator/components.js';
 
 export interface LabStep {
   instruction: string;

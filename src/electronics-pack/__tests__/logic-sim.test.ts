@@ -14,7 +14,7 @@ import {
   LogicGate,
   evaluateGate,
   getGateInternals,
-} from '../simulator/logic-sim';
+} from '../simulator/logic-sim.js';
 
 // ---------------------------------------------------------------------------
 // 1. Gate evaluation -- all 8 types (LOGIC-01)

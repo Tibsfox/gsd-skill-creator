@@ -17,7 +17,7 @@ import {
   applyWindowToCoeffs,
   quantizeSignal,
   reconstructSignal,
-} from '../simulator/dsp-engine';
+} from '../simulator/dsp-engine.js';
 
 // ---------------------------------------------------------------------------
 // Helper: generate a pure sine wave

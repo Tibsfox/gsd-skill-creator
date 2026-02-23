@@ -7,7 +7,7 @@
  * Phase 274 Plan 02.
  */
 
-import { GPIOSimulator } from '../../simulator/gpio-sim';
+import { GPIOSimulator } from '../../simulator/gpio-sim.js';
 
 export interface LabStep {
   instruction: string;

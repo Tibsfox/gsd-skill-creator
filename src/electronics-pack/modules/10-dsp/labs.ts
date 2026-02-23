@@ -13,8 +13,8 @@ import {
   designFIRHighpass,
   designFIRBandpass,
   applyFIR,
-} from '../../simulator/dsp-engine';
-import { applyWindow } from '../../simulator/instruments';
+} from '../../simulator/dsp-engine.js';
+import { applyWindow } from '../../simulator/instruments.js';
 
 export interface LabStep {
   instruction: string;

@@ -13,7 +13,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/03-the-signal/labs';
+import { labs } from '../modules/03-the-signal/labs.js';
 
 // ============================================================================
 // General structure tests

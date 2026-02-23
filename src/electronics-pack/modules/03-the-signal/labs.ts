@@ -5,9 +5,9 @@
  * Each lab uses real MNA simulator analysis or physics-based calculations.
  */
 
-import { acAnalysis } from '../../simulator/mna-engine';
-import { transientAnalysis } from '../../simulator/transient';
-import type { Component } from '../../simulator/components';
+import { acAnalysis } from '../../simulator/mna-engine.js';
+import { transientAnalysis } from '../../simulator/transient.js';
+import type { Component } from '../../simulator/components.js';
 
 export interface LabStep {
   instruction: string;

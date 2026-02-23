@@ -8,7 +8,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/13-plc/labs';
+import { labs } from '../modules/13-plc/labs.js';
 
 // ============================================================================
 // General structure tests

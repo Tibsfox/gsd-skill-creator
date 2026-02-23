@@ -12,8 +12,8 @@ import {
   computeSpectrum,
   fft,
   applyWindow,
-} from '../simulator/instruments';
-import type { TransientTimePoint } from '../simulator/transient';
+} from '../simulator/instruments.js';
+import type { TransientTimePoint } from '../simulator/transient.js';
 
 // ============================================================================
 // Helper: generate time-domain signals as TransientTimePoint arrays

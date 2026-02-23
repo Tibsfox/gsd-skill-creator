@@ -150,6 +150,9 @@ export const ConfiguratorConfigSchema = z.object({
 /** TypeScript type for configurator config */
 export type ConfiguratorConfig = z.infer<typeof ConfiguratorConfigSchema>;
 
+/** TypeScript type for configurator config input (defaults optional) */
+export type ConfiguratorConfigInput = z.input<typeof ConfiguratorConfigSchema>;
+
 // ============================================================================
 // Stateless functions
 // ============================================================================
@@ -244,7 +247,7 @@ export function evaluateSkillRequirements(
  * @returns Chipset readiness result
  */
 export function checkChipsetReadiness(
-  topology: TopologyProfile,
+  topology: { name: string; roles: readonly AgentId[]; description: string; maxPhases: number; tokenBudget: number },
   skillReqs: SkillRequirement[],
 ): ChipsetReadiness {
   const missingRequired = skillReqs.filter((r) => r.required && !r.available);
@@ -404,7 +407,7 @@ export class Configurator {
  * @param config - Configurator configuration
  * @returns Initialized Configurator instance
  */
-export async function createConfigurator(config: ConfiguratorConfig): Promise<Configurator> {
+export async function createConfigurator(config: ConfiguratorConfigInput): Promise<Configurator> {
   const validated = ConfiguratorConfigSchema.parse(config);
   await mkdir(dirname(validated.logPath), { recursive: true });
   return new Configurator(validated);

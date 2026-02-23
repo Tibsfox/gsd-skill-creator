@@ -8,8 +8,8 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/02-passive-components/labs';
-import type { Lab, LabStep } from '../modules/02-passive-components/labs';
+import { labs } from '../modules/02-passive-components/labs.js';
+import type { Lab, LabStep } from '../modules/02-passive-components/labs.js';
 
 // ============================================================================
 // General Structure Tests

@@ -13,7 +13,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/07-power-supplies/labs';
+import { labs } from '../modules/07-power-supplies/labs.js';
 
 // ============================================================================
 // Structural tests -- lab array shape and metadata

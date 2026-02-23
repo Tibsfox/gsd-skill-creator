@@ -7,7 +7,7 @@
  * are pure digital signal processing.
  */
 
-import { quantizeSignal, reconstructSignal, dspFFT } from '../../simulator/dsp-engine';
+import { quantizeSignal, reconstructSignal, dspFFT } from '../../simulator/dsp-engine.js';
 
 export interface LabStep {
   instruction: string;

@@ -6,9 +6,9 @@
  * Oscilloscope, FFT, windowing, spectrum analyzer in Phase 264 Plan 02.
  */
 
-import { dcAnalysis, type MNASolution } from './mna-engine';
-import type { Component, VoltageSource } from './components';
-import type { TransientTimePoint } from './transient';
+import { dcAnalysis, type MNASolution } from './mna-engine.js';
+import type { Component, VoltageSource } from './components.js';
+import type { TransientTimePoint } from './transient.js';
 
 /** Voltmeter — measures voltage between two nodes */
 export interface Voltmeter {

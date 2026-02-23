@@ -15,8 +15,8 @@ import {
   evaluateFlipFlop,
   buildRippleCarryAdder,
   rippleCarryAdd,
-} from '../simulator/logic-sim';
-import type { FlipFlopState } from '../simulator/logic-sim';
+} from '../simulator/logic-sim.js';
+import type { FlipFlopState } from '../simulator/logic-sim.js';
 
 // ---------------------------------------------------------------------------
 // 1. SR Flip-Flop (LOGIC-06)

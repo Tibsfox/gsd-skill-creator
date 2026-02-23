@@ -161,8 +161,11 @@ export const CoordinatorConfigSchema = z.object({
   positions: z.array(AgentIdSchema).default(['planner', 'configurator', 'monitor', 'verifier']),
 });
 
-/** TypeScript type for coordinator config */
+/** TypeScript type for coordinator config (output — all defaults resolved) */
 export type CoordinatorConfig = z.infer<typeof CoordinatorConfigSchema>;
+
+/** TypeScript type for coordinator config input (defaults optional) */
+export type CoordinatorConfigInput = z.input<typeof CoordinatorConfigSchema>;
 
 // ============================================================================
 // Decision logging (JSONL)
@@ -661,7 +664,7 @@ export class Coordinator {
  * @param config - Coordinator configuration
  * @returns Initialized Coordinator instance
  */
-export async function createCoordinator(config: CoordinatorConfig): Promise<Coordinator> {
+export async function createCoordinator(config: CoordinatorConfigInput): Promise<Coordinator> {
   const validated = CoordinatorConfigSchema.parse(config);
   await mkdir(dirname(validated.logPath), { recursive: true });
   return new Coordinator(validated);

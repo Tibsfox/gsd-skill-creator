@@ -41,8 +41,11 @@ export const CommsLogConfigSchema = z.object({
   maxEntries: z.number().int().positive().default(200),
 });
 
-/** TypeScript type for CommsLog config */
+/** TypeScript type for CommsLog config (output — all defaults resolved) */
 export type CommsLogConfig = z.infer<typeof CommsLogConfigSchema>;
+
+/** TypeScript type for CommsLog config input (defaults optional) */
+export type CommsLogConfigInput = z.input<typeof CommsLogConfigSchema>;
 
 // ============================================================================
 // TimelineEntry schema
@@ -352,7 +355,7 @@ export class CommsLog {
    *
    * @param config - CommsLog configuration (validated through Zod)
    */
-  constructor(config: CommsLogConfig) {
+  constructor(config: CommsLogConfigInput) {
     this.commsConfig = CommsLogConfigSchema.parse(config);
   }
 

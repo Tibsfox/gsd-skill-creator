@@ -9,7 +9,7 @@
  * depth markers.
  */
 
-import { DepthLevel, DepthMarker, filterByDepth, getModuleMarkers } from './learn-mode';
+import { DepthLevel, DepthMarker, filterByDepth, getModuleMarkers } from './learn-mode.js';
 
 // ---------------------------------------------------------------------------
 // Exported types

@@ -15,7 +15,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/07a-logic-gates/labs';
+import { labs } from '../modules/07a-logic-gates/labs.js';
 
 // ============================================================================
 // Structural tests -- lab array shape and metadata

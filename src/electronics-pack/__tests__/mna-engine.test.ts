@@ -16,7 +16,7 @@ import {
   dcAnalysis,
   solveNonlinear,
   acAnalysis,
-} from '../simulator/mna-engine';
+} from '../simulator/mna-engine.js';
 import {
   stampResistor,
   stampCapacitor,
@@ -25,8 +25,8 @@ import {
   stampCurrentSource,
   stampComponent,
   stampDiode,
-} from '../simulator/components';
-import type { StampLogEntry, MNASolution, ACAnalysisPoint } from '../simulator/mna-engine';
+} from '../simulator/components.js';
+import type { StampLogEntry, MNASolution, ACAnalysisPoint } from '../simulator/mna-engine.js';
 import type {
   Resistor,
   Capacitor,
@@ -35,7 +35,7 @@ import type {
   CurrentSource,
   Diode,
   Component,
-} from '../simulator/components';
+} from '../simulator/components.js';
 
 // ============================================================================
 // Helper: create components with defaults

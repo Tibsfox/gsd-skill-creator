@@ -6,14 +6,14 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { measureVoltage, measureCurrent } from '../simulator/instruments';
-import { dcAnalysis, type MNASolution } from '../simulator/mna-engine';
+import { measureVoltage, measureCurrent } from '../simulator/instruments.js';
+import { dcAnalysis, type MNASolution } from '../simulator/mna-engine.js';
 import type {
   Component,
   Resistor,
   VoltageSource,
   CurrentSource,
-} from '../simulator/components';
+} from '../simulator/components.js';
 
 // ============================================================================
 // Helper: build common test circuits

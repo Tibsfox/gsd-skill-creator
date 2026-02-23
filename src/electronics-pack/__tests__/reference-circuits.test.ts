@@ -23,12 +23,12 @@ import {
   acAnalysis,
   solveNonlinear,
   buildMatrix,
-} from '../simulator/mna-engine';
-import { measureVoltage, measureCurrent, renderOscilloscope, computeSpectrum } from '../simulator/instruments';
-import { transientAnalysis } from '../simulator/transient';
-import { saveCircuit, loadCircuit, circuitToComponents, type CircuitDefinition } from '../shared/circuit-format';
-import { referenceCircuits } from '../simulator/reference-circuits';
-import type { Component, Resistor, VoltageSource, Capacitor, Inductor, Diode } from '../simulator/components';
+} from '../simulator/mna-engine.js';
+import { measureVoltage, measureCurrent, renderOscilloscope, computeSpectrum } from '../simulator/instruments.js';
+import { transientAnalysis } from '../simulator/transient.js';
+import { saveCircuit, loadCircuit, circuitToComponents, type CircuitDefinition } from '../shared/circuit-format.js';
+import { referenceCircuits } from '../simulator/reference-circuits.js';
+import type { Component, Resistor, VoltageSource, Capacitor, Inductor, Diode } from '../simulator/components.js';
 
 // ============================================================================
 // REF-01: Voltage Divider (DC)

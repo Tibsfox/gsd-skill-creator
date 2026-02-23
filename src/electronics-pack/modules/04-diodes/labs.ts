@@ -7,8 +7,8 @@
  * values against MNA nonlinear solver results.
  */
 
-import { solveNonlinear } from '../../simulator/mna-engine';
-import type { Component, Resistor, VoltageSource, Diode } from '../../simulator/components';
+import { solveNonlinear } from '../../simulator/mna-engine.js';
+import type { Component, Resistor, VoltageSource, Diode } from '../../simulator/components.js';
 
 export interface LabStep {
   instruction: string;
