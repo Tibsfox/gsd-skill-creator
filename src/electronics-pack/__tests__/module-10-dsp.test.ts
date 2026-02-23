@@ -8,8 +8,8 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/10-dsp/labs';
-import { dspFFT } from '../simulator/dsp-engine';
+import { labs } from '../modules/10-dsp/labs.js';
+import { dspFFT } from '../simulator/dsp-engine.js';
 
 // ============================================================================
 // Helper: generate a sine wave

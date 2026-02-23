@@ -6,7 +6,7 @@
  * All questions use positive framing aligned with the Safety Warden.
  */
 
-import type { SafetyAssessment } from '../warden';
+import type { SafetyAssessment } from '../warden.js';
 
 // ---------------------------------------------------------------------------
 // Types

@@ -12,7 +12,7 @@
  * Phase 264 Plan 03.
  */
 
-import type { Component } from './components';
+import type { Component } from './components.js';
 
 // ============================================================================
 // Reference Circuit Interface

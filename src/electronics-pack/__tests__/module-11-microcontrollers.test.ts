@@ -10,8 +10,8 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/11-microcontrollers/labs';
-import { GPIOSimulator } from '../simulator/gpio-sim';
+import { labs } from '../modules/11-microcontrollers/labs.js';
+import { GPIOSimulator } from '../simulator/gpio-sim.js';
 
 // ============================================================================
 // General structure tests

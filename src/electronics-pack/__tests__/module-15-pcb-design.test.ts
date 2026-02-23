@@ -14,7 +14,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/15-pcb-design/labs';
+import { labs } from '../modules/15-pcb-design/labs.js';
 
 // ============================================================================
 // Structural tests -- lab array shape and metadata

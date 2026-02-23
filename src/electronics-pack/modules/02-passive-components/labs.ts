@@ -9,9 +9,9 @@
  *   Lab 5: Thevenin Equivalence (DC)
  */
 
-import { dcAnalysis, acAnalysis } from '../../simulator/mna-engine';
-import { transientAnalysis } from '../../simulator/transient';
-import type { Component } from '../../simulator/components';
+import { dcAnalysis, acAnalysis } from '../../simulator/mna-engine.js';
+import { transientAnalysis } from '../../simulator/transient.js';
+import type { Component } from '../../simulator/components.js';
 
 export interface LabStep {
   instruction: string;

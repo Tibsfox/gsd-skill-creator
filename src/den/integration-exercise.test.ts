@@ -476,15 +476,15 @@ describe('Group 3: Failure Recovery', () => {
     });
 
     // Record high consumption: 96% utilization
-    monitor.recordConsumption('executor', 14400, 15000);
-    monitor.recordConsumption('planner', 5760, 6000);
+    monitor.recordConsumption('executor', 14400);
+    monitor.recordConsumption('planner', 5760);
 
     // Check budget -- should be at high alert (96k/100k = 96%)
     // Actually we recorded executor 14400 + planner 5760 = 20160 tokens
     // Against totalBudget 100000 => 20.16% -- that's GREEN
     // To get CRITICAL, we need total to exceed 95% of totalBudget
     // Record more consumption to hit 96%
-    monitor.recordConsumption('coordinator', 76000, 80000);
+    monitor.recordConsumption('coordinator', 76000);
 
     const alert = await monitor.checkBudget(5, 7);
     // 14400 + 5760 + 76000 = 96160 out of 100000 = 96.16%

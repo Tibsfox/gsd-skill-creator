@@ -9,7 +9,7 @@ import {
   evaluateFlipFlop,
   FlipFlopType,
   type FlipFlopState,
-} from '../../simulator/logic-sim';
+} from '../../simulator/logic-sim.js';
 
 export interface LabStep {
   instruction: string;

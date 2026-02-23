@@ -20,7 +20,7 @@ import {
   writeCoil,
   readHoldingRegister,
   writeHoldingRegister,
-} from '../simulator/plc-engine';
+} from '../simulator/plc-engine.js';
 
 // =========================================================================
 // Group 1: Ladder Logic Parser (ENG-04)
