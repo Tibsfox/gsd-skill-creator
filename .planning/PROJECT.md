@@ -66,7 +66,22 @@ Skills, agents, and teams must match official Claude Code patterns so they work 
 
 ### Active
 
-(No active milestone — planning next milestone)
+## Current Milestone: v1.33 GSD OpenStack Cloud Platform (NASA SE Edition)
+
+**Goal:** Deploy a fully functional single-node OpenStack cloud through GSD-OS using the complete mission crew manifest, produce a NASA SE-structured educational documentation pack that accompanies the functional system, and verify that every document is accurate against the running infrastructure.
+
+**Target features:**
+- 18 GSD skills (8 core OpenStack + 6 operations + 4 documentation/methodology)
+- 3 agent crew configurations (deployment 12 roles, operations 8 roles, documentation 8 roles) with full Squadron activation
+- 9 communication loops with priority-based bus arbitration
+- Complete ASIC chipset definition for cloud infrastructure
+- Systems Administrator's Guide (7 chapters mapping NASA SE phases)
+- Operations Manual with per-service verified procedures
+- Runbook Library (40+ entries, task-indexed and symptom-indexed)
+- Reference Library (3-tier: NASA SE + OpenStack + cross-cloud translation)
+- V&V Plan with requirements verification matrix
+- GSD-OS dashboard panel for cloud operations and documentation browsing
+- Lessons learned document in NASA LLIS format
 
 ### Out of Scope
 
@@ -219,4 +234,4 @@ Stack: TypeScript, Rust, GLSL, Bash, Python, Tauri v2, xterm.js, WebGL, Vite, Ce
 | Write-only FS-UAE configs | Generate, never parse — string template sufficient | ✓ Good |
 
 ---
-*Last updated: 2026-02-22 after v1.32 milestone*
+*Last updated: 2026-02-22 after v1.33 milestone started*

@@ -5,28 +5,30 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** Planning next milestone
+**Current focus:** v1.33 GSD OpenStack Cloud Platform (NASA SE Edition)
 
 ## Current Position
 
-Phase: None (between milestones)
-Plan: N/A
-Status: Milestone v1.32 complete
-Last activity: 2026-02-22 -- Completed v1.32 Brainstorm Session Support milestone (7 phases, 25 plans, 46 requirements, 321 tests)
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-02-22 — Milestone v1.33 started
 
-Progress: [████████████████] 100% (v1.32)
+Progress: ░░░░░░░░░░░░░░░░ 0% (v1.33)
 
 ## Accumulated Context
 
 ### Decision Log
 
-(Cleared at milestone completion — full log in PROJECT.md Key Decisions table)
+- Skip research for v1.33 — complete mission package provided with vision, reference, milestone spec, wave plan, and test plan (~126K of pre-built research)
 
 ### Key Constraints
 
 - Must follow existing project patterns: Zod schemas, functional API + class wrapper, TDD
 - Strict module boundaries: src/ never imports desktop/@tauri-apps/api; desktop/ never imports Node.js modules
 - Local-first architecture: no cloud dependencies for core functionality
+- Hardware minimum: 32GB RAM, 100GB disk, nested virtualization for OpenStack deployment
+- Safety: credentials never in version control; no external network exposure without HITL approval
 
 ### Blockers
 
@@ -35,5 +37,5 @@ None
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed v1.32 milestone archival
+Stopped at: Defining v1.33 requirements
 Resume file: None
