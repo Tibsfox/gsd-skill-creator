@@ -13,8 +13,8 @@ import {
   GateType,
   generateTruthTable,
   generateTimingDiagram,
-} from '../simulator/logic-sim';
-import type { TruthTable, TimingDiagram } from '../simulator/logic-sim';
+} from '../simulator/logic-sim.js';
+import type { TruthTable, TimingDiagram } from '../simulator/logic-sim.js';
 
 // ---------------------------------------------------------------------------
 // Helper: build a fresh simulator with specified gates

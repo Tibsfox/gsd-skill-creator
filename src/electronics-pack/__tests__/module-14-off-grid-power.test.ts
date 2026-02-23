@@ -9,7 +9,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { labs } from '../modules/14-off-grid-power/labs';
+import { labs } from '../modules/14-off-grid-power/labs.js';
 
 // ============================================================================
 // General structure tests

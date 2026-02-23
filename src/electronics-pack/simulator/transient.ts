@@ -10,9 +10,9 @@
  * MNA engine.
  */
 
-import type { Component, TransientState } from './components';
-import { stampComponent, type StampTarget } from './components';
-import { solve, type StampLogEntry } from './mna-engine';
+import type { Component, TransientState } from './components.js';
+import { stampComponent, type StampTarget } from './components.js';
+import { solve, type StampLogEntry } from './mna-engine.js';
 
 /** Configuration for Backward Euler transient analysis */
 export interface BackwardEulerConfig {

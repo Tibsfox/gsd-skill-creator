@@ -7,10 +7,10 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { stampBJT, stampComponent } from '../simulator/components';
-import { solveNonlinear } from '../simulator/mna-engine';
-import type { Component, BJT, StampTarget } from '../simulator/components';
-import type { StampLogEntry } from '../simulator/mna-engine';
+import { stampBJT, stampComponent } from '../simulator/components.js';
+import { solveNonlinear } from '../simulator/mna-engine.js';
+import type { Component, BJT, StampTarget } from '../simulator/components.js';
+import type { StampLogEntry } from '../simulator/mna-engine.js';
 
 // ============================================================================
 // Test 1: stampBJT is exported and callable

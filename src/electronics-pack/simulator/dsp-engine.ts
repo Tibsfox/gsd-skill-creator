@@ -9,7 +9,7 @@
  * Phase 273 Plan 01.
  */
 
-import { fft, applyWindow } from './instruments';
+import { fft, applyWindow } from './instruments.js';
 
 // ===========================================================================
 // 1. dspFFT -- higher-level FFT wrapper
