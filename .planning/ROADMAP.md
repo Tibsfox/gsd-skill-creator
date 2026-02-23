@@ -88,7 +88,7 @@
 - [x] **Phase 314: Operations Skills** - 6 operations domain skills for monitoring, backup, security, networking debug, capacity, and kolla-ansible ops (completed 2026-02-23)
 - [x] **Phase 315: Documentation & Methodology Skills** - 3 documentation skills (ops-manual-writer, runbook-generator, doc-verifier) and NASA SE methodology extensions (completed 2026-02-23)
 - [x] **Phase 316: Deployment & Operations Crews** - Deployment crew (12 roles) and operations crew (8 roles) with activation profiles and skill loadouts (completed 2026-02-23)
-- [ ] **Phase 317: Documentation Crew & Communication Framework** - Documentation crew (8 roles) and all 9 communication loops with priority-based bus arbitration
+- [x] **Phase 317: Documentation Crew & Communication Framework** - Documentation crew (8 roles) and all 9 communication loops with priority-based bus arbitration (completed 2026-02-23)
 - [ ] **Phase 318: Chipset Definition** - Complete ASIC chipset.yaml integrating all skills, crews, activation profiles, and evaluation gates
 - [ ] **Phase 319: Systems Administrator's Guide** - 7-chapter guide mapping NASA SE phases to cloud operations with SP-6105 and NPR 7123.1 cross-references
 - [ ] **Phase 320: Operations Manual** - Per-service verified procedures for all 8 OpenStack services following NASA procedure format
@@ -199,7 +199,10 @@ Plans:
   1. Complete ASIC chipset.yaml validates against schema, references only existing skills and agents, and configures scout/patrol/squadron activation profiles
   2. Pre-deploy evaluation gates (hardware inventory, network connectivity, resource sufficiency) execute and produce pass/fail results
   3. Post-deploy evaluation gates (keystone auth, nova compute, neutron network, doc verification) execute and produce pass/fail results
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 318-01-PLAN.md -- Complete ASIC chipset.yaml with skill registry, agent definitions, crew references, routing, and budget
+- [ ] 318-02-PLAN.md -- Evaluation gate configurations (pre-deploy and post-deploy) and chipset validation script
 **Model**: Opus
 
 ### Phase 319: Systems Administrator's Guide
@@ -303,8 +306,8 @@ Phases 312 through 325. Parallel tracks within waves:
 | 314. Operations Skills | 2/2 | Complete   | 2026-02-23 |
 | 315. Documentation & Methodology Skills | 2/2 | Complete   | 2026-02-23 |
 | 316. Deployment & Operations Crews | 2/2 | Complete   | 2026-02-23 |
-| 317. Documentation Crew & Communication Framework | 0/2 | Not started | - |
-| 318. Chipset Definition | 0/TBD | Not started | - |
+| 317. Documentation Crew & Communication Framework | 2/2 | Complete   | 2026-02-23 |
+| 318. Chipset Definition | 0/2 | Not started | - |
 | 319. Systems Administrator's Guide | 0/TBD | Not started | - |
 | 320. Operations Manual | 0/TBD | Not started | - |
 | 321. Runbook Library & Reference Library | 0/TBD | Not started | - |
