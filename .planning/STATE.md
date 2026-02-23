@@ -34,11 +34,11 @@ Progress: ████████░░░░░░░░ 54% (v1.33)
 | 316 | 2 | ~4 min | ~2 min |
 | 317 | 2 | ~6 min | ~3 min |
 | 318 | 2 | ~8 min | ~4 min |
-| 319 | 1 | ~5 min | ~5 min |
+| 319 | 2 | ~10 min | ~5 min |
 | 321 | 1 | ~5 min | ~5 min |
 
 **Recent Trend:**
-- Last 5 plans: 318-01 (4m), 318-02 (4m), 319-03 (5m), 321-01 (5m)
+- Last 5 plans: 318-02 (4m), 319-02 (5m), 319-03 (5m), 321-01 (5m)
 - Trend: Documentation chapters ~5 min each
 
 *Updated after each plan completion*
@@ -55,6 +55,7 @@ Recent decisions affecting current work:
 - Model assignments: Opus for methodology/crews/chipset/sysadmin-guide/lessons-learned, Sonnet for core/ops skills and documentation production, Haiku for reference library
 - All pre-deploy gates use action 'block' -- host must meet minimums before deployment
 - Post-deploy gates split block/warn: critical services block, optional services warn
+- [Phase 319]: Phase F service decommissioning order follows exact reverse of Phase D deployment order (Heat->Horizon->Swift->Cinder->Neutron->Nova->Glance->Keystone)
 - [Phase 321]: Dual PROCEDURE sections for scheduled vs emergency Fernet key rotation in RB-KEYSTONE-005
 
 ### Pending Todos
@@ -68,5 +69,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-23
-Stopped at: Phase 318 complete, ready for Wave 3 (319, 320, 321 parallel)
+Stopped at: Completed 319-03-PLAN.md (Phase E ops + Phase F closeout chapters)
 Resume file: None
