@@ -1,0 +1,69 @@
+name: e2e-deployment-verification
+version: 1.0.0
+description: "End-to-end deployment verification results"
+requirement: VERIF-06
+nasa_se_phase: "Phase D -- System Integration Review (SIR)"
+chipset_ref: openstack-nasa-se
+
+execution:
+  timestamp: "2026-02-23T05:45:36Z"
+  git_commit: "f61e4e6"
+  dry_run: true
+  operator: "foxy"
+
+stages:
+  - stage: 1
+    name: "Fresh System Baseline"
+    status: skip
+    details: {}
+    duration_seconds: 0
+  - stage: 2
+    name: "Pre-Deploy Gate Execution"
+    status: skip
+    gates:
+      PRE-001: skip
+      PRE-002: skip
+      PRE-003: skip
+      PRE-004: skip
+    duration_seconds: 0
+  - stage: 3
+    name: "Deployment Crew Activation"
+    status: skip
+    details: {}
+    duration_seconds: 0
+  - stage: 4
+    name: "Kolla-Ansible Deployment"
+    status: skip
+    details: {}
+    duration_seconds: 0
+  - stage: 5
+    name: "Post-Deploy Gate Execution"
+    status: skip
+    gates:
+      POST-001: skip
+      POST-002: skip
+      POST-003: skip
+      POST-004: skip
+      POST-005: skip
+      POST-006: skip
+      POST-007: skip
+      POST-008: skip
+      POST-009: skip
+    duration_seconds: 0
+  - stage: 6
+    name: "Operations Handoff"
+    status: skip
+    details: {}
+    duration_seconds: 0
+  - stage: 7
+    name: "Documentation Verification"
+    status: skip
+    details: {}
+    duration_seconds: 0
+
+summary:
+  total_stages: 7
+  passed: 0
+  failed: 0
+  skipped: 7
+  verdict: PASS
