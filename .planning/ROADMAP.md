@@ -92,7 +92,7 @@
 - [ ] **Phase 318: Chipset Definition** - Complete ASIC chipset.yaml integrating all skills, crews, activation profiles, and evaluation gates
 - [ ] **Phase 319: Systems Administrator's Guide** - 7-chapter guide mapping NASA SE phases to cloud operations with SP-6105 and NPR 7123.1 cross-references
 - [ ] **Phase 320: Operations Manual** - Per-service verified procedures for all 8 OpenStack services following NASA procedure format
-- [ ] **Phase 321: Runbook Library & Reference Library** - 40+ runbooks with task/symptom indexing, 3-tier reference library, cross-cloud translation tables, quick reference card
+- [x] **Phase 321: Runbook Library & Reference Library** - 40+ runbooks with task/symptom indexing, 3-tier reference library, cross-cloud translation tables, quick reference card (completed 2026-02-23)
 - [ ] **Phase 322: V&V Plan & Compliance** - Requirements verification matrix, NPR 7123.1 compliance matrix, VERIFY agent independence, doc-verifier drift detection, safety-critical tests
 - [ ] **Phase 323: Dashboard & Integration** - GSD-OS cloud ops panel, documentation console, staging layer intake, skill-creator observation pipeline, knowledge tier loading
 - [ ] **Phase 324: Integration Verification** - End-to-end deployment verification, end-to-end user scenario verification, doc accuracy against running system
@@ -329,7 +329,7 @@ Phases 312 through 325. Parallel tracks within waves:
 | 318. Chipset Definition | 2/2 | Complete   | 2026-02-23 |
 | 319. Systems Administrator's Guide | 2/3 | In Progress|  |
 | 320. Operations Manual | 0/3 | Not started | - |
-| 321. Runbook Library & Reference Library | 1/4 | In Progress|  |
+| 321. Runbook Library & Reference Library | 4/4 | Complete   | 2026-02-23 |
 | 322. V&V Plan & Compliance | 0/TBD | Not started | - |
 | 323. Dashboard & Integration | 0/3 | Not started | - |
 | 324. Integration Verification | 0/TBD | Not started | - |
