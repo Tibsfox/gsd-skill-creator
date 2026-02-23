@@ -52,14 +52,14 @@ Requirements for the OpenStack Cloud Platform milestone. Each maps to roadmap ph
 
 ### Documentation Pack (DOCS)
 
-- [ ] **DOCS-01**: Systems Administrator's Guide has 7 chapters mapping to NASA SE phases (Pre-Phase A through Phase F) with cross-references to SP-6105 and NPR 7123.1
-- [ ] **DOCS-02**: Each sysadmin guide chapter contains narrative, procedures, and cross-references that are accurate against the deployed system
+- [x] **DOCS-01**: Systems Administrator's Guide has 7 chapters mapping to NASA SE phases (Pre-Phase A through Phase F) with cross-references to SP-6105 and NPR 7123.1
+- [x] **DOCS-02**: Each sysadmin guide chapter contains narrative, procedures, and cross-references that are accurate against the deployed system
 - [ ] **DOCS-03**: Operations Manual contains per-service procedures for all 8 OpenStack services following NASA procedure format
 - [ ] **DOCS-04**: All operations manual procedures are verified against the running system
 - [x] **DOCS-05**: Runbook Library contains ≥40 entries with task-indexed and symptom-indexed access
 - [x] **DOCS-06**: Every runbook follows the standard format (preconditions, procedure, verification, rollback, references)
 - [ ] **DOCS-07**: Reference Library has 3-tier structure (summary ~6K always-loaded, active ~20K on-demand, reference ~40K deep dives)
-- [ ] **DOCS-08**: NASA SE cross-references point to correct SP-6105 and NPR 7123.1 sections
+- [x] **DOCS-08**: NASA SE cross-references point to correct SP-6105 and NPR 7123.1 sections
 - [ ] **DOCS-09**: OpenStack documentation references point to correct and current pages
 - [ ] **DOCS-10**: Cross-cloud translation tables (OpenStack → AWS/GCP/Azure) are verified against current vendor documentation
 - [ ] **DOCS-11**: Quick reference card (service names, ports, log locations, CLI commands) matches the running system
@@ -157,14 +157,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | COMM-09 | Phase 318 | Complete |
 | COMM-10 | Phase 318 | Complete |
 | COMM-11 | Phase 317 | Complete |
-| DOCS-01 | Phase 319 | Pending |
-| DOCS-02 | Phase 319 | Pending |
+| DOCS-01 | Phase 319 | Complete |
+| DOCS-02 | Phase 319 | Complete |
 | DOCS-03 | Phase 320 | Pending |
 | DOCS-04 | Phase 320 | Pending |
 | DOCS-05 | Phase 321 | Complete |
 | DOCS-06 | Phase 321 | Complete |
 | DOCS-07 | Phase 321 | Pending |
-| DOCS-08 | Phase 319 | Pending |
+| DOCS-08 | Phase 319 | Complete |
 | DOCS-09 | Phase 320 | Pending |
 | DOCS-10 | Phase 321 | Pending |
 | DOCS-11 | Phase 321 | Pending |
