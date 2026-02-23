@@ -169,7 +169,10 @@ Plans:
   3. Scout (3 roles), Patrol (7 roles), and Squadron (all roles) activation profiles function correctly with role subset hierarchy
   4. CRAFT agents trigger on domain keywords (e.g., "neutron" activates craft-network, "RBAC" activates craft-security)
   5. CAPCOM is the sole human interface; crew handoff from deployment to operations preserves full system context
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 316-01-PLAN.md -- Deployment crew configuration with 12 roles, skill loadouts, and activation profiles
+- [ ] 316-02-PLAN.md -- Operations crew configuration with SURGEON health monitoring and crew handoff
 **Model**: Opus (deployment crew), Sonnet (operations crew)
 
 ### Phase 317: Documentation Crew & Communication Framework
@@ -296,7 +299,7 @@ Phases 312 through 325. Parallel tracks within waves:
 | 313. Core OpenStack Skills | 3/3 | Complete   | 2026-02-23 |
 | 314. Operations Skills | 0/2 | Not started | - |
 | 315. Documentation & Methodology Skills | 0/2 | Not started | - |
-| 316. Deployment & Operations Crews | 0/TBD | Not started | - |
+| 316. Deployment & Operations Crews | 0/2 | Not started | - |
 | 317. Documentation Crew & Communication Framework | 0/TBD | Not started | - |
 | 318. Chipset Definition | 0/TBD | Not started | - |
 | 319. Systems Administrator's Guide | 0/TBD | Not started | - |
