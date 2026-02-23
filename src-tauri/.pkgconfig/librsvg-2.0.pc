@@ -1,0 +1,10 @@
+prefix=/usr
+libdir=${prefix}/lib/x86_64-linux-gnu
+includedir=${prefix}/include/librsvg-2.0/librsvg
+
+Name: librsvg
+Description: library that renders SVG files using cairo
+Version: 2.60.0
+Requires: glib-2.0 gio-2.0 gdk-pixbuf-2.0 cairo pangocairo libxml-2.0
+Libs: -L${libdir} -lrsvg-2
+Cflags: -I${includedir}
