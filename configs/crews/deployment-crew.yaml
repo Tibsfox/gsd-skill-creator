@@ -1,0 +1,370 @@
+# ==========================================================================
+# Deployment Crew Configuration
+# ==========================================================================
+# OpenStack deployment crew -- 12 roles for full Squadron-class cloud
+# deployment through NASA SE methodology.
+#
+# This crew exercises the full Squadron activation profile from the mission
+# crew manifest. It manages the complete lifecycle from pre-deployment
+# hardware survey through service integration verification.
+#
+# Role Hierarchy:
+#   Tier 1: FLIGHT (mission control, sole orchestrator)
+#   Tier 2: PLAN, EXEC, VERIFY, INTEG, CAPCOM, TOPO (core operations)
+#   Tier 3: CRAFT, SCOUT, BUDGET (specialist and support)
+#
+# Skill Loadout Rationale:
+#   - EXEC agents carry domain-specific OpenStack skills plus kolla-ansible
+#     (the deployment engine) so each can deploy its services independently
+#   - CRAFT agents carry diagnostic/specialist skills for their domains
+#   - FLIGHT and PLAN carry nasa-se-methodology for process orchestration
+#   - VERIFY carries doc-verifier for independence from implementation
+#   - SCOUT carries kolla-ansible for pre-deployment environment assessment
+
+name: deployment-crew
+version: 1.0.0
+description: "OpenStack deployment crew -- 12 roles for full Squadron-class cloud deployment through NASA SE methodology"
+mission_phase: "Formulation through Integration"
+
+# ==========================================================================
+# Human Interface Isolation (CREW-07)
+# ==========================================================================
+# CAPCOM is the sole channel crossing the human-machine boundary.
+# No other agent may send messages directly to the human operator.
+# This mirrors NASA Mission Control where CAPCOM is the only person
+# who communicates directly with the crew.
+
+human_interface:
+  sole_agent: capcom
+  rule: "No agent other than CAPCOM may send messages directly to the human operator"
+
+# ==========================================================================
+# Positions (14 entries, 12 distinct role types)
+# ==========================================================================
+# EXEC appears 3 times (identity, compute, network-storage domains)
+# CRAFT appears 3 times (network, security, storage domains)
+# All other roles appear once each.
+
+positions:
+
+  # --------------------------------------------------------------------------
+  # Tier 1: Mission Control
+  # --------------------------------------------------------------------------
+
+  - id: flight
+    role: FLIGHT
+    context: main
+    lifecycle: persistent
+    tier: 1
+    communication_loop: command
+    description: "Orchestrates full deployment sequence via command loop"
+    skills:
+      - nasa-se-methodology
+    skillRequirements:
+      required:
+        - nasa-se-methodology
+      recommended:
+        - workflow-orchestration
+
+  # --------------------------------------------------------------------------
+  # Tier 2: Core Operations
+  # --------------------------------------------------------------------------
+
+  - id: plan
+    role: PLAN
+    context: fork
+    lifecycle: task
+    tier: 2
+    communication_loop: execution
+    description: "Decomposes OpenStack deployment into phases"
+    skills:
+      - nasa-se-methodology
+    skillRequirements:
+      required:
+        - nasa-se-methodology
+      recommended:
+        - phase-decomposition
+
+  # EXEC agents: 3 parallel deployment streams, each with domain-specific
+  # OpenStack skills plus the shared kolla-ansible deployment engine.
+
+  - id: exec-keystone
+    role: EXEC
+    context: fork
+    lifecycle: task
+    tier: 2
+    domain: identity
+    communication_loop: execution
+    description: "Deploys Keystone identity service"
+    skills:
+      - openstack-keystone
+      - openstack-kolla-ansible
+    skillRequirements:
+      required:
+        - openstack-keystone
+        - openstack-kolla-ansible
+      recommended:
+        - service-deployment
+
+  - id: exec-compute
+    role: EXEC
+    context: fork
+    lifecycle: task
+    tier: 2
+    domain: compute
+    communication_loop: execution
+    description: "Deploys Nova compute and Glance image services"
+    skills:
+      - openstack-nova
+      - openstack-glance
+      - openstack-kolla-ansible
+    skillRequirements:
+      required:
+        - openstack-nova
+        - openstack-glance
+        - openstack-kolla-ansible
+      recommended:
+        - service-deployment
+
+  - id: exec-network-storage
+    role: EXEC
+    context: fork
+    lifecycle: task
+    tier: 2
+    domain: network-storage
+    communication_loop: execution
+    description: "Deploys Neutron networking and Cinder block storage"
+    skills:
+      - openstack-neutron
+      - openstack-cinder
+      - openstack-kolla-ansible
+    skillRequirements:
+      required:
+        - openstack-neutron
+        - openstack-cinder
+        - openstack-kolla-ansible
+      recommended:
+        - service-deployment
+
+  - id: verify
+    role: VERIFY
+    context: fork
+    lifecycle: task
+    tier: 2
+    communication_loop: execution
+    description: "Runs service health checks, API validation, integration tests. Independent from EXEC -- cannot access EXEC implementation context."
+    skills:
+      - doc-verifier
+    skillRequirements:
+      required:
+        - doc-verifier
+      recommended:
+        - verification-gates
+        - quality-assessment
+
+  - id: integ
+    role: INTEG
+    context: fork
+    lifecycle: task
+    tier: 2
+    communication_loop: execution
+    description: "Monitors cross-service interfaces (Nova-Neutron, Nova-Cinder, Keystone-all)"
+    skills: []
+    skillRequirements:
+      required: []
+      recommended:
+        - integration-testing
+        - interface-monitoring
+
+  - id: capcom
+    role: CAPCOM
+    context: main
+    lifecycle: persistent
+    tier: 2
+    human_interface: true
+    communication_loop: user
+    description: "The SOLE channel crossing the human-machine boundary. No other agent has human_interface: true."
+    skills: []
+    skillRequirements:
+      required: []
+      recommended:
+        - question-consolidation
+        - report-generation
+
+  - id: topo
+    role: TOPO
+    context: main
+    lifecycle: persistent
+    tier: 2
+    communication_loop: command
+    description: "Manages team topology changes as deployment progresses"
+    skills: []
+    skillRequirements:
+      required: []
+      recommended:
+        - topology-management
+
+  # --------------------------------------------------------------------------
+  # Tier 3: Specialist and Support
+  # --------------------------------------------------------------------------
+
+  # CRAFT agents: domain specialists activated on-demand via keyword triggers.
+  # Each carries diagnostic skills for deep domain expertise.
+
+  - id: craft-network
+    role: CRAFT
+    context: fork
+    lifecycle: on-demand
+    tier: 3
+    domain: sdn
+    communication_loop: specialist
+    description: "Neutron SDN specialist, activated for network configuration"
+    skills:
+      - openstack-neutron
+      - openstack-networking-debug
+    triggers:
+      - "neutron"
+      - "network"
+      - "SDN"
+      - "floating IP"
+      - "security group"
+      - "OVS"
+      - "OVN"
+      - "DHCP"
+    skillRequirements:
+      required:
+        - openstack-neutron
+        - openstack-networking-debug
+      recommended:
+        - packet-analysis
+
+  - id: craft-security
+    role: CRAFT
+    context: fork
+    lifecycle: on-demand
+    tier: 3
+    domain: security
+    communication_loop: specialist
+    description: "Keystone RBAC and security hardening specialist"
+    skills:
+      - openstack-keystone
+      - openstack-security
+    triggers:
+      - "RBAC"
+      - "policy"
+      - "certificate"
+      - "hardening"
+      - "TLS"
+      - "CVE"
+      - "audit"
+    skillRequirements:
+      required:
+        - openstack-keystone
+        - openstack-security
+      recommended:
+        - vulnerability-assessment
+
+  - id: craft-storage
+    role: CRAFT
+    context: fork
+    lifecycle: on-demand
+    tier: 3
+    domain: storage
+    communication_loop: specialist
+    description: "Cinder and Swift storage architecture specialist"
+    skills:
+      - openstack-cinder
+      - openstack-swift
+      - openstack-backup
+    triggers:
+      - "volume"
+      - "object"
+      - "backup"
+      - "snapshot"
+      - "LVM"
+      - "NFS"
+    skillRequirements:
+      required:
+        - openstack-cinder
+        - openstack-swift
+        - openstack-backup
+      recommended:
+        - storage-architecture
+
+  - id: scout
+    role: SCOUT
+    context: fork
+    lifecycle: task
+    tier: 3
+    communication_loop: specialist
+    description: "Pre-deployment hardware survey and dependency assessment"
+    skills:
+      - openstack-kolla-ansible
+    skillRequirements:
+      required:
+        - openstack-kolla-ansible
+      recommended:
+        - hardware-inventory
+        - resource-estimation
+
+  - id: budget
+    role: BUDGET
+    context: main
+    lifecycle: persistent
+    tier: 3
+    communication_loop: budget
+    description: "Token and resource consumption tracking"
+    skills: []
+    skillRequirements:
+      required: []
+      recommended:
+        - budget-tracking
+        - consumption-analysis
+
+# ==========================================================================
+# Activation Profiles (CREW-04)
+# ==========================================================================
+# Three profiles provide graduated crew activation based on mission scope.
+# Each profile is a strict subset of the next larger profile.
+#
+# Scout:    3 role types, 3 positions  -- quick config change or hotfix
+# Patrol:   7 role types, 9 positions  -- standard service deployment
+# Squadron: all role types, all positions -- full deployment with docs
+
+activation_profiles:
+  scout:
+    description: "Quick OpenStack config change or single-service fix"
+    roles:
+      - FLIGHT
+      - EXEC
+      - VERIFY
+    positions:
+      - flight
+      - exec-keystone
+      - verify
+
+  patrol:
+    description: "Standard service deployment or upgrade"
+    roles:
+      - FLIGHT
+      - PLAN
+      - EXEC
+      - VERIFY
+      - CAPCOM
+      - BUDGET
+      - TOPO
+    positions:
+      - flight
+      - plan
+      - exec-keystone
+      - exec-compute
+      - exec-network-storage
+      - verify
+      - capcom
+      - budget
+      - topo
+
+  squadron:
+    description: "Full OpenStack deployment with documentation"
+    roles: all
+    positions: all
