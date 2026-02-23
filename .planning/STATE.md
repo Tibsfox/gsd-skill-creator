@@ -42,6 +42,7 @@ Progress: ██████████░░░░░░ 71% (v1.33)
 - Trend: Documentation chapters ~5 min each
 
 *Updated after each plan completion*
+| Phase 323-dashboard-integration P02 | 25 | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -58,6 +59,8 @@ Recent decisions affecting current work:
 - [Phase 319]: Phase F service decommissioning order follows exact reverse of Phase D deployment order (Heat->Horizon->Swift->Cinder->Neutron->Nova->Glance->Keystone)
 - [Phase 321]: Dual PROCEDURE sections for scheduled vs emergency Fernet key rotation in RB-KEYSTONE-005
 - [Phase 321]: Dual-index pattern for runbook discovery (task intent + failure symptom), 3-tier reference loading
+- [Phase 323-dashboard-integration]: Config staging does not block on validation failure -- intake first, assess second
+- [Phase 323-dashboard-integration]: DeploymentObserver uses sliding window sub-sequence detection, not service-boundary segmentation
 
 ### Pending Todos
 

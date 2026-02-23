@@ -331,7 +331,7 @@ Phases 312 through 325. Parallel tracks within waves:
 | 320. Operations Manual | 0/3 | Not started | - |
 | 321. Runbook Library & Reference Library | 4/4 | Complete   | 2026-02-23 |
 | 322. V&V Plan & Compliance | 0/TBD | Not started | - |
-| 323. Dashboard & Integration | 0/3 | Not started | - |
+| 323. Dashboard & Integration | 2/3 | In Progress|  |
 | 324. Integration Verification | 0/TBD | Not started | - |
 | 325. Lessons Learned & Mission Retrospective | 0/1 | Not started | - |
 
