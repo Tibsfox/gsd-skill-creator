@@ -1,0 +1,31 @@
+name: specialist
+description: "Specialist loop routing domain-specific requests to appropriate CRAFT agents via TOPO"
+priority: 3
+direction: bidirectional
+participants:
+  - role: TOPO
+    direction: route
+    message_types: [activation-trigger, domain-assignment]
+  - role: CRAFT
+    direction: respond
+    message_types: [domain-response, specialist-advisory]
+
+config:
+  activation_method: "keyword-trigger"
+  routing_agent: TOPO
+  craft_agents:
+    - name: craft-network
+      triggers: ["neutron", "network", "SDN", "floating IP", "security group", "OVS", "OVN", "DHCP"]
+    - name: craft-security
+      triggers: ["RBAC", "policy", "certificate", "hardening", "TLS", "CVE", "audit"]
+    - name: craft-storage
+      triggers: ["volume", "object", "backup", "snapshot", "LVM", "NFS"]
+    - name: craft-monitoring
+      triggers: ["monitoring", "alerting", "prometheus", "grafana", "metric", "dashboard", "alert rule"]
+    - name: craft-techwriter
+      triggers: ["document standard", "procedure format", "technical writing", "NASA format", "ConOps", "SEMP", "cross-reference", "SE phase"]
+
+routing:
+  pattern: "content-based-routing"
+  description: "TOPO inspects message content for trigger keywords, routes to matching CRAFT agent. If multiple triggers match, routes to most specific (longest match)."
+  fallback: "If no trigger matches, TOPO escalates to FLIGHT"

@@ -27,14 +27,14 @@ Requirements for the OpenStack Cloud Platform milestone. Each maps to roadmap ph
 
 ### Agent Crews (CREW)
 
-- [ ] **CREW-01**: Deployment crew configuration activates all 12 roles (FLIGHT, PLAN, EXEC×3, CRAFT-network, CRAFT-security, CRAFT-storage, VERIFY, INTEG, SCOUT, CAPCOM, BUDGET, TOPO) at Squadron profile
-- [ ] **CREW-02**: Operations crew configuration activates all 8 roles (FLIGHT, SURGEON, EXEC, CRAFT-monitoring, VERIFY, CAPCOM, LOG, GUARD) for day-2 operations
+- [x] **CREW-01**: Deployment crew configuration activates all 12 roles (FLIGHT, PLAN, EXEC×3, CRAFT-network, CRAFT-security, CRAFT-storage, VERIFY, INTEG, SCOUT, CAPCOM, BUDGET, TOPO) at Squadron profile
+- [x] **CREW-02**: Operations crew configuration activates all 8 roles (FLIGHT, SURGEON, EXEC, CRAFT-monitoring, VERIFY, CAPCOM, LOG, GUARD) for day-2 operations
 - [ ] **CREW-03**: Documentation crew configuration activates all 8 roles (FLIGHT, PLAN, EXEC×2, CRAFT-techwriter, VERIFY, ANALYST, RETRO, PAO) for parallel documentation production
-- [ ] **CREW-04**: Scout (3 roles), Patrol (7 roles), and Squadron (all roles) activation profiles function correctly with role subset hierarchy
-- [ ] **CREW-05**: Each EXEC agent receives the correct domain-specific skill loadout
-- [ ] **CREW-06**: CRAFT agents trigger on domain keywords (e.g., "neutron" → craft-network, "RBAC" → craft-security)
-- [ ] **CREW-07**: CAPCOM is the sole human interface — no other agent sends messages to human directly
-- [ ] **CREW-08**: Crew handoff works: deployment crew completes → operations crew activates with full system context
+- [x] **CREW-04**: Scout (3 roles), Patrol (7 roles), and Squadron (all roles) activation profiles function correctly with role subset hierarchy
+- [x] **CREW-05**: Each EXEC agent receives the correct domain-specific skill loadout
+- [x] **CREW-06**: CRAFT agents trigger on domain keywords (e.g., "neutron" → craft-network, "RBAC" → craft-security)
+- [x] **CREW-07**: CAPCOM is the sole human interface — no other agent sends messages to human directly
+- [x] **CREW-08**: Crew handoff works: deployment crew completes → operations crew activates with full system context
 
 ### Communication & Chipset (COMM)
 
@@ -138,14 +138,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SKILL-05 | Phase 315 | Complete |
 | SKILL-06 | Phase 313 | Complete |
 | SKILL-07 | Phase 313 | Complete |
-| CREW-01 | Phase 316 | Pending |
-| CREW-02 | Phase 316 | Pending |
+| CREW-01 | Phase 316 | Complete |
+| CREW-02 | Phase 316 | Complete |
 | CREW-03 | Phase 317 | Pending |
-| CREW-04 | Phase 316 | Pending |
-| CREW-05 | Phase 316 | Pending |
-| CREW-06 | Phase 316 | Pending |
-| CREW-07 | Phase 316 | Pending |
-| CREW-08 | Phase 316 | Pending |
+| CREW-04 | Phase 316 | Complete |
+| CREW-05 | Phase 316 | Complete |
+| CREW-06 | Phase 316 | Complete |
+| CREW-07 | Phase 316 | Complete |
+| CREW-08 | Phase 316 | Complete |
 | COMM-01 | Phase 317 | Pending |
 | COMM-02 | Phase 317 | Pending |
 | COMM-03 | Phase 317 | Pending |

@@ -1,0 +1,22 @@
+name: user
+description: "User loop providing the sole human interface through CAPCOM for decisions and notifications"
+priority: 2
+direction: bidirectional
+participants:
+  - role: CAPCOM
+    direction: send-and-receive
+    message_types: [decision-request, notification, user-response]
+  - role: "human operator"
+    direction: send-and-receive
+    message_types: [decision, acknowledgment, override]
+
+config:
+  sole_interface: true
+  sole_agent: CAPCOM
+  isolation_rule: "No agent other than CAPCOM may send messages to the human operator"
+  decision_timeout_seconds: 300
+  notification_batching: true
+
+routing:
+  pattern: "point-to-point"
+  description: "Exclusive bidirectional channel between CAPCOM and human. All other agents must route human communication through CAPCOM."

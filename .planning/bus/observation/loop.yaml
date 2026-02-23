@@ -1,0 +1,21 @@
+name: observation
+description: "Observation loop feeding pattern data from all agents into the skill-creator pipeline"
+priority: 6
+direction: unidirectional
+participants:
+  - role: "all agents"
+    direction: send
+    message_types: [pattern-observation, session-event]
+  - role: "SKILL (skill-creator pipeline)"
+    direction: receive
+    message_types: [pattern-observation, session-event]
+
+config:
+  collection_mode: "passive"
+  buffering: true
+  buffer_flush_interval_seconds: 60
+  non_blocking: true
+
+routing:
+  pattern: "fan-in"
+  description: "All agents emit observation events. Events are buffered and batch-delivered to skill-creator pipeline. Never blocks agent execution."
