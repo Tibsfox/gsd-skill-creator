@@ -1,0 +1,75 @@
+name: bus-arbitration
+version: 1.0.0
+description: "Priority-based message arbitration for the mission communication bus. When multiple messages arrive simultaneously, higher-priority messages are processed first."
+
+# Priority scheme -- lower number = higher priority
+# Matches LoopPriority type in src/types/openstack.ts (0-7)
+priority_levels:
+  0:
+    name: HALT
+    description: "Emergency stop -- immediate processing, preempts everything"
+    behavior: "Interrupt current processing, deliver to all agents immediately"
+    source: "FLIGHT only"
+  1:
+    name: COMMAND
+    description: "Mission-level directives from FLIGHT"
+    behavior: "Process after any active HALT, before all other messages"
+    loops: [command]
+  2:
+    name: CRITICAL_OPERATIONAL
+    description: "Core operational messages that affect mission progress"
+    behavior: "Round-robin among same-priority loops"
+    loops: [execution, user, health, cloud-ops]
+  3:
+    name: COORDINATION
+    description: "Coordination and resource management messages"
+    behavior: "Process after all priority 2 messages"
+    loops: [specialist, budget]
+  4:
+    name: MAINTENANCE
+    description: "System maintenance and documentation upkeep"
+    behavior: "Process when no higher-priority messages pending"
+    loops: [doc-sync]
+  5:
+    name: ROUTINE
+    description: "Reserved for future routine loops"
+    behavior: "Background processing"
+    loops: []
+  6:
+    name: BACKGROUND
+    description: "Non-critical background tasks"
+    behavior: "Process only when bus is idle"
+    loops: [observation]
+  7:
+    name: HEARTBEAT
+    description: "Keep-alive and status monitoring"
+    behavior: "Lowest priority, dropped under load"
+    loops: []
+
+# Arbitration rules
+rules:
+  - name: "halt-preemption"
+    description: "Priority 0 (HALT) preempts all in-progress message processing"
+    condition: "message.priority == 0"
+    action: "interrupt-and-deliver"
+
+  - name: "same-priority-ordering"
+    description: "Messages at the same priority level are processed round-robin by loop"
+    condition: "message.priority == current.priority"
+    action: "round-robin"
+
+  - name: "starvation-prevention"
+    description: "No loop may be starved for more than 5 cycles"
+    condition: "loop.cycles_without_processing > 5"
+    action: "promote-priority-by-1"
+
+  - name: "budget-block-enforcement"
+    description: "Budget block messages (priority 3) are promoted to priority 1 when block threshold reached"
+    condition: "message.type == 'budget-block'"
+    action: "promote-to-priority-1"
+
+# Bus capacity
+capacity:
+  max_in_flight_messages: 100
+  max_message_size_bytes: 65536
+  queue_overflow_action: "drop-lowest-priority"
