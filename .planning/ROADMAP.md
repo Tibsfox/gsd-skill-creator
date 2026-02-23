@@ -213,18 +213,26 @@ Plans:
   1. The guide has 7 chapters mapping to NASA SE phases (Pre-Phase A through Phase F) with narrative, procedures, and cross-references
   2. Each chapter contains technically accurate content that describes the actual deployment configuration and procedures
   3. NASA SE cross-references point to correct SP-6105 and NPR 7123.1 sections
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 319-01-PLAN.md -- Guide overview + Pre-Phase A concept studies + Phase A technology development + Phase B preliminary design
+- [ ] 319-02-PLAN.md -- Phase C final design and fabrication + Phase D integration and test
+- [ ] 319-03-PLAN.md -- Phase E operations and sustainment + Phase F closeout
 **Model**: Opus
 
 ### Phase 320: Operations Manual
 **Goal**: Every OpenStack service has documented, verified procedures that an operator can follow for day-2 operations
-**Depends on**: Phase 313, Phase 314
+**Depends on**: Phase 313, Phase 315
 **Requirements**: DOCS-03, DOCS-04, DOCS-09
 **Success Criteria** (what must be TRUE):
   1. Operations manual contains per-service procedures for all 8 OpenStack services following NASA procedure format
   2. All operations manual procedures are structured for verification against the running system
   3. OpenStack documentation references point to correct and current pages
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 320-01-PLAN.md -- Keystone, Nova, and Glance operations procedures (identity + compute + images)
+- [ ] 320-02-PLAN.md -- Neutron, Cinder, and Swift operations procedures (networking + storage)
+- [ ] 320-03-PLAN.md -- Heat and Horizon operations procedures (orchestration + dashboard)
 **Model**: Sonnet
 
 ### Phase 321: Runbook Library & Reference Library
@@ -308,8 +316,8 @@ Phases 312 through 325. Parallel tracks within waves:
 | 316. Deployment & Operations Crews | 2/2 | Complete   | 2026-02-23 |
 | 317. Documentation Crew & Communication Framework | 2/2 | Complete   | 2026-02-23 |
 | 318. Chipset Definition | 0/2 | Not started | - |
-| 319. Systems Administrator's Guide | 0/TBD | Not started | - |
-| 320. Operations Manual | 0/TBD | Not started | - |
+| 319. Systems Administrator's Guide | 0/3 | Not started | - |
+| 320. Operations Manual | 0/3 | Not started | - |
 | 321. Runbook Library & Reference Library | 0/TBD | Not started | - |
 | 322. V&V Plan & Compliance | 0/TBD | Not started | - |
 | 323. Dashboard & Integration | 0/TBD | Not started | - |
