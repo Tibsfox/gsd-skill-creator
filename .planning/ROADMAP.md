@@ -298,7 +298,9 @@ Plans:
   1. Lessons learned document captures mission retrospective in NASA LLIS format
   2. Document identifies at least 3 actionable improvements with specific recommendations
   3. Retrospective covers all mission phases (foundation, skills, crews, documentation, verification) with honest assessment
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 325-01-PLAN.md -- NASA LLIS-format lessons learned document with mission retrospective, actionable improvements, and GSD ecosystem feedback
 **Model**: Opus
 
 ## Progress
@@ -327,7 +329,7 @@ Phases 312 through 325. Parallel tracks within waves:
 | 322. V&V Plan & Compliance | 0/TBD | Not started | - |
 | 323. Dashboard & Integration | 0/TBD | Not started | - |
 | 324. Integration Verification | 0/TBD | Not started | - |
-| 325. Lessons Learned & Mission Retrospective | 0/TBD | Not started | - |
+| 325. Lessons Learned & Mission Retrospective | 0/1 | Not started | - |
 
 ---
 *35 milestones shipped. 311 phases complete. 819 plans completed.*
