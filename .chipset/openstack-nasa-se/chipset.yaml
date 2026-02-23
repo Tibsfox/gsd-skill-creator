@@ -1,0 +1,1069 @@
+# =============================================================================
+# OpenStack NASA SE Edition -- ASIC Chipset Configuration
+# =============================================================================
+#
+# ASIC Pattern: Application-Specific Integrated Circuit
+# A single declarative YAML file that fully specifies the entire OpenStack
+# operational environment -- which skills load, which agents activate, how
+# they communicate, and how resources are budgeted. Every downstream phase
+# (319+) reads this chipset to understand the operational environment.
+#
+# This chipset integrates:
+#   - 19 skills (8 core OpenStack + 1 deployment engine + 6 operations + 3 documentation + 1 methodology)
+#   - 31 agents across 3 crews (14 deployment + 8 operations + 9 documentation)
+#   - 3 team topologies (map-reduce, router, pipeline)
+#   - 9 communication loops with priority-based arbitration
+#   - 3 activation profiles (scout/patrol/squadron)
+#   - Routing rules with disambiguation for overlapping domains
+#   - Token budget allocations within 30% ceiling
+#   - Pre-deploy and post-deploy evaluation gates
+#
+# Created: 2026-02-22 as part of GSD OpenStack Cloud Platform (NASA SE Edition)
+# =============================================================================
+
+schema_version: "1.0"
+
+# -----------------------------------------------------------------------------
+# Chipset Metadata
+# -----------------------------------------------------------------------------
+chipset:
+  name: openstack-nasa-se
+  description: "Complete OpenStack deployment and operations platform with NASA SE methodology -- ASIC chipset integrating 19 skills, 3 crews, and 9 communication loops"
+  version: "1.0.0"
+  project: "gsd-openstack-cloud-platform"
+  created: "2026-02-22"
+  updated: "2026-02-22"
+
+# =============================================================================
+# Skills Registry (18 skills)
+# =============================================================================
+#
+# Each skill entry defines:
+#   name          - Unique identifier matching the skill directory name
+#   source        - Path to the SKILL.md file on disk
+#   token_budget  - Percentage of context window allocated to this skill
+#   priority      - Loading priority (1-100, higher = loaded first in 6-stage pipeline)
+#   team          - Primary team assignment
+#   agents        - Agents that compose (load) this skill
+#   phase_origin  - Phase that created this skill
+#   enabled       - Whether the skill is active (default true)
+#   dependencies  - Other skills this one depends on
+#
+# Budget rationale: 30% ceiling per GSD conventions. Deployment gets the
+# largest share because deploying OpenStack is the primary mission.
+# kolla-ansible has the highest priority (95) because it is the deployment
+# engine used by all EXEC agents.
+# =============================================================================
+
+skills:
+  # ---------------------------------------------------------------------------
+  # Deployment Engine (1 skill) -- Priority 95
+  # kolla-ansible is the deployment backbone. Every EXEC agent needs it.
+  # ---------------------------------------------------------------------------
+  - name: openstack-kolla-ansible
+    source: "skills/openstack/kolla-ansible/SKILL.md"
+    token_budget: "3%"
+    priority: 95
+    team: deployment
+    agents:
+      - exec-keystone
+      - exec-compute
+      - exec-network-storage
+      - scout
+    phase_origin: "313"
+    enabled: true
+    dependencies: []
+
+  # ---------------------------------------------------------------------------
+  # Core OpenStack Skills (8 skills) -- Priority 80-90
+  # These are the individual OpenStack service skills providing
+  # deploy/configure/operate/troubleshoot guidance for each service.
+  # ---------------------------------------------------------------------------
+  - name: openstack-keystone
+    source: "skills/openstack/keystone/SKILL.md"
+    token_budget: "2.5%"
+    priority: 90
+    team: deployment
+    agents:
+      - exec-keystone
+      - craft-security
+    phase_origin: "313"
+    enabled: true
+    dependencies: []
+
+  - name: openstack-nova
+    source: "skills/openstack/nova/SKILL.md"
+    token_budget: "2.5%"
+    priority: 85
+    team: deployment
+    agents:
+      - exec-compute
+    phase_origin: "313"
+    enabled: true
+    dependencies:
+      - openstack-keystone
+      - openstack-glance
+
+  - name: openstack-neutron
+    source: "skills/openstack/neutron/SKILL.md"
+    token_budget: "2.5%"
+    priority: 85
+    team: deployment
+    agents:
+      - exec-network-storage
+      - craft-network
+    phase_origin: "313"
+    enabled: true
+    dependencies:
+      - openstack-keystone
+
+  - name: openstack-cinder
+    source: "skills/openstack/cinder/SKILL.md"
+    token_budget: "2%"
+    priority: 80
+    team: deployment
+    agents:
+      - exec-network-storage
+      - craft-storage
+    phase_origin: "313"
+    enabled: true
+    dependencies:
+      - openstack-keystone
+
+  - name: openstack-glance
+    source: "skills/openstack/glance/SKILL.md"
+    token_budget: "1.5%"
+    priority: 80
+    team: deployment
+    agents:
+      - exec-compute
+    phase_origin: "313"
+    enabled: true
+    dependencies:
+      - openstack-keystone
+
+  - name: openstack-swift
+    source: "skills/openstack/swift/SKILL.md"
+    token_budget: "1.5%"
+    priority: 60
+    team: deployment
+    agents:
+      - craft-storage
+    phase_origin: "313"
+    enabled: true
+    dependencies:
+      - openstack-keystone
+
+  - name: openstack-heat
+    source: "skills/openstack/heat/SKILL.md"
+    token_budget: "1.5%"
+    priority: 60
+    team: deployment
+    agents:
+      - exec-compute
+    phase_origin: "313"
+    enabled: true
+    dependencies:
+      - openstack-keystone
+      - openstack-nova
+      - openstack-neutron
+
+  - name: openstack-horizon
+    source: "skills/openstack/horizon/SKILL.md"
+    token_budget: "1%"
+    priority: 50
+    team: deployment
+    agents:
+      - exec-compute
+    phase_origin: "313"
+    enabled: true
+    dependencies:
+      - openstack-keystone
+
+  # ---------------------------------------------------------------------------
+  # Operations Skills (6 skills) -- Priority 65-75
+  # Day-2 operations coverage: monitoring, backup, security hardening,
+  # network debugging, capacity planning, and kolla-ansible operations.
+  # ---------------------------------------------------------------------------
+  - name: openstack-monitoring
+    source: "skills/openstack/monitoring/SKILL.md"
+    token_budget: "1.5%"
+    priority: 75
+    team: operations
+    agents:
+      - surgeon
+      - craft-monitoring
+    phase_origin: "314"
+    enabled: true
+    dependencies: []
+
+  - name: openstack-backup
+    source: "skills/openstack/backup/SKILL.md"
+    token_budget: "1%"
+    priority: 70
+    team: operations
+    agents:
+      - craft-storage
+    phase_origin: "314"
+    enabled: true
+    dependencies: []
+
+  - name: openstack-security
+    source: "skills/openstack/security/SKILL.md"
+    token_budget: "1.5%"
+    priority: 75
+    team: operations
+    agents:
+      - craft-security
+      - guard
+    phase_origin: "314"
+    enabled: true
+    dependencies:
+      - openstack-keystone
+
+  - name: openstack-networking-debug
+    source: "skills/openstack/networking-debug/SKILL.md"
+    token_budget: "1%"
+    priority: 70
+    team: operations
+    agents:
+      - craft-network
+    phase_origin: "314"
+    enabled: true
+    dependencies:
+      - openstack-neutron
+
+  - name: openstack-capacity
+    source: "skills/openstack/capacity/SKILL.md"
+    token_budget: "1%"
+    priority: 65
+    team: operations
+    agents:
+      - surgeon
+    phase_origin: "314"
+    enabled: true
+    dependencies:
+      - openstack-monitoring
+
+  - name: openstack-kolla-ansible-ops
+    source: "skills/openstack/kolla-ansible-ops/SKILL.md"
+    token_budget: "1.5%"
+    priority: 70
+    team: operations
+    agents:
+      - ops-exec
+    phase_origin: "314"
+    enabled: true
+    dependencies:
+      - openstack-kolla-ansible
+
+  # ---------------------------------------------------------------------------
+  # Documentation & Methodology Skills (3+1 skills) -- Priority 60-85
+  # NASA SE methodology is the highest-priority documentation skill because
+  # it provides the structural framework that all documentation follows.
+  # These skills are shared across teams (nasa-se-methodology is used by
+  # deployment, operations, and documentation crews).
+  # ---------------------------------------------------------------------------
+  - name: nasa-se-methodology
+    source: "skills/methodology/nasa-se/SKILL.md"
+    token_budget: "2%"
+    priority: 85
+    team: documentation
+    agents:
+      - flight
+      - plan
+      - craft-techwriter
+      - retro
+    phase_origin: "312"
+    enabled: true
+    dependencies: []
+
+  - name: ops-manual-writer
+    source: "skills/methodology/ops-manual-writer/SKILL.md"
+    token_budget: "1.5%"
+    priority: 65
+    team: documentation
+    agents:
+      - exec-procedures
+      - craft-techwriter
+      - pao
+    phase_origin: "315"
+    enabled: true
+    dependencies:
+      - nasa-se-methodology
+
+  - name: runbook-generator
+    source: "skills/methodology/runbook-generator/SKILL.md"
+    token_budget: "1.5%"
+    priority: 65
+    team: documentation
+    agents:
+      - exec-runbooks
+      - craft-techwriter
+    phase_origin: "315"
+    enabled: true
+    dependencies:
+      - nasa-se-methodology
+
+  - name: doc-verifier
+    source: "skills/methodology/doc-verifier/SKILL.md"
+    token_budget: "1.5%"
+    priority: 70
+    team: documentation
+    agents:
+      - verify
+      - ops-verify
+      - doc-verify
+    phase_origin: "315"
+    enabled: true
+    dependencies: []
+
+# =============================================================================
+# Agent Definitions (31 agents across 3 crews)
+# =============================================================================
+#
+# Agent model assignments follow the v1.33 model strategy:
+#   opus   - Methodology, orchestration, and high-judgment roles (flight directors,
+#            craft-techwriter, retro analyst)
+#   sonnet - Core execution, verification, and specialist roles
+#   haiku  - Lightweight tracking and logging roles (budget, log)
+#
+# Every agent has at least one skill assignment. Agents that serve coordination
+# or infrastructure roles receive the team's primary methodology or operational
+# skill to ensure they have domain context for their decisions.
+# =============================================================================
+
+agents:
+  # ---------------------------------------------------------------------------
+  # Deployment Crew (14 agents)
+  # The deployment crew uses a map-reduce topology: FLIGHT orchestrates,
+  # PLAN decomposes, EXEC agents deploy services in parallel (map),
+  # VERIFY and INTEG validate the integrated result (reduce).
+  # ---------------------------------------------------------------------------
+  - name: flight
+    description: "Mission director -- orchestrates full deployment sequence"
+    skills:
+      - nasa-se-methodology
+    team: deployment
+    model: opus
+
+  - name: plan
+    description: "Phase planner -- decomposes deployment into executable phases"
+    skills:
+      - nasa-se-methodology
+    team: deployment
+    model: sonnet
+
+  - name: exec-keystone
+    description: "Identity service deployer -- Keystone + auth infrastructure"
+    skills:
+      - openstack-keystone
+      - openstack-kolla-ansible
+    team: deployment
+    model: sonnet
+
+  - name: exec-compute
+    description: "Compute service deployer -- Nova + Glance"
+    skills:
+      - openstack-nova
+      - openstack-glance
+      - openstack-kolla-ansible
+    team: deployment
+    model: sonnet
+
+  - name: exec-network-storage
+    description: "Network and storage deployer -- Neutron + Cinder"
+    skills:
+      - openstack-neutron
+      - openstack-cinder
+      - openstack-kolla-ansible
+    team: deployment
+    model: sonnet
+
+  - name: craft-network
+    description: "SDN specialist -- Neutron networking and debug"
+    skills:
+      - openstack-neutron
+      - openstack-networking-debug
+    team: deployment
+    model: sonnet
+
+  - name: craft-security
+    description: "Security specialist -- Keystone RBAC + hardening"
+    skills:
+      - openstack-keystone
+      - openstack-security
+    team: deployment
+    model: sonnet
+
+  - name: craft-storage
+    description: "Storage specialist -- Cinder + Swift + backup"
+    skills:
+      - openstack-cinder
+      - openstack-swift
+      - openstack-backup
+    team: deployment
+    model: sonnet
+
+  - name: verify
+    description: "Independent verifier -- service health checks and integration tests"
+    skills:
+      - doc-verifier
+    team: deployment
+    model: sonnet
+
+  - name: integ
+    description: "Integration monitor -- cross-service interface validation"
+    skills:
+      - openstack-kolla-ansible
+    team: deployment
+    model: sonnet
+
+  - name: scout
+    description: "Pre-deployment surveyor -- hardware inventory and dependency check"
+    skills:
+      - openstack-kolla-ansible
+    team: deployment
+    model: sonnet
+
+  - name: capcom
+    description: "Sole human interface -- deployment decisions and notifications"
+    skills:
+      - nasa-se-methodology
+    team: deployment
+    model: sonnet
+
+  - name: budget
+    description: "Token and resource consumption tracker"
+    skills:
+      - openstack-capacity
+    team: deployment
+    model: haiku
+
+  - name: topo
+    description: "Team topology manager -- adjusts crew as deployment progresses"
+    skills:
+      - nasa-se-methodology
+    team: deployment
+    model: sonnet
+
+  # ---------------------------------------------------------------------------
+  # Operations Crew (8 agents)
+  # The operations crew uses a router topology: OPS-FLIGHT routes incoming
+  # operations requests to the appropriate specialist based on domain.
+  # SURGEON continuously monitors cloud health and advises OPS-FLIGHT.
+  # ---------------------------------------------------------------------------
+  - name: ops-flight
+    description: "Day-2 operations director"
+    skills:
+      - nasa-se-methodology
+    team: operations
+    model: opus
+
+  - name: surgeon
+    description: "Cloud health monitor -- API polling, drift detection, advisories"
+    skills:
+      - openstack-monitoring
+    team: operations
+    model: sonnet
+
+  - name: ops-exec
+    description: "Operations executor -- maintenance procedures and updates"
+    skills:
+      - openstack-kolla-ansible
+      - openstack-kolla-ansible-ops
+    team: operations
+    model: sonnet
+
+  - name: craft-monitoring
+    description: "Prometheus/Grafana monitoring specialist"
+    skills:
+      - openstack-monitoring
+    team: operations
+    model: sonnet
+
+  - name: ops-verify
+    description: "Operations verifier -- validates against runbook procedures"
+    skills:
+      - doc-verifier
+    team: operations
+    model: sonnet
+
+  - name: ops-capcom
+    description: "Sole human interface -- operational decisions"
+    skills:
+      - nasa-se-methodology
+    team: operations
+    model: sonnet
+
+  - name: log
+    description: "Audit trail -- records all operational changes"
+    skills:
+      - openstack-monitoring
+    team: operations
+    model: haiku
+
+  - name: guard
+    description: "Security monitor -- vulnerability scanning and intrusion detection"
+    skills:
+      - openstack-security
+    team: operations
+    model: sonnet
+
+  # ---------------------------------------------------------------------------
+  # Documentation Crew (9 agents)
+  # The documentation crew uses a pipeline topology: DOC-FLIGHT coordinates,
+  # DOC-PLAN maps phases to deliverables, EXEC agents produce content,
+  # CRAFT-TECHWRITER applies NASA standards, DOC-VERIFY validates accuracy.
+  # Documentation runs in PARALLEL with deployment and operations crews.
+  # ---------------------------------------------------------------------------
+  - name: doc-flight
+    description: "Documentation production coordinator"
+    skills:
+      - nasa-se-methodology
+    team: documentation
+    model: opus
+
+  - name: doc-plan
+    description: "Documentation planner -- maps SE phases to deliverables"
+    skills:
+      - nasa-se-methodology
+    team: documentation
+    model: sonnet
+
+  - name: exec-procedures
+    description: "Procedure writer -- operations manual content"
+    skills:
+      - ops-manual-writer
+      - openstack-kolla-ansible
+    team: documentation
+    model: sonnet
+
+  - name: exec-runbooks
+    description: "Runbook writer -- incident response procedures"
+    skills:
+      - runbook-generator
+      - openstack-kolla-ansible
+    team: documentation
+    model: sonnet
+
+  - name: craft-techwriter
+    description: "NASA document standards specialist"
+    skills:
+      - nasa-se-methodology
+      - ops-manual-writer
+      - runbook-generator
+    team: documentation
+    model: opus
+
+  - name: doc-verify
+    description: "Documentation verifier -- cross-references against running system"
+    skills:
+      - doc-verifier
+    team: documentation
+    model: sonnet
+
+  - name: analyst
+    description: "Pattern analyst -- studies deployment for curriculum content"
+    skills:
+      - nasa-se-methodology
+    team: documentation
+    model: sonnet
+
+  - name: retro
+    description: "Retrospective analyst -- NASA LLIS-format lessons learned"
+    skills:
+      - nasa-se-methodology
+    team: documentation
+    model: opus
+
+  - name: pao
+    description: "Public affairs -- mission narrative and changelog"
+    skills:
+      - ops-manual-writer
+    team: documentation
+    model: sonnet
+
+# =============================================================================
+# Teams (3 crews)
+# =============================================================================
+#
+# Crew coordination pattern:
+#   1. Deployment crew deploys OpenStack services (map-reduce: parallel deploy, integrated verify)
+#   2. Operations crew handles day-2 operations (router: domain-based request routing)
+#   3. Documentation crew produces NASA SE-structured docs (pipeline: sequential production)
+#
+# Deployment -> handoff -> Operations (via configs/crews/crew-handoff.yaml)
+# Documentation runs in parallel with both deployment and operations.
+# =============================================================================
+
+teams:
+  - name: deployment
+    description: "OpenStack deployment crew -- full Squadron profile for cloud deployment"
+    topology: map-reduce
+    lead_agent: flight
+    members:
+      - flight
+      - plan
+      - exec-keystone
+      - exec-compute
+      - exec-network-storage
+      - craft-network
+      - craft-security
+      - craft-storage
+      - verify
+      - integ
+      - scout
+      - capcom
+      - budget
+      - topo
+    resource_locks:
+      - "configs/kolla-ansible/**"
+      - ".planning/bus/execution/**"
+    sync_points:
+      - event: deployment_verified
+        action: "trigger crew-handoff to operations"
+    message_bus: ".planning/bus/"
+
+  - name: operations
+    description: "OpenStack operations crew -- day-2 operations and sustainment"
+    topology: router
+    lead_agent: ops-flight
+    members:
+      - ops-flight
+      - surgeon
+      - ops-exec
+      - craft-monitoring
+      - ops-verify
+      - ops-capcom
+      - log
+      - guard
+    resource_locks:
+      - "configs/kolla-ansible/**"
+    sync_points:
+      - event: incident_detected
+        action: "escalate to squadron profile"
+    message_bus: ".planning/bus/"
+
+  - name: documentation
+    description: "Documentation production crew -- continuous NASA SE-structured documentation"
+    topology: pipeline
+    lead_agent: doc-flight
+    members:
+      - doc-flight
+      - doc-plan
+      - exec-procedures
+      - exec-runbooks
+      - craft-techwriter
+      - doc-verify
+      - analyst
+      - retro
+      - pao
+    resource_locks:
+      - "docs/**"
+    sync_points:
+      - event: phase_complete
+        action: "trigger doc review cycle"
+    message_bus: ".planning/bus/"
+
+# =============================================================================
+# Routing Rules
+# =============================================================================
+#
+# Intent-based routing maps user requests to the correct team and agents.
+# Patterns are regex-based. When multiple rules match, the highest-priority
+# rule wins. Disambiguation rules resolve overlapping patterns.
+#
+# Default team is deployment because the primary mission is deploying OpenStack.
+# =============================================================================
+
+routing:
+  rules:
+    - intent_pattern: "deploy.*openstack|install.*cloud|kolla-ansible deploy"
+      team: deployment
+      agents:
+        - flight
+        - plan
+        - exec-keystone
+        - exec-compute
+        - exec-network-storage
+      skills:
+        - openstack-kolla-ansible
+      priority: 90
+      description: "Full OpenStack deployment or installation"
+
+    - intent_pattern: "keystone|identity|auth|token|RBAC|catalog"
+      team: deployment
+      agents:
+        - exec-keystone
+        - craft-security
+      skills:
+        - openstack-keystone
+      priority: 80
+      description: "Identity service, authentication, and RBAC"
+
+    - intent_pattern: "nova|compute|instance|flavor|hypervisor"
+      team: deployment
+      agents:
+        - exec-compute
+      skills:
+        - openstack-nova
+      priority: 80
+      description: "Compute service, VM instances, and hypervisors"
+
+    - intent_pattern: "neutron|network|subnet|router|floating.?IP|security.?group|SDN|OVS|OVN"
+      team: deployment
+      agents:
+        - exec-network-storage
+        - craft-network
+      skills:
+        - openstack-neutron
+      priority: 80
+      description: "Networking, SDN, and security groups"
+
+    - intent_pattern: "cinder|volume|block.?storage|snapshot"
+      team: deployment
+      agents:
+        - exec-network-storage
+        - craft-storage
+      skills:
+        - openstack-cinder
+      priority: 75
+      description: "Block storage, volumes, and snapshots"
+
+    - intent_pattern: "monitor|alert|prometheus|grafana|metric|health"
+      team: operations
+      agents:
+        - surgeon
+        - craft-monitoring
+      skills:
+        - openstack-monitoring
+      priority: 75
+      description: "Monitoring, alerting, and health checks"
+
+    - intent_pattern: "backup|restore|disaster.?recovery"
+      team: operations
+      agents:
+        - ops-exec
+        - craft-storage
+      skills:
+        - openstack-backup
+      priority: 70
+      description: "Backup, restore, and disaster recovery"
+
+    - intent_pattern: "security|harden|certificate|TLS|CVE|vulnerability"
+      team: operations
+      agents:
+        - guard
+        - craft-security
+      skills:
+        - openstack-security
+      priority: 80
+      description: "Security hardening, certificates, and vulnerability management"
+
+    - intent_pattern: "document|procedure|manual|runbook|write.*doc"
+      team: documentation
+      agents:
+        - doc-flight
+        - exec-procedures
+        - exec-runbooks
+      skills:
+        - ops-manual-writer
+        - runbook-generator
+      priority: 60
+      description: "Documentation production, procedures, and runbooks"
+
+    - intent_pattern: "verify.*doc|drift|doc.*accuracy|cross.?reference"
+      team: documentation
+      agents:
+        - doc-verify
+      skills:
+        - doc-verifier
+      priority: 65
+      description: "Documentation verification and drift detection"
+
+    - intent_pattern: "NASA|SE.?phase|SP.?6105|NPR.?7123|methodology"
+      team: documentation
+      agents:
+        - craft-techwriter
+        - retro
+      skills:
+        - nasa-se-methodology
+      priority: 70
+      description: "NASA SE methodology, standards cross-references"
+
+  default_team: deployment
+
+  disambiguation:
+    - patterns:
+        - "security"
+        - "RBAC"
+      strategy: context
+      winner: "context-dependent"
+      rationale: "Security concerns route differently based on active crew -- deployment phase routes to craft-security in deployment team; operations phase routes to guard in operations team"
+
+    - patterns:
+        - "neutron"
+        - "network debug"
+      strategy: specificity
+      winner: craft-network
+      rationale: "More specific 'network debug' routes to networking-debug specialist over general neutron handler"
+
+    - patterns:
+        - "document"
+        - "verify"
+      strategy: priority
+      winner: doc-verify
+      rationale: "Verification takes priority over production when both patterns match"
+
+# =============================================================================
+# Token Budget Allocations
+# =============================================================================
+#
+# Budget ceiling is 30% of context window per GSD conventions.
+# 5% headroom reserved within the ceiling for execution overhead.
+# Deployment gets the largest share (12%) because deploying OpenStack
+# is the primary mission. Operations gets 8% for day-2 coverage.
+# Documentation gets 7% for NASA SE-structured doc production.
+# Shared budget (3%) covers nasa-se-methodology which is used across all teams.
+#
+# Per-skill budgets are maximum allocations when that skill is loaded.
+# Not all skills load simultaneously -- activation profiles control which
+# subset is active. Team budgets (total 30%) are the actual allocation
+# constraint enforced by the 6-stage pipeline.
+#
+# Loading order follows priority descending -- the 6-stage pipeline
+# loads the highest-priority skills first to ensure the deployment
+# engine and critical services are always available.
+# =============================================================================
+
+budget:
+  ceiling_percent: 30
+  headroom_percent: 5
+
+  skill_budgets:
+    openstack-kolla-ansible: "3%"
+    openstack-keystone: "2.5%"
+    openstack-nova: "2.5%"
+    openstack-neutron: "2.5%"
+    openstack-cinder: "2%"
+    openstack-glance: "1.5%"
+    openstack-swift: "1.5%"
+    openstack-heat: "1.5%"
+    openstack-horizon: "1%"
+    openstack-monitoring: "1.5%"
+    openstack-backup: "1%"
+    openstack-security: "1.5%"
+    openstack-networking-debug: "1%"
+    openstack-capacity: "1%"
+    openstack-kolla-ansible-ops: "1.5%"
+    nasa-se-methodology: "2%"
+    ops-manual-writer: "1.5%"
+    runbook-generator: "1.5%"
+    doc-verifier: "1.5%"
+
+  team_budgets:
+    deployment: "12%"
+    operations: "8%"
+    documentation: "7%"
+    shared: "3%"
+
+  loading_order:
+    - openstack-kolla-ansible
+    - openstack-keystone
+    - openstack-nova
+    - openstack-neutron
+    - nasa-se-methodology
+    - openstack-cinder
+    - openstack-glance
+    - openstack-monitoring
+    - openstack-security
+    - openstack-kolla-ansible-ops
+    - doc-verifier
+    - openstack-backup
+    - openstack-networking-debug
+    - openstack-capacity
+    - ops-manual-writer
+    - runbook-generator
+    - openstack-swift
+    - openstack-heat
+    - openstack-horizon
+
+  total_allocated: "30%"
+
+# =============================================================================
+# Activation Profiles
+# =============================================================================
+#
+# Three profiles control how many agents activate based on mission scope:
+#
+#   Scout (9 agents)    - Quick config change or single-service fix
+#   Patrol (23 agents)  - Standard deployment or maintenance
+#   Squadron (31 agents) - Full deployment with all documentation
+#
+# Each profile specifies the exact positions activated per crew.
+# Profile selection is based on mission scope assessment by FLIGHT.
+# =============================================================================
+
+activation_profiles:
+  scout:
+    description: "Quick config change or single-service fix -- minimal crew"
+    deployment_positions:
+      - flight
+      - exec-keystone
+      - verify
+    operations_positions:
+      - ops-flight
+      - ops-exec
+      - ops-verify
+    documentation_positions:
+      - doc-flight
+      - exec-procedures
+      - doc-verify
+    total_agents: 9
+    estimated_budget: "10%"
+
+  patrol:
+    description: "Standard deployment or maintenance -- core crew with coordination"
+    deployment_positions:
+      - flight
+      - plan
+      - exec-keystone
+      - exec-compute
+      - exec-network-storage
+      - verify
+      - capcom
+      - budget
+      - topo
+    operations_positions:
+      - ops-flight
+      - surgeon
+      - ops-exec
+      - ops-verify
+      - ops-capcom
+      - log
+      - guard
+    documentation_positions:
+      - doc-flight
+      - doc-plan
+      - exec-procedures
+      - exec-runbooks
+      - craft-techwriter
+      - doc-verify
+      - pao
+    total_agents: 23
+    estimated_budget: "20%"
+
+  squadron:
+    description: "Full deployment with documentation -- all agents active"
+    deployment_positions: all
+    operations_positions: all
+    documentation_positions: all
+    total_agents: 31
+    estimated_budget: "30%"
+
+# =============================================================================
+# Communication Framework
+# =============================================================================
+#
+# 9 communication loops handle all inter-agent messaging through the
+# filesystem-based message bus. Priority determines processing order
+# when multiple loops have pending messages.
+#
+# Loop hierarchy:
+#   Priority 1: command    -- FLIGHT directives (highest priority)
+#   Priority 2: execution  -- PLAN/EXEC/VERIFY task flow
+#   Priority 2: user       -- CAPCOM human interface
+#   Priority 2: health     -- SURGEON cloud status
+#   Priority 2: cloud-ops  -- OpenStack API polling
+#   Priority 3: specialist -- TOPO/CRAFT domain routing
+#   Priority 3: budget     -- Token consumption tracking
+#   Priority 4: doc-sync   -- Documentation drift detection
+#   Priority 6: observation -- Skill-creator pattern capture (lowest priority)
+#
+# Arbitration and HALT configs are global -- they apply across all loops.
+# =============================================================================
+
+communication:
+  bus_root: ".planning/bus"
+  loops:
+    - name: command
+      config: ".planning/bus/command/loop.yaml"
+      priority: 1
+    - name: execution
+      config: ".planning/bus/execution/loop.yaml"
+      priority: 2
+    - name: specialist
+      config: ".planning/bus/specialist/loop.yaml"
+      priority: 3
+    - name: user
+      config: ".planning/bus/user/loop.yaml"
+      priority: 2
+    - name: observation
+      config: ".planning/bus/observation/loop.yaml"
+      priority: 6
+    - name: health
+      config: ".planning/bus/health/loop.yaml"
+      priority: 2
+    - name: budget
+      config: ".planning/bus/budget/loop.yaml"
+      priority: 3
+    - name: cloud-ops
+      config: ".planning/bus/cloud-ops/loop.yaml"
+      priority: 2
+    - name: doc-sync
+      config: ".planning/bus/doc-sync/loop.yaml"
+      priority: 4
+  arbitration: ".planning/bus/arbitration.yaml"
+  halt: ".planning/bus/halt.yaml"
+
+# =============================================================================
+# Crew Configuration References
+# =============================================================================
+#
+# External crew config files define detailed role hierarchies, activation
+# profiles, and handoff procedures. The chipset references them by path.
+# =============================================================================
+
+crews:
+  deployment: "configs/crews/deployment-crew.yaml"
+  operations: "configs/crews/operations-crew.yaml"
+  documentation: "configs/crews/documentation-crew.yaml"
+  handoff: "configs/crews/crew-handoff.yaml"
+
+# =============================================================================
+# Evaluation Gates
+# =============================================================================
+#
+# Pre-deploy gates must pass before any OpenStack deployment begins.
+# Post-deploy gates must pass before crew handoff from deployment to operations.
+# Action "block" prevents continuation; "warn" logs an advisory but allows it.
+#
+# Detailed gate implementations are defined in Plan 318-02.
+# =============================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: hardware_inventory
+        description: "Verify hardware meets minimum requirements"
+        action: block
+      - check: network_connectivity
+        description: "Verify management and external network interfaces"
+        action: block
+      - check: resource_sufficiency
+        description: "Verify 16GB+ RAM, 100GB+ disk"
+        action: block
+    post_deploy:
+      - check: keystone_auth
+        description: "Verify Keystone token issuance"
+        action: block
+      - check: nova_compute
+        description: "Verify Nova hypervisor availability"
+        action: block
+      - check: neutron_network
+        description: "Verify Neutron network operations"
+        action: block
+      - check: doc_verification
+        description: "Verify documentation accuracy against running system"
+        action: warn
