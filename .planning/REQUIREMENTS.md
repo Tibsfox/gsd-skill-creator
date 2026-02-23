@@ -46,8 +46,8 @@ Requirements for the OpenStack Cloud Platform milestone. Each maps to roadmap ph
 - [x] **COMM-06**: Cloud Ops loop polls OpenStack API endpoints and detects status changes
 - [x] **COMM-07**: Doc Sync loop detects configuration drift between running system and documentation
 - [x] **COMM-08**: HALT signal propagates to all agents within 1 communication cycle; no partial operations
-- [ ] **COMM-09**: Complete ASIC chipset.yaml validates against schema, references only existing skills and agents, and configures the entire OpenStack operational environment
-- [ ] **COMM-10**: Chipset evaluation gates (pre-deploy and post-deploy) execute and produce pass/fail results
+- [x] **COMM-09**: Complete ASIC chipset.yaml validates against schema, references only existing skills and agents, and configures the entire OpenStack operational environment
+- [x] **COMM-10**: Chipset evaluation gates (pre-deploy and post-deploy) execute and produce pass/fail results
 - [x] **COMM-11**: Budget agent tracks token consumption and warns at 90%, blocks new EXEC at 95%
 
 ### Documentation Pack (DOCS)
@@ -154,8 +154,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | COMM-06 | Phase 317 | Complete |
 | COMM-07 | Phase 317 | Complete |
 | COMM-08 | Phase 317 | Complete |
-| COMM-09 | Phase 318 | Pending |
-| COMM-10 | Phase 318 | Pending |
+| COMM-09 | Phase 318 | Complete |
+| COMM-10 | Phase 318 | Complete |
 | COMM-11 | Phase 317 | Complete |
 | DOCS-01 | Phase 319 | Pending |
 | DOCS-02 | Phase 319 | Pending |
