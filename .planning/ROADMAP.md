@@ -325,7 +325,7 @@ Phases 312 through 325. Parallel tracks within waves:
 | 318. Chipset Definition | 2/2 | Complete   | 2026-02-23 |
 | 319. Systems Administrator's Guide | 0/3 | Not started | - |
 | 320. Operations Manual | 0/3 | Not started | - |
-| 321. Runbook Library & Reference Library | 0/4 | Not started | - |
+| 321. Runbook Library & Reference Library | 1/4 | In Progress|  |
 | 322. V&V Plan & Compliance | 0/TBD | Not started | - |
 | 323. Dashboard & Integration | 0/TBD | Not started | - |
 | 324. Integration Verification | 0/TBD | Not started | - |

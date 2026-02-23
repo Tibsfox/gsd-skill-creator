@@ -56,8 +56,8 @@ Requirements for the OpenStack Cloud Platform milestone. Each maps to roadmap ph
 - [ ] **DOCS-02**: Each sysadmin guide chapter contains narrative, procedures, and cross-references that are accurate against the deployed system
 - [ ] **DOCS-03**: Operations Manual contains per-service procedures for all 8 OpenStack services following NASA procedure format
 - [ ] **DOCS-04**: All operations manual procedures are verified against the running system
-- [ ] **DOCS-05**: Runbook Library contains ≥40 entries with task-indexed and symptom-indexed access
-- [ ] **DOCS-06**: Every runbook follows the standard format (preconditions, procedure, verification, rollback, references)
+- [x] **DOCS-05**: Runbook Library contains ≥40 entries with task-indexed and symptom-indexed access
+- [x] **DOCS-06**: Every runbook follows the standard format (preconditions, procedure, verification, rollback, references)
 - [ ] **DOCS-07**: Reference Library has 3-tier structure (summary ~6K always-loaded, active ~20K on-demand, reference ~40K deep dives)
 - [ ] **DOCS-08**: NASA SE cross-references point to correct SP-6105 and NPR 7123.1 sections
 - [ ] **DOCS-09**: OpenStack documentation references point to correct and current pages
@@ -161,8 +161,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DOCS-02 | Phase 319 | Pending |
 | DOCS-03 | Phase 320 | Pending |
 | DOCS-04 | Phase 320 | Pending |
-| DOCS-05 | Phase 321 | Pending |
-| DOCS-06 | Phase 321 | Pending |
+| DOCS-05 | Phase 321 | Complete |
+| DOCS-06 | Phase 321 | Complete |
 | DOCS-07 | Phase 321 | Pending |
 | DOCS-08 | Phase 319 | Pending |
 | DOCS-09 | Phase 320 | Pending |
