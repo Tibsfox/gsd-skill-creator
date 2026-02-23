@@ -185,7 +185,10 @@ Plans:
   3. Execution loop completes the full PLAN to EXEC to VERIFY cycle; specialist loop routes domain requests to correct CRAFT agents
   4. Health loop reports cloud status from SURGEON to FLIGHT; cloud ops loop polls OpenStack API endpoints and detects status changes; doc sync loop detects configuration drift
   5. HALT signal propagates to all agents within 1 communication cycle with no partial operations; budget agent tracks token consumption and blocks new EXEC at 95%
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 317-01-PLAN.md -- Documentation crew configuration with 8 roles, skill loadouts, and parallel operation capability
+- [ ] 317-02-PLAN.md -- Communication bus infrastructure with 9 loop configs, priority arbitration, and HALT signal propagation
 **Model**: Opus
 
 ### Phase 318: Chipset Definition
@@ -300,7 +303,7 @@ Phases 312 through 325. Parallel tracks within waves:
 | 314. Operations Skills | 2/2 | Complete   | 2026-02-23 |
 | 315. Documentation & Methodology Skills | 2/2 | Complete   | 2026-02-23 |
 | 316. Deployment & Operations Crews | 0/2 | Not started | - |
-| 317. Documentation Crew & Communication Framework | 0/TBD | Not started | - |
+| 317. Documentation Crew & Communication Framework | 0/2 | Not started | - |
 | 318. Chipset Definition | 0/TBD | Not started | - |
 | 319. Systems Administrator's Guide | 0/TBD | Not started | - |
 | 320. Operations Manual | 0/TBD | Not started | - |
