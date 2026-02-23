@@ -109,7 +109,10 @@
   2. NASA SE Methodology skill maps all 7 SE phases (Pre-Phase A through Phase F) to cloud operations equivalents with verifiable cross-references to SP-6105 and NPR 7123.1
   3. All 9 communication loop schemas (command, execution, specialist, user, observation, health, budget, cloud-ops, doc-sync) are defined with priority levels
   4. Filesystem directory contracts for skills/, docs/, configs/, .chipset/, and .planning/bus/ are established and documented
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 312-01-PLAN.md -- Shared TypeScript interfaces, Zod schemas, and communication loop definitions
+- [ ] 312-02-PLAN.md -- NASA SE Methodology skill and filesystem directory contracts
 **Model**: Opus (methodology), Sonnet (types)
 
 ### Phase 313: Core OpenStack Skills
@@ -279,7 +282,7 @@ Phases 312 through 325. Parallel tracks within waves:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 312. Foundation Types & NASA SE Methodology | 0/TBD | Not started | - |
+| 312. Foundation Types & NASA SE Methodology | 0/2 | Planned | - |
 | 313. Core OpenStack Skills | 0/TBD | Not started | - |
 | 314. Operations Skills | 0/TBD | Not started | - |
 | 315. Documentation & Methodology Skills | 0/TBD | Not started | - |
