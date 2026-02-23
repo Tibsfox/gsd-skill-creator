@@ -1,0 +1,299 @@
+# ==========================================================================
+# Documentation Crew Configuration
+# ==========================================================================
+# OpenStack documentation crew -- 8 roles for continuous NASA SE-structured
+# documentation production in parallel with other crews.
+#
+# This crew operates CONTINUOUSLY across all mission phases (Formulation
+# through Closeout), running alongside the deployment and operations crews.
+# Unlike those crews, the documentation crew has NO CAPCOM -- it receives
+# directives from the mission-level FLIGHT director through the command
+# loop, not directly from the human operator. This enables asynchronous,
+# parallel documentation production without blocking operational activities.
+#
+# Role Hierarchy:
+#   Tier 1: FLIGHT (documentation coordination)
+#   Tier 2: PLAN, EXEC, VERIFY (core documentation production)
+#   Tier 3: CRAFT-techwriter, ANALYST, RETRO, PAO (specialist and support)
+#
+# Key Differences from Deployment/Operations Crews:
+#   - parallel_operation: true (runs alongside other crews, not sequentially)
+#   - No CAPCOM (human interaction flows through deployment/ops CAPCOM)
+#   - EXEC agents write documentation artifacts, not infrastructure changes
+#   - ANALYST and RETRO provide learning/retrospective capabilities
+#   - CRAFT-techwriter carries NASA SE methodology for document standards
+#
+# Skill Loadout Rationale:
+#   - FLIGHT and PLAN carry nasa-se-methodology for phase-to-deliverable mapping
+#   - EXEC-procedures carries ops-manual-writer + kolla-ansible for procedure authoring
+#   - EXEC-runbooks carries runbook-generator + kolla-ansible for runbook authoring
+#   - CRAFT-techwriter carries ALL documentation skills as standards authority
+#   - VERIFY carries doc-verifier for drift detection (independent from EXEC)
+#   - RETRO carries nasa-se-methodology for LLIS-format retrospectives
+#   - PAO carries ops-manual-writer for human-readable narrative generation
+
+name: documentation-crew
+version: 1.0.0
+description: "OpenStack documentation crew -- 8 roles for continuous NASA SE-structured documentation production in parallel with other crews"
+mission_phase: "Continuous across all phases (Formulation through Closeout)"
+parallel_operation: true
+
+# ==========================================================================
+# No CAPCOM in Documentation Crew
+# ==========================================================================
+# Documentation crew has no CAPCOM. Human interaction flows through the
+# deployment or operations crew's CAPCOM. Documentation FLIGHT receives
+# directives from the mission-level FLIGHT director, not directly from
+# the human operator. This enables the documentation crew to operate
+# asynchronously and in parallel with the active operational crew.
+
+# ==========================================================================
+# Positions (9 entries, 8 distinct role types)
+# ==========================================================================
+# EXEC appears 2 times (procedures domain, runbooks domain)
+# All other roles appear once each.
+# 8 distinct role types: FLIGHT, PLAN, EXEC, CRAFT, VERIFY, ANALYST, RETRO, PAO
+
+positions:
+
+  # --------------------------------------------------------------------------
+  # Tier 1: Documentation Coordination
+  # --------------------------------------------------------------------------
+  # This is a SEPARATE FLIGHT instance from the deployment/operations FLIGHT.
+  # Documentation FLIGHT coordinates documentation work only, receiving
+  # mission-level directives through the command loop.
+
+  - id: flight
+    role: FLIGHT
+    context: main
+    lifecycle: persistent
+    tier: 1
+    communication_loop: command
+    description: "Coordinates documentation production across all NASA SE phases. Separate FLIGHT instance from deployment/operations -- coordinates doc work only."
+    skills:
+      - nasa-se-methodology
+    skillRequirements:
+      required:
+        - nasa-se-methodology
+      recommended:
+        - workflow-orchestration
+        - document-lifecycle
+
+  # --------------------------------------------------------------------------
+  # Tier 2: Core Documentation Production
+  # --------------------------------------------------------------------------
+
+  - id: plan
+    role: PLAN
+    context: fork
+    lifecycle: task
+    tier: 2
+    communication_loop: execution
+    description: "Maps NASA SE phases to documentation deliverables. Determines which documents are due at each phase gate."
+    skills:
+      - nasa-se-methodology
+    skillRequirements:
+      required:
+        - nasa-se-methodology
+      recommended:
+        - phase-decomposition
+        - deliverable-tracking
+
+  # EXEC agents: 2 parallel documentation streams, each with domain-specific
+  # documentation skills plus the shared kolla-ansible knowledge for accurate
+  # infrastructure documentation.
+
+  - id: exec-procedures
+    role: EXEC
+    context: fork
+    lifecycle: task
+    tier: 2
+    domain: procedures
+    communication_loop: execution
+    description: "Writes operations manual procedures following NASA procedure format (OPS-{SERVICE}-{NUMBER})"
+    skills:
+      - ops-manual-writer
+      - openstack-kolla-ansible
+    skillRequirements:
+      required:
+        - ops-manual-writer
+        - openstack-kolla-ansible
+      recommended:
+        - procedure-authoring
+        - technical-writing
+
+  - id: exec-runbooks
+    role: EXEC
+    context: fork
+    lifecycle: task
+    tier: 2
+    domain: runbooks
+    communication_loop: execution
+    description: "Writes runbook entries following standard format (RB-{SERVICE}-{NNN}) with dual task/symptom indexing"
+    skills:
+      - runbook-generator
+      - openstack-kolla-ansible
+    skillRequirements:
+      required:
+        - runbook-generator
+        - openstack-kolla-ansible
+      recommended:
+        - incident-response
+        - symptom-indexing
+
+  - id: verify
+    role: VERIFY
+    context: fork
+    lifecycle: task
+    tier: 2
+    communication_loop: execution
+    description: "Cross-references documentation against running system configuration. Independent from EXEC -- cannot access EXEC draft context. Uses doc-verifier 4 drift detection methods (configuration, endpoint, procedure, version)."
+    skills:
+      - doc-verifier
+    skillRequirements:
+      required:
+        - doc-verifier
+      recommended:
+        - verification-gates
+        - drift-detection
+
+  # --------------------------------------------------------------------------
+  # Tier 3: Specialist and Support
+  # --------------------------------------------------------------------------
+
+  - id: craft-techwriter
+    role: CRAFT
+    context: fork
+    lifecycle: on-demand
+    tier: 3
+    domain: technical-writing
+    communication_loop: specialist
+    description: "NASA document standards specialist. Ensures all documentation follows NASA SE methodology, ConOps format, and cross-reference standards."
+    skills:
+      - nasa-se-methodology
+      - ops-manual-writer
+      - runbook-generator
+    triggers:
+      - "document standard"
+      - "procedure format"
+      - "technical writing"
+      - "NASA format"
+      - "ConOps"
+      - "SEMP"
+      - "cross-reference"
+      - "SE phase"
+    skillRequirements:
+      required:
+        - nasa-se-methodology
+        - ops-manual-writer
+        - runbook-generator
+      recommended:
+        - style-guide
+        - document-standards
+
+  - id: analyst
+    role: ANALYST
+    context: fork
+    lifecycle: task
+    tier: 3
+    communication_loop: observation
+    description: "Studies deployment and operations patterns for curriculum content. Feeds observations into the skill-creator pipeline."
+    skills: []
+    skillRequirements:
+      required: []
+      recommended:
+        - pattern-analysis
+        - curriculum-design
+
+  - id: retro
+    role: RETRO
+    context: fork
+    lifecycle: task
+    tier: 3
+    communication_loop: observation
+    description: "Post-phase analysis and lessons learned capture following NASA LLIS (Lessons Learned Information System) format"
+    skills:
+      - nasa-se-methodology
+    skillRequirements:
+      required:
+        - nasa-se-methodology
+      recommended:
+        - retrospective-facilitation
+        - lessons-learned
+
+  - id: pao
+    role: PAO
+    context: fork
+    lifecycle: task
+    tier: 3
+    communication_loop: command
+    description: "Generates human-readable mission narrative and changelog. Public Affairs Officer for mission communication."
+    skills:
+      - ops-manual-writer
+    skillRequirements:
+      required:
+        - ops-manual-writer
+      recommended:
+        - narrative-writing
+        - changelog-generation
+
+# ==========================================================================
+# Activation Profiles
+# ==========================================================================
+# Three profiles provide graduated crew activation based on documentation
+# scope. Each profile is a strict subset of the next larger profile.
+#
+# Scout:    3 role types, 3 positions  -- quick doc update or single revision
+# Patrol:   6 role types, 7 positions  -- standard phase gate deliverable
+# Squadron: all role types, all positions -- full phase documentation set
+
+activation_profiles:
+  scout:
+    description: "Quick documentation update or single procedure revision"
+    roles:
+      - FLIGHT
+      - EXEC
+      - VERIFY
+    positions:
+      - flight
+      - exec-procedures
+      - verify
+
+  patrol:
+    description: "Standard documentation production for a phase gate deliverable"
+    roles:
+      - FLIGHT
+      - PLAN
+      - EXEC
+      - VERIFY
+      - CRAFT
+      - PAO
+    positions:
+      - flight
+      - plan
+      - exec-procedures
+      - exec-runbooks
+      - craft-techwriter
+      - verify
+      - pao
+
+  squadron:
+    description: "Full documentation production -- complete phase documentation set"
+    roles: all
+    positions: all
+
+# ==========================================================================
+# Parallel Operation Rules
+# ==========================================================================
+# These rules govern how the documentation crew operates concurrently with
+# the deployment and operations crews without conflicts or blocking.
+
+parallel_operation_rules:
+  - rule: "Documentation crew FLIGHT coordinates with mission FLIGHT via command loop"
+    mechanism: "command loop priority 1 messages"
+  - rule: "Documentation crew VERIFY reads system state but never modifies it"
+    mechanism: "read-only access to OpenStack API endpoints and config files"
+  - rule: "Documentation crew does not block deployment or operations activities"
+    mechanism: "observation loop (priority 6) for non-critical pattern data"
+  - rule: "Doc-sync loop alerts documentation crew when system configuration changes"
+    mechanism: "doc-sync loop (priority 4) drift detection triggers"
