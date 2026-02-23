@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** Skills, agents, and teams must match official Claude Code patterns -- and the GSD ecosystem must provide spatial, visual, and operational tools that make complex system design tangible.
-**Current focus:** v1.33 Phase 321 — Runbook Library and Reference Library
+**Current focus:** v1.33 Phase 322-325 — Wave 4-5 (V&V, Dashboard, Integration, Lessons Learned)
 
 ## Current Position
 
-Phase: 321 of 325 (Runbook Library and Reference Library) — IN PROGRESS
-Plan: 4 of 4 in Phase 321
-Status: Phases 312-319 complete (Wave 0-3 complete), Wave 4 in progress (321-04 complete)
-Last activity: 2026-02-23 — Phase 321 Plan 04 executed (2 tasks, dual runbook indexes + 3-tier reference library)
+Phase: 322 of 325 (V&V Plan Compliance) — STARTING
+Plan: 1 of 2 in Phase 322
+Status: Phases 312-321 complete (Waves 0-3 complete), Wave 4 starting (322+323), Wave 5 queued (324+325)
+Last activity: 2026-02-23 — Waves 0-3 complete, all 26 plans executed, launching Wave 4+5
 
-Progress: █████████░░░░░░░ 58% (v1.33)
+Progress: ██████████░░░░░░ 71% (v1.33)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 16 (v1.33)
-- Average duration: ~4 min
-- Total execution time: ~69 min
+- Total plans completed: 26 (v1.33)
+- Average duration: ~5 min
+- Total execution time: ~95 min
 
 **By Phase:**
 
