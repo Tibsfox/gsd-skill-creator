@@ -1,0 +1,191 @@
+# ==========================================================================
+# Crew Handoff Configuration
+# ==========================================================================
+# Defines the transition from deployment crew to operations crew.
+#
+# Why context preservation matters:
+#   When the deployment crew completes its mission, it has accumulated
+#   deep operational knowledge: which services are running, how they were
+#   configured, what decisions were made and why, what the network topology
+#   looks like, and what the verification baseline is. This knowledge must
+#   transfer completely to the operations crew -- operator knowledge lost
+#   between crews means the operations team starts blind.
+#
+# Blocking vs informational gates:
+#   Blocking gates halt the handoff if they fail -- these protect against
+#   context loss or incomplete verification. Informational gates notify
+#   but do not block -- these are status updates that keep the human
+#   operator informed of progress.
+#
+# Why CAPCOM persists across the transition:
+#   The human operator should experience a seamless transition. CAPCOM
+#   provides continuity of the human interface -- the operator never
+#   loses their communication channel, even as the crew changes beneath.
+#
+# Rollback strategy:
+#   If any blocking gate fails during handoff, the deployment crew is
+#   reactivated at squadron profile (full capability) to diagnose and
+#   resolve the issue. The handoff is not attempted again until the
+#   blocking condition is resolved.
+
+name: crew-handoff
+version: 1.0.0
+description: "Crew transition configuration -- preserves full system context when deployment crew completes and operations crew activates"
+
+# ==========================================================================
+# Transition Definitions
+# ==========================================================================
+
+transitions:
+  - id: deployment-to-operations
+    source_crew: deployment-crew
+    target_crew: operations-crew
+    trigger: "deployment_verified"
+    description: "After VERIFY confirms all services healthy, deploy crew deactivates and ops crew activates"
+
+    # ======================================================================
+    # Context Preservation
+    # ======================================================================
+    # Every piece of system knowledge accumulated during deployment must
+    # be captured and transferred. Missing context means the operations
+    # crew cannot effectively monitor, maintain, or troubleshoot.
+
+    context_preservation:
+      system_state:
+        - name: "deployed_services"
+          description: "List of successfully deployed OpenStack services with versions and endpoints"
+          source_agent: verify
+          format: "yaml"
+
+        - name: "configuration_snapshot"
+          description: "Current kolla-ansible globals.yml and per-service configs at deployment completion"
+          source_agent: exec-keystone
+          format: "file_references"
+          paths:
+            - "configs/kolla-ansible/globals.yml"
+            - "configs/kolla-ansible/passwords.yml"
+
+        - name: "network_topology"
+          description: "Deployed network configuration -- bridges, VLANs, security groups, floating IPs"
+          source_agent: exec-network-storage
+          format: "yaml"
+
+        - name: "verification_results"
+          description: "Complete verification report from deployment VERIFY agent"
+          source_agent: verify
+          format: "markdown"
+
+        - name: "deployment_decisions"
+          description: "Key decisions made during deployment with rationale"
+          source_agent: flight
+          format: "log"
+
+      # ====================================================================
+      # Agent Mapping
+      # ====================================================================
+      # Maps deployment crew roles to operations crew equivalents.
+      # The operations crew has fewer positions (8 vs 14) so multiple
+      # deployment roles may map to a single operations role.
+      # Context transfer follows these mappings to ensure the receiving
+      # agent gets all relevant knowledge from its predecessor(s).
+
+      agent_mapping:
+        description: "Maps deployment crew roles to operations crew equivalents for context transfer"
+        mappings:
+          - from: "flight (deployment)"
+            to: "flight (operations)"
+            context: "Mission status, phase completion, outstanding items"
+
+          - from: "exec-keystone"
+            to: "exec"
+            context: "Keystone configuration, credentials location, endpoint URLs"
+
+          - from: "exec-compute"
+            to: "exec"
+            context: "Nova configuration, hypervisor setup, image catalog"
+
+          - from: "exec-network-storage"
+            to: "exec"
+            context: "Network topology, storage backend config, volume status"
+
+          - from: "verify (deployment)"
+            to: "verify (operations)"
+            context: "Baseline test results, known issues, acceptance criteria"
+
+          - from: "craft-security"
+            to: "guard"
+            context: "TLS certificate locations, RBAC policies, security baseline"
+
+          - from: "capcom (deployment)"
+            to: "capcom (operations)"
+            context: "Human preferences, communication history, escalation patterns"
+
+          - from: "budget (deployment)"
+            to: "flight (operations)"
+            context: "Token consumption baseline, resource usage patterns"
+
+    # ======================================================================
+    # Handoff Procedure
+    # ======================================================================
+    # 9-step procedure with blocking and informational gates.
+    # Steps 1-2 collect and verify context. Step 3 notifies the human.
+    # Steps 4-7 execute the transition. Steps 8-9 confirm operations.
+
+    procedure:
+      steps:
+        - order: 1
+          action: "VERIFY runs final health check on all deployed services"
+          agent: verify
+          gate: blocking
+
+        - order: 2
+          action: "FLIGHT collects context from all deployment agents"
+          agent: flight
+          gate: blocking
+
+        - order: 3
+          action: "CAPCOM notifies human: 'Deployment complete. Transitioning to operations crew.'"
+          agent: capcom
+          gate: informational
+
+        - order: 4
+          action: "Context bundle written to .planning/bus/command/handoff-context.json"
+          agent: flight
+          gate: blocking
+
+        - order: 5
+          action: "Deployment crew positions deactivated (except CAPCOM during transition)"
+          agent: flight
+          gate: blocking
+
+        - order: 6
+          action: "Operations crew activated at patrol profile"
+          agent: flight
+          gate: blocking
+
+        - order: 7
+          action: "Operations FLIGHT reads handoff context and distributes to crew"
+          agent: flight
+          gate: blocking
+
+        - order: 8
+          action: "SURGEON begins initial health monitoring baseline"
+          agent: surgeon
+          gate: informational
+
+        - order: 9
+          action: "CAPCOM confirms handoff to human: 'Operations crew active. All systems nominal.'"
+          agent: capcom
+          gate: informational
+
+    # ======================================================================
+    # Rollback
+    # ======================================================================
+    # If any blocking gate fails, the handoff is aborted and the
+    # deployment crew is restored to full capability (squadron profile)
+    # to diagnose the issue. CAPCOM notifies the human operator.
+
+    rollback:
+      trigger: "Any blocking gate fails"
+      action: "Reactivate deployment crew, notify CAPCOM of handoff failure"
+      restore_profile: squadron
