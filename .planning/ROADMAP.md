@@ -124,7 +124,11 @@ Plans:
   2. Kolla-Ansible deployment skill encapsulates bootstrap, deploy, reconfigure, and upgrade procedures
   3. Every OpenStack skill contains troubleshooting sections for common failure modes
   4. No individual skill exceeds 8K tokens when loaded; combined active skills stay within 30K token budget
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 313-01-PLAN.md -- Keystone, Nova, and Glance core service skills (identity + compute + images)
+- [ ] 313-02-PLAN.md -- Neutron, Cinder, and Swift core service skills (networking + storage)
+- [ ] 313-03-PLAN.md -- Heat, Horizon, and Kolla-Ansible skills (orchestration + dashboard + deployment engine)
 **Model**: Sonnet
 
 ### Phase 314: Operations Skills
@@ -283,7 +287,7 @@ Phases 312 through 325. Parallel tracks within waves:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 312. Foundation Types & NASA SE Methodology | 2/2 | Complete   | 2026-02-23 |
-| 313. Core OpenStack Skills | 0/TBD | Not started | - |
+| 313. Core OpenStack Skills | 0/3 | Not started | - |
 | 314. Operations Skills | 0/TBD | Not started | - |
 | 315. Documentation & Methodology Skills | 0/TBD | Not started | - |
 | 316. Deployment & Operations Crews | 0/TBD | Not started | - |
