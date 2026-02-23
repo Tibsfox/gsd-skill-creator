@@ -178,10 +178,10 @@ The SE Engine defines **how** engineering work is performed. The lifecycle phase
 - **Deliverables:** Verified Operations Manual, Runbook Library, Monitoring Configuration, Backup Procedures, Upgrade Procedures, Operational Health Reports
 - **Review Gate:** ORR (Operational Readiness Review) / Operations Handoff Review
 - **Phase Gate Criteria:**
-  1. Operations crew trained and ready
-  2. All runbooks verified against running system
-  3. Monitoring and alerting operational
-  4. Backup and recovery procedures tested
+  1. Operations crew has documented handoff checklist with all items signed off
+  2. All runbooks verified against running system with doc-verifier (zero Critical drift items)
+  3. Monitoring dashboards accessible and alerting rules fire on synthetic test conditions
+  4. Backup procedure executed and restore verified on at least one service database
 
 ### Phase F: Closeout -- Decommission and Lessons Learned
 
@@ -197,10 +197,10 @@ The SE Engine defines **how** engineering work is performed. The lifecycle phase
 - **Deliverables:** Decommissioning Report, Data Archive, Lessons Learned Document, Final Mission Report
 - **Review Gate:** DR (Decommissioning Review) / Cloud Lifecycle Review
 - **Phase Gate Criteria:**
-  1. All user data migrated or archived with confirmation
-  2. All services decommissioned cleanly
-  3. Hardware resources recovered and inventoried
-  4. Lessons learned document published
+  1. All user data migrated or archived with written confirmation from data owners
+  2. All services stopped, containers removed, and no OpenStack processes running (`docker ps` empty of kolla containers)
+  3. Hardware resources recovered and inventoried with updated asset register
+  4. Lessons learned document published in NASA LLIS format with at least 3 actionable recommendations
 
 ## Verification Methods (TAID)
 
@@ -229,6 +229,112 @@ Each NASA document type maps to a cloud operations equivalent:
 | Operations Manual | Systems Administrator's Guide | Markdown: 7 chapters mapping SE phases, procedures, cross-references to SP-6105 and NPR 7123.1 |
 | Operations Procedures | Runbook Library | Markdown: standard format per entry with preconditions, procedure steps, verification, rollback, references |
 | Lessons Learned | Operations Journal | Markdown: NASA LLIS format with mission retrospective, actionable improvements, process recommendations |
+
+### Document Template Structures
+
+Heading outlines for the three critical document types. Executors producing these documents should follow this structure.
+
+**Cloud Architecture Overview (ConOps)** -- SP-6105 SS 4.1, Appendix S
+```
+1. Introduction
+   1.1 Purpose
+   1.2 Scope
+   1.3 Reference Documents
+2. Stakeholder Identification
+   2.1 Cloud Consumers (developers, operators, end users)
+   2.2 Service Level Expectations
+   2.3 Measures of Effectiveness
+3. System Overview
+   3.1 Architecture Diagram
+   3.2 Service Inventory
+   3.3 Hardware Baseline
+4. Operational Scenarios
+   4.1 Normal Operations (instance lifecycle, storage, networking)
+   4.2 Peak Load Scenarios
+   4.3 Maintenance Windows
+5. Off-Nominal Scenarios
+   5.1 Compute Node Failure
+   5.2 Network Partition
+   5.3 Storage Backend Failure
+   5.4 Identity Service Outage
+6. User Interaction Modes
+   6.1 Horizon Dashboard
+   6.2 CLI (openstack client)
+   6.3 API Direct Access
+   6.4 Heat Templates (IaC)
+7. Risk Classification
+   7.1 Project Type (SP-6105 SS 3.11)
+   7.2 Tailoring Rationale
+```
+
+**Cloud Requirements Document** -- SP-6105 SS 4.2
+```
+1. Introduction
+   1.1 Purpose and Scope
+   1.2 Applicable Documents
+   1.3 Requirement ID Convention (CLOUD-{DOMAIN}-{NNN})
+2. System-Level Requirements
+   2.1 Functional Requirements
+   2.2 Performance Requirements
+   2.3 Security Requirements
+   2.4 Availability Requirements
+3. Service-Level Requirements
+   3.1 Identity (Keystone)
+   3.2 Compute (Nova)
+   3.3 Networking (Neutron)
+   3.4 Block Storage (Cinder)
+   3.5 Image (Glance)
+   3.6 Object Storage (Swift)
+   3.7 Orchestration (Heat)
+   3.8 Dashboard (Horizon)
+4. Interface Requirements
+   4.1 Service-to-Service APIs
+   4.2 Network Interfaces
+   4.3 External Integrations
+5. Constraints
+   5.1 Hardware Constraints
+   5.2 Software Constraints
+   5.3 Operational Constraints
+6. Verification Cross-Reference
+   6.1 Requirement-to-TAID Method Mapping
+   6.2 Verification Phase Assignment
+```
+
+**Cloud V&V Plan** -- SP-6105 SS 5.3
+```
+1. Introduction
+   1.1 Purpose
+   1.2 Scope
+   1.3 V&V Approach (TAID Methods)
+2. Requirements Verification Matrix
+   2.1 Matrix Format (Req ID, Description, Method, Phase, Status)
+   2.2 Functional Requirements Verification
+   2.3 Performance Requirements Verification
+   2.4 Security Requirements Verification
+3. Test Procedures
+   3.1 Service-Level Tests (per service)
+   3.2 Integration Tests (cross-service scenarios)
+   3.3 Performance Tests (load, capacity)
+   3.4 Security Tests (vulnerability, policy)
+4. Analysis Procedures
+   4.1 Log Analysis Methods
+   4.2 Configuration Analysis Methods
+   4.3 Capacity Analysis Methods
+5. Inspection Procedures
+   5.1 Configuration File Review Checklist
+   5.2 Certificate Validation Checklist
+   5.3 RBAC Policy Audit Checklist
+6. Demonstration Scenarios
+   6.1 End-to-End User Scenario
+   6.2 Operational Readiness Scenario
+   6.3 Failure Recovery Scenario
+7. Acceptance Criteria
+   7.1 Per-Requirement Pass/Fail Criteria
+   7.2 System-Level Acceptance Criteria
+8. Documentation Verification
+   8.1 Doc-Verifier Integration
+   8.2 Drift Detection Schedule
+```
 
 ## Tailoring Guidance
 
