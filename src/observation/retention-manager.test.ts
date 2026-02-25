@@ -43,6 +43,35 @@ describe('RetentionManager', () => {
       expect(remaining.map(e => e.data.id)).toEqual([3, 4, 5]);
     });
 
+    it('should create temp file in same directory as target (EXDEV fix)', async () => {
+      const manager = new RetentionManager({ maxEntries: 1, maxAgeDays: 365 });
+
+      const now = Date.now();
+      const entries = [
+        { timestamp: now - 2000, category: 'sessions', data: { id: 1 } },
+        { timestamp: now - 1000, category: 'sessions', data: { id: 2 } },
+      ];
+
+      await writeFile(testFile, entries.map(e => JSON.stringify(e)).join('\n') + '\n');
+
+      // After pruning, the file should exist at the original path
+      // and no temp files should remain in the directory
+      const pruned = await manager.prune(testFile);
+      expect(pruned).toBe(1);
+
+      // Verify the file was written correctly at the original path
+      const content = await readFile(testFile, 'utf-8');
+      const remaining = content.trim().split('\n').map(line => JSON.parse(line));
+      expect(remaining).toHaveLength(1);
+      expect(remaining[0].data.id).toBe(2);
+
+      // Verify no leftover temp files in the directory
+      const { readdir } = await import('fs/promises');
+      const files = await readdir(testDir);
+      const tempFiles = files.filter(f => f.startsWith('.prune-'));
+      expect(tempFiles).toHaveLength(0);
+    });
+
     it('should not prune when under limit', async () => {
       const manager = new RetentionManager({ maxEntries: 10, maxAgeDays: 365 });
 
