@@ -1,6 +1,5 @@
 import { readFile, writeFile, rename } from 'fs/promises';
-import { join } from 'path';
-import { tmpdir } from 'os';
+import { join, dirname } from 'path';
 import type { Pattern } from '../types/pattern.js';
 import type { RetentionConfig } from '../types/observation.js';
 import { DEFAULT_RETENTION_CONFIG } from '../types/observation.js';
@@ -61,8 +60,8 @@ export class RetentionManager {
     if (prunedCount > 0) {
       // Atomic write: temp file then rename
       const tempPath = join(
-        tmpdir(),
-        `prune-${Date.now()}-${Math.random().toString(36).slice(2)}.jsonl`
+        dirname(filePath),
+        `.prune-${Date.now()}-${Math.random().toString(36).slice(2)}.jsonl`
       );
       const newContent = pruned.map(e => JSON.stringify(e)).join('\n') + '\n';
       await writeFile(tempPath, newContent, 'utf-8');
