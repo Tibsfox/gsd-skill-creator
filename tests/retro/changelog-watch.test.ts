@@ -3,14 +3,12 @@ import { detectVersion, parseChangelog, classifyFeatures, runChangelogWatch } fr
 import { ChangelogWatchResultSchema } from '../../src/retro/types.js';
 import type { ChangelogEntry } from '../../src/retro/types.js';
 
-// Mock child_process at module level
+// Mock child_process at module level -- return string since detectVersion
+// uses { encoding: 'utf-8' } which makes execSync return string.
+const mockExecSync = vi.hoisted(() => vi.fn());
 vi.mock('child_process', () => ({
-  execSync: vi.fn(),
+  execSync: mockExecSync,
 }));
-
-import { execSync } from 'child_process';
-
-const mockExecSync = vi.mocked(execSync);
 
 describe('changelog-watch', () => {
   beforeEach(() => {
@@ -19,7 +17,7 @@ describe('changelog-watch', () => {
 
   describe('detectVersion', () => {
     it('parses claude --version output', () => {
-      mockExecSync.mockReturnValue(Buffer.from('claude v2.1.5\n'));
+      mockExecSync.mockReturnValue('claude v2.1.5\n');
       const version = detectVersion();
       expect(version).toBe('2.1.5');
     });
@@ -122,7 +120,7 @@ describe('changelog-watch', () => {
 
   describe('runChangelogWatch', () => {
     it('produces ChangelogWatchResult', () => {
-      mockExecSync.mockReturnValue(Buffer.from('claude v2.1.5\n'));
+      mockExecSync.mockReturnValue('claude v2.1.5\n');
 
       const changelogText = `
 ## v2.1.5
