@@ -6,5 +6,6 @@
 //!
 //! TypeScript equivalent: src/types/security.ts
 
+pub mod sandbox;
 pub mod types;
 pub use types::*;
