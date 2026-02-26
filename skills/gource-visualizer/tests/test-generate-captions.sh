@@ -20,27 +20,27 @@ SCRIPT="$SCRIPT_DIR/scripts/generate-captions.sh"
 
 assert_eq() {
   if [[ "$1" == "$2" ]]; then
-    ((PASS++))
+    ((PASS++)) || true
   else
-    ((FAIL++))
+    ((FAIL++)) || true
     ERRORS+="  FAIL: $3 -- expected '$2', got '$1'\n"
   fi
 }
 
 assert_true() {
   if eval "$1"; then
-    ((PASS++))
+    ((PASS++)) || true
   else
-    ((FAIL++))
+    ((FAIL++)) || true
     ERRORS+="  FAIL: $2\n"
   fi
 }
 
 assert_false() {
   if ! eval "$1"; then
-    ((PASS++))
+    ((PASS++)) || true
   else
-    ((FAIL++))
+    ((FAIL++)) || true
     ERRORS+="  FAIL: $2 (expected failure)\n"
   fi
 }
@@ -50,9 +50,9 @@ assert_exit() {
   local actual
   set +e; "$@" >/dev/null 2>&1; actual=$?; set -e
   if [[ "$actual" -eq "$expected" ]]; then
-    ((PASS++))
+    ((PASS++)) || true
   else
-    ((FAIL++))
+    ((FAIL++)) || true
     ERRORS+="  FAIL: expected exit $expected, got $actual -- $*\n"
   fi
 }
@@ -71,41 +71,39 @@ trap report EXIT
 create_tagged_repo() {
   local dir
   dir=$(mktemp -d)
-  cd "$dir"
-  git init -b main . >/dev/null 2>&1
-  git config user.email "alice@example.com"
-  git config user.name "Alice Developer"
-  echo "v1" > file.txt
-  git add file.txt
-  git commit -m "initial" >/dev/null 2>&1
-  git tag v1.0.0
+  git -C "$dir" init -b main >/dev/null 2>&1
+  git -C "$dir" config user.email "alice@example.com"
+  git -C "$dir" config user.name "Alice Developer"
+  echo "v1" > "$dir/file.txt"
+  git -C "$dir" add file.txt
+  git -C "$dir" commit -m "initial" >/dev/null 2>&1
+  git -C "$dir" tag v1.0.0
   # sleep to ensure distinct timestamps
   sleep 1
-  echo "v2" > file.txt
-  git add file.txt
-  git commit -m "feature: improvements" >/dev/null 2>&1
-  git tag v1.1.0
+  echo "v2" > "$dir/file.txt"
+  git -C "$dir" add file.txt
+  git -C "$dir" commit -m "feature: improvements" >/dev/null 2>&1
+  git -C "$dir" tag v1.1.0
   # Add second contributor
   sleep 1
-  git config user.email "bob@example.com"
-  git config user.name "Bob Builder"
-  echo "v3" > file2.txt
-  git add file2.txt
-  git commit -m "bob's contribution" >/dev/null 2>&1
-  git tag v2.0.0
+  git -C "$dir" config user.email "bob@example.com"
+  git -C "$dir" config user.name "Bob Builder"
+  echo "v3" > "$dir/file2.txt"
+  git -C "$dir" add file2.txt
+  git -C "$dir" commit -m "bob's contribution" >/dev/null 2>&1
+  git -C "$dir" tag v2.0.0
   echo "$dir"
 }
 
 create_empty_repo() {
   local dir
   dir=$(mktemp -d)
-  cd "$dir"
-  git init -b main . >/dev/null 2>&1
-  git config user.email "test@example.com"
-  git config user.name "Test User"
-  echo "hello" > file.txt
-  git add file.txt
-  git commit -m "initial commit" >/dev/null 2>&1
+  git -C "$dir" init -b main >/dev/null 2>&1
+  git -C "$dir" config user.email "test@example.com"
+  git -C "$dir" config user.name "Test User"
+  echo "hello" > "$dir/file.txt"
+  git -C "$dir" add file.txt
+  git -C "$dir" commit -m "initial commit" >/dev/null 2>&1
   # No tags
   echo "$dir"
 }
