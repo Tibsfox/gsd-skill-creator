@@ -31,7 +31,7 @@ last_verified: "2026-02-25"
 
 # Features and Capabilities
 
-GSD Skill Creator has grown across 33 milestones from a skill management tool into a
+GSD Skill Creator has grown across 42 milestones from a skill management tool into a
 comprehensive development ecosystem. This page inventories the framework's capabilities
 organized by domain. Each domain groups related features and identifies the milestone version
 that introduced them. For the conceptual foundation, see
