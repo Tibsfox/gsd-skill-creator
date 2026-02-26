@@ -2,7 +2,7 @@
  * Citation extractor barrel export.
  *
  * Re-exports all extraction utilities: patterns, DOI detector,
- * URL resolver.
+ * URL resolver, and parser orchestrator.
  */
 
 export {
@@ -33,3 +33,7 @@ export {
   extractEmbeddedDoi,
   extractUrls,
 } from './url-resolver.js';
+
+export {
+  extractCitations,
+} from './parser.js';
