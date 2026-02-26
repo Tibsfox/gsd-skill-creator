@@ -5,6 +5,12 @@ import type { ScoredSkill } from '../../types/application.js';
 import type { AdaptiveRouter } from '../../retrieval/adaptive-router.js';
 import type { EmbeddingService } from '../../embeddings/embedding-service.js';
 import { cosineSimilarity } from '../../embeddings/cosine-similarity.js';
+import type { SkillPosition } from '../../plane/types.js';
+import type { PlaneActivationConfig } from '../../plane/activation.js';
+import { analyzeTask, computeEnhancedScore, DEFAULT_PLANE_ACTIVATION_CONFIG } from '../../plane/activation.js';
+
+/** Lookup function for skill positions. Returns null for skills without plane data. */
+export type PositionLookup = (skillName: string) => SkillPosition | null;
 
 /**
  * Finds trigger matches and scores them via TF-IDF or embedding similarity.
@@ -24,6 +30,8 @@ export class ScoreStage implements PipelineStage {
     private scorer: RelevanceScorer,
     private router?: AdaptiveRouter,
     private embeddingService?: EmbeddingService,
+    private positionLookup?: PositionLookup,
+    private planeConfig?: PlaneActivationConfig,
   ) {}
 
   async process(context: PipelineContext): Promise<PipelineContext> {
@@ -76,6 +84,39 @@ export class ScoreStage implements PipelineStage {
         score: 1,
         matchType: 'file' as const,
       }));
+    }
+
+    // Geometric scoring enhancement (ACTIV-02, ACTIV-04)
+    if (this.positionLookup && (this.planeConfig?.enabled ?? true)) {
+      const config = this.planeConfig ?? DEFAULT_PLANE_ACTIVATION_CONFIG;
+      try {
+        const taskVector = analyzeTask({
+          intent: context.intent,
+          file: context.file,
+          context: context.context,
+        });
+
+        context.scoredSkills = context.scoredSkills.map(skill => {
+          const position = this.positionLookup!(skill.name);
+          const enhanced = computeEnhancedScore(
+            skill.name,
+            position,
+            taskVector,
+            skill.score,
+            config,
+          );
+          return {
+            ...skill,
+            score: enhanced.combinedScore,
+          };
+        });
+
+        // Re-sort by enhanced score (highest first)
+        context.scoredSkills.sort((a, b) => b.score - a.score);
+      } catch {
+        // Fallback: if geometric scoring fails, keep existing semantic scores (ACTIV-05)
+        // No-op -- scoredSkills remain as computed by TF-IDF/embeddings
+      }
     }
 
     return context;
