@@ -95,6 +95,43 @@ pub enum CredentialSource {
     File,
 }
 
+/// Overall security system status.
+///
+/// Used by SecurityState to report the aggregate security posture
+/// to the dashboard shield indicator.
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
+#[serde(rename_all = "lowercase")]
+pub enum SecurityStatus {
+    /// All security components active and verified.
+    Active,
+    /// One or more components need attention (non-critical).
+    Attention,
+    /// No security components active.
+    Inactive,
+    /// A breach was detected and blocked.
+    BreachBlocked,
+}
+
+/// Shield state emitted via IPC for the frontend taskbar indicator.
+///
+/// Maps to the 4 shield status CSS classes in SecurityPanel.ts:
+/// - `Secure` -> `shield-secure` (green)
+/// - `Attention` -> `shield-attention` (amber)
+/// - `BreachBlocked` -> `shield-breach-blocked` (red)
+/// - `Inactive` -> `shield-inactive` (gray)
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
+#[serde(rename_all = "kebab-case")]
+pub enum ShieldState {
+    /// All systems nominal — green shield.
+    Secure,
+    /// Attention needed — amber shield.
+    Attention,
+    /// Breach detected and blocked — red shield.
+    BreachBlocked,
+    /// Security components not active — gray shield.
+    Inactive,
+}
+
 // ============================================================================
 // Structs
 // ============================================================================
