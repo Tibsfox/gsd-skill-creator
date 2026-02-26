@@ -1,0 +1,2153 @@
+{
+  "domain": "structure",
+  "version": "1.35.0",
+  "primitives": [
+    {
+      "id": "structure-vector-definition",
+      "name": "Vector Definition",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 11,
+      "section": "11.1",
+      "planePosition": { "real": -0.2, "imaginary": 0.2 },
+      "formalStatement": "A vector v in R^n is an ordered n-tuple v = (v_1, v_2, ..., v_n) where each v_i is a real number. Vectors represent both magnitude and direction in n-dimensional space.",
+      "computationalForm": "Represent as an array of n real numbers. Access component i as v[i]. Display as column or row notation.",
+      "prerequisites": ["Real numbers", "Ordered pairs and tuples", "Coordinate systems"],
+      "dependencies": [
+        {
+          "target": "structure-vector-space-axioms",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Vectors are elements of a vector space defined by these axioms"
+        }
+      ],
+      "enables": ["structure-vector-addition", "structure-dot-product", "structure-cross-product", "structure-vector-norm"],
+      "compositionRules": [
+        {
+          "with": "structure-vector-addition",
+          "yields": "Vector arithmetic in R^n",
+          "type": "sequential",
+          "conditions": ["Vectors must be in the same R^n space"],
+          "example": "v = (1,2,3) and w = (4,5,6) compose via addition to give v+w = (5,7,9)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "I need to represent a quantity with both magnitude and direction",
+        "How do I work with points or directions in multiple dimensions",
+        "Describe a displacement or velocity in n-dimensional space"
+      ],
+      "keywords": ["vector", "tuple", "component", "direction", "magnitude", "R^n"],
+      "tags": ["vectors", "linear-algebra", "fundamental"],
+      "buildLabs": ["Build Lab 11.1: Visualizing Vectors in R^2 and R^3"]
+    },
+    {
+      "id": "structure-vector-addition",
+      "name": "Vector Addition and Scalar Multiplication",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 11,
+      "section": "11.1",
+      "planePosition": { "real": -0.15, "imaginary": 0.15 },
+      "formalStatement": "For vectors u, v in R^n and scalar c in R: (u+v)_i = u_i + v_i (componentwise addition) and (cv)_i = c * v_i (scalar multiplication). These operations satisfy closure, commutativity, associativity, and distributivity.",
+      "computationalForm": "Add vectors componentwise: (u+v)[i] = u[i] + v[i]. Scale by multiplying each component: (cv)[i] = c * v[i].",
+      "prerequisites": ["Vector definition", "Real number arithmetic"],
+      "dependencies": [
+        {
+          "target": "structure-vector-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Operations are defined on vectors"
+        }
+      ],
+      "enables": ["structure-linear-independence", "structure-span-basis", "structure-linear-transformation"],
+      "compositionRules": [
+        {
+          "with": "structure-vector-definition",
+          "yields": "Complete vector arithmetic system",
+          "type": "parallel",
+          "conditions": ["Vectors in same dimension"],
+          "example": "2*(1,3) + 3*(2,-1) = (2,6) + (6,-3) = (8,3)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "How do I add or scale vectors",
+        "Combine forces or velocities acting on an object",
+        "Compute a linear combination of vectors"
+      ],
+      "keywords": ["addition", "scalar multiplication", "linear combination", "componentwise"],
+      "tags": ["vectors", "operations", "linear-algebra"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-vector-space-axioms",
+      "name": "Vector Space Axioms",
+      "type": "axiom",
+      "domain": "structure",
+      "chapter": 11,
+      "section": "11.2",
+      "planePosition": { "real": -0.3, "imaginary": 0.35 },
+      "formalStatement": "A vector space V over a field F is a set with two operations (addition, scalar multiplication) satisfying 8 axioms: closure under addition and scalar multiplication, commutativity and associativity of addition, existence of zero vector and additive inverses, and distributive laws connecting addition with scalar multiplication.",
+      "computationalForm": "To verify a set is a vector space: check all 8 axioms. 1) u+v in V, 2) cv in V, 3) u+v=v+u, 4) (u+v)+w=u+(v+w), 5) exists 0: v+0=v, 6) exists -v: v+(-v)=0, 7) c(u+v)=cu+cv, 8) (c+d)v=cv+dv, plus 1*v=v and c(dv)=(cd)v.",
+      "prerequisites": ["Sets", "Fields (or at minimum real numbers)", "Binary operations"],
+      "dependencies": [],
+      "enables": ["structure-vector-definition", "structure-linear-independence", "structure-span-basis", "structure-subspace"],
+      "compositionRules": [
+        {
+          "with": "structure-linear-transformation",
+          "yields": "Theory of linear maps between vector spaces",
+          "type": "sequential",
+          "conditions": ["Both domain and codomain are vector spaces"],
+          "example": "R^2 and R^3 are vector spaces; T: R^2 -> R^3 is a linear transformation between them"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Is this set a vector space",
+        "Verify the axioms for a proposed vector space structure",
+        "What properties must a space have to support linear algebra"
+      ],
+      "keywords": ["axiom", "vector space", "closure", "additive identity", "field"],
+      "tags": ["vectors", "axioms", "linear-algebra", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-dot-product",
+      "name": "Dot Product (Inner Product)",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 11,
+      "section": "11.3",
+      "planePosition": { "real": -0.1, "imaginary": 0.2 },
+      "formalStatement": "The dot product of u, v in R^n is u . v = sum_{i=1}^{n} u_i * v_i. Geometrically, u . v = ||u|| ||v|| cos(theta) where theta is the angle between u and v.",
+      "computationalForm": "Compute sum of products of corresponding components: u.v = u[1]*v[1] + u[2]*v[2] + ... + u[n]*v[n]. Result is a scalar.",
+      "prerequisites": ["Vector definition", "Real number arithmetic", "Cosine function"],
+      "dependencies": [
+        {
+          "target": "structure-vector-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Dot product is defined on vectors"
+        }
+      ],
+      "enables": ["structure-vector-norm", "structure-orthogonality", "structure-cauchy-schwarz", "structure-orthogonal-matrix"],
+      "compositionRules": [
+        {
+          "with": "structure-vector-norm",
+          "yields": "Angle measurement between vectors: cos(theta) = (u.v)/(||u|| ||v||)",
+          "type": "sequential",
+          "conditions": ["Both vectors are nonzero"],
+          "example": "Angle between (1,0) and (1,1): cos(theta) = 1/sqrt(2), so theta = pi/4"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find the angle between two vectors",
+        "Compute the projection of one vector onto another",
+        "Check if two vectors are perpendicular"
+      ],
+      "keywords": ["dot product", "inner product", "scalar product", "angle", "projection"],
+      "tags": ["vectors", "inner-product", "geometry"],
+      "buildLabs": ["Build Lab 11.2: Dot Products and Angles"]
+    },
+    {
+      "id": "structure-cross-product",
+      "name": "Cross Product",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 11,
+      "section": "11.4",
+      "planePosition": { "real": -0.05, "imaginary": 0.25 },
+      "formalStatement": "The cross product of u, v in R^3 is u x v = (u_2*v_3 - u_3*v_2, u_3*v_1 - u_1*v_3, u_1*v_2 - u_2*v_1). The result is a vector perpendicular to both u and v with magnitude ||u|| ||v|| sin(theta).",
+      "computationalForm": "Compute via determinant expansion: u x v = det([i,j,k; u_1,u_2,u_3; v_1,v_2,v_3]). Result is a vector in R^3.",
+      "prerequisites": ["Vector definition in R^3", "Determinants (2x2)", "Sine function"],
+      "dependencies": [
+        {
+          "target": "structure-vector-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Cross product operates on 3D vectors"
+        }
+      ],
+      "enables": ["structure-curl", "structure-surface-integral"],
+      "compositionRules": [
+        {
+          "with": "structure-dot-product",
+          "yields": "Scalar triple product: u . (v x w) = volume of parallelepiped",
+          "type": "sequential",
+          "conditions": ["All vectors in R^3"],
+          "example": "Volume of parallelepiped spanned by (1,0,0), (0,1,0), (0,0,1) is |1.(0x0 - 0x0, 0x1 - 1x0, 1x0 - 0x0)| = 1"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find a vector perpendicular to two given vectors",
+        "Compute the area of a parallelogram spanned by two vectors",
+        "Determine the orientation of three vectors in 3D space"
+      ],
+      "keywords": ["cross product", "vector product", "perpendicular", "normal", "area"],
+      "tags": ["vectors", "geometry", "3D"],
+      "buildLabs": ["Build Lab 11.3: Cross Products and Surfaces"]
+    },
+    {
+      "id": "structure-vector-norm",
+      "name": "Vector Norm (Magnitude)",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 11,
+      "section": "11.3",
+      "planePosition": { "real": -0.15, "imaginary": 0.1 },
+      "formalStatement": "The Euclidean norm of v in R^n is ||v|| = sqrt(v . v) = sqrt(sum_{i=1}^{n} v_i^2). It measures the length (magnitude) of the vector. A unit vector has ||v|| = 1.",
+      "computationalForm": "Compute ||v|| = sqrt(v[1]^2 + v[2]^2 + ... + v[n]^2). Normalize: v_hat = v / ||v||.",
+      "prerequisites": ["Dot product", "Square root", "Pythagorean theorem"],
+      "dependencies": [
+        {
+          "target": "structure-dot-product",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Norm is defined via the dot product: ||v|| = sqrt(v.v)"
+        }
+      ],
+      "enables": ["structure-orthogonality", "structure-cauchy-schwarz", "structure-triangle-inequality"],
+      "compositionRules": [
+        {
+          "with": "structure-vector-definition",
+          "yields": "Distance metric in R^n: d(u,v) = ||u-v||",
+          "type": "sequential",
+          "conditions": ["Vectors in same space"],
+          "example": "Distance from (1,2) to (4,6) is ||(3,4)|| = 5"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find the length or magnitude of a vector",
+        "Normalize a vector to unit length",
+        "Compute distance between two points in R^n"
+      ],
+      "keywords": ["norm", "magnitude", "length", "unit vector", "distance", "normalize"],
+      "tags": ["vectors", "metric", "geometry"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-orthogonality",
+      "name": "Orthogonality and Projection",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 11,
+      "section": "11.5",
+      "planePosition": { "real": -0.2, "imaginary": 0.3 },
+      "formalStatement": "Vectors u and v are orthogonal iff u . v = 0. The orthogonal projection of u onto v is proj_v(u) = (u . v / v . v) * v. The component of u orthogonal to v is u - proj_v(u).",
+      "computationalForm": "Test orthogonality: compute u.v, check if zero. Project: proj = (u.v / v.v) * v. Orthogonal decomposition: u = proj_v(u) + (u - proj_v(u)).",
+      "prerequisites": ["Dot product", "Vector norm", "Vector arithmetic"],
+      "dependencies": [
+        {
+          "target": "structure-dot-product",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Orthogonality is defined via the dot product being zero"
+        },
+        {
+          "target": "structure-vector-norm",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Projection formula uses norms"
+        }
+      ],
+      "enables": ["structure-orthogonal-matrix", "structure-least-squares", "structure-spectral-theorem"],
+      "compositionRules": [
+        {
+          "with": "structure-span-basis",
+          "yields": "Gram-Schmidt orthogonalization: convert any basis to orthogonal basis",
+          "type": "sequential",
+          "conditions": ["Set of linearly independent vectors given"],
+          "example": "Given {(1,1), (1,0)}, Gram-Schmidt produces {(1,1), (1/2,-1/2)} (orthogonal)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Check if two vectors are perpendicular",
+        "Decompose a vector into components along and perpendicular to a direction",
+        "Find the closest point on a line or subspace to a given point"
+      ],
+      "keywords": ["orthogonal", "perpendicular", "projection", "Gram-Schmidt", "decomposition"],
+      "tags": ["vectors", "geometry", "inner-product"],
+      "buildLabs": ["Build Lab 11.4: Orthogonal Projection"]
+    },
+    {
+      "id": "structure-linear-independence",
+      "name": "Linear Independence",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 11,
+      "section": "11.6",
+      "planePosition": { "real": -0.25, "imaginary": 0.3 },
+      "formalStatement": "Vectors v_1, ..., v_k in V are linearly independent if the only solution to c_1*v_1 + ... + c_k*v_k = 0 is c_1 = ... = c_k = 0. Otherwise they are linearly dependent.",
+      "computationalForm": "Set up homogeneous system [v_1 | ... | v_k] c = 0 and row reduce. If only trivial solution exists, vectors are independent. Equivalently, check if the matrix has full column rank.",
+      "prerequisites": ["Vector addition and scalar multiplication", "Systems of equations"],
+      "dependencies": [
+        {
+          "target": "structure-vector-addition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Linear independence is defined via linear combinations"
+        }
+      ],
+      "enables": ["structure-span-basis", "structure-rank-nullity", "structure-determinant"],
+      "compositionRules": [
+        {
+          "with": "structure-span-basis",
+          "yields": "Dimension of a vector space: size of any basis",
+          "type": "sequential",
+          "conditions": ["Finite-dimensional vector space"],
+          "example": "Standard basis {e_1,...,e_n} in R^n has n linearly independent vectors, so dim(R^n) = n"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if a set of vectors can represent all combinations uniquely",
+        "Check if one vector is redundant given others",
+        "Find the minimum number of vectors needed to span a space"
+      ],
+      "keywords": ["linear independence", "dependence", "trivial solution", "redundant"],
+      "tags": ["vectors", "linear-algebra", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-span-basis",
+      "name": "Span and Basis",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 11,
+      "section": "11.6",
+      "planePosition": { "real": -0.3, "imaginary": 0.35 },
+      "formalStatement": "The span of vectors {v_1,...,v_k} is the set of all linear combinations: span(S) = {c_1*v_1 + ... + c_k*v_k : c_i in F}. A basis of V is a linearly independent set that spans V. The dimension dim(V) is the number of basis vectors.",
+      "computationalForm": "To find a basis: place vectors as columns, row reduce, take columns corresponding to pivot positions. dim(V) = number of pivots.",
+      "prerequisites": ["Linear independence", "Vector addition and scalar multiplication"],
+      "dependencies": [
+        {
+          "target": "structure-linear-independence",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Basis requires linear independence"
+        },
+        {
+          "target": "structure-vector-addition",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Span requires linear combinations"
+        }
+      ],
+      "enables": ["structure-change-of-basis", "structure-rank-nullity", "structure-matrix-definition"],
+      "compositionRules": [
+        {
+          "with": "structure-linear-transformation",
+          "yields": "Matrix representation of a linear map with respect to chosen bases",
+          "type": "sequential",
+          "conditions": ["Finite-dimensional vector spaces", "Bases chosen for domain and codomain"],
+          "example": "Rotation by theta in R^2 relative to standard basis gives matrix [[cos(theta), -sin(theta)],[sin(theta), cos(theta)]]"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find a minimal set of vectors that generates a subspace",
+        "Determine the dimension of a vector space or subspace",
+        "Express any vector as coordinates relative to a basis"
+      ],
+      "keywords": ["span", "basis", "dimension", "generating set", "coordinates"],
+      "tags": ["vectors", "linear-algebra", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-triangle-inequality",
+      "name": "Triangle Inequality for Vectors",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 11,
+      "section": "11.5",
+      "planePosition": { "real": -0.1, "imaginary": 0.15 },
+      "formalStatement": "For any vectors u, v in R^n: ||u + v|| <= ||u|| + ||v||. Equality holds iff u and v point in the same direction (one is a nonnegative scalar multiple of the other).",
+      "computationalForm": "Verify by computing both sides. Proof uses Cauchy-Schwarz: ||u+v||^2 = ||u||^2 + 2(u.v) + ||v||^2 <= ||u||^2 + 2||u||||v|| + ||v||^2 = (||u|| + ||v||)^2.",
+      "prerequisites": ["Vector norm", "Cauchy-Schwarz inequality"],
+      "dependencies": [
+        {
+          "target": "structure-vector-norm",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Triangle inequality is a property of the norm"
+        },
+        {
+          "target": "structure-cauchy-schwarz",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Proof depends on Cauchy-Schwarz"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "structure-vector-norm",
+          "yields": "Metric space structure on R^n with triangle inequality as key axiom",
+          "type": "parallel",
+          "conditions": ["Any normed vector space"],
+          "example": "In R^2: ||(1,0) + (0,1)|| = sqrt(2) <= 1 + 1 = 2"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Bound the length of a sum of vectors",
+        "Prove that a norm defines a valid metric",
+        "Estimate distances using the triangle inequality"
+      ],
+      "keywords": ["triangle inequality", "norm bound", "metric", "distance"],
+      "tags": ["vectors", "inequality", "analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-cauchy-schwarz",
+      "name": "Cauchy-Schwarz Inequality",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 11,
+      "section": "11.5",
+      "planePosition": { "real": -0.25, "imaginary": 0.25 },
+      "formalStatement": "|u . v| <= ||u|| * ||v|| for all u, v in an inner product space. Equality holds iff u and v are linearly dependent (one is a scalar multiple of the other).",
+      "computationalForm": "Verify: compute |u.v| and ||u||*||v|| separately. Proof: consider ||u - (u.v/v.v)v||^2 >= 0, expand to get the inequality.",
+      "prerequisites": ["Dot product", "Vector norm"],
+      "dependencies": [
+        {
+          "target": "structure-dot-product",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Inequality involves the inner product"
+        },
+        {
+          "target": "structure-vector-norm",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Inequality involves the norm"
+        }
+      ],
+      "enables": ["structure-triangle-inequality"],
+      "compositionRules": [
+        {
+          "with": "structure-dot-product",
+          "yields": "Angle between vectors is well-defined: cos(theta) = u.v/(||u||||v||) is in [-1,1]",
+          "type": "sequential",
+          "conditions": ["Nonzero vectors in inner product space"],
+          "example": "For u=(1,2), v=(3,4): |1*3+2*4|=11, ||u||*||v||=sqrt(5)*5=5*sqrt(5)>11"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Prove that the angle between vectors is well-defined",
+        "Bound a dot product in terms of norms",
+        "Establish inequalities in inner product spaces"
+      ],
+      "keywords": ["Cauchy-Schwarz", "inequality", "inner product", "bound"],
+      "tags": ["vectors", "inequality", "analysis", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-subspace",
+      "name": "Subspace",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 11,
+      "section": "11.6",
+      "planePosition": { "real": -0.3, "imaginary": 0.3 },
+      "formalStatement": "A subspace W of a vector space V is a nonempty subset of V that is closed under addition and scalar multiplication: (1) 0 in W, (2) u,v in W implies u+v in W, (3) u in W, c in F implies cu in W.",
+      "computationalForm": "To verify W is a subspace: check three conditions. Common subspaces: null space of a matrix, column space, row space, eigenspaces.",
+      "prerequisites": ["Vector space axioms", "Sets"],
+      "dependencies": [
+        {
+          "target": "structure-vector-space-axioms",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Subspace inherits vector space structure"
+        }
+      ],
+      "enables": ["structure-rank-nullity", "structure-eigenvalue"],
+      "compositionRules": [
+        {
+          "with": "structure-linear-transformation",
+          "yields": "Kernel and image of a linear map are subspaces",
+          "type": "sequential",
+          "conditions": ["T is a linear transformation"],
+          "example": "Kernel of T(x,y,z)=(x+y, 2z) is the subspace {(x,-x,0)} of R^3"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Is this subset of a vector space also a vector space",
+        "Find the null space or column space of a matrix",
+        "Identify invariant subspaces of a transformation"
+      ],
+      "keywords": ["subspace", "null space", "column space", "invariant", "closed"],
+      "tags": ["vectors", "linear-algebra", "structure"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-matrix-definition",
+      "name": "Matrix Definition and Operations",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.1",
+      "planePosition": { "real": -0.4, "imaginary": 0.45 },
+      "formalStatement": "An m x n matrix A is a rectangular array of scalars with m rows and n columns: A = [a_{ij}] where 1 <= i <= m, 1 <= j <= n. Matrix addition is componentwise; scalar multiplication scales all entries.",
+      "computationalForm": "Store as 2D array. Addition: C[i][j] = A[i][j] + B[i][j]. Scalar multiplication: (cA)[i][j] = c * A[i][j]. Requires matching dimensions for addition.",
+      "prerequisites": ["Real numbers", "Arrays", "Vector definition"],
+      "dependencies": [
+        {
+          "target": "structure-span-basis",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Matrices represent linear maps between spaces with chosen bases"
+        }
+      ],
+      "enables": ["structure-matrix-multiplication", "structure-determinant", "structure-gaussian-elimination", "structure-matrix-inverse"],
+      "compositionRules": [
+        {
+          "with": "structure-matrix-multiplication",
+          "yields": "Matrix algebra: a ring of n x n matrices",
+          "type": "parallel",
+          "conditions": ["Square matrices of same size"],
+          "example": "2x2 matrices with addition and multiplication form a ring (non-commutative)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Represent a linear system of equations in compact form",
+        "Store and manipulate tabular numerical data",
+        "Encode a linear transformation as a matrix"
+      ],
+      "keywords": ["matrix", "array", "entries", "rows", "columns", "rectangular"],
+      "tags": ["linear-algebra", "matrices", "fundamental"],
+      "buildLabs": ["Build Lab 12.1: Matrix Operations"]
+    },
+    {
+      "id": "structure-linear-transformation",
+      "name": "Linear Transformation",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.2",
+      "planePosition": { "real": -0.35, "imaginary": 0.5 },
+      "formalStatement": "A function T: V -> W between vector spaces is a linear transformation if T(u+v) = T(u)+T(v) and T(cv) = cT(v) for all u,v in V and scalars c. Equivalently, T(c_1*v_1 + c_2*v_2) = c_1*T(v_1) + c_2*T(v_2).",
+      "computationalForm": "Represent T as a matrix A: T(v) = Av. Find matrix by computing T on each basis vector. Composition T2 o T1 corresponds to matrix product A2 * A1.",
+      "prerequisites": ["Vector spaces", "Functions", "Basis"],
+      "dependencies": [
+        {
+          "target": "structure-vector-space-axioms",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Linear transformations are maps between vector spaces"
+        },
+        {
+          "target": "structure-span-basis",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Matrix representation requires choosing bases"
+        }
+      ],
+      "enables": ["structure-matrix-multiplication", "structure-eigenvalue", "structure-rank-nullity", "structure-diagonalization"],
+      "compositionRules": [
+        {
+          "with": "structure-matrix-definition",
+          "yields": "Concrete matrix representation of abstract linear maps",
+          "type": "sequential",
+          "conditions": ["Finite-dimensional vector spaces", "Bases chosen"],
+          "example": "Differentiation d/dx on polynomials of degree <= 2: matrix [[0,1,0],[0,0,2],[0,0,0]] relative to basis {1, x, x^2}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Define a function that preserves vector space structure",
+        "Represent a geometric transformation as a matrix",
+        "Map between different vector spaces while preserving linearity"
+      ],
+      "keywords": ["linear transformation", "linear map", "homomorphism", "matrix representation"],
+      "tags": ["linear-algebra", "transformations", "fundamental"],
+      "buildLabs": ["Build Lab 12.2: Geometric Transformations as Matrices"]
+    },
+    {
+      "id": "structure-matrix-multiplication",
+      "name": "Matrix Multiplication as Composition",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.2",
+      "planePosition": { "real": -0.4, "imaginary": 0.5 },
+      "formalStatement": "For an m x n matrix A and n x p matrix B, the product AB is the m x p matrix with (AB)_{ij} = sum_{k=1}^{n} a_{ik} * b_{kj}. Matrix multiplication corresponds to composition of linear transformations: [T2 o T1] = [T2][T1].",
+      "computationalForm": "Compute (AB)[i][j] = dot product of row i of A with column j of B. Complexity: O(mnp) for m x n times n x p. Note: AB != BA in general.",
+      "prerequisites": ["Matrix definition", "Linear transformations", "Dot product"],
+      "dependencies": [
+        {
+          "target": "structure-matrix-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Multiplication is defined on matrices"
+        },
+        {
+          "target": "structure-linear-transformation",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Multiplication encodes composition of linear maps"
+        }
+      ],
+      "enables": ["structure-matrix-inverse", "structure-determinant", "structure-eigenvalue"],
+      "compositionRules": [
+        {
+          "with": "structure-linear-transformation",
+          "yields": "Composition of transformations as a single matrix",
+          "type": "sequential",
+          "conditions": ["Dimensions are compatible: A is m x n, B is n x p"],
+          "example": "Rotation by 30 degrees then 45 degrees: R(45)*R(30) = R(75)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Combine two linear transformations into one",
+        "Multiply matrices to solve a system or transform data",
+        "Apply a sequence of operations as a single matrix product"
+      ],
+      "keywords": ["matrix multiplication", "composition", "product", "row-column"],
+      "tags": ["linear-algebra", "matrices", "operations"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-determinant",
+      "name": "Determinant",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.3",
+      "planePosition": { "real": -0.45, "imaginary": 0.55 },
+      "formalStatement": "The determinant of a square matrix A is det(A) = sum over permutations sigma of sign(sigma) * product_{i=1}^{n} a_{i,sigma(i)}. For 2x2: det([[a,b],[c,d]]) = ad - bc. det(A) = 0 iff A is singular.",
+      "computationalForm": "For 2x2: ad-bc. For 3x3: cofactor expansion along any row or column. For n x n: LU decomposition and multiply diagonal entries. det(AB) = det(A)*det(B).",
+      "prerequisites": ["Matrix definition", "Permutations"],
+      "dependencies": [
+        {
+          "target": "structure-matrix-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Determinant is defined on square matrices"
+        }
+      ],
+      "enables": ["structure-matrix-inverse", "structure-eigenvalue", "structure-jacobian"],
+      "compositionRules": [
+        {
+          "with": "structure-eigenvalue",
+          "yields": "det(A) = product of eigenvalues; characteristic polynomial via det(A - lambda*I) = 0",
+          "type": "sequential",
+          "conditions": ["Square matrix"],
+          "example": "For A = [[2,1],[0,3]], det(A) = 6 = 2*3, eigenvalues are 2 and 3"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Check if a matrix is invertible",
+        "Compute the volume scaling factor of a linear transformation",
+        "Find eigenvalues via the characteristic polynomial"
+      ],
+      "keywords": ["determinant", "singular", "invertible", "volume", "cofactor"],
+      "tags": ["linear-algebra", "matrices", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-rank-nullity",
+      "name": "Rank-Nullity Theorem",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.3",
+      "planePosition": { "real": -0.5, "imaginary": 0.6 },
+      "formalStatement": "For a linear transformation T: V -> W where V is finite-dimensional: dim(V) = rank(T) + nullity(T), where rank(T) = dim(im(T)) and nullity(T) = dim(ker(T)).",
+      "computationalForm": "Row reduce the matrix of T. rank = number of pivots. nullity = number of free variables. Verify: rank + nullity = number of columns.",
+      "prerequisites": ["Linear transformation", "Subspace", "Dimension", "Kernel and image"],
+      "dependencies": [
+        {
+          "target": "structure-linear-transformation",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Theorem is about linear transformations"
+        },
+        {
+          "target": "structure-subspace",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Kernel and image are subspaces"
+        },
+        {
+          "target": "structure-linear-independence",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Rank and nullity measure dimensions of subspaces"
+        }
+      ],
+      "enables": ["structure-least-squares"],
+      "compositionRules": [
+        {
+          "with": "structure-gaussian-elimination",
+          "yields": "Complete solution of linear systems: particular + null space",
+          "type": "sequential",
+          "conditions": ["Linear system Ax = b"],
+          "example": "For 3x4 matrix with rank 2: nullity = 2, so solution set is 2-dimensional affine subspace"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Relate the dimensions of the kernel and image of a linear map",
+        "Determine how many free variables a linear system has",
+        "Characterize the solution space of a homogeneous system"
+      ],
+      "keywords": ["rank", "nullity", "dimension", "kernel", "image", "rank-nullity"],
+      "tags": ["linear-algebra", "fundamental-theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-eigenvalue",
+      "name": "Eigenvalue and Eigenvector",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.4",
+      "planePosition": { "real": -0.35, "imaginary": 0.6 },
+      "formalStatement": "A scalar lambda is an eigenvalue of a square matrix A if there exists a nonzero vector v such that Av = lambda*v. The vector v is the corresponding eigenvector. The set of all eigenvectors for lambda (plus 0) is the eigenspace E_lambda = ker(A - lambda*I).",
+      "computationalForm": "Solve det(A - lambda*I) = 0 to find eigenvalues. For each lambda, solve (A - lambda*I)v = 0 to find eigenvectors. The eigenspace is the null space of A - lambda*I.",
+      "prerequisites": ["Matrix multiplication", "Determinant", "Null space"],
+      "dependencies": [
+        {
+          "target": "structure-matrix-multiplication",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Eigenvalue equation Av = lambda*v uses matrix-vector product"
+        },
+        {
+          "target": "structure-determinant",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Finding eigenvalues requires solving det(A - lambda*I) = 0"
+        }
+      ],
+      "enables": ["structure-characteristic-polynomial", "structure-diagonalization", "structure-spectral-theorem", "structure-svd"],
+      "compositionRules": [
+        {
+          "with": "structure-diagonalization",
+          "yields": "A = PDP^{-1} where D is diagonal of eigenvalues and P is matrix of eigenvectors",
+          "type": "sequential",
+          "conditions": ["Matrix has n linearly independent eigenvectors"],
+          "example": "A = [[2,1],[0,3]] has eigenvalues 2,3 and eigenvectors (1,0),(1,1) => A = PDP^{-1}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find the directions that a transformation merely scales",
+        "Analyze the long-term behavior of a dynamical system",
+        "Diagonalize a matrix for easier computation"
+      ],
+      "keywords": ["eigenvalue", "eigenvector", "eigenspace", "characteristic", "spectrum"],
+      "tags": ["linear-algebra", "spectral-theory", "fundamental"],
+      "buildLabs": ["Build Lab 12.3: Eigenvalues and Geometric Interpretation"]
+    },
+    {
+      "id": "structure-characteristic-polynomial",
+      "name": "Characteristic Polynomial",
+      "type": "algorithm",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.4",
+      "planePosition": { "real": -0.4, "imaginary": 0.55 },
+      "formalStatement": "The characteristic polynomial of an n x n matrix A is p(lambda) = det(A - lambda*I), a degree-n polynomial in lambda. Its roots are the eigenvalues of A. By the fundamental theorem of algebra, A has exactly n eigenvalues (counting multiplicity) in C.",
+      "computationalForm": "1. Form A - lambda*I. 2. Compute det(A - lambda*I) by cofactor expansion or row reduction. 3. Factor the resulting polynomial. 4. Roots are eigenvalues.",
+      "prerequisites": ["Determinant", "Polynomial factoring", "Complex numbers"],
+      "dependencies": [
+        {
+          "target": "structure-eigenvalue",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Characteristic polynomial is the tool for finding eigenvalues"
+        },
+        {
+          "target": "structure-determinant",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Defined as determinant of A - lambda*I"
+        }
+      ],
+      "enables": ["structure-diagonalization"],
+      "compositionRules": [
+        {
+          "with": "structure-eigenvalue",
+          "yields": "Complete eigenvalue computation pipeline",
+          "type": "sequential",
+          "conditions": ["Square matrix given"],
+          "example": "For A = [[1,2],[3,4]]: p(lambda) = (1-lambda)(4-lambda)-6 = lambda^2-5*lambda-2, roots: (5+/-sqrt(33))/2"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find all eigenvalues of a matrix systematically",
+        "Determine the algebraic multiplicity of each eigenvalue",
+        "Compute a polynomial whose roots encode matrix behavior"
+      ],
+      "keywords": ["characteristic polynomial", "eigenvalue", "roots", "determinant"],
+      "tags": ["linear-algebra", "algorithms", "spectral-theory"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-diagonalization",
+      "name": "Diagonalization",
+      "type": "algorithm",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.5",
+      "planePosition": { "real": -0.3, "imaginary": 0.6 },
+      "formalStatement": "An n x n matrix A is diagonalizable if A = PDP^{-1} where D = diag(lambda_1,...,lambda_n) and P = [v_1 | ... | v_n] with v_i the eigenvectors. A is diagonalizable iff it has n linearly independent eigenvectors.",
+      "computationalForm": "1. Find eigenvalues from characteristic polynomial. 2. Find eigenvectors for each eigenvalue. 3. If n independent eigenvectors exist, form P and D. 4. Verify AP = PD. Powers: A^k = PD^kP^{-1}.",
+      "prerequisites": ["Eigenvalues and eigenvectors", "Matrix inverse", "Linear independence"],
+      "dependencies": [
+        {
+          "target": "structure-eigenvalue",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Diagonalization requires eigenvalues and eigenvectors"
+        },
+        {
+          "target": "structure-matrix-inverse",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "A = PDP^{-1} requires inverting P"
+        }
+      ],
+      "enables": ["structure-spectral-theorem"],
+      "compositionRules": [
+        {
+          "with": "structure-eigenvalue",
+          "yields": "Efficient matrix powers: A^k = PD^kP^{-1} with D^k trivial",
+          "type": "sequential",
+          "conditions": ["A is diagonalizable"],
+          "example": "If A has eigenvalues 2,3 then A^{100} = P*diag(2^{100},3^{100})*P^{-1}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Simplify repeated application of a linear transformation",
+        "Compute large powers of a matrix efficiently",
+        "Solve systems of differential equations via diagonalization"
+      ],
+      "keywords": ["diagonalization", "similar matrices", "eigenbasis", "matrix powers"],
+      "tags": ["linear-algebra", "algorithms", "spectral-theory"],
+      "buildLabs": ["Build Lab 12.4: Diagonalization and Matrix Powers"]
+    },
+    {
+      "id": "structure-svd",
+      "name": "Singular Value Decomposition",
+      "type": "algorithm",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.6",
+      "planePosition": { "real": -0.25, "imaginary": 0.65 },
+      "formalStatement": "Every m x n matrix A has a decomposition A = U * Sigma * V^T where U is m x m orthogonal, V is n x n orthogonal, and Sigma is m x n diagonal with nonneg entries sigma_1 >= sigma_2 >= ... >= 0 (the singular values).",
+      "computationalForm": "1. Compute eigenvalues of A^T*A (these are sigma_i^2). 2. sigma_i = sqrt(eigenvalue_i). 3. V = eigenvectors of A^T*A. 4. U = eigenvectors of A*A^T. 5. Sigma = diag(sigma_1,...). Low-rank approximation: keep top k singular values.",
+      "prerequisites": ["Eigenvalues", "Orthogonal matrices", "Matrix transpose"],
+      "dependencies": [
+        {
+          "target": "structure-eigenvalue",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "SVD is based on eigendecomposition of A^T*A and A*A^T"
+        },
+        {
+          "target": "structure-orthogonal-matrix",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "U and V are orthogonal matrices"
+        }
+      ],
+      "enables": ["structure-least-squares"],
+      "compositionRules": [
+        {
+          "with": "structure-least-squares",
+          "yields": "Pseudoinverse via SVD: A^+ = V * Sigma^+ * U^T for least squares solutions",
+          "type": "sequential",
+          "conditions": ["A is any m x n matrix"],
+          "example": "For overdetermined system Ax = b, pseudoinverse gives x = A^+*b = V*Sigma^+*U^T*b"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Decompose any matrix into rotation, scaling, and rotation components",
+        "Find the best low-rank approximation to a matrix",
+        "Compute the pseudoinverse for least-squares problems"
+      ],
+      "keywords": ["SVD", "singular value", "decomposition", "low-rank", "pseudoinverse"],
+      "tags": ["linear-algebra", "algorithms", "data-science"],
+      "buildLabs": ["Build Lab 12.5: SVD and Data Compression"]
+    },
+    {
+      "id": "structure-gaussian-elimination",
+      "name": "Gaussian Elimination",
+      "type": "algorithm",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.1",
+      "planePosition": { "real": -0.45, "imaginary": 0.4 },
+      "formalStatement": "Gaussian elimination transforms a matrix to row echelon form via elementary row operations: (1) swap two rows, (2) multiply a row by a nonzero scalar, (3) add a scalar multiple of one row to another. Back substitution then solves the system.",
+      "computationalForm": "1. Find leftmost nonzero column (pivot column). 2. Swap to bring nonzero entry to pivot position. 3. Eliminate all entries below pivot using row operations. 4. Repeat for next row/column. 5. Back-substitute from bottom up.",
+      "prerequisites": ["Matrix definition", "Systems of linear equations"],
+      "dependencies": [
+        {
+          "target": "structure-matrix-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Algorithm operates on matrices"
+        }
+      ],
+      "enables": ["structure-matrix-inverse", "structure-rank-nullity", "structure-determinant"],
+      "compositionRules": [
+        {
+          "with": "structure-matrix-definition",
+          "yields": "Complete linear system solver: reduces Ax = b to triangular form",
+          "type": "sequential",
+          "conditions": ["Any m x n matrix augmented with b"],
+          "example": "[[1,2,3],[4,5,6],[7,8,10]] row reduces to [[1,2,3],[0,-3,-6],[0,0,1]]"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Solve a system of linear equations",
+        "Find the rank of a matrix",
+        "Determine if a system has a unique solution, infinitely many, or none"
+      ],
+      "keywords": ["Gaussian elimination", "row reduction", "echelon form", "pivot", "back substitution"],
+      "tags": ["linear-algebra", "algorithms", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-matrix-inverse",
+      "name": "Matrix Inverse",
+      "type": "algorithm",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.3",
+      "planePosition": { "real": -0.5, "imaginary": 0.5 },
+      "formalStatement": "The inverse of an n x n matrix A is the unique matrix A^{-1} satisfying A*A^{-1} = A^{-1}*A = I. A is invertible iff det(A) != 0 iff rank(A) = n iff all eigenvalues are nonzero.",
+      "computationalForm": "Method 1: Augment [A | I] and row reduce to [I | A^{-1}]. Method 2: A^{-1} = (1/det(A)) * adj(A). For 2x2: [[a,b],[c,d]]^{-1} = (1/(ad-bc))*[[d,-b],[-c,a]].",
+      "prerequisites": ["Gaussian elimination", "Determinant", "Identity matrix"],
+      "dependencies": [
+        {
+          "target": "structure-gaussian-elimination",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Row reduction is the standard algorithm for computing inverses"
+        },
+        {
+          "target": "structure-determinant",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Invertibility requires nonzero determinant"
+        }
+      ],
+      "enables": ["structure-diagonalization", "structure-change-of-basis"],
+      "compositionRules": [
+        {
+          "with": "structure-linear-transformation",
+          "yields": "Invertible transformations: bijective linear maps",
+          "type": "sequential",
+          "conditions": ["Square matrix with nonzero determinant"],
+          "example": "Rotation inverse: R(theta)^{-1} = R(-theta)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Solve a linear system Ax = b by computing x = A^{-1}b",
+        "Undo a linear transformation",
+        "Check if a transformation is bijective"
+      ],
+      "keywords": ["inverse", "invertible", "nonsingular", "bijective"],
+      "tags": ["linear-algebra", "algorithms", "matrices"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-orthogonal-matrix",
+      "name": "Orthogonal and Unitary Matrices",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.5",
+      "planePosition": { "real": -0.3, "imaginary": 0.55 },
+      "formalStatement": "A real square matrix Q is orthogonal if Q^T*Q = Q*Q^T = I, equivalently Q^{-1} = Q^T. Its columns form an orthonormal basis. A complex matrix U is unitary if U^{dagger}*U = I. Orthogonal matrices preserve lengths and angles: ||Qv|| = ||v||.",
+      "computationalForm": "Check: Q^T * Q should equal I. Properties: det(Q) = +/-1, eigenvalues have |lambda| = 1. Examples: rotation matrices, reflection matrices, permutation matrices.",
+      "prerequisites": ["Matrix transpose", "Orthogonality", "Inner product"],
+      "dependencies": [
+        {
+          "target": "structure-orthogonality",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Columns of orthogonal matrix are orthonormal"
+        },
+        {
+          "target": "structure-matrix-multiplication",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Defined via matrix product Q^T*Q = I"
+        }
+      ],
+      "enables": ["structure-svd", "structure-spectral-theorem"],
+      "compositionRules": [
+        {
+          "with": "structure-eigenvalue",
+          "yields": "Spectral decomposition of symmetric matrices: A = Q*D*Q^T",
+          "type": "sequential",
+          "conditions": ["A is real symmetric"],
+          "example": "Symmetric 2x2 matrix decomposes with orthogonal eigenvector matrix"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find a transformation that preserves distances and angles",
+        "Represent rotations and reflections as matrices",
+        "Construct an orthonormal basis for a subspace"
+      ],
+      "keywords": ["orthogonal", "unitary", "rotation", "reflection", "isometry"],
+      "tags": ["linear-algebra", "geometry", "transformations"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-spectral-theorem",
+      "name": "Spectral Theorem",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.6",
+      "planePosition": { "real": -0.35, "imaginary": 0.7 },
+      "formalStatement": "Every real symmetric matrix A has an orthogonal diagonalization: A = Q*D*Q^T where Q is orthogonal and D is diagonal with real eigenvalues. Every Hermitian matrix has a unitary diagonalization. In particular, all eigenvalues of a symmetric/Hermitian matrix are real.",
+      "computationalForm": "1. Verify A = A^T (symmetric). 2. Find eigenvalues (guaranteed real). 3. Find orthonormal eigenvectors (Gram-Schmidt if needed). 4. Form Q = [v_1|...|v_n], D = diag(lambda_1,...,lambda_n). Then A = QDQ^T.",
+      "prerequisites": ["Diagonalization", "Orthogonal matrices", "Eigenvalues"],
+      "dependencies": [
+        {
+          "target": "structure-diagonalization",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Spectral theorem is a special case of diagonalization for symmetric matrices"
+        },
+        {
+          "target": "structure-orthogonal-matrix",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "The change-of-basis matrix is orthogonal"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "structure-svd",
+          "yields": "Connection between spectral theorem and SVD: for symmetric A, SVD reduces to spectral decomposition",
+          "type": "parallel",
+          "conditions": ["A is real symmetric"],
+          "example": "For symmetric A: A^T*A = A^2, so singular values are |eigenvalues|, and U = V (up to signs)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Diagonalize a symmetric or Hermitian matrix with an orthogonal basis",
+        "Prove that all eigenvalues of a symmetric matrix are real",
+        "Decompose a quadratic form into principal axes"
+      ],
+      "keywords": ["spectral theorem", "symmetric", "Hermitian", "orthogonal diagonalization", "real eigenvalues"],
+      "tags": ["linear-algebra", "spectral-theory", "fundamental-theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-change-of-basis",
+      "name": "Change of Basis",
+      "type": "technique",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.5",
+      "planePosition": { "real": -0.4, "imaginary": 0.6 },
+      "formalStatement": "If B = {b_1,...,b_n} and B' = {b'_1,...,b'_n} are two bases of V, the change-of-basis matrix P from B to B' satisfies [v]_{B'} = P^{-1}[v]_B. The matrix of T in basis B' is [T]_{B'} = P^{-1}[T]_B P.",
+      "computationalForm": "1. Express each b_i as a linear combination of B' vectors. 2. Form P with these coefficients as columns. 3. New coordinates: [v]_{B'} = P^{-1}[v]_B. 4. New matrix: [T]_{B'} = P^{-1}[T]_B*P.",
+      "prerequisites": ["Basis", "Matrix inverse", "Linear transformation"],
+      "dependencies": [
+        {
+          "target": "structure-span-basis",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Change of basis operates between two bases"
+        },
+        {
+          "target": "structure-matrix-inverse",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Change-of-basis matrix must be invertible"
+        }
+      ],
+      "enables": ["structure-diagonalization"],
+      "compositionRules": [
+        {
+          "with": "structure-diagonalization",
+          "yields": "Diagonalization is change of basis to eigenbasis: A = PDP^{-1}",
+          "type": "sequential",
+          "conditions": ["Matrix is diagonalizable"],
+          "example": "Choosing eigenvectors as new basis converts A to diagonal form"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Express a vector or transformation in a different coordinate system",
+        "Simplify a matrix by choosing a convenient basis",
+        "Convert between different representations of the same linear map"
+      ],
+      "keywords": ["change of basis", "coordinates", "similar matrices", "transition matrix"],
+      "tags": ["linear-algebra", "technique", "transformations"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-least-squares",
+      "name": "Least Squares",
+      "type": "algorithm",
+      "domain": "structure",
+      "chapter": 12,
+      "section": "12.6",
+      "planePosition": { "real": -0.2, "imaginary": 0.5 },
+      "formalStatement": "For an overdetermined system Ax = b (more equations than unknowns), the least squares solution minimizes ||Ax - b||^2. It satisfies the normal equations A^T*A*x = A^T*b. If A has full column rank, x = (A^T*A)^{-1}*A^T*b.",
+      "computationalForm": "1. Form normal equations: A^T*A*x = A^T*b. 2. Solve (A^T*A is square and invertible if A has full rank). Alternative: use SVD pseudoinverse x = A^+*b.",
+      "prerequisites": ["Matrix multiplication", "Rank-nullity theorem", "Orthogonal projection"],
+      "dependencies": [
+        {
+          "target": "structure-orthogonality",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Least squares finds the orthogonal projection of b onto column space of A"
+        },
+        {
+          "target": "structure-rank-nullity",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Full rank condition determines unique solution existence"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "structure-svd",
+          "yields": "Numerically stable least squares via SVD pseudoinverse",
+          "type": "sequential",
+          "conditions": ["Any m x n matrix A with m > n"],
+          "example": "Fitting a line y = mx + c to n data points: A = [[x_1,1],...,[x_n,1]], b = [y_1,...,y_n]"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find the best approximate solution to an overdetermined system",
+        "Fit a model to data with more observations than parameters",
+        "Perform linear regression"
+      ],
+      "keywords": ["least squares", "regression", "normal equations", "overdetermined", "best fit"],
+      "tags": ["linear-algebra", "algorithms", "data-science", "optimization"],
+      "buildLabs": ["Build Lab 12.6: Linear Regression via Least Squares"]
+    },
+    {
+      "id": "structure-gradient",
+      "name": "Gradient",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 13,
+      "section": "13.1",
+      "planePosition": { "real": -0.1, "imaginary": 0.35 },
+      "formalStatement": "The gradient of a scalar field f: R^n -> R is the vector of partial derivatives: grad(f) = nabla f = (df/dx_1, df/dx_2, ..., df/dx_n). It points in the direction of steepest ascent and its magnitude is the rate of maximum increase.",
+      "computationalForm": "Compute each partial derivative df/dx_i holding other variables constant. Assemble into vector. At point p: direction of steepest ascent is nabla f(p) / ||nabla f(p)||.",
+      "prerequisites": ["Partial derivatives", "Vectors in R^n"],
+      "dependencies": [
+        {
+          "target": "structure-vector-definition",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Gradient is a vector"
+        }
+      ],
+      "enables": ["structure-divergence", "structure-curl", "structure-conservative-field", "structure-jacobian"],
+      "compositionRules": [
+        {
+          "with": "structure-line-integral",
+          "yields": "Fundamental theorem for line integrals: integral of grad(f) . dr = f(b) - f(a)",
+          "type": "sequential",
+          "conditions": ["f is differentiable", "Path from a to b"],
+          "example": "For f(x,y) = x^2+y^2, integral of nabla f from (0,0) to (1,1) = f(1,1)-f(0,0) = 2"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find the direction of steepest increase of a function",
+        "Compute the rate of change in an arbitrary direction via directional derivative",
+        "Set up optimization conditions: critical points where nabla f = 0"
+      ],
+      "keywords": ["gradient", "nabla", "partial derivative", "steepest ascent", "directional derivative"],
+      "tags": ["vector-calculus", "calculus", "optimization"],
+      "buildLabs": ["Build Lab 13.1: Gradient Fields and Level Curves"]
+    },
+    {
+      "id": "structure-divergence",
+      "name": "Divergence",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 13,
+      "section": "13.2",
+      "planePosition": { "real": -0.05, "imaginary": 0.4 },
+      "formalStatement": "The divergence of a vector field F = (F_1, F_2, F_3): R^3 -> R^3 is the scalar field div(F) = nabla . F = dF_1/dx + dF_2/dy + dF_3/dz. It measures the rate at which the field expands or compresses at each point.",
+      "computationalForm": "Sum the partial derivatives of each component with respect to its corresponding variable: div(F) = dF_1/dx_1 + dF_2/dx_2 + ... + dF_n/dx_n.",
+      "prerequisites": ["Partial derivatives", "Vector fields"],
+      "dependencies": [
+        {
+          "target": "structure-gradient",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Divergence uses the same nabla operator as gradient but as dot product"
+        }
+      ],
+      "enables": ["structure-divergence-theorem"],
+      "compositionRules": [
+        {
+          "with": "structure-gradient",
+          "yields": "Laplacian: div(grad(f)) = nabla^2 f = sum of second partials",
+          "type": "sequential",
+          "conditions": ["f is twice differentiable"],
+          "example": "For f(x,y) = x^2 + y^2: grad(f) = (2x, 2y), div(grad(f)) = 2 + 2 = 4"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if a vector field is expanding or compressing at a point",
+        "Check if a fluid flow is incompressible (div = 0)",
+        "Compute the source/sink strength of a field"
+      ],
+      "keywords": ["divergence", "source", "sink", "flux density", "compressible"],
+      "tags": ["vector-calculus", "differential-operators"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-curl",
+      "name": "Curl",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 13,
+      "section": "13.2",
+      "planePosition": { "real": 0.0, "imaginary": 0.45 },
+      "formalStatement": "The curl of a vector field F = (F_1, F_2, F_3) is curl(F) = nabla x F = (dF_3/dy - dF_2/dz, dF_1/dz - dF_3/dx, dF_2/dx - dF_1/dy). It measures the rotational tendency of the field at each point.",
+      "computationalForm": "Compute as formal determinant of [i,j,k; d/dx,d/dy,d/dz; F_1,F_2,F_3]. Each component is a difference of cross-partial derivatives.",
+      "prerequisites": ["Partial derivatives", "Cross product", "Vector fields"],
+      "dependencies": [
+        {
+          "target": "structure-gradient",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Curl uses the nabla operator as cross product"
+        },
+        {
+          "target": "structure-cross-product",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Curl is formally nabla cross F"
+        }
+      ],
+      "enables": ["structure-stokes-theorem", "structure-conservative-field"],
+      "compositionRules": [
+        {
+          "with": "structure-gradient",
+          "yields": "Identity: curl(grad(f)) = 0 for any twice-differentiable scalar field",
+          "type": "sequential",
+          "conditions": ["f is C^2"],
+          "example": "For f(x,y,z) = xyz: grad = (yz, xz, xy), curl of this = (x-x, y-y, z-z) = (0,0,0)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if a vector field has rotational behavior",
+        "Check if a field is conservative (curl = 0)",
+        "Compute circulation density around a point"
+      ],
+      "keywords": ["curl", "rotation", "circulation", "irrotational", "vorticity"],
+      "tags": ["vector-calculus", "differential-operators"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-line-integral",
+      "name": "Line Integral",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 13,
+      "section": "13.3",
+      "planePosition": { "real": -0.1, "imaginary": 0.35 },
+      "formalStatement": "The line integral of a vector field F along a curve C parametrized by r(t), a <= t <= b, is integral_C F . dr = integral_a^b F(r(t)) . r'(t) dt. For a scalar field f: integral_C f ds = integral_a^b f(r(t)) ||r'(t)|| dt.",
+      "computationalForm": "1. Parametrize the curve: r(t). 2. Compute r'(t). 3. Evaluate F(r(t)). 4. Compute dot product F(r(t)) . r'(t). 5. Integrate from a to b.",
+      "prerequisites": ["Parametric curves", "Dot product", "Integration"],
+      "dependencies": [
+        {
+          "target": "structure-dot-product",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Line integral of vector field uses dot product F . dr"
+        },
+        {
+          "target": "structure-vector-definition",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Defined for vector fields along curves"
+        }
+      ],
+      "enables": ["structure-greens-theorem", "structure-stokes-theorem", "structure-conservative-field"],
+      "compositionRules": [
+        {
+          "with": "structure-conservative-field",
+          "yields": "Path-independent integral: integral depends only on endpoints if F = grad(f)",
+          "type": "sequential",
+          "conditions": ["F is conservative"],
+          "example": "Work done by gravity: integral_C mg . dr = mgh depends only on height change"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Compute work done by a force along a path",
+        "Calculate circulation of a vector field around a curve",
+        "Evaluate integral of a function along a curve"
+      ],
+      "keywords": ["line integral", "path integral", "work", "circulation", "parametrize"],
+      "tags": ["vector-calculus", "integration"],
+      "buildLabs": ["Build Lab 13.2: Work and Line Integrals"]
+    },
+    {
+      "id": "structure-surface-integral",
+      "name": "Surface Integral",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 13,
+      "section": "13.4",
+      "planePosition": { "real": 0.0, "imaginary": 0.5 },
+      "formalStatement": "The surface integral of F over S parametrized by r(u,v) is integral_S F . dS = integral_D F(r(u,v)) . (r_u x r_v) du dv. For a scalar: integral_S f dS = integral_D f(r(u,v)) ||r_u x r_v|| du dv.",
+      "computationalForm": "1. Parametrize surface: r(u,v). 2. Compute r_u and r_v (partial derivatives). 3. Normal: n = r_u x r_v. 4. Evaluate F . n at each point. 5. Integrate over parameter domain D.",
+      "prerequisites": ["Cross product", "Double integrals", "Parametric surfaces"],
+      "dependencies": [
+        {
+          "target": "structure-cross-product",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Surface element dS involves cross product of tangent vectors"
+        },
+        {
+          "target": "structure-line-integral",
+          "type": "motivates",
+          "strength": 0.6,
+          "description": "Surface integrals generalize line integrals to 2D"
+        }
+      ],
+      "enables": ["structure-divergence-theorem", "structure-stokes-theorem"],
+      "compositionRules": [
+        {
+          "with": "structure-divergence-theorem",
+          "yields": "Convert volume integrals to surface integrals and vice versa",
+          "type": "sequential",
+          "conditions": ["Closed surface bounding a volume", "F is C^1"],
+          "example": "Flux through sphere = integral of divergence over ball interior"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Calculate flux of a vector field through a surface",
+        "Compute the total quantity passing through a boundary",
+        "Evaluate integrals over curved surfaces"
+      ],
+      "keywords": ["surface integral", "flux", "normal vector", "parametric surface"],
+      "tags": ["vector-calculus", "integration"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-greens-theorem",
+      "name": "Green's Theorem",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 13,
+      "section": "13.5",
+      "planePosition": { "real": -0.15, "imaginary": 0.5 },
+      "formalStatement": "For a positively oriented, piecewise smooth, simple closed curve C bounding a region D in R^2, and F = (P, Q) a C^1 vector field: oint_C P dx + Q dy = integral_D (dQ/dx - dP/dy) dA.",
+      "computationalForm": "1. Identify the boundary curve C and interior region D. 2. Compute dQ/dx - dP/dy. 3. Evaluate the double integral over D. This equals the line integral around C.",
+      "prerequisites": ["Line integrals", "Double integrals", "Partial derivatives"],
+      "dependencies": [
+        {
+          "target": "structure-line-integral",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Green's theorem relates line integrals to double integrals"
+        },
+        {
+          "target": "structure-curl",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "The integrand dQ/dx - dP/dy is the 2D curl"
+        }
+      ],
+      "enables": ["structure-stokes-theorem"],
+      "compositionRules": [
+        {
+          "with": "structure-line-integral",
+          "yields": "Area computation: A = (1/2) oint_C x dy - y dx",
+          "type": "sequential",
+          "conditions": ["Simple closed curve in R^2"],
+          "example": "Area of circle: (1/2) oint (x dy - y dx) = pi*r^2 using parametrization x=r*cos(t), y=r*sin(t)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Convert a line integral around a closed curve to a double integral",
+        "Compute area enclosed by a curve using a line integral",
+        "Evaluate circulation of a 2D vector field"
+      ],
+      "keywords": ["Green's theorem", "circulation", "area", "planar", "curl"],
+      "tags": ["vector-calculus", "fundamental-theorem", "integration"],
+      "buildLabs": ["Build Lab 13.3: Green's Theorem and Area"]
+    },
+    {
+      "id": "structure-stokes-theorem",
+      "name": "Stokes' Theorem",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 13,
+      "section": "13.6",
+      "planePosition": { "real": -0.05, "imaginary": 0.55 },
+      "formalStatement": "For a smooth oriented surface S with boundary curve C (oriented consistently): integral_C F . dr = integral_S (curl F) . dS. The circulation of F around C equals the flux of curl(F) through S.",
+      "computationalForm": "1. Identify surface S and its boundary C. 2. Compute curl(F). 3. Choose: either evaluate line integral around C or surface integral of curl(F) over S, whichever is easier.",
+      "prerequisites": ["Curl", "Line integrals", "Surface integrals"],
+      "dependencies": [
+        {
+          "target": "structure-curl",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Stokes' theorem involves curl of the vector field"
+        },
+        {
+          "target": "structure-surface-integral",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Right side is a surface integral"
+        },
+        {
+          "target": "structure-line-integral",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Left side is a line integral"
+        },
+        {
+          "target": "structure-greens-theorem",
+          "type": "generalizes",
+          "strength": 0.8,
+          "description": "Green's theorem is the 2D case of Stokes' theorem"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "structure-conservative-field",
+          "yields": "For conservative F (curl=0), integral over any closed curve is 0",
+          "type": "sequential",
+          "conditions": ["curl(F) = 0", "Simply connected domain"],
+          "example": "If F = grad(f), then curl(F) = 0, so oint_C F . dr = integral_S 0 dS = 0"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Convert a line integral to a surface integral or vice versa",
+        "Relate circulation around a boundary to rotation through a surface",
+        "Prove that a conservative field has zero circulation"
+      ],
+      "keywords": ["Stokes' theorem", "circulation", "curl", "surface", "boundary"],
+      "tags": ["vector-calculus", "fundamental-theorem"],
+      "buildLabs": ["Build Lab 13.4: Stokes' Theorem Verification"]
+    },
+    {
+      "id": "structure-divergence-theorem",
+      "name": "Divergence Theorem (Gauss's Theorem)",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 13,
+      "section": "13.6",
+      "planePosition": { "real": 0.05, "imaginary": 0.5 },
+      "formalStatement": "For a solid region E bounded by a closed surface S with outward normal: integral_S F . dS = integral_E div(F) dV. The total flux through S equals the integral of divergence over the enclosed volume.",
+      "computationalForm": "1. Identify closed surface S bounding volume E. 2. Compute div(F). 3. Choose: either compute surface integral directly or volume integral of divergence, whichever is simpler.",
+      "prerequisites": ["Divergence", "Surface integrals", "Triple integrals"],
+      "dependencies": [
+        {
+          "target": "structure-divergence",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Theorem involves divergence of the field"
+        },
+        {
+          "target": "structure-surface-integral",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Left side is a surface integral"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "structure-divergence",
+          "yields": "Physical conservation laws: if div(F) = 0, total flux through any closed surface is 0",
+          "type": "sequential",
+          "conditions": ["F is divergence-free (solenoidal)"],
+          "example": "For incompressible fluid (div(v) = 0): flux into any volume = flux out"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Convert a surface integral over a closed surface to a volume integral",
+        "Compute flux using divergence when surface integral is hard",
+        "Derive conservation laws in physics"
+      ],
+      "keywords": ["divergence theorem", "Gauss", "flux", "volume integral", "conservation"],
+      "tags": ["vector-calculus", "fundamental-theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-conservative-field",
+      "name": "Conservative Vector Field",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 13,
+      "section": "13.3",
+      "planePosition": { "real": -0.1, "imaginary": 0.4 },
+      "formalStatement": "A vector field F is conservative if F = grad(f) for some scalar potential f. Equivalently (in simply connected domains): curl(F) = 0, and the line integral of F is path-independent.",
+      "computationalForm": "Test: compute curl(F). If curl(F) = 0 in a simply connected domain, F is conservative. Find potential: integrate F_1 w.r.t. x, then match remaining components.",
+      "prerequisites": ["Gradient", "Curl", "Line integrals"],
+      "dependencies": [
+        {
+          "target": "structure-gradient",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Conservative field is defined as gradient of a potential"
+        },
+        {
+          "target": "structure-curl",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Curl test determines if field is conservative"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "structure-line-integral",
+          "yields": "Path independence: integral depends only on endpoints, not path",
+          "type": "sequential",
+          "conditions": ["Simply connected domain", "curl(F) = 0"],
+          "example": "F = (2xy, x^2): potential f = x^2*y, integral from (0,0) to (1,1) = f(1,1) - f(0,0) = 1"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if a force field is conservative (has a potential)",
+        "Simplify line integral computation via path independence",
+        "Find a scalar potential function for a given vector field"
+      ],
+      "keywords": ["conservative", "potential", "path independent", "gradient field", "exact"],
+      "tags": ["vector-calculus", "physics"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-potential-function",
+      "name": "Potential Function",
+      "type": "technique",
+      "domain": "structure",
+      "chapter": 13,
+      "section": "13.3",
+      "planePosition": { "real": 0.0, "imaginary": 0.35 },
+      "formalStatement": "For a conservative field F = (P, Q, R), the potential function f satisfies df/dx = P, df/dy = Q, df/dz = R. Recovery technique: integrate P w.r.t. x to get f = integral P dx + g(y,z), then determine g by matching df/dy = Q and df/dz = R.",
+      "computationalForm": "1. Integrate F_1 w.r.t. x_1: f = int F_1 dx_1 + g(x_2,...,x_n). 2. Differentiate f w.r.t. x_2 and set equal to F_2: solve for partial g. 3. Repeat for remaining variables. 4. Result: f such that grad(f) = F.",
+      "prerequisites": ["Conservative vector fields", "Integration", "Partial derivatives"],
+      "dependencies": [
+        {
+          "target": "structure-conservative-field",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Potential functions exist only for conservative fields"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "structure-gradient",
+          "yields": "Round-trip: f -> grad(f) = F -> recover f from F (up to constant)",
+          "type": "sequential",
+          "conditions": ["F is conservative"],
+          "example": "F = (yz, xz, xy): f = xyz (check: grad(xyz) = (yz, xz, xy))"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find the potential energy function for a conservative force",
+        "Recover a scalar field whose gradient is a given vector field",
+        "Simplify work calculations by finding the potential"
+      ],
+      "keywords": ["potential function", "antiderivative", "scalar potential", "recovery"],
+      "tags": ["vector-calculus", "technique", "physics"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-jacobian",
+      "name": "Jacobian Matrix",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 13,
+      "section": "13.1",
+      "planePosition": { "real": -0.15, "imaginary": 0.45 },
+      "formalStatement": "The Jacobian matrix of a function F: R^n -> R^m at point x is the m x n matrix J_F(x) with J_{ij} = dF_i/dx_j. It is the best linear approximation to F near x: F(x + h) approx F(x) + J_F(x)*h.",
+      "computationalForm": "Compute all partial derivatives: J[i][j] = dF_i/dx_j. For coordinate transformations, |det(J)| is the volume scaling factor. Jacobian determinant used in change of variables for integration.",
+      "prerequisites": ["Partial derivatives", "Matrix definition", "Linear transformations"],
+      "dependencies": [
+        {
+          "target": "structure-gradient",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Jacobian matrix generalizes the gradient to vector-valued functions"
+        },
+        {
+          "target": "structure-matrix-definition",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Jacobian is a matrix of partial derivatives"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "structure-determinant",
+          "yields": "Change of variables in integrals: dx dy = |det(J)| du dv",
+          "type": "sequential",
+          "conditions": ["Transformation is differentiable and invertible"],
+          "example": "Polar coordinates: J = [[cos(t),-r*sin(t)],[sin(t),r*cos(t)]], |det(J)| = r, so dx dy = r dr dt"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Linearize a nonlinear function at a point",
+        "Compute the volume scaling factor for a coordinate transformation",
+        "Apply the chain rule for multivariable functions"
+      ],
+      "keywords": ["Jacobian", "partial derivatives", "linearization", "change of variables", "chain rule"],
+      "tags": ["vector-calculus", "matrices", "analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-multivariable-chain-rule",
+      "name": "Chain Rule for Multivariable Functions",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 13,
+      "section": "13.1",
+      "planePosition": { "real": -0.05, "imaginary": 0.3 },
+      "formalStatement": "If g: R^m -> R^n and f: R^n -> R^p are differentiable, then the derivative of f o g at x is J_{fog}(x) = J_f(g(x)) * J_g(x). In the scalar case: d(f(g(t)))/dt = nabla f(g(t)) . g'(t).",
+      "computationalForm": "Multiply Jacobian matrices: J of composition = J of outer evaluated at inner times J of inner. For scalar composition: df/dt = sum_i (df/dx_i)(dx_i/dt).",
+      "prerequisites": ["Jacobian matrix", "Matrix multiplication", "Single-variable chain rule"],
+      "dependencies": [
+        {
+          "target": "structure-jacobian",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Chain rule is expressed via Jacobian matrix multiplication"
+        },
+        {
+          "target": "structure-matrix-multiplication",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Composition of derivatives = product of Jacobians"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "structure-gradient",
+          "yields": "Directional derivative: D_u f = nabla f . u (chain rule along direction u)",
+          "type": "sequential",
+          "conditions": ["f differentiable", "u is a unit vector"],
+          "example": "D_(1/sqrt(2),1/sqrt(2)) (x^2+y^2) at (1,1) = (2,2).(1/sqrt(2),1/sqrt(2)) = 2*sqrt(2)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Differentiate a composition of multivariable functions",
+        "Convert between different coordinate system derivatives",
+        "Compute how a function changes along a parametric path"
+      ],
+      "keywords": ["chain rule", "composition", "Jacobian", "directional derivative"],
+      "tags": ["vector-calculus", "calculus", "differentiation"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-complex-function",
+      "name": "Complex Function",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 14,
+      "section": "14.1",
+      "planePosition": { "real": -0.3, "imaginary": 0.6 },
+      "formalStatement": "A complex function f: C -> C maps complex numbers to complex numbers. Writing z = x + iy and f(z) = u(x,y) + iv(x,y), f decomposes into real and imaginary parts u, v: R^2 -> R. Complex functions can be visualized as transformations of the complex plane.",
+      "computationalForm": "Decompose f(z) = u(x,y) + iv(x,y). Evaluate by substituting z = x + iy. Common functions: polynomials, exp(z) = e^x(cos y + i sin y), log(z) = ln|z| + i*arg(z).",
+      "prerequisites": ["Complex numbers", "Functions of two real variables"],
+      "dependencies": [
+        {
+          "target": "structure-vector-definition",
+          "type": "motivates",
+          "strength": 0.5,
+          "description": "Complex functions can be viewed as R^2 -> R^2 vector fields"
+        }
+      ],
+      "enables": ["structure-analyticity", "structure-cauchy-riemann", "structure-contour-integral"],
+      "compositionRules": [
+        {
+          "with": "structure-analyticity",
+          "yields": "Holomorphic function theory: differentiable complex functions have extraordinary properties",
+          "type": "sequential",
+          "conditions": ["f is differentiable as a complex function"],
+          "example": "f(z) = z^2 is entire (holomorphic everywhere): f'(z) = 2z"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Define and evaluate functions of a complex variable",
+        "Decompose a complex function into real and imaginary parts",
+        "Visualize how a function transforms the complex plane"
+      ],
+      "keywords": ["complex function", "holomorphic", "analytic", "complex plane", "mapping"],
+      "tags": ["complex-analysis", "functions"],
+      "buildLabs": ["Build Lab 14.1: Complex Function Visualization"]
+    },
+    {
+      "id": "structure-analyticity",
+      "name": "Analyticity (Holomorphic Function)",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 14,
+      "section": "14.1",
+      "planePosition": { "real": -0.35, "imaginary": 0.65 },
+      "formalStatement": "A complex function f is analytic (holomorphic) at z_0 if f'(z_0) = lim_{h->0} (f(z_0+h)-f(z_0))/h exists, where h approaches 0 through complex values. f is entire if analytic on all of C. Analytic implies infinitely differentiable and equals its Taylor series.",
+      "computationalForm": "Check Cauchy-Riemann equations: du/dx = dv/dy and du/dy = -dv/dx. If satisfied and partials are continuous, f is analytic. Alternatively, f'(z) = du/dx + i*dv/dx.",
+      "prerequisites": ["Complex functions", "Limits", "Partial derivatives"],
+      "dependencies": [
+        {
+          "target": "structure-complex-function",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Analyticity is a property of complex functions"
+        }
+      ],
+      "enables": ["structure-cauchy-riemann", "structure-cauchy-integral-theorem", "structure-cauchy-integral-formula", "structure-laurent-series"],
+      "compositionRules": [
+        {
+          "with": "structure-cauchy-integral-theorem",
+          "yields": "Cauchy theory: if f is analytic inside C, then oint_C f(z) dz = 0",
+          "type": "sequential",
+          "conditions": ["f analytic in simply connected domain containing C"],
+          "example": "oint_{|z|=1} z^2 dz = 0 because z^2 is entire"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if a complex function is differentiable in the complex sense",
+        "Identify functions that have power series representations",
+        "Apply the powerful theorems of complex analysis to a function"
+      ],
+      "keywords": ["analytic", "holomorphic", "entire", "complex differentiable", "power series"],
+      "tags": ["complex-analysis", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-cauchy-riemann",
+      "name": "Cauchy-Riemann Equations",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 14,
+      "section": "14.2",
+      "planePosition": { "real": -0.3, "imaginary": 0.7 },
+      "formalStatement": "A function f(z) = u(x,y) + iv(x,y) is analytic at z = x + iy if and only if (assuming continuous partials) the Cauchy-Riemann equations hold: du/dx = dv/dy and du/dy = -dv/dx.",
+      "computationalForm": "1. Write f(z) = u + iv. 2. Compute du/dx, du/dy, dv/dx, dv/dy. 3. Check: du/dx = dv/dy and du/dy = -dv/dx. If both hold (with continuous partials), f is analytic.",
+      "prerequisites": ["Complex functions", "Partial derivatives"],
+      "dependencies": [
+        {
+          "target": "structure-analyticity",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "CR equations characterize analyticity"
+        }
+      ],
+      "enables": ["structure-conformal-mapping"],
+      "compositionRules": [
+        {
+          "with": "structure-gradient",
+          "yields": "u and v are harmonic conjugates: nabla^2 u = 0 and nabla^2 v = 0 (Laplace equation)",
+          "type": "sequential",
+          "conditions": ["f = u + iv is analytic"],
+          "example": "f(z) = z^2: u = x^2-y^2, v = 2xy. Both satisfy Laplace's equation."
+        }
+      ],
+      "applicabilityPatterns": [
+        "Test whether a complex function is analytic",
+        "Derive relationships between the real and imaginary parts of an analytic function",
+        "Show that real and imaginary parts of analytic functions are harmonic"
+      ],
+      "keywords": ["Cauchy-Riemann", "analytic test", "harmonic", "conjugate"],
+      "tags": ["complex-analysis", "differential-equations"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-contour-integral",
+      "name": "Contour Integral",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 14,
+      "section": "14.3",
+      "planePosition": { "real": -0.2, "imaginary": 0.6 },
+      "formalStatement": "The contour integral of f along a curve C parametrized by z(t), a <= t <= b, is integral_C f(z) dz = integral_a^b f(z(t)) z'(t) dt. For a closed contour, write oint_C f(z) dz.",
+      "computationalForm": "1. Parametrize the contour: z(t) for t in [a,b]. 2. Compute z'(t). 3. Substitute: integral_a^b f(z(t)) * z'(t) dt. Common contours: circles z(t) = z_0 + re^{it}.",
+      "prerequisites": ["Complex functions", "Parametric curves", "Integration"],
+      "dependencies": [
+        {
+          "target": "structure-complex-function",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Contour integrals are integrals of complex functions"
+        }
+      ],
+      "enables": ["structure-cauchy-integral-theorem", "structure-cauchy-integral-formula", "structure-residue-theorem"],
+      "compositionRules": [
+        {
+          "with": "structure-residue-theorem",
+          "yields": "Evaluate integrals by summing residues: oint f(z) dz = 2*pi*i * sum of residues",
+          "type": "sequential",
+          "conditions": ["f is meromorphic inside C", "C is a simple closed contour"],
+          "example": "oint_{|z|=2} 1/(z^2-1) dz = 2*pi*i*(Res(1) + Res(-1)) = 2*pi*i*(1/2 + (-1/2)) = 0"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Integrate a complex function along a path in the complex plane",
+        "Evaluate real integrals by extending to complex contours",
+        "Compute the integral of a function around a singularity"
+      ],
+      "keywords": ["contour integral", "path integral", "complex integration", "closed contour"],
+      "tags": ["complex-analysis", "integration"],
+      "buildLabs": ["Build Lab 14.2: Contour Integration"]
+    },
+    {
+      "id": "structure-cauchy-integral-theorem",
+      "name": "Cauchy's Integral Theorem",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 14,
+      "section": "14.3",
+      "planePosition": { "real": -0.25, "imaginary": 0.7 },
+      "formalStatement": "If f is analytic on and inside a simple closed contour C, then oint_C f(z) dz = 0. Equivalently, the integral of an analytic function depends only on the endpoints, not the path.",
+      "computationalForm": "Check that f is analytic everywhere inside C (no singularities). If so, the contour integral is zero. If singularities exist inside C, use residue theorem instead.",
+      "prerequisites": ["Contour integrals", "Analyticity"],
+      "dependencies": [
+        {
+          "target": "structure-analyticity",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Theorem applies to analytic functions"
+        },
+        {
+          "target": "structure-contour-integral",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Theorem is about contour integrals"
+        }
+      ],
+      "enables": ["structure-cauchy-integral-formula", "structure-residue-theorem"],
+      "compositionRules": [
+        {
+          "with": "structure-cauchy-integral-formula",
+          "yields": "Evaluate f(z_0) from boundary data: f(z_0) = (1/2*pi*i) oint f(z)/(z-z_0) dz",
+          "type": "sequential",
+          "conditions": ["f analytic inside C", "z_0 inside C"],
+          "example": "f(z) = e^z, z_0 = 0, C = unit circle: (1/2*pi*i) oint e^z/z dz = e^0 = 1"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Show that a contour integral of an analytic function is zero",
+        "Prove path independence for complex integrals",
+        "Deform contours through regions where f is analytic"
+      ],
+      "keywords": ["Cauchy theorem", "analytic", "closed contour", "path independence"],
+      "tags": ["complex-analysis", "fundamental-theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-cauchy-integral-formula",
+      "name": "Cauchy's Integral Formula",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 14,
+      "section": "14.4",
+      "planePosition": { "real": -0.2, "imaginary": 0.75 },
+      "formalStatement": "If f is analytic inside and on a simple closed contour C, and z_0 is inside C, then f(z_0) = (1/(2*pi*i)) oint_C f(z)/(z - z_0) dz. The n-th derivative: f^{(n)}(z_0) = (n!/(2*pi*i)) oint_C f(z)/(z - z_0)^{n+1} dz.",
+      "computationalForm": "To find f(z_0): compute oint f(z)/(z-z_0) dz and divide by 2*pi*i. For derivatives: compute oint f(z)/(z-z_0)^{n+1} dz and multiply by n!/(2*pi*i).",
+      "prerequisites": ["Cauchy's integral theorem", "Contour integrals", "Analyticity"],
+      "dependencies": [
+        {
+          "target": "structure-cauchy-integral-theorem",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Integral formula is a consequence of Cauchy's theorem"
+        }
+      ],
+      "enables": ["structure-residue-theorem", "structure-maximum-modulus"],
+      "compositionRules": [
+        {
+          "with": "structure-laurent-series",
+          "yields": "Coefficient extraction: a_n = (1/(2*pi*i)) oint f(z)/z^{n+1} dz (Laurent coefficients)",
+          "type": "sequential",
+          "conditions": ["f analytic in annular region"],
+          "example": "For e^z around z=0: a_n = 1/n! recovered from integral formula"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Evaluate a complex function at a point using contour integration",
+        "Compute derivatives of analytic functions from integral representations",
+        "Prove that analytic functions are infinitely differentiable"
+      ],
+      "keywords": ["Cauchy formula", "integral representation", "derivative", "analytic"],
+      "tags": ["complex-analysis", "fundamental-theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-residue-theorem",
+      "name": "Residue Theorem",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 14,
+      "section": "14.5",
+      "planePosition": { "real": -0.15, "imaginary": 0.75 },
+      "formalStatement": "If f is analytic inside and on a simple closed contour C except for isolated singularities z_1,...,z_n inside C, then oint_C f(z) dz = 2*pi*i * sum_{k=1}^{n} Res(f, z_k).",
+      "computationalForm": "1. Find all singularities inside C. 2. Compute residue at each: Res(f,z_k) = coefficient of 1/(z-z_k) in Laurent series. For simple poles: Res = lim_{z->z_k} (z-z_k)*f(z). 3. Sum and multiply by 2*pi*i.",
+      "prerequisites": ["Cauchy's integral formula", "Laurent series", "Poles and singularities"],
+      "dependencies": [
+        {
+          "target": "structure-cauchy-integral-formula",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Residue theorem generalizes Cauchy's integral formula"
+        },
+        {
+          "target": "structure-laurent-series",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Residues are Laurent series coefficients"
+        },
+        {
+          "target": "structure-poles-singularities",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Residue theorem applies at singularities"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "structure-contour-integral",
+          "yields": "Evaluation of real integrals via complex methods: integral_{-inf}^{inf} f(x) dx = 2*pi*i * sum of residues in upper half-plane",
+          "type": "sequential",
+          "conditions": ["f(z) decays sufficiently as |z| -> infinity", "Appropriate contour chosen"],
+          "example": "integral_{-inf}^{inf} 1/(1+x^2) dx = 2*pi*i * Res(1/(1+z^2), i) = 2*pi*i * 1/(2i) = pi"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Evaluate complex contour integrals around singularities",
+        "Compute real definite integrals using complex analysis techniques",
+        "Sum series using residue methods"
+      ],
+      "keywords": ["residue", "singularity", "pole", "contour", "Laurent"],
+      "tags": ["complex-analysis", "integration", "fundamental-theorem"],
+      "buildLabs": ["Build Lab 14.3: Residue Theorem Applications"]
+    },
+    {
+      "id": "structure-laurent-series",
+      "name": "Laurent Series",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 14,
+      "section": "14.5",
+      "planePosition": { "real": -0.25, "imaginary": 0.65 },
+      "formalStatement": "The Laurent series of f about z_0 in an annular region R_1 < |z - z_0| < R_2 is f(z) = sum_{n=-inf}^{inf} a_n (z - z_0)^n where a_n = (1/(2*pi*i)) oint_C f(z)/(z-z_0)^{n+1} dz.",
+      "computationalForm": "Expand f in positive and negative powers of (z - z_0). The principal part (negative powers) determines the singularity type. For computational use, partial fractions and known series expansions.",
+      "prerequisites": ["Power series", "Contour integrals", "Analyticity"],
+      "dependencies": [
+        {
+          "target": "structure-analyticity",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Laurent series exists where f is analytic in an annulus"
+        },
+        {
+          "target": "structure-contour-integral",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Coefficients defined via contour integrals"
+        }
+      ],
+      "enables": ["structure-residue-theorem", "structure-poles-singularities"],
+      "compositionRules": [
+        {
+          "with": "structure-poles-singularities",
+          "yields": "Classification of singularities by Laurent series: removable (no negative terms), pole (finite negative terms), essential (infinite negative terms)",
+          "type": "sequential",
+          "conditions": ["f has isolated singularity at z_0"],
+          "example": "1/(z-1) has Laurent series with single term (z-1)^{-1}: simple pole"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Expand a function with singularities as a series",
+        "Classify the type of an isolated singularity",
+        "Find the residue as the a_{-1} coefficient"
+      ],
+      "keywords": ["Laurent series", "principal part", "annulus", "negative powers"],
+      "tags": ["complex-analysis", "series"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-conformal-mapping",
+      "name": "Conformal Mapping",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 14,
+      "section": "14.6",
+      "planePosition": { "real": -0.1, "imaginary": 0.7 },
+      "formalStatement": "A conformal mapping is a function f: C -> C that preserves angles between curves at every point where f'(z) != 0. Analytic functions with nonzero derivative are conformal. Key examples: Mobius transformations f(z) = (az+b)/(cz+d), exponential maps.",
+      "computationalForm": "Check conformality: verify f is analytic and f'(z) != 0. Mobius transformations: given three pairs (z_k, w_k), solve for a,b,c,d. Applications: map complicated domains to simple ones for easier integration.",
+      "prerequisites": ["Analyticity", "Cauchy-Riemann equations", "Complex functions"],
+      "dependencies": [
+        {
+          "target": "structure-cauchy-riemann",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Conformal maps are analytic functions satisfying CR equations"
+        },
+        {
+          "target": "structure-analyticity",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Conformality requires analyticity"
+        }
+      ],
+      "enables": ["structure-riemann-sphere"],
+      "compositionRules": [
+        {
+          "with": "structure-cauchy-integral-theorem",
+          "yields": "Solve boundary value problems by mapping to simpler domains, integrating, mapping back",
+          "type": "sequential",
+          "conditions": ["Domains are conformally equivalent", "f'(z) != 0 in domain"],
+          "example": "Map upper half-plane to unit disk via f(z) = (z-i)/(z+i), solve there, map back"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Transform a complex domain into a simpler one for analysis",
+        "Preserve angles and local shape while remapping regions",
+        "Solve Laplace's equation by mapping to standard domains"
+      ],
+      "keywords": ["conformal", "angle-preserving", "Mobius", "bilinear", "mapping"],
+      "tags": ["complex-analysis", "geometry", "transformations"],
+      "buildLabs": ["Build Lab 14.4: Conformal Mappings"]
+    },
+    {
+      "id": "structure-riemann-sphere",
+      "name": "Riemann Sphere",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 14,
+      "section": "14.6",
+      "planePosition": { "real": -0.05, "imaginary": 0.75 },
+      "formalStatement": "The Riemann sphere is the extended complex plane C union {infinity}, topologically equivalent to S^2 via stereographic projection. Mobius transformations act on the Riemann sphere as the group of conformal automorphisms.",
+      "computationalForm": "Stereographic projection: point (X,Y,Z) on S^2 maps to z = (X+iY)/(1-Z). North pole maps to infinity. Arithmetic with infinity: z + inf = inf, z * inf = inf (for z != 0), z/0 = inf.",
+      "prerequisites": ["Complex numbers", "Conformal mapping", "Topology basics"],
+      "dependencies": [
+        {
+          "target": "structure-conformal-mapping",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Riemann sphere is the natural domain for Mobius transformations"
+        },
+        {
+          "target": "structure-complex-function",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Extends the complex plane by adding a point at infinity"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "structure-conformal-mapping",
+          "yields": "Complete theory of Mobius transformations on the Riemann sphere",
+          "type": "parallel",
+          "conditions": ["Working with extended complex plane"],
+          "example": "f(z) = 1/z maps 0 to infinity and infinity to 0 on the Riemann sphere"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Extend complex analysis to include infinity as a point",
+        "Visualize the complex plane as a sphere via stereographic projection",
+        "Classify all conformal maps of the sphere to itself"
+      ],
+      "keywords": ["Riemann sphere", "stereographic projection", "extended complex plane", "infinity"],
+      "tags": ["complex-analysis", "topology", "geometry"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-maximum-modulus",
+      "name": "Maximum Modulus Principle",
+      "type": "theorem",
+      "domain": "structure",
+      "chapter": 14,
+      "section": "14.4",
+      "planePosition": { "real": -0.35, "imaginary": 0.75 },
+      "formalStatement": "If f is analytic and non-constant on a connected open set D, then |f| has no local maximum in D. Consequently, if D is bounded and f is continuous on the closure of D, then |f| achieves its maximum on the boundary of D.",
+      "computationalForm": "To find the maximum of |f| on a region: evaluate |f| only on the boundary. The maximum of |f| on the closure is attained on the boundary, never the interior (unless f is constant).",
+      "prerequisites": ["Analyticity", "Cauchy's integral formula", "Connected sets"],
+      "dependencies": [
+        {
+          "target": "structure-cauchy-integral-formula",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Proof uses Cauchy's integral formula"
+        },
+        {
+          "target": "structure-analyticity",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Applies to analytic functions"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "structure-analyticity",
+          "yields": "Rigidity of analytic functions: if |f| is constant on an open set, f is constant",
+          "type": "parallel",
+          "conditions": ["f analytic on connected open set"],
+          "example": "If |e^z| = 1 on an open disk, then e^z is constant there (impossible for non-degenerate disk)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find the maximum of the modulus of an analytic function",
+        "Prove bounds on analytic functions from boundary estimates",
+        "Show that analytic functions cannot have interior extrema for |f|"
+      ],
+      "keywords": ["maximum modulus", "boundary", "analytic", "bound", "extremum"],
+      "tags": ["complex-analysis", "analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "structure-poles-singularities",
+      "name": "Poles and Singularities",
+      "type": "definition",
+      "domain": "structure",
+      "chapter": 14,
+      "section": "14.5",
+      "planePosition": { "real": -0.2, "imaginary": 0.7 },
+      "formalStatement": "An isolated singularity z_0 of f is: removable if lim_{z->z_0} f(z) exists finitely; a pole of order n if (z-z_0)^n * f(z) is analytic and nonzero at z_0; essential if neither. For a pole of order n, the residue is Res(f,z_0) = lim_{z->z_0} (1/(n-1)!) d^{n-1}/dz^{n-1} [(z-z_0)^n f(z)].",
+      "computationalForm": "Classify: expand Laurent series. If no negative powers: removable. If finitely many negative powers up to (z-z_0)^{-n}: pole of order n. If infinitely many: essential. Residue at simple pole: Res = lim (z-z_0)*f(z).",
+      "prerequisites": ["Laurent series", "Limits", "Analyticity"],
+      "dependencies": [
+        {
+          "target": "structure-laurent-series",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Singularity classification uses Laurent series"
+        },
+        {
+          "target": "structure-analyticity",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Singularities are points where analyticity fails"
+        }
+      ],
+      "enables": ["structure-residue-theorem"],
+      "compositionRules": [
+        {
+          "with": "structure-residue-theorem",
+          "yields": "Complete integration toolkit: classify singularities, compute residues, evaluate integrals",
+          "type": "sequential",
+          "conditions": ["f has isolated singularities"],
+          "example": "f(z) = 1/z^2 has pole of order 2 at z=0, Res = 0 (coefficient of 1/z is 0)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Classify the nature of a singularity of a complex function",
+        "Determine the order of a pole",
+        "Compute residues for use in the residue theorem"
+      ],
+      "keywords": ["pole", "singularity", "removable", "essential", "residue", "order"],
+      "tags": ["complex-analysis", "singularity-theory"],
+      "buildLabs": []
+    }
+  ]
+}
