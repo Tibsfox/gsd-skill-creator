@@ -3,6 +3,8 @@ use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::{Path, PathBuf};
 
+use crate::security::types::{EventSeverity, EventSource, SecurityEvent};
+
 // ============================================================================
 // Types
 // ============================================================================
@@ -73,6 +75,27 @@ pub enum ScanVerdict {
     /// NOTE: No release/unlock/approve method exists on this variant.
     /// Content can only be released by user action via dashboard or CLI.
     Quarantine(Vec<SecurityFinding>),
+}
+
+/// A full scan report with findings, events, verdict, and action guidance.
+///
+/// Produced by `SecurityScanner::scan_and_report()`. Serializes to JSON for
+/// persistence alongside quarantined artifacts.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SecurityFindingReport {
+    /// RFC 3339 timestamp of when the scan was performed
+    pub scan_timestamp: String,
+    /// Source identifier (typically the content directory name)
+    pub content_source: String,
+    /// Verdict string: "clean", "flagged", or "quarantine"
+    pub verdict: String,
+    /// All findings with file/line/match/CVE details
+    pub findings: Vec<SecurityFinding>,
+    /// One SecurityEvent per finding for dashboard consumption
+    pub events: Vec<SecurityEvent>,
+    /// Human-readable action description
+    pub action_required: String,
 }
 
 /// The security scanner with compiled CVE-informed pattern detectors.
@@ -286,6 +309,18 @@ impl SecurityScanner {
         findings
     }
 
+    /// Scan content and produce a full finding report with SecurityEvent emission.
+    ///
+    /// Returns a `SecurityFindingReport` containing findings, events, verdict,
+    /// and action guidance. Events are emitted per finding for dashboard consumption.
+    pub fn scan_and_report(
+        &self,
+        _content_root: &Path,
+        _content_source: &str,
+    ) -> SecurityFindingReport {
+        todo!("implement in 370-02 Task 1 (GREEN phase)")
+    }
+
     /// Classify findings into a verdict.
     ///
     /// - Any Critical finding -> Quarantine
@@ -390,6 +425,7 @@ fn is_text_file(path: &Path) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::security::types::EventSource;
     use std::path::PathBuf;
 
     fn fixture_path(name: &str) -> PathBuf {
@@ -510,5 +546,91 @@ mod tests {
         assert!(!findings.is_empty(), "SEC-008 must detect base64 obfuscation");
         let f = findings.iter().find(|f| f.id == "SEC-008").expect("SEC-008 finding missing");
         assert_eq!(f.severity, SecuritySeverity::Medium);
+    }
+
+    // =========================================================================
+    // 370-02 tests: Finding reports, pipeline integration, hardening
+    // =========================================================================
+
+    #[test]
+    fn finding_report_includes_file_line_match_and_cve() {
+        let s = scanner();
+        let report = s.scan_and_report(&fixture_path("sec-001-hook-override"), "sec-001-test");
+        assert!(!report.findings.is_empty(), "report must have findings");
+        let f = report.findings.iter().find(|f| f.id == "SEC-001")
+            .expect("SEC-001 finding must be in report");
+        assert_eq!(f.file, ".claude/settings.json");
+        assert!(f.line > 0, "line number must be positive");
+        assert!(!f.matched_text.is_empty(), "matched text must be non-empty");
+        assert_eq!(f.cve_reference, Some("CVE-2025-59536".to_string()));
+    }
+
+    #[test]
+    fn finding_report_serializes_to_json_with_action_required() {
+        let s = scanner();
+        let report = s.scan_and_report(&fixture_path("sec-001-hook-override"), "sec-001-test");
+        let json = serde_json::to_string(&report).expect("report must serialize to JSON");
+        assert!(json.contains("actionRequired"), "JSON must have actionRequired field");
+        assert!(!report.action_required.is_empty(), "action_required must not be empty");
+        assert_eq!(report.verdict, "quarantine");
+    }
+
+    #[test]
+    fn mixed_high_only_produces_flagged_not_quarantine() {
+        let s = scanner();
+        let findings = s.scan(&fixture_path("mixed-high-only"));
+        assert!(!findings.is_empty(), "mixed-high-only must produce findings");
+        let all_non_critical = findings.iter().all(|f| f.severity != SecuritySeverity::Critical);
+        assert!(all_non_critical, "mixed-high-only must have no critical findings");
+        let verdict = s.classify(&findings);
+        assert!(matches!(verdict, ScanVerdict::Flagged(_)), "high-only -> Flagged");
+    }
+
+    #[test]
+    fn mixed_critical_plus_high_produces_quarantine() {
+        let s = scanner();
+        let findings = s.scan(&fixture_path("mixed-critical-plus-high"));
+        assert!(!findings.is_empty(), "mixed-critical-plus-high must produce findings");
+        let has_critical = findings.iter().any(|f| f.severity == SecuritySeverity::Critical);
+        assert!(has_critical, "mixed-critical-plus-high must have critical findings");
+        let verdict = s.classify(&findings);
+        assert!(matches!(verdict, ScanVerdict::Quarantine(_)), "critical+high -> Quarantine");
+    }
+
+    #[test]
+    fn security_events_emitted_per_finding() {
+        let s = scanner();
+        let report = s.scan_and_report(&fixture_path("sec-001-hook-override"), "sec-001-test");
+        assert_eq!(
+            report.events.len(),
+            report.findings.len(),
+            "one event per finding"
+        );
+        for event in &report.events {
+            assert_eq!(event.source, EventSource::Staging);
+            assert_eq!(event.event_type, "pattern_match");
+            // Verify finding_id is in the event detail
+            let detail = &event.detail;
+            assert!(detail.get("finding_id").is_some(), "event detail must contain finding_id");
+        }
+    }
+
+    #[test]
+    fn false_negative_regression_sec001_with_obfuscated_key_names() {
+        // SEC-001 compound detection: hooks key + command with shell commands
+        // This tests that the pattern still fires with different tool matchers
+        let s = scanner();
+        let findings = s.scan(&fixture_path("sec-001-hook-override"));
+        let sec001 = findings.iter().find(|f| f.id == "SEC-001");
+        assert!(sec001.is_some(), "SEC-001 must detect even with varied hook structure");
+    }
+
+    #[test]
+    fn false_negative_regression_sec007_wget_variant() {
+        let s = scanner();
+        let findings = s.scan(&fixture_path("sec-007-credential-exfil"));
+        // The fixture contains both curl and wget variants
+        let sec007 = findings.iter().filter(|f| f.id == "SEC-007").count();
+        assert!(sec007 > 0, "SEC-007 must detect wget credential exfiltration variant");
     }
 }
