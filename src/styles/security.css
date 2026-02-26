@@ -1,0 +1,201 @@
+/* Security Dashboard Panel — Styles
+   Shield states, severity colors, pulse animation, timeline layout.
+   Extends the GSD design system (src/dashboard/design-system.ts tokens). */
+
+/* --- Shield state colors --- */
+.shield-secure        { color: #22c55e; border-color: #22c55e; }
+.shield-attention     { color: #f97316; border-color: #f97316; }
+.shield-breach-blocked { color: #ef4444; border-color: #ef4444; }
+.shield-inactive      { color: #6b7280; border-color: #6b7280; }
+
+/* --- Shield indicator layout --- */
+.shield-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  font-family: var(--font-data, monospace);
+  font-size: 0.8rem;
+}
+
+.shield-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.shield-status {
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.shield-subsystems {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+/* --- Shield pulse animation (fires on state change) --- */
+@keyframes shieldPulse {
+  0%   { opacity: 1; transform: scale(1); }
+  50%  { opacity: 0.6; transform: scale(1.15); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.shield-pulse {
+  animation: shieldPulse 0.4s ease-in-out;
+}
+
+/* --- Event severity colors --- */
+.severity-blocked  { color: #ef4444; }
+.severity-critical { color: #ef4444; }
+.severity-warning  { color: #f97316; }
+.severity-info     { color: #58a6ff; }
+.severity-audit    { color: #6b7280; }
+
+/* --- Proxy status colors --- */
+.proxy-running  { color: #22c55e; }
+.proxy-down     { color: #ef4444; }
+.proxy-degraded { color: #f97316; }
+
+/* --- Agent isolation status --- */
+.isolated-yes  { color: #22c55e; }
+.isolated-no   { color: #ef4444; }
+
+/* --- Security detail panel --- */
+.security-detail {
+  padding: 8px;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+}
+
+.security-summary {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+  font-family: var(--font-data, monospace);
+  font-size: 0.8rem;
+}
+
+/* --- Timeline layout --- */
+.security-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.security-timeline-entry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-data, monospace);
+  font-size: 0.8rem;
+}
+
+/* --- Full operations view sections --- */
+.security-event-stream,
+.sandbox-profiles,
+.proxy-logs,
+.quarantine-contents {
+  margin-top: 12px;
+  padding: 8px;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+}
+
+.security-event-stream h4,
+.sandbox-profiles h4,
+.proxy-logs h4,
+.quarantine-contents h4 {
+  margin: 0 0 8px 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #8b949e);
+}
+
+/* --- Blocked request log --- */
+.blocked-request-log {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.blocked-entry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-data, monospace);
+  font-size: 0.8rem;
+}
+
+/* --- Agent isolation status list --- */
+.agent-isolation-status {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.agent-entry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-data, monospace);
+  font-size: 0.8rem;
+}
+
+/* --- Proxy health panel --- */
+.proxy-health {
+  padding: 8px;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+}
+
+.proxy-health .proxy-status,
+.proxy-health .proxy-metrics,
+.proxy-health .proxy-domains {
+  display: flex;
+  gap: 16px;
+  font-family: var(--font-data, monospace);
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+}
+
+/* --- Profile entries --- */
+.profile-entry {
+  display: flex;
+  gap: 8px;
+  font-family: var(--font-data, monospace);
+  font-size: 0.8rem;
+}
+
+.profile-active  { color: #22c55e; }
+.profile-inactive { color: #6b7280; }
+
+/* --- Proxy log entries --- */
+.proxy-log-entry {
+  display: flex;
+  gap: 8px;
+  font-family: var(--font-data, monospace);
+  font-size: 0.8rem;
+}
+
+/* --- Quarantine entries --- */
+.quarantine-entry {
+  display: flex;
+  gap: 8px;
+  font-family: var(--font-data, monospace);
+  font-size: 0.8rem;
+}
+
+/* --- Event stream entries --- */
+.event-entry {
+  display: flex;
+  gap: 8px;
+  font-family: var(--font-data, monospace);
+  font-size: 0.8rem;
+}
