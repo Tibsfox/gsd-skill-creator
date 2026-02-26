@@ -11,6 +11,8 @@ import * as os from 'node:os';
 import {
   acquireSource,
   detectSourceType,
+  filterByScope,
+  isSupportedExtension,
   type AcquisitionResult,
   type AcquisitionSource,
   type SourceType,
@@ -216,9 +218,9 @@ describe('GitHub URL acquisition', () => {
     expect(result.familiarity).toBe('STRANGER');
   });
 
-  it('applies scope filter to cloned files', async () => {
-    // Simulate a cloned GitHub repo by creating a temp dir structure
-    // and mocking child_process.execSync to avoid actual git clone
+  it('applies scope filter to cloned files', () => {
+    // Test the scope filtering logic directly using exported helpers
+    // (avoids ESM mock limitations for child_process.execSync)
     const cloneDir = path.join(tmpDir, 'mock-clone');
     fs.mkdirSync(path.join(cloneDir, 'docs'), { recursive: true });
     fs.mkdirSync(path.join(cloneDir, 'src'), { recursive: true });
@@ -226,40 +228,25 @@ describe('GitHub URL acquisition', () => {
     fs.writeFileSync(path.join(cloneDir, 'src', 'code.ts'), 'const x = 1;');
     fs.writeFileSync(path.join(cloneDir, 'README.md'), '# Root Readme');
 
-    // We test the scope filtering by using acquireSource on a local directory
-    // simulating the post-clone state. The real test is the scope filter logic.
-    // Since acquireGitHub creates a temp dir internally, we need to mock execSync.
-    const childProcess = await import('node:child_process');
-    const originalExecSync = childProcess.execSync;
+    const allFiles = [
+      path.join(cloneDir, 'docs', 'readme.md'),
+      path.join(cloneDir, 'src', 'code.ts'),
+      path.join(cloneDir, 'README.md'),
+    ];
 
-    // Mock execSync to skip the actual git clone and use our test dir
-    vi.spyOn(childProcess, 'execSync').mockImplementation((cmd: string, opts?: any) => {
-      const cmdStr = String(cmd);
-      if (cmdStr.startsWith('git clone')) {
-        // Instead of cloning, copy our mock dir to the target
-        const targetMatch = cmdStr.match(/"([^"]+)"$/);
-        if (targetMatch) {
-          const target = targetMatch[1];
-          fs.cpSync(cloneDir, target, { recursive: true });
-        }
-        return Buffer.from('');
-      }
-      return originalExecSync(cmd, opts);
-    });
+    // Filter by docs/ scope only
+    const scopeFiltered = filterByScope(allFiles, cloneDir, ['docs/']);
+    expect(scopeFiltered).toHaveLength(1);
+    expect(scopeFiltered[0]).toContain('docs/readme.md');
 
-    try {
-      const result = await acquireSource('https://github.com/user/repo', {
-        stagingDir: path.join(tmpDir, 'staging'),
-        githubScope: ['docs/'],
-      });
+    // Filter by docs/ + README.md
+    const widerScope = filterByScope(allFiles, cloneDir, ['docs/', 'README.md']);
+    expect(widerScope).toHaveLength(2);
 
-      const filenames = result.staged.map(s => s.filename);
-      expect(filenames).toContain('readme.md');
-      // src/code.ts should NOT be included (not in scope, and .ts not supported)
-      expect(filenames).not.toContain('code.ts');
-    } finally {
-      vi.restoreAllMocks();
-    }
+    // Extension filtering
+    expect(isSupportedExtension('readme.md')).toBe(true);
+    expect(isSupportedExtension('code.ts')).toBe(false);
+    expect(isSupportedExtension('doc.pdf')).toBe(true);
   });
 });
 
