@@ -97,6 +97,11 @@ teardown() {
     rm -rf "$TEST_TMPDIR"
 }
 
+# Helper: extract JSON from output (filters out [detect-repo] stderr lines)
+get_json() {
+    echo "$output" | grep -v '^\[detect-repo\]'
+}
+
 # ---------------------------------------------------------------------------
 # Test 1: Exits 1 when path does not exist
 # ---------------------------------------------------------------------------
@@ -120,7 +125,7 @@ teardown() {
     mkdir -p "$MOCK_REPO/.git"
     run "$DETECT_SCRIPT" "$MOCK_REPO"
     [ "$status" -eq 0 ]
-    echo "$output" | jq -e '.vcs_type == "git"'
+    get_json | jq -e '.vcs_type == "git"'
 }
 
 # ---------------------------------------------------------------------------
@@ -130,7 +135,7 @@ teardown() {
     mkdir -p "$MOCK_REPO/.hg"
     run "$DETECT_SCRIPT" "$MOCK_REPO"
     [ "$status" -eq 0 ]
-    echo "$output" | jq -e '.vcs_type == "hg"'
+    get_json | jq -e '.vcs_type == "hg"'
 }
 
 # ---------------------------------------------------------------------------
@@ -140,7 +145,7 @@ teardown() {
     mkdir -p "$MOCK_REPO/.svn"
     run "$DETECT_SCRIPT" "$MOCK_REPO"
     [ "$status" -eq 0 ]
-    echo "$output" | jq -e '.vcs_type == "svn"'
+    get_json | jq -e '.vcs_type == "svn"'
 }
 
 # ---------------------------------------------------------------------------
@@ -151,7 +156,7 @@ teardown() {
     run "$DETECT_SCRIPT" "$MOCK_REPO"
     [ "$status" -eq 0 ]
     # Must be valid JSON
-    echo "$output" | jq . > /dev/null
+    get_json | jq . > /dev/null
 }
 
 # ---------------------------------------------------------------------------
@@ -162,7 +167,7 @@ teardown() {
     run "$DETECT_SCRIPT" "$MOCK_REPO"
     [ "$status" -eq 0 ]
     local count
-    count=$(echo "$output" | jq '.commit_count')
+    count=$(get_json | jq '.commit_count')
     [ "$count" -eq 42 ]
 }
 
@@ -174,16 +179,16 @@ teardown() {
     run "$DETECT_SCRIPT" "$MOCK_REPO"
     [ "$status" -eq 0 ]
     local count
-    count=$(echo "$output" | jq '.contributor_count')
+    count=$(get_json | jq '.contributor_count')
     [ "$count" -eq 3 ]
     # Check contributors array has 3 entries
     local arr_len
-    arr_len=$(echo "$output" | jq '.contributors | length')
+    arr_len=$(get_json | jq '.contributors | length')
     [ "$arr_len" -eq 3 ]
     # Check first contributor has name, email, commits fields
-    echo "$output" | jq -e '.contributors[0].name' > /dev/null
-    echo "$output" | jq -e '.contributors[0].email' > /dev/null
-    echo "$output" | jq -e '.contributors[0].commits' > /dev/null
+    get_json | jq -e '.contributors[0].name' > /dev/null
+    get_json | jq -e '.contributors[0].email' > /dev/null
+    get_json | jq -e '.contributors[0].commits' > /dev/null
 }
 
 # ---------------------------------------------------------------------------
@@ -193,12 +198,12 @@ teardown() {
     mkdir -p "$MOCK_REPO/.git"
     run "$DETECT_SCRIPT" "$MOCK_REPO"
     [ "$status" -eq 0 ]
-    echo "$output" | jq -e '.first_commit_date' > /dev/null
-    echo "$output" | jq -e '.last_commit_date' > /dev/null
-    echo "$output" | jq -e '.date_range_days' > /dev/null
+    get_json | jq -e '.first_commit_date' > /dev/null
+    get_json | jq -e '.last_commit_date' > /dev/null
+    get_json | jq -e '.date_range_days' > /dev/null
     # date_range_days should be a positive integer
     local days
-    days=$(echo "$output" | jq '.date_range_days')
+    days=$(get_json | jq '.date_range_days')
     [ "$days" -gt 0 ]
 }
 
@@ -209,20 +214,20 @@ teardown() {
     mkdir -p "$MOCK_REPO/.git"
     run "$DETECT_SCRIPT" "$MOCK_REPO"
     [ "$status" -eq 0 ]
-    echo "$output" | jq -e '.file_count' > /dev/null
-    echo "$output" | jq -e '.tag_count' > /dev/null
-    echo "$output" | jq -e '.branch' > /dev/null
-    echo "$output" | jq -e '.remote_url' > /dev/null
-    echo "$output" | jq -e '.is_github' > /dev/null
+    get_json | jq -e '.file_count' > /dev/null
+    get_json | jq -e '.tag_count' > /dev/null
+    get_json | jq -e '.branch' > /dev/null
+    get_json | jq -e '.remote_url' > /dev/null
+    get_json | jq -e '.is_github' > /dev/null
     # Validate specific values
     local file_count
-    file_count=$(echo "$output" | jq '.file_count')
+    file_count=$(get_json | jq '.file_count')
     [ "$file_count" -eq 150 ]
     local tag_count
-    tag_count=$(echo "$output" | jq '.tag_count')
+    tag_count=$(get_json | jq '.tag_count')
     [ "$tag_count" -eq 3 ]
     local branch
-    branch=$(echo "$output" | jq -r '.branch')
+    branch=$(get_json | jq -r '.branch')
     [ "$branch" = "main" ]
 }
 
@@ -234,7 +239,7 @@ teardown() {
     run "$DETECT_SCRIPT" "$MOCK_REPO"
     [ "$status" -eq 0 ]
     local is_github
-    is_github=$(echo "$output" | jq '.is_github')
+    is_github=$(get_json | jq '.is_github')
     [ "$is_github" = "true" ]
 }
 
@@ -274,7 +279,7 @@ MOCKEOF
     run "$DETECT_SCRIPT" "$MOCK_REPO"
     [ "$status" -eq 0 ]
     local is_github
-    is_github=$(echo "$output" | jq '.is_github')
+    is_github=$(get_json | jq '.is_github')
     [ "$is_github" = "true" ]
 }
 
@@ -314,7 +319,7 @@ MOCKEOF
     run "$DETECT_SCRIPT" "$MOCK_REPO"
     [ "$status" -eq 0 ]
     local tag_count
-    tag_count=$(echo "$output" | jq '.tag_count')
+    tag_count=$(get_json | jq '.tag_count')
     [ "$tag_count" -eq 0 ]
 }
 
@@ -326,5 +331,5 @@ MOCKEOF
     cd "$MOCK_REPO"
     run "$DETECT_SCRIPT"
     [ "$status" -eq 0 ]
-    echo "$output" | jq -e '.vcs_type == "git"'
+    get_json | jq -e '.vcs_type == "git"'
 }
