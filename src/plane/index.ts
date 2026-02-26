@@ -12,3 +12,4 @@ export * from './signal-classification.js';
 export { PositionStore } from './position-store.js';
 export { ObserverAngularBridge } from './observer-bridge.js';
 export type { PatternGroup } from './observer-bridge.js';
+export * from './chords.js';
