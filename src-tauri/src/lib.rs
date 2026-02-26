@@ -2,6 +2,7 @@ mod claude;
 mod commands;
 mod error;
 mod pty;
+pub mod security;
 mod state;
 mod tmux;
 mod mcp_host;
