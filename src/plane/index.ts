@@ -6,4 +6,4 @@
  */
 
 export * from './types.js';
-// arithmetic.ts will be added by plan 359-02
+export * from './arithmetic.js';
