@@ -1,0 +1,691 @@
+{
+  "version": "1.35.0",
+  "scope": "advanced",
+  "description": "Cross-domain dependency edges and composition rules for Domains VII-X (Mapping, Unification, Emergence, Synthesis)",
+  "edges": [
+    {
+      "source": "mapping-category",
+      "target": "foundations-set-definition",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Categories are built on sets of objects and morphisms"
+    },
+    {
+      "source": "mapping-functor",
+      "target": "foundations-group-definition",
+      "type": "generalizes",
+      "strength": 0.9,
+      "description": "Functors generalize group homomorphisms to arbitrary categories"
+    },
+    {
+      "source": "mapping-functor",
+      "target": "structure-linear-transformation",
+      "type": "generalizes",
+      "strength": 0.85,
+      "description": "Functors generalize linear maps between vector spaces to maps between categories"
+    },
+    {
+      "source": "mapping-functor",
+      "target": "foundations-homomorphism",
+      "type": "generalizes",
+      "strength": 0.95,
+      "description": "Functors are the categorical generalization of algebraic homomorphisms"
+    },
+    {
+      "source": "mapping-natural-transformation",
+      "target": "mapping-functor",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "Natural transformations are morphisms between functors"
+    },
+    {
+      "source": "mapping-yoneda-lemma",
+      "target": "mapping-category",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "The Yoneda lemma characterizes objects in a category by their morphisms"
+    },
+    {
+      "source": "mapping-yoneda-lemma",
+      "target": "mapping-functor",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "Yoneda embedding is a functor from a category to its presheaf category"
+    },
+    {
+      "source": "mapping-shannon-entropy",
+      "target": "mapping-probability-axioms",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "Shannon entropy is defined in terms of probability distributions"
+    },
+    {
+      "source": "mapping-shannon-entropy",
+      "target": "change-definite-integral",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "Continuous (differential) entropy uses integration over probability densities"
+    },
+    {
+      "source": "mapping-fourier-transform",
+      "target": "waves-fourier-series-preview",
+      "type": "generalizes",
+      "strength": 0.95,
+      "description": "Fourier transform generalizes Fourier series from periodic to aperiodic signals"
+    },
+    {
+      "source": "mapping-fourier-transform",
+      "target": "change-definite-integral",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "The Fourier transform is defined as an integral transform"
+    },
+    {
+      "source": "mapping-fourier-transform",
+      "target": "perception-complex-numbers",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Fourier transform maps to complex-valued frequency domain via e^(iwt)"
+    },
+    {
+      "source": "mapping-sampling-theorem",
+      "target": "mapping-fourier-transform",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "Nyquist-Shannon sampling theorem requires Fourier analysis of bandwidth"
+    },
+    {
+      "source": "mapping-fft",
+      "target": "mapping-fourier-transform",
+      "type": "specializes",
+      "strength": 1.0,
+      "description": "FFT is an efficient O(n log n) algorithm computing the discrete Fourier transform"
+    },
+    {
+      "source": "mapping-bayes-theorem",
+      "target": "mapping-probability-axioms",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "Bayes' theorem follows directly from the axioms of probability"
+    },
+    {
+      "source": "mapping-markov-chain",
+      "target": "mapping-probability-axioms",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Markov chains are stochastic processes defined on probability spaces"
+    },
+    {
+      "source": "mapping-markov-chain",
+      "target": "structure-linear-transformation",
+      "type": "applies",
+      "strength": 0.85,
+      "description": "Markov chain transitions are represented as matrix-vector multiplication"
+    },
+    {
+      "source": "mapping-convolution-theorem",
+      "target": "mapping-fourier-transform",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "Convolution theorem states convolution in time becomes multiplication in frequency domain"
+    },
+    {
+      "source": "mapping-central-limit-theorem",
+      "target": "mapping-normal-distribution",
+      "type": "motivates",
+      "strength": 0.95,
+      "description": "CLT explains why the normal distribution is ubiquitous: sums of independent variables converge to it"
+    },
+    {
+      "source": "unification-symmetry-group-u1",
+      "target": "foundations-group-definition",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "U(1) electromagnetic gauge symmetry is a Lie group"
+    },
+    {
+      "source": "unification-symmetry-group-su2",
+      "target": "foundations-group-definition",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "SU(2) weak isospin symmetry is a non-abelian Lie group"
+    },
+    {
+      "source": "unification-symmetry-group-su3",
+      "target": "foundations-group-definition",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "SU(3) color symmetry of QCD is a non-abelian Lie group"
+    },
+    {
+      "source": "unification-gauge-principle",
+      "target": "structure-vector-space-axioms",
+      "type": "requires",
+      "strength": 0.85,
+      "description": "Gauge fields are connections on fiber bundles over vector spaces"
+    },
+    {
+      "source": "unification-gauge-principle",
+      "target": "foundations-group-definition",
+      "type": "requires",
+      "strength": 0.95,
+      "description": "Gauge transformations form a symmetry group that governs field interactions"
+    },
+    {
+      "source": "unification-noether-theorem",
+      "target": "change-definite-integral",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Noether's theorem derives from variation of the action integral"
+    },
+    {
+      "source": "unification-noether-theorem",
+      "target": "foundations-group-definition",
+      "type": "requires",
+      "strength": 0.95,
+      "description": "Each continuous symmetry group yields a conservation law via Noether's theorem"
+    },
+    {
+      "source": "unification-lagrangian",
+      "target": "change-optimization",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Lagrangian mechanics uses variational principle to find extrema of the action"
+    },
+    {
+      "source": "unification-higgs-mechanism",
+      "target": "unification-gauge-principle",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "Higgs mechanism requires gauge symmetry to then spontaneously break it"
+    },
+    {
+      "source": "unification-higgs-mechanism",
+      "target": "unification-symmetry-group-su2",
+      "type": "requires",
+      "strength": 0.95,
+      "description": "Higgs field breaks SU(2) weak isospin symmetry to give mass to W and Z bosons"
+    },
+    {
+      "source": "unification-string-action",
+      "target": "change-definite-integral",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "String action (Nambu-Goto/Polyakov) is a worldsheet area integral"
+    },
+    {
+      "source": "unification-string-action",
+      "target": "reality-dimensional-analysis",
+      "type": "applies",
+      "strength": 0.7,
+      "description": "String scale set by dimensional analysis relating tension to Planck length"
+    },
+    {
+      "source": "unification-ads-cft",
+      "target": "unification-string-action",
+      "type": "requires",
+      "strength": 0.85,
+      "description": "AdS/CFT duality emerges from string theory in anti-de Sitter spacetime"
+    },
+    {
+      "source": "unification-ads-cft",
+      "target": "reality-hilbert-space",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "Boundary CFT lives in a quantum Hilbert space dual to bulk gravity"
+    },
+    {
+      "source": "unification-t-duality",
+      "target": "unification-s-duality",
+      "type": "equivalent",
+      "strength": 0.8,
+      "description": "T-duality and S-duality are complementary manifestations of string duality"
+    },
+    {
+      "source": "unification-black-hole-entropy",
+      "target": "mapping-shannon-entropy",
+      "type": "applies",
+      "strength": 0.75,
+      "description": "Bekenstein-Hawking entropy connects thermodynamic entropy to information-theoretic entropy"
+    },
+    {
+      "source": "emergence-logistic-map",
+      "target": "change-derivative",
+      "type": "requires",
+      "strength": 0.85,
+      "description": "Stability analysis of fixed points uses derivatives of the logistic map"
+    },
+    {
+      "source": "emergence-lyapunov-exponent",
+      "target": "change-derivative",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Lyapunov exponents measure exponential rate of divergence via derivative along trajectories"
+    },
+    {
+      "source": "emergence-lyapunov-exponent",
+      "target": "change-definite-integral",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "Time-averaged Lyapunov exponent is computed as a limit of an integral"
+    },
+    {
+      "source": "emergence-fractal-dimension",
+      "target": "perception-distance-formula",
+      "type": "generalizes",
+      "strength": 0.8,
+      "description": "Fractal (Hausdorff) dimension extends the concept of dimension beyond integers"
+    },
+    {
+      "source": "emergence-l-system",
+      "target": "foundations-set-definition",
+      "type": "applies",
+      "strength": 0.7,
+      "description": "L-systems are formal grammars defined as sets of production rules on symbol alphabets"
+    },
+    {
+      "source": "emergence-turing-machine",
+      "target": "foundations-set-definition",
+      "type": "requires",
+      "strength": 0.85,
+      "description": "Turing machines are defined in terms of sets of states, alphabets, and transition functions"
+    },
+    {
+      "source": "emergence-turing-machine",
+      "target": "foundations-proof-by-contradiction",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "Halting problem undecidability is proved by contradiction (diagonalization argument)"
+    },
+    {
+      "source": "emergence-backpropagation",
+      "target": "change-chain-rule",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "Backpropagation is the chain rule applied to compute gradients through neural network layers"
+    },
+    {
+      "source": "emergence-backpropagation",
+      "target": "structure-linear-transformation",
+      "type": "applies",
+      "strength": 0.85,
+      "description": "Each neural network layer is a linear transformation followed by a nonlinearity"
+    },
+    {
+      "source": "emergence-gradient-descent",
+      "target": "change-optimization",
+      "type": "specializes",
+      "strength": 0.9,
+      "description": "Gradient descent is a first-order iterative optimization algorithm"
+    },
+    {
+      "source": "emergence-neural-network",
+      "target": "structure-vector-space-axioms",
+      "type": "requires",
+      "strength": 0.8,
+      "description": "Neural network weight spaces and activations live in vector spaces"
+    },
+    {
+      "source": "emergence-neural-network",
+      "target": "structure-linear-transformation",
+      "type": "applies",
+      "strength": 0.9,
+      "description": "Neural network layers are linear transformations composed with activation functions"
+    },
+    {
+      "source": "emergence-strange-attractor",
+      "target": "change-ode",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Strange attractors arise in nonlinear dynamical systems described by ODEs (e.g., Lorenz system)"
+    },
+    {
+      "source": "emergence-halting-problem",
+      "target": "foundations-proof-by-contradiction",
+      "type": "applies",
+      "strength": 0.95,
+      "description": "Undecidability of the halting problem is proved by self-referential contradiction"
+    },
+    {
+      "source": "synthesis-complex-plane",
+      "target": "perception-coordinate-plane",
+      "type": "generalizes",
+      "strength": 0.85,
+      "description": "The Complex Plane framework generalizes the coordinate plane to classify mathematical domains"
+    },
+    {
+      "source": "synthesis-complex-plane",
+      "target": "perception-complex-numbers",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "Domain positions are represented as complex numbers on the logic-creativity/embodied-abstract plane"
+    },
+    {
+      "source": "synthesis-foundational-decomposition",
+      "target": "perception-pythagorean-theorem",
+      "type": "applies",
+      "strength": 0.7,
+      "description": "Decomposition traces advanced concepts back to foundational primitives like Pythagoras"
+    },
+    {
+      "source": "synthesis-foundational-decomposition",
+      "target": "perception-unit-circle",
+      "type": "applies",
+      "strength": 0.7,
+      "description": "The unit circle is a foundational primitive that many advanced concepts decompose to"
+    },
+    {
+      "source": "synthesis-cross-domain-bridge",
+      "target": "mapping-functor",
+      "type": "requires",
+      "strength": 0.85,
+      "description": "Functors provide the formal mechanism for bridging between mathematical domains"
+    },
+    {
+      "source": "synthesis-cross-domain-bridge",
+      "target": "mapping-natural-transformation",
+      "type": "requires",
+      "strength": 0.8,
+      "description": "Natural transformations ensure cross-domain bridges preserve structural relationships"
+    },
+    {
+      "source": "synthesis-through-line",
+      "target": "perception-natural-numbers",
+      "type": "motivates",
+      "strength": 0.7,
+      "description": "The through-line begins with counting (natural numbers) as the first mathematical act"
+    },
+    {
+      "source": "synthesis-through-line",
+      "target": "change-derivative",
+      "type": "motivates",
+      "strength": 0.75,
+      "description": "The through-line passes through calculus as the language of change"
+    },
+    {
+      "source": "synthesis-through-line",
+      "target": "foundations-group-definition",
+      "type": "motivates",
+      "strength": 0.75,
+      "description": "The through-line culminates in abstract algebra as the study of structure itself"
+    },
+    {
+      "source": "synthesis-through-line",
+      "target": "emergence-neural-network",
+      "type": "motivates",
+      "strength": 0.7,
+      "description": "The through-line connects mathematics to machine learning as emergent computation"
+    },
+    {
+      "source": "synthesis-dependency-chain",
+      "target": "mapping-category",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "Dependency chains are directed paths in the category of mathematical primitives"
+    },
+    {
+      "source": "synthesis-domain-activation",
+      "target": "mapping-bayes-theorem",
+      "type": "applies",
+      "strength": 0.7,
+      "description": "Domain activation uses Bayesian inference to select relevant mathematical domains"
+    },
+    {
+      "source": "synthesis-scale-invariance",
+      "target": "emergence-self-similarity",
+      "type": "equivalent",
+      "strength": 0.8,
+      "description": "Scale invariance in synthesis mirrors the self-similarity property of fractals"
+    },
+    {
+      "source": "synthesis-emergence-from-axioms",
+      "target": "foundations-zfc-axiom-system",
+      "type": "motivates",
+      "strength": 0.85,
+      "description": "All mathematics emerges from axiom systems like ZFC, connecting synthesis to foundations"
+    },
+    {
+      "source": "emergence-convolutional-network",
+      "target": "mapping-convolution-theorem",
+      "type": "applies",
+      "strength": 0.85,
+      "description": "Convolutional neural networks apply the convolution operation from signal processing"
+    },
+    {
+      "source": "emergence-attention-mechanism",
+      "target": "structure-dot-product",
+      "type": "applies",
+      "strength": 0.9,
+      "description": "Attention computes scaled dot-product similarity between query and key vectors"
+    },
+    {
+      "source": "unification-feynman-diagrams",
+      "target": "mapping-category",
+      "type": "applies",
+      "strength": 0.7,
+      "description": "Feynman diagrams can be formalized as morphisms in a monoidal category"
+    },
+    {
+      "source": "unification-renormalization",
+      "target": "change-definite-integral",
+      "type": "requires",
+      "strength": 0.85,
+      "description": "Renormalization regularizes divergent integrals in quantum field theory"
+    },
+    {
+      "source": "unification-conservation-laws",
+      "target": "unification-noether-theorem",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "Conservation laws (energy, momentum, charge) derive from Noether's theorem"
+    },
+    {
+      "source": "emergence-bias-variance",
+      "target": "mapping-expected-value",
+      "type": "requires",
+      "strength": 0.85,
+      "description": "Bias-variance decomposition is expressed in terms of expected values over data"
+    },
+    {
+      "source": "emergence-universal-approximation",
+      "target": "change-continuity",
+      "type": "requires",
+      "strength": 0.8,
+      "description": "Universal approximation theorem applies to continuous functions on compact sets"
+    }
+  ],
+  "compositionRules": [
+    {
+      "source": "mapping-fourier-transform",
+      "with": "mapping-shannon-entropy",
+      "yields": "Rate-distortion analysis: decompose signal into frequency components, then quantify minimum bits per component for lossy compression",
+      "type": "sequential",
+      "conditions": ["Signal has finite bandwidth", "Entropy is finite"],
+      "example": "Fourier transform decomposes an audio signal into frequency bands, Shannon entropy quantifies the minimum bits needed to represent each band at a target distortion level"
+    },
+    {
+      "source": "mapping-fourier-transform",
+      "with": "emergence-neural-network",
+      "yields": "Spectral feature extraction: frequency-domain representations as neural network input features",
+      "type": "sequential",
+      "conditions": ["Input data has meaningful frequency structure", "Network architecture accepts spectral features"],
+      "example": "Audio classification pipelines apply FFT to waveforms, then feed spectrograms into convolutional networks for speech recognition"
+    },
+    {
+      "source": "mapping-bayes-theorem",
+      "with": "emergence-gradient-descent",
+      "yields": "Bayesian learning via maximum a posteriori estimation optimized by gradient descent",
+      "type": "nested",
+      "conditions": ["Prior distribution is differentiable", "Likelihood function is tractable"],
+      "example": "MAP estimation adds a log-prior penalty to the loss function, then gradient descent optimizes the regularized objective to find the most probable parameters"
+    },
+    {
+      "source": "mapping-category",
+      "with": "unification-gauge-principle",
+      "yields": "Fiber bundle classification: principal bundles as categorical objects with gauge groups as structure groups",
+      "type": "parallel",
+      "conditions": ["Base manifold is smooth", "Structure group is a Lie group"],
+      "example": "Categorifying gauge theory: principal G-bundles over a manifold form a category whose morphisms are gauge transformations"
+    },
+    {
+      "source": "mapping-markov-chain",
+      "with": "emergence-gradient-descent",
+      "yields": "Stochastic gradient descent: random mini-batch sampling creates a Markov chain over parameter space converging to optima",
+      "type": "nested",
+      "conditions": ["Dataset is large enough for mini-batching", "Learning rate satisfies Robbins-Monro conditions"],
+      "example": "SGD randomly samples mini-batches (Markov property: next batch depends only on current parameters), applying gradient updates that converge to a local minimum"
+    },
+    {
+      "source": "unification-noether-theorem",
+      "with": "change-ode",
+      "yields": "Conservation law derivation: symmetry of a differential equation yields a conserved quantity along solutions",
+      "type": "sequential",
+      "conditions": ["System has a Lagrangian formulation", "Symmetry is continuous"],
+      "example": "Time-translation symmetry of the Lagrangian for a harmonic oscillator ODE yields conservation of energy via Noether's theorem"
+    },
+    {
+      "source": "unification-gauge-principle",
+      "with": "foundations-group-definition",
+      "yields": "Gauge field construction: promoting a global symmetry group to a local gauge symmetry generates interaction fields",
+      "type": "sequential",
+      "conditions": ["Symmetry group is a Lie group", "Matter fields transform under the group representation"],
+      "example": "Promoting global U(1) phase symmetry to local U(1) gauge symmetry requires introducing the electromagnetic field (photon) as a connection"
+    },
+    {
+      "source": "unification-symmetry-group-su3",
+      "with": "reality-schrodinger-time-independent",
+      "yields": "QCD bound-state calculations: solving for hadron energy levels using SU(3) color symmetry constraints",
+      "type": "parallel",
+      "conditions": ["Energy scale is in the non-perturbative QCD regime", "Color confinement applies"],
+      "example": "Quark model combines SU(3) color multiplet structure with quantum mechanical energy eigenvalue equations to predict hadron mass spectra"
+    },
+    {
+      "source": "emergence-backpropagation",
+      "with": "change-optimization",
+      "yields": "Neural network training: backprop computes gradients, optimization algorithm updates weights to minimize loss",
+      "type": "sequential",
+      "conditions": ["Loss function is differentiable", "Network architecture supports gradient flow"],
+      "example": "Backpropagation computes dL/dw for each weight via chain rule, then Adam optimizer uses these gradients with adaptive learning rates to minimize cross-entropy loss"
+    },
+    {
+      "source": "emergence-fractal-dimension",
+      "with": "perception-distance-formula",
+      "yields": "Fractal analysis: computing Hausdorff dimension by measuring how sets scale with distance-based covering",
+      "type": "nested",
+      "conditions": ["Set exhibits self-similarity at multiple scales", "Distance metric is well-defined"],
+      "example": "Box-counting dimension of the Koch snowflake: cover with boxes of side epsilon (using Euclidean distance), count boxes N(epsilon), then D = lim log(N)/log(1/epsilon)"
+    },
+    {
+      "source": "emergence-lyapunov-exponent",
+      "with": "change-ode",
+      "yields": "Stability classification: Lyapunov spectrum of an ODE system classifies trajectories as stable, periodic, or chaotic",
+      "type": "parallel",
+      "conditions": ["System is autonomous", "Trajectories remain bounded"],
+      "example": "Computing Lyapunov exponents of the Lorenz system dx/dt=sigma(y-x), dy/dt=rx-y-xz, dz/dt=xy-bz reveals positive exponent confirming chaotic dynamics"
+    },
+    {
+      "source": "emergence-turing-machine",
+      "with": "foundations-proof-by-contradiction",
+      "yields": "Decidability analysis: using diagonalization arguments to prove computational problems are undecidable",
+      "type": "sequential",
+      "conditions": ["Problem is formally defined as a language recognition task", "Reduction argument is constructive"],
+      "example": "Prove the halting problem is undecidable: assume a Turing machine H decides halting, construct machine D that contradicts H on input D, concluding no such H exists"
+    },
+    {
+      "source": "synthesis-complex-plane",
+      "with": "mapping-probability-axioms",
+      "yields": "Probabilistic domain routing: using probability distributions over Complex Plane positions to activate relevant mathematical domains",
+      "type": "parallel",
+      "conditions": ["Problem has been decomposed into domain-relevant features", "Domain positions are calibrated"],
+      "example": "Given a problem about wave interference, probability mass concentrates near the Waves domain position on the Complex Plane, with secondary activation of Perception for trig"
+    },
+    {
+      "source": "synthesis-foundational-decomposition",
+      "with": "mapping-functor",
+      "yields": "Functorial decomposition: systematically mapping advanced concepts to their foundational components via structure-preserving transformations",
+      "type": "sequential",
+      "conditions": ["Source concept has explicit dependencies", "Decomposition preserves logical structure"],
+      "example": "Decompose neural network training: backprop functor maps to chain rule, loss function maps to optimization, weight updates map to linear algebra, preserving the compositional structure"
+    },
+    {
+      "source": "mapping-fft",
+      "with": "waves-fourier-series-preview",
+      "yields": "Efficient spectral analysis: computing Fourier series coefficients in O(n log n) for periodic signals",
+      "type": "sequential",
+      "conditions": ["Signal is sampled at regular intervals", "Sample count is a power of 2 for radix-2 FFT"],
+      "example": "Analyze a musical chord: sample the waveform at 44.1kHz, apply FFT to recover the Fourier series harmonics, identify fundamental frequencies of each note"
+    },
+    {
+      "source": "mapping-channel-capacity",
+      "with": "mapping-shannon-entropy",
+      "yields": "Channel coding design: entropy determines source compression limit, channel capacity determines transmission rate limit",
+      "type": "parallel",
+      "conditions": ["Channel noise model is known", "Source statistics are stationary"],
+      "example": "Design a communication system: source entropy H(X) sets minimum bits for compression, channel capacity C = max I(X;Y) sets maximum reliable transmission rate"
+    },
+    {
+      "source": "emergence-neural-network",
+      "with": "structure-eigenvalue",
+      "yields": "Spectral analysis of weight matrices: eigenvalue decomposition reveals learned feature directions and training dynamics",
+      "type": "sequential",
+      "conditions": ["Weight matrices are square or can be analyzed via SVD", "Network has reached a meaningful training state"],
+      "example": "Eigendecomposition of a trained layer's weight matrix reveals principal feature directions; eigenvalue magnitudes indicate feature importance for classification"
+    },
+    {
+      "source": "unification-ads-cft",
+      "with": "emergence-fractal-dimension",
+      "yields": "Holographic complexity: fractal structure of the boundary CFT encodes bulk gravitational degrees of freedom",
+      "type": "parallel",
+      "conditions": ["Boundary theory is conformal", "Bulk geometry is asymptotically AdS"],
+      "example": "The fractal-like structure of entanglement entropy in a 2D CFT at criticality encodes the geometry of the dual 3D AdS spacetime via the Ryu-Takayanagi formula"
+    },
+    {
+      "source": "emergence-gradient-descent",
+      "with": "change-taylor-series",
+      "yields": "Convergence analysis: Taylor expansion of the loss around a critical point determines convergence rate and step size bounds",
+      "type": "sequential",
+      "conditions": ["Loss function is twice differentiable", "Current point is near a local minimum"],
+      "example": "Second-order Taylor expansion L(w+dw) ~ L(w) + g^T dw + 0.5 dw^T H dw gives quadratic convergence rate, optimal step size 1/lambda_max(H)"
+    },
+    {
+      "source": "mapping-bayes-theorem",
+      "with": "reality-dimensional-analysis",
+      "yields": "Dimensional Bayesian inference: incorporating physical dimension constraints as prior information in parameter estimation",
+      "type": "nested",
+      "conditions": ["Parameters have physical dimensions", "Prior encodes dimensional constraints"],
+      "example": "Estimating gravitational constant: Bayesian prior constrains G to have dimensions m^3/(kg*s^2), posterior updates from experimental measurements preserve dimensional consistency"
+    },
+    {
+      "source": "synthesis-through-line",
+      "with": "emergence-backpropagation",
+      "yields": "Mathematical pedagogy optimization: using gradient-based learning to optimize the presentation order along the through-line",
+      "type": "parallel",
+      "conditions": ["Learning outcomes are measurable", "Prerequisite graph is known"],
+      "example": "Model student learning as a neural process: backpropagate from assessment outcomes through the dependency graph to identify which foundational concepts need reinforcement"
+    },
+    {
+      "source": "mapping-convolution-theorem",
+      "with": "emergence-convolutional-network",
+      "yields": "Convolutional neural network theory: convolution theorem explains why CNNs learn translation-equivariant features efficiently",
+      "type": "nested",
+      "conditions": ["Input has spatial or temporal structure", "Translation equivariance is desired"],
+      "example": "CNN filters perform spatial convolution; by the convolution theorem, this is multiplication in frequency domain, explaining why CNNs naturally learn frequency-selective features"
+    },
+    {
+      "source": "unification-holographic-principle",
+      "with": "mapping-shannon-entropy",
+      "yields": "Information-theoretic bounds on spacetime: maximum entropy of a region scales with boundary area, not volume",
+      "type": "parallel",
+      "conditions": ["Gravitational system is in thermal equilibrium", "Boundary is well-defined"],
+      "example": "Bekenstein bound: maximum information content of a spherical region is S_max = A/(4*l_P^2) in Planck units, connecting Shannon information to spacetime geometry"
+    },
+    {
+      "source": "emergence-reinforcement-learning",
+      "with": "mapping-markov-chain",
+      "yields": "Markov decision process optimization: RL agent learns optimal policy over Markov state transitions",
+      "type": "nested",
+      "conditions": ["Environment satisfies Markov property", "Reward signal is well-defined"],
+      "example": "Q-learning agent navigates a grid world: state transitions form a Markov chain, Bellman equation propagates expected rewards backward through the chain to learn optimal actions"
+    }
+  ]
+}
