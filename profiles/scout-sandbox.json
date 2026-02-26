@@ -1,0 +1,32 @@
+{
+  "agent_type": "scout",
+  "description": "Scout agent sandbox profile — research-only write access, expanded domain allowlist for web research",
+  "write_dirs": [
+    "$PROJECT/.planning/research"
+  ],
+  "deny_read_dirs": [
+    "$HOME/.ssh",
+    "$HOME/.config",
+    "$HOME/.aws"
+  ],
+  "allowed_domains": [
+    "api.anthropic.com",
+    "github.com",
+    "registry.npmjs.org",
+    "crates.io",
+    "docs.rs",
+    "stackoverflow.com",
+    "developer.mozilla.org",
+    "pkg.go.dev",
+    "pypi.org"
+  ],
+  "proxy_socket": "$PROJECT/.planning/security/proxy.sock",
+  "bwrap_flags": {
+    "die_with_parent": true,
+    "cap_drop": "ALL",
+    "unshare_net": true,
+    "unshare_pid": true,
+    "unshare_uts": true,
+    "restricted_proc": true
+  }
+}

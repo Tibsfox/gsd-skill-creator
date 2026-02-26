@@ -5,7 +5,10 @@
 //!
 //! Phase 368 — Sandbox Configurator
 
-use crate::security::sandbox::{detect_platform, SandboxPlatform, SandboxProfileGenerator};
+use crate::security::sandbox::{
+    detect_platform, parse_verification_output, SandboxPlatform, SandboxProfileGenerator,
+    VerificationResult,
+};
 use crate::security::types::AgentType;
 
 use serde::Serialize;
@@ -62,4 +65,35 @@ pub fn get_sandbox_status() -> SandboxStatus {
         active: false, // Will be wired in Phase 373
         profile_path: None,
     }
+}
+
+/// Run the sandbox verification script and return structured results.
+///
+/// Executes `scripts/security/verify-sandbox.sh` and parses the PASS/FAIL
+/// output into a `VerificationResult` for dashboard consumption.
+#[tauri::command]
+pub async fn verify_sandbox() -> Result<VerificationResult, String> {
+    // Look for the script relative to the executable or project root
+    let script_path = std::env::current_dir()
+        .map_err(|e| e.to_string())?
+        .join("scripts")
+        .join("security")
+        .join("verify-sandbox.sh");
+
+    if !script_path.exists() {
+        return Err(format!(
+            "Verification script not found: {}",
+            script_path.display()
+        ));
+    }
+
+    let output = std::process::Command::new("bash")
+        .arg(&script_path)
+        .output()
+        .map_err(|e| format!("Failed to run verification script: {}", e))?;
+
+    let stdout = String::from_utf8_lossy(&output.stdout).to_string();
+    let exit_code = output.status.code().unwrap_or(1) as u32;
+
+    Ok(parse_verification_output(&stdout, exit_code))
 }
