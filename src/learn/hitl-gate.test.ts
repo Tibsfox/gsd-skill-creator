@@ -183,7 +183,7 @@ describe('finding presentation', () => {
     const output = formatFindings(report);
 
     expect(output).toContain('prompt-injection');
-    expect(output).toContain('critical');
+    expect(output).toContain('CRITICAL');
     expect(output).toContain('test evidence content');
     expect(output).toContain('Review');
   });
