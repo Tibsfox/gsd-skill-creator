@@ -11,31 +11,41 @@ import { PART_ANGULAR_REGIONS, INITIAL_RADIUS, MAX_ANGULAR_VELOCITY } from './ty
 
 /**
  * Assign a position on the complex plane for a newly detected concept.
- * Theta is based on the part's angular region with a small offset for
- * uniqueness within the part. Radius starts at INITIAL_RADIUS.
+ *
+ * - Theta is based on the part's angular region, adjusted by up to +/- pi/16
+ *   based on the concept's abstractionLevel.
+ * - Radius starts at INITIAL_RADIUS (0.1).
+ * - Angular velocity is 0 for first detection.
+ * - abstractionLevel = theta / (2 * PI), clamped to [0, 1].
  */
 export function assignPosition(
   concept: LearnedConcept,
   part: number,
 ): PositionAssignment {
   const baseTheta = PART_ANGULAR_REGIONS[part] ?? 0;
-  // Small deterministic offset based on concept name hash
-  const nameHash = hashString(concept.name);
-  const offset = ((nameHash % 1000) / 1000) * (Math.PI / 16) - (Math.PI / 32);
-  const theta = normalizeTheta(baseTheta + offset);
+
+  // Adjust theta by up to +/- pi/16 based on abstraction level
+  // More abstract = slightly higher theta within the part range
+  const abstractionOffset = (concept.abstractionLevel - 0.5) * (Math.PI / 16);
+  const theta = Math.max(0, baseTheta + abstractionOffset);
+
+  // Compute abstractionLevel from final theta
+  const abstractionLevel = Math.min(1, Math.max(0, theta / (2 * Math.PI)));
 
   return {
     theta,
-    radius: INITIAL_RADIUS + concept.confidence * 0.05,
-    angularVelocity: Math.min(concept.mathDensity * 0.15, MAX_ANGULAR_VELOCITY),
-    abstractionLevel: concept.abstractionLevel,
+    radius: INITIAL_RADIUS,
+    angularVelocity: 0,
+    abstractionLevel,
   };
 }
 
 /**
  * Update an existing position when the same concept is re-encountered,
  * increasing radius to reflect progressive depth understanding.
- * Radius increases by 0.1 * newConfidence, clamped to 1.0.
+ *
+ * - Radius increases by 0.1 * newConfidence, clamped to max 1.0.
+ * - Angular velocity is the change rate, clamped to MAX_ANGULAR_VELOCITY (0.2).
  */
 export function updatePositionForDepth(
   existing: PositionAssignment,
@@ -53,19 +63,4 @@ export function updatePositionForDepth(
     angularVelocity: newVelocity,
     abstractionLevel: existing.abstractionLevel,
   };
-}
-
-function hashString(s: string): number {
-  let hash = 0;
-  for (let i = 0; i < s.length; i++) {
-    const chr = s.charCodeAt(i);
-    hash = ((hash << 5) - hash) + chr;
-    hash |= 0;
-  }
-  return Math.abs(hash);
-}
-
-function normalizeTheta(theta: number): number {
-  const TWO_PI = 2 * Math.PI;
-  return ((theta % TWO_PI) + TWO_PI) % TWO_PI;
 }
