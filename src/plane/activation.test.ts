@@ -107,10 +107,11 @@ describe('computeEnhancedScore', () => {
   });
 
   it('scores distant skill low', () => {
-    const position = createPosition(0.05, 0.9);
+    // Very concrete skill (theta~0) vs purely abstract task (0, 1)
+    const position = createPosition(0.05, 0.5);
     const taskVector: TaskVector = {
-      x: 0.1,
-      y: 0.99,
+      x: 0.0,
+      y: 1.0,
       raw: { concreteSignals: [], abstractSignals: [] },
     };
 
@@ -121,6 +122,7 @@ describe('computeEnhancedScore', () => {
       0.5,
     );
 
+    // Tangent line at theta~0 is nearly vertical, far from (0, 1)
     expect(result.tangentScore).toBeLessThan(0.5);
   });
 
