@@ -233,7 +233,7 @@ describe('Schema conformance', () => {
     for (const candidate of result.candidates) {
       for (const field of REQUIRED_FIELDS) {
         expect(candidate).toHaveProperty(field);
-        const value = (candidate as Record<string, unknown>)[field];
+        const value = (candidate as unknown as Record<string, unknown>)[field];
         expect(value, `Field "${field}" should not be undefined`).not.toBeUndefined();
         expect(value, `Field "${field}" should not be null`).not.toBeNull();
       }
