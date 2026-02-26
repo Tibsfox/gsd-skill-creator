@@ -30,6 +30,7 @@ pub fn run() {
             app.manage(tokio::sync::Mutex::new(mcp_host::McpHostState::new()));
             app.manage(tokio::sync::Mutex::new(security::SecurityState::new()));
             app.manage(tokio::sync::Mutex::new(state::ApiClientState::default()));
+            app.manage(tokio::sync::Mutex::new(services::launcher::ServiceLauncher::new_without_emitter()));
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -87,6 +88,10 @@ pub fn run() {
             commands::ipc::stop_service,
             commands::ipc::restart_service,
             commands::ipc::get_staging_status,
+            commands::services::svc_start_service,
+            commands::services::svc_start_all_services,
+            commands::services::svc_get_all_service_states,
+            commands::services::svc_restart_service,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
