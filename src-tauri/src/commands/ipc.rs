@@ -7,6 +7,7 @@ use serde_json::json;
 use tauri::Emitter;
 
 use crate::api::client::{AnthropicClient, Message};
+use crate::api::history::ConversationHistory;
 use crate::api::keystore::KeyStore;
 use crate::state::ApiClientState;
 
@@ -50,19 +51,39 @@ pub async fn send_chat_message(
     }
 
     let client = api_state.client.as_ref().unwrap();
+    let msg_content = message.clone();
     let messages = vec![Message {
         role: "user".to_string(),
         content: message,
     }];
     match client
-        .send_message(messages, None, &app_handle, &cid)
+        .send_message_with_retry(messages, None, &app_handle, &cid)
         .await
     {
-        Ok(response) => Ok(json!({
-            "conversation_id": cid,
-            "input_tokens": response.input_tokens,
-            "output_tokens": response.output_tokens,
-        })),
+        Ok(response) => {
+            // Persist conversation history
+            let conversations_dir = std::path::PathBuf::from(".planning/conversations");
+            let mut history = ConversationHistory::new(
+                cid.clone(),
+                "claude-sonnet-4-5-20250929".to_string(),
+            );
+            history.add_message(&Message {
+                role: "user".to_string(),
+                content: msg_content,
+            });
+            history.add_message(&Message {
+                role: "assistant".to_string(),
+                content: response.full_text.clone(),
+            });
+            history.update_usage(response.input_tokens, response.output_tokens);
+            let _ = ConversationHistory::save(history.record(), &conversations_dir);
+
+            Ok(json!({
+                "conversation_id": cid,
+                "input_tokens": response.input_tokens,
+                "output_tokens": response.output_tokens,
+            }))
+        }
         Err(e) => Err(e.to_string()),
     }
 }
@@ -119,15 +140,37 @@ pub async fn get_magic_level() -> Result<serde_json::Value, String> {
     Ok(json!({ "level": 3 }))
 }
 
-/// Get conversation history.
+/// Get conversation history from the conversations directory.
 ///
-/// Stub: will be wired to history persistence in Phase 376-02.
+/// If conversation_id is provided, loads that specific file.
+/// Otherwise returns a list of all conversations.
 #[tauri::command]
 pub async fn get_conversation_history(
     conversation_id: String,
 ) -> Result<serde_json::Value, String> {
-    let _ = conversation_id; // suppress unused warning in stub
-    Ok(json!({ "messages": [] }))
+    let dir = std::path::PathBuf::from(".planning/conversations");
+    if conversation_id.is_empty() || conversation_id == "list" {
+        // List all conversations
+        let paths = ConversationHistory::list(&dir).map_err(|e| e.to_string())?;
+        let mut records = Vec::new();
+        for path in paths {
+            if let Ok(record) = ConversationHistory::load(&path) {
+                records.push(serde_json::to_value(record).unwrap_or_default());
+            }
+        }
+        Ok(json!(records))
+    } else {
+        // Try to find and load a specific conversation
+        let paths = ConversationHistory::list(&dir).map_err(|e| e.to_string())?;
+        for path in paths {
+            if let Ok(record) = ConversationHistory::load(&path) {
+                if record.id == conversation_id {
+                    return Ok(serde_json::to_value(record).unwrap_or_default());
+                }
+            }
+        }
+        Ok(json!({ "messages": [] }))
+    }
 }
 
 /// Start a managed service.

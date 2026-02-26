@@ -9,6 +9,7 @@
 //! - The key is injected into the x-api-key header only in send_message
 
 use crate::api::keystore::{KeyStore, KeyStoreError};
+use crate::api::retry::RetryPolicy;
 use crate::api::streaming::{self, MessageResponse};
 
 // ============================================================================
@@ -177,5 +178,81 @@ impl AnthropicClient {
         }
 
         streaming::stream_response(response, app_handle, conversation_id).await
+    }
+
+    /// Send a message with retry logic wrapping send_message.
+    ///
+    /// Retries with exponential backoff on network errors and server errors.
+    /// Honors retry-after headers on 429 rate-limit responses.
+    /// Emits chat:retry and chat:rate_limited IPC events during retry loops.
+    pub async fn send_message_with_retry(
+        &self,
+        messages: Vec<Message>,
+        system: Option<String>,
+        app_handle: &tauri::AppHandle,
+        conversation_id: &str,
+    ) -> Result<MessageResponse, ApiError> {
+        use tauri::Emitter;
+
+        let policy = RetryPolicy::default();
+        let mut last_error: Option<ApiError> = None;
+
+        for attempt in 1..=(policy.max_attempts + 1) {
+            match self
+                .send_message(messages.clone(), system.clone(), app_handle, conversation_id)
+                .await
+            {
+                Ok(response) => return Ok(response),
+                Err(e) => {
+                    if !policy.should_retry(attempt, &e) {
+                        return Err(e);
+                    }
+
+                    let delay = if policy.is_rate_limited(&e) {
+                        let retry_after_ms =
+                            extract_retry_after_from_error(&e).unwrap_or(5000);
+                        let _ = app_handle.emit(
+                            crate::ipc::events::CHAT_RATE_LIMITED,
+                            serde_json::json!({"retry_after_ms": retry_after_ms}),
+                        );
+                        policy.delay_for_rate_limit(retry_after_ms / 1000)
+                    } else {
+                        policy.delay_for_attempt(attempt)
+                    };
+
+                    // Emit chat:retry IPC event
+                    let _ = app_handle.emit(
+                        crate::ipc::events::CHAT_RETRY,
+                        serde_json::json!({
+                            "conversation_id": conversation_id,
+                            "attempt": attempt,
+                            "max_attempts": policy.max_attempts,
+                            "delay_ms": delay.as_millis() as u64,
+                        }),
+                    );
+
+                    tokio::time::sleep(delay).await;
+                    last_error = Some(e);
+                }
+            }
+        }
+
+        Err(last_error.unwrap_or(ApiError::NoApiKey))
+    }
+}
+
+/// Extract retry-after value from a 429 HttpError message field.
+fn extract_retry_after_from_error(error: &ApiError) -> Option<u64> {
+    if let ApiError::HttpError {
+        status: 429,
+        message,
+    } = error
+    {
+        message
+            .strip_prefix("retry-after:")
+            .and_then(|s| s.parse::<u64>().ok())
+            .map(|secs| secs * 1000)
+    } else {
+        None
     }
 }
