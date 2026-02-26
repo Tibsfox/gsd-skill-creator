@@ -3,6 +3,7 @@ mod commands;
 mod error;
 mod pty;
 pub mod security;
+pub mod api;
 mod state;
 mod tmux;
 mod mcp_host;
