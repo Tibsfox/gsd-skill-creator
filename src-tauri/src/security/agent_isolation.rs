@@ -329,6 +329,122 @@ impl AgentIsolationManager {
         &self.active_agents
     }
 
+    /// Destroy an agent: copy outbox to shared results, remove worktree, clean up.
+    ///
+    /// Steps:
+    /// 1. Look up agent in active_agents
+    /// 2. Copy outbox contents to `.agents/shared/results/{id}/`
+    /// 3. Run `git worktree remove --force` (fallback: fs::remove_dir_all)
+    /// 4. Remove agent from active_agents
+    /// 5. Emit "agent_destroyed" SecurityEvent
+    pub async fn destroy_agent(&mut self, id: &str) -> Result<(), IsolationError> {
+        let agent = self
+            .active_agents
+            .get(id)
+            .ok_or_else(|| IsolationError::WorktreeCreationFailed(format!("agent {} not found", id)))?
+            .clone();
+
+        // Copy outbox to shared/results/{id}
+        let outbox = agent.worktree_path.join(".planning").join("outbox");
+        let results_dest = self.shared_dir.join("results").join(id);
+        if outbox.is_dir() {
+            let _ = copy_dir_recursive(&outbox, &results_dest);
+        }
+
+        // Try git worktree remove first
+        let output = Command::new("git")
+            .args(["worktree", "remove", "--force", &agent.worktree_path.to_string_lossy()])
+            .current_dir(&self.project_root)
+            .output();
+
+        match output {
+            Ok(o) if o.status.success() => {}
+            _ => {
+                // Fallback: remove directory manually
+                if agent.worktree_path.exists() {
+                    fs::remove_dir_all(&agent.worktree_path)?;
+                }
+            }
+        }
+
+        // Remove from active agents
+        self.active_agents.remove(id);
+
+        // Emit security event
+        self.emit_event(
+            "agent_destroyed",
+            EventSeverity::Info,
+            serde_json::json!({ "agent_id": id }),
+        );
+
+        Ok(())
+    }
+
+    /// Verify that two agents are isolated from each other.
+    ///
+    /// Returns true if both agents exist and neither agent's sandbox profile
+    /// allows writing to the other agent's worktree path.
+    /// Returns false if either agent is unknown (cannot verify isolation).
+    pub fn verify_isolation(&self, agent_a: &str, agent_b: &str) -> bool {
+        let a = match self.active_agents.get(agent_a) {
+            Some(agent) => agent,
+            None => return false,
+        };
+        let b = match self.active_agents.get(agent_b) {
+            Some(agent) => agent,
+            None => return false,
+        };
+
+        let a_wt = a.worktree_path.to_string_lossy().to_string();
+        let b_wt = b.worktree_path.to_string_lossy().to_string();
+
+        // Check that agent A's write_dirs do NOT contain agent B's worktree
+        let a_can_write_b = a.sandbox_profile.filesystem.write_dirs.iter().any(|d| d == &b_wt);
+        // Check that agent B's write_dirs do NOT contain agent A's worktree
+        let b_can_write_a = b.sandbox_profile.filesystem.write_dirs.iter().any(|d| d == &a_wt);
+
+        !a_can_write_b && !b_can_write_a
+    }
+
+    /// Handle a worktree lifecycle hook from Claude Code Agent Teams.
+    ///
+    /// - `WorktreeCreate`: generate sandbox profile and write `.sandbox-profile.json`
+    /// - `WorktreeRemove`: remove `.sandbox-profile.json`
+    /// - `TaskCompleted`: copy outbox to shared results
+    /// - Other hooks: no-op
+    pub fn handle_worktree_hook(&mut self, payload: WorktreeHookPayload) -> Result<(), IsolationError> {
+        let wt_path = PathBuf::from(&payload.worktree_path);
+
+        match payload.hook.as_str() {
+            "WorktreeCreate" => {
+                let agent_type = parse_agent_type(&payload.agent_type);
+                let profile = self
+                    .sandbox_gen
+                    .generate_for_worktree(&payload.agent_id, agent_type, &wt_path)?;
+                let profile_json = serde_json::to_string_pretty(&profile)
+                    .map_err(|e| IsolationError::SandboxGenerationFailed(e.to_string()))?;
+                fs::write(wt_path.join(".sandbox-profile.json"), &profile_json)?;
+                Ok(())
+            }
+            "WorktreeRemove" => {
+                let profile_path = wt_path.join(".sandbox-profile.json");
+                if profile_path.exists() {
+                    let _ = fs::remove_file(&profile_path);
+                }
+                Ok(())
+            }
+            "TaskCompleted" => {
+                let outbox = wt_path.join(".planning").join("outbox");
+                let results_dest = self.shared_dir.join("results").join(&payload.agent_id);
+                if outbox.is_dir() {
+                    let _ = copy_dir_recursive(&outbox, &results_dest);
+                }
+                Ok(())
+            }
+            _ => Ok(()), // TeammateIdle and others are no-ops
+        }
+    }
+
     /// Record a security event internally.
     fn emit_event(
         &mut self,
@@ -350,5 +466,34 @@ impl AgentIsolationManager {
             event_type: event_type.to_string(),
             detail,
         });
+    }
+}
+
+// ============================================================================
+// Helper functions
+// ============================================================================
+
+/// Recursively copy a directory from src to dst.
+fn copy_dir_recursive(src: &Path, dst: &Path) -> Result<(), std::io::Error> {
+    fs::create_dir_all(dst)?;
+    for entry in fs::read_dir(src)? {
+        let entry = entry?;
+        let dest_path = dst.join(entry.file_name());
+        if entry.file_type()?.is_dir() {
+            copy_dir_recursive(&entry.path(), &dest_path)?;
+        } else {
+            fs::copy(&entry.path(), &dest_path)?;
+        }
+    }
+    Ok(())
+}
+
+/// Parse an agent type string to AgentType enum.
+fn parse_agent_type(s: &str) -> AgentType {
+    match s {
+        "exec" => AgentType::Exec,
+        "verify" => AgentType::Verify,
+        "scout" => AgentType::Scout,
+        _ => AgentType::Main,
     }
 }
