@@ -1,0 +1,1776 @@
+{
+  "domain": "change",
+  "version": "1.35.0",
+  "primitives": [
+    {
+      "id": "change-limit",
+      "name": "Limit",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.1",
+      "planePosition": { "real": -0.1, "imaginary": 0.1 },
+      "formalStatement": "The limit of f(x) as x approaches a is L, written lim_{x->a} f(x) = L, if for every epsilon > 0 there exists delta > 0 such that 0 < |x - a| < delta implies |f(x) - L| < epsilon.",
+      "computationalForm": "Evaluate lim_{x->a} f(x): try direct substitution. If indeterminate (0/0, inf/inf), use algebraic simplification, L'Hopital's rule, or squeeze theorem.",
+      "prerequisites": ["Real numbers", "Absolute value", "Real line completeness"],
+      "dependencies": [
+        {
+          "target": "perception-real-numbers",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Limits are defined on the real numbers"
+        },
+        {
+          "target": "perception-absolute-value",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Epsilon-delta definition uses absolute value for distance"
+        },
+        {
+          "target": "perception-real-line-completeness",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Completeness ensures limits of convergent sequences exist in R"
+        }
+      ],
+      "enables": ["change-continuity", "change-derivative", "change-riemann-sum", "change-lhopitals-rule"],
+      "compositionRules": [
+        {
+          "with": "perception-real-line-completeness",
+          "yields": "Foundation for epsilon-delta analysis: the limit exists because R is complete",
+          "type": "nested",
+          "conditions": ["When proving existence of limits in the real number system"],
+          "example": "lim_{x->0} sin(x)/x = 1 (exists because R is complete and the sequence converges)"
+        }
+      ],
+      "applicabilityPatterns": ["finding the value a function approaches near a point where it may not be defined", "establishing the foundation for derivatives and integrals"],
+      "keywords": ["limit", "epsilon-delta", "approach", "convergence", "lim"],
+      "tags": ["analysis", "foundational", "calculus"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-continuity",
+      "name": "Continuity",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.1",
+      "planePosition": { "real": -0.1, "imaginary": 0.05 },
+      "formalStatement": "A function f is continuous at a point a if: (1) f(a) is defined, (2) lim_{x->a} f(x) exists, and (3) lim_{x->a} f(x) = f(a). f is continuous on an interval if continuous at every point in the interval.",
+      "computationalForm": "Check continuity: evaluate lim_{x->a} f(x) and compare to f(a). Continuous functions: polynomials, exponentials, trig functions (on their domains). Operations preserving continuity: +, -, *, /, composition.",
+      "prerequisites": ["Limit"],
+      "dependencies": [
+        {
+          "target": "change-limit",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Continuity is defined in terms of limits"
+        }
+      ],
+      "enables": ["change-derivative", "change-mean-value-theorem", "change-fundamental-theorem-1"],
+      "compositionRules": [
+        {
+          "with": "change-limit",
+          "yields": "The no-surprises condition: the limit equals the function value",
+          "type": "sequential",
+          "conditions": ["When checking whether a function is well-behaved at a point"],
+          "example": "f(x) = sin(x)/x at x=0: undefined, but lim = 1, so defining f(0)=1 makes it continuous"
+        }
+      ],
+      "applicabilityPatterns": ["verifying that a function has no jumps or breaks at a point", "determining the domain on which a function is well-behaved for calculus"],
+      "keywords": ["continuous", "continuity", "no break", "limit equals value"],
+      "tags": ["analysis", "calculus", "foundational"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-derivative",
+      "name": "Derivative",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.2",
+      "planePosition": { "real": 0.0, "imaginary": -0.1 },
+      "formalStatement": "The derivative of f at x is f'(x) = lim_{h->0} [f(x+h) - f(x)]/h, when this limit exists. It represents the instantaneous rate of change of f at x, and the slope of the tangent line to the graph at (x, f(x)).",
+      "computationalForm": "f'(x) = lim_{h->0} (f(x+h)-f(x))/h. Notation: f'(x), df/dx, Df(x). Tangent line: y = f(a) + f'(a)(x-a).",
+      "prerequisites": ["Limit", "Continuity"],
+      "dependencies": [
+        {
+          "target": "change-limit",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "The derivative is defined as a limit of the difference quotient"
+        },
+        {
+          "target": "change-continuity",
+          "type": "motivates",
+          "strength": 0.6,
+          "description": "Differentiability implies continuity (but not conversely)"
+        }
+      ],
+      "enables": ["change-power-rule", "change-chain-rule", "change-product-rule", "change-quotient-rule", "change-higher-order-derivatives", "change-critical-point", "change-mean-value-theorem", "change-newtons-method"],
+      "compositionRules": [
+        {
+          "with": "change-fundamental-theorem-2",
+          "yields": "The fundamental connection: differentiation and integration are inverse operations",
+          "type": "parallel",
+          "conditions": ["When switching between rate-of-change and accumulation perspectives"],
+          "example": "d/dx integral_0^x t^2 dt = x^2 by FTC"
+        }
+      ],
+      "applicabilityPatterns": ["computing the instantaneous rate of change of a quantity", "finding the slope of a curve at a specific point"],
+      "keywords": ["derivative", "differentiation", "rate of change", "slope", "tangent"],
+      "tags": ["calculus", "foundational", "rate"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-differentiability",
+      "name": "Differentiability",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.2",
+      "planePosition": { "real": -0.1, "imaginary": 0.1 },
+      "formalStatement": "A function f is differentiable at a if f'(a) = lim_{h->0} [f(a+h) - f(a)]/h exists. Differentiability implies continuity. A function may be continuous but not differentiable (e.g., |x| at x=0).",
+      "computationalForm": "Check differentiability: verify lim_{h->0+} [f(a+h)-f(a)]/h = lim_{h->0-} [f(a+h)-f(a)]/h. If left and right derivatives differ, f is not differentiable at a.",
+      "prerequisites": ["Derivative", "Continuity"],
+      "dependencies": [
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Differentiability is the existence of the derivative"
+        },
+        {
+          "target": "change-continuity",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Differentiability is a stronger condition than continuity"
+        }
+      ],
+      "enables": ["change-mean-value-theorem"],
+      "compositionRules": [
+        {
+          "with": "change-continuity",
+          "yields": "Hierarchy: differentiable => continuous => defined (each implication is strict)",
+          "type": "sequential",
+          "conditions": ["When classifying the regularity of a function"],
+          "example": "|x| is continuous everywhere but not differentiable at x=0 (corner)"
+        }
+      ],
+      "applicabilityPatterns": ["determining whether a function has a well-defined tangent line at a point", "checking prerequisites for applying differentiation rules"],
+      "keywords": ["differentiable", "smooth", "corner", "cusp", "regularity"],
+      "tags": ["calculus", "analysis", "regularity"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-higher-order-derivatives",
+      "name": "Higher-Order Derivatives",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.2",
+      "planePosition": { "real": 0.0, "imaginary": 0.0 },
+      "formalStatement": "The nth derivative f^(n)(x) is obtained by differentiating f n times. f''(x) = d^2f/dx^2 (acceleration, concavity). f^(n)(x) = d^n f/dx^n. A function is C^n if its first n derivatives are continuous.",
+      "computationalForm": "f''(x) = (f')'(x). f^(n)(x) = (f^(n-1))'(x). For f(x) = x^m: f^(n)(x) = m!/(m-n)! * x^(m-n) for n <= m, 0 for n > m.",
+      "prerequisites": ["Derivative"],
+      "dependencies": [
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Higher derivatives are iterated first derivatives"
+        }
+      ],
+      "enables": ["change-inflection-point", "change-taylor-series", "change-second-derivative-test"],
+      "compositionRules": [
+        {
+          "with": "change-taylor-series",
+          "yields": "Taylor coefficients: f(x) ~ sum f^(n)(a)/n! * (x-a)^n, each coefficient from an nth derivative",
+          "type": "sequential",
+          "conditions": ["When constructing polynomial approximations of functions"],
+          "example": "e^x: f^(n)(0) = 1 for all n, so Taylor series = sum x^n/n!"
+        }
+      ],
+      "applicabilityPatterns": ["computing acceleration as the second derivative of position", "determining concavity and inflection points of curves"],
+      "keywords": ["second derivative", "higher order", "nth derivative", "acceleration", "concavity"],
+      "tags": ["calculus", "analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-critical-point",
+      "name": "Critical Point",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.3",
+      "planePosition": { "real": 0.1, "imaginary": -0.2 },
+      "formalStatement": "A critical point of f is a value c in the domain of f where f'(c) = 0 or f'(c) does not exist. Critical points are candidates for local maxima, local minima, or inflection points.",
+      "computationalForm": "Find critical points: solve f'(x) = 0. Also check where f'(x) is undefined but f(x) is defined. Classify using first or second derivative test.",
+      "prerequisites": ["Derivative"],
+      "dependencies": [
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Critical points are defined in terms of the derivative"
+        }
+      ],
+      "enables": ["change-first-derivative-test", "change-second-derivative-test", "change-optimization"],
+      "compositionRules": [
+        {
+          "with": "change-first-derivative-test",
+          "yields": "Complete local extremum classification: find critical points then test sign changes",
+          "type": "sequential",
+          "conditions": ["When determining whether a function has maxima or minima"],
+          "example": "f(x) = x^3 - 3x: f'(x) = 3x^2 - 3 = 0 at x = +/-1. Sign change analysis: min at x=1, max at x=-1"
+        }
+      ],
+      "applicabilityPatterns": ["finding where a function might achieve its maximum or minimum value", "locating turning points of a curve"],
+      "keywords": ["critical point", "stationary point", "f'=0", "turning point"],
+      "tags": ["calculus", "optimization"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-inflection-point",
+      "name": "Inflection Point",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.3",
+      "planePosition": { "real": 0.1, "imaginary": -0.1 },
+      "formalStatement": "An inflection point is a point where the concavity of f changes: f'' changes sign. At an inflection point, the tangent line crosses the curve.",
+      "computationalForm": "Find inflection points: solve f''(x) = 0, then verify f'' changes sign. Concave up: f'' > 0. Concave down: f'' < 0.",
+      "prerequisites": ["Higher-order derivatives"],
+      "dependencies": [
+        {
+          "target": "change-higher-order-derivatives",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Inflection points are where the second derivative changes sign"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "change-critical-point",
+          "yields": "Complete curve analysis: critical points for extrema, inflection points for concavity changes",
+          "type": "parallel",
+          "conditions": ["When sketching or fully analyzing the shape of a function"],
+          "example": "f(x) = x^3: inflection at x=0 (f''=6x changes sign), no extrema"
+        }
+      ],
+      "applicabilityPatterns": ["determining where a curve changes from bending upward to bending downward", "identifying transition points in growth models"],
+      "keywords": ["inflection", "concavity", "second derivative", "sign change"],
+      "tags": ["calculus", "analysis", "curve-sketching"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-power-rule",
+      "name": "Power Rule",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.3",
+      "planePosition": { "real": 0.1, "imaginary": -0.2 },
+      "formalStatement": "For any real number n: d/dx(x^n) = n*x^(n-1). This holds for integer, rational, and real exponents (where the function is defined).",
+      "computationalForm": "d/dx(x^n) = n*x^(n-1). Examples: d/dx(x^3) = 3x^2, d/dx(sqrt(x)) = 1/(2*sqrt(x)), d/dx(1/x) = -1/x^2.",
+      "prerequisites": ["Derivative", "Limit"],
+      "dependencies": [
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Power rule is derived from the limit definition of derivative"
+        }
+      ],
+      "enables": ["change-chain-rule", "change-antiderivative"],
+      "compositionRules": [
+        {
+          "with": "change-chain-rule",
+          "yields": "Generalized power rule: d/dx(f(x)^n) = n*f(x)^(n-1)*f'(x)",
+          "type": "nested",
+          "conditions": ["When differentiating composite power expressions"],
+          "example": "d/dx(sin(x))^3 = 3*sin^2(x)*cos(x)"
+        }
+      ],
+      "applicabilityPatterns": ["differentiating polynomial terms and power functions", "finding the derivative of any expression of the form x^n"],
+      "keywords": ["power rule", "x^n", "polynomial", "differentiation rule"],
+      "tags": ["calculus", "differentiation", "rule"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-chain-rule",
+      "name": "Chain Rule",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.4",
+      "planePosition": { "real": 0.0, "imaginary": -0.1 },
+      "formalStatement": "If g is differentiable at x and f is differentiable at g(x), then the composite function f(g(x)) is differentiable at x with: d/dx[f(g(x))] = f'(g(x)) * g'(x).",
+      "computationalForm": "d/dx f(g(x)) = f'(g(x)) * g'(x). Leibniz notation: dy/dx = (dy/du)*(du/dx) where u = g(x). Multiple composition: d/dx f(g(h(x))) = f'(g(h(x)))*g'(h(x))*h'(x).",
+      "prerequisites": ["Derivative"],
+      "dependencies": [
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Chain rule is a fundamental differentiation theorem"
+        }
+      ],
+      "enables": ["change-implicit-differentiation", "change-derivative-of-trig"],
+      "compositionRules": [
+        {
+          "with": "change-power-rule",
+          "yields": "d/dx[f(x)]^n = n[f(x)]^(n-1) * f'(x)",
+          "type": "nested",
+          "conditions": ["When differentiating a power of a composite function"],
+          "example": "d/dx(x^2+1)^5 = 5(x^2+1)^4 * 2x = 10x(x^2+1)^4"
+        }
+      ],
+      "applicabilityPatterns": ["differentiating compositions of functions like sin(x^2) or e^(3x)", "computing rates of change through connected relationships"],
+      "keywords": ["chain rule", "composition", "outer*inner", "dy/du * du/dx"],
+      "tags": ["calculus", "differentiation", "rule"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-product-rule",
+      "name": "Product Rule",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.4",
+      "planePosition": { "real": 0.1, "imaginary": -0.15 },
+      "formalStatement": "If f and g are differentiable, then d/dx[f(x)*g(x)] = f'(x)*g(x) + f(x)*g'(x).",
+      "computationalForm": "(fg)' = f'g + fg'. Leibniz: d(uv) = u*dv + v*du. Extension to three functions: (fgh)' = f'gh + fg'h + fgh'.",
+      "prerequisites": ["Derivative"],
+      "dependencies": [
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Product rule is a fundamental differentiation theorem"
+        }
+      ],
+      "enables": ["change-integration-by-parts"],
+      "compositionRules": [
+        {
+          "with": "change-quotient-rule",
+          "yields": "Complete toolkit for differentiating rational expressions",
+          "type": "parallel",
+          "conditions": ["When differentiating products and quotients of functions"],
+          "example": "d/dx[x*sin(x)] = sin(x) + x*cos(x)"
+        }
+      ],
+      "applicabilityPatterns": ["differentiating a product of two functions", "deriving integration by parts from the product rule"],
+      "keywords": ["product rule", "Leibniz rule", "f'g + fg'", "multiplication"],
+      "tags": ["calculus", "differentiation", "rule"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-quotient-rule",
+      "name": "Quotient Rule",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.4",
+      "planePosition": { "real": 0.1, "imaginary": -0.15 },
+      "formalStatement": "If f and g are differentiable and g(x) != 0, then d/dx[f(x)/g(x)] = [f'(x)*g(x) - f(x)*g'(x)] / [g(x)]^2.",
+      "computationalForm": "(f/g)' = (f'g - fg') / g^2. Mnemonic: lo*d(hi) - hi*d(lo) over lo*lo.",
+      "prerequisites": ["Derivative", "Product rule"],
+      "dependencies": [
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Quotient rule is a fundamental differentiation theorem"
+        },
+        {
+          "target": "change-product-rule",
+          "type": "motivates",
+          "strength": 0.6,
+          "description": "Quotient rule can be derived from the product rule"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "change-product-rule",
+          "yields": "Complete differentiation of rational expressions: products and quotients",
+          "type": "parallel",
+          "conditions": ["When differentiating fractions of functions"],
+          "example": "d/dx[sin(x)/x] = [cos(x)*x - sin(x)] / x^2"
+        }
+      ],
+      "applicabilityPatterns": ["differentiating a fraction where both numerator and denominator are functions of x", "finding rates of change of ratios"],
+      "keywords": ["quotient rule", "fraction", "f/g", "lo d hi minus hi d lo"],
+      "tags": ["calculus", "differentiation", "rule"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-mean-value-theorem",
+      "name": "Mean Value Theorem",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.5",
+      "planePosition": { "real": -0.1, "imaginary": 0.15 },
+      "formalStatement": "If f is continuous on [a,b] and differentiable on (a,b), then there exists c in (a,b) such that f'(c) = [f(b) - f(a)] / (b - a). The instantaneous rate equals the average rate at some interior point.",
+      "computationalForm": "Find c: solve f'(c) = (f(b)-f(a))/(b-a). MVT guarantees existence but may not give a unique c. Special case (Rolle's): if f(a)=f(b), then f'(c)=0 for some c in (a,b).",
+      "prerequisites": ["Derivative", "Continuity"],
+      "dependencies": [
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "MVT relates the derivative to the average rate of change"
+        },
+        {
+          "target": "change-continuity",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Continuity on [a,b] is a hypothesis of MVT"
+        },
+        {
+          "target": "change-differentiability",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Differentiability on (a,b) is a hypothesis of MVT"
+        }
+      ],
+      "enables": ["change-fundamental-theorem-1"],
+      "compositionRules": [
+        {
+          "with": "change-fundamental-theorem-1",
+          "yields": "The bridge from local (derivative) to global (integral): MVT connects pointwise and average behavior",
+          "type": "sequential",
+          "conditions": ["When proving that a function's average behavior is achieved at some point"],
+          "example": "A car averaging 60 mph over 2 hours must have been going exactly 60 mph at some instant"
+        }
+      ],
+      "applicabilityPatterns": ["proving that a function achieves its average rate at some interior point", "establishing bounds on function values from derivative bounds"],
+      "keywords": ["mean value theorem", "MVT", "Rolle", "average rate", "intermediate"],
+      "tags": ["calculus", "theorem", "analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-lhopitals-rule",
+      "name": "L'Hopital's Rule",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.5",
+      "planePosition": { "real": 0.0, "imaginary": 0.05 },
+      "formalStatement": "If lim_{x->a} f(x)/g(x) gives an indeterminate form 0/0 or inf/inf, and if lim_{x->a} f'(x)/g'(x) exists, then lim_{x->a} f(x)/g(x) = lim_{x->a} f'(x)/g'(x).",
+      "computationalForm": "For 0/0 or inf/inf: lim f/g = lim f'/g'. May need to apply multiple times. Other indeterminate forms (0*inf, inf-inf, 0^0, 1^inf, inf^0) must be rewritten first.",
+      "prerequisites": ["Limit", "Derivative"],
+      "dependencies": [
+        {
+          "target": "change-limit",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "L'Hopital's rule evaluates limits of indeterminate quotients"
+        },
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "The rule replaces the limit with a limit of derivatives"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "change-derivative",
+          "yields": "Powerful limit evaluation: convert hard limits to easier ones via differentiation",
+          "type": "sequential",
+          "conditions": ["When direct substitution yields 0/0 or infinity/infinity"],
+          "example": "lim_{x->0} sin(x)/x = lim cos(x)/1 = 1"
+        }
+      ],
+      "applicabilityPatterns": ["evaluating limits that produce indeterminate forms like 0/0 or infinity/infinity", "simplifying complex limit expressions by differentiating numerator and denominator"],
+      "keywords": ["L'Hopital", "indeterminate", "0/0", "infinity/infinity", "limit evaluation"],
+      "tags": ["calculus", "theorem", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-newtons-method",
+      "name": "Newton's Method",
+      "type": "algorithm",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.6",
+      "planePosition": { "real": 0.2, "imaginary": -0.3 },
+      "formalStatement": "Newton's method for finding roots of f(x) = 0: starting from initial guess x_0, iterate x_{n+1} = x_n - f(x_n)/f'(x_n). Under suitable conditions, convergence is quadratic: error at step n+1 is proportional to error^2 at step n.",
+      "computationalForm": "x_{n+1} = x_n - f(x_n)/f'(x_n). Convergence: if |f(x_0)f''(x_0)| < |f'(x_0)|^2 (roughly). Failure modes: f'(x_n) = 0, cycling, divergence from poor initial guess.",
+      "prerequisites": ["Derivative"],
+      "dependencies": [
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Newton's method uses the derivative to approximate the root"
+        }
+      ],
+      "enables": ["change-gradient-descent-preview"],
+      "compositionRules": [
+        {
+          "with": "change-derivative",
+          "yields": "Iterative root-finding using tangent line approximation",
+          "type": "sequential",
+          "conditions": ["When a closed-form solution to f(x)=0 is unavailable"],
+          "example": "Finding sqrt(2): solve x^2-2=0. x_0=1, x_1=1.5, x_2=1.4167, x_3=1.41422..."
+        }
+      ],
+      "applicabilityPatterns": ["numerically finding zeros of equations that cannot be solved algebraically", "rapidly improving an approximate solution to an equation"],
+      "keywords": ["Newton", "root-finding", "iteration", "quadratic convergence", "tangent line"],
+      "tags": ["calculus", "algorithm", "numerical"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-implicit-differentiation",
+      "name": "Implicit Differentiation",
+      "type": "technique",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.5",
+      "planePosition": { "real": 0.0, "imaginary": 0.0 },
+      "formalStatement": "When y is defined implicitly by an equation F(x,y) = 0, differentiate both sides with respect to x, treating y as a function of x (applying chain rule): dF/dx + (dF/dy)(dy/dx) = 0, solving for dy/dx.",
+      "computationalForm": "Given F(x,y)=0: dy/dx = -(dF/dx)/(dF/dy). Example: x^2 + y^2 = 1, differentiate: 2x + 2y*dy/dx = 0, so dy/dx = -x/y.",
+      "prerequisites": ["Chain rule", "Derivative"],
+      "dependencies": [
+        {
+          "target": "change-chain-rule",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Implicit differentiation requires the chain rule to differentiate y(x)"
+        },
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Core differentiation concept"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "change-chain-rule",
+          "yields": "Differentiation of curves defined by equations rather than explicit functions",
+          "type": "nested",
+          "conditions": ["When y cannot be easily solved for explicitly"],
+          "example": "Circle x^2+y^2=r^2: dy/dx = -x/y without needing y = +/-sqrt(r^2-x^2)"
+        }
+      ],
+      "applicabilityPatterns": ["finding derivatives when the dependent variable is not explicitly isolated", "differentiating relations defined by equations involving both variables"],
+      "keywords": ["implicit", "implicit differentiation", "related rates", "F(x,y)=0"],
+      "tags": ["calculus", "technique", "differentiation"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-derivative-of-trig",
+      "name": "Derivatives of Trigonometric Functions",
+      "type": "identity",
+      "domain": "change",
+      "chapter": 8,
+      "section": "8.4",
+      "planePosition": { "real": -0.1, "imaginary": -0.05 },
+      "formalStatement": "d/dx sin(x) = cos(x). d/dx cos(x) = -sin(x). d/dx tan(x) = sec^2(x). d/dx sec(x) = sec(x)tan(x). d/dx csc(x) = -csc(x)cot(x). d/dx cot(x) = -csc^2(x).",
+      "computationalForm": "sin' = cos, cos' = -sin, tan' = sec^2, sec' = sec*tan. With chain rule: d/dx sin(f(x)) = cos(f(x))*f'(x).",
+      "prerequisites": ["Derivative", "Chain rule", "Sine function", "Cosine function"],
+      "dependencies": [
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "These are derivatives of specific functions"
+        },
+        {
+          "target": "change-chain-rule",
+          "type": "applies",
+          "strength": 0.7,
+          "description": "Combined with chain rule for composite trig functions"
+        },
+        {
+          "target": "perception-sine-function",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Deriving the derivative of sine"
+        },
+        {
+          "target": "perception-cosine-function",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Deriving the derivative of cosine"
+        }
+      ],
+      "enables": ["change-integration-techniques"],
+      "compositionRules": [
+        {
+          "with": "change-chain-rule",
+          "yields": "Derivatives of composite trig functions: d/dx sin(g(x)) = cos(g(x))*g'(x)",
+          "type": "nested",
+          "conditions": ["When differentiating trigonometric functions of other expressions"],
+          "example": "d/dx sin(x^2) = 2x*cos(x^2)"
+        }
+      ],
+      "applicabilityPatterns": ["differentiating expressions involving sine, cosine, and other trig functions", "computing velocity of objects in circular or oscillatory motion"],
+      "keywords": ["trig derivative", "sin'=cos", "cos'=-sin", "differentiation of trig"],
+      "tags": ["calculus", "identity", "trigonometry"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-riemann-sum",
+      "name": "Riemann Sum",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.1",
+      "planePosition": { "real": 0.1, "imaginary": -0.3 },
+      "formalStatement": "A Riemann sum approximates the integral of f over [a,b] by partitioning into n subintervals and summing: S_n = sum_{i=1}^{n} f(x_i*) * Delta_x_i, where x_i* is a sample point in each subinterval.",
+      "computationalForm": "Left sum: S_n = sum_{i=0}^{n-1} f(a + i*h)*h. Right sum: S_n = sum_{i=1}^{n} f(a + i*h)*h. Midpoint: S_n = sum_{i=0}^{n-1} f(a + (i+0.5)*h)*h. h = (b-a)/n.",
+      "prerequisites": ["Limit", "Real numbers"],
+      "dependencies": [
+        {
+          "target": "change-limit",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "The definite integral is the limit of Riemann sums as n -> infinity"
+        },
+        {
+          "target": "perception-real-numbers",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Riemann sums operate on real-valued functions"
+        }
+      ],
+      "enables": ["change-definite-integral", "change-trapezoidal-rule"],
+      "compositionRules": [
+        {
+          "with": "change-limit",
+          "yields": "The definite integral: integral_a^b f(x)dx = lim_{n->inf} sum f(x_i*)*Delta_x",
+          "type": "sequential",
+          "conditions": ["When defining the integral as the limit of approximating sums"],
+          "example": "Area under y=x^2 from 0 to 1: lim_{n->inf} sum (i/n)^2 * (1/n) = 1/3"
+        }
+      ],
+      "applicabilityPatterns": ["approximating the area under a curve using rectangles", "providing the foundation for the definition of the definite integral"],
+      "keywords": ["Riemann sum", "partition", "approximation", "rectangles", "area"],
+      "tags": ["calculus", "integration", "approximation"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-definite-integral",
+      "name": "Definite Integral",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.1",
+      "planePosition": { "real": 0.0, "imaginary": -0.2 },
+      "formalStatement": "The definite integral of f from a to b is integral_a^b f(x)dx = lim_{n->inf} sum_{i=1}^{n} f(x_i*)*Delta_x, when this limit exists. It represents the signed area between f and the x-axis over [a,b].",
+      "computationalForm": "Properties: integral_a^b c*f = c*integral_a^b f. integral_a^b (f+g) = integral_a^b f + integral_a^b g. integral_a^b f = -integral_b^a f. integral_a^c f = integral_a^b f + integral_b^c f.",
+      "prerequisites": ["Riemann sum", "Limit"],
+      "dependencies": [
+        {
+          "target": "change-riemann-sum",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Definite integral is the limit of Riemann sums"
+        },
+        {
+          "target": "change-limit",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "The integral is defined as a limit"
+        }
+      ],
+      "enables": ["change-fundamental-theorem-1", "change-fundamental-theorem-2", "change-improper-integral", "change-area-under-curve", "change-arc-length"],
+      "compositionRules": [
+        {
+          "with": "change-fundamental-theorem-2",
+          "yields": "Practical evaluation: integral_a^b f(x)dx = F(b) - F(a) where F' = f",
+          "type": "sequential",
+          "conditions": ["When an antiderivative of f is known"],
+          "example": "integral_0^1 x^2 dx = [x^3/3]_0^1 = 1/3"
+        }
+      ],
+      "applicabilityPatterns": ["computing the total accumulation of a quantity over an interval", "finding the area enclosed between a curve and the x-axis"],
+      "keywords": ["definite integral", "area", "accumulation", "signed area", "integral"],
+      "tags": ["calculus", "integration", "foundational"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-antiderivative",
+      "name": "Antiderivative (Indefinite Integral)",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.2",
+      "planePosition": { "real": 0.0, "imaginary": -0.15 },
+      "formalStatement": "An antiderivative of f is a function F such that F'(x) = f(x). The indefinite integral integral f(x)dx = F(x) + C represents the family of all antiderivatives, where C is an arbitrary constant.",
+      "computationalForm": "integral x^n dx = x^(n+1)/(n+1) + C (n != -1). integral 1/x dx = ln|x| + C. integral e^x dx = e^x + C. integral sin(x)dx = -cos(x) + C.",
+      "prerequisites": ["Derivative"],
+      "dependencies": [
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Antiderivative is the reverse of differentiation"
+        }
+      ],
+      "enables": ["change-fundamental-theorem-2", "change-integration-by-parts", "change-substitution-rule"],
+      "compositionRules": [
+        {
+          "with": "change-derivative",
+          "yields": "Inverse relationship: d/dx integral f(x)dx = f(x) and integral f'(x)dx = f(x) + C",
+          "type": "parallel",
+          "conditions": ["When switching between differentiation and integration"],
+          "example": "d/dx(-cos(x)) = sin(x), so integral sin(x)dx = -cos(x) + C"
+        }
+      ],
+      "applicabilityPatterns": ["finding a function whose derivative is a given function", "reversing differentiation to recover original functions"],
+      "keywords": ["antiderivative", "indefinite integral", "primitive", "reverse differentiation", "+C"],
+      "tags": ["calculus", "integration", "foundational"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-improper-integral",
+      "name": "Improper Integral",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.3",
+      "planePosition": { "real": -0.1, "imaginary": 0.0 },
+      "formalStatement": "An improper integral is a definite integral with an infinite limit or a discontinuous integrand. integral_a^inf f(x)dx = lim_{b->inf} integral_a^b f(x)dx. If the limit exists and is finite, the integral converges.",
+      "computationalForm": "integral_1^inf 1/x^p dx: converges to 1/(p-1) if p > 1, diverges if p <= 1. integral_0^1 1/x^p dx: converges to 1/(1-p) if p < 1, diverges if p >= 1.",
+      "prerequisites": ["Definite integral", "Limit"],
+      "dependencies": [
+        {
+          "target": "change-definite-integral",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Improper integral extends the definite integral to infinite domains"
+        },
+        {
+          "target": "change-limit",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Improper integrals are defined as limits"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "waves-harmonic-series-divergence",
+          "yields": "Integral test for series: sum 1/n diverges because integral 1/x dx diverges",
+          "type": "parallel",
+          "conditions": ["When using integrals to test convergence of series"],
+          "example": "integral_1^inf 1/x^2 dx = 1 (converges), so sum 1/n^2 converges (to pi^2/6)"
+        }
+      ],
+      "applicabilityPatterns": ["computing the total area under a curve extending to infinity", "determining whether an infinite sum converges using the integral test"],
+      "keywords": ["improper", "infinite", "convergence", "divergence", "integral test"],
+      "tags": ["calculus", "integration", "analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-area-under-curve",
+      "name": "Area Under a Curve",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.1",
+      "planePosition": { "real": 0.1, "imaginary": -0.35 },
+      "formalStatement": "The area between the curve y = f(x), the x-axis, and the vertical lines x = a and x = b is given by integral_a^b |f(x)| dx. When f(x) >= 0, this equals integral_a^b f(x) dx.",
+      "computationalForm": "Area = integral_a^b |f(x)| dx. Between two curves: integral_a^b |f(x) - g(x)| dx = integral_a^b [upper - lower] dx.",
+      "prerequisites": ["Definite integral"],
+      "dependencies": [
+        {
+          "target": "change-definite-integral",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Area is the geometric interpretation of the definite integral"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "change-definite-integral",
+          "yields": "Geometric interpretation: the integral computes signed area; absolute value gives true area",
+          "type": "nested",
+          "conditions": ["When computing the area enclosed by curves"],
+          "example": "Area between y=x^2 and y=x from 0 to 1: integral_0^1 (x - x^2)dx = 1/6"
+        }
+      ],
+      "applicabilityPatterns": ["computing the area enclosed between curves", "finding the total area of a region bounded by a function and the axes"],
+      "keywords": ["area", "enclosed", "between curves", "geometric interpretation"],
+      "tags": ["calculus", "geometry", "integration"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-arc-length",
+      "name": "Arc Length",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.3",
+      "planePosition": { "real": 0.0, "imaginary": -0.2 },
+      "formalStatement": "The arc length of the curve y = f(x) from x = a to x = b is L = integral_a^b sqrt(1 + [f'(x)]^2) dx. This follows from the infinitesimal Pythagorean theorem: ds^2 = dx^2 + dy^2.",
+      "computationalForm": "L = integral_a^b sqrt(1 + (dy/dx)^2) dx. Parametric: L = integral_a^b sqrt((dx/dt)^2 + (dy/dt)^2) dt. Polar: L = integral sqrt(r^2 + (dr/d_theta)^2) d_theta.",
+      "prerequisites": ["Definite integral", "Pythagorean theorem", "Derivative"],
+      "dependencies": [
+        {
+          "target": "change-definite-integral",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Arc length is computed as a definite integral"
+        },
+        {
+          "target": "perception-pythagorean-theorem",
+          "type": "applies",
+          "strength": 0.9,
+          "description": "The infinitesimal arc length formula uses the Pythagorean theorem"
+        },
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "The integrand involves the derivative f'(x)"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "perception-pythagorean-theorem",
+          "yields": "Infinitesimal distance: ds = sqrt(dx^2+dy^2), the Pythagorean theorem applied at infinitesimal scale",
+          "type": "nested",
+          "conditions": ["When computing the length of a curved path"],
+          "example": "Arc length of y=x^(3/2) from 0 to 4: integral_0^4 sqrt(1 + (3/2*sqrt(x))^2) dx"
+        }
+      ],
+      "applicabilityPatterns": ["computing the length of a curve in the plane", "finding the distance traveled along a curved path"],
+      "keywords": ["arc length", "curve length", "ds", "Pythagorean infinitesimal"],
+      "tags": ["calculus", "geometry", "integration"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-fundamental-theorem-1",
+      "name": "Fundamental Theorem of Calculus Part 1",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.2",
+      "planePosition": { "real": -0.1, "imaginary": 0.1 },
+      "formalStatement": "If f is continuous on [a,b], then the function F(x) = integral_a^x f(t)dt is continuous on [a,b], differentiable on (a,b), and F'(x) = f(x). Differentiation undoes integration.",
+      "computationalForm": "d/dx integral_a^x f(t) dt = f(x). With chain rule: d/dx integral_a^{g(x)} f(t) dt = f(g(x)) * g'(x).",
+      "prerequisites": ["Definite integral", "Continuity", "Derivative"],
+      "dependencies": [
+        {
+          "target": "change-definite-integral",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "FTC1 relates the definite integral to differentiation"
+        },
+        {
+          "target": "change-continuity",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Continuity of f is required for FTC1"
+        },
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "FTC1 states that the derivative of the integral function is f"
+        }
+      ],
+      "enables": ["change-fundamental-theorem-2"],
+      "compositionRules": [
+        {
+          "with": "change-chain-rule",
+          "yields": "d/dx integral_a^{g(x)} f(t)dt = f(g(x))*g'(x): differentiating integrals with variable upper limits",
+          "type": "nested",
+          "conditions": ["When the upper limit of integration is a function of x"],
+          "example": "d/dx integral_0^{x^2} sin(t)dt = sin(x^2)*2x"
+        }
+      ],
+      "applicabilityPatterns": ["differentiating an integral with a variable upper limit", "proving that every continuous function has an antiderivative"],
+      "keywords": ["FTC", "fundamental theorem", "derivative of integral", "F'=f"],
+      "tags": ["calculus", "theorem", "foundational"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-fundamental-theorem-2",
+      "name": "Fundamental Theorem of Calculus Part 2",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.2",
+      "planePosition": { "real": -0.1, "imaginary": 0.1 },
+      "formalStatement": "If f is continuous on [a,b] and F is any antiderivative of f (F' = f), then integral_a^b f(x)dx = F(b) - F(a). Integration is evaluated using antiderivatives.",
+      "computationalForm": "integral_a^b f(x)dx = F(b) - F(a) = [F(x)]_a^b. Example: integral_0^pi sin(x)dx = [-cos(x)]_0^pi = -cos(pi)-(-cos(0)) = 1+1 = 2.",
+      "prerequisites": ["Fundamental Theorem Part 1", "Antiderivative"],
+      "dependencies": [
+        {
+          "target": "change-fundamental-theorem-1",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "FTC2 is the practical evaluation consequence of FTC1"
+        },
+        {
+          "target": "change-antiderivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "FTC2 uses antiderivatives to evaluate integrals"
+        }
+      ],
+      "enables": ["change-integration-by-parts", "change-substitution-rule"],
+      "compositionRules": [
+        {
+          "with": "change-antiderivative",
+          "yields": "Practical integration: find F with F'=f, then integral = F(b)-F(a)",
+          "type": "sequential",
+          "conditions": ["When an antiderivative can be found"],
+          "example": "integral_1^e 1/x dx = [ln(x)]_1^e = ln(e) - ln(1) = 1"
+        }
+      ],
+      "applicabilityPatterns": ["evaluating definite integrals using antiderivatives instead of Riemann sums", "computing exact areas, volumes, and accumulations"],
+      "keywords": ["FTC", "fundamental theorem", "evaluation", "F(b)-F(a)", "antiderivative"],
+      "tags": ["calculus", "theorem", "foundational"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-integration-by-parts",
+      "name": "Integration by Parts",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.3",
+      "planePosition": { "real": 0.1, "imaginary": -0.1 },
+      "formalStatement": "integral u dv = uv - integral v du. Equivalently, integral_a^b f(x)g'(x)dx = [f(x)g(x)]_a^b - integral_a^b f'(x)g(x)dx. This is the integration analog of the product rule.",
+      "computationalForm": "Choose u and dv (LIATE rule: Log, Inverse trig, Algebraic, Trig, Exponential — u from left). integral u dv = uv - integral v du. May need multiple applications.",
+      "prerequisites": ["Product rule", "Antiderivative", "Fundamental Theorem Part 2"],
+      "dependencies": [
+        {
+          "target": "change-product-rule",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Integration by parts is derived from the product rule"
+        },
+        {
+          "target": "change-antiderivative",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Finding the antiderivative v from dv"
+        },
+        {
+          "target": "change-fundamental-theorem-2",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Used to evaluate the resulting integral"
+        }
+      ],
+      "enables": ["change-integration-techniques"],
+      "compositionRules": [
+        {
+          "with": "change-substitution-rule",
+          "yields": "Complete integration toolkit: substitution for chain-rule integrands, parts for product integrands",
+          "type": "parallel",
+          "conditions": ["When neither direct antiderivative nor simple substitution works"],
+          "example": "integral x*e^x dx: u=x, dv=e^x dx, yields x*e^x - integral e^x dx = x*e^x - e^x + C"
+        }
+      ],
+      "applicabilityPatterns": ["integrating products of functions where one simplifies upon differentiation", "reducing complex integrals to simpler forms"],
+      "keywords": ["integration by parts", "uv", "LIATE", "product integral"],
+      "tags": ["calculus", "integration", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-substitution-rule",
+      "name": "Substitution Rule (u-substitution)",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.3",
+      "planePosition": { "real": 0.1, "imaginary": -0.1 },
+      "formalStatement": "If u = g(x) is differentiable, then integral f(g(x))*g'(x)dx = integral f(u)du. This is the integration counterpart of the chain rule.",
+      "computationalForm": "Set u = g(x), du = g'(x)dx. Substitute: integral f(g(x))g'(x)dx = integral f(u)du. For definite integrals: change limits to u(a) and u(b).",
+      "prerequisites": ["Chain rule", "Antiderivative"],
+      "dependencies": [
+        {
+          "target": "change-chain-rule",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "u-substitution is the reverse of the chain rule"
+        },
+        {
+          "target": "change-antiderivative",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Substitution simplifies finding antiderivatives"
+        }
+      ],
+      "enables": ["change-integration-techniques"],
+      "compositionRules": [
+        {
+          "with": "change-integration-by-parts",
+          "yields": "Combined integration strategy: try substitution first, then parts, then partial fractions",
+          "type": "parallel",
+          "conditions": ["When working through integration strategy"],
+          "example": "integral 2x*cos(x^2)dx: u=x^2, du=2x dx, = integral cos(u)du = sin(u)+C = sin(x^2)+C"
+        }
+      ],
+      "applicabilityPatterns": ["integrating composite functions where the inner function's derivative is present", "simplifying integrals by changing variables"],
+      "keywords": ["substitution", "u-sub", "change of variable", "chain rule reverse"],
+      "tags": ["calculus", "integration", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-trapezoidal-rule",
+      "name": "Trapezoidal Rule",
+      "type": "algorithm",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.4",
+      "planePosition": { "real": 0.2, "imaginary": -0.3 },
+      "formalStatement": "The trapezoidal rule approximates integral_a^b f(x)dx by summing trapezoid areas: T_n = h/2 * [f(x_0) + 2*f(x_1) + 2*f(x_2) + ... + 2*f(x_{n-1}) + f(x_n)] where h = (b-a)/n.",
+      "computationalForm": "T_n = (h/2)*[f(a) + 2*sum_{i=1}^{n-1} f(a+ih) + f(b)]. Error: |E_T| <= (b-a)^3/(12*n^2) * max|f''(x)|. O(h^2) accuracy.",
+      "prerequisites": ["Definite integral", "Riemann sum"],
+      "dependencies": [
+        {
+          "target": "change-definite-integral",
+          "type": "applies",
+          "strength": 0.9,
+          "description": "Trapezoidal rule numerically approximates definite integrals"
+        },
+        {
+          "target": "change-riemann-sum",
+          "type": "generalizes",
+          "strength": 0.8,
+          "description": "Trapezoidal rule improves on Riemann sum by using trapezoids instead of rectangles"
+        }
+      ],
+      "enables": ["change-simpsons-rule"],
+      "compositionRules": [
+        {
+          "with": "change-simpsons-rule",
+          "yields": "Hierarchy of numerical integration methods: midpoint O(h^2), trapezoidal O(h^2), Simpson's O(h^4)",
+          "type": "parallel",
+          "conditions": ["When choosing between numerical integration methods"],
+          "example": "integral_0^1 e^x dx with n=4: T_4 ~ 1.7189, exact = e-1 ~ 1.7183"
+        }
+      ],
+      "applicabilityPatterns": ["numerically approximating integrals when antiderivatives are unknown or complex", "computing integrals from tabulated data points"],
+      "keywords": ["trapezoidal", "numerical integration", "quadrature", "approximation"],
+      "tags": ["calculus", "algorithm", "numerical"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-simpsons-rule",
+      "name": "Simpson's Rule",
+      "type": "algorithm",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.4",
+      "planePosition": { "real": 0.2, "imaginary": -0.25 },
+      "formalStatement": "Simpson's rule approximates integral_a^b f(x)dx using parabolic arcs: S_n = h/3 * [f(x_0) + 4f(x_1) + 2f(x_2) + 4f(x_3) + ... + 4f(x_{n-1}) + f(x_n)] where n is even and h = (b-a)/n.",
+      "computationalForm": "S_n = (h/3)*[f(a) + 4*sum_{odd} f(x_i) + 2*sum_{even} f(x_i) + f(b)]. Error: |E_S| <= (b-a)^5/(180*n^4) * max|f^(4)(x)|. O(h^4) accuracy.",
+      "prerequisites": ["Trapezoidal rule"],
+      "dependencies": [
+        {
+          "target": "change-trapezoidal-rule",
+          "type": "generalizes",
+          "strength": 0.8,
+          "description": "Simpson's rule improves on the trapezoidal rule with higher-order approximation"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "change-trapezoidal-rule",
+          "yields": "Adaptive quadrature: use Simpson's on fine intervals, trapezoidal where the function is linear",
+          "type": "parallel",
+          "conditions": ["When high accuracy is needed for smooth integrands"],
+          "example": "integral_0^1 e^x dx with n=4: S_4 ~ 1.71828, exact ~ 1.71828 (4+ correct decimals)"
+        }
+      ],
+      "applicabilityPatterns": ["achieving high-accuracy numerical integration with fewer function evaluations", "integrating smooth functions where the error bound must be small"],
+      "keywords": ["Simpson", "parabolic", "numerical integration", "quadrature", "O(h^4)"],
+      "tags": ["calculus", "algorithm", "numerical"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-partial-fractions",
+      "name": "Partial Fractions",
+      "type": "technique",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.3",
+      "planePosition": { "real": 0.1, "imaginary": -0.05 },
+      "formalStatement": "Any proper rational function P(x)/Q(x) can be decomposed into a sum of simpler fractions with linear or irreducible quadratic denominators, enabling integration term by term.",
+      "computationalForm": "1/(x^2-1) = 1/((x-1)(x+1)) = A/(x-1) + B/(x+1). Solve: A=1/2, B=-1/2. integral = (1/2)ln|x-1| - (1/2)ln|x+1| + C.",
+      "prerequisites": ["Antiderivative"],
+      "dependencies": [
+        {
+          "target": "change-antiderivative",
+          "type": "applies",
+          "strength": 0.8,
+          "description": "Partial fractions enable finding antiderivatives of rational functions"
+        }
+      ],
+      "enables": ["change-integration-techniques"],
+      "compositionRules": [
+        {
+          "with": "change-substitution-rule",
+          "yields": "Rational function integration: partial fractions decompose, then ln or arctan integrate each term",
+          "type": "sequential",
+          "conditions": ["When integrating a rational function"],
+          "example": "integral 1/(x^2+1) dx = arctan(x) + C (irreducible quadratic case)"
+        }
+      ],
+      "applicabilityPatterns": ["integrating rational functions by decomposing into simpler fractions", "computing Laplace transform inverses"],
+      "keywords": ["partial fractions", "rational function", "decomposition", "integration technique"],
+      "tags": ["calculus", "technique", "algebra"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-integration-techniques",
+      "name": "Integration Strategy",
+      "type": "technique",
+      "domain": "change",
+      "chapter": 9,
+      "section": "9.4",
+      "planePosition": { "real": 0.1, "imaginary": -0.15 },
+      "formalStatement": "A systematic approach to integration: (1) Try direct antiderivative. (2) Try u-substitution. (3) Try integration by parts. (4) Try partial fractions (for rationals). (5) Try trigonometric identities or substitution. (6) Use numerical methods.",
+      "computationalForm": "Decision tree: Is it a standard form? -> Direct. Is there a composition? -> u-sub. Product of different types? -> Parts (LIATE). Rational? -> Partial fractions. Trig? -> Identities. Otherwise -> Numerical.",
+      "prerequisites": ["Substitution rule", "Integration by parts", "Partial fractions"],
+      "dependencies": [
+        {
+          "target": "change-substitution-rule",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "u-substitution is a core integration strategy"
+        },
+        {
+          "target": "change-integration-by-parts",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Integration by parts is a core integration strategy"
+        },
+        {
+          "target": "change-partial-fractions",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Partial fractions handle rational function integrals"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "change-definite-integral",
+          "yields": "Complete practical integration: strategy to evaluate any definite integral",
+          "type": "sequential",
+          "conditions": ["When facing an integral that does not have an obvious antiderivative"],
+          "example": "integral x*ln(x) dx: not direct, not substitution, try parts: u=ln(x), dv=x dx"
+        }
+      ],
+      "applicabilityPatterns": ["choosing the right integration method for a given integrand", "systematically working through difficult integrals"],
+      "keywords": ["integration strategy", "technique selection", "method choice"],
+      "tags": ["calculus", "technique", "meta"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-ode",
+      "name": "Ordinary Differential Equation",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.1",
+      "planePosition": { "real": 0.0, "imaginary": 0.1 },
+      "formalStatement": "An ordinary differential equation (ODE) is an equation involving a function y(x) and its derivatives: F(x, y, y', y'', ..., y^(n)) = 0. The order is the highest derivative present. A solution is a function that satisfies the equation on an interval.",
+      "computationalForm": "First order: y' = f(x,y). Second order: y'' = f(x,y,y'). General solution contains n arbitrary constants for nth-order ODE. Particular solution: fix constants via initial/boundary conditions.",
+      "prerequisites": ["Derivative", "Higher-order derivatives"],
+      "dependencies": [
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "ODEs are equations involving derivatives"
+        },
+        {
+          "target": "change-higher-order-derivatives",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Higher-order ODEs involve second and higher derivatives"
+        }
+      ],
+      "enables": ["change-initial-value-problem", "change-harmonic-oscillator", "change-existence-uniqueness", "change-separation-of-variables-ode", "change-eulers-method"],
+      "compositionRules": [
+        {
+          "with": "change-initial-value-problem",
+          "yields": "Complete ODE problem: equation + initial conditions = unique solution (when existence/uniqueness holds)",
+          "type": "sequential",
+          "conditions": ["When modeling a physical system's evolution from a known starting state"],
+          "example": "dy/dx = 2x, y(0) = 1: solution y = x^2 + 1"
+        }
+      ],
+      "applicabilityPatterns": ["modeling systems where the rate of change depends on the current state", "describing physical laws relating a quantity to its derivatives"],
+      "keywords": ["ODE", "differential equation", "order", "solution", "initial condition"],
+      "tags": ["calculus", "differential-equation", "foundational"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-initial-value-problem",
+      "name": "Initial Value Problem",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.1",
+      "planePosition": { "real": 0.0, "imaginary": 0.0 },
+      "formalStatement": "An initial value problem (IVP) is an ODE together with initial conditions: y^(k)(x_0) = y_k for k = 0, 1, ..., n-1. For a first-order IVP: y' = f(x,y), y(x_0) = y_0.",
+      "computationalForm": "Solve IVP: (1) Find general solution of ODE. (2) Apply initial conditions to determine constants. Example: y' = 2x, y(0)=1 -> y = x^2 + C, C=1 -> y = x^2 + 1.",
+      "prerequisites": ["ODE"],
+      "dependencies": [
+        {
+          "target": "change-ode",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "An IVP is an ODE with initial conditions"
+        }
+      ],
+      "enables": ["change-existence-uniqueness", "change-eulers-method"],
+      "compositionRules": [
+        {
+          "with": "change-existence-uniqueness",
+          "yields": "Guaranteed unique solution: under Picard-Lindelof conditions, the IVP has exactly one solution",
+          "type": "sequential",
+          "conditions": ["When the ODE satisfies Lipschitz continuity conditions"],
+          "example": "y' = y, y(0)=1: unique solution y = e^x (exponential growth)"
+        }
+      ],
+      "applicabilityPatterns": ["predicting the future state of a system from its current state and rate law", "solving physical problems with known starting conditions"],
+      "keywords": ["initial value problem", "IVP", "initial condition", "particular solution"],
+      "tags": ["calculus", "differential-equation"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-taylor-series",
+      "name": "Taylor Series",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.2",
+      "planePosition": { "real": -0.1, "imaginary": 0.2 },
+      "formalStatement": "The Taylor series of f about x = a is f(x) = sum_{n=0}^{infinity} f^(n)(a)/n! * (x-a)^n = f(a) + f'(a)(x-a) + f''(a)(x-a)^2/2! + ... The series converges to f(x) within the radius of convergence.",
+      "computationalForm": "e^x = sum x^n/n! = 1 + x + x^2/2 + x^3/6 + ... sin(x) = sum (-1)^n x^(2n+1)/(2n+1)! cos(x) = sum (-1)^n x^(2n)/(2n)! 1/(1-x) = sum x^n for |x|<1.",
+      "prerequisites": ["Higher-order derivatives"],
+      "dependencies": [
+        {
+          "target": "change-higher-order-derivatives",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Taylor coefficients are computed from nth derivatives"
+        }
+      ],
+      "enables": ["change-maclaurin-series", "change-taylors-theorem-remainder"],
+      "compositionRules": [
+        {
+          "with": "change-higher-order-derivatives",
+          "yields": "Local polynomial approximation: truncate Taylor series to get nth degree polynomial near x=a",
+          "type": "sequential",
+          "conditions": ["When approximating a function near a point with a polynomial"],
+          "example": "sin(x) ~ x - x^3/6 + x^5/120 near x=0 (5th degree approximation)"
+        }
+      ],
+      "applicabilityPatterns": ["approximating functions with polynomials for computation", "analyzing local behavior of functions near a point"],
+      "keywords": ["Taylor series", "power series", "approximation", "polynomial", "expansion"],
+      "tags": ["calculus", "analysis", "approximation"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-maclaurin-series",
+      "name": "Maclaurin Series",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.2",
+      "planePosition": { "real": -0.1, "imaginary": 0.15 },
+      "formalStatement": "A Maclaurin series is a Taylor series centered at a = 0: f(x) = sum_{n=0}^{infinity} f^(n)(0)/n! * x^n. It is the special case of Taylor series at the origin.",
+      "computationalForm": "Key Maclaurin series: e^x = sum x^n/n!, sin(x) = sum (-1)^n x^(2n+1)/(2n+1)!, cos(x) = sum (-1)^n x^(2n)/(2n)!, ln(1+x) = sum (-1)^(n+1) x^n/n for |x|<=1.",
+      "prerequisites": ["Taylor series"],
+      "dependencies": [
+        {
+          "target": "change-taylor-series",
+          "type": "specializes",
+          "strength": 0.9,
+          "description": "Maclaurin series is Taylor series at a=0"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "perception-eulers-formula",
+          "yields": "Proof of Euler's formula: e^(ix) = cos(x) + i*sin(x) by comparing Maclaurin series of both sides",
+          "type": "parallel",
+          "conditions": ["When connecting exponential and trigonometric functions via series"],
+          "example": "e^(ix) = 1 + ix - x^2/2 - ix^3/6 + ... = cos(x) + i*sin(x)"
+        }
+      ],
+      "applicabilityPatterns": ["computing standard function values using series expansions at x=0", "proving identities by comparing series term by term"],
+      "keywords": ["Maclaurin", "series at zero", "standard expansions"],
+      "tags": ["calculus", "analysis", "special-case"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-harmonic-oscillator",
+      "name": "Harmonic Oscillator ODE",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.3",
+      "planePosition": { "real": 0.1, "imaginary": -0.1 },
+      "formalStatement": "The harmonic oscillator equation is d^2x/dt^2 + omega^2*x = 0. The general solution is x(t) = A*cos(omega*t) + B*sin(omega*t) = C*cos(omega*t + phi). Damped: d^2x/dt^2 + 2*zeta*omega*dx/dt + omega^2*x = 0.",
+      "computationalForm": "Undamped: x(t) = A*cos(omega*t+phi), omega = sqrt(k/m). Damped: x(t) = e^(-zeta*omega*t)[A*cos(omega_d*t) + B*sin(omega_d*t)] where omega_d = omega*sqrt(1-zeta^2).",
+      "prerequisites": ["ODE", "Simple harmonic motion"],
+      "dependencies": [
+        {
+          "target": "change-ode",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "The harmonic oscillator is a second-order ODE"
+        },
+        {
+          "target": "waves-simple-harmonic-motion",
+          "type": "equivalent",
+          "strength": 0.9,
+          "description": "The harmonic oscillator ODE is the mathematical formulation of SHM"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "waves-resonance-conditions",
+          "yields": "Driven harmonic oscillator: d^2x/dt^2 + 2*zeta*omega*dx/dt + omega^2*x = F_0*cos(omega_d*t), with resonance analysis",
+          "type": "sequential",
+          "conditions": ["When modeling a system driven by an external periodic force"],
+          "example": "Mass-spring-dashpot: resonance when driving frequency matches natural frequency"
+        }
+      ],
+      "applicabilityPatterns": ["modeling oscillatory systems like springs, pendulums, and LC circuits", "analyzing damped vibrations and their decay rates"],
+      "keywords": ["harmonic oscillator", "spring", "damping", "second order ODE", "oscillation"],
+      "tags": ["calculus", "differential-equation", "physics"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-optimization",
+      "name": "Optimization (Extrema)",
+      "type": "definition",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.4",
+      "planePosition": { "real": 0.2, "imaginary": -0.3 },
+      "formalStatement": "A local minimum (maximum) of f occurs at x=c if f(c) <= f(x) (f(c) >= f(x)) for all x in some neighborhood of c. A global extremum is the absolute minimum or maximum on the entire domain.",
+      "computationalForm": "Find extrema: (1) Find critical points (f'=0 or undefined). (2) Classify using first or second derivative test. (3) Compare with endpoint values for closed intervals. Global: compare all critical and endpoint values.",
+      "prerequisites": ["Critical point", "First derivative test", "Second derivative test"],
+      "dependencies": [
+        {
+          "target": "change-critical-point",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Extrema occur at critical points or endpoints"
+        },
+        {
+          "target": "change-first-derivative-test",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Used to classify extrema"
+        },
+        {
+          "target": "change-second-derivative-test",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Alternative classification of extrema"
+        }
+      ],
+      "enables": ["change-lagrange-multipliers", "change-gradient-descent-preview"],
+      "compositionRules": [
+        {
+          "with": "change-lagrange-multipliers",
+          "yields": "Constrained optimization: finding extrema subject to equality constraints",
+          "type": "sequential",
+          "conditions": ["When optimizing a function subject to constraints"],
+          "example": "Maximize area of rectangle with fixed perimeter: A=xy, constraint: 2x+2y=P"
+        }
+      ],
+      "applicabilityPatterns": ["finding the maximum or minimum value of a function", "solving word problems that ask for the best, largest, smallest, or most efficient quantity"],
+      "keywords": ["optimization", "maximum", "minimum", "extremum", "optimize"],
+      "tags": ["calculus", "optimization", "applied"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-taylors-theorem-remainder",
+      "name": "Taylor's Theorem with Remainder",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.2",
+      "planePosition": { "real": -0.1, "imaginary": 0.2 },
+      "formalStatement": "If f has (n+1) continuous derivatives on an interval containing a, then f(x) = P_n(x) + R_n(x), where P_n is the nth Taylor polynomial and R_n(x) = f^(n+1)(c)/(n+1)! * (x-a)^(n+1) for some c between a and x (Lagrange form).",
+      "computationalForm": "|R_n(x)| <= M * |x-a|^(n+1) / (n+1)! where M = max|f^(n+1)(t)| on [a,x]. This bounds the approximation error of the nth Taylor polynomial.",
+      "prerequisites": ["Taylor series", "Higher-order derivatives"],
+      "dependencies": [
+        {
+          "target": "change-taylor-series",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Remainder theorem quantifies the error of Taylor polynomial approximation"
+        },
+        {
+          "target": "change-higher-order-derivatives",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Error bound involves the (n+1)th derivative"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "change-taylor-series",
+          "yields": "Certified approximation: Taylor polynomial plus error bound gives guaranteed accuracy",
+          "type": "sequential",
+          "conditions": ["When needing to know how accurate a Taylor approximation is"],
+          "example": "sin(0.1) ~ 0.1 - 0.001/6: |R_3| <= 0.1^5/120 < 10^-7, so 4+ correct decimals"
+        }
+      ],
+      "applicabilityPatterns": ["bounding the error of polynomial approximation to a function", "determining how many Taylor terms are needed for a given accuracy"],
+      "keywords": ["Taylor remainder", "Lagrange remainder", "error bound", "approximation error"],
+      "tags": ["calculus", "analysis", "error"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-existence-uniqueness",
+      "name": "Existence and Uniqueness Theorem (Picard-Lindelof)",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.1",
+      "planePosition": { "real": -0.2, "imaginary": 0.2 },
+      "formalStatement": "If f(x,y) and df/dy are continuous in a rectangle containing (x_0, y_0), then the IVP y' = f(x,y), y(x_0) = y_0 has a unique solution in some interval around x_0.",
+      "computationalForm": "Check conditions: f continuous => existence (Peano). f and df/dy continuous (Lipschitz in y) => uniqueness. Counter-example: y' = y^(2/3), y(0)=0 has multiple solutions (f not Lipschitz).",
+      "prerequisites": ["Initial value problem", "Continuity"],
+      "dependencies": [
+        {
+          "target": "change-initial-value-problem",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "The theorem guarantees existence and uniqueness for IVPs"
+        },
+        {
+          "target": "change-continuity",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Continuity conditions are the hypotheses"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "change-initial-value-problem",
+          "yields": "Confidence that physical ODE models have well-defined solutions under reasonable conditions",
+          "type": "parallel",
+          "conditions": ["When verifying that an ODE problem is well-posed"],
+          "example": "y' = sin(xy), y(0)=1: f=sin(xy) and df/dy = x*cos(xy) are continuous everywhere, so unique solution exists"
+        }
+      ],
+      "applicabilityPatterns": ["verifying that a differential equation model has a well-defined unique solution", "identifying pathological ODEs that may have non-unique solutions"],
+      "keywords": ["existence", "uniqueness", "Picard", "Lindelof", "Lipschitz"],
+      "tags": ["calculus", "theorem", "analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-first-derivative-test",
+      "name": "First Derivative Test",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.4",
+      "planePosition": { "real": 0.1, "imaginary": -0.2 },
+      "formalStatement": "If f'(x) changes from positive to negative at critical point c, then f has a local maximum at c. If f'(x) changes from negative to positive at c, then f has a local minimum at c. If f' does not change sign, c is neither.",
+      "computationalForm": "At critical point c: check sign of f'(x) for x < c and x > c. +/- => local max. -/+ => local min. +/+ or -/- => neither (inflection or saddle).",
+      "prerequisites": ["Critical point", "Derivative"],
+      "dependencies": [
+        {
+          "target": "change-critical-point",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "First derivative test classifies critical points"
+        },
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Test uses the sign of the first derivative"
+        }
+      ],
+      "enables": ["change-optimization"],
+      "compositionRules": [
+        {
+          "with": "change-second-derivative-test",
+          "yields": "Two complementary methods for classifying critical points: sign change vs concavity",
+          "type": "parallel",
+          "conditions": ["When classifying critical points of differentiable functions"],
+          "example": "f(x) = x^4: f'(0) = 0, f' changes from - to +, local minimum (second derivative test: f''(0)=0, inconclusive)"
+        }
+      ],
+      "applicabilityPatterns": ["determining whether a critical point is a local maximum, minimum, or neither", "analyzing the increasing/decreasing behavior of functions"],
+      "keywords": ["first derivative test", "sign change", "increasing", "decreasing", "classify"],
+      "tags": ["calculus", "theorem", "optimization"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-second-derivative-test",
+      "name": "Second Derivative Test",
+      "type": "theorem",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.4",
+      "planePosition": { "real": 0.1, "imaginary": -0.15 },
+      "formalStatement": "If f'(c) = 0 and f''(c) > 0, then f has a local minimum at c. If f'(c) = 0 and f''(c) < 0, then f has a local maximum at c. If f''(c) = 0, the test is inconclusive.",
+      "computationalForm": "At critical point c: compute f''(c). f''(c) > 0 => concave up => local min. f''(c) < 0 => concave down => local max. f''(c) = 0 => use first derivative test instead.",
+      "prerequisites": ["Critical point", "Higher-order derivatives"],
+      "dependencies": [
+        {
+          "target": "change-critical-point",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Applies to critical points where f'=0"
+        },
+        {
+          "target": "change-higher-order-derivatives",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Uses the second derivative for classification"
+        }
+      ],
+      "enables": ["change-optimization"],
+      "compositionRules": [
+        {
+          "with": "change-first-derivative-test",
+          "yields": "Complete critical point classification toolkit",
+          "type": "parallel",
+          "conditions": ["When classifying extrema efficiently"],
+          "example": "f(x) = x^3 - 3x: f'(1)=0, f''(1)=6>0, so local min. f'(-1)=0, f''(-1)=-6<0, so local max."
+        }
+      ],
+      "applicabilityPatterns": ["quickly classifying critical points when the second derivative is easy to compute", "determining concavity at critical points"],
+      "keywords": ["second derivative test", "concavity", "classify", "local min", "local max"],
+      "tags": ["calculus", "theorem", "optimization"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-eulers-method",
+      "name": "Euler's Method",
+      "type": "algorithm",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.3",
+      "planePosition": { "real": 0.2, "imaginary": -0.35 },
+      "formalStatement": "Euler's method numerically solves y' = f(x,y), y(x_0) = y_0 by iterating: y_{n+1} = y_n + h*f(x_n, y_n), x_{n+1} = x_n + h, where h is the step size. Convergence is first-order: global error O(h).",
+      "computationalForm": "y_{n+1} = y_n + h*f(x_n, y_n). Local truncation error: O(h^2). Global error: O(h). Improved Euler (Heun): y* = y_n + h*f(x_n,y_n), y_{n+1} = y_n + (h/2)*[f(x_n,y_n) + f(x_{n+1},y*)].",
+      "prerequisites": ["Initial value problem", "Derivative"],
+      "dependencies": [
+        {
+          "target": "change-initial-value-problem",
+          "type": "applies",
+          "strength": 1.0,
+          "description": "Euler's method numerically solves initial value problems"
+        },
+        {
+          "target": "change-derivative",
+          "type": "applies",
+          "strength": 0.8,
+          "description": "Uses the derivative (slope) to step forward"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "change-newtons-method",
+          "yields": "Suite of iterative numerical methods: Euler for ODEs, Newton for root-finding",
+          "type": "parallel",
+          "conditions": ["When comparing numerical approaches to different mathematical problems"],
+          "example": "Solve y'=y, y(0)=1 with h=0.1: y_1=1.1, y_2=1.21, ..., y_10=2.594 (exact: e~2.718)"
+        }
+      ],
+      "applicabilityPatterns": ["numerically solving ODEs when analytical solutions are unavailable", "simulating dynamical systems on a computer"],
+      "keywords": ["Euler", "numerical ODE", "step method", "first order", "time stepping"],
+      "tags": ["calculus", "algorithm", "numerical"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-gradient-descent-preview",
+      "name": "Gradient Descent (Preview)",
+      "type": "algorithm",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.4",
+      "planePosition": { "real": 0.3, "imaginary": -0.4 },
+      "formalStatement": "Gradient descent iteratively minimizes a function f by stepping in the direction of steepest descent: x_{n+1} = x_n - alpha * f'(x_n) in 1D, or x_{n+1} = x_n - alpha * grad(f)(x_n) in multiple dimensions. alpha is the learning rate.",
+      "computationalForm": "x_{n+1} = x_n - alpha * f'(x_n). Choose alpha small enough for convergence. Convergence criterion: |f'(x_n)| < epsilon. Multi-dimensional: x_{n+1} = x_n - alpha * [df/dx_1, df/dx_2, ..., df/dx_n]^T.",
+      "prerequisites": ["Optimization", "Derivative", "Newton's method"],
+      "dependencies": [
+        {
+          "target": "change-optimization",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Gradient descent is an iterative optimization algorithm"
+        },
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Uses the derivative (gradient) to determine the descent direction"
+        },
+        {
+          "target": "change-newtons-method",
+          "type": "motivates",
+          "strength": 0.5,
+          "description": "Both are iterative methods; gradient descent trades convergence speed for simplicity"
+        }
+      ],
+      "enables": ["emergence-neural-network-training"],
+      "compositionRules": [
+        {
+          "with": "change-derivative",
+          "yields": "Optimization by following the negative gradient: always step toward lower function values",
+          "type": "sequential",
+          "conditions": ["When finding the minimum of a differentiable function iteratively"],
+          "example": "Minimize f(x)=(x-3)^2: f'(x)=2(x-3), starting at x=0, alpha=0.1: x_1=0.6, x_2=1.08, ... -> 3"
+        }
+      ],
+      "applicabilityPatterns": ["iteratively finding the minimum of a function when no closed-form solution exists", "training machine learning models by minimizing loss functions"],
+      "keywords": ["gradient descent", "optimization", "learning rate", "steepest descent", "alpha"],
+      "tags": ["calculus", "algorithm", "optimization", "machine-learning"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-separation-of-variables-ode",
+      "name": "Separation of Variables for ODEs",
+      "type": "technique",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.1",
+      "planePosition": { "real": 0.0, "imaginary": 0.0 },
+      "formalStatement": "For a separable ODE dy/dx = f(x)*g(y): rewrite as dy/g(y) = f(x)dx, then integrate both sides. This yields integral dy/g(y) = integral f(x)dx + C.",
+      "computationalForm": "dy/dx = f(x)*g(y) -> integral 1/g(y) dy = integral f(x) dx + C. Example: dy/dx = xy -> integral dy/y = integral x dx -> ln|y| = x^2/2 + C -> y = Ae^(x^2/2).",
+      "prerequisites": ["ODE", "Antiderivative"],
+      "dependencies": [
+        {
+          "target": "change-ode",
+          "type": "applies",
+          "strength": 1.0,
+          "description": "Separation of variables solves a class of first-order ODEs"
+        },
+        {
+          "target": "change-antiderivative",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Both sides are solved by finding antiderivatives"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "change-antiderivative",
+          "yields": "Direct solution of separable ODEs by integrating both sides",
+          "type": "sequential",
+          "conditions": ["When the ODE can be written as g(y)dy = f(x)dx"],
+          "example": "dy/dx = -y/x -> integral dy/y = -integral dx/x -> ln|y| = -ln|x| + C -> y = A/x"
+        }
+      ],
+      "applicabilityPatterns": ["solving ODEs where variables can be separated to opposite sides of the equation", "modeling exponential growth/decay, logistic growth, and other separable dynamics"],
+      "keywords": ["separation of variables", "separable", "integrate both sides", "ODE technique"],
+      "tags": ["calculus", "technique", "differential-equation"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-lagrange-multipliers",
+      "name": "Lagrange Multipliers",
+      "type": "technique",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.4",
+      "planePosition": { "real": 0.1, "imaginary": 0.1 },
+      "formalStatement": "To optimize f(x,y) subject to constraint g(x,y) = 0: solve the system grad(f) = lambda * grad(g) and g = 0. The Lagrange multiplier lambda gives the rate of change of the optimal value with respect to the constraint.",
+      "computationalForm": "System: df/dx = lambda*dg/dx, df/dy = lambda*dg/dy, g(x,y) = 0. Three equations in three unknowns (x, y, lambda). Extension to multiple constraints: grad(f) = sum lambda_i * grad(g_i).",
+      "prerequisites": ["Optimization", "Derivative"],
+      "dependencies": [
+        {
+          "target": "change-optimization",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Lagrange multipliers solve constrained optimization problems"
+        },
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "The method requires computing partial derivatives"
+        }
+      ],
+      "enables": ["structure-constrained-optimization"],
+      "compositionRules": [
+        {
+          "with": "change-optimization",
+          "yields": "Constrained optimization: finding extrema on the constraint surface",
+          "type": "sequential",
+          "conditions": ["When optimizing a function subject to equality constraints"],
+          "example": "Maximize f(x,y)=xy subject to x+y=10: grad(xy)=lambda*grad(x+y) gives (y,x)=lambda*(1,1), so x=y=5"
+        }
+      ],
+      "applicabilityPatterns": ["optimizing a function subject to equality constraints", "finding the extrema of a function restricted to a surface or curve"],
+      "keywords": ["Lagrange", "multiplier", "constraint", "constrained optimization", "grad f = lambda grad g"],
+      "tags": ["calculus", "technique", "optimization"],
+      "buildLabs": []
+    },
+    {
+      "id": "change-laplace-transform-pairs",
+      "name": "Laplace Transform Basic Pairs",
+      "type": "identity",
+      "domain": "change",
+      "chapter": 10,
+      "section": "10.3",
+      "planePosition": { "real": 0.0, "imaginary": 0.2 },
+      "formalStatement": "The Laplace transform L{f(t)} = integral_0^inf e^(-st)*f(t)dt maps time-domain functions to the s-domain, converting differential equations to algebraic equations. Key pairs: L{1} = 1/s, L{e^(at)} = 1/(s-a), L{sin(bt)} = b/(s^2+b^2), L{cos(bt)} = s/(s^2+b^2).",
+      "computationalForm": "L{f'(t)} = s*F(s) - f(0). L{f''(t)} = s^2*F(s) - s*f(0) - f'(0). Inverse: L^{-1}{1/(s-a)} = e^(at). Linearity: L{af+bg} = aF+bG.",
+      "prerequisites": ["ODE", "Improper integral"],
+      "dependencies": [
+        {
+          "target": "change-ode",
+          "type": "applies",
+          "strength": 0.9,
+          "description": "Laplace transforms convert ODEs to algebraic equations"
+        },
+        {
+          "target": "change-improper-integral",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "The Laplace transform is defined as an improper integral"
+        }
+      ],
+      "enables": ["mapping-fourier-transform"],
+      "compositionRules": [
+        {
+          "with": "change-ode",
+          "yields": "Algebraic ODE solution: transform ODE -> solve algebraically in s-domain -> inverse transform back to t-domain",
+          "type": "sequential",
+          "conditions": ["When solving linear ODEs with constant coefficients and initial conditions"],
+          "example": "y'' + y = 0, y(0)=1, y'(0)=0: s^2Y - s + Y = 0 -> Y = s/(s^2+1) -> y = cos(t)"
+        }
+      ],
+      "applicabilityPatterns": ["solving linear ODEs with constant coefficients using algebraic methods", "analyzing linear systems using transfer functions"],
+      "keywords": ["Laplace", "transform", "s-domain", "transfer function", "algebraic"],
+      "tags": ["calculus", "identity", "transform"],
+      "buildLabs": []
+    }
+  ]
+}
