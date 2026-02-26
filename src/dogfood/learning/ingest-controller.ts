@@ -69,9 +69,17 @@ export function createIngestController(config: {
           break;
         }
 
-        // Don't exceed budget
+        // Don't exceed budget — record error and stop
         const tokensForChunk = chunk.estimatedTokens;
         if (tokensForChunk > state.tokenBudgetRemaining) {
+          const budgetError: IngestionError = {
+            chunkId: chunk.id,
+            chapter: chunk.chapter,
+            message: `Token budget exhausted: ${state.tokenBudgetUsed + tokensForChunk} would exceed budget of ${config.tokenBudget}`,
+            severity: 'error',
+            timestamp: new Date().toISOString(),
+          };
+          state.errors.push(budgetError);
           break;
         }
 
@@ -97,13 +105,13 @@ export function createIngestController(config: {
           state.totalConceptsLearned = allConcepts.length;
           state.tokenBudgetUsed += tokensForChunk;
           state.tokenBudgetRemaining -= tokensForChunk;
-          state.checkpoint = `chapter-${chunk.chapter}`;
+          state.checkpoint = chunk.id;
         } catch (err) {
           const error: IngestionError = {
             chunkId: chunk.id,
             chapter: chunk.chapter,
             message: err instanceof Error ? err.message : String(err),
-            severity: 'warning',
+            severity: 'error',
             timestamp: new Date().toISOString(),
           };
           state.errors.push(error);
