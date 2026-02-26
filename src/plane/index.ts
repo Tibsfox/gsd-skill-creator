@@ -16,3 +16,4 @@ export * from './chords.js';
 export * from './composition.js';
 export * from './promotion.js';
 export * from './refinement-wrapper.js';
+export * from './metrics.js';
