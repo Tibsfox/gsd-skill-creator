@@ -21,5 +21,8 @@ src-tauri/gen/
 desktop/dist/
 desktop/node_modules/
 
+# Citation cache (regenerable API responses)
+.citations/cache/
+
 # Coverage
 coverage/
