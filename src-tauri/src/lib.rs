@@ -55,6 +55,9 @@ pub fn run() {
             mcp_host::commands::mcp_get_trace,
             mcp_host::commands::mcp_get_trust_state,
             commands::security_init::init_security_directory,
+            commands::sandbox::get_sandbox_platform,
+            commands::sandbox::configure_sandbox,
+            commands::sandbox::get_sandbox_status,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
