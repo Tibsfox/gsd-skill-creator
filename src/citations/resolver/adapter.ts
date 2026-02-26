@@ -145,7 +145,7 @@ export abstract class BaseAdapter implements ResolverAdapter {
     const cached = this.readCache(cacheKey);
     if (cached !== null) {
       this.metrics.cacheHits++;
-      return cached;
+      return Array.isArray(cached) ? cached[0] ?? null : cached;
     }
 
     const acquired = await this.getBucket().waitForToken(this.maxWaitMs);

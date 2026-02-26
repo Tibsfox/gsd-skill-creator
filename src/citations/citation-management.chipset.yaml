@@ -1,0 +1,75 @@
+name: citation-management
+version: 1.0.0
+description: "Citation tracking, source attribution, and bibliography generation for the sc learn pathway"
+domain: citation
+
+skills:
+  citation-extractor:
+    domain: citation
+    description: "Extract citation candidates from reference material during sc learn ingestion"
+    token_budget: 800
+  source-resolver:
+    domain: citation
+    description: "Resolve citation candidates against public APIs and local database"
+    token_budget: 1200
+  citation-store:
+    domain: citation
+    description: "Manage the normalized citation database with provenance chains"
+    token_budget: 600
+  bibliography-generator:
+    domain: citation
+    description: "Generate formatted bibliographies in BibTeX, APA, Chicago, MLA, and custom formats"
+    token_budget: 800
+  discovery-tools:
+    domain: citation
+    description: "Search, trace, and verify citations across public sources"
+    token_budget: 600
+  learn-hook:
+    domain: citation
+    description: "Integrate citation extraction into the sc learn preprocessing pipeline"
+    token_budget: 400
+
+agents:
+  topology: "pipeline"
+  agents:
+    - name: "LIBRARIAN"
+      role: "Citation extraction and resolution pipeline coordinator"
+      skills: [citation-extractor, source-resolver, citation-store]
+      model: "sonnet"
+    - name: "ARCHIVIST"
+      role: "Source discovery and provenance chain verification"
+      skills: [discovery-tools, source-resolver]
+      model: "sonnet"
+    - name: "SCRIBE"
+      role: "Bibliography formatting and attribution report generation"
+      skills: [bibliography-generator, citation-store]
+      model: "haiku"
+    - name: "AUDITOR"
+      role: "Citation integrity verification and completeness assessment"
+      skills: [citation-store, discovery-tools, learn-hook]
+      model: "opus"
+
+communication_loops:
+  - name: "citation"
+    description: "Citation extraction and resolution pipeline messages"
+    priority: 5
+  - name: "provenance"
+    description: "Provenance chain updates and integrity checks"
+    priority: 6
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "test_coverage"
+        threshold: 85
+        action: "block"
+      - check: "type_check"
+        command: "npx tsc --noEmit"
+        action: "block"
+    post_deploy:
+      - check: "citation_extraction_accuracy"
+        threshold: 90
+        action: "warn"
+      - check: "resolution_rate"
+        threshold: 70
+        action: "warn"
