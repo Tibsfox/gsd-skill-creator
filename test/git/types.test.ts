@@ -10,6 +10,7 @@ import type {
   GitOperationLog,
 } from '../../src/git/types.js';
 import { GIT_STATES } from '../../src/git/types.js';
+import { ScGitConfigSchema, validateScGitConfig } from '../../src/git/schemas.js';
 
 // --- Factories ---
 
@@ -261,5 +262,87 @@ describe('GitOperationLog', () => {
     const logErr = makeGitOperationLog({ success: false, error: 'merge conflict' });
     expect(logErr.error).toBe('merge conflict');
     expect(logErr.success).toBe(false);
+  });
+});
+
+// --- Schema Validation Tests ---
+
+describe('ScGitConfigSchema', () => {
+  function makeValidConfigData() {
+    return {
+      repo: 'my-project',
+      upstream: 'https://github.com/upstream/repo.git',
+      origin: 'https://github.com/user/repo.git',
+      devBranch: 'dev',
+      mainBranch: 'main',
+      gates: { mergeToMain: true, prToUpstream: true },
+      worktreeRoot: '/home/user/projects/my-project',
+      installedAt: '2026-02-26T22:00:00Z',
+      lastSync: null,
+    };
+  }
+
+  it('valid config passes validation', () => {
+    const result = validateScGitConfig(makeValidConfigData());
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.config.repo).toBe('my-project');
+      expect(result.config.gates.mergeToMain).toBe(true);
+    }
+  });
+
+  it('missing repo field fails', () => {
+    const data = makeValidConfigData();
+    delete (data as Record<string, unknown>).repo;
+    const result = validateScGitConfig(data);
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.errors.length).toBeGreaterThan(0);
+      expect(result.errors.some((e) => e.includes('repo'))).toBe(true);
+    }
+  });
+
+  it('invalid URL for upstream fails', () => {
+    const data = makeValidConfigData();
+    data.upstream = 'not-a-url';
+    const result = validateScGitConfig(data);
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.errors.some((e) => e.includes('upstream'))).toBe(true);
+    }
+  });
+
+  it('lastSync accepts null', () => {
+    const data = makeValidConfigData();
+    data.lastSync = null;
+    const result = validateScGitConfig(data);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.config.lastSync).toBeNull();
+    }
+  });
+
+  it('returns typed errors array on failure', () => {
+    const result = validateScGitConfig({});
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.errors).toBeInstanceOf(Array);
+      expect(result.errors.length).toBeGreaterThan(0);
+      for (const err of result.errors) {
+        expect(typeof err).toBe('string');
+      }
+    }
+  });
+
+  it('applies defaults for devBranch and mainBranch', () => {
+    const data = makeValidConfigData();
+    delete (data as Record<string, unknown>).devBranch;
+    delete (data as Record<string, unknown>).mainBranch;
+    const result = validateScGitConfig(data);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.config.devBranch).toBe('dev');
+      expect(result.config.mainBranch).toBe('main');
+    }
   });
 });
