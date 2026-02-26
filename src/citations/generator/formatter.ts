@@ -11,6 +11,9 @@ import type { BibliographyFormat, FormatOptions } from '../types/index.js';
 import { CitationStore } from '../store/index.js';
 import { formatBibliography as formatBibtex } from './formats/bibtex.js';
 import { formatBibliography as formatApa7 } from './formats/apa7.js';
+import { formatBibliography as formatChicago } from './formats/chicago.js';
+import { formatBibliography as formatMla } from './formats/mla.js';
+import { formatBibliography as formatCustom } from './formats/custom.js';
 
 // ============================================================================
 // Types
@@ -33,6 +36,9 @@ export class BibliographyFormatter {
     // Register built-in formats
     this.formats.set('bibtex', formatBibtex);
     this.formats.set('apa7', formatApa7);
+    this.formats.set('chicago', formatChicago);
+    this.formats.set('mla', formatMla);
+    this.formats.set('custom', formatCustom);
   }
 
   /**

@@ -310,11 +310,11 @@ describe('BibliographyFormatter', () => {
   it('throws for unsupported format', async () => {
     await expect(
       formatter.generate({
-        format: 'custom' as any,
+        format: 'nonexistent' as any,
         scope: 'all',
         sortBy: 'author',
         includeUnverified: true,
       }),
-    ).rejects.toThrow('Unsupported bibliography format: custom');
+    ).rejects.toThrow('Unsupported bibliography format: nonexistent');
   });
 });
