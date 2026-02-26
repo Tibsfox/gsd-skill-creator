@@ -1,0 +1,361 @@
+{
+  "version": "1.35.0",
+  "scope": "foundational",
+  "description": "Cross-domain dependency edges for Domains I-III (Chapters 1-10)",
+  "edges": [
+    {
+      "source": "waves-simple-harmonic-motion",
+      "target": "perception-sine-function",
+      "type": "requires",
+      "strength": 1,
+      "description": "SHM position is described by sine/cosine functions"
+    },
+    {
+      "source": "waves-simple-harmonic-motion",
+      "target": "perception-cosine-function",
+      "type": "requires",
+      "strength": 1,
+      "description": "SHM uses cosine for position from maximum displacement"
+    },
+    {
+      "source": "waves-simple-harmonic-motion",
+      "target": "perception-amplitude",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Amplitude determines maximum displacement of SHM"
+    },
+    {
+      "source": "waves-wave-function",
+      "target": "perception-sine-function",
+      "type": "requires",
+      "strength": 1,
+      "description": "Wave function is built on the sine function"
+    },
+    {
+      "source": "waves-wave-function",
+      "target": "perception-amplitude",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Amplitude scales the wave function"
+    },
+    {
+      "source": "waves-wave-function",
+      "target": "perception-phase",
+      "type": "requires",
+      "strength": 0.8,
+      "description": "Phase determines initial offset of the wave"
+    },
+    {
+      "source": "waves-angular-frequency",
+      "target": "perception-radian-measure",
+      "type": "requires",
+      "strength": 0.8,
+      "description": "Angular frequency is measured in radians per second"
+    },
+    {
+      "source": "waves-phasor-representation",
+      "target": "perception-complex-numbers",
+      "type": "applies",
+      "strength": 0.9,
+      "description": "Phasors are complex numbers representing sinusoidal signals"
+    },
+    {
+      "source": "waves-phasor-representation",
+      "target": "perception-eulers-formula",
+      "type": "requires",
+      "strength": 1,
+      "description": "Phasor representation is based on Euler's formula"
+    },
+    {
+      "source": "waves-harmonic-series",
+      "target": "perception-natural-numbers",
+      "type": "requires",
+      "strength": 0.7,
+      "description": "Harmonics are indexed by natural number multiples"
+    },
+    {
+      "source": "waves-musical-interval-ratios",
+      "target": "perception-rational-numbers",
+      "type": "applies",
+      "strength": 0.7,
+      "description": "Musical intervals are rational number ratios"
+    },
+    {
+      "source": "waves-sum-to-product",
+      "target": "perception-double-angle-formulas",
+      "type": "requires",
+      "strength": 0.8,
+      "description": "Sum-to-product identities derive from addition formulas related to double-angle identities"
+    },
+    {
+      "source": "waves-sum-to-product",
+      "target": "perception-sine-function",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Sum-to-product formulas involve sine"
+    },
+    {
+      "source": "waves-sum-to-product",
+      "target": "perception-cosine-function",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Sum-to-product formulas involve cosine"
+    },
+    {
+      "source": "waves-period",
+      "target": "perception-periodicity",
+      "type": "requires",
+      "strength": 0.8,
+      "description": "Period generalizes periodicity from trigonometric functions"
+    },
+    {
+      "source": "waves-modal-analysis",
+      "target": "perception-inner-product",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "Mode amplitudes are found by inner product projection"
+    },
+    {
+      "source": "waves-fourier-series-preview",
+      "target": "perception-sine-function",
+      "type": "requires",
+      "strength": 1,
+      "description": "Fourier series uses sine as basis functions"
+    },
+    {
+      "source": "waves-fourier-series-preview",
+      "target": "perception-cosine-function",
+      "type": "requires",
+      "strength": 1,
+      "description": "Fourier series uses cosine as basis functions"
+    },
+    {
+      "source": "waves-fourier-series-preview",
+      "target": "perception-orthogonal-decomposition",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "Fourier series is an orthogonal decomposition in the space of periodic functions"
+    },
+    {
+      "source": "waves-constructive-destructive-interference",
+      "target": "perception-phase",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Type of interference depends on phase relationship"
+    },
+    {
+      "source": "change-limit",
+      "target": "perception-real-numbers",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Limits are defined on the real numbers"
+    },
+    {
+      "source": "change-limit",
+      "target": "perception-absolute-value",
+      "type": "requires",
+      "strength": 0.8,
+      "description": "Epsilon-delta definition uses absolute value for distance"
+    },
+    {
+      "source": "change-limit",
+      "target": "perception-real-line-completeness",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Completeness ensures limits of convergent sequences exist in R"
+    },
+    {
+      "source": "change-derivative-of-trig",
+      "target": "perception-sine-function",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Deriving the derivative of sine"
+    },
+    {
+      "source": "change-derivative-of-trig",
+      "target": "perception-cosine-function",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Deriving the derivative of cosine"
+    },
+    {
+      "source": "change-arc-length",
+      "target": "perception-pythagorean-theorem",
+      "type": "applies",
+      "strength": 0.9,
+      "description": "Arc length formula uses the Pythagorean theorem at infinitesimal scale"
+    },
+    {
+      "source": "change-riemann-sum",
+      "target": "perception-real-numbers",
+      "type": "requires",
+      "strength": 0.7,
+      "description": "Riemann sums operate on real-valued functions"
+    },
+    {
+      "source": "change-harmonic-oscillator",
+      "target": "waves-simple-harmonic-motion",
+      "type": "equivalent",
+      "strength": 0.9,
+      "description": "The harmonic oscillator ODE is the mathematical formulation of SHM"
+    },
+    {
+      "source": "waves-wave-equation",
+      "target": "change-derivative",
+      "type": "requires",
+      "strength": 1,
+      "description": "The wave equation involves second partial derivatives"
+    },
+    {
+      "source": "waves-group-velocity",
+      "target": "change-derivative",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "Group velocity is defined as d(omega)/dk, a derivative"
+    },
+    {
+      "source": "waves-harmonic-series-divergence",
+      "target": "perception-natural-numbers",
+      "type": "requires",
+      "strength": 0.6,
+      "description": "The harmonic series sum is indexed over natural numbers"
+    },
+    {
+      "source": "change-improper-integral",
+      "target": "waves-harmonic-series-divergence",
+      "type": "applies",
+      "strength": 0.6,
+      "description": "Integral test connects improper integrals to series like the harmonic series"
+    },
+    {
+      "source": "change-maclaurin-series",
+      "target": "perception-eulers-formula",
+      "type": "applies",
+      "strength": 0.7,
+      "description": "Comparing Maclaurin series of e^(ix), cos(x), and i*sin(x) proves Euler's formula"
+    },
+    {
+      "source": "waves-fourier-series-preview",
+      "target": "change-definite-integral",
+      "type": "requires",
+      "strength": 0.8,
+      "description": "Fourier coefficients are computed via definite integrals"
+    },
+    {
+      "source": "change-laplace-transform-pairs",
+      "target": "change-improper-integral",
+      "type": "requires",
+      "strength": 0.8,
+      "description": "Laplace transform is defined as an improper integral"
+    },
+    {
+      "source": "change-intermediate-value-theorem",
+      "target": "perception-real-line-completeness",
+      "type": "requires",
+      "strength": 0.8,
+      "description": "IVT depends on the completeness of the real numbers (no gaps)"
+    }
+  ],
+  "compositionRules": [
+    {
+      "primitiveA": "perception-pythagorean-theorem",
+      "primitiveB": "change-derivative",
+      "yields": "Distance rate of change — computing how fast distance changes between moving objects",
+      "type": "sequential",
+      "conditions": [
+        "When measuring rate of change of distance between moving points"
+      ],
+      "example": "Ship A moves north at 3 km/h, ship B east at 4 km/h. Rate of distance change = d/dt sqrt(a^2 + b^2)"
+    },
+    {
+      "primitiveA": "perception-unit-circle",
+      "primitiveB": "waves-wave-function",
+      "yields": "Polar/phasor representation of waves — expressing waves as rotating vectors on the unit circle",
+      "type": "parallel",
+      "conditions": [
+        "When representing sinusoidal waves using complex exponential or rotating phasor"
+      ],
+      "example": "Wave A*sin(omega*t) = Im(A*e^(i*omega*t)), a rotating phasor on the unit circle scaled by A"
+    },
+    {
+      "primitiveA": "perception-sine-function",
+      "primitiveB": "change-definite-integral",
+      "yields": "Average value of periodic functions — integrating sine over one period gives zero, half-period gives 2A/pi",
+      "type": "sequential",
+      "conditions": [
+        "When computing the average or RMS value of a sinusoidal signal"
+      ],
+      "example": "Average of |sin(x)| over [0,pi] = (1/pi)*integral_0^pi sin(x)dx = 2/pi"
+    },
+    {
+      "primitiveA": "perception-inner-product",
+      "primitiveB": "change-derivative",
+      "yields": "Directional derivative — the rate of change of a function in the direction of a given vector",
+      "type": "nested",
+      "conditions": [
+        "When computing how fast a multivariable function changes in a specific direction"
+      ],
+      "example": "D_u f = grad(f) . u = (df/dx, df/dy) . (u_1, u_2), the dot product of gradient and direction"
+    },
+    {
+      "primitiveA": "waves-wave-equation",
+      "primitiveB": "waves-separation-of-variables",
+      "yields": "Standing wave mode solutions — separating space and time to find normal mode frequencies",
+      "type": "sequential",
+      "conditions": [
+        "When solving the wave equation on a bounded domain with boundary conditions"
+      ],
+      "example": "String fixed at both ends: u(x,t) = sin(n*pi*x/L)*cos(n*pi*c*t/L)"
+    },
+    {
+      "primitiveA": "waves-harmonic-series",
+      "primitiveB": "change-taylor-series",
+      "yields": "Power series representations of wave-like functions — connecting harmonic decomposition to polynomial approximation",
+      "type": "parallel",
+      "conditions": [
+        "When representing periodic phenomena using both Fourier and Taylor approaches"
+      ],
+      "example": "sin(x) = x - x^3/6 + x^5/120 - ... (Taylor) vs sin(x) as the first Fourier basis function"
+    },
+    {
+      "primitiveA": "waves-frequency",
+      "primitiveB": "change-derivative",
+      "yields": "Instantaneous frequency — the derivative of the phase function gives the instantaneous frequency of a modulated signal",
+      "type": "nested",
+      "conditions": [
+        "When a signal's frequency changes over time (frequency modulation)"
+      ],
+      "example": "For phase phi(t), instantaneous frequency = (1/2pi)*d(phi)/dt"
+    },
+    {
+      "primitiveA": "waves-fourier-series-preview",
+      "primitiveB": "change-fundamental-theorem-2",
+      "yields": "Fourier coefficient calculation via integration — FTC enables exact computation of Fourier coefficients",
+      "type": "sequential",
+      "conditions": [
+        "When computing Fourier coefficients of a known periodic function"
+      ],
+      "example": "a_n = (2/L)*integral_0^L f(x)*cos(2*pi*n*x/L)dx, evaluated using FTC"
+    },
+    {
+      "primitiveA": "waves-superposition-principle",
+      "primitiveB": "change-definite-integral",
+      "yields": "Integral superposition of continuous wave sources — replacing discrete sum with integral over a continuum",
+      "type": "nested",
+      "conditions": [
+        "When summing contributions from a continuous distribution of wave sources"
+      ],
+      "example": "Diffraction integral: summing wavelets from each point of an aperture"
+    },
+    {
+      "primitiveA": "perception-real-line-completeness",
+      "primitiveB": "change-limit",
+      "yields": "Foundation for epsilon-delta analysis — completeness guarantees that convergent Cauchy sequences have limits in R",
+      "type": "nested",
+      "conditions": [
+        "When proving existence of limits using the completeness of the real numbers"
+      ],
+      "example": "The sequence 3, 3.1, 3.14, 3.141, 3.1415, ... converges to pi because R is complete"
+    }
+  ]
+}

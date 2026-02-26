@@ -9,16 +9,39 @@
       "domain": "perception",
       "chapter": 1,
       "section": "1.1",
-      "planePosition": { "real": -0.3, "imaginary": 0.4 },
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.4
+      },
       "formalStatement": "The natural numbers N = {1, 2, 3, ...} satisfy the Peano axioms: there exists a first element 1, every element n has a unique successor S(n), no two elements share a successor, and the induction principle holds.",
       "computationalForm": "",
       "prerequisites": [],
       "dependencies": [],
-      "enables": ["perception-integers", "perception-rational-numbers", "perception-real-numbers", "waves-harmonic-series", "waves-fundamental-frequency"],
+      "enables": [
+        "perception-integers",
+        "perception-rational-numbers",
+        "perception-real-numbers",
+        "waves-harmonic-series",
+        "waves-fundamental-frequency",
+        "waves-harmonic-series-divergence"
+      ],
       "compositionRules": [],
-      "applicabilityPatterns": ["counting objects or elements in a set", "establishing the basis for mathematical induction"],
-      "keywords": ["natural", "counting", "Peano", "successor", "induction"],
-      "tags": ["foundational", "number-system", "axiom"],
+      "applicabilityPatterns": [
+        "counting objects or elements in a set",
+        "establishing the basis for mathematical induction"
+      ],
+      "keywords": [
+        "natural",
+        "counting",
+        "Peano",
+        "successor",
+        "induction"
+      ],
+      "tags": [
+        "foundational",
+        "number-system",
+        "axiom"
+      ],
       "buildLabs": []
     },
     {
@@ -28,16 +51,39 @@
       "domain": "perception",
       "chapter": 1,
       "section": "1.3",
-      "planePosition": { "real": -0.4, "imaginary": 0.5 },
+      "planePosition": {
+        "real": -0.4,
+        "imaginary": 0.5
+      },
       "formalStatement": "Every non-empty subset of R that is bounded above has a least upper bound (supremum). Equivalently, there are no gaps in the real number line.",
       "computationalForm": "",
-      "prerequisites": ["Understanding of real numbers and ordering"],
+      "prerequisites": [
+        "Understanding of real numbers and ordering"
+      ],
       "dependencies": [],
-      "enables": ["perception-real-numbers", "change-limit", "change-continuity"],
+      "enables": [
+        "perception-real-numbers",
+        "change-limit",
+        "change-continuity",
+        "change-intermediate-value-theorem"
+      ],
       "compositionRules": [],
-      "applicabilityPatterns": ["proving existence of limits or suprema", "establishing that a convergent sequence has a real limit"],
-      "keywords": ["completeness", "supremum", "least upper bound", "continuum", "no gaps"],
-      "tags": ["foundational", "analysis", "axiom"],
+      "applicabilityPatterns": [
+        "proving existence of limits or suprema",
+        "establishing that a convergent sequence has a real limit"
+      ],
+      "keywords": [
+        "completeness",
+        "supremum",
+        "least upper bound",
+        "continuum",
+        "no gaps"
+      ],
+      "tags": [
+        "foundational",
+        "analysis",
+        "axiom"
+      ],
       "buildLabs": []
     },
     {
@@ -47,31 +93,54 @@
       "domain": "perception",
       "chapter": 1,
       "section": "1.1",
-      "planePosition": { "real": -0.3, "imaginary": 0.2 },
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.2
+      },
       "formalStatement": "The integers Z = {..., -2, -1, 0, 1, 2, ...} extend the natural numbers to include zero and additive inverses, forming an ordered ring under addition and multiplication.",
       "computationalForm": "For any natural number n, its additive inverse -n satisfies n + (-n) = 0.",
-      "prerequisites": ["Natural numbers"],
+      "prerequisites": [
+        "Natural numbers"
+      ],
       "dependencies": [
         {
           "target": "perception-natural-numbers",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Integers extend natural numbers by adding zero and negative numbers"
         }
       ],
-      "enables": ["perception-rational-numbers", "perception-absolute-value"],
+      "enables": [
+        "perception-rational-numbers",
+        "perception-absolute-value"
+      ],
       "compositionRules": [
         {
           "with": "perception-natural-numbers",
           "yields": "Complete additive group with identity and inverses",
           "type": "sequential",
-          "conditions": ["When subtraction must always be defined"],
+          "conditions": [
+            "When subtraction must always be defined"
+          ],
           "example": "Extending counting numbers to allow 3 - 5 = -2"
         }
       ],
-      "applicabilityPatterns": ["representing signed quantities like temperature or debt", "problems involving subtraction that may go below zero"],
-      "keywords": ["integer", "negative", "zero", "additive inverse", "ring"],
-      "tags": ["foundational", "number-system", "algebra"],
+      "applicabilityPatterns": [
+        "representing signed quantities like temperature or debt",
+        "problems involving subtraction that may go below zero"
+      ],
+      "keywords": [
+        "integer",
+        "negative",
+        "zero",
+        "additive inverse",
+        "ring"
+      ],
+      "tags": [
+        "foundational",
+        "number-system",
+        "algebra"
+      ],
       "buildLabs": []
     },
     {
@@ -81,31 +150,55 @@
       "domain": "perception",
       "chapter": 1,
       "section": "1.2",
-      "planePosition": { "real": -0.3, "imaginary": 0.15 },
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.15
+      },
       "formalStatement": "The rational numbers Q = {p/q : p, q in Z, q != 0} form an ordered field under addition and multiplication, with equivalence p/q = r/s iff ps = qr.",
       "computationalForm": "Arithmetic: a/b + c/d = (ad + bc)/(bd); (a/b)(c/d) = ac/(bd); (a/b)^(-1) = b/a for a != 0.",
-      "prerequisites": ["Integers"],
+      "prerequisites": [
+        "Integers"
+      ],
       "dependencies": [
         {
           "target": "perception-integers",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Rational numbers are ratios of integers"
         }
       ],
-      "enables": ["perception-irrational-numbers", "perception-real-numbers", "waves-musical-interval-ratios"],
+      "enables": [
+        "perception-irrational-numbers",
+        "perception-real-numbers",
+        "waves-musical-interval-ratios"
+      ],
       "compositionRules": [
         {
           "with": "perception-integers",
           "yields": "A number system where division is always defined (except by zero)",
           "type": "sequential",
-          "conditions": ["When division must produce exact results"],
+          "conditions": [
+            "When division must produce exact results"
+          ],
           "example": "Dividing 1 by 3 to get the exact fraction 1/3"
         }
       ],
-      "applicabilityPatterns": ["representing exact ratios like musical intervals", "solving equations where results are fractional"],
-      "keywords": ["rational", "fraction", "ratio", "field", "quotient"],
-      "tags": ["foundational", "number-system", "algebra"],
+      "applicabilityPatterns": [
+        "representing exact ratios like musical intervals",
+        "solving equations where results are fractional"
+      ],
+      "keywords": [
+        "rational",
+        "fraction",
+        "ratio",
+        "field",
+        "quotient"
+      ],
+      "tags": [
+        "foundational",
+        "number-system",
+        "algebra"
+      ],
       "buildLabs": []
     },
     {
@@ -115,10 +208,15 @@
       "domain": "perception",
       "chapter": 1,
       "section": "1.2",
-      "planePosition": { "real": -0.2, "imaginary": 0.3 },
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.3
+      },
       "formalStatement": "An irrational number is a real number that cannot be expressed as a ratio p/q of integers. The set of irrationals is R \\ Q. Examples include sqrt(2), pi, and e.",
       "computationalForm": "Proof by contradiction: assume sqrt(2) = p/q in lowest terms, then 2q^2 = p^2 implies p is even, contradicting lowest terms.",
-      "prerequisites": ["Rational numbers"],
+      "prerequisites": [
+        "Rational numbers"
+      ],
       "dependencies": [
         {
           "target": "perception-rational-numbers",
@@ -127,19 +225,36 @@
           "description": "Irrational numbers are defined as those that are NOT rational"
         }
       ],
-      "enables": ["perception-real-numbers"],
+      "enables": [
+        "perception-real-numbers"
+      ],
       "compositionRules": [
         {
           "with": "perception-rational-numbers",
           "yields": "The complete real number line without gaps",
           "type": "parallel",
-          "conditions": ["When both rational and irrational numbers are needed to fill the line"],
+          "conditions": [
+            "When both rational and irrational numbers are needed to fill the line"
+          ],
           "example": "sqrt(2) lies between 1.414 and 1.415 on the number line, filling a gap the rationals leave"
         }
       ],
-      "applicabilityPatterns": ["proving that certain numbers like sqrt(2) or pi cannot be exactly expressed as fractions", "understanding why the real line has no gaps"],
-      "keywords": ["irrational", "sqrt(2)", "pi", "incommensurable", "non-repeating decimal"],
-      "tags": ["foundational", "number-system", "analysis"],
+      "applicabilityPatterns": [
+        "proving that certain numbers like sqrt(2) or pi cannot be exactly expressed as fractions",
+        "understanding why the real line has no gaps"
+      ],
+      "keywords": [
+        "irrational",
+        "sqrt(2)",
+        "pi",
+        "incommensurable",
+        "non-repeating decimal"
+      ],
+      "tags": [
+        "foundational",
+        "number-system",
+        "analysis"
+      ],
       "buildLabs": []
     },
     {
@@ -149,43 +264,73 @@
       "domain": "perception",
       "chapter": 1,
       "section": "1.3",
-      "planePosition": { "real": -0.2, "imaginary": 0.2 },
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.2
+      },
       "formalStatement": "The real numbers R form a complete ordered field: closed under +, -, *, /, ordered by <, and satisfying the completeness axiom. R = Q union (R \\ Q).",
       "computationalForm": "Real arithmetic follows field axioms: associativity, commutativity, distributivity, identities (0,1), inverses. Ordering: trichotomy, transitivity.",
-      "prerequisites": ["Rational numbers", "Irrational numbers", "Real line completeness"],
+      "prerequisites": [
+        "Rational numbers",
+        "Irrational numbers",
+        "Real line completeness"
+      ],
       "dependencies": [
         {
           "target": "perception-rational-numbers",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Real numbers include all rationals"
         },
         {
           "target": "perception-irrational-numbers",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Real numbers include all irrationals"
         },
         {
           "target": "perception-real-line-completeness",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Completeness is the defining property that distinguishes R from Q"
         }
       ],
-      "enables": ["perception-complex-numbers", "perception-absolute-value", "perception-number-line", "perception-unit-circle", "waves-wave-function", "change-limit"],
+      "enables": [
+        "perception-complex-numbers",
+        "perception-absolute-value",
+        "perception-number-line",
+        "perception-unit-circle",
+        "waves-wave-function",
+        "change-limit",
+        "change-riemann-sum"
+      ],
       "compositionRules": [
         {
           "with": "perception-real-line-completeness",
           "yields": "A number system where limits of convergent sequences always exist",
           "type": "nested",
-          "conditions": ["When analysis requires limiting processes"],
+          "conditions": [
+            "When analysis requires limiting processes"
+          ],
           "example": "The sequence 1, 1.4, 1.41, 1.414, ... converges to sqrt(2) in R"
         }
       ],
-      "applicabilityPatterns": ["any calculation involving continuous quantities", "measuring distances, areas, or physical quantities"],
-      "keywords": ["real", "complete field", "continuum", "R", "ordered field"],
-      "tags": ["foundational", "number-system", "analysis"],
+      "applicabilityPatterns": [
+        "any calculation involving continuous quantities",
+        "measuring distances, areas, or physical quantities"
+      ],
+      "keywords": [
+        "real",
+        "complete field",
+        "continuum",
+        "R",
+        "ordered field"
+      ],
+      "tags": [
+        "foundational",
+        "number-system",
+        "analysis"
+      ],
       "buildLabs": []
     },
     {
@@ -195,31 +340,56 @@
       "domain": "perception",
       "chapter": 1,
       "section": "1.4",
-      "planePosition": { "real": -0.1, "imaginary": 0.4 },
+      "planePosition": {
+        "real": -0.1,
+        "imaginary": 0.4
+      },
       "formalStatement": "The complex numbers C = {a + bi : a, b in R, i^2 = -1} form an algebraically closed field. Every complex number has modulus |z| = sqrt(a^2 + b^2) and argument arg(z) = atan2(b, a).",
       "computationalForm": "Addition: (a+bi) + (c+di) = (a+c) + (b+d)i. Multiplication: (a+bi)(c+di) = (ac-bd) + (ad+bc)i. Modulus: |z| = sqrt(a^2+b^2).",
-      "prerequisites": ["Real numbers"],
+      "prerequisites": [
+        "Real numbers"
+      ],
       "dependencies": [
         {
           "target": "perception-real-numbers",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Complex numbers extend real numbers with the imaginary unit"
         }
       ],
-      "enables": ["perception-eulers-formula", "perception-unit-circle", "waves-phasor-representation", "waves-wave-function"],
+      "enables": [
+        "perception-eulers-formula",
+        "perception-unit-circle",
+        "waves-phasor-representation",
+        "waves-wave-function"
+      ],
       "compositionRules": [
         {
           "with": "perception-unit-circle",
           "yields": "Polar form of complex numbers: z = r*e^(i*theta)",
           "type": "parallel",
-          "conditions": ["When phase and magnitude need separate representation"],
+          "conditions": [
+            "When phase and magnitude need separate representation"
+          ],
           "example": "1+i = sqrt(2) * e^(i*pi/4) in polar form"
         }
       ],
-      "applicabilityPatterns": ["representing quantities with both magnitude and phase", "solving polynomial equations that have no real roots"],
-      "keywords": ["complex", "imaginary", "modulus", "argument", "algebraically closed"],
-      "tags": ["foundational", "number-system", "algebra"],
+      "applicabilityPatterns": [
+        "representing quantities with both magnitude and phase",
+        "solving polynomial equations that have no real roots"
+      ],
+      "keywords": [
+        "complex",
+        "imaginary",
+        "modulus",
+        "argument",
+        "algebraically closed"
+      ],
+      "tags": [
+        "foundational",
+        "number-system",
+        "algebra"
+      ],
       "buildLabs": []
     },
     {
@@ -229,10 +399,15 @@
       "domain": "perception",
       "chapter": 1,
       "section": "1.2",
-      "planePosition": { "real": -0.1, "imaginary": 0.0 },
+      "planePosition": {
+        "real": -0.1,
+        "imaginary": 0
+      },
       "formalStatement": "For x in R, the absolute value |x| = x if x >= 0, |x| = -x if x < 0. Equivalently, |x| = sqrt(x^2). It measures the distance from x to 0 on the number line.",
       "computationalForm": "|x| = sqrt(x^2). Properties: |xy| = |x||y|, |x+y| <= |x|+|y| (triangle inequality), |x| >= 0 with equality iff x = 0.",
-      "prerequisites": ["Real numbers"],
+      "prerequisites": [
+        "Real numbers"
+      ],
       "dependencies": [
         {
           "target": "perception-real-numbers",
@@ -241,19 +416,39 @@
           "description": "Absolute value is defined on real numbers"
         }
       ],
-      "enables": ["perception-distance-formula", "perception-triangle-inequality", "perception-norm"],
+      "enables": [
+        "perception-distance-formula",
+        "perception-triangle-inequality",
+        "perception-norm",
+        "change-limit"
+      ],
       "compositionRules": [
         {
           "with": "perception-number-line",
           "yields": "Distance between two points on the line: |a - b|",
           "type": "sequential",
-          "conditions": ["When measuring separation between two real values"],
+          "conditions": [
+            "When measuring separation between two real values"
+          ],
           "example": "Distance between -3 and 5 is |(-3) - 5| = 8"
         }
       ],
-      "applicabilityPatterns": ["measuring distance from zero or between two numbers", "bounding the size of a quantity regardless of sign"],
-      "keywords": ["absolute value", "magnitude", "distance", "modulus", "non-negative"],
-      "tags": ["foundational", "measurement", "analysis"],
+      "applicabilityPatterns": [
+        "measuring distance from zero or between two numbers",
+        "bounding the size of a quantity regardless of sign"
+      ],
+      "keywords": [
+        "absolute value",
+        "magnitude",
+        "distance",
+        "modulus",
+        "non-negative"
+      ],
+      "tags": [
+        "foundational",
+        "measurement",
+        "analysis"
+      ],
       "buildLabs": []
     },
     {
@@ -263,31 +458,54 @@
       "domain": "perception",
       "chapter": 1,
       "section": "1.3",
-      "planePosition": { "real": -0.1, "imaginary": -0.1 },
+      "planePosition": {
+        "real": -0.1,
+        "imaginary": -0.1
+      },
       "formalStatement": "The number line is a one-to-one correspondence between the real numbers R and points on a line, preserving order and distance. Each point corresponds to exactly one real number and vice versa.",
       "computationalForm": "Map x in R to point P at signed distance x from origin O. Distance between points at a and b is |a - b|.",
-      "prerequisites": ["Real numbers"],
+      "prerequisites": [
+        "Real numbers"
+      ],
       "dependencies": [
         {
           "target": "perception-real-numbers",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "The number line is the geometric representation of the real numbers"
         }
       ],
-      "enables": ["perception-distance-formula", "perception-unit-circle", "change-limit"],
+      "enables": [
+        "perception-distance-formula",
+        "perception-unit-circle",
+        "change-limit"
+      ],
       "compositionRules": [
         {
           "with": "perception-absolute-value",
           "yields": "Metric space structure on R with distance d(a,b) = |a-b|",
           "type": "parallel",
-          "conditions": ["When geometric distance on the real line is needed"],
+          "conditions": [
+            "When geometric distance on the real line is needed"
+          ],
           "example": "Representing temperature on a thermometer as a point on the number line"
         }
       ],
-      "applicabilityPatterns": ["visualizing ordering and distance relationships between numbers", "geometric interpretation of inequalities"],
-      "keywords": ["number line", "real line", "geometric representation", "one-dimensional"],
-      "tags": ["foundational", "geometry", "visualization"],
+      "applicabilityPatterns": [
+        "visualizing ordering and distance relationships between numbers",
+        "geometric interpretation of inequalities"
+      ],
+      "keywords": [
+        "number line",
+        "real line",
+        "geometric representation",
+        "one-dimensional"
+      ],
+      "tags": [
+        "foundational",
+        "geometry",
+        "visualization"
+      ],
       "buildLabs": []
     },
     {
@@ -297,10 +515,16 @@
       "domain": "perception",
       "chapter": 1,
       "section": "1.2",
-      "planePosition": { "real": -0.4, "imaginary": 0.35 },
+      "planePosition": {
+        "real": -0.4,
+        "imaginary": 0.35
+      },
       "formalStatement": "Between any two distinct real numbers a < b, there exists a rational number q such that a < q < b. Equivalently, Q is dense in R.",
       "computationalForm": "Given a < b, choose n such that 1/n < b - a (Archimedean property), then find integer m such that a < m/n < b.",
-      "prerequisites": ["Real numbers", "Rational numbers"],
+      "prerequisites": [
+        "Real numbers",
+        "Rational numbers"
+      ],
       "dependencies": [
         {
           "target": "perception-real-numbers",
@@ -311,23 +535,40 @@
         {
           "target": "perception-rational-numbers",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "The theorem is about the rational numbers"
         }
       ],
-      "enables": ["change-riemann-sum"],
+      "enables": [
+        "change-riemann-sum"
+      ],
       "compositionRules": [
         {
           "with": "perception-real-line-completeness",
           "yields": "Understanding that Q is dense but not complete — R fills the gaps",
           "type": "parallel",
-          "conditions": ["When understanding the relationship between Q and R"],
+          "conditions": [
+            "When understanding the relationship between Q and R"
+          ],
           "example": "Between any two irrationals there is a rational, yet between any two rationals there is an irrational"
         }
       ],
-      "applicabilityPatterns": ["approximating any real number by a rational number", "constructing sequences of rationals converging to a real limit"],
-      "keywords": ["density", "dense", "approximation", "Archimedean", "between"],
-      "tags": ["analysis", "number-theory", "approximation"],
+      "applicabilityPatterns": [
+        "approximating any real number by a rational number",
+        "constructing sequences of rationals converging to a real limit"
+      ],
+      "keywords": [
+        "density",
+        "dense",
+        "approximation",
+        "Archimedean",
+        "between"
+      ],
+      "tags": [
+        "analysis",
+        "number-theory",
+        "approximation"
+      ],
       "buildLabs": []
     },
     {
@@ -337,31 +578,54 @@
       "domain": "perception",
       "chapter": 1,
       "section": "1.2",
-      "planePosition": { "real": -0.3, "imaginary": 0.1 },
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.1
+      },
       "formalStatement": "For all real numbers a, b: |a + b| <= |a| + |b|. Equality holds if and only if a and b have the same sign (or one is zero).",
       "computationalForm": "Verify: |a + b|^2 = (a+b)^2 <= (|a| + |b|)^2 = |a|^2 + 2|a||b| + |b|^2, using ab <= |a||b|.",
-      "prerequisites": ["Absolute value"],
+      "prerequisites": [
+        "Absolute value"
+      ],
       "dependencies": [
         {
           "target": "perception-absolute-value",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "The triangle inequality is a fundamental property of absolute value"
         }
       ],
-      "enables": ["perception-distance-formula", "perception-norm", "perception-cauchy-schwarz"],
+      "enables": [
+        "perception-distance-formula",
+        "perception-norm",
+        "perception-cauchy-schwarz"
+      ],
       "compositionRules": [
         {
           "with": "perception-distance-formula",
           "yields": "Metric space axiom: d(a,c) <= d(a,b) + d(b,c)",
           "type": "sequential",
-          "conditions": ["When proving metric space properties"],
+          "conditions": [
+            "When proving metric space properties"
+          ],
           "example": "Distance from A to C via B is at least as long as the direct path"
         }
       ],
-      "applicabilityPatterns": ["bounding the magnitude of a sum by the sum of magnitudes", "proving convergence of sequences using epsilon-delta arguments"],
-      "keywords": ["triangle inequality", "bound", "magnitude", "metric"],
-      "tags": ["analysis", "inequality", "metric"],
+      "applicabilityPatterns": [
+        "bounding the magnitude of a sum by the sum of magnitudes",
+        "proving convergence of sequences using epsilon-delta arguments"
+      ],
+      "keywords": [
+        "triangle inequality",
+        "bound",
+        "magnitude",
+        "metric"
+      ],
+      "tags": [
+        "analysis",
+        "inequality",
+        "metric"
+      ],
       "buildLabs": []
     },
     {
@@ -371,10 +635,16 @@
       "domain": "perception",
       "chapter": 2,
       "section": "2.1",
-      "planePosition": { "real": -0.3, "imaginary": 0.2 },
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.2
+      },
       "formalStatement": "The unit circle is the set of points (x, y) in R^2 satisfying x^2 + y^2 = 1. Every point on the unit circle can be written as (cos(theta), sin(theta)) for a unique angle theta in [0, 2*pi).",
       "computationalForm": "Parameterization: x = cos(theta), y = sin(theta). Arc length from (1,0) to angle theta equals theta (in radians).",
-      "prerequisites": ["Real numbers", "Pythagorean theorem concept"],
+      "prerequisites": [
+        "Real numbers",
+        "Pythagorean theorem concept"
+      ],
       "dependencies": [
         {
           "target": "perception-real-numbers",
@@ -383,19 +653,42 @@
           "description": "Coordinates on the unit circle are real numbers"
         }
       ],
-      "enables": ["perception-sine-function", "perception-cosine-function", "perception-radian-measure", "perception-pythagorean-identity", "perception-eulers-formula", "waves-wave-function", "waves-phasor-representation"],
+      "enables": [
+        "perception-sine-function",
+        "perception-cosine-function",
+        "perception-radian-measure",
+        "perception-pythagorean-identity",
+        "perception-eulers-formula",
+        "waves-wave-function",
+        "waves-phasor-representation"
+      ],
       "compositionRules": [
         {
           "with": "perception-complex-numbers",
           "yields": "Complex numbers of modulus 1: z = e^(i*theta) on the unit circle",
           "type": "parallel",
-          "conditions": ["When representing rotations or phases as complex numbers"],
+          "conditions": [
+            "When representing rotations or phases as complex numbers"
+          ],
           "example": "The point (cos(pi/4), sin(pi/4)) corresponds to e^(i*pi/4) = (1+i)/sqrt(2)"
         }
       ],
-      "applicabilityPatterns": ["defining trigonometric functions geometrically", "representing angles and rotations in the plane"],
-      "keywords": ["unit circle", "circle", "radius 1", "angle", "parameterization"],
-      "tags": ["geometry", "trigonometry", "foundational"],
+      "applicabilityPatterns": [
+        "defining trigonometric functions geometrically",
+        "representing angles and rotations in the plane"
+      ],
+      "keywords": [
+        "unit circle",
+        "circle",
+        "radius 1",
+        "angle",
+        "parameterization"
+      ],
+      "tags": [
+        "geometry",
+        "trigonometry",
+        "foundational"
+      ],
       "buildLabs": []
     },
     {
@@ -405,10 +698,15 @@
       "domain": "perception",
       "chapter": 2,
       "section": "2.1",
-      "planePosition": { "real": -0.2, "imaginary": 0.15 },
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.15
+      },
       "formalStatement": "One radian is the angle subtended at the center of a circle by an arc equal in length to the radius. A full circle is 2*pi radians. Conversion: theta_rad = theta_deg * pi/180.",
       "computationalForm": "Arc length s = r * theta (in radians). Full circle: 2*pi rad = 360 degrees. pi rad = 180 degrees.",
-      "prerequisites": ["Unit circle"],
+      "prerequisites": [
+        "Unit circle"
+      ],
       "dependencies": [
         {
           "target": "perception-unit-circle",
@@ -417,19 +715,38 @@
           "description": "Radian measure is most naturally defined on the unit circle where arc length equals angle"
         }
       ],
-      "enables": ["perception-sine-function", "perception-cosine-function", "waves-angular-frequency"],
+      "enables": [
+        "perception-sine-function",
+        "perception-cosine-function",
+        "waves-angular-frequency"
+      ],
       "compositionRules": [
         {
           "with": "perception-unit-circle",
           "yields": "Natural angle measurement where arc length equals angle on unit circle",
           "type": "nested",
-          "conditions": ["When angles must be compatible with calculus (derivatives of trig functions)"],
+          "conditions": [
+            "When angles must be compatible with calculus (derivatives of trig functions)"
+          ],
           "example": "At radius 1, an arc of length pi/2 subtends a right angle"
         }
       ],
-      "applicabilityPatterns": ["converting between degrees and radians", "computing arc length from angle and radius"],
-      "keywords": ["radian", "angle", "arc length", "degree", "conversion"],
-      "tags": ["trigonometry", "measurement", "geometry"],
+      "applicabilityPatterns": [
+        "converting between degrees and radians",
+        "computing arc length from angle and radius"
+      ],
+      "keywords": [
+        "radian",
+        "angle",
+        "arc length",
+        "degree",
+        "conversion"
+      ],
+      "tags": [
+        "trigonometry",
+        "measurement",
+        "geometry"
+      ],
       "buildLabs": []
     },
     {
@@ -439,15 +756,21 @@
       "domain": "perception",
       "chapter": 2,
       "section": "2.2",
-      "planePosition": { "real": -0.3, "imaginary": 0.25 },
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.25
+      },
       "formalStatement": "The sine function sin: R -> [-1,1] is defined as the y-coordinate of the point on the unit circle at angle theta from the positive x-axis. It is periodic with period 2*pi, odd: sin(-theta) = -sin(theta).",
       "computationalForm": "sin(0) = 0, sin(pi/6) = 1/2, sin(pi/4) = sqrt(2)/2, sin(pi/3) = sqrt(3)/2, sin(pi/2) = 1. Taylor: sin(x) = x - x^3/3! + x^5/5! - ...",
-      "prerequisites": ["Unit circle", "Radian measure"],
+      "prerequisites": [
+        "Unit circle",
+        "Radian measure"
+      ],
       "dependencies": [
         {
           "target": "perception-unit-circle",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Sine is defined as the y-coordinate on the unit circle"
         },
         {
@@ -457,19 +780,44 @@
           "description": "Sine takes angles in radians as input"
         }
       ],
-      "enables": ["perception-tangent-function", "perception-pythagorean-identity", "perception-double-angle-formulas", "perception-eulers-formula", "waves-wave-function", "waves-simple-harmonic-motion", "change-derivative-of-trig"],
+      "enables": [
+        "perception-tangent-function",
+        "perception-pythagorean-identity",
+        "perception-double-angle-formulas",
+        "perception-eulers-formula",
+        "waves-wave-function",
+        "waves-simple-harmonic-motion",
+        "change-derivative-of-trig",
+        "waves-sum-to-product",
+        "waves-fourier-series-preview"
+      ],
       "compositionRules": [
         {
           "with": "perception-cosine-function",
           "yields": "Complete unit circle parameterization: (cos(theta), sin(theta))",
           "type": "parallel",
-          "conditions": ["When both coordinates of a point on the unit circle are needed"],
+          "conditions": [
+            "When both coordinates of a point on the unit circle are needed"
+          ],
           "example": "A point at angle pi/3 is (cos(pi/3), sin(pi/3)) = (1/2, sqrt(3)/2)"
         }
       ],
-      "applicabilityPatterns": ["computing vertical components of circular or oscillatory motion", "modeling periodic phenomena like waves and vibrations"],
-      "keywords": ["sine", "sin", "y-coordinate", "periodic", "odd function"],
-      "tags": ["trigonometry", "function", "periodic"],
+      "applicabilityPatterns": [
+        "computing vertical components of circular or oscillatory motion",
+        "modeling periodic phenomena like waves and vibrations"
+      ],
+      "keywords": [
+        "sine",
+        "sin",
+        "y-coordinate",
+        "periodic",
+        "odd function"
+      ],
+      "tags": [
+        "trigonometry",
+        "function",
+        "periodic"
+      ],
       "buildLabs": []
     },
     {
@@ -479,15 +827,21 @@
       "domain": "perception",
       "chapter": 2,
       "section": "2.2",
-      "planePosition": { "real": -0.3, "imaginary": 0.25 },
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.25
+      },
       "formalStatement": "The cosine function cos: R -> [-1,1] is defined as the x-coordinate of the point on the unit circle at angle theta. It is periodic with period 2*pi, even: cos(-theta) = cos(theta). cos(theta) = sin(theta + pi/2).",
       "computationalForm": "cos(0) = 1, cos(pi/6) = sqrt(3)/2, cos(pi/4) = sqrt(2)/2, cos(pi/3) = 1/2, cos(pi/2) = 0. Taylor: cos(x) = 1 - x^2/2! + x^4/4! - ...",
-      "prerequisites": ["Unit circle", "Radian measure"],
+      "prerequisites": [
+        "Unit circle",
+        "Radian measure"
+      ],
       "dependencies": [
         {
           "target": "perception-unit-circle",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Cosine is defined as the x-coordinate on the unit circle"
         },
         {
@@ -497,19 +851,44 @@
           "description": "Cosine takes angles in radians as input"
         }
       ],
-      "enables": ["perception-tangent-function", "perception-pythagorean-identity", "perception-double-angle-formulas", "perception-eulers-formula", "waves-wave-function", "waves-simple-harmonic-motion"],
+      "enables": [
+        "perception-tangent-function",
+        "perception-pythagorean-identity",
+        "perception-double-angle-formulas",
+        "perception-eulers-formula",
+        "waves-wave-function",
+        "waves-simple-harmonic-motion",
+        "waves-sum-to-product",
+        "waves-fourier-series-preview",
+        "change-derivative-of-trig"
+      ],
       "compositionRules": [
         {
           "with": "perception-sine-function",
           "yields": "Complete unit circle parameterization and Pythagorean identity",
           "type": "parallel",
-          "conditions": ["When decomposing a vector or oscillation into orthogonal components"],
+          "conditions": [
+            "When decomposing a vector or oscillation into orthogonal components"
+          ],
           "example": "Resolving a force F at angle theta into components F*cos(theta) and F*sin(theta)"
         }
       ],
-      "applicabilityPatterns": ["computing horizontal components of circular or oscillatory motion", "finding phase relationships between periodic signals"],
-      "keywords": ["cosine", "cos", "x-coordinate", "periodic", "even function"],
-      "tags": ["trigonometry", "function", "periodic"],
+      "applicabilityPatterns": [
+        "computing horizontal components of circular or oscillatory motion",
+        "finding phase relationships between periodic signals"
+      ],
+      "keywords": [
+        "cosine",
+        "cos",
+        "x-coordinate",
+        "periodic",
+        "even function"
+      ],
+      "tags": [
+        "trigonometry",
+        "function",
+        "periodic"
+      ],
       "buildLabs": []
     },
     {
@@ -519,37 +898,59 @@
       "domain": "perception",
       "chapter": 2,
       "section": "2.2",
-      "planePosition": { "real": -0.2, "imaginary": 0.3 },
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.3
+      },
       "formalStatement": "The tangent function tan(theta) = sin(theta)/cos(theta), defined for all theta where cos(theta) != 0. It has period pi and vertical asymptotes at theta = pi/2 + n*pi.",
       "computationalForm": "tan(0) = 0, tan(pi/4) = 1, tan(pi/3) = sqrt(3). Derivative: d/dx tan(x) = sec^2(x) = 1 + tan^2(x).",
-      "prerequisites": ["Sine function", "Cosine function"],
+      "prerequisites": [
+        "Sine function",
+        "Cosine function"
+      ],
       "dependencies": [
         {
           "target": "perception-sine-function",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Tangent is the ratio of sine to cosine"
         },
         {
           "target": "perception-cosine-function",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Tangent is the ratio of sine to cosine"
         }
       ],
-      "enables": ["waves-wave-function"],
+      "enables": [
+        "waves-wave-function"
+      ],
       "compositionRules": [
         {
           "with": "perception-pythagorean-identity",
           "yields": "The identity 1 + tan^2(theta) = sec^2(theta)",
           "type": "nested",
-          "conditions": ["When relating tangent to secant in integration or identities"],
+          "conditions": [
+            "When relating tangent to secant in integration or identities"
+          ],
           "example": "Simplifying integral of sec^2(x) dx = tan(x) + C"
         }
       ],
-      "applicabilityPatterns": ["computing the slope of a line at an angle theta", "relating opposite and adjacent sides in a right triangle"],
-      "keywords": ["tangent", "tan", "slope", "ratio", "asymptote"],
-      "tags": ["trigonometry", "function"],
+      "applicabilityPatterns": [
+        "computing the slope of a line at an angle theta",
+        "relating opposite and adjacent sides in a right triangle"
+      ],
+      "keywords": [
+        "tangent",
+        "tan",
+        "slope",
+        "ratio",
+        "asymptote"
+      ],
+      "tags": [
+        "trigonometry",
+        "function"
+      ],
       "buildLabs": []
     },
     {
@@ -559,10 +960,15 @@
       "domain": "perception",
       "chapter": 2,
       "section": "2.3",
-      "planePosition": { "real": -0.2, "imaginary": 0.1 },
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.1
+      },
       "formalStatement": "The amplitude A of a sinusoidal function y = A*sin(theta + phi) is the maximum displacement from the mean position. A >= 0, and |y| <= A for all theta.",
       "computationalForm": "For y = A*sin(omega*t + phi): amplitude = A, maximum value = A, minimum value = -A, peak-to-peak = 2A.",
-      "prerequisites": ["Sine function"],
+      "prerequisites": [
+        "Sine function"
+      ],
       "dependencies": [
         {
           "target": "perception-sine-function",
@@ -571,19 +977,38 @@
           "description": "Amplitude scales the sine function"
         }
       ],
-      "enables": ["waves-wave-function", "waves-simple-harmonic-motion", "waves-constructive-destructive-interference"],
+      "enables": [
+        "waves-wave-function",
+        "waves-simple-harmonic-motion",
+        "waves-constructive-destructive-interference"
+      ],
       "compositionRules": [
         {
           "with": "perception-phase",
           "yields": "Complete sinusoidal description: y = A*sin(theta + phi)",
           "type": "parallel",
-          "conditions": ["When specifying the full shape of a sinusoidal signal"],
+          "conditions": [
+            "When specifying the full shape of a sinusoidal signal"
+          ],
           "example": "A sound wave with amplitude 0.1 Pa and phase shift pi/4"
         }
       ],
-      "applicabilityPatterns": ["measuring the strength or intensity of an oscillation", "determining the peak displacement of a wave"],
-      "keywords": ["amplitude", "peak", "maximum displacement", "strength", "A"],
-      "tags": ["trigonometry", "waves", "measurement"],
+      "applicabilityPatterns": [
+        "measuring the strength or intensity of an oscillation",
+        "determining the peak displacement of a wave"
+      ],
+      "keywords": [
+        "amplitude",
+        "peak",
+        "maximum displacement",
+        "strength",
+        "A"
+      ],
+      "tags": [
+        "trigonometry",
+        "waves",
+        "measurement"
+      ],
       "buildLabs": []
     },
     {
@@ -593,10 +1018,16 @@
       "domain": "perception",
       "chapter": 2,
       "section": "2.3",
-      "planePosition": { "real": -0.2, "imaginary": 0.15 },
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.15
+      },
       "formalStatement": "The phase phi of a sinusoidal function y = A*sin(omega*t + phi) is the angular offset that determines where in the cycle the function begins at t = 0. Phase is measured in radians.",
       "computationalForm": "Phase shift in time: delta_t = phi/omega. Two signals are in phase when phi_1 = phi_2, out of phase by pi when they differ by pi radians.",
-      "prerequisites": ["Sine function", "Radian measure"],
+      "prerequisites": [
+        "Sine function",
+        "Radian measure"
+      ],
       "dependencies": [
         {
           "target": "perception-sine-function",
@@ -611,19 +1042,38 @@
           "description": "Phase is measured in radians"
         }
       ],
-      "enables": ["waves-wave-function", "waves-phasor-representation", "waves-constructive-destructive-interference"],
+      "enables": [
+        "waves-wave-function",
+        "waves-phasor-representation",
+        "waves-constructive-destructive-interference"
+      ],
       "compositionRules": [
         {
           "with": "perception-amplitude",
           "yields": "Complete sinusoidal specification: A*sin(omega*t + phi)",
           "type": "parallel",
-          "conditions": ["When describing the initial state and shape of an oscillation"],
+          "conditions": [
+            "When describing the initial state and shape of an oscillation"
+          ],
           "example": "A pendulum released from maximum displacement has phase phi = pi/2"
         }
       ],
-      "applicabilityPatterns": ["describing the timing offset between two periodic signals", "determining when a periodic process starts within its cycle"],
-      "keywords": ["phase", "phase shift", "offset", "initial angle", "phi"],
-      "tags": ["trigonometry", "waves", "timing"],
+      "applicabilityPatterns": [
+        "describing the timing offset between two periodic signals",
+        "determining when a periodic process starts within its cycle"
+      ],
+      "keywords": [
+        "phase",
+        "phase shift",
+        "offset",
+        "initial angle",
+        "phi"
+      ],
+      "tags": [
+        "trigonometry",
+        "waves",
+        "timing"
+      ],
       "buildLabs": []
     },
     {
@@ -633,43 +1083,67 @@
       "domain": "perception",
       "chapter": 2,
       "section": "2.3",
-      "planePosition": { "real": -0.4, "imaginary": 0.3 },
+      "planePosition": {
+        "real": -0.4,
+        "imaginary": 0.3
+      },
       "formalStatement": "For all theta in R: sin^2(theta) + cos^2(theta) = 1. This follows directly from the unit circle definition: the point (cos(theta), sin(theta)) lies on x^2 + y^2 = 1.",
       "computationalForm": "sin^2(theta) = 1 - cos^2(theta); cos^2(theta) = 1 - sin^2(theta). Used to convert between sin and cos in expressions.",
-      "prerequisites": ["Sine function", "Cosine function", "Unit circle"],
+      "prerequisites": [
+        "Sine function",
+        "Cosine function",
+        "Unit circle"
+      ],
       "dependencies": [
         {
           "target": "perception-sine-function",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Identity involves sine"
         },
         {
           "target": "perception-cosine-function",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Identity involves cosine"
         },
         {
           "target": "perception-unit-circle",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "The identity follows from the unit circle equation"
         }
       ],
-      "enables": ["perception-double-angle-formulas", "perception-pythagorean-theorem", "waves-wave-function"],
+      "enables": [
+        "perception-double-angle-formulas",
+        "perception-pythagorean-theorem",
+        "waves-wave-function"
+      ],
       "compositionRules": [
         {
           "with": "perception-pythagorean-theorem",
           "yields": "Connection between algebraic identity and geometric theorem",
           "type": "parallel",
-          "conditions": ["When the same a^2 + b^2 = c^2 pattern appears in both trig and geometry"],
+          "conditions": [
+            "When the same a^2 + b^2 = c^2 pattern appears in both trig and geometry"
+          ],
           "example": "In a right triangle with hypotenuse 1: (opposite)^2 + (adjacent)^2 = 1"
         }
       ],
-      "applicabilityPatterns": ["simplifying expressions involving sin^2 and cos^2", "converting between sine and cosine in trigonometric equations"],
-      "keywords": ["Pythagorean identity", "sin^2 + cos^2 = 1", "trig identity"],
-      "tags": ["trigonometry", "identity", "foundational"],
+      "applicabilityPatterns": [
+        "simplifying expressions involving sin^2 and cos^2",
+        "converting between sine and cosine in trigonometric equations"
+      ],
+      "keywords": [
+        "Pythagorean identity",
+        "sin^2 + cos^2 = 1",
+        "trig identity"
+      ],
+      "tags": [
+        "trigonometry",
+        "identity",
+        "foundational"
+      ],
       "buildLabs": []
     },
     {
@@ -679,10 +1153,17 @@
       "domain": "perception",
       "chapter": 2,
       "section": "2.4",
-      "planePosition": { "real": -0.3, "imaginary": 0.35 },
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.35
+      },
       "formalStatement": "sin(2*theta) = 2*sin(theta)*cos(theta). cos(2*theta) = cos^2(theta) - sin^2(theta) = 2*cos^2(theta) - 1 = 1 - 2*sin^2(theta).",
       "computationalForm": "Half-angle: sin^2(theta) = (1 - cos(2*theta))/2, cos^2(theta) = (1 + cos(2*theta))/2. These simplify integration of sin^2 and cos^2.",
-      "prerequisites": ["Sine function", "Cosine function", "Pythagorean identity"],
+      "prerequisites": [
+        "Sine function",
+        "Cosine function",
+        "Pythagorean identity"
+      ],
       "dependencies": [
         {
           "target": "perception-sine-function",
@@ -703,19 +1184,37 @@
           "description": "Alternative forms derive from sin^2 + cos^2 = 1"
         }
       ],
-      "enables": ["waves-sum-to-product", "waves-product-to-sum", "change-integration-by-parts"],
+      "enables": [
+        "waves-sum-to-product",
+        "waves-product-to-sum",
+        "change-integration-by-parts"
+      ],
       "compositionRules": [
         {
           "with": "perception-pythagorean-identity",
           "yields": "Power-reduction formulas for integration",
           "type": "sequential",
-          "conditions": ["When integrating even powers of sin or cos"],
+          "conditions": [
+            "When integrating even powers of sin or cos"
+          ],
           "example": "integral sin^2(x)dx = integral (1-cos(2x))/2 dx = x/2 - sin(2x)/4 + C"
         }
       ],
-      "applicabilityPatterns": ["reducing powers of trigonometric functions in integrals", "relating frequencies: converting between single and double frequency expressions"],
-      "keywords": ["double angle", "half angle", "power reduction", "2*theta"],
-      "tags": ["trigonometry", "identity", "algebra"],
+      "applicabilityPatterns": [
+        "reducing powers of trigonometric functions in integrals",
+        "relating frequencies: converting between single and double frequency expressions"
+      ],
+      "keywords": [
+        "double angle",
+        "half angle",
+        "power reduction",
+        "2*theta"
+      ],
+      "tags": [
+        "trigonometry",
+        "identity",
+        "algebra"
+      ],
       "buildLabs": []
     },
     {
@@ -725,43 +1224,70 @@
       "domain": "perception",
       "chapter": 2,
       "section": "2.5",
-      "planePosition": { "real": -0.1, "imaginary": 0.5 },
+      "planePosition": {
+        "real": -0.1,
+        "imaginary": 0.5
+      },
       "formalStatement": "For all theta in R: e^(i*theta) = cos(theta) + i*sin(theta). The special case theta = pi gives Euler's identity: e^(i*pi) + 1 = 0.",
       "computationalForm": "cos(theta) = Re(e^(i*theta)) = (e^(i*theta) + e^(-i*theta))/2. sin(theta) = Im(e^(i*theta)) = (e^(i*theta) - e^(-i*theta))/(2i).",
-      "prerequisites": ["Complex numbers", "Sine function", "Cosine function"],
+      "prerequisites": [
+        "Complex numbers",
+        "Sine function",
+        "Cosine function"
+      ],
       "dependencies": [
         {
           "target": "perception-complex-numbers",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Euler's formula connects the exponential function with complex trigonometry"
         },
         {
           "target": "perception-sine-function",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Sine appears in the formula"
         },
         {
           "target": "perception-cosine-function",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Cosine appears in the formula"
         }
       ],
-      "enables": ["waves-phasor-representation", "waves-fourier-series-preview", "change-taylor-series"],
+      "enables": [
+        "waves-phasor-representation",
+        "waves-fourier-series-preview",
+        "change-taylor-series",
+        "change-maclaurin-series"
+      ],
       "compositionRules": [
         {
           "with": "perception-unit-circle",
           "yields": "Every point on the unit circle as e^(i*theta), unifying algebra and geometry",
           "type": "parallel",
-          "conditions": ["When switching between trigonometric and exponential representations"],
+          "conditions": [
+            "When switching between trigonometric and exponential representations"
+          ],
           "example": "e^(i*pi/3) = cos(pi/3) + i*sin(pi/3) = 1/2 + i*sqrt(3)/2"
         }
       ],
-      "applicabilityPatterns": ["converting between trigonometric and exponential forms of complex numbers", "simplifying products and powers of trigonometric expressions using exponentials"],
-      "keywords": ["Euler", "e^(i*theta)", "complex exponential", "Euler's identity"],
-      "tags": ["foundational", "identity", "complex-analysis", "unifying"],
+      "applicabilityPatterns": [
+        "converting between trigonometric and exponential forms of complex numbers",
+        "simplifying products and powers of trigonometric expressions using exponentials"
+      ],
+      "keywords": [
+        "Euler",
+        "e^(i*theta)",
+        "complex exponential",
+        "Euler's identity"
+      ],
+      "tags": [
+        "foundational",
+        "identity",
+        "complex-analysis",
+        "unifying"
+      ],
       "buildLabs": []
     },
     {
@@ -771,21 +1297,28 @@
       "domain": "perception",
       "chapter": 2,
       "section": "2.3",
-      "planePosition": { "real": -0.4, "imaginary": 0.2 },
+      "planePosition": {
+        "real": -0.4,
+        "imaginary": 0.2
+      },
       "formalStatement": "sin(theta + 2*pi) = sin(theta) and cos(theta + 2*pi) = cos(theta) for all theta. The fundamental period of sin and cos is 2*pi. The fundamental period of tan is pi.",
       "computationalForm": "For periodicity T: f(x + T) = f(x) for all x. sin/cos: T = 2*pi. tan: T = pi. Frequency f = 1/T, angular frequency omega = 2*pi/T.",
-      "prerequisites": ["Sine function", "Cosine function", "Unit circle"],
+      "prerequisites": [
+        "Sine function",
+        "Cosine function",
+        "Unit circle"
+      ],
       "dependencies": [
         {
           "target": "perception-sine-function",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Periodicity is a fundamental property of sine"
         },
         {
           "target": "perception-cosine-function",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Periodicity is a fundamental property of cosine"
         },
         {
@@ -795,19 +1328,38 @@
           "description": "Periodicity follows from the circular nature of the unit circle"
         }
       ],
-      "enables": ["waves-frequency", "waves-period", "waves-wave-function"],
+      "enables": [
+        "waves-frequency",
+        "waves-period",
+        "waves-wave-function"
+      ],
       "compositionRules": [
         {
           "with": "perception-unit-circle",
           "yields": "Understanding that periodicity arises from the circular motion returning to its starting point",
           "type": "nested",
-          "conditions": ["When explaining why trigonometric functions repeat"],
+          "conditions": [
+            "When explaining why trigonometric functions repeat"
+          ],
           "example": "After rotating 2*pi radians around the unit circle, you return to the same point"
         }
       ],
-      "applicabilityPatterns": ["determining the repetition interval of a periodic signal", "simplifying trigonometric expressions by reducing angles modulo the period"],
-      "keywords": ["period", "periodic", "2*pi", "cycle", "repetition"],
-      "tags": ["trigonometry", "theorem", "periodic"],
+      "applicabilityPatterns": [
+        "determining the repetition interval of a periodic signal",
+        "simplifying trigonometric expressions by reducing angles modulo the period"
+      ],
+      "keywords": [
+        "period",
+        "periodic",
+        "2*pi",
+        "cycle",
+        "repetition"
+      ],
+      "tags": [
+        "trigonometry",
+        "theorem",
+        "periodic"
+      ],
       "buildLabs": []
     },
     {
@@ -817,10 +1369,16 @@
       "domain": "perception",
       "chapter": 3,
       "section": "3.1",
-      "planePosition": { "real": -0.3, "imaginary": 0.3 },
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.3
+      },
       "formalStatement": "In a right triangle with legs a and b and hypotenuse c: a^2 + b^2 = c^2. Conversely, if a^2 + b^2 = c^2 for a triangle with sides a, b, c, then the triangle is right-angled.",
       "computationalForm": "c = sqrt(a^2 + b^2). Given any two sides, find the third: a = sqrt(c^2 - b^2). Verify right angle: check a^2 + b^2 = c^2.",
-      "prerequisites": ["Real numbers", "Unit circle"],
+      "prerequisites": [
+        "Real numbers",
+        "Unit circle"
+      ],
       "dependencies": [
         {
           "target": "perception-real-numbers",
@@ -835,19 +1393,39 @@
           "description": "The Pythagorean identity sin^2 + cos^2 = 1 is the unit circle case of the Pythagorean theorem"
         }
       ],
-      "enables": ["perception-distance-formula", "perception-inner-product", "perception-cauchy-schwarz", "perception-law-of-cosines", "change-arc-length"],
+      "enables": [
+        "perception-distance-formula",
+        "perception-inner-product",
+        "perception-cauchy-schwarz",
+        "perception-law-of-cosines",
+        "change-arc-length"
+      ],
       "compositionRules": [
         {
           "with": "perception-distance-formula",
           "yields": "Euclidean distance: d = sqrt((x2-x1)^2 + (y2-y1)^2)",
           "type": "sequential",
-          "conditions": ["When computing distance between two points in a plane"],
+          "conditions": [
+            "When computing distance between two points in a plane"
+          ],
           "example": "Distance from (1,2) to (4,6) = sqrt(9+16) = sqrt(25) = 5"
         }
       ],
-      "applicabilityPatterns": ["computing the length of the hypotenuse in a right triangle", "finding distance between two points in Euclidean space"],
-      "keywords": ["Pythagorean", "right triangle", "a^2+b^2=c^2", "hypotenuse"],
-      "tags": ["geometry", "theorem", "foundational"],
+      "applicabilityPatterns": [
+        "computing the length of the hypotenuse in a right triangle",
+        "finding distance between two points in Euclidean space"
+      ],
+      "keywords": [
+        "Pythagorean",
+        "right triangle",
+        "a^2+b^2=c^2",
+        "hypotenuse"
+      ],
+      "tags": [
+        "geometry",
+        "theorem",
+        "foundational"
+      ],
       "buildLabs": []
     },
     {
@@ -857,15 +1435,21 @@
       "domain": "perception",
       "chapter": 3,
       "section": "3.1",
-      "planePosition": { "real": -0.2, "imaginary": 0.2 },
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.2
+      },
       "formalStatement": "The Euclidean distance between points P = (x1, y1) and Q = (x2, y2) in R^2 is d(P,Q) = sqrt((x2-x1)^2 + (y2-y1)^2). In R^n: d(P,Q) = sqrt(sum_i (q_i - p_i)^2).",
       "computationalForm": "d = sqrt((x2-x1)^2 + (y2-y1)^2). Satisfies metric axioms: d(P,Q) >= 0, d(P,Q) = 0 iff P=Q, d(P,Q) = d(Q,P), d(P,R) <= d(P,Q) + d(Q,R).",
-      "prerequisites": ["Pythagorean theorem", "Real numbers"],
+      "prerequisites": [
+        "Pythagorean theorem",
+        "Real numbers"
+      ],
       "dependencies": [
         {
           "target": "perception-pythagorean-theorem",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "The distance formula is a direct application of the Pythagorean theorem"
         },
         {
@@ -875,19 +1459,39 @@
           "description": "Coordinates and distances are real numbers"
         }
       ],
-      "enables": ["perception-norm", "perception-inner-product", "change-optimization", "change-arc-length"],
+      "enables": [
+        "perception-norm",
+        "perception-inner-product",
+        "change-optimization",
+        "change-arc-length"
+      ],
       "compositionRules": [
         {
           "with": "perception-absolute-value",
           "yields": "Unified distance metric: in 1D it reduces to |a-b|, in 2D it's the Pythagorean distance",
           "type": "sequential",
-          "conditions": ["When generalizing 1D distance to higher dimensions"],
+          "conditions": [
+            "When generalizing 1D distance to higher dimensions"
+          ],
           "example": "In R^1: d(a,b) = sqrt((a-b)^2) = |a-b|"
         }
       ],
-      "applicabilityPatterns": ["measuring how far apart two points are in a plane or higher-dimensional space", "computing the length of a line segment given its endpoints"],
-      "keywords": ["distance", "Euclidean", "metric", "length", "separation"],
-      "tags": ["geometry", "metric", "foundational"],
+      "applicabilityPatterns": [
+        "measuring how far apart two points are in a plane or higher-dimensional space",
+        "computing the length of a line segment given its endpoints"
+      ],
+      "keywords": [
+        "distance",
+        "Euclidean",
+        "metric",
+        "length",
+        "separation"
+      ],
+      "tags": [
+        "geometry",
+        "metric",
+        "foundational"
+      ],
       "buildLabs": []
     },
     {
@@ -897,10 +1501,17 @@
       "domain": "perception",
       "chapter": 3,
       "section": "3.2",
-      "planePosition": { "real": -0.2, "imaginary": 0.35 },
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.35
+      },
       "formalStatement": "The inner product (dot product) of vectors u = (u1,...,un) and v = (v1,...,vn) in R^n is u . v = sum_i u_i * v_i = |u||v|cos(theta), where theta is the angle between u and v.",
       "computationalForm": "u . v = u1*v1 + u2*v2 + ... + un*vn. |u| = sqrt(u.u). cos(theta) = (u.v)/(|u||v|). u perp v iff u.v = 0.",
-      "prerequisites": ["Real numbers", "Pythagorean theorem", "Cosine function"],
+      "prerequisites": [
+        "Real numbers",
+        "Pythagorean theorem",
+        "Cosine function"
+      ],
       "dependencies": [
         {
           "target": "perception-real-numbers",
@@ -921,19 +1532,41 @@
           "description": "The geometric form uses cosine of the angle between vectors"
         }
       ],
-      "enables": ["perception-orthogonality", "perception-norm", "perception-projection", "perception-cauchy-schwarz", "change-directional-derivative"],
+      "enables": [
+        "perception-orthogonality",
+        "perception-norm",
+        "perception-projection",
+        "perception-cauchy-schwarz",
+        "change-directional-derivative",
+        "waves-modal-analysis"
+      ],
       "compositionRules": [
         {
           "with": "perception-cosine-function",
           "yields": "Angle between vectors: theta = arccos(u.v / (|u||v|))",
           "type": "nested",
-          "conditions": ["When finding the angle between two direction vectors"],
+          "conditions": [
+            "When finding the angle between two direction vectors"
+          ],
           "example": "Angle between (1,0) and (1,1) = arccos(1/sqrt(2)) = pi/4"
         }
       ],
-      "applicabilityPatterns": ["computing the angle between two vectors", "finding the component of one vector along another direction"],
-      "keywords": ["dot product", "inner product", "angle", "projection", "scalar product"],
-      "tags": ["algebra", "geometry", "linear-algebra"],
+      "applicabilityPatterns": [
+        "computing the angle between two vectors",
+        "finding the component of one vector along another direction"
+      ],
+      "keywords": [
+        "dot product",
+        "inner product",
+        "angle",
+        "projection",
+        "scalar product"
+      ],
+      "tags": [
+        "algebra",
+        "geometry",
+        "linear-algebra"
+      ],
       "buildLabs": []
     },
     {
@@ -943,31 +1576,55 @@
       "domain": "perception",
       "chapter": 3,
       "section": "3.2",
-      "planePosition": { "real": -0.3, "imaginary": 0.4 },
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.4
+      },
       "formalStatement": "Two vectors u and v are orthogonal (perpendicular) if and only if u . v = 0. An orthogonal set is a set of vectors that are pairwise orthogonal. An orthonormal set is orthogonal with each vector having unit length.",
       "computationalForm": "Test: u . v = 0 implies orthogonality. Orthonormal basis: {e1,...,en} where ei . ej = delta_ij (Kronecker delta).",
-      "prerequisites": ["Inner product"],
+      "prerequisites": [
+        "Inner product"
+      ],
       "dependencies": [
         {
           "target": "perception-inner-product",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Orthogonality is defined via the inner product being zero"
         }
       ],
-      "enables": ["perception-projection", "perception-orthogonal-decomposition", "waves-standing-wave-formation"],
+      "enables": [
+        "perception-projection",
+        "perception-orthogonal-decomposition",
+        "waves-standing-wave-formation"
+      ],
       "compositionRules": [
         {
           "with": "perception-projection",
           "yields": "Orthogonal decomposition: v = proj_u(v) + (v - proj_u(v)), where the two components are orthogonal",
           "type": "sequential",
-          "conditions": ["When decomposing a vector into parallel and perpendicular components"],
+          "conditions": [
+            "When decomposing a vector into parallel and perpendicular components"
+          ],
           "example": "Decomposing velocity into components along and perpendicular to a slope"
         }
       ],
-      "applicabilityPatterns": ["testing whether two directions are perpendicular", "constructing coordinate systems where axes are mutually perpendicular"],
-      "keywords": ["orthogonal", "perpendicular", "orthonormal", "independent", "right angle"],
-      "tags": ["geometry", "linear-algebra", "foundational"],
+      "applicabilityPatterns": [
+        "testing whether two directions are perpendicular",
+        "constructing coordinate systems where axes are mutually perpendicular"
+      ],
+      "keywords": [
+        "orthogonal",
+        "perpendicular",
+        "orthonormal",
+        "independent",
+        "right angle"
+      ],
+      "tags": [
+        "geometry",
+        "linear-algebra",
+        "foundational"
+      ],
       "buildLabs": []
     },
     {
@@ -977,15 +1634,21 @@
       "domain": "perception",
       "chapter": 3,
       "section": "3.2",
-      "planePosition": { "real": -0.2, "imaginary": 0.25 },
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.25
+      },
       "formalStatement": "The Euclidean norm (magnitude, length) of a vector v = (v1,...,vn) is ||v|| = sqrt(v . v) = sqrt(v1^2 + ... + vn^2). It satisfies: ||v|| >= 0, ||v|| = 0 iff v = 0, ||c*v|| = |c|*||v||, and the triangle inequality ||u+v|| <= ||u|| + ||v||.",
       "computationalForm": "||v|| = sqrt(v1^2 + v2^2 + ... + vn^2). Unit vector: v_hat = v / ||v||. ||v||^2 = v . v.",
-      "prerequisites": ["Inner product", "Distance formula"],
+      "prerequisites": [
+        "Inner product",
+        "Distance formula"
+      ],
       "dependencies": [
         {
           "target": "perception-inner-product",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Norm is defined as the square root of the inner product with itself"
         },
         {
@@ -995,19 +1658,38 @@
           "description": "Norm of (P-Q) equals distance from P to Q"
         }
       ],
-      "enables": ["perception-projection", "perception-cauchy-schwarz", "change-gradient-descent-preview"],
+      "enables": [
+        "perception-projection",
+        "perception-cauchy-schwarz",
+        "change-gradient-descent-preview"
+      ],
       "compositionRules": [
         {
           "with": "perception-inner-product",
           "yields": "Normalized inner product (cosine similarity): cos(theta) = (u.v)/(||u|| ||v||)",
           "type": "nested",
-          "conditions": ["When comparing directions independent of magnitude"],
+          "conditions": [
+            "When comparing directions independent of magnitude"
+          ],
           "example": "Cosine similarity between document vectors in information retrieval"
         }
       ],
-      "applicabilityPatterns": ["computing the length or magnitude of a vector", "normalizing a vector to unit length"],
-      "keywords": ["norm", "magnitude", "length", "Euclidean norm", "unit vector"],
-      "tags": ["geometry", "linear-algebra", "measurement"],
+      "applicabilityPatterns": [
+        "computing the length or magnitude of a vector",
+        "normalizing a vector to unit length"
+      ],
+      "keywords": [
+        "norm",
+        "magnitude",
+        "length",
+        "Euclidean norm",
+        "unit vector"
+      ],
+      "tags": [
+        "geometry",
+        "linear-algebra",
+        "measurement"
+      ],
       "buildLabs": []
     },
     {
@@ -1017,15 +1699,22 @@
       "domain": "perception",
       "chapter": 3,
       "section": "3.3",
-      "planePosition": { "real": -0.2, "imaginary": 0.3 },
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.3
+      },
       "formalStatement": "The scalar projection of v onto u is comp_u(v) = (v . u) / ||u||. The vector projection is proj_u(v) = ((v . u) / (u . u)) * u. The rejection (orthogonal component) is v - proj_u(v).",
       "computationalForm": "proj_u(v) = ((v.u)/(u.u)) * u. |comp_u(v)| = |v.u|/||u||. Verify: proj_u(v) . (v - proj_u(v)) = 0.",
-      "prerequisites": ["Inner product", "Norm", "Orthogonality"],
+      "prerequisites": [
+        "Inner product",
+        "Norm",
+        "Orthogonality"
+      ],
       "dependencies": [
         {
           "target": "perception-inner-product",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Projection formula uses the inner product"
         },
         {
@@ -1041,19 +1730,37 @@
           "description": "Projection produces orthogonal decomposition"
         }
       ],
-      "enables": ["perception-orthogonal-decomposition", "change-directional-derivative"],
+      "enables": [
+        "perception-orthogonal-decomposition",
+        "change-directional-derivative"
+      ],
       "compositionRules": [
         {
           "with": "perception-orthogonality",
           "yields": "Orthogonal decomposition: v = proj_u(v) + (v - proj_u(v))",
           "type": "sequential",
-          "conditions": ["When decomposing a vector into components along and perpendicular to a direction"],
+          "conditions": [
+            "When decomposing a vector into components along and perpendicular to a direction"
+          ],
           "example": "Work done by force F along displacement d: W = proj_d(F) * ||d|| = F.d"
         }
       ],
-      "applicabilityPatterns": ["finding the component of one vector along another direction", "computing work done by a force in the direction of displacement"],
-      "keywords": ["projection", "component", "shadow", "decomposition", "proj"],
-      "tags": ["geometry", "linear-algebra", "computation"],
+      "applicabilityPatterns": [
+        "finding the component of one vector along another direction",
+        "computing work done by a force in the direction of displacement"
+      ],
+      "keywords": [
+        "projection",
+        "component",
+        "shadow",
+        "decomposition",
+        "proj"
+      ],
+      "tags": [
+        "geometry",
+        "linear-algebra",
+        "computation"
+      ],
       "buildLabs": []
     },
     {
@@ -1063,37 +1770,60 @@
       "domain": "perception",
       "chapter": 3,
       "section": "3.3",
-      "planePosition": { "real": -0.2, "imaginary": 0.35 },
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.35
+      },
       "formalStatement": "Any vector v in R^n can be decomposed into the sum of its projection onto a subspace W and its component orthogonal to W: v = proj_W(v) + perp_W(v), where proj_W(v) in W and perp_W(v) in W^perp.",
       "computationalForm": "For orthogonal basis {u1,...,uk} of W: proj_W(v) = sum_i ((v.ui)/(ui.ui)) * ui. Residual: perp_W(v) = v - proj_W(v).",
-      "prerequisites": ["Projection", "Orthogonality"],
+      "prerequisites": [
+        "Projection",
+        "Orthogonality"
+      ],
       "dependencies": [
         {
           "target": "perception-projection",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "Orthogonal decomposition is built from repeated projection"
         },
         {
           "target": "perception-orthogonality",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "The decomposition produces orthogonal components"
         }
       ],
-      "enables": ["waves-modal-analysis", "waves-fourier-series-preview"],
+      "enables": [
+        "waves-modal-analysis",
+        "waves-fourier-series-preview"
+      ],
       "compositionRules": [
         {
           "with": "perception-inner-product",
           "yields": "Gram-Schmidt process: constructing orthonormal basis from arbitrary basis",
           "type": "sequential",
-          "conditions": ["When an orthogonal basis is needed from a non-orthogonal one"],
+          "conditions": [
+            "When an orthogonal basis is needed from a non-orthogonal one"
+          ],
           "example": "Gram-Schmidt: given {v1, v2}, produce orthogonal {u1, u2 = v2 - proj_{u1}(v2)}"
         }
       ],
-      "applicabilityPatterns": ["breaking a signal into independent orthogonal components", "removing the component of a vector along an unwanted direction"],
-      "keywords": ["decomposition", "orthogonal complement", "Gram-Schmidt", "perpendicular component"],
-      "tags": ["linear-algebra", "technique", "computation"],
+      "applicabilityPatterns": [
+        "breaking a signal into independent orthogonal components",
+        "removing the component of a vector along an unwanted direction"
+      ],
+      "keywords": [
+        "decomposition",
+        "orthogonal complement",
+        "Gram-Schmidt",
+        "perpendicular component"
+      ],
+      "tags": [
+        "linear-algebra",
+        "technique",
+        "computation"
+      ],
       "buildLabs": []
     },
     {
@@ -1103,37 +1833,59 @@
       "domain": "perception",
       "chapter": 3,
       "section": "3.4",
-      "planePosition": { "real": -0.3, "imaginary": 0.5 },
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.5
+      },
       "formalStatement": "For all vectors u, v in an inner product space: |u . v| <= ||u|| * ||v||. Equality holds if and only if u and v are linearly dependent (parallel).",
       "computationalForm": "|u . v| <= ||u|| * ||v||. Equivalent: (sum u_i * v_i)^2 <= (sum u_i^2)(sum v_i^2). Verify equality: check if u = c*v for some scalar c.",
-      "prerequisites": ["Inner product", "Norm"],
+      "prerequisites": [
+        "Inner product",
+        "Norm"
+      ],
       "dependencies": [
         {
           "target": "perception-inner-product",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "The inequality bounds the inner product"
         },
         {
           "target": "perception-norm",
           "type": "requires",
-          "strength": 1.0,
+          "strength": 1,
           "description": "The bound involves norms of both vectors"
         }
       ],
-      "enables": ["perception-law-of-cosines"],
+      "enables": [
+        "perception-law-of-cosines"
+      ],
       "compositionRules": [
         {
           "with": "perception-triangle-inequality",
           "yields": "Triangle inequality for vectors: ||u+v|| <= ||u|| + ||v|| (follows from Cauchy-Schwarz)",
           "type": "sequential",
-          "conditions": ["When proving the triangle inequality in an inner product space"],
+          "conditions": [
+            "When proving the triangle inequality in an inner product space"
+          ],
           "example": "||u+v||^2 = ||u||^2 + 2(u.v) + ||v||^2 <= (||u|| + ||v||)^2"
         }
       ],
-      "applicabilityPatterns": ["bounding the correlation between two quantities", "proving that the cosine of an angle is between -1 and 1"],
-      "keywords": ["Cauchy-Schwarz", "inequality", "bound", "inner product bound"],
-      "tags": ["analysis", "inequality", "foundational"],
+      "applicabilityPatterns": [
+        "bounding the correlation between two quantities",
+        "proving that the cosine of an angle is between -1 and 1"
+      ],
+      "keywords": [
+        "Cauchy-Schwarz",
+        "inequality",
+        "bound",
+        "inner product bound"
+      ],
+      "tags": [
+        "analysis",
+        "inequality",
+        "foundational"
+      ],
       "buildLabs": []
     },
     {
@@ -1143,10 +1895,16 @@
       "domain": "perception",
       "chapter": 3,
       "section": "3.4",
-      "planePosition": { "real": -0.3, "imaginary": 0.4 },
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.4
+      },
       "formalStatement": "In a triangle with sides a, b, c and angle C opposite side c: c^2 = a^2 + b^2 - 2*a*b*cos(C). When C = pi/2, this reduces to the Pythagorean theorem.",
       "computationalForm": "c = sqrt(a^2 + b^2 - 2*a*b*cos(C)). Solve for angle: cos(C) = (a^2 + b^2 - c^2)/(2*a*b).",
-      "prerequisites": ["Pythagorean theorem", "Cosine function"],
+      "prerequisites": [
+        "Pythagorean theorem",
+        "Cosine function"
+      ],
       "dependencies": [
         {
           "target": "perception-pythagorean-theorem",
@@ -1167,19 +1925,783 @@
           "description": "Cauchy-Schwarz ensures the cosine term is well-defined"
         }
       ],
-      "enables": ["waves-superposition-principle"],
+      "enables": [
+        "waves-superposition-principle"
+      ],
       "compositionRules": [
         {
           "with": "perception-inner-product",
           "yields": "Vector form: ||u-v||^2 = ||u||^2 + ||v||^2 - 2(u.v), connecting dot product to geometric distance",
           "type": "nested",
-          "conditions": ["When computing distance between vector endpoints"],
+          "conditions": [
+            "When computing distance between vector endpoints"
+          ],
           "example": "||u-v||^2 = (u-v).(u-v) = u.u - 2u.v + v.v"
         }
       ],
-      "applicabilityPatterns": ["finding the third side of a triangle when two sides and the included angle are known", "computing the angle between two sides of a triangle when all three sides are known"],
-      "keywords": ["law of cosines", "triangle", "generalization", "non-right triangle"],
-      "tags": ["geometry", "theorem", "trigonometry"],
+      "applicabilityPatterns": [
+        "finding the third side of a triangle when two sides and the included angle are known",
+        "computing the angle between two sides of a triangle when all three sides are known"
+      ],
+      "keywords": [
+        "law of cosines",
+        "triangle",
+        "generalization",
+        "non-right triangle"
+      ],
+      "tags": [
+        "geometry",
+        "theorem",
+        "trigonometry"
+      ],
+      "buildLabs": []
+    },
+    {
+      "id": "perception-reciprocal-trig",
+      "name": "Reciprocal Trigonometric Functions",
+      "type": "definition",
+      "domain": "perception",
+      "chapter": 2,
+      "section": "2.2",
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.3
+      },
+      "formalStatement": "sec(theta) = 1/cos(theta), csc(theta) = 1/sin(theta), cot(theta) = 1/tan(theta) = cos(theta)/sin(theta). These are defined wherever their denominators are nonzero.",
+      "computationalForm": "sec(0) = 1, csc(pi/2) = 1, cot(pi/4) = 1. Identities: 1 + tan^2 = sec^2, 1 + cot^2 = csc^2.",
+      "prerequisites": [
+        "Sine function",
+        "Cosine function",
+        "Tangent function"
+      ],
+      "dependencies": [
+        {
+          "target": "perception-sine-function",
+          "type": "requires",
+          "strength": 1,
+          "description": "csc is reciprocal of sine"
+        },
+        {
+          "target": "perception-cosine-function",
+          "type": "requires",
+          "strength": 1,
+          "description": "sec is reciprocal of cosine"
+        },
+        {
+          "target": "perception-tangent-function",
+          "type": "requires",
+          "strength": 1,
+          "description": "cot is reciprocal of tangent"
+        }
+      ],
+      "enables": [
+        "change-derivative-of-trig"
+      ],
+      "compositionRules": [
+        {
+          "with": "perception-pythagorean-identity",
+          "yields": "Extended Pythagorean identities: 1+tan^2=sec^2 and 1+cot^2=csc^2",
+          "type": "parallel",
+          "conditions": [
+            "When simplifying expressions with secant or cosecant"
+          ],
+          "example": "integral sec^2(x)dx = tan(x)+C follows from the identity"
+        }
+      ],
+      "applicabilityPatterns": [
+        "computing reciprocals of trig functions in calculus",
+        "simplifying expressions involving sec, csc, or cot"
+      ],
+      "keywords": [
+        "secant",
+        "cosecant",
+        "cotangent",
+        "reciprocal"
+      ],
+      "tags": [
+        "trigonometry",
+        "definition"
+      ],
+      "buildLabs": []
+    },
+    {
+      "id": "perception-inverse-trig",
+      "name": "Inverse Trigonometric Functions",
+      "type": "definition",
+      "domain": "perception",
+      "chapter": 2,
+      "section": "2.4",
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.35
+      },
+      "formalStatement": "arcsin: [-1,1] -> [-pi/2, pi/2], arccos: [-1,1] -> [0, pi], arctan: R -> (-pi/2, pi/2). These are the inverses of the restricted trig functions.",
+      "computationalForm": "arcsin(sin(x)) = x for x in [-pi/2,pi/2]. d/dx arcsin(x) = 1/sqrt(1-x^2). d/dx arctan(x) = 1/(1+x^2). d/dx arccos(x) = -1/sqrt(1-x^2).",
+      "prerequisites": [
+        "Sine function",
+        "Cosine function",
+        "Tangent function"
+      ],
+      "dependencies": [
+        {
+          "target": "perception-sine-function",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "arcsin is the inverse of sine"
+        },
+        {
+          "target": "perception-cosine-function",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "arccos is the inverse of cosine"
+        },
+        {
+          "target": "perception-tangent-function",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "arctan is the inverse of tangent"
+        }
+      ],
+      "enables": [
+        "change-derivative-of-trig"
+      ],
+      "compositionRules": [
+        {
+          "with": "perception-inner-product",
+          "yields": "Angle between vectors: theta = arccos(u.v/(|u||v|))",
+          "type": "nested",
+          "conditions": [
+            "When computing the angle between two vectors"
+          ],
+          "example": "Angle between (1,0) and (0,1) = arccos(0) = pi/2"
+        }
+      ],
+      "applicabilityPatterns": [
+        "finding angles from known trig ratios",
+        "computing the angle between vectors using arccos"
+      ],
+      "keywords": [
+        "arcsin",
+        "arccos",
+        "arctan",
+        "inverse trig",
+        "arcsine"
+      ],
+      "tags": [
+        "trigonometry",
+        "definition",
+        "inverse"
+      ],
+      "buildLabs": []
+    },
+    {
+      "id": "perception-sum-difference-formulas",
+      "name": "Sum and Difference Formulas",
+      "type": "identity",
+      "domain": "perception",
+      "chapter": 2,
+      "section": "2.4",
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.35
+      },
+      "formalStatement": "sin(A+B) = sin(A)cos(B) + cos(A)sin(B). cos(A+B) = cos(A)cos(B) - sin(A)sin(B). tan(A+B) = (tan(A)+tan(B))/(1-tan(A)tan(B)).",
+      "computationalForm": "sin(A-B) = sin(A)cos(B) - cos(A)sin(B). cos(A-B) = cos(A)cos(B) + sin(A)sin(B). These are the foundation for double-angle and half-angle formulas.",
+      "prerequisites": [
+        "Sine function",
+        "Cosine function"
+      ],
+      "dependencies": [
+        {
+          "target": "perception-sine-function",
+          "type": "requires",
+          "strength": 1,
+          "description": "Sum formulas express sin(A+B) in terms of sin and cos"
+        },
+        {
+          "target": "perception-cosine-function",
+          "type": "requires",
+          "strength": 1,
+          "description": "Sum formulas express cos(A+B) in terms of sin and cos"
+        }
+      ],
+      "enables": [
+        "perception-double-angle-formulas",
+        "waves-sum-to-product"
+      ],
+      "compositionRules": [
+        {
+          "with": "perception-double-angle-formulas",
+          "yields": "Double angle as special case: sin(2A) = sin(A+A) = 2sin(A)cos(A)",
+          "type": "sequential",
+          "conditions": [
+            "Setting B=A in sum formulas"
+          ],
+          "example": "cos(A+B) with A=B gives cos(2A) = cos^2(A) - sin^2(A)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "computing exact values of trig functions at non-standard angles",
+        "deriving double-angle and product-to-sum identities"
+      ],
+      "keywords": [
+        "sum formula",
+        "difference formula",
+        "angle addition",
+        "sin(A+B)"
+      ],
+      "tags": [
+        "trigonometry",
+        "identity"
+      ],
+      "buildLabs": []
+    },
+    {
+      "id": "perception-exponential-function",
+      "name": "Exponential Function",
+      "type": "definition",
+      "domain": "perception",
+      "chapter": 1,
+      "section": "1.4",
+      "planePosition": {
+        "real": -0.1,
+        "imaginary": 0.3
+      },
+      "formalStatement": "The exponential function exp(x) = e^x where e = lim_{n->inf}(1+1/n)^n ~ 2.71828. Properties: e^(a+b) = e^a*e^b, e^0 = 1, d/dx e^x = e^x, e^x > 0 for all x.",
+      "computationalForm": "e^x = sum_{n=0}^inf x^n/n! = 1 + x + x^2/2 + x^3/6 + ... Inverse: ln(e^x) = x. Growth: e^x > x^n for large x.",
+      "prerequisites": [
+        "Real numbers"
+      ],
+      "dependencies": [
+        {
+          "target": "perception-real-numbers",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Exponential is defined on real numbers"
+        }
+      ],
+      "enables": [
+        "perception-eulers-formula",
+        "change-derivative",
+        "change-antiderivative"
+      ],
+      "compositionRules": [
+        {
+          "with": "perception-complex-numbers",
+          "yields": "Complex exponential: e^(a+bi) = e^a(cos(b)+i*sin(b))",
+          "type": "parallel",
+          "conditions": [
+            "When extending the exponential to complex arguments"
+          ],
+          "example": "e^(1+i*pi) = e^1 * e^(i*pi) = -e"
+        }
+      ],
+      "applicabilityPatterns": [
+        "modeling exponential growth or decay",
+        "computing compound interest or population dynamics"
+      ],
+      "keywords": [
+        "exponential",
+        "e^x",
+        "exp",
+        "growth",
+        "Euler number"
+      ],
+      "tags": [
+        "foundational",
+        "function",
+        "growth"
+      ],
+      "buildLabs": []
+    },
+    {
+      "id": "perception-logarithm",
+      "name": "Natural Logarithm",
+      "type": "definition",
+      "domain": "perception",
+      "chapter": 1,
+      "section": "1.4",
+      "planePosition": {
+        "real": -0.1,
+        "imaginary": 0.25
+      },
+      "formalStatement": "The natural logarithm ln(x) = log_e(x) is the inverse of the exponential function: ln(e^x) = x, e^(ln(x)) = x for x > 0. ln: (0,inf) -> R is increasing and concave.",
+      "computationalForm": "ln(1) = 0, ln(e) = 1. Properties: ln(ab) = ln(a)+ln(b), ln(a^n) = n*ln(a). d/dx ln(x) = 1/x. integral 1/x dx = ln|x|+C.",
+      "prerequisites": [
+        "Exponential function",
+        "Real numbers"
+      ],
+      "dependencies": [
+        {
+          "target": "perception-exponential-function",
+          "type": "requires",
+          "strength": 1,
+          "description": "Logarithm is the inverse of the exponential"
+        },
+        {
+          "target": "perception-real-numbers",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Logarithm maps positive reals to R"
+        }
+      ],
+      "enables": [
+        "change-antiderivative",
+        "change-integration-by-parts"
+      ],
+      "compositionRules": [
+        {
+          "with": "perception-exponential-function",
+          "yields": "Inverse pair: ln and exp undo each other",
+          "type": "parallel",
+          "conditions": [
+            "When solving exponential or logarithmic equations"
+          ],
+          "example": "Solve e^x = 5: x = ln(5) ~ 1.609"
+        }
+      ],
+      "applicabilityPatterns": [
+        "solving exponential equations by taking logarithms",
+        "integrating 1/x to get ln|x|"
+      ],
+      "keywords": [
+        "logarithm",
+        "ln",
+        "log",
+        "inverse exponential",
+        "natural log"
+      ],
+      "tags": [
+        "foundational",
+        "function",
+        "inverse"
+      ],
+      "buildLabs": []
+    },
+    {
+      "id": "perception-polar-coordinates",
+      "name": "Polar Coordinates",
+      "type": "definition",
+      "domain": "perception",
+      "chapter": 2,
+      "section": "2.5",
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.1
+      },
+      "formalStatement": "Polar coordinates (r, theta) represent a point in the plane by distance r from the origin and angle theta from the positive x-axis. Conversion: x = r*cos(theta), y = r*sin(theta), r = sqrt(x^2+y^2), theta = atan2(y,x).",
+      "computationalForm": "x = r*cos(theta), y = r*sin(theta). r = sqrt(x^2+y^2). theta = atan2(y,x). Area element: dA = r*dr*d_theta.",
+      "prerequisites": [
+        "Unit circle",
+        "Distance formula"
+      ],
+      "dependencies": [
+        {
+          "target": "perception-unit-circle",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Polar coordinates use the unit circle parameterization"
+        },
+        {
+          "target": "perception-distance-formula",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "r is the Euclidean distance from origin"
+        }
+      ],
+      "enables": [
+        "waves-phasor-representation"
+      ],
+      "compositionRules": [
+        {
+          "with": "perception-complex-numbers",
+          "yields": "Complex number in polar form: z = r*e^(i*theta)",
+          "type": "parallel",
+          "conditions": [
+            "When representing complex numbers geometrically"
+          ],
+          "example": "3+4i in polar: r=5, theta=arctan(4/3), so z = 5*e^(i*arctan(4/3))"
+        }
+      ],
+      "applicabilityPatterns": [
+        "describing circular or spiral curves more naturally than Cartesian",
+        "converting between rectangular and polar representations"
+      ],
+      "keywords": [
+        "polar",
+        "r",
+        "theta",
+        "coordinate system",
+        "atan2"
+      ],
+      "tags": [
+        "geometry",
+        "coordinates",
+        "definition"
+      ],
+      "buildLabs": []
+    },
+    {
+      "id": "perception-set-notation",
+      "name": "Set Notation and Operations",
+      "type": "definition",
+      "domain": "perception",
+      "chapter": 1,
+      "section": "1.1",
+      "planePosition": {
+        "real": -0.4,
+        "imaginary": 0.4
+      },
+      "formalStatement": "A set is a collection of distinct elements. Notation: {x : condition}. Operations: union A cup B, intersection A cap B, complement A^c, difference A  B. Subset: A subset B. Empty set: {}.",
+      "computationalForm": "A cup B = {x : x in A or x in B}. A cap B = {x : x in A and x in B}. A  B = {x : x in A and x not in B}. |A cup B| = |A| + |B| - |A cap B|.",
+      "prerequisites": [],
+      "dependencies": [
+        {
+          "target": "perception-natural-numbers",
+          "type": "motivates",
+          "strength": 0.5,
+          "description": "Sets formalize the collections of numbers N, Z, Q, R, C"
+        }
+      ],
+      "enables": [
+        "perception-real-numbers"
+      ],
+      "compositionRules": [
+        {
+          "with": "perception-real-numbers",
+          "yields": "Interval notation: (a,b), [a,b], [a,b) as subsets of R",
+          "type": "parallel",
+          "conditions": [
+            "When describing subsets of the real line"
+          ],
+          "example": "The domain of sqrt(x) is [0, infinity) = {x in R : x >= 0}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "defining domains and ranges of functions",
+        "describing collections of numbers or solutions"
+      ],
+      "keywords": [
+        "set",
+        "union",
+        "intersection",
+        "subset",
+        "element"
+      ],
+      "tags": [
+        "foundational",
+        "notation",
+        "set-theory"
+      ],
+      "buildLabs": []
+    },
+    {
+      "id": "perception-function-definition",
+      "name": "Function",
+      "type": "definition",
+      "domain": "perception",
+      "chapter": 1,
+      "section": "1.4",
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.35
+      },
+      "formalStatement": "A function f: A -> B is a rule that assigns to each element x in domain A exactly one element f(x) in codomain B. The range (image) is {f(x) : x in A} subset B.",
+      "computationalForm": "Evaluate: f(a) = output. Composition: (f circ g)(x) = f(g(x)). Inverse: f^{-1}(y) = x iff f(x) = y, exists iff f is bijective.",
+      "prerequisites": [
+        "Set notation"
+      ],
+      "dependencies": [
+        {
+          "target": "perception-set-notation",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Functions are defined between sets"
+        }
+      ],
+      "enables": [
+        "change-limit",
+        "change-derivative",
+        "change-continuity"
+      ],
+      "compositionRules": [
+        {
+          "with": "perception-real-numbers",
+          "yields": "Real-valued functions f: R -> R, the primary objects of calculus",
+          "type": "parallel",
+          "conditions": [
+            "When studying functions from reals to reals"
+          ],
+          "example": "f(x) = x^2 maps R to [0, infinity)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "defining mappings between sets with unique outputs",
+        "specifying the domain and range of a mathematical rule"
+      ],
+      "keywords": [
+        "function",
+        "domain",
+        "range",
+        "codomain",
+        "mapping"
+      ],
+      "tags": [
+        "foundational",
+        "definition",
+        "function"
+      ],
+      "buildLabs": []
+    },
+    {
+      "id": "perception-coordinate-plane",
+      "name": "Cartesian Coordinate Plane",
+      "type": "definition",
+      "domain": "perception",
+      "chapter": 1,
+      "section": "1.3",
+      "planePosition": {
+        "real": -0.1,
+        "imaginary": 0
+      },
+      "formalStatement": "The Cartesian coordinate plane R^2 = R x R identifies each point with an ordered pair (x, y). The x-axis is horizontal, y-axis is vertical, intersecting at the origin (0,0). Quadrants numbered I-IV counterclockwise.",
+      "computationalForm": "Point: (x, y). Distance: d = sqrt((x2-x1)^2 + (y2-y1)^2). Midpoint: ((x1+x2)/2, (y1+y2)/2). Slope: m = (y2-y1)/(x2-x1).",
+      "prerequisites": [
+        "Real numbers",
+        "Number line"
+      ],
+      "dependencies": [
+        {
+          "target": "perception-real-numbers",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Coordinates are real numbers"
+        },
+        {
+          "target": "perception-number-line",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Each axis is a number line"
+        }
+      ],
+      "enables": [
+        "perception-unit-circle",
+        "perception-distance-formula",
+        "perception-polar-coordinates"
+      ],
+      "compositionRules": [
+        {
+          "with": "perception-number-line",
+          "yields": "Extension from 1D to 2D: two perpendicular number lines create the plane",
+          "type": "parallel",
+          "conditions": [
+            "When visualizing functions and geometric relationships"
+          ],
+          "example": "Plotting y = x^2: each x maps to a point (x, x^2) in the plane"
+        }
+      ],
+      "applicabilityPatterns": [
+        "plotting functions and curves in two dimensions",
+        "locating points using horizontal and vertical coordinates"
+      ],
+      "keywords": [
+        "Cartesian",
+        "coordinate",
+        "plane",
+        "R^2",
+        "ordered pair",
+        "quadrant"
+      ],
+      "tags": [
+        "geometry",
+        "coordinate",
+        "foundational"
+      ],
+      "buildLabs": []
+    },
+    {
+      "id": "perception-cross-product-preview",
+      "name": "Cross Product (Preview)",
+      "type": "definition",
+      "domain": "perception",
+      "chapter": 3,
+      "section": "3.4",
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.45
+      },
+      "formalStatement": "The cross product u x v of two vectors in R^3 produces a vector perpendicular to both: u x v = (u2*v3-u3*v2, u3*v1-u1*v3, u1*v2-u2*v1). |u x v| = |u||v|sin(theta).",
+      "computationalForm": "u x v = det([i,j,k; u1,u2,u3; v1,v2,v3]). |u x v| = area of parallelogram. Direction: right-hand rule. u x v = -(v x u) (anti-commutative).",
+      "prerequisites": [
+        "Inner product",
+        "Sine function"
+      ],
+      "dependencies": [
+        {
+          "target": "perception-inner-product",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Cross product complements the dot product for 3D vectors"
+        },
+        {
+          "target": "perception-sine-function",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Magnitude uses sine of angle between vectors"
+        }
+      ],
+      "enables": [
+        "structure-vector-calculus"
+      ],
+      "compositionRules": [
+        {
+          "with": "perception-inner-product",
+          "yields": "Complete 3D vector algebra: dot product gives scalar (projection), cross product gives vector (perpendicular)",
+          "type": "parallel",
+          "conditions": [
+            "When working with 3D geometry and physics"
+          ],
+          "example": "Torque = r x F: perpendicular to both radius and force, magnitude = |r||F|sin(theta)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "computing areas of parallelograms from edge vectors",
+        "finding a vector perpendicular to two given vectors in 3D"
+      ],
+      "keywords": [
+        "cross product",
+        "vector product",
+        "perpendicular",
+        "area",
+        "determinant"
+      ],
+      "tags": [
+        "geometry",
+        "linear-algebra",
+        "three-dimensional"
+      ],
+      "buildLabs": []
+    },
+    {
+      "id": "perception-vector-definition",
+      "name": "Vector",
+      "type": "definition",
+      "domain": "perception",
+      "chapter": 3,
+      "section": "3.1",
+      "planePosition": {
+        "real": -0.2,
+        "imaginary": 0.2
+      },
+      "formalStatement": "A vector in R^n is an ordered n-tuple v = (v_1, v_2, ..., v_n). Vectors have magnitude (norm) and direction. Addition: u+v = (u_1+v_1, ..., u_n+v_n). Scalar multiplication: c*v = (c*v_1, ..., c*v_n).",
+      "computationalForm": "v = (v_1,...,v_n). |v| = sqrt(sum v_i^2). Unit vector: v/|v|. Zero vector: (0,...,0). Dimension: n components.",
+      "prerequisites": [
+        "Real numbers"
+      ],
+      "dependencies": [
+        {
+          "target": "perception-real-numbers",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Vector components are real numbers"
+        }
+      ],
+      "enables": [
+        "perception-inner-product",
+        "perception-norm",
+        "perception-distance-formula"
+      ],
+      "compositionRules": [
+        {
+          "with": "perception-real-numbers",
+          "yields": "Geometric objects with both magnitude and direction, extending scalars",
+          "type": "sequential",
+          "conditions": [
+            "When a quantity has both size and direction"
+          ],
+          "example": "Velocity (3, 4) m/s: speed = 5 m/s, direction = arctan(4/3) from x-axis"
+        }
+      ],
+      "applicabilityPatterns": [
+        "representing quantities with both magnitude and direction",
+        "performing arithmetic on multi-dimensional data"
+      ],
+      "keywords": [
+        "vector",
+        "magnitude",
+        "direction",
+        "component",
+        "n-tuple"
+      ],
+      "tags": [
+        "geometry",
+        "linear-algebra",
+        "foundational"
+      ],
+      "buildLabs": []
+    },
+    {
+      "id": "perception-right-triangle-trig",
+      "name": "Right Triangle Trigonometry",
+      "type": "definition",
+      "domain": "perception",
+      "chapter": 2,
+      "section": "2.1",
+      "planePosition": {
+        "real": -0.3,
+        "imaginary": 0.1
+      },
+      "formalStatement": "In a right triangle with angle theta: sin(theta) = opposite/hypotenuse, cos(theta) = adjacent/hypotenuse, tan(theta) = opposite/adjacent. These ratios are independent of triangle size (by similarity).",
+      "computationalForm": "SOH-CAH-TOA. Given angle and one side, find all others. sin(30) = 1/2, cos(45) = sqrt(2)/2, tan(60) = sqrt(3).",
+      "prerequisites": [
+        "Sine function",
+        "Cosine function",
+        "Tangent function"
+      ],
+      "dependencies": [
+        {
+          "target": "perception-sine-function",
+          "type": "specializes",
+          "strength": 0.8,
+          "description": "Right triangle ratios are the original definition of trig functions"
+        },
+        {
+          "target": "perception-pythagorean-theorem",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "The Pythagorean theorem relates the three sides"
+        }
+      ],
+      "enables": [
+        "perception-law-of-cosines"
+      ],
+      "compositionRules": [
+        {
+          "with": "perception-pythagorean-theorem",
+          "yields": "Complete right triangle solver: given angle + side, find all measurements",
+          "type": "sequential",
+          "conditions": [
+            "When solving triangles for unknown sides or angles"
+          ],
+          "example": "Ladder 10m at 60 degrees: height = 10*sin(60) = 8.66m, base = 10*cos(60) = 5m"
+        }
+      ],
+      "applicabilityPatterns": [
+        "solving right triangles to find unknown sides or angles",
+        "computing heights, distances, and angles in practical surveying"
+      ],
+      "keywords": [
+        "SOHCAHTOA",
+        "right triangle",
+        "opposite",
+        "adjacent",
+        "hypotenuse"
+      ],
+      "tags": [
+        "trigonometry",
+        "geometry",
+        "applied"
+      ],
       "buildLabs": []
     }
   ]
