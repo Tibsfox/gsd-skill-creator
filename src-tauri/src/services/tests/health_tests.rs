@@ -2,7 +2,6 @@ use std::collections::HashMap;
 use std::time::Duration;
 
 use crate::services::health::*;
-use crate::services::launcher::*;
 use crate::services::types::*;
 
 #[test]

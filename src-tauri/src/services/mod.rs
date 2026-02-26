@@ -6,6 +6,9 @@
 pub mod types;
 pub mod registry;
 pub mod launcher;
+pub mod health;
+pub mod led;
+pub mod shutdown;
 pub use types::*;
 
 #[cfg(test)]
