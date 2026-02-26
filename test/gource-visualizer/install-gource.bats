@@ -19,13 +19,12 @@ setup() {
     MOCK_BIN="$TEST_TMPDIR/mock-bin"
     mkdir -p "$MOCK_BIN"
 
-    # Mock sudo -- records calls and succeeds
+    # Mock sudo -- records calls, then runs the command without escalation
     MOCK_SUDO_CALLS="$TEST_TMPDIR/sudo-calls.log"
     cat > "$MOCK_BIN/sudo" << MOCKEOF
 #!/bin/bash
 echo "sudo \$@" >> "$MOCK_SUDO_CALLS"
 # Execute the command without privilege escalation
-shift  # remove 'sudo'
 "\$@"
 MOCKEOF
     chmod +x "$MOCK_BIN/sudo"
@@ -189,10 +188,35 @@ echo "Linux"
 MOCKEOF
     chmod +x "$MOCK_BIN/uname"
 
-    # Remove apt-get so platform detection fails
+    # Shadow apt-get and brew with scripts that exit 1
+    # This ensures command -v apt-get fails even if the real one is in PATH
     rm -f "$MOCK_BIN/apt-get"
+    rm -f "$MOCK_BIN/brew"
 
-    run "$INSTALL_SCRIPT"
+    # Override PATH to only include MOCK_BIN (exclude system paths)
+    # But keep /usr/bin for bash, coreutils, etc. -- just not apt-get/brew
+    local RESTRICTED_BIN="$TEST_TMPDIR/restricted-bin"
+    mkdir -p "$RESTRICTED_BIN"
+    # Link essential tools only
+    ln -sf "$(which bash)" "$RESTRICTED_BIN/bash"
+    ln -sf "$(which cat)" "$RESTRICTED_BIN/cat"
+    ln -sf "$(which grep)" "$RESTRICTED_BIN/grep"
+    ln -sf "$(which cut)" "$RESTRICTED_BIN/cut"
+    ln -sf "$(which tr)" "$RESTRICTED_BIN/tr"
+    ln -sf "$(which echo)" "$RESTRICTED_BIN/echo" 2>/dev/null || true
+    ln -sf "$(which head)" "$RESTRICTED_BIN/head"
+    ln -sf "$(which sed)" "$RESTRICTED_BIN/sed"
+    ln -sf "$(which date)" "$RESTRICTED_BIN/date"
+    ln -sf "$(which env)" "$RESTRICTED_BIN/env"
+    ln -sf "$(which uname)" "$RESTRICTED_BIN/real-uname" 2>/dev/null || true
+    ln -sf "$(which command)" "$RESTRICTED_BIN/command" 2>/dev/null || true
+    ln -sf "$(which printf)" "$RESTRICTED_BIN/printf" 2>/dev/null || true
+    ln -sf "$(which wc)" "$RESTRICTED_BIN/wc"
+    ln -sf "$(which test)" "$RESTRICTED_BIN/test" 2>/dev/null || true
+    ln -sf "$(which [)" "$RESTRICTED_BIN/[" 2>/dev/null || true
+    ln -sf "$(which chmod)" "$RESTRICTED_BIN/chmod"
+
+    run env PATH="$MOCK_BIN:$RESTRICTED_BIN" "$INSTALL_SCRIPT"
     [ "$status" -eq 1 ]
 }
 
@@ -226,35 +250,29 @@ MOCKEOF
 # Test 6: Installs missing components via apt-get
 # ---------------------------------------------------------------------------
 @test "installs missing components via apt-get" {
-    # No gource, ffmpeg, or xvfb-run mocked -- they are missing
-    # After apt-get "install", create the mocks so verification passes
+    # No gource, ffmpeg, or xvfb-run mocked yet -- they are "missing"
+    # Pre-create a helper script that apt-get mock will source to create
+    # the post-install mocks
+    cat > "$TEST_TMPDIR/create-post-install-mocks.sh" << HELPEREOF
+#!/bin/bash
+# Create gource mock
+printf '#!/bin/bash\nif [ "\$1" = "--help" ] || [ "\$1" = "--version" ]; then echo "Gource v0.55"; fi\nexit 0\n' > "$MOCK_BIN/gource"
+chmod +x "$MOCK_BIN/gource"
+# Create ffmpeg mock
+printf '#!/bin/bash\nif [ "\$1" = "-codecs" ]; then echo " DEV.LS h264  (encoders: libx264 libx264rgb)"; exit 0; fi\nexit 0\n' > "$MOCK_BIN/ffmpeg"
+chmod +x "$MOCK_BIN/ffmpeg"
+# Create xvfb-run mock
+printf '#!/bin/bash\nexit 0\n' > "$MOCK_BIN/xvfb-run"
+chmod +x "$MOCK_BIN/xvfb-run"
+HELPEREOF
+    chmod +x "$TEST_TMPDIR/create-post-install-mocks.sh"
+
+    # apt-get mock that runs the helper on "install"
     cat > "$MOCK_BIN/apt-get" << MOCKEOF
 #!/bin/bash
 echo "apt-get \$@" >> "$MOCK_APT_CALLS"
-# Simulate installing gource
 if echo "\$@" | grep -q "install"; then
-    cat > "$MOCK_BIN/gource" << 'INNEREOF'
-#!/bin/bash
-if [ "\$1" = "--help" ] || [ "\$1" = "--version" ]; then
-    echo "Gource v0.55"
-fi
-exit 0
-INNEREOF
-    chmod +x "$MOCK_BIN/gource"
-    cat > "$MOCK_BIN/ffmpeg" << 'INNEREOF'
-#!/bin/bash
-if [ "\$1" = "-codecs" ]; then
-    echo " DEV.LS h264  (encoders: libx264 libx264rgb)"
-    exit 0
-fi
-exit 0
-INNEREOF
-    chmod +x "$MOCK_BIN/ffmpeg"
-    cat > "$MOCK_BIN/xvfb-run" << 'INNEREOF'
-#!/bin/bash
-exit 0
-INNEREOF
-    chmod +x "$MOCK_BIN/xvfb-run"
+    bash "$TEST_TMPDIR/create-post-install-mocks.sh"
 fi
 exit 0
 MOCKEOF
