@@ -79,7 +79,7 @@ export function makePrimitive(
     section: '1.1',
     planePosition: { real: center.real, imaginary: center.imaginary },
     formalStatement: 'A test formal statement.',
-    computationalForm: 'test-output-type',
+    computationalForm: `${domain}-type`,
     prerequisites: [],
     dependencies: [],
     enables: [],
@@ -119,13 +119,15 @@ export function makeDomainData(
             },
           ];
 
-    // Each primitive has a sequential composition rule with the next primitive
+    // Each primitive has a sequential composition rule with the next primitive.
+    // yields must match the next primitive's computationalForm so the composition
+    // engine produces dimensionally consistent paths (inputType === prev outputType).
     const compositionRules: CompositionRule[] =
       n < primitiveCount - 1
         ? [
             {
               with: `${domainId}-prim-${n + 1}`,
-              yields: `${domainId}-composed-${n}`,
+              yields: `${domainId}-type`,
               type: 'sequential',
               conditions: ['Both primitives available'],
               example: `Compose ${id} with ${domainId}-prim-${n + 1}`,
@@ -148,7 +150,7 @@ export function makeDomainData(
         section: `${chapters[n % chapters.length]}.${n + 1}`,
         planePosition,
         formalStatement: `Formal statement for ${id}`,
-        computationalForm: `${domainId}-output-${n}`,
+        computationalForm: `${domainId}-type`,
         prerequisites: n > 0 ? [`Understanding of ${domainId}-prim-${n - 1}`] : [],
         dependencies,
         enables: n < primitiveCount - 1 ? [`${domainId}-prim-${n + 1}`] : [],
