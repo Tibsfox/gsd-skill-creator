@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MFE Domain Data File",
+  "description": "Schema for domain data files containing mathematical primitives from The Space Between",
+  "type": "object",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "enum": [
+        "perception", "waves", "change", "structure", "reality",
+        "foundations", "mapping", "unification", "emergence", "synthesis"
+      ],
+      "description": "Domain identifier"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the domain data"
+    },
+    "primitives": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/MathematicalPrimitive" },
+      "description": "Array of mathematical primitives in this domain"
+    }
+  },
+  "required": ["domain", "version", "primitives"],
+  "additionalProperties": false,
+  "$defs": {
+    "PlanePosition": {
+      "type": "object",
+      "properties": {
+        "real": {
+          "type": "number",
+          "minimum": -1.0,
+          "maximum": 1.0,
+          "description": "Position on logic-creativity axis"
+        },
+        "imaginary": {
+          "type": "number",
+          "minimum": -1.0,
+          "maximum": 1.0,
+          "description": "Position on embodied-abstract axis"
+        }
+      },
+      "required": ["real", "imaginary"],
+      "additionalProperties": false
+    },
+    "DependencyEdge": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string",
+          "pattern": "^[a-z]+-[a-z0-9-]+$",
+          "description": "PrimitiveId of the dependency"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["requires", "generalizes", "specializes", "motivates", "applies", "equivalent"],
+          "description": "Kind of dependency relationship"
+        },
+        "strength": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "How essential (1.0 = cannot exist without)"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Why this dependency exists"
+        }
+      },
+      "required": ["target", "type", "strength", "description"],
+      "additionalProperties": false
+    },
+    "CompositionRule": {
+      "type": "object",
+      "properties": {
+        "with": {
+          "type": "string",
+          "pattern": "^[a-z]+-[a-z0-9-]+$",
+          "description": "PrimitiveId to compose with"
+        },
+        "yields": {
+          "type": "string",
+          "minLength": 1,
+          "description": "What the composition produces"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["sequential", "parallel", "nested"],
+          "description": "Composition pattern"
+        },
+        "conditions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "When this composition is valid"
+        },
+        "example": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Concrete example from the book"
+        }
+      },
+      "required": ["with", "yields", "type", "conditions", "example"],
+      "additionalProperties": false
+    },
+    "MathematicalPrimitive": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z]+-[a-z0-9-]+$",
+          "description": "Unique lowercase hyphenated identifier"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable name"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["axiom", "definition", "theorem", "algorithm", "technique", "identity"],
+          "description": "Kind of mathematical primitive"
+        },
+        "domain": {
+          "type": "string",
+          "enum": [
+            "perception", "waves", "change", "structure", "reality",
+            "foundations", "mapping", "unification", "emergence", "synthesis"
+          ],
+          "description": "Which of the 10 domains"
+        },
+        "chapter": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 33,
+          "description": "Chapter in The Space Between (1-33)"
+        },
+        "section": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Section reference (e.g., '3.1')"
+        },
+        "planePosition": {
+          "$ref": "#/$defs/PlanePosition"
+        },
+        "formalStatement": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Precise mathematical statement"
+        },
+        "computationalForm": {
+          "type": "string",
+          "description": "How to compute or apply it"
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Natural language prerequisites"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/DependencyEdge" },
+          "description": "What this primitive requires"
+        },
+        "enables": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z]+-[a-z0-9-]+$"
+          },
+          "description": "PrimitiveIds this unlocks"
+        },
+        "compositionRules": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/CompositionRule" },
+          "description": "How this composes with others"
+        },
+        "applicabilityPatterns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "description": "Natural language patterns that trigger this primitive"
+        },
+        "keywords": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Search keywords"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Categorical tags"
+        },
+        "buildLabs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Related Build Lab references"
+        }
+      },
+      "required": [
+        "id", "name", "type", "domain", "chapter", "section",
+        "planePosition", "formalStatement", "computationalForm",
+        "prerequisites", "dependencies", "enables", "compositionRules",
+        "applicabilityPatterns", "keywords", "tags", "buildLabs"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": { "enum": ["theorem", "algorithm"] }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "properties": {
+              "computationalForm": {
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "not": {
+              "properties": {
+                "type": { "const": "axiom" }
+              },
+              "required": ["type"]
+            }
+          },
+          "then": {
+            "properties": {
+              "dependencies": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
