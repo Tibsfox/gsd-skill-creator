@@ -1,0 +1,2162 @@
+{
+  "domain": "foundations",
+  "version": "1.35.0",
+  "primitives": [
+    {
+      "id": "foundations-set-definition",
+      "name": "Set Definition (ZFC)",
+      "type": "axiom",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.1",
+      "planePosition": { "real": -0.65, "imaginary": 0.5 },
+      "formalStatement": "A set is a well-defined collection of distinct objects (elements). Membership is denoted x in S. Two sets are equal iff they have exactly the same elements (Axiom of Extensionality). Sets are the foundational objects of mathematics under ZFC.",
+      "computationalForm": "Define sets by listing: S = {1, 2, 3} or by comprehension: S = {x : P(x)}. Test membership: x in S. Key operations: union, intersection, complement. Sets can contain other sets.",
+      "prerequisites": ["Logic", "Objects"],
+      "dependencies": [],
+      "enables": ["foundations-empty-set", "foundations-set-union", "foundations-set-intersection", "foundations-set-complement", "foundations-cartesian-product", "foundations-power-set", "foundations-relation", "foundations-function-as-relation"],
+      "compositionRules": [
+        {
+          "with": "foundations-propositional-logic",
+          "yields": "Set builder notation: {x in S : P(x)} uses logical predicates to define sets",
+          "type": "parallel",
+          "conditions": ["Well-defined predicate P"],
+          "example": "Even numbers: {x in Z : exists k in Z, x = 2k}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Define a collection of mathematical objects",
+        "Establish the foundational objects for building mathematical structures",
+        "Work with membership, inclusion, and equality of collections"
+      ],
+      "keywords": ["set", "element", "membership", "extensionality", "ZFC", "collection"],
+      "tags": ["set-theory", "axioms", "fundamental"],
+      "buildLabs": ["Build Lab 18.1: Sets and Operations"]
+    },
+    {
+      "id": "foundations-empty-set",
+      "name": "Empty Set",
+      "type": "axiom",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.1",
+      "planePosition": { "real": -0.7, "imaginary": 0.5 },
+      "formalStatement": "The empty set {} (also written as emptyset) is the unique set containing no elements. For all x: x not in {}. The empty set exists (Axiom of Empty Set) and is a subset of every set.",
+      "computationalForm": "emptyset = {}. |emptyset| = 0. For any set S: emptyset subset S. emptyset union S = S. emptyset intersection S = emptyset.",
+      "prerequisites": ["Set definition"],
+      "dependencies": [],
+      "enables": ["foundations-cardinality"],
+      "compositionRules": [
+        {
+          "with": "foundations-set-definition",
+          "yields": "Basis for inductive set construction: {}, {{}}, {{},{{}}}, ...",
+          "type": "sequential",
+          "conditions": ["Constructing ordinals or natural numbers from sets"],
+          "example": "Von Neumann ordinals: 0 = {}, 1 = {{}}, 2 = {{}, {{}}}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Represent the absence of elements in a collection",
+        "Serve as the base case for inductive set constructions",
+        "Act as the identity element for set union"
+      ],
+      "keywords": ["empty set", "null set", "emptyset", "void"],
+      "tags": ["set-theory", "axioms"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-set-union",
+      "name": "Set Union",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.2",
+      "planePosition": { "real": -0.6, "imaginary": 0.45 },
+      "formalStatement": "The union of sets A and B is A union B = {x : x in A or x in B}. For a family of sets {A_i}: union A_i = {x : exists i, x in A_i}. Union is commutative, associative, and distributes over intersection.",
+      "computationalForm": "A union B: include all elements from both sets. |A union B| = |A| + |B| - |A intersection B| (inclusion-exclusion). Iterate for multiple sets.",
+      "prerequisites": ["Set definition", "Logical OR"],
+      "dependencies": [
+        {
+          "target": "foundations-set-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Union is an operation on sets"
+        }
+      ],
+      "enables": ["foundations-de-morgans-laws"],
+      "compositionRules": [
+        {
+          "with": "foundations-set-intersection",
+          "yields": "Boolean algebra of sets: union and intersection with complement form a complete Boolean algebra",
+          "type": "parallel",
+          "conditions": ["Sets within a universal set"],
+          "example": "A union (B intersection C) = (A union B) intersection (A union C) (distributivity)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Combine elements from multiple collections",
+        "Count elements using inclusion-exclusion",
+        "Build larger sets from smaller ones"
+      ],
+      "keywords": ["union", "combine", "OR", "merge", "inclusion-exclusion"],
+      "tags": ["set-theory", "operations"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-set-intersection",
+      "name": "Set Intersection",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.2",
+      "planePosition": { "real": -0.6, "imaginary": 0.5 },
+      "formalStatement": "The intersection of sets A and B is A intersection B = {x : x in A and x in B}. For a family: intersection A_i = {x : for all i, x in A_i}. Intersection is commutative, associative, and distributes over union.",
+      "computationalForm": "A intersection B: include only elements common to both. |A intersection B| = |A| + |B| - |A union B|. Disjoint sets: A intersection B = emptyset.",
+      "prerequisites": ["Set definition", "Logical AND"],
+      "dependencies": [
+        {
+          "target": "foundations-set-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Intersection is an operation on sets"
+        }
+      ],
+      "enables": ["foundations-de-morgans-laws"],
+      "compositionRules": [
+        {
+          "with": "foundations-set-union",
+          "yields": "Set algebra with distributive laws: A inter (B union C) = (A inter B) union (A inter C)",
+          "type": "parallel",
+          "conditions": ["Sets within a universal set"],
+          "example": "{1,2,3} inter {2,3,4} = {2,3}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find elements common to multiple collections",
+        "Test if two sets are disjoint",
+        "Filter a collection by a criterion"
+      ],
+      "keywords": ["intersection", "common", "AND", "overlap", "disjoint"],
+      "tags": ["set-theory", "operations"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-set-complement",
+      "name": "Set Complement",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.2",
+      "planePosition": { "real": -0.65, "imaginary": 0.45 },
+      "formalStatement": "The complement of A relative to universal set U is A^c = U \\ A = {x in U : x not in A}. The set difference A \\ B = {x in A : x not in B}. Complement satisfies: (A^c)^c = A, A union A^c = U, A inter A^c = emptyset.",
+      "computationalForm": "A^c = U - A. |A^c| = |U| - |A|. Double complement: (A^c)^c = A. De Morgan's: (A union B)^c = A^c inter B^c.",
+      "prerequisites": ["Set definition", "Logical NOT"],
+      "dependencies": [
+        {
+          "target": "foundations-set-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Complement is defined relative to a universal set"
+        }
+      ],
+      "enables": ["foundations-de-morgans-laws"],
+      "compositionRules": [
+        {
+          "with": "foundations-set-union",
+          "yields": "De Morgan's laws for sets: (A union B)^c = A^c inter B^c and (A inter B)^c = A^c union B^c",
+          "type": "parallel",
+          "conditions": ["Universal set U defined"],
+          "example": "U = {1,2,3,4,5}, A = {1,2}, B = {2,3}: (A union B)^c = {4,5} = {3,4,5} inter {1,4,5}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find all elements not in a given set",
+        "Express set differences and symmetric differences",
+        "Apply De Morgan's laws to set expressions"
+      ],
+      "keywords": ["complement", "difference", "NOT", "exclusion"],
+      "tags": ["set-theory", "operations"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-cartesian-product",
+      "name": "Cartesian Product",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.3",
+      "planePosition": { "real": -0.55, "imaginary": 0.5 },
+      "formalStatement": "The Cartesian product of A and B is A x B = {(a,b) : a in A, b in B}. For n sets: A_1 x ... x A_n = {(a_1,...,a_n) : a_i in A_i}. |A x B| = |A| * |B|. R^n = R x R x ... x R (n times).",
+      "computationalForm": "Generate all ordered pairs: for each a in A, for each b in B, output (a,b). |A x B| = |A| * |B|. Iterated: A x B x C has elements (a,b,c).",
+      "prerequisites": ["Set definition", "Ordered pairs"],
+      "dependencies": [
+        {
+          "target": "foundations-set-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Cartesian product creates a set from two sets"
+        }
+      ],
+      "enables": ["foundations-relation", "foundations-function-as-relation"],
+      "compositionRules": [
+        {
+          "with": "foundations-relation",
+          "yields": "Relations as subsets of Cartesian products: R subset A x B",
+          "type": "sequential",
+          "conditions": ["Two sets given"],
+          "example": "Less-than on {1,2,3}: R = {(1,2),(1,3),(2,3)} subset {1,2,3} x {1,2,3}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Form all possible pairs from two sets",
+        "Construct the domain for relations and functions",
+        "Build multi-dimensional spaces from one-dimensional sets"
+      ],
+      "keywords": ["Cartesian product", "ordered pair", "cross product", "tuple"],
+      "tags": ["set-theory", "construction"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-power-set",
+      "name": "Power Set",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.3",
+      "planePosition": { "real": -0.6, "imaginary": 0.55 },
+      "formalStatement": "The power set P(A) is the set of all subsets of A: P(A) = {S : S subset A}. |P(A)| = 2^|A|. The power set is always strictly larger than the set itself (Cantor's theorem): |P(A)| > |A|.",
+      "computationalForm": "Enumerate all subsets: for set of size n, there are 2^n subsets (each element is either in or out). Include emptyset and A itself. Lattice ordering by subset inclusion.",
+      "prerequisites": ["Set definition", "Subsets", "Exponentiation"],
+      "dependencies": [
+        {
+          "target": "foundations-set-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Power set is defined in terms of subsets"
+        }
+      ],
+      "enables": ["foundations-cantors-theorem"],
+      "compositionRules": [
+        {
+          "with": "foundations-cardinality",
+          "yields": "Cantor's theorem: |P(A)| > |A| for any set A, proving no largest cardinal",
+          "type": "sequential",
+          "conditions": ["Any set A"],
+          "example": "A = {1,2}: P(A) = {{},{1},{2},{1,2}}, |P(A)| = 4 > 2 = |A|"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Enumerate all subsets of a given set",
+        "Count the number of subsets using 2^n",
+        "Construct larger sets from existing ones"
+      ],
+      "keywords": ["power set", "subsets", "2^n", "lattice"],
+      "tags": ["set-theory", "construction"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-relation",
+      "name": "Relation",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.4",
+      "planePosition": { "real": -0.55, "imaginary": 0.55 },
+      "formalStatement": "A relation R from A to B is a subset of A x B. We write aRb or (a,b) in R. Properties: reflexive (aRa), symmetric (aRb => bRa), antisymmetric (aRb and bRa => a=b), transitive (aRb and bRc => aRc).",
+      "computationalForm": "Represent as set of ordered pairs, or as a boolean matrix M[i][j] = 1 iff (a_i, b_j) in R. Check properties by examining the matrix: reflexive = diagonal all 1, symmetric = M = M^T.",
+      "prerequisites": ["Cartesian product", "Set definition"],
+      "dependencies": [
+        {
+          "target": "foundations-cartesian-product",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "A relation is a subset of a Cartesian product"
+        }
+      ],
+      "enables": ["foundations-equivalence-relation", "foundations-function-as-relation"],
+      "compositionRules": [
+        {
+          "with": "foundations-set-definition",
+          "yields": "Relations as structured subsets of Cartesian products, enabling order theory",
+          "type": "sequential",
+          "conditions": ["Sets A, B given"],
+          "example": "Divisibility on Z+: 2|6 means (2,6) in R, where R = {(a,b) : a divides b}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Define a relationship between elements of two sets",
+        "Check if a relation has special properties (reflexive, symmetric, transitive)",
+        "Formalize order, equivalence, or other structural relationships"
+      ],
+      "keywords": ["relation", "reflexive", "symmetric", "transitive", "antisymmetric"],
+      "tags": ["set-theory", "relations"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-equivalence-relation",
+      "name": "Equivalence Relation",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.4",
+      "planePosition": { "real": -0.6, "imaginary": 0.6 },
+      "formalStatement": "An equivalence relation ~ on set A is a relation that is reflexive (a ~ a), symmetric (a ~ b => b ~ a), and transitive (a ~ b and b ~ c => a ~ c). It partitions A into disjoint equivalence classes [a] = {x in A : x ~ a}.",
+      "computationalForm": "Verify three properties. Equivalence classes: [a] = {x : x ~ a}. Partition: A = union of disjoint equivalence classes. Number of classes = number of distinct representatives.",
+      "prerequisites": ["Relation", "Properties of relations"],
+      "dependencies": [
+        {
+          "target": "foundations-relation",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Equivalence relation is a special kind of relation"
+        }
+      ],
+      "enables": ["foundations-equivalence-class-partition", "foundations-quotient-group"],
+      "compositionRules": [
+        {
+          "with": "foundations-group-definition",
+          "yields": "Quotient group: G/N uses equivalence classes (cosets) as group elements",
+          "type": "sequential",
+          "conditions": ["Normal subgroup N of group G"],
+          "example": "Z/2Z: equivalence classes {even integers} and {odd integers}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Classify elements into groups where they are considered equivalent",
+        "Partition a set into disjoint equivalence classes",
+        "Define modular arithmetic or congruence relations"
+      ],
+      "keywords": ["equivalence relation", "equivalence class", "partition", "congruence"],
+      "tags": ["set-theory", "relations", "fundamental"],
+      "buildLabs": ["Build Lab 18.2: Equivalence Relations and Partitions"]
+    },
+    {
+      "id": "foundations-equivalence-class-partition",
+      "name": "Equivalence Class / Partition Theorem",
+      "type": "theorem",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.4",
+      "planePosition": { "real": -0.55, "imaginary": 0.6 },
+      "formalStatement": "An equivalence relation ~ on A determines a unique partition of A into equivalence classes. Conversely, any partition of A determines a unique equivalence relation. The equivalence classes are disjoint and their union is A.",
+      "computationalForm": "Given ~: compute [a] for each a. Remove duplicates. Verify: classes are disjoint, union = A. Conversely: given partition {B_i}, define a ~ b iff a, b in same B_i.",
+      "prerequisites": ["Equivalence relation"],
+      "dependencies": [
+        {
+          "target": "foundations-equivalence-relation",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Theorem connects equivalence relations to partitions"
+        }
+      ],
+      "enables": ["foundations-quotient-group"],
+      "compositionRules": [
+        {
+          "with": "foundations-equivalence-relation",
+          "yields": "Bijection between equivalence relations on A and partitions of A",
+          "type": "parallel",
+          "conditions": ["Set A given"],
+          "example": "Parity on Z: ~ defined by a ~ b iff a-b is even, partition into {even, odd}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Convert between an equivalence relation and its corresponding partition",
+        "Prove that equivalence classes are disjoint and exhaustive",
+        "Count the number of equivalence classes"
+      ],
+      "keywords": ["partition", "equivalence class", "disjoint", "exhaustive"],
+      "tags": ["set-theory", "fundamental-theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-function-as-relation",
+      "name": "Function as Relation",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.5",
+      "planePosition": { "real": -0.5, "imaginary": 0.5 },
+      "formalStatement": "A function f: A -> B is a relation R subset A x B such that for every a in A, there is exactly one b in B with (a,b) in R. A is the domain, B is the codomain, f(A) is the image. Functions can be injective (one-to-one), surjective (onto), or bijective (both).",
+      "computationalForm": "Check: for each a in A, count elements b with (a,b) in R; must be exactly 1. Injective: f(a_1) = f(a_2) => a_1 = a_2. Surjective: for all b in B, exists a with f(a) = b. Bijective: both.",
+      "prerequisites": ["Relation", "Cartesian product"],
+      "dependencies": [
+        {
+          "target": "foundations-relation",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "A function is a special kind of relation"
+        }
+      ],
+      "enables": ["foundations-cardinality", "foundations-homomorphism"],
+      "compositionRules": [
+        {
+          "with": "foundations-cardinality",
+          "yields": "Bijection establishes equal cardinality: |A| = |B| iff exists bijection f: A -> B",
+          "type": "sequential",
+          "conditions": ["Sets A, B"],
+          "example": "f(n) = 2n is bijection from N to even numbers, so |N| = |{even N}|"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Define a mapping between sets formally",
+        "Determine if a function is injective, surjective, or bijective",
+        "Establish correspondence between sets"
+      ],
+      "keywords": ["function", "mapping", "injective", "surjective", "bijective", "domain", "codomain"],
+      "tags": ["set-theory", "functions", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-cardinality",
+      "name": "Cardinality",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.6",
+      "planePosition": { "real": -0.65, "imaginary": 0.6 },
+      "formalStatement": "The cardinality |A| of a set A measures its size. Two sets have the same cardinality iff there exists a bijection between them. Finite sets have cardinality in N. The natural numbers have cardinality aleph_0 (countably infinite). The reals have cardinality c = 2^{aleph_0} > aleph_0.",
+      "computationalForm": "Finite: count elements. Countable: construct bijection with N (list all elements). Uncountable: prove no bijection with N exists (diagonalization). Cantor's theorem: |P(A)| > |A| for any A.",
+      "prerequisites": ["Set definition", "Function as relation", "Bijection"],
+      "dependencies": [
+        {
+          "target": "foundations-function-as-relation",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Cardinality comparison uses bijections"
+        },
+        {
+          "target": "foundations-set-definition",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Cardinality is a property of sets"
+        }
+      ],
+      "enables": ["foundations-cantors-theorem"],
+      "compositionRules": [
+        {
+          "with": "foundations-power-set",
+          "yields": "Cantor's theorem: no set can be mapped bijectively onto its power set",
+          "type": "sequential",
+          "conditions": ["Any set A"],
+          "example": "|R| = |P(N)| = 2^{aleph_0} > aleph_0 = |N| (continuum is uncountable)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Compare the sizes of infinite sets",
+        "Prove a set is countable or uncountable",
+        "Establish cardinality hierarchies"
+      ],
+      "keywords": ["cardinality", "countable", "uncountable", "aleph", "bijection", "size"],
+      "tags": ["set-theory", "infinity", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-cantors-theorem",
+      "name": "Cantor's Theorem",
+      "type": "theorem",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.6",
+      "planePosition": { "real": -0.7, "imaginary": 0.65 },
+      "formalStatement": "For any set A, there is no surjection from A onto P(A). Consequently |P(A)| > |A| for every set A. In particular, the real numbers are uncountable: |R| = |P(N)| > |N| = aleph_0.",
+      "computationalForm": "Proof by diagonalization: suppose f: A -> P(A) is surjective. Define D = {a in A : a not in f(a)}. D is a subset of A, so D in P(A). Then D = f(d) for some d. If d in D then d not in f(d) = D: contradiction. If d not in D then d in f(d) = D: contradiction.",
+      "prerequisites": ["Cardinality", "Power set", "Proof by contradiction"],
+      "dependencies": [
+        {
+          "target": "foundations-cardinality",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Cantor's theorem is about comparing cardinalities"
+        },
+        {
+          "target": "foundations-power-set",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Theorem compares |A| with |P(A)|"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-proof-by-contradiction",
+          "yields": "Diagonal argument: powerful technique for proving impossibility results about infinite sets",
+          "type": "sequential",
+          "conditions": ["Assume a bijection exists, derive contradiction"],
+          "example": "Cantor diagonal: list all reals in (0,1), change n-th digit of n-th number -> new real not in list"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Prove that a set is uncountable",
+        "Show that no enumeration of an infinite set is exhaustive",
+        "Establish strict cardinality hierarchies"
+      ],
+      "keywords": ["Cantor", "diagonalization", "uncountable", "power set", "cardinality"],
+      "tags": ["set-theory", "fundamental-theorem", "infinity"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-zfc-axiom-system",
+      "name": "ZFC Axiom System",
+      "type": "axiom",
+      "domain": "foundations",
+      "chapter": 18,
+      "section": "18.7",
+      "planePosition": { "real": -0.7, "imaginary": 0.55 },
+      "formalStatement": "Zermelo-Fraenkel set theory with Choice (ZFC) comprises axioms: Extensionality, Empty Set, Pairing, Union, Power Set, Infinity, Separation (Comprehension), Replacement, Foundation (Regularity), and Choice. ZFC is the standard foundation for most of mathematics.",
+      "computationalForm": "ZFC provides existence guarantees: empty set exists, unions exist, power sets exist, infinite sets exist (axiom of infinity). Choice: for any collection of nonempty sets, a function selects one element from each. Foundation: no infinite descending membership chains.",
+      "prerequisites": ["Set definition", "First-order logic"],
+      "dependencies": [],
+      "enables": ["foundations-set-definition"],
+      "compositionRules": [
+        {
+          "with": "foundations-formal-axiomatic-system",
+          "yields": "ZFC as a first-order theory: axioms + deduction rules determine all provable theorems about sets",
+          "type": "parallel",
+          "conditions": ["Formal logical framework"],
+          "example": "From ZFC axioms: existence of natural numbers, real numbers, and all standard mathematical objects"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Justify the existence of mathematical objects from axioms",
+        "Resolve paradoxes like Russell's paradox via restricted comprehension",
+        "Provide the formal foundation for all mathematical constructions"
+      ],
+      "keywords": ["ZFC", "axioms", "foundation", "set theory", "choice", "comprehension"],
+      "tags": ["set-theory", "axioms", "foundations"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-propositional-logic",
+      "name": "Propositional Logic (Boolean Operations)",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 19,
+      "section": "19.1",
+      "planePosition": { "real": -0.75, "imaginary": 0.6 },
+      "formalStatement": "Propositional logic deals with propositions (true/false statements) combined by logical connectives: AND (conjunction, p ^ q), OR (disjunction, p v q), NOT (negation, ~p), IMPLIES (conditional, p -> q), IFF (biconditional, p <-> q).",
+      "computationalForm": "Evaluate truth values: p ^ q is true iff both are true. p v q is true iff at least one is true. ~p flips truth value. p -> q is false only when p is true and q is false. Build compound propositions from atomic ones.",
+      "prerequisites": ["True and false", "Statements"],
+      "dependencies": [
+        {
+          "target": "foundations-set-definition",
+          "type": "motivates",
+          "strength": 0.6,
+          "description": "Set operations mirror logical operations"
+        }
+      ],
+      "enables": ["foundations-truth-tables", "foundations-predicate-logic", "foundations-logical-equivalence", "foundations-tautology"],
+      "compositionRules": [
+        {
+          "with": "foundations-set-definition",
+          "yields": "Boolean algebra: logic operations correspond to set operations (AND=intersection, OR=union, NOT=complement)",
+          "type": "parallel",
+          "conditions": ["Propositions about set membership"],
+          "example": "x in (A inter B) iff (x in A) AND (x in B)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Combine simple statements into complex logical expressions",
+        "Determine the truth value of a compound proposition",
+        "Formalize arguments and reasoning"
+      ],
+      "keywords": ["propositional logic", "AND", "OR", "NOT", "implication", "Boolean"],
+      "tags": ["logic", "fundamental"],
+      "buildLabs": ["Build Lab 19.1: Logic Gates and Truth Tables"]
+    },
+    {
+      "id": "foundations-truth-tables",
+      "name": "Truth Tables",
+      "type": "algorithm",
+      "domain": "foundations",
+      "chapter": 19,
+      "section": "19.1",
+      "planePosition": { "real": -0.7, "imaginary": 0.55 },
+      "formalStatement": "A truth table systematically lists all possible truth value combinations for the atomic propositions in an expression and the resulting truth value of the expression. For n atomic propositions, the table has 2^n rows.",
+      "computationalForm": "1. List all 2^n combinations of truth values for n variables. 2. Evaluate the expression for each combination. 3. The final column shows the expression's truth value. Use to verify tautologies, contradictions, and equivalences.",
+      "prerequisites": ["Propositional logic"],
+      "dependencies": [
+        {
+          "target": "foundations-propositional-logic",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Truth tables evaluate propositional logic expressions"
+        }
+      ],
+      "enables": ["foundations-tautology", "foundations-logical-equivalence"],
+      "compositionRules": [
+        {
+          "with": "foundations-logical-equivalence",
+          "yields": "Proof of equivalence: two expressions are equivalent iff their truth tables match on all rows",
+          "type": "sequential",
+          "conditions": ["Finite number of atomic propositions"],
+          "example": "p -> q and ~p v q have identical truth tables (4 rows, all match)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if a logical expression is a tautology, contradiction, or contingency",
+        "Verify logical equivalences systematically",
+        "Check the validity of an argument form"
+      ],
+      "keywords": ["truth table", "evaluation", "Boolean", "combinatorial"],
+      "tags": ["logic", "algorithms"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-predicate-logic",
+      "name": "Predicate Logic (Quantifiers)",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 19,
+      "section": "19.2",
+      "planePosition": { "real": -0.8, "imaginary": 0.65 },
+      "formalStatement": "Predicate logic extends propositional logic with variables, predicates P(x), and quantifiers: universal (forall x, P(x)) meaning P holds for all x, and existential (exists x, P(x)) meaning P holds for some x. Negation: ~(forall x, P(x)) iff (exists x, ~P(x)).",
+      "computationalForm": "Evaluate: forall x in D: check P(x) for every x. exists x in D: find at least one x where P(x) is true. Nested quantifiers: evaluate from outside in. Order matters: forall x exists y != exists y forall x in general.",
+      "prerequisites": ["Propositional logic", "Variables", "Sets"],
+      "dependencies": [
+        {
+          "target": "foundations-propositional-logic",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Predicate logic extends propositional logic with quantifiers"
+        }
+      ],
+      "enables": ["foundations-proof-by-direct", "foundations-proof-by-contradiction", "foundations-proof-by-induction", "foundations-formal-axiomatic-system"],
+      "compositionRules": [
+        {
+          "with": "foundations-set-definition",
+          "yields": "Set comprehension: {x in A : P(x)} uses predicate logic to define sets",
+          "type": "parallel",
+          "conditions": ["Domain set and predicate given"],
+          "example": "Prime numbers: {n in N : n > 1 and forall d, (1 < d < n -> d does not divide n)}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Express mathematical statements involving 'for all' or 'there exists'",
+        "Negate quantified statements correctly",
+        "Formalize mathematical definitions and theorems"
+      ],
+      "keywords": ["predicate logic", "quantifier", "forall", "exists", "first-order"],
+      "tags": ["logic", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-proof-by-direct",
+      "name": "Proof by Direct Deduction",
+      "type": "technique",
+      "domain": "foundations",
+      "chapter": 19,
+      "section": "19.3",
+      "planePosition": { "real": -0.7, "imaginary": 0.7 },
+      "formalStatement": "A direct proof of 'P implies Q' assumes P is true and derives Q through a chain of valid logical steps. Each step follows from previous steps, axioms, or previously proven theorems.",
+      "computationalForm": "Structure: 1. Assume P. 2. Apply definitions, axioms, and previously proven results. 3. Derive intermediate conclusions. 4. Conclude Q. Each step must be logically justified.",
+      "prerequisites": ["Predicate logic", "Logical implication"],
+      "dependencies": [
+        {
+          "target": "foundations-predicate-logic",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Direct proof uses logical deduction rules"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-modus-ponens",
+          "yields": "Chain of implications: P -> Q, Q -> R gives P -> R via transitivity",
+          "type": "sequential",
+          "conditions": ["Valid logical chain"],
+          "example": "Prove 'if n is even, then n^2 is even': Assume n=2k. Then n^2=4k^2=2(2k^2), which is even."
+        }
+      ],
+      "applicabilityPatterns": [
+        "Prove a conditional statement by assuming the hypothesis and deriving the conclusion",
+        "Build a logical argument from known facts to desired conclusion",
+        "Establish a mathematical result through straightforward reasoning"
+      ],
+      "keywords": ["direct proof", "deduction", "assume", "derive", "implication"],
+      "tags": ["logic", "proof", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-proof-by-contradiction",
+      "name": "Proof by Contradiction",
+      "type": "technique",
+      "domain": "foundations",
+      "chapter": 19,
+      "section": "19.3",
+      "planePosition": { "real": -0.75, "imaginary": 0.7 },
+      "formalStatement": "To prove P, assume ~P and derive a contradiction (a statement that is both true and false). Since ~P leads to a contradiction, ~P must be false, so P is true. This relies on the law of excluded middle: P or ~P.",
+      "computationalForm": "Structure: 1. Assume ~P (negation of what you want to prove). 2. Apply logical deductions. 3. Arrive at a statement R and ~R (contradiction). 4. Conclude P.",
+      "prerequisites": ["Predicate logic", "Negation", "Law of excluded middle"],
+      "dependencies": [
+        {
+          "target": "foundations-predicate-logic",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Uses logical deduction and negation"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-predicate-logic",
+          "yields": "Proving nonexistence or impossibility: assume it exists, derive contradiction",
+          "type": "sequential",
+          "conditions": ["Statement difficult to prove directly"],
+          "example": "sqrt(2) is irrational: assume sqrt(2) = p/q (lowest terms), then 2q^2 = p^2, so p is even, then q is even, contradicting lowest terms"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Prove a statement by showing its negation is impossible",
+        "Establish irrationality, nonexistence, or impossibility results",
+        "Handle cases where direct proof is difficult"
+      ],
+      "keywords": ["contradiction", "reductio ad absurdum", "assume negation", "impossible"],
+      "tags": ["logic", "proof", "technique"],
+      "buildLabs": ["Build Lab 19.2: Proofs by Contradiction"]
+    },
+    {
+      "id": "foundations-proof-by-induction",
+      "name": "Proof by Induction",
+      "type": "technique",
+      "domain": "foundations",
+      "chapter": 19,
+      "section": "19.4",
+      "planePosition": { "real": -0.65, "imaginary": 0.7 },
+      "formalStatement": "Mathematical induction proves P(n) for all n >= n_0: (1) Base case: prove P(n_0). (2) Inductive step: prove that P(k) implies P(k+1) for arbitrary k >= n_0. Strong induction: assume P(j) for all n_0 <= j <= k, prove P(k+1).",
+      "computationalForm": "1. Verify P(n_0) directly. 2. Assume P(k) for arbitrary k (inductive hypothesis). 3. Use the hypothesis to prove P(k+1). 4. Conclude: by induction, P(n) holds for all n >= n_0.",
+      "prerequisites": ["Natural numbers", "Predicate logic", "Logical implication"],
+      "dependencies": [
+        {
+          "target": "foundations-predicate-logic",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Induction is a proof technique using quantified statements"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-predicate-logic",
+          "yields": "Universal statements about natural numbers: proves P(n) for all n simultaneously",
+          "type": "sequential",
+          "conditions": ["Property depends on natural number n", "Base case verifiable"],
+          "example": "Sum formula: 1+2+...+n = n(n+1)/2. Base: n=1, 1=1. Step: assume for k, then 1+...+k+(k+1) = k(k+1)/2 + (k+1) = (k+1)(k+2)/2."
+        }
+      ],
+      "applicabilityPatterns": [
+        "Prove a statement holds for all natural numbers",
+        "Establish formulas, inequalities, or properties by building from base case",
+        "Prove properties of recursively defined structures"
+      ],
+      "keywords": ["induction", "base case", "inductive step", "natural numbers", "strong induction"],
+      "tags": ["logic", "proof", "technique", "fundamental"],
+      "buildLabs": ["Build Lab 19.3: Induction Proofs"]
+    },
+    {
+      "id": "foundations-proof-by-contrapositive",
+      "name": "Proof by Contrapositive",
+      "type": "technique",
+      "domain": "foundations",
+      "chapter": 19,
+      "section": "19.3",
+      "planePosition": { "real": -0.7, "imaginary": 0.65 },
+      "formalStatement": "To prove 'P implies Q', instead prove '~Q implies ~P' (the contrapositive). The contrapositive is logically equivalent to the original implication: (P -> Q) iff (~Q -> ~P).",
+      "computationalForm": "Structure: 1. Assume ~Q (negation of conclusion). 2. Derive ~P (negation of hypothesis). 3. Conclude P -> Q by contrapositive equivalence.",
+      "prerequisites": ["Propositional logic", "Logical equivalence"],
+      "dependencies": [
+        {
+          "target": "foundations-logical-equivalence",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Contrapositive relies on logical equivalence of P->Q and ~Q->~P"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-propositional-logic",
+          "yields": "Alternative proof strategy: sometimes ~Q -> ~P is easier than P -> Q directly",
+          "type": "sequential",
+          "conditions": ["Original implication is hard to prove directly"],
+          "example": "Prove: if n^2 is odd then n is odd. Contrapositive: if n is even then n^2 is even. Proof: n=2k => n^2=4k^2=2(2k^2), even."
+        }
+      ],
+      "applicabilityPatterns": [
+        "Prove an implication by proving its equivalent contrapositive",
+        "Handle cases where the conclusion is hard to derive directly",
+        "Use negations to simplify the proof structure"
+      ],
+      "keywords": ["contrapositive", "negation", "equivalence", "reverse implication"],
+      "tags": ["logic", "proof", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-logical-equivalence",
+      "name": "Logical Equivalence",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 19,
+      "section": "19.1",
+      "planePosition": { "real": -0.75, "imaginary": 0.6 },
+      "formalStatement": "Two propositions P and Q are logically equivalent (P <=> Q) if they have the same truth value in every possible interpretation. Equivalently, P <=> Q iff (P -> Q) and (Q -> P). Key equivalences: P -> Q <=> ~P v Q, ~(P ^ Q) <=> ~P v ~Q.",
+      "computationalForm": "Check equivalence via truth tables: P <=> Q iff truth tables have identical final columns. Or prove both directions: P -> Q and Q -> P.",
+      "prerequisites": ["Propositional logic", "Truth tables"],
+      "dependencies": [
+        {
+          "target": "foundations-propositional-logic",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Logical equivalence is a relation between propositions"
+        }
+      ],
+      "enables": ["foundations-proof-by-contrapositive", "foundations-de-morgans-laws"],
+      "compositionRules": [
+        {
+          "with": "foundations-truth-tables",
+          "yields": "Mechanical verification of equivalence: compare truth table columns",
+          "type": "sequential",
+          "conditions": ["Finite number of atomic propositions"],
+          "example": "P -> Q <=> ~P v Q: both false only when P=T, Q=F"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Simplify logical expressions by replacing with equivalent forms",
+        "Verify that two different formulations say the same thing",
+        "Transform implications into disjunctions for easier reasoning"
+      ],
+      "keywords": ["logical equivalence", "biconditional", "iff", "same truth value"],
+      "tags": ["logic", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-tautology",
+      "name": "Tautology and Contradiction",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 19,
+      "section": "19.1",
+      "planePosition": { "real": -0.7, "imaginary": 0.55 },
+      "formalStatement": "A tautology is a proposition that is true under every possible assignment of truth values to its variables. A contradiction is a proposition that is false under every assignment. A contingency is neither. Example tautology: P v ~P. Example contradiction: P ^ ~P.",
+      "computationalForm": "Check via truth table: if all rows give TRUE, it is a tautology. If all rows give FALSE, it is a contradiction. Tautologies are logically valid formulas.",
+      "prerequisites": ["Propositional logic", "Truth tables"],
+      "dependencies": [
+        {
+          "target": "foundations-propositional-logic",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Tautologies and contradictions are propositional logic concepts"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-proof-by-contradiction",
+          "yields": "Contradiction detection: if an assumption leads to P ^ ~P, the assumption is false",
+          "type": "sequential",
+          "conditions": ["Logical deduction chain"],
+          "example": "Assume sqrt(2) = p/q -> leads to P='p is even' and 'q is even' contradicting 'gcd(p,q)=1'"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Identify logical formulas that are always true or always false",
+        "Verify the validity of argument forms",
+        "Recognize contradictions to apply proof by contradiction"
+      ],
+      "keywords": ["tautology", "contradiction", "valid", "satisfiable", "contingency"],
+      "tags": ["logic", "propositional"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-de-morgans-laws",
+      "name": "De Morgan's Laws",
+      "type": "identity",
+      "domain": "foundations",
+      "chapter": 19,
+      "section": "19.2",
+      "planePosition": { "real": -0.75, "imaginary": 0.55 },
+      "formalStatement": "For propositions: ~(P ^ Q) <=> (~P v ~Q) and ~(P v Q) <=> (~P ^ ~Q). For sets: (A inter B)^c = A^c union B^c and (A union B)^c = A^c inter B^c. These laws connect negation with conjunction and disjunction.",
+      "computationalForm": "To negate a conjunction: negate each part and change AND to OR. To negate a disjunction: negate each part and change OR to AND. Extends to n terms: ~(P_1 ^ ... ^ P_n) = ~P_1 v ... v ~P_n.",
+      "prerequisites": ["Propositional logic", "Set operations", "Negation"],
+      "dependencies": [
+        {
+          "target": "foundations-logical-equivalence",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "De Morgan's laws are logical equivalences"
+        },
+        {
+          "target": "foundations-set-complement",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Set version uses complement operation"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-predicate-logic",
+          "yields": "Quantifier negation: ~(forall x, P(x)) <=> exists x, ~P(x) (generalized De Morgan's)",
+          "type": "parallel",
+          "conditions": ["Quantified propositions"],
+          "example": "'Not all students passed' <=> 'some student did not pass'"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Negate complex logical expressions systematically",
+        "Convert between union/intersection under complement",
+        "Simplify logical formulas by pushing negations inward"
+      ],
+      "keywords": ["De Morgan", "negation", "duality", "complement", "AND-OR"],
+      "tags": ["logic", "identity", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-modus-ponens",
+      "name": "Modus Ponens",
+      "type": "axiom",
+      "domain": "foundations",
+      "chapter": 19,
+      "section": "19.3",
+      "planePosition": { "real": -0.8, "imaginary": 0.7 },
+      "formalStatement": "Modus ponens is the fundamental rule of inference: from P and P -> Q, conclude Q. In symbols: {P, P -> Q} |- Q. It is the basis of all forward reasoning in logic.",
+      "computationalForm": "Given: premise P is true, and conditional P -> Q is true. Conclude: Q is true. Chain: if also Q -> R, then conclude R (hypothetical syllogism).",
+      "prerequisites": ["Propositional logic", "Implication"],
+      "dependencies": [],
+      "enables": ["foundations-proof-by-direct"],
+      "compositionRules": [
+        {
+          "with": "foundations-proof-by-direct",
+          "yields": "Direct proof chains: P -> Q, Q -> R gives P -> R via repeated modus ponens",
+          "type": "sequential",
+          "conditions": ["Valid implications established"],
+          "example": "If it rains, the ground is wet. It rains. Therefore the ground is wet."
+        }
+      ],
+      "applicabilityPatterns": [
+        "Apply a conditional rule to derive a new fact",
+        "Chain logical implications together",
+        "Implement the basic step of logical deduction"
+      ],
+      "keywords": ["modus ponens", "inference", "deduction", "implication elimination"],
+      "tags": ["logic", "axiom", "inference"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-formal-axiomatic-system",
+      "name": "Formal Axiomatic System",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 19,
+      "section": "19.5",
+      "planePosition": { "real": -0.8, "imaginary": 0.75 },
+      "formalStatement": "A formal axiomatic system consists of: (1) a language (symbols, terms, formulas), (2) axioms (accepted truths), (3) rules of inference (ways to derive new theorems from axioms and existing theorems). A system is consistent if it cannot prove both P and ~P. It is complete if every true statement is provable.",
+      "computationalForm": "Define: alphabet, formation rules (well-formed formulas), axioms (initial theorems), inference rules. A proof is a finite sequence of formulas, each an axiom or derived from previous ones by inference rules. A theorem is the last formula in a proof.",
+      "prerequisites": ["Predicate logic", "Proof techniques"],
+      "dependencies": [
+        {
+          "target": "foundations-predicate-logic",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Formal systems are built on formal logic"
+        }
+      ],
+      "enables": ["foundations-godels-incompleteness"],
+      "compositionRules": [
+        {
+          "with": "foundations-godels-incompleteness",
+          "yields": "Fundamental limitation: no consistent system rich enough for arithmetic can prove all truths about arithmetic",
+          "type": "sequential",
+          "conditions": ["System contains basic arithmetic"],
+          "example": "Peano arithmetic: consistent and sound, but incomplete (by Godel's theorems)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Formalize a mathematical theory with explicit axioms and rules",
+        "Determine what can and cannot be proved in a given system",
+        "Study the foundations of mathematical reasoning"
+      ],
+      "keywords": ["formal system", "axiomatic", "consistency", "completeness", "derivation"],
+      "tags": ["logic", "metamathematics", "foundations"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-godels-incompleteness",
+      "name": "Godel's Incompleteness Theorems",
+      "type": "theorem",
+      "domain": "foundations",
+      "chapter": 19,
+      "section": "19.6",
+      "planePosition": { "real": -0.75, "imaginary": 0.8 },
+      "formalStatement": "First theorem: Any consistent formal system F capable of expressing basic arithmetic contains statements that are true but unprovable in F. Second theorem: F cannot prove its own consistency (if it is in fact consistent).",
+      "computationalForm": "Construct a Godel sentence G that says 'I am not provable in F'. If F is consistent: G is true but unprovable (if G were provable, F proves something false, contradicting consistency). This shows F is incomplete. Adding G as an axiom creates a new system with its own Godel sentence.",
+      "prerequisites": ["Formal axiomatic systems", "Self-reference", "Arithmetic coding"],
+      "dependencies": [
+        {
+          "target": "foundations-formal-axiomatic-system",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Incompleteness is a property of formal axiomatic systems"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-formal-axiomatic-system",
+          "yields": "Fundamental limits of formalization: no finite axiom system can capture all mathematical truth",
+          "type": "parallel",
+          "conditions": ["System extends basic arithmetic", "System is consistent"],
+          "example": "Peano arithmetic cannot prove Con(PA), the statement of its own consistency"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Understand the inherent limitations of formal mathematical systems",
+        "Explain why no single theory can prove all mathematical truths",
+        "Recognize self-referential constructions in logic"
+      ],
+      "keywords": ["Godel", "incompleteness", "undecidable", "self-reference", "consistency"],
+      "tags": ["logic", "metamathematics", "fundamental-theorem"],
+      "buildLabs": ["Build Lab 19.4: Godel's Surprise"]
+    },
+    {
+      "id": "foundations-group-definition",
+      "name": "Group Definition and Axioms",
+      "type": "axiom",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.1",
+      "planePosition": { "real": -0.5, "imaginary": 0.6 },
+      "formalStatement": "A group (G, *) is a set G with a binary operation * satisfying: (1) Closure: a*b in G for all a,b in G. (2) Associativity: (a*b)*c = a*(b*c). (3) Identity: exists e in G such that e*a = a*e = a. (4) Inverses: for each a, exists a^{-1} with a*a^{-1} = a^{-1}*a = e.",
+      "computationalForm": "Verify group axioms: check closure (operation table stays in G), associativity (check all triples), identity element exists, every element has an inverse. Abelian group: additionally a*b = b*a for all a,b.",
+      "prerequisites": ["Sets", "Binary operations", "Associativity"],
+      "dependencies": [],
+      "enables": ["foundations-subgroup", "foundations-homomorphism", "foundations-isomorphism", "foundations-cyclic-group", "foundations-symmetry-group", "foundations-lagranges-theorem", "foundations-group-action"],
+      "compositionRules": [
+        {
+          "with": "foundations-homomorphism",
+          "yields": "Group homomorphisms preserve group structure: f(a*b) = f(a)*f(b)",
+          "type": "sequential",
+          "conditions": ["Both domain and codomain are groups"],
+          "example": "exp: (R, +) -> (R+, *) is a group homomorphism: exp(a+b) = exp(a)*exp(b)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Verify if a set with an operation forms a group",
+        "Identify symmetries of objects as group elements",
+        "Study algebraic structures with a single binary operation"
+      ],
+      "keywords": ["group", "axioms", "associative", "identity", "inverse", "closure"],
+      "tags": ["algebra", "group-theory", "axioms", "fundamental"],
+      "buildLabs": ["Build Lab 20.1: Groups and Symmetry"]
+    },
+    {
+      "id": "foundations-subgroup",
+      "name": "Subgroup",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.1",
+      "planePosition": { "real": -0.5, "imaginary": 0.65 },
+      "formalStatement": "A subset H of group G is a subgroup if H is itself a group under the same operation. Equivalently (subgroup test): H is nonempty, and for all a, b in H: a*b^{-1} in H.",
+      "computationalForm": "Subgroup test: 1. Check H is nonempty. 2. For all a, b in H, check a*b^{-1} in H. If both pass, H is a subgroup. Index [G:H] = |G|/|H| (for finite groups, by Lagrange's theorem).",
+      "prerequisites": ["Group definition"],
+      "dependencies": [
+        {
+          "target": "foundations-group-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Subgroup inherits group structure"
+        }
+      ],
+      "enables": ["foundations-quotient-group", "foundations-lagranges-theorem"],
+      "compositionRules": [
+        {
+          "with": "foundations-lagranges-theorem",
+          "yields": "Subgroup order divides group order: |H| divides |G|",
+          "type": "sequential",
+          "conditions": ["G is a finite group", "H is a subgroup of G"],
+          "example": "S_3 has order 6; subgroups have order 1, 2, 3, or 6 (all divisors of 6)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Identify a subset of a group that is itself a group",
+        "Find all subgroups of a given group",
+        "Determine the index of a subgroup"
+      ],
+      "keywords": ["subgroup", "subset", "closure", "index", "subgroup test"],
+      "tags": ["algebra", "group-theory"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-homomorphism",
+      "name": "Homomorphism",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.2",
+      "planePosition": { "real": -0.45, "imaginary": 0.65 },
+      "formalStatement": "A group homomorphism f: G -> H is a function satisfying f(a *_G b) = f(a) *_H f(b) for all a, b in G. It preserves the group operation. The kernel ker(f) = {a in G : f(a) = e_H} is a normal subgroup of G. The image im(f) is a subgroup of H.",
+      "computationalForm": "Verify: f(a*b) = f(a)*f(b) for all a, b. Kernel: find all elements mapping to identity. Image: compute f(a) for all a in G. Properties: f(e_G) = e_H, f(a^{-1}) = f(a)^{-1}.",
+      "prerequisites": ["Group definition", "Functions"],
+      "dependencies": [
+        {
+          "target": "foundations-group-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Homomorphism is defined between groups"
+        },
+        {
+          "target": "foundations-function-as-relation",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "A homomorphism is a function with additional structure"
+        }
+      ],
+      "enables": ["foundations-isomorphism", "foundations-kernel-image", "foundations-first-isomorphism-theorem"],
+      "compositionRules": [
+        {
+          "with": "foundations-kernel-image",
+          "yields": "Structure theorem: G/ker(f) is isomorphic to im(f) (First Isomorphism Theorem)",
+          "type": "sequential",
+          "conditions": ["f is a group homomorphism"],
+          "example": "f: Z -> Z/nZ by f(k) = k mod n; ker(f) = nZ, im(f) = Z/nZ, and Z/nZ ≅ Z/nZ"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Define a structure-preserving map between groups",
+        "Identify the kernel and image of a group map",
+        "Classify groups up to homomorphic relationships"
+      ],
+      "keywords": ["homomorphism", "structure-preserving", "kernel", "image", "group map"],
+      "tags": ["algebra", "group-theory", "morphisms"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-isomorphism",
+      "name": "Isomorphism",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.2",
+      "planePosition": { "real": -0.4, "imaginary": 0.65 },
+      "formalStatement": "A group isomorphism f: G -> H is a bijective homomorphism. Two groups are isomorphic (G ≅ H) if an isomorphism exists between them. Isomorphic groups have identical algebraic structure: same order, same number of elements of each order, same subgroup lattice.",
+      "computationalForm": "Check: f is bijective and f(a*b) = f(a)*f(b). Isomorphic groups: match elements by order, check operation tables match. Classification: up to isomorphism, identify distinct group structures.",
+      "prerequisites": ["Homomorphism", "Bijection"],
+      "dependencies": [
+        {
+          "target": "foundations-homomorphism",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Isomorphism is a special homomorphism"
+        }
+      ],
+      "enables": ["foundations-first-isomorphism-theorem"],
+      "compositionRules": [
+        {
+          "with": "foundations-group-definition",
+          "yields": "Group classification: identify all groups of a given order up to isomorphism",
+          "type": "parallel",
+          "conditions": ["Finite groups of given order"],
+          "example": "Groups of order 4: Z/4Z and Z/2Z x Z/2Z (only two, up to isomorphism)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if two groups have the same algebraic structure",
+        "Classify groups by identifying isomorphism classes",
+        "Transfer results between isomorphic groups"
+      ],
+      "keywords": ["isomorphism", "bijective homomorphism", "structurally identical", "classification"],
+      "tags": ["algebra", "group-theory", "morphisms"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-ring-definition",
+      "name": "Ring Definition",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.3",
+      "planePosition": { "real": -0.45, "imaginary": 0.7 },
+      "formalStatement": "A ring (R, +, *) is a set with two binary operations: (R, +) is an abelian group, (R, *) is a monoid (associative with identity 1), and * distributes over +: a*(b+c) = a*b + a*c and (a+b)*c = a*c + b*c.",
+      "computationalForm": "Verify: (R, +) is abelian group, * is associative with identity, left and right distributivity hold. Commutative ring: a*b = b*a. Examples: Z, Z/nZ, polynomial ring R[x], matrix ring M_n(R).",
+      "prerequisites": ["Group definition", "Binary operations", "Distributivity"],
+      "dependencies": [
+        {
+          "target": "foundations-group-definition",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "(R, +) must be an abelian group"
+        }
+      ],
+      "enables": ["foundations-field-definition"],
+      "compositionRules": [
+        {
+          "with": "foundations-field-definition",
+          "yields": "Fields are commutative rings where every nonzero element has a multiplicative inverse",
+          "type": "sequential",
+          "conditions": ["Ring is commutative and every nonzero element is a unit"],
+          "example": "Z is a ring but not a field (2 has no multiplicative inverse). Q is a field."
+        }
+      ],
+      "applicabilityPatterns": [
+        "Study algebraic structures with two operations (addition and multiplication)",
+        "Determine if a set with two operations forms a ring",
+        "Work with polynomial rings, matrix rings, and modular arithmetic"
+      ],
+      "keywords": ["ring", "addition", "multiplication", "distributive", "commutative ring"],
+      "tags": ["algebra", "ring-theory"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-field-definition",
+      "name": "Field Definition",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.3",
+      "planePosition": { "real": -0.4, "imaginary": 0.7 },
+      "formalStatement": "A field (F, +, *) is a commutative ring where every nonzero element has a multiplicative inverse: for all a != 0, exists a^{-1} with a*a^{-1} = 1. Equivalently, (F\\{0}, *) is an abelian group. Examples: Q, R, C, Z/pZ (p prime), finite fields F_q.",
+      "computationalForm": "Verify: (F, +) abelian group, (F\\{0}, *) abelian group, distributivity. In a field: division is always possible (except by 0). Characteristic: smallest positive n with n*1 = 0 (0 if no such n).",
+      "prerequisites": ["Ring definition", "Multiplicative inverse"],
+      "dependencies": [
+        {
+          "target": "foundations-ring-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "A field is a special kind of ring"
+        }
+      ],
+      "enables": ["foundations-galois-theory"],
+      "compositionRules": [
+        {
+          "with": "foundations-group-definition",
+          "yields": "A field has two group structures: (F, +) and (F\\{0}, *), connected by distributivity",
+          "type": "parallel",
+          "conditions": ["Both operations defined on F"],
+          "example": "R: (R, +) is additive group; (R\\{0}, *) is multiplicative group; multiplication distributes over addition"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if an algebraic structure is a field",
+        "Work with number systems where division is possible",
+        "Build vector spaces over a field"
+      ],
+      "keywords": ["field", "division", "multiplicative inverse", "characteristic", "finite field"],
+      "tags": ["algebra", "field-theory", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-quotient-group",
+      "name": "Quotient Group (Normal Subgroup)",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.4",
+      "planePosition": { "real": -0.5, "imaginary": 0.7 },
+      "formalStatement": "If N is a normal subgroup of G (gNg^{-1} = N for all g), the quotient group G/N consists of cosets gN = {gn : n in N} with operation (gN)(hN) = (gh)N. |G/N| = |G|/|N| = [G:N].",
+      "computationalForm": "1. Verify N is normal: gNg^{-1} = N for all g. 2. Form cosets: gN for each g in G. 3. Identify distinct cosets (gN = hN iff g^{-1}h in N). 4. Define multiplication: (gN)(hN) = (gh)N.",
+      "prerequisites": ["Subgroup", "Normal subgroup", "Cosets"],
+      "dependencies": [
+        {
+          "target": "foundations-subgroup",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Normal subgroup is a special subgroup"
+        },
+        {
+          "target": "foundations-equivalence-relation",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Cosets form equivalence classes"
+        }
+      ],
+      "enables": ["foundations-first-isomorphism-theorem"],
+      "compositionRules": [
+        {
+          "with": "foundations-first-isomorphism-theorem",
+          "yields": "G/ker(f) ≅ im(f): quotient by kernel gives the image",
+          "type": "sequential",
+          "conditions": ["f is a group homomorphism"],
+          "example": "Z/3Z: cosets {0,3,6,...}, {1,4,7,...}, {2,5,8,...} form group of order 3"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Construct a new group by collapsing a normal subgroup to the identity",
+        "Simplify group structure by modding out a subgroup",
+        "Build modular arithmetic as a quotient group"
+      ],
+      "keywords": ["quotient group", "normal subgroup", "coset", "factor group"],
+      "tags": ["algebra", "group-theory"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-lagranges-theorem",
+      "name": "Lagrange's Theorem",
+      "type": "theorem",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.2",
+      "planePosition": { "real": -0.55, "imaginary": 0.7 },
+      "formalStatement": "For a finite group G and subgroup H: |H| divides |G|. The index [G:H] = |G|/|H| equals the number of distinct cosets of H in G. Consequence: the order of every element divides the order of the group.",
+      "computationalForm": "|G| = |H| * [G:H]. For element a of order d: d divides |G|. Possible subgroup orders divide |G|. This constrains which subgroups can exist.",
+      "prerequisites": ["Group definition", "Subgroup", "Cosets"],
+      "dependencies": [
+        {
+          "target": "foundations-subgroup",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Theorem relates subgroup order to group order"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-group-definition",
+          "yields": "Order constraints: possible element orders and subgroup orders of a finite group",
+          "type": "sequential",
+          "conditions": ["Finite group G"],
+          "example": "Group of order 12: element orders can be 1, 2, 3, 4, 6, or 12; subgroup orders can be 1, 2, 3, 4, 6, or 12"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine which subgroup orders are possible for a finite group",
+        "Prove that element order divides group order",
+        "Count the number of cosets of a subgroup"
+      ],
+      "keywords": ["Lagrange", "order divides", "coset", "index", "finite group"],
+      "tags": ["algebra", "group-theory", "fundamental-theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-first-isomorphism-theorem",
+      "name": "First Isomorphism Theorem",
+      "type": "theorem",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.4",
+      "planePosition": { "real": -0.45, "imaginary": 0.75 },
+      "formalStatement": "For a group homomorphism f: G -> H, the quotient G/ker(f) is isomorphic to im(f): G/ker(f) ≅ im(f). The map gN -> f(g) is a well-defined isomorphism.",
+      "computationalForm": "Given f: G -> H. 1. Compute ker(f) = {g : f(g) = e_H}. 2. Form quotient G/ker(f). 3. The map phi: G/ker(f) -> im(f) by phi(gN) = f(g) is an isomorphism. |im(f)| = |G|/|ker(f)|.",
+      "prerequisites": ["Homomorphism", "Quotient group", "Isomorphism"],
+      "dependencies": [
+        {
+          "target": "foundations-homomorphism",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Theorem is about group homomorphisms"
+        },
+        {
+          "target": "foundations-quotient-group",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Uses quotient group construction"
+        },
+        {
+          "target": "foundations-isomorphism",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Conclusion is an isomorphism"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-homomorphism",
+          "yields": "Factor any homomorphism through a quotient: f = injection o canonical projection",
+          "type": "sequential",
+          "conditions": ["Group homomorphism f"],
+          "example": "f: Z -> Z/5Z by f(n) = n mod 5: ker = 5Z, Z/5Z ≅ Z/5Z"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Relate the quotient by a kernel to the image of a homomorphism",
+        "Determine the structure of a quotient group",
+        "Factor homomorphisms through quotient constructions"
+      ],
+      "keywords": ["isomorphism theorem", "kernel", "quotient", "image", "factor"],
+      "tags": ["algebra", "group-theory", "fundamental-theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-cyclic-group",
+      "name": "Cyclic Group and Generators",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.1",
+      "planePosition": { "real": -0.55, "imaginary": 0.6 },
+      "formalStatement": "A group G is cyclic if G = <a> = {a^n : n in Z} for some generator a. Every cyclic group is isomorphic to Z (infinite) or Z/nZ (finite of order n). Cyclic groups are always abelian. Every subgroup of a cyclic group is cyclic.",
+      "computationalForm": "Find generator: element a such that powers of a produce all group elements. For Z/nZ: generators are elements coprime to n. Number of generators = phi(n) (Euler's totient). Subgroups of Z/nZ: one for each divisor of n.",
+      "prerequisites": ["Group definition"],
+      "dependencies": [
+        {
+          "target": "foundations-group-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Cyclic groups are a special class of groups"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-lagranges-theorem",
+          "yields": "In a cyclic group of order n, there is exactly one subgroup of order d for each divisor d of n",
+          "type": "sequential",
+          "conditions": ["Finite cyclic group"],
+          "example": "Z/12Z: subgroups of order 1,2,3,4,6,12 generated by 0,6,4,3,2,1 respectively"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if a group is generated by a single element",
+        "Classify all cyclic groups and their subgroups",
+        "Work with modular arithmetic as cyclic group operations"
+      ],
+      "keywords": ["cyclic group", "generator", "order", "Z/nZ", "abelian"],
+      "tags": ["algebra", "group-theory"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-symmetry-group",
+      "name": "Symmetry Group (Permutation Group)",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.5",
+      "planePosition": { "real": -0.4, "imaginary": 0.6 },
+      "formalStatement": "The symmetric group S_n is the group of all permutations of {1,...,n} under composition. |S_n| = n!. Every group is isomorphic to a subgroup of some S_n (Cayley's theorem). Dihedral group D_n: symmetries of regular n-gon, |D_n| = 2n.",
+      "computationalForm": "Represent permutations as functions or cycle notation. Compose by applying right-to-left. Order of a permutation = LCM of cycle lengths. S_n generators: any transposition and any n-cycle.",
+      "prerequisites": ["Group definition", "Functions", "Composition"],
+      "dependencies": [
+        {
+          "target": "foundations-group-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Symmetric group is a group under composition"
+        }
+      ],
+      "enables": ["foundations-galois-theory"],
+      "compositionRules": [
+        {
+          "with": "foundations-group-action",
+          "yields": "Group actions on sets: S_n naturally acts on {1,...,n} by permuting elements",
+          "type": "parallel",
+          "conditions": ["Set with n elements"],
+          "example": "D_3 acts on triangle vertices: rotations and reflections permute {1,2,3}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Study symmetries of geometric objects as group elements",
+        "Represent any group as a permutation group (Cayley's theorem)",
+        "Count arrangements and symmetric configurations"
+      ],
+      "keywords": ["symmetric group", "permutation", "S_n", "dihedral", "cycle notation"],
+      "tags": ["algebra", "group-theory", "symmetry"],
+      "buildLabs": ["Build Lab 20.2: Symmetry Groups of Regular Polygons"]
+    },
+    {
+      "id": "foundations-galois-theory",
+      "name": "Galois Theory Connection",
+      "type": "theorem",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.6",
+      "planePosition": { "real": -0.35, "imaginary": 0.75 },
+      "formalStatement": "Galois theory establishes a correspondence between field extensions and groups: the Galois group Gal(E/F) consists of field automorphisms of E fixing F. The Fundamental Theorem of Galois Theory: subgroups of Gal(E/F) correspond bijectively to intermediate fields between F and E.",
+      "computationalForm": "For polynomial p(x) over F: splitting field E = F(roots of p). Gal(E/F) = automorphisms of E fixing F. Subgroup H corresponds to fixed field E^H. Application: p(x) is solvable by radicals iff Gal(E/F) is a solvable group.",
+      "prerequisites": ["Group definition", "Field definition", "Polynomial roots"],
+      "dependencies": [
+        {
+          "target": "foundations-field-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Galois theory connects fields and groups"
+        },
+        {
+          "target": "foundations-symmetry-group",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Galois groups are often subgroups of symmetric groups"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-symmetry-group",
+          "yields": "Unsolvability of the quintic: S_5 is not solvable, so general degree-5 polynomials have no radical formula",
+          "type": "sequential",
+          "conditions": ["Polynomial of degree >= 5"],
+          "example": "x^5 - x - 1: Galois group is S_5, which is not solvable -> no formula in radicals"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if a polynomial equation is solvable by radicals",
+        "Study the symmetries of polynomial roots",
+        "Connect field extensions to group theory"
+      ],
+      "keywords": ["Galois", "field extension", "automorphism", "solvable", "radical"],
+      "tags": ["algebra", "field-theory", "fundamental-theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-group-action",
+      "name": "Group Action",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.5",
+      "planePosition": { "real": -0.4, "imaginary": 0.55 },
+      "formalStatement": "A group action of G on a set X is a function G x X -> X written g.x satisfying: (1) e.x = x for all x (identity acts trivially), (2) (gh).x = g.(h.x) for all g,h,x (compatibility). The orbit of x is O_x = {g.x : g in G}. The stabilizer of x is G_x = {g : g.x = x}.",
+      "computationalForm": "Orbit-stabilizer theorem: |O_x| * |G_x| = |G|. Burnside's lemma: number of orbits = (1/|G|) sum_{g in G} |Fix(g)|. Faithful action: only identity fixes all points.",
+      "prerequisites": ["Group definition", "Sets", "Functions"],
+      "dependencies": [
+        {
+          "target": "foundations-group-definition",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Group actions require a group acting on a set"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-symmetry-group",
+          "yields": "Counting symmetric configurations via Burnside's lemma",
+          "type": "sequential",
+          "conditions": ["Finite group acting on finite set"],
+          "example": "Color cube faces with 2 colors: rotation group has 24 elements, Burnside gives 10 distinct colorings"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Model how a group of symmetries transforms a set",
+        "Count distinct objects up to symmetry equivalence",
+        "Decompose a set into orbits under a group action"
+      ],
+      "keywords": ["group action", "orbit", "stabilizer", "Burnside", "fixed point"],
+      "tags": ["algebra", "group-theory", "combinatorics"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-kernel-image",
+      "name": "Kernel and Image",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 20,
+      "section": "20.2",
+      "planePosition": { "real": -0.5, "imaginary": 0.65 },
+      "formalStatement": "For a group homomorphism f: G -> H: the kernel ker(f) = {g in G : f(g) = e_H} is a normal subgroup of G. The image im(f) = {f(g) : g in G} is a subgroup of H. f is injective iff ker(f) = {e_G}. f is surjective iff im(f) = H.",
+      "computationalForm": "Compute kernel: find all elements mapping to identity. Compute image: apply f to all elements. |im(f)| = [G : ker(f)] (by first isomorphism theorem). Test injectivity: check ker(f) = {e}.",
+      "prerequisites": ["Homomorphism", "Subgroup", "Normal subgroup"],
+      "dependencies": [
+        {
+          "target": "foundations-homomorphism",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Kernel and image are defined for homomorphisms"
+        }
+      ],
+      "enables": ["foundations-first-isomorphism-theorem"],
+      "compositionRules": [
+        {
+          "with": "foundations-quotient-group",
+          "yields": "G/ker(f) ≅ im(f) (first isomorphism theorem)",
+          "type": "sequential",
+          "conditions": ["f is a group homomorphism"],
+          "example": "det: GL(n,R) -> R*: kernel = SL(n,R) (matrices with det=1), image = R*"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find elements that map to the identity under a homomorphism",
+        "Determine the range of a group homomorphism",
+        "Test if a homomorphism is injective or surjective"
+      ],
+      "keywords": ["kernel", "image", "normal subgroup", "injective", "surjective"],
+      "tags": ["algebra", "group-theory", "morphisms"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-topological-space",
+      "name": "Topological Space",
+      "type": "axiom",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.1",
+      "planePosition": { "real": -0.4, "imaginary": 0.7 },
+      "formalStatement": "A topological space (X, tau) is a set X with a collection tau of subsets (called open sets) satisfying: (1) emptyset and X are in tau. (2) Any union of sets in tau is in tau. (3) Any finite intersection of sets in tau is in tau.",
+      "computationalForm": "Verify topology axioms: check empty set and X are open, arbitrary unions of open sets are open, finite intersections of open sets are open. Common topologies: discrete (all subsets open), trivial ({emptyset, X}), metric topology, product topology.",
+      "prerequisites": ["Sets", "Subsets", "Unions and intersections"],
+      "dependencies": [],
+      "enables": ["foundations-open-closed-set", "foundations-continuity-topology", "foundations-homeomorphism", "foundations-compactness", "foundations-connectedness", "foundations-hausdorff", "foundations-metric-space", "foundations-product-topology"],
+      "compositionRules": [
+        {
+          "with": "foundations-continuity-topology",
+          "yields": "Continuous functions: f: X -> Y is continuous iff preimage of every open set is open",
+          "type": "sequential",
+          "conditions": ["Both X and Y are topological spaces"],
+          "example": "f: R -> R continuous iff f^{-1}(a,b) is open for every interval (a,b)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Define the concept of 'nearness' or 'openness' without a metric",
+        "Study properties preserved under continuous deformation",
+        "Generalize analysis to abstract settings"
+      ],
+      "keywords": ["topological space", "topology", "open set", "axioms", "continuous"],
+      "tags": ["topology", "axioms", "fundamental"],
+      "buildLabs": ["Build Lab 21.1: Topological Spaces"]
+    },
+    {
+      "id": "foundations-open-closed-set",
+      "name": "Open Set and Closed Set",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.1",
+      "planePosition": { "real": -0.4, "imaginary": 0.65 },
+      "formalStatement": "In a topological space (X, tau), a set U is open if U in tau. A set C is closed if X \\ C is open. The closure cl(A) is the smallest closed set containing A. The interior int(A) is the largest open set contained in A. A set can be both open and closed (clopen).",
+      "computationalForm": "Open: check membership in tau. Closed: check complement is in tau. Closure: cl(A) = intersection of all closed sets containing A. Interior: int(A) = union of all open sets contained in A. Boundary: bd(A) = cl(A) \\ int(A).",
+      "prerequisites": ["Topological space", "Set operations"],
+      "dependencies": [
+        {
+          "target": "foundations-topological-space",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Open and closed are defined relative to a topology"
+        }
+      ],
+      "enables": ["foundations-continuity-topology", "foundations-compactness", "foundations-connectedness"],
+      "compositionRules": [
+        {
+          "with": "foundations-metric-space",
+          "yields": "Metric topology: open balls B(x,r) = {y : d(x,y) < r} generate the metric topology",
+          "type": "sequential",
+          "conditions": ["Metric space (X, d)"],
+          "example": "In R: open intervals (a,b) are open sets, closed intervals [a,b] are closed sets"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if a set is open, closed, or neither in a given topology",
+        "Compute the closure, interior, and boundary of a set",
+        "Work with topological properties defined via open/closed sets"
+      ],
+      "keywords": ["open set", "closed set", "closure", "interior", "boundary", "clopen"],
+      "tags": ["topology", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-continuity-topology",
+      "name": "Continuity in Topology",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.2",
+      "planePosition": { "real": -0.35, "imaginary": 0.7 },
+      "formalStatement": "A function f: X -> Y between topological spaces is continuous if for every open set V in Y, the preimage f^{-1}(V) is open in X. This generalizes the epsilon-delta definition: in metric spaces, the two definitions are equivalent.",
+      "computationalForm": "Check: for each open V in Y, verify f^{-1}(V) is open in X. Equivalently: for each closed C in Y, f^{-1}(C) is closed in X. In metric spaces: for every epsilon > 0, exists delta > 0 such that d_X(x, x_0) < delta implies d_Y(f(x), f(x_0)) < epsilon.",
+      "prerequisites": ["Topological space", "Open sets", "Preimage"],
+      "dependencies": [
+        {
+          "target": "foundations-topological-space",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Continuity is defined between topological spaces"
+        },
+        {
+          "target": "foundations-open-closed-set",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Defined via preimages of open sets"
+        }
+      ],
+      "enables": ["foundations-homeomorphism"],
+      "compositionRules": [
+        {
+          "with": "foundations-homeomorphism",
+          "yields": "Topological equivalence: continuous bijection with continuous inverse",
+          "type": "sequential",
+          "conditions": ["f is bijective and both f and f^{-1} are continuous"],
+          "example": "f(t) = (cos t, sin t): [0, 2pi) -> circle is continuous bijection, but not homeomorphism (inverse not continuous)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if a function between topological spaces is continuous",
+        "Generalize continuity from metric spaces to arbitrary topologies",
+        "Preserve topological properties under continuous maps"
+      ],
+      "keywords": ["continuous", "preimage", "open", "epsilon-delta", "topological"],
+      "tags": ["topology", "continuity", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-homeomorphism",
+      "name": "Homeomorphism",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.2",
+      "planePosition": { "real": -0.3, "imaginary": 0.7 },
+      "formalStatement": "A homeomorphism f: X -> Y is a continuous bijection whose inverse f^{-1}: Y -> X is also continuous. Two spaces are homeomorphic (X ≅ Y) if a homeomorphism exists between them. Homeomorphic spaces are topologically equivalent — they share all topological properties.",
+      "computationalForm": "Verify: f is bijective, f is continuous, f^{-1} is continuous. Topological invariants preserved by homeomorphism: compactness, connectedness, fundamental group, Euler characteristic. Not invariant: metric properties (distance, angle).",
+      "prerequisites": ["Continuity in topology", "Bijection"],
+      "dependencies": [
+        {
+          "target": "foundations-continuity-topology",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Homeomorphism requires continuity in both directions"
+        }
+      ],
+      "enables": ["foundations-fundamental-group", "foundations-topological-invariant"],
+      "compositionRules": [
+        {
+          "with": "foundations-euler-characteristic",
+          "yields": "Distinguish non-homeomorphic surfaces by computing their Euler characteristics",
+          "type": "sequential",
+          "conditions": ["Compact surfaces"],
+          "example": "Sphere (chi=2) is not homeomorphic to torus (chi=0) because they have different Euler characteristics"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if two topological spaces are equivalent",
+        "Classify spaces up to topological equivalence",
+        "Prove two spaces are NOT homeomorphic by finding different invariants"
+      ],
+      "keywords": ["homeomorphism", "topological equivalence", "rubber-sheet", "invariant"],
+      "tags": ["topology", "equivalence", "fundamental"],
+      "buildLabs": ["Build Lab 21.2: Homeomorphisms and Rubber-Sheet Geometry"]
+    },
+    {
+      "id": "foundations-compactness",
+      "name": "Compactness",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.3",
+      "planePosition": { "real": -0.3, "imaginary": 0.75 },
+      "formalStatement": "A topological space X is compact if every open cover has a finite subcover: if X = union_{alpha} U_alpha with each U_alpha open, then X = U_{alpha_1} union ... union U_{alpha_n} for finitely many alpha_i. In R^n, compact = closed and bounded (Heine-Borel).",
+      "computationalForm": "Check compactness: for every open cover, extract a finite subcover. In metric spaces: equivalent to sequentially compact (every sequence has convergent subsequence). For R^n subsets: check closed and bounded.",
+      "prerequisites": ["Topological space", "Open covers", "Finiteness"],
+      "dependencies": [
+        {
+          "target": "foundations-topological-space",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Compactness is a topological property"
+        },
+        {
+          "target": "foundations-open-closed-set",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Defined via open covers"
+        }
+      ],
+      "enables": ["foundations-tychonoffs-theorem"],
+      "compositionRules": [
+        {
+          "with": "foundations-continuity-topology",
+          "yields": "Continuous image of compact space is compact; continuous functions on compact spaces attain their bounds",
+          "type": "sequential",
+          "conditions": ["f is continuous", "Domain is compact"],
+          "example": "f: [a,b] -> R continuous: f attains max and min on [a,b] (extreme value theorem)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if a space has the compactness property",
+        "Ensure continuous functions attain their maximum and minimum",
+        "Extract finite information from infinite covers"
+      ],
+      "keywords": ["compact", "open cover", "finite subcover", "Heine-Borel", "bounded"],
+      "tags": ["topology", "analysis", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-connectedness",
+      "name": "Connectedness",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.3",
+      "planePosition": { "real": -0.3, "imaginary": 0.65 },
+      "formalStatement": "A topological space X is connected if it cannot be written as a union of two nonempty disjoint open sets. Equivalently: the only clopen subsets are emptyset and X. Path-connected: any two points can be joined by a continuous path.",
+      "computationalForm": "Check: does there exist a nontrivial partition of X into two open sets? If yes: disconnected. If no: connected. Path-connected implies connected, but not conversely (in general). In R^n: connected iff path-connected (for open sets).",
+      "prerequisites": ["Topological space", "Open sets", "Paths"],
+      "dependencies": [
+        {
+          "target": "foundations-topological-space",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Connectedness is a topological property"
+        },
+        {
+          "target": "foundations-open-closed-set",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Defined via open/closed sets"
+        }
+      ],
+      "enables": ["foundations-fundamental-group"],
+      "compositionRules": [
+        {
+          "with": "foundations-continuity-topology",
+          "yields": "Intermediate value theorem generalization: continuous image of connected space is connected",
+          "type": "sequential",
+          "conditions": ["f is continuous", "Domain is connected"],
+          "example": "f: [0,1] -> R continuous, f(0)=0, f(1)=1: image contains all values between 0 and 1 (IVT)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if a topological space consists of one piece",
+        "Prove existence of solutions via intermediate value theorem",
+        "Classify spaces by their number of connected components"
+      ],
+      "keywords": ["connected", "path-connected", "disconnected", "component"],
+      "tags": ["topology", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-hausdorff",
+      "name": "Hausdorff Space",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.1",
+      "planePosition": { "real": -0.35, "imaginary": 0.65 },
+      "formalStatement": "A topological space is Hausdorff (T2) if for any two distinct points x != y, there exist disjoint open sets U, V with x in U and y in V. In Hausdorff spaces, limits of sequences are unique, and compact subsets are closed.",
+      "computationalForm": "Check: for every pair of distinct points, find separating open neighborhoods. All metric spaces are Hausdorff (use balls of radius d(x,y)/2). Consequences: singletons are closed, limits are unique.",
+      "prerequisites": ["Topological space", "Open sets", "Separation"],
+      "dependencies": [
+        {
+          "target": "foundations-topological-space",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Hausdorff is a separation axiom for topological spaces"
+        }
+      ],
+      "enables": ["foundations-tychonoffs-theorem"],
+      "compositionRules": [
+        {
+          "with": "foundations-compactness",
+          "yields": "In Hausdorff spaces: compact subsets are closed, and compact Hausdorff spaces have nice properties (normality, Urysohn's lemma applies)",
+          "type": "parallel",
+          "conditions": ["Hausdorff space"],
+          "example": "R is Hausdorff; [0,1] is compact and therefore closed in R"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Ensure that limits are unique in a topological space",
+        "Separate points with open neighborhoods",
+        "Work with topological spaces that behave like metric spaces"
+      ],
+      "keywords": ["Hausdorff", "T2", "separation", "unique limits", "disjoint neighborhoods"],
+      "tags": ["topology", "separation-axioms"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-metric-space",
+      "name": "Metric Space",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.1",
+      "planePosition": { "real": -0.3, "imaginary": 0.6 },
+      "formalStatement": "A metric space (X, d) is a set X with a distance function d: X x X -> [0, infinity) satisfying: (1) d(x,y) = 0 iff x = y, (2) d(x,y) = d(y,x) (symmetry), (3) d(x,z) <= d(x,y) + d(y,z) (triangle inequality).",
+      "computationalForm": "Common metrics: Euclidean d_2(x,y) = sqrt(sum (x_i-y_i)^2), Manhattan d_1(x,y) = sum |x_i-y_i|, sup-metric d_inf(x,y) = max |x_i-y_i|. Open ball: B(x,r) = {y : d(x,y) < r}.",
+      "prerequisites": ["Sets", "Real numbers", "Triangle inequality"],
+      "dependencies": [
+        {
+          "target": "foundations-topological-space",
+          "type": "specializes",
+          "strength": 0.8,
+          "description": "Every metric space has a natural topology (metric topology)"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-compactness",
+          "yields": "In metric spaces: compact = complete and totally bounded = sequentially compact",
+          "type": "parallel",
+          "conditions": ["Metric space"],
+          "example": "R^n: compact iff closed and bounded (Heine-Borel theorem)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Define distance between points in a structured way",
+        "Work with convergence and continuity using explicit distances",
+        "Build topological spaces from distance functions"
+      ],
+      "keywords": ["metric", "distance", "triangle inequality", "open ball", "Euclidean"],
+      "tags": ["topology", "metric-spaces", "analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-fundamental-group",
+      "name": "Fundamental Group",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.4",
+      "planePosition": { "real": -0.25, "imaginary": 0.75 },
+      "formalStatement": "The fundamental group pi_1(X, x_0) of a topological space X at basepoint x_0 is the group of homotopy classes of loops based at x_0, with group operation being path concatenation. It measures the 'holes' in X: pi_1(S^1) = Z (one loop type per winding number), pi_1(R^n) = 0 (no holes).",
+      "computationalForm": "Two loops are equivalent if one can be continuously deformed into the other. Identity: constant loop. Inverse: reversed loop. Concatenation: traverse first loop then second. Compute: for simple spaces, use generators and relations.",
+      "prerequisites": ["Topological space", "Continuous paths", "Homotopy", "Group definition"],
+      "dependencies": [
+        {
+          "target": "foundations-homeomorphism",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Fundamental group is a topological invariant"
+        },
+        {
+          "target": "foundations-homotopy",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Fundamental group is defined via homotopy classes"
+        },
+        {
+          "target": "foundations-group-definition",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Fundamental group is a group"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-euler-characteristic",
+          "yields": "Algebraic topology toolkit: fundamental group + Euler characteristic distinguish most surfaces",
+          "type": "parallel",
+          "conditions": ["Compact surface"],
+          "example": "Torus: pi_1 = Z x Z, chi = 0. Klein bottle: pi_1 = Z semidirect Z, chi = 0."
+        }
+      ],
+      "applicabilityPatterns": [
+        "Detect holes in a topological space",
+        "Distinguish non-homeomorphic spaces via their fundamental groups",
+        "Classify surfaces and knots using algebraic invariants"
+      ],
+      "keywords": ["fundamental group", "pi_1", "loop", "homotopy class", "winding number"],
+      "tags": ["topology", "algebraic-topology", "invariants"],
+      "buildLabs": ["Build Lab 21.3: The Fundamental Group"]
+    },
+    {
+      "id": "foundations-euler-characteristic",
+      "name": "Euler Characteristic",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.5",
+      "planePosition": { "real": -0.25, "imaginary": 0.8 },
+      "formalStatement": "The Euler characteristic of a polyhedron or cell complex is chi = V - E + F (vertices minus edges plus faces). For closed surfaces: sphere chi = 2, torus chi = 0, genus-g surface chi = 2 - 2g. Chi is a topological invariant: homeomorphic spaces have the same chi.",
+      "computationalForm": "For a triangulated surface: count V, E, F, compute chi = V - E + F. For genus-g orientable surface: chi = 2 - 2g. Check: same chi is necessary (but not sufficient) for homeomorphism.",
+      "prerequisites": ["Topological space", "Triangulation", "Homeomorphism"],
+      "dependencies": [
+        {
+          "target": "foundations-homeomorphism",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Euler characteristic is a topological invariant"
+        },
+        {
+          "target": "foundations-topological-space",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Defined for topological objects"
+        }
+      ],
+      "enables": ["foundations-topological-invariant"],
+      "compositionRules": [
+        {
+          "with": "foundations-fundamental-group",
+          "yields": "Surface classification: genus g determines both chi and pi_1",
+          "type": "parallel",
+          "conditions": ["Closed orientable surface"],
+          "example": "Genus 1 (torus): chi = 0, pi_1 = Z x Z. Genus 2 (double torus): chi = -2, pi_1 has 4 generators."
+        }
+      ],
+      "applicabilityPatterns": [
+        "Compute a numerical invariant of a surface or polyhedron",
+        "Distinguish surfaces by their Euler characteristic",
+        "Verify Euler's formula for polyhedra: V - E + F = 2"
+      ],
+      "keywords": ["Euler characteristic", "V-E+F", "genus", "topological invariant", "polyhedron"],
+      "tags": ["topology", "invariants", "combinatorics"],
+      "buildLabs": ["Build Lab 21.4: Euler's Formula"]
+    },
+    {
+      "id": "foundations-homotopy",
+      "name": "Homotopy",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.4",
+      "planePosition": { "real": -0.3, "imaginary": 0.8 },
+      "formalStatement": "Two continuous maps f, g: X -> Y are homotopic (f ~ g) if there exists a continuous function H: X x [0,1] -> Y with H(x,0) = f(x) and H(x,1) = g(x). Homotopy is an equivalence relation. Two spaces are homotopy equivalent if there exist maps f: X -> Y and g: Y -> X with g o f ~ id_X and f o g ~ id_Y.",
+      "computationalForm": "Construct H(x,t) that continuously deforms f into g as t goes from 0 to 1. Linear homotopy: H(x,t) = (1-t)*f(x) + t*g(x) (in R^n). Homotopy equivalence is weaker than homeomorphism.",
+      "prerequisites": ["Continuous functions", "Products of topological spaces"],
+      "dependencies": [
+        {
+          "target": "foundations-continuity-topology",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Homotopy is defined via continuous deformations"
+        }
+      ],
+      "enables": ["foundations-fundamental-group"],
+      "compositionRules": [
+        {
+          "with": "foundations-continuity-topology",
+          "yields": "Homotopy type: spaces that are continuously deformable into each other share algebraic invariants",
+          "type": "parallel",
+          "conditions": ["Continuous maps between spaces"],
+          "example": "R^n is homotopy equivalent to a point (contractible): H(x,t) = (1-t)*x continuously shrinks R^n to 0"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if two continuous maps can be continuously deformed into each other",
+        "Classify spaces up to continuous deformation",
+        "Define algebraic invariants via homotopy classes"
+      ],
+      "keywords": ["homotopy", "deformation", "homotopy equivalence", "contractible"],
+      "tags": ["topology", "algebraic-topology"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-topological-invariant",
+      "name": "Topological Invariant",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.5",
+      "planePosition": { "real": -0.25, "imaginary": 0.7 },
+      "formalStatement": "A topological invariant is a property or quantity that is preserved by homeomorphisms. Examples: compactness, connectedness, fundamental group, Euler characteristic, number of holes, orientability. If two spaces differ in any topological invariant, they are not homeomorphic.",
+      "computationalForm": "To show X not homeomorphic to Y: find an invariant that differs. Compactness: [0,1] compact, (0,1) not -> not homeomorphic. Fundamental group: S^1 has pi_1 = Z, [0,1] has pi_1 = 0 -> not homeomorphic.",
+      "prerequisites": ["Homeomorphism", "Fundamental group", "Euler characteristic"],
+      "dependencies": [
+        {
+          "target": "foundations-homeomorphism",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Invariants are preserved by homeomorphisms"
+        },
+        {
+          "target": "foundations-euler-characteristic",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Euler characteristic is a key invariant"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-fundamental-group",
+          "yields": "Algebraic topology: use algebraic invariants (groups, numbers) to distinguish topological spaces",
+          "type": "parallel",
+          "conditions": ["Topological spaces to classify"],
+          "example": "Sphere (pi_1=0, chi=2), torus (pi_1=ZxZ, chi=0), projective plane (pi_1=Z/2Z, chi=1): all distinct"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Distinguish non-homeomorphic spaces using invariant properties",
+        "Classify topological spaces using computable invariants",
+        "Prove that no homeomorphism can exist between two spaces"
+      ],
+      "keywords": ["topological invariant", "preserved", "homeomorphism", "classification"],
+      "tags": ["topology", "invariants", "classification"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-product-topology",
+      "name": "Product Topology",
+      "type": "definition",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.3",
+      "planePosition": { "real": -0.35, "imaginary": 0.8 },
+      "formalStatement": "The product topology on X x Y is the topology generated by sets U x V where U is open in X and V is open in Y. Projections pi_X: X x Y -> X and pi_Y: X x Y -> Y are continuous. For infinite products, the product topology uses finite intersections of preimages of open sets.",
+      "computationalForm": "Basis: products U x V of open sets from each factor. A set is open in X x Y iff it is a union of such basis elements. Continuous maps into X x Y: f is continuous iff pi_X o f and pi_Y o f are continuous.",
+      "prerequisites": ["Topological space", "Cartesian product"],
+      "dependencies": [
+        {
+          "target": "foundations-topological-space",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Product topology is defined on products of topological spaces"
+        },
+        {
+          "target": "foundations-cartesian-product",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Underlying set is the Cartesian product"
+        }
+      ],
+      "enables": ["foundations-tychonoffs-theorem"],
+      "compositionRules": [
+        {
+          "with": "foundations-topological-space",
+          "yields": "R^n with standard topology = product of n copies of R with standard topology",
+          "type": "parallel",
+          "conditions": ["Finite product of topological spaces"],
+          "example": "R^2 = R x R with product topology = standard Euclidean topology on the plane"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Define topology on a product of spaces",
+        "Construct higher-dimensional spaces from lower-dimensional ones",
+        "Verify continuity of functions into product spaces via projections"
+      ],
+      "keywords": ["product topology", "Cartesian product", "projection", "basis"],
+      "tags": ["topology", "construction"],
+      "buildLabs": []
+    },
+    {
+      "id": "foundations-tychonoffs-theorem",
+      "name": "Tychonoff's Theorem",
+      "type": "theorem",
+      "domain": "foundations",
+      "chapter": 21,
+      "section": "21.5",
+      "planePosition": { "real": -0.25, "imaginary": 0.85 },
+      "formalStatement": "The product of any collection of compact topological spaces is compact in the product topology. This is equivalent to the axiom of choice. For finite products, the theorem follows without choice. It is one of the most important theorems in general topology.",
+      "computationalForm": "For finite products: if X_1,...,X_n are compact, then X_1 x ... x X_n is compact (provable without AC). For infinite products: requires AC/Zorn's lemma. Application: closed bounded subsets of R^n are compact (Heine-Borel via Tychonoff).",
+      "prerequisites": ["Compactness", "Product topology", "Axiom of choice"],
+      "dependencies": [
+        {
+          "target": "foundations-compactness",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Theorem is about compactness of products"
+        },
+        {
+          "target": "foundations-product-topology",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Product must have the product topology"
+        },
+        {
+          "target": "foundations-hausdorff",
+          "type": "motivates",
+          "strength": 0.5,
+          "description": "Often applied in Hausdorff settings where compact = closed and bounded"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "foundations-compactness",
+          "yields": "Compactness propagation: if each factor space is compact, the product is compact regardless of the number of factors",
+          "type": "parallel",
+          "conditions": ["All factor spaces compact", "Product topology used"],
+          "example": "[0,1]^N (infinite product of unit intervals) is compact in product topology"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Prove compactness of product spaces",
+        "Apply compactness arguments to infinite-dimensional settings",
+        "Establish existence results in functional analysis and topology"
+      ],
+      "keywords": ["Tychonoff", "product", "compact", "axiom of choice"],
+      "tags": ["topology", "fundamental-theorem", "compactness"],
+      "buildLabs": []
+    }
+  ]
+}

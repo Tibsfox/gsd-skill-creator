@@ -1,0 +1,1551 @@
+{
+  "domain": "reality",
+  "version": "1.35.0",
+  "primitives": [
+    {
+      "id": "reality-dimensional-analysis",
+      "name": "Dimensional Analysis",
+      "type": "technique",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.1",
+      "planePosition": { "real": 0.2, "imaginary": -0.5 },
+      "formalStatement": "Every physical equation must be dimensionally consistent: both sides must have the same dimensions in terms of fundamental quantities (length L, mass M, time T, charge Q, temperature Theta). A quantity Q has dimensions [Q] = L^a M^b T^c Q^d Theta^e.",
+      "computationalForm": "1. Express each quantity in terms of fundamental dimensions. 2. Verify both sides of an equation have identical dimensional exponents. 3. Use to derive relationships: if f depends on variables with known dimensions, dimensional analysis constrains the functional form.",
+      "prerequisites": ["Units", "Exponents", "Physical quantities"],
+      "dependencies": [
+        {
+          "target": "reality-physical-quantity",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Dimensional analysis operates on physical quantities with units"
+        }
+      ],
+      "enables": ["reality-buckingham-pi", "reality-natural-units", "reality-dimensional-homogeneity"],
+      "compositionRules": [
+        {
+          "with": "reality-buckingham-pi",
+          "yields": "Systematic derivation of dimensionless groups governing a physical system",
+          "type": "sequential",
+          "conditions": ["Physical system with known relevant variables"],
+          "example": "Pendulum period depends on L, g: [T] = [L]^a [LT^{-2}]^b gives a=1/2, b=-1/2, so T ~ sqrt(L/g)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Check if a physics equation is dimensionally consistent",
+        "Derive the functional form of a physical relationship from dimensional constraints",
+        "Determine which variables a physical quantity can depend on"
+      ],
+      "keywords": ["dimensional analysis", "units", "dimensions", "consistency", "scaling"],
+      "tags": ["physics", "dimensional-analysis", "technique"],
+      "buildLabs": ["Build Lab 15.1: Dimensional Analysis in Practice"]
+    },
+    {
+      "id": "reality-buckingham-pi",
+      "name": "Buckingham Pi Theorem",
+      "type": "theorem",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.1",
+      "planePosition": { "real": 0.25, "imaginary": -0.45 },
+      "formalStatement": "If a physical system involves n variables and k independent fundamental dimensions, then the system can be described by n - k independent dimensionless groups (Pi groups). Any dimensionless combination is a product of powers of these Pi groups.",
+      "computationalForm": "1. List n variables and k fundamental dimensions. 2. Form the dimensional matrix. 3. Find rank = k'. 4. Number of Pi groups = n - k'. 5. Choose k' repeating variables; form each Pi group by combining remaining variables with repeating ones to cancel dimensions.",
+      "prerequisites": ["Dimensional analysis", "Matrix rank", "Linear algebra basics"],
+      "dependencies": [
+        {
+          "target": "reality-dimensional-analysis",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Pi theorem formalizes dimensional analysis into a systematic method"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "reality-dimensional-analysis",
+          "yields": "Complete dimensional reduction of any physical problem to dimensionless form",
+          "type": "sequential",
+          "conditions": ["Complete list of relevant variables known", "Fundamental dimensions identified"],
+          "example": "Drag on a sphere: variables F, rho, v, D, mu (5 vars, 3 dims) -> 2 Pi groups: C_D and Re"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Reduce a physical problem to its essential dimensionless parameters",
+        "Determine the number of independent dimensionless groups in a system",
+        "Systematically construct dimensionless ratios from physical variables"
+      ],
+      "keywords": ["Buckingham Pi", "dimensionless", "scaling", "similarity", "repeating variables"],
+      "tags": ["physics", "dimensional-analysis", "fundamental-theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-speed-of-light",
+      "name": "Speed of Light",
+      "type": "axiom",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.2",
+      "planePosition": { "real": 0.15, "imaginary": -0.55 },
+      "formalStatement": "The speed of light in vacuum is a universal constant: c = 299,792,458 m/s exactly. It is the maximum speed for information transfer and the conversion factor between space and time: E = mc^2.",
+      "computationalForm": "c = 2.998 x 10^8 m/s. Use in energy-mass: E = mc^2. In relativity: gamma = 1/sqrt(1 - v^2/c^2). In natural units: set c = 1, then length and time have same units.",
+      "prerequisites": ["SI units", "Real numbers"],
+      "dependencies": [],
+      "enables": ["reality-fine-structure-constant", "reality-natural-units"],
+      "compositionRules": [
+        {
+          "with": "reality-plancks-constant",
+          "yields": "Photon energy: E = hc/lambda, linking quantum and electromagnetic scales",
+          "type": "sequential",
+          "conditions": ["Electromagnetic radiation context"],
+          "example": "Visible light (lambda = 500 nm): E = (6.626e-34)(3e8)/(500e-9) = 3.97e-19 J ≈ 2.48 eV"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Convert between mass and energy",
+        "Compute relativistic effects at high velocities",
+        "Set the scale for electromagnetic phenomena"
+      ],
+      "keywords": ["speed of light", "c", "relativity", "electromagnetic", "universal constant"],
+      "tags": ["physics", "constants", "relativity"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-plancks-constant",
+      "name": "Planck's Constant",
+      "type": "axiom",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.2",
+      "planePosition": { "real": 0.1, "imaginary": -0.5 },
+      "formalStatement": "Planck's constant h = 6.62607015 x 10^{-34} J*s (exact, SI definition). The reduced Planck constant hbar = h/(2*pi). It is the quantum of action, setting the scale where quantum effects become significant.",
+      "computationalForm": "h = 6.626 x 10^{-34} J*s. hbar = 1.055 x 10^{-34} J*s. Energy of a photon: E = hf = hbar*omega. De Broglie wavelength: lambda = h/p.",
+      "prerequisites": ["SI units", "Frequency"],
+      "dependencies": [],
+      "enables": ["reality-fine-structure-constant", "reality-natural-units", "reality-wave-function", "reality-uncertainty-principle"],
+      "compositionRules": [
+        {
+          "with": "reality-speed-of-light",
+          "yields": "Natural unit system where hbar = c = 1",
+          "type": "parallel",
+          "conditions": ["Theoretical physics context"],
+          "example": "In natural units: energy in eV, length in 1/eV, time in 1/eV"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine the scale at which quantum effects matter",
+        "Compute photon energy from frequency",
+        "Calculate the de Broglie wavelength of a particle"
+      ],
+      "keywords": ["Planck constant", "h", "hbar", "quantum", "action"],
+      "tags": ["physics", "constants", "quantum-mechanics"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-gravitational-constant",
+      "name": "Gravitational Constant",
+      "type": "axiom",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.2",
+      "planePosition": { "real": 0.3, "imaginary": -0.6 },
+      "formalStatement": "Newton's gravitational constant G = 6.674 x 10^{-11} N*m^2/kg^2 governs the strength of gravitational interaction: F = G*m_1*m_2/r^2.",
+      "computationalForm": "G = 6.674 x 10^{-11} m^3 kg^{-1} s^{-2}. Gravitational force: F = Gm_1m_2/r^2. Gravitational potential energy: U = -Gm_1m_2/r. Escape velocity: v = sqrt(2GM/r).",
+      "prerequisites": ["SI units", "Newton's laws"],
+      "dependencies": [],
+      "enables": ["reality-natural-units"],
+      "compositionRules": [
+        {
+          "with": "reality-speed-of-light",
+          "yields": "Schwarzschild radius: r_s = 2GM/c^2, boundary of a black hole",
+          "type": "sequential",
+          "conditions": ["Gravitational and relativistic regimes combined"],
+          "example": "Sun: r_s = 2*(6.674e-11)*(2e30)/(3e8)^2 ≈ 3 km"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Compute gravitational forces between masses",
+        "Calculate orbital parameters and escape velocities",
+        "Determine when general relativistic corrections are needed"
+      ],
+      "keywords": ["gravitational constant", "G", "gravity", "Newton", "universal"],
+      "tags": ["physics", "constants", "gravity"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-boltzmann-constant",
+      "name": "Boltzmann Constant",
+      "type": "axiom",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.2",
+      "planePosition": { "real": 0.35, "imaginary": -0.55 },
+      "formalStatement": "The Boltzmann constant k_B = 1.380649 x 10^{-23} J/K (exact, SI definition) relates temperature to energy: the average kinetic energy per degree of freedom is (1/2)*k_B*T.",
+      "computationalForm": "k_B = 1.381 x 10^{-23} J/K. Thermal energy: E_th = k_B*T. At room temp (300K): k_B*T ≈ 0.026 eV. Entropy: S = k_B * ln(W).",
+      "prerequisites": ["SI units", "Temperature", "Energy"],
+      "dependencies": [],
+      "enables": ["reality-natural-units"],
+      "compositionRules": [
+        {
+          "with": "reality-plancks-constant",
+          "yields": "Planck distribution: n(omega) = 1/(exp(hbar*omega/(k_B*T)) - 1), quantum statistics",
+          "type": "sequential",
+          "conditions": ["Thermal quantum systems"],
+          "example": "Blackbody peak: hbar*omega_max ≈ 2.82 * k_B * T (Wien's displacement law)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Convert between temperature and energy scales",
+        "Compute thermal fluctuation energies",
+        "Determine entropy from microstates"
+      ],
+      "keywords": ["Boltzmann constant", "k_B", "temperature", "entropy", "thermal"],
+      "tags": ["physics", "constants", "thermodynamics"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-elementary-charge",
+      "name": "Elementary Charge",
+      "type": "axiom",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.2",
+      "planePosition": { "real": 0.25, "imaginary": -0.5 },
+      "formalStatement": "The elementary charge e = 1.602176634 x 10^{-19} C (exact, SI definition) is the magnitude of the charge of the electron and proton. It is the fundamental quantum of electric charge.",
+      "computationalForm": "e = 1.602 x 10^{-19} C. Coulomb force: F = ke*q_1*q_2/r^2 where k_e = 1/(4*pi*epsilon_0). Energy unit: 1 eV = e * 1 V = 1.602 x 10^{-19} J.",
+      "prerequisites": ["SI units", "Coulomb's law"],
+      "dependencies": [],
+      "enables": ["reality-fine-structure-constant", "reality-quantum-numbers"],
+      "compositionRules": [
+        {
+          "with": "reality-plancks-constant",
+          "yields": "Fine structure constant: alpha = e^2/(4*pi*epsilon_0*hbar*c) ≈ 1/137, strength of electromagnetic interaction",
+          "type": "sequential",
+          "conditions": ["Electromagnetic context"],
+          "example": "alpha = (1.602e-19)^2 / (4*pi*8.854e-12*1.055e-34*3e8) ≈ 1/137"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Compute electromagnetic forces between charged particles",
+        "Convert between energy in joules and electron-volts",
+        "Quantize charge in atomic and molecular systems"
+      ],
+      "keywords": ["elementary charge", "e", "electron", "proton", "Coulomb"],
+      "tags": ["physics", "constants", "electromagnetism"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-fine-structure-constant",
+      "name": "Fine Structure Constant",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.3",
+      "planePosition": { "real": 0.15, "imaginary": -0.4 },
+      "formalStatement": "The fine structure constant alpha = e^2/(4*pi*epsilon_0*hbar*c) ≈ 1/137.036 is a dimensionless constant characterizing the strength of the electromagnetic interaction. It appears throughout atomic physics and quantum electrodynamics.",
+      "computationalForm": "alpha ≈ 1/137.036 ≈ 0.007297. Appears in: Bohr model energy levels E_n = -alpha^2*m_e*c^2/(2n^2), hydrogen fine structure splitting, QED perturbation theory (corrections in powers of alpha).",
+      "prerequisites": ["Elementary charge", "Planck's constant", "Speed of light"],
+      "dependencies": [
+        {
+          "target": "reality-elementary-charge",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "alpha is defined in terms of e"
+        },
+        {
+          "target": "reality-plancks-constant",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "alpha is defined in terms of hbar"
+        },
+        {
+          "target": "reality-speed-of-light",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "alpha is defined in terms of c"
+        }
+      ],
+      "enables": ["reality-electron-configuration"],
+      "compositionRules": [
+        {
+          "with": "reality-quantum-numbers",
+          "yields": "Hydrogen energy levels: E_n = -13.6 eV / n^2, with fine structure corrections of order alpha^2",
+          "type": "sequential",
+          "conditions": ["Hydrogen-like atom"],
+          "example": "Ground state hydrogen: E_1 = -alpha^2*m_e*c^2/2 = -13.6 eV"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Characterize the strength of electromagnetic interactions",
+        "Compute perturbative corrections in QED",
+        "Determine the fine structure splitting of atomic energy levels"
+      ],
+      "keywords": ["fine structure constant", "alpha", "1/137", "electromagnetic coupling", "dimensionless"],
+      "tags": ["physics", "constants", "quantum-mechanics", "electromagnetism"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-natural-units",
+      "name": "Natural Units (Planck Units)",
+      "type": "technique",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.3",
+      "planePosition": { "real": 0.2, "imaginary": -0.35 },
+      "formalStatement": "Natural units set fundamental constants to 1: hbar = c = k_B = 1 (particle physics) or hbar = c = G = 1 (Planck units). Planck length l_P = sqrt(hbar*G/c^3) ≈ 1.6 x 10^{-35} m, Planck mass m_P = sqrt(hbar*c/G) ≈ 2.2 x 10^{-8} kg, Planck time t_P = l_P/c ≈ 5.4 x 10^{-44} s.",
+      "computationalForm": "Set hbar = c = 1: energy, mass, and inverse-length share units (typically GeV). Restore SI: multiply by appropriate powers of hbar and c. Planck scales mark where quantum gravity becomes relevant.",
+      "prerequisites": ["Speed of light", "Planck's constant", "Gravitational constant", "Dimensional analysis"],
+      "dependencies": [
+        {
+          "target": "reality-dimensional-analysis",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Natural units exploit dimensional analysis to simplify equations"
+        },
+        {
+          "target": "reality-speed-of-light",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "c = 1 in natural units"
+        },
+        {
+          "target": "reality-plancks-constant",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "hbar = 1 in natural units"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "reality-gravitational-constant",
+          "yields": "Planck scales: the natural units of quantum gravity where l_P, m_P, t_P emerge",
+          "type": "parallel",
+          "conditions": ["All three constants c, hbar, G combined"],
+          "example": "Planck energy: E_P = m_P*c^2 = sqrt(hbar*c^5/G) ≈ 1.22 x 10^{19} GeV"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Simplify equations in particle physics by setting constants to 1",
+        "Identify the fundamental scales where quantum gravity becomes relevant",
+        "Convert between natural and SI units"
+      ],
+      "keywords": ["natural units", "Planck units", "Planck length", "Planck mass", "hbar=c=1"],
+      "tags": ["physics", "constants", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-dimensional-homogeneity",
+      "name": "Dimensional Homogeneity",
+      "type": "theorem",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.1",
+      "planePosition": { "real": 0.3, "imaginary": -0.5 },
+      "formalStatement": "Every physically meaningful equation must be dimensionally homogeneous: all terms added or equated must have the same dimensions. If [LHS] != [RHS], the equation is physically invalid.",
+      "computationalForm": "For each term: determine dimensions in [L^a M^b T^c ...]. Check all terms in a sum or equation have identical dimensional exponents. Use to detect errors in derivations.",
+      "prerequisites": ["Dimensional analysis", "Physical quantities"],
+      "dependencies": [
+        {
+          "target": "reality-dimensional-analysis",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Homogeneity is the core principle of dimensional analysis"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "reality-dimensional-analysis",
+          "yields": "Error detection: identify physically impossible equations before computing",
+          "type": "parallel",
+          "conditions": ["Any physical equation"],
+          "example": "F = mv is dimensionally wrong: [MLT^{-2}] != [MLT^{-1}]; correct is F = ma"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Verify that a derived equation is physically valid",
+        "Detect algebraic errors by checking dimensional consistency",
+        "Constrain the form of unknown physical relationships"
+      ],
+      "keywords": ["dimensional homogeneity", "consistency", "validation", "dimensions"],
+      "tags": ["physics", "dimensional-analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-physical-quantity",
+      "name": "Physical Quantity",
+      "type": "axiom",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.1",
+      "planePosition": { "real": 0.35, "imaginary": -0.55 },
+      "formalStatement": "A physical quantity Q is the product of a numerical value {Q} and a unit [Q]: Q = {Q} x [Q]. The numerical value depends on the choice of unit, but the physical quantity is invariant. Examples: length l = 5 m, energy E = 3.2 eV.",
+      "computationalForm": "Always track units alongside numerical values. Convert units by multiplying by appropriate conversion factors (dimensionless ratios equal to 1). SI base units: m, kg, s, A, K, mol, cd.",
+      "prerequisites": ["Numbers", "Measurement"],
+      "dependencies": [],
+      "enables": ["reality-dimensional-analysis", "reality-si-unit-system"],
+      "compositionRules": [
+        {
+          "with": "reality-si-unit-system",
+          "yields": "Complete measurement framework: quantity = number x unit in a coherent system",
+          "type": "parallel",
+          "conditions": ["Physical measurement context"],
+          "example": "Force of 1 Newton: F = 1 N = 1 kg*m/s^2"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Represent a measurable physical quantity with units",
+        "Convert between different unit systems",
+        "Ensure calculations preserve physical meaning"
+      ],
+      "keywords": ["physical quantity", "measurement", "unit", "value", "SI"],
+      "tags": ["physics", "measurement", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-si-unit-system",
+      "name": "SI Unit System",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.1",
+      "planePosition": { "real": 0.4, "imaginary": -0.55 },
+      "formalStatement": "The International System of Units (SI) defines 7 base units: metre (m), kilogram (kg), second (s), ampere (A), kelvin (K), mole (mol), candela (cd). All other units are derived from these. Since 2019, all base units are defined via fundamental constants.",
+      "computationalForm": "Derived units: Newton = kg*m/s^2, Joule = kg*m^2/s^2, Watt = J/s, Volt = J/C, etc. Prefix system: kilo=10^3, mega=10^6, milli=10^{-3}, micro=10^{-6}, nano=10^{-9}.",
+      "prerequisites": ["Physical quantities", "Real numbers"],
+      "dependencies": [
+        {
+          "target": "reality-physical-quantity",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "SI provides the standard units for physical quantities"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "reality-physical-quantity",
+          "yields": "Coherent measurement framework where derived units follow naturally from base units",
+          "type": "parallel",
+          "conditions": ["Scientific or engineering context"],
+          "example": "1 Joule = 1 kg * m^2 / s^2, derived from base units"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Express physical measurements in a standardized unit system",
+        "Convert between SI and other unit systems",
+        "Derive units for complex physical quantities from base units"
+      ],
+      "keywords": ["SI", "metric", "units", "metre", "kilogram", "second"],
+      "tags": ["physics", "measurement", "standards"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-atomic-number",
+      "name": "Atomic Number and Mass",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 16,
+      "section": "16.1",
+      "planePosition": { "real": 0.3, "imaginary": -0.4 },
+      "formalStatement": "The atomic number Z is the number of protons in an atom's nucleus, uniquely identifying the element. The mass number A = Z + N where N is the number of neutrons. Atomic mass is measured in unified atomic mass units (u ≈ 1.661 x 10^{-27} kg).",
+      "computationalForm": "Z = number of protons = number of electrons (neutral atom). A = Z + N. Isotope notation: ^A_Z X. Atomic mass of an element: weighted average over isotope abundances.",
+      "prerequisites": ["Protons and neutrons", "Elementary charge"],
+      "dependencies": [
+        {
+          "target": "reality-elementary-charge",
+          "type": "requires",
+          "strength": 0.6,
+          "description": "Nuclear charge is Z*e"
+        }
+      ],
+      "enables": ["reality-quantum-numbers", "reality-electron-configuration", "reality-periodic-law"],
+      "compositionRules": [
+        {
+          "with": "reality-quantum-numbers",
+          "yields": "Electron shell structure: Z electrons fill orbitals according to quantum numbers",
+          "type": "sequential",
+          "conditions": ["Neutral atom in ground state"],
+          "example": "Carbon (Z=6): 6 electrons fill 1s^2 2s^2 2p^2"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Identify an element from its number of protons",
+        "Determine the number of electrons in a neutral atom",
+        "Calculate atomic mass from isotope data"
+      ],
+      "keywords": ["atomic number", "mass number", "proton", "neutron", "isotope"],
+      "tags": ["physics", "periodic-table", "atomic-physics"],
+      "buildLabs": ["Build Lab 16.1: The Periodic Table"]
+    },
+    {
+      "id": "reality-quantum-numbers",
+      "name": "Quantum Numbers",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 16,
+      "section": "16.2",
+      "planePosition": { "real": 0.25, "imaginary": -0.35 },
+      "formalStatement": "Each electron in an atom is described by four quantum numbers: principal n (1,2,3,...), angular momentum l (0,...,n-1), magnetic m_l (-l,...,+l), and spin m_s (+1/2 or -1/2). No two electrons can share all four quantum numbers (Pauli exclusion).",
+      "computationalForm": "n determines energy level and shell size. l determines orbital shape (s,p,d,f for l=0,1,2,3). m_l determines orbital orientation. m_s determines spin direction. Total electrons in shell n: 2n^2.",
+      "prerequisites": ["Atomic number", "Integer sequences"],
+      "dependencies": [
+        {
+          "target": "reality-atomic-number",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Quantum numbers describe electrons in atoms identified by Z"
+        }
+      ],
+      "enables": ["reality-electron-configuration", "reality-orbital-theory", "reality-pauli-exclusion"],
+      "compositionRules": [
+        {
+          "with": "reality-pauli-exclusion",
+          "yields": "Shell filling rules: maximum 2 electrons per orbital, 2l+1 orbitals per subshell",
+          "type": "sequential",
+          "conditions": ["Multi-electron atom"],
+          "example": "3d subshell (n=3, l=2): 5 orbitals (m_l = -2,-1,0,1,2), max 10 electrons"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Describe the state of an electron in an atom",
+        "Determine the number of electrons in each shell and subshell",
+        "Predict orbital shapes and orientations"
+      ],
+      "keywords": ["quantum numbers", "principal", "angular momentum", "magnetic", "spin"],
+      "tags": ["physics", "quantum-mechanics", "atomic-physics"],
+      "buildLabs": ["Build Lab 16.2: Quantum Numbers and Orbitals"]
+    },
+    {
+      "id": "reality-electron-configuration",
+      "name": "Electron Configuration (Aufbau Principle)",
+      "type": "algorithm",
+      "domain": "reality",
+      "chapter": 16,
+      "section": "16.3",
+      "planePosition": { "real": 0.35, "imaginary": -0.3 },
+      "formalStatement": "The Aufbau principle states that electrons fill orbitals in order of increasing energy: 1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, 5s, 4d, ... The filling order follows the (n+l) rule: lower n+l fills first; for equal n+l, lower n fills first.",
+      "computationalForm": "1. Order subshells by (n+l), breaking ties by n. 2. Fill each subshell with up to 2(2l+1) electrons. 3. Apply Hund's rule within subshells. 4. Note exceptions (Cr, Cu: d-shell stability). Notation: 1s^2 2s^2 2p^6 3s^2 ...",
+      "prerequisites": ["Quantum numbers", "Pauli exclusion principle"],
+      "dependencies": [
+        {
+          "target": "reality-quantum-numbers",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Filling order depends on quantum numbers n and l"
+        },
+        {
+          "target": "reality-pauli-exclusion",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Maximum occupancy per orbital = 2 (one per spin)"
+        }
+      ],
+      "enables": ["reality-periodic-law", "reality-valence-electrons", "reality-electronegativity"],
+      "compositionRules": [
+        {
+          "with": "reality-periodic-law",
+          "yields": "Periodic table structure: elements in same column have same valence electron configuration",
+          "type": "sequential",
+          "conditions": ["Ground state atom"],
+          "example": "Group 1 (Li, Na, K): all have [core] ns^1 configuration"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine the electron configuration of an element",
+        "Predict chemical properties from electron arrangement",
+        "Understand the structure of the periodic table"
+      ],
+      "keywords": ["electron configuration", "Aufbau", "filling order", "n+l rule", "orbital"],
+      "tags": ["physics", "periodic-table", "atomic-physics", "algorithm"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-pauli-exclusion",
+      "name": "Pauli Exclusion Principle",
+      "type": "axiom",
+      "domain": "reality",
+      "chapter": 16,
+      "section": "16.2",
+      "planePosition": { "real": 0.2, "imaginary": -0.3 },
+      "formalStatement": "No two identical fermions (particles with half-integer spin, including electrons) can occupy the same quantum state simultaneously. For electrons in an atom: no two electrons can have the same set of four quantum numbers (n, l, m_l, m_s).",
+      "computationalForm": "Maximum electrons per orbital (fixed n, l, m_l): 2 (one spin-up, one spin-down). Maximum per subshell (fixed n, l): 2(2l+1). Maximum per shell (fixed n): 2n^2.",
+      "prerequisites": ["Quantum numbers", "Spin"],
+      "dependencies": [],
+      "enables": ["reality-electron-configuration", "reality-periodic-law"],
+      "compositionRules": [
+        {
+          "with": "reality-quantum-numbers",
+          "yields": "Atomic shell structure: electrons arrange in shells with fixed capacity",
+          "type": "sequential",
+          "conditions": ["Fermions (half-integer spin particles)"],
+          "example": "First shell (n=1): max 2 electrons. Second shell (n=2): max 8. Third (n=3): max 18."
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine the maximum number of electrons in a shell or subshell",
+        "Explain why atoms have distinct electron shells",
+        "Understand the stability of matter (electrons cannot all collapse to lowest state)"
+      ],
+      "keywords": ["Pauli exclusion", "fermion", "quantum state", "spin", "identical particles"],
+      "tags": ["physics", "quantum-mechanics", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-periodic-law",
+      "name": "Periodic Law and Trends",
+      "type": "theorem",
+      "domain": "reality",
+      "chapter": 16,
+      "section": "16.4",
+      "planePosition": { "real": 0.4, "imaginary": -0.35 },
+      "formalStatement": "When elements are arranged by atomic number, their chemical and physical properties recur periodically. Properties that vary predictably: atomic radius decreases across a period, increases down a group; ionization energy increases across, decreases down; electronegativity increases across, decreases down.",
+      "computationalForm": "Periodic trends follow from electron configuration. Across period: increasing Z with same n -> stronger nuclear attraction -> smaller radius. Down group: new shell -> larger radius. Ionization energy correlates inversely with radius.",
+      "prerequisites": ["Electron configuration", "Atomic number"],
+      "dependencies": [
+        {
+          "target": "reality-electron-configuration",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Periodic trends are explained by electron configuration patterns"
+        },
+        {
+          "target": "reality-atomic-number",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Periodicity follows from arrangement by atomic number"
+        }
+      ],
+      "enables": ["reality-chemical-bonding"],
+      "compositionRules": [
+        {
+          "with": "reality-valence-electrons",
+          "yields": "Prediction of chemical behavior: elements with similar valence configurations have similar chemistry",
+          "type": "parallel",
+          "conditions": ["Elements in same group"],
+          "example": "Group 17 (halogens F, Cl, Br, I): all ns^2 np^5, all gain one electron readily"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Predict how an element's properties compare to its neighbors",
+        "Explain trends in atomic size, ionization energy, or electronegativity",
+        "Classify elements by their position and expected behavior"
+      ],
+      "keywords": ["periodic law", "periodic trends", "atomic radius", "ionization energy", "periodicity"],
+      "tags": ["physics", "periodic-table", "chemistry"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-chemical-bonding",
+      "name": "Chemical Bonding",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 16,
+      "section": "16.5",
+      "planePosition": { "real": 0.4, "imaginary": -0.25 },
+      "formalStatement": "Chemical bonds form when atoms share or transfer electrons to achieve stable configurations. Ionic bonds: electron transfer between atoms of very different electronegativity. Covalent bonds: electron sharing between atoms of similar electronegativity. Metallic bonds: delocalized electron sharing in metals.",
+      "computationalForm": "Bond type prediction: compute electronegativity difference delta_EN. If delta_EN > 1.7: ionic. If delta_EN < 0.4: nonpolar covalent. Between: polar covalent. Bond energy and length are measurable properties.",
+      "prerequisites": ["Electronegativity", "Valence electrons", "Periodic trends"],
+      "dependencies": [
+        {
+          "target": "reality-periodic-law",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Bonding behavior follows from periodic properties"
+        },
+        {
+          "target": "reality-electronegativity",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Bond type determined by electronegativity difference"
+        },
+        {
+          "target": "reality-valence-electrons",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Bonding involves valence electrons"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "reality-orbital-theory",
+          "yields": "Molecular orbital theory: linear combinations of atomic orbitals form bonding and antibonding molecular orbitals",
+          "type": "nested",
+          "conditions": ["Multi-atom system"],
+          "example": "H_2: 1s_A + 1s_B -> sigma (bonding) and sigma* (antibonding); 2 electrons fill sigma"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine the type of bond between two atoms",
+        "Predict molecular geometry from bonding patterns",
+        "Explain the properties of materials from their bonding"
+      ],
+      "keywords": ["chemical bond", "ionic", "covalent", "metallic", "bonding"],
+      "tags": ["physics", "chemistry", "periodic-table"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-orbital-theory",
+      "name": "Orbital Theory",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 16,
+      "section": "16.2",
+      "planePosition": { "real": 0.2, "imaginary": -0.25 },
+      "formalStatement": "An atomic orbital is a mathematical function (wave function) describing the probability amplitude of finding an electron at a given position. The orbital shape is determined by quantum numbers: s-orbitals are spherical, p-orbitals are dumbbell-shaped, d-orbitals have cloverleaf patterns.",
+      "computationalForm": "Probability density: P(r,theta,phi) = |psi(r,theta,phi)|^2. Radial probability: P(r) = r^2 |R_{nl}(r)|^2. Angular distribution from spherical harmonics Y_l^m. Orbital energy in hydrogen: E_n = -13.6/n^2 eV.",
+      "prerequisites": ["Quantum numbers", "Wave function", "Probability"],
+      "dependencies": [
+        {
+          "target": "reality-quantum-numbers",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Orbital shape and energy determined by quantum numbers"
+        }
+      ],
+      "enables": ["reality-electron-configuration", "reality-chemical-bonding"],
+      "compositionRules": [
+        {
+          "with": "reality-wave-function",
+          "yields": "Complete atomic model: wave functions describe electron probability distributions in atoms",
+          "type": "parallel",
+          "conditions": ["Quantum mechanical atom"],
+          "example": "Hydrogen 1s orbital: psi = (1/sqrt(pi*a_0^3)) exp(-r/a_0)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Visualize where an electron is likely to be found",
+        "Determine the shape and orientation of electron clouds",
+        "Understand hybridization and molecular geometry"
+      ],
+      "keywords": ["orbital", "wave function", "probability", "s-orbital", "p-orbital", "d-orbital"],
+      "tags": ["physics", "quantum-mechanics", "atomic-physics"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-electron-shell-model",
+      "name": "Electron Shell Model",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 16,
+      "section": "16.1",
+      "planePosition": { "real": 0.3, "imaginary": -0.3 },
+      "formalStatement": "Electrons are organized into concentric shells around the nucleus, numbered n = 1, 2, 3, ... (K, L, M, ...). Each shell contains subshells (s, p, d, f) with increasing angular momentum. Maximum electrons per shell: 2n^2.",
+      "computationalForm": "Shell n has subshells l = 0, 1, ..., n-1. Each subshell holds 2(2l+1) electrons. Shell 1: 2, Shell 2: 8, Shell 3: 18, Shell 4: 32. Valence shell = outermost occupied shell.",
+      "prerequisites": ["Quantum numbers", "Atomic structure"],
+      "dependencies": [
+        {
+          "target": "reality-quantum-numbers",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Shell structure derives from quantum numbers"
+        }
+      ],
+      "enables": ["reality-valence-electrons"],
+      "compositionRules": [
+        {
+          "with": "reality-pauli-exclusion",
+          "yields": "Fixed shell capacity: 2n^2 electrons per shell, explaining noble gas stability",
+          "type": "sequential",
+          "conditions": ["Multi-electron atoms"],
+          "example": "Neon (Z=10): 2+8=10, filling shells 1 and 2 completely -> noble gas stability"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Organize electrons into shells and subshells",
+        "Determine which shell is the valence shell",
+        "Predict the maximum number of electrons per shell"
+      ],
+      "keywords": ["electron shell", "K shell", "L shell", "subshell", "valence shell"],
+      "tags": ["physics", "atomic-physics", "periodic-table"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-electronegativity",
+      "name": "Electronegativity",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 16,
+      "section": "16.4",
+      "planePosition": { "real": 0.45, "imaginary": -0.35 },
+      "formalStatement": "Electronegativity (EN) measures an atom's tendency to attract shared electrons in a bond. On the Pauling scale, fluorine has the highest value (3.98) and francium the lowest (~0.7). EN increases across a period (left to right) and decreases down a group.",
+      "computationalForm": "Pauling scale: EN difference predicts bond character. |EN_A - EN_B| > 1.7: ionic. < 0.4: nonpolar covalent. Between: polar covalent. Mulliken EN = (IE + EA)/2.",
+      "prerequisites": ["Periodic trends", "Electron configuration"],
+      "dependencies": [
+        {
+          "target": "reality-electron-configuration",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "EN trends follow from electron configuration"
+        }
+      ],
+      "enables": ["reality-chemical-bonding"],
+      "compositionRules": [
+        {
+          "with": "reality-periodic-law",
+          "yields": "Complete periodic trend picture: size, EN, IE, EA all interrelated via effective nuclear charge",
+          "type": "parallel",
+          "conditions": ["Main group elements"],
+          "example": "Across Period 3: Na(0.93) -> Mg(1.31) -> Al(1.61) -> Si(1.90) -> P(2.19) -> S(2.58) -> Cl(3.16)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Predict the polarity of a chemical bond",
+        "Determine which atom attracts electrons more strongly in a molecule",
+        "Classify bond type from electronegativity difference"
+      ],
+      "keywords": ["electronegativity", "Pauling scale", "bond polarity", "electron affinity"],
+      "tags": ["physics", "chemistry", "periodic-table"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-ionization-energy",
+      "name": "Ionization Energy",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 16,
+      "section": "16.4",
+      "planePosition": { "real": 0.35, "imaginary": -0.4 },
+      "formalStatement": "The first ionization energy IE_1 is the minimum energy required to remove the outermost electron from a neutral atom in the gas phase: X -> X^+ + e^-. Successive ionization energies IE_2, IE_3, ... are progressively larger. IE increases across a period and decreases down a group.",
+      "computationalForm": "IE_1 measured in eV or kJ/mol. Hydrogen: 13.6 eV. Trends: across period, IE increases due to increasing effective nuclear charge. Down group, IE decreases due to increasing distance and shielding.",
+      "prerequisites": ["Electron configuration", "Atomic structure"],
+      "dependencies": [
+        {
+          "target": "reality-electron-configuration",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "IE depends on which orbital the electron is removed from"
+        }
+      ],
+      "enables": ["reality-periodic-law"],
+      "compositionRules": [
+        {
+          "with": "reality-electronegativity",
+          "yields": "Mulliken electronegativity: EN = (IE + EA)/2, connecting ionization and electron affinity",
+          "type": "parallel",
+          "conditions": ["Atom with known IE and EA"],
+          "example": "Fluorine: IE = 17.4 eV, EA = 3.4 eV, Mulliken EN = (17.4 + 3.4)/2 = 10.4 eV"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine how easily an atom loses an electron",
+        "Predict reactivity of metals (low IE = easily ionized)",
+        "Identify elements that form cations readily"
+      ],
+      "keywords": ["ionization energy", "IE", "electron removal", "cation formation"],
+      "tags": ["physics", "chemistry", "periodic-table"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-hunds-rule",
+      "name": "Hund's Rule",
+      "type": "theorem",
+      "domain": "reality",
+      "chapter": 16,
+      "section": "16.3",
+      "planePosition": { "real": 0.3, "imaginary": -0.25 },
+      "formalStatement": "For degenerate orbitals (same energy), electrons fill each orbital singly with parallel spins before any orbital gets a second electron. This maximizes total spin and minimizes electron-electron repulsion.",
+      "computationalForm": "For a subshell with (2l+1) orbitals and k electrons (k <= 2l+1): place one electron in each orbital with same spin. For k > 2l+1: pair electrons in already-occupied orbitals. Example: 2p^3 -> one electron in each of three 2p orbitals, all spin-up.",
+      "prerequisites": ["Quantum numbers", "Pauli exclusion", "Orbital degeneracy"],
+      "dependencies": [
+        {
+          "target": "reality-quantum-numbers",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Hund's rule applies to degenerate orbitals within a subshell"
+        },
+        {
+          "target": "reality-pauli-exclusion",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Combined with Pauli exclusion to determine filling pattern"
+        }
+      ],
+      "enables": ["reality-electron-configuration"],
+      "compositionRules": [
+        {
+          "with": "reality-electron-configuration",
+          "yields": "Complete ground state configuration: Aufbau + Pauli + Hund's rule",
+          "type": "sequential",
+          "conditions": ["Ground state multi-electron atom"],
+          "example": "Nitrogen (Z=7): 1s^2 2s^2 2p^3 -> three unpaired 2p electrons (not paired)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine the electron spin configuration in partially filled subshells",
+        "Predict whether an atom is paramagnetic (unpaired electrons)",
+        "Determine the ground state electron arrangement"
+      ],
+      "keywords": ["Hund's rule", "parallel spin", "unpaired electrons", "maximum multiplicity"],
+      "tags": ["physics", "quantum-mechanics", "atomic-physics"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-valence-electrons",
+      "name": "Valence Electrons",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 16,
+      "section": "16.3",
+      "planePosition": { "real": 0.4, "imaginary": -0.3 },
+      "formalStatement": "Valence electrons are the electrons in the outermost (highest n) shell of an atom. They determine the atom's chemical behavior: bonding, reactivity, and periodic group. For main group elements, the number of valence electrons equals the group number.",
+      "computationalForm": "For main group: valence electrons = group number (Groups 1-2: s-electrons; Groups 13-18: s + p electrons). For transition metals: usually (n-1)d + ns electrons. Count from electron configuration.",
+      "prerequisites": ["Electron configuration", "Electron shell model"],
+      "dependencies": [
+        {
+          "target": "reality-electron-shell-model",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Valence electrons are in the outermost shell"
+        },
+        {
+          "target": "reality-electron-configuration",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Configuration determines which electrons are valence"
+        }
+      ],
+      "enables": ["reality-chemical-bonding"],
+      "compositionRules": [
+        {
+          "with": "reality-chemical-bonding",
+          "yields": "Lewis structures: represent bonding using valence electron dot diagrams",
+          "type": "sequential",
+          "conditions": ["Main group elements"],
+          "example": "Carbon has 4 valence electrons, forms 4 bonds (CH_4, CO_2, etc.)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine how many bonds an atom typically forms",
+        "Predict the chemical behavior of an element from its group",
+        "Draw Lewis dot structures for molecules"
+      ],
+      "keywords": ["valence electrons", "outermost shell", "bonding capacity", "Lewis"],
+      "tags": ["physics", "chemistry", "periodic-table"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-wave-function",
+      "name": "Wave Function",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.1",
+      "planePosition": { "real": 0.1, "imaginary": -0.2 },
+      "formalStatement": "The wave function psi(x,t) is a complex-valued function that completely describes the quantum state of a system. The probability of finding the particle between x and x+dx is |psi(x,t)|^2 dx. The wave function must be normalized: integral |psi|^2 dx = 1.",
+      "computationalForm": "Probability density: rho(x) = |psi(x)|^2. Normalization: integral_{-inf}^{inf} |psi(x)|^2 dx = 1. Expectation value of observable A: <A> = integral psi* A_hat psi dx.",
+      "prerequisites": ["Complex numbers", "Probability", "Integration"],
+      "dependencies": [
+        {
+          "target": "reality-plancks-constant",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Wave function evolves according to hbar in Schrodinger equation"
+        }
+      ],
+      "enables": ["reality-schrodinger-time-independent", "reality-schrodinger-time-dependent", "reality-measurement-born-rule", "reality-superposition"],
+      "compositionRules": [
+        {
+          "with": "reality-hilbert-space",
+          "yields": "Quantum states as vectors in Hilbert space: psi is an element of L^2",
+          "type": "parallel",
+          "conditions": ["Quantum system"],
+          "example": "Particle in a box: psi_n(x) = sqrt(2/L) sin(n*pi*x/L) are orthonormal basis vectors in L^2([0,L])"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Describe the state of a quantum particle",
+        "Compute probabilities of measurement outcomes",
+        "Determine the time evolution of a quantum system"
+      ],
+      "keywords": ["wave function", "psi", "probability amplitude", "quantum state", "normalization"],
+      "tags": ["quantum-mechanics", "fundamental"],
+      "buildLabs": ["Build Lab 17.1: Wave Functions and Probability"]
+    },
+    {
+      "id": "reality-schrodinger-time-independent",
+      "name": "Time-Independent Schrodinger Equation",
+      "type": "theorem",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.2",
+      "planePosition": { "real": 0.05, "imaginary": -0.15 },
+      "formalStatement": "For a stationary state with energy E: H_hat psi = E psi, where H_hat = -hbar^2/(2m) d^2/dx^2 + V(x) is the Hamiltonian operator. Solutions are energy eigenstates with definite energy E.",
+      "computationalForm": "Solve the eigenvalue equation: -hbar^2/(2m) psi'' + V(x) psi = E psi. Boundary conditions determine allowed energies (quantization). For particle in a box: E_n = n^2*pi^2*hbar^2/(2mL^2).",
+      "prerequisites": ["Wave function", "Differential equations", "Operators"],
+      "dependencies": [
+        {
+          "target": "reality-wave-function",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Equation governs the wave function"
+        },
+        {
+          "target": "reality-quantum-operators",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Uses the Hamiltonian operator"
+        },
+        {
+          "target": "reality-plancks-constant",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "hbar appears in the kinetic energy operator"
+        }
+      ],
+      "enables": ["reality-quantum-harmonic-oscillator", "reality-quantum-tunneling"],
+      "compositionRules": [
+        {
+          "with": "reality-schrodinger-time-dependent",
+          "yields": "Full quantum dynamics: stationary states evolve as psi(x,t) = psi(x) exp(-iEt/hbar)",
+          "type": "sequential",
+          "conditions": ["Time-independent potential V(x)"],
+          "example": "Particle in a box: psi_n(x,t) = sqrt(2/L) sin(n*pi*x/L) exp(-iE_n*t/hbar)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Find the allowed energy levels of a quantum system",
+        "Solve for stationary states of a particle in a potential",
+        "Determine the energy spectrum of a quantum Hamiltonian"
+      ],
+      "keywords": ["Schrodinger equation", "stationary state", "eigenvalue", "Hamiltonian", "energy"],
+      "tags": ["quantum-mechanics", "differential-equations"],
+      "buildLabs": ["Build Lab 17.2: Solving the Schrodinger Equation"]
+    },
+    {
+      "id": "reality-schrodinger-time-dependent",
+      "name": "Time-Dependent Schrodinger Equation",
+      "type": "theorem",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.2",
+      "planePosition": { "real": 0.1, "imaginary": -0.1 },
+      "formalStatement": "The fundamental equation of quantum mechanics: i*hbar d/dt |psi(t)> = H_hat |psi(t)>. It governs the time evolution of any quantum state. The solution is |psi(t)> = exp(-iHt/hbar) |psi(0)>.",
+      "computationalForm": "For time-independent H: expand psi(0) in energy eigenstates psi_n, then psi(t) = sum c_n psi_n exp(-iE_n*t/hbar). Time evolution operator: U(t) = exp(-iHt/hbar).",
+      "prerequisites": ["Wave function", "Hamiltonian operator", "Complex exponential"],
+      "dependencies": [
+        {
+          "target": "reality-wave-function",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Describes time evolution of the wave function"
+        },
+        {
+          "target": "reality-quantum-operators",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Uses the Hamiltonian operator"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "reality-superposition",
+          "yields": "Quantum dynamics: superposition of energy eigenstates oscillate at different frequencies",
+          "type": "sequential",
+          "conditions": ["System not in an energy eigenstate"],
+          "example": "Superposition of two states: psi(t) = c_1 psi_1 e^{-iE_1 t/hbar} + c_2 psi_2 e^{-iE_2 t/hbar}"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine how a quantum state changes over time",
+        "Compute transition probabilities between states",
+        "Describe quantum dynamics and oscillations"
+      ],
+      "keywords": ["Schrodinger equation", "time evolution", "dynamics", "unitary evolution"],
+      "tags": ["quantum-mechanics", "differential-equations", "dynamics"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-hilbert-space",
+      "name": "Hilbert Space",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.3",
+      "planePosition": { "real": 0.0, "imaginary": -0.15 },
+      "formalStatement": "A Hilbert space H is a complete inner product space. In quantum mechanics, the state space is a complex Hilbert space where vectors represent quantum states and the inner product <psi|phi> gives probability amplitudes. L^2 (square-integrable functions) is the standard Hilbert space for position-space wave functions.",
+      "computationalForm": "Inner product: <psi|phi> = integral psi*(x) phi(x) dx. Norm: ||psi|| = sqrt(<psi|psi>). Basis: {|n>} orthonormal if <m|n> = delta_{mn}. Completeness: sum |n><n| = I.",
+      "prerequisites": ["Vector spaces", "Inner product", "Complex numbers", "Completeness"],
+      "dependencies": [
+        {
+          "target": "reality-wave-function",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Wave functions live in Hilbert space"
+        }
+      ],
+      "enables": ["reality-quantum-operators", "reality-quantum-state-ket"],
+      "compositionRules": [
+        {
+          "with": "reality-quantum-operators",
+          "yields": "Operator algebra on Hilbert space: observables as self-adjoint operators with spectral decomposition",
+          "type": "parallel",
+          "conditions": ["Quantum mechanical framework"],
+          "example": "Position operator X psi(x) = x*psi(x) in L^2; momentum P psi(x) = -i*hbar d/dx psi(x)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Formalize the space in which quantum states live",
+        "Define inner products and orthogonality for quantum states",
+        "Establish the mathematical framework for quantum mechanics"
+      ],
+      "keywords": ["Hilbert space", "inner product", "complete", "L^2", "quantum state space"],
+      "tags": ["quantum-mechanics", "mathematical-physics", "functional-analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-quantum-operators",
+      "name": "Quantum Operators (Observables)",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.3",
+      "planePosition": { "real": 0.05, "imaginary": -0.2 },
+      "formalStatement": "Observables in quantum mechanics are represented by Hermitian (self-adjoint) operators on Hilbert space. Position: X_hat psi = x*psi. Momentum: P_hat psi = -i*hbar*d/dx psi. The eigenvalues of an observable are the possible measurement outcomes.",
+      "computationalForm": "Hermitian: A_hat = A_hat^dagger (self-adjoint). Eigenvalues are real. Eigenstates are orthogonal. Expectation value: <A> = <psi|A_hat|psi>. Commutator: [A,B] = AB - BA.",
+      "prerequisites": ["Hilbert space", "Linear operators", "Hermitian matrices"],
+      "dependencies": [
+        {
+          "target": "reality-hilbert-space",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Operators act on Hilbert space"
+        }
+      ],
+      "enables": ["reality-measurement-born-rule", "reality-uncertainty-principle", "reality-commutator", "reality-expectation-value", "reality-schrodinger-time-independent"],
+      "compositionRules": [
+        {
+          "with": "reality-measurement-born-rule",
+          "yields": "Complete measurement theory: operator eigenvalues are outcomes, |<eigenstate|psi>|^2 gives probability",
+          "type": "sequential",
+          "conditions": ["Measuring observable A on state psi"],
+          "example": "Measure energy of particle in superposition: outcomes are E_n with probabilities |c_n|^2"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Represent a physical measurement mathematically",
+        "Find the possible outcomes of a quantum measurement",
+        "Determine whether two observables can be measured simultaneously"
+      ],
+      "keywords": ["operator", "observable", "Hermitian", "eigenvalue", "measurement"],
+      "tags": ["quantum-mechanics", "operators"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-measurement-born-rule",
+      "name": "Measurement Postulate (Born Rule)",
+      "type": "axiom",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.4",
+      "planePosition": { "real": 0.15, "imaginary": -0.15 },
+      "formalStatement": "When observable A with eigenstates {|a_n>} is measured on state |psi>, the outcome is one of the eigenvalues a_n with probability P(a_n) = |<a_n|psi>|^2. After measurement, the state collapses to |a_n>.",
+      "computationalForm": "1. Expand |psi> in eigenbasis of A: |psi> = sum c_n |a_n>. 2. Probability of outcome a_n: P(a_n) = |c_n|^2. 3. Post-measurement state: |a_n>. Verify: sum P(a_n) = 1 (normalization).",
+      "prerequisites": ["Quantum operators", "Hilbert space", "Probability"],
+      "dependencies": [],
+      "enables": ["reality-expectation-value"],
+      "compositionRules": [
+        {
+          "with": "reality-quantum-operators",
+          "yields": "Probabilistic predictions: quantum mechanics predicts measurement statistics, not individual outcomes",
+          "type": "sequential",
+          "conditions": ["Quantum measurement"],
+          "example": "Spin-1/2 in state |+x>: measure z-spin, get +hbar/2 or -hbar/2 each with probability 1/2"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Predict the probability of each measurement outcome",
+        "Determine what happens to a quantum state after measurement",
+        "Calculate the statistics of repeated measurements"
+      ],
+      "keywords": ["Born rule", "measurement", "probability", "collapse", "projection"],
+      "tags": ["quantum-mechanics", "axiom", "measurement"],
+      "buildLabs": ["Build Lab 17.3: Quantum Measurement"]
+    },
+    {
+      "id": "reality-uncertainty-principle",
+      "name": "Heisenberg Uncertainty Principle",
+      "type": "theorem",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.4",
+      "planePosition": { "real": 0.05, "imaginary": -0.1 },
+      "formalStatement": "For any quantum state, the product of standard deviations of position and momentum satisfies: sigma_x * sigma_p >= hbar/2. More generally, for any two observables A, B: sigma_A * sigma_B >= |<[A,B]>|/2.",
+      "computationalForm": "For position-momentum: Delta x * Delta p >= hbar/2. For energy-time: Delta E * Delta t >= hbar/2. Cannot simultaneously know both with arbitrary precision. Compute via sigma_A^2 = <A^2> - <A>^2.",
+      "prerequisites": ["Quantum operators", "Commutator", "Standard deviation"],
+      "dependencies": [
+        {
+          "target": "reality-quantum-operators",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Uncertainty arises from non-commuting operators"
+        },
+        {
+          "target": "reality-commutator",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "General uncertainty principle involves the commutator"
+        },
+        {
+          "target": "reality-plancks-constant",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "The bound involves hbar"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "reality-wave-function",
+          "yields": "Fundamental limit on wave packet localization: narrower in x -> wider in p and vice versa",
+          "type": "parallel",
+          "conditions": ["Any quantum state"],
+          "example": "Gaussian wave packet: sigma_x * sigma_p = hbar/2 (minimum uncertainty state)"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine the fundamental limits of simultaneous measurement precision",
+        "Estimate ground state energies from uncertainty arguments",
+        "Explain why electrons don't collapse into the nucleus"
+      ],
+      "keywords": ["uncertainty principle", "Heisenberg", "complementarity", "precision limit"],
+      "tags": ["quantum-mechanics", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-superposition",
+      "name": "Superposition Principle",
+      "type": "axiom",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.1",
+      "planePosition": { "real": 0.15, "imaginary": -0.25 },
+      "formalStatement": "If |psi_1> and |psi_2> are valid quantum states, then any linear combination c_1|psi_1> + c_2|psi_2> (with |c_1|^2 + |c_2|^2 = 1 for normalization) is also a valid quantum state. This is a consequence of the linearity of the Schrodinger equation.",
+      "computationalForm": "Combine states: |psi> = c_1|psi_1> + c_2|psi_2>. Normalize: ensure <psi|psi> = 1. Measurement probabilities: P(outcome associated with |psi_1>) = |c_1|^2.",
+      "prerequisites": ["Wave function", "Complex numbers", "Linearity"],
+      "dependencies": [],
+      "enables": ["reality-entanglement", "reality-quantum-state-ket"],
+      "compositionRules": [
+        {
+          "with": "reality-measurement-born-rule",
+          "yields": "Interference: superposition creates non-classical probability patterns when measuring",
+          "type": "sequential",
+          "conditions": ["Coherent superposition (no decoherence)"],
+          "example": "Double slit: |psi> = (|left> + |right>)/sqrt(2), interference pattern P(x) = |psi_L(x) + psi_R(x)|^2"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Combine quantum states to form new valid states",
+        "Describe a system that is in multiple states simultaneously",
+        "Explain quantum interference phenomena"
+      ],
+      "keywords": ["superposition", "linear combination", "interference", "quantum state"],
+      "tags": ["quantum-mechanics", "axiom", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-quantum-state-ket",
+      "name": "Quantum State (Ket Notation)",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.3",
+      "planePosition": { "real": 0.0, "imaginary": -0.2 },
+      "formalStatement": "A quantum state is represented by a ket |psi> in Hilbert space. The dual is a bra <psi|. The inner product <phi|psi> gives the probability amplitude for transitioning from |psi> to |phi>. The outer product |psi><phi| is an operator.",
+      "computationalForm": "Ket: column vector |psi>. Bra: row vector <psi| = |psi>^dagger. Inner product: <phi|psi> = complex number. Outer product: |psi><phi| = matrix. Projection: P_psi = |psi><psi|.",
+      "prerequisites": ["Hilbert space", "Complex numbers", "Linear algebra"],
+      "dependencies": [
+        {
+          "target": "reality-hilbert-space",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Kets are vectors in Hilbert space"
+        },
+        {
+          "target": "reality-superposition",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Kets can be superposed as linear combinations"
+        }
+      ],
+      "enables": ["reality-expectation-value"],
+      "compositionRules": [
+        {
+          "with": "reality-quantum-operators",
+          "yields": "Bra-ket formalism: compact notation for quantum mechanics: <psi|A|phi>",
+          "type": "parallel",
+          "conditions": ["Quantum mechanical calculations"],
+          "example": "Expectation value of position: <psi|X|psi> = integral psi*(x) x psi(x) dx"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Represent quantum states in Dirac notation",
+        "Compute inner products and probability amplitudes",
+        "Express quantum mechanical equations compactly"
+      ],
+      "keywords": ["ket", "bra", "Dirac notation", "state vector", "inner product"],
+      "tags": ["quantum-mechanics", "notation", "linear-algebra"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-expectation-value",
+      "name": "Expectation Value",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.4",
+      "planePosition": { "real": 0.1, "imaginary": -0.2 },
+      "formalStatement": "The expectation value of observable A in state |psi> is <A> = <psi|A_hat|psi> = integral psi*(x) A_hat psi(x) dx. It represents the average outcome of many measurements of A on identically prepared systems.",
+      "computationalForm": "In position basis: <A> = integral psi* A_hat psi dx. In eigenstate basis: <A> = sum |c_n|^2 a_n where c_n = <a_n|psi>. Standard deviation: sigma_A = sqrt(<A^2> - <A>^2).",
+      "prerequisites": ["Quantum operators", "Born rule", "Inner product"],
+      "dependencies": [
+        {
+          "target": "reality-quantum-operators",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Expectation value is computed for operator A"
+        },
+        {
+          "target": "reality-measurement-born-rule",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Expectation value is the mean under Born rule probabilities"
+        }
+      ],
+      "enables": ["reality-uncertainty-principle"],
+      "compositionRules": [
+        {
+          "with": "reality-quantum-state-ket",
+          "yields": "Complete bra-ket expectation calculation: <psi|A|psi>",
+          "type": "sequential",
+          "conditions": ["State and operator given"],
+          "example": "<x> for ground state of harmonic oscillator: <0|X|0> = 0 by symmetry"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Compute the average result of measuring an observable",
+        "Determine the expected energy of a quantum system",
+        "Calculate the variance and uncertainty of a measurement"
+      ],
+      "keywords": ["expectation value", "average", "mean", "observable", "measurement"],
+      "tags": ["quantum-mechanics", "statistics"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-commutator",
+      "name": "Commutator and Commutation Relations",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.3",
+      "planePosition": { "real": 0.0, "imaginary": -0.1 },
+      "formalStatement": "The commutator of operators A and B is [A,B] = AB - BA. If [A,B] = 0, A and B commute and share eigenstates. The canonical commutation relation: [X,P] = i*hbar, encoding the fundamental quantum uncertainty.",
+      "computationalForm": "Compute [A,B]psi = A(B psi) - B(A psi). Key relations: [X,P] = i*hbar, [L_x,L_y] = i*hbar*L_z, [a,a^dagger] = 1. If [A,B] != 0: cannot simultaneously diagonalize.",
+      "prerequisites": ["Quantum operators", "Linear algebra"],
+      "dependencies": [
+        {
+          "target": "reality-quantum-operators",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Commutator is defined for quantum operators"
+        }
+      ],
+      "enables": ["reality-uncertainty-principle", "reality-spin-angular-momentum"],
+      "compositionRules": [
+        {
+          "with": "reality-uncertainty-principle",
+          "yields": "General uncertainty relation: sigma_A*sigma_B >= |<[A,B]>|/2",
+          "type": "sequential",
+          "conditions": ["Operators A, B with nonzero commutator"],
+          "example": "[X,P] = i*hbar => sigma_x * sigma_p >= hbar/2"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Determine if two observables can be simultaneously measured",
+        "Derive uncertainty relations from commutation relations",
+        "Establish the algebra of quantum mechanical operators"
+      ],
+      "keywords": ["commutator", "commutation relation", "canonical", "[X,P]=ihbar"],
+      "tags": ["quantum-mechanics", "operators", "algebra"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-quantum-harmonic-oscillator",
+      "name": "Quantum Harmonic Oscillator",
+      "type": "algorithm",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.5",
+      "planePosition": { "real": 0.15, "imaginary": -0.15 },
+      "formalStatement": "The quantum harmonic oscillator with V(x) = (1/2)m*omega^2*x^2 has energy levels E_n = hbar*omega*(n + 1/2) for n = 0, 1, 2, ... The ground state energy E_0 = hbar*omega/2 is nonzero (zero-point energy). Solved via ladder operators a, a^dagger.",
+      "computationalForm": "Ladder operators: a = sqrt(m*omega/(2*hbar))(x + ip/(m*omega)), a^dagger = conjugate. [a, a^dagger] = 1. H = hbar*omega*(a^dagger*a + 1/2). Raise: a^dagger|n> = sqrt(n+1)|n+1>. Lower: a|n> = sqrt(n)|n-1>.",
+      "prerequisites": ["Schrodinger equation", "Operators", "Complex analysis basics"],
+      "dependencies": [
+        {
+          "target": "reality-schrodinger-time-independent",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "QHO is a solution of the time-independent Schrodinger equation"
+        },
+        {
+          "target": "reality-commutator",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Ladder operator method uses [a, a^dagger] = 1"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "reality-wave-function",
+          "yields": "Hermite-Gaussian wave functions: psi_n(x) = (m*omega/(pi*hbar))^{1/4} * H_n(xi) * exp(-xi^2/2) / sqrt(2^n * n!)",
+          "type": "sequential",
+          "conditions": ["Harmonic potential V(x) = m*omega^2*x^2/2"],
+          "example": "Ground state: Gaussian psi_0(x) = (m*omega/(pi*hbar))^{1/4} exp(-m*omega*x^2/(2*hbar))"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Solve for energy levels of a particle in a quadratic potential",
+        "Model vibrations of atoms in molecules or crystals",
+        "Apply ladder operator techniques to raise/lower quantum states"
+      ],
+      "keywords": ["harmonic oscillator", "ladder operators", "zero-point energy", "creation", "annihilation"],
+      "tags": ["quantum-mechanics", "exactly-solvable", "algorithm"],
+      "buildLabs": ["Build Lab 17.4: Quantum Harmonic Oscillator"]
+    },
+    {
+      "id": "reality-entanglement",
+      "name": "Entanglement",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.6",
+      "planePosition": { "real": 0.2, "imaginary": -0.1 },
+      "formalStatement": "Two quantum systems are entangled when the state of the composite system cannot be written as a tensor product of individual states: |psi_AB> != |psi_A> tensor |psi_B>. Measurement on one subsystem instantaneously determines the state of the other, regardless of distance.",
+      "computationalForm": "Bell state example: |psi^+> = (|01> + |10>)/sqrt(2). Test: compute reduced density matrix rho_A = Tr_B(|psi><psi|). If rho_A is mixed (not pure), the state is entangled. Von Neumann entropy S = -Tr(rho_A log rho_A) > 0 for entangled states.",
+      "prerequisites": ["Superposition", "Tensor product", "Measurement"],
+      "dependencies": [
+        {
+          "target": "reality-superposition",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Entangled states are superpositions of product states"
+        },
+        {
+          "target": "reality-measurement-born-rule",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Entanglement manifests through correlated measurement outcomes"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "reality-quantum-state-ket",
+          "yields": "Bell states: maximally entangled 2-qubit states forming a basis",
+          "type": "parallel",
+          "conditions": ["Two quantum systems"],
+          "example": "EPR pair: (|00> + |11>)/sqrt(2), measuring first qubit as 0 forces second to be 0"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Describe correlations between quantum systems that have no classical explanation",
+        "Generate perfectly correlated measurement outcomes at a distance",
+        "Implement quantum teleportation or quantum key distribution"
+      ],
+      "keywords": ["entanglement", "Bell state", "EPR", "nonlocal", "correlation"],
+      "tags": ["quantum-mechanics", "quantum-information"],
+      "buildLabs": ["Build Lab 17.5: Entanglement and Bell States"]
+    },
+    {
+      "id": "reality-spin-angular-momentum",
+      "name": "Spin and Angular Momentum",
+      "type": "definition",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.5",
+      "planePosition": { "real": 0.1, "imaginary": -0.15 },
+      "formalStatement": "Spin is an intrinsic angular momentum of quantum particles with no classical analog. For spin-s particles, the spin operators satisfy [S_x, S_y] = i*hbar*S_z (cyclic). Spin-1/2 particles (electrons): S_z has eigenvalues +hbar/2 and -hbar/2, represented by Pauli matrices.",
+      "computationalForm": "Pauli matrices: sigma_x = [[0,1],[1,0]], sigma_y = [[0,-i],[i,0]], sigma_z = [[1,0],[0,-1]]. S = (hbar/2)*sigma. Spin-up: |+> = [1,0], spin-down: |-> = [0,1]. Total angular momentum: J = L + S.",
+      "prerequisites": ["Quantum operators", "Commutator", "Matrices"],
+      "dependencies": [
+        {
+          "target": "reality-commutator",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Spin algebra defined by commutation relations"
+        },
+        {
+          "target": "reality-quantum-operators",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Spin operators are quantum observables"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "reality-pauli-exclusion",
+          "yields": "Spin-statistics theorem: half-integer spin -> fermion (Pauli exclusion), integer spin -> boson (no exclusion)",
+          "type": "parallel",
+          "conditions": ["Identical particles"],
+          "example": "Electrons (spin-1/2): fermions, obey Pauli exclusion. Photons (spin-1): bosons, can occupy same state."
+        }
+      ],
+      "applicabilityPatterns": [
+        "Describe the intrinsic angular momentum of particles",
+        "Compute spin states and measurement probabilities",
+        "Model magnetic properties of atoms and particles"
+      ],
+      "keywords": ["spin", "angular momentum", "Pauli matrices", "spin-1/2", "magnetic moment"],
+      "tags": ["quantum-mechanics", "particles"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-quantum-tunneling",
+      "name": "Quantum Tunneling",
+      "type": "theorem",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.6",
+      "planePosition": { "real": 0.2, "imaginary": -0.2 },
+      "formalStatement": "A quantum particle can penetrate through a potential barrier V_0 > E, where E is the particle's energy. The tunneling probability through a rectangular barrier of width a is approximately T ≈ exp(-2*kappa*a) where kappa = sqrt(2m(V_0-E))/hbar.",
+      "computationalForm": "For rectangular barrier of height V_0, width a, particle energy E < V_0: T ≈ 16*(E/V_0)*(1-E/V_0)*exp(-2*a*sqrt(2m(V_0-E)/hbar^2)). Exponential decay with barrier width and sqrt(mass * energy deficit).",
+      "prerequisites": ["Schrodinger equation", "Wave function", "Exponential decay"],
+      "dependencies": [
+        {
+          "target": "reality-schrodinger-time-independent",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Tunneling is a solution of the Schrodinger equation with a barrier potential"
+        },
+        {
+          "target": "reality-wave-function",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Wave function has nonzero amplitude beyond the barrier"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "reality-plancks-constant",
+          "yields": "Scale of tunneling: heavier particles or wider barriers suppress tunneling exponentially",
+          "type": "sequential",
+          "conditions": ["Particle energy less than barrier height"],
+          "example": "Alpha decay: alpha particle tunnels through nuclear potential barrier, half-lives from microseconds to billions of years"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Explain how particles pass through classically forbidden barriers",
+        "Calculate tunneling probabilities for quantum particles",
+        "Understand alpha decay and scanning tunneling microscopy"
+      ],
+      "keywords": ["tunneling", "barrier penetration", "transmission coefficient", "exponential decay"],
+      "tags": ["quantum-mechanics", "phenomena"],
+      "buildLabs": []
+    }
+  ]
+}
