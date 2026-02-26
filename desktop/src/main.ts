@@ -147,15 +147,29 @@ async function init(): Promise<void> {
   const shell = new DesktopShell({ desktop, wm });
   shell.init();
 
-  // --- Pipeline wiring (Phase 383: Integration) ---
+  // --- Full Pipeline Wiring (Phase 383: Integration) ---
   try {
-    const { ChatPipeline, LedBridge, StagingBridge } = await import("./pipeline");
+    const {
+      ChatPipeline, LedBridge, StagingBridge,
+      BootstrapFlow, ErrorRecoveryManager, PersistenceManager,
+    } = await import("./pipeline");
+    const ipcCommands = await import("./ipc/commands");
 
-    // Pipeline classes are ready. Actual instantiation happens during the
-    // bootstrap flow (383-02) when ChatRenderer and MagicFilter are available.
-    console.log("[Pipeline] Integration wiring ready for bootstrap connection");
+    // PersistenceManager: load magic level from config
+    const persistence = new PersistenceManager({
+      setMagicLevel: ipcCommands.setMagicLevel,
+      getMagicLevel: ipcCommands.getMagicLevel,
+      getConversationHistory: ipcCommands.getConversationHistory,
+    });
+    const initialLevel = await persistence.loadMagicLevel();
+    console.log(`[Bootstrap] Magic level: ${initialLevel}`);
+
+    // Pipeline classes and BootstrapFlow are ready. Actual ChatRenderer
+    // and MagicFilter instances are connected when the CLI Chat window
+    // opens. The bootstrap sequence runs from there.
+    console.log("[Bootstrap] Integration pipeline ready");
   } catch (err) {
-    console.warn("[Pipeline] Pipeline wiring deferred (modules not yet available):", err);
+    console.warn("[Bootstrap] Integration deferred:", err);
   }
 
   // --- Dashboard integration: mount DashboardHost when dashboard window opens ---
