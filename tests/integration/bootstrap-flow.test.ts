@@ -100,10 +100,26 @@ describe("BootstrapFlow (full bootstrap sequence)", () => {
 
   it("full bootstrap reaches READY with services in dependency order", async () => {
     const startOrder: string[] = [];
+    const startedServices = new Set<string>();
+
     ipc.startService = vi.fn(async (serviceId: string) => {
       startOrder.push(serviceId);
+      startedServices.add(serviceId);
       return { ok: true };
     });
+
+    // Ensure getServiceStates reflects the services started so far
+    const allServiceIds = [
+      "tmux", "claude", "file_watcher", "dashboard",
+      "console", "staging", "terminal",
+    ];
+    ipc.getServiceStates = vi.fn(async () =>
+      allServiceIds.map((id) => ({
+        service_id: id,
+        status: startedServices.has(id) ? "online" : "offline",
+        led_color: startedServices.has(id) ? "green" : "red",
+      })),
+    );
 
     const flow = new BootstrapFlow({
       chatRenderer,
@@ -185,12 +201,27 @@ describe("BootstrapFlow (full bootstrap sequence)", () => {
   });
 
   it("handles service start failure", async () => {
+    const startedServices = new Set<string>();
+    const allServiceIds = [
+      "tmux", "claude", "file_watcher", "dashboard",
+      "console", "staging", "terminal",
+    ];
+
     ipc.startService = vi.fn(async (serviceId: string) => {
       if (serviceId === "claude") {
         return { ok: false, error: "Process not found" };
       }
+      startedServices.add(serviceId);
       return { ok: true };
     });
+
+    ipc.getServiceStates = vi.fn(async () =>
+      allServiceIds.map((id) => ({
+        service_id: id,
+        status: startedServices.has(id) ? "online" : "offline",
+        led_color: startedServices.has(id) ? "green" : "red",
+      })),
+    );
 
     const flow = new BootstrapFlow({
       chatRenderer,
