@@ -121,25 +121,6 @@ pub async fn get_service_states() -> Result<serde_json::Value, String> {
     Ok(json!([]))
 }
 
-/// Set the magic verbosity level (1-5).
-///
-/// Stub: will be wired to magic system in Phase 379.
-#[tauri::command]
-pub async fn set_magic_level(level: u8) -> Result<serde_json::Value, String> {
-    if !(1..=5).contains(&level) {
-        return Err("Magic level must be 1-5".to_string());
-    }
-    Ok(json!({ "level": level, "previous_level": 3 }))
-}
-
-/// Get the current magic verbosity level.
-///
-/// Stub: will read from .planning/config/magic-level.json in Phase 379.
-#[tauri::command]
-pub async fn get_magic_level() -> Result<serde_json::Value, String> {
-    Ok(json!({ "level": 3 }))
-}
-
 /// Get conversation history from the conversations directory.
 ///
 /// If conversation_id is provided, loads that specific file.
