@@ -190,7 +190,7 @@ describe('isValidTransition', () => {
   it('C-07: rejects invalid transitions', () => {
     expect(isValidTransition('DIRTY', 'MERGING', 'merge')).toBe(false);
     expect(isValidTransition('MERGING', 'REBASING', 'rebase')).toBe(false);
-    expect(isValidTransition('CONFLICT', 'DIRTY', 'edit')).toBe(false);
+    expect(isValidTransition('CONFLICT', 'MERGING', 'merge')).toBe(false);
   });
 
   it('allows MERGING to CONFLICT', () => {
