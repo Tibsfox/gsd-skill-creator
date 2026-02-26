@@ -14,7 +14,7 @@
       "computationalForm": "",
       "prerequisites": ["Group theory", "Complex exponentials", "Phase rotation"],
       "dependencies": [
-        { "target": "foundations-group", "type": "requires", "strength": 1.0, "description": "U(1) is a Lie group" },
+        { "target": "foundations-group-definition", "type": "requires", "strength": 1.0, "description": "U(1) is a Lie group" },
         { "target": "perception-unit-circle", "type": "applies", "strength": 0.8, "description": "U(1) is the unit circle in the complex plane" }
       ],
       "enables": ["unification-gauge-principle", "unification-electroweak-unification"],
@@ -38,7 +38,7 @@
       "computationalForm": "",
       "prerequisites": ["Group theory", "Matrix operations", "Unitary matrices"],
       "dependencies": [
-        { "target": "foundations-group", "type": "requires", "strength": 1.0, "description": "SU(2) is a Lie group" },
+        { "target": "foundations-group-definition", "type": "requires", "strength": 1.0, "description": "SU(2) is a Lie group" },
         { "target": "structure-linear-transformation", "type": "applies", "strength": 0.8, "description": "SU(2) elements are linear transformations" }
       ],
       "enables": ["unification-gauge-principle", "unification-electroweak-unification", "unification-higgs-mechanism"],
@@ -62,12 +62,12 @@
       "computationalForm": "",
       "prerequisites": ["Group theory", "Unitary matrices", "Color charge"],
       "dependencies": [
-        { "target": "foundations-group", "type": "requires", "strength": 1.0, "description": "SU(3) is a Lie group" },
+        { "target": "foundations-group-definition", "type": "requires", "strength": 1.0, "description": "SU(3) is a Lie group" },
         { "target": "structure-linear-transformation", "type": "applies", "strength": 0.8, "description": "SU(3) elements are linear transformations in color space" }
       ],
       "enables": ["unification-gauge-principle", "unification-strong-force-qcd"],
       "compositionRules": [
-        { "with": "reality-schrodinger-equation", "yields": "QCD equations of motion for quark fields", "type": "nested", "conditions": ["Gauge-covariant derivative used", "Color charge included"], "example": "The QCD Lagrangian includes quark fields transforming under SU(3) with gluon fields as gauge connections" }
+        { "with": "reality-schrodinger-time-independent", "yields": "QCD equations of motion for quark fields", "type": "nested", "conditions": ["Gauge-covariant derivative used", "Color charge included"], "example": "The QCD Lagrangian includes quark fields transforming under SU(3) with gluon fields as gauge connections" }
       ],
       "applicabilityPatterns": ["Describing strong nuclear force interactions between quarks", "Classifying hadrons using color charge representations", "Modeling gluon self-interactions"],
       "keywords": ["SU(3)", "QCD", "strong force", "color", "gluon"],
@@ -86,13 +86,13 @@
       "computationalForm": "Replace ordinary derivatives with gauge-covariant derivatives: D_mu = partial_mu - i g A_mu. The gauge field A_mu transforms to compensate for the spacetime-dependent phase, ensuring the Lagrangian remains invariant.",
       "prerequisites": ["Symmetry groups", "Lagrangian mechanics", "Covariant derivative"],
       "dependencies": [
-        { "target": "foundations-group", "type": "requires", "strength": 0.9, "description": "Gauge groups provide the symmetry structure" },
-        { "target": "structure-vector-space", "type": "applies", "strength": 0.7, "description": "Gauge fields live in the Lie algebra (a vector space)" },
-        { "target": "change-differential-equation", "type": "applies", "strength": 0.8, "description": "Gauge-covariant derivatives modify differential equations" }
+        { "target": "foundations-group-definition", "type": "requires", "strength": 0.9, "description": "Gauge groups provide the symmetry structure" },
+        { "target": "structure-vector-space-axioms", "type": "applies", "strength": 0.7, "description": "Gauge fields live in the Lie algebra (a vector space)" },
+        { "target": "change-ode", "type": "applies", "strength": 0.8, "description": "Gauge-covariant derivatives modify differential equations" }
       ],
       "enables": ["unification-lagrangian", "unification-higgs-mechanism", "unification-electroweak-unification", "unification-strong-force-qcd"],
       "compositionRules": [
-        { "with": "foundations-group", "yields": "Construction of gauge theories from any Lie group", "type": "sequential", "conditions": ["Lie group is compact", "Matter fields transform under a representation"], "example": "Starting with SU(2) symmetry and applying the gauge principle generates the W and Z bosons as gauge fields" }
+        { "with": "foundations-group-definition", "yields": "Construction of gauge theories from any Lie group", "type": "sequential", "conditions": ["Lie group is compact", "Matter fields transform under a representation"], "example": "Starting with SU(2) symmetry and applying the gauge principle generates the W and Z bosons as gauge fields" }
       ],
       "applicabilityPatterns": ["Constructing quantum field theories from symmetry requirements", "Deriving force-carrying particles from local invariance", "Understanding why fundamental forces have the structure they do"],
       "keywords": ["gauge", "local symmetry", "covariant derivative", "gauge field", "invariance"],
@@ -112,8 +112,8 @@
       "prerequisites": ["Variational calculus", "Action principle", "Field theory basics"],
       "dependencies": [
         { "target": "change-optimization", "type": "requires", "strength": 0.9, "description": "Lagrangian mechanics uses variational principles (extremizing the action)" },
-        { "target": "change-integral", "type": "requires", "strength": 0.8, "description": "The action is an integral of the Lagrangian" },
-        { "target": "change-differential-equation", "type": "motivates", "strength": 0.7, "description": "Euler-Lagrange equations are differential equations of motion" }
+        { "target": "change-definite-integral", "type": "requires", "strength": 0.8, "description": "The action is an integral of the Lagrangian" },
+        { "target": "change-ode", "type": "motivates", "strength": 0.7, "description": "Euler-Lagrange equations are differential equations of motion" }
       ],
       "enables": ["unification-noether-theorem", "unification-gauge-principle"],
       "compositionRules": [
@@ -137,8 +137,8 @@
       "prerequisites": ["Lagrangian formulation", "Continuous symmetry", "Conservation laws"],
       "dependencies": [
         { "target": "unification-lagrangian", "type": "requires", "strength": 1.0, "description": "Noether's theorem operates on the Lagrangian/action" },
-        { "target": "foundations-group", "type": "requires", "strength": 0.8, "description": "Symmetries form groups" },
-        { "target": "change-integral", "type": "applies", "strength": 0.7, "description": "Conserved charge is a spatial integral of the current" }
+        { "target": "foundations-group-definition", "type": "requires", "strength": 0.8, "description": "Symmetries form groups" },
+        { "target": "change-definite-integral", "type": "applies", "strength": 0.7, "description": "Conserved charge is a spatial integral of the current" }
       ],
       "enables": ["unification-conservation-laws"],
       "compositionRules": [
@@ -186,7 +186,7 @@
       "computationalForm": "",
       "prerequisites": ["Symmetry groups", "Potential energy", "Ground state"],
       "dependencies": [
-        { "target": "foundations-group", "type": "requires", "strength": 0.8, "description": "Symmetry breaking relates group G to subgroup H" },
+        { "target": "foundations-group-definition", "type": "requires", "strength": 0.8, "description": "Symmetry breaking relates group G to subgroup H" },
         { "target": "change-optimization", "type": "applies", "strength": 0.7, "description": "Ground state is found by minimizing the potential" }
       ],
       "enables": ["unification-higgs-mechanism"],
@@ -238,7 +238,7 @@
       "dependencies": [
         { "target": "unification-symmetry-group-su3", "type": "requires", "strength": 1.0, "description": "QCD is the SU(3) gauge theory" },
         { "target": "unification-gauge-principle", "type": "requires", "strength": 1.0, "description": "QCD is constructed via the gauge principle" },
-        { "target": "reality-schrodinger-equation", "type": "applies", "strength": 0.6, "description": "Quantum mechanical framework for quark fields" }
+        { "target": "reality-schrodinger-time-independent", "type": "applies", "strength": 0.6, "description": "Quantum mechanical framework for quark fields" }
       ],
       "enables": [],
       "compositionRules": [
@@ -262,7 +262,7 @@
       "prerequisites": ["Lagrangian formulation", "Perturbation theory", "Propagators"],
       "dependencies": [
         { "target": "unification-lagrangian", "type": "requires", "strength": 0.9, "description": "Feynman rules are derived from the Lagrangian" },
-        { "target": "change-integral", "type": "applies", "strength": 0.8, "description": "Each loop in a diagram contributes an integration over momentum" }
+        { "target": "change-definite-integral", "type": "applies", "strength": 0.8, "description": "Each loop in a diagram contributes an integration over momentum" }
       ],
       "enables": ["unification-renormalization"],
       "compositionRules": [
@@ -310,7 +310,7 @@
       "prerequisites": ["Feynman diagrams", "Loop integrals", "Perturbation theory"],
       "dependencies": [
         { "target": "unification-feynman-diagrams", "type": "requires", "strength": 0.9, "description": "Divergences appear in loop diagrams" },
-        { "target": "change-integral", "type": "applies", "strength": 0.7, "description": "Regularization modifies loop integrals" }
+        { "target": "change-definite-integral", "type": "applies", "strength": 0.7, "description": "Regularization modifies loop integrals" }
       ],
       "enables": ["unification-coupling-constants"],
       "compositionRules": [
@@ -334,7 +334,7 @@
       "prerequisites": ["Noether's theorem", "Symmetry groups", "Quantum numbers"],
       "dependencies": [
         { "target": "unification-noether-theorem", "type": "requires", "strength": 1.0, "description": "Conservation laws follow from Noether's theorem" },
-        { "target": "foundations-group", "type": "applies", "strength": 0.7, "description": "Symmetries form groups whose structure determines what is conserved" }
+        { "target": "foundations-group-definition", "type": "applies", "strength": 0.7, "description": "Symmetries form groups whose structure determines what is conserved" }
       ],
       "enables": [],
       "compositionRules": [
@@ -381,7 +381,7 @@
       "computationalForm": "",
       "prerequisites": ["Special relativity", "Action principle", "Differential geometry"],
       "dependencies": [
-        { "target": "change-integral", "type": "requires", "strength": 0.9, "description": "The string action is a worldsheet area integral" },
+        { "target": "change-definite-integral", "type": "requires", "strength": 0.9, "description": "The string action is a worldsheet area integral" },
         { "target": "reality-dimensional-analysis", "type": "applies", "strength": 0.7, "description": "String tension has dimensions of energy/length" },
         { "target": "unification-lagrangian", "type": "generalizes", "strength": 0.8, "description": "String action generalizes the point particle action to extended objects" }
       ],
@@ -551,7 +551,7 @@
       "computationalForm": "",
       "prerequisites": ["Quantum field theory", "Bosons and fermions", "Lie superalgebras"],
       "dependencies": [
-        { "target": "foundations-group", "type": "generalizes", "strength": 0.8, "description": "SUSY extends the Poincare group with fermionic generators" },
+        { "target": "foundations-group-definition", "type": "generalizes", "strength": 0.8, "description": "SUSY extends the Poincare group with fermionic generators" },
         { "target": "unification-lagrangian", "type": "requires", "strength": 0.7, "description": "SUSY constrains the form of the Lagrangian" }
       ],
       "enables": ["unification-m-theory"],
@@ -724,7 +724,7 @@
       "prerequisites": ["Gauge principle", "Symmetry groups", "Spin and quantum numbers"],
       "dependencies": [
         { "target": "unification-gauge-principle", "type": "requires", "strength": 1.0, "description": "Gauge bosons arise from the gauge principle" },
-        { "target": "foundations-group", "type": "applies", "strength": 0.7, "description": "Number and properties of gauge bosons determined by the gauge group" }
+        { "target": "foundations-group-definition", "type": "applies", "strength": 0.7, "description": "Number and properties of gauge bosons determined by the gauge group" }
       ],
       "enables": ["unification-feynman-diagrams"],
       "compositionRules": [
@@ -733,6 +733,175 @@
       "applicabilityPatterns": ["Identifying force carriers in the Standard Model", "Computing interaction vertices for scattering processes", "Understanding the particle content required by gauge invariance"],
       "keywords": ["gauge boson", "photon", "gluon", "W boson", "Z boson", "force carrier"],
       "tags": ["gauge-boson", "standard-model", "particle"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-anomaly-cancellation",
+      "name": "Anomaly Cancellation",
+      "type": "theorem",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.12",
+      "planePosition": { "real": -0.15, "imaginary": 0.65 },
+      "formalStatement": "Quantum anomalies (violations of classical symmetries by quantum effects) must cancel for a gauge theory to be consistent. In the Standard Model, the sum of electric charges over all fermion species in each generation cancels: sum Q_L - sum Q_R = 0, ensuring gauge invariance at the quantum level.",
+      "computationalForm": "For SU(N) gauge theory: Tr[T^a {T^b, T^c}] must vanish when summed over all chiral fermion representations. For the Standard Model: contributions from quarks (3 colors x 2 per generation) and leptons (1 per generation) cancel precisely.",
+      "prerequisites": ["Gauge symmetry", "Quantum corrections", "Chiral fermions"],
+      "dependencies": [
+        { "target": "unification-gauge-principle", "type": "requires", "strength": 0.95, "description": "Anomaly cancellation is a quantum consistency condition on gauge theories" },
+        { "target": "unification-renormalization", "type": "requires", "strength": 0.8, "description": "Anomalies arise from loop diagrams computed during renormalization" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "unification-symmetry-group-su2", "yields": "Constraint on fermion representations: each generation must form an anomaly-free set under SU(2)_L", "type": "parallel", "conditions": ["Theory is chiral (left-right asymmetric)", "Gauge group has cubic Casimir"], "example": "In each generation: 3 quarks doublets + 1 lepton doublet cancel the SU(2)^2 x U(1) anomaly" }
+      ],
+      "applicabilityPatterns": ["Checking quantum consistency of gauge theories", "Constraining allowed matter content in unified theories"],
+      "keywords": ["anomaly", "cancellation", "chiral", "consistency", "quantum"],
+      "tags": ["standard-model", "quantum-field-theory", "consistency"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-running-coupling",
+      "name": "Running Coupling Constants",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.10",
+      "planePosition": { "real": -0.1, "imaginary": 0.5 },
+      "formalStatement": "Coupling constants alpha_i(mu) depend on the energy scale mu at which they are measured. The renormalization group equations govern this running: d(alpha_i)/d(ln mu) = beta_i(alpha_i). In the Standard Model, alpha_1, alpha_2, alpha_3 converge at high energies.",
+      "computationalForm": "One-loop RGE: 1/alpha_i(mu) = 1/alpha_i(mu_0) - b_i/(2*pi) * ln(mu/mu_0). Standard Model beta coefficients: b_1 = 41/10, b_2 = -19/6, b_3 = -7. Grand Unification scale: ~10^{16} GeV where couplings approximately meet.",
+      "prerequisites": ["Coupling constants", "Renormalization", "Energy scale"],
+      "dependencies": [
+        { "target": "unification-coupling-constants", "type": "requires", "strength": 1.0, "description": "Running describes how coupling constants change with energy" },
+        { "target": "unification-renormalization", "type": "requires", "strength": 0.95, "description": "Running couplings are a consequence of renormalization" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "unification-supersymmetry", "yields": "Precise gauge coupling unification: SUSY modifies beta functions so couplings meet at a single point", "type": "parallel", "conditions": ["SUSY partners exist at TeV scale", "No intermediate thresholds"], "example": "MSSM beta coefficients b_1=33/5, b_2=1, b_3=-3 give exact unification at ~2x10^{16} GeV" }
+      ],
+      "applicabilityPatterns": ["Predicting interaction strengths at different energy scales", "Testing grand unification hypotheses"],
+      "keywords": ["running coupling", "renormalization group", "beta function", "unification"],
+      "tags": ["standard-model", "renormalization", "energy-scale"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-yang-mills",
+      "name": "Yang-Mills Theory",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.4",
+      "planePosition": { "real": -0.1, "imaginary": 0.7 },
+      "formalStatement": "Yang-Mills theory is a gauge theory with a non-abelian gauge group G. The field strength tensor is F^a_{mu nu} = partial_mu A^a_nu - partial_nu A^a_mu + g f^{abc} A^b_mu A^c_nu, where f^{abc} are structure constants. The Lagrangian is L = -1/4 F^a_{mu nu} F^{a mu nu}.",
+      "computationalForm": "For SU(N): N^2 - 1 gauge fields. Equations of motion: D_mu F^{mu nu} = J^nu where D_mu is the gauge covariant derivative. Self-interaction term g f^{abc} A^b A^c distinguishes non-abelian from abelian gauge theories (asymptotic freedom follows).",
+      "prerequisites": ["Gauge principle", "Non-abelian groups", "Field strength tensor"],
+      "dependencies": [
+        { "target": "unification-gauge-principle", "type": "requires", "strength": 1.0, "description": "Yang-Mills extends the gauge principle to non-abelian groups" },
+        { "target": "foundations-group-definition", "type": "requires", "strength": 0.9, "description": "Non-abelian Lie groups provide the symmetry structure" }
+      ],
+      "enables": ["unification-strong-force-qcd", "unification-electroweak-unification"],
+      "compositionRules": [
+        { "with": "unification-symmetry-group-su3", "yields": "Quantum Chromodynamics: SU(3) Yang-Mills theory describes the strong nuclear force", "type": "parallel", "conditions": ["Gauge group is SU(3)", "Matter fields are quarks in fundamental representation"], "example": "QCD Lagrangian: SU(3) Yang-Mills with 8 gluon fields coupled to 6 quark flavors" }
+      ],
+      "applicabilityPatterns": ["Constructing non-abelian gauge theories for fundamental forces", "Understanding self-interactions of gauge fields"],
+      "keywords": ["yang-mills", "non-abelian", "gauge theory", "field strength"],
+      "tags": ["gauge-theory", "yang-mills", "non-abelian"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-compactification",
+      "name": "Compactification",
+      "type": "technique",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.5",
+      "planePosition": { "real": 0.05, "imaginary": 0.8 },
+      "formalStatement": "Compactification reduces higher-dimensional theories to 4D by curling extra dimensions into a compact manifold K. The 10D spacetime M^{10} = M^4 x K^6 where K is a Calabi-Yau manifold. The topology and geometry of K determine the 4D particle spectrum and coupling constants.",
+      "computationalForm": "Kaluza-Klein decomposition: phi(x,y) = sum_n phi_n(x) * psi_n(y) where y are compact coordinates, psi_n are harmonics on K. Mass spectrum: m_n^2 ~ n^2/R^2 where R is compactification radius. Low-energy limit: only n=0 modes survive.",
+      "prerequisites": ["Extra dimensions", "Calabi-Yau manifolds", "Dimensional reduction"],
+      "dependencies": [
+        { "target": "unification-extra-dimensions", "type": "requires", "strength": 1.0, "description": "Compactification is the mechanism for making extra dimensions physical" },
+        { "target": "unification-calabi-yau", "type": "requires", "strength": 0.95, "description": "Calabi-Yau manifolds are the standard compact spaces for string compactification" }
+      ],
+      "enables": ["unification-landscape"],
+      "compositionRules": [
+        { "with": "unification-moduli-space", "yields": "Vacuum selection: different points in moduli space correspond to different compactifications with different physics", "type": "parallel", "conditions": ["Compactification manifold has adjustable parameters", "Moduli are not all stabilized"], "example": "Different Calabi-Yau shapes give different gauge groups and matter content, with continuous moduli determining coupling constants" }
+      ],
+      "applicabilityPatterns": ["Reducing higher-dimensional theories to observable 4D physics", "Deriving the Standard Model particle spectrum from string theory"],
+      "keywords": ["compactification", "Kaluza-Klein", "dimensional reduction", "extra dimensions"],
+      "tags": ["string-theory", "compactification", "extra-dimensions"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-brane",
+      "name": "D-Branes",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.8",
+      "planePosition": { "real": 0.1, "imaginary": 0.85 },
+      "formalStatement": "A Dp-brane is a (p+1)-dimensional extended object on which open strings can end. The endpoints satisfy Dirichlet boundary conditions in the transverse directions. D-branes carry Ramond-Ramond charge and their dynamics are described by the DBI (Dirac-Born-Infeld) action.",
+      "computationalForm": "DBI action: S = -T_p integral d^{p+1}x sqrt(-det(g_{ab} + 2*pi*alpha' F_{ab})) where T_p = 1/((2*pi)^p * g_s * alpha'^{(p+1)/2}) is the brane tension. Open string spectrum on N coincident D-branes gives U(N) gauge theory.",
+      "prerequisites": ["String theory", "Open/closed strings", "Boundary conditions"],
+      "dependencies": [
+        { "target": "unification-string-action", "type": "requires", "strength": 0.9, "description": "D-branes arise as boundary conditions for open strings" },
+        { "target": "unification-t-duality", "type": "requires", "strength": 0.8, "description": "T-duality maps Neumann to Dirichlet boundary conditions, generating D-branes" }
+      ],
+      "enables": ["unification-ads-cft"],
+      "compositionRules": [
+        { "with": "unification-gauge-principle", "yields": "Gauge theories on branes: stack of N D-branes generates U(N) gauge theory on their worldvolume", "type": "parallel", "conditions": ["Branes are coincident", "Low-energy limit is taken"], "example": "N coincident D3-branes in type IIB string theory give N=4 super Yang-Mills with U(N) gauge group" }
+      ],
+      "applicabilityPatterns": ["Constructing gauge theories from string theory", "Understanding non-perturbative objects in string theory"],
+      "keywords": ["D-brane", "boundary condition", "DBI action", "gauge theory", "Ramond-Ramond"],
+      "tags": ["string-theory", "D-brane", "non-perturbative"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-grand-unification",
+      "name": "Grand Unification",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.14",
+      "planePosition": { "real": -0.05, "imaginary": 0.75 },
+      "formalStatement": "Grand Unified Theories (GUTs) embed the Standard Model gauge group SU(3)_C x SU(2)_L x U(1)_Y into a larger simple group G (e.g., SU(5), SO(10), E_6). At energies above the GUT scale M_GUT ~ 10^{16} GeV, all three forces unify into a single interaction.",
+      "computationalForm": "SU(5) GUT: quarks and leptons fit into 5-bar and 10 representations. Proton decay rate: tau_p ~ M_GUT^4 / (alpha_GUT^2 * m_p^5). Current bound: tau_p > 10^{34} years (Super-K). SO(10): all fermions of one generation fit into a single 16-dimensional spinor representation.",
+      "prerequisites": ["Standard Model gauge group", "Running couplings", "Group representations"],
+      "dependencies": [
+        { "target": "unification-symmetry-group-u1", "type": "requires", "strength": 0.9, "description": "U(1) hypercharge embeds into the GUT group" },
+        { "target": "unification-symmetry-group-su2", "type": "requires", "strength": 0.9, "description": "SU(2) weak isospin embeds into the GUT group" },
+        { "target": "unification-symmetry-group-su3", "type": "requires", "strength": 0.9, "description": "SU(3) color embeds into the GUT group" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "unification-spontaneous-symmetry-breaking", "yields": "GUT breaking: G -> SU(3) x SU(2) x U(1) at M_GUT, then electroweak breaking at M_W", "type": "sequential", "conditions": ["GUT Higgs field acquires VEV at M_GUT", "Breaking preserves the Standard Model subgroup"], "example": "SU(5) -> SU(3) x SU(2) x U(1) via a 24-dimensional Higgs acquiring a VEV proportional to diag(2,2,2,-3,-3)" }
+      ],
+      "applicabilityPatterns": ["Unifying the three fundamental forces into a single framework", "Predicting proton decay and other GUT-scale phenomena"],
+      "keywords": ["grand unification", "GUT", "SU(5)", "SO(10)", "proton decay"],
+      "tags": ["unification", "GUT", "beyond-standard-model"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-symmetry-breaking-pattern",
+      "name": "Symmetry Breaking Patterns",
+      "type": "technique",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.8",
+      "planePosition": { "real": -0.1, "imaginary": 0.55 },
+      "formalStatement": "Symmetry breaking patterns classify how a symmetry group G breaks to a subgroup H via a scalar field acquiring a vacuum expectation value. The pattern G -> H determines the number of massive and massless gauge bosons: dim(G) - dim(H) massive bosons (eaten Goldstone bosons), dim(H) massless bosons remain.",
+      "computationalForm": "Count: dim(G/H) = dim(G) - dim(H) massive gauge bosons. Electroweak: SU(2)_L x U(1)_Y -> U(1)_EM gives 4-1 = 3 massive (W+, W-, Z). Goldstone theorem: each broken generator yields one massless scalar, which becomes the longitudinal mode of a massive gauge boson (Higgs mechanism).",
+      "prerequisites": ["Spontaneous symmetry breaking", "Gauge symmetry", "Group theory"],
+      "dependencies": [
+        { "target": "unification-spontaneous-symmetry-breaking", "type": "requires", "strength": 1.0, "description": "Breaking patterns classify the outcomes of spontaneous symmetry breaking" },
+        { "target": "unification-higgs-mechanism", "type": "requires", "strength": 0.9, "description": "Higgs mechanism converts Goldstone bosons into massive gauge boson modes" }
+      ],
+      "enables": ["unification-grand-unification"],
+      "compositionRules": [
+        { "with": "foundations-group-definition", "yields": "Systematic classification of all possible breaking patterns for a given gauge group", "type": "parallel", "conditions": ["Gauge group is known", "Scalar field representations are specified"], "example": "SO(10) can break as SO(10) -> SU(5) x U(1) -> SU(3) x SU(2) x U(1) with 45-10-1 = 34 massive bosons at the first step" }
+      ],
+      "applicabilityPatterns": ["Classifying possible outcomes when a gauge symmetry is broken", "Predicting particle mass spectra from symmetry breaking"],
+      "keywords": ["symmetry breaking", "pattern", "Goldstone", "massive boson", "subgroup"],
+      "tags": ["standard-model", "symmetry-breaking", "particle-physics"],
       "buildLabs": []
     }
   ]

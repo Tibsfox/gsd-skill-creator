@@ -15,8 +15,8 @@
       "prerequisites": ["Complex numbers", "Mathematical classification", "Understanding of abstraction levels"],
       "dependencies": [
         { "target": "perception-unit-circle", "type": "requires", "strength": 0.7, "description": "The unit circle on the complex plane is the generative center of the framework" },
-        { "target": "structure-complex-analysis", "type": "applies", "strength": 0.6, "description": "Uses complex plane as a classification space" },
-        { "target": "foundations-set-operations", "type": "requires", "strength": 0.5, "description": "Domains and quadrants are defined as sets of concepts" }
+        { "target": "structure-complex-function", "type": "applies", "strength": 0.6, "description": "Uses complex plane as a classification space" },
+        { "target": "foundations-set-union", "type": "requires", "strength": 0.5, "description": "Domains and quadrants are defined as sets of concepts" }
       ],
       "enables": ["synthesis-quadrant-classification", "synthesis-domain-positioning", "synthesis-plane-navigation", "synthesis-domain-activation"],
       "compositionRules": [
@@ -40,7 +40,7 @@
       "prerequisites": ["Complex Plane of Experience", "Domain definitions", "Mathematical abstraction levels"],
       "dependencies": [
         { "target": "synthesis-complex-plane", "type": "requires", "strength": 1.0, "description": "Quadrants are defined on the Complex Plane" },
-        { "target": "foundations-set-operations", "type": "applies", "strength": 0.4, "description": "Each quadrant is a set of concepts" }
+        { "target": "foundations-set-union", "type": "applies", "strength": 0.4, "description": "Each quadrant is a set of concepts" }
       ],
       "enables": ["synthesis-domain-activation", "synthesis-cross-quadrant-composition"],
       "compositionRules": [
@@ -213,7 +213,7 @@
       "dependencies": [
         { "target": "synthesis-complex-plane", "type": "requires", "strength": 1.0, "description": "The imaginary axis defines the abstraction gradient" },
         { "target": "mapping-functor", "type": "applies", "strength": 0.6, "description": "Generalization is a functor from concrete to abstract categories" },
-        { "target": "foundations-proof-techniques", "type": "motivates", "strength": 0.5, "description": "Abstraction is a core proof technique (prove the general case)" }
+        { "target": "foundations-proof-by-direct", "type": "motivates", "strength": 0.5, "description": "Abstraction is a core proof technique (prove the general case)" }
       ],
       "enables": [],
       "compositionRules": [
@@ -237,7 +237,7 @@
       "prerequisites": ["Complex Plane", "Problem-solving strategies", "Mathematical creativity"],
       "dependencies": [
         { "target": "synthesis-complex-plane", "type": "requires", "strength": 1.0, "description": "The real axis defines the logic-creativity spectrum" },
-        { "target": "foundations-proof-techniques", "type": "applies", "strength": 0.6, "description": "Logical approaches rely on formal proof techniques" }
+        { "target": "foundations-proof-by-direct", "type": "applies", "strength": 0.6, "description": "Logical approaches rely on formal proof techniques" }
       ],
       "enables": [],
       "compositionRules": [
@@ -308,8 +308,8 @@
       "computationalForm": "To find the dependency chain for a primitive P: recursively follow P.dependencies, collecting each target primitive. Continue until reaching axioms (primitives with no dependencies). The chain is the sequence [axiom_1, ..., axiom_k, ..., intermediate_j, ..., P]. Longest chain = graph depth.",
       "prerequisites": ["Graph theory", "DAG traversal", "Axiomatic foundations"],
       "dependencies": [
-        { "target": "foundations-proof-techniques", "type": "requires", "strength": 0.7, "description": "Dependency chains are the structure of mathematical proofs" },
-        { "target": "foundations-set-operations", "type": "applies", "strength": 0.5, "description": "Dependencies form a partial order (a set with a relation)" },
+        { "target": "foundations-proof-by-direct", "type": "requires", "strength": 0.7, "description": "Dependency chains are the structure of mathematical proofs" },
+        { "target": "foundations-set-union", "type": "applies", "strength": 0.5, "description": "Dependencies form a partial order (a set with a relation)" },
         { "target": "perception-natural-numbers", "type": "motivates", "strength": 0.5, "description": "Natural numbers are among the deepest axiomatic foundations" }
       ],
       "enables": ["synthesis-foundational-decomposition", "synthesis-proof-as-path"],
@@ -335,9 +335,9 @@
       "dependencies": [
         { "target": "perception-natural-numbers", "type": "requires", "strength": 0.9, "description": "The through-line begins with counting (natural numbers)" },
         { "target": "perception-pythagorean-theorem", "type": "requires", "strength": 0.8, "description": "Geometry emerges early in the through-line" },
-        { "target": "waves-fourier-series", "type": "requires", "strength": 0.7, "description": "Frequency analysis enters the through-line through waves" },
+        { "target": "waves-fourier-series-preview", "type": "requires", "strength": 0.7, "description": "Frequency analysis enters the through-line through waves" },
         { "target": "change-derivative", "type": "requires", "strength": 0.8, "description": "Calculus is a pivotal point in the through-line" },
-        { "target": "foundations-group", "type": "requires", "strength": 0.7, "description": "Abstract algebra provides the structural foundation" },
+        { "target": "foundations-group-definition", "type": "requires", "strength": 0.7, "description": "Abstract algebra provides the structural foundation" },
         { "target": "mapping-functor", "type": "requires", "strength": 0.6, "description": "Category theory reveals the deep connections" },
         { "target": "emergence-neural-network", "type": "requires", "strength": 0.5, "description": "Machine learning represents the modern culmination" }
       ],
@@ -389,7 +389,7 @@
       "prerequisites": ["Composition rules", "Type checking", "Dependency ordering"],
       "dependencies": [
         { "target": "synthesis-foundational-decomposition", "type": "requires", "strength": 0.9, "description": "Decomposition produces chains that need verification" },
-        { "target": "foundations-proof-techniques", "type": "applies", "strength": 0.7, "description": "Verification is a form of proof checking" },
+        { "target": "foundations-proof-by-direct", "type": "applies", "strength": 0.7, "description": "Verification is a form of proof checking" },
         { "target": "mapping-category", "type": "applies", "strength": 0.5, "description": "Composition verification checks categorical composition laws" }
       ],
       "enables": [],
@@ -464,8 +464,8 @@
       "prerequisites": ["All 10 domains", "Coverage analysis", "Basis concept"],
       "dependencies": [
         { "target": "synthesis-domain-positioning", "type": "requires", "strength": 0.9, "description": "Completeness requires all domain positions to cover the plane" },
-        { "target": "structure-vector-space", "type": "motivates", "strength": 0.5, "description": "Completeness is analogous to a basis spanning a vector space" },
-        { "target": "foundations-set-operations", "type": "applies", "strength": 0.5, "description": "Coverage analysis uses set union of domain regions" }
+        { "target": "structure-vector-space-axioms", "type": "motivates", "strength": 0.5, "description": "Completeness is analogous to a basis spanning a vector space" },
+        { "target": "foundations-set-union", "type": "applies", "strength": 0.5, "description": "Coverage analysis uses set union of domain regions" }
       ],
       "enables": [],
       "compositionRules": [
@@ -513,7 +513,7 @@
       "computationalForm": "",
       "prerequisites": ["Groups", "Symmetry", "Pattern recognition across domains"],
       "dependencies": [
-        { "target": "foundations-group", "type": "requires", "strength": 0.8, "description": "Group is the exemplary scale-invariant pattern" },
+        { "target": "foundations-group-definition", "type": "requires", "strength": 0.8, "description": "Group is the exemplary scale-invariant pattern" },
         { "target": "mapping-functor", "type": "applies", "strength": 0.7, "description": "Functors preserve structure across levels of abstraction" },
         { "target": "emergence-self-similarity", "type": "motivates", "strength": 0.6, "description": "Mathematical scale invariance parallels fractal self-similarity" }
       ],
@@ -538,7 +538,7 @@
       "computationalForm": "",
       "prerequisites": ["Axiomatic systems", "Logical deduction", "Composition"],
       "dependencies": [
-        { "target": "foundations-proof-techniques", "type": "requires", "strength": 0.9, "description": "Proofs are the mechanism of emergence from axioms" },
+        { "target": "foundations-proof-by-direct", "type": "requires", "strength": 0.9, "description": "Proofs are the mechanism of emergence from axioms" },
         { "target": "perception-natural-numbers", "type": "motivates", "strength": 0.7, "description": "Natural numbers emerge from Peano axioms -- the simplest example" },
         { "target": "synthesis-dependency-chain", "type": "requires", "strength": 0.8, "description": "Emergence follows dependency chains from axioms to theorems" }
       ],
@@ -614,7 +614,7 @@
       "prerequisites": ["Dependency chains", "Composition rules", "Logical deduction"],
       "dependencies": [
         { "target": "synthesis-dependency-chain", "type": "requires", "strength": 1.0, "description": "A proof traces a path through the dependency graph" },
-        { "target": "foundations-proof-techniques", "type": "requires", "strength": 0.9, "description": "Proof techniques are the steps in the path" },
+        { "target": "foundations-proof-by-direct", "type": "requires", "strength": 0.9, "description": "Proof techniques are the steps in the path" },
         { "target": "synthesis-compositional-verification", "type": "applies", "strength": 0.8, "description": "Each proof step must pass compositional verification" }
       ],
       "enables": [],
@@ -665,7 +665,7 @@
       "dependencies": [
         { "target": "synthesis-compositional-verification", "type": "requires", "strength": 0.9, "description": "Type system enables compositional verification" },
         { "target": "mapping-category", "type": "applies", "strength": 0.6, "description": "Composition types correspond to categorical composition patterns" },
-        { "target": "foundations-set-operations", "type": "applies", "strength": 0.4, "description": "Type compatibility is checked via set membership" }
+        { "target": "foundations-set-union", "type": "applies", "strength": 0.4, "description": "Type compatibility is checked via set membership" }
       ],
       "enables": [],
       "compositionRules": [
@@ -749,6 +749,126 @@
       "applicabilityPatterns": ["Accelerating repeated problem types to near-instant resolution", "Building an experience base that improves mathematical problem-solving speed", "Optimizing resource usage by avoiding redundant graph navigation"],
       "keywords": ["cache", "path", "memoization", "speed", "lookup", "experience"],
       "tags": ["meta-mathematical", "caching", "optimization"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-analogy-engine",
+      "name": "Mathematical Analogy Engine",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.8",
+      "planePosition": { "real": -0.1, "imaginary": 0.1 },
+      "formalStatement": "Cross-domain analogies are detected by finding structural isomorphisms between dependency subgraphs. If domain A has a subgraph pattern P_A and domain B has subgraph P_B with the same shape (same edge types and node degrees), then A's problem-solving strategies can be transferred to B by mapping through P_B.",
+      "computationalForm": "1. Extract local dependency subgraph around source primitive (depth k). 2. Compute graph signature (degree sequence + edge type distribution). 3. Search target domain for subgraphs with matching signatures. 4. Map solution steps from source to target via the isomorphism. Precision increases with subgraph depth.",
+      "prerequisites": ["Dependency graph", "Graph isomorphism", "Cross-domain bridges"],
+      "dependencies": [
+        { "target": "synthesis-cross-domain-bridge", "type": "requires", "strength": 0.9, "description": "Bridges provide the connection points for analogy transfer" },
+        { "target": "synthesis-dependency-chain", "type": "requires", "strength": 0.85, "description": "Dependency chain structure provides the subgraph patterns to match" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-functor", "yields": "Formal analogy: structure-preserving functor between domain categories makes analogy rigorous", "type": "parallel", "conditions": ["Both domains are categorified", "Functor preserves dependency types"], "example": "Analogy between electrical circuits and mechanical systems: functor maps voltage to force, current to velocity, capacitance to spring compliance" }
+      ],
+      "applicabilityPatterns": ["Transferring solution strategies between structurally similar domains", "Discovering non-obvious connections between mathematical areas"],
+      "keywords": ["analogy", "structural isomorphism", "transfer", "cross-domain"],
+      "tags": ["meta-mathematical", "analogy", "transfer"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-difficulty-estimation",
+      "name": "Problem Difficulty Estimation",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.10",
+      "planePosition": { "real": 0.2, "imaginary": -0.05 },
+      "formalStatement": "The difficulty of a mathematical problem can be estimated from its position on the Complex Plane and the required decomposition path. Difficulty D = sum of edge weights on the shortest decomposition path + domain_count_penalty * |activated_domains| + abstraction_jumps * jump_cost.",
+      "computationalForm": "D(problem) = path_cost(p*) + alpha * |domains(p*)| + beta * jumps(p*) where p* is the optimal decomposition path, alpha penalizes multi-domain problems, beta penalizes large abstraction jumps. Normalize to [0,1] scale. Problems with D < 0.3 are elementary, 0.3-0.7 intermediate, > 0.7 advanced.",
+      "prerequisites": ["Complex Plane navigation", "Dependency graph", "Decomposition"],
+      "dependencies": [
+        { "target": "synthesis-foundational-decomposition", "type": "requires", "strength": 0.9, "description": "Difficulty is measured by the decomposition path length and complexity" },
+        { "target": "synthesis-distance-metric", "type": "requires", "strength": 0.85, "description": "Distance metric on the plane contributes to difficulty estimation" }
+      ],
+      "enables": ["synthesis-progressive-disclosure"],
+      "compositionRules": [
+        { "with": "synthesis-progressive-disclosure", "yields": "Adaptive explanation depth: difficulty estimate determines how much to decompose for the learner", "type": "sequential", "conditions": ["Learner skill level is known or estimated", "Problem has been classified on the plane"], "example": "For a calculus student: eigenvalue problem has D=0.8, so explain via full decomposition to derivatives. For a linear algebra student: D=0.3, explain directly" }
+      ],
+      "applicabilityPatterns": ["Estimating how challenging a problem is before attempting it", "Matching problem difficulty to learner skill level"],
+      "keywords": ["difficulty", "estimation", "complexity", "path cost"],
+      "tags": ["meta-mathematical", "difficulty", "assessment"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-domain-boundary",
+      "name": "Domain Boundary Detection",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.8",
+      "planePosition": { "real": 0.0, "imaginary": 0.15 },
+      "formalStatement": "Domain boundaries on the Complex Plane are not sharp lines but fuzzy transition zones. A problem near a boundary activates multiple domains with weights proportional to proximity. The overlap region between domains is where the richest cross-domain composition opportunities exist.",
+      "computationalForm": "Activation weight for domain d at position p: w_d(p) = max(0, 1 - ||p - center_d|| / radius_d). Multi-domain activation when w_d(p) > threshold for multiple d. Overlap region: {p : count(w_d(p) > threshold) >= 2}. Boundary width ~ min(radius_d1, radius_d2) / 4.",
+      "prerequisites": ["Complex Plane positions", "Domain regions", "Activation functions"],
+      "dependencies": [
+        { "target": "synthesis-domain-positioning", "type": "requires", "strength": 0.95, "description": "Domain positions define the boundaries to detect" },
+        { "target": "synthesis-domain-activation", "type": "requires", "strength": 0.9, "description": "Activation determines how boundaries create multi-domain responses" }
+      ],
+      "enables": ["synthesis-multi-domain-problems"],
+      "compositionRules": [
+        { "with": "synthesis-cross-quadrant-composition", "yields": "Boundary exploration: problems at domain boundaries naturally require cross-quadrant techniques", "type": "parallel", "conditions": ["Problem lies in overlap region of 2+ domains", "Domains span different quadrants"], "example": "A problem at the boundary of Waves and Structure activates both: Fourier analysis (Waves) and linear algebra (Structure) combine for spectral decomposition" }
+      ],
+      "applicabilityPatterns": ["Identifying problems that benefit from multi-domain approaches", "Finding rich composition opportunities at domain intersections"],
+      "keywords": ["boundary", "overlap", "multi-domain", "transition", "fuzzy"],
+      "tags": ["meta-mathematical", "boundary", "navigation"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-verification-chain",
+      "name": "Verification Chain",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.10",
+      "planePosition": { "real": 0.25, "imaginary": -0.1 },
+      "formalStatement": "A verification chain validates a composition path by checking each step: (1) type compatibility between composed primitives, (2) satisfaction of composition conditions, (3) dimensional/unit consistency, (4) intermediate result validity. The chain propagates confidence scores forward.",
+      "computationalForm": "For composition path [s_1, s_2, ..., s_n]: verify(path) = product(v(s_i)) where v(s_i) = type_check(s_i) * condition_check(s_i) * dimension_check(s_i). If verify(path) < threshold, flag specific failing step. Confidence: C = verify(path)^{1/n} (geometric mean per step).",
+      "prerequisites": ["Composition rules", "Type checking", "Dimensional analysis"],
+      "dependencies": [
+        { "target": "synthesis-compositional-verification", "type": "requires", "strength": 1.0, "description": "Verification chains implement compositional verification" },
+        { "target": "synthesis-composition-type-system", "type": "requires", "strength": 0.9, "description": "Type system provides the compatibility rules to check" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-proof-as-path", "yields": "Verified proof path: each step of the proof is independently validated by the verification chain", "type": "sequential", "conditions": ["Proof is structured as a composition path", "Each step has explicit justification"], "example": "Verify a proof that continuous functions on [a,b] are bounded: check that compactness (topology), continuity (analysis), and boundedness (order) compose validly at each step" }
+      ],
+      "applicabilityPatterns": ["Ensuring mathematical reasoning chains are valid at every step", "Detecting errors in multi-step compositions before producing output"],
+      "keywords": ["verification", "chain", "type check", "validation", "confidence"],
+      "tags": ["meta-mathematical", "verification", "safety"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-knowledge-graph-merge",
+      "name": "Knowledge Graph Merging",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.12",
+      "planePosition": { "real": -0.05, "imaginary": -0.05 },
+      "formalStatement": "When new knowledge is ingested, it must be merged with the existing dependency graph. The merge algorithm: (1) align new primitives to existing ones by plane position and semantic similarity, (2) classify as duplicate/generalization/specialization/new, (3) wire dependencies to the nearest existing anchor points, (4) validate graph remains acyclic.",
+      "computationalForm": "Similarity: sim(p_new, p_existing) = alpha * plane_distance(p_new, p_existing) + beta * keyword_overlap + gamma * dependency_pattern_match. If sim > 0.9: duplicate. If 0.7-0.9: check generalization/specialization via dependency subset relation. If < 0.7: genuinely new. After merge: run topological sort to verify DAG property.",
+      "prerequisites": ["Dependency graph", "Primitive registry", "Deduplication"],
+      "dependencies": [
+        { "target": "synthesis-dependency-chain", "type": "requires", "strength": 0.85, "description": "Merging must preserve and extend existing dependency chains" },
+        { "target": "synthesis-domain-positioning", "type": "requires", "strength": 0.8, "description": "Plane position is used for alignment during merge" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-compositional-verification", "yields": "Verified knowledge integration: new knowledge is merged and its compositions are validated against existing graph", "type": "sequential", "conditions": ["New primitives have complete schema fields", "Merge does not introduce cycles"], "example": "Ingesting a new domain (e.g., number theory): align primes to existing foundations, classify as new domain, wire dependencies to set theory and proof techniques, verify no cycles" }
+      ],
+      "applicabilityPatterns": ["Integrating new mathematical knowledge into an existing graph", "Maintaining graph integrity during knowledge base growth"],
+      "keywords": ["merge", "knowledge graph", "alignment", "deduplication", "integration"],
+      "tags": ["meta-mathematical", "graph", "integration"],
       "buildLabs": []
     }
   ]
