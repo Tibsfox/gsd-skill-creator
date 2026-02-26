@@ -1,8 +1,8 @@
 //! Security type definitions for the GSD-OS SSH Agent Security system (v1.38).
 //!
 //! Serde-serializable structs and enums matching the TypeScript Zod schemas
-//! in `src/types/security.ts`. JSON serialization uses camelCase field names
-//! to ensure cross-language compatibility.
+//! in `src/types/security.ts`. JSON serialization uses snake_case field names
+//! (Rust default) to match the TypeScript Zod schema key names exactly.
 //!
 //! All types round-trip through JSON: serialize to JSON, deserialize back,
 //! and the result equals the original.
@@ -107,7 +107,6 @@ pub enum CredentialSource {
 ///
 /// TypeScript equivalent: `DomainCredentialSchema` in `src/types/security.ts`
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
-#[serde(rename_all = "camelCase")]
 pub struct DomainCredential {
     /// Target domain (e.g., "api.anthropic.com", "github.com")
     pub domain: String,
@@ -125,7 +124,6 @@ pub struct DomainCredential {
 
 /// Filesystem access restrictions for a sandboxed agent.
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
-#[serde(rename_all = "camelCase")]
 pub struct Filesystem {
     /// Directories the agent is allowed to write to
     pub write_dirs: Vec<String>,
@@ -136,7 +134,6 @@ pub struct Filesystem {
 
 /// Network access restrictions for a sandboxed agent.
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
-#[serde(rename_all = "camelCase")]
 pub struct Network {
     /// Domains the agent is allowed to reach (with credential bindings)
     pub allowed_domains: Vec<DomainCredential>,
@@ -154,7 +151,6 @@ pub struct Network {
 ///
 /// TypeScript equivalent: `SandboxProfileSchema` in `src/types/security.ts`
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
-#[serde(rename_all = "camelCase")]
 pub struct SandboxProfile {
     /// Agent identifier this profile belongs to
     pub agent_id: String,
@@ -181,7 +177,6 @@ pub struct SandboxProfile {
 ///
 /// TypeScript equivalent: `SecurityEventSchema` in `src/types/security.ts`
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
-#[serde(rename_all = "camelCase")]
 pub struct SecurityEvent {
     /// Unique event identifier
     pub id: String,
@@ -214,7 +209,6 @@ pub struct SecurityEvent {
 ///
 /// TypeScript equivalent: `ProxyConfigSchema` in `src/types/security.ts`
 #[derive(Serialize, Debug, Clone, PartialEq)]
-#[serde(rename_all = "camelCase")]
 pub struct ProxyConfig {
     /// Path to the Unix domain socket (mode 0600)
     pub socket_path: String,
@@ -238,7 +232,6 @@ impl<'de> Deserialize<'de> for ProxyConfig {
     {
         /// Helper struct for intermediate deserialization.
         #[derive(Deserialize)]
-        #[serde(rename_all = "camelCase")]
         struct ProxyConfigRaw {
             socket_path: String,
             allowed_domains: Vec<DomainCredential>,
@@ -266,7 +259,6 @@ impl<'de> Deserialize<'de> for ProxyConfig {
 ///
 /// TypeScript equivalent: `AgentIsolationStateSchema` in `src/types/security.ts`
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
-#[serde(rename_all = "camelCase")]
 pub struct AgentIsolationState {
     /// Agent identifier
     pub agent_id: String,
