@@ -41,6 +41,12 @@ function ensureDir(filePath) {
   }
 }
 
+function ensureDirPath(dirPath) {
+  if (!fs.existsSync(dirPath)) {
+    if (!dryRun) fs.mkdirSync(dirPath, { recursive: true });
+  }
+}
+
 function readFileSafe(filePath) {
   try {
     return fs.readFileSync(filePath, 'utf-8');
@@ -84,6 +90,156 @@ function installStandalone(entry) {
   } else {
     warn(`differs: ${entry.target} (use --force to overwrite)`);
   }
+}
+
+// --- Skill directory install ---
+function installSkillDir(entry) {
+  const sourceBase = path.join(sourceDir, entry.source);
+  const targetBase = path.join(projectRoot, entry.target);
+
+  if (!fs.existsSync(sourceBase)) {
+    warn(`Skill source directory missing: ${entry.source}`);
+    return;
+  }
+
+  // Ensure target directory exists
+  ensureDirPath(targetBase);
+
+  const files = entry.files || [];
+  let skillInstalled = 0;
+  let skillCurrent = 0;
+
+  for (const relFile of files) {
+    const sourcePath = path.join(sourceBase, relFile);
+    const targetPath = path.join(targetBase, relFile);
+
+    const sourceContent = readFileSafe(sourcePath);
+    if (sourceContent === null) {
+      warn(`Skill file missing: ${entry.source}/${relFile}`);
+      continue;
+    }
+
+    const targetContent = readFileSafe(targetPath);
+
+    if (targetContent === null) {
+      if (!dryRun) {
+        ensureDir(targetPath);
+        fs.writeFileSync(targetPath, sourceContent);
+      }
+      log(`  + installed: ${entry.target}/${relFile}`);
+      stats.installed++;
+      skillInstalled++;
+    } else if (sha256(sourceContent) === sha256(targetContent)) {
+      if (!quiet) log(`  = current:   ${entry.target}/${relFile}`);
+      stats.current++;
+      skillCurrent++;
+    } else if (force) {
+      if (!dryRun) {
+        fs.writeFileSync(targetPath, sourceContent);
+      }
+      log(`  ↻ updated:   ${entry.target}/${relFile}`);
+      stats.updated++;
+      skillInstalled++;
+    } else {
+      warn(`differs: ${entry.target}/${relFile} (use --force to overwrite)`);
+    }
+  }
+
+  if (skillInstalled === 0 && skillCurrent === files.length && !quiet) {
+    // All files current — summary already logged per-file
+  }
+}
+
+// --- Hook script install (with chmod +x) ---
+function installHookScript(entry) {
+  const sourcePath = path.join(sourceDir, entry.source);
+  const targetPath = path.join(projectRoot, entry.target);
+
+  const sourceContent = readFileSafe(sourcePath);
+  if (sourceContent === null) {
+    warn(`Hook source missing: ${entry.source}`);
+    return;
+  }
+
+  const targetContent = readFileSafe(targetPath);
+
+  if (targetContent === null) {
+    if (!dryRun) {
+      ensureDir(targetPath);
+      fs.writeFileSync(targetPath, sourceContent);
+      fs.chmodSync(targetPath, 0o755);
+    }
+    log(`  + installed: ${entry.target} (executable)`);
+    stats.installed++;
+  } else if (sha256(sourceContent) === sha256(targetContent)) {
+    // Ensure executable even if content matches
+    if (!dryRun) {
+      try { fs.chmodSync(targetPath, 0o755); } catch { /* ignore */ }
+    }
+    if (!quiet) log(`  = current:   ${entry.target}`);
+    stats.current++;
+  } else if (force) {
+    if (!dryRun) {
+      fs.writeFileSync(targetPath, sourceContent);
+      fs.chmodSync(targetPath, 0o755);
+    }
+    log(`  ↻ updated:   ${entry.target} (executable)`);
+    stats.updated++;
+  } else {
+    warn(`differs: ${entry.target} (use --force to overwrite)`);
+  }
+}
+
+// --- CLAUDE.md install (with legacy backup) ---
+function installClaudeMd(entry) {
+  const sourcePath = path.join(sourceDir, entry.source);
+  const targetPath = path.join(projectRoot, entry.target);
+  const legacyThreshold = entry.legacyThreshold || 100;
+
+  const sourceContent = readFileSafe(sourcePath);
+  if (sourceContent === null) {
+    warn(`CLAUDE.md source missing: ${entry.source}`);
+    return;
+  }
+
+  const targetContent = readFileSafe(targetPath);
+
+  if (targetContent === null) {
+    // No existing CLAUDE.md — fresh install
+    if (!dryRun) {
+      ensureDir(targetPath);
+      fs.writeFileSync(targetPath, sourceContent);
+    }
+    log(`  + installed: ${entry.target}`);
+    stats.installed++;
+    return;
+  }
+
+  // Check if content matches
+  if (sha256(sourceContent) === sha256(targetContent)) {
+    if (!quiet) log(`  = current:   ${entry.target}`);
+    stats.current++;
+    return;
+  }
+
+  // Content differs — check if legacy backup needed
+  const lineCount = targetContent.split('\n').length;
+  if (lineCount > legacyThreshold) {
+    const legacyPath = path.join(projectRoot, 'CLAUDE.md.legacy');
+    if (!fs.existsSync(legacyPath)) {
+      if (!dryRun) {
+        fs.writeFileSync(legacyPath, targetContent);
+      }
+      log(`  ~ backup:    CLAUDE.md.legacy (${lineCount} lines archived)`);
+    }
+  }
+
+  // Deploy slim version
+  if (!dryRun) {
+    fs.writeFileSync(targetPath, sourceContent);
+  }
+  log(`  ↻ updated:   ${entry.target} (slim version deployed)`);
+  stats.updated++;
 }
 
 // --- Extension install ---
@@ -225,6 +381,12 @@ function installSettings(entry) {
         }
       }
     }
+  }
+
+  // Merge non-hook top-level keys (e.g., statusLine)
+  if (sourceSettings.statusLine && !targetSettings.statusLine) {
+    targetSettings.statusLine = sourceSettings.statusLine;
+    changed = true;
   }
 
   if (changed) {
@@ -418,12 +580,26 @@ function validateInstallation() {
     { name: 'wrap:verify', path: '.claude/commands/wrap/verify.md' },
     { name: 'wrap:plan', path: '.claude/commands/wrap/plan.md' },
     { name: 'wrap:phase', path: '.claude/commands/wrap/phase.md' },
-    // Agent
+    // Agents
     { name: 'observer agent', path: '.claude/agents/observer.md' },
+    { name: 'gsd-executor agent', path: '.claude/agents/gsd-executor.md' },
+    { name: 'gsd-verifier agent', path: '.claude/agents/gsd-verifier.md' },
+    { name: 'gsd-planner agent', path: '.claude/agents/gsd-planner.md' },
+    // Skills
+    { name: 'gsd-workflow skill', path: '.claude/skills/gsd-workflow/SKILL.md' },
+    { name: 'skill-integration skill', path: '.claude/skills/skill-integration/SKILL.md' },
+    { name: 'session-awareness skill', path: '.claude/skills/session-awareness/SKILL.md' },
+    { name: 'security-hygiene skill', path: '.claude/skills/security-hygiene/SKILL.md' },
+    // Hook scripts
+    { name: 'session-state hook', path: '.claude/hooks/session-state.sh' },
+    { name: 'validate-commit hook', path: '.claude/hooks/validate-commit.sh' },
+    { name: 'phase-boundary-check hook', path: '.claude/hooks/phase-boundary-check.sh' },
     // Dashboard
     { name: 'gsd-dashboard', path: '.claude/commands/gsd-dashboard.md' },
     // Config
     { name: 'integration config', path: '.planning/skill-creator.json' },
+    // CLAUDE.md
+    { name: 'CLAUDE.md', path: 'CLAUDE.md' },
   ];
 
   let ok = 0;
@@ -471,6 +647,24 @@ function validateInstallation() {
     missing++;
   }
 
+  // Check hook script permissions
+  const hookScripts = [
+    '.claude/hooks/session-state.sh',
+    '.claude/hooks/validate-commit.sh',
+    '.claude/hooks/phase-boundary-check.sh',
+  ];
+  for (const hookScript of hookScripts) {
+    const fullPath = path.join(projectRoot, hookScript);
+    try {
+      fs.accessSync(fullPath, fs.constants.X_OK);
+      log(`  ✓ ${hookScript} (executable)`);
+      ok++;
+    } catch {
+      log(`  ✗ ${hookScript} — not executable`);
+      missing++;
+    }
+  }
+
   log('');
   log(`Validation: ${ok} ok, ${missing} missing`);
 
@@ -486,9 +680,19 @@ function uninstallIntegration() {
     dirs: [
       '.claude/commands/sc',
       '.claude/commands/wrap',
+      '.claude/skills/gsd-workflow',
+      '.claude/skills/skill-integration',
+      '.claude/skills/session-awareness',
+      '.claude/skills/security-hygiene',
     ],
     files: [
       '.claude/agents/observer.md',
+      '.claude/agents/gsd-executor.md',
+      '.claude/agents/gsd-verifier.md',
+      '.claude/agents/gsd-planner.md',
+      '.claude/hooks/session-state.sh',
+      '.claude/hooks/validate-commit.sh',
+      '.claude/hooks/phase-boundary-check.sh',
       '.planning/skill-creator.json',
     ],
   };
@@ -594,6 +798,31 @@ function main() {
     log('');
   }
 
+  // Install skill directories
+  if (manifest.files.skills) {
+    log('Skills:');
+    for (const entry of manifest.files.skills) {
+      installSkillDir(entry);
+    }
+    log('');
+  }
+
+  // Install hook scripts (with executable permissions)
+  if (manifest.files.hookScripts) {
+    log('Hook scripts:');
+    for (const entry of manifest.files.hookScripts) {
+      installHookScript(entry);
+    }
+    log('');
+  }
+
+  // Install CLAUDE.md (with legacy backup)
+  if (manifest.files.claudeMd) {
+    log('CLAUDE.md:');
+    installClaudeMd(manifest.files.claudeMd);
+    log('');
+  }
+
   // Install extensions
   if (manifest.files.extensions) {
     log('Extensions:');
@@ -603,10 +832,17 @@ function main() {
     log('');
   }
 
-  // Install settings
+  // Install settings (primary settings.json)
   if (manifest.files.settings) {
     log('Settings:');
     installSettings(manifest.files.settings);
+    log('');
+  }
+
+  // Install settings hooks (merge additional hook config)
+  if (manifest.files.settingsHooks) {
+    log('Settings hooks:');
+    installSettings(manifest.files.settingsHooks);
     log('');
   }
 

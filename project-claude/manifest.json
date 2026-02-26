@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "project": "gsd-skill-creator",
   "description": "Project-specific .claude files that extend GSD framework",
   "files": {
@@ -268,8 +268,72 @@
         "source": "agents/observer.md",
         "target": ".claude/agents/observer.md",
         "description": "Passive session observer agent"
+      },
+      {
+        "source": "agents/gsd-executor.md",
+        "target": ".claude/agents/gsd-executor.md",
+        "description": "GSD phase execution agent with skill references"
+      },
+      {
+        "source": "agents/gsd-verifier.md",
+        "target": ".claude/agents/gsd-verifier.md",
+        "description": "GSD phase verification agent (read-only)"
+      },
+      {
+        "source": "agents/gsd-planner.md",
+        "target": ".claude/agents/gsd-planner.md",
+        "description": "GSD phase planning agent with skill references"
       }
     ],
+    "skills": [
+      {
+        "source": "skills/gsd-workflow",
+        "target": ".claude/skills/gsd-workflow",
+        "description": "GSD workflow routing and phase behavior skill",
+        "files": ["SKILL.md", "references/command-routing.md", "references/phase-behavior.md", "references/yolo-mode.md"]
+      },
+      {
+        "source": "skills/skill-integration",
+        "target": ".claude/skills/skill-integration",
+        "description": "Skill-creator integration protocol skill",
+        "files": ["SKILL.md", "references/loading-protocol.md", "references/bounded-guardrails.md", "references/observation-patterns.md"]
+      },
+      {
+        "source": "skills/session-awareness",
+        "target": ".claude/skills/session-awareness",
+        "description": "Session state awareness skill",
+        "files": ["SKILL.md"]
+      },
+      {
+        "source": "skills/security-hygiene",
+        "target": ".claude/skills/security-hygiene",
+        "description": "Security hygiene for self-modifying systems skill",
+        "files": ["SKILL.md"]
+      }
+    ],
+    "hookScripts": [
+      {
+        "source": "hooks/session-state.sh",
+        "target": ".claude/hooks/session-state.sh",
+        "description": "SessionStart hook: inject project state"
+      },
+      {
+        "source": "hooks/validate-commit.sh",
+        "target": ".claude/hooks/validate-commit.sh",
+        "description": "PreToolUse hook: enforce Conventional Commits"
+      },
+      {
+        "source": "hooks/phase-boundary-check.sh",
+        "target": ".claude/hooks/phase-boundary-check.sh",
+        "description": "PostToolUse hook: detect phase boundary writes"
+      }
+    ],
+    "claudeMd": {
+      "source": "CLAUDE.md",
+      "target": "CLAUDE.md",
+      "description": "Slim CLAUDE.md (<80 lines) replacing monolithic version",
+      "legacyThreshold": 100
+    },
     "extensions": [
       {
         "source": "extensions/gsd-executor--injected-skills.md",
@@ -294,6 +358,11 @@
         "gsd-save-work-state",
         "gsd-snapshot-session"
       ]
+    },
+    "settingsHooks": {
+      "source": "settings-hooks.json",
+      "target": ".claude/settings.json",
+      "description": "New hook registrations for session-state, validate-commit, phase-boundary-check"
     }
   }
 }
