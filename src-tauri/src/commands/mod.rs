@@ -11,5 +11,6 @@ pub mod sandbox;
 pub mod security;
 pub mod security_init;
 pub mod services;
+pub mod staging;
 pub mod tmux;
 pub mod watcher;
