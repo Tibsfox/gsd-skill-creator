@@ -56,13 +56,14 @@ describe('AngularPromotionEvaluator', () => {
 
   describe('evaluatePromotion - direction check', () => {
     it('approves promotion toward theta=0 (more concrete)', () => {
-      // Skill in CONVERSATION region promoting to SKILL_MD (toward theta=0)
-      const pos = createPosition(Math.PI / 3, 0.5, 0.01);
+      // Skill in CONVERSATION region (theta > 3*pi/8) promoting to SKILL_MD
+      const theta = PROMOTION_REGIONS[PromotionLevel.CONVERSATION].thetaMin + 0.01;
+      const pos = createPosition(theta, 0.5, 0.01);
       const store = createMockPositionStore(new Map([['s1', pos]]));
       const evaluator = new AngularPromotionEvaluator(
         store,
         createMockEvalFramework(),
-        createMockEvidenceProvider(),
+        createMockEvidenceProvider({ getPatternRepetitions: () => 200 }),
       );
 
       const result = evaluator.evaluatePromotion('s1', PromotionLevel.SKILL_MD);
@@ -156,9 +157,9 @@ describe('AngularPromotionEvaluator', () => {
 
   describe('evaluatePromotion - angular step & velocity bound', () => {
     it('rejects step exceeding angular velocity bound', () => {
-      // Skill at theta=1.0, target SKILL_MD midpoint ~0.27
-      // Step = 1.0 - 0.27 = 0.73, bound = 0.2 * 1.0 = 0.2 -> reject
-      const pos = createPosition(1.0, 0.5, 0.02);
+      // Skill at theta=1.5 (CONVERSATION), target SKILL_MD boundary = 3*pi/8 = 1.178
+      // stepToRegion = |1.5 - 1.178| = 0.322, bound = 0.2 * 1.5 = 0.3 -> reject
+      const pos = createPosition(1.5, 0.5, 0.02);
       const store = createMockPositionStore(new Map([['s1', pos]]));
       const evaluator = new AngularPromotionEvaluator(
         store,
@@ -172,15 +173,15 @@ describe('AngularPromotionEvaluator', () => {
     });
 
     it('approves step within velocity bound', () => {
-      // Skill just above SKILL_MD max, targeting SKILL_MD
-      // Small step well within 20% of current theta
+      // Skill just above SKILL_MD max (in CONVERSATION), targeting SKILL_MD
+      // stepToRegion = 0.01, bound = 0.2 * 1.188 = 0.238 -> passes easily
       const justAbove = PROMOTION_REGIONS[PromotionLevel.SKILL_MD].thetaMax + 0.01;
       const pos = createPosition(justAbove, 0.5, 0.02);
       const store = createMockPositionStore(new Map([['s1', pos]]));
       const evaluator = new AngularPromotionEvaluator(
         store,
         createMockEvalFramework(),
-        createMockEvidenceProvider(),
+        createMockEvidenceProvider({ getPatternRepetitions: () => 200 }),
       );
 
       const result = evaluator.evaluatePromotion('s1', PromotionLevel.SKILL_MD);
@@ -240,7 +241,7 @@ describe('AngularPromotionEvaluator', () => {
       const evaluator = new AngularPromotionEvaluator(
         store,
         createMockEvalFramework(),
-        createMockEvidenceProvider(),
+        createMockEvidenceProvider({ getPatternRepetitions: () => 200 }),
       );
 
       const result = evaluator.evaluatePromotion('s1', PromotionLevel.SKILL_MD);
@@ -273,7 +274,7 @@ describe('AngularPromotionEvaluator', () => {
       const evaluator = new AngularPromotionEvaluator(
         store,
         createMockEvalFramework(false, 'F1 below threshold'),
-        createMockEvidenceProvider(),
+        createMockEvidenceProvider({ getPatternRepetitions: () => 200 }),
       );
 
       const result = evaluator.evaluatePromotion('s1', PromotionLevel.SKILL_MD);
