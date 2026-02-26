@@ -377,6 +377,37 @@ impl SandboxProfileGenerator {
         args
     }
 
+    /// Convert an internal profile to Claude Code sandbox.json format.
+    ///
+    /// Maps write_dirs to `allow`, deny_read_dirs to `deny`, and
+    /// allowed_domains to `network.allow`.
+    pub fn to_claude_code_config(
+        &self,
+        profile: &InternalSandboxProfile,
+    ) -> ClaudeCodeSandboxConfig {
+        let allow: Vec<String> = profile
+            .write_dirs
+            .iter()
+            .map(|d| d.to_string_lossy().to_string())
+            .collect();
+
+        let deny: Vec<String> = profile
+            .deny_read_dirs
+            .iter()
+            .map(|d| d.to_string_lossy().to_string())
+            .collect();
+
+        let network_allow: Vec<String> = profile.allowed_domains.clone();
+
+        ClaudeCodeSandboxConfig {
+            allow,
+            deny,
+            network: ClaudeCodeNetworkConfig {
+                allow: network_allow,
+            },
+        }
+    }
+
     /// Convert profile to macOS Seatbelt scheme string.
     ///
     /// Generates a scheme for `sandbox-exec -p <scheme>`. Uses deny-default
@@ -487,16 +518,47 @@ pub struct ClaudeCodeNetworkConfig {
 /// Parse the output of verify-sandbox.sh into a VerificationResult.
 ///
 /// Each line starting with "PASS:" or "FAIL:" becomes a VerificationTest.
+/// Lines starting with "WARN:" are noted but do not count as pass or fail.
 /// The exit_code is the number of failures (0 = all pass).
-pub fn parse_verification_output(_output: &str, _exit_code: u32) -> VerificationResult {
-    todo!("parse_verification_output not yet implemented")
-}
+pub fn parse_verification_output(output: &str, exit_code: u32) -> VerificationResult {
+    let mut tests = Vec::new();
+    let mut failure_count: u32 = 0;
 
-// Add to_claude_code_config stub
-impl SandboxProfileGenerator {
-    /// Convert an internal profile to Claude Code sandbox.json format.
-    pub fn to_claude_code_config(&self, _profile: &InternalSandboxProfile) -> ClaudeCodeSandboxConfig {
-        todo!("to_claude_code_config not yet implemented")
+    for line in output.lines() {
+        let trimmed = line.trim();
+        if trimmed.starts_with("PASS:") {
+            let message = trimmed.to_string();
+            let name = trimmed
+                .trim_start_matches("PASS:")
+                .trim()
+                .to_lowercase()
+                .replace(' ', "_");
+            tests.push(VerificationTest {
+                name,
+                passed: true,
+                message,
+            });
+        } else if trimmed.starts_with("FAIL:") {
+            let message = trimmed.to_string();
+            let name = trimmed
+                .trim_start_matches("FAIL:")
+                .trim()
+                .to_lowercase()
+                .replace(' ', "_");
+            failure_count += 1;
+            tests.push(VerificationTest {
+                name,
+                passed: false,
+                message,
+            });
+        }
+        // WARN lines are informational — not counted as pass or fail
+    }
+
+    VerificationResult {
+        all_passed: exit_code == 0 && failure_count == 0,
+        tests,
+        failure_count,
     }
 }
 

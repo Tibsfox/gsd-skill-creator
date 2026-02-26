@@ -1,0 +1,20 @@
+{
+  "agent_type": "verify",
+  "description": "Verify agent sandbox profile — read-only filesystem, no network access, no write paths",
+  "write_dirs": [],
+  "deny_read_dirs": [
+    "$HOME/.ssh",
+    "$HOME/.config",
+    "$HOME/.aws"
+  ],
+  "allowed_domains": [],
+  "proxy_socket": null,
+  "bwrap_flags": {
+    "die_with_parent": true,
+    "cap_drop": "ALL",
+    "unshare_net": true,
+    "unshare_pid": true,
+    "unshare_uts": true,
+    "restricted_proc": true
+  }
+}
