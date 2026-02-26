@@ -193,8 +193,8 @@ describe('safety-validator', () => {
     it('returns passed=true when all checks pass', () => {
       const result = validateSafety({
         skillUpdates: [makeSkillUpdate({
-          currentDefinition: 'Original text here.',
-          proposedDefinition: 'Original text here slightly modified.',
+          currentDefinition: 'The Fourier transform converts signals between time and frequency domains using integration.',
+          proposedDefinition: 'The Fourier transform converts signals between time and frequency domains via integration.',
         })],
         patches: [makePatch({ requiresReview: true })],
         checkpoint: null,
