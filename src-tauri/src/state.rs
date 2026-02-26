@@ -1,5 +1,21 @@
 use std::sync::mpsc;
 
+use crate::api::client::AnthropicClient;
+
+/// Managed state for the API client.
+///
+/// Wrapped in `tokio::sync::Mutex<ApiClientState>` for async access.
+/// The client is lazily initialized on first use.
+pub struct ApiClientState {
+    pub client: Option<AnthropicClient>,
+}
+
+impl Default for ApiClientState {
+    fn default() -> Self {
+        Self { client: None }
+    }
+}
+
 /// Application state managed by Tauri.
 ///
 /// Wrapped in `Mutex<AppState>` and registered via `app.manage()`.
