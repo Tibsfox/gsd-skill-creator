@@ -14,7 +14,6 @@ set -euo pipefail
 PASS=0; FAIL=0; ERRORS=""
 SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 MERGE_REPOS="$SCRIPT_DIR/scripts/merge-repos.sh"
-GENERATE_LOG="$SCRIPT_DIR/scripts/generate-log.sh"
 
 # ---------------------------------------------------------------------------
 # Test harness
@@ -22,27 +21,27 @@ GENERATE_LOG="$SCRIPT_DIR/scripts/generate-log.sh"
 
 assert_eq() {
     if [[ "$1" == "$2" ]]; then
-        ((PASS++))
+        PASS=$((PASS + 1))
     else
-        ((FAIL++))
+        FAIL=$((FAIL + 1))
         ERRORS+="  FAIL: $3 -- expected '$2', got '$1'\n"
     fi
 }
 
 assert_true() {
     if eval "$1"; then
-        ((PASS++))
+        PASS=$((PASS + 1))
     else
-        ((FAIL++))
+        FAIL=$((FAIL + 1))
         ERRORS+="  FAIL: $2\n"
     fi
 }
 
 assert_false() {
     if ! eval "$1"; then
-        ((PASS++))
+        PASS=$((PASS + 1))
     else
-        ((FAIL++))
+        FAIL=$((FAIL + 1))
         ERRORS+="  FAIL: $2 (expected failure)\n"
     fi
 }
@@ -52,9 +51,9 @@ assert_exit() {
     local actual
     set +e; "$@" >/dev/null 2>&1; actual=$?; set -e
     if [[ "$actual" -eq "$expected" ]]; then
-        ((PASS++))
+        PASS=$((PASS + 1))
     else
-        ((FAIL++))
+        FAIL=$((FAIL + 1))
         ERRORS+="  FAIL: expected exit $expected, got $actual -- $*\n"
     fi
 }
