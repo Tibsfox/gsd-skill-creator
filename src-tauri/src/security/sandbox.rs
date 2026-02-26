@@ -448,6 +448,59 @@ impl SandboxProfileGenerator {
 }
 
 // ============================================================================
+// Verification types (Phase 368-02)
+// ============================================================================
+
+/// Result of a single sandbox verification test.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VerificationTest {
+    pub name: String,
+    pub passed: bool,
+    pub message: String,
+}
+
+/// Aggregate result of all sandbox verification tests.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VerificationResult {
+    pub all_passed: bool,
+    pub tests: Vec<VerificationTest>,
+    pub failure_count: u32,
+}
+
+/// Claude Code /sandbox compatibility configuration.
+///
+/// Matches the format Claude Code reads from `.claude/sandbox.json`:
+/// `{ "allow": [...], "deny": [...], "network": { "allow": [...] } }`
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ClaudeCodeSandboxConfig {
+    pub allow: Vec<String>,
+    pub deny: Vec<String>,
+    pub network: ClaudeCodeNetworkConfig,
+}
+
+/// Network section of Claude Code sandbox configuration.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ClaudeCodeNetworkConfig {
+    pub allow: Vec<String>,
+}
+
+/// Parse the output of verify-sandbox.sh into a VerificationResult.
+///
+/// Each line starting with "PASS:" or "FAIL:" becomes a VerificationTest.
+/// The exit_code is the number of failures (0 = all pass).
+pub fn parse_verification_output(_output: &str, _exit_code: u32) -> VerificationResult {
+    todo!("parse_verification_output not yet implemented")
+}
+
+// Add to_claude_code_config stub
+impl SandboxProfileGenerator {
+    /// Convert an internal profile to Claude Code sandbox.json format.
+    pub fn to_claude_code_config(&self, _profile: &InternalSandboxProfile) -> ClaudeCodeSandboxConfig {
+        todo!("to_claude_code_config not yet implemented")
+    }
+}
+
+// ============================================================================
 // Tests
 // ============================================================================
 
@@ -546,5 +599,114 @@ mod tests {
             !seatbelt.contains(".ssh"),
             "Seatbelt profile must not allow .ssh path"
         );
+    }
+
+    // ========================================================================
+    // 368-02 tests: escape prevention, die-with-parent, verification, Claude Code compat
+    // ========================================================================
+
+    #[test]
+    fn test_bwrap_command_includes_die_with_parent() {
+        let gen = SandboxProfileGenerator::new_test();
+        let profile = gen.generate(AgentType::Main, None);
+        let cmd = gen.to_bwrap_command(&profile);
+        assert!(
+            cmd.contains(&"--die-with-parent".to_string()),
+            "bwrap command must include --die-with-parent"
+        );
+    }
+
+    #[test]
+    fn test_bwrap_command_drops_all_capabilities() {
+        let gen = SandboxProfileGenerator::new_test();
+        let profile = gen.generate(AgentType::Main, None);
+        let cmd = gen.to_bwrap_command(&profile);
+        let cap_drop_idx = cmd.iter().position(|a| a == "--cap-drop");
+        assert!(cap_drop_idx.is_some(), "bwrap command must have --cap-drop");
+        let next = cmd.get(cap_drop_idx.unwrap() + 1);
+        assert_eq!(
+            next,
+            Some(&"ALL".to_string()),
+            "--cap-drop must be followed by ALL"
+        );
+    }
+
+    #[test]
+    fn test_bwrap_command_uses_restricted_proc() {
+        let gen = SandboxProfileGenerator::new_test();
+        let profile = gen.generate(AgentType::Main, None);
+        let cmd = gen.to_bwrap_command(&profile);
+        assert!(
+            cmd.contains(&"--proc".to_string()),
+            "bwrap command must use --proc flag for restricted proc mount"
+        );
+        // Must NOT use --bind /proc /proc (direct mount)
+        let bind_proc = cmd
+            .windows(3)
+            .any(|w| w[0] == "--bind" && w[1] == "/proc");
+        assert!(
+            !bind_proc,
+            "bwrap must NOT bind-mount /proc directly (use --proc instead)"
+        );
+    }
+
+    #[test]
+    fn test_verification_result_structure() {
+        let result = VerificationResult {
+            all_passed: true,
+            tests: vec![VerificationTest {
+                name: "ssh_key_unreadable".to_string(),
+                passed: true,
+                message: "PASS: SSH key not accessible".to_string(),
+            }],
+            failure_count: 0,
+        };
+        assert!(result.all_passed);
+        assert_eq!(result.tests.len(), 1);
+        assert_eq!(result.failure_count, 0);
+    }
+
+    #[test]
+    fn test_claude_code_config_excludes_ssh_dir() {
+        let gen = SandboxProfileGenerator::new_test();
+        let profile = gen.generate(AgentType::Main, None);
+        let config = gen.to_claude_code_config(&profile);
+        assert!(
+            config.deny.iter().any(|d| d.contains(".ssh")),
+            "Claude Code config deny list must include ~/.ssh/"
+        );
+        assert!(
+            !config.allow.iter().any(|d| d.contains(".ssh")),
+            "Claude Code config allow list must not include ~/.ssh/"
+        );
+    }
+
+    #[test]
+    fn test_claude_code_config_verify_has_no_network() {
+        let gen = SandboxProfileGenerator::new_test();
+        let profile = gen.generate(AgentType::Verify, None);
+        let config = gen.to_claude_code_config(&profile);
+        assert!(
+            config.network.allow.is_empty(),
+            "VERIFY agent Claude Code config must have empty network allow list"
+        );
+    }
+
+    #[test]
+    fn test_parse_verification_script_output_all_pass() {
+        let output = "PASS: SSH key not accessible\nPASS: Cannot write outside project\nPASS: Non-allowlisted domains blocked\nWARN: Proxy connection failed (may need API key)\nPASS: nsenter blocked\n";
+        let result = parse_verification_output(output, 0);
+        assert!(result.all_passed, "Exit code 0 with all PASS means success");
+        assert_eq!(result.failure_count, 0);
+    }
+
+    #[test]
+    fn test_parse_verification_script_output_with_failure() {
+        let output =
+            "FAIL: SSH key readable inside sandbox\nPASS: Cannot write outside project\n";
+        let result = parse_verification_output(output, 1);
+        assert!(!result.all_passed);
+        assert_eq!(result.failure_count, 1);
+        assert!(!result.tests[0].passed);
     }
 }
