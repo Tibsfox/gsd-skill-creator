@@ -288,7 +288,7 @@ All documentation lives in [`docs/`](docs/).
 | [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 42 milestones |
 | [GSD Teams Guide](docs/GSD-TEAMS.md) | Teams vs subagents for GSD workflows |
 | [Comparison](docs/COMPARISON.md) | Skills vs Agents vs Teams |
-| [Release History](docs/RELEASE-HISTORY.md) | Detailed release notes for all 42 milestones |
+| [Release History](docs/RELEASE-HISTORY.md) | Version index linking to [per-release notes](docs/release-notes/) |
 | [Troubleshooting](docs/TROUBLESHOOTING.md) | Common issues and solutions |
 | [Examples](examples/) | 34 ready-to-use skills, agents, and teams |
 
