@@ -1,0 +1,670 @@
+{
+  "version": "1.35.0",
+  "scope": "intermediate",
+  "description": "Cross-domain dependency edges for Domains IV-VI and connections to Domains I-III",
+  "edges": [
+    {
+      "source": "structure-vector-definition",
+      "target": "perception-real-numbers",
+      "type": "generalizes",
+      "strength": 0.9,
+      "description": "Vectors generalize real numbers to ordered tuples in R^n; scalars are 1-dimensional vectors"
+    },
+    {
+      "source": "structure-dot-product",
+      "target": "perception-inner-product",
+      "type": "specializes",
+      "strength": 0.95,
+      "description": "The dot product is the standard inner product in R^n, specializing the abstract inner product concept"
+    },
+    {
+      "source": "structure-vector-norm",
+      "target": "perception-pythagorean-theorem",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "The Euclidean norm ||v|| = sqrt(v1^2 + ... + vn^2) is the Pythagorean theorem generalized to n dimensions"
+    },
+    {
+      "source": "structure-cauchy-schwarz",
+      "target": "perception-cauchy-schwarz",
+      "type": "generalizes",
+      "strength": 0.95,
+      "description": "Structure's Cauchy-Schwarz for general inner product spaces generalizes the scalar inequality from Perception"
+    },
+    {
+      "source": "structure-eigenvalue",
+      "target": "perception-complex-numbers",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Eigenvalues are roots of the characteristic polynomial and may be complex even for real matrices"
+    },
+    {
+      "source": "structure-linear-transformation",
+      "target": "perception-function-definition",
+      "type": "specializes",
+      "strength": 0.7,
+      "description": "A linear transformation is a function between vector spaces that preserves addition and scalar multiplication"
+    },
+    {
+      "source": "structure-gradient",
+      "target": "change-derivative",
+      "type": "generalizes",
+      "strength": 0.95,
+      "description": "The gradient extends the single-variable derivative to a vector of partial derivatives in R^n"
+    },
+    {
+      "source": "structure-divergence",
+      "target": "change-derivative",
+      "type": "generalizes",
+      "strength": 0.85,
+      "description": "Divergence measures the rate of expansion of a vector field, extending the derivative to vector-valued functions"
+    },
+    {
+      "source": "structure-curl",
+      "target": "change-derivative",
+      "type": "generalizes",
+      "strength": 0.85,
+      "description": "Curl measures rotational tendency of a vector field, extending the derivative to capture circulation"
+    },
+    {
+      "source": "structure-stokes-theorem",
+      "target": "change-fundamental-theorem-2",
+      "type": "generalizes",
+      "strength": 1.0,
+      "description": "Stokes' theorem generalizes the Fundamental Theorem of Calculus to integration over manifolds with boundary"
+    },
+    {
+      "source": "structure-divergence-theorem",
+      "target": "change-fundamental-theorem-2",
+      "type": "generalizes",
+      "strength": 0.95,
+      "description": "The Divergence Theorem relates volume integrals of divergence to surface flux, generalizing FTC to 3D"
+    },
+    {
+      "source": "structure-greens-theorem",
+      "target": "change-fundamental-theorem-2",
+      "type": "generalizes",
+      "strength": 0.95,
+      "description": "Green's theorem relates a line integral around a closed curve to a double integral over the enclosed region"
+    },
+    {
+      "source": "structure-jacobian",
+      "target": "change-chain-rule",
+      "type": "generalizes",
+      "strength": 0.9,
+      "description": "The Jacobian matrix generalizes the chain rule to multivariate functions; Df(x) is the linear map best approximating f near x"
+    },
+    {
+      "source": "structure-complex-function",
+      "target": "waves-wave-equation",
+      "type": "applies",
+      "strength": 0.7,
+      "description": "Complex exponentials e^(ikx) encode wave solutions; complex analysis provides the natural language for wave phenomena"
+    },
+    {
+      "source": "structure-complex-function",
+      "target": "perception-eulers-formula",
+      "type": "requires",
+      "strength": 0.95,
+      "description": "Complex function theory builds on Euler's formula e^(ix) = cos(x) + i*sin(x) as the bridge between exponential and trigonometric"
+    },
+    {
+      "source": "structure-contour-integral",
+      "target": "change-definite-integral",
+      "type": "generalizes",
+      "strength": 0.9,
+      "description": "Contour integration generalizes definite integration from the real line to paths in the complex plane"
+    },
+    {
+      "source": "structure-line-integral",
+      "target": "change-definite-integral",
+      "type": "generalizes",
+      "strength": 0.9,
+      "description": "Line integrals generalize definite integrals from intervals to curves in R^n"
+    },
+    {
+      "source": "structure-least-squares",
+      "target": "change-optimization",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "Least squares minimizes ||Ax - b||^2, applying optimization to find the best approximate solution"
+    },
+    {
+      "source": "structure-multivariable-chain-rule",
+      "target": "change-chain-rule",
+      "type": "generalizes",
+      "strength": 0.95,
+      "description": "The multivariable chain rule extends the single-variable chain rule to compositions of multivariate functions"
+    },
+    {
+      "source": "structure-vector-space-axioms",
+      "target": "perception-real-numbers",
+      "type": "requires",
+      "strength": 0.8,
+      "description": "Vector space axioms require a scalar field; R (the real numbers) is the most common scalar field for real vector spaces"
+    },
+    {
+      "source": "reality-schrodinger-time-independent",
+      "target": "change-ode",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "The time-independent Schrodinger equation H*psi = E*psi is an eigenvalue ODE/PDE for the Hamiltonian operator"
+    },
+    {
+      "source": "reality-schrodinger-time-dependent",
+      "target": "change-ode",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "The time-dependent Schrodinger equation i*hbar*dpsi/dt = H*psi is a first-order PDE in time"
+    },
+    {
+      "source": "reality-hilbert-space",
+      "target": "structure-vector-space-axioms",
+      "type": "generalizes",
+      "strength": 1.0,
+      "description": "A Hilbert space is a complete inner product space, generalizing finite-dimensional vector spaces to infinite dimensions"
+    },
+    {
+      "source": "reality-quantum-operators",
+      "target": "structure-linear-transformation",
+      "type": "requires",
+      "strength": 0.95,
+      "description": "Quantum operators are self-adjoint linear operators on Hilbert space; linearity is their defining structural property"
+    },
+    {
+      "source": "reality-wave-function",
+      "target": "waves-wave-equation",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "The quantum wave function satisfies wave-like equations; its probability interpretation connects wave physics to measurement"
+    },
+    {
+      "source": "reality-quantum-harmonic-oscillator",
+      "target": "change-harmonic-oscillator",
+      "type": "specializes",
+      "strength": 0.9,
+      "description": "The quantum harmonic oscillator is the quantized version of the classical oscillator, with discrete energy levels"
+    },
+    {
+      "source": "reality-uncertainty-principle",
+      "target": "waves-frequency",
+      "type": "applies",
+      "strength": 0.75,
+      "description": "Heisenberg uncertainty mirrors the time-frequency uncertainty: narrower wave packets require broader frequency spectra"
+    },
+    {
+      "source": "reality-dimensional-analysis",
+      "target": "perception-rational-numbers",
+      "type": "requires",
+      "strength": 0.6,
+      "description": "Dimensional analysis uses rational exponents to express how physical quantities scale; dimensions are rational power products"
+    },
+    {
+      "source": "reality-speed-of-light",
+      "target": "perception-real-numbers",
+      "type": "requires",
+      "strength": 0.5,
+      "description": "Physical constants are real-valued measurements; c = 299,792,458 m/s requires the real number system"
+    },
+    {
+      "source": "reality-quantum-numbers",
+      "target": "perception-integers",
+      "type": "requires",
+      "strength": 0.8,
+      "description": "Quantum numbers (n, l, m_l, m_s) are integers or half-integers; discreteness is their defining feature"
+    },
+    {
+      "source": "reality-electron-configuration",
+      "target": "reality-quantum-numbers",
+      "type": "requires",
+      "strength": 0.95,
+      "description": "Electron configuration is determined by filling orbitals according to quantum number constraints"
+    },
+    {
+      "source": "reality-expectation-value",
+      "target": "change-definite-integral",
+      "type": "requires",
+      "strength": 0.85,
+      "description": "Expectation values <A> = integral of psi* A psi dx require definite integration over all space"
+    },
+    {
+      "source": "reality-quantum-state-ket",
+      "target": "structure-vector-definition",
+      "type": "applies",
+      "strength": 0.9,
+      "description": "Dirac ket notation |psi> represents quantum states as vectors in Hilbert space, applying vector formalism to physics"
+    },
+    {
+      "source": "reality-commutator",
+      "target": "structure-matrix-multiplication",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "The commutator [A,B] = AB - BA uses matrix/operator multiplication; non-commutativity is key to quantum mechanics"
+    },
+    {
+      "source": "reality-superposition",
+      "target": "structure-linear-independence",
+      "type": "applies",
+      "strength": 0.75,
+      "description": "Quantum superposition expresses states as linear combinations of basis states, applying linear independence and span"
+    },
+    {
+      "source": "reality-de-broglie-wavelength",
+      "target": "waves-wavelength",
+      "type": "applies",
+      "strength": 0.85,
+      "description": "de Broglie wavelength lambda = h/p assigns a wavelength to massive particles, applying wave concepts to matter"
+    },
+    {
+      "source": "reality-blackbody-radiation",
+      "target": "waves-frequency",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "Planck's blackbody radiation law relates spectral radiance to frequency, applying wave frequency concepts to thermal radiation"
+    },
+    {
+      "source": "reality-energy-mass-equivalence",
+      "target": "reality-speed-of-light",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "E = mc^2 requires the speed of light as the conversion factor between mass and energy"
+    },
+    {
+      "source": "foundations-group-definition",
+      "target": "structure-linear-transformation",
+      "type": "generalizes",
+      "strength": 0.8,
+      "description": "Groups formalize the algebraic structure of invertible linear transformations; GL(n) is the general linear group"
+    },
+    {
+      "source": "foundations-field-definition",
+      "target": "perception-real-numbers",
+      "type": "generalizes",
+      "strength": 0.95,
+      "description": "The field axioms generalize the algebraic properties of real numbers to abstract systems with +, *, and inverses"
+    },
+    {
+      "source": "foundations-field-definition",
+      "target": "perception-complex-numbers",
+      "type": "generalizes",
+      "strength": 0.9,
+      "description": "The complex numbers form a field; field theory generalizes their algebraic structure"
+    },
+    {
+      "source": "foundations-topological-space",
+      "target": "structure-vector-space-axioms",
+      "type": "generalizes",
+      "strength": 0.7,
+      "description": "Every normed vector space induces a topology via the norm metric; topology generalizes the notion of 'nearness' beyond linear structure"
+    },
+    {
+      "source": "foundations-continuity-topology",
+      "target": "change-continuity",
+      "type": "generalizes",
+      "strength": 0.95,
+      "description": "Topological continuity (preimage of open is open) generalizes epsilon-delta continuity from calculus"
+    },
+    {
+      "source": "foundations-set-definition",
+      "target": "perception-natural-numbers",
+      "type": "generalizes",
+      "strength": 0.8,
+      "description": "Natural numbers can be constructed from sets (von Neumann ordinals); set theory provides the foundational language for number systems"
+    },
+    {
+      "source": "foundations-set-definition",
+      "target": "perception-set-notation",
+      "type": "generalizes",
+      "strength": 0.9,
+      "description": "Formal set theory (ZFC axioms) generalizes the informal set notation used throughout Perception"
+    },
+    {
+      "source": "foundations-equivalence-relation",
+      "target": "perception-real-numbers",
+      "type": "generalizes",
+      "strength": 0.6,
+      "description": "Equality of real numbers is an equivalence relation; equivalence relations formalize the concept of 'sameness' used throughout mathematics"
+    },
+    {
+      "source": "foundations-ring-definition",
+      "target": "perception-integers",
+      "type": "generalizes",
+      "strength": 0.9,
+      "description": "The integers form a ring; ring theory generalizes integer arithmetic (addition, multiplication, but not always division)"
+    },
+    {
+      "source": "foundations-homeomorphism",
+      "target": "foundations-isomorphism",
+      "type": "specializes",
+      "strength": 0.7,
+      "description": "Homeomorphism is the topological version of isomorphism: a bicontinuous bijection preserving topological structure"
+    },
+    {
+      "source": "foundations-compactness",
+      "target": "change-continuity",
+      "type": "applies",
+      "strength": 0.7,
+      "description": "Compactness extends the notion of closed and bounded sets; continuous images of compact sets are compact (extreme value theorem)"
+    },
+    {
+      "source": "foundations-propositional-logic",
+      "target": "perception-set-notation",
+      "type": "motivates",
+      "strength": 0.5,
+      "description": "Propositional logic formalizes the logical connectives (and, or, not) used informally in set membership and conditions"
+    },
+    {
+      "source": "foundations-proof-by-induction",
+      "target": "perception-natural-numbers",
+      "type": "requires",
+      "strength": 0.9,
+      "description": "Mathematical induction is defined on the natural numbers and requires their well-ordering property"
+    },
+    {
+      "source": "foundations-metric-space",
+      "target": "perception-distance-formula",
+      "type": "generalizes",
+      "strength": 0.85,
+      "description": "Metric spaces generalize the Euclidean distance formula to abstract distance functions satisfying the triangle inequality"
+    },
+    {
+      "source": "foundations-fundamental-group",
+      "target": "foundations-group-definition",
+      "type": "requires",
+      "strength": 0.95,
+      "description": "The fundamental group pi_1(X,x_0) is a group; its construction requires group theory (composition of loops)"
+    },
+    {
+      "source": "foundations-symmetry-group",
+      "target": "structure-orthogonal-matrix",
+      "type": "applies",
+      "strength": 0.75,
+      "description": "Symmetry groups often consist of orthogonal transformations (rotations, reflections) represented as orthogonal matrices"
+    },
+    {
+      "source": "foundations-galois-theory",
+      "target": "foundations-field-definition",
+      "type": "requires",
+      "strength": 1.0,
+      "description": "Galois theory studies field extensions and their automorphism groups; it requires the full machinery of field theory"
+    },
+    {
+      "source": "foundations-topological-space",
+      "target": "structure-complex-function",
+      "type": "applies",
+      "strength": 0.65,
+      "description": "Complex analysis relies on topological concepts (open sets, connectedness, compactness) for its fundamental theorems"
+    },
+    {
+      "source": "reality-hilbert-space",
+      "target": "structure-dot-product",
+      "type": "generalizes",
+      "strength": 0.85,
+      "description": "The Hilbert space inner product generalizes the dot product to infinite-dimensional and complex spaces"
+    },
+    {
+      "source": "foundations-group-definition",
+      "target": "structure-determinant",
+      "type": "applies",
+      "strength": 0.7,
+      "description": "The determinant is a group homomorphism from GL(n) to the multiplicative group of the scalar field"
+    },
+    {
+      "source": "foundations-homomorphism",
+      "target": "structure-linear-transformation",
+      "type": "generalizes",
+      "strength": 0.85,
+      "description": "Linear transformations are homomorphisms of vector spaces; homomorphism theory generalizes this to arbitrary algebraic structures"
+    },
+    {
+      "source": "reality-measurement-born-rule",
+      "target": "foundations-set-definition",
+      "type": "applies",
+      "strength": 0.5,
+      "description": "Born's rule assigns probabilities to measurement outcomes that form a discrete or continuous set; set theory frames the sample space"
+    },
+    {
+      "source": "reality-quantum-operators",
+      "target": "structure-eigenvalue",
+      "type": "requires",
+      "strength": 0.95,
+      "description": "Observable eigenvalues are the possible measurement outcomes; the spectral theorem guarantees real eigenvalues for self-adjoint operators"
+    },
+    {
+      "source": "foundations-continuity-topology",
+      "target": "structure-complex-function",
+      "type": "applies",
+      "strength": 0.6,
+      "description": "Topological continuity provides the rigorous foundation for holomorphic functions, which are continuous maps in the complex topology"
+    },
+    {
+      "source": "reality-spin-angular-momentum",
+      "target": "foundations-group-definition",
+      "type": "applies",
+      "strength": 0.8,
+      "description": "Spin is described by representations of SU(2), a Lie group; group theory classifies spin states and their transformations"
+    },
+    {
+      "source": "foundations-formal-axiomatic-system",
+      "target": "change-mean-value-theorem",
+      "type": "motivates",
+      "strength": 0.4,
+      "description": "Formal axiomatic systems motivate rigorous proofs of calculus theorems like MVT, replacing intuitive arguments with logical deduction"
+    },
+    {
+      "source": "structure-spectral-theorem",
+      "target": "reality-quantum-operators",
+      "type": "motivates",
+      "strength": 0.7,
+      "description": "The spectral theorem for self-adjoint operators motivates the mathematical framework of quantum measurement"
+    },
+    {
+      "source": "structure-svd",
+      "target": "change-optimization",
+      "type": "applies",
+      "strength": 0.75,
+      "description": "SVD provides optimal low-rank approximations and solves least-squares problems, applying optimization to matrix factorization"
+    },
+    {
+      "source": "foundations-predicate-logic",
+      "target": "foundations-propositional-logic",
+      "type": "generalizes",
+      "strength": 0.95,
+      "description": "Predicate logic extends propositional logic with quantifiers (forall, exists) and variables, enabling statements about mathematical objects"
+    }
+  ],
+  "compositionRules": [
+    {
+      "from": "structure-linear-transformation",
+      "with": "change-derivative",
+      "yields": "Jacobian matrix of a multivariable function",
+      "type": "sequential",
+      "conditions": ["Function is differentiable", "Domain is R^n"],
+      "example": "The Jacobian of f(x,y) = (x^2+y, xy) is the matrix of partial derivatives [[2x,1],[y,x]]"
+    },
+    {
+      "from": "structure-vector-space-axioms",
+      "with": "foundations-group-definition",
+      "yields": "Representation theory: groups acting as linear transformations on vector spaces",
+      "type": "nested",
+      "conditions": ["Group is finite or Lie group", "Vector space is over characteristic 0 field"],
+      "example": "The rotation group SO(3) represented by 3x3 orthogonal matrices acting on R^3"
+    },
+    {
+      "from": "reality-hilbert-space",
+      "with": "reality-quantum-operators",
+      "yields": "Quantum measurement framework: eigenvalues as outcomes, eigenstates as post-measurement states",
+      "type": "sequential",
+      "conditions": ["Operator is self-adjoint", "State is normalized"],
+      "example": "Measuring energy via Hamiltonian H|n> = E_n|n>; outcome E_n with probability |<n|psi>|^2"
+    },
+    {
+      "from": "foundations-topological-space",
+      "with": "foundations-group-definition",
+      "yields": "Topological group: a group with continuous group operations",
+      "type": "parallel",
+      "conditions": ["Multiplication map G x G -> G is continuous", "Inversion map G -> G is continuous"],
+      "example": "GL(n,R) with the subspace topology from R^(n^2) is a topological group"
+    },
+    {
+      "from": "structure-complex-function",
+      "with": "foundations-topological-space",
+      "yields": "Riemann surfaces: complex manifolds where multi-valued functions become single-valued",
+      "type": "nested",
+      "conditions": ["Function has branch points", "Surface is a 1-dimensional complex manifold"],
+      "example": "The Riemann surface of sqrt(z) is a double cover of C branched at the origin"
+    },
+    {
+      "from": "foundations-set-definition",
+      "with": "foundations-propositional-logic",
+      "yields": "Formal proof system: axioms + inference rules producing verified theorems",
+      "type": "sequential",
+      "conditions": ["Axiom set is consistent", "Inference rules preserve truth"],
+      "example": "ZFC set theory + first-order logic produces all of standard mathematics"
+    },
+    {
+      "from": "structure-eigenvalue",
+      "with": "reality-quantum-operators",
+      "yields": "Energy levels: discrete eigenvalues of the Hamiltonian operator",
+      "type": "sequential",
+      "conditions": ["Potential is confining (bound states)", "Hamiltonian is self-adjoint"],
+      "example": "Hydrogen atom: E_n = -13.6/n^2 eV are eigenvalues of the Coulomb Hamiltonian"
+    },
+    {
+      "from": "waves-fourier-series-preview",
+      "with": "reality-hilbert-space",
+      "yields": "Spectral theory: decomposition of operators via complete orthonormal bases",
+      "type": "parallel",
+      "conditions": ["Hilbert space is separable", "Operator is bounded or self-adjoint"],
+      "example": "Fourier basis {e^(inx)} is a complete orthonormal set in L^2([0,2pi]); spectral decomposition uses similar bases"
+    },
+    {
+      "from": "foundations-group-definition",
+      "with": "foundations-topological-space",
+      "yields": "Algebraic topology: using group-theoretic invariants to classify topological spaces",
+      "type": "parallel",
+      "conditions": ["Space is path-connected", "Groups are computed via homotopy or homology"],
+      "example": "pi_1(S^1) = Z distinguishes the circle from the disk; pi_1(disk) = 0"
+    },
+    {
+      "from": "reality-dimensional-analysis",
+      "with": "reality-speed-of-light",
+      "yields": "Natural units: c = hbar = 1 simplifies equations by eliminating dimensional constants",
+      "type": "sequential",
+      "conditions": ["Working in high-energy physics", "All quantities expressed in powers of energy"],
+      "example": "In natural units, E^2 = p^2 + m^2 instead of E^2 = (pc)^2 + (mc^2)^2"
+    },
+    {
+      "from": "structure-vector-space-axioms",
+      "with": "foundations-topological-space",
+      "yields": "Topological vector space: a vector space with a topology making operations continuous",
+      "type": "parallel",
+      "conditions": ["Addition V x V -> V is continuous", "Scalar multiplication F x V -> V is continuous"],
+      "example": "Every normed space is a topological vector space; L^p spaces are Banach (complete normed) spaces"
+    },
+    {
+      "from": "foundations-group-definition",
+      "with": "reality-quantum-operators",
+      "yields": "Symmetry classification of particles: irreducible representations label particle types",
+      "type": "sequential",
+      "conditions": ["Symmetry group acts on quantum states", "Representation is unitary"],
+      "example": "SU(3) flavor symmetry classifies quarks into multiplets (up, down, strange in the fundamental representation)"
+    },
+    {
+      "from": "foundations-ring-definition",
+      "with": "change-taylor-series",
+      "yields": "Polynomial ring factorization: formal power series as elements of the ring R[[x]]",
+      "type": "nested",
+      "conditions": ["Coefficients form a commutative ring", "Series converges or is treated formally"],
+      "example": "Z[x]/(x^2+1) is isomorphic to the Gaussian integers Z[i]; Taylor series live in R[[x]]"
+    },
+    {
+      "from": "structure-gradient",
+      "with": "reality-gravitational-constant",
+      "yields": "Gravitational force field: F = -grad(phi) where phi = -GM/r is the gravitational potential",
+      "type": "sequential",
+      "conditions": ["Mass distribution is known", "Field is conservative"],
+      "example": "Earth's gravitational field g = -grad(-GM/r) points radially inward with magnitude GM/r^2"
+    },
+    {
+      "from": "foundations-equivalence-relation",
+      "with": "foundations-group-definition",
+      "yields": "Quotient group: G/N where the equivalence classes are cosets of a normal subgroup N",
+      "type": "sequential",
+      "conditions": ["N is a normal subgroup of G", "Coset multiplication is well-defined"],
+      "example": "Z/nZ: integers modulo n form a cyclic group of order n"
+    },
+    {
+      "from": "reality-wave-function",
+      "with": "structure-matrix-definition",
+      "yields": "Matrix mechanics: quantum mechanics formulated as matrix operations on state vectors",
+      "type": "nested",
+      "conditions": ["Basis is chosen for Hilbert space", "Operators represented as matrices in that basis"],
+      "example": "Pauli matrices sigma_x, sigma_y, sigma_z represent spin-1/2 operators in the |up>, |down> basis"
+    },
+    {
+      "from": "structure-contour-integral",
+      "with": "structure-residue-theorem",
+      "yields": "Physical scattering amplitudes computed via residues at poles in the complex energy plane",
+      "type": "sequential",
+      "conditions": ["Integrand has isolated poles", "Contour can be closed in the complex plane"],
+      "example": "Evaluating integral_(-inf)^(inf) dx/(x^2+1) = pi via a semicircular contour and the residue at z=i"
+    },
+    {
+      "from": "foundations-metric-space",
+      "with": "foundations-continuity-topology",
+      "yields": "Uniform convergence: sequences of functions converging uniformly preserve continuity",
+      "type": "nested",
+      "conditions": ["Function space has the sup metric", "Convergence is uniform, not just pointwise"],
+      "example": "If f_n -> f uniformly and each f_n is continuous, then f is continuous (uniform limit theorem)"
+    },
+    {
+      "from": "structure-curl",
+      "with": "structure-divergence-theorem",
+      "yields": "Maxwell's equations in integral form: relating field circulation and flux to sources",
+      "type": "parallel",
+      "conditions": ["Fields are smooth vector fields in R^3", "Surfaces and curves are appropriately oriented"],
+      "example": "Faraday's law: integral of E dot dl = -d/dt integral of B dot dA (curl E relates to changing B flux)"
+    },
+    {
+      "from": "foundations-cardinality",
+      "with": "foundations-topological-space",
+      "yields": "Dimension theory: topological invariants capturing the 'size' of a space (covering dimension, Hausdorff dimension)",
+      "type": "nested",
+      "conditions": ["Space is separable and metrizable", "Dimension is a topological invariant"],
+      "example": "R^n has covering dimension n; the Cantor set has topological dimension 0 but Hausdorff dimension log(2)/log(3)"
+    },
+    {
+      "from": "structure-determinant",
+      "with": "reality-quantum-operators",
+      "yields": "Characteristic equation of observables: det(A - lambda I) = 0 determines the measurement spectrum",
+      "type": "sequential",
+      "conditions": ["Operator is represented as a finite matrix", "Matrix is Hermitian (self-adjoint)"],
+      "example": "For spin-1/2 sigma_z = [[1,0],[0,-1]], det(sigma_z - lambda I) = 0 gives lambda = +/-1"
+    },
+    {
+      "from": "foundations-proof-by-induction",
+      "with": "foundations-group-definition",
+      "yields": "Cayley's theorem verification: every finite group of order n embeds in S_n, proved by induction on group structure",
+      "type": "sequential",
+      "conditions": ["Group is finite", "Left regular representation is injective"],
+      "example": "Z/3Z embeds in S_3 via the permutation representation: 0->(1), 1->(123), 2->(132)"
+    },
+    {
+      "from": "structure-diagonalization",
+      "with": "change-ode",
+      "yields": "Solution of linear ODE systems via diagonalization: x'=Ax solved by x(t) = P*diag(e^(lambda_i*t))*P^(-1)*x(0)",
+      "type": "sequential",
+      "conditions": ["Matrix A is diagonalizable", "System is linear and autonomous"],
+      "example": "x'=[[0,1],[-2,-3]]x: eigenvalues -1,-2; solution x(t) = c1*e^(-t)*v1 + c2*e^(-2t)*v2"
+    },
+    {
+      "from": "reality-uncertainty-principle",
+      "with": "waves-fourier-convergence",
+      "yields": "Bandwidth theorem: the product of time duration and frequency bandwidth is bounded below",
+      "type": "parallel",
+      "conditions": ["Signal is square-integrable", "Time and frequency representations are Fourier duals"],
+      "example": "A Gaussian pulse sigma_t * sigma_f >= 1/(4*pi) achieves the minimum uncertainty product"
+    }
+  ]
+}
