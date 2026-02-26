@@ -3,10 +3,11 @@
 // Uses ajv (Another JSON Validator) with the primitive-registry schema.
 // Provides both file-level and single-primitive validation.
 
-import Ajv2020 from 'ajv/dist/2020.js';
+import Ajv from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
+import type { ErrorObject } from 'ajv';
 
 // === Public types ===
 
@@ -28,8 +29,12 @@ const require = createRequire(import.meta.url);
 const schema = require('../../schemas/primitive-registry.schema.json');
 
 // Compile the schema once and cache
-const ajv = new Ajv2020({ allErrors: true, strict: false });
-addFormats(ajv);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const AjvConstructor = (Ajv as any).default ?? Ajv;
+const ajv = new AjvConstructor({ allErrors: true, strict: false });
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const addFormatsFn = (addFormats as any).default ?? addFormats;
+addFormatsFn(ajv);
 
 const validateDomainSchema = ajv.compile(schema);
 
@@ -44,9 +49,9 @@ const validatePrimitiveSchema = primitiveSchema
 
 // === Error formatting ===
 
-function formatErrors(ajvErrors: typeof validateDomainSchema.errors): ValidationError[] {
+function formatErrors(ajvErrors: ErrorObject[] | null | undefined): ValidationError[] {
   if (!ajvErrors) return [];
-  return ajvErrors.map((err) => ({
+  return ajvErrors.map((err: ErrorObject) => ({
     path: err.instancePath || '/',
     message: err.message
       ? `${err.instancePath || '/'}: ${err.message}`
@@ -71,7 +76,7 @@ export function validatePrimitive(primitive: unknown): ValidationResult {
   const valid = validatePrimitiveSchema(primitive);
   return {
     valid: valid as boolean,
-    errors: valid ? [] : formatErrors(validatePrimitiveSchema.errors),
+    errors: valid ? [] : formatErrors(validatePrimitiveSchema.errors as ErrorObject[] | null),
   };
 }
 
@@ -83,7 +88,7 @@ export async function validateDomainFile(filePath: string): Promise<ValidationRe
   let raw: string;
   try {
     raw = await readFile(filePath, 'utf-8');
-  } catch (err) {
+  } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
     return {
       valid: false,
@@ -94,7 +99,7 @@ export async function validateDomainFile(filePath: string): Promise<ValidationRe
   let data: unknown;
   try {
     data = JSON.parse(raw);
-  } catch (err) {
+  } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
     return {
       valid: false,
@@ -110,7 +115,7 @@ export async function validateDomainFile(filePath: string): Promise<ValidationRe
 
   return {
     valid: valid as boolean,
-    errors: valid ? [] : formatErrors(validateDomainSchema.errors),
+    errors: valid ? [] : formatErrors(validateDomainSchema.errors as ErrorObject[] | null),
     primitiveCount,
   };
 }
