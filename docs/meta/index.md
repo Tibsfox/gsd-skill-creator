@@ -22,6 +22,9 @@ cross_references:
   - path: "meta/improvement-cycle.md"
     relationship: "gateway-to"
     description: "Iterative feedback loop"
+  - path: "meta/lessons-applied-v1.34.md"
+    relationship: "gateway-to"
+    description: "v1.33 lessons mapped to v1.34 design decisions"
 reading_levels:
   glance: "Meta-documentation governing how the documentation ecosystem is structured, maintained, and improved."
   scan:
@@ -31,6 +34,7 @@ reading_levels:
     - "Site architecture — www/ structure and migration path"
     - "Content pipeline — docs/ to www/ transformation"
     - "Improvement cycle — feedback loops and template promotion"
+    - "Lessons applied — v1.33 to v1.34 continuous improvement traceability"
 created_by_phase: "v1.34-326"
 last_verified: "2026-02-25"
 ---
@@ -39,4 +43,4 @@ last_verified: "2026-02-25"
 
 This directory contains documentation about the documentation itself. It governs how content is structured, who owns what, how documents flow from source to publication, and how the system improves over time.
 
-Start with the [style guide](style-guide.md) if you are writing new content. Consult the [filesystem contracts](filesystem-contracts.md) to understand file ownership. Review the [content map](content-map.md) for a complete inventory of what exists.
+Start with the [style guide](style-guide.md) if you are writing new content. Consult the [filesystem contracts](filesystem-contracts.md) to understand file ownership. Review the [content map](content-map.md) for a complete inventory of what exists. See the [lessons applied](lessons-applied-v1.34.md) document for how prior mission lessons shaped this ecosystem's design.
