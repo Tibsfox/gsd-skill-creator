@@ -110,7 +110,7 @@ describe('dedup pre-filter: ranking', () => {
     });
     const existingB = makePrimitive({
       id: 'existing-b',
-      planePosition: { real: 0.52, imaginary: 0.32 },
+      planePosition: { real: 0.515, imaginary: 0.315 },
       keywords: ['vector', 'space'],
     });
     const candidate = makePrimitive({
