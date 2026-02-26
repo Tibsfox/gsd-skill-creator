@@ -24,6 +24,7 @@ pub fn run() {
             app.manage(Mutex::new(PtyManager::default()));
             app.manage(Mutex::new(ClaudeSessionManager::default()));
             app.manage(tokio::sync::Mutex::new(mcp_host::McpHostState::new()));
+            app.manage(tokio::sync::Mutex::new(security::SecurityState::new()));
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -63,6 +64,13 @@ pub fn run() {
             commands::proxy::start_proxy,
             commands::proxy::stop_proxy,
             commands::proxy::proxy_status,
+            commands::security::security_get_status,
+            commands::security::security_release_quarantine,
+            commands::security::sandbox_verify_full,
+            commands::security::proxy_health,
+            commands::security::agent_create,
+            commands::security::agent_destroy,
+            commands::security::agent_verify_isolation,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
