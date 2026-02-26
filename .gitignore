@@ -6,14 +6,14 @@ node_modules/
 
 # Planning docs (local only)
 .planning/
+.claude/
+.cpanel.yml
 
 # Brainstorm session data (local only)
 .brainstorm/
 
 # Generated dashboard (root-level only, not src/dashboard/)
-/dashboard/
-
-.claude/
+dashboard/
 
 # Tauri / Desktop
 src-tauri/target/
