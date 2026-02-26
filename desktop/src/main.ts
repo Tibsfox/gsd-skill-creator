@@ -147,6 +147,17 @@ async function init(): Promise<void> {
   const shell = new DesktopShell({ desktop, wm });
   shell.init();
 
+  // --- Pipeline wiring (Phase 383: Integration) ---
+  try {
+    const { ChatPipeline, LedBridge, StagingBridge } = await import("./pipeline");
+
+    // Pipeline classes are ready. Actual instantiation happens during the
+    // bootstrap flow (383-02) when ChatRenderer and MagicFilter are available.
+    console.log("[Pipeline] Integration wiring ready for bootstrap connection");
+  } catch (err) {
+    console.warn("[Pipeline] Pipeline wiring deferred (modules not yet available):", err);
+  }
+
   // --- Dashboard integration: mount DashboardHost when dashboard window opens ---
   const planningDir = ".planning";
   let dashHost: DashboardHost | null = null;
