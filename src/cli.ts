@@ -25,6 +25,7 @@ import { publishCommand } from './cli/commands/publish.js';
 import { installCommand } from './cli/commands/install.js';
 import { statusCommand } from './cli/commands/status.js';
 import { auditCommand } from './cli/commands/audit.js';
+import { handleMigratePlaneCommand } from './plane/migration.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
@@ -113,6 +114,21 @@ async function main() {
       const scope = parseScope(args);
       const skillName = args.filter(a => !a.startsWith('-'))[1];
       await migrateCommand(skillName, { skillsDir: getSkillsBasePath(scope) });
+      break;
+    }
+
+    case 'migrate-plane':
+    case 'mp': {
+      const dryRun = args.includes('--dry-run');
+      const force = args.includes('--force');
+      const noHistory = args.includes('--no-history');
+      const verbose = args.includes('--verbose') || args.includes('-v');
+      await handleMigratePlaneCommand({
+        dryRun,
+        force,
+        includeHistory: !noHistory,
+        verbose,
+      });
       break;
     }
 
@@ -1308,6 +1324,14 @@ async function main() {
     case 'term': {
       const { terminalCommand } = await import('./cli/commands/terminal.js');
       const exitCode = await terminalCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'plane-status':
+    case 'ps': {
+      const { planeStatusCommand } = await import('./cli/commands/plane-status.js');
+      const exitCode = await planeStatusCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
     }
