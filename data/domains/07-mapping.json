@@ -1,0 +1,905 @@
+{
+  "domain": "mapping",
+  "version": "1.35.0",
+  "primitives": [
+    {
+      "id": "mapping-category",
+      "name": "Category",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 22,
+      "section": "22.1",
+      "planePosition": { "real": 0.4, "imaginary": 0.7 },
+      "formalStatement": "A category C consists of a collection of objects ob(C), a collection of morphisms hom(C) between objects, an identity morphism id_A for each object A, and a composition operation that is associative and respects identities.",
+      "computationalForm": "",
+      "prerequisites": ["Sets and functions", "Composition of functions", "Identity function"],
+      "dependencies": [
+        { "target": "foundations-set-operations", "type": "requires", "strength": 0.9, "description": "Categories generalize the structure of sets and functions" },
+        { "target": "foundations-proof-techniques", "type": "applies", "strength": 0.5, "description": "Proofs about categories use logical reasoning" }
+      ],
+      "enables": ["mapping-functor", "mapping-natural-transformation", "mapping-yoneda-lemma", "mapping-adjunction"],
+      "compositionRules": [
+        { "with": "foundations-group", "yields": "Group as a single-object category where all morphisms are invertible", "type": "parallel", "conditions": ["Group has single object", "All morphisms are isomorphisms"], "example": "A group G viewed as a category with one object * and morphisms Hom(*,*) = G" }
+      ],
+      "applicabilityPatterns": ["Analyzing structure-preserving maps between mathematical objects", "Identifying universal properties in algebraic structures", "Abstracting common patterns across different areas of mathematics"],
+      "keywords": ["category", "morphism", "object", "composition", "identity"],
+      "tags": ["category-theory", "abstraction", "structure"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-functor",
+      "name": "Functor",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 22,
+      "section": "22.2",
+      "planePosition": { "real": 0.4, "imaginary": 0.75 },
+      "formalStatement": "A functor F: C -> D maps objects of C to objects of D and morphisms of C to morphisms of D, preserving identity morphisms F(id_A) = id_{F(A)} and composition F(g . f) = F(g) . F(f).",
+      "computationalForm": "",
+      "prerequisites": ["Category", "Morphism composition", "Structure preservation"],
+      "dependencies": [
+        { "target": "mapping-category", "type": "requires", "strength": 1.0, "description": "Functors are maps between categories" },
+        { "target": "foundations-group", "type": "generalizes", "strength": 0.8, "description": "Functors generalize group homomorphisms to arbitrary categories" },
+        { "target": "structure-linear-transformation", "type": "generalizes", "strength": 0.7, "description": "Functors generalize linear maps between vector spaces" }
+      ],
+      "enables": ["mapping-natural-transformation", "mapping-adjunction", "mapping-yoneda-lemma"],
+      "compositionRules": [
+        { "with": "mapping-functor", "yields": "Composite functor G . F: C -> E", "type": "sequential", "conditions": ["Codomain of F equals domain of G"], "example": "Forgetful functor from groups to sets, composed with free functor from sets to groups, gives the free-forgetful adjunction" }
+      ],
+      "applicabilityPatterns": ["Translating problems between different mathematical frameworks", "Identifying when a map preserves essential structure", "Building bridges between algebraic and geometric viewpoints"],
+      "keywords": ["functor", "morphism", "structure-preserving", "map", "category"],
+      "tags": ["category-theory", "functor", "structure-preservation"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-natural-transformation",
+      "name": "Natural Transformation",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 22,
+      "section": "22.3",
+      "planePosition": { "real": 0.45, "imaginary": 0.8 },
+      "formalStatement": "A natural transformation eta: F => G between functors F, G: C -> D is a family of morphisms eta_A: F(A) -> G(A) for each object A in C, such that for every morphism f: A -> B in C, the diagram commutes: G(f) . eta_A = eta_B . F(f).",
+      "computationalForm": "",
+      "prerequisites": ["Functor", "Commutative diagram", "Component morphisms"],
+      "dependencies": [
+        { "target": "mapping-functor", "type": "requires", "strength": 1.0, "description": "Natural transformations are morphisms between functors" },
+        { "target": "mapping-category", "type": "requires", "strength": 0.9, "description": "Naturality is defined within category theory" }
+      ],
+      "enables": ["mapping-yoneda-lemma", "mapping-adjunction", "mapping-monad"],
+      "compositionRules": [
+        { "with": "mapping-functor", "yields": "Whiskered natural transformation (horizontal composition)", "type": "nested", "conditions": ["Functor domain/codomain compatible with transformation components"], "example": "Composing a natural transformation with a functor to shift the naturality square across categories" }
+      ],
+      "applicabilityPatterns": ["Comparing two different ways to transform mathematical structures", "Establishing canonical relationships between functors", "Verifying that a family of maps is independent of arbitrary choices"],
+      "keywords": ["natural transformation", "naturality", "commutative diagram", "functor morphism"],
+      "tags": ["category-theory", "natural-transformation", "abstraction"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-yoneda-lemma",
+      "name": "Yoneda Lemma",
+      "type": "theorem",
+      "domain": "mapping",
+      "chapter": 22,
+      "section": "22.4",
+      "planePosition": { "real": 0.5, "imaginary": 0.8 },
+      "formalStatement": "For any functor F: C^op -> Set and object A in C, there is a natural bijection Nat(Hom(-, A), F) ≅ F(A), given by evaluating at the identity morphism id_A.",
+      "computationalForm": "Given a natural transformation alpha: Hom(-, A) => F, compute alpha_A(id_A) to obtain the corresponding element of F(A). Conversely, given x in F(A), define alpha_B(f) = F(f)(x) for each f: B -> A.",
+      "prerequisites": ["Category", "Functor", "Natural transformation", "Hom functor"],
+      "dependencies": [
+        { "target": "mapping-natural-transformation", "type": "requires", "strength": 1.0, "description": "Yoneda classifies natural transformations" },
+        { "target": "mapping-functor", "type": "requires", "strength": 1.0, "description": "Yoneda relates functors to representable presheaves" },
+        { "target": "mapping-category", "type": "requires", "strength": 0.9, "description": "Stated within the framework of category theory" }
+      ],
+      "enables": ["mapping-adjunction"],
+      "compositionRules": [
+        { "with": "mapping-category", "yields": "Embedding of any category into its presheaf category (Yoneda embedding)", "type": "sequential", "conditions": ["Category is locally small"], "example": "Every group G embeds fully faithfully into the functor category [G^op, Set] via the Yoneda embedding" }
+      ],
+      "applicabilityPatterns": ["Determining when an object is uniquely characterized by its relationships", "Reducing questions about natural transformations to concrete element computations", "Proving representability of functors"],
+      "keywords": ["yoneda", "lemma", "representable", "presheaf", "embedding"],
+      "tags": ["category-theory", "yoneda", "representation-theory"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-adjunction",
+      "name": "Adjunction",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 22,
+      "section": "22.5",
+      "planePosition": { "real": 0.35, "imaginary": 0.75 },
+      "formalStatement": "An adjunction between categories C and D is a pair of functors F: C -> D (left adjoint) and G: D -> C (right adjoint) with a natural bijection Hom_D(F(A), B) ≅ Hom_C(A, G(B)) for all objects A in C, B in D.",
+      "computationalForm": "",
+      "prerequisites": ["Functor", "Natural bijection", "Hom sets"],
+      "dependencies": [
+        { "target": "mapping-functor", "type": "requires", "strength": 1.0, "description": "Adjunctions relate pairs of functors" },
+        { "target": "mapping-natural-transformation", "type": "requires", "strength": 0.8, "description": "Unit and counit are natural transformations" },
+        { "target": "mapping-category", "type": "requires", "strength": 0.9, "description": "Adjunctions are defined between categories" }
+      ],
+      "enables": ["mapping-monad"],
+      "compositionRules": [
+        { "with": "foundations-group", "yields": "Free-forgetful adjunction between groups and sets", "type": "parallel", "conditions": ["Forgetful functor has a left adjoint"], "example": "The free group functor F: Set -> Grp is left adjoint to the forgetful functor U: Grp -> Set" }
+      ],
+      "applicabilityPatterns": ["Finding the best approximation of one type of structure by another", "Establishing free-forgetful relationships between algebraic structures", "Optimizing constructions with universal properties"],
+      "keywords": ["adjunction", "adjoint", "free", "forgetful", "universal"],
+      "tags": ["category-theory", "adjunction", "universal-property"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-monad",
+      "name": "Monad",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 22,
+      "section": "22.6",
+      "planePosition": { "real": 0.3, "imaginary": 0.7 },
+      "formalStatement": "A monad on a category C is an endofunctor T: C -> C equipped with natural transformations eta: Id => T (unit) and mu: T^2 => T (multiplication) satisfying associativity mu . T(mu) = mu . mu_T and unit laws mu . T(eta) = mu . eta_T = id_T.",
+      "computationalForm": "",
+      "prerequisites": ["Functor", "Natural transformation", "Adjunction"],
+      "dependencies": [
+        { "target": "mapping-adjunction", "type": "requires", "strength": 0.9, "description": "Every adjunction gives rise to a monad" },
+        { "target": "mapping-functor", "type": "requires", "strength": 1.0, "description": "A monad is an endofunctor with extra structure" },
+        { "target": "mapping-natural-transformation", "type": "requires", "strength": 1.0, "description": "Unit and multiplication are natural transformations" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-category", "yields": "Kleisli category for sequential composition of effectful computations", "type": "sequential", "conditions": ["Monad laws satisfied"], "example": "The list monad captures nondeterminism: T(X) = List(X), unit wraps in singleton, multiplication flattens nested lists" }
+      ],
+      "applicabilityPatterns": ["Sequencing computations with side effects in functional programming", "Encoding algebraic theories as categorical structures", "Chaining transformations that produce structured output"],
+      "keywords": ["monad", "unit", "multiplication", "endofunctor", "kleisli"],
+      "tags": ["category-theory", "monad", "computation"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-universal-property",
+      "name": "Universal Property",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 22,
+      "section": "22.7",
+      "planePosition": { "real": 0.45, "imaginary": 0.7 },
+      "formalStatement": "An object U in a category C has a universal property with respect to a functor F if for every object X and morphism f: F(X) -> Y (or f: Y -> F(X)), there exists a unique morphism u: X -> U (or u: U -> X) making the appropriate diagram commute.",
+      "computationalForm": "",
+      "prerequisites": ["Category", "Functor", "Uniqueness of morphisms"],
+      "dependencies": [
+        { "target": "mapping-category", "type": "requires", "strength": 1.0, "description": "Universal properties are stated within categories" },
+        { "target": "mapping-functor", "type": "requires", "strength": 0.7, "description": "Universal properties often involve functors" }
+      ],
+      "enables": ["mapping-adjunction"],
+      "compositionRules": [
+        { "with": "foundations-group", "yields": "Characterization of free groups via universal property", "type": "sequential", "conditions": ["Construction satisfies the universal mapping property"], "example": "The free group on a set S is the unique group (up to isomorphism) through which every set map from S to any group G factors" }
+      ],
+      "applicabilityPatterns": ["Defining mathematical constructions by what they do rather than how they are built", "Proving uniqueness of constructions up to isomorphism", "Identifying when an object is the best solution to a mapping problem"],
+      "keywords": ["universal", "property", "unique", "factorization", "initial", "terminal"],
+      "tags": ["category-theory", "universal-property", "abstraction"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-limits-colimits",
+      "name": "Limits and Colimits",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 22,
+      "section": "22.8",
+      "planePosition": { "real": 0.35, "imaginary": 0.65 },
+      "formalStatement": "A limit of a diagram D: J -> C is an object lim D with projection morphisms pi_j: lim D -> D(j) that is universal among all cones over D. A colimit is the dual: an object colim D with injection morphisms that is universal among all cocones.",
+      "computationalForm": "",
+      "prerequisites": ["Category", "Universal property", "Diagrams and cones"],
+      "dependencies": [
+        { "target": "mapping-universal-property", "type": "requires", "strength": 1.0, "description": "Limits are defined by their universal property" },
+        { "target": "mapping-category", "type": "requires", "strength": 1.0, "description": "Limits exist within categories" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "foundations-set-operations", "yields": "Products, coproducts, equalizers, coequalizers in Set", "type": "parallel", "conditions": ["Category has all small limits"], "example": "The product of sets A and B is the Cartesian product A x B with projection maps, which is a limit of the discrete two-object diagram" }
+      ],
+      "applicabilityPatterns": ["Constructing products, intersections, and pullbacks in abstract settings", "Building new objects from diagrams of existing objects", "Ensuring completeness of categorical constructions"],
+      "keywords": ["limit", "colimit", "product", "coproduct", "pullback", "pushout"],
+      "tags": ["category-theory", "limits", "construction"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-shannon-entropy",
+      "name": "Shannon Entropy",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 23,
+      "section": "23.1",
+      "planePosition": { "real": 0.1, "imaginary": 0.45 },
+      "formalStatement": "For a discrete random variable X with probability mass function P(x), the Shannon entropy is H(X) = -sum_x P(x) log_2 P(x), measuring the average information content in bits per symbol.",
+      "computationalForm": "For each outcome x with probability p(x) > 0, compute -p(x) * log2(p(x)). Sum over all outcomes. Convention: 0 * log(0) = 0.",
+      "prerequisites": ["Probability distribution", "Logarithm", "Expected value"],
+      "dependencies": [
+        { "target": "mapping-probability-axioms", "type": "requires", "strength": 1.0, "description": "Entropy is defined over probability distributions" },
+        { "target": "change-integral", "type": "applies", "strength": 0.6, "description": "Continuous entropy uses integration: h(X) = -integral f(x) log f(x) dx" },
+        { "target": "perception-real-numbers", "type": "requires", "strength": 0.5, "description": "Entropy values are real numbers" }
+      ],
+      "enables": ["mapping-mutual-information", "mapping-channel-capacity", "mapping-kl-divergence"],
+      "compositionRules": [
+        { "with": "mapping-probability-axioms", "yields": "Entropy of joint distributions and conditional entropy", "type": "sequential", "conditions": ["Joint probability distribution is well-defined"], "example": "H(X,Y) = H(X) + H(Y|X), the chain rule of entropy" }
+      ],
+      "applicabilityPatterns": ["Measuring uncertainty or surprise in a random source", "Determining minimum bits needed to encode a message", "Quantifying information content of a probability distribution"],
+      "keywords": ["entropy", "information", "bits", "uncertainty", "shannon"],
+      "tags": ["information-theory", "entropy", "measurement"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-mutual-information",
+      "name": "Mutual Information",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 23,
+      "section": "23.2",
+      "planePosition": { "real": 0.1, "imaginary": 0.4 },
+      "formalStatement": "The mutual information between random variables X and Y is I(X;Y) = H(X) + H(Y) - H(X,Y) = sum_{x,y} P(x,y) log(P(x,y) / (P(x)P(y))), measuring the information shared between X and Y.",
+      "computationalForm": "Compute joint entropy H(X,Y), marginal entropies H(X) and H(Y), then I(X;Y) = H(X) + H(Y) - H(X,Y). Alternatively, compute KL divergence D(P(X,Y) || P(X)P(Y)).",
+      "prerequisites": ["Shannon entropy", "Joint probability", "Conditional probability"],
+      "dependencies": [
+        { "target": "mapping-shannon-entropy", "type": "requires", "strength": 1.0, "description": "Mutual information is defined via entropy" },
+        { "target": "mapping-probability-axioms", "type": "requires", "strength": 0.8, "description": "Requires joint and marginal distributions" }
+      ],
+      "enables": ["mapping-channel-capacity"],
+      "compositionRules": [
+        { "with": "mapping-shannon-entropy", "yields": "Data processing inequality: I(X;Z) <= I(X;Y) when X->Y->Z form a Markov chain", "type": "sequential", "conditions": ["Markov chain structure holds"], "example": "Processing data through a noisy channel can only lose information, never gain it" }
+      ],
+      "applicabilityPatterns": ["Measuring how much knowing one variable tells about another", "Feature selection in machine learning by maximizing relevance", "Quantifying statistical dependence between variables"],
+      "keywords": ["mutual information", "dependence", "shared information", "correlation"],
+      "tags": ["information-theory", "mutual-information", "dependence"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-channel-capacity",
+      "name": "Channel Capacity",
+      "type": "theorem",
+      "domain": "mapping",
+      "chapter": 23,
+      "section": "23.3",
+      "planePosition": { "real": 0.0, "imaginary": 0.4 },
+      "formalStatement": "The capacity of a discrete memoryless channel is C = max_{P(x)} I(X;Y), the maximum mutual information over all input distributions. Shannon's channel coding theorem states that reliable communication is possible at any rate R < C and impossible for R > C.",
+      "computationalForm": "Compute mutual information I(X;Y) for each valid input distribution P(x). Use iterative algorithms like Blahut-Arimoto to find the maximizing distribution. C = max I(X;Y).",
+      "prerequisites": ["Mutual information", "Probability distributions", "Channel model"],
+      "dependencies": [
+        { "target": "mapping-mutual-information", "type": "requires", "strength": 1.0, "description": "Channel capacity maximizes mutual information" },
+        { "target": "mapping-shannon-entropy", "type": "requires", "strength": 0.8, "description": "Entropy bounds the capacity" },
+        { "target": "change-optimization", "type": "applies", "strength": 0.7, "description": "Capacity is an optimization problem over input distributions" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-shannon-entropy", "yields": "Rate-distortion theory for lossy compression", "type": "sequential", "conditions": ["Distortion measure is defined", "Source has finite entropy"], "example": "For a binary symmetric source with crossover probability p, channel capacity C = 1 - H(p)" }
+      ],
+      "applicabilityPatterns": ["Determining the maximum reliable data rate for a communication channel", "Designing error-correcting codes that approach capacity", "Bounding achievable compression ratios"],
+      "keywords": ["capacity", "channel", "coding theorem", "reliable communication", "rate"],
+      "tags": ["information-theory", "channel-capacity", "coding"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-kl-divergence",
+      "name": "Kullback-Leibler Divergence",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 23,
+      "section": "23.4",
+      "planePosition": { "real": 0.05, "imaginary": 0.35 },
+      "formalStatement": "The Kullback-Leibler divergence from distribution Q to distribution P is D_KL(P || Q) = sum_x P(x) log(P(x)/Q(x)), measuring how P diverges from Q. It is non-negative (Gibbs' inequality) and zero iff P = Q.",
+      "computationalForm": "For each x where P(x) > 0, compute P(x) * log(P(x)/Q(x)). Sum over all x. If Q(x) = 0 where P(x) > 0, D_KL = infinity.",
+      "prerequisites": ["Probability distribution", "Logarithm", "Shannon entropy"],
+      "dependencies": [
+        { "target": "mapping-shannon-entropy", "type": "requires", "strength": 0.9, "description": "KL divergence decomposes into cross-entropy minus entropy" },
+        { "target": "mapping-probability-axioms", "type": "requires", "strength": 1.0, "description": "Defined over probability distributions" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-mutual-information", "yields": "I(X;Y) = D_KL(P(X,Y) || P(X)P(Y)), mutual information as KL divergence from independence", "type": "parallel", "conditions": ["Joint distribution exists"], "example": "Mutual information measures divergence of the joint distribution from the product of marginals" }
+      ],
+      "applicabilityPatterns": ["Measuring the difference between two probability distributions", "Defining loss functions for variational inference and generative models", "Quantifying information loss when approximating one distribution by another"],
+      "keywords": ["kl divergence", "relative entropy", "information divergence", "distribution distance"],
+      "tags": ["information-theory", "divergence", "distance-measure"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-huffman-coding",
+      "name": "Huffman Coding",
+      "type": "algorithm",
+      "domain": "mapping",
+      "chapter": 23,
+      "section": "23.5",
+      "planePosition": { "real": -0.05, "imaginary": 0.3 },
+      "formalStatement": "Huffman coding is an optimal prefix-free coding scheme that assigns shorter codewords to more probable symbols, achieving average code length within 1 bit of the entropy H(X).",
+      "computationalForm": "1. Create a leaf node for each symbol with its probability. 2. Repeatedly merge the two lowest-probability nodes into a new parent. 3. Assign 0/1 to left/right branches. 4. Read codeword for each symbol from root to leaf.",
+      "prerequisites": ["Shannon entropy", "Prefix-free codes", "Binary trees"],
+      "dependencies": [
+        { "target": "mapping-shannon-entropy", "type": "requires", "strength": 0.9, "description": "Huffman coding approaches the entropy lower bound" },
+        { "target": "mapping-probability-axioms", "type": "requires", "strength": 0.8, "description": "Requires symbol probabilities" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-shannon-entropy", "yields": "Optimal lossless data compression with provable bounds", "type": "sequential", "conditions": ["Symbol probabilities are known", "Source is memoryless"], "example": "For English text with known letter frequencies, Huffman coding achieves ~4.7 bits/character vs 8 bits for ASCII" }
+      ],
+      "applicabilityPatterns": ["Compressing data when symbol frequencies are known", "Building optimal variable-length codes for lossless compression", "Encoding symbols with minimum average code length"],
+      "keywords": ["huffman", "coding", "compression", "prefix-free", "optimal"],
+      "tags": ["information-theory", "coding", "algorithm", "compression"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-source-coding-theorem",
+      "name": "Source Coding Theorem",
+      "type": "theorem",
+      "domain": "mapping",
+      "chapter": 23,
+      "section": "23.6",
+      "planePosition": { "real": 0.0, "imaginary": 0.45 },
+      "formalStatement": "For a discrete memoryless source with entropy H(X), the minimum achievable average code length per symbol with lossless compression satisfies L >= H(X), and there exist codes achieving L < H(X) + 1 bit.",
+      "computationalForm": "Compute the entropy H(X) of the source. This gives the fundamental lower bound on compression. Construct a Huffman code or arithmetic code to approach this bound. For block coding of length n, L_n/n -> H(X) as n -> infinity.",
+      "prerequisites": ["Shannon entropy", "Prefix-free codes", "Kraft inequality"],
+      "dependencies": [
+        { "target": "mapping-shannon-entropy", "type": "requires", "strength": 1.0, "description": "The entropy is the fundamental limit of lossless compression" },
+        { "target": "mapping-huffman-coding", "type": "motivates", "strength": 0.8, "description": "Huffman coding achieves near-optimal compression" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-channel-capacity", "yields": "Joint source-channel coding theorem (separation theorem)", "type": "parallel", "conditions": ["Source and channel are independent", "Block length approaches infinity"], "example": "Shannon showed that source coding and channel coding can be optimized separately without loss of optimality" }
+      ],
+      "applicabilityPatterns": ["Determining the fundamental limits of data compression", "Proving optimality of coding schemes", "Understanding the relationship between information content and code length"],
+      "keywords": ["source coding", "compression limit", "noiseless coding", "entropy bound"],
+      "tags": ["information-theory", "coding-theorem", "compression"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-error-correction",
+      "name": "Error Correction Codes",
+      "type": "technique",
+      "domain": "mapping",
+      "chapter": 23,
+      "section": "23.7",
+      "planePosition": { "real": -0.1, "imaginary": 0.35 },
+      "formalStatement": "An (n, k, d) error-correcting code encodes k information symbols into n code symbols with minimum Hamming distance d, capable of detecting d-1 errors and correcting floor((d-1)/2) errors.",
+      "computationalForm": "Encode: multiply message vector m (length k) by generator matrix G to produce codeword c = mG (length n). Decode: compute syndrome s = rH^T for received vector r. If s = 0, no error. Otherwise, use syndrome to identify and correct error pattern.",
+      "prerequisites": ["Linear algebra over finite fields", "Hamming distance", "Probability of error"],
+      "dependencies": [
+        { "target": "mapping-channel-capacity", "type": "motivates", "strength": 0.8, "description": "Error correction codes approach channel capacity" },
+        { "target": "structure-linear-transformation", "type": "applies", "strength": 0.7, "description": "Linear codes use matrix multiplication over finite fields" },
+        { "target": "foundations-field", "type": "requires", "strength": 0.6, "description": "Codes are defined over finite fields" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-channel-capacity", "yields": "Capacity-approaching code design (turbo codes, LDPC)", "type": "sequential", "conditions": ["Block length is large enough", "Channel model is known"], "example": "LDPC codes can achieve rates within 0.0045 dB of the Shannon limit on binary symmetric channels" }
+      ],
+      "applicabilityPatterns": ["Protecting data from corruption during transmission or storage", "Designing reliable communication systems", "Adding controlled redundancy to detect and fix errors"],
+      "keywords": ["error correction", "hamming", "code", "redundancy", "syndrome"],
+      "tags": ["information-theory", "error-correction", "coding"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-fourier-transform",
+      "name": "Fourier Transform",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 24,
+      "section": "24.1",
+      "planePosition": { "real": 0.1, "imaginary": 0.35 },
+      "formalStatement": "The Fourier transform of an integrable function f: R -> C is F{f}(xi) = integral_{-inf}^{inf} f(t) e^{-2pi i xi t} dt, mapping the function from the time domain to the frequency domain.",
+      "computationalForm": "For continuous signals, evaluate the integral numerically using quadrature. For discrete signals of length N, use the DFT: X[k] = sum_{n=0}^{N-1} x[n] e^{-2pi i kn/N}.",
+      "prerequisites": ["Complex exponentials", "Integration", "Frequency and period"],
+      "dependencies": [
+        { "target": "waves-fourier-series", "type": "generalizes", "strength": 0.9, "description": "Fourier transform generalizes Fourier series from periodic to aperiodic functions" },
+        { "target": "change-integral", "type": "requires", "strength": 1.0, "description": "The transform is defined as an integral" },
+        { "target": "structure-complex-analysis", "type": "applies", "strength": 0.6, "description": "Uses complex exponentials and analytic properties" }
+      ],
+      "enables": ["mapping-fft", "mapping-sampling-theorem", "mapping-convolution-theorem"],
+      "compositionRules": [
+        { "with": "waves-fourier-series", "yields": "Unified spectral analysis for periodic and aperiodic signals", "type": "parallel", "conditions": ["Signal is integrable or periodic"], "example": "A windowed periodic signal uses the Fourier transform, reducing to Fourier series coefficients as window length approaches the period" }
+      ],
+      "applicabilityPatterns": ["Analyzing frequency content of signals", "Solving differential equations by transforming to the frequency domain", "Converting between time-domain and frequency-domain representations"],
+      "keywords": ["fourier", "transform", "frequency", "spectrum", "spectral"],
+      "tags": ["signal-processing", "fourier", "frequency-domain"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-fft",
+      "name": "Fast Fourier Transform",
+      "type": "algorithm",
+      "domain": "mapping",
+      "chapter": 24,
+      "section": "24.2",
+      "planePosition": { "real": 0.0, "imaginary": 0.25 },
+      "formalStatement": "The FFT computes the Discrete Fourier Transform of N points in O(N log N) operations by exploiting the periodicity and symmetry of the complex roots of unity, recursively decomposing the DFT into smaller sub-problems (Cooley-Tukey algorithm).",
+      "computationalForm": "Split x[n] into even-indexed x_e[n] = x[2n] and odd-indexed x_o[n] = x[2n+1]. Compute N/2-point DFTs of each. Combine: X[k] = X_e[k] + W_N^k * X_o[k], X[k+N/2] = X_e[k] - W_N^k * X_o[k], where W_N = e^{-2pi i/N}. Requires N to be a power of 2 (or use mixed-radix variants).",
+      "prerequisites": ["Discrete Fourier Transform", "Complex roots of unity", "Divide and conquer"],
+      "dependencies": [
+        { "target": "mapping-fourier-transform", "type": "specializes", "strength": 1.0, "description": "FFT is an efficient algorithm for computing the DFT" },
+        { "target": "perception-unit-circle", "type": "applies", "strength": 0.6, "description": "FFT exploits roots of unity on the unit circle" }
+      ],
+      "enables": ["mapping-convolution-theorem"],
+      "compositionRules": [
+        { "with": "mapping-convolution-theorem", "yields": "O(N log N) convolution via spectral multiplication", "type": "sequential", "conditions": ["Signals are discrete and finite"], "example": "Multiply two polynomials of degree n in O(n log n) by FFT, pointwise multiply, inverse FFT" }
+      ],
+      "applicabilityPatterns": ["Computing frequency spectra of large datasets efficiently", "Enabling real-time audio and image processing", "Accelerating convolution and correlation computations"],
+      "keywords": ["fft", "fast fourier", "cooley-tukey", "divide-conquer", "efficient"],
+      "tags": ["signal-processing", "algorithm", "fft", "efficiency"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-sampling-theorem",
+      "name": "Nyquist-Shannon Sampling Theorem",
+      "type": "theorem",
+      "domain": "mapping",
+      "chapter": 24,
+      "section": "24.3",
+      "planePosition": { "real": 0.05, "imaginary": 0.2 },
+      "formalStatement": "A bandlimited signal f(t) with maximum frequency B can be perfectly reconstructed from its samples taken at rate f_s >= 2B (the Nyquist rate): f(t) = sum_n f(n/f_s) sinc(f_s * t - n).",
+      "computationalForm": "1. Determine the bandwidth B of the signal. 2. Sample at rate f_s >= 2B. 3. Reconstruct using sinc interpolation: f(t) = sum_n x[n] * sinc((t - n/f_s) * f_s). In practice, use windowed sinc or polyphase filters.",
+      "prerequisites": ["Fourier transform", "Bandwidth", "Sinc function"],
+      "dependencies": [
+        { "target": "mapping-fourier-transform", "type": "requires", "strength": 1.0, "description": "Sampling theorem is proved via Fourier analysis" },
+        { "target": "waves-fourier-series", "type": "motivates", "strength": 0.6, "description": "Discrete sampling connects to Fourier series of periodic extensions" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-fourier-transform", "yields": "Complete analog-to-digital and digital-to-analog conversion pipeline", "type": "sequential", "conditions": ["Signal is bandlimited", "Sampling rate meets Nyquist criterion"], "example": "Audio CD sampling at 44.1 kHz captures all frequencies up to 22.05 kHz, exceeding the 20 kHz human hearing limit" }
+      ],
+      "applicabilityPatterns": ["Determining the minimum sampling rate for faithful signal digitization", "Understanding aliasing artifacts when undersampling", "Designing analog-to-digital converters"],
+      "keywords": ["sampling", "nyquist", "bandlimited", "aliasing", "reconstruction"],
+      "tags": ["signal-processing", "sampling", "theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-convolution-theorem",
+      "name": "Convolution Theorem",
+      "type": "theorem",
+      "domain": "mapping",
+      "chapter": 24,
+      "section": "24.4",
+      "planePosition": { "real": 0.15, "imaginary": 0.3 },
+      "formalStatement": "The Fourier transform converts convolution to pointwise multiplication: F{f * g} = F{f} . F{g}, where (f * g)(t) = integral f(tau) g(t - tau) d(tau). Equivalently, F{f . g} = F{f} * F{g}.",
+      "computationalForm": "To convolve f and g: 1. Compute F{f} and F{g} using FFT. 2. Multiply pointwise: H = F{f} . F{g}. 3. Inverse FFT to get f * g = F^{-1}{H}. Total cost: O(N log N) instead of O(N^2).",
+      "prerequisites": ["Fourier transform", "Convolution integral", "Pointwise multiplication"],
+      "dependencies": [
+        { "target": "mapping-fourier-transform", "type": "requires", "strength": 1.0, "description": "The theorem relates convolution and multiplication via the Fourier transform" },
+        { "target": "change-integral", "type": "requires", "strength": 0.7, "description": "Convolution is defined as an integral" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-fft", "yields": "Fast convolution algorithm", "type": "sequential", "conditions": ["Signals are discrete", "FFT is available"], "example": "Applying a FIR filter of length M to a signal of length N takes O((N+M) log(N+M)) instead of O(NM)" }
+      ],
+      "applicabilityPatterns": ["Speeding up convolution operations in signal processing", "Understanding how filters operate in the frequency domain", "Analyzing linear time-invariant systems"],
+      "keywords": ["convolution", "multiplication", "frequency domain", "duality"],
+      "tags": ["signal-processing", "convolution", "theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-filter-design",
+      "name": "Digital Filter Design",
+      "type": "technique",
+      "domain": "mapping",
+      "chapter": 24,
+      "section": "24.5",
+      "planePosition": { "real": 0.2, "imaginary": 0.2 },
+      "formalStatement": "A digital filter is a linear time-invariant system characterized by its impulse response h[n] or equivalently its transfer function H(z) = sum_n h[n] z^{-n}. FIR filters have finite impulse response; IIR filters have infinite impulse response with feedback.",
+      "computationalForm": "FIR: y[n] = sum_{k=0}^{M} b_k x[n-k]. IIR: y[n] = sum_{k=0}^{M} b_k x[n-k] - sum_{k=1}^{N} a_k y[n-k]. Design via window method (FIR) or bilinear transform (IIR).",
+      "prerequisites": ["Fourier transform", "Z-transform", "Transfer function concept"],
+      "dependencies": [
+        { "target": "mapping-fourier-transform", "type": "requires", "strength": 0.9, "description": "Filter design uses frequency-domain specifications" },
+        { "target": "mapping-z-transform", "type": "requires", "strength": 0.8, "description": "Transfer functions are expressed in the z-domain" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-fft", "yields": "Real-time spectral analysis with windowed FFT filtering", "type": "sequential", "conditions": ["Signal is discrete", "Filter specifications are known"], "example": "Low-pass Butterworth filter designed with bilinear transform, then applied in real-time to audio signals" }
+      ],
+      "applicabilityPatterns": ["Separating desired signal components from noise", "Implementing low-pass, high-pass, and band-pass frequency selection", "Designing audio effects and equalization systems"],
+      "keywords": ["filter", "FIR", "IIR", "low-pass", "high-pass", "band-pass"],
+      "tags": ["signal-processing", "filter", "design"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-z-transform",
+      "name": "Z-Transform",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 24,
+      "section": "24.6",
+      "planePosition": { "real": 0.15, "imaginary": 0.35 },
+      "formalStatement": "The Z-transform of a discrete-time signal x[n] is X(z) = sum_{n=-inf}^{inf} x[n] z^{-n}, where z is a complex variable. The region of convergence (ROC) determines where the series converges.",
+      "computationalForm": "For causal signals, evaluate the one-sided sum X(z) = sum_{n=0}^{inf} x[n] z^{-n}. For rational X(z) = B(z)/A(z), find poles and zeros. The ROC extends outward from the outermost pole for causal signals.",
+      "prerequisites": ["Complex numbers", "Power series", "Discrete-time signals"],
+      "dependencies": [
+        { "target": "mapping-fourier-transform", "type": "specializes", "strength": 0.8, "description": "Z-transform is the discrete-time analog of the Laplace transform; evaluating on the unit circle gives the DTFT" },
+        { "target": "structure-complex-analysis", "type": "applies", "strength": 0.7, "description": "Z-transform analysis uses complex analysis (poles, zeros, ROC)" }
+      ],
+      "enables": ["mapping-filter-design"],
+      "compositionRules": [
+        { "with": "mapping-filter-design", "yields": "Complete discrete-time system analysis via transfer functions", "type": "sequential", "conditions": ["System is linear time-invariant"], "example": "Z-transform converts a difference equation y[n] - 0.5y[n-1] = x[n] into algebraic form Y(z)(1 - 0.5z^{-1}) = X(z)" }
+      ],
+      "applicabilityPatterns": ["Analyzing discrete-time linear systems using algebra instead of difference equations", "Determining stability from pole locations in the z-plane", "Converting between time-domain and transform-domain representations of discrete signals"],
+      "keywords": ["z-transform", "discrete", "transfer function", "poles", "zeros"],
+      "tags": ["signal-processing", "z-transform", "system-analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-spectral-analysis",
+      "name": "Spectral Analysis",
+      "type": "technique",
+      "domain": "mapping",
+      "chapter": 24,
+      "section": "24.7",
+      "planePosition": { "real": 0.2, "imaginary": 0.3 },
+      "formalStatement": "Spectral analysis estimates the power spectral density S(f) of a signal, which describes the distribution of power across frequencies. The Wiener-Khinchin theorem relates the PSD to the autocorrelation: S(f) = F{R(tau)} where R(tau) = E[x(t)x(t+tau)].",
+      "computationalForm": "Periodogram: S_hat(f) = |X(f)|^2 / N where X(f) is the DFT. Welch's method: divide signal into overlapping segments, window each, compute periodograms, average. Use FFT for efficiency.",
+      "prerequisites": ["Fourier transform", "Autocorrelation", "Power spectral density"],
+      "dependencies": [
+        { "target": "mapping-fourier-transform", "type": "requires", "strength": 1.0, "description": "Spectral analysis is based on the Fourier transform" },
+        { "target": "mapping-fft", "type": "applies", "strength": 0.8, "description": "FFT makes spectral estimation computationally feasible" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-probability-axioms", "yields": "Statistical spectral estimation with confidence intervals", "type": "parallel", "conditions": ["Signal is stationary", "Sufficient data length"], "example": "Welch's method estimates PSD of EEG signals to identify alpha, beta, and theta brain wave frequencies" }
+      ],
+      "applicabilityPatterns": ["Identifying dominant frequencies in noisy data", "Characterizing vibration patterns in mechanical systems", "Analyzing periodicity in time series data"],
+      "keywords": ["spectral", "power spectrum", "periodogram", "PSD", "frequency analysis"],
+      "tags": ["signal-processing", "spectral-analysis", "estimation"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-windowing",
+      "name": "Windowing Functions",
+      "type": "technique",
+      "domain": "mapping",
+      "chapter": 24,
+      "section": "24.8",
+      "planePosition": { "real": 0.25, "imaginary": 0.25 },
+      "formalStatement": "A window function w[n] is a finite-length weighting applied to a signal before spectral analysis to reduce spectral leakage. Common windows: rectangular (w[n]=1), Hann (0.5 - 0.5cos(2pi n/N)), Hamming (0.54 - 0.46cos(2pi n/N)), Blackman, Kaiser.",
+      "computationalForm": "Apply window by pointwise multiplication: x_w[n] = x[n] * w[n]. Then compute FFT of x_w[n]. The window controls the tradeoff between main lobe width (frequency resolution) and side lobe level (leakage suppression).",
+      "prerequisites": ["Fourier transform", "Spectral leakage", "Trigonometric functions"],
+      "dependencies": [
+        { "target": "mapping-fft", "type": "applies", "strength": 0.8, "description": "Windows are applied before FFT computation" },
+        { "target": "mapping-fourier-transform", "type": "requires", "strength": 0.7, "description": "Window design is analyzed via Fourier transform of the window" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-spectral-analysis", "yields": "Reduced-leakage spectral estimation", "type": "sequential", "conditions": ["Signal is finite-length", "Spectral leakage must be minimized"], "example": "Applying a Hann window before FFT of a 1024-sample audio clip reduces side lobe artifacts by 31 dB compared to rectangular windowing" }
+      ],
+      "applicabilityPatterns": ["Reducing spectral leakage in finite-length signal analysis", "Balancing frequency resolution against side lobe suppression", "Preprocessing signals for spectral estimation"],
+      "keywords": ["window", "hann", "hamming", "spectral leakage", "tapering"],
+      "tags": ["signal-processing", "windowing", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-probability-axioms",
+      "name": "Probability Axioms",
+      "type": "axiom",
+      "domain": "mapping",
+      "chapter": 25,
+      "section": "25.1",
+      "planePosition": { "real": 0.0, "imaginary": 0.15 },
+      "formalStatement": "Kolmogorov's axioms: For a sample space Omega with sigma-algebra F, a probability measure P satisfies: (1) P(A) >= 0 for all A in F, (2) P(Omega) = 1, (3) P(union A_i) = sum P(A_i) for countably many disjoint events A_i.",
+      "computationalForm": "",
+      "prerequisites": ["Sets and set operations", "Sigma-algebra", "Measure concept"],
+      "dependencies": [],
+      "enables": ["mapping-conditional-probability", "mapping-bayes-theorem", "mapping-random-variable", "mapping-shannon-entropy"],
+      "compositionRules": [
+        { "with": "foundations-set-operations", "yields": "Probability space (Omega, F, P) as a measure space", "type": "parallel", "conditions": ["Sigma-algebra is properly defined", "Probability measure satisfies axioms"], "example": "Rolling a fair die: Omega = {1,2,3,4,5,6}, F = power set, P({k}) = 1/6 for each k" }
+      ],
+      "applicabilityPatterns": ["Formalizing uncertainty in mathematical models", "Defining the foundation for statistical inference", "Setting up probability spaces for random experiments"],
+      "keywords": ["probability", "axioms", "kolmogorov", "measure", "sample space"],
+      "tags": ["probability", "axioms", "foundations"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-conditional-probability",
+      "name": "Conditional Probability",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 25,
+      "section": "25.2",
+      "planePosition": { "real": 0.05, "imaginary": 0.1 },
+      "formalStatement": "The conditional probability of event A given event B (with P(B) > 0) is P(A|B) = P(A intersect B) / P(B). This defines a new probability measure on the restricted sample space.",
+      "computationalForm": "Compute P(A intersect B) and P(B) from the probability model. Divide: P(A|B) = P(A intersect B) / P(B). For independence: P(A|B) = P(A).",
+      "prerequisites": ["Probability axioms", "Set intersection", "Division"],
+      "dependencies": [
+        { "target": "mapping-probability-axioms", "type": "requires", "strength": 1.0, "description": "Conditional probability is defined within probability theory" }
+      ],
+      "enables": ["mapping-bayes-theorem"],
+      "compositionRules": [
+        { "with": "mapping-probability-axioms", "yields": "Law of total probability: P(A) = sum_i P(A|B_i)P(B_i)", "type": "sequential", "conditions": ["Events B_i form a partition of the sample space"], "example": "Probability of rain = P(rain|cloudy)P(cloudy) + P(rain|clear)P(clear)" }
+      ],
+      "applicabilityPatterns": ["Updating beliefs when new evidence is observed", "Computing probabilities in sequential experiments", "Defining independence and dependence between events"],
+      "keywords": ["conditional", "probability", "given", "evidence", "restriction"],
+      "tags": ["probability", "conditional", "inference"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-bayes-theorem",
+      "name": "Bayes' Theorem",
+      "type": "theorem",
+      "domain": "mapping",
+      "chapter": 25,
+      "section": "25.3",
+      "planePosition": { "real": 0.1, "imaginary": 0.15 },
+      "formalStatement": "P(A|B) = P(B|A) * P(A) / P(B), where P(A) is the prior, P(B|A) is the likelihood, P(B) is the evidence, and P(A|B) is the posterior probability.",
+      "computationalForm": "1. Specify prior P(A) (belief before evidence). 2. Compute likelihood P(B|A) (probability of evidence given hypothesis). 3. Compute evidence P(B) = sum_i P(B|A_i)P(A_i) using total probability. 4. Posterior: P(A|B) = P(B|A) * P(A) / P(B).",
+      "prerequisites": ["Conditional probability", "Prior and posterior", "Multiplication rule"],
+      "dependencies": [
+        { "target": "mapping-conditional-probability", "type": "requires", "strength": 1.0, "description": "Bayes' theorem inverts conditional probability" },
+        { "target": "mapping-probability-axioms", "type": "requires", "strength": 0.9, "description": "Founded on probability axioms" }
+      ],
+      "enables": ["mapping-markov-chain"],
+      "compositionRules": [
+        { "with": "mapping-probability-distributions", "yields": "Bayesian inference: posterior distribution = likelihood * prior / evidence", "type": "sequential", "conditions": ["Prior distribution is specified", "Likelihood model is known"], "example": "Updating a Beta(1,1) prior on a coin's bias after observing 7 heads in 10 flips gives Beta(8,4) posterior" }
+      ],
+      "applicabilityPatterns": ["Updating beliefs in light of new evidence", "Medical diagnosis: computing disease probability from test results", "Combining prior knowledge with observed data for inference"],
+      "keywords": ["bayes", "posterior", "prior", "likelihood", "evidence", "inference"],
+      "tags": ["probability", "bayesian", "inference", "theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-random-variable",
+      "name": "Random Variable",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 25,
+      "section": "25.4",
+      "planePosition": { "real": 0.0, "imaginary": 0.1 },
+      "formalStatement": "A random variable X: Omega -> R is a measurable function from the sample space to the real numbers, assigning a numerical value to each outcome. Its distribution is characterized by the CDF F_X(x) = P(X <= x).",
+      "computationalForm": "",
+      "prerequisites": ["Probability axioms", "Measurable function", "Real numbers"],
+      "dependencies": [
+        { "target": "mapping-probability-axioms", "type": "requires", "strength": 1.0, "description": "Random variables are functions on probability spaces" },
+        { "target": "perception-real-numbers", "type": "requires", "strength": 0.6, "description": "Random variables map to real numbers" }
+      ],
+      "enables": ["mapping-expected-value", "mapping-variance", "mapping-probability-distributions"],
+      "compositionRules": [
+        { "with": "mapping-probability-axioms", "yields": "Joint random variables and multivariate distributions", "type": "parallel", "conditions": ["Multiple random variables on the same probability space"], "example": "Height X and weight Y of randomly selected people form a bivariate random variable (X,Y) with joint distribution" }
+      ],
+      "applicabilityPatterns": ["Modeling numerical outcomes of random experiments", "Defining probability distributions over numerical values", "Abstracting uncertain quantities for mathematical analysis"],
+      "keywords": ["random variable", "distribution", "CDF", "measurable", "outcome"],
+      "tags": ["probability", "random-variable", "distribution"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-expected-value",
+      "name": "Expected Value",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 25,
+      "section": "25.5",
+      "planePosition": { "real": -0.05, "imaginary": 0.1 },
+      "formalStatement": "The expected value of a random variable X is E[X] = sum_x x P(X=x) for discrete X, or E[X] = integral x f_X(x) dx for continuous X with density f_X. Linearity: E[aX + bY] = aE[X] + bE[Y].",
+      "computationalForm": "Discrete: sum each value times its probability. Continuous: integrate x * f(x) over the support. For functions: E[g(X)] = sum g(x) P(X=x) or integral g(x) f(x) dx.",
+      "prerequisites": ["Random variable", "Summation", "Integration"],
+      "dependencies": [
+        { "target": "mapping-random-variable", "type": "requires", "strength": 1.0, "description": "Expected value is a functional of the distribution" },
+        { "target": "change-integral", "type": "applies", "strength": 0.7, "description": "Continuous expected value uses integration" }
+      ],
+      "enables": ["mapping-variance"],
+      "compositionRules": [
+        { "with": "mapping-random-variable", "yields": "Moment generating function M_X(t) = E[e^{tX}]", "type": "sequential", "conditions": ["E[e^{tX}] exists in a neighborhood of 0"], "example": "For X ~ Poisson(lambda), M_X(t) = exp(lambda(e^t - 1)), from which all moments are derived" }
+      ],
+      "applicabilityPatterns": ["Computing the average outcome of a random process", "Evaluating decision alternatives under uncertainty", "Defining fairness and equilibrium in probabilistic models"],
+      "keywords": ["expected value", "mean", "average", "expectation", "linearity"],
+      "tags": ["probability", "expected-value", "statistics"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-variance",
+      "name": "Variance",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 25,
+      "section": "25.6",
+      "planePosition": { "real": -0.05, "imaginary": 0.05 },
+      "formalStatement": "The variance of a random variable X is Var(X) = E[(X - E[X])^2] = E[X^2] - (E[X])^2, measuring the expected squared deviation from the mean. Standard deviation sigma = sqrt(Var(X)).",
+      "computationalForm": "Compute E[X] and E[X^2]. Then Var(X) = E[X^2] - (E[X])^2. For independent variables: Var(X+Y) = Var(X) + Var(Y). For scaled variables: Var(aX) = a^2 Var(X).",
+      "prerequisites": ["Expected value", "Squared deviation", "Square root"],
+      "dependencies": [
+        { "target": "mapping-expected-value", "type": "requires", "strength": 1.0, "description": "Variance is defined in terms of expected value" },
+        { "target": "mapping-random-variable", "type": "requires", "strength": 0.9, "description": "Variance characterizes the distribution of a random variable" }
+      ],
+      "enables": ["mapping-normal-distribution", "mapping-central-limit-theorem"],
+      "compositionRules": [
+        { "with": "mapping-expected-value", "yields": "Chebyshev's inequality: P(|X - mu| >= k*sigma) <= 1/k^2", "type": "parallel", "conditions": ["Variance is finite"], "example": "For any distribution with mean 100 and std 15, at least 75% of values fall within 2 standard deviations: [70, 130]" }
+      ],
+      "applicabilityPatterns": ["Quantifying the spread or dispersion of a distribution", "Assessing risk and uncertainty in financial and scientific models", "Comparing the reliability of different estimators"],
+      "keywords": ["variance", "standard deviation", "spread", "dispersion", "second moment"],
+      "tags": ["probability", "variance", "statistics"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-probability-distributions",
+      "name": "Probability Distributions",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 25,
+      "section": "25.7",
+      "planePosition": { "real": 0.1, "imaginary": 0.05 },
+      "formalStatement": "A probability distribution assigns probabilities to events. Key distributions: Binomial B(n,p) with PMF C(n,k)p^k(1-p)^{n-k}; Poisson Poi(lambda) with PMF e^{-lambda}lambda^k/k!; Normal N(mu,sigma^2) with PDF (1/(sigma*sqrt(2pi)))exp(-(x-mu)^2/(2sigma^2)).",
+      "computationalForm": "Binomial: compute C(n,k) * p^k * (1-p)^(n-k). Poisson: compute exp(-lambda) * lambda^k / k!. Normal: use standard normal tables or erfc function. CDF computed by integration or lookup.",
+      "prerequisites": ["Random variable", "Probability mass/density function", "Parameters"],
+      "dependencies": [
+        { "target": "mapping-random-variable", "type": "requires", "strength": 1.0, "description": "Distributions describe random variables" },
+        { "target": "mapping-probability-axioms", "type": "requires", "strength": 0.9, "description": "Distributions satisfy probability axioms" },
+        { "target": "change-integral", "type": "applies", "strength": 0.6, "description": "Continuous distributions use density functions integrated to give probabilities" }
+      ],
+      "enables": ["mapping-normal-distribution", "mapping-central-limit-theorem"],
+      "compositionRules": [
+        { "with": "mapping-bayes-theorem", "yields": "Conjugate prior-posterior pairs for Bayesian inference", "type": "sequential", "conditions": ["Prior is conjugate to the likelihood"], "example": "Beta prior with Binomial likelihood gives Beta posterior: Beta(alpha,beta) + Binomial data -> Beta(alpha+successes, beta+failures)" }
+      ],
+      "applicabilityPatterns": ["Modeling specific types of random phenomena with parametric families", "Computing probabilities for binomial experiments, rare events, or measurement errors", "Selecting appropriate statistical models for data"],
+      "keywords": ["distribution", "binomial", "poisson", "normal", "parametric"],
+      "tags": ["probability", "distributions", "parametric"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-normal-distribution",
+      "name": "Normal Distribution",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 25,
+      "section": "25.8",
+      "planePosition": { "real": 0.15, "imaginary": 0.0 },
+      "formalStatement": "The normal (Gaussian) distribution N(mu, sigma^2) has PDF f(x) = (1/(sigma*sqrt(2*pi))) * exp(-(x-mu)^2 / (2*sigma^2)). The standard normal Z ~ N(0,1). The 68-95-99.7 rule: 68% within 1 sigma, 95% within 2 sigma, 99.7% within 3 sigma.",
+      "computationalForm": "Standardize: Z = (X - mu) / sigma. Use standard normal CDF Phi(z) for probabilities. Inverse: X = mu + sigma * Phi^{-1}(p). Box-Muller transform generates normal samples from uniform samples.",
+      "prerequisites": ["Probability distributions", "Exponential function", "Mean and variance"],
+      "dependencies": [
+        { "target": "mapping-probability-distributions", "type": "specializes", "strength": 1.0, "description": "Normal is a specific probability distribution family" },
+        { "target": "mapping-variance", "type": "requires", "strength": 0.9, "description": "Normal distribution is parametrized by mean and variance" }
+      ],
+      "enables": ["mapping-central-limit-theorem"],
+      "compositionRules": [
+        { "with": "mapping-expected-value", "yields": "Maximum likelihood estimation for normal parameters", "type": "sequential", "conditions": ["Data is normally distributed", "Samples are independent"], "example": "MLE for N(mu, sigma^2): mu_hat = sample mean, sigma^2_hat = sample variance" }
+      ],
+      "applicabilityPatterns": ["Modeling measurement errors and natural variation", "Serving as the limiting distribution in the central limit theorem", "Providing the foundation for many statistical tests"],
+      "keywords": ["normal", "gaussian", "bell curve", "standard normal", "68-95-99.7"],
+      "tags": ["probability", "normal", "gaussian", "statistics"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-markov-chain",
+      "name": "Markov Chain",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 25,
+      "section": "25.9",
+      "planePosition": { "real": 0.2, "imaginary": 0.15 },
+      "formalStatement": "A Markov chain is a stochastic process {X_n} where the future state depends only on the present state, not the past: P(X_{n+1} = j | X_n = i, X_{n-1}, ..., X_0) = P(X_{n+1} = j | X_n = i) = p_{ij}. The transition matrix P = [p_{ij}] is row-stochastic.",
+      "computationalForm": "Given initial distribution pi_0 and transition matrix P, the distribution at step n is pi_n = pi_0 * P^n. Stationary distribution pi satisfies pi * P = pi. Compute P^n by matrix exponentiation or eigendecomposition.",
+      "prerequisites": ["Conditional probability", "Matrix multiplication", "Stochastic processes"],
+      "dependencies": [
+        { "target": "mapping-conditional-probability", "type": "requires", "strength": 1.0, "description": "Markov property is a conditional independence statement" },
+        { "target": "mapping-probability-axioms", "type": "requires", "strength": 0.8, "description": "Transition probabilities form a probability distribution" },
+        { "target": "structure-linear-transformation", "type": "applies", "strength": 0.7, "description": "Transition matrix is a linear operator on probability vectors" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "structure-eigenvalue", "yields": "Stationary distribution computation via eigenvector of transition matrix", "type": "sequential", "conditions": ["Chain is irreducible and aperiodic", "Transition matrix has eigenvalue 1"], "example": "PageRank: the stationary distribution of a web-graph Markov chain gives the importance of each page" }
+      ],
+      "applicabilityPatterns": ["Modeling systems that evolve randomly with memoryless transitions", "Analyzing long-run behavior of stochastic processes", "Computing page rank and random walk probabilities on graphs"],
+      "keywords": ["markov", "chain", "transition", "stochastic", "memoryless", "stationary"],
+      "tags": ["probability", "markov", "stochastic-process"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-law-large-numbers",
+      "name": "Law of Large Numbers",
+      "type": "theorem",
+      "domain": "mapping",
+      "chapter": 25,
+      "section": "25.10",
+      "planePosition": { "real": -0.1, "imaginary": 0.15 },
+      "formalStatement": "Weak LLN: For iid random variables X_1, ..., X_n with mean mu, the sample mean X_bar_n = (1/n) sum X_i converges in probability to mu: P(|X_bar_n - mu| > epsilon) -> 0 as n -> infinity. Strong LLN: convergence is almost sure.",
+      "computationalForm": "For a sample of size n from a distribution with mean mu, the sample mean converges to mu. Error bounds: by Chebyshev, P(|X_bar - mu| > epsilon) <= sigma^2/(n*epsilon^2). For practical purposes, n > 30 gives reasonable convergence for most distributions.",
+      "prerequisites": ["Expected value", "Variance", "Convergence concepts"],
+      "dependencies": [
+        { "target": "mapping-expected-value", "type": "requires", "strength": 1.0, "description": "LLN concerns convergence to the expected value" },
+        { "target": "mapping-variance", "type": "requires", "strength": 0.8, "description": "Finite variance ensures convergence rate" },
+        { "target": "mapping-probability-axioms", "type": "requires", "strength": 0.7, "description": "Convergence is defined in terms of probability" }
+      ],
+      "enables": ["mapping-central-limit-theorem"],
+      "compositionRules": [
+        { "with": "mapping-probability-distributions", "yields": "Monte Carlo estimation: approximate E[g(X)] by sample average", "type": "sequential", "conditions": ["Samples are iid", "Expected value exists"], "example": "Estimate pi by sampling random points in [0,1]^2: pi/4 ≈ fraction falling inside the unit circle, converging by LLN" }
+      ],
+      "applicabilityPatterns": ["Justifying the use of sample averages to estimate population parameters", "Understanding why larger samples give more reliable estimates", "Providing the theoretical basis for Monte Carlo simulation"],
+      "keywords": ["law of large numbers", "convergence", "sample mean", "iid", "consistency"],
+      "tags": ["probability", "convergence", "theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-central-limit-theorem",
+      "name": "Central Limit Theorem",
+      "type": "theorem",
+      "domain": "mapping",
+      "chapter": 25,
+      "section": "25.11",
+      "planePosition": { "real": 0.0, "imaginary": 0.2 },
+      "formalStatement": "For iid random variables X_1, ..., X_n with mean mu and variance sigma^2, the standardized sum (X_bar_n - mu) / (sigma/sqrt(n)) converges in distribution to N(0,1) as n -> infinity.",
+      "computationalForm": "For large n, approximate P(X_bar_n <= x) ≈ Phi((x - mu) / (sigma/sqrt(n))) where Phi is the standard normal CDF. Rule of thumb: n >= 30 is sufficient for most distributions; for highly skewed distributions, larger n may be needed.",
+      "prerequisites": ["Normal distribution", "Variance", "Law of large numbers"],
+      "dependencies": [
+        { "target": "mapping-normal-distribution", "type": "requires", "strength": 1.0, "description": "CLT shows convergence to the normal distribution" },
+        { "target": "mapping-variance", "type": "requires", "strength": 0.9, "description": "Finite variance is required for the classical CLT" },
+        { "target": "mapping-law-large-numbers", "type": "motivates", "strength": 0.7, "description": "CLT refines LLN by characterizing the distribution of deviations" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-normal-distribution", "yields": "Confidence intervals and hypothesis tests for sample means", "type": "sequential", "conditions": ["Sample size is large enough", "Variance is finite"], "example": "For n=100 samples with mean 50 and std 10, a 95% CI for the population mean is 50 +/- 1.96*10/sqrt(100) = [48.04, 51.96]" }
+      ],
+      "applicabilityPatterns": ["Explaining why the normal distribution appears so frequently in nature", "Constructing confidence intervals and hypothesis tests for large samples", "Justifying normal approximations to sums of random variables"],
+      "keywords": ["central limit theorem", "CLT", "normal approximation", "convergence", "sum"],
+      "tags": ["probability", "CLT", "convergence", "theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-transfer-function",
+      "name": "Transfer Function",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 24,
+      "section": "24.9",
+      "planePosition": { "real": 0.1, "imaginary": 0.25 },
+      "formalStatement": "The transfer function H(s) of a continuous-time LTI system is the Laplace transform of the impulse response h(t): H(s) = L{h(t)} = integral_0^inf h(t) e^{-st} dt. For discrete-time: H(z) = Z{h[n]}. Input-output: Y(s) = H(s) X(s).",
+      "computationalForm": "For a system described by differential equation sum a_k y^(k) = sum b_k x^(k), H(s) = B(s)/A(s) where B(s) = sum b_k s^k, A(s) = sum a_k s^k. Evaluate frequency response: H(j*omega) = H(s)|_{s=j*omega}.",
+      "prerequisites": ["Laplace transform", "Impulse response", "Linear systems"],
+      "dependencies": [
+        { "target": "mapping-fourier-transform", "type": "requires", "strength": 0.8, "description": "Transfer function evaluated on the imaginary axis gives the frequency response" },
+        { "target": "change-differential-equation", "type": "requires", "strength": 0.9, "description": "Transfer functions encode differential equation systems" },
+        { "target": "structure-linear-transformation", "type": "applies", "strength": 0.7, "description": "Transfer function represents a linear operator" }
+      ],
+      "enables": ["mapping-filter-design"],
+      "compositionRules": [
+        { "with": "mapping-filter-design", "yields": "Complete system design from specification to implementation", "type": "sequential", "conditions": ["System is LTI", "Specifications are in frequency domain"], "example": "Design a Butterworth low-pass filter: specify cutoff frequency and order, compute H(s) = 1/B_n(s/omega_c), realize as circuit or digital filter" }
+      ],
+      "applicabilityPatterns": ["Analyzing the frequency response of linear systems", "Designing control systems with specified stability and performance", "Converting between time-domain and frequency-domain system descriptions"],
+      "keywords": ["transfer function", "laplace", "frequency response", "system", "LTI"],
+      "tags": ["signal-processing", "systems", "transfer-function"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-data-compression",
+      "name": "Data Compression",
+      "type": "technique",
+      "domain": "mapping",
+      "chapter": 23,
+      "section": "23.8",
+      "planePosition": { "real": -0.1, "imaginary": 0.3 },
+      "formalStatement": "Data compression reduces the number of bits needed to represent information. Lossless compression (Huffman, LZW, arithmetic coding) preserves all information with compression ratio bounded by entropy. Lossy compression (JPEG, MP3) discards information below perceptual thresholds.",
+      "computationalForm": "Lossless: compute symbol frequencies, build Huffman tree or use arithmetic coder. Lossy: transform (DCT/FFT), quantize coefficients, entropy code the quantized values. Compression ratio = original size / compressed size.",
+      "prerequisites": ["Shannon entropy", "Huffman coding", "Transform coding"],
+      "dependencies": [
+        { "target": "mapping-shannon-entropy", "type": "requires", "strength": 0.9, "description": "Entropy sets the fundamental limit for lossless compression" },
+        { "target": "mapping-huffman-coding", "type": "applies", "strength": 0.8, "description": "Huffman coding is a key lossless compression technique" },
+        { "target": "mapping-fourier-transform", "type": "applies", "strength": 0.6, "description": "Transform coding uses frequency-domain representations for lossy compression" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-fourier-transform", "yields": "Transform-based lossy compression (JPEG, MP3)", "type": "sequential", "conditions": ["Perceptual model is available", "Some information loss is acceptable"], "example": "JPEG: DCT of 8x8 blocks, quantize high-frequency coefficients aggressively, Huffman code the result" }
+      ],
+      "applicabilityPatterns": ["Reducing storage and bandwidth requirements for data", "Exploiting statistical redundancy in information sources", "Trading off fidelity for compression in multimedia applications"],
+      "keywords": ["compression", "lossless", "lossy", "entropy coding", "redundancy"],
+      "tags": ["information-theory", "compression", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-noisy-channel-coding",
+      "name": "Noisy Channel Coding Theorem",
+      "type": "theorem",
+      "domain": "mapping",
+      "chapter": 23,
+      "section": "23.9",
+      "planePosition": { "real": 0.05, "imaginary": 0.5 },
+      "formalStatement": "For any rate R < C (channel capacity), there exist codes of rate R that achieve arbitrarily small error probability. Conversely, for R > C, the error probability is bounded away from zero for all codes. Proved by Shannon using random coding arguments.",
+      "computationalForm": "For a binary symmetric channel with crossover probability p: C = 1 - H(p). Design codes with rate R < C and block length n. Error probability decreases exponentially: P_e <= 2^{-nE(R)} where E(R) is the reliability function.",
+      "prerequisites": ["Channel capacity", "Error probability", "Block codes"],
+      "dependencies": [
+        { "target": "mapping-channel-capacity", "type": "requires", "strength": 1.0, "description": "The theorem characterizes achievability relative to capacity" },
+        { "target": "mapping-shannon-entropy", "type": "requires", "strength": 0.8, "description": "Entropy enters through the capacity formula" },
+        { "target": "mapping-probability-axioms", "type": "applies", "strength": 0.7, "description": "Random coding argument uses probabilistic existence proof" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-error-correction", "yields": "Practical capacity-approaching coding schemes", "type": "sequential", "conditions": ["Block length is sufficiently large", "Decoding complexity is manageable"], "example": "Turbo codes and LDPC codes achieve within 0.1 dB of Shannon capacity on AWGN channels with practical decoding algorithms" }
+      ],
+      "applicabilityPatterns": ["Understanding the fundamental limits of reliable communication", "Motivating the design of efficient error-correcting codes", "Proving that reliable communication is possible over noisy channels"],
+      "keywords": ["noisy channel", "coding theorem", "shannon", "achievability", "converse"],
+      "tags": ["information-theory", "coding-theorem", "reliability"],
+      "buildLabs": []
+    }
+  ]
+}
