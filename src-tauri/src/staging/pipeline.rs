@@ -14,12 +14,38 @@ pub struct StagingPipelineResult {
 ///
 /// Pipeline position: AFTER hygiene checks, BEFORE orchestrator notification.
 ///
-/// Quarantined content never generates pending tasks -- callers must check
-/// `result.verdict` before proceeding. Only `ScanVerdict::Clean` content
-/// should be forwarded to the orchestrator.
+/// The caller is responsible for NOT forwarding quarantined content to the orchestrator.
+/// Typical usage:
+///
+/// ```ignore
+/// let result = run_security_scan(&content_path);
+/// match result.verdict {
+///     ScanVerdict::Clean => forward_to_orchestrator(content_path),
+///     ScanVerdict::Flagged(findings) => forward_with_advisory(content_path, findings),
+///     ScanVerdict::Quarantine(_) => { /* do NOT forward -- log, notify user, stop */ }
+/// }
+/// ```
 ///
 /// Safety: This function NEVER releases quarantined content. No method exists
 /// to release quarantine from code -- only user interaction via dashboard or CLI.
-pub fn run_security_scan(_content_root: &Path) -> StagingPipelineResult {
-    todo!("implement in 370-02 Task 1 (GREEN phase)")
+pub fn run_security_scan(content_root: &Path) -> StagingPipelineResult {
+    let scanner = SecurityScanner::new();
+    let content_source = content_root
+        .file_name()
+        .and_then(|n| n.to_str())
+        .unwrap_or("unknown")
+        .to_string();
+
+    let report = scanner.scan_and_report(content_root, &content_source);
+    let verdict = scanner.classify(&report.findings);
+
+    let report_opt = match &verdict {
+        ScanVerdict::Clean => None,
+        _ => Some(report),
+    };
+
+    StagingPipelineResult {
+        verdict,
+        report: report_opt,
+    }
 }
