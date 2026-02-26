@@ -10,5 +10,6 @@ pub mod pty;
 pub mod sandbox;
 pub mod security;
 pub mod security_init;
+pub mod services;
 pub mod tmux;
 pub mod watcher;
