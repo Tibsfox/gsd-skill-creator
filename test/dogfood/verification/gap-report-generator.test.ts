@@ -30,9 +30,12 @@ function makeGap(overrides: Partial<GapRecord> = {}): GapRecord {
 describe('gap-report-generator', () => {
   describe('generateGapReport', () => {
     it('merges gaps from three tracks into single list', () => {
-      const trackA = [makeGap(), makeGap(), makeGap(), makeGap(), makeGap()];
-      const trackB = [makeGap(), makeGap(), makeGap()];
-      const trackC = [makeGap(), makeGap()];
+      const trackA = [
+        makeGap({ concept: 'a1' }), makeGap({ concept: 'a2' }),
+        makeGap({ concept: 'a3' }), makeGap({ concept: 'a4' }), makeGap({ concept: 'a5' }),
+      ];
+      const trackB = [makeGap({ concept: 'b1' }), makeGap({ concept: 'b2' }), makeGap({ concept: 'b3' })];
+      const trackC = [makeGap({ concept: 'c1' }), makeGap({ concept: 'c2' })];
 
       const report = generateGapReport({ trackA, trackB, trackC });
 
@@ -95,9 +98,9 @@ describe('gap-report-generator', () => {
 
     it('counts gaps by severity in statistics', () => {
       const trackA = [
-        makeGap({ severity: 'critical' }),
-        makeGap({ severity: 'critical', concept: 'c2' }),
-        makeGap({ severity: 'minor' }),
+        makeGap({ severity: 'critical', concept: 'sev-c1' }),
+        makeGap({ severity: 'critical', concept: 'sev-c2' }),
+        makeGap({ severity: 'minor', concept: 'sev-c3' }),
       ];
 
       const report = generateGapReport({ trackA, trackB: [], trackC: [] });
