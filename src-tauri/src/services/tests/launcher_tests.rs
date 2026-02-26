@@ -1,6 +1,5 @@
 use crate::services::types::*;
 use crate::services::launcher::*;
-use std::collections::HashMap;
 
 #[test]
 fn test_new_launcher_all_services_offline() {
