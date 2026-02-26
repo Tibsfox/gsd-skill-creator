@@ -1,0 +1,116 @@
+/* CLI Chat terminal interface */
+.cli-chat {
+  background: var(--gsd-terminal-bg, #1a1a2e);
+  color: var(--gsd-terminal-fg, #c0c0c0);
+  font-family: var(--gsd-mono-font, 'Cascadia Mono', 'Fira Code', monospace);
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 8px 12px;
+  overflow-y: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cli-chat__messages {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.cli-chat__system { color: var(--gsd-terminal-green, #50fa7b); }
+.cli-chat__user { color: var(--gsd-terminal-cyan, #8be9fd); }
+.cli-chat__user::before { content: '> '; opacity: 0.6; }
+.cli-chat__error { color: var(--gsd-terminal-red, #ff5555); }
+.cli-chat__assistant { color: var(--gsd-terminal-fg, #c0c0c0); }
+
+.cli-chat__input-row {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--gsd-terminal-fg, #c0c0c0);
+  padding-top: 4px;
+  margin-top: 4px;
+}
+
+.cli-chat__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--gsd-terminal-cyan, #8be9fd);
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+  caret-color: transparent; /* hide default caret, we use custom cursor */
+}
+
+.cli-chat__input::placeholder {
+  color: var(--gsd-terminal-fg, #c0c0c0);
+  opacity: 0.5;
+}
+
+.cli-chat__cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  background: var(--gsd-terminal-cyan, #8be9fd);
+  animation: cli-chat-blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+.cli-chat__cursor--hidden { display: none; }
+
+@keyframes cli-chat-blink {
+  50% { opacity: 0; }
+}
+
+.cli-chat__streaming {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.cli-chat__streaming-container {
+  min-height: 0;
+}
+
+/* Scroll-to-bottom indicator (used by scroll-controller from 377-02) */
+.cli-chat__scroll-indicator {
+  position: sticky;
+  bottom: 0;
+  text-align: center;
+  background: var(--gsd-terminal-bg, #1a1a2e);
+  color: var(--gsd-terminal-cyan, #8be9fd);
+  padding: 4px;
+  cursor: pointer;
+  opacity: 0.8;
+  border-top: 1px solid var(--gsd-terminal-fg, #c0c0c0);
+}
+
+.cli-chat__scroll-indicator:hover {
+  opacity: 1;
+}
+
+/* LED panel styles (used by led-panel from 377-02) */
+.led-panel {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.led-panel__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gsd-terminal-fg, #c0c0c0);
+}
+
+.led-panel__dot--green { background: var(--gsd-terminal-green, #50fa7b); }
+.led-panel__dot--red { background: var(--gsd-terminal-red, #ff5555); }
+.led-panel__dot--amber { background: var(--gsd-terminal-amber, #f1fa8c); }
+
+.led-panel__dot--blink {
+  animation: led-blink 1s step-end infinite;
+}
+
+@keyframes led-blink {
+  50% { opacity: 0.2; }
+}
