@@ -88,8 +88,9 @@ src/                        # TypeScript library
 ├── mcp/                    # MCP distribution (v1.9)
 ├── retrieval/              # Agentic RAG (v1.9)
 ├── hooks/                  # Hook safety (v1.10)
-├── integration/            # GSD integration layer (v1.11)
-│   └── monitoring/         # Passive monitoring
+├── integration/            # GSD integration layer (v1.11) + MFE pipeline (v1.35)
+│   ├── monitoring/         # Passive monitoring
+│   └── config/             # Configuration reader, schema, terminal config
 ├── dashboard/              # Planning docs dashboard (v1.12+)
 │   ├── parser.ts           # Markdown-to-HTML parser
 │   ├── renderer.ts         # HTML page renderer
@@ -121,6 +122,71 @@ src/                        # TypeScript library
 │   ├── monitor/            # Executive Monitor with scheduling visualization
 │   ├── tools/              # yaYUL assembler, debugger, disassembler, rope loader
 │   └── curriculum/         # 11 chapters, 8 exercises, learn mode
+├── engines/                # Mathematical foundations engines (v1.35)
+│   ├── dependency-graph    # Prerequisite graph traversal
+│   ├── path-finder         # Learning path computation
+│   ├── plane-classifier    # Domain classification
+│   ├── plane-navigator     # Concept space navigation
+│   ├── composition-engine  # Knowledge composition
+│   ├── proof-composer      # Proof assembly
+│   ├── property-checkers   # Domain property verification
+│   └── verification-engine # End-to-end verification
+├── learn/                  # sc:learn knowledge ingestion pipeline (v1.35)
+│   ├── acquirer            # Source acquisition
+│   ├── sanitizer           # Input sanitization
+│   ├── hitl-gate           # Human-in-the-loop approval gate
+│   ├── analyzer            # Content analysis
+│   ├── extractor           # Knowledge extraction
+│   ├── dependency-wirer    # Dependency graph wiring
+│   ├── dedup-prefilter     # Deduplication pre-filter
+│   ├── semantic-comparator # Semantic similarity comparison
+│   ├── merge-engine        # Knowledge merge
+│   ├── changeset-manager   # Changeset tracking
+│   ├── report-generator    # Ingestion report generation
+│   ├── generators/         # Skill/agent generators
+│   └── heuristics/         # Scoring heuristics
+├── citations/              # Citation management and source attribution (v1.36)
+│   ├── types/              # Citation type definitions
+│   ├── extractor/          # Citation extraction from sources
+│   ├── store/              # Citation persistence
+│   ├── resolver/           # Cross-reference resolution (CrossRef, OpenAlex, NASA NTRS)
+│   ├── generator/          # Format output (BibTeX, APA7, Chicago, MLA, Mustache)
+│   ├── learn-integration/  # sc:learn pipeline integration
+│   ├── discovery/          # Source discovery
+│   ├── dashboard/          # Citation dashboard
+│   └── space-between/      # Inter-citation analysis
+├── plane/                  # Complex plane learning framework (v1.37)
+│   ├── types               # SkillPosition (theta, r), domain types
+│   ├── arithmetic          # Complex arithmetic operations
+│   ├── activation          # Tangent-line activation functions
+│   ├── signal-classification # Signal classification in complex plane
+│   ├── position-store      # PositionStorePort, skill position persistence
+│   ├── observer-bridge     # Observation pipeline bridge
+│   ├── promotion           # Skill promotion logic
+│   ├── refinement-wrapper  # Refinement with angular velocity clamping
+│   ├── chords              # Chord detection
+│   ├── composition         # Euler composition (r1*r2*e^(i(t1+t2)))
+│   ├── metrics             # Versine/exsecant metrics
+│   ├── dashboard           # Plane visualization dashboard
+│   └── migration           # Position data migration
+├── retro/                  # Self-improvement lifecycle (v1.39)
+│   ├── types               # Retro type definitions
+│   ├── template-generator  # Retrospective template generation
+│   ├── changelog-watch     # Changelog monitoring
+│   ├── calibration-delta   # Calibration drift detection
+│   ├── action-generator    # Improvement action generation
+│   └── observation-harvester # Session observation harvesting
+├── dogfood/                # sc:learn dogfood pipeline (v1.40)
+│   ├── extraction/         # PDF extraction: extractor, chapter-detector, math-parser,
+│   │                       #   chunk-segmenter, section-parser, diagram-cataloger, manifest
+│   ├── harness/            # Ingestion harness: checkpoint-manager, progress-tracker,
+│   │                       #   metrics-collector, dashboard-bridge
+│   ├── learning/           # Learning pipeline: concept-detector, position-mapper,
+│   │                       #   track-runner, cross-referencer, database-merger, ingest-controller
+│   ├── verification/       # Verification engine: knowledge-differ, gap-classifier,
+│   │                       #   coverage-mapper, consistency-checker, eight-layer-verifier
+│   └── refinement/         # Refinement and reporting: patch-generator, ticket-generator,
+│                           #   skill-refiner, report-builder, safety-validator
 ├── cli/                    # CLI command modules
 ├── cli.ts                  # CLI entry point
 └── index.ts                # Module exports
@@ -132,7 +198,16 @@ src-tauri/                  # Rust backend (v1.21)
 │   ├── watcher/            # File system watcher (notify crate)
 │   ├── tmux/               # tmux session binding
 │   ├── claude/             # Claude Code session management
-│   └── ipc/                # Tauri IPC commands and events
+│   ├── ipc/                # Tauri IPC type definitions and events
+│   ├── security/           # Agent security (v1.38): sandbox, credential proxy,
+│   │                       #   keystore, agent isolation
+│   ├── api/                # API client (v1.39): client, streaming, keystore, retry, history
+│   ├── magic/              # Magic verbosity system (v1.39): filter, persistence, types
+│   ├── services/           # Service launcher (v1.39): launcher, registry, health,
+│   │                       #   LED, shutdown
+│   ├── staging/            # Staging intake (v1.38/v1.39): intake, hygiene, notify,
+│   │                       #   debrief, security scanner, pipeline
+│   └── commands/           # Tauri IPC command handlers (v1.39)
 ├── Cargo.toml              # Rust dependencies
 └── tauri.conf.json         # Tauri window/capability configuration
 
@@ -147,10 +222,23 @@ desktop/                    # Vite webview frontend (v1.21)
 │   ├── shell/              # Desktop shell (taskbar, icons, system menu)
 │   ├── dashboard/          # Dashboard rendering within GSD-OS windows
 │   ├── calibration/        # Three-screen calibration wizard
-│   └── boot/               # Amiga chipset boot sequence animation
+│   ├── boot/               # Amiga chipset boot sequence animation
+│   ├── components/         # Chat UI components (v1.39): CliChat, ChatInput, StreamingText
+│   ├── chat/               # Chat pipeline (v1.39): history, sanitizer, LED panel,
+│   │                       #   error display, scroll controller
+│   ├── magic/              # Magic settings UI (v1.39): filter, persistence, recalibrate panel
+│   ├── pipeline/           # Integration pipeline (v1.39): chat-pipeline, led-bridge,
+│   │                       #   staging-bridge, bootstrap-flow, error-recovery, persistence-manager
+│   └── styles/             # CSS styles (v1.39): main, cli-chat, dashboard-host, boot, recalibrate
 ├── index.html              # Webview entry point
 ├── vite.config.ts          # Vite build configuration
 └── package.json            # Frontend dependencies
+
+data/                       # Domain data files (v1.35)
+├── domains/                # 10 domain JSON files (451 primitives)
+│   ├── 01-perception.json through 10-synthesis.json
+├── dependencies/           # Dependency graph JSON (foundational, intermediate, advanced)
+└── domain-index.json       # Domain index registry
 
 infra/                      # Bash infrastructure scripts (v1.22)
 ├── scripts/                # Core infrastructure automation
