@@ -20,3 +20,22 @@ export type {
   StagingIntakeCompletePayload,
   StagingBridgeConfig,
 } from "./staging-bridge";
+
+export { BootstrapFlow, createBootstrapFlow } from "./bootstrap-flow";
+export type {
+  BootstrapStage,
+  BootstrapFlowConfig,
+  IpcCommandsPort,
+} from "./bootstrap-flow";
+
+export { ErrorRecoveryManager, createErrorRecovery } from "./error-recovery";
+export type {
+  ServiceFailedPayload,
+  ErrorRecoveryConfig,
+} from "./error-recovery";
+
+export { PersistenceManager, createPersistenceManager } from "./persistence-manager";
+export type {
+  PersistenceConfig,
+  ConversationSnapshot,
+} from "./persistence-manager";
