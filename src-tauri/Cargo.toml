@@ -21,6 +21,7 @@ uuid = { version = "1", features = ["v4"] }
 dirs = "6"
 zeroize = { version = "1", features = ["derive"] }
 base64 = "0.22"
+regex = "1"
 
 [features]
 gnome-keyring = []
