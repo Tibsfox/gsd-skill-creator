@@ -21,3 +21,11 @@ export {
   getCurrentVersion,
   migrate,
 } from './migrations.js';
+
+export {
+  ProvenanceTracker,
+  type ArtifactRecord,
+  type SourceRecord,
+  type ProvenanceChain,
+  type VerifyResult,
+} from './provenance-chain.js';
