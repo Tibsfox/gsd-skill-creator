@@ -1,3 +1,23 @@
+//! Security Scanner -- CVE-Informed Staging Gate
+//!
+//! # Safety Invariants
+//!
+//! - `ScanVerdict::Quarantine` carries NO release mechanism. Content can only be
+//!   released by user action via the dashboard or CLI. No Tauri command, IPC event,
+//!   or agent action can programmatically release quarantine.
+//!
+//! - The scanner reads files but NEVER executes, evaluates, or interprets content.
+//!   No `eval`, no shell expansion, no dynamic loading.
+//!
+//! - Scanner runs outside the agent sandbox: it needs read access to incoming
+//!   content before sandboxing. It does NOT run within any agent's namespace.
+//!
+//! # Pattern References
+//!
+//! - SEC-001: CVE-2025-59536 -- settings.json hook override
+//! - SEC-002: CVE-2026-21852 -- ANTHROPIC_BASE_URL redirect
+//! - SEC-003 through SEC-008: Additional attack vectors (no CVE assigned)
+
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 use std::fs;
@@ -16,6 +36,17 @@ pub enum SecuritySeverity {
     Critical,
     High,
     Medium,
+}
+
+impl SecuritySeverity {
+    /// Return a lowercase string representation for JSON reports.
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            SecuritySeverity::Critical => "critical",
+            SecuritySeverity::High => "high",
+            SecuritySeverity::Medium => "medium",
+        }
+    }
 }
 
 /// Action to take when a pattern is detected.
