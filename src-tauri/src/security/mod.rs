@@ -6,6 +6,12 @@
 //!
 //! TypeScript equivalent: src/types/security.ts
 
+pub mod keystore;
+pub mod proxy;
+pub mod proxy_server;
 pub mod sandbox;
 pub mod types;
 pub use types::*;
+
+#[cfg(test)]
+mod tests;
