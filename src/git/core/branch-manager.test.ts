@@ -4,31 +4,27 @@
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-const mockExecFile = vi.fn();
-const mockExistsSync = vi.fn();
-const mockRmSync = vi.fn();
-const mockMkdirSync = vi.fn();
+const {
+  mockExecFile,
+  mockAssertClean,
+  mockDetectState,
+  mockLoadConfig,
+} = vi.hoisted(() => ({
+  mockExecFile: vi.fn(),
+  mockAssertClean: vi.fn(),
+  mockDetectState: vi.fn(),
+  mockLoadConfig: vi.fn(),
+}));
 
 vi.mock('node:child_process', () => ({
   execFile: mockExecFile,
 }));
 
-vi.mock('node:fs', () => ({
-  existsSync: mockExistsSync,
-  rmSync: mockRmSync,
-  mkdirSync: mockMkdirSync,
-}));
-
-// Mock state-machine
-const mockAssertClean = vi.fn();
-const mockDetectState = vi.fn();
 vi.mock('./state-machine.js', () => ({
   assertClean: (...args: unknown[]) => mockAssertClean(...args),
   detectState: (...args: unknown[]) => mockDetectState(...args),
 }));
 
-// Mock repo-manager
-const mockLoadConfig = vi.fn();
 vi.mock('./repo-manager.js', () => ({
   loadConfig: (...args: unknown[]) => mockLoadConfig(...args),
 }));
@@ -190,7 +186,7 @@ describe('createBranch', () => {
     const configCall = mockExecFile.mock.calls.find(
       (call: unknown[]) => {
         const args = call[1] as string[];
-        return args.includes('config') && args.includes('pushRemote');
+        return args.includes('config') && args.some((a: string) => a.includes('pushRemote'));
       },
     );
     expect(configCall).toBeDefined();
@@ -273,11 +269,9 @@ describe('removeBranch', () => {
   });
 
   it('allows force delete of unmerged branch', async () => {
-    // git worktree list --porcelain
+    // git worktree list --porcelain (no worktree)
     execFileResolves('');
-    // git merge-base --is-ancestor fails
-    execFileRejects('not ancestor');
-    // git branch -D (force)
+    // git branch -D (force — skips merge check entirely)
     execFileResolves('');
 
     await expect(removeBranch('/repo', 'feature/unmerged', { force: true })).resolves.not.toThrow();
