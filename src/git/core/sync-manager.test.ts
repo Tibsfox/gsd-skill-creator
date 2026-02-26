@@ -4,23 +4,29 @@
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-const mockExecFile = vi.fn();
+const {
+  mockExecFile,
+  mockAssertClean,
+  mockAssertState,
+  mockLoadConfig,
+  mockSaveConfig,
+} = vi.hoisted(() => ({
+  mockExecFile: vi.fn(),
+  mockAssertClean: vi.fn(),
+  mockAssertState: vi.fn(),
+  mockLoadConfig: vi.fn(),
+  mockSaveConfig: vi.fn(),
+}));
 
 vi.mock('node:child_process', () => ({
   execFile: mockExecFile,
 }));
 
-// Mock state-machine
-const mockAssertClean = vi.fn();
-const mockAssertState = vi.fn();
 vi.mock('./state-machine.js', () => ({
   assertClean: (...args: unknown[]) => mockAssertClean(...args),
   assertState: (...args: unknown[]) => mockAssertState(...args),
 }));
 
-// Mock repo-manager
-const mockLoadConfig = vi.fn();
-const mockSaveConfig = vi.fn();
 vi.mock('./repo-manager.js', () => ({
   loadConfig: (...args: unknown[]) => mockLoadConfig(...args),
   saveConfig: (...args: unknown[]) => mockSaveConfig(...args),
