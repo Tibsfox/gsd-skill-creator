@@ -1,17 +1,22 @@
 /**
- * Skill Migration Analyzer -- converts existing skill metadata and content
- * into complex plane positions.
+ * Skill Migration System -- analyzer and executor for migrating existing
+ * skills to complex plane positions.
  *
  * Provides:
  * - SkillMigrationAnalyzer class with analyzeSkill() and enhanceWithHistory()
+ * - PlaneMigration executor class with migrateAll() and convertSkillToMetadata()
+ * - handleMigratePlaneCommand CLI handler
  * - 6 exported content analysis helpers (pure functions)
- * - ExistingSkillMetadata, InferredPosition, ActivationRecord types
- *
- * Only imports from sibling plane modules (types.js, arithmetic.js).
+ * - ExistingSkillMetadata, InferredPosition, ActivationRecord,
+ *   MigrationOptions, MigrationDetail, MigrationReport types
  */
 
 import { type SkillPosition, MATURITY_THRESHOLD } from './types.js';
-import { estimateTheta, estimateRadius } from './arithmetic.js';
+import { createPosition, classifyByVersine, estimateTheta, estimateRadius } from './arithmetic.js';
+import { PositionStore } from './position-store.js';
+import { SkillStore } from '../storage/skill-store.js';
+import type { Skill } from '../types/skill.js';
+import { getExtension } from '../types/extensions.js';
 
 // ============================================================================
 // Types
@@ -268,5 +273,198 @@ export class SkillMigrationAnalyzer {
       confidence: 'high',
       source: 'history_enhanced',
     };
+  }
+}
+
+// ============================================================================
+// Migration Executor Types
+// ============================================================================
+
+/**
+ * Options controlling migration behavior.
+ */
+export interface MigrationOptions {
+  dryRun: boolean;
+  force: boolean;
+  includeHistory: boolean;
+  verbose: boolean;
+}
+
+/**
+ * Per-skill migration result detail.
+ */
+export interface MigrationDetail {
+  skillId: string;
+  position?: SkillPosition;
+  confidence?: string;
+  source?: string;
+  error?: string;
+}
+
+/**
+ * Aggregate migration report.
+ */
+export interface MigrationReport {
+  total: number;
+  migrated: number;
+  skipped: number;
+  errors: number;
+  details: MigrationDetail[];
+}
+
+// ============================================================================
+// PlaneMigration Executor
+// ============================================================================
+
+/**
+ * Orchestrates bulk migration of existing skills to complex plane positions.
+ *
+ * - Idempotent: second run with same skills produces 0 migrated
+ * - Non-destructive: never modifies SKILL.md files
+ * - Error-isolated: failure in one skill does not block others
+ */
+export class PlaneMigration {
+  constructor(
+    private analyzer: SkillMigrationAnalyzer,
+    private positionStore: PositionStore,
+    private skillStore: SkillStore,
+  ) {}
+
+  /**
+   * Convert a Skill object (from SkillStore) into ExistingSkillMetadata
+   * for the analyzer.
+   */
+  convertSkillToMetadata(skill: Skill): ExistingSkillMetadata {
+    const ext = getExtension(skill.metadata);
+    return {
+      id: skill.metadata.name,
+      triggers: ext.triggers ?? skill.metadata.triggers,
+      content: skill.body,
+      extensions: {
+        promotionLevel: (ext as Record<string, unknown>).promotionLevel as string | undefined,
+        version: ext.version,
+        learning: ext.learning
+          ? { applicationCount: ext.learning.applicationCount }
+          : undefined,
+      },
+    };
+  }
+
+  /**
+   * Migrate all skills to complex plane positions.
+   */
+  async migrateAll(options?: Partial<MigrationOptions>): Promise<MigrationReport> {
+    const opts: MigrationOptions = {
+      dryRun: options?.dryRun ?? false,
+      force: options?.force ?? false,
+      includeHistory: options?.includeHistory ?? true,
+      verbose: options?.verbose ?? false,
+    };
+
+    const skillNames = await this.skillStore.list();
+    const report: MigrationReport = {
+      total: skillNames.length,
+      migrated: 0,
+      skipped: 0,
+      errors: 0,
+      details: [],
+    };
+
+    for (const name of skillNames) {
+      // Skip if already positioned (unless force)
+      if (!opts.force && this.positionStore.get(name)) {
+        report.skipped++;
+        continue;
+      }
+
+      try {
+        const skill = await this.skillStore.read(name);
+        const metadata = this.convertSkillToMetadata(skill);
+
+        // Analyze content
+        const inferred = this.analyzer.analyzeSkill(metadata);
+
+        // Note: activation history loading is a future enhancement.
+        // When Phase 366 wires everything, history can be loaded and
+        // passed to enhanceWithHistory() here.
+
+        // Create position
+        const position = createPosition(
+          inferred.theta,
+          inferred.radius,
+          0,  // No angular velocity for migrated skills
+        );
+
+        if (!opts.dryRun) {
+          this.positionStore.set(name, position);
+        }
+
+        report.migrated++;
+        report.details.push({
+          skillId: name,
+          position,
+          confidence: inferred.confidence,
+          source: inferred.source,
+        });
+      } catch (error) {
+        report.errors++;
+        report.details.push({
+          skillId: name,
+          error: error instanceof Error ? error.message : String(error),
+        });
+      }
+    }
+
+    if (!opts.dryRun && report.migrated > 0) {
+      await this.positionStore.save();
+    }
+
+    return report;
+  }
+}
+
+// ============================================================================
+// CLI Handler
+// ============================================================================
+
+/**
+ * CLI handler for the `migrate-plane` command.
+ *
+ * Creates SkillStore, PositionStore, SkillMigrationAnalyzer, runs migration,
+ * and prints summary to console.
+ */
+export async function handleMigratePlaneCommand(
+  options: Partial<MigrationOptions> = {},
+): Promise<void> {
+  const skillStore = new SkillStore();
+  const positionStore = new PositionStore();
+  const analyzer = new SkillMigrationAnalyzer();
+  const migration = new PlaneMigration(analyzer, positionStore, skillStore);
+
+  await positionStore.load();
+
+  console.log('Analyzing existing skills for complex plane migration...');
+  const report = await migration.migrateAll(options);
+
+  const dryRunLabel = options.dryRun ? '(DRY RUN) ' : '';
+  console.log(`\nMigration ${dryRunLabel}Complete:`);
+  console.log(`  Total skills: ${report.total}`);
+  console.log(`  Migrated: ${report.migrated}`);
+  console.log(`  Skipped (already positioned): ${report.skipped}`);
+  console.log(`  Errors: ${report.errors}`);
+
+  if (options.verbose) {
+    for (const detail of report.details) {
+      if (detail.position) {
+        const zone = classifyByVersine(detail.position);
+        console.log(
+          `  ${detail.skillId}: theta=${detail.position.theta.toFixed(3)} ` +
+          `r=${detail.position.radius.toFixed(3)} [${zone}] ` +
+          `(${detail.confidence}, ${detail.source})`,
+        );
+      } else if (detail.error) {
+        console.log(`  ${detail.skillId}: ERROR -- ${detail.error}`);
+      }
+    }
   }
 }

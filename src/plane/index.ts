@@ -18,3 +18,4 @@ export * from './promotion.js';
 export * from './refinement-wrapper.js';
 export * from './metrics.js';
 export * from './dashboard.js';
+export * from './migration.js';
