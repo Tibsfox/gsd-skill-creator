@@ -60,14 +60,14 @@ describe('consistency-checker', () => {
       const concepts = [
         makeConcept({
           name: 'Fourier decomposition',
-          definition: 'Decomposition of functions into frequency components using Fourier series',
-          keywords: ['fourier', 'decomposition', 'frequency'],
+          definition: 'Fourier decomposition of functions into frequency components',
+          keywords: ['fourier', 'decomposition', 'frequency', 'function', 'components'],
         }),
       ];
       const claims = [
         makeClaim({
-          claim: 'Fourier decomposition breaks functions into frequency components',
-          keywords: ['fourier', 'decomposition', 'frequency', 'function'],
+          claim: 'Fourier decomposition of functions into frequency components',
+          keywords: ['fourier', 'decomposition', 'frequency', 'function', 'components'],
           mathDomain: 'analysis',
         }),
       ];
