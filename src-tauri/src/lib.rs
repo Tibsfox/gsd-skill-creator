@@ -58,6 +58,7 @@ pub fn run() {
             commands::sandbox::get_sandbox_platform,
             commands::sandbox::configure_sandbox,
             commands::sandbox::get_sandbox_status,
+            commands::sandbox::verify_sandbox,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
