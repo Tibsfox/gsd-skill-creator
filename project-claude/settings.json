@@ -24,6 +24,14 @@
             "command": "node .claude/hooks/gsd-inject-snapshot.js"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/session-state.sh"
+          }
+        ]
       }
     ],
     "SessionEnd": [
@@ -40,6 +48,28 @@
           {
             "type": "command",
             "command": "node .claude/hooks/gsd-snapshot-session.js"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/validate-commit.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/phase-boundary-check.sh"
           }
         ]
       }
