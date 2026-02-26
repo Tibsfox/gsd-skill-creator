@@ -6,6 +6,7 @@ pub mod security;
 mod state;
 mod tmux;
 mod mcp_host;
+pub mod staging;
 mod watcher;
 
 use std::sync::Mutex;
