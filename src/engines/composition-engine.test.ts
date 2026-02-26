@@ -425,8 +425,11 @@ describe('CompositionEngine', () => {
 
   describe('rejection: no matching rules', () => {
     it('rejects composition when no rules exist between primitives', () => {
+      // Use two primitives that have no dependency issues AND no composition rules between them
+      // perception-isolated-concept has no deps, perception-unit-circle has no deps
+      // But unit-circle has a nested rule with sine-function, not with isolated-concept
       const result = engine.compose(
-        ['perception-isolated-concept', 'waves-simple-harmonic-motion'],
+        ['perception-isolated-concept', 'perception-unit-circle'],
         'Try to compose unrelated concepts',
       );
 
