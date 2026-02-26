@@ -315,10 +315,69 @@ impl SecurityScanner {
     /// and action guidance. Events are emitted per finding for dashboard consumption.
     pub fn scan_and_report(
         &self,
-        _content_root: &Path,
-        _content_source: &str,
+        content_root: &Path,
+        content_source: &str,
     ) -> SecurityFindingReport {
-        todo!("implement in 370-02 Task 1 (GREEN phase)")
+        let findings = self.scan(content_root);
+        let verdict = self.classify(&findings);
+
+        let verdict_str = match &verdict {
+            ScanVerdict::Clean => "clean",
+            ScanVerdict::Flagged(_) => "flagged",
+            ScanVerdict::Quarantine(_) => "quarantine",
+        };
+
+        // Emit one SecurityEvent per finding
+        let events: Vec<SecurityEvent> = findings
+            .iter()
+            .map(|f| SecurityEvent {
+                id: uuid::Uuid::new_v4().to_string(),
+                timestamp: timestamp_now(),
+                severity: match f.severity {
+                    SecuritySeverity::Critical => EventSeverity::Critical,
+                    SecuritySeverity::High => EventSeverity::Warning,
+                    SecuritySeverity::Medium => EventSeverity::Info,
+                },
+                source: EventSource::Staging,
+                event_type: "pattern_match".to_string(),
+                detail: serde_json::json!({
+                    "finding_id": f.id,
+                    "file": f.file,
+                    "line": f.line,
+                    "cve": f.cve_reference,
+                }),
+            })
+            .collect();
+
+        let action_required = match verdict_str {
+            "quarantine" => {
+                let critical_count = findings
+                    .iter()
+                    .filter(|f| matches!(f.severity, SecuritySeverity::Critical))
+                    .count();
+                format!(
+                    "Human review required. Content quarantined. \
+                     Only a user (not an agent) can release quarantined content. \
+                     {} critical finding(s) detected.",
+                    critical_count
+                )
+            }
+            "flagged" => format!(
+                "Content flagged with {} advisory finding(s). \
+                 Review recommended before proceeding.",
+                findings.len()
+            ),
+            _ => "No action required.".to_string(),
+        };
+
+        SecurityFindingReport {
+            scan_timestamp: timestamp_now(),
+            content_source: content_source.to_string(),
+            verdict: verdict_str.to_string(),
+            findings,
+            events,
+            action_required,
+        }
     }
 
     /// Classify findings into a verdict.
@@ -346,6 +405,65 @@ impl SecurityScanner {
 // ============================================================================
 // Internal helpers
 // ============================================================================
+
+/// Produce an RFC 3339 timestamp string using std::time::SystemTime.
+fn timestamp_now() -> String {
+    use std::time::{SystemTime, UNIX_EPOCH};
+
+    let duration = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap_or_default();
+    let secs = duration.as_secs();
+
+    // Convert epoch seconds to date components (simplified UTC)
+    let days = secs / 86400;
+    let time_of_day = secs % 86400;
+    let hours = time_of_day / 3600;
+    let minutes = (time_of_day % 3600) / 60;
+    let seconds = time_of_day % 60;
+
+    // Days since epoch to year/month/day (simplified Gregorian)
+    let mut y = 1970i64;
+    let mut remaining_days = days as i64;
+
+    loop {
+        let days_in_year = if is_leap_year(y) { 366 } else { 365 };
+        if remaining_days < days_in_year {
+            break;
+        }
+        remaining_days -= days_in_year;
+        y += 1;
+    }
+
+    let month_days = if is_leap_year(y) {
+        [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    } else {
+        [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    };
+
+    let mut m = 0usize;
+    for (i, &days_in_month) in month_days.iter().enumerate() {
+        if remaining_days < days_in_month as i64 {
+            m = i;
+            break;
+        }
+        remaining_days -= days_in_month as i64;
+    }
+
+    format!(
+        "{:04}-{:02}-{:02}T{:02}:{:02}:{:02}Z",
+        y,
+        m + 1,
+        remaining_days + 1,
+        hours,
+        minutes,
+        seconds
+    )
+}
+
+fn is_leap_year(y: i64) -> bool {
+    (y % 4 == 0 && y % 100 != 0) || y % 400 == 0
+}
 
 /// Check if content contains ANTHROPIC_BASE_URL pointing to a non-Anthropic domain.
 /// Returns true if the URL is suspicious (NOT anthropic.com), false if safe.
