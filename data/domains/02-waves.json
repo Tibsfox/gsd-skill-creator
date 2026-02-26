@@ -1,0 +1,1486 @@
+{
+  "domain": "waves",
+  "version": "1.35.0",
+  "primitives": [
+    {
+      "id": "waves-simple-harmonic-motion",
+      "name": "Simple Harmonic Motion",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 4,
+      "section": "4.1",
+      "planePosition": { "real": -0.4, "imaginary": -0.1 },
+      "formalStatement": "Simple harmonic motion (SHM) is periodic motion where the restoring force is proportional to displacement: F = -kx. The solution is x(t) = A*cos(omega*t + phi) where omega = sqrt(k/m).",
+      "computationalForm": "x(t) = A*cos(omega*t + phi), v(t) = -A*omega*sin(omega*t + phi), a(t) = -A*omega^2*cos(omega*t + phi). Period T = 2*pi/omega.",
+      "prerequisites": ["Sine function", "Cosine function", "Amplitude", "Phase"],
+      "dependencies": [
+        {
+          "target": "perception-sine-function",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "SHM position is described by sinusoidal functions"
+        },
+        {
+          "target": "perception-cosine-function",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "SHM uses cosine for position when starting from maximum displacement"
+        },
+        {
+          "target": "perception-amplitude",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Amplitude determines the maximum displacement"
+        }
+      ],
+      "enables": ["waves-wave-function", "waves-frequency", "waves-period", "change-harmonic-oscillator"],
+      "compositionRules": [
+        {
+          "with": "waves-frequency",
+          "yields": "Complete SHM description with temporal period and spatial amplitude",
+          "type": "parallel",
+          "conditions": ["When describing the full time evolution of an oscillating system"],
+          "example": "A mass on a spring with k=4 N/m, m=1 kg: omega=2 rad/s, T=pi s"
+        }
+      ],
+      "applicabilityPatterns": ["modeling back-and-forth motion of a pendulum or spring", "any system with a linear restoring force proportional to displacement"],
+      "keywords": ["SHM", "harmonic", "oscillation", "spring", "pendulum", "restoring force"],
+      "tags": ["waves", "mechanics", "oscillation"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-frequency",
+      "name": "Frequency",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 4,
+      "section": "4.1",
+      "planePosition": { "real": -0.5, "imaginary": -0.1 },
+      "formalStatement": "The frequency f of a periodic phenomenon is the number of complete cycles per unit time. f = 1/T where T is the period. Measured in hertz (Hz = cycles/second).",
+      "computationalForm": "f = 1/T = omega/(2*pi). omega = 2*pi*f. T = 1/f. For waves: f = v/lambda where v is wave speed and lambda is wavelength.",
+      "prerequisites": ["Simple harmonic motion"],
+      "dependencies": [
+        {
+          "target": "waves-simple-harmonic-motion",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Frequency characterizes the rate of repetition of SHM"
+        }
+      ],
+      "enables": ["waves-angular-frequency", "waves-wave-function", "waves-beat-frequency", "waves-fundamental-frequency"],
+      "compositionRules": [
+        {
+          "with": "waves-wavelength",
+          "yields": "Wave speed: v = f * lambda, connecting temporal and spatial periodicity",
+          "type": "parallel",
+          "conditions": ["When relating how fast a wave travels to its frequency and size"],
+          "example": "Sound at 440 Hz with wavelength 0.773 m travels at v = 440 * 0.773 = 340 m/s"
+        }
+      ],
+      "applicabilityPatterns": ["determining how many oscillations occur per second", "relating pitch of a sound to its physical frequency"],
+      "keywords": ["frequency", "hertz", "Hz", "cycles per second", "rate"],
+      "tags": ["waves", "measurement", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-period",
+      "name": "Period",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 4,
+      "section": "4.1",
+      "planePosition": { "real": -0.5, "imaginary": -0.15 },
+      "formalStatement": "The period T of a periodic function f is the smallest positive value such that f(t + T) = f(t) for all t. T is the duration of one complete cycle.",
+      "computationalForm": "T = 1/f = 2*pi/omega. For SHM with spring constant k and mass m: T = 2*pi*sqrt(m/k).",
+      "prerequisites": ["Frequency", "Periodicity of trigonometric functions"],
+      "dependencies": [
+        {
+          "target": "waves-frequency",
+          "type": "equivalent",
+          "strength": 1.0,
+          "description": "Period is the reciprocal of frequency"
+        },
+        {
+          "target": "perception-periodicity",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Period generalizes the concept of periodicity from trigonometric functions"
+        }
+      ],
+      "enables": ["waves-wave-function", "waves-standing-wave"],
+      "compositionRules": [
+        {
+          "with": "waves-frequency",
+          "yields": "Complete temporal characterization: T = 1/f, f = 1/T",
+          "type": "parallel",
+          "conditions": ["When switching between time-per-cycle and cycles-per-time descriptions"],
+          "example": "A guitar string vibrating at 440 Hz has period T = 1/440 = 2.27 ms"
+        }
+      ],
+      "applicabilityPatterns": ["measuring the time for one complete oscillation cycle", "determining how long before a periodic system returns to its initial state"],
+      "keywords": ["period", "cycle time", "duration", "T", "repetition interval"],
+      "tags": ["waves", "measurement", "temporal"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-angular-frequency",
+      "name": "Angular Frequency",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 4,
+      "section": "4.2",
+      "planePosition": { "real": -0.4, "imaginary": 0.0 },
+      "formalStatement": "Angular frequency omega = 2*pi*f = 2*pi/T measures the rate of angular change in radians per unit time. It is the natural frequency parameter for sinusoidal functions.",
+      "computationalForm": "omega = 2*pi*f = 2*pi/T. For SHM: omega = sqrt(k/m). y(t) = A*sin(omega*t + phi).",
+      "prerequisites": ["Frequency", "Radian measure"],
+      "dependencies": [
+        {
+          "target": "waves-frequency",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Angular frequency is 2*pi times ordinary frequency"
+        },
+        {
+          "target": "perception-radian-measure",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Angular frequency is measured in radians per second"
+        }
+      ],
+      "enables": ["waves-wave-function", "waves-wave-number"],
+      "compositionRules": [
+        {
+          "with": "perception-radian-measure",
+          "yields": "Natural sinusoidal parameterization: sin(omega*t) cycles at frequency f = omega/(2*pi)",
+          "type": "nested",
+          "conditions": ["When converting between angular and ordinary frequency"],
+          "example": "A 60 Hz signal has omega = 2*pi*60 = 377 rad/s"
+        }
+      ],
+      "applicabilityPatterns": ["expressing the rate of rotation or oscillation in radians per second", "simplifying equations of motion by eliminating factors of 2*pi"],
+      "keywords": ["angular frequency", "omega", "rad/s", "circular frequency"],
+      "tags": ["waves", "measurement", "angular"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-wave-function",
+      "name": "Wave Function",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 4,
+      "section": "4.2",
+      "planePosition": { "real": -0.4, "imaginary": 0.1 },
+      "formalStatement": "The general sinusoidal wave function is y(x,t) = A*sin(kx - omega*t + phi), describing a traveling wave with amplitude A, wave number k, angular frequency omega, and phase offset phi.",
+      "computationalForm": "y(x,t) = A*sin(kx - omega*t + phi). Phase velocity: v = omega/k = lambda*f. At fixed x: oscillation in time. At fixed t: snapshot of spatial wave.",
+      "prerequisites": ["Sine function", "Angular frequency", "Amplitude", "Phase"],
+      "dependencies": [
+        {
+          "target": "perception-sine-function",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Wave function is built on the sine function"
+        },
+        {
+          "target": "waves-angular-frequency",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Temporal component uses angular frequency"
+        },
+        {
+          "target": "perception-amplitude",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Amplitude scales the wave"
+        },
+        {
+          "target": "perception-phase",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Phase determines the initial offset"
+        }
+      ],
+      "enables": ["waves-superposition-principle", "waves-wavelength", "waves-wave-equation", "waves-standing-wave"],
+      "compositionRules": [
+        {
+          "with": "waves-wave-number",
+          "yields": "Complete space-time wave description: y(x,t) = A*sin(kx - omega*t)",
+          "type": "parallel",
+          "conditions": ["When modeling a wave propagating through space"],
+          "example": "An electromagnetic wave: E(x,t) = E0*sin(kx - omega*t) traveling at speed c = omega/k"
+        }
+      ],
+      "applicabilityPatterns": ["describing a sinusoidal disturbance propagating through a medium", "modeling light, sound, or any traveling periodic signal"],
+      "keywords": ["wave function", "traveling wave", "sinusoidal", "propagation"],
+      "tags": ["waves", "definition", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-wavelength",
+      "name": "Wavelength",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 4,
+      "section": "4.2",
+      "planePosition": { "real": -0.5, "imaginary": -0.05 },
+      "formalStatement": "The wavelength lambda is the spatial period of a wave: the distance over which the wave shape repeats. lambda = v/f = 2*pi/k where v is phase velocity, f is frequency, and k is wave number.",
+      "computationalForm": "lambda = v/f = 2*pi/k = v*T. For light: lambda = c/f. For sound in air: lambda ~ 340/f meters.",
+      "prerequisites": ["Wave function", "Frequency"],
+      "dependencies": [
+        {
+          "target": "waves-wave-function",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Wavelength is the spatial period of the wave function"
+        },
+        {
+          "target": "waves-frequency",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Wavelength relates to frequency via wave speed"
+        }
+      ],
+      "enables": ["waves-wave-number", "waves-standing-wave"],
+      "compositionRules": [
+        {
+          "with": "waves-frequency",
+          "yields": "Wave speed relation: v = lambda * f",
+          "type": "parallel",
+          "conditions": ["When computing the speed of wave propagation"],
+          "example": "Radio waves at 100 MHz: lambda = 3e8/1e8 = 3 meters"
+        }
+      ],
+      "applicabilityPatterns": ["measuring the spatial extent of one cycle of a wave", "determining the physical size of a wave from its frequency"],
+      "keywords": ["wavelength", "lambda", "spatial period", "cycle length"],
+      "tags": ["waves", "measurement", "spatial"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-sum-to-product",
+      "name": "Sum-to-Product Formulas",
+      "type": "identity",
+      "domain": "waves",
+      "chapter": 4,
+      "section": "4.3",
+      "planePosition": { "real": -0.3, "imaginary": 0.2 },
+      "formalStatement": "sin(A) + sin(B) = 2*sin((A+B)/2)*cos((A-B)/2). cos(A) + cos(B) = 2*cos((A+B)/2)*cos((A-B)/2). These convert sums of sinusoids into products.",
+      "computationalForm": "sin(A)+sin(B) = 2*sin((A+B)/2)*cos((A-B)/2). cos(A)+cos(B) = 2*cos((A+B)/2)*cos((A-B)/2). sin(A)-sin(B) = 2*cos((A+B)/2)*sin((A-B)/2).",
+      "prerequisites": ["Sine function", "Cosine function", "Double angle formulas"],
+      "dependencies": [
+        {
+          "target": "perception-sine-function",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Formulas involve sine"
+        },
+        {
+          "target": "perception-cosine-function",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Formulas involve cosine"
+        },
+        {
+          "target": "perception-double-angle-formulas",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Derivable from addition formulas which relate to double angle identities"
+        }
+      ],
+      "enables": ["waves-beat-frequency", "waves-constructive-destructive-interference"],
+      "compositionRules": [
+        {
+          "with": "waves-superposition-principle",
+          "yields": "Analysis of combined waves: sum of two sinusoids reveals beat and carrier frequencies",
+          "type": "sequential",
+          "conditions": ["When two waves of nearly equal frequency are added"],
+          "example": "sin(440*t) + sin(442*t) = 2*cos(t)*sin(441*t), producing beats at 2 Hz"
+        }
+      ],
+      "applicabilityPatterns": ["analyzing the combination of two sinusoidal signals at different frequencies", "detecting beat frequencies from the superposition of close-frequency waves"],
+      "keywords": ["sum-to-product", "trigonometric identity", "beat", "combination"],
+      "tags": ["trigonometry", "identity", "waves"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-product-to-sum",
+      "name": "Product-to-Sum Formulas",
+      "type": "identity",
+      "domain": "waves",
+      "chapter": 4,
+      "section": "4.3",
+      "planePosition": { "real": -0.3, "imaginary": 0.2 },
+      "formalStatement": "sin(A)*sin(B) = [cos(A-B) - cos(A+B)]/2. cos(A)*cos(B) = [cos(A-B) + cos(A+B)]/2. sin(A)*cos(B) = [sin(A+B) + sin(A-B)]/2.",
+      "computationalForm": "sin(A)*cos(B) = [sin(A+B) + sin(A-B)]/2. Used to simplify products of trig functions into sums, especially for integration.",
+      "prerequisites": ["Sum-to-product formulas"],
+      "dependencies": [
+        {
+          "target": "waves-sum-to-product",
+          "type": "equivalent",
+          "strength": 0.9,
+          "description": "Product-to-sum formulas are the algebraic inverses of sum-to-product formulas"
+        }
+      ],
+      "enables": ["change-integration-techniques"],
+      "compositionRules": [
+        {
+          "with": "waves-sum-to-product",
+          "yields": "Complete toolkit for converting between product and sum forms of trigonometric expressions",
+          "type": "parallel",
+          "conditions": ["When simplifying trigonometric expressions for integration or analysis"],
+          "example": "integral sin(3x)*cos(5x) dx = integral [sin(8x) + sin(-2x)]/2 dx"
+        }
+      ],
+      "applicabilityPatterns": ["simplifying products of trigonometric functions for integration", "analyzing amplitude modulation as sum of two frequencies"],
+      "keywords": ["product-to-sum", "trigonometric identity", "modulation", "simplification"],
+      "tags": ["trigonometry", "identity", "waves"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-superposition-principle",
+      "name": "Superposition Principle",
+      "type": "theorem",
+      "domain": "waves",
+      "chapter": 4,
+      "section": "4.4",
+      "planePosition": { "real": -0.5, "imaginary": 0.1 },
+      "formalStatement": "For linear systems, the net response at a given point caused by two or more stimuli is the sum of the responses that would have been caused by each stimulus individually. For waves: y_total(x,t) = y_1(x,t) + y_2(x,t) + ...",
+      "computationalForm": "y_total = sum_i y_i. If y_i = A_i*sin(k_i*x - omega_i*t + phi_i), then y_total = sum A_i*sin(k_i*x - omega_i*t + phi_i). Holds for linear wave equations.",
+      "prerequisites": ["Wave function"],
+      "dependencies": [
+        {
+          "target": "waves-wave-function",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Superposition applies to wave functions"
+        }
+      ],
+      "enables": ["waves-constructive-destructive-interference", "waves-standing-wave-formation", "waves-fourier-series-preview", "change-integral-superposition"],
+      "compositionRules": [
+        {
+          "with": "waves-constructive-destructive-interference",
+          "yields": "Complete interference analysis: constructive when in-phase, destructive when out-of-phase",
+          "type": "sequential",
+          "conditions": ["When multiple waves interact at the same point in space"],
+          "example": "Two speakers playing the same note: loud spots (constructive) and quiet spots (destructive)"
+        }
+      ],
+      "applicabilityPatterns": ["adding together multiple wave sources to find the combined effect", "analyzing interference patterns from multiple coherent sources"],
+      "keywords": ["superposition", "linear", "addition", "interference", "combination"],
+      "tags": ["waves", "theorem", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-phasor-representation",
+      "name": "Phasor Representation",
+      "type": "technique",
+      "domain": "waves",
+      "chapter": 4,
+      "section": "4.4",
+      "planePosition": { "real": -0.3, "imaginary": 0.15 },
+      "formalStatement": "A sinusoidal signal A*cos(omega*t + phi) is represented as a complex number (phasor) A*e^(i*phi) in the complex plane. Phasor addition corresponds to vector addition of rotating vectors, simplifying the analysis of combined sinusoids.",
+      "computationalForm": "Phasor: P = A*e^(i*phi). Signal: Re(P*e^(i*omega*t)) = A*cos(omega*t + phi). Sum: P_total = P_1 + P_2 = A_1*e^(i*phi_1) + A_2*e^(i*phi_2).",
+      "prerequisites": ["Complex numbers", "Euler's formula", "Wave function"],
+      "dependencies": [
+        {
+          "target": "perception-complex-numbers",
+          "type": "applies",
+          "strength": 0.9,
+          "description": "Phasors are complex numbers representing sinusoidal signals"
+        },
+        {
+          "target": "perception-eulers-formula",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Phasor representation is based on Euler's formula"
+        },
+        {
+          "target": "waves-wave-function",
+          "type": "applies",
+          "strength": 0.8,
+          "description": "Phasors represent sinusoidal wave functions"
+        }
+      ],
+      "enables": ["waves-fourier-series-preview"],
+      "compositionRules": [
+        {
+          "with": "waves-superposition-principle",
+          "yields": "Adding sinusoids by vector addition of their phasors",
+          "type": "sequential",
+          "conditions": ["When combining multiple sinusoidal signals at the same frequency"],
+          "example": "Two signals 3*cos(t) + 4*cos(t+pi/2): phasors 3+4i, |phasor_sum| = 5, combined signal = 5*cos(t + arctan(4/3))"
+        }
+      ],
+      "applicabilityPatterns": ["simplifying the addition of sinusoidal signals using complex arithmetic", "analyzing AC circuits where voltages and currents are sinusoidal"],
+      "keywords": ["phasor", "rotating vector", "complex representation", "AC circuit"],
+      "tags": ["waves", "technique", "complex-analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-harmonic-series",
+      "name": "Harmonic Series",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 5,
+      "section": "5.1",
+      "planePosition": { "real": -0.4, "imaginary": 0.05 },
+      "formalStatement": "The harmonic series of a fundamental frequency f_1 consists of integer multiples: f_n = n * f_1 for n = 1, 2, 3, ... The nth harmonic has frequency n times the fundamental.",
+      "computationalForm": "f_n = n * f_1. Wavelengths: lambda_n = lambda_1 / n. String fixed at both ends: f_n = n * v/(2L) where v is wave speed, L is string length.",
+      "prerequisites": ["Fundamental frequency", "Natural numbers"],
+      "dependencies": [
+        {
+          "target": "waves-fundamental-frequency",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Harmonic series is built from multiples of the fundamental"
+        },
+        {
+          "target": "perception-natural-numbers",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Harmonics are indexed by natural number multiples"
+        }
+      ],
+      "enables": ["waves-overtones", "waves-timbre", "waves-fourier-series-preview"],
+      "compositionRules": [
+        {
+          "with": "waves-superposition-principle",
+          "yields": "Complex tones: real sounds as sums of harmonics with varying amplitudes",
+          "type": "nested",
+          "conditions": ["When analyzing the frequency content of a musical instrument's sound"],
+          "example": "A clarinet emphasizes odd harmonics: f, 3f, 5f, 7f with decreasing amplitudes"
+        }
+      ],
+      "applicabilityPatterns": ["determining the frequency content of a vibrating string or air column", "understanding why different instruments sound different even playing the same note"],
+      "keywords": ["harmonic", "overtone", "multiple", "frequency ratio", "partials"],
+      "tags": ["waves", "music", "spectral"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-fundamental-frequency",
+      "name": "Fundamental Frequency",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 5,
+      "section": "5.1",
+      "planePosition": { "real": -0.5, "imaginary": -0.05 },
+      "formalStatement": "The fundamental frequency f_1 is the lowest resonant frequency of a vibrating system. For a string of length L with wave speed v: f_1 = v/(2L). All higher harmonics are integer multiples of f_1.",
+      "computationalForm": "f_1 = v/(2L) for a string. f_1 = v/(4L) for a pipe closed at one end. f_1 = v/(2L) for a pipe open at both ends.",
+      "prerequisites": ["Frequency", "Simple harmonic motion"],
+      "dependencies": [
+        {
+          "target": "waves-frequency",
+          "type": "specializes",
+          "strength": 0.9,
+          "description": "Fundamental frequency is the specific lowest frequency of a resonant system"
+        },
+        {
+          "target": "waves-simple-harmonic-motion",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Resonant systems exhibit harmonic motion at their fundamental"
+        }
+      ],
+      "enables": ["waves-harmonic-series", "waves-overtones", "waves-resonance-conditions"],
+      "compositionRules": [
+        {
+          "with": "waves-harmonic-series",
+          "yields": "Complete spectral description of a vibrating system: f_n = n * f_1",
+          "type": "sequential",
+          "conditions": ["When determining all resonant frequencies of a vibrating body"],
+          "example": "Guitar A string: f_1 = 110 Hz, harmonics at 220, 330, 440, ... Hz"
+        }
+      ],
+      "applicabilityPatterns": ["finding the lowest pitch produced by a vibrating string or air column", "tuning musical instruments to a specific pitch"],
+      "keywords": ["fundamental", "first harmonic", "lowest frequency", "pitch", "resonance"],
+      "tags": ["waves", "music", "resonance"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-overtones",
+      "name": "Overtones",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 5,
+      "section": "5.1",
+      "planePosition": { "real": -0.4, "imaginary": 0.0 },
+      "formalStatement": "Overtones are the frequencies of vibration above the fundamental. The nth overtone is the (n+1)th harmonic: f_{overtone_n} = (n+1)*f_1. The first overtone is the second harmonic.",
+      "computationalForm": "1st overtone = 2*f_1 (octave above fundamental). 2nd overtone = 3*f_1. Relative amplitudes determine the timbre of the sound.",
+      "prerequisites": ["Harmonic series", "Fundamental frequency"],
+      "dependencies": [
+        {
+          "target": "waves-harmonic-series",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Overtones are the harmonics above the fundamental"
+        },
+        {
+          "target": "waves-fundamental-frequency",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Overtones are defined relative to the fundamental"
+        }
+      ],
+      "enables": ["waves-timbre"],
+      "compositionRules": [
+        {
+          "with": "waves-timbre",
+          "yields": "Sound character: the relative strengths of overtones determine instrument identity",
+          "type": "parallel",
+          "conditions": ["When analyzing or synthesizing instrument sounds"],
+          "example": "A flute has weak overtones (nearly pure tone), a violin has strong overtones (rich tone)"
+        }
+      ],
+      "applicabilityPatterns": ["analyzing the spectral content of a musical note beyond its fundamental pitch", "understanding why a note played on different instruments sounds different"],
+      "keywords": ["overtone", "partial", "higher harmonic", "spectral content"],
+      "tags": ["waves", "music", "spectral"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-timbre",
+      "name": "Timbre",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 5,
+      "section": "5.2",
+      "planePosition": { "real": -0.5, "imaginary": -0.2 },
+      "formalStatement": "Timbre (tone color) is the quality of a sound that distinguishes different sources playing the same pitch at the same loudness. It is determined by the relative amplitudes and phases of the harmonics in the sound's spectrum.",
+      "computationalForm": "Timbre is characterized by the spectral envelope: {A_n} where sound = sum A_n * sin(n*omega_1*t + phi_n). Different {A_n} profiles = different timbres.",
+      "prerequisites": ["Overtones", "Harmonic series"],
+      "dependencies": [
+        {
+          "target": "waves-overtones",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Timbre is determined by the pattern of overtones"
+        },
+        {
+          "target": "waves-harmonic-series",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "The harmonic series provides the frequency components that determine timbre"
+        }
+      ],
+      "enables": ["waves-fourier-series-preview"],
+      "compositionRules": [
+        {
+          "with": "waves-fourier-series-preview",
+          "yields": "Mathematical representation of any periodic sound as a Fourier series, with coefficients encoding timbre",
+          "type": "nested",
+          "conditions": ["When mathematically analyzing or synthesizing sound quality"],
+          "example": "Synthesizing a violin sound by setting A_n ~ 1/n and appropriate phases"
+        }
+      ],
+      "applicabilityPatterns": ["distinguishing between instruments playing the same note", "designing sound synthesis algorithms that mimic real instruments"],
+      "keywords": ["timbre", "tone color", "sound quality", "spectral envelope", "instrument"],
+      "tags": ["waves", "music", "perception"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-musical-interval-ratios",
+      "name": "Musical Interval Ratios",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 5,
+      "section": "5.2",
+      "planePosition": { "real": -0.5, "imaginary": -0.2 },
+      "formalStatement": "Musical intervals correspond to simple frequency ratios: octave (2:1), perfect fifth (3:2), perfect fourth (4:3), major third (5:4), minor third (6:5). Consonant intervals have small-integer ratios.",
+      "computationalForm": "Given base frequency f: octave = 2f, fifth = 3f/2, fourth = 4f/3, major third = 5f/4. Equal temperament: semitone ratio = 2^(1/12) ~ 1.0595.",
+      "prerequisites": ["Fundamental frequency", "Rational numbers"],
+      "dependencies": [
+        {
+          "target": "waves-fundamental-frequency",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Intervals are defined as ratios of fundamental frequencies"
+        },
+        {
+          "target": "perception-rational-numbers",
+          "type": "applies",
+          "strength": 0.7,
+          "description": "Musical intervals are rational number ratios"
+        }
+      ],
+      "enables": ["waves-resonance-conditions"],
+      "compositionRules": [
+        {
+          "with": "waves-harmonic-series",
+          "yields": "Natural occurrence of musical intervals within the harmonic series of a single note",
+          "type": "nested",
+          "conditions": ["When explaining why certain intervals sound consonant"],
+          "example": "The 2nd and 3rd harmonics (2f, 3f) form a perfect fifth (3:2 ratio)"
+        }
+      ],
+      "applicabilityPatterns": ["constructing musical scales from frequency ratios", "understanding consonance and dissonance in music theory"],
+      "keywords": ["interval", "octave", "fifth", "fourth", "consonance", "ratio", "temperament"],
+      "tags": ["waves", "music", "ratio"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-harmonic-series-divergence",
+      "name": "Divergence of the Harmonic Series",
+      "type": "theorem",
+      "domain": "waves",
+      "chapter": 5,
+      "section": "5.3",
+      "planePosition": { "real": -0.3, "imaginary": 0.25 },
+      "formalStatement": "The harmonic series sum_{n=1}^{infinity} 1/n = 1 + 1/2 + 1/3 + 1/4 + ... diverges to infinity. Despite each term approaching 0, the partial sums grow without bound.",
+      "computationalForm": "Proof by grouping: 1 + 1/2 + (1/3+1/4) + (1/5+1/6+1/7+1/8) + ... >= 1 + 1/2 + 1/2 + 1/2 + ... Partial sum S_n ~ ln(n) + gamma where gamma ~ 0.5772 (Euler-Mascheroni constant).",
+      "prerequisites": ["Harmonic series", "Natural numbers"],
+      "dependencies": [
+        {
+          "target": "waves-harmonic-series",
+          "type": "applies",
+          "strength": 0.7,
+          "description": "The mathematical harmonic series 1/n is named after musical harmonics"
+        },
+        {
+          "target": "perception-natural-numbers",
+          "type": "requires",
+          "strength": 0.6,
+          "description": "The series is indexed over natural numbers"
+        }
+      ],
+      "enables": ["change-improper-integral"],
+      "compositionRules": [
+        {
+          "with": "change-improper-integral",
+          "yields": "Integral test connection: integral of 1/x from 1 to infinity diverges, matching the harmonic series",
+          "type": "parallel",
+          "conditions": ["When using the integral test for series convergence"],
+          "example": "integral_1^N 1/x dx = ln(N) grows without bound, so sum 1/n diverges"
+        }
+      ],
+      "applicabilityPatterns": ["determining that a series with terms decreasing to zero can still diverge", "estimating how many terms of the harmonic series are needed to reach a given sum"],
+      "keywords": ["harmonic series", "divergence", "1/n", "Euler-Mascheroni", "slow growth"],
+      "tags": ["analysis", "series", "divergence"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-resonance-conditions",
+      "name": "Resonance Conditions",
+      "type": "theorem",
+      "domain": "waves",
+      "chapter": 5,
+      "section": "5.3",
+      "planePosition": { "real": -0.4, "imaginary": 0.1 },
+      "formalStatement": "Resonance occurs when a driving force oscillates at a natural frequency of the system. At resonance, energy transfer is maximized and amplitude reaches a peak. For a damped oscillator driven at frequency omega_d: maximum amplitude when omega_d = omega_0*sqrt(1 - 2*zeta^2).",
+      "computationalForm": "Resonance frequency: omega_r = omega_0 for undamped. Amplitude at resonance: A_max = F_0 / (2*m*omega_0*zeta) for light damping. Quality factor Q = omega_0 / (2*zeta*omega_0) = 1/(2*zeta).",
+      "prerequisites": ["Fundamental frequency", "Simple harmonic motion"],
+      "dependencies": [
+        {
+          "target": "waves-fundamental-frequency",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Resonance occurs at natural frequencies which include the fundamental"
+        },
+        {
+          "target": "waves-simple-harmonic-motion",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Resonance is a phenomenon of driven harmonic oscillators"
+        }
+      ],
+      "enables": ["waves-standing-wave", "change-harmonic-oscillator"],
+      "compositionRules": [
+        {
+          "with": "waves-simple-harmonic-motion",
+          "yields": "Driven damped oscillator: full analysis of forced vibrations including resonance peak",
+          "type": "sequential",
+          "conditions": ["When a periodic force drives a naturally oscillating system"],
+          "example": "A child pushing a swing at its natural frequency produces large amplitude oscillations"
+        }
+      ],
+      "applicabilityPatterns": ["predicting when a driven system will achieve maximum amplitude", "designing systems to either exploit or avoid resonance effects"],
+      "keywords": ["resonance", "natural frequency", "Q factor", "driven oscillation", "amplification"],
+      "tags": ["waves", "resonance", "dynamics"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-beat-frequency",
+      "name": "Beat Frequency",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 5,
+      "section": "5.3",
+      "planePosition": { "real": -0.4, "imaginary": -0.1 },
+      "formalStatement": "When two sinusoidal waves of frequencies f_1 and f_2 are superposed, the result exhibits amplitude modulation at the beat frequency f_beat = |f_1 - f_2|. Using sum-to-product: sin(2*pi*f_1*t) + sin(2*pi*f_2*t) = 2*cos(2*pi*f_beat/2 * t)*sin(2*pi*f_avg * t).",
+      "computationalForm": "f_beat = |f_1 - f_2|. f_average = (f_1 + f_2)/2. Perceived as a pulsating sound at rate f_beat with carrier at f_average.",
+      "prerequisites": ["Superposition principle", "Sum-to-product formulas", "Frequency"],
+      "dependencies": [
+        {
+          "target": "waves-superposition-principle",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Beats arise from the superposition of two waves"
+        },
+        {
+          "target": "waves-sum-to-product",
+          "type": "applies",
+          "strength": 0.9,
+          "description": "Sum-to-product identity reveals the beat and carrier frequencies"
+        },
+        {
+          "target": "waves-frequency",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Beat frequency is the difference of two frequencies"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "waves-superposition-principle",
+          "yields": "Practical tuning method: beats slow down and vanish when frequencies match",
+          "type": "sequential",
+          "conditions": ["When two nearly-equal frequencies combine"],
+          "example": "Tuning a guitar: 440 Hz + 442 Hz produces 2 beats per second"
+        }
+      ],
+      "applicabilityPatterns": ["tuning musical instruments by listening for beats to disappear", "measuring small frequency differences between two oscillators"],
+      "keywords": ["beat", "beating", "amplitude modulation", "frequency difference", "tuning"],
+      "tags": ["waves", "interference", "music"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-constructive-destructive-interference",
+      "name": "Constructive and Destructive Interference",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 5,
+      "section": "5.4",
+      "planePosition": { "real": -0.5, "imaginary": 0.0 },
+      "formalStatement": "When two waves meet: constructive interference occurs when they are in phase (phase difference = 2n*pi), amplitudes add; destructive interference when out of phase (phase difference = (2n+1)*pi), amplitudes cancel.",
+      "computationalForm": "Two waves A*sin(kx+phi_1) and A*sin(kx+phi_2): constructive when phi_2-phi_1 = 2n*pi (amplitude 2A), destructive when phi_2-phi_1 = (2n+1)*pi (amplitude 0). General: A_total = 2A*|cos((phi_2-phi_1)/2)|.",
+      "prerequisites": ["Superposition principle", "Phase"],
+      "dependencies": [
+        {
+          "target": "waves-superposition-principle",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Interference is a consequence of superposition"
+        },
+        {
+          "target": "perception-phase",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "The type of interference depends on the phase relationship"
+        }
+      ],
+      "enables": ["waves-standing-wave-formation"],
+      "compositionRules": [
+        {
+          "with": "waves-standing-wave-formation",
+          "yields": "Standing wave patterns from constructive/destructive interference of counter-propagating waves",
+          "type": "sequential",
+          "conditions": ["When identical waves travel in opposite directions in a bounded medium"],
+          "example": "A guitar string: incident and reflected waves interfere to create nodes and antinodes"
+        }
+      ],
+      "applicabilityPatterns": ["predicting where sound will be loud or quiet in a room with reflections", "designing noise-cancellation systems using destructive interference"],
+      "keywords": ["constructive", "destructive", "interference", "in phase", "out of phase", "cancellation"],
+      "tags": ["waves", "interference", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-wave-equation",
+      "name": "Wave Equation",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 6,
+      "section": "6.1",
+      "planePosition": { "real": -0.3, "imaginary": 0.3 },
+      "formalStatement": "The one-dimensional wave equation is the second-order partial differential equation: d^2u/dt^2 = c^2 * d^2u/dx^2, where c is the wave propagation speed and u(x,t) is the displacement field.",
+      "computationalForm": "PDE: u_tt = c^2 * u_xx. Solutions: u(x,t) = f(x-ct) + g(x+ct) (D'Alembert). Sinusoidal: u = A*sin(kx - omega*t) with c = omega/k.",
+      "prerequisites": ["Wave function", "Derivatives"],
+      "dependencies": [
+        {
+          "target": "waves-wave-function",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Sinusoidal waves are particular solutions of the wave equation"
+        },
+        {
+          "target": "change-derivative",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "The wave equation involves second partial derivatives"
+        }
+      ],
+      "enables": ["waves-dalembert-solution", "waves-phase-velocity", "waves-separation-of-variables", "waves-standing-wave"],
+      "compositionRules": [
+        {
+          "with": "waves-separation-of-variables",
+          "yields": "Normal mode solutions: u(x,t) = X(x)*T(t) leading to standing waves",
+          "type": "sequential",
+          "conditions": ["When solving the wave equation with boundary conditions"],
+          "example": "String fixed at both ends: u(x,t) = sum B_n * sin(n*pi*x/L) * cos(n*pi*c*t/L)"
+        }
+      ],
+      "applicabilityPatterns": ["modeling wave propagation in strings, air columns, or electromagnetic fields", "predicting how disturbances travel through a medium"],
+      "keywords": ["wave equation", "PDE", "second order", "propagation", "d'Alembert"],
+      "tags": ["waves", "differential-equation", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-phase-velocity",
+      "name": "Phase Velocity",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 6,
+      "section": "6.1",
+      "planePosition": { "real": -0.3, "imaginary": 0.15 },
+      "formalStatement": "The phase velocity v_p of a wave is the speed at which a point of constant phase travels. For a wave y = A*sin(kx - omega*t): v_p = omega/k = lambda*f. In non-dispersive media, phase velocity equals group velocity.",
+      "computationalForm": "v_p = omega/k = lambda*f = lambda/T. For the wave equation u_tt = c^2*u_xx: v_p = c (constant). For dispersive media: v_p = v_p(k).",
+      "prerequisites": ["Wave function", "Angular frequency", "Wave number"],
+      "dependencies": [
+        {
+          "target": "waves-wave-function",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Phase velocity characterizes the propagation of the wave function"
+        },
+        {
+          "target": "waves-angular-frequency",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Phase velocity is the ratio of angular frequency to wave number"
+        }
+      ],
+      "enables": ["waves-group-velocity", "waves-dispersion"],
+      "compositionRules": [
+        {
+          "with": "waves-group-velocity",
+          "yields": "Complete wave propagation characterization: crests travel at v_p, energy travels at v_g",
+          "type": "parallel",
+          "conditions": ["When distinguishing between phase and energy transport in dispersive media"],
+          "example": "Deep water waves: v_p = sqrt(g*lambda/(2*pi)), v_g = v_p/2"
+        }
+      ],
+      "applicabilityPatterns": ["computing the speed at which wave crests advance through a medium", "determining the wavelength of a wave from its frequency and medium properties"],
+      "keywords": ["phase velocity", "wave speed", "propagation speed", "omega/k"],
+      "tags": ["waves", "velocity", "propagation"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-group-velocity",
+      "name": "Group Velocity",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 6,
+      "section": "6.2",
+      "planePosition": { "real": -0.2, "imaginary": 0.2 },
+      "formalStatement": "The group velocity v_g = d(omega)/dk is the speed at which the envelope (and energy) of a wave packet propagates. In non-dispersive media: v_g = v_p. In dispersive media: v_g != v_p.",
+      "computationalForm": "v_g = d(omega)/dk. For omega = omega(k): v_g = v_p + k * dv_p/dk. If omega = c*k (non-dispersive): v_g = c = v_p.",
+      "prerequisites": ["Phase velocity", "Derivative"],
+      "dependencies": [
+        {
+          "target": "waves-phase-velocity",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Group velocity generalizes phase velocity for wave packets"
+        },
+        {
+          "target": "change-derivative",
+          "type": "applies",
+          "strength": 0.8,
+          "description": "Group velocity is defined as the derivative of omega with respect to k"
+        }
+      ],
+      "enables": ["waves-dispersion"],
+      "compositionRules": [
+        {
+          "with": "waves-dispersion",
+          "yields": "Quantitative measure of how quickly wave packets spread: v_g != v_p implies dispersion",
+          "type": "parallel",
+          "conditions": ["When wave packets propagate in a medium where speed depends on frequency"],
+          "example": "Light in glass: different colors have different phase velocities, causing prismatic dispersion"
+        }
+      ],
+      "applicabilityPatterns": ["computing the speed at which information or energy is transported by a wave", "analyzing how wave packets spread in dispersive media"],
+      "keywords": ["group velocity", "wave packet", "energy velocity", "d(omega)/dk", "envelope"],
+      "tags": ["waves", "velocity", "dispersion"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-dispersion",
+      "name": "Dispersion",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 6,
+      "section": "6.2",
+      "planePosition": { "real": -0.3, "imaginary": 0.15 },
+      "formalStatement": "Dispersion occurs when the phase velocity of a wave depends on its frequency or wavelength: v_p = v_p(omega). This causes different frequency components to travel at different speeds, spreading wave packets over time.",
+      "computationalForm": "Dispersion relation: omega = omega(k). Non-dispersive: omega = c*k (linear). Dispersive: omega = c*k + alpha*k^3 (example). Measure: d^2(omega)/dk^2 != 0.",
+      "prerequisites": ["Phase velocity", "Group velocity"],
+      "dependencies": [
+        {
+          "target": "waves-phase-velocity",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Dispersion means phase velocity varies with frequency"
+        },
+        {
+          "target": "waves-group-velocity",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Dispersion is characterized by v_g != v_p"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "waves-wave-equation",
+          "yields": "Modified wave equations with dispersion terms: u_tt = c^2*u_xx + beta*u_xxxx",
+          "type": "nested",
+          "conditions": ["When modeling waves in media where short wavelengths travel differently"],
+          "example": "Water waves: short ripples are dispersive (capillary), long swells are less so (gravity)"
+        }
+      ],
+      "applicabilityPatterns": ["explaining why white light splits into colors through a prism", "predicting how a pulse broadens as it travels through fiber optics"],
+      "keywords": ["dispersion", "dispersive", "frequency-dependent", "spreading", "prism"],
+      "tags": ["waves", "propagation", "optics"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-wave-number",
+      "name": "Wave Number",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 6,
+      "section": "6.1",
+      "planePosition": { "real": -0.4, "imaginary": 0.05 },
+      "formalStatement": "The wave number k = 2*pi/lambda is the spatial frequency of a wave, measuring the number of radians per unit distance. It is the spatial analog of angular frequency.",
+      "computationalForm": "k = 2*pi/lambda = omega/v_p. Wave function: y = A*sin(kx - omega*t). Units: radians per meter.",
+      "prerequisites": ["Wavelength", "Angular frequency"],
+      "dependencies": [
+        {
+          "target": "waves-wavelength",
+          "type": "equivalent",
+          "strength": 0.9,
+          "description": "Wave number is the reciprocal of wavelength scaled by 2*pi"
+        },
+        {
+          "target": "waves-angular-frequency",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Wave number is the spatial counterpart of angular frequency"
+        }
+      ],
+      "enables": ["waves-wave-equation", "waves-phase-velocity"],
+      "compositionRules": [
+        {
+          "with": "waves-angular-frequency",
+          "yields": "Phase velocity: v_p = omega/k, connecting temporal and spatial wave parameters",
+          "type": "parallel",
+          "conditions": ["When computing wave propagation speed from frequency and spatial parameters"],
+          "example": "A wave with omega = 100 rad/s and k = 5 rad/m has v_p = 20 m/s"
+        }
+      ],
+      "applicabilityPatterns": ["measuring how many wave cycles fit in a given distance", "expressing the spatial structure of a wave in mathematical equations"],
+      "keywords": ["wave number", "k", "spatial frequency", "radians per meter"],
+      "tags": ["waves", "measurement", "spatial"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-dalembert-solution",
+      "name": "D'Alembert's Solution",
+      "type": "theorem",
+      "domain": "waves",
+      "chapter": 6,
+      "section": "6.2",
+      "planePosition": { "real": -0.2, "imaginary": 0.3 },
+      "formalStatement": "The general solution to the 1D wave equation u_tt = c^2*u_xx is u(x,t) = f(x - ct) + g(x + ct), where f and g are arbitrary twice-differentiable functions representing right-traveling and left-traveling waves respectively.",
+      "computationalForm": "Given initial conditions u(x,0) = phi(x), u_t(x,0) = psi(x): f(s) = [phi(s) + (1/c)*integral_0^s psi(r)dr]/2, g(s) = [phi(s) - (1/c)*integral_0^s psi(r)dr]/2.",
+      "prerequisites": ["Wave equation"],
+      "dependencies": [
+        {
+          "target": "waves-wave-equation",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "D'Alembert's solution is the general solution of the wave equation"
+        }
+      ],
+      "enables": ["waves-standing-wave-formation"],
+      "compositionRules": [
+        {
+          "with": "waves-superposition-principle",
+          "yields": "Any wave motion = rightward wave + leftward wave, each propagating at speed c",
+          "type": "parallel",
+          "conditions": ["When decomposing arbitrary wave motion into traveling components"],
+          "example": "A plucked string: initial triangular shape decomposes into two triangular waves traveling in opposite directions"
+        }
+      ],
+      "applicabilityPatterns": ["finding the shape of a wave at any future time from its initial shape and velocity", "understanding wave propagation as superposition of right and left traveling components"],
+      "keywords": ["d'Alembert", "traveling wave", "general solution", "f(x-ct) + g(x+ct)"],
+      "tags": ["waves", "theorem", "PDE"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-energy-conservation-wave",
+      "name": "Energy Conservation in Waves",
+      "type": "theorem",
+      "domain": "waves",
+      "chapter": 6,
+      "section": "6.3",
+      "planePosition": { "real": -0.2, "imaginary": 0.1 },
+      "formalStatement": "The total energy of a wave equals the sum of kinetic and potential energy. For a sinusoidal wave on a string: E = (1/2)*mu*omega^2*A^2*lambda where mu is linear density. Energy propagates at group velocity.",
+      "computationalForm": "Energy density: u = (1/2)*mu*(du/dt)^2 + (1/2)*T*(du/dx)^2 where T is tension. Power: P = E/T = (1/2)*mu*omega^2*A^2*v. Intensity: I = P/area.",
+      "prerequisites": ["Wave equation", "Simple harmonic motion"],
+      "dependencies": [
+        {
+          "target": "waves-wave-equation",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Energy conservation follows from the wave equation's structure"
+        },
+        {
+          "target": "waves-simple-harmonic-motion",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Wave energy is analogous to SHM energy exchange between kinetic and potential"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "waves-group-velocity",
+          "yields": "Energy transport velocity: wave energy propagates at the group velocity, not the phase velocity",
+          "type": "parallel",
+          "conditions": ["When computing power flow through a region"],
+          "example": "For deep water waves: energy travels at v_g = v_p/2, half the crest speed"
+        }
+      ],
+      "applicabilityPatterns": ["computing the power carried by a wave through a medium", "relating wave amplitude to energy and intensity"],
+      "keywords": ["energy", "conservation", "power", "intensity", "wave energy"],
+      "tags": ["waves", "energy", "conservation"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-wave-equation-numerical",
+      "name": "Numerical Wave Equation Solution",
+      "type": "algorithm",
+      "domain": "waves",
+      "chapter": 6,
+      "section": "6.3",
+      "planePosition": { "real": -0.2, "imaginary": 0.05 },
+      "formalStatement": "The wave equation can be solved numerically using the finite difference method. Discretize: u(i,n+1) = 2*u(i,n) - u(i,n-1) + r^2*(u(i+1,n) - 2*u(i,n) + u(i-1,n)) where r = c*dt/dx (Courant number).",
+      "computationalForm": "Stability condition (CFL): r = c*dt/dx <= 1. Grid: x_i = i*dx, t_n = n*dt. Update: u_i^{n+1} = 2u_i^n - u_i^{n-1} + r^2(u_{i+1}^n - 2u_i^n + u_{i-1}^n). Apply boundary conditions at each step.",
+      "prerequisites": ["Wave equation"],
+      "dependencies": [
+        {
+          "target": "waves-wave-equation",
+          "type": "applies",
+          "strength": 1.0,
+          "description": "Numerical method approximates solutions of the wave equation"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "change-eulers-method",
+          "yields": "Comparison of numerical ODE/PDE methods: Euler for ODEs, finite differences for wave PDE",
+          "type": "parallel",
+          "conditions": ["When numerically solving differential equations"],
+          "example": "Simulating a vibrating string by time-stepping the finite difference wave equation"
+        }
+      ],
+      "applicabilityPatterns": ["simulating wave propagation on a computer when analytic solutions are unavailable", "modeling complex wave phenomena like reflections and diffraction numerically"],
+      "keywords": ["finite difference", "numerical", "CFL condition", "Courant number", "simulation"],
+      "tags": ["waves", "algorithm", "numerical"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-separation-of-variables",
+      "name": "Separation of Variables for Waves",
+      "type": "technique",
+      "domain": "waves",
+      "chapter": 6,
+      "section": "6.3",
+      "planePosition": { "real": -0.2, "imaginary": 0.25 },
+      "formalStatement": "Separation of variables assumes the solution to a PDE is a product of functions of individual variables: u(x,t) = X(x)*T(t). Substituting into the wave equation and dividing by X*T yields two ODEs: X''/X = T''/(c^2*T) = -lambda (separation constant).",
+      "computationalForm": "Assume u(x,t) = X(x)*T(t). Wave eq: X*T'' = c^2*X''*T. Divide: T''/(c^2*T) = X''/X = -k^2. Get: X'' + k^2*X = 0, T'' + c^2*k^2*T = 0. Solutions: X = sin(kx) or cos(kx), T = sin(ckt) or cos(ckt).",
+      "prerequisites": ["Wave equation"],
+      "dependencies": [
+        {
+          "target": "waves-wave-equation",
+          "type": "applies",
+          "strength": 1.0,
+          "description": "Separation of variables is the primary technique for solving the wave equation with boundary conditions"
+        }
+      ],
+      "enables": ["waves-normal-modes", "waves-standing-wave", "change-separation-of-variables-ode"],
+      "compositionRules": [
+        {
+          "with": "waves-wave-equation",
+          "yields": "Normal mode solutions satisfying boundary conditions",
+          "type": "sequential",
+          "conditions": ["When boundary conditions make direct D'Alembert solution difficult"],
+          "example": "String fixed at x=0 and x=L: X(0)=X(L)=0 forces k=n*pi/L, giving standing wave modes"
+        }
+      ],
+      "applicabilityPatterns": ["solving the wave equation on a bounded domain with fixed or free boundary conditions", "finding the natural vibration modes of a physical system"],
+      "keywords": ["separation of variables", "product solution", "PDE technique", "boundary value problem"],
+      "tags": ["waves", "technique", "PDE"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-standing-wave",
+      "name": "Standing Wave",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 7,
+      "section": "7.1",
+      "planePosition": { "real": -0.4, "imaginary": 0.1 },
+      "formalStatement": "A standing wave is a wave pattern that does not propagate through space but oscillates in place. It is formed by the superposition of two identical waves traveling in opposite directions: 2A*sin(kx)*cos(omega*t).",
+      "computationalForm": "y(x,t) = 2A*sin(kx)*cos(omega*t). Nodes at kx = n*pi (x = n*lambda/2). Antinodes at kx = (n+1/2)*pi (x = (2n+1)*lambda/4). Amplitude varies as 2A*|sin(kx)|.",
+      "prerequisites": ["Superposition principle", "Wave function"],
+      "dependencies": [
+        {
+          "target": "waves-superposition-principle",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Standing waves are formed by superposition of counter-propagating waves"
+        },
+        {
+          "target": "waves-wave-function",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Standing waves are products of spatial and temporal functions"
+        }
+      ],
+      "enables": ["waves-node", "waves-antinode", "waves-normal-modes"],
+      "compositionRules": [
+        {
+          "with": "waves-normal-modes",
+          "yields": "Complete modal description of vibrating systems: each mode is a standing wave at a specific frequency",
+          "type": "parallel",
+          "conditions": ["When analyzing all possible vibration patterns of a bounded system"],
+          "example": "A guitar string's vibration is a sum of standing waves at f_1, 2f_1, 3f_1, ..."
+        }
+      ],
+      "applicabilityPatterns": ["analyzing vibration patterns on strings, membranes, or in cavities", "determining where resonant systems have maximum and minimum displacement"],
+      "keywords": ["standing wave", "stationary wave", "node", "antinode", "resonance"],
+      "tags": ["waves", "resonance", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-node",
+      "name": "Node",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 7,
+      "section": "7.1",
+      "planePosition": { "real": -0.5, "imaginary": -0.1 },
+      "formalStatement": "A node is a point in a standing wave where the displacement is always zero. For standing wave y(x,t) = 2A*sin(kx)*cos(omega*t): nodes occur at x = n*lambda/2 where n = 0, 1, 2, ...",
+      "computationalForm": "Node positions: x_n = n*lambda/2 = n*pi/k. For string fixed at both ends (length L): x_n = n*L/N for Nth harmonic, giving N+1 nodes (including endpoints).",
+      "prerequisites": ["Standing wave"],
+      "dependencies": [
+        {
+          "target": "waves-standing-wave",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Nodes are a feature of standing waves"
+        }
+      ],
+      "enables": ["waves-boundary-conditions"],
+      "compositionRules": [
+        {
+          "with": "waves-antinode",
+          "yields": "Complete spatial amplitude profile: alternating nodes (zero) and antinodes (maximum)",
+          "type": "parallel",
+          "conditions": ["When mapping the displacement pattern of a standing wave"],
+          "example": "2nd harmonic of a string: 3 nodes (ends + center), 2 antinodes (at L/4 and 3L/4)"
+        }
+      ],
+      "applicabilityPatterns": ["locating points of zero displacement in a resonating system", "determining where to place a finger on a string to produce a harmonic"],
+      "keywords": ["node", "zero displacement", "standing wave", "fixed point"],
+      "tags": ["waves", "standing-wave", "spatial"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-antinode",
+      "name": "Antinode",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 7,
+      "section": "7.1",
+      "planePosition": { "real": -0.5, "imaginary": -0.1 },
+      "formalStatement": "An antinode is a point in a standing wave where the displacement amplitude is maximum. For standing wave y(x,t) = 2A*sin(kx)*cos(omega*t): antinodes occur at x = (2n+1)*lambda/4 where sin(kx) = +/-1.",
+      "computationalForm": "Antinode positions: x_n = (2n+1)*lambda/4 = (2n+1)*pi/(2k). Maximum amplitude at antinodes is 2A. Located midway between adjacent nodes.",
+      "prerequisites": ["Standing wave", "Node"],
+      "dependencies": [
+        {
+          "target": "waves-standing-wave",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Antinodes are a feature of standing waves"
+        },
+        {
+          "target": "waves-node",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Antinodes are located midway between nodes"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "waves-node",
+          "yields": "Complete standing wave spatial structure: nodes and antinodes alternating at lambda/4 intervals",
+          "type": "parallel",
+          "conditions": ["When describing the full spatial pattern of a standing wave"],
+          "example": "A pipe open at both ends: antinodes at open ends, nodes evenly spaced between"
+        }
+      ],
+      "applicabilityPatterns": ["finding points of maximum vibration in a resonating system", "designing acoustic spaces to place or avoid maximum sound pressure points"],
+      "keywords": ["antinode", "maximum displacement", "standing wave", "peak"],
+      "tags": ["waves", "standing-wave", "spatial"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-normal-modes",
+      "name": "Normal Modes",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 7,
+      "section": "7.2",
+      "planePosition": { "real": -0.3, "imaginary": 0.2 },
+      "formalStatement": "Normal modes are the independent patterns of vibration of a system. Each mode vibrates at a single frequency (eigenfrequency) with a fixed spatial pattern (eigenfunction). Any vibration is a superposition of normal modes.",
+      "computationalForm": "For string of length L: mode n has frequency f_n = n*v/(2L) and shape X_n(x) = sin(n*pi*x/L). General solution: u(x,t) = sum B_n*sin(n*pi*x/L)*cos(n*pi*v*t/L + phi_n).",
+      "prerequisites": ["Standing wave", "Separation of variables"],
+      "dependencies": [
+        {
+          "target": "waves-standing-wave",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Each normal mode is a standing wave pattern"
+        },
+        {
+          "target": "waves-separation-of-variables",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Normal modes arise from separation of variables in the wave equation"
+        }
+      ],
+      "enables": ["waves-fourier-series-preview", "waves-modal-analysis"],
+      "compositionRules": [
+        {
+          "with": "waves-superposition-principle",
+          "yields": "Any vibration = sum of normal modes: the principle that allows Fourier decomposition of arbitrary vibrations",
+          "type": "nested",
+          "conditions": ["When representing arbitrary motion as a sum of fundamental vibration patterns"],
+          "example": "A plucked guitar string: initial triangular shape = sum of sinusoidal modes with amplitudes B_n"
+        }
+      ],
+      "applicabilityPatterns": ["decomposing complex vibrations into independent frequency components", "analyzing structural vibration by finding natural frequencies and mode shapes"],
+      "keywords": ["normal mode", "eigenfrequency", "eigenfunction", "mode shape", "vibration pattern"],
+      "tags": ["waves", "resonance", "analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-fourier-series-preview",
+      "name": "Fourier Series (Preview)",
+      "type": "definition",
+      "domain": "waves",
+      "chapter": 7,
+      "section": "7.3",
+      "planePosition": { "real": -0.2, "imaginary": 0.3 },
+      "formalStatement": "Any periodic function f(x) with period L can be represented as a sum of sinusoids: f(x) = a_0/2 + sum_{n=1}^{infinity} [a_n*cos(2*pi*n*x/L) + b_n*sin(2*pi*n*x/L)] where a_n and b_n are Fourier coefficients.",
+      "computationalForm": "a_n = (2/L)*integral_0^L f(x)*cos(2*pi*n*x/L) dx. b_n = (2/L)*integral_0^L f(x)*sin(2*pi*n*x/L) dx. a_0/2 = average value of f.",
+      "prerequisites": ["Normal modes", "Sine function", "Cosine function"],
+      "dependencies": [
+        {
+          "target": "waves-normal-modes",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Fourier series decomposes functions into normal mode components"
+        },
+        {
+          "target": "perception-sine-function",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Fourier series uses sine functions as basis"
+        },
+        {
+          "target": "perception-cosine-function",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Fourier series uses cosine functions as basis"
+        }
+      ],
+      "enables": ["change-taylor-series", "mapping-fourier-transform"],
+      "compositionRules": [
+        {
+          "with": "perception-orthogonal-decomposition",
+          "yields": "Fourier series as orthogonal decomposition: sin and cos form an orthogonal basis for periodic functions",
+          "type": "nested",
+          "conditions": ["When expressing a periodic function in terms of its frequency components"],
+          "example": "Square wave: f(x) = (4/pi)*[sin(x) + sin(3x)/3 + sin(5x)/5 + ...]"
+        }
+      ],
+      "applicabilityPatterns": ["decomposing any periodic signal into a sum of pure frequency components", "analyzing the harmonic content of a complex waveform"],
+      "keywords": ["Fourier series", "harmonic decomposition", "frequency analysis", "spectral"],
+      "tags": ["waves", "analysis", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-standing-wave-formation",
+      "name": "Standing Wave Formation Theorem",
+      "type": "theorem",
+      "domain": "waves",
+      "chapter": 7,
+      "section": "7.1",
+      "planePosition": { "real": -0.3, "imaginary": 0.15 },
+      "formalStatement": "The superposition of two identical sinusoidal waves traveling in opposite directions produces a standing wave: A*sin(kx - omega*t) + A*sin(kx + omega*t) = 2A*sin(kx)*cos(omega*t).",
+      "computationalForm": "A*sin(kx-wt) + A*sin(kx+wt) = 2A*sin(kx)*cos(wt). Result: space and time are separated. Spatial envelope sin(kx) is fixed; temporal oscillation cos(wt) is uniform.",
+      "prerequisites": ["Superposition principle", "Sum-to-product formulas"],
+      "dependencies": [
+        {
+          "target": "waves-superposition-principle",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Standing waves are formed by superposition"
+        },
+        {
+          "target": "waves-sum-to-product",
+          "type": "applies",
+          "strength": 0.8,
+          "description": "Sum-to-product identity shows the product form of two counter-propagating waves"
+        }
+      ],
+      "enables": ["waves-standing-wave", "waves-normal-modes"],
+      "compositionRules": [
+        {
+          "with": "waves-dalembert-solution",
+          "yields": "Connection between traveling and standing wave descriptions of bounded wave systems",
+          "type": "parallel",
+          "conditions": ["When converting between traveling wave and standing wave representations"],
+          "example": "Reflection at a fixed boundary: incident + reflected wave = standing wave"
+        }
+      ],
+      "applicabilityPatterns": ["explaining how reflections create standing wave patterns", "deriving the standing wave equation from counter-propagating traveling waves"],
+      "keywords": ["formation", "counter-propagating", "reflection", "standing wave creation"],
+      "tags": ["waves", "theorem", "interference"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-boundary-conditions",
+      "name": "Boundary Conditions Determine Allowed Modes",
+      "type": "theorem",
+      "domain": "waves",
+      "chapter": 7,
+      "section": "7.2",
+      "planePosition": { "real": -0.3, "imaginary": 0.25 },
+      "formalStatement": "For a bounded system, boundary conditions restrict the allowed wave numbers and frequencies to discrete values. Fixed ends (Dirichlet): u(0,t) = u(L,t) = 0 forces k_n = n*pi/L. Free ends (Neumann): du/dx = 0 at ends.",
+      "computationalForm": "Fixed-fixed string: k_n = n*pi/L, f_n = n*v/(2L). Open-open pipe: same frequencies. Fixed-free: k_n = (2n-1)*pi/(2L), f_n = (2n-1)*v/(4L) (odd harmonics only).",
+      "prerequisites": ["Standing wave", "Normal modes"],
+      "dependencies": [
+        {
+          "target": "waves-standing-wave",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Boundary conditions select which standing wave modes are allowed"
+        },
+        {
+          "target": "waves-normal-modes",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Boundary conditions quantize the allowed normal modes"
+        }
+      ],
+      "enables": ["waves-fourier-series-preview"],
+      "compositionRules": [
+        {
+          "with": "waves-harmonic-series",
+          "yields": "Physical harmonic series: boundary conditions determine whether all or only odd harmonics are present",
+          "type": "nested",
+          "conditions": ["When determining the allowed frequencies of a vibrating system"],
+          "example": "Closed pipe: only odd harmonics (clarinet). Open pipe: all harmonics (flute)."
+        }
+      ],
+      "applicabilityPatterns": ["determining the resonant frequencies of a bounded acoustic or mechanical system", "explaining why different instrument shapes produce different harmonic content"],
+      "keywords": ["boundary condition", "Dirichlet", "Neumann", "allowed modes", "quantization"],
+      "tags": ["waves", "theorem", "boundary"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-fourier-convergence",
+      "name": "Fourier Series Convergence",
+      "type": "identity",
+      "domain": "waves",
+      "chapter": 7,
+      "section": "7.3",
+      "planePosition": { "real": -0.2, "imaginary": 0.35 },
+      "formalStatement": "For a piecewise continuous periodic function f with piecewise continuous derivative, the Fourier series converges to f(x) at points of continuity and to [f(x+) + f(x-)]/2 at points of discontinuity (Dirichlet conditions).",
+      "computationalForm": "Convergence rate: if f has k continuous derivatives, then a_n, b_n = O(1/n^(k+1)). Gibbs phenomenon: at discontinuities, partial sums overshoot by ~9% regardless of number of terms.",
+      "prerequisites": ["Fourier series preview"],
+      "dependencies": [
+        {
+          "target": "waves-fourier-series-preview",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Convergence theorem describes when and how Fourier series representations are valid"
+        }
+      ],
+      "enables": ["change-taylor-series"],
+      "compositionRules": [
+        {
+          "with": "change-taylor-series",
+          "yields": "Comparison of approximation strategies: Fourier (global, periodic) vs Taylor (local, any function)",
+          "type": "parallel",
+          "conditions": ["When choosing between Fourier and Taylor representations"],
+          "example": "Square wave: Fourier converges (everywhere); Taylor fails (not analytic at jumps)"
+        }
+      ],
+      "applicabilityPatterns": ["determining whether a Fourier series will accurately represent a given function", "understanding the limitations of Fourier approximation at discontinuities"],
+      "keywords": ["convergence", "Dirichlet conditions", "Gibbs phenomenon", "pointwise convergence"],
+      "tags": ["waves", "analysis", "convergence"],
+      "buildLabs": []
+    },
+    {
+      "id": "waves-modal-analysis",
+      "name": "Modal Analysis",
+      "type": "technique",
+      "domain": "waves",
+      "chapter": 7,
+      "section": "7.3",
+      "planePosition": { "real": -0.2, "imaginary": 0.15 },
+      "formalStatement": "Modal analysis decomposes any vibration of a linear system into a sum of normal modes. Given initial conditions, the mode amplitudes B_n are found by projecting the initial shape onto the mode shapes using inner products: B_n = (2/L)*integral_0^L f(x)*sin(n*pi*x/L) dx.",
+      "computationalForm": "B_n = (2/L)*integral_0^L u(x,0)*sin(n*pi*x/L) dx. Time response: u(x,t) = sum B_n*sin(n*pi*x/L)*cos(omega_n*t). Energy in mode n proportional to B_n^2.",
+      "prerequisites": ["Normal modes", "Inner product", "Fourier series preview"],
+      "dependencies": [
+        {
+          "target": "waves-normal-modes",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Modal analysis decomposes into normal modes"
+        },
+        {
+          "target": "perception-inner-product",
+          "type": "applies",
+          "strength": 0.8,
+          "description": "Mode amplitudes are found by inner product projection"
+        },
+        {
+          "target": "waves-fourier-series-preview",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Modal analysis is essentially Fourier series applied to vibrating systems"
+        }
+      ],
+      "enables": ["mapping-fourier-transform"],
+      "compositionRules": [
+        {
+          "with": "perception-orthogonal-decomposition",
+          "yields": "Vibration analysis as orthogonal decomposition in the space of mode shapes",
+          "type": "nested",
+          "conditions": ["When analyzing complex vibrations in terms of independent frequency components"],
+          "example": "A bridge's vibration decomposed into its first 5 normal modes to identify dominant frequencies"
+        }
+      ],
+      "applicabilityPatterns": ["analyzing complex vibrations by decomposing into independent frequency components", "determining which normal modes contribute most energy to a given vibration"],
+      "keywords": ["modal analysis", "mode decomposition", "vibration analysis", "eigenmode expansion"],
+      "tags": ["waves", "technique", "engineering"],
+      "buildLabs": []
+    }
+  ]
+}
