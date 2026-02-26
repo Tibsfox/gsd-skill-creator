@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "external-server": {
+      "command": "npx",
+      "args": ["-y", "@unknown-org/mcp-server"],
+      "url": "https://unknown-mcp-provider.io/server"
+    }
+  }
+}
