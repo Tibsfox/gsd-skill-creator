@@ -27,6 +27,7 @@ pub fn run() {
             app.manage(Mutex::new(ClaudeSessionManager::default()));
             app.manage(tokio::sync::Mutex::new(mcp_host::McpHostState::new()));
             app.manage(tokio::sync::Mutex::new(security::SecurityState::new()));
+            app.manage(tokio::sync::Mutex::new(state::ApiClientState::default()));
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -74,6 +75,8 @@ pub fn run() {
             commands::security::agent_destroy,
             commands::security::agent_verify_isolation,
             commands::ipc::send_chat_message,
+            commands::ipc::has_api_key,
+            commands::ipc::store_api_key,
             commands::ipc::get_service_states,
             commands::ipc::set_magic_level,
             commands::ipc::get_magic_level,
