@@ -1,0 +1,22 @@
+/**
+ * Pipeline barrel -- exports all integration wiring modules.
+ *
+ * @module pipeline
+ * @since Phase 383
+ */
+
+export { ChatPipeline, createChatPipeline } from "./chat-pipeline";
+export type {
+  ChatRendererPort,
+  MagicFilterPort,
+  ChatPipelineConfig,
+} from "./chat-pipeline";
+
+export { LedBridge, createLedBridge } from "./led-bridge";
+export type { LedPanelPort, LedBridgeConfig } from "./led-bridge";
+
+export { StagingBridge, createStagingBridge } from "./staging-bridge";
+export type {
+  StagingIntakeCompletePayload,
+  StagingBridgeConfig,
+} from "./staging-bridge";
