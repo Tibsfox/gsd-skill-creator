@@ -6,8 +6,8 @@
 
 use std::path::PathBuf;
 
-use gsd_os_lib::security::agent_isolation::{AgentIsolationManager, IsolationError};
-use gsd_os_lib::security::types::AgentType;
+use gsd_os_lib::security::agent_isolation::{AgentIsolationManager, WorktreeHookPayload};
+use gsd_os_lib::security::types::{AgentType, EventSource};
 
 /// Create a temporary git repository suitable for worktree operations.
 fn make_test_project() -> (tempfile::TempDir, PathBuf) {
@@ -127,4 +127,135 @@ async fn test_agent_id_increments() {
 
     assert_eq!(first.id, "exec-001");
     assert_eq!(second.id, "exec-002");
+}
+
+// ============================================================================
+// 371-02 tests: destroy_agent, verify_isolation, hooks, SecurityEvent
+// ============================================================================
+
+#[tokio::test]
+async fn test_destroy_agent_removes_worktree() {
+    let (_tmp, root) = make_test_project();
+    let mut manager = AgentIsolationManager::new(root.clone()).unwrap();
+
+    let agent = manager.create_agent(AgentType::Exec).await.unwrap();
+    let wt = agent.worktree_path.clone();
+    assert!(wt.exists(), "worktree must exist before destroy");
+
+    manager.destroy_agent("exec-001").await.unwrap();
+
+    assert!(!wt.exists(), "worktree dir must be removed after destroy");
+    assert!(
+        manager.get_active_agents().get("exec-001").is_none(),
+        "agent must be removed from active_agents"
+    );
+}
+
+#[tokio::test]
+async fn test_destroy_agent_writes_results_to_shared() {
+    let (_tmp, root) = make_test_project();
+    let mut manager = AgentIsolationManager::new(root.clone()).unwrap();
+
+    let agent = manager.create_agent(AgentType::Exec).await.unwrap();
+
+    // Write a file to the agent's outbox
+    let outbox = agent.worktree_path.join(".planning").join("outbox");
+    std::fs::write(outbox.join("result.json"), r#"{"status":"done"}"#).unwrap();
+
+    manager.destroy_agent("exec-001").await.unwrap();
+
+    // Check that result was copied to shared/results/exec-001/
+    let shared_result = root
+        .join(".agents")
+        .join("shared")
+        .join("results")
+        .join("exec-001")
+        .join("result.json");
+    assert!(
+        shared_result.exists(),
+        "outbox result.json must be copied to shared/results/exec-001/"
+    );
+    let content = std::fs::read_to_string(&shared_result).unwrap();
+    assert!(content.contains("done"), "copied file must retain content");
+}
+
+#[tokio::test]
+async fn test_verify_isolation_true_for_exec_verify() {
+    let (_tmp, root) = make_test_project();
+    let mut manager = AgentIsolationManager::new(root.clone()).unwrap();
+
+    let _exec = manager.create_agent(AgentType::Exec).await.unwrap();
+    let _verify = manager.create_agent(AgentType::Verify).await.unwrap();
+
+    let isolated = manager.verify_isolation("exec-001", "verify-001");
+    assert!(
+        isolated,
+        "exec and verify agents must be isolated from each other"
+    );
+}
+
+#[tokio::test]
+async fn test_verify_isolation_false_if_agent_unknown() {
+    let (_tmp, root) = make_test_project();
+    let mut manager = AgentIsolationManager::new(root.clone()).unwrap();
+
+    let _exec = manager.create_agent(AgentType::Exec).await.unwrap();
+
+    let result = manager.verify_isolation("exec-001", "nonexistent");
+    assert!(!result, "verify_isolation must return false for unknown agent");
+}
+
+#[tokio::test]
+async fn test_worktree_create_hook_generates_profile() {
+    let (_tmp, root) = make_test_project();
+    let mut manager = AgentIsolationManager::new(root.clone()).unwrap();
+
+    // Create the worktree directory manually to simulate hook scenario
+    let hook_wt = root.join(".agents").join("exec-002");
+    std::fs::create_dir_all(&hook_wt).unwrap();
+
+    let payload = WorktreeHookPayload {
+        hook: "WorktreeCreate".to_string(),
+        worktree_path: hook_wt.to_string_lossy().to_string(),
+        agent_id: "exec-002".to_string(),
+        agent_type: "exec".to_string(),
+    };
+
+    manager.handle_worktree_hook(payload).unwrap();
+
+    let profile_path = hook_wt.join(".sandbox-profile.json");
+    assert!(
+        profile_path.exists(),
+        ".sandbox-profile.json must be written by WorktreeCreate hook"
+    );
+
+    let content = std::fs::read_to_string(&profile_path).unwrap();
+    let profile: serde_json::Value = serde_json::from_str(&content).unwrap();
+    assert_eq!(
+        profile["worktree_path"].as_str().unwrap(),
+        hook_wt.to_string_lossy().as_ref(),
+        "profile worktree_path must match hook worktree"
+    );
+}
+
+#[tokio::test]
+async fn test_security_event_emitted_on_create() {
+    let (_tmp, root) = make_test_project();
+    let mut manager = AgentIsolationManager::new(root.clone()).unwrap();
+
+    let _agent = manager.create_agent(AgentType::Exec).await.unwrap();
+
+    let events = manager.get_events();
+    assert!(!events.is_empty(), "at least one event must be recorded");
+
+    let create_event = events
+        .iter()
+        .find(|e| e.event_type == "agent_created")
+        .expect("must have agent_created event");
+
+    assert_eq!(create_event.source, EventSource::AgentIsolation);
+    assert_eq!(
+        create_event.detail["agent_id"].as_str().unwrap(),
+        "exec-001"
+    );
 }
