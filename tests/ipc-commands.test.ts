@@ -3,22 +3,34 @@
  *
  * Verifies that all 9 planned Tauri command wrappers exist in the desktop
  * IPC module and invoke the correct Tauri command name strings with correct
- * argument shapes. Uses vi.mock to intercept @tauri-apps/api/core invoke
- * calls since this test runs from root (no jsdom/Tauri mock environment).
+ * argument shapes. Uses vi.hoisted + vi.mock to intercept @tauri-apps/api/core
+ * invoke calls across the desktop/root module boundary.
  *
  * @module tests/ipc-commands
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-// Mock @tauri-apps/api/core at the module level so the desktop commands
-// module gets the mocked invoke when imported.
-const mockInvoke = vi.fn();
-vi.mock('@tauri-apps/api/core', () => ({
-  invoke: mockInvoke,
-}));
+// vi.hoisted runs before vi.mock hoisting, making mockInvoke available
+// to the vi.mock factory functions below.
+const { mockInvoke } = vi.hoisted(() => {
+  return { mockInvoke: vi.fn() };
+});
 
-// Import the desktop command wrappers (these don't exist yet -- RED phase)
+// Mock the Tauri core module using the absolute path that desktop resolves to.
+// vi.mock is hoisted, so we inline the path computation.
+vi.mock(
+  new URL('../desktop/node_modules/@tauri-apps/api/core', import.meta.url).pathname,
+  () => ({ invoke: mockInvoke }),
+);
+
+// Mock the Tauri event module (needed for event listener imports in commands.test.ts)
+vi.mock(
+  new URL('../desktop/node_modules/@tauri-apps/api/event', import.meta.url).pathname,
+  () => ({ listen: vi.fn() }),
+);
+
+// Import the desktop command wrappers
 import {
   sendChatMessage,
   getServiceStates,
