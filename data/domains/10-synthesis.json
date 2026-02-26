@@ -1,0 +1,755 @@
+{
+  "domain": "synthesis",
+  "version": "1.35.0",
+  "primitives": [
+    {
+      "id": "synthesis-complex-plane",
+      "name": "Complex Plane of Experience",
+      "type": "definition",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.1",
+      "planePosition": { "real": 0.0, "imaginary": 0.0 },
+      "formalStatement": "The Complex Plane of Experience is a two-axis classification framework for mathematical concepts: the real axis spans from pure logic (-1) to pure creativity (+1), the imaginary axis spans from pure embodied (-1) to pure abstract (+1). Every mathematical concept occupies a position on this plane.",
+      "computationalForm": "",
+      "prerequisites": ["Complex numbers", "Mathematical classification", "Understanding of abstraction levels"],
+      "dependencies": [
+        { "target": "perception-unit-circle", "type": "requires", "strength": 0.7, "description": "The unit circle on the complex plane is the generative center of the framework" },
+        { "target": "structure-complex-analysis", "type": "applies", "strength": 0.6, "description": "Uses complex plane as a classification space" },
+        { "target": "foundations-set-operations", "type": "requires", "strength": 0.5, "description": "Domains and quadrants are defined as sets of concepts" }
+      ],
+      "enables": ["synthesis-quadrant-classification", "synthesis-domain-positioning", "synthesis-plane-navigation", "synthesis-domain-activation"],
+      "compositionRules": [
+        { "with": "mapping-functor", "yields": "Functorial mapping between the Complex Plane positions and domain structures", "type": "parallel", "conditions": ["Domain positions are specified", "Composition rules respect proximity"], "example": "Two concepts near each other on the plane are more likely to compose well than distant concepts, reflecting shared mathematical prerequisites" }
+      ],
+      "applicabilityPatterns": ["Classifying mathematical problems by their character and abstraction level", "Organizing an entire mathematical curriculum into a navigable landscape", "Determining which mathematical domains are relevant to a given problem"],
+      "keywords": ["complex plane", "classification", "framework", "real", "imaginary", "domain"],
+      "tags": ["meta-mathematical", "framework", "navigation"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-quadrant-classification",
+      "name": "Quadrant Classification",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.2",
+      "planePosition": { "real": -0.3, "imaginary": 0.3 },
+      "formalStatement": "The Complex Plane divides into four quadrants, each with distinct mathematical character: Q1 (Abstract+Creative): pure mathematics, category theory, topology; Q2 (Abstract+Logical): formal methods, proof theory, mathematical logic; Q3 (Embodied+Logical): applied science, physics, engineering; Q4 (Embodied+Creative): design, simulation, computational art.",
+      "computationalForm": "Given a concept's plane position (real, imaginary): if real > 0 and imaginary > 0: Q1 (abstract-creative). If real < 0 and imaginary > 0: Q2 (abstract-logical). If real < 0 and imaginary < 0: Q3 (embodied-logical). If real > 0 and imaginary < 0: Q4 (embodied-creative). Border cases use nearest-domain heuristic.",
+      "prerequisites": ["Complex Plane of Experience", "Domain definitions", "Mathematical abstraction levels"],
+      "dependencies": [
+        { "target": "synthesis-complex-plane", "type": "requires", "strength": 1.0, "description": "Quadrants are defined on the Complex Plane" },
+        { "target": "foundations-set-operations", "type": "applies", "strength": 0.4, "description": "Each quadrant is a set of concepts" }
+      ],
+      "enables": ["synthesis-domain-activation", "synthesis-cross-quadrant-composition"],
+      "compositionRules": [
+        { "with": "synthesis-domain-activation", "yields": "Multi-quadrant problem decomposition strategy", "type": "sequential", "conditions": ["Problem has components in multiple quadrants"], "example": "Engineering a bridge (Q4: creative-embodied) requires structural analysis (Q3: logical-embodied) and topology optimization (Q1: creative-abstract)" }
+      ],
+      "applicabilityPatterns": ["Quickly classifying a mathematical concept by its nature", "Organizing curriculum by quadrant for balanced learning", "Identifying which thinking mode a problem requires"],
+      "keywords": ["quadrant", "classification", "abstract", "embodied", "logical", "creative"],
+      "tags": ["meta-mathematical", "classification", "quadrant"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-domain-positioning",
+      "name": "Domain Positioning",
+      "type": "definition",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.3",
+      "planePosition": { "real": -0.2, "imaginary": 0.2 },
+      "formalStatement": "Each of the 10 mathematical domains occupies a region on the Complex Plane defined by a center position and radius: Perception (-0.2, 0.2, r=0.4), Waves (-0.4, 0.0, r=0.4), Change (0.0, -0.2, r=0.4), Structure (-0.3, 0.5, r=0.4), Reality (0.3, -0.4, r=0.35), Foundations (-0.6, 0.6, r=0.35), Mapping (0.2, 0.4, r=0.4), Unification (0.0, 0.6, r=0.3), Emergence (0.5, 0.0, r=0.4), Synthesis (0.0, 0.0, r=0.6).",
+      "computationalForm": "For a domain D with center (c_r, c_i) and radius r: a concept at position (p_r, p_i) belongs to D if sqrt((p_r - c_r)^2 + (p_i - c_i)^2) <= r. Concepts may belong to multiple overlapping domains. Synthesis, centered at the origin with the largest radius, overlaps all other domains.",
+      "prerequisites": ["Complex Plane of Experience", "Domain definitions", "Euclidean distance"],
+      "dependencies": [
+        { "target": "synthesis-complex-plane", "type": "requires", "strength": 1.0, "description": "Domain positions are coordinates on the Complex Plane" },
+        { "target": "perception-pythagorean-theorem", "type": "applies", "strength": 0.5, "description": "Distance calculation uses Pythagorean distance" }
+      ],
+      "enables": ["synthesis-domain-activation", "synthesis-distance-metric"],
+      "compositionRules": [
+        { "with": "synthesis-complex-plane", "yields": "Complete domain map: the 10-domain atlas of mathematical knowledge", "type": "parallel", "conditions": ["All domain centers and radii are defined", "Overlap regions are identified"], "example": "Structure (center -0.3, 0.5) overlaps with Foundations (center -0.6, 0.6) in the abstract-logical region, reflecting how linear algebra and abstract algebra share concepts" }
+      ],
+      "applicabilityPatterns": ["Mapping which domains cover which areas of the mathematical plane", "Identifying which domains overlap for cross-domain composition", "Routing problems to the most relevant domain based on plane position"],
+      "keywords": ["domain", "position", "center", "radius", "region", "atlas"],
+      "tags": ["meta-mathematical", "domain", "positioning"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-cross-quadrant-composition",
+      "name": "Cross-Quadrant Composition",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.4",
+      "planePosition": { "real": 0.1, "imaginary": 0.1 },
+      "formalStatement": "The most powerful mathematical techniques combine concepts from different quadrants of the Complex Plane. Cross-quadrant composition bridges abstract and embodied, logical and creative, yielding solutions that neither quadrant alone could produce. The composition cost increases with plane distance.",
+      "computationalForm": "Given two primitives at positions (r1, i1) and (r2, i2): composition distance = sqrt((r1-r2)^2 + (i1-i2)^2). Cross-quadrant distance >= sqrt(min_axis_crossing^2) > 0. Composition is valid when there exists a bridge primitive in the overlapping region.",
+      "prerequisites": ["Complex Plane", "Quadrant classification", "Composition rules"],
+      "dependencies": [
+        { "target": "synthesis-quadrant-classification", "type": "requires", "strength": 0.9, "description": "Quadrant identification determines which compositions are cross-quadrant" },
+        { "target": "mapping-functor", "type": "applies", "strength": 0.7, "description": "Cross-quadrant composition is a functorial mapping between domain categories" },
+        { "target": "synthesis-complex-plane", "type": "requires", "strength": 0.8, "description": "The plane provides the distance metric for composition cost" }
+      ],
+      "enables": ["synthesis-proof-as-path"],
+      "compositionRules": [
+        { "with": "synthesis-plane-navigation", "yields": "Optimal cross-quadrant solution paths that minimize total composition cost", "type": "sequential", "conditions": ["Start and end domains are identified", "Bridge primitives exist"], "example": "Solving a physics problem (Q3) using category theory (Q1): navigate through structure (Q2 border) and mapping (Q1-Q3 bridge)" }
+      ],
+      "applicabilityPatterns": ["Solving problems that require combining abstract theory with practical application", "Finding creative approaches by crossing between logical and creative quadrants", "Building mathematical bridges between theory and computation"],
+      "keywords": ["cross-quadrant", "composition", "bridge", "distance", "combination"],
+      "tags": ["meta-mathematical", "composition", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-plane-navigation",
+      "name": "Plane Navigation",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.5",
+      "planePosition": { "real": 0.15, "imaginary": 0.0 },
+      "formalStatement": "Plane navigation is the technique of tracing paths through the Complex Plane from a problem's position to the primitives needed for its solution. A valid navigation path visits domains in dependency order, respecting prerequisite relationships, and minimizes total traversal cost.",
+      "computationalForm": "1. Classify the problem to a plane position. 2. Identify activated domains (those within reach of the problem position). 3. For each activated domain, find relevant primitives. 4. Build a path through the dependency graph from problem to solution primitives. 5. Minimize total path cost (sum of edge weights).",
+      "prerequisites": ["Domain positioning", "Dependency graph", "Shortest path algorithms"],
+      "dependencies": [
+        { "target": "synthesis-domain-positioning", "type": "requires", "strength": 0.9, "description": "Navigation uses domain positions for routing" },
+        { "target": "synthesis-complex-plane", "type": "requires", "strength": 0.8, "description": "The plane is the space being navigated" },
+        { "target": "mapping-category", "type": "applies", "strength": 0.5, "description": "Navigation paths are morphisms in the primitive category" }
+      ],
+      "enables": ["synthesis-foundational-decomposition"],
+      "compositionRules": [
+        { "with": "synthesis-domain-activation", "yields": "Problem-driven domain selection and primitive retrieval", "type": "sequential", "conditions": ["Problem is classified to a plane position", "Domain index is available"], "example": "A probability question activates Mapping domain; the navigator finds Bayes' theorem, which depends on conditional probability, which depends on probability axioms -- a clear path" }
+      ],
+      "applicabilityPatterns": ["Finding the mathematical tools needed to solve a problem", "Building step-by-step solution strategies across domains", "Optimizing the order in which mathematical concepts are applied"],
+      "keywords": ["navigation", "path", "routing", "problem-solving", "traverse"],
+      "tags": ["meta-mathematical", "navigation", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-position-classification",
+      "name": "Position-Based Classification",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.6",
+      "planePosition": { "real": -0.2, "imaginary": -0.1 },
+      "formalStatement": "Position-based classification maps a problem description to a Complex Plane position by analyzing its mathematical character: the logic-creativity balance (real axis) and the abstraction level (imaginary axis). Keyword patterns, domain activation signals, and structural cues determine the position.",
+      "computationalForm": "1. Extract keywords from problem description. 2. Match against domain activation patterns. 3. Compute weighted average of matching domain centers. 4. Adjust for abstraction indicators (theoretical -> high imaginary, practical -> low imaginary) and approach indicators (formal -> negative real, exploratory -> positive real).",
+      "prerequisites": ["Complex Plane", "Domain activation patterns", "Keyword matching"],
+      "dependencies": [
+        { "target": "synthesis-complex-plane", "type": "requires", "strength": 1.0, "description": "Classification targets a position on the Complex Plane" },
+        { "target": "synthesis-domain-positioning", "type": "requires", "strength": 0.8, "description": "Domain centers provide reference points for classification" }
+      ],
+      "enables": ["synthesis-domain-activation"],
+      "compositionRules": [
+        { "with": "mapping-bayes-theorem", "yields": "Bayesian problem classification that updates position with evidence", "type": "sequential", "conditions": ["Prior domain distribution is available", "Problem provides discriminating keywords"], "example": "A problem mentioning 'eigenvalues' and 'vibration' initially classifies near Structure but Bayesian update with 'vibration' shifts toward Waves-Reality overlap" }
+      ],
+      "applicabilityPatterns": ["Automatically categorizing mathematical problems by their nature", "Routing student questions to the right area of mathematics", "Determining what kind of mathematical thinking a problem requires"],
+      "keywords": ["classification", "position", "keyword", "routing", "analysis"],
+      "tags": ["meta-mathematical", "classification", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-domain-activation",
+      "name": "Domain Activation",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.7",
+      "planePosition": { "real": -0.1, "imaginary": 0.1 },
+      "formalStatement": "Domain activation determines which of the 10 mathematical domains are relevant to a given problem based on its plane position. A domain is activated if the problem position falls within the domain's region. Multi-domain activation occurs for problems near domain boundaries or in overlapping regions.",
+      "computationalForm": "For problem at (p_r, p_i), compute distance to each domain center (c_r, c_i): d = sqrt((p_r - c_r)^2 + (p_i - c_i)^2). Domain is activated if d <= radius. Activation strength = max(0, 1 - d/radius). Rank activated domains by strength. Multi-domain problems have 2+ activations above threshold.",
+      "prerequisites": ["Domain positioning", "Position classification", "Distance computation"],
+      "dependencies": [
+        { "target": "synthesis-domain-positioning", "type": "requires", "strength": 1.0, "description": "Activation uses domain positions and radii" },
+        { "target": "synthesis-position-classification", "type": "requires", "strength": 0.9, "description": "Problem position must be classified first" },
+        { "target": "perception-pythagorean-theorem", "type": "applies", "strength": 0.5, "description": "Distance computation uses Euclidean distance" }
+      ],
+      "enables": ["synthesis-plane-navigation"],
+      "compositionRules": [
+        { "with": "synthesis-position-classification", "yields": "Complete problem-to-domain routing pipeline", "type": "sequential", "conditions": ["Problem description is provided", "Domain index is loaded"], "example": "A problem about 'wave interference in quantum mechanics' activates Waves (primary), Reality (secondary), and Structure (tertiary)" }
+      ],
+      "applicabilityPatterns": ["Determining which mathematical tools are most relevant to a problem", "Handling multi-domain problems that span several areas of mathematics", "Providing ranked domain recommendations for problem-solving"],
+      "keywords": ["activation", "domain", "relevance", "routing", "multi-domain"],
+      "tags": ["meta-mathematical", "activation", "routing"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-multi-domain-problems",
+      "name": "Multi-Domain Problem Solving",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.8",
+      "planePosition": { "real": 0.2, "imaginary": -0.1 },
+      "formalStatement": "Multi-domain problems span multiple mathematical domains and require multi-step navigation through the dependency graph, collecting primitives from different domains and composing them. The solution involves: domain decomposition, per-domain primitive selection, cross-domain composition, and verification of each composition step.",
+      "computationalForm": "1. Activate relevant domains (2+ domains). 2. Decompose problem into domain-specific sub-problems. 3. Solve each sub-problem using its domain's primitives. 4. Compose sub-solutions using cross-domain composition rules. 5. Verify each composition step for type compatibility and dependency ordering.",
+      "prerequisites": ["Domain activation", "Composition rules", "Plane navigation"],
+      "dependencies": [
+        { "target": "synthesis-domain-activation", "type": "requires", "strength": 1.0, "description": "Multi-domain problems activate multiple domains" },
+        { "target": "synthesis-plane-navigation", "type": "requires", "strength": 0.9, "description": "Navigation finds paths across domain boundaries" },
+        { "target": "synthesis-cross-quadrant-composition", "type": "applies", "strength": 0.8, "description": "Cross-quadrant techniques compose concepts from different quadrants" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-foundational-decomposition", "yields": "Complete multi-domain solution with verified composition chain", "type": "sequential", "conditions": ["All sub-problems are solvable", "Cross-domain compositions are valid"], "example": "Quantum computing problem: decompose into quantum mechanics (Reality), linear algebra (Structure), information theory (Mapping), and computational complexity (Emergence)" }
+      ],
+      "applicabilityPatterns": ["Solving complex problems that require knowledge from multiple mathematical areas", "Integrating theoretical and applied mathematics in a single solution", "Breaking down interdisciplinary problems into manageable components"],
+      "keywords": ["multi-domain", "decomposition", "integration", "cross-domain", "composition"],
+      "tags": ["meta-mathematical", "multi-domain", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-abstraction-gradient",
+      "name": "Abstraction Gradient",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.9",
+      "planePosition": { "real": 0.0, "imaginary": 0.3 },
+      "formalStatement": "The abstraction gradient is the technique of moving along the imaginary axis of the Complex Plane: from concrete/embodied (negative imaginary) to abstract (positive imaginary). Moving upward generalizes: specific numbers become algebraic structures. Moving downward specializes: abstract theorems become computable algorithms.",
+      "computationalForm": "To generalize: identify the concrete instance, extract the essential properties, formulate as axioms/definitions (move from Domains I-III toward IV-VI). To specialize: take the abstract theorem, choose specific instances, compute concrete results (move from Domains VI toward III-I).",
+      "prerequisites": ["Complex Plane", "Abstraction levels", "Generalization and specialization"],
+      "dependencies": [
+        { "target": "synthesis-complex-plane", "type": "requires", "strength": 1.0, "description": "The imaginary axis defines the abstraction gradient" },
+        { "target": "mapping-functor", "type": "applies", "strength": 0.6, "description": "Generalization is a functor from concrete to abstract categories" },
+        { "target": "foundations-proof-techniques", "type": "motivates", "strength": 0.5, "description": "Abstraction is a core proof technique (prove the general case)" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-foundational-decomposition", "yields": "Abstraction ladder: move up to find the right level of generality, then back down to compute", "type": "sequential", "conditions": ["Problem admits both concrete and abstract formulations", "Abstract formulation simplifies the solution"], "example": "To solve a specific system of linear equations: abstract to vector space (up), prove existence/uniqueness (abstract level), specialize back to matrix operations (down), compute the solution" }
+      ],
+      "applicabilityPatterns": ["Choosing the right level of abstraction for problem solving", "Generalizing specific results to broader classes of problems", "Making abstract mathematics concrete and computable"],
+      "keywords": ["abstraction", "gradient", "generalize", "specialize", "concrete", "abstract"],
+      "tags": ["meta-mathematical", "abstraction", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-logic-creativity-balance",
+      "name": "Logic-Creativity Balance",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.10",
+      "planePosition": { "real": 0.0, "imaginary": -0.1 },
+      "formalStatement": "The logic-creativity balance is the technique of moving along the real axis of the Complex Plane: from pure logic (negative real) to pure creativity (positive real). Logical approaches use deduction, formal proof, and systematic analysis. Creative approaches use intuition, visualization, analogy, and experimental exploration.",
+      "computationalForm": "For a stuck problem: if currently using logical approach (negative real), shift creative (try visualization, analogy, explore examples). If currently using creative approach (positive real), shift logical (formalize the intuition, check rigorously). Optimal problem-solving oscillates between creative exploration and logical verification.",
+      "prerequisites": ["Complex Plane", "Problem-solving strategies", "Mathematical creativity"],
+      "dependencies": [
+        { "target": "synthesis-complex-plane", "type": "requires", "strength": 1.0, "description": "The real axis defines the logic-creativity spectrum" },
+        { "target": "foundations-proof-techniques", "type": "applies", "strength": 0.6, "description": "Logical approaches rely on formal proof techniques" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-abstraction-gradient", "yields": "Full 2D navigation strategy: adjust both abstraction and approach simultaneously", "type": "parallel", "conditions": ["Problem is multifaceted", "Both dimensions can be varied"], "example": "Stuck on a proof (Q2: abstract-logical)? Try drawing a picture (shift to Q4: embodied-creative), gain intuition, then return to formalize" }
+      ],
+      "applicabilityPatterns": ["Choosing between rigorous and exploratory approaches to a problem", "Breaking through mathematical blocks by shifting thinking mode", "Balancing formal proof with intuitive understanding"],
+      "keywords": ["logic", "creativity", "balance", "approach", "intuition", "formal"],
+      "tags": ["meta-mathematical", "approach", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-distance-metric",
+      "name": "Plane Distance Metric",
+      "type": "definition",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.11",
+      "planePosition": { "real": -0.15, "imaginary": 0.15 },
+      "formalStatement": "The distance between two concepts on the Complex Plane determines their composition compatibility. Distance d(A,B) = sqrt((r_A - r_B)^2 + (i_A - i_B)^2) with composition cost proportional to d. Close concepts (d < 0.3) compose easily; distant concepts (d > 0.8) require bridge primitives.",
+      "computationalForm": "Compute Euclidean distance between plane positions. Cost function: C(d) = 1.0 for d <= 0.3 (easy), C(d) = exp(d - 0.3) for d > 0.3 (exponentially increasing). Bridge detection: for d > 0.5, search for an intermediate primitive B with d(A,B) < 0.4 and d(B,C) < 0.4.",
+      "prerequisites": ["Complex Plane", "Euclidean distance", "Composition cost"],
+      "dependencies": [
+        { "target": "synthesis-complex-plane", "type": "requires", "strength": 1.0, "description": "Distance is measured on the Complex Plane" },
+        { "target": "perception-pythagorean-theorem", "type": "applies", "strength": 0.8, "description": "Euclidean distance uses the Pythagorean formula" }
+      ],
+      "enables": ["synthesis-cross-quadrant-composition"],
+      "compositionRules": [
+        { "with": "synthesis-domain-positioning", "yields": "Inter-domain composition cost matrix", "type": "parallel", "conditions": ["All domain centers are known", "Cost function is defined"], "example": "Distance from Perception center (-0.2, 0.2) to Foundations center (-0.6, 0.6) is 0.57, indicating moderate composition cost requiring bridge concepts" }
+      ],
+      "applicabilityPatterns": ["Estimating how difficult it is to connect two mathematical concepts", "Planning the most efficient path between concepts", "Identifying when bridge concepts are needed for composition"],
+      "keywords": ["distance", "metric", "composition cost", "proximity", "bridge"],
+      "tags": ["meta-mathematical", "metric", "composition"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-origin-as-synthesis",
+      "name": "The Origin as Synthesis Point",
+      "type": "identity",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.12",
+      "planePosition": { "real": 0.0, "imaginary": 0.0 },
+      "formalStatement": "The origin of the Complex Plane (0,0) is the synthesis point where all domains converge. Concepts at or near the origin balance logic and creativity, abstract and embodied. The Synthesis domain is centered at the origin with the largest radius (0.6), reflecting its role as the meta-domain connecting all others.",
+      "computationalForm": "",
+      "prerequisites": ["Complex Plane", "Domain positioning", "Central tendency"],
+      "dependencies": [
+        { "target": "synthesis-complex-plane", "type": "requires", "strength": 1.0, "description": "The origin is the center of the Complex Plane" },
+        { "target": "synthesis-domain-positioning", "type": "requires", "strength": 0.8, "description": "Synthesis domain is defined at the origin" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-plane-navigation", "yields": "Origin as the natural waypoint for any cross-plane navigation", "type": "parallel", "conditions": ["Source and target are in opposite quadrants"], "example": "Navigating from Foundations (-0.6, 0.6) to Emergence (0.5, 0.0): routing through the origin via Synthesis primitives provides the bridge" }
+      ],
+      "applicabilityPatterns": ["Understanding why some mathematical concepts feel universally applicable", "Recognizing the unifying role of meta-mathematical thinking", "Using synthesis as a waypoint between distant mathematical domains"],
+      "keywords": ["origin", "center", "synthesis", "convergence", "balance"],
+      "tags": ["meta-mathematical", "synthesis", "identity"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-dependency-chain",
+      "name": "Mathematical Dependency Chain",
+      "type": "definition",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.1",
+      "planePosition": { "real": -0.1, "imaginary": 0.2 },
+      "formalStatement": "Every complex mathematical concept traces back to simpler foundations through a directed acyclic graph of dependencies. A dependency chain is a path from a complex theorem back to the axioms it ultimately rests on. The length of the longest dependency chain in the MFE measures the depth of mathematical knowledge.",
+      "computationalForm": "To find the dependency chain for a primitive P: recursively follow P.dependencies, collecting each target primitive. Continue until reaching axioms (primitives with no dependencies). The chain is the sequence [axiom_1, ..., axiom_k, ..., intermediate_j, ..., P]. Longest chain = graph depth.",
+      "prerequisites": ["Graph theory", "DAG traversal", "Axiomatic foundations"],
+      "dependencies": [
+        { "target": "foundations-proof-techniques", "type": "requires", "strength": 0.7, "description": "Dependency chains are the structure of mathematical proofs" },
+        { "target": "foundations-set-operations", "type": "applies", "strength": 0.5, "description": "Dependencies form a partial order (a set with a relation)" },
+        { "target": "perception-natural-numbers", "type": "motivates", "strength": 0.5, "description": "Natural numbers are among the deepest axiomatic foundations" }
+      ],
+      "enables": ["synthesis-foundational-decomposition", "synthesis-proof-as-path"],
+      "compositionRules": [
+        { "with": "synthesis-foundational-decomposition", "yields": "Complete decomposition of any concept into its foundational components", "type": "sequential", "conditions": ["Dependency graph is complete", "All edges are valid"], "example": "Central Limit Theorem -> Normal Distribution -> Variance -> Expected Value -> Random Variable -> Probability Axioms: a chain of depth 5" }
+      ],
+      "applicabilityPatterns": ["Understanding the logical foundations of any mathematical result", "Finding the minimal prerequisites for learning a concept", "Tracing the intellectual history of mathematical ideas"],
+      "keywords": ["dependency", "chain", "foundation", "DAG", "prerequisites", "depth"],
+      "tags": ["meta-mathematical", "dependency", "structure"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-through-line",
+      "name": "The Through-Line",
+      "type": "identity",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.2",
+      "planePosition": { "real": 0.1, "imaginary": -0.1 },
+      "formalStatement": "The through-line is the narrative and mathematical thread connecting all 33 chapters of The Space Between, from counting to complexity. It traces a quark's journey from origin to present, passing through every mathematical layer: numbers -> geometry -> waves -> calculus -> algebra -> physics -> foundations -> mapping -> unification -> emergence -> synthesis.",
+      "computationalForm": "",
+      "prerequisites": ["All 10 domains", "Mathematical history", "The quark narrative"],
+      "dependencies": [
+        { "target": "perception-natural-numbers", "type": "requires", "strength": 0.9, "description": "The through-line begins with counting (natural numbers)" },
+        { "target": "perception-pythagorean-theorem", "type": "requires", "strength": 0.8, "description": "Geometry emerges early in the through-line" },
+        { "target": "waves-fourier-series", "type": "requires", "strength": 0.7, "description": "Frequency analysis enters the through-line through waves" },
+        { "target": "change-derivative", "type": "requires", "strength": 0.8, "description": "Calculus is a pivotal point in the through-line" },
+        { "target": "foundations-group", "type": "requires", "strength": 0.7, "description": "Abstract algebra provides the structural foundation" },
+        { "target": "mapping-functor", "type": "requires", "strength": 0.6, "description": "Category theory reveals the deep connections" },
+        { "target": "emergence-neural-network", "type": "requires", "strength": 0.5, "description": "Machine learning represents the modern culmination" }
+      ],
+      "enables": ["synthesis-foundational-decomposition"],
+      "compositionRules": [
+        { "with": "synthesis-dependency-chain", "yields": "Narrative-aware problem decomposition that follows the natural mathematical progression", "type": "parallel", "conditions": ["Problem can be contextualized in the mathematical progression"], "example": "Understanding machine learning (Ch 31) requires tracing back through calculus (Ch 8-10) -> linear algebra (Ch 11-14) -> probability (Ch 25) -- the through-line reveals the prerequisites" }
+      ],
+      "applicabilityPatterns": ["Understanding how mathematics builds on itself from foundations", "Seeing the connections between apparently unrelated mathematical fields", "Using the mathematical progression as a guide for learning"],
+      "keywords": ["through-line", "narrative", "progression", "quark", "journey", "connection"],
+      "tags": ["meta-mathematical", "through-line", "narrative"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-foundational-decomposition",
+      "name": "Foundational Decomposition",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.3",
+      "planePosition": { "real": 0.2, "imaginary": -0.2 },
+      "formalStatement": "Foundational decomposition is the technique of reducing any problem to Domain I primitives (numbers, distance, angles) and building back up through intermediate domains. Every mathematical concept can be expressed as a composition chain starting from perception primitives, passing through required intermediate layers.",
+      "computationalForm": "1. Express the problem in its natural domain. 2. Identify the highest-level primitives needed. 3. Follow dependency chains downward until reaching Domain I axioms. 4. Verify each step is valid. 5. Execute the composition chain upward to produce the solution. This is the 'Euclid principle': complex truths from simple axioms.",
+      "prerequisites": ["Dependency chains", "Domain hierarchy", "Axiom identification"],
+      "dependencies": [
+        { "target": "synthesis-dependency-chain", "type": "requires", "strength": 1.0, "description": "Decomposition follows dependency chains" },
+        { "target": "synthesis-plane-navigation", "type": "requires", "strength": 0.8, "description": "Navigation guides the decomposition path" },
+        { "target": "perception-pythagorean-theorem", "type": "motivates", "strength": 0.7, "description": "Pythagorean theorem is a classic example of foundational decomposition" },
+        { "target": "perception-unit-circle", "type": "motivates", "strength": 0.6, "description": "The unit circle is a generative center for decomposition" }
+      ],
+      "enables": ["synthesis-compositional-verification"],
+      "compositionRules": [
+        { "with": "synthesis-through-line", "yields": "Complete problem solution from first principles", "type": "sequential", "conditions": ["Problem is well-posed", "All dependency chains terminate at axioms"], "example": "Prove the Central Limit Theorem from axioms: start from probability axioms, build up random variables, expected value, variance, characteristic functions, and arrive at convergence to normal distribution" }
+      ],
+      "applicabilityPatterns": ["Solving problems from first principles when standard techniques fail", "Understanding a concept by tracing its axiomatic roots", "Building complete mathematical arguments from simple beginnings"],
+      "keywords": ["decomposition", "foundation", "first principles", "axioms", "build up"],
+      "tags": ["meta-mathematical", "decomposition", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-compositional-verification",
+      "name": "Compositional Verification",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.4",
+      "planePosition": { "real": -0.2, "imaginary": 0.0 },
+      "formalStatement": "Compositional verification checks each step of a composition chain against the properties of its constituent primitives. Every composition step must satisfy: type compatibility (output type of step n matches input type of step n+1), dependency ordering (later steps depend on earlier ones), and domain consistency (cross-domain compositions have valid bridge rules).",
+      "computationalForm": "For each composition step [A compose B -> C]: 1. Check A.type is compatible with B's composition rule conditions. 2. Verify B appears in A.compositionRules (or vice versa). 3. Check that yields description matches C. 4. Verify no circular dependencies. 5. Mark step as verified.",
+      "prerequisites": ["Composition rules", "Type checking", "Dependency ordering"],
+      "dependencies": [
+        { "target": "synthesis-foundational-decomposition", "type": "requires", "strength": 0.9, "description": "Decomposition produces chains that need verification" },
+        { "target": "foundations-proof-techniques", "type": "applies", "strength": 0.7, "description": "Verification is a form of proof checking" },
+        { "target": "mapping-category", "type": "applies", "strength": 0.5, "description": "Composition verification checks categorical composition laws" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-proof-as-path", "yields": "Verified proof chain with every step justified", "type": "sequential", "conditions": ["Each composition step passes type check", "No cycles in dependency chain"], "example": "Verifying a linear algebra proof: each step applies a theorem whose prerequisites were established in previous steps" }
+      ],
+      "applicabilityPatterns": ["Checking the correctness of mathematical arguments step by step", "Ensuring that composition chains are valid and complete", "Detecting errors in mathematical reasoning"],
+      "keywords": ["verification", "composition", "type checking", "validity", "correctness"],
+      "tags": ["meta-mathematical", "verification", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-progressive-disclosure",
+      "name": "Progressive Disclosure",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.5",
+      "planePosition": { "real": 0.3, "imaginary": -0.2 },
+      "formalStatement": "Progressive disclosure is the pedagogical principle that mathematics reveals itself in layers of increasing abstraction: counting -> arithmetic -> algebra -> analysis -> topology. Each layer builds on the previous, and concepts should be introduced only when their prerequisites are established.",
+      "computationalForm": "Order primitives by dependency depth: depth-0 are axioms, depth-n requires at least one depth-(n-1) primitive. Present primitives in non-decreasing depth order. For a given learner's current knowledge set K, the frontier of learnable concepts is: {P : P.dependencies subset K}.",
+      "prerequisites": ["Dependency chains", "Learning theory", "Curriculum design"],
+      "dependencies": [
+        { "target": "synthesis-dependency-chain", "type": "requires", "strength": 0.9, "description": "Disclosure order follows dependency depth" },
+        { "target": "synthesis-through-line", "type": "applies", "strength": 0.7, "description": "The through-line exemplifies progressive disclosure in narrative form" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-dependency-chain", "yields": "Optimal learning paths that respect prerequisite ordering", "type": "sequential", "conditions": ["Learner's current knowledge is known", "All dependencies are mapped"], "example": "To learn Fourier analysis: first master trigonometry (Ch 2), then complex exponentials (Ch 3), then series (Ch 5), then integral transforms (Ch 24)" }
+      ],
+      "applicabilityPatterns": ["Designing mathematical curricula that build knowledge systematically", "Determining what a learner needs to know before tackling a new concept", "Presenting complex mathematics in a learnable sequence"],
+      "keywords": ["progressive", "disclosure", "layers", "curriculum", "learning", "order"],
+      "tags": ["meta-mathematical", "pedagogy", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-cross-domain-bridge",
+      "name": "Cross-Domain Bridge",
+      "type": "identity",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.6",
+      "planePosition": { "real": 0.1, "imaginary": 0.2 },
+      "formalStatement": "Cross-domain bridges are specific mathematical connections that link seemingly separate domains: Fourier transform bridges Waves and Mapping, Noether's theorem bridges Foundations and Unification, gradient descent bridges Change and Emergence, probability bridges Mapping and every applied domain.",
+      "computationalForm": "",
+      "prerequisites": ["All 10 domains", "Dependency edges", "Functor concept"],
+      "dependencies": [
+        { "target": "mapping-fourier-transform", "type": "requires", "strength": 0.7, "description": "Fourier transform is a key cross-domain bridge (Waves <-> Mapping)" },
+        { "target": "unification-noether-theorem", "type": "requires", "strength": 0.7, "description": "Noether's theorem bridges Foundations and Unification" },
+        { "target": "mapping-functor", "type": "applies", "strength": 0.8, "description": "Functors are the formal mechanism for cross-domain bridges" },
+        { "target": "change-derivative", "type": "requires", "strength": 0.6, "description": "Calculus bridges Change to many other domains" }
+      ],
+      "enables": ["synthesis-unity-of-mathematics"],
+      "compositionRules": [
+        { "with": "synthesis-plane-navigation", "yields": "Bridge-mediated navigation between distant domains", "type": "sequential", "conditions": ["Source and target domains are not directly adjacent", "Bridge concept exists"], "example": "Connecting Perception (Ch 1-3) to Emergence (Ch 28-31): bridge through Change (calculus) and Structure (linear algebra)" }
+      ],
+      "applicabilityPatterns": ["Discovering unexpected connections between mathematical fields", "Using one mathematical tool to solve problems in another domain", "Recognizing when a concept from one domain illuminates another"],
+      "keywords": ["bridge", "cross-domain", "connection", "link", "transfer"],
+      "tags": ["meta-mathematical", "bridge", "identity"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-mathematical-completeness",
+      "name": "Mathematical Completeness",
+      "type": "definition",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.7",
+      "planePosition": { "real": -0.3, "imaginary": 0.2 },
+      "formalStatement": "Mathematical completeness in the MFE context means that the 10-domain structure covers the mathematical landscape sufficiently for problem decomposition. While no finite system captures all mathematics, the 10 domains form a basis -- any well-posed mathematical problem can be decomposed into primitives from these domains.",
+      "computationalForm": "",
+      "prerequisites": ["All 10 domains", "Coverage analysis", "Basis concept"],
+      "dependencies": [
+        { "target": "synthesis-domain-positioning", "type": "requires", "strength": 0.9, "description": "Completeness requires all domain positions to cover the plane" },
+        { "target": "structure-vector-space", "type": "motivates", "strength": 0.5, "description": "Completeness is analogous to a basis spanning a vector space" },
+        { "target": "foundations-set-operations", "type": "applies", "strength": 0.5, "description": "Coverage analysis uses set union of domain regions" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-domain-positioning", "yields": "Verification that every plane position is within reach of at least one domain", "type": "parallel", "conditions": ["Domain regions are defined", "Union covers the relevant plane area"], "example": "The 10 domain regions, with overlaps, cover the [-1,1]x[-1,1] plane sufficiently: every point is within 0.5 of at least one domain center" }
+      ],
+      "applicabilityPatterns": ["Verifying that the domain structure is adequate for problem-solving", "Identifying potential gaps in mathematical coverage", "Justifying the 10-domain organization as a practical classification system"],
+      "keywords": ["completeness", "coverage", "basis", "sufficiency", "domains"],
+      "tags": ["meta-mathematical", "completeness", "definition"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-inverse-navigation",
+      "name": "Inverse Operations as Navigation",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.8",
+      "planePosition": { "real": 0.25, "imaginary": 0.0 },
+      "formalStatement": "Every mathematical operation has an inverse; navigating backward through the dependency graph uses inverses. Differentiation/integration, encoding/decoding, abstraction/specialization, composition/decomposition are all inverse pairs. Inverse navigation enables both forward construction and backward analysis.",
+      "computationalForm": "For a composition chain A -> B -> C -> D: the inverse chain is D^{-1} -> C^{-1} -> B^{-1} -> A^{-1}. Not all operations have exact inverses (information may be lost), but approximate inverses often suffice. Key pairs: derivative/integral, FFT/inverse FFT, encrypt/decrypt, generalize/specialize.",
+      "prerequisites": ["Inverse functions", "Dependency graph", "Composition chains"],
+      "dependencies": [
+        { "target": "synthesis-dependency-chain", "type": "requires", "strength": 0.8, "description": "Inverse navigation reverses dependency chains" },
+        { "target": "change-derivative", "type": "applies", "strength": 0.7, "description": "Derivative/integral is the canonical inverse pair" },
+        { "target": "mapping-fourier-transform", "type": "applies", "strength": 0.6, "description": "Forward/inverse Fourier transform is an exact inverse pair" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-foundational-decomposition", "yields": "Bidirectional problem solving: decompose forward OR reconstruct backward", "type": "parallel", "conditions": ["Inverse operations exist for each composition step", "Information loss is bounded"], "example": "Solving an integral equation: instead of composing forward (anti-differentiate), navigate backward from the solution form using differentiation" }
+      ],
+      "applicabilityPatterns": ["Solving problems by working backward from the desired result", "Understanding mathematical operations through their inverses", "Using inverse transforms to decode or reconstruct information"],
+      "keywords": ["inverse", "backward", "reverse", "undo", "dual", "navigation"],
+      "tags": ["meta-mathematical", "inverse", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-scale-invariance",
+      "name": "Scale Invariance in Mathematics",
+      "type": "identity",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.9",
+      "planePosition": { "real": 0.3, "imaginary": 0.2 },
+      "formalStatement": "The same structural patterns -- groups, symmetries, transformations, fixed points, dualities -- appear at every level of mathematical abstraction. Group structure appears in integers (Z), matrices (GL(n)), symmetries (S_n), and gauge theories (SU(3)). This scale invariance means that understanding the pattern at any level transfers to all others.",
+      "computationalForm": "",
+      "prerequisites": ["Groups", "Symmetry", "Pattern recognition across domains"],
+      "dependencies": [
+        { "target": "foundations-group", "type": "requires", "strength": 0.8, "description": "Group is the exemplary scale-invariant pattern" },
+        { "target": "mapping-functor", "type": "applies", "strength": 0.7, "description": "Functors preserve structure across levels of abstraction" },
+        { "target": "emergence-self-similarity", "type": "motivates", "strength": 0.6, "description": "Mathematical scale invariance parallels fractal self-similarity" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-functor", "yields": "Structure-preserving transfer of insights between abstraction levels", "type": "parallel", "conditions": ["Source and target share the structural pattern", "Functor between them exists"], "example": "Understanding group structure in permutations (finite, concrete) transfers to Lie groups (infinite, continuous) via the same axioms" }
+      ],
+      "applicabilityPatterns": ["Recognizing familiar mathematical patterns in new contexts", "Transferring techniques from one domain to another based on shared structure", "Understanding why mathematical structures repeat across levels of abstraction"],
+      "keywords": ["scale invariance", "pattern", "universality", "structure", "transfer"],
+      "tags": ["meta-mathematical", "scale-invariance", "identity"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-emergence-from-axioms",
+      "name": "Emergence from Axioms",
+      "type": "identity",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.10",
+      "planePosition": { "real": -0.1, "imaginary": -0.2 },
+      "formalStatement": "Complex mathematical theorems emerge from simple axioms through structured composition -- the Euclid principle. From 5 axioms, Euclid derived all of plane geometry. From ZFC set theory axioms, all of modern mathematics can be constructed. This emergence is the central miracle of mathematics: finite rules generate infinite structure.",
+      "computationalForm": "",
+      "prerequisites": ["Axiomatic systems", "Logical deduction", "Composition"],
+      "dependencies": [
+        { "target": "foundations-proof-techniques", "type": "requires", "strength": 0.9, "description": "Proofs are the mechanism of emergence from axioms" },
+        { "target": "perception-natural-numbers", "type": "motivates", "strength": 0.7, "description": "Natural numbers emerge from Peano axioms -- the simplest example" },
+        { "target": "synthesis-dependency-chain", "type": "requires", "strength": 0.8, "description": "Emergence follows dependency chains from axioms to theorems" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-foundational-decomposition", "yields": "Complete axiomatic reconstruction of any mathematical result", "type": "sequential", "conditions": ["Starting axioms are identified", "All proof steps are valid"], "example": "Euclid's Elements: from 5 postulates and 5 common notions, 465 propositions covering plane and solid geometry" }
+      ],
+      "applicabilityPatterns": ["Understanding how complex mathematics arises from simple starting points", "Building mathematical systems from minimal axiom sets", "Appreciating the generative power of formal systems"],
+      "keywords": ["emergence", "axioms", "euclid", "construction", "generation"],
+      "tags": ["meta-mathematical", "emergence", "identity"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-unity-of-mathematics",
+      "name": "Unity of Mathematics",
+      "type": "identity",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.11",
+      "planePosition": { "real": 0.0, "imaginary": 0.3 },
+      "formalStatement": "Category theory (Domain VII) reveals that apparently different mathematical structures share common patterns. Functors map between domains, preserving essential structure. The unity of mathematics means that insights in one domain often have counterparts in others, discoverable through functorial connections.",
+      "computationalForm": "",
+      "prerequisites": ["Category theory", "Functors", "Cross-domain connections"],
+      "dependencies": [
+        { "target": "mapping-category", "type": "requires", "strength": 0.9, "description": "Category theory provides the formal framework for mathematical unity" },
+        { "target": "mapping-functor", "type": "requires", "strength": 0.9, "description": "Functors are the formal bridge between mathematical structures" },
+        { "target": "synthesis-cross-domain-bridge", "type": "requires", "strength": 0.8, "description": "Cross-domain bridges are the concrete manifestation of mathematical unity" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-functor", "yields": "Systematic discovery of analogies between mathematical domains", "type": "parallel", "conditions": ["Functor between source and target categories exists", "Both domains are sufficiently developed"], "example": "Stone duality: topology and Boolean algebra are connected by a contravariant functor, allowing algebraic proofs of topological theorems and vice versa" }
+      ],
+      "applicabilityPatterns": ["Discovering deep connections between different areas of mathematics", "Using category theory to transfer results between fields", "Understanding why the same theorems appear in different guises across mathematics"],
+      "keywords": ["unity", "connection", "functor", "category", "analogy", "transfer"],
+      "tags": ["meta-mathematical", "unity", "category-theory"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-beauty-as-signal",
+      "name": "Mathematical Beauty as Signal",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.12",
+      "planePosition": { "real": 0.3, "imaginary": 0.1 },
+      "formalStatement": "The aesthetic quality of a mathematical result often indicates fundamental truth -- a meta-heuristic for navigation. Euler's identity e^{i*pi} + 1 = 0, the Pythagorean theorem, and Noether's theorem are considered beautiful because they reveal deep, unexpected connections with minimal complexity. Beauty serves as a navigation signal on the Complex Plane.",
+      "computationalForm": "Beauty heuristic: a result is likely fundamental if it (1) connects multiple domains with minimal notation, (2) reveals unexpected equivalences, (3) has a simple statement with deep consequences, (4) exhibits symmetry or duality. Use as a soft signal for prioritizing exploration paths on the Complex Plane.",
+      "prerequisites": ["Mathematical aesthetics", "Cross-domain connections", "Simplicity and depth"],
+      "dependencies": [
+        { "target": "synthesis-unity-of-mathematics", "type": "requires", "strength": 0.7, "description": "Beautiful results often reveal mathematical unity" },
+        { "target": "synthesis-cross-domain-bridge", "type": "motivates", "strength": 0.6, "description": "Cross-domain results are often considered beautiful" },
+        { "target": "perception-pythagorean-theorem", "type": "motivates", "strength": 0.5, "description": "The Pythagorean theorem is a canonical example of mathematical beauty" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-plane-navigation", "yields": "Beauty-guided exploration: prioritize elegant paths through the mathematical landscape", "type": "parallel", "conditions": ["Multiple solution paths exist", "Some paths are simpler or more symmetric"], "example": "Euler's formula e^{ix} = cos(x) + i*sin(x) connects trigonometry, exponentials, and complex numbers in a single identity -- its beauty signals its fundamental importance" }
+      ],
+      "applicabilityPatterns": ["Using aesthetic intuition to guide mathematical exploration", "Identifying results that are likely to be fundamental or widely applicable", "Appreciating mathematical elegance as an indicator of deep truth"],
+      "keywords": ["beauty", "elegance", "aesthetics", "simplicity", "signal", "heuristic"],
+      "tags": ["meta-mathematical", "aesthetics", "heuristic"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-proof-as-path",
+      "name": "Proof as Path",
+      "type": "identity",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.13",
+      "planePosition": { "real": -0.2, "imaginary": 0.1 },
+      "formalStatement": "A mathematical proof IS a path through the dependency graph from axioms to theorem. Each step cites a previously established result (a primitive in the graph) and applies a composition rule. The proof is valid if and only if the path is valid: every step uses correctly composed primitives with satisfied dependencies.",
+      "computationalForm": "A proof of theorem T consists of a sequence of steps [S_1, ..., S_n] where: S_1 cites axioms, each S_k cites primitives established in S_1, ..., S_{k-1} or existing axioms/theorems, and S_n establishes T. Verify by checking that each step's dependencies are satisfied by preceding steps.",
+      "prerequisites": ["Dependency chains", "Composition rules", "Logical deduction"],
+      "dependencies": [
+        { "target": "synthesis-dependency-chain", "type": "requires", "strength": 1.0, "description": "A proof traces a path through the dependency graph" },
+        { "target": "foundations-proof-techniques", "type": "requires", "strength": 0.9, "description": "Proof techniques are the steps in the path" },
+        { "target": "synthesis-compositional-verification", "type": "applies", "strength": 0.8, "description": "Each proof step must pass compositional verification" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-compositional-verification", "yields": "Mechanically verified proof chain", "type": "sequential", "conditions": ["All proof steps are formalized as primitive compositions", "Each step passes type and dependency checks"], "example": "Proving the irrationality of sqrt(2): path from rational number definition -> proof by contradiction -> Pythagorean theorem -> number theory (even/odd) -> contradiction -> QED" }
+      ],
+      "applicabilityPatterns": ["Understanding proofs as paths through a graph of mathematical knowledge", "Verifying the completeness and correctness of mathematical arguments", "Discovering new proofs by finding alternative paths through the dependency graph"],
+      "keywords": ["proof", "path", "graph", "verification", "deduction", "chain"],
+      "tags": ["meta-mathematical", "proof", "identity"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-tiered-knowledge",
+      "name": "Tiered Knowledge Loading",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.13",
+      "planePosition": { "real": -0.3, "imaginary": -0.1 },
+      "formalStatement": "Mathematical knowledge operates in three tiers: summary (domain names, top primitives, activation patterns), active (full primitives for activated domains), and reference (complete dependency graphs and composition rules). Only the tier needed for the current task should be loaded, minimizing cognitive and computational overhead.",
+      "computationalForm": "Summary tier (~4K tokens): domain list, top-5 primitives per domain, activation patterns. Active tier (~15K): full primitive details for 1-3 activated domains. Reference tier (~40K): complete graph with all edges and composition rules. Load summary always, active on domain activation, reference never in production (only for verification).",
+      "prerequisites": ["Domain structure", "Information retrieval", "Resource management"],
+      "dependencies": [
+        { "target": "synthesis-domain-activation", "type": "requires", "strength": 0.9, "description": "Activation determines which tier to load" },
+        { "target": "mapping-shannon-entropy", "type": "applies", "strength": 0.4, "description": "Information-theoretic approach to knowledge compression" },
+        { "target": "synthesis-complex-plane", "type": "requires", "strength": 0.7, "description": "The plane provides the organization structure for tiered loading" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-domain-activation", "yields": "Efficient on-demand knowledge retrieval", "type": "sequential", "conditions": ["Resource budget is constrained", "Not all domains needed simultaneously"], "example": "A calculus problem activates Change domain: load Change active tier (full primitives), keep other domains at summary tier" }
+      ],
+      "applicabilityPatterns": ["Managing the amount of mathematical knowledge loaded for a task", "Optimizing computational resources when navigating the mathematical landscape", "Progressive detail loading based on problem requirements"],
+      "keywords": ["tiered", "knowledge", "loading", "summary", "active", "reference"],
+      "tags": ["meta-mathematical", "resource-management", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-composition-type-system",
+      "name": "Composition Type System",
+      "type": "definition",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.14",
+      "planePosition": { "real": -0.25, "imaginary": 0.15 },
+      "formalStatement": "The composition type system defines three ways primitives compose: sequential (output of A feeds into B), parallel (A and B contribute independently to a result), and nested (A operates inside the framework of B). Type compatibility is checked by verifying that the yielded result matches expected inputs at each composition step.",
+      "computationalForm": "Sequential: A -> B means output type of A matches input type of B. Parallel: A || B means both contribute to a combined result. Nested: A(B) means B operates within A's structure. Type check: for each CompositionRule, verify conditions are satisfiable and yields is well-defined.",
+      "prerequisites": ["Composition rules", "Type theory basics", "Mathematical operations"],
+      "dependencies": [
+        { "target": "synthesis-compositional-verification", "type": "requires", "strength": 0.9, "description": "Type system enables compositional verification" },
+        { "target": "mapping-category", "type": "applies", "strength": 0.6, "description": "Composition types correspond to categorical composition patterns" },
+        { "target": "foundations-set-operations", "type": "applies", "strength": 0.4, "description": "Type compatibility is checked via set membership" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-compositional-verification", "yields": "Type-safe mathematical composition chains", "type": "sequential", "conditions": ["All composition steps have declared types", "Type checker is available"], "example": "FFT (algorithm) -> Filter Design (technique): sequential composition is valid because FFT output (frequency spectrum) is the input type for filter specification" }
+      ],
+      "applicabilityPatterns": ["Ensuring mathematical compositions are well-typed before execution", "Catching composition errors before they propagate through a proof", "Designing valid composition chains by type matching"],
+      "keywords": ["type system", "composition", "sequential", "parallel", "nested", "compatibility"],
+      "tags": ["meta-mathematical", "type-system", "definition"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-graceful-degradation",
+      "name": "Graceful Degradation",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 32,
+      "section": "32.14",
+      "planePosition": { "real": 0.2, "imaginary": -0.3 },
+      "formalStatement": "When no valid decomposition exists for a problem (the activated domains lack sufficient primitives, or composition chains break), the system degrades gracefully: report the partial decomposition achieved, identify the gap, and suggest which domains or primitives would be needed to complete the solution.",
+      "computationalForm": "1. Attempt full decomposition. 2. If decomposition fails at step k: report steps 1..k-1 as valid. 3. Identify the missing primitive or broken composition. 4. Check which domain the gap falls in (by plane position). 5. Suggest: 'This problem requires a primitive near position (r, i) in domain D that we don't have.'",
+      "prerequisites": ["Plane navigation", "Error handling", "Partial solutions"],
+      "dependencies": [
+        { "target": "synthesis-plane-navigation", "type": "requires", "strength": 0.8, "description": "Navigation reveals where decomposition breaks down" },
+        { "target": "synthesis-domain-activation", "type": "requires", "strength": 0.7, "description": "Gap identification uses domain activation analysis" },
+        { "target": "synthesis-distance-metric", "type": "applies", "strength": 0.5, "description": "Distance metric identifies how far the gap is from known primitives" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-plane-navigation", "yields": "Informative failure reporting with gap analysis", "type": "sequential", "conditions": ["Decomposition fails", "Partial progress is achievable"], "example": "Problem requires topology + probability composition, but no bridge primitive exists: report partial decomposition through topology, identify gap at (0.3, 0.4), suggest probability-topology bridge needed" }
+      ],
+      "applicabilityPatterns": ["Handling problems that exceed current mathematical coverage", "Providing useful partial results when complete solutions are impossible", "Identifying gaps in mathematical knowledge for future learning"],
+      "keywords": ["graceful", "degradation", "partial", "gap", "failure", "suggestion"],
+      "tags": ["meta-mathematical", "error-handling", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-observation-learning",
+      "name": "Observation-Based Learning",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.15",
+      "planePosition": { "real": 0.35, "imaginary": -0.1 },
+      "formalStatement": "Problem-solving episodes generate observations that refine the mathematical landscape: which primitives are used together, which compositions succeed or fail, which domain activations are accurate. These observations feed back into improved activation patterns, composition costs, and path caching.",
+      "computationalForm": "For each problem-solving episode, record: (problem_hash, plane_position, domains_activated, primitives_used, composition_path, result, user_feedback). On positive feedback: strengthen activation patterns, cache successful paths, reduce composition costs for used edges. On negative: weaken patterns, increase costs.",
+      "prerequisites": ["Problem solving", "Pattern recognition", "Feedback loops"],
+      "dependencies": [
+        { "target": "synthesis-plane-navigation", "type": "requires", "strength": 0.8, "description": "Navigation generates the episodes to learn from" },
+        { "target": "mapping-bayes-theorem", "type": "applies", "strength": 0.6, "description": "Bayesian updating of activation pattern confidence" },
+        { "target": "emergence-backpropagation", "type": "motivates", "strength": 0.5, "description": "Analogous to training a neural network from experience" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-bayes-theorem", "yields": "Bayesian refinement of domain activation patterns from problem-solving observations", "type": "sequential", "conditions": ["Sufficient observations accumulated", "User feedback is available"], "example": "After 10 episodes where calculus problems also used linear algebra, increase the co-activation weight between Change and Structure domains" }
+      ],
+      "applicabilityPatterns": ["Improving mathematical problem-solving accuracy over time", "Adapting to a user's problem-solving patterns and preferences", "Building a personalized mathematical knowledge base"],
+      "keywords": ["observation", "learning", "feedback", "refinement", "adaptation"],
+      "tags": ["meta-mathematical", "learning", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "synthesis-path-caching",
+      "name": "Composition Path Caching",
+      "type": "technique",
+      "domain": "synthesis",
+      "chapter": 33,
+      "section": "33.16",
+      "planePosition": { "real": 0.15, "imaginary": -0.15 },
+      "formalStatement": "Previously successful composition paths are cached by problem type (keyed by plane position and activated domains). When a similar problem is encountered, the cached path provides near-instant resolution without re-navigating the graph. Cache entries are validated periodically and evicted if the graph structure changes.",
+      "computationalForm": "Cache key: (quantized_plane_position, sorted_domain_set). Cache value: (composition_path, success_count, last_used). On problem arrival: compute key, look up cache. If hit and success_count > threshold: use cached path directly. If miss: navigate graph, solve, cache result. Evict entries with success_count below threshold or older than TTL.",
+      "prerequisites": ["Plane navigation", "Caching strategies", "Problem classification"],
+      "dependencies": [
+        { "target": "synthesis-plane-navigation", "type": "requires", "strength": 0.9, "description": "Caching stores results of prior navigations" },
+        { "target": "synthesis-position-classification", "type": "requires", "strength": 0.8, "description": "Problem classification provides the cache key" },
+        { "target": "synthesis-observation-learning", "type": "requires", "strength": 0.7, "description": "Observations determine which paths to cache" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "synthesis-observation-learning", "yields": "Progressively faster problem resolution through cached experience", "type": "sequential", "conditions": ["Cache has been populated by prior episodes", "New problem matches a cached key"], "example": "First time solving a Fourier analysis problem: full navigation takes 5 steps. Tenth time: cache hit resolves instantly with the same composition path" }
+      ],
+      "applicabilityPatterns": ["Accelerating repeated problem types to near-instant resolution", "Building an experience base that improves mathematical problem-solving speed", "Optimizing resource usage by avoiding redundant graph navigation"],
+      "keywords": ["cache", "path", "memoization", "speed", "lookup", "experience"],
+      "tags": ["meta-mathematical", "caching", "optimization"],
+      "buildLabs": []
+    }
+  ]
+}
