@@ -1546,6 +1546,226 @@
       "keywords": ["tunneling", "barrier penetration", "transmission coefficient", "exponential decay"],
       "tags": ["quantum-mechanics", "phenomena"],
       "buildLabs": []
+    },
+    {
+      "id": "reality-energy-mass-equivalence",
+      "name": "Energy-Mass Equivalence",
+      "type": "theorem",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.2",
+      "planePosition": { "real": 0.15, "imaginary": -0.45 },
+      "formalStatement": "Einstein's mass-energy equivalence: E = mc^2 where E is rest energy, m is rest mass, and c is the speed of light. More generally, the relativistic energy-momentum relation is E^2 = (pc)^2 + (mc^2)^2.",
+      "computationalForm": "Rest energy: E_0 = mc^2. Kinetic energy: K = (gamma - 1)mc^2 where gamma = 1/sqrt(1-v^2/c^2). Total energy: E = gamma*mc^2. For massless particles (photons): E = pc.",
+      "prerequisites": ["Speed of light", "Energy", "Momentum"],
+      "dependencies": [
+        {
+          "target": "reality-speed-of-light",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "c is the conversion factor between mass and energy"
+        }
+      ],
+      "enables": ["reality-natural-units"],
+      "compositionRules": [
+        {
+          "with": "reality-plancks-constant",
+          "yields": "Compton wavelength: lambda_C = h/(mc), the scale at which quantum and relativistic effects both matter",
+          "type": "sequential",
+          "conditions": ["Particle with mass m"],
+          "example": "Electron Compton wavelength: h/(m_e*c) = 2.43 x 10^{-12} m"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Convert between mass and energy in nuclear and particle physics",
+        "Calculate the energy released in nuclear reactions",
+        "Determine the total relativistic energy of a moving object"
+      ],
+      "keywords": ["E=mc^2", "mass-energy", "relativity", "rest energy", "Einstein"],
+      "tags": ["physics", "relativity", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-de-broglie-wavelength",
+      "name": "De Broglie Wavelength",
+      "type": "theorem",
+      "domain": "reality",
+      "chapter": 17,
+      "section": "17.1",
+      "planePosition": { "real": 0.1, "imaginary": -0.3 },
+      "formalStatement": "Every particle with momentum p has an associated wavelength lambda = h/p (de Broglie relation). This establishes wave-particle duality: particles exhibit wave-like behavior at quantum scales. For a particle with mass m and velocity v: lambda = h/(mv).",
+      "computationalForm": "lambda = h/p = h/(mv). For thermal particles: lambda_thermal = h/sqrt(2*m*k_B*T). Quantum effects are significant when lambda is comparable to system dimensions.",
+      "prerequisites": ["Planck's constant", "Momentum", "Wave properties"],
+      "dependencies": [
+        {
+          "target": "reality-plancks-constant",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "h sets the scale of the matter wave wavelength"
+        },
+        {
+          "target": "reality-wave-function",
+          "type": "motivates",
+          "strength": 0.8,
+          "description": "De Broglie wavelength motivates the wave function description"
+        }
+      ],
+      "enables": ["reality-schrodinger-time-independent"],
+      "compositionRules": [
+        {
+          "with": "reality-uncertainty-principle",
+          "yields": "Position-momentum uncertainty: localizing a particle to Delta x requires momentum spread Delta p >= h/(4*pi*Delta x)",
+          "type": "parallel",
+          "conditions": ["Quantum particle"],
+          "example": "Electron at 1 eV: lambda = h/sqrt(2*m*E) ≈ 1.2 nm, comparable to atomic spacing"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Calculate the wavelength associated with a moving particle",
+        "Determine when quantum wave effects become important",
+        "Design electron diffraction experiments"
+      ],
+      "keywords": ["de Broglie", "matter wave", "wavelength", "wave-particle duality"],
+      "tags": ["quantum-mechanics", "wave-particle-duality"],
+      "buildLabs": ["Build Lab 17.6: Matter Waves"]
+    },
+    {
+      "id": "reality-blackbody-radiation",
+      "name": "Blackbody Radiation (Planck's Law)",
+      "type": "theorem",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.3",
+      "planePosition": { "real": 0.25, "imaginary": -0.4 },
+      "formalStatement": "The spectral radiance of a blackbody at temperature T is B(nu,T) = (2*h*nu^3/c^2) * 1/(exp(h*nu/(k_B*T)) - 1). This solved the ultraviolet catastrophe by introducing energy quantization E = h*nu. Wien's displacement: lambda_max * T = 2.898 x 10^{-3} m*K.",
+      "computationalForm": "Peak wavelength: lambda_max = 2.898e-3/T m. Total power: P = sigma*T^4 (Stefan-Boltzmann law, sigma = 5.67e-8 W/m^2/K^4). Rayleigh-Jeans (classical limit): B ~ 2*k_B*T*nu^2/c^2 (fails at high frequencies).",
+      "prerequisites": ["Planck's constant", "Boltzmann constant", "Speed of light"],
+      "dependencies": [
+        {
+          "target": "reality-plancks-constant",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Planck's constant was introduced to explain blackbody radiation"
+        },
+        {
+          "target": "reality-boltzmann-constant",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Temperature enters through k_B*T"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "reality-speed-of-light",
+          "yields": "Photon energy: E = h*nu = hc/lambda, connecting frequency, wavelength, and energy",
+          "type": "sequential",
+          "conditions": ["Electromagnetic radiation"],
+          "example": "Sun surface (T=5778K): lambda_max = 502 nm (green light), total power = sigma*T^4 = 6.3e7 W/m^2"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Calculate the spectrum of thermal radiation from a hot object",
+        "Determine the peak wavelength of emission from temperature",
+        "Understand the historical origin of quantum mechanics"
+      ],
+      "keywords": ["blackbody", "Planck", "thermal radiation", "Wien", "Stefan-Boltzmann"],
+      "tags": ["physics", "quantum-mechanics", "thermodynamics"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-photoelectric-effect",
+      "name": "Photoelectric Effect",
+      "type": "theorem",
+      "domain": "reality",
+      "chapter": 15,
+      "section": "15.3",
+      "planePosition": { "real": 0.2, "imaginary": -0.45 },
+      "formalStatement": "Light incident on a metal surface ejects electrons only if the photon energy E = h*nu exceeds the work function phi: K_max = h*nu - phi. The effect demonstrates light's particle nature: increasing intensity increases electron count but not energy; only frequency determines energy.",
+      "computationalForm": "Maximum kinetic energy: K_max = h*nu - phi. Threshold frequency: nu_0 = phi/h (below this, no electrons ejected regardless of intensity). Stopping voltage: eV_0 = K_max.",
+      "prerequisites": ["Planck's constant", "Energy", "Light frequency"],
+      "dependencies": [
+        {
+          "target": "reality-plancks-constant",
+          "type": "requires",
+          "strength": 1.0,
+          "description": "Photon energy E = h*nu is essential"
+        },
+        {
+          "target": "reality-elementary-charge",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "Electron charge determines stopping potential"
+        }
+      ],
+      "enables": [],
+      "compositionRules": [
+        {
+          "with": "reality-wave-function",
+          "yields": "Photon as quantum object: discrete energy packets interacting with electron wave functions in metals",
+          "type": "sequential",
+          "conditions": ["Light-matter interaction"],
+          "example": "UV light (nu = 1.0e15 Hz) on sodium (phi = 2.3 eV): K_max = 4.14 eV - 2.3 eV = 1.84 eV"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Calculate the maximum kinetic energy of photoelectrons",
+        "Determine the threshold frequency for electron emission",
+        "Demonstrate the quantum nature of light"
+      ],
+      "keywords": ["photoelectric", "photon", "work function", "threshold frequency", "Einstein"],
+      "tags": ["physics", "quantum-mechanics", "experiments"],
+      "buildLabs": []
+    },
+    {
+      "id": "reality-hydrogen-spectrum",
+      "name": "Hydrogen Spectrum (Bohr Model)",
+      "type": "theorem",
+      "domain": "reality",
+      "chapter": 16,
+      "section": "16.1",
+      "planePosition": { "real": 0.3, "imaginary": -0.35 },
+      "formalStatement": "The energy levels of hydrogen are E_n = -13.6 eV / n^2 for n = 1, 2, 3, ... Photon emission/absorption occurs at frequencies nu = (E_m - E_n)/h. The Rydberg formula: 1/lambda = R_H (1/n_1^2 - 1/n_2^2) where R_H = 1.097 x 10^7 m^{-1}.",
+      "computationalForm": "Energy: E_n = -13.6/n^2 eV. Wavelength: 1/lambda = R_H(1/n_1^2 - 1/n_2^2). Lyman series (n_1=1): UV. Balmer series (n_1=2): visible. Paschen series (n_1=3): IR. Bohr radius: a_0 = 0.529 Angstroms.",
+      "prerequisites": ["Atomic number", "Quantum numbers", "Planck's constant"],
+      "dependencies": [
+        {
+          "target": "reality-atomic-number",
+          "type": "requires",
+          "strength": 0.8,
+          "description": "Hydrogen is the simplest atom with Z=1"
+        },
+        {
+          "target": "reality-plancks-constant",
+          "type": "requires",
+          "strength": 0.9,
+          "description": "Quantized energy levels involve h"
+        },
+        {
+          "target": "reality-fine-structure-constant",
+          "type": "requires",
+          "strength": 0.7,
+          "description": "E_n = -alpha^2*m_e*c^2/(2n^2)"
+        }
+      ],
+      "enables": ["reality-electron-configuration"],
+      "compositionRules": [
+        {
+          "with": "reality-quantum-numbers",
+          "yields": "Complete atomic energy level structure: n, l, m_l, m_s determine each state; transitions produce spectral lines",
+          "type": "sequential",
+          "conditions": ["Hydrogen or hydrogen-like atom"],
+          "example": "Balmer H-alpha: n=3 to n=2, lambda = 656 nm (red), the most prominent hydrogen line"
+        }
+      ],
+      "applicabilityPatterns": [
+        "Calculate the wavelengths of hydrogen spectral lines",
+        "Determine the energy required to ionize a hydrogen atom",
+        "Predict transition frequencies between atomic energy levels"
+      ],
+      "keywords": ["hydrogen", "Bohr", "Rydberg", "spectral lines", "energy levels"],
+      "tags": ["physics", "atomic-physics", "spectroscopy"],
+      "buildLabs": ["Build Lab 16.3: Hydrogen Spectral Lines"]
     }
   ]
 }
