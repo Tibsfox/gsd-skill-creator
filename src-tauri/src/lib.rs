@@ -92,6 +92,9 @@ pub fn run() {
             commands::services::svc_start_all_services,
             commands::services::svc_get_all_service_states,
             commands::services::svc_restart_service,
+            commands::staging::staging_trigger_intake,
+            commands::staging::staging_get_debrief,
+            commands::staging::staging_list_quarantine,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
