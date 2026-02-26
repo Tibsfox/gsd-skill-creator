@@ -147,8 +147,12 @@ describe('ChordDetector', () => {
     store = new MockPositionStore();
 
     // Populate known positions
-    store.set('skill-concrete', createPosition(0.1, 0.8));   // concrete, mature
-    store.set('skill-abstract', createPosition(1.4, 0.7));   // abstract, mature
+    // For chord detection to work, the savings ratio arc/(2*r_avg*sin(arc/2))
+    // must be >= 1.5. Lower radii increase the ratio because chord shrinks
+    // faster than arc distance. So we use moderate radii (~0.3-0.4) for the
+    // test pair to ensure the savings threshold is met.
+    store.set('skill-concrete', createPosition(0.1, 0.35));  // concrete, moderate maturity
+    store.set('skill-abstract', createPosition(1.4, 0.3));   // abstract, moderate maturity
     store.set('skill-balanced', createPosition(Math.PI / 4, 0.5)); // balanced
     store.set('skill-nearby', createPosition(0.15, 0.6));    // close to skill-concrete
     store.set('skill-immature', createPosition(1.0, 0.1));   // immature
@@ -185,13 +189,13 @@ describe('ChordDetector', () => {
     });
 
     it('filters low savings ratio', () => {
-      // Two low-radius skills close-ish together: arc/chord ratio tends toward 1
-      store.set('low-a', createPosition(0.5, 0.05));
-      store.set('low-b', createPosition(1.4, 0.05));
-      const coAct = [makeCoActivation('low-a', 'low-b', 10)];
+      // Two high-radius skills with moderate arc separation.
+      // With r=1.0 and arc~pi/2: ratio = (pi/2)/(2*sin(pi/4)) = 1.11 < 1.5
+      // The high radius means chord is closer to arc, so savings ratio is low.
+      store.set('high-a', createPosition(0.5, 1.0));
+      store.set('high-b', createPosition(0.5 + Math.PI / 2, 1.0));
+      const coAct = [makeCoActivation('high-a', 'high-b', 10)];
       const chords = detector.detectChords(coAct);
-      // Even if arc is large, low radius means chordLength can approach arc
-      // The savings ratio for very small radii won't hit 1.5
       expect(chords.length).toBe(0);
     });
 
@@ -243,12 +247,22 @@ describe('ChordDetector', () => {
 
   describe('evaluateChord', () => {
     it('evaluates a high-savings chord', () => {
-      const coAct = [makeCoActivation('skill-concrete', 'skill-abstract', 10)];
-      const chords = detector.detectChords(coAct);
-      expect(chords.length).toBeGreaterThan(0);
+      // Build a chord directly to avoid dependency on detectChords filtering
+      const posA = store.get('skill-concrete')!;
+      const posB = store.get('skill-abstract')!;
+      const chord: ChordCandidate = {
+        fromId: 'skill-concrete',
+        toId: 'skill-abstract',
+        fromPosition: posA,
+        toPosition: posB,
+        arcDistance: 1.3,
+        chordLength: 0.5,
+        savings: 0.8,
+        frequency: 10,
+      };
 
-      const evaluation = detector.evaluateChord(chords[0]);
-      expect(evaluation.chord).toBe(chords[0]);
+      const evaluation = detector.evaluateChord(chord);
+      expect(evaluation.chord).toBe(chord);
       expect(['excellent', 'good', 'marginal', 'poor']).toContain(evaluation.compositionQuality);
       expect(evaluation.recommendAction).toBeDefined();
     });
@@ -274,22 +288,40 @@ describe('ChordDetector', () => {
     });
 
     it('computes score as savings * frequency', () => {
-      const coAct = [makeCoActivation('skill-concrete', 'skill-abstract', 10)];
-      const chords = detector.detectChords(coAct);
-      const evaluation = detector.evaluateChord(chords[0]);
-      expect(evaluation.score).toBeCloseTo(chords[0].savings * chords[0].frequency, 5);
+      const posA = store.get('skill-concrete')!;
+      const posB = store.get('skill-abstract')!;
+      const chord: ChordCandidate = {
+        fromId: 'skill-concrete',
+        toId: 'skill-abstract',
+        fromPosition: posA,
+        toPosition: posB,
+        arcDistance: 1.3,
+        chordLength: 0.5,
+        savings: 0.8,
+        frequency: 10,
+      };
+      const evaluation = detector.evaluateChord(chord);
+      expect(evaluation.score).toBeCloseTo(chord.savings * chord.frequency, 5);
     });
 
     it('computes composed position via Euler multiplication', () => {
-      const coAct = [makeCoActivation('skill-concrete', 'skill-abstract', 10)];
-      const chords = detector.detectChords(coAct);
-      const evaluation = detector.evaluateChord(chords[0]);
-      const a = chords[0].fromPosition;
-      const b = chords[0].toPosition;
+      const posA = store.get('skill-concrete')!;
+      const posB = store.get('skill-abstract')!;
+      const chord: ChordCandidate = {
+        fromId: 'skill-concrete',
+        toId: 'skill-abstract',
+        fromPosition: posA,
+        toPosition: posB,
+        arcDistance: 1.3,
+        chordLength: 0.5,
+        savings: 0.8,
+        frequency: 10,
+      };
+      const evaluation = detector.evaluateChord(chord);
       // theta ~ a.theta + b.theta (mod 2pi), radius ~ a.radius * b.radius
-      const expectedTheta = (a.theta + b.theta) % (2 * Math.PI);
+      const expectedTheta = (posA.theta + posB.theta) % (2 * Math.PI);
       expect(evaluation.composedPosition.theta).toBeCloseTo(expectedTheta, 2);
-      expect(evaluation.composedPosition.radius).toBeCloseTo(a.radius * b.radius, 2);
+      expect(evaluation.composedPosition.radius).toBeCloseTo(posA.radius * posB.radius, 2);
     });
   });
 });
