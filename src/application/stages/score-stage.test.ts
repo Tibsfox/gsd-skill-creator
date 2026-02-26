@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ScoreStage } from './score-stage.js';
+import type { PositionLookup } from './score-stage.js';
 import { createEmptyContext } from '../skill-pipeline.js';
 import type { SkillIndex, SkillIndexEntry } from '../../storage/skill-index.js';
 import type { RelevanceScorer } from '../relevance-scorer.js';
@@ -7,6 +8,8 @@ import type { AdaptiveRouter } from '../../retrieval/adaptive-router.js';
 import type { EmbeddingService } from '../../embeddings/embedding-service.js';
 import type { ScoredSkill } from '../../types/application.js';
 import type { RouteDecision } from '../../retrieval/types.js';
+import { createPosition } from '../../plane/arithmetic.js';
+import type { PlaneActivationConfig } from '../../plane/activation.js';
 
 // Mock cosine-similarity module
 vi.mock('../../embeddings/cosine-similarity.js', () => ({
@@ -186,5 +189,164 @@ describe('ScoreStage with AdaptiveRouter', () => {
 
     expect(result.earlyExit).toBe(true);
     expect(router.classify).not.toHaveBeenCalled();
+  });
+});
+
+describe('ScoreStage with geometric scoring', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('enhances scores when positionLookup is provided', async () => {
+    const matches = [SKILL_A];
+    const scored: ScoredSkill[] = [
+      { name: 'skill-a', score: 0.5, matchType: 'intent' },
+    ];
+    const skillIndex = createMockSkillIndex(matches);
+    const scorer = createMockScorer(scored);
+    const positionLookup: PositionLookup = (name) =>
+      name === 'skill-a' ? createPosition(Math.PI / 4, 0.8) : null;
+
+    const stage = new ScoreStage(
+      skillIndex, scorer, undefined, undefined, positionLookup,
+    );
+    const context = createEmptyContext({ intent: 'typescript' });
+    const result = await stage.process(context);
+
+    // Geometric scoring should have changed the score from the semantic value
+    expect(result.scoredSkills[0].score).not.toBe(0.5);
+    expect(result.scoredSkills[0].score).not.toBeNaN();
+    expect(typeof result.scoredSkills[0].score).toBe('number');
+  });
+
+  it('falls back to semantic when no positionLookup', async () => {
+    const matches = [SKILL_A];
+    const scored: ScoredSkill[] = [
+      { name: 'skill-a', score: 0.7, matchType: 'intent' },
+    ];
+    const skillIndex = createMockSkillIndex(matches);
+    const scorer = createMockScorer(scored);
+
+    // No positionLookup -- existing 4-arg constructor
+    const stage = new ScoreStage(skillIndex, scorer);
+    const context = createEmptyContext({ intent: 'typescript' });
+    const result = await stage.process(context);
+
+    expect(result.scoredSkills[0].score).toBe(0.7);
+  });
+
+  it('falls back to semantic when config.enabled is false', async () => {
+    const matches = [SKILL_A];
+    const scored: ScoredSkill[] = [
+      { name: 'skill-a', score: 0.6, matchType: 'intent' },
+    ];
+    const skillIndex = createMockSkillIndex(matches);
+    const scorer = createMockScorer(scored);
+    const positionLookup: PositionLookup = () => createPosition(Math.PI / 4, 0.8);
+    const config: PlaneActivationConfig = {
+      enabled: false,
+      geometricWeight: 0.6,
+      fallbackToSemantic: true,
+      logGeometricDetail: false,
+    };
+
+    const stage = new ScoreStage(
+      skillIndex, scorer, undefined, undefined, positionLookup, config,
+    );
+    const context = createEmptyContext({ intent: 'typescript' });
+    const result = await stage.process(context);
+
+    expect(result.scoredSkills[0].score).toBe(0.6);
+  });
+
+  it('handles mixed skills (some with positions, some without)', async () => {
+    const matches = [SKILL_A, SKILL_B];
+    const scored: ScoredSkill[] = [
+      { name: 'skill-a', score: 0.5, matchType: 'intent' },
+      { name: 'skill-b', score: 0.8, matchType: 'intent' },
+    ];
+    const skillIndex = createMockSkillIndex(matches);
+    const scorer = createMockScorer(scored);
+    const positionLookup: PositionLookup = (name) =>
+      name === 'skill-a' ? createPosition(Math.PI / 4, 0.8) : null;
+
+    const stage = new ScoreStage(
+      skillIndex, scorer, undefined, undefined, positionLookup,
+    );
+    const context = createEmptyContext({ intent: 'typescript' });
+    const result = await stage.process(context);
+
+    const skillAResult = result.scoredSkills.find(s => s.name === 'skill-a');
+    const skillBResult = result.scoredSkills.find(s => s.name === 'skill-b');
+
+    // skill-a should have geometric enhancement (score changed)
+    expect(skillAResult!.score).not.toBe(0.5);
+    // skill-b has no position -- semantic only (0.8 unchanged)
+    expect(skillBResult!.score).toBe(0.8);
+  });
+
+  it('preserves earlyExit behavior with positionLookup', async () => {
+    const skillIndex = createMockSkillIndex([]);
+    const scorer = createMockScorer([]);
+    const positionLookup = vi.fn().mockReturnValue(createPosition(Math.PI / 4, 0.8));
+
+    const stage = new ScoreStage(
+      skillIndex, scorer, undefined, undefined, positionLookup,
+    );
+    const context = createEmptyContext({ intent: 'typescript', earlyExit: true });
+    const result = await stage.process(context);
+
+    expect(result.earlyExit).toBe(true);
+    expect(positionLookup).not.toHaveBeenCalled();
+  });
+
+  it('re-sorts skills by enhanced score', async () => {
+    const matches = [SKILL_A, SKILL_B];
+    const scored: ScoredSkill[] = [
+      { name: 'skill-a', score: 0.9, matchType: 'intent' },
+      { name: 'skill-b', score: 0.3, matchType: 'intent' },
+    ];
+    const skillIndex = createMockSkillIndex(matches);
+    const scorer = createMockScorer(scored);
+    // Give skill-b a very high-scoring position, skill-a gets null
+    const positionLookup: PositionLookup = (name) =>
+      name === 'skill-b' ? createPosition(Math.PI / 4, 1.0) : null;
+
+    const stage = new ScoreStage(
+      skillIndex, scorer, undefined, undefined, positionLookup,
+    );
+    const context = createEmptyContext({ intent: 'typescript' });
+    const result = await stage.process(context);
+
+    // Results should be sorted by score descending
+    for (let i = 1; i < result.scoredSkills.length; i++) {
+      expect(result.scoredSkills[i - 1].score).toBeGreaterThanOrEqual(
+        result.scoredSkills[i].score,
+      );
+    }
+  });
+
+  it('all legacy skills (no positions) behave identically', async () => {
+    const matches = [SKILL_A, SKILL_B];
+    const scored: ScoredSkill[] = [
+      { name: 'skill-a', score: 0.8, matchType: 'intent' },
+      { name: 'skill-b', score: 0.4, matchType: 'intent' },
+    ];
+    const skillIndex = createMockSkillIndex(matches);
+    const scorer = createMockScorer(scored);
+    // positionLookup always returns null
+    const positionLookup: PositionLookup = () => null;
+
+    const stage = new ScoreStage(
+      skillIndex, scorer, undefined, undefined, positionLookup,
+    );
+    const context = createEmptyContext({ intent: 'typescript' });
+    const result = await stage.process(context);
+
+    // Scores unchanged -- null positions -> semantic-only
+    expect(result.scoredSkills[0].score).toBe(0.8);
+    expect(result.scoredSkills[0].name).toBe('skill-a');
+    expect(result.scoredSkills[1].score).toBe(0.4);
+    expect(result.scoredSkills[1].name).toBe('skill-b');
   });
 });
