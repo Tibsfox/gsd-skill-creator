@@ -1,8 +1,405 @@
 # Release History
 
-Comprehensive release notes for GSD Skill Creator across all 36 milestones.
+Comprehensive release notes for GSD Skill Creator across all 42 milestones.
 
-**Totals:** 37 milestones (v1.0-v1.33 + v1.8.1 patch) | 325 phases | 852 plans | ~416k LOC | 1,240 requirements
+**Totals:** 42 milestones (v1.0-v1.40 + v1.8.1 patch) | 389 phases | 1,007 plans | ~513k LOC | ~1,616 requirements
+
+---
+
+## v1.40 — sc:learn Dogfood Mission
+
+**Shipped:** 2026-02-26
+**Phases:** 384-389 (6 phases) | **Plans:** 12 | **Commits:** 24 | **Requirements:** 44 | **Tests:** 362 | **LOC:** ~7.2K
+
+Dogfood sc:learn by ingesting "The Space Between" (923 pages, 33 chapters) through the full learning pipeline with PDF extraction, checkpoint-based ingestion, dual-track learning, 3-track verification, refinement with actionable patches, and safety validation.
+
+### Key Features
+
+**PDF Extraction Pipeline (Phase 384):**
+- pdftotext-based extraction with chapter/part detection
+- LaTeX math preservation, TikZ diagram cataloging, MusiXTeX tagging
+- Exercise and build-lab extraction with chunk segmentation (8000 token limit)
+- JSONL manifest with full metadata
+- 118 tests
+
+**Ingestion Harness (Phase 385):**
+- Atomic checkpoint write/read with SHA-256 integrity hash
+- Multi-session resume with validation
+- Per-chapter metrics (tokens, concepts, math density, processing time)
+- Dashboard bridge writing JSON to console outbox
+- 27 tests
+
+**Dual-Track Learning Pipeline (Phase 386):**
+- Track A (Parts I-V) and Track B (Parts VI-X) concept extraction
+- Regex-based detection (definitions, theorems, headings)
+- Complex plane positioning via PART_ANGULAR_REGIONS
+- Progressive depth tracking with ecosystem cross-referencing
+- Token budget enforcement (~100K per track)
+- 68 tests
+
+**Database Merger (Phase 386):**
+- Case-insensitive deduplication across tracks
+- Progressive depth preservation
+- Coverage statistics and coordinate validation
+- 26 tests
+
+**Verification Engine (Phase 387):**
+- 3-track verification: concept coverage audit, cross-document consistency, eight-layer progression
+- Bidirectional knowledge diffing with Jaccard similarity
+- 8-type gap taxonomy with 4-level severity and analysis justification
+- Gap deduplication and statistics generation
+- 65 tests
+
+**Refinement & Reporting (Phase 388-389):**
+- Knowledge patch generator (proposals only, requiresReview=true)
+- Improvement ticket generator with reproduction steps
+- Skill refiner with complex plane positions
+- Comprehensive dogfood report builder (11 sections, actual metrics)
+- Safety validator: bounded learning <=20%, checkpoint integrity, no auto-application, regression gate
+- 84 tests
+
+---
+
+## v1.39 — GSD-OS Bootstrap & READY Prompt
+
+**Shipped:** 2026-02-26
+**Phases:** 375-383 (9 phases) | **Plans:** 18 | **Commits:** 36 | **Requirements:** 80 | **Tests:** 517 | **LOC:** ~16.7K
+
+Transforms GSD-OS from an empty desktop shell into a living development environment with IPC foundation, API streaming client, CLI chat, bootstrap system, magic verbosity control, service launcher, staging intake, and self-improvement lifecycle.
+
+### Key Features
+
+**IPC Foundation (Phase 375):**
+- 29 event types with Zod + serde JSON parity between TypeScript and Rust
+- 9 Tauri command stubs with desktop IPC wrappers
+- .planning/ directory scaffold
+- 120 tests
+
+**API Client (Phase 376):**
+- Rust SSE streaming parser for Anthropic Messages API
+- Secure key management (env/keychain/encrypted file)
+- Exponential backoff retry with 429 compliance
+- Conversation history persistence
+- 38 tests
+
+**CLI Chat (Phase 377):**
+- Terminal-styled webview chat with READY. prompt sequence
+- Streaming render from IPC deltas
+- Command history (up arrow), auto-scroll with manual override
+- LED status panel, XSS prevention (textContent only)
+- 72 tests
+
+**Bootstrap System (Phase 378):**
+- Idempotent bootstrap.sh (no sudo, no rm, magic-level output)
+- Platform-aware prerequisite detection
+- 7-section SKILL.md with dependency graph, bring-up sequence, error recovery
+- "You can't break it" guarantee
+- 42 tests
+
+**Magic Verbosity System (Phase 379):**
+- 5-level verbosity control (Full Magic L1 to No Magic L5)
+- Event visibility map for 29 event types
+- Chat passthrough at all levels, JSON persistence
+- Settings recalibrate panel with live preview
+- 74 tests
+
+**Service Launcher (Phase 380):**
+- 7-service dependency graph with Kahn's topological sort
+- Ordered startup with dependency validation
+- 5s health checks (3 missed = Degraded, 5 missed = Failed)
+- LED state machine, graceful shutdown (SIGTERM then 10s then SIGKILL)
+- 51 tests
+
+**Staging Intake (Phase 381):**
+- Filesystem watcher with atomic move-to-processing
+- Hygiene pipeline (YAML code execution, path traversal, zip extraction)
+- Quarantine routing, orchestrator JSON notification
+- Debrief collector with calibration ratios
+- 50 tests
+
+**Self-Improvement Lifecycle (Phase 382):**
+- RETROSPECTIVE.md template generator
+- Changelog watch with LEVERAGE/PLAN/WATCH classification
+- Calibration delta computation, observation harvester
+- Prioritized action item generator
+- 34 tests
+
+**Integration & Wiring (Phase 383):**
+- API to Magic to Chat pipeline
+- Service to LED bridge, Staging to Inbox bridge
+- Full bootstrap flow, error recovery flow, persistence manager
+- 36 tests via port-based dependency injection
+
+---
+
+## v1.38 — SSH Agent Security
+
+**Shipped:** 2026-02-26
+**Phases:** 367-374 (8 phases) | **Plans:** 16 | **Commits:** 39 | **Requirements:** 70 | **Tests:** 260 | **LOC:** ~11.3K
+
+SSH-based agent security architecture for GSD-OS using OS-level sandboxing (bubblewrap/Seatbelt) and a credential proxy to structurally prevent credential exposure, even under successful prompt injection.
+
+### Key Features
+
+**Security Foundation Types (Phase 367):**
+- 5 Zod schemas + 5 serde structs with TS-Rust JSON round-trip parity
+- .planning/security/ directory initialization
+- 52 type tests
+
+**OS-Level Sandbox Configurator (Phase 368):**
+- bubblewrap/Seatbelt platform detection
+- Per-agent profiles for 4 agent types (exec/verify/scout/main)
+- SSH key/credential directory denial
+- Escape prevention (nsenter/unshare/chroot/proc)
+
+**Zero-Knowledge Credential Proxy (Phase 369):**
+- SecretString with zeroize-on-drop
+- Unix socket server (mode 0600)
+- Domain allowlist (deny-by-default)
+- API key injection without credential material entering sandbox
+- GNOME Keyring/macOS Keychain native credential stores
+
+**CVE-Informed Staging Scanner (Phase 370):**
+- 8 pattern detectors (SEC-001 through SEC-008)
+- Covers settings.json hooks, API redirect, hook injection, MCP risk, sandbox escape, SSH key references, credential exfiltration, base64 obfuscation
+- Agent-proof quarantine (no release mechanism in code)
+
+**Per-Agent Worktree Isolation (Phase 371):**
+- Git worktrees with scoped sandbox profiles
+- Cross-agent read denial verified programmatically
+- INTEG read-across with read-only access
+- WorktreeCreate hook auto-generates sandbox profiles
+
+**Security Dashboard (Phase 372):**
+- Shield indicator visible at all 5 magic levels
+- 4 shield states (secure/attention/breach-blocked/inactive)
+- Critical events bypass magic filter
+- Event timeline, full operations view at level 5
+
+**Bootstrap Phase 0 (Phase 373):**
+- Security infrastructure online before Claude connects
+- 6-step boot sequence: SSH key check, sandbox install, profile generation, proxy start, verification, LED activation
+- Hard-stop if verification fails
+
+**E2E Integration (Phase 374):**
+- SecurityState in Tauri managed state, 7 Tauri commands
+- IPC event routing, TypeScript barrel
+- 80 cross-cutting tests (17 safety-critical + 63 core/integration)
+- Full regression clean (16,273 total tests)
+
+---
+
+## v1.37 — Complex Plane Learning Framework
+
+**Shipped:** 2026-02-26
+**Phases:** 359-366 (8 phases) | **Plans:** 16 | **Commits:** 28 | **Requirements:** 50 | **Tests:** 446 | **LOC:** ~9.7K
+
+Replaces skill-creator's implicit linear knowledge model with an explicit Complex Plane mathematical framework where every skill occupies a position defined by angle theta (abstract-to-concrete balance) and radius r (maturity), with tangent-line activation, bounded angular rotation promotion, Euler skill composition, and versine/exsecant health metrics.
+
+### Key Features
+
+**Mathematical Core (Phase 359):**
+- 7 Zod schemas (SkillPosition, TangentContext, TangentMatch, ChordCandidate, PromotionDecision, AngularObservation, PlaneMetrics)
+- PromotionLevel enum, PROMOTION_REGIONS
+- 19 pure arithmetic functions with division-by-zero guards
+- 129 tests
+
+**Tangent Activation Engine (Phase 360):**
+- TaskVector analysis classifying concrete/abstract context signals
+- Enhanced scoring with configurable geometric/semantic weight blending (60/40 default)
+- Surgical Score stage integration preserving all 5 downstream pipeline stages
+- 37 tests
+
+**Observer Angular Integration (Phase 361):**
+- PositionStore with JSON persistence at .claude/plane/positions.json
+- SIGNAL_WEIGHTS classification (12 signal types)
+- ObserverAngularBridge with session processing and angular velocity clamping
+- 54 tests
+
+**Angular Promotion Pipeline (Phase 362):**
+- 7-check AngularPromotionEvaluator (direction, adjacency, angular step, evidence, stability, velocity, existing F1/MCC)
+- AngularRefinementWrapper with content direction analysis
+- CONSTRAINT_MAP preserving 3-correction/7-day/20% rules
+- 52 tests
+
+**Chord Detection & Euler Composition (Phase 363):**
+- ChordDetector with configurable arc/savings/frequency filtering
+- ChordStore persistence
+- EulerCompositionEngine (complex multiplication, quality assessment, action recommendation)
+- Co-activation geometric gate
+- 54 tests
+
+**Plane Metrics Dashboard (Phase 364):**
+- Versine distribution (grounded/working/frontier)
+- Exsecant reach, velocity warnings
+- `skill-creator plane-status` CLI with --json/--snapshot/--detail
+- Terminal bar charts
+- 33 tests
+
+**Migration System (Phase 365):**
+- SkillMigrationAnalyzer (trigger/content/history analysis)
+- PlaneMigration executor (dry-run/force/idempotent)
+- `skill-creator migrate-plane` CLI with 4 flags
+- 68 tests
+
+**Integration & Verification (Phase 366):**
+- 12 safety-critical tests (SC-01 through SC-12)
+- 12 E2E integration tests (INT-01 through INT-12)
+- Full regression (16,100 tests, 0 failures)
+- Barrel exports for 13 modules
+- 38 tests
+
+---
+
+## v1.36 — Citation Management & Source Attribution
+
+**Shipped:** 2026-02-26
+**Phases:** 351-358 (8 phases) | **Plans:** 16 | **Commits:** 17 | **Requirements:** 71 | **Tests:** 280 | **LOC:** ~14.2K
+
+Citation tracking, source attribution, and bibliography generation system integrated into skill-creator's sc:learn pathway, maintaining provenance chains from original author through derived works with formatted bibliography output including a publication-ready bibliography for "The Space Between."
+
+### Key Features
+
+**Multi-Format Citation Extractor (Phase 351):**
+- 8 regex patterns (APA, narrative, numbered, DOI, ISBN, URL, bibliography section, informal prose)
+- DOI detector with normalization, URL resolver with domain classification
+- Bibliography parser with cross-reference boost and author+year dedup
+- 63 extraction tests
+
+**Citation Store (Phase 352):**
+- JSONL-backed store with 3-tier deduplication (DOI, ISBN, title similarity via Levenshtein)
+- SHA-256 deterministic IDs, field indexes (DOI/ISBN/title/author/tag)
+- Provenance chain tracker with dual-index JSONL
+- Bidirectional queries (source to artifacts, artifact to sources)
+- Chain traversal with depth limit and circular detection
+
+**6-Adapter Resolution Cascade (Phase 353):**
+- CrossRef, OpenAlex, NASA NTRS, GitHub (with CITATION.cff), Internet Archive, generic web fallback
+- Injectable fetch, 30-day TTL caching, token bucket rate limiting, graceful timeout/error handling
+- Confidence cascade: stop at >=0.70, continue at 0.50-0.69, unresolved below 0.50
+
+**Bibliography Generator (Phase 354):**
+- 5 formats: BibTeX (LaTeX escaping, key dedup), APA 7th (1/2/3-20/21+ author rules), Chicago 17th (notes-bibliography), MLA 9th (containers model), custom Mustache templates
+- Attribution report classifying claims into 5 categories (cited/common/novel/original/unattributed)
+- Integrity auditor with completeness scoring and broken reference detection
+
+**Learn Pipeline Integration (Phase 355):**
+- SAFE-06 fault isolation: pre-hook extracts and resolves citations (<5% overhead)
+- Post-hook links skills to provenance asynchronously
+- Non-destructive [CITE:id] annotation injection
+- Knowledge tier linker (summary/active/reference priority)
+
+**Discovery CLI & Dashboard (Phase 356):**
+- 6 commands: search, trace, verify, export, enrich, status
+- Citation graph walker with cycle detection
+- Dashboard citation panel with provenance tree viewer
+- Green/yellow/red integrity badges
+
+**"The Space Between" Bibliography (Phase 357):**
+- 10 curated references (Sagan, Shannon, Lindenmayer, Euclid, Pythagoras, Clausius, Heisenberg, Mac Lane, Gibbs, Fourier)
+- BibTeX + APA7 output
+- Attribution report distinguishing philosophical originals from cited foundations
+
+**Citation Chipset (Phase 358):**
+- 6 skills, 4 agents (LIBRARIAN, ARCHIVIST, SCRIBE, AUDITOR)
+- 2 communication loops
+- Pre/post-deploy evaluation gates
+
+---
+
+## v1.35 — Mathematical Foundations Engine
+
+**Shipped:** 2026-02-26
+**Phases:** 335-350 (16 phases) | **Plans:** 50 | **Commits:** 79 | **Requirements:** 43 | **Tests:** 631 | **LOC:** ~9.7K source + ~13.1K test + ~21.4K data + ~1.2K skills
+
+451 typed mathematical primitives from The Space Between encoded in a navigable dependency graph with composition, proof, and verification engines transparently integrated into skill-creator's pipeline, plus `sc:learn` generalized knowledge ingestion and `sc:unlearn` reversible sessions.
+
+### Key Features
+
+**Primitive Registry & Dependency Graph (Phases 335-337):**
+- 451 primitives across 10 domains (Perception, Waves, Change, Structure, Reality, Foundations, Mapping, Unification, Emergence, Synthesis)
+- Coverage of all 33 chapters of The Space Between
+- 106 dependency edges, DAG builder with Dijkstra path finder
+
+**Mathematical Engines (Phases 338-342):**
+- Complex Plane classifier/navigator
+- Composition engine (sequential/parallel/nested)
+- Proof composer (formal reasoning chains)
+- Verification engine (dimensional/type/domain checks)
+- Property checker library (5 mathematical properties)
+
+**Pipeline Integration (Phases 343-344):**
+- MFE activates as skill type in 6-stage pipeline
+- Tiered knowledge loading respecting 2-5% token budget (4K summary / 15K active / 40K reference)
+- 10 progressive disclosure domain skill files generated
+
+**sc:learn Generalized Ingestion (Phases 345-348):**
+- Acquire: PDF, Markdown, docx, txt, epub, zip, tgz, GitHub
+- Sanitize: STRANGER-tier security with 6 attack categories
+- HITL gate, analyze (structure/type/domain/plane)
+- Extract + wire dependencies, deduplicate + merge
+- Generate skills/agents/teams, report with provenance
+
+**sc:unlearn Reversible Sessions (Phase 349):**
+- Changeset manager for session-scoped rollback
+- Graph integrity validation
+- Skill regeneration after removal
+
+**Safety-Critical Tests (Phase 350):**
+- SAFE-04: 5% budget cap enforcement
+- SAFE-05 Magic Test: zero MFE leakage in user output
+- SAFE-06 Euclid's Test: decompose-compose round trip
+- SAFE-07 self-validation: 96.2% duplicate detection
+- SAFE-08 security stress: 31 attack vectors blocked across 6 categories
+
+---
+
+## v1.34 — Documentation Ecosystem Refinement
+
+**Shipped:** 2026-02-26
+**Phases:** 326-334 (9 phases) | **Plans:** 23 | **Commits:** 9 | **Requirements:** 18 | **Docs:** 158 markdown files (~53K lines)
+
+Transformed docs/ from a collection of independent educational resources into a unified, self-improving documentation ecosystem with canonical source, narrative spine, extractable templates, site architecture, and WordPress migration plan.
+
+### Key Features
+
+**Canonical Source Structure (Phases 326-327):**
+- Complete docs/ directory (158 markdown files) as single source of truth
+- YAML frontmatter schema, style guide, machine-readable filesystem contracts
+
+**Narrative Spine (Phase 328):**
+- docs/index.md connecting 5 educational layers with 3 entry points (learn/build/understand)
+- References all 5 published resources (The Space Between, Skills-and-Agents, Power Efficiency Rankings, Skill Creator docs, OpenStack Cloud)
+
+**Gateway Documents (Phase 329):**
+- 3 foundations: mathematical-foundations, complex-plane, eight-layer-progression
+- 4 principles: agentic-programming, amiga-principle, progressive-disclosure, humane-flow
+
+**WordPress Content Migration (Phase 330):**
+- Core content migrated to docs/ as clean markdown
+- Getting Started, Core Concepts, Features, About, Architecture, Core Learning
+- 2 application gateways (Power Efficiency, OpenStack case study)
+
+**Extractable Templates (Phase 331):**
+- Educational pack template (from Power Efficiency Rankings)
+- Career pathway template
+- AI learning prompt template (3 patterns: structured roadmap, Socratic tutor, hands-on project)
+- Mission retrospective template (NASA LLIS format with 8 fields)
+
+**Site Architecture (Phase 332):**
+- URL structure, WordPress redirect map
+- Astro SSG recommendation
+- 5-phase incremental migration plan
+- Content pipeline (docs/ to www/ transformation)
+
+**Iterative Improvement Cycle (Phase 333):**
+- 5 feedback loops (Mission to Template, skill-creator to Quality, Template to Skill, Community to Documentation, Analytics to Priorities)
+- Community contributing guide
+
+**Verification (Phase 334):**
+- 502 cross-references validated (0 broken)
+- All 30 content documents pass three-speed reading test
+- All frontmatter schema-compliant
 
 ---
 
@@ -1732,6 +2129,56 @@ The foundational 6-step adaptive learning loop.
 
 ---
 
+## Version History
+
+| Version | Summary |
+|---------|---------|
+| **v1.40** | sc:learn Dogfood Mission: PDF extraction pipeline, checkpoint ingestion harness, dual-track concept learning, 3-track verification engine (coverage/consistency/progression), refinement with patches/tickets/skill updates, safety validation |
+| **v1.39** | GSD-OS Bootstrap & READY Prompt: IPC foundation (29 event types), Rust SSE API client, CLI chat with streaming, 5-level magic verbosity, 7-service launcher with health checks, staging intake, self-improvement lifecycle |
+| **v1.38** | SSH Agent Security: OS-level sandbox (bubblewrap/Seatbelt), zero-knowledge credential proxy, CVE-informed staging scanner, per-agent worktree isolation, security dashboard, bootstrap Phase 0 |
+| **v1.37** | Complex Plane Learning Framework: SkillPosition (theta,r) with tangent-line activation, angular promotion pipeline, chord detection, Euler composition, versine/exsecant metrics, plane-status CLI, migration system |
+| **v1.36** | Citation Management: multi-format extraction, 6-adapter resolution cascade, 5 bibliography formats (BibTeX/APA7/Chicago/MLA/custom), provenance chains, learn pipeline integration, "The Space Between" bibliography, citation chipset (6 skills, 4 agents) |
+| **v1.35** | Mathematical Foundations Engine: 451 primitives across 10 domains, 8 mathematical engines, sc:learn generalized knowledge ingestion, sc:unlearn reversible sessions, 6 safety-critical tests |
+| **v1.34** | Documentation Ecosystem: canonical docs/ source, narrative spine, 7 gateway documents, 4 extractable templates, site architecture |
+| **v1.33** | GSD OpenStack Cloud Platform: NASA SE methodology, 19 skills, 3 crew configurations (31 agents), ASIC chipset, documentation pack, V&V infrastructure |
+| **v1.32** | Brainstorm Session Support: 8 specialized agents, 16 techniques, 5 pathways, Osborn's rules, adaptive facilitation |
+| **v1.31** | GSD-OS MCP Integration: MCP Host Manager, Gateway Server (19 tools), 3 template generators, agent bridge, security pipeline |
+| **v1.30** | Vision-to-Mission Pipeline: document parsers, wave planner, model assignment, cache optimizer, test plan generator, template system |
+| **v1.29** | Electronics Educational Pack: MNA simulator, logic simulator, safety warden, learn mode, 15 modules, 77 labs |
+| **v1.28** | GSD Den Operations: filesystem message bus, 10 staff positions, 5 divisions, topology profiles, integration exercise |
+| **v1.27** | Foundational Knowledge Packs: 35 packs across 3 tiers, GSD-OS dashboard, observation infrastructure, pathway adaptation |
+| **v1.26** | Aminet Archive Extension Pack: INDEX parser, mirror engine, virus scanner, archive extraction, FS-UAE integration |
+| **v1.25** | Ecosystem Integration: 20-node dependency DAG, EventDispatcher spec, dependency philosophy, integration test strategy |
+| **v1.24** | GSD Conformance Audit: 336-checkpoint matrix, 4-tier audit, zero-fail conformance, 9,355 tests passing |
+| **v1.23** | Project AMIGA: mission infrastructure (MC-1/ME-1/CE-1/GL-1), Apollo AGC simulator, DSKY interface, RFC Reference Skill |
+| **v1.22** | Minecraft Knowledge World: local cloud infrastructure, Fabric server, platform portability, Amiga emulation, spatial curriculum |
+| **v1.21** | GSD-OS Desktop Foundation: Tauri v2 shell, WebGL CRT engine, PTY terminal, Workbench desktop, calibration wizard |
+| **v1.20** | Dashboard Assembly: unified CSS pipeline, topology/activity/budget/staging collectors, console page |
+| **v1.19** | Budget Display Overhaul: LoadingProjection, dual-view display, configurable budgets, dashboard gauge |
+| **v1.18** | Information Design System: shape+color encoding, status gantry, topology views, three-speed layering |
+| **v1.17** | Staging Layer: analysis, scanning, resource planning, approval queue for parallel execution |
+| **v1.16** | Dashboard Console & Milestone Ingestion |
+| **v1.15** | Live Dashboard Terminal |
+| **v1.14** | Promotion Pipeline |
+| **v1.13** | Session Lifecycle & Workflow Coprocessor |
+| **v1.12.1** | Live Metrics Dashboard |
+| **v1.12** | GSD Planning Docs Dashboard |
+| **v1.11** | GSD Integration Layer |
+| **v1.10** | Security Hardening |
+| **v1.9** | Ecosystem Alignment & Advanced Orchestration |
+| **v1.8.1** | Audit Remediation (Patch) |
+| **v1.8** | Capability-Aware Planning + Token Efficiency |
+| **v1.7** | GSD Master Orchestration Agent |
+| **v1.6** | Cross-Domain Examples |
+| **v1.5** | Pattern Discovery |
+| **v1.4** | Agent Teams |
+| **v1.3** | Documentation Overhaul |
+| **v1.2** | Test Infrastructure |
+| **v1.1** | Semantic Conflict Detection |
+| **v1.0** | Core Skill Management |
+
+---
+
 ## Timeline
 
 ```
@@ -1771,4 +2218,11 @@ The foundational 6-step adaptive learning loop.
 2026-02-22  v1.31   GSD-OS MCP Integration
 2026-02-22  v1.32   Brainstorm Session Support
 2026-02-23  v1.33   GSD OpenStack Cloud Platform (NASA SE Edition)
+2026-02-26  v1.34   Documentation Ecosystem Refinement
+2026-02-26  v1.35   Mathematical Foundations Engine
+2026-02-26  v1.36   Citation Management & Source Attribution
+2026-02-26  v1.37   Complex Plane Learning Framework
+2026-02-26  v1.38   SSH Agent Security
+2026-02-26  v1.39   GSD-OS Bootstrap & READY Prompt
+2026-02-26  v1.40   sc:learn Dogfood Mission
 ```
