@@ -24,6 +24,7 @@ base64 = "0.22"
 regex = "1"
 reqwest = { version = "0.12", features = ["json", "stream", "rustls-tls"], default-features = false }
 futures-util = "0.3"
+zip = { version = "2", default-features = false, features = ["deflate"] }
 
 [features]
 gnome-keyring = []
@@ -31,6 +32,7 @@ macos-keychain = []
 
 [dev-dependencies]
 tempfile = "3"
+zip = { version = "2", default-features = false, features = ["deflate"] }
 
 [build-dependencies]
 tauri-build = { version = "2.5", features = [] }
