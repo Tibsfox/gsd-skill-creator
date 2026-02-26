@@ -4,9 +4,11 @@
  * Plan 365-01: TDD RED phase -- all tests fail until migration.ts is implemented.
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import {
   SkillMigrationAnalyzer,
+  PlaneMigration,
+  handleMigratePlaneCommand,
   countCodeBlocks,
   countExplicitCommands,
   countFilePaths,
@@ -16,9 +18,12 @@ import {
   type InferredPosition,
   type ExistingSkillMetadata,
   type ActivationRecord,
+  type MigrationReport,
+  type MigrationOptions,
 } from './migration.js';
 import { estimateTheta, estimateRadius } from './arithmetic.js';
 import { MATURITY_THRESHOLD } from './types.js';
+import type { SkillPosition } from './types.js';
 
 // ---------------------------------------------------------------------------
 // Content Analysis Helpers
@@ -510,5 +515,254 @@ describe('SkillMigrationAnalyzer', () => {
       expect(result.confidence).toBe('high');
       expect(result.source).toBe('history_enhanced');
     });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// PlaneMigration Executor (Plan 365-02)
+// ---------------------------------------------------------------------------
+
+/**
+ * Create mock dependencies for PlaneMigration tests.
+ */
+function createMockDeps() {
+  const mockPositionStore = {
+    load: vi.fn().mockResolvedValue(undefined),
+    save: vi.fn().mockResolvedValue(undefined),
+    get: vi.fn().mockReturnValue(null),
+    set: vi.fn(),
+    all: vi.fn().mockReturnValue(new Map()),
+    remove: vi.fn(),
+  };
+  const mockSkillStore = {
+    list: vi.fn().mockResolvedValue([] as string[]),
+    read: vi.fn(),
+  };
+  const analyzer = new SkillMigrationAnalyzer();
+  return { mockPositionStore, mockSkillStore, analyzer };
+}
+
+/**
+ * Create a mock Skill object with minimal structure.
+ */
+function mockSkill(name: string, body: string, triggers?: { files?: string[]; intents?: string[] }) {
+  return {
+    metadata: {
+      name,
+      description: `${name} skill`,
+      triggers,
+    },
+    body,
+    path: `.claude/skills/${name}/SKILL.md`,
+  };
+}
+
+describe('PlaneMigration', () => {
+  describe('migrateAll - fresh system', () => {
+    it('migrates 3 skills with no existing positions', async () => {
+      const { mockPositionStore, mockSkillStore, analyzer } = createMockDeps();
+      mockSkillStore.list.mockResolvedValue(['alpha', 'beta', 'gamma']);
+      mockSkillStore.read.mockImplementation(async (name: string) =>
+        mockSkill(name, '```\ncode\n```\nUse when testing.'),
+      );
+
+      const migration = new PlaneMigration(analyzer, mockPositionStore as any, mockSkillStore as any);
+      const report = await migration.migrateAll();
+
+      expect(report.total).toBe(3);
+      expect(report.migrated).toBe(3);
+      expect(report.skipped).toBe(0);
+      expect(report.errors).toBe(0);
+      expect(mockPositionStore.set).toHaveBeenCalledTimes(3);
+      expect(mockPositionStore.save).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('migrateAll - partially migrated', () => {
+    it('skips skills that already have positions', async () => {
+      const { mockPositionStore, mockSkillStore, analyzer } = createMockDeps();
+      mockSkillStore.list.mockResolvedValue(['alpha', 'beta', 'gamma']);
+      mockSkillStore.read.mockImplementation(async (name: string) =>
+        mockSkill(name, '```\ncode\n```'),
+      );
+      // beta already has a position
+      mockPositionStore.get.mockImplementation((id: string) =>
+        id === 'beta'
+          ? { theta: 0.5, radius: 0.3, angularVelocity: 0, lastUpdated: new Date().toISOString() }
+          : null,
+      );
+
+      const migration = new PlaneMigration(analyzer, mockPositionStore as any, mockSkillStore as any);
+      const report = await migration.migrateAll();
+
+      expect(report.migrated).toBe(2);
+      expect(report.skipped).toBe(1);
+    });
+  });
+
+  describe('migrateAll - idempotent (MIGRATE-04)', () => {
+    it('produces 0 migrated on second run with same skills', async () => {
+      const { mockPositionStore, mockSkillStore, analyzer } = createMockDeps();
+      mockSkillStore.list.mockResolvedValue(['alpha', 'beta', 'gamma']);
+      mockSkillStore.read.mockImplementation(async (name: string) =>
+        mockSkill(name, '```\ncode\n```'),
+      );
+
+      const migration = new PlaneMigration(analyzer, mockPositionStore as any, mockSkillStore as any);
+
+      // First run: all migrated
+      const report1 = await migration.migrateAll();
+      expect(report1.migrated).toBe(3);
+
+      // Simulate all skills now having positions
+      const fakePos: SkillPosition = { theta: 0.5, radius: 0.3, angularVelocity: 0, lastUpdated: new Date().toISOString() };
+      mockPositionStore.get.mockReturnValue(fakePos);
+      mockPositionStore.set.mockClear();
+      mockPositionStore.save.mockClear();
+
+      // Second run: all skipped
+      const report2 = await migration.migrateAll();
+      expect(report2.migrated).toBe(0);
+      expect(report2.skipped).toBe(3);
+    });
+  });
+
+  describe('migrateAll - non-destructive (MIGRATE-05)', () => {
+    it('never writes or updates skill files', async () => {
+      const { mockPositionStore, mockSkillStore, analyzer } = createMockDeps();
+      mockSkillStore.list.mockResolvedValue(['alpha']);
+      mockSkillStore.read.mockResolvedValue(mockSkill('alpha', 'body'));
+
+      const migration = new PlaneMigration(analyzer, mockPositionStore as any, mockSkillStore as any);
+      await migration.migrateAll();
+
+      // SkillStore mock has no update/write/create methods -- if PlaneMigration
+      // called any, it would throw. Verify read was called but nothing else.
+      expect(mockSkillStore.read).toHaveBeenCalledWith('alpha');
+      expect(Object.keys(mockSkillStore).sort()).toEqual(['list', 'read']);
+    });
+  });
+
+  describe('migrateAll - dry-run', () => {
+    it('does not call positionStore.set or save', async () => {
+      const { mockPositionStore, mockSkillStore, analyzer } = createMockDeps();
+      mockSkillStore.list.mockResolvedValue(['alpha', 'beta']);
+      mockSkillStore.read.mockImplementation(async (name: string) =>
+        mockSkill(name, '```\ncode\n```'),
+      );
+
+      const migration = new PlaneMigration(analyzer, mockPositionStore as any, mockSkillStore as any);
+      const report = await migration.migrateAll({ dryRun: true });
+
+      expect(report.migrated).toBe(2);
+      expect(report.details.length).toBe(2);
+      expect(report.details[0].position).toBeDefined();
+      expect(mockPositionStore.set).not.toHaveBeenCalled();
+      expect(mockPositionStore.save).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('migrateAll - force mode', () => {
+    it('re-analyzes skills that already have positions', async () => {
+      const { mockPositionStore, mockSkillStore, analyzer } = createMockDeps();
+      mockSkillStore.list.mockResolvedValue(['alpha', 'beta', 'gamma']);
+      mockSkillStore.read.mockImplementation(async (name: string) =>
+        mockSkill(name, '```\ncode\n```'),
+      );
+      // All already positioned
+      const fakePos: SkillPosition = { theta: 0.5, radius: 0.3, angularVelocity: 0, lastUpdated: new Date().toISOString() };
+      mockPositionStore.get.mockReturnValue(fakePos);
+
+      const migration = new PlaneMigration(analyzer, mockPositionStore as any, mockSkillStore as any);
+      const report = await migration.migrateAll({ force: true });
+
+      expect(report.migrated).toBe(3);
+      expect(report.skipped).toBe(0);
+      expect(mockPositionStore.set).toHaveBeenCalledTimes(3);
+    });
+  });
+
+  describe('migrateAll - error isolation', () => {
+    it('continues migrating when one skill throws', async () => {
+      const { mockPositionStore, mockSkillStore, analyzer } = createMockDeps();
+      mockSkillStore.list.mockResolvedValue(['alpha', 'beta', 'gamma']);
+      mockSkillStore.read.mockImplementation(async (name: string) => {
+        if (name === 'beta') throw new Error('read failure');
+        return mockSkill(name, '```\ncode\n```');
+      });
+
+      const migration = new PlaneMigration(analyzer, mockPositionStore as any, mockSkillStore as any);
+      const report = await migration.migrateAll();
+
+      expect(report.migrated).toBe(2);
+      expect(report.errors).toBe(1);
+      const errorDetail = report.details.find(d => d.skillId === 'beta');
+      expect(errorDetail?.error).toBe('read failure');
+    });
+  });
+
+  describe('migrateAll - empty skill set', () => {
+    it('returns zero totals for empty skill list', async () => {
+      const { mockPositionStore, mockSkillStore, analyzer } = createMockDeps();
+      mockSkillStore.list.mockResolvedValue([]);
+
+      const migration = new PlaneMigration(analyzer, mockPositionStore as any, mockSkillStore as any);
+      const report = await migration.migrateAll();
+
+      expect(report.total).toBe(0);
+      expect(report.migrated).toBe(0);
+      expect(report.skipped).toBe(0);
+      expect(report.errors).toBe(0);
+      expect(report.details).toEqual([]);
+    });
+  });
+
+  describe('migrateAll - no-history mode', () => {
+    it('produces content_analysis source (not history_enhanced) when includeHistory is false', async () => {
+      const { mockPositionStore, mockSkillStore, analyzer } = createMockDeps();
+      mockSkillStore.list.mockResolvedValue(['alpha']);
+      mockSkillStore.read.mockResolvedValue(mockSkill('alpha', '```\ncode\n```'));
+
+      const migration = new PlaneMigration(analyzer, mockPositionStore as any, mockSkillStore as any);
+      const report = await migration.migrateAll({ includeHistory: false });
+
+      // Without history, source should be content_analysis or default (not history_enhanced)
+      expect(report.details[0].source).not.toBe('history_enhanced');
+    });
+  });
+
+  describe('convertSkillToMetadata', () => {
+    it('converts Skill with triggers into ExistingSkillMetadata', () => {
+      const { mockPositionStore, mockSkillStore, analyzer } = createMockDeps();
+      const migration = new PlaneMigration(analyzer, mockPositionStore as any, mockSkillStore as any);
+
+      const skill = mockSkill('test-skill', 'body content', {
+        files: ['*.ts'],
+        intents: ['refactor'],
+      });
+      const meta = migration.convertSkillToMetadata(skill as any);
+
+      expect(meta.id).toBe('test-skill');
+      expect(meta.content).toBe('body content');
+      expect(meta.triggers?.files).toEqual(['*.ts']);
+      expect(meta.triggers?.intents).toEqual(['refactor']);
+    });
+
+    it('handles skill with no triggers gracefully', () => {
+      const { mockPositionStore, mockSkillStore, analyzer } = createMockDeps();
+      const migration = new PlaneMigration(analyzer, mockPositionStore as any, mockSkillStore as any);
+
+      const skill = mockSkill('bare-skill', 'just body');
+      const meta = migration.convertSkillToMetadata(skill as any);
+
+      expect(meta.id).toBe('bare-skill');
+      expect(meta.content).toBe('just body');
+    });
+  });
+});
+
+describe('handleMigratePlaneCommand', () => {
+  it('is exported and callable', () => {
+    expect(typeof handleMigratePlaneCommand).toBe('function');
   });
 });
