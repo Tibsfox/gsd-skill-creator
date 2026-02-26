@@ -10,6 +10,7 @@ mod mcp_host;
 pub mod staging;
 pub mod ipc;
 pub mod magic;
+pub mod services;
 mod watcher;
 
 use std::sync::Mutex;
