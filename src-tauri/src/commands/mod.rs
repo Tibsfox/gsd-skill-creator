@@ -3,6 +3,7 @@ pub mod claude;
 pub mod dashboard;
 pub mod echo;
 pub mod greet;
+pub mod ipc;
 pub mod proxy;
 pub mod pty;
 pub mod sandbox;

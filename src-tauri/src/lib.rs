@@ -72,6 +72,15 @@ pub fn run() {
             commands::security::agent_create,
             commands::security::agent_destroy,
             commands::security::agent_verify_isolation,
+            commands::ipc::send_chat_message,
+            commands::ipc::get_service_states,
+            commands::ipc::set_magic_level,
+            commands::ipc::get_magic_level,
+            commands::ipc::get_conversation_history,
+            commands::ipc::start_service,
+            commands::ipc::stop_service,
+            commands::ipc::restart_service,
+            commands::ipc::get_staging_status,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
