@@ -1,0 +1,178 @@
+{
+  "version": "1.35.0",
+  "domains": [
+    {
+      "id": "perception",
+      "name": "Perception",
+      "part": "Part I: Seeing",
+      "chapters": [1, 2, 3],
+      "planeRegion": {
+        "center": { "real": -0.2, "imaginary": 0.2 },
+        "radius": 0.4
+      },
+      "activationPatterns": [
+        "number", "count", "distance", "magnitude", "circle",
+        "trigonometric", "angle", "inner product", "orthogonal"
+      ],
+      "compatibleWith": ["waves", "change", "structure", "synthesis"],
+      "primaryPrimitiveTypes": ["axiom", "definition", "theorem"],
+      "description": "Foundational measurements and relationships. The axioms of the system — numbers, distance, angles, and the geometry of seeing."
+    },
+    {
+      "id": "waves",
+      "name": "Waves",
+      "part": "Part II: Hearing",
+      "chapters": [4, 5, 6, 7],
+      "planeRegion": {
+        "center": { "real": -0.4, "imaginary": 0.0 },
+        "radius": 0.4
+      },
+      "activationPatterns": [
+        "wave", "frequency", "harmonic", "oscillation", "period",
+        "amplitude", "resonance", "standing wave", "Fourier", "spectrum"
+      ],
+      "compatibleWith": ["perception", "change", "reality", "mapping", "synthesis"],
+      "primaryPrimitiveTypes": ["definition", "theorem", "algorithm"],
+      "description": "Periodic phenomena and frequency analysis. How repetition creates structure — from simple oscillation to Fourier decomposition."
+    },
+    {
+      "id": "change",
+      "name": "Change",
+      "part": "Part III: Moving",
+      "chapters": [8, 9, 10],
+      "planeRegion": {
+        "center": { "real": 0.0, "imaginary": -0.2 },
+        "radius": 0.4
+      },
+      "activationPatterns": [
+        "derivative", "integral", "rate", "differential", "Taylor",
+        "optimization", "limit", "continuous", "accumulation"
+      ],
+      "compatibleWith": ["perception", "waves", "structure", "emergence", "synthesis"],
+      "primaryPrimitiveTypes": ["definition", "theorem", "algorithm", "technique"],
+      "description": "Calculus and continuous transformation. Rates, accumulation, approximation — the mathematics of motion and growth."
+    },
+    {
+      "id": "structure",
+      "name": "Structure",
+      "part": "Part IV: Expanding",
+      "chapters": [11, 12, 13, 14],
+      "planeRegion": {
+        "center": { "real": -0.3, "imaginary": 0.5 },
+        "radius": 0.4
+      },
+      "activationPatterns": [
+        "vector", "matrix", "linear", "space", "dimension",
+        "basis", "eigenvalue", "transformation", "determinant"
+      ],
+      "compatibleWith": ["perception", "change", "reality", "foundations", "mapping", "synthesis"],
+      "primaryPrimitiveTypes": ["definition", "theorem", "algorithm"],
+      "description": "Linear algebra and higher-dimensional thinking. Vectors, matrices, transformations — the architecture of mathematical space."
+    },
+    {
+      "id": "reality",
+      "name": "Reality",
+      "part": "Part V: Grounding",
+      "chapters": [15, 16, 17],
+      "planeRegion": {
+        "center": { "real": 0.3, "imaginary": -0.4 },
+        "radius": 0.35
+      },
+      "activationPatterns": [
+        "physics", "constant", "quantum", "particle", "energy",
+        "momentum", "wave function", "measurement", "uncertainty"
+      ],
+      "compatibleWith": ["structure", "waves", "foundations", "synthesis"],
+      "primaryPrimitiveTypes": ["axiom", "definition", "theorem"],
+      "description": "Physical applications of mathematics. Constants, quantum mechanics, measurement — where abstract meets embodied."
+    },
+    {
+      "id": "foundations",
+      "name": "Foundations",
+      "part": "Part VI: Defining",
+      "chapters": [18, 19, 20, 21],
+      "planeRegion": {
+        "center": { "real": -0.6, "imaginary": 0.6 },
+        "radius": 0.35
+      },
+      "activationPatterns": [
+        "set", "logic", "proof", "group", "ring",
+        "field", "topology", "axiom", "formal", "abstract"
+      ],
+      "compatibleWith": ["structure", "reality", "mapping", "unification", "synthesis"],
+      "primaryPrimitiveTypes": ["axiom", "definition", "theorem"],
+      "description": "Pure mathematical structure. Sets, groups, rings, fields, topology — the formal bedrock everything else rests on."
+    },
+    {
+      "id": "mapping",
+      "name": "Mapping",
+      "part": "Part VII: Mapping",
+      "chapters": [22, 23, 24, 25],
+      "planeRegion": {
+        "center": { "real": 0.2, "imaginary": 0.4 },
+        "radius": 0.4
+      },
+      "activationPatterns": [
+        "function", "morphism", "category", "functor", "information",
+        "entropy", "signal", "probability", "transform"
+      ],
+      "compatibleWith": ["structure", "foundations", "waves", "unification", "emergence", "synthesis"],
+      "primaryPrimitiveTypes": ["definition", "theorem", "algorithm", "technique"],
+      "description": "Functions, categories, and information. How mathematical objects relate to each other — morphisms, entropy, signal processing."
+    },
+    {
+      "id": "unification",
+      "name": "Unification",
+      "part": "Part VIII: Converging",
+      "chapters": [26, 27],
+      "planeRegion": {
+        "center": { "real": 0.0, "imaginary": 0.6 },
+        "radius": 0.3
+      },
+      "activationPatterns": [
+        "symmetry", "gauge", "unify", "standard model", "force",
+        "coupling", "conservation", "invariance"
+      ],
+      "compatibleWith": ["foundations", "mapping", "emergence", "synthesis"],
+      "primaryPrimitiveTypes": ["theorem", "identity"],
+      "description": "Deep symmetries and unifying principles. Where separate mathematical threads converge into shared structure."
+    },
+    {
+      "id": "emergence",
+      "name": "Emergence",
+      "part": "Part IX: Growing",
+      "chapters": [28, 29, 30, 31],
+      "planeRegion": {
+        "center": { "real": 0.5, "imaginary": 0.0 },
+        "radius": 0.4
+      },
+      "activationPatterns": [
+        "chaos", "complexity", "nonlinear", "attractor", "fractal",
+        "network", "learning", "neural", "emergent", "self-organizing"
+      ],
+      "compatibleWith": ["change", "mapping", "unification", "synthesis"],
+      "primaryPrimitiveTypes": ["definition", "theorem", "algorithm", "technique"],
+      "description": "Complex systems and emergent behavior. Chaos, networks, learning — how simple rules generate unexpected complexity."
+    },
+    {
+      "id": "synthesis",
+      "name": "Synthesis",
+      "part": "Part X: Being",
+      "chapters": [32, 33],
+      "planeRegion": {
+        "center": { "real": 0.0, "imaginary": 0.0 },
+        "radius": 0.6
+      },
+      "activationPatterns": [
+        "connection", "through-line", "plane", "meta", "overview",
+        "cross-domain", "integration", "wholeness"
+      ],
+      "compatibleWith": [
+        "perception", "waves", "change", "structure", "reality",
+        "foundations", "mapping", "unification", "emergence"
+      ],
+      "primaryPrimitiveTypes": ["identity", "technique"],
+      "description": "The complete picture. Meta-mathematical connections, cross-domain synthesis, and the Complex Plane itself as a navigational tool."
+    }
+  ]
+}
