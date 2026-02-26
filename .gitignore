@@ -12,8 +12,8 @@ node_modules/
 # Brainstorm session data (local only)
 .brainstorm/
 
-# Generated dashboard (root-level only, not src/dashboard/)
-dashboard/
+# Generated dashboard (root-level only, not src/dashboard/ or src/citations/dashboard/)
+/dashboard/
 
 # Tauri / Desktop
 src-tauri/target/
