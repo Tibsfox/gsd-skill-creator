@@ -14,12 +14,12 @@
       "computationalForm": "",
       "prerequisites": ["Sets and functions", "Composition of functions", "Identity function"],
       "dependencies": [
-        { "target": "foundations-set-operations", "type": "requires", "strength": 0.9, "description": "Categories generalize the structure of sets and functions" },
-        { "target": "foundations-proof-techniques", "type": "applies", "strength": 0.5, "description": "Proofs about categories use logical reasoning" }
+        { "target": "foundations-set-union", "type": "requires", "strength": 0.9, "description": "Categories generalize the structure of sets and functions" },
+        { "target": "foundations-proof-by-direct", "type": "applies", "strength": 0.5, "description": "Proofs about categories use logical reasoning" }
       ],
       "enables": ["mapping-functor", "mapping-natural-transformation", "mapping-yoneda-lemma", "mapping-adjunction"],
       "compositionRules": [
-        { "with": "foundations-group", "yields": "Group as a single-object category where all morphisms are invertible", "type": "parallel", "conditions": ["Group has single object", "All morphisms are isomorphisms"], "example": "A group G viewed as a category with one object * and morphisms Hom(*,*) = G" }
+        { "with": "foundations-group-definition", "yields": "Group as a single-object category where all morphisms are invertible", "type": "parallel", "conditions": ["Group has single object", "All morphisms are isomorphisms"], "example": "A group G viewed as a category with one object * and morphisms Hom(*,*) = G" }
       ],
       "applicabilityPatterns": ["Analyzing structure-preserving maps between mathematical objects", "Identifying universal properties in algebraic structures", "Abstracting common patterns across different areas of mathematics"],
       "keywords": ["category", "morphism", "object", "composition", "identity"],
@@ -39,7 +39,7 @@
       "prerequisites": ["Category", "Morphism composition", "Structure preservation"],
       "dependencies": [
         { "target": "mapping-category", "type": "requires", "strength": 1.0, "description": "Functors are maps between categories" },
-        { "target": "foundations-group", "type": "generalizes", "strength": 0.8, "description": "Functors generalize group homomorphisms to arbitrary categories" },
+        { "target": "foundations-group-definition", "type": "generalizes", "strength": 0.8, "description": "Functors generalize group homomorphisms to arbitrary categories" },
         { "target": "structure-linear-transformation", "type": "generalizes", "strength": 0.7, "description": "Functors generalize linear maps between vector spaces" }
       ],
       "enables": ["mapping-natural-transformation", "mapping-adjunction", "mapping-yoneda-lemma"],
@@ -118,7 +118,7 @@
       ],
       "enables": ["mapping-monad"],
       "compositionRules": [
-        { "with": "foundations-group", "yields": "Free-forgetful adjunction between groups and sets", "type": "parallel", "conditions": ["Forgetful functor has a left adjoint"], "example": "The free group functor F: Set -> Grp is left adjoint to the forgetful functor U: Grp -> Set" }
+        { "with": "foundations-group-definition", "yields": "Free-forgetful adjunction between groups and sets", "type": "parallel", "conditions": ["Forgetful functor has a left adjoint"], "example": "The free group functor F: Set -> Grp is left adjoint to the forgetful functor U: Grp -> Set" }
       ],
       "applicabilityPatterns": ["Finding the best approximation of one type of structure by another", "Establishing free-forgetful relationships between algebraic structures", "Optimizing constructions with universal properties"],
       "keywords": ["adjunction", "adjoint", "free", "forgetful", "universal"],
@@ -167,7 +167,7 @@
       ],
       "enables": ["mapping-adjunction"],
       "compositionRules": [
-        { "with": "foundations-group", "yields": "Characterization of free groups via universal property", "type": "sequential", "conditions": ["Construction satisfies the universal mapping property"], "example": "The free group on a set S is the unique group (up to isomorphism) through which every set map from S to any group G factors" }
+        { "with": "foundations-group-definition", "yields": "Characterization of free groups via universal property", "type": "sequential", "conditions": ["Construction satisfies the universal mapping property"], "example": "The free group on a set S is the unique group (up to isomorphism) through which every set map from S to any group G factors" }
       ],
       "applicabilityPatterns": ["Defining mathematical constructions by what they do rather than how they are built", "Proving uniqueness of constructions up to isomorphism", "Identifying when an object is the best solution to a mapping problem"],
       "keywords": ["universal", "property", "unique", "factorization", "initial", "terminal"],
@@ -191,7 +191,7 @@
       ],
       "enables": [],
       "compositionRules": [
-        { "with": "foundations-set-operations", "yields": "Products, coproducts, equalizers, coequalizers in Set", "type": "parallel", "conditions": ["Category has all small limits"], "example": "The product of sets A and B is the Cartesian product A x B with projection maps, which is a limit of the discrete two-object diagram" }
+        { "with": "foundations-set-union", "yields": "Products, coproducts, equalizers, coequalizers in Set", "type": "parallel", "conditions": ["Category has all small limits"], "example": "The product of sets A and B is the Cartesian product A x B with projection maps, which is a limit of the discrete two-object diagram" }
       ],
       "applicabilityPatterns": ["Constructing products, intersections, and pullbacks in abstract settings", "Building new objects from diagrams of existing objects", "Ensuring completeness of categorical constructions"],
       "keywords": ["limit", "colimit", "product", "coproduct", "pullback", "pushout"],
@@ -211,7 +211,7 @@
       "prerequisites": ["Probability distribution", "Logarithm", "Expected value"],
       "dependencies": [
         { "target": "mapping-probability-axioms", "type": "requires", "strength": 1.0, "description": "Entropy is defined over probability distributions" },
-        { "target": "change-integral", "type": "applies", "strength": 0.6, "description": "Continuous entropy uses integration: h(X) = -integral f(x) log f(x) dx" },
+        { "target": "change-definite-integral", "type": "applies", "strength": 0.6, "description": "Continuous entropy uses integration: h(X) = -integral f(x) log f(x) dx" },
         { "target": "perception-real-numbers", "type": "requires", "strength": 0.5, "description": "Entropy values are real numbers" }
       ],
       "enables": ["mapping-mutual-information", "mapping-channel-capacity", "mapping-kl-divergence"],
@@ -358,7 +358,7 @@
       "dependencies": [
         { "target": "mapping-channel-capacity", "type": "motivates", "strength": 0.8, "description": "Error correction codes approach channel capacity" },
         { "target": "structure-linear-transformation", "type": "applies", "strength": 0.7, "description": "Linear codes use matrix multiplication over finite fields" },
-        { "target": "foundations-field", "type": "requires", "strength": 0.6, "description": "Codes are defined over finite fields" }
+        { "target": "foundations-field-definition", "type": "requires", "strength": 0.6, "description": "Codes are defined over finite fields" }
       ],
       "enables": [],
       "compositionRules": [
@@ -381,13 +381,13 @@
       "computationalForm": "For continuous signals, evaluate the integral numerically using quadrature. For discrete signals of length N, use the DFT: X[k] = sum_{n=0}^{N-1} x[n] e^{-2pi i kn/N}.",
       "prerequisites": ["Complex exponentials", "Integration", "Frequency and period"],
       "dependencies": [
-        { "target": "waves-fourier-series", "type": "generalizes", "strength": 0.9, "description": "Fourier transform generalizes Fourier series from periodic to aperiodic functions" },
-        { "target": "change-integral", "type": "requires", "strength": 1.0, "description": "The transform is defined as an integral" },
-        { "target": "structure-complex-analysis", "type": "applies", "strength": 0.6, "description": "Uses complex exponentials and analytic properties" }
+        { "target": "waves-fourier-series-preview", "type": "generalizes", "strength": 0.9, "description": "Fourier transform generalizes Fourier series from periodic to aperiodic functions" },
+        { "target": "change-definite-integral", "type": "requires", "strength": 1.0, "description": "The transform is defined as an integral" },
+        { "target": "structure-complex-function", "type": "applies", "strength": 0.6, "description": "Uses complex exponentials and analytic properties" }
       ],
       "enables": ["mapping-fft", "mapping-sampling-theorem", "mapping-convolution-theorem"],
       "compositionRules": [
-        { "with": "waves-fourier-series", "yields": "Unified spectral analysis for periodic and aperiodic signals", "type": "parallel", "conditions": ["Signal is integrable or periodic"], "example": "A windowed periodic signal uses the Fourier transform, reducing to Fourier series coefficients as window length approaches the period" }
+        { "with": "waves-fourier-series-preview", "yields": "Unified spectral analysis for periodic and aperiodic signals", "type": "parallel", "conditions": ["Signal is integrable or periodic"], "example": "A windowed periodic signal uses the Fourier transform, reducing to Fourier series coefficients as window length approaches the period" }
       ],
       "applicabilityPatterns": ["Analyzing frequency content of signals", "Solving differential equations by transforming to the frequency domain", "Converting between time-domain and frequency-domain representations"],
       "keywords": ["fourier", "transform", "frequency", "spectrum", "spectral"],
@@ -431,7 +431,7 @@
       "prerequisites": ["Fourier transform", "Bandwidth", "Sinc function"],
       "dependencies": [
         { "target": "mapping-fourier-transform", "type": "requires", "strength": 1.0, "description": "Sampling theorem is proved via Fourier analysis" },
-        { "target": "waves-fourier-series", "type": "motivates", "strength": 0.6, "description": "Discrete sampling connects to Fourier series of periodic extensions" }
+        { "target": "waves-fourier-series-preview", "type": "motivates", "strength": 0.6, "description": "Discrete sampling connects to Fourier series of periodic extensions" }
       ],
       "enables": [],
       "compositionRules": [
@@ -455,7 +455,7 @@
       "prerequisites": ["Fourier transform", "Convolution integral", "Pointwise multiplication"],
       "dependencies": [
         { "target": "mapping-fourier-transform", "type": "requires", "strength": 1.0, "description": "The theorem relates convolution and multiplication via the Fourier transform" },
-        { "target": "change-integral", "type": "requires", "strength": 0.7, "description": "Convolution is defined as an integral" }
+        { "target": "change-definite-integral", "type": "requires", "strength": 0.7, "description": "Convolution is defined as an integral" }
       ],
       "enables": [],
       "compositionRules": [
@@ -503,7 +503,7 @@
       "prerequisites": ["Complex numbers", "Power series", "Discrete-time signals"],
       "dependencies": [
         { "target": "mapping-fourier-transform", "type": "specializes", "strength": 0.8, "description": "Z-transform is the discrete-time analog of the Laplace transform; evaluating on the unit circle gives the DTFT" },
-        { "target": "structure-complex-analysis", "type": "applies", "strength": 0.7, "description": "Z-transform analysis uses complex analysis (poles, zeros, ROC)" }
+        { "target": "structure-complex-function", "type": "applies", "strength": 0.7, "description": "Z-transform analysis uses complex analysis (poles, zeros, ROC)" }
       ],
       "enables": ["mapping-filter-design"],
       "compositionRules": [
@@ -576,7 +576,7 @@
       "dependencies": [],
       "enables": ["mapping-conditional-probability", "mapping-bayes-theorem", "mapping-random-variable", "mapping-shannon-entropy"],
       "compositionRules": [
-        { "with": "foundations-set-operations", "yields": "Probability space (Omega, F, P) as a measure space", "type": "parallel", "conditions": ["Sigma-algebra is properly defined", "Probability measure satisfies axioms"], "example": "Rolling a fair die: Omega = {1,2,3,4,5,6}, F = power set, P({k}) = 1/6 for each k" }
+        { "with": "foundations-set-union", "yields": "Probability space (Omega, F, P) as a measure space", "type": "parallel", "conditions": ["Sigma-algebra is properly defined", "Probability measure satisfies axioms"], "example": "Rolling a fair die: Omega = {1,2,3,4,5,6}, F = power set, P({k}) = 1/6 for each k" }
       ],
       "applicabilityPatterns": ["Formalizing uncertainty in mathematical models", "Defining the foundation for statistical inference", "Setting up probability spaces for random experiments"],
       "keywords": ["probability", "axioms", "kolmogorov", "measure", "sample space"],
@@ -667,7 +667,7 @@
       "prerequisites": ["Random variable", "Summation", "Integration"],
       "dependencies": [
         { "target": "mapping-random-variable", "type": "requires", "strength": 1.0, "description": "Expected value is a functional of the distribution" },
-        { "target": "change-integral", "type": "applies", "strength": 0.7, "description": "Continuous expected value uses integration" }
+        { "target": "change-definite-integral", "type": "applies", "strength": 0.7, "description": "Continuous expected value uses integration" }
       ],
       "enables": ["mapping-variance"],
       "compositionRules": [
@@ -716,7 +716,7 @@
       "dependencies": [
         { "target": "mapping-random-variable", "type": "requires", "strength": 1.0, "description": "Distributions describe random variables" },
         { "target": "mapping-probability-axioms", "type": "requires", "strength": 0.9, "description": "Distributions satisfy probability axioms" },
-        { "target": "change-integral", "type": "applies", "strength": 0.6, "description": "Continuous distributions use density functions integrated to give probabilities" }
+        { "target": "change-definite-integral", "type": "applies", "strength": 0.6, "description": "Continuous distributions use density functions integrated to give probabilities" }
       ],
       "enables": ["mapping-normal-distribution", "mapping-central-limit-theorem"],
       "compositionRules": [
@@ -839,7 +839,7 @@
       "prerequisites": ["Laplace transform", "Impulse response", "Linear systems"],
       "dependencies": [
         { "target": "mapping-fourier-transform", "type": "requires", "strength": 0.8, "description": "Transfer function evaluated on the imaginary axis gives the frequency response" },
-        { "target": "change-differential-equation", "type": "requires", "strength": 0.9, "description": "Transfer functions encode differential equation systems" },
+        { "target": "change-ode", "type": "requires", "strength": 0.9, "description": "Transfer functions encode differential equation systems" },
         { "target": "structure-linear-transformation", "type": "applies", "strength": 0.7, "description": "Transfer function represents a linear operator" }
       ],
       "enables": ["mapping-filter-design"],
@@ -899,6 +899,126 @@
       "applicabilityPatterns": ["Understanding the fundamental limits of reliable communication", "Motivating the design of efficient error-correcting codes", "Proving that reliable communication is possible over noisy channels"],
       "keywords": ["noisy channel", "coding theorem", "shannon", "achievability", "converse"],
       "tags": ["information-theory", "coding-theorem", "reliability"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-entropy-rate",
+      "name": "Entropy Rate",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 23,
+      "section": "23.6",
+      "planePosition": { "real": 0.1, "imaginary": 0.5 },
+      "formalStatement": "The entropy rate of a stochastic process {X_n} is H' = lim_{n->inf} (1/n) H(X_1, X_2, ..., X_n), measuring the average information per symbol in the long run.",
+      "computationalForm": "For a stationary Markov chain with transition matrix P and stationary distribution pi: H' = -sum_i pi_i sum_j P_{ij} log P_{ij}.",
+      "prerequisites": ["Shannon entropy", "Stochastic process", "Markov chain"],
+      "dependencies": [
+        { "target": "mapping-shannon-entropy", "type": "requires", "strength": 1.0, "description": "Entropy rate extends Shannon entropy to sequential processes" },
+        { "target": "mapping-markov-chain", "type": "applies", "strength": 0.85, "description": "Markov chains provide the simplest nontrivial entropy rate computation" }
+      ],
+      "enables": ["mapping-source-coding-theorem"],
+      "compositionRules": [
+        { "with": "mapping-data-compression", "yields": "Optimal compression ratio for sequential data equals the entropy rate", "type": "sequential", "conditions": ["Source is stationary and ergodic", "Compressor has unlimited memory"], "example": "English text has entropy rate ~1.0-1.5 bits/character, so optimal compression approaches this limit" }
+      ],
+      "applicabilityPatterns": ["Measuring information content of sequential data", "Determining optimal compression rates for time series"],
+      "keywords": ["entropy rate", "stochastic process", "information rate", "stationary"],
+      "tags": ["information-theory", "entropy", "stochastic"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-rate-distortion",
+      "name": "Rate-Distortion Theory",
+      "type": "theorem",
+      "domain": "mapping",
+      "chapter": 23,
+      "section": "23.7",
+      "planePosition": { "real": 0.0, "imaginary": 0.55 },
+      "formalStatement": "The rate-distortion function R(D) gives the minimum bit rate required to represent a source with average distortion at most D. R(D) = min_{p(x_hat|x): E[d(X,X_hat)]<=D} I(X; X_hat).",
+      "computationalForm": "For a Gaussian source X ~ N(0, sigma^2) with squared-error distortion: R(D) = 0.5 * log_2(sigma^2/D) for 0 < D <= sigma^2, and R(D) = 0 for D > sigma^2.",
+      "prerequisites": ["Mutual information", "Distortion measure", "Optimization"],
+      "dependencies": [
+        { "target": "mapping-mutual-information", "type": "requires", "strength": 1.0, "description": "Rate-distortion function is defined as a minimum mutual information" },
+        { "target": "mapping-shannon-entropy", "type": "requires", "strength": 0.8, "description": "Entropy provides the upper bound at zero distortion" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-fourier-transform", "yields": "Spectral rate-distortion: frequency-domain allocation of bits to spectral components", "type": "sequential", "conditions": ["Source is stationary with known power spectral density", "Distortion is mean squared error"], "example": "Reverse water-filling allocates more bits to high-energy frequency bands for optimal lossy compression" }
+      ],
+      "applicabilityPatterns": ["Determining theoretical limits of lossy compression", "Optimizing quality vs bitrate tradeoffs in signal encoding"],
+      "keywords": ["rate-distortion", "lossy compression", "distortion", "information theory"],
+      "tags": ["information-theory", "compression", "optimization"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-discrete-cosine-transform",
+      "name": "Discrete Cosine Transform",
+      "type": "algorithm",
+      "domain": "mapping",
+      "chapter": 24,
+      "section": "24.6",
+      "planePosition": { "real": -0.1, "imaginary": 0.25 },
+      "formalStatement": "The DCT-II of a sequence x[n] of length N is X[k] = sum_{n=0}^{N-1} x[n] cos[pi/N * (n+0.5) * k] for k = 0, 1, ..., N-1. It concentrates energy in low-frequency coefficients for natural signals.",
+      "computationalForm": "Compute via FFT of length 2N on symmetrically extended input: O(N log N). The inverse DCT recovers x[n] from X[k] with normalization. Used in JPEG (8x8 blocks) and MP3 (MDCT variant).",
+      "prerequisites": ["Fourier transform", "Cosine basis functions", "Signal energy"],
+      "dependencies": [
+        { "target": "mapping-fourier-transform", "type": "specializes", "strength": 0.9, "description": "DCT is a real-valued specialization of the Fourier transform" },
+        { "target": "mapping-fft", "type": "applies", "strength": 0.8, "description": "DCT can be computed efficiently via FFT" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-data-compression", "yields": "Transform-based lossy compression: quantize DCT coefficients for image/audio compression", "type": "sequential", "conditions": ["Input signal has energy concentrated in low frequencies", "Quantization noise is acceptable"], "example": "JPEG compression applies 8x8 DCT, quantizes coefficients, then entropy codes the result" }
+      ],
+      "applicabilityPatterns": ["Efficient real-valued frequency decomposition of signals", "Energy compaction for transform-based compression"],
+      "keywords": ["DCT", "cosine transform", "JPEG", "compression", "frequency"],
+      "tags": ["signal-processing", "transform", "compression"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-moment-generating-function",
+      "name": "Moment Generating Function",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 25,
+      "section": "25.7",
+      "planePosition": { "real": 0.15, "imaginary": 0.45 },
+      "formalStatement": "The moment generating function of a random variable X is M_X(t) = E[e^{tX}] = integral e^{tx} f(x) dx. The nth moment is E[X^n] = M_X^{(n)}(0) (nth derivative evaluated at t=0).",
+      "computationalForm": "For discrete X: M_X(t) = sum_x e^{tx} P(X=x). For X ~ N(mu, sigma^2): M_X(t) = exp(mu*t + sigma^2*t^2/2). Uniquely determines distribution when it exists in a neighborhood of 0.",
+      "prerequisites": ["Expected value", "Exponential function", "Moments of a distribution"],
+      "dependencies": [
+        { "target": "mapping-expected-value", "type": "requires", "strength": 1.0, "description": "MGF is defined as the expected value of e^{tX}" },
+        { "target": "mapping-probability-distributions", "type": "requires", "strength": 0.8, "description": "Each distribution has a characteristic MGF" }
+      ],
+      "enables": ["mapping-central-limit-theorem"],
+      "compositionRules": [
+        { "with": "mapping-normal-distribution", "yields": "Proof of CLT via convergence of MGFs to the Gaussian MGF", "type": "sequential", "conditions": ["MGF exists in a neighborhood of 0", "Random variables are i.i.d."], "example": "Sum of n i.i.d. variables: M_{S_n/sqrt(n)}(t) -> exp(t^2/2) as n -> infinity, proving convergence to standard normal" }
+      ],
+      "applicabilityPatterns": ["Computing moments of probability distributions systematically", "Proving convergence in distribution via MGF convergence"],
+      "keywords": ["moment generating function", "MGF", "moments", "characteristic function"],
+      "tags": ["probability", "moments", "distribution"],
+      "buildLabs": []
+    },
+    {
+      "id": "mapping-joint-probability",
+      "name": "Joint Probability Distribution",
+      "type": "definition",
+      "domain": "mapping",
+      "chapter": 25,
+      "section": "25.4",
+      "planePosition": { "real": 0.1, "imaginary": 0.3 },
+      "formalStatement": "The joint distribution of random variables X, Y is P(X in A, Y in B) for all measurable sets A, B. For continuous variables, the joint density f_{X,Y}(x,y) satisfies P(X in A, Y in B) = integral_A integral_B f(x,y) dy dx.",
+      "computationalForm": "Marginal: f_X(x) = integral f_{X,Y}(x,y) dy. Independence: f_{X,Y}(x,y) = f_X(x)*f_Y(y). Covariance: Cov(X,Y) = E[XY] - E[X]E[Y]. Correlation: rho = Cov(X,Y)/(sigma_X * sigma_Y).",
+      "prerequisites": ["Random variable", "Probability density", "Integration"],
+      "dependencies": [
+        { "target": "mapping-random-variable", "type": "requires", "strength": 1.0, "description": "Joint distributions are defined over multiple random variables" },
+        { "target": "mapping-probability-axioms", "type": "requires", "strength": 0.9, "description": "Joint distributions satisfy the axioms of probability" }
+      ],
+      "enables": ["mapping-conditional-probability", "mapping-bayes-theorem"],
+      "compositionRules": [
+        { "with": "mapping-bayes-theorem", "yields": "Posterior inference: compute conditional distributions from joint via Bayes rule", "type": "sequential", "conditions": ["Joint distribution is known or estimable", "Marginal of conditioning variable is nonzero"], "example": "Given joint P(X,Y), compute P(Y|X=x) = P(X=x,Y)/P(X=x) for Bayesian parameter estimation" }
+      ],
+      "applicabilityPatterns": ["Modeling relationships between multiple random variables", "Computing conditional distributions and independence properties"],
+      "keywords": ["joint distribution", "marginal", "covariance", "correlation", "independence"],
+      "tags": ["probability", "joint-distribution", "multivariate"],
       "buildLabs": []
     }
   ]

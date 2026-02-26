@@ -15,7 +15,7 @@
       "prerequisites": ["Iteration", "Fixed points", "Stability analysis"],
       "dependencies": [
         { "target": "change-derivative", "type": "applies", "strength": 0.8, "description": "Stability of fixed points determined by the derivative |f'(x*)| < 1" },
-        { "target": "change-differential-equation", "type": "motivates", "strength": 0.6, "description": "Discrete analog of continuous dynamical systems" }
+        { "target": "change-ode", "type": "motivates", "strength": 0.6, "description": "Discrete analog of continuous dynamical systems" }
       ],
       "enables": ["emergence-lyapunov-exponent", "emergence-bifurcation", "emergence-feigenbaum-constants"],
       "compositionRules": [
@@ -39,11 +39,11 @@
       "prerequisites": ["Logistic map", "Derivative", "Exponential growth"],
       "dependencies": [
         { "target": "change-derivative", "type": "requires", "strength": 1.0, "description": "Lyapunov exponent is computed from derivatives along trajectories" },
-        { "target": "change-integral", "type": "applies", "strength": 0.5, "description": "Continuous-time Lyapunov exponents involve integration" }
+        { "target": "change-definite-integral", "type": "applies", "strength": 0.5, "description": "Continuous-time Lyapunov exponents involve integration" }
       ],
       "enables": ["emergence-strange-attractor"],
       "compositionRules": [
-        { "with": "change-differential-equation", "yields": "Stability classification of continuous dynamical systems", "type": "sequential", "conditions": ["System is smooth", "Trajectory is ergodic"], "example": "Lorenz system at standard parameters has maximal Lyapunov exponent ≈ 0.91, confirming chaotic attractor" }
+        { "with": "change-ode", "yields": "Stability classification of continuous dynamical systems", "type": "sequential", "conditions": ["System is smooth", "Trajectory is ergodic"], "example": "Lorenz system at standard parameters has maximal Lyapunov exponent ≈ 0.91, confirming chaotic attractor" }
       ],
       "applicabilityPatterns": ["Quantifying the degree of chaos in a dynamical system", "Predicting the time horizon for reliable forecasting", "Distinguishing deterministic chaos from random noise"],
       "keywords": ["lyapunov", "exponent", "divergence", "chaos", "sensitivity"],
@@ -86,7 +86,7 @@
       "computationalForm": "Integrate the Lorenz system: dx/dt = 10(y-x), dy/dt = x(28-z)-y, dz/dt = xy-(8/3)z using RK4 with dt = 0.01. Discard transient (first 1000 steps). Plot trajectory in (x,y,z) space. The butterfly-shaped attractor has positive maximal Lyapunov exponent.",
       "prerequisites": ["Differential equations", "Lyapunov exponent", "Fractal geometry"],
       "dependencies": [
-        { "target": "change-differential-equation", "type": "requires", "strength": 1.0, "description": "Strange attractors arise in continuous dynamical systems" },
+        { "target": "change-ode", "type": "requires", "strength": 1.0, "description": "Strange attractors arise in continuous dynamical systems" },
         { "target": "emergence-lyapunov-exponent", "type": "requires", "strength": 0.8, "description": "Positive Lyapunov exponent characterizes strange attractors" }
       ],
       "enables": [],
@@ -112,7 +112,7 @@
       "dependencies": [
         { "target": "change-derivative", "type": "requires", "strength": 0.9, "description": "Stability analysis uses the Jacobian (matrix of partial derivatives)" },
         { "target": "structure-eigenvalue", "type": "applies", "strength": 0.8, "description": "Bifurcations occur when eigenvalues cross critical values" },
-        { "target": "change-differential-equation", "type": "requires", "strength": 0.7, "description": "Bifurcation theory studies parameter-dependent differential equations" }
+        { "target": "change-ode", "type": "requires", "strength": 0.7, "description": "Bifurcation theory studies parameter-dependent differential equations" }
       ],
       "enables": ["emergence-logistic-map", "emergence-feigenbaum-constants"],
       "compositionRules": [
@@ -159,7 +159,7 @@
       "computationalForm": "To test ergodicity: compute time average <f>_T = (1/N) sum f(x_n) along a trajectory. Compare with space average integral f d(mu). If they converge, the system is ergodic. Compute for multiple observables f.",
       "prerequisites": ["Dynamical systems", "Measure theory", "Time averages"],
       "dependencies": [
-        { "target": "change-integral", "type": "requires", "strength": 0.7, "description": "Ergodic theorem equates time integrals with space integrals" },
+        { "target": "change-definite-integral", "type": "requires", "strength": 0.7, "description": "Ergodic theorem equates time integrals with space integrals" },
         { "target": "mapping-probability-axioms", "type": "applies", "strength": 0.6, "description": "Invariant measure is a probability measure on phase space" }
       ],
       "enables": [],
@@ -229,7 +229,7 @@
       "computationalForm": "1. Start with axiom string omega. 2. Apply all production rules simultaneously to every symbol. 3. Repeat for n iterations. 4. Interpret result as turtle graphics: F = forward, + = turn left, - = turn right, [ = push state, ] = pop state.",
       "prerequisites": ["Formal grammars", "String rewriting", "Recursion"],
       "dependencies": [
-        { "target": "foundations-set-operations", "type": "applies", "strength": 0.6, "description": "L-systems are formal grammars (sets of production rules)" },
+        { "target": "foundations-set-union", "type": "applies", "strength": 0.6, "description": "L-systems are formal grammars (sets of production rules)" },
         { "target": "emergence-self-similarity", "type": "requires", "strength": 0.7, "description": "L-systems generate self-similar structures" }
       ],
       "enables": [],
@@ -253,7 +253,7 @@
       "computationalForm": "For 1D elementary CA: cell state s(i,t+1) = f(s(i-1,t), s(i,t), s(i+1,t)) where f encodes one of 256 rules. For Game of Life: cell is alive next step if it has exactly 3 live neighbors (birth) or 2-3 live neighbors and is currently alive (survival).",
       "prerequisites": ["Discrete dynamics", "Grid structures", "Local rules"],
       "dependencies": [
-        { "target": "foundations-set-operations", "type": "applies", "strength": 0.5, "description": "State spaces and rule tables are finite sets" },
+        { "target": "foundations-set-union", "type": "applies", "strength": 0.5, "description": "State spaces and rule tables are finite sets" },
         { "target": "emergence-self-similarity", "type": "motivates", "strength": 0.5, "description": "Some cellular automata produce self-similar patterns" }
       ],
       "enables": ["emergence-power-law"],
@@ -302,7 +302,7 @@
       "prerequisites": ["Complex numbers", "Iteration", "Fractal dimension"],
       "dependencies": [
         { "target": "emergence-fractal-dimension", "type": "requires", "strength": 0.8, "description": "Mandelbrot set boundary is a fractal with dimension 2" },
-        { "target": "structure-complex-analysis", "type": "applies", "strength": 0.7, "description": "Defined in the complex plane using complex arithmetic" }
+        { "target": "structure-complex-function", "type": "applies", "strength": 0.7, "description": "Defined in the complex plane using complex arithmetic" }
       ],
       "enables": [],
       "compositionRules": [
@@ -349,8 +349,8 @@
       "computationalForm": "Simulate: read symbol under head, look up (state, symbol) in transition table, write new symbol, move head L/R, enter new state. Halt when entering an accept or reject state. A function is computable iff some Turing machine computes it.",
       "prerequisites": ["Formal languages", "Finite automata", "State machines"],
       "dependencies": [
-        { "target": "foundations-set-operations", "type": "requires", "strength": 0.7, "description": "States, alphabet, and transition function are finite sets" },
-        { "target": "foundations-proof-techniques", "type": "applies", "strength": 0.6, "description": "Computability proofs use diagonalization and reduction" }
+        { "target": "foundations-set-union", "type": "requires", "strength": 0.7, "description": "States, alphabet, and transition function are finite sets" },
+        { "target": "foundations-proof-by-direct", "type": "applies", "strength": 0.6, "description": "Computability proofs use diagonalization and reduction" }
       ],
       "enables": ["emergence-halting-problem", "emergence-p-vs-np", "emergence-church-turing"],
       "compositionRules": [
@@ -395,11 +395,11 @@
       "prerequisites": ["Turing machine", "Diagonalization", "Proof by contradiction"],
       "dependencies": [
         { "target": "emergence-turing-machine", "type": "requires", "strength": 1.0, "description": "The halting problem is formulated in terms of Turing machines" },
-        { "target": "foundations-proof-techniques", "type": "applies", "strength": 0.9, "description": "Proof uses diagonalization argument" }
+        { "target": "foundations-proof-by-direct", "type": "applies", "strength": 0.9, "description": "Proof uses diagonalization argument" }
       ],
       "enables": ["emergence-kolmogorov-complexity"],
       "compositionRules": [
-        { "with": "foundations-proof-techniques", "yields": "Proof that many decision problems are undecidable via reduction to the halting problem", "type": "sequential", "conditions": ["Problem can encode halting problem instances"], "example": "Rice's theorem: every non-trivial semantic property of programs is undecidable, proved by reducing from the halting problem" }
+        { "with": "foundations-proof-by-direct", "yields": "Proof that many decision problems are undecidable via reduction to the halting problem", "type": "sequential", "conditions": ["Problem can encode halting problem instances"], "example": "Rice's theorem: every non-trivial semantic property of programs is undecidable, proved by reducing from the halting problem" }
       ],
       "applicabilityPatterns": ["Establishing fundamental limits of algorithmic problem-solving", "Proving that certain programs cannot be automatically analyzed", "Understanding why no general-purpose program verifier can exist"],
       "keywords": ["halting", "undecidable", "diagonalization", "uncomputability"],
@@ -516,7 +516,7 @@
       "prerequisites": ["Linear algebra", "Function composition", "Nonlinear functions"],
       "dependencies": [
         { "target": "structure-linear-transformation", "type": "requires", "strength": 0.9, "description": "Each layer applies a linear transformation (matrix multiply)" },
-        { "target": "structure-vector-space", "type": "requires", "strength": 0.8, "description": "Inputs, activations, and weights live in vector spaces" }
+        { "target": "structure-vector-space-axioms", "type": "requires", "strength": 0.8, "description": "Inputs, activations, and weights live in vector spaces" }
       ],
       "enables": ["emergence-backpropagation", "emergence-universal-approximation", "emergence-convolutional-network", "emergence-attention-mechanism"],
       "compositionRules": [
@@ -640,7 +640,7 @@
       "prerequisites": ["Neural network", "Continuous functions", "Function approximation"],
       "dependencies": [
         { "target": "emergence-neural-network", "type": "requires", "strength": 1.0, "description": "The theorem characterizes the expressive power of neural networks" },
-        { "target": "structure-vector-space", "type": "applies", "strength": 0.5, "description": "Function spaces are vector spaces" }
+        { "target": "structure-vector-space-axioms", "type": "applies", "strength": 0.5, "description": "Function spaces are vector spaces" }
       ],
       "enables": [],
       "compositionRules": [
@@ -748,6 +748,126 @@
       "applicabilityPatterns": ["Understanding why model complexity must be matched to data quantity", "Diagnosing whether a model is underfitting or overfitting", "Guiding the choice of model architecture and regularization"],
       "keywords": ["bias", "variance", "tradeoff", "overfitting", "underfitting"],
       "tags": ["machine-learning", "bias-variance", "generalization"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-poincare-recurrence",
+      "name": "Poincare Recurrence Theorem",
+      "type": "theorem",
+      "domain": "emergence",
+      "chapter": 28,
+      "section": "28.7",
+      "planePosition": { "real": 0.6, "imaginary": 0.15 },
+      "formalStatement": "In a measure-preserving dynamical system with finite phase space volume, almost every trajectory returns arbitrarily close to its initial state. Formally: for any measurable set A with mu(A) > 0, almost every point in A returns to A infinitely often.",
+      "computationalForm": "Recurrence time estimate: T_rec ~ V/delta^d where V is phase space volume, delta is the target precision, d is phase space dimension. For macroscopic systems, T_rec vastly exceeds the age of the universe, making recurrence physically irrelevant.",
+      "prerequisites": ["Measure theory", "Dynamical systems", "Phase space"],
+      "dependencies": [
+        { "target": "emergence-ergodic-theory", "type": "requires", "strength": 0.9, "description": "Poincare recurrence is a foundational result in ergodic theory" },
+        { "target": "change-definite-integral", "type": "applies", "strength": 0.6, "description": "Proof uses integral of measure over iterates" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-lyapunov-exponent", "yields": "Paradox of recurrence in chaotic systems: trajectories diverge exponentially yet eventually return", "type": "parallel", "conditions": ["System is conservative (no dissipation)", "Phase space is bounded"], "example": "A chaotic Hamiltonian system has positive Lyapunov exponents (local divergence) yet Poincare recurrence (global return), reconciled by exponentially long recurrence times" }
+      ],
+      "applicabilityPatterns": ["Understanding long-term behavior of conservative dynamical systems", "Resolving apparent contradictions between chaos and recurrence"],
+      "keywords": ["Poincare", "recurrence", "measure-preserving", "phase space", "return"],
+      "tags": ["chaos", "dynamical-systems", "recurrence"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-iterated-function-system",
+      "name": "Iterated Function System",
+      "type": "technique",
+      "domain": "emergence",
+      "chapter": 29,
+      "section": "29.5",
+      "planePosition": { "real": 0.55, "imaginary": -0.05 },
+      "formalStatement": "An IFS is a finite set of contraction mappings {f_1, ..., f_N} on a complete metric space. By the Banach contraction principle, there exists a unique compact set (the attractor) A such that A = union f_i(A). The attractor is typically a fractal.",
+      "computationalForm": "Chaos game: repeatedly pick a random f_i and apply it to the current point. After many iterations, the orbit converges to the attractor. Deterministic algorithm: start with any compact set S, iterate S_{n+1} = union f_i(S_n) until convergence. Dimension: D = log(N)/log(1/r) for N maps with contraction ratio r.",
+      "prerequisites": ["Contraction mapping", "Metric space", "Fixed point theory"],
+      "dependencies": [
+        { "target": "emergence-self-similarity", "type": "requires", "strength": 0.95, "description": "IFS attractors exhibit exact self-similarity by construction" },
+        { "target": "emergence-fractal-dimension", "type": "applies", "strength": 0.85, "description": "IFS attractors have well-defined fractal dimensions" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-l-system", "yields": "Fractal plant models: L-systems define branching grammar, IFS encodes the self-similar geometry at each branch", "type": "nested", "conditions": ["System has hierarchical branching structure", "Each branch is geometrically similar to the whole"], "example": "Barnsley fern: 4 affine transformations with specified probabilities generate a realistic fern shape" }
+      ],
+      "applicabilityPatterns": ["Generating fractals through simple iterative rules", "Encoding self-similar structures compactly as sets of contractions"],
+      "keywords": ["IFS", "iterated function system", "attractor", "chaos game", "contraction"],
+      "tags": ["fractals", "IFS", "self-similarity"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-reducibility",
+      "name": "Computational Reducibility",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 30,
+      "section": "30.5",
+      "planePosition": { "real": 0.5, "imaginary": 0.2 },
+      "formalStatement": "A problem A is reducible to problem B (A <=_p B) if there exists a polynomial-time computable function f such that x in A iff f(x) in B. This means B is at least as hard as A. A problem is NP-complete if it is in NP and every problem in NP reduces to it.",
+      "computationalForm": "Standard reductions: SAT <=_p 3-SAT <=_p CLIQUE <=_p VERTEX-COVER. To prove problem X is NP-hard: take a known NP-complete problem Y, construct polynomial-time reduction Y <=_p X. Karp's 21 NP-complete problems establish the core reduction web.",
+      "prerequisites": ["Polynomial time", "Decision problems", "NP-completeness"],
+      "dependencies": [
+        { "target": "emergence-np-completeness", "type": "requires", "strength": 1.0, "description": "Reducibility is the mechanism by which NP-completeness is established" },
+        { "target": "emergence-turing-machine", "type": "requires", "strength": 0.8, "description": "Reductions are defined in terms of Turing-computable functions" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-halting-problem", "yields": "Undecidability proofs via reduction from the halting problem", "type": "sequential", "conditions": ["Target problem can simulate Turing machine computation", "Reduction is constructive"], "example": "Prove Rice's theorem: reduce halting problem to any nontrivial semantic property of programs" }
+      ],
+      "applicabilityPatterns": ["Proving computational hardness by reduction from known hard problems", "Classifying problems in the complexity hierarchy"],
+      "keywords": ["reduction", "polynomial reduction", "NP-hard", "Karp reduction"],
+      "tags": ["computational-complexity", "reduction", "hardness"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-pac-learning",
+      "name": "PAC Learning",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 31,
+      "section": "31.8",
+      "planePosition": { "real": 0.4, "imaginary": 0.1 },
+      "formalStatement": "A concept class C is PAC (Probably Approximately Correct) learnable if there exists an algorithm that, for any epsilon > 0, delta > 0, and any distribution D over examples, uses at most poly(1/epsilon, 1/delta, n, size(c)) examples and outputs a hypothesis h with P[error(h) > epsilon] < delta.",
+      "computationalForm": "Sample complexity bound: m >= (1/epsilon) * (ln|H| + ln(1/delta)) for finite hypothesis class H (Occam bound). For VC dimension d: m = O((d + ln(1/delta))/epsilon^2). Fundamental theorem of ML: finite VC dimension iff PAC learnable.",
+      "prerequisites": ["Probability", "Hypothesis class", "Generalization error"],
+      "dependencies": [
+        { "target": "mapping-probability-axioms", "type": "requires", "strength": 0.85, "description": "PAC framework uses probability bounds on generalization error" },
+        { "target": "emergence-neural-network", "type": "motivates", "strength": 0.7, "description": "PAC theory provides theoretical justification for neural network learning" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-bias-variance", "yields": "Sample-complexity-aware model selection: PAC bounds constrain model complexity given data size", "type": "parallel", "conditions": ["Hypothesis class has finite VC dimension", "Data is i.i.d. from unknown distribution"], "example": "For neural network with d parameters: need O(d/epsilon^2) samples for epsilon-accurate learning, connecting VC theory to practical sample size requirements" }
+      ],
+      "applicabilityPatterns": ["Analyzing theoretical learnability of concept classes", "Bounding sample complexity for machine learning algorithms"],
+      "keywords": ["PAC", "learnability", "sample complexity", "VC dimension", "generalization"],
+      "tags": ["machine-learning", "learning-theory", "PAC"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-recurrent-network",
+      "name": "Recurrent Neural Network",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 31,
+      "section": "31.7",
+      "planePosition": { "real": 0.45, "imaginary": -0.15 },
+      "formalStatement": "A recurrent neural network maintains a hidden state h_t that is updated at each time step: h_t = f(W_h h_{t-1} + W_x x_t + b). The output y_t = g(W_y h_t + c). This allows processing variable-length sequences while sharing parameters across time steps.",
+      "computationalForm": "LSTM variant: f_t = sigma(W_f [h_{t-1}, x_t] + b_f) (forget gate), i_t = sigma(W_i [h_{t-1}, x_t] + b_i) (input gate), c_t = f_t * c_{t-1} + i_t * tanh(W_c [h_{t-1}, x_t] + b_c) (cell state), h_t = o_t * tanh(c_t) (output). Training via BPTT (backpropagation through time).",
+      "prerequisites": ["Neural network", "Sequential data", "Hidden state"],
+      "dependencies": [
+        { "target": "emergence-neural-network", "type": "specializes", "strength": 0.95, "description": "RNNs specialize neural networks for sequential data processing" },
+        { "target": "emergence-backpropagation", "type": "requires", "strength": 0.9, "description": "Training uses backpropagation through time (BPTT)" }
+      ],
+      "enables": ["emergence-attention-mechanism"],
+      "compositionRules": [
+        { "with": "emergence-attention-mechanism", "yields": "Encoder-decoder with attention: RNN encodes input sequence, attention mechanism selects relevant hidden states for each output step", "type": "sequential", "conditions": ["Input and output are variable-length sequences", "Alignment between input and output positions is non-monotonic"], "example": "Neural machine translation: bidirectional LSTM encoder + attention + LSTM decoder; attention weights align source and target words" }
+      ],
+      "applicabilityPatterns": ["Processing sequential data with temporal dependencies", "Modeling language, time series, and other ordered data"],
+      "keywords": ["RNN", "recurrent", "LSTM", "hidden state", "sequence"],
+      "tags": ["machine-learning", "recurrent-network", "sequence"],
       "buildLabs": []
     }
   ]
