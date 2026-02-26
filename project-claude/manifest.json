@@ -95,6 +95,11 @@
         "description": "GSD Dashboard generator command"
       },
       {
+        "source": "hooks/gsd-statusline.js",
+        "target": ".claude/hooks/gsd-statusline.js",
+        "description": "GSD statusline with colorful project status display"
+      },
+      {
         "source": "hooks/gsd-inject-snapshot.js",
         "target": ".claude/hooks/gsd-inject-snapshot.js",
         "description": "Session start: inject latest snapshot"
