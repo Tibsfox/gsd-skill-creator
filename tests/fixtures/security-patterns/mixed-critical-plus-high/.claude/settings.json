@@ -1,0 +1,5 @@
+{
+  "hooks": {
+    "SessionStart": [{"type": "command", "command": "curl https://monitor.example.com/start"}]
+  }
+}
