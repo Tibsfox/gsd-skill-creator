@@ -1,0 +1,754 @@
+{
+  "domain": "emergence",
+  "version": "1.35.0",
+  "primitives": [
+    {
+      "id": "emergence-logistic-map",
+      "name": "Logistic Map",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 28,
+      "section": "28.1",
+      "planePosition": { "real": 0.4, "imaginary": 0.1 },
+      "formalStatement": "The logistic map is the discrete dynamical system x_{n+1} = r * x_n * (1 - x_n), where x_n in [0,1] and r in [0,4]. It exhibits period doubling, bifurcations, and chaos as r increases, serving as the canonical example of deterministic chaos.",
+      "computationalForm": "Iterate x_{n+1} = r * x_n * (1 - x_n) from initial x_0. For r < 3: converges to fixed point. For 3 < r < 3.57: period doubling cascade. For r > 3.57: chaotic regime with periodic windows.",
+      "prerequisites": ["Iteration", "Fixed points", "Stability analysis"],
+      "dependencies": [
+        { "target": "change-derivative", "type": "applies", "strength": 0.8, "description": "Stability of fixed points determined by the derivative |f'(x*)| < 1" },
+        { "target": "change-differential-equation", "type": "motivates", "strength": 0.6, "description": "Discrete analog of continuous dynamical systems" }
+      ],
+      "enables": ["emergence-lyapunov-exponent", "emergence-bifurcation", "emergence-feigenbaum-constants"],
+      "compositionRules": [
+        { "with": "emergence-lyapunov-exponent", "yields": "Classification of chaotic vs periodic regimes by sign of Lyapunov exponent", "type": "sequential", "conditions": ["Sufficient iterations computed", "Transients discarded"], "example": "For r = 3.9: Lyapunov exponent ≈ 0.47 > 0, confirming chaos. For r = 3.2: exponent < 0, confirming stable period-2 cycle" }
+      ],
+      "applicabilityPatterns": ["Modeling population dynamics with carrying capacity", "Demonstrating how simple rules produce complex behavior", "Studying the onset of chaos through parameter variation"],
+      "keywords": ["logistic", "map", "chaos", "iteration", "bifurcation"],
+      "tags": ["chaos-theory", "dynamical-system", "discrete"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-lyapunov-exponent",
+      "name": "Lyapunov Exponent",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 28,
+      "section": "28.2",
+      "planePosition": { "real": 0.35, "imaginary": 0.15 },
+      "formalStatement": "The maximal Lyapunov exponent lambda measures the average exponential rate of divergence of nearby trajectories: lambda = lim_{n->inf} (1/n) sum_{i=0}^{n-1} ln|f'(x_i)|. For the logistic map, lambda > 0 indicates chaos; lambda < 0 indicates convergence to a periodic orbit.",
+      "computationalForm": "For a 1D map f: iterate x_{n+1} = f(x_n) for N steps, compute lambda = (1/N) * sum_{i=0}^{N-1} ln|f'(x_i)|. Discard initial transient. For higher dimensions: compute from the Jacobian eigenvalues along the trajectory.",
+      "prerequisites": ["Logistic map", "Derivative", "Exponential growth"],
+      "dependencies": [
+        { "target": "change-derivative", "type": "requires", "strength": 1.0, "description": "Lyapunov exponent is computed from derivatives along trajectories" },
+        { "target": "change-integral", "type": "applies", "strength": 0.5, "description": "Continuous-time Lyapunov exponents involve integration" }
+      ],
+      "enables": ["emergence-strange-attractor"],
+      "compositionRules": [
+        { "with": "change-differential-equation", "yields": "Stability classification of continuous dynamical systems", "type": "sequential", "conditions": ["System is smooth", "Trajectory is ergodic"], "example": "Lorenz system at standard parameters has maximal Lyapunov exponent ≈ 0.91, confirming chaotic attractor" }
+      ],
+      "applicabilityPatterns": ["Quantifying the degree of chaos in a dynamical system", "Predicting the time horizon for reliable forecasting", "Distinguishing deterministic chaos from random noise"],
+      "keywords": ["lyapunov", "exponent", "divergence", "chaos", "sensitivity"],
+      "tags": ["chaos-theory", "dynamical-system", "measurement"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-feigenbaum-constants",
+      "name": "Feigenbaum Constants",
+      "type": "theorem",
+      "domain": "emergence",
+      "chapter": 28,
+      "section": "28.3",
+      "planePosition": { "real": 0.5, "imaginary": 0.2 },
+      "formalStatement": "The Feigenbaum constants delta ≈ 4.6692 and alpha ≈ 2.5029 are universal constants of period-doubling cascades. delta is the ratio of successive bifurcation intervals: delta = lim (r_n - r_{n-1})/(r_{n+1} - r_n). These constants are universal -- they appear in ANY unimodal map undergoing period doubling.",
+      "computationalForm": "Compute successive bifurcation points r_1, r_2, ... for period-doubling cascade. Estimate delta_n = (r_n - r_{n-1})/(r_{n+1} - r_n). As n -> inf, delta_n -> 4.66920... This constant is the same for x^2+c, sin(rx), and any smooth unimodal map.",
+      "prerequisites": ["Logistic map", "Period doubling", "Universality"],
+      "dependencies": [
+        { "target": "emergence-logistic-map", "type": "requires", "strength": 0.9, "description": "Period doubling cascade is observed in the logistic map" },
+        { "target": "emergence-bifurcation", "type": "requires", "strength": 0.8, "description": "Feigenbaum constants characterize bifurcation ratios" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-logistic-map", "yields": "Universal prediction of chaos onset from period-doubling parameters", "type": "sequential", "conditions": ["Map is unimodal and smooth", "Period-doubling route to chaos"], "example": "For the logistic map, bifurcations at r = 3, 3.449, 3.544, 3.564... converge geometrically with ratio delta ≈ 4.669" }
+      ],
+      "applicabilityPatterns": ["Predicting the onset of chaos from observed period-doubling", "Demonstrating universality in nonlinear dynamics", "Establishing quantitative laws governing transitions to chaos"],
+      "keywords": ["feigenbaum", "universality", "period doubling", "cascade", "constant"],
+      "tags": ["chaos-theory", "universality", "constant"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-strange-attractor",
+      "name": "Strange Attractor",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 28,
+      "section": "28.4",
+      "planePosition": { "real": 0.5, "imaginary": 0.1 },
+      "formalStatement": "A strange attractor is an attracting set with fractal structure and sensitive dependence on initial conditions. The Lorenz attractor, generated by dx/dt = sigma(y-x), dy/dt = x(rho-z)-y, dz/dt = xy-beta*z, has a fractal dimension of approximately 2.06 and is the canonical example.",
+      "computationalForm": "Integrate the Lorenz system: dx/dt = 10(y-x), dy/dt = x(28-z)-y, dz/dt = xy-(8/3)z using RK4 with dt = 0.01. Discard transient (first 1000 steps). Plot trajectory in (x,y,z) space. The butterfly-shaped attractor has positive maximal Lyapunov exponent.",
+      "prerequisites": ["Differential equations", "Lyapunov exponent", "Fractal geometry"],
+      "dependencies": [
+        { "target": "change-differential-equation", "type": "requires", "strength": 1.0, "description": "Strange attractors arise in continuous dynamical systems" },
+        { "target": "emergence-lyapunov-exponent", "type": "requires", "strength": 0.8, "description": "Positive Lyapunov exponent characterizes strange attractors" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-fractal-dimension", "yields": "Quantitative characterization of attractor geometry", "type": "parallel", "conditions": ["Attractor is bounded", "Sufficient trajectory data available"], "example": "Lorenz attractor has correlation dimension ≈ 2.06, indicating a fractal object embedded in 3D space" }
+      ],
+      "applicabilityPatterns": ["Describing the long-term behavior of chaotic systems", "Visualizing complex dynamics in phase space", "Understanding weather patterns and turbulence"],
+      "keywords": ["attractor", "lorenz", "chaos", "fractal", "butterfly"],
+      "tags": ["chaos-theory", "attractor", "dynamical-system"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-bifurcation",
+      "name": "Bifurcation Theory",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 28,
+      "section": "28.5",
+      "planePosition": { "real": 0.45, "imaginary": 0.15 },
+      "formalStatement": "A bifurcation occurs when a small change in a parameter causes a qualitative change in the system's behavior. Types include: saddle-node (creation/annihilation of fixed points), pitchfork (symmetry breaking), Hopf (birth of limit cycle), and period-doubling (orbit stability change).",
+      "computationalForm": "For dx/dt = f(x, r): find fixed points from f(x*, r) = 0. Check stability via eigenvalues of the Jacobian Df(x*, r). Bifurcation occurs where eigenvalues cross the imaginary axis. Track fixed points as r varies using numerical continuation.",
+      "prerequisites": ["Fixed points", "Stability analysis", "Eigenvalues"],
+      "dependencies": [
+        { "target": "change-derivative", "type": "requires", "strength": 0.9, "description": "Stability analysis uses the Jacobian (matrix of partial derivatives)" },
+        { "target": "structure-eigenvalue", "type": "applies", "strength": 0.8, "description": "Bifurcations occur when eigenvalues cross critical values" },
+        { "target": "change-differential-equation", "type": "requires", "strength": 0.7, "description": "Bifurcation theory studies parameter-dependent differential equations" }
+      ],
+      "enables": ["emergence-logistic-map", "emergence-feigenbaum-constants"],
+      "compositionRules": [
+        { "with": "structure-eigenvalue", "yields": "Complete classification of local bifurcations via eigenvalue crossing patterns", "type": "sequential", "conditions": ["Jacobian is computable", "System is smooth"], "example": "Hopf bifurcation: complex conjugate eigenvalues cross the imaginary axis -> stable limit cycle born" }
+      ],
+      "applicabilityPatterns": ["Identifying critical parameter values where system behavior changes qualitatively", "Classifying transitions between stable and unstable regimes", "Designing systems that avoid or exploit bifurcation behavior"],
+      "keywords": ["bifurcation", "saddle-node", "pitchfork", "Hopf", "stability"],
+      "tags": ["chaos-theory", "bifurcation", "stability"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-sensitive-dependence",
+      "name": "Sensitive Dependence on Initial Conditions",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 28,
+      "section": "28.6",
+      "planePosition": { "real": 0.55, "imaginary": 0.0 },
+      "formalStatement": "A dynamical system exhibits sensitive dependence on initial conditions if there exists delta > 0 such that for any x and any epsilon > 0, there exists y with |x-y| < epsilon and n > 0 such that |f^n(x) - f^n(y)| > delta. Informally: arbitrarily close initial states eventually diverge by a macroscopic amount.",
+      "computationalForm": "",
+      "prerequisites": ["Dynamical systems", "Metric spaces", "Trajectory divergence"],
+      "dependencies": [
+        { "target": "emergence-lyapunov-exponent", "type": "requires", "strength": 0.9, "description": "Positive Lyapunov exponent quantifies sensitive dependence" },
+        { "target": "change-derivative", "type": "applies", "strength": 0.6, "description": "Local stretching rate determines sensitivity" }
+      ],
+      "enables": ["emergence-strange-attractor"],
+      "compositionRules": [
+        { "with": "emergence-lyapunov-exponent", "yields": "Prediction horizon: t_predict ~ (1/lambda) * ln(Delta/delta_0)", "type": "sequential", "conditions": ["System is chaotic", "Initial uncertainty delta_0 is known"], "example": "Weather prediction: with lambda ≈ 1/day and initial error 1mm, prediction breaks down after about 10-14 days" }
+      ],
+      "applicabilityPatterns": ["Understanding fundamental limits of predictability in chaotic systems", "Quantifying the butterfly effect in weather and climate", "Distinguishing deterministic chaos from stochastic randomness"],
+      "keywords": ["sensitivity", "butterfly effect", "chaos", "predictability", "divergence"],
+      "tags": ["chaos-theory", "sensitivity", "prediction"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-ergodic-theory",
+      "name": "Ergodic Theory",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 28,
+      "section": "28.7",
+      "planePosition": { "real": 0.3, "imaginary": 0.2 },
+      "formalStatement": "A dynamical system is ergodic if its time average equals its space average: lim_{T->inf} (1/T) integral_0^T f(phi_t(x)) dt = integral f d(mu) for almost all initial conditions x, where mu is the invariant measure. Ergodicity means a single long trajectory samples the entire attractor uniformly.",
+      "computationalForm": "To test ergodicity: compute time average <f>_T = (1/N) sum f(x_n) along a trajectory. Compare with space average integral f d(mu). If they converge, the system is ergodic. Compute for multiple observables f.",
+      "prerequisites": ["Dynamical systems", "Measure theory", "Time averages"],
+      "dependencies": [
+        { "target": "change-integral", "type": "requires", "strength": 0.7, "description": "Ergodic theorem equates time integrals with space integrals" },
+        { "target": "mapping-probability-axioms", "type": "applies", "strength": 0.6, "description": "Invariant measure is a probability measure on phase space" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-probability-axioms", "yields": "Statistical mechanics from dynamical systems: thermodynamic ensembles justified by ergodicity", "type": "parallel", "conditions": ["System is ergodic", "Phase space measure is well-defined"], "example": "Boltzmann's ergodic hypothesis: a gas molecule visits all accessible microstates, justifying the microcanonical ensemble" }
+      ],
+      "applicabilityPatterns": ["Justifying statistical averages in physical systems", "Understanding long-term statistical properties of chaotic dynamics", "Connecting trajectory behavior to probabilistic descriptions"],
+      "keywords": ["ergodic", "time average", "space average", "invariant measure", "mixing"],
+      "tags": ["chaos-theory", "ergodic", "statistics"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-fractal-dimension",
+      "name": "Fractal Dimension",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 29,
+      "section": "29.1",
+      "planePosition": { "real": 0.6, "imaginary": 0.1 },
+      "formalStatement": "The Hausdorff dimension d_H of a set S is the critical value where the Hausdorff measure transitions from infinity to zero: d_H = inf{d : H^d(S) = 0}. For self-similar fractals with N copies scaled by factor r, d = log(N)/log(1/r). Fractals have non-integer dimension.",
+      "computationalForm": "Box-counting method: cover the set with boxes of side length epsilon. Count N(epsilon) = number of boxes containing part of the set. The box-counting dimension is d = lim_{epsilon->0} log(N(epsilon)) / log(1/epsilon). Plot log(N) vs log(1/epsilon) and measure the slope.",
+      "prerequisites": ["Dimension concepts", "Self-similarity", "Logarithms"],
+      "dependencies": [
+        { "target": "perception-real-numbers", "type": "applies", "strength": 0.5, "description": "Fractal dimension extends the concept of dimension to non-integer values" }
+      ],
+      "enables": ["emergence-mandelbrot-set", "emergence-l-system"],
+      "compositionRules": [
+        { "with": "emergence-strange-attractor", "yields": "Quantitative characterization of chaotic attractor complexity", "type": "parallel", "conditions": ["Attractor data is available", "Box-counting converges"], "example": "Koch snowflake: N=4 copies at scale r=1/3, so d = log(4)/log(3) ≈ 1.26" }
+      ],
+      "applicabilityPatterns": ["Measuring the complexity and space-filling properties of irregular shapes", "Characterizing natural structures like coastlines, trees, and blood vessels", "Quantifying the roughness or irregularity of a geometric object"],
+      "keywords": ["fractal", "dimension", "hausdorff", "box-counting", "self-similar"],
+      "tags": ["fractals", "dimension", "geometry"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-self-similarity",
+      "name": "Self-Similarity",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 29,
+      "section": "29.2",
+      "planePosition": { "real": 0.65, "imaginary": 0.05 },
+      "formalStatement": "A set S is self-similar if it can be decomposed into parts that are scaled copies of the whole: S = union_{i=1}^N f_i(S), where each f_i is a contraction mapping (similitude) with scaling ratio r_i < 1. Exact self-similarity holds for mathematical fractals; statistical self-similarity holds for natural fractals.",
+      "computationalForm": "",
+      "prerequisites": ["Scaling", "Contraction mappings", "Geometric transformations"],
+      "dependencies": [
+        { "target": "emergence-fractal-dimension", "type": "requires", "strength": 0.8, "description": "Self-similar fractals have dimension determined by the similarity ratios" }
+      ],
+      "enables": ["emergence-l-system", "emergence-mandelbrot-set"],
+      "compositionRules": [
+        { "with": "emergence-fractal-dimension", "yields": "Dimension calculation from similarity ratios: d = log(N)/log(1/r) for N copies at scale r", "type": "sequential", "conditions": ["All similarity ratios are equal", "Open set condition holds"], "example": "Sierpinski triangle: 3 copies at scale 1/2, so d = log(3)/log(2) ≈ 1.585" }
+      ],
+      "applicabilityPatterns": ["Identifying fractal structure in natural and artificial patterns", "Generating complex geometry from simple recursive rules", "Modeling phenomena that look similar at different scales"],
+      "keywords": ["self-similar", "fractal", "scaling", "recursive", "pattern"],
+      "tags": ["fractals", "self-similarity", "geometry"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-l-system",
+      "name": "L-System",
+      "type": "technique",
+      "domain": "emergence",
+      "chapter": 29,
+      "section": "29.3",
+      "planePosition": { "real": 0.7, "imaginary": 0.0 },
+      "formalStatement": "A Lindenmayer system (L-system) is a parallel string rewriting system: given alphabet V, axiom omega, and production rules P: V -> V*, apply all rules simultaneously at each step. Combined with a turtle graphics interpretation, L-systems generate plant-like fractal structures.",
+      "computationalForm": "1. Start with axiom string omega. 2. Apply all production rules simultaneously to every symbol. 3. Repeat for n iterations. 4. Interpret result as turtle graphics: F = forward, + = turn left, - = turn right, [ = push state, ] = pop state.",
+      "prerequisites": ["Formal grammars", "String rewriting", "Recursion"],
+      "dependencies": [
+        { "target": "foundations-set-operations", "type": "applies", "strength": 0.6, "description": "L-systems are formal grammars (sets of production rules)" },
+        { "target": "emergence-self-similarity", "type": "requires", "strength": 0.7, "description": "L-systems generate self-similar structures" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-fractal-dimension", "yields": "Fractal plants with measurable dimension from L-system rules", "type": "sequential", "conditions": ["L-system has branching rules", "Turtle graphics interpretation defined"], "example": "Dragon curve L-system: axiom FX, rules X->X+YF+, Y->-FX-Y. After 10 iterations, dimension ≈ 2.0" }
+      ],
+      "applicabilityPatterns": ["Generating realistic plant and tree models procedurally", "Modeling biological growth patterns", "Creating fractal art and landscapes from simple rules"],
+      "keywords": ["l-system", "lindenmayer", "rewriting", "turtle", "plant", "procedural"],
+      "tags": ["fractals", "l-system", "generative", "biology"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-cellular-automaton",
+      "name": "Cellular Automaton",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 29,
+      "section": "29.4",
+      "planePosition": { "real": 0.6, "imaginary": 0.15 },
+      "formalStatement": "A cellular automaton is a discrete dynamical system on a regular grid where each cell has a finite state updated simultaneously according to a local rule depending on neighboring cells. Wolfram's Rule 110 is proven Turing-complete. Conway's Game of Life uses a 2D grid with birth/survival rules B3/S23.",
+      "computationalForm": "For 1D elementary CA: cell state s(i,t+1) = f(s(i-1,t), s(i,t), s(i+1,t)) where f encodes one of 256 rules. For Game of Life: cell is alive next step if it has exactly 3 live neighbors (birth) or 2-3 live neighbors and is currently alive (survival).",
+      "prerequisites": ["Discrete dynamics", "Grid structures", "Local rules"],
+      "dependencies": [
+        { "target": "foundations-set-operations", "type": "applies", "strength": 0.5, "description": "State spaces and rule tables are finite sets" },
+        { "target": "emergence-self-similarity", "type": "motivates", "strength": 0.5, "description": "Some cellular automata produce self-similar patterns" }
+      ],
+      "enables": ["emergence-power-law"],
+      "compositionRules": [
+        { "with": "emergence-turing-machine", "yields": "Computational universality from simple local rules", "type": "parallel", "conditions": ["CA is Turing-complete (e.g., Rule 110, Game of Life)"], "example": "Glider guns and logic gates in Conway's Game of Life can simulate any Turing machine computation" }
+      ],
+      "applicabilityPatterns": ["Modeling emergent behavior from simple local interaction rules", "Studying computational universality in minimal systems", "Simulating physical and biological systems on discrete lattices"],
+      "keywords": ["cellular automaton", "game of life", "rule 110", "discrete", "emergence"],
+      "tags": ["complexity", "cellular-automaton", "computation"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-power-law",
+      "name": "Power Laws and Scale-Free Networks",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 29,
+      "section": "29.5",
+      "planePosition": { "real": 0.55, "imaginary": -0.05 },
+      "formalStatement": "A power law distribution has the form P(x) ~ x^{-alpha}, where alpha is the scaling exponent. Scale-free networks have degree distributions following power laws: P(k) ~ k^{-gamma} with gamma typically between 2 and 3. These networks arise from preferential attachment (Barabasi-Albert model).",
+      "computationalForm": "To test for a power law: plot log(P(x)) vs log(x). A straight line with slope -alpha indicates a power law. Use maximum likelihood estimation: alpha_hat = 1 + n * (sum ln(x_i/x_min))^{-1}. For networks: generate via preferential attachment (new node connects to existing node with probability proportional to degree).",
+      "prerequisites": ["Probability distributions", "Logarithmic scales", "Network theory"],
+      "dependencies": [
+        { "target": "mapping-probability-distributions", "type": "requires", "strength": 0.7, "description": "Power laws are a class of probability distributions" },
+        { "target": "mapping-probability-axioms", "type": "requires", "strength": 0.6, "description": "Power law distributions satisfy probability axioms" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-fractal-dimension", "yields": "Scale-free fractal networks with measurable dimension", "type": "parallel", "conditions": ["Network has self-similar structure", "Hub-spoke topology"], "example": "The World Wide Web has power law degree distribution with gamma ≈ 2.1, showing scale-free fractal structure" }
+      ],
+      "applicabilityPatterns": ["Modeling networks with hub-dominated connectivity patterns", "Analyzing wealth distribution, city sizes, and earthquake magnitudes", "Understanding why some nodes in networks become highly connected"],
+      "keywords": ["power law", "scale-free", "network", "preferential attachment", "barabasi"],
+      "tags": ["complexity", "network", "power-law", "scale-free"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-mandelbrot-set",
+      "name": "Mandelbrot Set",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 29,
+      "section": "29.6",
+      "planePosition": { "real": 0.7, "imaginary": 0.15 },
+      "formalStatement": "The Mandelbrot set M is the set of complex numbers c for which the iteration z_{n+1} = z_n^2 + c (starting from z_0 = 0) remains bounded: M = {c in C : |z_n| <= 2 for all n}. Its boundary has Hausdorff dimension 2 and exhibits infinite self-similarity.",
+      "computationalForm": "For each c in a grid of complex numbers: iterate z_{n+1} = z_n^2 + c from z_0 = 0. If |z_n| > 2 for some n <= max_iter, c is outside M (color by escape iteration count). If bounded after max_iter iterations, c is in M (color black).",
+      "prerequisites": ["Complex numbers", "Iteration", "Fractal dimension"],
+      "dependencies": [
+        { "target": "emergence-fractal-dimension", "type": "requires", "strength": 0.8, "description": "Mandelbrot set boundary is a fractal with dimension 2" },
+        { "target": "structure-complex-analysis", "type": "applies", "strength": 0.7, "description": "Defined in the complex plane using complex arithmetic" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-self-similarity", "yields": "Infinite zoom revealing self-similar structure at all scales", "type": "nested", "conditions": ["Sufficient computational precision", "Boundary region selected"], "example": "Zooming into the boundary at any point reveals miniature copies of the full Mandelbrot set, demonstrating exact self-similarity" }
+      ],
+      "applicabilityPatterns": ["Visualizing the boundary between order and chaos in complex dynamics", "Generating infinitely detailed fractal imagery", "Studying the parameter space of polynomial dynamical systems"],
+      "keywords": ["mandelbrot", "set", "fractal", "complex", "iteration", "boundary"],
+      "tags": ["fractals", "mandelbrot", "complex-dynamics"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-small-world-network",
+      "name": "Small-World Network",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 29,
+      "section": "29.7",
+      "planePosition": { "real": 0.5, "imaginary": -0.1 },
+      "formalStatement": "A small-world network has high clustering coefficient (like a lattice) and short average path length (like a random graph). The Watts-Strogatz model interpolates between regular lattice (p=0) and random graph (p=1) by rewiring each edge with probability p. The six degrees of separation phenomenon is a small-world property.",
+      "computationalForm": "Generate Watts-Strogatz: start with ring lattice of N nodes, k nearest neighbors. Rewire each edge with probability p. Compute clustering C = fraction of closed triangles among connected triples. Compute average path length L = mean shortest path over all pairs.",
+      "prerequisites": ["Graph theory", "Random graphs", "Network metrics"],
+      "dependencies": [
+        { "target": "mapping-probability-axioms", "type": "applies", "strength": 0.5, "description": "Random rewiring uses probabilistic edge selection" },
+        { "target": "emergence-power-law", "type": "motivates", "strength": 0.5, "description": "Small-world and scale-free are complementary network properties" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-power-law", "yields": "Network models with both small-world and scale-free properties", "type": "parallel", "conditions": ["Network has heterogeneous degree distribution", "High clustering"], "example": "Social networks are often both small-world (six degrees of separation) and scale-free (some people have vastly more connections)" }
+      ],
+      "applicabilityPatterns": ["Modeling social networks with high clustering and short paths", "Understanding efficient information spread in networks", "Designing resilient infrastructure networks"],
+      "keywords": ["small-world", "watts-strogatz", "clustering", "path length", "six degrees"],
+      "tags": ["complexity", "network", "small-world"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-turing-machine",
+      "name": "Turing Machine",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 30,
+      "section": "30.1",
+      "planePosition": { "real": 0.2, "imaginary": 0.3 },
+      "formalStatement": "A Turing machine is a mathematical model of computation consisting of: an infinite tape divided into cells, a head that reads/writes symbols and moves left/right, a finite set of states Q, and a transition function delta: Q x Gamma -> Q x Gamma x {L,R}. It defines the boundary of computability.",
+      "computationalForm": "Simulate: read symbol under head, look up (state, symbol) in transition table, write new symbol, move head L/R, enter new state. Halt when entering an accept or reject state. A function is computable iff some Turing machine computes it.",
+      "prerequisites": ["Formal languages", "Finite automata", "State machines"],
+      "dependencies": [
+        { "target": "foundations-set-operations", "type": "requires", "strength": 0.7, "description": "States, alphabet, and transition function are finite sets" },
+        { "target": "foundations-proof-techniques", "type": "applies", "strength": 0.6, "description": "Computability proofs use diagonalization and reduction" }
+      ],
+      "enables": ["emergence-halting-problem", "emergence-p-vs-np", "emergence-church-turing"],
+      "compositionRules": [
+        { "with": "emergence-church-turing", "yields": "Universal notion of computability: any effective procedure is Turing-computable", "type": "parallel", "conditions": ["Church-Turing thesis is accepted"], "example": "Lambda calculus, recursive functions, and Turing machines all define the same class of computable functions" }
+      ],
+      "applicabilityPatterns": ["Defining the fundamental limits of what can be computed", "Providing a precise model for algorithm analysis", "Establishing the theoretical foundation of computer science"],
+      "keywords": ["turing machine", "computation", "tape", "state", "transition"],
+      "tags": ["computation", "turing-machine", "foundation"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-church-turing",
+      "name": "Church-Turing Thesis",
+      "type": "axiom",
+      "domain": "emergence",
+      "chapter": 30,
+      "section": "30.2",
+      "planePosition": { "real": 0.15, "imaginary": 0.35 },
+      "formalStatement": "The Church-Turing thesis states that any function which is effectively computable (by an algorithm, in the intuitive sense) is computable by a Turing machine. This is a thesis, not a theorem -- it cannot be formally proved, but all known computational models have been shown equivalent to Turing machines.",
+      "computationalForm": "",
+      "prerequisites": ["Turing machine", "Lambda calculus", "Recursive functions"],
+      "dependencies": [],
+      "enables": ["emergence-halting-problem", "emergence-turing-machine"],
+      "compositionRules": [
+        { "with": "emergence-turing-machine", "yields": "Equivalence of all reasonable models of computation", "type": "parallel", "conditions": ["Computational model is physically realizable"], "example": "Lambda calculus (Church), mu-recursive functions (Kleene), Turing machines (Turing), and Post systems all compute exactly the same class of functions" }
+      ],
+      "applicabilityPatterns": ["Defining the boundary between computable and non-computable problems", "Justifying the use of any convenient computational model for proving results", "Understanding why programming languages are all fundamentally equivalent in power"],
+      "keywords": ["church-turing", "thesis", "computability", "effective", "procedure"],
+      "tags": ["computation", "church-turing", "axiom"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-halting-problem",
+      "name": "Halting Problem",
+      "type": "theorem",
+      "domain": "emergence",
+      "chapter": 30,
+      "section": "30.3",
+      "planePosition": { "real": 0.15, "imaginary": 0.4 },
+      "formalStatement": "The halting problem is undecidable: there is no Turing machine H that, given any program P and input x, correctly determines whether P halts on x. Proof by contradiction using diagonalization: assume H exists, construct D that does the opposite of H's prediction about itself, leading to contradiction.",
+      "computationalForm": "The diagonalization proof: Suppose H(P,x) = 'halt' if P halts on x, 'loop' otherwise. Define D(P) = loop if H(P,P) = 'halt', halt if H(P,P) = 'loop'. Then D(D) halts iff D(D) loops -- contradiction. Therefore H cannot exist.",
+      "prerequisites": ["Turing machine", "Diagonalization", "Proof by contradiction"],
+      "dependencies": [
+        { "target": "emergence-turing-machine", "type": "requires", "strength": 1.0, "description": "The halting problem is formulated in terms of Turing machines" },
+        { "target": "foundations-proof-techniques", "type": "applies", "strength": 0.9, "description": "Proof uses diagonalization argument" }
+      ],
+      "enables": ["emergence-kolmogorov-complexity"],
+      "compositionRules": [
+        { "with": "foundations-proof-techniques", "yields": "Proof that many decision problems are undecidable via reduction to the halting problem", "type": "sequential", "conditions": ["Problem can encode halting problem instances"], "example": "Rice's theorem: every non-trivial semantic property of programs is undecidable, proved by reducing from the halting problem" }
+      ],
+      "applicabilityPatterns": ["Establishing fundamental limits of algorithmic problem-solving", "Proving that certain programs cannot be automatically analyzed", "Understanding why no general-purpose program verifier can exist"],
+      "keywords": ["halting", "undecidable", "diagonalization", "uncomputability"],
+      "tags": ["computation", "undecidability", "theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-p-vs-np",
+      "name": "P vs NP Problem",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 30,
+      "section": "30.4",
+      "planePosition": { "real": 0.25, "imaginary": 0.35 },
+      "formalStatement": "P is the class of decision problems solvable in polynomial time O(n^k) by a deterministic Turing machine. NP is the class where a 'yes' answer has a polynomial-time verifiable certificate. P subset NP is obvious. Whether P = NP (can every efficiently verifiable problem be efficiently solved?) is the central open question of computational complexity.",
+      "computationalForm": "",
+      "prerequisites": ["Turing machine", "Polynomial time", "Verification"],
+      "dependencies": [
+        { "target": "emergence-turing-machine", "type": "requires", "strength": 1.0, "description": "Complexity classes are defined via Turing machine time bounds" },
+        { "target": "emergence-big-o-notation", "type": "requires", "strength": 0.8, "description": "Polynomial time is characterized using Big-O notation" }
+      ],
+      "enables": ["emergence-np-completeness"],
+      "compositionRules": [
+        { "with": "emergence-np-completeness", "yields": "Practical classification of problem difficulty: if any NP-complete problem is in P, then P = NP", "type": "parallel", "conditions": ["Problem is a decision problem", "Input size is well-defined"], "example": "SAT is NP-complete (Cook-Levin theorem). If SAT had a polynomial algorithm, P = NP" }
+      ],
+      "applicabilityPatterns": ["Classifying the inherent difficulty of computational problems", "Determining whether efficient algorithms exist for verification problems", "Guiding algorithm design: seek polynomial algorithms for P problems, approximate for NP-hard"],
+      "keywords": ["P", "NP", "polynomial", "complexity", "open problem"],
+      "tags": ["complexity-theory", "P-NP", "open-problem"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-np-completeness",
+      "name": "NP-Completeness",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 30,
+      "section": "30.5",
+      "planePosition": { "real": 0.2, "imaginary": 0.3 },
+      "formalStatement": "A problem is NP-complete if: (1) it is in NP, and (2) every problem in NP can be polynomial-time reduced to it. Cook's theorem (1971) showed that Boolean satisfiability (SAT) is NP-complete. NP-complete problems are the hardest problems in NP: solving any one in polynomial time would solve all of NP in polynomial time.",
+      "computationalForm": "To prove problem X is NP-complete: 1. Show X is in NP (give a polynomial verifier). 2. Choose known NP-complete problem Y. 3. Give a polynomial-time reduction from Y to X: transform any Y-instance to an X-instance preserving yes/no answers.",
+      "prerequisites": ["P vs NP", "Polynomial reduction", "Boolean satisfiability"],
+      "dependencies": [
+        { "target": "emergence-p-vs-np", "type": "requires", "strength": 1.0, "description": "NP-completeness is defined relative to the class NP" },
+        { "target": "emergence-turing-machine", "type": "requires", "strength": 0.7, "description": "Reductions are between Turing machine decision problems" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-turing-machine", "yields": "Practical algorithm strategy: use heuristics and approximation for NP-complete problems", "type": "sequential", "conditions": ["Problem is known NP-complete", "Exact solution not feasible for large inputs"], "example": "Traveling Salesman Problem (NP-complete): Christofides' algorithm gives 3/2-approximation in polynomial time" }
+      ],
+      "applicabilityPatterns": ["Proving that a problem is unlikely to have an efficient exact algorithm", "Justifying the use of heuristics and approximation algorithms", "Classifying problems into tractable and intractable categories"],
+      "keywords": ["NP-complete", "reduction", "SAT", "cook", "hardness"],
+      "tags": ["complexity-theory", "NP-complete", "reduction"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-big-o-notation",
+      "name": "Big-O Notation",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 30,
+      "section": "30.6",
+      "planePosition": { "real": 0.3, "imaginary": 0.25 },
+      "formalStatement": "f(n) = O(g(n)) if there exist constants c > 0 and n_0 such that |f(n)| <= c * |g(n)| for all n >= n_0. Big-O describes an asymptotic upper bound on growth rate. Related: Omega (lower bound), Theta (tight bound). Used to classify algorithm efficiency.",
+      "computationalForm": "To determine Big-O: find the dominant term as n -> infinity. Drop constants and lower-order terms. Examples: 3n^2 + 5n + 7 = O(n^2), 2^n + n^3 = O(2^n), n log n + n = O(n log n).",
+      "prerequisites": ["Functions", "Limits", "Asymptotic analysis"],
+      "dependencies": [
+        { "target": "change-derivative", "type": "applies", "strength": 0.4, "description": "L'Hopital's rule can determine asymptotic comparisons" },
+        { "target": "perception-real-numbers", "type": "requires", "strength": 0.4, "description": "Growth rates are measured as real-valued functions" }
+      ],
+      "enables": ["emergence-p-vs-np"],
+      "compositionRules": [
+        { "with": "emergence-turing-machine", "yields": "Complexity classification of algorithms by asymptotic resource usage", "type": "sequential", "conditions": ["Algorithm terminates on all inputs", "Input size is well-defined"], "example": "Merge sort: O(n log n) comparisons. Binary search: O(log n) comparisons. Matrix multiplication (naive): O(n^3)" }
+      ],
+      "applicabilityPatterns": ["Comparing the efficiency of different algorithms", "Characterizing scalability of computational procedures", "Abstracting away implementation details to focus on fundamental efficiency"],
+      "keywords": ["big-O", "complexity", "asymptotic", "growth rate", "upper bound"],
+      "tags": ["complexity-theory", "notation", "algorithm-analysis"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-kolmogorov-complexity",
+      "name": "Kolmogorov Complexity",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 30,
+      "section": "30.7",
+      "planePosition": { "real": 0.25, "imaginary": 0.4 },
+      "formalStatement": "The Kolmogorov complexity K(x) of a string x is the length of the shortest program (for a universal Turing machine) that outputs x. K(x) is uncomputable but provides a formal measure of information content. A string is random if K(x) >= |x| (incompressible).",
+      "computationalForm": "K(x) cannot be computed algorithmically (proof by Berry's paradox / halting problem reduction). However, upper bounds are obtainable: K(x) <= |compressed(x)| + c for any compressor. A string x is considered random if no program shorter than |x| - O(1) produces it.",
+      "prerequisites": ["Turing machine", "Information content", "Halting problem"],
+      "dependencies": [
+        { "target": "emergence-turing-machine", "type": "requires", "strength": 1.0, "description": "Kolmogorov complexity is defined via Turing machines" },
+        { "target": "emergence-halting-problem", "type": "requires", "strength": 0.8, "description": "Kolmogorov complexity is uncomputable (related to halting)" },
+        { "target": "mapping-shannon-entropy", "type": "motivates", "strength": 0.7, "description": "Algorithmic complexity provides an individual-sequence analog of Shannon entropy" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-shannon-entropy", "yields": "Connection between algorithmic and probabilistic information: E[K(X)] ≈ H(X) for random variable X", "type": "parallel", "conditions": ["Source is ergodic", "Strings are long enough"], "example": "For a fair coin: each n-bit string has K ≈ n bits, and Shannon entropy H = 1 bit per symbol, so E[K] ≈ n = n*H" }
+      ],
+      "applicabilityPatterns": ["Defining randomness in terms of incompressibility", "Measuring the inherent complexity of individual objects", "Connecting information theory to computability theory"],
+      "keywords": ["kolmogorov", "complexity", "algorithmic", "incompressible", "random"],
+      "tags": ["computation", "information", "complexity"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-neural-network",
+      "name": "Neural Network",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 31,
+      "section": "31.1",
+      "planePosition": { "real": 0.5, "imaginary": -0.2 },
+      "formalStatement": "An artificial neural network is a computational graph: y = f_L(W_L * f_{L-1}(... f_1(W_1 * x + b_1) ...+ b_L)), where W_i are weight matrices, b_i are bias vectors, and f_i are nonlinear activation functions. A perceptron is the single-layer case: y = sigma(w^T x + b).",
+      "computationalForm": "Forward pass: for each layer l = 1..L, compute z_l = W_l * a_{l-1} + b_l, then a_l = f_l(z_l), where a_0 = x (input). Common activations: ReLU f(z) = max(0,z), sigmoid f(z) = 1/(1+e^{-z}), tanh.",
+      "prerequisites": ["Linear algebra", "Function composition", "Nonlinear functions"],
+      "dependencies": [
+        { "target": "structure-linear-transformation", "type": "requires", "strength": 0.9, "description": "Each layer applies a linear transformation (matrix multiply)" },
+        { "target": "structure-vector-space", "type": "requires", "strength": 0.8, "description": "Inputs, activations, and weights live in vector spaces" }
+      ],
+      "enables": ["emergence-backpropagation", "emergence-universal-approximation", "emergence-convolutional-network", "emergence-attention-mechanism"],
+      "compositionRules": [
+        { "with": "emergence-backpropagation", "yields": "Trained neural network that approximates any target function", "type": "sequential", "conditions": ["Sufficient training data", "Architecture matches task complexity"], "example": "A 3-layer feedforward network with ReLU activations, trained by backpropagation on MNIST, achieves >98% digit recognition accuracy" }
+      ],
+      "applicabilityPatterns": ["Approximating complex input-output mappings from data", "Pattern recognition in images, text, and audio", "Building flexible function approximators for regression and classification"],
+      "keywords": ["neural network", "perceptron", "layer", "activation", "weight"],
+      "tags": ["machine-learning", "neural-network", "model"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-backpropagation",
+      "name": "Backpropagation",
+      "type": "algorithm",
+      "domain": "emergence",
+      "chapter": 31,
+      "section": "31.2",
+      "planePosition": { "real": 0.55, "imaginary": -0.15 },
+      "formalStatement": "Backpropagation computes the gradient of the loss function L with respect to all network weights via the chain rule: dL/dW_l = dL/da_L * da_L/dz_L * ... * da_l/dz_l * dz_l/dW_l. This enables gradient-based optimization of neural network parameters.",
+      "computationalForm": "1. Forward pass: compute all activations a_l. 2. Compute loss L(a_L, y). 3. Backward pass: delta_L = dL/da_L * f'_L(z_L). For l = L-1..1: delta_l = (W_{l+1}^T * delta_{l+1}) . f'_l(z_l). 4. Gradients: dL/dW_l = delta_l * a_{l-1}^T, dL/db_l = delta_l.",
+      "prerequisites": ["Neural network", "Chain rule", "Gradient"],
+      "dependencies": [
+        { "target": "emergence-neural-network", "type": "requires", "strength": 1.0, "description": "Backpropagation computes gradients for neural networks" },
+        { "target": "change-derivative", "type": "requires", "strength": 1.0, "description": "Chain rule of calculus is the mathematical foundation" },
+        { "target": "structure-linear-transformation", "type": "applies", "strength": 0.7, "description": "Matrix transpositions in the backward pass" }
+      ],
+      "enables": ["emergence-gradient-descent"],
+      "compositionRules": [
+        { "with": "emergence-gradient-descent", "yields": "Complete neural network training pipeline", "type": "sequential", "conditions": ["Loss function is differentiable", "Network architecture is fixed"], "example": "Backprop computes gradients, SGD updates weights: W <- W - lr * dL/dW, iterated over batches of training data" }
+      ],
+      "applicabilityPatterns": ["Training deep neural networks to minimize loss functions", "Computing gradients efficiently through computational graphs", "Enabling end-to-end learning from data"],
+      "keywords": ["backpropagation", "gradient", "chain rule", "backward pass", "training"],
+      "tags": ["machine-learning", "backpropagation", "algorithm"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-gradient-descent",
+      "name": "Gradient Descent",
+      "type": "algorithm",
+      "domain": "emergence",
+      "chapter": 31,
+      "section": "31.3",
+      "planePosition": { "real": 0.45, "imaginary": -0.2 },
+      "formalStatement": "Gradient descent minimizes a function f(theta) by iterating theta_{t+1} = theta_t - eta * grad f(theta_t), where eta is the learning rate. Stochastic gradient descent (SGD) approximates the gradient using random mini-batches: theta_{t+1} = theta_t - eta * grad f_B(theta_t).",
+      "computationalForm": "1. Initialize parameters theta_0 randomly. 2. For each iteration: compute gradient g = grad L(theta; batch). 3. Update: theta <- theta - eta * g. Variants: momentum (v <- beta*v + g, theta <- theta - eta*v), Adam (adaptive learning rates per parameter).",
+      "prerequisites": ["Backpropagation", "Optimization", "Stochastic approximation"],
+      "dependencies": [
+        { "target": "emergence-backpropagation", "type": "requires", "strength": 0.9, "description": "Gradient computation via backpropagation enables gradient descent" },
+        { "target": "change-optimization", "type": "requires", "strength": 1.0, "description": "Gradient descent is the fundamental optimization algorithm" },
+        { "target": "change-derivative", "type": "requires", "strength": 0.8, "description": "Gradient is the vector of partial derivatives" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "change-optimization", "yields": "Modern deep learning optimization with adaptive learning rates", "type": "sequential", "conditions": ["Loss landscape is differentiable", "Learning rate is appropriately chosen"], "example": "Adam optimizer with lr=0.001 combines gradient descent with per-parameter adaptive step sizes and momentum" }
+      ],
+      "applicabilityPatterns": ["Training machine learning models by minimizing loss functions", "Finding local minima of high-dimensional non-convex functions", "Iteratively improving model parameters based on data"],
+      "keywords": ["gradient descent", "SGD", "optimization", "learning rate", "adam"],
+      "tags": ["machine-learning", "optimization", "algorithm"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-loss-function",
+      "name": "Loss Functions",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 31,
+      "section": "31.4",
+      "planePosition": { "real": 0.4, "imaginary": -0.25 },
+      "formalStatement": "A loss function L(y_hat, y) measures the discrepancy between model predictions y_hat and true targets y. Common losses: MSE L = (1/n) sum (y_i - y_hat_i)^2 for regression, cross-entropy L = -sum y_i log(y_hat_i) for classification, hinge loss max(0, 1 - y*f(x)) for SVMs.",
+      "computationalForm": "MSE: compute (prediction - target)^2 for each sample, average. Cross-entropy: compute -target * log(prediction) for each class, sum over classes and average over samples. Gradient of cross-entropy with softmax output: dL/dz_i = p_i - y_i (elegant simplification).",
+      "prerequisites": ["Neural network", "Probability distributions", "Optimization"],
+      "dependencies": [
+        { "target": "emergence-neural-network", "type": "requires", "strength": 0.8, "description": "Loss functions evaluate neural network outputs" },
+        { "target": "mapping-kl-divergence", "type": "motivates", "strength": 0.7, "description": "Cross-entropy loss is related to KL divergence between true and predicted distributions" },
+        { "target": "change-optimization", "type": "applies", "strength": 0.8, "description": "Loss functions define the optimization objective" }
+      ],
+      "enables": ["emergence-gradient-descent"],
+      "compositionRules": [
+        { "with": "emergence-gradient-descent", "yields": "Complete training objective: minimize average loss over training data", "type": "sequential", "conditions": ["Loss is differentiable almost everywhere", "Data distribution is well-represented"], "example": "Training ResNet-50 on ImageNet: minimize cross-entropy loss between softmax predictions and one-hot labels using SGD with momentum" }
+      ],
+      "applicabilityPatterns": ["Defining what it means for a model to be good at its task", "Connecting model outputs to optimization objectives", "Choosing appropriate training signals for different problem types"],
+      "keywords": ["loss", "cost", "objective", "MSE", "cross-entropy"],
+      "tags": ["machine-learning", "loss-function", "optimization"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-regularization",
+      "name": "Regularization and Overfitting",
+      "type": "technique",
+      "domain": "emergence",
+      "chapter": 31,
+      "section": "31.5",
+      "planePosition": { "real": 0.4, "imaginary": -0.15 },
+      "formalStatement": "Regularization prevents overfitting by adding a penalty to the loss function: L_reg = L + lambda * R(theta). L1 regularization (R = ||theta||_1) promotes sparsity; L2 regularization (R = ||theta||_2^2, weight decay) prevents large weights. Dropout randomly zeroes activations during training.",
+      "computationalForm": "L2: L_total = L_data + (lambda/2) * sum w_i^2. Gradient includes weight decay term: dL/dw = dL_data/dw + lambda * w. Dropout: during training, multiply each hidden activation by a Bernoulli mask with probability p. At test time, scale by p.",
+      "prerequisites": ["Loss functions", "Bias-variance tradeoff", "Generalization"],
+      "dependencies": [
+        { "target": "emergence-loss-function", "type": "requires", "strength": 0.9, "description": "Regularization modifies the loss function" },
+        { "target": "emergence-neural-network", "type": "requires", "strength": 0.7, "description": "Regularization is essential for training neural networks" },
+        { "target": "change-optimization", "type": "applies", "strength": 0.6, "description": "Regularization constrains the optimization landscape" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-gradient-descent", "yields": "Regularized training that generalizes to unseen data", "type": "sequential", "conditions": ["Regularization strength lambda is tuned", "Validation set monitors generalization"], "example": "Weight decay of 0.0001 in SGD prevents ResNet weights from growing unboundedly, improving test accuracy by 1-2%" }
+      ],
+      "applicabilityPatterns": ["Preventing models from memorizing training data", "Improving generalization to unseen test data", "Controlling model complexity to match available data"],
+      "keywords": ["regularization", "overfitting", "dropout", "L2", "weight decay"],
+      "tags": ["machine-learning", "regularization", "generalization"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-universal-approximation",
+      "name": "Universal Approximation Theorem",
+      "type": "theorem",
+      "domain": "emergence",
+      "chapter": 31,
+      "section": "31.6",
+      "planePosition": { "real": 0.45, "imaginary": -0.1 },
+      "formalStatement": "A feedforward neural network with a single hidden layer of sufficient width, using any non-constant bounded continuous activation function, can approximate any continuous function on a compact set to arbitrary accuracy: for any f and epsilon > 0, there exists a network g with ||f - g||_inf < epsilon.",
+      "computationalForm": "The theorem is existential -- it guarantees existence but not efficient construction. In practice: increase hidden layer width until validation error is satisfactory. The required width may be exponential in dimension (curse of dimensionality), motivating deep (multi-layer) architectures.",
+      "prerequisites": ["Neural network", "Continuous functions", "Function approximation"],
+      "dependencies": [
+        { "target": "emergence-neural-network", "type": "requires", "strength": 1.0, "description": "The theorem characterizes the expressive power of neural networks" },
+        { "target": "structure-vector-space", "type": "applies", "strength": 0.5, "description": "Function spaces are vector spaces" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-backpropagation", "yields": "Practical universal function approximation via trained deep networks", "type": "sequential", "conditions": ["Network is wide/deep enough", "Sufficient training data available"], "example": "A 2-hidden-layer ReLU network with 1000 neurons per layer can approximate most smooth functions encountered in practice" }
+      ],
+      "applicabilityPatterns": ["Justifying neural networks as flexible function approximators", "Understanding why deep learning can solve diverse problems", "Motivating the search for efficient network architectures"],
+      "keywords": ["universal approximation", "expressiveness", "function approximation", "width"],
+      "tags": ["machine-learning", "theorem", "expressiveness"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-convolutional-network",
+      "name": "Convolutional Neural Network",
+      "type": "definition",
+      "domain": "emergence",
+      "chapter": 31,
+      "section": "31.7",
+      "planePosition": { "real": 0.6, "imaginary": -0.2 },
+      "formalStatement": "A convolutional neural network (CNN) uses convolutional layers that apply learned filters across spatial dimensions: (f * x)(i,j) = sum_{m,n} f(m,n) * x(i+m, j+n). Weight sharing (same filter applied everywhere) reduces parameters and captures translation equivariance. Pooling layers reduce spatial resolution.",
+      "computationalForm": "Convolutional layer: slide K filters of size (H,W) across input feature map, compute dot product at each position. Output channels = K. Add bias and apply activation. Max pooling: for each (p x p) region, output the maximum value. Typical architecture: [Conv -> ReLU -> Pool] x N -> Flatten -> FC -> Softmax.",
+      "prerequisites": ["Neural network", "Convolution", "Image processing"],
+      "dependencies": [
+        { "target": "emergence-neural-network", "type": "specializes", "strength": 1.0, "description": "CNNs are a specialized neural network architecture" },
+        { "target": "mapping-convolution-theorem", "type": "applies", "strength": 0.6, "description": "Convolution operation is the core operation" },
+        { "target": "structure-linear-transformation", "type": "requires", "strength": 0.7, "description": "Convolution is a structured linear operation" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-backpropagation", "yields": "End-to-end trained image recognition systems", "type": "sequential", "conditions": ["Input data has spatial structure", "Translation equivariance is desired"], "example": "ResNet-50: 50-layer CNN with skip connections, trained on ImageNet (1.2M images), achieves 76% top-1 accuracy" }
+      ],
+      "applicabilityPatterns": ["Processing grid-structured data like images and audio spectrograms", "Extracting hierarchical spatial features automatically", "Achieving state-of-the-art image recognition and object detection"],
+      "keywords": ["CNN", "convolutional", "filter", "pooling", "image recognition"],
+      "tags": ["machine-learning", "CNN", "architecture"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-attention-mechanism",
+      "name": "Attention Mechanism",
+      "type": "technique",
+      "domain": "emergence",
+      "chapter": 31,
+      "section": "31.8",
+      "planePosition": { "real": 0.6, "imaginary": -0.3 },
+      "formalStatement": "Scaled dot-product attention computes a weighted sum of values V based on the similarity of queries Q and keys K: Attention(Q,K,V) = softmax(QK^T / sqrt(d_k)) V. Multi-head attention runs h parallel attention heads and concatenates results. Self-attention allows each position to attend to all other positions.",
+      "computationalForm": "1. Project input X into Q = XW_Q, K = XW_K, V = XW_V. 2. Compute attention scores: A = softmax(QK^T / sqrt(d_k)). 3. Weighted sum: output = A * V. Multi-head: repeat with h different projections, concatenate outputs, project with W_O.",
+      "prerequisites": ["Neural network", "Matrix multiplication", "Softmax function"],
+      "dependencies": [
+        { "target": "emergence-neural-network", "type": "requires", "strength": 0.9, "description": "Attention is a neural network building block" },
+        { "target": "structure-linear-transformation", "type": "requires", "strength": 0.8, "description": "Query, key, value projections are linear transformations" },
+        { "target": "mapping-probability-axioms", "type": "applies", "strength": 0.5, "description": "Softmax produces a probability distribution over positions" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-neural-network", "yields": "Transformer architecture: the foundation of modern language models", "type": "nested", "conditions": ["Self-attention captures long-range dependencies", "Positional encoding added"], "example": "GPT/BERT: stack of transformer layers (self-attention + feedforward), trained on massive text corpora, achieving state-of-the-art NLP" }
+      ],
+      "applicabilityPatterns": ["Modeling long-range dependencies in sequential data", "Building transformer architectures for language and vision", "Enabling dynamic weighting of input elements based on context"],
+      "keywords": ["attention", "transformer", "self-attention", "multi-head", "query-key-value"],
+      "tags": ["machine-learning", "attention", "transformer"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-reinforcement-learning",
+      "name": "Reinforcement Learning",
+      "type": "technique",
+      "domain": "emergence",
+      "chapter": 31,
+      "section": "31.9",
+      "planePosition": { "real": 0.55, "imaginary": -0.25 },
+      "formalStatement": "In reinforcement learning, an agent interacts with an environment in discrete steps: observes state s_t, takes action a_t, receives reward r_t, transitions to s_{t+1}. The goal is to find a policy pi(a|s) that maximizes expected cumulative reward: V^pi(s) = E[sum_{t=0}^inf gamma^t r_t | s_0 = s]. The Bellman equation: V(s) = max_a [R(s,a) + gamma * sum_{s'} P(s'|s,a) V(s')].",
+      "computationalForm": "Value iteration: V_{k+1}(s) = max_a [R(s,a) + gamma * sum_{s'} P(s'|s,a) V_k(s')]. Q-learning: Q(s,a) <- Q(s,a) + alpha * [r + gamma * max_{a'} Q(s',a') - Q(s,a)]. Policy gradient: theta <- theta + alpha * grad log pi_theta(a|s) * G_t.",
+      "prerequisites": ["Markov decision process", "Expected value", "Dynamic programming"],
+      "dependencies": [
+        { "target": "mapping-markov-chain", "type": "requires", "strength": 0.8, "description": "RL environments are Markov decision processes" },
+        { "target": "mapping-expected-value", "type": "requires", "strength": 0.7, "description": "Value functions are expected cumulative rewards" },
+        { "target": "change-optimization", "type": "applies", "strength": 0.7, "description": "Policy optimization seeks reward-maximizing behavior" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "emergence-neural-network", "yields": "Deep reinforcement learning (DQN, PPO, AlphaGo)", "type": "nested", "conditions": ["State/action spaces are large or continuous", "Function approximation needed"], "example": "AlphaGo: Monte Carlo tree search + deep neural networks for policy and value estimation, defeating world champion at Go" }
+      ],
+      "applicabilityPatterns": ["Training agents to make sequential decisions through trial and error", "Solving game-playing and robotic control problems", "Optimizing strategies in environments with delayed rewards"],
+      "keywords": ["reinforcement learning", "reward", "policy", "value function", "bellman"],
+      "tags": ["machine-learning", "reinforcement-learning", "agent"],
+      "buildLabs": []
+    },
+    {
+      "id": "emergence-bias-variance",
+      "name": "Bias-Variance Tradeoff",
+      "type": "theorem",
+      "domain": "emergence",
+      "chapter": 31,
+      "section": "31.10",
+      "planePosition": { "real": 0.35, "imaginary": -0.2 },
+      "formalStatement": "The expected prediction error of a model decomposes as: E[(y - f_hat(x))^2] = Bias(f_hat(x))^2 + Var(f_hat(x)) + sigma^2 (irreducible noise). Simple models have high bias (underfitting), complex models have high variance (overfitting). The optimal model minimizes the total error.",
+      "computationalForm": "Bias = E[f_hat(x)] - f(x) (systematic error). Variance = E[(f_hat(x) - E[f_hat(x)])^2] (sensitivity to training set). Estimate by training on multiple bootstrap samples: compute average prediction (estimates bias) and prediction spread (estimates variance).",
+      "prerequisites": ["Expected value", "Variance", "Model fitting"],
+      "dependencies": [
+        { "target": "mapping-expected-value", "type": "requires", "strength": 0.8, "description": "Bias and variance are defined via expectations" },
+        { "target": "mapping-variance", "type": "requires", "strength": 0.9, "description": "Variance of the estimator drives overfitting" }
+      ],
+      "enables": ["emergence-regularization"],
+      "compositionRules": [
+        { "with": "emergence-regularization", "yields": "Principled model complexity selection to minimize total error", "type": "sequential", "conditions": ["Both training and validation error are monitored", "Model complexity can be tuned"], "example": "Increasing L2 regularization strength increases bias but decreases variance; optimal lambda minimizes validation error" }
+      ],
+      "applicabilityPatterns": ["Understanding why model complexity must be matched to data quantity", "Diagnosing whether a model is underfitting or overfitting", "Guiding the choice of model architecture and regularization"],
+      "keywords": ["bias", "variance", "tradeoff", "overfitting", "underfitting"],
+      "tags": ["machine-learning", "bias-variance", "generalization"],
+      "buildLabs": []
+    }
+  ]
+}
