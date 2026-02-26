@@ -1,0 +1,17 @@
+# v1.4 — Agent Teams
+
+**Shipped:** 2026-02-05
+**Phases:** 18-23 (6 phases) | **Plans:** 18 | **Requirements:** 22
+
+Multi-agent team coordination enabling complex workflows across specialized agents.
+
+### Key Features
+
+- Team schema with YAML frontmatter defining topology and member roles
+- Three topologies: leader-worker, pipeline, swarm
+- Team storage in `.claude/teams/` with validation and CLI management
+- Member capability declarations and role assignments
+- GSD workflow templates for team-based execution
+- `skill-creator team create/list/validate/run` CLI commands
+
+---

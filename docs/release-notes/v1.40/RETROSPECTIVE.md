@@ -1,0 +1,51 @@
+# v1.40 Retrospective — sc:learn Dogfood Mission
+
+**Shipped:** 2026-02-26
+**Phases:** 6 (384-389) | **Plans:** 12 | **Commits:** 24 | **Sessions:** 1
+**Tests:** 362 | **Source LOC:** ~7.2K | **Requirements:** 44/44
+
+### What Was Built
+- PDF extraction pipeline: pdftotext-based extractor with chapter/part boundary detection (Roman numerals), section parser with LaTeX math preservation (display, inline, theorem/definition/proof), MusiXTeX tagging via Unicode + keyword proximity, TikZ diagram cataloging, cross-reference detection with zero-padded formatting (ch-05), boundary-respecting chunk segmentation (8000 token max), JSONL manifest with exercise/build-lab extraction and difficulty tags — 118 tests
+- Ingestion harness: CheckpointManager with atomic write (temp→rename) and SHA-256 integrity validation, ProgressTracker with weighted multi-stage percentages (extraction 20%, trackA 25%, trackB 25%, verification 15%, refinement 15%), MetricsCollector with per-chapter recording and Pearson correlation (mathDensity vs processingTimeMs), DashboardBridge writing JSON outbox for real-time pipeline observability — 27 tests
+- Learning pipeline: Dual-track architecture (A: Parts I-V, B: Parts VI-X) with shared runTrack() helper, regex-based concept detection (definitions, theorems, prerequisites, relationships, applications), complex plane positioning via PART_ANGULAR_REGIONS (10 parts mapped to angular regions), progressive depth tracking (radius growth), ecosystem cross-referencing with confidence-tiered relationship classification (>0.8 identical, >0.6 extends, else refines), token budget enforcement (~100K per track), garbled LaTeX warning-and-continue — 68 tests
+- Database merger: Case-insensitive name deduplication across tracks, higher-confidence detection preserved as primary, progressive depth applied via updatePositionForDepth, ecosystem mappings combined and deduplicated by document+section, coverage statistics (total unique, per-part breakdowns, cross-track overlap) — integrated into Phase 387
+- Verification engine: 3-track verification — Track A (concept coverage audit) with Jaccard similarity on keyword sets (threshold >0.15), Track B (cross-document consistency) with antonym-pair contradiction detection (continuous/discrete, finite/infinite, convergent/divergent, bounded/unbounded, linear/nonlinear, commutative/noncommutative), Track C (eight-layer progression mapping) with confidence scores, ordering consistency check, and dependency gap identification — 8-type gap taxonomy, 4-level severity with analysis justification, gap deduplication by (concept, type) pair, sequential IDs (gap-001, gap-002...), statistics by type/severity/document — 65 tests
+- Refinement and reporting: Patch generator filtering to actionable gap types only (inconsistent→update, outdated→replace, incomplete→add) with confidence scoring (0.85 default, 0.75 geometry-sensitive, 0.6 annotations) and SAFETY-03 enforcement (requiresReview always true); ticket generator with component derivation from analysis context and reproduction step generation; skill refiner with merge candidate detection and complex plane position inheritance; report builder producing 11-section markdown from actual pipeline metrics (zero placeholders); safety validator with Levenshtein-based bounded learning check (≤20%), SHA-256 checkpoint integrity, no-auto-application audit, regression gate (16,795 tests, 0 failures) — 84 tests
+
+### What Worked
+- **4-wave execution with 2 parallel tracks in Waves 1 and 2**: 12 plans completed in single session; Wave 1 (384+385) and Wave 2 (386+387) ran with 2 parallel agents each; Waves 3 (388) and 4 (389) ran sequentially due to data dependencies
+- **Parallel agent coordination via test contracts**: Phases 386 and 387 ran simultaneously building shared modules (track-runner, cross-referencer, concept-detector, position-mapper). Phase 387 pre-implemented shared files while Phase 386 was still building tests. Phase 386 detected existing code, read it, and validated against its test expectations — all tests passed without manual coordination
+- **Pre-built VTM mission package (10 docs, ~88K)**: Zero research phase — consumed directly by new-milestone, immediate wave planning. Fifth consecutive milestone using this pattern (v1.33, v1.35, v1.37, v1.39, v1.40)
+- **Type-driven phase boundaries**: Each phase defines its own types.ts contract file consumed by downstream phases — extraction types (384), harness types (385), learning types (386), verification types (388), refinement types (389). Clean import chains with no circular dependencies
+- **Zero deviations across all 12 plans**: Not a single auto-fix needed. This is the first milestone since v1.35 with zero deviations. Contributing factors: mature plan template, well-tested patterns, TDD cycle catching all issues at authoring time
+- **Deterministic testable design throughout**: All modules avoid LLM calls in favor of regex/heuristic extraction and pure functional logic with dependency injection (DetectFn, PositionFn, EcosystemDocIndex). Every function is testable with synthetic data — no filesystem, no network, no external dependencies
+- **Safety-first design proven end-to-end**: SAFETY-01 through SAFETY-04 validated at Phase 389 close. The safety validator runs all 4 checks simultaneously, reports multiple violations, and the full regression suite (16,795 tests) passed with zero failures
+- **Single-session execution with zero human interventions**: Entire milestone (plan → execute → verify → state update) completed autonomously. No stuck agents, no rate limits, no manual fixes. This is the first fully hands-free milestone
+
+### What Was Inefficient
+- **Parallel write coordination on shared files**: Phases 386 and 387 both needed to create track-runner.ts and cross-referencer.ts. Phase 387 won the race and created them first, meaning Phase 386 had to adapt. While the test-contract approach handled this gracefully, it's conceptually fragile — if 387's implementation had been incompatible with 386's test expectations, the fix would have been expensive
+- **Chunking heuristics vs actual tokenization**: Token estimation uses density-adjusted word count ratios (1.3-1.8x based on math density) rather than actual tokenizer calls. The 10% accuracy requirement (EXTRACT-10) is met by the heuristic, but drift risk exists for content with unusual token/word ratios
+- **No index/barrel file for verification module**: Phases 384, 385, and 389 all create index.ts barrel files. Phase 388 (verification engine) does not. This is inconsistent but has no runtime impact since downstream consumers import from specific files
+- **ROADMAP.md and REQUIREMENTS.md manual update required**: Executor agents updated SUMMARY.md files but not ROADMAP.md plan checkboxes or REQUIREMENTS.md checkmarks. These were updated manually during milestone completion. Same pattern as v1.37-v1.39
+
+### Patterns Established
+- **Parallel agent coordination via test contracts**: When two phases must create shared files, the first agent to complete writes the implementation, and the second agent validates against its test expectations. This worked perfectly for v1.40 but should be formalized — either by assigning file ownership to one phase or by requiring the shared types to be in a Wave 0 phase
+- **Three-track verification with deduplication**: The Track A (coverage) + Track B (consistency) + Track C (progression) pattern catches different classes of gaps. Deduplication by (concept, type) pair prevents double-counting across tracks. This is reusable for any future verification pipeline
+- **Actionable gap filtering**: Not all gaps warrant patches. The pattern of filtering to actionable types (inconsistent, outdated, incomplete) while skipping verified, missing-in-textbook, new-connection, missing-in-ecosystem, and differently-expressed produces a focused, high-value patch set
+- **Confidence-tiered patch scoring**: Geometry-sensitive patches (affecting unit circle, theta, radius) get lower confidence (0.75) than factual corrections (0.85). Annotation patches get lowest confidence (0.6). This encodes domain-specific risk into the output
+- **Safety validator as reusable module**: The 4-constraint safety validator (bounded learning, checkpoint integrity, no auto-application, regression gate) is generic enough to be used for any future sc:learn invocation, not just the dogfood mission
+
+### Key Lessons
+1. **Zero deviations is achievable with mature patterns**: v1.40 had zero auto-fixes across 12 plans. The combination of TDD RED-GREEN cycle, comprehensive plan specifications, and 40+ milestones of pattern refinement has eliminated most sources of execution variance
+2. **Parallel agent coordination works through test contracts, not explicit synchronization**: When Phases 386 and 387 raced to create shared files, the test expectations served as the coordination mechanism. This is more robust than lock files or turn-taking
+3. **Safety constraints should be testable as data validations, not runtime enforcement**: SAFETY-01 through SAFETY-04 are all pure data checks on the outputs of the pipeline. No runtime hooks, no file watchers, no middleware — just assertions on the final data structures. This makes safety trivially testable
+4. **Dogfood pipelines reveal architecture patterns**: Building a 5-stage pipeline (extract → learn → verify → refine → report) with harness infrastructure exercised every architectural pattern in the project: type-first boundaries, port-based DI, checkpoint/resume, dashboard bridge, TDD cycle
+5. **Single-session milestones scale to 12 plans with zero human intervention**: v1.40 is the cleanest autonomous execution yet — no stuck agents, no rate limits, no manual coordination. The 12-plan boundary is well within the single-session limit (established at 16-20 in v1.36-v1.37)
+
+### Cost Observations
+- Model mix: ~50% Opus (learning pipeline, verification engine, report builder), ~50% Sonnet (extraction, harness, patches, skills)
+- Sessions: 1 (entire milestone in single context window)
+- Notable: 6 phases in ~45 min wall clock = ~7.5 min/phase average; consistent with v1.37-v1.39 velocity
+- Zero human interventions — first fully autonomous milestone
+
+---
