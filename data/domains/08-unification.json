@@ -1,0 +1,739 @@
+{
+  "domain": "unification",
+  "version": "1.35.0",
+  "primitives": [
+    {
+      "id": "unification-symmetry-group-u1",
+      "name": "U(1) Symmetry Group",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.1",
+      "planePosition": { "real": -0.2, "imaginary": 0.5 },
+      "formalStatement": "U(1) is the group of complex numbers of unit modulus under multiplication: U(1) = {e^{i*theta} : theta in [0, 2*pi)}. It is the gauge group of electromagnetism, with phase rotations psi -> e^{i*alpha} psi leaving the Lagrangian invariant.",
+      "computationalForm": "",
+      "prerequisites": ["Group theory", "Complex exponentials", "Phase rotation"],
+      "dependencies": [
+        { "target": "foundations-group", "type": "requires", "strength": 1.0, "description": "U(1) is a Lie group" },
+        { "target": "perception-unit-circle", "type": "applies", "strength": 0.8, "description": "U(1) is the unit circle in the complex plane" }
+      ],
+      "enables": ["unification-gauge-principle", "unification-electroweak-unification"],
+      "compositionRules": [
+        { "with": "unification-symmetry-group-su2", "yields": "Electroweak gauge group SU(2) x U(1)", "type": "parallel", "conditions": ["Combined symmetry before spontaneous symmetry breaking"], "example": "The Standard Model electroweak sector has gauge group SU(2)_L x U(1)_Y, broken to U(1)_EM by the Higgs mechanism" }
+      ],
+      "applicabilityPatterns": ["Describing electromagnetic gauge invariance", "Modeling phase symmetries in quantum mechanics", "Classifying abelian gauge theories"],
+      "keywords": ["U(1)", "gauge", "symmetry", "electromagnetic", "phase"],
+      "tags": ["symmetry-group", "gauge-theory", "electromagnetism"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-symmetry-group-su2",
+      "name": "SU(2) Symmetry Group",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.2",
+      "planePosition": { "real": -0.2, "imaginary": 0.55 },
+      "formalStatement": "SU(2) is the group of 2x2 unitary matrices with determinant 1. It is the gauge group of the weak nuclear force and is locally isomorphic to SO(3), the rotation group in 3D. Its Lie algebra su(2) has basis {sigma_1/2, sigma_2/2, sigma_3/2} (Pauli matrices).",
+      "computationalForm": "",
+      "prerequisites": ["Group theory", "Matrix operations", "Unitary matrices"],
+      "dependencies": [
+        { "target": "foundations-group", "type": "requires", "strength": 1.0, "description": "SU(2) is a Lie group" },
+        { "target": "structure-linear-transformation", "type": "applies", "strength": 0.8, "description": "SU(2) elements are linear transformations" }
+      ],
+      "enables": ["unification-gauge-principle", "unification-electroweak-unification", "unification-higgs-mechanism"],
+      "compositionRules": [
+        { "with": "unification-symmetry-group-su3", "yields": "Non-abelian gauge group of the Standard Model: SU(3) x SU(2) x U(1)", "type": "parallel", "conditions": ["All three gauge groups act independently"], "example": "The complete Standard Model gauge group SU(3)_C x SU(2)_L x U(1)_Y describes strong, weak, and electromagnetic interactions" }
+      ],
+      "applicabilityPatterns": ["Describing weak nuclear force gauge symmetry", "Modeling isospin and weak interactions", "Representing 3D rotations via double cover"],
+      "keywords": ["SU(2)", "weak force", "isospin", "Pauli matrices", "non-abelian"],
+      "tags": ["symmetry-group", "gauge-theory", "weak-force"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-symmetry-group-su3",
+      "name": "SU(3) Symmetry Group",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.3",
+      "planePosition": { "real": -0.15, "imaginary": 0.55 },
+      "formalStatement": "SU(3) is the group of 3x3 unitary matrices with determinant 1. It is the gauge group of quantum chromodynamics (QCD), governing the strong nuclear force. Its 8 generators correspond to 8 gluons, the force carriers of the strong interaction.",
+      "computationalForm": "",
+      "prerequisites": ["Group theory", "Unitary matrices", "Color charge"],
+      "dependencies": [
+        { "target": "foundations-group", "type": "requires", "strength": 1.0, "description": "SU(3) is a Lie group" },
+        { "target": "structure-linear-transformation", "type": "applies", "strength": 0.8, "description": "SU(3) elements are linear transformations in color space" }
+      ],
+      "enables": ["unification-gauge-principle", "unification-strong-force-qcd"],
+      "compositionRules": [
+        { "with": "reality-schrodinger-equation", "yields": "QCD equations of motion for quark fields", "type": "nested", "conditions": ["Gauge-covariant derivative used", "Color charge included"], "example": "The QCD Lagrangian includes quark fields transforming under SU(3) with gluon fields as gauge connections" }
+      ],
+      "applicabilityPatterns": ["Describing strong nuclear force interactions between quarks", "Classifying hadrons using color charge representations", "Modeling gluon self-interactions"],
+      "keywords": ["SU(3)", "QCD", "strong force", "color", "gluon"],
+      "tags": ["symmetry-group", "gauge-theory", "strong-force"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-gauge-principle",
+      "name": "Gauge Principle",
+      "type": "technique",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.4",
+      "planePosition": { "real": -0.1, "imaginary": 0.6 },
+      "formalStatement": "The gauge principle states that physics must be invariant under local (spacetime-dependent) symmetry transformations. Requiring local gauge invariance necessitates the introduction of gauge fields (connections) that transform as A_mu -> g A_mu g^{-1} + (i/e) g partial_mu g^{-1}.",
+      "computationalForm": "Replace ordinary derivatives with gauge-covariant derivatives: D_mu = partial_mu - i g A_mu. The gauge field A_mu transforms to compensate for the spacetime-dependent phase, ensuring the Lagrangian remains invariant.",
+      "prerequisites": ["Symmetry groups", "Lagrangian mechanics", "Covariant derivative"],
+      "dependencies": [
+        { "target": "foundations-group", "type": "requires", "strength": 0.9, "description": "Gauge groups provide the symmetry structure" },
+        { "target": "structure-vector-space", "type": "applies", "strength": 0.7, "description": "Gauge fields live in the Lie algebra (a vector space)" },
+        { "target": "change-differential-equation", "type": "applies", "strength": 0.8, "description": "Gauge-covariant derivatives modify differential equations" }
+      ],
+      "enables": ["unification-lagrangian", "unification-higgs-mechanism", "unification-electroweak-unification", "unification-strong-force-qcd"],
+      "compositionRules": [
+        { "with": "foundations-group", "yields": "Construction of gauge theories from any Lie group", "type": "sequential", "conditions": ["Lie group is compact", "Matter fields transform under a representation"], "example": "Starting with SU(2) symmetry and applying the gauge principle generates the W and Z bosons as gauge fields" }
+      ],
+      "applicabilityPatterns": ["Constructing quantum field theories from symmetry requirements", "Deriving force-carrying particles from local invariance", "Understanding why fundamental forces have the structure they do"],
+      "keywords": ["gauge", "local symmetry", "covariant derivative", "gauge field", "invariance"],
+      "tags": ["gauge-theory", "fundamental-forces", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-lagrangian",
+      "name": "Lagrangian Formulation",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.5",
+      "planePosition": { "real": -0.15, "imaginary": 0.45 },
+      "formalStatement": "The Lagrangian density L encodes the dynamics of a field theory. The action S = integral L d^4x is stationary under field variations (Hamilton's principle), yielding the Euler-Lagrange field equations. The Standard Model Lagrangian L_SM = L_gauge + L_fermion + L_Higgs + L_Yukawa.",
+      "computationalForm": "Write L as a function of fields phi and their derivatives partial_mu phi. Apply the Euler-Lagrange equation: partial_mu (partial L / partial(partial_mu phi)) - partial L / partial phi = 0. For the Standard Model, this generates coupled field equations for all particles.",
+      "prerequisites": ["Variational calculus", "Action principle", "Field theory basics"],
+      "dependencies": [
+        { "target": "change-optimization", "type": "requires", "strength": 0.9, "description": "Lagrangian mechanics uses variational principles (extremizing the action)" },
+        { "target": "change-integral", "type": "requires", "strength": 0.8, "description": "The action is an integral of the Lagrangian" },
+        { "target": "change-differential-equation", "type": "motivates", "strength": 0.7, "description": "Euler-Lagrange equations are differential equations of motion" }
+      ],
+      "enables": ["unification-noether-theorem", "unification-gauge-principle"],
+      "compositionRules": [
+        { "with": "unification-gauge-principle", "yields": "Gauge-invariant Lagrangian with gauge field kinetic terms", "type": "sequential", "conditions": ["Gauge group is specified", "Matter content is defined"], "example": "QED Lagrangian: L = psi_bar(i gamma^mu D_mu - m)psi - (1/4)F_{mu nu}F^{mu nu}" }
+      ],
+      "applicabilityPatterns": ["Formulating physical theories from symmetry principles", "Deriving equations of motion for fields and particles", "Encoding all interactions in a single mathematical object"],
+      "keywords": ["lagrangian", "action", "variational", "euler-lagrange", "field theory"],
+      "tags": ["lagrangian", "field-theory", "variational"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-noether-theorem",
+      "name": "Noether's Theorem",
+      "type": "theorem",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.6",
+      "planePosition": { "real": -0.05, "imaginary": 0.65 },
+      "formalStatement": "For every continuous symmetry of the action, there exists a corresponding conserved quantity. If the Lagrangian is invariant under a continuous transformation phi -> phi + epsilon * delta_phi, then the current j^mu = (partial L / partial(partial_mu phi)) delta_phi is conserved: partial_mu j^mu = 0.",
+      "computationalForm": "1. Identify a continuous symmetry transformation of the Lagrangian. 2. Compute the variation delta_phi. 3. Construct the Noether current j^mu. 4. The conserved charge Q = integral j^0 d^3x is constant in time: dQ/dt = 0.",
+      "prerequisites": ["Lagrangian formulation", "Continuous symmetry", "Conservation laws"],
+      "dependencies": [
+        { "target": "unification-lagrangian", "type": "requires", "strength": 1.0, "description": "Noether's theorem operates on the Lagrangian/action" },
+        { "target": "foundations-group", "type": "requires", "strength": 0.8, "description": "Symmetries form groups" },
+        { "target": "change-integral", "type": "applies", "strength": 0.7, "description": "Conserved charge is a spatial integral of the current" }
+      ],
+      "enables": ["unification-conservation-laws"],
+      "compositionRules": [
+        { "with": "unification-gauge-principle", "yields": "Gauge conservation laws: charge, color charge, weak isospin", "type": "sequential", "conditions": ["Lagrangian has gauge symmetry", "Symmetry is continuous"], "example": "U(1) gauge symmetry -> electric charge conservation; time translation symmetry -> energy conservation" }
+      ],
+      "applicabilityPatterns": ["Deriving conservation laws from symmetry principles", "Understanding the deep connection between symmetry and physics", "Finding conserved quantities for novel physical theories"],
+      "keywords": ["noether", "symmetry", "conservation", "current", "charge"],
+      "tags": ["symmetry", "conservation", "theorem", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-higgs-mechanism",
+      "name": "Higgs Mechanism",
+      "type": "technique",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.7",
+      "planePosition": { "real": 0.0, "imaginary": 0.55 },
+      "formalStatement": "Spontaneous symmetry breaking via a scalar field phi with potential V(phi) = -mu^2 |phi|^2 + lambda |phi|^4 gives gauge bosons mass. The vacuum expectation value <phi> = v/sqrt(2) breaks SU(2) x U(1)_Y -> U(1)_EM, generating masses m_W = gv/2, m_Z = v*sqrt(g^2+g'^2)/2.",
+      "computationalForm": "Write the Higgs doublet phi = (phi+, phi0)^T. Expand around the vacuum: phi0 = (v + h)/sqrt(2). Substitute into the Lagrangian. The cross terms between phi and gauge fields generate mass terms for W+/-, Z bosons. The photon remains massless.",
+      "prerequisites": ["Gauge principle", "Spontaneous symmetry breaking", "Scalar field theory"],
+      "dependencies": [
+        { "target": "unification-gauge-principle", "type": "requires", "strength": 1.0, "description": "Higgs mechanism requires gauge symmetry to break" },
+        { "target": "unification-symmetry-group-su2", "type": "requires", "strength": 0.9, "description": "The electroweak SU(2) symmetry is broken" },
+        { "target": "change-optimization", "type": "applies", "strength": 0.6, "description": "The Higgs field settles at the minimum of its potential" }
+      ],
+      "enables": ["unification-electroweak-unification"],
+      "compositionRules": [
+        { "with": "unification-symmetry-group-su2", "yields": "Massive W and Z bosons with predicted mass ratios", "type": "sequential", "conditions": ["Higgs potential has Mexican hat shape", "Vacuum expectation value is nonzero"], "example": "The predicted mass ratio m_W/m_Z = cos(theta_W) ≈ 0.88 was confirmed experimentally" }
+      ],
+      "applicabilityPatterns": ["Explaining how gauge bosons acquire mass", "Understanding mass generation without breaking gauge invariance at the Lagrangian level", "Predicting particle masses from symmetry breaking patterns"],
+      "keywords": ["higgs", "symmetry breaking", "mass generation", "vacuum expectation", "boson"],
+      "tags": ["higgs", "symmetry-breaking", "mass-generation"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-spontaneous-symmetry-breaking",
+      "name": "Spontaneous Symmetry Breaking",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.8",
+      "planePosition": { "real": 0.05, "imaginary": 0.5 },
+      "formalStatement": "Spontaneous symmetry breaking occurs when the ground state of a system does not share the symmetry of the Lagrangian. A potential V(phi) invariant under a symmetry group G may have minima that are only invariant under a subgroup H subset G, breaking G -> H with dim(G/H) massless Goldstone bosons.",
+      "computationalForm": "",
+      "prerequisites": ["Symmetry groups", "Potential energy", "Ground state"],
+      "dependencies": [
+        { "target": "foundations-group", "type": "requires", "strength": 0.8, "description": "Symmetry breaking relates group G to subgroup H" },
+        { "target": "change-optimization", "type": "applies", "strength": 0.7, "description": "Ground state is found by minimizing the potential" }
+      ],
+      "enables": ["unification-higgs-mechanism"],
+      "compositionRules": [
+        { "with": "unification-gauge-principle", "yields": "Gauge boson mass generation (Higgs mechanism)", "type": "sequential", "conditions": ["Symmetry is a gauge symmetry", "Goldstone bosons become longitudinal gauge boson modes"], "example": "Mexican hat potential V = -mu^2 phi^2 + lambda phi^4 has circular minimum; choosing a particular minimum breaks rotational symmetry" }
+      ],
+      "applicabilityPatterns": ["Understanding phase transitions in condensed matter and particle physics", "Explaining why physical laws may have hidden symmetries", "Analyzing how ordered states emerge from symmetric interactions"],
+      "keywords": ["spontaneous", "symmetry breaking", "goldstone", "ground state", "phase transition"],
+      "tags": ["symmetry-breaking", "phase-transition", "goldstone"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-electroweak-unification",
+      "name": "Electroweak Unification",
+      "type": "theorem",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.9",
+      "planePosition": { "real": -0.1, "imaginary": 0.65 },
+      "formalStatement": "The Glashow-Weinberg-Salam theory unifies electromagnetic and weak interactions under the gauge group SU(2)_L x U(1)_Y. After spontaneous symmetry breaking via the Higgs mechanism, the four gauge bosons split into massive W+/-, Z^0 and the massless photon gamma, with mixing angle theta_W.",
+      "computationalForm": "Construct the SU(2)_L x U(1)_Y gauge Lagrangian with fermion doublets and singlets. Add Higgs doublet with Mexican hat potential. After symmetry breaking: W_mu^+/- = (W_mu^1 -/+ i W_mu^2)/sqrt(2), Z_mu = cos(theta_W) W_mu^3 - sin(theta_W) B_mu, A_mu = sin(theta_W) W_mu^3 + cos(theta_W) B_mu.",
+      "prerequisites": ["Gauge principle", "SU(2) symmetry", "Higgs mechanism"],
+      "dependencies": [
+        { "target": "unification-gauge-principle", "type": "requires", "strength": 1.0, "description": "Electroweak theory is a gauge theory" },
+        { "target": "unification-higgs-mechanism", "type": "requires", "strength": 1.0, "description": "Higgs mechanism breaks the electroweak symmetry" },
+        { "target": "unification-symmetry-group-su2", "type": "requires", "strength": 1.0, "description": "Weak force is SU(2)_L gauge theory" },
+        { "target": "unification-symmetry-group-u1", "type": "requires", "strength": 0.9, "description": "Hypercharge is U(1)_Y gauge symmetry" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "unification-strong-force-qcd", "yields": "The complete Standard Model: SU(3) x SU(2) x U(1)", "type": "parallel", "conditions": ["All three forces are included", "Gravity excluded"], "example": "The Standard Model combines QCD (SU(3) color) with electroweak (SU(2) x U(1)) into a single consistent quantum field theory" }
+      ],
+      "applicabilityPatterns": ["Understanding why electromagnetic and weak forces are aspects of the same interaction", "Predicting W and Z boson masses from symmetry parameters", "Calculating weak interaction cross-sections"],
+      "keywords": ["electroweak", "unification", "weinberg", "salam", "mixing angle"],
+      "tags": ["electroweak", "unification", "standard-model"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-strong-force-qcd",
+      "name": "Quantum Chromodynamics (QCD)",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.10",
+      "planePosition": { "real": -0.15, "imaginary": 0.5 },
+      "formalStatement": "QCD is the SU(3) gauge theory of the strong nuclear force. Quarks carry color charge (red, green, blue) and interact via 8 massless gluons. Key properties: asymptotic freedom (coupling decreases at high energy), confinement (free quarks never observed), and chiral symmetry breaking.",
+      "computationalForm": "The QCD Lagrangian: L = sum_q psi_bar_q(i gamma^mu D_mu - m_q)psi_q - (1/4)G^a_{mu nu}G^{a mu nu}, where D_mu = partial_mu - ig_s (lambda^a/2) A^a_mu is the covariant derivative with Gell-Mann matrices lambda^a.",
+      "prerequisites": ["SU(3) symmetry group", "Gauge principle", "Quark model"],
+      "dependencies": [
+        { "target": "unification-symmetry-group-su3", "type": "requires", "strength": 1.0, "description": "QCD is the SU(3) gauge theory" },
+        { "target": "unification-gauge-principle", "type": "requires", "strength": 1.0, "description": "QCD is constructed via the gauge principle" },
+        { "target": "reality-schrodinger-equation", "type": "applies", "strength": 0.6, "description": "Quantum mechanical framework for quark fields" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "unification-electroweak-unification", "yields": "The complete Standard Model of particle physics", "type": "parallel", "conditions": ["All matter content and gauge groups included"], "example": "Combining SU(3)_C (QCD) with SU(2)_L x U(1)_Y (electroweak) gives the full Standard Model with 19 free parameters" }
+      ],
+      "applicabilityPatterns": ["Calculating strong interaction processes at high energies", "Understanding quark confinement and hadron structure", "Predicting jet production and scattering cross-sections at particle colliders"],
+      "keywords": ["QCD", "strong force", "color", "gluon", "asymptotic freedom", "confinement"],
+      "tags": ["QCD", "strong-force", "standard-model"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-feynman-diagrams",
+      "name": "Feynman Diagrams",
+      "type": "technique",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.11",
+      "planePosition": { "real": 0.1, "imaginary": 0.4 },
+      "formalStatement": "Feynman diagrams are graphical representations of perturbative contributions to scattering amplitudes. Each vertex represents an interaction term in the Lagrangian, internal lines are propagators, and external lines are incoming/outgoing particles. The diagram encodes an integral via the Feynman rules.",
+      "computationalForm": "For each diagram: 1. Draw all topologically distinct connected diagrams with the given external lines. 2. Assign momenta to all lines. 3. Write propagator for each internal line. 4. Write vertex factor for each vertex. 5. Integrate over undetermined loop momenta. 6. Include symmetry factors.",
+      "prerequisites": ["Lagrangian formulation", "Perturbation theory", "Propagators"],
+      "dependencies": [
+        { "target": "unification-lagrangian", "type": "requires", "strength": 0.9, "description": "Feynman rules are derived from the Lagrangian" },
+        { "target": "change-integral", "type": "applies", "strength": 0.8, "description": "Each loop in a diagram contributes an integration over momentum" }
+      ],
+      "enables": ["unification-renormalization"],
+      "compositionRules": [
+        { "with": "unification-lagrangian", "yields": "Complete perturbative calculation of scattering amplitudes", "type": "sequential", "conditions": ["Coupling constant is small enough for perturbation theory"], "example": "Electron-electron scattering in QED: tree-level diagram gives Coulomb potential, one-loop diagrams give quantum corrections" }
+      ],
+      "applicabilityPatterns": ["Calculating particle scattering probabilities in quantum field theory", "Organizing perturbative expansions by diagram topology", "Visualizing and computing quantum interactions"],
+      "keywords": ["feynman", "diagram", "perturbation", "scattering", "amplitude"],
+      "tags": ["feynman-diagrams", "perturbation-theory", "calculation"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-coupling-constants",
+      "name": "Coupling Constants",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.12",
+      "planePosition": { "real": -0.1, "imaginary": 0.4 },
+      "formalStatement": "Coupling constants parameterize the strength of each fundamental interaction: alpha_EM ≈ 1/137 (electromagnetic), alpha_W ≈ 1/30 (weak), alpha_s ≈ 0.12 (strong). They run with energy scale via renormalization group equations: d(alpha)/d(ln mu) = beta(alpha).",
+      "computationalForm": "Solve the renormalization group equation for each coupling: alpha_i(mu) = alpha_i(mu_0) / (1 - b_i alpha_i(mu_0) ln(mu/mu_0) / (2pi)). At mu ~ 10^16 GeV, the three couplings nearly converge, suggesting grand unification.",
+      "prerequisites": ["Gauge theories", "Perturbation theory", "Energy scales"],
+      "dependencies": [
+        { "target": "unification-gauge-principle", "type": "requires", "strength": 0.8, "description": "Coupling constants appear in gauge interactions" },
+        { "target": "unification-renormalization", "type": "requires", "strength": 0.9, "description": "Coupling constants run due to renormalization" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "unification-renormalization", "yields": "Running coupling constants that predict grand unification scale", "type": "sequential", "conditions": ["Beta functions are computed for all gauge groups"], "example": "Running the three SM couplings toward high energy, they nearly meet at ~10^16 GeV, suggesting GUT unification" }
+      ],
+      "applicabilityPatterns": ["Predicting interaction strengths at different energy scales", "Testing grand unification hypotheses", "Computing radiative corrections to physical processes"],
+      "keywords": ["coupling", "constant", "running", "fine structure", "alpha"],
+      "tags": ["coupling-constant", "renormalization", "energy-scale"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-renormalization",
+      "name": "Renormalization",
+      "type": "technique",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.13",
+      "planePosition": { "real": -0.05, "imaginary": 0.55 },
+      "formalStatement": "Renormalization systematically absorbs ultraviolet divergences in quantum field theory into redefined (renormalized) parameters. A renormalizable theory has a finite number of divergent structures, all absorbable into a finite set of physical parameters (masses, couplings, field normalizations).",
+      "computationalForm": "1. Regularize: introduce cutoff Lambda or dimensional regularization (d = 4-epsilon). 2. Identify divergent diagrams. 3. Add counterterms to the Lagrangian to cancel divergences. 4. Express results in terms of renormalized (physical) parameters. 5. Take regulator to infinity.",
+      "prerequisites": ["Feynman diagrams", "Loop integrals", "Perturbation theory"],
+      "dependencies": [
+        { "target": "unification-feynman-diagrams", "type": "requires", "strength": 0.9, "description": "Divergences appear in loop diagrams" },
+        { "target": "change-integral", "type": "applies", "strength": 0.7, "description": "Regularization modifies loop integrals" }
+      ],
+      "enables": ["unification-coupling-constants"],
+      "compositionRules": [
+        { "with": "unification-feynman-diagrams", "yields": "Finite, physically meaningful predictions from quantum field theory", "type": "sequential", "conditions": ["Theory is renormalizable", "Counterterms absorb all divergences"], "example": "QED: computing the anomalous magnetic moment of the electron to 10 decimal places via renormalized perturbation theory" }
+      ],
+      "applicabilityPatterns": ["Making quantum field theory predictions finite and physically meaningful", "Understanding how physical parameters change with observation scale", "Establishing which theories can make consistent predictions"],
+      "keywords": ["renormalization", "divergence", "counterterm", "regularization", "UV"],
+      "tags": ["renormalization", "quantum-field-theory", "technique"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-conservation-laws",
+      "name": "Conservation Laws",
+      "type": "theorem",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.14",
+      "planePosition": { "real": -0.2, "imaginary": 0.45 },
+      "formalStatement": "Every continuous symmetry yields a conserved quantity via Noether's theorem: time translation -> energy, spatial translation -> momentum, rotation -> angular momentum, U(1) gauge -> electric charge, SU(3) color -> color charge, baryon number -> baryon conservation.",
+      "computationalForm": "For each symmetry, identify the conserved Noether current j^mu and charge Q = integral j^0 d^3x. Verify dQ/dt = 0 using equations of motion. Check conservation in Feynman diagrams: conserved quantum numbers must match at each vertex.",
+      "prerequisites": ["Noether's theorem", "Symmetry groups", "Quantum numbers"],
+      "dependencies": [
+        { "target": "unification-noether-theorem", "type": "requires", "strength": 1.0, "description": "Conservation laws follow from Noether's theorem" },
+        { "target": "foundations-group", "type": "applies", "strength": 0.7, "description": "Symmetries form groups whose structure determines what is conserved" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "unification-noether-theorem", "yields": "Complete accounting of conserved quantities in the Standard Model", "type": "parallel", "conditions": ["All continuous symmetries identified", "Anomalies accounted for"], "example": "Electric charge conservation: Q(p) = +1, Q(e-) = -1, so p + e- -> n + nu_e conserves total charge (0 on each side)" }
+      ],
+      "applicabilityPatterns": ["Predicting which particle reactions are allowed by conservation laws", "Simplifying calculations by using conserved quantities as constraints", "Understanding fundamental physical constraints from symmetry"],
+      "keywords": ["conservation", "charge", "energy", "momentum", "baryon number"],
+      "tags": ["conservation", "symmetry", "physics"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-cpt-symmetry",
+      "name": "CPT Symmetry",
+      "type": "theorem",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.15",
+      "planePosition": { "real": 0.1, "imaginary": 0.6 },
+      "formalStatement": "The CPT theorem states that any Lorentz-invariant local quantum field theory is invariant under the combined operation of charge conjugation (C), parity reversal (P), and time reversal (T). CPT symmetry implies particle-antiparticle mass equality and equal total decay rates.",
+      "computationalForm": "Apply C (swap particles and antiparticles), P (mirror spatial coordinates), T (reverse time direction) simultaneously. The CPT-transformed S-matrix equals the original: S_{CPT} = S. Verify: m_particle = m_antiparticle, Gamma_total(particle) = Gamma_total(antiparticle).",
+      "prerequisites": ["Lorentz invariance", "Quantum field theory", "Discrete symmetries"],
+      "dependencies": [
+        { "target": "unification-lagrangian", "type": "requires", "strength": 0.8, "description": "CPT theorem applies to Lagrangian field theories" },
+        { "target": "unification-conservation-laws", "type": "motivates", "strength": 0.6, "description": "CPT symmetry constrains what conservation laws can hold" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "unification-conservation-laws", "yields": "Constraints on CP violation and matter-antimatter asymmetry", "type": "parallel", "conditions": ["Lorentz invariance holds", "Locality holds"], "example": "CP violation in the weak interaction (observed in kaon and B-meson decays) must be compensated by T violation to preserve CPT" }
+      ],
+      "applicabilityPatterns": ["Establishing the most fundamental symmetry of quantum field theory", "Constraining theories of matter-antimatter asymmetry", "Testing fundamental physics by looking for CPT violations"],
+      "keywords": ["CPT", "charge conjugation", "parity", "time reversal", "antimatter"],
+      "tags": ["CPT", "symmetry", "fundamental-theorem"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-string-action",
+      "name": "String Action",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.1",
+      "planePosition": { "real": 0.15, "imaginary": 0.75 },
+      "formalStatement": "The Nambu-Goto action S_NG = -T integral d^2 sigma sqrt(-det(h_{alpha beta})) describes a relativistic string propagating through spacetime, where h_{alpha beta} = partial_alpha X^mu partial_beta X_mu is the induced metric on the worldsheet and T = 1/(2*pi*alpha') is the string tension.",
+      "computationalForm": "",
+      "prerequisites": ["Special relativity", "Action principle", "Differential geometry"],
+      "dependencies": [
+        { "target": "change-integral", "type": "requires", "strength": 0.9, "description": "The string action is a worldsheet area integral" },
+        { "target": "reality-dimensional-analysis", "type": "applies", "strength": 0.7, "description": "String tension has dimensions of energy/length" },
+        { "target": "unification-lagrangian", "type": "generalizes", "strength": 0.8, "description": "String action generalizes the point particle action to extended objects" }
+      ],
+      "enables": ["unification-extra-dimensions", "unification-t-duality", "unification-s-duality"],
+      "compositionRules": [
+        { "with": "unification-extra-dimensions", "yields": "Consistent string theory requiring 10 or 26 spacetime dimensions", "type": "sequential", "conditions": ["Conformal anomaly cancellation", "Lorentz invariance preserved"], "example": "Quantizing the bosonic string gives a conformal anomaly unless d = 26; the superstring requires d = 10" }
+      ],
+      "applicabilityPatterns": ["Describing fundamental objects beyond point particles", "Building quantum theories of gravity", "Exploring the structure of spacetime at the Planck scale"],
+      "keywords": ["string", "action", "worldsheet", "nambu-goto", "tension"],
+      "tags": ["string-theory", "action", "fundamental"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-extra-dimensions",
+      "name": "Extra Dimensions and Compactification",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.2",
+      "planePosition": { "real": 0.2, "imaginary": 0.8 },
+      "formalStatement": "String theory requires extra spatial dimensions (6 for superstrings, 22 for bosonic strings) beyond the 3+1 spacetime dimensions we observe. Compactification curls extra dimensions into small manifolds: M^{10} = M^{3,1} x K^6 where K^6 is a compact Calabi-Yau manifold.",
+      "computationalForm": "",
+      "prerequisites": ["String action", "Differential geometry", "Topology"],
+      "dependencies": [
+        { "target": "unification-string-action", "type": "requires", "strength": 1.0, "description": "Extra dimensions arise from string quantization consistency" },
+        { "target": "foundations-topological-space", "type": "applies", "strength": 0.8, "description": "Compactification involves topological properties of the extra dimensions" }
+      ],
+      "enables": ["unification-calabi-yau", "unification-landscape"],
+      "compositionRules": [
+        { "with": "foundations-topological-space", "yields": "Classification of compactification geometries and their physical consequences", "type": "sequential", "conditions": ["Topology of compact manifold is specified", "Moduli are stabilized"], "example": "Compactifying on a 6-torus T^6 preserves all supersymmetries; Calabi-Yau compactification breaks to N=1 SUSY" }
+      ],
+      "applicabilityPatterns": ["Understanding why string theory predicts more than 4 spacetime dimensions", "Connecting string theory to observable 4D physics", "Exploring the landscape of possible low-energy effective theories"],
+      "keywords": ["extra dimensions", "compactification", "calabi-yau", "kaluza-klein"],
+      "tags": ["string-theory", "extra-dimensions", "compactification"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-t-duality",
+      "name": "T-Duality",
+      "type": "identity",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.3",
+      "planePosition": { "real": 0.25, "imaginary": 0.7 },
+      "formalStatement": "T-duality is an exact equivalence between string theory on a circle of radius R and string theory on a circle of radius alpha'/R (where alpha' = l_s^2 is the string length squared). Momentum modes on one side map to winding modes on the other: n <-> w, R <-> alpha'/R.",
+      "computationalForm": "Under T-duality: X_L^25 -> X_L^25, X_R^25 -> -X_R^25 (flip right-movers). Momentum quantum number n <-> winding number w. String spectrum is invariant: M^2 = (n/R)^2 + (wR/alpha')^2 + ... is symmetric under R <-> alpha'/R with n <-> w.",
+      "prerequisites": ["String action", "Compactification", "Momentum and winding"],
+      "dependencies": [
+        { "target": "unification-string-action", "type": "requires", "strength": 0.9, "description": "T-duality is a symmetry of the string spectrum" },
+        { "target": "unification-extra-dimensions", "type": "requires", "strength": 0.8, "description": "T-duality relates different compactification radii" }
+      ],
+      "enables": ["unification-m-theory"],
+      "compositionRules": [
+        { "with": "unification-s-duality", "yields": "Web of string theory dualities connecting all five superstring theories", "type": "parallel", "conditions": ["Both dualities applied to different compactification parameters"], "example": "Type IIA on circle of radius R is T-dual to Type IIB on radius alpha'/R" }
+      ],
+      "applicabilityPatterns": ["Discovering equivalences between apparently different string theories", "Understanding the minimum length scale in string theory", "Exploring non-perturbative string theory"],
+      "keywords": ["T-duality", "winding", "momentum", "radius", "equivalence"],
+      "tags": ["string-theory", "duality", "equivalence"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-s-duality",
+      "name": "S-Duality",
+      "type": "identity",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.4",
+      "planePosition": { "real": 0.2, "imaginary": 0.75 },
+      "formalStatement": "S-duality is an equivalence between a string theory at coupling g_s and the same (or different) theory at coupling 1/g_s. It maps the perturbative regime of one theory to the non-perturbative regime of another: weak coupling <-> strong coupling.",
+      "computationalForm": "",
+      "prerequisites": ["String coupling constant", "Perturbative/non-perturbative regimes", "BPS states"],
+      "dependencies": [
+        { "target": "unification-string-action", "type": "requires", "strength": 0.8, "description": "S-duality relates different coupling regimes of string theory" },
+        { "target": "unification-t-duality", "type": "motivates", "strength": 0.7, "description": "S-duality complements T-duality in the duality web" }
+      ],
+      "enables": ["unification-m-theory"],
+      "compositionRules": [
+        { "with": "unification-t-duality", "yields": "Complete duality network relating all five consistent superstring theories", "type": "parallel", "conditions": ["Combined T and S dualities considered"], "example": "Type I string theory at strong coupling is S-dual to SO(32) heterotic string theory at weak coupling" }
+      ],
+      "applicabilityPatterns": ["Understanding non-perturbative string theory through weak-coupling calculations", "Connecting different string theories as limits of a single framework", "Computing strong-coupling results using dual weak-coupling descriptions"],
+      "keywords": ["S-duality", "strong-weak", "coupling", "non-perturbative", "BPS"],
+      "tags": ["string-theory", "duality", "non-perturbative"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-ads-cft",
+      "name": "AdS/CFT Correspondence",
+      "type": "identity",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.5",
+      "planePosition": { "real": 0.25, "imaginary": 0.85 },
+      "formalStatement": "The AdS/CFT correspondence (Maldacena conjecture) states that string theory on AdS_{d+1} x S^{p} is equivalent to a conformal field theory on the d-dimensional boundary. The most studied case: Type IIB string theory on AdS_5 x S^5 is dual to N=4 Super Yang-Mills in 4D.",
+      "computationalForm": "Correlation functions in the CFT are computed from string theory via: <O_1(x_1)...O_n(x_n)>_CFT = Z_string[phi_i -> phi_i^0 on boundary]. In the large N limit, string theory reduces to classical gravity, and CFT correlators are computed from bulk geodesics and gravitational actions.",
+      "prerequisites": ["String theory", "Conformal field theory", "Anti-de Sitter space"],
+      "dependencies": [
+        { "target": "unification-string-action", "type": "requires", "strength": 0.9, "description": "AdS/CFT is a duality of string theory" },
+        { "target": "reality-hilbert-space", "type": "applies", "strength": 0.6, "description": "Both sides of the duality have quantum mechanical Hilbert spaces that are identified" }
+      ],
+      "enables": ["unification-holographic-principle"],
+      "compositionRules": [
+        { "with": "mapping-category", "yields": "Categorical formulation of holographic duality as a functor between theories", "type": "nested", "conditions": ["Categorical language is used for both sides of the duality"], "example": "The duality maps bulk operators to boundary operators, preserving the algebraic structure: a functor from bulk algebra to boundary algebra" }
+      ],
+      "applicabilityPatterns": ["Computing strongly coupled gauge theory observables using gravity", "Understanding quantum gravity through field theory", "Studying quantum information in gravitational systems"],
+      "keywords": ["AdS/CFT", "holography", "Maldacena", "duality", "correspondence"],
+      "tags": ["string-theory", "holography", "duality"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-holographic-principle",
+      "name": "Holographic Principle",
+      "type": "theorem",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.6",
+      "planePosition": { "real": 0.15, "imaginary": 0.85 },
+      "formalStatement": "The holographic principle states that the information content of a region of space is bounded by the area of its boundary, not its volume: S <= A/(4 l_P^2), where l_P is the Planck length. A (d+1)-dimensional gravitational theory is encoded by a d-dimensional boundary theory.",
+      "computationalForm": "Compute the maximum entropy in a region: S_max = A/(4 G_N) in natural units. For a black hole, this bound is saturated: S_BH = A/(4 l_P^2). The Bekenstein bound for general systems: S <= 2*pi*R*E/(hbar*c).",
+      "prerequisites": ["Black hole thermodynamics", "Entropy", "AdS/CFT"],
+      "dependencies": [
+        { "target": "unification-ads-cft", "type": "requires", "strength": 0.9, "description": "AdS/CFT is the most concrete realization of holography" },
+        { "target": "mapping-shannon-entropy", "type": "applies", "strength": 0.6, "description": "Information-theoretic entropy quantifies the holographic bound" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-shannon-entropy", "yields": "Holographic entropy bounds constraining information storage in gravitational systems", "type": "parallel", "conditions": ["Gravitational system with well-defined boundary"], "example": "A black hole of mass M has entropy S = 4*pi*G*M^2/(hbar*c), the maximum entropy for that radius" }
+      ],
+      "applicabilityPatterns": ["Bounding information content of physical systems", "Understanding the deep relationship between spacetime geometry and quantum information", "Resolving the black hole information paradox"],
+      "keywords": ["holographic", "principle", "entropy bound", "black hole", "information"],
+      "tags": ["holography", "information", "quantum-gravity"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-m-theory",
+      "name": "M-Theory",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.7",
+      "planePosition": { "real": 0.1, "imaginary": 0.9 },
+      "formalStatement": "M-theory is the conjectured 11-dimensional theory that unifies all five consistent superstring theories as different perturbative limits. Its low-energy limit is 11D supergravity. M-theory contains membranes (M2-branes) and five-branes (M5-branes) as fundamental objects.",
+      "computationalForm": "",
+      "prerequisites": ["String theory", "Supergravity", "Dualities"],
+      "dependencies": [
+        { "target": "unification-t-duality", "type": "requires", "strength": 0.8, "description": "T-duality connects string theories that are M-theory limits" },
+        { "target": "unification-s-duality", "type": "requires", "strength": 0.8, "description": "S-duality connects perturbative and non-perturbative limits" },
+        { "target": "unification-string-action", "type": "generalizes", "strength": 0.9, "description": "M-theory generalizes string theory to include membranes" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "unification-extra-dimensions", "yields": "Derivation of all five superstring theories as M-theory compactifications", "type": "sequential", "conditions": ["Different compactification manifolds chosen"], "example": "M-theory on S^1 gives Type IIA; M-theory on S^1/Z_2 gives heterotic E_8 x E_8" }
+      ],
+      "applicabilityPatterns": ["Seeking the unique underlying theory of quantum gravity", "Understanding non-perturbative string theory", "Exploring the fundamental structure of spacetime"],
+      "keywords": ["M-theory", "11-dimensional", "membrane", "brane", "unification"],
+      "tags": ["string-theory", "M-theory", "unification"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-supersymmetry",
+      "name": "Supersymmetry",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.8",
+      "planePosition": { "real": 0.05, "imaginary": 0.8 },
+      "formalStatement": "Supersymmetry (SUSY) is a symmetry relating bosons and fermions: the supercharge Q transforms bosons into fermions and vice versa, Q|boson> = |fermion>, Q|fermion> = |boson>. The SUSY algebra: {Q_alpha, Q_bar_beta} = 2 sigma^mu_{alpha beta} P_mu.",
+      "computationalForm": "",
+      "prerequisites": ["Quantum field theory", "Bosons and fermions", "Lie superalgebras"],
+      "dependencies": [
+        { "target": "foundations-group", "type": "generalizes", "strength": 0.8, "description": "SUSY extends the Poincare group with fermionic generators" },
+        { "target": "unification-lagrangian", "type": "requires", "strength": 0.7, "description": "SUSY constrains the form of the Lagrangian" }
+      ],
+      "enables": ["unification-m-theory"],
+      "compositionRules": [
+        { "with": "unification-gauge-principle", "yields": "Supersymmetric gauge theories with improved UV behavior", "type": "parallel", "conditions": ["SUSY is combined with gauge invariance"], "example": "N=4 Super Yang-Mills is the most symmetric 4D gauge theory: conformal, finite to all loop orders" }
+      ],
+      "applicabilityPatterns": ["Addressing the hierarchy problem in particle physics", "Constructing consistent quantum theories of gravity", "Improving ultraviolet behavior of quantum field theories"],
+      "keywords": ["supersymmetry", "SUSY", "supercharge", "boson-fermion", "superpartner"],
+      "tags": ["supersymmetry", "beyond-standard-model", "symmetry"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-calabi-yau",
+      "name": "Calabi-Yau Manifold",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.9",
+      "planePosition": { "real": 0.25, "imaginary": 0.85 },
+      "formalStatement": "A Calabi-Yau manifold is a compact Kahler manifold with vanishing first Chern class (equivalently, admitting a Ricci-flat metric). In string theory, compactification on a Calabi-Yau 3-fold preserves N=1 supersymmetry in 4D. The topology (Hodge numbers h^{1,1}, h^{2,1}) determines the particle spectrum.",
+      "computationalForm": "",
+      "prerequisites": ["Differential geometry", "Complex manifolds", "Topology"],
+      "dependencies": [
+        { "target": "unification-extra-dimensions", "type": "requires", "strength": 1.0, "description": "Calabi-Yau manifolds are the compactification spaces" },
+        { "target": "foundations-topological-space", "type": "requires", "strength": 0.8, "description": "Topological invariants of the Calabi-Yau determine physical properties" }
+      ],
+      "enables": ["unification-landscape"],
+      "compositionRules": [
+        { "with": "unification-extra-dimensions", "yields": "Specific 4D particle physics from string compactification", "type": "sequential", "conditions": ["Calabi-Yau topology is specified", "Flux configuration is chosen"], "example": "Compactification on a Calabi-Yau with h^{1,1}=3, h^{2,1}=243 gives a specific 4D effective theory with determined gauge groups and matter content" }
+      ],
+      "applicabilityPatterns": ["Connecting string theory to 4D particle physics", "Classifying possible low-energy effective theories from string theory", "Understanding how geometry determines physics"],
+      "keywords": ["calabi-yau", "compactification", "manifold", "hodge numbers", "ricci-flat"],
+      "tags": ["string-theory", "geometry", "compactification"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-landscape",
+      "name": "String Landscape",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.10",
+      "planePosition": { "real": 0.2, "imaginary": 0.7 },
+      "formalStatement": "The string landscape is the vast collection of possible vacuum states (estimated at 10^500 or more) arising from different compactification choices, flux configurations, and brane arrangements in string theory. Each vacuum corresponds to a different low-energy effective theory with different particle content and coupling constants.",
+      "computationalForm": "",
+      "prerequisites": ["String compactification", "Calabi-Yau manifolds", "Flux quantization"],
+      "dependencies": [
+        { "target": "unification-calabi-yau", "type": "requires", "strength": 0.9, "description": "Different Calabi-Yau topologies populate the landscape" },
+        { "target": "unification-extra-dimensions", "type": "requires", "strength": 0.8, "description": "Different compactifications give different vacua" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-probability-axioms", "yields": "Statistical analysis of the string landscape (vacuum statistics)", "type": "parallel", "conditions": ["Measure on the landscape is defined", "Anthropic reasoning applied if needed"], "example": "Douglas's vacuum statistics: the number of flux vacua with cosmological constant Lambda scales as N(Lambda) ~ Lambda^{b_4/2} where b_4 is the fourth Betti number" }
+      ],
+      "applicabilityPatterns": ["Understanding the predictive limitations of string theory", "Exploring the anthropic landscape and vacuum selection", "Analyzing the space of consistent quantum gravity theories"],
+      "keywords": ["landscape", "vacuum", "multiverse", "anthropic", "flux"],
+      "tags": ["string-theory", "landscape", "philosophy"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-black-hole-entropy",
+      "name": "Black Hole Entropy",
+      "type": "theorem",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.11",
+      "planePosition": { "real": 0.1, "imaginary": 0.65 },
+      "formalStatement": "The Bekenstein-Hawking entropy of a black hole is S_BH = A/(4 G_N) = A/(4 l_P^2), where A is the area of the event horizon. String theory provides a microscopic derivation via D-brane state counting, exactly matching S_BH for extremal and near-extremal black holes (Strominger-Vafa).",
+      "computationalForm": "For a Schwarzschild black hole of mass M: A = 16*pi*G^2*M^2/c^4, so S = 4*pi*G*M^2/(hbar*c). In string theory, count BPS microstates: S_micro = log(N_states). The Strominger-Vafa result: S_micro = 2*pi*sqrt(n_1*n_5*n_p) matches S_BH exactly.",
+      "prerequisites": ["General relativity", "Thermodynamics", "String theory"],
+      "dependencies": [
+        { "target": "unification-string-action", "type": "requires", "strength": 0.8, "description": "Microscopic entropy counting uses string theory" },
+        { "target": "mapping-shannon-entropy", "type": "applies", "strength": 0.6, "description": "Entropy quantifies the information content / number of microstates" },
+        { "target": "unification-holographic-principle", "type": "motivates", "strength": 0.7, "description": "Black hole entropy is the original motivation for holography" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "mapping-shannon-entropy", "yields": "Microscopic information-theoretic interpretation of black hole thermodynamics", "type": "parallel", "conditions": ["BPS state counting is available", "Black hole is near-extremal"], "example": "Strominger and Vafa counted D-brane microstates for a 5D extremal black hole and obtained S = A/(4G) exactly" }
+      ],
+      "applicabilityPatterns": ["Providing a microscopic foundation for black hole thermodynamics", "Testing quantum gravity proposals through entropy matching", "Connecting string theory to observable gravitational physics"],
+      "keywords": ["black hole", "entropy", "bekenstein", "hawking", "microstate"],
+      "tags": ["black-hole", "entropy", "quantum-gravity"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-information-paradox",
+      "name": "Black Hole Information Paradox",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.12",
+      "planePosition": { "real": 0.15, "imaginary": 0.8 },
+      "formalStatement": "The information paradox arises because black hole evaporation via Hawking radiation appears to destroy information (pure states evolve to mixed states), violating quantum mechanical unitarity. Resolution proposals include: information encoded in subtle correlations in Hawking radiation, complementarity, and the Page curve from replica wormholes.",
+      "computationalForm": "",
+      "prerequisites": ["Black hole entropy", "Quantum mechanics", "Hawking radiation"],
+      "dependencies": [
+        { "target": "unification-black-hole-entropy", "type": "requires", "strength": 0.9, "description": "The information paradox involves the entropy of black holes" },
+        { "target": "unification-holographic-principle", "type": "motivates", "strength": 0.8, "description": "Holography suggests information is preserved on the boundary" },
+        { "target": "reality-hilbert-space", "type": "applies", "strength": 0.6, "description": "Unitarity of quantum evolution is at stake" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "unification-ads-cft", "yields": "Resolution via holographic encoding of information on the boundary", "type": "nested", "conditions": ["AdS/CFT is exact", "Boundary theory is unitary"], "example": "In AdS/CFT, bulk black hole formation and evaporation is dual to unitary boundary CFT evolution, so information is preserved" }
+      ],
+      "applicabilityPatterns": ["Understanding the fundamental nature of information in physics", "Probing the consistency of quantum gravity", "Motivating new approaches to quantum gravity"],
+      "keywords": ["information paradox", "hawking", "unitarity", "black hole evaporation"],
+      "tags": ["information-paradox", "quantum-gravity", "open-problem"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-emergent-spacetime",
+      "name": "Emergent Spacetime",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.13",
+      "planePosition": { "real": 0.2, "imaginary": 0.9 },
+      "formalStatement": "In approaches to quantum gravity, spacetime itself may be an emergent phenomenon rather than fundamental. Entanglement structure of the boundary CFT in AdS/CFT determines bulk spacetime geometry via the RT formula: S(A) = Area(gamma_A)/(4 G_N), where gamma_A is the minimal surface homologous to boundary region A.",
+      "computationalForm": "",
+      "prerequisites": ["AdS/CFT correspondence", "Entanglement entropy", "Quantum information"],
+      "dependencies": [
+        { "target": "unification-ads-cft", "type": "requires", "strength": 0.9, "description": "Emergent spacetime is realized concretely in AdS/CFT" },
+        { "target": "unification-holographic-principle", "type": "requires", "strength": 0.8, "description": "Holography implies spacetime geometry encodes boundary information" },
+        { "target": "mapping-shannon-entropy", "type": "applies", "strength": 0.5, "description": "Entanglement entropy drives spacetime emergence" }
+      ],
+      "enables": [],
+      "compositionRules": [
+        { "with": "unification-holographic-principle", "yields": "ER=EPR: entanglement as the fabric of spacetime connectivity", "type": "parallel", "conditions": ["Entanglement structure is known", "Gravitational dual exists"], "example": "Maldacena and Susskind's ER=EPR conjecture: Einstein-Rosen bridges (wormholes) are Einstein-Podolsky-Rosen entanglement pairs" }
+      ],
+      "applicabilityPatterns": ["Understanding the fundamental nature of spacetime", "Connecting quantum information to gravitational geometry", "Exploring how classical spacetime arises from quantum degrees of freedom"],
+      "keywords": ["emergent", "spacetime", "entanglement", "Ryu-Takayanagi", "ER=EPR"],
+      "tags": ["quantum-gravity", "emergence", "spacetime"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-moduli-space",
+      "name": "Moduli Space",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 27,
+      "section": "27.14",
+      "planePosition": { "real": 0.1, "imaginary": 0.75 },
+      "formalStatement": "The moduli space of a string compactification is the space of continuous parameters (moduli) that characterize the vacuum, including the shape and size of the compact manifold. Moduli are massless scalar fields in the effective theory that must be stabilized to give a physically viable vacuum.",
+      "computationalForm": "",
+      "prerequisites": ["Compactification", "Calabi-Yau manifolds", "Effective field theory"],
+      "dependencies": [
+        { "target": "unification-calabi-yau", "type": "requires", "strength": 0.9, "description": "Calabi-Yau moduli parametrize the compactification geometry" },
+        { "target": "unification-extra-dimensions", "type": "requires", "strength": 0.8, "description": "Moduli arise from the freedom in compactification" },
+        { "target": "foundations-topological-space", "type": "applies", "strength": 0.6, "description": "Moduli space has a natural topological and geometric structure" }
+      ],
+      "enables": ["unification-landscape"],
+      "compositionRules": [
+        { "with": "unification-landscape", "yields": "Discretuum of flux vacua within the continuous moduli space", "type": "nested", "conditions": ["Flux quantization is imposed", "Moduli potential is generated"], "example": "In Type IIB on a Calabi-Yau with h^{2,1} complex structure moduli, flux choices discretize the continuous moduli space into O(10^{500}) vacua" }
+      ],
+      "applicabilityPatterns": ["Classifying the degrees of freedom in string compactifications", "Understanding vacuum degeneracy in string theory", "Studying the geometry of solution spaces in mathematical physics"],
+      "keywords": ["moduli", "space", "vacuum", "deformation", "stabilization"],
+      "tags": ["string-theory", "moduli", "geometry"],
+      "buildLabs": []
+    },
+    {
+      "id": "unification-gauge-boson",
+      "name": "Gauge Bosons",
+      "type": "definition",
+      "domain": "unification",
+      "chapter": 26,
+      "section": "26.16",
+      "planePosition": { "real": -0.05, "imaginary": 0.45 },
+      "formalStatement": "Gauge bosons are the force-carrying particles that mediate fundamental interactions. They arise as the gauge fields required by local gauge invariance: photon (gamma, U(1) EM), W+/-, Z^0 (SU(2)_L x U(1)_Y electroweak), and 8 gluons (SU(3)_C strong). All are spin-1 vector bosons.",
+      "computationalForm": "The number of gauge bosons equals the dimension of the gauge group's Lie algebra: U(1) -> 1 photon, SU(2) -> 3 (W+, W-, Z after mixing), SU(3) -> 8 gluons. Total: 12 gauge bosons in the Standard Model (before symmetry breaking: 4 electroweak + 8 strong).",
+      "prerequisites": ["Gauge principle", "Symmetry groups", "Spin and quantum numbers"],
+      "dependencies": [
+        { "target": "unification-gauge-principle", "type": "requires", "strength": 1.0, "description": "Gauge bosons arise from the gauge principle" },
+        { "target": "foundations-group", "type": "applies", "strength": 0.7, "description": "Number and properties of gauge bosons determined by the gauge group" }
+      ],
+      "enables": ["unification-feynman-diagrams"],
+      "compositionRules": [
+        { "with": "unification-higgs-mechanism", "yields": "Massive W and Z bosons plus massless photon", "type": "sequential", "conditions": ["Electroweak symmetry is broken", "Goldstone bosons absorbed"], "example": "Before symmetry breaking: 4 massless electroweak gauge bosons. After: 3 massive (W+, W-, Z) + 1 massless (photon)" }
+      ],
+      "applicabilityPatterns": ["Identifying force carriers in the Standard Model", "Computing interaction vertices for scattering processes", "Understanding the particle content required by gauge invariance"],
+      "keywords": ["gauge boson", "photon", "gluon", "W boson", "Z boson", "force carrier"],
+      "tags": ["gauge-boson", "standard-model", "particle"],
+      "buildLabs": []
+    }
+  ]
+}
