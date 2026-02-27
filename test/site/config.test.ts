@@ -19,7 +19,7 @@ describe('Site Configuration', () => {
     const raw = readFileSync(join(CONFIG_DIR, 'site.yaml'), 'utf-8');
     const config = yaml.load(raw) as SiteConfig;
 
-    expect(config.title).toBe('tibsfox.com');
+    expect(config.title).toBe('My Site');
     expect(config.description).toBeTruthy();
     expect(config.url).toMatch(/^https?:\/\//);
     expect(config.author).toBeTruthy();

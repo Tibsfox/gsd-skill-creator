@@ -4,9 +4,9 @@ import type { ContentPage, SiteConfig } from '../../../src/site/types';
 
 function makeSite(overrides: Partial<SiteConfig> = {}): SiteConfig {
   return {
-    title: 'TibsFox',
-    description: 'Electronics education and creative technology',
-    url: 'https://tibsfox.com',
+    title: 'Test Site',
+    description: 'Educational resources and open knowledge',
+    url: 'https://example.com',
     author: 'Foxy',
     language: 'en',
     buildDate: '2026-02-27',
@@ -42,8 +42,8 @@ describe('generateLlmsTxt', () => {
     const pages: ContentPage[] = [];
     const result = generateLlmsTxt(pages, site);
 
-    expect(result).toContain('# TibsFox');
-    expect(result).toContain('> Electronics education and creative technology');
+    expect(result).toContain('# Test Site');
+    expect(result).toContain('> Educational resources and open knowledge');
   });
 
   it('filters out pages with agent_visible: false', () => {
@@ -126,14 +126,14 @@ describe('generateLlmsTxt', () => {
     ];
     const result = generateLlmsTxt(pages, site);
 
-    expect(result).toContain('https://tibsfox.com/docs/my-page/');
+    expect(result).toContain('https://example.com/docs/my-page/');
   });
 
   it('returns minimal output for empty pages', () => {
     const result = generateLlmsTxt([], site);
 
-    expect(result).toContain('# TibsFox');
-    expect(result).toContain('> Electronics education');
+    expect(result).toContain('# Test Site');
+    expect(result).toContain('> Educational resources');
     // No section headings
     expect(result).not.toContain('## ');
   });

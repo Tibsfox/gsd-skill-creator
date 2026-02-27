@@ -116,7 +116,7 @@ describe('Site Generator Types', () => {
         template: 'essay',
         date: '2026-01-01',
         updated: '2026-02-01',
-        author: 'TibsFox',
+        author: 'Site Author',
         tags: ['test', 'example'],
         agent_visible: true,
         agent_priority: 'high',

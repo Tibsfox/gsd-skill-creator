@@ -172,14 +172,14 @@ Content.`;
 title: WP Post
 wp_post_id: 123
 wp_sync: false
-original_url: https://tibsfox.com/old-post
+original_url: https://example.com/old-post
 ---
 Migrated content.`;
 
     const result = parseFrontmatter(raw);
     expect(result.frontmatter.wp_post_id).toBe(123);
     expect(result.frontmatter.wp_sync).toBe(false);
-    expect(result.frontmatter.original_url).toBe('https://tibsfox.com/old-post');
+    expect(result.frontmatter.original_url).toBe('https://example.com/old-post');
   });
 
   it('handles invalid YAML gracefully', () => {

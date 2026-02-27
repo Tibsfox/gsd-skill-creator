@@ -4,9 +4,9 @@ import type { ContentPage, SiteConfig } from '../../../src/site/types';
 
 function makeSite(overrides: Partial<SiteConfig> = {}): SiteConfig {
   return {
-    title: 'TibsFox',
-    description: 'Electronics education and creative technology',
-    url: 'https://tibsfox.com',
+    title: 'Test Site',
+    description: 'Educational resources and open knowledge',
+    url: 'https://example.com',
     author: 'Foxy',
     language: 'en',
     buildDate: '2026-02-27',
@@ -115,7 +115,7 @@ describe('generateSchemaOrg', () => {
   it('generates WebSite schema with SearchAction', () => {
     const page = makePage({
       frontmatter: {
-        title: 'TibsFox',
+        title: 'Test Site',
         schema_type: 'WebSite',
       },
       url: '/',
@@ -124,8 +124,8 @@ describe('generateSchemaOrg', () => {
     const result = Array.isArray(parsed) ? parsed[0] : parsed;
 
     expect(result['@type']).toBe('WebSite');
-    expect(result.name).toBe('TibsFox');
-    expect(result.url).toBe('https://tibsfox.com');
+    expect(result.name).toBe('Test Site');
+    expect(result.url).toBe('https://example.com');
     expect(result.potentialAction).toBeDefined();
     expect(result.potentialAction['@type']).toBe('SearchAction');
   });
@@ -140,7 +140,7 @@ describe('generateSchemaOrg', () => {
 
     expect(result['@type']).toBe('WebPage');
     expect(result.name).toBe('Some Page');
-    expect(result.url).toBe('https://tibsfox.com/some-page/');
+    expect(result.url).toBe('https://example.com/some-page/');
   });
 
   it('includes BreadcrumbList from URL path', () => {
