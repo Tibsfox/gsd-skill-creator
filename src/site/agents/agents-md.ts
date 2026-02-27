@@ -1,4 +1,4 @@
-import type { ContentPage, SiteConfig } from '../types';
+import type { ContentPage, SiteConfig } from '../types.js';
 
 const PRIORITY_ORDER: Record<string, number> = { high: 0, medium: 1, low: 2 };
 

@@ -1,5 +1,5 @@
 import yaml from 'js-yaml';
-import type { FrontMatter } from '../types';
+import type { FrontMatter } from '../types.js';
 
 /**
  * Derive a title from a file path by:

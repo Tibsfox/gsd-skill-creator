@@ -1,4 +1,4 @@
-import type { ContentPage, SiteConfig } from '../types';
+import type { ContentPage, SiteConfig } from '../types.js';
 
 interface SchemaObject {
   '@context'?: string;

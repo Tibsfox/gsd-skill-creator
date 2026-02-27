@@ -1,4 +1,4 @@
-import type { ContentPage } from '../types';
+import type { ContentPage } from '../types.js';
 
 /**
  * Generate a markdown mirror of all agent-visible pages.
