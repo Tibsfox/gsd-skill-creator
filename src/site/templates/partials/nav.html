@@ -1,0 +1,14 @@
+<nav class="site-nav" aria-label="Site navigation">
+  {{#navigation}}
+  <p class="site-nav__section-title">{{label}}</p>
+  <ul class="site-nav__list">
+    {{#items}}
+    <li>
+      <a href="{{url}}" class="site-nav__link{{#active}} site-nav__link--active{{/active}}"{{#external}} target="_blank" rel="noopener"{{/external}}>
+        {{label}}
+      </a>
+    </li>
+    {{/items}}
+  </ul>
+  {{/navigation}}
+</nav>

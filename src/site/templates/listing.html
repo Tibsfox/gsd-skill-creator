@@ -1,0 +1,28 @@
+{{!-- Listing template: card grid of child pages --}}
+
+{{>breadcrumb}}
+
+<div class="page-content">
+  <h1>{{page.frontmatter.title}}</h1>
+
+  {{#page.frontmatter.description}}
+  <p class="listing-intro">{{page.frontmatter.description}}</p>
+  {{/page.frontmatter.description}}
+
+  {{#children}}
+  <ul class="card-grid">
+    {{#children}}
+    <li>
+      <div class="card">
+        <h2 class="card__title">
+          <a href="{{url}}">{{frontmatter.title}}</a>
+        </h2>
+        {{#frontmatter.description}}
+        <p class="card__description">{{frontmatter.description}}</p>
+        {{/frontmatter.description}}
+      </div>
+    </li>
+    {{/children}}
+  </ul>
+  {{/children}}
+</div>
