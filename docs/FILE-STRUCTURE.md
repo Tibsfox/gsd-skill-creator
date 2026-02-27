@@ -212,6 +212,25 @@ src/                        # TypeScript library
 │   ├── dmd/                # DMD core + 4 variants + Koopman/EDMD + bridge
 │   ├── modules/HD-01..10/  # 10 educational modules with content and Try Sessions
 │   └── skills/             # Progressive disclosure SKILL.md
+├── dacp/                   # Deterministic Agent Communication Protocol (v1.49)
+│   ├── types.ts            # 26 Zod schemas (BundleManifest, FidelityLevel, DriftScore, etc.)
+│   ├── schema-generator.ts # JSON Schema generation from Zod definitions
+│   ├── bundle.ts           # Bundle filesystem layout and creation
+│   ├── msg-fallback.ts     # Backward-compatible .msg generation
+│   ├── fidelity/           # Adaptive fidelity decision model (Level 0-3)
+│   ├── assembler/          # Three-part bundle composition with skill library queries
+│   ├── retrospective/      # Drift scoring, pattern detection, cooldown enforcement
+│   ├── templates/          # Bundle template registry with 5 starter templates
+│   └── bus/                # Filesystem bus integration, scanner, cleanup, degradation
+├── interpreter/            # DACP Interpreter (v1.49)
+│   ├── validator.ts        # 8-stage validation pipeline
+│   ├── loader.ts           # Bundle loading and manifest parsing
+│   ├── context-builder.ts  # Object.freeze execution context (no auto-execute)
+│   └── provenance-guard.ts # Chain-of-custody provenance validation
+├── catalog/                # Skill library catalogs (v1.49)
+│   ├── script-catalog.ts   # Function-type indexing with provenance enforcement
+│   ├── schema-library.ts   # Data schema indexing with multi-field search
+│   └── indexer.ts          # Unified catalog indexer
 ├── cli/                    # CLI command modules
 ├── cli.ts                  # CLI entry point
 └── index.ts                # Module exports
