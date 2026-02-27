@@ -19,3 +19,9 @@ export type {
   APIProperty,
   APIParameter,
 } from './api-mapper.js';
+
+export { extractConcepts } from './concept-extractor.js';
+export type { ExtractedConcept } from './concept-extractor.js';
+
+export { mapComplexPlane } from './complex-plane-mapper.js';
+export type { ComplexPlaneMap } from './complex-plane-mapper.js';
