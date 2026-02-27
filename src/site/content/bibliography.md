@@ -1,6 +1,6 @@
 ---
 title: "Bibliography"
-description: "Full citations for all sources referenced across tibsfox.com"
+description: "Full citations for all sources referenced across the site"
 template: bibliography
 schema_type: WebPage
 tags:
@@ -15,7 +15,7 @@ agent_priority: low
 
 # Bibliography
 
-This page provides full citations for all sources referenced in essays and educational packs across tibsfox.com. Citations are organized alphabetically by first author's surname. Each entry includes the original publication details and, where available, links to open-access editions or publisher pages.
+This page provides full citations for all sources referenced in essays and educational packs across the site. Citations are organized alphabetically by first author's surname. Each entry includes the original publication details and, where available, links to open-access editions or publisher pages.
 
 ## How Citations Work
 

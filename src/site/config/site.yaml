@@ -1,7 +1,8 @@
-title: tibsfox.com
+# Site configuration — customize these values for your deployment
+title: "My Site"
 description: "Educational resources, essays, and open knowledge for curious minds"
-url: https://tibsfox.com
-author: TibsFox
+url: https://example.com
+author: "Site Author"
 language: en
 
 agent:
@@ -12,14 +13,14 @@ agent:
   markdown_mirror: true
 
 wordpress:
-  url: https://tibsfox.com/wp
-  api: https://tibsfox.com/wp/wp-json/wp/v2
+  url: https://example.com/wp
+  api: https://example.com/wp/wp-json/wp/v2
   comments_enabled: true
   comments_moderation: true
 
 deploy:
   method: ftp
-  host: ftp.tibsfox.com
+  host: ftp.example.com
   user: "${DEPLOY_USER}"
   path: /public_html
   exclude:
