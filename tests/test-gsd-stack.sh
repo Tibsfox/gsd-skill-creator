@@ -24,7 +24,7 @@ export GSD_STACK_DIR="$TEST_DIR/stack"
 trap 'rm -rf "$TEST_DIR"' EXIT
 
 # -- Path to gsd-stack under test --
-GSD_STACK="$(cd "$(dirname "$0")/.." && pwd)/bin/gsd-stack"
+GSD_STACK="$(cd "$(dirname "$0")/.." && pwd)/scripts/bin/gsd-stack"
 
 # ==============================================================================
 # Helper functions
