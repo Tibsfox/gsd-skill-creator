@@ -125,7 +125,7 @@ describe('AGCI-01: Block definitions', () => {
 // ============================================================================
 
 describe('AGCI-02: Chipset configuration', () => {
-  const chipsetPath = join(process.cwd(), '.chipset', 'agc-educational.yaml');
+  const chipsetPath = join(process.cwd(), 'data/chipset', 'agc-educational.yaml');
   let chipsetData: Record<string, unknown>;
 
   it('agc-educational.yaml file exists', () => {
@@ -297,8 +297,8 @@ describe('AGCI-04: Standalone pack', () => {
     expect(packExports.ROPE_SOURCES).toBeDefined();
   });
 
-  it('isPackInstalled returns true when agc-educational.yaml exists in .chipset/', () => {
-    const chipsetDir = join(process.cwd(), '.chipset');
+  it('isPackInstalled returns true when agc-educational.yaml exists in data/chipset/', () => {
+    const chipsetDir = join(process.cwd(), 'data/chipset');
     expect(isPackInstalled(chipsetDir)).toBe(true);
   });
 

@@ -1,5 +1,5 @@
 /**
- * Validation tests for .chipset/chipset.yaml configuration file.
+ * Validation tests for data/chipset/chipset.yaml configuration file.
  *
  * Reads the YAML file from disk and validates it against the Chipset module's
  * Zod schemas and DEN_STAFF_POSITIONS constants. Covers CHIP-01 through CHIP-05
@@ -19,7 +19,7 @@ import {
 // YAML loading helper
 // ============================================================================
 
-/** Parsed YAML data from .chipset/chipset.yaml */
+/** Parsed YAML data from data/chipset/chipset.yaml */
 let yamlData: Record<string, unknown>;
 
 /** Core fields extracted for ChipsetConfigSchema validation */
@@ -27,7 +27,7 @@ let coreConfig: Record<string, unknown>;
 
 beforeAll(async () => {
   const jsYaml = (await import('js-yaml')).default ?? (await import('js-yaml'));
-  const filePath = join(process.cwd(), '.chipset', 'chipset.yaml');
+  const filePath = join(process.cwd(), 'data/chipset', 'chipset.yaml');
   const content = await readFile(filePath, 'utf-8');
   yamlData = jsYaml.load(content) as Record<string, unknown>;
 
