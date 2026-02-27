@@ -50,9 +50,11 @@ describe('Cross-Module Integration', () => {
 
   it('try-sessions export runTrySession function', async () => {
     // Spot-check HD-01, HD-05, HD-09
-    for (const id of ['HD-01', 'HD-05', 'HD-09']) {
-      const mod = await import(`../../src/holomorphic/modules/${id}/try-session`);
-      expect(typeof mod.runTrySession).toBe('function');
-    }
+    const hd01 = await import('../../src/holomorphic/modules/HD-01/try-session');
+    expect(typeof hd01.runTrySession).toBe('function');
+    const hd05 = await import('../../src/holomorphic/modules/HD-05/try-session');
+    expect(typeof hd05.runTrySession).toBe('function');
+    const hd09 = await import('../../src/holomorphic/modules/HD-09/try-session');
+    expect(typeof hd09.runTrySession).toBe('function');
   });
 });
