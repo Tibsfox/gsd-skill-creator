@@ -202,7 +202,7 @@ Produces platform-specific packages in `src-tauri/target/release/bundle/`:
 # Run desktop test suite
 npm run desktop:test
 
-# Run skill-creator library tests (16,999 tests)
+# Run skill-creator library tests (18,397 tests)
 npm test
 ```
 
@@ -285,7 +285,7 @@ All documentation lives in [`docs/`](docs/).
 | [Configuration](docs/CONFIGURATION.md) | Thresholds, retention, and cluster settings |
 | [File Structure](docs/FILE-STRUCTURE.md) | Project and source code layout |
 | [Development](docs/DEVELOPMENT.md) | Building, testing, and contributing |
-| [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 49 milestones |
+| [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 50 milestones |
 | [GSD Teams Guide](docs/GSD-TEAMS.md) | Teams vs subagents for GSD workflows |
 | [Comparison](docs/COMPARISON.md) | Skills vs Agents vs Teams |
 | [Release History](docs/RELEASE-HISTORY.md) | Version index linking to [per-release notes](docs/release-notes/) |
@@ -302,7 +302,7 @@ See [SECURITY.md](SECURITY.md) for vulnerability reporting, threat model, and se
 
 ## Project Stats
 
-49 milestones shipped (v1.0-v1.47 + v1.8.1 patch) | 433 phases | 1,031 plans | ~520k LOC TypeScript, Rust, GLSL, Bash & Python | 16,999 tests
+50 milestones shipped (v1.0-v1.48 + v1.8.1 patch) | 445 phases | 1,061 plans | ~541K LOC TypeScript, Rust, GLSL, Bash & Python | 18,397 tests
 
 ---
 
