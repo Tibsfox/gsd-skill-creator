@@ -26,3 +26,12 @@ export {
   ONE,
   I,
 } from './complex/arithmetic';
+
+export {
+  computeOrbit,
+  detectPeriod,
+  computeMultiplier,
+  classifyFixedPoint,
+  isRationalMultipleOfPi,
+} from './complex/iterate';
+export type { IterationFn } from './complex/iterate';
