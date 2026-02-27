@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{{site.language}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{page.frontmatter.title}} — {{site.title}}</title>
+  {{#page.frontmatter.description}}
+  <meta name="description" content="{{page.frontmatter.description}}">
+  {{/page.frontmatter.description}}
+  <meta name="author" content="{{site.author}}">
+  <link rel="canonical" href="{{site.url}}{{page.url}}">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/atom+xml" title="{{site.title}} Feed" href="/feed.xml">
+
+  {{#schemaJsonLd}}
+  <script type="application/ld+json">
+    {{{schemaJsonLd}}}
+  </script>
+  {{/schemaJsonLd}}
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
+
+  {{>header}}
+  {{>nav}}
+
+  <main id="main-content">
+    {{{content}}}
+  </main>
+
+  {{>footer}}
+
+  <div class="search-overlay" id="search-overlay" role="dialog" aria-label="Search">
+    <div class="search-overlay__box">
+      <input type="search" class="search-overlay__input" placeholder="Search..." aria-label="Search query">
+      <div class="search-overlay__results"></div>
+    </div>
+  </div>
+
+  <script defer src="/assets/js/search.js"></script>
+</body>
+</html>

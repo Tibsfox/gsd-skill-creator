@@ -1,0 +1,23 @@
+{{!-- 404 Not Found template --}}
+
+<div class="page-content">
+  <h1>404 — Page Not Found</h1>
+  <p>The page you are looking for does not exist or has been moved.</p>
+
+  <h2>Try these instead</h2>
+  <ul>
+    <li><a href="/">Home</a></li>
+    {{#navigation}}
+    {{#items}}
+    <li><a href="{{url}}">{{label}}</a></li>
+    {{/items}}
+    {{/navigation}}
+  </ul>
+
+  <div class="search-prompt">
+    <p>Or try searching:</p>
+    <button class="search-trigger requires-js" aria-label="Open search">
+      Search the site
+    </button>
+  </div>
+</div>

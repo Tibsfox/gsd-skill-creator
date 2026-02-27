@@ -1,0 +1,12 @@
+{{#page.toc.length}}
+<aside class="toc" aria-label="Table of contents">
+  <p class="toc__title">On this page</p>
+  <ul class="toc__list">
+    {{#page.toc}}
+    <li>
+      <a href="#{{id}}" class="toc__link toc__link--depth-{{level}}">{{text}}</a>
+    </li>
+    {{/page.toc}}
+  </ul>
+</aside>
+{{/page.toc.length}}

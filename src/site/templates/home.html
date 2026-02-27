@@ -1,0 +1,41 @@
+{{!-- Home page template: featured content, hero area, no sidebar --}}
+
+<div class="home-hero">
+  <h1>{{site.title}}</h1>
+  <p class="home-hero__tagline">{{site.description}}</p>
+</div>
+
+<div class="page-content home-content">
+  {{{page.content}}}
+
+  {{#featured}}
+  <section class="home-featured">
+    <h2>Featured</h2>
+    <ul class="card-grid">
+      {{#featured}}
+      <li>
+        <div class="card">
+          <h3 class="card__title">
+            <a href="{{url}}">{{frontmatter.title}}</a>
+          </h3>
+          {{#frontmatter.description}}
+          <p class="card__description">{{frontmatter.description}}</p>
+          {{/frontmatter.description}}
+        </div>
+      </li>
+      {{/featured}}
+    </ul>
+  </section>
+  {{/featured}}
+
+  {{#navigation}}
+  <section class="home-sections">
+    <h2>{{label}}</h2>
+    <ul>
+      {{#items}}
+      <li><a href="{{url}}">{{label}}</a></li>
+      {{/items}}
+    </ul>
+  </section>
+  {{/navigation}}
+</div>
