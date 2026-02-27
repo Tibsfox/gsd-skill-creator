@@ -48,7 +48,7 @@
 | FOUND-01 | Shared TypeScript interfaces defined for OpenStackService, Requirement, Runbook, NASASEPhase, CommunicationLoop with Zod schemas | I, A | DV-019 | Phase C | All 5 interface types defined; Zod schemas validate correctly; no TypeScript compile errors | PASS |
 | FOUND-02 | NASA SE Methodology skill maps all 7 SE phases to cloud operations equivalents with cross-references to SP-6105 and NPR 7123.1 | I, T | CF-SK-019, DV-019 | Phase C | 7 SE phases mapped; SP-6105 sections cited per reference; skill loads via 6-stage pipeline | PASS |
 | FOUND-03 | Communication loop schemas define all 9 loops with priority levels | I, A | CF-CH-001, CF-CH-006 | Phase C | All 9 loops present (command, execution, specialist, user, observation, health, budget, cloud-ops, doc-sync); priority levels defined | PASS |
-| FOUND-04 | Filesystem contracts established for skills/, docs/, configs/, .chipset/, and .planning/bus/ directories | I | DV-019 | Phase C | All 5 directory contracts present; paths match deployed structure | PASS |
+| FOUND-04 | Filesystem contracts established for skills/, docs/, configs/, data/chipset/, and .planning/bus/ directories | I | DV-019 | Phase C | All 5 directory contracts present; paths match deployed structure | PASS |
 
 **Group 1 Summary:** 4/4 requirements verified, all PASS.
 

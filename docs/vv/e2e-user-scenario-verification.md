@@ -748,5 +748,5 @@ This git history provides an auditable record of every configuration decision ma
 - **skills/openstack/nova/SKILL.md:** Instance launch and lifecycle troubleshooting
 - **skills/openstack/cinder/SKILL.md:** Volume creation and attachment troubleshooting
 - **skills/openstack/networking-debug/SKILL.md:** Connectivity diagnostic procedures
-- **configs/evaluation/e2e-user-scenario-results.yaml:** Results template for recording outcomes
+- **config/evaluation/e2e-user-scenario-results.yaml:** Results template for recording outcomes
 - **scripts/e2e-user-scenario-verification.sh:** Automated execution script for this procedure
