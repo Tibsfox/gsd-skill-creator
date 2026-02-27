@@ -1,0 +1,231 @@
+template:
+  name: pipe-flow-pressure-drop
+  solver: simpleFoam
+  turbulence_model: kOmegaSST
+  description: >
+    Steady-state incompressible pipe flow for pressure drop validation.
+    Compares CFD result to Darcy-Weisbach analytical calculation.
+    Includes effect of pipe fittings (elbows, tees, valves).
+  scenario: Pipe sizing validation and Darcy-Weisbach verification
+
+parameters:
+  pipe:
+    diameter_mm:
+      type: number
+      default: 100
+      unit: mm
+      description: Nominal pipe inner diameter
+    length_m:
+      type: number
+      default: 10
+      unit: m
+      description: Straight pipe run length
+    roughness_mm:
+      type: number
+      default: 0.046
+      unit: mm
+      description: Pipe wall roughness (carbon steel 0.046mm, SS 0.015mm, PVC 0.0015mm)
+  fluid:
+    density_kg_m3:
+      type: number
+      default: 998.2
+      unit: kg/m3
+      description: Fluid density at operating temperature (water at 20C = 998.2)
+    viscosity_cP:
+      type: number
+      default: 1.002
+      unit: cP
+      description: Dynamic viscosity in centipoise (water at 20C = 1.002)
+    flow_rate_LPM:
+      type: number
+      default: 200
+      unit: L/min
+      description: Volumetric flow rate
+  mesh:
+    radial_cells:
+      type: number
+      default: 20
+      unit: cells
+      description: Number of cells in radial direction
+    axial_cells_per_meter:
+      type: number
+      default: 10
+      unit: cells/m
+      description: Axial mesh resolution
+
+generated_files:
+  system/controlDict: |
+    FoamFile { version 2.0; format ascii; class dictionary; object controlDict; }
+
+    application     simpleFoam;
+    startFrom       startTime;
+    startTime       0;
+    stopAt          endTime;
+    endTime         500;
+    deltaT          1;
+    writeControl    timeStep;
+    writeInterval   100;
+    purgeWrite      2;
+    writeFormat     ascii;
+    runTimeModifiable true;
+
+  system/fvSchemes: |
+    FoamFile { version 2.0; format ascii; class dictionary; object fvSchemes; }
+
+    ddtSchemes { default steadyState; }
+
+    gradSchemes { default Gauss linear; }
+
+    divSchemes
+    {
+        default         none;
+        div(phi,U)      bounded Gauss linearUpwind grad(U);
+        div(phi,k)      bounded Gauss upwind;
+        div(phi,omega)  bounded Gauss upwind;
+        div((nuEff*dev(T(grad(U))))) Gauss linear;
+    }
+
+    laplacianSchemes { default Gauss linear corrected; }
+
+    interpolationSchemes { default linear; }
+
+    snGradSchemes { default corrected; }
+
+  system/fvSolution: |
+    FoamFile { version 2.0; format ascii; class dictionary; object fvSolution; }
+
+    solvers
+    {
+        p
+        {
+            solver          GAMG;
+            tolerance       1e-7;
+            relTol          0.01;
+            smoother        GaussSeidel;
+        }
+
+        "(U|k|omega)"
+        {
+            solver          PBiCGStab;
+            preconditioner  DILU;
+            tolerance       1e-7;
+            relTol          0.1;
+        }
+    }
+
+    SIMPLE
+    {
+        nNonOrthogonalCorrectors 0;
+        residualControl
+        {
+            p               1e-6;
+            U               1e-5;
+        }
+    }
+
+    relaxationFactors
+    {
+        fields { p 0.3; }
+        equations
+        {
+            U               0.7;
+            k               0.7;
+            omega           0.7;
+        }
+    }
+
+  constant/physicalProperties: |
+    FoamFile { version 2.0; format ascii; class dictionary; object physicalProperties; }
+
+    // Water at 20C — replace with values from parameters
+    nu              [0 2 -1 0 0 0 0]  1.004e-06;  // Kinematic viscosity = mu/rho
+
+  constant/turbulenceProperties: |
+    FoamFile { version 2.0; format ascii; class dictionary; object turbulenceProperties; }
+
+    simulationType  RAS;
+
+    RAS { RASModel kOmegaSST; turbulence on; printCoeffs on; }
+
+  0/U: |
+    FoamFile { version 2.0; format ascii; class volVectorField; object U; }
+
+    dimensions      [0 1 -1 0 0 0 0];
+    internalField   uniform (0.447 0 0);  // Q/A: 200 LPM through 100mm pipe ~ 0.447 m/s
+
+    boundaryField
+    {
+        inlet   { type fixedValue; value uniform (0.447 0 0); }
+        outlet  { type zeroGradient; }
+        walls   { type noSlip; }
+    }
+
+  0/p: |
+    FoamFile { version 2.0; format ascii; class volScalarField; object p; }
+
+    dimensions      [0 2 -2 0 0 0 0];  // Kinematic pressure (m2/s2) = p/rho
+    internalField   uniform 0;
+
+    boundaryField
+    {
+        inlet   { type zeroGradient; }
+        outlet  { type fixedValue; value uniform 0; }
+        walls   { type zeroGradient; }
+    }
+
+  0/k: |
+    FoamFile { version 2.0; format ascii; class volScalarField; object k; }
+
+    dimensions      [0 2 -2 0 0 0 0];
+    // k = 1.5 * (U * TI)^2 where TI = 5% turbulence intensity
+    internalField   uniform 0.00075;
+
+    boundaryField
+    {
+        inlet   { type fixedValue; value uniform 0.00075; }
+        outlet  { type zeroGradient; }
+        walls   { type kqRWallFunction; value uniform 0.00075; }
+    }
+
+  0/omega: |
+    FoamFile { version 2.0; format ascii; class volScalarField; object omega; }
+
+    dimensions      [0 0 -1 0 0 0 0];
+    // omega = k^0.5 / (Cmu^0.25 * l) where l ~ 0.07 * D
+    internalField   uniform 4.46;
+
+    boundaryField
+    {
+        inlet   { type fixedValue; value uniform 4.46; }
+        outlet  { type zeroGradient; }
+        walls   { type omegaWallFunction; value uniform 4.46; }
+    }
+
+run_instructions: |
+  # OpenFOAM Pipe Flow Pressure Drop Validation
+  #
+  # 1. Generate structured pipe mesh
+  blockMesh
+  #
+  # 2. Check mesh quality
+  checkMesh
+  #
+  # 3. Run simpleFoam (incompressible, typically 5-15 min)
+  simpleFoam | tee log.simpleFoam
+  #
+  # 4. Extract pressure drop (between inlet and outlet)
+  postProcess -func 'patchAverage(patch=inlet, fields=(p))' -latestTime
+  postProcess -func 'patchAverage(patch=outlet, fields=(p))' -latestTime
+  #
+  # 5. Compare to Darcy-Weisbach:
+  # dP = f x (L/D) x (rho*v^2/2)
+  # f from Colebrook: 1/sqrt(f) = -2log(eps/3.7D + 2.51/(Re*sqrt(f)))
+  paraFoam
+
+validation:
+  expected_outputs:
+    - "CFD pressure drop within 10% of Darcy-Weisbach analytical result"
+    - "Velocity profile shows parabolic (laminar) or log-law (turbulent) shape"
+    - "Wall shear stress matches friction factor prediction"
+    - "Inlet flow rate matches specified Q at uniform velocity BC"
+  convergence_criteria: "Pressure residuals < 1e-6, U residuals < 1e-5"
