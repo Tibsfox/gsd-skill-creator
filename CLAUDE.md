@@ -5,9 +5,9 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 ## Tech Stack
 
 - **Languages:** TypeScript (src/), Rust (src-tauri/), GLSL (shaders)
-- **Build:** `npm run build`
-- **Test:** `npm test` (Vitest, 16795+ tests)
-- **Lint:** `npm run lint`
+- **Build:** `npm run build` or `make build`
+- **Test:** `npm test` or `make test` (Vitest, 19185+ tests)
+- **Lint:** `npm run lint` or `make lint`
 - **Key deps:** Tauri v2, xterm.js, Vite v6, Vitest
 - **Desktop frontend:** `desktop/` (Vite webview)
 
@@ -20,9 +20,16 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `.claude/hooks/` -- deterministic hooks (commit validation, session state, phase boundary)
 - `project-claude/` -- source of project-specific Claude config (installed via `node project-claude/install.cjs`)
 - `src/` -- TypeScript library and CLI
+- `src/fs/xdg.ts` -- XDG Base Directory utility
 - `src-tauri/` -- Rust backend (Tauri)
+- `src-tauri/src/xdg.rs` -- Rust XDG utility
 - `desktop/` -- Vite webview frontend
-- `docs/` -- 158 markdown files, canonical documentation
+- `docs/` -- 158+ markdown files, canonical documentation
+- `config/` -- Unified configuration (templates, crews, evaluation, profiles)
+- `data/` -- Static data (schemas, chipset definitions, citations, domain data)
+- `extra/` -- Linux system integration (man pages, completions, .desktop, systemd)
+- `packaging/` -- Distro packaging (debian/, rpm/)
+- `scripts/` -- Utility scripts (bootstrap, dashboard server, bin/)
 
 ## Commit Convention
 
@@ -36,6 +43,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 
 - Check project state: read `.planning/STATE.md` and `.planning/ROADMAP.md`
 - Install project-claude files: `node project-claude/install.cjs`
+- Run full verification: `make verify`
 - GSD skills and hooks handle workflow guidance automatically
 - Strict boundary: `src/` never imports `desktop/@tauri-apps/api`; `desktop/` never imports Node.js modules
 
