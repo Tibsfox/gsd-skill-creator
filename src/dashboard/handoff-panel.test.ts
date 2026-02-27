@@ -2,10 +2,13 @@ import { describe, it, expect } from 'vitest';
 import {
   renderDriftTrend,
   renderFidelityDistribution,
+  renderRecommendations,
+  renderHandoffPanel,
   renderHandoffPanelStyles,
   type HandoffPanelData,
   type DriftEntry,
   type FidelityDistribution,
+  type Recommendation,
 } from './handoff-panel.js';
 
 // ---------------------------------------------------------------------------
@@ -18,6 +21,19 @@ function makeDriftEntry(overrides: Partial<DriftEntry> = {}): DriftEntry {
     timestamp: overrides.timestamp ?? '2026-02-26T10:00:00Z',
     pattern: overrides.pattern ?? 'planner->executor:task',
     recommendation: overrides.recommendation ?? 'maintain',
+  };
+}
+
+function makeRecommendation(
+  overrides: Partial<Recommendation> = {},
+): Recommendation {
+  return {
+    pattern: overrides.pattern ?? 'planner->executor:schema-task',
+    direction: overrides.direction ?? 'promote',
+    fromLevel: overrides.fromLevel ?? 2,
+    toLevel: overrides.toLevel ?? 3,
+    reason: overrides.reason ?? 'drift 0.45 x 3 consecutive',
+    evidence: overrides.evidence ?? 3,
   };
 }
 
@@ -38,6 +54,7 @@ function makeHandoffPanelData(
   return {
     driftEntries: overrides.driftEntries ?? [makeDriftEntry()],
     fidelity: overrides.fidelity ?? makeFidelityDistribution(),
+    recommendations: overrides.recommendations ?? [makeRecommendation()],
     milestoneName: overrides.milestoneName ?? 'auth-refactor-v2',
     totalHandoffs: overrides.totalHandoffs ?? 47,
     avgDrift: overrides.avgDrift ?? 0.08,
@@ -323,5 +340,183 @@ describe('renderHandoffPanelStyles', () => {
     const css = renderHandoffPanelStyles();
     expect(css).toContain('var(--surface');
     expect(css).toContain('var(--border');
+  });
+
+  it('contains .handoff-panel top-level class', () => {
+    const css = renderHandoffPanelStyles();
+    expect(css).toContain('.handoff-panel');
+  });
+
+  it('contains .hp-recommendations class', () => {
+    const css = renderHandoffPanelStyles();
+    expect(css).toContain('.hp-recommendations');
+  });
+
+  it('contains .hp-recommendation class', () => {
+    const css = renderHandoffPanelStyles();
+    expect(css).toContain('.hp-recommendation');
+  });
+
+  it('contains .hp-rec-promote class', () => {
+    const css = renderHandoffPanelStyles();
+    expect(css).toContain('.hp-rec-promote');
+  });
+
+  it('contains .hp-rec-demote class', () => {
+    const css = renderHandoffPanelStyles();
+    expect(css).toContain('.hp-rec-demote');
+  });
+
+  it('contains .hp-panel-title class', () => {
+    const css = renderHandoffPanelStyles();
+    expect(css).toContain('.hp-panel-title');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// renderRecommendations (DASH-03)
+// ---------------------------------------------------------------------------
+
+describe('renderRecommendations', () => {
+  it('returns HTML containing hp-recommendations container class', () => {
+    const html = renderRecommendations(makeHandoffPanelData());
+    expect(html).toContain('hp-recommendations');
+  });
+
+  it('renders each recommendation with hp-recommendation class', () => {
+    const html = renderRecommendations(
+      makeHandoffPanelData({
+        recommendations: [makeRecommendation(), makeRecommendation({ direction: 'demote' })],
+      }),
+    );
+    const matches = html.match(/hp-recommendation[^s]/g);
+    expect(matches!.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('promote recommendations show up-arrow and hp-rec-promote class', () => {
+    const html = renderRecommendations(
+      makeHandoffPanelData({
+        recommendations: [makeRecommendation({ direction: 'promote' })],
+      }),
+    );
+    expect(html).toContain('hp-rec-promote');
+    expect(html).toMatch(/[\u2191\u25B2\u2B06]/);
+  });
+
+  it('demote recommendations show down-arrow and hp-rec-demote class', () => {
+    const html = renderRecommendations(
+      makeHandoffPanelData({
+        recommendations: [makeRecommendation({ direction: 'demote' })],
+      }),
+    );
+    expect(html).toContain('hp-rec-demote');
+    expect(html).toMatch(/[\u2193\u25BC\u2B07]/);
+  });
+
+  it('each recommendation shows pattern name', () => {
+    const html = renderRecommendations(
+      makeHandoffPanelData({
+        recommendations: [makeRecommendation({ pattern: 'lead->verifier:check' })],
+      }),
+    );
+    expect(html).toContain('lead-&gt;verifier:check');
+  });
+
+  it('each recommendation shows level change', () => {
+    const html = renderRecommendations(
+      makeHandoffPanelData({
+        recommendations: [makeRecommendation({ fromLevel: 2, toLevel: 3 })],
+      }),
+    );
+    expect(html).toContain('Level 2');
+    expect(html).toContain('3');
+  });
+
+  it('each recommendation shows reason', () => {
+    const html = renderRecommendations(
+      makeHandoffPanelData({
+        recommendations: [makeRecommendation({ reason: 'drift 0.45 x 3 consecutive' })],
+      }),
+    );
+    expect(html).toContain('drift 0.45 x 3 consecutive');
+  });
+
+  it('each recommendation shows evidence count', () => {
+    const html = renderRecommendations(
+      makeHandoffPanelData({
+        recommendations: [makeRecommendation({ evidence: 5 })],
+      }),
+    );
+    expect(html).toContain('5 handoffs');
+  });
+
+  it('empty recommendations array renders hp-empty-msg', () => {
+    const html = renderRecommendations(
+      makeHandoffPanelData({ recommendations: [] }),
+    );
+    expect(html).toContain('hp-empty-msg');
+    expect(html).toContain('No recommendations at this time');
+  });
+
+  it('renders section heading "Recommended Actions"', () => {
+    const html = renderRecommendations(makeHandoffPanelData());
+    expect(html).toContain('Recommended Actions');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// renderHandoffPanel (DASH-04)
+// ---------------------------------------------------------------------------
+
+describe('renderHandoffPanel', () => {
+  it('returns HTML containing handoff-panel wrapper class', () => {
+    const html = renderHandoffPanel(makeHandoffPanelData());
+    expect(html).toContain('handoff-panel');
+  });
+
+  it('contains panel title with milestone name', () => {
+    const html = renderHandoffPanel(
+      makeHandoffPanelData({ milestoneName: 'auth-refactor-v2' }),
+    );
+    expect(html).toContain('hp-panel-title');
+    expect(html).toContain('HANDOFF QUALITY');
+    expect(html).toContain('auth-refactor-v2');
+  });
+
+  it('contains hp-drift-trend section', () => {
+    const html = renderHandoffPanel(makeHandoffPanelData());
+    expect(html).toContain('hp-drift-trend');
+  });
+
+  it('contains hp-fidelity-dist section', () => {
+    const html = renderHandoffPanel(makeHandoffPanelData());
+    expect(html).toContain('hp-fidelity-dist');
+  });
+
+  it('contains hp-recommendations section', () => {
+    const html = renderHandoffPanel(makeHandoffPanelData());
+    expect(html).toContain('hp-recommendations');
+  });
+
+  it('renders all three sub-sections in order: drift, fidelity, recommendations', () => {
+    const html = renderHandoffPanel(makeHandoffPanelData());
+    const driftIdx = html.indexOf('hp-drift-trend');
+    const fidelityIdx = html.indexOf('hp-fidelity-dist');
+    const recIdx = html.indexOf('hp-recommendations');
+    expect(driftIdx).toBeLessThan(fidelityIdx);
+    expect(fidelityIdx).toBeLessThan(recIdx);
+  });
+
+  it('full empty state renders panel shell with all three empty-state messages', () => {
+    const html = renderHandoffPanel(
+      makeHandoffPanelData({
+        driftEntries: [],
+        fidelity: makeFidelityDistribution({ level0: 0, level1: 0, level2: 0, level3: 0 }),
+        recommendations: [],
+      }),
+    );
+    expect(html).toContain('handoff-panel');
+    expect(html).toContain('No drift events recorded');
+    expect(html).toContain('No recommendations at this time');
   });
 });
