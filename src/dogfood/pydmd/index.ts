@@ -20,4 +20,11 @@ export type {
   Connection,
   TutorialReplayResult,
   ClaimVerification,
+  DependencySpec,
+  PythonProjectInfo,
+  VenvConfig,
+  VenvResult,
+  HealthCheckConfig,
+  HealthReport,
+  InstallManifest,
 } from './types.js';
