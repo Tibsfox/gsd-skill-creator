@@ -43,7 +43,7 @@ export interface AdapterMetrics {
 
 /** Configuration for BaseAdapter constructor. */
 export interface BaseAdapterConfig {
-  /** Override the base cache directory (default: .citations/cache). */
+  /** Override the base cache directory (default: data/citations/cache). */
   cacheDir?: string;
   /** Override the cache TTL in days (default: 30). */
   cacheTtlDays?: number;
@@ -121,7 +121,7 @@ export abstract class BaseAdapter implements ResolverAdapter {
 
   constructor(config: BaseAdapterConfig = {}) {
     this.fetchFn = config.fetchFn ?? globalThis.fetch;
-    this.cacheDir = config.cacheDir ?? '.citations/cache';
+    this.cacheDir = config.cacheDir ?? 'data/citations/cache';
     this.cacheTtlDays = config.cacheTtlDays ?? 30;
     this.maxWaitMs = config.maxWaitMs ?? 5000;
     this.timeoutMs = config.timeoutMs ?? 10_000;

@@ -1,0 +1,7 @@
+# Ignore all cached API responses (regenerable)
+*
+# But keep this .gitignore and subdirectory structure
+!.gitignore
+!crossref/
+!openalex/
+!nasa-ntrs/
