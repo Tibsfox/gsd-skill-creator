@@ -170,6 +170,12 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **164. Three-Track Verification Engine** | Track A concept coverage audit via Jaccard similarity, Track B cross-document consistency via antonym-pair detection, Track C eight-layer-to-ten-part progression mapping, 8-type gap taxonomy, 4-level severity (v1.40) |
 | **165. Refinement & Reporting** | Knowledge patch generator (proposals only, requiresReview=true), improvement ticket generator with reproduction steps, skill refiner with complex plane positions, 11-section dogfood report builder, safety validator (v1.40) |
 | **166. Safety Validation** | Bounded learning enforcement (≤20% via Levenshtein), checkpoint integrity (SHA-256), no auto-application (requiresReview=true on all patches), regression gate (16,795 tests, 0 failures) (v1.40) |
+| **167. Slim CLAUDE.md Architecture** | 417→46 line CLAUDE.md migration with 4 auto-activating skills (gsd-workflow, skill-integration, session-awareness, security-hygiene), 3 scoped subagent definitions (executor, verifier, planner), reference document architecture (v1.41) |
+| **168. Git Workflow Intelligence** | Git-aware pattern detection from commit history, progressive disclosure git workflow skill, CLI command registration, coverage reporting with @vitest/coverage-v8 (v1.42) |
+| **169. Gource Visualization Pipeline** | Configuration profiles for repository history animation, batch processing scripts, avatar/caption management, BATS test suites, deployment documentation (v1.43) |
+| **170. PyDMD Knowledge Dogfood** | sc:learn pipeline dogfood against PyDMD scientific computing library, concept mapping to knowledge graph, tutorial replay engine, accuracy checker, observation bridge, dogfood report template (v1.44) |
+| **171. Agent-Ready Static Site Generator** | Custom SSG for tibsfox.com with markdown→HTML pipeline, Mustache template engine, agent discovery layers (llms.txt, llms-full.txt, AGENTS.md, Schema.org JSON-LD), client-side search, citation integration, WordPress MCP sync (v1.45) |
+| **172. Upstream Intelligence Pack** | Upstream change monitoring with 5 agents (SENTINEL, ANALYST, TRACER, PATCHER, HERALD), 3 team topologies, channel monitors for Anthropic API/SDK, append-only persistence with rollback, 50-event historical test corpus (v1.46) |
 
 ## Version History
 
@@ -218,4 +224,10 @@ The Dynamic Skill Creator helps you build a personalized knowledge base for Clau
 | **v1.38** | SSH Agent Security: OS-level bubblewrap/Seatbelt sandboxing, zero-knowledge credential proxy, CVE staging security scanner (8 detectors), per-agent isolation via git worktrees, security dashboard, Bootstrap Phase 0, 260 tests |
 | **v1.39** | GSD-OS Bootstrap & READY Prompt: 29 IPC event types, Rust SSE API client, CLI chat with READY. sequence, 5-level magic verbosity, 7-service launcher, staging intake, self-improvement lifecycle, 517 tests |
 | **v1.40** | sc:learn Dogfood Mission: PDF extraction pipeline, ingestion harness with checkpoint resume, dual-track learning (Parts I-V / VI-X), three-track verification engine, refinement and reporting, bounded learning safety validation, 362 tests |
+| **v1.41** | Claude Code Integration Reliability: slim CLAUDE.md (417→46 lines), 4 auto-activating skills, 3 subagent definitions, install script migration, reference document architecture |
+| **v1.42** | SC Git Support: git workflow intelligence, pattern detection from commits, progressive disclosure skill, CLI integration, coverage reporting, 272 tests |
+| **v1.43** | Gource Visualization Pack: repository animation pipeline, configuration profiles, batch processing, avatar/caption systems, 46 BATS tests |
+| **v1.44** | SC Learn PyDMD Dogfood: PyDMD knowledge extraction, concept mapping, tutorial replay engine, accuracy checker, observation bridge, dogfood report, 284 tests |
+| **v1.45** | Agent-Ready Static Site: custom SSG with agent discovery (llms.txt, AGENTS.md, JSON-LD), template engine, search, citations, WordPress sync, deployment, 243 tests |
+| **v1.46** | Upstream Intelligence Pack: 5 monitoring agents, 3 team topologies, channel monitors, persistence with rollback, 50-event test corpus, pipeline orchestrator, 206 tests |
 | **v1.47** | Holomorphic Dynamics Educational Pack: 10-module pack (HD-01 through HD-10) covering iteration, fixed points, Mandelbrot/Julia sets, cycles, topology, deep learning dynamics, skill-creator dynamics, DMD, and Koopman theory. Complex arithmetic library, fractal renderer, standard DMD + 4 variants (DMDc, mrDMD, piDMD, BOP-DMD), EDMD with dictionary lifting, SkillDynamicsExtended bridge, skill dynamics classification with Fatou/Julia domains, 209 tests |
