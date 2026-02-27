@@ -1388,6 +1388,35 @@ async function main() {
       break;
     }
 
+    case 'project':
+    case 'proj': {
+      const { projectCommand } = await import('./cli/commands/project.js');
+      const exitCode = await projectCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'pack': {
+      const { packCommand } = await import('./cli/commands/pack.js');
+      const exitCode = await packCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'contrib': {
+      const { contribCommand } = await import('./cli/commands/contrib.js');
+      const exitCode = await contribCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'www': {
+      const { wwwCommand } = await import('./cli/commands/www.js');
+      const exitCode = await wwwCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1553,6 +1582,10 @@ Commands:
   event, ev         Manage skill events (list, emit, consume, suggest, expire)
   dashboard, db     Generate GSD Planning Docs Dashboard from .planning/
   terminal, term    Manage Wetty terminal server (start, stop, status, restart)
+  project, proj     Manage GSD projects (init, list, status)
+  pack              Browse educational packs (list, info)
+  contrib           Manage contrib zone (upstream, downstream, publishing)
+  www               Manage www zone (status)
   help, -h          Show this help message
   --version, -V     Show version information
 
