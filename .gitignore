@@ -1,6 +1,5 @@
 # Build output
 dist/
-www/
 
 # Dependencies
 node_modules/
@@ -27,3 +26,25 @@ desktop/node_modules/
 
 # Coverage
 coverage/
+
+# === Filesystem Zones (v1.49.4) ===
+
+# User workspace (personal, not shared)
+projects/*/
+!projects/README.md
+!projects/.gitkeep
+
+# Contrib staging (ephemeral review artifacts)
+contrib/downstream/staging/*/
+contrib/upstream/*/
+!contrib/upstream/.gitkeep
+!contrib/README.md
+
+# WWW generated output
+www/site/*/
+www/staging/*/
+!www/tools/
+!www/README.md
+
+# User-local config
+.sc-config.json
