@@ -1,0 +1,301 @@
+template:
+  name: data-center-airflow
+  solver: buoyantSimpleFoam
+  turbulence_model: kEpsilon
+  description: >
+    Steady-state buoyancy-driven airflow in a data center with raised-floor plenum.
+    Models rack heat sources, CRAC cooling units, and perforated floor tiles.
+    Validates hot-aisle/cold-aisle arrangement effectiveness.
+  scenario: Data center thermal management and hot spot identification
+
+parameters:
+  room:
+    length_m:
+      type: number
+      default: 15
+      unit: m
+      description: Data center room length
+    width_m:
+      type: number
+      default: 8
+      unit: m
+      description: Data center room width
+    height_m:
+      type: number
+      default: 3.5
+      unit: m
+      description: Floor-to-ceiling height (above raised floor)
+    plenum_depth_m:
+      type: number
+      default: 0.6
+      unit: m
+      description: Raised floor plenum depth
+  racks:
+    count:
+      type: number
+      default: 20
+      unit: each
+      description: Number of server racks
+    heat_load_kW_per_rack:
+      type: number
+      default: 10
+      unit: kW
+      description: Average heat dissipation per rack
+    arrangement:
+      type: string
+      default: hot-aisle-cold-aisle
+      description: "Rack arrangement: hot-aisle-cold-aisle or open-floor"
+  cooling:
+    crac_count:
+      type: number
+      default: 4
+      unit: each
+      description: Number of CRAC/CRAH units
+    supply_temp_C:
+      type: number
+      default: 13
+      unit: degC
+      description: CRAC supply air temperature
+    total_airflow_m3s:
+      type: number
+      default: 10.0
+      unit: m3/s
+      description: Total cooling airflow from all CRAC units
+  tiles:
+    open_area_percent:
+      type: number
+      default: 25
+      unit: percent
+      description: Perforated tile open area percentage
+
+generated_files:
+  system/controlDict: |
+    /*--------------------------------*- C++ -*----------------------------------*\
+    | =========                 |                                                 |
+    | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+    |  \\    /   O peration     |                                                 |
+    |   \\  /    A nd           | Template: data-center-airflow                   |
+    |    \\/     M anipulation  |                                                 |
+    \*---------------------------------------------------------------------------*/
+    FoamFile
+    {
+        version     2.0;
+        format      ascii;
+        class       dictionary;
+        object      controlDict;
+    }
+
+    application     buoyantSimpleFoam;
+
+    startFrom       startTime;
+    startTime       0;
+    stopAt          endTime;
+    endTime         500;
+    deltaT          1;
+
+    writeControl    timeStep;
+    writeInterval   50;
+    purgeWrite      3;
+
+    writeFormat     ascii;
+    writePrecision  6;
+    writeCompression off;
+
+    timeFormat      general;
+    timePrecision   6;
+
+    runTimeModifiable true;
+
+    functions
+    {
+        fieldAverage1
+        {
+            type            fieldAverage;
+            libs            ("libfieldFunctionObjects.so");
+            writeControl    writeTime;
+            fields
+            (
+                U { mean on; prime2Mean off; base time; }
+                T { mean on; prime2Mean off; base time; }
+                p_rgh { mean on; prime2Mean off; base time; }
+            );
+        }
+    }
+
+  system/fvSchemes: |
+    FoamFile { version 2.0; format ascii; class dictionary; object fvSchemes; }
+
+    ddtSchemes { default steadyState; }
+
+    gradSchemes { default Gauss linear; }
+
+    divSchemes
+    {
+        default         none;
+        div(phi,U)      bounded Gauss linearUpwind grad(U);
+        div(phi,h)      bounded Gauss linearUpwind grad(h);
+        div(phi,K)      bounded Gauss upwind;
+        div(phi,k)      bounded Gauss upwind;
+        div(phi,epsilon) bounded Gauss upwind;
+        div((nuEff*dev(T(grad(U))))) Gauss linear;
+    }
+
+    laplacianSchemes { default Gauss linear corrected; }
+
+    interpolationSchemes { default linear; }
+
+    snGradSchemes { default corrected; }
+
+  system/fvSolution: |
+    FoamFile { version 2.0; format ascii; class dictionary; object fvSolution; }
+
+    solvers
+    {
+        p_rgh
+        {
+            solver          GAMG;
+            tolerance       1e-7;
+            relTol          0.01;
+            smoother        GaussSeidel;
+        }
+
+        "(U|h|k|epsilon)"
+        {
+            solver          PBiCGStab;
+            preconditioner  DILU;
+            tolerance       1e-7;
+            relTol          0.1;
+        }
+    }
+
+    SIMPLE
+    {
+        nNonOrthogonalCorrectors 0;
+        residualControl
+        {
+            p_rgh           1e-4;
+            U               1e-4;
+            h               1e-4;
+        }
+    }
+
+    relaxationFactors
+    {
+        fields { p_rgh 0.7; }
+        equations
+        {
+            U               0.3;
+            h               0.3;
+            k               0.7;
+            epsilon         0.7;
+        }
+    }
+
+  constant/physicalProperties: |
+    FoamFile { version 2.0; format ascii; class dictionary; object physicalProperties; }
+
+    thermoType
+    {
+        type            hePsiThermo;
+        mixture         pureMixture;
+        transport       const;
+        thermo          hConst;
+        equationOfState perfectGas;
+        specie          specie;
+        energy          sensibleEnthalpy;
+    }
+
+    mixture
+    {
+        specie    { nMoles 1; molWeight 28.9; }
+        thermodynamics { Cp 1005; Hf 0; }
+        transport { mu 1.85e-5; Pr 0.713; }
+    }
+
+  constant/turbulenceProperties: |
+    FoamFile { version 2.0; format ascii; class dictionary; object turbulenceProperties; }
+
+    simulationType  RAS;
+
+    RAS { RASModel kEpsilon; turbulence on; printCoeffs on; }
+
+  0/U: |
+    FoamFile { version 2.0; format ascii; class volVectorField; object U; }
+
+    dimensions      [0 1 -1 0 0 0 0];
+    internalField   uniform (0 0 0);
+
+    boundaryField
+    {
+        crac_inlets   { type fixedValue; value uniform (0 2.5 0); }
+        tile_outlets  { type fixedValue; value uniform (0 0 1.5); }
+        rack_faces    { type zeroGradient; }
+        walls         { type noSlip; }
+        ceiling       { type noSlip; }
+        outlet        { type pressureInletOutletVelocity; value uniform (0 0 0); }
+    }
+
+  0/p: |
+    FoamFile { version 2.0; format ascii; class volScalarField; object p; }
+
+    dimensions      [1 -1 -2 0 0 0 0];
+    internalField   uniform 101325;
+
+    boundaryField
+    {
+        crac_inlets   { type zeroGradient; }
+        tile_outlets  { type zeroGradient; }
+        rack_faces    { type zeroGradient; }
+        walls         { type zeroGradient; }
+        ceiling       { type zeroGradient; }
+        outlet        { type fixedValue; value uniform 101325; }
+    }
+
+  0/T: |
+    FoamFile { version 2.0; format ascii; class volScalarField; object T; }
+
+    dimensions      [0 0 0 1 0 0 0];
+    internalField   uniform 295.15;
+
+    boundaryField
+    {
+        crac_inlets   { type fixedValue; value uniform 286.15; }
+        rack_faces    { type externalWallHeatFluxTemperature;
+                        mode power;
+                        Q 10000;
+                        value uniform 300; }
+        walls         { type zeroGradient; }
+        ceiling       { type zeroGradient; }
+        outlet        { type inletOutlet; inletValue uniform 295.15; value uniform 295.15; }
+    }
+
+run_instructions: |
+  # OpenFOAM Data Center Airflow Simulation
+  # Requires OpenFOAM v2112 or later
+  #
+  # 1. Generate mesh
+  blockMesh
+  #
+  # 2. Check mesh quality (target: max non-orthogonality < 70, max skewness < 4)
+  checkMesh
+  #
+  # 3. Initialize fields (optional but recommended)
+  setFields
+  #
+  # 4. Run solver (may take 30-120 minutes depending on mesh resolution)
+  buoyantSimpleFoam | tee log.buoyantSimpleFoam
+  #
+  # 5. Monitor convergence (in another terminal)
+  foamMonitor -l log.buoyantSimpleFoam
+  #
+  # 6. Post-process and visualize
+  paraFoam
+  # In ParaView: load case, apply Filters > Common > Slice for temperature planes
+
+validation:
+  expected_outputs:
+    - "Temperature field T converges to steady state (residuals < 1e-5)"
+    - "Velocity field U shows cold-aisle supply and hot-aisle exhaust pattern"
+    - "Maximum rack outlet temperature < 35C (A1 class, ASHRAE TC 9.9)"
+    - "Pressure uniformity across raised floor (< 10% variation)"
+  convergence_criteria: "T and U residuals < 1e-4 over 100 iterations"
