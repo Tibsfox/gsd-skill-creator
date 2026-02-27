@@ -1,5 +1,5 @@
-import { htmlToMarkdown } from './html-to-md';
-import { parseFrontmatter } from '../utils/frontmatter';
+import { htmlToMarkdown } from './html-to-md.js';
+import { parseFrontmatter } from '../utils/frontmatter.js';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */

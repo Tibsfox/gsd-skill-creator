@@ -1,4 +1,4 @@
-import type { ContentPage, SiteConfig } from './types';
+import type { ContentPage, SiteConfig } from './types.js';
 
 const PRIORITY_MAP: Record<string, string> = {
   high: '0.8',
