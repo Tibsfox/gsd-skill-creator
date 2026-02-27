@@ -1,11 +1,12 @@
 # Release History
 
-49 milestones shipped across 433 phases, 1,031 plans, ~520k LOC, and 16,999 tests.
+50 milestones shipped across 445 phases, 1,061 plans, ~541K LOC, and 18,397 tests.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned.
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
+| [v1.48](release-notes/v1.48/) | Physical Infrastructure Engineering Pack | 2026-02-27 | 12 | 30 | [retro](release-notes/v1.48/RETROSPECTIVE.md), [lessons](release-notes/v1.48/LESSONS-LEARNED.md) |
 | [v1.47](release-notes/v1.47/) | Holomorphic Dynamics Educational Pack | 2026-02-27 | 10 | 24 | [retro](release-notes/v1.47/RETROSPECTIVE.md), [lessons](release-notes/v1.47/LESSONS-LEARNED.md) |
 | [v1.46](release-notes/v1.46/) | Upstream Intelligence Pack | 2026-02-26 | 8 | 18 | [retro](release-notes/v1.46/RETROSPECTIVE.md), [lessons](release-notes/v1.46/LESSONS-LEARNED.md) |
 | [v1.45](release-notes/v1.45/) | Agent-Ready Static Site | 2026-02-26 | 8 | 22 | [retro](release-notes/v1.45/RETROSPECTIVE.md), [lessons](release-notes/v1.45/LESSONS-LEARNED.md) |
