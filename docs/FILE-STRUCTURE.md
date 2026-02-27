@@ -187,6 +187,23 @@ src/                        # TypeScript library
 │   │                       #   coverage-mapper, consistency-checker, eight-layer-verifier
 │   └── refinement/         # Refinement and reporting: patch-generator, ticket-generator,
 │                           #   skill-refiner, report-builder, safety-validator
+├── git/                    # Git workflow intelligence (v1.42)
+│   ├── core/               # Git core operations
+│   ├── workflows/          # Git workflow patterns
+│   ├── gates/              # Safety gates for destructive operations
+│   └── scripts/            # Git automation scripts
+├── site/                   # Static site generator (v1.45)
+│   ├── templates/          # Mustache-style page templates (7 variants)
+│   ├── config/             # Site configuration (site.yaml, navigation.yaml)
+│   ├── content/            # Sample content generation
+│   ├── agents/             # Agent discovery generators (llms.txt, AGENTS.md, JSON-LD)
+│   ├── static/             # Static assets (CSS, JS)
+│   ├── utils/              # Utility functions
+│   └── wordpress/          # WordPress integration (comments, content sync)
+├── upstream/               # Upstream intelligence pack (v1.46)
+│   ├── agents/             # 5 monitoring agents (SENTINEL, ANALYST, TRACER, PATCHER, HERALD)
+│   ├── teams/              # 3 team topologies (upstream-watch, impact-response, full-cycle)
+│   └── test-data/          # 50-event historical test corpus
 ├── holomorphic/            # Holomorphic dynamics educational pack (v1.47)
 │   ├── types.ts            # Shared types (ComplexNumber, Orbit, FixedPoint, etc.)
 │   ├── complex/            # Complex arithmetic and iteration engine
@@ -266,6 +283,16 @@ infra/                      # Bash infrastructure scripts (v1.22)
 ├── templates/              # Kickstart, VM, and configuration templates
 ├── runbooks/               # 4 operational runbooks
 └── inventory/              # Hardware capability profiles
+
+skills/                     # Generated skill packs (v1.41+)
+├── bootstrap-guide/        # GSD-OS bootstrap tutorial (v1.39)
+├── git-workflow/            # Git workflow intelligence skill (v1.42)
+├── gource-visualizer/      # Gource visualization pipeline (v1.43)
+│   ├── references/          # Configuration reference docs
+│   └── tests/               # Shell script test suites
+├── methodology/             # Methodology documentation skills
+├── mfe-domains/             # 10 MFE domain skills (v1.35)
+└── openstack/               # OpenStack operational skills (v1.33)
 
 .chipset/                   # Chipset configuration (v1.22)
 ├── chipset.yaml            # Unified chipset definition
