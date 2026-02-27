@@ -6,6 +6,7 @@ Each version links to a detailed release notes directory with full feature descr
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
+| [v1.49.4](release-notes/v1.49.4/) | Filesystem Management Strategy | 2026-02-27 | 3 | 7 | |
 | [v1.49.3](release-notes/v1.49.3/) | GSD-OS Desktop Polish (Patch) | 2026-02-27 | — | — | |
 | [v1.49.2](release-notes/v1.49.2/) | GSD-OS Indicator Wiring & TypeScript Fixes (Patch) | 2026-02-27 | — | — | |
 | [v1.49.1](release-notes/v1.49.1/) | DACP CLI Field Alignment (Patch) | 2026-02-27 | — | — | |
