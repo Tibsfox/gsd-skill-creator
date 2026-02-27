@@ -1,0 +1,37 @@
+Source: gsd-os
+Section: devel
+Priority: optional
+Maintainer: GSD Project <gsd@tibsfox.com>
+Build-Depends: debhelper-compat (= 13),
+               cargo,
+               rustc (>= 1.70),
+               nodejs (>= 18),
+               npm,
+               libwebkit2gtk-4.1-dev,
+               libgtk-3-dev,
+               libayatana-appindicator3-dev,
+               librsvg2-dev,
+               libssl-dev,
+               scdoc
+Standards-Version: 4.6.2
+Homepage: https://github.com/Tibsfox/gsd-skill-creator
+Rules-Requires-Root: no
+
+Package: gsd-os
+Architecture: amd64
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         libwebkit2gtk-4.1-0,
+         libgtk-3-0,
+         libayatana-appindicator3-1
+Recommends: tmux, claude-code
+Suggests: scdoc
+Description: GSD-OS - AI-powered project management desktop
+ GSD-OS is a desktop application for the Get Shit Done project
+ management framework. It integrates a tmux terminal, Claude AI
+ assistant, file watcher, and planning dashboard into a unified
+ desktop environment built with Tauri.
+ .
+ Features include adaptive skill creation, agent orchestration,
+ educational pack management, and a complete project lifecycle
+ from vision to delivery.
