@@ -1,0 +1,41 @@
+{
+  "version": "{{version}}",
+  "fidelity_level": "{{fidelity_level}}",
+  "source_agent": "{{source_agent}}",
+  "target_agent": "{{target_agent}}",
+  "opcode": "{{opcode}}",
+  "intent_summary": "{{intent_summary}}",
+  "human_origin": {
+    "vision_doc": "{{vision_doc}}",
+    "planning_phase": "{{planning_phase}}",
+    "user_directive": "{{user_directive}}"
+  },
+  "data_manifest": {
+    "{{data_filename}}": {
+      "purpose": "{{data_purpose}}",
+      "source": "{{data_source}}",
+      "schema_ref": "{{schema_ref}}"
+    }
+  },
+  "code_manifest": {
+    "{{code_filename}}": {
+      "purpose": "{{code_purpose}}",
+      "language": "{{code_language}}",
+      "source_skill": "{{source_skill}}",
+      "deterministic": "{{deterministic}}"
+    }
+  },
+  "assembly_rationale": {
+    "level_justification": "{{level_justification}}",
+    "skills_used": ["{{skill_name}}"],
+    "generated_artifacts": ["{{generated_artifact}}"],
+    "reused_artifacts": ["{{reused_artifact}}"]
+  },
+  "provenance": {
+    "assembled_by": "dacp-assembler",
+    "assembled_at": "{{assembled_at}}",
+    "skill_versions": {
+      "{{skill_name}}": "{{skill_version}}"
+    }
+  }
+}
