@@ -16,7 +16,7 @@ import type { BudgetProfile } from '../types/application.js';
 import type { LoadingProjection } from './loading-projection.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const testDir = join(__dirname, '..', '..', 'test-fixtures', 'budget-validation');
+const testDir = join(__dirname, '..', '..', 'test', 'fixtures', 'budget-validation');
 
 // ============================================================================
 // BudgetValidator.load() tests
