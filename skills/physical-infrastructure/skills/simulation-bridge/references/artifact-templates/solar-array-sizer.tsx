@@ -269,8 +269,7 @@ function SolarArraySizer() {
       </table>
 
       <p style={{ fontSize: '11px', color: '#9ca3af', marginTop: '16px' }}>
-        Engineering Disclaimer: Simplified irradiance model. Verify with a licensed Professional
-        Engineer, PVGIS or PVWatts for accurate site-specific production estimates.
+        {'Engineering Disclaimer: Simplified irradiance model. Verify with a licensed Professional Engineer, PVGIS or PVWatts for accurate site-specific production estimates.'}
       </p>
     </div>
   );
