@@ -1,6 +1,6 @@
 ---
 title: "About"
-description: "About tibsfox.com, its philosophy, and the person behind it"
+description: "About this site, its philosophy, and the approach to education"
 template: page
 schema_type: WebPage
 tags:
@@ -12,9 +12,9 @@ agent_visible: true
 agent_priority: medium
 ---
 
-# About tibsfox
+# About This Site
 
-tibsfox.com exists because the best educational resources are the ones that respect your intelligence while meeting you exactly where you are.
+This site exists because the best educational resources are the ones that respect your intelligence while meeting you exactly where you are.
 
 ## Philosophy
 
@@ -39,8 +39,6 @@ All content is published in dual format: rendered HTML for reading and plain mar
 
 This isn't an afterthought. It's a core architectural decision. Knowledge that can only be consumed through a single interface is knowledge at risk of being lost. By publishing in open, standardized formats, the content outlives any particular rendering technology.
 
-## Who
+## Credits
 
-tibsfox is a technologist, educator, and lifelong tinkerer. The name comes from a handle that's older than the web itself, coined on a BBS in the early 1990s. The work here reflects decades of learning across electronics, software engineering, systems design, and the humanities -- and a persistent belief that the most interesting things happen at the intersections between fields.
-
-You can find the tools that power this site, including the skill-creator system, at the [Skills](/skills/skill-creator/) section.
+This site is powered by a custom static site generator with built-in agent discovery, WordPress coexistence, and quality verification. You can find the tools that power this site, including the skill-creator system, at the [Skills](/skills/skill-creator/) section.
