@@ -1,0 +1,72 @@
+[
+  {
+    "id": "scenario-01",
+    "description": "Clean, low-noise time-series data with few spatial modes",
+    "dataCharacteristics": { "noisy": false, "multiScale": false, "hasControl": false, "highDimensional": false, "timeDelayed": false, "parameterVarying": false, "needsSparse": false, "physicsKnown": false, "streaming": false, "nonlinear": false },
+    "expectedVariant": "DMD",
+    "rationale": "Standard DMD is optimal for clean, simple dynamics"
+  },
+  {
+    "id": "scenario-02",
+    "description": "Noisy experimental sensor data with outliers",
+    "dataCharacteristics": { "noisy": true, "multiScale": false, "hasControl": false, "highDimensional": false, "timeDelayed": false, "parameterVarying": false, "needsSparse": false, "physicsKnown": false, "streaming": false, "nonlinear": false },
+    "expectedVariant": "BOP-DMD",
+    "rationale": "BOP-DMD uses bagging to handle noise robustly"
+  },
+  {
+    "id": "scenario-03",
+    "description": "Multi-scale phenomena with fast and slow dynamics",
+    "dataCharacteristics": { "noisy": false, "multiScale": true, "hasControl": false, "highDimensional": false, "timeDelayed": false, "parameterVarying": false, "needsSparse": false, "physicsKnown": false, "streaming": false, "nonlinear": false },
+    "expectedVariant": "MrDMD",
+    "rationale": "Multi-Resolution DMD separates dynamics at different time scales"
+  },
+  {
+    "id": "scenario-04",
+    "description": "System with known external forcing/actuation inputs",
+    "dataCharacteristics": { "noisy": false, "multiScale": false, "hasControl": true, "highDimensional": false, "timeDelayed": false, "parameterVarying": false, "needsSparse": false, "physicsKnown": false, "streaming": false, "nonlinear": false },
+    "expectedVariant": "DMDc",
+    "rationale": "DMDc explicitly accounts for control/forcing inputs"
+  },
+  {
+    "id": "scenario-05",
+    "description": "Very high-dimensional spatial data (e.g., full CFD field)",
+    "dataCharacteristics": { "noisy": false, "multiScale": false, "hasControl": false, "highDimensional": true, "timeDelayed": false, "parameterVarying": false, "needsSparse": false, "physicsKnown": false, "streaming": false, "nonlinear": false },
+    "expectedVariant": "CDMD",
+    "rationale": "Compressed DMD reduces computational cost for high-dimensional data"
+  },
+  {
+    "id": "scenario-06",
+    "description": "Data from a nonlinear dynamical system requiring lifting",
+    "dataCharacteristics": { "noisy": false, "multiScale": false, "hasControl": false, "highDimensional": false, "timeDelayed": false, "parameterVarying": false, "needsSparse": false, "physicsKnown": false, "streaming": false, "nonlinear": true },
+    "expectedVariant": "EDMD",
+    "rationale": "Extended DMD uses dictionary functions to lift nonlinear dynamics into linear space"
+  },
+  {
+    "id": "scenario-07",
+    "description": "Time-series with limited snapshots requiring delay embedding",
+    "dataCharacteristics": { "noisy": false, "multiScale": false, "hasControl": false, "highDimensional": false, "timeDelayed": true, "parameterVarying": false, "needsSparse": false, "physicsKnown": false, "streaming": false, "nonlinear": false },
+    "expectedVariant": "HankelDMD",
+    "rationale": "Hankel DMD uses time-delay embedding to augment limited snapshot data"
+  },
+  {
+    "id": "scenario-08",
+    "description": "System where physical conservation laws are known a priori",
+    "dataCharacteristics": { "noisy": false, "multiScale": false, "hasControl": false, "highDimensional": false, "timeDelayed": false, "parameterVarying": false, "needsSparse": false, "physicsKnown": true, "streaming": false, "nonlinear": false },
+    "expectedVariant": "PiDMD",
+    "rationale": "Physics-informed DMD enforces known physical constraints on the operator"
+  },
+  {
+    "id": "scenario-09",
+    "description": "Design study where a system parameter varies across experiments",
+    "dataCharacteristics": { "noisy": false, "multiScale": false, "hasControl": false, "highDimensional": false, "timeDelayed": false, "parameterVarying": true, "needsSparse": false, "physicsKnown": false, "streaming": false, "nonlinear": false },
+    "expectedVariant": "ParametricDMD",
+    "rationale": "Parametric DMD interpolates dynamics across parameter values"
+  },
+  {
+    "id": "scenario-10",
+    "description": "Goal is to identify only the most important modes from a rich spectrum",
+    "dataCharacteristics": { "noisy": false, "multiScale": false, "hasControl": false, "highDimensional": false, "timeDelayed": false, "parameterVarying": false, "needsSparse": true, "physicsKnown": false, "streaming": false, "nonlinear": false },
+    "expectedVariant": "SpDMD",
+    "rationale": "Sparse Promoting DMD selects only the dynamically important modes"
+  }
+]
