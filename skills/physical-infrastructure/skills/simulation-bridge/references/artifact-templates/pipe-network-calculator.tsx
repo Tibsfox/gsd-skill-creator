@@ -185,8 +185,7 @@ function PipeNetworkCalculator() {
       )}
 
       <p style={{ fontSize: '11px', color: '#9ca3af', marginTop: '16px' }}>
-        Engineering Disclaimer: All results are approximate. Verify with a licensed Professional
-        Engineer before use in design or construction decisions.
+        {'Engineering Disclaimer: All results are approximate. Verify with a licensed Professional Engineer before use in design or construction decisions.'}
       </p>
     </div>
   );
