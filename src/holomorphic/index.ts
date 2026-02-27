@@ -80,3 +80,12 @@ export {
 
 export { plotEigenvaluesOnUnitCircle } from './renderer/eigenvalue-plot';
 export type { EigenvaluePlotData, EigenvaluePoint } from './renderer/eigenvalue-plot';
+
+export { dmdc } from './dmd/dmd-control';
+export type { DMDcResult } from './dmd/dmd-control';
+
+export { mrdmd } from './dmd/dmd-multiresolution';
+
+export { pidmd } from './dmd/dmd-physics';
+
+export { bopdmd } from './dmd/dmd-robust';
