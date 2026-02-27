@@ -1,0 +1,30 @@
+{{!-- Textbook template: chapter with prev/next navigation --}}
+
+{{>breadcrumb}}
+
+<article class="page-content">
+  <h1>{{page.frontmatter.title}}</h1>
+
+  {{{page.content}}}
+
+  <nav class="chapter-nav" aria-label="Chapter navigation">
+    {{#prevChapter}}
+    <a href="{{url}}" class="chapter-nav__link">
+      <span class="chapter-nav__label">Previous</span>
+      <span class="chapter-nav__title">{{frontmatter.title}}</span>
+    </a>
+    {{/prevChapter}}
+    {{^prevChapter}}
+    <span></span>
+    {{/prevChapter}}
+
+    {{#nextChapter}}
+    <a href="{{url}}" class="chapter-nav__link">
+      <span class="chapter-nav__label">Next</span>
+      <span class="chapter-nav__title">{{frontmatter.title}}</span>
+    </a>
+    {{/nextChapter}}
+  </nav>
+</article>
+
+{{>toc}}
