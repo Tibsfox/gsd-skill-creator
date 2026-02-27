@@ -7,6 +7,12 @@ Each version links to a detailed release notes directory with full feature descr
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
 | [v1.47](release-notes/v1.47/) | Holomorphic Dynamics Educational Pack | 2026-02-27 | 10 | 24 | [retro](release-notes/v1.47/RETROSPECTIVE.md), [lessons](release-notes/v1.47/LESSONS-LEARNED.md) |
+| [v1.46](release-notes/v1.46/) | Upstream Intelligence Pack | 2026-02-26 | 8 | 18 | [retro](release-notes/v1.46/RETROSPECTIVE.md), [lessons](release-notes/v1.46/LESSONS-LEARNED.md) |
+| [v1.45](release-notes/v1.45/) | Agent-Ready Static Site | 2026-02-26 | 8 | 22 | [retro](release-notes/v1.45/RETROSPECTIVE.md), [lessons](release-notes/v1.45/LESSONS-LEARNED.md) |
+| [v1.44](release-notes/v1.44/) | SC Learn PyDMD Dogfood | 2026-02-26 | 5 | 11 | [retro](release-notes/v1.44/RETROSPECTIVE.md), [lessons](release-notes/v1.44/LESSONS-LEARNED.md) |
+| [v1.43](release-notes/v1.43/) | Gource Visualization Pack | 2026-02-26 | 5 | 9 | [retro](release-notes/v1.43/RETROSPECTIVE.md), [lessons](release-notes/v1.43/LESSONS-LEARNED.md) |
+| [v1.42](release-notes/v1.42/) | SC Git Support | 2026-02-26 | 4 | 8 | [retro](release-notes/v1.42/RETROSPECTIVE.md), [lessons](release-notes/v1.42/LESSONS-LEARNED.md) |
+| [v1.41](release-notes/v1.41/) | Claude Code Integration Reliability | 2026-02-26 | 4 | 8 | [retro](release-notes/v1.41/RETROSPECTIVE.md), [lessons](release-notes/v1.41/LESSONS-LEARNED.md) |
 | [v1.40](release-notes/v1.40/) | sc:learn Dogfood Mission | 2026-02-26 | 6 | 12 | [retro](release-notes/v1.40/RETROSPECTIVE.md), [lessons](release-notes/v1.40/LESSONS-LEARNED.md) |
 | [v1.39](release-notes/v1.39/) | GSD-OS Bootstrap & READY Prompt | 2026-02-26 | 9 | 18 | [lessons](release-notes/v1.39/LESSONS-LEARNED.md) |
 | [v1.38](release-notes/v1.38/) | SSH Agent Security | 2026-02-26 | 8 | 16 | |
