@@ -96,3 +96,21 @@ export type {
 
 export { renderMirrorWidget, renderMirrorWidgetStyles } from './aminet-widget.js';
 export type { MirrorStats } from './aminet-widget.js';
+
+// ============================================================================
+// Handoff Quality Panel (Phase 454)
+// ============================================================================
+
+export {
+  renderHandoffPanel,
+  renderDriftTrend,
+  renderFidelityDistribution,
+  renderRecommendations,
+  renderHandoffPanelStyles,
+} from './handoff-panel.js';
+export type {
+  HandoffPanelData,
+  DriftEntry,
+  FidelityDistribution,
+  Recommendation,
+} from './handoff-panel.js';
