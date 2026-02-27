@@ -1,0 +1,402 @@
+[
+  {
+    "id": "corpus-001",
+    "channel": "anthropic-changelog",
+    "diff_summary": "Removed support for claude-2.0 model",
+    "raw_content": "## Breaking Change\nThe claude-2.0 model has been retired and is no longer available via the API. All requests to claude-2.0 will return a 404. Migration required to claude-3 or later.",
+    "expected_type": "breaking",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-002",
+    "channel": "anthropic-docs",
+    "diff_summary": "Breaking change: removed /v1/complete endpoint",
+    "raw_content": "The legacy /v1/complete endpoint has been permanently removed. All users must migrate to /v1/messages. This is a backwards incompatible change.",
+    "expected_type": "breaking",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-003",
+    "channel": "claude-code-releases",
+    "diff_summary": "Removed CLAUDE.md include syntax breaking backward compatibility",
+    "raw_content": "## Breaking Change\nThe @include directive in CLAUDE.md files has been removed. Projects using @include must refactor to use direct file references. Migration required.",
+    "expected_type": "breaking",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-004",
+    "channel": "anthropic-sdk-python",
+    "diff_summary": "Removed deprecated async_complete method from client",
+    "raw_content": "## Breaking Change\nThe async_complete() method has been removed from AnthropicClient. Use messages.create() instead. This is a backwards incompatible change.",
+    "expected_type": "breaking",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-005",
+    "channel": "anthropic-sdk-ts",
+    "diff_summary": "Removed legacy streaming interface breaking existing integrations",
+    "raw_content": "## Breaking Change\nThe Stream class has been removed in favor of MessageStream. All code using new Anthropic().completions.create() must migrate. Migration required.",
+    "expected_type": "breaking",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-006",
+    "channel": "mcp-spec",
+    "diff_summary": "Breaking change: transport protocol version bump removes SSE support",
+    "raw_content": "## Breaking Change\nMCP transport protocol v2 removes Server-Sent Events (SSE) in favor of StreamableHTTP. All MCP server implementations must update. This is backward incompatible.",
+    "expected_type": "breaking",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-007",
+    "channel": "anthropic-changelog",
+    "diff_summary": "Removed support for max_tokens_to_sample parameter",
+    "raw_content": "## Breaking Change\nThe max_tokens_to_sample parameter is no longer accepted. Use max_tokens instead. Requests including the old parameter will return a 400 error.",
+    "expected_type": "breaking",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-008",
+    "channel": "anthropic-docs",
+    "diff_summary": "Deprecated claude-instant-1.2 model scheduled for end of life",
+    "raw_content": "## Deprecation Notice\nThe claude-instant-1.2 model is now deprecated and will be removed on 2026-06-01. Please migrate to claude-3-haiku. End of life notice.",
+    "expected_type": "deprecation",
+    "expected_severity": "P1"
+  },
+  {
+    "id": "corpus-009",
+    "channel": "anthropic-changelog",
+    "diff_summary": "Deprecated the human/assistant prompt format",
+    "raw_content": "## Deprecation\nThe \\n\\nHuman: / \\n\\nAssistant: prompt format is deprecated. Use the messages API format instead. Will be removed in Q3 2026.",
+    "expected_type": "deprecation",
+    "expected_severity": "P1"
+  },
+  {
+    "id": "corpus-010",
+    "channel": "anthropic-sdk-python",
+    "diff_summary": "Deprecated completion() method will be removed in v1.0",
+    "raw_content": "## Deprecation\nThe completion() method is deprecated in favor of messages.create(). It will be removed in the next major version. Please migrate.",
+    "expected_type": "deprecation",
+    "expected_severity": "P1"
+  },
+  {
+    "id": "corpus-011",
+    "channel": "claude-code-releases",
+    "diff_summary": "Deprecated slash command /review in favor of /code-review",
+    "raw_content": "## Deprecation\nThe /review slash command is deprecated and will be removed in a future release. Use /code-review instead. Sunset scheduled for March 2026.",
+    "expected_type": "deprecation",
+    "expected_severity": "P1"
+  },
+  {
+    "id": "corpus-012",
+    "channel": "mcp-spec",
+    "diff_summary": "Deprecated resources/list without pagination parameter",
+    "raw_content": "## Deprecation Notice\nCalling resources/list without the cursor parameter is now deprecated. All implementations should include pagination support. Will be removed in MCP 2.0.",
+    "expected_type": "deprecation",
+    "expected_severity": "P1"
+  },
+  {
+    "id": "corpus-013",
+    "channel": "anthropic-sdk-ts",
+    "diff_summary": "Deprecated Anthropic.HUMAN_PROMPT and Anthropic.AI_PROMPT constants",
+    "raw_content": "## Deprecation\nThe HUMAN_PROMPT and AI_PROMPT string constants are deprecated. Use the messages API which does not require prompt formatting. End of life Q4 2026.",
+    "expected_type": "deprecation",
+    "expected_severity": "P1"
+  },
+  {
+    "id": "corpus-014",
+    "channel": "anthropic-changelog",
+    "diff_summary": "Added support for tool_use with streaming responses",
+    "raw_content": "## New Feature\nTool use is now supported in streaming mode. Added new content_block events for tool_use and tool_result. Now supports parallel tool execution.",
+    "expected_type": "enhancement",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-015",
+    "channel": "claude-code-releases",
+    "diff_summary": "New feature: MCP tool support added to Claude Code",
+    "raw_content": "## New Feature\nClaude Code now supports MCP (Model Context Protocol) tools natively. Added support for connecting to MCP servers via stdio and SSE transports. Introducing tool discovery.",
+    "expected_type": "enhancement",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-016",
+    "channel": "anthropic-docs",
+    "diff_summary": "Added new vision capabilities documentation",
+    "raw_content": "## Enhancement\nNew documentation for Claude's vision capabilities. Now supports analyzing images in messages. Introducing multi-modal input support with base64 and URL references.",
+    "expected_type": "enhancement",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-017",
+    "channel": "anthropic-sdk-python",
+    "diff_summary": "Added support for new beta features header in SDK",
+    "raw_content": "## Enhancement\nIntroducing beta features support. The SDK now supports passing anthropic-beta headers for accessing preview features. New feature for prompt caching.",
+    "expected_type": "enhancement",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-018",
+    "channel": "mcp-servers",
+    "diff_summary": "New feature: added PostgreSQL MCP server to ecosystem",
+    "raw_content": "## New Server\nIntroducing a new PostgreSQL MCP server for database interactions. Added support for queries, schema inspection, and migration management.",
+    "expected_type": "enhancement",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-019",
+    "channel": "anthropic-cookbook",
+    "diff_summary": "Added new prompt caching cookbook example",
+    "raw_content": "## New Example\nIntroducing a comprehensive prompt caching cookbook. Added new patterns for reducing token usage with cache_control blocks. Now supports system prompt caching.",
+    "expected_type": "enhancement",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-020",
+    "channel": "anthropic-sdk-ts",
+    "diff_summary": "Added support for extended thinking in TypeScript SDK",
+    "raw_content": "## New Feature\nThe TypeScript SDK now supports extended thinking (chain-of-thought). Introducing the thinking content block type and budget_tokens parameter.",
+    "expected_type": "enhancement",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-021",
+    "channel": "claude-code-releases",
+    "diff_summary": "Now supports custom slash commands from .claude/commands/",
+    "raw_content": "## Enhancement\nClaude Code now supports user-defined slash commands. Add .md files to .claude/commands/ or ~/.claude/commands/ and they become available as /commands. Introducing skill loading.",
+    "expected_type": "enhancement",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-022",
+    "channel": "anthropic-status",
+    "diff_summary": "Security vulnerability patched in API gateway authentication",
+    "raw_content": "## Security Fix\nPatched a security vulnerability in the API gateway that could allow authentication bypass under specific conditions. CVE-2026-4821 resolved. All API keys rotated.",
+    "expected_type": "security",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-023",
+    "channel": "anthropic-sdk-python",
+    "diff_summary": "Security fix: patched token injection vulnerability in prompt formatting",
+    "raw_content": "## Security Update\nFixed a vulnerability where specially crafted input could inject additional tokens into prompts. CVE-2026-3392 has been assigned. Patched security issue in input sanitization.",
+    "expected_type": "security",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-024",
+    "channel": "anthropic-sdk-ts",
+    "diff_summary": "Security: fixed credential exposure vulnerability in error logs",
+    "raw_content": "## Security Patch\nFixed a security issue where API keys could be exposed in error stack traces when using debug logging. CVE-2026-5510. Vulnerability in credential handling patched.",
+    "expected_type": "security",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-025",
+    "channel": "mcp-spec",
+    "diff_summary": "Security advisory: authentication bypass in MCP transport layer",
+    "raw_content": "## Security Advisory\nA vulnerability was discovered in the MCP transport authentication handshake. CVE-2026-6201. Allows unauthenticated access to tools. Security patch available.",
+    "expected_type": "security",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-026",
+    "channel": "claude-code-releases",
+    "diff_summary": "Security: patched sandbox escape vulnerability in Bash tool",
+    "raw_content": "## Security Fix\nPatched a security vulnerability where the Bash tool could escape its sandbox under certain conditions. CVE-2026-7788. All users should update immediately.",
+    "expected_type": "security",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-027",
+    "channel": "anthropic-changelog",
+    "diff_summary": "Security patch for API rate limiting bypass vulnerability",
+    "raw_content": "## Security Update\nFixed a vulnerability that allowed bypassing API rate limits through request header manipulation. CVE-2026-8103. Security improvement to rate limiting system.",
+    "expected_type": "security",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-028",
+    "channel": "anthropic-changelog",
+    "diff_summary": "Performance improvement: 40% faster token generation for claude-3.5-sonnet",
+    "raw_content": "## Performance\nOptimized the inference pipeline for claude-3.5-sonnet, achieving 40% faster token generation. Reduced latency from 45ms to 27ms per token. Throughput significantly improved.",
+    "expected_type": "optimization",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-029",
+    "channel": "anthropic-docs",
+    "diff_summary": "Performance optimization guide for batch processing added",
+    "raw_content": "## Optimization Guide\nNew documentation on optimized batch processing patterns. Demonstrates faster parallel request handling with reduced latency using the batches API.",
+    "expected_type": "optimization",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-030",
+    "channel": "anthropic-sdk-python",
+    "diff_summary": "Optimized connection pooling for faster API requests",
+    "raw_content": "## Performance Improvement\nOptimized HTTP connection pooling in the Python SDK. Reduced connection overhead by 60%. Faster request throughput for high-volume applications.",
+    "expected_type": "optimization",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-031",
+    "channel": "anthropic-sdk-ts",
+    "diff_summary": "Performance: reduced memory usage in streaming responses by 35%",
+    "raw_content": "## Optimization\nOptimized memory allocation during streaming response processing. Reduced peak memory usage by 35%. Faster garbage collection with smaller buffer allocations.",
+    "expected_type": "optimization",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-032",
+    "channel": "claude-code-releases",
+    "diff_summary": "Optimized file indexing for faster codebase search performance",
+    "raw_content": "## Performance\nOptimized the file indexing engine for large codebases. Search performance improved by 50%. Reduced latency for Grep and Glob operations. Faster startup time.",
+    "expected_type": "optimization",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-033",
+    "channel": "mcp-servers",
+    "diff_summary": "Performance: optimized MCP server startup time reduced by 70%",
+    "raw_content": "## Performance Update\nOptimized MCP server initialization. Startup time reduced from 3s to 0.9s. Faster tool discovery and capability negotiation. Throughput improved.",
+    "expected_type": "optimization",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-034",
+    "channel": "anthropic-docs",
+    "diff_summary": "Updated documentation formatting and typo fixes",
+    "raw_content": "Minor formatting changes to the API reference documentation. Fixed several typos in the authentication guide. Updated code examples for clarity.",
+    "expected_type": "informational",
+    "expected_severity": "P3"
+  },
+  {
+    "id": "corpus-035",
+    "channel": "anthropic-blog",
+    "diff_summary": "Published blog post about responsible AI development practices",
+    "raw_content": "New blog post discussing Anthropic's approach to responsible AI development. Covers safety research updates and alignment methodology. Informational post with no API changes.",
+    "expected_type": "informational",
+    "expected_severity": "P3"
+  },
+  {
+    "id": "corpus-036",
+    "channel": "anthropic-cookbook",
+    "diff_summary": "Updated documentation for existing classification cookbook",
+    "raw_content": "Minor updates to the text classification cookbook. Fixed a typo in the system prompt example. Clarified the output format description. No functional changes.",
+    "expected_type": "informational",
+    "expected_severity": "P3"
+  },
+  {
+    "id": "corpus-037",
+    "channel": "claude-code-issues",
+    "diff_summary": "Community discussion about best practices for CLAUDE.md files",
+    "raw_content": "Community thread discussing recommended patterns for CLAUDE.md project instructions. Various user experiences shared. Informational discussion with no code changes.",
+    "expected_type": "informational",
+    "expected_severity": "P3"
+  },
+  {
+    "id": "corpus-038",
+    "channel": "anthropic-status",
+    "diff_summary": "Scheduled maintenance window announced for March 15 2026",
+    "raw_content": "Scheduled maintenance notification for March 15, 2026 from 02:00-04:00 UTC. Expected brief interruption to API services. Informational notice. No action required at this time.",
+    "expected_type": "informational",
+    "expected_severity": "P3"
+  },
+  {
+    "id": "corpus-039",
+    "channel": "mcp-spec",
+    "diff_summary": "Updated documentation clarifying MCP capability negotiation process",
+    "raw_content": "Clarified the capability negotiation section of the MCP specification. Fixed a typo in the sequence diagram. Updated examples for readability. No protocol changes.",
+    "expected_type": "informational",
+    "expected_severity": "P3"
+  },
+  {
+    "id": "corpus-040",
+    "channel": "anthropic-blog",
+    "diff_summary": "Published research paper summary on constitutional AI improvements",
+    "raw_content": "Blog post summarizing recent constitutional AI research findings. Discusses improvements to harmlessness training. Informational update with no product changes.",
+    "expected_type": "informational",
+    "expected_severity": "P3"
+  },
+  {
+    "id": "corpus-041",
+    "channel": "claude-code-issues",
+    "diff_summary": "Updated documentation for issue template with clearer guidelines",
+    "raw_content": "Updated the issue template to include clearer reproduction steps guidelines. Fixed a typo in the template header. Minor documentation improvement.",
+    "expected_type": "informational",
+    "expected_severity": "P3"
+  },
+  {
+    "id": "corpus-042",
+    "channel": "anthropic-changelog",
+    "diff_summary": "Added support for new citation content blocks in messages API",
+    "raw_content": "## New Feature\nThe messages API now supports citation content blocks. Introducing source attribution for model responses. Added new cite and cited_content block types.",
+    "expected_type": "enhancement",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-043",
+    "channel": "anthropic-blog",
+    "diff_summary": "Deprecated the legacy usage dashboard in console",
+    "raw_content": "## Deprecation\nThe legacy usage dashboard in the Anthropic Console is deprecated. A new analytics dashboard will replace it. End of life for the old dashboard is April 2026.",
+    "expected_type": "deprecation",
+    "expected_severity": "P1"
+  },
+  {
+    "id": "corpus-044",
+    "channel": "mcp-servers",
+    "diff_summary": "Updated documentation for filesystem MCP server README",
+    "raw_content": "Updated the filesystem MCP server README with clearer installation instructions. Fixed a typo in the configuration section. No functional changes to the server.",
+    "expected_type": "informational",
+    "expected_severity": "P3"
+  },
+  {
+    "id": "corpus-045",
+    "channel": "anthropic-cookbook",
+    "diff_summary": "Optimized embedding generation example for faster batch processing",
+    "raw_content": "## Performance Update\nOptimized the embedding generation cookbook example. Demonstrates faster batch processing with parallel requests. Reduced latency by 45% in the example.",
+    "expected_type": "optimization",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-046",
+    "channel": "claude-code-issues",
+    "diff_summary": "Security: reported vulnerability in hook configuration parsing",
+    "raw_content": "## Security Report\nA vulnerability was reported in hook configuration parsing that could allow command injection. CVE-2026-9912. Security fix deployed in latest release.",
+    "expected_type": "security",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-047",
+    "channel": "anthropic-status",
+    "diff_summary": "Performance: optimized API gateway routing reduced p99 latency",
+    "raw_content": "## Infrastructure Update\nOptimized API gateway routing. Reduced p99 latency from 200ms to 120ms. Faster request processing across all model endpoints. Throughput increased by 25%.",
+    "expected_type": "optimization",
+    "expected_severity": "P2"
+  },
+  {
+    "id": "corpus-048",
+    "channel": "anthropic-docs",
+    "diff_summary": "Breaking change: removed support for XML tool_use format",
+    "raw_content": "## Breaking Change\nThe XML-based tool_use format has been removed from the API. All tool use must now use the JSON content block format. Migration required for all tool-using applications.",
+    "expected_type": "breaking",
+    "expected_severity": "P0"
+  },
+  {
+    "id": "corpus-049",
+    "channel": "mcp-servers",
+    "diff_summary": "Deprecated the legacy stdio transport adapter in MCP servers",
+    "raw_content": "## Deprecation\nThe legacy stdio transport adapter is deprecated in favor of the new StreamableHTTP transport. Will be removed in the next major release. End of life Q2 2026.",
+    "expected_type": "deprecation",
+    "expected_severity": "P1"
+  },
+  {
+    "id": "corpus-050",
+    "channel": "anthropic-blog",
+    "diff_summary": "Security advisory: third-party integration credential exposure",
+    "raw_content": "## Security Advisory\nA security vulnerability was identified in a third-party integration that could expose API credentials. CVE-2026-1155. All affected users notified. Vulnerability patched.",
+    "expected_type": "security",
+    "expected_severity": "P0"
+  }
+]
