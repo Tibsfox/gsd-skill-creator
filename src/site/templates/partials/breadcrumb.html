@@ -1,0 +1,15 @@
+{{#breadcrumbs.length}}
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb__item">
+      <a href="/" class="breadcrumb__link">Home</a>
+    </li>
+    {{#breadcrumbs}}
+    <li class="breadcrumb__item">
+      {{#url}}<a href="{{url}}" class="breadcrumb__link">{{label}}</a>{{/url}}
+      {{^url}}<span aria-current="page">{{label}}</span>{{/url}}
+    </li>
+    {{/breadcrumbs}}
+  </ol>
+</nav>
+{{/breadcrumbs.length}}
