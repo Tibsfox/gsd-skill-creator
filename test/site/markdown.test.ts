@@ -100,7 +100,9 @@ describe('Markdown Processor', () => {
 
     it('converts multiple citations [@a; @b] to grouped links', () => {
       const { html } = processMarkdown('Research [@alpha; @beta] shows...');
-      expect(html).toContain('[1, 2]');
+      expect(html).toContain('<sup class="cite">');
+      expect(html).toContain('[1]</a>');
+      expect(html).toContain('[2]</a>');
       expect(html).toContain('href="/bibliography/#alpha"');
       expect(html).toContain('href="/bibliography/#beta"');
     });
@@ -141,7 +143,8 @@ describe('Markdown Processor', () => {
   describe('edge cases', () => {
     it('handles special characters in headings with slugified IDs', () => {
       const { html } = processMarkdown('## Hello & World! (2026)');
-      expect(html).toContain('id="hello--world-2026"');
+      // & and ! are stripped, () stripped, spaces become hyphens
+      expect(html).toContain('id="hello-world-2026"');
     });
 
     it('returns empty html for empty markdown', () => {
