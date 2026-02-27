@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd.tools/schemas/dacp/fidelity-decision.schema.json",
+  "description": "DACP Fidelity Decision: input factors the fidelity model evaluates to determine the appropriate fidelity level for a handoff.",
+  "type": "object",
+  "properties": {
+    "handoff_type": {
+      "type": "string"
+    },
+    "data_complexity": {
+      "type": "string",
+      "enum": [
+        "none",
+        "simple",
+        "structured",
+        "complex"
+      ]
+    },
+    "historical_drift_rate": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "available_skills": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "token_budget_remaining": {
+      "type": "number",
+      "minimum": 0
+    },
+    "safety_critical": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "handoff_type",
+    "data_complexity",
+    "historical_drift_rate",
+    "available_skills",
+    "token_budget_remaining",
+    "safety_critical"
+  ],
+  "additionalProperties": false
+}

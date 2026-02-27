@@ -36,14 +36,27 @@ import { tmpdir } from 'node:os';
 // ============================================================================
 
 let schemasDir: string;
-let ajv: InstanceType<typeof Ajv2020>;
+const validators = new Map<string, (data: unknown) => boolean>();
+
+/**
+ * Get or create a compiled Ajv validator for a schema file.
+ * Caches validators to avoid Ajv's duplicate $id error.
+ */
+function getValidator(filename: string): (data: unknown) => boolean {
+  let validate = validators.get(filename);
+  if (!validate) {
+    const schema = JSON.parse(readFileSync(join(schemasDir, filename), 'utf-8'));
+    const ajv = new Ajv2020({ allErrors: true, strict: false });
+    addFormats(ajv);
+    validate = ajv.compile(schema) as (data: unknown) => boolean;
+    validators.set(filename, validate);
+  }
+  return validate;
+}
 
 beforeAll(() => {
   schemasDir = mkdtempSync(join(tmpdir(), 'dacp-schemas-'));
   generateDACPSchemas(schemasDir);
-
-  ajv = new Ajv2020({ allErrors: true, strict: false });
-  addFormats(ajv);
 });
 
 // ============================================================================
@@ -314,46 +327,40 @@ describe('generateSingleSchema', () => {
 // ============================================================================
 
 describe('Valid fixture validation', () => {
-  function loadAndValidate(filename: string, fixture: Record<string, unknown>): boolean {
-    const schema = JSON.parse(readFileSync(join(schemasDir, filename), 'utf-8'));
-    const validate = ajv.compile(schema);
-    return validate(fixture) as boolean;
-  }
-
   it('valid BundleManifest fixture passes', () => {
-    expect(loadAndValidate('bundle-manifest.schema.json', validBundleManifest)).toBe(true);
+    expect(getValidator('bundle-manifest.schema.json')(validBundleManifest)).toBe(true);
   });
 
   it('valid HandoffOutcome fixture passes', () => {
-    expect(loadAndValidate('handoff-outcome.schema.json', validHandoffOutcome)).toBe(true);
+    expect(getValidator('handoff-outcome.schema.json')(validHandoffOutcome)).toBe(true);
   });
 
   it('valid DriftScore fixture passes', () => {
-    expect(loadAndValidate('drift-score.schema.json', validDriftScore)).toBe(true);
+    expect(getValidator('drift-score.schema.json')(validDriftScore)).toBe(true);
   });
 
   it('valid BundleTemplate fixture passes', () => {
-    expect(loadAndValidate('bundle-template.schema.json', validBundleTemplate)).toBe(true);
+    expect(getValidator('bundle-template.schema.json')(validBundleTemplate)).toBe(true);
   });
 
   it('valid FidelityDecision fixture passes', () => {
-    expect(loadAndValidate('fidelity-decision.schema.json', validFidelityDecision)).toBe(true);
+    expect(getValidator('fidelity-decision.schema.json')(validFidelityDecision)).toBe(true);
   });
 
   it('valid ScriptCatalogEntry fixture passes', () => {
-    expect(loadAndValidate('script-catalog-entry.schema.json', validScriptCatalogEntry)).toBe(true);
+    expect(getValidator('script-catalog-entry.schema.json')(validScriptCatalogEntry)).toBe(true);
   });
 
   it('valid SchemaLibraryEntry fixture passes', () => {
-    expect(loadAndValidate('schema-library-entry.schema.json', validSchemaLibraryEntry)).toBe(true);
+    expect(getValidator('schema-library-entry.schema.json')(validSchemaLibraryEntry)).toBe(true);
   });
 
   it('valid HandoffPattern fixture passes', () => {
-    expect(loadAndValidate('handoff-pattern.schema.json', validHandoffPattern)).toBe(true);
+    expect(getValidator('handoff-pattern.schema.json')(validHandoffPattern)).toBe(true);
   });
 
   it('valid DACPStatus fixture passes', () => {
-    expect(loadAndValidate('dacp-status.schema.json', validDACPStatus)).toBe(true);
+    expect(getValidator('dacp-status.schema.json')(validDACPStatus)).toBe(true);
   });
 });
 
@@ -362,21 +369,15 @@ describe('Valid fixture validation', () => {
 // ============================================================================
 
 describe('Invalid fixture rejection', () => {
-  function loadAndValidate(filename: string, fixture: Record<string, unknown>): boolean {
-    const schema = JSON.parse(readFileSync(join(schemasDir, filename), 'utf-8'));
-    const validate = ajv.compile(schema);
-    return validate(fixture) as boolean;
-  }
-
   it('BundleManifest missing version field rejected', () => {
     const invalid = { ...validBundleManifest };
     delete (invalid as Record<string, unknown>).version;
-    expect(loadAndValidate('bundle-manifest.schema.json', invalid)).toBe(false);
+    expect(getValidator('bundle-manifest.schema.json')(invalid)).toBe(false);
   });
 
   it('HandoffOutcome with intent_alignment out of range rejected', () => {
     const invalid = { ...validHandoffOutcome, intent_alignment: 1.5 };
-    expect(loadAndValidate('handoff-outcome.schema.json', invalid)).toBe(false);
+    expect(getValidator('handoff-outcome.schema.json')(invalid)).toBe(false);
   });
 
   it('DriftScore with score out of range rejected', () => {
@@ -384,18 +385,18 @@ describe('Invalid fixture rejection', () => {
       ...validDriftScore,
       score: -0.1,
     };
-    expect(loadAndValidate('drift-score.schema.json', invalid)).toBe(false);
+    expect(getValidator('drift-score.schema.json')(invalid)).toBe(false);
   });
 
   it('BundleTemplate missing name rejected', () => {
     const invalid = { ...validBundleTemplate };
     delete (invalid as Record<string, unknown>).name;
-    expect(loadAndValidate('bundle-template.schema.json', invalid)).toBe(false);
+    expect(getValidator('bundle-template.schema.json')(invalid)).toBe(false);
   });
 
   it('FidelityDecision with invalid data_complexity rejected', () => {
     const invalid = { ...validFidelityDecision, data_complexity: 'extreme' };
-    expect(loadAndValidate('fidelity-decision.schema.json', invalid)).toBe(false);
+    expect(getValidator('fidelity-decision.schema.json')(invalid)).toBe(false);
   });
 });
 
@@ -417,9 +418,7 @@ describe('Round-trip consistency', () => {
       zodValid = false;
     }
 
-    const schema = JSON.parse(readFileSync(join(schemasDir, jsonSchemaFilename), 'utf-8'));
-    const validate = ajv.compile(schema);
-    const jsonSchemaValid = validate(fixture) as boolean;
+    const jsonSchemaValid = getValidator(jsonSchemaFilename)(fixture);
 
     return { zodValid, jsonSchemaValid };
   }

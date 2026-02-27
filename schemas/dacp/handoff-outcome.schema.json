@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd.tools/schemas/dacp/handoff-outcome.schema.json",
+  "description": "DACP Handoff Outcome: metrics from a receiving agent processing a bundle, including intent alignment, rework, and verification results.",
+  "type": "object",
+  "properties": {
+    "bundle_id": {
+      "type": "string"
+    },
+    "fidelity_level": {
+      "anyOf": [
+        {
+          "type": "number",
+          "const": 0
+        },
+        {
+          "type": "number",
+          "const": 1
+        },
+        {
+          "type": "number",
+          "const": 2
+        },
+        {
+          "type": "number",
+          "const": 3
+        },
+        {
+          "type": "number",
+          "const": 4
+        }
+      ]
+    },
+    "intent_alignment": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "rework_required": {
+      "type": "boolean"
+    },
+    "tokens_spent_interpreting": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "code_modifications": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "verification_pass": {
+      "type": "boolean"
+    },
+    "timestamp": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "bundle_id",
+    "fidelity_level",
+    "intent_alignment",
+    "rework_required",
+    "tokens_spent_interpreting",
+    "code_modifications",
+    "verification_pass",
+    "timestamp"
+  ],
+  "additionalProperties": false
+}
