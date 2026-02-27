@@ -187,6 +187,14 @@ src/                        # TypeScript library
 │   │                       #   coverage-mapper, consistency-checker, eight-layer-verifier
 │   └── refinement/         # Refinement and reporting: patch-generator, ticket-generator,
 │                           #   skill-refiner, report-builder, safety-validator
+├── holomorphic/            # Holomorphic dynamics educational pack (v1.47)
+│   ├── types.ts            # Shared types (ComplexNumber, Orbit, FixedPoint, etc.)
+│   ├── complex/            # Complex arithmetic and iteration engine
+│   ├── renderer/           # Fractal renderer (Mandelbrot, Julia, bifurcation)
+│   ├── dynamics/           # Skill-creator dynamical model
+│   ├── dmd/                # DMD core + 4 variants + Koopman/EDMD + bridge
+│   ├── modules/HD-01..10/  # 10 educational modules with content and Try Sessions
+│   └── skills/             # Progressive disclosure SKILL.md
 ├── cli/                    # CLI command modules
 ├── cli.ts                  # CLI entry point
 └── index.ts                # Module exports
