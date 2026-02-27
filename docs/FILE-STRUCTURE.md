@@ -1,345 +1,94 @@
 # File Structure
 
-## User Project Layout
+> Last updated: v1.49.5 (2026-02-27)
+
+## Root Directory Layout
 
 ```
-your-project/
-├── .claude/
-│   ├── skills/                      # Skill storage
-│   │   └── <skill-name>/
-│   │       ├── SKILL.md            # Main skill file (frontmatter + content)
-│   │       ├── reference.md        # Optional reference material
-│   │       └── scripts/            # Optional automation scripts
-│   ├── agents/                      # Generated/custom agents
-│   │   └── <agent-name>.md         # Composite agent file
-│   ├── teams/                       # Agent team configurations
-│   │   └── <team-name>.json        # Team config (members, topology)
-│   ├── workflows/                   # Skill workflow definitions (v1.7)
-│   │   └── <name>.workflow.yaml    # Multi-step skill chains
-│   ├── roles/                       # Skill role definitions (v1.7)
-│   │   └── <name>.role.yaml        # Behavioral constraints
-│   ├── bundles/                     # Work bundle definitions (v1.7)
-│   │   └── <name>.bundle.yaml      # Project-phase skill sets
-│   └── settings.json               # Claude Code settings (hooks, etc.)
-│
-├── .planning/
-│   ├── patterns/                    # Observation data
-│   │   ├── sessions.jsonl          # Session observations (append-only)
-│   │   ├── suggestions.json        # Skill suggestion state
-│   │   ├── feedback.jsonl          # User corrections/feedback
-│   │   ├── agent-suggestions.json  # Agent suggestion state
-│   │   ├── workflow-runs.jsonl     # Workflow execution state (v1.7)
-│   │   ├── events.jsonl            # Inter-skill events (v1.7)
-│   │   └── snapshots.jsonl         # Session snapshots (v1.7)
-│   ├── hooks/                       # Work state persistence (v1.7)
-│   │   └── current-work.yaml       # Active task/skills/checkpoint
-│   ├── PROJECT.md                  # Project context
-│   ├── REQUIREMENTS.md             # Requirements specification
-│   ├── ROADMAP.md                  # Development roadmap
-│   └── STATE.md                    # Session memory
-│
-└── node_modules/
-    └── dynamic-skill-creator/       # If installed as dependency
+gsd-skill-creator/
+├── config/              Configuration templates and profiles
+│   ├── crews/           Crew deployment configs
+│   ├── evaluation/      E2E evaluation configs
+│   ├── profiles/        Sandbox profiles (exec, main, scout, verify)
+│   └── reserved-names.json
+├── contrib/             Contribution workflow (downstream/upstream)
+├── data/                Static data files
+│   ├── chipset/         Chipset YAML definitions
+│   ├── citations/       Citation database, cache, exports
+│   ├── dependencies/    Dependency graph data (3 JSON files)
+│   ├── domains/         MFE domain data (10 JSON files, 451 primitives)
+│   ├── domain-index.json
+│   └── schemas/         JSON schemas (DACP, primitive registry)
+├── desktop/             Vite webview frontend (Tauri v2)
+├── dist/                Build output (gitignored)
+├── docs/                Documentation (47+ markdown files)
+├── examples/            Example skills, agents, and teams
+├── extra/               Linux system integration files
+│   ├── completions/     Shell completions (bash, zsh, fish)
+│   ├── linux/           .desktop entry, AppStream metadata
+│   ├── logo/            Logo assets (placeholder)
+│   ├── man/             Man pages in scdoc format
+│   └── systemd/         systemd user service unit
+├── infra/               Infrastructure configs
+│   ├── dashboard/       Generated HTML dashboard (gitignored)
+│   ├── minecraft/       Minecraft knowledge world
+│   └── ...              17 other infrastructure subdirectories
+├── packaging/           Distro packaging definitions
+│   ├── debian/          Debian source package (control, rules, etc.)
+│   └── rpm/             RPM spec file
+├── packs/               Educational pack catalog
+├── project-claude/      Claude project config source (install.cjs)
+├── projects/            User workspace (gitignored)
+├── scripts/             Utility scripts
+│   ├── bin/             CLI wrappers (gsd-stack)
+│   ├── bootstrap.sh     Project bootstrap script
+│   ├── serve-dashboard.mjs
+│   └── ...              Check/validation scripts
+├── skills/              Installable skill packs (9 packs)
+├── src/                 TypeScript library + CLI (72 modules)
+│   ├── fs/              Filesystem utilities (config, XDG, scaffold, etc.)
+│   └── ...              70+ domain modules
+├── src-tauri/           Rust backend (Tauri v2)
+│   └── src/             Rust source (api, security, xdg, etc.)
+├── test/                Test suites (12 directories)
+│   └── fixtures/        Test fixture data
+├── tests/               Legacy test directory (integration, chipset, security)
+└── www/                 Web staging (site, tools)
 ```
 
-## Source Code Layout
+## Hidden Directories
 
 ```
-src/                        # TypeScript library
-├── storage/                # Skill storage (SkillStore, PatternStore, SkillIndex)
-├── types/                  # TypeScript type definitions
-├── workflows/              # CLI workflows (create, list, search)
-├── application/            # Skill application + pipeline (v1.8)
-│   └── stages/             # Pipeline stages (budget, cache-order, model-filter)
-├── observation/            # Session observation
-├── detection/              # Pattern detection
-├── learning/               # Feedback learning
-├── composition/            # Skill extension (dependency graph, resolver)
-├── agents/                 # Agent composition
-├── embeddings/             # Local embedding infrastructure (v1.1)
-├── conflicts/              # Conflict detection (v1.1)
-├── activation/             # Activation scoring (v1.1)
-├── testing/                # Test infrastructure (v1.2)
-├── simulation/             # Activation simulation (v1.2)
-├── calibration/            # Threshold tuning (v1.2)
-├── teams/                  # Agent team management (v1.4)
-├── discovery/              # Pattern discovery from session logs (v1.5)
-├── orchestrator/           # GSD Master Orchestration Agent (v1.7)
-│   ├── discovery/          # Filesystem discovery
-│   ├── state/              # Project state reading
-│   ├── intent/             # Intent classification
-│   ├── lifecycle/          # Lifecycle coordination
-│   ├── verbosity/          # Output control
-│   ├── gates/              # HITL approval gates
-│   └── extension/          # gsd-skill-creator detection
-├── work-state/             # Persistent work state (v1.7)
-├── session-continuity/     # Session snapshots (v1.7)
-├── ephemeral-observations/ # Tiered observations (v1.7)
-├── workflows/              # Skill workflows (v1.7)
-├── roles/                  # Skill roles (v1.7)
-├── bundles/                # Work bundles (v1.7)
-├── events/                 # Inter-skill communication (v1.7)
-├── capabilities/           # Capability-aware planning (v1.8)
-├── validation/             # Spec alignment & validation (v1.9+)
-├── safety/                 # Security & integrity (v1.10)
-├── disclosure/             # Progressive disclosure (v1.9)
-├── portability/            # Cross-platform export (v1.9)
-├── evaluator/              # Evaluator-optimizer (v1.9)
-├── mcp/                    # MCP distribution (v1.9)
-├── retrieval/              # Agentic RAG (v1.9)
-├── hooks/                  # Hook safety (v1.10)
-├── integration/            # GSD integration layer (v1.11) + MFE pipeline (v1.35)
-│   ├── monitoring/         # Passive monitoring
-│   └── config/             # Configuration reader, schema, terminal config
-├── dashboard/              # Planning docs dashboard (v1.12+)
-│   ├── parser.ts           # Markdown-to-HTML parser
-│   ├── renderer.ts         # HTML page renderer
-│   ├── generator.ts        # Multi-page generator pipeline
-│   ├── collectors/         # Data collectors (git, topology, activity, budget, staging)
-│   ├── metrics/            # Live metrics engine (hot/warm/cold tiers)
-│   ├── design-system/      # CSS tokens, entity shapes, gantry strip
-│   └── console/            # Console page, question cards, settings
-├── identifiers/            # Domain-prefixed identifiers (v1.18)
-├── terminal/               # Terminal launcher, health, session (v1.15)
-├── launcher/               # Dashboard + terminal dev launcher (v1.15)
-├── console/                # Filesystem message bus (v1.16)
-├── amiga/                  # AMIGA mission infrastructure (v1.23)
-│   ├── mc1/                # MC-1 Control Surface (dashboard, parser, alerts, gates)
-│   ├── me1/                # ME-1 Mission Environment (provisioner, phase engine, swarm)
-│   ├── ce1/                # CE-1 Commons Engine (attribution, weighting, dividends)
-│   ├── gl1/                # GL-1 Governance Layer (charter, rules engine, policy)
-│   ├── icd/                # 4 typed Inter-Component Definitions
-│   └── integration/        # Full-stack controller and meta-mission harness
-├── agc/                    # Apollo AGC Block II simulator (v1.23)
-│   ├── cpu/                # 38-instruction CPU, ones' complement ALU
-│   ├── memory/             # Bank-switched memory (EBANK/FBANK/superbank)
-│   ├── interrupts/         # 10-vector interrupt system, I/O channels
-│   ├── timing/             # 2.048 MHz timing model
-│   ├── executive/          # Priority-based cooperative scheduler (8 core sets)
-│   ├── waitlist/           # Timer-driven task queue (9 entries)
-│   ├── bailout/            # Restart protection, 1202 alarm reproduction
-│   ├── dsky/               # Display model, keyboard, VERB/NOUN processor
-│   ├── monitor/            # Executive Monitor with scheduling visualization
-│   ├── tools/              # yaYUL assembler, debugger, disassembler, rope loader
-│   └── curriculum/         # 11 chapters, 8 exercises, learn mode
-├── engines/                # Mathematical foundations engines (v1.35)
-│   ├── dependency-graph    # Prerequisite graph traversal
-│   ├── path-finder         # Learning path computation
-│   ├── plane-classifier    # Domain classification
-│   ├── plane-navigator     # Concept space navigation
-│   ├── composition-engine  # Knowledge composition
-│   ├── proof-composer      # Proof assembly
-│   ├── property-checkers   # Domain property verification
-│   └── verification-engine # End-to-end verification
-├── learn/                  # sc:learn knowledge ingestion pipeline (v1.35)
-│   ├── acquirer            # Source acquisition
-│   ├── sanitizer           # Input sanitization
-│   ├── hitl-gate           # Human-in-the-loop approval gate
-│   ├── analyzer            # Content analysis
-│   ├── extractor           # Knowledge extraction
-│   ├── dependency-wirer    # Dependency graph wiring
-│   ├── dedup-prefilter     # Deduplication pre-filter
-│   ├── semantic-comparator # Semantic similarity comparison
-│   ├── merge-engine        # Knowledge merge
-│   ├── changeset-manager   # Changeset tracking
-│   ├── report-generator    # Ingestion report generation
-│   ├── generators/         # Skill/agent generators
-│   └── heuristics/         # Scoring heuristics
-├── citations/              # Citation management and source attribution (v1.36)
-│   ├── types/              # Citation type definitions
-│   ├── extractor/          # Citation extraction from sources
-│   ├── store/              # Citation persistence
-│   ├── resolver/           # Cross-reference resolution (CrossRef, OpenAlex, NASA NTRS)
-│   ├── generator/          # Format output (BibTeX, APA7, Chicago, MLA, Mustache)
-│   ├── learn-integration/  # sc:learn pipeline integration
-│   ├── discovery/          # Source discovery
-│   ├── dashboard/          # Citation dashboard
-│   └── space-between/      # Inter-citation analysis
-├── plane/                  # Complex plane learning framework (v1.37)
-│   ├── types               # SkillPosition (theta, r), domain types
-│   ├── arithmetic          # Complex arithmetic operations
-│   ├── activation          # Tangent-line activation functions
-│   ├── signal-classification # Signal classification in complex plane
-│   ├── position-store      # PositionStorePort, skill position persistence
-│   ├── observer-bridge     # Observation pipeline bridge
-│   ├── promotion           # Skill promotion logic
-│   ├── refinement-wrapper  # Refinement with angular velocity clamping
-│   ├── chords              # Chord detection
-│   ├── composition         # Euler composition (r1*r2*e^(i(t1+t2)))
-│   ├── metrics             # Versine/exsecant metrics
-│   ├── dashboard           # Plane visualization dashboard
-│   └── migration           # Position data migration
-├── retro/                  # Self-improvement lifecycle (v1.39)
-│   ├── types               # Retro type definitions
-│   ├── template-generator  # Retrospective template generation
-│   ├── changelog-watch     # Changelog monitoring
-│   ├── calibration-delta   # Calibration drift detection
-│   ├── action-generator    # Improvement action generation
-│   └── observation-harvester # Session observation harvesting
-├── dogfood/                # sc:learn dogfood pipeline (v1.40)
-│   ├── extraction/         # PDF extraction: extractor, chapter-detector, math-parser,
-│   │                       #   chunk-segmenter, section-parser, diagram-cataloger, manifest
-│   ├── harness/            # Ingestion harness: checkpoint-manager, progress-tracker,
-│   │                       #   metrics-collector, dashboard-bridge
-│   ├── learning/           # Learning pipeline: concept-detector, position-mapper,
-│   │                       #   track-runner, cross-referencer, database-merger, ingest-controller
-│   ├── verification/       # Verification engine: knowledge-differ, gap-classifier,
-│   │                       #   coverage-mapper, consistency-checker, eight-layer-verifier
-│   └── refinement/         # Refinement and reporting: patch-generator, ticket-generator,
-│                           #   skill-refiner, report-builder, safety-validator
-├── git/                    # Git workflow intelligence (v1.42)
-│   ├── core/               # Git core operations
-│   ├── workflows/          # Git workflow patterns
-│   ├── gates/              # Safety gates for destructive operations
-│   └── scripts/            # Git automation scripts
-├── site/                   # Static site generator (v1.45)
-│   ├── templates/          # Mustache-style page templates (7 variants)
-│   ├── config/             # Site configuration (site.yaml, navigation.yaml)
-│   ├── content/            # Sample content generation
-│   ├── agents/             # Agent discovery generators (llms.txt, AGENTS.md, JSON-LD)
-│   ├── static/             # Static assets (CSS, JS)
-│   ├── utils/              # Utility functions
-│   └── wordpress/          # WordPress integration (comments, content sync)
-├── upstream/               # Upstream intelligence pack (v1.46)
-│   ├── agents/             # 5 monitoring agents (SENTINEL, ANALYST, TRACER, PATCHER, HERALD)
-│   ├── teams/              # 3 team topologies (upstream-watch, impact-response, full-cycle)
-│   └── test-data/          # 50-event historical test corpus
-├── holomorphic/            # Holomorphic dynamics educational pack (v1.47)
-│   ├── types.ts            # Shared types (ComplexNumber, Orbit, FixedPoint, etc.)
-│   ├── complex/            # Complex arithmetic and iteration engine
-│   ├── renderer/           # Fractal renderer (Mandelbrot, Julia, bifurcation)
-│   ├── dynamics/           # Skill-creator dynamical model
-│   ├── dmd/                # DMD core + 4 variants + Koopman/EDMD + bridge
-│   ├── modules/HD-01..10/  # 10 educational modules with content and Try Sessions
-│   └── skills/             # Progressive disclosure SKILL.md
-├── dacp/                   # Deterministic Agent Communication Protocol (v1.49)
-│   ├── types.ts            # 26 Zod schemas (BundleManifest, FidelityLevel, DriftScore, etc.)
-│   ├── schema-generator.ts # JSON Schema generation from Zod definitions
-│   ├── bundle.ts           # Bundle filesystem layout and creation
-│   ├── msg-fallback.ts     # Backward-compatible .msg generation
-│   ├── fidelity/           # Adaptive fidelity decision model (Level 0-3)
-│   ├── assembler/          # Three-part bundle composition with skill library queries
-│   ├── retrospective/      # Drift scoring, pattern detection, cooldown enforcement
-│   ├── templates/          # Bundle template registry with 5 starter templates
-│   └── bus/                # Filesystem bus integration, scanner, cleanup, degradation
-├── interpreter/            # DACP Interpreter (v1.49)
-│   ├── validator.ts        # 8-stage validation pipeline
-│   ├── loader.ts           # Bundle loading and manifest parsing
-│   ├── context-builder.ts  # Object.freeze execution context (no auto-execute)
-│   └── provenance-guard.ts # Chain-of-custody provenance validation
-├── catalog/                # Skill library catalogs (v1.49)
-│   ├── script-catalog.ts   # Function-type indexing with provenance enforcement
-│   ├── schema-library.ts   # Data schema indexing with multi-field search
-│   └── indexer.ts          # Unified catalog indexer
-├── cli/                    # CLI command modules
-├── cli.ts                  # CLI entry point
-└── index.ts                # Module exports
-
-src-tauri/                  # Rust backend (v1.21)
-├── src/
-│   ├── main.rs             # Tauri application entry point
-│   ├── pty/                # Native PTY management (portable-pty)
-│   ├── watcher/            # File system watcher (notify crate)
-│   ├── tmux/               # tmux session binding
-│   ├── claude/             # Claude Code session management
-│   ├── ipc/                # Tauri IPC type definitions and events
-│   ├── security/           # Agent security (v1.38): sandbox, credential proxy,
-│   │                       #   keystore, agent isolation
-│   ├── api/                # API client (v1.39): client, streaming, keystore, retry, history
-│   ├── magic/              # Magic verbosity system (v1.39): filter, persistence, types
-│   ├── services/           # Service launcher (v1.39): launcher, registry, health,
-│   │                       #   LED, shutdown
-│   ├── staging/            # Staging intake (v1.38/v1.39): intake, hygiene, notify,
-│   │                       #   debrief, security scanner, pipeline
-│   └── commands/           # Tauri IPC command handlers (v1.39)
-├── Cargo.toml              # Rust dependencies
-└── tauri.conf.json         # Tauri window/capability configuration
-
-desktop/                    # Vite webview frontend (v1.21)
-├── src/
-│   ├── engine/             # WebGL2 CRT shader engine, palette, copper lists
-│   ├── terminal/           # xterm.js terminal emulator
-│   ├── tmux/               # tmux session UI
-│   ├── claude/             # Claude session UI
-│   ├── ipc/                # Tauri IPC client wrappers
-│   ├── wm/                 # Window manager (depth cycling, drag/resize)
-│   ├── shell/              # Desktop shell (taskbar, icons, system menu)
-│   ├── dashboard/          # Dashboard rendering within GSD-OS windows
-│   ├── calibration/        # Three-screen calibration wizard
-│   ├── boot/               # Amiga chipset boot sequence animation
-│   ├── components/         # Chat UI components (v1.39): CliChat, ChatInput, StreamingText
-│   ├── chat/               # Chat pipeline (v1.39): history, sanitizer, LED panel,
-│   │                       #   error display, scroll controller
-│   ├── magic/              # Magic settings UI (v1.39): filter, persistence, recalibrate panel
-│   ├── pipeline/           # Integration pipeline (v1.39): chat-pipeline, led-bridge,
-│   │                       #   staging-bridge, bootstrap-flow, error-recovery, persistence-manager
-│   └── styles/             # CSS styles (v1.39): main, cli-chat, dashboard-host, boot, recalibrate
-├── index.html              # Webview entry point
-├── vite.config.ts          # Vite build configuration
-└── package.json            # Frontend dependencies
-
-data/                       # Domain data files (v1.35)
-├── domains/                # 10 domain JSON files (451 primitives)
-│   ├── 01-perception.json through 10-synthesis.json
-├── dependencies/           # Dependency graph JSON (foundational, intermediate, advanced)
-└── domain-index.json       # Domain index registry
-
-infra/                      # Bash infrastructure scripts (v1.22)
-├── scripts/                # Core infrastructure automation
-│   ├── pxe/                # PXE boot server setup and kickstart templates
-│   ├── vm/                 # Hypervisor-agnostic VM provisioning (KVM/VMware/VBox)
-│   ├── minecraft/          # Fabric server deployment, RCON management
-│   ├── amiga/              # FS-UAE emulation, AROS ROM, format converters
-│   ├── platform/           # Hardware discovery, distribution abstraction
-│   ├── backup/             # RCON-quiesced backups with 24/7/4 rotation
-│   └── monitoring/         # Prometheus metrics, alert rules
-├── skills/                 # 20 formalized SKILL.md definitions
-├── agents/                 # 10 agent definitions
-├── teams/                  # 5 team configurations with coordination patterns
-├── packs/                  # Educational content packs
-│   ├── agc/                # AGC study documents and reading paths
-│   └── rfc-reference/      # RFC skill with 3 agents and 5 Python scripts
-├── templates/              # Kickstart, VM, and configuration templates
-├── runbooks/               # 4 operational runbooks
-└── inventory/              # Hardware capability profiles
-
-skills/                     # Generated skill packs (v1.41+)
-├── bootstrap-guide/        # GSD-OS bootstrap tutorial (v1.39)
-├── git-workflow/            # Git workflow intelligence skill (v1.42)
-├── gource-visualizer/      # Gource visualization pipeline (v1.43)
-│   ├── references/          # Configuration reference docs
-│   └── tests/               # Shell script test suites
-├── methodology/             # Methodology documentation skills
-├── mfe-domains/             # 10 MFE domain skills (v1.35)
-├── openstack/               # OpenStack operational skills (v1.33)
-└── physical-infrastructure/ # Physical infrastructure engineering (v1.48)
-    ├── SKILL.md              # Progressive disclosure entry point
-    ├── references/            # 8 domain reference documents
-    │   ├── fluid-systems.md
-    │   ├── power-systems.md
-    │   ├── thermal-engineering.md
-    │   ├── blueprint-engine.md
-    │   ├── dimensional-analysis.md
-    │   ├── simulation-bridge.md
-    │   ├── construction-docs.md
-    │   └── creative-pipeline.md
-    ├── symbols/               # Engineering drawing symbols
-    │   ├── isa-5.1/           # 50 ISA-5.1 P&ID SVG symbols
-    │   └── ieee-c2/           # 30 IEEE SLD SVG symbols
-    ├── agents/                # 6 agent definitions
-    │   ├── architect.md       # Opus entry point — design intent router
-    │   ├── fluid-specialist.md
-    │   ├── power-specialist.md
-    │   ├── thermal-specialist.md
-    │   ├── blueprint-specialist.md
-    │   └── safety-warden.md
-    ├── teams/                 # 3 team topologies
-    │   ├── domain-specialist.yaml
-    │   ├── cross-domain.yaml
-    │   └── full-build.yaml
-    └── chipset.yaml           # Router topology with budget allocation
-
-.chipset/                   # Chipset configuration (v1.22)
-├── chipset.yaml            # Unified chipset definition
-└── agc-educational.yaml    # AGC educational chipset config (v1.23)
+.archive/       Deprecated code archive (gitignored)
+.claude/        Claude Code runtime configuration
+.git/           Git repository
+.github/        GitHub configuration
+.planning/      GSD project management (gitignored)
 ```
+
+## Root Files
+
+| File | Purpose |
+|------|---------|
+| `CHANGELOG.md` | Release changelog |
+| `CLAUDE.md` | Claude Code instructions |
+| `CONTRIBUTING.md` | Contribution guidelines |
+| `INSTALL.md` | Installation guide |
+| `LICENSE` | MIT license |
+| `Makefile` | Build orchestration (make build/test/lint/verify) |
+| `README.md` | Project readme |
+| `SECURITY.md` | Security policy |
+| `.editorconfig` | Cross-editor formatting |
+| `.gitignore` | Git exclusion rules |
+| `package.json` | NPM manifest |
+| `package-lock.json` | NPM lock file |
+| `tsconfig.json` | TypeScript configuration |
+| `vitest.config.ts` | Vitest test configuration |
+
+## Key Conventions
+
+- **Strict boundary:** `src/` never imports from `desktop/` or `@tauri-apps/api`; `desktop/` never imports Node.js modules
+- **XDG compliance:** Runtime paths use `src/fs/xdg.ts` (TypeScript) and `src-tauri/src/xdg.rs` (Rust)
+- **Alacritty model:** `extra/` contains all Linux integration files following the Alacritty packaging pattern
+- **FHS compliance:** `packaging/` definitions install to standard Linux filesystem paths
+- **Static data:** All static data files (schemas, chipset definitions, domain data) live under `data/`
