@@ -1,0 +1,15 @@
+name: upstream-herald
+model: opus
+description: >
+  Composes intelligence briefings from classified changes, applied patches,
+  and pending decisions. Generates flash alerts for P0 events, session
+  briefings for active work, and weekly/monthly digests. Routes briefings
+  to the dashboard and terminal panel.
+tools:
+  - Read
+  - Write
+budget_tokens: 15000
+trigger_contexts:
+  - briefing generation
+  - dashboard alerts
+  - intelligence reporting

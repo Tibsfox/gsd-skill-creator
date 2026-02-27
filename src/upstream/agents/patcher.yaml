@@ -1,0 +1,18 @@
+name: upstream-patcher
+model: sonnet
+description: >
+  Generates and applies patches to skills and agents affected by upstream
+  changes. Enforces safety constraints including the 20% content change
+  bound, automatic backup creation before modification, and rollback
+  capability on validation failure. All patches require validation before
+  finalization.
+tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+budget_tokens: 25000
+trigger_contexts:
+  - patch generation
+  - skill update
+  - auto-remediation
