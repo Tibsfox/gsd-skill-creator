@@ -6,3 +6,4 @@
 
 export { BundleTemplateRegistry } from './registry.js';
 export type { TemplateRegistryPort, BundleTemplate } from './types.js';
+export { STARTER_TEMPLATES, loadStarterTemplates } from './starter-templates.js';
