@@ -1,0 +1,12 @@
+name: impact-response
+topology: router
+description: >
+  Routes classified change events based on patchability. Patchable changes
+  flow to PATCHER for automated remediation; non-patchable changes flow
+  to HERALD for human briefing and escalation.
+members:
+  - patcher
+  - herald
+routes:
+  patchable: patcher
+  non-patchable: herald
