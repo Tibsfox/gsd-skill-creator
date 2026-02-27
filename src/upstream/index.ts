@@ -29,3 +29,7 @@ export { traceImpact, findDirectImpacts, findTransitiveImpacts, buildDependencyG
 export type { ReadDirFn, TracerDeps } from './tracer';
 export { applyPatch, calculatePatchSize, createBackup, rollback, validatePatchBounds, checkCooldown, generatePatchContent } from './patcher';
 export type { WriteFileFn, CopyFileFn, HashFileFn, RunValidationFn, GetPatchHistoryFn, PatcherDeps, BoundsResult, CooldownResult } from './patcher';
+export { appendLog, readLog, writeCache, readCache, createRollbackBackup, restoreFromBackup } from './persistence';
+export type { ReadFileFn, AppendFileFn, MkdirFn, ExistsFn, PersistenceDeps } from './persistence';
+export { saveChannelState, loadChannelState, loadAllChannelStates, updateHash, markChanged } from './channel-state';
+export type { ChannelStateDeps } from './channel-state';
