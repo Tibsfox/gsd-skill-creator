@@ -1,4 +1,4 @@
-import type { ComplexNumber } from '../types';
+import type { ComplexNumber } from '../types.js';
 
 /**
  * A matrix of snapshots from a dynamical system.

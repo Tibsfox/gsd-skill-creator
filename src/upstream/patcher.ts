@@ -6,7 +6,7 @@ import type {
   PatchDiff,
   PatchValidation,
   Severity,
-} from './types';
+} from './types.js';
 
 // --- Injectable dependency types ---
 

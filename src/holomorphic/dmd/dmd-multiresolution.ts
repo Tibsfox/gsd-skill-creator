@@ -13,10 +13,10 @@
  * Reference: Kutz, Fu, Brunton (2016) — "Multiresolution DMD"
  */
 
-import type { SnapshotMatrix, DMDResult } from './types';
-import type { ComplexNumber } from '../types';
-import { magnitude, argument, mul, add, cexp } from '../complex/arithmetic';
-import { dmd } from './dmd-core';
+import type { SnapshotMatrix, DMDResult } from './types.js';
+import type { ComplexNumber } from '../types.js';
+import { magnitude, argument, mul, add, cexp } from '../complex/arithmetic.js';
+import { dmd } from './dmd-core.js';
 
 /** Frequency threshold for slow mode identification (radians) */
 const SLOW_MODE_THRESHOLD = 0.3;

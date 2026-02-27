@@ -4,7 +4,7 @@ import type {
   ImpactManifest,
   ImpactType,
   ComponentStatus,
-} from './types';
+} from './types.js';
 
 /** Injectable dependency: read directory entries */
 export type ReadDirFn = (dir: string) => Promise<string[]>;

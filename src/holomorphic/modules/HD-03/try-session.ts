@@ -1,4 +1,4 @@
-import { renderMandelbrot, mandelbrotEscape } from '../../index';
+import { renderMandelbrot, mandelbrotEscape } from '../../index.js';
 
 /**
  * HD-03 Try Session: The Mandelbrot Set

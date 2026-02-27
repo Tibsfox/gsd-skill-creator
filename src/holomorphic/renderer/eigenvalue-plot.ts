@@ -7,8 +7,8 @@
  * (growing), and on the circle are neutral (persistent).
  */
 
-import type { ComplexNumber } from '../types';
-import { magnitude } from '../complex/arithmetic';
+import type { ComplexNumber } from '../types.js';
+import { magnitude } from '../complex/arithmetic.js';
 
 /** A point on the eigenvalue plot with classification metadata */
 export interface EigenvaluePoint {

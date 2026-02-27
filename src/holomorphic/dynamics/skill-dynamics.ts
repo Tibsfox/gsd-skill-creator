@@ -16,14 +16,14 @@ import type {
   SkillPosition,
   SkillDynamics,
   FixedPointClassification,
-} from '../types';
-import type { IterationFn } from '../complex/iterate';
-import { magnitude, sub, cexp } from '../complex/arithmetic';
+} from '../types.js';
+import type { IterationFn } from '../complex/iterate.js';
+import { magnitude, sub, cexp } from '../complex/arithmetic.js';
 import {
   computeOrbit,
   computeMultiplier as iterateMultiplier,
   classifyFixedPoint,
-} from '../complex/iterate';
+} from '../complex/iterate.js';
 
 /* ------------------------------------------------------------------ */
 /*  Constants                                                           */

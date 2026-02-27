@@ -12,8 +12,8 @@
  * 4. Apply standard DMD to Psi to get approximate Koopman eigenvalues/modes
  */
 
-import type { KoopmanObservable, DMDResult, SnapshotMatrix } from './types';
-import { dmd } from './dmd-core';
+import type { KoopmanObservable, DMDResult, SnapshotMatrix } from './types.js';
+import { dmd } from './dmd-core.js';
 
 /**
  * Configuration for Extended DMD.
