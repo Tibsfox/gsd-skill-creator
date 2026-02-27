@@ -38,12 +38,30 @@ export interface FidelityDistribution {
   level3: number;
 }
 
+/** A fidelity promotion or demotion recommendation. */
+export interface Recommendation {
+  /** Handoff pattern (e.g. "planner->executor:schema-task"). */
+  pattern: string;
+  /** Recommendation direction. */
+  direction: 'promote' | 'demote';
+  /** Current fidelity level (0-3). */
+  fromLevel: number;
+  /** Recommended fidelity level (0-3). */
+  toLevel: number;
+  /** Human-readable reason (e.g. "drift 0.45 x 3 consecutive"). */
+  reason: string;
+  /** Number of supporting handoffs. */
+  evidence: number;
+}
+
 /** Data needed to render the handoff quality panel. */
 export interface HandoffPanelData {
   /** Drift score entries for trend display. */
   driftEntries: DriftEntry[];
   /** Fidelity level distribution. */
   fidelity: FidelityDistribution;
+  /** Fidelity promotion/demotion recommendations. */
+  recommendations: Recommendation[];
   /** Current milestone name. */
   milestoneName: string;
   /** Total handoff count. */
@@ -149,6 +167,80 @@ export function renderFidelityDistribution(data: HandoffPanelData): string {
 
   return `<div class="hp-fidelity-dist">
   ${barsHtml}
+</div>`;
+}
+
+// ============================================================================
+// Recommendations Renderer (DASH-03)
+// ============================================================================
+
+/** Direction arrow characters for recommendations. */
+const DIR_ARROWS: Record<Recommendation['direction'], string> = {
+  promote: '\u2191', // Up arrow
+  demote: '\u2193',  // Down arrow
+};
+
+/**
+ * Render the promotion/demotion recommendations section.
+ *
+ * Shows each recommendation with a direction arrow, pattern name,
+ * level change, reason, and evidence count.
+ *
+ * @param data - Handoff panel data.
+ * @returns HTML string for the recommendations section.
+ */
+export function renderRecommendations(data: HandoffPanelData): string {
+  if (data.recommendations.length === 0) {
+    return `<div class="hp-recommendations">
+  <div class="hp-rec-heading">Recommended Actions</div>
+  <div class="hp-empty-msg">No recommendations at this time</div>
+</div>`;
+  }
+
+  const recsHtml = data.recommendations
+    .map((rec) => {
+      const dirClass = rec.direction === 'promote' ? 'hp-rec-promote' : 'hp-rec-demote';
+      const arrow = DIR_ARROWS[rec.direction];
+      return `<div class="hp-recommendation ${dirClass}">
+      <span class="hp-rec-arrow">${arrow}</span>
+      <span class="hp-rec-pattern">${escapeHtml(rec.pattern)}</span>
+      <span class="hp-rec-level">Level ${rec.fromLevel} \u2192 ${rec.toLevel}</span>
+      <span class="hp-rec-reason">${escapeHtml(rec.reason)}</span>
+      <span class="hp-rec-evidence">${rec.evidence} handoffs</span>
+    </div>`;
+    })
+    .join('\n  ');
+
+  return `<div class="hp-recommendations">
+  <div class="hp-rec-heading">Recommended Actions</div>
+  ${recsHtml}
+</div>`;
+}
+
+// ============================================================================
+// Full Panel Renderer (DASH-04)
+// ============================================================================
+
+/**
+ * Render the complete handoff quality panel.
+ *
+ * Composes drift trend, fidelity distribution, and recommendations
+ * into a single panel component with a title bar.
+ *
+ * @param data - Handoff panel data.
+ * @returns HTML string for the full handoff quality panel.
+ */
+export function renderHandoffPanel(data: HandoffPanelData): string {
+  const title = `<div class="hp-panel-title">HANDOFF QUALITY \u2014 ${escapeHtml(data.milestoneName)}</div>`;
+  const drift = renderDriftTrend(data);
+  const fidelity = renderFidelityDistribution(data);
+  const recommendations = renderRecommendations(data);
+
+  return `<div class="handoff-panel">
+  ${title}
+  ${drift}
+  ${fidelity}
+  ${recommendations}
 </div>`;
 }
 
@@ -294,6 +386,88 @@ export function renderHandoffPanelStyles(): string {
   font-style: italic;
   padding: var(--space-md, 1rem) 0;
   font-size: 0.9rem;
+}
+
+/* --- Full panel wrapper --- */
+
+.handoff-panel {
+  background: var(--surface, #161b22);
+  border: 1px solid var(--border, #30363d);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-lg, 1.25rem);
+  margin-bottom: var(--space-md, 1rem);
+}
+
+.hp-panel-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #8b949e);
+  margin-bottom: var(--space-md, 1rem);
+}
+
+/* --- Recommendations --- */
+
+.hp-recommendations {
+  margin-top: var(--space-md, 1rem);
+}
+
+.hp-rec-heading {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text, #e6edf3);
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+.hp-recommendation {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 0.5rem);
+  padding: var(--space-xs, 0.25rem) 0;
+  border-bottom: 1px solid var(--border-muted, #21262d);
+}
+
+.hp-recommendation:last-child {
+  border-bottom: none;
+}
+
+.hp-rec-arrow {
+  font-size: 1rem;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.hp-rec-promote .hp-rec-arrow {
+  color: var(--green, #3fb950);
+}
+
+.hp-rec-demote .hp-rec-arrow {
+  color: var(--yellow, #d29922);
+}
+
+.hp-rec-pattern {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  color: var(--text-muted, #8b949e);
+}
+
+.hp-rec-level {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+  color: var(--text, #e6edf3);
+}
+
+.hp-rec-reason {
+  font-size: 0.75rem;
+  color: var(--text-dim, #484f58);
+  flex: 1;
+}
+
+.hp-rec-evidence {
+  font-size: 0.7rem;
+  color: var(--text-muted, #8b949e);
+  font-variant-numeric: tabular-nums;
 }
 `;
 }
