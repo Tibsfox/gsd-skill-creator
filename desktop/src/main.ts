@@ -12,6 +12,7 @@ import {
   applyAccessibilityMode,
   watchAccessibilityChanges,
 } from "./boot";
+import "@xterm/xterm/css/xterm.css";
 import "./styles/main.css";
 import "./styles/boot.css";
 
@@ -226,10 +227,16 @@ async function init(): Promise<void> {
       if (state?.type === "terminal") {
         const content = wm.getContentElement(event.windowId);
         if (content) {
-          const { createTmuxTerminal } = await import("./tmux");
-          const handle = await createTmuxTerminal(content, event.windowId);
-          shell.updateProcessStatus("terminal", "running");
-          terminalHandles.set(event.windowId, handle);
+          try {
+            const { createTmuxTerminal } = await import("./tmux");
+            const handle = await createTmuxTerminal(content, event.windowId);
+            shell.updateProcessStatus("terminal", "running");
+            terminalHandles.set(event.windowId, handle);
+          } catch (err) {
+            console.error("[Terminal] Failed to create tmux terminal:", err);
+            content.textContent = `Terminal error: ${err}`;
+            shell.updateProcessStatus("terminal", "stopped");
+          }
         }
       }
     }
