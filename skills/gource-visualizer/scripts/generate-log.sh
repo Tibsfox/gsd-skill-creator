@@ -94,6 +94,7 @@ fi
 # ---------------------------------------------------------------------------
 
 TMPFILE=""
+# shellcheck disable=SC2329
 cleanup_tmp() {
     if [[ -n "$TMPFILE" && -f "$TMPFILE" ]]; then
         rm -f "$TMPFILE"
