@@ -77,3 +77,6 @@ export {
   classifyDMDEigenvalue,
   reconstructFromDMD,
 } from './dmd/dmd-core';
+
+export { plotEigenvaluesOnUnitCircle } from './renderer/eigenvalue-plot';
+export type { EigenvaluePlotData, EigenvaluePoint } from './renderer/eigenvalue-plot';
