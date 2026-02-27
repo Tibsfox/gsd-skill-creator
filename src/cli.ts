@@ -1336,6 +1336,58 @@ async function main() {
       break;
     }
 
+    case 'dacp':
+    case 'dp': {
+      const subcommand = args[1];
+      const subArgs = args.slice(2);
+
+      switch (subcommand) {
+        case 'status':
+        case 's': {
+          const { dacpStatusCommand } = await import('./cli/commands/dacp-status.js');
+          const exitCode = await dacpStatusCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        case 'set-level':
+        case 'sl': {
+          const { dacpSetLevelCommand } = await import('./cli/commands/dacp-set-level.js');
+          const exitCode = await dacpSetLevelCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        case 'history':
+        case 'h': {
+          const { dacpHistoryCommand } = await import('./cli/commands/dacp-history.js');
+          const exitCode = await dacpHistoryCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        case 'analyze':
+        case 'a': {
+          const { dacpAnalyzeCommand } = await import('./cli/commands/dacp-analyze.js');
+          const exitCode = await dacpAnalyzeCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        case 'export-templates':
+        case 'et': {
+          const { dacpExportTemplatesCommand } = await import('./cli/commands/dacp-export-templates.js');
+          const exitCode = await dacpExportTemplatesCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
+        default:
+          showDacpHelp();
+      }
+      break;
+    }
+
     case 'help':
     case '-h':
     case '--help':
@@ -1381,6 +1433,33 @@ async function processAction(
       break;
     }
   }
+}
+
+function showDacpHelp(): void {
+  console.log(`
+skill-creator dacp - Manage DACP communication protocol
+
+Usage:
+  skill-creator dacp <command> [options]
+  skill-creator dp <command> [options]
+
+Commands:
+  status, s             Show DACP state (bundles, fidelity, drift)
+  set-level, sl         Set fidelity level override for a pattern
+  history, h            Show handoff history for a pattern
+  analyze, a            Trigger retrospective analysis
+  export-templates, et  Export bundle templates
+
+Examples:
+  skill-creator dacp status
+  skill-creator dp s --json
+  skill-creator dacp set-level "planner->executor:task" 3
+  skill-creator dacp history "planner->executor:task" --last 5
+  skill-creator dacp analyze --milestone v1.49
+  skill-creator dacp export-templates --format=yaml
+
+Use 'skill-creator dacp <command> --help' for command-specific help.
+`);
 }
 
 function showTeamHelp(): void {
@@ -1451,6 +1530,7 @@ Commands:
   rollback, rb      Rollback skill to previous version
   agents, ag        Manage agent suggestions from skill clusters
   team, tm          Manage agent teams (create, list, validate, spawn, status)
+  dacp, dp          Manage DACP handoff protocol (status, set-level, history, analyze, export)
   reload-embeddings, re  Reload embedding model (retry after fallback)
   calibrate, cal    Optimize activation threshold from calibration data
   benchmark, bench  Measure simulator accuracy vs real activation
