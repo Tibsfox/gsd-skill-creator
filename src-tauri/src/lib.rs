@@ -1,3 +1,4 @@
+pub mod xdg;
 mod claude;
 mod commands;
 mod error;
