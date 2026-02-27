@@ -34,7 +34,7 @@ describe('extractToc', () => {
     const html = `<h2>Ohm's Law: V = I * R</h2>`;
     const toc = extractToc(html);
     expect(toc[0].text).toBe("Ohm's Law: V = I * R");
-    expect(toc[0].id).toBe('ohms-law-v--i--r');
+    expect(toc[0].id).toBe('ohms-law-v-i-r');
   });
 
   it('handles duplicate headings by appending -1, -2', () => {
