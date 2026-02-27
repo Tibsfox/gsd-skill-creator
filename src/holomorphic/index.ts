@@ -70,3 +70,10 @@ export type {
   DMDConstraints,
   KoopmanObservable,
 } from './dmd/types';
+
+export {
+  dmd,
+  svd,
+  classifyDMDEigenvalue,
+  reconstructFromDMD,
+} from './dmd/dmd-core';
