@@ -1,11 +1,12 @@
 # Release History
 
-42 milestones shipped across 389 phases, 1,007 plans, ~513k LOC, and 16,795 tests.
+49 milestones shipped across 433 phases, 1,031 plans, ~520k LOC, and 16,999 tests.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned.
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
+| [v1.47](release-notes/v1.47/) | Holomorphic Dynamics Educational Pack | 2026-02-27 | 10 | 24 | [retro](release-notes/v1.47/RETROSPECTIVE.md), [lessons](release-notes/v1.47/LESSONS-LEARNED.md) |
 | [v1.40](release-notes/v1.40/) | sc:learn Dogfood Mission | 2026-02-26 | 6 | 12 | [retro](release-notes/v1.40/RETROSPECTIVE.md), [lessons](release-notes/v1.40/LESSONS-LEARNED.md) |
 | [v1.39](release-notes/v1.39/) | GSD-OS Bootstrap & READY Prompt | 2026-02-26 | 9 | 18 | [lessons](release-notes/v1.39/LESSONS-LEARNED.md) |
 | [v1.38](release-notes/v1.38/) | SSH Agent Security | 2026-02-26 | 8 | 16 | |
