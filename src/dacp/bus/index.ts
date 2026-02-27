@@ -21,3 +21,6 @@ export { scanForBundles, scanPriorityDirWithBundles } from './scanner.js';
 
 // Cleanup
 export { cleanupBundles, detectOrphans } from './cleanup.js';
+
+// Degradation
+export { tryLoadBundle, isBundleAvailable } from './degradation.js';
