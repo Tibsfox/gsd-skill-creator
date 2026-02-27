@@ -1,0 +1,21 @@
+name: dacp-assembler
+version: "1.0.0"
+description: "Composes three-part DACP bundles from skill library artifacts"
+triggers:
+  - pattern: "handoff"
+    weight: 0.8
+  - pattern: "bundle"
+    weight: 0.7
+  - pattern: "assemble"
+    weight: 0.9
+  - pattern: "dacp"
+    weight: 1.0
+  - pattern: "fidelity"
+    weight: 0.6
+domain: "agent-communication"
+fidelity_default: 2
+safety_boundaries:
+  - "no-code-generation"
+  - "size-limits"
+  - "bounded-fidelity-change"
+  - "mandatory-provenance"
