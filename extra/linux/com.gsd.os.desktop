@@ -1,0 +1,18 @@
+[Desktop Entry]
+Type=Application
+Name=GSD-OS
+GenericName=Project Management IDE
+Comment=Get Shit Done — AI-powered project management desktop
+Exec=gsd-os %U
+Icon=com.gsd.os
+Terminal=false
+Categories=Development;ProjectManagement;IDE;
+Keywords=gsd;project;management;ai;claude;terminal;
+StartupNotify=true
+StartupWMClass=gsd-os
+MimeType=application/x-gsd-project;
+Actions=new-project;
+
+[Desktop Action new-project]
+Name=New Project
+Exec=gsd-os --new-project
