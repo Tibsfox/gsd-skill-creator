@@ -6,7 +6,7 @@
  * framework connections, and a pedagogical narrative.
  */
 
-import type { AlgorithmVariant } from '../../types.js';
+import type { AlgorithmVariant } from '../types.js';
 import type { ExtractedConcept } from './concept-extractor.js';
 
 /** Maps DMD eigenvalue analysis to the unit circle framework. */

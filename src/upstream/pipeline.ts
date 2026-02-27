@@ -4,17 +4,17 @@ import type {
   ImpactManifest,
   PatchManifest,
   Briefing,
-} from './types';
-import type { MonitorDeps } from './monitor';
-import type { TracerDeps } from './tracer';
-import type { PatcherDeps } from './patcher';
-import type { PersistenceDeps } from './persistence';
-import { checkChannel } from './monitor';
-import { classifyChange } from './classifier';
-import { traceImpact } from './tracer';
-import { applyPatch } from './patcher';
-import { generateBriefing } from './briefer';
-import { appendLog } from './persistence';
+} from './types.js';
+import type { MonitorDeps } from './monitor.js';
+import type { TracerDeps } from './tracer.js';
+import type { PatcherDeps } from './patcher.js';
+import type { PersistenceDeps } from './persistence.js';
+import { checkChannel } from './monitor.js';
+import { classifyChange } from './classifier.js';
+import { traceImpact } from './tracer.js';
+import { applyPatch } from './patcher.js';
+import { generateBriefing } from './briefer.js';
+import { appendLog } from './persistence.js';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */

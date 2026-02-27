@@ -1,4 +1,4 @@
-import type { DashboardAlert, Severity } from './types';
+import type { DashboardAlert, Severity } from './types.js';
 
 /** Validation result for a dashboard alert */
 export interface AlertValidation {

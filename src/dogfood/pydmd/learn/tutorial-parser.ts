@@ -5,7 +5,7 @@
  * Phase 405 Plan 03 -- Track C of the learn engine.
  */
 
-import type { RepoManifest, TutorialSummary } from '../../types.js';
+import type { RepoManifest, TutorialSummary } from '../types.js';
 
 // --- Known DMD class names ---
 

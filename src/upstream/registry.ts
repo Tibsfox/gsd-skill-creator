@@ -1,4 +1,4 @@
-import type { ChannelConfig, Severity } from './types';
+import type { ChannelConfig, Severity } from './types.js';
 
 const CHANNELS: ChannelConfig[] = [
   {
