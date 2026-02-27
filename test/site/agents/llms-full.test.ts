@@ -4,9 +4,9 @@ import type { ContentPage, SiteConfig } from '../../../src/site/types';
 
 function makeSite(overrides: Partial<SiteConfig> = {}): SiteConfig {
   return {
-    title: 'TibsFox',
-    description: 'Electronics education and creative technology',
-    url: 'https://tibsfox.com',
+    title: 'Test Site',
+    description: 'Educational resources and open knowledge',
+    url: 'https://example.com',
     author: 'Foxy',
     language: 'en',
     buildDate: '2026-02-27',
@@ -92,7 +92,7 @@ describe('generateLlmsFullTxt', () => {
     ];
     const result = generateLlmsFullTxt(pages, site);
 
-    expect(result.content).toContain('TibsFox');
+    expect(result.content).toContain('Test Site');
     expect(result.content).toContain('Total pages: 2');
     expect(result.content).toContain('2026-02-27');
   });

@@ -4,9 +4,9 @@ import type { ContentPage, SiteConfig } from '../../../src/site/types';
 
 function makeSite(overrides: Partial<SiteConfig> = {}): SiteConfig {
   return {
-    title: 'TibsFox',
-    description: 'Electronics education and creative technology',
-    url: 'https://tibsfox.com',
+    title: 'Test Site',
+    description: 'Educational resources and open knowledge',
+    url: 'https://example.com',
     author: 'Foxy',
     language: 'en',
     buildDate: '2026-02-27',
@@ -41,8 +41,8 @@ describe('generateAgentsMd', () => {
   it('contains site title and description', () => {
     const result = generateAgentsMd([], site);
 
-    expect(result).toContain('# TibsFox');
-    expect(result).toContain('Electronics education and creative technology');
+    expect(result).toContain('# Test Site');
+    expect(result).toContain('Educational resources and open knowledge');
   });
 
   it('lists content sections with page counts', () => {
@@ -83,7 +83,7 @@ describe('generateAgentsMd', () => {
     const result = generateAgentsMd([], site);
 
     expect(result).toContain('## Citation guidance');
-    expect(result).toContain('https://tibsfox.com');
+    expect(result).toContain('https://example.com');
   });
 
   it('includes usage instructions', () => {

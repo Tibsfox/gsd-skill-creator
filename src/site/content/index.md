@@ -1,5 +1,5 @@
 ---
-title: "tibsfox.com"
+title: "Home"
 description: "Educational resources, essays, and open knowledge for curious minds"
 template: home
 schema_type: WebSite
@@ -13,7 +13,7 @@ agent_visible: true
 agent_priority: high
 ---
 
-# Welcome to tibsfox
+# Welcome
 
 Technology education built on first principles. Every concept explained from the ground up, every abstraction earned through understanding.
 

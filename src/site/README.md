@@ -1,6 +1,6 @@
-# tibsfox.com Static Site Generator
+# Static Site Generator
 
-A custom static site generator built for tibsfox.com. Produces pure HTML/CSS/JS output with built-in AI agent discovery, WordPress coexistence, and quality verification.
+A custom static site generator with configurable hosting. Produces pure HTML/CSS/JS output with built-in AI agent discovery, WordPress coexistence, and quality verification.
 
 ## Architecture
 
@@ -77,7 +77,7 @@ npx tsx src/site/build.ts
 npm run site:build
 ```
 
-The build reads content from `src/site/content/`, templates from `src/site/templates/`, configuration from `src/site/config/`, and writes output to `src/site/build/` (gitignored).
+The build reads content from `src/site/content/`, templates from `src/site/templates/`, configuration from `src/site/config/`, and writes output to `www/` (gitignored). Configure `site.yaml` with your hostname and settings before building.
 
 ## Project Structure
 
@@ -119,7 +119,7 @@ description: "Page summary"   # For meta tags and search
 template: page                # Template name (default: page)
 date: "2026-01-15"           # Publication date
 updated: "2026-01-20"        # Last update
-author: TibsFox              # Overrides site author
+author: "Author Name"        # Overrides site author
 tags:                         # For search index
   - tag-one
   - tag-two
@@ -275,10 +275,10 @@ const result = await verifyDeployment('https://example.com');
 Main site configuration:
 
 ```yaml
-title: tibsfox.com
+title: "My Site"
 description: "Educational resources and open knowledge"
-url: https://tibsfox.com
-author: TibsFox
+url: https://example.com
+author: "Author Name"
 language: en
 
 agent:
@@ -289,14 +289,14 @@ agent:
   markdown_mirror: true # Generate /docs/*.md mirror
 
 wordpress:
-  url: https://tibsfox.com/wp
-  api: https://tibsfox.com/wp/wp-json/wp/v2
+  url: https://example.com/wp
+  api: https://example.com/wp/wp-json/wp/v2
   comments_enabled: true
   comments_moderation: true
 
 deploy:
   method: ftp
-  host: ftp.tibsfox.com
+  host: ftp.example.com
   user: "${DEPLOY_USER}"
   path: /public_html
   exclude:
