@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd.tools/schemas/dacp/script-catalog-entry.schema.json",
+  "description": "DACP Script Catalog Entry: indexes a skill script with provenance, function classification, and usage tracking.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "skill_source": {
+      "type": "string"
+    },
+    "skill_version": {
+      "type": "string"
+    },
+    "script_path": {
+      "type": "string"
+    },
+    "script_hash": {
+      "type": "string"
+    },
+    "function_type": {
+      "type": "string",
+      "enum": [
+        "parser",
+        "validator",
+        "transformer",
+        "formatter",
+        "analyzer",
+        "generator"
+      ]
+    },
+    "data_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "input_schema_ref": {
+      "type": "string"
+    },
+    "output_schema_ref": {
+      "type": "string"
+    },
+    "deterministic": {
+      "type": "boolean"
+    },
+    "last_used": {
+      "type": "string"
+    },
+    "use_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "success_rate": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "avg_execution_ms": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "id",
+    "skill_source",
+    "skill_version",
+    "script_path",
+    "script_hash",
+    "function_type",
+    "data_types",
+    "deterministic",
+    "last_used",
+    "use_count",
+    "success_rate",
+    "avg_execution_ms"
+  ],
+  "additionalProperties": false
+}

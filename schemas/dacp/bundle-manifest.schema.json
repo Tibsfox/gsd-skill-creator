@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd.tools/schemas/dacp/bundle-manifest.schema.json",
+  "description": "DACP Bundle Manifest: top-level descriptor for a DACP bundle directory containing intent, data, and code manifests with provenance and assembly rationale.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "fidelity_level": {
+      "anyOf": [
+        {
+          "type": "number",
+          "const": 0
+        },
+        {
+          "type": "number",
+          "const": 1
+        },
+        {
+          "type": "number",
+          "const": 2
+        },
+        {
+          "type": "number",
+          "const": 3
+        },
+        {
+          "type": "number",
+          "const": 4
+        }
+      ]
+    },
+    "source_agent": {
+      "type": "string"
+    },
+    "target_agent": {
+      "type": "string"
+    },
+    "opcode": {
+      "type": "string",
+      "enum": [
+        "EXEC",
+        "VERIFY",
+        "TRANSFORM",
+        "CONFIG",
+        "RESEARCH",
+        "REPORT",
+        "QUESTION",
+        "PATCH",
+        "ALERT"
+      ]
+    },
+    "intent_summary": {
+      "type": "string"
+    },
+    "human_origin": {
+      "type": "object",
+      "properties": {
+        "vision_doc": {
+          "type": "string"
+        },
+        "planning_phase": {
+          "type": "string"
+        },
+        "user_directive": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "vision_doc",
+        "planning_phase",
+        "user_directive"
+      ],
+      "additionalProperties": false
+    },
+    "data_manifest": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "purpose": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "schema_ref": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "purpose",
+          "source"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "code_manifest": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "purpose": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "source_skill": {
+            "type": "string"
+          },
+          "deterministic": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "purpose",
+          "language",
+          "source_skill",
+          "deterministic"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "assembly_rationale": {
+      "type": "object",
+      "properties": {
+        "level_justification": {
+          "type": "string"
+        },
+        "skills_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "generated_artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reused_artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "level_justification",
+        "skills_used",
+        "generated_artifacts",
+        "reused_artifacts"
+      ],
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "assembled_by": {
+          "type": "string"
+        },
+        "assembled_at": {
+          "type": "string"
+        },
+        "skill_versions": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "assembled_by",
+        "assembled_at",
+        "skill_versions"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "version",
+    "fidelity_level",
+    "source_agent",
+    "target_agent",
+    "opcode",
+    "intent_summary",
+    "human_origin",
+    "data_manifest",
+    "code_manifest",
+    "assembly_rationale",
+    "provenance"
+  ],
+  "additionalProperties": false
+}
