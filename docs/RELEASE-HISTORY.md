@@ -6,6 +6,9 @@ Each version links to a detailed release notes directory with full feature descr
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
+| [v1.49.3](release-notes/v1.49.3/) | GSD-OS Desktop Polish (Patch) | 2026-02-27 | — | — | |
+| [v1.49.2](release-notes/v1.49.2/) | GSD-OS Indicator Wiring & TypeScript Fixes (Patch) | 2026-02-27 | — | — | |
+| [v1.49.1](release-notes/v1.49.1/) | DACP CLI Field Alignment (Patch) | 2026-02-27 | — | — | |
 | [v1.49](release-notes/v1.49/) | Deterministic Agent Communication Protocol | 2026-02-27 | 11 | 24 | [retro](release-notes/v1.49/RETROSPECTIVE.md), [lessons](release-notes/v1.49/LESSONS-LEARNED.md) |
 | [v1.48](release-notes/v1.48/) | Physical Infrastructure Engineering Pack | 2026-02-27 | 12 | 30 | [retro](release-notes/v1.48/RETROSPECTIVE.md), [lessons](release-notes/v1.48/LESSONS-LEARNED.md) |
 | [v1.47](release-notes/v1.47/) | Holomorphic Dynamics Educational Pack | 2026-02-27 | 10 | 24 | [retro](release-notes/v1.47/RETROSPECTIVE.md), [lessons](release-notes/v1.47/LESSONS-LEARNED.md) |
