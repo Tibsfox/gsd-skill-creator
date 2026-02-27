@@ -1,0 +1,451 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd.tools/schemas/dacp/dacp-status.schema.json",
+  "description": "DACP System Status: aggregate view of the entire DACP system state including handoff counts, drift scores, and fidelity distribution.",
+  "type": "object",
+  "properties": {
+    "total_handoffs": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "total_bundles_assembled": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "avg_drift_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "fidelity_distribution": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "active_patterns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "template_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "script_catalog_size": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "schema_library_size": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "pending_promotions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "source_agent_type": {
+            "type": "string"
+          },
+          "target_agent_type": {
+            "type": "string"
+          },
+          "opcode": {
+            "type": "string",
+            "enum": [
+              "EXEC",
+              "VERIFY",
+              "TRANSFORM",
+              "CONFIG",
+              "RESEARCH",
+              "REPORT",
+              "QUESTION",
+              "PATCH",
+              "ALERT"
+            ]
+          },
+          "observed_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "avg_drift_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "max_drift_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "current_fidelity": {
+            "anyOf": [
+              {
+                "type": "number",
+                "const": 0
+              },
+              {
+                "type": "number",
+                "const": 1
+              },
+              {
+                "type": "number",
+                "const": 2
+              },
+              {
+                "type": "number",
+                "const": 3
+              },
+              {
+                "type": "number",
+                "const": 4
+              }
+            ]
+          },
+          "recommended_fidelity": {
+            "anyOf": [
+              {
+                "type": "number",
+                "const": 0
+              },
+              {
+                "type": "number",
+                "const": 1
+              },
+              {
+                "type": "number",
+                "const": 2
+              },
+              {
+                "type": "number",
+                "const": 3
+              },
+              {
+                "type": "number",
+                "const": 4
+              }
+            ]
+          },
+          "last_observed": {
+            "type": "string"
+          },
+          "promotion_history": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "anyOf": [
+                    {
+                      "type": "number",
+                      "const": 0
+                    },
+                    {
+                      "type": "number",
+                      "const": 1
+                    },
+                    {
+                      "type": "number",
+                      "const": 2
+                    },
+                    {
+                      "type": "number",
+                      "const": 3
+                    },
+                    {
+                      "type": "number",
+                      "const": 4
+                    }
+                  ]
+                },
+                "to": {
+                  "anyOf": [
+                    {
+                      "type": "number",
+                      "const": 0
+                    },
+                    {
+                      "type": "number",
+                      "const": 1
+                    },
+                    {
+                      "type": "number",
+                      "const": 2
+                    },
+                    {
+                      "type": "number",
+                      "const": 3
+                    },
+                    {
+                      "type": "number",
+                      "const": 4
+                    }
+                  ]
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "timestamp": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "from",
+                "to",
+                "reason",
+                "timestamp"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "contributing_bundles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "source_agent_type",
+          "target_agent_type",
+          "opcode",
+          "observed_count",
+          "avg_drift_score",
+          "max_drift_score",
+          "current_fidelity",
+          "recommended_fidelity",
+          "last_observed",
+          "promotion_history",
+          "contributing_bundles"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "pending_demotions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "source_agent_type": {
+            "type": "string"
+          },
+          "target_agent_type": {
+            "type": "string"
+          },
+          "opcode": {
+            "type": "string",
+            "enum": [
+              "EXEC",
+              "VERIFY",
+              "TRANSFORM",
+              "CONFIG",
+              "RESEARCH",
+              "REPORT",
+              "QUESTION",
+              "PATCH",
+              "ALERT"
+            ]
+          },
+          "observed_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "avg_drift_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "max_drift_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "current_fidelity": {
+            "anyOf": [
+              {
+                "type": "number",
+                "const": 0
+              },
+              {
+                "type": "number",
+                "const": 1
+              },
+              {
+                "type": "number",
+                "const": 2
+              },
+              {
+                "type": "number",
+                "const": 3
+              },
+              {
+                "type": "number",
+                "const": 4
+              }
+            ]
+          },
+          "recommended_fidelity": {
+            "anyOf": [
+              {
+                "type": "number",
+                "const": 0
+              },
+              {
+                "type": "number",
+                "const": 1
+              },
+              {
+                "type": "number",
+                "const": 2
+              },
+              {
+                "type": "number",
+                "const": 3
+              },
+              {
+                "type": "number",
+                "const": 4
+              }
+            ]
+          },
+          "last_observed": {
+            "type": "string"
+          },
+          "promotion_history": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "anyOf": [
+                    {
+                      "type": "number",
+                      "const": 0
+                    },
+                    {
+                      "type": "number",
+                      "const": 1
+                    },
+                    {
+                      "type": "number",
+                      "const": 2
+                    },
+                    {
+                      "type": "number",
+                      "const": 3
+                    },
+                    {
+                      "type": "number",
+                      "const": 4
+                    }
+                  ]
+                },
+                "to": {
+                  "anyOf": [
+                    {
+                      "type": "number",
+                      "const": 0
+                    },
+                    {
+                      "type": "number",
+                      "const": 1
+                    },
+                    {
+                      "type": "number",
+                      "const": 2
+                    },
+                    {
+                      "type": "number",
+                      "const": 3
+                    },
+                    {
+                      "type": "number",
+                      "const": 4
+                    }
+                  ]
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "timestamp": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "from",
+                "to",
+                "reason",
+                "timestamp"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "contributing_bundles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "source_agent_type",
+          "target_agent_type",
+          "opcode",
+          "observed_count",
+          "avg_drift_score",
+          "max_drift_score",
+          "current_fidelity",
+          "recommended_fidelity",
+          "last_observed",
+          "promotion_history",
+          "contributing_bundles"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "last_retrospective": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "total_handoffs",
+    "total_bundles_assembled",
+    "avg_drift_score",
+    "fidelity_distribution",
+    "active_patterns",
+    "template_count",
+    "script_catalog_size",
+    "schema_library_size",
+    "pending_promotions",
+    "pending_demotions",
+    "last_retrospective"
+  ],
+  "additionalProperties": false
+}
