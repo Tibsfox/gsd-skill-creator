@@ -6,12 +6,23 @@ import type {
   SiteConfig,
   NavigationSection,
   TemplateData,
+  CitationDatabase,
 } from './types';
 import { loadTemplates, renderTemplate } from './templates';
 import type { TemplateRegistry } from './templates';
 import { parseFrontmatter } from './utils/frontmatter';
 import { pathToSlug, slugToOutputPath, slugToUrl } from './utils/slug';
 import { processMarkdown, resetCitationCounter } from './markdown';
+import {
+  generateLlmsTxt,
+  generateLlmsFullTxt,
+  generateAgentsMd,
+  generateSchemaOrg,
+  generateMarkdownMirror,
+} from './agents';
+import { buildSearchIndex } from './search';
+import { generateAtomFeed } from './feed';
+import { generateSitemap, generateRobotsTxt } from './sitemap';
 
 /* ---- Single page processing ---- */
 
@@ -63,6 +74,7 @@ function mergeTemplate(
   siteConfig: SiteConfig,
   templates: TemplateRegistry,
   navigation: NavigationSection[],
+  schemaJsonLd?: string,
 ): { html: string; warning?: string } {
   const templateName = page.frontmatter.template ?? 'page';
   let warning: string | undefined;
@@ -80,7 +92,7 @@ function mergeTemplate(
     navigation,
     currentSection: page.frontmatter.nav_section ?? '',
     buildDate: siteConfig.buildDate || new Date().toISOString().split('T')[0],
-    schemaJsonLd: '{}',
+    schemaJsonLd: schemaJsonLd ?? '{}',
   };
 
   const html = renderTemplate(resolvedTemplate, data, templates);
@@ -133,8 +145,18 @@ export async function build(options: BuildOptions): Promise<BuildResult> {
     contentFiles = [];
   }
 
+  // 4b. Load citation database (optional)
+  let citationDb: CitationDatabase | null = null;
+  try {
+    const citationsRaw = await readFile(`${options.dataDir}/citations.json`);
+    citationDb = JSON.parse(citationsRaw) as CitationDatabase;
+  } catch {
+    // No citation database, that's fine
+  }
+
   // 5. Process each page
   await ensureDir(options.outputDir);
+  const publishedPages: ContentPage[] = [];
 
   for (const file of contentFiles) {
     const rawContent = await readFile(`${options.contentDir}/${file}`);
@@ -152,8 +174,11 @@ export async function build(options: BuildOptions): Promise<BuildResult> {
       continue;
     }
 
-    // Merge with template
-    const { html, warning } = mergeTemplate(page, siteConfig, templates, navigation);
+    // Generate Schema.org JSON-LD for the page
+    const schemaJsonLd = generateSchemaOrg(page, siteConfig);
+
+    // Merge with template (pass schema data)
+    const { html, warning } = mergeTemplate(page, siteConfig, templates, navigation, schemaJsonLd);
     if (warning) {
       warnings.push(warning);
     }
@@ -164,10 +189,58 @@ export async function build(options: BuildOptions): Promise<BuildResult> {
     await ensureDir(outputDir);
     await writeFile(outputPath, html);
 
+    publishedPages.push(page);
     pagesBuilt += 1;
   }
 
-  // 6. Copy static assets
+  // 6. Generate agent discovery layer
+  if (siteConfig.agent) {
+    if (siteConfig.agent.llms_txt) {
+      const llmsTxt = generateLlmsTxt(publishedPages, siteConfig);
+      await writeFile(`${options.outputDir}/llms.txt`, llmsTxt);
+    }
+    if (siteConfig.agent.llms_full) {
+      const { content: llmsFullTxt, sizeWarning } = generateLlmsFullTxt(publishedPages, siteConfig);
+      if (sizeWarning) {
+        warnings.push('llms-full.txt exceeds 500KB size threshold');
+      }
+      await writeFile(`${options.outputDir}/llms-full.txt`, llmsFullTxt);
+    }
+    if (siteConfig.agent.agents_md) {
+      const agentsMd = generateAgentsMd(publishedPages, siteConfig);
+      await writeFile(`${options.outputDir}/AGENTS.md`, agentsMd);
+    }
+    if (siteConfig.agent.markdown_mirror) {
+      const mirror = generateMarkdownMirror(publishedPages);
+      for (const entry of mirror) {
+        const mirrorPath = `${options.outputDir}/${entry.path}`;
+        const mirrorDir = mirrorPath.substring(0, mirrorPath.lastIndexOf('/'));
+        await ensureDir(mirrorDir);
+        await writeFile(mirrorPath, entry.content);
+      }
+    }
+  }
+
+  // 7. Generate search index
+  const searchIndex = buildSearchIndex(publishedPages);
+  await writeFile(`${options.outputDir}/search-index.json`, JSON.stringify(searchIndex));
+
+  // 8. Generate feed, sitemap, robots.txt
+  const sortedByDate = [...publishedPages].sort((a, b) => {
+    const da = a.frontmatter.date ?? '';
+    const db = b.frontmatter.date ?? '';
+    return db.localeCompare(da);
+  });
+  const atomFeed = generateAtomFeed(sortedByDate, siteConfig);
+  await writeFile(`${options.outputDir}/feed.xml`, atomFeed);
+
+  const sitemap = generateSitemap(publishedPages, siteConfig);
+  await writeFile(`${options.outputDir}/sitemap.xml`, sitemap);
+
+  const robotsTxt = generateRobotsTxt(siteConfig);
+  await writeFile(`${options.outputDir}/robots.txt`, robotsTxt);
+
+  // 9. Copy static assets
   try {
     await copyDir(options.staticDir, `${options.outputDir}/assets`);
   } catch {
