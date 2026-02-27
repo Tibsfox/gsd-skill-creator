@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd.tools/schemas/dacp/bundle-template.schema.json",
+  "description": "DACP Bundle Template: reusable structure for common handoff types with default fidelity level and artifact references.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "handoff_type": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "default_fidelity": {
+      "anyOf": [
+        {
+          "type": "number",
+          "const": 0
+        },
+        {
+          "type": "number",
+          "const": 1
+        },
+        {
+          "type": "number",
+          "const": 2
+        },
+        {
+          "type": "number",
+          "const": 3
+        },
+        {
+          "type": "number",
+          "const": 4
+        }
+      ]
+    },
+    "data_schema_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "code_script_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "test_fixture_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "handoff_type",
+    "description",
+    "default_fidelity",
+    "data_schema_refs",
+    "code_script_refs",
+    "test_fixture_refs"
+  ],
+  "additionalProperties": false
+}

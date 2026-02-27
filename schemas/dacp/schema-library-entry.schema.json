@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd.tools/schemas/dacp/schema-library-entry.schema.json",
+  "description": "DACP Schema Library Entry: indexes a JSON Schema with provenance and usage tracking for the schema library.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "schema_path": {
+      "type": "string"
+    },
+    "data_type": {
+      "type": "string"
+    },
+    "source_skill": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "last_updated": {
+      "type": "string"
+    },
+    "reference_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "schema_path",
+    "data_type",
+    "source_skill",
+    "version",
+    "fields",
+    "last_updated",
+    "reference_count"
+  ],
+  "additionalProperties": false
+}
