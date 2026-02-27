@@ -41,24 +41,24 @@ applies_to:
 
 ## At a Glance
 
-Calculate heat transfer, size heat exchangers, and analyze data center thermal performance for infrastructure engineering.
+Calculate heat transfer rates, size heat exchangers, and analyze data center thermal performance from component-level junction temperatures to facility-wide efficiency metrics.
 
 **Activation:** InfrastructureRequest type='thermal', any heat exchanger sizing request, PUE/WUE calculation, airflow management design, or cooling load analysis.
 
 **Key capabilities:**
 
-- Three-mode heat transfer analysis (conduction, convection, radiation) with material property tables
-- Thermal resistance networks using electrical circuit analogy
-- Data center cooling load breakdown (IT + UPS + lighting + fan/pump + envelope)
+- Three-mode heat transfer: conduction (Fourier), convection (Newton), radiation (Stefan-Boltzmann)
+- Thermal resistance networks (series/parallel, analogous to electrical circuits)
+- Data center cooling load breakdown (IT, UPS, lighting, fans, envelope)
 - Heat exchanger sizing via LMTD and epsilon-NTU methods
-- PUE, TUE, WUE, CUE efficiency metric calculations with target benchmarks
-- Airflow management: hot/cold aisle layout, containment systems, raised-floor design
+- PUE/TUE/WUE/CUE efficiency metric calculations with target benchmarks
+- Airflow management: hot/cold aisle containment, raised floor, economizer modes
 
-**Integration:** Works in tandem with pie-fluid-systems -- the fluid skill sizes cooling loop pipes and pumps; this skill quantifies the heat and determines exchanger performance.
+**Integration:** Works in tandem with pie-fluid-systems: the fluid skill sizes cooling loop pipes and pumps; this skill quantifies the heat and determines exchanger performance.
 
 > ENGINEERING DISCLAIMER: All calculations must be verified by a licensed Professional Engineer before use in construction or installation. HVAC and mechanical codes (ASHRAE 90.1, IMC) impose requirements not captured here. User assumes all responsibility for verification.
 
-**Quick routing:** Heat transfer modes -- see Heat Transfer Fundamentals. Thermal resistance -- see Thermal Resistance Networks. Cooling load -- see Data Center Cooling Load. Heat exchanger sizing -- see Heat Exchanger Sizing. PUE/WUE metrics -- see Efficiency Metrics. Airflow design -- see Airflow Management.
+**Quick routing:** Heat transfer modes -- see Heat Transfer Fundamentals. Resistance networks -- see Thermal Resistance Networks. Data center loads -- see Data Center Cooling Load. Exchanger sizing -- see Heat Exchanger Sizing. PUE/WUE metrics -- see Efficiency Metrics. Airflow layout -- see Airflow Management.
 
 ---
 
@@ -66,7 +66,7 @@ Calculate heat transfer, size heat exchangers, and analyze data center thermal p
 
 ### Conduction -- Fourier's Law
 
-Heat transfer through a solid material by molecular vibration, without bulk fluid movement.
+Heat flow through a solid material by molecular vibration:
 
 ```
 q = -k x A x (dT/dx)
@@ -79,9 +79,11 @@ q = -k x A x (dT/dx)
 | A | Cross-sectional area perpendicular to heat flow | m^2 |
 | dT/dx | Temperature gradient | K/m |
 
-**Thermal resistance (conduction):** R_cond = L / (k x A) -- analogous to electrical resistance R = rho L / A
+The negative sign indicates heat flows from hot to cold (opposite to the temperature gradient).
 
-**Thermal conductivity k values:**
+**Thermal resistance (conduction):** R_cond = L / (k x A), analogous to electrical resistance R = rho L / A.
+
+**Thermal conductivity reference values:**
 
 | Material | k (W/(m K)) | Application |
 |----------|------------|-------------|
@@ -97,7 +99,7 @@ q = -k x A x (dT/dx)
 
 ### Convection -- Newton's Law of Cooling
 
-Heat transfer between a solid surface and a moving fluid (gas or liquid).
+Heat transfer between a surface and a moving fluid:
 
 ```
 q = h x A x (T_surface - T_fluid)
@@ -107,11 +109,11 @@ q = h x A x (T_surface - T_fluid)
 |----------|-----------|-------|
 | q | Heat flow rate | W |
 | h | Convective heat transfer coefficient | W/(m^2 K) |
-| A | Surface area in contact with fluid | m^2 |
+| A | Surface area exposed to fluid | m^2 |
 
 **Thermal resistance (convection):** R_conv = 1 / (h x A)
 
-**Convective coefficient h reference values:**
+**Convective coefficient reference values:**
 
 | Flow Type | Medium | h (W/(m^2 K)) |
 |-----------|--------|---------------|
@@ -122,121 +124,110 @@ q = h x A x (T_surface - T_fluid)
 | Boiling | Water | 3,000-60,000 |
 | Condensing | Steam | 5,000-100,000 |
 
-For convection correlations (Nusselt number, Re, Pr relationships) -- @references/heat-transfer.md
+For convection correlations (Nusselt number, Reynolds, Prandtl relationships) -- @references/heat-transfer.md
 
 ### Radiation -- Stefan-Boltzmann Law
 
-Heat transfer via electromagnetic radiation. No medium required.
+Heat transfer by electromagnetic emission between surfaces:
 
 ```
 q = epsilon x sigma x A x (T1^4 - T2^4)
 ```
 
-| Variable | Definition | Value |
+| Variable | Definition | Units |
 |----------|-----------|-------|
-| sigma | Stefan-Boltzmann constant | 5.67 x 10^-8 W/(m^2 K^4) |
-| epsilon | Surface emissivity | 0 (perfect reflector) to 1 (blackbody) |
+| epsilon | Surface emissivity (0 = perfect reflector, 1 = blackbody) | dimensionless |
+| sigma | Stefan-Boltzmann constant = 5.67e-8 | W/(m^2 K^4) |
+| T1, T2 | Surface temperatures | K (Kelvin only) |
 
-**CRITICAL:** Temperatures MUST be in Kelvin (K = C + 273.15) for radiation calculations.
+**CRITICAL:** Temperatures MUST be in Kelvin for radiation calculations. K = C + 273.15.
 
-**Emissivity values:**
+**Emissivity reference values:**
 
-| Surface | epsilon |
-|---------|---------|
-| Blackbody (theoretical) | 1.00 |
-| Painted steel | 0.90 |
-| Glass | 0.90 |
-| Oxidized copper | 0.70 |
-| Anodized aluminum | 0.80 |
-| Polished aluminum | 0.04 |
-| Polished stainless steel | 0.10 |
+| Surface | epsilon | Notes |
+|---------|--------|-------|
+| Blackbody (ideal) | 1.0 | Theoretical maximum |
+| Painted steel | 0.9 | Most painted surfaces |
+| Oxidized copper | 0.7 | Aged copper surfaces |
+| Glass | 0.9 | Window and enclosure glass |
+| Polished aluminum | 0.04 | Reflective radiation shield |
+| Anodized aluminum | 0.8 | Common enclosure finish |
 
-**When radiation matters:** Significant at high temperatures (>200C), large temperature differentials, or vacuum/low-pressure environments. Usually negligible for data center operating temperatures (20-45C); important for outdoor equipment exposed to solar radiation.
-
-For radiation view factors and multi-surface enclosure analysis -- @references/heat-transfer.md
+**When radiation matters:** High temperatures (>200C), large temperature differentials, or vacuum/low-pressure environments. Usually negligible for data center operating temperatures (15-55C); important for outdoor equipment and industrial processes.
 
 ---
 
 ## Thermal Resistance Networks
 
-The electrical analogy provides a powerful framework for analyzing complex heat flow paths.
-
-### Analogy
+The thermal-electrical analogy maps heat transfer directly onto circuit analysis:
 
 | Thermal Domain | Electrical Domain |
-|---------------|------------------|
+|---------------|-------------------|
 | Heat flow q (W) | Current I (A) |
 | Temperature difference DeltaT (K) | Voltage V (V) |
-| Thermal resistance R (K/W) | Electrical resistance R (Ohm) |
-| Heat capacity (J/K) | Capacitance (F) |
+| Thermal resistance R (K/W) | Electrical resistance R (ohm) |
 
 ### Series Network (Heat Path Stack)
 
-When heat must pass through multiple layers in sequence:
+When heat flows through sequential layers, resistances add:
 
 ```
 R_total = R1 + R2 + R3 + ...
 q = (T_hot - T_cold) / R_total
 ```
 
-**Example: Server die to coolant**
+**Example: server die to coolant path:**
 
 ```
-Total R = R_die-spreading + R_TIM + R_cold-plate-wall + R_cold-plate-convection
+R_total = R_die_spreading + R_TIM + R_cold_plate_wall + R_cold_plate_convection
 
-R_die    = t_die / (k_silicon x A_die)
-R_TIM    = t_TIM / (k_TIM x A_TIM)
-R_wall   = t_wall / (k_copper x A_plate)
-R_conv   = 1 / (h_coolant x A_internal)
+R_die_spreading   = t_die / (k_silicon x A_die)
+R_TIM             = t_TIM / (k_paste x A_contact)
+R_cold_plate_wall = t_wall / (k_copper x A_plate)
+R_cold_plate_conv = 1 / (h_coolant x A_internal)
 ```
 
-Temperature rise: DeltaT_junction = q x R_total. Check against CPU TjMax (typically 95-105C).
+Temperature rise check: DeltaT_junction = q x R_total. Verify T_junction < TjMax (typically 95-105C for modern CPUs/GPUs).
 
 ### Parallel Network (Multiple Heat Paths)
 
-When heat can take multiple simultaneous paths:
+When heat has multiple simultaneous paths, resistances combine as parallels:
 
 ```
 1/R_total = 1/R1 + 1/R2 + 1/R3
 ```
 
-Use when heat splits between paths: fins parallel to base, simultaneous air cooling and liquid cooling. The path with lowest resistance carries the most heat.
+Use when heat splits between paths: fins parallel to base, combined air cooling + liquid cooling, multiple heat sinks on a shared substrate. The path with lowest resistance carries the most heat.
 
-### Contact/Interface Resistance
+### Contact and Interface Resistance
 
-Real surfaces have micro-asperities; actual contact area is only 1-2% of nominal area.
+Real surfaces have microscopic asperities -- actual contact area is only 1-2% of nominal area.
 
 ```
 R_contact = 1 / (h_c x A)
 ```
 
-Thermal interface material (TIM) specific resistance values:
+**Thermal interface material (TIM) specific resistance:**
 
-| TIM Type | R (K cm^2/W) |
-|----------|-------------|
-| Thermal grease | 0.1-0.5 |
-| Phase-change material | 0.05-0.2 |
-| Thermal pad | 0.5-3.0 |
-| Indium foil | 0.02-0.1 |
-| Solder bond | 0.01-0.05 |
+| TIM Type | R (K cm^2/W) | Application |
+|----------|-------------|-------------|
+| Bare metal contact | 0.5-5.0 | Avoid -- poor performance |
+| Thermal grease | 0.1-0.5 | Standard CPU mounting |
+| Phase-change pad | 0.05-0.2 | Factory-applied, consistent |
+| Solder/braze | 0.02-0.1 | Permanent, best performance |
 
-Reduce contact resistance by: smoother surfaces, higher clamping force, high-conductivity TIM.
+Reduce contact resistance by: smoother surfaces, higher clamping force, higher-conductivity TIM.
 
 ### Mathematical Connection
 
-Heat flow against a temperature gradient:
+Heat flow against a temperature gradient follows the same mathematical structure as gradient descent in machine learning:
 
 ```
-q = -k nabla T    (Fourier's law in 3D)
+Heat:  q = -k nabla(T)                         (heat flows opposite to temperature gradient)
+ML:    theta_n+1 = theta_n - alpha nabla(L)     (parameters move opposite to loss gradient)
 ```
 
-This is the same mathematical structure as gradient descent in machine learning:
-
-```
-theta_{n+1} = theta_n - alpha nabla L(theta)
-```
-
-Both describe movement opposing the direction of increasing potential. Parameters move against the loss gradient; heat flows against the temperature gradient. The student who has trained neural network weights already understands the physics of heat conduction.
+Both describe movement opposing the direction of increasing potential. The temperature field T(x,y,z) in a data center is a scalar field whose gradient points from cold to hot. Heat flows against it. The student who has trained neural networks already understands the physics of heat conduction.
 
 For thermal network examples and contact resistance data -- @references/heat-transfer.md
 
@@ -249,36 +240,27 @@ For thermal network examples and contact resistance data -- @references/heat-tra
 **IT equipment load** (dominant term, typically 60-80% of total):
 
 ```
-Q_IT = sum(server_TDP) x diversity_factor
+Q_IT = sum(server_nameplate_TDP) x diversity_factor
      = rack_count x avg_density_kW x utilization
 ```
 
-- Diversity factor: 0.7-0.9 (servers rarely run at nameplate continuously)
-- Maximum demand method (NEC 220.87 adapted): measured 15-min peak x 1.25
+Diversity factor: 0.7-0.9 (servers rarely sustain nameplate power continuously). Maximum demand method (NEC 220.87 adapted): use measured 15-minute peak power x 1.25.
 
-**Lighting:**
-- LED: 10-20 W/m^2
-- 100% converts to heat (add directly to cooling load)
+**Lighting:** 10-20 W/m^2 for LED (was 50 W/m^2 for fluorescent). All lighting converts to heat -- add to cooling load.
 
-**UPS losses:**
+**UPS losses:** Heat generated by power conversion inefficiency:
 
-| UPS Type | At 50% Load | At 100% Load |
-|----------|------------|-------------|
+| UPS Type | Loss at 50% Load | Loss at 100% Load |
+|----------|------------------|-------------------|
 | Online double-conversion (VRLA) | 4-6% | 2-3% |
-| Online double-conversion (Li-ion) | 1.5-2% | 1-2% |
-| Line-interactive | 2-3% | 1-2% |
+| Online double-conversion (Li-ion) | 1.5-2% | 1-1.5% |
+| Line-interactive | 2-4% | 1-2% |
 
-**Fan/pump power:**
-- CRAC/CRAH fans: typically 5-15% of served IT load
-- Chilled water pumps: typically 1-3% of IT load
-- CDU pumps: typically 1-2% of served rack load
+**Fan and pump power:** CRAC/CRAH fan power typically 5-15% of served IT load; pump power <3% of IT load. Add to heat balance as these also convert to heat within the space.
 
-**Envelope loads** (usually <5% for well-insulated interior data halls):
-- Solar gain through walls/roof: Q = U x A x CLTD (cooling load temperature difference)
-- CLTD depends on orientation, time of day, climate; typically 5-15C for insulated walls
-- Interior data halls (no exterior walls): envelope load approximately zero
+**Envelope loads:** Usually <5% for well-insulated interior data halls. Include solar gain if windows or poorly insulated walls face direct sun. Q_envelope = U x A x CLTD (cooling load temperature difference; typically 5-15C for insulated walls).
 
-### Total Cooling Load Calculation
+### Total Cooling Load
 
 ```
 Q_cooling = Q_IT x (1 + UPS_loss_fraction) + Q_lighting + Q_fans + Q_envelope
@@ -286,16 +268,20 @@ Q_cooling = Q_IT x (1 + UPS_loss_fraction) + Q_lighting + Q_fans + Q_envelope
 
 Add 15-20% safety margin for future expansion.
 
-### Per-Rack Cooling Approach
+### Per-Rack Analysis
 
-| Average Rack Density | Era / Context | Recommended Cooling |
-|---------------------|---------------|-------------------|
-| 2-5 kW/rack | 2000s legacy | Raised-floor CRAC/CRAH |
-| 5-10 kW/rack | 2010s standard | Raised-floor with containment |
-| 10-15 kW/rack | Modern enterprise | In-row cooling or rear-door HX |
-| 15-30 kW/rack | High-performance | Rear-door HX or in-row CDU |
-| 30-50 kW/rack | AI/GPU training | Direct liquid cooling (DTC, CDU required) |
-| 50-100+ kW/rack | Dense AI/GPU | Full DTC per ASHRAE TC 9.9 W3-W5 |
+| Era/Type | Typical Density | Cooling Approach |
+|----------|----------------|------------------|
+| Legacy (2010s) | 5 kW/rack | Air cooling (raised floor CRAC/CRAH) |
+| Modern enterprise | 10-15 kW/rack | Air cooling with in-row or rear-door units |
+| High-performance | 15-30 kW/rack | Rear-door heat exchangers or in-row cooling |
+| AI/GPU dense | 30-50+ kW/rack | Direct liquid cooling (DTC, CDU required) |
+| Ultra-dense AI | 80-120+ kW/rack | Full immersion or multi-CDU per rack |
+
+Cooling approach by density:
+- < 10 kW/rack: air cooling (raised floor CRAC/CRAH sufficient)
+- 10-30 kW/rack: rear-door heat exchangers or in-row cooling units
+- > 30 kW/rack: direct liquid cooling (DTC) per ASHRAE TC 9.9 guidelines
 
 ---
 
@@ -303,7 +289,7 @@ Add 15-20% safety margin for future expansion.
 
 ### LMTD Method
 
-Use when both inlet AND outlet temperatures are known (rating existing equipment).
+Use when both inlet and outlet temperatures are known (rating existing equipment or fixed design conditions).
 
 ```
 Q = U x A x F x LMTD
@@ -315,40 +301,32 @@ Q = U x A x F x LMTD
 LMTD = (DeltaT1 - DeltaT2) / ln(DeltaT1 / DeltaT2)
 ```
 
-**For counterflow:**
-- DeltaT1 = T_hot,in - T_cold,out
-- DeltaT2 = T_hot,out - T_cold,in
+For counterflow: DeltaT1 = T_h,in - T_c,out; DeltaT2 = T_h,out - T_c,in
 
-**For parallel flow:**
-- DeltaT1 = T_hot,in - T_cold,in
-- DeltaT2 = T_hot,out - T_cold,out
+For parallel flow: DeltaT1 = T_h,in - T_c,in; DeltaT2 = T_h,out - T_c,out
 
-**F = LMTD correction factor:** 1.0 for pure counterflow; 0.7-0.95 for shell-and-tube or crossflow arrangements.
+**F = LMTD correction factor:** F = 1.0 for pure counterflow (ideal). F = 0.7-0.95 for shell-and-tube and crossflow arrangements. If F < 0.75, consider adding shell passes or switching to counterflow.
 
-**Required area:**
-
-```
-A = Q / (U x F x LMTD)
-```
+**Required area:** A = Q / (U x F x LMTD)
 
 **Typical overall heat transfer coefficient U:**
 
-| Application | U (W/(m^2 K)) |
-|-------------|--------------|
-| Water-to-water plate HX | 3,000-8,000 |
-| CDU (server-side) | 1,000-3,000 |
-| Water-to-air coil (CRAH) | 30-300 |
-| Shell-and-tube (water-water) | 800-2,500 |
-| Finned tube (air cooler) | 20-80 |
+| Application | U (W/(m^2 K)) | Notes |
+|-------------|--------------|-------|
+| Water-to-water plate HX | 3,000-8,000 | Compact, high efficiency |
+| CDU (server-side) | 1,000-3,000 | Data center cooling |
+| Water-to-air coil | 30-300 | Depends on air velocity |
+| Shell-and-tube (water) | 800-2,500 | Industrial standard |
+| Finned tube (air-cooled) | 20-60 | Dry cooler, condenser |
 
 ### Epsilon-NTU Method
 
-Preferred when only inlet temperatures are known (sizing new equipment).
+Preferred when only inlet temperatures and desired capacity are known (sizing new equipment).
 
 **Effectiveness:**
 
 ```
-epsilon = Q_actual / Q_max = Q_actual / (C_min x (T_hot,in - T_cold,in))
+epsilon = Q_actual / Q_max = Q_actual / (C_min x (T_h,in - T_c,in))
 ```
 
 **Number of Transfer Units:**
@@ -360,33 +338,26 @@ NTU = U x A / C_min
 **Heat capacity rates:**
 
 ```
-C_hot = m_dot_hot x Cp_hot    (W/K)
+C_hot  = m_dot_hot x Cp_hot    (W/K)
 C_cold = m_dot_cold x Cp_cold  (W/K)
-C_min = smaller of the two
-C_r = C_min / C_max
+C_min  = min(C_hot, C_cold)
+C_r    = C_min / C_max
 ```
 
-**Counterflow effectiveness:**
+**Epsilon-NTU relationships:**
 
-```
-epsilon = (1 - e^(-NTU(1-Cr))) / (1 - Cr x e^(-NTU(1-Cr)))    for Cr != 1
-epsilon = NTU / (1 + NTU)                                       for Cr = 1
-```
+| Flow Arrangement | Effectiveness Formula |
+|-----------------|----------------------|
+| Counterflow (Cr != 1) | epsilon = (1 - e^(-NTU(1-Cr))) / (1 - Cr x e^(-NTU(1-Cr))) |
+| Counterflow (Cr = 1) | epsilon = NTU / (1 + NTU) |
+| Parallel flow | epsilon = (1 - e^(-NTU(1+Cr))) / (1 + Cr) |
+| Condenser/evaporator (Cr = 0) | epsilon = 1 - e^(-NTU) |
 
-**Design process:**
-1. Choose target effectiveness (typically 0.7-0.85 for cost-effective design)
-2. Calculate C_min, C_r from flow rates and fluid properties
-3. Solve for required NTU from epsilon-NTU relationship
-4. Calculate required area: A = NTU x C_min / U
+**Design process:** Choose target epsilon (typically 0.7-0.85), solve for NTU, then A = NTU x C_min / U.
 
-### When to Use Each Method
-
-| Situation | Recommended Method |
-|-----------|-------------------|
-| Rating existing equipment (all temps known) | LMTD |
-| Sizing new equipment (only inlet temps known) | epsilon-NTU |
-| Quick check on performance change | epsilon-NTU |
-| Multi-pass shell-and-tube design | LMTD with F correction |
+**When to use each method:**
+- LMTD: rating existing equipment or when both inlet AND outlet temperatures are specified
+- Epsilon-NTU: sizing new equipment when only inlet temperatures and desired capacity are known
 
 For LMTD correction factor charts and epsilon-NTU tables for all flow arrangements -- @references/heat-exchangers.md
 
@@ -400,15 +371,13 @@ For LMTD correction factor charts and epsilon-NTU tables for all flow arrangemen
 PUE = Total Facility Power / IT Equipment Power
 ```
 
-- **Total includes:** IT, UPS losses, cooling (chillers, towers, pumps, fans), lighting, power conditioning, security
-- **Total excludes:** Non-data-center loads on same utility meter
-- **Measurement:** Annual average preferred (not instantaneous snapshots)
+Total includes: IT, UPS, cooling (chillers, pumps, fans, towers), lighting, power conditioning, security. Excludes non-data-center loads on the same meter.
 
-**PUE benchmarks:**
+**Measurement:** Annual average (preferred for reporting), not instantaneous. Use 15-minute interval samples for trending.
 
-| PUE | Overhead % | Typical Configuration |
-|-----|-----------|----------------------|
-| 1.03 | 3% | Hyperscale, outdoor/direct air cooling |
+| PUE | Overhead | Typical Configuration |
+|-----|----------|----------------------|
+| 1.03 | 3% | Hyperscale, outdoor/direct air |
 | 1.1 | 10% | Modern enterprise, water-side economizer |
 | 1.2 | 20% | Typical new build, air-side economizer |
 | 1.5 | 50% | Older facilities, legacy cooling |
@@ -420,15 +389,13 @@ PUE = Total Facility Power / IT Equipment Power
 TUE = IT Equipment Energy / (Total Energy - Energy Reused Externally)
 ```
 
-Accounts for heat recovery (district heating, absorption cooling, aquifer thermal storage):
+Accounts for heat recovery: district heating, absorption chillers, aquifer thermal storage.
 
 ```
 TUE = PUE x (1 - reuse_fraction)
 ```
 
-- TUE <= PUE always; equality holds when no heat is reused
-- TUE < 1.0 is achievable when heat recovery exceeds cooling overhead
-- Example: PUE = 1.3, heat recovery = 25% of total energy => TUE = 1.3 x 0.75 = 0.975
+If heat recovery reuses 25% of total energy and PUE = 1.3: TUE = 1.3 x 0.75 = 0.975. TUE < 1.0 is achievable when heat recovery is substantial. TUE <= PUE always; equality holds when no heat is reused.
 
 ### WUE -- Water Usage Effectiveness
 
@@ -436,36 +403,33 @@ TUE = PUE x (1 - reuse_fraction)
 WUE = Annual Site Water Usage (L) / Annual IT Equipment Energy (kWh)
 ```
 
-**Water sources:** Cooling tower evaporation (~90% of water use), humidifiers, chiller heat rejection (if wet-cooled)
+Sources of water use: cooling tower evaporation (~90%), humidifiers, chiller heat rejection.
 
-**WUE targets:**
+| WUE (L/kWh) | Rating | Notes |
+|-------------|--------|-------|
+| < 1.0 | World-class | Air-side economizer or dry cooling |
+| 1.0-2.0 | Good | Moderate evaporative cooling |
+| 2.0-3.0 | Average | Standard cooling tower operation |
+| > 3.0 | Investigate | Excessive water consumption |
 
-| WUE (L/kWh) | Rating | Configuration |
-|-------------|--------|---------------|
-| 0 | Zero water | Air-cooled, no tower |
-| <1.0 | World-class | Minimal evaporative cooling |
-| 1.0-2.0 | Good | Moderate tower use |
-| 2.0-3.0 | Average | Standard tower cooling |
-| >3.0 | Investigate | Excessive water consumption |
-
-**Trade-off:** Evaporative cooling reduces PUE (less compressor energy) but increases WUE (more water).
+Trade-off: air-side economizer uses zero water; evaporative cooling uses more water but delivers lower PUE.
 
 ### CUE -- Carbon Usage Effectiveness
 
 ```
 CUE = Annual Total CO2 Emissions (kg) / Annual IT Energy (kWh)
-CUE = PUE x grid_carbon_intensity (kg CO2/kWh)
+CUE = PUE x local_grid_carbon_intensity (kg CO2/kWh)
 ```
 
-**Grid carbon intensity by region:**
+| Region | Grid Carbon Intensity (kg CO2/kWh) |
+|--------|-----------------------------------|
+| Norway (hydro) | 0.024 |
+| France (nuclear) | 0.085 |
+| EU average | 0.28 |
+| US average | 0.39 |
+| Coal-heavy grids | 0.82 |
 
-| Region | kg CO2/kWh | Primary Source |
-|--------|-----------|---------------|
-| Norway | 0.024 | Hydroelectric |
-| France | 0.085 | Nuclear |
-| EU average | 0.28 | Mixed |
-| US average | 0.39 | Mixed |
-| Coal-heavy grids | 0.82+ | Coal/gas |
+Reduce CUE by: renewable energy procurement (PPAs, RECs), carbon-aware workload scheduling, on-site generation, heat recovery (reduces total energy via TUE).
 
 For PUE measurement methodology (Green Grid Annex A), TUE derivation, and WUE water budget -- @references/dc-efficiency-metrics.md
 
@@ -475,52 +439,39 @@ For PUE measurement methodology (Green Grid Annex A), TUE derivation, and WUE wa
 
 ### Hot/Cold Aisle Layout
 
-Servers are oriented so front air intakes face into the cold aisle and rear exhausts face into the hot aisle.
+Servers face into the cold aisle (front intakes aligned), exhaust into the hot aisle. This is the foundational airflow pattern for all air-cooled data centers.
 
-- **Cold aisle supply:** 15-27C (ASHRAE A-class), delivered from raised-floor tiles or overhead diffusers
-- **Hot aisle return:** 35-45C, returned to CRAC/CRAH inlets
-- **Never allow recirculation:** Hot exhaust air must not short-circuit back to cold aisle intakes
+- **Cold aisle supply:** 15-27C (ASHRAE A-class), delivered from raised floor tiles or overhead diffusers
+- **Hot aisle return:** 35-45C, returned to CRAC/CRAH inlets -- never allow recirculation back to cold aisle
+- **Row spacing:** cold aisles 4 ft (1.2 m) minimum, hot aisles 3 ft (0.9 m) minimum
 
 ### Containment Systems
 
 | Type | Description | PUE Improvement | Preferred When |
 |------|-------------|----------------|----------------|
-| Cold aisle containment (CAC) | Physical barriers + ceiling panels enclose cold aisle | 0.1-0.2 reduction | Easier retrofit to existing halls |
-| Hot aisle containment (HAC) | Physical barriers enclose hot aisle; ducts to CRAC | 0.15-0.25 reduction | New build, highest efficiency |
-| Full containment | Both CAC + HAC with separated airstreams | 0.2-0.3 reduction | New high-density builds |
-| Chimney cabinet | Per-rack exhaust duct to ceiling plenum | 0.1-0.15 reduction | Single-rack solutions |
+| Cold aisle containment (CAC) | Physical barriers + ceiling panels enclose cold aisle | 0.1-0.2 PUE reduction | Easier retrofit to existing hall |
+| Hot aisle containment (HAC) | Physical barriers enclose hot aisle; ducts to CRAC return | 0.15-0.25 PUE reduction | New build; highest efficiency |
+| Full containment | Both CAC + HAC | 0.2-0.3 PUE reduction | New high-density builds |
 
-**Containment is the single highest-ROI efficiency improvement** for most existing data centers.
+CAC captures supply air; HAC captures exhaust air. HAC is generally preferred for new builds because it prevents hot air mixing with the room and allows higher CRAC supply temperatures.
 
-### Raised-Floor Airflow
+### Raised Floor Airflow
 
-Supply air is delivered from an under-floor plenum through perforated tiles into the cold aisle.
-
-| Parameter | Recommended Value |
-|-----------|------------------|
-| Plenum height | 18-24 in (minimum 12 in) |
-| Tile airflow | 150-500 CFM per tile at 0.05 in WG |
-| Plenum pressure | 0.05-0.10 in water gauge |
-
-**Tile placement rules:**
-- Cold aisle only -- never place perforated tiles in hot aisles or under power equipment
-- Higher-perforation tiles in front of highest-density racks
-- Solid tiles under cable trays and between rows
-
-**Blanking panels:** Fill ALL empty rack U-spaces with blanking panels to prevent hot air recirculation. This is the highest-ROI single action for airflow management -- zero capital cost, immediate measurable PUE improvement.
+- **Plenum height:** 12 inches minimum, 18-24 inches recommended for high-density deployments
+- **Perforated tiles:** 150-500 CFM per tile at 0.05 inches water gauge plenum pressure
+- **Tile placement rules:** cold aisle only; no tiles in hot aisles or under power/network equipment
+- **Blanking panels:** fill ALL empty rack U-spaces to prevent hot air recirculation -- highest ROI single action for thermal management
+- **Cable management:** route cables to avoid blocking plenum airflow; use overhead trays where possible
 
 ### Economizer Modes
 
 | Mode | Mechanism | Water Use | Best Climate |
 |------|-----------|-----------|-------------|
-| Air-side (direct) | Outdoor air when T_outdoor < T_setpoint | Zero | Cool/dry climates |
-| Water-side (indirect) | Cooling tower when T_wetbulb allows free cooling | Moderate | Temperate climates |
+| Air-side (direct) | Outdoor air when T_outdoor < T_supply setpoint | Zero | Cool/dry climates |
+| Water-side (indirect) | Cooling tower free cooling when T_wetbulb allows | Moderate | Temperate climates |
 | Evaporative (adiabatic) | Pre-cool supply air via evaporation | High | Hot/dry climates |
-| Hybrid | Air-side + evaporative assist | Variable | Wide range |
 
-**Air-side economizer:** Requires air filtration (MERV 11-13 minimum). Humidity control needed to stay within ASHRAE recommended range (20-80% RH). Zero water use makes this the preferred option for WUE optimization.
-
-**Water-side economizer:** Cooling tower provides free cooling when wet-bulb temperature is sufficiently below chilled water supply setpoint. Typical switchover: wet-bulb < supply setpoint - 3C.
+Air-side economizer requires air filtration and humidity control. Water-side economizer avoids contamination risk by keeping outdoor air outside. Evaporative saves compressor energy but increases WUE.
 
 ---
 
