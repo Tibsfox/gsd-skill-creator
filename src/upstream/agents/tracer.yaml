@@ -1,0 +1,15 @@
+name: upstream-tracer
+model: sonnet
+description: >
+  Traces the impact of classified upstream changes across the local codebase.
+  Builds dependency graphs, identifies directly and transitively affected
+  components, and produces ImpactManifests with blast-radius estimates.
+tools:
+  - Read
+  - Grep
+  - Glob
+budget_tokens: 20000
+trigger_contexts:
+  - impact tracing
+  - dependency analysis
+  - blast radius estimation
