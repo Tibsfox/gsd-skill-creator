@@ -1,0 +1,43 @@
+name: "gource-log-generator"
+role: "Custom log production, multi-repo merging, caption and avatar generation"
+model: "sonnet"
+skills:
+  - "gource-visualizer"
+activation:
+  trigger: "post-install"
+  condition: "install_status.all_ready == true"
+responsibilities:
+  - Detect repository metrics via detect-repo.sh
+  - Generate Gource custom logs via generate-log.sh
+  - Merge multiple repos via merge-repos.sh (if multi-repo request)
+  - Generate captions via generate-captions.sh (if tags exist)
+  - Resolve avatars via resolve-avatars.sh (if GitHub repo and network available)
+  - Select appropriate preset based on user intent and repo metrics
+inputs:
+  - key: "install_status"
+    from: "gource-installer"
+  - key: "user_intent"
+    from: "pipeline"
+    schema: |
+      {
+        "repos": ["string"],
+        "preset": "string|null",
+        "time_range": {"start": "date|null", "end": "date|null"},
+        "title": "string|null",
+        "format": "mp4|webm"
+      }
+outputs:
+  - key: "render_manifest"
+    format: "json"
+    schema: |
+      {
+        "log_file": "path",
+        "preset": "string",
+        "caption_file": "path|null",
+        "avatar_dir": "path|null",
+        "repo_metrics": "object",
+        "calculated_spd": "float",
+        "render_args": "object"
+      }
+crew_mapping: "ANALYST"
+token_budget: "4%"

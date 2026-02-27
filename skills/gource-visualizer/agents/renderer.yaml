@@ -1,0 +1,30 @@
+name: "gource-renderer"
+role: "Gource + ffmpeg pipeline execution"
+model: "haiku"
+skills:
+  - "gource-visualizer"
+activation:
+  trigger: "post-log-generation"
+  condition: "render_manifest exists"
+responsibilities:
+  - Execute render-video.sh with manifest parameters
+  - Detect headless environment and use Xvfb if needed
+  - Monitor pipeline progress
+  - Verify output file integrity via ffprobe
+inputs:
+  - key: "render_manifest"
+    from: "gource-log-generator"
+outputs:
+  - key: "render_result"
+    format: "json"
+    schema: |
+      {
+        "output_path": "path",
+        "duration_seconds": "float",
+        "resolution": "string",
+        "file_size_bytes": "integer",
+        "codec": "string",
+        "success": "boolean"
+      }
+crew_mapping: "EXEC"
+token_budget: "2%"
