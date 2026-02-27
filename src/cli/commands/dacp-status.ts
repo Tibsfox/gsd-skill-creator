@@ -49,7 +49,8 @@ interface DacpStatusData {
 }
 
 interface DriftEntry {
-  pattern: string;
+  handoff_type: string;
+  pattern?: string; // backward compat alias
   score: number;
   fidelity_level: number;
   recommendation: string;
@@ -57,7 +58,8 @@ interface DriftEntry {
 }
 
 interface Recommendation {
-  pattern: string;
+  handoff_type: string;
+  pattern?: string; // backward compat alias
   action: string;
   from: number;
   to: number;
@@ -251,8 +253,9 @@ export async function dacpStatusCommand(args: string[]): Promise<number> {
     for (const action of pendingActions) {
       const arrow =
         action.action === 'promote' ? '\u2191' : '\u2193';
+      const actionType = action.handoff_type ?? action.pattern ?? 'unknown';
       p.log.message(
-        `  ${arrow} ${action.pattern} \u2192 Level ${action.to} (${action.reason})`,
+        `  ${arrow} ${actionType} \u2192 Level ${action.to} (${action.reason})`,
       );
     }
   }
