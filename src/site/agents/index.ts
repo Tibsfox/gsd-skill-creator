@@ -1,5 +1,5 @@
-export { generateLlmsTxt } from './llms-txt';
-export { generateLlmsFullTxt } from './llms-full';
-export { generateAgentsMd } from './agents-md';
-export { generateSchemaOrg } from './schema-org';
-export { generateMarkdownMirror } from './markdown-mirror';
+export { generateLlmsTxt } from './llms-txt.js';
+export { generateLlmsFullTxt } from './llms-full.js';
+export { generateAgentsMd } from './agents-md.js';
+export { generateSchemaOrg } from './schema-org.js';
+export { generateMarkdownMirror } from './markdown-mirror.js';

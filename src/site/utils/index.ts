@@ -1,5 +1,5 @@
-export { parseFrontmatter } from './frontmatter';
-export { pathToSlug, slugToOutputPath, slugToUrl } from './slug';
+export { parseFrontmatter } from './frontmatter.js';
+export { pathToSlug, slugToOutputPath, slugToUrl } from './slug.js';
 export {
   walkMarkdownFiles,
   createFileOps,
@@ -7,5 +7,5 @@ export {
   type FileOpsConfig,
   type ReadDirFn,
   type StatFn,
-} from './files';
-export { extractToc } from './toc';
+} from './files.js';
+export { extractToc } from './toc.js';

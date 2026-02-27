@@ -1,6 +1,6 @@
-export { generateCommentSection } from './comments';
-export { htmlToMarkdown } from './html-to-md';
-export { pullContent, pushContent } from './wp-sync';
+export { generateCommentSection } from './comments.js';
+export { htmlToMarkdown } from './html-to-md.js';
+export { pullContent, pushContent } from './wp-sync.js';
 export type {
   WpPost,
   WpApiAdapter,
@@ -9,4 +9,4 @@ export type {
   PullOptions,
   PullResult,
   PushResult,
-} from './wp-sync';
+} from './wp-sync.js';

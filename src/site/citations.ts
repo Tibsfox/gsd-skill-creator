@@ -1,4 +1,4 @@
-import type { CitationDatabase, CitationEntry } from './types';
+import type { CitationDatabase, CitationEntry } from './types.js';
 
 /** A citation resolved from the markdown source. */
 export interface ResolvedCitation {
