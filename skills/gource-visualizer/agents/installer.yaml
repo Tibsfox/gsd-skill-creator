@@ -1,0 +1,26 @@
+name: "gource-installer"
+role: "Dependency verification and installation"
+model: "haiku"
+skills:
+  - "gource-visualizer"
+activation:
+  trigger: "pre-render"
+  condition: "always"
+responsibilities:
+  - Verify Gource is installed and at minimum version
+  - Verify ffmpeg is installed with libx264 support
+  - Verify Xvfb is available on Linux systems
+  - Install missing dependencies via install-gource.sh
+  - Report installation status to pipeline
+outputs:
+  - key: "install_status"
+    format: "json"
+    schema: |
+      {
+        "gource_version": "string",
+        "ffmpeg_version": "string",
+        "xvfb_available": "boolean",
+        "all_ready": "boolean"
+      }
+crew_mapping: "STAGE"
+token_budget: "2%"
