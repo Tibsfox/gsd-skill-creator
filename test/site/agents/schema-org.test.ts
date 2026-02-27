@@ -49,7 +49,8 @@ describe('generateSchemaOrg', () => {
       },
       url: '/articles/my-article/',
     });
-    const result = JSON.parse(generateSchemaOrg(page, site));
+    const parsed = JSON.parse(generateSchemaOrg(page, site));
+    const result = Array.isArray(parsed) ? parsed[0] : parsed;
 
     expect(result['@context']).toBe('https://schema.org');
     expect(result['@type']).toBe('Article');
@@ -68,7 +69,8 @@ describe('generateSchemaOrg', () => {
       },
       url: '/tech/circuits/',
     });
-    const result = JSON.parse(generateSchemaOrg(page, site));
+    const parsed = JSON.parse(generateSchemaOrg(page, site));
+    const result = Array.isArray(parsed) ? parsed[0] : parsed;
 
     expect(result['@type']).toBe('TechArticle');
     expect(result).toHaveProperty('proficiencyLevel');
@@ -84,7 +86,8 @@ describe('generateSchemaOrg', () => {
       },
       url: '/books/electronics/',
     });
-    const result = JSON.parse(generateSchemaOrg(page, site));
+    const parsed = JSON.parse(generateSchemaOrg(page, site));
+    const result = Array.isArray(parsed) ? parsed[0] : parsed;
 
     expect(result['@type']).toBe('Book');
     expect(result.name).toBe('Electronics Handbook');
@@ -100,7 +103,8 @@ describe('generateSchemaOrg', () => {
       },
       url: '/courses/intro-circuits/',
     });
-    const result = JSON.parse(generateSchemaOrg(page, site));
+    const parsed = JSON.parse(generateSchemaOrg(page, site));
+    const result = Array.isArray(parsed) ? parsed[0] : parsed;
 
     expect(result['@type']).toBe('Course');
     expect(result.name).toBe('Intro to Circuits');
@@ -116,7 +120,8 @@ describe('generateSchemaOrg', () => {
       },
       url: '/',
     });
-    const result = JSON.parse(generateSchemaOrg(page, site));
+    const parsed = JSON.parse(generateSchemaOrg(page, site));
+    const result = Array.isArray(parsed) ? parsed[0] : parsed;
 
     expect(result['@type']).toBe('WebSite');
     expect(result.name).toBe('TibsFox');
@@ -130,7 +135,8 @@ describe('generateSchemaOrg', () => {
       frontmatter: { title: 'Some Page' },
       url: '/some-page/',
     });
-    const result = JSON.parse(generateSchemaOrg(page, site));
+    const parsed = JSON.parse(generateSchemaOrg(page, site));
+    const result = Array.isArray(parsed) ? parsed[0] : parsed;
 
     expect(result['@type']).toBe('WebPage');
     expect(result.name).toBe('Some Page');
