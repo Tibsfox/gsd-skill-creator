@@ -8,265 +8,273 @@
 
 ### Measurement Boundary
 
-The Green Grid defines PUE measurement at three levels of precision:
+PUE requires clear boundary definitions for both the numerator (total facility power) and denominator (IT equipment power).
 
-| Level | IT Power Measurement Point | Total Power Measurement Point | Accuracy |
-|-------|---------------------------|-------------------------------|----------|
-| Level 1 (basic) | UPS output | Utility meter | +/- 10-15% |
-| Level 2 (standard) | PDU output | Utility meter + sub-meters | +/- 5-10% |
-| Level 3 (advanced) | Server-level metering | Full sub-metering per system | +/- 2-5% |
+**Total facility power** (measured at utility meter or ATS output):
 
-**IT Power measurement:**
-- Level 1: UPS output power (includes UPS-to-rack distribution losses in IT term)
-- Level 2: PDU output power (more accurate, excludes branch circuit losses)
-- Level 3: Sum of individual server/network/storage power draw
+| Include | Exclude |
+|---------|---------|
+| IT equipment (servers, storage, network) | Office space on shared meter |
+| UPS and power distribution losses | Tenant/colocation customer loads (if separate meter) |
+| Cooling (chillers, pumps, fans, towers) | Construction power |
+| Lighting within data center boundary | External campus lighting |
+| Security systems (CCTV, access control) | Non-data-center mechanical systems |
+| Fire suppression power | |
+| Generator/switchgear parasitic loads | |
 
-**Total Facility Power measurement:**
-- Everything on the data center utility meter
-- Includes: IT, cooling, UPS, lighting, security, fire suppression controls, generator transfer switches
-- Excludes: office space, cafeteria, parking (if on same meter, subtract via sub-metering)
+**IT equipment power** (measured at PDU output or server input):
+
+| Measurement Point | Accuracy | Ease |
+|-------------------|----------|------|
+| Utility meter minus non-IT submeters | Low (estimated) | Easy |
+| UPS output (before PDU) | Medium | Moderate |
+| PDU output (closest to IT) | High | Best for reporting |
+| Server-level (BMC/IPMI) | Highest | Difficult at scale |
 
 ### Averaging Period
 
 | Period | Use Case | Notes |
 |--------|---------|-------|
-| Instantaneous | Troubleshooting, commissioning | Misleading for reporting (varies with outdoor temp, IT load) |
-| 15-minute intervals | Trending, optimization | Good granularity for identifying efficiency patterns |
-| Monthly average | Seasonal analysis | Shows economizer impact across seasons |
-| Annual average | Official reporting | Gold standard; accounts for all seasonal variation |
+| Instantaneous (1 min) | Troubleshooting, commissioning | Highly variable, not for reporting |
+| Hourly | Trending, anomaly detection | Shows diurnal patterns |
+| Monthly | Operational reporting | Captures seasonal variation |
+| Annual | Benchmarking, regulatory reporting | Preferred by Green Grid, ASHRAE |
 
-**Reporting:** Always report annual average PUE. Instantaneous PUE on a cool night with low IT load can be deceptively low.
+**Best practice:** Collect 15-minute interval data. Report annual average. Include measurement uncertainty (+/- 5% is typical for metered PUE).
 
-### Boundary Disputes
+### Common Measurement Pitfalls
 
-**On-site solar generation:**
-- Green Grid recommendation: do not subtract solar from total facility power for PUE calculation
-- Solar reduces CUE (carbon), not PUE (efficiency)
-- Rationale: PUE measures infrastructure efficiency, not energy source
-
-**Generator fuel:**
-- During utility outage, use generator output as total facility power
-- Generator efficiency losses are upstream of the data center boundary
-
-**Shared building:**
-- Sub-meter data center loads separately
-- Allocate shared services (fire suppression, security) proportionally by floor area
+- **Generator testing:** Generator runs add fuel-equivalent power but may not be metered electrically. Exclude test runs from PUE calculation or note as adjustment.
+- **On-site solar:** Solar reduces utility meter reading, artificially lowering total facility power. Report PUE with and without solar offset for transparency.
+- **Shared building loads:** If data center shares a building, submeter data center boundary loads. Estimating shared loads introduces error.
+- **IT load changes:** PUE improves as IT load increases (fixed cooling overhead spread over more IT). Do not compare PUE between data centers at different utilizations without normalizing.
 
 ## PUE Categories and Partial PUE
 
-The Green Grid defines partial PUE (pPUE) for subsystem benchmarking:
+### Partial PUE (pPUE) for Subsystem Benchmarking
 
-### Partial PUE by Subsystem
+The Green Grid defines partial PUE to isolate overhead contributions from individual subsystems:
 
 ```
 pPUE_cooling = (P_IT + P_cooling) / P_IT
 pPUE_UPS     = (P_IT + P_UPS_losses) / P_IT
 pPUE_lighting = (P_IT + P_lighting) / P_IT
-pPUE_other   = (P_IT + P_other) / P_IT
 ```
 
-**Relationship:**
+**Total PUE decomposition:**
 
 ```
-PUE = 1 + (pPUE_cooling - 1) + (pPUE_UPS - 1) + (pPUE_lighting - 1) + (pPUE_other - 1)
+PUE = 1 + (P_cooling + P_UPS_losses + P_lighting + P_other) / P_IT
+    = 1 + overhead_cooling + overhead_UPS + overhead_lighting + overhead_other
 ```
 
 ### Typical pPUE Breakdown
 
-| Subsystem | pPUE Contribution | % of Overhead | Improvement Opportunity |
-|-----------|------------------|---------------|------------------------|
-| Cooling | 0.15-0.60 | 50-70% | Economizer, raise setpoints, containment |
-| UPS | 0.03-0.08 | 10-20% | Higher-efficiency UPS, eco-mode |
-| Power distribution | 0.02-0.05 | 5-12% | Higher voltage (480V), fewer transformations |
-| Lighting | 0.01-0.02 | 2-5% | LED, occupancy sensors |
-| Other | 0.01-0.03 | 3-8% | Security, fire suppression, CCTV |
+| Subsystem | Overhead Contribution | % of Total Overhead |
+|-----------|----------------------|---------------------|
+| Cooling | 0.10-0.40 | 50-70% |
+| UPS/power distribution | 0.03-0.10 | 15-25% |
+| Lighting | 0.01-0.03 | 3-8% |
+| Other (security, fire) | 0.01-0.02 | 2-5% |
 
-**Priority:** Cooling is always the largest overhead component. Target cooling efficiency first.
+Cooling is the largest overhead contributor in most facilities. Reducing cooling overhead has the greatest impact on PUE.
 
-### PUE Improvement Strategies
+### PUE by Cooling Technology
 
-| Strategy | PUE Reduction | Capital Cost | Payback |
-|----------|--------------|-------------|---------|
-| Blanking panels + sealing | 0.05-0.10 | Very low | <6 months |
-| Hot/cold aisle containment | 0.10-0.20 | Low-moderate | 6-18 months |
-| Raise cold aisle setpoint (to 27C) | 0.05-0.10 | Zero | Immediate |
-| Water-side economizer | 0.10-0.30 | Moderate | 1-3 years |
-| Air-side economizer | 0.15-0.40 | Moderate | 1-2 years |
-| Direct liquid cooling (DTC) | 0.10-0.25 | High | 2-4 years |
-| High-efficiency UPS (eco-mode) | 0.02-0.04 | Low | 1-2 years |
+| Technology | Typical pPUE_cooling | Notes |
+|------------|---------------------|-------|
+| Direct expansion (DX) CRAC | 1.30-1.50 | Least efficient, legacy |
+| Chilled water CRAH | 1.15-1.30 | Standard modern |
+| Water-side economizer | 1.05-1.15 | Moderate climate benefit |
+| Air-side economizer | 1.03-1.10 | Cool/dry climate |
+| Direct liquid cooling (DTC) | 1.02-1.08 | Minimal fan power |
+| Immersion cooling | 1.01-1.05 | Near-zero air movement |
 
 ## TUE Full Derivation
 
-### Definition
+### Concept
 
-Total Usage Effectiveness accounts for energy reused externally (heat recovery):
+Total Usage Effectiveness accounts for energy reuse -- heat exported from the data center for external beneficial use.
 
 ```
-TUE = IT_energy / (Total_energy - Reused_energy)
+TUE = E_IT / (E_total - E_reused)
 ```
 
-Alternatively:
+Where:
+- E_IT = annual IT equipment energy consumption (kWh)
+- E_total = annual total facility energy consumption (kWh)
+- E_reused = annual energy exported for external reuse (kWh)
+
+### Relationship to PUE
+
+```
+PUE = E_total / E_IT
+TUE = E_IT / (E_total - E_reused) = 1 / (PUE - E_reused/E_IT)
+```
+
+Or equivalently:
 
 ```
 TUE = PUE x (1 - reuse_fraction)
 ```
 
-Where reuse_fraction = Reused_energy / Total_energy.
+Where reuse_fraction = E_reused / E_total.
 
-### Forms of Energy Reuse
+### Reuse Energy Sources
 
-| Reuse Method | Temperature Required | Typical Recovery % | Application |
-|-------------|---------------------|-------------------|-------------|
-| District heating | >55C return water | 10-40% of total | Nordic climates, campus settings |
-| Absorption chilling | >80C (double-effect) | 5-15% | Converting waste heat to cooling |
-| Aquifer thermal storage | >30C | 10-25% | Seasonal storage for heating |
-| Swimming pool heating | >30C | 2-5% | Community integration |
-| Snow melting | >25C | 1-3% | Winter climates, parking, walkways |
+| Source | Typical Temperature | Reuse Application |
+|--------|-------------------|-------------------|
+| Server exhaust air | 35-45C | Preheating office ventilation |
+| CDU return water | 40-55C | District heating (with boost) |
+| Hot water cooling (W5) | >55C | District heating (direct) |
+| Condenser heat rejection | 30-40C | Greenhouse heating, aquaculture |
+| Absorption chiller input | >80C (requires boost) | Chilled water generation |
 
-### TUE Calculation Example
+### TUE Examples
 
-**Scenario:** Data center, PUE = 1.30, annual total energy = 10,000 MWh, heat recovery to district heating = 2,500 MWh
+| Scenario | PUE | Reuse % | TUE | Notes |
+|----------|-----|---------|-----|-------|
+| No heat recovery | 1.30 | 0% | 1.30 | TUE = PUE |
+| Moderate district heating | 1.25 | 15% | 1.06 | Nordic climate typical |
+| Aggressive heat recovery | 1.20 | 30% | 0.84 | TUE < 1 is possible |
+| Hyperscale with full recovery | 1.10 | 40% | 0.66 | Theoretical best case |
 
-```
-Reuse_fraction = 2,500 / 10,000 = 0.25
-TUE = 1.30 x (1 - 0.25) = 1.30 x 0.75 = 0.975
-```
-
-TUE < 1.0 means the data center provides more useful energy (IT + heat) than it consumes from the grid. This is achievable with W4/W5 water class and district heating integration.
-
-### TUE < 1.0 Interpretation
-
-When TUE < 1.0, the data center is a net energy contributor to the community. This reframes the data center from "energy consumer" to "heat source" -- a significant narrative shift for sustainability reporting.
-
-**Conditions for TUE < 1.0:**
-- PUE < 1.5 (reasonable infrastructure efficiency)
-- Heat recovery > 1/3 of total energy
-- Practical only with W4/W5 water class (return water hot enough for district heating)
+TUE < 1.0 means the data center delivers more useful energy (IT processing + exported heat) than it consumes. This is the goal for sustainable data center operations.
 
 ## WUE Annual Calculation
 
-### Monthly Water Budget
+### Water Sources in Data Center Operations
 
-For each month, calculate water consumption from each source:
+| Source | Typical Consumption | % of Total |
+|--------|-------------------|------------|
+| Cooling tower evaporation | 1.5-3.0 L per kWh rejected | 70-90% |
+| Cooling tower blowdown | 0.3-1.0 L per kWh rejected | 10-20% |
+| Humidifier makeup | 0.1-0.5 L per kWh IT (climate dependent) | 5-15% |
+| Evaporative pre-cooling | 0.5-2.0 L per kWh IT (hot climates) | 0-30% |
+| Domestic/cleaning | Negligible | <1% |
 
-**Cooling tower evaporation:**
+### Monthly Water Budget Method
 
-```
-V_evap (L/month) = Q_rejected (kW) x hours x 3.6 / (h_fg x rho_water)
-```
-
-Where h_fg = latent heat of vaporization (2,260 kJ/kg at 100C, but evaporation occurs at lower temperatures; use 2,400 kJ/kg at 30C).
-
-Simplified: approximately 1.5 L/kWh of heat rejected for a standard cooling tower.
-
-**Humidifier consumption:**
+For each month m:
 
 ```
-V_humid (L/month) = humidifier_capacity (L/h) x operating_hours
+W_tower(m) = Q_rejected(m) x evaporation_rate(m) x hours(m)
+W_blowdown(m) = W_tower(m) / (cycles_of_concentration - 1)
+W_humidifier(m) = makeup_rate(m) x hours_needed(m)
+W_total(m) = W_tower(m) + W_blowdown(m) + W_humidifier(m)
 ```
 
-Operating hours depend on climate and air-side economizer use. Desert climates: 2,000-4,000 hr/yr. Humid climates: 500-1,000 hr/yr.
-
-**Blowdown (cooling tower):**
+Annual WUE:
 
 ```
-V_blowdown = V_evap / (cycles_of_concentration - 1)
+WUE = sum(W_total(m) for m=1..12) / sum(E_IT(m) for m=1..12)
 ```
 
-Typical cycles of concentration: 3-5 (higher = less blowdown = less water). Limited by water chemistry (scaling, corrosion).
-
-### Annual WUE Calculation
+### Cooling Tower Evaporation Rate
 
 ```
-WUE = (V_evap_annual + V_humid_annual + V_blowdown_annual) / IT_energy_annual
+evaporation_rate (L/hr) = Q_rejected (kW) x 3,600 / (h_fg x 1,000)
 ```
 
-Units: L/kWh (note: some references use gallons/kWh -- specify units explicitly).
+Where h_fg = latent heat of vaporization (approximately 2,260 kJ/kg at 40C).
+
+Simplified: approximately 1.5 L per kWh of heat rejected.
+
+### Cycles of Concentration
+
+Cooling tower blowdown is controlled by the cycles of concentration (CoC):
+
+```
+blowdown_rate = evaporation_rate / (CoC - 1)
+```
+
+| CoC | Blowdown % of Evaporation | Water Savings |
+|-----|--------------------------|---------------|
+| 3 | 50% | Baseline |
+| 5 | 25% | Moderate |
+| 7 | 17% | Good |
+| 10 | 11% | Very good (requires water treatment) |
+
+Higher CoC reduces water consumption but increases mineral concentration, requiring better water treatment to prevent scaling.
 
 ### WUE Reduction Strategies
 
-| Strategy | WUE Reduction | Trade-off |
-|----------|--------------|-----------|
-| Air-side economizer (eliminate tower) | 100% reduction | Requires filtration, humidity control |
-| Higher cycles of concentration | 20-40% blowdown reduction | Water treatment cost increases |
-| Increase condenser water setpoint | 10-20% evaporation reduction | Chiller works harder (PUE may increase) |
-| Dry cooler for shoulder seasons | 30-50% seasonal reduction | Capital cost for additional equipment |
-| Water-free cooling (adiabatic pre-cool) | Variable | Different water consumption profile |
+| Strategy | WUE Impact | PUE Impact | Trade-off |
+|----------|-----------|-----------|-----------|
+| Air-side economizer | Eliminates tower water | May increase fan power | Air filtration needed |
+| Dry cooler (no tower) | Zero water | Higher approach temp | Works in cool climates |
+| Higher CoC | 20-40% reduction | None | Better water treatment |
+| Increased tower efficiency | 10-20% reduction | None | Larger tower investment |
+| Waterless humidification | Eliminates humidifier water | Minor | Higher capital cost |
 
 ## Benchmarking and Industry Data
 
-### PUE by Facility Type
+### PUE by Facility Type (Industry Surveys)
 
-| Facility Type | Average PUE | Range |
-|--------------|-------------|-------|
-| Hyperscale cloud (Google, Meta, Microsoft) | 1.10-1.12 | 1.06-1.20 |
-| Large enterprise (Fortune 500) | 1.40-1.60 | 1.20-2.00 |
-| Colocation (Tier III) | 1.30-1.50 | 1.15-1.80 |
-| Small/medium enterprise | 1.80-2.20 | 1.40-3.00 |
-| Legacy (>15 years old) | 2.00-2.50 | 1.80-3.50 |
+| Facility Type | Median PUE | 25th Percentile | 75th Percentile |
+|--------------|-----------|-----------------|-----------------|
+| Enterprise on-premises | 1.80 | 1.50 | 2.10 |
+| Colocation (multi-tenant) | 1.55 | 1.35 | 1.80 |
+| Cloud hyperscaler | 1.12 | 1.08 | 1.18 |
+| New build (2023+) | 1.25 | 1.10 | 1.40 |
+| Top performers (published) | 1.06 | 1.03 | 1.10 |
 
-### PUE by Uptime Institute Tier
+Source: Uptime Institute annual survey data, compiled across multiple years.
 
-| Tier | Typical PUE | Redundancy | Uptime Target |
-|------|-------------|-----------|---------------|
-| Tier I | 2.0+ | N (no redundancy) | 99.671% |
-| Tier II | 1.8 | N+1 | 99.741% |
-| Tier III | 1.5 | N+1, dual path | 99.982% |
-| Tier IV | 1.4 | 2N+1, fault tolerant | 99.995% |
+### Regional Variation
 
-**Observation:** Higher tiers historically meant higher PUE (more redundant equipment running at partial load). Modern Tier III/IV designs achieve 1.2-1.3 with advanced cooling and VFD optimization.
+Climate significantly affects achievable PUE:
 
-### Industry Targets and Standards
+| Climate Zone | Free Cooling Hours | Best Achievable PUE | WUE Impact |
+|-------------|-------------------|--------------------|-----------| 
+| Nordic (Stockholm, Helsinki) | 7,000+ | 1.03-1.08 | Low (minimal tower) |
+| Maritime (London, Amsterdam) | 5,000-6,000 | 1.06-1.12 | Low-moderate |
+| Continental (Chicago, Frankfurt) | 3,000-5,000 | 1.10-1.20 | Moderate |
+| Subtropical (Singapore, Miami) | <500 | 1.20-1.40 | High (year-round tower) |
+| Arid (Phoenix, Dubai) | 2,000-4,000 | 1.10-1.25 | Very high (evaporative) |
 
-| Standard/Program | PUE Target | Scope |
-|-----------------|-----------|-------|
-| EU Code of Conduct (new builds) | < 1.30 | European Union |
-| EPA Energy Star for Data Centers | Top 25% benchmark | United States |
-| Singapore BCA Green Mark | < 1.40 (Platinum) | Singapore |
-| LEED v4 (data center credit) | Demonstrate improvement | Global |
-| Open Compute Project | < 1.10 (design target) | Industry consortium |
+### Certification and Reporting Standards
+
+| Standard | Focus | Key Metric |
+|----------|-------|-----------|
+| EPA Energy Star for Data Centers | Energy efficiency | PUE benchmark vs national database |
+| EU Code of Conduct (JRC) | Best practices | PUE target by tier |
+| EN 50600 | Data center infrastructure | PUE, availability, security |
+| ASHRAE 90.4 | Energy standard for data centers | Mechanical PUE budget |
+| ISO 30134 | KPI for data centers | PUE, REF, WUE, CUE, GEC |
 
 ## Carbon-Optimal Operation
 
-### Time-Varying Carbon Intensity
+### Time-Varying CUE Calculation
 
-Grid carbon intensity varies by hour due to renewable generation, demand patterns, and dispatch order:
+Grid carbon intensity varies by hour based on generation mix. Carbon-aware operation shifts workloads to low-carbon periods.
 
 ```
-CUE = sum(P_total(t) x CI(t), t=0..T) / sum(P_IT(t), t=0..T)
+CUE = sum(P_total(t) x CI(t) x dt) / sum(P_IT(t) x dt)
 ```
 
 Where CI(t) = grid carbon intensity at time t (kg CO2/kWh).
 
-### Carbon-Aware Scheduling
+### Carbon-Aware Strategies
 
-Shift deferrable workloads (batch processing, model training, backups) to low-carbon hours:
-
-| Grid Condition | CI Typical | Strategy |
-|---------------|-----------|----------|
-| High renewables (midday solar, windy nights) | 0.05-0.15 | Schedule batch jobs |
-| Shoulder periods | 0.20-0.40 | Normal operation |
-| Peak demand (gas peakers) | 0.50-0.80 | Defer non-critical loads |
-| Coal-heavy hours | 0.80+ | Maximum deferral |
-
-### Carbon Reduction Hierarchy
-
-1. **Reduce PUE** (less total energy for same IT) -- infrastructure efficiency
-2. **Green energy procurement** (PPAs, RECs) -- supply decarbonization
-3. **Carbon-aware scheduling** -- temporal load shifting
-4. **On-site generation** (solar, fuel cells) -- local clean generation
-5. **Heat recovery** (reduce community fossil heat) -- system-level impact
+| Strategy | CUE Reduction | Complexity | Notes |
+|----------|--------------|-----------|-------|
+| Renewable energy PPA | 30-90% | Medium | Depends on % of load covered |
+| Time-shifting batch workloads | 10-30% | High | Requires workload flexibility |
+| Geographic workload routing | 15-40% | Very high | Multi-site infrastructure |
+| On-site solar/wind | 10-50% | Medium | Weather dependent, space needed |
+| Grid carbon API integration | 5-15% | Low | Marginal gain, easy to implement |
 
 ### Renewable Energy Accounting
 
-| Method | Carbon Impact | Cost | Credibility |
-|--------|--------------|------|------------|
-| Behind-the-meter solar | Direct reduction | High upfront, low LCOE | Highest (physical connection) |
-| Power Purchase Agreement (PPA) | Contractual claim | Market rate | High (additionality) |
-| Renewable Energy Certificate (REC) | Market claim | Low | Moderate (may not be additional) |
-| Carbon offsets | Compensatory | Variable | Low-moderate (quality varies) |
+| Method | Description | Additionality |
+|--------|-------------|---------------|
+| Unbundled RECs | Purchase certificates, not tied to specific generation | Low |
+| Bundled PPAs | Contract with specific renewable project | High |
+| On-site generation | Solar/wind at data center | Highest |
+| 24/7 carbon-free matching | Hour-by-hour matching of consumption to clean generation | Highest |
 
-**Best practice:** Prioritize behind-the-meter and PPA. Use RECs as supplement. Minimize reliance on offsets.
+24/7 carbon-free energy matching (pioneered by Google) is the gold standard. It ensures that for every hour of operation, equivalent clean energy was generated, rather than relying on annual averages that mask dirty-grid hours.
 
 ---
 *Data Center Efficiency Metrics Deep Reference v1.0.0 -- Thermal Engineering Skill*
