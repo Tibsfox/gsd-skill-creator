@@ -292,7 +292,33 @@ skills/                     # Generated skill packs (v1.41+)
 │   └── tests/               # Shell script test suites
 ├── methodology/             # Methodology documentation skills
 ├── mfe-domains/             # 10 MFE domain skills (v1.35)
-└── openstack/               # OpenStack operational skills (v1.33)
+├── openstack/               # OpenStack operational skills (v1.33)
+└── physical-infrastructure/ # Physical infrastructure engineering (v1.48)
+    ├── SKILL.md              # Progressive disclosure entry point
+    ├── references/            # 8 domain reference documents
+    │   ├── fluid-systems.md
+    │   ├── power-systems.md
+    │   ├── thermal-engineering.md
+    │   ├── blueprint-engine.md
+    │   ├── dimensional-analysis.md
+    │   ├── simulation-bridge.md
+    │   ├── construction-docs.md
+    │   └── creative-pipeline.md
+    ├── symbols/               # Engineering drawing symbols
+    │   ├── isa-5.1/           # 50 ISA-5.1 P&ID SVG symbols
+    │   └── ieee-c2/           # 30 IEEE SLD SVG symbols
+    ├── agents/                # 6 agent definitions
+    │   ├── architect.md       # Opus entry point — design intent router
+    │   ├── fluid-specialist.md
+    │   ├── power-specialist.md
+    │   ├── thermal-specialist.md
+    │   ├── blueprint-specialist.md
+    │   └── safety-warden.md
+    ├── teams/                 # 3 team topologies
+    │   ├── domain-specialist.yaml
+    │   ├── cross-domain.yaml
+    │   └── full-build.yaml
+    └── chipset.yaml           # Router topology with budget allocation
 
 .chipset/                   # Chipset configuration (v1.22)
 ├── chipset.yaml            # Unified chipset definition
