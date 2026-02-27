@@ -89,3 +89,9 @@ export { mrdmd } from './dmd/dmd-multiresolution';
 export { pidmd } from './dmd/dmd-physics';
 
 export { bopdmd } from './dmd/dmd-robust';
+
+export { edmd, liftDictionary } from './dmd/koopman';
+export type { EDMDConfig } from './dmd/koopman';
+
+export { bridgeDMDToSkillDynamics } from './dmd/skill-dmd-bridge';
+export type { SkillDynamicsExtended } from './dmd/skill-dmd-bridge';
