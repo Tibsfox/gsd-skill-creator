@@ -3,6 +3,8 @@ export type { ScConfig } from "./config.js";
 export { scaffoldZones } from "./scaffold.js";
 export { ProjectManager } from "./project-manager.js";
 export { PackCatalog } from "./pack-catalog.js";
+export { ContribManager } from "./contrib-manager.js";
+export { WWWStager } from "./www-stager.js";
 export type {
   Zone,
   ProjectDescriptor,
