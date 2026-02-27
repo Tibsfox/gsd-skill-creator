@@ -261,14 +261,14 @@ loop. Deployment proceeds only on explicit human "yes" approval.
 **Verification Method:** I (Inspection) + D (Demonstration)
 
 **Preconditions:**
-- `configs/crews/deployment-crew.yaml` accessible
+- `config/crews/deployment-crew.yaml` accessible
 - CAPCOM role properly configured as sole human interface
 
 **Procedure:**
 
 1. Verify CAPCOM is defined as sole human interface:
    ```bash
-   grep -A 5 "human_interface:" configs/crews/deployment-crew.yaml
+   grep -A 5 "human_interface:" config/crews/deployment-crew.yaml
    ```
    Expected:
    ```yaml
@@ -279,13 +279,13 @@ loop. Deployment proceeds only on explicit human "yes" approval.
 
 2. Verify no other agent has `human_interface: true`:
    ```bash
-   grep "human_interface: true" configs/crews/deployment-crew.yaml
+   grep "human_interface: true" config/crews/deployment-crew.yaml
    ```
    Expected: Exactly one line matching `capcom` position.
 
 3. Verify CAPCOM position definition includes human interface flag:
    ```bash
-   grep -A 15 "id: capcom" configs/crews/deployment-crew.yaml | grep "human_interface"
+   grep -A 15 "id: capcom" config/crews/deployment-crew.yaml | grep "human_interface"
    ```
    Expected: `    human_interface: true`
 
@@ -772,7 +772,7 @@ RAM < 16 GB or disk < 100 GB available.
 
 1. Verify SCOUT is defined in deployment crew:
    ```bash
-   grep -A 10 "id: scout" configs/crews/deployment-crew.yaml
+   grep -A 10 "id: scout" config/crews/deployment-crew.yaml
    ```
    Expected: SCOUT role present with `openstack-kolla-ansible` skill and hardware inventory
    in recommended skills.
@@ -886,7 +886,7 @@ is blocked from new tasks at 95% consumption.
 
 1. Verify BUDGET is defined in deployment crew:
    ```bash
-   grep -A 15 "id: budget" configs/crews/deployment-crew.yaml
+   grep -A 15 "id: budget" config/crews/deployment-crew.yaml
    ```
    Expected: BUDGET present with `communication_loop: budget` and `lifecycle: persistent`.
 
@@ -927,8 +927,8 @@ only artifacts (outputs), not EXEC's reasoning or intermediate decisions.
 **Verification Method:** I (Inspection)
 
 **Preconditions:**
-- `configs/crews/deployment-crew.yaml` accessible
-- `configs/crews/operations-crew.yaml` accessible
+- `config/crews/deployment-crew.yaml` accessible
+- `config/crews/operations-crew.yaml` accessible
 
 **Procedure:**
 
@@ -938,34 +938,34 @@ document.
 
 1. Verify VERIFY skill loadout in deployment crew contains only `doc-verifier`:
    ```bash
-   grep -A 15 "id: verify" configs/crews/deployment-crew.yaml | grep -E "skills:|  - "
+   grep -A 15 "id: verify" config/crews/deployment-crew.yaml | grep -E "skills:|  - "
    ```
    Expected: `doc-verifier` only. No OpenStack deployment skills.
 
 2. Verify no EXEC agent in deployment crew carries `doc-verifier`:
    ```bash
-   grep -A 20 "id: exec-keystone" configs/crews/deployment-crew.yaml | grep "doc-verifier"
-   grep -A 20 "id: exec-compute" configs/crews/deployment-crew.yaml | grep "doc-verifier"
-   grep -A 20 "id: exec-network-storage" configs/crews/deployment-crew.yaml | grep "doc-verifier"
+   grep -A 20 "id: exec-keystone" config/crews/deployment-crew.yaml | grep "doc-verifier"
+   grep -A 20 "id: exec-compute" config/crews/deployment-crew.yaml | grep "doc-verifier"
+   grep -A 20 "id: exec-network-storage" config/crews/deployment-crew.yaml | grep "doc-verifier"
    ```
    Expected: No output from any command.
 
 3. Verify VERIFY in operations crew carries only `doc-verifier`:
    ```bash
-   grep -A 10 "id: verify" configs/crews/operations-crew.yaml | grep -E "skills:|  - "
+   grep -A 10 "id: verify" config/crews/operations-crew.yaml | grep -E "skills:|  - "
    ```
    Expected: `doc-verifier` only.
 
 4. Verify operations EXEC does not carry `doc-verifier`:
    ```bash
-   grep -A 20 "id: exec" configs/crews/operations-crew.yaml | grep "doc-verifier"
+   grep -A 20 "id: exec" config/crews/operations-crew.yaml | grep "doc-verifier"
    ```
    Expected: No output.
 
 5. Verify VERIFY uses forked context in both crews:
    ```bash
-   grep -A 5 "id: verify" configs/crews/deployment-crew.yaml | grep "context:"
-   grep -A 5 "id: verify" configs/crews/operations-crew.yaml | grep "context:"
+   grep -A 5 "id: verify" config/crews/deployment-crew.yaml | grep "context:"
+   grep -A 5 "id: verify" config/crews/operations-crew.yaml | grep "context:"
    ```
    Expected: `context: fork` in both.
 
@@ -1061,7 +1061,7 @@ skills or chipset variants may be accepted until the staging pipeline is operati
 
 4. Verify agent implementations acknowledge HALT:
    ```bash
-   grep -r "HALT\|halt" configs/crews/ 2>/dev/null | grep -v "#" | head -10
+   grep -r "HALT\|halt" config/crews/ 2>/dev/null | grep -v "#" | head -10
    ```
    Expected: HALT handling referenced in crew configuration or agent documentation.
 

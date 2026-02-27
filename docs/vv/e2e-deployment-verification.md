@@ -22,11 +22,11 @@ gates, and documentation -- into one verifiable sequence.
 
 | Config | Purpose |
 |--------|---------|
-| `configs/evaluation/pre-deploy-gates.yaml` | PRE-001 through PRE-004 -- host readiness |
-| `configs/evaluation/post-deploy-gates.yaml` | POST-001 through POST-009 -- service verification |
-| `configs/crews/deployment-crew.yaml` | 12-role deployment crew configuration |
-| `configs/crews/operations-crew.yaml` | 8-role operations crew configuration |
-| `configs/crews/crew-handoff.yaml` | Deployment-to-operations transition procedure |
+| `config/evaluation/pre-deploy-gates.yaml` | PRE-001 through PRE-004 -- host readiness |
+| `config/evaluation/post-deploy-gates.yaml` | POST-001 through POST-009 -- service verification |
+| `config/crews/deployment-crew.yaml` | 12-role deployment crew configuration |
+| `config/crews/operations-crew.yaml` | 8-role operations crew configuration |
+| `config/crews/crew-handoff.yaml` | Deployment-to-operations transition procedure |
 
 ---
 
@@ -46,7 +46,7 @@ Minimum requirements for single-node OpenStack:
 | Disk | 100 GB | OS, container images, and Cinder volumes |
 | Virtualization | VT-x / AMD-V | Nova requires hardware-assisted virtualization |
 
-Gate config: `configs/evaluation/pre-deploy-gates.yaml` -- `id: PRE-001`
+Gate config: `config/evaluation/pre-deploy-gates.yaml` -- `id: PRE-001`
 
 ### PRE-002: Network Connectivity
 
@@ -57,7 +57,7 @@ Gate config: `configs/evaluation/pre-deploy-gates.yaml` -- `id: PRE-001`
 | DNS resolves external hostnames | Yes |
 | Internet access (container image pulls) | Yes |
 
-Gate config: `configs/evaluation/pre-deploy-gates.yaml` -- `id: PRE-002`
+Gate config: `config/evaluation/pre-deploy-gates.yaml` -- `id: PRE-002`
 
 ### PRE-003: Resource Sufficiency
 
@@ -68,7 +68,7 @@ Gate config: `configs/evaluation/pre-deploy-gates.yaml` -- `id: PRE-002`
 | Port conflicts (5000, 8774, 9696, 8776, 9292, 6080, 8004, 80, 443) | None |
 | Docker installed and running | Yes |
 
-Gate config: `configs/evaluation/pre-deploy-gates.yaml` -- `id: PRE-003`
+Gate config: `config/evaluation/pre-deploy-gates.yaml` -- `id: PRE-003`
 
 ### PRE-004: OS Compatibility
 
@@ -81,7 +81,7 @@ Gate config: `configs/evaluation/pre-deploy-gates.yaml` -- `id: PRE-003`
 | Docker | Present |
 | Git | Present |
 
-Gate config: `configs/evaluation/pre-deploy-gates.yaml` -- `id: PRE-004`
+Gate config: `config/evaluation/pre-deploy-gates.yaml` -- `id: PRE-004`
 
 ---
 
@@ -142,7 +142,7 @@ the procedure.
 - Timestamp
 - Duration
 
-**Gate config:** `configs/evaluation/pre-deploy-gates.yaml`
+**Gate config:** `config/evaluation/pre-deploy-gates.yaml`
 
 **Failure action:** If any gate fails, halt. Do not proceed to Stage 3. Follow failure
 handling procedure (see Failure Handling section).
@@ -157,7 +157,7 @@ defined before issuing the deployment directive.
 
 **Crew Profile:** Squadron (all 12 role types, all 14 positions)
 
-**Deployment crew positions per `configs/crews/deployment-crew.yaml`:**
+**Deployment crew positions per `config/crews/deployment-crew.yaml`:**
 
 | Tier | Role | Position ID | Domain | Lifecycle |
 |------|------|------------|--------|-----------|
@@ -187,7 +187,7 @@ defined before issuing the deployment directive.
 7. INTEG monitors cross-service interfaces: Nova-Neutron, Nova-Cinder, Keystone-all
 8. CAPCOM remains the sole human communication channel throughout
 
-**Verify:** `configs/crews/deployment-crew.yaml` exists and is valid YAML.
+**Verify:** `config/crews/deployment-crew.yaml` exists and is valid YAML.
 
 **Pass Criteria:** Crew config present; all 14 positions defined; CAPCOM designated as sole
 `human_interface: true` agent; human_interface isolation rule present.
@@ -232,7 +232,7 @@ system works as an integrated whole
 **Purpose:** Run the formal post-deployment evaluation gates. Gates execute in dependency
 order. Blocking gates must pass before crew handoff can proceed.
 
-**Execution order per `configs/evaluation/post-deploy-gates.yaml`:**
+**Execution order per `config/evaluation/post-deploy-gates.yaml`:**
 
 **Group 1 -- Foundation (must pass first):**
 
@@ -270,7 +270,7 @@ all other services. If POST-001 fails, all dependent gates automatically receive
 - `depends_on_status` for gates with dependencies
 - Timestamp and duration
 
-**Gate config:** `configs/evaluation/post-deploy-gates.yaml`
+**Gate config:** `config/evaluation/post-deploy-gates.yaml`
 
 **Skip condition:** If Stage 4 was skipped (OpenStack not deployed), all post-deploy gates
 receive `status: skip`.
@@ -286,7 +286,7 @@ pass or warn; no skip unless Stage 4 was skipped.
 **Purpose:** Transfer complete system knowledge from the deployment crew to the operations
 crew. Context loss at handoff means the operations team starts blind.
 
-**Handoff procedure per `configs/crews/crew-handoff.yaml` (transition: deployment-to-operations):**
+**Handoff procedure per `config/crews/crew-handoff.yaml` (transition: deployment-to-operations):**
 
 **9-step procedure:**
 
@@ -312,7 +312,7 @@ crew. Context loss at handoff means the operations team starts blind.
 | verification_results | verify | markdown |
 | deployment_decisions | flight | log |
 
-**Operations crew positions per `configs/crews/operations-crew.yaml`:**
+**Operations crew positions per `config/crews/operations-crew.yaml`:**
 
 | Role | Position | Domain | Key Difference from Deployment |
 |------|----------|--------|-------------------------------|
@@ -335,7 +335,7 @@ crew. Context loss at handoff means the operations team starts blind.
 **CAPCOM continuity:** CAPCOM persists across the transition. The human operator
 experiences a seamless handoff -- their communication channel never drops.
 
-**Verify:** `configs/crews/crew-handoff.yaml` exists; `configs/crews/operations-crew.yaml`
+**Verify:** `config/crews/crew-handoff.yaml` exists; `config/crews/operations-crew.yaml`
 exists; handoff-context.json written; SURGEON confirmed active.
 
 **Pass Criteria:** All 9 handoff steps complete; 5 context items transferred; operations
@@ -446,7 +446,7 @@ audit trail from initial system state through operations handoff.
 **If PRE-001 fails (hardware):**
 - Upgrade hardware to meet minimums: 4 CPU cores, 16 GB RAM, 100 GB disk, VT-x/AMD-V
 - Re-run the hardware inventory gate in isolation before re-running Stage 2
-- Gate config: `configs/evaluation/pre-deploy-gates.yaml` remediation field
+- Gate config: `config/evaluation/pre-deploy-gates.yaml` remediation field
 
 **If PRE-002 fails (network):**
 - Configure network interfaces; verify default route; test DNS with `host -t A docs.openstack.org`
@@ -547,7 +547,7 @@ scripts/e2e-deployment-verification.sh
 
 Key flags:
 - `--dry-run` -- prints what would be checked without executing checks
-- Results written to `configs/evaluation/e2e-deployment-results.yaml`
+- Results written to `config/evaluation/e2e-deployment-results.yaml`
 
 Run for development/CI validation:
 ```bash
