@@ -1,4 +1,4 @@
-import type { ChannelState } from './types';
+import type { ChannelState } from './types.js';
 
 /* ------------------------------------------------------------------ */
 /*  Injectable dependency types                                        */

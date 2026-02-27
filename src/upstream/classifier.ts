@@ -4,7 +4,7 @@ import type {
   ChannelConfig,
   ChangeType,
   Severity,
-} from './types';
+} from './types.js';
 
 /* ------------------------------------------------------------------ */
 /*  Keyword patterns for change type detection                         */

@@ -14,10 +14,10 @@
  * Reference: Sashidhar & Kutz (2022) — "BOP-DMD"
  */
 
-import type { SnapshotMatrix, DMDResult } from './types';
-import type { ComplexNumber } from '../types';
-import { magnitude, argument } from '../complex/arithmetic';
-import { dmd } from './dmd-core';
+import type { SnapshotMatrix, DMDResult } from './types.js';
+import type { ComplexNumber } from '../types.js';
+import { magnitude, argument } from '../complex/arithmetic.js';
+import { dmd } from './dmd-core.js';
 
 /** Simple seeded random for reproducible subsampling */
 function seededRandom(seed: number): () => number {

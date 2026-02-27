@@ -14,9 +14,9 @@
  * 5. Recover modes, amplitudes, frequencies, growth rates
  */
 
-import type { ComplexNumber } from '../types';
-import { magnitude, argument, mul, add, cexp } from '../complex/arithmetic';
-import type { SnapshotMatrix, DMDResult, DMDEigenvalueClassification } from './types';
+import type { ComplexNumber } from '../types.js';
+import { magnitude, argument, mul, add, cexp } from '../complex/arithmetic.js';
+import type { SnapshotMatrix, DMDResult, DMDEigenvalueClassification } from './types.js';
 
 /** Tolerance for near-zero checks */
 const EPS = 1e-12;

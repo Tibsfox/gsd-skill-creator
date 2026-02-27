@@ -1,5 +1,5 @@
-import type { ComplexNumber, Orbit, FixedPointClassification } from '../types';
-import { magnitude, sub, argument } from './arithmetic';
+import type { ComplexNumber, Orbit, FixedPointClassification } from '../types.js';
+import { magnitude, sub, argument } from './arithmetic.js';
 
 /** Function that maps a complex number to another */
 export type IterationFn = (z: ComplexNumber) => ComplexNumber;

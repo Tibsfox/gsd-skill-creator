@@ -1,6 +1,6 @@
-import { magnitude, argument } from '../../index';
-import type { ComplexNumber } from '../../types';
-import type { KoopmanObservable } from '../../dmd/types';
+import { magnitude, argument } from '../../index.js';
+import type { ComplexNumber } from '../../types.js';
+import type { KoopmanObservable } from '../../dmd/types.js';
 
 /**
  * HD-10 Try Session: Koopman Operator Theory

@@ -6,7 +6,7 @@
  * AlgorithmVariant[] records for the knowledge graph.
  */
 
-import type { RepoManifest, AlgorithmVariant, Parameter } from '../../types.js';
+import type { RepoManifest, AlgorithmVariant, Parameter } from '../types.js';
 
 /** Extended Concept with fields beyond the base types.ts Concept. */
 export interface ExtractedConcept {

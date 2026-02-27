@@ -1,5 +1,5 @@
-import type { ComplexNumber, FixedPointClassification, ColorScheme, RGB } from '../types';
-import { pixelToComplex, type Bounds } from './core';
+import type { ComplexNumber, FixedPointClassification, ColorScheme, RGB } from '../types.js';
+import { pixelToComplex, type Bounds } from './core.js';
 
 /* ------------------------------------------------------------------ */
 /*  Inline complex helpers (avoids dependency on parallel agent's module) */

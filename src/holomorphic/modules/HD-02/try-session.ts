@@ -1,5 +1,5 @@
-import { computeMultiplier, classifyFixedPoint, mul, add, magnitude } from '../../index';
-import type { ComplexNumber } from '../../types';
+import { computeMultiplier, classifyFixedPoint, mul, add, magnitude } from '../../index.js';
+import type { ComplexNumber } from '../../types.js';
 
 /**
  * HD-02 Try Session: Fixed Points and Stability

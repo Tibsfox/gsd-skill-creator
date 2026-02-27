@@ -1,4 +1,4 @@
-import type { ComplexNumber, ColorScheme, RGB } from '../types';
+import type { ComplexNumber, ColorScheme, RGB } from '../types.js';
 
 /* ------------------------------------------------------------------ */
 /*  Inline complex helpers (avoids dependency on parallel agent's module) */

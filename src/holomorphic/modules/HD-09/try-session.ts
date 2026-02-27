@@ -1,5 +1,5 @@
-import { magnitude, argument } from '../../index';
-import type { ComplexNumber } from '../../types';
+import { magnitude, argument } from '../../index.js';
+import type { ComplexNumber } from '../../types.js';
 
 /**
  * HD-09 Try Session: Dynamic Mode Decomposition

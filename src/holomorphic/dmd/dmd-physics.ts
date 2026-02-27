@@ -17,10 +17,10 @@
  * Reference: Baddoo et al. (2023) — "Physics-informed DMD"
  */
 
-import type { SnapshotMatrix, DMDResult, DMDConstraints } from './types';
-import type { ComplexNumber } from '../types';
-import { magnitude, argument } from '../complex/arithmetic';
-import { dmd } from './dmd-core';
+import type { SnapshotMatrix, DMDResult, DMDConstraints } from './types.js';
+import type { ComplexNumber } from '../types.js';
+import { magnitude, argument } from '../complex/arithmetic.js';
+import { dmd } from './dmd-core.js';
 
 /**
  * Compute Physics-Informed DMD with stability constraints.
