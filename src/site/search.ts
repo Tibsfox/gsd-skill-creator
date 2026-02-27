@@ -1,4 +1,4 @@
-import type { ContentPage, SearchEntry } from './types';
+import type { ContentPage, SearchEntry } from './types.js';
 
 /**
  * Strip markdown syntax from raw text, leaving only plain words.

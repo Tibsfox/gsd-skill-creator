@@ -1,4 +1,4 @@
-import type { TocEntry } from '../types';
+import type { TocEntry } from '../types.js';
 
 /** Regex to match opening heading tags h1-h6 and their content. */
 const HEADING_RE = /<h([1-6])[^>]*>([\s\S]*?)<\/h\1>/gi;
