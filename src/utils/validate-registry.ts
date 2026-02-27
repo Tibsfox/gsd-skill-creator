@@ -26,7 +26,7 @@ export interface ValidationResult {
 // === Schema loading ===
 
 const require = createRequire(import.meta.url);
-const schema = require('../../schemas/primitive-registry.schema.json');
+const schema = require('../../data/schemas/primitive-registry.schema.json');
 
 // Compile the schema once and cache
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
