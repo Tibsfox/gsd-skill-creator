@@ -1,0 +1,10 @@
+name: upstream-watch
+topology: pipeline
+description: >
+  Monitors Anthropic public channels for content changes, then classifies
+  detected diffs by type, severity, and affected domains. The SENTINEL
+  fetches and hashes; the ANALYST classifies and scores.
+members:
+  - sentinel
+  - analyst
+flow: sentinel -> analyst
