@@ -144,3 +144,84 @@ export interface ValidationReport {
   claimVerifications: ClaimVerification[];
   timestamp: string;
 }
+
+// --- Install pipeline types ---
+
+export interface DependencySpec {
+  name: string;
+  versionConstraint: string | null;
+  optional: boolean;
+}
+
+export interface PythonProjectInfo {
+  isPython: boolean;
+  buildSystem: "pyproject-setuptools" | "pyproject-flit" | "pyproject-hatch" |
+               "pyproject-poetry" | "setup.py" | "setup.cfg" | "unknown";
+  pythonRequires: string | null;
+  testFramework: "pytest" | "unittest" | "nose" | "unknown";
+  dependencyGroups: {
+    core: DependencySpec[];
+    test: DependencySpec[];
+    dev: DependencySpec[];
+    extras: Record<string, DependencySpec[]>;
+  };
+  directories: {
+    source: string;
+    tests: string;
+    tutorials: string | null;
+    docs: string | null;
+  };
+  entryPoints: string[];
+}
+
+export interface VenvConfig {
+  projectPath: string;
+  venvPath: string;
+  pythonVersion: string;
+  installGroups: string[];
+}
+
+export interface VenvResult {
+  success: boolean;
+  venvPath: string;
+  pythonPath: string;
+  installedPackages: string[];
+  installErrors: string[];
+  sizeBytes: number;
+}
+
+export interface HealthCheckConfig {
+  venvResult: VenvResult;
+  projectPath: string;
+  testFramework: "pytest" | "unittest";
+  timeout: number;
+  maxTestOutput: number;
+}
+
+export interface HealthReport {
+  overall: "pass" | "partial" | "fail";
+  testResults: {
+    total: number;
+    passed: number;
+    failed: number;
+    skipped: number;
+    errors: number;
+    duration: number;
+  };
+  failedTests: {
+    name: string;
+    reason: string;
+  }[];
+  coverage: number | null;
+  warnings: string[];
+  timestamp: string;
+}
+
+export interface InstallManifest {
+  projectInfo: PythonProjectInfo;
+  venvResult: VenvResult;
+  healthReport: HealthReport;
+  fileCount: number;
+  totalSizeBytes: number;
+  timestamp: string;
+}
