@@ -9,7 +9,7 @@ import {
 } from './reserved-names.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const testConfigDir = join(__dirname, '..', '..', 'test-fixtures');
+const testConfigDir = join(__dirname, '..', '..', 'test', 'fixtures');
 const testConfigPath = join(testConfigDir, 'test-reserved-names.json');
 
 const validConfig = {
