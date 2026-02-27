@@ -54,6 +54,15 @@ export {
   colorFromScheme,
 } from './renderer/helpers';
 
+export {
+  classifySkillDynamics,
+  computeSkillOrbit,
+  detectSkillFixedPoint,
+  computeSkillMultiplier,
+  classifyFatouJulia,
+  clampAngularVelocity,
+} from './dynamics/skill-dynamics';
+
 export type {
   SnapshotMatrix,
   DMDResult,
