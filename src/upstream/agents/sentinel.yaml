@@ -1,0 +1,15 @@
+name: upstream-sentinel
+model: haiku
+description: >
+  Monitors Anthropic public channels for content changes via hash comparison.
+  Fetches page content, computes hashes, and emits RawChangeEvents when diffs
+  are detected. Runs on a lightweight model to minimize cost during frequent
+  polling cycles.
+tools:
+  - Read
+  - Bash
+  - WebFetch
+budget_tokens: 8000
+trigger_contexts:
+  - channel monitoring
+  - content fetching
