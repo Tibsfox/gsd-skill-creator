@@ -26,7 +26,7 @@ enforcement is sound.
 
 ### VERIFY Role Definition -- Deployment Crew
 
-From `configs/crews/deployment-crew.yaml`:
+From `config/crews/deployment-crew.yaml`:
 
 ```yaml
 - id: verify
@@ -62,7 +62,7 @@ From `configs/crews/deployment-crew.yaml`:
 
 ### VERIFY Role Definition -- Operations Crew
 
-From `configs/crews/operations-crew.yaml`:
+From `config/crews/operations-crew.yaml`:
 
 ```yaml
 - id: verify
@@ -154,14 +154,14 @@ from this specification.
 
 ### Preconditions
 
-- `configs/crews/deployment-crew.yaml` exists and is syntactically valid YAML
-- `configs/crews/operations-crew.yaml` exists and is syntactically valid YAML
+- `config/crews/deployment-crew.yaml` exists and is syntactically valid YAML
+- `config/crews/operations-crew.yaml` exists and is syntactically valid YAML
 
 ### Procedure
 
 **Step 1: Verify VERIFY skill loadout in deployment crew**
 ```bash
-grep -A 15 "id: verify" configs/crews/deployment-crew.yaml | grep -E "skills:|  - "
+grep -A 15 "id: verify" config/crews/deployment-crew.yaml | grep -E "skills:|  - "
 ```
 Expected output:
 ```
@@ -174,9 +174,9 @@ Fail: Any OpenStack skill (`openstack-keystone`, `openstack-nova`, `openstack-ne
 
 **Step 2: Confirm EXEC agents do NOT carry doc-verifier**
 ```bash
-grep -A 20 "id: exec-keystone" configs/crews/deployment-crew.yaml | grep "doc-verifier"
-grep -A 20 "id: exec-compute" configs/crews/deployment-crew.yaml | grep "doc-verifier"
-grep -A 20 "id: exec-network-storage" configs/crews/deployment-crew.yaml | grep "doc-verifier"
+grep -A 20 "id: exec-keystone" config/crews/deployment-crew.yaml | grep "doc-verifier"
+grep -A 20 "id: exec-compute" config/crews/deployment-crew.yaml | grep "doc-verifier"
+grep -A 20 "id: exec-network-storage" config/crews/deployment-crew.yaml | grep "doc-verifier"
 ```
 Expected output: No output (none of the EXEC agents carry doc-verifier).
 Pass: All three commands produce empty output.
@@ -184,7 +184,7 @@ Fail: Any EXEC agent's skill block contains `doc-verifier`.
 
 **Step 3: Verify VERIFY skill loadout in operations crew**
 ```bash
-grep -A 10 "id: verify" configs/crews/operations-crew.yaml | grep -E "skills:|  - "
+grep -A 10 "id: verify" config/crews/operations-crew.yaml | grep -E "skills:|  - "
 ```
 Expected output:
 ```
@@ -195,14 +195,14 @@ Pass: Output contains exactly `doc-verifier`.
 
 **Step 4: Confirm operations EXEC does NOT carry doc-verifier**
 ```bash
-grep -A 20 "id: exec" configs/crews/operations-crew.yaml | grep "doc-verifier"
+grep -A 20 "id: exec" config/crews/operations-crew.yaml | grep "doc-verifier"
 ```
 Expected output: No output.
 
 **Step 5: Verify VERIFY uses forked context**
 ```bash
-grep -A 5 "id: verify" configs/crews/deployment-crew.yaml | grep "context:"
-grep -A 5 "id: verify" configs/crews/operations-crew.yaml | grep "context:"
+grep -A 5 "id: verify" config/crews/deployment-crew.yaml | grep "context:"
+grep -A 5 "id: verify" config/crews/operations-crew.yaml | grep "context:"
 ```
 Expected output (both): `    context: fork`
 Pass: Both VERIFY definitions specify `context: fork`.
@@ -294,4 +294,4 @@ All tailoring decisions are documented in the project Compliance Matrix.
 ---
 
 *Document maintained in `docs/vv/`. Updates require re-running SC-013 verification.*
-*Cross-reference: `docs/vv/safety-critical-tests.md` SC-013, `configs/crews/deployment-crew.yaml`*
+*Cross-reference: `docs/vv/safety-critical-tests.md` SC-013, `config/crews/deployment-crew.yaml`*
