@@ -51,7 +51,7 @@ export const AGC_PACK_MANIFEST: PackManifest = {
  * The pack is considered installed if `agc-educational.yaml` exists in
  * the given chipset directory.
  *
- * @param chipsetDir - Path to the chipset directory (e.g. '.chipset/').
+ * @param chipsetDir - Path to the chipset directory (e.g. 'data/chipset/').
  * @returns true if the pack's chipset YAML exists, false otherwise.
  */
 export function isPackInstalled(chipsetDir: string): boolean {
