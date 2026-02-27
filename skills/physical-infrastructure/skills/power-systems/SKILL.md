@@ -368,6 +368,119 @@ Arc flash hazard increases with available fault current. Data center 480V buses 
 - Missing arc flash label call-out: severity 'warning'
 - Any 480V+ industrial class work described without "qualified persons only" notation: severity 'critical'
 
+## Solar PV Sizing
+
+### Array Sizing
+
+Formula: kWp = Annual_kWh_demand / (Peak_Sun_Hours_per_day x 365 x System_Efficiency)
+
+System efficiency: 75-85% total (panels ~95% x inverter ~97% x wiring ~98% x soiling/temperature ~90%)
+
+**Peak Sun Hours (PSH) by US Region:**
+
+| Location | PSH (hrs/day) | Notes |
+|----------|--------------|-------|
+| Phoenix AZ | 5.5-6.5 | Best US solar resource |
+| Denver CO | 5.0-5.5 | High altitude benefit |
+| Miami FL | 5.0-5.5 | Year-round production |
+| New York NY | 4.0-4.5 | Significant seasonal variation |
+| Seattle WA | 3.5-4.0 | Cloud cover factor |
+| Chicago IL | 4.0-4.5 | Snow loss in winter |
+
+**Worked example:** 500,000 kWh/yr facility in Phoenix, 80% system efficiency:
+kWp = 500,000 / (6.0 x 365 x 0.80) = **285 kWp** array required
+
+### Inverter Sizing
+
+- **DC/AC ratio:** Inverter_kW_AC = Array_kWp / DC_AC_ratio (typical 1.1-1.3)
+  Rationale: panels rarely operate at STC; slight DC oversizing improves economic yield without excessive clipping losses
+- **String sizing (max):** modules_per_string = floor(V_max_inverter / V_oc_module x T_correction_cold)
+- **String sizing (min):** modules_per_string = ceil(V_min_mppt / V_mp_module x T_correction_hot)
+- Maximum string voltage: never exceed inverter maximum input voltage (typically 1000V or 1500V)
+
+### NEC 690 Key Requirements
+
+- **690.12: Rapid shutdown** — Conductors more than 1 foot from array boundary must de-energize to <30V within 30 seconds of rapid shutdown initiation. Required for 2014 NEC and later. Compliance options: module-level power electronics (MLPEs) or string-level rapid shutdown devices.
+- **690.15: Disconnecting means** — Required at each inverter; must be accessible and permanently marked; rated for DC voltage and current
+- **690.47: Grounding** — Equipment grounding conductor required for all PV systems. Grounded system: one conductor bonded to ground; requires ground fault protection (GFP). Ungrounded system: floating; requires insulation monitoring.
+- **690.56(B): Service entrance marking** — WARNING label required: "SOLAR PHOTOVOLTAIC SYSTEM — TURN OFF AC BREAKER PANEL BEFORE WORKING ON WIRING"
+
+For string sizing calculations, shading analysis, performance ratio, and utility interconnect (IEEE 1547): @references/solar-pv-sizing.md
+
+## Battery Energy Storage
+
+### Capacity Sizing
+
+Formula: Capacity_kWh = (Load_kW x Runtime_hours) / (DoD x Round_trip_efficiency)
+
+**Chemistry defaults:**
+- LFP: DoD = 0.85, round-trip efficiency = 0.94
+- NMC: DoD = 0.80, round-trip efficiency = 0.93
+- VRLA: DoD = 0.50, round-trip efficiency = 0.82
+
+**Worked example:** 100 kW critical load, 2 hours runtime, LFP chemistry:
+Capacity = (100 x 2) / (0.85 x 0.94) = **250 kWh** usable storage required
+
+### Chemistry Selection
+
+| Chemistry | Energy Density | Cycle Life | Safety | Best Use |
+|-----------|---------------|-----------|--------|----------|
+| LFP (LiFePO4) | ~150 Wh/kg | 3,000-6,000 | Safest lithium | Long-duration backup, daily cycling |
+| NMC (Li-NiMnCo) | ~250 Wh/kg | 1,500-3,000 | Moderate risk | Space-constrained, high power density |
+| VRLA (Lead-acid) | ~30 Wh/kg | 200-500 | No thermal runaway | Low-cost short-duration UPS |
+| Lead-carbon | ~40 Wh/kg | 1,000-2,000 | No thermal runaway | Partial state-of-charge applications |
+| Vanadium flow | ~20 Wh/L | Unlimited | Very safe | Long-duration (4-12 hr), utility scale |
+
+### NFPA 855 Compliance (Summary)
+
+- **Max per-compartment:** 600 kWh commercial, 20 kWh residential
+- **Separation:** 1-hour fire barrier from occupied spaces for >50 kWh installations
+- **Suppression:** Automatic sprinkler (wet pipe or clean agent) for >50 kWh in occupied buildings
+- **Detection:** Temperature + smoke for lithium chemistries; hydrogen detection for lead-acid
+- **BMS:** Battery Management System mandatory for all lithium chemistries — monitors cell voltage, temperature, current; enforces SoC limits; provides cell balancing
+
+### Peak Shaving vs Backup
+
+- **Backup sizing:** Size for energy (kWh) — covers critical load x minimum runtime. Design question: "How long must we sustain this load without utility?"
+- **Peak shaving sizing:** Size for power (kW) — reduces utility demand charge over 1-4 hour discharge window. Design question: "How much demand charge can we shave?"
+- **Hybrid approach:** Design for backup first; model peak shaving revenue with remaining capacity. Most data center BESS installations prioritize backup with peak shaving as secondary benefit.
+
+For full chemistry comparison, NFPA 855 detailed requirements, BMS specifications, and thermal management: @references/bess-selection.md
+
+## DC Distribution Patterns
+
+### 380-400V DC Bus
+
+- **Architecture:** AC utility -> rectifier (active front end with PFC) -> 380V DC bus -> server PSU (DC input)
+- **Benefit:** Eliminates one AC-DC conversion stage; 3-5% efficiency gain vs traditional AC distribution
+- **Adoption:** Limited to hyperscale greenfield builds; growing interest for BESS direct coupling (BESS is inherently DC)
+- **Vendors:** ABB, Eaton, Vertiv offer 380V DC distribution products
+- **Limitation:** Smaller vendor ecosystem, specialized maintenance expertise required, limited field experience vs ubiquitous AC
+
+### 48V DC (Telecom/Blade)
+
+- **Standard:** -48V nominal (negative grounded per NEBS/ETSI telecom convention)
+- **Application:** Telecom central offices, blade server backplanes, edge computing
+- **Source:** Rectifier module + battery float charge — highly reliable, mature technology with decades of field experience
+- **Efficiency:** On-server 48V-to-12V conversion is more efficient than full AC-DC conversion chain
+- **Standards:** ETSI EN 300 132-2 (European), NEBS/Telcordia GR-63-CORE (North American)
+
+### 12V On-Board
+
+- Server internal distribution rail, converted from 48V by VRMs (Voltage Regulator Modules)
+- Not a distribution architecture — implementation detail within server chassis
+- CPUs draw from ~1.0V rails, further converted on-die
+- Historical 12V distribution being displaced by 48V-to-on-board VRM approach for efficiency
+
+### Safety for DC Systems
+
+- **DC arcs do NOT self-extinguish** — no AC zero-crossing means sustained arc flash hazard; DC arc fault is more dangerous than equivalent AC
+- **Arc fault detection:** Increasingly required by NEC for DC circuits; dedicated DC AFCI devices needed
+- **Ground fault:** Floating DC requires insulation monitoring device (IMD); solidly grounded DC uses conventional detection but has higher touch voltage risk on single fault
+- **Disconnecting means:** NEC 690/705 requires means to de-energize DC conductors within 6.5 feet of point of utility connection
+
+For 380V DC architecture details, protection device selection, efficiency analysis, and conversion chain comparison: @references/dc-distribution.md
+
 ## Reference Documents
 
 | Reference | When to Read | Coverage |
@@ -375,8 +488,11 @@ Arc flash hazard increases with available fault current. Data center 480V buses 
 | @references/nec-load-calculations.md | Full NEC 220 demand factor tables | Complete load calculation methodology |
 | @references/conductor-sizing.md | Full NEC 310.16 ampacity table, correction factors | Complete conductor selection |
 | @references/redundancy-architectures.md | Transfer switches, generator integration, Tier correlation | Redundancy topology design |
+| @references/solar-pv-sizing.md | NEC 690 provisions, string sizing, shading analysis | Solar PV engineering |
+| @references/bess-selection.md | Chemistry comparison, NFPA 855, BMS specs | Battery storage engineering |
+| @references/dc-distribution.md | 380V DC architecture, protection, efficiency | DC distribution design |
 
 ---
 *Power Systems Skill v1.0.0 — Physical Infrastructure Engineering Pack*
-*Phase 436-01 | References: NFPA 70 (NEC 2023), IEEE 1584, NFPA 855, BICSI 002*
+*Phase 436-01/02 | References: NFPA 70 (NEC 2023), NEC 690, NFPA 855, IEEE 1584, BICSI 002*
 *All outputs require verification by a licensed Professional Engineer and licensed Electrician.*
