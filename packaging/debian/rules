@@ -1,0 +1,39 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	npm ci
+	npm run build
+	cd src-tauri && cargo build --release
+	# Compile man pages from scdoc
+	scdoc < extra/man/gsd-os.1.scd > extra/man/gsd-os.1
+	scdoc < extra/man/skill-creator.1.scd > extra/man/skill-creator.1
+	scdoc < extra/man/sc-config.5.scd > extra/man/sc-config.5
+
+override_dh_auto_install:
+	# Binary
+	install -Dm755 src-tauri/target/release/gsd-os debian/gsd-os/usr/bin/gsd-os
+	# Man pages
+	install -Dm644 extra/man/gsd-os.1 debian/gsd-os/usr/share/man/man1/gsd-os.1
+	install -Dm644 extra/man/skill-creator.1 debian/gsd-os/usr/share/man/man1/skill-creator.1
+	install -Dm644 extra/man/sc-config.5 debian/gsd-os/usr/share/man/man5/sc-config.5
+	# Shell completions
+	install -Dm644 extra/completions/skill-creator.bash debian/gsd-os/usr/share/bash-completion/completions/skill-creator
+	install -Dm644 extra/completions/_skill-creator debian/gsd-os/usr/share/zsh/vendor-completions/_skill-creator
+	install -Dm644 extra/completions/skill-creator.fish debian/gsd-os/usr/share/fish/vendor_completions.d/skill-creator.fish
+	# Desktop entry
+	install -Dm644 extra/linux/com.gsd.os.desktop debian/gsd-os/usr/share/applications/com.gsd.os.desktop
+	# AppStream metadata
+	install -Dm644 extra/linux/com.gsd.os.appdata.xml debian/gsd-os/usr/share/metainfo/com.gsd.os.appdata.xml
+	# Icons
+	install -Dm644 src-tauri/icons/128x128.png debian/gsd-os/usr/share/icons/hicolor/128x128/apps/com.gsd.os.png
+	install -Dm644 src-tauri/icons/32x32.png debian/gsd-os/usr/share/icons/hicolor/32x32/apps/com.gsd.os.png
+	# systemd user service
+	install -Dm644 extra/systemd/gsd-os-agent.service debian/gsd-os/usr/lib/systemd/user/gsd-os-agent.service
+	# License
+	install -Dm644 LICENSE debian/gsd-os/usr/share/doc/gsd-os/copyright
+
+override_dh_auto_clean:
+	rm -rf node_modules dist src-tauri/target
