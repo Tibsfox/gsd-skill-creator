@@ -33,3 +33,5 @@ export { appendLog, readLog, writeCache, readCache, createRollbackBackup, restor
 export type { ReadFileFn, AppendFileFn, MkdirFn, ExistsFn, PersistenceDeps } from './persistence';
 export { saveChannelState, loadChannelState, loadAllChannelStates, updateHash, markChanged } from './channel-state';
 export type { ChannelStateDeps } from './channel-state';
+export { runPipeline, processSingleChannel } from './pipeline';
+export type { PipelineDeps, PipelineResult, ChannelResult } from './pipeline';
