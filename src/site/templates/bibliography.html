@@ -1,0 +1,27 @@
+{{!-- Bibliography template: alphabetical citation entries with anchor IDs --}}
+
+{{>breadcrumb}}
+
+<div class="page-content">
+  <h1>{{page.frontmatter.title}}</h1>
+
+  {{#page.frontmatter.description}}
+  <p>{{page.frontmatter.description}}</p>
+  {{/page.frontmatter.description}}
+
+  {{#citations}}
+  <ol class="bibliography">
+    {{#citations}}
+    <li class="bibliography__entry" id="cite-{{key}}">
+      <span class="bibliography__key">[{{key}}]</span>
+      <span class="bibliography__authors">{{authors}}</span>.
+      <span class="bibliography__title">{{title}}</span>.
+      {{#publisher}}{{publisher}}, {{/publisher}}
+      {{year}}.
+      {{#doi}}<a href="https://doi.org/{{doi}}">doi:{{doi}}</a>{{/doi}}
+      {{#url}}<a href="{{url}}">{{url}}</a>{{/url}}
+    </li>
+    {{/citations}}
+  </ol>
+  {{/citations}}
+</div>

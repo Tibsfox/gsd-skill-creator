@@ -1,0 +1,33 @@
+{{!-- Essay template: serif body, wider measure, subtle dividers --}}
+
+{{>breadcrumb}}
+
+<article class="essay-layout">
+  <header>
+    <h1>{{page.frontmatter.title}}</h1>
+    {{#page.frontmatter.date}}
+    <p class="page-meta">
+      <time datetime="{{page.frontmatter.date}}">{{page.frontmatter.date}}</time>
+      {{#page.frontmatter.author}} &middot; {{page.frontmatter.author}}{{/page.frontmatter.author}}
+    </p>
+    {{/page.frontmatter.date}}
+  </header>
+
+  {{{page.content}}}
+
+  {{#page.frontmatter.tags}}
+  <hr>
+  <div class="page-tags">
+    {{#page.frontmatter.tags}}
+    <span class="tag">{{.}}</span>
+    {{/page.frontmatter.tags}}
+  </div>
+  {{/page.frontmatter.tags}}
+</article>
+
+{{#page.frontmatter.comments}}
+<section class="comment-section">
+  <h2 class="comment-section__title">Comments</h2>
+  <div id="comments-container"></div>
+</section>
+{{/page.frontmatter.comments}}
