@@ -1,0 +1,292 @@
+template:
+  name: heat-exchanger-performance
+  solver: chtMultiRegionFoam
+  turbulence_model: kOmegaSST
+  description: >
+    Conjugate heat transfer in a simplified counter-flow heat exchanger geometry.
+    Validates LMTD and epsilon-NTU analytical calculations with CFD.
+    Models shell-side and tube-side fluids as separate regions.
+  scenario: Heat exchanger sizing validation and thermal performance verification
+
+parameters:
+  geometry:
+    type:
+      type: string
+      default: counter-flow
+      description: "Flow arrangement: counter-flow or parallel-flow"
+    shell_diameter_mm:
+      type: number
+      default: 200
+      unit: mm
+      description: Shell inner diameter
+    tube_count:
+      type: number
+      default: 20
+      unit: each
+      description: Number of tubes in bundle
+    tube_od_mm:
+      type: number
+      default: 19
+      unit: mm
+      description: Tube outer diameter
+    tube_thickness_mm:
+      type: number
+      default: 1.5
+      unit: mm
+      description: Tube wall thickness
+    length_m:
+      type: number
+      default: 1.5
+      unit: m
+      description: Heat exchanger length
+  hot_side:
+    fluid:
+      type: string
+      default: water
+      description: Fluid on shell (hot) side
+    inlet_temp_C:
+      type: number
+      default: 60
+      unit: degC
+      description: Shell-side inlet temperature
+    flow_rate_LPM:
+      type: number
+      default: 100
+      unit: L/min
+      description: Shell-side volumetric flow rate
+  cold_side:
+    fluid:
+      type: string
+      default: water
+      description: Fluid on tube (cold) side
+    inlet_temp_C:
+      type: number
+      default: 15
+      unit: degC
+      description: Tube-side inlet temperature
+    flow_rate_LPM:
+      type: number
+      default: 150
+      unit: L/min
+      description: Tube-side volumetric flow rate
+  material:
+    tube_material:
+      type: string
+      default: stainless-steel
+      description: "Tube material: stainless-steel, copper, carbon-steel"
+    thermal_conductivity_WmK:
+      type: number
+      default: 16.0
+      unit: W/(m*K)
+      description: Tube wall thermal conductivity (SS = 16.0, Cu = 385, CS = 50)
+
+generated_files:
+  system/controlDict: |
+    FoamFile { version 2.0; format ascii; class dictionary; object controlDict; }
+
+    application     chtMultiRegionFoam;
+    startFrom       startTime;
+    startTime       0;
+    stopAt          endTime;
+    endTime         1000;
+    deltaT          0.01;
+    writeControl    adjustableRunTime;
+    writeInterval   100;
+    maxCo           0.6;
+    runTimeModifiable true;
+
+  system/fvSchemes: |
+    FoamFile { version 2.0; format ascii; class dictionary; object fvSchemes; }
+
+    ddtSchemes { default Euler; }
+
+    gradSchemes { default Gauss linear; }
+
+    divSchemes
+    {
+        default         none;
+        div(phi,U)      bounded Gauss linearUpwind grad(U);
+        div(phi,h)      bounded Gauss linearUpwind grad(h);
+        div(phi,k)      bounded Gauss upwind;
+        div(phi,omega)  bounded Gauss upwind;
+        div((nuEff*dev(T(grad(U))))) Gauss linear;
+    }
+
+    laplacianSchemes { default Gauss linear corrected; }
+
+    interpolationSchemes { default linear; }
+
+    snGradSchemes { default corrected; }
+
+  system/fvSolution: |
+    FoamFile { version 2.0; format ascii; class dictionary; object fvSolution; }
+
+    solvers
+    {
+        "rho.*"
+        {
+            solver          PCG;
+            preconditioner  DIC;
+            tolerance       1e-7;
+            relTol          0;
+        }
+
+        p_rgh
+        {
+            solver          GAMG;
+            tolerance       1e-7;
+            relTol          0.01;
+            smoother        GaussSeidel;
+        }
+
+        "(U|h|k|omega)"
+        {
+            solver          PBiCGStab;
+            preconditioner  DILU;
+            tolerance       1e-7;
+            relTol          0.1;
+        }
+    }
+
+    PIMPLE
+    {
+        nOuterCorrectors    1;
+        nCorrectors         2;
+        nNonOrthogonalCorrectors 0;
+    }
+
+    relaxationFactors
+    {
+        equations
+        {
+            ".*"            1;
+        }
+    }
+
+  constant/regionProperties: |
+    FoamFile { version 2.0; format ascii; class dictionary; object regionProperties; }
+
+    regions
+    (
+        fluid (shell_side tube_side)
+        solid (tube_wall)
+    );
+
+  constant/shell_side/physicalProperties: |
+    FoamFile { version 2.0; format ascii; class dictionary; object physicalProperties; }
+
+    // Hot side fluid properties (water at 60C)
+    thermoType
+    {
+        type            hePsiThermo;
+        mixture         pureMixture;
+        transport       const;
+        thermo          hConst;
+        equationOfState perfectFluid;
+        specie          specie;
+        energy          sensibleEnthalpy;
+    }
+
+    mixture
+    {
+        specie { nMoles 1; molWeight 18; }
+        equationOfState { R 461.5; rho0 983.2; }
+        thermodynamics { Cp 4185; Hf 0; }
+        transport { mu 4.67e-4; Pr 2.99; }
+    }
+
+  constant/tube_side/physicalProperties: |
+    FoamFile { version 2.0; format ascii; class dictionary; object physicalProperties; }
+
+    // Cold side fluid properties (water at 15C)
+    thermoType
+    {
+        type            hePsiThermo;
+        mixture         pureMixture;
+        transport       const;
+        thermo          hConst;
+        equationOfState perfectFluid;
+        specie          specie;
+        energy          sensibleEnthalpy;
+    }
+
+    mixture
+    {
+        specie { nMoles 1; molWeight 18; }
+        equationOfState { R 461.5; rho0 999.1; }
+        thermodynamics { Cp 4186; Hf 0; }
+        transport { mu 1.14e-3; Pr 7.98; }
+    }
+
+  constant/tube_wall/physicalProperties: |
+    FoamFile { version 2.0; format ascii; class dictionary; object physicalProperties; }
+
+    // Stainless steel tube wall
+    thermoType
+    {
+        type            heSolidThermo;
+        mixture         pureMixture;
+        transport       constIso;
+        thermo          hConst;
+        equationOfState rhoConst;
+        specie          specie;
+        energy          sensibleEnthalpy;
+    }
+
+    mixture
+    {
+        specie { nMoles 1; molWeight 55.845; }
+        equationOfState { rho 8000; }
+        thermodynamics { Cp 500; Hf 0; }
+        transport { kappa 16.0; }
+    }
+
+  constant/shell_side/turbulenceProperties: |
+    FoamFile { version 2.0; format ascii; class dictionary; object turbulenceProperties; }
+
+    simulationType  RAS;
+
+    RAS { RASModel kOmegaSST; turbulence on; printCoeffs on; }
+
+  constant/tube_side/turbulenceProperties: |
+    FoamFile { version 2.0; format ascii; class dictionary; object turbulenceProperties; }
+
+    simulationType  RAS;
+
+    RAS { RASModel kOmegaSST; turbulence on; printCoeffs on; }
+
+run_instructions: |
+  # OpenFOAM Heat Exchanger Performance Validation
+  # Multi-region simulation — more complex setup required
+  #
+  # 1. Generate multi-region mesh (requires snappyHexMesh or cfMesh)
+  blockMesh
+  snappyHexMesh -overwrite
+  splitMeshRegions -cellZones -overwrite
+  #
+  # 2. Check all region meshes
+  checkMesh -region shell_side
+  checkMesh -region tube_side
+  checkMesh -region tube_wall
+  #
+  # 3. Run chtMultiRegionFoam (may take 2-6 hours)
+  chtMultiRegionFoam | tee log.chtMultiRegionFoam
+  #
+  # 4. Extract outlet temperatures
+  postProcess -region shell_side -func 'patchAverage(patch=outlet, fields=(T))' -latestTime
+  postProcess -region tube_side  -func 'patchAverage(patch=outlet, fields=(T))' -latestTime
+  #
+  # 5. Calculate effectiveness and compare to epsilon-NTU:
+  # e = Q_actual / Q_max
+  # Q_actual = m_dot_cold x Cp_cold x (T_cold_out - T_cold_in)
+  # Q_max    = C_min x (T_hot_in - T_cold_in)
+  paraFoam -region shell_side
+  paraFoam -region tube_side
+
+validation:
+  expected_outputs:
+    - "Shell-side outlet temperature within 5C of LMTD analytical result"
+    - "Tube-side outlet temperature within 5C of analytical result"
+    - "Heat transfer rate Q (CFD) within 10% of LMTD/epsilon-NTU prediction"
+    - "Temperature distribution shows counter-flow pattern (hot inlet matches cold outlet end)"
+  convergence_criteria: "T residuals < 1e-6 in all regions over 200 iterations"
