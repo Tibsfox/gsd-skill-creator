@@ -12,8 +12,12 @@ node_modules/
 # Brainstorm session data (local only)
 .brainstorm/
 
-# Generated dashboard (root-level only, not src/dashboard/ or src/citations/dashboard/)
-/dashboard/
+# Archive (deprecated code, hidden)
+.archive/
+
+# Generated dashboard (infra/dashboard/, not src/dashboard/)
+infra/dashboard/*.html
+infra/dashboard/.dashboard-manifest.json
 
 # Tauri / Desktop
 src-tauri/target/
@@ -22,7 +26,11 @@ desktop/dist/
 desktop/node_modules/
 
 # Citation cache (regenerable API responses)
-.citations/cache/
+data/citations/cache/
+
+# Compiled man pages (source is .scd)
+extra/man/*.1
+extra/man/*.5
 
 # Coverage
 coverage/
