@@ -23,7 +23,7 @@ pub struct ClaudeStatusEvent {
 pub fn start_monitor(app_handle: AppHandle, poll_interval_ms: u64) -> mpsc::Sender<()> {
     let (shutdown_tx, mut shutdown_rx) = mpsc::channel::<()>(1);
 
-    tokio::spawn(async move {
+    tauri::async_runtime::spawn(async move {
         let interval = tokio::time::Duration::from_millis(poll_interval_ms);
         loop {
             tokio::select! {
