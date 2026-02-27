@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd.tools/schemas/dacp/drift-score.schema.json",
+  "description": "DACP Drift Score: composite score with component breakdown and fidelity adjustment recommendation.",
+  "type": "object",
+  "properties": {
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "components": {
+      "type": "object",
+      "properties": {
+        "intent_miss": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rework_penalty": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "verification_penalty": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "modification_penalty": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "intent_miss",
+        "rework_penalty",
+        "verification_penalty",
+        "modification_penalty"
+      ],
+      "additionalProperties": false
+    },
+    "recommendation": {
+      "type": "string",
+      "enum": [
+        "promote",
+        "demote",
+        "maintain"
+      ]
+    },
+    "recommended_level": {
+      "anyOf": [
+        {
+          "type": "number",
+          "const": 0
+        },
+        {
+          "type": "number",
+          "const": 1
+        },
+        {
+          "type": "number",
+          "const": 2
+        },
+        {
+          "type": "number",
+          "const": 3
+        },
+        {
+          "type": "number",
+          "const": 4
+        }
+      ]
+    }
+  },
+  "required": [
+    "score",
+    "components",
+    "recommendation"
+  ],
+  "additionalProperties": false
+}

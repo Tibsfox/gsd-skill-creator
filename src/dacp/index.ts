@@ -8,3 +8,5 @@
  */
 
 export * from './types.js';
+export { generateDACPSchemas, SCHEMA_CONFIGS } from './schema-generator.js';
+export type { SchemaConfig } from './schema-generator.js';
