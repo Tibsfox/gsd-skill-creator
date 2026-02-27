@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.gsd.os</id>
+  <name>GSD-OS</name>
+  <summary>AI-powered project management desktop</summary>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <description>
+    <p>
+      GSD-OS is a desktop application for the Get Shit Done project management
+      framework. It integrates a tmux terminal, Claude AI assistant, file watcher,
+      and planning dashboard into a unified desktop environment built with Tauri.
+    </p>
+    <p>
+      Features include adaptive skill creation, agent orchestration, team
+      coordination, educational pack management, and a complete project lifecycle
+      from vision to delivery.
+    </p>
+  </description>
+  <url type="homepage">https://github.com/Tibsfox/gsd-skill-creator</url>
+  <url type="bugtracker">https://github.com/Tibsfox/gsd-skill-creator/issues</url>
+  <launchable type="desktop-id">com.gsd.os.desktop</launchable>
+  <provides>
+    <binary>gsd-os</binary>
+    <binary>skill-creator</binary>
+    <binary>sc</binary>
+  </provides>
+  <content_rating type="oars-1.1" />
+  <releases>
+    <release version="1.49.5" date="2026-02-27">
+      <description>
+        <p>Filesystem reorganization for Linux standards compliance.</p>
+      </description>
+    </release>
+  </releases>
+</component>
