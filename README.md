@@ -285,7 +285,7 @@ All documentation lives in [`docs/`](docs/).
 | [Configuration](docs/CONFIGURATION.md) | Thresholds, retention, and cluster settings |
 | [File Structure](docs/FILE-STRUCTURE.md) | Project and source code layout |
 | [Development](docs/DEVELOPMENT.md) | Building, testing, and contributing |
-| [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 50 milestones |
+| [Requirements](docs/REQUIREMENTS.md) | All shipped requirements across 51 milestones |
 | [GSD Teams Guide](docs/GSD-TEAMS.md) | Teams vs subagents for GSD workflows |
 | [Comparison](docs/COMPARISON.md) | Skills vs Agents vs Teams |
 | [Release History](docs/RELEASE-HISTORY.md) | Version index linking to [per-release notes](docs/release-notes/) |
@@ -302,7 +302,7 @@ See [SECURITY.md](SECURITY.md) for vulnerability reporting, threat model, and se
 
 ## Project Stats
 
-50 milestones shipped (v1.0-v1.48 + v1.8.1 patch) | 445 phases | 1,061 plans | ~541K LOC TypeScript, Rust, GLSL, Bash & Python | 18,397 tests
+51 milestones shipped (v1.0-v1.49 + v1.8.1 patch) | 456 phases | 1,085 plans | ~564K LOC TypeScript, Rust, GLSL, Bash & Python | 19,110 tests
 
 ---
 
