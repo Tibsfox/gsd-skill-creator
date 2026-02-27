@@ -35,3 +35,21 @@ export {
   isRationalMultipleOfPi,
 } from './complex/iterate';
 export type { IterationFn } from './complex/iterate';
+
+export {
+  pixelToComplex,
+  mandelbrotEscape,
+  juliaEscape,
+  colorMap,
+  renderMandelbrot,
+  renderJulia,
+  applyZoom,
+} from './renderer/core';
+export type { Bounds } from './renderer/core';
+
+export {
+  renderBifurcation,
+  renderOrbitPlot,
+  renderPhasePortrait,
+  colorFromScheme,
+} from './renderer/helpers';
