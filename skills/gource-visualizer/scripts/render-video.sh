@@ -68,6 +68,7 @@ info() {
 GOURCE_PID=""
 FFMPEG_PID=""
 
+# shellcheck disable=SC2329
 cleanup() {
     if [[ -n "$GOURCE_PID" ]]; then
         kill "$GOURCE_PID" 2>/dev/null || true

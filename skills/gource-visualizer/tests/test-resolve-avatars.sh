@@ -249,7 +249,8 @@ CURL_LOG=$(mktemp)
 export MOCK_CURL_LOG="$CURL_LOG"
 # First run
 PATH="$MOCK_DIR:$PATH" "$SCRIPT" "$REPO" "$OUT_DIR" 2>/dev/null || true
-first_calls=$(grep -c "CURL_CALL" "$CURL_LOG" || true)
+# Record initial call count (used only for debugging, not asserted)
+grep -c "CURL_CALL" "$CURL_LOG" >/dev/null 2>&1 || true
 # Second run -- should skip cached
 echo "" > "$CURL_LOG"
 stderr_output=$(PATH="$MOCK_DIR:$PATH" "$SCRIPT" "$REPO" "$OUT_DIR" 2>&1 >/dev/null || true)

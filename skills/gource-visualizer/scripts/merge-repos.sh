@@ -104,6 +104,7 @@ done
 # ---------------------------------------------------------------------------
 
 TMPDIR_MERGE=$(mktemp -d)
+# shellcheck disable=SC2329
 cleanup_merge() {
     rm -rf "$TMPDIR_MERGE" 2>/dev/null || true
 }
