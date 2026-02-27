@@ -1,0 +1,16 @@
+[Unit]
+Description=GSD-OS Agent Service (headless mode)
+Documentation=man:gsd-os(1)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/gsd-os --headless
+Restart=on-failure
+RestartSec=5
+Environment=DISPLAY=
+Environment=XDG_RUNTIME_DIR=/run/user/%U
+
+[Install]
+WantedBy=default.target
