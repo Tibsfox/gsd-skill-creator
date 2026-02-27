@@ -13,3 +13,4 @@ export type {
   WwwDescriptor,
   ZoneManager,
 } from "./types.js";
+export { configDir, dataDir, stateDir, cacheDir, runtimeDir, APP_NAME } from "./xdg.js";
