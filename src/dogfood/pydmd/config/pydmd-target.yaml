@@ -1,0 +1,80 @@
+# PyDMD target configuration for sc install + sc:learn dogfood (v1.44)
+target:
+  name: PyDMD
+  url: https://github.com/PyDMD/PyDMD
+  branch: master
+  language: python
+  description: "Python Dynamic Mode Decomposition library"
+
+expected_structure:
+  source_dir: pydmd/
+  test_dir: tests/
+  tutorial_dir: tutorials/
+  docs_dir: docs/
+
+build_system:
+  type: pyproject.toml
+  python_version: ">=3.9"
+  test_framework: pytest
+  optional_dep_groups:
+    - test
+    - dev
+    - docs
+
+known_algorithm_variants:
+  - name: DMD
+    class: DMD
+    description: "Standard Dynamic Mode Decomposition"
+  - name: BOP-DMD
+    class: BOPDMD
+    description: "Bagging, Optimized DMD"
+  - name: CDMD
+    class: CDMD
+    description: "Compressed DMD"
+  - name: DMDc
+    class: DMDc
+    description: "DMD with control"
+  - name: EDMD
+    class: EDMD
+    description: "Extended DMD (dictionary-based)"
+  - name: FbDMD
+    class: FbDMD
+    description: "Forward-Backward DMD"
+  - name: HAVOK
+    class: HAVOK
+    description: "Hankel Alternative View of Koopman"
+  - name: HankelDMD
+    class: HankelDMD
+    description: "Hankel DMD for time-delay embedding"
+  - name: MrDMD
+    class: MrDMD
+    description: "Multi-Resolution DMD"
+  - name: OptDMD
+    class: OptDMD
+    description: "Optimized DMD"
+  - name: LANDO
+    class: LANDO
+    description: "Linear and Nonlinear Disambiguation Optimization"
+  - name: ParametricDMD
+    class: ParametricDMD
+    description: "Parametric DMD for parameter-varying systems"
+  - name: PiDMD
+    class: PiDMD
+    description: "Physics-informed DMD"
+  - name: RDMD
+    class: RDMD
+    description: "Randomized DMD"
+  - name: SpDMD
+    class: SpDMD
+    description: "Sparse Promoting DMD"
+  - name: SPDMD
+    class: SPDMD
+    description: "Streaming/Parallel DMD"
+  - name: SubspaceDMD
+    class: SubspaceDMD
+    description: "Subspace DMD"
+
+health_check:
+  pass_threshold: 0.80
+  timeout_seconds: 300
+  skip_gpu_tests: true
