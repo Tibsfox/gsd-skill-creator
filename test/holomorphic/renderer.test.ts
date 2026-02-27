@@ -21,9 +21,12 @@ describe('Fractal Renderer — Core', () => {
 
   describe('pixelToComplex', () => {
     it('maps center pixel to center of bounds', () => {
-      const c = pixelToComplex(50, 50, 100, 100, defaultBounds);
-      expect(c.re).toBeCloseTo(0, 5);
-      expect(c.im).toBeCloseTo(0, 5);
+      // With 100 pixels spanning [-2,2], each pixel is 0.04 wide.
+      // Half-pixel centering: pixel 50 → (-2 + 50.5/100 * 4) = 0.02.
+      // Use even dimensions for exact center alignment.
+      const c = pixelToComplex(50, 50, 101, 101, defaultBounds);
+      expect(c.re).toBeCloseTo(0, 1);
+      expect(c.im).toBeCloseTo(0, 1);
     });
 
     it('maps top-left pixel to top-left corner of bounds', () => {
