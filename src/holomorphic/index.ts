@@ -53,3 +53,11 @@ export {
   renderPhasePortrait,
   colorFromScheme,
 } from './renderer/helpers';
+
+export type {
+  SnapshotMatrix,
+  DMDResult,
+  DMDEigenvalueClassification,
+  DMDConstraints,
+  KoopmanObservable,
+} from './dmd/types';
