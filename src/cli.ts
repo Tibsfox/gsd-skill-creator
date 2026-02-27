@@ -1390,28 +1390,28 @@ async function main() {
 
     case 'project':
     case 'proj': {
-      const { projectCommand } = await import('./cli/commands/project.js');
+      const { projectCommand } = await import('./fs/commands/project.js');
       const exitCode = await projectCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
     }
 
     case 'pack': {
-      const { packCommand } = await import('./cli/commands/pack.js');
+      const { packCommand } = await import('./fs/commands/pack.js');
       const exitCode = await packCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
     }
 
     case 'contrib': {
-      const { contribCommand } = await import('./cli/commands/contrib.js');
+      const { contribCommand } = await import('./fs/commands/contrib.js');
       const exitCode = await contribCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
     }
 
     case 'www': {
-      const { wwwCommand } = await import('./cli/commands/www.js');
+      const { wwwCommand } = await import('./fs/commands/www.js');
       const exitCode = await wwwCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
