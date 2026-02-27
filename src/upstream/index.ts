@@ -25,3 +25,7 @@ export { classifyChange, detectChangeType, assignSeverity, assessPatchability } 
 export { generateBriefing, generateFlashAlert, generateSessionBriefing, generateWeeklyDigest, generateMonthlyReport, routeSeverity, formatBriefingText } from './briefer';
 export { validateAlert, formatAlertForTerminal, aggregateAlerts, deduplicateAlerts } from './dashboard-alerts';
 export type { AlertValidation, AggregatedAlerts } from './dashboard-alerts';
+export { traceImpact, findDirectImpacts, findTransitiveImpacts, buildDependencyGraph, calculateBlastRadius } from './tracer';
+export type { ReadDirFn, TracerDeps } from './tracer';
+export { applyPatch, calculatePatchSize, createBackup, rollback, validatePatchBounds, checkCooldown, generatePatchContent } from './patcher';
+export type { WriteFileFn, CopyFileFn, HashFileFn, RunValidationFn, GetPatchHistoryFn, PatcherDeps, BoundsResult, CooldownResult } from './patcher';

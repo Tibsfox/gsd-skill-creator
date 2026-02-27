@@ -54,6 +54,38 @@ function makeManifest(overrides: Partial<ImpactManifest> = {}): ImpactManifest {
   };
 }
 
+/** Helper: generate realistic skill content long enough to keep patches under 20% */
+function makeSkillContent(): string {
+  return [
+    '---',
+    'version: 1.2.0',
+    '---',
+    '# GSD Workflow Skill',
+    '',
+    '## Description',
+    'This skill manages the GSD workflow lifecycle including planning,',
+    'execution, verification, and milestone completion phases.',
+    '',
+    '## Activation',
+    'Activates when user requests project management or workflow operations.',
+    '',
+    '## Instructions',
+    '1. Check current project state via STATE.md',
+    '2. Route to appropriate GSD command based on user intent',
+    '3. Execute the command with full context loading',
+    '4. Update state after completion',
+    '',
+    '## Examples',
+    '- "Plan the next phase" -> /gsd:plan-phase',
+    '- "Build phase 3" -> /gsd:execute-phase 3',
+    '- "Verify the work" -> /gsd:verify-work',
+    '',
+    '## Notes',
+    'Always check ROADMAP.md before execution.',
+    'Respect token budgets and context window limits.',
+  ].join('\n');
+}
+
 describe('Skill Patcher', () => {
   describe('calculatePatchSize', () => {
     it('calculates diff percentage correctly', () => {
@@ -129,7 +161,7 @@ describe('Skill Patcher', () => {
       const backupOrder: string[] = [];
 
       const deps = {
-        readFile: async (): Promise<string> => '# Skill\nOriginal content here for testing the patch flow',
+        readFile: async (): Promise<string> => makeSkillContent(),
         writeFile: async (): Promise<void> => {
           patchApplied = true;
           backupOrder.push('write');
@@ -158,7 +190,7 @@ describe('Skill Patcher', () => {
       let rolledBack = false;
 
       const deps = {
-        readFile: async (): Promise<string> => '# Skill\nOriginal content that should be restored on failure',
+        readFile: async (): Promise<string> => makeSkillContent(),
         writeFile: async (): Promise<void> => { /* patch applied */ },
         copyFile: async (): Promise<void> => { /* backup created */ },
         hashFile: async (): Promise<string> => 'sha256-match',
@@ -208,7 +240,7 @@ describe('Skill Patcher', () => {
   describe('patch operations', () => {
     it('generates complete patch manifest', async () => {
       const deps = {
-        readFile: async (): Promise<string> => '# Skill\nOriginal content for manifest generation test',
+        readFile: async (): Promise<string> => makeSkillContent(),
         writeFile: async (): Promise<void> => {},
         copyFile: async (): Promise<void> => {},
         hashFile: async (): Promise<string> => 'sha256-test',
@@ -237,7 +269,7 @@ describe('Skill Patcher', () => {
       const callOrder: string[] = [];
 
       const deps = {
-        readFile: async (): Promise<string> => '# Skill\nContent',
+        readFile: async (): Promise<string> => makeSkillContent(),
         writeFile: async (): Promise<void> => { callOrder.push('write'); },
         copyFile: async (): Promise<void> => { callOrder.push('backup'); },
         hashFile: async (): Promise<string> => 'sha256-test',
@@ -263,7 +295,7 @@ describe('Skill Patcher', () => {
       const callOrder: string[] = [];
 
       const deps = {
-        readFile: async (): Promise<string> => '# Skill\nContent for post-validation test',
+        readFile: async (): Promise<string> => makeSkillContent(),
         writeFile: async (): Promise<void> => { callOrder.push('write'); },
         copyFile: async (): Promise<void> => {},
         hashFile: async (): Promise<string> => 'sha256-test',
