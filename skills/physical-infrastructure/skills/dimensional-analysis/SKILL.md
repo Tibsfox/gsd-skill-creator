@@ -314,14 +314,206 @@ Each step is dimensionally verified before proceeding. If any step produces wron
 
 ---
 
+## Tolerance Stack-Up Analysis
+
+Real manufactured components have dimensional tolerances. When multiple components assemble in series, tolerances accumulate. The critical question: does the worst-case assembly actually fit in the available space?
+
+### Worst-Case Method (Conservative)
+
+**Formula:** T_total = sum of |t_i| (sum of all individual tolerance magnitudes)
+
+This assumes all tolerances are simultaneously at their worst values. It is always conservative -- the result is the absolute maximum possible deviation.
+
+**When to use:**
+- Safety-critical assemblies (pressure containment, seismic bracing)
+- Small assemblies with 4 or fewer components (RSS benefit is marginal)
+- Zero tolerance for field rework
+
+**Decision rule:** If nominal_gap >= nominal_assembly + T_total, the assembly always fits regardless of manufacturing variation.
+
+### RSS Method (Root Sum of Squares, Statistical)
+
+**Formula:** T_total = sqrt(sum of t_i^2)
+
+This assumes tolerances are independent, normally distributed, and centered on nominal values. The probability that all tolerances simultaneously reach their worst values is vanishingly small -- for n=5 components, P(all worst) = (0.0027)^5 = 1.4 x 10^-13.
+
+**Result:** RSS total is typically 40-70% of worst-case total for 5 or more components. This represents significant material and space savings.
+
+**When to use:**
+- Large assemblies with 5 or more independent components
+- Moderate cost of occasional interference (rework is feasible)
+- Tolerances are truly independent (no shared manufacturing process)
+
+### Choosing the Right Method
+
+| Scenario | Method | Rationale |
+|----------|--------|-----------|
+| Safety-critical (pressure containment) | Worst-case | Zero tolerance for interference |
+| Small assembly (<5 components) | Worst-case | RSS benefit is marginal |
+| Large assembly (5+ components) | RSS | Statistical saving is significant |
+| Expensive rework | RSS with verification tests | Balance economy vs risk |
+
+### Worked Example -- Pipe Assembly in Wall Chase
+
+**Setup:** One 2" pipe (NPS) with insulation in a field-cut wall chase.
+
+| Component | Nominal | Tolerance |
+|-----------|---------|-----------|
+| Chase width | 8.000" | +/- 0.250" (field cut) |
+| Pipe OD | 2.375" | +/- 0.010" (manufacturing) |
+| Insulation thickness (each side) | 1.000" | +/- 0.125" (installation) |
+| Required clearance (each side) | 0.500" | -- |
+
+**Nominal assembly width:** 2.375 + 2 x 1.000 = 4.375"
+**Nominal with clearances:** 4.375 + 2 x 0.500 = 5.375"
+
+**Worst-case tolerance:** T = 0.010 + 0.125 + 0.125 = 0.260" (pipe + both insulation layers)
+**Available space (worst case):** 8.000 - 0.250 = 7.750"
+**Required space (worst case):** 5.375 + 0.260 = 5.635"
+**Margin:** 7.750 - 5.635 = 2.115" --> **PASSES**
+
+**Second scenario -- add a second 2" pipe:**
+Total nominal assembly: 2.375 + 2.067 + 2 x 1.000 + 2 x 1.000 = 8.442"
+This already exceeds the 8.000" nominal chase width --> **FAILS at nominal before tolerances are even considered.** The chase must be widened or the routing redesigned.
+
+For statistical tolerance analysis with non-normal distributions and Monte Carlo simulation --> @references/tolerance-stack-up.md
+
+---
+
+## Spatial Constraint Verification
+
+### Bounding Box Intersection Test
+
+**AABB (Axis-Aligned Bounding Box)** -- the standard approach for infrastructure equipment placement:
+
+Define each item by its min/max coordinates: {x_min, x_max, y_min, y_max, z_min, z_max}
+
+Overlap test:
+```
+overlap = NOT (A.x_max < B.x_min OR A.x_min > B.x_max)
+      AND NOT (A.y_max < B.y_min OR A.y_min > B.y_max)
+      AND NOT (A.z_max < B.z_min OR A.z_min > B.z_max)
+```
+
+If no overlap on any axis, no collision -- items fit.
+
+**OBB (Oriented Bounding Box)** -- for rotated equipment: more complex, uses the separating axis theorem. Only needed when equipment is not aligned to a 90-degree grid.
+
+For infrastructure placement, most equipment is axis-aligned. AABB is sufficient and fast (O(1) per pair).
+
+### Clearance Verification
+
+After confirming no AABB overlap, verify that the gap between items meets or exceeds code-mandated minimums. Expand one bounding box by the required clearance in all directions and re-test -- if the expanded box overlaps, clearance is insufficient.
+
+### NEC 110.26 Working Space (Electrical Panels)
+
+| Voltage to Ground | Condition 1 (live one side) | Condition 2 (live + grounded both sides) | Condition 3 (live both sides) |
+|-------------------|----------------------------|------------------------------------------|-------------------------------|
+| 0-150V | 3 ft | 3 ft | 3 ft |
+| 151-600V | 3 ft | 3.5 ft | 4 ft |
+| 601-2500V | 4 ft | 4 ft | 5 ft |
+
+**Width:** Minimum 30" or width of equipment, whichever is greater.
+**Height:** Minimum 6.5 ft or height of equipment above floor.
+**Illumination:** Required for all working spaces (NEC 110.26(D)).
+**Dedicated space:** Working clearance area must not be used for storage; overhead piping and ducts are prohibited in dedicated electrical space (NEC 110.26(E)).
+
+### Mechanical Access Clearances (General Rules)
+
+| Equipment | Minimum Clearance | Rationale |
+|-----------|------------------|-----------|
+| Valve handwheel | 6" all around | Operation access |
+| Valve actuator (pneumatic/electric) | 12"-18" | Maintenance and removal |
+| Pump casing | 24" in shaft direction | Impeller removal |
+| Heat exchanger | 100% of tube bundle length | Tube cleaning access |
+| Air handler | 36" front clearance | Filter access |
+| Server rack | 42"-48" front and rear | Hot aisle containment |
+
+---
+
+## Interference Checking
+
+### Pipe Chase Fill
+
+Total assembly width in a pipe chase:
+
+```
+W_required = sum(pipe_OD_i + 2 * insulation_i) + (n-1) * separation + 2 * wall_clearance
+```
+
+**Minimum pipe-to-pipe separation:** 0.5 x OD of the larger pipe (thermal expansion and installation access).
+
+**Algorithm for n pipes in a chase of width W:**
+1. Sum all pipe-plus-insulation widths
+2. Add (n - 1) x minimum separation clearances
+3. Add 2 x wall clearance (typically 1" each side)
+4. Compare required total to chase width W
+5. Apply worst-case tolerance: available = W - T_chase; required = sum + T_pipes
+6. If required > available at worst case, the chase must be widened
+
+### Cable Tray Fill (NEC 392.22)
+
+| Cable Type | Max Fill | Notes |
+|-----------|----------|-------|
+| 600V multiconductor, <=2000 kcmil | 50% of tray cross-sectional area | Area = cable OD^2 x pi/4 |
+| Power cables >2000 kcmil | Single layer only | No stacking; check current derating |
+| Control/instrument (<=1" OD) | 50% of area | |
+| Mixed power + control | 40% for control portion | Separation between power and control recommended |
+
+**Tray fill calculation:** sum(cable cross-sectional areas) <= tray_width x tray_depth x fill_fraction
+
+**Common trap:** Using jacket OD area instead of individual conductor area. Using jacket OD is conservative but acceptable; using conductor area is more accurate but requires knowing the cable construction.
+
+### Minimum Bend Radius
+
+| Material | Minimum Bend Radius |
+|----------|-------------------|
+| Steel pipe (Schedule 40) | 5-6 x OD |
+| Copper pipe (Type L/K) | 4 x OD |
+| PEX tubing | 8 x OD minimum |
+| Rigid conduit (>1" trade) | 6 x trade size |
+| EMT conduit | 5 x trade size |
+| THWN-2 conductor | 8 x OD (NEC 300.34) |
+| Armored cable (AC/MC) | 7 x smallest OD dimension |
+
+All routing changes of direction must have adequate bend radius. Flag tight bends for field review -- undersized bends cause flow restriction in pipes and conductor damage in cables.
+
+### Slope Requirements
+
+| System | Minimum Slope | Notes |
+|--------|--------------|-------|
+| Drain/waste/vent (horizontal) | 1/4" per foot (2.08%) | IPC/UPC gravity drain |
+| Storm drainage (horizontal) | 1/8" per foot (1.04%) | Minimum; more is better |
+| HVAC condensate drain | 1/4" per foot | Away from air handler |
+| Steam condensate return | 1/2" per foot | In direction of flow |
+| Cold water supply | None required | Pressurized system |
+| Hot water supply | None required | Pressurized; slope for drainability preferred |
+
+### Safety Warden Integration
+
+Interference checking triggers Safety Warden findings at these severity levels:
+
+| Condition | Severity | Domain | Action |
+|-----------|---------|--------|--------|
+| Equipment bounding box overlap | critical | structural | Block -- cannot place overlapping equipment |
+| Clearance < code minimum (electrical panel) | critical | voltage | Block until clearance verified by PE |
+| Pipe chase fill > 100% at worst-case tolerance | blocking | structural | Redesign chase or reroute pipes |
+| Cable tray fill > 50% | warning | structural | Review tray sizing; may need larger tray |
+| Bend radius below minimum | warning | structural | Flag for field review (critical if pressure piping) |
+| Missing required slope on gravity drain | warning | plumbing | Verify routing elevation changes |
+
+---
+
 ## Reference Documents
 
 | Reference | When to Read | Coverage |
 |-----------|-------------|----------|
 | @references/unit-algebra.md | Full SI/Imperial conversion tables, all infrastructure domains | Complete unit reference |
 | @references/buckingham-pi.md | Full theorem derivation, dimensional matrix, five worked examples | Deep pi theorem guide |
+| @references/tolerance-stack-up.md | Statistical analysis, GD&T basics, Monte Carlo simulation | Tolerance engineering |
+| @references/spatial-constraints.md | OBB algorithm, full NEC 110.26 tables, cable tray details | Spatial verification |
 
 ---
 *Dimensional Analysis Skill v1.0.0 -- Physical Infrastructure Engineering Pack*
-*Phase 437-01 | References: BIPM SI Brochure (9th ed.), Buckingham (1914), Bridgman (1922)*
+*Phase 437 | References: BIPM SI Brochure (9th ed.), Buckingham (1914), Bridgman (1922), NEC 2023, ASME Y14.5*
 *Dimensional verification is a mathematical check -- not a substitute for engineering judgment.*
