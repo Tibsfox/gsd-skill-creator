@@ -1,0 +1,30 @@
+name: "gource-deliverer"
+role: "Output packaging, summary generation, file delivery"
+model: "sonnet"
+skills:
+  - "gource-visualizer"
+activation:
+  trigger: "post-render"
+  condition: "render_result.success == true"
+responsibilities:
+  - Copy output file to GSD output directory
+  - Generate thumbnail (optional, using thumbnail preset)
+  - Produce human-readable summary of the visualization
+  - Report metrics (duration, resolution, contributors, date range)
+inputs:
+  - key: "render_result"
+    from: "gource-renderer"
+  - key: "render_manifest"
+    from: "gource-log-generator"
+outputs:
+  - key: "delivery"
+    format: "json"
+    schema: |
+      {
+        "video_path": "path",
+        "thumbnail_path": "path|null",
+        "summary": "string",
+        "metrics": "object"
+      }
+crew_mapping: "PAO"
+token_budget: "3%"
