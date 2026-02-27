@@ -1,4 +1,4 @@
-import type { ContentPage, WordPressConfig } from '../types';
+import type { ContentPage, WordPressConfig } from '../types.js';
 
 /**
  * Generate the comment section HTML for a content page.

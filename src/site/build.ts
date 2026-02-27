@@ -7,22 +7,22 @@ import type {
   NavigationSection,
   TemplateData,
   CitationDatabase,
-} from './types';
-import { loadTemplates, renderTemplate } from './templates';
-import type { TemplateRegistry } from './templates';
-import { parseFrontmatter } from './utils/frontmatter';
-import { pathToSlug, slugToOutputPath, slugToUrl } from './utils/slug';
-import { processMarkdown, resetCitationCounter } from './markdown';
+} from './types.js';
+import { loadTemplates, renderTemplate } from './templates.js';
+import type { TemplateRegistry } from './templates.js';
+import { parseFrontmatter } from './utils/frontmatter.js';
+import { pathToSlug, slugToOutputPath, slugToUrl } from './utils/slug.js';
+import { processMarkdown, resetCitationCounter } from './markdown.js';
 import {
   generateLlmsTxt,
   generateLlmsFullTxt,
   generateAgentsMd,
   generateSchemaOrg,
   generateMarkdownMirror,
-} from './agents';
-import { buildSearchIndex } from './search';
-import { generateAtomFeed } from './feed';
-import { generateSitemap, generateRobotsTxt } from './sitemap';
+} from './agents/index.js';
+import { buildSearchIndex } from './search.js';
+import { generateAtomFeed } from './feed.js';
+import { generateSitemap, generateRobotsTxt } from './sitemap.js';
 
 /* ---- Single page processing ---- */
 
@@ -269,7 +269,7 @@ async function defaultWriteFile(path: string, content: string): Promise<void> {
 }
 
 async function defaultWalkDir(dir: string): Promise<string[]> {
-  const { walkMarkdownFiles } = await import('./utils/files');
+  const { walkMarkdownFiles } = await import('./utils/files.js');
   return walkMarkdownFiles(dir);
 }
 

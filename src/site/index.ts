@@ -15,17 +15,17 @@ export type {
   BuildResult,
   TemplateData,
   BuildOptions,
-} from './types';
+} from './types.js';
 
 /* ---- Build pipeline ---- */
-export { build, processPage } from './build';
+export { build, processPage } from './build.js';
 
 /* ---- Markdown processing ---- */
-export { processMarkdown, resetCitationCounter, getCitationMap } from './markdown';
+export { processMarkdown, resetCitationCounter, getCitationMap } from './markdown.js';
 
 /* ---- Templates ---- */
-export { loadTemplates, renderTemplate } from './templates';
-export type { TemplateRegistry } from './templates';
+export { loadTemplates, renderTemplate } from './templates.js';
+export type { TemplateRegistry } from './templates.js';
 
 /* ---- Utilities ---- */
 export {
@@ -36,8 +36,8 @@ export {
   walkMarkdownFiles,
   createFileOps,
   extractToc,
-} from './utils';
-export type { FileOps, FileOpsConfig, ReadDirFn, StatFn } from './utils';
+} from './utils/index.js';
+export type { FileOps, FileOpsConfig, ReadDirFn, StatFn } from './utils/index.js';
 
 /* ---- Agent discovery ---- */
 export {
@@ -46,20 +46,20 @@ export {
   generateAgentsMd,
   generateSchemaOrg,
   generateMarkdownMirror,
-} from './agents';
+} from './agents/index.js';
 
 /* ---- Search ---- */
-export { buildSearchIndex, stripMarkdownSyntax } from './search';
+export { buildSearchIndex, stripMarkdownSyntax } from './search.js';
 
 /* ---- Citations ---- */
-export { resolveCitations, generateBibliography, formatCitation } from './citations';
-export type { ResolvedCitation, BibliographyEntry, CitationResult } from './citations';
+export { resolveCitations, generateBibliography, formatCitation } from './citations.js';
+export type { ResolvedCitation, BibliographyEntry, CitationResult } from './citations.js';
 
 /* ---- Feed ---- */
-export { generateAtomFeed } from './feed';
+export { generateAtomFeed } from './feed.js';
 
 /* ---- Sitemap ---- */
-export { generateSitemap, generateRobotsTxt, generateHtaccess } from './sitemap';
+export { generateSitemap, generateRobotsTxt, generateHtaccess } from './sitemap.js';
 
 /* ---- WordPress ---- */
 export {
@@ -67,9 +67,9 @@ export {
   htmlToMarkdown,
   pullContent,
   pushContent,
-} from './wordpress';
-export type { WpPost, WpApiAdapter, WpApiPushAdapter, WpPostData, PullOptions, PullResult, PushResult } from './wordpress';
+} from './wordpress/index.js';
+export type { WpPost, WpApiAdapter, WpApiPushAdapter, WpPostData, PullOptions, PullResult, PushResult } from './wordpress/index.js';
 
 /* ---- Deploy ---- */
-export { deploy, dryRun, verifyDeployment } from './deploy';
-export type { DeployAdapter, DeployOptions, DeployResult, DryRunResult, VerificationResult, FetchFn } from './deploy';
+export { deploy, dryRun, verifyDeployment } from './deploy.js';
+export type { DeployAdapter, DeployOptions, DeployResult, DryRunResult, VerificationResult, FetchFn } from './deploy.js';

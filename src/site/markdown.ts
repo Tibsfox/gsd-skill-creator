@@ -1,6 +1,6 @@
 import { Marked, Renderer } from 'marked';
-import type { TocEntry } from './types';
-import { extractToc } from './utils/toc';
+import type { TocEntry } from './types.js';
+import { extractToc } from './utils/toc.js';
 
 /* ---- Citation state (module-level, reset between pages) ---- */
 

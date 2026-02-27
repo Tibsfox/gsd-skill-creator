@@ -1,4 +1,4 @@
-import type { DeployConfig } from './types';
+import type { DeployConfig } from './types.js';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */

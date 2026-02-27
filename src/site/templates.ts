@@ -1,4 +1,4 @@
-import type { TemplateData } from './types';
+import type { TemplateData } from './types.js';
 
 export type TemplateRegistry = Map<string, string>;
 
