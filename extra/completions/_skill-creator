@@ -1,0 +1,56 @@
+#compdef skill-creator sc
+
+# Zsh completion for skill-creator (sc)
+# Install: copy to a directory in $fpath
+
+_skill_creator() {
+    local -a commands
+    commands=(
+        'project:Manage skill-creator projects'
+        'pack:Manage educational and skill packs'
+        'contrib:Contribution workflow management'
+        'www:Website staging and deployment'
+        'learn:Adaptive learning — ingest resources into skills'
+        'unlearn:Remove previously learned material'
+        'orchestrator:GSD orchestrator commands'
+    )
+
+    _arguments -C \
+        '--version[Print version and exit]' \
+        '--help[Show help message]' \
+        '--verbose[Enable verbose output]' \
+        '1: :->cmd' \
+        '*::arg:->args'
+
+    case $state in
+        cmd)
+            _describe -t commands 'skill-creator command' commands
+            ;;
+        args)
+            case $words[1] in
+                project)
+                    _describe -t subcommands 'project subcommand' \
+                        '(init:Initialize a new project list:List projects status:Show project status)'
+                    ;;
+                pack)
+                    _describe -t subcommands 'pack subcommand' \
+                        '(list:List available packs info:Show pack details)'
+                    ;;
+                contrib)
+                    _describe -t subcommands 'contrib subcommand' \
+                        '(status:Show contribution status list:List contributions)'
+                    ;;
+                www)
+                    _describe -t subcommands 'www subcommand' \
+                        '(status:Show website status)'
+                    ;;
+                orchestrator)
+                    _describe -t subcommands 'orchestrator subcommand' \
+                        '(discover:Discover commands classify:Classify intent lifecycle:Query lifecycle)'
+                    ;;
+            esac
+            ;;
+    esac
+}
+
+_skill_creator "$@"
