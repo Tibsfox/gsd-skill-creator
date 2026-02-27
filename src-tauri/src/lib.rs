@@ -32,10 +32,6 @@ pub fn run() {
             app.manage(tokio::sync::Mutex::new(state::ApiClientState::default()));
             app.manage(tokio::sync::Mutex::new(services::launcher::ServiceLauncher::new_without_emitter()));
 
-            // Start Claude session monitor (polls every 2s)
-            let handle = app.handle().clone();
-            claude::monitor::start_monitor(handle, 2000);
-
             // Auto-detect existing Claude sessions in the gsd tmux session
             if let Ok(output) = std::process::Command::new("tmux")
                 .args(["list-windows", "-t", "gsd", "-F", "#{window_name}"])
@@ -66,6 +62,11 @@ pub fn run() {
                     }
                 }
             }
+
+            // Start Claude session monitor (polls every 2s)
+            // Must come after session auto-detection so there's something to poll
+            let handle = app.handle().clone();
+            claude::monitor::start_monitor(handle, 2000);
 
             Ok(())
         })
