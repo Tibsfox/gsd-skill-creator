@@ -92,7 +92,7 @@ date: "2026-01-01"
 
 # About
 
-This is the about page. It has [a link to home](/) and [another to essays](/essays/test-essay/).
+This is the about page. It has [a link to home](/) and [another to the essay](/test-essay/).
 `;
 
 const essayPage = `---
