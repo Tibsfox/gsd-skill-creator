@@ -1,5 +1,5 @@
-import { renderJulia } from '../../index';
-import type { ComplexNumber } from '../../types';
+import { renderJulia } from '../../index.js';
+import type { ComplexNumber } from '../../types.js';
 
 /**
  * HD-04 Try Session: Julia Sets and Fatou Sets

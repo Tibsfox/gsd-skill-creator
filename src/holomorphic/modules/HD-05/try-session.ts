@@ -1,5 +1,5 @@
-import { renderBifurcation, computeOrbit, detectPeriod, mul, add } from '../../index';
-import type { ComplexNumber } from '../../types';
+import { renderBifurcation, computeOrbit, detectPeriod, mul, add } from '../../index.js';
+import type { ComplexNumber } from '../../types.js';
 
 /**
  * HD-05 Try Session: Cycles and Period Doubling

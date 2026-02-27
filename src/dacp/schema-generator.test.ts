@@ -9,8 +9,14 @@
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
-import Ajv2020 from 'ajv/dist/2020.js';
-import addFormats from 'ajv-formats';
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+import Ajv2020Module from 'ajv/dist/2020.js';
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+import addFormatsModule from 'ajv-formats';
+
+// Handle ESM/CJS interop: default export may be nested
+const Ajv2020 = (Ajv2020Module as any).default ?? Ajv2020Module;
+const addFormats = (addFormatsModule as any).default ?? addFormatsModule;
 import {
   generateDACPSchemas,
   SCHEMA_CONFIGS,

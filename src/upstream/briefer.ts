@@ -6,7 +6,7 @@ import type {
   DashboardAlert,
   BriefingTier,
   Severity,
-} from './types';
+} from './types.js';
 
 /** Route a severity level to the briefing tiers it should appear in */
 export function routeSeverity(severity: Severity): BriefingTier[] {

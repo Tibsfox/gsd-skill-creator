@@ -71,7 +71,7 @@ export class ChatPipeline {
 
       case "chat:delta":
         if (this.magicFilter.shouldRender("chat:delta")) {
-          this.chatRenderer.appendDelta((p as ChatDeltaPayload).delta);
+          this.chatRenderer.appendDelta((p as unknown as ChatDeltaPayload).delta);
         }
         break;
 
@@ -81,8 +81,8 @@ export class ChatPipeline {
 
       case "chat:error":
         this.chatRenderer.showError(
-          (p as ChatErrorPayload).error,
-          (p as ChatErrorPayload).recoverable,
+          (p as unknown as ChatErrorPayload).error,
+          (p as unknown as ChatErrorPayload).recoverable,
         );
         break;
 

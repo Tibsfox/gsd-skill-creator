@@ -3,8 +3,8 @@ import {
   classifyFixedPoint,
   computeMultiplier,
   magnitude,
-} from '../../index';
-import type { ComplexNumber } from '../../types';
+} from '../../index.js';
+import type { ComplexNumber } from '../../types.js';
 
 /**
  * HD-08 Try Session: Skill Convergence Demo
