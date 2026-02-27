@@ -83,6 +83,11 @@ beforeAll(async () => {
   );
 
   await writeFile(
+    join(tempDir, 'vision-template.md'),
+    '# {{name}}\n\nStatus: {{status}}\n\n{{vision}}',
+  );
+
+  await writeFile(
     join(tempDir, 'markdown-structure-template.md'),
     [
       '# {{title}}',
@@ -392,7 +397,7 @@ describe('createTemplateRegistry', () => {
   });
 
   it('get() returns metadata + loaded template content for a specific template', async () => {
-    const registry = createTemplateRegistry();
+    const registry = createTemplateRegistry(tempDir);
     const result = await registry.get('vision');
     expect(result).not.toBeNull();
     expect(result!.meta.name).toBe('vision');
