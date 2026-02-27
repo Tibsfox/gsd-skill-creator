@@ -1,0 +1,34 @@
+sections:
+  - id: home
+    label: Home
+    items:
+      - label: Home
+        url: /
+      - label: About
+        url: /about/
+  - id: essays
+    label: Essays
+    items:
+      - label: The Space Between
+        url: /essays/the-space-between/
+      - label: The Amiga Principle
+        url: /essays/amiga-principle/
+  - id: packs
+    label: Educational Packs
+    items:
+      - label: Electronics
+        url: /packs/electronics/
+      - label: BBS Culture
+        url: /packs/bbs-culture/
+      - label: Kung Fu Cinema
+        url: /packs/kung-fu-cinema/
+  - id: skills
+    label: Skills
+    items:
+      - label: Skill Creator
+        url: /skills/skill-creator/
+  - id: reference
+    label: Reference
+    items:
+      - label: Bibliography
+        url: /bibliography/

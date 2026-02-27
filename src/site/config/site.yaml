@@ -1,0 +1,27 @@
+title: tibsfox.com
+description: "Educational resources, essays, and open knowledge for curious minds"
+url: https://tibsfox.com
+author: TibsFox
+language: en
+
+agent:
+  llms_txt: true
+  llms_full: true
+  agents_md: true
+  schema_org: true
+  markdown_mirror: true
+
+wordpress:
+  url: https://tibsfox.com/wp
+  api: https://tibsfox.com/wp/wp-json/wp/v2
+  comments_enabled: true
+  comments_moderation: true
+
+deploy:
+  method: ftp
+  host: ftp.tibsfox.com
+  user: "${DEPLOY_USER}"
+  path: /public_html
+  exclude:
+    - "*.map"
+    - ".DS_Store"
