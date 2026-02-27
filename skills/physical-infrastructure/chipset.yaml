@@ -1,0 +1,149 @@
+# Physical Infrastructure Engineering Pack — Chipset Configuration
+# This file configures the multi-agent system for infrastructure engineering workflows.
+# All six agents are defined in skills/physical-infrastructure/agents/
+# Safety Warden is mandatory in all team topologies and cannot be removed.
+
+name: physical-infrastructure
+version: "1.0.0"
+description: >
+  Multi-agent chipset for water cooling, power distribution, thermal engineering,
+  blueprint generation, simulation, and visualization of physical infrastructure systems.
+
+topology: router
+
+router:
+  description: Routes infrastructure requests to appropriate specialist agents based on domain
+  entry_point: architect-agent
+  default_agent: architect-agent
+
+agents:
+  architect-agent:
+    path: skills/physical-infrastructure/agents/architect-agent.md
+    model: claude-opus-4-5
+    token_budget: 32000
+    description: System-level decomposition and constraint satisfaction
+
+  calculator-agent:
+    path: skills/physical-infrastructure/agents/specialist-agents.md#calculator-agent
+    model: claude-sonnet-4-5
+    token_budget: 16000
+    description: Mathematical validation — pipe sizing, electrical calculations, thermal analysis
+
+  draftsman-agent:
+    path: skills/physical-infrastructure/agents/specialist-agents.md#draftsman-agent
+    model: claude-sonnet-4-5
+    token_budget: 16000
+    description: Blueprint generation from verified, safety-approved designs
+
+  simulator-agent:
+    path: skills/physical-infrastructure/agents/specialist-agents.md#simulator-agent
+    model: claude-sonnet-4-5
+    token_budget: 16000
+    description: Simulation input generation at three fidelity levels
+
+  renderer-agent:
+    path: skills/physical-infrastructure/agents/specialist-agents.md#renderer-agent
+    model: claude-sonnet-4-5
+    token_budget: 16000
+    description: Blender visualization and media production
+
+  safety-warden:
+    path: skills/physical-infrastructure/agents/safety-warden.md
+    model: claude-opus-4-5
+    token_budget: 32000
+    description: Mandatory safety review gate — cannot be removed from any team topology
+
+triggers:
+  - pattern: "*.pid"
+    agent: draftsman-agent
+    description: P&ID file changes route to draftsman for drawing updates
+    action: review_and_update_pid
+
+  - pattern: "*.sld"
+    agent: draftsman-agent
+    description: Single-line diagram changes route to draftsman for electrical updates
+    action: review_and_update_sld
+
+  - pattern: "*.calc"
+    agent: calculator-agent
+    description: Calculation file changes route to calculator for verification
+    action: verify_calculations
+
+teams:
+  design-review:
+    topology: pipeline
+    description: >
+      Sequential design review workflow. Architect decomposes, Calculator validates,
+      Safety Warden gates, Draftsman produces blueprints. Used for thorough design reviews
+      where each stage must complete before the next begins.
+    required_members:
+      - safety-warden   # Cannot be removed
+    pipeline:
+      - step: 1
+        agent: architect-agent
+        description: Decompose request and identify all subsystems
+      - step: 2
+        agent: calculator-agent
+        description: Perform all domain calculations with unit tracking
+      - step: 3
+        agent: safety-warden
+        description: Review all calculations for safety threshold violations (MANDATORY GATE)
+      - step: 4
+        agent: draftsman-agent
+        description: Generate blueprints from approved calculations
+    exit_conditions:
+      - safety-warden-blocked: halt  # Do not proceed past step 3 if blocked
+
+  rapid-prototype:
+    topology: leader-worker
+    description: >
+      Fast conceptual design workflow. Architect leads, calculator and simulator run in parallel
+      for quick validation. Safety Warden reviews before any output. Used when exploring design
+      options before committing to full documentation.
+    required_members:
+      - safety-warden   # Cannot be removed
+    leader: architect-agent
+    workers:
+      - calculator-agent
+      - simulator-agent
+    gate:
+      agent: safety-warden
+      description: All worker outputs pass through safety gate before user sees results
+    note: >
+      Even in rapid-prototype mode, safety-warden reviews all outputs. Speed is achieved by
+      parallel calculator+simulator execution, not by skipping the safety gate.
+
+  construction-package:
+    topology: pipeline
+    description: >
+      Full construction document pipeline. Produces complete engineering package:
+      calculations, blueprints, BOM, installation sequences, O&M docs, and simulation inputs.
+      Used when design is finalized and construction documentation is needed.
+    required_members:
+      - safety-warden   # Cannot be removed
+    pipeline:
+      - step: 1
+        agent: architect-agent
+        description: Finalize system specification and subsystem breakdown
+      - step: 2
+        agent: calculator-agent
+        description: Complete all calculations with full unit tracking
+      - step: 3
+        agent: safety-warden
+        description: Comprehensive safety review — all domains (MANDATORY GATE)
+      - step: 4
+        agent: draftsman-agent
+        description: Generate full drawing set and construction documents
+      - step: 5
+        agent: simulator-agent
+        description: Generate simulation inputs for all subsystems (OpenFOAM, ngspice, artifacts)
+      - step: 6
+        agent: renderer-agent
+        description: Generate Blender visualization and stakeholder presentation materials
+        optional: true
+
+safety:
+  disclaimer_required: true
+  warden_required_in_all_teams: true
+  warden_removal_raises_error: true
+  downgrade_safety_class: forbidden
