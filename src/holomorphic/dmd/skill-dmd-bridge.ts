@@ -17,10 +17,10 @@ import type {
   SkillDynamics,
   SkillPosition,
   FixedPointClassification,
-} from '../types';
-import type { DMDResult, DMDEigenvalueClassification } from './types';
-import { magnitude, argument } from '../complex/arithmetic';
-import { classifyDMDEigenvalue } from './dmd-core';
+} from '../types.js';
+import type { DMDResult, DMDEigenvalueClassification } from './types.js';
+import { magnitude, argument } from '../complex/arithmetic.js';
+import { classifyDMDEigenvalue } from './dmd-core.js';
 
 /**
  * Extended SkillDynamics with DMD mode information.

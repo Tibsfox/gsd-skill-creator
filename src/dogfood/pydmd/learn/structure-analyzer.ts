@@ -5,7 +5,7 @@
  * Phase 405 Plan 01 -- Track A of the learn engine.
  */
 
-import type { RepoManifest } from '../../types.js';
+import type { RepoManifest } from '../types.js';
 
 // --- Rich analysis types (extend the simpler types.ts shapes) ---
 

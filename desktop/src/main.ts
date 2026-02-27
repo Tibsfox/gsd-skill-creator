@@ -15,6 +15,8 @@ import {
 import "./styles/main.css";
 import "./styles/boot.css";
 
+const terminalHandles = new Map<string, { dispose: () => Promise<void> }>();
+
 async function init(): Promise<void> {
   const app = document.getElementById("app");
   if (!app) return;
@@ -177,7 +179,7 @@ async function init(): Promise<void> {
   let dashHost: DashboardHost | null = null;
   let watcherRefresh: WatcherRefresh | null = null;
 
-  wm.on((event) => {
+  wm.on(async (event) => {
     if (event.type === "window-opened") {
       const state = wm.getWindowState(event.windowId);
       if (state?.type === "dashboard") {
@@ -220,6 +222,16 @@ async function init(): Promise<void> {
           );
         }
       }
+
+      if (state?.type === "terminal") {
+        const content = wm.getContentElement(event.windowId);
+        if (content) {
+          const { createTmuxTerminal } = await import("./tmux");
+          const handle = await createTmuxTerminal(content, event.windowId);
+          shell.updateProcessStatus("terminal", "running");
+          terminalHandles.set(event.windowId, handle);
+        }
+      }
     }
 
     if (event.type === "window-closed") {
@@ -230,6 +242,16 @@ async function init(): Promise<void> {
         dashHost = null;
         watcherRefresh?.stop();
         watcherRefresh = null;
+      }
+
+      // Clean up terminal resources when terminal window closes
+      if (terminalHandles.has(event.windowId)) {
+        const handle = terminalHandles.get(event.windowId)!;
+        await handle.dispose();
+        terminalHandles.delete(event.windowId);
+        if (terminalHandles.size === 0) {
+          shell.updateProcessStatus("terminal", "stopped");
+        }
       }
     }
   });
@@ -246,7 +268,14 @@ async function init(): Promise<void> {
     const monitor = new SessionMonitor();
     await monitor.start();
     monitor.subscribe((event) => {
-      shell.updateProcessStatus("claude", event.status);
+      const statusMap: Record<string, string> = {
+        active: "running",
+        paused: "paused",
+        idle: "idle",
+        starting: "idle",
+        stopped: "stopped",
+      };
+      shell.updateProcessStatus("claude", statusMap[event.status] ?? "idle");
     });
   } catch {
     // SessionMonitor requires Tauri runtime

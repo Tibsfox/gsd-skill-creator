@@ -1,5 +1,5 @@
-import { computeOrbit, classifyFixedPoint, computeMultiplier } from '../../index';
-import type { ComplexNumber } from '../../types';
+import { computeOrbit, classifyFixedPoint, computeMultiplier } from '../../index.js';
+import type { ComplexNumber } from '../../types.js';
 
 /**
  * HD-07 Try Session: From Dynamics to Deep Learning

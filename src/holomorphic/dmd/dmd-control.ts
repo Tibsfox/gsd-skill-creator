@@ -13,10 +13,10 @@
  * Reference: Proctor, Brunton, Kutz (2016) — "DMD with control"
  */
 
-import type { SnapshotMatrix, DMDResult } from './types';
-import type { ComplexNumber } from '../types';
-import { magnitude, argument, mul, add, cexp } from '../complex/arithmetic';
-import { dmd, svd } from './dmd-core';
+import type { SnapshotMatrix, DMDResult } from './types.js';
+import type { ComplexNumber } from '../types.js';
+import { magnitude, argument, mul, add, cexp } from '../complex/arithmetic.js';
+import { dmd, svd } from './dmd-core.js';
 
 /** DMDc result extends DMDResult with the control matrix B */
 export interface DMDcResult extends DMDResult {

@@ -1,4 +1,4 @@
-import type { ComplexNumber } from '../types';
+import type { ComplexNumber } from '../types.js';
 
 /** Additive identity */
 export const ZERO: ComplexNumber = { re: 0, im: 0 };

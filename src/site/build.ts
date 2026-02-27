@@ -52,7 +52,7 @@ export function processPage(
   const wordCount = markdownBody
     .replace(/[#*_`\[\]()>-]/g, '')
     .split(/\s+/)
-    .filter((w) => w.length > 0).length;
+    .filter((w: string) => w.length > 0).length;
 
   return {
     frontmatter,

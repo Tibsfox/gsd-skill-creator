@@ -10,7 +10,7 @@ export type {
   ChangeType,
   ColorScheme,
   RGB,
-} from './types';
+} from './types.js';
 
 export {
   add,
@@ -25,7 +25,7 @@ export {
   ZERO,
   ONE,
   I,
-} from './complex/arithmetic';
+} from './complex/arithmetic.js';
 
 export {
   computeOrbit,
@@ -33,8 +33,8 @@ export {
   computeMultiplier,
   classifyFixedPoint,
   isRationalMultipleOfPi,
-} from './complex/iterate';
-export type { IterationFn } from './complex/iterate';
+} from './complex/iterate.js';
+export type { IterationFn } from './complex/iterate.js';
 
 export {
   pixelToComplex,
@@ -44,15 +44,15 @@ export {
   renderMandelbrot,
   renderJulia,
   applyZoom,
-} from './renderer/core';
-export type { Bounds } from './renderer/core';
+} from './renderer/core.js';
+export type { Bounds } from './renderer/core.js';
 
 export {
   renderBifurcation,
   renderOrbitPlot,
   renderPhasePortrait,
   colorFromScheme,
-} from './renderer/helpers';
+} from './renderer/helpers.js';
 
 export {
   classifySkillDynamics,
@@ -61,7 +61,7 @@ export {
   computeSkillMultiplier,
   classifyFatouJulia,
   clampAngularVelocity,
-} from './dynamics/skill-dynamics';
+} from './dynamics/skill-dynamics.js';
 
 export type {
   SnapshotMatrix,
@@ -69,29 +69,29 @@ export type {
   DMDEigenvalueClassification,
   DMDConstraints,
   KoopmanObservable,
-} from './dmd/types';
+} from './dmd/types.js';
 
 export {
   dmd,
   svd,
   classifyDMDEigenvalue,
   reconstructFromDMD,
-} from './dmd/dmd-core';
+} from './dmd/dmd-core.js';
 
-export { plotEigenvaluesOnUnitCircle } from './renderer/eigenvalue-plot';
-export type { EigenvaluePlotData, EigenvaluePoint } from './renderer/eigenvalue-plot';
+export { plotEigenvaluesOnUnitCircle } from './renderer/eigenvalue-plot.js';
+export type { EigenvaluePlotData, EigenvaluePoint } from './renderer/eigenvalue-plot.js';
 
-export { dmdc } from './dmd/dmd-control';
-export type { DMDcResult } from './dmd/dmd-control';
+export { dmdc } from './dmd/dmd-control.js';
+export type { DMDcResult } from './dmd/dmd-control.js';
 
-export { mrdmd } from './dmd/dmd-multiresolution';
+export { mrdmd } from './dmd/dmd-multiresolution.js';
 
-export { pidmd } from './dmd/dmd-physics';
+export { pidmd } from './dmd/dmd-physics.js';
 
-export { bopdmd } from './dmd/dmd-robust';
+export { bopdmd } from './dmd/dmd-robust.js';
 
-export { edmd, liftDictionary } from './dmd/koopman';
-export type { EDMDConfig } from './dmd/koopman';
+export { edmd, liftDictionary } from './dmd/koopman.js';
+export type { EDMDConfig } from './dmd/koopman.js';
 
-export { bridgeDMDToSkillDynamics } from './dmd/skill-dmd-bridge';
-export type { SkillDynamicsExtended } from './dmd/skill-dmd-bridge';
+export { bridgeDMDToSkillDynamics } from './dmd/skill-dmd-bridge.js';
+export type { SkillDynamicsExtended } from './dmd/skill-dmd-bridge.js';

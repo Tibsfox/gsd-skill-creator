@@ -106,7 +106,7 @@ export async function dacpAnalyzeCommand(args: string[]): Promise<number> {
     );
 
     // Read drift history
-    const driftRecords = await readDriftHistory(milestone ? { milestone } : undefined);
+    const driftRecords = await readDriftHistory(milestone);
 
     if (!driftRecords || driftRecords.length === 0) {
       if (json) {
@@ -118,8 +118,9 @@ export async function dacpAnalyzeCommand(args: string[]): Promise<number> {
     }
 
     // Convert drift records to HandoffOutcomeWithType format for analyzer
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const outcomes = driftRecords.map(
-      (record: Record<string, unknown>) => ({
+      (record: any) => ({
         bundle_id: record.bundle_id ?? '',
         fidelity_level: record.fidelity_level ?? 0,
         intent_alignment: record.intent_alignment ?? 1.0,

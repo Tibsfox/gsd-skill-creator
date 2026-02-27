@@ -18,7 +18,7 @@ import type {
   ClassNode,
   ModuleNode,
   APIMethod,
-} from '../../types.js';
+} from '../types.js';
 import type { ComplexPlaneMap } from './complex-plane-mapper.js';
 
 // --- KnowledgeGraph assembly ---
@@ -98,7 +98,7 @@ function synthesizeUsagePatterns(
 
   // Data preparation pattern
   const prepTutorials = tutorials.filter(t =>
-    t.codePatterns.some(p => p.toLowerCase().includes('data') || p.toLowerCase().includes('load')),
+    t.codePatterns.some((p: string) => p.toLowerCase().includes('data') || p.toLowerCase().includes('load')),
   );
   if (prepTutorials.length > 0) {
     patterns.push({

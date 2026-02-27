@@ -1,5 +1,5 @@
-import { computeOrbit, mul, add } from '../../index';
-import type { ComplexNumber } from '../../types';
+import { computeOrbit, mul, add } from '../../index.js';
+import type { ComplexNumber } from '../../types.js';
 
 /**
  * HD-01 Try Session: Iteration on the Complex Plane

@@ -113,7 +113,7 @@ function buildBreadcrumbList(page: ContentPage, site: SiteConfig): SchemaObject 
     path += `/${segments[i]}`;
     const name = segments[i]
       .replace(/-/g, ' ')
-      .replace(/\b\w/g, (c) => c.toUpperCase());
+      .replace(/\b\w/g, (c: string) => c.toUpperCase());
     items.push({
       '@type': 'ListItem',
       position: i + 2,

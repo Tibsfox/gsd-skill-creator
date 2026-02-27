@@ -1,4 +1,4 @@
-import type { ChannelConfig, ChannelState, RawChangeEvent } from './types';
+import type { ChannelConfig, ChannelState, RawChangeEvent } from './types.js';
 
 /* ------------------------------------------------------------------ */
 /*  Injectable dependency types                                        */
