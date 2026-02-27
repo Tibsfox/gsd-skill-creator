@@ -1,0 +1,18 @@
+name: dacp-interpreter
+version: "1.0.0"
+description: "DACP bundle interpreter for receiving agents"
+triggers:
+  - pattern: "*.bundle/"
+    type: directory
+  - pattern: ".bundle/manifest.json"
+    type: file
+activation:
+  context: "When receiving a bus message with companion .bundle/ directory"
+  priority: high
+dependencies:
+  - "dacp-types"
+tags:
+  - dacp
+  - interpreter
+  - bundle
+  - agent-communication
