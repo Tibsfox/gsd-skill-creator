@@ -54,5 +54,10 @@ www/staging/*/
 !www/tools/
 !www/README.md
 
+# Media assets (large binaries excluded from git)
+assets/*.mp4
+assets/*.png
+!assets/.gitkeep
+
 # User-local config
 .sc-config.json
