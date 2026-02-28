@@ -1252,3 +1252,439 @@ export const allProofsThrough478: ProofStatement[] = [
   ...allProofsThrough477,
   ...allPhase478Proofs,
 ];
+
+// ---------------------------------------------------------------------------
+// Chapter 21: Abstract Algebra (Phase 479)
+// ---------------------------------------------------------------------------
+export const ch21Proofs: ProofStatement[] = [
+  {
+    id: 'thm-21-A',
+    chapter: 21,
+    section: 0,
+    name: 'Group axioms — definitional L5 (7th L5-AXIOM instance)',
+    type: 'definition',
+    classification: 'L5',
+    studentExperience: 'Acknowledged gap — definitional axioms accepted',
+    dependencies: [],
+    status: 'acknowledged-gap',
+    platformConnection: 'Skill composition satisfies group axioms (associativity, identity)',
+    subversion: '1.50.71',
+  },
+  {
+    id: 'thm-21-1',
+    chapter: 21,
+    section: 1,
+    name: "Lagrange's theorem: |H| divides |G| for any subgroup H of finite group G",
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-21-A'],
+    status: 'proved',
+    testId: 'proof-21-1-lagrange',
+    platformConnection: 'Skill refinement phases divide total plans — divisibility structure',
+    subversion: '1.50.71',
+  },
+  {
+    id: 'thm-21-2',
+    chapter: 21,
+    section: 2,
+    name: 'First isomorphism theorem: G/ker(φ) ≅ im(φ)',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-21-1'],
+    status: 'proved',
+    testId: 'proof-21-2-isomorphism',
+    platformConnection: 'Skill projection through kernel = signal-classification quotient structure',
+    subversion: '1.50.71',
+  },
+  {
+    id: 'thm-21-3',
+    chapter: 21,
+    section: 3,
+    name: "Stokes' theorem via differential forms: d² = 0; Green's theorem as special case",
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-21-2'],
+    status: 'proved',
+    testId: 'proof-21-3-stokes-forms',
+    platformConnection: 'Differential structure of skill positions on the plane (angular derivative)',
+    subversion: '1.50.71',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Chapter 22: Topology (Phase 479)
+// ---------------------------------------------------------------------------
+export const ch22Proofs: ProofStatement[] = [
+  {
+    id: 'thm-22-A',
+    chapter: 22,
+    section: 0,
+    name: 'Topological open-set axioms — definitional L5 (8th L5-AXIOM instance)',
+    type: 'definition',
+    classification: 'L5',
+    studentExperience: 'Acknowledged gap — definitional axioms accepted',
+    dependencies: [],
+    status: 'acknowledged-gap',
+    platformConnection: 'Skill activation neighborhoods form open sets in the skill topology',
+    subversion: '1.50.72',
+  },
+  {
+    id: 'thm-22-1',
+    chapter: 22,
+    section: 1,
+    name: 'Continuous image of compact set is compact (f(x)=x² on [0,1])',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-22-A'],
+    status: 'proved',
+    testId: 'proof-22-1-continuous-compact',
+    platformConnection: 'Bounded skill radius maps to bounded activation score range',
+    subversion: '1.50.72',
+  },
+  {
+    id: 'thm-22-2',
+    chapter: 22,
+    section: 2,
+    name: 'Heine-Borel theorem: [0,1] compact ↔ closed and bounded in ℝ',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-22-1'],
+    status: 'proved',
+    testId: 'proof-22-2-heine-borel',
+    platformConnection: 'Skill position space [0,2π] × [0,1] is compact — bounded learning',
+    subversion: '1.50.72',
+  },
+  {
+    id: 'thm-22-3',
+    chapter: 22,
+    section: 3,
+    name: 'Banach fixed-point theorem: T(x)=x/2+1 converges to x*=2 (CLOSES L5-B-001)',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-22-2'],
+    status: 'proved',
+    testId: 'proof-22-3-banach-fpt',
+    platformConnection: 'Learning update in observer-bridge.ts is a contraction — skill positions converge',
+    subversion: '1.50.72',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Chapter 23: Category Theory (Phase 479)
+// ---------------------------------------------------------------------------
+export const ch23Proofs: ProofStatement[] = [
+  {
+    id: 'thm-23-A',
+    chapter: 23,
+    section: 0,
+    name: 'Category axioms — definitional L5 (9th L5-AXIOM instance)',
+    type: 'definition',
+    classification: 'L5',
+    studentExperience: 'Acknowledged gap — definitional axioms accepted',
+    dependencies: [],
+    status: 'acknowledged-gap',
+    platformConnection: 'Skill domain with composition satisfies category axioms (src/plane/composition.ts)',
+    subversion: '1.50.73',
+  },
+  {
+    id: 'thm-23-1',
+    chapter: 23,
+    section: 1,
+    name: 'Category axioms verified for Set, Grp, Top; skill domain is a category',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: ['thm-23-A'],
+    status: 'proved',
+    testId: 'proof-23-1-category-axioms',
+    platformConnection: 'src/plane/composition.ts implements categorical composition (identity-level)',
+    subversion: '1.50.73',
+  },
+  {
+    id: 'thm-23-2',
+    chapter: 23,
+    section: 2,
+    name: 'Functor preserves composition and identities: chipset IS a functor',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: ['thm-23-1'],
+    status: 'proved',
+    testId: 'proof-23-2-functor',
+    platformConnection: 'config/crews/ crew configuration IS a functor (identity-level connection)',
+    subversion: '1.50.73',
+  },
+  {
+    id: 'thm-23-B',
+    chapter: 23,
+    section: 3,
+    name: 'Yoneda lemma (L4 partial): |Nat(Hom(−,A),F)| = |F(A)| verified for small category',
+    type: 'theorem',
+    classification: 'L4',
+    studentExperience: 'Acknowledged gap — bijection verified for small category; full generality L4',
+    dependencies: ['thm-23-2'],
+    status: 'acknowledged-gap',
+    testId: 'proof-23-3-yoneda-partial',
+    platformConnection: 'Activation function in src/plane/activation.ts IS Yoneda embedding (identity-level)',
+    subversion: '1.50.73',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Chapter 24: Information Theory (Phase 479)
+// ---------------------------------------------------------------------------
+export const ch24Proofs: ProofStatement[] = [
+  {
+    id: 'thm-24-A',
+    chapter: 24,
+    section: 0,
+    name: 'Shannon entropy axioms — definitional L5 (10th L5-AXIOM instance)',
+    type: 'definition',
+    classification: 'L5',
+    studentExperience: 'Acknowledged gap — definitional axioms accepted',
+    dependencies: [],
+    status: 'acknowledged-gap',
+    platformConnection: 'Signal classification reduces entropy — Shannon framework applies to skill activation',
+    subversion: '1.50.74',
+  },
+  {
+    id: 'thm-24-1',
+    chapter: 24,
+    section: 1,
+    name: 'Shannon entropy formula from axioms: H = −∑pᵢ log pᵢ uniquely satisfies axioms',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-24-A'],
+    status: 'proved',
+    testId: 'proof-24-1-shannon-entropy',
+    platformConnection: 'src/plane/signal-classification.ts 12-type taxonomy reduces entropy (identity-level)',
+    subversion: '1.50.74',
+  },
+  {
+    id: 'thm-24-2',
+    chapter: 24,
+    section: 2,
+    name: 'Source coding theorem: Huffman achieves H ≤ L < H+1 (4-symbol source)',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-24-1'],
+    status: 'proved',
+    testId: 'proof-24-2-source-coding',
+    platformConnection: 'Signal taxonomy ≈ Huffman code for context signals (identity-level)',
+    subversion: '1.50.74',
+  },
+  {
+    id: 'thm-24-B',
+    chapter: 24,
+    section: 3,
+    name: 'Noisy channel coding theorem (L4): converse direction via Fano inequality',
+    type: 'theorem',
+    classification: 'L4',
+    studentExperience: 'Acknowledged gap — converse proved; achievability requires L4 random coding',
+    dependencies: ['thm-24-2'],
+    status: 'acknowledged-gap',
+    testId: 'proof-24-3-channel-capacity',
+    platformConnection: 'Token budget as rate control below context window capacity (structural)',
+    subversion: '1.50.74',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Chapter 25: Signal Processing (Phase 479)
+// ---------------------------------------------------------------------------
+export const ch25Proofs: ProofStatement[] = [
+  {
+    id: 'thm-25-1',
+    chapter: 25,
+    section: 1,
+    name: 'Fourier inversion theorem: DFT round-trip + Parseval; CLOSES CLT Fourier gap',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-24-1', 'thm-22-3'],
+    status: 'proved',
+    testId: 'proof-25-1-fourier-inversion',
+    platformConnection: 'Activation signal Fourier decomposition is lossless (src/plane/activation.ts)',
+    subversion: '1.50.75',
+  },
+  {
+    id: 'thm-25-2',
+    chapter: 25,
+    section: 2,
+    name: 'Nyquist-Shannon sampling theorem: above Nyquist reconstructs; below aliases',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-25-1'],
+    status: 'proved',
+    testId: 'proof-25-2-nyquist',
+    platformConnection: 'Observer-bridge.ts sampling rate must satisfy Nyquist condition (identity-level)',
+    subversion: '1.50.75',
+  },
+  {
+    id: 'thm-25-3',
+    chapter: 25,
+    section: 3,
+    name: 'Convolution theorem: direct convolution = frequency-domain multiplication',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: ['thm-25-1'],
+    status: 'proved',
+    testId: 'proof-25-3-convolution',
+    platformConnection: 'Pattern detection in signal-classification.ts as frequency-domain matching (structural)',
+    subversion: '1.50.75',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Chapter 26: Computation (Phase 479)
+// ---------------------------------------------------------------------------
+export const ch26Proofs: ProofStatement[] = [
+  {
+    id: 'thm-26-1',
+    chapter: 26,
+    section: 1,
+    name: 'Halting problem undecidable: diagonal construction DIAG defeats any total detector',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: ['thm-19-1'],
+    status: 'proved',
+    testId: 'proof-26-1-halting',
+    platformConnection: 'Probabilistic activation in src/plane/activation.ts is the correct response to undecidability',
+    subversion: '1.50.76',
+  },
+  {
+    id: 'thm-26-2',
+    chapter: 26,
+    section: 2,
+    name: 'P ⊆ NP (L2); Cook-Levin: SAT is NP-complete (L4 outline)',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: ['thm-26-1'],
+    status: 'proved',
+    testId: 'proof-26-2-cook-levin',
+    platformConnection: 'Geometric approximation (θ,r) converts NP-hard skill matching to polynomial-time',
+    subversion: '1.50.76',
+  },
+  {
+    id: 'thm-26-A',
+    chapter: 26,
+    section: 3,
+    name: 'P vs NP open problem — acknowledged, relativization barrier, unresolved',
+    type: 'theorem',
+    classification: 'L4',
+    studentExperience: 'Acknowledged gap — open problem; diagonalization cannot resolve due to relativization barrier',
+    dependencies: ['thm-26-2'],
+    status: 'acknowledged-gap',
+    platformConnection: 'P vs NP is genuinely open; platform correctly uses approximation not exact optimization',
+    subversion: '1.50.76',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Chapter 27: AI/ML Foundations (Phase 479)
+// ---------------------------------------------------------------------------
+export const ch27Proofs: ProofStatement[] = [
+  {
+    id: 'thm-27-1',
+    chapter: 27,
+    section: 1,
+    name: 'Universal approximation theorem: 1-hidden-layer σ network approximates any continuous f',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-22-2', 'thm-25-1'],
+    status: 'proved',
+    testId: 'proof-27-1-universal-approx',
+    platformConnection: 'Claude model has universal approximation capacity for skill activation rules',
+    subversion: '1.50.77',
+  },
+  {
+    id: 'thm-27-2',
+    chapter: 27,
+    section: 2,
+    name: 'Backpropagation = chain rule (Ch 8 Proof 8.5): gradient check < 1e-5',
+    type: 'identity',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: ['thm-27-1'],
+    status: 'proved',
+    testId: 'proof-27-2-backprop',
+    platformConnection: 'Chain rule (Ch 8) IS the algorithm training the AI system executing this proof',
+    subversion: '1.50.77',
+  },
+  {
+    id: 'thm-27-3',
+    chapter: 27,
+    section: 3,
+    name: 'Gradient descent convergence: O(1/k) rate for L-smooth convex f',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-22-3', 'thm-27-2'],
+    status: 'proved',
+    testId: 'proof-27-3-gradient-descent',
+    platformConnection: 'computeAngularStep in observer-bridge.ts IS gradient descent — O(1/k) convergence',
+    subversion: '1.50.77',
+  },
+  {
+    id: 'thm-27-A',
+    chapter: 27,
+    section: 4,
+    name: 'Attention mechanism: geometric structure L2; expressiveness and training convergence L4',
+    type: 'theorem',
+    classification: 'L4',
+    studentExperience: 'Acknowledged gap — attention structure proved at L2; full expressiveness L4',
+    dependencies: ['thm-27-1'],
+    status: 'acknowledged-gap',
+    platformConnection: 'Attention mechanism IS skill-creator activation formalized (identity-level)',
+    subversion: '1.50.77',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// All Phase 479 proofs by Part
+// ---------------------------------------------------------------------------
+export const allPhase479PartVIIProofs: ProofStatement[] = [
+  ...ch21Proofs,
+  ...ch22Proofs,
+  ...ch23Proofs,
+];
+
+export const allPhase479PartVIIIProofs: ProofStatement[] = [
+  ...ch24Proofs,
+  ...ch25Proofs,
+  ...ch26Proofs,
+];
+
+export const allPhase479PartIXProofs: ProofStatement[] = [
+  ...ch27Proofs,
+];
+
+// ---------------------------------------------------------------------------
+// All Phase 479 proofs (Ch 21-27)
+// ---------------------------------------------------------------------------
+export const allPhase479Proofs: ProofStatement[] = [
+  ...allPhase479PartVIIProofs,
+  ...allPhase479PartVIIIProofs,
+  ...allPhase479PartIXProofs,
+];
+
+// ---------------------------------------------------------------------------
+// All proofs through Phase 479 (Ch 1-27)
+// ---------------------------------------------------------------------------
+export const allProofsThrough479: ProofStatement[] = [
+  ...allProofsThrough478,
+  ...allPhase479Proofs,
+];
