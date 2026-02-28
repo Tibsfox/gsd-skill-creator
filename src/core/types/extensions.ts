@@ -1,8 +1,8 @@
 import type { SkillTrigger, SkillLearning } from './skill.js';
 import type { SkillEvents } from '../events/types.js';
-import type { CacheTier } from '../application/stages/cache-order-stage.js';
+import type { CacheTier } from '../../application/stages/cache-order-stage.js';
 
-export type { CacheTier } from '../application/stages/cache-order-stage.js';
+export type { CacheTier } from '../../application/stages/cache-order-stage.js';
 
 /**
  * Tracking data for force-override of reserved names.

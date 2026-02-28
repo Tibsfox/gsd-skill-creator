@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { ObservationSquasher } from './observation-squasher.js';
-import type { SessionObservation } from '../types/observation.js';
+import type { SessionObservation } from '../core/types/observation.js';
 
 function makeObservation(overrides: Partial<SessionObservation> = {}): SessionObservation {
   return {

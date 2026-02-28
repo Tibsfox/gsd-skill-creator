@@ -16,8 +16,8 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import matter from 'gray-matter';
 import { CapabilityDiscovery, renderManifest } from '../../capabilities/index.js';
-import { SkillStore } from '../../storage/skill-store.js';
-import { getSkillsBasePath } from '../../types/scope.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
+import { getSkillsBasePath } from '../../core/types/scope.js';
 import type { CapabilityManifest } from '../../capabilities/index.js';
 
 // ============================================================================

@@ -10,7 +10,7 @@
  * @module integration/path-cache
  */
 
-import type { CompositionPath } from '../types/mfe-types.js';
+import type { CompositionPath } from '../core/types/mfe-types.js';
 
 // ============================================================================
 // Constants

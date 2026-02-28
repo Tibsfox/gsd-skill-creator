@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ContradictionDetector } from './contradiction-detector.js';
 import { FeedbackStore } from './feedback-store.js';
-import type { FeedbackEvent } from '../types/learning.js';
+import type { FeedbackEvent } from '../core/types/learning.js';
 
 vi.mock('./feedback-store.js');
 

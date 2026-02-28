@@ -1,5 +1,5 @@
-import type { ScoredSkill, ConflictResult, SkippedSkill, BudgetWarning } from '../types/application.js';
-import type { SkillIndexEntry } from '../storage/skill-index.js';
+import type { ScoredSkill, ConflictResult, SkippedSkill, BudgetWarning } from '../core/types/application.js';
+import type { SkillIndexEntry } from '../core/storage/skill-index.js';
 import type { SessionReport } from './skill-session.js';
 
 /**

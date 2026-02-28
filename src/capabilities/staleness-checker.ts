@@ -5,8 +5,8 @@
  */
 
 import { computeContentHash } from './types.js';
-import { getExtension } from '../types/extensions.js';
-import type { SkillMetadata } from '../types/skill.js';
+import { getExtension } from '../core/types/extensions.js';
+import type { SkillMetadata } from '../core/types/skill.js';
 
 // ============================================================================
 // Result Types

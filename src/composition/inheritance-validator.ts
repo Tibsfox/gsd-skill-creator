@@ -7,7 +7,7 @@
  * - Impact warnings for widely-depended-on skills
  */
 
-import { SkillMetadata, getExtension } from '../types/skill.js';
+import { SkillMetadata, getExtension } from '../core/types/skill.js';
 import { DependencyGraph } from './dependency-graph.js';
 
 /** Maximum allowed inheritance depth (number of extends hops) */

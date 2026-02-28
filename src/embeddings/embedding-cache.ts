@@ -14,7 +14,7 @@ import { readFile, writeFile, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
 import { homedir } from 'os';
 import { existsSync } from 'fs';
-import type { CacheStore, CacheEntry, EmbeddingVector } from '../types/embeddings.js';
+import type { CacheStore, CacheEntry, EmbeddingVector } from '../core/types/embeddings.js';
 
 /** Cache format version for future migrations */
 const CACHE_VERSION = '1.0';

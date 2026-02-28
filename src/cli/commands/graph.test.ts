@@ -37,7 +37,7 @@ vi.mock('picocolors', () => ({
 
 // Mock SkillStore to return controlled data
 // Must use regular function (not arrow) for vitest new-ability
-vi.mock('../../storage/skill-store.js', () => ({
+vi.mock('../../core/storage/skill-store.js', () => ({
   SkillStore: vi.fn(function () {
     return {
       list: vi.fn().mockResolvedValue([]),

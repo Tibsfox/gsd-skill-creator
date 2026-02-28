@@ -8,7 +8,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import type { LineageEntry } from '../../types/observation.js';
+import type { LineageEntry } from '../../core/types/observation.js';
 import { buildProvenanceChain, getInheritedTier } from './provenance.js';
 
 /**

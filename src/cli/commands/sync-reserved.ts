@@ -1,6 +1,6 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import { ReservedNameValidator } from '../../validation/reserved-names.js';
+import { ReservedNameValidator } from '../../core/validation/reserved-names.js';
 
 /**
  * Sync command - shows current reserved names and provides manual update instructions.

@@ -24,7 +24,7 @@ import type {
   MathematicalPrimitive,
   DomainId,
   CompositionPath,
-} from '../../src/types/mfe-types.js';
+} from '../../src/core/types/mfe-types.js';
 import type { PlaneClassification } from '../../src/engines/plane-classifier.js';
 
 // === Module-level mocks ===

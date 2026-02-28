@@ -14,8 +14,8 @@
 
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import { parseScope, getSkillsBasePath } from '../../types/scope.js';
-import { SkillStore } from '../../storage/skill-store.js';
+import { parseScope, getSkillsBasePath } from '../../core/types/scope.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
 import { ResultStore } from '../../testing/result-store.js';
 import { SuccessTracker } from '../../evaluator/success-tracker.js';
 import { HealthScorer } from '../../evaluator/health-scorer.js';

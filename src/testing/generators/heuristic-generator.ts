@@ -3,7 +3,7 @@ import type {
   GeneratedTest,
   GeneratorStrategy,
   SkillInfo,
-} from '../../types/test-generation.js';
+} from '../../core/types/test-generation.js';
 
 /**
  * Common words to filter out during phrase extraction.

@@ -13,7 +13,7 @@
 
 import { CoActivationTracker } from '../agents/co-activation-tracker.js';
 import type { SkillCoActivation } from '../agents/co-activation-tracker.js';
-import type { SessionObservation } from '../types/observation.js';
+import type { SessionObservation } from '../core/types/observation.js';
 
 // ============================================================================
 // Types

@@ -1,5 +1,5 @@
 import { FeedbackStore } from './feedback-store.js';
-import { FeedbackEvent } from '../types/learning.js';
+import { FeedbackEvent } from '../core/types/learning.js';
 
 /**
  * Represents a detected contradiction between two feedback corrections.

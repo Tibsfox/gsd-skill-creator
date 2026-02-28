@@ -7,7 +7,7 @@
 // This is the first stage: it eliminates obviously-new primitives cheaply so the
 // semantic comparator (348-02) only processes realistic duplicate candidates.
 
-import type { MathematicalPrimitive, PlanePosition } from '../types/mfe-types.js';
+import type { MathematicalPrimitive, PlanePosition } from '../core/types/mfe-types.js';
 
 // === Exported Types ===
 

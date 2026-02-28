@@ -10,8 +10,8 @@ import type {
   TestRunResult,
   TestCaseResult,
   RunMetrics,
-} from '../types/test-run.js';
-import type { TestExpectation } from '../types/testing.js';
+} from '../core/types/test-run.js';
+import type { TestExpectation } from '../core/types/testing.js';
 
 /**
  * Options for formatting test results.

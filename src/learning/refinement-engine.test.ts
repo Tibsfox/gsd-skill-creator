@@ -4,8 +4,8 @@ import { join } from 'path';
 import { tmpdir } from 'os';
 import { RefinementEngine } from './refinement-engine.js';
 import { FeedbackStore } from './feedback-store.js';
-import { SkillStore } from '../storage/skill-store.js';
-import { Skill, SkillMetadata, getExtension } from '../types/skill.js';
+import { SkillStore } from '../core/storage/skill-store.js';
+import { Skill, SkillMetadata, getExtension } from '../core/types/skill.js';
 
 describe('RefinementEngine', () => {
   const testDir = join(tmpdir(), `refinement-engine-test-${Date.now()}`);

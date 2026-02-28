@@ -6,7 +6,7 @@
  * changes (SECR-06). New servers always enter quarantine (SECR-04).
  */
 
-import type { TrustState, HashRecord } from '../../types/mcp.js';
+import type { TrustState, HashRecord } from '../../core/types/mcp.js';
 import type { HashDriftResult } from './hash-gate.js';
 
 // ============================================================================
@@ -33,7 +33,7 @@ interface ServerTrustRecord {
   state: TrustState;
   lastActivity: number;
   lastHashRecord: HashRecord | undefined;
-  lastTools: import('../../types/mcp.js').Tool[] | undefined;
+  lastTools: import('../../core/types/mcp.js').Tool[] | undefined;
   transitions: TrustTransition[];
 }
 
@@ -205,7 +205,7 @@ export class TrustManager {
   /**
    * Store the last known tools for a server (used for hash drift diffing).
    */
-  storeTools(serverId: string, tools: import('../../types/mcp.js').Tool[]): void {
+  storeTools(serverId: string, tools: import('../../core/types/mcp.js').Tool[]): void {
     const record = this.getOrCreateRecord(serverId);
     record.lastTools = tools;
   }
@@ -213,7 +213,7 @@ export class TrustManager {
   /**
    * Get the last known tools for a server.
    */
-  getLastTools(serverId: string): import('../../types/mcp.js').Tool[] | undefined {
+  getLastTools(serverId: string): import('../../core/types/mcp.js').Tool[] | undefined {
     return this.servers.get(serverId)?.lastTools;
   }
 

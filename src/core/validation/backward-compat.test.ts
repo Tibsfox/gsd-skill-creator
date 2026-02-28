@@ -5,7 +5,7 @@ import matter from 'gray-matter';
 import { SkillMetadataSchema } from './skill-validation.js';
 
 // Path relative to project root (vitest runs from project root)
-const EXAMPLES_DIR = join(__dirname, '..', '..', 'examples');
+const EXAMPLES_DIR = join(__dirname, '..', '..', '..', 'examples');
 
 // ============================================================================
 // Helper: Discover example directories

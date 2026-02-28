@@ -1,4 +1,4 @@
-import type { SkillMetadata, Skill } from '../types/skill.js';
+import type { SkillMetadata, Skill } from '../core/types/skill.js';
 import { normalizePaths } from './path-normalizer.js';
 import matter from 'gray-matter';
 

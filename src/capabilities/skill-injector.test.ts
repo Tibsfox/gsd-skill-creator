@@ -12,7 +12,7 @@ import { join } from 'path';
 import { tmpdir } from 'os';
 import matter from 'gray-matter';
 import { SkillInjector } from './skill-injector.js';
-import { SkillStore } from '../storage/skill-store.js';
+import { SkillStore } from '../core/storage/skill-store.js';
 import type { CapabilityRef } from './types.js';
 
 describe('SkillInjector', () => {

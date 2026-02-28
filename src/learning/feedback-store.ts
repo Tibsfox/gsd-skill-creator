@@ -1,7 +1,7 @@
 import { readFile, appendFile, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
 import { randomUUID } from 'crypto';
-import { FeedbackEvent, FeedbackType } from '../types/learning.js';
+import { FeedbackEvent, FeedbackType } from '../core/types/learning.js';
 
 export class FeedbackStore {
   private feedbackPath: string;

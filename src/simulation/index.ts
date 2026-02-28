@@ -43,4 +43,4 @@ export type {
   SimulationTrace,
   SkillPrediction,
   ConfidenceLevel,
-} from '../types/simulation.js';
+} from '../core/types/simulation.js';

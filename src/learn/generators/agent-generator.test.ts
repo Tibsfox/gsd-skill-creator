@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { MathematicalPrimitive, PlanePosition } from '../../types/mfe-types.js';
+import type { MathematicalPrimitive, PlanePosition } from '../../core/types/mfe-types.js';
 import { generateAgent } from './agent-generator.js';
 
 // === Test Helpers ===

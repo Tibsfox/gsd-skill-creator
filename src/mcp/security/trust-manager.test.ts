@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { TrustManager } from './trust-manager.js';
 import { computeToolHash, detectHashDriftWithTools } from './hash-gate.js';
-import type { Tool } from '../../types/mcp.js';
+import type { Tool } from '../../core/types/mcp.js';
 
 // ============================================================================
 // Test fixtures

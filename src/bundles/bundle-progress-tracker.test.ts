@@ -28,7 +28,7 @@ import {
   computeSkillStatus,
   BundleProgressStore,
 } from './bundle-progress-tracker.js';
-import type { SessionObservation } from '../types/observation.js';
+import type { SessionObservation } from '../core/types/observation.js';
 
 // ============================================================================
 // Helpers

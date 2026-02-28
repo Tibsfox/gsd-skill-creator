@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { mkdtemp, rm, access, stat, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { scaffoldZones } from "../../../src/fs/scaffold.js";
+import { scaffoldZones } from "../../../src/core/fs/scaffold.js";
 
 let tmpRoot: string;
 

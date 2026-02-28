@@ -15,7 +15,7 @@ import { CompactGenerator } from './compact-generator.js';
 import { DisclosureBudget } from './disclosure-budget.js';
 import { ReferenceLinker } from './reference-linker.js';
 import { ContentAnalyzer } from './content-analyzer.js';
-import { SkillStore } from '../storage/skill-store.js';
+import { SkillStore } from '../core/storage/skill-store.js';
 
 /**
  * Generate a skill body with multiple H2 sections exceeding the word threshold.

@@ -1,5 +1,5 @@
-import type { ActiveSkill, SessionState, TokenTracking, ApplicationConfig } from '../types/application.js';
-import { DEFAULT_CONFIG } from '../types/application.js';
+import type { ActiveSkill, SessionState, TokenTracking, ApplicationConfig } from '../core/types/application.js';
+import { DEFAULT_CONFIG } from '../core/types/application.js';
 import { TokenCounter } from './token-counter.js';
 
 export interface SkillLoadResult {

@@ -32,6 +32,6 @@ export type {
   ValidationResult,
   ApplyResult,
   DriftResult,
-} from '../types/learning.js';
+} from '../core/types/learning.js';
 
-export { DEFAULT_BOUNDED_CONFIG, DEFAULT_DRIFT_THRESHOLD } from '../types/learning.js';
+export { DEFAULT_BOUNDED_CONFIG, DEFAULT_DRIFT_THRESHOLD } from '../core/types/learning.js';

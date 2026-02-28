@@ -1,6 +1,6 @@
 import { TranscriptParser } from './transcript-parser.js';
-import { PatternStore } from '../storage/pattern-store.js';
-import type { TranscriptEntry, ExecutionContext, ToolExecutionPair, StoredExecutionBatch } from '../types/observation.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
+import type { TranscriptEntry, ExecutionContext, ToolExecutionPair, StoredExecutionBatch } from '../core/types/observation.js';
 
 /** Pattern store category for execution pairs */
 export const EXECUTIONS_CATEGORY = 'executions' as const;

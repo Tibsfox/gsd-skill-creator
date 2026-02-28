@@ -11,7 +11,7 @@ import type {
   PlanePosition,
   DependencyEdge,
   CompositionRule,
-} from '../types/mfe-types.js';
+} from '../core/types/mfe-types.js';
 import type { DocumentAnalysis, DocumentSection, ContentType } from './analyzer.js';
 
 // === Public types ===

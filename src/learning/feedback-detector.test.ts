@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { Change } from '../types/learning.js';
+import type { Change } from '../core/types/learning.js';
 import {
   analyzeCorrection,
   countWords,

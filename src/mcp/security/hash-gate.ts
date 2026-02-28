@@ -7,7 +7,7 @@
  */
 
 import { createHash } from 'node:crypto';
-import type { Tool, HashRecord } from '../../types/mcp.js';
+import type { Tool, HashRecord } from '../../core/types/mcp.js';
 
 // ============================================================================
 // Types

@@ -20,7 +20,7 @@ import {
   type AgentIsolationState,
   SECURITY_COMMANDS,
   SECURITY_IPC_EVENTS,
-} from '../../../src/security/index.js';
+} from '../../../src/core/security/index.js';
 
 import {
   renderAgentIsolationStatus,

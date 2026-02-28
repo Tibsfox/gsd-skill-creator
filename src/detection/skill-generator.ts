@@ -1,13 +1,13 @@
-import { SkillStore } from '../storage/skill-store.js';
-import { SkillMetadata, SkillTrigger } from '../types/skill.js';
-import { type GsdSkillCreatorExtension } from '../types/extensions.js';
-import { SkillCandidate, PatternEvidence } from '../types/detection.js';
-import { detectArguments, suggestArgumentHint, checkInjectionRisk } from '../validation/arguments-validation.js';
-import { shouldForkContext, suggestAgent } from '../validation/context-fork-detection.js';
+import { SkillStore } from '../core/storage/skill-store.js';
+import { SkillMetadata, SkillTrigger } from '../core/types/skill.js';
+import { type GsdSkillCreatorExtension } from '../core/types/extensions.js';
+import { SkillCandidate, PatternEvidence } from '../core/types/detection.js';
+import { detectArguments, suggestArgumentHint, checkInjectionRisk } from '../core/validation/arguments-validation.js';
+import { shouldForkContext, suggestAgent } from '../core/validation/context-fork-detection.js';
 import { ContentDecomposer } from '../disclosure/index.js';
 import type { ReferenceFile, ScriptFile } from '../disclosure/index.js';
 import { injectGsdReferences } from './gsd-reference-injector.js';
-import { inferAllowedTools, sanitizeGeneratedContent, scanForDangerousCommands } from '../validation/generation-safety.js';
+import { inferAllowedTools, sanitizeGeneratedContent, scanForDangerousCommands } from '../core/validation/generation-safety.js';
 
 export interface GeneratedSkill {
   name: string;

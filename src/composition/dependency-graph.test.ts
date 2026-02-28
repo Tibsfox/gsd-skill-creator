@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { DependencyGraph } from './dependency-graph.js';
-import { SkillMetadata } from '../types/skill.js';
+import { SkillMetadata } from '../core/types/skill.js';
 
 describe('DependencyGraph', () => {
   describe('detectCycles', () => {

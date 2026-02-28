@@ -7,7 +7,7 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { installSkill } from '../../mcp/index.js';
-import { getSkillsBasePath } from '../../types/scope.js';
+import { getSkillsBasePath } from '../../core/types/scope.js';
 
 /**
  * Install a skill from a local .tar.gz file or remote URL.

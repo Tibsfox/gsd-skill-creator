@@ -8,7 +8,7 @@
  */
 
 import { describe, it, expect, beforeEach } from 'vitest';
-import type { CompositionPath, CompositionStep, DomainId } from '../types/mfe-types.js';
+import type { CompositionPath, CompositionStep, DomainId } from '../core/types/mfe-types.js';
 import { createPathCache, type PathCache } from './path-cache.js';
 
 // ---------------------------------------------------------------------------

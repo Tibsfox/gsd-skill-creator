@@ -11,7 +11,7 @@ import type {
   CompositionStep,
   CompositionType,
   DomainId,
-} from '../types/mfe-types.js';
+} from '../core/types/mfe-types.js';
 
 // --- Test Primitive Factory ---
 

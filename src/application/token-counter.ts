@@ -1,6 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { isWithinTokenLimit, encode } from 'gpt-tokenizer';
-import type { TokenCountResult } from '../types/application.js';
+import type { TokenCountResult } from '../core/types/application.js';
 
 export class TokenCounter {
   private client: Anthropic | null = null;

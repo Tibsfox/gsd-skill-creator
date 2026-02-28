@@ -16,9 +16,9 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { ResearchCompressor } from '../../capabilities/research-compressor.js';
 import { StalenessChecker } from '../../capabilities/staleness-checker.js';
-import { SkillStore } from '../../storage/skill-store.js';
-import { getSkillsBasePath } from '../../types/scope.js';
-import type { SkillMetadata } from '../../types/skill.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
+import { getSkillsBasePath } from '../../core/types/scope.js';
+import type { SkillMetadata } from '../../core/types/skill.js';
 
 // ============================================================================
 // Types

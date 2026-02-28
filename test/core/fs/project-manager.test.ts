@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { mkdtemp, mkdir, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { ProjectManager } from "../../../src/fs/project-manager.js";
-import { defaultConfig } from "../../../src/fs/config.js";
+import { ProjectManager } from "../../../src/core/fs/project-manager.js";
+import { defaultConfig } from "../../../src/core/fs/config.js";
 
 // --- Helpers ---
 

@@ -3,8 +3,8 @@ import * as path from 'path';
 import { CoActivationTracker, SkillCoActivation } from './co-activation-tracker.js';
 import { ClusterDetector, SkillCluster } from './cluster-detector.js';
 import { AgentGenerator, GeneratedAgent } from './agent-generator.js';
-import { SessionObservation } from '../types/observation.js';
-import { SkillStore } from '../storage/skill-store.js';
+import { SessionObservation } from '../core/types/observation.js';
+import { SkillStore } from '../core/storage/skill-store.js';
 import { inferDomain, generateAgentId } from '../identifiers/generator.js';
 import type { AgentId } from '../identifiers/types.js';
 

@@ -8,7 +8,7 @@
  * @module mcp/presentation/types
  */
 
-import type { TrustState } from '../../types/mcp.js';
+import type { TrustState } from '../../core/types/mcp.js';
 
 // ============================================================================
 // Block Types

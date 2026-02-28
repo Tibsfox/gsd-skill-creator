@@ -57,7 +57,7 @@ const mockCheckCumulative = vi.fn().mockResolvedValue({
   loadableTotal: 8000,
 });
 
-vi.mock('../../validation/budget-validation.js', () => ({
+vi.mock('../../core/validation/budget-validation.js', () => ({
   BudgetValidator: {
     load: vi.fn(() => ({
       checkCumulative: mockCheckCumulative,
@@ -93,7 +93,7 @@ vi.mock('../../disclosure/disclosure-budget.js', () => {
 const mockRead = vi.fn().mockResolvedValue([]);
 const mockAppend = vi.fn().mockResolvedValue(undefined);
 
-vi.mock('../../storage/budget-history.js', () => {
+vi.mock('../../core/storage/budget-history.js', () => {
   return {
     BudgetHistory: function BudgetHistory() {
       return {
@@ -105,7 +105,7 @@ vi.mock('../../storage/budget-history.js', () => {
 });
 
 // Add static getTrend to the mock
-import { BudgetHistory } from '../../storage/budget-history.js';
+import { BudgetHistory } from '../../core/storage/budget-history.js';
 (BudgetHistory as any).getTrend = vi.fn().mockReturnValue(null);
 
 vi.mock('../../index.js', () => ({
@@ -124,7 +124,7 @@ vi.mock('../../index.js', () => ({
 const mockSkillStoreList = vi.fn().mockResolvedValue([]);
 const mockSkillStoreRead = vi.fn().mockResolvedValue(null);
 
-vi.mock('../../storage/skill-store.js', () => ({
+vi.mock('../../core/storage/skill-store.js', () => ({
   SkillStore: function SkillStore() {
     return {
       list: mockSkillStoreList,

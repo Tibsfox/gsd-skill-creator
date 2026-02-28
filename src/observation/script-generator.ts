@@ -1,5 +1,5 @@
 import { createHash } from 'crypto';
-import { PatternStore } from '../storage/pattern-store.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
 import { OffloadOperationSchema } from '../chipset/blitter/types.js';
 import { executeOffloadOp } from '../chipset/blitter/executor.js';
 import type { OffloadOperation, OffloadResult } from '../chipset/blitter/types.js';
@@ -10,8 +10,8 @@ import type {
   DryRunResult,
   StoredExecutionBatch,
   ToolExecutionPair,
-} from '../types/observation.js';
-import { DEFAULT_SCRIPT_GENERATOR_CONFIG } from '../types/observation.js';
+} from '../core/types/observation.js';
+import { DEFAULT_SCRIPT_GENERATOR_CONFIG } from '../core/types/observation.js';
 
 /** Tools that have bash script generation support */
 const SUPPORTED_SCRIPT_TOOLS = new Set(['Read', 'Bash', 'Write', 'Glob', 'Grep']);

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { PromotionEvaluator, DEFAULT_PROMOTION_CRITERIA } from './promotion-evaluator.js';
-import type { SessionObservation } from '../types/observation.js';
+import type { SessionObservation } from '../core/types/observation.js';
 
 function makeObservation(overrides: Partial<SessionObservation> = {}): SessionObservation {
   return {

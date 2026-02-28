@@ -3,11 +3,11 @@ import { readFile, mkdir, rm, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { TestStore } from './test-store.js';
-import type { TestCase } from '../types/testing.js';
-import type { TestCaseInput } from '../validation/test-validation.js';
+import type { TestCase } from '../core/types/testing.js';
+import type { TestCaseInput } from '../core/validation/test-validation.js';
 
 // Mock getSkillsBasePath to use temp directories
-vi.mock('../types/scope.js', async () => {
+vi.mock('../core/types/scope.js', async () => {
   const testBaseDir = join(tmpdir(), `test-store-test-${Date.now()}`);
   return {
     getSkillsBasePath: (scope: 'user' | 'project') => {
@@ -27,7 +27,7 @@ describe('TestStore', () => {
 
   beforeEach(async () => {
     // Get the paths from the mock
-    const { getSkillsBasePath } = await import('../types/scope.js');
+    const { getSkillsBasePath } = await import('../core/types/scope.js');
     userSkillsDir = getSkillsBasePath('user');
     projectSkillsDir = getSkillsBasePath('project');
     testBaseDir = join(userSkillsDir, '..');

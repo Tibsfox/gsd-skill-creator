@@ -6,9 +6,9 @@
  * comprehensive test suites for skills.
  */
 
-import { SkillStore } from '../../storage/skill-store.js';
-import type { SkillScope } from '../../types/scope.js';
-import type { GeneratedTest, SkillInfo } from '../../types/test-generation.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
+import type { SkillScope } from '../../core/types/scope.js';
+import type { GeneratedTest, SkillInfo } from '../../core/types/test-generation.js';
 import {
   CrossSkillGenerator,
   type CrossSkillGeneratorConfig,

@@ -7,7 +7,7 @@ import {
   SkillCandidate,
   DetectionConfig,
   DEFAULT_DETECTION_CONFIG,
-} from '../types/detection.js';
+} from '../core/types/detection.js';
 
 export class SuggestionStore {
   private suggestionsPath: string;

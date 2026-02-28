@@ -2,9 +2,9 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { TokenCounter } from '../../application/token-counter.js';
 import { DEFAULT_PROFILES, getBudgetProfile, getTierForSkill } from '../../application/budget-profiles.js';
-import { formatProgressBar } from '../../validation/budget-validation.js';
-import { SkillStore } from '../../storage/skill-store.js';
-import type { BudgetProfile, PriorityTier } from '../../types/application.js';
+import { formatProgressBar } from '../../core/validation/budget-validation.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
+import type { BudgetProfile, PriorityTier } from '../../core/types/application.js';
 
 interface SkillEstimate {
   name: string;

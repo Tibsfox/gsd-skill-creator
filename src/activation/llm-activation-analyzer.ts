@@ -6,7 +6,7 @@
  * key is unavailable (caller should use heuristic fallback).
  */
 
-import type { LLMAnalysisResult } from '../types/activation.js';
+import type { LLMAnalysisResult } from '../core/types/activation.js';
 
 /**
  * JSON structure expected from LLM response.

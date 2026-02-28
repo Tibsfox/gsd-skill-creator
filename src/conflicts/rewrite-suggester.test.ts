@@ -7,7 +7,7 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { RewriteSuggester } from './rewrite-suggester.js';
-import type { ConflictPair } from '../types/conflicts.js';
+import type { ConflictPair } from '../core/types/conflicts.js';
 
 // Store original env
 const originalEnv = { ...process.env };

@@ -4,7 +4,7 @@ import {
   COLLECTOR_TOOLS,
   type CollectorAgentConfig,
 } from './collector-agent-generator.js';
-import { validateAgentFrontmatter } from '../validation/agent-validation.js';
+import { validateAgentFrontmatter } from '../core/validation/agent-validation.js';
 
 // ============================================================================
 // Helpers

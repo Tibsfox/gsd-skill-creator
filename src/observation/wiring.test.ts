@@ -2,9 +2,9 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { writeFile, readFile, mkdir, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import { PatternStore } from '../storage/pattern-store.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
 import { EphemeralStore } from './ephemeral-store.js';
-import type { SessionObservation } from '../types/observation.js';
+import type { SessionObservation } from '../core/types/observation.js';
 
 function makeObservation(overrides: Partial<SessionObservation> = {}): SessionObservation {
   return {

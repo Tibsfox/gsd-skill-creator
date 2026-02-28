@@ -23,7 +23,7 @@ describe("XDG Base Directory utilities", () => {
   // Dynamic import to get fresh module for each test group
   async function loadXdg() {
     // Clear module cache to pick up env changes
-    const mod = await import("../../../src/fs/xdg.js");
+    const mod = await import("../../../src/core/fs/xdg.js");
     return mod;
   }
 

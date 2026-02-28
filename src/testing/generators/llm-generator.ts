@@ -7,7 +7,7 @@
  * use heuristic fallback).
  */
 
-import type { GeneratedTest, SkillInfo } from '../../types/test-generation.js';
+import type { GeneratedTest, SkillInfo } from '../../core/types/test-generation.js';
 
 /**
  * Structure expected from LLM for positive test generation.

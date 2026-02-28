@@ -1,8 +1,8 @@
 import type { PipelineStage, PipelineContext } from '../application/skill-pipeline.js';
-import type { ScoredSkill } from '../types/application.js';
+import type { ScoredSkill } from '../core/types/application.js';
 import type { EmbeddingService } from '../embeddings/embedding-service.js';
 import type { RelevanceScorer } from '../application/relevance-scorer.js';
-import type { SkillIndexEntry } from '../storage/skill-index.js';
+import type { SkillIndexEntry } from '../core/storage/skill-index.js';
 import { cosineSimilarity } from '../embeddings/cosine-similarity.js';
 
 /**

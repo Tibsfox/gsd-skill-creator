@@ -9,8 +9,8 @@
  * @module cloud-ops/git/commit-rationale
  */
 
-import { NASA_SE_PHASES } from '../../types/openstack.js';
-import type { OpenStackServiceName, SEPhaseId } from '../../types/openstack.js';
+import { NASA_SE_PHASES } from '../../core/types/openstack.js';
+import type { OpenStackServiceName, SEPhaseId } from '../../core/types/openstack.js';
 import type {
   DeploymentChangeType,
   DeploymentCommitInfo,

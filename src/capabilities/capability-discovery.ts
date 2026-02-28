@@ -15,7 +15,7 @@ import { scanDirectoryForDirs } from '../orchestrator/discovery/scanner.js';
 import { parseAgentFile } from '../orchestrator/discovery/agent-parser.js';
 import { parseTeamConfig } from '../orchestrator/discovery/team-parser.js';
 import { computeContentHash } from './types.js';
-import type { SkillStore } from '../storage/skill-store.js';
+import type { SkillStore } from '../core/storage/skill-store.js';
 import type {
   SkillCapability,
   AgentCapability,

@@ -14,7 +14,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { StagingPipeline } from './security/index.js';
 import { computeToolHash } from './security/index.js';
 import { createScoutServer, createExecClient } from './agent-bridge/index.js';
-import type { Tool } from '../types/mcp.js';
+import type { Tool } from '../core/types/mcp.js';
 
 // ============================================================================
 // Helpers

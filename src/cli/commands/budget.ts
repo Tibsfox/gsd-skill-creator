@@ -1,6 +1,6 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import { BudgetValidator, formatProgressBar } from '../../validation/budget-validation.js';
+import { BudgetValidator, formatProgressBar } from '../../core/validation/budget-validation.js';
 
 /**
  * Budget command - shows current character budget usage across all skills.

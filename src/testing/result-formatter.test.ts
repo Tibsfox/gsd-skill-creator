@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { ResultFormatter, formatTestResults, formatJSON } from './result-formatter.js';
-import type { TestRunResult, TestCaseResult, RunMetrics } from '../types/test-run.js';
+import type { TestRunResult, TestCaseResult, RunMetrics } from '../core/types/test-run.js';
 
 /**
  * Create a mock test case result for testing.

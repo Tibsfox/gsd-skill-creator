@@ -9,8 +9,8 @@ import {
   USER_AGENT_BUG_WARNING,
 } from './agent-generator.js';
 import { SkillCluster } from './cluster-detector.js';
-import { SkillStore } from '../storage/skill-store.js';
-import { PathTraversalError } from '../validation/path-safety.js';
+import { SkillStore } from '../core/storage/skill-store.js';
+import { PathTraversalError } from '../core/validation/path-safety.js';
 
 describe('AgentGenerator', () => {
   let tempDir: string;

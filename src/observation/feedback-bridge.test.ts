@@ -3,7 +3,7 @@ import { mkdtemp, rm } from 'fs/promises';
 import { join } from 'path';
 import * as os from 'os';
 import { createHash } from 'crypto';
-import { PatternStore } from '../storage/pattern-store.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
 import { SignalBus, createCompletionSignal } from '../chipset/blitter/signals.js';
 import type { OffloadResult, CompletionSignal } from '../chipset/blitter/types.js';
 import { FeedbackBridge } from './feedback-bridge.js';

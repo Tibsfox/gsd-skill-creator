@@ -13,9 +13,9 @@
 
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import type { SkillStore } from '../storage/skill-store.js';
+import type { SkillStore } from '../core/storage/skill-store.js';
 import type { CapabilityRef, CapabilityType, CapabilityVerb } from './types.js';
-import type { BudgetProfile, PriorityTier } from '../types/application.js';
+import type { BudgetProfile, PriorityTier } from '../core/types/application.js';
 
 // ============================================================================
 // Types

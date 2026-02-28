@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { CumulativeBudgetResult } from '../validation/budget-validation.js';
+import type { CumulativeBudgetResult } from '../core/validation/budget-validation.js';
 import type { IntegrationConfig } from '../integration/config/types.js';
 
 // Mock BudgetValidator
-vi.mock('../validation/budget-validation.js', () => {
+vi.mock('../core/validation/budget-validation.js', () => {
   const mockCheckCumulative = vi.fn();
   return {
     BudgetValidator: {
@@ -21,7 +21,7 @@ vi.mock('../integration/config/reader.js', () => ({
 }));
 
 import { toBudgetGaugeData, toSiliconPanelData, collectBudgetSiliconData } from './budget-silicon-collector.js';
-import { BudgetValidator } from '../validation/budget-validation.js';
+import { BudgetValidator } from '../core/validation/budget-validation.js';
 import { readIntegrationConfig } from '../integration/config/reader.js';
 
 // ============================================================================

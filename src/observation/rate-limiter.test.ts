@@ -4,7 +4,7 @@ import {
   DEFAULT_RATE_LIMIT_CONFIG,
   detectAnomalies,
 } from './rate-limiter.js';
-import type { SessionObservation } from '../types/observation.js';
+import type { SessionObservation } from '../core/types/observation.js';
 
 function makeObservation(overrides: Partial<SessionObservation> = {}): SessionObservation {
   const startTime = overrides.startTime ?? 1000000;

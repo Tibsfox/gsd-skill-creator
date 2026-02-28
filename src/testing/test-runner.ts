@@ -9,17 +9,17 @@
  * 5. Storing results to ResultStore
  */
 
-import type { TestCase } from '../types/testing.js';
+import type { TestCase } from '../core/types/testing.js';
 import type {
   TestCaseResult,
   RunMetrics,
   TestRunResult,
-} from '../types/test-run.js';
-import type { SimulationResult } from '../types/simulation.js';
-import type { SkillScope } from '../types/scope.js';
+} from '../core/types/test-run.js';
+import type { SimulationResult } from '../core/types/simulation.js';
+import type { SkillScope } from '../core/types/scope.js';
 import { TestStore } from './test-store.js';
 import { ResultStore } from './result-store.js';
-import { SkillStore } from '../storage/skill-store.js';
+import { SkillStore } from '../core/storage/skill-store.js';
 import { BatchSimulator } from '../simulation/batch-simulator.js';
 
 /**

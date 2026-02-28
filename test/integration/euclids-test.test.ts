@@ -22,7 +22,7 @@ import type {
   MathematicalPrimitive,
   DomainId,
   CompositionPath,
-} from '../../src/types/mfe-types.js';
+} from '../../src/core/types/mfe-types.js';
 import type { DependencyGraphPort } from '../../src/engines/composition-engine.js';
 import type { PropertyLookups } from '../../src/engines/property-checkers.js';
 import { CompositionEngine } from '../../src/engines/composition-engine.js';

@@ -4,10 +4,10 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { existsSync } from "node:fs";
 
-import { projectCommand } from "../../../src/fs/commands/project.js";
-import { packCommand } from "../../../src/fs/commands/pack.js";
-import { contribCommand } from "../../../src/fs/commands/contrib.js";
-import { wwwCommand } from "../../../src/fs/commands/www.js";
+import { projectCommand } from "../../../src/core/fs/commands/project.js";
+import { packCommand } from "../../../src/core/fs/commands/pack.js";
+import { contribCommand } from "../../../src/core/fs/commands/contrib.js";
+import { wwwCommand } from "../../../src/core/fs/commands/www.js";
 
 // --- Console capture ---
 

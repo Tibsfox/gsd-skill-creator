@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { detectChallengers, isWeakMatch } from './challenger-detector.js';
-import type { SkillPrediction } from '../types/simulation.js';
+import type { SkillPrediction } from '../core/types/simulation.js';
 
 describe('detectChallengers', () => {
   /**

@@ -10,7 +10,7 @@ import {
   type ContentType,
   type DocumentSection,
 } from './analyzer.js';
-import type { DomainDefinition } from '../types/mfe-types.js';
+import type { DomainDefinition } from '../core/types/mfe-types.js';
 
 // --- Test domain definitions (avoids loading domain-index.json) ---
 

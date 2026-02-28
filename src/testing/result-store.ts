@@ -1,8 +1,8 @@
 import { readFile, appendFile, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
 import { randomUUID } from 'crypto';
-import type { TestRunResult, TestRunSnapshot } from '../types/test-run.js';
-import { getSkillsBasePath, type SkillScope } from '../types/scope.js';
+import type { TestRunResult, TestRunSnapshot } from '../core/types/test-run.js';
+import { getSkillsBasePath, type SkillScope } from '../core/types/scope.js';
 
 /**
  * Store for persisting test run results to JSONL files.

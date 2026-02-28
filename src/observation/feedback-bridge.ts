@@ -1,7 +1,7 @@
 import { createHash } from 'crypto';
 import { SignalBus } from '../chipset/blitter/signals.js';
 import type { CompletionSignal } from '../chipset/blitter/types.js';
-import { PatternStore } from '../storage/pattern-store.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
 
 /**
  * Bridges Blitter CompletionSignal events to PatternStore 'feedback' category,

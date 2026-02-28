@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { mkdtemp, rm, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { PackCatalog } from "../../../src/fs/pack-catalog.js";
+import { PackCatalog } from "../../../src/core/fs/pack-catalog.js";
 
 let tmpRoot: string;
 

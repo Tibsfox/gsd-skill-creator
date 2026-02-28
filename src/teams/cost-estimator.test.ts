@@ -13,7 +13,7 @@ import {
   TOPOLOGY_TOKEN_ESTIMATES,
   PRICING_LAST_UPDATED,
 } from './cost-estimator.js';
-import type { TeamConfig } from '../types/team.js';
+import type { TeamConfig } from '../core/types/team.js';
 
 // ============================================================================
 // Helper: create minimal TeamConfig

@@ -3,7 +3,7 @@ import { writeFile, mkdir, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { PatternAnalyzer } from './pattern-analyzer.js';
-import { SessionObservation } from '../types/observation.js';
+import { SessionObservation } from '../core/types/observation.js';
 
 describe('PatternAnalyzer', () => {
   const testDir = join(tmpdir(), `pattern-analyzer-test-${Date.now()}`);

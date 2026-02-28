@@ -12,7 +12,7 @@ export { ResultStore } from './result-store.js';
 export { TestRunner, type RunOptions } from './test-runner.js';
 
 // Re-export types from types/testing.ts for convenience
-export type { TestCase, TestResult, TestExpectation } from '../types/testing.js';
+export type { TestCase, TestResult, TestExpectation } from '../core/types/testing.js';
 
 // Re-export types from types/test-run.ts for test execution results
 export type {
@@ -20,11 +20,11 @@ export type {
   RunMetrics,
   TestRunResult,
   TestRunSnapshot,
-} from '../types/test-run.js';
+} from '../core/types/test-run.js';
 
 // Re-export validation utilities
-export { validateTestCaseInput, TestCaseInputSchema } from '../validation/test-validation.js';
-export type { TestCaseInput, ValidationWarning } from '../validation/test-validation.js';
+export { validateTestCaseInput, TestCaseInputSchema } from '../core/validation/test-validation.js';
+export type { TestCaseInput, ValidationWarning } from '../core/validation/test-validation.js';
 
 // Result formatting for terminal display and JSON export
 export {

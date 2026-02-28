@@ -19,9 +19,9 @@ import {
   type GeneratedTest,
   type GenerationResult,
 } from '../../testing/index.js';
-import { SkillStore } from '../../storage/skill-store.js';
-import { parseScope, getSkillsBasePath, type SkillScope } from '../../types/scope.js';
-import type { TestExpectation, TestDifficulty, TestCase } from '../../types/testing.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
+import { parseScope, getSkillsBasePath, type SkillScope } from '../../core/types/scope.js';
+import type { TestExpectation, TestDifficulty, TestCase } from '../../core/types/testing.js';
 import { access } from 'fs/promises';
 import { join } from 'path';
 

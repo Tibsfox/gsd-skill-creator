@@ -3,7 +3,7 @@ import pc from 'picocolors';
 import matter from 'gray-matter';
 import { readdir, readFile, writeFile, stat } from 'fs/promises';
 import { join, basename } from 'path';
-import { validateAgentFrontmatter, validateToolsField } from '../../validation/agent-validation.js';
+import { validateAgentFrontmatter, validateToolsField } from '../../core/validation/agent-validation.js';
 
 // ============================================================================
 // Migration Types

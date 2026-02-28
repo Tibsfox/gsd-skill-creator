@@ -1,17 +1,17 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { SkillIndexEntry } from '../storage/skill-index.js';
+import type { SkillIndexEntry } from '../core/storage/skill-index.js';
 
 // Mock dependencies before importing the module under test
 // Use regular functions (not arrows) so mocks can be called with `new` (68-04 pattern)
-vi.mock('../storage/skill-store.js', () => ({
+vi.mock('../core/storage/skill-store.js', () => ({
   SkillStore: vi.fn(function SkillStore() { return {}; }),
 }));
 
-vi.mock('../storage/skill-index.js', () => ({
+vi.mock('../core/storage/skill-index.js', () => ({
   SkillIndex: vi.fn(function SkillIndex() { return {}; }),
 }));
 
-vi.mock('../types/scope.js', () => ({
+vi.mock('../core/types/scope.js', () => ({
   getSkillsBasePath: vi.fn((scope: string) => {
     if (scope === 'user') return '/home/user/.claude/skills';
     return '.claude/skills';
@@ -24,9 +24,9 @@ vi.mock('../embeddings/embedding-cache.js', () => ({
 
 // Now import the module under test and mocked modules
 import { CrossProjectIndex } from './cross-project-index.js';
-import { SkillIndex } from '../storage/skill-index.js';
-import { SkillStore } from '../storage/skill-store.js';
-import { getSkillsBasePath } from '../types/scope.js';
+import { SkillIndex } from '../core/storage/skill-index.js';
+import { SkillStore } from '../core/storage/skill-store.js';
+import { getSkillsBasePath } from '../core/types/scope.js';
 import { EmbeddingCache } from '../embeddings/embedding-cache.js';
 
 /**

@@ -54,7 +54,7 @@ import {
   // Union + constants
   IpcEventSchema,
   IPC_EVENT_NAMES,
-} from '../../../src/types/ipc-events.js';
+} from '../../../src/core/types/ipc-events.js';
 
 // ============================================================================
 // Chat events (11 types)

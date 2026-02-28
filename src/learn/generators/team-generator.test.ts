@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { MathematicalPrimitive, CompositionRule } from '../../types/mfe-types.js';
+import type { MathematicalPrimitive, CompositionRule } from '../../core/types/mfe-types.js';
 import { generateTeam } from './team-generator.js';
 
 // === Test Helpers ===

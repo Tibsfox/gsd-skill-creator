@@ -4,7 +4,7 @@ import {
   type ContentSafetyResult,
   type ContentSafetyOptions,
 } from './content-validator.js';
-import type { SkillMetadata } from '../types/skill.js';
+import type { SkillMetadata } from '../core/types/skill.js';
 
 /** Helper to build valid metadata */
 function validMetadata(overrides: Partial<SkillMetadata> = {}): Partial<SkillMetadata> {

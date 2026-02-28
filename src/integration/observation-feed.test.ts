@@ -10,7 +10,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, readFile, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import type { DomainId, PlanePosition, CompositionStep } from '../types/mfe-types.js';
+import type { DomainId, PlanePosition, CompositionStep } from '../core/types/mfe-types.js';
 
 // Will be implemented in observation-feed.ts
 import {

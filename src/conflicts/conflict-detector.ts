@@ -6,7 +6,7 @@
  */
 
 import { getEmbeddingService, cosineSimilarity } from '../embeddings/index.js';
-import type { ConflictConfig, ConflictPair, ConflictResult } from '../types/conflicts.js';
+import type { ConflictConfig, ConflictPair, ConflictResult } from '../core/types/conflicts.js';
 
 /** Default similarity threshold for conflict detection */
 const DEFAULT_THRESHOLD = 0.85;

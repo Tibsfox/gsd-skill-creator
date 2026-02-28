@@ -27,7 +27,7 @@ import type {
   DomainId,
   CompositionPath,
   CompositionStep,
-} from '../../src/types/mfe-types.js';
+} from '../../src/core/types/mfe-types.js';
 import type { PlaneClassification, DomainActivation } from '../../src/engines/plane-classifier.js';
 import type { NavigationResult, NearbyPrimitive } from '../../src/engines/plane-navigator.js';
 

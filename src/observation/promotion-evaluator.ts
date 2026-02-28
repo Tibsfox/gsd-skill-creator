@@ -1,4 +1,4 @@
-import type { SessionObservation } from '../types/observation.js';
+import type { SessionObservation } from '../core/types/observation.js';
 
 /** Result of evaluating an observation for promotion */
 export interface PromotionResult {

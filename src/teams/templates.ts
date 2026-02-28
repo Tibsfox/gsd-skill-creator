@@ -13,7 +13,7 @@
  * No side effects, no I/O -- purely data transformation.
  */
 
-import type { TeamConfig, TeamMember, TeamTask } from '../types/team.js';
+import type { TeamConfig, TeamMember, TeamTask } from '../core/types/team.js';
 
 // ============================================================================
 // Tool Constant Arrays

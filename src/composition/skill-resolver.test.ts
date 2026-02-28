@@ -2,9 +2,9 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdir, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import { SkillStore } from '../storage/skill-store.js';
+import { SkillStore } from '../core/storage/skill-store.js';
 import { SkillResolver } from './skill-resolver.js';
-import { SkillMetadata, getExtension } from '../types/skill.js';
+import { SkillMetadata, getExtension } from '../core/types/skill.js';
 
 describe('SkillResolver', () => {
   const testDir = join(tmpdir(), `skill-resolver-test-${Date.now()}`);

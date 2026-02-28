@@ -5,7 +5,7 @@
  * More suggestions for lower scores, includes before/after examples.
  */
 
-import type { ActivationScore } from '../types/activation.js';
+import type { ActivationScore } from '../core/types/activation.js';
 
 /**
  * A suggestion for improving a skill description.

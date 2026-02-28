@@ -47,7 +47,7 @@ vi.mock('../../testing/index.js', () => ({
   }),
 }));
 
-vi.mock('../../storage/skill-store.js', () => ({
+vi.mock('../../core/storage/skill-store.js', () => ({
   SkillStore: vi.fn(function(this: any) {
     this.list = vi.fn();
     this.read = vi.fn();
@@ -57,8 +57,8 @@ vi.mock('../../storage/skill-store.js', () => ({
 // Import after mocking
 import { testCommand } from './test.js';
 import { TestStore, TestRunner, ResultStore, ResultFormatter } from '../../testing/index.js';
-import { SkillStore } from '../../storage/skill-store.js';
-import type { TestRunResult, RunMetrics } from '../../types/test-run.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
+import type { TestRunResult, RunMetrics } from '../../core/types/test-run.js';
 
 describe('test run command', () => {
   let mockTestStore: { count: ReturnType<typeof vi.fn>; list: ReturnType<typeof vi.fn> };

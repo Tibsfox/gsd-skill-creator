@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm } from 'fs/promises';
 import { join } from 'path';
 import * as os from 'os';
-import { PatternStore } from '../storage/pattern-store.js';
-import type { LineageEntry } from '../types/observation.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
+import type { LineageEntry } from '../core/types/observation.js';
 import { LineageTracker } from './lineage-tracker.js';
 
 function makeEntry(overrides: Partial<LineageEntry> = {}): LineageEntry {

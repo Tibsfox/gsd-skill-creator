@@ -18,7 +18,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 const mockList = vi.fn();
 const mockRead = vi.fn();
 
-vi.mock('../../storage/skill-store.js', () => ({
+vi.mock('../../core/storage/skill-store.js', () => ({
   SkillStore: function SkillStore() {
     return {
       list: mockList,

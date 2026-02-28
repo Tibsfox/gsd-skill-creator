@@ -1,6 +1,6 @@
 import natural from 'natural';
-import type { ScoredSkill } from '../types/application.js';
-import type { SkillIndexEntry } from '../storage/skill-index.js';
+import type { ScoredSkill } from '../core/types/application.js';
+import type { SkillIndexEntry } from '../core/storage/skill-index.js';
 
 export class RelevanceScorer {
   private tfidf: natural.TfIdf;

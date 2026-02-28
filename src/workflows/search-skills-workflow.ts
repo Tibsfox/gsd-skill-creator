@@ -1,6 +1,6 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import type { SkillIndex } from '../storage/skill-index.js';
+import type { SkillIndex } from '../core/storage/skill-index.js';
 import { formatSkillEntry } from './list-skills-workflow.js';
 import { CrossProjectIndex } from '../retrieval/cross-project-index.js';
 import type { ScopedSearchResult } from '../retrieval/types.js';

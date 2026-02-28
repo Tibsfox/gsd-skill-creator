@@ -17,6 +17,6 @@ export type {
   ConflictConfig,
   ConflictPair,
   ConflictResult,
-} from '../types/conflicts.js';
+} from '../core/types/conflicts.js';
 
 export type { RewriteSuggestion } from './rewrite-suggester.js';

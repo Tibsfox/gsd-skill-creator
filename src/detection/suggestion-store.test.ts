@@ -3,7 +3,7 @@ import { readFile, mkdir, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { SuggestionStore } from './suggestion-store.js';
-import { SkillCandidate, Suggestion, PatternEvidence } from '../types/detection.js';
+import { SkillCandidate, Suggestion, PatternEvidence } from '../core/types/detection.js';
 
 describe('SuggestionStore', () => {
   const testDir = join(tmpdir(), `suggestion-store-test-${Date.now()}`);

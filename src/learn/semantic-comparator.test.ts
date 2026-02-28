@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { MathematicalPrimitive } from '../types/mfe-types.js';
+import type { MathematicalPrimitive } from '../core/types/mfe-types.js';
 import type { PrefilterMatch } from './dedup-prefilter.js';
 import { compareSemantically } from './semantic-comparator.js';
 

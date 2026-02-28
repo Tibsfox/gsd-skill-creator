@@ -1,7 +1,7 @@
 // Detection module exports
 
 // Types
-export * from '../types/detection.js';
+export * from '../core/types/detection.js';
 
 // Classes
 export { PatternAnalyzer } from './pattern-analyzer.js';
@@ -28,4 +28,4 @@ export {
   type ToolInferenceCandidate,
   type WrappedScript,
   type SanitizeResult,
-} from '../validation/generation-safety.js';
+} from '../core/validation/generation-safety.js';

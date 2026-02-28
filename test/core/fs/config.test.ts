@@ -9,7 +9,7 @@ import {
   saveConfig,
   defaultConfig,
   resolveProjectPath,
-} from "../../../src/fs/config.js";
+} from "../../../src/core/fs/config.js";
 
 // --- Helpers ---
 

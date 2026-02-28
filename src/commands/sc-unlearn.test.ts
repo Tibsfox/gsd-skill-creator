@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { MathematicalPrimitive } from '../types/mfe-types.js';
+import type { MathematicalPrimitive } from '../core/types/mfe-types.js';
 import type { PrimitiveModification } from '../learn/merge-engine.js';
 import { createChangesetManager } from '../learn/changeset-manager.js';
 import type { GraphIntegrityValidator } from '../learn/changeset-manager.js';

@@ -9,7 +9,7 @@
 // Only resolveConflict() can produce 'replace', and only after explicit user
 // decision. This enforces LEARN-08: "never silently overwrites."
 
-import type { MathematicalPrimitive } from '../types/mfe-types.js';
+import type { MathematicalPrimitive } from '../core/types/mfe-types.js';
 import type { ComparisonDetail } from './semantic-comparator.js';
 
 // === Exported Types ===

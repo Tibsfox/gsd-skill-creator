@@ -1,5 +1,5 @@
-import type { ConflictResult, ScoredSkill } from '../types/application.js';
-import type { SkillIndexEntry } from '../storage/skill-index.js';
+import type { ConflictResult, ScoredSkill } from '../core/types/application.js';
+import type { SkillIndexEntry } from '../core/storage/skill-index.js';
 
 export class ConflictResolver {
   // Detect overlapping triggers between skills

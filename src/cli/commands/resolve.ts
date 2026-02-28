@@ -1,9 +1,9 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { stat } from 'fs/promises';
-import type { SkillScope } from '../../types/scope.js';
-import { getSkillPath, getSkillsBasePath } from '../../types/scope.js';
-import { SkillStore } from '../../storage/skill-store.js';
+import type { SkillScope } from '../../core/types/scope.js';
+import { getSkillPath, getSkillsBasePath } from '../../core/types/scope.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
 
 export interface ResolvedSkill {
   scope: SkillScope;

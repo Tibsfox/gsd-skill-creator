@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { MathematicalPrimitive } from '../../types/mfe-types.js';
+import type { MathematicalPrimitive } from '../../core/types/mfe-types.js';
 import { generateLearnedSkill } from './skill-generator.js';
 import type { LearnedSkillConfig, LearnedSkillResult, GeneratedSkillFile } from './skill-generator.js';
 

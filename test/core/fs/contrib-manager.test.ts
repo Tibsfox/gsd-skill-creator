@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { mkdtemp, rm, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { ContribManager } from "../../../src/fs/contrib-manager.js";
-import { defaultConfig } from "../../../src/fs/config.js";
+import { ContribManager } from "../../../src/core/fs/contrib-manager.js";
+import { defaultConfig } from "../../../src/core/fs/config.js";
 
 let tmpRoot: string;
 

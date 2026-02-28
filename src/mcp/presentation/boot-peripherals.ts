@@ -10,7 +10,7 @@
  * @module mcp/presentation/boot-peripherals
  */
 
-import type { TrustState } from '../../types/mcp.js';
+import type { TrustState } from '../../core/types/mcp.js';
 
 // ============================================================================
 // Types

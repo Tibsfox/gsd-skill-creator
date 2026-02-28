@@ -3,8 +3,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import { TeamStore, getTeamsBasePath, getAgentsBasePath } from './team-store.js';
-import type { TeamConfig } from '../types/team.js';
-import { PathTraversalError } from '../validation/path-safety.js';
+import type { TeamConfig } from '../core/types/team.js';
+import { PathTraversalError } from '../core/validation/path-safety.js';
 
 describe('TeamStore', () => {
   let tempDir: string;

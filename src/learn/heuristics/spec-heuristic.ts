@@ -3,7 +3,7 @@
 // Extracts MUST/SHALL requirements, interface definitions, invariants,
 // and constraints from specification documents.
 
-import type { PrimitiveType } from '../../types/mfe-types.js';
+import type { PrimitiveType } from '../../core/types/mfe-types.js';
 import type { ExtractionHeuristic, ExtractionPattern } from './index.js';
 
 const patterns: ExtractionPattern[] = [

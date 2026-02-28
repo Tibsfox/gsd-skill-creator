@@ -28,7 +28,7 @@ import {
 } from './security/index.js';
 import { createScoutServer } from './agent-bridge/scout-server.js';
 import { createExecClient } from './agent-bridge/exec-client.js';
-import type { Tool } from '../types/mcp.js';
+import type { Tool } from '../core/types/mcp.js';
 
 // ============================================================================
 // Helpers

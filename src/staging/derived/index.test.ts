@@ -5,7 +5,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import type { LineageEntry } from '../../types/observation.js';
+import type { LineageEntry } from '../../core/types/observation.js';
 
 describe('derived barrel index', () => {
   it('exports checkDerived', async () => {

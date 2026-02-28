@@ -4,8 +4,8 @@ import { join } from 'path';
 import * as os from 'os';
 import { ExecutionCapture } from './execution-capture.js';
 import { TranscriptParser } from './transcript-parser.js';
-import { PatternStore } from '../storage/pattern-store.js';
-import type { TranscriptEntry, ExecutionContext } from '../types/observation.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
+import type { TranscriptEntry, ExecutionContext } from '../core/types/observation.js';
 
 /** Helper to create a tool_use transcript entry */
 function toolUse(uuid: string, toolName: string, input: Record<string, unknown> = {}): TranscriptEntry {

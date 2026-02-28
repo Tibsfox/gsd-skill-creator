@@ -51,4 +51,4 @@ export type {
   LineageNode,
   LineageGraphEntry,
   LineageViewData,
-} from '../../types/dashboard.js';
+} from '../../core/types/dashboard.js';

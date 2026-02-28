@@ -1,5 +1,5 @@
-import { Skill, SkillMetadata, SkillTrigger, getExtension, hasExtensionData, type GsdSkillCreatorExtension } from '../types/skill.js';
-import { SkillStore } from '../storage/skill-store.js';
+import { Skill, SkillMetadata, SkillTrigger, getExtension, hasExtensionData, type GsdSkillCreatorExtension } from '../core/types/skill.js';
+import { SkillStore } from '../core/storage/skill-store.js';
 import { DependencyGraph } from './dependency-graph.js';
 
 export interface SkillResolution {

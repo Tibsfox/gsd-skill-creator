@@ -13,7 +13,7 @@ import { describe, it, expect } from 'vitest';
 import {
   SandboxProfileSchema,
   type SandboxProfileType,
-} from '../../../src/security/index.js';
+} from '../../../src/core/security/index.js';
 
 // ---------------------------------------------------------------------------
 // Fixtures

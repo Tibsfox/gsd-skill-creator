@@ -6,7 +6,7 @@
 //
 // Uses planeDistance from dedup-prefilter for distance calculation.
 
-import type { MathematicalPrimitive, PlanePosition } from '../../types/mfe-types.js';
+import type { MathematicalPrimitive, PlanePosition } from '../../core/types/mfe-types.js';
 import { planeDistance } from '../dedup-prefilter.js';
 
 // === Exported Types ===

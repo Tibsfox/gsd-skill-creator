@@ -14,11 +14,11 @@
  * for flagging underperforming skills with actionable suggestions.
  */
 
-import type { HealthScore, HealthThresholds } from '../types/evaluator.js';
-import { DEFAULT_HEALTH_THRESHOLDS } from '../types/evaluator.js';
+import type { HealthScore, HealthThresholds } from '../core/types/evaluator.js';
+import { DEFAULT_HEALTH_THRESHOLDS } from '../core/types/evaluator.js';
 import type { ResultStore } from '../testing/result-store.js';
 import type { SuccessTracker } from './success-tracker.js';
-import type { SkillStore } from '../storage/skill-store.js';
+import type { SkillStore } from '../core/storage/skill-store.js';
 
 /** Budget limit in characters (matches BudgetValidator default) */
 const CHAR_BUDGET = 15000;

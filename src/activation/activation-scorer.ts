@@ -11,7 +11,7 @@ import type {
   ActivationScore,
   ScoringFactors,
   ScoringWeights,
-} from '../types/activation.js';
+} from '../core/types/activation.js';
 
 /**
  * Default weights for scoring factors.

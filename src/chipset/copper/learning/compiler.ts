@@ -15,8 +15,8 @@
  * 6. Compile each pattern into a validated Pipeline
  */
 
-import type { SessionObservation } from '../../../types/observation.js';
-import type { SkillCandidate } from '../../../types/detection.js';
+import type { SessionObservation } from '../../../core/types/observation.js';
+import type { SkillCandidate } from '../../../core/types/detection.js';
 import type {
   Pipeline,
   PipelineInstruction,

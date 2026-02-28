@@ -1,10 +1,10 @@
 import pc from 'picocolors';
-import { SkillStore } from '../../storage/skill-store.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
 import { VersionManager } from '../../learning/version-manager.js';
 import { DriftTracker } from '../../learning/drift-tracker.js';
 import { ContradictionDetector } from '../../learning/contradiction-detector.js';
 import { FeedbackStore } from '../../learning/feedback-store.js';
-import { getExtension } from '../../types/skill.js';
+import { getExtension } from '../../core/types/skill.js';
 
 /**
  * Audit CLI command - displays skill evolution history with diffs and drift.

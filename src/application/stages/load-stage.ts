@@ -1,5 +1,5 @@
 import type { PipelineStage, PipelineContext } from '../skill-pipeline.js';
-import type { SkillStore } from '../../storage/skill-store.js';
+import type { SkillStore } from '../../core/storage/skill-store.js';
 import type { SkillSession } from '../skill-session.js';
 
 /**

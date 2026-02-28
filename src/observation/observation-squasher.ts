@@ -1,4 +1,4 @@
-import type { SessionObservation } from '../types/observation.js';
+import type { SessionObservation } from '../core/types/observation.js';
 
 /**
  * Squashes multiple ephemeral observations into a single summary observation.

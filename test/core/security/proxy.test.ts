@@ -18,7 +18,7 @@ import {
   SecurityEventSchema,
   type ProxyConfig,
   SECURITY_COMMANDS,
-} from '../../../src/security/index.js';
+} from '../../../src/core/security/index.js';
 
 import {
   renderProxyHealth,

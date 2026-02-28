@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { mkdtemp, rm, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { WWWStager } from "../../../src/fs/www-stager.js";
-import { defaultConfig } from "../../../src/fs/config.js";
+import { WWWStager } from "../../../src/core/fs/www-stager.js";
+import { defaultConfig } from "../../../src/core/fs/config.js";
 
 let tmpRoot: string;
 

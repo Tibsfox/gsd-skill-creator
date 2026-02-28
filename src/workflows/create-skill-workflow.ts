@@ -1,16 +1,16 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import matter from 'gray-matter';
-import { SkillStore } from '../storage/skill-store.js';
-import { validateSkillInput, suggestFixedName, validateDescriptionQuality } from '../validation/skill-validation.js';
-import { ReservedNameValidator } from '../validation/reserved-names.js';
-import { BudgetValidator, formatBudgetDisplay } from '../validation/budget-validation.js';
-import { detectArguments, detectPreprocessing, checkInjectionRisk, suggestArgumentHint } from '../validation/arguments-validation.js';
+import { SkillStore } from '../core/storage/skill-store.js';
+import { validateSkillInput, suggestFixedName, validateDescriptionQuality } from '../core/validation/skill-validation.js';
+import { ReservedNameValidator } from '../core/validation/reserved-names.js';
+import { BudgetValidator, formatBudgetDisplay } from '../core/validation/budget-validation.js';
+import { detectArguments, detectPreprocessing, checkInjectionRisk, suggestArgumentHint } from '../core/validation/arguments-validation.js';
 import { ContentAnalyzer, WORD_THRESHOLD_WARNING } from '../disclosure/index.js';
-import type { SkillTrigger, SkillMetadata } from '../types/skill.js';
-import type { GsdSkillCreatorExtension, ForceOverrideReservedName, ForceOverrideBudget } from '../types/extensions.js';
-import type { SkillScope } from '../types/scope.js';
-import { getSkillsBasePath } from '../types/scope.js';
+import type { SkillTrigger, SkillMetadata } from '../core/types/skill.js';
+import type { GsdSkillCreatorExtension, ForceOverrideReservedName, ForceOverrideBudget } from '../core/types/extensions.js';
+import type { SkillScope } from '../core/types/scope.js';
+import { getSkillsBasePath } from '../core/types/scope.js';
 
 // Parse comma-separated string into array
 function parseCommaSeparated(input: string | undefined): string[] {

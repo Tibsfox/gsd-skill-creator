@@ -6,7 +6,7 @@
 //
 // 5-stage flow: LOAD -> VALIDATE -> PROCESS RESULT -> REGENERATE -> SUMMARY
 
-import type { MathematicalPrimitive } from '../types/mfe-types.js';
+import type { MathematicalPrimitive } from '../core/types/mfe-types.js';
 import type {
   ChangesetManager,
   GraphIntegrityValidator,

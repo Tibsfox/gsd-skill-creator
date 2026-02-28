@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { PipelineContext } from '../application/skill-pipeline.js';
-import type { ScoredSkill } from '../types/application.js';
-import type { SkillIndexEntry } from '../storage/skill-index.js';
+import type { ScoredSkill } from '../core/types/application.js';
+import type { SkillIndexEntry } from '../core/storage/skill-index.js';
 import type { EmbeddingService } from '../embeddings/embedding-service.js';
 import type { RelevanceScorer } from '../application/relevance-scorer.js';
-import type { EmbeddingResult } from '../types/embeddings.js';
+import type { EmbeddingResult } from '../core/types/embeddings.js';
 import { CorrectionStage, DEFAULT_CORRECTION_CONFIG } from './corrective-rag.js';
 import type { CorrectionConfig } from './corrective-rag.js';
 

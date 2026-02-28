@@ -11,7 +11,7 @@
  * the pattern from detectTaskCycles() in team-validator.ts.
  */
 
-import type { InterTeamLink } from '../types/team.js';
+import type { InterTeamLink } from '../core/types/team.js';
 
 // ============================================================================
 // Result Types

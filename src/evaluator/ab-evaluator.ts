@@ -8,7 +8,7 @@
  * small samples (df < 30) rather than the large-sample approximation of 1.96.
  */
 import { tTestTwoSample, mean, sampleStandardDeviation } from 'simple-statistics';
-import type { ABResult } from '../types/evaluator.js';
+import type { ABResult } from '../core/types/evaluator.js';
 
 export class ABEvaluator {
   private readonly MIN_ACTIVATIONS = 10;

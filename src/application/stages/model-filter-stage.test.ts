@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ModelFilterStage } from './model-filter-stage.js';
 import { createEmptyContext } from '../skill-pipeline.js';
-import type { ScoredSkill } from '../../types/application.js';
-import type { Skill } from '../../types/skill.js';
+import type { ScoredSkill } from '../../core/types/application.js';
+import type { Skill } from '../../core/types/skill.js';
 
 /** Build a mock Skill object with optional modelGuidance on the raw metadata. */
 function buildSkill(

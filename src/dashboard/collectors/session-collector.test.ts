@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { SessionObservation } from '../../types/observation.js';
+import type { SessionObservation } from '../../core/types/observation.js';
 
 // ---------------------------------------------------------------------------
 // Mock fs/promises before importing the module under test

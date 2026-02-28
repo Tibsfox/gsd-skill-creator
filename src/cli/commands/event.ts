@@ -18,8 +18,8 @@
 
 import { join } from 'node:path';
 import { readFile } from 'node:fs/promises';
-import { EventStore, emitEvent, consumeEvent, expireStaleEvents, EventNameSchema } from '../../events/index.js';
-import { EventSuggester } from '../../events/event-suggester.js';
+import { EventStore, emitEvent, consumeEvent, expireStaleEvents, EventNameSchema } from '../../core/events/index.js';
+import { EventSuggester } from '../../core/events/event-suggester.js';
 
 // ============================================================================
 // Argument parsing helpers

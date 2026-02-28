@@ -1,13 +1,13 @@
 import { createReadStream } from 'fs';
 import { createInterface } from 'readline';
-import { SessionObservation } from '../types/observation.js';
+import { SessionObservation } from '../core/types/observation.js';
 import {
   SkillCandidate,
   FrequencyMap,
   DetectionConfig,
   PatternEvidence,
   DEFAULT_DETECTION_CONFIG,
-} from '../types/detection.js';
+} from '../core/types/detection.js';
 
 // Common dev commands that aren't skill-worthy on their own
 const COMMON_COMMANDS = new Set([

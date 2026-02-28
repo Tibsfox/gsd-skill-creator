@@ -9,7 +9,7 @@
  */
 
 import pc from 'picocolors';
-import { formatProgressBar, type CumulativeBudgetResult } from '../../validation/budget-validation.js';
+import { formatProgressBar, type CumulativeBudgetResult } from '../../core/validation/budget-validation.js';
 
 // ============================================================================
 // Color coding (BC-09)

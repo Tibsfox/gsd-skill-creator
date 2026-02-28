@@ -10,7 +10,7 @@ import {
   type CandidatePrimitive,
 } from './extractor.js';
 import type { DocumentAnalysis, DocumentSection, ContentType } from './analyzer.js';
-import type { PlanePosition } from '../types/mfe-types.js';
+import type { PlanePosition } from '../core/types/mfe-types.js';
 
 // --- Test helper: build a DocumentAnalysis with defaults ---
 

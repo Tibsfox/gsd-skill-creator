@@ -11,11 +11,11 @@
  */
 
 import pc from 'picocolors';
-import { SkillStore } from '../../storage/skill-store.js';
-import { SkillMetadata } from '../../types/skill.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
+import { SkillMetadata } from '../../core/types/skill.js';
 import { DependencyGraph } from '../../composition/dependency-graph.js';
 import { InheritanceValidator } from '../../composition/inheritance-validator.js';
-import { parseScope, getSkillsBasePath } from '../../types/scope.js';
+import { parseScope, getSkillsBasePath } from '../../core/types/scope.js';
 
 const HELP_TEXT = `
 Usage: skill-creator impact <skill-name> [options]

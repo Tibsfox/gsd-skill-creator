@@ -11,10 +11,10 @@
  *   skill-creator graph --project    Use project scope
  */
 
-import { SkillStore } from '../../storage/skill-store.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
 import { renderMermaid, GraphData, GraphSkill, GraphCluster } from '../../composition/graph-renderer.js';
-import { getExtension } from '../../types/skill.js';
-import { parseScope, getSkillsBasePath } from '../../types/scope.js';
+import { getExtension } from '../../core/types/skill.js';
+import { parseScope, getSkillsBasePath } from '../../core/types/scope.js';
 
 const HELP_TEXT = `
 Usage: skill-creator graph [options]

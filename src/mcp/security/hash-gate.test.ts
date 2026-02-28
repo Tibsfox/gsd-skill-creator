@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { computeToolHash, detectHashDrift, detectHashDriftWithTools } from './hash-gate.js';
-import type { Tool, HashRecord } from '../../types/mcp.js';
+import type { Tool, HashRecord } from '../../core/types/mcp.js';
 
 // ============================================================================
 // Test fixtures

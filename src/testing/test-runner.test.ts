@@ -2,17 +2,17 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { TestRunner, type RunOptions } from './test-runner.js';
 import { TestStore } from './test-store.js';
 import { ResultStore } from './result-store.js';
-import { SkillStore } from '../storage/skill-store.js';
+import { SkillStore } from '../core/storage/skill-store.js';
 import { BatchSimulator } from '../simulation/batch-simulator.js';
-import type { TestCase } from '../types/testing.js';
-import type { SimulationResult, SkillPrediction } from '../types/simulation.js';
-import type { Skill } from '../types/skill.js';
+import type { TestCase } from '../core/types/testing.js';
+import type { SimulationResult, SkillPrediction } from '../core/types/simulation.js';
+import type { Skill } from '../core/types/skill.js';
 import type { BatchResult } from '../simulation/batch-simulator.js';
 
 // Mock dependencies
 vi.mock('./test-store.js');
 vi.mock('./result-store.js');
-vi.mock('../storage/skill-store.js');
+vi.mock('../core/storage/skill-store.js');
 vi.mock('../simulation/batch-simulator.js');
 
 describe('TestRunner', () => {

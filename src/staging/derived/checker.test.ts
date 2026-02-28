@@ -7,7 +7,7 @@
 import { describe, it, expect } from 'vitest';
 import { checkDerived } from './checker.js';
 import type { DerivedCheckInput } from './checker.js';
-import type { LineageEntry } from '../../types/observation.js';
+import type { LineageEntry } from '../../core/types/observation.js';
 import type { ObservationEvidence } from './pattern-fidelity.js';
 
 /**

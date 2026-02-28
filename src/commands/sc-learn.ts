@@ -7,7 +7,7 @@
 //
 // Requirements: LEARN-10 (pipeline orchestration), LEARN-12 (provenance report)
 
-import type { MathematicalPrimitive, PlanePosition } from '../types/mfe-types.js';
+import type { MathematicalPrimitive, PlanePosition } from '../core/types/mfe-types.js';
 import type { AcquisitionResult } from '../learn/acquirer.js';
 import type { SanitizationResult } from '../learn/sanitizer.js';
 import type { HitlGateResult, PromptFn } from '../learn/hitl-gate.js';

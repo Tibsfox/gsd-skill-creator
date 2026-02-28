@@ -15,7 +15,7 @@
 import type {
   MFEObservation,
   MathematicalPrimitive,
-} from '../types/mfe-types.js';
+} from '../core/types/mfe-types.js';
 
 // ============================================================================
 // Types

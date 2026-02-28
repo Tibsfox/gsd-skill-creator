@@ -1,14 +1,14 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { DriftTracker, DriftThresholdError } from './drift-tracker.js';
 import { VersionManager } from './version-manager.js';
-import { SkillStore } from '../storage/skill-store.js';
-import { DEFAULT_DRIFT_THRESHOLD } from '../types/learning.js';
-import type { SkillVersion } from '../types/learning.js';
-import type { Skill } from '../types/skill.js';
+import { SkillStore } from '../core/storage/skill-store.js';
+import { DEFAULT_DRIFT_THRESHOLD } from '../core/types/learning.js';
+import type { SkillVersion } from '../core/types/learning.js';
+import type { Skill } from '../core/types/skill.js';
 
 // Mock VersionManager and SkillStore
 vi.mock('./version-manager.js');
-vi.mock('../storage/skill-store.js');
+vi.mock('../core/storage/skill-store.js');
 
 describe('DriftTracker', () => {
   let versionManager: VersionManager;

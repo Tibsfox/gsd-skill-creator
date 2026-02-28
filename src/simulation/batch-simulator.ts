@@ -16,7 +16,7 @@ import type {
   SimulationConfig,
   SimulationResult,
   SkillPrediction,
-} from '../types/simulation.js';
+} from '../core/types/simulation.js';
 
 /**
  * Configuration for batch simulation.

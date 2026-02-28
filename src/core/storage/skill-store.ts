@@ -15,7 +15,7 @@ import {
   ContentDecomposer,
   ReferenceLinker,
   CircularReferenceError,
-} from '../disclosure/index.js';
+} from '../../disclosure/index.js';
 import {
   validateSafeName,
   assertSafePath,

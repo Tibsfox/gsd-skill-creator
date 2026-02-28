@@ -174,7 +174,7 @@ export class ReservedNameValidator {
    */
   private static getDefaultConfigPath(): string {
     const __dirname = dirname(fileURLToPath(import.meta.url));
-    return join(__dirname, '..', '..', 'config', 'reserved-names.json');
+    return join(__dirname, '..', '..', '..', 'config', 'reserved-names.json');
   }
 
   /**

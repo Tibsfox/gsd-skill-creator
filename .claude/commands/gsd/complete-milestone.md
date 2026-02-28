@@ -100,21 +100,14 @@ Output: Milestone archived (roadmap + requirements), PROJECT.md evolved, git tag
    - Add "Next Milestone Goals" section
    - Archive previous content in `<details>` (if v1.1+)
 
-7. **Bump versions:**
+7. **Commit and tag:**
 
-   - Update package.json version to match milestone (e.g., v1.36 -> "1.36.0")
-   - Update src-tauri/Cargo.toml version if file exists
-   - Update src-tauri/tauri.conf.json version if file exists
-   - Include bumped files in milestone commit
-
-8. **Commit and tag:**
-
-   - Stage: MILESTONES.md, PROJECT.md, ROADMAP.md, STATE.md, archive files, package.json, src-tauri/Cargo.toml, src-tauri/tauri.conf.json
+   - Stage: MILESTONES.md, PROJECT.md, ROADMAP.md, STATE.md, archive files
    - Commit: `chore: archive v{{version}} milestone`
    - Tag: `git tag -a v{{version}} -m "[milestone summary]"`
    - Ask about pushing tag
 
-9. **Offer next steps:**
+8. **Offer next steps:**
    - `/gsd:new-milestone` — start next milestone (questioning → research → requirements → roadmap)
 
 </process>
@@ -127,7 +120,6 @@ Output: Milestone archived (roadmap + requirements), PROJECT.md evolved, git tag
 - ROADMAP.md collapsed to one-line entry
 - PROJECT.md updated with current state
 - Git tag v{{version}} created
-- Version files bumped to match milestone (package.json, Cargo.toml, tauri.conf.json)
 - Commit successful
 - User knows next steps (including need for fresh requirements)
   </success_criteria>

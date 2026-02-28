@@ -40,7 +40,7 @@ When a milestone completes:
 **Use `roadmap analyze` for comprehensive readiness check:**
 
 ```bash
-ROADMAP=$(node ./.claude/get-shit-done/bin/gsd-tools.cjs roadmap analyze)
+ROADMAP=$(node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" roadmap analyze)
 ```
 
 This returns all phases with plan/summary counts and disk status. Use this to verify:
@@ -154,7 +154,7 @@ Extract one-liners from SUMMARY.md files using summary-extract:
 ```bash
 # For each phase in milestone, extract one-liner
 for summary in .planning/phases/*-*/*-SUMMARY.md; do
-  node ./.claude/get-shit-done/bin/gsd-tools.cjs summary-extract "$summary" --fields one_liner | jq -r '.one_liner'
+  node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" summary-extract "$summary" --fields one_liner | jq -r '.one_liner'
 done
 ```
 
@@ -367,7 +367,7 @@ Update `.planning/ROADMAP.md` — group completed milestone phases:
 **Delegate archival to gsd-tools:**
 
 ```bash
-ARCHIVE=$(node ./.claude/get-shit-done/bin/gsd-tools.cjs milestone complete "v[X.Y]" --name "[Milestone Name]")
+ARCHIVE=$(node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" milestone complete "v[X.Y]" --name "[Milestone Name]")
 ```
 
 The CLI handles:
@@ -401,75 +401,6 @@ After archival, the AI still handles:
 - Full PROJECT.md evolution review (requires understanding)
 - Deleting original ROADMAP.md and REQUIREMENTS.md
 - These are NOT fully delegated because they require AI interpretation of content
-
-</step>
-
-<step name="bump_versions">
-
-Bump version numbers in all manifest files to match the milestone version.
-
-**Convert milestone version to semver:**
-
-The milestone version (e.g., "v1.35") needs conversion to semver format:
-- `v1.35` -> `1.35.0`
-- `v2.0` -> `2.0.0`
-- `v1.35.1` -> `1.35.1` (patch versions pass through)
-
-```bash
-# Strip 'v' prefix, ensure 3-part semver
-MILESTONE_VERSION="${VERSION#v}"
-if [[ "$MILESTONE_VERSION" =~ ^[0-9]+\.[0-9]+$ ]]; then
-  SEMVER="${MILESTONE_VERSION}.0"
-else
-  SEMVER="$MILESTONE_VERSION"
-fi
-echo "Bumping versions to: $SEMVER"
-```
-
-**Bump package.json:**
-
-```bash
-# Use node for safe JSON editing (preserves formatting)
-node -e "
-const fs = require('fs');
-const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-pkg.version = '${SEMVER}';
-fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
-console.log('package.json: ' + pkg.version);
-"
-```
-
-**Bump Cargo.toml (if exists):**
-
-```bash
-if [ -f src-tauri/Cargo.toml ]; then
-  sed -i "0,/^version = \".*\"/s//version = \"${SEMVER}\"/" src-tauri/Cargo.toml
-  echo "Cargo.toml bumped to ${SEMVER}"
-fi
-```
-
-**Bump tauri.conf.json (if exists):**
-
-```bash
-if [ -f src-tauri/tauri.conf.json ]; then
-  node -e "
-  const fs = require('fs');
-  const conf = JSON.parse(fs.readFileSync('src-tauri/tauri.conf.json', 'utf8'));
-  conf.version = '${SEMVER}';
-  fs.writeFileSync('src-tauri/tauri.conf.json', JSON.stringify(conf, null, 2) + '\n');
-  console.log('tauri.conf.json: ' + conf.version);
-  "
-fi
-```
-
-**Report:**
-
-```
-Version bump complete:
-- package.json: ${SEMVER}
-- Cargo.toml: ${SEMVER} (if present)
-- tauri.conf.json: ${SEMVER} (if present)
-```
 
 </step>
 
@@ -563,7 +494,7 @@ If the "## Cross-Milestone Trends" section exists, update the tables with new da
 
 **Commit:**
 ```bash
-node ./.claude/get-shit-done/bin/gsd-tools.cjs commit "docs: update retrospective for v${VERSION}" --files .planning/RETROSPECTIVE.md
+node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" commit "docs: update retrospective for v${VERSION}" --files .planning/RETROSPECTIVE.md
 ```
 
 </step>
@@ -597,7 +528,7 @@ Check branching strategy and offer merge options.
 Use `init milestone-op` for context, or load config directly:
 
 ```bash
-INIT=$(node ./.claude/get-shit-done/bin/gsd-tools.cjs init execute-phase "1")
+INIT=$(node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" init execute-phase "1")
 ```
 
 Extract `branching_strategy`, `phase_branch_template`, `milestone_branch_template`, and `commit_docs` from init JSON.
@@ -745,7 +676,7 @@ git push origin v[X.Y]
 Commit milestone completion.
 
 ```bash
-node ./.claude/get-shit-done/bin/gsd-tools.cjs commit "chore: complete v[X.Y] milestone" --files .planning/milestones/v[X.Y]-ROADMAP.md .planning/milestones/v[X.Y]-REQUIREMENTS.md .planning/milestones/v[X.Y]-MILESTONE-AUDIT.md .planning/MILESTONES.md .planning/PROJECT.md .planning/STATE.md package.json src-tauri/Cargo.toml src-tauri/tauri.conf.json
+node "$HOME/.claude/get-shit-done/bin/gsd-tools.cjs" commit "chore: complete v[X.Y] milestone" --files .planning/milestones/v[X.Y]-ROADMAP.md .planning/milestones/v[X.Y]-REQUIREMENTS.md .planning/milestones/v[X.Y]-MILESTONE-AUDIT.md .planning/MILESTONES.md .planning/PROJECT.md .planning/STATE.md
 ```
 ```
 

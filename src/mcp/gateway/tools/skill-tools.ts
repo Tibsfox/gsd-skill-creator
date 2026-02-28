@@ -13,8 +13,8 @@
 
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
-import { SkillStore } from '../../../storage/skill-store.js';
-import { SkillIndex } from '../../../storage/skill-index.js';
+import { SkillStore } from '../../../core/storage/skill-store.js';
+import { SkillIndex } from '../../../core/storage/skill-index.js';
 
 // ── Types ───────────────────────────────────────────────────────────────
 

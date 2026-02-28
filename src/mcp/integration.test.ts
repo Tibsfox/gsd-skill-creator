@@ -82,7 +82,7 @@ import {
 } from './templates/index.js';
 
 // Types
-import type { Tool, TraceEvent, TrustState } from '../types/mcp.js';
+import type { Tool, TraceEvent, TrustState } from '../core/types/mcp.js';
 
 // ============================================================================
 // Helpers

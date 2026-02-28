@@ -8,7 +8,7 @@ import { listSkillsWorkflow, parseScopeFilter } from './workflows/list-skills-wo
 import { searchSkillsWorkflow } from './workflows/search-skills-workflow.js';
 import { migrateCommand } from './cli/commands/migrate.js';
 import { migrateAgentCommand, listAgentsInDir } from './cli/commands/migrate-agent.js';
-import { validateAgentFrontmatter } from './validation/agent-validation.js';
+import { validateAgentFrontmatter } from './core/validation/agent-validation.js';
 import { validateCommand } from './cli/commands/validate.js';
 import { detectConflictsCommand } from './cli/commands/detect-conflicts.js';
 import { scoreActivationCommand } from './cli/commands/score-activation.js';
@@ -28,9 +28,9 @@ import { auditCommand } from './cli/commands/audit.js';
 import { handleMigratePlaneCommand } from './plane/migration.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
-import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
-import { SkillStore } from './storage/skill-store.js';
-import { SkillIndex } from './storage/skill-index.js';
+import { parseScope, getSkillsBasePath, type SkillScope } from './core/types/scope.js';
+import { SkillStore } from './core/storage/skill-store.js';
+import { SkillIndex } from './core/storage/skill-index.js';
 
 /**
  * Create skill store and index for a specific scope.
@@ -1390,28 +1390,28 @@ async function main() {
 
     case 'project':
     case 'proj': {
-      const { projectCommand } = await import('./fs/commands/project.js');
+      const { projectCommand } = await import('./core/fs/commands/project.js');
       const exitCode = await projectCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
     }
 
     case 'pack': {
-      const { packCommand } = await import('./fs/commands/pack.js');
+      const { packCommand } = await import('./core/fs/commands/pack.js');
       const exitCode = await packCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
     }
 
     case 'contrib': {
-      const { contribCommand } = await import('./fs/commands/contrib.js');
+      const { contribCommand } = await import('./core/fs/commands/contrib.js');
       const exitCode = await contribCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
     }
 
     case 'www': {
-      const { wwwCommand } = await import('./fs/commands/www.js');
+      const { wwwCommand } = await import('./core/fs/commands/www.js');
       const exitCode = await wwwCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;

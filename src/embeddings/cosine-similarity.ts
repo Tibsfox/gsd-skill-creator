@@ -1,4 +1,4 @@
-import type { EmbeddingVector } from '../types/embeddings.js';
+import type { EmbeddingVector } from '../core/types/embeddings.js';
 
 /**
  * Compute cosine similarity between two embedding vectors.

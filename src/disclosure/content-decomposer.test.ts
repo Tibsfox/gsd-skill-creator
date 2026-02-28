@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ContentDecomposer } from './content-decomposer.js';
 import type { DecomposedSkill } from './content-decomposer.js';
-import type { SkillMetadata } from '../types/skill.js';
+import type { SkillMetadata } from '../core/types/skill.js';
 
 // Helper to generate text of approximately N words
 function generateWords(n: number): string {

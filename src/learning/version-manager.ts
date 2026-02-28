@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { SkillVersion } from '../types/learning.js';
+import { SkillVersion } from '../core/types/learning.js';
 
 const execAsync = promisify(exec);
 

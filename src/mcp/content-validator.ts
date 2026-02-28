@@ -1,4 +1,4 @@
-import type { SkillMetadata } from '../types/skill.js';
+import type { SkillMetadata } from '../core/types/skill.js';
 
 /**
  * Result of content safety validation.
