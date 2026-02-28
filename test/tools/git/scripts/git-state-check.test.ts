@@ -3,9 +3,9 @@ import { execSync } from 'child_process';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
-import type { GitStateReport } from '../../../../src/git/types.js';
+import type { GitStateReport } from '../../../../src/tools/git/types.js';
 
-const SCRIPT_PATH = path.resolve(__dirname, '../../../../src/git/scripts/git-state-check.sh');
+const SCRIPT_PATH = path.resolve(__dirname, '../../../../src/tools/git/scripts/git-state-check.sh');
 
 /** Create a temporary git repo with an initial commit. */
 function createTempRepo(): string {

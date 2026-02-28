@@ -16,8 +16,8 @@ import { DACPAssembler, type AssemblyRequest } from '../../../src/dacp/assembler
 import { CatalogQuery } from '../../../src/dacp/assembler/catalog-query.js';
 import { createBundle, listBundleContents, isBundleComplete } from '../../../src/dacp/bundle.js';
 import { bundleToMsgContent } from '../../../src/dacp/msg-fallback.js';
-import { loadBundle } from '../../../src/interpreter/loader.js';
-import { buildExecutionContext } from '../../../src/interpreter/context-builder.js';
+import { loadBundle } from '../../../src/tools/interpreter/loader.js';
+import { buildExecutionContext } from '../../../src/tools/interpreter/context-builder.js';
 import { calculateDriftScore } from '../../../src/dacp/retrospective/drift.js';
 import { analyzePatterns, type HandoffOutcomeWithType } from '../../../src/dacp/retrospective/analyzer.js';
 import { determineFidelity, assessDataComplexity } from '../../../src/dacp/fidelity/decision.js';

@@ -68,7 +68,7 @@ afterEach(() => {
 describe('Safety-critical (S-01..S-12)', () => {
   // S-01: push.default=nothing after install
   it('S-01: push.default=nothing after install', async () => {
-    const { installRepo } = await import('../../../src/git/core/repo-manager.js');
+    const { installRepo } = await import('../../../src/tools/git/core/repo-manager.js');
     const bare = createBareUpstream();
     const target = createTargetDir();
     await installRepo(bare, target);
@@ -81,7 +81,7 @@ describe('Safety-critical (S-01..S-12)', () => {
 
   // S-02: Dev pushRemote=origin after install
   it('S-02: dev pushRemote=origin after install', async () => {
-    const { installRepo } = await import('../../../src/git/core/repo-manager.js');
+    const { installRepo } = await import('../../../src/tools/git/core/repo-manager.js');
     const bare = createBareUpstream();
     const target = createTargetDir();
     await installRepo(bare, target);
@@ -94,7 +94,7 @@ describe('Safety-critical (S-01..S-12)', () => {
 
   // S-03: Gate 1 blocks without approval
   it('S-03: Gate 1 blocks without approval (contribute rejects)', async () => {
-    const { contribute } = await import('../../../src/git/workflows/contribute.js');
+    const { contribute } = await import('../../../src/tools/git/workflows/contribute.js');
     const repo = createTempRepo();
 
     // Create dev and main branches with divergent commits
@@ -160,7 +160,7 @@ describe('Safety-critical (S-01..S-12)', () => {
 
   // S-04: Gate 2 blocks without approval (no upstream contact)
   it('S-04: Gate 2 blocks without approval (no upstream contact)', async () => {
-    const { contribute } = await import('../../../src/git/workflows/contribute.js');
+    const { contribute } = await import('../../../src/tools/git/workflows/contribute.js');
     const repo = createTempRepo();
 
     const mainBranch = execSync('git rev-parse --abbrev-ref HEAD', {
@@ -218,7 +218,7 @@ describe('Safety-critical (S-01..S-12)', () => {
 
   // S-05: Gate 1 rejection = no state change
   it('S-05: Gate 1 rejection leaves repo state unchanged', async () => {
-    const { contribute } = await import('../../../src/git/workflows/contribute.js');
+    const { contribute } = await import('../../../src/tools/git/workflows/contribute.js');
     const repo = createTempRepo();
 
     const mainBranch = execSync('git rev-parse --abbrev-ref HEAD', {
@@ -273,7 +273,7 @@ describe('Safety-critical (S-01..S-12)', () => {
 
   // S-06: Gate 2 rejection = no upstream contact
   it('S-06: Gate 2 rejection produces zero push/PR calls', async () => {
-    const { contribute } = await import('../../../src/git/workflows/contribute.js');
+    const { contribute } = await import('../../../src/tools/git/workflows/contribute.js');
     const repo = createTempRepo();
 
     const mainBranch = execSync('git rev-parse --abbrev-ref HEAD', {
@@ -329,8 +329,8 @@ describe('Safety-critical (S-01..S-12)', () => {
   });
 
   // S-07: No --force in any script
-  it('S-07: no --force in any shell script under src/git/scripts/', () => {
-    const scriptsDir = path.resolve(__dirname, '../../../src/git/scripts');
+  it('S-07: no --force in any shell script under src/tools/git/scripts/', () => {
+    const scriptsDir = path.resolve(__dirname, '../../../src/tools/git/scripts');
     const scripts = fs.readdirSync(scriptsDir).filter(f => f.endsWith('.sh'));
     expect(scripts.length).toBeGreaterThanOrEqual(4);
 
@@ -347,9 +347,9 @@ describe('Safety-critical (S-01..S-12)', () => {
     }
   });
 
-  // S-08: No --force in any TypeScript module under src/git/
-  it('S-08: no --force in any TypeScript module under src/git/', () => {
-    const gitDir = path.resolve(__dirname, '../../../src/git');
+  // S-08: No --force in any TypeScript module under src/tools/git/
+  it('S-08: no --force in any TypeScript module under src/tools/git/', () => {
+    const gitDir = path.resolve(__dirname, '../../../src/tools/git');
 
     function collectTsFiles(dir: string): string[] {
       const result: string[] = [];
@@ -400,7 +400,7 @@ describe('Safety-critical (S-01..S-12)', () => {
     // Make repo dirty
     fs.writeFileSync(path.join(repo, 'README.md'), '# Dirty state\n');
 
-    const safeMerge = path.resolve(__dirname, '../../../src/git/scripts/safe-merge.sh');
+    const safeMerge = path.resolve(__dirname, '../../../src/tools/git/scripts/safe-merge.sh');
     try {
       execSync(`bash "${safeMerge}" "${repo}" "feature" "${mainBranch}"`, {
         encoding: 'utf-8',
@@ -435,7 +435,7 @@ describe('Safety-critical (S-01..S-12)', () => {
 
     const headBefore = execSync('git rev-parse HEAD', { cwd: repo, encoding: 'utf-8' }).trim();
 
-    const safeMerge = path.resolve(__dirname, '../../../src/git/scripts/safe-merge.sh');
+    const safeMerge = path.resolve(__dirname, '../../../src/tools/git/scripts/safe-merge.sh');
     try {
       execSync(`bash "${safeMerge}" "${repo}" "conflict-branch" "${mainBranch}"`, {
         encoding: 'utf-8',
@@ -458,7 +458,7 @@ describe('Safety-critical (S-01..S-12)', () => {
 
   // S-11: Conflict = abort (rebase)
   it('S-11: sync with rebase aborts on conflict and restores state', async () => {
-    const { sync } = await import('../../../src/git/core/sync-manager.js');
+    const { sync } = await import('../../../src/tools/git/core/sync-manager.js');
     const repo = createTempRepo();
     const mainBranch = execSync('git rev-parse --abbrev-ref HEAD', {
       cwd: repo, encoding: 'utf-8',
@@ -516,8 +516,8 @@ describe('Safety-critical (S-01..S-12)', () => {
 
   // S-12: Protected branches cannot be deleted
   it('S-12: cannot delete dev or main branches, can delete non-protected', async () => {
-    const { installRepo } = await import('../../../src/git/core/repo-manager.js');
-    const { removeBranch, createBranch } = await import('../../../src/git/core/branch-manager.js');
+    const { installRepo } = await import('../../../src/tools/git/core/repo-manager.js');
+    const { removeBranch, createBranch } = await import('../../../src/tools/git/core/branch-manager.js');
 
     const bare = createBareUpstream();
     const target = createTargetDir();

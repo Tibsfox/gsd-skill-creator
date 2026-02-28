@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
 
-const SCRIPTS_DIR = path.resolve(__dirname, '../../../../src/git/scripts');
+const SCRIPTS_DIR = path.resolve(__dirname, '../../../../src/tools/git/scripts');
 const SAFE_MERGE = path.join(SCRIPTS_DIR, 'safe-merge.sh');
 const PR_BUNDLE = path.join(SCRIPTS_DIR, 'pr-bundle.sh');
 const WORKTREE_SETUP = path.join(SCRIPTS_DIR, 'worktree-setup.sh');

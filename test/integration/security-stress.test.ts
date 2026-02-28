@@ -7,16 +7,16 @@
 // end-to-end pipeline fence.
 
 import { describe, it, expect } from 'vitest';
-import { sanitizeContent } from '../../src/learn/sanitizer.js';
-import { hitlGate, type PromptFn } from '../../src/learn/hitl-gate.js';
-import { analyzeDocument } from '../../src/learn/analyzer.js';
-import { extractPrimitives } from '../../src/learn/extractor.js';
+import { sanitizeContent } from '../../src/tools/learn/sanitizer.js';
+import { hitlGate, type PromptFn } from '../../src/tools/learn/hitl-gate.js';
+import { analyzeDocument } from '../../src/tools/learn/analyzer.js';
+import { extractPrimitives } from '../../src/tools/learn/extractor.js';
 import type {
   AcquisitionResult,
   AcquisitionSource,
   StagedContent,
   SourceFamiliarity,
-} from '../../src/learn/acquirer.js';
+} from '../../src/tools/learn/acquirer.js';
 
 // === Helper factory ===
 

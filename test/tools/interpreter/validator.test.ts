@@ -10,7 +10,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdirSync, writeFileSync, mkdtempSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { validateBundle } from '../../../src/interpreter/validator.js';
+import { validateBundle } from '../../../src/tools/interpreter/validator.js';
 import type { BundleManifest } from '../../../src/dacp/types.js';
 
 // ============================================================================

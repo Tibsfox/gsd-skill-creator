@@ -2,8 +2,8 @@ import { describe, it, expect, afterEach } from 'vitest';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
-import { logOperation } from '../../../../src/git/core/logger.js';
-import type { GitStateReport, GitOperationLog } from '../../../../src/git/types.js';
+import { logOperation } from '../../../../src/tools/git/core/logger.js';
+import type { GitStateReport, GitOperationLog } from '../../../../src/tools/git/types.js';
 
 // --- Helpers ---
 

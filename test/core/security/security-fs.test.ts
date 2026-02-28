@@ -5,7 +5,7 @@
  * structure, template files, README, and schemas.json with proper
  * permissions and idempotent behavior.
  *
- * TDD RED phase: These tests import from src/commands/security-init.ts
+ * TDD RED phase: These tests import from src/tools/commands/security-init.ts
  * which does not yet exist -- all tests must FAIL on first run.
  *
  * @module tests/security-fs
@@ -19,7 +19,7 @@ import * as os from 'node:os';
 import {
   securityInitCommand,
   initSecurityDirectory,
-} from '../../../src/commands/security-init.js';
+} from '../../../src/tools/commands/security-init.js';
 
 // ---------------------------------------------------------------------------
 // Helpers
