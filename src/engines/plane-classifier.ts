@@ -9,7 +9,7 @@
 // Domain definitions loaded from data/domain-index.json at module init.
 
 import { createRequire } from 'node:module';
-import type { PlanePosition, DomainId, DomainDefinition } from '../types/mfe-types.js';
+import type { PlanePosition, DomainId, DomainDefinition } from '../core/types/mfe-types.js';
 
 // === Public types ===
 

@@ -3,7 +3,7 @@ import { mkdtemp, writeFile, readFile, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { JsonlCompactor, DEFAULT_COMPACTION_CONFIG } from './jsonl-compactor.js';
-import { createChecksummedEntry } from '../validation/jsonl-safety.js';
+import { createChecksummedEntry } from '../core/validation/jsonl-safety.js';
 
 function makeEntry(overrides: { timestamp?: number; category?: string; data?: Record<string, unknown> } = {}) {
   return {

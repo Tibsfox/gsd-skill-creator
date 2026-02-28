@@ -10,7 +10,7 @@
  * @module mcp/presentation/blueprint-blocks
  */
 
-import type { TrustState } from '../../types/mcp.js';
+import type { TrustState } from '../../core/types/mcp.js';
 import type { ServerBlockData, ToolBlockData, ResourceBlockData } from './types.js';
 
 // ============================================================================

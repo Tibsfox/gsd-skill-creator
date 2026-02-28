@@ -20,4 +20,4 @@ export type {
   GeneratorStrategy,
   SkillInfo,
   GenerateOptions,
-} from '../../types/test-generation.js';
+} from '../../core/types/test-generation.js';

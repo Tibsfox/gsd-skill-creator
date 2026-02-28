@@ -1,4 +1,4 @@
-import type { BudgetProfile, PriorityTier } from '../types/application.js';
+import type { BudgetProfile, PriorityTier } from '../core/types/application.js';
 
 /**
  * Default budget profiles for GSD agents.

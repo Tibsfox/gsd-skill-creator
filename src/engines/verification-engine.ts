@@ -13,7 +13,7 @@ import type {
   CompositionPath,
   PrimitiveType,
   DomainId,
-} from '../types/mfe-types.js';
+} from '../core/types/mfe-types.js';
 
 // === Types ===
 

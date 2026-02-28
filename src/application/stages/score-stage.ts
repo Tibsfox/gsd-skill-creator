@@ -1,7 +1,7 @@
 import type { PipelineStage, PipelineContext } from '../skill-pipeline.js';
-import type { SkillIndex, SkillIndexEntry } from '../../storage/skill-index.js';
+import type { SkillIndex, SkillIndexEntry } from '../../core/storage/skill-index.js';
 import type { RelevanceScorer } from '../relevance-scorer.js';
-import type { ScoredSkill } from '../../types/application.js';
+import type { ScoredSkill } from '../../core/types/application.js';
 import type { AdaptiveRouter } from '../../retrieval/adaptive-router.js';
 import type { EmbeddingService } from '../../embeddings/embedding-service.js';
 import { cosineSimilarity } from '../../embeddings/cosine-similarity.js';

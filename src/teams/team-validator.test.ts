@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { TeamMember, TeamTask } from '../types/team.js';
+import type { TeamMember, TeamTask } from '../core/types/team.js';
 
 // ============================================================================
 // Mock fs for agent resolution tests
@@ -31,12 +31,12 @@ vi.mock('../conflicts/conflict-detector.js', () => ({
 // Mock team-validation module for validateTeamFull integration tests
 // ============================================================================
 
-vi.mock('../validation/team-validation.js', () => ({
+vi.mock('../core/validation/team-validation.js', () => ({
   validateTeamConfig: vi.fn(),
   validateTopologyRules: vi.fn(),
 }));
 
-import { validateTeamConfig, validateTopologyRules } from '../validation/team-validation.js';
+import { validateTeamConfig, validateTopologyRules } from '../core/validation/team-validation.js';
 const mockValidateTeamConfig = vi.mocked(validateTeamConfig);
 const mockValidateTopologyRules = vi.mocked(validateTopologyRules);
 

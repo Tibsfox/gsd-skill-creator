@@ -5,7 +5,7 @@
  * Thresholds are configurable to support calibration in Phase 18.
  */
 
-import type { ConfidenceLevel } from '../types/simulation.js';
+import type { ConfidenceLevel } from '../core/types/simulation.js';
 
 /**
  * Default thresholds for confidence categorization.

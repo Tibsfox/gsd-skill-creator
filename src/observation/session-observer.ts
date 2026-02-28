@@ -3,11 +3,11 @@ import { writeFile, readFile, mkdir } from 'fs/promises';
 import { TranscriptParser } from './transcript-parser.js';
 import { PatternSummarizer } from './pattern-summarizer.js';
 import { RetentionManager } from './retention-manager.js';
-import { PatternStore } from '../storage/pattern-store.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
 import { EphemeralStore } from './ephemeral-store.js';
 import { PromotionEvaluator } from './promotion-evaluator.js';
 import { ObservationSquasher } from './observation-squasher.js';
-import { SessionObservation, RetentionConfig } from '../types/observation.js';
+import { SessionObservation, RetentionConfig } from '../core/types/observation.js';
 import { ObservationRateLimiter, detectAnomalies } from './rate-limiter.js';
 import type { RateLimitConfig } from './rate-limiter.js';
 

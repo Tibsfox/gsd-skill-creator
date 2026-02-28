@@ -3,7 +3,7 @@ import pc from 'picocolors';
 import { readdir, stat } from 'fs/promises';
 import { join } from 'path';
 import { migrateSkillWorkflow, type MigrationResult } from '../../workflows/migrate-skill-workflow.js';
-import { isLegacyFlatFile } from '../../validation/directory-validation.js';
+import { isLegacyFlatFile } from '../../core/validation/directory-validation.js';
 
 // ============================================================================
 // Migration Types

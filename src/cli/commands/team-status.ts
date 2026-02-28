@@ -15,7 +15,7 @@ import {
   getTeamsBasePath,
   validateTeamFull,
 } from '../../teams/index.js';
-import type { TeamConfig } from '../../types/team.js';
+import type { TeamConfig } from '../../core/types/team.js';
 
 // ============================================================================
 // Help

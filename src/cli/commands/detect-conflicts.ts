@@ -8,13 +8,13 @@
 
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import { SkillStore } from '../../storage/skill-store.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
 import {
   ConflictDetector,
   ConflictFormatter,
   RewriteSuggester,
 } from '../../conflicts/index.js';
-import type { ConflictResult, ConflictPair } from '../../types/conflicts.js';
+import type { ConflictResult, ConflictPair } from '../../core/types/conflicts.js';
 import type { RewriteSuggestion } from '../../conflicts/rewrite-suggester.js';
 
 /**

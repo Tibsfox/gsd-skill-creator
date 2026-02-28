@@ -2,12 +2,12 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { stat as fsStat } from 'fs/promises';
 import { join, dirname } from 'path';
-import { SkillStore } from '../../storage/skill-store.js';
-import { validateSkillNameStrict, classifyFields } from '../../validation/skill-validation.js';
-import { validateSkillDirectory, validateDirectoryNameMatch } from '../../validation/directory-validation.js';
-import { SkillMetadataSchema } from '../../validation/skill-validation.js';
-import type { FieldClassification } from '../../validation/skill-validation.js';
-import { getExtension, isLegacyFormat } from '../../types/extensions.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
+import { validateSkillNameStrict, classifyFields } from '../../core/validation/skill-validation.js';
+import { validateSkillDirectory, validateDirectoryNameMatch } from '../../core/validation/directory-validation.js';
+import { SkillMetadataSchema } from '../../core/validation/skill-validation.js';
+import type { FieldClassification } from '../../core/validation/skill-validation.js';
+import { getExtension, isLegacyFormat } from '../../core/types/extensions.js';
 import { ReferenceLinker, DisclosureBudget } from '../../disclosure/index.js';
 import type { DisclosureBudgetResult } from '../../disclosure/index.js';
 

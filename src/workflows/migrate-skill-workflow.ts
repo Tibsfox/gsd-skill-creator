@@ -2,7 +2,7 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { readFile, writeFile, mkdir, unlink, stat } from 'fs/promises';
 import { join, dirname, basename } from 'path';
-import { isLegacyFlatFile, validateSkillDirectory } from '../validation/directory-validation.js';
+import { isLegacyFlatFile, validateSkillDirectory } from '../core/validation/directory-validation.js';
 
 // ============================================================================
 // Migration Result Types

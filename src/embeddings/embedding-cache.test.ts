@@ -7,7 +7,7 @@ import { EmbeddingCache } from './embedding-cache.js';
 import { rm, mkdir, readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
-import type { EmbeddingVector } from '../types/embeddings.js';
+import type { EmbeddingVector } from '../core/types/embeddings.js';
 
 describe('EmbeddingCache', () => {
   const testDir = './test-cache-temp';

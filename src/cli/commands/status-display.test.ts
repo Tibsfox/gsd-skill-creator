@@ -22,7 +22,7 @@ vi.mock('picocolors', () => ({
   },
 }));
 
-vi.mock('../../validation/budget-validation.js', () => ({
+vi.mock('../../core/validation/budget-validation.js', () => ({
   formatProgressBar: vi.fn((current: number, max: number, width = 20) => {
     const pct = Math.min(current / max, 1);
     const filled = Math.round(width * pct);
@@ -37,8 +37,8 @@ import {
   buildStatusJson,
 } from './status-display.js';
 
-import type { CumulativeBudgetResult, SkillBudgetInfo } from '../../validation/budget-validation.js';
-import type { LoadingProjection } from '../../validation/loading-projection.js';
+import type { CumulativeBudgetResult, SkillBudgetInfo } from '../../core/validation/budget-validation.js';
+import type { LoadingProjection } from '../../core/validation/loading-projection.js';
 
 // ============================================================================
 // Test helpers

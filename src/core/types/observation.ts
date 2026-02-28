@@ -299,7 +299,7 @@ export const DEFAULT_SCRIPT_GENERATOR_CONFIG: ScriptGeneratorConfig = {
 /** A generated script ready for dry-run validation and promotion (SCRP-01, SCRP-02) */
 export interface GeneratedScript {
   /** The OffloadOperation-conformant object (SCRP-04) */
-  operation: import('../chipset/blitter/types.js').OffloadOperation;
+  operation: import('../../chipset/blitter/types.js').OffloadOperation;
   /** The source promotion candidate this script was generated from */
   sourceCandidate: PromotionCandidate;
   /** The raw script content (same as operation.script, exposed for inspection) */

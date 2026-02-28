@@ -1,12 +1,12 @@
-import { PatternStore } from '../../storage/pattern-store.js';
+import { PatternStore } from '../../core/storage/pattern-store.js';
 import { LineageTracker } from '../../observation/lineage-tracker.js';
 import type {
   LineageViewData,
   LineageGraphEntry,
   LineageNode,
   DashboardArtifactType,
-} from '../../types/dashboard.js';
-import type { LineageEntry } from '../../types/observation.js';
+} from '../../core/types/dashboard.js';
+import type { LineageEntry } from '../../core/types/observation.js';
 
 /**
  * Collects lineage graph data for all promoted artifacts by combining

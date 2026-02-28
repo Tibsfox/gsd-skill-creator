@@ -6,10 +6,10 @@
  * version drift across directories when cache version info is provided.
  */
 
-import { SkillStore } from '../storage/skill-store.js';
-import { SkillIndex } from '../storage/skill-index.js';
-import { getSkillsBasePath } from '../types/scope.js';
-import type { SkillScope } from '../types/scope.js';
+import { SkillStore } from '../core/storage/skill-store.js';
+import { SkillIndex } from '../core/storage/skill-index.js';
+import { getSkillsBasePath } from '../core/types/scope.js';
+import type { SkillScope } from '../core/types/scope.js';
 import type { ScopedSearchResult } from './types.js';
 
 export interface CrossProjectSearchOptions {

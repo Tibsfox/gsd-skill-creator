@@ -10,7 +10,7 @@
  * with deterministic IDs (`{skillName}:{promotionName}`).
  */
 
-import type { SkillMetadata } from '../../types/skill.js';
+import type { SkillMetadata } from '../../core/types/skill.js';
 import { PromotionDeclarationSchema, OffloadOperationSchema } from './types.js';
 import type { OffloadOperation } from './types.js';
 

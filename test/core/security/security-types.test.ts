@@ -17,14 +17,14 @@ import {
   ProxyConfigSchema,
   DomainCredentialSchema,
   AgentIsolationStateSchema,
-} from '../../../src/types/security.js';
+} from '../../../src/core/types/security.js';
 import type {
   SecurityEvent,
   SandboxProfile,
   ProxyConfig,
   DomainCredential,
   AgentIsolationState,
-} from '../../../src/types/security.js';
+} from '../../../src/core/types/security.js';
 
 // ---------------------------------------------------------------------------
 // Test fixtures

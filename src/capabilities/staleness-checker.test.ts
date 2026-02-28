@@ -9,7 +9,7 @@
 import { describe, it, expect } from 'vitest';
 import { StalenessChecker } from './staleness-checker.js';
 import { computeContentHash } from './types.js';
-import type { SkillMetadata } from '../types/skill.js';
+import type { SkillMetadata } from '../core/types/skill.js';
 
 /**
  * Helper: create a SkillMetadata object that looks auto-generated

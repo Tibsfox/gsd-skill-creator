@@ -11,7 +11,7 @@
 // Q3: real < 0,  imaginary < 0   (logical + embodied)
 // Q4: real >= 0, imaginary < 0   (creative + embodied)
 
-import type { MathematicalPrimitive, PlanePosition } from '../../types/mfe-types.js';
+import type { MathematicalPrimitive, PlanePosition } from '../../core/types/mfe-types.js';
 
 // === Exported Types ===
 

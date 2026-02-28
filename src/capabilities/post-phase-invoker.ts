@@ -12,7 +12,7 @@
 
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import type { SkillStore } from '../storage/skill-store.js';
+import type { SkillStore } from '../core/storage/skill-store.js';
 import type { CapabilityRef, CapabilityType } from './types.js';
 
 // ============================================================================

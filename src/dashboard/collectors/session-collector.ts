@@ -16,7 +16,7 @@ import type {
   SessionCollectorResult,
   SessionCollectorOptions,
 } from './types.js';
-import type { SessionObservation } from '../../types/observation.js';
+import type { SessionObservation } from '../../core/types/observation.js';
 
 /**
  * Check if a parsed JSONL entry has the shape of a SessionObservation

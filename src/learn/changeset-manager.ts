@@ -9,7 +9,7 @@
 // operations. If reverting would create dangling references, the revert is
 // blocked unless force=true.
 
-import type { MathematicalPrimitive } from '../types/mfe-types.js';
+import type { MathematicalPrimitive } from '../core/types/mfe-types.js';
 import type { PrimitiveModification } from './merge-engine.js';
 
 // === Exported Types ===

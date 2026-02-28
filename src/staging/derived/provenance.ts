@@ -8,7 +8,7 @@
  * @module staging/derived/provenance
  */
 
-import type { LineageEntry } from '../../types/observation.js';
+import type { LineageEntry } from '../../core/types/observation.js';
 import type { FamiliarityTier, ProvenanceNode, ProvenanceChain } from './types.js';
 import { FAMILIARITY_TIERS } from './types.js';
 

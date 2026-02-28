@@ -3,7 +3,7 @@ import { writeFile, readFile, mkdir, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { EphemeralStore } from './ephemeral-store.js';
-import type { SessionObservation } from '../types/observation.js';
+import type { SessionObservation } from '../core/types/observation.js';
 
 function makeObservation(overrides: Partial<SessionObservation> = {}): SessionObservation {
   return {

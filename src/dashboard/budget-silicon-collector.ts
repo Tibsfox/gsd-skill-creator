@@ -10,11 +10,11 @@
 
 import type { BudgetGaugeData, BudgetSegment } from './budget-gauge.js';
 import type { SiliconPanelData } from './silicon-panel.js';
-import type { CumulativeBudgetResult, SkillBudgetInfo } from '../validation/budget-validation.js';
-import { BudgetValidator } from '../validation/budget-validation.js';
+import type { CumulativeBudgetResult, SkillBudgetInfo } from '../core/validation/budget-validation.js';
+import { BudgetValidator } from '../core/validation/budget-validation.js';
 import { readIntegrationConfig } from '../integration/config/reader.js';
 import type { IntegrationConfig } from '../integration/config/types.js';
-import type { BudgetProfile } from '../types/application.js';
+import type { BudgetProfile } from '../core/types/application.js';
 import { inferDomain } from '../identifiers/generator.js';
 import type { DomainName } from '../identifiers/types.js';
 

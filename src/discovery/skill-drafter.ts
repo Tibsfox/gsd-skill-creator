@@ -14,7 +14,7 @@
 import { parsePatternKey } from './pattern-scorer.js';
 import type { RankedCandidate, ParsedPatternKey } from './pattern-scorer.js';
 import { injectGsdReferences } from '../detection/gsd-reference-injector.js';
-import { sanitizeGeneratedContent } from '../validation/generation-safety.js';
+import { sanitizeGeneratedContent } from '../core/validation/generation-safety.js';
 
 // ============================================================================
 // Exported constants

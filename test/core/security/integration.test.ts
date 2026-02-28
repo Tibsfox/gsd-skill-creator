@@ -22,7 +22,7 @@ import {
   SECURITY_COMMANDS,
   SECURITY_IPC_EVENTS,
   PANEL_IPC_EVENTS,
-} from '../../../src/security/index.js';
+} from '../../../src/core/security/index.js';
 
 import {
   renderShieldIndicator,

@@ -7,7 +7,7 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { ConflictDetector } from './conflict-detector.js';
-import type { EmbeddingResult } from '../types/embeddings.js';
+import type { EmbeddingResult } from '../core/types/embeddings.js';
 
 // Mock the embeddings module
 vi.mock('../embeddings/index.js', () => ({

@@ -22,4 +22,4 @@ export type {
   EmbeddingServiceConfig,
   ProgressInfo,
   EmbeddingResult,
-} from '../types/embeddings.js';
+} from '../core/types/embeddings.js';

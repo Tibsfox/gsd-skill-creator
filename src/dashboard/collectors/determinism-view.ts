@@ -1,5 +1,5 @@
 import { DeterminismAnalyzer } from '../../observation/determinism-analyzer.js';
-import type { DeterminismViewData, DeterminismRow, DeterminismSortField, SortDirection } from '../../types/dashboard.js';
+import type { DeterminismViewData, DeterminismRow, DeterminismSortField, SortDirection } from '../../core/types/dashboard.js';
 
 /**
  * Collects determinism analysis data and produces a sortable per-operation

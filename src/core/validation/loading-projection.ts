@@ -1,6 +1,6 @@
 import type { BudgetProfile, PriorityTier } from '../types/application.js';
 import type { SkillBudgetInfo } from './budget-validation.js';
-import { getTierForSkill } from '../application/budget-profiles.js';
+import { getTierForSkill } from '../../application/budget-profiles.js';
 
 // ============================================================================
 // Types

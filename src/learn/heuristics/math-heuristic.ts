@@ -3,7 +3,7 @@
 // Extracts definitions, theorems, algorithms, identities, and lemmas
 // from mathematical/textbook-style documents.
 
-import type { PrimitiveType } from '../../types/mfe-types.js';
+import type { PrimitiveType } from '../../core/types/mfe-types.js';
 import type { ExtractionHeuristic, ExtractionPattern } from './index.js';
 
 const patterns: ExtractionPattern[] = [

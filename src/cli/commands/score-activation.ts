@@ -7,14 +7,14 @@
 
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import { SkillStore } from '../../storage/skill-store.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
 import {
   ActivationScorer,
   ActivationFormatter,
   ActivationSuggester,
   LLMActivationAnalyzer,
 } from '../../activation/index.js';
-import type { CombinedActivationResult } from '../../types/activation.js';
+import type { CombinedActivationResult } from '../../core/types/activation.js';
 
 /**
  * Options for the score-activation command.

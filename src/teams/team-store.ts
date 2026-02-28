@@ -12,13 +12,13 @@
 import { readFile, writeFile, mkdir, readdir, stat, rm } from 'fs/promises';
 import { join, resolve } from 'path';
 import { homedir } from 'node:os';
-import { validateTeamConfig } from '../validation/team-validation.js';
-import type { TeamConfig } from '../types/team.js';
+import { validateTeamConfig } from '../core/validation/team-validation.js';
+import type { TeamConfig } from '../core/types/team.js';
 import {
   validateSafeName,
   assertSafePath,
   PathTraversalError,
-} from '../validation/path-safety.js';
+} from '../core/validation/path-safety.js';
 
 // ============================================================================
 // Scope Types

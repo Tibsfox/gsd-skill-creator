@@ -21,7 +21,7 @@ import {
   DEFAULT_SNAPSHOT_MAX_AGE_DAYS,
 } from './types.js';
 import type { SessionSnapshot } from './types.js';
-import type { TranscriptEntry } from '../../types/observation.js';
+import type { TranscriptEntry } from '../../core/types/observation.js';
 
 export interface SnapshotManagerOptions {
   maxSnapshots?: number;

@@ -16,7 +16,7 @@ import type {
   SimulationResult,
   SimulationTrace,
   SkillPrediction,
-} from '../types/simulation.js';
+} from '../core/types/simulation.js';
 
 /**
  * Default configuration values.

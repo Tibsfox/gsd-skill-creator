@@ -6,7 +6,7 @@ import {
   renderTracePanel,
   renderTracePanelStyles,
 } from './trace-panel.js';
-import type { TraceEvent } from '../../types/mcp.js';
+import type { TraceEvent } from '../../core/types/mcp.js';
 
 // ---------------------------------------------------------------------------
 // Helpers

@@ -13,7 +13,7 @@ import type {
   ActivationScore,
   LLMAnalysisResult,
   CombinedActivationResult,
-} from '../types/activation.js';
+} from '../core/types/activation.js';
 
 export interface FormatOptions {
   /** Show full factor breakdown */

@@ -7,7 +7,7 @@
 // Consumes pre-filter matches (348-01) and produces classification results
 // that drive the merge engine (348-03).
 
-import type { MathematicalPrimitive } from '../types/mfe-types.js';
+import type { MathematicalPrimitive } from '../core/types/mfe-types.js';
 import type { PrefilterMatch } from './dedup-prefilter.js';
 
 // === Exported Types ===

@@ -15,7 +15,7 @@ import type {
   PlanePosition,
   CompositionStep,
   DomainId,
-} from '../types/mfe-types.js';
+} from '../core/types/mfe-types.js';
 
 // ============================================================================
 // Constants

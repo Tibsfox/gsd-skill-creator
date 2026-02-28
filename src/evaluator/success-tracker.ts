@@ -14,7 +14,7 @@ import { readFile, writeFile, appendFile, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
 import { homedir } from 'os';
 import { randomUUID } from 'crypto';
-import type { SuccessSignal } from '../types/evaluator.js';
+import type { SuccessSignal } from '../core/types/evaluator.js';
 
 export class SuccessTracker {
   private signalsPath: string;

@@ -2,10 +2,10 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm } from 'fs/promises';
 import { join } from 'path';
 import * as os from 'os';
-import type { PromotionCandidate, ClassifiedOperation, GatekeeperConfig } from '../types/observation.js';
-import { DEFAULT_GATEKEEPER_CONFIG } from '../types/observation.js';
+import type { PromotionCandidate, ClassifiedOperation, GatekeeperConfig } from '../core/types/observation.js';
+import { DEFAULT_GATEKEEPER_CONFIG } from '../core/types/observation.js';
 import { PromotionGatekeeper } from './promotion-gatekeeper.js';
-import { PatternStore } from '../storage/pattern-store.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
 import type { BenchmarkReport } from '../calibration/benchmark-reporter.js';
 import { calculateMCC, mccToPercentage } from '../calibration/mcc-calculator.js';
 

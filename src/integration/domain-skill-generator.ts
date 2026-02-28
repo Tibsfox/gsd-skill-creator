@@ -8,7 +8,7 @@
 
 import { writeFile, mkdir } from 'node:fs/promises';
 import { dirname } from 'node:path';
-import type { DomainId, DomainDefinition, MathematicalPrimitive } from '../types/mfe-types.js';
+import type { DomainId, DomainDefinition, MathematicalPrimitive } from '../core/types/mfe-types.js';
 
 // === Types ===
 

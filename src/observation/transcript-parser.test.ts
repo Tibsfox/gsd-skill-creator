@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { TranscriptParser } from './transcript-parser.js';
-import type { ExecutionContext } from '../types/observation.js';
+import type { ExecutionContext } from '../core/types/observation.js';
 
 describe('TranscriptParser', () => {
   const parser = new TranscriptParser();

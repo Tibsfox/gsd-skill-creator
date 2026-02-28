@@ -1,5 +1,5 @@
 import { createHash } from 'crypto';
-import { PatternStore } from '../storage/pattern-store.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
 import type {
   StoredExecutionBatch,
   ToolExecutionPair,
@@ -8,8 +8,8 @@ import type {
   DeterminismClassification,
   ClassifiedOperation,
   OperationKey,
-} from '../types/observation.js';
-import { DEFAULT_DETERMINISM_CONFIG } from '../types/observation.js';
+} from '../core/types/observation.js';
+import { DEFAULT_DETERMINISM_CONFIG } from '../core/types/observation.js';
 
 /**
  * Analyzes determinism of tool operations by reading stored execution batches

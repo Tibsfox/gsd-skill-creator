@@ -1,6 +1,6 @@
 import type { PipelineStage, PipelineContext } from '../skill-pipeline.js';
-import type { SkillStore } from '../../storage/skill-store.js';
-import type { ModelTier, ModelGuidance } from '../../types/application.js';
+import type { SkillStore } from '../../core/storage/skill-store.js';
+import type { ModelTier, ModelGuidance } from '../../core/types/application.js';
 
 /** Map model profile names to model tiers. */
 const PROFILE_TO_TIER: Record<string, ModelTier> = {

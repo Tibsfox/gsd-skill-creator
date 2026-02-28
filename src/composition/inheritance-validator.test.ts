@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { InheritanceValidator, MAX_INHERITANCE_DEPTH } from './inheritance-validator.js';
-import { SkillMetadata } from '../types/skill.js';
+import { SkillMetadata } from '../core/types/skill.js';
 
 describe('InheritanceValidator', () => {
   const validator = new InheritanceValidator();

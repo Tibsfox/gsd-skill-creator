@@ -6,7 +6,7 @@
  */
 
 import { startMcpServer } from '../../mcp/index.js';
-import { getSkillsBasePath, parseScope } from '../../types/scope.js';
+import { getSkillsBasePath, parseScope } from '../../core/types/scope.js';
 
 /**
  * Start the MCP server for skill browsing and installation.

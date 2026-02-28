@@ -14,7 +14,7 @@ import type {
   DomainId,
   PlanePosition,
   CompositionStep,
-} from '../types/mfe-types.js';
+} from '../core/types/mfe-types.js';
 import {
   createPatternRefiner,
   type PatternRefiner,

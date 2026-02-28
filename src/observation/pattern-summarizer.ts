@@ -1,4 +1,4 @@
-import type { TranscriptEntry, SessionObservation } from '../types/observation.js';
+import type { TranscriptEntry, SessionObservation } from '../core/types/observation.js';
 import { TranscriptParser } from './transcript-parser.js';
 
 export class PatternSummarizer {

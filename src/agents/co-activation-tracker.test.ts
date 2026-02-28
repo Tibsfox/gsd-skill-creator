@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { CoActivationTracker } from './co-activation-tracker.js';
-import { SessionObservation } from '../types/observation.js';
+import { SessionObservation } from '../core/types/observation.js';
 
 describe('CoActivationTracker', () => {
   function createSession(

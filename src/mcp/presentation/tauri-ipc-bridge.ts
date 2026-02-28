@@ -10,7 +10,7 @@
  * @module mcp/presentation/tauri-ipc-bridge
  */
 
-import type { TraceEvent, TrustState, TransportConfig } from '../../types/mcp.js';
+import type { TraceEvent, TrustState, TransportConfig } from '../../core/types/mcp.js';
 
 // ============================================================================
 // Types (mirrors Rust IPC response shapes)

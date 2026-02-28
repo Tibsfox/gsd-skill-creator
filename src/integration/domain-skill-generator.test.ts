@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import type { DomainDefinition, MathematicalPrimitive, DomainId } from '../types/mfe-types.js';
+import type { DomainDefinition, MathematicalPrimitive, DomainId } from '../core/types/mfe-types.js';
 import {
   DomainSkillGenerator,
   generateDomainSkill,

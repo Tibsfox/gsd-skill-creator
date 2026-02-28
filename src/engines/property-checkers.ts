@@ -12,7 +12,7 @@ import type {
   CompositionPath,
   CompositionRule,
   PrimitiveType,
-} from '../types/mfe-types.js';
+} from '../core/types/mfe-types.js';
 
 // === Types ===
 

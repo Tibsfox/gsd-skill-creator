@@ -16,7 +16,7 @@ import { resolve, join } from 'path';
 import {
   SecurityEventSchema,
   type SecurityEventType,
-} from '../../../src/security/index.js';
+} from '../../../src/core/security/index.js';
 
 // ---------------------------------------------------------------------------
 // Fixture helpers

@@ -9,7 +9,7 @@
  * since they handle delegation and synthesis in addition to their own work.
  */
 
-import type { TeamMemberModel, TeamConfig } from '../types/team.js';
+import type { TeamMemberModel, TeamConfig } from '../core/types/team.js';
 
 // ============================================================================
 // Static Pricing (per million tokens, USD)

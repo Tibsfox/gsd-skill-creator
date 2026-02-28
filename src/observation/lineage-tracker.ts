@@ -1,5 +1,5 @@
-import { PatternStore } from '../storage/pattern-store.js';
-import type { LineageEntry, LineageChain, ArtifactType } from '../types/observation.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
+import type { LineageEntry, LineageChain, ArtifactType } from '../core/types/observation.js';
 
 /**
  * Provides full provenance tracking across all 6 pipeline stages.

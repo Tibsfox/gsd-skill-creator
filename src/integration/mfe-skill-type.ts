@@ -8,8 +8,8 @@
 // (insertAfter/insertBefore) is handled by pipeline-hooks.ts.
 
 import { classifyProblem } from '../engines/plane-classifier.js';
-import type { DomainId } from '../types/mfe-types.js';
-import type { ScoredSkill } from '../types/application.js';
+import type { DomainId } from '../core/types/mfe-types.js';
+import type { ScoredSkill } from '../core/types/application.js';
 
 // === Knowledge Tiers ===
 

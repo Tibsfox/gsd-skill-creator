@@ -16,7 +16,7 @@ import type {
   DomainDefinition,
   MathematicalPrimitive,
   PrimitiveType,
-} from '../types/mfe-types.js';
+} from '../core/types/mfe-types.js';
 import type { PlaneClassification, DomainActivation } from './plane-classifier.js';
 
 // === Public types ===

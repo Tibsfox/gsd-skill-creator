@@ -11,7 +11,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { HealthFormatter } from './health-formatter.js';
-import type { HealthScore } from '../types/evaluator.js';
+import type { HealthScore } from '../core/types/evaluator.js';
 
 function makeHealthScore(overrides: Partial<HealthScore> = {}): HealthScore {
   return {

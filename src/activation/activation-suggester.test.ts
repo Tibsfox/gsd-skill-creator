@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { ActivationSuggester } from './activation-suggester.js';
-import type { ActivationScore, ScoringFactors, ActivationLabel } from '../types/activation.js';
+import type { ActivationScore, ScoringFactors, ActivationLabel } from '../core/types/activation.js';
 
 function makeScore(overrides: Partial<ActivationScore> & { score: number }): ActivationScore {
   const defaultFactors: ScoringFactors = {

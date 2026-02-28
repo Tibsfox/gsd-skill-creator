@@ -1,5 +1,5 @@
 import natural from 'natural';
-import type { EmbeddingVector } from '../types/embeddings.js';
+import type { EmbeddingVector } from '../core/types/embeddings.js';
 
 /**
  * Heuristic embedder using TF-IDF for fallback when transformer model unavailable.

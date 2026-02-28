@@ -7,7 +7,7 @@
 import { describe, it, expect } from 'vitest';
 import { wireDependencies, type WiringResult } from './dependency-wirer.js';
 import type { CandidatePrimitive } from './extractor.js';
-import type { DomainId, PrimitiveType, DependencyEdge, CompositionRule } from '../types/mfe-types.js';
+import type { DomainId, PrimitiveType, DependencyEdge, CompositionRule } from '../core/types/mfe-types.js';
 
 // --- Test helper: factory for valid CandidatePrimitive ---
 

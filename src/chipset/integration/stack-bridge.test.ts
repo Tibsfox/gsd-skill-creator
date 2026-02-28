@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { StackBridge } from './stack-bridge.js';
-import type { SessionObservation } from '../../types/observation.js';
+import type { SessionObservation } from '../../core/types/observation.js';
 
 // ============================================================================
 // Test Helpers

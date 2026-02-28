@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { CacheOrderStage, DEFAULT_CACHE_TIER } from './cache-order-stage.js';
 import { createEmptyContext } from '../skill-pipeline.js';
-import type { ScoredSkill } from '../../types/application.js';
-import type { Skill } from '../../types/skill.js';
+import type { ScoredSkill } from '../../core/types/application.js';
+import type { Skill } from '../../core/types/skill.js';
 
 /**
  * Build a mock Skill object with optional cacheTier in the extension metadata.

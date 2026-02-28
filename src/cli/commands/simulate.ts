@@ -8,15 +8,15 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { readFile } from 'fs/promises';
-import { SkillStore } from '../../storage/skill-store.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
 import {
   ActivationSimulator,
   BatchSimulator,
   formatConfidence,
 } from '../../simulation/index.js';
 import type { SimulationResult, BatchResult } from '../../simulation/index.js';
-import type { SkillScope } from '../../types/scope.js';
-import { getSkillsBasePath } from '../../types/scope.js';
+import type { SkillScope } from '../../core/types/scope.js';
+import { getSkillsBasePath } from '../../core/types/scope.js';
 
 /**
  * Options for the simulate command.

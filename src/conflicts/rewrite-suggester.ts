@@ -6,7 +6,7 @@
  * an Anthropic API key is available, falling back to heuristic templates.
  */
 
-import type { ConflictPair } from '../types/conflicts.js';
+import type { ConflictPair } from '../core/types/conflicts.js';
 
 /**
  * A suggestion for rewriting a skill description to reduce conflicts.

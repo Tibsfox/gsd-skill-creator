@@ -1,5 +1,5 @@
 import { diffWords } from 'diff';
-import { Change, CorrectionAnalysis } from '../types/learning.js';
+import { Change, CorrectionAnalysis } from '../core/types/learning.js';
 
 export interface DetectorConfig {
   threshold: number;       // Similarity below this is significant (default 0.7)

@@ -13,9 +13,9 @@ import { pipeline } from 'node:stream/promises';
 import { createGzip } from 'node:zlib';
 import matter from 'gray-matter';
 import { exportPortableContent } from '../portability/index.js';
-import type { SkillMetadata, Skill } from '../types/skill.js';
-import { safeParseFrontmatter } from '../validation/yaml-safety.js';
-import { SkillMetadataSchema } from '../validation/skill-validation.js';
+import type { SkillMetadata, Skill } from '../core/types/skill.js';
+import { safeParseFrontmatter } from '../core/validation/yaml-safety.js';
+import { SkillMetadataSchema } from '../core/validation/skill-validation.js';
 
 /**
  * Format version envelope for skill packages.

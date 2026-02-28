@@ -13,7 +13,7 @@ import type {
   DomainId,
   RegistrySummary,
   DomainSummary,
-} from '../types/mfe-types.js';
+} from '../core/types/mfe-types.js';
 
 // === Public Types ===
 

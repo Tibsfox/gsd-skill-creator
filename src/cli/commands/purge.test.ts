@@ -3,7 +3,7 @@ import { writeFile, readFile, mkdir, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { purgeCommand } from './purge.js';
-import { createChecksummedEntry } from '../../validation/jsonl-safety.js';
+import { createChecksummedEntry } from '../../core/validation/jsonl-safety.js';
 
 function makeEntry(overrides: { timestamp?: number; category?: string; data?: Record<string, unknown> } = {}) {
   return createChecksummedEntry({

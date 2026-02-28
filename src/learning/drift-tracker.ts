@@ -1,8 +1,8 @@
 import { diffWords } from 'diff';
 import matter from 'gray-matter';
 import { VersionManager } from './version-manager.js';
-import { SkillStore } from '../storage/skill-store.js';
-import { DriftResult, DEFAULT_DRIFT_THRESHOLD } from '../types/learning.js';
+import { SkillStore } from '../core/storage/skill-store.js';
+import { DriftResult, DEFAULT_DRIFT_THRESHOLD } from '../core/types/learning.js';
 
 /**
  * DriftThresholdError is thrown when cumulative drift exceeds the allowed threshold.

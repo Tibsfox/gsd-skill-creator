@@ -12,7 +12,7 @@ import {
   ROUTER_TOOLS,
   REDUCER_TOOLS,
 } from './templates.js';
-import { validateTeamConfig } from '../validation/team-validation.js';
+import { validateTeamConfig } from '../core/validation/team-validation.js';
 
 // ============================================================================
 // Leader/Worker Template Tests

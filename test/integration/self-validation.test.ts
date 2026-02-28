@@ -18,7 +18,7 @@ import type { CandidatePrimitive } from '../../src/learn/extractor.js';
 import { prefilterDuplicates } from '../../src/learn/dedup-prefilter.js';
 import { compareSemantically } from '../../src/learn/semantic-comparator.js';
 import type { SemanticClassification } from '../../src/learn/semantic-comparator.js';
-import type { MathematicalPrimitive, DomainDefinition } from '../../src/types/mfe-types.js';
+import type { MathematicalPrimitive, DomainDefinition } from '../../src/core/types/mfe-types.js';
 
 // === Test data ===
 

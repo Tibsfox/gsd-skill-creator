@@ -8,7 +8,7 @@
 // module init). Reimplements scoring logic locally and accepts domain
 // definitions as a parameter.
 
-import type { PlanePosition, DomainId, DomainDefinition } from '../types/mfe-types.js';
+import type { PlanePosition, DomainId, DomainDefinition } from '../core/types/mfe-types.js';
 
 // === Public types ===
 

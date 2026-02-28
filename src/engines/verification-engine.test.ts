@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { CompositionStep, CompositionPath, PrimitiveType, DomainId } from '../types/mfe-types.js';
+import type { CompositionStep, CompositionPath, PrimitiveType, DomainId } from '../core/types/mfe-types.js';
 import {
   verifyDimensionalConsistency,
   verifyTypeCompatibility,

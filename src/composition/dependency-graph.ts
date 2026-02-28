@@ -3,7 +3,7 @@
  * Uses Kahn's algorithm (BFS topological sort) for O(n+m) cycle detection.
  */
 
-import { SkillMetadata, getExtension } from '../types/skill.js';
+import { SkillMetadata, getExtension } from '../core/types/skill.js';
 
 export interface DependencyResult {
   hasCycle: boolean;

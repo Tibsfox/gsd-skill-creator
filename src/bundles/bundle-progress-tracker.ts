@@ -18,7 +18,7 @@
 import { z } from 'zod';
 import { appendFile, readFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
-import type { SessionObservation } from '../types/observation.js';
+import type { SessionObservation } from '../core/types/observation.js';
 
 // ============================================================================
 // Schema

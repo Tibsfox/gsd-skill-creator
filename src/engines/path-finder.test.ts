@@ -16,7 +16,7 @@ import type {
   DependencyEdge,
   DomainId,
   PlanePosition,
-} from '../types/mfe-types.js';
+} from '../core/types/mfe-types.js';
 
 // === Test Helpers ===
 

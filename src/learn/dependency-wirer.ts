@@ -7,7 +7,7 @@
 // Does NOT import from dependency-graph.ts (that's the full registry graph
 // engine; this builds LOCAL edges only).
 
-import type { DependencyEdge, DependencyType } from '../types/mfe-types.js';
+import type { DependencyEdge, DependencyType } from '../core/types/mfe-types.js';
 import type { CandidatePrimitive } from './extractor.js';
 
 // === Public types ===
