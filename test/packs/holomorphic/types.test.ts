@@ -8,7 +8,7 @@ import type {
   SkillDynamics,
   TopologicalProperty,
   ChangeType,
-} from '../../../src/holomorphic/types';
+} from '../../../src/packs/holomorphic/types';
 
 /* ------------------------------------------------------------------ */
 /*  Type conformance tests                                              */

@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
-import { CheckpointManager } from '../../../../src/dogfood/harness/checkpoint-manager.js';
-import type { Checkpoint } from '../../../../src/dogfood/harness/types.js';
+import { CheckpointManager } from '../../../../src/packs/dogfood/harness/checkpoint-manager.js';
+import type { Checkpoint } from '../../../../src/packs/dogfood/harness/types.js';
 
 function createCheckpoint(overrides: Partial<Checkpoint> = {}): Checkpoint {
   return {

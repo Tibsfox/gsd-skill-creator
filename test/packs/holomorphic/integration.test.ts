@@ -2,13 +2,13 @@ import { describe, it, expect } from 'vitest';
 import { existsSync, readFileSync, statSync } from 'fs';
 import { join } from 'path';
 
-const HOLOMORPHIC_ROOT = join(__dirname, '../../../src/holomorphic');
+const HOLOMORPHIC_ROOT = join(__dirname, '../../../src/packs/holomorphic');
 const SKILL_PATH = join(HOLOMORPHIC_ROOT, 'skills/holomorphic-dynamics/SKILL.md');
 const MODULE_ROOT = join(HOLOMORPHIC_ROOT, 'modules');
 
 describe('Cross-Module Integration', () => {
   it('master barrel exports all expected function names', async () => {
-    const barrel = await import('../../../src/holomorphic/index');
+    const barrel = await import('../../../src/packs/holomorphic/index');
     const expectedExports = [
       'add', 'sub', 'mul', 'div', 'magnitude',
       'computeOrbit', 'detectPeriod', 'classifyFixedPoint',
@@ -50,11 +50,11 @@ describe('Cross-Module Integration', () => {
 
   it('try-sessions export runTrySession function', async () => {
     // Spot-check HD-01, HD-05, HD-09
-    const hd01 = await import('../../../src/holomorphic/modules/HD-01/try-session');
+    const hd01 = await import('../../../src/packs/holomorphic/modules/HD-01/try-session');
     expect(typeof hd01.runTrySession).toBe('function');
-    const hd05 = await import('../../../src/holomorphic/modules/HD-05/try-session');
+    const hd05 = await import('../../../src/packs/holomorphic/modules/HD-05/try-session');
     expect(typeof hd05.runTrySession).toBe('function');
-    const hd09 = await import('../../../src/holomorphic/modules/HD-09/try-session');
+    const hd09 = await import('../../../src/packs/holomorphic/modules/HD-09/try-session');
     expect(typeof hd09.runTrySession).toBe('function');
   });
 });

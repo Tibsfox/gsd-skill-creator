@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { classifyGap, assignSeverity } from '../../../../src/dogfood/verification/gap-classifier.js';
-import type { LearnedConceptRef, EcosystemClaim, GapRecord } from '../../../../src/dogfood/verification/types.js';
-import { GAP_TYPES, GAP_SEVERITIES } from '../../../../src/dogfood/verification/types.js';
+import { classifyGap, assignSeverity } from '../../../../src/packs/dogfood/verification/gap-classifier.js';
+import type { LearnedConceptRef, EcosystemClaim, GapRecord } from '../../../../src/packs/dogfood/verification/types.js';
+import { GAP_TYPES, GAP_SEVERITIES } from '../../../../src/packs/dogfood/verification/types.js';
 
 // --- Helpers ---
 

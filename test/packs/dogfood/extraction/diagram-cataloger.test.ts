@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { catalogDiagrams } from '../../../../src/dogfood/extraction/diagram-cataloger.js';
+import { catalogDiagrams } from '../../../../src/packs/dogfood/extraction/diagram-cataloger.js';
 
 describe('catalogDiagrams', () => {
   describe('TikZ diagram detection', () => {

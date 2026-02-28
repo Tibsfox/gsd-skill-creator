@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { magnitude } from '../../../src/holomorphic/complex/arithmetic';
-import type { KoopmanObservable } from '../../../src/holomorphic/dmd/types';
-import { edmd, liftDictionary } from '../../../src/holomorphic/dmd/koopman';
-import { bridgeDMDToSkillDynamics } from '../../../src/holomorphic/dmd/skill-dmd-bridge';
-import type { SkillDynamicsExtended } from '../../../src/holomorphic/dmd/skill-dmd-bridge';
-import type { SkillPosition } from '../../../src/holomorphic/types';
+import { magnitude } from '../../../src/packs/holomorphic/complex/arithmetic';
+import type { KoopmanObservable } from '../../../src/packs/holomorphic/dmd/types';
+import { edmd, liftDictionary } from '../../../src/packs/holomorphic/dmd/koopman';
+import { bridgeDMDToSkillDynamics } from '../../../src/packs/holomorphic/dmd/skill-dmd-bridge';
+import type { SkillDynamicsExtended } from '../../../src/packs/holomorphic/dmd/skill-dmd-bridge';
+import type { SkillPosition } from '../../../src/packs/holomorphic/types';
 
 /* ------------------------------------------------------------------ */
 /*  Koopman / EDMD Implementation                                       */

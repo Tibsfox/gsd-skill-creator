@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
-import type { VenvConfig, VenvResult, PythonProjectInfo, DependencySpec } from '../../../../../src/dogfood/pydmd/types.js';
-import { createVenv, cleanupVenv } from '../../../../../src/dogfood/pydmd/install/venv-manager.js';
-import type { CommandExecutor } from '../../../../../src/dogfood/pydmd/install/venv-manager.js';
+import type { VenvConfig, VenvResult, PythonProjectInfo, DependencySpec } from '../../../../../src/packs/dogfood/pydmd/types.js';
+import { createVenv, cleanupVenv } from '../../../../../src/packs/dogfood/pydmd/install/venv-manager.js';
+import type { CommandExecutor } from '../../../../../src/packs/dogfood/pydmd/install/venv-manager.js';
 
 // --- Factories ---
 

@@ -13,11 +13,11 @@
  * Aliases: ps
  */
 
-import { computeDashboardMetrics, saveMetricsSnapshot } from '../../plane/metrics.js';
-import { renderPlaneStatus, renderSkillDetail } from '../../plane/dashboard.js';
-import { computeTangent } from '../../plane/arithmetic.js';
-import { PositionStore } from '../../plane/position-store.js';
-import { ChordStore } from '../../plane/chords.js';
+import { computeDashboardMetrics, saveMetricsSnapshot } from '../../packs/plane/metrics.js';
+import { renderPlaneStatus, renderSkillDetail } from '../../packs/plane/dashboard.js';
+import { computeTangent } from '../../packs/plane/arithmetic.js';
+import { PositionStore } from '../../packs/plane/position-store.js';
+import { ChordStore } from '../../packs/plane/chords.js';
 
 // ============================================================================
 // Types

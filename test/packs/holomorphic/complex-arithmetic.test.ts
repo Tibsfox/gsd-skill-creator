@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { ComplexNumber } from '../../../src/holomorphic/types';
+import type { ComplexNumber } from '../../../src/packs/holomorphic/types';
 import {
   add,
   sub,
@@ -13,7 +13,7 @@ import {
   ZERO,
   ONE,
   I,
-} from '../../../src/holomorphic/complex/arithmetic';
+} from '../../../src/packs/holomorphic/complex/arithmetic';
 
 /* ------------------------------------------------------------------ */
 /*  Complex arithmetic tests                                            */

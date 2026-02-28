@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MODULE_DIR = resolve(__dirname, '../../../../src/holomorphic/modules/HD-10');
+const MODULE_DIR = resolve(__dirname, '../../../../src/packs/holomorphic/modules/HD-10');
 
 /* ------------------------------------------------------------------ */
 /*  HD-10: Koopman Operator Theory                                      */
@@ -63,7 +63,7 @@ describe('HD-10 — Koopman Operator Theory', () => {
     });
 
     it('exports runTrySession function', async () => {
-      const mod = await import('../../../../src/holomorphic/modules/HD-10/try-session');
+      const mod = await import('../../../../src/packs/holomorphic/modules/HD-10/try-session');
       expect(typeof mod.runTrySession).toBe('function');
     });
   });

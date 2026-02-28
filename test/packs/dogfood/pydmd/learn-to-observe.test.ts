@@ -1,10 +1,10 @@
 import { describe, it, expect } from "vitest";
-import type { KnowledgeGraph } from "../../../../src/dogfood/pydmd/types.js";
+import type { KnowledgeGraph } from "../../../../src/packs/dogfood/pydmd/types.js";
 import type {
   BridgeResult,
   LearnedObservation,
-} from "../../../../src/dogfood/pydmd/integration/types.js";
-import { bridgeToObservations } from "../../../../src/dogfood/pydmd/integration/learn-to-observe.js";
+} from "../../../../src/packs/dogfood/pydmd/integration/types.js";
+import { bridgeToObservations } from "../../../../src/packs/dogfood/pydmd/integration/learn-to-observe.js";
 
 // ---------------------------------------------------------------------------
 // Mock helper

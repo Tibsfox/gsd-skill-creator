@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import type { RepoManifest, TutorialSummary } from '../../../../../src/dogfood/pydmd/types.js';
-import { parseTutorials } from '../../../../../src/dogfood/pydmd/learn/tutorial-parser.js';
+import type { RepoManifest, TutorialSummary } from '../../../../../src/packs/dogfood/pydmd/types.js';
+import { parseTutorials } from '../../../../../src/packs/dogfood/pydmd/learn/tutorial-parser.js';
 
 // --- Factories ---
 

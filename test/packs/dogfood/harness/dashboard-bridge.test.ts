@@ -2,10 +2,10 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
-import { DashboardBridge } from '../../../../src/dogfood/harness/dashboard-bridge.js';
-import { ProgressTracker } from '../../../../src/dogfood/harness/progress-tracker.js';
-import { MetricsCollector } from '../../../../src/dogfood/harness/metrics-collector.js';
-import type { ChapterMetrics } from '../../../../src/dogfood/harness/types.js';
+import { DashboardBridge } from '../../../../src/packs/dogfood/harness/dashboard-bridge.js';
+import { ProgressTracker } from '../../../../src/packs/dogfood/harness/progress-tracker.js';
+import { MetricsCollector } from '../../../../src/packs/dogfood/harness/metrics-collector.js';
+import type { ChapterMetrics } from '../../../../src/packs/dogfood/harness/types.js';
 
 function createChapterMetrics(
   overrides: Partial<ChapterMetrics> = {},

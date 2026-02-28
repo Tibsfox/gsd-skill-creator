@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import type { PythonProjectInfo, DependencySpec } from '../../../../../src/dogfood/pydmd/types.js';
-import { detectPythonProject } from '../../../../../src/dogfood/pydmd/install/python-detector.js';
+import type { PythonProjectInfo, DependencySpec } from '../../../../../src/packs/dogfood/pydmd/types.js';
+import { detectPythonProject } from '../../../../../src/packs/dogfood/pydmd/install/python-detector.js';
 
 // --- Factories ---
 

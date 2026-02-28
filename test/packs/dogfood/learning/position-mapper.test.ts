@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { assignPosition, updatePositionForDepth } from '../../../../src/dogfood/learning/position-mapper.js';
-import type { LearnedConcept, PositionAssignment } from '../../../../src/dogfood/learning/types.js';
+import { assignPosition, updatePositionForDepth } from '../../../../src/packs/dogfood/learning/position-mapper.js';
+import type { LearnedConcept, PositionAssignment } from '../../../../src/packs/dogfood/learning/types.js';
 import {
   PART_ANGULAR_REGIONS,
   INITIAL_RADIUS,
   MAX_ANGULAR_VELOCITY,
-} from '../../../../src/dogfood/learning/types.js';
+} from '../../../../src/packs/dogfood/learning/types.js';
 
 // --- Factories ---
 

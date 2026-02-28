@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import type { SkillUpdate, KnowledgePatch } from '../../../../src/dogfood/refinement/types.js';
-import { validateSafety } from '../../../../src/dogfood/refinement/safety-validator.js';
-import type { SafetyValidationResult, TestRunResult, CheckpointState } from '../../../../src/dogfood/refinement/safety-validator.js';
+import type { SkillUpdate, KnowledgePatch } from '../../../../src/packs/dogfood/refinement/types.js';
+import { validateSafety } from '../../../../src/packs/dogfood/refinement/safety-validator.js';
+import type { SafetyValidationResult, TestRunResult, CheckpointState } from '../../../../src/packs/dogfood/refinement/safety-validator.js';
 
 // --- Factories ---
 

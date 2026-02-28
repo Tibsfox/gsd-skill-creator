@@ -16,7 +16,7 @@ import type {
   DomainDefinition,
   MathematicalPrimitive,
   PrimitiveType,
-} from '../core/types/mfe-types.js';
+} from '../../core/types/mfe-types.js';
 import type { PlaneClassification, DomainActivation } from './plane-classifier.js';
 
 // === Public types ===
@@ -54,7 +54,7 @@ export interface NavigationResult {
 // === Domain index loading ===
 
 const require = createRequire(import.meta.url);
-const domainIndex: { domains: DomainDefinition[] } = require('../../data/domain-index.json');
+const domainIndex: { domains: DomainDefinition[] } = require('../../../data/domain-index.json');
 
 // === Domain file number mapping ===
 
@@ -88,7 +88,7 @@ function loadDomainPrimitives(domainId: DomainId): MathematicalPrimitive[] {
   if (!fileNum) return [];
 
   try {
-    const data = require(`../../data/domains/${fileNum}-${domainId}.json`);
+    const data = require(`../../../data/domains/${fileNum}-${domainId}.json`);
     const primitives: MathematicalPrimitive[] = data.primitives || [];
     primitiveCache.set(domainId, primitives);
     return primitives;

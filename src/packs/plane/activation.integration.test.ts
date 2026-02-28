@@ -1,15 +1,15 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { SkillPipeline, createEmptyContext } from '../application/skill-pipeline.js';
-import { ScoreStage } from '../application/stages/score-stage.js';
-import type { PositionLookup } from '../application/stages/score-stage.js';
+import { SkillPipeline, createEmptyContext } from '../../application/skill-pipeline.js';
+import { ScoreStage } from '../../application/stages/score-stage.js';
+import type { PositionLookup } from '../../application/stages/score-stage.js';
 import { createPosition } from './arithmetic.js';
 import type { PlaneActivationConfig } from './activation.js';
-import type { SkillIndex, SkillIndexEntry } from '../core/storage/skill-index.js';
-import type { RelevanceScorer } from '../application/relevance-scorer.js';
-import type { ScoredSkill } from '../core/types/application.js';
+import type { SkillIndex, SkillIndexEntry } from '../../core/storage/skill-index.js';
+import type { RelevanceScorer } from '../../application/relevance-scorer.js';
+import type { ScoredSkill } from '../../core/types/application.js';
 
 // Mock cosine-similarity module (required by ScoreStage import chain)
-vi.mock('../embeddings/cosine-similarity.js', () => ({
+vi.mock('../../embeddings/cosine-similarity.js', () => ({
   cosineSimilarity: vi.fn(() => 0.85),
 }));
 

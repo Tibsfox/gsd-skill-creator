@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MODULE_DIR = resolve(__dirname, '../../../src/holomorphic/modules/HD-09');
+const MODULE_DIR = resolve(__dirname, '../../../src/packs/holomorphic/modules/HD-09');
 
 /* ------------------------------------------------------------------ */
 /*  HD-09 Try Sessions & Eigenvalue Visualizer                          */
@@ -28,7 +28,7 @@ describe('HD-09 Try Sessions & Eigenvalue Visualizer', () => {
 
   describe('TypeScript try-session', () => {
     it('exports runTrySession function', async () => {
-      const mod = await import('../../../src/holomorphic/modules/HD-09/try-session');
+      const mod = await import('../../../src/packs/holomorphic/modules/HD-09/try-session');
       expect(typeof mod.runTrySession).toBe('function');
     });
   });
@@ -36,7 +36,7 @@ describe('HD-09 Try Sessions & Eigenvalue Visualizer', () => {
   describe('eigenvalue visualizer', () => {
     it('plotEigenvaluesOnUnitCircle returns unit circle and eigenvalue points', async () => {
       const { plotEigenvaluesOnUnitCircle } = await import(
-        '../../../src/holomorphic/renderer/eigenvalue-plot'
+        '../../../src/packs/holomorphic/renderer/eigenvalue-plot'
       );
 
       const eigenvalues = [
@@ -68,7 +68,7 @@ describe('HD-09 Try Sessions & Eigenvalue Visualizer', () => {
 
     it('classifies eigenvalues by unit circle position', async () => {
       const { plotEigenvaluesOnUnitCircle } = await import(
-        '../../../src/holomorphic/renderer/eigenvalue-plot'
+        '../../../src/packs/holomorphic/renderer/eigenvalue-plot'
       );
 
       const eigenvalues = [
