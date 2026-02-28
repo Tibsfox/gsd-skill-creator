@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MODULE_DIR = resolve(__dirname, '../../../../src/holomorphic/modules/HD-04');
+const MODULE_DIR = resolve(__dirname, '../../../../src/packs/holomorphic/modules/HD-04');
 
 /* ------------------------------------------------------------------ */
 /*  HD-04: Julia Sets and Fatou Sets                                    */
@@ -50,7 +50,7 @@ describe('HD-04 — Julia Sets and Fatou Sets', () => {
     });
 
     it('exports runTrySession function', async () => {
-      const mod = await import('../../../../src/holomorphic/modules/HD-04/try-session');
+      const mod = await import('../../../../src/packs/holomorphic/modules/HD-04/try-session');
       expect(typeof mod.runTrySession).toBe('function');
     });
   });

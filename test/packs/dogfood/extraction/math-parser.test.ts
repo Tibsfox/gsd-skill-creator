@@ -3,7 +3,7 @@ import {
   parseMathBlock,
   renderReadable,
   estimateTokens,
-} from '../../../../src/dogfood/extraction/math-parser.js';
+} from '../../../../src/packs/dogfood/extraction/math-parser.js';
 
 describe('parseMathBlock', () => {
   it('detects display equations (centered, multi-line)', () => {

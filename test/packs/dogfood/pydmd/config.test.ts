@@ -4,8 +4,8 @@ import { resolve } from 'node:path';
 import { load } from 'js-yaml';
 
 const ROOT = resolve(import.meta.dirname, '..', '..', '..', '..');
-const CONFIG_PATH = resolve(ROOT, 'src/dogfood/pydmd/config/pydmd-target.yaml');
-const SCENARIOS_PATH = resolve(ROOT, 'src/dogfood/pydmd/config/dmd-scenarios.json');
+const CONFIG_PATH = resolve(ROOT, 'src/packs/dogfood/pydmd/config/pydmd-target.yaml');
+const SCENARIOS_PATH = resolve(ROOT, 'src/packs/dogfood/pydmd/config/dmd-scenarios.json');
 
 describe('PyDMD config', () => {
   describe('pydmd-target.yaml', () => {

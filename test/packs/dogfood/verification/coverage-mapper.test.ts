@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { mapConceptCoverage, mapEcosystemCoverage } from '../../../../src/dogfood/verification/coverage-mapper.js';
-import type { LearnedConceptRef, EcosystemCorpus, EcosystemClaim } from '../../../../src/dogfood/verification/types.js';
+import { mapConceptCoverage, mapEcosystemCoverage } from '../../../../src/packs/dogfood/verification/coverage-mapper.js';
+import type { LearnedConceptRef, EcosystemCorpus, EcosystemClaim } from '../../../../src/packs/dogfood/verification/types.js';
 
 // --- Helpers ---
 

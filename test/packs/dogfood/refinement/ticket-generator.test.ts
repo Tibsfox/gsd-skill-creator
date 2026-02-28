@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import type { GapRecord } from '../../../../src/dogfood/verification/types.js';
-import type { ImprovementTicket } from '../../../../src/dogfood/refinement/types.js';
-import { generateTickets } from '../../../../src/dogfood/refinement/ticket-generator.js';
+import type { GapRecord } from '../../../../src/packs/dogfood/verification/types.js';
+import type { ImprovementTicket } from '../../../../src/packs/dogfood/refinement/types.js';
+import { generateTickets } from '../../../../src/packs/dogfood/refinement/ticket-generator.js';
 
 // --- Factory ---
 

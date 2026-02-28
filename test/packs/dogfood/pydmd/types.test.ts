@@ -17,7 +17,7 @@ import type {
   Connection,
   TutorialReplayResult,
   ClaimVerification,
-} from '../../../../src/dogfood/pydmd/types.js';
+} from '../../../../src/packs/dogfood/pydmd/types.js';
 
 describe('PyDMD types', () => {
   describe('export completeness', () => {

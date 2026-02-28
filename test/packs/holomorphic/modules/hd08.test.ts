@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MODULE_DIR = resolve(__dirname, '../../../../src/holomorphic/modules/HD-08');
+const MODULE_DIR = resolve(__dirname, '../../../../src/packs/holomorphic/modules/HD-08');
 
 /* ------------------------------------------------------------------ */
 /*  HD-08: Skill-Creator as a Dynamical System                         */
@@ -71,7 +71,7 @@ describe('HD-08 — Skill-Creator as a Dynamical System', () => {
 
     it('exports runTrySession function', async () => {
       const mod = await import(
-        '../../../../src/holomorphic/modules/HD-08/try-session'
+        '../../../../src/packs/holomorphic/modules/HD-08/try-session'
       );
       expect(typeof mod.runTrySession).toBe('function');
     });

@@ -279,7 +279,7 @@ describe('Chapter 22: Topology — Computational Verification', () => {
       expect(converged).toBe(true);
     });
 
-    // Platform connection: validates src/plane/observer-bridge.ts convergence
+    // Platform connection: validates src/packs/plane/observer-bridge.ts convergence
     test('platform: learning update is a contraction — bounded skill learning converges', () => {
       // Simulate a simplified skill position update: weighted average contraction
       // newTheta = (existingWeight * existing + observedWeight * observed) / totalWeight

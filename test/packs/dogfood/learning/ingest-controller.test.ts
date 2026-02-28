@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { createIngestController } from '../../../../src/dogfood/learning/ingest-controller.js';
+import { createIngestController } from '../../../../src/packs/dogfood/learning/ingest-controller.js';
 import type {
   ChunkInput,
   ConceptDetectionResult,
@@ -7,8 +7,8 @@ import type {
   PositionAssignment,
   DetectFn,
   PositionFn,
-} from '../../../../src/dogfood/learning/types.js';
-import { DEFAULT_TOKEN_BUDGET, INITIAL_RADIUS } from '../../../../src/dogfood/learning/types.js';
+} from '../../../../src/packs/dogfood/learning/types.js';
+import { DEFAULT_TOKEN_BUDGET, INITIAL_RADIUS } from '../../../../src/packs/dogfood/learning/types.js';
 
 // --- Factories ---
 

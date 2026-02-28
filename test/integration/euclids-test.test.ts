@@ -23,14 +23,14 @@ import type {
   DomainId,
   CompositionPath,
 } from '../../src/core/types/mfe-types.js';
-import type { DependencyGraphPort } from '../../src/engines/composition-engine.js';
-import type { PropertyLookups } from '../../src/engines/property-checkers.js';
-import { CompositionEngine } from '../../src/engines/composition-engine.js';
-import { ProofComposer } from '../../src/engines/proof-composer.js';
-import type { ProofChain } from '../../src/engines/proof-composer.js';
-import { verifyCompositionPath } from '../../src/engines/verification-engine.js';
-import type { VerificationLookups } from '../../src/engines/verification-engine.js';
-import { checkAllProperties } from '../../src/engines/property-checkers.js';
+import type { DependencyGraphPort } from '../../src/packs/engines/composition-engine.js';
+import type { PropertyLookups } from '../../src/packs/engines/property-checkers.js';
+import { CompositionEngine } from '../../src/packs/engines/composition-engine.js';
+import { ProofComposer } from '../../src/packs/engines/proof-composer.js';
+import type { ProofChain } from '../../src/packs/engines/proof-composer.js';
+import { verifyCompositionPath } from '../../src/packs/engines/verification-engine.js';
+import type { VerificationLookups } from '../../src/packs/engines/verification-engine.js';
+import { checkAllProperties } from '../../src/packs/engines/property-checkers.js';
 
 // === Euclid's Test Primitives ===
 

@@ -1,12 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { PlaneClassification, DomainActivation } from '../engines/plane-classifier.js';
+import type { PlaneClassification, DomainActivation } from '../packs/engines/plane-classifier.js';
 
 // Mock classifyProblem before importing the module under test
-vi.mock('../engines/plane-classifier.js', () => ({
+vi.mock('../packs/engines/plane-classifier.js', () => ({
   classifyProblem: vi.fn(),
 }));
 
-import { classifyProblem } from '../engines/plane-classifier.js';
+import { classifyProblem } from '../packs/engines/plane-classifier.js';
 import {
   MfeSkillType,
   detectMathematicalStructure,

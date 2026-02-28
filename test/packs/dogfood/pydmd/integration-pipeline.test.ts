@@ -9,28 +9,28 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // --- Install pipeline ---
-import { detectPythonProject } from '../../../../src/dogfood/pydmd/install/python-detector.js';
-import { createVenv } from '../../../../src/dogfood/pydmd/install/venv-manager.js';
-import { runHealthCheck } from '../../../../src/dogfood/pydmd/install/health-check.js';
-import type { CommandExecutor } from '../../../../src/dogfood/pydmd/install/venv-manager.js';
+import { detectPythonProject } from '../../../../src/packs/dogfood/pydmd/install/python-detector.js';
+import { createVenv } from '../../../../src/packs/dogfood/pydmd/install/venv-manager.js';
+import { runHealthCheck } from '../../../../src/packs/dogfood/pydmd/install/health-check.js';
+import type { CommandExecutor } from '../../../../src/packs/dogfood/pydmd/install/venv-manager.js';
 
 // --- Learn pipeline ---
-import { analyzeStructure } from '../../../../src/dogfood/pydmd/learn/structure-analyzer.js';
-import { extractConcepts } from '../../../../src/dogfood/pydmd/learn/concept-extractor.js';
-import { parseTutorials } from '../../../../src/dogfood/pydmd/learn/tutorial-parser.js';
-import { synthesizePatterns } from '../../../../src/dogfood/pydmd/learn/pattern-synthesizer.js';
+import { analyzeStructure } from '../../../../src/packs/dogfood/pydmd/learn/structure-analyzer.js';
+import { extractConcepts } from '../../../../src/packs/dogfood/pydmd/learn/concept-extractor.js';
+import { parseTutorials } from '../../../../src/packs/dogfood/pydmd/learn/tutorial-parser.js';
+import { synthesizePatterns } from '../../../../src/packs/dogfood/pydmd/learn/pattern-synthesizer.js';
 
 // --- Generate pipeline ---
-import { composeSkill } from '../../../../src/dogfood/pydmd/generate/skill-composer.js';
-import { buildReferences } from '../../../../src/dogfood/pydmd/generate/reference-builder.js';
-import { generateScripts } from '../../../../src/dogfood/pydmd/generate/script-generator.js';
+import { composeSkill } from '../../../../src/packs/dogfood/pydmd/generate/skill-composer.js';
+import { buildReferences } from '../../../../src/packs/dogfood/pydmd/generate/reference-builder.js';
+import { generateScripts } from '../../../../src/packs/dogfood/pydmd/generate/script-generator.js';
 
 // --- Validate pipeline ---
-import { checkAccuracy } from '../../../../src/dogfood/pydmd/validate/accuracy-checker.js';
-import { replayTutorials } from '../../../../src/dogfood/pydmd/validate/tutorial-replay.js';
+import { checkAccuracy } from '../../../../src/packs/dogfood/pydmd/validate/accuracy-checker.js';
+import { replayTutorials } from '../../../../src/packs/dogfood/pydmd/validate/tutorial-replay.js';
 
 // --- Integration bridge ---
-import { bridgeToObservations } from '../../../../src/dogfood/pydmd/integration/learn-to-observe.js';
+import { bridgeToObservations } from '../../../../src/packs/dogfood/pydmd/integration/learn-to-observe.js';
 
 // --- Types ---
 import type {
@@ -51,12 +51,12 @@ import type {
   Connection,
   UsagePattern,
   Pitfall,
-} from '../../../../src/dogfood/pydmd/types.js';
+} from '../../../../src/packs/dogfood/pydmd/types.js';
 
-import type { ComplexPlaneMap } from '../../../../src/dogfood/pydmd/learn/complex-plane-mapper.js';
-import type { GeneratedSkill } from '../../../../src/dogfood/pydmd/generate/types.js';
-import type { AccuracyReport } from '../../../../src/dogfood/pydmd/validate/types.js';
-import type { LearnedObservation, BridgeResult } from '../../../../src/dogfood/pydmd/integration/types.js';
+import type { ComplexPlaneMap } from '../../../../src/packs/dogfood/pydmd/learn/complex-plane-mapper.js';
+import type { GeneratedSkill } from '../../../../src/packs/dogfood/pydmd/generate/types.js';
+import type { AccuracyReport } from '../../../../src/packs/dogfood/pydmd/validate/types.js';
+import type { LearnedObservation, BridgeResult } from '../../../../src/packs/dogfood/pydmd/integration/types.js';
 
 // --- Fixtures ---
 

@@ -17,7 +17,7 @@ import type { SkillPosition, ChordCandidate } from './types.js';
 import { composePositions, classifyByVersine, getPromotionLevel, arcDistance, chordLength } from './arithmetic.js';
 import { ChordDetector, assessCompositionQuality, determineAction } from './chords.js';
 import type { PositionStorePort, ChordEvaluation } from './chords.js';
-import type { SkillCluster } from '../agents/cluster-detector.js';
+import type { SkillCluster } from '../../agents/cluster-detector.js';
 
 // ============================================================================
 // Interfaces

@@ -5,9 +5,9 @@ import type { ScoredSkill } from '../../core/types/application.js';
 import type { AdaptiveRouter } from '../../retrieval/adaptive-router.js';
 import type { EmbeddingService } from '../../embeddings/embedding-service.js';
 import { cosineSimilarity } from '../../embeddings/cosine-similarity.js';
-import type { SkillPosition } from '../../plane/types.js';
-import type { PlaneActivationConfig } from '../../plane/activation.js';
-import { analyzeTask, computeEnhancedScore, DEFAULT_PLANE_ACTIVATION_CONFIG } from '../../plane/activation.js';
+import type { SkillPosition } from '../../packs/plane/types.js';
+import type { PlaneActivationConfig } from '../../packs/plane/activation.js';
+import { analyzeTask, computeEnhancedScore, DEFAULT_PLANE_ACTIVATION_CONFIG } from '../../packs/plane/activation.js';
 
 /** Lookup function for skill positions. Returns null for skills without plane data. */
 export type PositionLookup = (skillName: string) => SkillPosition | null;

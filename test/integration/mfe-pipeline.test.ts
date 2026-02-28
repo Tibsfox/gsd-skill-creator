@@ -28,18 +28,18 @@ import type {
   CompositionPath,
   CompositionStep,
 } from '../../src/core/types/mfe-types.js';
-import type { PlaneClassification, DomainActivation } from '../../src/engines/plane-classifier.js';
-import type { NavigationResult, NearbyPrimitive } from '../../src/engines/plane-navigator.js';
+import type { PlaneClassification, DomainActivation } from '../../src/packs/engines/plane-classifier.js';
+import type { NavigationResult, NearbyPrimitive } from '../../src/packs/engines/plane-navigator.js';
 
 // === Module-level mocks ===
 // classifyProblem and navigatePlane load domain-index.json at module init,
 // so they must be mocked before any import of modules that depend on them.
 
-vi.mock('../../src/engines/plane-classifier.js', () => ({
+vi.mock('../../src/packs/engines/plane-classifier.js', () => ({
   classifyProblem: vi.fn(),
 }));
 
-vi.mock('../../src/engines/plane-navigator.js', () => ({
+vi.mock('../../src/packs/engines/plane-navigator.js', () => ({
   navigatePlane: vi.fn(),
 }));
 
@@ -53,10 +53,10 @@ vi.mock('../../src/integration/mfe-skill-type.js', async (importOriginal) => {
 });
 
 // Import after mocking
-import { classifyProblem } from '../../src/engines/plane-classifier.js';
-import { navigatePlane } from '../../src/engines/plane-navigator.js';
-import { CompositionEngine } from '../../src/engines/composition-engine.js';
-import { verifyCompositionPath } from '../../src/engines/verification-engine.js';
+import { classifyProblem } from '../../src/packs/engines/plane-classifier.js';
+import { navigatePlane } from '../../src/packs/engines/plane-navigator.js';
+import { CompositionEngine } from '../../src/packs/engines/composition-engine.js';
+import { verifyCompositionPath } from '../../src/packs/engines/verification-engine.js';
 import { MfeScoreHook, MfeBudgetHook, MFE_BUDGET_PERCENT } from '../../src/integration/pipeline-hooks.js';
 import { MfeSkillType, detectMathematicalStructure } from '../../src/integration/mfe-skill-type.js';
 import { createObservationFeed } from '../../src/integration/observation-feed.js';

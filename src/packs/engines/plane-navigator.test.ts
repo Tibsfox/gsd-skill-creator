@@ -7,7 +7,7 @@ import { describe, it, expect } from 'vitest';
 import { navigatePlane } from './plane-navigator.js';
 import type { NavigationResult, NearbyPrimitive, DecompositionStrategy } from './plane-navigator.js';
 import type { PlaneClassification, DomainActivation } from './plane-classifier.js';
-import type { DomainId, PlanePosition } from '../core/types/mfe-types.js';
+import type { DomainId, PlanePosition } from '../../core/types/mfe-types.js';
 
 // === Test helpers ===
 

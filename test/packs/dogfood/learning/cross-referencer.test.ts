@@ -3,9 +3,9 @@ import {
   crossReference,
   buildDefaultEcosystemIndex,
   type EcosystemDocIndex,
-} from '../../../../src/dogfood/learning/cross-referencer.js';
-import type { LearnedConcept } from '../../../../src/dogfood/learning/types.js';
-import { INITIAL_RADIUS } from '../../../../src/dogfood/learning/types.js';
+} from '../../../../src/packs/dogfood/learning/cross-referencer.js';
+import type { LearnedConcept } from '../../../../src/packs/dogfood/learning/types.js';
+import { INITIAL_RADIUS } from '../../../../src/packs/dogfood/learning/types.js';
 
 // --- Factories ---
 

@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
-import { MetricsCollector } from '../../../../src/dogfood/harness/metrics-collector.js';
-import type { ChapterMetrics } from '../../../../src/dogfood/harness/types.js';
+import { MetricsCollector } from '../../../../src/packs/dogfood/harness/metrics-collector.js';
+import type { ChapterMetrics } from '../../../../src/packs/dogfood/harness/types.js';
 
 function createChapterMetrics(
   overrides: Partial<ChapterMetrics> = {},

@@ -161,7 +161,7 @@ describe('Chapter 15: Physics Constants and Dimensional Analysis — Computation
       }
     });
 
-    // Platform connection: dimensionless thresholds in src/plane/types.ts
+    // Platform connection: dimensionless thresholds in src/packs/plane/types.ts
     test('platform: PROMOTION_THRESHOLD and MAX_ANGULAR_VELOCITY are dimensionless (ratio type)', () => {
       const PROMOTION_THRESHOLD = 0.7;
       const MAX_ANGULAR_VELOCITY = 0.2;

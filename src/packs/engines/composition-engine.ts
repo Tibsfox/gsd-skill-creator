@@ -11,7 +11,7 @@ import type {
   CompositionStep,
   CompositionType,
   DomainId,
-} from '../core/types/mfe-types.js';
+} from '../../core/types/mfe-types.js';
 
 // === Dependency Graph Port ===
 // Interface for dependency graph queries. Phase 339 provides the real

@@ -4,7 +4,7 @@ import {
   extractMathExpressions,
   detectCrossRefs,
   tagMusiXTeX,
-} from '../../../../src/dogfood/extraction/section-parser.js';
+} from '../../../../src/packs/dogfood/extraction/section-parser.js';
 
 // --- Helpers ---
 

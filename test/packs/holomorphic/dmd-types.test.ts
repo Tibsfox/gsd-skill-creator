@@ -5,7 +5,7 @@ import type {
   DMDEigenvalueClassification,
   DMDConstraints,
   KoopmanObservable,
-} from '../../../src/holomorphic/dmd/types';
+} from '../../../src/packs/holomorphic/dmd/types';
 
 /* ------------------------------------------------------------------ */
 /*  DMD and Koopman — Shared Types                                      */

@@ -9,7 +9,7 @@
 // Domain definitions loaded from data/domain-index.json at module init.
 
 import { createRequire } from 'node:module';
-import type { PlanePosition, DomainId, DomainDefinition } from '../core/types/mfe-types.js';
+import type { PlanePosition, DomainId, DomainDefinition } from '../../core/types/mfe-types.js';
 
 // === Public types ===
 
@@ -29,7 +29,7 @@ export interface PlaneClassification {
 // === Domain index loading ===
 
 const require = createRequire(import.meta.url);
-const domainIndex: { domains: DomainDefinition[] } = require('../../data/domain-index.json');
+const domainIndex: { domains: DomainDefinition[] } = require('../../../data/domain-index.json');
 
 // === Stop words ===
 

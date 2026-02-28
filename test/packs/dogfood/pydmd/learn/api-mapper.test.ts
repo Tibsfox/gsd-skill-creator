@@ -5,13 +5,13 @@ import {
   type AnalyzedAPIMethod,
   type APIProperty,
   type APIParameter,
-} from '../../../../../src/dogfood/pydmd/learn/api-mapper.js';
+} from '../../../../../src/packs/dogfood/pydmd/learn/api-mapper.js';
 import type {
   AnalyzedClassNode,
   AnalyzedModuleNode,
   MethodInfo,
   ParameterInfo,
-} from '../../../../../src/dogfood/pydmd/learn/structure-analyzer.js';
+} from '../../../../../src/packs/dogfood/pydmd/learn/structure-analyzer.js';
 
 // --- Factories ---
 

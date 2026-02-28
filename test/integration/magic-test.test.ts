@@ -25,12 +25,12 @@ import type {
   DomainId,
   CompositionPath,
 } from '../../src/core/types/mfe-types.js';
-import type { PlaneClassification } from '../../src/engines/plane-classifier.js';
+import type { PlaneClassification } from '../../src/packs/engines/plane-classifier.js';
 
 // === Module-level mocks ===
 // classifyProblem and navigatePlane load domain-index.json at module init.
 
-vi.mock('../../src/engines/plane-classifier.js', () => ({
+vi.mock('../../src/packs/engines/plane-classifier.js', () => ({
   classifyProblem: vi.fn(),
 }));
 
@@ -45,11 +45,11 @@ vi.mock('../../src/integration/mfe-skill-type.js', async (importOriginal) => {
 });
 
 // Import after mocking
-import { classifyProblem } from '../../src/engines/plane-classifier.js';
+import { classifyProblem } from '../../src/packs/engines/plane-classifier.js';
 import { detectMathematicalStructure } from '../../src/integration/mfe-skill-type.js';
-import { CompositionEngine } from '../../src/engines/composition-engine.js';
-import { ProofComposer } from '../../src/engines/proof-composer.js';
-import type { ProofChain, ProofStep } from '../../src/engines/proof-composer.js';
+import { CompositionEngine } from '../../src/packs/engines/composition-engine.js';
+import { ProofComposer } from '../../src/packs/engines/proof-composer.js';
+import type { ProofChain, ProofStep } from '../../src/packs/engines/proof-composer.js';
 import { MfeScoreHook, MfeBudgetHook } from '../../src/integration/pipeline-hooks.js';
 import { MfeSkillType } from '../../src/integration/mfe-skill-type.js';
 import { generateDomainSkill } from '../../src/integration/domain-skill-generator.js';

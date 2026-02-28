@@ -238,7 +238,7 @@ describe('Chapter 17: Quantum Mechanics — Computational Verification', () => {
       // MAX_ANGULAR_VELOCITY = 0.2 is the fundamental lower bound on angular step size
       // Analogous to ħ/2: a skill with high positional precision (narrow θ range)
       // can only change its angle by at most MAX_ANGULAR_VELOCITY per cycle
-      const MAX_ANGULAR_VELOCITY = 0.2; // from src/plane/observer-bridge.ts
+      const MAX_ANGULAR_VELOCITY = 0.2; // from src/packs/plane/observer-bridge.ts
       // The clamping enforces: Δθ_step ≤ MAX_ANGULAR_VELOCITY
       // For a skill at theta with step Δω:
       const proposedStep = 0.35; // exceeds the bound

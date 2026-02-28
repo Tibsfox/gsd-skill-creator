@@ -8,11 +8,11 @@ import type {
   APIMethod,
   TutorialSummary,
   Connection,
-} from '../../../../../src/dogfood/pydmd/types.js';
-import type { GeneratedSkill } from '../../../../../src/dogfood/pydmd/generate/types.js';
-import type { ReplayReport, ReplayResult } from '../../../../../src/dogfood/pydmd/validate/types.js';
-import { replayTutorials } from '../../../../../src/dogfood/pydmd/validate/tutorial-replay.js';
-import { computeOverallScore, computeReplayScore } from '../../../../../src/dogfood/pydmd/validate/scoring.js';
+} from '../../../../../src/packs/dogfood/pydmd/types.js';
+import type { GeneratedSkill } from '../../../../../src/packs/dogfood/pydmd/generate/types.js';
+import type { ReplayReport, ReplayResult } from '../../../../../src/packs/dogfood/pydmd/validate/types.js';
+import { replayTutorials } from '../../../../../src/packs/dogfood/pydmd/validate/tutorial-replay.js';
+import { computeOverallScore, computeReplayScore } from '../../../../../src/packs/dogfood/pydmd/validate/scoring.js';
 
 // --- Factory functions ---
 

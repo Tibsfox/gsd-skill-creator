@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import type { HealthCheckConfig, HealthReport, VenvResult } from '../../../../../src/dogfood/pydmd/types.js';
-import type { CommandExecutor } from '../../../../../src/dogfood/pydmd/install/venv-manager.js';
-import { runHealthCheck } from '../../../../../src/dogfood/pydmd/install/health-check.js';
+import type { HealthCheckConfig, HealthReport, VenvResult } from '../../../../../src/packs/dogfood/pydmd/types.js';
+import type { CommandExecutor } from '../../../../../src/packs/dogfood/pydmd/install/venv-manager.js';
+import { runHealthCheck } from '../../../../../src/packs/dogfood/pydmd/install/health-check.js';
 
 // --- Factories ---
 

@@ -5,9 +5,9 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { mergeDatabases } from '../../../../src/dogfood/learning/database-merger.js';
-import type { LearnedConcept, EcosystemMapping } from '../../../../src/dogfood/learning/types.js';
-import { INITIAL_RADIUS } from '../../../../src/dogfood/learning/types.js';
+import { mergeDatabases } from '../../../../src/packs/dogfood/learning/database-merger.js';
+import type { LearnedConcept, EcosystemMapping } from '../../../../src/packs/dogfood/learning/types.js';
+import { INITIAL_RADIUS } from '../../../../src/packs/dogfood/learning/types.js';
 
 // --- Helpers ---
 

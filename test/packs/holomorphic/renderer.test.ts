@@ -7,8 +7,8 @@ import {
   renderMandelbrot,
   renderJulia,
   applyZoom,
-} from '../../../src/holomorphic/renderer/core';
-import type { RGB } from '../../../src/holomorphic/types';
+} from '../../../src/packs/holomorphic/renderer/core';
+import type { RGB } from '../../../src/packs/holomorphic/types';
 
 /* ------------------------------------------------------------------ */
 /*  Fractal Renderer Core                                               */

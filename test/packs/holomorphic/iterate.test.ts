@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import type { ComplexNumber } from '../../../src/holomorphic/types';
-import { mul, add, magnitude } from '../../../src/holomorphic/complex/arithmetic';
+import type { ComplexNumber } from '../../../src/packs/holomorphic/types';
+import { mul, add, magnitude } from '../../../src/packs/holomorphic/complex/arithmetic';
 import {
   computeOrbit,
   detectPeriod,
   computeMultiplier,
   classifyFixedPoint,
   isRationalMultipleOfPi,
-} from '../../../src/holomorphic/complex/iterate';
+} from '../../../src/packs/holomorphic/complex/iterate';
 
 /* ------------------------------------------------------------------ */
 /*  Iteration engine tests                                              */
