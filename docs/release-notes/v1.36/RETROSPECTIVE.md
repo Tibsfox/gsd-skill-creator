@@ -25,7 +25,7 @@
 ### What Was Inefficient
 - **gsd-tools milestone complete bugs still persist**: Same issues as v1.35 — wrong phase/plan counts, wrong accomplishments, wrong insertion order. Manual fixup again required
 - **Roadmap plan-count tracking stale**: Phases 353, 354, 358 show partial counts ("1/2", "1/3") in archived roadmap despite all plans being complete — the ROADMAP wasn't fully updated before archival
-- **Gitignore collision**: Phase 357-02 was blocked by an anchored `/dashboard/` pattern in .gitignore that matched `src/citations/dashboard/`. Auto-fixed but avoidable with more specific gitignore patterns from the start
+- **Gitignore collision**: Phase 357-02 was blocked by an anchored `/dashboard/` pattern in .gitignore that matched `src/packs/citations/dashboard/`. Auto-fixed but avoidable with more specific gitignore patterns from the start
 - **No v1.36 retrospective written before archival**: v1.36 shipped and archived without updating RETROSPECTIVE.md, requiring retroactive reconstruction from commit history and phase summaries
 
 ### Patterns Established

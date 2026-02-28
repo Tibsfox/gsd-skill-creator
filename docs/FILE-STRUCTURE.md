@@ -21,7 +21,7 @@ gsd-skill-creator/
 │   └── schemas/         JSON schemas (DACP, primitive registry)
 ├── desktop/             Vite webview frontend (Tauri v2)
 ├── dist/                Build output (gitignored)
-├── docs/                Documentation (47+ markdown files)
+├── docs/                Documentation (158+ markdown files)
 ├── examples/            Example skills, agents, and teams
 ├── extra/               Linux system integration files
 │   ├── completions/     Shell completions (bash, zsh, fish)
@@ -46,15 +46,96 @@ gsd-skill-creator/
 │   ├── serve-dashboard.mjs
 │   └── ...              Check/validation scripts
 ├── skills/              Published/distributable Claude skill packs (domain knowledge, installable by users)
-├── src/                 TypeScript library + CLI (72 modules)
-│   ├── fs/              Filesystem utilities (config, XDG, scaffold, etc.)
-│   └── ...              70+ domain modules
+├── src/                 TypeScript library + CLI (domain-grouped)
+│   ├── core/            Core infrastructure
+│   │   ├── types/       Type definitions and schemas
+│   │   ├── utils/       Shared utilities
+│   │   ├── fs/          Filesystem utilities (config, XDG, scaffold)
+│   │   ├── events/      Event system
+│   │   ├── hooks/       Lifecycle hooks
+│   │   ├── storage/     Persistence layer (skill-store, pattern-store)
+│   │   ├── validation/  Validation logic
+│   │   ├── safety/      Safety constraints
+│   │   └── security/    Security boundaries
+│   ├── packs/           Educational and domain packs
+│   │   ├── agc/         Apollo Guidance Computer simulator
+│   │   ├── citations/   Citation management and attribution
+│   │   ├── dogfood/     sc:learn dogfood pipeline
+│   │   ├── electronics-pack/  Electronics educational pack
+│   │   ├── engines/     Mathematical foundations engine
+│   │   ├── holomorphic/ Holomorphic dynamics and DMD
+│   │   ├── knowledge/   Knowledge modules
+│   │   └── plane/       Complex plane learning framework
+│   ├── tools/           CLI and developer tools
+│   │   ├── catalog/     Script catalog
+│   │   ├── cli/         CLI framework
+│   │   ├── commands/    CLI command implementations
+│   │   ├── git/         Git integration
+│   │   ├── interpreter/ Interpreter modules
+│   │   ├── learn/       sc:learn pipeline
+│   │   ├── mcp/         MCP host integration
+│   │   └── vtm/         Vision-to-mission pipeline
+│   ├── platform/        Platform services and UI
+│   │   ├── calibration/ Threshold calibration
+│   │   ├── console/     Console UI
+│   │   ├── dashboard/   Live planning dashboard
+│   │   ├── observation/ Session observation
+│   │   ├── retro/       Retrospective tooling
+│   │   ├── staging/     Staging pipeline
+│   │   └── terminal/    Terminal integration
+│   ├── services/        Agent orchestration and services
+│   │   ├── agents/      Agent generation and management
+│   │   ├── brainstorm/  Brainstorm session support
+│   │   ├── chipset/     AMIGA chipset model
+│   │   ├── detection/   Pattern detection (n-gram, DBSCAN)
+│   │   ├── discovery/   Skill discovery
+│   │   ├── orchestrator/ Multi-agent orchestration
+│   │   ├── teams/       Team generation and coordination
+│   │   └── workflows/   Skill workflow engine
+│   ├── integrations/    External system integrations
+│   │   ├── amiga/       AMIGA coprocessor protocol
+│   │   ├── aminet/      Aminet package network
+│   │   ├── cloud-ops/   Cloud operations (OpenStack)
+│   │   ├── dacp/        Deterministic agent communication
+│   │   ├── den/         Den modules
+│   │   ├── site/        Static site generation
+│   │   └── upstream/    Upstream intelligence
+│   ├── activation/      Skill activation engine
+│   ├── application/     Application lifecycle
+│   ├── bundles/         Bundle management
+│   ├── capabilities/    Capability declarations
+│   ├── components/      Component system
+│   ├── composition/     Skill composition
+│   ├── conflicts/       Conflict resolution
+│   ├── disclosure/      Progressive disclosure
+│   ├── embeddings/      Embedding cache and similarity
+│   ├── evaluator/       Skill evaluation
+│   ├── identifiers/     Name and ID management
+│   ├── initialization/  Init and bootstrap
+│   ├── integration/     Integration helpers (singular)
+│   ├── launcher/        Process launcher
+│   ├── learning/        Learning engine
+│   ├── portability/     Cross-platform export
+│   ├── retrieval/       Skill retrieval
+│   ├── roles/           Role definitions
+│   ├── simulation/      Activation simulation
+│   ├── skill-workflows/ Workflow definitions
+│   ├── styles/          Style system
+│   ├── test/            Test utilities
+│   ├── testing/         Test framework
+│   ├── cli.ts           CLI entry point
+│   └── index.ts         Library barrel export
 ├── src-tauri/           Rust backend (Tauri v2)
 │   └── src/             Rust source (api, security, xdg, etc.)
-├── test/                Test suites (14 directories)
+├── test/                Test suites (domain-grouped, mirrors src/)
+│   ├── core/            Core module tests
+│   ├── packs/           Pack module tests
+│   ├── tools/           Tool module tests
+│   ├── platform/        Platform module tests
+│   ├── services/        Service module tests
+│   ├── integrations/    Integration module tests
 │   ├── proofs/          Proof verification tests (9 part directories + helpers/)
 │   └── fixtures/        Test fixture data
-├── tests/               Legacy test directory (integration, chipset, security)
 └── www/                 Web staging (site, tools)
 ```
 
@@ -90,7 +171,7 @@ gsd-skill-creator/
 ## Key Conventions
 
 - **Strict boundary:** `src/` never imports from `desktop/` or `@tauri-apps/api`; `desktop/` never imports Node.js modules
-- **XDG compliance:** Runtime paths use `src/fs/xdg.ts` (TypeScript) and `src-tauri/src/xdg.rs` (Rust)
+- **XDG compliance:** Runtime paths use `src/core/fs/xdg.ts` (TypeScript) and `src-tauri/src/xdg.rs` (Rust)
 - **Alacritty model:** `extra/` contains all Linux integration files following the Alacritty packaging pattern
 - **FHS compliance:** `packaging/` definitions install to standard Linux filesystem paths
 - **Static data:** All static data files (schemas, chipset definitions, domain data) live under `data/`

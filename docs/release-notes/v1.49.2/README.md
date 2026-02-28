@@ -12,10 +12,10 @@ Major bugfix release wiring GSD-OS desktop indicators and resolving 219 TypeScri
 
 ### TypeScript Fixes (219 errors → 0)
 
-- **Missing `.js` extensions (167 errors):** Added `.js` extensions to 114 relative imports across 34 files in `src/holomorphic/` and `src/upstream/`
-- **Missing `.js` extensions in site (21 files):** Fixed extensionless imports in `src/site/`, including barrel imports requiring `/index.js`
+- **Missing `.js` extensions (167 errors):** Added `.js` extensions to 114 relative imports across 34 files in `src/packs/holomorphic/` and `src/integrations/upstream/`
+- **Missing `.js` extensions in site (21 files):** Fixed extensionless imports in `src/integrations/site/`, including barrel imports requiring `/index.js`
 - **Chat pipeline casts (3 errors):** Fixed type casts in `desktop/src/pipeline/chat-pipeline.ts` by casting through `unknown`
-- **Dogfood import paths (5 errors):** Fixed `../../types` → `../types` in `src/dogfood/pydmd/learn/`
+- **Dogfood import paths (5 errors):** Fixed `../../types` → `../types` in `src/packs/dogfood/pydmd/learn/`
 - **Implicit `any` parameters (18 errors):** Added type annotations across holomorphic, site, and dogfood modules
 - **Ajv ESM/CJS interop:** Fixed constructor usage with `.default` fallback pattern
 - **DACP analyze types:** Fixed type mismatches in `dacp-analyze.ts`
