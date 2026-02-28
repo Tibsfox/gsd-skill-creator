@@ -12,7 +12,7 @@ import {
   formatValidationQuiet,
   formatValidationJson,
 } from './team-validate.js';
-import type { TeamFullValidationResult } from '../../../teams/index.js';
+import type { TeamFullValidationResult } from '../../../services/teams/index.js';
 
 // ============================================================================
 // Helper: build a TeamFullValidationResult

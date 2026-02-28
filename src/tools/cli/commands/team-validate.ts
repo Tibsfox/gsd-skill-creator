@@ -16,12 +16,12 @@ import {
   TeamStore,
   getTeamsBasePath,
   validateTeamFull,
-} from '../../../teams/index.js';
+} from '../../../services/teams/index.js';
 import type {
   TeamFullValidationResult,
   MemberResolutionResult,
-} from '../../../teams/index.js';
-import type { TeamScope } from '../../../teams/team-store.js';
+} from '../../../services/teams/index.js';
+import type { TeamScope } from '../../../services/teams/team-store.js';
 
 // ============================================================================
 // Formatting Functions (tested by team-validate.test.ts)

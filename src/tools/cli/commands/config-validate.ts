@@ -15,8 +15,8 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { readFile } from 'fs/promises';
-import { validateConfig } from '../../../orchestrator/state/config-validator.js';
-import type { ConfigValidationResult, ConfigIssue } from '../../../orchestrator/state/config-validator.js';
+import { validateConfig } from '../../../services/orchestrator/state/config-validator.js';
+import type { ConfigValidationResult, ConfigIssue } from '../../../services/orchestrator/state/config-validator.js';
 
 /** Default config file path. */
 const DEFAULT_CONFIG_PATH = '.planning/config.json';

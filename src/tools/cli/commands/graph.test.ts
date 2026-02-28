@@ -51,14 +51,14 @@ vi.mock('../../../core/storage/skill-store.js', () => ({
 }));
 
 // Mock CoActivationTracker
-vi.mock('../../../agents/co-activation-tracker.js', () => ({
+vi.mock('../../../services/agents/co-activation-tracker.js', () => ({
   CoActivationTracker: vi.fn().mockImplementation(() => ({
     analyze: vi.fn().mockReturnValue([]),
   })),
 }));
 
 // Mock ClusterDetector
-vi.mock('../../../agents/cluster-detector.js', () => ({
+vi.mock('../../../services/agents/cluster-detector.js', () => ({
   ClusterDetector: vi.fn().mockImplementation(() => ({
     detect: vi.fn().mockReturnValue([]),
   })),

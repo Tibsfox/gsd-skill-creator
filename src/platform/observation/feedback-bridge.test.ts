@@ -4,8 +4,8 @@ import { join } from 'path';
 import * as os from 'os';
 import { createHash } from 'crypto';
 import { PatternStore } from '../../core/storage/pattern-store.js';
-import { SignalBus, createCompletionSignal } from '../../chipset/blitter/signals.js';
-import type { OffloadResult, CompletionSignal } from '../../chipset/blitter/types.js';
+import { SignalBus, createCompletionSignal } from '../../services/chipset/blitter/signals.js';
+import type { OffloadResult, CompletionSignal } from '../../services/chipset/blitter/types.js';
 import { FeedbackBridge } from './feedback-bridge.js';
 
 function makeResult(overrides: Partial<OffloadResult> = {}): OffloadResult {

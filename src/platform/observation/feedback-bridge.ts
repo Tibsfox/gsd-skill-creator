@@ -1,6 +1,6 @@
 import { createHash } from 'crypto';
-import { SignalBus } from '../../chipset/blitter/signals.js';
-import type { CompletionSignal } from '../../chipset/blitter/types.js';
+import { SignalBus } from '../../services/chipset/blitter/signals.js';
+import type { CompletionSignal } from '../../services/chipset/blitter/types.js';
 import { PatternStore } from '../../core/storage/pattern-store.js';
 
 /**

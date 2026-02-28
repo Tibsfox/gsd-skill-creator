@@ -2,7 +2,7 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { readdir, stat } from 'fs/promises';
 import { join } from 'path';
-import { migrateSkillWorkflow, type MigrationResult } from '../../../workflows/migrate-skill-workflow.js';
+import { migrateSkillWorkflow, type MigrationResult } from '../../../services/workflows/migrate-skill-workflow.js';
 import { isLegacyFlatFile } from '../../../core/validation/directory-validation.js';
 
 // ============================================================================
