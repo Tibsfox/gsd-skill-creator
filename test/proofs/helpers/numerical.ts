@@ -46,3 +46,8 @@ export function dot2D(
 export function mag2D(u: { x: number; y: number }): number {
   return Math.sqrt(u.x * u.x + u.y * u.y);
 }
+
+/** Numerical derivative via central difference (for Ch 8-10 tests). */
+export function numericalDerivative(f: (x: number) => number, x: number, h = 1e-7): number {
+  return (f(x + h) - f(x - h)) / (2 * h);
+}
