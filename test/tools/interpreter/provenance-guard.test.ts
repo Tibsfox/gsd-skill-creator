@@ -6,8 +6,8 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { validateProvenance, type ProvenanceResult } from '../../../src/interpreter/provenance-guard.js';
-import type { BundleScript } from '../../../src/interpreter/types.js';
+import { validateProvenance, type ProvenanceResult } from '../../../src/tools/interpreter/provenance-guard.js';
+import type { BundleScript } from '../../../src/tools/interpreter/types.js';
 import type { Provenance } from '../../../src/dacp/types.js';
 
 // ============================================================================

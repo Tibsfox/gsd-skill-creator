@@ -8,7 +8,7 @@ import {
   assertState,
   assertClean,
   isValidTransition,
-} from '../../../../src/git/core/state-machine.js';
+} from '../../../../src/tools/git/core/state-machine.js';
 
 // --- Helpers ---
 

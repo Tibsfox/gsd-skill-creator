@@ -12,12 +12,12 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
-import { analyzeDocument } from '../../src/learn/analyzer.js';
-import { extractPrimitives } from '../../src/learn/extractor.js';
-import type { CandidatePrimitive } from '../../src/learn/extractor.js';
-import { prefilterDuplicates } from '../../src/learn/dedup-prefilter.js';
-import { compareSemantically } from '../../src/learn/semantic-comparator.js';
-import type { SemanticClassification } from '../../src/learn/semantic-comparator.js';
+import { analyzeDocument } from '../../src/tools/learn/analyzer.js';
+import { extractPrimitives } from '../../src/tools/learn/extractor.js';
+import type { CandidatePrimitive } from '../../src/tools/learn/extractor.js';
+import { prefilterDuplicates } from '../../src/tools/learn/dedup-prefilter.js';
+import { compareSemantically } from '../../src/tools/learn/semantic-comparator.js';
+import type { SemanticClassification } from '../../src/tools/learn/semantic-comparator.js';
 import type { MathematicalPrimitive, DomainDefinition } from '../../src/core/types/mfe-types.js';
 
 // === Test data ===

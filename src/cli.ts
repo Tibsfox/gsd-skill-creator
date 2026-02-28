@@ -6,25 +6,25 @@ import { createStores, createApplicationContext } from './index.js';
 import { createSkillWorkflow } from './workflows/create-skill-workflow.js';
 import { listSkillsWorkflow, parseScopeFilter } from './workflows/list-skills-workflow.js';
 import { searchSkillsWorkflow } from './workflows/search-skills-workflow.js';
-import { migrateCommand } from './cli/commands/migrate.js';
-import { migrateAgentCommand, listAgentsInDir } from './cli/commands/migrate-agent.js';
+import { migrateCommand } from './tools/cli/commands/migrate.js';
+import { migrateAgentCommand, listAgentsInDir } from './tools/cli/commands/migrate-agent.js';
 import { validateAgentFrontmatter } from './core/validation/agent-validation.js';
-import { validateCommand } from './cli/commands/validate.js';
-import { detectConflictsCommand } from './cli/commands/detect-conflicts.js';
-import { scoreActivationCommand } from './cli/commands/score-activation.js';
-import { syncReservedCommand } from './cli/commands/sync-reserved.js';
-import { budgetCommand } from './cli/commands/budget.js';
-import { budgetEstimateCommand } from './cli/commands/budget-estimate.js';
-import { resolveCommand } from './cli/commands/resolve.js';
-import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
-import { testCommand } from './cli/commands/test.js';
-import { simulateCommand, simulateHelp } from './cli/commands/simulate.js';
-import { calibrateCommand, calibrateHelp } from './cli/commands/calibrate.js';
-import { mcpServerCommand } from './cli/commands/mcp-server.js';
-import { publishCommand } from './cli/commands/publish.js';
-import { installCommand } from './cli/commands/install.js';
-import { statusCommand } from './cli/commands/status.js';
-import { auditCommand } from './cli/commands/audit.js';
+import { validateCommand } from './tools/cli/commands/validate.js';
+import { detectConflictsCommand } from './tools/cli/commands/detect-conflicts.js';
+import { scoreActivationCommand } from './tools/cli/commands/score-activation.js';
+import { syncReservedCommand } from './tools/cli/commands/sync-reserved.js';
+import { budgetCommand } from './tools/cli/commands/budget.js';
+import { budgetEstimateCommand } from './tools/cli/commands/budget-estimate.js';
+import { resolveCommand } from './tools/cli/commands/resolve.js';
+import { reloadEmbeddingsCommand } from './tools/cli/commands/reload-embeddings.js';
+import { testCommand } from './tools/cli/commands/test.js';
+import { simulateCommand, simulateHelp } from './tools/cli/commands/simulate.js';
+import { calibrateCommand, calibrateHelp } from './tools/cli/commands/calibrate.js';
+import { mcpServerCommand } from './tools/cli/commands/mcp-server.js';
+import { publishCommand } from './tools/cli/commands/publish.js';
+import { installCommand } from './tools/cli/commands/install.js';
+import { statusCommand } from './tools/cli/commands/status.js';
+import { auditCommand } from './tools/cli/commands/audit.js';
 import { handleMigratePlaneCommand } from './packs/plane/migration.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
@@ -268,7 +268,7 @@ async function main() {
 
     case 'capabilities':
     case 'cap': {
-      const { capabilitiesCommand } = await import('./cli/commands/capabilities.js');
+      const { capabilitiesCommand } = await import('./tools/cli/commands/capabilities.js');
       const exitCode = await capabilitiesCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -276,7 +276,7 @@ async function main() {
 
     case 'compress-research':
     case 'cr': {
-      const { compressResearchCommand } = await import('./cli/commands/compress-research.js');
+      const { compressResearchCommand } = await import('./tools/cli/commands/compress-research.js');
       const exitCode = await compressResearchCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -284,7 +284,7 @@ async function main() {
 
     case 'generate-collector':
     case 'gc': {
-      const { generateCollectorCommand } = await import('./cli/commands/generate-collector.js');
+      const { generateCollectorCommand } = await import('./tools/cli/commands/generate-collector.js');
       const exitCode = await generateCollectorCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1051,7 +1051,7 @@ async function main() {
       switch (subcommand) {
         case 'create':
         case 'c': {
-          const { teamCreateCommand } = await import('./cli/commands/team-create.js');
+          const { teamCreateCommand } = await import('./tools/cli/commands/team-create.js');
           const exitCode = await teamCreateCommand(subArgs);
           if (exitCode !== 0) process.exit(exitCode);
           break;
@@ -1059,7 +1059,7 @@ async function main() {
 
         case 'list':
         case 'l': {
-          const { teamListCommand } = await import('./cli/commands/team-list.js');
+          const { teamListCommand } = await import('./tools/cli/commands/team-list.js');
           const exitCode = await teamListCommand(subArgs);
           if (exitCode !== 0) process.exit(exitCode);
           break;
@@ -1067,7 +1067,7 @@ async function main() {
 
         case 'validate':
         case 'v': {
-          const { teamValidateCommand } = await import('./cli/commands/team-validate.js');
+          const { teamValidateCommand } = await import('./tools/cli/commands/team-validate.js');
           const exitCode = await teamValidateCommand(subArgs);
           if (exitCode !== 0) process.exit(exitCode);
           break;
@@ -1075,7 +1075,7 @@ async function main() {
 
         case 'spawn':
         case 'sp': {
-          const { teamSpawnCommand } = await import('./cli/commands/team-spawn.js');
+          const { teamSpawnCommand } = await import('./tools/cli/commands/team-spawn.js');
           const exitCode = await teamSpawnCommand(subArgs);
           if (exitCode !== 0) process.exit(exitCode);
           break;
@@ -1083,7 +1083,7 @@ async function main() {
 
         case 'status':
         case 's': {
-          const { teamStatusCommand } = await import('./cli/commands/team-status.js');
+          const { teamStatusCommand } = await import('./tools/cli/commands/team-status.js');
           const exitCode = await teamStatusCommand(subArgs);
           if (exitCode !== 0) process.exit(exitCode);
           break;
@@ -1091,7 +1091,7 @@ async function main() {
 
         case 'estimate':
         case 'e': {
-          const { teamEstimateCommand } = await import('./cli/commands/team-estimate.js');
+          const { teamEstimateCommand } = await import('./tools/cli/commands/team-estimate.js');
           const exitCode = await teamEstimateCommand(subArgs);
           if (exitCode !== 0) process.exit(exitCode);
           break;
@@ -1105,7 +1105,7 @@ async function main() {
 
     case 'session':
     case 'sess': {
-      const { sessionCommand } = await import('./cli/commands/session.js');
+      const { sessionCommand } = await import('./tools/cli/commands/session.js');
       const exitCode = await sessionCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1113,7 +1113,7 @@ async function main() {
 
     case 'purge':
     case 'pg': {
-      const { purgeCommand } = await import('./cli/commands/purge.js');
+      const { purgeCommand } = await import('./tools/cli/commands/purge.js');
       const exitCode = await purgeCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1121,7 +1121,7 @@ async function main() {
 
     case 'discover':
     case 'disc': {
-      const { discoverCommand } = await import('./cli/commands/discover.js');
+      const { discoverCommand } = await import('./tools/cli/commands/discover.js');
       const exitCode = await discoverCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1129,7 +1129,7 @@ async function main() {
 
     case 'orchestrator':
     case 'orch': {
-      const { orchestratorCommand } = await import('./cli/commands/orchestrator.js');
+      const { orchestratorCommand } = await import('./tools/cli/commands/orchestrator.js');
       const exitCode = await orchestratorCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1137,7 +1137,7 @@ async function main() {
 
     case 'workflow':
     case 'wf': {
-      const { workflowCommand } = await import('./cli/commands/workflow.js');
+      const { workflowCommand } = await import('./tools/cli/commands/workflow.js');
       const exitCode = await workflowCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1145,7 +1145,7 @@ async function main() {
 
     case 'role':
     case 'rl': {
-      const { roleCommand } = await import('./cli/commands/role.js');
+      const { roleCommand } = await import('./tools/cli/commands/role.js');
       const exitCode = await roleCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1153,7 +1153,7 @@ async function main() {
 
     case 'bundle':
     case 'bd': {
-      const { bundleCommand } = await import('./cli/commands/bundle.js');
+      const { bundleCommand } = await import('./tools/cli/commands/bundle.js');
       const exitCode = await bundleCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1161,7 +1161,7 @@ async function main() {
 
     case 'event':
     case 'ev': {
-      const { eventCommand } = await import('./cli/commands/event.js');
+      const { eventCommand } = await import('./tools/cli/commands/event.js');
       const exitCode = await eventCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1169,7 +1169,7 @@ async function main() {
 
     case 'quality':
     case 'q': {
-      const { qualityCommand } = await import('./cli/commands/quality.js');
+      const { qualityCommand } = await import('./tools/cli/commands/quality.js');
       const exitCode = await qualityCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1182,7 +1182,7 @@ async function main() {
 
       // If subcommand is a known sub (validate, show), pass from args[1] onward
       // If it's a flag (--help, --json), pass all args after 'integration'
-      const { integrationConfigCommand } = await import('./cli/commands/integration-config.js');
+      const { integrationConfigCommand } = await import('./tools/cli/commands/integration-config.js');
       const exitCode = await integrationConfigCommand(subArgs);
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1196,7 +1196,7 @@ async function main() {
       switch (subcommand) {
         case 'validate':
         case 'v': {
-          const { configValidateCommand } = await import('./cli/commands/config-validate.js');
+          const { configValidateCommand } = await import('./tools/cli/commands/config-validate.js');
           const exitCode = await configValidateCommand(subArgs);
           if (exitCode !== 0) process.exit(exitCode);
           break;
@@ -1219,7 +1219,7 @@ async function main() {
 
     case 'graph':
     case 'gr': {
-      const { graphCommand } = await import('./cli/commands/graph.js');
+      const { graphCommand } = await import('./tools/cli/commands/graph.js');
       const exitCode = await graphCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1227,7 +1227,7 @@ async function main() {
 
     case 'impact':
     case 'imp': {
-      const { impactCommand } = await import('./cli/commands/impact.js');
+      const { impactCommand } = await import('./tools/cli/commands/impact.js');
       const exitCode = await impactCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1235,7 +1235,7 @@ async function main() {
 
     case 'dashboard':
     case 'db': {
-      const { dashboardCommand } = await import('./cli/commands/dashboard.js');
+      const { dashboardCommand } = await import('./tools/cli/commands/dashboard.js');
       const exitCode = await dashboardCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1286,7 +1286,7 @@ async function main() {
 
     case 'export':
     case 'ex': {
-      const { exportCommand } = await import('./cli/commands/export.js');
+      const { exportCommand } = await import('./tools/cli/commands/export.js');
       const scope = parseScope(args);
       const portable = args.includes('--portable');
       const platformArg = args.find(a => a.startsWith('--platform='));
@@ -1314,7 +1314,7 @@ async function main() {
 
     case 'advise-parallelization':
     case 'ap': {
-      const { adviseParallelizationCommand } = await import('./cli/commands/advise-parallelization.js');
+      const { adviseParallelizationCommand } = await import('./tools/cli/commands/advise-parallelization.js');
       const exitCode = await adviseParallelizationCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1322,7 +1322,7 @@ async function main() {
 
     case 'terminal':
     case 'term': {
-      const { terminalCommand } = await import('./cli/commands/terminal.js');
+      const { terminalCommand } = await import('./tools/cli/commands/terminal.js');
       const exitCode = await terminalCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1330,7 +1330,7 @@ async function main() {
 
     case 'plane-status':
     case 'ps': {
-      const { planeStatusCommand } = await import('./cli/commands/plane-status.js');
+      const { planeStatusCommand } = await import('./tools/cli/commands/plane-status.js');
       const exitCode = await planeStatusCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1344,7 +1344,7 @@ async function main() {
       switch (subcommand) {
         case 'status':
         case 's': {
-          const { dacpStatusCommand } = await import('./cli/commands/dacp-status.js');
+          const { dacpStatusCommand } = await import('./tools/cli/commands/dacp-status.js');
           const exitCode = await dacpStatusCommand(subArgs);
           if (exitCode !== 0) process.exit(exitCode);
           break;
@@ -1352,7 +1352,7 @@ async function main() {
 
         case 'set-level':
         case 'sl': {
-          const { dacpSetLevelCommand } = await import('./cli/commands/dacp-set-level.js');
+          const { dacpSetLevelCommand } = await import('./tools/cli/commands/dacp-set-level.js');
           const exitCode = await dacpSetLevelCommand(subArgs);
           if (exitCode !== 0) process.exit(exitCode);
           break;
@@ -1360,7 +1360,7 @@ async function main() {
 
         case 'history':
         case 'h': {
-          const { dacpHistoryCommand } = await import('./cli/commands/dacp-history.js');
+          const { dacpHistoryCommand } = await import('./tools/cli/commands/dacp-history.js');
           const exitCode = await dacpHistoryCommand(subArgs);
           if (exitCode !== 0) process.exit(exitCode);
           break;
@@ -1368,7 +1368,7 @@ async function main() {
 
         case 'analyze':
         case 'a': {
-          const { dacpAnalyzeCommand } = await import('./cli/commands/dacp-analyze.js');
+          const { dacpAnalyzeCommand } = await import('./tools/cli/commands/dacp-analyze.js');
           const exitCode = await dacpAnalyzeCommand(subArgs);
           if (exitCode !== 0) process.exit(exitCode);
           break;
@@ -1376,7 +1376,7 @@ async function main() {
 
         case 'export-templates':
         case 'et': {
-          const { dacpExportTemplatesCommand } = await import('./cli/commands/dacp-export-templates.js');
+          const { dacpExportTemplatesCommand } = await import('./tools/cli/commands/dacp-export-templates.js');
           const exitCode = await dacpExportTemplatesCommand(subArgs);
           if (exitCode !== 0) process.exit(exitCode);
           break;
