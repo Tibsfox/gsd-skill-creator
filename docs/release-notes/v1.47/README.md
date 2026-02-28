@@ -53,7 +53,7 @@ A 10-module educational pack covering holomorphic dynamics, Dynamic Mode Decompo
 ## Architecture
 
 ```
-src/holomorphic/
+src/packs/holomorphic/
 ├── types.ts                    # Shared types and interfaces
 ├── complex/
 │   ├── arithmetic.ts           # Complex number operations

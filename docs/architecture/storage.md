@@ -28,16 +28,16 @@ Project-level skills take precedence over user-level skills with the same name. 
 
 | Data Type | Location | Format | Source File |
 |-----------|----------|--------|-------------|
-| Project skills | `.claude/skills/{name}/SKILL.md` | YAML frontmatter + markdown | [src/storage/skill-store.ts](../../src/storage/skill-store.ts) |
-| User skills | `~/.claude/skills/{name}/SKILL.md` | YAML frontmatter + markdown | [src/types/scope.ts](../../src/types/scope.ts) |
-| Skill index | `.claude/skills/.skill-index.json` | JSON | [src/storage/skill-index.ts](../../src/storage/skill-index.ts) |
-| Patterns | `.planning/patterns/{category}.jsonl` | JSONL | [src/storage/pattern-store.ts](../../src/storage/pattern-store.ts) |
+| Project skills | `.claude/skills/{name}/SKILL.md` | YAML frontmatter + markdown | [src/core/storage/skill-store.ts](../../src/core/storage/skill-store.ts) |
+| User skills | `~/.claude/skills/{name}/SKILL.md` | YAML frontmatter + markdown | [src/core/types/scope.ts](../../src/core/types/scope.ts) |
+| Skill index | `.claude/skills/.skill-index.json` | JSON | [src/core/storage/skill-index.ts](../../src/core/storage/skill-index.ts) |
+| Patterns | `.planning/patterns/{category}.jsonl` | JSONL | [src/core/storage/pattern-store.ts](../../src/core/storage/pattern-store.ts) |
 | Test cases | `.claude/skills/{name}/tests.json` | JSON | [src/testing/test-store.ts](../../src/testing/test-store.ts) |
-| Calibration events | `~/.gsd-skill/calibration/events.jsonl` | JSONL | [src/calibration/calibration-store.ts](../../src/calibration/calibration-store.ts) |
+| Calibration events | `~/.gsd-skill/calibration/events.jsonl` | JSONL | [src/platform/calibration/calibration-store.ts](../../src/platform/calibration/calibration-store.ts) |
 | Embedding cache | `~/.gsd-skill-creator/embeddings/cache.json` | JSON | [src/embeddings/embedding-cache.ts](../../src/embeddings/embedding-cache.ts) |
-| Threshold history | `~/.gsd-skill/calibration/thresholds.json` | JSON | [src/calibration/threshold-history.ts](../../src/calibration/threshold-history.ts) |
-| Project teams | `.claude/teams/{name}/config.json` | JSON | [src/teams/team-store.ts](../../src/teams/team-store.ts) |
-| User teams | `~/.claude/teams/{name}/config.json` | JSON | [src/teams/team-store.ts](../../src/teams/team-store.ts) |
+| Threshold history | `~/.gsd-skill/calibration/thresholds.json` | JSON | [src/platform/calibration/threshold-history.ts](../../src/platform/calibration/threshold-history.ts) |
+| Project teams | `.claude/teams/{name}/config.json` | JSON | [src/services/teams/team-store.ts](../../src/services/teams/team-store.ts) |
+| User teams | `~/.claude/teams/{name}/config.json` | JSON | [src/services/teams/team-store.ts](../../src/services/teams/team-store.ts) |
 
 ## File Formats
 

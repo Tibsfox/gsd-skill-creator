@@ -477,9 +477,9 @@ The following source files were audited for comment accuracy:
 
 | File | Status | Notes |
 |------|--------|-------|
-| `src/types/skill.ts` | Accurate | All @deprecated tags include migration path (e.g., "Use getExtension(metadata).triggers") |
-| `src/detection/skill-generator.ts` | Accurate | TODO comments in generated skills are intentional placeholders for user customization |
-| `src/storage/skill-store.ts` | Accurate | Migration behavior documented correctly; logs when migrating from legacy format |
+| `src/core/types/skill.ts` | Accurate | All @deprecated tags include migration path (e.g., "Use getExtension(metadata).triggers") |
+| `src/services/detection/skill-generator.ts` | Accurate | TODO comments in generated skills are intentional placeholders for user customization |
+| `src/core/storage/skill-store.ts` | Accurate | Migration behavior documented correctly; logs when migrating from legacy format |
 
 **Findings:**
 

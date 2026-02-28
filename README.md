@@ -221,10 +221,16 @@ npm test
 ### Architecture
 
 ```
-src/           TypeScript library (skill-creator CLI, dashboard, AMIGA, AGC, brainstorm)
-src-tauri/     Rust backend (PTY, file watcher, tmux, Claude sessions, MCP host, IPC)
-desktop/       Vite webview frontend (WebGL engine, desktop shell, terminal)
-infra/         Bash infrastructure (PXE, VM provisioning, Minecraft, runbooks)
+src/               TypeScript library (domain-grouped)
+  core/            Core infrastructure (types, utils, fs, events, hooks, storage, validation, safety, security)
+  packs/           Educational packs (AGC, citations, holomorphic, electronics, engines, knowledge, plane, dogfood)
+  tools/           CLI and dev tools (cli, commands, learn, git, mcp, vtm, interpreter, catalog)
+  platform/        Platform services (dashboard, console, terminal, staging, retro, observation, calibration)
+  services/        Agent orchestration (agents, teams, chipset, orchestrator, workflows, brainstorm, discovery, detection)
+  integrations/    External integrations (amiga, aminet, cloud-ops, dacp, den, site, upstream)
+src-tauri/         Rust backend (PTY, file watcher, tmux, Claude sessions, MCP host, IPC)
+desktop/           Vite webview frontend (WebGL engine, desktop shell, terminal)
+infra/             Bash infrastructure (PXE, VM provisioning, Minecraft, runbooks)
 ```
 
 Strict module boundaries: `src/` never imports `@tauri-apps/api`; `desktop/` never imports Node.js modules. All communication between Rust and the webview goes through Tauri IPC commands, events, and channels. `infra/` is self-contained bash scripts with no TypeScript dependencies.
