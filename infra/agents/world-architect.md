@@ -57,11 +57,11 @@ Choose world-architect over curriculum-designer when the intent is **spatial des
 - "Syncmatica", "build specification", "gateway design"
 
 **File patterns:**
-- `infra/world/world-layout.yaml`
-- `infra/world/districts/*.yaml`
-- `infra/world/schematics-catalog.yaml`
-- `infra/world/wayfinding-standards.md`
-- `infra/world/schematics/*.litematic`
+- `infra/worlds/world/world-layout.yaml`
+- `infra/worlds/world/districts/*.yaml`
+- `infra/worlds/world/schematics-catalog.yaml`
+- `infra/worlds/world/wayfinding-standards.md`
+- `infra/worlds/world/schematics/*.litematic`
 
 ## Skill Composition
 

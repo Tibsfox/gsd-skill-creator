@@ -29,22 +29,23 @@ gsd-skill-creator/
 │   ├── logo/            Logo assets (placeholder)
 │   ├── man/             Man pages in scdoc format
 │   └── systemd/         systemd user service unit
-├── infra/               Infrastructure configs
+├── assets/              Project media assets (Gource videos, diagrams)
+├── infra/               Infrastructure operations + game/emulation worlds (infra/worlds/)
 │   ├── dashboard/       Generated HTML dashboard (gitignored)
-│   ├── minecraft/       Minecraft knowledge world
-│   └── ...              17 other infrastructure subdirectories
+│   ├── worlds/          Game and emulation environments (Minecraft, etc.)
+│   └── ...              Other infrastructure subdirectories
 ├── packaging/           Distro packaging definitions
 │   ├── debian/          Debian source package (control, rules, etc.)
 │   └── rpm/             RPM spec file
-├── packs/               Educational pack catalog
+├── packs/               Staging workspace for pack release artifacts (source in src/)
 ├── project-claude/      Claude project config source (install.cjs)
-├── projects/            User workspace (gitignored)
+├── projects/            User workspace for GSD-managed projects (gitignored by default)
 ├── scripts/             Utility scripts
 │   ├── bin/             CLI wrappers (gsd-stack)
 │   ├── bootstrap.sh     Project bootstrap script
 │   ├── serve-dashboard.mjs
 │   └── ...              Check/validation scripts
-├── skills/              Installable skill packs (9 packs)
+├── skills/              Published/distributable Claude skill packs (domain knowledge, installable by users)
 ├── src/                 TypeScript library + CLI (72 modules)
 │   ├── fs/              Filesystem utilities (config, XDG, scaffold, etc.)
 │   └── ...              70+ domain modules
