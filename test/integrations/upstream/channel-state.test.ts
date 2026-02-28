@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import type { ChannelState } from '../../../src/upstream/types';
+import type { ChannelState } from '../../../src/integrations/upstream/types';
 import {
   saveChannelState,
   loadChannelState,
   loadAllChannelStates,
   updateHash,
   markChanged,
-} from '../../../src/upstream/channel-state';
-import type { ChannelStateDeps } from '../../../src/upstream/channel-state';
+} from '../../../src/integrations/upstream/channel-state';
+import type { ChannelStateDeps } from '../../../src/integrations/upstream/channel-state';
 
 /** Helper: build a minimal ChannelState */
 function makeState(overrides: Partial<ChannelState> = {}): ChannelState {

@@ -3,7 +3,7 @@ import {
   processMarkdown,
   resetCitationCounter,
   getCitationMap,
-} from '../../../src/site/markdown';
+} from '../../../src/integrations/site/markdown';
 
 describe('Markdown Processor', () => {
   beforeEach(() => {

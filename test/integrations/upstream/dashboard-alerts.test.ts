@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import type { DashboardAlert } from '../../../src/upstream/types';
+import type { DashboardAlert } from '../../../src/integrations/upstream/types';
 import {
   validateAlert,
   formatAlertForTerminal,
   aggregateAlerts,
   deduplicateAlerts,
-} from '../../../src/upstream/dashboard-alerts';
+} from '../../../src/integrations/upstream/dashboard-alerts';
 
 /** Helper: build a valid dashboard alert */
 function makeAlert(overrides: Partial<DashboardAlert> = {}): DashboardAlert {

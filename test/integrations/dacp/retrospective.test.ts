@@ -8,14 +8,14 @@
 
 import { describe, it, expect } from 'vitest';
 
-import { calculateDriftScore } from '../../../src/dacp/retrospective/drift.js';
+import { calculateDriftScore } from '../../../src/integrations/dacp/retrospective/drift.js';
 import {
   analyzePatterns,
   PROMOTION_THRESHOLD,
   DEMOTION_THRESHOLD,
   type HandoffOutcomeWithType,
-} from '../../../src/dacp/retrospective/analyzer.js';
-import type { HandoffOutcome, HandoffPattern, FidelityLevel } from '../../../src/dacp/types.js';
+} from '../../../src/integrations/dacp/retrospective/analyzer.js';
+import type { HandoffOutcome, HandoffPattern, FidelityLevel } from '../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Factories

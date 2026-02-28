@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { generateLlmsTxt } from '../../../../src/site/agents/llms-txt';
-import type { ContentPage, SiteConfig } from '../../../../src/site/types';
+import { generateLlmsTxt } from '../../../../src/integrations/site/agents/llms-txt';
+import type { ContentPage, SiteConfig } from '../../../../src/integrations/site/types';
 
 function makeSite(overrides: Partial<SiteConfig> = {}): SiteConfig {
   return {

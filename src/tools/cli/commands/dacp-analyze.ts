@@ -102,7 +102,7 @@ export async function dacpAnalyzeCommand(args: string[]): Promise<number> {
   try {
     // Dynamic import of retrospective module
     const { analyzePatterns, readDriftHistory } = await import(
-      '../../../dacp/retrospective/index.js'
+      '../../../integrations/dacp/retrospective/index.js'
     );
 
     // Read drift history

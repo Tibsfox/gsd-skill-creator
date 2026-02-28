@@ -10,14 +10,14 @@ import {
   analyzePatterns,
   PROMOTION_THRESHOLD,
   DEMOTION_THRESHOLD,
-} from '../../../../src/dacp/retrospective/analyzer.js';
-import type { HandoffOutcomeWithType } from '../../../../src/dacp/retrospective/analyzer.js';
+} from '../../../../src/integrations/dacp/retrospective/analyzer.js';
+import type { HandoffOutcomeWithType } from '../../../../src/integrations/dacp/retrospective/analyzer.js';
 import type {
   HandoffPattern,
   FidelityLevel,
   FidelityChange,
   BusOpcode,
-} from '../../../../src/dacp/types.js';
+} from '../../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Factory Functions

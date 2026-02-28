@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import yaml from 'js-yaml';
-import { loadTeamConfig, type TeamYaml } from '../../../src/upstream/teams/index';
+import { loadTeamConfig, type TeamYaml } from '../../../src/integrations/upstream/teams/index';
 
 /* ------------------------------------------------------------------ */
 /*  Inline YAML for test isolation                                     */

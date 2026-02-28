@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { loadTemplates, renderTemplate } from '../../../src/site/templates';
-import type { TemplateData, ContentPage, SiteConfig } from '../../../src/site/types';
+import { loadTemplates, renderTemplate } from '../../../src/integrations/site/templates';
+import type { TemplateData, ContentPage, SiteConfig } from '../../../src/integrations/site/types';
 
 /* ---- Test fixtures ---- */
 

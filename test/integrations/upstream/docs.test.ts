@@ -2,10 +2,10 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
-const ROOT = resolve(__dirname, '../../../src/upstream');
+const ROOT = resolve(__dirname, '../../../src/integrations/upstream');
 
 describe('Upstream Intelligence Pack — Documentation', () => {
-  it('README.md exists at src/upstream/README.md', () => {
+  it('README.md exists at src/integrations/upstream/README.md', () => {
     const readmePath = resolve(ROOT, 'README.md');
     expect(existsSync(readmePath)).toBe(true);
   });

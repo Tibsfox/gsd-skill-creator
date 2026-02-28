@@ -4,7 +4,7 @@ import type {
   PatchManifest,
   ImpactManifest,
   Severity,
-} from '../../../src/upstream/types';
+} from '../../../src/integrations/upstream/types';
 import {
   generateBriefing,
   generateFlashAlert,
@@ -13,7 +13,7 @@ import {
   generateMonthlyReport,
   routeSeverity,
   formatBriefingText,
-} from '../../../src/upstream/briefer';
+} from '../../../src/integrations/upstream/briefer';
 
 /** Helper: build a classified event with sensible defaults */
 function makeEvent(overrides: Partial<ClassifiedEvent> = {}): ClassifiedEvent {

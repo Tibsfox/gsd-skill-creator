@@ -12,8 +12,8 @@ import {
   determineFidelity,
   assessDataComplexity,
   clampFidelityChange,
-} from '../../../src/dacp/fidelity/decision.js';
-import type { FidelityDecision, FidelityLevel } from '../../../src/dacp/types.js';
+} from '../../../src/integrations/dacp/fidelity/decision.js';
+import type { FidelityDecision, FidelityLevel } from '../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Scenario Definitions

@@ -9,10 +9,10 @@
 
 import { describe, it, expect } from 'vitest';
 
-import { DACPAssembler, type AssemblyRequest } from '../../../src/dacp/assembler/assembler.js';
-import { CatalogQuery } from '../../../src/dacp/assembler/catalog-query.js';
-import { assessDataComplexity } from '../../../src/dacp/fidelity/decision.js';
-import type { ScriptCatalogEntry, SchemaLibraryEntry } from '../../../src/dacp/types.js';
+import { DACPAssembler, type AssemblyRequest } from '../../../src/integrations/dacp/assembler/assembler.js';
+import { CatalogQuery } from '../../../src/integrations/dacp/assembler/catalog-query.js';
+import { assessDataComplexity } from '../../../src/integrations/dacp/fidelity/decision.js';
+import type { ScriptCatalogEntry, SchemaLibraryEntry } from '../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Factories

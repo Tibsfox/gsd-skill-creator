@@ -2,10 +2,10 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const README_PATH = resolve(__dirname, '../../../src/site/README.md');
+const README_PATH = resolve(__dirname, '../../../src/integrations/site/README.md');
 
 describe('Generator Documentation', () => {
-  it('README.md exists at src/site/README.md', () => {
+  it('README.md exists at src/integrations/site/README.md', () => {
     expect(existsSync(README_PATH)).toBe(true);
   });
 

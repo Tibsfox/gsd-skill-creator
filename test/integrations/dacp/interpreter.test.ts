@@ -14,7 +14,7 @@ import { tmpdir } from 'node:os';
 import { loadBundle } from '../../../src/tools/interpreter/loader.js';
 import { buildExecutionContext } from '../../../src/tools/interpreter/context-builder.js';
 import { validateProvenance } from '../../../src/tools/interpreter/provenance-guard.js';
-import type { BundleManifest } from '../../../src/dacp/types.js';
+import type { BundleManifest } from '../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Factories

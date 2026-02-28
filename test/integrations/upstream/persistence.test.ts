@@ -6,8 +6,8 @@ import {
   readCache,
   createRollbackBackup,
   restoreFromBackup,
-} from '../../../src/upstream/persistence';
-import type { PersistenceDeps } from '../../../src/upstream/persistence';
+} from '../../../src/integrations/upstream/persistence';
+import type { PersistenceDeps } from '../../../src/integrations/upstream/persistence';
 
 /** Helper: build minimal persistence deps with in-memory storage */
 function makeDeps(overrides: Partial<PersistenceDeps> = {}): PersistenceDeps {

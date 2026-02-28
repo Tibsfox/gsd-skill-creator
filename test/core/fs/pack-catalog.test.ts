@@ -68,7 +68,7 @@ describe("PackCatalog", () => {
 
     it("returns multiple packs when multiple source paths exist", async () => {
       await createMockPack(tmpRoot, "src/agc", ["types.ts", "cpu.ts"]);
-      await createMockPack(tmpRoot, "src/aminet", ["types.ts"]);
+      await createMockPack(tmpRoot, "src/integrations/aminet", ["types.ts"]);
 
       const catalog = new PackCatalog(tmpRoot);
       const packs = await catalog.list();

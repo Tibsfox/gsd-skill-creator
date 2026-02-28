@@ -15,7 +15,7 @@ import type {
   BuildResult,
   TemplateData,
   BuildOptions,
-} from '../../../src/site/types';
+} from '../../../src/integrations/site/types';
 
 describe('Site Generator Types', () => {
   describe('export completeness', () => {

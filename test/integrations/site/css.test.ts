@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, statSync } from 'fs';
 import { resolve } from 'path';
 
-const CSS_PATH = resolve(__dirname, '../../../src/site/static/css/style.css');
+const CSS_PATH = resolve(__dirname, '../../../src/integrations/site/static/css/style.css');
 
 function readCss(): string {
   return readFileSync(CSS_PATH, 'utf-8');

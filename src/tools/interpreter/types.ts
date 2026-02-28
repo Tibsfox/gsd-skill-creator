@@ -8,7 +8,7 @@
  * @module interpreter/types
  */
 
-import type { BundleManifest, FidelityLevel } from '../../dacp/types.js';
+import type { BundleManifest, FidelityLevel } from '../../integrations/dacp/types.js';
 
 // ============================================================================
 // Bundle Script

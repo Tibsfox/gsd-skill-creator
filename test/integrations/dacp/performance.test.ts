@@ -13,14 +13,14 @@ import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-import { DACPAssembler } from '../../../src/dacp/assembler/assembler.js';
-import { CatalogQuery } from '../../../src/dacp/assembler/catalog-query.js';
-import { createBundle } from '../../../src/dacp/bundle.js';
+import { DACPAssembler } from '../../../src/integrations/dacp/assembler/assembler.js';
+import { CatalogQuery } from '../../../src/integrations/dacp/assembler/catalog-query.js';
+import { createBundle } from '../../../src/integrations/dacp/bundle.js';
 import { loadBundle } from '../../../src/tools/interpreter/loader.js';
-import { calculateDriftScore } from '../../../src/dacp/retrospective/drift.js';
-import { analyzePatterns, type HandoffOutcomeWithType } from '../../../src/dacp/retrospective/analyzer.js';
-import { BundleTemplateRegistry } from '../../../src/dacp/templates/registry.js';
-import { loadStarterTemplates } from '../../../src/dacp/templates/starter-templates.js';
+import { calculateDriftScore } from '../../../src/integrations/dacp/retrospective/drift.js';
+import { analyzePatterns, type HandoffOutcomeWithType } from '../../../src/integrations/dacp/retrospective/analyzer.js';
+import { BundleTemplateRegistry } from '../../../src/integrations/dacp/templates/registry.js';
+import { loadStarterTemplates } from '../../../src/integrations/dacp/templates/starter-templates.js';
 import {
   renderHandoffPanel,
   type HandoffPanelData,
@@ -30,7 +30,7 @@ import type {
   HandoffOutcome,
   ScriptCatalogEntry,
   SchemaLibraryEntry,
-} from '../../../src/dacp/types.js';
+} from '../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Factories

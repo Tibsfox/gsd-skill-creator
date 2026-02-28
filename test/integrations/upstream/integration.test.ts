@@ -6,13 +6,13 @@ import type {
   AffectedComponent,
   ImpactManifest,
   PatchManifest,
-} from '../../../src/upstream/types';
-import type { MonitorDeps } from '../../../src/upstream/monitor';
-import type { TracerDeps } from '../../../src/upstream/tracer';
-import type { PatcherDeps } from '../../../src/upstream/patcher';
-import type { PersistenceDeps } from '../../../src/upstream/persistence';
-import { runPipeline, processSingleChannel } from '../../../src/upstream/pipeline';
-import type { PipelineDeps, PipelineResult } from '../../../src/upstream/pipeline';
+} from '../../../src/integrations/upstream/types';
+import type { MonitorDeps } from '../../../src/integrations/upstream/monitor';
+import type { TracerDeps } from '../../../src/integrations/upstream/tracer';
+import type { PatcherDeps } from '../../../src/integrations/upstream/patcher';
+import type { PersistenceDeps } from '../../../src/integrations/upstream/persistence';
+import { runPipeline, processSingleChannel } from '../../../src/integrations/upstream/pipeline';
+import type { PipelineDeps, PipelineResult } from '../../../src/integrations/upstream/pipeline';
 
 /* ------------------------------------------------------------------ */
 /*  Test helpers                                                       */
