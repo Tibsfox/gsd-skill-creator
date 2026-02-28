@@ -17,7 +17,7 @@ import {
   type DriftEntry,
   type FidelityDistribution,
   type Recommendation,
-} from '../../../src/dashboard/handoff-panel.js';
+} from '../../../src/platform/dashboard/handoff-panel.js';
 
 // ============================================================================
 // Factories

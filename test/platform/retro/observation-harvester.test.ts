@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { harvestObservations } from '../../../src/retro/observation-harvester.js';
+import { harvestObservations } from '../../../src/platform/retro/observation-harvester.js';
 import { mkdtempSync, writeFileSync, rmSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';

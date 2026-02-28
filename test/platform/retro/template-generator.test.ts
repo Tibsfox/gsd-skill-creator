@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { generateRetrospective } from '../../../src/retro/template-generator.js';
-import type { RetroTemplateData, ChangelogEntry } from '../../../src/retro/types.js';
+import { generateRetrospective } from '../../../src/platform/retro/template-generator.js';
+import type { RetroTemplateData, ChangelogEntry } from '../../../src/platform/retro/types.js';
 
 /**
  * Helper to create minimal valid RetroTemplateData.

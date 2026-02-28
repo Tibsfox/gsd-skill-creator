@@ -8,7 +8,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { ServiceStatus } from '../terminal/types.js';
+import type { ServiceStatus } from '../platform/terminal/types.js';
 import type { DashboardServiceStatus } from './types.js';
 import { DevEnvironmentManager } from './dev-environment.js';
 

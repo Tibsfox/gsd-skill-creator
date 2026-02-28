@@ -21,7 +21,7 @@ import {
   ThresholdOptimizer,
   ThresholdHistory,
   BenchmarkReporter,
-} from '../../../calibration/index.js';
+} from '../../../platform/calibration/index.js';
 
 /** Minimum events required for calibration per CONTEXT.md and RESEARCH.md */
 const MIN_SAMPLES = 75;

@@ -10,13 +10,13 @@
  * @module launcher/dev-environment
  */
 
-import type { ServiceStatus } from '../terminal/types.js';
+import type { ServiceStatus } from '../platform/terminal/types.js';
 import type {
   DashboardServiceStatus,
   DevEnvironmentConfig,
   DevEnvironmentStatus,
 } from './types.js';
-import { TerminalProcessManager } from '../terminal/process-manager.js';
+import { TerminalProcessManager } from '../platform/terminal/process-manager.js';
 import { DashboardService } from './dashboard-service.js';
 import type { DashboardGeneratorFn } from './dashboard-service.js';
 
