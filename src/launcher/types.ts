@@ -8,7 +8,7 @@
  * @module launcher/types
  */
 
-import type { ServiceStatus } from '../terminal/types.js';
+import type { ServiceStatus } from '../platform/terminal/types.js';
 import type { TerminalConfig } from '../integration/config/terminal-types.js';
 
 // ---------------------------------------------------------------------------

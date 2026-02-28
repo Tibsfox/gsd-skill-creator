@@ -18,7 +18,7 @@ import { existsSync, readFileSync, writeFileSync, unlinkSync, mkdirSync, chmodSy
 import { join, dirname } from 'node:path';
 import { homedir } from 'node:os';
 import type { TerminalConfig } from '../../../integration/config/terminal-types.js';
-import { checkHealth } from '../../../terminal/health.js';
+import { checkHealth } from '../../../platform/terminal/health.js';
 
 // ---------------------------------------------------------------------------
 // PID file management

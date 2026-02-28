@@ -13,7 +13,7 @@
  * }
  */
 
-import { SessionObserver, SessionStartData } from '../../observation/session-observer.js';
+import { SessionObserver, SessionStartData } from '../../platform/observation/session-observer.js';
 
 // Claude Code sends snake_case fields, map to our internal interface
 interface ClaudeCodeSessionStartInput {

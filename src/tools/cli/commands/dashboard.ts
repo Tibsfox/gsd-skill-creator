@@ -22,9 +22,9 @@
 
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import { generate } from '../../../dashboard/generator.js';
-import type { GenerateOptions } from '../../../dashboard/generator.js';
-import { MANIFEST_FILENAME } from '../../../dashboard/incremental.js';
+import { generate } from '../../../platform/dashboard/generator.js';
+import type { GenerateOptions } from '../../../platform/dashboard/generator.js';
+import { MANIFEST_FILENAME } from '../../../platform/dashboard/incremental.js';
 import { stat, rm, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 

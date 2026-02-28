@@ -11,8 +11,8 @@
 import { join } from 'node:path';
 import { readFile, writeFile, rm, copyFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { JsonlCompactor } from '../../../observation/jsonl-compactor.js';
-import type { CompactionResult } from '../../../observation/jsonl-compactor.js';
+import { JsonlCompactor } from '../../../platform/observation/jsonl-compactor.js';
+import type { CompactionResult } from '../../../platform/observation/jsonl-compactor.js';
 
 /** Known JSONL files in the patterns directory */
 const JSONL_FILES = [

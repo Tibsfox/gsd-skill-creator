@@ -13,7 +13,7 @@
 import { appendFile, readFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { TranscriptParser } from '../../observation/transcript-parser.js';
+import { TranscriptParser } from '../../platform/observation/transcript-parser.js';
 import {
   SessionSnapshotSchema,
   SNAPSHOT_FILENAME,

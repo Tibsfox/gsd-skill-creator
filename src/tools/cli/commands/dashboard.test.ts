@@ -37,7 +37,7 @@ vi.mock('picocolors', () => ({
 }));
 
 // Mock the generator module
-vi.mock('../../../dashboard/generator.js', () => ({
+vi.mock('../../../platform/dashboard/generator.js', () => ({
   generate: vi.fn().mockResolvedValue({
     pages: ['index.html'],
     skipped: [],
@@ -77,7 +77,7 @@ describe('dashboardCommand', () => {
   });
 
   it('passes output dir to generator with --output flag', async () => {
-    const { generate } = await import('../../../dashboard/generator.js');
+    const { generate } = await import('../../../platform/dashboard/generator.js');
     const { dashboardCommand } = await import('./dashboard.js');
 
     await dashboardCommand(['generate', '--output', '/tmp/test-dashboard']);
@@ -90,7 +90,7 @@ describe('dashboardCommand', () => {
   });
 
   it('defaults to generate subcommand with empty args', async () => {
-    const { generate } = await import('../../../dashboard/generator.js');
+    const { generate } = await import('../../../platform/dashboard/generator.js');
     const { dashboardCommand } = await import('./dashboard.js');
 
     await dashboardCommand([]);
@@ -99,7 +99,7 @@ describe('dashboardCommand', () => {
   });
 
   it('passes short -o flag for output', async () => {
-    const { generate } = await import('../../../dashboard/generator.js');
+    const { generate } = await import('../../../platform/dashboard/generator.js');
     const { dashboardCommand } = await import('./dashboard.js');
 
     await dashboardCommand(['generate', '-o', '/tmp/short-flag']);

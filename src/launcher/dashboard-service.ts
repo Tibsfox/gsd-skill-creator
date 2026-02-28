@@ -238,8 +238,8 @@ export class DashboardService {
    */
   private async loadGenerator(): Promise<DashboardGeneratorFn | null> {
     try {
-      // Relative path resolved by tsc from src/launcher/ to src/dashboard/
-      const mod = await import('../dashboard/generator.js');
+      // Relative path resolved by tsc from src/launcher/ to src/platform/dashboard/
+      const mod = await import('../platform/dashboard/generator.js');
       return mod.generate as DashboardGeneratorFn;
     } catch {
       console.error('[dashboard-service] Could not load generator from dist/');

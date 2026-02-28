@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { generateActionItems } from '../../../src/retro/action-generator.js';
-import type { CalibrationDelta, ChangelogEntry } from '../../../src/retro/types.js';
-import type { ObservationSummary } from '../../../src/retro/observation-harvester.js';
+import { generateActionItems } from '../../../src/platform/retro/action-generator.js';
+import type { CalibrationDelta, ChangelogEntry } from '../../../src/platform/retro/types.js';
+import type { ObservationSummary } from '../../../src/platform/retro/observation-harvester.js';
 
 describe('action-generator', () => {
   describe('calibration action items', () => {

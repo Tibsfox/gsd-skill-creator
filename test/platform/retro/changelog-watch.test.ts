@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { detectVersion, parseChangelog, classifyFeatures, runChangelogWatch } from '../../../src/retro/changelog-watch.js';
-import { ChangelogWatchResultSchema } from '../../../src/retro/types.js';
-import type { ChangelogEntry } from '../../../src/retro/types.js';
+import { detectVersion, parseChangelog, classifyFeatures, runChangelogWatch } from '../../../src/platform/retro/changelog-watch.js';
+import { ChangelogWatchResultSchema } from '../../../src/platform/retro/types.js';
+import type { ChangelogEntry } from '../../../src/platform/retro/types.js';
 
 // Mock child_process at module level -- return string since detectVersion
 // uses { encoding: 'utf-8' } which makes execSync return string.

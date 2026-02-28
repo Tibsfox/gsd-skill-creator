@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { computeCalibrationDeltas, classifyDirection } from '../../../src/retro/calibration-delta.js';
-import type { MilestoneMetrics } from '../../../src/retro/types.js';
+import { computeCalibrationDeltas, classifyDirection } from '../../../src/platform/retro/calibration-delta.js';
+import type { MilestoneMetrics } from '../../../src/platform/retro/types.js';
 
 /**
  * Helper to create minimal valid MilestoneMetrics.
