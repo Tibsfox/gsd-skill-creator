@@ -7,25 +7,25 @@ import {
   rollback,
   calculatePatchSize,
   generatePatchContent,
-} from '../../../src/upstream/patcher';
-import type { PatcherDeps } from '../../../src/upstream/patcher';
+} from '../../../src/integrations/upstream/patcher';
+import type { PatcherDeps } from '../../../src/integrations/upstream/patcher';
 import {
   classifyChange,
   detectChangeType,
   assignSeverity,
   assessPatchability,
-} from '../../../src/upstream/classifier';
-import { checkChannel, createRateLimiter } from '../../../src/upstream/monitor';
-import type { MonitorDeps } from '../../../src/upstream/monitor';
-import { getChannels } from '../../../src/upstream/registry';
-import { appendLog, readLog } from '../../../src/upstream/persistence';
-import type { PersistenceDeps } from '../../../src/upstream/persistence';
-import { loadAllChannelStates, loadChannelState } from '../../../src/upstream/channel-state';
-import type { ChannelStateDeps } from '../../../src/upstream/channel-state';
-import { deduplicateAlerts } from '../../../src/upstream/dashboard-alerts';
-import { generateBriefing, formatBriefingText } from '../../../src/upstream/briefer';
-import { findTransitiveImpacts } from '../../../src/upstream/tracer';
-import { loadAgentConfig } from '../../../src/upstream/agents/index';
+} from '../../../src/integrations/upstream/classifier';
+import { checkChannel, createRateLimiter } from '../../../src/integrations/upstream/monitor';
+import type { MonitorDeps } from '../../../src/integrations/upstream/monitor';
+import { getChannels } from '../../../src/integrations/upstream/registry';
+import { appendLog, readLog } from '../../../src/integrations/upstream/persistence';
+import type { PersistenceDeps } from '../../../src/integrations/upstream/persistence';
+import { loadAllChannelStates, loadChannelState } from '../../../src/integrations/upstream/channel-state';
+import type { ChannelStateDeps } from '../../../src/integrations/upstream/channel-state';
+import { deduplicateAlerts } from '../../../src/integrations/upstream/dashboard-alerts';
+import { generateBriefing, formatBriefingText } from '../../../src/integrations/upstream/briefer';
+import { findTransitiveImpacts } from '../../../src/integrations/upstream/tracer';
+import { loadAgentConfig } from '../../../src/integrations/upstream/agents/index';
 import type {
   ClassifiedEvent,
   AffectedComponent,
@@ -34,7 +34,7 @@ import type {
   ChannelState,
   RawChangeEvent,
   DashboardAlert,
-} from '../../../src/upstream/types';
+} from '../../../src/integrations/upstream/types';
 
 /* ------------------------------------------------------------------ */
 /*  Shared helpers                                                     */

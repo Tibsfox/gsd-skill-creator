@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { pullContent, pushContent } from '../../../../src/site/wordpress/wp-sync';
-import type { WpApiAdapter, WpApiPushAdapter, WpPost } from '../../../../src/site/wordpress/wp-sync';
+import { pullContent, pushContent } from '../../../../src/integrations/site/wordpress/wp-sync';
+import type { WpApiAdapter, WpApiPushAdapter, WpPost } from '../../../../src/integrations/site/wordpress/wp-sync';
 
 const samplePost: WpPost = {
   id: 101,

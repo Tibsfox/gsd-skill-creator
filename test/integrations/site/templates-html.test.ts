@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
-const TEMPLATE_DIR = resolve(__dirname, '../../../src/site/templates');
+const TEMPLATE_DIR = resolve(__dirname, '../../../src/integrations/site/templates');
 
 function readTemplate(name: string): string {
   return readFileSync(resolve(TEMPLATE_DIR, name), 'utf-8');

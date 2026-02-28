@@ -12,7 +12,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
 import { ScriptCatalog } from './script-catalog.js';
-import type { ScriptCatalogEntry } from '../../dacp/types.js';
+import type { ScriptCatalogEntry } from '../../integrations/dacp/types.js';
 
 // ============================================================================
 // Test Fixtures

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { build } from '../../../src/site/build';
-import type { BuildOptions } from '../../../src/site/types';
+import { build } from '../../../src/integrations/site/build';
+import type { BuildOptions } from '../../../src/integrations/site/types';
 
 /* ---- Fixtures ---- */
 

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { generateAtomFeed } from '../../../src/site/feed';
-import type { ContentPage, SiteConfig } from '../../../src/site/types';
+import { generateAtomFeed } from '../../../src/integrations/site/feed';
+import type { ContentPage, SiteConfig } from '../../../src/integrations/site/types';
 
 function makeSite(): SiteConfig {
   return {

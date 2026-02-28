@@ -9,8 +9,8 @@ import { mkdtemp, rm, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-import { BundleTemplateRegistry } from '../../../../src/dacp/templates/registry.js';
-import type { BundleTemplate } from '../../../../src/dacp/types.js';
+import { BundleTemplateRegistry } from '../../../../src/integrations/dacp/templates/registry.js';
+import type { BundleTemplate } from '../../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Test helpers

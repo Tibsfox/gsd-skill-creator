@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { runAudit } from '../../../src/site/audit';
-import type { AuditResult } from '../../../src/site/audit';
+import { runAudit } from '../../../src/integrations/site/audit';
+import type { AuditResult } from '../../../src/integrations/site/audit';
 
 /* ---- Mock filesystem for audit ---- */
 

@@ -9,7 +9,7 @@
 import { describe, it, expect } from 'vitest';
 import { KnowledgeEventBridge, KNOWLEDGE_EVENT_TYPES } from '../event-bridge.js';
 import type { LearnerObservation } from '../observation-types.js';
-import { EventEnvelopeSchema } from '../../../amiga/message-envelope.js';
+import { EventEnvelopeSchema } from '../../../integrations/amiga/message-envelope.js';
 
 // ============================================================================
 // Test Observation Fixtures

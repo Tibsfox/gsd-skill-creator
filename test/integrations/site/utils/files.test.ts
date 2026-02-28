@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   walkMarkdownFiles,
   createFileOps,
-} from '../../../../src/site/utils/files';
+} from '../../../../src/integrations/site/utils/files';
 
 /** Helper: build an in-memory directory tree for the walker. */
 function mockWalker(tree: Record<string, 'file' | 'dir'>) {

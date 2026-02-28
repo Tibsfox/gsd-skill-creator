@@ -21,7 +21,7 @@ const PACK_REGISTRY: Array<{ name: string; sourcePath: string; description: stri
   },
   {
     name: "aminet",
-    sourcePath: "src/aminet",
+    sourcePath: "src/integrations/aminet",
     description: "Amiga software archive exploration and retrocomputing history",
   },
 ];

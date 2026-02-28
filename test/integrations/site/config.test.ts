@@ -9,10 +9,10 @@ import type {
   NavigationSection,
   CitationDatabase,
   CitationEntry,
-} from '../../../src/site/types';
+} from '../../../src/integrations/site/types';
 
-const CONFIG_DIR = resolve(__dirname, '../../../src/site/config');
-const CONTENT_DIR = resolve(__dirname, '../../../src/site/content');
+const CONFIG_DIR = resolve(__dirname, '../../../src/integrations/site/config');
+const CONTENT_DIR = resolve(__dirname, '../../../src/integrations/site/content');
 
 describe('Site Configuration', () => {
   it('site.yaml is parseable and matches SiteConfig shape', () => {

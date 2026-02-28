@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { generateCommentSection } from '../../../../src/site/wordpress/comments';
-import type { ContentPage, WordPressConfig } from '../../../../src/site/types';
+import { generateCommentSection } from '../../../../src/integrations/site/wordpress/comments';
+import type { ContentPage, WordPressConfig } from '../../../../src/integrations/site/types';
 
 function makePage(overrides: Partial<ContentPage['frontmatter']> = {}): ContentPage {
   return {

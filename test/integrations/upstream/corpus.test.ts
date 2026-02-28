@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { ChangeType, Severity } from '../../../src/upstream/types';
+import type { ChangeType, Severity } from '../../../src/integrations/upstream/types';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,7 +16,7 @@ interface CorpusEntry {
   expected_severity: Severity;
 }
 
-const corpusPath = resolve(__dirname, '../../../src/upstream/test-data/corpus.json');
+const corpusPath = resolve(__dirname, '../../../src/integrations/upstream/test-data/corpus.json');
 const corpus: CorpusEntry[] = JSON.parse(readFileSync(corpusPath, 'utf-8'));
 
 /* ------------------------------------------------------------------ */

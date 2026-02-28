@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { htmlToMarkdown } from '../../../../src/site/wordpress/html-to-md';
+import { htmlToMarkdown } from '../../../../src/integrations/site/wordpress/html-to-md';
 
 describe('htmlToMarkdown', () => {
   it('converts paragraphs to newlines', () => {

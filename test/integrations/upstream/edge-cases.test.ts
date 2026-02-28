@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { detectChangeType, classifyChange } from '../../../src/upstream/classifier';
-import { appendLog, readLog } from '../../../src/upstream/persistence';
-import type { PersistenceDeps } from '../../../src/upstream/persistence';
-import { createRateLimiter } from '../../../src/upstream/monitor';
-import { loadAllChannelStates } from '../../../src/upstream/channel-state';
-import { getChannels } from '../../../src/upstream/registry';
-import type { RawChangeEvent, ChannelConfig } from '../../../src/upstream/types';
+import { detectChangeType, classifyChange } from '../../../src/integrations/upstream/classifier';
+import { appendLog, readLog } from '../../../src/integrations/upstream/persistence';
+import type { PersistenceDeps } from '../../../src/integrations/upstream/persistence';
+import { createRateLimiter } from '../../../src/integrations/upstream/monitor';
+import { loadAllChannelStates } from '../../../src/integrations/upstream/channel-state';
+import { getChannels } from '../../../src/integrations/upstream/registry';
+import type { RawChangeEvent, ChannelConfig } from '../../../src/integrations/upstream/types';
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */

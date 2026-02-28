@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import yaml from 'js-yaml';
-import { loadAgentConfig, type AgentYaml } from '../../../src/upstream/agents/index';
+import { loadAgentConfig, type AgentYaml } from '../../../src/integrations/upstream/agents/index';
 
 const SENTINEL_YAML = `
 name: upstream-sentinel

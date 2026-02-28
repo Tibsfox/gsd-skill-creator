@@ -12,7 +12,7 @@
 
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
-import { type ChipsetConfig, ChipsetConfigSchema } from '../../../../den/chipset.js';
+import { type ChipsetConfig, ChipsetConfigSchema } from '../../../../integrations/den/chipset.js';
 import type { ChipsetStateManager, ChipsetUpdate } from './chipset-state.js';
 
 // ============================================================================

@@ -8,8 +8,8 @@
 
 import { describe, it, expect } from 'vitest';
 
-import { CatalogQuery } from '../../../src/dacp/assembler/catalog-query.js';
-import type { ScriptCatalogEntry, SchemaLibraryEntry } from '../../../src/dacp/types.js';
+import { CatalogQuery } from '../../../src/integrations/dacp/assembler/catalog-query.js';
+import type { ScriptCatalogEntry, SchemaLibraryEntry } from '../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Factories

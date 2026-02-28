@@ -44,7 +44,7 @@ vi.mock('picocolors', () => ({
 }));
 
 // Mock the retrospective analyzer module
-vi.mock('../../../dacp/retrospective/index.js', () => ({
+vi.mock('../../../integrations/dacp/retrospective/index.js', () => ({
   analyzePatterns: mockAnalyzePatterns,
   readDriftHistory: mockReadDriftHistory,
 }));

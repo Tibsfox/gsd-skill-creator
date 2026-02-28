@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { build, processPage } from '../../../src/site/build';
+import { build, processPage } from '../../../src/integrations/site/build';
 import type {
   SiteConfig,
   NavigationSection,
   BuildOptions,
-} from '../../../src/site/types';
-import type { TemplateRegistry } from '../../../src/site/templates';
+} from '../../../src/integrations/site/types';
+import type { TemplateRegistry } from '../../../src/integrations/site/templates';
 
 /* ---- Fixtures ---- */
 

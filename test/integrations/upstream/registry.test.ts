@@ -4,7 +4,7 @@ import {
   getChannel,
   getChannelsByPriority,
   getChannelsByDomain,
-} from '../../../src/upstream/registry';
+} from '../../../src/integrations/upstream/registry';
 
 describe('Channel Registry', () => {
   it('loads all 11 channels', () => {

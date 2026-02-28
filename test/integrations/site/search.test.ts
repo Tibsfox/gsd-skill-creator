@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { buildSearchIndex, stripMarkdownSyntax } from '../../../src/site/search';
-import type { ContentPage, SearchEntry } from '../../../src/site/types';
+import { buildSearchIndex, stripMarkdownSyntax } from '../../../src/integrations/site/search';
+import type { ContentPage, SearchEntry } from '../../../src/integrations/site/types';
 
 function makePage(overrides: Partial<ContentPage> = {}): ContentPage {
   return {

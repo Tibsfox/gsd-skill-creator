@@ -18,4 +18,4 @@ export type {
   SchemaPersistenceData,
 } from './types.js';
 // Re-export DACP types used by consumers
-export type { ScriptCatalogEntry, SchemaLibraryEntry, ScriptFunction } from '../../dacp/types.js';
+export type { ScriptCatalogEntry, SchemaLibraryEntry, ScriptFunction } from '../../integrations/dacp/types.js';

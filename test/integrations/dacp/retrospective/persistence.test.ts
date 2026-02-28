@@ -12,8 +12,8 @@ import { tmpdir } from 'os';
 import {
   appendDriftScore,
   readDriftHistory,
-} from '../../../../src/dacp/retrospective/persistence.js';
-import type { DriftScoreRecord } from '../../../../src/dacp/retrospective/types.js';
+} from '../../../../src/integrations/dacp/retrospective/persistence.js';
+import type { DriftScoreRecord } from '../../../../src/integrations/dacp/retrospective/types.js';
 
 /** Factory for DriftScoreRecord test data */
 function makeDriftScoreRecord(

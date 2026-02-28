@@ -11,14 +11,14 @@ import { mkdirSync, writeFileSync, rmSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-import { DACPAssembler, type AssemblyRequest } from '../../../src/dacp/assembler/assembler.js';
-import { CatalogQuery } from '../../../src/dacp/assembler/catalog-query.js';
-import { createBundle, MAX_DATA_SIZE } from '../../../src/dacp/bundle.js';
+import { DACPAssembler, type AssemblyRequest } from '../../../src/integrations/dacp/assembler/assembler.js';
+import { CatalogQuery } from '../../../src/integrations/dacp/assembler/catalog-query.js';
+import { createBundle, MAX_DATA_SIZE } from '../../../src/integrations/dacp/bundle.js';
 import { loadBundle } from '../../../src/tools/interpreter/loader.js';
-import { calculateDriftScore } from '../../../src/dacp/retrospective/drift.js';
-import { analyzePatterns, type HandoffOutcomeWithType } from '../../../src/dacp/retrospective/analyzer.js';
-import { assessDataComplexity } from '../../../src/dacp/fidelity/decision.js';
-import type { BundleManifest, ScriptCatalogEntry, SchemaLibraryEntry, HandoffOutcome } from '../../../src/dacp/types.js';
+import { calculateDriftScore } from '../../../src/integrations/dacp/retrospective/drift.js';
+import { analyzePatterns, type HandoffOutcomeWithType } from '../../../src/integrations/dacp/retrospective/analyzer.js';
+import { assessDataComplexity } from '../../../src/integrations/dacp/fidelity/decision.js';
+import type { BundleManifest, ScriptCatalogEntry, SchemaLibraryEntry, HandoffOutcome } from '../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Factories

@@ -8,7 +8,7 @@
  * @module cloud-ops/git/types
  */
 
-import type { OpenStackServiceName, SEPhaseId } from '../../core/types/openstack.js';
+import type { OpenStackServiceName, SEPhaseId } from '../../../core/types/openstack.js';
 
 // ============================================================================
 // Deployment Change Types

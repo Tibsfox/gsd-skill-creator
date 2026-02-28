@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { ClassifiedEvent, AffectedComponent, ImpactManifest, PatchManifest } from '../../../src/upstream/types';
+import type { ClassifiedEvent, AffectedComponent, ImpactManifest, PatchManifest } from '../../../src/integrations/upstream/types';
 import {
   applyPatch,
   calculatePatchSize,
@@ -8,7 +8,7 @@ import {
   validatePatchBounds,
   checkCooldown,
   generatePatchContent,
-} from '../../../src/upstream/patcher';
+} from '../../../src/integrations/upstream/patcher';
 
 /** Helper: build a minimal ClassifiedEvent */
 function makeEvent(overrides: Partial<ClassifiedEvent> = {}): ClassifiedEvent {

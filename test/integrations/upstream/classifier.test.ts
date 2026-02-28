@@ -4,13 +4,13 @@ import {
   detectChangeType,
   assignSeverity,
   assessPatchability,
-} from '../../../src/upstream/classifier';
+} from '../../../src/integrations/upstream/classifier';
 import type {
   RawChangeEvent,
   ChannelConfig,
   ChangeType,
   Severity,
-} from '../../../src/upstream/types';
+} from '../../../src/integrations/upstream/types';
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */

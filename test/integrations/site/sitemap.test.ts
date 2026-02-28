@@ -3,8 +3,8 @@ import {
   generateSitemap,
   generateRobotsTxt,
   generateHtaccess,
-} from '../../../src/site/sitemap';
-import type { ContentPage, SiteConfig } from '../../../src/site/types';
+} from '../../../src/integrations/site/sitemap';
+import type { ContentPage, SiteConfig } from '../../../src/integrations/site/types';
 
 function makeSite(): SiteConfig {
   return {

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { loadAgentConfig } from '../../../src/upstream/agents/index';
+import { loadAgentConfig } from '../../../src/integrations/upstream/agents/index';
 
 const TRACER_YAML = `
 name: upstream-tracer

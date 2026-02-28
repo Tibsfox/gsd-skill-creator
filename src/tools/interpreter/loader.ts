@@ -14,7 +14,7 @@
 
 import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
-import { BundleManifestSchema, type BundleManifest } from '../../dacp/types.js';
+import { BundleManifestSchema, type BundleManifest } from '../../integrations/dacp/types.js';
 import {
   DEFAULT_INTERPRETER_CONFIG,
   type InterpreterConfig,

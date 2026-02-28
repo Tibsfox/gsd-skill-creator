@@ -3,12 +3,12 @@ import {
   checkChannel,
   checkAllChannels,
   createRateLimiter,
-} from '../../../src/upstream/monitor';
+} from '../../../src/integrations/upstream/monitor';
 import type {
   ChannelConfig,
   ChannelState,
   RawChangeEvent,
-} from '../../../src/upstream/types';
+} from '../../../src/integrations/upstream/types';
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */

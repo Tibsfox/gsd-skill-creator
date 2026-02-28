@@ -13,7 +13,7 @@ import {
   ChipsetConfigSchema,
   type ChipsetConfig,
   createDefaultChipsetConfig,
-} from '../../../../den/chipset.js';
+} from '../../../../integrations/den/chipset.js';
 
 // ============================================================================
 // Types

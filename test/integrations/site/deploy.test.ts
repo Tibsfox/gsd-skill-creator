@@ -3,9 +3,9 @@ import {
   deploy,
   dryRun,
   verifyDeployment,
-} from '../../../src/site/deploy';
-import type { DeployAdapter } from '../../../src/site/deploy';
-import type { DeployConfig } from '../../../src/site/types';
+} from '../../../src/integrations/site/deploy';
+import type { DeployAdapter } from '../../../src/integrations/site/deploy';
+import type { DeployConfig } from '../../../src/integrations/site/types';
 
 const config: DeployConfig = {
   method: 'ftp',

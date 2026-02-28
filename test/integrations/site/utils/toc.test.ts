@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { extractToc } from '../../../../src/site/utils/toc';
-import type { TocEntry } from '../../../../src/site/types';
+import { extractToc } from '../../../../src/integrations/site/utils/toc';
+import type { TocEntry } from '../../../../src/integrations/site/types';
 
 describe('extractToc', () => {
   it('extracts h1-h6 headings', () => {

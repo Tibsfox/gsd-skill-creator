@@ -3,8 +3,8 @@ import {
   resolveCitations,
   generateBibliography,
   formatCitation,
-} from '../../../src/site/citations';
-import type { CitationDatabase, CitationEntry } from '../../../src/site/types';
+} from '../../../src/integrations/site/citations';
+import type { CitationDatabase, CitationEntry } from '../../../src/integrations/site/types';
 
 const sampleDb: CitationDatabase = {
   knuth1997: {

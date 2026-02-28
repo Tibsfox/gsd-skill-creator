@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { generateMarkdownMirror } from '../../../../src/site/agents/markdown-mirror';
-import type { ContentPage } from '../../../../src/site/types';
+import { generateMarkdownMirror } from '../../../../src/integrations/site/agents/markdown-mirror';
+import type { ContentPage } from '../../../../src/integrations/site/types';
 
 function makePage(overrides: Partial<ContentPage> & { frontmatter: ContentPage['frontmatter'] }): ContentPage {
   return {

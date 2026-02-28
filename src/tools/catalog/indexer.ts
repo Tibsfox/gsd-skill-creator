@@ -11,7 +11,7 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as crypto from 'node:crypto';
-import type { ScriptCatalogEntry, SchemaLibraryEntry } from '../../dacp/types.js';
+import type { ScriptCatalogEntry, SchemaLibraryEntry } from '../../integrations/dacp/types.js';
 import type { IndexResult } from './types.js';
 import type { ScriptCatalog } from './script-catalog.js';
 import type { SchemaLibrary } from './schema-library.js';

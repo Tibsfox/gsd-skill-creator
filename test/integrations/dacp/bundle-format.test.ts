@@ -19,8 +19,8 @@ import {
   MAX_DATA_SIZE,
   MAX_SCRIPT_SIZE,
   type CreateBundleOptions,
-} from '../../../src/dacp/bundle.js';
-import type { BundleManifest } from '../../../src/dacp/types.js';
+} from '../../../src/integrations/dacp/bundle.js';
+import type { BundleManifest } from '../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Factories

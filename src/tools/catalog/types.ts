@@ -13,7 +13,7 @@ export type {
   ScriptCatalogEntry,
   SchemaLibraryEntry,
   ScriptFunction,
-} from '../../dacp/types.js';
+} from '../../integrations/dacp/types.js';
 
 /**
  * Query interface for searching the script catalog.
@@ -66,7 +66,7 @@ export interface CatalogPersistenceData {
   /** Format version */
   version: string;
   /** Serialized catalog entries */
-  entries: import('../../dacp/types.js').ScriptCatalogEntry[];
+  entries: import('../../integrations/dacp/types.js').ScriptCatalogEntry[];
   /** ISO 8601 timestamp of last build */
   last_built: string;
 }
@@ -78,7 +78,7 @@ export interface SchemaPersistenceData {
   /** Format version */
   version: string;
   /** Serialized library entries */
-  entries: import('../../dacp/types.js').SchemaLibraryEntry[];
+  entries: import('../../integrations/dacp/types.js').SchemaLibraryEntry[];
   /** ISO 8601 timestamp of last build */
   last_built: string;
 }

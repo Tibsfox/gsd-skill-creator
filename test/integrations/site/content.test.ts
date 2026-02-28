@@ -2,9 +2,9 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'fs';
 import { resolve, join } from 'path';
 import yaml from 'js-yaml';
-import type { FrontMatter } from '../../../src/site/types';
+import type { FrontMatter } from '../../../src/integrations/site/types';
 
-const CONTENT_DIR = resolve(__dirname, '../../../src/site/content');
+const CONTENT_DIR = resolve(__dirname, '../../../src/integrations/site/content');
 
 /** Parse YAML frontmatter from markdown file content */
 function parseFrontmatter(raw: string): { frontmatter: FrontMatter; body: string } {
