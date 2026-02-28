@@ -13,11 +13,11 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
 import { createRequire } from 'node:module';
-import { SkillStore } from '../storage/skill-store.js';
-import { SkillIndex } from '../storage/skill-index.js';
+import { SkillStore } from '../core/storage/skill-store.js';
+import { SkillIndex } from '../core/storage/skill-index.js';
 import { exportPortableContent } from '../portability/index.js';
 import { installSkill } from './skill-installer.js';
-import { getSkillsBasePath } from '../types/scope.js';
+import { getSkillsBasePath } from '../core/types/scope.js';
 
 // Read version from package.json using createRequire (safe in ESM)
 const require = createRequire(import.meta.url);

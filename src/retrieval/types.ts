@@ -1,5 +1,5 @@
-import type { SkillIndexEntry } from '../storage/skill-index.js';
-import type { SkillScope } from '../types/scope.js';
+import type { SkillIndexEntry } from '../core/storage/skill-index.js';
+import type { SkillScope } from '../core/types/scope.js';
 
 /**
  * The two retrieval scoring strategies.

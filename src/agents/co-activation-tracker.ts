@@ -1,4 +1,4 @@
-import { SessionObservation } from '../types/observation.js';
+import { SessionObservation } from '../core/types/observation.js';
 
 export interface SkillCoActivation {
   skillPair: [string, string];  // Alphabetically sorted for consistency

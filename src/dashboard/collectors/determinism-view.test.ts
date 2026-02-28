@@ -2,10 +2,10 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm } from 'fs/promises';
 import { join } from 'path';
 import * as os from 'os';
-import { PatternStore } from '../../storage/pattern-store.js';
+import { PatternStore } from '../../core/storage/pattern-store.js';
 import { DeterminismAnalyzer } from '../../observation/determinism-analyzer.js';
-import type { DeterminismViewData, DeterminismSortField } from '../../types/dashboard.js';
-import type { StoredExecutionBatch, ToolExecutionPair } from '../../types/observation.js';
+import type { DeterminismViewData, DeterminismSortField } from '../../core/types/dashboard.js';
+import type { StoredExecutionBatch, ToolExecutionPair } from '../../core/types/observation.js';
 import { DeterminismViewCollector } from './determinism-view.js';
 
 function completePair(

@@ -1,6 +1,6 @@
 import { readFile, writeFile, rename } from 'fs/promises';
 import { dirname, join } from 'path';
-import { validateJsonlEntry, verifyChecksum } from '../validation/jsonl-safety.js';
+import { validateJsonlEntry, verifyChecksum } from '../core/validation/jsonl-safety.js';
 
 // ============================================================================
 // JSONL Compactor

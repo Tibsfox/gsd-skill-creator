@@ -6,8 +6,8 @@
 
 import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
-import { BudgetValidator } from '../validation/budget-validation.js';
-import type { BudgetSeverity } from '../validation/budget-validation.js';
+import { BudgetValidator } from '../core/validation/budget-validation.js';
+import type { BudgetSeverity } from '../core/validation/budget-validation.js';
 
 export interface FileSizeInfo {
   filename: string;

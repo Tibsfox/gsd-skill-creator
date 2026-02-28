@@ -13,7 +13,7 @@
 
 import { getEmbeddingService, cosineSimilarity } from '../../embeddings/index.js';
 import type { GsdCommandMetadata } from '../discovery/types.js';
-import type { EmbeddingVector } from '../../types/embeddings.js';
+import type { EmbeddingVector } from '../../core/types/embeddings.js';
 import type { EmbeddingService } from '../../embeddings/embedding-service.js';
 
 // ============================================================================

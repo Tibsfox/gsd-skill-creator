@@ -10,7 +10,7 @@ const mockCompareVersions = vi.fn();
 const mockComputeDrift = vi.fn();
 const mockDetect = vi.fn();
 
-vi.mock('../../storage/skill-store.js', () => {
+vi.mock('../../core/storage/skill-store.js', () => {
   return {
     SkillStore: class MockSkillStore {
       read = mockRead;

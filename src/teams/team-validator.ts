@@ -15,10 +15,10 @@
 import { existsSync, readdirSync } from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
-import type { TeamConfig, TeamMember, TeamTask, InterTeamLink } from '../types/team.js';
+import type { TeamConfig, TeamMember, TeamTask, InterTeamLink } from '../core/types/team.js';
 import { ConflictDetector } from '../conflicts/conflict-detector.js';
 import { getEmbeddingService, cosineSimilarity } from '../embeddings/index.js';
-import { validateTeamConfig, validateTopologyRules } from '../validation/team-validation.js';
+import { validateTeamConfig, validateTopologyRules } from '../core/validation/team-validation.js';
 
 // ============================================================================
 // Type Definitions

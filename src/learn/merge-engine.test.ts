@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { MathematicalPrimitive } from '../types/mfe-types.js';
+import type { MathematicalPrimitive } from '../core/types/mfe-types.js';
 import type { ComparisonDetail, SemanticClassification } from './semantic-comparator.js';
 import { createMergeEngine } from './merge-engine.js';
 

@@ -6,7 +6,7 @@
  * skill descriptions.
  */
 
-import type { SkillPrediction } from '../types/simulation.js';
+import type { SkillPrediction } from '../core/types/simulation.js';
 
 /**
  * A specific hint for differentiating a skill from competitors.

@@ -12,7 +12,7 @@ import { join } from 'path';
 import { tmpdir } from 'os';
 import matter from 'gray-matter';
 import { CapabilityDiscovery } from './capability-discovery.js';
-import { SkillStore } from '../storage/skill-store.js';
+import { SkillStore } from '../core/storage/skill-store.js';
 import type { CapabilityManifest } from './types.js';
 
 describe('CapabilityDiscovery', () => {

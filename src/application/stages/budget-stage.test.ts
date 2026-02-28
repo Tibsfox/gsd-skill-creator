@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { BudgetStage } from './budget-stage.js';
 import { createEmptyContext } from '../skill-pipeline.js';
-import type { BudgetProfile } from '../../types/application.js';
+import type { BudgetProfile } from '../../core/types/application.js';
 
 // Mock TokenCounter
 const mockTokenCounter = {

@@ -1,6 +1,6 @@
 import { diffWords } from 'diff';
 import { FeedbackStore } from './feedback-store.js';
-import { SkillStore } from '../storage/skill-store.js';
+import { SkillStore } from '../core/storage/skill-store.js';
 import { DriftTracker } from './drift-tracker.js';
 import {
   BoundedLearningConfig,
@@ -12,8 +12,8 @@ import {
   ValidationResult,
   ApplyResult,
   CorrectionPattern,
-} from '../types/learning.js';
-import { Skill, SkillMetadata, getExtension, type GsdSkillCreatorExtension } from '../types/skill.js';
+} from '../core/types/learning.js';
+import { Skill, SkillMetadata, getExtension, type GsdSkillCreatorExtension } from '../core/types/skill.js';
 
 /**
  * RefinementEngine generates bounded skill refinement suggestions based on accumulated feedback.

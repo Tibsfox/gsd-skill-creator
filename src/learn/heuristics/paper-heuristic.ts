@@ -3,7 +3,7 @@
 // Extracts algorithms, findings, methods, hypotheses, and definitions
 // from academic paper-style documents.
 
-import type { PrimitiveType } from '../../types/mfe-types.js';
+import type { PrimitiveType } from '../../core/types/mfe-types.js';
 import type { ExtractionHeuristic, ExtractionPattern } from './index.js';
 
 const patterns: ExtractionPattern[] = [

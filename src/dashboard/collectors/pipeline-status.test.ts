@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm } from 'fs/promises';
 import { join } from 'path';
 import * as os from 'os';
-import { PatternStore } from '../../storage/pattern-store.js';
-import type { PipelineStatusView } from '../../types/dashboard.js';
+import { PatternStore } from '../../core/storage/pattern-store.js';
+import type { PipelineStatusView } from '../../core/types/dashboard.js';
 import { PipelineStatusCollector } from './pipeline-status.js';
 
 describe('PipelineStatusCollector', () => {

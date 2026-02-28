@@ -9,8 +9,8 @@
  * as subagents that produce focused output.
  */
 
-import { validateAgentFrontmatter } from '../validation/agent-validation.js';
-import type { AgentFrontmatter } from '../types/agent.js';
+import { validateAgentFrontmatter } from '../core/validation/agent-validation.js';
+import type { AgentFrontmatter } from '../core/types/agent.js';
 
 // ============================================================================
 // Constants

@@ -5,7 +5,7 @@
  * with the winner, with configurable margin and floor thresholds.
  */
 
-import type { SkillPrediction } from '../types/simulation.js';
+import type { SkillPrediction } from '../core/types/simulation.js';
 
 /**
  * Configuration for challenger detection.

@@ -1,17 +1,17 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { SkillCluster } from './cluster-detector.js';
-import { SkillStore } from '../storage/skill-store.js';
+import { SkillStore } from '../core/storage/skill-store.js';
 import {
   validateAgentFrontmatter,
   validateToolsField,
-} from '../validation/agent-validation.js';
-import type { AgentFrontmatter } from '../types/agent.js';
+} from '../core/validation/agent-validation.js';
+import type { AgentFrontmatter } from '../core/types/agent.js';
 import {
   validateSafeName,
   assertSafePath,
   PathTraversalError,
-} from '../validation/path-safety.js';
+} from '../core/validation/path-safety.js';
 
 /**
  * Warning message for user-level agent creation.

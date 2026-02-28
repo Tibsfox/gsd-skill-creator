@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { stripToPortable, exportPortableContent } from './portable-exporter.js';
-import type { SkillMetadata, Skill } from '../types/skill.js';
+import type { SkillMetadata, Skill } from '../core/types/skill.js';
 
 // ============================================================================
 // stripToPortable() tests

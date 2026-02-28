@@ -1,9 +1,9 @@
 import { readFile, writeFile, rename, mkdir, access } from 'fs/promises';
 import { join, dirname } from 'path';
 import { randomUUID } from 'crypto';
-import type { TestCase } from '../types/testing.js';
-import { validateTestCaseInput, type TestCaseInput } from '../validation/test-validation.js';
-import { getSkillsBasePath, type SkillScope } from '../types/scope.js';
+import type { TestCase } from '../core/types/testing.js';
+import { validateTestCaseInput, type TestCaseInput } from '../core/validation/test-validation.js';
+import { getSkillsBasePath, type SkillScope } from '../core/types/scope.js';
 
 /**
  * Store for persisting test cases to JSON files.

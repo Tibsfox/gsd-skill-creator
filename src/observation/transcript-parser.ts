@@ -1,7 +1,7 @@
 import { createReadStream, existsSync } from 'fs';
 import { createHash } from 'crypto';
 import { createInterface } from 'readline';
-import type { TranscriptEntry, ToolExecutionPair, ExecutionContext } from '../types/observation.js';
+import type { TranscriptEntry, ToolExecutionPair, ExecutionContext } from '../core/types/observation.js';
 
 export class TranscriptParser {
   /**

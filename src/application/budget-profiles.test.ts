@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { DEFAULT_PROFILES, getBudgetProfile, getTierForSkill } from './budget-profiles.js';
-import type { BudgetProfile } from '../types/application.js';
+import type { BudgetProfile } from '../core/types/application.js';
 
 describe('DEFAULT_PROFILES', () => {
   it('contains gsd-executor profile', () => {

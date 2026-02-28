@@ -19,7 +19,7 @@ import type {
   EmbeddingServiceConfig,
   ProgressInfo,
   EmbeddingResult,
-} from '../types/embeddings.js';
+} from '../core/types/embeddings.js';
 import { EmbeddingCache } from './embedding-cache.js';
 import { HeuristicEmbedder } from './heuristic-fallback.js';
 

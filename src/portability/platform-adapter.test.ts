@@ -10,7 +10,7 @@ import {
   exportSkillDirectory,
 } from './platform-adapter.js';
 import type { PlatformConfig } from './platform-adapter.js';
-import type { Skill } from '../types/skill.js';
+import type { Skill } from '../core/types/skill.js';
 
 // ============================================================================
 // Platform Registry tests

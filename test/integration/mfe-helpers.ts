@@ -13,7 +13,7 @@ import type {
   PrimitiveType,
   DependencyEdge,
   CompositionRule,
-} from '../../src/types/mfe-types.js';
+} from '../../src/core/types/mfe-types.js';
 import type { DomainDataFile } from '../../src/engines/dependency-graph.js';
 import type { DependencyGraphPort } from '../../src/engines/composition-engine.js';
 import type { VerificationLookups } from '../../src/engines/verification-engine.js';

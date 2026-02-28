@@ -6,7 +6,7 @@
  * checking against configurable pattern sets.
  */
 
-import type { ValidationResult } from '../../types/mcp.js';
+import type { ValidationResult } from '../../core/types/mcp.js';
 
 // ============================================================================
 // Types

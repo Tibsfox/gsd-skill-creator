@@ -1,7 +1,7 @@
 import type { PipelineStage, PipelineContext } from '../skill-pipeline.js';
 import type { TokenCounter } from '../token-counter.js';
-import type { SkillStore } from '../../storage/skill-store.js';
-import type { BudgetProfile, BudgetWarning, ScoredSkill, PriorityTier } from '../../types/application.js';
+import type { SkillStore } from '../../core/storage/skill-store.js';
+import type { BudgetProfile, BudgetWarning, ScoredSkill, PriorityTier } from '../../core/types/application.js';
 import { getTierForSkill } from '../budget-profiles.js';
 
 /**

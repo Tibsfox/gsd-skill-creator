@@ -7,7 +7,7 @@
 // Extensible: new heuristics can be registered at runtime via registerHeuristic.
 
 import type { ContentType } from '../analyzer.js';
-import type { PrimitiveType } from '../../types/mfe-types.js';
+import type { PrimitiveType } from '../../core/types/mfe-types.js';
 import { mathHeuristic } from './math-heuristic.js';
 import { codeHeuristic } from './code-heuristic.js';
 import { tutorialHeuristic } from './tutorial-heuristic.js';

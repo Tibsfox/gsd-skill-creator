@@ -3,7 +3,7 @@
 // Extracts function signatures, class/interface definitions, design patterns,
 // constraints, and API endpoints from reference documentation.
 
-import type { PrimitiveType } from '../../types/mfe-types.js';
+import type { PrimitiveType } from '../../core/types/mfe-types.js';
 import type { ExtractionHeuristic, ExtractionPattern } from './index.js';
 
 const patterns: ExtractionPattern[] = [

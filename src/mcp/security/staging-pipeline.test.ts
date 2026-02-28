@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { StagingPipeline, type StagingRequest } from './staging-pipeline.js';
-import type { Tool } from '../../types/mcp.js';
+import type { Tool } from '../../core/types/mcp.js';
 
 // ============================================================================
 // Test fixtures

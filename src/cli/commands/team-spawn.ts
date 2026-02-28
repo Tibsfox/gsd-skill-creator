@@ -17,7 +17,7 @@ import {
   writeTeamAgentFiles,
 } from '../../teams/index.js';
 import type { MemberResolutionResult } from '../../teams/index.js';
-import type { TeamConfig } from '../../types/team.js';
+import type { TeamConfig } from '../../core/types/team.js';
 
 // ============================================================================
 // Help

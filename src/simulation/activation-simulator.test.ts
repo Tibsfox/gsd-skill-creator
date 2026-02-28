@@ -7,7 +7,7 @@
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ActivationSimulator } from './activation-simulator.js';
-import type { EmbeddingResult } from '../types/embeddings.js';
+import type { EmbeddingResult } from '../core/types/embeddings.js';
 
 // Mock the embeddings module to avoid model-loading flakiness
 vi.mock('../embeddings/index.js', () => ({

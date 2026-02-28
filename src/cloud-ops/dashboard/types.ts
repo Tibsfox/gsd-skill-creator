@@ -7,7 +7,7 @@
  * @module cloud-ops/dashboard/types
  */
 
-import type { ServiceStatus, OpenStackServiceName, CommunicationLoopName } from '../../types/openstack.js';
+import type { ServiceStatus, OpenStackServiceName, CommunicationLoopName } from '../../core/types/openstack.js';
 
 // ============================================================================
 // Re-export used types for downstream consumers

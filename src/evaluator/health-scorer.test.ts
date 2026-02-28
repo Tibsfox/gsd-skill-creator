@@ -17,8 +17,8 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { HealthScorer } from './health-scorer.js';
 import type { ResultStore } from '../testing/result-store.js';
 import type { SuccessTracker } from './success-tracker.js';
-import type { SkillStore } from '../storage/skill-store.js';
-import type { TestRunSnapshot } from '../types/test-run.js';
+import type { SkillStore } from '../core/storage/skill-store.js';
+import type { TestRunSnapshot } from '../core/types/test-run.js';
 
 // Helper to create mock ResultStore
 function createMockResultStore(overrides: Partial<ResultStore> = {}): ResultStore {

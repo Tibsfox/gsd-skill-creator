@@ -1,8 +1,8 @@
 import { appendFile, readFile, writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
-import type { SessionObservation } from '../types/observation.js';
-import { normalizeObservationTier } from '../types/observation.js';
-import { createChecksummedEntry, validateJsonlEntry, verifyChecksum } from '../validation/jsonl-safety.js';
+import type { SessionObservation } from '../core/types/observation.js';
+import { normalizeObservationTier } from '../core/types/observation.js';
+import { createChecksummedEntry, validateJsonlEntry, verifyChecksum } from '../core/validation/jsonl-safety.js';
 
 /** Filename for the ephemeral observation buffer */
 export const EPHEMERAL_FILENAME = '.ephemeral.jsonl';

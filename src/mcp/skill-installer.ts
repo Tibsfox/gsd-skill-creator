@@ -16,8 +16,8 @@ import matter from 'gray-matter';
 import { unpackTar } from 'modern-tar/fs';
 import { validateContentSafety } from './content-validator.js';
 import type { SkillPackageManifest } from './skill-packager.js';
-import { safeParseFrontmatter } from '../validation/yaml-safety.js';
-import { SkillMetadataSchema } from '../validation/skill-validation.js';
+import { safeParseFrontmatter } from '../core/validation/yaml-safety.js';
+import { SkillMetadataSchema } from '../core/validation/skill-validation.js';
 
 /** Default maximum download size: 10 MB */
 const DEFAULT_MAX_DOWNLOAD_BYTES = 10 * 1024 * 1024;

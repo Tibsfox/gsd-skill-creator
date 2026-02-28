@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import type { SkillMetadata } from '../../types/skill.js';
+import type { SkillMetadata } from '../../core/types/skill.js';
 import { detectPromotable, extractOffloadOps } from './promoter.js';
 
 /**

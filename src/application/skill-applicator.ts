@@ -1,11 +1,11 @@
-import type { SkillIndex } from '../storage/skill-index.js';
-import type { SkillStore } from '../storage/skill-store.js';
+import type { SkillIndex } from '../core/storage/skill-index.js';
+import type { SkillStore } from '../core/storage/skill-store.js';
 import { TokenCounter } from './token-counter.js';
 import { RelevanceScorer } from './relevance-scorer.js';
 import { ConflictResolver } from './conflict-resolver.js';
 import { SkillSession, type SkillLoadResult, type SessionReport } from './skill-session.js';
-import type { ApplicationConfig, ConflictResult, BudgetProfile, SkippedSkill, BudgetWarning } from '../types/application.js';
-import { DEFAULT_CONFIG } from '../types/application.js';
+import type { ApplicationConfig, ConflictResult, BudgetProfile, SkippedSkill, BudgetWarning } from '../core/types/application.js';
+import { DEFAULT_CONFIG } from '../core/types/application.js';
 import { SkillPipeline, createEmptyContext } from './skill-pipeline.js';
 import { ScoreStage, ResolveStage, LoadStage, BudgetStage, CacheOrderStage, ModelFilterStage } from './stages/index.js';
 import { AdaptiveRouter, CorrectionStage } from '../retrieval/index.js';

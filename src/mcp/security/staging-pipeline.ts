@@ -19,7 +19,7 @@ import type {
   TrustState,
   HashRecord,
   ValidationResult,
-} from '../../types/mcp.js';
+} from '../../core/types/mcp.js';
 import { computeToolHash, detectHashDriftWithTools, type HashDriftResult } from './hash-gate.js';
 import { TrustManager, type TrustManagerConfig, type TrustTransition } from './trust-manager.js';
 import { validateInvocationParams, type InvocationValidatorConfig } from './invocation-validator.js';

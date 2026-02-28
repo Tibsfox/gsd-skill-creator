@@ -3,7 +3,7 @@
 // Extracts steps, key concepts, exercises, tips, and best practices
 // from tutorial-style documents.
 
-import type { PrimitiveType } from '../../types/mfe-types.js';
+import type { PrimitiveType } from '../../core/types/mfe-types.js';
 import type { ExtractionHeuristic, ExtractionPattern } from './index.js';
 
 const patterns: ExtractionPattern[] = [

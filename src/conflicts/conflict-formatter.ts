@@ -8,7 +8,7 @@
  */
 
 import pc from 'picocolors';
-import type { ConflictPair, ConflictResult } from '../types/conflicts.js';
+import type { ConflictPair, ConflictResult } from '../core/types/conflicts.js';
 
 /**
  * Options for text formatting.

@@ -12,7 +12,7 @@
  */
 
 import { z } from 'zod';
-import type { SessionObservation, SessionMetrics } from '../../types/observation.js';
+import type { SessionObservation, SessionMetrics } from '../../core/types/observation.js';
 import type { ObservationInput } from '../copper/learning/types.js';
 
 // ============================================================================

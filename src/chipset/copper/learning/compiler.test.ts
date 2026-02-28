@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { PipelineSchema } from '../schema.js';
-import type { SessionObservation } from '../../../types/observation.js';
-import type { SkillCandidate, PatternEvidence } from '../../../types/detection.js';
+import type { SessionObservation } from '../../../core/types/observation.js';
+import type { SkillCandidate, PatternEvidence } from '../../../core/types/detection.js';
 import type { Pipeline, MoveInstruction, WaitInstruction } from '../types.js';
 import { LearningCompiler } from './compiler.js';
 

@@ -1,13 +1,13 @@
 import { PatternAnalyzer } from './pattern-analyzer.js';
 import { SuggestionStore } from './suggestion-store.js';
 import { SkillGenerator, GeneratedSkill } from './skill-generator.js';
-import { SkillStore } from '../storage/skill-store.js';
+import { SkillStore } from '../core/storage/skill-store.js';
 import {
   Suggestion,
   SkillCandidate,
   DetectionConfig,
   DEFAULT_DETECTION_CONFIG,
-} from '../types/detection.js';
+} from '../core/types/detection.js';
 import { inferDomain, generateSkillId } from '../identifiers/generator.js';
 import type { AgentId } from '../identifiers/types.js';
 import { DOMAIN_PREFIX_MAP } from '../identifiers/types.js';

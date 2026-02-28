@@ -46,7 +46,7 @@ export type {
   ProxyLogEntry,
   QuarantineItem,
   SecurityDetailOpts,
-} from '../components/SecurityPanel.js';
+} from '../../components/SecurityPanel.js';
 
 /** Shield indicator and security detail render functions. */
 export {
@@ -57,13 +57,13 @@ export {
   renderBlockedRequestLog,
   renderAgentIsolationStatus,
   renderProxyHealth,
-} from '../components/SecurityPanel.js';
+} from '../../components/SecurityPanel.js';
 
 /**
  * IPC events from SecurityPanel (Phase 372 event names).
  * Re-exported for convenience -- consumers can use either import path.
  */
-export { SECURITY_IPC_EVENTS as PANEL_IPC_EVENTS } from '../components/SecurityPanel.js';
+export { SECURITY_IPC_EVENTS as PANEL_IPC_EVENTS } from '../../components/SecurityPanel.js';
 
 // ============================================================================
 // IPC event constants (Tauri backend -> frontend)

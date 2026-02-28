@@ -1,5 +1,5 @@
 import { createHash } from 'crypto';
-import { PatternStore } from '../storage/pattern-store.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
 import { DeterminismAnalyzer } from './determinism-analyzer.js';
 import type {
   DeterminismConfig,
@@ -8,12 +8,12 @@ import type {
   StoredExecutionBatch,
   ToolExecutionPair,
   ClassifiedOperation,
-} from '../types/observation.js';
+} from '../core/types/observation.js';
 import {
   DEFAULT_PROMOTION_DETECTOR_CONFIG,
   DEFAULT_DETERMINISM_CONFIG,
   PROMOTABLE_TOOL_NAMES,
-} from '../types/observation.js';
+} from '../core/types/observation.js';
 
 /**
  * Detects promotion candidates by consuming DeterminismAnalyzer output,

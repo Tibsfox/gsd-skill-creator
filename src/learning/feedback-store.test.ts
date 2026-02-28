@@ -3,7 +3,7 @@ import { mkdir, rm, writeFile, readFile } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { FeedbackStore } from './feedback-store.js';
-import { FeedbackEvent } from '../types/learning.js';
+import { FeedbackEvent } from '../core/types/learning.js';
 
 describe('FeedbackStore', () => {
   const testDir = join(tmpdir(), `feedback-store-test-${Date.now()}`);

@@ -1,8 +1,8 @@
 import { readFile, writeFile, rename } from 'fs/promises';
 import { join, dirname } from 'path';
-import type { Pattern } from '../types/pattern.js';
-import type { RetentionConfig } from '../types/observation.js';
-import { DEFAULT_RETENTION_CONFIG } from '../types/observation.js';
+import type { Pattern } from '../core/types/pattern.js';
+import type { RetentionConfig } from '../core/types/observation.js';
+import { DEFAULT_RETENTION_CONFIG } from '../core/types/observation.js';
 
 export class RetentionManager {
   private config: RetentionConfig;

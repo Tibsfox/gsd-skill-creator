@@ -4,9 +4,9 @@ import { ScoreStage } from '../application/stages/score-stage.js';
 import type { PositionLookup } from '../application/stages/score-stage.js';
 import { createPosition } from './arithmetic.js';
 import type { PlaneActivationConfig } from './activation.js';
-import type { SkillIndex, SkillIndexEntry } from '../storage/skill-index.js';
+import type { SkillIndex, SkillIndexEntry } from '../core/storage/skill-index.js';
 import type { RelevanceScorer } from '../application/relevance-scorer.js';
-import type { ScoredSkill } from '../types/application.js';
+import type { ScoredSkill } from '../core/types/application.js';
 
 // Mock cosine-similarity module (required by ScoreStage import chain)
 vi.mock('../embeddings/cosine-similarity.js', () => ({

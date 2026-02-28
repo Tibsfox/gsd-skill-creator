@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm } from 'fs/promises';
 import { join } from 'path';
 import * as os from 'os';
-import { PatternStore } from '../storage/pattern-store.js';
-import type { DriftEvent, DemotionDecision, DriftMonitorConfig } from '../types/observation.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
+import type { DriftEvent, DemotionDecision, DriftMonitorConfig } from '../core/types/observation.js';
 import { DriftMonitor } from './drift-monitor.js';
 
 describe('DriftMonitor', () => {

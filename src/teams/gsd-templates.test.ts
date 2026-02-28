@@ -7,7 +7,7 @@ import {
   RESEARCH_DIMENSIONS,
 } from './gsd-templates.js';
 import { LEADER_TOOLS, WORKER_TOOLS } from './templates.js';
-import { validateTeamConfig } from '../validation/team-validation.js';
+import { validateTeamConfig } from '../core/validation/team-validation.js';
 
 // ============================================================================
 // GSD Research Team Tests

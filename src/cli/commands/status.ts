@@ -15,8 +15,8 @@
 
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import { BudgetValidator } from '../../validation/budget-validation.js';
-import { BudgetHistory } from '../../storage/budget-history.js';
+import { BudgetValidator } from '../../core/validation/budget-validation.js';
+import { BudgetHistory } from '../../core/storage/budget-history.js';
 import { createApplicationContext } from '../../index.js';
 import { renderInstalledSection, renderProjectionSection, buildStatusJson } from './status-display.js';
 import { getBudgetProfile } from '../../application/budget-profiles.js';

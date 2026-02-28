@@ -6,7 +6,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { ConflictFormatter } from './conflict-formatter.js';
-import type { ConflictPair, ConflictResult } from '../types/conflicts.js';
+import type { ConflictPair, ConflictResult } from '../core/types/conflicts.js';
 
 // Strip ANSI codes for easier string assertions
 function stripAnsi(str: string): string {

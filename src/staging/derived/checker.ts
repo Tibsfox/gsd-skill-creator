@@ -8,7 +8,7 @@
  * @module staging/derived/checker
  */
 
-import type { LineageEntry } from '../../types/observation.js';
+import type { LineageEntry } from '../../core/types/observation.js';
 import type { DerivedCheckResult } from './types.js';
 import type { ObservationEvidence } from './pattern-fidelity.js';
 import type { TrainingPair } from './training-coherence.js';

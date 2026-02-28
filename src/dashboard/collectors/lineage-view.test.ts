@@ -2,9 +2,9 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm } from 'fs/promises';
 import { join } from 'path';
 import * as os from 'os';
-import { PatternStore } from '../../storage/pattern-store.js';
+import { PatternStore } from '../../core/storage/pattern-store.js';
 import { LineageTracker } from '../../observation/lineage-tracker.js';
-import type { LineageViewData, LineageGraphEntry } from '../../types/dashboard.js';
+import type { LineageViewData, LineageGraphEntry } from '../../core/types/dashboard.js';
 import { LineageViewCollector } from './lineage-view.js';
 
 /**

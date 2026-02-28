@@ -1,11 +1,11 @@
-import type { SkillMetadata, Skill } from '../types/skill.js';
+import type { SkillMetadata, Skill } from '../core/types/skill.js';
 import { stripToPortable } from './portable-exporter.js';
 import { normalizePaths } from './path-normalizer.js';
 import matter from 'gray-matter';
 import { readdir, copyFile, mkdir, readFile, writeFile, stat } from 'fs/promises';
 import { join, relative } from 'path';
-import { safeParseFrontmatter } from '../validation/yaml-safety.js';
-import { SkillMetadataSchema } from '../validation/skill-validation.js';
+import { safeParseFrontmatter } from '../core/validation/yaml-safety.js';
+import { SkillMetadataSchema } from '../core/validation/skill-validation.js';
 
 /**
  * Platform configuration for skill storage and export.

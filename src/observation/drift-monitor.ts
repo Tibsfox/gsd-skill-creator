@@ -1,10 +1,10 @@
-import { PatternStore } from '../storage/pattern-store.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
 import type {
   DriftMonitorConfig,
   DriftEvent,
   DemotionDecision,
-} from '../types/observation.js';
-import { DEFAULT_DRIFT_MONITOR_CONFIG } from '../types/observation.js';
+} from '../core/types/observation.js';
+import { DEFAULT_DRIFT_MONITOR_CONFIG } from '../core/types/observation.js';
 
 /**
  * Monitors post-promotion script execution results for output drift.

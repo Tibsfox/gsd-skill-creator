@@ -6,7 +6,7 @@
  * "too close to call" warnings.
  */
 
-import type { SkillPrediction } from '../types/simulation.js';
+import type { SkillPrediction } from '../core/types/simulation.js';
 import { formatConfidence } from './confidence-categorizer.js';
 import type { ChallengerResult } from './challenger-detector.js';
 import type { DifferentiationHint } from './hint-generator.js';

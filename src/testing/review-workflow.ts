@@ -10,7 +10,7 @@
 
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import type { GeneratedTest } from '../types/test-generation.js';
+import type { GeneratedTest } from '../core/types/test-generation.js';
 
 /**
  * Result of the review workflow.

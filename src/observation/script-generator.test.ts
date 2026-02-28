@@ -3,8 +3,8 @@ import { createHash } from 'crypto';
 import { mkdtemp, rm, writeFile } from 'fs/promises';
 import { join } from 'path';
 import * as os from 'os';
-import { PatternStore } from '../storage/pattern-store.js';
-import type { StoredExecutionBatch, ToolExecutionPair, PromotionCandidate } from '../types/observation.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
+import type { StoredExecutionBatch, ToolExecutionPair, PromotionCandidate } from '../core/types/observation.js';
 import { ScriptGenerator } from './script-generator.js';
 import { OffloadOperationSchema } from '../chipset/blitter/types.js';
 

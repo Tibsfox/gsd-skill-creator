@@ -1,13 +1,13 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import type { SkillIndex, SkillIndexEntry } from '../storage/skill-index.js';
-import { listAllScopes, type ScopedSkillEntry } from '../storage/skill-index.js';
-import type { SkillScope } from '../types/scope.js';
-import { BudgetValidator, formatProgressBar } from '../validation/budget-validation.js';
-import { SkillStore } from '../storage/skill-store.js';
+import type { SkillIndex, SkillIndexEntry } from '../core/storage/skill-index.js';
+import { listAllScopes, type ScopedSkillEntry } from '../core/storage/skill-index.js';
+import type { SkillScope } from '../core/types/scope.js';
+import { BudgetValidator, formatProgressBar } from '../core/validation/budget-validation.js';
+import { SkillStore } from '../core/storage/skill-store.js';
 import { DependencyGraph } from '../composition/dependency-graph.js';
-import { getSkillsBasePath } from '../types/scope.js';
-import type { SkillMetadata } from '../types/skill.js';
+import { getSkillsBasePath } from '../core/types/scope.js';
+import type { SkillMetadata } from '../core/types/skill.js';
 
 /**
  * Scope filter for listing skills.

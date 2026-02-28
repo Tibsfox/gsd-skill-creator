@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { PatternSummarizer, summarizeSession } from './pattern-summarizer.js';
-import type { TranscriptEntry } from '../types/observation.js';
+import type { TranscriptEntry } from '../core/types/observation.js';
 
 describe('PatternSummarizer', () => {
   const summarizer = new PatternSummarizer();

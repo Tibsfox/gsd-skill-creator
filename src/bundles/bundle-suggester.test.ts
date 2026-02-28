@@ -17,7 +17,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { BundleSuggester } from './bundle-suggester.js';
-import type { SessionObservation } from '../types/observation.js';
+import type { SessionObservation } from '../core/types/observation.js';
 
 // ============================================================================
 // Helpers

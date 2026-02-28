@@ -10,7 +10,7 @@
  */
 
 import pc from 'picocolors';
-import type { HealthScore } from '../types/evaluator.js';
+import type { HealthScore } from '../core/types/evaluator.js';
 
 /**
  * Format options for terminal output.

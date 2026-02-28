@@ -1,7 +1,7 @@
 import { createHash } from 'crypto';
-import { PatternStore } from '../../storage/pattern-store.js';
-import type { PipelineStatusView, PipelineStageStatus } from '../../types/dashboard.js';
-import type { StoredExecutionBatch, ToolExecutionPair, DriftEvent } from '../../types/observation.js';
+import { PatternStore } from '../../core/storage/pattern-store.js';
+import type { PipelineStatusView, PipelineStageStatus } from '../../core/types/dashboard.js';
+import type { StoredExecutionBatch, ToolExecutionPair, DriftEvent } from '../../core/types/observation.js';
 
 /**
  * Collects pipeline status data by reading from PatternStore categories

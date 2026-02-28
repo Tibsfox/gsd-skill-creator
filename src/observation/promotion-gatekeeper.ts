@@ -3,11 +3,11 @@ import type {
   GatekeeperConfig,
   GatekeeperDecision,
   GatekeeperEvidence,
-} from '../types/observation.js';
-import { DEFAULT_GATEKEEPER_CONFIG } from '../types/observation.js';
+} from '../core/types/observation.js';
+import { DEFAULT_GATEKEEPER_CONFIG } from '../core/types/observation.js';
 import type { BenchmarkReport } from '../calibration/benchmark-reporter.js';
 import { calculateMCC } from '../calibration/mcc-calculator.js';
-import { PatternStore } from '../storage/pattern-store.js';
+import { PatternStore } from '../core/storage/pattern-store.js';
 
 /**
  * Evaluates promotion candidates against configurable thresholds.

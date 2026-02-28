@@ -12,7 +12,7 @@ import {
   type ExtractionPattern,
 } from './index.js';
 import type { ContentType } from '../analyzer.js';
-import type { PrimitiveType } from '../../types/mfe-types.js';
+import type { PrimitiveType } from '../../core/types/mfe-types.js';
 
 // --- Helper: run a heuristic pattern against input text ---
 

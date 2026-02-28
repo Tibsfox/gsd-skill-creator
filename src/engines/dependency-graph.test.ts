@@ -9,7 +9,7 @@ import {
   DomainDataFile,
   DependencyDataFile,
 } from './dependency-graph.js';
-import type { MathematicalPrimitive, DependencyEdge, DomainId } from '../types/mfe-types.js';
+import type { MathematicalPrimitive, DependencyEdge, DomainId } from '../core/types/mfe-types.js';
 
 // === Test Helpers ===
 

@@ -43,8 +43,8 @@ import type {
   PromptCollectorResult,
 } from '../../discovery/index.js';
 import { EmbeddingService } from '../../embeddings/embedding-service.js';
-import { SkillStore } from '../../storage/skill-store.js';
-import { getSkillsBasePath } from '../../types/scope.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
+import { getSkillsBasePath } from '../../core/types/scope.js';
 import { checkGsdInstalled } from '../../detection/gsd-reference-injector.js';
 
 // ============================================================================

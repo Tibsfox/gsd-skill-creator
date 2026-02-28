@@ -4,7 +4,7 @@ export type {
   PatternCategory,
   CommandPattern,
   DecisionPattern,
-} from './types/pattern.js';
+} from './core/types/pattern.js';
 
 export type {
   Skill,
@@ -12,17 +12,17 @@ export type {
   SkillTrigger,
   SkillLearning,
   SkillCorrection,
-} from './types/skill.js';
+} from './core/types/skill.js';
 
 export {
   SKILL_NAME_PATTERN,
   MAX_DESCRIPTION_LENGTH,
   validateSkillName,
   validateSkillMetadata,
-} from './types/skill.js';
+} from './core/types/skill.js';
 
 // Scope types and utilities
-export type { SkillScope, ScopedSkillPath } from './types/scope.js';
+export type { SkillScope, ScopedSkillPath } from './core/types/scope.js';
 export {
   getSkillsBasePath,
   getSkillPath,
@@ -30,7 +30,7 @@ export {
   resolveScopedSkillPath,
   SCOPE_FLAG,
   SCOPE_FLAG_SHORT,
-} from './types/scope.js';
+} from './core/types/scope.js';
 
 // Team types
 export type {
@@ -39,7 +39,7 @@ export type {
   TeamTask,
   InboxMessage,
   TeamValidationResult,
-} from './types/team.js';
+} from './core/types/team.js';
 
 export {
   TEAM_TOPOLOGIES,
@@ -48,7 +48,7 @@ export {
   TEAM_MEMBER_MODELS,
   BACKEND_TYPES,
   STRUCTURED_MESSAGE_TYPES,
-} from './types/team.js';
+} from './core/types/team.js';
 
 export type {
   TeamTopology,
@@ -57,21 +57,21 @@ export type {
   TeamMemberModel,
   BackendType,
   StructuredMessageType,
-} from './types/team.js';
+} from './core/types/team.js';
 
 // Storage - Import first so we can use in functions
-import { PatternStore } from './storage/pattern-store.js';
-import { SkillStore } from './storage/skill-store.js';
-import { SkillIndex } from './storage/skill-index.js';
+import { PatternStore } from './core/storage/pattern-store.js';
+import { SkillStore } from './core/storage/skill-store.js';
+import { SkillIndex } from './core/storage/skill-index.js';
 
 // Import scope utilities for factory functions
-import { getSkillsBasePath } from './types/scope.js';
-import type { SkillScope } from './types/scope.js';
+import { getSkillsBasePath } from './core/types/scope.js';
+import type { SkillScope } from './core/types/scope.js';
 
 // Re-export storage classes
 export { PatternStore, SkillStore, SkillIndex };
-export type { SkillIndexEntry, SkillIndexData, ScopedSkillEntry } from './storage/skill-index.js';
-export { listAllScopes } from './storage/skill-index.js';
+export type { SkillIndexEntry, SkillIndexData, ScopedSkillEntry } from './core/storage/skill-index.js';
+export { listAllScopes } from './core/storage/skill-index.js';
 
 // Convenience factory for creating all stores with consistent paths
 export function createStores(options?: {
@@ -129,8 +129,8 @@ export {
   validateSkillInput,
   SkillUpdateSchema,
   validateSkillUpdate,
-} from './validation/skill-validation.js';
-export type { SkillInput, SkillUpdate } from './validation/skill-validation.js';
+} from './core/validation/skill-validation.js';
+export type { SkillInput, SkillUpdate } from './core/validation/skill-validation.js';
 
 // Team validation
 export {
@@ -140,8 +140,8 @@ export {
   InboxMessageSchema,
   validateTeamConfig,
   validateInboxMessage,
-} from './validation/team-validation.js';
-export type { InboxMessageValidationResult } from './validation/team-validation.js';
+} from './core/validation/team-validation.js';
+export type { InboxMessageValidationResult } from './core/validation/team-validation.js';
 
 // Message safety
 export {
@@ -149,8 +149,8 @@ export {
   truncateMessageText,
   sanitizeInboxMessage,
   DEFAULT_MAX_MESSAGE_LENGTH,
-} from './validation/message-safety.js';
-export type { MessageSanitizeResult } from './validation/message-safety.js';
+} from './core/validation/message-safety.js';
+export type { MessageSanitizeResult } from './core/validation/message-safety.js';
 
 // Teams module: templates, storage, agent generation, wizard, validation
 export {
@@ -220,7 +220,7 @@ export type {
   BudgetProfile,
   ModelTier,
   ModelGuidance,
-} from './types/application.js';
+} from './core/types/application.js';
 
 // Learning module
 export * from './learning/index.js';
@@ -244,7 +244,7 @@ export type {
   BenchmarkReport,
 } from './calibration/index.js';
 
-export { DEFAULT_CONFIG } from './types/application.js';
+export { DEFAULT_CONFIG } from './core/types/application.js';
 
 // Embeddings module
 export {
@@ -375,7 +375,7 @@ export type {
 
 // Import applicator for factory
 import { SkillApplicator } from './application/skill-applicator.js';
-import type { ApplicationConfig, BudgetProfile } from './types/application.js';
+import type { ApplicationConfig, BudgetProfile } from './core/types/application.js';
 
 // Enhanced factory that includes applicator
 export function createApplicationContext(options?: {

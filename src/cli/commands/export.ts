@@ -2,15 +2,15 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { join, dirname } from 'path';
 import { mkdir, writeFile, readdir } from 'fs/promises';
-import { SkillStore } from '../../storage/skill-store.js';
-import type { Skill } from '../../types/skill.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
+import type { Skill } from '../../core/types/skill.js';
 import {
   exportPortableContent,
   exportSkillDirectory,
   getSupportedPlatforms,
   PLATFORMS,
 } from '../../portability/index.js';
-import { getSkillsBasePath } from '../../types/scope.js';
+import { getSkillsBasePath } from '../../core/types/scope.js';
 
 /**
  * CLI export command -- export skills for other platforms.

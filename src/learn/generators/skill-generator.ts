@@ -7,7 +7,7 @@
 //
 // Consumed by the sc:learn CLI (Plan 03) and the report generator (Plan 02).
 
-import type { MathematicalPrimitive } from '../../types/mfe-types.js';
+import type { MathematicalPrimitive } from '../../core/types/mfe-types.js';
 
 // === Exported Types ===
 
