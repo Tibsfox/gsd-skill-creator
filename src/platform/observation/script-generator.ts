@@ -1,8 +1,8 @@
 import { createHash } from 'crypto';
 import { PatternStore } from '../../core/storage/pattern-store.js';
-import { OffloadOperationSchema } from '../../chipset/blitter/types.js';
-import { executeOffloadOp } from '../../chipset/blitter/executor.js';
-import type { OffloadOperation, OffloadResult } from '../../chipset/blitter/types.js';
+import { OffloadOperationSchema } from '../../services/chipset/blitter/types.js';
+import { executeOffloadOp } from '../../services/chipset/blitter/executor.js';
+import type { OffloadOperation, OffloadResult } from '../../services/chipset/blitter/types.js';
 import type {
   PromotionCandidate,
   GeneratedScript,

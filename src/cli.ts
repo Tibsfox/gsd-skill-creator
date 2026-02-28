@@ -3,9 +3,9 @@ import { createRequire } from 'node:module';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { createStores, createApplicationContext } from './index.js';
-import { createSkillWorkflow } from './workflows/create-skill-workflow.js';
-import { listSkillsWorkflow, parseScopeFilter } from './workflows/list-skills-workflow.js';
-import { searchSkillsWorkflow } from './workflows/search-skills-workflow.js';
+import { createSkillWorkflow } from './services/workflows/create-skill-workflow.js';
+import { listSkillsWorkflow, parseScopeFilter } from './services/workflows/list-skills-workflow.js';
+import { searchSkillsWorkflow } from './services/workflows/search-skills-workflow.js';
 import { migrateCommand } from './tools/cli/commands/migrate.js';
 import { migrateAgentCommand, listAgentsInDir } from './tools/cli/commands/migrate-agent.js';
 import { validateAgentFrontmatter } from './core/validation/agent-validation.js';
@@ -26,7 +26,7 @@ import { installCommand } from './tools/cli/commands/install.js';
 import { statusCommand } from './tools/cli/commands/status.js';
 import { auditCommand } from './tools/cli/commands/audit.js';
 import { handleMigratePlaneCommand } from './packs/plane/migration.js';
-import { SuggestionManager } from './detection/index.js';
+import { SuggestionManager } from './services/detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './core/types/scope.js';
 import { SkillStore } from './core/storage/skill-store.js';
@@ -782,7 +782,7 @@ async function main() {
     case 'ag': {
       const subcommand = args[1];
       const { skillStore } = createStores();
-      const { AgentSuggestionManager } = await import('./agents/index.js');
+      const { AgentSuggestionManager } = await import('./services/agents/index.js');
       const manager = new AgentSuggestionManager('.planning/patterns', skillStore);
       const matter = await import('gray-matter');
 

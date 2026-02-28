@@ -8,7 +8,7 @@ const mockGenerate = vi.fn();
 const mockStore = vi.fn();
 const mockGetLatest = vi.fn();
 
-vi.mock('../../../orchestrator/session-continuity/snapshot-manager.js', () => ({
+vi.mock('../../../services/orchestrator/session-continuity/snapshot-manager.js', () => ({
   SnapshotManager: vi.fn().mockImplementation(function (this: Record<string, unknown>) {
     this.generate = mockGenerate;
     this.store = mockStore;
@@ -18,7 +18,7 @@ vi.mock('../../../orchestrator/session-continuity/snapshot-manager.js', () => ({
 
 const mockWarmStartGenerate = vi.fn();
 
-vi.mock('../../../orchestrator/session-continuity/warm-start.js', () => ({
+vi.mock('../../../services/orchestrator/session-continuity/warm-start.js', () => ({
   WarmStartGenerator: vi.fn().mockImplementation(function (this: Record<string, unknown>) {
     this.generate = mockWarmStartGenerate;
   }),
@@ -26,13 +26,13 @@ vi.mock('../../../orchestrator/session-continuity/warm-start.js', () => ({
 
 const mockHandoffGenerate = vi.fn();
 
-vi.mock('../../../orchestrator/session-continuity/handoff-generator.js', () => ({
+vi.mock('../../../services/orchestrator/session-continuity/handoff-generator.js', () => ({
   HandoffGenerator: vi.fn().mockImplementation(function (this: Record<string, unknown>) {
     this.generate = mockHandoffGenerate;
   }),
 }));
 
-vi.mock('../../../orchestrator/session-continuity/skill-preload-suggester.js', () => ({
+vi.mock('../../../services/orchestrator/session-continuity/skill-preload-suggester.js', () => ({
   SkillPreloadSuggester: vi.fn().mockImplementation(function () {
     // No methods needed for preload suggester
   }),
@@ -40,7 +40,7 @@ vi.mock('../../../orchestrator/session-continuity/skill-preload-suggester.js', (
 
 const mockStateRead = vi.fn();
 
-vi.mock('../../../orchestrator/state/state-reader.js', () => ({
+vi.mock('../../../services/orchestrator/state/state-reader.js', () => ({
   ProjectStateReader: vi.fn().mockImplementation(function (this: Record<string, unknown>) {
     this.read = mockStateRead;
   }),

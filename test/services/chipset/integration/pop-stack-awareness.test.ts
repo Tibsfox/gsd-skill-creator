@@ -17,7 +17,7 @@ import {
   PopStackAwareness,
   type PopStackConfig,
   type PopStackResult,
-} from '../../../../src/chipset/integration/pop-stack-awareness.js';
+} from '../../../../src/services/chipset/integration/pop-stack-awareness.js';
 
 // ============================================================================
 // Test Setup -- temporary filesystem

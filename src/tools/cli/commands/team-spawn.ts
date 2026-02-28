@@ -15,8 +15,8 @@ import {
   getTeamsBasePath,
   validateMemberAgents,
   writeTeamAgentFiles,
-} from '../../../teams/index.js';
-import type { MemberResolutionResult } from '../../../teams/index.js';
+} from '../../../services/teams/index.js';
+import type { MemberResolutionResult } from '../../../services/teams/index.js';
 import type { TeamConfig } from '../../../core/types/team.js';
 
 // ============================================================================

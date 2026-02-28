@@ -13,7 +13,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { readFile, readdir, stat, mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { parseProject } from '../../../../orchestrator/state/project-parser.js';
+import { parseProject } from '../../../../services/orchestrator/state/project-parser.js';
 
 // ── Types ───────────────────────────────────────────────────────────────
 

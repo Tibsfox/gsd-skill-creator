@@ -179,7 +179,7 @@ export {
   detectToolOverlap,
   detectSkillConflicts,
   detectRoleCoherence,
-} from './teams/index.js';
+} from './services/teams/index.js';
 export type {
   TemplateOptions,
   TemplateResult,
@@ -198,12 +198,12 @@ export type {
   SkillConflictEntry,
   RoleCoherenceResult,
   RoleCoherenceWarning,
-} from './teams/index.js';
+} from './services/teams/index.js';
 
 // Workflows
-export { createSkillWorkflow } from './workflows/create-skill-workflow.js';
-export { listSkillsWorkflow } from './workflows/list-skills-workflow.js';
-export { searchSkillsWorkflow } from './workflows/search-skills-workflow.js';
+export { createSkillWorkflow } from './services/workflows/create-skill-workflow.js';
+export { listSkillsWorkflow } from './services/workflows/list-skills-workflow.js';
+export { searchSkillsWorkflow } from './services/workflows/search-skills-workflow.js';
 
 // Application types
 export type {

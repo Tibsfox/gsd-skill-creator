@@ -11,9 +11,9 @@
 
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import { TeamStore, getTeamsBasePath } from '../../../teams/team-store.js';
-import { CostEstimator, PRICING_LAST_UPDATED } from '../../../teams/cost-estimator.js';
-import type { TeamScope } from '../../../teams/team-store.js';
+import { TeamStore, getTeamsBasePath } from '../../../services/teams/team-store.js';
+import { CostEstimator, PRICING_LAST_UPDATED } from '../../../services/teams/cost-estimator.js';
+import type { TeamScope } from '../../../services/teams/team-store.js';
 
 /**
  * Format a USD value for display.

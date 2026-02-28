@@ -13,13 +13,13 @@ import { mkdtemp, mkdir, writeFile, readFile, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-import { StackBridge } from '../../../../src/chipset/integration/stack-bridge.js';
-import { SessionEventBridge } from '../../../../src/chipset/integration/session-events.js';
-import { PopStackAwareness } from '../../../../src/chipset/integration/pop-stack-awareness.js';
-import { LearningCompiler } from '../../../../src/chipset/copper/learning/compiler.js';
-import { LifecycleSync } from '../../../../src/chipset/copper/lifecycle-sync.js';
-import { PipelineExecutor } from '../../../../src/chipset/copper/executor.js';
-import type { Pipeline, MoveInstruction } from '../../../../src/chipset/copper/types.js';
+import { StackBridge } from '../../../../src/services/chipset/integration/stack-bridge.js';
+import { SessionEventBridge } from '../../../../src/services/chipset/integration/session-events.js';
+import { PopStackAwareness } from '../../../../src/services/chipset/integration/pop-stack-awareness.js';
+import { LearningCompiler } from '../../../../src/services/chipset/copper/learning/compiler.js';
+import { LifecycleSync } from '../../../../src/services/chipset/copper/lifecycle-sync.js';
+import { PipelineExecutor } from '../../../../src/services/chipset/copper/executor.js';
+import type { Pipeline, MoveInstruction } from '../../../../src/services/chipset/copper/types.js';
 
 // ============================================================================
 // Test Scenario 1: Recording -> Learning Pipeline
@@ -447,7 +447,7 @@ describe('End-to-End: Full Lifecycle', () => {
 
 describe('Barrel Exports', () => {
   it('should export all integration module classes and types from integration/index.ts', async () => {
-    const integrationModule = await import('../../../../src/chipset/integration/index.js');
+    const integrationModule = await import('../../../../src/services/chipset/integration/index.js');
 
     // Classes
     expect(integrationModule.StackBridge).toBeDefined();
@@ -461,7 +461,7 @@ describe('Barrel Exports', () => {
   });
 
   it('should export all chipset sub-modules from chipset/index.ts as namespaces', async () => {
-    const chipsetModule = await import('../../../../src/chipset/index.js');
+    const chipsetModule = await import('../../../../src/services/chipset/index.js');
 
     // All 5 namespaces should exist
     expect(chipsetModule.copper).toBeDefined();
@@ -494,7 +494,7 @@ describe('Barrel Exports', () => {
   });
 
   it('should allow importing integration types through the chipset barrel', async () => {
-    const { integration } = await import('../../../../src/chipset/index.js');
+    const { integration } = await import('../../../../src/services/chipset/index.js');
 
     // Create instances through the namespace
     const bridge = new integration.StackBridge();

@@ -15,9 +15,9 @@
 import { randomUUID } from 'node:crypto';
 import type { WorkflowDefinition, WorkflowRunEntry } from './types.js';
 import type { WorkflowRunStore } from './workflow-run-store.js';
-import type { WorkState } from '../orchestrator/work-state/types.js';
-import type { WorkStateReader } from '../orchestrator/work-state/work-state-reader.js';
-import type { WorkStateWriter } from '../orchestrator/work-state/work-state-writer.js';
+import type { WorkState } from '../services/orchestrator/work-state/types.js';
+import type { WorkStateReader } from '../services/orchestrator/work-state/work-state-reader.js';
+import type { WorkStateWriter } from '../services/orchestrator/work-state/work-state-writer.js';
 import { resolveExtends } from './workflow-extends.js';
 import { validateWorkflow } from './workflow-validator.js';
 import { WorkflowDAG } from './workflow-dag.js';

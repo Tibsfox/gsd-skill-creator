@@ -43,7 +43,7 @@ vi.mock('picocolors', () => ({
 }));
 
 // Mock TeamStore
-vi.mock('../../../teams/team-store.js', () => {
+vi.mock('../../../services/teams/team-store.js', () => {
   return {
     TeamStore: class MockTeamStore {
       exists = mockExists;

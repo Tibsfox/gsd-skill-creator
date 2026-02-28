@@ -10,7 +10,7 @@
  * delegates pair detection, adds domain-specific suggestion logic.
  */
 
-import { CoActivationTracker } from '../../agents/co-activation-tracker.js';
+import { CoActivationTracker } from '../../services/agents/co-activation-tracker.js';
 import type { SessionObservation } from '../types/observation.js';
 import type { EventConnectionSuggestion } from './types.js';
 

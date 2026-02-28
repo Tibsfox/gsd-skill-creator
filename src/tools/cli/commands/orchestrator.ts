@@ -23,15 +23,15 @@ import {
   LifecycleCoordinator,
   evaluateGate,
   filterByVerbosity,
-} from '../../../orchestrator/index.js';
-import type { OutputSection } from '../../../orchestrator/index.js';
-import { ProjectStateReader } from '../../../orchestrator/state/state-reader.js';
-import { WorkStateWriter } from '../../../orchestrator/work-state/work-state-writer.js';
-import { WorkStateReader } from '../../../orchestrator/work-state/work-state-reader.js';
-import { QueueManager } from '../../../orchestrator/work-state/queue-manager.js';
-import { DEFAULT_WORK_STATE_FILENAME } from '../../../orchestrator/work-state/types.js';
-import { SnapshotManager } from '../../../orchestrator/session-continuity/snapshot-manager.js';
-import { SNAPSHOT_FILENAME } from '../../../orchestrator/session-continuity/types.js';
+} from '../../../services/orchestrator/index.js';
+import type { OutputSection } from '../../../services/orchestrator/index.js';
+import { ProjectStateReader } from '../../../services/orchestrator/state/state-reader.js';
+import { WorkStateWriter } from '../../../services/orchestrator/work-state/work-state-writer.js';
+import { WorkStateReader } from '../../../services/orchestrator/work-state/work-state-reader.js';
+import { QueueManager } from '../../../services/orchestrator/work-state/queue-manager.js';
+import { DEFAULT_WORK_STATE_FILENAME } from '../../../services/orchestrator/work-state/types.js';
+import { SnapshotManager } from '../../../services/orchestrator/session-continuity/snapshot-manager.js';
+import { SNAPSHOT_FILENAME } from '../../../services/orchestrator/session-continuity/types.js';
 import { RetentionManager } from '../../../platform/observation/retention-manager.js';
 
 // ============================================================================

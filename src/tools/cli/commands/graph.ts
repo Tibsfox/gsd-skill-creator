@@ -76,8 +76,8 @@ export async function graphCommand(args: string[]): Promise<number> {
       const lines = content.trim().split('\n').filter(Boolean);
 
       if (lines.length > 0) {
-        const { CoActivationTracker } = await import('../../../agents/co-activation-tracker.js');
-        const { ClusterDetector } = await import('../../../agents/cluster-detector.js');
+        const { CoActivationTracker } = await import('../../../services/agents/co-activation-tracker.js');
+        const { ClusterDetector } = await import('../../../services/agents/cluster-detector.js');
 
         const sessions = lines.map(line => JSON.parse(line));
         const tracker = new CoActivationTracker();

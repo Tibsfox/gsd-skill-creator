@@ -6,8 +6,8 @@
  * missing) and nonInteractiveCreate for flag-based mode (when both provided).
  */
 
-import { teamCreationWizard } from '../../../teams/index.js';
-import type { WizardOptions } from '../../../teams/index.js';
+import { teamCreationWizard } from '../../../services/teams/index.js';
+import type { WizardOptions } from '../../../services/teams/index.js';
 
 /**
  * Show help text for the team create command.

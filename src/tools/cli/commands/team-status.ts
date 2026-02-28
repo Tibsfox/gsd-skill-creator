@@ -14,7 +14,7 @@ import {
   TeamStore,
   getTeamsBasePath,
   validateTeamFull,
-} from '../../../teams/index.js';
+} from '../../../services/teams/index.js';
 import type { TeamConfig } from '../../../core/types/team.js';
 
 // ============================================================================
