@@ -1,14 +1,14 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { PipelineContext } from '../application/skill-pipeline.js';
 import { SkillPipeline, createEmptyContext } from '../application/skill-pipeline.js';
-import type { PlaneClassification } from '../engines/plane-classifier.js';
+import type { PlaneClassification } from '../packs/engines/plane-classifier.js';
 
 // Mock classifyProblem at module level (used by mfe-skill-type internals)
-vi.mock('../engines/plane-classifier.js', () => ({
+vi.mock('../packs/engines/plane-classifier.js', () => ({
   classifyProblem: vi.fn(),
 }));
 
-import { classifyProblem } from '../engines/plane-classifier.js';
+import { classifyProblem } from '../packs/engines/plane-classifier.js';
 import {
   MfeScoreHook,
   MfeBudgetHook,

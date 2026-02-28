@@ -14,9 +14,9 @@
 import { type SkillPosition, MATURITY_THRESHOLD } from './types.js';
 import { createPosition, classifyByVersine, estimateTheta, estimateRadius } from './arithmetic.js';
 import { PositionStore } from './position-store.js';
-import { SkillStore } from '../core/storage/skill-store.js';
-import type { Skill } from '../core/types/skill.js';
-import { getExtension } from '../core/types/extensions.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
+import type { Skill } from '../../core/types/skill.js';
+import { getExtension } from '../../core/types/extensions.js';
 
 // ============================================================================
 // Types

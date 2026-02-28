@@ -10,11 +10,11 @@ import type {
   Pitfall,
   TutorialSummary,
   Connection,
-} from '../../../../../src/dogfood/pydmd/types.js';
-import type { GeneratedSkill } from '../../../../../src/dogfood/pydmd/generate/types.js';
-import { composeSkill } from '../../../../../src/dogfood/pydmd/generate/skill-composer.js';
-import { countWords } from '../../../../../src/dogfood/pydmd/generate/word-counter.js';
-import { formatDecisionTree } from '../../../../../src/dogfood/pydmd/generate/decision-tree-formatter.js';
+} from '../../../../../src/packs/dogfood/pydmd/types.js';
+import type { GeneratedSkill } from '../../../../../src/packs/dogfood/pydmd/generate/types.js';
+import { composeSkill } from '../../../../../src/packs/dogfood/pydmd/generate/skill-composer.js';
+import { countWords } from '../../../../../src/packs/dogfood/pydmd/generate/word-counter.js';
+import { formatDecisionTree } from '../../../../../src/packs/dogfood/pydmd/generate/decision-tree-formatter.js';
 
 // --- Factory functions ---
 

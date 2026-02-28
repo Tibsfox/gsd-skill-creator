@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import type { RepoManifest, AlgorithmVariant } from '../../../../../src/dogfood/pydmd/types.js';
+import type { RepoManifest, AlgorithmVariant } from '../../../../../src/packs/dogfood/pydmd/types.js';
 import {
   extractConcepts,
   type ExtractedConcept,
-} from '../../../../../src/dogfood/pydmd/learn/concept-extractor.js';
+} from '../../../../../src/packs/dogfood/pydmd/learn/concept-extractor.js';
 
 // --- Factories ---
 

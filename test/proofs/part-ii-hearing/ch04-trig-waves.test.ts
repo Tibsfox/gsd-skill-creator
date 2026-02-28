@@ -73,7 +73,7 @@ describe('Chapter 4: Trigonometry and Waves — Computational Verification', () 
   // ---------------------------------------------------------------------------
   // proof-4-6-beat-frequency
   // cos(A) - cos(B) = -2 * sin((A+B)/2) * sin((A-B)/2)
-  // Platform connection: beat frequency → src/plane/signal-classification.ts (HIGH CONSEQUENCE)
+  // Platform connection: beat frequency → src/packs/plane/signal-classification.ts (HIGH CONSEQUENCE)
   // Technique 2: Property testing with 100 random angle pairs
   // ---------------------------------------------------------------------------
   describe('proof-4-6: beat frequency — sum-to-product identity', () => {

@@ -4,8 +4,8 @@ import {
   renderOrbitPlot,
   renderPhasePortrait,
   colorFromScheme,
-} from '../../../src/holomorphic/renderer/helpers';
-import type { ComplexNumber, FixedPointClassification } from '../../../src/holomorphic/types';
+} from '../../../src/packs/holomorphic/renderer/helpers';
+import type { ComplexNumber, FixedPointClassification } from '../../../src/packs/holomorphic/types';
 
 /* ------------------------------------------------------------------ */
 /*  Renderer Visualization Helpers                                      */

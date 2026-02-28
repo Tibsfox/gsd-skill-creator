@@ -10,7 +10,7 @@ import type {
   CompositionStep,
   CompositionType,
   DomainId,
-} from '../core/types/mfe-types.js';
+} from '../../core/types/mfe-types.js';
 
 // === Proof Types ===
 

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildReferences } from '../../../../../src/dogfood/pydmd/generate/reference-builder.js';
+import { buildReferences } from '../../../../../src/packs/dogfood/pydmd/generate/reference-builder.js';
 import type {
   KnowledgeGraph,
   AlgorithmVariant,
@@ -13,7 +13,7 @@ import type {
   ModuleNode,
   APIMethod,
   TutorialSummary,
-} from '../../../../../src/dogfood/pydmd/types.js';
+} from '../../../../../src/packs/dogfood/pydmd/types.js';
 
 // --- Factories ---
 

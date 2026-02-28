@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { magnitude } from '../../../src/holomorphic/complex/arithmetic';
-import type { SnapshotMatrix, DMDConstraints } from '../../../src/holomorphic/dmd/types';
+import { magnitude } from '../../../src/packs/holomorphic/complex/arithmetic';
+import type { SnapshotMatrix, DMDConstraints } from '../../../src/packs/holomorphic/dmd/types';
 
 /* ------------------------------------------------------------------ */
 /*  DMD Variants                                                        */
@@ -27,7 +27,7 @@ describe('DMD Variants', () => {
   /* ---------------------------------------------------------------- */
   describe('dmdc — DMD with Control', () => {
     it('separates system dynamics from control inputs (A + B matrices)', async () => {
-      const { dmdc } = await import('../../../src/holomorphic/dmd/dmd-control');
+      const { dmdc } = await import('../../../src/packs/holomorphic/dmd/dmd-control');
 
       // System with control: x_{k+1} = 0.9 * x_k + 0.5 * u_k
       const N = 30;
@@ -50,7 +50,7 @@ describe('DMD Variants', () => {
     });
 
     it('returns controlMatrix alongside standard DMDResult fields', async () => {
-      const { dmdc } = await import('../../../src/holomorphic/dmd/dmd-control');
+      const { dmdc } = await import('../../../src/packs/holomorphic/dmd/dmd-control');
 
       const N = 20;
       const x: number[] = [1.0];
@@ -80,7 +80,7 @@ describe('DMD Variants', () => {
   /* ---------------------------------------------------------------- */
   describe('mrdmd — Multi-Resolution DMD', () => {
     it('separates two time scales (slow + fast components)', async () => {
-      const { mrdmd } = await import('../../../src/holomorphic/dmd/dmd-multiresolution');
+      const { mrdmd } = await import('../../../src/packs/holomorphic/dmd/dmd-multiresolution');
 
       // Signal with slow + fast components
       const N = 64;
@@ -100,7 +100,7 @@ describe('DMD Variants', () => {
     });
 
     it('returns array of DMDResult (one per resolution level)', async () => {
-      const { mrdmd } = await import('../../../src/holomorphic/dmd/dmd-multiresolution');
+      const { mrdmd } = await import('../../../src/packs/holomorphic/dmd/dmd-multiresolution');
 
       const N = 32;
       const row: number[] = [];
@@ -125,7 +125,7 @@ describe('DMD Variants', () => {
   /* ---------------------------------------------------------------- */
   describe('pidmd — Physics-Informed DMD', () => {
     it('enforces |lambda| <= 1+eps (no growing eigenvalues beyond stability bound)', async () => {
-      const { pidmd } = await import('../../../src/holomorphic/dmd/dmd-physics');
+      const { pidmd } = await import('../../../src/packs/holomorphic/dmd/dmd-physics');
 
       // Signal with a growing mode (|lambda| > 1)
       const N = 20;
@@ -154,7 +154,7 @@ describe('DMD Variants', () => {
     });
 
     it('returns constrained eigenvalues (all |lambda| <= stabilityBound)', async () => {
-      const { pidmd } = await import('../../../src/holomorphic/dmd/dmd-physics');
+      const { pidmd } = await import('../../../src/packs/holomorphic/dmd/dmd-physics');
 
       const N = 25;
       const row1: number[] = [];
@@ -184,8 +184,8 @@ describe('DMD Variants', () => {
   /* ---------------------------------------------------------------- */
   describe('bopdmd — Bagging Optimized DMD', () => {
     it('handles noisy data (eigenvalues within tolerance of clean data)', async () => {
-      const { bopdmd } = await import('../../../src/holomorphic/dmd/dmd-robust');
-      const { dmd } = await import('../../../src/holomorphic/dmd/dmd-core');
+      const { bopdmd } = await import('../../../src/packs/holomorphic/dmd/dmd-robust');
+      const { dmd } = await import('../../../src/packs/holomorphic/dmd/dmd-core');
 
       const N = 40;
       const omega = 0.3;
@@ -220,7 +220,7 @@ describe('DMD Variants', () => {
     });
 
     it('returns median eigenvalues from multiple bootstrap samples', async () => {
-      const { bopdmd } = await import('../../../src/holomorphic/dmd/dmd-robust');
+      const { bopdmd } = await import('../../../src/packs/holomorphic/dmd/dmd-robust');
 
       const N = 30;
       const row1: number[] = [];

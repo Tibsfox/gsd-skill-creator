@@ -6,9 +6,9 @@ import {
   computeSkillMultiplier,
   classifyFatouJulia,
   clampAngularVelocity,
-} from '../../../src/holomorphic/dynamics/skill-dynamics';
-import { magnitude } from '../../../src/holomorphic/complex/arithmetic';
-import type { ComplexNumber } from '../../../src/holomorphic/types';
+} from '../../../src/packs/holomorphic/dynamics/skill-dynamics';
+import { magnitude } from '../../../src/packs/holomorphic/complex/arithmetic';
+import type { ComplexNumber } from '../../../src/packs/holomorphic/types';
 
 /* ------------------------------------------------------------------ */
 /*  Skill Dynamics Model                                                */

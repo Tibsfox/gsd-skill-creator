@@ -11,11 +11,11 @@ import type {
   Pitfall,
   TutorialSummary,
   Connection,
-} from '../../../../../src/dogfood/pydmd/types.js';
-import type { GeneratedSkill } from '../../../../../src/dogfood/pydmd/generate/types.js';
-import type { ReferenceSet } from '../../../../../src/dogfood/pydmd/generate/reference-builder.js';
-import type { AccuracyReport, DMDScenario } from '../../../../../src/dogfood/pydmd/validate/types.js';
-import { checkAccuracy } from '../../../../../src/dogfood/pydmd/validate/accuracy-checker.js';
+} from '../../../../../src/packs/dogfood/pydmd/types.js';
+import type { GeneratedSkill } from '../../../../../src/packs/dogfood/pydmd/generate/types.js';
+import type { ReferenceSet } from '../../../../../src/packs/dogfood/pydmd/generate/reference-builder.js';
+import type { AccuracyReport, DMDScenario } from '../../../../../src/packs/dogfood/pydmd/validate/types.js';
+import { checkAccuracy } from '../../../../../src/packs/dogfood/pydmd/validate/accuracy-checker.js';
 
 // --- Factory functions ---
 

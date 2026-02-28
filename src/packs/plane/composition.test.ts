@@ -19,7 +19,7 @@ import { createPosition, arcDistance, chordLength } from './arithmetic.js';
 import { ChordDetector, assessCompositionQuality } from './chords.js';
 import type { PositionStorePort } from './chords.js';
 import type { SkillPosition, ChordCandidate } from './types.js';
-import type { SkillCluster } from '../agents/cluster-detector.js';
+import type { SkillCluster } from '../../agents/cluster-detector.js';
 
 // ============================================================================
 // Helpers

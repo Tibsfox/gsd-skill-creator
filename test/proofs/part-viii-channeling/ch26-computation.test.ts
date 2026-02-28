@@ -11,7 +11,7 @@
 // - Proof 26.1 (L2): Halting problem — restricted halt detector defeated by diagonal construction
 // - Proof 26.2 (L2/L4): P ⊆ NP (L2) and Cook-Levin sketch (L4)
 //
-// Platform connection: halting → probabilistic activation (src/plane/activation.ts)
+// Platform connection: halting → probabilistic activation (src/packs/plane/activation.ts)
 
 import { describe, test, expect } from 'vitest';
 

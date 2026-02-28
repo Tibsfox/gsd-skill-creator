@@ -43,7 +43,7 @@ export const ch01Proofs: ProofStatement[] = [
     dependencies: [],
     status: 'proved',
     testId: 'proof-1-1-sqrt2-irrational',
-    platformConnection: 'src/plane/types.ts SkillPosition real-valued radius',
+    platformConnection: 'src/packs/plane/types.ts SkillPosition real-valued radius',
     subversion: '1.50.51',
   },
   {
@@ -57,7 +57,7 @@ export const ch01Proofs: ProofStatement[] = [
     dependencies: [],
     status: 'proved',
     testId: 'proof-1-2-rationals-countable',
-    platformConnection: 'src/plane/position-store.ts enumerable positions',
+    platformConnection: 'src/packs/plane/position-store.ts enumerable positions',
     subversion: '1.50.51',
   },
   {
@@ -117,7 +117,7 @@ export const ch02Proofs: ProofStatement[] = [
     dependencies: [],
     status: 'proved',
     testId: 'proof-2-1-pythagorean-identity',
-    platformConnection: 'src/plane/observer-bridge.ts angular constraint; src/plane/types.ts SkillPositionSchema',
+    platformConnection: 'src/packs/plane/observer-bridge.ts angular constraint; src/packs/plane/types.ts SkillPositionSchema',
     subversion: '1.50.52',
   },
   {
@@ -145,7 +145,7 @@ export const ch02Proofs: ProofStatement[] = [
     dependencies: ['thm-2-1'],
     status: 'proved',
     testId: 'proof-2-3-symmetry',
-    platformConnection: 'src/plane/observer-bridge.ts symmetric angular clamping',
+    platformConnection: 'src/packs/plane/observer-bridge.ts symmetric angular clamping',
     subversion: '1.50.52',
   },
   {
@@ -159,7 +159,7 @@ export const ch02Proofs: ProofStatement[] = [
     dependencies: ['thm-2-1'],
     status: 'proved',
     testId: 'proof-2-4-trig-relationships',
-    platformConnection: 'src/plane/activation.ts TangentContext',
+    platformConnection: 'src/packs/plane/activation.ts TangentContext',
     subversion: '1.50.52',
   },
   {
@@ -172,7 +172,7 @@ export const ch02Proofs: ProofStatement[] = [
     studentExperience: 'I can do this',
     dependencies: ['thm-2-1'],
     status: 'proved',
-    platformConnection: 'src/plane/composition.ts Euler-based skill composition',
+    platformConnection: 'src/packs/plane/composition.ts Euler-based skill composition',
     subversion: '1.50.52',
   },
 ];
@@ -192,7 +192,7 @@ export const ch03Proofs: ProofStatement[] = [
     dependencies: [],
     status: 'proved',
     testId: 'proof-3-1-pythagorean-theorem',
-    platformConnection: 'src/plane/types.ts SkillPosition (r, theta) coordinate system',
+    platformConnection: 'src/packs/plane/types.ts SkillPosition (r, theta) coordinate system',
     subversion: '1.50.53',
   },
   {
@@ -219,7 +219,7 @@ export const ch03Proofs: ProofStatement[] = [
     dependencies: ['thm-3-1'],
     status: 'proved',
     testId: 'proof-3-3-cauchy-schwarz',
-    platformConnection: 'src/plane/activation.ts tangentScore bounded by Cauchy-Schwarz (HIGH CONSEQUENCE)',
+    platformConnection: 'src/packs/plane/activation.ts tangentScore bounded by Cauchy-Schwarz (HIGH CONSEQUENCE)',
     subversion: '1.50.53',
   },
   {
@@ -233,7 +233,7 @@ export const ch03Proofs: ProofStatement[] = [
     dependencies: ['thm-3-1'],
     status: 'proved',
     testId: 'proof-3-4-distance-formula',
-    platformConnection: 'src/plane/position-store.ts angular distance between skills',
+    platformConnection: 'src/packs/plane/position-store.ts angular distance between skills',
     subversion: '1.50.53',
   },
 ];
@@ -253,7 +253,7 @@ export const ch04Proofs: ProofStatement[] = [
     dependencies: ['thm-2-1'],
     status: 'proved',
     testId: 'proof-4-1-cos-addition',
-    platformConnection: 'src/plane/arithmetic.ts angular addition',
+    platformConnection: 'src/packs/plane/arithmetic.ts angular addition',
     subversion: '1.50.54',
   },
   {
@@ -267,7 +267,7 @@ export const ch04Proofs: ProofStatement[] = [
     dependencies: ['thm-2-1'],
     status: 'proved',
     testId: 'proof-4-2-sin-addition',
-    platformConnection: 'src/plane/arithmetic.ts angular addition',
+    platformConnection: 'src/packs/plane/arithmetic.ts angular addition',
     subversion: '1.50.54',
   },
   {
@@ -294,7 +294,7 @@ export const ch04Proofs: ProofStatement[] = [
     dependencies: ['thm-4-1', 'thm-4-2'],
     status: 'proved',
     testId: 'proof-4-6-beat-frequency',
-    platformConnection: 'src/plane/signal-classification.ts beat-frequency sensitivity (HIGH CONSEQUENCE)',
+    platformConnection: 'src/packs/plane/signal-classification.ts beat-frequency sensitivity (HIGH CONSEQUENCE)',
     subversion: '1.50.54',
   },
 ];
@@ -314,7 +314,7 @@ export const ch05Proofs: ProofStatement[] = [
     dependencies: [],
     status: 'proved',
     testId: 'proof-5-3-12tet-formula',
-    platformConnection: 'src/plane/chords.ts terminological (chord name mapping)',
+    platformConnection: 'src/packs/plane/chords.ts terminological (chord name mapping)',
     subversion: '1.50.55',
   },
   {
@@ -328,7 +328,7 @@ export const ch05Proofs: ProofStatement[] = [
     dependencies: ['thm-5-3'],
     status: 'proved',
     testId: 'proof-5-4-12tet-approx',
-    platformConnection: 'src/plane/signal-classification.ts structural parallel',
+    platformConnection: 'src/packs/plane/signal-classification.ts structural parallel',
     subversion: '1.50.55',
   },
 ];
@@ -362,7 +362,7 @@ export const ch06Proofs: ProofStatement[] = [
     status: 'proved',
     testId: 'proof-6-2-boundary-conditions',
     platformConnection:
-      'src/plane/observer-bridge.ts velocity clamping — boundary conditions → angular velocity bound (HIGH CONSEQUENCE)',
+      'src/packs/plane/observer-bridge.ts velocity clamping — boundary conditions → angular velocity bound (HIGH CONSEQUENCE)',
     subversion: '1.50.56',
   },
   {
@@ -376,7 +376,7 @@ export const ch06Proofs: ProofStatement[] = [
     dependencies: ['thm-6-1'],
     status: 'acknowledged-gap',
     testId: 'proof-6-4-fourier-convergence',
-    platformConnection: 'src/plane/signal-classification.ts classifySignals (Fourier → signal decomposition)',
+    platformConnection: 'src/packs/plane/signal-classification.ts classifySignals (Fourier → signal decomposition)',
     subversion: '1.50.56',
   },
 ];
@@ -396,7 +396,7 @@ export const ch07Proofs: ProofStatement[] = [
     dependencies: [],
     status: 'proved',
     testId: 'proof-7-1-z12-group',
-    platformConnection: 'src/plane/signal-classification.ts 12 signal categories as Z₁₂ structural parallel',
+    platformConnection: 'src/packs/plane/signal-classification.ts 12 signal categories as Z₁₂ structural parallel',
     subversion: '1.50.57',
   },
   {
@@ -410,7 +410,7 @@ export const ch07Proofs: ProofStatement[] = [
     dependencies: [],
     status: 'proved',
     testId: 'proof-7-2-geometric-series',
-    platformConnection: 'src/plane/types.ts MATURITY_THRESHOLD convergence',
+    platformConnection: 'src/packs/plane/types.ts MATURITY_THRESHOLD convergence',
     subversion: '1.50.57',
   },
   {
@@ -424,7 +424,7 @@ export const ch07Proofs: ProofStatement[] = [
     dependencies: [],
     status: 'proved',
     testId: 'proof-7-3-information-density',
-    platformConnection: 'src/plane/types.ts SkillPosition coordinate vs. discrete label design',
+    platformConnection: 'src/packs/plane/types.ts SkillPosition coordinate vs. discrete label design',
     subversion: '1.50.57',
   },
 ];
@@ -522,7 +522,7 @@ export const ch08Proofs: ProofStatement[] = [
     dependencies: ['thm-8-6'],
     status: 'proved',
     testId: 'proof-8-7-derivative-sin',
-    platformConnection: 'src/plane/observer-bridge.ts angular velocity as discrete derivative',
+    platformConnection: 'src/packs/plane/observer-bridge.ts angular velocity as discrete derivative',
     subversion: '1.50.58',
   },
   {
@@ -568,7 +568,7 @@ export const ch09Proofs: ProofStatement[] = [
     dependencies: ['thm-8-1'],
     status: 'proved',
     testId: 'proof-9-1-ftc-part1',
-    platformConnection: 'src/plane/observer-bridge.ts radius growth as discrete Riemann sum',
+    platformConnection: 'src/packs/plane/observer-bridge.ts radius growth as discrete Riemann sum',
     subversion: '1.50.59',
   },
   {
@@ -627,7 +627,7 @@ export const ch10Proofs: ProofStatement[] = [
     dependencies: ['thm-8-5', 'thm-8-7'],
     status: 'proved',
     testId: 'proof-10-1-harmonic-oscillator',
-    platformConnection: 'src/plane/observer-bridge.ts skill position oscillation dynamics',
+    platformConnection: 'src/packs/plane/observer-bridge.ts skill position oscillation dynamics',
     subversion: '1.50.60',
   },
   {
@@ -988,7 +988,7 @@ export const ch15Proofs: ProofStatement[] = [
     dependencies: ['thm-15-1'],
     status: 'proved',
     testId: 'proof-15-2-natural-units',
-    platformConnection: 'src/plane/types.ts radius ∈ [0,1] is natural units normalization — max skill strength = 1',
+    platformConnection: 'src/packs/plane/types.ts radius ∈ [0,1] is natural units normalization — max skill strength = 1',
     subversion: '1.50.66',
   },
   {
@@ -1200,7 +1200,7 @@ export const ch20Proofs: ProofStatement[] = [
     dependencies: [],
     status: 'proved',
     testId: 'proof-20-1-bayes-theorem',
-    platformConnection: 'computeEnhancedScore in src/plane/activation.ts IS Bayesian inference (identity-level connection)',
+    platformConnection: 'computeEnhancedScore in src/packs/plane/activation.ts IS Bayesian inference (identity-level connection)',
     subversion: '1.50.70',
   },
   {
@@ -1389,7 +1389,7 @@ export const ch23Proofs: ProofStatement[] = [
     studentExperience: 'Acknowledged gap — definitional axioms accepted',
     dependencies: [],
     status: 'acknowledged-gap',
-    platformConnection: 'Skill domain with composition satisfies category axioms (src/plane/composition.ts)',
+    platformConnection: 'Skill domain with composition satisfies category axioms (src/packs/plane/composition.ts)',
     subversion: '1.50.73',
   },
   {
@@ -1403,7 +1403,7 @@ export const ch23Proofs: ProofStatement[] = [
     dependencies: ['thm-23-A'],
     status: 'proved',
     testId: 'proof-23-1-category-axioms',
-    platformConnection: 'src/plane/composition.ts implements categorical composition (identity-level)',
+    platformConnection: 'src/packs/plane/composition.ts implements categorical composition (identity-level)',
     subversion: '1.50.73',
   },
   {
@@ -1431,7 +1431,7 @@ export const ch23Proofs: ProofStatement[] = [
     dependencies: ['thm-23-2'],
     status: 'acknowledged-gap',
     testId: 'proof-23-3-yoneda-partial',
-    platformConnection: 'Activation function in src/plane/activation.ts IS Yoneda embedding (identity-level)',
+    platformConnection: 'Activation function in src/packs/plane/activation.ts IS Yoneda embedding (identity-level)',
     subversion: '1.50.73',
   },
 ];
@@ -1464,7 +1464,7 @@ export const ch24Proofs: ProofStatement[] = [
     dependencies: ['thm-24-A'],
     status: 'proved',
     testId: 'proof-24-1-shannon-entropy',
-    platformConnection: 'src/plane/signal-classification.ts 12-type taxonomy reduces entropy (identity-level)',
+    platformConnection: 'src/packs/plane/signal-classification.ts 12-type taxonomy reduces entropy (identity-level)',
     subversion: '1.50.74',
   },
   {
@@ -1512,7 +1512,7 @@ export const ch25Proofs: ProofStatement[] = [
     dependencies: ['thm-24-1', 'thm-22-3'],
     status: 'proved',
     testId: 'proof-25-1-fourier-inversion',
-    platformConnection: 'Activation signal Fourier decomposition is lossless (src/plane/activation.ts)',
+    platformConnection: 'Activation signal Fourier decomposition is lossless (src/packs/plane/activation.ts)',
     subversion: '1.50.75',
   },
   {
@@ -1560,7 +1560,7 @@ export const ch26Proofs: ProofStatement[] = [
     dependencies: ['thm-19-1'],
     status: 'proved',
     testId: 'proof-26-1-halting',
-    platformConnection: 'Probabilistic activation in src/plane/activation.ts is the correct response to undecidability',
+    platformConnection: 'Probabilistic activation in src/packs/plane/activation.ts is the correct response to undecidability',
     subversion: '1.50.76',
   },
   {

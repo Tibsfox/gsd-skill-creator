@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { checkConsistency } from '../../../../src/dogfood/verification/consistency-checker.js';
-import type { LearnedConceptRef, EcosystemClaim } from '../../../../src/dogfood/verification/types.js';
-import { GAP_TYPES, GAP_SEVERITIES } from '../../../../src/dogfood/verification/types.js';
+import { checkConsistency } from '../../../../src/packs/dogfood/verification/consistency-checker.js';
+import type { LearnedConceptRef, EcosystemClaim } from '../../../../src/packs/dogfood/verification/types.js';
+import { GAP_TYPES, GAP_SEVERITIES } from '../../../../src/packs/dogfood/verification/types.js';
 
 // --- Helpers ---
 

@@ -19,8 +19,8 @@
  * @module
  */
 
-import { createEnvelope, EventEnvelopeSchema } from '../amiga/message-envelope.js';
-import type { EventEnvelope } from '../amiga/message-envelope.js';
+import { createEnvelope, EventEnvelopeSchema } from '../../amiga/message-envelope.js';
+import type { EventEnvelope } from '../../amiga/message-envelope.js';
 import type { LearnerObservation } from './observation-types.js';
 
 // ============================================================================

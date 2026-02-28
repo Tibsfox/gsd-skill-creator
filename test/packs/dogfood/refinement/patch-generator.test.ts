@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import type { GapRecord, GapType, GapSeverity } from '../../../../src/dogfood/verification/types.js';
-import type { KnowledgePatch } from '../../../../src/dogfood/refinement/types.js';
-import { generatePatches } from '../../../../src/dogfood/refinement/patch-generator.js';
+import type { GapRecord, GapType, GapSeverity } from '../../../../src/packs/dogfood/verification/types.js';
+import type { KnowledgePatch } from '../../../../src/packs/dogfood/refinement/types.js';
+import { generatePatches } from '../../../../src/packs/dogfood/refinement/patch-generator.js';
 
 // --- Factory ---
 

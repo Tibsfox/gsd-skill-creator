@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { verifyProgression } from '../../../../src/dogfood/verification/eight-layer-verifier.js';
-import type { LearnedConceptRef, EcosystemClaim } from '../../../../src/dogfood/verification/types.js';
+import { verifyProgression } from '../../../../src/packs/dogfood/verification/eight-layer-verifier.js';
+import type { LearnedConceptRef, EcosystemClaim } from '../../../../src/packs/dogfood/verification/types.js';
 
 // --- Helpers ---
 

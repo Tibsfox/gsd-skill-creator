@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { segmentChapter } from '../../../../src/dogfood/extraction/chunk-segmenter.js';
-import type { ChapterMap, PartMap } from '../../../../src/dogfood/extraction/types.js';
+import { segmentChapter } from '../../../../src/packs/dogfood/extraction/chunk-segmenter.js';
+import type { ChapterMap, PartMap } from '../../../../src/packs/dogfood/extraction/types.js';
 
 // --- Factories ---
 

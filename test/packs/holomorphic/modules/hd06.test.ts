@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MODULE_DIR = resolve(__dirname, '../../../../src/holomorphic/modules/HD-06');
+const MODULE_DIR = resolve(__dirname, '../../../../src/packs/holomorphic/modules/HD-06');
 
 /* ------------------------------------------------------------------ */
 /*  HD-06: Topology of the Complex Plane                               */

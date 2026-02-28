@@ -11,7 +11,7 @@
 //
 // MOST IMPORTANT PLATFORM CONNECTION IN PHASE 478:
 // Bayes' theorem (Proof 20.1) validates that computeEnhancedScore in
-// src/plane/activation.ts IS Bayesian inference (identity connection, not analogy).
+// src/packs/plane/activation.ts IS Bayesian inference (identity connection, not analogy).
 
 import { describe, test, expect } from 'vitest';
 
@@ -195,7 +195,7 @@ describe('Chapter 20: Probability Theory — Computational Verification', () => 
 
     // PLATFORM CONNECTION: computeEnhancedScore IS Bayesian inference
     test('platform: Bayesian scoring formula — posterior = likelihood × prior / normalizer', () => {
-      // computeEnhancedScore in src/plane/activation.ts:
+      // computeEnhancedScore in src/packs/plane/activation.ts:
       // semanticScore ≈ P(context | skill active) [likelihood]
       // position.radius ≈ P(skill active) [prior]
       // combinedScore ≈ P(skill active | context) [posterior]

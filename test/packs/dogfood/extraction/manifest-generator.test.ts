@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import {
   generateManifest,
   extractExercises,
-} from '../../../../src/dogfood/extraction/manifest-generator.js';
-import type { ChapterMap, PartMap } from '../../../../src/dogfood/extraction/types.js';
+} from '../../../../src/packs/dogfood/extraction/manifest-generator.js';
+import type { ChapterMap, PartMap } from '../../../../src/packs/dogfood/extraction/types.js';
 
 // --- Factories ---
 

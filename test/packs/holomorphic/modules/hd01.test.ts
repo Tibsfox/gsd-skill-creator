@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MODULE_DIR = resolve(__dirname, '../../../../src/holomorphic/modules/HD-01');
+const MODULE_DIR = resolve(__dirname, '../../../../src/packs/holomorphic/modules/HD-01');
 
 /* ------------------------------------------------------------------ */
 /*  HD-01: Iteration on the Complex Plane                              */
@@ -48,7 +48,7 @@ describe('HD-01 — Iteration on the Complex Plane', () => {
     });
 
     it('exports runTrySession function', async () => {
-      const mod = await import('../../../../src/holomorphic/modules/HD-01/try-session');
+      const mod = await import('../../../../src/packs/holomorphic/modules/HD-01/try-session');
       expect(typeof mod.runTrySession).toBe('function');
     });
   });

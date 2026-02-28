@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import type { AlgorithmVariant, Parameter } from '../../../../../src/dogfood/pydmd/types.js';
-import type { ExtractedConcept } from '../../../../../src/dogfood/pydmd/learn/concept-extractor.js';
+import type { AlgorithmVariant, Parameter } from '../../../../../src/packs/dogfood/pydmd/types.js';
+import type { ExtractedConcept } from '../../../../../src/packs/dogfood/pydmd/learn/concept-extractor.js';
 import {
   mapComplexPlane,
   type ComplexPlaneMap,
-} from '../../../../../src/dogfood/pydmd/learn/complex-plane-mapper.js';
+} from '../../../../../src/packs/dogfood/pydmd/learn/complex-plane-mapper.js';
 
 // --- Factories ---
 

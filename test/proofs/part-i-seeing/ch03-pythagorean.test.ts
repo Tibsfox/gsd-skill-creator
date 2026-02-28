@@ -80,7 +80,7 @@ describe('Chapter 3: Pythagorean Theorem — Computational Verification', () => 
   // ---------------------------------------------------------------------------
   // proof-3-3-cauchy-schwarz: |u·v| <= |u||v|
   // Technique 2: Property testing
-  // Platform connection: tangentScore in src/plane/activation.ts is bounded <= 1
+  // Platform connection: tangentScore in src/packs/plane/activation.ts is bounded <= 1
   // This is labeled HIGH CONSEQUENCE in the proof document.
   // ---------------------------------------------------------------------------
   describe('proof-3-5: Cauchy-Schwarz inequality |u·v| <= |u||v|', () => {
@@ -115,7 +115,7 @@ describe('Chapter 3: Pythagorean Theorem — Computational Verification', () => 
 
     // PLATFORM CONNECTION TEST
     // Proves that the dot product of two unit-circle skill positions is in [-1, 1].
-    // This bounds the tangentScore used in src/plane/activation.ts.
+    // This bounds the tangentScore used in src/packs/plane/activation.ts.
     // When both u and v are on the unit circle (|u| = |v| = 1),
     // Cauchy-Schwarz gives |u·v| <= 1*1 = 1, so dot product is in [-1, 1].
     test('activation score analog: unit-vector dot product is bounded in [-1, 1]', () => {

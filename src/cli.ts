@@ -25,7 +25,7 @@ import { publishCommand } from './cli/commands/publish.js';
 import { installCommand } from './cli/commands/install.js';
 import { statusCommand } from './cli/commands/status.js';
 import { auditCommand } from './cli/commands/audit.js';
-import { handleMigratePlaneCommand } from './plane/migration.js';
+import { handleMigratePlaneCommand } from './packs/plane/migration.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './core/types/scope.js';

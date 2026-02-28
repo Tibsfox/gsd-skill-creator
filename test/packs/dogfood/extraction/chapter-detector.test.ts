@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { detectParts, detectChapters } from '../../../../src/dogfood/extraction/chapter-detector.js';
-import type { RawPage, PartMap } from '../../../../src/dogfood/extraction/types.js';
+import { detectParts, detectChapters } from '../../../../src/packs/dogfood/extraction/chapter-detector.js';
+import type { RawPage, PartMap } from '../../../../src/packs/dogfood/extraction/types.js';
 
 // --- Factories ---
 

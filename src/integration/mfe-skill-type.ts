@@ -7,7 +7,7 @@
 // This module is the skill type definition only. Pipeline hook wiring
 // (insertAfter/insertBefore) is handled by pipeline-hooks.ts.
 
-import { classifyProblem } from '../engines/plane-classifier.js';
+import { classifyProblem } from '../packs/engines/plane-classifier.js';
 import type { DomainId } from '../core/types/mfe-types.js';
 import type { ScoredSkill } from '../core/types/application.js';
 

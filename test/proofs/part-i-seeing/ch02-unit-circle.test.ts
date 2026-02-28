@@ -35,7 +35,7 @@ describe('Chapter 2: Unit Circle — Computational Verification', () => {
     // PLATFORM CONNECTION TEST — CVER-03 requirement
     // Proves that skill activation is bounded: if a skill position sits on the unit circle,
     // then cos^2(theta) + sin^2(theta) = 1 guarantees |position| = 1.
-    // This validates src/plane/observer-bridge.ts angular constraint.
+    // This validates src/packs/plane/observer-bridge.ts angular constraint.
     test('Pythagorean identity holds for 1000 random skill positions — activation is bounded', () => {
       const skillAngles = randomAngles(1000);
       for (const theta of skillAngles) {
@@ -115,7 +115,7 @@ describe('Chapter 2: Unit Circle — Computational Verification', () => {
   // ---------------------------------------------------------------------------
   // proof-2-4-trig-relationships: tan = sin/cos
   // Technique 1: Numerical evaluation (avoid near-zero cos values)
-  // Platform connection: src/plane/activation.ts TangentContext
+  // Platform connection: src/packs/plane/activation.ts TangentContext
   // ---------------------------------------------------------------------------
   describe('proof-2-4: tan(theta) = sin(theta)/cos(theta)', () => {
     // Exclude angles near pi/2 where cos approaches zero

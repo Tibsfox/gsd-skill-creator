@@ -5,12 +5,12 @@
 //
 // THE MOST IMPORTANT TEST FILE IN THE PHASE 477 SUITE.
 // Euler's formula e^(iθ) = cos θ + i sin θ is the mathematical heart of the
-// platform: composePositions in src/plane/arithmetic.ts IS complex multiplication,
+// platform: composePositions in src/packs/plane/arithmetic.ts IS complex multiplication,
 // and Euler's formula mandates that composition add angles and multiply radii.
 
 import { describe, test, expect } from 'vitest';
-import { composePositions } from '../../../src/plane/arithmetic';
-import type { SkillPosition } from '../../../src/plane/types';
+import { composePositions } from '../../../src/packs/plane/arithmetic';
+import type { SkillPosition } from '../../../src/packs/plane/types';
 
 // ---------------------------------------------------------------------------
 // Complex number helpers
@@ -620,7 +620,7 @@ describe('Chapter 14: Complex Analysis — Computational Verification', () => {
   // PLATFORM TEST: composePositions implements complex multiplication
   //
   // This is the definitive platform connection test:
-  // composePositions(a, b) in src/plane/arithmetic.ts computes:
+  // composePositions(a, b) in src/packs/plane/arithmetic.ts computes:
   //   theta: normalizeAngle(a.theta + b.theta)  [angles add]
   //   radius: clamp(a.radius * b.radius, 0, 1)  [radii multiply]
   //

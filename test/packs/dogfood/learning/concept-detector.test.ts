@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { detectConcepts } from '../../../../src/dogfood/learning/concept-detector.js';
-import type { ChunkInput, LearnedConcept } from '../../../../src/dogfood/learning/types.js';
-import { INITIAL_RADIUS } from '../../../../src/dogfood/learning/types.js';
+import { detectConcepts } from '../../../../src/packs/dogfood/learning/concept-detector.js';
+import type { ChunkInput, LearnedConcept } from '../../../../src/packs/dogfood/learning/types.js';
+import { INITIAL_RADIUS } from '../../../../src/packs/dogfood/learning/types.js';
 
 // --- Factories ---
 

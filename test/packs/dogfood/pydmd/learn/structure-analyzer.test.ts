@@ -6,8 +6,8 @@ import {
   type MethodInfo,
   type ParameterInfo,
   type ImportInfo,
-} from '../../../../../src/dogfood/pydmd/learn/structure-analyzer.js';
-import type { RepoManifest } from '../../../../../src/dogfood/pydmd/types.js';
+} from '../../../../../src/packs/dogfood/pydmd/learn/structure-analyzer.js';
+import type { RepoManifest } from '../../../../../src/packs/dogfood/pydmd/types.js';
 
 // --- Factories ---
 

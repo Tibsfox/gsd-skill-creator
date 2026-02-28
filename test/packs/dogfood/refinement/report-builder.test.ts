@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import type { RefinementResult, KnowledgePatch, ImprovementTicket, SkillUpdate } from '../../../../src/dogfood/refinement/types.js';
-import type { ProgressState, ChapterMetrics, TrackProgress } from '../../../../src/dogfood/harness/types.js';
-import type { GapRecord } from '../../../../src/dogfood/verification/types.js';
-import { buildReport } from '../../../../src/dogfood/refinement/report-builder.js';
-import type { ReportInput, EightLayerMapping } from '../../../../src/dogfood/refinement/report-builder.js';
+import type { RefinementResult, KnowledgePatch, ImprovementTicket, SkillUpdate } from '../../../../src/packs/dogfood/refinement/types.js';
+import type { ProgressState, ChapterMetrics, TrackProgress } from '../../../../src/packs/dogfood/harness/types.js';
+import type { GapRecord } from '../../../../src/packs/dogfood/verification/types.js';
+import { buildReport } from '../../../../src/packs/dogfood/refinement/report-builder.js';
+import type { ReportInput, EightLayerMapping } from '../../../../src/packs/dogfood/refinement/report-builder.js';
 
 // --- Factories ---
 

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MODULE_DIR = resolve(__dirname, '../../../../src/holomorphic/modules/HD-07');
+const MODULE_DIR = resolve(__dirname, '../../../../src/packs/holomorphic/modules/HD-07');
 
 /* ------------------------------------------------------------------ */
 /*  HD-07: From Dynamics to Deep Learning                               */
@@ -55,7 +55,7 @@ describe('HD-07 — From Dynamics to Deep Learning', () => {
     });
 
     it('exports runTrySession function', async () => {
-      const mod = await import('../../../../src/holomorphic/modules/HD-07/try-session');
+      const mod = await import('../../../../src/packs/holomorphic/modules/HD-07/try-session');
       expect(typeof mod.runTrySession).toBe('function');
     });
   });

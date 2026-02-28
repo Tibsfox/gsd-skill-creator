@@ -1,8 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
-import { runTrackA, type TrackResult } from '../../../../src/dogfood/learning/track-runner.js';
-import { buildDefaultEcosystemIndex, type EcosystemDocIndex } from '../../../../src/dogfood/learning/cross-referencer.js';
-import type { ChunkInput, IngestionState } from '../../../../src/dogfood/learning/types.js';
-import { DEFAULT_TOKEN_BUDGET } from '../../../../src/dogfood/learning/types.js';
+import { runTrackA, type TrackResult } from '../../../../src/packs/dogfood/learning/track-runner.js';
+import { buildDefaultEcosystemIndex, type EcosystemDocIndex } from '../../../../src/packs/dogfood/learning/cross-referencer.js';
+import type { ChunkInput, IngestionState } from '../../../../src/packs/dogfood/learning/types.js';
+import { DEFAULT_TOKEN_BUDGET } from '../../../../src/packs/dogfood/learning/types.js';
 
 // --- Factories ---
 

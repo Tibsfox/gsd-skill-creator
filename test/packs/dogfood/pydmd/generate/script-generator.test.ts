@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { generateScripts } from '../../../../../src/dogfood/pydmd/generate/script-generator.js';
-import { checkCrossReferences } from '../../../../../src/dogfood/pydmd/generate/cross-reference-checker.js';
+import { generateScripts } from '../../../../../src/packs/dogfood/pydmd/generate/script-generator.js';
+import { checkCrossReferences } from '../../../../../src/packs/dogfood/pydmd/generate/cross-reference-checker.js';
 import type {
   KnowledgeGraph,
   AlgorithmVariant,
@@ -14,9 +14,9 @@ import type {
   ModuleNode,
   APIMethod,
   TutorialSummary,
-} from '../../../../../src/dogfood/pydmd/types.js';
-import type { ReferenceSet } from '../../../../../src/dogfood/pydmd/generate/reference-builder.js';
-import type { ScriptSet } from '../../../../../src/dogfood/pydmd/generate/script-generator.js';
+} from '../../../../../src/packs/dogfood/pydmd/types.js';
+import type { ReferenceSet } from '../../../../../src/packs/dogfood/pydmd/generate/reference-builder.js';
+import type { ScriptSet } from '../../../../../src/packs/dogfood/pydmd/generate/script-generator.js';
 
 // --- Factories ---
 

@@ -6,9 +6,9 @@
  */
 
 import { describe, it, expect, vi } from 'vitest';
-import { runTrackB } from '../../../../src/dogfood/learning/track-runner.js';
-import type { ChunkInput, IngestionState } from '../../../../src/dogfood/learning/types.js';
-import type { EcosystemDocIndex } from '../../../../src/dogfood/learning/cross-referencer.js';
+import { runTrackB } from '../../../../src/packs/dogfood/learning/track-runner.js';
+import type { ChunkInput, IngestionState } from '../../../../src/packs/dogfood/learning/types.js';
+import type { EcosystemDocIndex } from '../../../../src/packs/dogfood/learning/cross-referencer.js';
 
 // --- Helpers ---
 

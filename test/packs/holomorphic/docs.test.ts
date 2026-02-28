@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { existsSync, readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 
-const HOLOMORPHIC_ROOT = join(__dirname, '../../../src/holomorphic');
+const HOLOMORPHIC_ROOT = join(__dirname, '../../../src/packs/holomorphic');
 const README_PATH = join(HOLOMORPHIC_ROOT, 'README.md');
 const TEST_ROOT = join(__dirname, '.');
 

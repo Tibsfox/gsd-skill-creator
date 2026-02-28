@@ -14,9 +14,9 @@ import type {
   DependencyEdge,
   CompositionRule,
 } from '../../src/core/types/mfe-types.js';
-import type { DomainDataFile } from '../../src/engines/dependency-graph.js';
-import type { DependencyGraphPort } from '../../src/engines/composition-engine.js';
-import type { VerificationLookups } from '../../src/engines/verification-engine.js';
+import type { DomainDataFile } from '../../src/packs/engines/dependency-graph.js';
+import type { DependencyGraphPort } from '../../src/packs/engines/composition-engine.js';
+import type { VerificationLookups } from '../../src/packs/engines/verification-engine.js';
 
 // === Constants ===
 

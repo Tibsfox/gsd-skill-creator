@@ -7,7 +7,7 @@
 // The path finder is the navigation engine for MFE — composition and problem
 // decomposition use it to find efficient solution routes through the DAG.
 
-import type { DependencyType, DomainId } from '../core/types/mfe-types.js';
+import type { DependencyType, DomainId } from '../../core/types/mfe-types.js';
 import type { DependencyGraph, GraphEdge, GraphNode } from './dependency-graph.js';
 
 // === Public Types ===

@@ -10,7 +10,7 @@ import type {
   CompositionRule,
   DependencyEdge,
   DomainId,
-} from '../core/types/mfe-types.js';
+} from '../../core/types/mfe-types.js';
 
 // --- Mock DependencyGraphPort ---
 

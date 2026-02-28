@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { dmd, classifyDMDEigenvalue, reconstructFromDMD, svd } from '../../../src/holomorphic/dmd/dmd-core';
-import { magnitude } from '../../../src/holomorphic/complex/arithmetic';
-import type { SnapshotMatrix } from '../../../src/holomorphic/dmd/types';
+import { dmd, classifyDMDEigenvalue, reconstructFromDMD, svd } from '../../../src/packs/holomorphic/dmd/dmd-core';
+import { magnitude } from '../../../src/packs/holomorphic/complex/arithmetic';
+import type { SnapshotMatrix } from '../../../src/packs/holomorphic/dmd/types';
 
 /* ------------------------------------------------------------------ */
 /*  DMD Core Algorithm                                                  */

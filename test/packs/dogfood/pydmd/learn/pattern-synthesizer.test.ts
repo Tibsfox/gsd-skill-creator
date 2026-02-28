@@ -12,12 +12,12 @@ import type {
   ClassNode,
   ModuleNode,
   APIMethod,
-} from '../../../../../src/dogfood/pydmd/types.js';
-import type { ComplexPlaneMap } from '../../../../../src/dogfood/pydmd/learn/complex-plane-mapper.js';
+} from '../../../../../src/packs/dogfood/pydmd/types.js';
+import type { ComplexPlaneMap } from '../../../../../src/packs/dogfood/pydmd/learn/complex-plane-mapper.js';
 import {
   synthesizePatterns,
   buildDecisionTree,
-} from '../../../../../src/dogfood/pydmd/learn/pattern-synthesizer.js';
+} from '../../../../../src/packs/dogfood/pydmd/learn/pattern-synthesizer.js';
 
 // --- Factories ---
 

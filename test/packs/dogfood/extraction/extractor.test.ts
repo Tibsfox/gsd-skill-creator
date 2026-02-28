@@ -12,7 +12,7 @@ vi.mock('node:fs/promises', async (importOriginal) => {
   };
 });
 
-import { extractPdf } from '../../../../src/dogfood/extraction/extractor.js';
+import { extractPdf } from '../../../../src/packs/dogfood/extraction/extractor.js';
 import { execFile } from 'node:child_process';
 import { access } from 'node:fs/promises';
 

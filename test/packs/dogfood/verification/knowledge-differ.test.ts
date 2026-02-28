@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { diffKnowledge } from '../../../../src/dogfood/verification/knowledge-differ.js';
-import type { LearnedConceptRef, EcosystemClaim } from '../../../../src/dogfood/verification/types.js';
+import { diffKnowledge } from '../../../../src/packs/dogfood/verification/knowledge-differ.js';
+import type { LearnedConceptRef, EcosystemClaim } from '../../../../src/packs/dogfood/verification/types.js';
 
 // --- Helpers ---
 

@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
-import { ProgressTracker } from '../../../../src/dogfood/harness/progress-tracker.js';
+import { ProgressTracker } from '../../../../src/packs/dogfood/harness/progress-tracker.js';
 
 describe('ProgressTracker', () => {
   let tempDir: string;

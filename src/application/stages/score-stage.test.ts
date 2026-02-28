@@ -8,8 +8,8 @@ import type { AdaptiveRouter } from '../../retrieval/adaptive-router.js';
 import type { EmbeddingService } from '../../embeddings/embedding-service.js';
 import type { ScoredSkill } from '../../core/types/application.js';
 import type { RouteDecision } from '../../retrieval/types.js';
-import { createPosition } from '../../plane/arithmetic.js';
-import type { PlaneActivationConfig } from '../../plane/activation.js';
+import { createPosition } from '../../packs/plane/arithmetic.js';
+import type { PlaneActivationConfig } from '../../packs/plane/activation.js';
 
 // Mock cosine-similarity module
 vi.mock('../../embeddings/cosine-similarity.js', () => ({
