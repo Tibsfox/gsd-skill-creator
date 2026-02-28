@@ -1,6 +1,6 @@
 # File Structure
 
-> Last updated: v1.49.5 (2026-02-27)
+> Last updated: v1.50 (2026-02-28)
 
 ## Root Directory Layout
 
@@ -50,7 +50,8 @@ gsd-skill-creator/
 │   └── ...              70+ domain modules
 ├── src-tauri/           Rust backend (Tauri v2)
 │   └── src/             Rust source (api, security, xdg, etc.)
-├── test/                Test suites (12 directories)
+├── test/                Test suites (14 directories)
+│   ├── proofs/          Proof verification tests (9 part directories + helpers/)
 │   └── fixtures/        Test fixture data
 ├── tests/               Legacy test directory (integration, chipset, security)
 └── www/                 Web staging (site, tools)
