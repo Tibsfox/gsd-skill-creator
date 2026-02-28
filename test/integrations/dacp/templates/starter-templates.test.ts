@@ -13,9 +13,9 @@ import { tmpdir } from 'node:os';
 import {
   STARTER_TEMPLATES,
   loadStarterTemplates,
-} from '../../../../src/dacp/templates/starter-templates.js';
-import { BundleTemplateRegistry } from '../../../../src/dacp/templates/registry.js';
-import type { BundleTemplate } from '../../../../src/dacp/types.js';
+} from '../../../../src/integrations/dacp/templates/starter-templates.js';
+import { BundleTemplateRegistry } from '../../../../src/integrations/dacp/templates/registry.js';
+import type { BundleTemplate } from '../../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Tests

@@ -20,11 +20,11 @@ import {
   PROMOTION_THRESHOLD,
   DEMOTION_THRESHOLD,
   type HandoffOutcomeWithType,
-} from '../../../src/dacp/retrospective/analyzer.js';
-import { createBundle, isBundleComplete, MAX_DATA_SIZE, MAX_SCRIPT_SIZE } from '../../../src/dacp/bundle.js';
-import { DACPAssembler } from '../../../src/dacp/assembler/assembler.js';
-import { CatalogQuery } from '../../../src/dacp/assembler/catalog-query.js';
-import type { BundleManifest, HandoffPattern, FidelityLevel } from '../../../src/dacp/types.js';
+} from '../../../src/integrations/dacp/retrospective/analyzer.js';
+import { createBundle, isBundleComplete, MAX_DATA_SIZE, MAX_SCRIPT_SIZE } from '../../../src/integrations/dacp/bundle.js';
+import { DACPAssembler } from '../../../src/integrations/dacp/assembler/assembler.js';
+import { CatalogQuery } from '../../../src/integrations/dacp/assembler/catalog-query.js';
+import type { BundleManifest, HandoffPattern, FidelityLevel } from '../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Factories
@@ -153,7 +153,7 @@ describe('SAFETY-CRITICAL (mandatory pass)', () => {
 
   // SC-02: Backward compatibility — .msg fallback must exist for DACP removal
   it('SC-02: bundleToMsgContent produces valid BusMessage from manifest', async () => {
-    const { bundleToMsgContent } = await import('../../../src/dacp/msg-fallback.js');
+    const { bundleToMsgContent } = await import('../../../src/integrations/dacp/msg-fallback.js');
     const manifest = makeManifest({ fidelity_level: 2 });
     const intent = '# Test Intent\n\nHandoff description.';
 
@@ -270,7 +270,7 @@ describe('SAFETY-CRITICAL (mandatory pass)', () => {
 
   // SC-06: No personal data in templates
   it('SC-06: starter templates contain no user-specific content', async () => {
-    const { STARTER_TEMPLATES } = await import('../../../src/dacp/templates/starter-templates.js');
+    const { STARTER_TEMPLATES } = await import('../../../src/integrations/dacp/templates/starter-templates.js');
 
     const personalDataPatterns = [
       /\/home\/\w+/,           // Home directory paths

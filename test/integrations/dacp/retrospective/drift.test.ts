@@ -9,8 +9,8 @@ import { describe, it, expect } from 'vitest';
 import {
   calculateDriftScore,
   determineRecommendation,
-} from '../../../../src/dacp/retrospective/drift.js';
-import type { HandoffOutcome, FidelityLevel } from '../../../../src/dacp/types.js';
+} from '../../../../src/integrations/dacp/retrospective/drift.js';
+import type { HandoffOutcome, FidelityLevel } from '../../../../src/integrations/dacp/types.js';
 
 /** Factory for HandoffOutcome test data */
 function makeHandoffOutcome(

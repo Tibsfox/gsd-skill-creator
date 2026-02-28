@@ -10,7 +10,7 @@ import {
   ChipsetStateManager,
   createChipsetStateManager,
 } from './chipset-state.js';
-import { createDefaultChipsetConfig } from '../../../../den/chipset.js';
+import { createDefaultChipsetConfig } from '../../../../integrations/den/chipset.js';
 
 describe('ChipsetStateManager', () => {
   // ── Initialization ──────────────────────────────────────────────────

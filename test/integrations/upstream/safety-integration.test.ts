@@ -4,11 +4,11 @@ import type {
   AffectedComponent,
   ImpactManifest,
   DashboardAlert,
-} from '../../../src/upstream/types';
-import { applyPatch, createBackup, rollback } from '../../../src/upstream/patcher';
-import { validateAlert, formatAlertForTerminal, aggregateAlerts, deduplicateAlerts } from '../../../src/upstream/dashboard-alerts';
-import { runPipeline } from '../../../src/upstream/pipeline';
-import type { PipelineDeps } from '../../../src/upstream/pipeline';
+} from '../../../src/integrations/upstream/types';
+import { applyPatch, createBackup, rollback } from '../../../src/integrations/upstream/patcher';
+import { validateAlert, formatAlertForTerminal, aggregateAlerts, deduplicateAlerts } from '../../../src/integrations/upstream/dashboard-alerts';
+import { runPipeline } from '../../../src/integrations/upstream/pipeline';
+import type { PipelineDeps } from '../../../src/integrations/upstream/pipeline';
 
 /* ------------------------------------------------------------------ */
 /*  Test helpers                                                       */

@@ -9,7 +9,7 @@
  */
 
 import type { BundleScript } from './types.js';
-import type { Provenance } from '../../dacp/types.js';
+import type { Provenance } from '../../integrations/dacp/types.js';
 
 // ============================================================================
 // Types

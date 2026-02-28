@@ -34,7 +34,7 @@ import {
   type ScriptCatalogEntry,
   type SchemaLibraryEntry,
   type FidelityLevel,
-} from '../../../src/dacp/types.js';
+} from '../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Factories
@@ -263,7 +263,7 @@ describe('DACP Types & Schemas (TS-01 to TS-10)', () => {
   // TS-10: No `any` types in module
   it('TS-10: no `: any` types in types.ts source', () => {
     const typesSource = readFileSync(
-      join(__dirname, '../../../src/dacp/types.ts'),
+      join(__dirname, '../../../src/integrations/dacp/types.ts'),
       'utf-8',
     );
     // Match `: any` that is a type annotation (not inside a string or comment)

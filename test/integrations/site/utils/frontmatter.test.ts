@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { parseFrontmatter } from '../../../../src/site/utils/frontmatter';
-import type { FrontMatter } from '../../../../src/site/types';
+import { parseFrontmatter } from '../../../../src/integrations/site/utils/frontmatter';
+import type { FrontMatter } from '../../../../src/integrations/site/types';
 
 describe('parseFrontmatter', () => {
   it('parses complete frontmatter with all fields', () => {

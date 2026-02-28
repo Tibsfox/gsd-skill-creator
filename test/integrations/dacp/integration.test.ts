@@ -12,17 +12,17 @@ import { mkdirSync, writeFileSync, rmSync, existsSync, readFileSync } from 'node
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-import { DACPAssembler, type AssemblyRequest } from '../../../src/dacp/assembler/assembler.js';
-import { CatalogQuery } from '../../../src/dacp/assembler/catalog-query.js';
-import { createBundle, listBundleContents, isBundleComplete } from '../../../src/dacp/bundle.js';
-import { bundleToMsgContent } from '../../../src/dacp/msg-fallback.js';
+import { DACPAssembler, type AssemblyRequest } from '../../../src/integrations/dacp/assembler/assembler.js';
+import { CatalogQuery } from '../../../src/integrations/dacp/assembler/catalog-query.js';
+import { createBundle, listBundleContents, isBundleComplete } from '../../../src/integrations/dacp/bundle.js';
+import { bundleToMsgContent } from '../../../src/integrations/dacp/msg-fallback.js';
 import { loadBundle } from '../../../src/tools/interpreter/loader.js';
 import { buildExecutionContext } from '../../../src/tools/interpreter/context-builder.js';
-import { calculateDriftScore } from '../../../src/dacp/retrospective/drift.js';
-import { analyzePatterns, type HandoffOutcomeWithType } from '../../../src/dacp/retrospective/analyzer.js';
-import { determineFidelity, assessDataComplexity } from '../../../src/dacp/fidelity/decision.js';
-import { BundleTemplateRegistry } from '../../../src/dacp/templates/registry.js';
-import { STARTER_TEMPLATES, loadStarterTemplates } from '../../../src/dacp/templates/starter-templates.js';
+import { calculateDriftScore } from '../../../src/integrations/dacp/retrospective/drift.js';
+import { analyzePatterns, type HandoffOutcomeWithType } from '../../../src/integrations/dacp/retrospective/analyzer.js';
+import { determineFidelity, assessDataComplexity } from '../../../src/integrations/dacp/fidelity/decision.js';
+import { BundleTemplateRegistry } from '../../../src/integrations/dacp/templates/registry.js';
+import { STARTER_TEMPLATES, loadStarterTemplates } from '../../../src/integrations/dacp/templates/starter-templates.js';
 import {
   renderHandoffPanel,
   renderDriftTrend,
@@ -34,7 +34,7 @@ import type {
   ScriptCatalogEntry,
   SchemaLibraryEntry,
   FidelityLevel,
-} from '../../../src/dacp/types.js';
+} from '../../../src/integrations/dacp/types.js';
 
 // ============================================================================
 // Factories

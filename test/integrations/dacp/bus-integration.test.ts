@@ -11,9 +11,9 @@ import { mkdirSync, writeFileSync, rmSync, existsSync, readFileSync } from 'node
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-import { scanPriorityDirWithBundles } from '../../../src/dacp/bus/scanner.js';
-import { detectOrphans } from '../../../src/dacp/bus/cleanup.js';
-import type { BusConfig } from '../../../src/den/types.js';
+import { scanPriorityDirWithBundles } from '../../../src/integrations/dacp/bus/scanner.js';
+import { detectOrphans } from '../../../src/integrations/dacp/bus/cleanup.js';
+import type { BusConfig } from '../../../src/integrations/den/types.js';
 
 // ============================================================================
 // Helpers

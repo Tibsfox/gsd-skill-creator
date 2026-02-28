@@ -17,7 +17,7 @@ import type {
   Briefing,
   ChannelConfig,
   ChannelState,
-} from '../../../src/upstream/types';
+} from '../../../src/integrations/upstream/types';
 
 describe('Upstream Intelligence Types', () => {
   it('RawChangeEvent has all required fields', () => {

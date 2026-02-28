@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { pathToSlug, slugToOutputPath, slugToUrl } from '../../../../src/site/utils/slug';
+import { pathToSlug, slugToOutputPath, slugToUrl } from '../../../../src/integrations/site/utils/slug';
 
 describe('pathToSlug', () => {
   it('converts simple path to slug', () => {

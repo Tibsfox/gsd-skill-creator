@@ -23,7 +23,7 @@ import {
   type ValidationError,
   type ValidationWarning,
   type FidelityLevel,
-} from '../../dacp/types.js';
+} from '../../integrations/dacp/types.js';
 import { DEFAULT_INTERPRETER_CONFIG, type InterpreterConfig } from './types.js';
 
 // ============================================================================

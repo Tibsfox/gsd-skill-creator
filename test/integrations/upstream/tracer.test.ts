@@ -1,12 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import type { ClassifiedEvent, AffectedComponent, ImpactManifest } from '../../../src/upstream/types';
+import type { ClassifiedEvent, AffectedComponent, ImpactManifest } from '../../../src/integrations/upstream/types';
 import {
   traceImpact,
   findDirectImpacts,
   findTransitiveImpacts,
   buildDependencyGraph,
   calculateBlastRadius,
-} from '../../../src/upstream/tracer';
+} from '../../../src/integrations/upstream/tracer';
 
 /** Helper: build a minimal ClassifiedEvent for testing */
 function makeEvent(overrides: Partial<ClassifiedEvent> = {}): ClassifiedEvent {
