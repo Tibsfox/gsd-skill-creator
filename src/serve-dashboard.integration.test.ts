@@ -19,8 +19,8 @@ import { createServer, type Server, type IncomingMessage, type ServerResponse } 
 import { mkdtempSync, rmSync, existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { createHelperRouter, type HelperRouter } from './console/helper.js';
-import { ensureConsoleDirectory } from './console/directory.js';
+import { createHelperRouter, type HelperRouter } from './platform/console/helper.js';
+import { ensureConsoleDirectory } from './platform/console/directory.js';
 
 // ---------------------------------------------------------------------------
 // Test server -- minimal reproduction of serve-dashboard.mjs handler flow

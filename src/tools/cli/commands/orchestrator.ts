@@ -32,7 +32,7 @@ import { QueueManager } from '../../../orchestrator/work-state/queue-manager.js'
 import { DEFAULT_WORK_STATE_FILENAME } from '../../../orchestrator/work-state/types.js';
 import { SnapshotManager } from '../../../orchestrator/session-continuity/snapshot-manager.js';
 import { SNAPSHOT_FILENAME } from '../../../orchestrator/session-continuity/types.js';
-import { RetentionManager } from '../../../observation/retention-manager.js';
+import { RetentionManager } from '../../../platform/observation/retention-manager.js';
 
 // ============================================================================
 // Argument parsing helpers

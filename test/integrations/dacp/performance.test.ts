@@ -24,7 +24,7 @@ import { loadStarterTemplates } from '../../../src/dacp/templates/starter-templa
 import {
   renderHandoffPanel,
   type HandoffPanelData,
-} from '../../../src/dashboard/handoff-panel.js';
+} from '../../../src/platform/dashboard/handoff-panel.js';
 import type {
   BundleManifest,
   HandoffOutcome,

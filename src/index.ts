@@ -233,7 +233,7 @@ export {
   calculateMCC,
   mccToPercentage,
   BenchmarkReporter,
-} from './calibration/index.js';
+} from './platform/calibration/index.js';
 export type {
   CalibrationEvent,
   CalibrationOutcome,
@@ -242,7 +242,7 @@ export type {
   OptimizationResult,
   ThresholdSnapshot,
   BenchmarkReport,
-} from './calibration/index.js';
+} from './platform/calibration/index.js';
 
 export { DEFAULT_CONFIG } from './core/types/application.js';
 
