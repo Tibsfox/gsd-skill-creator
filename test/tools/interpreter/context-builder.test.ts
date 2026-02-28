@@ -7,8 +7,8 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { buildExecutionContext } from '../../../src/interpreter/context-builder.js';
-import type { LoadedBundle, BundleScript } from '../../../src/interpreter/types.js';
+import { buildExecutionContext } from '../../../src/tools/interpreter/context-builder.js';
+import type { LoadedBundle, BundleScript } from '../../../src/tools/interpreter/types.js';
 import type { BundleManifest } from '../../../src/dacp/types.js';
 
 // ============================================================================

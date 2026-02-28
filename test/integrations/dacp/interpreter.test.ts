@@ -11,9 +11,9 @@ import { mkdirSync, writeFileSync, rmSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-import { loadBundle } from '../../../src/interpreter/loader.js';
-import { buildExecutionContext } from '../../../src/interpreter/context-builder.js';
-import { validateProvenance } from '../../../src/interpreter/provenance-guard.js';
+import { loadBundle } from '../../../src/tools/interpreter/loader.js';
+import { buildExecutionContext } from '../../../src/tools/interpreter/context-builder.js';
+import { validateProvenance } from '../../../src/tools/interpreter/provenance-guard.js';
 import type { BundleManifest } from '../../../src/dacp/types.js';
 
 // ============================================================================

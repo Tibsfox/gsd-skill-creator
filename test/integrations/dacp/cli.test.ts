@@ -10,8 +10,8 @@ import { mkdirSync, writeFileSync, rmSync, readFileSync, existsSync } from 'node
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-import { dacpStatusCommand } from '../../../src/cli/commands/dacp-status.js';
-import { dacpSetLevelCommand } from '../../../src/cli/commands/dacp-set-level.js';
+import { dacpStatusCommand } from '../../../src/tools/cli/commands/dacp-status.js';
+import { dacpSetLevelCommand } from '../../../src/tools/cli/commands/dacp-set-level.js';
 
 // ============================================================================
 // Setup

@@ -126,14 +126,14 @@ describe('Core functionality', () => {
 
   describe('State Machine (C-01..C-07)', () => {
     it('C-01: fresh commit returns CLEAN', async () => {
-      const { detectState } = await import('../../../src/git/core/state-machine.js');
+      const { detectState } = await import('../../../src/tools/git/core/state-machine.js');
       const dir = createTempRepo();
       const report = await detectState(dir);
       expect(report.state).toBe('CLEAN');
     });
 
     it('C-02: modified file returns DIRTY', async () => {
-      const { detectState } = await import('../../../src/git/core/state-machine.js');
+      const { detectState } = await import('../../../src/tools/git/core/state-machine.js');
       const dir = createTempRepo();
       fs.writeFileSync(path.join(dir, 'README.md'), '# Modified\n');
       const report = await detectState(dir);
@@ -141,7 +141,7 @@ describe('Core functionality', () => {
     });
 
     it('C-03: mid-merge returns MERGING', async () => {
-      const { detectState } = await import('../../../src/git/core/state-machine.js');
+      const { detectState } = await import('../../../src/tools/git/core/state-machine.js');
       const dir = createTempRepo();
       const sha = execSync('git rev-parse HEAD', { cwd: dir, encoding: 'utf-8' }).trim();
       fs.writeFileSync(path.join(dir, '.git', 'MERGE_HEAD'), sha + '\n');
@@ -150,7 +150,7 @@ describe('Core functionality', () => {
     });
 
     it('C-04: mid-rebase returns REBASING', async () => {
-      const { detectState } = await import('../../../src/git/core/state-machine.js');
+      const { detectState } = await import('../../../src/tools/git/core/state-machine.js');
       const dir = createTempRepo();
       fs.mkdirSync(path.join(dir, '.git', 'rebase-merge'), { recursive: true });
       const report = await detectState(dir);
@@ -158,7 +158,7 @@ describe('Core functionality', () => {
     });
 
     it('C-05: detached HEAD returns DETACHED', async () => {
-      const { detectState } = await import('../../../src/git/core/state-machine.js');
+      const { detectState } = await import('../../../src/tools/git/core/state-machine.js');
       const dir = createTempRepo();
       const sha = execSync('git rev-parse HEAD', { cwd: dir, encoding: 'utf-8' }).trim();
       execSync(`git checkout ${sha}`, { cwd: dir, stdio: 'pipe', env: { ...process.env, GIT_TERMINAL_PROMPT: '0' } });
@@ -168,7 +168,7 @@ describe('Core functionality', () => {
     });
 
     it('C-06: merge conflict returns CONFLICT', async () => {
-      const { detectState } = await import('../../../src/git/core/state-machine.js');
+      const { detectState } = await import('../../../src/tools/git/core/state-machine.js');
       const dir = createTempRepo();
       execSync('git checkout -b feature', { cwd: dir, stdio: 'pipe' });
       fs.writeFileSync(path.join(dir, 'README.md'), '# Feature\n');
@@ -184,7 +184,7 @@ describe('Core functionality', () => {
     });
 
     it('C-07: isValidTransition covers all valid/invalid pairs', async () => {
-      const { isValidTransition } = await import('../../../src/git/core/state-machine.js');
+      const { isValidTransition } = await import('../../../src/tools/git/core/state-machine.js');
       // Valid transitions
       expect(isValidTransition('CLEAN', 'DIRTY', 'edit')).toBe(true);
       expect(isValidTransition('CLEAN', 'MERGING', 'merge')).toBe(true);
@@ -211,7 +211,7 @@ describe('Core functionality', () => {
 
   describe('Repo Manager (C-08..C-12)', () => {
     it('C-08: clone succeeds to correct path', async () => {
-      const { installRepo } = await import('../../../src/git/core/repo-manager.js');
+      const { installRepo } = await import('../../../src/tools/git/core/repo-manager.js');
       const bare = createBareUpstream();
       const target = createTargetDir();
       await installRepo(bare, target);
@@ -219,7 +219,7 @@ describe('Core functionality', () => {
     });
 
     it('C-09: both origin and upstream remotes present', async () => {
-      const { installRepo } = await import('../../../src/git/core/repo-manager.js');
+      const { installRepo } = await import('../../../src/tools/git/core/repo-manager.js');
       const bare = createBareUpstream();
       const target = createTargetDir();
       await installRepo(bare, target);
@@ -229,7 +229,7 @@ describe('Core functionality', () => {
     });
 
     it('C-10: dev branch exists and is checked out', async () => {
-      const { installRepo } = await import('../../../src/git/core/repo-manager.js');
+      const { installRepo } = await import('../../../src/tools/git/core/repo-manager.js');
       const bare = createBareUpstream();
       const target = createTargetDir();
       await installRepo(bare, target);
@@ -240,7 +240,7 @@ describe('Core functionality', () => {
     });
 
     it('C-11: .sc-git/config.json exists and has correct shape', async () => {
-      const { installRepo } = await import('../../../src/git/core/repo-manager.js');
+      const { installRepo } = await import('../../../src/tools/git/core/repo-manager.js');
       const bare = createBareUpstream();
       const target = createTargetDir();
       await installRepo(bare, target);
@@ -265,7 +265,7 @@ describe('Core functionality', () => {
     });
 
     it('C-12: detects master as default branch', async () => {
-      const { installRepo } = await import('../../../src/git/core/repo-manager.js');
+      const { installRepo } = await import('../../../src/tools/git/core/repo-manager.js');
       const bare = createBareUpstream('master');
       const target = createTargetDir();
       const config = await installRepo(bare, target);
@@ -275,7 +275,7 @@ describe('Core functionality', () => {
 
   describe('Install Flow (C-13..C-17)', () => {
     it('C-13: full installRepo end-to-end with local bare repo', async () => {
-      const { installRepo, isInstalled } = await import('../../../src/git/core/repo-manager.js');
+      const { installRepo, isInstalled } = await import('../../../src/tools/git/core/repo-manager.js');
       const bare = createBareUpstream();
       const target = createTargetDir();
 
@@ -287,7 +287,7 @@ describe('Core functionality', () => {
     });
 
     it('C-14: parseRepoUrl handles HTTPS', async () => {
-      const { parseRepoUrl } = await import('../../../src/git/workflows/install.js');
+      const { parseRepoUrl } = await import('../../../src/tools/git/workflows/install.js');
       const result = parseRepoUrl('https://github.com/owner/repo');
       expect(result.host).toBe('github.com');
       expect(result.owner).toBe('owner');
@@ -297,7 +297,7 @@ describe('Core functionality', () => {
     });
 
     it('C-15: parseRepoUrl handles SSH', async () => {
-      const { parseRepoUrl } = await import('../../../src/git/workflows/install.js');
+      const { parseRepoUrl } = await import('../../../src/tools/git/workflows/install.js');
       const result = parseRepoUrl('git@github.com:owner/repo.git');
       expect(result.host).toBe('github.com');
       expect(result.owner).toBe('owner');
@@ -307,7 +307,7 @@ describe('Core functionality', () => {
     });
 
     it('C-16: already-installed detection', async () => {
-      const { installRepo, isInstalled } = await import('../../../src/git/core/repo-manager.js');
+      const { installRepo, isInstalled } = await import('../../../src/tools/git/core/repo-manager.js');
       const bare = createBareUpstream();
       const target = createTargetDir();
 
@@ -323,7 +323,7 @@ describe('Core functionality', () => {
     });
 
     it('C-17: invalid URL produces clear error', async () => {
-      const { install } = await import('../../../src/git/workflows/install.js');
+      const { install } = await import('../../../src/tools/git/workflows/install.js');
       const result = await install('not-a-valid-url');
       expect(result.success).toBe(false);
       expect(result.error).toBeDefined();
@@ -333,14 +333,14 @@ describe('Core functionality', () => {
 
   describe('Branch & Worktree (C-18..C-23)', () => {
     it('C-18: createBranch creates with correct prefix', async () => {
-      const { createBranch } = await import('../../../src/git/core/branch-manager.js');
+      const { createBranch } = await import('../../../src/tools/git/core/branch-manager.js');
       const { repoPath } = setupInstalledRepo();
       const result = await createBranch(repoPath, 'my-thing');
       expect(result.branch).toBe('feature/my-thing');
     });
 
     it('C-19: createBranch with worktree creates functional directory', async () => {
-      const { createBranch } = await import('../../../src/git/core/branch-manager.js');
+      const { createBranch } = await import('../../../src/tools/git/core/branch-manager.js');
       const { repoPath } = setupInstalledRepo();
 
       // Create worktrees directory
@@ -363,7 +363,7 @@ describe('Core functionality', () => {
     });
 
     it('C-20: listBranches returns all branches with status', async () => {
-      const { listBranches, createBranch } = await import('../../../src/git/core/branch-manager.js');
+      const { listBranches, createBranch } = await import('../../../src/tools/git/core/branch-manager.js');
       const { repoPath } = setupInstalledRepo();
       await createBranch(repoPath, 'feature-a');
       const branches = await listBranches(repoPath);
@@ -373,7 +373,7 @@ describe('Core functionality', () => {
     });
 
     it('C-21: worktree paths listed correctly', async () => {
-      const { listWorktrees } = await import('../../../src/git/core/branch-manager.js');
+      const { listWorktrees } = await import('../../../src/tools/git/core/branch-manager.js');
       const { repoPath } = setupInstalledRepo();
       const worktrees = await listWorktrees(repoPath);
       // At minimum, the main repo path should appear
@@ -382,7 +382,7 @@ describe('Core functionality', () => {
     });
 
     it('C-22: removeBranch cleans up branch', async () => {
-      const { createBranch, removeBranch, listBranches } = await import('../../../src/git/core/branch-manager.js');
+      const { createBranch, removeBranch, listBranches } = await import('../../../src/tools/git/core/branch-manager.js');
       const { repoPath } = setupInstalledRepo();
       await createBranch(repoPath, 'to-remove');
       // Force delete since it has no merged commits
@@ -393,7 +393,7 @@ describe('Core functionality', () => {
     });
 
     it('C-23: invalid branch names rejected', async () => {
-      const { validateBranchName } = await import('../../../src/git/core/branch-manager.js');
+      const { validateBranchName } = await import('../../../src/tools/git/core/branch-manager.js');
       expect(() => validateBranchName('BAD NAME')).toThrow();
       expect(() => validateBranchName('my--double')).toThrow();
       expect(() => validateBranchName('feature/' + 'a'.repeat(50))).toThrow();
@@ -402,7 +402,7 @@ describe('Core functionality', () => {
 
   describe('Sync (C-24..C-28)', () => {
     it('C-24: already up to date returns clean exit', async () => {
-      const { sync } = await import('../../../src/git/core/sync-manager.js');
+      const { sync } = await import('../../../src/tools/git/core/sync-manager.js');
       const { repoPath } = setupInstalledRepo();
       const result = await sync(repoPath);
       expect(result.newCommits).toBe(0);
@@ -410,7 +410,7 @@ describe('Core functionality', () => {
     });
 
     it('C-25: clean rebase onto new upstream commits', async () => {
-      const { sync } = await import('../../../src/git/core/sync-manager.js');
+      const { sync } = await import('../../../src/tools/git/core/sync-manager.js');
       const { repoPath, upstreamPath } = setupInstalledRepo();
 
       // Push a new commit to upstream
@@ -431,7 +431,7 @@ describe('Core functionality', () => {
     });
 
     it('C-26: merge strategy creates merge commit', async () => {
-      const { sync } = await import('../../../src/git/core/sync-manager.js');
+      const { sync } = await import('../../../src/tools/git/core/sync-manager.js');
       const { repoPath, upstreamPath } = setupInstalledRepo();
 
       // Add upstream commit
@@ -455,7 +455,7 @@ describe('Core functionality', () => {
     });
 
     it('C-27: dry run reports without modification', async () => {
-      const { sync } = await import('../../../src/git/core/sync-manager.js');
+      const { sync } = await import('../../../src/tools/git/core/sync-manager.js');
       const { repoPath, upstreamPath } = setupInstalledRepo();
 
       // Add upstream commit
@@ -482,7 +482,7 @@ describe('Core functionality', () => {
     });
 
     it('C-28: dirty state prevents sync', async () => {
-      const { sync } = await import('../../../src/git/core/sync-manager.js');
+      const { sync } = await import('../../../src/tools/git/core/sync-manager.js');
       const { repoPath } = setupInstalledRepo();
       fs.writeFileSync(path.join(repoPath, 'dirty.txt'), 'dirty\n');
       await expect(sync(repoPath)).rejects.toThrow(/not clean/i);
@@ -496,8 +496,8 @@ describe('Core functionality', () => {
 
 describe('Integration (I-01..I-18)', () => {
   it('I-01: state is CLEAN after install completes (once config committed)', async () => {
-    const { installRepo } = await import('../../../src/git/core/repo-manager.js');
-    const { detectState } = await import('../../../src/git/core/state-machine.js');
+    const { installRepo } = await import('../../../src/tools/git/core/repo-manager.js');
+    const { detectState } = await import('../../../src/tools/git/core/state-machine.js');
     const bare = createBareUpstream();
     const target = createTargetDir();
     await installRepo(bare, target);
@@ -512,8 +512,8 @@ describe('Integration (I-01..I-18)', () => {
   });
 
   it('I-02: dev branch in listBranches after install', async () => {
-    const { installRepo } = await import('../../../src/git/core/repo-manager.js');
-    const { listBranches } = await import('../../../src/git/core/branch-manager.js');
+    const { installRepo } = await import('../../../src/tools/git/core/repo-manager.js');
+    const { listBranches } = await import('../../../src/tools/git/core/branch-manager.js');
     const bare = createBareUpstream();
     const target = createTargetDir();
     await installRepo(bare, target);
@@ -526,7 +526,7 @@ describe('Integration (I-01..I-18)', () => {
   });
 
   it('I-03: createBranch checks state before creating', async () => {
-    const { createBranch } = await import('../../../src/git/core/branch-manager.js');
+    const { createBranch } = await import('../../../src/tools/git/core/branch-manager.js');
     const { repoPath } = setupInstalledRepo();
     // Make repo dirty
     fs.writeFileSync(path.join(repoPath, 'dirty.txt'), 'dirty\n');
@@ -534,7 +534,7 @@ describe('Integration (I-01..I-18)', () => {
   });
 
   it('I-04: createBranch with worktree calls worktree-setup.sh', async () => {
-    const { createBranch } = await import('../../../src/git/core/branch-manager.js');
+    const { createBranch } = await import('../../../src/tools/git/core/branch-manager.js');
     const { repoPath } = setupInstalledRepo();
     const config = JSON.parse(
       fs.readFileSync(path.join(repoPath, '.sc-git', 'config.json'), 'utf-8'),
@@ -545,15 +545,15 @@ describe('Integration (I-01..I-18)', () => {
   });
 
   it('I-05: sync verifies CLEAN before proceeding', async () => {
-    const { sync } = await import('../../../src/git/core/sync-manager.js');
+    const { sync } = await import('../../../src/tools/git/core/sync-manager.js');
     const { repoPath } = setupInstalledRepo();
     fs.writeFileSync(path.join(repoPath, 'dirty.txt'), 'dirty\n');
     await expect(sync(repoPath)).rejects.toThrow(/not clean/i);
   });
 
   it('I-06: sync updates config.lastSync', async () => {
-    const { syncWorkflow } = await import('../../../src/git/workflows/sync.js');
-    const { loadConfig } = await import('../../../src/git/core/repo-manager.js');
+    const { syncWorkflow } = await import('../../../src/tools/git/workflows/sync.js');
+    const { loadConfig } = await import('../../../src/tools/git/core/repo-manager.js');
     const { repoPath, upstreamPath } = setupInstalledRepo();
 
     // Push new upstream commit
@@ -577,7 +577,7 @@ describe('Integration (I-01..I-18)', () => {
   });
 
   it('I-07: contribute runs pre-flight before Gate 1', async () => {
-    const { contribute } = await import('../../../src/git/workflows/contribute.js');
+    const { contribute } = await import('../../../src/tools/git/workflows/contribute.js');
     const { repoPath } = setupInstalledRepo();
 
     // Add commit to dev
@@ -602,7 +602,7 @@ describe('Integration (I-01..I-18)', () => {
   });
 
   it('I-08: contribute with Gate 1 approval triggers merge', async () => {
-    const { contribute } = await import('../../../src/git/workflows/contribute.js');
+    const { contribute } = await import('../../../src/tools/git/workflows/contribute.js');
     const { repoPath } = setupInstalledRepo();
 
     fs.writeFileSync(path.join(repoPath, 'feature.txt'), 'feature\n');
@@ -629,7 +629,7 @@ describe('Integration (I-01..I-18)', () => {
   });
 
   it('I-09: contribute with Gate 2 approval attempts PR creation', async () => {
-    const { contribute } = await import('../../../src/git/workflows/contribute.js');
+    const { contribute } = await import('../../../src/tools/git/workflows/contribute.js');
     const { repoPath } = setupInstalledRepo();
 
     fs.writeFileSync(path.join(repoPath, 'feature.txt'), 'feature\n');
@@ -658,7 +658,7 @@ describe('Integration (I-01..I-18)', () => {
   });
 
   it('I-10: operations append to JSONL log', async () => {
-    const { logOperation } = await import('../../../src/git/core/logger.js');
+    const { logOperation } = await import('../../../src/tools/git/core/logger.js');
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'sc-int-log-'));
     tempDirs.push(dir);
 
@@ -685,7 +685,7 @@ describe('Integration (I-01..I-18)', () => {
 
   it('I-11: git-state-check.sh output parses to GitStateReport shape', () => {
     const repo = createTempRepo();
-    const stateCheck = path.resolve(__dirname, '../../../src/git/scripts/git-state-check.sh');
+    const stateCheck = path.resolve(__dirname, '../../../src/tools/git/scripts/git-state-check.sh');
     const output = execSync(`bash "${stateCheck}" "${repo}"`, {
       encoding: 'utf-8',
       stdio: ['pipe', 'pipe', 'pipe'],
@@ -710,7 +710,7 @@ describe('Integration (I-01..I-18)', () => {
     execSync('git commit -m "add new file"', { cwd: repo, stdio: 'pipe' });
     execSync(`git checkout ${mainBranch}`, { cwd: repo, stdio: 'pipe' });
 
-    const safeMerge = path.resolve(__dirname, '../../../src/git/scripts/safe-merge.sh');
+    const safeMerge = path.resolve(__dirname, '../../../src/tools/git/scripts/safe-merge.sh');
     const output = execSync(`bash "${safeMerge}" "${repo}" "test-feature" "${mainBranch}"`, {
       encoding: 'utf-8',
       stdio: ['pipe', 'pipe', 'pipe'],
@@ -731,7 +731,7 @@ describe('Integration (I-01..I-18)', () => {
     execSync('git add pr-file.txt', { cwd: repo, stdio: 'pipe' });
     execSync('git commit -m "feat: pr feature"', { cwd: repo, stdio: 'pipe' });
 
-    const prBundle = path.resolve(__dirname, '../../../src/git/scripts/pr-bundle.sh');
+    const prBundle = path.resolve(__dirname, '../../../src/tools/git/scripts/pr-bundle.sh');
     const output = execSync(`bash "${prBundle}" "${repo}" "${mainBranch}"`, {
       encoding: 'utf-8',
       stdio: ['pipe', 'pipe', 'pipe'],
@@ -757,7 +757,7 @@ describe('Integration (I-01..I-18)', () => {
   });
 
   it('I-15: registerGitCommands includes install handler', async () => {
-    const { registerGitCommands } = await import('../../../src/git/cli.js');
+    const { registerGitCommands } = await import('../../../src/tools/git/cli.js');
     const commands = registerGitCommands();
     const installCmd = commands.find(c => c.name === 'install');
     expect(installCmd).toBeDefined();
@@ -766,7 +766,7 @@ describe('Integration (I-01..I-18)', () => {
   });
 
   it('I-16: sc git status/sync/work/gate commands all registered', async () => {
-    const { registerGitCommands } = await import('../../../src/git/cli.js');
+    const { registerGitCommands } = await import('../../../src/tools/git/cli.js');
     const commands = registerGitCommands();
     const names = commands.map(c => c.name);
     expect(names).toContain('git-status');
@@ -778,11 +778,11 @@ describe('Integration (I-01..I-18)', () => {
   });
 
   it('I-17: full flow install -> createBranch -> commit -> sync -> contribute', async () => {
-    const { installRepo } = await import('../../../src/git/core/repo-manager.js');
-    const { createBranch } = await import('../../../src/git/core/branch-manager.js');
-    const { sync } = await import('../../../src/git/core/sync-manager.js');
-    const { contribute } = await import('../../../src/git/workflows/contribute.js');
-    const { detectState } = await import('../../../src/git/core/state-machine.js');
+    const { installRepo } = await import('../../../src/tools/git/core/repo-manager.js');
+    const { createBranch } = await import('../../../src/tools/git/core/branch-manager.js');
+    const { sync } = await import('../../../src/tools/git/core/sync-manager.js');
+    const { contribute } = await import('../../../src/tools/git/workflows/contribute.js');
+    const { detectState } = await import('../../../src/tools/git/core/state-machine.js');
 
     const bare = createBareUpstream();
     const target = createTargetDir();
@@ -847,7 +847,7 @@ describe('Integration (I-01..I-18)', () => {
 
 describe('Edge Cases (E-01..E-12)', () => {
   it('E-01: install into non-empty directory produces error', async () => {
-    const { install } = await import('../../../src/git/workflows/install.js');
+    const { install } = await import('../../../src/tools/git/workflows/install.js');
     // Create a non-empty project root where repo dir already exists with content
     const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'sc-edge-nonempty-'));
     tempDirs.push(projectRoot);
@@ -868,7 +868,7 @@ describe('Edge Cases (E-01..E-12)', () => {
   });
 
   it('E-02: network failure during clone reports error', async () => {
-    const { install } = await import('../../../src/git/workflows/install.js');
+    const { install } = await import('../../../src/tools/git/workflows/install.js');
     // Use a non-existent remote URL
     const result = await install('https://github.com/nonexistent-org-12345/nonexistent-repo-67890', {
       projectRoot: fs.mkdtempSync(path.join(os.tmpdir(), 'sc-edge-netfail-')),
@@ -879,7 +879,7 @@ describe('Edge Cases (E-01..E-12)', () => {
   });
 
   it('E-03: worktree path already exists produces error', async () => {
-    const { createBranch } = await import('../../../src/git/core/branch-manager.js');
+    const { createBranch } = await import('../../../src/tools/git/core/branch-manager.js');
     const { repoPath } = setupInstalledRepo();
     const config = JSON.parse(
       fs.readFileSync(path.join(repoPath, '.sc-git', 'config.json'), 'utf-8'),
@@ -902,7 +902,7 @@ describe('Edge Cases (E-01..E-12)', () => {
   });
 
   it('E-04: remove worktree with uncommitted changes requires force', async () => {
-    const { removeBranch, createBranch } = await import('../../../src/git/core/branch-manager.js');
+    const { removeBranch, createBranch } = await import('../../../src/tools/git/core/branch-manager.js');
     const { repoPath } = setupInstalledRepo();
     const config = JSON.parse(
       fs.readFileSync(path.join(repoPath, '.sc-git', 'config.json'), 'utf-8'),
@@ -926,7 +926,7 @@ describe('Edge Cases (E-01..E-12)', () => {
   });
 
   it('E-05: sync when not on dev branch throws error', async () => {
-    const { sync } = await import('../../../src/git/core/sync-manager.js');
+    const { sync } = await import('../../../src/tools/git/core/sync-manager.js');
     const { repoPath } = setupInstalledRepo();
 
     // Read config to get the actual main branch name
@@ -942,7 +942,7 @@ describe('Edge Cases (E-01..E-12)', () => {
   });
 
   it('E-06: gate with 100+ files changed uses grouped display', async () => {
-    const { groupFiles } = await import('../../../src/git/gates/hitl-gate.js');
+    const { groupFiles } = await import('../../../src/tools/git/gates/hitl-gate.js');
     // Create 100+ mock file diffs
     const files = [];
     for (let i = 0; i < 120; i++) {
@@ -965,7 +965,7 @@ describe('Edge Cases (E-01..E-12)', () => {
   });
 
   it('E-07: PR without gh CLI produces fallback URL', async () => {
-    const { contribute } = await import('../../../src/git/workflows/contribute.js');
+    const { contribute } = await import('../../../src/tools/git/workflows/contribute.js');
     const { repoPath } = setupInstalledRepo();
 
     fs.writeFileSync(path.join(repoPath, 'feature.txt'), 'feature\n');
@@ -993,7 +993,7 @@ describe('Edge Cases (E-01..E-12)', () => {
   });
 
   it('E-08: repo with non-main default branch detects correctly', async () => {
-    const { installRepo } = await import('../../../src/git/core/repo-manager.js');
+    const { installRepo } = await import('../../../src/tools/git/core/repo-manager.js');
     const bare = createBareUpstream('develop');
     const target = createTargetDir();
     const config = await installRepo(bare, target);
@@ -1002,7 +1002,7 @@ describe('Edge Cases (E-01..E-12)', () => {
   });
 
   it('E-09: multiple installs into separate paths have no collision', async () => {
-    const { installRepo, loadConfig } = await import('../../../src/git/core/repo-manager.js');
+    const { installRepo, loadConfig } = await import('../../../src/tools/git/core/repo-manager.js');
     const bare1 = createBareUpstream();
     const bare2 = createBareUpstream();
     const target1 = createTargetDir();
@@ -1021,7 +1021,7 @@ describe('Edge Cases (E-01..E-12)', () => {
   });
 
   it('E-10: JSONL file missing is recreated without crash', async () => {
-    const { logOperation } = await import('../../../src/git/core/logger.js');
+    const { logOperation } = await import('../../../src/tools/git/core/logger.js');
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'sc-edge-jsonl-'));
     tempDirs.push(dir);
 
@@ -1054,7 +1054,7 @@ describe('Edge Cases (E-01..E-12)', () => {
   });
 
   it('E-11: git version detection (state machine works with current git)', async () => {
-    const { detectState } = await import('../../../src/git/core/state-machine.js');
+    const { detectState } = await import('../../../src/tools/git/core/state-machine.js');
     const repo = createTempRepo();
 
     // Verify git is available and version is reported
@@ -1068,7 +1068,7 @@ describe('Edge Cases (E-01..E-12)', () => {
   });
 
   it('E-12: paths use forward slashes consistently', async () => {
-    const { resolveInstallPaths } = await import('../../../src/git/workflows/install.js');
+    const { resolveInstallPaths } = await import('../../../src/tools/git/workflows/install.js');
     const paths = resolveInstallPaths('test-repo', '/home/user/projects');
     // All paths should use forward slashes (POSIX)
     expect(paths.repoPath).not.toContain('\\');

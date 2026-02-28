@@ -9,7 +9,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdirSync, writeFileSync, mkdtempSync, rmSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
-import { loadBundle } from '../../../src/interpreter/loader.js';
+import { loadBundle } from '../../../src/tools/interpreter/loader.js';
 import type { BundleManifest } from '../../../src/dacp/types.js';
 
 // ============================================================================

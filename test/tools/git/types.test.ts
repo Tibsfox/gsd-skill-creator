@@ -8,9 +8,9 @@ import type {
   DiffSummary,
   FileDiff,
   GitOperationLog,
-} from '../../../src/git/types.js';
-import { GIT_STATES } from '../../../src/git/types.js';
-import { ScGitConfigSchema, validateScGitConfig } from '../../../src/git/schemas.js';
+} from '../../../src/tools/git/types.js';
+import { GIT_STATES } from '../../../src/tools/git/types.js';
+import { ScGitConfigSchema, validateScGitConfig } from '../../../src/tools/git/schemas.js';
 
 // --- Factories ---
 
@@ -64,7 +64,7 @@ function makeDiffSummary(overrides: Partial<DiffSummary> = {}): DiffSummary {
 
 function makeFileDiff(overrides: Partial<FileDiff> = {}): FileDiff {
   return {
-    path: 'src/git/types.ts',
+    path: 'src/tools/git/types.ts',
     status: 'added',
     insertions: 42,
     deletions: 0,
@@ -212,7 +212,7 @@ describe('DiffSummary and FileDiff', () => {
   it('files is array of FileDiff', () => {
     const diff = makeDiffSummary();
     expect(diff.files).toBeInstanceOf(Array);
-    expect(diff.files[0].path).toBe('src/git/types.ts');
+    expect(diff.files[0].path).toBe('src/tools/git/types.ts');
   });
 
   it('status is one of added, modified, deleted, renamed', () => {

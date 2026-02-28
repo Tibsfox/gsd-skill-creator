@@ -8,8 +8,8 @@ import {
   isInstalled,
   loadConfig,
   saveConfig,
-} from '../../../../src/git/core/repo-manager.js';
-import type { ScGitConfig } from '../../../../src/git/types.js';
+} from '../../../../src/tools/git/core/repo-manager.js';
+import type { ScGitConfig } from '../../../../src/tools/git/types.js';
 
 // --- Helpers ---
 

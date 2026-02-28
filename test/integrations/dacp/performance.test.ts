@@ -16,7 +16,7 @@ import { tmpdir } from 'node:os';
 import { DACPAssembler } from '../../../src/dacp/assembler/assembler.js';
 import { CatalogQuery } from '../../../src/dacp/assembler/catalog-query.js';
 import { createBundle } from '../../../src/dacp/bundle.js';
-import { loadBundle } from '../../../src/interpreter/loader.js';
+import { loadBundle } from '../../../src/tools/interpreter/loader.js';
 import { calculateDriftScore } from '../../../src/dacp/retrospective/drift.js';
 import { analyzePatterns, type HandoffOutcomeWithType } from '../../../src/dacp/retrospective/analyzer.js';
 import { BundleTemplateRegistry } from '../../../src/dacp/templates/registry.js';
