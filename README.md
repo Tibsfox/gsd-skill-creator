@@ -202,7 +202,7 @@ Produces platform-specific packages in `src-tauri/target/release/bundle/`:
 # Run desktop test suite
 npm run desktop:test
 
-# Run skill-creator library tests (19,222 tests)
+# Run skill-creator library tests (20,019+ tests)
 npm test
 ```
 
@@ -302,7 +302,7 @@ See [SECURITY.md](SECURITY.md) for vulnerability reporting, threat model, and se
 
 ## Project Stats
 
-52 milestones shipped (v1.0-v1.49.5 + v1.8.1 patch) | 467 phases | 1,109 plans | ~564K LOC TypeScript, Rust, GLSL, Bash & Python | 19,222 tests
+53 milestones shipped (v1.0-v1.50 + v1.8.1 patch) | 481 phases | 1,176 plans | ~564K LOC TypeScript, Rust, GLSL, Bash & Python | 20,019+ tests
 
 ---
 
