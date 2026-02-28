@@ -11,8 +11,8 @@
  * list, average co-activation score, and total session count.
  */
 
-import { CoActivationTracker } from '../agents/co-activation-tracker.js';
-import type { SkillCoActivation } from '../agents/co-activation-tracker.js';
+import { CoActivationTracker } from '../services/agents/co-activation-tracker.js';
+import type { SkillCoActivation } from '../services/agents/co-activation-tracker.js';
 import type { SessionObservation } from '../core/types/observation.js';
 
 // ============================================================================

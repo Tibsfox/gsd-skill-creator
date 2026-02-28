@@ -6,7 +6,7 @@ import * as os from 'os';
 import { PatternStore } from '../../core/storage/pattern-store.js';
 import type { StoredExecutionBatch, ToolExecutionPair, PromotionCandidate } from '../../core/types/observation.js';
 import { ScriptGenerator } from './script-generator.js';
-import { OffloadOperationSchema } from '../../chipset/blitter/types.js';
+import { OffloadOperationSchema } from '../../services/chipset/blitter/types.js';
 
 /**
  * Helper: create a complete ToolExecutionPair for test data.

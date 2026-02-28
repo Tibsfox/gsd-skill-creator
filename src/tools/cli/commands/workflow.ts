@@ -26,9 +26,9 @@ import {
   resolveExtends,
 } from '../../../skill-workflows/index.js';
 import type { WorkflowDefinition, WorkflowStep } from '../../../skill-workflows/index.js';
-import { WorkStateReader } from '../../../orchestrator/work-state/work-state-reader.js';
-import { WorkStateWriter } from '../../../orchestrator/work-state/work-state-writer.js';
-import { DEFAULT_WORK_STATE_FILENAME } from '../../../orchestrator/work-state/types.js';
+import { WorkStateReader } from '../../../services/orchestrator/work-state/work-state-reader.js';
+import { WorkStateWriter } from '../../../services/orchestrator/work-state/work-state-writer.js';
+import { DEFAULT_WORK_STATE_FILENAME } from '../../../services/orchestrator/work-state/types.js';
 
 // ============================================================================
 // Argument parsing helpers

@@ -10,10 +10,10 @@
 
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import { scanDirectory } from '../orchestrator/discovery/scanner.js';
-import { scanDirectoryForDirs } from '../orchestrator/discovery/scanner.js';
-import { parseAgentFile } from '../orchestrator/discovery/agent-parser.js';
-import { parseTeamConfig } from '../orchestrator/discovery/team-parser.js';
+import { scanDirectory } from '../services/orchestrator/discovery/scanner.js';
+import { scanDirectoryForDirs } from '../services/orchestrator/discovery/scanner.js';
+import { parseAgentFile } from '../services/orchestrator/discovery/agent-parser.js';
+import { parseTeamConfig } from '../services/orchestrator/discovery/team-parser.js';
 import { computeContentHash } from './types.js';
 import type { SkillStore } from '../core/storage/skill-store.js';
 import type {

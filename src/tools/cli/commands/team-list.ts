@@ -8,7 +8,7 @@
 
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import { TeamStore, getTeamsBasePath } from '../../../teams/index.js';
+import { TeamStore, getTeamsBasePath } from '../../../services/teams/index.js';
 import type { TeamConfig } from '../../../core/types/team.js';
 
 // ============================================================================

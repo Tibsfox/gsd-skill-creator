@@ -13,11 +13,11 @@
  */
 
 import { join } from 'node:path';
-import { SnapshotManager } from '../../../orchestrator/session-continuity/snapshot-manager.js';
-import { SkillPreloadSuggester } from '../../../orchestrator/session-continuity/skill-preload-suggester.js';
-import { WarmStartGenerator } from '../../../orchestrator/session-continuity/warm-start.js';
-import { HandoffGenerator } from '../../../orchestrator/session-continuity/handoff-generator.js';
-import { ProjectStateReader } from '../../../orchestrator/state/state-reader.js';
+import { SnapshotManager } from '../../../services/orchestrator/session-continuity/snapshot-manager.js';
+import { SkillPreloadSuggester } from '../../../services/orchestrator/session-continuity/skill-preload-suggester.js';
+import { WarmStartGenerator } from '../../../services/orchestrator/session-continuity/warm-start.js';
+import { HandoffGenerator } from '../../../services/orchestrator/session-continuity/handoff-generator.js';
+import { ProjectStateReader } from '../../../services/orchestrator/state/state-reader.js';
 
 // ============================================================================
 // Argument parsing helpers

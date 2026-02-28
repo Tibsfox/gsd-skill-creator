@@ -406,7 +406,7 @@ describe('Progressive Disclosure Integration Tests', () => {
   describe('SkillGenerator integration', () => {
     it('generateScaffold decomposes large candidates', async () => {
       // Import SkillGenerator lazily to avoid circular dependency issues
-      const { SkillGenerator } = await import('../detection/skill-generator.js');
+      const { SkillGenerator } = await import('../services/detection/skill-generator.js');
       const skillsDir = join(tmpDir, 'gen-skills');
       const store = new SkillStore(skillsDir);
       const generator = new SkillGenerator(store);

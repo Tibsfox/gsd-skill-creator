@@ -18,7 +18,7 @@ import { WorkflowRunner } from './workflow-runner.js';
 import type { WorkflowRunnerDeps } from './workflow-runner.js';
 import type { WorkflowDefinition } from './types.js';
 import type { WorkflowRunEntry } from './types.js';
-import type { WorkState } from '../orchestrator/work-state/types.js';
+import type { WorkState } from '../services/orchestrator/work-state/types.js';
 
 // ============================================================================
 // Mock helpers
