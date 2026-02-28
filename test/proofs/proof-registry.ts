@@ -958,3 +958,297 @@ export const allProofsThrough477: ProofStatement[] = [
   ...allProofsThrough476,
   ...allPhase477Proofs,
 ];
+
+// ---------------------------------------------------------------------------
+// Chapter 15: Physics Constants and Dimensional Analysis (Phase 478)
+// ---------------------------------------------------------------------------
+export const ch15Proofs: ProofStatement[] = [
+  {
+    id: 'thm-15-1',
+    chapter: 15,
+    section: 1,
+    name: 'Buckingham Pi theorem for pendulum: rank-nullity gives 1 dimensionless group',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-12-1'],
+    status: 'proved',
+    testId: 'proof-15-1-buckingham-pi',
+    platformConnection: 'rank-nullity theorem from linear algebra determines how many dimensionless groups exist',
+    subversion: '1.50.66',
+  },
+  {
+    id: 'thm-15-2',
+    chapter: 15,
+    section: 2,
+    name: 'natural units: F/(ma) = 1 is invariant under consistent rescaling of units',
+    type: 'proposition',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: ['thm-15-1'],
+    status: 'proved',
+    testId: 'proof-15-2-natural-units',
+    platformConnection: 'src/plane/types.ts radius ∈ [0,1] is natural units normalization — max skill strength = 1',
+    subversion: '1.50.66',
+  },
+  {
+    id: 'thm-15-3',
+    chapter: 15,
+    section: 3,
+    name: 'fine structure constant α ≈ 1/137 is dimensionless and unit-invariant',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: ['thm-15-1'],
+    status: 'proved',
+    testId: 'proof-15-3-fine-structure',
+    platformConnection: 'MATURITY_THRESHOLD/MAX_ANGULAR_VELOCITY ratio is a dimensionless platform constant analogous to α',
+    subversion: '1.50.66',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Chapter 16: Periodic Table and Atomic Structure (Phase 478)
+// ---------------------------------------------------------------------------
+export const ch16Proofs: ProofStatement[] = [
+  {
+    id: 'thm-16-1',
+    chapter: 16,
+    section: 1,
+    name: 'shell capacity = 2n²: sum of subshell capacities 2(2l+1) for l=0..n-1',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: [],
+    status: 'proved',
+    testId: 'proof-16-1-shell-filling',
+    platformConnection: 'discrete levels with increasing capacity mirror shell capacity sequence',
+    subversion: '1.50.66',
+  },
+  {
+    id: 'thm-16-2',
+    chapter: 16,
+    section: 2,
+    name: 'periodicity: Aufbau recurrence generates period lengths [2,8,8,18,18,32]',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: ['thm-16-1'],
+    status: 'proved',
+    testId: 'proof-16-2-periodicity',
+    platformConnection: 'PROMOTION_REGIONS as discrete angular sectors — both systems partition space into discrete levels',
+    subversion: '1.50.66',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Chapter 17: Quantum Mechanics (Phase 478)
+// ---------------------------------------------------------------------------
+export const ch17Proofs: ProofStatement[] = [
+  {
+    id: 'thm-17-1',
+    chapter: 17,
+    section: 1,
+    name: 'L²(ℝ) inner product axioms hold for Gaussian wave packets',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-9-4', 'thm-11-1'],
+    status: 'proved',
+    testId: 'proof-17-1-hilbert-space',
+    platformConnection: 'skill co-activation inner product satisfies Hilbert space axioms (positivity, symmetry, linearity)',
+    subversion: '1.50.66',
+  },
+  {
+    id: 'thm-17-2',
+    chapter: 17,
+    section: 2,
+    name: 'Heisenberg uncertainty: ΔxΔp = ħ/2 for Gaussian (minimum uncertainty state)',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-17-1'],
+    status: 'proved',
+    testId: 'proof-17-2-uncertainty-principle',
+    platformConnection: 'MIN_THETA · MAX_ANGULAR_VELOCITY ≥ constant analogous to Heisenberg lower bound',
+    subversion: '1.50.66',
+  },
+  {
+    id: 'thm-17-3',
+    chapter: 17,
+    section: 3,
+    name: 'hydrogen Eₙ = -13.6 eV/n² and Balmer spectral lines (L4 honest partial)',
+    type: 'theorem',
+    classification: 'L4',
+    studentExperience: 'Acknowledged gap — full eigenvalue derivation requires functional analysis',
+    dependencies: ['thm-17-1'],
+    status: 'acknowledged-gap',
+    testId: 'proof-17-3-hydrogen-energy',
+    platformConnection: 'discrete promotion levels mirror discrete energy quantization',
+    subversion: '1.50.66',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Chapter 18: Set Theory (Phase 478)
+// ---------------------------------------------------------------------------
+export const ch18Proofs: ProofStatement[] = [
+  {
+    id: 'thm-18-1',
+    chapter: 18,
+    section: 1,
+    name: 'Russell paradox: naive comprehension is inconsistent; ZFC Separation prevents it',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: [],
+    status: 'proved',
+    testId: 'proof-18-1-russell-paradox',
+    platformConnection: 'ZFC Separation mirrors security-hygiene skill: bounded access prevents self-referential loops',
+    subversion: '1.50.67',
+  },
+  {
+    id: 'thm-18-2',
+    chapter: 18,
+    section: 2,
+    name: 'Von Neumann ordinals construct ℕ; Peano axioms verified in ZFC',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: ['thm-18-1'],
+    status: 'proved',
+    testId: 'proof-18-2-natural-numbers',
+    platformConnection: 'version number ordering (ℕ-structure) underlies plan and phase tracking',
+    subversion: '1.50.67',
+  },
+  {
+    id: 'thm-18-3',
+    chapter: 18,
+    section: 3,
+    name: 'Cantor theorem: |P(A)| > |A| — no surjection A → P(A) (diagonalization)',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: ['thm-18-2'],
+    status: 'proved',
+    testId: 'proof-18-3-cantor-theorem',
+    platformConnection: 'skill-space is strictly richer than any finite enumeration — no finite skill registry can cover all skills',
+    subversion: '1.50.67',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Chapter 19: Logic and Proof Theory (Phase 478)
+// ---------------------------------------------------------------------------
+export const ch19Proofs: ProofStatement[] = [
+  {
+    id: 'thm-19-1',
+    chapter: 19,
+    section: 1,
+    name: 'De Morgan laws: ¬(P∧Q) ↔ ¬P∨¬Q and ¬(P∨Q) ↔ ¬P∧¬Q (truth table)',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: [],
+    status: 'proved',
+    testId: 'proof-19-1-boolean-algebra',
+    platformConnection: 'NOT/AND/OR are the logical primitives underlying all skill activation conditions',
+    subversion: '1.50.68',
+  },
+  {
+    id: 'thm-19-2',
+    chapter: 19,
+    section: 2,
+    name: 'soundness of modus ponens, tollens, hypothetical syllogism, disjunctive syllogism',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: ['thm-19-1'],
+    status: 'proved',
+    testId: 'proof-19-2-soundness',
+    platformConnection: 'inference rules are the logical backbone of agent reasoning chains',
+    subversion: '1.50.68',
+  },
+  {
+    id: 'thm-19-3',
+    chapter: 19,
+    section: 3,
+    name: 'propositional completeness outline: all tautologies provable from Boolean axioms',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-19-1', 'thm-19-2'],
+    status: 'proved',
+    testId: 'proof-19-3-completeness-outline',
+    platformConnection: 'completeness guarantees that all true activation conditions are expressible',
+    subversion: '1.50.68',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Chapter 20: Probability and Statistics (Phase 478)
+// ---------------------------------------------------------------------------
+export const ch20Proofs: ProofStatement[] = [
+  {
+    id: 'thm-20-1',
+    chapter: 20,
+    section: 1,
+    name: "Bayes' theorem: P(A|B) = P(B|A)P(A)/P(B); medical test example ≈ 49%",
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: [],
+    status: 'proved',
+    testId: 'proof-20-1-bayes-theorem',
+    platformConnection: 'computeEnhancedScore in src/plane/activation.ts IS Bayesian inference (identity-level connection)',
+    subversion: '1.50.70',
+  },
+  {
+    id: 'thm-20-2',
+    chapter: 20,
+    section: 2,
+    name: 'Weak Law of Large Numbers: P(|X̄ₙ − μ| > ε) ≤ σ²/(nε²) via Chebyshev',
+    type: 'theorem',
+    classification: 'L2',
+    studentExperience: 'I can do this',
+    dependencies: ['thm-20-1'],
+    status: 'proved',
+    testId: 'proof-20-2-law-of-large-numbers',
+    platformConnection: 'long-run average skill score converges to true quality — law of large sessions',
+    subversion: '1.50.70',
+  },
+  {
+    id: 'thm-20-3',
+    chapter: 20,
+    section: 3,
+    name: 'Central Limit Theorem (simulation): standardized Uniform[0,1] sums → N(0,1), KS < 0.02',
+    type: 'theorem',
+    classification: 'L3',
+    studentExperience: 'This is hard but I am getting it',
+    dependencies: ['thm-20-2'],
+    status: 'proved',
+    testId: 'proof-20-3-central-limit-theorem',
+    platformConnection: 'aggregated skill scores across many sessions approximate a normal distribution',
+    subversion: '1.50.70',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// All Phase 478 proofs (Ch 15-20)
+// ---------------------------------------------------------------------------
+export const allPhase478Proofs: ProofStatement[] = [
+  ...ch15Proofs,
+  ...ch16Proofs,
+  ...ch17Proofs,
+  ...ch18Proofs,
+  ...ch19Proofs,
+  ...ch20Proofs,
+];
+
+// ---------------------------------------------------------------------------
+// All proofs through Phase 478
+// ---------------------------------------------------------------------------
+export const allProofsThrough478: ProofStatement[] = [
+  ...allProofsThrough477,
+  ...allPhase478Proofs,
+];
