@@ -73,6 +73,14 @@ Progress: [███████████████████████
 - Confidence scoring includes count factor applied only to consistency bonus
 - DeltaStore uses JSON files organized by userId/domain path structure
 - registerModel() throws TypeError for duplicates; replaceModel() for intentional overrides
+- CollegeLoader takes basePath parameter for testability -- tests use temp directories
+- DEPARTMENT.md parser extracts wings from markdown list with dash-separated descriptions
+- Explorer uses dependency injection: receives CollegeLoader and ConceptRegistry in constructor
+- Path format is dept/wing/concept with each segment optional for progressive depth
+- CrossReferenceResolver groups resolveAll results by source concept and target department
+- Session definitions stored as JSON in try-sessions/ directory
+- completeStep() is the only method that marks steps complete; nextStep() only advances position
+- Integration tests use real .college/departments/ directory, not temp dirs
 
 ### Pending Todos
 
@@ -85,5 +93,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Phase 6 Heritage Panels complete -- 6/6 plans, 102 tests passing
+Stopped at: Phase 4 College Structure re-executed -- 4/4 plans, 47 college tests, 276 total .college tests
 Resume file: None
