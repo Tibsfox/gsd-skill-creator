@@ -98,3 +98,13 @@ export {
   isGraduation,
 } from './gates.js';
 export type { GateEvaluatorOptions } from './gates.js';
+
+// State pruner (Phase 500-01)
+export {
+  countLines,
+  parseStateEntries,
+  identifyStaleEntries,
+  formatArchive,
+  pruneState,
+} from './state-pruner.js';
+export type { PruneResult, StateSection, ParsedState, IOCallbacks } from './state-pruner.js';
