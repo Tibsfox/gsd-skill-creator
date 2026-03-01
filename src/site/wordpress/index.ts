@@ -12,3 +12,5 @@ export type {
 } from './wp-sync.js';
 export { createMcpWpAdapter } from './mcp-adapter.js';
 export type { McpToolCaller, McpWpAdapter } from './mcp-adapter.js';
+export { migrateAllContent } from './migrate.js';
+export type { MigrateAdapter, MigrateOptions, MigrateResult } from './migrate.js';
