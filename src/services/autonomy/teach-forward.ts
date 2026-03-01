@@ -219,6 +219,133 @@ export async function loadTeachForward(
 }
 
 // ============================================================================
+// Phase-level teach-forward types
+// ============================================================================
+
+/** Result of writing a phase-level teach-forward file */
+export interface PhaseTeachForwardResult {
+  from_phase: number;
+  to_phase: number;
+  insights: string[];
+  extracted_at: string;
+}
+
+// ============================================================================
+// extractPhaseTeachForward
+// ============================================================================
+
+/**
+ * Extract teach-forward insights from a phase SUMMARY.md document.
+ *
+ * Tries sections in priority order: 'Key Findings', 'Accomplishments',
+ * 'What Was Built'. On first match with >0 bullets, returns up to 5.
+ * Falls back to last 5 bullet points from entire document.
+ */
+export function extractPhaseTeachForward(summaryContent: string): string[] {
+  if (!summaryContent) return [];
+
+  const prioritySections = ['Key Findings', 'Accomplishments', 'What Was Built'];
+
+  for (const heading of prioritySections) {
+    const section = extractSection(summaryContent, heading);
+    if (section) {
+      const bullets = parseBulletPoints(section);
+      if (bullets.length > 0) {
+        return bullets.slice(0, MAX_INSIGHTS);
+      }
+    }
+  }
+
+  // Fallback: last 5 bullet points from entire document
+  const allBullets = parseBulletPoints(summaryContent);
+  if (allBullets.length === 0) return [];
+
+  return allBullets.slice(-MAX_INSIGHTS);
+}
+
+// ============================================================================
+// writePhaseTeachForward
+// ============================================================================
+
+/**
+ * Write a phase-level teach-forward file for the next phase.
+ *
+ * Creates {phasesDir}/{toPhase}-TEACH-FORWARD.md with YAML frontmatter
+ * containing from_phase, to_phase, extracted_at, and a bullet list of insights.
+ *
+ * File is written to phasesDir root (not inside a phase subdirectory)
+ * because the next phase directory may not exist yet.
+ */
+export async function writePhaseTeachForward(
+  phasesDir: string,
+  fromPhase: number,
+  insights: string[],
+  io: WriteIO,
+): Promise<PhaseTeachForwardResult> {
+  const toPhase = fromPhase + 1;
+  const extractedAt = new Date().toISOString();
+
+  const result: PhaseTeachForwardResult = {
+    from_phase: fromPhase,
+    to_phase: toPhase,
+    insights,
+    extracted_at: extractedAt,
+  };
+
+  const bulletList = insights.map(i => `- ${i}`).join('\n');
+  const content = [
+    '---',
+    `from_phase: ${fromPhase}`,
+    `to_phase: ${toPhase}`,
+    `extracted_at: "${extractedAt}"`,
+    '---',
+    '',
+    bulletList,
+    '',
+  ].join('\n');
+
+  const filePath = `${phasesDir}/${toPhase}-TEACH-FORWARD.md`;
+  await io.writeFile(filePath, content);
+
+  return result;
+}
+
+// ============================================================================
+// loadPhaseTeachForward
+// ============================================================================
+
+/**
+ * Load a phase-level teach-forward file and format it for context injection.
+ *
+ * Reads {phasesDir}/{phaseNum}-TEACH-FORWARD.md, extracts bullets after
+ * frontmatter, and returns a formatted context block with
+ * "## Context from Prior Phase" heading. Returns empty string on error.
+ */
+export async function loadPhaseTeachForward(
+  phasesDir: string,
+  phaseNum: number,
+  io: ReadIO,
+): Promise<string> {
+  const filePath = `${phasesDir}/${phaseNum}-TEACH-FORWARD.md`;
+
+  try {
+    const content = await io.readFile(filePath);
+
+    // Extract bullet points from the content (after frontmatter)
+    const bodyMatch = content.match(/---\n[\s\S]*?\n---\n([\s\S]*)/);
+    const body = bodyMatch ? bodyMatch[1].trim() : content.trim();
+    const bullets = parseBulletPoints(body);
+
+    if (bullets.length === 0) return '';
+
+    const bulletList = bullets.map(b => `- ${b}`).join('\n');
+    return `## Context from Prior Phase\n\n${bulletList}\n\n---`;
+  } catch {
+    return '';
+  }
+}
+
+// ============================================================================
 // verifyTeachForwardChain
 // ============================================================================
 

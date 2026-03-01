@@ -109,7 +109,7 @@ export {
 } from './state-pruner.js';
 export type { PruneResult, StateSection, ParsedState, IOCallbacks } from './state-pruner.js';
 
-// Teach-forward (Phase 500-02)
+// Teach-forward (Phase 500-02, Phase 508-02)
 export {
   extractSection,
   parseBulletPoints,
@@ -118,8 +118,11 @@ export {
   loadTeachForward,
   verifyTeachForwardChain,
   processJournal,
+  extractPhaseTeachForward,
+  writePhaseTeachForward,
+  loadPhaseTeachForward,
 } from './teach-forward.js';
-export type { ChainVerificationResult } from './teach-forward.js';
+export type { ChainVerificationResult, PhaseTeachForwardResult } from './teach-forward.js';
 
 // Context budget (Phase 500-03)
 export {
