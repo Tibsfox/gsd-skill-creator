@@ -47,3 +47,7 @@ export type { GateConfig } from './schema-validation.js';
 // Validation utilities
 export { validateExecutionState, validateGateConfig } from './schema-validation.js';
 export type { ValidationResult } from './schema-validation.js';
+
+// Gate config loader
+export { loadGateConfig, validateGateConfigFile } from './gate-loader.js';
+export type { GateLoadResult } from './gate-loader.js';
