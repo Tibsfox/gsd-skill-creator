@@ -56,3 +56,6 @@ www/staging/*/
 
 # User-local config
 .sc-config.json
+
+# Runtime state (autonomy watchdog)
+watchdog-state.json
