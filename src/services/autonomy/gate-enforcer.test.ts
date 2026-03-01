@@ -343,3 +343,117 @@ describe('enforceGates', () => {
     expect(result.results[0].gate_type).toBe('checkpoint');
   });
 });
+
+// ============================================================================
+// Summary gate type tests (RC-11)
+// ============================================================================
+
+describe('summary gate type', () => {
+  it('should pass when valid SUMMARY.md exists in phase directory', async () => {
+    const dir = createTempDir();
+    const phaseDir = join(dir, '.planning', 'phases', '508-rc-closure-foundation');
+    await mkdir(phaseDir, { recursive: true });
+
+    // Create a valid SUMMARY.md with required content
+    const summaryContent = [
+      '# Phase 508 Plan 01: Watchdog Summary',
+      '',
+      '## Completed Tasks',
+      '',
+      'Created the watchdog timer module with commit abc1234.',
+      'Modified the autonomy engine to wire in the watchdog.',
+      '',
+      '## Accomplishments',
+      '',
+      'Task 1 completed successfully.',
+    ].join('\n');
+    await writeFile(join(phaseDir, '508-01-SUMMARY.md'), summaryContent, 'utf-8');
+
+    const config = makeConfig('summary', [
+      makeDefinition({
+        name: 'summary-md',
+        description: 'SUMMARY.md verification at phase completion (RC-11 fix)',
+        path_pattern: '.planning/phases/{phase_dir}/508-01-SUMMARY.md',
+        min_size_bytes: 100,
+        blocking: true,
+        content_checks: [
+          { pattern: '^#\\s+', required: true, description: 'Must have at least one heading' },
+          { pattern: '([Aa]ccomplishment|[Cc]ompleted|[Cc]reated|[Mm]odified)', required: true, description: 'Must describe accomplishments' },
+          { pattern: '([Cc]ommit|[Tt]ask)', required: true, description: 'Must reference commits or tasks' },
+        ],
+      }),
+    ]);
+
+    const result = await enforceGates(config, 'summary', dir, {
+      phase_dir: '508-rc-closure-foundation',
+    });
+
+    expect(result.passed).toBe(true);
+    expect(result.results).toHaveLength(1);
+    expect(result.results[0].passed).toBe(true);
+    expect(result.results[0].gate_type).toBe('summary');
+  });
+
+  it('should fail when SUMMARY.md is missing from phase directory', async () => {
+    const dir = createTempDir();
+    const phaseDir = join(dir, '.planning', 'phases', '508-rc-closure-foundation');
+    await mkdir(phaseDir, { recursive: true });
+    // No SUMMARY.md created
+
+    const config = makeConfig('summary', [
+      makeDefinition({
+        name: 'summary-md',
+        description: 'SUMMARY.md verification at phase completion (RC-11 fix)',
+        path_pattern: '.planning/phases/{phase_dir}/508-01-SUMMARY.md',
+        min_size_bytes: 500,
+        blocking: true,
+        content_checks: [
+          { pattern: '^#\\s+', required: true },
+          { pattern: '([Aa]ccomplishment|[Cc]ompleted|[Cc]reated|[Mm]odified)', required: true },
+          { pattern: '([Cc]ommit|[Tt]ask)', required: true },
+        ],
+      }),
+    ]);
+
+    const result = await enforceGates(config, 'summary', dir, {
+      phase_dir: '508-rc-closure-foundation',
+    });
+
+    expect(result.passed).toBe(false);
+    expect(result.blocking_failures).toHaveLength(1);
+    expect(result.blocking_failures[0].gate_name).toBe('summary-md');
+    expect(result.blocking_failures[0].message).toContain('Missing artifact');
+  });
+
+  it('should fail when SUMMARY.md is too small (below 500 bytes)', async () => {
+    const dir = createTempDir();
+    const phaseDir = join(dir, '.planning', 'phases', '508-rc-closure-foundation');
+    await mkdir(phaseDir, { recursive: true });
+
+    // Create a tiny SUMMARY.md that is below the 500-byte threshold
+    await writeFile(join(phaseDir, '508-01-SUMMARY.md'), '# Summary\nToo short.', 'utf-8');
+
+    const config = makeConfig('summary', [
+      makeDefinition({
+        name: 'summary-md',
+        description: 'SUMMARY.md verification at phase completion (RC-11 fix)',
+        path_pattern: '.planning/phases/{phase_dir}/508-01-SUMMARY.md',
+        min_size_bytes: 500,
+        blocking: true,
+        content_checks: [
+          { pattern: '^#\\s+', required: true },
+          { pattern: '([Aa]ccomplishment|[Cc]ompleted|[Cc]reated|[Mm]odified)', required: true },
+          { pattern: '([Cc]ommit|[Tt]ask)', required: true },
+        ],
+      }),
+    ]);
+
+    const result = await enforceGates(config, 'summary', dir, {
+      phase_dir: '508-rc-closure-foundation',
+    });
+
+    expect(result.passed).toBe(false);
+    expect(result.blocking_failures).toHaveLength(1);
+    expect(result.blocking_failures[0].message).toContain('too small');
+  });
+});
