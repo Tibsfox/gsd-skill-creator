@@ -21,6 +21,7 @@ import type { ExecutionState } from './types.js';
 import type { SubversionCallbacks } from './scheduler.js';
 import type { GateEvaluatorOptions } from './gates.js';
 import type { WatchdogConfig } from './write-watchdog.js';
+import type { TeamConfig } from '../../types/team.js';
 import { createExecutionState, transition } from './state-machine.js';
 import { createScheduler } from './scheduler.js';
 import { resumeExecution } from './resume.js';
@@ -29,10 +30,27 @@ import { GateEvaluator } from './gates.js';
 import { estimateContextBudget, shouldPause } from './context-budget.js';
 import { createWatchdog } from './write-watchdog.js';
 import { writeExecutionState } from './persistence.js';
+import { TeamLifecycleManager } from '../../teams/team-lifecycle.js';
+import { TeamStore } from '../../teams/team-store.js';
 
 // ============================================================================
 // Types
 // ============================================================================
+
+/**
+ * Optional team configuration for autonomy-managed teams.
+ *
+ * When provided, the engine creates a team at startup and
+ * optionally dissolves it at completion based on durability.
+ */
+export interface AutonomyTeamConfig {
+  /** Base team config to create (name, leadAgentId, members, etc.) */
+  teamConfig: TeamConfig;
+  /** Path to teams directory for TeamStore */
+  teamsDir: string;
+  /** Team durability: 'ephemeral' auto-dissolves on completion */
+  durability?: 'ephemeral' | 'persistent';
+}
 
 /**
  * Configuration for the autonomy engine.
@@ -60,6 +78,8 @@ export interface AutonomyEngineConfig {
   teachForwardDir?: string;
   /** Path for journal input for teach-forward */
   journalDir?: string;
+  /** Optional team lifecycle management */
+  team?: AutonomyTeamConfig;
 }
 
 /**
@@ -106,6 +126,28 @@ export function createAutonomyEngine(config: AutonomyEngineConfig): AutonomyEngi
         state = createExecutionState(config.milestoneId, {
           total_subversions: config.totalSubversions,
         });
+      }
+
+      // ====================================================================
+      // Step 1b: Team lifecycle -- create and activate team if configured
+      // ====================================================================
+      let lifecycleManager: TeamLifecycleManager | null = null;
+      if (config.team) {
+        const teamStore = new TeamStore(config.team.teamsDir);
+        lifecycleManager = new TeamLifecycleManager(teamStore, config.team.teamsDir);
+        try {
+          const teamCfg: TeamConfig = {
+            ...config.team.teamConfig,
+            durability: config.team.durability ?? 'persistent',
+          };
+          await lifecycleManager.createTeam(teamCfg, 'auto');
+          await lifecycleManager.activateTeam(teamCfg.name);
+        } catch (err) {
+          const message = err instanceof Error ? err.message : String(err);
+          state = transition(state, 'FAILED', `team creation failed: ${message}`);
+          await writeExecutionState(state, config.statePath);
+          return state;
+        }
       }
 
       // ====================================================================
@@ -184,6 +226,25 @@ export function createAutonomyEngine(config: AutonomyEngineConfig): AutonomyEngi
       if (state.status === 'COMPLETING') {
         state = transition(state, 'DONE', 'all subversions completed successfully');
         await writeExecutionState(state, config.statePath);
+      }
+
+      // ====================================================================
+      // Step 6b: Team lifecycle -- dissolve ephemeral teams on completion
+      // ====================================================================
+      if (lifecycleManager && config.team && state.status === 'DONE') {
+        const durability = config.team.durability ?? 'persistent';
+        if (durability === 'ephemeral') {
+          try {
+            await lifecycleManager.dissolveTeam(
+              config.team.teamConfig.name,
+              'autonomy:milestone-complete',
+            );
+          } catch (err) {
+            // Log but don't fail the engine -- milestone completed successfully
+            const message = err instanceof Error ? err.message : String(err);
+            state = { ...state, last_error: `team dissolution warning: ${message}` };
+          }
+        }
       }
 
       return state;
