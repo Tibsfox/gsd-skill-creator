@@ -179,7 +179,7 @@ agents to self-organize around tasks.
 
 Teams are stored as YAML configurations and validated against the official format. The
 [Features](framework/features.md) page lists all team capabilities, and the
-[GSD Teams Guide](framework/features.md) covers when to use teams versus individual agents in
+[GSD Teams Guide](GSD-TEAMS.md) covers when to use teams versus individual agents in
 GSD workflows.
 
 
