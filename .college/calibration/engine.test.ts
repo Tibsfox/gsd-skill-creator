@@ -14,8 +14,9 @@ import {
   ComparisonDelta,
   ObservedResult,
   DomainCalibrationModel,
+  ProfileSynthesizer,
 } from './engine.js';
-import type { CalibrationDelta } from '../rosetta-core/types.js';
+import type { CalibrationDelta, CalibrationProfile } from '../rosetta-core/types.js';
 
 /** Minimal DeltaStore interface for testing */
 interface DeltaStore {
@@ -205,4 +206,147 @@ describe('CalibrationEngine', () => {
       expect(result.adjustment.precision).toBe(10);
     });
   });
+
+  describe('Profile synthesis (CAL-04)', () => {
+    it('synthesizes a single delta into a profile', () => {
+      const synthesizer = new ProfileSynthesizer();
+      const delta = createTestDelta({
+        domainModel: 'cooking',
+        timestamp: new Date('2026-03-01T12:00:00Z'),
+      });
+
+      const profile = synthesizer.synthesize([delta]);
+      expect(profile.deltas).toHaveLength(1);
+      expect(profile.lastUpdated).toEqual(new Date('2026-03-01T12:00:00Z'));
+      expect(profile.domain).toBe('cooking');
+    });
+
+    it('accumulates multiple deltas preserving all entries', () => {
+      const synthesizer = new ProfileSynthesizer();
+      const deltas = [
+        createTestDelta({ adjustment: { temperature: -10 }, timestamp: new Date('2026-01-01T00:00:00Z') }),
+        createTestDelta({ adjustment: { temperature: -10 }, timestamp: new Date('2026-02-01T00:00:00Z') }),
+        createTestDelta({ adjustment: { temperature: -10 }, timestamp: new Date('2026-03-01T00:00:00Z') }),
+      ];
+
+      const profile = synthesizer.synthesize(deltas);
+      expect(profile.deltas).toHaveLength(3);
+      expect(profile.lastUpdated).toEqual(new Date('2026-03-01T00:00:00Z'));
+    });
+
+    it('returns empty profile with zero confidence for empty input', () => {
+      const synthesizer = new ProfileSynthesizer();
+      const profile = synthesizer.synthesize([]);
+      expect(profile.confidenceScore).toBe(0);
+      expect(profile.deltas).toEqual([]);
+      expect(profile.domain).toBe('unknown');
+    });
+  });
+
+  describe('Confidence scoring (CAL-05)', () => {
+    it('produces higher confidence for consistent repeated feedback than single feedback', () => {
+      const synthesizer = new ProfileSynthesizer();
+
+      const singleDelta = [
+        createTestDelta({ adjustment: { temperature: -20 }, confidence: 0.6 }),
+      ];
+      const threeDeltas = [
+        createTestDelta({ adjustment: { temperature: -20 }, confidence: 0.6 }),
+        createTestDelta({ adjustment: { temperature: -20 }, confidence: 0.6 }),
+        createTestDelta({ adjustment: { temperature: -20 }, confidence: 0.6 }),
+      ];
+
+      const singleProfile = synthesizer.synthesize(singleDelta);
+      const threeProfile = synthesizer.synthesize(threeDeltas);
+
+      expect(threeProfile.confidenceScore).toBeGreaterThan(singleProfile.confidenceScore);
+    });
+
+    it('does not apply consistency bonus for contradictory feedback', () => {
+      const synthesizer = new ProfileSynthesizer();
+
+      const contradictoryDeltas = [
+        createTestDelta({ adjustment: { temperature: -20 }, confidence: 0.7 }),
+        createTestDelta({ adjustment: { temperature: +20 }, confidence: 0.7 }),
+      ];
+
+      const score = synthesizer.scoreConfidence(contradictoryDeltas);
+      // Base is 0.7, no consistency bonus since signs differ
+      expect(score).toBe(0.7);
+    });
+
+    it('computes single consistent delta confidence correctly', () => {
+      const synthesizer = new ProfileSynthesizer();
+
+      const deltas = [
+        createTestDelta({ adjustment: { temperature: -10 }, confidence: 0.5 }),
+      ];
+
+      const score = synthesizer.scoreConfidence(deltas);
+      // base = 0.5, consistency = 1.0 (one param, consistent)
+      // final = clamp(0.5 * (1 + 1.0 * 0.5), 0, 1) = 0.75
+      expect(score).toBe(0.75);
+    });
+
+    it('never exceeds 1.0 even with perfect consistency and high base', () => {
+      const synthesizer = new ProfileSynthesizer();
+
+      const deltas = [
+        createTestDelta({ adjustment: { temperature: -10 }, confidence: 1.0 }),
+        createTestDelta({ adjustment: { temperature: -10 }, confidence: 1.0 }),
+      ];
+
+      const score = synthesizer.scoreConfidence(deltas);
+      expect(score).toBeLessThanOrEqual(1.0);
+    });
+
+    it('getProfile returns profile with correct delta count after processing', async () => {
+      const mockStore = createMockDeltaStore();
+      const engine = new CalibrationEngine(mockStore);
+      const model = createMockModel('cooking');
+      engine.registerModel(model);
+
+      await engine.process({
+        domain: 'cooking',
+        translationId: 't1',
+        observedResult: 'overdone',
+        expectedResult: 'medium',
+        parameters: { temperature: 350 },
+      });
+      await engine.process({
+        domain: 'cooking',
+        translationId: 't2',
+        observedResult: 'overdone',
+        expectedResult: 'medium',
+        parameters: { temperature: 340 },
+      });
+
+      const profile = await engine.getProfile('user1', 'cooking');
+      expect(profile.deltas).toHaveLength(2);
+    });
+
+    it('keeps score at exactly 1.0 for 100 identical deltas', () => {
+      const synthesizer = new ProfileSynthesizer();
+
+      const deltas = Array.from({ length: 100 }, () =>
+        createTestDelta({ adjustment: { temperature: -10 }, confidence: 1.0 }),
+      );
+
+      const score = synthesizer.scoreConfidence(deltas);
+      expect(score).toBe(1.0);
+    });
+  });
 });
+
+/** Helper to create test CalibrationDelta objects. */
+function createTestDelta(overrides: Partial<CalibrationDelta> = {}): CalibrationDelta {
+  return {
+    observedResult: 'overdone',
+    expectedResult: 'medium',
+    adjustment: { temperature: -15 },
+    confidence: 0.7,
+    domainModel: 'cooking',
+    timestamp: new Date('2026-03-01T12:00:00Z'),
+    ...overrides,
+  };
+}
