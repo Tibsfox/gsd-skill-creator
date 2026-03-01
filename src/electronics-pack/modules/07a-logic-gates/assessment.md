@@ -91,7 +91,7 @@ F = A(B + B'C) + BC
 F = A(B + C) + BC          [using B + B'C = B + C]
 F = AB + AC + BC
 
-**Simplified result: F = AB + AC + BC** (majority function)
+**Simplified result: F = AB + AC + BC** (majority function) -- H&H 10.1 (Boolean algebra and Karnaugh maps)
 
 **K-map verification** (3-variable):
 ```
@@ -112,7 +112,7 @@ A 3-input NAND gate requires **6 MOSFETs** (3 PMOS + 3 NMOS).
 
 **Pull-down network (NMOS):** 3 NMOS transistors connected in **series** between output and GND. ALL three inputs must be HIGH for all NMOS to conduct and pull the output LOW.
 
-General formula: An N-input NAND gate uses 2N MOSFETs (N PMOS parallel + N NMOS series).
+General formula: An N-input NAND gate uses 2N MOSFETs (N PMOS parallel + N NMOS series). -- H&H 10.2 (CMOS gate construction)
 
 ---
 
@@ -129,7 +129,7 @@ Y = A'B' + C'D'
 
 **Result in AND/NOT form:** Y = A'B' + C'D'
 
-This reads as: "Y is HIGH when both A and B are LOW, or when both C and D are LOW."
+This reads as: "Y is HIGH when both A and B are LOW, or when both C and D are LOW." -- H&H 10.1 (De Morgan's theorem)
 
 ---
 
@@ -156,7 +156,7 @@ Groups:
 - Column C=1 (all 4 cells in columns 01 and 11 where C=1): gives **C**
 - Cell 110 (AB, C=0): gives **AB**
 
-**Simplified result: Y = C + AB**
+**Simplified result: Y = C + AB** -- H&H 10.1 (combinational circuit design and K-map simplification)
 
 **Circuit:** One AND gate (A AND B), one OR gate (AND_output OR C). Total: 2 gates.
 
@@ -184,4 +184,4 @@ New critical path: 5 + 10 + 5 = 20ns
 - T_min = 6 + 20 + 3 = 29ns
 - **f_max = 1 / 29ns = 34.48 MHz**
 
-The 3ns reduction in AND gate delay yields a 3.23 MHz improvement (10.3% faster clock).
+The 3ns reduction in AND gate delay yields a 3.23 MHz improvement (10.3% faster clock). -- H&H 10.2 (propagation delay and timing analysis)

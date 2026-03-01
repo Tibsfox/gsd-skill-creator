@@ -52,7 +52,7 @@ You are designing the output stage for a 16-bit audio DAC running at 44.1 kHz.
 
 ### Answer 1
 
-The Nyquist-Shannon sampling theorem states that a bandlimited analog signal can be perfectly reconstructed from its discrete samples if and only if the sampling rate is at least twice the highest frequency component in the signal. For a 10 kHz signal, the minimum (Nyquist) sample rate is 20 kHz. A practical system would use 40-80 kHz (2x-4x the signal frequency) to provide margin for the anti-aliasing filter's transition band -- no real filter has a perfectly sharp cutoff, so the extra bandwidth gives the filter room to roll off before the Nyquist frequency.
+The Nyquist-Shannon sampling theorem states that a bandlimited analog signal can be perfectly reconstructed from its discrete samples if and only if the sampling rate is at least twice the highest frequency component in the signal. For a 10 kHz signal, the minimum (Nyquist) sample rate is 20 kHz. A practical system would use 40-80 kHz (2x-4x the signal frequency) to provide margin for the anti-aliasing filter's transition band -- no real filter has a perfectly sharp cutoff, so the extra bandwidth gives the filter room to roll off before the Nyquist frequency. -- H&H 13.1 (sampling theorem and Nyquist criterion)
 
 ### Answer 2
 
@@ -60,7 +60,7 @@ The Nyquist-Shannon sampling theorem states that a bandlimited analog signal can
 
 (b) LSB = Vref / 2^N = 3.3V / 4096 = 0.8057 mV (approximately 0.806 mV)
 
-(c) Maximum quantization error = 0.5 * LSB = 0.5 * 0.806 mV = 0.403 mV. This is independent of the input voltage -- every sample has at most +/- 0.5 LSB error regardless of its value.
+(c) Maximum quantization error = 0.5 * LSB = 0.5 * 0.806 mV = 0.403 mV. This is independent of the input voltage -- every sample has at most +/- 0.5 LSB error regardless of its value. -- H&H 13.2 (quantization noise and converter resolution)
 
 ### Answer 3
 
@@ -68,7 +68,7 @@ The Nyquist-Shannon sampling theorem states that a bandlimited analog signal can
 
 (b) The original frequency was 6 kHz. When sampled at 8 kHz, the alias appears at |f_sample - f_signal| = |8000 - 6000| = 2000 Hz.
 
-(c) Add an analog anti-aliasing low-pass filter before the ADC with a cutoff at or below 4 kHz (the Nyquist frequency). This removes the 6 kHz component before it reaches the sampler. Alternatively, increase the sample rate above 12 kHz (2 * 6 kHz) so that 6 kHz falls below the new Nyquist frequency.
+(c) Add an analog anti-aliasing low-pass filter before the ADC with a cutoff at or below 4 kHz (the Nyquist frequency). This removes the 6 kHz component before it reaches the sampler. Alternatively, increase the sample rate above 12 kHz (2 * 6 kHz) so that 6 kHz falls below the new Nyquist frequency. -- H&H 13.1 (aliasing and anti-aliasing filters)
 
 ### Answer 4
 
@@ -78,6 +78,8 @@ The Nyquist-Shannon sampling theorem states that a bandlimited analog signal can
 | **Flash** | 6-10 bits | 100 MSps - 5 GSps | Fastest possible conversion (single clock cycle) | Exponential hardware cost (2^N - 1 comparators) | Digital oscilloscopes, radar receivers, video digitizers |
 | **Sigma-Delta** | 16-24 bits | 10 SPS - 200 kSps | Highest resolution achievable, simple analog front-end | Slow conversion rate due to oversampling requirement | Precision measurement (strain gauges, thermocouples), professional audio |
 
+-- H&H 13.3 (ADC architectures: SAR, flash, sigma-delta)
+
 ### Answer 5
 
 (a) Nyquist frequency = 44,100 / 2 = 22,050 Hz.
@@ -86,4 +88,4 @@ The Nyquist-Shannon sampling theorem states that a bandlimited analog signal can
 
 (c) The reconstruction filter must be analog because it operates on the DAC's analog output. The DAC produces a staircase waveform with sharp transitions that contain high-frequency spectral images. A digital filter before the DAC cannot remove these because the staircase shape is created by the DAC itself during digital-to-analog conversion.
 
-(d) A Bessel (or linear-phase) filter is recommended for audio applications because it has maximally flat group delay, meaning all frequencies experience the same time delay through the filter. This preserves the waveshape and avoids phase distortion that would be audible as smeared transients. A Butterworth has flatter amplitude response but more group delay variation. A Chebyshev has passband ripple that would color the audio. Modern audio DACs often use oversampling (e.g., 8x at 352.8 kHz) followed by a simple first-order analog filter, which avoids the need for a sharp analog filter altogether.
+(d) A Bessel (or linear-phase) filter is recommended for audio applications because it has maximally flat group delay, meaning all frequencies experience the same time delay through the filter. This preserves the waveshape and avoids phase distortion that would be audible as smeared transients. A Butterworth has flatter amplitude response but more group delay variation. A Chebyshev has passband ripple that would color the audio. Modern audio DACs often use oversampling (e.g., 8x at 352.8 kHz) followed by a simple first-order analog filter, which avoids the need for a sharp analog filter altogether. -- H&H 13.6 (DAC output stages and reconstruction filters)
