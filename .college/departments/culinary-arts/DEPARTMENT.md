@@ -6,13 +6,13 @@
 
 ## Wings
 
-1. Food Science -- Maillard reactions, emulsification, protein denaturation, starch gelatinization
-2. Thermodynamics -- heat transfer modes, specific heat capacity, altitude adjustments
-3. Nutrition -- macronutrient roles, micronutrient bioavailability
-4. Technique -- wet/dry/combination heat methods, knife skills
-5. Baking Science -- baker's ratios, gluten development, yeast biology
-6. Food Safety -- temperature danger zone, cross-contamination, allergen management
-7. Home Economics -- meal planning, budget management, pantry management
+- Food Science -- Maillard reactions, emulsification, protein denaturation, starch gelatinization, caramelization, fermentation
+- Thermodynamics -- heat transfer modes, specific heat capacity, altitude adjustments, Newton's law of cooling
+- Nutrition -- macronutrient roles, micronutrient bioavailability, preparation-nutrition effects
+- Technique -- dry heat methods, wet heat methods, combination methods and knife skills
+- Baking Science -- baker's ratios, gluten development, yeast biology, sugar chemistry
+- Food Safety -- temperature danger zone, cross-contamination prevention, safe storage times, allergen management
+- Home Economics -- meal planning, budget management, pantry management, preservation techniques
 
 ## Concepts
 
