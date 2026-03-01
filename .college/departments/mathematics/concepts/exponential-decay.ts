@@ -26,7 +26,7 @@ export const exponentialDecay: RosettaConcept = {
   relationships: [
     {
       type: 'cross-reference',
-      targetId: 'culinary-cooling-curves',
+      targetId: 'cook-newtons-cooling',
       description: 'Cooling curves in cooking -- how hot food reaches safe temperatures, fermentation rates, yeast growth',
     },
     {
