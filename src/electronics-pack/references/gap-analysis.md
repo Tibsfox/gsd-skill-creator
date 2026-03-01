@@ -259,3 +259,165 @@
 | 15.2 | Networks | MISSING | 11-microcontrollers | modules/11-microcontrollers/labs.ts | H&H 15.2 covers Ethernet, TCP/IP, wireless protocols. Not addressed |
 | 15.3 | Real-time / RTOS | PARTIAL | 11-microcontrollers | modules/11-microcontrollers/labs.ts | Topic 10 mentions RTOS concept. H&H 15.3 covers RTOS task scheduling, priority inversion, semaphores. Only a brief mention exists |
 | 15.4 | System design | MISSING | 11-microcontrollers | modules/11-microcontrollers/labs.ts | H&H 15.4 covers power management, watchdog timers, EMC compliance, system-level design. Not addressed |
+
+---
+
+## Coverage Summary
+
+| Status | Count | Percentage |
+|--------|-------|-----------|
+| COVERED | 56 | 46.7% |
+| PARTIAL | 26 | 21.7% |
+| MISSING | 20 | 16.7% |
+| DEFERRED | 18 | 15.0% |
+| **Total** | **120** | **100%** |
+
+**Actionable gaps (PARTIAL + MISSING):** 46 sections requiring content extension across 13 existing modules.
+
+**Effective coverage (excluding DEFERRED):** 56 COVERED out of 102 in-scope sections = **54.9%** fully covered. With PARTIAL counted as half-covered: **(56 + 13) / 102 = 67.6%** effective coverage.
+
+### By Tier
+
+| Tier | Modules | Covered | Partial | Missing | Deferred |
+|------|---------|---------|---------|---------|----------|
+| 1 (Foundations) | 01, 02, 03 | 18 | 2 | 1 | 0 |
+| 2 (Active/Analog) | 04, 05, 06, 07 | 20 | 14 | 15 | 0 |
+| 3 (Digital/Mixed) | 07a, 08, 09, 10 | 17 | 3 | 2 | 0 |
+| 4 (Applied) | 11, 12, 13, 14, 15 | 4 | 7 | 2 | 0 |
+| N/A (Deferred) | - | 0 | 0 | 0 | 18 |
+
+**Key observations:**
+- **Tier 1** is the strongest: 85.7% fully covered (18/21). Only signal sources (1.3) and transformer theory (1.5) have gaps.
+- **Tier 2** has the largest gap surface: 29 of 49 in-scope sections need work. Chapters 3 (FETs) and 5 (Precision) are especially sparse.
+- **Tier 3** is well-covered: 77.3% fully covered (17/22). Minor gaps in memory cells and converter specs.
+- **Tier 4** has moderate gaps: 4 of 13 fully covered, mostly in embedded systems breadth (Ch.15).
+
+---
+
+## Extension Targets by Module
+
+### modules/01-the-circuit/labs.ts
+- No gaps -- all H&H 1.2 sections fully covered
+
+### modules/02-passive-components/labs.ts
+- H&H 1.5: Inductor-only lab (PARTIAL) -- needs dedicated inductor transient or RL filter lab
+- H&H 1.5: Transformer action (MISSING) -- needs new lab for turns ratio and impedance transformation
+
+### modules/03-the-signal/labs.ts
+- H&H 1.3: Signal sources/waveform types (PARTIAL) -- needs lab covering square/triangle/sawtooth generation and measurement
+
+### modules/04-diodes/labs.ts
+- H&H 1.6: Diode switching speed (PARTIAL) -- needs lab comparing standard vs Schottky reverse recovery
+
+### modules/05-transistors/labs.ts
+- H&H 2.3: Differential amplifiers (MISSING) -- needs new lab simulating BJT diff pair with tail current source
+- H&H 2.3: Cascode amplifiers (MISSING) -- needs new lab for cascode topology (improved bandwidth, output resistance)
+- H&H 2.4: Advanced current mirrors (PARTIAL) -- needs deeper steps for Wilson and cascode mirrors
+- H&H 2.5: Biasing techniques (PARTIAL) -- needs labs for collector-feedback bias and thermal stability
+- H&H 3.1: JFET introduction (PARTIAL) -- needs JFET drain characteristics and pinch-off lab
+- H&H 3.2: FET linear circuits (MISSING) -- needs common-source and common-drain FET amplifier labs
+- H&H 3.3: FET analog switches (MISSING) -- needs CMOS transmission gate lab
+- H&H 3.5: Power MOSFET details (PARTIAL) -- needs deeper steps for gate drive, SOA analysis
+- H&H 3.6: FET amplifier miscellany (MISSING) -- needs FET source follower and FET current source labs
+
+### modules/06-op-amps/labs.ts
+- H&H 4.2: Summing amplifier (PARTIAL) -- needs dedicated summing amp lab with verify()
+- H&H 4.2: Differentiator (PARTIAL) -- needs differentiator lab (separate from integrator)
+- H&H 4.3: Non-idealities (PARTIAL) -- needs lab testing GBW limit, slew rate, or offset voltage
+- H&H 4.4: Precision op-amp design (MISSING) -- needs lab for offset trimming or auto-zero concept
+- H&H 4.6: Op-amp miscellany (MISSING) -- needs lab for log amp or gyrator (new lab)
+- H&H 5.1: Precision voltage references (MISSING) -- needs bandgap reference concept lab
+- H&H 5.2: Precision op-amp design (MISSING) -- needs guard ring or chopper stabilization concept lab
+- H&H 6.3: Active filters (PARTIAL) -- needs deeper Sallen-Key lab with AC sweep, or state-variable filter lab
+- H&H 6.4: Switched-capacitor filters (MISSING) -- needs SC filter concept lab
+
+### modules/07-power-supplies/labs.ts
+- H&H 9.4: Buck-boost/SEPIC (PARTIAL) -- needs dedicated buck-boost lab with verify()
+- H&H 9.5: Power-factor correction (MISSING) -- needs PFC concept lab
+- H&H 9.7: Power conversion miscellany (MISSING) -- needs charge pump or flyback lab
+
+### modules/07a-logic-gates/labs.ts
+- H&H 3.4: MOSFET digital logic depth (PARTIAL) -- needs deeper steps for NMOS depletion-load logic and transfer characteristics
+
+### modules/08-sequential-logic/labs.ts
+- H&H 10.4: Logic pathology / metastability (PARTIAL) -- needs metastability or debounce lab
+- H&H 10.5: Memory cells (PARTIAL) -- needs SRAM cell or DRAM concept lab
+- H&H 10.5: Digital misc (FIFOs, buses) (MISSING) -- needs FIFO or three-state bus lab
+
+### modules/09-data-conversion/labs.ts
+- H&H 5.3: Precision converters (MISSING) -- needs V-to-F or F-to-V converter concept lab
+- H&H 5.6: Digital-domain precision (MISSING) -- needs digital calibration or averaging lab
+- H&H 13.4: Converter specifications (PARTIAL) -- needs lab testing ENOB or DNL measurement
+- H&H 13.6: Converter miscellany (MISSING) -- needs sample-and-hold or aperture jitter lab
+
+### modules/11-microcontrollers/labs.ts
+- H&H 14.4: Embedded programming (PARTIAL) -- needs interrupt-driven programming or DMA lab
+- H&H 14.5: Design examples (PARTIAL) -- needs complete system design walkthrough lab
+- H&H 15.1: Buses and interfaces (PARTIAL) -- needs USB, CAN, or RS-485 concept lab
+- H&H 15.2: Networks (MISSING) -- needs Ethernet or wireless protocol concept lab
+- H&H 15.3: Real-time / RTOS (PARTIAL) -- needs RTOS task scheduling concept lab
+- H&H 15.4: System design (MISSING) -- needs system-level design or watchdog timer lab
+
+### modules/12-sensors-actuators/labs.ts
+- H&H 4.5: Instrumentation amplifier depth (PARTIAL) -- needs deeper INA derivation or CMRR optimization lab
+- H&H 5.4: Charge-sensitive amplifiers (MISSING) -- needs charge amplifier concept lab
+- H&H 5.5: Lock-in amplifiers (PARTIAL) -- needs lock-in / synchronous detection concept lab
+
+### modules/14-off-grid-power/labs.ts
+- H&H 9.6: Inverters (PARTIAL) -- needs deeper full-bridge inverter or sine-wave generation lab
+
+### modules/15-pcb-design/labs.ts
+- H&H 12.2: Construction techniques (PARTIAL) -- needs breadboarding or protoboard layout lab
+- H&H 12.3: Test and debug (PARTIAL) -- needs oscilloscope debug technique or JTAG concept lab
+- H&H 12.4: Grounding and shielding (PARTIAL) -- needs star grounding or EMI shielding concept lab
+
+---
+
+## Downstream Phase Mapping
+
+### Phase Mapping
+
+| Phase | Scope | Gap Count | Key Focus Areas |
+|-------|-------|-----------|-----------------|
+| 510 (Tier 1 Depth) | Modules 01-03 gaps | 3 | Signal sources (1.3), inductor/transformer labs (1.5) |
+| 511 (Tier 2 Depth) | Modules 04-06 gaps | 29 | FET circuits (Ch.3), precision circuits (Ch.5), active filters (Ch.6), differential amps (2.3) |
+| 512 (Tier 3 + Assessment) | Modules 07-09 gaps | 8 | Buck-boost lab (9.4), PFC (9.5), metastability (10.4), memory cells (10.5), converter specs (13.4) |
+
+**Notes:**
+- Phase 512 scope per ROADMAP is "Modules 7-9" meaning 07-power-supplies, 07a-logic-gates, 08-sequential-logic, 09-data-conversion
+- Modules 10-15 (Tier 3 digital and Tier 4 applied) gaps are NOT in phases 510-512 scope -- they would be addressed in future phases
+- Phase 511 has the largest gap surface (29 items) because Chapters 2-6 map to Tier 2 modules and contain the deepest H&H content
+
+---
+
+## Validation
+
+### Extension Target Validity Check
+
+All extension targets verified against `ls src/electronics-pack/modules/*/labs.ts`:
+
+| Target File | Exists | Gap Count |
+|-------------|--------|-----------|
+| modules/01-the-circuit/labs.ts | YES | 0 |
+| modules/02-passive-components/labs.ts | YES | 2 |
+| modules/03-the-signal/labs.ts | YES | 1 |
+| modules/04-diodes/labs.ts | YES | 1 |
+| modules/05-transistors/labs.ts | YES | 9 |
+| modules/06-op-amps/labs.ts | YES | 9 |
+| modules/07-power-supplies/labs.ts | YES | 3 |
+| modules/07a-logic-gates/labs.ts | YES | 1 |
+| modules/08-sequential-logic/labs.ts | YES | 3 |
+| modules/09-data-conversion/labs.ts | YES | 4 |
+| modules/10-dsp/labs.ts | YES | 0 |
+| modules/11-microcontrollers/labs.ts | YES | 6 |
+| modules/12-sensors-actuators/labs.ts | YES | 3 |
+| modules/13-plc/labs.ts | YES | 0 |
+| modules/14-off-grid-power/labs.ts | YES | 1 |
+| modules/15-pcb-design/labs.ts | YES | 3 |
+
+### Consistency Checks
+
+- DEFERRED items: 18 total (Ch.7: 4, Ch.8 except 8.11: 10, Ch.11: 4) -- NONE have extension targets
+- No new module directories suggested anywhere in this document
+- Status counts: 56 + 26 + 20 + 18 = 120 total sections enumerated
+- All 15 H&H chapters represented at section-level granularity
