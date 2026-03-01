@@ -5,7 +5,7 @@
  * and purity of state transitions.
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import {
   createExecutionState,
   transition,
