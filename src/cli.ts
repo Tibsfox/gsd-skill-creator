@@ -1167,6 +1167,14 @@ async function main() {
       break;
     }
 
+    case 'site':
+    case 'st': {
+      const { siteCommand } = await import('./cli/commands/site.js');
+      const exitCode = await siteCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'event':
     case 'ev': {
       const { eventCommand } = await import('./cli/commands/event.js');
