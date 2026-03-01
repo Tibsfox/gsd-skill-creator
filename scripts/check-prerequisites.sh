@@ -7,7 +7,7 @@
 # Uses show_ok() and show_fail() functions defined by bootstrap.sh.
 # Uses $MAGIC_LEVEL set by bootstrap.sh.
 #
-# Checks 4 required commands (node, npm, tmux, git) and 1 optional (claude).
+# Checks 3 required commands (node, npm, git) and 2 optional (tmux, claude).
 # Exits 1 if any required command is missing.
 #
 # Phase 378-01 — Bootstrap
@@ -31,8 +31,15 @@ MISSING=0
 
 check_command "node" "Node.js" "https://nodejs.org/ (v18+ required)" || MISSING=$((MISSING + 1))
 check_command "npm" "npm" "Comes with Node.js" || MISSING=$((MISSING + 1))
-check_command "tmux" "tmux" "apt install tmux (Ubuntu) / brew install tmux (macOS)" || MISSING=$((MISSING + 1))
 check_command "git" "git" "apt install git (Ubuntu) / xcode-select --install (macOS)" || MISSING=$((MISSING + 1))
+
+# v1.49.7 (PR #24 @PatrickRobotham): tmux is optional — terminal falls back to raw PTY.
+if command -v "tmux" > /dev/null 2>&1; then
+    show_ok "tmux: $(tmux -V 2>&1 | head -1)"
+else
+    echo "  tmux not found (optional — terminal will use raw PTY mode)"
+    echo "    Install for tmux support: apt install tmux (Ubuntu) / brew install tmux (macOS)"
+fi
 
 # Claude Code is optional at bootstrap but needed for READY.
 if command -v "claude" > /dev/null 2>&1; then

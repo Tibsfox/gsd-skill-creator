@@ -79,6 +79,11 @@ pub enum StartCommand {
 
 /// Definition of a managed service including its identity,
 /// dependencies, health check strategy, and LED position.
+///
+/// The `optional` field controls graceful degradation: when an optional
+/// service (e.g., tmux) is unavailable, dependent services skip it
+/// instead of failing. PR #24 (@PatrickRobotham) identified that tmux
+/// was an undocumented hard dependency causing ENOENT crashes.
 #[derive(Debug, Clone)]
 pub struct ServiceDef {
     /// Unique service identifier.
@@ -93,6 +98,10 @@ pub struct ServiceDef {
     pub start_command: Option<StartCommand>,
     /// Position in the LED indicator strip (0-6).
     pub led_position: u8,
+    /// Whether this service is optional. Optional services that fail to
+    /// start are skipped rather than blocking the entire startup chain.
+    /// Added in v1.49.7 per PR #24 (@PatrickRobotham).
+    pub optional: bool,
 }
 
 /// Errors that can occur when starting a service.
