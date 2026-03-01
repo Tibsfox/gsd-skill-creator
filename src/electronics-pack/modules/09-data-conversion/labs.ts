@@ -349,7 +349,136 @@ const lab05: Lab = {
 };
 
 // ============================================================================
+// Lab 6: ENOB and Converter Specifications (m9-lab-06)
+// ============================================================================
+
+const lab06: Lab = {
+  id: 'm9-lab-06',
+  title: 'ENOB and Converter Specifications',
+  steps: [
+    {
+      instruction:
+        'Calculate the theoretical signal-to-noise ratio (SNR) for ideal N-bit converters using the formula SNR_q = 6.02*N + 1.76 dB. Compute for 8-bit, 12-bit, and 16-bit converters.',
+      expected_observation:
+        '8-bit: SNR = 49.92 dB. 12-bit: SNR = 74.00 dB. 16-bit: SNR = 98.08 dB. Each additional bit adds 6.02 dB of dynamic range, roughly doubling the signal-to-noise ratio.',
+      learn_note:
+        'The 6.02*N + 1.76 formula comes from the quantization noise power of a uniform quantizer. The 6.02 factor is 20*log10(2) -- each bit doubles the number of levels, halving the quantization step size. -- H&H Ch.13 [@HH-Ch.13]',
+    },
+    {
+      instruction:
+        'Calculate the Effective Number of Bits (ENOB) from the SNR: ENOB = (SNR - 1.76) / 6.02. For an ideal 12-bit converter with 74.0 dB SNR: ENOB = (74.0 - 1.76) / 6.02 = 12.0. For an ideal 8-bit: ENOB = (49.92 - 1.76) / 6.02 = 8.0.',
+      expected_observation:
+        'Ideal converters achieve ENOB exactly equal to their nominal bit count. This is the theoretical maximum -- real converters always have ENOB below the nominal resolution due to noise, distortion, and non-linearity.',
+      learn_note:
+        'ENOB is the industry-standard metric for converter quality. It captures all impairments (noise, harmonic distortion, non-linearity) in a single number. Datasheet ENOB is measured at specific frequencies and input levels. -- H&H Ch.13 [@HH-Ch.13]',
+    },
+    {
+      instruction:
+        'Model a real 12-bit converter with SINAD (signal-to-noise-and-distortion) of 68 dB instead of the ideal 74 dB. Calculate ENOB = (68 - 1.76) / 6.02 = 11.0 bits. The converter loses 1 full bit of effective resolution to noise and distortion.',
+      expected_observation:
+        'Real ENOB = 11.0, one bit below the nominal 12-bit resolution. This means the least significant bit is buried in noise -- the converter effectively gives only 11 bits of useful information.',
+      learn_note:
+        'Losing 1 bit of ENOB is common in practical systems. Layout noise, reference voltage noise, and clock jitter all degrade SINAD. Achieving ENOB within 1 bit of nominal requires careful PCB design, clean power supplies, and low-jitter clocks. -- H&H Ch.13 [@HH-Ch.13]',
+    },
+  ],
+  verify: () => {
+    // ENOB formula verification
+    const enob = (snr: number) => (snr - 1.76) / 6.02;
+    const snrIdeal = (bits: number) => 6.02 * bits + 1.76;
+
+    // 12-bit ideal: SNR = 74.0 dB, ENOB = 12.0
+    const snr12 = snrIdeal(12);
+    if (!withinTolerance(snr12, 74.0, 0.001)) return false;
+    const enob12 = enob(snr12);
+    if (!withinTolerance(enob12, 12.0, 0.001)) return false;
+
+    // 8-bit ideal: SNR = 49.92 dB, ENOB = 8.0
+    const snr8 = snrIdeal(8);
+    if (!withinTolerance(snr8, 49.92, 0.001)) return false;
+    const enob8 = enob(snr8);
+    if (!withinTolerance(enob8, 8.0, 0.001)) return false;
+
+    // Real 12-bit converter with 68 dB SINAD: ENOB < 12
+    const realSinad = 68;
+    const realEnob = enob(realSinad);
+    if (realEnob >= 12) return false; // Must be below nominal
+    if (!withinTolerance(realEnob, 11.0, 0.01)) return false;
+
+    return true;
+  },
+};
+
+// ============================================================================
+// Lab 7: Sample-and-Hold (m9-lab-07)
+// ============================================================================
+
+const lab07: Lab = {
+  id: 'm9-lab-07',
+  title: 'Sample-and-Hold',
+  steps: [
+    {
+      instruction:
+        'Model a sample-and-hold (S/H) circuit. During the "sample" phase, a switch connects the input to a hold capacitor. During "hold", the switch opens and the capacitor holds the voltage for the ADC to convert. The key parameter is droop: how much the voltage drops during the hold time due to leakage current.',
+      expected_observation:
+        'The hold capacitor voltage droops linearly: V_droop = I_leak * T_hold / C_hold. With a good design (large cap, low leakage, short hold), droop is negligible compared to the ADC\'s least significant bit.',
+      learn_note:
+        'Every ADC needs a sample-and-hold front end to freeze the input during conversion. Without it, the input could change during the conversion process, producing errors. Fast ADCs integrate the S/H on-chip. -- H&H Ch.13 [@HH-Ch.13]',
+    },
+    {
+      instruction:
+        'Good design: C_hold = 100pF, I_leak = 1nA, T_hold = 10us. V_droop = 1e-9 * 10e-6 / 100e-12 = 0.1mV. Compare to 1 LSB of a 12-bit 5V ADC: LSB = 5.0/4096 = 1.22mV. Droop is well below 1 LSB -- negligible. Poor design: C_hold = 1pF, I_leak = 10nA, T_hold = 1ms. V_droop = 10e-9 * 1e-3 / 1e-12 = 10V. Droop exceeds the entire full-scale range!',
+      expected_observation:
+        'Good design droop: 0.1mV (8% of 1 LSB for 12-bit @ 5V). Poor design droop: 10V (catastrophic -- more than full scale). The capacitor size and leakage current dominate S/H performance.',
+      learn_note:
+        'The hold capacitor faces a fundamental tradeoff: larger capacitance reduces droop but increases acquisition time (the time needed to charge it). In practice, 10pF to 100pF covers most SAR ADC designs. Very low-leakage JFET switches are preferred. -- H&H Ch.13 [@HH-Ch.13]',
+    },
+    {
+      instruction:
+        'Calculate the acquisition time for the good design: T_acq = -C_hold * R_on * ln(epsilon), where R_on = 100 ohm (switch resistance), epsilon = LSB/V_step = 1.22mV/5V = 2.44e-4. T_acq = -100e-12 * 100 * ln(2.44e-4) = 100e-12 * 100 * 8.32 = 83.2ns.',
+      expected_observation:
+        'Acquisition time is 83.2ns -- fast enough for most SAR ADCs running at 1 MSPS (1us per conversion). The S/H must fully settle within this time for the conversion to be accurate.',
+      learn_note:
+        'Aperture jitter -- random variation in the exact sampling instant -- adds an additional error source. For a sine wave at frequency f with aperture jitter dt: SNR_jitter = -20*log10(2*pi*f*dt). At 1MHz signal, 100ps jitter limits SNR to ~64 dB. -- H&H Ch.13 [@HH-Ch.13]',
+    },
+  ],
+  verify: () => {
+    // Good design: minimal droop
+    const Chold_good = 100e-12;  // 100 pF
+    const Ileak_good = 1e-9;     // 1 nA
+    const Thold_good = 10e-6;    // 10 us
+    const Vdroop_good = Ileak_good * Thold_good / Chold_good; // 0.1mV
+
+    // 12-bit 5V reference: 1 LSB = 1.22 mV
+    const vRef = 5.0;
+    const bits = 12;
+    const lsb = vRef / Math.pow(2, bits); // 1.22 mV
+
+    // Good design droop must be less than 1 LSB
+    if (Vdroop_good >= lsb) return false;
+
+    // Poor design: catastrophic droop
+    const Chold_poor = 1e-12;    // 1 pF
+    const Ileak_poor = 10e-9;    // 10 nA
+    const Thold_poor = 1e-3;     // 1 ms
+    const Vdroop_poor = Ileak_poor * Thold_poor / Chold_poor; // 10V
+
+    // Poor design droop must exceed full-scale range
+    if (Vdroop_poor <= vRef) return false;
+
+    // Acquisition time for good design
+    const Ron = 100;          // 100 ohm switch resistance
+    const epsilon = lsb / vRef;  // ~2.44e-4
+    const Tacq = -Chold_good * Ron * Math.log(epsilon); // ~83.2 ns
+
+    // Acquisition time should be reasonable (10ns to 1us range)
+    if (Tacq < 10e-9 || Tacq > 1e-6) return false;
+
+    return true;
+  },
+};
+
+// ============================================================================
 // Export all labs
 // ============================================================================
 
-export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05];
+export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05, lab06, lab07];
