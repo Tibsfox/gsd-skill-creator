@@ -7,11 +7,11 @@ Multi-agent team coordination enabling complex workflows across specialized agen
 
 ### Key Features
 
-- Team schema with YAML frontmatter defining topology and member roles
-- Three topologies: leader-worker, pipeline, swarm
+- Team schema as JSON (`config.json`) validated by Zod schemas (`src/core/validation/team-validation.ts`)
+- Six topologies: leader-worker, pipeline, swarm, router, map-reduce, custom
 - Team storage in `.claude/teams/` with validation and CLI management
 - Member capability declarations and role assignments
 - GSD workflow templates for team-based execution
-- `skill-creator team create/list/validate/run` CLI commands
+- `skill-creator team create/list/validate/estimate/spawn/status` CLI commands
 
 ---
