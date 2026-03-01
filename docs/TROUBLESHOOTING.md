@@ -609,7 +609,7 @@ skill-creator status
 
 If you've tried the solutions above and still have issues:
 
-1. Check [existing issues](https://github.com/anthropics/skill-creator/issues)
+1. Check [existing issues](https://github.com/Tibsfox/gsd-skill-creator/issues)
 
 2. Create a new issue with:
    - **skill-creator version:** `skill-creator --version`
