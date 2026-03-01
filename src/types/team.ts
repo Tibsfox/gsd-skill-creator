@@ -178,9 +178,70 @@ export interface TeamConfig {
   /** Team members (at least one required). */
   members: TeamMember[];
 
+  /** Who manages the team lifecycle ('auto' or 'manual'). */
+  managedBy?: TeamManagedBy;
+
+  /** Team durability ('ephemeral' or 'persistent'). */
+  durability?: TeamDurability;
+
+  /** Current lifecycle state of the team. */
+  lifecycleState?: TeamLifecycleState;
+
   /** Allow unknown fields for forward compatibility. */
   [key: string]: unknown;
 }
+
+// ============================================================================
+// Team Lifecycle States
+// ============================================================================
+
+/**
+ * Valid lifecycle states for a team.
+ *
+ * - FORMING: Team is being created and configured
+ * - ACTIVE: Team is operational and executing work
+ * - DISSOLVING: Team is in the process of shutting down
+ * - DISSOLVED: Team has been fully dissolved (terminal state)
+ */
+export const TEAM_LIFECYCLE_STATES = [
+  'FORMING',
+  'ACTIVE',
+  'DISSOLVING',
+  'DISSOLVED',
+] as const;
+
+/** Type for team lifecycle state */
+export type TeamLifecycleState = (typeof TEAM_LIFECYCLE_STATES)[number];
+
+// ============================================================================
+// Team Management Mode
+// ============================================================================
+
+/**
+ * Who manages the team lifecycle.
+ *
+ * - auto: Managed by the autonomy engine (lifecycle automation applies)
+ * - manual: Managed by the user via CLI (lifecycle automation skipped)
+ */
+export const TEAM_MANAGED_BY_OPTIONS = ['auto', 'manual'] as const;
+
+/** Type for team management mode */
+export type TeamManagedBy = (typeof TEAM_MANAGED_BY_OPTIONS)[number];
+
+// ============================================================================
+// Team Durability
+// ============================================================================
+
+/**
+ * Team durability determines behavior on completion.
+ *
+ * - ephemeral: Auto-dissolves when the managing work completes
+ * - persistent: Survives completion, requires explicit dissolution
+ */
+export const TEAM_DURABILITY_OPTIONS = ['ephemeral', 'persistent'] as const;
+
+/** Type for team durability */
+export type TeamDurability = (typeof TEAM_DURABILITY_OPTIONS)[number];
 
 // ============================================================================
 // Team Task Statuses
