@@ -325,7 +325,184 @@ const lab05: Lab = {
 };
 
 // ============================================================================
+// Lab 6: Summing Amplifier (m6-lab-06)
+// ============================================================================
+
+const lab06: Lab = {
+  id: 'm6-lab-06',
+  title: 'Summing Amplifier',
+  steps: [
+    {
+      instruction: 'Build an inverting summing amplifier: three inputs V1=1V, V2=2V, V3=3V each through R=10k to the inverting node. Feedback resistor Rf=10k from output to inverting node. Non-inverting input tied to ground.',
+      expected_observation: 'V_out = -(V1 + V2 + V3) = -(1 + 2 + 3) = -6V. Each input contributes independently through its own resistor to the virtual ground summing junction.',
+      learn_note: 'The summing amplifier adds multiple signals with weights set by the resistor ratios Rf/Rn. With equal resistors, all inputs have unity gain. Changing one resistor changes only that input\'s weight -- H&H 4.2 [@HH-Ch.4]',
+    },
+    {
+      instruction: 'Verify superposition: disconnect V2 and V3 (ground their inputs). With only V1=1V, V_out should be -1V. Each input acts independently because the inverting node is a virtual ground.',
+      expected_observation: 'With a single 1V input, V_out = -(Rf/R1)*V1 = -1V. The virtual ground ensures that current from one input does not affect the other input resistors.',
+      learn_note: 'Superposition works perfectly in the summing amplifier because the virtual ground isolates each input. Current from V1 through R1 flows into the summing junction and out through Rf, independent of other inputs -- H&H 4.2 [@HH-Ch.4]',
+    },
+    {
+      instruction: 'Now consider a weighted summer: if R1=10k, R2=20k, R3=40k with Rf=10k, the gains become -Rf/R1=-1, -Rf/R2=-0.5, -Rf/R3=-0.25. This creates a binary-weighted DAC.',
+      expected_observation: 'V_out = -(1*V1 + 0.5*V2 + 0.25*V3). With V1=V2=V3=1V: V_out = -1.75V. Different resistor ratios set different weights for each input.',
+      learn_note: 'A binary-weighted summing amplifier with resistor ratios 1:2:4:8 is the basis of the R-2R DAC. Each input contributes a binary-weighted fraction of the output. Precision resistors are essential for accuracy -- H&H 4.2 [@HH-Ch.4]',
+    },
+  ],
+  verify: () => {
+    // Inverting summing amplifier: R1=R2=R3=Rf=10k
+    // V1=1V, V2=2V, V3=3V => V_out = -(1+2+3) = -6V
+    const components: Component[] = [
+      { id: 'V1', type: 'voltage-source', nodes: ['inp1', '0'], voltage: 1 } as VoltageSource,
+      { id: 'V2', type: 'voltage-source', nodes: ['inp2', '0'], voltage: 2 } as VoltageSource,
+      { id: 'V3', type: 'voltage-source', nodes: ['inp3', '0'], voltage: 3 } as VoltageSource,
+      { id: 'R1', type: 'resistor', nodes: ['inp1', 'inv'], resistance: 10000 } as Resistor,
+      { id: 'R2', type: 'resistor', nodes: ['inp2', 'inv'], resistance: 10000 } as Resistor,
+      { id: 'R3', type: 'resistor', nodes: ['inp3', 'inv'], resistance: 10000 } as Resistor,
+      { id: 'Rf', type: 'resistor', nodes: ['out', 'inv'], resistance: 10000 } as Resistor,
+    ];
+
+    const opamps: OpAmp[] = [
+      {
+        id: 'U1',
+        type: 'op-amp',
+        nonInvertingInput: '0',
+        invertingInput: 'inv',
+        output: 'out',
+        openLoopGain: 1e6,
+        gbwProduct: 1e6,
+        slewRate: 1,
+        inputOffset: 0,
+      },
+    ];
+
+    const result = solveNonlinear(components, '0', 50, 1e-6, opamps);
+    if (!result.converged) return false;
+
+    const vOut = result.nodeVoltages.find((nv) => nv.node === 'out');
+    if (!vOut) return false;
+
+    // V_out should be ~ -6V (within 5%)
+    return withinTolerance(vOut.voltage, -6.0, 0.05);
+  },
+};
+
+// ============================================================================
+// Lab 7: Differentiator (m6-lab-07)
+// ============================================================================
+
+const lab07: Lab = {
+  id: 'm6-lab-07',
+  title: 'Differentiator',
+  steps: [
+    {
+      instruction: 'Build an op-amp differentiator: C_in=100nF from input to inverting node, Rf=10k from output to inverting node. Non-inverting input tied to ground. Apply a DC input of 1V.',
+      expected_observation: 'At DC steady state, the capacitor is an open circuit -- no current flows through C_in. With no current through Rf, V_out = 0V. The differentiator only responds to changing signals.',
+      learn_note: 'The differentiator output is proportional to the rate of change of the input: V_out = -Rf*C*dVin/dt. At DC (constant input), dVin/dt = 0, so V_out = 0V. The circuit is the dual of the integrator -- H&H 4.2 [@HH-Ch.4]',
+    },
+    {
+      instruction: 'Calculate the time constant: tau = Rf * C_in = 10k * 100nF = 1ms. This sets the frequency where the differentiator gain reaches unity (0dB): f_0 = 1/(2*pi*tau) = 159 Hz.',
+      expected_observation: 'Below 159 Hz, the differentiator has gain < 1 (attenuates). Above 159 Hz, gain > 1 (amplifies). The gain rises at +20dB/decade -- the opposite of an integrator.',
+      learn_note: 'The rising gain at high frequencies makes differentiators noise-sensitive. A small series resistor (Rs) in front of C_in limits the high-frequency gain to Rf/Rs, preventing noise amplification and oscillation -- H&H 4.2 [@HH-Ch.4]',
+    },
+    {
+      instruction: 'Compare differentiator vs integrator: the integrator has Rf*C in the feedback path (low-pass), while the differentiator has C in the input path (high-pass). They are mathematical duals.',
+      expected_observation: 'Integrator: V_out = -(1/RC)*integral(Vin dt), gain falls with frequency. Differentiator: V_out = -RC*dVin/dt, gain rises with frequency. Together they can reconstruct signals.',
+      learn_note: 'Practical differentiators always include a stability resistor to limit high-frequency gain. Without it, the 90-degree phase shift from C combined with the op-amp phase shift can cause oscillation at high frequencies -- H&H 4.2 [@HH-Ch.4]',
+    },
+  ],
+  verify: () => {
+    // DC steady-state: C_in is open circuit, so V_out = 0V
+    const components: Component[] = [
+      { id: 'V_in', type: 'voltage-source', nodes: ['inp', '0'], voltage: 1 } as VoltageSource,
+      { id: 'C_in', type: 'capacitor', nodes: ['inp', 'inv'], capacitance: 100e-9 } as Capacitor,
+      { id: 'Rf', type: 'resistor', nodes: ['out', 'inv'], resistance: 10000 } as Resistor,
+    ];
+
+    const opamps: OpAmp[] = [
+      {
+        id: 'U1',
+        type: 'op-amp',
+        nonInvertingInput: '0',
+        invertingInput: 'inv',
+        output: 'out',
+        openLoopGain: 1e6,
+        gbwProduct: 1e6,
+        slewRate: 1,
+        inputOffset: 0,
+      },
+    ];
+
+    const result = solveNonlinear(components, '0', 50, 1e-6, opamps);
+    if (!result.converged) return false;
+
+    const vOut = result.nodeVoltages.find((nv) => nv.node === 'out');
+    if (!vOut) return false;
+
+    // At DC: V_out should be ~ 0V (within absolute tolerance 0.1V)
+    if (Math.abs(vOut.voltage) > 0.1) return false;
+
+    // Mathematical verification: time constant tau = Rf * C = 10k * 100nF = 1ms
+    const tau = 10000 * 100e-9;
+    if (!withinTolerance(tau, 1e-3, 0.01)) return false;
+
+    return true;
+  },
+};
+
+// ============================================================================
+// Lab 8: Op-Amp Non-Idealities (m6-lab-08)
+// ============================================================================
+
+const lab08: Lab = {
+  id: 'm6-lab-08',
+  title: 'Op-Amp Non-Idealities',
+  steps: [
+    {
+      instruction: 'Consider a non-inverting amplifier with gain=100 (Rf=99k, Rg=1k) using an op-amp with GBW=1MHz. The closed-loop bandwidth is GBW/gain = 1MHz/100 = 10kHz.',
+      expected_observation: 'At 10kHz (the -3dB frequency), the gain drops to 100/sqrt(2) = 70.71. Above 10kHz, the gain continues to fall at -20dB/decade until it reaches unity at 1MHz.',
+      learn_note: 'The gain-bandwidth product (GBW) is constant for a single-pole op-amp: if you increase the gain, the bandwidth decreases proportionally. A gain of 1000 with GBW=1MHz gives only 1kHz bandwidth -- H&H 4.3 [@HH-Ch.4]',
+    },
+    {
+      instruction: 'Add input offset voltage: Vos=5mV. With gain=100, the output offset is Vos*(1+Rf/Rg) = 5mV*100 = 500mV. This DC error appears even with the input grounded.',
+      expected_observation: 'With input grounded, the output sits at 500mV instead of 0V. For precision applications, you need low-offset op-amps (Vos < 100uV) or auto-zero techniques.',
+      learn_note: 'Input offset voltage is the most common source of DC error in op-amp circuits. It gets amplified by the noise gain (1+Rf/Rg), not the signal gain. Chopper-stabilized op-amps can achieve Vos < 1uV -- H&H 4.3 [@HH-Ch.4]',
+    },
+    {
+      instruction: 'Calculate the slew rate limit: SR=1V/us. For a 10Vpp sine wave (Vpeak=5V), the maximum frequency without slewing is f_max = SR/(2*pi*Vpeak) = 1e6/(2*pi*5) = 31.83kHz.',
+      expected_observation: 'Above 31.83kHz with 10Vpp output, the op-amp cannot change voltage fast enough. The sine wave becomes a triangle wave, introducing severe distortion.',
+      learn_note: 'Slew rate and GBW are independent limits. GBW limits small-signal bandwidth; slew rate limits large-signal bandwidth. A circuit can have adequate GBW but still distort large signals due to slew rate limiting -- H&H 4.3 [@HH-Ch.4]',
+    },
+  ],
+  verify: () => {
+    // Pure mathematical verification (DC model cannot simulate frequency response)
+    const gain = 100;
+    const gbw = 1e6; // 1 MHz
+    const vos = 5e-3; // 5 mV
+    const slewRate = 1e6; // 1 V/us = 1e6 V/s
+    const vPeak = 5; // 5V peak (10Vpp)
+
+    // GBW limit: bandwidth = GBW / gain = 10kHz
+    const bandwidth = gbw / gain;
+    if (!withinTolerance(bandwidth, 10000, 0.01)) return false;
+
+    // At bandwidth frequency: gain drops to gain/sqrt(2) ~ 70.71
+    const gainAtBandwidth = gain / Math.sqrt(2);
+    if (!withinTolerance(gainAtBandwidth, 70.71, 0.01)) return false;
+
+    // Input offset: output offset = Vos * gain = 500mV
+    const outputOffset = vos * gain;
+    if (!withinTolerance(outputOffset, 0.5, 0.01)) return false;
+
+    // Slew rate limit: f_max = SR / (2*pi*Vpeak) ~ 31.83kHz
+    const fMax = slewRate / (2 * Math.PI * vPeak);
+    if (!withinTolerance(fMax, 31830.99, 0.01)) return false;
+
+    return true;
+  },
+};
+
+// ============================================================================
 // Export all labs
 // ============================================================================
 
-export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05];
+export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05, lab06, lab07, lab08];
