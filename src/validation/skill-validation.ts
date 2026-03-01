@@ -316,7 +316,11 @@ export const AllowedToolsSchema = z.preprocess(
 // ============================================================================
 
 // Schema for skill name: lowercase alphanumeric with hyphens, 1-64 chars
-// NOTE: This is the legacy schema - use OfficialSkillNameSchema for strict validation
+/**
+ * @deprecated Use `OfficialSkillNameSchema` instead. This legacy schema permits
+ * names that the official specification rejects (leading/trailing hyphens,
+ * consecutive hyphens). Will be removed in a future major version.
+ */
 export const SkillNameSchema = z
   .string()
   .min(1, 'Name is required')
@@ -356,7 +360,7 @@ export const GsdExtensionSchema = z.object({
   learning: SkillLearningSchema.optional(),
   enabled: z.boolean().optional(),
   version: z.number().optional(),
-  extends: SkillNameSchema.optional(),
+  extends: OfficialSkillNameSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
 });
@@ -381,7 +385,7 @@ export const MetadataContainerSchema = z.object({
 
 // Full schema for skill creation input (accepts both legacy and new formats)
 export const SkillInputSchema = z.object({
-  name: SkillNameSchema,
+  name: OfficialSkillNameSchema,
   description: z
     .string()
     .min(1, 'Description is required')
@@ -409,7 +413,7 @@ export const SkillInputSchema = z.object({
   triggers: TriggerPatternsSchema.optional(),
   learning: SkillLearningSchema.optional(),
   version: z.number().optional(),
-  extends: SkillNameSchema.optional(),
+  extends: OfficialSkillNameSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
 }).passthrough(); // Preserve unknown fields
@@ -455,7 +459,7 @@ export function validateSkillUpdate(data: unknown): SkillUpdate {
  */
 export const SkillMetadataSchema = z.object({
   // Required fields
-  name: SkillNameSchema,
+  name: OfficialSkillNameSchema,
   description: z.string().max(1024),
 
   // Claude Code optional fields
@@ -480,7 +484,7 @@ export const SkillMetadataSchema = z.object({
   enabled: z.boolean().optional(),
   learning: SkillLearningSchema.optional(),
   version: z.number().optional(),
-  extends: SkillNameSchema.optional(),
+  extends: OfficialSkillNameSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
 }).passthrough(); // Preserve unknown fields

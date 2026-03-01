@@ -125,6 +125,8 @@ export function createScopedStores(scope: SkillScope, options?: {
 export {
   SkillInputSchema,
   TriggerPatternsSchema,
+  OfficialSkillNameSchema,
+  /** @deprecated Use OfficialSkillNameSchema instead */
   SkillNameSchema,
   validateSkillInput,
   SkillUpdateSchema,
