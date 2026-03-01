@@ -22,6 +22,30 @@ export const DEFAULT_TIMEOUT_MS = 600_000;
 export const DEFAULT_CHECK_INTERVAL_MS = 120_000;
 
 // ============================================================================
+// Persistence Types
+// ============================================================================
+
+/** Serialized watchdog state for file-based persistence */
+export interface WatchdogFileState {
+  /** ISO string of last recorded write */
+  last_write_at: string;
+  /** Last file path written, or null */
+  last_file: string | null;
+  /** Session identifier (stale detection) */
+  session_id: string;
+  /** ISO string of watchdog start time */
+  started_at: string;
+  /** Configured timeout in milliseconds */
+  timeout_ms: number;
+}
+
+/** Injectable IO for file persistence (avoids direct fs dependency) */
+export interface WatchdogPersistIO {
+  writeFile: (path: string, content: string) => Promise<void>;
+  readFile: (path: string) => Promise<string>;
+}
+
+// ============================================================================
 // Types
 // ============================================================================
 
@@ -149,6 +173,56 @@ export class WriteWatchdog {
    */
   isRunning(): boolean {
     return this._running;
+  }
+
+  // --------------------------------------------------------------------------
+  // File-based persistence
+  // --------------------------------------------------------------------------
+
+  /**
+   * Persist the current watchdog state to a JSON file.
+   *
+   * Uses injectable IO to avoid direct filesystem dependency, matching
+   * the project's IO injection pattern.
+   *
+   * @param statePath - Path to write the state file
+   * @param sessionId - Session identifier for stale detection
+   * @param io - Injectable IO callbacks
+   */
+  async persistState(
+    statePath: string,
+    sessionId: string,
+    io: WatchdogPersistIO,
+  ): Promise<void> {
+    const state: WatchdogFileState = {
+      last_write_at: this._lastWriteAt.toISOString(),
+      last_file: this._lastFilePath ?? null,
+      session_id: sessionId,
+      started_at: this._lastWriteAt.toISOString(),
+      timeout_ms: this._config.timeoutMs,
+    };
+    await io.writeFile(statePath, JSON.stringify(state, null, 2));
+  }
+
+  /**
+   * Load and parse watchdog state from a JSON file.
+   *
+   * Returns null if the file is missing or contains corrupt JSON.
+   *
+   * @param statePath - Path to read the state file
+   * @param io - Injectable IO callbacks
+   * @returns Parsed state or null
+   */
+  static async loadState(
+    statePath: string,
+    io: WatchdogPersistIO,
+  ): Promise<WatchdogFileState | null> {
+    try {
+      const raw = await io.readFile(statePath);
+      return JSON.parse(raw) as WatchdogFileState;
+    } catch {
+      return null;
+    }
   }
 
   // --------------------------------------------------------------------------
