@@ -197,9 +197,11 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   3. Panel correctness tests verify mathematical accuracy: each panel produces numerically correct results for at least three mathematical concepts
   4. Integration tests verify cross-component interfaces: Rosetta Core → College → Calibration Engine round-trip completes without errors
   5. End-to-end scenario "user asks why are my cookies flat" produces a correct baking science diagnosis with a calibration delta recorded
-**Plans**: 2 plans
+**Plans**: 4 plans
   - [ ] 10-01-PLAN.md -- Coverage tooling and gap fill (vitest coverage config, calibration model tests, integration stub tests)
   - [ ] 10-02-PLAN.md -- Safety-critical (SC-01 through SC-14) and panel correctness (PAN-01 through PAN-14) canonical test suites
+  - [ ] 10-03-PLAN.md -- Integration round-trip tests (Rosetta Core → College → Calibration Engine) and flat cookies e2e scenario
+  - [ ] 10-04-PLAN.md -- Final coverage report, full test suite verification, foxfood report
 
 ## Progress
 
@@ -218,4 +220,4 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 | 7. Cooking Department | v1.49.8 | 7/7 | Complete | 2026-03-01 |
 | 8. Safety Warden and Cross-References | v1.49.8 | 0/3 | Planned | - |
 | 9. Integration Bridge | v1.49.8 | 0/4 | Planned | - |
-| 10. Test Suite and Verification | v1.49.8 | 0/2 | Planned | - |
+| 10. Test Suite and Verification | v1.49.8 | 0/4 | Planned | - |
