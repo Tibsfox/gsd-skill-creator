@@ -18,7 +18,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 
 ### 🚧 v1.49.8 Cooking With Claude (Phases 0.5, 1-10)
 
-- [ ] **Phase 0.5: Foundations Documentation** - Fix 23 broken links in docs/foundations/, fill index.md stub (docs-only, no code deps)
+- [x] **Phase 0.5: Foundations Documentation** - Fix 23 broken links in docs/foundations/, fill index.md stub (docs-only, no code deps) (2026-03-01)
 - [x] **Phase 1: Foundation** - Shared types, Panel Interface contract, directory scaffold (2026-03-01)
 - [x] **Phase 2: Rosetta Core Engine** - Concept Registry, Panel Router, Expression Renderer (2026-03-01)
 - [x] **Phase 3: Calibration Engine** - Universal feedback loop, Safety Warden framework (2026-03-01)
@@ -187,7 +187,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 0.5 Foundations Docs | v1.49.8 | 0/1 | Planned | - |
+| 0.5 Foundations Docs | v1.49.8 | 1/1 | Complete | 2026-03-01 |
 | 1. Foundation | v1.49.8 | 3/3 | Complete | 2026-03-01 |
 | 2. Rosetta Core Engine | v1.49.8 | 4/4 | Complete | 2026-03-01 |
 | 3. Calibration Engine | v1.49.8 | 4/4 | Complete | 2026-03-01 |
