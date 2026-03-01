@@ -159,8 +159,24 @@ export class CalibrationEngine {
     this.deltaStore = deltaStore;
   }
 
-  /** Register a domain-specific calibration model. */
+  /**
+   * Register a domain-specific calibration model.
+   * @throws TypeError if a model is already registered for this domain.
+   *         Use replaceModel() to override an existing registration.
+   */
   registerModel(model: DomainCalibrationModel): void {
+    if (this.models.has(model.domain)) {
+      throw new TypeError(
+        `Model already registered for domain: ${model.domain}. Use replaceModel() to override.`,
+      );
+    }
+    this.models.set(model.domain, model);
+  }
+
+  /**
+   * Replace an existing domain model registration, or register a new one.
+   */
+  replaceModel(model: DomainCalibrationModel): void {
     this.models.set(model.domain, model);
   }
 
