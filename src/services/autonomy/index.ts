@@ -136,3 +136,12 @@ export {
   DEFAULT_THRESHOLD,
 } from './context-budget.js';
 export type { BudgetMetrics, PauseDecision, RemainingCapacity } from './context-budget.js';
+
+// Write watchdog (Phase 500-04)
+export {
+  WriteWatchdog,
+  createWatchdog,
+  DEFAULT_TIMEOUT_MS,
+  DEFAULT_CHECK_INTERVAL_MS,
+} from './write-watchdog.js';
+export type { WatchdogConfig, WatchdogStatus } from './write-watchdog.js';
