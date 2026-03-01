@@ -105,7 +105,7 @@ export class LispPanel extends PanelInterface {
   // ─── Private Helpers ────────────────────────────────────────────────────────
 
   private buildSExpression(concept: RosettaConcept, safeName: string): string {
-    if (concept.domain === 'mathematics' && concept.id === 'exponential-decay') {
+    if (concept.domain === 'mathematics' && (concept.id === 'exponential-decay' || concept.id === 'math-exponential-decay')) {
       return this.buildExponentialDecaySExpr(safeName);
     }
     return this.buildGenericSExpr(concept, safeName);

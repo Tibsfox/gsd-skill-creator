@@ -90,7 +90,7 @@ export class PascalPanel extends PanelInterface {
   // ─── Private Helpers ────────────────────────────────────────────────────────
 
   private buildPascalCode(concept: RosettaConcept): string {
-    if (concept.domain === 'mathematics' && concept.id === 'exponential-decay') {
+    if (concept.domain === 'mathematics' && (concept.id === 'exponential-decay' || concept.id === 'math-exponential-decay')) {
       return this.buildExponentialDecayPascal();
     }
     return this.buildGenericPascal(concept);

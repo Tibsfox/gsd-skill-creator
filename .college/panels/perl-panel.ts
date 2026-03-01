@@ -98,7 +98,7 @@ export class PerlPanel extends PanelInterface {
   // ─── Private Helpers ────────────────────────────────────────────────────────
 
   private buildPerlCode(concept: RosettaConcept): string {
-    if (concept.domain === 'mathematics' && concept.id === 'exponential-decay') {
+    if (concept.domain === 'mathematics' && (concept.id === 'exponential-decay' || concept.id === 'math-exponential-decay')) {
       return this.buildExponentialDecayPerl();
     }
     return this.buildGenericPerl(concept);
