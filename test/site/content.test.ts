@@ -102,3 +102,29 @@ describe('Sample Content', () => {
     }
   });
 });
+
+describe('WordPress Migration Readiness', () => {
+  it('migration module exports migrateAllContent function', async () => {
+    const { migrateAllContent } = await import('../../src/site/wordpress/index');
+    expect(typeof migrateAllContent).toBe('function');
+  });
+
+  it('MigrateResult interface has required fields', async () => {
+    const { migrateAllContent } = await import('../../src/site/wordpress/index');
+    const mockAdapter = {
+      async fetchPosts() { return []; },
+      async fetchPages() { return []; },
+    };
+    const result = await migrateAllContent(mockAdapter, '/tmp/test', {
+      writeFn: async () => {},
+    });
+    expect(result).toHaveProperty('migrated');
+    expect(result).toHaveProperty('skipped');
+    expect(result).toHaveProperty('files');
+  });
+
+  it('releases/ and docs/ listing pages exist for migrated content', () => {
+    expect(existsSync(join(CONTENT_DIR, 'releases/index.md'))).toBe(true);
+    expect(existsSync(join(CONTENT_DIR, 'docs/index.md'))).toBe(true);
+  });
+});
