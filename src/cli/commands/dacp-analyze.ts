@@ -118,7 +118,6 @@ export async function dacpAnalyzeCommand(args: string[]): Promise<number> {
     }
 
     // Convert drift records to HandoffOutcomeWithType format for analyzer
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const outcomes = driftRecords.map(
       (record: any) => ({
         bundle_id: record.bundle_id ?? '',
