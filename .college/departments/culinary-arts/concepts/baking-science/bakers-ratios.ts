@@ -24,6 +24,11 @@ export const bakersRatios: RosettaConcept = {
       targetId: 'cook-sugar-chemistry',
       description: 'Sugar ratio relative to flour affects spread, moisture retention, and texture in baked goods',
     },
+    {
+      type: 'cross-reference',
+      targetId: 'math-ratios',
+      description: 'Baker\'s percentages are a direct application of ratios and proportions from mathematics',
+    },
   ],
   complexPlanePosition: {
     real: 0.7,
