@@ -26,8 +26,8 @@ export const logarithmicScales: RosettaConcept = {
   relationships: [
     {
       type: 'cross-reference',
-      targetId: 'culinary-ph-cooking',
-      description: 'pH in cooking uses logarithmic scale -- taste perception follows Weber-Fechner law',
+      targetId: 'cook-maillard-reaction',
+      description: 'pH in cooking uses logarithmic scale -- Maillard reaction is pH-sensitive, taste perception follows Weber-Fechner law',
     },
     {
       type: 'analogy',
