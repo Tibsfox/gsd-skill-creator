@@ -476,3 +476,99 @@ describe('AutonomyEngine + TeamLifecycle integration', () => {
     expect(teamConfig.lifecycleState).toBe('ACTIVE');
   });
 });
+
+// ============================================================================
+// Watchdog file persistence (508-01)
+// ============================================================================
+
+describe('watchdog file persistence', () => {
+  it('should accept watchdogStatePath in engine config', async () => {
+    const dir = await makeTempDir();
+    tempDirs.push(dir);
+
+    const watchdogStatePath = join(dir, 'watchdog-state.json');
+    const config: AutonomyEngineConfig = {
+      milestoneId: 'v-watchdog-test',
+      totalSubversions: 2,
+      statePath: join(dir, 'execution-state.json'),
+      callbacks: makeStubCallbacks(),
+      watchdogStatePath,
+    };
+
+    // Should not throw -- config accepted
+    const engine = createAutonomyEngine(config);
+    expect(engine).toBeDefined();
+  });
+
+  it('should write watchdog state file during engine run when watchdogStatePath is configured', async () => {
+    const dir = await makeTempDir();
+    tempDirs.push(dir);
+
+    const watchdogStatePath = join(dir, 'watchdog-state.json');
+    const engine = createAutonomyEngine(makeConfig(dir, {
+      totalSubversions: 3,
+      watchdogStatePath,
+    }));
+    const finalState = await engine.run();
+
+    expect(finalState.status).toBe('DONE');
+
+    // Watchdog state file should exist
+    const raw = await readFile(watchdogStatePath, 'utf-8');
+    const state = JSON.parse(raw);
+    expect(state).toHaveProperty('last_write_at');
+    expect(state).toHaveProperty('session_id');
+    expect(state).toHaveProperty('timeout_ms');
+    expect(state).toHaveProperty('started_at');
+  });
+
+  it('should use milestoneId as default sessionId', async () => {
+    const dir = await makeTempDir();
+    tempDirs.push(dir);
+
+    const watchdogStatePath = join(dir, 'watchdog-state.json');
+    const engine = createAutonomyEngine(makeConfig(dir, {
+      milestoneId: 'v-session-test',
+      totalSubversions: 1,
+      watchdogStatePath,
+    }));
+    await engine.run();
+
+    const raw = await readFile(watchdogStatePath, 'utf-8');
+    const state = JSON.parse(raw);
+    expect(state.session_id).toBe('v-session-test');
+  });
+
+  it('should use explicit sessionId when provided', async () => {
+    const dir = await makeTempDir();
+    tempDirs.push(dir);
+
+    const watchdogStatePath = join(dir, 'watchdog-state.json');
+    const engine = createAutonomyEngine(makeConfig(dir, {
+      milestoneId: 'v-explicit',
+      totalSubversions: 1,
+      watchdogStatePath,
+      sessionId: 'custom-session-42',
+    }));
+    await engine.run();
+
+    const raw = await readFile(watchdogStatePath, 'utf-8');
+    const state = JSON.parse(raw);
+    expect(state.session_id).toBe('custom-session-42');
+  });
+
+  it('should NOT write watchdog state file when watchdogStatePath is not configured', async () => {
+    const dir = await makeTempDir();
+    tempDirs.push(dir);
+
+    const engine = createAutonomyEngine(makeConfig(dir, {
+      totalSubversions: 1,
+    }));
+    await engine.run();
+
+    // No watchdog state file should exist in the temp dir
+    const files = await import('fs/promises').then(fs => fs.readdir(dir));
+    const watchdogFiles = files.filter(f => f.includes('watchdog-state'));
+    expect(watchdogFiles).toHaveLength(0);
+  });
+});
