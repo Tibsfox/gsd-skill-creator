@@ -23,6 +23,11 @@ export const proteinDenaturation: RosettaConcept = {
       targetId: 'cook-maillard-reaction',
       description: 'Denatured proteins expose amino acids that participate in Maillard browning reactions',
     },
+    {
+      type: 'cross-reference',
+      targetId: 'cook-temperature-danger-zone',
+      description: 'Safe internal temperatures ensure complete protein denaturation for pathogen destruction',
+    },
   ],
   complexPlanePosition: {
     real: 0.5,
