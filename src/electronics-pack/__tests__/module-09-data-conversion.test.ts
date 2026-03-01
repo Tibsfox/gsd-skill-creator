@@ -1,9 +1,9 @@
 /**
  * Module 9: Data Conversion -- Test suite
  *
- * Validates all 5 data conversion labs backed by the DSP engine
+ * Validates all 7 data conversion labs backed by the DSP engine
  * (quantizeSignal, reconstructSignal, dspFFT). Labs simulate
- * ADC/DAC algorithms, aliasing, and sigma-delta concepts.
+ * ADC/DAC algorithms, aliasing, sigma-delta, ENOB, and sample-and-hold concepts.
  *
  * Labs:
  *   1. R-2R DAC (m9-lab-01)
@@ -11,6 +11,8 @@
  *   3. Aliasing Demo (m9-lab-03)
  *   4. Audio ADC/DAC Round-Trip (m9-lab-04)
  *   5. Sigma-Delta Concept (m9-lab-05)
+ *   6. ENOB and Converter Specifications (m9-lab-06)
+ *   7. Sample-and-Hold (m9-lab-07)
  */
 
 import { describe, it, expect } from 'vitest';
@@ -21,8 +23,8 @@ import { labs } from '../modules/09-data-conversion/labs.js';
 // ============================================================================
 
 describe('Module 9: Data Conversion -- Structure', () => {
-  it('exports exactly 5 labs', () => {
-    expect(labs).toHaveLength(5);
+  it('exports exactly 7 labs', () => {
+    expect(labs).toHaveLength(7);
   });
 
   it('each lab has a non-empty id', () => {
@@ -176,11 +178,67 @@ describe('Lab 5: Sigma-Delta Concept', () => {
 });
 
 // ============================================================================
+// Lab 6: ENOB and Converter Specifications (m9-lab-06)
+// ============================================================================
+
+describe('Lab 6: ENOB and Converter Specifications', () => {
+  it('has id "m9-lab-06"', () => {
+    expect(labs[5].id).toBe('m9-lab-06');
+  });
+
+  it('has title "ENOB and Converter Specifications"', () => {
+    expect(labs[5].title).toBe('ENOB and Converter Specifications');
+  });
+
+  it('has at least 3 steps', () => {
+    expect(labs[5].steps.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('verify() returns true -- 12-bit ENOB = 12.0, real converter ENOB < nominal', () => {
+    expect(labs[5].verify()).toBe(true);
+  });
+
+  it('learn_notes contain H&H citation', () => {
+    for (const step of labs[5].steps) {
+      expect(step.learn_note).toMatch(/H&H/);
+    }
+  });
+});
+
+// ============================================================================
+// Lab 7: Sample-and-Hold (m9-lab-07)
+// ============================================================================
+
+describe('Lab 7: Sample-and-Hold', () => {
+  it('has id "m9-lab-07"', () => {
+    expect(labs[6].id).toBe('m9-lab-07');
+  });
+
+  it('has title "Sample-and-Hold"', () => {
+    expect(labs[6].title).toBe('Sample-and-Hold');
+  });
+
+  it('has at least 3 steps', () => {
+    expect(labs[6].steps.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('verify() returns true -- good design droop negligible, poor design droop catastrophic', () => {
+    expect(labs[6].verify()).toBe(true);
+  });
+
+  it('learn_notes contain H&H citation', () => {
+    for (const step of labs[6].steps) {
+      expect(step.learn_note).toMatch(/H&H/);
+    }
+  });
+});
+
+// ============================================================================
 // All labs verify
 // ============================================================================
 
 describe('Module 9: All labs verify', () => {
-  it('all 5 verify() calls return true', () => {
+  it('all 7 verify() calls return true', () => {
     for (const lab of labs) {
       expect(lab.verify()).toBe(true);
     }
