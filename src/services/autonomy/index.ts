@@ -144,7 +144,7 @@ export {
   DEFAULT_TIMEOUT_MS,
   DEFAULT_CHECK_INTERVAL_MS,
 } from './write-watchdog.js';
-export type { WatchdogConfig, WatchdogStatus } from './write-watchdog.js';
+export type { WatchdogConfig, WatchdogStatus, WatchdogFileState, WatchdogPersistIO } from './write-watchdog.js';
 
 // Engine (Phase 501-02)
 export { createAutonomyEngine } from './engine.js';
