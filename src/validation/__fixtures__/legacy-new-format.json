@@ -1,0 +1,14 @@
+{
+  "name": "new-format-skill",
+  "description": "Skill using the metadata.extensions container format.",
+  "metadata": {
+    "extensions": {
+      "gsd-skill-creator": {
+        "triggers": { "intents": ["analyze"], "files": ["*.ts"] },
+        "enabled": true,
+        "version": 3,
+        "createdAt": "2025-03-01T00:00:00Z"
+      }
+    }
+  }
+}
