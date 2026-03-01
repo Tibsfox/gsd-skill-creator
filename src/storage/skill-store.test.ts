@@ -360,3 +360,176 @@ describe('SkillStore budget enforcement', () => {
     });
   });
 });
+
+// ============================================================================
+// SkillStore migrateAll Tests (QUAL-08)
+// ============================================================================
+
+describe('SkillStore migrateAll', () => {
+  let tempDir: string;
+  let skillsDir: string;
+  let store: SkillStore;
+
+  beforeEach(() => {
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'skill-store-migrate-'));
+    skillsDir = path.join(tempDir, 'skills');
+    fs.mkdirSync(skillsDir, { recursive: true });
+    store = new SkillStore(skillsDir);
+  });
+
+  afterEach(() => {
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  });
+
+  /**
+   * Write a legacy flat-file skill directly as skills/name.md.
+   */
+  function writeLegacySkill(name: string, content: string): void {
+    fs.writeFileSync(path.join(skillsDir, `${name}.md`), content, 'utf-8');
+  }
+
+  /**
+   * Write a current-format skill as skills/name/SKILL.md.
+   */
+  function writeCurrentSkill(name: string, content: string): void {
+    const dir = path.join(skillsDir, name);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, 'SKILL.md'), content, 'utf-8');
+  }
+
+  const sampleContent = [
+    '---',
+    'name: test-skill',
+    'description: A test skill',
+    '---',
+    'Body content here',
+  ].join('\n');
+
+  it('migrates legacy flat-file to subdirectory format', async () => {
+    writeLegacySkill('my-skill', sampleContent);
+
+    const result = await store.migrateAll();
+
+    expect(result.migrated).toBe(1);
+    expect(result.skipped).toBe(0);
+    expect(result.errors).toHaveLength(0);
+
+    // New file exists
+    expect(fs.existsSync(path.join(skillsDir, 'my-skill', 'SKILL.md'))).toBe(true);
+    // Legacy file removed
+    expect(fs.existsSync(path.join(skillsDir, 'my-skill.md'))).toBe(false);
+  });
+
+  it('preserves all frontmatter and body content', async () => {
+    const specificContent = [
+      '---',
+      'name: content-check',
+      'description: Checking content preservation',
+      'allowed-tools:',
+      '  - Read',
+      '  - Write',
+      '---',
+      '',
+      'This is the body with **markdown**.',
+      '',
+      '## Section',
+      '',
+      'More content.',
+    ].join('\n');
+
+    writeLegacySkill('content-check', specificContent);
+    await store.migrateAll();
+
+    const migratedContent = fs.readFileSync(
+      path.join(skillsDir, 'content-check', 'SKILL.md'),
+      'utf-8',
+    );
+    expect(migratedContent).toBe(specificContent);
+  });
+
+  it('skips current format skills', async () => {
+    writeCurrentSkill('existing', sampleContent);
+
+    const result = await store.migrateAll();
+
+    expect(result.migrated).toBe(0);
+    expect(result.skipped).toBe(1);
+    expect(result.errors).toHaveLength(0);
+  });
+
+  it('handles empty skills directory', async () => {
+    const result = await store.migrateAll();
+
+    expect(result.migrated).toBe(0);
+    expect(result.skipped).toBe(0);
+    expect(result.errors).toHaveLength(0);
+  });
+
+  it('is idempotent - second call is no-op', async () => {
+    writeLegacySkill('idempotent-test', sampleContent);
+
+    const result1 = await store.migrateAll();
+    expect(result1.migrated).toBe(1);
+
+    const result2 = await store.migrateAll();
+    expect(result2.migrated).toBe(0);
+    expect(result2.skipped).toBe(1);
+  });
+
+  it('does not overwrite if subdirectory already exists', async () => {
+    const legacyContent = 'Legacy version';
+    const currentContent = 'Current version';
+
+    // Create both legacy and current format with different content
+    writeLegacySkill('dual-format', legacyContent);
+    writeCurrentSkill('dual-format', currentContent);
+
+    const result = await store.migrateAll();
+
+    // Legacy entry should be skipped (current exists)
+    // Note: listWithFormat() returns both -- the legacy one is skipped in migrateAll
+    // because stat(targetPath) succeeds
+    expect(result.migrated).toBe(0);
+
+    // Current content preserved (not overwritten)
+    const content = fs.readFileSync(
+      path.join(skillsDir, 'dual-format', 'SKILL.md'),
+      'utf-8',
+    );
+    expect(content).toBe(currentContent);
+  });
+
+  it('migrates multiple skills in one call', async () => {
+    writeLegacySkill('skill-a', sampleContent);
+    writeLegacySkill('skill-b', sampleContent);
+    writeLegacySkill('skill-c', sampleContent);
+
+    const result = await store.migrateAll();
+
+    expect(result.migrated).toBe(3);
+    expect(result.skipped).toBe(0);
+    expect(result.errors).toHaveLength(0);
+
+    // All three migrated
+    expect(fs.existsSync(path.join(skillsDir, 'skill-a', 'SKILL.md'))).toBe(true);
+    expect(fs.existsSync(path.join(skillsDir, 'skill-b', 'SKILL.md'))).toBe(true);
+    expect(fs.existsSync(path.join(skillsDir, 'skill-c', 'SKILL.md'))).toBe(true);
+
+    // All three legacy files removed
+    expect(fs.existsSync(path.join(skillsDir, 'skill-a.md'))).toBe(false);
+    expect(fs.existsSync(path.join(skillsDir, 'skill-b.md'))).toBe(false);
+    expect(fs.existsSync(path.join(skillsDir, 'skill-c.md'))).toBe(false);
+  });
+
+  it('mixes current and legacy skills correctly', async () => {
+    writeLegacySkill('legacy-one', sampleContent);
+    writeCurrentSkill('current-one', sampleContent);
+    writeLegacySkill('legacy-two', sampleContent);
+
+    const result = await store.migrateAll();
+
+    expect(result.migrated).toBe(2);
+    expect(result.skipped).toBe(1);
+    expect(result.errors).toHaveLength(0);
+  });
+});
