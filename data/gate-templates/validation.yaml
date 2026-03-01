@@ -1,0 +1,66 @@
+version: "1.0"
+milestone: "{milestone}"
+milestone_type: validation
+gates:
+  per_subversion:
+    - name: verification-report
+      description: "Verification report for each validation subversion"
+      path_pattern: ".planning/{milestone_dir}/verifications/{subversion}-verification.md"
+      min_size_bytes: 400
+      blocking: true
+      content_checks:
+        - pattern: "([Pp]ass|[Ff]ail|[Rr]esult|[Vv]erified)"
+          required: true
+          description: "Must contain verification results"
+        - pattern: "\\d+"
+          required: true
+          description: "Must contain numeric results"
+  checkpoint:
+    - name: checkpoint-coverage
+      description: "Test coverage checkpoint"
+      path_pattern: ".planning/{milestone_dir}/checkpoints/checkpoint-{subversion}.md"
+      min_size_bytes: 800
+      blocking: true
+      content_checks:
+        - pattern: "([Cc]overage|[Tt]est|[Aa]ssertion)"
+          required: true
+          description: "Must contain coverage information"
+  half_transition:
+    - name: midpoint-validation
+      description: "Midpoint validation summary"
+      path_pattern: ".planning/{milestone_dir}/midpoint-report.md"
+      min_size_bytes: 1500
+      blocking: true
+      content_checks:
+        - pattern: "([Vv]alidated|[Vv]erified|[Cc]onfirmed)"
+          required: true
+          description: "Must confirm validation status"
+  graduation:
+    - name: graduation-validation
+      description: "Final validation report"
+      path_pattern: ".planning/{milestone_dir}/graduation-report.md"
+      min_size_bytes: 2500
+      blocking: true
+      content_checks:
+        - pattern: "^#\\s+"
+          required: true
+          description: "Must have headings"
+        - pattern: "([Pp]ass|[Cc]omplete|[Vv]alidated)"
+          required: true
+          description: "Must confirm all validations pass"
+  summary:
+    - name: summary-md
+      description: "SUMMARY.md verification at phase completion (RC-11 fix)"
+      path_pattern: ".planning/phases/{phase_dir}/*-SUMMARY.md"
+      min_size_bytes: 500
+      blocking: true
+      content_checks:
+        - pattern: "^#\\s+"
+          required: true
+          description: "Must have at least one heading"
+        - pattern: "([Aa]ccomplishment|[Cc]ompleted|[Cc]reated|[Mm]odified)"
+          required: true
+          description: "Must describe accomplishments"
+        - pattern: "([Cc]ommit|[Tt]ask)"
+          required: true
+          description: "Must reference commits or tasks"
