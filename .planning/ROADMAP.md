@@ -18,7 +18,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 
 ### 🚧 v1.49.8 Cooking With Claude (Phases 1-10)
 
-- [ ] **Phase 1: Foundation** - Shared types, Panel Interface contract, directory scaffold
+- [x] **Phase 1: Foundation** - Shared types, Panel Interface contract, directory scaffold (2026-03-01)
 - [ ] **Phase 2: Rosetta Core Engine** - Concept Registry, Panel Router, Expression Renderer
 - [ ] **Phase 3: Calibration Engine** - Universal feedback loop, Safety Warden framework
 - [ ] **Phase 4: College Structure** - Department framework, progressive disclosure, try-sessions
@@ -41,9 +41,9 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   3. `.college/` directory structure exists on disk matching the filesystem contract from the milestone spec
   4. A developer can start implementing any panel or engine in Wave 1 using only the types and interface from this phase
 **Plans**: 3 plans
-  - [ ] 01-01-PLAN.md -- Shared type definitions (RosettaConcept, PanelExpression, CalibrationDelta, CollegeDepartment, SafetyBoundary, PanelId, CalibrationModel)
-  - [ ] 01-02-PLAN.md -- Panel Interface contract (PanelInterface abstract class, PanelRegistry, mock panel smoke test)
-  - [ ] 01-03-PLAN.md -- Directory scaffold (.college/ tree, stub files, DEPARTMENT.md templates)
+  - [x] 01-01-PLAN.md -- Shared type definitions (RosettaConcept, PanelExpression, CalibrationDelta, CollegeDepartment, SafetyBoundary, PanelId, CalibrationModel)
+  - [x] 01-02-PLAN.md -- Panel Interface contract (PanelInterface abstract class, PanelRegistry, mock panel smoke test)
+  - [x] 01-03-PLAN.md -- Directory scaffold (.college/ tree, stub files, DEPARTMENT.md templates)
 
 ### Phase 2: Rosetta Core Engine
 **Goal**: The translation engine exists — concepts can be stored, routed to appropriate panels, and rendered as output
@@ -156,7 +156,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 1. Foundation | v1.49.8 | 0/3 | Planned | - |
+| 1. Foundation | v1.49.8 | 3/3 | Complete | 2026-03-01 |
 | 2. Rosetta Core Engine | v1.49.8 | 0/TBD | Not started | - |
 | 3. Calibration Engine | v1.49.8 | 0/TBD | Not started | - |
 | 4. College Structure | v1.49.8 | 0/TBD | Not started | - |
