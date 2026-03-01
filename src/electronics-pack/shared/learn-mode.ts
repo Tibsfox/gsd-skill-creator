@@ -16,11 +16,21 @@ export enum DepthLevel {
   Mathematical = 3,
 }
 
+/** Self-assessment checkpoint linking a depth marker to an assessment question */
+export interface AssessmentCheckpoint {
+  /** Reference to an assessment.md question, e.g., "Q3" */
+  questionRef: string;
+  /** Topic description for the checkpoint */
+  topic: string;
+}
+
 /** A depth marker embedded in module content */
 export interface DepthMarker {
   level: DepthLevel;
   content: string;
   hhCitation: string; // e.g., "H&H 1.2.1" or "H&H p.42"
+  /** Optional self-assessment checkpoint linking this marker to an assessment question */
+  checkpoint?: AssessmentCheckpoint;
 }
 
 /** Learn mode configuration per module */
@@ -172,6 +182,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 1.2 for the relationship between voltage, current, and resistance in linear circuits, including Kirchhoff\'s voltage and current laws (KVL/KCL) and the concept of conductance G.',
       hhCitation: 'H&H 1.2',
+      checkpoint: { questionRef: 'Q3', topic: 'Voltage divider analysis and loading' },
     },
     {
       level: DepthLevel.Mathematical,
@@ -196,6 +207,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 1.4 for capacitor behavior in AC circuits, RC time constants, and high-pass/low-pass filter configurations. Section 1.7 covers impedance and resonant circuits.',
       hhCitation: 'H&H 1.4',
+      checkpoint: { questionRef: 'Q2', topic: 'RC time constant and frequency response' },
     },
     {
       level: DepthLevel.Reference,
@@ -245,6 +257,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 1.7 for Bode plot construction, impedance-based filter analysis, and the transition from time-domain to frequency-domain thinking. Section 8.11 covers noise spectral density and noise figure.',
       hhCitation: 'H&H 1.7',
+      checkpoint: { questionRef: 'Q3', topic: 'Noise and signal-to-noise ratio' },
     },
     {
       level: DepthLevel.Mathematical,
@@ -279,6 +292,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 1.6 for the diode I-V characteristic, rectifier circuits (half-wave, full-wave, bridge), Zener regulation, and the exponential diode equation.',
       hhCitation: 'H&H 1.6',
+      checkpoint: { questionRef: 'Q4', topic: 'Rectifier circuit analysis' },
     },
     {
       level: DepthLevel.Mathematical,
@@ -313,6 +327,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H Ch.2 for BJT biasing, common-emitter amplifiers, current mirrors, and the Ebers-Moll model. Ch.3 covers FET types (JFET, MOSFET), transfer characteristics, and CMOS analog switches.',
       hhCitation: 'H&H Ch.2',
+      checkpoint: { questionRef: 'Q3', topic: 'Transistor biasing and operating point' },
     },
     {
       level: DepthLevel.Mathematical,
@@ -367,6 +382,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H Ch.4 for the ideal op-amp model, inverting/non-inverting configurations, virtual ground concept, and feedback stability. Ch.6 covers active filter topologies (Sallen-Key, state-variable, biquad).',
       hhCitation: 'H&H Ch.4',
+      checkpoint: { questionRef: 'Q2', topic: 'Feedback configurations and gain' },
     },
     {
       level: DepthLevel.Mathematical,
@@ -421,6 +437,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H Ch.9 for linear regulator design (pass transistor, error amplifier, dropout), switching converter topologies (buck, boost, buck-boost), and thermal management.',
       hhCitation: 'H&H Ch.9',
+      checkpoint: { questionRef: 'Q4', topic: 'Regulator topology selection for variable-input applications' },
     },
     {
       level: DepthLevel.Mathematical,
@@ -471,6 +488,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 10.1 for Boolean algebra, truth tables, De Morgan\'s laws, and canonical forms (SOP/POS). Section 10.2 covers CMOS gate implementation, propagation delay, fan-out, and noise margins.',
       hhCitation: 'H&H 10.1',
+      checkpoint: { questionRef: 'Q3', topic: 'Logic family comparison and noise margins' },
     },
     {
       level: DepthLevel.Mathematical,
@@ -511,6 +529,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 10.3 for SR, JK, and D flip-flop operation and timing constraints (setup, hold, propagation). Sections 10.4-10.5 cover counters, shift registers, and finite state machine design.',
       hhCitation: 'H&H 10.3',
+      checkpoint: { questionRef: 'Q2', topic: 'Counter design and state encoding' },
     },
     {
       level: DepthLevel.Mathematical,
@@ -561,6 +580,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H Ch.13 for ADC architectures (successive approximation, delta-sigma, flash), DAC topologies (R-2R ladder, current-steering), and quantization error analysis.',
       hhCitation: 'H&H Ch.13',
+      checkpoint: { questionRef: 'Q3', topic: 'Sampling, aliasing, and Nyquist criterion' },
     },
     {
       level: DepthLevel.Mathematical,
@@ -616,6 +636,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 13.5 for FIR and IIR filter design, the discrete Fourier transform, windowing functions, and the relationship between analog and digital filter specifications.',
       hhCitation: 'H&H 13.5',
+      checkpoint: { questionRef: 'Q2', topic: 'FIR filter design and frequency response' },
     },
     {
       level: DepthLevel.Mathematical,
