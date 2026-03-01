@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.49.8
 milestone_name: Cooking With Claude
-status: wave_3_planning
+status: wave_3_executing
 last_updated: "2026-03-01"
-last_plan_completed: "06-06"
+last_plan_completed: "05-05"
 progress:
   total_phases: 10
-  completed_phases: 5
-  total_plans: 22
-  completed_plans: 22
+  completed_phases: 6
+  total_plans: 27
+  completed_plans: 27
 ---
 
 # Project State
@@ -19,23 +19,23 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-01)
 
 **Core value:** Skills are discovered from real patterns and proved against mathematical foundations
-**Current focus:** Wave 2 complete (Phases 4-6), planning Wave 3 (Phases 5, 7-8)
+**Current focus:** Phase 5 complete, Wave 3 in progress (Phases 5, 7, 8)
 
 ## Current Position
 
-Phase: Wave 3 planning (Phases 5, 7, 8)
-Plan: N/A (planning phase)
-Status: Phases 1-4, 6, 0.5 complete — planning Phase 5 and Phase 7 in parallel
-Last activity: 2026-03-01 -- Wave 2 complete, planning Wave 3
+Phase: Wave 3 execution (Phases 5, 7, 8)
+Plan: Phase 5 complete (5/5 plans)
+Status: Phases 0.5, 1-6 complete -- executing Wave 3
+Last activity: 2026-03-01 -- Phase 5 complete (3 systems panels + 7 math concepts + integration tests)
 
-Progress: [██████████████████████████████████████████████████] 50%
+Progress: [██████████████████████████████████████████████████████████████] 60%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 12
+- Total plans completed: 17
 - Average duration: 2.7 min
-- Total execution time: 0.5 hours
+- Total execution time: 0.7 hours
 
 **By Phase:**
 
@@ -46,10 +46,11 @@ Progress: [███████████████████████
 | 0.5 | 1/1 | 3 min | 3 min |
 | 3 | 4/4 | 12 min | 3 min |
 | 4 | 4/4 | 12 min | 3 min |
+| 5 | 5/5 | 13 min | 2.6 min |
 | 6 | 6/6 | 18 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-04 (3 min), 06-04 (3 min), 06-05 (3 min), 06-06 (3 min)
+- Last 5 plans: 05-01 (3 min), 05-02 (3 min), 05-03 (2 min), 05-04 (3 min), 05-05 (2 min)
 - Trend: consistent
 
 *Updated after each plan completion*
@@ -81,6 +82,10 @@ Progress: [███████████████████████
 - Session definitions stored as JSON in try-sessions/ directory
 - completeStep() is the only method that marks steps complete; nextStep() only advances position
 - Integration tests use real .college/departments/ directory, not temp dirs
+- Systems panels handle both legacy IDs and namespaced IDs (e.g., exponential-decay and math-exponential-decay)
+- Math concept panels Map initialized empty -- panels translate on demand, not hardcoded
+- complexPlanePosition computed from polar coordinates (theta, radius) for mathematical clarity
+- Culinary cross-references use descriptive future-resolvable targetIds
 
 ### Pending Todos
 
@@ -93,5 +98,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: Phase 4 College Structure re-executed -- 4/4 plans, 47 college tests, 276 total .college tests
+Stopped at: Phase 5 complete -- 5/5 plans, 119 new tests, 395 total .college tests
 Resume file: None
