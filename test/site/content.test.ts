@@ -35,6 +35,8 @@ const CONTENT_FILES = [
   'packs/kung-fu-cinema.md',
   'skills/skill-creator.md',
   'bibliography.md',
+  'releases/index.md',
+  'docs/index.md',
 ];
 
 describe('Sample Content', () => {
@@ -84,6 +86,19 @@ describe('Sample Content', () => {
       const { body } = parseFrontmatter(raw);
       const count = wordCount(body);
       expect(count, `${file} has only ${count} words (need 100+)`).toBeGreaterThanOrEqual(100);
+    }
+  });
+
+  it('listing pages use page template and have nav_section', () => {
+    const listingPages = [
+      { file: 'releases/index.md', section: 'releases' },
+      { file: 'docs/index.md', section: 'docs' },
+    ];
+    for (const { file, section } of listingPages) {
+      const raw = readFileSync(join(CONTENT_DIR, file), 'utf-8');
+      const { frontmatter } = parseFrontmatter(raw);
+      expect(frontmatter.template, `${file} should use page template`).toBe('page');
+      expect(frontmatter.nav_section, `${file} should have nav_section=${section}`).toBe(section);
     }
   });
 });
