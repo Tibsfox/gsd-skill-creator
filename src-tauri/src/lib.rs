@@ -33,41 +33,46 @@ pub fn run() {
             app.manage(tokio::sync::Mutex::new(state::ApiClientState::default()));
             app.manage(tokio::sync::Mutex::new(services::launcher::ServiceLauncher::new_without_emitter()));
 
-            // Auto-detect existing Claude sessions in the gsd tmux session
-            if let Ok(output) = std::process::Command::new("tmux")
-                .args(["list-windows", "-t", "gsd", "-F", "#{window_name}"])
-                .output()
-            {
-                if output.status.success() {
-                    let windows = String::from_utf8_lossy(&output.stdout);
-                    if let Ok(mut mgr) = app.state::<Mutex<ClaudeSessionManager>>().lock() {
-                        let now = std::time::SystemTime::now()
-                            .duration_since(std::time::UNIX_EPOCH)
-                            .unwrap_or_default()
-                            .as_secs();
-                        for name in windows.lines() {
-                            if name.starts_with("claude") {
-                                mgr.insert(
-                                    name.to_string(),
-                                    claude::session::ClaudeSessionInfo {
-                                        id: name.to_string(),
-                                        tmux_window: name.to_string(),
-                                        status: claude::session::ClaudeStatus::Idle,
-                                        started_at: now,
-                                        last_activity: now,
-                                        project_dir: None,
-                                    },
-                                );
+            // v1.49.7 (PR #24 @PatrickRobotham): gate tmux session auto-detection
+            // and monitor on tmux availability. Without tmux, these would poll a
+            // nonexistent binary every 2 seconds, causing needless ENOENT errors.
+            if tmux::detector::detect_tmux().is_some() {
+                // Auto-detect existing Claude sessions in the gsd tmux session
+                if let Ok(output) = std::process::Command::new("tmux")
+                    .args(["list-windows", "-t", "gsd", "-F", "#{window_name}"])
+                    .output()
+                {
+                    if output.status.success() {
+                        let windows = String::from_utf8_lossy(&output.stdout);
+                        if let Ok(mut mgr) = app.state::<Mutex<ClaudeSessionManager>>().lock() {
+                            let now = std::time::SystemTime::now()
+                                .duration_since(std::time::UNIX_EPOCH)
+                                .unwrap_or_default()
+                                .as_secs();
+                            for name in windows.lines() {
+                                if name.starts_with("claude") {
+                                    mgr.insert(
+                                        name.to_string(),
+                                        claude::session::ClaudeSessionInfo {
+                                            id: name.to_string(),
+                                            tmux_window: name.to_string(),
+                                            status: claude::session::ClaudeStatus::Idle,
+                                            started_at: now,
+                                            last_activity: now,
+                                            project_dir: None,
+                                        },
+                                    );
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            // Start Claude session monitor (polls every 2s)
-            // Must come after session auto-detection so there's something to poll
-            let handle = app.handle().clone();
-            claude::monitor::start_monitor(handle, 2000);
+                // Start Claude session monitor (polls every 2s)
+                // Must come after session auto-detection so there's something to poll
+                let handle = app.handle().clone();
+                claude::monitor::start_monitor(handle, 2000);
+            }
 
             Ok(())
         })
