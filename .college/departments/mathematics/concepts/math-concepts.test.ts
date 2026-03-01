@@ -1,0 +1,144 @@
+/**
+ * Mathematics Department concept tests -- validates all 7 concepts have
+ * required fields, valid complexPlanePosition, cross-references, and
+ * correct wing assignments.
+ *
+ * Covers: MATH-01, MATH-03
+ */
+
+import { describe, it, expect } from 'vitest';
+import {
+  exponentialDecay,
+  trigFunctions,
+  complexNumbers,
+  eulerFormula,
+  ratiosProportions,
+  logarithmicScales,
+  fractalGeometry,
+} from './index.js';
+import type { RosettaConcept } from '../../../rosetta-core/types.js';
+
+// ─── All 7 Concepts ────────────────────────────────────────────────────────
+
+const allConcepts: RosettaConcept[] = [
+  exponentialDecay,
+  trigFunctions,
+  complexNumbers,
+  eulerFormula,
+  ratiosProportions,
+  logarithmicScales,
+  fractalGeometry,
+];
+
+const conceptNames = [
+  'exponentialDecay',
+  'trigFunctions',
+  'complexNumbers',
+  'eulerFormula',
+  'ratiosProportions',
+  'logarithmicScales',
+  'fractalGeometry',
+];
+
+// ─── Tests ──────────────────────────────────────────────────────────────────
+
+describe('Mathematics Department Concepts', () => {
+
+  describe('MATH-01: All 7 concepts have valid RosettaConcept fields', () => {
+    it.each(allConcepts.map((c, i) => [conceptNames[i], c] as const))(
+      '%s has non-empty id, name, domain=mathematics, and description',
+      (_name, concept) => {
+        expect(concept.id).toBeTruthy();
+        expect(concept.name).toBeTruthy();
+        expect(concept.domain).toBe('mathematics');
+        expect(concept.description.length).toBeGreaterThan(10);
+      }
+    );
+  });
+
+  describe('MATH-03: complexPlanePosition validation', () => {
+    it.each(allConcepts.map((c, i) => [conceptNames[i], c] as const))(
+      '%s has valid complexPlanePosition with magnitude and angle',
+      (_name, concept) => {
+        expect(concept.complexPlanePosition).toBeDefined();
+        const pos = concept.complexPlanePosition!;
+
+        // Must have all four fields
+        expect(typeof pos.real).toBe('number');
+        expect(typeof pos.imaginary).toBe('number');
+        expect(typeof pos.magnitude).toBe('number');
+        expect(typeof pos.angle).toBe('number');
+
+        // Magnitude must equal sqrt(real^2 + imaginary^2)
+        const expectedMag = Math.sqrt(pos.real * pos.real + pos.imaginary * pos.imaginary);
+        expect(pos.magnitude).toBeCloseTo(expectedMag, 5);
+
+        // Angle must equal atan2(imaginary, real)
+        const expectedAngle = Math.atan2(pos.imaginary, pos.real);
+        expect(pos.angle).toBeCloseTo(expectedAngle, 5);
+      }
+    );
+
+    it('concrete concepts have smaller theta than abstract ones', () => {
+      // ratios (pi/12) should be more concrete than euler (pi/2)
+      const ratiosAngle = ratiosProportions.complexPlanePosition!.angle;
+      const eulerAngle = eulerFormula.complexPlanePosition!.angle;
+      expect(ratiosAngle).toBeLessThan(eulerAngle);
+    });
+  });
+
+  describe('Cross-references and relationships', () => {
+    it.each(allConcepts.map((c, i) => [conceptNames[i], c] as const))(
+      '%s has at least one relationship',
+      (_name, concept) => {
+        expect(concept.relationships.length).toBeGreaterThanOrEqual(1);
+      }
+    );
+
+    it('at least one concept has a cross-reference to culinary arts', () => {
+      const hasCulinaryRef = allConcepts.some(c =>
+        c.relationships.some(r =>
+          r.type === 'cross-reference' && r.targetId.includes('culinary')
+        )
+      );
+      expect(hasCulinaryRef).toBe(true);
+    });
+  });
+
+  describe('Wing coverage', () => {
+    it('concepts cover all 4 wings: Algebra, Geometry, Calculus, Complex Analysis', () => {
+      // ratios and logarithmic -> Algebra
+      // trig -> Geometry
+      // exponential decay -> Calculus
+      // complex numbers, euler, fractal -> Complex Analysis
+      const ids = allConcepts.map(c => c.id);
+      expect(ids).toContain('math-ratios');
+      expect(ids).toContain('math-logarithmic-scales');
+      expect(ids).toContain('math-trig-functions');
+      expect(ids).toContain('math-exponential-decay');
+      expect(ids).toContain('math-complex-numbers');
+      expect(ids).toContain('math-euler-formula');
+      expect(ids).toContain('math-fractal-geometry');
+    });
+  });
+
+  describe('panels Map', () => {
+    it.each(allConcepts.map((c, i) => [conceptNames[i], c] as const))(
+      '%s has an initialized panels Map',
+      (_name, concept) => {
+        expect(concept.panels).toBeInstanceOf(Map);
+      }
+    );
+  });
+
+  describe('barrel export', () => {
+    it('index.ts re-exports all 7 concepts', () => {
+      expect(allConcepts).toHaveLength(7);
+      // Each concept is defined (not undefined)
+      for (const concept of allConcepts) {
+        expect(concept).toBeDefined();
+        expect(concept.id).toBeTruthy();
+      }
+    });
+  });
+});

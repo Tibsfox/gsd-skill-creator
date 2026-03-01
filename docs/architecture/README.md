@@ -110,11 +110,11 @@ For learning-oriented documentation, see:
   - [Conflict Detection](../tutorials/conflict-detection.md)
   - [Calibration](../tutorials/calibration.md)
   - [CI Integration](../tutorials/ci-integration.md)
-- [Examples](../../examples/) - Ready-to-use skill templates
+- [Examples](../../examples/README.md) - Ready-to-use skill templates
 
 For reference documentation:
 
 - [API.md](../API.md) - Complete programmatic API reference
 - [CLI.md](../CLI.md) - Command-line interface reference
 - [GSD-TEAMS.md](../GSD-TEAMS.md) - GSD teams vs subagents decision guide
-- [CHANGELOG.md](../CHANGELOG.md) - Version history and changes
+- [RELEASE-HISTORY.md](../RELEASE-HISTORY.md) - Version history and changes
