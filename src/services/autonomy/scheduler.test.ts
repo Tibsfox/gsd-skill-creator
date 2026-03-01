@@ -368,10 +368,10 @@ describe('scheduler', () => {
       await scheduler.run(state);
 
       // First call: subversion 0
-      expect(onComplete.mock.calls[0][0]).toBe(0);
-      expect(onComplete.mock.calls[0][1]).toHaveProperty('status', 'RUNNING');
+      expect((onComplete.mock.calls as any[][])[0][0]).toBe(0);
+      expect((onComplete.mock.calls as any[][])[0][1]).toHaveProperty('status', 'RUNNING');
       // Second call: subversion 1
-      expect(onComplete.mock.calls[1][0]).toBe(1);
+      expect((onComplete.mock.calls as any[][])[1][0]).toBe(1);
     });
 
     it('does not call onSubversionComplete for failed subversions', async () => {

@@ -89,3 +89,12 @@ export type {
 // Resume (Phase 498-03)
 export { resumeExecution, canResume, computeResumePoint } from './resume.js';
 export type { ResumeResult } from './resume.js';
+
+// Gates (Phase 498-04)
+export {
+  GateEvaluator,
+  isCheckpointSubversion,
+  isHalfTransition,
+  isGraduation,
+} from './gates.js';
+export type { GateEvaluatorOptions } from './gates.js';
