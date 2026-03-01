@@ -20,6 +20,9 @@ import {
   loadTeachForward,
   verifyTeachForwardChain,
   processJournal,
+  extractPhaseTeachForward,
+  writePhaseTeachForward,
+  loadPhaseTeachForward,
 } from './teach-forward.js';
 import type { ChainVerificationResult } from './teach-forward.js';
 
@@ -318,5 +321,194 @@ describe('processJournal', () => {
     const entry = await processJournal('j.md', 'tf/', 99, { readFile: readFn, writeFile: writeFn });
 
     expect(entry.to_subversion).toBe(100);
+  });
+});
+
+// ============================================================================
+// Phase-level teach-forward
+// ============================================================================
+
+describe('phase-level teach-forward', () => {
+  // --------------------------------------------------------------------------
+  // extractPhaseTeachForward
+  // --------------------------------------------------------------------------
+
+  describe('extractPhaseTeachForward', () => {
+    it('should extract from Key Findings section when present', () => {
+      const summary = [
+        '# Phase 508 Summary',
+        '',
+        '## Key Findings',
+        '',
+        '- finding one',
+        '- finding two',
+        '- finding three',
+        '',
+        '## Other Section',
+        '',
+        '- other stuff',
+      ].join('\n');
+
+      const result = extractPhaseTeachForward(summary);
+      expect(result).toEqual(['finding one', 'finding two', 'finding three']);
+    });
+
+    it('should fall back to Accomplishments when no Key Findings', () => {
+      const summary = [
+        '# Phase 508 Summary',
+        '',
+        '## Accomplishments',
+        '',
+        '- accomplished A',
+        '- accomplished B',
+        '',
+        '## Notes',
+        '',
+        '- note 1',
+      ].join('\n');
+
+      const result = extractPhaseTeachForward(summary);
+      expect(result).toEqual(['accomplished A', 'accomplished B']);
+    });
+
+    it('should fall back to What Was Built when no Key Findings or Accomplishments', () => {
+      const summary = [
+        '# Phase 508 Summary',
+        '',
+        '## What Was Built',
+        '',
+        '- built X',
+        '- built Y',
+        '- built Z',
+        '',
+      ].join('\n');
+
+      const result = extractPhaseTeachForward(summary);
+      expect(result).toEqual(['built X', 'built Y', 'built Z']);
+    });
+
+    it('should fall back to last 5 bullets from entire doc when no structured section', () => {
+      const summary = [
+        '# Phase 508 Summary',
+        '',
+        'Some text.',
+        '',
+        '- bullet 1',
+        '- bullet 2',
+        '- bullet 3',
+        '- bullet 4',
+        '- bullet 5',
+        '- bullet 6',
+        '- bullet 7',
+      ].join('\n');
+
+      const result = extractPhaseTeachForward(summary);
+      expect(result).toHaveLength(5);
+      expect(result[0]).toBe('bullet 3');
+      expect(result[4]).toBe('bullet 7');
+    });
+
+    it('should limit to 5 insights from Key Findings with 8 bullets', () => {
+      const bullets = Array.from({ length: 8 }, (_, i) => `- finding ${i + 1}`).join('\n');
+      const summary = `## Key Findings\n\n${bullets}\n`;
+
+      const result = extractPhaseTeachForward(summary);
+      expect(result).toHaveLength(5);
+      expect(result[0]).toBe('finding 1');
+      expect(result[4]).toBe('finding 5');
+    });
+
+    it('should return empty array for empty content', () => {
+      expect(extractPhaseTeachForward('')).toEqual([]);
+    });
+  });
+
+  // --------------------------------------------------------------------------
+  // writePhaseTeachForward
+  // --------------------------------------------------------------------------
+
+  describe('writePhaseTeachForward', () => {
+    it('should write file to {toPhase}-TEACH-FORWARD.md', async () => {
+      const writeFn = vi.fn().mockResolvedValue(undefined);
+      await writePhaseTeachForward('.planning/phases', 508, ['insight A'], { writeFile: writeFn });
+
+      expect(writeFn).toHaveBeenCalledTimes(1);
+      const writtenPath = writeFn.mock.calls[0][0];
+      expect(writtenPath).toBe('.planning/phases/509-TEACH-FORWARD.md');
+    });
+
+    it('should produce YAML frontmatter with from_phase, to_phase, extracted_at', async () => {
+      let writtenContent = '';
+      const writeFn = vi.fn().mockImplementation((_: string, content: string) => {
+        writtenContent = content;
+        return Promise.resolve();
+      });
+
+      await writePhaseTeachForward('.planning/phases', 508, ['insight'], { writeFile: writeFn });
+
+      expect(writtenContent).toContain('from_phase: 508');
+      expect(writtenContent).toContain('to_phase: 509');
+      expect(writtenContent).toContain('extracted_at:');
+      expect(writtenContent).toMatch(/^---\n/);
+      expect(writtenContent).toMatch(/\n---\n/);
+    });
+
+    it('should include bullet list of insights in body', async () => {
+      let writtenContent = '';
+      const writeFn = vi.fn().mockImplementation((_: string, content: string) => {
+        writtenContent = content;
+        return Promise.resolve();
+      });
+
+      await writePhaseTeachForward('.planning/phases', 508, ['insight A', 'insight B'], { writeFile: writeFn });
+
+      expect(writtenContent).toContain('- insight A');
+      expect(writtenContent).toContain('- insight B');
+    });
+
+    it('should return result with from_phase, to_phase, insights, extracted_at', async () => {
+      const writeFn = vi.fn().mockResolvedValue(undefined);
+      const result = await writePhaseTeachForward('.planning/phases', 508, ['insight'], { writeFile: writeFn });
+
+      expect(result.from_phase).toBe(508);
+      expect(result.to_phase).toBe(509);
+      expect(result.insights).toEqual(['insight']);
+      expect(result.extracted_at).toBeDefined();
+    });
+  });
+
+  // --------------------------------------------------------------------------
+  // loadPhaseTeachForward
+  // --------------------------------------------------------------------------
+
+  describe('loadPhaseTeachForward', () => {
+    it('should read and format context block with "Context from Prior Phase" heading', async () => {
+      const fileContent = [
+        '---',
+        'from_phase: 507',
+        'to_phase: 508',
+        'extracted_at: "2026-03-01T12:00:00Z"',
+        '---',
+        '',
+        '- insight from phase 507',
+        '- another insight',
+        '',
+      ].join('\n');
+      const readFn = vi.fn().mockResolvedValue(fileContent);
+
+      const result = await loadPhaseTeachForward('.planning/phases', 508, { readFile: readFn });
+
+      expect(result).toContain('## Context from Prior Phase');
+      expect(result).toContain('insight from phase 507');
+      expect(result).toContain('another insight');
+      expect(result).toContain('---');
+    });
+
+    it('should return empty string when file does not exist', async () => {
+      const readFn = vi.fn().mockRejectedValue(new Error('ENOENT'));
+
+      const result = await loadPhaseTeachForward('.planning/phases', 508, { readFile: readFn });
+      expect(result).toBe('');
+    });
   });
 });
