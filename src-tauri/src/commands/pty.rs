@@ -37,8 +37,14 @@ pub async fn pty_open(
         })
         .map_err(|e| e.to_string())?;
 
+    // v1.49.7 (PR #24 @PatrickRobotham): cross-platform shell fallback.
+    // Windows: %COMSPEC% / cmd.exe; Unix: $SHELL / /bin/bash.
     let shell_path = shell.unwrap_or_else(|| {
-        std::env::var("SHELL").unwrap_or_else(|_| "/bin/bash".into())
+        if cfg!(windows) {
+            std::env::var("COMSPEC").unwrap_or_else(|_| "cmd.exe".into())
+        } else {
+            std::env::var("SHELL").unwrap_or_else(|_| "/bin/bash".into())
+        }
     });
     let mut cmd = CommandBuilder::new(&shell_path);
     if let Some(ref extra_args) = args {

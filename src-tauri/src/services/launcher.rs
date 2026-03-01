@@ -90,18 +90,28 @@ impl ServiceLauncher {
             return Err(LaunchError::AlreadyRunning);
         }
 
-        // Check all dependencies are Online
+        // Check all dependencies are Online.
+        // v1.49.7 (PR #24 @PatrickRobotham): optional dependencies that are not
+        // Online are skipped instead of blocking startup.
         let mut missing = Vec::new();
         for dep_id in &def.depends_on {
             match self.states.get(dep_id) {
                 Some(ServiceState::Online) => {} // Good
                 Some(ServiceState::Failed(err)) => {
+                    // If the failed dependency is optional, skip it
+                    if self.is_optional(dep_id) {
+                        continue;
+                    }
                     return Err(LaunchError::DependencyFailed {
                         service: *dep_id,
                         error: err.clone(),
                     });
                 }
                 _ => {
+                    // If the dependency is optional, skip it
+                    if self.is_optional(dep_id) {
+                        continue;
+                    }
                     missing.push(*dep_id);
                 }
             }
@@ -127,7 +137,8 @@ impl ServiceLauncher {
 
     /// Start all services in topological order.
     ///
-    /// Stops on the first failure -- remaining services stay Offline.
+    /// v1.49.7 (PR #24 @PatrickRobotham): optional services that fail to start
+    /// are skipped with a continue instead of breaking the entire chain.
     /// Returns a vector of (ServiceId, Result) in execution order.
     pub fn start_all(&mut self) -> Vec<(ServiceId, Result<(), LaunchError>)> {
         let order = registry::topological_order();
@@ -138,6 +149,10 @@ impl ServiceLauncher {
             let is_err = result.is_err();
             results.push((id, result));
             if is_err {
+                // Optional services that fail don't block the rest
+                if self.is_optional(&id) {
+                    continue;
+                }
                 break;
             }
         }
@@ -181,5 +196,11 @@ impl ServiceLauncher {
     /// Find a service definition by ID.
     fn find_service_def(&self, id: &ServiceId) -> Option<&ServiceDef> {
         self.registry.iter().find(|def| &def.id == id)
+    }
+
+    /// Check if a service is marked as optional.
+    /// v1.49.7 (PR #24 @PatrickRobotham): supports graceful degradation.
+    fn is_optional(&self, id: &ServiceId) -> bool {
+        self.find_service_def(id).map_or(false, |def| def.optional)
     }
 }

@@ -1,8 +1,18 @@
 use std::process::Command;
 
 /// Check if the tmux binary exists in PATH and return its absolute path.
+///
+/// v1.49.7 (PR #24 @PatrickRobotham): replaced `which` with cross-platform
+/// detection — `command -v` on Unix, `where.exe` on Windows.
 pub fn detect_tmux() -> Option<String> {
-    let output = Command::new("which").arg("tmux").output().ok()?;
+    let output = if cfg!(windows) {
+        Command::new("where.exe").arg("tmux").output().ok()?
+    } else {
+        Command::new("sh")
+            .args(["-c", "command -v tmux"])
+            .output()
+            .ok()?
+    };
     if output.status.success() {
         let path = String::from_utf8_lossy(&output.stdout).trim().to_string();
         if path.is_empty() {
