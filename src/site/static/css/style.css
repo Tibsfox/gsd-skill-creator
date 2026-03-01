@@ -626,15 +626,20 @@
 
 /* ========================= PRINT STYLES ========================= */
 @media print {
+  @page { margin: 2cm; }
+
   .site-header,
   .site-nav,
+  .site-footer,
   .toc,
   .search-overlay,
+  .search-trigger,
   .breadcrumb,
   .skip-link,
   .nav-toggle-label,
   .chapter-nav,
-  .comment-section {
+  .comment-section,
+  .page-tags {
     display: none !important;
   }
 
@@ -645,6 +650,12 @@
     font-size: 12pt;
     line-height: 1.5;
   }
+
+  p, li, blockquote { orphans: 3; widows: 3; }
+
+  h1, h2, h3, h4 { break-after: avoid; }
+
+  pre, .code-block, blockquote, figure, img, table { break-inside: avoid; }
 
   .page-content,
   .essay-layout {
@@ -666,11 +677,7 @@
 
   pre {
     border: 1px solid #ccc;
-    page-break-inside: avoid;
-  }
-
-  h1, h2, h3 {
-    page-break-after: avoid;
+    padding: 0.5em;
   }
 
   .print-only {
