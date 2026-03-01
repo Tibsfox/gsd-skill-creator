@@ -26,6 +26,7 @@ import {
 } from '../../orchestrator/index.js';
 import type { OutputSection } from '../../orchestrator/index.js';
 import { ProjectStateReader } from '../../orchestrator/state/state-reader.js';
+import { computeMilestoneScope } from '../../orchestrator/state/milestone-scope.js';
 import { WorkStateWriter } from '../../orchestrator/work-state/work-state-writer.js';
 import { WorkStateReader } from '../../orchestrator/work-state/work-state-reader.js';
 import { QueueManager } from '../../orchestrator/work-state/queue-manager.js';
@@ -268,13 +269,23 @@ async function handleState(args: string[]): Promise<number> {
     const reader = new ProjectStateReader(planningDir);
     const state = await reader.read();
 
+    // Compute milestone-scoped counts (RC-07 fix)
+    const milestoneScope = computeMilestoneScope(state);
+
     if (pretty) {
       console.log('Project State');
       console.log('=============');
       console.log(`initialized: ${state.initialized}`);
       if (state.position) {
-        console.log(`Phase: ${state.position.phase} of ${state.position.totalPhases} (${state.position.phaseName ?? 'unnamed'})`);
-        console.log(`Plan: ${state.position.plan} of ${state.position.totalPlans}`);
+        if (milestoneScope) {
+          // Milestone-scoped display (RC-07 fix)
+          console.log(`Phase: ${milestoneScope.milestonePhaseIndex} of ${milestoneScope.totalMilestonePhases} (${milestoneScope.milestonePhaseName})`);
+          console.log(`Plans: ${milestoneScope.completedPlans} of ${milestoneScope.totalPlans} complete`);
+        } else {
+          // Fallback to global counts when no milestone context
+          console.log(`Phase: ${state.position.phase} of ${state.position.totalPhases} (${state.position.phaseName ?? 'unnamed'})`);
+          console.log(`Plan: ${state.position.plan} of ${state.position.totalPlans}`);
+        }
         console.log(`Status: ${state.position.status ?? 'unknown'}`);
       }
       console.log(`Phases: ${state.phases.length}`);
@@ -284,7 +295,10 @@ async function handleState(args: string[]): Promise<number> {
       console.log(`Has config: ${state.hasConfig}`);
       console.log(`Mode: ${state.config.mode}`);
     } else {
-      console.log(JSON.stringify(state, null, 2));
+      const output = milestoneScope
+        ? { ...state, milestoneScope }
+        : state;
+      console.log(JSON.stringify(output, null, 2));
     }
 
     return 0;
