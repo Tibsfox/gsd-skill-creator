@@ -136,7 +136,23 @@ GSD-OS is a native desktop application that wraps the entire skill-creator ecosy
 
 ### Prerequisites
 
-**Node.js 18+** and **Rust** (via [rustup](https://rustup.rs/)) are required.
+**Node.js 18+**, **Rust** (via [rustup](https://rustup.rs/)), and **tmux** are required.
+
+```bash
+# macOS
+brew install tmux
+
+# Debian/Ubuntu
+sudo apt install tmux
+
+# Fedora
+sudo dnf install tmux
+
+# Arch
+sudo pacman -S tmux
+```
+
+The embedded terminal spawns a PTY attached to a tmux session. Without tmux installed, opening a terminal window will fail with "No such file or directory".
 
 **Linux** -- Install Tauri system dependencies:
 

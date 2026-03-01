@@ -26,6 +26,7 @@ This guide covers installing the Dynamic Skill Creator for use with Claude Code.
 | **Node.js** | 18.x or higher | `node --version` |
 | **npm** | 8.x or higher | `npm --version` |
 | **Git** | Any recent version | `git --version` |
+| **tmux** | Any recent version | `tmux -V` |
 
 ### Verify Prerequisites
 
@@ -43,6 +44,10 @@ npm --version
 # Check Git is installed
 git --version
 # Expected: git version 2.x.x
+
+# Check tmux is installed (required for desktop terminal)
+tmux -V
+# Expected: tmux 3.x or higher
 ```
 
 ### Install Prerequisites (if needed)
@@ -71,6 +76,23 @@ sudo apt-get install git
 # Windows
 winget install Git.Git
 ```
+
+**tmux** (required for the desktop terminal):
+```bash
+# macOS
+brew install tmux
+
+# Ubuntu/Debian
+sudo apt-get install tmux
+
+# Fedora
+sudo dnf install tmux
+
+# Arch
+sudo pacman -S tmux
+```
+
+> **Note:** tmux is required for the GSD-OS desktop terminal. The embedded terminal spawns a PTY attached to a tmux session. Without tmux, opening a terminal window will fail with "No such file or directory".
 
 ---
 
