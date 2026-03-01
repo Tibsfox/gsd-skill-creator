@@ -23,6 +23,15 @@ import { homedir } from 'node:os';
 /** Schema version for future migration support */
 export const SCAN_STATE_VERSION = 1;
 
+/**
+ * Processing-schema version for watermark invalidation.
+ *
+ * Bump this when processing logic changes (e.g., new fields extracted,
+ * different parsing behavior) to force re-processing of all sessions.
+ * Distinct from SCAN_STATE_VERSION which tracks the state-file format.
+ */
+export const SCAN_SCHEMA_VERSION = 1;
+
 // ============================================================================
 // Zod Schemas
 // ============================================================================
@@ -50,6 +59,8 @@ export const ScanStatsSchema = z.object({
 export const ScanStateSchema = z.object({
   /** Schema version for future migrations */
   version: z.number(),
+  /** Processing-schema version for watermark invalidation (0 = pre-versioning) */
+  schemaVersion: z.number().default(0),
   /** Map of "projectSlug:sessionId" -> watermark */
   sessions: z.record(z.string(), SessionWatermarkSchema),
   /** Projects to exclude from scanning */
@@ -169,6 +180,7 @@ export class ScanStateStore {
   private createEmpty(): ScanState {
     return {
       version: SCAN_STATE_VERSION,
+      schemaVersion: SCAN_SCHEMA_VERSION,
       sessions: {},
       excludeProjects: [],
     };
