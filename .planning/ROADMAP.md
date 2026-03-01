@@ -114,7 +114,12 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   2. Mathematics Department contains concepts for exponential growth/decay, trig functions, complex numbers, and fractal geometry
   3. Any Mathematics Department concept renders correctly in all three systems panels (correct code, correct library bindings)
   4. Math concepts are positioned on the Complex Plane of Experience with valid `complexPlanePosition` values
-**Plans**: TBD
+**Plans**: 5 plans
+  - [ ] 05-01-PLAN.md -- Python panel (math.exp/numpy bindings, readability as mathematical notation, PAN-01/PAN-07/SC-12)
+  - [ ] 05-02-PLAN.md -- C++ panel (cmath/std::exp bindings, performance and precision, PAN-02/PAN-08/SC-13)
+  - [ ] 05-03-PLAN.md -- Java panel (Math.exp bindings, type safety and platform independence, PAN-03)
+  - [ ] 05-04-PLAN.md -- Mathematics Department concepts (7 concepts with complexPlanePosition, cross-references, MATH-01/MATH-03)
+  - [ ] 05-05-PLAN.md -- Integration tests (3 systems panels + 7 math concepts cross-rendering, 9-panel coexistence, MATH-02)
 
 ### Phase 6: Heritage Panels
 **Goal**: All six heritage and frontier panels (Lisp, Pascal, Fortran, Perl, ALGOL, Unison) implement the Panel Interface with their distinctive pedagogical characteristics
@@ -192,7 +197,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 | 2. Rosetta Core Engine | v1.49.8 | 4/4 | Complete | 2026-03-01 |
 | 3. Calibration Engine | v1.49.8 | 4/4 | Complete | 2026-03-01 |
 | 4. College Structure | v1.49.8 | 4/4 | Complete | 2026-03-01 |
-| 5. Systems Panels and Mathematics Dept | v1.49.8 | 0/TBD | Not started | - |
+| 5. Systems Panels and Mathematics Dept | v1.49.8 | 0/5 | Planned | - |
 | 6. Heritage Panels | v1.49.8 | 6/6 | Complete | 2026-03-01 |
 | 7. Cooking Department | v1.49.8 | 0/TBD | Not started | - |
 | 8. Safety Warden and Cross-References | v1.49.8 | 0/TBD | Not started | - |
