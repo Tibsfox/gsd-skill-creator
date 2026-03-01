@@ -53,6 +53,7 @@ interface ChapterEntry {
 
 const HH_CHAPTER_MAP: ChapterEntry[] = [
   { ref: '1.2', chapter: 1, section: '2', topic: 'Voltage, current, resistance', modules: ['01-the-circuit'] },
+  { ref: '1.3', chapter: 1, section: '3', topic: 'Signals', modules: ['03-the-signal'] },
   { ref: '1.4', chapter: 1, section: '4', topic: 'Capacitors and AC circuits', modules: ['02-passive-components'] },
   { ref: '1.5', chapter: 1, section: '5', topic: 'Inductors and transformers', modules: ['02-passive-components'] },
   { ref: '1.6', chapter: 1, section: '6', topic: 'Diodes and diode circuits', modules: ['04-diodes'] },
@@ -206,6 +207,26 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       content: 'Capacitive impedance: Z_C = 1/(jwC). Inductive impedance: Z_L = jwL. RC time constant: tau = RC. Resonant frequency: f_0 = 1/(2*pi*sqrt(LC)). Quality factor: Q = f_0/BW = (1/R)*sqrt(L/C).',
       hhCitation: 'H&H 1.7',
     },
+    {
+      level: DepthLevel.Practical,
+      content: 'An inductor resists sudden changes in current by storing energy in its magnetic field. The RL time constant (inductance divided by resistance) determines how fast current builds -- after one time constant, current reaches about 63% of its final value.',
+      hhCitation: 'H&H 1.5',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'RL transient: I(t) = (V/R)*(1 - e^(-t*R/L)). Time constant: tau = L/R. Inductor voltage: V_L = L*dI/dt. Energy stored: E = (1/2)*L*I^2.',
+      hhCitation: 'H&H 1.5',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'A transformer uses magnetic coupling to transfer energy between coils. The voltage ratio equals the turns ratio: more turns means higher voltage.',
+      hhCitation: 'H&H 1.5',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'Transformer voltage ratio: V2/V1 = N2/N1. Impedance transformation: Z_reflected = (N1/N2)^2 * Z_load. Power conservation: V1*I1 = V2*I2 (ideal).',
+      hhCitation: 'H&H 1.5',
+    },
   ],
 
   // ---- 03-the-signal: H&H 1.7, 8.11 ----
@@ -229,6 +250,16 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Mathematical,
       content: 'Transfer function magnitude: |H(jw)| = V_out/V_in. Decibels: dB = 20*log10(|H|). Johnson noise voltage: V_n = sqrt(4*k*T*R*BW). SNR = signal_power/noise_power. First-order rolloff: -20dB/decade = -6dB/octave.',
       hhCitation: 'H&H 8.11',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'Signal sources produce waveforms -- sine, square, triangle -- each with different RMS values even at the same peak amplitude. The square wave has the highest RMS because it spends all its time at peak.',
+      hhCitation: 'H&H 1.3',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'Waveform RMS values for peak amplitude A: sine Vrms = A/sqrt(2), square Vrms = A, triangle Vrms = A/sqrt(3). Crest factor CF = Vpeak/Vrms: sine CF = sqrt(2), square CF = 1, triangle CF = sqrt(3).',
+      hhCitation: 'H&H 1.3',
     },
   ],
 
