@@ -149,7 +149,14 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   3. Given the scenario "user's cookies came out flat," the baking science wing provides a concept-grounded diagnosis (butter ratio, chill time)
   4. A novice user can complete a try-session for "first meal" from start to finish
   5. Each wing has at least one calibration rule that prevents adjustment below a safety boundary
-**Plans**: TBD
+**Plans**: 7 plans
+  - [ ] 07-01-PLAN.md -- Food Science wing (6 concepts: Maillard, emulsification, protein denaturation, starch gelatinization, caramelization, fermentation)
+  - [ ] 07-02-PLAN.md -- Thermodynamics wing (4 concepts: heat transfer, specific heat, altitude adjustments, Newton's cooling)
+  - [ ] 07-03-PLAN.md -- Nutrition + Technique wings (3+3 concepts: macronutrients, bioavailability, prep-nutrition; dry/wet/combination heat)
+  - [ ] 07-04-PLAN.md -- Baking Science wing (4 concepts: baker's ratios, gluten development, yeast biology, sugar chemistry)
+  - [ ] 07-05-PLAN.md -- Food Safety + Home Economics wings (4+4 concepts: danger zone, contamination, storage, allergens; meal planning, budget, pantry, preservation)
+  - [ ] 07-06-PLAN.md -- Cooking calibration models (4 DomainCalibrationModels: temperature, timing, seasoning, texture)
+  - [ ] 07-07-PLAN.md -- Integration tests + first-meal try-session (all 5 success criteria verification)
 
 ### Phase 8: Safety Warden and Cross-References
 **Goal**: Absolute food safety boundaries are enforced across all three modes, and Math-Cooking concept bridges navigate correctly in both directions
@@ -199,7 +206,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 | 4. College Structure | v1.49.8 | 4/4 | Complete | 2026-03-01 |
 | 5. Systems Panels and Mathematics Dept | v1.49.8 | 0/5 | Planned | - |
 | 6. Heritage Panels | v1.49.8 | 6/6 | Complete | 2026-03-01 |
-| 7. Cooking Department | v1.49.8 | 0/TBD | Not started | - |
+| 7. Cooking Department | v1.49.8 | 0/7 | Planned | - |
 | 8. Safety Warden and Cross-References | v1.49.8 | 0/TBD | Not started | - |
 | 9. Integration Bridge | v1.49.8 | 0/TBD | Not started | - |
 | 10. Test Suite and Verification | v1.49.8 | 0/TBD | Not started | - |
