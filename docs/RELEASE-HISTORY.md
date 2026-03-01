@@ -1,11 +1,12 @@
 # Release History
 
-52 milestones shipped across 467 phases, 1,109 plans, ~564K LOC, and 19,222 tests.
+53 milestones shipped across 467 phases, 1,109 plans, ~564K LOC, and 19,201 tests.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned.
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
+| [v1.49.6](release-notes/v1.49.6/) | macOS Compatibility & Dependency Hardening | 2026-03-01 | — | — | |
 | [v1.49.5](release-notes/v1.49.5/) | Project Filesystem Reorganization | 2026-02-27 | 8 | 17 | [retro](release-notes/v1.49.5/RETROSPECTIVE.md), [lessons](release-notes/v1.49.5/LESSONS-LEARNED.md) |
 | [v1.49.4](release-notes/v1.49.4/) | Filesystem Management Strategy | 2026-02-27 | 3 | 7 | |
 | [v1.49.3](release-notes/v1.49.3/) | GSD-OS Desktop Polish (Patch) | 2026-02-27 | — | — | |
