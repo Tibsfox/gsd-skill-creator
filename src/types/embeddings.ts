@@ -43,6 +43,8 @@ export interface CacheEntry {
   contentHash: string;
   /** ISO date string when entry was created */
   createdAt: string;
+  /** Embedding method: 'model' for transformer, 'heuristic' for TF-IDF fallback. Optional for backward compat with pre-migration entries. */
+  method?: 'model' | 'heuristic';
 }
 
 /**
