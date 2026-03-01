@@ -332,6 +332,33 @@ describe('EmbeddingService', () => {
     });
   });
 
+  describe('isFallbackMode (QUAL-05)', () => {
+    it('isFallbackMode() returns true when service is disabled', () => {
+      const service = EmbeddingService.createFresh({
+        enabled: false,
+        cacheDir: testCacheDir,
+      });
+      expect(service.isFallbackMode()).toBe(true);
+    });
+
+    it('isFallbackMode() matches isUsingFallback()', () => {
+      const service = EmbeddingService.createFresh({
+        enabled: false,
+        cacheDir: testCacheDir,
+      });
+      expect(service.isFallbackMode()).toBe(service.isUsingFallback());
+    });
+
+    it('isFallbackMode() returns false for default config (before init failure)', () => {
+      // Create service with default config (enabled: true)
+      // Before init, fallbackMode is false
+      const service = EmbeddingService.createFresh({
+        cacheDir: testCacheDir,
+      });
+      expect(service.isFallbackMode()).toBe(false);
+    });
+  });
+
   describe('Status', () => {
     it('getStatus() returns correct state', () => {
       const service = EmbeddingService.createFresh({
