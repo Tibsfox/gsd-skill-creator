@@ -486,7 +486,171 @@ const lab5: Lab = {
 };
 
 // ============================================================================
+// Lab 6: Metastability and Synchronizers (m8-lab-06)
+// ============================================================================
+
+const lab6: Lab = {
+  id: 'm8-lab-06',
+  title: 'Metastability and Synchronizers',
+  steps: [
+    {
+      instruction:
+        'Consider a D flip-flop sampling an asynchronous signal. If the data input changes within the setup/hold window around the clock edge, the flip-flop enters a metastable state where the output hovers between 0 and 1. This is metastability -- the digital equivalent of balancing a ball on a knife edge.',
+      expected_observation:
+        'The metastable state eventually resolves to either 0 or 1, but the resolution time is probabilistic. The probability of remaining metastable decreases exponentially with the time allowed for resolution.',
+      learn_note:
+        'Metastability occurs whenever asynchronous signals cross clock domains. It cannot be eliminated, only made statistically improbable enough to be safe. The resolution time constant tau is a property of the flip-flop technology. -- H&H 10.4 [@HH-10.3-10.5]',
+    },
+    {
+      instruction:
+        'Calculate the Mean Time Between Failures (MTBF) for a single synchronizer flip-flop: fClk = 100MHz, fData = 10MHz, tau = 50ps, tResolve = 2ns (one clock period at 500MHz). MTBF = exp(tResolve/tau) / (fClk * fData) = exp(2e-9/50e-12) / (100e6 * 10e6).',
+      expected_observation:
+        'For a single synchronizer: tResolve/tau = 40, exp(40) = 2.35e17. MTBF = 2.35e17 / (1e15) = 235 seconds -- only about 4 minutes! At 100MHz clock and 10MHz data rates, metastability failures happen frequently.',
+      learn_note:
+        'The MTBF formula is MTBF = exp(t_resolve/tau) / (fClk * fData). The exponential dependence on t_resolve/tau means small changes in resolution time cause massive MTBF changes. Doubling t_resolve squares the exponential factor. -- H&H 10.4 [@HH-10.3-10.5]',
+    },
+    {
+      instruction:
+        'Add a second synchronizer flip-flop in series (two-stage synchronizer). The first FF gets one clock period to resolve, then the second FF re-samples the (now stable) output. Two-stage MTBF = exp(2*tResolve/tau) / (fClk * fData). Compare mtbf2 to mtbf1.',
+      expected_observation:
+        'Two-stage MTBF: exp(80) / (1e15) = 5.54e19 seconds -- over 1.7 trillion years! The two-stage synchronizer is astronomically more reliable than a single stage. This is why two-stage synchronizers are the standard practice.',
+      learn_note:
+        'Two-stage synchronizers are the industry standard for crossing clock domains. Three stages are used in radiation-hardened or safety-critical designs. The cost is just one extra clock cycle of latency -- a trivial price for reliable operation. -- H&H 10.4 [@HH-10.3-10.5]',
+    },
+  ],
+  verify: () => {
+    // Mathematical MTBF model for metastability
+    const fClk = 100e6;     // 100 MHz
+    const fData = 10e6;     // 10 MHz asynchronous data rate
+    const tau = 50e-12;     // 50 ps resolution time constant
+    const tResolve = 2e-9;  // 2 ns resolution window
+
+    // Single synchronizer MTBF
+    const mtbf1 = Math.exp(tResolve / tau) / (fClk * fData);
+
+    // Two-stage synchronizer MTBF
+    const mtbf2 = Math.exp(2 * tResolve / tau) / (fClk * fData);
+
+    // Two-stage must be vastly better (> 1e6 times better)
+    if (mtbf2 <= mtbf1 * 1e6) return false;
+
+    // Single stage MTBF ~ 235 seconds (about 4 minutes) -- not great
+    // This demonstrates why single-stage synchronizers are inadequate
+    if (mtbf1 < 100) return false;   // at least a couple minutes
+    if (mtbf1 > 1e6) return false;   // sanity: shouldn't be millions of seconds
+
+    // Two-stage should be astronomically large
+    if (mtbf2 < 1e15) return false; // at least millions of years
+
+    return true;
+  },
+};
+
+// ============================================================================
+// Lab 7: FIFO Concept (m8-lab-07)
+// ============================================================================
+
+const lab7: Lab = {
+  id: 'm8-lab-07',
+  title: 'FIFO Concept',
+  steps: [
+    {
+      instruction:
+        'Build a 4-deep FIFO (first-in-first-out) buffer using a chain of 4 D flip-flops, reusing the shift register pattern from Lab 4. In a FIFO, data enters one end and exits the other in the same order -- the first item written is the first item read.',
+      expected_observation:
+        'The 4-stage D flip-flop chain acts as a simple FIFO: serial data shifts through from entry (FF0) to exit (FF3). After 4 clock cycles, the first bit written reaches the output end.',
+      learn_note:
+        'FIFOs are fundamental to digital systems. They connect subsystems running at different speeds by buffering data between producer and consumer. The depth (number of entries) determines how much speed mismatch the FIFO can absorb. -- H&H 10.5 [@HH-10.3-10.5]',
+    },
+    {
+      instruction:
+        'Write the sequence [true, false, true, true] into the FIFO over 4 clock cycles. After all 4 writes, read the FIFO from the output end (FF3). The data should emerge in the same order: first written (true) is first available at the output.',
+      expected_observation:
+        'After 4 clocks: FF3=true (first written, shifted furthest), FF2=false (second), FF1=true (third), FF0=true (fourth, just entered). Reading from FF3 to FF0 recovers the original write order -- FIFO behavior confirmed.',
+      learn_note:
+        'Real FIFOs use read and write pointers instead of shifting all data. Circular buffer FIFOs use dual-port SRAM and independent read/write clocks, enabling asynchronous clock domain crossing. The shift register approach here illustrates the ordering principle. -- H&H 10.5 [@HH-10.3-10.5]',
+    },
+    {
+      instruction:
+        'Compare FIFO (first-in-first-out) to stack/LIFO (last-in-first-out). In a LIFO, writing [A, B, C, D] and then reading gives [D, C, B, A] -- reversed order. In a FIFO, reading gives [A, B, C, D] -- same order. FIFOs preserve temporal order; stacks reverse it.',
+      expected_observation:
+        'FIFO: write order = read order (queue behavior). LIFO: write order reversed on read (stack behavior). Both are essential data structures implemented in hardware across all digital systems.',
+      learn_note:
+        'FIFO applications: UART transmit/receive buffers, DMA transfer queues, CPU instruction prefetch, video frame buffers, and network packet buffers. Typical depths range from 16 entries (UART) to millions (video). -- H&H 10.5 [@HH-10.3-10.5]',
+    },
+  ],
+  verify: () => {
+    // Use D flip-flop chain (same as lab4 shift register) to demonstrate FIFO
+    const ffStates: FlipFlopState[] = [
+      { Q: false, Qbar: true }, // FF0 (write end)
+      { Q: false, Qbar: true }, // FF1
+      { Q: false, Qbar: true }, // FF2
+      { Q: false, Qbar: true }, // FF3 (read end)
+    ];
+
+    // Write sequence: [true, false, true, true]
+    const writeData = [true, false, true, true];
+
+    for (let clk = 0; clk < writeData.length; clk++) {
+      // Capture current Q values before updates (synchronous behavior)
+      const prevQ = ffStates.map((ff) => ff.Q);
+
+      // FF0 gets serial write data
+      ffStates[0] = evaluateFlipFlop(
+        FlipFlopType.D,
+        { D: writeData[clk] },
+        ffStates[0],
+        'rising',
+      );
+
+      // FF1 gets previous Q of FF0
+      ffStates[1] = evaluateFlipFlop(
+        FlipFlopType.D,
+        { D: prevQ[0] },
+        ffStates[1],
+        'rising',
+      );
+
+      // FF2 gets previous Q of FF1
+      ffStates[2] = evaluateFlipFlop(
+        FlipFlopType.D,
+        { D: prevQ[1] },
+        ffStates[2],
+        'rising',
+      );
+
+      // FF3 gets previous Q of FF2
+      ffStates[3] = evaluateFlipFlop(
+        FlipFlopType.D,
+        { D: prevQ[2] },
+        ffStates[3],
+        'rising',
+      );
+    }
+
+    // After writing [true, false, true, true]:
+    // FF3 = true  (first written, shifted furthest -- FIFO output)
+    // FF2 = false (second written)
+    // FF1 = true  (third written)
+    // FF0 = true  (fourth written, just entered)
+    // Reading from FF3 -> FF0 gives the FIFO output order: true, false, true, true
+    if (ffStates[3].Q !== true) return false;   // First in = first out
+    if (ffStates[2].Q !== false) return false;  // Second in
+    if (ffStates[1].Q !== true) return false;   // Third in
+    if (ffStates[0].Q !== true) return false;   // Fourth in (last written)
+
+    // Verify FIFO order preservation: read order matches write order
+    const readOrder = [ffStates[3].Q, ffStates[2].Q, ffStates[1].Q, ffStates[0].Q];
+    for (let i = 0; i < writeData.length; i++) {
+      if (readOrder[i] !== writeData[i]) return false;
+    }
+
+    return true;
+  },
+};
+
+// ============================================================================
 // Export all labs
 // ============================================================================
 
-export const labs: Lab[] = [lab1, lab2, lab3, lab4, lab5];
+export const labs: Lab[] = [lab1, lab2, lab3, lab4, lab5, lab6, lab7];
