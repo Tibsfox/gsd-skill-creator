@@ -475,6 +475,73 @@ Content for page ${i} with **bold** and *italic* text.
       expect(result.pagesSkipped).toBe(0);
     });
 
+    it('generates .htaccess when wordpress config present', async () => {
+      const wpSiteYaml = `title: Test Site
+description: A test site
+url: https://example.com
+author: Author
+language: en
+agent:
+  llms_txt: true
+  llms_full: true
+  agents_md: true
+  schema_org: true
+  markdown_mirror: true
+wordpress:
+  url: https://example.com/blog
+  api: https://example.com/blog/wp-json/wp/v2
+  comments_enabled: true
+  comments_moderation: true
+`;
+      const fs = createMockFS({
+        'data/site.yaml': wpSiteYaml,
+        'data/navigation.yaml': navYaml,
+        'templates/page.html': pageTemplate,
+        'content/a.md': samplePage,
+      });
+
+      await build({
+        contentDir: 'content',
+        templateDir: 'templates',
+        dataDir: 'data',
+        staticDir: 'static',
+        outputDir: 'build',
+        readFile: fs.readFile,
+        writeFile: fs.writeFile,
+        walkDir: fs.walkDir,
+        ensureDir: fs.ensureDir,
+        copyDir: fs.copyDir,
+      });
+
+      expect(fs.files.has('build/.htaccess')).toBe(true);
+      const htaccess = fs.files.get('build/.htaccess')!;
+      expect(htaccess).toContain('RewriteEngine');
+    });
+
+    it('does not generate .htaccess when wordpress config absent', async () => {
+      const fs = createMockFS({
+        'data/site.yaml': siteYaml,
+        'data/navigation.yaml': navYaml,
+        'templates/page.html': pageTemplate,
+        'content/a.md': samplePage,
+      });
+
+      await build({
+        contentDir: 'content',
+        templateDir: 'templates',
+        dataDir: 'data',
+        staticDir: 'static',
+        outputDir: 'build',
+        readFile: fs.readFile,
+        writeFile: fs.writeFile,
+        walkDir: fs.walkDir,
+        ensureDir: fs.ensureDir,
+        copyDir: fs.copyDir,
+      });
+
+      expect(fs.files.has('build/.htaccess')).toBe(false);
+    });
+
     it('warns for pages with missing frontmatter', async () => {
       const fs = createMockFS({
         'data/site.yaml': siteYaml,

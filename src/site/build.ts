@@ -22,7 +22,7 @@ import {
 } from './agents/index.js';
 import { buildSearchIndex } from './search.js';
 import { generateAtomFeed } from './feed.js';
-import { generateSitemap, generateRobotsTxt } from './sitemap.js';
+import { generateSitemap, generateRobotsTxt, generateHtaccess } from './sitemap.js';
 
 /* ---- Single page processing ---- */
 
@@ -240,7 +240,13 @@ export async function build(options: BuildOptions): Promise<BuildResult> {
   const robotsTxt = generateRobotsTxt(siteConfig);
   await writeFile(`${options.outputDir}/robots.txt`, robotsTxt);
 
-  // 9. Copy static assets
+  // 9. Generate .htaccess for WordPress coexistence
+  if (siteConfig.wordpress) {
+    const htaccess = generateHtaccess(siteConfig);
+    await writeFile(`${options.outputDir}/.htaccess`, htaccess);
+  }
+
+  // 10. Copy static assets
   try {
     await copyDir(options.staticDir, `${options.outputDir}/assets`);
   } catch {
