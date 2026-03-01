@@ -92,9 +92,9 @@ into every other layer of the ecosystem.
 
 ## How to Approach It
 
-Start with the [Complex Plane of Experience](foundations/complex-plane.md) document if
+Start with the [Complex Plane of Experience](complex-plane.md) document if
 you want to understand the organizing framework before diving into the mathematics. The
-[Eight-Layer Progression](foundations/eight-layer-progression.md) provides a reading
+[Eight-Layer Progression](eight-layer-progression.md) provides a reading
 guide that maps each layer to estimated time investment and suggests which sections to
 prioritize based on your background.
 
@@ -114,14 +114,14 @@ the material unnecessarily difficult.
 
 The mathematical foundations are Layer 1 of the five-layer educational model. They
 provide the formal grounding that the principles layer (Layer 2) draws on. When the
-[AMIGA Principle](principles/amiga-principle.md) describes architectural leverage, the
+[AMIGA Principle](../principles/amiga-principle.md) describes architectural leverage, the
 mathematical notion of composition from category theory gives that principle formal
-precision. When [progressive disclosure](principles/progressive-disclosure.md) describes
+precision. When [progressive disclosure](../principles/progressive-disclosure.md) describes
 three reading speeds, the information-theoretic notion of channel capacity explains why
 that design works.
 
 At the application layer (Layer 4), the mathematics appears directly. The
-[Electronics Educational Pack](applications/educational-packs.md) uses trigonometry
+[Electronics Educational Pack](../applications/educational-packs.md) uses trigonometry
 and complex analysis for circuit design. The Foundational Knowledge Packs teach
 subjects ranging from pre-K through college, with mathematical concepts appearing at
 every level. The eight-layer progression is itself a demonstration of progressive
@@ -133,6 +133,6 @@ disclosure: each layer reveals exactly what the next layer needs, nothing more.
 Read the full textbook: [*The Space Between*](https://tibsfox.com/media/The_Space_Between.pdf) (PDF, 923 pages).
 
 For a structured reading guide, see the
-[Eight-Layer Progression](foundations/eight-layer-progression.md).
+[Eight-Layer Progression](eight-layer-progression.md).
 For the organizing framework that structures the entire book, see the
-[Complex Plane of Experience](foundations/complex-plane.md).
+[Complex Plane of Experience](complex-plane.md).
