@@ -16,7 +16,10 @@ export interface EvaluationContext {
   crossSessionCount?: number;
 }
 
-/** Default promotion criteria */
+/** @justification Type: Accepted heuristic. minScore 0.3 is the lowest
+ * composite score at which an observation has enough signal (tool calls,
+ * duration, file activity) to justify persistence. Cross-session threshold
+ * of 2 (line 88) prevents single-occurrence noise from being promoted. */
 export const DEFAULT_PROMOTION_CRITERIA = {
   minScore: 0.3,
 } as const;
