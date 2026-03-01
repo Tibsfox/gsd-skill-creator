@@ -8,7 +8,7 @@ last_plan_completed: "07-07"
 progress:
   total_phases: 10
   completed_phases: 7
-  total_plans: 36
+  total_plans: 38
   completed_plans: 34
 ---
 
