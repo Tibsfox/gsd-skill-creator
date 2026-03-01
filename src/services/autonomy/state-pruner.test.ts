@@ -447,4 +447,62 @@ describe('pruneState', () => {
       expect(writtenContent['STATE.md']).toContain('STATE-ARCHIVE-');
     }
   });
+
+  it('should handle large phase numbers (e.g., 508) as currentCheckpoint', async () => {
+    // Build a state with stale entries at phase 500 and current checkpoint at 508
+    const lines: string[] = [];
+    lines.push('---');
+    lines.push('milestone: v1.55');
+    lines.push('status: executing');
+    lines.push('---');
+    lines.push('');
+    lines.push('# Project State');
+    lines.push('');
+    lines.push('## Project Reference');
+    lines.push('');
+    lines.push('See: .planning/PROJECT.md');
+    lines.push('');
+    lines.push('## Current Position');
+    lines.push('');
+    lines.push('Phase: 508 of 518');
+    lines.push('');
+    lines.push('## Performance Metrics');
+    lines.push('');
+    // Phase 500 content -- should be stale relative to checkpoint 508
+    lines.push('Phase: 500 metrics here');
+    // Pad to exceed soft limit
+    for (let i = 0; i < 65; i++) {
+      lines.push(`- metric line ${i}`);
+    }
+    lines.push('');
+    lines.push('## Session Continuity');
+    lines.push('');
+    lines.push('Last session: 2026-03-01');
+    const content = lines.join('\n') + '\n';
+
+    const readFn = vi.fn().mockResolvedValue(content);
+    const writeFn = vi.fn().mockResolvedValue(undefined);
+
+    const largePhaseState = {
+      milestone: 'v1.55',
+      status: 'RUNNING' as const,
+      current_subversion: 508,
+      total_subversions: 100,
+      checkpoints: [],
+      started_at: '2026-03-01T00:00:00.000Z',
+      updated_at: '2026-03-01T08:00:00.000Z',
+    };
+
+    const result = await pruneState(
+      'STATE.md',
+      'archive/',
+      largePhaseState,
+      { readFile: readFn, writeFile: writeFn }
+    );
+
+    // The Performance Metrics section (checkpoint=500) should be stale relative to 508
+    expect(result.pruned).toBe(true);
+    expect(result.linesAfter).toBeLessThan(result.linesBefore);
+    expect(result.archivePath).toContain('STATE-ARCHIVE-508');
+  });
 });
