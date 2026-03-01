@@ -21,11 +21,42 @@ describe('Cooking calibration models', () => {
       expect(adj.oven_temp).toBeGreaterThan(0);
     });
 
+    it('returns small fixed adjustment for miss direction', () => {
+      const delta: ComparisonDelta = { category: 'temperature', magnitude: 1, direction: 'miss' };
+      const adj = temperatureModel.computeAdjustment(delta);
+      expect(adj.oven_temp).toBe(5);
+    });
+
     it('returns confidence between 0 and 1', () => {
       const delta: ComparisonDelta = { category: 'temperature', magnitude: 1, direction: 'over' };
       const conf = temperatureModel.confidence(delta);
       expect(conf).toBeGreaterThanOrEqual(0);
       expect(conf).toBeLessThanOrEqual(1);
+    });
+
+    it('confidence for miss direction is 0.4', () => {
+      const delta: ComparisonDelta = { category: 'temperature', magnitude: 1, direction: 'miss' };
+      const conf = temperatureModel.confidence(delta);
+      expect(conf).toBe(0.4);
+    });
+
+    it('caps magnitude scaling at 2', () => {
+      const delta: ComparisonDelta = { category: 'temperature', magnitude: 5, direction: 'over' };
+      const adj = temperatureModel.computeAdjustment(delta);
+      // base=20, scaled=20*min(5,2)=40, so oven_temp=-40
+      expect(adj.oven_temp).toBe(-40);
+    });
+
+    it('includes surface_temp adjustment for over direction', () => {
+      const delta: ComparisonDelta = { category: 'temperature', magnitude: 1, direction: 'over' };
+      const adj = temperatureModel.computeAdjustment(delta);
+      expect(adj.surface_temp).toBeLessThan(0);
+    });
+
+    it('includes surface_temp adjustment for under direction', () => {
+      const delta: ComparisonDelta = { category: 'temperature', magnitude: 1, direction: 'under' };
+      const adj = temperatureModel.computeAdjustment(delta);
+      expect(adj.surface_temp).toBeGreaterThan(0);
     });
 
     it('has poultry_internal_temp safety boundary at 165F absolute', () => {
@@ -63,11 +94,42 @@ describe('Cooking calibration models', () => {
       expect(adj.cook_time).toBeLessThan(0);
     });
 
+    it('returns small fixed adjustment for miss direction', () => {
+      const delta: ComparisonDelta = { category: 'timing', magnitude: 1, direction: 'miss' };
+      const adj = timingModel.computeAdjustment(delta);
+      expect(adj.cook_time).toBe(5);
+    });
+
+    it('includes rest_time in under adjustments', () => {
+      const delta: ComparisonDelta = { category: 'timing', magnitude: 1, direction: 'under' };
+      const adj = timingModel.computeAdjustment(delta);
+      expect(adj.rest_time).toBeGreaterThan(0);
+    });
+
+    it('includes rest_time in over adjustments', () => {
+      const delta: ComparisonDelta = { category: 'timing', magnitude: 1, direction: 'over' };
+      const adj = timingModel.computeAdjustment(delta);
+      expect(adj.rest_time).toBeLessThan(0);
+    });
+
     it('returns confidence between 0 and 1', () => {
       const delta: ComparisonDelta = { category: 'timing', magnitude: 1, direction: 'under' };
       const conf = timingModel.confidence(delta);
       expect(conf).toBeGreaterThanOrEqual(0);
       expect(conf).toBeLessThanOrEqual(1);
+    });
+
+    it('confidence for miss direction is 0.5', () => {
+      const delta: ComparisonDelta = { category: 'timing', magnitude: 1, direction: 'miss' };
+      const conf = timingModel.confidence(delta);
+      expect(conf).toBe(0.5);
+    });
+
+    it('caps magnitude scaling at 2', () => {
+      const delta: ComparisonDelta = { category: 'timing', magnitude: 5, direction: 'under' };
+      const adj = timingModel.computeAdjustment(delta);
+      // factor=0.125*min(5,2)=0.25, cook_time=0.25*100=25
+      expect(adj.cook_time).toBe(25);
     });
 
     it('has danger_zone_time safety boundary at 120 minutes absolute', () => {
@@ -83,6 +145,28 @@ describe('Cooking calibration models', () => {
       const delta: ComparisonDelta = { category: 'seasoning', magnitude: 1, direction: 'under' };
       const adj = seasoningModel.computeAdjustment(delta);
       expect(adj.salt_amount).toBeGreaterThan(0);
+    });
+
+    it('returns negative seasoning adjustment for over direction (too salty)', () => {
+      const delta: ComparisonDelta = { category: 'seasoning', magnitude: 1, direction: 'over' };
+      const adj = seasoningModel.computeAdjustment(delta);
+      expect(adj.salt_amount).toBeLessThan(0);
+      expect(adj.spice_amount).toBeLessThan(0);
+      expect(adj.acid_amount).toBeLessThan(0);
+    });
+
+    it('returns small fixed adjustment for miss direction', () => {
+      const delta: ComparisonDelta = { category: 'seasoning', magnitude: 1, direction: 'miss' };
+      const adj = seasoningModel.computeAdjustment(delta);
+      expect(adj.salt_amount).toBe(1);
+      expect(adj.spice_amount).toBe(1);
+    });
+
+    it('includes spice_amount and acid_amount in under adjustments', () => {
+      const delta: ComparisonDelta = { category: 'seasoning', magnitude: 1, direction: 'under' };
+      const adj = seasoningModel.computeAdjustment(delta);
+      expect(adj.spice_amount).toBeGreaterThan(0);
+      expect(adj.acid_amount).toBeGreaterThan(0);
     });
 
     it('uses logarithmic scaling (adjustment decreases with higher magnitude)', () => {
@@ -103,6 +187,26 @@ describe('Cooking calibration models', () => {
       expect(conf).toBeLessThanOrEqual(1);
     });
 
+    it('confidence for over direction is bounded', () => {
+      const delta: ComparisonDelta = { category: 'seasoning', magnitude: 1, direction: 'over' };
+      const conf = seasoningModel.confidence(delta);
+      expect(conf).toBeGreaterThanOrEqual(0);
+      expect(conf).toBeLessThanOrEqual(0.7);
+    });
+
+    it('confidence for miss direction is 0.4', () => {
+      const delta: ComparisonDelta = { category: 'seasoning', magnitude: 1, direction: 'miss' };
+      const conf = seasoningModel.confidence(delta);
+      expect(conf).toBe(0.4);
+    });
+
+    it('has sodium_daily_max safety boundary at 2300mg', () => {
+      const boundary = seasoningModel.safetyBoundaries.find(b => b.parameter === 'sodium_daily_max');
+      expect(boundary).toBeDefined();
+      expect(boundary!.limit).toBe(2300);
+      expect(boundary!.type).toBe('absolute');
+    });
+
     it('has at least one absolute safety boundary', () => {
       const absolute = seasoningModel.safetyBoundaries.filter(b => b.type === 'absolute');
       expect(absolute.length).toBeGreaterThanOrEqual(1);
@@ -117,11 +221,61 @@ describe('Cooking calibration models', () => {
       expect(adj.moisture_amount).toBeGreaterThan(0);
     });
 
+    it('returns positive heat and time for under (too wet/raw) direction', () => {
+      const delta: ComparisonDelta = { category: 'texture', magnitude: 1, direction: 'under' };
+      const adj = textureModel.computeAdjustment(delta);
+      expect(adj.heat_level).toBeGreaterThan(0);
+      expect(adj.cook_time).toBeGreaterThan(0);
+      expect(adj.moisture_amount).toBeLessThan(0);
+      expect(adj.fat_amount).toBe(0);
+    });
+
+    it('returns small fixed adjustment for miss direction', () => {
+      const delta: ComparisonDelta = { category: 'texture', magnitude: 1, direction: 'miss' };
+      const adj = textureModel.computeAdjustment(delta);
+      expect(adj.heat_level).toBe(5);
+      expect(adj.cook_time).toBe(3);
+    });
+
+    it('over direction includes fat_amount and cook_time adjustments', () => {
+      const delta: ComparisonDelta = { category: 'texture', magnitude: 1, direction: 'over' };
+      const adj = textureModel.computeAdjustment(delta);
+      expect(adj.fat_amount).toBeGreaterThan(0);
+      expect(adj.cook_time).toBeLessThan(0);
+    });
+
+    it('caps magnitude scaling at 2', () => {
+      const delta: ComparisonDelta = { category: 'texture', magnitude: 5, direction: 'over' };
+      const adj = textureModel.computeAdjustment(delta);
+      // base=15, scaled=15*min(5,2)=30
+      expect(adj.heat_level).toBe(-30);
+    });
+
     it('returns confidence between 0 and 1', () => {
       const delta: ComparisonDelta = { category: 'texture', magnitude: 1, direction: 'over' };
       const conf = textureModel.confidence(delta);
       expect(conf).toBeGreaterThanOrEqual(0);
       expect(conf).toBeLessThanOrEqual(1);
+    });
+
+    it('confidence for under direction is bounded at 0.7', () => {
+      const delta: ComparisonDelta = { category: 'texture', magnitude: 1, direction: 'under' };
+      const conf = textureModel.confidence(delta);
+      expect(conf).toBeGreaterThanOrEqual(0);
+      expect(conf).toBeLessThanOrEqual(0.7);
+    });
+
+    it('confidence for miss direction is 0.4', () => {
+      const delta: ComparisonDelta = { category: 'texture', magnitude: 1, direction: 'miss' };
+      const conf = textureModel.confidence(delta);
+      expect(conf).toBe(0.4);
+    });
+
+    it('has minimum_internal_temp safety boundary at 145F', () => {
+      const boundary = textureModel.safetyBoundaries.find(b => b.parameter === 'minimum_internal_temp');
+      expect(boundary).toBeDefined();
+      expect(boundary!.limit).toBe(145);
+      expect(boundary!.type).toBe('absolute');
     });
 
     it('has at least one absolute safety boundary', () => {
