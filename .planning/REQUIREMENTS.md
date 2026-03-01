@@ -43,12 +43,12 @@ Requirements for Cooking With Claude milestone. Each maps to roadmap phases.
 
 ### Calibration Engine
 
-- [ ] **CAL-01**: Universal Observe→Compare→Adjust→Record loop completes full cycle
-- [ ] **CAL-02**: CalibrationModel interface supports domain-specific science models
-- [ ] **CAL-03**: Delta persistence — calibration deltas survive session restart
-- [ ] **CAL-04**: Profile synthesis — multiple deltas combine into coherent user profile
-- [ ] **CAL-05**: Confidence scoring — repeated consistent feedback increases confidence
-- [ ] **CAL-06**: Bounded adjustment — no single calibration step changes parameters by more than 20%
+- [x] **CAL-01**: Universal Observe→Compare→Adjust→Record loop completes full cycle
+- [x] **CAL-02**: CalibrationModel interface supports domain-specific science models
+- [x] **CAL-03**: Delta persistence — calibration deltas survive session restart
+- [x] **CAL-04**: Profile synthesis — multiple deltas combine into coherent user profile
+- [x] **CAL-05**: Confidence scoring — repeated consistent feedback increases confidence
+- [x] **CAL-06**: Bounded adjustment — no single calibration step changes parameters by more than 20%
 
 ### Cooking Department
 
@@ -125,12 +125,12 @@ Requirements for Cooking With Claude milestone. Each maps to roadmap phases.
 | CORE-02 | Phase 2: Rosetta Core Engine | Pending |
 | CORE-03 | Phase 2: Rosetta Core Engine | Pending |
 | CORE-04 | Phase 2: Rosetta Core Engine | Pending |
-| CAL-01 | Phase 3: Calibration Engine | Pending |
-| CAL-02 | Phase 3: Calibration Engine | Pending |
-| CAL-03 | Phase 3: Calibration Engine | Pending |
-| CAL-04 | Phase 3: Calibration Engine | Pending |
-| CAL-05 | Phase 3: Calibration Engine | Pending |
-| CAL-06 | Phase 3: Calibration Engine | Pending |
+| CAL-01 | Phase 3: Calibration Engine | Complete |
+| CAL-02 | Phase 3: Calibration Engine | Complete |
+| CAL-03 | Phase 3: Calibration Engine | Complete |
+| CAL-04 | Phase 3: Calibration Engine | Complete |
+| CAL-05 | Phase 3: Calibration Engine | Complete |
+| CAL-06 | Phase 3: Calibration Engine | Complete |
 | COLL-01 | Phase 4: College Structure | Pending |
 | COLL-02 | Phase 4: College Structure | Pending |
 | COLL-03 | Phase 4: College Structure | Pending |
