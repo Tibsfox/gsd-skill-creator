@@ -168,7 +168,10 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   3. Safety Warden operates correctly in all three modes: annotate (flags concern in output), gate (requires explicit acknowledgment before proceeding), redirect (substitutes a safe alternative)
   4. Temperature danger zone tracker warns at 2+ hours in the 40-140F range
   5. A Math concept (e.g., exponential decay) navigates to its Cooking cross-reference (cooling curves) and back without errors
-**Plans**: TBD
+**Plans**: 3 plans
+  - [ ] 08-01-PLAN.md -- SafetyWarden class with three modes (annotate/gate/redirect), temperature floor enforcement, danger zone tracker (SAFE-01, SAFE-03, SAFE-04)
+  - [ ] 08-02-PLAN.md -- AllergenManager with Big 9 allergen database and substitution flagging, safety module barrel export (SAFE-02)
+  - [ ] 08-03-PLAN.md -- Integration tests: Math<->Cooking cross-reference bridges + safety-critical SC-01 through SC-08, INT-04, INT-07, INT-12 through INT-14 (INTG-04, all SAFE)
 
 ### Phase 9: Integration Bridge
 **Goal**: Rosetta Core connects to the existing skill-creator observation pipeline, token budget enforcement works across all loading tiers, and chipset adapters route panels to specialist agents
@@ -207,6 +210,6 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 | 5. Systems Panels and Mathematics Dept | v1.49.8 | 0/5 | Planned | - |
 | 6. Heritage Panels | v1.49.8 | 6/6 | Complete | 2026-03-01 |
 | 7. Cooking Department | v1.49.8 | 0/7 | Planned | - |
-| 8. Safety Warden and Cross-References | v1.49.8 | 0/TBD | Not started | - |
+| 8. Safety Warden and Cross-References | v1.49.8 | 0/3 | Planned | - |
 | 9. Integration Bridge | v1.49.8 | 0/TBD | Not started | - |
 | 10. Test Suite and Verification | v1.49.8 | 0/TBD | Not started | - |
