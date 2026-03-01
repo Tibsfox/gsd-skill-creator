@@ -46,7 +46,9 @@ export interface TopologyData {
 // Constants
 // ============================================================================
 
-/** Maximum visible nodes before collapse. */
+/** @justification Type: Accepted heuristic. Mirrors MAX_VISIBLE_NODES from
+ * topology-data.ts -- 12-node limit for legible rendering in fixed-width panel.
+ * @see src/dashboard/topology-data.ts for primary justification */
 const MAX_VISIBLE_NODES = 12;
 
 /** Type priority for collapse sorting (higher = kept longer). */

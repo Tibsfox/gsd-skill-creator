@@ -15,7 +15,9 @@ import type { GantryData, GantryCell } from './gantry-panel.js';
 // Constants
 // ============================================================================
 
-/** Maximum cells in the gantry strip. */
+/** @justification Type: Accepted heuristic. 8 cells fills the available
+ * horizontal space in the gantry strip at standard viewport width (1920px).
+ * More cells cause wrapping or overflow which defeats at-a-glance monitoring. */
 const MAX_CELLS = 8;
 
 /** Keywords indicating a token/budget metric key. */

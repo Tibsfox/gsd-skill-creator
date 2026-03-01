@@ -22,6 +22,14 @@ function runPdftotext(sourcePath: string): Promise<{ stdout: string; stderr: str
   });
 }
 
+/**
+ * @justification Type: Accepted heuristic
+ * - maxChunkTokens 8000: Balances extraction completeness against model input
+ *   constraints. Leaves headroom for prompt framing within a 16K context window
+ *   (8K content + 8K for system prompt, instructions, and response space).
+ * - chunkStrategy 'adaptive': Splits at natural section boundaries rather than
+ *   fixed offsets, preserving semantic coherence within chunks.
+ */
 const DEFAULT_CONFIG: Omit<ExtractionConfig, 'sourcePath'> = {
   outputDir: '.planning/v1.40/extraction',
   chunkStrategy: 'adaptive',

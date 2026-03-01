@@ -70,7 +70,9 @@ export interface GenerateOptions {
   force?: boolean;
   /** Inject auto-refresh script into generated pages. */
   live?: boolean;
-  /** Auto-refresh interval in milliseconds (default: 5000). */
+  /** @justification Type: Accepted heuristic. 5-second auto-refresh balances
+   * dashboard currency against browser performance. Standard monitoring UI
+   * cadence -- fast enough for trend visibility, slow enough to avoid flicker. */
   refreshInterval?: number;
 }
 

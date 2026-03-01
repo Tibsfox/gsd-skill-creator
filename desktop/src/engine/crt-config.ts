@@ -22,7 +22,18 @@ export interface CRTConfig {
   vignette: number;
 }
 
-/** Readonly default CRT configuration matching research spec values. */
+/**
+ * Readonly default CRT configuration matching research spec values.
+ *
+ * @justification Type: Accepted heuristic
+ * CRT effect defaults are perceptual tuning values inspired by Amiga OCS hardware:
+ * - scanlineIntensity 0.6: Visible scanline gaps without obscuring terminal text
+ * - barrelDistortion 0.15: Subtle CRT curvature that doesn't distort UI readability
+ * - phosphorGlow 0.4: Moderate bloom emulating P22 phosphor persistence
+ * - chromaticAberration 2.0px: Minimal RGB fringing visible at screen edges only
+ * - vignette 0.5: Half-strength edge darkening for CRT "spotlight" effect
+ * All values are user-configurable at runtime via mergeCRTConfig().
+ */
 export const CRT_DEFAULTS: Readonly<CRTConfig> = {
   enabled: true,
   scanlineIntensity: 0.6,

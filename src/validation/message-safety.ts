@@ -49,7 +49,10 @@ export interface InjectionPatternEntry {
 // ============================================================================
 
 /**
- * Prompt injection patterns to detect and neutralize.
+ * @justification Type: Empirical catalog. 13 prompt injection patterns
+ * derived from published attack taxonomies (OWASP LLM Top 10, prompt injection
+ * research literature). Count reflects known attack surface as of catalog creation.
+ * Three categories: role-override (4), instruction-hijack (7), prompt-extraction (2).
  *
  * Each entry has a category name and a regex. The regex must use the 'gi'
  * flags (global + case-insensitive) or 'gim' (+ multiline) as appropriate.

@@ -25,7 +25,17 @@ export type QueueState =
   | 'executing'
   | 'set-aside';
 
-/** All valid queue states as a const array for runtime use. */
+/**
+ * All valid queue states as a const array for runtime use.
+ *
+ * @justification Type: Accepted heuristic
+ * 7-state pipeline models the document lifecycle from intake to execution:
+ * uploaded/checking/needs-attention handle intake validation;
+ * ready/queued/executing model the execution pipeline;
+ * set-aside provides a parking state for deferred items.
+ * This mirrors common CI/CD pipeline state machines (e.g., GitLab pipeline
+ * states) and covers the minimum states needed for audit trail completeness.
+ */
 export const QUEUE_STATES = [
   'uploaded',
   'checking',
