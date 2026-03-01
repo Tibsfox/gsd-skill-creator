@@ -23,6 +23,11 @@ export const maillardReaction: RosettaConcept = {
       targetId: 'cook-protein-denaturation',
       description: 'Proteins must denature and expose amino acids before they can participate in Maillard reactions',
     },
+    {
+      type: 'cross-reference',
+      targetId: 'math-logarithmic-scales',
+      description: 'Maillard reaction rate is pH-sensitive (logarithmic scale) and taste perception follows Weber-Fechner logarithmic law',
+    },
   ],
   complexPlanePosition: {
     real: 0.7,

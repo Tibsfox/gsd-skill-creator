@@ -26,7 +26,7 @@ export const ratiosProportions: RosettaConcept = {
   relationships: [
     {
       type: 'cross-reference',
-      targetId: 'culinary-bakers-percentages',
+      targetId: 'cook-bakers-ratios',
       description: 'Baker\'s percentages express all ingredients as ratios to flour weight',
     },
   ],
