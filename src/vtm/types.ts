@@ -103,8 +103,12 @@ export const TokenBudgetConstraintSchema = z.object({
 export type TokenBudgetConstraint = z.infer<typeof TokenBudgetConstraintSchema>;
 
 /**
- * Default budget ranges encoding the 60/40 principle.
+ * @justification Type: Accepted heuristic
+ * Budget ranges map token tiers to operational limits. Each tier's boundaries
+ * are derived from model context window sizes and empirical testing of skill
+ * generation quality at each budget level.
  *
+ * Default budget ranges encoding the 60/40 principle.
  * Sonnet handles ~60% of work (structural implementation),
  * Opus handles ~30% (judgment/creativity),
  * Haiku handles ~10% (scaffold/boilerplate).

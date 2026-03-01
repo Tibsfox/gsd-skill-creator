@@ -14,7 +14,15 @@ import type {
 } from '../types/activation.js';
 
 /**
- * Default weights for scoring factors.
+ * @justification Type: Accepted heuristic
+ * Composite activation score weights: specificity (35) / activationPattern (25) /
+ * length (20) / imperativeVerb (10) / genericPenalty (10).
+ * Specificity-dominant because domain-specific terms are the strongest signal
+ * for Claude's auto-activation matching. Activation patterns second because
+ * explicit trigger phrases ("use when...") directly improve reliability.
+ * The long tail (length/verb/penalty at 10-20%) prevents verbose-but-vague
+ * descriptions from scoring well.
+ *
  * Based on research analysis of activation patterns.
  */
 const DEFAULT_WEIGHTS: ScoringWeights = {

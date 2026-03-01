@@ -110,7 +110,14 @@ export interface RetentionConfig {
   maxAgeDays: number;
 }
 
-// Default retention configuration
+/**
+ * @justification Type: Accepted heuristic
+ * maxEntries (100): Ring buffer size balancing memory footprint against
+ *   statistical significance for pattern extraction. 100 observations
+ *   provide >95% confidence for frequency-based promotion decisions.
+ * maxAgeDays (30): Monthly retention window aligned with typical project
+ *   sprint cycles. Older observations are stale for learning purposes.
+ */
 export const DEFAULT_RETENTION_CONFIG: RetentionConfig = {
   maxEntries: 100,
   maxAgeDays: 30,
