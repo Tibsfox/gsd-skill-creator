@@ -21,7 +21,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 - [ ] **Phase 0.5: Foundations Documentation** - Fix 23 broken links in docs/foundations/, fill index.md stub (docs-only, no code deps)
 - [x] **Phase 1: Foundation** - Shared types, Panel Interface contract, directory scaffold (2026-03-01)
 - [ ] **Phase 2: Rosetta Core Engine** - Concept Registry, Panel Router, Expression Renderer
-- [ ] **Phase 3: Calibration Engine** - Universal feedback loop, Safety Warden framework
+- [x] **Phase 3: Calibration Engine** - Universal feedback loop, Safety Warden framework (2026-03-01)
 - [ ] **Phase 4: College Structure** - Department framework, progressive disclosure, try-sessions
 - [ ] **Phase 5: Systems Panels and Mathematics Department** - Python/C++/Java panels and Math Department seed
 - [ ] **Phase 6: Heritage Panels** - Lisp, Pascal, Fortran, Perl, ALGOL, Unison panels
