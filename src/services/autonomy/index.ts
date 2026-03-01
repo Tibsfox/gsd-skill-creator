@@ -108,3 +108,15 @@ export {
   pruneState,
 } from './state-pruner.js';
 export type { PruneResult, StateSection, ParsedState, IOCallbacks } from './state-pruner.js';
+
+// Teach-forward (Phase 500-02)
+export {
+  extractSection,
+  parseBulletPoints,
+  extractTeachForward,
+  writeTeachForward,
+  loadTeachForward,
+  verifyTeachForwardChain,
+  processJournal,
+} from './teach-forward.js';
+export type { ChainVerificationResult } from './teach-forward.js';
