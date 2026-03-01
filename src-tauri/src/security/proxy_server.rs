@@ -202,16 +202,60 @@ impl ProxyServer {
         }
     }
 
-    /// Forward a request to the actual destination.
-    /// Production: use reqwest/hyper. Test: returns mock 200 response.
-    async fn forward(&self, _req: &ProxiedRequest) -> Result<ProxiedResponse, ProxyError> {
-        // Production: use reqwest/hyper to forward to actual destination
-        // For now: returns mock 200 response
+    /// Forward a request to the actual destination via reqwest.
+    ///
+    /// Supports GET, POST, PUT, DELETE, PATCH, HEAD methods.
+    /// Headers (including credentials injected by handle()) are forwarded.
+    /// 30-second timeout prevents hanging on slow destinations.
+    async fn forward(&self, req: &ProxiedRequest) -> Result<ProxiedResponse, ProxyError> {
+        let client = reqwest::Client::builder()
+            .timeout(std::time::Duration::from_secs(30))
+            .build()
+            .map_err(|e| ProxyError::SocketError(e.to_string()))?;
+
+        let mut builder = match req.method.to_uppercase().as_str() {
+            "GET" => client.get(&req.url),
+            "POST" => client.post(&req.url),
+            "PUT" => client.put(&req.url),
+            "DELETE" => client.delete(&req.url),
+            "PATCH" => client.patch(&req.url),
+            "HEAD" => client.head(&req.url),
+            _ => client.get(&req.url),
+        };
+
+        // Apply headers (credentials already injected by handle())
+        for (k, v) in &req.headers {
+            builder = builder.header(k.as_str(), v.as_str());
+        }
+
+        // Apply body if present
+        if let Some(body) = &req.body {
+            builder = builder.body(body.clone());
+        }
+
+        let start = Instant::now();
+        let resp = builder
+            .send()
+            .await
+            .map_err(|e| ProxyError::SocketError(e.to_string()))?;
+
+        let status = resp.status().as_u16();
+        let headers: Vec<(String, String)> = resp
+            .headers()
+            .iter()
+            .map(|(k, v)| (k.to_string(), v.to_str().unwrap_or("").to_string()))
+            .collect();
+        let body = resp
+            .bytes()
+            .await
+            .map_err(|e| ProxyError::SocketError(e.to_string()))?
+            .to_vec();
+
         Ok(ProxiedResponse {
-            status: 200,
-            headers: vec![],
-            body: b"{}".to_vec(),
-            latency_ms: 0,
+            status,
+            headers,
+            body,
+            latency_ms: start.elapsed().as_millis() as u64,
         })
     }
 
