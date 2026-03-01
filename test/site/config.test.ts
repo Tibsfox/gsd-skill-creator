@@ -73,8 +73,11 @@ describe('Site Configuration', () => {
         // Convert URL like /essays/the-space-between/ to content file path
         const urlPath = item.url.replace(/^\//, '').replace(/\/$/, '');
         const filePath = urlPath === '' ? 'index.md' : `${urlPath}.md`;
+        const indexPath = urlPath === '' ? 'index.md' : `${urlPath}/index.md`;
         const fullPath = join(CONTENT_DIR, filePath);
-        expect(existsSync(fullPath), `Nav URL ${item.url} has no content file at ${filePath}`).toBe(true);
+        const fullIndexPath = join(CONTENT_DIR, indexPath);
+        const found = existsSync(fullPath) || existsSync(fullIndexPath);
+        expect(found, `Nav URL ${item.url} has no content file at ${filePath} or ${indexPath}`).toBe(true);
       }
     }
   });
