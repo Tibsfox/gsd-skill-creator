@@ -86,6 +86,73 @@ describe('CSS Design System', () => {
     });
   });
 
+  describe('Print Stylesheet - SITE-06', () => {
+    function extractPrintSection(css: string): string {
+      // Find the last @media print block and extract it using brace counting
+      const lastPrintIdx = css.lastIndexOf('@media print');
+      if (lastPrintIdx === -1) return '';
+      const openBrace = css.indexOf('{', lastPrintIdx);
+      if (openBrace === -1) return '';
+      let depth = 1;
+      let pos = openBrace + 1;
+      while (pos < css.length && depth > 0) {
+        if (css[pos] === '{') depth++;
+        if (css[pos] === '}') depth--;
+        pos++;
+      }
+      return css.slice(lastPrintIdx, pos);
+    }
+
+    it('has orphans and widows control', () => {
+      const print = extractPrintSection(readCss());
+      expect(print).toContain('orphans: 3');
+      expect(print).toContain('widows: 3');
+    });
+
+    it('prevents page breaks inside content blocks', () => {
+      const print = extractPrintSection(readCss());
+      expect(print).toMatch(/break-inside:\s*avoid/);
+    });
+
+    it('prevents page breaks after headings', () => {
+      const print = extractPrintSection(readCss());
+      expect(print).toMatch(/break-after:\s*avoid/);
+    });
+
+    it('has @page margin declaration', () => {
+      const print = extractPrintSection(readCss());
+      expect(print).toContain('@page');
+    });
+
+    it('hides site footer in print', () => {
+      const print = extractPrintSection(readCss());
+      expect(print).toContain('.site-footer');
+    });
+
+    it('hides navigation elements in print', () => {
+      const print = extractPrintSection(readCss());
+      expect(print).toContain('.site-header');
+      expect(print).toContain('.site-nav');
+      expect(print).toContain('.toc');
+    });
+
+    it('uses modern break properties (not legacy page-break-*)', () => {
+      const print = extractPrintSection(readCss());
+      expect(print).not.toContain('page-break-inside');
+      expect(print).not.toContain('page-break-after');
+    });
+
+    it('sets print body typography', () => {
+      const print = extractPrintSection(readCss());
+      expect(print).toContain('12pt');
+    });
+
+    it('file size remains under 15KB after print expansion', () => {
+      const stats = statSync(CSS_PATH);
+      expect(stats.size).toBeLessThan(15 * 1024);
+    });
+  });
+
   it('contains no framework class names', () => {
     const css = readCss();
     // Tailwind patterns
