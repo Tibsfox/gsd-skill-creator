@@ -82,7 +82,11 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   3. Calibration deltas written in one session are readable in a new session (persistence survives restart)
   4. Multiple deltas from the same domain combine into a coherent user profile with accurate confidence scores
   5. No single calibration adjustment changes any parameter by more than 20%
-**Plans**: TBD
+**Plans**: 4 plans
+  - [x] 03-01-PLAN.md -- CalibrationEngine (universal Observe->Compare->Adjust->Record feedback loop, bounded adjustment)
+  - [x] 03-02-PLAN.md -- DeltaStore (JSON file persistence for CalibrationDelta records)
+  - [x] 03-03-PLAN.md -- ProfileSynthesizer (profile synthesis, confidence scoring)
+  - [x] 03-04-PLAN.md -- Pluggability proof (DomainCalibrationModel integration test, API finalization)
 
 ### Phase 4: College Structure
 **Goal**: The College framework loads departments with progressive disclosure and supports cross-department navigation as explorable code
