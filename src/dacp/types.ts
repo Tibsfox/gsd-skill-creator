@@ -322,18 +322,23 @@ export const DriftScoreSchema = z.object({
 export type DriftScore = z.infer<typeof DriftScoreSchema>;
 
 /**
- * Calculate a composite drift score from a handoff outcome.
+ * General-purpose DriftScore calculation for the bundle assembler context.
  *
- * Weights:
- * - intent_miss:          35% (most important signal)
- * - rework_penalty:       25%
- * - verification_penalty: 25%
- * - modification_penalty: 15%
+ * @justification Type: Accepted heuristic (intentionally different from retrospective/drift.ts)
+ * Weight set: 35/25/25/15 -- balanced for prospective assembly decisions
+ * where all four signals contribute more equally. Compared to the
+ * retrospective analyzer (40/30/20/10), the assembler:
+ * - Gives less weight to intent_miss (35% vs 40%) because assembly
+ *   happens before outcomes are known
+ * - Equalizes rework and verification penalties (25% each) because
+ *   both are predictive signals during assembly
+ * - Gives more weight to modification_penalty (15% vs 10%) because
+ *   modification count is measurable at assembly time
  *
- * Recommendations:
- * - score > 0.6 => 'promote' (increase fidelity)
- * - score < 0.2 => 'demote' (decrease fidelity — bundle is over-engineered)
- * - otherwise   => 'maintain'
+ * Thresholds: promote > 0.6, demote < 0.2 (wider band than retrospective
+ * because prospective decisions should be more conservative about level changes)
+ *
+ * @see src/dacp/retrospective/drift.ts for the retrospective-tuned variant
  */
 export function calculateDriftScore(outcome: HandoffOutcome): DriftScore {
   const intent_miss = 1 - outcome.intent_alignment;
