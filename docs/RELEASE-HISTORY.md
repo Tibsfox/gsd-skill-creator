@@ -1,11 +1,14 @@
 # Release History
 
-53 milestones shipped across 467 phases, 1,109 plans, ~564K LOC, and 19,201 tests.
+56 milestones shipped across 489 phases, 1,165 plans, ~564K LOC, and 20,604 tests.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned.
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
+| v1.49.9 | Learn Kung Fu | 2026-03-01 | 11 | 11 | |
+| v1.49.8 | Cooking With Claude | 2026-03-01 | 11 | 45 | |
+| v1.49.7 | Optional tmux with Graceful Degradation | 2026-03-01 | — | — | |
 | [v1.49.6](release-notes/v1.49.6/) | macOS Compatibility & Dependency Hardening | 2026-03-01 | — | — | |
 | [v1.49.5](release-notes/v1.49.5/) | Project Filesystem Reorganization | 2026-02-27 | 8 | 17 | [retro](release-notes/v1.49.5/RETROSPECTIVE.md), [lessons](release-notes/v1.49.5/LESSONS-LEARNED.md) |
 | [v1.49.4](release-notes/v1.49.4/) | Filesystem Management Strategy | 2026-02-27 | 3 | 7 | |
