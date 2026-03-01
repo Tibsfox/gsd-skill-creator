@@ -27,7 +27,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 - [x] **Phase 6: Heritage Panels** - Lisp, Pascal, Fortran, Perl, ALGOL, Unison panels (2026-03-01)
 - [x] **Phase 7: Cooking Department** - Seven wings of culinary knowledge with calibration models (2026-03-01)
 - [x] **Phase 8: Safety Warden and Cross-References** - Culinary safety boundaries and Math-Cooking bridges (2026-03-01)
-- [ ] **Phase 9: Integration Bridge** - Observation pipeline, token budget, chipset adapters
+- [x] **Phase 9: Integration Bridge** - Observation pipeline, token budget, chipset adapters (2026-03-01)
 - [ ] **Phase 10: Test Suite and Verification** - 85%+ coverage, 14 safety-critical tests, foxfood report
 
 ## Phase Details
@@ -182,10 +182,10 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   2. Panel loading at every tier (summary, active, deep) stays within the 2-5% token budget ceiling
   3. Chipset adapter configuration loads without errors and routes panel requests to the correct specialist agents
 **Plans**: 4 plans
-  - [ ] 09-01-PLAN.md -- Observation pipeline adapter (ObservationBridge emitting exploration/translation events compatible with SessionObserver)
-  - [ ] 09-02-PLAN.md -- Token budget enforcement adapter (TokenBudgetAdapter wrapping CollegeLoader with 2-5% ceiling)
-  - [ ] 09-03-PLAN.md -- Chipset adapter (ChipsetAdapter mapping panels to specialist engine domains)
-  - [ ] 09-04-PLAN.md -- Integration tests and barrel export (end-to-end verification of all three adapters)
+  - [x] 09-01-PLAN.md -- Observation pipeline adapter (ObservationBridge emitting exploration/translation events compatible with SessionObserver)
+  - [x] 09-02-PLAN.md -- Token budget enforcement adapter (TokenBudgetAdapter wrapping CollegeLoader with 2-5% ceiling)
+  - [x] 09-03-PLAN.md -- Chipset adapter (ChipsetAdapter mapping panels to specialist engine domains)
+  - [x] 09-04-PLAN.md -- Integration tests and barrel export (end-to-end verification of all three adapters)
 
 ### Phase 10: Test Suite and Verification
 **Goal**: 85%+ test coverage across all new code, all 14 safety-critical tests pass with zero tolerance, and the foxfood report documents using the system to verify itself
@@ -219,5 +219,5 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 | 6. Heritage Panels | v1.49.8 | 6/6 | Complete | 2026-03-01 |
 | 7. Cooking Department | v1.49.8 | 7/7 | Complete | 2026-03-01 |
 | 8. Safety Warden and Cross-References | v1.49.8 | 3/3 | Complete | 2026-03-01 |
-| 9. Integration Bridge | v1.49.8 | 0/4 | Planned | - |
+| 9. Integration Bridge | v1.49.8 | 4/4 | Complete | 2026-03-01 |
 | 10. Test Suite and Verification | v1.49.8 | 0/4 | Planned | - |
