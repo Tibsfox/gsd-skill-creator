@@ -60,6 +60,10 @@ export type { GateEnforcementResult } from './gate-enforcer.js';
 export { detectSimulatedWork } from './simulated-work-detector.js';
 export type { SimulatedWorkResult, SimulatedWorkCheck } from './simulated-work-detector.js';
 
+// Gate templates
+export { loadGateTemplate, GATE_TEMPLATE_NAMES } from './gate-templates.js';
+export type { GateTemplateName } from './gate-templates.js';
+
 // State machine (Phase 498-01)
 export {
   VALID_TRANSITIONS,
