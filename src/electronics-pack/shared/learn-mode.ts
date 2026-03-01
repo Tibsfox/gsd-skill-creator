@@ -427,6 +427,32 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       content: 'Linear regulator: P_dissipated = (V_in - V_out) * I_load. Buck converter: V_out = D * V_in, where D = duty cycle. Boost: V_out = V_in/(1-D). Efficiency: eta = P_out/P_in. Inductor ripple: delta_I = (V_in - V_out)*D/(L*f_sw).',
       hhCitation: 'H&H Ch.9',
     },
+    // Tier 3 depth markers (buck-boost, charge pump, PFC)
+    {
+      level: DepthLevel.Practical,
+      content: 'A buck-boost converter handles input voltages that swing above and below the output -- essential for Li-ion battery to 3.3V rails where the battery voltage crosses the target during discharge',
+      hhCitation: 'H&H Ch.9',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'Charge pumps use capacitors and switches to multiply voltage without an inductor -- smaller and cheaper than inductive converters but limited to low current applications',
+      hhCitation: 'H&H Ch.9',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 9.5 for power factor correction (PFC) circuits that shape the input current to match the voltage waveform, reducing harmonic distortion on AC mains and improving energy efficiency',
+      hhCitation: 'H&H Ch.9',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 9.7 for charge pump architectures including voltage doublers, inverters, and fractional converters, plus the tradeoff between output impedance and switching frequency',
+      hhCitation: 'H&H Ch.9',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'Buck-boost duty cycle: V_out = V_in * D/(1-D) for inverting topology, or D crossover between buck (D = V_out/V_in) and boost (D = 1 - V_in/V_out) modes. Charge pump output: V_out = N*V_in - I_load/(f_sw*C_fly) - N*V_diode for N-stage multiplier.',
+      hhCitation: 'H&H Ch.9',
+    },
   ],
 
   // ---- 07a-logic-gates: H&H 10.1, 10.2 ----
@@ -449,6 +475,22 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
     {
       level: DepthLevel.Mathematical,
       content: 'Boolean identities: A + A\'B = A + B, (A+B)\' = A\'B\' (De Morgan). Propagation delay: t_pd = 0.7*R*C per stage. Dynamic power: P = C_L * V_DD^2 * f. NAND transistor count: 2N MOSFETs for N inputs.',
+      hhCitation: 'H&H 10.2',
+    },
+    // Tier 3 depth markers (MOSFET digital logic depth)
+    {
+      level: DepthLevel.Practical,
+      content: 'MOSFET digital gates come in NMOS-only and CMOS flavors -- CMOS uses complementary pairs to achieve near-zero static power, which is why billions of transistors can fit on a modern chip',
+      hhCitation: 'H&H 10.2',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 3.4 for MOSFET behavior in the digital domain: threshold voltage, noise margins, dynamic power dissipation, and why CMOS replaced NMOS for most digital logic',
+      hhCitation: 'H&H 10.2',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'CMOS dynamic power: P = C_load * V_DD^2 * f_clk * alpha, where alpha is the activity factor. Propagation delay: t_pd = 0.7 * (R_p * C_load), where R_p is the effective pull-up/pull-down resistance. Static power: P_static = I_leak * V_DD.',
       hhCitation: 'H&H 10.2',
     },
   ],
@@ -475,6 +517,32 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       content: 'Maximum clock frequency: f_max = 1/(t_cq + t_comb + t_setup). Ripple counter delay: t_total = N * t_pd. State encoding: log2(N) flip-flops for N states. Counter modulus: 2^n for n-bit binary counter.',
       hhCitation: 'H&H 10.4',
     },
+    // Tier 3 depth markers (metastability, FIFO, memory)
+    {
+      level: DepthLevel.Practical,
+      content: 'Metastability is the digital equivalent of balancing a ball on a knife edge -- if the flip-flop input changes too close to the clock edge, the output can hover between 0 and 1 for an unpredictable time',
+      hhCitation: 'H&H 10.3-10.5',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'FIFOs (first-in-first-out buffers) connect subsystems running at different speeds -- the write side pushes data in, the read side pulls data out in the same order, with the FIFO absorbing speed mismatches',
+      hhCitation: 'H&H 10.3-10.5',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 10.4 for metastability analysis, MTBF calculations, and multi-stage synchronizer design for crossing clock domains safely',
+      hhCitation: 'H&H 10.3-10.5',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 10.5 for memory architectures including SRAM, DRAM, Flash, and FIFO organizations, plus bus protocols for connecting digital subsystems',
+      hhCitation: 'H&H 10.3-10.5',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'Metastability MTBF: MTBF = exp(t_resolve/tau) / (f_clk * f_data). Two-stage synchronizer: MTBF_2 = exp(2*t_resolve/tau) / (f_clk * f_data). DRAM refresh: t_refresh < t_retention (typically 64ms for 4K rows, so each row refreshed every 15.6us).',
+      hhCitation: 'H&H 10.3-10.5',
+    },
   ],
 
   // ---- 09-data-conversion: H&H Ch.13 ----
@@ -497,6 +565,37 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
     {
       level: DepthLevel.Mathematical,
       content: 'Resolution: LSB = V_ref / 2^n. Quantization noise: SNR_q = 6.02*n + 1.76 dB. Nyquist criterion: f_sample >= 2*f_max. Oversampling gain: +3dB SNR per doubling of sample rate. ENOB = (SINAD - 1.76)/6.02.',
+      hhCitation: 'H&H Ch.13',
+    },
+    // Tier 3 depth markers (ENOB, precision converters, sample-and-hold)
+    {
+      level: DepthLevel.Practical,
+      content: 'ENOB (effective number of bits) tells the real story of converter quality -- a 16-bit ADC with noisy layout might only give 13 effective bits of resolution',
+      hhCitation: 'H&H Ch.13',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'A sample-and-hold circuit freezes the input voltage on a capacitor so the ADC can take its time converting -- without it, the input could change during conversion and corrupt the result',
+      hhCitation: 'H&H Ch.13',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 5.3 for precision converter techniques including auto-zero amplifiers, chopper stabilization, and multi-slope integration that achieve resolution beyond what quantization noise alone would predict',
+      hhCitation: 'H&H Ch.13',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 13.4 for converter specifications: INL, DNL, SFDR, SINAD, ENOB, and how to interpret datasheets for ADC and DAC selection',
+      hhCitation: 'H&H Ch.13',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 13.6 for sample-and-hold circuits, aperture jitter, droop rate, acquisition time, and the critical role of the hold capacitor in converter accuracy',
+      hhCitation: 'H&H Ch.13',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'ENOB = (SINAD - 1.76) / 6.02. Ideal SNR_q = 6.02*N + 1.76 dB. S/H droop: V_droop = I_leak * T_hold / C_hold. Acquisition time: T_acq = -(R_on * C_hold) * ln(epsilon), where epsilon = V_error/V_step.',
       hhCitation: 'H&H Ch.13',
     },
   ],
