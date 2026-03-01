@@ -9,6 +9,7 @@
 
 import { mkdir, appendFile, readFile } from 'fs/promises';
 import { dirname } from 'path';
+import { homedir } from 'os';
 import type { DriftScoreRecord } from './types.js';
 
 /** Default path for the drift score JSONL file */
@@ -22,7 +23,7 @@ export const DEFAULT_DRIFT_PATH = '~/.gsd/dacp/retrospective/drift-scores.jsonl'
  */
 function resolveHome(filePath: string): string {
   if (filePath.startsWith('~/')) {
-    return filePath.replace('~', process.env.HOME ?? '/tmp');
+    return filePath.replace('~', homedir());
   }
   return filePath;
 }

@@ -1,6 +1,6 @@
 # File Structure
 
-> Last updated: v1.49.5 (2026-02-27)
+> Last updated: v1.49.6 (2026-03-01)
 
 ## Root Directory Layout
 
@@ -45,8 +45,9 @@ gsd-skill-creator/
 │   ├── serve-dashboard.mjs
 │   └── ...              Check/validation scripts
 ├── skills/              Installable skill packs (9 packs)
-├── src/                 TypeScript library + CLI (72 modules)
+├── src/                 TypeScript library + CLI (73 modules)
 │   ├── fs/              Filesystem utilities (config, XDG, scaffold, etc.)
+│   ├── nlp/             Lightweight NLP (TF-IDF, Naive Bayes, barrel export)
 │   └── ...              70+ domain modules
 ├── src-tauri/           Rust backend (Tauri v2)
 │   └── src/             Rust source (api, security, xdg, etc.)

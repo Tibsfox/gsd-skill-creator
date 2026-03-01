@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # phase-boundary-check.sh — PostToolUse hook: detect .planning/ file writes
 # Outputs a reminder when planning files are modified.
 
