@@ -257,4 +257,24 @@ describe('SkillStore YAML safety', () => {
       expect(skill.metadata.description).toBe('Full featured skill');
     });
   });
+
+  // --------------------------------------------------------------------------
+  // getSkillsDir (QUAL-06)
+  // --------------------------------------------------------------------------
+
+  describe('getSkillsDir', () => {
+    it('returns the skillsDir passed to constructor', () => {
+      expect(store.getSkillsDir()).toBe(skillsDir);
+    });
+
+    it('returns default .claude/skills when no path provided', () => {
+      const defaultStore = new SkillStore();
+      expect(defaultStore.getSkillsDir()).toBe('.claude/skills');
+    });
+
+    it('returns custom path when custom path provided', () => {
+      const customStore = new SkillStore('/custom/skills/path');
+      expect(customStore.getSkillsDir()).toBe('/custom/skills/path');
+    });
+  });
 });
