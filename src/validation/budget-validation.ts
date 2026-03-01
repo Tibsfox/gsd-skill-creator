@@ -79,6 +79,30 @@ export interface CumulativeBudgetResult {
 }
 
 // ============================================================================
+// BudgetExceededError
+// ============================================================================
+
+/**
+ * Thrown when a skill exceeds the character budget and no force-override is set.
+ *
+ * Carries the full BudgetCheckResult so callers can inspect charCount, budget,
+ * severity, and suggestions for error display.
+ */
+export class BudgetExceededError extends Error {
+  override name = 'BudgetExceededError' as const;
+
+  constructor(
+    public readonly skillName: string,
+    public readonly budgetResult: BudgetCheckResult,
+  ) {
+    super(
+      `Skill "${skillName}" exceeds character budget ` +
+      `(${budgetResult.charCount.toLocaleString()} / ${budgetResult.budget.toLocaleString()} chars)`
+    );
+  }
+}
+
+// ============================================================================
 // BudgetValidator Class
 // ============================================================================
 

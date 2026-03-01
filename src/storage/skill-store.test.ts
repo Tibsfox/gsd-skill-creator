@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as os from 'os';
 import { SkillStore } from './skill-store.js';
 import { PathTraversalError } from '../validation/path-safety.js';
+import { BudgetExceededError } from '../validation/budget-validation.js';
 
 // ============================================================================
 // SkillStore Path Safety Tests
@@ -275,6 +276,87 @@ describe('SkillStore YAML safety', () => {
     it('returns custom path when custom path provided', () => {
       const customStore = new SkillStore('/custom/skills/path');
       expect(customStore.getSkillsDir()).toBe('/custom/skills/path');
+    });
+  });
+});
+
+// ============================================================================
+// SkillStore Budget Enforcement Tests (QUAL-04)
+// ============================================================================
+
+describe('SkillStore budget enforcement', () => {
+  let tempDir: string;
+  let skillsDir: string;
+  let store: SkillStore;
+
+  beforeEach(async () => {
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'skill-store-budget-'));
+    skillsDir = path.join(tempDir, 'skills');
+    fs.mkdirSync(skillsDir, { recursive: true });
+    store = new SkillStore(skillsDir);
+  });
+
+  afterEach(() => {
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  });
+
+  describe('create() budget enforcement', () => {
+    it('throws BudgetExceededError when content exceeds budget', async () => {
+      const largeBody = 'x'.repeat(20000);
+      await expect(
+        store.create(
+          'over-budget',
+          { name: 'over-budget', description: 'A skill that exceeds budget' },
+          largeBody,
+        ),
+      ).rejects.toThrow(BudgetExceededError);
+    });
+
+    it('BudgetExceededError carries correct skillName', async () => {
+      const largeBody = 'x'.repeat(20000);
+      try {
+        await store.create(
+          'over-budget-name-check',
+          { name: 'over-budget-name-check', description: 'Test' },
+          largeBody,
+        );
+        expect.fail('Should have thrown');
+      } catch (err) {
+        expect(err).toBeInstanceOf(BudgetExceededError);
+        expect((err as BudgetExceededError).skillName).toBe('over-budget-name-check');
+        expect((err as BudgetExceededError).budgetResult.severity).toBe('error');
+      }
+    });
+
+    it('succeeds when forceOverrideBudget is set on extension data', async () => {
+      const largeBody = 'x'.repeat(20000);
+      const metadata = {
+        name: 'force-override',
+        description: 'A skill that exceeds budget but has force override',
+        metadata: {
+          extensions: {
+            'gsd-skill-creator': {
+              forceOverrideBudget: {
+                charCount: 20000,
+                budgetLimit: 15000,
+                overriddenAt: new Date().toISOString(),
+              },
+            },
+          },
+        },
+      };
+      const result = await store.create('force-override', metadata, largeBody);
+      expect(result.path).toContain('force-override');
+    });
+
+    it('succeeds when content is within budget', async () => {
+      const smallBody = 'Small skill body content';
+      const result = await store.create(
+        'within-budget',
+        { name: 'within-budget', description: 'A small skill' },
+        smallBody,
+      );
+      expect(result.path).toContain('within-budget');
     });
   });
 });
