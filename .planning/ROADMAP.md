@@ -16,8 +16,9 @@ v1.49.8 Cooking With Claude implements three architectural pillars: Rosetta Core
 
 Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 2 → Phases 4-6, Wave 3 → Phases 7-8, Wave 4 → Phases 9-10.
 
-### 🚧 v1.49.8 Cooking With Claude (Phases 1-10)
+### 🚧 v1.49.8 Cooking With Claude (Phases 0.5, 1-10)
 
+- [ ] **Phase 0.5: Foundations Documentation** - Fix 23 broken links in docs/foundations/, fill index.md stub (docs-only, no code deps)
 - [x] **Phase 1: Foundation** - Shared types, Panel Interface contract, directory scaffold (2026-03-01)
 - [ ] **Phase 2: Rosetta Core Engine** - Concept Registry, Panel Router, Expression Renderer
 - [ ] **Phase 3: Calibration Engine** - Universal feedback loop, Safety Warden framework
@@ -30,6 +31,17 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 - [ ] **Phase 10: Test Suite and Verification** - 85%+ coverage, 14 safety-critical tests, foxfood report
 
 ## Phase Details
+
+### Phase 0.5: Foundations Documentation
+**Goal**: Fix all 23 broken relative links in docs/foundations/ and fill the index.md stub with substantive content
+**Depends on**: Nothing (docs-only, runs in parallel with any code phase)
+**Requirements**: DOCS-01
+**Success Criteria** (what must be TRUE):
+  1. All relative links in docs/foundations/*.md resolve correctly on GitHub (no double-nesting, correct ../ prefixes)
+  2. foundations/index.md contains substantive Layer 1 overview content (not a stub)
+  3. PDF links to tibsfox.com are valid and preserved
+  4. Cross-references to principles/ and applications/ use correct relative paths
+**Plans**: 1 plan (00.5-01)
 
 ### Phase 1: Foundation
 **Goal**: Shared types, Panel Interface contract, and directory scaffold exist so all parallel tracks in subsequent waves can build without coordination overhead
@@ -160,6 +172,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
+| 0.5 Foundations Docs | v1.49.8 | 0/1 | Planned | - |
 | 1. Foundation | v1.49.8 | 3/3 | Complete | 2026-03-01 |
 | 2. Rosetta Core Engine | v1.49.8 | 0/4 | Planned | - |
 | 3. Calibration Engine | v1.49.8 | 0/TBD | Not started | - |
