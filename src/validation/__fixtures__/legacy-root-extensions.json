@@ -1,0 +1,10 @@
+{
+  "name": "my-legacy-skill",
+  "description": "A skill with root-level extension fields from the old format.",
+  "triggers": { "intents": ["deploy", "build"], "threshold": 0.8 },
+  "enabled": true,
+  "version": 2,
+  "extends": "base-skill",
+  "createdAt": "2025-01-01T00:00:00Z",
+  "updatedAt": "2025-06-15T12:00:00Z"
+}
