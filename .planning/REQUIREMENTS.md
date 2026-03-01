@@ -80,8 +80,8 @@ Requirements for Cooking With Claude milestone. Each maps to roadmap phases.
 - [ ] **TEST-01**: 85%+ test coverage across all new code
 - [ ] **TEST-02**: 14 safety-critical tests pass with zero tolerance (SC-01 through SC-14)
 - [ ] **TEST-03**: Panel correctness tests verify mathematical accuracy across all panels
-- [ ] **TEST-04**: Integration tests verify cross-component interfaces
-- [ ] **TEST-05**: End-to-end test: user asks "why are my cookies flat?" → correct diagnosis
+- [x] **TEST-04**: Integration tests verify cross-component interfaces
+- [x] **TEST-05**: End-to-end test: user asks "why are my cookies flat?" → correct diagnosis
 
 ## Future Requirements
 
@@ -167,8 +167,8 @@ Requirements for Cooking With Claude milestone. Each maps to roadmap phases.
 | TEST-01 | Phase 10: Test Suite and Verification | Pending |
 | TEST-02 | Phase 10: Test Suite and Verification | Pending |
 | TEST-03 | Phase 10: Test Suite and Verification | Pending |
-| TEST-04 | Phase 10: Test Suite and Verification | Pending |
-| TEST-05 | Phase 10: Test Suite and Verification | Pending |
+| TEST-04 | Phase 10: Test Suite and Verification | Complete |
+| TEST-05 | Phase 10: Test Suite and Verification | Complete |
 
 **Coverage:**
 - v1.49.8 requirements: 49 total (5 CORE + 9 PANEL + 5 COLL + 3 MATH + 6 CAL + 8 COOK + 4 SAFE + 4 INTG + 5 TEST)
