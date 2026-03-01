@@ -1,4 +1,5 @@
 import type { ContentPage, SiteConfig } from '../types.js';
+import type { Article, TechArticle, Book, Course, WebSite, WebPage, WithContext } from 'schema-dts';
 
 interface SchemaObject {
   '@context'?: string;
