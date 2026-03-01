@@ -92,6 +92,14 @@ export class SkillStore {
   constructor(private skillsDir: string = '.claude/skills') {}
 
   /**
+   * Get the skills directory path.
+   * Public API replacing the bracket-notation hack in SkillGenerator (QUAL-06).
+   */
+  getSkillsDir(): string {
+    return this.skillsDir;
+  }
+
+  /**
    * Validate that a name is safe for filesystem use (no traversal).
    * @throws PathTraversalError if name contains traversal sequences
    */
