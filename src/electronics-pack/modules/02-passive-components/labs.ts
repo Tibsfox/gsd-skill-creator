@@ -1,12 +1,14 @@
 /**
  * Module 2: Passive Components -- Lab exercises
  *
- * 5 labs using real MNA simulator analysis (no mocks):
+ * 7 labs using real MNA simulator analysis (no mocks):
  *   Lab 1: Capacitor Charge/Discharge (transient)
  *   Lab 2: RC Low-Pass Filter (AC)
  *   Lab 3: RC High-Pass Filter (AC)
  *   Lab 4: RLC Resonance (AC)
  *   Lab 5: Thevenin Equivalence (DC)
+ *   Lab 6: Inductor Current Rise (transient, RL time constant)
+ *   Lab 7: Transformer Action (mathematical, turns ratio/impedance/power)
  */
 
 import { dcAnalysis, acAnalysis } from '../../simulator/mna-engine.js';
@@ -374,5 +376,130 @@ const lab05: Lab = {
   },
 };
 
-/** All 5 Module 2 labs */
-export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05];
+// ============================================================================
+// Lab 6: Inductor Current Rise
+// ============================================================================
+
+const lab06: Lab = {
+  id: 'm2-lab-06',
+  title: 'Inductor Current Rise',
+  steps: [
+    {
+      instruction:
+        'Build an RL circuit: 5V source, R = 1k ohm, L = 100mH. The time constant tau = L/R = 100mH/1k = 0.1ms. Run a transient simulation with dt = 10us and stopTime = 0.5ms (5 tau).',
+      expected_observation:
+        'The current starts at zero and rises exponentially toward 5mA (I_max = V/R). The voltage across R mirrors this current rise, starting at 0V and rising toward 5V.',
+      learn_note:
+        'An inductor opposes changes in current. The RL time constant tau = L/R determines how quickly current builds up. After 1 tau, the current reaches 63.2% of its final value, just as a capacitor reaches 63.2% of its final voltage in an RC circuit. -- H&H 1.5 [@HH-1.5]',
+    },
+    {
+      instruction:
+        'Observe the voltage across R at t = tau (0.1ms). Compare to V_R = V_supply * (1 - e^(-1)) = 5 * 0.6321 = 3.16V.',
+      expected_observation:
+        'The voltage across R at t = tau is approximately 3.16V, confirming that 63.2% of the supply voltage appears across R as the inductor current rises to 63.2% of its steady-state value.',
+      learn_note:
+        'In an RL circuit, V_R(t) = V_supply * (1 - e^(-t/tau)) and V_L(t) = V_supply * e^(-t/tau). At t = tau, the inductor has released 63.2% of its initial voltage opposition, allowing current to flow. -- H&H 1.5 [@HH-1.5]',
+    },
+    {
+      instruction:
+        'Check the voltage across R at t = 5*tau (0.5ms). It should be within 1% of the full supply voltage (5V), indicating steady-state current.',
+      expected_observation:
+        'At t = 5*tau, V_R is within 1% of 5V. The inductor acts like a short circuit at DC steady state, so all supply voltage drops across R and the current is V/R = 5mA.',
+      learn_note:
+        'The 5-tau rule applies to RL circuits just as it does to RC circuits: after 5 time constants, the transient is effectively complete. At DC steady state, an ideal inductor has zero impedance (a short circuit). -- H&H 1.5 [@HH-1.5]',
+    },
+  ],
+  verify: () => {
+    const components: Component[] = [
+      { id: 'V1', type: 'voltage-source', nodes: ['1', '0'], voltage: 5 },
+      { id: 'R1', type: 'resistor', nodes: ['1', '2'], resistance: 1000 },
+      { id: 'L1', type: 'inductor', nodes: ['2', '0'], inductance: 100e-3 },
+    ];
+
+    const result = transientAnalysis(components, {
+      timeStep: 10e-6,
+      stopTime: 500e-6,
+      maxIterations: 50,
+      tolerance: 1e-6,
+    });
+
+    // tau = L/R = 100mH / 1k = 0.1ms = 100us
+    const tau = 100e-6;
+
+    // Find time point closest to t = tau
+    const atTau = result.timePoints.reduce((prev, curr) =>
+      Math.abs(curr.time - tau) < Math.abs(prev.time - tau) ? curr : prev,
+    );
+
+    // Voltage across R at t=tau: V_R = V1 - V(node 2)
+    // Node 1 is at V1 = 5V, node 2 is between R and L
+    const vNode2 = atTau.nodeVoltages['2'] ?? 0;
+    const vR = 5 - vNode2;
+    const expectedVR = 5 * (1 - Math.exp(-1)); // 3.1606...
+
+    // Within 10% tolerance
+    return Math.abs(vR - expectedVR) / expectedVR < 0.1;
+  },
+};
+
+// ============================================================================
+// Lab 7: Transformer Action
+// ============================================================================
+
+const lab07: Lab = {
+  id: 'm2-lab-07',
+  title: 'Transformer Action',
+  steps: [
+    {
+      instruction:
+        'Consider an ideal transformer with primary voltage V1 = 5V, turns ratio N1 = 100 turns, N2 = 200 turns (2:1 step-up). Calculate the secondary voltage using V2/V1 = N2/N1.',
+      expected_observation:
+        'V2 = V1 * (N2/N1) = 5V * (200/100) = 10V. The transformer steps up the voltage by the turns ratio. Both voltages remain within ELV range (<50V).',
+      learn_note:
+        'The ideal transformer voltage relation V2/V1 = N2/N1 follows directly from Faraday\'s law: both windings share the same changing magnetic flux, so the induced voltage is proportional to the number of turns. -- H&H 1.5 [@HH-1.5]',
+    },
+    {
+      instruction:
+        'With a load Z_load = 100 ohm on the secondary, calculate the reflected impedance seen at the primary: Z_reflected = (N1/N2)^2 * Z_load.',
+      expected_observation:
+        'Z_reflected = (100/200)^2 * 100 = 0.25 * 100 = 25 ohm. The transformer transforms impedance by the square of the turns ratio, making the 100-ohm load appear as 25 ohm at the primary.',
+      learn_note:
+        'Impedance transformation is one of the most powerful applications of transformers. By choosing the right turns ratio, you can match a source impedance to a load impedance for maximum power transfer. This is the basis of audio output transformers and RF matching networks. -- H&H 1.5 [@HH-1.5]',
+    },
+    {
+      instruction:
+        'Verify power conservation: with V1 = 5V and Z_reflected = 25 ohm, primary current I1 = V1/Z_reflected = 0.2A, so P1 = V1*I1 = 1.0W. On the secondary, I2 = V2/Z_load = 10V/100 = 0.1A, so P2 = V2*I2 = 1.0W.',
+      expected_observation:
+        'P1 = 1.0W and P2 = 1.0W. Power is conserved: the ideal transformer transfers all power from primary to secondary with no losses. Voltage goes up by N2/N1, current goes down by N1/N2.',
+      learn_note:
+        'An ideal transformer conserves power: P1 = P2. When voltage is stepped up, current is stepped down proportionally, and vice versa. Real transformers have losses (copper loss, core loss, leakage flux) but idealized analysis captures the essential behavior. -- H&H 1.5 [@HH-1.5]',
+    },
+  ],
+  verify: () => {
+    // Pure mathematical verification -- no MNA simulation
+    const V1 = 5;       // primary voltage (V)
+    const N1 = 100;      // primary turns
+    const N2 = 200;      // secondary turns
+    const Z_load = 100;  // load impedance (ohm)
+
+    // Turns ratio voltage: V2 = V1 * (N2/N1)
+    const V2 = V1 * (N2 / N1);
+    const turnsRatioOk = Math.abs(V2 - 10) < 0.001;
+
+    // Impedance reflection: Z_reflected = (N1/N2)^2 * Z_load
+    const Z_reflected = Math.pow(N1 / N2, 2) * Z_load;
+    const impedanceOk = Math.abs(Z_reflected - 25) < 0.001;
+
+    // Power conservation: P1 = P2
+    const I1 = V1 / Z_reflected;
+    const P1 = V1 * I1;
+    const I2 = V2 / Z_load;
+    const P2 = V2 * I2;
+    const powerOk = Math.abs(P1 - P2) / P1 < 0.001;
+
+    return turnsRatioOk && impedanceOk && powerOk;
+  },
+};
+
+/** All 7 Module 2 labs */
+export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05, lab06, lab07];
