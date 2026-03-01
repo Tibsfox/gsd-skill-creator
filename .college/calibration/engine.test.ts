@@ -336,6 +336,154 @@ describe('CalibrationEngine', () => {
       expect(score).toBe(1.0);
     });
   });
+
+  describe('Pluggability integration (CAL-02)', () => {
+    it('processes a full cycle with an inline cooking model', async () => {
+      const mockStore = createMockDeltaStore();
+      const engine = new CalibrationEngine(mockStore);
+
+      const cookingModel: DomainCalibrationModel = {
+        domain: 'culinary',
+        parameters: ['temperature', 'time', 'liquid'],
+        science: "Newton's law of cooling; protein denaturation models; starch gelatinization",
+        safetyBoundaries: [
+          {
+            parameter: 'poultry_internal_temp',
+            limit: 165,
+            type: 'absolute',
+            reason: 'FDA minimum safe internal temperature for poultry',
+          },
+        ],
+        computeAdjustment(delta: ComparisonDelta): Record<string, number> {
+          if (delta.direction === 'over' && delta.category === 'temperature') {
+            return { temperature: -25, time: -0.15 };
+          }
+          if (delta.direction === 'under' && delta.category === 'temperature') {
+            return { temperature: +25, time: +0.15 };
+          }
+          return {};
+        },
+        confidence(delta: ComparisonDelta): number {
+          return ['temperature', 'time', 'liquid'].includes(delta.category) ? 0.8 : 0.4;
+        },
+      };
+
+      engine.registerModel(cookingModel);
+
+      const result = await engine.process({
+        domain: 'culinary',
+        translationId: 'test-cook-1',
+        observedResult: 'overdone',
+        expectedResult: 'medium',
+        parameters: { temperature: 350 },
+      });
+
+      // Bounded: raw -25 on param 350 → 7.1% < 20% → passes through
+      expect(result.adjustment.temperature).toBe(-25);
+      expect(result.confidence).toBeGreaterThanOrEqual(0);
+      expect(result.confidence).toBeLessThanOrEqual(1);
+      expect(result.domainModel).toBe('culinary');
+    });
+
+    it('swaps between registered models based on domain', async () => {
+      const mockStore = createMockDeltaStore();
+      const engine = new CalibrationEngine(mockStore);
+
+      const mathModel: DomainCalibrationModel = {
+        domain: 'mathematics',
+        parameters: ['precision'],
+        science: 'Numerical analysis',
+        safetyBoundaries: [],
+        computeAdjustment: () => ({ precision: 42 }),
+        confidence: () => 0.95,
+      };
+
+      const cookingModel: DomainCalibrationModel = {
+        domain: 'culinary',
+        parameters: ['temperature'],
+        science: 'Thermodynamics',
+        safetyBoundaries: [],
+        computeAdjustment: () => ({ temperature: -10 }),
+        confidence: () => 0.7,
+      };
+
+      engine.registerModel(mathModel);
+      engine.registerModel(cookingModel);
+
+      const result = await engine.process({
+        domain: 'mathematics',
+        translationId: 'test-math-1',
+        observedResult: 'imprecise result',
+        expectedResult: 'precise',
+        parameters: { precision: 1000 },
+      });
+
+      // Math model returns precision: 42, 4.2% of 1000 < 20% → passes through
+      expect(result.adjustment.precision).toBe(42);
+      expect(result.domainModel).toBe('mathematics');
+      // Must NOT be 0.7 (cooking model) — confirms correct routing
+      expect(result.confidence).toBe(0.95);
+    });
+
+    it('throws clear error for unregistered domain', async () => {
+      const mockStore = createMockDeltaStore();
+      const engine = new CalibrationEngine(mockStore);
+
+      await expect(
+        engine.process({
+          domain: 'unknown-domain',
+          translationId: 'test-fail',
+          observedResult: 'bad',
+          expectedResult: 'good',
+          parameters: { x: 100 },
+        }),
+      ).rejects.toThrow('No calibration model registered for domain: unknown-domain');
+    });
+
+    it('throws TypeError for duplicate domain registration', () => {
+      const mockStore = createMockDeltaStore();
+      const engine = new CalibrationEngine(mockStore);
+
+      const model1: DomainCalibrationModel = {
+        domain: 'cooking',
+        parameters: ['temperature'],
+        science: 'Test',
+        safetyBoundaries: [],
+        computeAdjustment: () => ({}),
+        confidence: () => 0.5,
+      };
+
+      const model2: DomainCalibrationModel = {
+        domain: 'cooking',
+        parameters: ['time'],
+        science: 'Test v2',
+        safetyBoundaries: [],
+        computeAdjustment: () => ({}),
+        confidence: () => 0.6,
+      };
+
+      engine.registerModel(model1);
+      expect(() => engine.registerModel(model2)).toThrow(TypeError);
+      expect(() => engine.registerModel(model2)).toThrow(
+        'Model already registered for domain: cooking',
+      );
+    });
+
+    /*
+     * TypeScript compile-time interface test (intentionally not runnable):
+     *
+     * The following would NOT compile, proving DomainCalibrationModel
+     * requires both computeAdjustment and confidence methods:
+     *
+     * const incomplete: DomainCalibrationModel = {
+     *   domain: 'x',
+     *   parameters: [],
+     *   science: '',
+     *   safetyBoundaries: [],
+     *   // Missing computeAdjustment and confidence → TypeScript compile error
+     * };
+     */
+  });
 });
 
 /** Helper to create test CalibrationDelta objects. */
