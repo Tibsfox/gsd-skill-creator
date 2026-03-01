@@ -81,3 +81,7 @@ export type {
   PhaseResult,
   SchedulerOptions,
 } from './scheduler.js';
+
+// Resume (Phase 498-03)
+export { resumeExecution, canResume, computeResumePoint } from './resume.js';
+export type { ResumeResult } from './resume.js';
