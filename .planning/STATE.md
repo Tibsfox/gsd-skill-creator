@@ -87,7 +87,11 @@ Progress: [███████████████████████
 - Systems panels handle both legacy IDs and namespaced IDs (e.g., exponential-decay and math-exponential-decay)
 - Math concept panels Map initialized empty -- panels translate on demand, not hardcoded
 - complexPlanePosition computed from polar coordinates (theta, radius) for mathematical clarity
-- Culinary cross-references use descriptive future-resolvable targetIds
+- Culinary cross-references resolved from descriptive targetIds to actual concept IDs (cook- prefix)
+- SafetyWarden uses injectable clock (now?: () => Date) for deterministic danger zone testing
+- AllergenManager is stateless -- no user profile or calibration input, always flags allergens
+- Duplicate safety boundary registration keeps the stricter limit rather than throwing
+- Math<->Cooking cross-references mapped: exponential-decay<->newtons-cooling, ratios<->bakers-ratios, logarithmic-scales<->maillard-reaction
 
 ### Pending Todos
 

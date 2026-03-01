@@ -63,17 +63,17 @@ Requirements for Cooking With Claude milestone. Each maps to roadmap phases.
 
 ### Safety
 
-- [ ] **SAFE-01**: Safety Warden enforces absolute food safety boundaries — poultry ≥165°F, ground meat ≥160°F, whole cuts ≥145°F
-- [ ] **SAFE-02**: Allergen warnings are non-negotiable — ingredient substitution always flags allergen implications
-- [ ] **SAFE-03**: Safety Warden supports three modes: annotate (flag), gate (require acknowledgment), redirect (substitute safe alternative)
-- [ ] **SAFE-04**: Temperature danger zone (40-140°F) time tracking with warnings at 2+ hours
+- [x] **SAFE-01**: Safety Warden enforces absolute food safety boundaries — poultry ≥165°F, ground meat ≥160°F, whole cuts ≥145°F
+- [x] **SAFE-02**: Allergen warnings are non-negotiable — ingredient substitution always flags allergen implications
+- [x] **SAFE-03**: Safety Warden supports three modes: annotate (flag), gate (require acknowledgment), redirect (substitute safe alternative)
+- [x] **SAFE-04**: Temperature danger zone (40-140°F) time tracking with warnings at 2+ hours
 
 ### Integration
 
 - [ ] **INTG-01**: Rosetta Core connects to skill-creator observation pipeline (exploring code triggers pattern detection)
 - [ ] **INTG-02**: Token budget adapter ensures progressive disclosure respects 2-5% ceiling per panel load
 - [ ] **INTG-03**: Chipset adapter maps Rosetta panels to chipset specialist agents
-- [ ] **INTG-04**: Math↔Cooking cross-department references navigate correctly in both directions
+- [x] **INTG-04**: Math↔Cooking cross-department references navigate correctly in both directions
 
 ### Testing
 
@@ -156,11 +156,11 @@ Requirements for Cooking With Claude milestone. Each maps to roadmap phases.
 | COOK-06 | Phase 7: Cooking Department | Pending |
 | COOK-07 | Phase 7: Cooking Department | Pending |
 | COOK-08 | Phase 7: Cooking Department | Pending |
-| SAFE-01 | Phase 8: Safety Warden and Cross-References | Pending |
-| SAFE-02 | Phase 8: Safety Warden and Cross-References | Pending |
-| SAFE-03 | Phase 8: Safety Warden and Cross-References | Pending |
-| SAFE-04 | Phase 8: Safety Warden and Cross-References | Pending |
-| INTG-04 | Phase 8: Safety Warden and Cross-References | Pending |
+| SAFE-01 | Phase 8: Safety Warden and Cross-References | Complete |
+| SAFE-02 | Phase 8: Safety Warden and Cross-References | Complete |
+| SAFE-03 | Phase 8: Safety Warden and Cross-References | Complete |
+| SAFE-04 | Phase 8: Safety Warden and Cross-References | Complete |
+| INTG-04 | Phase 8: Safety Warden and Cross-References | Complete |
 | INTG-01 | Phase 9: Integration Bridge | Pending |
 | INTG-02 | Phase 9: Integration Bridge | Pending |
 | INTG-03 | Phase 9: Integration Bridge | Pending |
