@@ -29,11 +29,11 @@ Requirements for Cooking With Claude milestone. Each maps to roadmap phases.
 
 ### College Structure
 
-- [ ] **COLL-01**: College framework loads departments with progressive disclosure (summary <3K, active <12K, deep 50K+)
-- [ ] **COLL-02**: Department/wing/concept hierarchy is navigable and explorable as code
-- [ ] **COLL-03**: Try-session runner supports interactive entry points for each department
-- [ ] **COLL-04**: Cross-reference resolver links concepts across departments
-- [ ] **COLL-05**: Adding a new department requires no modifications to the College framework
+- [x] **COLL-01**: College framework loads departments with progressive disclosure (summary <3K, active <12K, deep 50K+)
+- [x] **COLL-02**: Department/wing/concept hierarchy is navigable and explorable as code
+- [x] **COLL-03**: Try-session runner supports interactive entry points for each department
+- [x] **COLL-04**: Cross-reference resolver links concepts across departments
+- [x] **COLL-05**: Adding a new department requires no modifications to the College framework
 
 ### Mathematics Department
 
