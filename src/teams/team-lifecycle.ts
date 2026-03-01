@@ -156,7 +156,7 @@ export class TeamLifecycleManager {
       ...config,
       managedBy,
       lifecycleState: 'FORMING' as TeamLifecycleState,
-      durability: (config.durability as string) ?? 'persistent',
+      durability: config.durability ?? 'persistent',
     };
 
     await this.store.save(newConfig);

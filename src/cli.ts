@@ -1097,6 +1097,14 @@ async function main() {
           break;
         }
 
+        case 'dissolve':
+        case 'd': {
+          const { teamDissolveCommand } = await import('./cli/commands/team-dissolve.js');
+          const exitCode = await teamDissolveCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
         default:
           showTeamHelp();
       }
@@ -1506,6 +1514,7 @@ Commands:
   spawn, sp     Check team readiness (agent resolution)
   status, s     Show team details and validation summary
   estimate, e   Show projected token usage and cost
+  dissolve, d   Dissolve a team (lifecycle tracking)
 
 Examples:
   skill-creator team create                    Interactive team creation
