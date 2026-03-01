@@ -54,7 +54,14 @@ const MAX_EVIDENCE_SESSIONS = 10;
 /** Default maximum candidates to return */
 const DEFAULT_MAX_CANDIDATES = 20;
 
-/** Default Jaccard similarity threshold for deduplication */
+/**
+ * Default Jaccard similarity threshold for deduplication.
+ *
+ * @justification Type: Accepted heuristic. 0.5 Jaccard similarity is the
+ * standard threshold for "substantial overlap" in information retrieval literature.
+ * Below 0.5, candidates are more different than similar; above 0.5, the shared
+ * content dominates and deduplication is warranted.
+ */
 const DEFAULT_DEDUP_THRESHOLD = 0.5;
 
 // ============================================================================
