@@ -17,7 +17,7 @@
 import type { SessionInfo, ParsedEntry } from './types.js';
 import { enumerateSessions } from './session-enumerator.js';
 import { parseSessionFile } from './session-parser.js';
-import { ScanStateStore } from './scan-state-store.js';
+import { ScanStateStore, SCAN_SCHEMA_VERSION } from './scan-state-store.js';
 import { validateProjectAccess } from './discovery-safety.js';
 import type { ProjectAccessConfig } from './discovery-safety.js';
 
@@ -116,6 +116,15 @@ export class CorpusScanner {
   async scan(processor: SessionProcessor): Promise<ScanResult> {
     // 1. Load persisted scan state
     const state = await this.stateStore.load();
+
+    // 1.5. Check schema version -- if mismatched, clear all watermarks for re-processing
+    if (state.schemaVersion !== SCAN_SCHEMA_VERSION) {
+      console.info(
+        `Schema version changed (${state.schemaVersion} -> ${SCAN_SCHEMA_VERSION}), re-processing all sessions`
+      );
+      state.sessions = {};
+      state.schemaVersion = SCAN_SCHEMA_VERSION;
+    }
 
     // 2. Enumerate all sessions from Claude projects
     const sessions = await enumerateSessions(this.claudeBaseDir);
