@@ -285,6 +285,16 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       content: 'Shockley diode equation: I = I_s * (exp(V/(n*V_T)) - 1), where V_T = kT/q ~ 26mV at room temperature, n ~ 1-2. Piecewise-linear model: I = (V - V_th)/R_on for V > V_th, else I = V/R_off.',
       hhCitation: 'H&H 1.6',
     },
+    {
+      level: DepthLevel.Practical,
+      content: 'Schottky diodes switch thousands of times faster than standard silicon diodes because they have no minority carrier storage -- they are the first choice for high-frequency power supplies',
+      hhCitation: 'H&H 1.6',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 1.6 for comparison of diode types: standard silicon (1N400x), fast recovery (1N4148), Schottky (1N58xx), and their reverse recovery characteristics',
+      hhCitation: 'H&H 1.6',
+    },
   ],
 
   // ---- 05-transistors: H&H Ch.2, Ch.3 ----
@@ -309,6 +319,36 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       content: 'BJT: I_C = beta * I_B, V_BE ~ 0.6V. Transconductance: g_m = I_C / V_T. Voltage gain: A_v = -g_m * R_C. MOSFET saturation: I_D = (1/2)*mu*C_ox*(W/L)*(V_GS - V_th)^2.',
       hhCitation: 'H&H Ch.2',
     },
+    {
+      level: DepthLevel.Practical,
+      content: 'A differential pair amplifies the difference between two inputs while ignoring signals common to both -- this is the front end of every op-amp',
+      hhCitation: 'H&H Ch.2',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'A JFET is a voltage-controlled resistor: the gate voltage squeezes the conducting channel. Zero gate voltage gives maximum current, negative gate voltage reduces it',
+      hhCitation: 'H&H Ch.3',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 2.3 for differential amplifier analysis including tail current sources, CMRR, and how transistor matching affects performance',
+      hhCitation: 'H&H Ch.2',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 3.1-3.2 for JFET drain characteristics, pinch-off voltage, and common-source/common-drain FET amplifier configurations',
+      hhCitation: 'H&H Ch.3',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'Differential pair gain: Ad = gm*Rc where gm = Ic/(2*Vt). Common-mode gain: Acm = -Rc/(2*Rtail). CMRR = Ad/Acm = gm*Rtail',
+      hhCitation: 'H&H Ch.2',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'JFET Shockley equation: Id = Idss*(1 - Vgs/Vp)^2. Transconductance: gm = 2*Idss/|Vp| * (1 - Vgs/Vp). Common-source gain: Av = -gm*Rd/(1 + gm*Rs)',
+      hhCitation: 'H&H Ch.3',
+    },
   ],
 
   // ---- 06-op-amps: H&H Ch.4, Ch.6 ----
@@ -331,6 +371,36 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
     {
       level: DepthLevel.Mathematical,
       content: 'Inverting amplifier: V_out = -(R_f/R_in)*V_in. Non-inverting: V_out = (1 + R_f/R_in)*V_in. GBW product: A_v * f_-3dB = constant. Sallen-Key Q: Q = sqrt(C1*C2*R1*R2)/(C2*(R1+R2)).',
+      hhCitation: 'H&H Ch.4',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'A summing amplifier adds multiple input signals with adjustable weights -- changing one resistor changes one input\'s contribution without affecting the others',
+      hhCitation: 'H&H Ch.4',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'Every real op-amp has finite bandwidth, input offset voltage, and slew rate that limit its performance in high-speed or precision circuits',
+      hhCitation: 'H&H Ch.4',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 4.2 for inverting op-amp variations: summing amplifier, differentiator, and the virtual ground concept that makes them work',
+      hhCitation: 'H&H Ch.4',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 4.3 for op-amp non-idealities: gain-bandwidth product, slew rate, input offset voltage, bias current, and common-mode rejection ratio',
+      hhCitation: 'H&H Ch.4',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'Summing amplifier: Vout = -(Rf/R1*V1 + Rf/R2*V2 + ... + Rf/Rn*Vn). Differentiator: Vout = -Rf*C*dVin/dt. Integration: Vout = -(1/(Rf*C))*integral(Vin*dt)',
+      hhCitation: 'H&H Ch.4',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'GBW product: Av * f_3dB = constant. Slew rate limit: f_max = SR/(2*pi*Vpeak). Output offset from Vos: Vout_offset = Vos * (1 + Rf/Rin)',
       hhCitation: 'H&H Ch.4',
     },
   ],
