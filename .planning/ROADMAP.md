@@ -100,10 +100,10 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   4. Cross-reference resolver links a concept in one department to a related concept in another
   5. A new department can be added by creating files in the correct directory — no changes to College framework code required
 **Plans**: 4 plans
-  - [ ] 04-01-PLAN.md -- College types, token counter, CollegeLoader with progressive disclosure (COLL-01, COLL-02, COLL-05)
-  - [ ] 04-02-PLAN.md -- DepartmentExplorer and CrossReferenceResolver (COLL-02, COLL-04)
-  - [ ] 04-03-PLAN.md -- TrySessionRunner with step navigation and concept tracking (COLL-03)
-  - [ ] 04-04-PLAN.md -- Integration tests, test department extensibility proof, barrel export (all COLL requirements)
+  - [x] 04-01-PLAN.md -- College types, token counter, CollegeLoader with progressive disclosure (COLL-01, COLL-02, COLL-05)
+  - [x] 04-02-PLAN.md -- DepartmentExplorer and CrossReferenceResolver (COLL-02, COLL-04)
+  - [x] 04-03-PLAN.md -- TrySessionRunner with step navigation and concept tracking (COLL-03)
+  - [x] 04-04-PLAN.md -- Integration tests, test department extensibility proof, barrel export (all COLL requirements)
 
 ### Phase 5: Systems Panels and Mathematics Department
 **Goal**: Python, C++, and Java panels implement the Panel Interface with correct math bindings, and the Mathematics Department is seeded with concepts from "The Space Between" that render correctly across all panels
@@ -127,12 +127,12 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   4. Perl panel demonstrates regex-as-syntax, closure factories, and POD-as-curriculum in a single concept example
   5. ALGOL panel shows BNF notation as meta-language and three-syntax architecture; Unison panel demonstrates content-addressed code with hash-based identity
 **Plans**: 6 plans
-  - [ ] 06-01-PLAN.md -- Lisp panel (homoiconicity: concept definition IS data structure, S-expression representation, macro composition)
-  - [ ] 06-02-PLAN.md -- Pascal + Fortran panels (Wirth's principles in Pascal; scientific computing heritage in Fortran)
-  - [ ] 06-03-PLAN.md -- Perl panel (regex-as-syntax, closure factories, POD-as-curriculum, CPAN ecosystem)
-  - [ ] 06-04-PLAN.md -- ALGOL panel (BNF notation, block structure, three-syntax architecture, descendant tree)
-  - [ ] 06-05-PLAN.md -- Unison panel (content-addressed code, hash-based identity, abilities, codebase-as-database)
-  - [ ] 06-06-PLAN.md -- Integration tests (all 6 panels registered, cross-panel rendering, pedagogical verification)
+  - [x] 06-01-PLAN.md -- Lisp panel (homoiconicity: concept definition IS data structure, S-expression representation, macro composition)
+  - [x] 06-02-PLAN.md -- Pascal + Fortran panels (Wirth's principles in Pascal; scientific computing heritage in Fortran)
+  - [x] 06-03-PLAN.md -- Perl panel (regex-as-syntax, closure factories, POD-as-curriculum, CPAN ecosystem)
+  - [x] 06-04-PLAN.md -- ALGOL panel (BNF notation, block structure, three-syntax architecture, descendant tree)
+  - [x] 06-05-PLAN.md -- Unison panel (content-addressed code, hash-based identity, abilities, codebase-as-database)
+  - [x] 06-06-PLAN.md -- Integration tests (all 6 panels registered, cross-panel rendering, pedagogical verification)
 
 ### Phase 7: Cooking Department
 **Goal**: All seven wings of the Cooking Department exist as navigable, calibration-aware knowledge organized as explorable College code
@@ -191,9 +191,9 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 | 1. Foundation | v1.49.8 | 3/3 | Complete | 2026-03-01 |
 | 2. Rosetta Core Engine | v1.49.8 | 4/4 | Complete | 2026-03-01 |
 | 3. Calibration Engine | v1.49.8 | 4/4 | Complete | 2026-03-01 |
-| 4. College Structure | v1.49.8 | 0/4 | Planned | - |
+| 4. College Structure | v1.49.8 | 4/4 | Complete | 2026-03-01 |
 | 5. Systems Panels and Mathematics Dept | v1.49.8 | 0/TBD | Not started | - |
-| 6. Heritage Panels | v1.49.8 | 0/6 | Planned | - |
+| 6. Heritage Panels | v1.49.8 | 6/6 | Complete | 2026-03-01 |
 | 7. Cooking Department | v1.49.8 | 0/TBD | Not started | - |
 | 8. Safety Warden and Cross-References | v1.49.8 | 0/TBD | Not started | - |
 | 9. Integration Bridge | v1.49.8 | 0/TBD | Not started | - |
