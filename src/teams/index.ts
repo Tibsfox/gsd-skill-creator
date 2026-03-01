@@ -49,6 +49,23 @@ export type { AgentFileResult, AgentMemberInput } from './team-agent-generator.j
 export { teamCreationWizard, nonInteractiveCreate } from './team-wizard.js';
 export type { WizardOptions, CreatePaths } from './team-wizard.js';
 
+// Team lifecycle management
+export {
+  TeamLifecycleManager,
+  teamTransition,
+  isValidTeamTransition,
+  TEAM_VALID_TRANSITIONS,
+} from './team-lifecycle.js';
+export type { TeamLifecycleState } from './team-lifecycle.js';
+
+// Team event log
+export {
+  appendTeamEvent,
+  readTeamEvents,
+  TEAM_EVENTS_FILENAME,
+} from './team-event-log.js';
+export type { TeamLifecycleEvent } from './team-event-log.js';
+
 // Team validation
 export {
   validateTeamFull,
