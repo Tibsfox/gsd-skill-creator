@@ -3,7 +3,7 @@ import { readFile, writeFile, mkdir, readdir, stat, unlink, rm, chmod } from 'fs
 import { join, dirname, resolve } from 'path';
 import { Skill, SkillMetadata, validateSkillMetadata } from '../types/skill.js';
 import { validateSkillNameStrict, suggestFixedName, validateReservedName, SkillMetadataSchema } from '../validation/skill-validation.js';
-import { BudgetValidator } from '../validation/budget-validation.js';
+import { BudgetValidator, BudgetExceededError } from '../validation/budget-validation.js';
 import {
   getExtension,
   isLegacyFormat,
@@ -214,11 +214,7 @@ export class SkillStore {
       const budgetCheck = budgetValidator.checkSingleSkill(content.length);
 
       if (budgetCheck.severity === 'error') {
-        console.warn(
-          `Warning: Skill "${skillName}" exceeds character budget ` +
-          `(${budgetCheck.charCount.toLocaleString()} / ${budgetCheck.budget.toLocaleString()} chars). ` +
-          `This skill may be hidden by Claude Code.`
-        );
+        throw new BudgetExceededError(skillName, budgetCheck);
       }
     }
 
@@ -342,11 +338,7 @@ export class SkillStore {
       const budgetCheck = budgetValidator.checkSingleSkill(content.length);
 
       if (budgetCheck.severity === 'error') {
-        console.warn(
-          `Warning: Skill "${skillName}" exceeds character budget ` +
-          `(${budgetCheck.charCount.toLocaleString()} / ${budgetCheck.budget.toLocaleString()} chars). ` +
-          `This skill may be hidden by Claude Code.`
-        );
+        throw new BudgetExceededError(skillName, budgetCheck);
       }
     }
 
