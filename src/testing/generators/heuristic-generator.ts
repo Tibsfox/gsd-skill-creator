@@ -1,4 +1,3 @@
-import natural from 'natural';
 import type {
   GeneratedTest,
   GeneratorStrategy,
@@ -74,10 +73,13 @@ const PROMPT_TEMPLATES = [
  * system.
  */
 export class HeuristicTestGenerator implements GeneratorStrategy {
-  private tokenizer: natural.WordTokenizer;
+  constructor() {}
 
-  constructor() {
-    this.tokenizer = new natural.WordTokenizer();
+  /**
+   * Tokenize text into words (replaces natural.WordTokenizer).
+   */
+  private tokenize(text: string): string[] {
+    return text.split(/\W+/).filter(Boolean);
   }
 
   /**
@@ -149,8 +151,7 @@ export class HeuristicTestGenerator implements GeneratorStrategy {
    */
   private extractKeyPhrases(text: string, maxCount: number): string[] {
     // Tokenize and normalize
-    const allTokens = this.tokenizer
-      .tokenize(text.toLowerCase())
+    const allTokens = this.tokenize(text.toLowerCase())
       ?.filter((token) => token.length > 2) ?? [];
 
     if (allTokens.length === 0) {

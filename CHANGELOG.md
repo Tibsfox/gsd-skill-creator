@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.49.6] - 2026-03-01
+
+### Fixed
+
+- **onnxruntime mutex crash on macOS** -- Pin onnxruntime-node to v1.20.1 via npm overrides to avoid C++ static destruction order bug (fixes #22)
+- **Bash 3.2 incompatibilities** -- Replace `local -n`, `grep -P`, and `#!/bin/bash` shebangs with POSIX-compatible alternatives across all shell scripts (fixes #21)
+- **Cross-platform home directory** -- Replace `process.env.HOME ?? '/tmp'` with `os.homedir()` in DACP retrospective persistence
+
+### Changed
+
+- **Remove `natural` dependency** -- Replace with zero-dependency `src/nlp/tfidf.ts` and `src/nlp/naive-bayes.ts` (~250 lines total vs ~300MB installed bloat from natural's pg/mongoose/redis transitive deps)
+- **Move `@huggingface/transformers` to optionalDependencies** -- Automatic heuristic fallback when model unavailable; local type stubs for compilation without package
+
+### Added
+
+- `src/nlp/tfidf.ts` -- Lightweight TF-IDF implementation (drop-in for `natural.TfIdf`)
+- `src/nlp/naive-bayes.ts` -- Multinomial Naive Bayes with Laplace smoothing (drop-in for `natural.BayesClassifier`)
+- `fastest-levenshtein` dependency -- 746-byte replacement for `natural.LevenshteinDistance`
+- `.npmrc` with `engine-strict=true`
+- `engines` field in package.json (`node >=18.0.0`)
+
+---
+
 ## [1.33.0] - 2026-02-23
 
 ### Added

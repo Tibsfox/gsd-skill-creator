@@ -1,19 +1,19 @@
-import natural from 'natural';
+import { TfIdf } from '../nlp/tfidf.js';
 import type { ScoredSkill } from '../types/application.js';
 import type { SkillIndexEntry } from '../storage/skill-index.js';
 
 export class RelevanceScorer {
-  private tfidf: natural.TfIdf;
+  private tfidf: TfIdf;
   private skillMap = new Map<number, SkillIndexEntry>();
   private indexed = false;
 
   constructor() {
-    this.tfidf = new natural.TfIdf();
+    this.tfidf = new TfIdf();
   }
 
   // Build TF-IDF corpus from skill descriptions and trigger patterns
   indexSkills(skills: SkillIndexEntry[]): void {
-    this.tfidf = new natural.TfIdf();
+    this.tfidf = new TfIdf();
     this.skillMap.clear();
 
     skills.forEach((skill, index) => {

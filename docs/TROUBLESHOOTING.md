@@ -9,6 +9,7 @@ Centralized troubleshooting for common issues with skill-creator. Each issue fol
 ## Table of Contents
 
 - [Installation Issues](#installation-issues)
+- [macOS Issues](#macos-issues)
 - [Skill Creation Issues](#skill-creation-issues)
 - [Testing Issues](#testing-issues)
 - [Conflict Detection Issues](#conflict-detection-issues)
@@ -117,6 +118,53 @@ node --version
 ```
 
 If below v18, upgrade Node.js. See [Installation Guide](../INSTALL.md#prerequisites) for installation instructions.
+
+---
+
+## macOS Issues
+
+### onnxruntime mutex crash (SIGABRT / "mutex lock failed")
+
+**Symptom:** Running `skill-creator test run` or embedding-related commands crashes with `libc++abi: mutex lock failed: Invalid argument` or `SIGABRT`.
+
+**Cause:** onnxruntime-node v1.21.x has a known C++ static destruction order bug on macOS. The `Ort::Env` singleton destructor fires during process exit and tries to acquire a mutex that has already been destroyed. This affects any code path that loads the HuggingFace embedding model via `@huggingface/transformers`.
+
+**Solution:**
+
+This was fixed in v1.49.6. The fix pins onnxruntime-node to v1.20.1 via npm overrides and moves `@huggingface/transformers` to optional dependencies with automatic heuristic fallback.
+
+If you see this on an older version, upgrade:
+```bash
+git pull origin dev
+npm install
+```
+
+Or manually add the override to your `package.json`:
+```json
+{
+  "overrides": {
+    "onnxruntime-node": "1.20.1"
+  }
+}
+```
+
+---
+
+### Shell script failures (Bash 3.2 compatibility)
+
+**Symptom:** Shell scripts fail with syntax errors like `local: -n: invalid option` or `grep: invalid option -- P`.
+
+**Cause:** macOS ships Bash 3.2.57 (GPLv2) permanently. Features like `local -n` (namerefs, Bash 4.3+), `declare -A` (associative arrays, Bash 4.0+), and `grep -P` (PCRE, GNU-only) are not available.
+
+**Solution:**
+
+This was fixed in v1.49.6 for all project shell scripts. If writing new scripts:
+
+- Use `#!/usr/bin/env bash` shebang (not `#!/bin/bash`)
+- Avoid `local -n` — use positional parameters or global variables instead
+- Avoid `grep -P` — use `grep -E` (extended regex) or `sed`
+- Avoid `declare -A` — use indexed arrays or environment variables
+- Avoid `${var^^}` / `${var,,}` — use `tr '[:lower:]' '[:upper:]'`
 
 ---
 
