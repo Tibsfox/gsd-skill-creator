@@ -22,6 +22,7 @@ import type { SubversionCallbacks } from './scheduler.js';
 import type { GateEvaluatorOptions } from './gates.js';
 import type { WatchdogConfig } from './write-watchdog.js';
 import type { TeamConfig } from '../../types/team.js';
+import { writeFile as writeFileFs, readFile as readFileFs } from 'node:fs/promises';
 import { createExecutionState, transition } from './state-machine.js';
 import { createScheduler } from './scheduler.js';
 import { resumeExecution } from './resume.js';
@@ -78,6 +79,10 @@ export interface AutonomyEngineConfig {
   teachForwardDir?: string;
   /** Path for journal input for teach-forward */
   journalDir?: string;
+  /** Path to watchdog state JSON file for cross-session persistence */
+  watchdogStatePath?: string;
+  /** Session identifier for watchdog state (defaults to milestoneId) */
+  sessionId?: string;
   /** Optional team lifecycle management */
   team?: AutonomyTeamConfig;
 }
@@ -176,6 +181,11 @@ export function createAutonomyEngine(config: AutonomyEngineConfig): AutonomyEngi
           // Record write activity to keep watchdog alive
           watchdog.recordWrite();
 
+          // Persist watchdog state to file after each subversion
+          if (config.watchdogStatePath) {
+            await watchdog.persistState(config.watchdogStatePath, watchdogSessionId, watchdogIO);
+          }
+
           // Gate evaluation
           if (gateEvaluator) {
             const gateResult = await gateEvaluator.evaluateGates(subversion, currentState);
@@ -201,6 +211,16 @@ export function createAutonomyEngine(config: AutonomyEngineConfig): AutonomyEngi
       // Step 5: Start watchdog and run scheduler
       // ====================================================================
       watchdog.start();
+
+      // Persist initial watchdog state to file if configured
+      const watchdogSessionId = config.sessionId ?? config.milestoneId;
+      const watchdogIO = {
+        writeFile: async (p: string, c: string) => { await writeFileFs(p, c, 'utf-8'); },
+        readFile: async (p: string) => readFileFs(p, 'utf-8'),
+      };
+      if (config.watchdogStatePath) {
+        await watchdog.persistState(config.watchdogStatePath, watchdogSessionId, watchdogIO);
+      }
 
       try {
         const schedulerResult = await scheduler.run(state);
