@@ -120,3 +120,19 @@ export {
   processJournal,
 } from './teach-forward.js';
 export type { ChainVerificationResult } from './teach-forward.js';
+
+// Context budget (Phase 500-03)
+export {
+  estimateTokenUsage,
+  estimateContextBudget,
+  shouldPause,
+  estimateRemainingCapacity,
+  formatBudgetReport,
+  TOKENS_PER_FILE_READ,
+  TOKENS_PER_FILE_WRITE,
+  TOKENS_PER_SUBVERSION,
+  SESSION_OVERHEAD,
+  DEFAULT_MAX_TOKENS,
+  DEFAULT_THRESHOLD,
+} from './context-budget.js';
+export type { BudgetMetrics, PauseDecision, RemainingCapacity } from './context-budget.js';

@@ -155,7 +155,7 @@ describe('estimateContextBudget', () => {
     };
     const budget = estimateContextBudget(metrics);
     // 55000 / 200000 * 100 = 27.5
-    expect(budget.usage_percent).toBe(27.5);
+    expect(budget.usage_percent).toBeCloseTo(27.5, 10);
   });
 });
 
