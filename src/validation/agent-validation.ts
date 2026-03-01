@@ -9,7 +9,7 @@
  */
 
 import { z } from 'zod';
-import natural from 'natural';
+import { distance as levenshteinDistance } from 'fastest-levenshtein';
 import {
   KNOWN_TOOLS,
   MODEL_ALIASES,
@@ -135,7 +135,7 @@ export function validateToolName(input: string): ToolValidationResult {
   let bestDistance = Infinity;
 
   for (const tool of KNOWN_TOOLS) {
-    const distance = natural.LevenshteinDistance(
+    const distance = levenshteinDistance(
       trimmed.toLowerCase(),
       tool.toLowerCase()
     );
@@ -332,7 +332,7 @@ export function suggestToolCorrection(input: string): string | null {
   let bestDistance = Infinity;
 
   for (const tool of KNOWN_TOOLS) {
-    const distance = natural.LevenshteinDistance(
+    const distance = levenshteinDistance(
       trimmed.toLowerCase(),
       tool.toLowerCase()
     );

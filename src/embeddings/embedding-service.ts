@@ -13,7 +13,14 @@
  * - Batch embedding support
  */
 
-import type { FeatureExtractionPipeline, Tensor } from '@huggingface/transformers';
+// Local type stubs for @huggingface/transformers (optional dependency).
+// These allow compilation without the package installed.
+type FeatureExtractionPipeline = (
+  text: string | string[],
+  options?: { pooling?: string; normalize?: boolean }
+) => Promise<Tensor>;
+type Tensor = { data: Float32Array; dims: number[] };
+
 import type {
   EmbeddingVector,
   EmbeddingServiceConfig,
@@ -142,9 +149,9 @@ export class EmbeddingService {
         ? this.wrapProgressCallback(progressCallback)
         : undefined;
 
-      // Load the embedding model
-      // Dynamic import with type assertion to avoid complex union type issues
-      // in @huggingface/transformers (see: https://github.com/huggingface/transformers.js/issues)
+      // Load the embedding model (optional dependency — may not be installed)
+      // Dynamic import with type assertion; wrapped in try/catch for graceful fallback
+      // @ts-expect-error -- @huggingface/transformers is an optional dependency
       const transformers = (await import('@huggingface/transformers')) as {
         pipeline: (
           task: string,

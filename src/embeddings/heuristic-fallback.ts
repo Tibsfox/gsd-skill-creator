@@ -1,4 +1,4 @@
-import natural from 'natural';
+import { TfIdf } from '../nlp/tfidf.js';
 import type { EmbeddingVector } from '../types/embeddings.js';
 
 /**
@@ -14,7 +14,7 @@ import type { EmbeddingVector } from '../types/embeddings.js';
  * 4. L2 normalizing the result for cosine similarity compatibility
  */
 export class HeuristicEmbedder {
-  private tfidf: natural.TfIdf;
+  private tfidf: TfIdf;
   private vocabulary: Map<string, number>;
   private dimension: number;
   private documentCount: number;
@@ -24,7 +24,7 @@ export class HeuristicEmbedder {
    * @param dimension - Target embedding dimension (default: 384 to match BGE-small)
    */
   constructor(dimension: number = 384) {
-    this.tfidf = new natural.TfIdf();
+    this.tfidf = new TfIdf();
     this.vocabulary = new Map();
     this.dimension = dimension;
     this.documentCount = 0;
@@ -107,7 +107,7 @@ export class HeuristicEmbedder {
    * Reset the embedder to initial state.
    */
   reset(): void {
-    this.tfidf = new natural.TfIdf();
+    this.tfidf = new TfIdf();
     this.vocabulary.clear();
     this.documentCount = 0;
   }
