@@ -52,6 +52,14 @@ export type { ValidationResult } from './schema-validation.js';
 export { loadGateConfig, validateGateConfigFile } from './gate-loader.js';
 export type { GateLoadResult } from './gate-loader.js';
 
+// Gate enforcement
+export { enforceGates, checkArtifact } from './gate-enforcer.js';
+export type { GateEnforcementResult } from './gate-enforcer.js';
+
+// Simulated work detection
+export { detectSimulatedWork } from './simulated-work-detector.js';
+export type { SimulatedWorkResult, SimulatedWorkCheck } from './simulated-work-detector.js';
+
 // State machine (Phase 498-01)
 export {
   VALID_TRANSITIONS,
@@ -65,3 +73,11 @@ export {
   writeExecutionState,
   readExecutionState,
 } from './persistence.js';
+
+// Scheduler (Phase 498-02)
+export { createScheduler } from './scheduler.js';
+export type {
+  SubversionCallbacks,
+  PhaseResult,
+  SchedulerOptions,
+} from './scheduler.js';
