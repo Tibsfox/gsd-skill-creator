@@ -36,8 +36,18 @@ pub fn tmux_list_sessions() -> Result<Vec<TmuxSessionInfo>, String> {
 ///
 /// This is the primary command used by the TypeScript layer to get the
 /// shell command that pty_open should spawn.
+///
+/// v1.49.7 (PR #24 @PatrickRobotham): checks for tmux availability first,
+/// returning a clear error instead of raw ENOENT "No such file or directory".
 #[tauri::command]
 pub fn tmux_ensure_session(name: String) -> Result<Vec<String>, String> {
+    // Gate on tmux availability — return helpful error instead of ENOENT
+    if detector::detect_tmux().is_none() {
+        return Err(
+            "tmux is not installed. Install it with: apt install tmux (Ubuntu) / brew install tmux (macOS). \
+             The terminal will fall back to raw PTY mode without tmux.".to_string()
+        );
+    }
     if !session::has_session(&name) {
         session::create_session(&name)?;
     }

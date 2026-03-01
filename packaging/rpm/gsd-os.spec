@@ -24,9 +24,12 @@ Recommends:     tmux
 
 %description
 GSD-OS is a desktop application for the Get Shit Done project
-management framework. It integrates a tmux terminal, Claude AI
-assistant, file watcher, and planning dashboard into a unified
-desktop environment built with Tauri.
+management framework. It integrates a terminal (tmux-enhanced or
+raw PTY), Claude AI assistant, file watcher, and planning dashboard
+into a unified desktop environment built with Tauri.
+
+tmux is recommended but optional — the terminal operates in raw PTY
+mode when tmux is not installed (v1.49.7, PR #24 @PatrickRobotham).
 
 Features include adaptive skill creation, agent orchestration,
 educational pack management, and a complete project lifecycle

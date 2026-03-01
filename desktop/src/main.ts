@@ -224,16 +224,28 @@ async function init(): Promise<void> {
         }
       }
 
+      // v1.49.7 (PR #24 @PatrickRobotham): detect tmux availability and fall
+      // back to raw PTY terminal when tmux is not installed.
       if (state?.type === "terminal") {
         const content = wm.getContentElement(event.windowId);
         if (content) {
           try {
-            const { createTmuxTerminal } = await import("./tmux");
-            const handle = await createTmuxTerminal(content, event.windowId);
-            shell.updateProcessStatus("terminal", "running");
-            terminalHandles.set(event.windowId, handle);
+            const { tmuxHasTmux, createTmuxTerminal } = await import("./tmux");
+            const hasTmux = await tmuxHasTmux();
+            if (hasTmux) {
+              const handle = await createTmuxTerminal(content, event.windowId);
+              shell.updateProcessStatus("terminal", "running");
+              terminalHandles.set(event.windowId, handle);
+            } else {
+              // Fallback: raw PTY terminal without tmux
+              console.warn("[Terminal] tmux not available, falling back to raw PTY");
+              const { createTerminal } = await import("./terminal/terminal-emulator");
+              const handle = await createTerminal(content, event.windowId);
+              shell.updateProcessStatus("terminal", "running");
+              terminalHandles.set(event.windowId, handle);
+            }
           } catch (err) {
-            console.error("[Terminal] Failed to create tmux terminal:", err);
+            console.error("[Terminal] Failed to create terminal:", err);
             content.textContent = `Terminal error: ${err}`;
             shell.updateProcessStatus("terminal", "stopped");
           }

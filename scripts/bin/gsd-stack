@@ -1533,8 +1533,9 @@ cmd_pause() {
     exit 1
   fi
 
-  # Step 1: Send Ctrl+C interrupt (skip in mock mode)
-  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+  # Step 1: Send Ctrl+C interrupt (skip in mock mode or if tmux unavailable)
+  # v1.49.7 (PR #24 @PatrickRobotham): guard on tmux availability
+  if [[ -z "$GSD_MOCK_TMUX" ]] && command -v tmux &>/dev/null; then
     local tmux_session
     tmux_session=$(json_field "$(cat "$session_dir/meta.json")" "tmux_session")
     tmux send-keys -t "$tmux_session" C-c 2>/dev/null || true
@@ -1690,8 +1691,9 @@ cmd_resume() {
         done) &
       fi
 
-      # Send warm-start prompt to tmux session (non-mock only)
-      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+      # Send warm-start prompt to tmux session (non-mock, tmux available only)
+      # v1.49.7 (PR #24 @PatrickRobotham): guard on tmux availability
+      if [[ -z "$GSD_MOCK_TMUX" ]] && command -v tmux &>/dev/null; then
         local tmux_session
         tmux_session=$(json_field "$meta_content" "tmux_session")
         if tmux has-session -t "$tmux_session" 2>/dev/null; then
@@ -1740,8 +1742,9 @@ cmd_resume() {
         done) &
       fi
 
-      # Send warm-start prompt to tmux session (non-mock, if tmux session still exists)
-      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+      # Send warm-start prompt to tmux session (non-mock, tmux available only)
+      # v1.49.7 (PR #24 @PatrickRobotham): guard on tmux availability
+      if [[ -z "$GSD_MOCK_TMUX" ]] && command -v tmux &>/dev/null; then
         local tmux_session
         tmux_session=$(json_field "$meta_content" "tmux_session")
         if tmux has-session -t "$tmux_session" 2>/dev/null; then
@@ -1793,8 +1796,9 @@ cmd_resume() {
         done) &
       fi
 
-      # Start new tmux session with Claude (non-mock only)
-      if [[ -z "$GSD_MOCK_TMUX" ]]; then
+      # Start new tmux session with Claude (non-mock, tmux available only)
+      # v1.49.7 (PR #24 @PatrickRobotham): guard on tmux availability
+      if [[ -z "$GSD_MOCK_TMUX" ]] && command -v tmux &>/dev/null; then
         tmux new-session -d -s "$tmux_name" -c "$project_path" "claude"
         sleep 1
         # Send warm-start prompt
@@ -1938,8 +1942,9 @@ cmd_stop() {
   local save_file=""
   save_file=$(_save_snapshot "$session_name" "auto-save on stop") || true
 
-  # Step 2: Graceful shutdown sequence (skip in mock mode)
-  if [[ -z "$GSD_MOCK_TMUX" ]]; then
+  # Step 2: Graceful shutdown sequence (skip in mock mode or if tmux unavailable)
+  # v1.49.7 (PR #24 @PatrickRobotham): guard on tmux availability
+  if [[ -z "$GSD_MOCK_TMUX" ]] && command -v tmux &>/dev/null; then
     local meta_content tmux_session
     meta_content=$(cat "$session_dir/meta.json")
     tmux_session=$(json_field "$meta_content" "tmux_session")

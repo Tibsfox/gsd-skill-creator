@@ -35,11 +35,13 @@ fn test_claude_depends_on_tmux() {
     assert_eq!(claude.depends_on, vec![ServiceId::Tmux]);
 }
 
+/// v1.49.7: FileWatcher has no dependencies (watches .planning/, no tmux involvement).
+/// Corrected from [Tmux] — fixes Rust/TS graph divergence (PR #24 @PatrickRobotham).
 #[test]
-fn test_file_watcher_depends_on_tmux() {
+fn test_file_watcher_has_no_dependencies() {
     let graph = service_graph();
     let fw = graph.iter().find(|s| s.id == ServiceId::FileWatcher).unwrap();
-    assert_eq!(fw.depends_on, vec![ServiceId::Tmux]);
+    assert!(fw.depends_on.is_empty(), "FileWatcher should have no dependencies");
 }
 
 #[test]
@@ -73,10 +75,14 @@ fn test_terminal_depends_on_staging() {
     assert_eq!(terminal.depends_on, vec![ServiceId::Staging]);
 }
 
+/// v1.49.7: With FileWatcher having no deps, both FileWatcher and Tmux are roots.
+/// Kahn's algorithm sorts alphabetically within same level: "file_watcher" < "tmux".
 #[test]
-fn test_topological_order_tmux_first() {
+fn test_topological_order_roots_first() {
     let order = topological_order();
-    assert_eq!(order[0], ServiceId::Tmux);
+    // Both FileWatcher and Tmux are roots (no deps). Alphabetically file_watcher < tmux.
+    assert_eq!(order[0], ServiceId::FileWatcher);
+    assert_eq!(order[1], ServiceId::Tmux);
 }
 
 #[test]

@@ -120,8 +120,18 @@ pub fn stop_claude_in_tmux(
 }
 
 /// Check if the `claude` binary is in PATH.
+///
+/// v1.49.7 (PR #24 @PatrickRobotham): replaced `which` with cross-platform
+/// detection — `command -v` on Unix, `where.exe` on Windows.
 pub fn detect_claude_binary() -> Option<String> {
-    let output = Command::new("which").arg("claude").output().ok()?;
+    let output = if cfg!(windows) {
+        Command::new("where.exe").arg("claude").output().ok()?
+    } else {
+        Command::new("sh")
+            .args(["-c", "command -v claude"])
+            .output()
+            .ok()?
+    };
     if output.status.success() {
         let path = String::from_utf8_lossy(&output.stdout).trim().to_string();
         if path.is_empty() {

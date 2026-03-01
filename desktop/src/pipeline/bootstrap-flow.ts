@@ -25,15 +25,21 @@ export type BootstrapStage =
   | "complete"
   | "failed";
 
-/** Service dependency graph: ordered list with dependency requirements. */
+/**
+ * Service dependency graph: ordered list with dependency requirements.
+ *
+ * v1.49.7 (PR #24 @PatrickRobotham): added `optional` field to support graceful
+ * degradation. Tmux marked optional; file_watcher deps corrected from ["claude"]
+ * to [] — fixes Rust/TS graph divergence found by audit.
+ */
 const SERVICE_ORDER = [
-  { id: "tmux", deps: [] as string[] },
-  { id: "claude", deps: ["tmux"] },
-  { id: "file_watcher", deps: ["claude"] },
-  { id: "dashboard", deps: ["file_watcher"] },
-  { id: "console", deps: ["file_watcher"] },
-  { id: "staging", deps: ["dashboard", "console"] },
-  { id: "terminal", deps: ["staging"] },
+  { id: "tmux", deps: [] as string[], optional: true },
+  { id: "claude", deps: ["tmux"], optional: false },
+  { id: "file_watcher", deps: [] as string[], optional: false },
+  { id: "dashboard", deps: ["file_watcher"], optional: false },
+  { id: "console", deps: ["file_watcher"], optional: false },
+  { id: "staging", deps: ["dashboard", "console"], optional: false },
+  { id: "terminal", deps: ["staging"], optional: false },
 ] as const;
 
 /** Port for IPC commands (injectable for testing). */
@@ -109,6 +115,8 @@ export class BootstrapFlow {
       // In-app, just verify directories exist via IPC or assume they do
 
       // Stage 3: Start services in dependency order
+      // v1.49.7 (PR #24 @PatrickRobotham): optional services that fail are
+      // skipped (LED set to grey) instead of aborting the entire bootstrap.
       this.setStage("services");
       for (const service of SERVICE_ORDER) {
         // Wait for dependencies to be online
@@ -116,7 +124,10 @@ export class BootstrapFlow {
           const states = await this.ipc.getServiceStates();
           const depsOnline = service.deps.every((dep) => {
             const depState = states.find((s) => s.service_id === dep);
-            return depState?.status === "online";
+            if (depState?.status === "online") return true;
+            // Skip unmet deps if the dep itself is optional
+            const depDef = SERVICE_ORDER.find((s) => s.id === dep);
+            return depDef?.optional === true;
           });
           if (!depsOnline) {
             this.chatRenderer.showError(
@@ -133,6 +144,15 @@ export class BootstrapFlow {
 
         const result = await this.ipc.startService(service.id);
         if (!result.ok) {
+          if (service.optional) {
+            // Optional service failed — set LED grey, log, continue
+            this.ledPanel.setServiceState(service.id, "offline", "grey");
+            this.chatRenderer.appendMessage(
+              "system",
+              `Optional service ${service.id} unavailable, skipping (${result.error || "not installed"})`,
+            );
+            continue;
+          }
           this.ledPanel.setServiceState(service.id, "failed", "red");
           this.chatRenderer.showError(
             `Failed to start ${service.id}: ${result.error || "unknown error"}`,
