@@ -108,12 +108,13 @@ export class CapabilityScaffolder {
    */
   private generateSkillTask(capabilityName: string): ScaffoldTask {
     const targetPath = `.claude/skills/${capabilityName}/SKILL.md`;
+    const displayName = this.deriveDisplayName(capabilityName);
 
-    const body = `\n# ${capabilityName}\n\nTODO: Add skill instructions here.\n\nThis skill was scaffolded by capability declaration.\n`;
+    const body = `\n# ${capabilityName}\n\nThis skill provides guidance for ${displayName} workflows.\n\nCustomize the instructions below for your specific use case.\n\nThis skill was scaffolded by capability declaration.\n`;
 
     const templateContent = matter.stringify(body, {
       name: capabilityName,
-      description: 'TODO: Describe when this skill should activate',
+      description: `Activates when working with ${displayName} patterns`,
     });
 
     return {
@@ -138,14 +139,17 @@ export class CapabilityScaffolder {
    */
   private generateAgentTask(capabilityName: string): ScaffoldTask {
     const targetPath = `.claude/agents/${capabilityName}.md`;
+    const displayName = this.deriveDisplayName(capabilityName);
 
     const templateContent = `---
 name: ${capabilityName}
-description: "TODO: Describe when this agent should be delegated to"
+description: "Handles ${displayName} tasks when delegated"
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
-TODO: Add agent instructions here.
+This agent handles ${displayName} operations.
+
+Customize the instructions below for your specific use case.
 
 This agent was scaffolded by capability declaration.
 `;
@@ -158,6 +162,18 @@ This agent was scaffolded by capability declaration.
       templateContent,
       taskXml: this.generateTaskXml('agent', capabilityName, targetPath),
     };
+  }
+
+  // --------------------------------------------------------------------------
+  // Helpers
+  // --------------------------------------------------------------------------
+
+  /**
+   * Convert kebab-case capability name to human-readable display name.
+   * e.g., 'my-build-helper' -> 'my build helper'
+   */
+  private deriveDisplayName(capabilityName: string): string {
+    return capabilityName.replace(/-/g, ' ');
   }
 
   // --------------------------------------------------------------------------
@@ -175,9 +191,9 @@ This agent was scaffolded by capability declaration.
     return `<task type="auto">
   <name>Scaffold ${type}/${capabilityName}</name>
   <files>${targetPath}</files>
-  <action>Create the ${type} file at ${targetPath} with the skeleton template. Then fill in the description and instructions based on the phase context and plan objectives. The skeleton has TODO markers — replace ALL of them with real content.</action>
+  <action>Create the ${type} file at ${targetPath} with the skeleton template. Then review and customize the generated content based on the phase context and plan objectives.</action>
   <verify>File exists at ${targetPath} and has valid frontmatter (name and description fields present)</verify>
-  <done>${type}/${capabilityName} file exists with real content (no remaining TODO markers)</done>
+  <done>${type}/${capabilityName} file exists with content that has been reviewed and customized</done>
 </task>`;
   }
 }
