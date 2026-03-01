@@ -54,7 +54,11 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   2. Panel Router selects the correct panel given a test context vector (domain, user preference, requested format)
   3. Expression Renderer produces formatted output from a panel-specific expression
   4. Rosetta Core translates the same concept (e.g., exponential growth) across 3 different panels and each output is correct
-**Plans**: TBD
+**Plans**: 4 plans
+  - [ ] 02-01-PLAN.md -- Concept Registry (ConceptRegistry class, dependency resolution, Complex Plane queries)
+  - [ ] 02-02-PLAN.md -- Panel Router (6-step routing logic, expertise/task/Complex Plane signals)
+  - [ ] 02-03-PLAN.md -- Expression Renderer (3-depth rendering, token cost, calibration-adjusted output)
+  - [ ] 02-04-PLAN.md -- Rosetta Engine + cross-panel integration tests (CORE-04: translate() pipeline, 3-panel proof)
 
 ### Phase 3: Calibration Engine
 **Goal**: The universal feedback loop is operational — observations produce calibration deltas that persist and accumulate into user profiles
@@ -157,7 +161,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 1. Foundation | v1.49.8 | 3/3 | Complete | 2026-03-01 |
-| 2. Rosetta Core Engine | v1.49.8 | 0/TBD | Not started | - |
+| 2. Rosetta Core Engine | v1.49.8 | 0/4 | Planned | - |
 | 3. Calibration Engine | v1.49.8 | 0/TBD | Not started | - |
 | 4. College Structure | v1.49.8 | 0/TBD | Not started | - |
 | 5. Systems Panels and Mathematics Dept | v1.49.8 | 0/TBD | Not started | - |
