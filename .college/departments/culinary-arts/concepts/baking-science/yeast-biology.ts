@@ -24,6 +24,11 @@ export const yeastBiology: RosettaConcept = {
       targetId: 'cook-gluten-development',
       description: 'Yeast CO2 inflates the gluten network -- strong gluten traps gas for a good rise',
     },
+    {
+      type: 'cross-reference',
+      targetId: 'cook-temperature-danger-zone',
+      description: 'Dough containing eggs or dairy must not proof in the danger zone (40-140F) for more than 2 hours',
+    },
   ],
   complexPlanePosition: {
     real: 0.5,
