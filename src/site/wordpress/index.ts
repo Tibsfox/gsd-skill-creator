@@ -10,3 +10,5 @@ export type {
   PullResult,
   PushResult,
 } from './wp-sync.js';
+export { createMcpWpAdapter } from './mcp-adapter.js';
+export type { McpToolCaller, McpWpAdapter } from './mcp-adapter.js';
