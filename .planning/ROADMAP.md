@@ -179,7 +179,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 | 0.5 Foundations Docs | v1.49.8 | 0/1 | Planned | - |
 | 1. Foundation | v1.49.8 | 3/3 | Complete | 2026-03-01 |
 | 2. Rosetta Core Engine | v1.49.8 | 0/4 | Planned | - |
-| 3. Calibration Engine | v1.49.8 | 0/TBD | Not started | - |
+| 3. Calibration Engine | v1.49.8 | 4/4 | Complete | 2026-03-01 |
 | 4. College Structure | v1.49.8 | 0/TBD | Not started | - |
 | 5. Systems Panels and Mathematics Dept | v1.49.8 | 0/TBD | Not started | - |
 | 6. Heritage Panels | v1.49.8 | 0/TBD | Not started | - |
