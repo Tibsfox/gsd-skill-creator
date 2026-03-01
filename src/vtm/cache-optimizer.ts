@@ -146,22 +146,52 @@ const STOPWORDS = new Set([
 /** Minimum word length to consider "significant" for overlap detection. */
 const MIN_WORD_LENGTH = 4;
 
-/** Jaccard similarity threshold for flagging content overlap. */
+/**
+ * Jaccard similarity threshold for flagging content overlap.
+ *
+ * @justification Type: Accepted heuristic. 0.5 Jaccard similarity is the
+ * standard threshold for "substantial overlap" in information retrieval literature.
+ * Below 0.5, items are more different than similar; above 0.5, the shared content
+ * dominates and deduplication is warranted.
+ */
 const OVERLAP_THRESHOLD = 0.5;
 
 /** Keywords identifying schema/type producers. */
 const SCHEMA_KEYWORDS = ['types', 'schema', 'interface', 'config'];
 
-/** Summary tier token target (~2K). */
+/**
+ * Summary tier token target (~2K).
+ *
+ * @justification Type: Accepted heuristic. 2000 tokens is the upper bound
+ * for a concise summary that fits within a single model completion window
+ * alongside a full prompt. Tasks needing <= 2K tokens of context can use
+ * the summary tier, which omits implementation details.
+ */
 const SUMMARY_TOKEN_THRESHOLD = 2000;
 
-/** Active tier token target (~10K). */
+/**
+ * Active tier token target (~10K).
+ *
+ * @justification Type: Accepted heuristic. 10000 tokens represents the
+ * practical context budget for a single active working task. Tasks needing
+ * 2K-10K tokens of context use the active tier, which includes implementation
+ * details but omits full reference documentation. Above 10K, the reference
+ * tier provides unabridged content.
+ */
 const ACTIVE_TOKEN_THRESHOLD = 10000;
 
 /** Tokens per minute estimation rate, consistent with wave-analysis.ts. */
 const TOKENS_PER_MINUTE = 1000;
 
-/** Default TTL threshold in minutes (per CONTEXT.md decision). */
+/**
+ * Default TTL threshold in minutes (per CONTEXT.md decision).
+ *
+ * @justification Type: Accepted heuristic. 5-minute TTL for cache staleness
+ * matches the expected execution window for a single wave in the VTM pipeline.
+ * At ~1000 tokens/minute, a 5K-token wave completes in ~5 minutes. Caches
+ * produced by Wave N become stale for Wave N+2 consumers if cumulative
+ * execution exceeds this window. Configurable via options.ttlMinutes.
+ */
 const DEFAULT_TTL_MINUTES = 5;
 
 // ---------------------------------------------------------------------------

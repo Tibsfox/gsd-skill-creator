@@ -20,6 +20,14 @@ export const MAX_ANGULAR_VELOCITY = 0.2;
 /**
  * Part-to-angular-region mapping.
  * Maps part number (1-10) to base theta value on the complex plane.
+ *
+ * @justification Type: Accepted heuristic. 10 angular regions partition
+ * the unit circle for learning domain classification. Each part occupies
+ * a pi/8 arc (22.5 degrees), providing sufficient angular resolution for
+ * domain discrimination without over-partitioning. The total span covers
+ * 0 to 9*pi/8 (~202 degrees), leaving the remaining arc for future
+ * expansion. Theta values increase monotonically so adjacent parts
+ * occupy adjacent angular regions on the complex plane.
  */
 export const PART_ANGULAR_REGIONS: Record<number, number> = {
   1: 0,                    // Part I: Seeing

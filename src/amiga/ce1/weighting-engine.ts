@@ -75,9 +75,23 @@ export interface WeightingConfig {
 /**
  * Default weighting configuration.
  *
- * Critical-path gets 40% weight because contributions during integration
- * and review are disproportionately valuable. Frequency and depth-decay
- * split the remaining 60% equally.
+ * @justification Type: Accepted heuristic
+ * Three-component weighting (30% frequency / 40% critical-path / 30% depth-decay):
+ * - Critical-path gets 40% because contributions during integration and review
+ *   phases are disproportionately valuable (late-stage work catches more bugs).
+ * - Frequency and depth-decay split the remaining 60% equally: frequency rewards
+ *   consistent contribution, depth-decay rewards direct (vs transitive) involvement.
+ * - Ratios must sum to 1.0 for normalization correctness.
+ *
+ * Phase scores (0.0-1.0) model increasing criticality through the mission lifecycle:
+ * BRIEFING(0.1)/PLANNING(0.2) are low-criticality; EXECUTION(0.5) is mid;
+ * INTEGRATION(0.8)/REVIEW_GATE(0.9)/COMPLETION(1.0) are high-criticality.
+ * HOLD(0.05)/ABORT(0.0) are near-zero because suspended/aborted work contributes
+ * minimally to mission outcomes.
+ *
+ * decayBase 0.5: Geometric decay halves weight per dependency depth level.
+ * At depth 3, transitive contribution is 12.5% of direct -- steep enough to
+ * prevent deep transitive chains from dominating the weight vector.
  */
 export const DEFAULT_WEIGHTING_CONFIG: WeightingConfig = {
   frequencyRatio: 0.3,
