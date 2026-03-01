@@ -181,7 +181,11 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   1. Exploring a cooking concept in the College triggers pattern detection in the existing skill-creator observation pipeline
   2. Panel loading at every tier (summary, active, deep) stays within the 2-5% token budget ceiling
   3. Chipset adapter configuration loads without errors and routes panel requests to the correct specialist agents
-**Plans**: TBD
+**Plans**: 4 plans
+  - [ ] 09-01-PLAN.md -- Observation pipeline adapter (ObservationBridge emitting exploration/translation events compatible with SessionObserver)
+  - [ ] 09-02-PLAN.md -- Token budget enforcement adapter (TokenBudgetAdapter wrapping CollegeLoader with 2-5% ceiling)
+  - [ ] 09-03-PLAN.md -- Chipset adapter (ChipsetAdapter mapping panels to specialist engine domains)
+  - [ ] 09-04-PLAN.md -- Integration tests and barrel export (end-to-end verification of all three adapters)
 
 ### Phase 10: Test Suite and Verification
 **Goal**: 85%+ test coverage across all new code, all 14 safety-critical tests pass with zero tolerance, and the foxfood report documents using the system to verify itself
@@ -211,5 +215,5 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 | 6. Heritage Panels | v1.49.8 | 6/6 | Complete | 2026-03-01 |
 | 7. Cooking Department | v1.49.8 | 0/7 | Planned | - |
 | 8. Safety Warden and Cross-References | v1.49.8 | 0/3 | Planned | - |
-| 9. Integration Bridge | v1.49.8 | 0/TBD | Not started | - |
+| 9. Integration Bridge | v1.49.8 | 0/4 | Planned | - |
 | 10. Test Suite and Verification | v1.49.8 | 0/TBD | Not started | - |
