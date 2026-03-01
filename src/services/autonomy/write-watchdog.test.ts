@@ -30,7 +30,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  vi.restoreAllTimers();
+  vi.useRealTimers();
 });
 
 // ============================================================================
