@@ -151,7 +151,6 @@ export class EmbeddingService {
 
       // Load the embedding model (optional dependency — may not be installed)
       // Dynamic import with type assertion; wrapped in try/catch for graceful fallback
-      // @ts-expect-error -- @huggingface/transformers is an optional dependency
       const transformers = (await import('@huggingface/transformers')) as {
         pipeline: (
           task: string,
