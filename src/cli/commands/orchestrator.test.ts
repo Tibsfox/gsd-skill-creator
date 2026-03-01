@@ -317,6 +317,154 @@ describe('orchestratorCommand state', () => {
 });
 
 // ============================================================================
+// State subcommand — milestone-scoped display (RC-07 fix)
+// ============================================================================
+
+const MILESTONE_ROADMAP_MD = [
+  '# Roadmap: Test Project',
+  '',
+  '## Phases',
+  '',
+  '- [x] **Phase 497: Foundation** (Complete 2026-03-01) - Build shared types',
+  '- [x] **Phase 498: Autonomy Engine** (Complete 2026-03-01) - State machine',
+  '- [x] **Phase 499: Artifact Verification Gates** (Complete 2026-03-01) - YAML gates',
+  '- [x] **Phase 500: Context Management** (Complete 2026-03-01) - STATE.md pruning',
+  '- [ ] **Phase 501: RC-07 Fix and Integration** - Milestone-scoped counts',
+  '- [ ] **Phase 502: Findings Report** - Comprehensive report',
+  '',
+  '## Phase Details',
+  '',
+  '### Phase 497: Foundation',
+  '',
+  'Plans:',
+  '- [x] 497-01 -- Shared types',
+  '- [x] 497-02 -- Schema validation',
+  '',
+  '### Phase 498: Autonomy Engine',
+  '',
+  'Plans:',
+  '- [x] 498-01 -- State machine',
+  '- [x] 498-02 -- Scheduler',
+  '- [x] 498-03 -- Auto-resume',
+  '- [x] 498-04 -- Checkpoint gates',
+  '',
+  '### Phase 499: Artifact Verification Gates',
+  '',
+  'Plans:',
+  '- [x] 499-01 -- Gate schema',
+  '- [x] 499-02 -- Pre-commit hook',
+  '- [x] 499-03 -- Simulated work',
+  '- [x] 499-04 -- Gate templates',
+  '',
+  '### Phase 500: Context Management',
+  '',
+  'Plans:',
+  '- [x] 500-01 -- State pruner',
+  '- [x] 500-02 -- Teach-forward',
+  '- [x] 500-03 -- Context budget',
+  '- [x] 500-04 -- Write watchdog',
+  '',
+  '### Phase 501: RC-07 Fix and Integration',
+  '',
+  'Plans:',
+  '- [ ] 501-01 -- Milestone-scoped counts',
+  '- [ ] 501-02 -- Integration wiring',
+  '',
+  '### Phase 502: Findings Report',
+  '',
+  'Plans:',
+  '- [ ] 502-01 -- Teaching notes catalog',
+  '- [ ] 502-02 -- Promoted patterns',
+  '- [ ] 502-03 -- Gap analysis',
+  '- [ ] 502-04 -- Recommendations',
+].join('\n');
+
+const MILESTONE_STATE_MD = [
+  '# Project State',
+  '',
+  '## Current Position',
+  '',
+  'Phase: 500 of 502 (Context Management) -- COMPLETE',
+  'Plan: 4 of 4 in current phase',
+  'Status: Executing',
+  'Last activity: 2026-03-01',
+  '',
+  'Progress: [▓▓▓▓▓▓░░░░] 60%',
+].join('\n');
+
+describe('orchestratorCommand state — milestone-scoped display (RC-07)', () => {
+  let planningDir: string;
+
+  beforeEach(async () => {
+    planningDir = join(
+      tmpdir(),
+      `gsd-orch-milestone-${Date.now()}-${Math.random().toString(36).slice(2)}`
+    );
+    await mkdir(planningDir, { recursive: true });
+    await writeFile(join(planningDir, 'ROADMAP.md'), MILESTONE_ROADMAP_MD);
+    await writeFile(join(planningDir, 'STATE.md'), MILESTONE_STATE_MD);
+    await writeFile(join(planningDir, 'config.json'), CONFIG_JSON);
+  });
+
+  afterEach(async () => {
+    await rm(planningDir, { recursive: true, force: true });
+  });
+
+  it('--pretty shows milestone-scoped phase count (Phase 4 of 6)', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand(['state', `--planning-dir=${planningDir}`, '--pretty'])
+    );
+
+    expect(exitCode).toBe(0);
+    expect(output).toContain('Phase: 4 of 6');
+    expect(output).toContain('Context Management');
+    expect(output).not.toContain('Phase: 500 of 502');
+  });
+
+  it('--pretty shows milestone-scoped plan counts', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand(['state', `--planning-dir=${planningDir}`, '--pretty'])
+    );
+
+    expect(exitCode).toBe(0);
+    // 14 completed plans out of 20 total
+    expect(output).toContain('Plans:');
+    expect(output).toContain('complete');
+  });
+
+  it('JSON output includes milestoneScope field', async () => {
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand(['state', `--planning-dir=${planningDir}`])
+    );
+
+    expect(exitCode).toBe(0);
+    const result = JSON.parse(output);
+    expect(result.milestoneScope).toBeDefined();
+    expect(result.milestoneScope.milestonePhaseIndex).toBe(4);
+    expect(result.milestoneScope.totalMilestonePhases).toBe(6);
+  });
+
+  it('falls back to global counts when no milestone context (no position)', async () => {
+    const noPositionState = [
+      '# Project State',
+      '',
+      '## Current Position',
+      '',
+      'No position available.',
+    ].join('\n');
+    await writeFile(join(planningDir, 'STATE.md'), noPositionState);
+
+    const { exitCode, output } = await captureOutput(() =>
+      orchestratorCommand(['state', `--planning-dir=${planningDir}`, '--pretty'])
+    );
+
+    expect(exitCode).toBe(0);
+    // No milestone scope, no phase line at all
+    expect(output).not.toContain('Phase:');
+  });
+});
+
+// ============================================================================
 // Help text tests
 // ============================================================================
 
