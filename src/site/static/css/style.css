@@ -36,6 +36,7 @@
 /* ============================== BASE ============================== */
 @layer base {
   :root {
+    color-scheme: dark light;
     /* Dark mode (default) */
     --color-bg: #0d1117;
     --color-text: #e6edf3;
