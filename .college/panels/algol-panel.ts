@@ -96,7 +96,7 @@ export class AlgolPanel extends PanelInterface {
   // ─── Private Helpers ────────────────────────────────────────────────────────
 
   private buildAlgolCode(concept: RosettaConcept): string {
-    if (concept.domain === 'mathematics' && concept.id === 'exponential-decay') {
+    if (concept.domain === 'mathematics' && (concept.id === 'exponential-decay' || concept.id === 'math-exponential-decay')) {
       return this.buildExponentialDecayAlgol();
     }
     return this.buildGenericAlgol(concept);

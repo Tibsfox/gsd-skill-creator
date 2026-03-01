@@ -87,7 +87,7 @@ export class FortranPanel extends PanelInterface {
   // ─── Private Helpers ────────────────────────────────────────────────────────
 
   private buildFortranCode(concept: RosettaConcept): string {
-    if (concept.domain === 'mathematics' && concept.id === 'exponential-decay') {
+    if (concept.domain === 'mathematics' && (concept.id === 'exponential-decay' || concept.id === 'math-exponential-decay')) {
       return this.buildExponentialDecayFortran();
     }
     return this.buildGenericFortran(concept);

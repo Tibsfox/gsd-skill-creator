@@ -96,7 +96,7 @@ export class UnisonPanel extends PanelInterface {
   // ─── Private Helpers ────────────────────────────────────────────────────────
 
   private buildUnisonCode(concept: RosettaConcept): string {
-    if (concept.domain === 'mathematics' && concept.id === 'exponential-decay') {
+    if (concept.domain === 'mathematics' && (concept.id === 'exponential-decay' || concept.id === 'math-exponential-decay')) {
       return this.buildExponentialDecayUnison();
     }
     return this.buildGenericUnison(concept);
