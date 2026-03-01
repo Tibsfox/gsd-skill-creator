@@ -2,7 +2,7 @@
 
 ## Milestones
 
-- 🚧 **v1.49.8 Cooking With Claude** - Phases 1-10 (in progress)
+- ✅ **v1.49.8 Cooking With Claude** - Phases 0.5, 1-10 (complete)
 
 ## Overview
 
@@ -28,7 +28,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 - [x] **Phase 7: Cooking Department** - Seven wings of culinary knowledge with calibration models (2026-03-01)
 - [x] **Phase 8: Safety Warden and Cross-References** - Culinary safety boundaries and Math-Cooking bridges (2026-03-01)
 - [x] **Phase 9: Integration Bridge** - Observation pipeline, token budget, chipset adapters (2026-03-01)
-- [ ] **Phase 10: Test Suite and Verification** - 85%+ coverage, 14 safety-critical tests, foxfood report
+- [x] **Phase 10: Test Suite and Verification** - 85%+ coverage, 14 safety-critical tests, foxfood report (2026-03-01)
 
 ## Phase Details
 
@@ -198,10 +198,10 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   4. Integration tests verify cross-component interfaces: Rosetta Core → College → Calibration Engine round-trip completes without errors
   5. End-to-end scenario "user asks why are my cookies flat" produces a correct baking science diagnosis with a calibration delta recorded
 **Plans**: 4 plans
-  - [ ] 10-01-PLAN.md -- Coverage tooling and gap fill (vitest coverage config, calibration model tests, integration stub tests)
-  - [ ] 10-02-PLAN.md -- Safety-critical (SC-01 through SC-14) and panel correctness (PAN-01 through PAN-14) canonical test suites
-  - [ ] 10-03-PLAN.md -- Integration round-trip tests (Rosetta Core → College → Calibration Engine) and flat cookies e2e scenario
-  - [ ] 10-04-PLAN.md -- Final coverage report, full test suite verification, foxfood report
+  - [x] 10-01-PLAN.md -- Coverage tooling and gap fill (vitest coverage config, calibration model tests, integration stub tests)
+  - [x] 10-02-PLAN.md -- Safety-critical (SC-01 through SC-14) and panel correctness (PAN-01 through PAN-14) canonical test suites
+  - [x] 10-03-PLAN.md -- Integration round-trip tests (Rosetta Core → College → Calibration Engine) and flat cookies e2e scenario
+  - [x] 10-04-PLAN.md -- Final coverage report, full test suite verification, foxfood report
 
 ## Progress
 
@@ -220,4 +220,4 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 | 7. Cooking Department | v1.49.8 | 7/7 | Complete | 2026-03-01 |
 | 8. Safety Warden and Cross-References | v1.49.8 | 3/3 | Complete | 2026-03-01 |
 | 9. Integration Bridge | v1.49.8 | 4/4 | Complete | 2026-03-01 |
-| 10. Test Suite and Verification | 3/4 | In Progress|  | - |
+| 10. Test Suite and Verification | v1.49.8 | 4/4 | Complete | 2026-03-01 |
