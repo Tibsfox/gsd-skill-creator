@@ -1,7 +1,7 @@
 /**
  * Module 7: Power Supplies -- Test suite
  *
- * Validates all 5 power supply labs run in the MNA simulator
+ * Validates all 7 power supply labs run in the MNA simulator
  * and produce correct results via verify() functions.
  *
  * Labs:
@@ -10,6 +10,8 @@
  *   3. Boost Converter (m7-lab-03)
  *   4. Load Regulation (m7-lab-04)
  *   5. CC/CV Battery Charger (m7-lab-05)
+ *   6. Buck-Boost Converter (m7-lab-06)
+ *   7. Charge Pump Voltage Doubler (m7-lab-07)
  */
 
 import { describe, it, expect } from 'vitest';
@@ -20,8 +22,8 @@ import { labs } from '../modules/07-power-supplies/labs.js';
 // ============================================================================
 
 describe('Module 7: Power Supplies -- Structure', () => {
-  it('exports exactly 5 labs', () => {
-    expect(labs).toHaveLength(5);
+  it('exports exactly 7 labs', () => {
+    expect(labs).toHaveLength(7);
   });
 
   it('each lab has a non-empty id', () => {
@@ -175,11 +177,67 @@ describe('Lab 5: CC/CV Battery Charger', () => {
 });
 
 // ============================================================================
+// Lab 6: Buck-Boost Converter (m7-lab-06)
+// ============================================================================
+
+describe('Lab 6: Buck-Boost Converter', () => {
+  it('has id "m7-lab-06"', () => {
+    expect(labs[5].id).toBe('m7-lab-06');
+  });
+
+  it('has title "Buck-Boost Converter"', () => {
+    expect(labs[5].title).toBe('Buck-Boost Converter');
+  });
+
+  it('has at least 3 steps', () => {
+    expect(labs[5].steps.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('verify() returns true -- 3.3V output from variable Li-ion input', () => {
+    expect(labs[5].verify()).toBe(true);
+  });
+
+  it('learn_notes contain H&H citation', () => {
+    for (const step of labs[5].steps) {
+      expect(step.learn_note).toMatch(/H&H/);
+    }
+  });
+});
+
+// ============================================================================
+// Lab 7: Charge Pump Voltage Doubler (m7-lab-07)
+// ============================================================================
+
+describe('Lab 7: Charge Pump Voltage Doubler', () => {
+  it('has id "m7-lab-07"', () => {
+    expect(labs[6].id).toBe('m7-lab-07');
+  });
+
+  it('has title "Charge Pump Voltage Doubler"', () => {
+    expect(labs[6].title).toBe('Charge Pump Voltage Doubler');
+  });
+
+  it('has at least 3 steps', () => {
+    expect(labs[6].steps.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('verify() returns true -- ideal Vout=10V, real Vout~9.3V', () => {
+    expect(labs[6].verify()).toBe(true);
+  });
+
+  it('learn_notes contain H&H citation', () => {
+    for (const step of labs[6].steps) {
+      expect(step.learn_note).toMatch(/H&H/);
+    }
+  });
+});
+
+// ============================================================================
 // All labs verify
 // ============================================================================
 
 describe('Module 7: All labs verify', () => {
-  it('all 5 verify() calls return true', () => {
+  it('all 7 verify() calls return true', () => {
     for (const lab of labs) {
       expect(lab.verify()).toBe(true);
     }
