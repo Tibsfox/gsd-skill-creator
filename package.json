@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/cli.ts",
+    "lint": "eslint src/",
     "test": "vitest",
     "setup:claude": "node project-claude/install.cjs",
     "setup:claude:force": "node project-claude/install.cjs --force",
@@ -36,14 +37,17 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@tauri-apps/cli": "^2.0.0",
     "@types/diff": "^7.0.2",
     "@types/js-yaml": "^4.0.9",
     "@types/natural": "^5.1.5",
     "@types/node": "^20.0.0",
     "@vitest/coverage-v8": "^4.0.18",
+    "eslint": "^10.0.2",
     "tsx": "^4.21.0",
     "typescript": "^5.3.0",
+    "typescript-eslint": "^8.56.1",
     "vitest": "^4.0.18"
   }
 }
