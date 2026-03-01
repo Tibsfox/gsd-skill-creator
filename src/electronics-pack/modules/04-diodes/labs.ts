@@ -1,10 +1,11 @@
 /**
  * Module 4: Diodes -- Lab exercises
  *
- * 5 labs backed by real MNA solveNonlinear simulation.
+ * 6 labs: labs 1-5 backed by real MNA solveNonlinear simulation,
+ * lab 6 uses pure mathematical verification for switching speed.
  * Each lab demonstrates a diode application with hands-on
  * simulation and a verify() function that checks expected
- * values against MNA nonlinear solver results.
+ * values against MNA nonlinear solver results or analytical models.
  */
 
 import { solveNonlinear } from '../../simulator/mna-engine.js';
@@ -264,7 +265,64 @@ const lab05: Lab = {
 };
 
 // ============================================================================
+// Lab 6: Diode Switching Speed (m4-lab-06)
+// ============================================================================
+
+const lab06: Lab = {
+  id: 'm4-lab-06',
+  title: 'Diode Switching Speed',
+  steps: [
+    {
+      instruction:
+        'Compare reverse recovery times of two diodes: a standard 1N4001 rectifier (trr = 30 microseconds) and a Schottky 1N5819 (trr = 10 nanoseconds). Reverse recovery time is how long a diode takes to stop conducting after the voltage reverses.',
+      expected_observation:
+        'The 1N4001 has a reverse recovery time 3000x longer than the 1N5819. During reverse recovery, the diode conducts in the wrong direction, wasting energy as switching loss.',
+      learn_note:
+        'Reverse recovery time (trr) is a critical parameter for high-frequency rectifier selection. Standard silicon diodes store minority carriers that must be swept out before the junction blocks; Schottky diodes use a metal-semiconductor junction with no minority carrier storage, giving near-zero trr. -- H&H 1.6 [@HH-1.6]',
+    },
+    {
+      instruction:
+        'Calculate switching power loss for both diodes at 100 kHz. Use the formula: P_sw = 0.5 * V_reverse * I_reverse * trr * f, where V_reverse = 48V, I_reverse = 1A, f = 100kHz. Standard: P = 0.5 * 48 * 1 * 30e-6 * 100e3 = 72W. Schottky: P = 0.5 * 48 * 1 * 10e-9 * 100e3 = 0.24mW.',
+      expected_observation:
+        'The standard diode dissipates 72W in switching losses alone at 100 kHz -- this would destroy the device. The Schottky dissipates only 0.24mW. The ratio is approximately 300,000:1.',
+      learn_note:
+        'Switching losses scale linearly with frequency. At 10 kHz the standard diode loss is 7.2W (manageable with heatsinking), but at 100 kHz it is catastrophic. This is why high-frequency power converters (SMPS) universally use Schottky or ultrafast recovery diodes. -- H&H 1.6 [@HH-1.6]',
+    },
+    {
+      instruction:
+        'Consider the frequency implications: as switching frequency increases, the advantage of Schottky diodes grows proportionally. Above ~50 kHz, standard rectifiers are impractical. Modern SMPS operate at 100 kHz to several MHz, where only Schottky or SiC diodes are viable.',
+      expected_observation:
+        'The switching loss ratio remains constant (~300,000:1) regardless of frequency, but the absolute losses increase linearly. At 1 MHz, the standard diode would dissipate 720W -- clearly impossible for any practical application.',
+      learn_note:
+        'The tradeoff for Schottky diodes is lower reverse voltage rating (typically 40-100V vs 50-1000V for standard) and higher leakage current. For high-voltage applications above 200V, ultrafast recovery diodes (trr ~ 25-75ns) or SiC Schottky diodes are used instead. -- H&H 1.6 [@HH-1.6]',
+    },
+  ],
+  verify: () => {
+    // Compare switching losses: standard 1N4001 vs Schottky 1N5819
+    // P_sw = 0.5 * V_reverse * I_reverse * trr * frequency
+    const V_reverse = 48; // volts
+    const I_reverse = 1; // amp
+    const f = 100e3; // 100 kHz
+
+    const trr_standard = 30e-6; // 30 microseconds (1N4001)
+    const trr_schottky = 10e-9; // 10 nanoseconds (1N5819)
+
+    const P_standard = 0.5 * V_reverse * I_reverse * trr_standard * f;
+    const P_schottky = 0.5 * V_reverse * I_reverse * trr_schottky * f;
+
+    // Standard: 0.5 * 48 * 1 * 30e-6 * 100e3 = 72W
+    // Schottky: 0.5 * 48 * 1 * 10e-9 * 100e3 = 0.00024W
+    // Ratio: 72 / 0.00024 = 300,000
+
+    const ratio = P_standard / P_schottky;
+
+    // Verify standard loss is > 1000x Schottky loss
+    return ratio > 1000;
+  },
+};
+
+// ============================================================================
 // Export all labs
 // ============================================================================
 
-export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05];
+export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05, lab06];
