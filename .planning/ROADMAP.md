@@ -22,9 +22,9 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 - [x] **Phase 1: Foundation** - Shared types, Panel Interface contract, directory scaffold (2026-03-01)
 - [x] **Phase 2: Rosetta Core Engine** - Concept Registry, Panel Router, Expression Renderer (2026-03-01)
 - [x] **Phase 3: Calibration Engine** - Universal feedback loop, Safety Warden framework (2026-03-01)
-- [ ] **Phase 4: College Structure** - Department framework, progressive disclosure, try-sessions
-- [ ] **Phase 5: Systems Panels and Mathematics Department** - Python/C++/Java panels and Math Department seed
-- [ ] **Phase 6: Heritage Panels** - Lisp, Pascal, Fortran, Perl, ALGOL, Unison panels
+- [x] **Phase 4: College Structure** - Department framework, progressive disclosure, try-sessions (2026-03-01)
+- [x] **Phase 5: Systems Panels and Mathematics Department** - Python/C++/Java panels and Math Department seed (2026-03-01)
+- [x] **Phase 6: Heritage Panels** - Lisp, Pascal, Fortran, Perl, ALGOL, Unison panels (2026-03-01)
 - [ ] **Phase 7: Cooking Department** - Seven wings of culinary knowledge with calibration models
 - [ ] **Phase 8: Safety Warden and Cross-References** - Culinary safety boundaries and Math-Cooking bridges
 - [ ] **Phase 9: Integration Bridge** - Observation pipeline, token budget, chipset adapters
@@ -115,11 +115,11 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   3. Any Mathematics Department concept renders correctly in all three systems panels (correct code, correct library bindings)
   4. Math concepts are positioned on the Complex Plane of Experience with valid `complexPlanePosition` values
 **Plans**: 5 plans
-  - [ ] 05-01-PLAN.md -- Python panel (math.exp/numpy bindings, readability as mathematical notation, PAN-01/PAN-07/SC-12)
-  - [ ] 05-02-PLAN.md -- C++ panel (cmath/std::exp bindings, performance and precision, PAN-02/PAN-08/SC-13)
-  - [ ] 05-03-PLAN.md -- Java panel (Math.exp bindings, type safety and platform independence, PAN-03)
-  - [ ] 05-04-PLAN.md -- Mathematics Department concepts (7 concepts with complexPlanePosition, cross-references, MATH-01/MATH-03)
-  - [ ] 05-05-PLAN.md -- Integration tests (3 systems panels + 7 math concepts cross-rendering, 9-panel coexistence, MATH-02)
+  - [x] 05-01-PLAN.md -- Python panel (math.exp/numpy bindings, readability as mathematical notation, PAN-01/PAN-07/SC-12)
+  - [x] 05-02-PLAN.md -- C++ panel (cmath/std::exp bindings, performance and precision, PAN-02/PAN-08/SC-13)
+  - [x] 05-03-PLAN.md -- Java panel (Math.exp bindings, type safety and platform independence, PAN-03)
+  - [x] 05-04-PLAN.md -- Mathematics Department concepts (7 concepts with complexPlanePosition, cross-references, MATH-01/MATH-03)
+  - [x] 05-05-PLAN.md -- Integration tests (3 systems panels + 7 math concepts cross-rendering, 9-panel coexistence, MATH-02)
 
 ### Phase 6: Heritage Panels
 **Goal**: All six heritage and frontier panels (Lisp, Pascal, Fortran, Perl, ALGOL, Unison) implement the Panel Interface with their distinctive pedagogical characteristics
@@ -207,7 +207,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 | 2. Rosetta Core Engine | v1.49.8 | 4/4 | Complete | 2026-03-01 |
 | 3. Calibration Engine | v1.49.8 | 4/4 | Complete | 2026-03-01 |
 | 4. College Structure | v1.49.8 | 4/4 | Complete | 2026-03-01 |
-| 5. Systems Panels and Mathematics Dept | v1.49.8 | 0/5 | Planned | - |
+| 5. Systems Panels and Mathematics Dept | v1.49.8 | 5/5 | Complete | 2026-03-01 |
 | 6. Heritage Panels | v1.49.8 | 6/6 | Complete | 2026-03-01 |
 | 7. Cooking Department | v1.49.8 | 0/7 | Planned | - |
 | 8. Safety Warden and Cross-References | v1.49.8 | 0/3 | Planned | - |
