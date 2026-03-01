@@ -20,7 +20,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 
 - [ ] **Phase 0.5: Foundations Documentation** - Fix 23 broken links in docs/foundations/, fill index.md stub (docs-only, no code deps)
 - [x] **Phase 1: Foundation** - Shared types, Panel Interface contract, directory scaffold (2026-03-01)
-- [ ] **Phase 2: Rosetta Core Engine** - Concept Registry, Panel Router, Expression Renderer
+- [x] **Phase 2: Rosetta Core Engine** - Concept Registry, Panel Router, Expression Renderer (2026-03-01)
 - [x] **Phase 3: Calibration Engine** - Universal feedback loop, Safety Warden framework (2026-03-01)
 - [ ] **Phase 4: College Structure** - Department framework, progressive disclosure, try-sessions
 - [ ] **Phase 5: Systems Panels and Mathematics Department** - Python/C++/Java panels and Math Department seed
@@ -67,10 +67,10 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   3. Expression Renderer produces formatted output from a panel-specific expression
   4. Rosetta Core translates the same concept (e.g., exponential growth) across 3 different panels and each output is correct
 **Plans**: 4 plans
-  - [ ] 02-01-PLAN.md -- Concept Registry (ConceptRegistry class, dependency resolution, Complex Plane queries)
-  - [ ] 02-02-PLAN.md -- Panel Router (6-step routing logic, expertise/task/Complex Plane signals)
-  - [ ] 02-03-PLAN.md -- Expression Renderer (3-depth rendering, token cost, calibration-adjusted output)
-  - [ ] 02-04-PLAN.md -- Rosetta Engine + cross-panel integration tests (CORE-04: translate() pipeline, 3-panel proof)
+  - [x] 02-01-PLAN.md -- Concept Registry (ConceptRegistry class, dependency resolution, Complex Plane queries)
+  - [x] 02-02-PLAN.md -- Panel Router (6-step routing logic, expertise/task/Complex Plane signals)
+  - [x] 02-03-PLAN.md -- Expression Renderer (3-depth rendering, token cost, calibration-adjusted output)
+  - [x] 02-04-PLAN.md -- Rosetta Engine + cross-panel integration tests (CORE-04: translate() pipeline, 3-panel proof)
 
 ### Phase 3: Calibration Engine
 **Goal**: The universal feedback loop is operational — observations produce calibration deltas that persist and accumulate into user profiles
@@ -98,7 +98,11 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   3. A try-session runner starts an interactive entry point for a test department without errors
   4. Cross-reference resolver links a concept in one department to a related concept in another
   5. A new department can be added by creating files in the correct directory — no changes to College framework code required
-**Plans**: TBD
+**Plans**: 4 plans
+  - [ ] 04-01-PLAN.md -- College types, token counter, CollegeLoader with progressive disclosure (COLL-01, COLL-02, COLL-05)
+  - [ ] 04-02-PLAN.md -- DepartmentExplorer and CrossReferenceResolver (COLL-02, COLL-04)
+  - [ ] 04-03-PLAN.md -- TrySessionRunner with step navigation and concept tracking (COLL-03)
+  - [ ] 04-04-PLAN.md -- Integration tests, test department extensibility proof, barrel export (all COLL requirements)
 
 ### Phase 5: Systems Panels and Mathematics Department
 **Goal**: Python, C++, and Java panels implement the Panel Interface with correct math bindings, and the Mathematics Department is seeded with concepts from "The Space Between" that render correctly across all panels
@@ -178,9 +182,9 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 |-------|-----------|----------------|--------|-----------|
 | 0.5 Foundations Docs | v1.49.8 | 0/1 | Planned | - |
 | 1. Foundation | v1.49.8 | 3/3 | Complete | 2026-03-01 |
-| 2. Rosetta Core Engine | v1.49.8 | 0/4 | Planned | - |
+| 2. Rosetta Core Engine | v1.49.8 | 4/4 | Complete | 2026-03-01 |
 | 3. Calibration Engine | v1.49.8 | 4/4 | Complete | 2026-03-01 |
-| 4. College Structure | v1.49.8 | 0/TBD | Not started | - |
+| 4. College Structure | v1.49.8 | 0/4 | Planned | - |
 | 5. Systems Panels and Mathematics Dept | v1.49.8 | 0/TBD | Not started | - |
 | 6. Heritage Panels | v1.49.8 | 0/TBD | Not started | - |
 | 7. Cooking Department | v1.49.8 | 0/TBD | Not started | - |
