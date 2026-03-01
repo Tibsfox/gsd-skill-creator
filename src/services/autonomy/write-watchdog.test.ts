@@ -319,3 +319,147 @@ describe('createWatchdog', () => {
     wd.stop();
   });
 });
+
+// ============================================================================
+// File-based persistence
+// ============================================================================
+
+import type { WatchdogFileState, WatchdogPersistIO } from './write-watchdog.js';
+
+describe('file-based persistence', () => {
+  /** Create a mock IO that stores data in memory */
+  function makeMockIO(): WatchdogPersistIO & { stored: Map<string, string> } {
+    const stored = new Map<string, string>();
+    return {
+      stored,
+      writeFile: vi.fn(async (path: string, content: string) => {
+        stored.set(path, content);
+      }),
+      readFile: vi.fn(async (path: string) => {
+        const data = stored.get(path);
+        if (data === undefined) throw new Error('ENOENT: file not found');
+        return data;
+      }),
+    };
+  }
+
+  describe('WatchdogFileState interface shape', () => {
+    it('should have all required fields when persisted', async () => {
+      const onTimeout = vi.fn();
+      const wd = new WriteWatchdog({ onTimeout, timeoutMs: 300000 });
+      wd.start();
+      wd.recordWrite('/some/file.ts');
+
+      const io = makeMockIO();
+      await wd.persistState('/tmp/watchdog-state.json', 'session-abc', io);
+
+      const raw = io.stored.get('/tmp/watchdog-state.json');
+      expect(raw).toBeDefined();
+      const state: WatchdogFileState = JSON.parse(raw!);
+
+      expect(state).toHaveProperty('last_write_at');
+      expect(state).toHaveProperty('last_file');
+      expect(state).toHaveProperty('session_id');
+      expect(state).toHaveProperty('started_at');
+      expect(state).toHaveProperty('timeout_ms');
+
+      expect(typeof state.last_write_at).toBe('string');
+      expect(typeof state.session_id).toBe('string');
+      expect(typeof state.started_at).toBe('string');
+      expect(typeof state.timeout_ms).toBe('number');
+
+      wd.stop();
+    });
+  });
+
+  describe('persistState', () => {
+    it('should write valid JSON with all required fields', async () => {
+      const onTimeout = vi.fn();
+      const wd = new WriteWatchdog({ onTimeout, timeoutMs: 600000 });
+      wd.start();
+      wd.recordWrite('/path/to/code.ts');
+
+      const io = makeMockIO();
+      await wd.persistState('/state.json', 'sess-1', io);
+
+      expect(io.writeFile).toHaveBeenCalledTimes(1);
+      expect(io.writeFile).toHaveBeenCalledWith('/state.json', expect.any(String));
+
+      const state: WatchdogFileState = JSON.parse(io.stored.get('/state.json')!);
+      expect(state.session_id).toBe('sess-1');
+      expect(state.timeout_ms).toBe(600000);
+      expect(state.last_file).toBe('/path/to/code.ts');
+      expect(new Date(state.last_write_at).getTime()).not.toBeNaN();
+      expect(new Date(state.started_at).getTime()).not.toBeNaN();
+
+      wd.stop();
+    });
+
+    it('should use injectable IO (not direct fs)', async () => {
+      const onTimeout = vi.fn();
+      const wd = new WriteWatchdog({ onTimeout });
+      wd.start();
+
+      const io = makeMockIO();
+      await wd.persistState('/custom/path.json', 'sess-2', io);
+
+      expect(io.writeFile).toHaveBeenCalledTimes(1);
+      expect(io.writeFile).toHaveBeenCalledWith('/custom/path.json', expect.any(String));
+
+      wd.stop();
+    });
+
+    it('should serialize last_file as null when no file path recorded', async () => {
+      const onTimeout = vi.fn();
+      const wd = new WriteWatchdog({ onTimeout });
+      wd.start();
+      // recordWrite without a file path
+      wd.recordWrite();
+
+      const io = makeMockIO();
+      await wd.persistState('/state.json', 'sess-3', io);
+
+      const state: WatchdogFileState = JSON.parse(io.stored.get('/state.json')!);
+      expect(state.last_file).toBeNull();
+
+      wd.stop();
+    });
+  });
+
+  describe('loadState', () => {
+    it('should read and return parsed state', async () => {
+      const io = makeMockIO();
+      const stateObj: WatchdogFileState = {
+        last_write_at: '2026-03-01T12:00:00.000Z',
+        last_file: '/test/file.ts',
+        session_id: 'sess-load',
+        started_at: '2026-03-01T11:00:00.000Z',
+        timeout_ms: 600000,
+      };
+      io.stored.set('/state.json', JSON.stringify(stateObj));
+
+      const loaded = await WriteWatchdog.loadState('/state.json', io);
+
+      expect(loaded).not.toBeNull();
+      expect(loaded!.session_id).toBe('sess-load');
+      expect(loaded!.last_file).toBe('/test/file.ts');
+      expect(loaded!.timeout_ms).toBe(600000);
+    });
+
+    it('should return null for missing file (readFile throws)', async () => {
+      const io = makeMockIO();
+      // Don't store anything -- readFile will throw ENOENT
+
+      const loaded = await WriteWatchdog.loadState('/nonexistent.json', io);
+      expect(loaded).toBeNull();
+    });
+
+    it('should return null for corrupt JSON', async () => {
+      const io = makeMockIO();
+      io.stored.set('/state.json', '{ broken json !!!');
+
+      const loaded = await WriteWatchdog.loadState('/state.json', io);
+      expect(loaded).toBeNull();
+    });
+  });
+});
