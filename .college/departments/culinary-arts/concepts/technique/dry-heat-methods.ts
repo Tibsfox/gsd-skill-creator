@@ -24,6 +24,11 @@ export const dryHeatMethods: RosettaConcept = {
       targetId: 'cook-heat-transfer-modes',
       description: 'Each dry heat method uses a different primary transfer mode -- conduction (saute), convection (roasting), radiation (grilling)',
     },
+    {
+      type: 'cross-reference',
+      targetId: 'cook-temperature-danger-zone',
+      description: 'Dry heat must achieve safe internal temperatures -- verify with thermometer regardless of surface browning',
+    },
   ],
   complexPlanePosition: {
     real: 0.9,
