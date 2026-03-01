@@ -32,15 +32,16 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 
 ## Phase Details
 
-### Phase 0.5: Foundations Documentation
-**Goal**: Fix all 23 broken relative links in docs/foundations/ and fill the index.md stub with substantive content
+### Phase 0.5: Documentation Fixes
+**Goal**: Fix 4 broken relative links across docs/, correct 1 wrong link target, update 1 incorrect GitHub URL, and fill the foundations/index.md stub
 **Depends on**: Nothing (docs-only, runs in parallel with any code phase)
 **Requirements**: DOCS-01
 **Success Criteria** (what must be TRUE):
-  1. All relative links in docs/foundations/*.md resolve correctly on GitHub (no double-nesting, correct ../ prefixes)
-  2. foundations/index.md contains substantive Layer 1 overview content (not a stub)
-  3. PDF links to tibsfox.com are valid and preserved
-  4. Cross-references to principles/ and applications/ use correct relative paths
+  1. docs/architecture/README.md CHANGELOG.md link resolves (create or redirect to RELEASE-HISTORY.md)
+  2. docs/architecture/README.md examples/ link points to ../../examples/README.md
+  3. docs/framework/getting-started.md "GSD Teams Guide" link points to GSD-TEAMS.md
+  4. docs/TROUBLESHOOTING.md GitHub issues URL points to Tibsfox/gsd-skill-creator
+  5. foundations/index.md contains substantive Layer 1 overview content (not a stub)
 **Plans**: 1 plan (00.5-01)
 
 ### Phase 1: Foundation
@@ -125,7 +126,13 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   3. Fortran panel expresses array operations and numerical methods using authentic scientific computing idioms
   4. Perl panel demonstrates regex-as-syntax, closure factories, and POD-as-curriculum in a single concept example
   5. ALGOL panel shows BNF notation as meta-language and three-syntax architecture; Unison panel demonstrates content-addressed code with hash-based identity
-**Plans**: TBD
+**Plans**: 6 plans
+  - [ ] 06-01-PLAN.md -- Lisp panel (homoiconicity: concept definition IS data structure, S-expression representation, macro composition)
+  - [ ] 06-02-PLAN.md -- Pascal + Fortran panels (Wirth's principles in Pascal; scientific computing heritage in Fortran)
+  - [ ] 06-03-PLAN.md -- Perl panel (regex-as-syntax, closure factories, POD-as-curriculum, CPAN ecosystem)
+  - [ ] 06-04-PLAN.md -- ALGOL panel (BNF notation, block structure, three-syntax architecture, descendant tree)
+  - [ ] 06-05-PLAN.md -- Unison panel (content-addressed code, hash-based identity, abilities, codebase-as-database)
+  - [ ] 06-06-PLAN.md -- Integration tests (all 6 panels registered, cross-panel rendering, pedagogical verification)
 
 ### Phase 7: Cooking Department
 **Goal**: All seven wings of the Cooking Department exist as navigable, calibration-aware knowledge organized as explorable College code
@@ -144,10 +151,10 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 **Depends on**: Phases 5, 7
 **Requirements**: SAFE-01, SAFE-02, SAFE-03, SAFE-04, INTG-04
 **Success Criteria** (what must be TRUE):
-  1. Safety Warden blocks any recommendation for poultry below 165°F, ground meat below 160°F, whole cuts below 145°F — no override possible
+  1. Safety Warden blocks any recommendation for poultry below 165F, ground meat below 160F, whole cuts below 145F — no override possible
   2. Allergen flagging fires on every ingredient substitution regardless of user history or calibration state
   3. Safety Warden operates correctly in all three modes: annotate (flags concern in output), gate (requires explicit acknowledgment before proceeding), redirect (substitutes a safe alternative)
-  4. Temperature danger zone tracker warns at 2+ hours in the 40-140°F range
+  4. Temperature danger zone tracker warns at 2+ hours in the 40-140F range
   5. A Math concept (e.g., exponential decay) navigates to its Cooking cross-reference (cooling curves) and back without errors
 **Plans**: TBD
 
@@ -186,7 +193,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 | 3. Calibration Engine | v1.49.8 | 4/4 | Complete | 2026-03-01 |
 | 4. College Structure | v1.49.8 | 0/4 | Planned | - |
 | 5. Systems Panels and Mathematics Dept | v1.49.8 | 0/TBD | Not started | - |
-| 6. Heritage Panels | v1.49.8 | 0/TBD | Not started | - |
+| 6. Heritage Panels | v1.49.8 | 0/6 | Planned | - |
 | 7. Cooking Department | v1.49.8 | 0/TBD | Not started | - |
 | 8. Safety Warden and Cross-References | v1.49.8 | 0/TBD | Not started | - |
 | 9. Integration Bridge | v1.49.8 | 0/TBD | Not started | - |
