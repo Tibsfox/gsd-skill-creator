@@ -1,0 +1,26 @@
+{
+  "id": "getting-started",
+  "title": "Getting Started with Hello World",
+  "description": "Write your first program in the test department",
+  "estimatedMinutes": 5,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Read the Hello World concept definition",
+      "expectedOutcome": "You understand that Hello World outputs a greeting",
+      "hint": "Look at the description field first",
+      "conceptsExplored": ["test-hello-world"]
+    },
+    {
+      "instruction": "Compare the Python and C++ panel expressions",
+      "expectedOutcome": "You can identify what Python simplifies vs C++",
+      "conceptsExplored": ["test-hello-world"]
+    },
+    {
+      "instruction": "Follow the analogy cross-reference to math-variables",
+      "expectedOutcome": "You see how programming variables relate to mathematical variables",
+      "hint": "Check the relationships array",
+      "conceptsExplored": ["test-hello-world", "math-variables"]
+    }
+  ]
+}
