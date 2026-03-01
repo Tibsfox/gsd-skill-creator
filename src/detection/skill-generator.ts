@@ -144,11 +144,10 @@ export class SkillGenerator {
   }
 
   /**
-   * Get the skills directory from the store.
-   * Accesses the private skillsDir field via bracket notation.
+   * Get the skills directory from the store via public API (QUAL-06).
    */
   private getSkillsDir(): string {
-    return (this.skillStore as unknown as { skillsDir: string }).skillsDir;
+    return this.skillStore.getSkillsDir();
   }
 
   /**
