@@ -25,7 +25,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 - [x] **Phase 4: College Structure** - Department framework, progressive disclosure, try-sessions (2026-03-01)
 - [x] **Phase 5: Systems Panels and Mathematics Department** - Python/C++/Java panels and Math Department seed (2026-03-01)
 - [x] **Phase 6: Heritage Panels** - Lisp, Pascal, Fortran, Perl, ALGOL, Unison panels (2026-03-01)
-- [ ] **Phase 7: Cooking Department** - Seven wings of culinary knowledge with calibration models
+- [x] **Phase 7: Cooking Department** - Seven wings of culinary knowledge with calibration models (2026-03-01)
 - [ ] **Phase 8: Safety Warden and Cross-References** - Culinary safety boundaries and Math-Cooking bridges
 - [ ] **Phase 9: Integration Bridge** - Observation pipeline, token budget, chipset adapters
 - [ ] **Phase 10: Test Suite and Verification** - 85%+ coverage, 14 safety-critical tests, foxfood report
@@ -150,13 +150,13 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   4. A novice user can complete a try-session for "first meal" from start to finish
   5. Each wing has at least one calibration rule that prevents adjustment below a safety boundary
 **Plans**: 7 plans
-  - [ ] 07-01-PLAN.md -- Food Science wing (6 concepts: Maillard, emulsification, protein denaturation, starch gelatinization, caramelization, fermentation)
-  - [ ] 07-02-PLAN.md -- Thermodynamics wing (4 concepts: heat transfer, specific heat, altitude adjustments, Newton's cooling)
-  - [ ] 07-03-PLAN.md -- Nutrition + Technique wings (3+3 concepts: macronutrients, bioavailability, prep-nutrition; dry/wet/combination heat)
-  - [ ] 07-04-PLAN.md -- Baking Science wing (4 concepts: baker's ratios, gluten development, yeast biology, sugar chemistry)
-  - [ ] 07-05-PLAN.md -- Food Safety + Home Economics wings (4+4 concepts: danger zone, contamination, storage, allergens; meal planning, budget, pantry, preservation)
-  - [ ] 07-06-PLAN.md -- Cooking calibration models (4 DomainCalibrationModels: temperature, timing, seasoning, texture)
-  - [ ] 07-07-PLAN.md -- Integration tests + first-meal try-session (all 5 success criteria verification)
+  - [x] 07-01-PLAN.md -- Food Science wing (6 concepts: Maillard, emulsification, protein denaturation, starch gelatinization, caramelization, fermentation)
+  - [x] 07-02-PLAN.md -- Thermodynamics wing (4 concepts: heat transfer, specific heat, altitude adjustments, Newton's cooling)
+  - [x] 07-03-PLAN.md -- Nutrition + Technique wings (3+3 concepts: macronutrients, bioavailability, prep-nutrition; dry/wet/combination heat)
+  - [x] 07-04-PLAN.md -- Baking Science wing (4 concepts: baker's ratios, gluten development, yeast biology, sugar chemistry)
+  - [x] 07-05-PLAN.md -- Food Safety + Home Economics wings (4+4 concepts: danger zone, contamination, storage, allergens; meal planning, budget, pantry, preservation)
+  - [x] 07-06-PLAN.md -- Cooking calibration models (4 DomainCalibrationModels: temperature, timing, seasoning, texture)
+  - [x] 07-07-PLAN.md -- Integration tests + first-meal try-session (all 5 success criteria verification)
 
 ### Phase 8: Safety Warden and Cross-References
 **Goal**: Absolute food safety boundaries are enforced across all three modes, and Math-Cooking concept bridges navigate correctly in both directions
@@ -197,7 +197,9 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
   3. Panel correctness tests verify mathematical accuracy: each panel produces numerically correct results for at least three mathematical concepts
   4. Integration tests verify cross-component interfaces: Rosetta Core → College → Calibration Engine round-trip completes without errors
   5. End-to-end scenario "user asks why are my cookies flat" produces a correct baking science diagnosis with a calibration delta recorded
-**Plans**: TBD
+**Plans**: 2 plans
+  - [ ] 10-01-PLAN.md -- Coverage tooling and gap fill (vitest coverage config, calibration model tests, integration stub tests)
+  - [ ] 10-02-PLAN.md -- Safety-critical (SC-01 through SC-14) and panel correctness (PAN-01 through PAN-14) canonical test suites
 
 ## Progress
 
@@ -213,7 +215,7 @@ Waves map to phases as follows: Wave 0 → Phase 1, Wave 1 → Phases 2-3, Wave 
 | 4. College Structure | v1.49.8 | 4/4 | Complete | 2026-03-01 |
 | 5. Systems Panels and Mathematics Dept | v1.49.8 | 5/5 | Complete | 2026-03-01 |
 | 6. Heritage Panels | v1.49.8 | 6/6 | Complete | 2026-03-01 |
-| 7. Cooking Department | v1.49.8 | 0/7 | Planned | - |
+| 7. Cooking Department | v1.49.8 | 7/7 | Complete | 2026-03-01 |
 | 8. Safety Warden and Cross-References | v1.49.8 | 0/3 | Planned | - |
 | 9. Integration Bridge | v1.49.8 | 0/4 | Planned | - |
-| 10. Test Suite and Verification | v1.49.8 | 0/TBD | Not started | - |
+| 10. Test Suite and Verification | v1.49.8 | 0/2 | Planned | - |
