@@ -5,7 +5,7 @@
 #
 # Wraps the Phase 368 Rust binary (gsd-sandbox-config) for sandbox profile
 # generation. If the binary is not available, writes a stub profile JSON
-# to allow Phase 0 to proceed during development.
+# with bwrap_args that exclude credential directories.
 #
 # Usage:
 #   generate-sandbox-profile.sh \
@@ -16,7 +16,7 @@
 #
 # Production: replace stub with call to gsd-sandbox-config binary (Phase 368)
 #
-# Phase 373-01 — Bootstrap Phase 0
+# Phase 373-01 / 516-03 — Bootstrap Phase 0
 # =============================================================================
 
 set -euo pipefail
@@ -78,11 +78,14 @@ if [ -x "$SANDBOX_CONFIG_BIN" ]; then
 fi
 
 # ---------------------------------------------------------------------------
-# Fallback: write stub profile JSON for development
+# Fallback: write stub profile JSON with safe bwrap_args
 # ---------------------------------------------------------------------------
-# Production: replace stub with call to gsd-sandbox-config binary (Phase 368)
+# Stub profiles MUST exclude credential directories (~/.ssh, ~/.aws,
+# ~/.config/gcloud, ~/.gnupg) from bind mounts. Uses --tmpfs for these
+# paths so programs don't get ENOENT but also can't read real keys.
 
 GENERATED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+HOME_DIR="${HOME:-/tmp/home}"
 
 # Ensure output directory exists
 mkdir -p "$(dirname "$OUTPUT")"
@@ -94,6 +97,26 @@ cat > "$OUTPUT" << EOPROFILE
   "platform": "$PLATFORM",
   "generated_at": "$GENERATED_AT",
   "stub": true,
+  "agent_type": "exec",
+  "bwrap_args": [
+    "bwrap",
+    "--die-with-parent",
+    "--cap-drop", "ALL",
+    "--unshare-pid",
+    "--unshare-uts",
+    "--proc", "/proc",
+    "--dev", "/dev",
+    "--ro-bind", "/usr", "/usr",
+    "--ro-bind", "/lib", "/lib",
+    "--ro-bind", "/bin", "/bin",
+    "--ro-bind", "/sbin", "/sbin",
+    "--ro-bind", "/etc", "/etc",
+    "--ro-bind", "$PROJECT_DIR", "$PROJECT_DIR",
+    "--tmpfs", "$HOME_DIR/.ssh",
+    "--tmpfs", "$HOME_DIR/.aws",
+    "--tmpfs", "$HOME_DIR/.config/gcloud",
+    "--tmpfs", "$HOME_DIR/.gnupg"
+  ],
   "note": "Stub profile — replace with Phase 368 gsd-sandbox-config binary output"
 }
 EOPROFILE
