@@ -26,6 +26,22 @@ describe('HTML Templates', () => {
     expect(base).toContain('#main-content');
   });
 
+  describe('FART Prevention', () => {
+    it('base.html has color-scheme meta tag', () => {
+      const base = readTemplate('base.html');
+      expect(base).toMatch(/name="color-scheme"/);
+    });
+
+    it('color-scheme meta tag appears before stylesheet link', () => {
+      const base = readTemplate('base.html');
+      const colorSchemeIndex = base.indexOf('color-scheme');
+      const stylesheetIndex = base.indexOf('rel="stylesheet"');
+      expect(colorSchemeIndex).toBeGreaterThan(-1);
+      expect(stylesheetIndex).toBeGreaterThan(-1);
+      expect(colorSchemeIndex).toBeLessThan(stylesheetIndex);
+    });
+  });
+
   it('all 8 template files exist', () => {
     const templates = [
       'base.html',
