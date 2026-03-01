@@ -13,11 +13,14 @@ import { describe, it, expect, afterEach, vi } from 'vitest';
 import { mkdir, writeFile, readFile, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import { createAutonomyEngine, type AutonomyEngineConfig } from './engine.js';
+import { createAutonomyEngine, type AutonomyEngineConfig, type AutonomyTeamConfig } from './engine.js';
 import type { ExecutionState } from './types.js';
 import type { SubversionCallbacks, PhaseResult } from './scheduler.js';
 import { writeExecutionState } from './persistence.js';
 import { createExecutionState, transition } from './state-machine.js';
+import { TeamStore } from '../../teams/team-store.js';
+import { readTeamEvents } from '../../teams/team-event-log.js';
+import type { TeamConfig } from '../../types/team.js';
 
 // ============================================================================
 // Helpers
@@ -293,5 +296,183 @@ describe('createAutonomyEngine', () => {
     // Zero subversions = immediately transition to COMPLETING -> DONE
     expect(finalState.status).toBe('DONE');
     expect(callbacks.prepare).not.toHaveBeenCalled();
+  });
+});
+
+// ============================================================================
+// AutonomyEngine + TeamLifecycle integration (507-03)
+// ============================================================================
+
+describe('AutonomyEngine + TeamLifecycle integration', () => {
+  /** Create a minimal team config for testing */
+  function makeTeamConfig(name: string = 'test-team'): TeamConfig {
+    return {
+      name,
+      leadAgentId: 'lead-1',
+      createdAt: '2026-03-01T00:00:00Z',
+      members: [{ agentId: 'lead-1', name: 'Lead' }],
+    };
+  }
+
+  it('runs identically without teamConfig (no regression)', async () => {
+    const dir = await makeTempDir();
+    tempDirs.push(dir);
+
+    const engine = createAutonomyEngine(makeConfig(dir, { totalSubversions: 2 }));
+    const finalState = await engine.run();
+    expect(finalState.status).toBe('DONE');
+    expect(finalState.completed_subversions.length).toBe(2);
+  });
+
+  it('creates and activates team at startup when teamConfig is present', async () => {
+    const dir = await makeTempDir();
+    tempDirs.push(dir);
+    const teamsDir = join(dir, 'teams');
+
+    const team: AutonomyTeamConfig = {
+      teamConfig: makeTeamConfig(),
+      teamsDir,
+      durability: 'persistent',
+    };
+
+    const engine = createAutonomyEngine(makeConfig(dir, {
+      totalSubversions: 2,
+      team,
+    }));
+    const finalState = await engine.run();
+    expect(finalState.status).toBe('DONE');
+
+    // Team should exist and be ACTIVE (persistent, not dissolved)
+    const store = new TeamStore(teamsDir);
+    const teamCfg = await store.read('test-team');
+    expect(teamCfg.lifecycleState).toBe('ACTIVE');
+    expect(teamCfg.managedBy).toBe('auto');
+
+    // Events should have created + activated
+    const events = await readTeamEvents(teamsDir, 'test-team');
+    const eventTypes = events.map((e) => e.event);
+    expect(eventTypes).toContain('created');
+    expect(eventTypes).toContain('activated');
+  });
+
+  it('dissolves ephemeral team after engine DONE', async () => {
+    const dir = await makeTempDir();
+    tempDirs.push(dir);
+    const teamsDir = join(dir, 'teams');
+
+    const team: AutonomyTeamConfig = {
+      teamConfig: makeTeamConfig(),
+      teamsDir,
+      durability: 'ephemeral',
+    };
+
+    const engine = createAutonomyEngine(makeConfig(dir, {
+      totalSubversions: 2,
+      team,
+    }));
+    const finalState = await engine.run();
+    expect(finalState.status).toBe('DONE');
+
+    // Team should be DISSOLVED
+    const store = new TeamStore(teamsDir);
+    const teamCfg = await store.read('test-team');
+    expect(teamCfg.lifecycleState).toBe('DISSOLVED');
+
+    // Events should contain full lifecycle
+    const events = await readTeamEvents(teamsDir, 'test-team');
+    const eventTypes = events.map((e) => e.event);
+    expect(eventTypes).toContain('created');
+    expect(eventTypes).toContain('activated');
+    expect(eventTypes).toContain('dissolving');
+    expect(eventTypes).toContain('dissolved');
+  });
+
+  it('does NOT dissolve persistent team after engine DONE', async () => {
+    const dir = await makeTempDir();
+    tempDirs.push(dir);
+    const teamsDir = join(dir, 'teams');
+
+    const team: AutonomyTeamConfig = {
+      teamConfig: makeTeamConfig(),
+      teamsDir,
+      durability: 'persistent',
+    };
+
+    const engine = createAutonomyEngine(makeConfig(dir, {
+      totalSubversions: 2,
+      team,
+    }));
+    const finalState = await engine.run();
+    expect(finalState.status).toBe('DONE');
+
+    // Team should remain ACTIVE (not dissolved)
+    const store = new TeamStore(teamsDir);
+    const teamCfg = await store.read('test-team');
+    expect(teamCfg.lifecycleState).toBe('ACTIVE');
+
+    // Events should only have created + activated (no dissolving/dissolved)
+    const events = await readTeamEvents(teamsDir, 'test-team');
+    const eventTypes = events.map((e) => e.event);
+    expect(eventTypes).toEqual(['created', 'activated']);
+  });
+
+  it('handles resume with existing ACTIVE team (idempotent createTeam)', async () => {
+    const dir = await makeTempDir();
+    tempDirs.push(dir);
+    const teamsDir = join(dir, 'teams');
+
+    // Pre-create a team in ACTIVE state (simulating a prior run)
+    const store = new TeamStore(teamsDir);
+    const teamCfg: TeamConfig = {
+      ...makeTeamConfig(),
+      managedBy: 'auto',
+      lifecycleState: 'ACTIVE',
+      durability: 'persistent',
+    };
+    await store.save(teamCfg);
+
+    const team: AutonomyTeamConfig = {
+      teamConfig: makeTeamConfig(),
+      teamsDir,
+      durability: 'persistent',
+    };
+
+    const engine = createAutonomyEngine(makeConfig(dir, {
+      totalSubversions: 2,
+      team,
+    }));
+    const finalState = await engine.run();
+    expect(finalState.status).toBe('DONE');
+
+    // No duplicate 'created' events -- createTeam was idempotent
+    const events = await readTeamEvents(teamsDir, 'test-team');
+    const createdEvents = events.filter((e) => e.event === 'created');
+    expect(createdEvents).toHaveLength(0); // idempotent -- no new created event
+  });
+
+  it('team stays ACTIVE when engine fails mid-execution', async () => {
+    const dir = await makeTempDir();
+    tempDirs.push(dir);
+    const teamsDir = join(dir, 'teams');
+
+    const team: AutonomyTeamConfig = {
+      teamConfig: makeTeamConfig(),
+      teamsDir,
+      durability: 'ephemeral',
+    };
+
+    const callbacks = makeFailingCallbacks(1); // fail at subversion 1
+    const engine = createAutonomyEngine(makeConfig(dir, {
+      totalSubversions: 3,
+      callbacks,
+      team,
+    }));
+    const finalState = await engine.run();
+    expect(finalState.status).toBe('FAILED');
+
+    // Team should stay ACTIVE (not dissolved) -- failure doesn't trigger dissolution
+    const store = new TeamStore(teamsDir);
+    const teamConfig = await store.read('test-team');
+    expect(teamConfig.lifecycleState).toBe('ACTIVE');
   });
 });
