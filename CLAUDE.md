@@ -6,7 +6,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 
 - **Languages:** TypeScript (src/), Rust (src-tauri/), GLSL (shaders)
 - **Build:** `npm run build` or `make build`
-- **Test:** `npm test` or `make test` (Vitest, 19200+ tests)
+- **Test:** `npm test` or `make test` (Vitest, 20600+ tests)
 - **Lint:** `npm run lint` or `make lint`
 - **Key deps:** Tauri v2, xterm.js, Vite v6, Vitest
 - **Desktop frontend:** `desktop/` (Vite webview)
@@ -30,6 +30,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `data/` -- Static data (schemas, chipset definitions, citations, domain data)
 - `extra/` -- Linux system integration (man pages, completions, .desktop, systemd)
 - `packaging/` -- Distro packaging (debian/, rpm/)
+- `.college/` -- College Structure: Rosetta Core, panels, departments (culinary-arts, mathematics, mind-body), calibration
 - `scripts/` -- Utility scripts (bootstrap, dashboard server, bin/)
 
 ## Commit Convention
