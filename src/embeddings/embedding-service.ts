@@ -200,14 +200,17 @@ export class EmbeddingService {
       await this.init();
     }
 
+    // Determine current method for cache operations (QUAL-05)
+    const currentMethod: 'model' | 'heuristic' = this.fallbackMode ? 'heuristic' : 'model';
+
     // Check cache if skillName provided
     if (skillName) {
-      const cached = this.cache.get(skillName, text);
+      const cached = this.cache.get(skillName, text, currentMethod);
       if (cached) {
         return {
           embedding: cached,
           fromCache: true,
-          method: this.fallbackMode ? 'heuristic' : 'model',
+          method: currentMethod,
         };
       }
     }
@@ -237,9 +240,9 @@ export class EmbeddingService {
       }
     }
 
-    // Cache result if skillName provided
+    // Cache result if skillName provided (QUAL-05: store method to prevent cross-method poisoning)
     if (skillName) {
-      this.cache.set(skillName, text, embedding);
+      this.cache.set(skillName, text, embedding, method);
     }
 
     return {
@@ -269,6 +272,9 @@ export class EmbeddingService {
       throw new Error('skillNames array must match texts array length');
     }
 
+    // Determine current method for cache operations (QUAL-05)
+    const currentMethod: 'model' | 'heuristic' = this.fallbackMode ? 'heuristic' : 'model';
+
     // Check cache for all texts
     const results: (EmbeddingResult | null)[] = new Array(texts.length).fill(null);
     const textsToEmbed: { index: number; text: string }[] = [];
@@ -276,12 +282,12 @@ export class EmbeddingService {
     for (let i = 0; i < texts.length; i++) {
       const skillName = skillNames?.[i];
       if (skillName) {
-        const cached = this.cache.get(skillName, texts[i]);
+        const cached = this.cache.get(skillName, texts[i], currentMethod);
         if (cached) {
           results[i] = {
             embedding: cached,
             fromCache: true,
-            method: this.fallbackMode ? 'heuristic' : 'model',
+            method: currentMethod,
           };
           continue;
         }
@@ -335,9 +341,9 @@ export class EmbeddingService {
       const embedding = embeddings[i];
       const skillName = skillNames?.[index];
 
-      // Cache if skillName provided
+      // Cache if skillName provided (QUAL-05: store method to prevent cross-method poisoning)
       if (skillName) {
-        this.cache.set(skillName, text, embedding);
+        this.cache.set(skillName, text, embedding, method);
       }
 
       results[index] = {
@@ -368,6 +374,14 @@ export class EmbeddingService {
    * Check if the service is using fallback (heuristic) mode.
    */
   isUsingFallback(): boolean {
+    return this.fallbackMode;
+  }
+
+  /**
+   * Check if the service is using fallback (heuristic) mode.
+   * Preferred API name per QUAL-05 — alias for isUsingFallback().
+   */
+  isFallbackMode(): boolean {
     return this.fallbackMode;
   }
 
