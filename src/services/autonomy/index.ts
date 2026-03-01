@@ -51,3 +51,17 @@ export type { ValidationResult } from './schema-validation.js';
 // Gate config loader
 export { loadGateConfig, validateGateConfigFile } from './gate-loader.js';
 export type { GateLoadResult } from './gate-loader.js';
+
+// State machine (Phase 498-01)
+export {
+  VALID_TRANSITIONS,
+  isValidTransition,
+  createExecutionState,
+  transition,
+} from './state-machine.js';
+
+// Persistence (Phase 498-01)
+export {
+  writeExecutionState,
+  readExecutionState,
+} from './persistence.js';
