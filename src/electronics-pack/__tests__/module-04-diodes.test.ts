@@ -1,9 +1,10 @@
 /**
  * Module 4: Diodes -- Test Suite
  *
- * Tests all 5 diode labs for correct MNA nonlinear simulation results.
- * Each lab uses solveNonlinear (Newton-Raphson) because diodes are
+ * Tests all 6 diode labs for correct MNA nonlinear simulation results.
+ * Labs 1-5 use solveNonlinear (Newton-Raphson) because diodes are
  * nonlinear devices requiring iterative solution.
+ * Lab 6 uses pure mathematical verification for switching speed comparison.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -15,8 +16,8 @@ import type { Lab, LabStep } from '../modules/04-diodes/labs.js';
 // ============================================================================
 
 describe('Module 4: Diodes -- Structure', () => {
-  it('exports exactly 5 labs', () => {
-    expect(labs).toHaveLength(5);
+  it('exports exactly 6 labs', () => {
+    expect(labs).toHaveLength(6);
   });
 
   it('each lab has a non-empty id, title, and steps array', () => {
@@ -37,7 +38,7 @@ describe('Module 4: Diodes -- Structure', () => {
     }
   });
 
-  it('all 5 verify() calls return true', () => {
+  it('all 6 verify() calls return true', () => {
     for (const lab of labs) {
       expect(lab.verify()).toBe(true);
     }
@@ -155,6 +156,35 @@ describe('Lab 5: LED Driver (m4-lab-05)', () => {
   });
 
   it('verify() returns true -- LED current within 10% of target', () => {
+    expect(lab().verify()).toBe(true);
+  });
+});
+
+// ============================================================================
+// Lab 6: Diode Switching Speed (m4-lab-06)
+// ============================================================================
+
+describe('Lab 6: Diode Switching Speed (m4-lab-06)', () => {
+  const lab = () => labs.find((l) => l.id === 'm4-lab-06')!;
+
+  it('exists with correct id and title', () => {
+    const l = lab();
+    expect(l).toBeDefined();
+    expect(l.id).toBe('m4-lab-06');
+    expect(l.title).toBe('Diode Switching Speed');
+  });
+
+  it('has at least 3 LabSteps', () => {
+    expect(lab().steps.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('learn_notes reference H&H 1.6', () => {
+    const l = lab();
+    const hasHHRef = l.steps.some((s) => s.learn_note.includes('H&H 1.6'));
+    expect(hasHHRef).toBe(true);
+  });
+
+  it('verify() returns true -- standard diode switching loss > 1000x Schottky loss', () => {
     expect(lab().verify()).toBe(true);
   });
 });

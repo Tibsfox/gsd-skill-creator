@@ -1,15 +1,19 @@
 /**
  * Module 5: Transistors -- Test Suite
  *
- * Validates all 5 transistor labs:
+ * Validates all 8 transistor labs:
  *   Lab 1: BJT Switch (NPN saturation)
  *   Lab 2: Common-Emitter Amplifier (voltage divider bias)
  *   Lab 3: Emitter Follower (unity gain buffer)
  *   Lab 4: MOSFET Switch (resistor model for on-state)
  *   Lab 5: Current Mirror (matched BJT pair)
+ *   Lab 6: Differential Amplifier (matched diff pair)
+ *   Lab 7: JFET Characteristics (Shockley equation)
+ *   Lab 8: FET Amplifier (common-source with source degeneration)
  *
- * All BJT labs use solveNonlinear from MNA engine.
- * MOSFET lab uses dcAnalysis (linear model, Phase 270 for full MOSFET).
+ * Labs 1-3, 5-6 use solveNonlinear from MNA engine.
+ * Lab 4 uses dcAnalysis (linear model, Phase 270 for full MOSFET).
+ * Labs 7-8 use pure mathematical verification (no JFET component type).
  */
 
 import { describe, it, expect } from 'vitest';
@@ -21,8 +25,8 @@ import type { Lab, LabStep } from '../modules/05-transistors/labs.js';
 // ============================================================================
 
 describe('Module 5: Transistors -- structure', () => {
-  it('exports exactly 5 labs', () => {
-    expect(labs).toHaveLength(5);
+  it('exports exactly 8 labs', () => {
+    expect(labs).toHaveLength(8);
   });
 
   it('each lab has non-empty id, title, and steps', () => {
@@ -151,11 +155,104 @@ describe('Lab 5: Current Mirror (m5-lab-05)', () => {
 });
 
 // ============================================================================
+// Lab 6: Differential Amplifier
+// ============================================================================
+
+describe('Lab 6: Differential Amplifier (m5-lab-06)', () => {
+  it('has correct id and title', () => {
+    const lab = labs.find((l) => l.id === 'm5-lab-06')!;
+    expect(lab).toBeDefined();
+    expect(lab.id).toBe('m5-lab-06');
+    expect(lab.title).toBe('Differential Amplifier');
+  });
+
+  it('has at least 3 steps', () => {
+    const lab = labs.find((l) => l.id === 'm5-lab-06')!;
+    expect(lab.steps.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('learn_notes reference H&H 2.3 or Ch.2', () => {
+    const lab = labs.find((l) => l.id === 'm5-lab-06')!;
+    const hasHHRef = lab.steps.some(
+      (s) => s.learn_note.includes('H&H 2.3') || s.learn_note.includes('H&H Ch.2'),
+    );
+    expect(hasHHRef).toBe(true);
+  });
+
+  it('verify() returns true -- differential gain > 10', () => {
+    const lab = labs.find((l) => l.id === 'm5-lab-06')!;
+    expect(lab.verify()).toBe(true);
+  });
+});
+
+// ============================================================================
+// Lab 7: JFET Characteristics
+// ============================================================================
+
+describe('Lab 7: JFET Characteristics (m5-lab-07)', () => {
+  it('has correct id and title', () => {
+    const lab = labs.find((l) => l.id === 'm5-lab-07')!;
+    expect(lab).toBeDefined();
+    expect(lab.id).toBe('m5-lab-07');
+    expect(lab.title).toBe('JFET Characteristics');
+  });
+
+  it('has at least 3 steps', () => {
+    const lab = labs.find((l) => l.id === 'm5-lab-07')!;
+    expect(lab.steps.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('learn_notes reference H&H 3.1 or Ch.3', () => {
+    const lab = labs.find((l) => l.id === 'm5-lab-07')!;
+    const hasHHRef = lab.steps.some(
+      (s) => s.learn_note.includes('H&H 3.1') || s.learn_note.includes('H&H Ch.3'),
+    );
+    expect(hasHHRef).toBe(true);
+  });
+
+  it('verify() returns true -- Shockley equation drain current and transconductance', () => {
+    const lab = labs.find((l) => l.id === 'm5-lab-07')!;
+    expect(lab.verify()).toBe(true);
+  });
+});
+
+// ============================================================================
+// Lab 8: FET Amplifier
+// ============================================================================
+
+describe('Lab 8: FET Amplifier (m5-lab-08)', () => {
+  it('has correct id and title', () => {
+    const lab = labs.find((l) => l.id === 'm5-lab-08')!;
+    expect(lab).toBeDefined();
+    expect(lab.id).toBe('m5-lab-08');
+    expect(lab.title).toBe('FET Amplifier');
+  });
+
+  it('has at least 3 steps', () => {
+    const lab = labs.find((l) => l.id === 'm5-lab-08')!;
+    expect(lab.steps.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('learn_notes reference H&H 3.2 or Ch.3', () => {
+    const lab = labs.find((l) => l.id === 'm5-lab-08')!;
+    const hasHHRef = lab.steps.some(
+      (s) => s.learn_note.includes('H&H 3.2') || s.learn_note.includes('H&H Ch.3'),
+    );
+    expect(hasHHRef).toBe(true);
+  });
+
+  it('verify() returns true -- common-source FET amplifier gain > 2', () => {
+    const lab = labs.find((l) => l.id === 'm5-lab-08')!;
+    expect(lab.verify()).toBe(true);
+  });
+});
+
+// ============================================================================
 // All verify() calls pass
 // ============================================================================
 
 describe('Module 5: all labs verify', () => {
-  it('all 5 verify() functions return true', () => {
+  it('all 8 verify() functions return true', () => {
     for (const lab of labs) {
       expect(lab.verify()).toBe(true);
     }
