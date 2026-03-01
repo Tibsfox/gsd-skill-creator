@@ -6,7 +6,9 @@
 
 // --- Constants ---
 
-/** Per-track token budget (Track A or Track B) */
+/** @justification Type: Accepted heuristic. 100K tokens provides ~50 pages of
+ * context for pattern learning -- sufficient for corpus analysis without exhausting
+ * model context windows. Balances thoroughness against API cost. */
 export const DEFAULT_TOKEN_BUDGET = 100_000;
 
 /** Starting radius for newly detected concepts on the complex plane */

@@ -56,7 +56,17 @@ export interface BoundedLearningConfig {
   preserveOriginalOnRefinement: boolean; // Always true
 }
 
-// Default bounded learning configuration
+/**
+ * @justification Type: Accepted heuristic
+ * minCorrectionsForRefinement (3): Minimum sample size to distinguish signal
+ *   from noise in correction patterns. Below 3, a single outlier dominates.
+ * cooldownDays (7): Weekly cadence prevents rapid oscillation between
+ *   refinement cycles. Aligned with typical user work-week rhythm.
+ * maxContentChangePercent (20): Caps total content drift per refinement.
+ *   Preserves skill recognizability while allowing meaningful updates.
+ * maxMetadataChanges (3): One metadata change per correction maximum,
+ *   matching minCorrections as a natural ceiling.
+ */
 export const DEFAULT_BOUNDED_CONFIG: BoundedLearningConfig = {
   minCorrectionsForRefinement: 3,
   minConfidence: 0.7,
@@ -148,5 +158,7 @@ export interface DriftResult {
   threshold: number;
 }
 
-// Default cumulative drift threshold (60%)
+/** @justification Type: Accepted heuristic. 60% cumulative drift signals
+ * the skill has changed enough to warrant re-evaluation. Below this threshold,
+ * accumulated small changes are tolerated as natural evolution. */
 export const DEFAULT_DRIFT_THRESHOLD = 60;
