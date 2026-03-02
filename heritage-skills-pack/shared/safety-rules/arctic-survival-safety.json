@@ -1,0 +1,92 @@
+[
+  {
+    "id": "ARCTIC-001",
+    "domain": "arctic-survival",
+    "pattern": "(?:snow.?shelter|quinzhee|iglu|igloo|snow.?cave|snow.?house|winter.?shelter.{0,30}snow).{0,100}(?!(?:ventilat|vent.?hole|air.?hole|breathing.?hole|poke|stick|mark|test|probe|airflow))",
+    "level": "redirected",
+    "annotation": {
+      "domain": "arctic-survival",
+      "level": "redirected",
+      "message": "Any enclosed snow shelter MUST have a ventilation hole to prevent carbon monoxide and CO2 buildup -- this is not optional. Before sleeping in a snow shelter: poke a ventilation hole through the ceiling/wall with a stick or ski pole, mark the hole's exterior location, and check it periodically as it can refreeze. A ventilated iglu that is well-built loses minimal heat while preventing suffocation.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "Canadian Armed Forces Arctic Survival Manual; Inuit Traditional Knowledge (Inuit Tapiriit Kanatami)"
+    },
+    "traditions": ["inuit", "first-nations"]
+  },
+  {
+    "id": "ARCTIC-002",
+    "domain": "arctic-survival",
+    "pattern": "(?:walk.{0,30}(?:on|across|over)|cross.{0,30}(?:on|over)|travel.{0,30}(?:on|across)|drive.{0,30}(?:on|across)).{0,60}(?:ice|frozen.{0,20}(?:lake|river|sea|ocean|bay|fjord|pond)).{0,80}(?!(?:thickness|thick|test|probe|check|measure|safe.{0,10}thickness|inches|centimeter|cm))",
+    "level": "gated",
+    "annotation": {
+      "domain": "arctic-survival",
+      "level": "gated",
+      "message": "Ice travel requires thickness verification before crossing. General safe minimums: 4 inches (10 cm) for one person on foot, 7-8 inches for a small group, 12-15 inches for snowmobile, 20+ inches for light vehicle. New clear ice is stronger than white/opaque ice. Always probe ahead with a pole or chisel, never cross alone, and know ice rescue procedures.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "Canadian Snowmobile Safety Association; Ontario Ministry of Natural Resources Ice Safety Guidelines"
+    },
+    "traditions": ["inuit", "first-nations"]
+  },
+  {
+    "id": "ARCTIC-003",
+    "domain": "arctic-survival",
+    "pattern": "(?:hypothermia|cold.{0,20}(?:exposure|injury|stress|emergency)|freezing.{0,20}(?:temperature|weather)|extreme.{0,20}cold).{0,80}(?!(?:treatment|warm|rewarm|remove|shelter|shiver|call|emergency|911|evacuate))",
+    "level": "gated",
+    "annotation": {
+      "domain": "arctic-survival",
+      "level": "gated",
+      "message": "Hypothermia occurs when core body temperature drops below 95\u00b0F (35\u00b0C). Signs: intense shivering, slurred speech, confusion, loss of coordination. Treatment: remove wet clothing, insulate from ground, apply gentle external warmth to core (not extremities), give warm (not hot) fluids if conscious. Severe hypothermia (no shivering, loss of consciousness) requires emergency evacuation.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Wilderness Medical Society Practice Guidelines; NOLS Wilderness Medicine"
+    },
+    "traditions": ["inuit", "first-nations", "appalachian"]
+  },
+  {
+    "id": "ARCTIC-004",
+    "domain": "arctic-survival",
+    "pattern": "(?:layering|layer.{0,20}(?:clothing|system|up|for)|dress.{0,30}(?:cold|winter|arctic|sub.?zero)|cold.{0,30}(?:weather.{0,20}gear|weather.{0,20}clothing))",
+    "level": "annotated",
+    "annotation": {
+      "domain": "arctic-survival",
+      "level": "annotated",
+      "message": "Traditional cold-weather dressing uses the layering principle: moisture-wicking base layer (wool, not cotton -- 'cotton kills'), insulating mid-layer (wool, down, or fur), windproof and waterproof outer layer. Inuit traditions use layered fur with the inner layer hair-in and outer layer hair-out for maximum insulation.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Canadian Armed Forces Arctic Survival Manual; Inuit Tapiriit Kanatami Educational Resources"
+    },
+    "traditions": ["inuit", "first-nations", "appalachian"]
+  },
+  {
+    "id": "ARCTIC-005",
+    "domain": "arctic-survival",
+    "pattern": "(?:qulliq|oil.?lamp|blubber.{0,20}lamp|seal.?oil.{0,20}lamp).{0,100}(?:(?:inside|interior|shelter|iglu|tent|enclosed).{0,80})?(?!(?:ventilat|vent.?hole|air.?hole|crack|opening|airflow|outside|crack.?open))",
+    "level": "gated",
+    "annotation": {
+      "domain": "arctic-survival",
+      "level": "gated",
+      "message": "A qulliq burning in an enclosed space must have adequate ventilation. The traditional iglu maintained ventilation through the entrance tunnel and a controllable vent hole. When burning any oil lamp in an enclosed space, ensure there is an air inlet and outlet. Monitor for signs of CO buildup: headache, drowsiness, or flame burning with yellow/orange instead of blue.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Inuit Tapiriit Kanatami; Traditional Inuit Building Knowledge"
+    },
+    "traditions": ["inuit"]
+  },
+  {
+    "id": "ARCTIC-006",
+    "domain": "arctic-survival",
+    "pattern": "(?:frostbite|frost.?nip|frozen.{0,30}(?:finger|toe|ear|nose|face|skin|extremity|limb)|extreme.{0,20}cold.{0,20}injury)",
+    "level": "annotated",
+    "annotation": {
+      "domain": "arctic-survival",
+      "level": "annotated",
+      "message": "Frostnip (first stage): skin becomes red and numb but remains soft. Warm gently with body heat -- do not rub. Frostbite (second stage+): skin becomes white, hard, and waxy. Do NOT rub frostbitten skin -- this causes tissue damage. Do not rewarm if refreezing is possible. Get to shelter, insulate, and seek emergency medical care.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Wilderness Medical Society Practice Guidelines; NOLS Wilderness Medicine"
+    },
+    "traditions": ["inuit", "first-nations", "appalachian"]
+  }
+]

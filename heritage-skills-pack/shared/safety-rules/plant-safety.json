@@ -1,0 +1,88 @@
+[
+  {
+    "id": "PLANT-001",
+    "domain": "plant",
+    "pattern": "(?:identify|identification|what.{0,20}plant|is.{0,20}this.{0,20}plant|plant.{0,20}look.{0,20}like|this.{0,20}look.{0,20}like)",
+    "level": "redirected",
+    "annotation": {
+      "domain": "plant",
+      "level": "redirected",
+      "message": "Plant identification from a text description alone is not safe. Deadly plants often closely resemble edible ones and cannot be reliably distinguished without physical examination, multiple identifying features, and ideally expert confirmation. Please consult a local botanist, mycologist, or certified foraging expert for in-person plant identification.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "American Association of Poison Control Centers; USDA Plant Identification Guidelines"
+    }
+  },
+  {
+    "id": "PLANT-002",
+    "domain": "plant",
+    "pattern": "(?:look.?alike|look.?s.{0,10}like|resemble|similar.{0,10}to|confused.{0,10}with|mistake.{0,10}for).{0,100}(?:hemlock|foxglove|nightshade|poison|toxic|deadly|dangerous)",
+    "level": "gated",
+    "annotation": {
+      "domain": "plant",
+      "level": "gated",
+      "message": "This plant has a dangerous toxic look-alike. Before proceeding, ensure the user has clearly reviewed all distinguishing features between the edible species and its toxic counterpart. Never harvest based on one characteristic alone -- use multiple identification markers simultaneously.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "Peterson Field Guides: Edible Wild Plants; Newcomb's Wildflower Guide"
+    }
+  },
+  {
+    "id": "PLANT-003",
+    "domain": "plant",
+    "pattern": "(?:forag|harvest|gather|pick|collect).{0,60}(?:wild|plant|herb|mushroom|berry|berries|root)",
+    "level": "annotated",
+    "annotation": {
+      "domain": "plant",
+      "level": "annotated",
+      "message": "When foraging wild plants, always positively identify using multiple features (leaf shape, stem structure, smell, habitat, season). Never eat any plant unless you are 100% certain of its identity. Harvest sustainably -- take no more than 1 in 10 plants from any patch.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Peterson Field Guides: Edible Wild Plants"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "PLANT-004",
+    "domain": "plant",
+    "pattern": "(?:medicinal|herbal|remedy|treatment|cure|heal|medicine).{0,60}(?:plant|herb|root|bark|leaf|leaves|berry|berries)",
+    "level": "gated",
+    "annotation": {
+      "domain": "plant",
+      "level": "gated",
+      "message": "Medicinal plant use carries risks of misidentification, toxicity, drug interactions, and inappropriate dosing. This content is provided as cultural and historical knowledge only. Always consult a qualified healthcare provider before using any plant medicinally.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "This information is for educational and cultural purposes only, not medical advice."
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "PLANT-005",
+    "domain": "plant",
+    "pattern": "(?:hemlock|foxglove|nightshade|belladonna|monkshood|aconite|water.?hemlock|poison.?hemlock|death.?camas|white.?snakeroot)",
+    "level": "redirected",
+    "annotation": {
+      "domain": "plant",
+      "level": "redirected",
+      "message": "This plant is potentially lethal. Hemlock, foxglove, nightshade, water hemlock, and related species have caused deaths from accidental ingestion. Do not handle, forage, or consume without expert botanical supervision. If accidental ingestion is suspected, call Poison Control immediately (1-800-222-1222 in the US).",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "American Association of Poison Control Centers; CDC Plant Poisoning Data"
+    }
+  },
+  {
+    "id": "PLANT-006",
+    "domain": "plant",
+    "pattern": "(?:wild.?carrot|queen.?anne.?lace|wild.?parsnip|cow.?parsnip|elderberry|pokeweed|jack.?in.?the.?pulpit)",
+    "level": "gated",
+    "annotation": {
+      "domain": "plant",
+      "level": "gated",
+      "message": "This plant has dangerous look-alikes or has toxic parts alongside edible parts. Wild carrot can be confused with poison hemlock. Elderberries require cooking -- raw berries and seeds are toxic. Exercise extreme caution and use multiple identification features.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Peterson Field Guides: Edible Wild Plants; USDA Plant Toxicology References"
+    }
+  }
+]

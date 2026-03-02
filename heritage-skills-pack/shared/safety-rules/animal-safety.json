@@ -1,0 +1,77 @@
+[
+  {
+    "id": "ANIMAL-001",
+    "domain": "animal",
+    "pattern": "(?:handle|approach|work.?with|catch|restrain|hold).{0,60}(?:animal|livestock|cattle|horse|goat|sheep|pig|hog|chicken|poultry).{0,80}(?!(?:safety|caution|careful|slow|calm|approach|technique|behind|side|horn|kick|bite))",
+    "level": "gated",
+    "annotation": {
+      "domain": "animal",
+      "level": "gated",
+      "message": "Animal handling requires understanding the animal's flight zone, approach angles, and body language. Never approach livestock from directly behind (kick zone) or stand in a horse's blind spot. Move slowly and calmly. Have an exit route before entering any enclosure with large animals. Wear appropriate footwear (steel-toed boots for large livestock).",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Temple Grandin, Livestock Handling and Transport; 4-H Animal Safety Guidelines"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "ANIMAL-002",
+    "domain": "animal",
+    "pattern": "(?:brain.?tan|brain.?tann|tan.{0,20}hide|skin.{0,20}(?:deer|elk|moose|caribou|seal|animal)).{0,80}(?!(?:glove|hygiene|wash|rinse|soap|hand))",
+    "level": "annotated",
+    "annotation": {
+      "domain": "animal",
+      "level": "annotated",
+      "message": "When processing animal hides, wear gloves when handling fresh hides and brains. Wash hands with soap and water after handling raw animal materials. Work outdoors or in well-ventilated spaces. Fresh hides should be processed or frozen within a day or two to prevent bacterial decomposition.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Matt Richards, Deerskins into Buckskins; Traditional Hide Processing Methods"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "ANIMAL-003",
+    "domain": "animal",
+    "pattern": "(?:wild.?animal|bear|cougar|mountain.?lion|moose|elk|bison|wolf|coyote|snake|rattlesnake).{0,80}(?:encounter|approach|near|found|see|met|cornered|attack)",
+    "level": "gated",
+    "annotation": {
+      "domain": "animal",
+      "level": "gated",
+      "message": "Wild animal encounters require specific responses by species. General principles: give the animal an escape route, back away slowly without turning your back, never run from a predator, never approach a mother with young. Carry bear spray in bear country and know how to use it. Contact your local wildlife agency for species-specific guidance.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Parks Canada Wildlife Safety Guidelines; National Wildlife Federation"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "ANIMAL-004",
+    "domain": "animal",
+    "pattern": "(?:livestock|cattle|horse|goat|sheep|pig|hog).{0,80}(?:basic|handle|work|care|feed|water|move|pen|pasture)",
+    "level": "annotated",
+    "annotation": {
+      "domain": "animal",
+      "level": "annotated",
+      "message": "Working with livestock requires consistent routines, calm demeanor, and awareness of the animal's comfort level. Heritage traditions emphasize a respectful relationship with working animals -- knowledge of individual animal behavior and building trust over time leads to safer, more effective work.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Foxfire Book 9 (1986): Gardening and Farming; Traditional Livestock Keeping"
+    },
+    "traditions": ["appalachian", "first-nations"]
+  },
+  {
+    "id": "ANIMAL-005",
+    "domain": "animal",
+    "pattern": "(?:zoonos|rabies|tularemia|brucellosis|hantavirus|leptospirosis|salmonella).{0,80}(?:(?:prevent|protect|risk|safe))?",
+    "level": "gated",
+    "annotation": {
+      "domain": "animal",
+      "level": "gated",
+      "message": "Zoonotic diseases (diseases transmissible from animals to humans) are a real risk in heritage skills contexts. Wash hands after any animal contact, wear gloves when processing game or hides, avoid contact with rodent droppings (hantavirus risk), and be aware that rodents and bats can transmit rabies. Consult a healthcare provider about recommended vaccinations for your region.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "CDC Zoonotic Disease Prevention Guidelines; USDA Animal Disease Information"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  }
+]
