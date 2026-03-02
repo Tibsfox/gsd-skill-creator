@@ -1,0 +1,52 @@
+{
+  "id": "arctic-14-caribou-hair-beginner",
+  "title": "Caribou Hair Properties",
+  "tradition": "inuit",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Understand why caribou hide is the supreme arctic insulator -- hollow hair shafts, air layer engineering, and the ~300-hour clothing cycle that embodies Inuit values of Pilimmaksarniq (learning through practice and observation) and Pijitsirniq (serving the community). This session explores the material science of caribou fiber and why Inuit clothing outperforms modern technical gear in certain extreme cold conditions.",
+  "prerequisites": [],
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Examine the structure of caribou hair. Unlike most mammal hair, which is solid, caribou hair is hollow. Each hair shaft is filled with air cells, making it an incredibly efficient insulator by weight. The hollow structure also means the hair is buoyant and water-resistant -- properties that matter in a wet arctic environment. Caribou hair is also shorter and denser than moose or deer hair, allowing it to pack more insulating air into a thinner layer.",
+      "culturalContext": "Understanding caribou hair properties is the foundation of Inuit clothing knowledge. Each hair is a tiny insulating tube -- nature's engineering at its finest. Inuit makers understood the thermal physics of caribou fiber through generations of observation and practice before Western scientists had the vocabulary to explain it. This is Pilimmaksarniq in its deepest form: knowing arrived at through doing, observing, and refining over thousands of years.",
+      "nationAttribution": "Inuit",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 2,
+      "instruction": "Learn the seasonal selection principle: caribou hide changes throughout the year, and the timing of harvest determines the quality and purpose of the garment. Fall hides (September-October) have long, dense hair at peak insulation -- ideal for winter parkas. Early summer hides have shorter hair and are better for lighter garments or waterproof boots (kamik). Spring hides have thin, worn hair unsuitable for cold-weather garments. The Inuit hunter's decision of when to hunt was also a clothing decision.",
+      "safetyNote": "Hypothermia awareness: proper clothing is survival-critical in arctic conditions. Understanding insulation science is not academic -- it is life-saving. Wet clothing in sub-zero temperatures loses nearly all insulating value. Caribou fur maintains much of its insulation when damp (the hollow air cells remain trapped) -- which is why Inuit clothing outperforms many synthetic materials in sustained cold. Modern synthetic insulation can fail catastrophically when soaked; caribou hides are more forgiving. This difference is why understanding traditional materials has real safety implications.",
+      "nationAttribution": "Inuit"
+    },
+    {
+      "order": 3,
+      "instruction": "Understand the hide preparation process: after harvest, the hide must be processed promptly to prevent spoilage. Fleshing removes the subcutaneous fat and tissue from the skin side. The hide is then stretched on a frame while wet and allowed to dry taut. Brain-tanning (using the animal's own brain, which contains natural tanning agents) or smoke-tanning softens and stabilizes the hide, making it supple and preventing rot. Each step requires specific knowledge of the hide's state -- when it is ready, when it needs more work, when it is done.",
+      "culturalContext": "The caribou clothing cycle takes approximately 300 hours from hunt to finished parka. This embodies Pilimmaksarniq -- learning by doing, building skill through accumulated practice -- and Pijitsirniq -- serving the community through skilled work. A woman who makes a parka is not just sewing; she is investing 300 hours of community labor in one person's survival. The knowledge is passed from mother to daughter, grandmother to granddaughter. Each maker's hands carry the accumulated knowledge of every maker who taught her.",
+      "nationAttribution": "Inuit",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 4,
+      "instruction": "Learn the inner-outer principle: Inuit parka construction uses two layers worn together. The inner amauti or attigi is worn with the hair facing inward against the body, trapping a layer of warm air next to the skin. The outer parka (qulittaq) is worn hair-outward to shed wind and precipitation. Together they create a system where moisture (sweat) moves away from the body, a warm still-air layer is maintained next to skin, and the outer layer protects against wind chill. The system works because of the physical properties of the hair -- it is more than just fur.",
+      "culturalContext": "The inner-outer principle is an engineering solution arrived at through millennia of arctic practice. Modern outdoor clothing designers have rediscovered and repackaged this as 'base layer and shell' -- but Inuit makers were doing it with caribou long before synthetic fibers existed. The critical difference is the material knowledge: knowing which season's hide, which part of the body, which preparation method, and which stitching technique all affect the performance of the system.",
+      "nationAttribution": "Inuit"
+    },
+    {
+      "order": 5,
+      "instruction": "Examine kamik (boot) construction principles. Kamik are multi-layer boots that address the specific challenge of foot insulation: feet generate sweat, which must be managed carefully, and contact with snow and ice can accelerate heat loss through conduction. Traditional kamik use caribou leg skin (the leg skin is tougher and has shorter, denser hair), a waterproof outer sole of sealskin, and an inner liner of caribou or rabbit fur. The boot system is designed to be dried nightly by the user.",
+      "nationAttribution": "Inuit",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 6,
+      "instruction": "Consider the complete system: how the inner parka, outer parka, pants, kamik, mittens, and headwear work together as an integrated system. Each piece is designed to function with the others. The hood is cut to channel breath away from the face, preventing ice buildup. The pants overlap the boots to prevent cold-air gaps. The mittens are long enough to cover wrist gaps. The system has no single point of failure -- if one component is damaged, the others maintain most of the protection. Maintenance and repair knowledge is as important as initial construction.",
+      "culturalContext": "Each piece of the caribou clothing system represents community investment in one person's survival. Making a complete outfit is an act of Pijitsirniq -- service to the community. The maker's knowledge ensures the hunter can return from the land. The hunter's skill ensures the community has hides to work with. The cycle is explicitly reciprocal: clothing makes the hunt possible; the hunt makes the clothing possible. The 300-hour investment is not a burden -- it is evidence of the community's commitment to each of its members.",
+      "nationAttribution": "Inuit"
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}
