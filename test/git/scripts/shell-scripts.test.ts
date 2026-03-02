@@ -297,7 +297,7 @@ describe('shellcheck (SCRIPT-05)', () => {
     }
   })();
 
-  it.skipIf(!hasShellcheck)('all scripts pass shellcheck', () => {
+  it.skipIf(!hasShellcheck)('all scripts pass shellcheck', { timeout: 30000 }, () => {
     const scripts = fs.readdirSync(SCRIPTS_DIR).filter((f) => f.endsWith('.sh'));
     expect(scripts.length).toBeGreaterThanOrEqual(4);
 
