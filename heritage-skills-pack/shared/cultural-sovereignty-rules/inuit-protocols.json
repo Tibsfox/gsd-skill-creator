@@ -1,0 +1,129 @@
+[
+  {
+    "id": "IQ-IQ-001",
+    "level": 1,
+    "tradition": "inuit",
+    "domain": "iq-principles",
+    "action": "include",
+    "explanation": "Inuit Qaujimajatuqangit (IQ) principles are publicly shared educational framework. Include with attribution to Inuit Tapiriit Kanatami and specific IQ principle names."
+  },
+  {
+    "id": "IQ-GOV-001",
+    "level": 1,
+    "tradition": "inuit",
+    "domain": "governance",
+    "action": "include",
+    "explanation": "Aajiiqatigiinniq (consensus decision-making) and other IQ governance principles are publicly shared. Include with Inuit attribution and IQ principle framing."
+  },
+  {
+    "id": "IQ-GOV-002",
+    "level": 2,
+    "tradition": "inuit",
+    "domain": "traditional-governance",
+    "action": "summarize-and-refer",
+    "referralTarget": "Inuit Tapiriit Kanatami and regional Inuit organizations",
+    "explanation": "Detailed traditional governance and leadership protocols are contextually shared. Summarize in educational framing; refer to ITK and regional organizations for full detail."
+  },
+  {
+    "id": "IQ-MUS-001",
+    "level": 2,
+    "tradition": "inuit",
+    "domain": "throat-singing",
+    "action": "summarize-and-refer",
+    "referralTarget": "Inuit cultural organizations and regional arts programs",
+    "explanation": "Katajjaq (throat singing) is culturally shared knowledge and appropriate in educational settings with proper attribution. Summarize and refer to Inuit cultural organizations for learning opportunities."
+  },
+  {
+    "id": "IQ-MUS-002",
+    "level": 2,
+    "tradition": "inuit",
+    "domain": "drum-dancing",
+    "action": "summarize-and-refer",
+    "referralTarget": "Inuit cultural centers and drum dance tradition keepers",
+    "explanation": "Drum dancing traditions are appropriate for educational summary. Refer to regional Inuit cultural centers for learning contexts."
+  },
+  {
+    "id": "IQ-MUS-003",
+    "level": 3,
+    "tradition": "inuit",
+    "domain": "ceremonial-drumming",
+    "action": "acknowledge-and-redirect",
+    "referralTarget": "regional Inuit elders and ceremony keepers",
+    "explanation": "Ceremonial drumming protocols specific to particular communities are restricted. Acknowledge their existence; redirect to regional ceremony keepers."
+  },
+  {
+    "id": "IQ-CER-001",
+    "level": 3,
+    "tradition": "inuit",
+    "domain": "qulliq-ceremony",
+    "action": "acknowledge-and-redirect",
+    "referralTarget": "Inuit women's organizations and qulliq tradition keepers",
+    "explanation": "Qulliq lighting ceremonies carry specific protocols that are community-restricted. Acknowledge the qulliq's cultural significance; redirect to qulliq tradition keepers for ceremonial context."
+  },
+  {
+    "id": "IQ-SPI-001",
+    "level": 4,
+    "tradition": "inuit",
+    "domain": "shamanic-practices",
+    "action": "block",
+    "explanation": "Angakkuit (shamanic) practices and associated spiritual knowledge are sacred. HARD BLOCK. These practices belong exclusively to specific communities and knowledge holders. No description, reproduction, or referral to specific practices permitted."
+  },
+  {
+    "id": "IQ-NAM-001",
+    "level": 4,
+    "tradition": "inuit",
+    "domain": "naming-ceremonies",
+    "action": "block",
+    "explanation": "Inuit naming ceremonies (atiq) are sacred. HARD BLOCK. The Inuit naming system carries deep spiritual significance connecting the living to ancestors; its protocols cannot be reproduced or described."
+  },
+  {
+    "id": "IQ-HIS-001",
+    "level": 1,
+    "tradition": "inuit",
+    "domain": "history",
+    "action": "include",
+    "explanation": "Publicly documented Inuit history, land use, and adaptation. Include with specific community attribution (Inuit, not generic 'Indigenous') and appropriate sources."
+  },
+  {
+    "id": "IQ-CRA-001",
+    "level": 1,
+    "tradition": "inuit",
+    "domain": "crafts",
+    "action": "include",
+    "explanation": "Traditional Inuit craft techniques (inukshuk, amauti construction, traditional tools) documented in public educational resources. Include with specific community attribution."
+  },
+  {
+    "id": "IQ-FOO-001",
+    "level": 1,
+    "tradition": "inuit",
+    "domain": "food",
+    "action": "include",
+    "explanation": "Traditional Inuit food practices documented in public educational contexts. Include with attribution and IQ principle framing where applicable."
+  },
+  {
+    "id": "IQ-NAV-001",
+    "level": 1,
+    "tradition": "inuit",
+    "domain": "northern-watercraft",
+    "action": "include",
+    "explanation": "Kayak and umiak construction techniques widely documented in museum and educational sources. Include with Inuit attribution and regional specificity."
+  },
+  {
+    "id": "IQ-EKO-001",
+    "level": 2,
+    "tradition": "inuit",
+    "domain": "ecological-knowledge",
+    "action": "summarize-and-refer",
+    "referralTarget": "Inuit Circumpolar Council and community environmental programs",
+    "explanation": "Inuit Qaujimajatuqangit ecological knowledge is contextually appropriate for educational summary. Refer to ICC and community programs for full knowledge systems."
+  },
+  {
+    "id": "IQ-LAN-001",
+    "level": 2,
+    "tradition": "inuit",
+    "domain": "language",
+    "action": "summarize-and-refer",
+    "referralTarget": "Inuit language revitalization programs and Nunavut Literacy Council",
+    "explanation": "Inuktitut and Inuinnaqtun language knowledge is appropriate for educational summary. Refer to language programs for learning resources."
+  }
+]
