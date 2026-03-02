@@ -1,0 +1,77 @@
+[
+  {
+    "id": "STRUCT-001",
+    "domain": "structural",
+    "pattern": "(?:load.?bearing|bearing.?wall|structural.{0,20}(?:beam|post|column|timber|joint|connection|support)).{0,100}(?!(?:engineer|professional|consult|assess|inspect|structural.{0,10}engineer))",
+    "level": "gated",
+    "annotation": {
+      "domain": "structural",
+      "level": "gated",
+      "message": "Load-bearing construction involves structural forces that, if miscalculated, can cause collapse. For any permanent structure intended for human occupancy, consult a structural engineer or licensed contractor. This content provides traditional techniques as educational context -- local building codes and professional assessment take precedence.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Heritage Skills Educational Pack Scope Definition; Local Building Code Requirements"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "STRUCT-002",
+    "domain": "structural",
+    "pattern": "(?:build.{0,20}(?:shelter|cabin|lodge|lean.?to|debris.?hut|quinzhee|iglu)|shelter.{0,20}(?:construction|build|make|create))",
+    "level": "annotated",
+    "annotation": {
+      "domain": "structural",
+      "level": "annotated",
+      "message": "When building any shelter, consider: weather loads (wind and snow), water drainage direction, ventilation, emergency egress, and ground stability. Temporary shelters should be sited away from hazard trees and natural drainage channels.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Tom Brown Jr. Survival Guides; NOLS Wilderness Medicine"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "STRUCT-003",
+    "domain": "structural",
+    "pattern": "(?:underground|earth.?contact|buried|earthen|dugout|root.?cellar|pit.?house|semi.?subterranean).{0,80}(?!ventilat)",
+    "level": "gated",
+    "annotation": {
+      "domain": "structural",
+      "level": "gated",
+      "message": "Earth-contact and underground construction requires adequate ventilation to prevent CO2 accumulation, moisture control to prevent rot and structural failure, and assessment of soil stability to prevent collapse. Always include at least one ventilation opening. Test air quality before extended occupancy.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "USDA Forest Service Earthen Structures Guide; Heritage Skills Structural Safety"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "STRUCT-004",
+    "domain": "structural",
+    "pattern": "(?:foundation|footer|footing|sill|mudsill|ground.?contact).{0,80}(?:wood|timber|log|post)",
+    "level": "annotated",
+    "annotation": {
+      "domain": "structural",
+      "level": "annotated",
+      "message": "Ground-contact wood requires naturally rot-resistant species (cedar, black locust, osage orange, black walnut heartwood) or traditional preservation methods. Use stone, brick, or concrete piers between soil and structural wood whenever possible to prevent moisture wicking and decay.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Foxfire Book 1 (1972): Log Cabin Building; Traditional Timber Framing References"
+    },
+    "traditions": ["appalachian", "first-nations"]
+  },
+  {
+    "id": "STRUCT-005",
+    "domain": "structural",
+    "pattern": "(?:notch|joint|mortise|tenon|dovetail|scarf).{0,80}(?:(?:how|correct|proper|right|strength|secure|tight))?",
+    "level": "annotated",
+    "annotation": {
+      "domain": "structural",
+      "level": "annotated",
+      "message": "Traditional joinery techniques provide strong connections when properly executed. Test joints for tightness before relying on them structurally. A well-cut wood joint needs no fasteners, but using wooden pegs (treenails) adds security. Practice on scrap wood before cutting final timbers.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Timber Framers Guild Technical Publications; Foxfire Book 1 (1972)"
+    },
+    "traditions": ["appalachian", "first-nations"]
+  }
+]
