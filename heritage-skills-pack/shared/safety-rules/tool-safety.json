@@ -1,0 +1,76 @@
+[
+  {
+    "id": "TOOL-001",
+    "domain": "tool",
+    "pattern": "(?:axe|hatchet|splitting.?maul|felling.?axe).{0,100}(?!(?:safety|stance|footing|grip|technique|position|away.?from|guard|protect))",
+    "level": "gated",
+    "annotation": {
+      "domain": "tool",
+      "level": "gated",
+      "message": "Axe and hatchet use requires proper safety stance: feet shoulder-width apart with stable footing, target area clear of people and obstacles, swing path free of obstructions. Keep the blade sharp (dull blades are more dangerous due to glancing). Always cut away from your body and ensure the axe head is securely attached.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "American Red Cross Wilderness Safety; Foxfire Book 1 (1972)"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "TOOL-002",
+    "domain": "tool",
+    "pattern": "(?:carv|whittle|knife.{0,20}(?:cut|use|work)|draw.?knife).{0,100}(?!(?:away.?from|direction|stroke|safe|guard|toward.?ground|chest.?lever))",
+    "level": "annotated",
+    "annotation": {
+      "domain": "tool",
+      "level": "annotated",
+      "message": "When carving with a knife, cut away from your body. Use a chest-lever grip for controlled cuts. Keep the non-cutting hand behind the blade's path. A sharp knife is safer than a dull one -- maintain your edge. Keep a first aid kit nearby when doing extended carving work.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Boy Scouts of America Woodcarving Safety; Foxfire Book 1 (1972)"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "TOOL-003",
+    "domain": "tool",
+    "pattern": "(?:chainsaw|circular.?saw|table.?saw|band.?saw|jigsaw|power.?saw|electric.?drill|power.?drill|router|grinder)",
+    "level": "gated",
+    "annotation": {
+      "domain": "tool",
+      "level": "gated",
+      "message": "Power tools fall outside the scope of heritage hand-skills instruction. This content focuses on traditional hand tools (draw knives, axes, hand saws, adzes, spokeshaves). For power tool use, consult the manufacturer's safety manual and consider appropriate training.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Heritage Skills Educational Pack Scope Definition"
+    }
+  },
+  {
+    "id": "TOOL-004",
+    "domain": "tool",
+    "pattern": "(?:store|storage|sheath|scabbard|cover|protect).{0,40}(?:blade|knife|axe|hatchet|chisel|gouge|awl)",
+    "level": "annotated",
+    "annotation": {
+      "domain": "tool",
+      "level": "annotated",
+      "message": "Sharp tools should always be stored with a protective sheath or edge guard. Store edge tools with edges covered when not in use. Transport bladed tools in a case or wrapped securely. Never leave sharp tools on the ground or in a position where someone could step on or trip over them.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Heritage Skills Safety Standards"
+    },
+    "traditions": ["appalachian", "first-nations", "inuit"]
+  },
+  {
+    "id": "TOOL-005",
+    "domain": "tool",
+    "pattern": "(?:adze|draw.?knife|spoke.?shave|froe|drawshave|croze|travisher).{0,80}(?!(?:brace|clamp|vise|horse|shaving.?horse|secure|stable|clamped))",
+    "level": "annotated",
+    "annotation": {
+      "domain": "tool",
+      "level": "annotated",
+      "message": "Traditional shaping tools like the drawknife and adze work best -- and most safely -- when the workpiece is securely clamped in a shaving horse or vise. Never attempt to hold the workpiece freehand while using these tools. The work should be stable before you begin.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Foxfire Book 1 (1972); Chairmaker's Notebook (Peter Galbert)"
+    },
+    "traditions": ["appalachian", "first-nations"]
+  }
+]
