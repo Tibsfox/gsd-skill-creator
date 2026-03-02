@@ -1,0 +1,129 @@
+{
+  "id": "seasonal-woodland",
+  "name": "Woodland Seasonal Round",
+  "description": "The seasonal cycle of the eastern woodland nations — following the rhythms of the Great Lakes, St. Lawrence, and Atlantic watersheds. Heritage skills are practiced in ecological context: the right time, the right material, the right protocol.",
+  "traditions": ["first-nations"],
+  "applicableNations": ["anishinaabe", "algonquin", "abenaki", "haudenosaunee", "mikmaq"],
+  "seasons": [
+    {
+      "name": "Sugar Moon (Ziisbaakdoke Giizis / Siikoobimizii Giizis)",
+      "westernMonths": ["March", "April"],
+      "ecologicalMarkers": [
+        "Maple sap rises when nights are below freezing and days above",
+        "First crow sightings announce spring is coming",
+        "Snow begins to crust (good for snowshoe travel)"
+      ],
+      "activities": [
+        "Maple sap tapping and collection",
+        "Sugar camp setup and family gathering",
+        "Maple syrup and maple sugar production",
+        "Spring fishing begins as rivers open",
+        "Snowshoe travel at maximum efficiency on crusted snow"
+      ],
+      "heritageSkillRooms": [5, 9],
+      "culturalContext": "The sugar bush season is a major community gathering time. Families traveled from winter hunting camps to established sugar bush sites. For the Anishinaabe, this was one of the first major food production events of the year after a long winter on cached and hunted food."
+    },
+    {
+      "name": "Planting Moon / Fishing Moon",
+      "westernMonths": ["May", "June"],
+      "ecologicalMarkers": [
+        "Ice breaks up on lakes and rivers",
+        "Fiddleheads emerge from forest floor",
+        "Wild leeks (ramps) carpet the forest floor",
+        "Walleye and perch spawn in shallow water"
+      ],
+      "activities": [
+        "Three Sisters planting begins (corn, beans, squash) — Haudenosaunee",
+        "Fiddlehead and wild leek harvesting",
+        "Spring fishing — walleye, perch, suckers running upstream",
+        "Birchbark harvesting begins (birch sap is running, bark peels cleanly)",
+        "Cedar bark harvesting for weaving and construction",
+        "Canoe repair after winter storage — birchbark patching"
+      ],
+      "heritageSkillRooms": [2, 5, 9, 13],
+      "culturalContext": "Spring is the season of renewal and the most intensive planting and harvesting period for shoreline and forest peoples. Birchbark at this time of year is at its most pliable and easiest to harvest without damaging the tree."
+    },
+    {
+      "name": "Berry Moon / Green Corn Moon",
+      "westernMonths": ["July", "August"],
+      "ecologicalMarkers": [
+        "Wild blueberries, raspberries, and strawberries ripen",
+        "Thunderstorm season",
+        "Green corn reaches harvest stage — Haudenosaunee",
+        "Wild rice (manoomin) heads begin to fill — Anishinaabe"
+      ],
+      "activities": [
+        "Wild berry picking and preservation (drying, making pemican-style berry mixtures)",
+        "Green Corn Ceremony preparation — Haudenosaunee (Level 2-3)",
+        "Fishing continues; smoking fish for storage",
+        "Hide tanning begins — hides taken in spring are processed now",
+        "Woodworking projects — carving, canoe building in summer camp",
+        "Gathering medicinal plants at peak potency"
+      ],
+      "heritageSkillRooms": [2, 4, 5, 9],
+      "culturalContext": "Midsummer is a time of abundance and extended community gatherings. The berry season provided critical vitamin C after winter. For the Haudenosaunee, the Green Corn Ceremony is a major thanksgiving gathering (Level 2 — educational framing required, ceremonial specifics not included)."
+    },
+    {
+      "name": "Ricing Moon (Manoominike Giizis) / Harvest Moon",
+      "westernMonths": ["August", "September"],
+      "ecologicalMarkers": [
+        "Wild rice (manoomin) heads are ripe — tested by rubbing a head between palms",
+        "First cool nights signal approaching autumn",
+        "Geese and ducks begin to gather for migration",
+        "Corn, beans, and squash reach full harvest stage"
+      ],
+      "activities": [
+        "Wild rice (manoomin) harvesting — canoe-based, using ricing sticks to knock heads — Anishinaabe (Level 1 for technique, Level 2 for protocols)",
+        "Wild rice parching and winnowing",
+        "Three Sisters harvest — corn, beans, squash — Haudenosaunee",
+        "Corn drying and hominy preparation",
+        "Hunting begins — deer and moose",
+        "Smoking and drying meat and fish for winter storage",
+        "Basswood bark harvesting for fiber"
+      ],
+      "heritageSkillRooms": [2, 5, 10],
+      "culturalContext": "The wild rice harvest is one of the most significant seasonal events in Anishinaabe culture — spiritually, economically, and nutritionally. The manoomin camp was a community gathering equivalent in importance to the sugar bush. For the Haudenosaunee, the Three Sisters harvest marks the end of the agricultural year."
+    },
+    {
+      "name": "Hunting Moon / Freezing Moon",
+      "westernMonths": ["October", "November"],
+      "ecologicalMarkers": [
+        "Deciduous trees drop leaves — game is more visible",
+        "First frosts arrive; freeze-up begins on ponds and small lakes",
+        "Moose and deer in rut — most active and visible",
+        "Migrating waterfowl move through"
+      ],
+      "activities": [
+        "Intensive moose and deer hunting",
+        "Moose hide preparation and tanning",
+        "Preparing winter shelter — checking for drafts, reinforcing wiigiwaam or longhouse",
+        "Final food storage preparations for winter",
+        "Snowshoe construction and repair for approaching winter",
+        "Net fishing under newly forming ice",
+        "Gathering and storing firewood"
+      ],
+      "heritageSkillRooms": [1, 2, 3, 4],
+      "culturalContext": "The fall hunt was critical for winter food security. A successful moose hunt provided hundreds of pounds of meat, hide for clothing, and bone for tools. Communities worked together to process large kills efficiently."
+    },
+    {
+      "name": "Winter Moon / Story Moon",
+      "westernMonths": ["December", "January", "February"],
+      "ecologicalMarkers": [
+        "Deep snow — snowshoe travel essential",
+        "Ice thick enough for ice fishing",
+        "Extreme cold — survival skills fully deployed",
+        "Long nights — primary storytelling season"
+      ],
+      "activities": [
+        "Ice fishing under the ice using jigging techniques and tip-ups",
+        "Trapping — setting and checking trap lines for beaver, muskrat, otter, marten",
+        "Woodworking projects — carving, snowshoe frame construction",
+        "Hide tanning using brain-tan techniques during cold weather",
+        "Weaving and sewing — moccasins, clothing, baskets during long indoor periods",
+        "Storytelling — winter is the season for teaching through story (cultural protocols around winter storytelling apply)"
+      ],
+      "heritageSkillRooms": [1, 2, 4, 6, 12],
+      "culturalContext": "Winter in the woodland nations was a time of relative stillness. The major food-getting activities were ice fishing and trapping. Long indoor periods were used for craft production and cultural transmission through storytelling. In Anishinaabe tradition, certain stories can only be told when there is snow on the ground."
+    }
+  ]
+}
