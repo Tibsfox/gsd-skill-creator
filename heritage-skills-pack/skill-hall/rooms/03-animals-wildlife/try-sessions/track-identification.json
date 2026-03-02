@@ -1,0 +1,55 @@
+{
+  "id": "animals-03-tracking-beginner",
+  "title": "Track Identification: Reading Animal Sign Across Traditions",
+  "tradition": "cross-tradition",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Learn to identify and interpret animal tracks from multiple traditions: Appalachian hunting and woodcraft, and Cree and Anishinaabe tracking knowledge. Explore how tracks reveal not just species but behavior, gait, size, and time of passage. Understand why tracking is a cross-tradition skill with deep roots in multiple knowledge systems.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Tracking as cross-tradition knowledge: the ability to read animal tracks and sign is a foundational skill across Appalachian hunting culture and many First Nations traditions including Cree, Dene, and Anishinaabe. Each tradition has developed vocabulary, pattern recognition, and interpretive frameworks for the same physical evidence. The underlying ecological knowledge overlaps even when the cultural context differs.",
+      "nationAttribution": "Cree, Anishinaabe",
+      "culturalContext": "In Cree and Anishinaabe traditions, tracking is inseparable from a relational understanding of the animal world -- reading tracks is part of a conversation between the tracker and the animal. In Appalachian tradition, tracking is more often framed as woodcraft skill. Both interpretive frameworks produce excellent trackers. The difference is in what the tracker believes the relationship between tracker and tracked animal to be.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Track anatomy: every track has four elements -- the shape of the print (toe number, claw marks, heel pad), the stride length (distance from track to track on the same side), the straddle (width of the track trail), and the trail pattern (how the tracks are arranged relative to each other). These four elements together identify the species and gait.",
+      "sumoMapping": "BiologicalProcess"
+    },
+    {
+      "order": 3,
+      "instruction": "Common species: white-tailed deer (pointed hooves, dewclaws show in soft substrate, trotting vs. bounding tracks), Eastern cottontail rabbit (bounding pattern with hind feet landing ahead of front feet), North American beaver (large webbed hind foot, tail drag mark), gray squirrel (bounding pattern, smaller version of rabbit pattern), and wild turkey (three-toed spread print, distinctive heel).",
+      "sumoMapping": "BiologicalProcess"
+    },
+    {
+      "order": 4,
+      "instruction": "Reading gait: a walking animal places its tracks in a pattern different from a trotting, bounding, or galloping animal. At a walk, diagonal limbs move together (front right and hind left advance simultaneously). At a bound (rabbit, squirrel), both hind feet land ahead of where the front feet were. Reading gait tells you whether an animal was relaxed (walk or trot) or alarmed (bound or gallop).",
+      "nationAttribution": "Cree, Anishinaabe",
+      "culturalContext": "In Cree and Anishinaabe tracking knowledge, gait reading extends beyond species identification to behavioral reading: a deer that was walking and then began bounding detected something alarming. The tracker infers what alarmed it, which may reveal information about other animals or conditions in the area.",
+      "sumoMapping": "BiologicalProcess"
+    },
+    {
+      "order": 5,
+      "instruction": "Substrate and age: tracks in soft mud capture fine detail (claw marks, paw pad texture); tracks in snow lose detail as they age (snow consolidates, edges round, small features disappear). Estimating track age from substrate condition is a judgment skill. Fresh tracks in frost-covered mud show sharp edges; older tracks have collapsed edges and may show hoarfrost growing into the impression.",
+      "sumoMapping": "BiologicalProcess"
+    },
+    {
+      "order": 6,
+      "instruction": "Other sign: tracks are not the only sign animals leave. Browse marks (how twigs are cut -- deer tear and leave a ragged edge; rabbit cut cleanly at 45 degrees), scat (size, content, and shape identify species and season), rubs (male deer rubbing velvet from antlers on small trees), scrapes (male deer pawing ground to leave scent), and feeding sign (seeds stripped from a cone, a partially-eaten mushroom). A comprehensive reading of an area uses all sign together.",
+      "nationAttribution": "Cree, Anishinaabe",
+      "culturalContext": "Cree and Anishinaabe tracking practice reads the landscape as a text: every disturbed leaf, bent grass stem, and tooth mark contributes to the story of what animals have been present and what they were doing. Building this 'landscape literacy' requires patient observation across many seasons.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 7,
+      "instruction": "Safety and ethics of tracking: tracking traditionally leads toward animals, not always to harvest. Tracking for observation is valuable and carries the same need for awareness as any time spent in animal habitat.",
+      "safetyNote": "Animal safety annotation: tracking can lead you near predator dens (bear, cougar, wolf) or into areas where animals are concentrated during vulnerable periods (calving, whelping). Always be aware of your surroundings. Make noise when moving through dense cover to avoid surprising bears. If you encounter a predator at close range: do not run (triggers chase response); face the animal, make yourself large, speak firmly, and back away slowly."
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}
