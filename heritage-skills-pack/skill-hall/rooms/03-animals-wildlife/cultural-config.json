@@ -1,0 +1,65 @@
+{
+  "roomId": "room-03-animals-wildlife",
+  "room": 3,
+  "culturalRules": [
+    {
+      "id": "ROOM03-CULT-001",
+      "domain": "animals-wildlife",
+      "tradition": "appalachian",
+      "concept": "animal husbandry and hunting tradition",
+      "level": 1,
+      "note": "Appalachian animal husbandry, beekeeping, and hunting are colonial settler heritage traditions. Historical context acknowledges Scots-Irish, English, and German immigrant practices adapted to Appalachian conditions. Hunting traditions in Appalachia often emphasize use of all parts and respect for the animal -- parallels with Indigenous perspectives exist but should not be conflated.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM03-CULT-002",
+      "domain": "animals-wildlife",
+      "tradition": "first-nations",
+      "concept": "trapping and snaring techniques",
+      "level": 1,
+      "nationAttribution": "Cree, Dene, Anishinaabe",
+      "note": "The technical aspects of wire snare construction, deadfall trap geometry, and trap set location selection are Level 1 publicly shared knowledge documented in trapping manuals and community-authorized educational materials. Attribution: Cree and Dene are the primary boreal forest trapping traditions; Anishinaabe traditions are also documented. Do not use generic 'First Nations trapping' -- specify nation.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM03-CULT-003",
+      "domain": "animals-wildlife",
+      "tradition": "first-nations",
+      "concept": "trapping protocols and relationship with animals",
+      "level": 2,
+      "nationAttribution": "Cree, Dene, Anishinaabe",
+      "note": "Many Cree, Dene, and Anishinaabe trapping traditions include specific protocols for approaching the trap line, giving thanks for animals harvested, and maintaining respectful relationship with the animal world. These dimensions are Level 2 (contextually shared) -- acknowledge they exist without prescribing specific protocols that belong to specific communities. A learner seeking to understand the spiritual and relational dimensions of trapping should consult community sources.",
+      "action": "acknowledge-level-2"
+    },
+    {
+      "id": "ROOM03-CULT-004",
+      "domain": "animals-wildlife",
+      "tradition": "first-nations",
+      "concept": "brain-tanning hide preparation technique",
+      "level": 1,
+      "nationAttribution": "Lakota, Crow, Cree, Dene (varies by specific technique)",
+      "note": "Brain-tanning is practiced across many First Nations. The technical process (scraping, braining, working soft, smoking) is Level 1 publicly shared knowledge. When describing specific technique variations, attribute to the nation whose technique is being described. 'Brain-tanning' as a generic technique category is appropriate; specific techniques should be attributed specifically.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM03-CULT-005",
+      "domain": "animals-wildlife",
+      "tradition": "inuit",
+      "concept": "seal hunting and caribou harvest ecological knowledge",
+      "level": 1,
+      "nationAttribution": "Inuit",
+      "note": "The ecological knowledge component of Inuit seal and caribou practices -- species identification, seasonal behavior, habitat use, sustainable harvest principles -- is Level 1 publicly shared knowledge consistent with Inuit Qaujimajatuqangit (IQ) educational materials. Specific hunt protocols that carry IQ spiritual or relational dimensions are Level 2. Attribution: Inuit.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM03-CULT-006",
+      "domain": "animals-wildlife",
+      "tradition": "inuit",
+      "concept": "IQ relational knowledge of animals",
+      "level": 2,
+      "nationAttribution": "Inuit",
+      "note": "Inuit Qaujimajatuqangit (IQ) encodes a relational understanding of the human-animal relationship: animals give themselves to hunters who approach with appropriate respect and preparation. This relational dimension of ecological knowledge is Level 2 (contextually shared) and should be acknowledged as present without attempting to define specific protocols, prayers, or ceremonies that belong to specific Inuit communities. Acknowledge that ecological knowledge and relational/spiritual knowledge are integrated in IQ, not separate.",
+      "action": "acknowledge-level-2"
+    }
+  ]
+}
