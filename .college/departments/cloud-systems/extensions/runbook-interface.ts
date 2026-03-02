@@ -8,7 +8,7 @@
  * @module departments/cloud-systems/extensions/runbook-interface
  */
 
-import type { OpenStackServiceName, VerificationMethod } from '../../../../src/types/openstack.js';
+import type { OpenStackServiceName, VerificationMethod } from '../../../../src/core/types/openstack.js';
 
 /** A simplified procedure step for educational try-sessions. */
 export interface TrySessionStep {

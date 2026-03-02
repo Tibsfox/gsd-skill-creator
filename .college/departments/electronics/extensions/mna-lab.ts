@@ -9,7 +9,7 @@
  * @module departments/electronics/extensions/mna-lab
  */
 
-import type { MNASolution } from '../../../../src/electronics-pack/simulator/mna-engine.js';
+import type { MNASolution } from '../../../../src/packs/electronics-pack/simulator/mna-engine.js';
 
 /** Configuration for a guided MNA lab session. */
 export interface MnaLabConfig {
