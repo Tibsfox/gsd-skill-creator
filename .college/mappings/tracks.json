@@ -1,0 +1,56 @@
+{
+  "name": "Default Educational Tracks",
+  "description": "Recommended learning sequences through the college subject pool",
+  "tracks": [
+    {
+      "id": "stem-foundation",
+      "name": "STEM Foundation",
+      "description": "A ground-up path through core STEM disciplines, starting with math and building toward applied sciences",
+      "subjects": ["math", "physics", "chemistry", "coding", "statistics", "engineering"],
+      "prerequisites": {
+        "physics": ["math"],
+        "chemistry": ["math"],
+        "statistics": ["math"],
+        "engineering": ["physics", "math"],
+        "coding": []
+      }
+    },
+    {
+      "id": "digital-literacy-path",
+      "name": "Digital Literacy Path",
+      "description": "From digital basics to data science and cloud systems",
+      "subjects": ["digital-literacy", "coding", "statistics", "data-science", "cloud-systems", "electronics"],
+      "prerequisites": {
+        "coding": ["digital-literacy"],
+        "statistics": ["digital-literacy"],
+        "data-science": ["coding", "statistics"],
+        "cloud-systems": ["coding"],
+        "electronics": []
+      }
+    },
+    {
+      "id": "humanities-breadth",
+      "name": "Humanities Breadth",
+      "description": "Reading, writing, communication, history, and philosophy for well-rounded human inquiry",
+      "subjects": ["reading", "writing", "communication", "history", "philosophy", "languages"],
+      "prerequisites": {
+        "writing": ["reading"],
+        "communication": ["writing"],
+        "philosophy": ["reading"],
+        "history": [],
+        "languages": ["reading"]
+      }
+    },
+    {
+      "id": "wellness-practitioner",
+      "name": "Wellness Practitioner",
+      "description": "Mind, body, and nutrition sciences for holistic health understanding",
+      "subjects": ["mind-body", "physical-education", "nutrition", "psychology", "science"],
+      "prerequisites": {
+        "nutrition": ["science"],
+        "physical-education": ["mind-body"],
+        "psychology": ["science"]
+      }
+    }
+  ]
+}
