@@ -1,0 +1,55 @@
+{
+  "roomId": "room-02-fiber-textile",
+  "room": 2,
+  "culturalRules": [
+    {
+      "id": "ROOM02-CULT-001",
+      "domain": "fiber-textile",
+      "tradition": "appalachian",
+      "concept": "spinning, weaving, quilting, natural dyeing",
+      "level": 1,
+      "note": "Appalachian fiber traditions are colonial settler heritage (Scots-Irish, English, German). This is Level 1 publicly shared knowledge. Quilting bee traditions document important Appalachian community mutual aid practices.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM02-CULT-002",
+      "domain": "fiber-textile",
+      "tradition": "first-nations",
+      "concept": "quillwork technique",
+      "level": 1,
+      "nationAttribution": "Anishinaabe, Mi'kmaq, Haudenosaunee",
+      "note": "The technical aspects of quillwork (sourcing porcupine quills, softening, flattening, dyeing, and attaching to a base material) are Level 1 publicly shared knowledge, documented in museum collections and community-authorized educational materials. General technique is appropriate for educational content with proper nation attribution. Do not use generic 'First Nations quillwork' -- specify Anishinaabe, Mi'kmaq, or Haudenosaunee tradition being described.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM02-CULT-003",
+      "domain": "fiber-textile",
+      "tradition": "first-nations",
+      "concept": "quillwork design patterns and symbolism",
+      "level": 2,
+      "nationAttribution": "Anishinaabe, Mi'kmaq, Haudenosaunee",
+      "note": "Specific quillwork design patterns (geometric arrangements, color combinations, motifs used in ceremonial or regalia contexts) may carry nation-specific cultural meanings at Level 2 (contextually shared). Educational content should note that design patterns have cultural dimensions beyond aesthetic technique and should not reproduce specific ceremonial designs without community context. A learner interested in the cultural meaning of specific patterns should consult community sources and cultural educators from the relevant nation.",
+      "action": "acknowledge-level-2"
+    },
+    {
+      "id": "ROOM02-CULT-004",
+      "domain": "fiber-textile",
+      "tradition": "first-nations",
+      "concept": "birchbark biting technique",
+      "level": 1,
+      "nationAttribution": "Anishinaabe, Cree, Innu",
+      "note": "Birchbark biting (the practice of folding thin birchbark and biting through the layers to create symmetrical designs) is Level 1 publicly shared knowledge documented in museum collections. It is an extraordinary skill requiring geometric visualization and fine motor control developed over years of practice. Nation attribution: Anishinaabe, Cree, and Innu are the primary traditions documented in ethnographic literature.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM02-CULT-005",
+      "domain": "fiber-textile",
+      "tradition": "inuit",
+      "concept": "sinew sewing and caribou hide construction",
+      "level": 1,
+      "nationAttribution": "Inuit",
+      "note": "Sinew thread preparation and caribou hide sewing are Level 1 publicly shared Inuit knowledge, documented in museum collections and Inuit Tapiriit Kanatami educational materials. The amauti (women's parka with baby pouch) construction is educational content appropriate at Level 1. Waterproof seam techniques for watercraft applications (qajaq) are cross-referenced to Room 14. Attribution: Inuit.",
+      "action": "include"
+    }
+  ]
+}

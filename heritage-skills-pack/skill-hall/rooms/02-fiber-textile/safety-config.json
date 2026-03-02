@@ -1,0 +1,32 @@
+{
+  "roomId": "room-02-fiber-textile",
+  "room": 2,
+  "isCritical": false,
+  "primarySafetyDomains": ["tool"],
+  "criticalRules": [],
+  "gateRules": [],
+  "annotateRules": [
+    {
+      "id": "ROOM02-ANN-001",
+      "description": "Needle, awl, and sharp implement safety",
+      "trigger": "sewing needle, awl, quillwork needle, sinew threading",
+      "action": "ANNOTATE -- needles and awls are sharp pointed tools; keep a secure grip on the workpiece; never leave needles unsecured (use a pincushion or needle minder); in traditional quillwork, the awl punctures the base material (leather, bark) -- keep the supporting hand clear of the awl's path"
+    },
+    {
+      "id": "ROOM02-ANN-002",
+      "description": "Spinning equipment safety (spindle, wheel moving parts)",
+      "trigger": "drop spindle, spinning wheel, quill winding",
+      "action": "ANNOTATE -- spinning wheel moving parts (drive wheel, spindle, bobbin) can catch loose clothing or long hair; tie back long hair before operating a wheel; drop spindles have a weighted whorl that can strike fingers if the spindle drops unexpectedly -- grip the shaft, not the whorl, when catching a dropped spindle"
+    },
+    {
+      "id": "ROOM02-ANN-003",
+      "description": "Natural dye plant toxicity",
+      "trigger": "natural dyeing, plant-based dye, pokeberry, black walnut, plant processing",
+      "action": "ANNOTATE -- some Appalachian dye plants are toxic: pokeberry (Phytolacca americana) causes gastrointestinal illness if ingested and skin irritation from repeated contact; black walnut hulls cause skin staining and can cause allergic reactions; always wear gloves when handling raw dye plants; do not use dye pots for food preparation"
+    }
+  ],
+  "safetyNotes": {
+    "needleSafety": "In textile traditions across all three cultures, sharp tools (needles, awls, bodkins) are always the first safety consideration. The rule is universal: know where the point is going before each stroke, and keep the non-tool hand clear of the point's path.",
+    "dyePlantSafety": "Natural dye plants have varying toxicity profiles. Research specific plant safety before working with unfamiliar dye plants. Pokeberry is the highest-risk common Appalachian dye plant -- handle with gloves and never ingest any part of the plant."
+  }
+}
