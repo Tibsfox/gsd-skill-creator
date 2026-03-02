@@ -1,0 +1,92 @@
+[
+  {
+    "heritageConceptId": "room-02-porcupine-quillwork",
+    "sumoTerm": "Fabric",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass PorcupineQuillwork Fabric)",
+    "naturalLanguage": "Porcupine quillwork produces a fabric-like decorative surface: quills arranged in patterns across a base material (leather, bark, or woven substrate) create a textured, structured surface with visual pattern akin to woven textiles.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-02-porcupine-quillwork",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass PorcupineQuillworkTechnique HeritageSkill)",
+    "naturalLanguage": "Porcupine quillwork is a heritage skill of the Anishinaabe, Mi'kmaq, and Haudenosaunee peoples, encoding knowledge of quill sourcing and preparation, natural dyeing, flattening technique, and pattern application developed over generations.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-02-hand-spinning",
+    "sumoTerm": "Manufacturing",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass WoolHandSpinning Manufacturing)",
+    "naturalLanguage": "Hand-spinning wool on a great wheel or walking wheel is a manufacturing process that transforms raw fiber (cleaned, carded wool roving) into yarn by applying twist while drawing out the fiber.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-02-hand-spinning",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass AppalachianHandSpinning HeritageSkill)",
+    "naturalLanguage": "Hand-spinning in the Appalachian tradition is a heritage skill encoding knowledge of fiber preparation, wheel mechanics, and drafting technique transmitted through the Scots-Irish and German settler community.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-02-traditional-weaving",
+    "sumoTerm": "Fabric",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalWeaving Fabric)",
+    "naturalLanguage": "Traditional weaving (floor loom, inkle loom, or finger weaving) produces fabric: a structured material created by interlacing perpendicular warp and weft threads or, in finger weaving, by braiding warp threads.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-02-sinew-preparation",
+    "sumoTerm": "MaterialCulture",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass InuitSinewPreparation MaterialCulture)",
+    "naturalLanguage": "Preparing caribou back sinew for sewing thread is Inuit material culture: splitting the sinew fibers to appropriate thickness, managing moisture to maintain working pliability, and threading the sinew through bone or metal needles.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-02-sinew-sewing",
+    "sumoTerm": "Sewing",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass InuitSinewSewing Sewing)",
+    "naturalLanguage": "Inuit sinew sewing is a form of sewing: joining pieces of hide or other material using a needle and thread (sinew) in a structured stitch pattern. The choice of stitch determines whether the seam is waterproof or merely durable.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-02-birchbark-biting",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass BirchbarkBiting HeritageSkill)",
+    "naturalLanguage": "Birchbark biting is an Anishinaabe, Cree, and Innu heritage skill: folding thin pieces of bark and pressing precise bite marks through multiple layers to create symmetrical geometric designs when unfolded. The skill requires exceptional geometric visualization and fine motor control.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-02-finger-weaving",
+    "sumoTerm": "Weaving",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass MetisFingerWeaving Weaving)",
+    "naturalLanguage": "Cree and Metis finger weaving is a form of weaving accomplished without a loom: the weaver manipulates warp threads between the fingers, creating braided structures such as the assumption sash (L'Assumption sash) by hand.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-02-natural-dyeing",
+    "sumoTerm": "TraditionalProcess",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass AppalachianNaturalDyeing TraditionalProcess)",
+    "naturalLanguage": "Appalachian natural dyeing is a traditional process: using plant-derived dye substances (black walnut hulls, goldenrod, madder, indigo) to color wool, cotton, or flax fibers through mordanting and dyebath processes transmitted through the regional settler community.",
+    "ontologicalBridge": null
+  }
+]

@@ -1,0 +1,81 @@
+{
+  "id": "room-03-animals-wildlife",
+  "room": 3,
+  "domain": "animals-wildlife",
+  "title": "Animals & Wildlife",
+  "traditions": ["appalachian", "first-nations", "inuit"],
+  "sumoClasses": ["Animal", "Hunting", "DomesticAnimal", "HeritageSkill", "BiologicalProcess"],
+  "sumoFile": ["Merge.kif", "heritage-domain-ontology.kif"],
+  "description": "Room 03 covers three distinct traditions of human relationships with animals — from Appalachian homestead husbandry to First Nations boreal trapping and Inuit marine ecology — each representing deep knowledge of specific ecosystems and sustainable harvest.\n\nAppalachian animal husbandry and hunting: The Appalachian small farm was built around animals. Cattle, hogs, chickens, and goats provided food, fiber, and labor. Beekeeping was a fixture of the Appalachian homestead: before the Langstroth movable-frame hive (1850s), Appalachian beekeepers used hand-hewn log gums (sections of hollow black gum or tulip poplar tree, preferred by bees for their smooth interiors) and woven straw skeps. Traditional swarm-catching, honey extraction from cut comb, and beeswax uses (candles, leather waterproofing, thread waxing, canning seals) formed an integrated seasonal practice. Appalachian hunting traditions — white-tailed deer, wild turkey, squirrel, rabbit — emphasized use of all parts of the harvested animal and game meat preservation through smoking, salting, and rendering. Hunting, trapping, and animal reading were practical skills and cultural identity.\n\nFirst Nations trapping, tracking, and brain-tanning: Cree and Dene trapping traditions represent sophisticated ecological knowledge of the boreal forest. Wire snare placement requires reading animal trails, beaver runs, rabbit habitat edges, and predator corridors. Traditional deadfall traps require knowledge of trigger geometry and animal behavioral patterns. Trap line management is a seasonal practice requiring understanding of sustainable harvest: taking enough without depleting. Many Cree, Dene, and Anishinaabe trapping traditions include specific protocols for approaching the trap line and giving thanks for animals harvested — these relational dimensions carry Level 2 cultural depth and should be acknowledged without prescribing specific community protocols. Tracking (reading animal sign: tracks, scat, browse marks, rubs, and feeding sign) is a cross-tradition skill shared by Appalachian woodcraft, and Cree, Dene, and Anishinaabe traditions, each developing deep frameworks for interpreting the same physical evidence. Brain-tanning is practiced across many First Nations: Lakota, Crow, Cree, Dene, and many others developed this technique using the animal's brain matter (containing lecithin) to tan its hide into soft, supple leather through scraping, braining, working while drying, and smoking. The complete technique is Level 1 publicly shared knowledge; specific ceremonial or protocol dimensions of hide preparation in some nations are Level 2.\n\nInuit marine mammals and caribou: Inuit seal hunting knowledge encodes detailed understanding of ringed seal (natsiq) and bearded seal (ugruk) ecology — sea ice conditions, breathing hole patterns, lead hunting, and sustainable harvest. Caribou harvest knowledge includes seasonal migration routes, herd ecology, and the full use of caribou body parts for food, clothing, tools, and shelter. Marine mammal ecology — beluga (qilalugaq), narwhal (qilalugaq tugaalik), and walrus (aiviq) — encodes behavioral knowledge, seasonal distribution, and the role of each species in Inuit food systems. Inuit Qaujimajatuqangit (IQ) integrates ecological and relational knowledge: animals are not merely biological entities but participants in a reciprocal relationship with hunters who approach with appropriate respect and preparation. This relational dimension is Level 2 (contextually shared) and is acknowledged in this room without prescribing specific IQ protocols that belong to specific Inuit communities.",
+  "safetyDomains": ["animal", "tool", "food"],
+  "trySessions": [
+    "animals-03-beekeeping-beginner",
+    "animals-03-tracking-beginner",
+    "animals-03-hide-scraping-beginner"
+  ],
+  "modules": [
+    {
+      "id": "animals-03-appalachian-husbandry",
+      "title": "Appalachian Animal Husbandry and Hunting Tradition",
+      "tradition": "appalachian",
+      "description": "Appalachian small-farm animal husbandry: cattle (beef and dairy), hogs (seasonal slaughter, smoking, and rendering), chickens and turkeys (eggs, meat, feathers), and goats (milk, meat, brush clearing). Seasonal rhythms of the farm animal: hog-killing time in late fall (cold weather required for safe meat handling), spring calving, summer pasture management, fall fattening. Hunting as integral to Appalachian food culture: white-tailed deer, wild turkey, squirrel, rabbit — use of all parts, game meat preservation through smoking, salting, and drying. Attribution: Scots-Irish, English, and German settler traditions adapted to Appalachian conditions over several generations.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["DomesticAnimal", "HeritageSkill", "Hunting"]
+    },
+    {
+      "id": "animals-03-appalachian-beekeeping",
+      "title": "Appalachian Beekeeping: Log Gums, Swarms, and Honey",
+      "tradition": "appalachian",
+      "description": "Traditional Appalachian beekeeping from log gum to Langstroth hive. Log gums (hollow sections of black gum or tulip poplar tree) were the primary hive form before the movable-frame hive. Swarm-catching as a practiced skill: understanding swarm biology, collecting swarms safely, and re-hiving. Honey extraction from cut comb (traditional) and uncapped frames (Langstroth). Colony structure (queen, workers, drones) and seasonal management (spring expansion, summer production, fall preparation, winter cluster). Beeswax uses on the Appalachian homestead: candle making, leather and wood waterproofing, thread waxing, canning seals. The Appalachian practice of 'telling the bees' (informing the colony of family events) documented in Foxfire sources.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["DomesticAnimal", "HeritageSkill", "BiologicalProcess"]
+    },
+    {
+      "id": "animals-03-fn-trapping-snaring",
+      "title": "Cree and Dene Trapping and Snaring",
+      "tradition": "first-nations",
+      "description": "Boreal forest trapping traditions of Cree and Dene peoples: wire snare construction and placement, deadfall trap geometry and trigger mechanics, trap line reading and set location selection based on animal travel corridors and habitat edges. Sustainable harvest principles — taking appropriate numbers without depleting populations. Many Cree, Dene, and Anishinaabe trapping traditions include specific protocols for approaching the trap line and giving thanks for harvested animals; these carry Level 2 cultural dimensions and are acknowledged here without prescribing specific community protocols. Learners seeking to understand the spiritual and relational dimensions of trapping should consult Cree and Dene community sources. Nation attribution: Cree, Dene (primary boreal forest trapping traditions); Anishinaabe also documented.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["Hunting", "HeritageSkill", "Artifact"]
+    },
+    {
+      "id": "animals-03-fn-tracking",
+      "title": "Animal Tracking: Reading Sign Across Traditions",
+      "tradition": "cross-tradition",
+      "description": "Track identification and animal sign reading across Appalachian woodcraft and Cree, Dene, and Anishinaabe tracking traditions. Track anatomy (print shape, stride length, straddle, trail pattern), common species identification (white-tailed deer, beaver, rabbit, squirrel, wolf, bear, turkey), gait reading (walk, trot, bound, gallop), and reading sign beyond tracks (browse marks, scat, rubs, scrapes, feeding sign). Tracking is a cross-tradition skill: Appalachian and First Nations trackers read the same physical evidence through different interpretive frameworks. Cree and Anishinaabe tracking understands reading tracks as a form of conversation with the animal world; Appalachian woodcraft frames tracking as ecological literacy. Nation attribution: Cree, Dene, Anishinaabe (First Nations tracking traditions).",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["BiologicalProcess", "HeritageSkill"]
+    },
+    {
+      "id": "animals-03-fn-brain-tanning",
+      "title": "Brain-Tanning Hide Preparation",
+      "tradition": "first-nations",
+      "description": "Brain-tanning is a traditional hide-working technique practiced across many First Nations: the hide is scraped (fleshing to remove membrane; graining to remove epidermis and hair), treated with a brain solution (brain matter contains lecithin which lubricates collagen fibers), worked extensively while drying to prevent stiffening, and finally smoked to set the tan and add moisture resistance. The complete technical process is Level 1 publicly shared knowledge. When describing specific technique variations, attribute to the nation whose technique is being described: Lakota brain-tanning, Crow brain-tanning, Cree brain-tanning, and Dene brain-tanning each have documented regional characteristics. Specific ceremonial or protocol dimensions of hide preparation observed by some nations are Level 2. Nation attribution: Lakota, Crow, Cree, Dene (varies by specific technique described).",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "Manufacturing"]
+    },
+    {
+      "id": "animals-03-inuit-seal-caribou",
+      "title": "Inuit Seal Hunting and Caribou Harvest",
+      "tradition": "inuit",
+      "description": "Inuit ecological knowledge of ringed seal (natsiq) and bearded seal (ugruk): sea ice conditions and safety, breathing hole hunting technique, lead hunting, sustainable harvest principles. Caribou harvest knowledge: seasonal migration routes, herd ecology, pre-harvest and post-harvest handling of caribou body parts for food, clothing, tools, and shelter. Inuit Qaujimajatuqangit (IQ) integrates ecological and relational knowledge — animals are participants in a reciprocal relationship with hunters who approach with appropriate respect and preparation. This relational dimension is Level 2 (contextually shared): acknowledge that IQ ecological knowledge and relational-spiritual knowledge are integrated, not separate, without prescribing specific IQ protocols that belong to specific communities. Nation attribution: Inuit.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["Hunting", "HeritageSkill", "BiologicalProcess"]
+    },
+    {
+      "id": "animals-03-inuit-marine-ecology",
+      "title": "Inuit Marine Mammal Ecology",
+      "tradition": "inuit",
+      "description": "Inuit knowledge of marine mammal ecology: beluga (qilalugaq) — seasonal migration routes, feeding ecology, and behavior in coastal leads; narwhal (qilalugaq tugaalik) — tusk function, pod behavior, and ice habitat; walrus (aiviq) — haulout behavior, feeding, and role in coastal Inuit food systems. Species identification by sound, surfacing pattern, and behavior. Role of each species in traditional Inuit food, clothing, and tool systems. Ecological relationships between marine mammals and sea ice — and how changing ice conditions affect traditional harvest. Nation attribution: Inuit.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["BiologicalProcess", "HeritageSkill"]
+    }
+  ]
+}
