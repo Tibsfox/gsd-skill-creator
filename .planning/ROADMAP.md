@@ -51,7 +51,7 @@ Full details: `.planning/milestones/v1.49.9-ROADMAP.md`
 **Milestone Goal:** Integrate all previous education packs into the .college framework as flat, independently-discoverable subjects with dynamic virtual department composition. 41 subjects total (35 foundational + 3 specialized + 3 existing).
 
 - [x] **Phase 22: Foundational Subject Migration** — Convert all 35 foundational packs to college department format in three tier batches (completed 2026-03-02)
-- [ ] **Phase 23: Specialized Pack Integration** — Integrate electronics, spatial-computing, and cloud-systems with domain-specific features preserved
+- [x] **Phase 23: Specialized Pack Integration** — Integrate electronics, spatial-computing, and cloud-systems with domain-specific features preserved (completed 2026-03-02)
 - [ ] **Phase 24: Dynamic Mapping Layer** — JSON schema, default groupings, educational tracks, user custom views, hot-reload
 - [ ] **Phase 25: Cross-Reference Network** — Import 48 dependency-graph edges, cross-department links, Complex Plane positioning
 - [ ] **Phase 26: Safety Extensions** — SafetyBoundary definitions for chemistry, electronics, physical-education, nutrition
@@ -89,7 +89,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 23-01: Electronics, spatial-computing, and cloud-systems department integration with domain-specific extensions
+- [x] 23-01: Electronics, spatial-computing, and cloud-systems department integration with domain-specific extensions (completed 2026-03-02 — 87 files, 45 typed RosettaConcept files, 3 chipset configs, 21 passing tests)
 
 ### Phase 24: Dynamic Mapping Layer
 **Goal**: Users can compose virtual departments from the flat 41-subject pool, create educational tracks, build custom views, and see mapping changes take effect without restart
@@ -160,7 +160,7 @@ Plans:
 | 0.5 Foundations Docs | v1.49.8 | 1/1 | Complete | 2026-03-01 |
 | 1-10 | v1.49.8 | 45/45 | Complete | 2026-03-01 |
 | 11-21 | v1.49.9 | 11/11 | Complete | 2026-03-01 |
-| 22. Foundational Subject Migration | 4/4 | Complete   | 2026-03-02 | 2026-03-02 |
+| 22. Foundational Subject Migration | 4/4 | Complete    | 2026-03-02 | 2026-03-02 |
 | 23. Specialized Pack Integration | v1.49.10 | 0/1 | Not started | - |
 | 24. Dynamic Mapping Layer | v1.49.10 | 0/1 | Not started | - |
 | 25. Cross-Reference Network | v1.49.10 | 0/1 | Not started | - |
