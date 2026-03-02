@@ -1,0 +1,44 @@
+{
+  "roomId": "room-13-northern-watercraft",
+  "room": 13,
+  "culturalRules": [
+    {
+      "id": "ROOM13-CULT-001",
+      "domain": "northern-watercraft",
+      "tradition": "first-nations",
+      "concept": "birchbark canoe construction",
+      "level": 1,
+      "nationAttribution": "Anishinaabe, Algonquin, Abenaki, Cree, Mi'kmaq, Innu, Attikamek",
+      "note": "Birchbark canoe construction techniques are Level 1 publicly shared knowledge across multiple nations. Each nation has regional variations that must be attributed specifically — do not use generic 'First Nations canoe' without specifying which nation's tradition is being described.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM13-CULT-002",
+      "domain": "northern-watercraft",
+      "tradition": "first-nations",
+      "concept": "tobacco offering (spiritual dimension)",
+      "level": 1,
+      "ceremonialLevel": 4,
+      "note": "The practice of offering tobacco before taking birchbark from a tree is Level 1 publicly acknowledged knowledge — widely documented and shared by communities for educational purposes. The acknowledgment that this practice exists is appropriate in educational content. Specific ceremony details, songs, protocols, and sacred teachings are Level 3-4 (community restricted to sacred-ceremonial) and must not be reproduced. Always distinguish between acknowledging a practice exists (Level 1) and reproducing the ceremony itself (Level 4 block).",
+      "action": "include"
+    },
+    {
+      "id": "ROOM13-CULT-003",
+      "domain": "northern-watercraft",
+      "tradition": "inuit",
+      "concept": "qajaq (kayak) construction and fitting",
+      "level": 1,
+      "note": "Qajaq construction is Level 1 publicly shared knowledge, well-documented in published sources including museum records and community-authorized educational materials. The individualized fitting process (building to the paddler's body measurements) is a core educational concept appropriate for Level 1 content. Attribution: Inuit (specific regional attribution varies — Greenlandic Inuit, Yup'ik, Inupiat, Nunavik Inuit, etc. when regional variation is the focus).",
+      "action": "include"
+    },
+    {
+      "id": "ROOM13-CULT-004",
+      "domain": "northern-watercraft",
+      "tradition": "inuit",
+      "concept": "umiak community boat",
+      "level": 1,
+      "note": "Umiak construction and use is Level 1 publicly shared knowledge. Community travel traditions and construction practices are educational content appropriate for this room. Attribution: Inuit (umiak use spans Inuit communities from Alaska to Greenland).",
+      "action": "include"
+    }
+  ]
+}
