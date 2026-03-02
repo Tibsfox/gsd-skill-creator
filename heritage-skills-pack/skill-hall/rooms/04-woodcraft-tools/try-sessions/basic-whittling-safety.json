@@ -1,0 +1,55 @@
+{
+  "id": "woodcraft-04-whittling-beginner",
+  "title": "Basic Whittling: Safety, Cuts, and Wood Selection",
+  "tradition": "appalachian",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Learn the foundational safety rules and four basic cuts of Appalachian whittling. Understand how to select the right wood for a beginner, how to hold both knife and workpiece safely, and how these simple cuts combine to shape any form.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "The Appalachian whittling tradition: context and heritage. Whittling in the Appalachian tradition draws on Scots-Irish, English, and German immigrant woodworking culture brought to the central and southern Appalachians from the 1700s onward. Green wood (freshly cut, still containing moisture) is easier to carve than dry wood -- this is why whittlers traditionally worked wood 'in the green'.",
+      "culturalContext": "Whittling is the simplest form of woodworking -- it requires only a sharp knife and a piece of wood. Appalachian whittlers produced everything from butter spreaders and spoons to chair rungs and tool handles using this technique. The Foxfire volumes document numerous Appalachian craftspeople who could carve complex forms with just a single pocket knife.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Wood selection for beginners: start with basswood (soft, even grain, no figure), white pine (widely available, soft), or butternut (soft hardwood, pleasant smell). Avoid hardwoods (oak, maple, hickory) for beginning practice -- they work against the beginner's tendency to use too much force. The grain should run roughly parallel to the piece's long axis.",
+      "culturalContext": "Appalachian whittlers prized different woods for different applications: butternut and walnut for decoration (beautiful grain), tulip poplar for utilitarian pieces (straight, even, easy), locust for outdoor use (extremely rot-resistant), and sourwood for tool handles (hard, flexible, holds detail).",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 3,
+      "instruction": "The push cut (chest lever): hold the workpiece in the non-dominant hand, knife in dominant hand, blade pointing away. Brace the thumb of the knife hand against the workpiece. Push the blade forward and outward while the thumb acts as a pivot. This is the most controlled basic cut.",
+      "safetyNote": "Tool safety annotation: the push cut requires the thumb to brace against the workpiece. The blade pushes away from the bracing thumb. If the thumb is placed too close to the cutting line or the blade slips, the thumb is in the cut path. Keep the bracing thumb behind the cut line, not alongside it.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 4,
+      "instruction": "The pull cut (draw cut): hold the workpiece in the non-dominant hand, knife in dominant hand. Draw the blade toward the body in a controlled slicing motion. The non-dominant thumb (holding the workpiece) must be completely clear of the cutting line. This cut produces a very controlled slice when done slowly.",
+      "safetyNote": "Tool safety annotation: the pull cut draws the blade toward the body. NEVER place any part of the non-dominant hand between the blade and the body. The workpiece hand must be fully wrapped around the far end of the workpiece, with the thumb pointing away from the blade's direction of travel.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 5,
+      "instruction": "The stop cut: make a perpendicular cut into the wood (cutting across the grain) to define a line that a second cut will meet. The second cut removes a chip by meeting the stop cut from the side. This is how detail and crisp transitions are created.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 6,
+      "instruction": "The pare cut (paring): hold the workpiece against a solid surface or the leg, braced with the non-dominant hand or thumb. Push the blade in short, controlled scooping strokes to remove small amounts from a surface. Used for finishing and detail work.",
+      "safetyNote": "Tool safety annotation: during pare cuts, the non-dominant hand that braces the workpiece is often close to the blade. Keep fingers on the far side of the workpiece from the blade. If the blade can reach your fingers in the direction of the cut, reposition.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 7,
+      "instruction": "First project: a simple butter spreader. Select a piece of basswood roughly 1 inch wide, 3/4 inch thick, and 6 inches long. Use push cuts to taper both sides of the blade area, stop cuts to define the shoulders where the blade meets the handle, and pare cuts to smooth the blade surface.",
+      "culturalContext": "The butter spreader is the traditional first whittling project in Appalachian tradition -- it requires only the four basic cuts, the wood is forgiving, and the finished piece is immediately useful. Many Appalachian carvers still teach this project as the gateway to more complex work.",
+      "sumoMapping": "Manufacturing"
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}
