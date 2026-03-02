@@ -927,3 +927,136 @@ describe('SafetyWarden', () => {
     });
   });
 });
+
+// ─── Marine Safety Domain ─────────────────────────────────────────────────────
+
+describe('Marine Safety Domain', () => {
+  describe('cold water rules — GATE', () => {
+    it('cold water + canoe triggers GATE with canProceed=false', () => {
+      const result = warden.evaluate('cold water safety when paddling a canoe', SafetyDomain.MARINE);
+      expect(result.canProceed).toBe(false);
+      expect(result.level).toBe(SafetyLevel.GATED);
+    });
+
+    it('capsize scenario triggers GATE', () => {
+      const result = warden.evaluate('what to do if my canoe capsizes in cold water', SafetyDomain.MARINE);
+      expect(result.canProceed).toBe(false);
+      expect(result.level).toBe(SafetyLevel.GATED);
+    });
+
+    it('solo paddle triggers GATE (buddy system requirement)', () => {
+      const result = warden.evaluate('I want to solo paddle across the strait', SafetyDomain.MARINE);
+      expect(result.canProceed).toBe(false);
+      expect(result.level).toBe(SafetyLevel.GATED);
+    });
+
+    it('1-10-1 rule content triggers GATE', () => {
+      const result = warden.evaluate('explaining cold shock and the 1-10-1 rule for cold water immersion', SafetyDomain.MARINE);
+      expect(result.canProceed).toBe(false);
+      expect(result.level).toBe(SafetyLevel.GATED);
+    });
+
+    it('cold water GATE annotation references life jacket or float plan', () => {
+      const result = warden.evaluate('cold water canoe paddling safety', SafetyDomain.MARINE);
+      const hasLifejacket = result.annotations.some(a => /life.?jacket|float.?plan|PNW/i.test(a.message));
+      expect(hasLifejacket).toBe(true);
+    });
+  });
+
+  describe('vessel loading rules — GATE', () => {
+    it('canoe loading triggers GATE', () => {
+      const result = warden.evaluate('how to load a canoe for a camping trip', SafetyDomain.MARINE);
+      expect(result.canProceed).toBe(false);
+      expect(result.level).toBe(SafetyLevel.GATED);
+    });
+
+    it('center of gravity question triggers GATE', () => {
+      const result = warden.evaluate('understanding center of gravity in canoe stability', SafetyDomain.MARINE);
+      expect(result.canProceed).toBe(false);
+      expect(result.level).toBe(SafetyLevel.GATED);
+    });
+
+    it('weather assessment triggers GATE', () => {
+      const result = warden.evaluate('checking weather window before paddling on the water', SafetyDomain.MARINE);
+      expect(result.canProceed).toBe(false);
+      expect(result.level).toBe(SafetyLevel.GATED);
+    });
+  });
+
+  describe('tidal rules — ANNOTATE', () => {
+    it('Deception Pass triggers ANNOTATE', () => {
+      const result = warden.evaluate('paddling through Deception Pass', SafetyDomain.MARINE);
+      expect(result.level).toBe(SafetyLevel.ANNOTATED);
+      expect(result.canProceed).toBe(true);
+    });
+
+    it('tidal rip triggers ANNOTATE', () => {
+      const result = warden.evaluate('understanding tidal rip currents in the San Juan Islands', SafetyDomain.MARINE);
+      expect(result.level).toBe(SafetyLevel.ANNOTATED);
+      expect(result.canProceed).toBe(true);
+    });
+
+    it('tide tables triggers ANNOTATE', () => {
+      const result = warden.evaluate('how to read tide tables and plan around slack water', SafetyDomain.MARINE);
+      expect(result.level).toBe(SafetyLevel.ANNOTATED);
+      expect(result.canProceed).toBe(true);
+    });
+
+    it('open water crossing triggers ANNOTATE', () => {
+      const result = warden.evaluate('planning an open water crossing of the passage', SafetyDomain.MARINE);
+      expect(result.level).toBe(SafetyLevel.ANNOTATED);
+      expect(result.canProceed).toBe(true);
+    });
+  });
+
+  describe('navigation rules — ANNOTATE', () => {
+    it('channel markers triggers ANNOTATE', () => {
+      const result = warden.evaluate('reading channel markers and buoys in a waterway', SafetyDomain.MARINE);
+      expect(result.level).toBe(SafetyLevel.ANNOTATED);
+      expect(result.canProceed).toBe(true);
+    });
+
+    it('fog navigation triggers ANNOTATE', () => {
+      const result = warden.evaluate('paddling in dense fog and limited visibility on the water', SafetyDomain.MARINE);
+      expect(result.level).toBe(SafetyLevel.ANNOTATED);
+      expect(result.canProceed).toBe(true);
+    });
+  });
+
+  describe('marine domain isolation — no cross-domain leakage', () => {
+    it('marine content does not trigger food domain rules', () => {
+      const result = warden.evaluate('cold water canoe capsizing', SafetyDomain.FOOD);
+      expect(result.level).toBe(SafetyLevel.STANDARD);
+    });
+
+    it('food content does not trigger marine domain rules', () => {
+      const result = warden.evaluate('canning green beans at home', SafetyDomain.MARINE);
+      expect(result.level).toBe(SafetyLevel.STANDARD);
+    });
+
+    it('non-marine content returns STANDARD from marine domain', () => {
+      const result = warden.evaluate('building a log cabin dovetail notch', SafetyDomain.MARINE);
+      expect(result.level).toBe(SafetyLevel.STANDARD);
+    });
+  });
+
+  describe('getCriticalRules for marine domain', () => {
+    it('marine domain has critical rules', () => {
+      const critical = warden.getCriticalRules(SafetyDomain.MARINE);
+      expect(critical.length).toBeGreaterThan(0);
+    });
+
+    it('cold water rule is critical', () => {
+      const critical = warden.getCriticalRules(SafetyDomain.MARINE);
+      const coldWater = critical.find(r => r.id === 'MARINE-001');
+      expect(coldWater).toBeDefined();
+      expect(coldWater?.annotation.isCritical).toBe(true);
+    });
+
+    it('solo travel rule is critical', () => {
+      const critical = warden.getCriticalRules(SafetyDomain.MARINE);
+      const soloTravel = critical.find(r => r.id === 'MARINE-003');
+      expect(soloTravel).toBeDefined();
+    });
+  });
+});
