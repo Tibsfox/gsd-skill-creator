@@ -6,7 +6,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 
 - **Languages:** TypeScript (src/), Rust (src-tauri/), GLSL (shaders)
 - **Build:** `npm run build` or `make build`
-- **Test:** `npm test` or `make test` (Vitest, 19185+ tests)
+- **Test:** `npm test` or `make test` (Vitest, 23,234+ tests)
 - **Lint:** `npm run lint` or `make lint`
 - **Key deps:** Tauri v2, xterm.js, Vite v6, Vitest
 - **Desktop frontend:** `desktop/` (Vite webview)
