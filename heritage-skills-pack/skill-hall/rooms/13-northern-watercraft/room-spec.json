@@ -1,0 +1,90 @@
+{
+  "id": "room-13-northern-watercraft",
+  "room": 13,
+  "domain": "northern-watercraft",
+  "title": "Northern Watercraft",
+  "traditions": ["first-nations", "inuit"],
+  "sumoClasses": ["WaterVehicle", "Canoe", "Kayak", "HeritageSkill", "MaterialCulture"],
+  "sumoFile": ["MILO", "heritage-domain-ontology.kif"],
+  "description": "Room 13 is the primary Ontological Tension Layer showcase for the Heritage Skills Hall. It explores northern watercraft traditions across First Nations and Inuit cultures — technologies of extraordinary sophistication that embody deep relationships between people, water, and the natural world.\n\nFirst Nations birchbark canoe traditions are shared across at least seven nations: Anishinaabe, Algonquin, Abenaki, Cree, Mi'kmaq, Innu, and Attikamek. Each nation developed regional variations suited to their specific waters — from the deep-hulled Great Lakes canoes of the Anishinaabe to the ocean-going Mi'kmaq designs, and the nimble river canoes of the Algonquin. Material selection (birchbark panels, cedar ribs and planking, spruce root lashing, spruce gum sealant) reflects intimate knowledge of the northern forest. The spiritual dimension of the birchbark canoe is central to many First Nations traditions: tobacco offered before harvesting birchbark acknowledges the tree's gift; building a canoe is understood as ceremony; paddling together teaches togetherness through the necessity of trust and synchronized movement. The Anishinaabe understanding encodes this: the canoe is not a tool but a partner.\n\nInuit qajaq traditions represent some of the most refined human-powered watercraft ever developed. The qajaq (kayak) is individually fitted to a single paddler — built to the body like clothing, measuring the paddler's specific proportions to determine hull width, cockpit size, and deck height. Skin-on-frame construction using sealskin over driftwood or bone creates a flexible hull that absorbs wave energy. Regional variations across Inuit communities from Alaska to Greenland demonstrate long-term ecological adaptation. The qajaq's rolling recovery techniques developed from the necessity of survival in arctic coastal waters.\n\nThe Inuit umiak — a large open boat for community travel — completes the northern watercraft triad. Its hide-on-frame construction accommodates entire families and serves community travel, whaling, and cargo transport. Its construction is itself a community project, and its use deepens community bonds.\n\nThis room's primary educational purpose is demonstrating the Ontological Tension Layer: a Western formal ontology (SUMO) classifies a birchbark canoe as Canoe → WaterVehicle → TransportationDevice → Device → Artifact — a manufactured object for water transportation. Anishinaabe knowledge sees the same canoe as a being with spirit, the product of ceremony, a teacher of togetherness and relationship. Both descriptions are true. They answer different questions: WHAT something is vs. WHAT something means. SUMO classifies by function; Anishinaabe knowledge weaves relationship, responsibility, and spirit into every object. This room holds both views together without forcing one to replace the other.\n\nAll watercraft activities carry cold water safety requirements. Cold water shock (the gasping reflex) can incapacitate a person within minutes of immersion regardless of swimming ability. The 1-10-1 rule applies in cold water: approximately 1 minute to control breathing, 10 minutes of meaningful movement, 1 hour before unconsciousness.",
+  "safetyDomains": ["tool", "structural", "arctic-survival"],
+  "trySessions": [
+    "watercraft-13-canoe-anatomy-beginner",
+    "watercraft-13-qajaq-geometry-beginner",
+    "watercraft-13-comparing-designs-beginner"
+  ],
+  "modules": [
+    {
+      "id": "watercraft-13-fn-birchbark-canoe",
+      "title": "First Nations Birchbark Canoe",
+      "tradition": "first-nations",
+      "description": "Birchbark canoe construction traditions across seven nations: Anishinaabe, Algonquin, Abenaki, Cree, Mi'kmaq, Innu, and Attikamek. Covers material selection, construction technique, spiritual dimension, and the canoe's role in community life and trade routes. Tobacco offering acknowledged (Level 1). Specific ceremony details are Level 3-4 and not reproduced.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["WaterVehicle", "Canoe", "MaterialCulture", "HeritageSkill"]
+    },
+    {
+      "id": "watercraft-13-fn-canoe-regional",
+      "title": "Regional Canoe Variations Across Nations",
+      "tradition": "first-nations",
+      "description": "Regional variations in birchbark canoe design across seven nations. Anishinaabe Great Lakes style (wide-beamed, deep hull), Mi'kmaq ocean-going design (higher freeboard, reinforced bow), Algonquin river canoe (narrow, agile), Cree river/lake hybrid, Abenaki designs, Innu subarctic designs, and Attikamek variations. Each design reflects intimate knowledge of the specific waters and travel conditions of that nation's territory.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["WaterVehicle", "MaterialCulture"]
+    },
+    {
+      "id": "watercraft-13-inuit-qajaq",
+      "title": "Inuit Qajaq (Kayak) Construction and Fitting",
+      "tradition": "inuit",
+      "description": "Qajaq construction as individually fitted watercraft. Skin-on-frame construction using sealskin over driftwood or bone frame. Individualized fitting process: hull width measured from paddler's fist-width, cockpit from knees, deck from fist raised off deck. Paddle design and regional variations. Rolling and recovery techniques (concept introduction — advanced skill requiring qualified instructor). Regional variations from Alaska to Greenland.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["WaterVehicle", "Kayak", "Manufacturing", "MaterialCulture", "HeritageSkill"]
+    },
+    {
+      "id": "watercraft-13-inuit-umiak",
+      "title": "Inuit Umiak: Community Boat",
+      "tradition": "inuit",
+      "description": "The umiak is a large open boat used for community travel, whaling, and cargo transport. Hide-on-frame construction typically uses ugruk (bearded seal) or walrus hide stretched over a driftwood or whalebone frame. Construction is a community project. The umiak carries entire families across open ocean. Its SUMO classification as LargeWaterVehicle correctly captures its physical properties while missing everything that matters most: its role as the vessel of community movement and shared life.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["WaterVehicle", "MaterialCulture"]
+    },
+    {
+      "id": "watercraft-13-ontological-bridge",
+      "title": "The Ontological Tension Layer: Watercraft as Artifact and Relationship",
+      "tradition": "cross-tradition",
+      "description": "The primary showcase for the Ontological Tension Layer. SUMO classifies the birchbark canoe as Canoe → WaterVehicle → TransportationDevice → Device → Artifact. Anishinaabe knowledge sees the canoe as a being with spirit, the product of ceremony, a teacher of togetherness. The qajaq presents a parallel tension: SUMO sees Kayak → WaterVehicle → Artifact; Inuit knowledge sees the qajaq as an extension of the paddler's body, fitted like clothing, enabling a unique relationship with water and ice. Both descriptions are true — they answer different questions. This module explores why holding both views together produces a fuller understanding than either alone.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["WaterVehicle", "Canoe", "Kayak"]
+    },
+    {
+      "id": "watercraft-13-spiritual-dimension",
+      "title": "Spiritual Dimensions of Northern Watercraft",
+      "tradition": "first-nations",
+      "description": "The spiritual relationship between First Nations builders, paddlers, and watercraft. Tobacco offering before birchbark harvest is widely acknowledged (Level 1 — publicly shared). The understanding that building a canoe is ceremony, that the canoe carries the spirit of the forest into the water, and that paddling together teaches togetherness through trust — these are Level 1 educational concepts. Specific ceremony details, songs, and sacred protocols are Level 3-4 (community restricted to sacred-ceremonial) and are not reproduced here.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["HeritageSkill", "CulturalPractice"]
+    }
+  ],
+  "ontologicalBridges": [
+    {
+      "id": "bridge-01-birchbark-canoe",
+      "title": "The Birchbark Canoe: Artifact or Relationship?",
+      "sumoView": "Canoe -> WaterVehicle -> TransportationDevice -> Device -> Artifact -> Object -> Physical -> Entity. A manufactured object for water transportation, constructed from birchbark panels over a cedar or spruce wood frame, waterproofed with pine pitch. Classified by function and material composition.",
+      "indigenousView": "A being with spirit, born from the birch tree's gift. The canoe teaches togetherness — paddling in unison requires trust and relationship. Building one is ceremony: the maker offers tobacco to the birch before harvest, gives thanks to the tree for its sacrifice, and understands that the canoe carries the spirit of the forest into the water. The Anishinaabe word for the birchbark canoe encodes this relationship; it is not a tool but a partner. Traditions: Anishinaabe, Algonquin, Abenaki, Cree, Mi'kmaq, Innu, Attikamek.",
+      "tradition": "first-nations",
+      "teachingPoint": "Both descriptions are true. They answer different questions: WHAT something is vs. WHAT something means. SUMO classifies by function — the canoe moves people on water. Anishinaabe knowledge weaves relationship, responsibility, and spirit into every object. The canoe is simultaneously a WaterVehicle and a teacher of togetherness. Knowing only the SUMO view, you can build a boat. Knowing only the Indigenous view, you understand why the journey matters. Both together is the fuller picture."
+    },
+    {
+      "id": "bridge-13-qajaq-extension",
+      "title": "The Qajaq: Artifact or Extension of Self?",
+      "sumoView": "Kayak -> WaterVehicle -> TransportationDevice -> Device -> Artifact -> Object -> Physical -> Entity. A manufactured watercraft constructed from skin over a wood or bone frame, designed for single-person operation in coastal and open water environments. Classified by material composition, hull geometry, and functional use.",
+      "indigenousView": "The qajaq is not a vehicle — it is an extension of the paddler's body. It is built to fit one specific person, measuring their exact proportions: the hull width from the fist, the cockpit from the knees, the deck height from the fist raised. In the water, the paddler wears the qajaq like a second skin. This intimate fit enables a relationship with water and ice that no classification system captures: the paddler does not sit in a boat, they become part of the water's surface. The qajaq enables Inuit hunters to move through environments that would otherwise be inaccessible. It is mastery expressed as fitting.",
+      "tradition": "inuit",
+      "teachingPoint": "SUMO sees an artifact; Inuit knowledge sees an extension of the person. The qajaq's SUMO classification (Kayak -> WaterVehicle -> Artifact) captures its physical properties accurately — material, function, classification. What it cannot capture is the relationship: the qajaq is as personal as kamik boots, and as essential to survival. A learner who understands only the SUMO view can describe the hull geometry. A learner who understands only the Inuit view knows why the fit matters more than the geometry. The tension between these views is itself a teaching: not every significant relationship between a person and a made object can be expressed as classification."
+    }
+  ]
+}
