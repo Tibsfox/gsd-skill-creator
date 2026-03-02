@@ -1,0 +1,62 @@
+# Cloud Systems Department Chipset Configuration
+# Based on src/types/openstack.ts service types and NASA SE phases
+
+name: cloud-systems
+version: 0.1.0
+description: "Cloud Systems Department -- routes queries across OpenStack services (keystone, nova, neutron, cinder, glance, swift, heat, horizon) and NASA SE lifecycle"
+
+skills:
+  - id: keystone-neutron-guide
+    name: Identity & Networking Guide
+    description: "Keystone auth tokens, service catalog, Neutron networks/subnets/routers/security groups"
+    triggers: [keystone, token, auth, neutron, network, subnet, router, floating IP, security group]
+    wing: identity-networking
+
+  - id: nova-storage-guide
+    name: Compute & Storage Guide
+    description: "Nova instance lifecycle, Cinder volumes, Glance images, Swift object storage"
+    triggers: [nova, instance, server, cinder, volume, glance, image, swift, object storage, flavor]
+    wing: compute-storage
+
+  - id: orchestration-guide
+    name: Orchestration Guide
+    description: "Heat stack templates, HOT syntax, Horizon dashboard, multi-service coordination"
+    triggers: [heat, stack, template, HOT, horizon, dashboard, orchestration, resource graph]
+    wing: orchestration
+
+  - id: nasa-se-guide
+    name: NASA SE Lifecycle Guide
+    description: "Pre-Phase A through Phase F, review gates (MCR/SRR/PDR/CDR/ORR), TAID verification methods"
+    triggers: [NASA, systems engineering, phase review, MCR, SRR, PDR, CDR, ORR, TAID, requirements]
+    wing: nasa-se-lifecycle
+
+  - id: runbook-guide
+    name: Runbook Operations Guide
+    description: "Runbook structure, ProcedureStep execution, communication loop priorities, deployment verification"
+    triggers: [runbook, procedure, deployment, communication loop, HALT, health check, verification]
+    wing: runbook-operations
+
+agents:
+  - id: cloud-ops-agent
+    name: cloud-ops-agent
+    role: "Primary cloud operations instructor for identity, networking, compute, and storage"
+    skills: [keystone-neutron-guide, nova-storage-guide]
+
+  - id: nasa-se-agent
+    name: nasa-se-agent
+    role: "Systems engineering instructor for NASA lifecycle phases, review gates, and TAID"
+    skills: [nasa-se-guide]
+
+  - id: runbook-agent
+    name: runbook-agent
+    role: "Orchestration and runbook instructor for Heat templates and operational procedures"
+    skills: [orchestration-guide, runbook-guide]
+
+topology:
+  type: pipeline
+  description: "cloud-ops-agent handles IaaS operations; nasa-se-agent handles SE process; runbook-agent coordinates cross-service orchestration and procedures"
+  flow:
+    - from: cloud-ops-agent
+      to: [runbook-agent]
+    - from: nasa-se-agent
+      to: [runbook-agent]
