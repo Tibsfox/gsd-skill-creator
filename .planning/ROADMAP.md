@@ -4,7 +4,7 @@
 
 - ✅ **v1.49.8 Cooking With Claude** — Phases 0.5, 1-10 (shipped 2026-03-01)
 - ✅ **v1.49.9 Learn Kung Fu** — Phases 11-21 (shipped 2026-03-01)
-- 🚧 **v1.49.10 College Expansion** — Phases 22-27 (in progress)
+- ✅ **v1.49.10 College Expansion** — Phases 22-27 (shipped 2026-03-02)
 
 ## Phases
 
@@ -46,7 +46,7 @@ Full details: `.planning/milestones/v1.49.9-ROADMAP.md`
 
 </details>
 
-### 🚧 v1.49.10 College Expansion (Phases 22-27)
+### ✅ v1.49.10 College Expansion (Phases 22-27) — SHIPPED 2026-03-02
 
 **Milestone Goal:** Integrate all previous education packs into the .college framework as flat, independently-discoverable subjects with dynamic virtual department composition. 41 subjects total (35 foundational + 3 specialized + 3 existing).
 
@@ -55,7 +55,7 @@ Full details: `.planning/milestones/v1.49.9-ROADMAP.md`
 - [x] **Phase 24: Dynamic Mapping Layer** — JSON schema, default groupings, educational tracks, user custom views, hot-reload (completed 2026-03-02)
 - [x] **Phase 25: Cross-Reference Network** — Import 63 dependency-graph edges, cross-department links, DepChainValidator, XREF-01 through XREF-05 satisfied (completed 2026-03-02)
 - [x] **Phase 26: Safety Extensions** — SafetyBoundary definitions for chemistry, electronics, physical-education, nutrition (completed 2026-03-02)
-- [ ] **Phase 27: Test Suite and Verification** — Discovery, loading, cross-references, mappings, safety, performance
+- [x] **Phase 27: Test Suite and Verification** — 52-test milestone integration suite, TEST-01 through TEST-07 all passing (completed 2026-03-02)
 
 ## Phase Details
 
@@ -151,7 +151,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 27-01: Full test suite — discovery, cross-reference integrity, mapping validation, safety-critical, token budget, calibration registration, performance
+- [x] 27-01: Full test suite — discovery, cross-reference integrity, mapping validation, safety-critical, token budget, calibration registration, performance (52 tests passing, completed 2026-03-02)
 
 ## Progress
 
@@ -165,4 +165,4 @@ Plans:
 | 24. Dynamic Mapping Layer | v1.49.10 | Complete    | 2026-03-02 | 2026-03-02 |
 | 25. Cross-Reference Network | v1.49.10 | Complete    | 2026-03-02 | 2026-03-02 |
 | 26. Safety Extensions | v1.49.10 | Complete    | 2026-03-02 | 2026-03-02 |
-| 27. Test Suite and Verification | v1.49.10 | 0/1 | Not started | - |
+| 27. Test Suite and Verification | v1.49.10 | 1/1 | Complete | 2026-03-02 |
