@@ -39,6 +39,18 @@ export {
   computeDigestResponse,
 } from './auth.js';
 
+/* ---- Cookies ---- */
+export { CurlCookieJar } from './cookies.js';
+export type { CurlCookie } from './types.js';
+
+/* ---- Proxy ---- */
+export { createProxyDispatcher, createHttpProxyDispatcher, createSocksProxyDispatcher } from './proxy.js';
+export type { CurlProxyConfig } from './types.js';
+
+/* ---- Certificates ---- */
+export { createCertAgent } from './certs.js';
+export type { CurlCertConfig, CurlRequestOptions } from './types.js';
+
 /* ---- Labs ---- */
 export { labs as curlLabs } from './labs.js';
 export type { CurlLab, CurlLabStep } from './labs.js';

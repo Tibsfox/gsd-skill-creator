@@ -65,7 +65,7 @@ describe('curl proxy dispatchers (CURL-03)', () => {
       expect(proxyAgentCalls).toHaveLength(1);
       const opts = proxyAgentCalls[0] as Record<string, unknown>;
       expect(opts.uri).toBe('http://proxy.example.com:8080');
-      expect((dispatcher as { type: string }).type).toBe('proxy-agent');
+      expect((dispatcher as unknown as { type: string }).type).toBe('proxy-agent');
     });
 
     it('includes Basic auth token when proxyAuth provided', () => {
@@ -93,7 +93,7 @@ describe('curl proxy dispatchers (CURL-03)', () => {
       const opts = agentCalls[0] as Record<string, unknown>;
       expect(opts.connect).toBeDefined();
       expect(typeof opts.connect).toBe('function');
-      expect((dispatcher as { type: string }).type).toBe('agent');
+      expect((dispatcher as unknown as { type: string }).type).toBe('agent');
     });
 
     it('creates Agent with custom connect for SOCKS4', () => {
