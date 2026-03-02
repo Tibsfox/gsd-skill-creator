@@ -1,0 +1,56 @@
+{
+  "id": "food-05-canning-safety-beginner",
+  "title": "Understanding Canning Safety",
+  "tradition": "appalachian",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Learn the fundamental safety principles behind Appalachian home canning, including the critical difference between high-acid and low-acid foods, and why pressure canning is non-negotiable for low-acid preservation. This session does not teach canning technique — it teaches the safety framework that makes canning survivable. Generations of Appalachian families have 'put food by' safely because they understood these principles.",
+  "prerequisites": [],
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Understanding pH: acidity is the key safety variable in home canning. Every food has a pH (potential of hydrogen) that measures how acidic it is. The pH scale runs from 0 (most acidic) to 14 (most alkaline), with 7 as neutral. In home canning, pH 4.6 is the critical safety boundary.",
+      "safetyNote": "pH 4.6 is the critical boundary. Foods with pH 4.6 and below are HIGH-ACID and can be safely water-bath canned. Foods with pH above 4.6 are LOW-ACID and MUST use pressure canning. Clostridium botulinum spores cannot produce toxin in high-acid environments — they can and do in low-acid environments at room temperature.",
+      "culturalContext": "Appalachian canning knowledge developed over generations of trial and understanding long before pH meters existed. Traditional wisdom — 'if it's sour enough, it's safe enough for the water bath' — correctly identified high-acid foods as safer for open-kettle methods, even without the chemistry vocabulary."
+    },
+    {
+      "order": 2,
+      "instruction": "High-acid foods — safe for water-bath canning: tomatoes and tomato products (pH 4.0-4.6), most fruits (pH 3.0-4.5), properly pickled vegetables (pH below 4.6 achieved through vinegar), jams and jellies with correct sugar levels, and fermented products (pH drops below 4.6 through fermentation). These foods can be safely processed in a boiling water bath at 212°F/100°C.",
+      "safetyNote": "Tomatoes sit right at the pH boundary (4.0-4.6). Modern tomato varieties can sometimes have higher pH than traditional varieties. Always add 1 tablespoon bottled lemon juice or 1/4 teaspoon citric acid per pint when canning whole or crushed tomatoes to ensure safety. Do not rely on tomato variety alone.",
+      "culturalContext": "Appalachian families traditionally canned tomatoes, apple butter, blackberry jam, pickled beans (with vinegar), corn relish, and fruit preserves. These are exactly the high-acid foods where water-bath canning is appropriate."
+    },
+    {
+      "order": 3,
+      "instruction": "Low-acid foods — MUST use pressure canning: green beans (pH 5.3-6.2), corn (pH 6.0-6.5), all meats and poultry, fish, mixed vegetables, soups, beans and legumes, beets (pH 5.3-6.6 unless pickled), and potatoes. Do NOT water-bath can these foods under any circumstances.",
+      "safetyNote": "CRITICAL: Low-acid foods canned in a water bath can develop botulism toxin, which is odorless, colorless, and potentially fatal. Botulism toxin is one of the most lethal substances known — a microscopic amount is lethal. Boiling the jar does not make low-acid water-bath canned food safe; the toxin is destroyed by boiling but the spores survive and can regenerate in the sealed jar. There is NO safe shortcut. No amount of extra processing time in a water bath makes low-acid foods safe. Use a pressure canner.",
+      "culturalContext": "Green beans — 'leather britches' when dried, or 'shuck beans' in Appalachian tradition — were traditionally dried and stored, not canned. When canning became common in Appalachia, well-intentioned families sometimes tried to use familiar water-bath methods for green beans with tragic results. Modern Appalachian canning traditions correctly specify pressure canning for all low-acid vegetables."
+    },
+    {
+      "order": 4,
+      "instruction": "Pressure canning basics: a pressure canner traps steam and raises internal pressure, which raises the boiling point of water above 212°F/100°C. At 10 lbs pressure (sea level), water boils at 240°F/116°C. This temperature is required to destroy Clostridium botulinum spores — the source of botulism. Always use current USDA-tested recipes for processing times. Never experiment with processing times for low-acid foods.",
+      "safetyNote": "Altitude affects pressure canning. At altitudes above 1,000 feet, increase pressure by 1 lb for every 2,000 feet of elevation (dial gauge) or use 15 lb pressure for weighted gauge canners. Appalachian mountain communities at higher elevations must account for altitude. Always follow current USDA Complete Guide to Home Canning guidelines.",
+      "sumoMapping": "FoodPreservation",
+      "culturalContext": "The arrival of reliable pressure canners in Appalachian communities in the early 20th century was transformative — it made safe year-round storage of garden vegetables possible and extended the tradition of 'putting food by' to an even wider range of foods."
+    },
+    {
+      "order": 5,
+      "instruction": "Signs of spoilage: before opening any home-canned jar, check: the lid should be concave (pulled down) and should not flex when pressed. If the lid flexes up and down or 'pops,' the seal has failed and the contents must be discarded. When opening, the jar should open with a slight vacuum release. Any spurting liquid, unusual odor (sour beyond expected, off, or no smell at all when you expect sour), cloudiness in clear liquids, or mold growth means discard.",
+      "safetyNote": "CRITICAL: Do not taste suspect canned goods to determine safety. Botulism toxin has no smell or taste. A jar can contain lethal levels of botulism toxin and appear and smell normal. When in doubt, throw it out. Dispose of suspect jars in a sealed plastic bag in the trash — do not compost or pour down the drain."
+    },
+    {
+      "order": 6,
+      "instruction": "Root cellaring as a complementary preservation method: for many vegetables, root cellaring — cool, humid underground storage — is a safer option than canning. Carrots, potatoes, turnips, cabbage, apples, and beets store well in a root cellar at 32-40°F/0-4°C and 85-95% humidity. Root cellaring requires no processing and preserves food naturally through cold temperature inhibition of microbial and enzymatic activity.",
+      "safetyNote": "Root cellar temperatures must stay below 40°F/4°C to inhibit bacterial growth. Check stored produce regularly and remove anything showing soft spots, mold, or decay — one rotting vegetable can spread rot to neighboring produce quickly.",
+      "sumoMapping": "FoodPreservation",
+      "culturalContext": "Root cellars were central to Appalachian homesteads before refrigeration. Many old mountain homesteads still have intact root cellars built into hillsides — the earth itself provides insulation. This is perhaps the most passive and elegant of all traditional Appalachian food preservation methods."
+    },
+    {
+      "order": 7,
+      "instruction": "The Appalachian tradition of putting food by: home preservation in Appalachian communities has always been both practical necessity and social practice. 'Canning bees' — community gatherings to process the harvest together — meant that knowledge, labor, and abundance were shared. A household with a full root cellar and stocked canning shelves going into winter was a household prepared. This knowledge, passed mother to daughter and neighbor to neighbor, is a living thread connecting modern Appalachian communities to their ancestors.",
+      "culturalContext": "In Appalachian communities, 'putting up' food is not just food security — it is cultural continuity. The rows of gleaming jars in a cellar represent the summer's work, the land's generosity, and the family's preparedness. Organizations like the National Center for Home Food Preservation work to keep this tradition safe by providing tested, science-based guidelines that honor the tradition while ensuring it remains safe for the next generation."
+    }
+  ],
+  "sumoProcessClass": "FoodPreservation"
+}
