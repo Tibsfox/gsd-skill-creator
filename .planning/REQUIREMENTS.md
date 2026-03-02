@@ -51,13 +51,13 @@ Requirements for College Expansion milestone. Each maps to roadmap phases.
 
 ### Test Suite
 
-- [ ] **TEST-01**: Integration tests verify all 41 departments are discovered, parsed, and loaded by CollegeLoader
-- [ ] **TEST-02**: Cross-reference integrity tests confirm all relationship targets resolve across departments
-- [ ] **TEST-03**: Mapping validation tests verify all referenced subjects exist with no orphans
-- [ ] **TEST-04**: Safety-critical tests verify SafetyBoundary definitions for chemistry, electronics, PE, nutrition
-- [ ] **TEST-05**: Token budget verification confirms summary tier under 3K tokens per department, active tier under 12K per wing
-- [ ] **TEST-06**: Calibration model registration tests pass for all departments with domain-specific models
-- [ ] **TEST-07**: CollegeLoader performance test confirms 41 departments discovered in under 100ms
+- [x] **TEST-01**: Integration tests verify all 41 departments are discovered, parsed, and loaded by CollegeLoader
+- [x] **TEST-02**: Cross-reference integrity tests confirm all relationship targets resolve across departments
+- [x] **TEST-03**: Mapping validation tests verify all referenced subjects exist with no orphans
+- [x] **TEST-04**: Safety-critical tests verify SafetyBoundary definitions for chemistry, electronics, PE, nutrition
+- [x] **TEST-05**: Token budget verification confirms summary tier under 3K tokens per department, active tier under 12K per wing
+- [x] **TEST-06**: Calibration model registration tests pass for all departments with domain-specific models
+- [x] **TEST-07**: CollegeLoader performance test confirms 41 departments discovered in under 100ms
 
 ## Future Requirements
 
@@ -112,13 +112,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SAFE-03 | Phase 26 | Complete |
 | SAFE-04 | Phase 26 | Complete |
 | SAFE-05 | Phase 26 | Complete |
-| TEST-01 | Phase 27 | Pending |
-| TEST-02 | Phase 27 | Pending |
-| TEST-03 | Phase 27 | Pending |
-| TEST-04 | Phase 27 | Pending |
-| TEST-05 | Phase 27 | Pending |
-| TEST-06 | Phase 27 | Pending |
-| TEST-07 | Phase 27 | Pending |
+| TEST-01 | Phase 27 | Complete |
+| TEST-02 | Phase 27 | Complete |
+| TEST-03 | Phase 27 | Complete |
+| TEST-04 | Phase 27 | Complete |
+| TEST-05 | Phase 27 | Complete |
+| TEST-06 | Phase 27 | Complete |
+| TEST-07 | Phase 27 | Complete |
 
 **Coverage:**
 - v1.49.10 requirements: 34 total
@@ -127,4 +127,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-01*
-*Last updated: 2026-03-01 — traceability complete after roadmap creation*
+*Last updated: 2026-03-02 — all 34 requirements complete, v1.49.10 milestone shipped*
