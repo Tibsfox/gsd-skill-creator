@@ -8,6 +8,14 @@
  *
  * SAFE-06: Citation failure NEVER blocks skill generation. All operations
  * wrapped in try/catch with graceful fallback to original material.
+ *
+ * SAFE-06 (CIT): Citation failure never blocks skill generation
+ * Attack scenario: The citation resolution service is unavailable or returns
+ * an error for a batch of citations. If this propagates as an exception,
+ * the learn pipeline halts and the user cannot generate skills until the
+ * citation service recovers.
+ * Consequence of absence: Citation service unavailability blocks skill
+ * creation entirely, making skill generation dependent on citation uptime.
  */
 
 import type { RawCitation, CitedWork, ProvenanceEntry, ExtractionResult } from '../types/index.js';
