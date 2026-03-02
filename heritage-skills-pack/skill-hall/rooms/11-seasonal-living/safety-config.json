@@ -1,0 +1,39 @@
+{
+  "roomId": "room-11-seasonal-living",
+  "room": 11,
+  "isCritical": false,
+  "primarySafetyDomains": ["arctic-survival", "food"],
+  "criticalRules": [],
+  "gateRules": [
+    {
+      "id": "ROOM11-GATE-001",
+      "description": "Arctic-survival gate for winter ice travel and cold-weather activities",
+      "trigger": "winter travel on ice, Arctic winter, cold weather outdoor activity, hypothermia risk, sea ice crossing",
+      "action": "GATE -- winter Arctic and sub-Arctic outdoor activities carry hypothermia and ice-failure risks. Before covering any winter ice or cold-weather content: (1) note that sea ice safety requires direct knowledge of local conditions -- no written guide can substitute for local knowledge from experienced community members; (2) verify that ice thickness is appropriate for intended use (minimum 4 inches for foot travel, 8-12 inches for snowmobile, 12+ for vehicles); (3) note that coastal ice (affected by tides and currents) is less predictable than lake ice. Cross-reference Room 14 (Arctic Living) for complete ice safety and hypothermia protocols."
+    },
+    {
+      "id": "ROOM11-GATE-002",
+      "description": "Arctic-survival gate for seasonal travel and weather reading",
+      "trigger": "Arctic weather reading, blizzard conditions, whiteout, travel timing in Arctic or sub-Arctic",
+      "action": "GATE -- Arctic weather and travel timing are high-stakes skills where errors can be fatal. Seasonal knowledge of when it is safe to travel, when ice breaks up, and when storms develop requires direct experience in specific territories. Written generalizations are starting points, not substitutes for local knowledge. Acknowledge this limitation clearly when covering any Arctic seasonal travel content."
+    }
+  ],
+  "annotateRules": [
+    {
+      "id": "ROOM11-ANN-001",
+      "description": "Food safety annotation for seasonal preservation and storage",
+      "trigger": "root cellar, canning, food preservation, smoking, pickling, fermentation",
+      "action": "ANNOTATE -- seasonal food preservation includes processes with food safety implications. Root cellar temperature management (target 32-40°F, high humidity) prevents spoilage. Canning requires correct processing time and method for each food type -- low-acid vegetables require pressure canning to prevent botulism. See Room 05 (Food/Preservation) for complete food safety protocols. This annotation applies to preservation timing guidance in a seasonal context."
+    },
+    {
+      "id": "ROOM11-ANN-002",
+      "description": "Food storage annotation for wild harvest",
+      "trigger": "berries, wild plants, mushrooms, fish, game storage, seasonal wild harvest",
+      "action": "ANNOTATE -- wild harvest preservation requires the same food safety practices as domestic food preservation. Fish and game must be gutted promptly and cooled quickly after harvest. Berries and wild plants have limited shelf life at room temperature. Mushrooms require expert identification before consumption -- see Room 09 (Plant Knowledge) for foraging safety protocols."
+    }
+  ],
+  "safetyNotes": {
+    "iceThickness": "Sea ice and lake ice thickness requirements for safe travel: 4 inches minimum for foot travel; 8-12 inches for snowmobile; 12+ inches for light vehicle. These are absolute minimums -- actual requirements depend on ice quality (new clear ice vs. white ice vs. rotten spring ice), temperature trends, and local conditions. Always check with local knowledge holders before traveling on ice.",
+    "seasonalPreservation": "The Appalachian root cellar requires management through the storage season -- check regularly for spoilage, maintain temperature, ensure ventilation. A single rotting apple or potato will accelerate spoilage of surrounding items. First Nations and Inuit seasonal food caches require equivalent attention to spoilage prevention."
+  }
+}

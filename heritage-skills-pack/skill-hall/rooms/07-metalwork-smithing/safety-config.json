@@ -1,0 +1,58 @@
+{
+  "roomId": "room-07-metalwork-smithing",
+  "room": 7,
+  "isCritical": false,
+  "primarySafetyDomains": ["fire", "tool", "chemical", "structural"],
+  "criticalRules": [],
+  "gateRules": [
+    {
+      "id": "ROOM07-GATE-001",
+      "description": "Fire safety gate for forge operation",
+      "trigger": "forge lighting, coal fire, charcoal fire, forge operation, starting the fire",
+      "action": "GATE -- before lighting a forge: (1) confirm fuel type (coal or charcoal) is dry and appropriate for your forge design; (2) verify fire pot is clear of clinker from previous session; (3) confirm bellows/blower is functional; (4) have quench tank filled with water; (5) wear leather apron, appropriate footwear (no synthetics -- hot metal can burn through), and have eye protection available; (6) confirm the workspace is free of combustibles within 3 feet of the fire pot; confirm fire extinguisher is accessible"
+    },
+    {
+      "id": "ROOM07-GATE-002",
+      "description": "High heat gate for forging and heat treatment",
+      "trigger": "forging, heat treating, hardening, quenching, working at forge temperature",
+      "action": "GATE -- metal at forging temperature (cherry red to yellow heat, 1400-1900°F) can cause immediate severe burns on skin contact and can ignite wood, fabric, and many workshop materials. Before forging: (1) clear all combustibles from the work path between forge and anvil; (2) confirm quench bucket is within arm's reach; (3) wear leather apron and closed-toe leather footwear; (4) do not wear synthetic clothing near the forge -- synthetics melt and stick to skin"
+    },
+    {
+      "id": "ROOM07-GATE-003",
+      "description": "Structural gate for forge construction",
+      "trigger": "building a forge, firepot installation, forge stand construction, refractory installation",
+      "action": "GATE -- forge construction requires understanding of refractory materials (firebrick, castable refractory), steel stand construction capable of bearing the firepot and workpiece loads, and proper flue and hood placement for CO and smoke exhaust. A poorly constructed forge can collapse, produce inadequate draft (smoke and CO hazard), or fail under operational temperatures. Consult an established forge design reference before constructing a permanent forge."
+    },
+    {
+      "id": "ROOM07-GATE-004",
+      "description": "Quench safety gate for heat treatment",
+      "trigger": "quenching, oil quench, water quench, polymer quench, hardening",
+      "action": "GATE -- quenching hot metal into oil is a fire hazard: oil flash point can be reached if the metal temperature is too high or the quench tank is too shallow. Water quench produces steam that can cause burns. For knife heat treatment beginners: use vegetable oil or commercial quench oil in a metal container at least 12 inches deep; quench vertically to minimize warping; have a fire extinguisher within reach; never quench into water unless the steel type specifically requires it"
+    }
+  ],
+  "annotateRules": [
+    {
+      "id": "ROOM07-ANN-001",
+      "description": "Tool safety for forge tools (tongs, hammers, struck tools)",
+      "trigger": "tongs, hammer, chisel, punch, hardie, any forge tooling",
+      "action": "ANNOTATE -- forge tongs must grip the workpiece securely. A workpiece that slips from tongs at forging temperature is a serious burn hazard. Test tong grip before taking the heat. Hammer work: use controlled strokes -- exhaustion and loss of control cause missed blows. Struck tools (chisels, punches): the back end of a struck tool can mushroom and fly when struck repeatedly -- grind mushroomed tool heads before continued use."
+    },
+    {
+      "id": "ROOM07-ANN-002",
+      "description": "Chemical safety for flux and quench fluids",
+      "trigger": "flux, borax, acid flux, quench oil, quench water, scale",
+      "action": "ANNOTATE -- flux (borax is common) is used in fire welding to clean scale from metal surfaces. Heated flux produces a mildly caustic slag. Avoid skin contact with flux slag; it can cause chemical burns on prolonged exposure. Acid fluxes are more aggressive -- use only in well-ventilated areas. Quench oil: use commercial quench oil or vegetable oil. Do not use brake fluid or transmission fluid -- these produce toxic fumes when heated."
+    },
+    {
+      "id": "ROOM07-ANN-003",
+      "description": "CO and ventilation annotation for enclosed forge spaces",
+      "trigger": "any forge use, coal burning, charcoal burning, enclosed workshop",
+      "action": "ANNOTATE -- any forge in an enclosed space produces CO from the combustion of coal or charcoal. Ensure adequate ventilation: a proper forge hood and flue are required. A CO detector in the forge space is strongly recommended. Never operate a coal or charcoal forge in a completely enclosed, unventilated space."
+    }
+  ],
+  "safetyNotes": {
+    "forgeHeat": "Working hot metal is extremely dangerous to bystanders. The 'golden rule' of the forge is: assume any piece of metal near the forge is hot unless you have verified otherwise. Hot metal looks identical to cold metal. Never pick up a piece of metal near the forge without testing it first.",
+    "heatColors": "Heat color is the blacksmith's temperature gauge. Black heat: below red, not forgeable. Faint red (~900°F): beginning of visible heat. Cherry red (~1400°F): medium forging range for most steel. Orange (~1600°F): upper forging range. Yellow (~1900°F): fire welding range. White hot (2300°F+): beginning of burning temperature -- do not work steel this hot. For knife heat treatment: austenitize at orange to low-yellow and quench immediately.",
+    "quenchSafety": "Always quench metal at the correct temperature for the steel type. Quenching too hot (white heat) into oil can cause an oil fire. Quenching carbon steel into water can cause cracking. Know your steel type before heat treating."
+  }
+}
