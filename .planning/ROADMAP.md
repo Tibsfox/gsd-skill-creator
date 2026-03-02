@@ -160,7 +160,7 @@ Plans:
 | 0.5 Foundations Docs | v1.49.8 | 1/1 | Complete | 2026-03-01 |
 | 1-10 | v1.49.8 | 45/45 | Complete | 2026-03-01 |
 | 11-21 | v1.49.9 | 11/11 | Complete | 2026-03-01 |
-| 22. Foundational Subject Migration | 2/3 | In Progress|  | 2026-03-02 |
+| 22. Foundational Subject Migration | 4/4 | Complete   | 2026-03-02 | 2026-03-02 |
 | 23. Specialized Pack Integration | v1.49.10 | 0/1 | Not started | - |
 | 24. Dynamic Mapping Layer | v1.49.10 | 0/1 | Not started | - |
 | 25. Cross-Reference Network | v1.49.10 | 0/1 | Not started | - |
