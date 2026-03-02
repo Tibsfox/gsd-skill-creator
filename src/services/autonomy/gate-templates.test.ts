@@ -131,3 +131,70 @@ describe('SUMMARY.md gate in all templates', () => {
     });
   }
 });
+
+// ============================================================================
+// Advisory gate tests (Phase 529 - behavioral evidence and deviations)
+// ============================================================================
+
+describe('advisory gates in validation template', () => {
+  it('should have behavioral-evidence gate with blocking: false', async () => {
+    const result = await loadGateTemplate('validation');
+    expect(result.success).toBe(true);
+    if (result.success) {
+      const gate = result.config.gates.per_subversion.find(
+        (g) => g.name === 'behavioral-evidence',
+      );
+      expect(gate).toBeDefined();
+      expect(gate!.blocking).toBe(false);
+      expect(gate!.content_checks.length).toBeGreaterThanOrEqual(1);
+      expect(gate!.content_checks[0].required).toBe(true);
+    }
+  });
+
+  it('should have deviations gate with blocking: false', async () => {
+    const result = await loadGateTemplate('validation');
+    expect(result.success).toBe(true);
+    if (result.success) {
+      const gate = result.config.gates.per_subversion.find(
+        (g) => g.name === 'deviations',
+      );
+      expect(gate).toBeDefined();
+      expect(gate!.blocking).toBe(false);
+      expect(gate!.content_checks.length).toBeGreaterThanOrEqual(1);
+      expect(gate!.content_checks[0].required).toBe(true);
+    }
+  });
+
+  it('should have behavioral-evidence pattern matching verification language', async () => {
+    const result = await loadGateTemplate('validation');
+    expect(result.success).toBe(true);
+    if (result.success) {
+      const gate = result.config.gates.per_subversion.find(
+        (g) => g.name === 'behavioral-evidence',
+      );
+      expect(gate).toBeDefined();
+      const pattern = gate!.content_checks[0].pattern;
+      // Pattern should match common verification evidence language
+      const regex = new RegExp(pattern);
+      expect(regex.test('Behavioral evidence confirms')).toBe(true);
+      expect(regex.test('Functional test passes')).toBe(true);
+      expect(regex.test('Verification complete')).toBe(true);
+    }
+  });
+
+  it('should have deviations pattern matching acknowledgment language', async () => {
+    const result = await loadGateTemplate('validation');
+    expect(result.success).toBe(true);
+    if (result.success) {
+      const gate = result.config.gates.per_subversion.find(
+        (g) => g.name === 'deviations',
+      );
+      expect(gate).toBeDefined();
+      const pattern = gate!.content_checks[0].pattern;
+      const regex = new RegExp(pattern);
+      expect(regex.test('No gaps found')).toBe(true);
+      expect(regex.test('DEVIATION: requirement changed')).toBe(true);
+      expect(regex.test('None identified')).toBe(true);
+    }
+  });
+});

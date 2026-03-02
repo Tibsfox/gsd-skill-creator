@@ -15,6 +15,24 @@ gates:
         - pattern: "\\d+"
           required: true
           description: "Must contain numeric results"
+    - name: behavioral-evidence
+      description: "Advisory check for behavioral evidence in verification reports"
+      path_pattern: ".planning/phases/{phase_dir}/*-VERIFICATION.md"
+      min_size_bytes: 200
+      blocking: false
+      content_checks:
+        - pattern: "([Bb]ehavioral|[Ff]unctional|[Ee]xercise|[Ii]ntegration|[Vv]erif)"
+          required: true
+          description: "Should reference behavioral or functional evidence"
+    - name: deviations
+      description: "Advisory check for deviation acknowledgment in verification reports"
+      path_pattern: ".planning/phases/{phase_dir}/*-VERIFICATION.md"
+      min_size_bytes: 200
+      blocking: false
+      content_checks:
+        - pattern: "(DEVIATION:|[Dd]eviation|[Gg]aps?|[Nn]one|[Cc]lean|[Vv]erdict|[Ii]ssues)"
+          required: true
+          description: "Should acknowledge deviations, gaps, or confirm none exist"
   checkpoint:
     - name: checkpoint-coverage
       description: "Test coverage checkpoint"
