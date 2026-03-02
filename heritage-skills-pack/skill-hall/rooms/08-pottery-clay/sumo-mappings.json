@@ -1,0 +1,83 @@
+[
+  {
+    "heritageConceptId": "room-08-pottery-making",
+    "sumoTerm": "PotteryMaking",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass AppalachianFolkPottery PotteryMaking)",
+    "naturalLanguage": "Appalachian folk pottery is a pottery-making tradition: the hand-forming, decorating, and wood-firing of ceramic vessels using regionally specific clay bodies and alkaline glazes, practiced in the Piedmont and mountain areas of the Carolinas, Georgia, and Virginia.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-08-coil-building",
+    "sumoTerm": "PotteryMaking",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CoilBuilding PotteryMaking)",
+    "naturalLanguage": "Coil building is a pottery-making method: constructing ceramic vessels by rolling clay into ropes (coils) and stacking them to build up vessel walls, blending the coil junctions and shaping the form by hand -- the primary construction method of pre-contact Haudenosaunee pottery.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-08-groundhog-kiln",
+    "sumoTerm": "Kiln",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass GroundhogKiln Kiln)",
+    "naturalLanguage": "A groundhog kiln is a type of kiln: a long, low wood-fired kiln built into a hillside, named for its burrow-like shape, used in Appalachian folk pottery traditions to fire stoneware to cone 10 temperatures (approximately 2350 degrees F) using local wood fuel.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-08-alkaline-glaze",
+    "sumoTerm": "Mixture",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass AlkalineGlaze Mixture)",
+    "naturalLanguage": "An alkaline glaze is a mixture used in Appalachian pottery: a ceramic surface treatment composed of wood ash, feldspar, or Albany slip that produces the characteristic olive-green to brown surfaces of Appalachian stoneware when fired at cone 10 temperatures.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-08-haudenosaunee-pottery",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass HaudenosauneePottery HeritageSkill)",
+    "naturalLanguage": "Haudenosaunee pottery is a heritage skill: the coil-building, tempered clay preparation, surface decoration, and open-pit firing of ceramic vessels by the Haudenosaunee peoples, encoding knowledge of local clay sources, construction methods, and design traditions transmitted across generations.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-08-soapstone-carving",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass SoapstoneCarving HeritageSkill)",
+    "naturalLanguage": "Soapstone carving is an Inuit heritage skill: shaping steatite (soapstone) using stone, antler, or metal tools to produce functional objects including qulliq lamps and cooking vessels -- encoding knowledge of stone selection, carving technique, and form requirements specific to Arctic use contexts.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-08-qulliq-form",
+    "sumoTerm": "Artifact",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass QulliqLamp Artifact)",
+    "naturalLanguage": "A qulliq (soapstone oil lamp) is an artifact: a carved soapstone vessel shaped as a shallow crescent with a wick gutter along one edge, designed to burn seal or marine mammal oil for heat and light in Arctic conditions. The qulliq was the central domestic technology of Inuit life in treeless Arctic environments.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-08-clay",
+    "sumoTerm": "Clay",
+    "sumoFile": "MILO",
+    "mappingType": "instance",
+    "kifStatement": "(instance CeramicClay Clay)",
+    "naturalLanguage": "Ceramic clay is an instance of Clay: a naturally occurring aluminum silicate material that is plastic when wet, rigid when dried, and vitrified into a permanent ceramic structure when fired at sufficient temperature. The clay body used in pottery includes added temper materials (grit, grog, shell) to control drying and firing behavior.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-08-face-jug",
+    "sumoTerm": "Artifact",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass FaceJug Artifact)",
+    "naturalLanguage": "A face jug is an artifact: a ceramic vessel bearing an applied human face (typically with exaggerated features, kaolin white clay eyes and teeth on a dark stoneware body), produced initially by African American potters in the Edgefield pottery district of South Carolina and continued in the Appalachian folk pottery tradition.",
+    "ontologicalBridge": null
+  }
+]
