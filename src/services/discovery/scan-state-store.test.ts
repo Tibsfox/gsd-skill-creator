@@ -2,11 +2,12 @@ import { describe, it, expect, afterEach } from 'vitest';
 import { mkdtempSync, writeFileSync, readFileSync, rmSync, existsSync, readdirSync } from 'fs';
 import { join } from 'path';
 import os from 'os';
-import { ScanStateStore } from './scan-state-store.js';
+import { ScanStateStore, SCAN_SCHEMA_VERSION } from './scan-state-store.js';
 
 /** Valid state fixture covering all fields */
 const validState = {
   version: 1,
+  schemaVersion: SCAN_SCHEMA_VERSION,
   sessions: {
     'project-a:sess-001': {
       fileMtime: 1706000000000,
@@ -52,6 +53,7 @@ describe('ScanStateStore', () => {
     const state = await store.load();
     expect(state).toEqual({
       version: 1,
+      schemaVersion: SCAN_SCHEMA_VERSION,
       sessions: {},
       excludeProjects: [],
     });
@@ -105,6 +107,7 @@ describe('ScanStateStore', () => {
     const state = await store.load();
     expect(state).toEqual({
       version: 1,
+      schemaVersion: SCAN_SCHEMA_VERSION,
       sessions: {},
       excludeProjects: [],
     });
@@ -119,6 +122,7 @@ describe('ScanStateStore', () => {
     const state = await store.load();
     expect(state).toEqual({
       version: 1,
+      schemaVersion: SCAN_SCHEMA_VERSION,
       sessions: {},
       excludeProjects: [],
     });
@@ -137,6 +141,7 @@ describe('ScanStateStore', () => {
     const state = await store.load();
     expect(state).toEqual({
       version: 1,
+      schemaVersion: SCAN_SCHEMA_VERSION,
       sessions: {},
       excludeProjects: [],
     });
@@ -164,7 +169,7 @@ describe('ScanStateStore', () => {
     const statePath = join(tmpDir, 'scan-state.json');
     const store = new ScanStateStore(statePath);
     // Save empty state first
-    await store.save({ version: 1, sessions: {}, excludeProjects: [] });
+    await store.save({ version: 1, schemaVersion: SCAN_SCHEMA_VERSION, sessions: {}, excludeProjects: [] });
     await store.addExclude('project-a');
     const loaded = await store.load();
     expect(loaded.excludeProjects).toContain('project-a');
@@ -175,7 +180,7 @@ describe('ScanStateStore', () => {
     createTmpDir();
     const statePath = join(tmpDir, 'scan-state.json');
     const store = new ScanStateStore(statePath);
-    await store.save({ version: 1, sessions: {}, excludeProjects: ['project-a'] });
+    await store.save({ version: 1, schemaVersion: SCAN_SCHEMA_VERSION, sessions: {}, excludeProjects: ['project-a'] });
     await store.addExclude('project-a');
     const loaded = await store.load();
     expect(loaded.excludeProjects).toEqual(['project-a']);
@@ -188,6 +193,7 @@ describe('ScanStateStore', () => {
     const store = new ScanStateStore(statePath);
     await store.save({
       version: 1,
+      schemaVersion: SCAN_SCHEMA_VERSION,
       sessions: {},
       excludeProjects: ['project-a', 'project-b'],
     });
@@ -201,7 +207,7 @@ describe('ScanStateStore', () => {
     createTmpDir();
     const statePath = join(tmpDir, 'scan-state.json');
     const store = new ScanStateStore(statePath);
-    await store.save({ version: 1, sessions: {}, excludeProjects: ['project-a'] });
+    await store.save({ version: 1, schemaVersion: SCAN_SCHEMA_VERSION, sessions: {}, excludeProjects: ['project-a'] });
     await store.removeExclude('project-x');
     const loaded = await store.load();
     expect(loaded.excludeProjects).toEqual(['project-a']);
@@ -219,6 +225,7 @@ describe('ScanStateStore', () => {
     // Save again with only 1 session
     const singleSession = {
       version: 1,
+      schemaVersion: SCAN_SCHEMA_VERSION,
       sessions: {
         'project-c:sess-003': {
           fileMtime: 1706200000000,
@@ -244,6 +251,7 @@ describe('ScanStateStore', () => {
 
     const state1 = {
       version: 1,
+      schemaVersion: SCAN_SCHEMA_VERSION,
       sessions: {
         'proj:sess-1': {
           fileMtime: 1000,
@@ -256,6 +264,7 @@ describe('ScanStateStore', () => {
 
     const state2 = {
       version: 1,
+      schemaVersion: SCAN_SCHEMA_VERSION,
       sessions: {
         'proj:sess-2': {
           fileMtime: 2000,
@@ -276,5 +285,57 @@ describe('ScanStateStore', () => {
     const keys = Object.keys(loaded.sessions);
     expect(keys.length).toBe(1);
     expect(['proj:sess-1', 'proj:sess-2']).toContain(keys[0]);
+  });
+
+  // Test 15: schemaVersion -- load() returns schemaVersion from existing state
+  it('load() returns schemaVersion from existing state file', async () => {
+    createTmpDir();
+    const statePath = join(tmpDir, 'scan-state.json');
+    const stateWithSchema = { ...validState, schemaVersion: 5 };
+    writeFileSync(statePath, JSON.stringify(stateWithSchema), 'utf-8');
+    const store = new ScanStateStore(statePath);
+    const loaded = await store.load();
+    expect(loaded.schemaVersion).toBe(5);
+  });
+
+  // Test 16: schemaVersion -- defaults to 0 when missing from state file
+  it('load() returns default 0 when state file has no schemaVersion', async () => {
+    createTmpDir();
+    const statePath = join(tmpDir, 'scan-state.json');
+    // Write a valid state WITHOUT schemaVersion (simulating pre-versioning file)
+    const preVersionState = {
+      version: 1,
+      sessions: {},
+      excludeProjects: [],
+    };
+    writeFileSync(statePath, JSON.stringify(preVersionState), 'utf-8');
+    const store = new ScanStateStore(statePath);
+    const loaded = await store.load();
+    expect(loaded.schemaVersion).toBe(0);
+  });
+
+  // Test 17: schemaVersion -- createEmpty returns current SCAN_SCHEMA_VERSION
+  it('createEmpty (via first-run load) returns schemaVersion = SCAN_SCHEMA_VERSION', async () => {
+    createTmpDir();
+    const statePath = join(tmpDir, 'nonexistent', 'scan-state.json');
+    const store = new ScanStateStore(statePath);
+    const state = await store.load();
+    expect(state.schemaVersion).toBe(SCAN_SCHEMA_VERSION);
+  });
+
+  // Test 18: schemaVersion -- persisted through save/load cycle
+  it('save() persists schemaVersion field', async () => {
+    createTmpDir();
+    const statePath = join(tmpDir, 'scan-state.json');
+    const store = new ScanStateStore(statePath);
+    const state = {
+      version: 1,
+      schemaVersion: 42,
+      sessions: {},
+      excludeProjects: [],
+    };
+    await store.save(state);
+    const loaded = await store.load();
+    expect(loaded.schemaVersion).toBe(42);
   });
 });

@@ -21,11 +21,15 @@ import {
 // ============================================================================
 
 /**
- * Default tier configurations with sensible interval defaults.
+ * @justification Type: Accepted heuristic
+ * 3-tier adaptive sample rates balance dashboard responsiveness against CPU load.
+ * hot (1500ms): Active interaction requires near-real-time updates. 1.5s is
+ *   below human perception threshold for "stale" data in monitoring UIs.
+ * warm (7500ms): Background monitoring where 7.5s cadence keeps dashboards
+ *   current without unnecessary polling. 5x hot tier ratio.
+ * cold (0ms): On-change-only for expensive recomputation.
  *
- * - hot:  1500ms (center of 1-2s range) — lightweight cache/single-op reads
- * - warm: 7500ms (center of 5-10s range) — moderate multi-file scans
- * - cold: 0ms (on-change-only) — expensive full-history recomputation
+ * Default tier configurations with sensible interval defaults.
  */
 export const DEFAULT_TIER_CONFIG: Record<SampleTier, TierConfig> = {
   [SampleTier.hot]: {

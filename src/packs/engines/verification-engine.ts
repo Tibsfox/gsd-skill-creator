@@ -7,6 +7,13 @@
 //
 // SAFE-03: Every function wraps in try/catch. No function returns undefined or null.
 // Incompatible compositions always produce explicit VerificationFailure entries.
+//
+// SAFE-03 (DACP): Verification never throws, never returns undefined
+// Attack scenario: A malformed composition step causes an exception inside
+// verifyStep(). An uncaught exception propagates to the composition engine,
+// which treats it as a program error and halts the entire composition pipeline.
+// Consequence of absence: A single malformed step aborts the whole pipeline
+// instead of producing a structured VerificationFailure with diagnostic info.
 
 import type {
   CompositionStep,

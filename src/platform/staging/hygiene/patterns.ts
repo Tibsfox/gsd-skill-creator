@@ -10,12 +10,16 @@
 import type { HygieneCategory, HygienePattern, HygieneFinding } from './types.js';
 
 /**
- * Create the set of built-in hygiene patterns.
+ * @justification Type: Empirical catalog. 11 hygiene patterns covering
+ * common code health indicators: prompt injection detection, hidden content
+ * detection (zero-width chars, RTL overrides, base64), and config safety
+ * (YAML execution, merge bombs, path traversal, env exposure). Count reflects
+ * the distinct hygiene dimensions identified during staging pipeline design.
  *
  * Patterns are organized across three categories:
- * - embedded-instructions: prompt injection and role manipulation
- * - hidden-content: invisible or obfuscated characters/encoding
- * - config-safety: dangerous config constructs and path traversal
+ * - embedded-instructions: prompt injection and role manipulation (4 patterns)
+ * - hidden-content: invisible or obfuscated characters/encoding (3 patterns)
+ * - config-safety: dangerous config constructs and path traversal (4 patterns)
  */
 function createBuiltinPatterns(): HygienePattern[] {
   return [

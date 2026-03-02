@@ -224,6 +224,116 @@ describe('CapabilityScaffolder', () => {
   });
 
   // ==========================================================================
+  // TODO-free scaffolding (QUAL-02)
+  // ==========================================================================
+
+  describe('TODO-free scaffolding', () => {
+    it('skill templateContent contains no TODO: string', () => {
+      const refs: CapabilityRef[] = [
+        { verb: 'create', type: 'skill', name: 'my-build-helper' },
+      ];
+      const tasks = scaffolder.generateTasks(refs);
+      expect(tasks[0].templateContent).not.toContain('TODO:');
+    });
+
+    it('skill templateContent description is not a TODO placeholder', () => {
+      const refs: CapabilityRef[] = [
+        { verb: 'create', type: 'skill', name: 'my-build-helper' },
+      ];
+      const tasks = scaffolder.generateTasks(refs);
+      const parsed = matter(tasks[0].templateContent);
+      expect(parsed.data.description).not.toContain('TODO');
+    });
+
+    it('skill templateContent body does not contain TODO: Add skill instructions', () => {
+      const refs: CapabilityRef[] = [
+        { verb: 'create', type: 'skill', name: 'my-build-helper' },
+      ];
+      const tasks = scaffolder.generateTasks(refs);
+      expect(tasks[0].templateContent).not.toContain('TODO: Add skill instructions here');
+    });
+
+    it('skill templateContent description mentions name-derived words', () => {
+      const refs: CapabilityRef[] = [
+        { verb: 'create', type: 'skill', name: 'my-build-helper' },
+      ];
+      const tasks = scaffolder.generateTasks(refs);
+      const parsed = matter(tasks[0].templateContent);
+      const desc = parsed.data.description.toLowerCase();
+      expect(desc).toContain('build');
+      expect(desc).toContain('helper');
+    });
+
+    it('agent templateContent contains no TODO: string', () => {
+      const refs: CapabilityRef[] = [
+        { verb: 'create', type: 'agent', name: 'code-reviewer' },
+      ];
+      const tasks = scaffolder.generateTasks(refs);
+      expect(tasks[0].templateContent).not.toContain('TODO:');
+    });
+
+    it('agent templateContent does not contain TODO: Describe when', () => {
+      const refs: CapabilityRef[] = [
+        { verb: 'create', type: 'agent', name: 'code-reviewer' },
+      ];
+      const tasks = scaffolder.generateTasks(refs);
+      expect(tasks[0].templateContent).not.toContain('TODO: Describe when this agent should be delegated to');
+    });
+
+    it('agent templateContent does not contain TODO: Add agent instructions', () => {
+      const refs: CapabilityRef[] = [
+        { verb: 'create', type: 'agent', name: 'code-reviewer' },
+      ];
+      const tasks = scaffolder.generateTasks(refs);
+      expect(tasks[0].templateContent).not.toContain('TODO: Add agent instructions here');
+    });
+
+    it('agent templateContent description mentions name-derived words', () => {
+      const refs: CapabilityRef[] = [
+        { verb: 'create', type: 'agent', name: 'code-reviewer' },
+      ];
+      const tasks = scaffolder.generateTasks(refs);
+      const parsed = matter(tasks[0].templateContent);
+      const desc = parsed.data.description.toLowerCase();
+      expect(desc).toContain('code');
+      expect(desc).toContain('reviewer');
+    });
+
+    it('taskXml action text does not reference TODO markers', () => {
+      const refs: CapabilityRef[] = [
+        { verb: 'create', type: 'skill', name: 'test-skill' },
+      ];
+      const tasks = scaffolder.generateTasks(refs);
+      expect(tasks[0].taskXml).not.toContain('replace ALL TODO markers');
+      expect(tasks[0].taskXml).not.toContain('replace ALL of them');
+    });
+
+    it('taskXml action text contains review/customize instruction', () => {
+      const refs: CapabilityRef[] = [
+        { verb: 'create', type: 'skill', name: 'test-skill' },
+      ];
+      const tasks = scaffolder.generateTasks(refs);
+      expect(tasks[0].taskXml).toContain('review and customize');
+    });
+
+    it('end-to-end: skill generate produces no TODO strings in templateContent', () => {
+      const refs: CapabilityRef[] = [
+        { verb: 'create', type: 'skill', name: 'end-to-end-skill' },
+      ];
+      const tasks = scaffolder.generateTasks(refs);
+      expect(tasks[0].templateContent).not.toContain('TODO');
+    });
+
+    it('end-to-end: agent generate produces no TODO strings in templateContent', () => {
+      const refs: CapabilityRef[] = [
+        { verb: 'create', type: 'agent', name: 'end-to-end-agent' },
+      ];
+      const tasks = scaffolder.generateTasks(refs);
+      expect(tasks[0].templateContent).not.toContain('TODO');
+    });
+  });
+
+  // ==========================================================================
   // checkExisting
   // ==========================================================================
 

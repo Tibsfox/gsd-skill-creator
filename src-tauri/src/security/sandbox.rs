@@ -226,8 +226,9 @@ impl SandboxProfileGenerator {
     fn credential_deny_dirs(&self) -> Vec<PathBuf> {
         vec![
             self.home_dir.join(".ssh"),
-            self.home_dir.join(".config"),
             self.home_dir.join(".aws"),
+            self.home_dir.join(".config/gcloud"),
+            self.home_dir.join(".gnupg"),
         ]
     }
 
@@ -319,22 +320,32 @@ impl SandboxProfileGenerator {
     /// Convert profile to bubblewrap command-line arguments.
     ///
     /// Security model: anything NOT explicitly bound is inaccessible.
-    /// Credential directories (~/.ssh/, ~/.config/, ~/.aws/) are never bound,
-    /// making them physically unreadable from inside the sandbox.
+    /// Credential directories (~/.ssh/, ~/.config/, ~/.aws/, ~/.gnupg) are
+    /// replaced with --tmpfs mounts so programs don't get ENOENT but also
+    /// cannot read real keys.
+    ///
+    /// Network isolation: VERIFY agents get --unshare-net (no network at all).
+    /// EXEC/SCOUT/MAIN agents keep network access for proxy socket communication.
     pub fn to_bwrap_command(&self, profile: &InternalSandboxProfile) -> Vec<String> {
         let mut args = vec![
             "bwrap".to_string(),
             "--die-with-parent".to_string(),
             "--cap-drop".to_string(),
             "ALL".to_string(),
-            "--unshare-net".to_string(),
-            "--unshare-pid".to_string(),
-            "--unshare-uts".to_string(),
-            "--proc".to_string(),
-            "/proc".to_string(),
-            "--dev".to_string(),
-            "/dev".to_string(),
         ];
+
+        // Network isolation: only VERIFY gets --unshare-net
+        // EXEC/SCOUT/MAIN need network for proxy socket communication
+        if profile.allowed_domains.is_empty() && profile.proxy_socket.is_none() {
+            args.push("--unshare-net".to_string());
+        }
+
+        args.push("--unshare-pid".to_string());
+        args.push("--unshare-uts".to_string());
+        args.push("--proc".to_string());
+        args.push("/proc".to_string());
+        args.push("--dev".to_string());
+        args.push("/dev".to_string());
 
         // Standard read-only system directories
         for sys_dir in &["/usr", "/lib", "/lib64", "/bin", "/sbin", "/etc"] {
@@ -371,10 +382,47 @@ impl SandboxProfileGenerator {
             args.push(sock.to_string_lossy().to_string());
         }
 
-        // deny_read_dirs: NOT bound = inaccessible (bwrap security model)
-        // No explicit deny needed — absence from bind list = denied
+        // Credential directories: --tmpfs mounts prevent ENOENT errors
+        // while ensuring real keys are inaccessible from inside sandbox
+        for deny_dir in &profile.deny_read_dirs {
+            args.push("--tmpfs".to_string());
+            args.push(deny_dir.to_string_lossy().to_string());
+        }
 
         args
+    }
+
+    /// Convert profile to a JSON-serializable structure with bwrap_args.
+    ///
+    /// Output includes: bwrap_args array, agent_type, platform, stub flag.
+    /// Used by generate-sandbox-profile.sh to emit profile JSON consumed
+    /// by run-in-sandbox.sh.
+    pub fn to_bwrap_args_json(
+        &self,
+        profile: &InternalSandboxProfile,
+    ) -> serde_json::Value {
+        let agent_type_str = match profile.agent_type {
+            AgentType::Main => "main",
+            AgentType::Exec => "exec",
+            AgentType::Verify => "verify",
+            AgentType::Scout => "scout",
+        };
+
+        let bwrap_args = self.to_bwrap_command(profile);
+
+        serde_json::json!({
+            "agent_type": agent_type_str,
+            "platform": "linux",
+            "stub": false,
+            "bwrap_args": bwrap_args,
+            "write_dirs": profile.write_dirs.iter()
+                .map(|d| d.to_string_lossy().to_string())
+                .collect::<Vec<_>>(),
+            "deny_read_dirs": profile.deny_read_dirs.iter()
+                .map(|d| d.to_string_lossy().to_string())
+                .collect::<Vec<_>>(),
+            "allowed_domains": profile.allowed_domains,
+        })
     }
 
     /// Convert an internal profile to Claude Code sandbox.json format.
@@ -642,13 +690,35 @@ mod tests {
     }
 
     #[test]
-    fn test_bwrap_command_includes_unshare_net() {
+    fn test_bwrap_verify_includes_unshare_net() {
         let gen = SandboxProfileGenerator::new_test();
-        let profile = gen.generate(AgentType::Main, None);
+        let profile = gen.generate(AgentType::Verify, None);
         let cmd = gen.to_bwrap_command(&profile);
         assert!(
             cmd.contains(&"--unshare-net".to_string()),
-            "bwrap command must unshare network namespace"
+            "VERIFY agent bwrap command must unshare network namespace"
+        );
+    }
+
+    #[test]
+    fn test_bwrap_exec_does_not_unshare_net() {
+        let gen = SandboxProfileGenerator::new_test();
+        let profile = gen.generate(AgentType::Exec, None);
+        let cmd = gen.to_bwrap_command(&profile);
+        assert!(
+            !cmd.contains(&"--unshare-net".to_string()),
+            "EXEC agent needs network access via proxy socket"
+        );
+    }
+
+    #[test]
+    fn test_bwrap_scout_does_not_unshare_net() {
+        let gen = SandboxProfileGenerator::new_test();
+        let profile = gen.generate(AgentType::Scout, None);
+        let cmd = gen.to_bwrap_command(&profile);
+        assert!(
+            !cmd.contains(&"--unshare-net".to_string()),
+            "SCOUT agent needs expanded network access via proxy"
         );
     }
 

@@ -1,3 +1,11 @@
+---
+module: HD-05
+title: "Cycles and Period Doubling"
+textbook_chapters: [30]
+textbook_chapters_confidence: medium
+textbook_chapters_note: "Cycles and Period Doubling IS the bifurcation cascade (Ch 30, Part IX: Emergence). renderBifurcation() IS the period-doubling diagram — the visual realization of the route to chaos."
+---
+
 # HD-05: Cycles and Period Doubling
 
 ## Overview

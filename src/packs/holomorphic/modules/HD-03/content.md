@@ -1,3 +1,11 @@
+---
+module: HD-03
+title: "The Mandelbrot Set"
+textbook_chapters: [28]
+textbook_chapters_confidence: medium
+textbook_chapters_note: "The Mandelbrot Set IS emergent structure from iteration (Ch 28, Part IX: Emergence). renderMandelbrot() IS the parameter-space visualization of emergent classification: which c-values produce bounded vs escaping orbits."
+---
+
 # HD-03: The Mandelbrot Set
 
 ## Parameter Space

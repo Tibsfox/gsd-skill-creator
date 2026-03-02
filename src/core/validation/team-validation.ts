@@ -15,6 +15,9 @@ import {
   TEAM_TASK_STATUSES,
   BACKEND_TYPES,
   TEAM_MEMBER_MODELS,
+  TEAM_MANAGED_BY_OPTIONS,
+  TEAM_DURABILITY_OPTIONS,
+  TEAM_LIFECYCLE_STATES,
   type TeamConfig,
   type InboxMessage,
   type TeamValidationResult,
@@ -65,6 +68,9 @@ export const TeamConfigSchema = z
     leadAgentId: z.string().min(1, 'Lead agent ID is required'),
     createdAt: z.string().min(1, 'Creation timestamp is required'),
     members: z.array(TeamMemberSchema).min(1, 'Team must have at least one member'),
+    managedBy: z.enum(TEAM_MANAGED_BY_OPTIONS as unknown as [string, ...string[]]).default('manual'),
+    durability: z.enum(TEAM_DURABILITY_OPTIONS as unknown as [string, ...string[]]).default('persistent'),
+    lifecycleState: z.enum(TEAM_LIFECYCLE_STATES as unknown as [string, ...string[]]).default('ACTIVE'),
   })
   .passthrough();
 

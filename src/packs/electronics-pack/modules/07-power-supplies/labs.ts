@@ -316,7 +316,125 @@ const lab05: Lab = {
 };
 
 // ============================================================================
+// Lab 6: Buck-Boost Converter (m7-lab-06)
+// ============================================================================
+
+const lab06: Lab = {
+  id: 'm7-lab-06',
+  title: 'Buck-Boost Converter',
+  steps: [
+    {
+      instruction:
+        'Build a buck-boost converter circuit: 3.6V source (V1, nodes vin to 0) representing a mid-discharge Li-ion cell, a buck-boost regulator (REG1, topology=buck-boost, outputVoltage=3.3V, dropoutVoltage=0, nodes vin to vout), and a 100 ohm load resistor (R_load, nodes vout to 0).',
+      expected_observation:
+        'The output is a stable 3.3V from a 3.6V input. At this voltage, the converter operates near the crossover point between buck and boost modes.',
+      learn_note:
+        'A buck-boost converter can step voltage up OR down, making it ideal for Li-ion to 3.3V rails where the battery voltage (3.0-4.2V) crosses the target during discharge. -- H&H Ch.9 [@HH-Ch.9]',
+    },
+    {
+      instruction:
+        'Test at voltage extremes: change V1 to 4.2V (fully charged Li-ion) and verify output is still 3.3V. Then change V1 to 3.0V (depleted cell) and verify output remains 3.3V. The buck-boost handles both cases seamlessly.',
+      expected_observation:
+        'At 4.2V input: the converter operates in buck mode (stepping down), output = 3.3V. At 3.0V input: the converter operates in boost mode (stepping up), output = 3.3V. The output never drops even as the battery discharges.',
+      learn_note:
+        'The buck-boost topology eliminates the dead zone where a pure buck converter cannot regulate (when V_in approaches V_out). Real designs use four-switch buck-boost ICs like the TPS63000 series. -- H&H Ch.9 [@HH-Ch.9]',
+    },
+    {
+      instruction:
+        'Compare duty cycles across the input range: at 4.2V input (buck mode), D = V_out/V_in = 3.3/4.2 = 0.79. At 3.0V input (boost mode), D = 1 - V_in/V_out = 1 - 3.0/3.3 = 0.09 (but in boost mode). The efficiency typically dips at the crossover point where the converter switches between modes.',
+      expected_observation:
+        'The buck-boost converter seamlessly transitions between modes. Efficiency is typically 90-95% in pure buck or boost regions, dropping to 85-90% near the crossover point where both switches are active.',
+      learn_note:
+        'Modern four-switch buck-boost converters use synchronous rectification to minimize crossover losses. The controller monitors V_in vs V_out and smoothly adjusts the switching pattern through the transition region. -- H&H Ch.9 [@HH-Ch.9]',
+    },
+  ],
+  verify: () => {
+    // Test at three Li-ion battery voltages
+    const testVoltages = [4.2, 3.6, 3.0]; // full, mid, depleted
+
+    for (const vin of testVoltages) {
+      const components: Component[] = [
+        { id: 'V1', type: 'voltage-source', nodes: ['vin', '0'], voltage: vin } as VoltageSource,
+        {
+          id: 'REG1', type: 'regulator', topology: 'buck-boost',
+          outputVoltage: 3.3, dropoutVoltage: 0, nodes: ['vin', 'vout'],
+        } as Regulator,
+        { id: 'R_load', type: 'resistor', nodes: ['vout', '0'], resistance: 100 } as Resistor,
+      ];
+      const result = solveNonlinear(components);
+      if (!result.converged) return false;
+
+      const vOut = result.nodeVoltages.find((nv) => nv.node === 'vout');
+      if (!vOut) return false;
+      if (!withinTolerance(vOut.voltage, 3.3, 0.01)) return false;
+    }
+
+    return true;
+  },
+};
+
+// ============================================================================
+// Lab 7: Charge Pump Voltage Doubler (m7-lab-07)
+// ============================================================================
+
+const lab07: Lab = {
+  id: 'm7-lab-07',
+  title: 'Charge Pump Voltage Doubler',
+  steps: [
+    {
+      instruction:
+        'Model an ideal charge pump voltage doubler: Vin = 5V, ideal Vout = 2 * Vin = 10V. The charge pump uses a flying capacitor that charges to Vin in one phase, then stacks on top of Vin in the second phase, producing 2*Vin at the output.',
+      expected_observation:
+        'Ideal output voltage = 10V. The voltage doubler achieves 2x multiplication without an inductor -- just capacitors and switches (typically MOSFET transistors or diode switches).',
+      learn_note:
+        'Charge pumps trade current capability for simplicity. They use only capacitors and switches (no bulky inductors), making them ideal for low-current applications like RS-232 level shifters and EEPROM write voltages. -- H&H Ch.9 [@HH-Ch.9]',
+    },
+    {
+      instruction:
+        'Calculate real-world losses for a practical charge pump: Vin=5V, Iload=10mA, fsw=100kHz, Cfly=1uF (flying capacitor), Vdiode=0.3V (Schottky diodes). Capacitor voltage drop = Iload/(fsw*Cfly) = 0.010/(100e3*1e-6) = 0.1V. Diode drops = 2*0.3V = 0.6V. Real Vout = 10 - 0.1 - 0.6 = 9.3V.',
+      expected_observation:
+        'Real output drops from 10V ideal to approximately 9.3V. The two main loss mechanisms are: (1) capacitor ripple from charge/discharge cycles, proportional to load current, and (2) forward voltage drops in the switching diodes.',
+      learn_note:
+        'To minimize losses: use larger flying capacitors (reduce Vdrop_cap), higher switching frequency (same effect), and Schottky diodes with low Vf. MOSFET switches can replace diodes for even lower losses. -- H&H Ch.9 [@HH-Ch.9]',
+    },
+    {
+      instruction:
+        'Consider applications and current limitations: charge pumps are ideal for loads under 100mA. For higher currents, the flying capacitor must be impractically large. Common uses: MAX232 RS-232 driver (+/-10V from 5V), LCD bias generators, LED drivers, and FLASH memory write voltages.',
+      expected_observation:
+        'The charge pump is a niche but important topology. Its advantages (no inductor, low EMI, small PCB area) make it the right choice when current requirements are modest.',
+      learn_note:
+        'Charge pump variants include voltage inverters (-Vin from +Vin), fractional multipliers (1.5x, -0.5x), and Dickson multi-stage multipliers for higher ratios. The output impedance is approximately 1/(fsw*Cfly) per stage. -- H&H Ch.9 [@HH-Ch.9]',
+    },
+  ],
+  verify: () => {
+    // Mathematical verification -- no charge pump component in MNA
+    const Vin = 5;
+    const Iload = 0.010; // 10mA
+    const fsw = 100e3;   // 100kHz
+    const Cfly = 1e-6;   // 1uF
+    const Vdiode = 0.3;  // Schottky
+
+    // Ideal voltage doubler
+    const Vout_ideal = 2 * Vin;
+    if (!withinTolerance(Vout_ideal, 10, 0.001)) return false;
+
+    // Real losses
+    const Vdrop_cap = Iload / (fsw * Cfly);     // 0.1V
+    const Vdrop_diodes = 2 * Vdiode;             // 0.6V
+    const Vout_real = Vout_ideal - Vdrop_cap - Vdrop_diodes; // 9.3V
+
+    // Real output must be less than ideal
+    if (Vout_real >= Vout_ideal) return false;
+
+    // Real output should be approximately 9.3V
+    if (!withinTolerance(Vout_real, 9.3, 0.05)) return false;
+
+    return true;
+  },
+};
+
+// ============================================================================
 // Export all labs
 // ============================================================================
 
-export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05];
+export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05, lab06, lab07];

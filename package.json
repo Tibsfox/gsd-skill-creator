@@ -1,6 +1,6 @@
 {
   "name": "dynamic-skill-creator",
-  "version": "1.50.0",
+  "version": "1.58.0",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/cli.ts",
+    "lint": "eslint src/",
     "test": "vitest",
     "setup:claude": "node project-claude/install.cjs",
     "setup:claude:force": "node project-claude/install.cjs --force",
@@ -24,26 +25,35 @@
     "@modelcontextprotocol/sdk": "^1.26.0",
     "ajv": "^8.18.0",
     "ajv-formats": "^3.0.1",
+    "cheerio": "^1.2.0",
     "diff": "^8.0.3",
+    "fast-xml-parser": "^5.4.1",
     "gpt-tokenizer": "^3.4.0",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.1",
+    "jsonpath-plus": "^10.4.0",
     "marked": "^17.0.3",
     "modern-tar": "^0.7.3",
     "natural": "^8.1.0",
     "picocolors": "^1.1.1",
     "simple-statistics": "^7.8.8",
+    "socks": "^2.8.7",
+    "undici": "^6.23.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@tauri-apps/cli": "^2.0.0",
     "@types/diff": "^7.0.2",
     "@types/js-yaml": "^4.0.9",
     "@types/natural": "^5.1.5",
     "@types/node": "^20.0.0",
     "@vitest/coverage-v8": "^4.0.18",
+    "eslint": "^10.0.2",
+    "schema-dts": "^1.1.5",
     "tsx": "^4.21.0",
     "typescript": "^5.3.0",
+    "typescript-eslint": "^8.56.1",
     "vitest": "^4.0.18"
   }
 }

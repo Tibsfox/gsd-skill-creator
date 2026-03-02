@@ -132,7 +132,7 @@ export class EmbeddingCache {
    * @param skillName - Name of the skill
    * @param content - Current content to check against cached content hash
    */
-  get(skillName: string, content: string): EmbeddingVector | null {
+  get(skillName: string, content: string, method?: 'model' | 'heuristic'): EmbeddingVector | null {
     const contentHash = this.computeContentHash(content);
     const key = this.getCacheKey(skillName, contentHash);
     const entry = this.cache.entries[key];
@@ -143,6 +143,13 @@ export class EmbeddingCache {
 
     // Validate model version matches
     if (entry.modelVersion !== this.modelVersion) {
+      return null;
+    }
+
+    // Method check: prevent cross-method cache poisoning (QUAL-05)
+    // If caller specifies a method AND entry has a stored method AND they differ, treat as miss.
+    // Pre-migration entries (no method field) are treated as valid regardless of requested method.
+    if (method && entry.method && entry.method !== method) {
       return null;
     }
 
@@ -157,19 +164,26 @@ export class EmbeddingCache {
    * @param content - Content used to generate the embedding
    * @param embedding - The embedding vector to cache
    */
-  set(skillName: string, content: string, embedding: EmbeddingVector): void {
+  set(skillName: string, content: string, embedding: EmbeddingVector, method?: 'model' | 'heuristic'): void {
     const contentHash = this.computeContentHash(content);
     const key = this.getCacheKey(skillName, contentHash);
 
     // Remove old entries for this skill with different content hashes
     this.deleteBySkillName(skillName);
 
-    this.cache.entries[key] = {
+    const entry: CacheEntry = {
       embedding,
       modelVersion: this.modelVersion,
       contentHash,
       createdAt: new Date().toISOString(),
     };
+
+    // Store method if provided (QUAL-05: prevents cross-method cache poisoning)
+    if (method) {
+      entry.method = method;
+    }
+
+    this.cache.entries[key] = entry;
     this.dirty = true;
   }
 

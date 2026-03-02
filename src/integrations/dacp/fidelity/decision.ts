@@ -142,6 +142,14 @@ export function assessDataComplexity(
  * jumps from Level 0 to Level 3 (or vice versa), ensuring gradual
  * fidelity transitions.
  *
+ * SAFE-02 (DACP): Bounded fidelity change (max 1 level per cycle)
+ * Attack scenario: A single high-drift event triggers a multi-level
+ * fidelity drop (e.g., Level 3 to Level 0) in one cycle. This "cliff"
+ * behavior causes extreme scaffolding changes that confuse downstream
+ * consumers expecting incremental transitions.
+ * Consequence of absence: Sudden multi-level fidelity jumps produce
+ * unstable handoff scaffolding and unpredictable executor behavior.
+ *
  * @param current - The current fidelity level
  * @param proposed - The proposed new fidelity level
  * @returns The clamped fidelity level (differs by at most 1 from current)

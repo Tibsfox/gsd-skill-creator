@@ -302,6 +302,87 @@ describe('EmbeddingCache', () => {
     });
   });
 
+  describe('Method-aware caching (QUAL-05)', () => {
+    it('set with method=model, get with method=model returns embedding', () => {
+      const cache = new EmbeddingCache(modelVersion, testCachePath);
+      cache.set('my-skill', 'content', sampleEmbedding, 'model');
+      const result = cache.get('my-skill', 'content', 'model');
+      expect(result).toEqual(sampleEmbedding);
+    });
+
+    it('set with method=model, get with method=heuristic returns null (cross-method miss)', () => {
+      const cache = new EmbeddingCache(modelVersion, testCachePath);
+      cache.set('my-skill', 'content', sampleEmbedding, 'model');
+      const result = cache.get('my-skill', 'content', 'heuristic');
+      expect(result).toBeNull();
+    });
+
+    it('set with method=heuristic, get with method=model returns null (cross-method miss)', () => {
+      const cache = new EmbeddingCache(modelVersion, testCachePath);
+      cache.set('my-skill', 'content', sampleEmbedding, 'heuristic');
+      const result = cache.get('my-skill', 'content', 'model');
+      expect(result).toBeNull();
+    });
+
+    it('set with method=heuristic, get with method=heuristic returns embedding', () => {
+      const cache = new EmbeddingCache(modelVersion, testCachePath);
+      cache.set('my-skill', 'content', sampleEmbedding, 'heuristic');
+      const result = cache.get('my-skill', 'content', 'heuristic');
+      expect(result).toEqual(sampleEmbedding);
+    });
+
+    it('pre-migration entry (no method field) is valid for get with method=model', async () => {
+      // Write a cache entry without the method field (simulating pre-migration data)
+      const cacheData = {
+        version: '1.0',
+        modelId: 'Xenova/bge-small-en-v1.5',
+        entries: {} as Record<string, unknown>,
+      };
+      // Manually create a key matching the cache's internal format
+      const cache = new EmbeddingCache(modelVersion, testCachePath);
+      cache.set('legacy-skill', 'content', sampleEmbedding);
+      await cache.save();
+
+      // Read the file and strip the method field
+      const raw = JSON.parse(await readFile(testCachePath, 'utf-8'));
+      for (const key of Object.keys(raw.entries)) {
+        delete raw.entries[key].method;
+      }
+      await writeFile(testCachePath, JSON.stringify(raw, null, 2), 'utf-8');
+
+      // Reload and test - should return embedding gracefully
+      const cache2 = new EmbeddingCache(modelVersion, testCachePath);
+      await cache2.load();
+      const result = cache2.get('legacy-skill', 'content', 'model');
+      expect(result).toEqual(sampleEmbedding);
+    });
+
+    it('pre-migration entry (no method field) is valid for get with method=heuristic', async () => {
+      const cache = new EmbeddingCache(modelVersion, testCachePath);
+      cache.set('legacy-skill', 'content', sampleEmbedding);
+      await cache.save();
+
+      // Strip method field
+      const raw = JSON.parse(await readFile(testCachePath, 'utf-8'));
+      for (const key of Object.keys(raw.entries)) {
+        delete raw.entries[key].method;
+      }
+      await writeFile(testCachePath, JSON.stringify(raw, null, 2), 'utf-8');
+
+      const cache2 = new EmbeddingCache(modelVersion, testCachePath);
+      await cache2.load();
+      const result = cache2.get('legacy-skill', 'content', 'heuristic');
+      expect(result).toEqual(sampleEmbedding);
+    });
+
+    it('get without method parameter returns embedding regardless of stored method', () => {
+      const cache = new EmbeddingCache(modelVersion, testCachePath);
+      cache.set('my-skill', 'content', sampleEmbedding, 'model');
+      const result = cache.get('my-skill', 'content');
+      expect(result).toEqual(sampleEmbedding);
+    });
+  });
+
   describe('Version drift detection', () => {
     it('getWithVersionInfo() returns embedding with modelVersion metadata', () => {
       const cache = new EmbeddingCache('v1', testCachePath);

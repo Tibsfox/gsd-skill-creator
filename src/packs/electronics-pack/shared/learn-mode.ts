@@ -16,11 +16,21 @@ export enum DepthLevel {
   Mathematical = 3,
 }
 
+/** Self-assessment checkpoint linking a depth marker to an assessment question */
+export interface AssessmentCheckpoint {
+  /** Reference to an assessment.md question, e.g., "Q3" */
+  questionRef: string;
+  /** Topic description for the checkpoint */
+  topic: string;
+}
+
 /** A depth marker embedded in module content */
 export interface DepthMarker {
   level: DepthLevel;
   content: string;
   hhCitation: string; // e.g., "H&H 1.2.1" or "H&H p.42"
+  /** Optional self-assessment checkpoint linking this marker to an assessment question */
+  checkpoint?: AssessmentCheckpoint;
 }
 
 /** Learn mode configuration per module */
@@ -53,6 +63,7 @@ interface ChapterEntry {
 
 const HH_CHAPTER_MAP: ChapterEntry[] = [
   { ref: '1.2', chapter: 1, section: '2', topic: 'Voltage, current, resistance', modules: ['01-the-circuit'] },
+  { ref: '1.3', chapter: 1, section: '3', topic: 'Signals', modules: ['03-the-signal'] },
   { ref: '1.4', chapter: 1, section: '4', topic: 'Capacitors and AC circuits', modules: ['02-passive-components'] },
   { ref: '1.5', chapter: 1, section: '5', topic: 'Inductors and transformers', modules: ['02-passive-components'] },
   { ref: '1.6', chapter: 1, section: '6', topic: 'Diodes and diode circuits', modules: ['04-diodes'] },
@@ -171,6 +182,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 1.2 for the relationship between voltage, current, and resistance in linear circuits, including Kirchhoff\'s voltage and current laws (KVL/KCL) and the concept of conductance G.',
       hhCitation: 'H&H 1.2',
+      checkpoint: { questionRef: 'Q3', topic: 'Voltage divider analysis and loading' },
     },
     {
       level: DepthLevel.Mathematical,
@@ -195,6 +207,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 1.4 for capacitor behavior in AC circuits, RC time constants, and high-pass/low-pass filter configurations. Section 1.7 covers impedance and resonant circuits.',
       hhCitation: 'H&H 1.4',
+      checkpoint: { questionRef: 'Q2', topic: 'RC time constant and frequency response' },
     },
     {
       level: DepthLevel.Reference,
@@ -205,6 +218,26 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Mathematical,
       content: 'Capacitive impedance: Z_C = 1/(jwC). Inductive impedance: Z_L = jwL. RC time constant: tau = RC. Resonant frequency: f_0 = 1/(2*pi*sqrt(LC)). Quality factor: Q = f_0/BW = (1/R)*sqrt(L/C).',
       hhCitation: 'H&H 1.7',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'An inductor resists sudden changes in current by storing energy in its magnetic field. The RL time constant (inductance divided by resistance) determines how fast current builds -- after one time constant, current reaches about 63% of its final value.',
+      hhCitation: 'H&H 1.5',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'RL transient: I(t) = (V/R)*(1 - e^(-t*R/L)). Time constant: tau = L/R. Inductor voltage: V_L = L*dI/dt. Energy stored: E = (1/2)*L*I^2.',
+      hhCitation: 'H&H 1.5',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'A transformer uses magnetic coupling to transfer energy between coils. The voltage ratio equals the turns ratio: more turns means higher voltage.',
+      hhCitation: 'H&H 1.5',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'Transformer voltage ratio: V2/V1 = N2/N1. Impedance transformation: Z_reflected = (N1/N2)^2 * Z_load. Power conservation: V1*I1 = V2*I2 (ideal).',
+      hhCitation: 'H&H 1.5',
     },
   ],
 
@@ -224,11 +257,22 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 1.7 for Bode plot construction, impedance-based filter analysis, and the transition from time-domain to frequency-domain thinking. Section 8.11 covers noise spectral density and noise figure.',
       hhCitation: 'H&H 1.7',
+      checkpoint: { questionRef: 'Q3', topic: 'Noise and signal-to-noise ratio' },
     },
     {
       level: DepthLevel.Mathematical,
       content: 'Transfer function magnitude: |H(jw)| = V_out/V_in. Decibels: dB = 20*log10(|H|). Johnson noise voltage: V_n = sqrt(4*k*T*R*BW). SNR = signal_power/noise_power. First-order rolloff: -20dB/decade = -6dB/octave.',
       hhCitation: 'H&H 8.11',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'Signal sources produce waveforms -- sine, square, triangle -- each with different RMS values even at the same peak amplitude. The square wave has the highest RMS because it spends all its time at peak.',
+      hhCitation: 'H&H 1.3',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'Waveform RMS values for peak amplitude A: sine Vrms = A/sqrt(2), square Vrms = A, triangle Vrms = A/sqrt(3). Crest factor CF = Vpeak/Vrms: sine CF = sqrt(2), square CF = 1, triangle CF = sqrt(3).',
+      hhCitation: 'H&H 1.3',
     },
   ],
 
@@ -248,10 +292,21 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 1.6 for the diode I-V characteristic, rectifier circuits (half-wave, full-wave, bridge), Zener regulation, and the exponential diode equation.',
       hhCitation: 'H&H 1.6',
+      checkpoint: { questionRef: 'Q4', topic: 'Rectifier circuit analysis' },
     },
     {
       level: DepthLevel.Mathematical,
       content: 'Shockley diode equation: I = I_s * (exp(V/(n*V_T)) - 1), where V_T = kT/q ~ 26mV at room temperature, n ~ 1-2. Piecewise-linear model: I = (V - V_th)/R_on for V > V_th, else I = V/R_off.',
+      hhCitation: 'H&H 1.6',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'Schottky diodes switch thousands of times faster than standard silicon diodes because they have no minority carrier storage -- they are the first choice for high-frequency power supplies',
+      hhCitation: 'H&H 1.6',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 1.6 for comparison of diode types: standard silicon (1N400x), fast recovery (1N4148), Schottky (1N58xx), and their reverse recovery characteristics',
       hhCitation: 'H&H 1.6',
     },
   ],
@@ -272,11 +327,42 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H Ch.2 for BJT biasing, common-emitter amplifiers, current mirrors, and the Ebers-Moll model. Ch.3 covers FET types (JFET, MOSFET), transfer characteristics, and CMOS analog switches.',
       hhCitation: 'H&H Ch.2',
+      checkpoint: { questionRef: 'Q3', topic: 'Transistor biasing and operating point' },
     },
     {
       level: DepthLevel.Mathematical,
       content: 'BJT: I_C = beta * I_B, V_BE ~ 0.6V. Transconductance: g_m = I_C / V_T. Voltage gain: A_v = -g_m * R_C. MOSFET saturation: I_D = (1/2)*mu*C_ox*(W/L)*(V_GS - V_th)^2.',
       hhCitation: 'H&H Ch.2',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'A differential pair amplifies the difference between two inputs while ignoring signals common to both -- this is the front end of every op-amp',
+      hhCitation: 'H&H Ch.2',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'A JFET is a voltage-controlled resistor: the gate voltage squeezes the conducting channel. Zero gate voltage gives maximum current, negative gate voltage reduces it',
+      hhCitation: 'H&H Ch.3',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 2.3 for differential amplifier analysis including tail current sources, CMRR, and how transistor matching affects performance',
+      hhCitation: 'H&H Ch.2',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 3.1-3.2 for JFET drain characteristics, pinch-off voltage, and common-source/common-drain FET amplifier configurations',
+      hhCitation: 'H&H Ch.3',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'Differential pair gain: Ad = gm*Rc where gm = Ic/(2*Vt). Common-mode gain: Acm = -Rc/(2*Rtail). CMRR = Ad/Acm = gm*Rtail',
+      hhCitation: 'H&H Ch.2',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'JFET Shockley equation: Id = Idss*(1 - Vgs/Vp)^2. Transconductance: gm = 2*Idss/|Vp| * (1 - Vgs/Vp). Common-source gain: Av = -gm*Rd/(1 + gm*Rs)',
+      hhCitation: 'H&H Ch.3',
     },
   ],
 
@@ -296,10 +382,41 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H Ch.4 for the ideal op-amp model, inverting/non-inverting configurations, virtual ground concept, and feedback stability. Ch.6 covers active filter topologies (Sallen-Key, state-variable, biquad).',
       hhCitation: 'H&H Ch.4',
+      checkpoint: { questionRef: 'Q2', topic: 'Feedback configurations and gain' },
     },
     {
       level: DepthLevel.Mathematical,
       content: 'Inverting amplifier: V_out = -(R_f/R_in)*V_in. Non-inverting: V_out = (1 + R_f/R_in)*V_in. GBW product: A_v * f_-3dB = constant. Sallen-Key Q: Q = sqrt(C1*C2*R1*R2)/(C2*(R1+R2)).',
+      hhCitation: 'H&H Ch.4',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'A summing amplifier adds multiple input signals with adjustable weights -- changing one resistor changes one input\'s contribution without affecting the others',
+      hhCitation: 'H&H Ch.4',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'Every real op-amp has finite bandwidth, input offset voltage, and slew rate that limit its performance in high-speed or precision circuits',
+      hhCitation: 'H&H Ch.4',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 4.2 for inverting op-amp variations: summing amplifier, differentiator, and the virtual ground concept that makes them work',
+      hhCitation: 'H&H Ch.4',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 4.3 for op-amp non-idealities: gain-bandwidth product, slew rate, input offset voltage, bias current, and common-mode rejection ratio',
+      hhCitation: 'H&H Ch.4',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'Summing amplifier: Vout = -(Rf/R1*V1 + Rf/R2*V2 + ... + Rf/Rn*Vn). Differentiator: Vout = -Rf*C*dVin/dt. Integration: Vout = -(1/(Rf*C))*integral(Vin*dt)',
+      hhCitation: 'H&H Ch.4',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'GBW product: Av * f_3dB = constant. Slew rate limit: f_max = SR/(2*pi*Vpeak). Output offset from Vos: Vout_offset = Vos * (1 + Rf/Rin)',
       hhCitation: 'H&H Ch.4',
     },
   ],
@@ -320,10 +437,37 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H Ch.9 for linear regulator design (pass transistor, error amplifier, dropout), switching converter topologies (buck, boost, buck-boost), and thermal management.',
       hhCitation: 'H&H Ch.9',
+      checkpoint: { questionRef: 'Q4', topic: 'Regulator topology selection for variable-input applications' },
     },
     {
       level: DepthLevel.Mathematical,
       content: 'Linear regulator: P_dissipated = (V_in - V_out) * I_load. Buck converter: V_out = D * V_in, where D = duty cycle. Boost: V_out = V_in/(1-D). Efficiency: eta = P_out/P_in. Inductor ripple: delta_I = (V_in - V_out)*D/(L*f_sw).',
+      hhCitation: 'H&H Ch.9',
+    },
+    // Tier 3 depth markers (buck-boost, charge pump, PFC)
+    {
+      level: DepthLevel.Practical,
+      content: 'A buck-boost converter handles input voltages that swing above and below the output -- essential for Li-ion battery to 3.3V rails where the battery voltage crosses the target during discharge',
+      hhCitation: 'H&H Ch.9',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'Charge pumps use capacitors and switches to multiply voltage without an inductor -- smaller and cheaper than inductive converters but limited to low current applications',
+      hhCitation: 'H&H Ch.9',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 9.5 for power factor correction (PFC) circuits that shape the input current to match the voltage waveform, reducing harmonic distortion on AC mains and improving energy efficiency',
+      hhCitation: 'H&H Ch.9',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 9.7 for charge pump architectures including voltage doublers, inverters, and fractional converters, plus the tradeoff between output impedance and switching frequency',
+      hhCitation: 'H&H Ch.9',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'Buck-boost duty cycle: V_out = V_in * D/(1-D) for inverting topology, or D crossover between buck (D = V_out/V_in) and boost (D = 1 - V_in/V_out) modes. Charge pump output: V_out = N*V_in - I_load/(f_sw*C_fly) - N*V_diode for N-stage multiplier.',
       hhCitation: 'H&H Ch.9',
     },
   ],
@@ -344,10 +488,27 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 10.1 for Boolean algebra, truth tables, De Morgan\'s laws, and canonical forms (SOP/POS). Section 10.2 covers CMOS gate implementation, propagation delay, fan-out, and noise margins.',
       hhCitation: 'H&H 10.1',
+      checkpoint: { questionRef: 'Q3', topic: 'Logic family comparison and noise margins' },
     },
     {
       level: DepthLevel.Mathematical,
       content: 'Boolean identities: A + A\'B = A + B, (A+B)\' = A\'B\' (De Morgan). Propagation delay: t_pd = 0.7*R*C per stage. Dynamic power: P = C_L * V_DD^2 * f. NAND transistor count: 2N MOSFETs for N inputs.',
+      hhCitation: 'H&H 10.2',
+    },
+    // Tier 3 depth markers (MOSFET digital logic depth)
+    {
+      level: DepthLevel.Practical,
+      content: 'MOSFET digital gates come in NMOS-only and CMOS flavors -- CMOS uses complementary pairs to achieve near-zero static power, which is why billions of transistors can fit on a modern chip',
+      hhCitation: 'H&H 10.2',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 3.4 for MOSFET behavior in the digital domain: threshold voltage, noise margins, dynamic power dissipation, and why CMOS replaced NMOS for most digital logic',
+      hhCitation: 'H&H 10.2',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'CMOS dynamic power: P = C_load * V_DD^2 * f_clk * alpha, where alpha is the activity factor. Propagation delay: t_pd = 0.7 * (R_p * C_load), where R_p is the effective pull-up/pull-down resistance. Static power: P_static = I_leak * V_DD.',
       hhCitation: 'H&H 10.2',
     },
   ],
@@ -368,11 +529,38 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 10.3 for SR, JK, and D flip-flop operation and timing constraints (setup, hold, propagation). Sections 10.4-10.5 cover counters, shift registers, and finite state machine design.',
       hhCitation: 'H&H 10.3',
+      checkpoint: { questionRef: 'Q2', topic: 'Counter design and state encoding' },
     },
     {
       level: DepthLevel.Mathematical,
       content: 'Maximum clock frequency: f_max = 1/(t_cq + t_comb + t_setup). Ripple counter delay: t_total = N * t_pd. State encoding: log2(N) flip-flops for N states. Counter modulus: 2^n for n-bit binary counter.',
       hhCitation: 'H&H 10.4',
+    },
+    // Tier 3 depth markers (metastability, FIFO, memory)
+    {
+      level: DepthLevel.Practical,
+      content: 'Metastability is the digital equivalent of balancing a ball on a knife edge -- if the flip-flop input changes too close to the clock edge, the output can hover between 0 and 1 for an unpredictable time',
+      hhCitation: 'H&H 10.3-10.5',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'FIFOs (first-in-first-out buffers) connect subsystems running at different speeds -- the write side pushes data in, the read side pulls data out in the same order, with the FIFO absorbing speed mismatches',
+      hhCitation: 'H&H 10.3-10.5',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 10.4 for metastability analysis, MTBF calculations, and multi-stage synchronizer design for crossing clock domains safely',
+      hhCitation: 'H&H 10.3-10.5',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 10.5 for memory architectures including SRAM, DRAM, Flash, and FIFO organizations, plus bus protocols for connecting digital subsystems',
+      hhCitation: 'H&H 10.3-10.5',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'Metastability MTBF: MTBF = exp(t_resolve/tau) / (f_clk * f_data). Two-stage synchronizer: MTBF_2 = exp(2*t_resolve/tau) / (f_clk * f_data). DRAM refresh: t_refresh < t_retention (typically 64ms for 4K rows, so each row refreshed every 15.6us).',
+      hhCitation: 'H&H 10.3-10.5',
     },
   ],
 
@@ -392,10 +580,42 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H Ch.13 for ADC architectures (successive approximation, delta-sigma, flash), DAC topologies (R-2R ladder, current-steering), and quantization error analysis.',
       hhCitation: 'H&H Ch.13',
+      checkpoint: { questionRef: 'Q3', topic: 'Sampling, aliasing, and Nyquist criterion' },
     },
     {
       level: DepthLevel.Mathematical,
       content: 'Resolution: LSB = V_ref / 2^n. Quantization noise: SNR_q = 6.02*n + 1.76 dB. Nyquist criterion: f_sample >= 2*f_max. Oversampling gain: +3dB SNR per doubling of sample rate. ENOB = (SINAD - 1.76)/6.02.',
+      hhCitation: 'H&H Ch.13',
+    },
+    // Tier 3 depth markers (ENOB, precision converters, sample-and-hold)
+    {
+      level: DepthLevel.Practical,
+      content: 'ENOB (effective number of bits) tells the real story of converter quality -- a 16-bit ADC with noisy layout might only give 13 effective bits of resolution',
+      hhCitation: 'H&H Ch.13',
+    },
+    {
+      level: DepthLevel.Practical,
+      content: 'A sample-and-hold circuit freezes the input voltage on a capacitor so the ADC can take its time converting -- without it, the input could change during conversion and corrupt the result',
+      hhCitation: 'H&H Ch.13',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 5.3 for precision converter techniques including auto-zero amplifiers, chopper stabilization, and multi-slope integration that achieve resolution beyond what quantization noise alone would predict',
+      hhCitation: 'H&H Ch.13',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 13.4 for converter specifications: INL, DNL, SFDR, SINAD, ENOB, and how to interpret datasheets for ADC and DAC selection',
+      hhCitation: 'H&H Ch.13',
+    },
+    {
+      level: DepthLevel.Reference,
+      content: 'See H&H 13.6 for sample-and-hold circuits, aperture jitter, droop rate, acquisition time, and the critical role of the hold capacitor in converter accuracy',
+      hhCitation: 'H&H Ch.13',
+    },
+    {
+      level: DepthLevel.Mathematical,
+      content: 'ENOB = (SINAD - 1.76) / 6.02. Ideal SNR_q = 6.02*N + 1.76 dB. S/H droop: V_droop = I_leak * T_hold / C_hold. Acquisition time: T_acq = -(R_on * C_hold) * ln(epsilon), where epsilon = V_error/V_step.',
       hhCitation: 'H&H Ch.13',
     },
   ],
@@ -416,6 +636,7 @@ export const MODULE_MARKERS: Record<string, DepthMarker[]> = {
       level: DepthLevel.Reference,
       content: 'See H&H 13.5 for FIR and IIR filter design, the discrete Fourier transform, windowing functions, and the relationship between analog and digital filter specifications.',
       hhCitation: 'H&H 13.5',
+      checkpoint: { questionRef: 'Q2', topic: 'FIR filter design and frequency response' },
     },
     {
       level: DepthLevel.Mathematical,

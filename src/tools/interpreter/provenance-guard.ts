@@ -44,6 +44,13 @@ const SEMVER_REGEX = /^\d+\.\d+\.\d+/;
 /**
  * Validate provenance for a batch of scripts.
  *
+ * SAFE-06 (DACP): Script provenance enforcement
+ * Attack scenario: A bundle creator omits source_skill to hide the origin
+ * of a script, bypassing attribution and audit trails. Without a non-empty
+ * source_skill, there is no chain of custody for the script content.
+ * Consequence of absence: Unattributed scripts could inject behavior
+ * without traceable origin, defeating the provenance model entirely.
+ *
  * For each script:
  * 1. Check source_skill is non-empty (SAFE-06)
  * 2. Check source_skill exists in provenance.skill_versions

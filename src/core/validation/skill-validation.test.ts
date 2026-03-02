@@ -7,6 +7,8 @@ import {
   validateDescriptionQuality,
   SkillInputSchema,
   SkillMetadataSchema,
+  SkillNameSchema,
+  GsdExtensionSchema,
 } from './skill-validation.js';
 import { validateSkillName, OFFICIAL_NAME_PATTERN } from '../types/skill.js';
 
@@ -385,6 +387,67 @@ describe('Description Quality Validation', () => {
       expect(result.hasUseWhenClause).toBe(true);
       expect(result.qualityScore).toBeGreaterThanOrEqual(0.8);
       expect(result.hasActivationTriggers).toBe(true);
+    });
+  });
+});
+
+describe('Schema Unification: OfficialSkillNameSchema', () => {
+  describe('SkillInputSchema rejects legacy-permissive names', () => {
+    it('should reject name with leading hyphen', () => {
+      const result = SkillInputSchema.safeParse({ name: '-leading-hyphen', description: 'test' });
+      expect(result.success).toBe(false);
+    });
+
+    it('should reject name with trailing hyphen', () => {
+      const result = SkillInputSchema.safeParse({ name: 'trailing-hyphen-', description: 'test' });
+      expect(result.success).toBe(false);
+    });
+
+    it('should reject name with consecutive hyphens', () => {
+      const result = SkillInputSchema.safeParse({ name: 'consecutive--hyphens', description: 'test' });
+      expect(result.success).toBe(false);
+    });
+
+    it('should still accept valid names', () => {
+      const result = SkillInputSchema.safeParse({ name: 'valid-skill', description: 'test' });
+      expect(result.success).toBe(true);
+    });
+  });
+
+  describe('SkillMetadataSchema rejects legacy-permissive names', () => {
+    it('should reject name with leading hyphen', () => {
+      const result = SkillMetadataSchema.safeParse({ name: '-leading-hyphen', description: 'test' });
+      expect(result.success).toBe(false);
+    });
+
+    it('should reject name with trailing hyphen', () => {
+      const result = SkillMetadataSchema.safeParse({ name: 'trailing-hyphen-', description: 'test' });
+      expect(result.success).toBe(false);
+    });
+
+    it('should reject name with consecutive hyphens', () => {
+      const result = SkillMetadataSchema.safeParse({ name: 'consecutive--hyphens', description: 'test' });
+      expect(result.success).toBe(false);
+    });
+
+    it('should still accept valid names', () => {
+      const result = SkillMetadataSchema.safeParse({ name: 'valid-skill', description: 'test' });
+      expect(result.success).toBe(true);
+    });
+  });
+
+  describe('GsdExtensionSchema rejects legacy-permissive names in extends', () => {
+    it('should reject extends with leading hyphen', () => {
+      const result = GsdExtensionSchema.safeParse({ extends: '-bad-name' });
+      expect(result.success).toBe(false);
+    });
+  });
+
+  describe('SkillNameSchema backward compat', () => {
+    it('should still export SkillNameSchema (legacy)', () => {
+      expect(SkillNameSchema).toBeDefined();
+      // Legacy schema still validates permissive names
+      expect(SkillNameSchema.safeParse('valid-name').success).toBe(true);
     });
   });
 });

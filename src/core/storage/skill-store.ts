@@ -3,7 +3,7 @@ import { readFile, writeFile, mkdir, readdir, stat, unlink, rm, chmod } from 'fs
 import { join, dirname, resolve } from 'path';
 import { Skill, SkillMetadata, validateSkillMetadata } from '../types/skill.js';
 import { validateSkillNameStrict, suggestFixedName, validateReservedName, SkillMetadataSchema } from '../validation/skill-validation.js';
-import { BudgetValidator } from '../validation/budget-validation.js';
+import { BudgetValidator, BudgetExceededError } from '../validation/budget-validation.js';
 import {
   getExtension,
   isLegacyFormat,
@@ -90,6 +90,14 @@ function normalizeForWrite(metadata: SkillMetadata): OfficialSkillMetadata {
 
 export class SkillStore {
   constructor(private skillsDir: string = '.claude/skills') {}
+
+  /**
+   * Get the skills directory path.
+   * Public API replacing the bracket-notation hack in SkillGenerator (QUAL-06).
+   */
+  getSkillsDir(): string {
+    return this.skillsDir;
+  }
 
   /**
    * Validate that a name is safe for filesystem use (no traversal).
@@ -206,11 +214,7 @@ export class SkillStore {
       const budgetCheck = budgetValidator.checkSingleSkill(content.length);
 
       if (budgetCheck.severity === 'error') {
-        console.warn(
-          `Warning: Skill "${skillName}" exceeds character budget ` +
-          `(${budgetCheck.charCount.toLocaleString()} / ${budgetCheck.budget.toLocaleString()} chars). ` +
-          `This skill may be hidden by Claude Code.`
-        );
+        throw new BudgetExceededError(skillName, budgetCheck);
       }
     }
 
@@ -334,11 +338,7 @@ export class SkillStore {
       const budgetCheck = budgetValidator.checkSingleSkill(content.length);
 
       if (budgetCheck.severity === 'error') {
-        console.warn(
-          `Warning: Skill "${skillName}" exceeds character budget ` +
-          `(${budgetCheck.charCount.toLocaleString()} / ${budgetCheck.budget.toLocaleString()} chars). ` +
-          `This skill may be hidden by Claude Code.`
-        );
+        throw new BudgetExceededError(skillName, budgetCheck);
       }
     }
 
@@ -609,5 +609,62 @@ export class SkillStore {
     }
 
     return false;
+  }
+
+  /**
+   * Migrate all legacy flat-file skills to subdirectory format.
+   *
+   * Converts .claude/skills/name.md to .claude/skills/name/SKILL.md.
+   * Idempotent -- safe to call on every startup. Uses error isolation
+   * so one skill failure does not block others.
+   *
+   * Should be called at startup, not per-read, to avoid concurrent
+   * write hazards under parallel test workers.
+   *
+   * @returns Migration report with migrated/skipped/errors counts
+   */
+  async migrateAll(): Promise<{ migrated: number; skipped: number; errors: string[] }> {
+    const report = { migrated: 0, skipped: 0, errors: [] as string[] };
+
+    const skills = await this.listWithFormat();
+
+    for (const skill of skills) {
+      if (skill.format === 'current') {
+        report.skipped++;
+        continue;
+      }
+
+      // Legacy format -- migrate
+      try {
+        const targetDir = join(this.skillsDir, skill.name);
+        const targetPath = join(targetDir, 'SKILL.md');
+
+        // Check if target already exists (edge case: both legacy and current exist)
+        try {
+          await stat(targetPath);
+          // Target exists -- skip, don't overwrite
+          report.skipped++;
+          continue;
+        } catch {
+          // Target does not exist -- proceed with migration
+        }
+
+        // Read legacy content
+        const content = await readFile(skill.path, 'utf-8');
+
+        // Create subdirectory and write
+        await mkdir(targetDir, { recursive: true });
+        await writeFile(targetPath, content, 'utf-8');
+
+        // Delete legacy file only after successful write
+        await unlink(skill.path);
+
+        report.migrated++;
+      } catch (err) {
+        report.errors.push(`${skill.name}: ${(err as Error).message}`);
+      }
+    }
+
+    return report;
   }
 }

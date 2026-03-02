@@ -36,7 +36,9 @@ export const TerminalConfigSchema = z.object({
   /** URL base path for Wetty (must start with /). Default: '/terminal'. */
   base_path: z.string().min(1).regex(/^\//, 'base_path must start with /').default('/terminal'),
 
-  /** Authentication mode. Default: 'none'. Extensible to ['none', 'token'] later. */
+  /** @justification Type: Accepted heuristic. Single-value 'none' enum is an
+   * extensibility point for future auth modes (token, SSH). Currently 'none'
+   * because the terminal runs localhost-only behind the dashboard's own access. */
   auth_mode: z.enum(['none']).default('none'),
 
   /** Terminal color theme. Default: 'dark'. */

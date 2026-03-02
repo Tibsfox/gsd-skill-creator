@@ -55,6 +55,10 @@ export interface PositionStorePort {
 // ============================================================================
 
 /**
+ * @justification Type: Accepted heuristic. Mirrors DEFAULT_BOUNDED_CONFIG
+ * values for constraint validation. See src/types/learning.ts for per-parameter rationale.
+ * @see src/types/learning.ts DEFAULT_BOUNDED_CONFIG
+ *
  * Mapping of existing bounded learning constraints plus angular velocity
  * parameters. Preserves minCorrections=3, cooldownDays=7, maxContentChange=20%
  * from the existing bounded learning config.

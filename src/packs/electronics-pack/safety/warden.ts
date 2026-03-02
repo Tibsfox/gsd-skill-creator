@@ -8,6 +8,32 @@
  *
  * All safety messages use positive framing — no negative/prohibitive language.
  * Professional context detection streamlines access for experienced users.
+ *
+ * SAFE-05 (EP): Positive framing for safety messages
+ * Attack scenario: A safety message uses prohibitive language ("do not connect
+ * to mains voltage") that triggers defensive reasoning, causing the user to
+ * dismiss or work around the safety check rather than engage with it.
+ * Consequence of absence: Safety messages produce avoidance behavior,
+ * reducing actual safety compliance.
+ *
+ * SAFE-06 (EP): Professional context detection
+ * Attack scenario: An experienced engineer is blocked by basic safety gates
+ * designed for novices. Frustration causes them to misrepresent their context
+ * or bypass the system entirely.
+ * Consequence of absence: Expert users disengage from the safety system,
+ * reducing compliance across the experienced-user population.
+ *
+ * SAFE-07 (EP): Safety assessment gate — see safety-assessments/assessments.ts
+ * Assessment completion required before hazardous-voltage module access.
+ *
+ * SAFE-08 (EP): Voltage escalation to more restrictive mode
+ * Attack scenario: A user accesses a low-risk module (e.g., annotate-mode)
+ * while specifying a voltage that falls in a hazardous range. Without
+ * escalation, the warden applies the module's default (lax) mode and
+ * allows access that should require assessment.
+ * Consequence of absence: Voltage-based hazard classification is ignored
+ * when module mode is more permissive, allowing unsafe voltage work
+ * without required safety gates.
  */
 
 /** Safety operating modes */
@@ -267,6 +293,8 @@ export function checkSafety(
 
   if (voltage !== undefined) {
     voltageRange = classifyVoltage(voltage);
+    // SAFE-08 (EP): Escalate to more restrictive mode when voltage classification
+    // exceeds module mode. See module JSDoc for threat model.
     // Escalate to the more restrictive mode
     if (MODE_SEVERITY[voltageRange.mode] > MODE_SEVERITY[effectiveMode]) {
       effectiveMode = voltageRange.mode;

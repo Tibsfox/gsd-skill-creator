@@ -36,6 +36,14 @@ export interface CostWeights {
 
 // === Default Weights ===
 
+/**
+ * @justification Type: Accepted heuristic
+ * Default cost weights are all 1.0 (equal contribution) so the path finder
+ * starts with no bias toward any cost dimension. Users override via
+ * CostWeights to emphasize edge type cost, domain distance, or abstraction
+ * jump penalty depending on their traversal goal. Equal defaults ensure
+ * predictable baseline behavior for testing and debugging.
+ */
 const DEFAULT_WEIGHTS: CostWeights = {
   edgeTypeWeight: 1.0,
   domainDistanceWeight: 1.0,
@@ -44,6 +52,18 @@ const DEFAULT_WEIGHTS: CostWeights = {
 
 // === Edge Type Cost Map ===
 
+/**
+ * @justification Type: Accepted heuristic
+ * 6 edge types model dependency relationship costs for DAG traversal:
+ * - requires/equivalent (1.0): Direct dependency or alias -- cheapest path
+ * - specializes/generalizes (2.0): Abstraction traversal costs 2x because
+ *   crossing abstraction levels introduces impedance mismatch
+ * - applies (3.0): Application of a concept to a domain is a larger conceptual leap
+ * - motivates (4.0): Motivational links are the weakest coupling -- highest cost
+ *   because they represent "inspiration" rather than direct dependency
+ * Cost values encode traversal preference: lower cost = preferred path during
+ * Dijkstra shortest-path resolution.
+ */
 const EDGE_TYPE_COSTS: Record<DependencyType, number> = {
   requires: 1.0,
   equivalent: 1.0,

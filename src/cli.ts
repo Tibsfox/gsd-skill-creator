@@ -1097,6 +1097,14 @@ async function main() {
           break;
         }
 
+        case 'dissolve':
+        case 'd': {
+          const { teamDissolveCommand } = await import('./cli/commands/team-dissolve.js');
+          const exitCode = await teamDissolveCommand(subArgs);
+          if (exitCode !== 0) process.exit(exitCode);
+          break;
+        }
+
         default:
           showTeamHelp();
       }
@@ -1155,6 +1163,30 @@ async function main() {
     case 'bd': {
       const { bundleCommand } = await import('./tools/cli/commands/bundle.js');
       const exitCode = await bundleCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'site':
+    case 'st': {
+      const { siteCommand } = await import('./cli/commands/site.js');
+      const exitCode = await siteCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'curl':
+    case 'cu': {
+      const { curlCommand } = await import('./cli/commands/curl.js');
+      const exitCode = await curlCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'web':
+    case 'we': {
+      const { webCommand } = await import('./cli/commands/web.js');
+      const exitCode = await webCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
     }
@@ -1506,6 +1538,7 @@ Commands:
   spawn, sp     Check team readiness (agent resolution)
   status, s     Show team details and validation summary
   estimate, e   Show projected token usage and cost
+  dissolve, d   Dissolve a team (lifecycle tracking)
 
 Examples:
   skill-creator team create                    Interactive team creation

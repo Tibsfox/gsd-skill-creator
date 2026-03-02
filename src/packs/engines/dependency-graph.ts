@@ -234,6 +234,14 @@ export function buildGraph(
     }
   }
 
+  // SAFE-02 (DACP): Referential integrity in dependency graph
+  // Attack scenario: A dependency JSON file references a primitive ID that
+  // does not exist in any domain file. If allowed, downstream consumers
+  // (path-finder, composition engine) silently operate on phantom nodes,
+  // producing structurally invalid composition paths.
+  // Consequence of absence: Phantom node references cause silent data
+  // corruption in composition paths with no error at the boundary.
+
   // Step 3: Referential integrity check (SAFE-02)
   const integrityErrors: GraphBuildError[] = [];
 
@@ -265,6 +273,13 @@ export function buildGraph(
     const existing = adjacencyList.get(edge.source)!;
     existing.push(edge);
   }
+
+  // SAFE-01 (DACP): DAG cycle detection
+  // Attack scenario: A circular dependency is introduced between primitives
+  // (A requires B, B requires C, C requires A). Topological sort never
+  // terminates; composition paths loop infinitely.
+  // Consequence of absence: Infinite loop / stack overflow in all graph
+  // traversal operations (path finding, topological sort, reachability).
 
   // Step 4: Cycle detection via Kahn's algorithm (SAFE-01)
   //

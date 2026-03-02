@@ -933,6 +933,89 @@ describe('validateInboxMessage', () => {
   });
 });
 
+// ============================================================================
+// TeamConfigSchema Lifecycle Fields (507-01)
+// ============================================================================
+
+describe('TeamConfigSchema - lifecycle fields (507-01)', () => {
+  const validMember = { agentId: 'agent-1', name: 'Alice' };
+  const minimalConfig = {
+    name: 'my-team',
+    leadAgentId: 'agent-1',
+    createdAt: '2026-01-15T10:00:00Z',
+    members: [validMember],
+  };
+
+  it('should default managedBy to manual when not provided', () => {
+    const result = TeamConfigSchema.safeParse(minimalConfig);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.managedBy).toBe('manual');
+    }
+  });
+
+  it('should default durability to persistent when not provided', () => {
+    const result = TeamConfigSchema.safeParse(minimalConfig);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.durability).toBe('persistent');
+    }
+  });
+
+  it('should default lifecycleState to ACTIVE when not provided', () => {
+    const result = TeamConfigSchema.safeParse(minimalConfig);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.lifecycleState).toBe('ACTIVE');
+    }
+  });
+
+  it('should preserve managedBy=auto when provided', () => {
+    const result = TeamConfigSchema.safeParse({ ...minimalConfig, managedBy: 'auto' });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.managedBy).toBe('auto');
+    }
+  });
+
+  it('should preserve durability=ephemeral when provided', () => {
+    const result = TeamConfigSchema.safeParse({ ...minimalConfig, durability: 'ephemeral' });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.durability).toBe('ephemeral');
+    }
+  });
+
+  it('should preserve lifecycleState=FORMING when provided', () => {
+    const result = TeamConfigSchema.safeParse({ ...minimalConfig, lifecycleState: 'FORMING' });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.lifecycleState).toBe('FORMING');
+    }
+  });
+
+  it('should reject invalid managedBy value', () => {
+    const result = TeamConfigSchema.safeParse({ ...minimalConfig, managedBy: 'unknown' });
+    expect(result.success).toBe(false);
+  });
+
+  it('should reject invalid durability value', () => {
+    const result = TeamConfigSchema.safeParse({ ...minimalConfig, durability: 'temporary' });
+    expect(result.success).toBe(false);
+  });
+
+  it('should reject invalid lifecycleState value', () => {
+    const result = TeamConfigSchema.safeParse({ ...minimalConfig, lifecycleState: 'INVALID' });
+    expect(result.success).toBe(false);
+  });
+
+  it('should pass validateTeamConfig for pre-507 configs (no new fields)', () => {
+    const result = validateTeamConfig(minimalConfig);
+    expect(result.valid).toBe(true);
+    expect(result.errors).toEqual([]);
+  });
+});
+
 describe('Type constants - router and map-reduce', () => {
   it('should include router in TEAM_TOPOLOGIES', () => {
     expect(TEAM_TOPOLOGIES).toContain('router');

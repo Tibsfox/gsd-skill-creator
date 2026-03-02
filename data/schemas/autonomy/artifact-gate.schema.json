@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd.tools/schemas/autonomy/artifact-gate.schema.json",
+  "description": "Artifact gate configuration: defines verification gates for autonomous milestone execution, organized by gate type (per_subversion, checkpoint, half_transition, graduation, summary).",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Gate configuration schema version"
+    },
+    "milestone": {
+      "type": "string",
+      "description": "Milestone identifier this gate config applies to"
+    },
+    "milestone_type": {
+      "type": "string",
+      "enum": [
+        "pedagogical",
+        "implementation",
+        "validation",
+        "integration"
+      ],
+      "description": "Type of milestone for gate template selection"
+    },
+    "gates": {
+      "type": "object",
+      "description": "Gate definitions organized by gate type",
+      "properties": {
+        "per_subversion": {
+          "type": "array",
+          "description": "Gates that run after every subversion",
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/gate_definition"
+          }
+        },
+        "checkpoint": {
+          "type": "array",
+          "description": "Gates that run at checkpoint intervals",
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/gate_definition"
+          }
+        },
+        "half_transition": {
+          "type": "array",
+          "description": "Gates that run at the midpoint",
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/gate_definition"
+          }
+        },
+        "graduation": {
+          "type": "array",
+          "description": "Gates that run at final completion",
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/gate_definition"
+          }
+        },
+        "summary": {
+          "type": "array",
+          "description": "Gates that run for synthesis/summary documents",
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/gate_definition"
+          }
+        }
+      },
+      "required": [
+        "per_subversion",
+        "checkpoint",
+        "half_transition",
+        "graduation",
+        "summary"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "version",
+    "milestone",
+    "milestone_type",
+    "gates"
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "gate_definition": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique name for this gate"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of what this gate validates"
+        },
+        "path_pattern": {
+          "type": "string",
+          "description": "Glob or template pattern for the artifact path"
+        },
+        "min_size_bytes": {
+          "type": "number",
+          "description": "Minimum file size in bytes for the artifact to pass"
+        },
+        "blocking": {
+          "type": "boolean",
+          "description": "Whether a gate failure blocks continued execution"
+        },
+        "content_checks": {
+          "type": "array",
+          "description": "Content checks to run against the artifact",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pattern": {
+                "type": "string",
+                "description": "Regex pattern to match against file content"
+              },
+              "required": {
+                "type": "boolean",
+                "description": "Whether this check must pass"
+              },
+              "description": {
+                "type": "string",
+                "description": "Human-readable description of what this check validates"
+              }
+            },
+            "required": [
+              "pattern",
+              "required"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "applies_when": {
+          "type": "string",
+          "description": "Optional condition expression for when this gate applies"
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "path_pattern",
+        "min_size_bytes",
+        "blocking",
+        "content_checks"
+      ],
+      "additionalProperties": true
+    }
+  }
+}

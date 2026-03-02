@@ -17,7 +17,16 @@ import { CRITICAL_PATTERN_IDS } from './trust-types.js';
 /** Trust levels in the decay chain (session is most restrictive, 90-day is most permissive). */
 export type TrustLevel = 'session' | '7-day' | '30-day' | '90-day';
 
-/** All trust levels as a const array for runtime use. */
+/**
+ * All trust levels as a const array for runtime use.
+ *
+ * @justification Type: Accepted heuristic
+ * Trust decay tiers model credential freshness across temporal windows:
+ * session (current), 7-day (active use), 30-day (recent), 90-day (stale).
+ * Windows align with standard security audit cadences. Trust levels decrease
+ * with age because older credentials have higher exposure risk. Four tiers
+ * provide sufficient granularity without over-complicating the promotion logic.
+ */
 export const TRUST_LEVELS: readonly TrustLevel[] = [
   'session',
   '7-day',
@@ -25,7 +34,15 @@ export const TRUST_LEVELS: readonly TrustLevel[] = [
   '90-day',
 ] as const;
 
-/** Duration in milliseconds for each trust level. */
+/**
+ * Duration in milliseconds for each trust level.
+ *
+ * @justification Type: Accepted heuristic
+ * Duration windows: session=0 (immediate), 7d (active use), 30d (recent), 90d (stale).
+ * These align with common security audit cadences (weekly review, monthly compliance,
+ * quarterly rotation). The 0ms session duration means the caller manages session
+ * lifecycle explicitly rather than relying on a timer.
+ */
 export const TRUST_DURATIONS: Record<TrustLevel, number> = {
   session: 0, // Expires at end of session (caller manages session lifecycle)
   '7-day': 7 * 24 * 60 * 60 * 1000,

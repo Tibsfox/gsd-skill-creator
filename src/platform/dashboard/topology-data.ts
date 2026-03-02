@@ -35,7 +35,10 @@ export interface TopologySource {
 // Constants
 // ============================================================================
 
-/** Maximum visible nodes before collapse. */
+/** @justification Type: Accepted heuristic. 12 nodes is the maximum that
+ * renders legibly in the dashboard's fixed-width topology panel without
+ * overlap or label truncation. Beyond 12, the graph collapses to a summary view.
+ * @see src/dashboard/topology-renderer.ts for rendering implementation */
 const MAX_VISIBLE_NODES = 12;
 
 /** Default viewBox dimensions. */
