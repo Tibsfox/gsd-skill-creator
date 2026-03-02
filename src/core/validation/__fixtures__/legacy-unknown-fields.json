@@ -1,0 +1,8 @@
+{
+  "name": "unknown-fields-skill",
+  "description": "Skill with fields from other tools that should be preserved.",
+  "custom-tool-field": "preserved-value",
+  "another-extension": { "nested": true, "count": 42 },
+  "license": "MIT",
+  "compatibility": "Claude Code v1.0+"
+}

@@ -35,6 +35,8 @@ const CONTENT_FILES = [
   'packs/kung-fu-cinema.md',
   'skills/skill-creator.md',
   'bibliography.md',
+  'releases/index.md',
+  'docs/index.md',
 ];
 
 describe('Sample Content', () => {
@@ -85,5 +87,44 @@ describe('Sample Content', () => {
       const count = wordCount(body);
       expect(count, `${file} has only ${count} words (need 100+)`).toBeGreaterThanOrEqual(100);
     }
+  });
+
+  it('listing pages use page template and have nav_section', () => {
+    const listingPages = [
+      { file: 'releases/index.md', section: 'releases' },
+      { file: 'docs/index.md', section: 'docs' },
+    ];
+    for (const { file, section } of listingPages) {
+      const raw = readFileSync(join(CONTENT_DIR, file), 'utf-8');
+      const { frontmatter } = parseFrontmatter(raw);
+      expect(frontmatter.template, `${file} should use page template`).toBe('page');
+      expect(frontmatter.nav_section, `${file} should have nav_section=${section}`).toBe(section);
+    }
+  });
+});
+
+describe('WordPress Migration Readiness', () => {
+  it('migration module exports migrateAllContent function', async () => {
+    const { migrateAllContent } = await import('../../src/site/wordpress/index');
+    expect(typeof migrateAllContent).toBe('function');
+  });
+
+  it('MigrateResult interface has required fields', async () => {
+    const { migrateAllContent } = await import('../../src/site/wordpress/index');
+    const mockAdapter = {
+      async fetchPosts() { return []; },
+      async fetchPages() { return []; },
+    };
+    const result = await migrateAllContent(mockAdapter, '/tmp/test', {
+      writeFn: async () => {},
+    });
+    expect(result).toHaveProperty('migrated');
+    expect(result).toHaveProperty('skipped');
+    expect(result).toHaveProperty('files');
+  });
+
+  it('releases/ and docs/ listing pages exist for migrated content', () => {
+    expect(existsSync(join(CONTENT_DIR, 'releases/index.md'))).toBe(true);
+    expect(existsSync(join(CONTENT_DIR, 'docs/index.md'))).toBe(true);
   });
 });

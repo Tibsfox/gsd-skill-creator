@@ -144,11 +144,10 @@ export class SkillGenerator {
   }
 
   /**
-   * Get the skills directory from the store.
-   * Accesses the private skillsDir field via bracket notation.
+   * Get the skills directory from the store via public API (QUAL-06).
    */
   private getSkillsDir(): string {
-    return (this.skillStore as unknown as { skillsDir: string }).skillsDir;
+    return this.skillStore.getSkillsDir();
   }
 
   /**
@@ -189,6 +188,8 @@ export class SkillGenerator {
    */
   private generateBody(candidate: SkillCandidate): string {
     const evidence = this.formatEvidence(candidate.evidence);
+    const guidelines = this.generateGuidelines(candidate);
+    const examples = this.generateExamples(candidate);
 
     let body = `# ${candidate.suggestedName}
 
@@ -204,21 +205,13 @@ ${evidence}
 
 ## Guidelines
 
-<!-- TODO: Add specific guidelines for this pattern -->
-
 When working with ${candidate.pattern}:
 
-1. [Add step 1]
-2. [Add step 2]
-3. [Add step 3]
+${guidelines}
 
 ## Examples
 
-<!-- TODO: Add examples based on your workflow -->
-
-\`\`\`
-# Example usage
-\`\`\`
+${examples}
 
 ---
 *Generated from pattern detection. Edit this skill to customize for your workflow.*
@@ -228,6 +221,86 @@ When working with ${candidate.pattern}:
     body = injectGsdReferences(body, candidate.suggestedDescription, this.gsdInstalled);
 
     return body;
+  }
+
+  /**
+   * Generate evidence-derived guidelines based on candidate type and data.
+   * Replaces static TODO placeholders with contextual content.
+   */
+  private generateGuidelines(candidate: SkillCandidate): string {
+    const { evidence, pattern, type } = candidate;
+    const lines: string[] = [];
+
+    // Tool-related guidelines
+    if (evidence.coOccurringTools.length > 0) {
+      const toolList = evidence.coOccurringTools.slice(0, 3); // @justification Type 6: UI display limit (top 3 tools)
+      for (const tool of toolList) {
+        lines.push(`- Use ${tool} when working with ${pattern}`);
+      }
+    }
+
+    // File-related guidelines based on type
+    if (evidence.coOccurringFiles.length > 0) {
+      const fileNames = evidence.coOccurringFiles
+        .slice(0, 3) // @justification Type 6: UI display limit (top 3 files)
+        .map(f => f.split('/').pop());
+
+      if (type === 'file') {
+        lines.push(`- Check related files: ${fileNames.join(', ')}`);
+      } else {
+        lines.push(`- Review ${fileNames.join(', ')} for related changes`);
+      }
+    }
+
+    // Frequency insight
+    lines.push(`- Pattern observed in ${evidence.sessionIds.length} session(s)`);
+
+    // Fallback for sparse evidence
+    if (evidence.coOccurringTools.length === 0 && evidence.coOccurringFiles.length === 0) {
+      lines.push(`- Follow standard practices for ${pattern}`);
+    }
+
+    return lines.join('\n');
+  }
+
+  /**
+   * Generate evidence-derived examples based on candidate type and data.
+   * Replaces static TODO placeholders with contextual content.
+   */
+  private generateExamples(candidate: SkillCandidate): string {
+    const { evidence, pattern, type } = candidate;
+    const hasFiles = evidence.coOccurringFiles.length > 0;
+    const hasTools = evidence.coOccurringTools.length > 0;
+
+    switch (type) {
+      case 'command': {
+        return `\`\`\`\n# Example: ${pattern}\n${hasTools ? `# Often used with: ${evidence.coOccurringTools.slice(0, 3).join(', ')}` : `# Customize for your ${pattern} workflows`}\n\`\`\``;
+      }
+      case 'file': {
+        const related = hasFiles
+          ? evidence.coOccurringFiles.slice(0, 3).map(f => `# Related: ${f}`).join('\n') // @justification Type 6: UI display limit
+          : `# Customize for your ${pattern} workflows`;
+        return `\`\`\`\n# Working with ${pattern}\n${related}\n\`\`\``;
+      }
+      case 'tool': {
+        return `\`\`\`\n# Using ${pattern}\n${hasFiles ? `# Context files: ${evidence.coOccurringFiles.slice(0, 3).map(f => f.split('/').pop()).join(', ')}` : `# Customize for your ${pattern} workflows`}\n\`\`\``;
+      }
+      case 'workflow': {
+        const parts: string[] = [`# Workflow: ${pattern}`];
+        if (hasFiles) {
+          parts.push(`# Files: ${evidence.coOccurringFiles.slice(0, 3).map(f => f.split('/').pop()).join(', ')}`);
+        }
+        if (hasTools) {
+          parts.push(`# Tools: ${evidence.coOccurringTools.slice(0, 3).join(', ')}`);
+        }
+        if (!hasFiles && !hasTools) {
+          parts.push(`# Customize for your ${pattern} workflows`);
+        }
+        return `\`\`\`\n${parts.join('\n')}\n\`\`\``;
+      }
+      default:
+        return `\`\`\`\n# Customize: Add examples from your ${pattern} workflows\n\`\`\``;
+    }
   }
 
   /**

@@ -1,7 +1,8 @@
 /**
  * Module 3: The Signal — Lab exercises
  *
- * 5 labs covering AC signals, impedance, Bode plots, decibels, and noise.
+ * 6 labs covering AC signals, impedance, Bode plots, decibels, noise,
+ * and signal sources / waveform types.
  * Each lab uses real MNA simulator analysis or physics-based calculations.
  */
 
@@ -345,7 +346,76 @@ const lab05: Lab = {
 };
 
 // ============================================================================
+// Lab 6: Signal Sources and Waveform Types (m3-lab-06)
+// ============================================================================
+
+const lab06: Lab = {
+  id: 'm3-lab-06',
+  title: 'Signal Sources and Waveform Types',
+  steps: [
+    {
+      instruction:
+        'Compare three waveform types at 1kHz with 1V peak amplitude: sine, square, and triangle. Calculate the RMS voltage for each waveform. Sine: Vrms = Vpeak / sqrt(2). Square: Vrms = Vpeak. Triangle: Vrms = Vpeak / sqrt(3).',
+      expected_observation:
+        'Sine RMS = 0.7071V, Square RMS = 1.0V, Triangle RMS = 0.5774V. The square wave has the highest RMS because it spends all its time at peak amplitude.',
+      learn_note:
+        'RMS (root mean square) is the effective or heating value of an AC waveform — a 1V RMS AC signal delivers the same power to a resistor as 1V DC. Different waveshapes at the same peak voltage have different RMS values because their energy distribution over time differs. -- H&H 1.3 [@HH-1.3]',
+    },
+    {
+      instruction:
+        'Calculate the crest factor (Vpeak / Vrms) for each waveform. Sine: CF = sqrt(2) = 1.414. Square: CF = 1.0. Triangle: CF = sqrt(3) = 1.732.',
+      expected_observation:
+        'The triangle wave has the highest crest factor (1.732) and the square wave the lowest (1.0). Higher crest factor means the peak is further from the RMS value.',
+      learn_note:
+        'Crest factor quantifies how "peaky" a waveform is relative to its effective value. It matters for peak power handling: a signal with crest factor 1.7 needs 1.7x the peak voltage capacity even though its average power is modest. Power supply and amplifier headroom must accommodate the crest factor. -- H&H 1.3 [@HH-1.3]',
+    },
+    {
+      instruction:
+        'Verify the frequency/period relationship f = 1/T for all three waveforms at 1kHz. The period T = 1/f = 1/1000 = 1ms = 0.001s. Confirm this holds regardless of waveform shape.',
+      expected_observation:
+        'All three waveforms at 1kHz have T = 1ms. The frequency/period relationship is independent of waveshape — it depends only on the repetition rate.',
+      learn_note:
+        'Frequency (Hz) and period (seconds) are reciprocals: f = 1/T. This fundamental relationship holds for any periodic waveform regardless of shape. A 1kHz sine, square, and triangle all complete one full cycle in exactly 1ms. The waveshape affects amplitude statistics (RMS, crest factor) but not timing. -- H&H 1.3 [@HH-1.3]',
+    },
+  ],
+  verify: () => {
+    const Vpeak = 1;
+
+    // Sine RMS = Vpeak / sqrt(2)
+    const sineRms = Vpeak / Math.SQRT2;
+    if (Math.abs(sineRms - 0.7071) >= 0.001) return false;
+
+    // Square RMS = Vpeak
+    const squareRms = Vpeak;
+    if (Math.abs(squareRms - 1.0) >= 0.001) return false;
+
+    // Triangle RMS = Vpeak / sqrt(3)
+    const triangleRms = Vpeak / Math.sqrt(3);
+    if (Math.abs(triangleRms - 0.5774) >= 0.001) return false;
+
+    // Sine crest factor = sqrt(2)
+    const sineCF = Vpeak / sineRms;
+    if (Math.abs(sineCF - Math.SQRT2) >= 0.01) return false;
+
+    // Square crest factor = 1.0
+    const squareCF = Vpeak / squareRms;
+    if (Math.abs(squareCF - 1.0) >= 0.01) return false;
+
+    // Triangle crest factor = sqrt(3)
+    const triangleCF = Vpeak / triangleRms;
+    if (Math.abs(triangleCF - Math.sqrt(3)) >= 0.01) return false;
+
+    // Frequency/period: f = 1kHz => T = 1ms
+    const f = 1000;
+    const T = 1 / f;
+    if (Math.abs(T - 0.001) >= 1e-9) return false;
+
+    return true;
+  },
+};
+
+// ============================================================================
 // Export all labs
 // ============================================================================
 
-export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05];
+export const labs: Lab[] = [lab01, lab02, lab03, lab04, lab05, lab06];

@@ -18,14 +18,25 @@
 import type { HandoffOutcome, DriftScore, FidelityLevel } from '../types.js';
 
 /**
- * Calculate a composite drift score from a handoff outcome using
- * retrospective-tuned weights.
+ * Retrospective-tuned DriftScore calculation.
  *
- * Weights:
- * - intent_miss:          (1 - intent_alignment) * 0.4
- * - rework_penalty:       rework_required ? 0.3 : 0
- * - verification_penalty: !verification_pass ? 0.2 : 0
- * - modification_penalty: min(code_modifications / 10, 1.0) * 0.1
+ * @justification Type: Accepted heuristic (intentionally different from ../types.ts)
+ * Weight set: 40/30/20/10 -- tuned for post-hoc analysis where intent
+ * alignment is the dominant signal. Compared to the assembler (35/25/25/15):
+ * - intent_miss gets 40% because retrospective analysis has complete
+ *   outcome data making intent alignment the most reliable signal
+ * - Rework penalty (30%) outweighs verification (20%) because rework
+ *   is a stronger retrospective indicator of drift than test results
+ * - modification_penalty is downweighted (10%) because post-hoc modification
+ *   counts are noisy (refactoring vs behavioral change indistinguishable)
+ *
+ * Components are pre-multiplied (weight applied when building the components
+ * object), unlike the types.ts variant which applies weights in the final sum.
+ *
+ * Thresholds: promote > 0.3, demote < 0.05 (tighter band because
+ * retrospective data is higher confidence -- smaller movements are meaningful)
+ *
+ * @see src/dacp/types.ts for the assembler-context variant
  *
  * @param outcome - The handoff outcome to score
  * @returns Drift score with component breakdown and recommendation

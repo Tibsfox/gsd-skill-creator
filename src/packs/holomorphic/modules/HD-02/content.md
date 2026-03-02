@@ -1,3 +1,11 @@
+---
+module: HD-02
+title: "Fixed Points and Stability"
+textbook_chapters: [8, 9, 10]
+textbook_chapters_confidence: medium
+textbook_chapters_note: "Fixed Points and Stability IS the stability analysis of iteration (Ch 8–10, Part III: Change). classifyFixedPoint() IS the stability classification by multiplier magnitude — the full taxonomy of convergent, periodic, and divergent behavior from Change."
+---
+
 # HD-02: Fixed Points and Stability
 
 ## What Is a Fixed Point?

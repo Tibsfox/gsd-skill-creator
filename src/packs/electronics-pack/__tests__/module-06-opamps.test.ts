@@ -15,8 +15,8 @@ import type { Lab, LabStep } from '../modules/06-op-amps/labs.js';
 // ============================================================================
 
 describe('Module 6: Op-Amps — Structural', () => {
-  it('exports exactly 5 labs', () => {
-    expect(labs).toHaveLength(5);
+  it('exports exactly 8 labs', () => {
+    expect(labs).toHaveLength(8);
   });
 
   it('each lab has a non-empty id, title, and steps array', () => {
@@ -155,11 +155,77 @@ describe('Module 6 Lab 5: Comparator', () => {
 });
 
 // ============================================================================
+// Lab 6: Summing Amplifier (m6-lab-06)
+// ============================================================================
+
+describe('Module 6 Lab 6: Summing Amplifier', () => {
+  it('has id m6-lab-06', () => {
+    expect(labs[5].id).toBe('m6-lab-06');
+  });
+
+  it('has title "Summing Amplifier"', () => {
+    expect(labs[5].title).toBe('Summing Amplifier');
+  });
+
+  it('has >= 3 lab steps', () => {
+    expect(labs[5].steps.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('verify() returns true -- V_out ~ -6V (unity-gain summing of 1+2+3)', () => {
+    expect(labs[5].verify()).toBe(true);
+  });
+});
+
+// ============================================================================
+// Lab 7: Differentiator (m6-lab-07)
+// ============================================================================
+
+describe('Module 6 Lab 7: Differentiator', () => {
+  it('has id m6-lab-07', () => {
+    expect(labs[6].id).toBe('m6-lab-07');
+  });
+
+  it('has title "Differentiator"', () => {
+    expect(labs[6].title).toBe('Differentiator');
+  });
+
+  it('has >= 3 lab steps', () => {
+    expect(labs[6].steps.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('verify() returns true -- DC V_out ~ 0V, tau = 1ms', () => {
+    expect(labs[6].verify()).toBe(true);
+  });
+});
+
+// ============================================================================
+// Lab 8: Op-Amp Non-Idealities (m6-lab-08)
+// ============================================================================
+
+describe('Module 6 Lab 8: Op-Amp Non-Idealities', () => {
+  it('has id m6-lab-08', () => {
+    expect(labs[7].id).toBe('m6-lab-08');
+  });
+
+  it('has title "Op-Amp Non-Idealities"', () => {
+    expect(labs[7].title).toBe('Op-Amp Non-Idealities');
+  });
+
+  it('has >= 3 lab steps', () => {
+    expect(labs[7].steps.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('verify() returns true -- GBW/offset/slew math verified', () => {
+    expect(labs[7].verify()).toBe(true);
+  });
+});
+
+// ============================================================================
 // All Labs Verify
 // ============================================================================
 
 describe('Module 6: All labs verify', () => {
-  it('all 5 verify() calls return true', () => {
+  it('all 8 verify() calls return true', () => {
     for (const lab of labs) {
       expect(lab.verify()).toBe(true);
     }

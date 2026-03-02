@@ -1,0 +1,8 @@
+{
+  "name": "claude-fields-skill",
+  "description": "Skill with Claude Code specific fields.",
+  "allowed-tools": "Read Grep Bash",
+  "model": "claude-sonnet-4-20250514",
+  "context": "fork",
+  "agent": "code-reviewer"
+}

@@ -1,3 +1,11 @@
+---
+module: HD-01
+title: "Iteration on the Complex Plane"
+textbook_chapters: [8, 9, 1, 2, 3]
+textbook_chapters_confidence: medium
+textbook_chapters_note: "Iteration on the Complex Plane IS the computational realization of change under maps (Ch 8–9, Part III: Change). The escape radius |z| > 2 IS Pythagorean distance magnitude() from Ch 2 (Part I: Perception). The ComplexNumber type IS the Ch 1–3 number system."
+---
+
 # HD-01: Iteration on the Complex Plane
 
 ## What Is Iteration?

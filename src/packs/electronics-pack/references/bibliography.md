@@ -17,6 +17,17 @@ Examples:
 - H&H Ch.4 -- Operational Amplifiers (full chapter)
 - H&H 10.1-10.2 -- Combinational logic (sections 1-2 of Chapter 10)
 
+### Programmatic Citation Keys
+
+In addition to the inline convention, content uses `[@key]` syntax for programmatic citation lookup:
+
+- `[@HH-1.2]` -- Voltage dividers (resolves via HH_CHAPTER_MAP in learn-mode.ts)
+- `[@HH-1.3]` -- Signals (sine, square, triangle waveforms, RMS, crest factor)
+- `[@HH-1.5]` -- Inductors and transformers (RL time constant, turns ratio)
+- `[@HH-Ch.4]` -- Operational amplifiers
+
+The `[@key]` format complements `-- H&H X.Y` for machine-readable cross-referencing. Both formats can coexist in the same learn_note string.
+
 ### Section Numbering
 
 H&H uses hierarchical numbering: Chapter.Section (e.g., 1.2, 9.8).

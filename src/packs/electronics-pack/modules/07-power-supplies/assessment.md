@@ -33,7 +33,7 @@ P_dissipated = (V_in - V_out) * I_load = (9V - 5V) * 1A = 4W.
 
 Four watts is substantial heat. The 7805 in a TO-220 package has a junction-to-ambient thermal resistance of approximately 50 C/W (without heatsink). The junction temperature rise would be 4W * 50 C/W = 200C above ambient -- far exceeding the 150C maximum junction temperature.
 
-With a heatsink (R_theta_JA ~ 10 C/W), the rise is 4W * 10 C/W = 40C, keeping T_J at roughly 65C in a 25C environment. A heatsink is essential at this power level. Alternatively, consider a switching regulator for better efficiency.
+With a heatsink (R_theta_JA ~ 10 C/W), the rise is 4W * 10 C/W = 40C, keeping T_J at roughly 65C in a 25C environment. A heatsink is essential at this power level. Alternatively, consider a switching regulator for better efficiency. -- H&H 9.3 (linear regulators, thermal design)
 
 ### Answer 2
 
@@ -46,13 +46,13 @@ delta_I = 19V * 0.2083 / 23.5
 delta_I = 3.958 / 23.5
 delta_I = 0.168A (approximately 168mA peak-to-peak).
 
-This ripple current flows through the output capacitor and creates output voltage ripple. The inductor must be rated for a DC current of I_load plus half the ripple current, and the output capacitor must handle the AC ripple current without excessive heating.
+This ripple current flows through the output capacitor and creates output voltage ripple. The inductor must be rated for a DC current of I_load plus half the ripple current, and the output capacitor must handle the AC ripple current without excessive heating. -- H&H 9.5 (switching regulators, buck converter design)
 
 ### Answer 3
 
 A boost converter cannot produce V_out < V_in because of how it operates. The boost formula is V_out = V_in / (1 - D), where D ranges from 0 to 1. When D = 0, V_out = V_in (minimum output). As D increases toward 1, V_out increases toward infinity. There is no D value that produces V_out < V_in.
 
-As V_out increases, D = 1 - V_in/V_out approaches 1. The switch stays ON for a longer fraction of each cycle, and the inductor must store more energy per cycle. Real boost converters become impractical above about D = 0.85 (roughly 6:1 step-up) because: (a) conduction losses increase as the switch carries current for most of the cycle, (b) the inductor must handle large peak currents, and (c) the diode reverse-recovery losses increase. Efficiency drops below 80% and thermal management becomes difficult.
+As V_out increases, D = 1 - V_in/V_out approaches 1. The switch stays ON for a longer fraction of each cycle, and the inductor must store more energy per cycle. Real boost converters become impractical above about D = 0.85 (roughly 6:1 step-up) because: (a) conduction losses increase as the switch carries current for most of the cycle, (b) the inductor must handle large peak currents, and (c) the diode reverse-recovery losses increase. Efficiency drops below 80% and thermal management becomes difficult. -- H&H 9.5 (boost converter topology and duty cycle limits)
 
 ### Answer 4
 
@@ -64,7 +64,7 @@ A buck-boost topology is the correct choice. Here is why:
 
 A pure buck converter fails when V_bat drops below 3.3V. A pure boost converter fails when V_bat is above 3.3V. Only a buck-boost (or SEPIC) topology handles the full range.
 
-In practice, an integrated buck-boost IC like the TPS63000 series handles 1.8V-5.5V input to 3.3V output with 90%+ efficiency, automatically transitioning between buck and boost modes as the battery voltage crosses V_out.
+In practice, an integrated buck-boost IC like the TPS63000 series handles 1.8V-5.5V input to 3.3V output with 90%+ efficiency, automatically transitioning between buck and boost modes as the battery voltage crosses V_out. -- H&H 9.5 (buck-boost topology for variable-input applications)
 
 ### Answer 5
 
@@ -81,4 +81,4 @@ With a 47uF electrolytic (ESR ~ 0.5 ohm):
 
 The electrolytic produces 100x more ESR-related ripple. At 250mV, this dominates the total ripple and can cause problems for noise-sensitive loads (ADCs, PLLs, RF circuits). The ceramic capacitor keeps ESR ripple negligible.
 
-This is why modern switching regulator designs specify ceramic output capacitors. The datasheet-recommended capacitor values assume ceramic -- substituting electrolytic capacitors with the same capacitance can cause stability problems (the ESR zero moves in the frequency domain) and excessive ripple.
+This is why modern switching regulator designs specify ceramic output capacitors. The datasheet-recommended capacitor values assume ceramic -- substituting electrolytic capacitors with the same capacitance can cause stability problems (the ESR zero moves in the frequency domain) and excessive ripple. -- H&H 9.5 (output capacitor selection and ESR effects)

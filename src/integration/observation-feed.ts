@@ -86,7 +86,6 @@ function hashProblem(description: string, position: PlanePosition): string {
   const input = `${description}|${position.real}|${position.imaginary}`;
   let hash = 5381;
   for (let i = 0; i < input.length; i++) {
-    // eslint-disable-next-line no-bitwise
     hash = ((hash << 5) + hash + input.charCodeAt(i)) >>> 0;
   }
   return hash.toString(16);
