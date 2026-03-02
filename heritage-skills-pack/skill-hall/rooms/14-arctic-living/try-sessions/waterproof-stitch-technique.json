@@ -1,0 +1,45 @@
+{
+  "id": "arctic-14-waterproof-stitch-beginner",
+  "title": "Waterproof Stitch Technique",
+  "tradition": "inuit",
+  "difficulty": "beginner",
+  "estimatedMinutes": 15,
+  "description": "Explore the Inuit waterproof stitching technique that makes sealskin boots and clothing water-resistant -- a critical survival skill in arctic conditions where wet clothing means hypothermia. This session covers the science of the crimped stitch, sinew preparation, and why this technique creates a better seal than simple straight stitching.",
+  "prerequisites": [],
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Understand why waterproofing is survival-critical in arctic environments. Water has 25 times the thermal conductivity of air. When clothing becomes wet, it loses most of its insulating value because water displaces the air trapped between fibers. In sub-zero temperatures, wet clothing can cause core temperature to drop to dangerous levels within 30-60 minutes of sustained exposure. The difference between waterproof seams and non-waterproof seams on a pair of kamik (boots) is the difference between dry feet and a cold-water emergency. Waterproof stitching is not a refinement -- it is a requirement.",
+      "safetyNote": "Hypothermia awareness: wet clothing in sub-zero temperatures accelerates heat loss dramatically. A person with wet feet in -20C conditions can develop frostbite in less than an hour and hypothermia in two to three hours without additional heat sources. Waterproof stitching is survival-critical, not decorative. The same principle applies to modern waterproof gear: any seam that allows water entry becomes a heat-loss pathway. Inspect seams on any cold-weather clothing before cold-weather exposure.",
+      "nationAttribution": "Inuit"
+    },
+    {
+      "order": 2,
+      "instruction": "Learn sinew preparation. Sinew (tendon and connective tissue) from caribou or seal is the traditional thread for waterproof stitching. The sinew must be prepared by splitting it into fine fibers, removing any fat or tissue, and drying it flat without tangling. Fine sinew for detailed work is split further by hand -- the fingers feel the separation of fibers down to thread-fine strands. Dried sinew is stored flat and moistened with saliva or water before sewing; wet sinew is pliable and strong, and it swells slightly when wet, which is part of what creates the waterproof seal in the finished seam.",
+      "culturalContext": "Sinew thread is a gift from the caribou or seal. Inuit sewers prepare sinew with care, as the quality of the thread determines the waterproofing of the finished garment. The process of splitting sinew is a meditative practice that produces intimate knowledge of the animal's body -- every tendon is a little different, and an experienced sewer can identify what part of the animal a piece of sinew came from by feel. This knowledge connects the sewer to the hunt, the hunter, and the animal in a continuous chain of reciprocal relationship.",
+      "nationAttribution": "Inuit",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 3,
+      "instruction": "Learn the waterproof (crimped) stitch technique. In a standard straight stitch, the needle passes directly through both pieces of hide, creating holes in the seam line that allow water to enter. The waterproof stitch uses a slightly different approach: the needle is pushed through only the inner layer of hide (the dermis, below the grain layer) without fully perforating the outer surface, then brought around and through the same way on the second piece. The slight crimp or bend in the thread as it passes through the hide compresses the surrounding hide fibers, effectively sealing the needle hole. The swelling of wet sinew in water then completes the seal from the inside.",
+      "culturalContext": "The waterproof stitch is an example of material knowledge at its most precise. The sewer must feel the resistance of the hide to know when the needle has entered at the right depth -- deep enough to hold, shallow enough not to penetrate the outer surface. This is knowledge in the hands, transmitted through demonstration and practice, not through words. It cannot be fully described -- it must be felt and repeated until the hands know it.",
+      "nationAttribution": "Inuit"
+    },
+    {
+      "order": 4,
+      "instruction": "Learn to test waterproofness. Traditional testing involves filling the finished boot or garment seam with water and inverting it, watching for seepage. An experienced maker can also test by feel -- running a finger along the seam line to feel for any place where the stitch is too tight (which can cut through the hide), too loose (which leaves gaps), or where the needle has punched through the outer surface. Modern testing can use a damp sponge on the outside of the seam while the inside is held against the light -- any penetration shows as a dark spot.",
+      "nationAttribution": "Inuit"
+    },
+    {
+      "order": 5,
+      "instruction": "Learn repair and maintenance principles. A waterproof seam that has cracked, separated, or been damaged by rough use must be repaired promptly. Any small gap in a seam is a water entry point; in cold conditions, water that enters a boot seam freezes and expands, making the damage worse. Inspect seams at the end of each day of hard use. Repair involves using a bone awl to open the old stitch, removing the failed thread, and re-stitching with fresh sinew, overlapping the old stitch by at least 1 cm on each side. Maintenance includes regular chewing or softening of boots to keep the hide flexible -- rigid hide is more prone to cracking.",
+      "culturalContext": "Maintaining clothing is as important as making it. In Inuit culture, caring for your clothing is caring for your survival. A hunter whose boots fail on the trail is a hunter in danger. Regular inspection and repair keeps the waterproof barrier intact through the harshest conditions. The knowledge of when to repair before failure -- reading the early signs of wear, feeling a seam that is beginning to loosen -- is as important as knowing how to make the seam in the first place.",
+      "nationAttribution": "Inuit",
+      "sumoMapping": "HeritageSkill"
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}
