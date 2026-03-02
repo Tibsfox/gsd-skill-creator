@@ -1,3 +1,9 @@
+// SAFE namespace: DACP subsystem (src/interpreter/, src/engines/, src/dacp/, src/catalog/)
+// DACP uses SAFE-01 through SAFE-06 for agent communication safety.
+// IMPORTANT: src/citations/ uses an independent SAFE-01 through SAFE-06 numbering
+// for citation pipeline safety. These are SEPARATE namespaces with NO shared semantics.
+// See src/citations/resolver/adapters/github.ts for the CIT namespace disambiguation.
+
 /**
  * DACP execution context builder.
  *
@@ -8,6 +14,14 @@
  * executable methods, functions, or callables. The entire ExecutionContext
  * is frozen to prevent post-creation mutation that could add execution
  * capabilities.
+ *
+ * SAFE-01 (DACP): No-execute script presentation
+ * Attack scenario: A malicious bundle injects a callable function into a
+ * script reference object. When an interpreter consumer calls it
+ * (e.g., context.scriptReferences[0].execute()), the injected code runs
+ * with interpreter process privileges.
+ * Consequence of absence: Arbitrary code execution from untrusted bundle
+ * content, bypassing the intent-only review model.
  *
  * @module interpreter/context-builder
  */

@@ -130,6 +130,8 @@ export class DACPAssembler {
     // Step 4: Determine fidelity level
     let fidelityLevel = determineFidelity(fidelityInput);
 
+    // SAFE-02 (DACP): Clamping enforced here prevents cliff-drop fidelity changes.
+    // Primary declaration: see src/dacp/fidelity/decision.ts clampFidelityChange.
     // SAFE-02: Clamp if current fidelity is provided
     if (request.current_fidelity !== undefined) {
       fidelityLevel = clampFidelityChange(request.current_fidelity, fidelityLevel);
