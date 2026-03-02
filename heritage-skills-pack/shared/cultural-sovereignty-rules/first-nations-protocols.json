@@ -1,0 +1,132 @@
+[
+  {
+    "id": "FN-GOV-001",
+    "level": 2,
+    "tradition": "first-nations",
+    "domain": "governance",
+    "action": "summarize-and-refer",
+    "referralTarget": "nation-specific governance councils and cultural offices",
+    "explanation": "Traditional governance structures (clan systems, band councils, confederacy models) are appropriate in educational framing. Summarize with specific nation attribution; refer to community sources for full protocols."
+  },
+  {
+    "id": "FN-CLA-001",
+    "level": 2,
+    "tradition": "first-nations",
+    "domain": "clans",
+    "action": "summarize-and-refer",
+    "referralTarget": "clan mothers and nation-specific cultural offices",
+    "explanation": "Clan systems vary significantly by nation. Educational summary acceptable with specific nation attribution; clan-specific protocols require community referral."
+  },
+  {
+    "id": "FN-CLA-002",
+    "level": 3,
+    "tradition": "first-nations",
+    "domain": "clan-ceremonies",
+    "action": "acknowledge-and-redirect",
+    "referralTarget": "clan mothers and traditional knowledge keepers",
+    "explanation": "Clan ceremony protocols are community-restricted. Acknowledge their existence with respect; redirect to clan mothers and community contacts."
+  },
+  {
+    "id": "FN-CER-001",
+    "level": 3,
+    "tradition": "first-nations",
+    "domain": "sweat-lodge",
+    "action": "acknowledge-and-redirect",
+    "referralTarget": "community ceremony keepers and cultural centers",
+    "explanation": "Sweat lodge protocols are community-restricted. Do not include procedural content; redirect to appropriate ceremony keepers."
+  },
+  {
+    "id": "FN-CER-002",
+    "level": 4,
+    "tradition": "first-nations",
+    "domain": "sun-dance",
+    "action": "block",
+    "explanation": "Sun Dance is a sacred ceremony. HARD BLOCK. Historically suppressed under the Indian Act (pre-1951); its protocols are sacred and belong exclusively to the originating nations. No description, referral, or reproduction permitted."
+  },
+  {
+    "id": "FN-CER-003",
+    "level": 3,
+    "tradition": "first-nations",
+    "domain": "potlatch",
+    "action": "acknowledge-and-redirect",
+    "referralTarget": "Northwest Coast and Plateau nation cultural offices",
+    "explanation": "Potlatch ceremonies, historically banned and now restored, are community-restricted. Educational acknowledgment of their significance acceptable; ceremonial protocols require community referral."
+  },
+  {
+    "id": "FN-MED-001",
+    "level": 3,
+    "tradition": "first-nations",
+    "domain": "medicine-wheel",
+    "action": "acknowledge-and-redirect",
+    "referralTarget": "Plains nation cultural offices and traditional healers",
+    "explanation": "Medicine wheel teachings are community-restricted. Acknowledge the framework's significance; redirect to specific nation educators for teachings."
+  },
+  {
+    "id": "FN-WMP-001",
+    "level": 2,
+    "tradition": "first-nations",
+    "domain": "wampum",
+    "action": "summarize-and-refer",
+    "referralTarget": "Haudenosaunee and Wabanaki cultural centers",
+    "explanation": "Wampum in historical and diplomatic contexts is appropriate for educational summary with attribution. Ceremonial and treaty-specific wampum use is community-restricted."
+  },
+  {
+    "id": "FN-WMP-002",
+    "level": 3,
+    "tradition": "first-nations",
+    "domain": "wampum-ceremonial",
+    "action": "acknowledge-and-redirect",
+    "referralTarget": "Haudenosaunee Confederacy cultural offices",
+    "explanation": "Ceremonial wampum protocols and belt-specific teachings are community-restricted. Acknowledge with respect; redirect to Confederacy cultural offices."
+  },
+  {
+    "id": "FN-MUS-001",
+    "level": 3,
+    "tradition": "first-nations",
+    "domain": "sacred-songs",
+    "action": "acknowledge-and-redirect",
+    "referralTarget": "nation-specific cultural offices and song keepers",
+    "explanation": "Sacred songs and associated drumming protocols are community-restricted. Each song may be owned by specific families or clans. Do not reproduce; redirect to appropriate song keepers."
+  },
+  {
+    "id": "FN-MUS-002",
+    "level": 4,
+    "tradition": "first-nations",
+    "domain": "sacred-drumming",
+    "action": "block",
+    "explanation": "Sacred drumming ceremonies and ceremonial drum protocols are sacred. HARD BLOCK. The drum is sacred in many First Nations traditions; its ceremonial use cannot be reproduced or described in detail."
+  },
+  {
+    "id": "FN-MED-002",
+    "level": 4,
+    "tradition": "first-nations",
+    "domain": "sacred-medicine",
+    "action": "block",
+    "explanation": "Sacred plant medicines and their ceremonial preparation are protected under cultural sovereignty. HARD BLOCK. No description, identification, or reproduction of sacred medicine protocols permitted."
+  },
+  {
+    "id": "FN-HIS-001",
+    "level": 1,
+    "tradition": "first-nations",
+    "domain": "history",
+    "action": "include",
+    "explanation": "Publicly documented historical information about First Nations peoples, treaties, and cultural history. Include with specific nation attribution and appropriate source citations."
+  },
+  {
+    "id": "FN-CRA-001",
+    "level": 1,
+    "tradition": "first-nations",
+    "domain": "crafts",
+    "action": "include",
+    "explanation": "Traditional craft techniques documented in publicly available educational resources. Include with specific nation attribution — never generic 'Native American' framing."
+  },
+  {
+    "id": "FN-LAN-001",
+    "level": 2,
+    "tradition": "first-nations",
+    "domain": "language",
+    "action": "summarize-and-refer",
+    "referralTarget": "nation-specific language revitalization programs",
+    "explanation": "Traditional language knowledge is appropriate for educational summary. Refer to nation-specific language programs for learning resources."
+  }
+]
