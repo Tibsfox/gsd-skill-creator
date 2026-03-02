@@ -35,11 +35,11 @@ Requirements for College Expansion milestone. Each maps to roadmap phases.
 
 ### Cross-References
 
-- [ ] **XREF-01**: All 48 edges from dependency-graph.yaml are imported as Rosetta cross-references
-- [ ] **XREF-02**: New cross-references between foundational packs and existing departments are validated (nutrition↔culinary-arts, physical-education↔mind-body, math↔mathematics)
-- [ ] **XREF-03**: Cross-reference resolver handles 41-department scale without performance degradation
-- [ ] **XREF-04**: Complex Plane positioning is assigned for all new concepts (real=concreteness, imaginary=complexity)
-- [ ] **XREF-05**: Dependency chain validation enforces max depth 4 with no circular references
+- [x] **XREF-01**: All 48 edges from dependency-graph.yaml are imported as Rosetta cross-references
+- [x] **XREF-02**: New cross-references between foundational packs and existing departments are validated (nutrition↔culinary-arts, physical-education↔mind-body, math↔mathematics)
+- [x] **XREF-03**: Cross-reference resolver handles 41-department scale without performance degradation
+- [x] **XREF-04**: Complex Plane positioning is assigned for all new concepts (real=concreteness, imaginary=complexity)
+- [x] **XREF-05**: Dependency chain validation enforces max depth 4 with no circular references
 
 ### Safety
 
@@ -102,11 +102,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MAP-04 | Phase 24 | Complete |
 | MAP-05 | Phase 24 | Complete |
 | MAP-06 | Phase 24 | Complete |
-| XREF-01 | Phase 25 | Pending |
-| XREF-02 | Phase 25 | Pending |
-| XREF-03 | Phase 25 | Pending |
-| XREF-04 | Phase 25 | Pending |
-| XREF-05 | Phase 25 | Pending |
+| XREF-01 | Phase 25 | Complete |
+| XREF-02 | Phase 25 | Complete |
+| XREF-03 | Phase 25 | Complete |
+| XREF-04 | Phase 25 | Complete |
+| XREF-05 | Phase 25 | Complete |
 | SAFE-01 | Phase 26 | Pending |
 | SAFE-02 | Phase 26 | Pending |
 | SAFE-03 | Phase 26 | Pending |
