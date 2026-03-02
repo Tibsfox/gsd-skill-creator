@@ -1,0 +1,96 @@
+{
+  "id": "room-05-food-preservation",
+  "room": 5,
+  "domain": "food",
+  "title": "Food & Preservation",
+  "traditions": ["appalachian", "first-nations", "inuit"],
+  "sumoClasses": ["FoodPreservation", "Cooking", "FermentingFood", "HeritageSkill"],
+  "sumoFile": ["Food.kif", "heritage-domain-ontology.kif"],
+  "description": "SAFETY-CRITICAL ROOM. Food & Preservation covers the traditional preservation knowledge of three distinct cultural traditions — all of which have fed communities for generations and all of which carry real risk of serious illness or death when practiced incorrectly. Appalachian preservation traditions include water-bath canning of high-acid foods (tomatoes, fruits, pickles), pressure canning of low-acid vegetables and meats, salt-curing and smokehouse techniques, root cellaring, sorghum syrup production, apple butter, and fruit drying. First Nations food traditions include pemmican production (Cree and Métis — concentrated lean meat, rendered fat, and dried berries), wild rice/manoomin harvesting and processing (Anishinaabe), maple sugar production (Anishinaabe and Haudenosaunee), smoked fish and game preparation, and berry drying. Inuit preservation methods include caribou drying (pipsi), fish drying and smoking, seal preparation, fat rendering and storage, cache construction and seasonal management, and an overview of traditional fermented foods presented as cultural knowledge. CRITICAL SAFETY RULES enforced in this room: (1) ALL low-acid foods — vegetables, meats, beans, corn — require pressure canning. Water-bath canning of low-acid foods creates conditions for Clostridium botulinum toxin formation. This rule cannot be overridden. (2) Pemmican fat rendering must reach minimum 250°F/121°C to destroy pathogens. Under-rendered fat will spoil and can cause serious illness. (3) All smoking content includes minimum safe internal temperatures. (4) All fermentation content includes contamination recognition and discard criteria. (5) Traditional fermented foods (including Inuit fermented preparations such as igunaq) are presented as cultural knowledge only — not as preparation instructions — due to the community expertise required for safe preparation.",
+  "safetyDomains": ["food", "fire", "chemical"],
+  "trySessions": [],
+  "modules": [
+    {
+      "id": "food-05-appalachian-canning",
+      "title": "Appalachian Canning & Jar Preservation",
+      "tradition": "appalachian",
+      "description": "The art and science of Appalachian home canning — putting food by for the winter. Covers high-acid water-bath canning (tomatoes, fruits, pickles, jams), pressure canning of low-acid vegetables and meats, jar selection, lids, sealing, and long-term storage. Critically distinguishes between which foods are safe for water-bath canning and which require pressure canning. The Appalachian tradition of 'putting up' food is both a survival necessity and a social practice connecting families and communities to the land's seasonal abundance.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["FoodPreservation", "Cooking"]
+    },
+    {
+      "id": "food-05-appalachian-smoking",
+      "title": "Appalachian Smokehouse & Meat Preservation",
+      "tradition": "appalachian",
+      "description": "Traditional Appalachian smokehouse techniques for preserving pork, venison, and other meats. Covers salt-curing (dry rub and brine), hot and cold smoking methods, smokehouse construction principles, wood selection for flavor and temperature, and proper internal temperatures for safe preservation. Includes fruit drying, jerky, and leather techniques. All smoking content includes minimum safe internal temperatures — smoking alone does not make food safe without reaching temperature thresholds.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["FoodPreservation", "Cooking"]
+    },
+    {
+      "id": "food-05-fn-pemmican",
+      "title": "Pemmican: Cree and Métis Concentrated Food",
+      "tradition": "first-nations",
+      "description": "Pemmican is one of the most nutritionally complete traditional foods developed by any culture — a concentrated mixture of lean dried meat, rendered fat, and dried berries that sustained Cree and Métis peoples through harsh winters and long journeys. This module covers lean meat selection and drying, fat rendering (with critical temperature requirements), berry preparation and ratios, mixing and forming techniques, and storage principles. Nation attribution: Cree/Métis peoples. Pemmican production requires strict attention to fat rendering temperatures — under-rendered fat produces a product that will spoil rapidly and can cause serious illness.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "FoodPreservation"]
+    },
+    {
+      "id": "food-05-fn-wild-rice",
+      "title": "Manoomin: Anishinaabe Wild Rice",
+      "tradition": "first-nations",
+      "description": "Manoomin (wild rice) is a sacred food to the Anishinaabe people — a gift from the Creator described in their migration story as 'the food that grows on water.' This module covers general wild rice ecology, harvesting methods (hand harvest by canoe), traditional parching and processing techniques, storage, and culinary preparation. General knowledge of wild rice cultivation and harvest is Level 1 (publicly shared). Ceremonial harvest protocols and the spiritual significance of manoomin are Level 2 (contextually shared) and are presented with appropriate cultural framing. Nation attribution: Anishinaabe peoples.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["CulturalPractice", "FoodPreservation"]
+    },
+    {
+      "id": "food-05-fn-maple-sugar",
+      "title": "Maple Sugar: Anishinaabe and Haudenosaunee Tradition",
+      "tradition": "first-nations",
+      "description": "Maple sugar production is one of North America's distinctive Indigenous contributions to world food knowledge. This module covers traditional tapping methods, sap collection, evaporation and concentration, sugar crystallization, and the production of maple candy and syrup. Nation attribution: Anishinaabe and Haudenosaunee peoples, both of whom developed sophisticated maple sugar traditions in their respective territories.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "Cooking"]
+    },
+    {
+      "id": "food-05-inuit-drying",
+      "title": "Arctic Drying: Caribou, Fish, and Environmental Preservation",
+      "tradition": "inuit",
+      "description": "Inuit food preservation uses the Arctic environment itself as a preservation technology — the combination of cold temperatures, low humidity, and consistent wind creates natural drying conditions unavailable in warmer climates. This module covers caribou drying and pipsi preparation, fish drying and smoking, fat rendering for storage, and the principles of reading Arctic drying conditions. All content includes safety monitoring for temperature changes that can allow bacterial growth. Nation attribution: Inuit peoples of Arctic Canada.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "FoodPreservation"]
+    },
+    {
+      "id": "food-05-inuit-fermented",
+      "title": "Traditional Inuit Fermented Foods: Cultural Knowledge",
+      "tradition": "inuit",
+      "description": "Traditional Inuit fermented preparations — including igunaq (fermented walrus or seal meat) and other fermented foods — are presented in this module as cultural knowledge only. These foods require community expertise, specific environmental conditions, and knowledge passed directly from experienced practitioners for safe preparation. This module provides cultural context, historical significance, and the role of fermented foods in Inuit food traditions, but does not provide preparation instructions. The complexity of safe preparation and the cultural context required makes direct instruction inappropriate outside the community transmission context. Nation attribution: Inuit peoples of Arctic Canada.",
+      "safetyLevel": "gated",
+      "culturalLevel": 2,
+      "sumoMappings": ["CulturalPractice", "FermentingFood"]
+    },
+    {
+      "id": "food-05-inuit-cache",
+      "title": "Cache Storage and Winter Food Planning",
+      "tradition": "inuit",
+      "description": "Traditional Inuit cache storage systems represent sophisticated environmental engineering — using permafrost, snow, and rock formations to maintain consistent temperatures for long-term food storage. This module covers cache site selection principles, construction of rock and snow caches, seasonal timing for cache establishment and retrieval, food preparation for caching, and animal-proofing techniques. Includes root cellaring parallels from Appalachian tradition for comparative context.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "FoodPreservation"]
+    }
+  ],
+  "ontologicalBridges": [
+    {
+      "id": "bridge-02-food-preservation",
+      "title": "Food Preservation: Chemistry or Community Obligation?",
+      "sumoView": "FoodPreservation -> ChemicalProcess -> InternalChange -> Process. Biochemical transformation preventing microbial growth through heat, salt, acid, dehydration, or fermentation. Governed by temperature thresholds, water activity levels, and pH measurements. Success is measured by shelf life and pathogen elimination.",
+      "indigenousView": "Keeping food is keeping life. Pemmican-making connects the hunter's gift, the berry picker's knowledge, the elder's recipe wisdom, and the next generation's survival into one act. The process carries obligations: you smoke enough fish for the whole community, not just your family. You share the first jar of canned berries. You teach the process so the knowledge does not die with you. Among the Cree and Métis, pemmican carried entire communities through winter; the obligation to make enough was understood as social law, not choice.",
+      "tradition": "cross-tradition",
+      "teachingPoint": "SUMO sees chemistry; heritage traditions see community obligation. Both are necessary — the chemistry keeps you safe, the obligation keeps you human. The SUMO view tells you HOW to preserve food without killing people (critical safety information). The Indigenous view tells you WHY food preservation matters and WHO it serves. A learner who understands only the chemistry can make pemmican safely but may miss that the recipe encodes social relationships. A learner who understands only the obligation may make unsafe food. The full picture requires both lenses."
+    }
+  ]
+}

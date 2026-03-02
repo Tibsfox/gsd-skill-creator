@@ -1,0 +1,72 @@
+{
+  "roomId": "room-05-food-preservation",
+  "room": 5,
+  "culturalRules": [
+    {
+      "id": "ROOM05-CULT-001",
+      "domain": "food-preservation",
+      "tradition": "first-nations",
+      "concept": "manoomin/wild rice",
+      "level": 1,
+      "ceremonialLevel": 2,
+      "nationAttribution": "Anishinaabe",
+      "note": "General wild rice knowledge is Level 1 (publicly shared). Wild rice ecology, hand-harvest methods, parching, processing, and culinary use are widely documented and freely shared with attribution to Anishinaabe peoples. Ceremonial harvest protocols — including prayer, first-harvest offerings, and the spiritual relationship between Anishinaabe peoples and manoomin — are Level 2 (contextually shared). Ceremonial content must be presented with explicit cultural framing that acknowledges the sacred nature of this relationship. The Anishinaabe migration prophecy describes manoomin as the food the people would find at the end of their journey; this origin story is Level 2 and should be introduced with appropriate framing.",
+      "action": "include",
+      "attribution": "Always attribute manoomin knowledge to Anishinaabe peoples. Never use the term 'wild rice' without acknowledging the Anishinaabe word manoomin and its cultural significance."
+    },
+    {
+      "id": "ROOM05-CULT-002",
+      "domain": "food-preservation",
+      "tradition": "first-nations",
+      "concept": "pemmican",
+      "level": 1,
+      "nationAttribution": "Cree/Métis",
+      "note": "Pemmican production is widely shared knowledge with a long documented history. The technique was developed by Cree and Métis peoples and is properly attributed to them. Pemmican knowledge spread broadly through the fur trade era, and the technique is now widely known. Attribution to Cree and Métis peoples is required in all pemmican content. The specific fat-to-meat-to-berry ratios developed by Cree and Métis knowledge keepers represent Indigenous intellectual contribution and should be acknowledged as such.",
+      "action": "include",
+      "attribution": "Always attribute pemmican to Cree/Métis peoples. Use 'Cree and Métis' not generic 'Plains peoples' or 'Indigenous peoples.'"
+    },
+    {
+      "id": "ROOM05-CULT-003",
+      "domain": "food-preservation",
+      "tradition": "inuit",
+      "concept": "traditional fermented foods",
+      "level": 2,
+      "note": "Traditional Inuit fermented foods — including igunaq (fermented walrus or seal), muktuk preparation, and other fermented preparations — are presented as cultural knowledge only, not as preparation instructions. These preparations require: (1) community expertise and direct knowledge transmission from experienced practitioners; (2) specific environmental conditions found in Arctic regions; (3) detailed understanding of safe vs. unsafe preparation that takes years to develop. The preparation of these foods outside traditional community contexts has resulted in serious foodborne illness. This content is Level 2 (contextually shared) — appropriate for educational settings that explain the cultural role and significance of these foods, but not for step-by-step preparation guidance.",
+      "action": "summarize-and-refer",
+      "referral": "Direct learners to Inuit cultural organizations and community-based food traditions programs for authentic instruction in traditional food preparation."
+    },
+    {
+      "id": "ROOM05-CULT-004",
+      "domain": "food-preservation",
+      "tradition": "first-nations",
+      "concept": "maple sugar",
+      "level": 1,
+      "nationAttribution": "Anishinaabe/Haudenosaunee",
+      "note": "Maple sugar production is general knowledge with clear Indigenous origins. Multiple First Nations peoples developed maple sugaring traditions in the Great Lakes and Northeast regions. The primary nations attributed are Anishinaabe (who call the sugar season 'Ziisbaakdoke-giizis' -- Sugarbush Moon) and Haudenosaunee (who developed bark vessels and evaporation techniques). When discussing maple sugaring, both nations should be acknowledged. General production techniques are Level 1 (publicly shared). Ceremonial aspects of the sugarbush season are Level 2 (contextually shared) for Anishinaabe tradition.",
+      "action": "include",
+      "attribution": "Attribute maple sugar knowledge to Anishinaabe and Haudenosaunee peoples. Do not use generic 'First Nations' or 'Native American' without specifying these nations."
+    },
+    {
+      "id": "ROOM05-CULT-005",
+      "domain": "food-preservation",
+      "tradition": "inuit",
+      "concept": "cache storage and pipsi",
+      "level": 1,
+      "nationAttribution": "Inuit",
+      "note": "Inuit cache storage systems and caribou drying (pipsi) techniques are general knowledge shared in many published sources and community education programs. These techniques are Level 1 (publicly shared) with standard attribution to Inuit peoples. The term pipsi refers specifically to dried caribou and should be used accurately. Cache construction principles and seasonal timing are publicly shared knowledge that Inuit communities have made available for educational purposes.",
+      "action": "include",
+      "attribution": "Always attribute Inuit food preservation knowledge to Inuit peoples. Use nation-specific references (e.g., Nunavut Inuit, Inuvialuit) when geographic specificity is relevant."
+    },
+    {
+      "id": "ROOM05-CULT-006",
+      "domain": "food-preservation",
+      "tradition": "first-nations",
+      "concept": "general fish smoking and preservation",
+      "level": 1,
+      "nationAttribution": "various First Nations",
+      "note": "Fish smoking and preservation is practiced by many First Nations peoples across Canada and is widely documented. Specific smoking techniques vary significantly by nation and region. When presenting general smoking methods, acknowledge the breadth of First Nations fish preservation traditions. When presenting nation-specific techniques, use accurate attribution to the specific nation (e.g., Pacific salmon smoking -- Coastal Salish and Kwakwaka'wakw; Great Lakes fish smoking -- Anishinaabe; subarctic fish drying -- Dene, Cree). Do not use generic attributions that flatten the diversity of these traditions.",
+      "action": "include",
+      "attribution": "Use specific nation names when presenting specific techniques. Avoid generic 'Indigenous peoples' language."
+    }
+  ]
+}
