@@ -56,8 +56,27 @@ if [[ "$FILE" == *-SUMMARY.md ]]; then
       } catch {}
     " 2>/dev/null || true
   fi
+elif [[ "$FILE" == *-VERIFICATION.md ]]; then
+  # Traceability staleness advisory (TRACE-02)
+  TRACE_DATE=$(grep -oP '(?<=\*\*Traceability updated:\*\* )\d{4}-\d{2}-\d{2}' .planning/REQUIREMENTS.md 2>/dev/null)
+  TODAY=$(date +%Y-%m-%d)
+
+  if [ -z "$TRACE_DATE" ]; then
+    echo "TRACEABILITY: No traceability_updated field found in REQUIREMENTS.md"
+  elif [ "$TRACE_DATE" != "$TODAY" ]; then
+    echo "TRACEABILITY: Requirements table last updated $TRACE_DATE, phase completed since. Review: update traceability table in REQUIREMENTS.md"
+  fi
+
+  # Deviation surface advisory (DEVN-02)
+  DEV_COUNT=$(grep -c '```deviation' "$FILE" 2>/dev/null || echo "0")
+  if [ "$DEV_COUNT" -gt 0 ]; then
+    echo "DEVIATION: $DEV_COUNT deviation(s) found in $(basename "$FILE")"
+    grep -A1 '```deviation' "$FILE" 2>/dev/null | grep -oP '(?<=Requirement: )\S+' | while read -r REQ_ID; do
+      echo "  - $REQ_ID"
+    done
+  fi
 else
-  # Non-SUMMARY .planning/ write — advisory messages
+  # Non-SUMMARY, Non-VERIFICATION .planning/ write — advisory messages
   echo ".planning/ file modified: $FILE"
   echo "Check: Does this phase transition trigger any skill-creator hooks?"
   echo "Check: Should STATE.md be updated?"
