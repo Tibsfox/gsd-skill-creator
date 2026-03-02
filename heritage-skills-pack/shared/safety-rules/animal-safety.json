@@ -32,7 +32,7 @@
   {
     "id": "ANIMAL-003",
     "domain": "animal",
-    "pattern": "(?:wild.?animal|bear|cougar|mountain.?lion|moose|elk|bison|wolf|coyote|snake|rattlesnake).{0,80}(?:encounter|approach|near|found|see|met|cornered|attack)",
+    "pattern": "(?:(?:wild.?animal|bear|cougar|mountain.?lion|moose|elk|bison|wolf|coyote|snake|rattlesnake).{0,80}(?:encounter|approach|near|found|see|met|cornered|attack)|(?:encounter|approach|found|met|cornered|attack).{0,80}(?:wild.?animal|bear|cougar|mountain.?lion|moose|elk|bison|wolf|coyote|snake|rattlesnake))",
     "level": "gated",
     "annotation": {
       "domain": "animal",
