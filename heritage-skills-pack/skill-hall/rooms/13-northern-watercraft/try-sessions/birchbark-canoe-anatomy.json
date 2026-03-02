@@ -1,0 +1,58 @@
+{
+  "id": "watercraft-13-canoe-anatomy-beginner",
+  "title": "Birchbark Canoe Anatomy",
+  "tradition": "first-nations",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore the anatomy of the birchbark canoe — from the gunwales to the ribs to the bark skin. Learn how different First Nations built canoes suited to their specific waters.",
+  "prerequisites": [],
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Understand the birchbark canoe as a shared tradition across nations.",
+      "nationAttribution": "Anishinaabe, Algonquin, Abenaki, Cree, Mi'kmaq, Innu, Attikamek",
+      "culturalContext": "The birchbark canoe is shared across many First Nations. Each nation developed regional variations suited to their waters — from the deep-hulled canoes of the Great Lakes to the river canoes of the eastern woodlands. When learning about birchbark canoes, it is important to attribute knowledge to the specific nation whose tradition you are studying, not to a generic 'First Nations' tradition.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Learn the primary materials: birchbark outer skin, cedar ribs and planking, spruce root lashing, and spruce gum sealant.",
+      "culturalContext": "Each material was selected through generations of ecological knowledge. White birch (Betula papyrifera) provides the outer shell — waterproof, flexible, and lightweight. Cedar provides the structural frame — light, rot-resistant, and workable. Spruce root, split and soaked, provides the lashing cord. Spruce gum, boiled and mixed with grease, seals the seams.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 3,
+      "instruction": "Study the structural anatomy: gunwales (the top rails), ribs (the curved hull formers), bark skin (the waterproof shell), and thwarts (the cross-braces that hold the shape).",
+      "culturalContext": "The gunwales are typically made from cedar or spruce and run the full length of the canoe. The ribs are steamed and bent cedar, inserted to create the curved hull shape. The thwarts brace the canoe's width and serve as seats or portage handles. Every structural element serves multiple purposes.",
+      "sumoMapping": "WaterVehicle"
+    },
+    {
+      "order": 4,
+      "instruction": "Acknowledge the spiritual dimension: tobacco offering before birchbark harvest.",
+      "nationAttribution": "Anishinaabe",
+      "culturalContext": "Many First Nations traditions include a tobacco offering before taking birchbark from a tree — acknowledging the tree's gift and giving thanks for its sacrifice. This practice is widely known and shared for educational purposes (Level 1 publicly shared knowledge). Specific ceremony details are sacred (Level 3-4) and are not reproduced here. Learning about this practice means understanding that canoe building begins with relationship and reciprocity, not just with tools.",
+      "safetyNote": "Respecting cultural sovereignty: the acknowledgment of tobacco offering is Level 1 publicly shared information. Do not seek or share ceremony-level details about this practice without explicit community guidance."
+    },
+    {
+      "order": 5,
+      "instruction": "Explore regional variations: Anishinaabe Great Lakes style, Mi'kmaq ocean-going design, and Algonquin river canoe.",
+      "nationAttribution": "Anishinaabe, Mi'kmaq, Algonquin",
+      "culturalContext": "Anishinaabe Great Lakes canoes are wide-beamed and deep-hulled to handle open lake conditions and carry substantial loads on long trading journeys. Mi'kmaq canoes are designed for coastal and tidal waters with higher freeboard and reinforced bow and stern. Algonquin river canoes are narrow and agile, optimized for maneuvering in fast-moving current. Cree, Innu, and Attikamek each have variations suited to their specific territories and travel routes.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 6,
+      "instruction": "Learn cold water safety: this is the required gate for all watercraft activities.",
+      "safetyNote": "Cold water safety: birchbark canoes are stable and well-designed, but capsizing in cold water is life-threatening. Cold water shock causes an involuntary gasping reflex — even strong swimmers can inhale water and drown within seconds of unexpected immersion. In water below 15°C (59°F), swimming ability fails within minutes. REQUIRED before any watercraft use: wear a personal flotation device (PFD), never paddle alone (buddy system required), and know the 1-10-1 rule — approximately 1 minute to control breathing, 10 minutes of meaningful movement, 1 hour before unconsciousness in cold water."
+    },
+    {
+      "order": 7,
+      "instruction": "Understand the canoe's role in community life: transportation, trade routes, and seasonal movement.",
+      "culturalContext": "The birchbark canoe is not just transportation — it is central to life on the water. Trade routes across the Great Lakes and St. Lawrence river systems were built around the canoe's capabilities. Seasonal camps, family travel, and inter-nation relations all flowed through the canoe tradition. The canoe enabled the detailed ecological knowledge of many different watersheds that First Nations communities hold today.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}
