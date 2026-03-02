@@ -119,15 +119,15 @@ describe('Edge Cases', () => {
   });
 
   it('rate limiter resets after window expires', async () => {
-    // Use a very short window (1ms) so it expires immediately
-    const limiter = createRateLimiter(1, 1);
+    // Use a short window (10ms) and generous wait to avoid timer jitter
+    const limiter = createRateLimiter(1, 10);
 
     expect(limiter.tryAcquire()).toBe(true);
     // Immediately should be rejected
     expect(limiter.tryAcquire()).toBe(false);
 
-    // Wait for window to expire
-    await new Promise((resolve) => setTimeout(resolve, 5));
+    // Wait for window to expire (3x margin for CI/busy systems)
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     // Should be allowed again after window expires
     expect(limiter.tryAcquire()).toBe(true);

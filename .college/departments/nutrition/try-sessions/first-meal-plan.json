@@ -1,0 +1,44 @@
+{
+  "id": "nutr-first-meal-plan",
+  "title": "Build a Day of Eating",
+  "description": "Apply nutrition knowledge to plan a realistic, evidence-based day of meals.",
+  "estimatedMinutes": 25,
+  "steps": [
+    {
+      "step": 1,
+      "title": "Estimate your energy needs",
+      "instruction": "Estimate your basal metabolic rate (BMR) and total daily energy expenditure (TDEE). Use the Mifflin-St Jeor equation or an online calculator.",
+      "prompt": "What is your estimated TDEE? What activity multiplier did you use? (sedentary: 1.2, lightly active: 1.375, moderately active: 1.55)"
+    },
+    {
+      "step": 2,
+      "title": "Plan breakfast",
+      "instruction": "Design a breakfast with at least 20g protein, fiber from whole foods, and at least one color of vegetable or fruit.",
+      "prompt": "Describe your breakfast. List the approximate macronutrients: protein, carbohydrate, and fat in grams."
+    },
+    {
+      "step": 3,
+      "title": "Plan lunch and dinner",
+      "instruction": "Follow a similar pattern for lunch and dinner. Aim for variety in protein sources and vegetables across the day.",
+      "prompt": "Describe lunch and dinner. What is your total estimated protein for the day? Aim for at least 0.8g per kg body weight."
+    },
+    {
+      "step": 4,
+      "title": "Read one food label",
+      "instruction": "Pick a packaged food you often eat. Read the label carefully.",
+      "prompt": "What is the serving size? How many servings are in the package? What are the first 3 ingredients? Any surprises?"
+    },
+    {
+      "step": 5,
+      "title": "Identify one food system impact",
+      "instruction": "Look at the foods in your meal plan. Where did they come from? What is the likely environmental impact of one item?",
+      "prompt": "Pick one food. Estimate its carbon footprint category: low (vegetables, legumes), medium (fish, poultry), high (beef, lamb)."
+    },
+    {
+      "step": 6,
+      "title": "Reflect on your eating environment",
+      "instruction": "What foods are most visible and accessible in your home right now?",
+      "prompt": "Does your food environment support the meal plan you just designed? What one change to your environment would make eating well easier?"
+    }
+  ]
+}

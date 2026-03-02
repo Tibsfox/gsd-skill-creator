@@ -1,12 +1,17 @@
 # Release History
 
-53 milestones shipped across 481 phases, 1,176 plans, ~564K LOC, and 20,019+ tests.
+57 milestones shipped across 535 phases, 1,182 plans, ~564K LOC, and 21,002+ tests.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned.
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
 | [v1.50](release-notes/v1.50/) | The Unit Circle Milestone | 2026-02-28 | 14 | 67 | |
+| v1.49.10 | College Expansion | 2026-03-02 | 6 | 9 | |
+| v1.49.9 | Learn Kung Fu | 2026-03-01 | 11 | 11 | |
+| v1.49.8 | Cooking With Claude | 2026-03-01 | 11 | 45 | |
+| v1.49.7 | Optional tmux with Graceful Degradation | 2026-03-01 | — | — | |
+| [v1.49.6](release-notes/v1.49.6/) | macOS Compatibility & Dependency Hardening | 2026-03-01 | — | — | |
 | [v1.49.5](release-notes/v1.49.5/) | Project Filesystem Reorganization | 2026-02-27 | 8 | 17 | [retro](release-notes/v1.49.5/RETROSPECTIVE.md), [lessons](release-notes/v1.49.5/LESSONS-LEARNED.md) |
 | [v1.49.4](release-notes/v1.49.4/) | Filesystem Management Strategy | 2026-02-27 | 3 | 7 | |
 | [v1.49.3](release-notes/v1.49.3/) | GSD-OS Desktop Polish (Patch) | 2026-02-27 | — | — | |

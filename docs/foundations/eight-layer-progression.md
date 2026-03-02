@@ -180,7 +180,7 @@ theory applied to software. Skills are objects. Composition rules determine whic
 can combine into agents and which agents can form teams. The six-stage pipeline (Score,
 Resolve, ModelFilter, CacheOrder, Budget, Load) is a sequence of morphisms in a
 category where each stage transforms one type into another. The
-[AMIGA Principle](principles/amiga-principle.md) is the design-level expression of
+[AMIGA Principle](../principles/amiga-principle.md) is the design-level expression of
 categorical composition: small, well-defined components producing disproportionate
 capability through composition.
 
@@ -262,17 +262,17 @@ Layer 8 explains the recursive improvement patterns.
 ## How It Connects
 
 The eight-layer progression is itself a demonstration of
-[progressive disclosure](principles/progressive-disclosure.md). Each layer discloses
+[progressive disclosure](../principles/progressive-disclosure.md). Each layer discloses
 exactly what the reader needs for the next, never more. The progression traces a path
-through the [Complex Plane of Experience](foundations/complex-plane.md), beginning near
+through the [Complex Plane of Experience](complex-plane.md), beginning near
 the real axis (geometric, concrete) and moving through regions that require both
 analytical and creative thinking.
 
 At the principles layer, the progression informs the
-[AMIGA Principle](principles/amiga-principle.md): category theory (Layer 6) provides the
+[AMIGA Principle](../principles/amiga-principle.md): category theory (Layer 6) provides the
 formal basis for why composable building blocks produce disproportionate capability.
 At the applications layer, every educational pack draws on concepts from specific layers,
-and the [educational packs index](applications/educational-packs.md) identifies those
+and the [educational packs index](../applications/educational-packs.md) identifies those
 connections.
 
 
@@ -280,6 +280,6 @@ connections.
 
 Read the full textbook: [*The Space Between*](https://tibsfox.com/media/The_Space_Between.pdf) (PDF, 923 pages).
 
-For the organizing framework: [Complex Plane of Experience](foundations/complex-plane.md).
+For the organizing framework: [Complex Plane of Experience](complex-plane.md).
 
-For the gateway to the full textbook: [Mathematical Foundations](foundations/mathematical-foundations.md).
+For the gateway to the full textbook: [Mathematical Foundations](mathematical-foundations.md).

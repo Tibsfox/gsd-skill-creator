@@ -109,17 +109,17 @@ somewhere in the interior, and getting better at it means extending along both a
 simultaneously.
 
 Then look at the ecosystem through this lens. The
-[mathematical foundations](foundations/mathematical-foundations.md) gateway is primarily
-real-axis material. The [humane flow](principles/humane-flow.md) principle is primarily
+[mathematical foundations](mathematical-foundations.md) gateway is primarily
+real-axis material. The [humane flow](../principles/humane-flow.md) principle is primarily
 imaginary-axis material (designing systems that feel supportive). The
-[AMIGA Principle](principles/amiga-principle.md) lives in the interior, combining the
+[AMIGA Principle](../principles/amiga-principle.md) lives in the interior, combining the
 analytical rigor of architectural design with the creative insight of recognizing which
 constraints produce leverage.
 
 If you want the formal mathematical treatment, read *The Space Between*, where the
 Complex Plane of Experience is introduced as a mathematical structure with precise
 definitions. If you want the practical application, continue to the
-[Eight-Layer Progression](foundations/eight-layer-progression.md), which shows how the
+[Eight-Layer Progression](eight-layer-progression.md), which shows how the
 mathematical journey traces a specific path through this plane.
 
 
@@ -128,9 +128,9 @@ mathematical journey traces a specific path through this plane.
 The Complex Plane of Experience connects to every other layer because it is the
 framework that explains why those layers exist and how they relate.
 
-At the principles layer, [progressive disclosure](principles/progressive-disclosure.md)
+At the principles layer, [progressive disclosure](../principles/progressive-disclosure.md)
 can be understood as movement along the real axis: each reading speed (glance, scan,
-read) adds precision and detail. The [AMIGA Principle](principles/amiga-principle.md)
+read) adds precision and detail. The [AMIGA Principle](../principles/amiga-principle.md)
 operates along both axes: architectural leverage requires the analytical ability to
 design composable components (real) and the creative insight to recognize which
 compositions produce disproportionate capability (imaginary).
@@ -143,7 +143,7 @@ not explicitly programmed.
 At the applications layer, each educational pack occupies a distinct position on the
 plane. The Foundational Knowledge Packs span a wide range, from purely analytical
 subjects (mathematics, logic) to primarily creative ones (art, music). The
-[educational packs index](applications/educational-packs.md) maps the full landscape.
+[educational packs index](../applications/educational-packs.md) maps the full landscape.
 
 
 ## Go Deeper
@@ -151,7 +151,7 @@ subjects (mathematics, logic) to primarily creative ones (art, music). The
 For the mathematical treatment: [*The Space Between*](https://tibsfox.com/media/The_Space_Between.pdf) (PDF, 923 pages).
 
 For how the eight mathematical layers trace a path through this plane:
-[Eight-Layer Progression](foundations/eight-layer-progression.md).
+[Eight-Layer Progression](eight-layer-progression.md).
 
 For how this framework shapes documentation design:
-[Progressive Disclosure](principles/progressive-disclosure.md).
+[Progressive Disclosure](../principles/progressive-disclosure.md).

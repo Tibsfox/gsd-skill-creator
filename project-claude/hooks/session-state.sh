@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # session-state.sh — SessionStart hook: inject project state reminder
 # Outputs STATE.md head on every session start for orientation.
 
