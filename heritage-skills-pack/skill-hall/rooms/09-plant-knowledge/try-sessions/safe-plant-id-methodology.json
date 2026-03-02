@@ -1,0 +1,50 @@
+{
+  "id": "plant-09-safe-id-beginner",
+  "title": "Safe Plant ID Methodology",
+  "tradition": "cross-tradition",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Learn the safe plant identification methodology used across all traditions: multiple markers, toxic look-alike awareness, and the absolute rule — never identify a plant from a single description, photo, or marker. Deadly look-alikes exist for nearly every popular foraged species. This session is the required foundation before engaging with any specific plant foraging content in this room.",
+  "prerequisites": [],
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "The cardinal rule of plant identification: NEVER identify a plant from a single source alone — not a text description, not a single photo, not a single field mark. Deadly plants often closely resemble edible species and cannot be reliably distinguished without multiple independent identifying features confirmed simultaneously.",
+      "safetyNote": "CRITICAL: NEVER identify a plant from a single description, photo, or marker. Deadly look-alikes exist for nearly every popular foraged species. Multiple independent markers are required. A single correct-looking feature is not sufficient grounds for consumption. If you are not 100% certain from multiple markers, do not eat it.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "The multi-marker methodology: for any plant you are considering foraging, you must confirm ALL of the following independently — (1) overall visual shape and growth habit, (2) leaf shape, arrangement, and texture, (3) stem structure (round, square, hollow, hairy), (4) habitat and ecological context, (5) season and phenological stage, (6) smell when leaves are crushed, (7) texture of leaf surface, bark, or stem. Cross-reference at least two different published field guides. The more markers that independently confirm the ID, the more reliable your identification.",
+      "safetyNote": "Even with all markers, beginners should have any foraged plant confirmed by an experienced forager before consuming. App-based identification (iNaturalist, etc.) can be a useful starting point but is never sufficient on its own for consumption decisions.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 3,
+      "instruction": "Toxic look-alike awareness: every popular edible plant has at least one dangerous look-alike, and in many cases a lethal one. Classic dangerous pairs to know: (1) Ramps/wild leeks (edible) vs. lily of the valley (toxic) vs. death camas (potentially lethal) — all have similar strap-shaped leaves. (2) Morel mushrooms (edible) vs. false morel/Gyromitra (toxic) — false morels have wrinkled caps vs. pitted morel caps. (3) Wild carrot/Queen Anne's lace (edible) vs. poison hemlock (potentially lethal) — hemlock has purple blotching on stems. (4) Elderberries (edible when cooked) vs. pokeweed berries (toxic) or water hemlock berries (lethal). Study look-alike pairs before foraging any species.",
+      "safetyNote": "Each edible plant discussed in this pack includes its specific toxic look-alikes. Skipping look-alike study is never acceptable. Learning the look-alike is as important as learning the target plant.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 4,
+      "instruction": "Field guide usage: published field guides by expert botanists are your most reliable identification resource. Recommended foundations: Peterson Field Guides (Edible Wild Plants by Lee Allen Peterson), Samuel Thayer's 'Nature's Garden' and 'Forager's Harvest', regional guides specific to your geographic area. Develop the habit of looking up every plant in two different guides before foraging. Never use a field guide as your only source — cross-reference always.",
+      "safetyNote": "Smartphone apps can misidentify dangerous plants as edible. App-based identification should never be the basis for foraging decisions. Published expert field guides are the standard; in-person expert confirmation is the gold standard.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 5,
+      "instruction": "When NOT to forage: even a correctly identified plant is unsafe to forage in certain conditions. Do not forage from: private land without permission, roadsides or railroad tracks (chemical contamination), areas that may have been sprayed with herbicides or pesticides, protected natural areas or national parks where foraging is prohibited, rare or threatened plant populations. Learn local regulations and land ownership before foraging.",
+      "safetyNote": "Contaminated plants (heavy metals, pesticides, herbicides) may look healthy and correctly identified but be unsafe to eat. Proximity to roads, industry, or agricultural land is a disqualifying factor regardless of species identification.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 6,
+      "instruction": "The mentorship model: in every heritage tradition covered in this pack — Appalachian, First Nations, Inuit — plant knowledge is traditionally passed person-to-person across generations. An elder, experienced forager, or community knowledge keeper teaches by doing: walking the land together, pointing out plants in context, teaching when and how to harvest. A book or app is a supplement, never a replacement, for learning from someone who has practiced this knowledge across many seasons.",
+      "culturalContext": "In every heritage tradition covered in this pack, plant knowledge is traditionally passed person-to-person. An experienced mentor teaches in context — reading the land, knowing the seasons, recognizing the full ecological picture. A book or app supplements; it never replaces direct mentorship. Seek out experienced foragers, First Nations knowledge keepers, and elders willing to share. That person-to-person transmission is the safest and most complete form of plant knowledge.",
+      "sumoMapping": "OralTradition"
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}
