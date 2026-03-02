@@ -1,0 +1,51 @@
+{
+  "id": "music-06-dulcimer-string-beginner",
+  "title": "Mountain Dulcimer String Basics: Tuning and Notation",
+  "tradition": "appalachian",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore the Appalachian mountain dulcimer -- its history, construction principles, and basic playing approach. Learn how the dulcimer's fret system and drone strings create the characteristic Appalachian sound, and how the noter style allows playing without formal music training.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Examine a mountain dulcimer (or a photo or diagram). Identify the main structural parts: the body (soundbox), the fretboard (running the length of the body), the tuning pegs (at the head), and the strings (typically 3-4, with one or two drone strings and one or two melody strings).",
+      "culturalContext": "The Appalachian mountain dulcimer is a hybrid instrument with no clear single origin. It combines features of European zithers (German scheitholt, French épinette des Vosges) with adaptations made by Appalachian builders. The result is an instrument uniquely suited to the Appalachian tradition: relatively easy to build from local materials, easy to learn to play without formal training, and resonant with the modal scales of the ballad tradition.",
+      "sumoMapping": "MusicalInstrument"
+    },
+    {
+      "order": 2,
+      "instruction": "Count the frets on the dulcimer fretboard. Notice that there is an extra fret at the 6-and-a-half position (between frets 6 and 7) that most other instruments do not have. This is sometimes called the noter fret and it produces the characteristic modal intervals of Appalachian music. Write down the fret sequence: 0 (open string), 1, 2, 3, 4, 5, 6, 6+, 7, and continuing up.",
+      "culturalContext": "The 6+ fret gives the mountain dulcimer its characteristic sound. It allows the player to access the Mixolydian mode (a flattened 7th scale degree) that is central to Scots-Irish ballad and dance tune harmony. Players who play in DAA tuning and use the 6+ fret can play many traditional Appalachian tunes without any other music theory knowledge.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 3,
+      "instruction": "Practice the noter style: hold a noter (a small cylindrical stick, traditionally made from a piece of cane or a pencil) in the left hand. Press the noter lightly against the melody string at fret 1. Pluck the melody string and the drone strings simultaneously with the right hand. Move the noter to fret 2 and pluck again. Move to fret 3. Notice how the drone strings ring continuously while only the melody string changes pitch.",
+      "culturalContext": "The noter style was the traditional Appalachian way of playing the dulcimer. You hold the noter in the fretting hand and press it against only the melody string, while the drone strings ring open throughout. This creates the characteristic drone-plus-melody sound of Appalachian dulcimer music. You do not need to read music to play noter style -- you need only to know which fret sequence produces which tune.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 4,
+      "instruction": "Try tuning: standard DAD tuning has the bass string tuned to D, the middle drone string to A, and the melody string to D (an octave above the bass). Using a tuner app or pitch reference, tune your dulcimer to DAD. Notice how the two D strings create a natural octave drone when played open.",
+      "safetyNote": "Tool safety annotation: when tuning up to pitch for the first time on a newly made or repaired dulcimer, increase tension gradually over several sessions. Do not go from slack to full pitch in one sitting. A new instrument may flex under full string tension. If a string breaks under tension, it can cause eye injury -- keep your face away from the string line when tuning up.",
+      "culturalContext": "DAD is one of several traditional dulcimer tunings. DAA (bass D, middle A, melody A) is another common tuning that keeps both top strings in unison, producing a slightly different drone texture. Players sometimes refer to these as 'D tuning' and 'A tuning' referring to the melody string's open pitch.",
+      "sumoMapping": "MusicalInstrument"
+    },
+    {
+      "order": 5,
+      "instruction": "Shape-note singing and dulcimer accompaniment: Shape-note singing (the Sacred Harp tradition) uses four shapes -- fa (triangle), sol (circle), la (square), mi (diamond) -- to indicate solfege syllables, allowing community members to sing four-part harmony without music training. Consider how this democratization of music access relates to the dulcimer's accessibility. Both instruments are entry points to music for people who would otherwise be excluded by formal training requirements.",
+      "culturalContext": "Shape-note singing was a community musical literacy tool used across the Appalachian South from the early 1800s onward. Like the dulcimer's noter style, it was designed to make musical participation accessible to people without formal music education. Both traditions reflect an Appalachian community value: music belongs to everyone, not just to trained musicians. Sacred Harp sings are community gatherings where everyone sings -- there is no audience, only participants.",
+      "sumoMapping": "Music"
+    },
+    {
+      "order": 6,
+      "instruction": "Banjo and dulcimer heritage note: the mountain dulcimer's drone-melody texture is similar to the banjo's. Both instruments use a drone string (the banjo's short fifth string) that rings throughout. Both have Appalachian heritage. The banjo's origins in West African lute traditions brought to North America through enslaved African people are part of the full history of Appalachian string music. Write one sentence acknowledging this cross-cultural heritage in your own words.",
+      "culturalContext": "Appalachian mountain music is not a single-heritage tradition. The fiddle, banjo, dulcimer, and vocal traditions that make up Appalachian music draw on Scots-Irish, English, German, and African American roots. The Scots-Irish and African American musical exchange -- at square dances, at crossroads gatherings, in shared community spaces -- produced the hybrid that became old-time, bluegrass, and country music. Telling Appalachian music history accurately requires all these strands.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ]
+}
