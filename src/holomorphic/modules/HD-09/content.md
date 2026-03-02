@@ -1,3 +1,11 @@
+---
+module: HD-09
+title: "Dynamic Mode Decomposition"
+textbook_chapters: [26, 27, 11, 12, 13]
+textbook_chapters_confidence: medium
+textbook_chapters_note: "Dynamic Mode Decomposition IS spectral decomposition (Ch 26–27, Part VIII: Unification) and IS educational linear algebra (Ch 11–13, Part IV: Structure). dmd() IS the construction of a linear evolution operator from snapshot data. svd() IS an educational SVD from linear algebra axioms."
+---
+
 # HD-09: Dynamic Mode Decomposition
 
 ## What is DMD?

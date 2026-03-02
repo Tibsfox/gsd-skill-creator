@@ -1,3 +1,10 @@
+---
+module: HD-06
+title: "Topology of the Complex Plane"
+textbook_chapters: []
+textbook_chapters_note: "No confirmed chapter-level identity connection. HD-06 educates on topological properties (connectedness, Riemann sphere, conformal maps) but src/holomorphic/ does not export topological predicates as functions. Closest textbook territory is Part VI: Foundations (Ch 18–21), but the relationship is educational dependency, not identity. See Gaps Found in docs/foundations/curriculum-alignment.md."
+---
+
 # HD-06: Topology of the Complex Plane
 
 ## Overview

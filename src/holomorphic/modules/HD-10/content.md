@@ -1,3 +1,11 @@
+---
+module: HD-10
+title: "Koopman Operator Theory"
+textbook_chapters: [27, 26]
+textbook_chapters_confidence: low
+textbook_chapters_note: "Koopman Operator Theory has a low-confidence connection to Ch 26–27 (Part VIII: Unification) as the theoretical framework for lifting nonlinear systems into linear observable space. edmd() IS the Extended DMD approximation of the Koopman operator — the most abstract unification in the pack. Low confidence because Ch 26–27 covers gauge symmetry and physics unification, while Koopman is a mathematical unification framework; topic alignment is approximate. See docs/foundations/curriculum-alignment.md."
+---
+
 # HD-10: Koopman Operator Theory
 
 ## The Koopman Operator
