@@ -1,0 +1,50 @@
+{
+  "id": "community-10-appalachian-mapping-beginner",
+  "title": "Appalachian Community Mapping: Documenting the Mutual Aid Network",
+  "tradition": "appalachian",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Learn to map the mutual aid and community support networks of an Appalachian community using the Foxfire-inspired approach. Understand how barn raising, church governance, and neighborliness ethics created a resilient community infrastructure that functioned without formal state support.",
+  "prerequisites": [],
+  "safetyLevel": "standard",
+  "culturalLevel": 1,
+  "sumoProcessClass": "CulturalPractice",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Before beginning, ask yourself: what community are you documenting? (Your own? A historical Appalachian community from Foxfire volumes?) Write one sentence describing the community and its approximate time and place.",
+      "culturalContext": "A community map is not just a geographic map — it is a map of relationships. Who helps whom? Who are the knowledge holders? Where does the community gather to make decisions? What is the rhythm of community life through the year? The Foxfire volumes document communities in the Rabun County, Georgia area in the 1960s-1970s — but the patterns they describe (barn raising, church governance, mutual aid labor exchange) were common across the southern and central Appalachians from the 1700s through the mid-20th century. The specific community shapes the specific network, but the structures repeat.",
+      "sumoMapping": "CulturalPractice"
+    },
+    {
+      "order": 2,
+      "instruction": "List 5-8 types of participants at a barn raising (by role or relationship, not name). For each, describe what they contributed and what obligation their participation created.",
+      "culturalContext": "The barn raising as network node: a barn raising was not a single event — it was a revelation of the mutual aid network. Who showed up? Who provided food? Who had specialized skills (carpentry, roofing, stone work) that others did not? The Appalachian barn raising operated as a form of social credit system. A family that worked on neighbors' barns, cabins, and harvests had credit it could draw on when it needed help. A family that failed to contribute to community work events gradually lost access to the network. The system was self-regulating through community memory and reputation.",
+      "sumoMapping": "SocialGroup"
+    },
+    {
+      "order": 3,
+      "instruction": "Describe three decisions or functions that a church meeting would handle in a historical Appalachian community that a town council would handle in an urban community. What does this tell you about the relationship between religious and civic life in Appalachian communities?",
+      "culturalContext": "The church as governance center: in many Appalachian communities, the church meeting was the closest thing to a community government. Decisions about roads, schools, and community disputes were discussed at church meetings. The church calendar organized the community year: planting time, laying-by time, revival season, harvest season. The role of the church as governance center was not a sign of theocracy — it was a pragmatic use of the only existing community infrastructure. The church building was the only public space; the church calendar was the shared time system; the congregation was the assembled community. Governance happened there because it was the only place the community assembled.",
+      "sumoMapping": "Government"
+    },
+    {
+      "order": 4,
+      "instruction": "Create a list of 8-10 knowledge domains that a historical Appalachian community needed to function. For each, describe who would hold that knowledge (by social role or position) and how the knowledge was transmitted to the next generation.",
+      "culturalContext": "Mapping the knowledge holders: every community has specific individuals who hold specific types of knowledge. The herbalist. The midwife. The saddle-maker. The master carpenter. The person who knows which creek bottoms flood and which don't. Foxfire's documentation project was, in part, a recognition that these knowledge holders were aging and that their knowledge would die with them if it was not documented. The Foxfire volumes are organized around knowledge domains: planting by the signs, animal husbandry, wood-splitting, soap-making — exactly this kind of mapping, done before it was too late.",
+      "sumoMapping": "CulturalPractice"
+    },
+    {
+      "order": 5,
+      "instruction": "Write a brief description of an ethical principle that governed Appalachian community life — not a law, not a church rule, but an understood expectation. How was this principle enforced? (Not by courts — by community memory, reputation, and reciprocal obligation.)",
+      "culturalContext": "Neighborliness as ethics: the Appalachian ethic of neighborliness was not sentimentality — it was a survival framework. You helped neighbors because you would need help yourself. You did not ask whether your neighbor deserved help; you asked whether they were your neighbor. The boundary of obligation was the boundary of the community. This ethic was enforced not by law but by community reputation: failure to participate in the mutual aid network was remembered and created social consequences. Help was freely given, but it was not without memory.",
+      "sumoMapping": "NormativeAttribute"
+    },
+    {
+      "order": 6,
+      "instruction": "Looking at the community map you have built through this session, identify one element that would be most likely to disappear from community memory if not documented. Why that element? What would be lost if it were forgotten?",
+      "culturalContext": "The community map as heritage document: when you have completed your mapping exercise, you have produced a heritage document. You have described: who the community was, how it made decisions, how it shared labor, who held knowledge, what obligations bound people together. This is community memory — the same thing Foxfire's students were preserving in their interviews. The Foxfire project demonstrated that community members themselves are often unaware of how valuable their knowledge is until someone asks and listens carefully. The act of documentation is also the act of recognition: you are telling community members that their knowledge matters and deserves to be preserved.",
+      "sumoMapping": "CulturalPractice"
+    }
+  ]
+}
