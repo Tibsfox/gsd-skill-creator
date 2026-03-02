@@ -1,0 +1,51 @@
+{
+  "id": "arctic-14-qulliq-beginner",
+  "title": "Qulliq Lamp Operation",
+  "tradition": "inuit",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Learn the principles of the qulliq -- the soapstone oil lamp that provides light, heat, and cooking capability in the igloo. The qulliq is central to Inuit home life and embodies sophisticated material knowledge about soapstone, arctic cotton grass, and seal oil. This session includes critical ventilation requirements for safe indoor use of any open-flame heat source.",
+  "prerequisites": [],
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Understand the qulliq's function and cultural role. The qulliq (also spelled kudlik) is a shallow, crescent-shaped or oval soapstone lamp designed to burn seal oil or other animal fat with a shaped wick of arctic cotton grass or moss. It provides light, heat for warming the interior, a heat source for melting snow for drinking water, cooking heat, and drying surfaces for clothing and equipment. In the igloo, where the qulliq is the only source of heat and light, its management is critical knowledge.",
+      "culturalContext": "The qulliq is central to Inuit home life. Traditionally tended by women, it provides light, warmth, cooking heat, and drying capability for the household. Knowledge of the qulliq is knowledge of home. The woman who tends the qulliq is managing the thermal environment of the family -- too little flame and the interior is cold and dark; too much flame and fuel is wasted and the interior becomes dangerously warm, softening the snow walls. This balance is a practical skill that requires daily practice to master.",
+      "nationAttribution": "Inuit",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Learn soapstone properties and lamp carving principles. Soapstone (steatite) is selected for qulliq carving because it is soft enough to work with stone tools, holds heat evenly without cracking under thermal cycling, and has no harmful leaching properties when heated. A qulliq is shaped with a flat or slightly concave oil reservoir and a straight or gently curved wick shelf along one edge. The shape must allow oil to wick up to the flame consistently without pooling away from the wick side.",
+      "nationAttribution": "Inuit",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 3,
+      "instruction": "Prepare the wick from arctic cotton grass (Eriophorum) or other moss. The cotton grass seed heads, which produce fluffy white fibers in late summer, are gathered and dried. Wick preparation involves pulling the fibers apart, loosening them, and shaping them into a loose bundle that will absorb oil and sustain a flame without burning too rapidly. The wick must be shaped correctly -- too dense and it won't burn cleanly; too loose and it will burn through quickly. Replace the wick section by section as it burns, pulling fresh wick forward along the wick shelf.",
+      "culturalContext": "The choice of wick material reflects Inuit environmental knowledge: arctic cotton grass produces a wick that burns with remarkable efficiency in seal oil. The knowledge of where to find cotton grass, when to harvest it at peak fiber development, and how to process and store it for winter use is part of the seasonal round knowledge system that connects qulliq operation to the broader ecology of the arctic environment.",
+      "nationAttribution": "Inuit"
+    },
+    {
+      "order": 4,
+      "instruction": "Understand fuel selection and flame management. Seal oil is the traditional fuel -- it has high energy content, burns cleanly in a well-managed qulliq, and was available from the seal hunt. Rendered bear or beluga fat can also be used. The flame height is controlled by adjusting the amount of wick exposed above the oil surface and the density of the wick. A well-managed qulliq burns with a steady, low yellow-orange flame; a flame that flickers, smokes heavily, or produces a strong smell indicates poor wick condition, contaminated fuel, or ventilation problems.",
+      "nationAttribution": "Inuit"
+    },
+    {
+      "order": 5,
+      "instruction": "CRITICAL: Before lighting any qulliq or open flame in an enclosed space, verify ventilation. Check that the igloo ventilation hole (near the top of the dome) is open and clear of snow or ice. The entrance tunnel provides an air inlet; the vent hole provides an outlet. With both open, combustion gases are exhausted while fresh air enters. Monitor the flame: a flame burning lower or changing color toward orange-red can indicate reduced oxygen. Perform a headache or dizziness check on all occupants before settling in for the night.",
+      "safetyNote": "CRITICAL -- CO AND FIRE WARNING: NEVER operate a qulliq or any open flame in an enclosed space without adequate ventilation. The qulliq consumes oxygen and produces carbon dioxide and carbon monoxide as combustion products. In a well-sealed igloo without ventilation, CO can reach dangerous levels within one to two hours of qulliq use. Symptoms of CO buildup: headache (often the first sign), dizziness, nausea, confusion, and then loss of consciousness. These symptoms can be mistaken for tiredness. If anyone inside reports a headache or unusual drowsiness, exit the shelter immediately, check and clear the ventilation hole, and wait 15 minutes before re-entry. Fire safety: keep all combustible materials (clothing, furs, food) at least 30 cm away from the flame. Never leave the qulliq unattended. If the qulliq tips, extinguish it immediately -- burning oil on snow creates a difficult fire to control.",
+      "nationAttribution": "Inuit"
+    },
+    {
+      "order": 6,
+      "instruction": "Learn the cooking and drying functions of the qulliq. A flat stone or small pot placed over or beside the flame provides a cooking surface for melting snow for water and heating food. Wet clothing and boots can be hung near (not over) the qulliq to dry while the household sleeps. The qulliq's even, sustained heat is ideal for this purpose -- it does not flare or spike. Before sleeping, assess whether to extinguish the qulliq or reduce its flame: a well-ventilated igloo with an experienced user can maintain a low qulliq flame through the night, but when in doubt, extinguish and rely on body heat.",
+      "safetyNote": "Fire safety: keep combustibles away from the flame at all times. Never hang wet clothing directly over an open flame -- dripping moisture can cause flare-ups and the clothing itself may ignite if it swings too close. Position clothing to dry at the sides and above the lamp, not directly over it. Extinguish the qulliq before sleeping if you are unsure about ventilation or if you are alone.",
+      "nationAttribution": "Inuit",
+      "sumoMapping": "HeritageSkill"
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}

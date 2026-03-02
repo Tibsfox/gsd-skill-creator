@@ -1,0 +1,58 @@
+{
+  "id": "arctic-14-igloo-geometry-beginner",
+  "title": "Igloo Block-Cutting Geometry",
+  "tradition": "inuit",
+  "difficulty": "beginner",
+  "estimatedMinutes": 25,
+  "description": "Explore the geometry and engineering of igloo block cutting -- how Inuit builders create the catenary curve dome from precisely cut snow blocks, with critical ventilation requirements for safety. This session covers the physics and practice of one of the most elegant engineering achievements in the human built environment.",
+  "prerequisites": [],
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Assess snow quality before beginning any igloo construction. The ideal snow is wind-packed and cohesive -- it should hold together when compressed in your hand and support your weight without crumbling. Avoid fresh powder (too soft), hollow crust (unstable), or wet spring snow (too heavy and won't hold shape when cut). Test by walking on the surface: a light crunching sound with minimal penetration indicates good igloo snow.",
+      "culturalContext": "Igloo building is a core Inuit skill developed over millennia in some of the harshest conditions on Earth. The builder reads snow the way a carpenter reads wood -- assessing grain, density, moisture, and structural properties through direct sensory knowledge. This knowledge is embodied in the Inuit hunter who can assess snow quality at a glance, a skill that takes years to develop.",
+      "nationAttribution": "Inuit",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Cut snow blocks using a snow knife or long knife, working in a consistent direction. Standard igloo blocks are approximately 90 cm (3 feet) long by 40 cm (16 inches) wide by 20 cm (8 inches) tall, though dimensions vary by builder and snow quality. Cut with the blade nearly vertical, making one cut along the length and two cuts across the ends. Lever the block up from the bottom with the blade to free it cleanly.",
+      "safetyNote": "Snow knife safety: always cut away from your body and maintain firm footing before each cut. Snow surfaces can be slippery and your footing will change as you cut blocks from the snow beneath you. Never rush block-cutting -- a consistent, deliberate cut produces better blocks and prevents injury.",
+      "nationAttribution": "Inuit"
+    },
+    {
+      "order": 3,
+      "instruction": "Place the first row of blocks in a circle and immediately bevel the top surface of the entire first row at a shallow inward angle. This creates the ascending spiral: instead of building horizontal ring by ring (which would require cutting and fitting a special wedge block to complete each ring), the Inuit technique builds a continuous spiral. Mark a single point in the first row, bevel down to ground level at that point, and the ascending spiral begins naturally from there.",
+      "culturalContext": "The spiral technique is one of the engineering insights that makes igloo construction fast and structurally sound. A builder with experience can complete a 3-meter igloo in under two hours using this method. The spiral means there is no weak point where ring joints meet -- every block is locked into a continuous helix.",
+      "sumoMapping": "ConstructionProcess"
+    },
+    {
+      "order": 4,
+      "instruction": "As the spiral rises, tilt each successive block increasingly inward. The dome follows a catenary curve -- the same mathematical shape formed by a hanging chain, which is the most efficient arch for distributing load. Each block leans against the ones beside it and below it. The dome holds without mortar because every block is in compression: the weight above pushes each block into its neighbors rather than pulling it away. Near the top, the blocks will lean at dramatic angles that seem impossible until the keystone block is dropped in from above.",
+      "culturalContext": "The igloo dome demonstrates the same mathematical curve found in Gothic cathedrals, suspension bridges, and the Gateway Arch. Inuit builders discovered this geometry through thousands of years of practice -- Pilimmaksarniq in action. The catenary was not known to European architects until the 17th century. Inuit builders had been using it for millennia before that.",
+      "nationAttribution": "Inuit"
+    },
+    {
+      "order": 5,
+      "instruction": "CRITICAL: Before completing the dome or using the igloo for any purpose, create a ventilation hole near the top of the dome. Use a stick, ski pole, or small knife to poke a hole 2-4 cm (1-2 inches) in diameter through one of the upper dome blocks. Mark the exterior location of this hole with a stick or colored marker so it can be found and checked in darkness or from outside. This hole is not optional and must never be blocked.",
+      "safetyNote": "CRITICAL -- CO POISONING WARNING: A ventilation hole is NON-NEGOTIABLE in any enclosed snow shelter. Without it, CO2 builds up from breathing and -- if any heat source (body heat alone over time, a qulliq, a camp stove, or any combustion) is present -- carbon monoxide can accumulate to fatal levels within hours. CO is colorless and odorless; you will not know it is present until you are already impaired. Symptoms of CO poisoning: headache, dizziness, nausea, confusion, and then unconsciousness. The ventilation hole must be near the top of the dome (where warm air collects), never blocked by snow or equipment, and checked every time you re-enter the shelter. If you feel headache or unusual drowsiness inside, exit immediately and check/clear the vent.",
+      "nationAttribution": "Inuit",
+      "sumoMapping": "ConstructionProcess"
+    },
+    {
+      "order": 6,
+      "instruction": "Excavate the entrance tunnel below the floor level of the igloo interior. The cold trap works because cold air is denser than warm air: it sinks into the tunnel and stays there, while the warm air you generate inside rises and stays in the dome. The entrance should be just wide and tall enough to crawl through -- smaller is warmer. The floor level inside the dome should be raised above the tunnel floor by at least 30 cm (12 inches).",
+      "culturalContext": "The cold trap entrance is a passive heat-retention system of remarkable elegance. It requires no fuel, no technology, and no maintenance. Combined with the snow's own insulation properties (snow is roughly 90-95% air), a well-built igloo can maintain temperatures near freezing inside even when the exterior temperature is -40. The tunnel also provides wind protection: even in a blizzard, the interior of a well-built igloo is calm.",
+      "nationAttribution": "Inuit"
+    },
+    {
+      "order": 7,
+      "instruction": "Build or pack a raised sleeping platform inside the igloo, at least 30-45 cm (12-18 inches) above the tunnel floor level. In a small igloo, this may simply be a flat area with sleeping skins or caribou hides layered for insulation from the snow below. In larger structures, block platforms can be constructed. The platform puts occupants in the warmest zone of the igloo -- the rising warm air from the qulliq and body heat collects near the top of the dome.",
+      "safetyNote": "Hypothermia awareness: even inside a well-built igloo, sleeping on the ground without insulation can cause heat loss through conduction faster than body heat can compensate. Core body temperature below 35C/95F is a medical emergency. Signs that someone is becoming hypothermic: intense shivering (mild stage) that may stop as hypothermia worsens, slurred speech, confusion, loss of coordination, unusual drowsiness. A person who stops shivering in the cold may be progressing to dangerous hypothermia. Insulate from the ground, share body heat, and seek warmth immediately.",
+      "nationAttribution": "Inuit"
+    }
+  ],
+  "sumoProcessClass": "ConstructionProcess"
+}
