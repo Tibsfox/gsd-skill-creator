@@ -25,6 +25,11 @@ export const digestiveProcess: RosettaConcept = {
       targetId: 'psych-mental-health-models',
       description: 'Gut-brain axis: enteric nervous system communicates bidirectionally with the central nervous system -- gut health affects mood and cognition',
     },
+    {
+      type: 'cross-reference',
+      targetId: 'cook-protein-denaturation',
+      description: 'Protein denaturation by stomach acid during digestion mirrors the denaturation in cooking -- both processes unfold proteins, one for flavor development, one for nutrient absorption',
+    },
   ],
   complexPlanePosition: {
     real: 0.7,
