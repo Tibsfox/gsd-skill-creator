@@ -1,0 +1,44 @@
+{
+  "roomId": "room-03-animals-wildlife",
+  "room": 3,
+  "isCritical": false,
+  "primarySafetyDomains": ["animal", "tool", "food"],
+  "criticalRules": [],
+  "gateRules": [],
+  "annotateRules": [
+    {
+      "id": "ROOM03-ANN-001",
+      "description": "Animal handling safety (livestock, bees, wild game)",
+      "trigger": "any live animal handling, livestock, beekeeping, wild game capture or processing",
+      "action": "ANNOTATE -- live animals can bite, kick, sting, or scratch; approach animals calmly and without sudden movements; beekeeping requires a veil and appropriate protective clothing; always have an exit path when working with confined livestock"
+    },
+    {
+      "id": "ROOM03-ANN-002",
+      "description": "Bee sting allergy awareness",
+      "trigger": "beekeeping, bee handling, honey extraction, swarm catching",
+      "action": "ANNOTATE -- bee stings cause anaphylaxis in sensitive individuals; before working with bees, know your allergy status; if allergic, carry an epinephrine auto-injector (EpiPen) and never work with bees alone; even non-allergic individuals may develop sensitivity after multiple stings"
+    },
+    {
+      "id": "ROOM03-ANN-003",
+      "description": "Tool safety for trapping, hide work, and hunting",
+      "trigger": "trap setting, snare construction, hide scraping, skinning, knife use for game processing",
+      "action": "ANNOTATE -- trapping tools (snare wire, spring-loaded traps), hide-scraping tools (fleshing knife, scraper), and hunting/processing knives are all sharp or have pinch/spring hazards; keep the non-tool hand clear of the cutting or clamping zone; always cut away from the body; secure the workpiece before applying force"
+    },
+    {
+      "id": "ROOM03-ANN-004",
+      "description": "Game meat food safety",
+      "trigger": "wild game processing, meat storage, game bird handling, game meat preservation",
+      "action": "ANNOTATE -- wild game must be field-dressed promptly after harvest and cooled below 40°F (4°C) as quickly as possible; chronic wasting disease (CWD) risk in deer: avoid consuming spinal cord, brain, eyes, spleen, lymph nodes; check state/provincial game health advisories before consuming game from areas with known CWD; properly smoked or dried game must reach internal temperature sufficient to kill pathogens"
+    },
+    {
+      "id": "ROOM03-ANN-005",
+      "description": "Zoonotic disease and wildlife contact",
+      "trigger": "wild animal contact, trapping, wildlife handling, animal carcass processing",
+      "action": "ANNOTATE -- wild animals carry zoonotic diseases (transmissible to humans): rabies (never handle bats, foxes, raccoons, skunks without PPE), hantavirus (rodent droppings -- wear N95 mask), tularemia (rabbits and rodents -- wear gloves when handling), leptospirosis (water contaminated with animal urine); consult local wildlife disease advisories before harvesting or handling wild animals in unfamiliar areas"
+    }
+  ],
+  "safetyNotes": {
+    "animalRespect": "Safe animal handling is inseparable from respectful animal handling. In all three traditions covered in this room, animals are treated with respect -- not only as a cultural value but as a practical one. A calm, respectful approach reduces stress responses in animals, making handling safer for both animal and handler.",
+    "gameMeatSafety": "The most important food safety rule for wild game: field-dress and cool promptly. Heat is the enemy of game meat quality and safety. An ungutted deer or elk left in warm weather for more than an hour begins spoiling. The skill of efficient field dressing is the critical link between harvest and safe consumption."
+  }
+}

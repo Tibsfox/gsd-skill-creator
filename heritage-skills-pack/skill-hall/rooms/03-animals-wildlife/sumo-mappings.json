@@ -1,0 +1,82 @@
+[
+  {
+    "heritageConceptId": "room-03-domestic-bee",
+    "sumoTerm": "DomesticAnimal",
+    "sumoFile": "Merge.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass DomesticBee DomesticAnimal)",
+    "naturalLanguage": "A domestic honeybee colony managed for honey and wax production is a kind of domestic animal -- a species whose reproduction and behavior are shaped by human management practices."
+  },
+  {
+    "heritageConceptId": "room-03-appalachian-beekeeping",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass AppalachianBeekeeping HeritageSkill)",
+    "naturalLanguage": "Appalachian beekeeping is a heritage skill encoding knowledge of colony management, swarm behavior, honey extraction, and beeswax processing transmitted through the settler communities of the central and southern Appalachian region."
+  },
+  {
+    "heritageConceptId": "room-03-animal-track-reading",
+    "sumoTerm": "BiologicalProcess",
+    "sumoFile": "Merge.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass AnimalTrackReading BiologicalProcess)",
+    "naturalLanguage": "Reading animal tracks is a form of interpreting biological processes: inferring an animal's species, gait, behavior, weight, and time of passage from the physical impression left in substrate."
+  },
+  {
+    "heritageConceptId": "room-03-traditional-track-reading",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalTrackReading HeritageSkill)",
+    "naturalLanguage": "Traditional track reading is a heritage skill of Appalachian, Cree, Dene, and Anishinaabe traditions, encoding knowledge of regional species sign and behavioral ecology developed through generations of land-based practice."
+  },
+  {
+    "heritageConceptId": "room-03-wire-snare",
+    "sumoTerm": "Artifact",
+    "sumoFile": "Merge.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass WireSnare Artifact)",
+    "naturalLanguage": "A wire snare is an artifact: a manufactured device designed to capture animals by restraining a limb or the neck as the animal passes through the snare loop."
+  },
+  {
+    "heritageConceptId": "room-03-traditional-snaring",
+    "sumoTerm": "Hunting",
+    "sumoFile": "Merge.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalSnaring Hunting)",
+    "naturalLanguage": "Traditional snaring is a form of hunting: an intentional process to capture wild animals for food, fur, or other use, using restraining devices placed in animal travel corridors."
+  },
+  {
+    "heritageConceptId": "room-03-brain-tanning",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass BrainTanning HeritageSkill)",
+    "naturalLanguage": "Brain-tanning is a heritage skill practiced across many First Nations traditions: using the animal's own brain matter emulsified in water to chemically convert raw rawhide into soft, supple leather through repeated application, wringing, and working."
+  },
+  {
+    "heritageConceptId": "room-03-inuit-seal-hunting",
+    "sumoTerm": "Hunting",
+    "sumoFile": "Merge.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass InuitSealHunting Hunting)",
+    "naturalLanguage": "Inuit seal hunting is a form of hunting: an intentional process, guided by deep ecological knowledge of ringed and bearded seal behavior, sea ice conditions, breathing hole patterns, and sustainable harvest principles."
+  },
+  {
+    "heritageConceptId": "room-03-inuit-caribou-harvest",
+    "sumoTerm": "Hunting",
+    "sumoFile": "Merge.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass InuitCaribouHarvest Hunting)",
+    "naturalLanguage": "Inuit caribou harvest is a form of hunting organized around detailed knowledge of caribou seasonal migration routes, herd structure, and ecological relationships with their Arctic and subarctic habitat."
+  },
+  {
+    "heritageConceptId": "room-03-inuit-marine-mammal-knowledge",
+    "sumoTerm": "BiologicalProcess",
+    "sumoFile": "Merge.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass InuitMarineMammalKnowledge BiologicalProcess)",
+    "naturalLanguage": "Inuit knowledge of marine mammal ecology (beluga, narwhal, walrus) encodes understanding of species behavior, seasonal distribution, feeding ecology, and population dynamics accumulated through generations of observation and harvest."
+  }
+]

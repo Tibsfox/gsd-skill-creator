@@ -1,0 +1,90 @@
+{
+  "id": "room-02-fiber-textile",
+  "room": 2,
+  "domain": "fiber-textile",
+  "title": "Fiber & Textile",
+  "traditions": ["appalachian", "first-nations", "inuit"],
+  "sumoClasses": ["Fabric", "Sewing", "Weaving", "HeritageSkill", "MaterialCulture"],
+  "sumoFile": ["MILO", "heritage-domain-ontology.kif"],
+  "description": "Room 02 covers the full spectrum of fiber and textile traditions across Appalachian, First Nations, and Inuit cultures — three distinct relationships with plant, animal, and textile materials shaped by ecology, community, and generations of skilled practice.\n\nAppalachian fiber traditions draw from the Scots-Irish, English, and German immigrant communities who settled the mountain region from the 1700s forward. Hand-spinning on the great wheel (for wool) and the walking wheel was the foundation of household textile production — a skilled spinner could produce hundreds of yards of yarn per day. The flax wheel produced linen thread from locally grown flax. Floor loom and inkle loom weaving produced cloth for clothing and household use; coverlet weaving on pattern-shaft looms created elaborate geometric designs. Quilting brought community together at quilting bees, where patchwork traditions from Scots-Irish and German backgrounds merged into distinctly Appalachian patterns. Natural dyeing used Appalachian plants: black walnut hulls (brown-black), goldenrod (yellow), madder (red), and pokeberry (purple) — each with specific toxicity profiles that tradition-bearers understood. Natural dyeing is annotated for dye plant handling safety.\n\nFirst Nations fiber traditions in this room cover three distinct practices. Porcupine quillwork — practiced by Anishinaabe (Ojibwe), Mi'kmaq, and Haudenosaunee artisans, among others — is one of the oldest and most sophisticated decorative arts in northeastern and Great Lakes First Nations culture. Quillwork technique (quill sourcing, softening in the mouth, natural dyeing, flattening, and application to leather, birchbark, or woven bases) is Level 1 publicly shared knowledge appropriate for educational content with nation attribution. The design patterns used in quillwork — geometric arrangements, color combinations, clan and family motifs — may carry nation-specific cultural meanings beyond technique and are treated at Level 2 (contextually shared); learners interested in pattern meaning should seek community guidance. Birchbark biting (practiced by Anishinaabe, Cree, and Innu communities) involves folding thin birchbark and pressing precision bite marks through the layers to create symmetrical geometric designs — an extraordinary skill requiring advanced geometric visualization developed over years of practice. Cree and Metis finger weaving produces the assumption sash and L'Assumption sash by interlacing warp threads between the fingers, without a loom. Nettle fiber (Urtica dioica) was a historic plant-based textile fiber used by various First Nations communities before European cotton trade.\n\nInuit textile traditions are dominated by sinew thread and caribou hide. Caribou back sinew (the long dorsal tendon) is split into thread of varying diameters: fine for delicate work, heavy for structural seams. Sinew thread swells when wet, helping to seal stitch holes — a property essential in cold, wet conditions. Caribou hide sewing covers the orientation of fur (hair-inward for warmth, hair-outward against wind) and the seam types used in different garments. The amauti — the Inuit women's parka with baby pouch — is introduced as a construction concept demonstrating the integration of form and function in extreme cold-climate clothing. Waterproof seam techniques for Arctic watercraft (specifically the crimped stitch used in qajaq deck seams, where the sinew must remain watertight under paddling pressure) are cross-referenced to Room 14 (Arctic Living). This room covers sinew preparation and general garment sewing; Room 14 covers the watercraft-specific waterproofing application.",
+  "safetyDomains": ["tool"],
+  "trySessions": [
+    "fiber-02-spinning-beginner",
+    "fiber-02-sinew-splitting-beginner",
+    "fiber-02-quillwork-prep-beginner"
+  ],
+  "modules": [
+    {
+      "id": "fiber-02-appalachian-spinning",
+      "title": "Appalachian Hand-Spinning",
+      "tradition": "appalachian",
+      "description": "Hand-spinning on the great wheel and walking wheel: wool preparation (washing, picking, carding into roving), drafting technique, applying Z-twist, and winding on. Covers the drop spindle as the foundational tool and the transition to wheel spinning. Attributed to Scots-Irish and German Appalachian textile traditions documented in the Foxfire volumes.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Manufacturing", "HeritageSkill"]
+    },
+    {
+      "id": "fiber-02-appalachian-weaving",
+      "title": "Appalachian Loom Weaving",
+      "tradition": "appalachian",
+      "description": "Floor loom and inkle loom weaving in the Appalachian tradition: warping the loom, threading heddles, plain weave and pattern weave structures, and finishing woven cloth. Coverlet weaving on multi-shaft looms produced elaborate geometric patterns. Inkle loom weaving produces narrow bands and straps. Colonial Appalachian households produced most of their own cloth.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Weaving", "Fabric", "HeritageSkill"]
+    },
+    {
+      "id": "fiber-02-appalachian-quilting-dye",
+      "title": "Quilting Traditions and Natural Dyeing",
+      "tradition": "appalachian",
+      "description": "Appalachian quilting traditions: patchwork patterns from Scots-Irish and German backgrounds, community quilting bees as mutual aid practice, pattern naming traditions. Natural dyeing with Appalachian dye plants: black walnut hulls (brown-black), goldenrod (yellow), madder (red), pokeberry (purple-red). Toxicity notes on pokeberry (Phytolacca americana) and proper dye plant handling.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Fabric", "HeritageSkill", "MaterialCulture"]
+    },
+    {
+      "id": "fiber-02-fn-quillwork",
+      "title": "First Nations Porcupine Quillwork",
+      "tradition": "first-nations",
+      "description": "Porcupine quillwork: quill sourcing (from legally obtained porcupine hides), sorting by size and diameter, softening in the mouth, flattening, natural dyeing with traditional plant dyes, and application techniques (wrapping, folding, plaiting) on leather, birchbark, and woven bases. Technical quillwork is Level 1 publicly shared knowledge. CULTURAL SENSITIVITY: Specific design patterns may carry nation-specific meanings at Level 2 — this module acknowledges the cultural dimension of design without reproducing specific ceremonial designs. Seek community guidance for pattern meaning. Nation attribution: Anishinaabe (Ojibwe), Mi'kmaq, Haudenosaunee.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["Fabric", "HeritageSkill", "MaterialCulture"]
+    },
+    {
+      "id": "fiber-02-fn-birchbark-biting",
+      "title": "Birchbark Biting",
+      "tradition": "first-nations",
+      "description": "Birchbark biting: folding thin, flexible birchbark and pressing precise bite marks through multiple layers to create symmetrical geometric designs when unfolded. An extraordinary skill requiring advanced geometric visualization — the design must be conceived in folded form and executed through feel, not sight. Practiced by Anishinaabe, Cree, and Innu communities. Documented in museum collections as Level 1 publicly shared knowledge.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "MaterialCulture"]
+    },
+    {
+      "id": "fiber-02-fn-finger-weaving",
+      "title": "Cree and Metis Finger Weaving",
+      "tradition": "first-nations",
+      "description": "Cree and Metis finger weaving: producing the assumption sash (L'Assumption sash) and other woven bands by interlacing warp threads between the fingers without a loom. The L'Assumption sash is associated with Metis and French-Canadian identity as well as Cree textile traditions. Also covers nettle fiber (Urtica dioica) preparation as a historic plant-based fiber source used before European cotton trade. Nation attribution: Cree, Metis.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Weaving", "HeritageSkill", "MaterialCulture"]
+    },
+    {
+      "id": "fiber-02-inuit-sinew-sewing",
+      "title": "Inuit Sinew Thread and Caribou Hide Sewing",
+      "tradition": "inuit",
+      "description": "Sinew thread preparation from caribou back sinew: drying, splitting to appropriate diameter, moisture management during sewing, and threading bone or metal needles. Caribou hide sewing: fur-in vs. fur-out orientation for inner and outer garments, seam types for different applications, and boot construction principles. The amauti (Inuit women's parka with baby pouch) is introduced as a construction concept. Waterproof seam techniques for qajaq construction are cross-referenced to Room 14 (Arctic Living): this session covers foundational sinew preparation and garment sewing.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Sewing", "HeritageSkill", "MaterialCulture"]
+    },
+    {
+      "id": "fiber-02-waterproof-crossref",
+      "title": "Waterproof Sewing: Cross-Reference to Room 14",
+      "tradition": "inuit",
+      "description": "Waterproof stitching for Arctic watercraft (qajaq deck seams) is covered in Room 14 (Arctic Living). This module covers the conceptual bridge: the same sinew thread preparation skills taught in Room 02 underlie the waterproof stitch in Room 14, but the application context — where the seam must resist water pressure during paddling — requires the full safety context of watercraft construction. Learners who have completed the sinew thread session in Room 02 are well-prepared for the Room 14 waterproof stitch session.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Sewing", "HeritageSkill"]
+    }
+  ]
+}
