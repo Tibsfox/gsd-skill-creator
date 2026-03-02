@@ -1,0 +1,53 @@
+{
+  "id": "animals-03-beekeeping-beginner",
+  "title": "Appalachian Beekeeping: Log Gums, Swarms, and Honey",
+  "tradition": "appalachian",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore the Appalachian beekeeping tradition -- from the hand-hewn log gum (hollowed log hive) used by early settlers to swarm-catching, honey extraction, and beeswax uses. Understand the colony structure and seasonal management that made beekeeping a fixture of the Appalachian homestead.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Appalachian beekeeping heritage: log gums and skeps. Before the invention of the Langstroth movable-frame hive in the 1850s, Appalachian beekeepers used log gums -- sections of hollow log (often black gum or tulip poplar, whose smooth hollow interiors bees preferred) stood upright, closed at the bottom with a flat stone, and open at the top for honey harvest. Skeps (woven straw domes) were also used. Both hive types required killing the colony to harvest honey -- movable-frame hives solved this problem.",
+      "culturalContext": "The Foxfire books document Appalachian beekeepers who maintained log gums well into the 20th century alongside modern Langstroth hives. The log gum represents a direct continuity between pre-industrial beekeeping practice and the honeybee's natural preference for hollow tree cavities.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Colony structure: the honeybee colony is organized around a single queen (the only reproductive female), tens of thousands of worker bees (sterile females who gather nectar, make honey, raise young, and defend the hive), and seasonal drones (males present only for mating season). Understanding colony structure is the foundation of all beekeeping management.",
+      "sumoMapping": "BiologicalProcess"
+    },
+    {
+      "order": 3,
+      "instruction": "The swarm: in spring, a healthy colony that has outgrown its space produces a new queen and the old queen leaves with roughly half the workers in a swarm. The swarm clusters temporarily on a branch or post while scout bees search for a new cavity. Catching a swarm is a traditional Appalachian skill -- swarms are docile (they have no home to defend) and can be collected into a hive box.",
+      "safetyNote": "Animal/bee safety annotation: even though swarms are generally docile, bees can sting if pressed or alarmed. Always wear a veil when approaching any bee cluster. Know your allergy status before working with bees. Anyone with a known bee allergy should not approach a swarm without an epinephrine auto-injector (EpiPen) and another person present.",
+      "sumoMapping": "BiologicalProcess"
+    },
+    {
+      "order": 4,
+      "instruction": "Honey extraction: traditional Appalachian honey extraction was done by cutting the comb from the hive (log gum or top-bar hive) and allowing it to drain through cloth, or by crushing the comb and straining. Langstroth hive frames allow uncapping and centrifugal extraction without destroying comb -- a major efficiency advantage. Raw honey was strained of wax debris and stored in crocks or jars.",
+      "culturalContext": "Honey was one of the most valuable Appalachian homestead products -- a primary sweetener, a cough suppressant, and a trade item. Beeswax from the same colony was used for candles, wood finishing, leather waterproofing, and sealing preserve jars.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 5,
+      "instruction": "Beeswax uses: the Appalachian homestead found uses for beeswax in candle making (slow, even burn; better than tallow), furniture and leather polish (waterproofing), thread wax (running thread over beeswax before sewing strengthens it and reduces tangling), and sealing wax for canned goods.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 6,
+      "instruction": "Seasonal management: spring (colony expansion, swarm prevention, adding space), summer (honey production and harvest, mite monitoring), fall (reducing hive entrance, checking winter stores), winter (minimal disturbance, checking for cluster health). Each season has specific management tasks that determine colony survival.",
+      "safetyNote": "Animal safety annotation: colonies are most defensive in late summer and fall (smaller workforce, more to defend, potential yellow jacket raids on the colony). Exercise greater caution during fall inspections; wear full protective equipment and work in the morning when bees are calmer."
+    },
+    {
+      "order": 7,
+      "instruction": "Appalachian bee lore: Appalachian beekeeping tradition includes the practice of 'telling the bees' -- informing the colony of significant family events (births, deaths, marriages). This practice, documented in Foxfire sources, reflects the close relationship between Appalachian families and their colonies. Bees were considered part of the household.",
+      "culturalContext": "The tradition of telling the bees exists across multiple European beekeeping traditions (British, Irish, German) and was maintained in Appalachian practice. Whether understood literally or as a ritual of care and attention, it reflects how intimately Appalachian families observed their colonies -- close enough to notice when the colony was behaving abnormally.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}
