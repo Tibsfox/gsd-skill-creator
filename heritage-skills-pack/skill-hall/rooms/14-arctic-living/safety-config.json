@@ -1,0 +1,65 @@
+{
+  "roomId": "room-14-arctic-living",
+  "room": 14,
+  "isCritical": true,
+  "primarySafetyDomains": ["arctic-survival", "tool", "fire"],
+  "criticalRules": [
+    {
+      "id": "ROOM14-CRIT-001",
+      "description": "CO WARNING on EVERY enclosed-shelter scenario. Igloo, snow cave, quinzhee -- any enclosed snow/ice shelter MUST include ventilation instruction and CO poisoning warning.",
+      "trigger": "enclosed shelter construction or habitation",
+      "action": "HARD STOP if ventilation not mentioned -- insert CO warning with symptoms and ventilation requirements",
+      "source": "Arctic survival standards; Canadian Armed Forces Arctic Survival Manual; Inuit Tapiriit Kanatami"
+    },
+    {
+      "id": "ROOM14-CRIT-002",
+      "description": "Hypothermia recognition for ALL cold-exposure activities. Core body temperature below 95F/35C is a medical emergency.",
+      "trigger": "any activity involving cold exposure, wet conditions, or wind chill",
+      "action": "HARD STOP if hypothermia recognition not addressed -- insert hypothermia symptoms (intense shivering, slurred speech, confusion, loss of coordination) and response protocol (shelter, insulation, gentle rewarming, emergency evacuation for severe cases)",
+      "source": "Wilderness Medical Society Practice Guidelines; NOLS Wilderness Medicine"
+    }
+  ],
+  "gateRules": [
+    {
+      "id": "ROOM14-GATE-001",
+      "description": "Ice thickness safety for travel-on-ice. Ice breakthrough in remote arctic conditions is typically fatal.",
+      "trigger": "ice travel, crossing frozen water, travel on sea ice or frozen lakes and rivers",
+      "action": "GATE -- include minimum ice thickness requirements (4 inches/10 cm walking alone; 7-8 inches for a small group; 12-15 inches for snowmobile; 20+ inches for light vehicle) and testing method (probe ahead with pole or chisel, check for cracks or water seepage, test before full weight). Never cross alone.",
+      "source": "Canadian Snowmobile Safety Association; Ontario Ministry of Natural Resources Ice Safety Guidelines"
+    },
+    {
+      "id": "ROOM14-GATE-002",
+      "description": "Frostbite prevention for sub-zero activities. Frostbite can occur within minutes in extreme cold and wind.",
+      "trigger": "extended outdoor activity below freezing, especially with wind chill, wet conditions, or restricted circulation",
+      "action": "GATE -- include frostbite recognition (frostnip: red, numb skin that remains soft; frostbite: white/gray/waxy skin, hard, no sensation) and prevention (proper layering, wind protection, exposed skin time limits by temperature, keeping extremities moving). Treatment: do NOT rub. Do not rewarm if refreezing possible.",
+      "source": "Wilderness Medical Society Practice Guidelines; NOLS Wilderness Medicine"
+    },
+    {
+      "id": "ROOM14-GATE-003",
+      "description": "Qulliq operation fire and CO awareness. A burning qulliq in an enclosed space without ventilation is a CO risk.",
+      "trigger": "qulliq lamp operation, especially in enclosed igloo or tent",
+      "action": "GATE -- include fire safety (flame management, keep combustibles clear of flame, never leave unattended) AND CO ventilation requirement (igloo vent hole must be open and checked, monitor for CO symptoms: headache, dizziness, nausea, confusion). Extinguish before sleeping unless ventilation is absolutely certain.",
+      "source": "Inuit Tapiriit Kanatami; Traditional Inuit Building Knowledge"
+    },
+    {
+      "id": "ROOM14-GATE-004",
+      "description": "Tool safety for ulu, snow knife, and other traditional cutting tools. These are sharp, unguarded tools used in cold conditions that can impair grip and sensation.",
+      "trigger": "use of traditional cutting tools including ulu, snow knife, and carving tools in cold conditions",
+      "action": "GATE -- include proper grip technique, cutting direction (away from body), maintaining firm footing in slippery conditions, storage safety (never bare blade), and awareness that cold numbness reduces tactile feedback on tool control."
+    }
+  ],
+  "annotateRules": [
+    {
+      "id": "ROOM14-ANN-001",
+      "description": "Cold weather clothing layering system. Improper layering accelerates heat loss.",
+      "trigger": "clothing for cold weather, discussion of thermal protection",
+      "action": "ANNOTATE -- include base/mid/outer layer principle. Inuit system: inner layer hair-in (caribou), outer layer hair-out against wind. Modern equivalent: moisture-wicking base, insulating mid-layer (wool/down/fur), windproof outer layer. Cotton kills in cold wet conditions."
+    },
+    {
+      "id": "ROOM14-ANN-002",
+      "description": "Snow blindness (photokeratitis) awareness. Reflected UV on snow can cause temporary blindness within hours.",
+      "trigger": "travel on snow or ice in bright conditions, extended outdoor activity in arctic spring or summer",
+      "action": "ANNOTATE -- include snow blindness symptoms (gritty feeling, redness, temporary vision loss), prevention (ilgaak/snow goggles or UV-protective eyewear), and treatment (rest in dark, cool compresses). Traditional ilgaak were made from bone, ivory, or antler with narrow slits to reduce UV exposure."
+    }
+  ]
+}

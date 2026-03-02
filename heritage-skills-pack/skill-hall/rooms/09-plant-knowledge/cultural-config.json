@@ -1,0 +1,66 @@
+{
+  "roomId": "room-09-plant-knowledge",
+  "room": 9,
+  "culturalRules": [
+    {
+      "id": "ROOM09-CULT-001",
+      "domain": "plant-knowledge",
+      "tradition": "first-nations",
+      "concept": "sacred plants (sweetgrass, sage, tobacco, cedar)",
+      "identificationLevel": 1,
+      "ceremonialLevel": 4,
+      "note": "Level 1 for general botanical knowledge and identification — this is publicly shared. Level 3-4 for ceremonial use protocols: sweetgrass braiding ceremony, smudging practices, tobacco offerings, and cedar ceremony details are community-restricted (Level 3) or sacred-ceremonial (Level 4) depending on specific practice and community. These protocols belong to the communities that hold them and are not reproduced here.",
+      "action": "acknowledge-and-redirect"
+    },
+    {
+      "id": "ROOM09-CULT-002",
+      "domain": "plant-knowledge",
+      "tradition": "first-nations",
+      "concept": "birch/wiigwaas",
+      "level": 1,
+      "nationAttribution": "Anishinaabe",
+      "note": "General birch identification and material culture uses of wiigwaas (birchbark) are Level 1 publicly shared knowledge. Harvesting protocols vary by community — sustainable practices are publicly shared; ceremonial harvesting protocols are Level 2 contextually shared. The word wiigwaas (Ojibwe for birch/birchbark) should be used with attribution to Anishinaabe peoples.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM09-CULT-003",
+      "domain": "plant-knowledge",
+      "tradition": "first-nations",
+      "concept": "three sisters (corn, beans, squash)",
+      "level": 1,
+      "ceremonialLevel": 2,
+      "nationAttribution": "Haudenosaunee",
+      "note": "The Three Sisters agricultural system is Level 1 publicly shared knowledge — companion planting methodology and its agricultural benefits are documented in publicly available literature with Haudenosaunee attribution. The spiritual and ceremonial significance of the Three Sisters is Level 2 contextually shared — the educational framing that these are sacred to Haudenosaunee people is appropriate, but ceremony details are not reproduced.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM09-CULT-004",
+      "domain": "plant-knowledge",
+      "tradition": "first-nations",
+      "concept": "manoomin (wild rice)",
+      "level": 1,
+      "ceremonialLevel": 2,
+      "nationAttribution": "Anishinaabe",
+      "note": "General wild rice ecology and processing knowledge is Level 1 publicly shared. Ceremonial harvest and thanksgiving protocols are Level 2 contextually shared — the significance of manoomin to Anishinaabe peoples is publicly acknowledged; specific ceremonial protocols are held by Anishinaabe communities. Cross-references Room 05 (Food/Preservation) for manoomin processing. The Ojibwe word manoomin should be used with attribution to Anishinaabe peoples.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM09-CULT-005",
+      "domain": "plant-knowledge",
+      "tradition": "inuit",
+      "concept": "tundra medicinal plants",
+      "level": 2,
+      "note": "Tundra plant knowledge (Labrador tea, Arctic willow, bearberry, lichen) is presented as Level 2 contextually shared cultural knowledge — appropriate in educational settings with proper framing. This is cultural and historical knowledge about how Inuit and subarctic peoples have understood these plants across generations. It is not instruction for medicinal use. All health applications redirect to healthcare providers.",
+      "action": "summarize-and-refer"
+    },
+    {
+      "id": "ROOM09-CULT-006",
+      "domain": "plant-knowledge",
+      "tradition": "inuit",
+      "concept": "berry knowledge (aqpik, paurngaq, kigutangirnait)",
+      "level": 1,
+      "note": "Berry identification and harvesting knowledge is Level 1 publicly shared. Inuit place-names for berries (aqpik for cloudberry, paurngaq for crowberry, kigutangirnait for blueberry) should be used alongside English names with attribution to Inuit peoples. Regional variation in berry species and names should be acknowledged.",
+      "action": "include"
+    }
+  ]
+}

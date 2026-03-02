@@ -1,0 +1,74 @@
+[
+  {
+    "heritageConceptId": "room09-foraging",
+    "sumoTerm": "Gathering",
+    "sumoFile": "Processes.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Foraging Gathering)\n(subclass Foraging IntentionalProcess)\n(documentation Foraging EnglishLanguage \"A process of intentionally collecting wild plants, fungi, or other natural materials from their habitat for food or material use.\")",
+    "naturalLanguage": "Foraging is a subclass of Gathering — an intentional process of collecting wild plants and materials from their natural environment.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room09-birch-wiigwaas",
+    "sumoTerm": "FloweringPlant",
+    "sumoFile": "Trees.kif",
+    "mappingType": "instance",
+    "kifStatement": "(instance BirchTree FloweringPlant)\n(documentation BirchTree EnglishLanguage \"Deciduous trees of the genus Betula, known as wiigwaas in Ojibwe (Anishinaabe). Birchbark is central to Anishinaabe material culture: canoes, containers, scrolls, shelter, and art.\")",
+    "naturalLanguage": "Birch/wiigwaas (Anishinaabe) is an instance of FloweringPlant in the SUMO Trees.kif ontology. Wiigwaas is the Ojibwe word for birch and birchbark, central to Anishinaabe material culture.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room09-ethnobotany",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Ethnobotany HeritageSkill)\n(subclass Ethnobotany IndigenousKnowledgeSystem)\n(documentation Ethnobotany EnglishLanguage \"The scientific study of relationships between peoples and plants across cultural contexts, including traditional ecological knowledge about plant identification, uses, and management.\")",
+    "naturalLanguage": "Ethnobotany is a subclass of both HeritageSkill and IndigenousKnowledgeSystem — it encompasses the accumulated traditional knowledge about plant relationships held within cultural communities.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room09-three-sisters",
+    "sumoTerm": "Agriculture",
+    "sumoFile": "Processes.kif",
+    "mappingType": "instance",
+    "kifStatement": "(instance ThreeSistersAgriculture Agriculture)\n(instance ThreeSistersAgriculture CulturalPractice)\n(documentation ThreeSistersAgriculture EnglishLanguage \"The Haudenosaunee companion planting system of corn (maize), beans, and squash grown together. The Three Sisters support each other: corn provides structure, beans fix nitrogen, squash suppresses weeds. This is both an agricultural technology and a sacred cultural relationship for Haudenosaunee peoples.\")",
+    "naturalLanguage": "The Three Sisters (Haudenosaunee) is both an Agriculture instance and a CulturalPractice instance — a sophisticated companion planting system with deep spiritual and cultural significance beyond its agricultural function.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room09-berry-identification",
+    "sumoTerm": "Plant",
+    "sumoFile": "Biology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass BerryPlant Plant)\n(subclass BerryPlant Organism)\n(documentation BerryPlant EnglishLanguage \"Plants that produce berry fruits, including cloudberry (aqpik), crowberry (paurngaq), and blueberry (kigutangirnait) as identified by Inuit peoples of the tundra regions. Berry knowledge is publicly shared cultural knowledge central to Inuit seasonal food practices.\")",
+    "naturalLanguage": "Berry plants are subclasses of both Plant and Organism. Inuit berry knowledge (aqpik, paurngaq, kigutangirnait) represents publicly shared cultural knowledge about tundra plant identification and seasonal harvest.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room09-dye-plants",
+    "sumoTerm": "Plant",
+    "sumoFile": "Biology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass DyePlant Plant)\n(instance AppalachianDyeTradition Manufacturing)\n(instance AppalachianDyeTradition CulturalPractice)\n(documentation DyePlant EnglishLanguage \"Plants used for producing natural dyes in Appalachian heritage traditions, including bloodroot (Sanguinaria canadensis), black walnut hull (Juglans nigra), goldenrod (Solidago), and pokeberry (Phytolacca americana). The Appalachian natural dye tradition connects material culture to forest and garden plant knowledge.\")",
+    "naturalLanguage": "Dye plants are a subclass of Plant. The Appalachian natural dye tradition is both a Manufacturing process (producing dyed textiles) and a CulturalPractice (transmitting heritage knowledge).",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room09-sacred-plants",
+    "sumoTerm": "CulturalPractice",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "instance",
+    "kifStatement": "(instance SacredPlantKnowledge CulturalPractice)\n(instance SacredPlantKnowledge IndigenousKnowledgeSystem)\n(documentation SacredPlantKnowledge EnglishLanguage \"Cultural knowledge surrounding sacred plants (sweetgrass, sage, tobacco, cedar) in First Nations traditions. General botanical identification is publicly shared (Level 1). Ceremonial uses and protocols are community-restricted (Level 3) or sacred-ceremonial (Level 4) and are held by the communities that carry these traditions.\")",
+    "naturalLanguage": "Sacred plant knowledge is an instance of CulturalPractice and IndigenousKnowledgeSystem. The SUMO classification captures the cultural and knowledge dimensions; the ceremonial dimension is held at Level 3-4 by First Nations communities.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room09-tundra-plants",
+    "sumoTerm": "Plant",
+    "sumoFile": "Biology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TundraPlant Plant)\n(documentation TundraPlant EnglishLanguage \"Plants adapted to arctic and subarctic tundra environments, including Labrador tea (Rhododendron groenlandicum), Arctic willow (Salix arctica), reindeer lichen (Cladonia rangiferina), and Arctic cotton grass (Eriophorum). Tundra plant knowledge is presented as contextually shared cultural knowledge about Inuit and subarctic heritage.\")",
+    "naturalLanguage": "Tundra plants are a subclass of Plant, adapted to arctic and subarctic environments. Tundra plant knowledge in this room is presented as contextually shared (Level 2) cultural and historical knowledge.",
+    "ontologicalBridge": null
+  }
+]

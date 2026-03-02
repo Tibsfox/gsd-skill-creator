@@ -1,0 +1,72 @@
+{
+  "roomId": "room-14-arctic-living",
+  "room": 14,
+  "culturalRules": [
+    {
+      "id": "ROOM14-CULT-001",
+      "domain": "arctic-living",
+      "tradition": "inuit",
+      "concept": "igloo construction",
+      "level": 1,
+      "note": "Igloo construction techniques are Level 1 publicly shared knowledge. Widely documented and taught by Inuit communities, museums, and educational programs. Techniques include block-cutting, spiral building, catenary dome physics, and cold-trap entrance design. Widely shared because the knowledge serves community survival and is considered appropriate for broad educational use.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM14-CULT-002",
+      "domain": "arctic-living",
+      "tradition": "inuit",
+      "concept": "caribou clothing cycle",
+      "level": 1,
+      "note": "Level 1 publicly shared. The clothing cycle (hide preparation, parka construction, kamik, mittens) embodies Pilimmaksarniq (developing skills through practice and observation) and Pijitsirniq (serving the community through skilled work). The technical knowledge is shared for educational purposes; the spiritual relationship with the caribou is acknowledged at Level 2.",
+      "iqPrinciples": ["Pilimmaksarniq", "Pijitsirniq"],
+      "action": "include"
+    },
+    {
+      "id": "ROOM14-CULT-003",
+      "domain": "arctic-living",
+      "tradition": "inuit",
+      "concept": "hunting spiritual practices",
+      "level": 2,
+      "note": "Hunting spiritual practices are Level 2 contextually shared. The spiritual relationship between hunter, animal, and community is fundamental to Inuit practice and is acknowledged with respect. However, the specific ceremonies, protocols, and obligations of the hunting relationship are not reproduced — they are noted as existing and referred to community knowledge keepers and Inuit-authored resources. The physical skills of igloo-building and clothing-making are Level 1; the spiritual context that surrounds the hunt is Level 2.",
+      "action": "summarize-and-refer"
+    },
+    {
+      "id": "ROOM14-CULT-004",
+      "domain": "arctic-living",
+      "tradition": "inuit",
+      "concept": "qulliq knowledge",
+      "level": 1,
+      "note": "Qulliq construction and operation is Level 1 publicly shared knowledge. Widely documented by Inuit communities and taught in educational settings. The qulliq as a cultural object with deep social significance (traditionally tended by women, central to home life) is discussed with appropriate context at Level 1.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM14-CULT-005",
+      "domain": "arctic-living",
+      "tradition": "inuit",
+      "concept": "waterproof sewing and sinew work",
+      "level": 1,
+      "note": "Waterproof stitching techniques are Level 1 publicly shared knowledge. Widely documented as survival-critical skills. Attribution to Inuit communities required.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM14-CULT-006",
+      "domain": "arctic-living",
+      "tradition": "first-nations",
+      "concept": "Dene snowshoe and toboggan traditions",
+      "level": 1,
+      "nationAttribution": "Dene",
+      "note": "Level 1 publicly shared knowledge. Dene snowshoe designs (various styles for different terrain and snow conditions) and toboggan construction are widely documented. Attribution to Dene peoples is required throughout. Cross-reference with Inuit solutions to similar challenges supports cross-cultural learning without conflating distinct traditions.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM14-CULT-007",
+      "domain": "arctic-living",
+      "tradition": "first-nations",
+      "concept": "Dene hide clothing traditions",
+      "level": 1,
+      "nationAttribution": "Dene",
+      "note": "Level 1 publicly shared knowledge. Dene hide clothing traditions, including moosehide and caribou hide preparation and garment construction, are widely documented with community authorization. Attribution to Dene peoples required. Note that while hide clothing appears in both Inuit and Dene traditions, the specific techniques, styles, and cultural contexts differ — they should not be merged or conflated.",
+      "action": "include"
+    }
+  ]
+}

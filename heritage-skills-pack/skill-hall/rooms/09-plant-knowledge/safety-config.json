@@ -1,0 +1,63 @@
+{
+  "roomId": "room-09-plant-knowledge",
+  "room": 9,
+  "isCritical": true,
+  "primarySafetyDomains": ["plant", "medical"],
+  "criticalRules": [
+    {
+      "id": "ROOM09-CRIT-001",
+      "description": "NEVER identify a plant from user description alone. Require multiple markers: visual shape, leaf pattern, habitat, season, smell, texture, and cross-reference with field guides.",
+      "trigger": "user-submitted plant description for identification",
+      "action": "HARD STOP -- refuse identification, explain multiple-marker methodology and direct user to an in-person botanist or certified foraging expert",
+      "source": "American Association of Poison Control Centers; USDA Plant Identification Guidelines; Peterson Field Guides"
+    },
+    {
+      "id": "ROOM09-CRIT-002",
+      "description": "Every edible plant discussion MUST include toxic look-alike warnings specific to the plant being discussed. Ramps/lily-of-the-valley, morel/false morel, wild carrot/poison hemlock, ramps/death camas. Skipping look-alike study is never acceptable.",
+      "trigger": "any edible plant identification or foraging content",
+      "action": "GATE -- insert toxic look-alike warning specific to the plant discussed before any identification or foraging instruction proceeds",
+      "source": "Peterson Field Guides: Edible Wild Plants; Lee Allen Peterson; Samuel Thayer"
+    },
+    {
+      "id": "ROOM09-CRIT-003",
+      "description": "Hemlock, foxglove, death camas, lily of the valley, white snakeroot, and other lethal plants require full danger framing including poison control contact information.",
+      "trigger": "mention of known lethal plants (hemlock, foxglove, death camas, lily of the valley, white snakeroot, monkshood, belladonna, water hemlock, poison hemlock)",
+      "action": "REDIRECT -- full danger framing required: label as potentially lethal, do not harvest or consume without expert botanical supervision, provide Poison Control number (1-800-222-1222 in US)",
+      "source": "American Association of Poison Control Centers; CDC Plant Poisoning Data"
+    }
+  ],
+  "gateRules": [
+    {
+      "id": "ROOM09-GATE-001",
+      "description": "All medicinal plant claims must redirect to healthcare professional. Folk remedies and traditional herbal practices are presented as cultural practice only, never as health advice.",
+      "trigger": "any medicinal or healing claim about plants, herbal remedy instructions, or plant-based treatment suggestions",
+      "action": "REDIRECT -- all medicinal claims redirect to a qualified healthcare professional. Content continues only with explicit cultural-practice-only framing."
+    },
+    {
+      "id": "ROOM09-GATE-002",
+      "description": "Mushroom foraging and identification requires expert-level identification warnings and acknowledgment that app-based identification is insufficient.",
+      "trigger": "mushroom identification, mushroom foraging, morel identification, chanterelle identification",
+      "action": "GATE -- require acknowledgment that expert confirmation from a mycologist or experienced forager is required before consuming any foraged mushroom"
+    },
+    {
+      "id": "ROOM09-GATE-003",
+      "description": "Sacred plant ceremonial use is community-restricted or sacred-ceremonial. General identification is Level 1 but ceremonial protocols are not instructed.",
+      "trigger": "ceremonial use of sweetgrass, sage, tobacco, cedar, or other designated sacred plants",
+      "action": "GATE -- acknowledge ceremonial significance, do not reproduce protocols, redirect to community knowledge keepers"
+    }
+  ],
+  "annotateRules": [
+    {
+      "id": "ROOM09-ANN-001",
+      "description": "All plant discussions include safe foraging reminder: positive identification from multiple features, never eat without 100% certainty, harvest sustainably.",
+      "trigger": "any plant discussion in this room",
+      "action": "ANNOTATE -- include safe foraging reminder and sustainability note at session start"
+    },
+    {
+      "id": "ROOM09-ANN-002",
+      "description": "Traditional plant knowledge presented as cultural practice only, not as instruction for personal health application.",
+      "trigger": "any discussion of traditional plant uses or ethnobotanical knowledge",
+      "action": "ANNOTATE -- include cultural-practice-only framing: 'Presented as cultural and historical knowledge. Not health or medical advice.'"
+    }
+  ]
+}
