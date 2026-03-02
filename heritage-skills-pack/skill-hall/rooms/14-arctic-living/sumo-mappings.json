@@ -1,0 +1,128 @@
+[
+  {
+    "heritageConceptId": "room-14-igloo-construction",
+    "sumoTerm": "ConstructionProcess",
+    "sumoFile": "Geography.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass IglooConstruction ConstructionProcess)",
+    "naturalLanguage": "Igloo construction is a kind of construction process — a structured process of building a shelter from snow blocks according to established engineering principles.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-14-igloo-construction",
+    "sumoTerm": "Shelter",
+    "sumoFile": "Geography.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Igloo Shelter)",
+    "naturalLanguage": "An igloo is a kind of shelter — a structure providing protection from the environment.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-14-caribou-clothing",
+    "sumoTerm": "Manufacturing",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CaribouClothingCycle Manufacturing)",
+    "naturalLanguage": "The caribou clothing cycle is a kind of manufacturing process — converting raw animal hide into functional garments through a structured sequence of preparation, cutting, and sewing stages.",
+    "ontologicalBridge": "bridge-03-clothing-cycle"
+  },
+  {
+    "heritageConceptId": "room-14-caribou-clothing",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CaribouClothingCycle HeritageSkill)",
+    "naturalLanguage": "The caribou clothing cycle is a kind of heritage skill — traditional knowledge transmitted across generations that embodies Pilimmaksarniq (learning through practice) and Pijitsirniq (serving the community).",
+    "ontologicalBridge": "bridge-03-clothing-cycle"
+  },
+  {
+    "heritageConceptId": "room-14-qulliq",
+    "sumoTerm": "Artifact",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "instance",
+    "kifStatement": "(instance Qulliq Artifact)",
+    "naturalLanguage": "A qulliq is an artifact — a human-made object (carved from soapstone) that serves specific functional purposes: providing light, heat, and cooking capability.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-14-qulliq",
+    "sumoTerm": "Combustion",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "related",
+    "kifStatement": "(relatedInternalConcept QulliqOperation Combustion)",
+    "naturalLanguage": "Qulliq operation involves a controlled combustion process — the oxidation of seal oil producing light and heat through a shaped wick.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-14-snow-goggles",
+    "sumoTerm": "Artifact",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "instance",
+    "kifStatement": "(instance Ilgaak Artifact)",
+    "naturalLanguage": "Ilgaak (snow goggles) are an artifact — carved from bone, ivory, or antler with narrow horizontal slits to reduce UV light exposure and prevent snow blindness.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-14-snow-goggles",
+    "sumoTerm": "WearableItem",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Ilgaak WearableItem)",
+    "naturalLanguage": "Ilgaak (snow goggles) are a kind of wearable item — protective eyewear designed to be worn over the eyes to prevent snow blindness.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-14-qamutik",
+    "sumoTerm": "Vehicle",
+    "sumoFile": "Geography.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Qamutik Vehicle)",
+    "naturalLanguage": "A qamutik (dog sled) is a kind of vehicle — a human-constructed transport device used for travel across snow and ice.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-14-qamutik",
+    "sumoTerm": "TransportationDevice",
+    "sumoFile": "Geography.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Qamutik TransportationDevice)",
+    "naturalLanguage": "A qamutik is a kind of transportation device — specifically designed for hauling loads across arctic snow and sea ice terrain.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-14-waterproof-sewing",
+    "sumoTerm": "Manufacturing",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass InuitWaterproofSewing Manufacturing)",
+    "naturalLanguage": "Inuit waterproof sewing is a kind of manufacturing process — applying a specialized crimped stitch technique to compress hide fibers and create a water-resistant seal at garment seams.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-14-waterproof-sewing",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass InuitWaterproofSewing HeritageSkill)",
+    "naturalLanguage": "Inuit waterproof sewing is a kind of heritage skill — traditional knowledge with critical survival implications, transmitted through demonstration and practice across generations.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-14-snowshoe-dene",
+    "sumoTerm": "Artifact",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "instance",
+    "kifStatement": "(instance DeneSnowshoe Artifact)",
+    "naturalLanguage": "Dene snowshoes are an artifact — wooden-framed footwear strapped over boots to distribute weight on soft snow, enabling travel through boreal forest terrain. (Dene cross-reference)",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-14-snowshoe-dene",
+    "sumoTerm": "WearableItem",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass DeneSnowshoe WearableItem)",
+    "naturalLanguage": "Dene snowshoes are a kind of wearable item — attached to the feet to enable travel on snow that would otherwise be impassable. Multiple regional designs exist for different snow conditions. (Dene cross-reference)",
+    "ontologicalBridge": null
+  }
+]

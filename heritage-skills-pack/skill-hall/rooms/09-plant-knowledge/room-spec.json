@@ -1,0 +1,97 @@
+{
+  "id": "room-09-plant-knowledge",
+  "room": 9,
+  "domain": "plants",
+  "title": "Plant Knowledge",
+  "traditions": ["appalachian", "first-nations", "inuit"],
+  "sumoClasses": ["Plant", "FloweringPlant", "Ethnobotany", "HeritageSkill"],
+  "sumoFile": ["Trees.kif", "heritage-domain-ontology.kif"],
+  "description": "SAFETY-CRITICAL: Room 09 covers plant knowledge across three heritage traditions. Misidentification of plants can be fatal — deadly look-alikes exist for nearly every popular foraged species. This room enforces the strictest identification protocols: never identify from description alone, always require multiple markers, always warn about toxic look-alikes, and always redirect medicinal claims to healthcare professionals.\n\nAppalachian traditions: foraging (ramps, morels, pawpaws, persimmons, black walnuts, hickory nuts), herbal traditions as cultural practice (NOT medical advice), dye plants (bloodroot, black walnut hull, goldenrod, pokeberry), and useful plants of the Appalachian forest and garden (white oak, sourwood, spicebush, sassafras).\n\nFirst Nations ethnobotany: birch/wiigwaas (Anishinaabe) — canoe-building, containers, art, bark scrolls, sap; cedar — cedar boughs, inner bark uses; spruce root — lashing and weaving; sweetgrass, sage, tobacco, and cedar as sacred plants (Level 1 for general identification only; ceremonial use is Level 3-4 community-restricted or sacred-ceremonial); three sisters agriculture (corn, beans, squash — Haudenosaunee); manoomin/wild rice (Anishinaabe).\n\nInuit plant knowledge: berry identification (cloudberry/aqpik, crowberry/paurngaq, blueberry/kigutangirnait); tundra medicinal plants as cultural knowledge only (Labrador tea, Labrador bearberry, Arctic willow — presented as cultural heritage, never as medical guidance); moss and lichen (peat, reindeer lichen/caribou moss); dwarf willow and Arctic flora. All medicinal plant information presented strictly as cultural practice — redirects to healthcare providers for any medical application.",
+  "safetyDomains": ["plant", "medical"],
+  "trySessions": [
+    {
+      "$ref": "try-sessions/safe-plant-id-methodology.json"
+    },
+    {
+      "$ref": "try-sessions/birch-in-anishinaabe-life.json"
+    },
+    {
+      "$ref": "try-sessions/appalachian-dye-plant-basics.json"
+    }
+  ],
+  "modules": [
+    {
+      "id": "plant-09-appalachian-foraging",
+      "title": "Appalachian Foraging",
+      "tradition": "appalachian",
+      "description": "Foraging traditions of the Appalachian mountains: ramps (Allium tricoccum), morels, pawpaws, persimmons, black walnuts, and hickory nuts. Covers safe identification methodology, toxic look-alike awareness for every species discussed, sustainable harvest practices, and the seasonal calendar of Appalachian foraging. GATED: every edible plant discussion includes toxic look-alike warnings. Mushroom identification is gated with expert-confirmation requirements.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Plant", "HeritageSkill", "Gathering"]
+    },
+    {
+      "id": "plant-09-appalachian-herbal",
+      "title": "Appalachian Herbal Traditions",
+      "tradition": "appalachian",
+      "description": "Herbal traditions of the Appalachian region as cultural and historical practice — granny medicine, folk remedies, and mountain herbalism. Covers goldenrod, elderflower, yarrow, plantain, spicebush, and other Appalachian herbal plants. ANNOTATED with cultural practice framing. All medicinal uses presented as cultural heritage only — redirects all health application to healthcare providers. Presented as living cultural knowledge, not medical instruction.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Plant", "CulturalPractice", "HeritageSkill"]
+    },
+    {
+      "id": "plant-09-appalachian-dye-plants",
+      "title": "Appalachian Dye Plants",
+      "tradition": "appalachian",
+      "description": "Natural dye plant traditions of the Appalachian mountains: bloodroot (orange-red), black walnut hull (brown-black), goldenrod (yellow), pokeberry (magenta-pink), indigo, and sumac. Covers safe identification of dye plant species, basic mordant chemistry (safer options only: alum, iron, copper), the traditional dye process from harvest to finished fiber, and sustainable harvesting. Bloodroot and pokeberry are toxic if ingested — safety notes included throughout.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Plant", "Manufacturing", "HeritageSkill"]
+    },
+    {
+      "id": "plant-09-fn-ethnobotany",
+      "title": "First Nations Ethnobotany",
+      "tradition": "first-nations",
+      "description": "Ethnobotanical knowledge of First Nations peoples: birch/wiigwaas (Anishinaabe) covering canoe-building, containers, bark scrolls, sap collection, and art; cedar (boughs, inner bark, weaving applications across Pacific and Eastern nations); spruce root for lashing, weaving, and canoe seams (Anishinaabe, Algonquin, Abenaki traditions). General identification knowledge for these important cultural species with sustainable harvesting principles. Nation-specific attribution throughout.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Plant", "HeritageSkill", "IndigenousKnowledgeSystem"]
+    },
+    {
+      "id": "plant-09-fn-sacred-plants",
+      "title": "Sacred Plants: Sweetgrass, Sage, Tobacco, Cedar",
+      "tradition": "first-nations",
+      "description": "General botanical identification knowledge for the four sacred plants: sweetgrass (Hierochloe odorata), white sage (Salvia apiana), tobacco (Nicotiana rustica), and cedar (Thuja species). Level 1 identification knowledge is publicly shared. Ceremonial and spiritual use is Level 3-4 community-restricted or sacred-ceremonial — those protocols are held by communities and are not reproduced here. This module provides identification and ecological context only; ceremonial use is acknowledged but not instructed.",
+      "safetyLevel": "gated",
+      "culturalLevel": 3,
+      "sumoMappings": ["Plant", "CulturalPractice", "IndigenousKnowledgeSystem"]
+    },
+    {
+      "id": "plant-09-fn-agriculture",
+      "title": "Three Sisters and Manoomin",
+      "tradition": "first-nations",
+      "description": "Traditional First Nations agriculture: the Three Sisters (corn, beans, squash — Haudenosaunee agricultural system) including companion planting methodology, soil building, and harvest practices. Wild rice/manoomin (Anishinaabe): general knowledge is Level 1; ceremonial harvest protocols are Level 2 contextually shared. Cross-reference with Room 05 (Food/Preservation) for manoomin processing. Nation-specific attribution: Three Sisters to Haudenosaunee, manoomin to Anishinaabe.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Plant", "Agriculture", "CulturalPractice"]
+    },
+    {
+      "id": "plant-09-inuit-berries",
+      "title": "Inuit Berry Knowledge",
+      "tradition": "inuit",
+      "description": "Berry identification traditions across Inuit regions: cloudberry/aqpik (Rubus chamaemorus), crowberry/paurngaq (Empetrum nigrum), blueberry/kigutangirnait, bearberry, lingonberry/partridgeberry. Covers safe multi-marker identification in tundra environments, seasonal harvesting practices, and safe storage. Toxic look-alike awareness included for all species discussed. Berry knowledge is publicly shared cultural knowledge (Level 1).",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Plant", "HeritageSkill", "Gathering"]
+    },
+    {
+      "id": "plant-09-inuit-tundra",
+      "title": "Tundra Plants: Cultural Knowledge",
+      "tradition": "inuit",
+      "description": "Tundra plant knowledge as cultural heritage: Labrador tea (Rhododendron groenlandicum), Arctic willow (Salix arctica), reindeer lichen/caribou moss (Cladonia rangiferina), peat moss (Sphagnum), bearberry (Arctostaphylos uva-ursi), and Arctic cotton grass (Eriophorum). All presented as cultural knowledge about how Inuit and subarctic peoples have understood and used these plants across generations. ANNOTATED: all medicinal use redirected to healthcare providers. Presented as contextually shared knowledge (Level 2) — requires proper educational framing.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["Plant", "IndigenousKnowledgeSystem", "CulturalPractice"]
+    }
+  ],
+  "ontologicalBridges": []
+}
