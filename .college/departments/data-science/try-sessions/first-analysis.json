@@ -1,0 +1,39 @@
+{
+  "id": "first-analysis",
+  "title": "Your First Analysis: Exploring a Student Dataset",
+  "description": "Explore a real small dataset of student performance data, practicing collection, exploratory analysis, visualization, and ethical consideration. Touches concepts from all 5 wings.",
+  "estimatedMinutes": 30,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Download the sample dataset (student_scores.csv). Before opening it, read the data sources concept. Where did this data come from? Is it primary or secondary data? What are its limitations? Write down two questions you have about the data's provenance.",
+      "expectedOutcome": "You understand that evaluating data source and provenance is the first step of any analysis -- before computing a single number",
+      "hint": "Think about: who collected this, when, from which students, with what method? Any of these choices could introduce bias",
+      "conceptsExplored": ["data-data-sources", "data-data-quality"]
+    },
+    {
+      "instruction": "Open the dataset (in Google Sheets, Excel, or pandas). How many rows and columns? Any missing values? Read the data quality concept. Document what cleaning steps you would need before analysis.",
+      "expectedOutcome": "You can identify missing values, potential outliers, and data type issues in a raw dataset",
+      "hint": "In pandas: df.info() and df.describe() give you a quick quality overview",
+      "conceptsExplored": ["data-data-quality"]
+    },
+    {
+      "instruction": "Calculate the mean, median, and standard deviation of test scores. Read the measures of center concept. Are the mean and median close? If they are far apart, what does that tell you about the distribution shape?",
+      "expectedOutcome": "You understand that mean and median diverge for skewed distributions, and you can identify which measure to report based on distribution shape",
+      "hint": "If mean > median, the distribution is right-skewed (pulled by high outliers). If mean < median, it's left-skewed",
+      "conceptsExplored": ["data-measures-of-center", "data-measures-of-spread", "data-distributions"]
+    },
+    {
+      "instruction": "Create a histogram of test scores and a scatter plot of study hours vs. score. Read the chart types concept. Which chart is appropriate for each question? Calculate the correlation coefficient. Now read the correlation concept -- what can and cannot you conclude?",
+      "expectedOutcome": "You can choose the correct chart type for each question, and you understand that correlation between study hours and scores does not prove causation",
+      "hint": "More study hours -> higher scores? This is correlation. But maybe students with higher ability study more AND score higher -- ability is a confound",
+      "conceptsExplored": ["data-chart-types", "data-correlation"]
+    },
+    {
+      "instruction": "Read the algorithmic bias and responsible practice concepts. If you were to build a model predicting which students need tutoring, what ethical considerations apply? Who might be harmed? What data should not be used as a predictor?",
+      "expectedOutcome": "You can identify potential harms, unfair proxies, and responsible practice requirements before building any predictive model",
+      "hint": "Race and socioeconomic status may correlate with scores due to systemic factors -- using them as predictors perpetuates rather than addresses disadvantage",
+      "conceptsExplored": ["data-algorithmic-bias", "data-responsible-practice"]
+    }
+  ]
+}

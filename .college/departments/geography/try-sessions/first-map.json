@@ -1,0 +1,39 @@
+{
+  "id": "first-map",
+  "title": "Your First Map Investigation: Reading Your World",
+  "description": "Use a map to investigate geographic patterns in your local area and the wider world. This session builds map literacy, geographic thinking, and climate knowledge.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Open a world map (digital or printed). Locate the equator, prime meridian, and your location. Read about latitude and longitude: what do these lines measure and why do they form a global grid?",
+      "expectedOutcome": "You can read coordinates (e.g., 51°N, 0°E = London) and explain that latitude measures distance from equator and longitude from prime meridian",
+      "hint": "Latitude runs east-west (horizontal lines); longitude runs north-south (vertical lines). Together they identify any point on Earth",
+      "conceptsExplored": ["geo-latitude-longitude"]
+    },
+    {
+      "instruction": "Notice how the map represents a sphere on a flat surface. Compare two world maps with different projections. Read about map types and projections: why does every flat map distort something?",
+      "expectedOutcome": "You can explain that projections must sacrifice accuracy in area, shape, distance, or direction — there is no perfect flat map of a sphere",
+      "hint": "Greenland appears huge on Mercator projections but is smaller than Africa on equal-area projections",
+      "conceptsExplored": ["geo-map-types-projections"]
+    },
+    {
+      "instruction": "Look at a population density map. Identify the most and least densely populated regions. Read about population and settlement: what physical geography factors explain the patterns you see?",
+      "expectedOutcome": "You can correlate high population density with temperate climates, arable land, and access to water, and explain why deserts and frozen regions are sparsely settled",
+      "hint": "Most of Earth's population lives in a relatively small band of temperate, coastal, and river valley areas",
+      "conceptsExplored": ["geo-population-settlement"]
+    },
+    {
+      "instruction": "Find a climate zone map. Identify your climate zone and two others in different parts of the world. Read about climate zones: what determines which climate zone a region belongs to?",
+      "expectedOutcome": "You can name your climate zone and explain that latitude, altitude, and ocean proximity are the primary determinants",
+      "hint": "Tropical zones near the equator receive direct sunlight year-round; polar zones receive sunlight at low angles, making them cold",
+      "conceptsExplored": ["geo-climate-zones"]
+    },
+    {
+      "instruction": "Find the major tectonic plate boundaries on a map. Overlay with a map of volcanoes and earthquake zones. Read about plate tectonics: why do these phenomena cluster at plate boundaries?",
+      "expectedOutcome": "You can explain that earthquakes and volcanoes concentrate at plate boundaries where plates collide, separate, or slide past each other",
+      "hint": "The 'Ring of Fire' around the Pacific Ocean is a convergent plate boundary zone — where plates collide and one subducts under the other",
+      "conceptsExplored": ["geo-lithosphere"]
+    }
+  ]
+}

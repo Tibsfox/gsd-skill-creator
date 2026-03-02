@@ -1,0 +1,38 @@
+{
+  "id": "first-observation",
+  "title": "Your First Observation: Nature Journaling in the Field",
+  "description": "Begin your nature journaling practice with a structured sit spot session. You will observe a single outdoor location for 30 minutes using all your senses and record what you find.",
+  "estimatedMinutes": 30,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Find a spot outdoors where you can sit comfortably for 15-20 minutes. This can be a backyard, park, schoolyard, or any semi-natural area. Read about outdoor observation -- what is the 'sit spot' practice and why does returning to the same spot over time reveal things a single visit cannot?",
+      "expectedOutcome": "You understand why patient, repeated observation of a single location reveals patterns invisible to casual passersby",
+      "hint": "Even an ordinary urban park has surprising wildlife if you sit quietly and wait -- the animals are usually there, just hiding from your movement and noise",
+      "conceptsExplored": ["nature-outdoor-observation"]
+    },
+    {
+      "instruction": "Open your nature journal (or any notebook). Record: date, time, location (as specific as possible), weather (temperature feel, cloud cover, wind direction), and a brief sketch of your surroundings. Read about nature journaling -- what does a complete journal entry look like?",
+      "expectedOutcome": "You have begun a journal entry with the minimum required documentation for a scientific nature observation",
+      "hint": "Sketch the view from where you sit -- it does not need to be beautiful, just spatially accurate enough to orient a future reader",
+      "conceptsExplored": ["nature-nature-journaling"]
+    },
+    {
+      "instruction": "Sit quietly for 10 minutes without writing. Use all your senses: What do you hear? What do you smell? What is moving? When wildlife returns to normal activity around you, note: date-stamped observations of specific organisms. What plants, insects, birds, or other animals do you detect?",
+      "expectedOutcome": "You have at least 3-5 specific organism observations with time, behavior, and your best identification attempt",
+      "hint": "Close your eyes and listen for 2 minutes -- you will hear birds you were not noticing while focused on sight",
+      "conceptsExplored": ["nature-outdoor-observation", "nature-bird-identification"]
+    },
+    {
+      "instruction": "Choose one organism you observed and sketch it in detail with labels. Read about tree identification or bird identification -- can you identify what you sketched? Use field marks (size, shape, color patterns, habitat). Note what you are uncertain about.",
+      "expectedOutcome": "You have made an illustrated species observation with your best identification and honest uncertainty notes",
+      "hint": "It is more scientifically valuable to note 'I am not sure' than to guess -- uncertainty is information",
+      "conceptsExplored": ["nature-tree-identification", "nature-bird-identification", "nature-nature-journaling"]
+    },
+    {
+      "instruction": "Write 3 'I wonder...' questions that arose during your observation. Then consider how to submit your best observation to iNaturalist. Read about citizen science -- how do platforms like iNaturalist use observations like yours?",
+      "expectedOutcome": "You have formulated genuine inquiry questions and understand how citizen science platforms aggregate individual observations into research-grade data",
+      "conceptsExplored": ["nature-citizen-science"]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "first-workout",
+  "title": "Your First Workout: Understanding Fitness Through a Basic Circuit",
+  "description": "Experience the science of fitness training through a simple body-weight circuit that illustrates cardiovascular response, muscular endurance, and the FITT principle. No equipment needed.",
+  "estimatedMinutes": 20,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Before exercising, read about fundamental movement skills and fitness training. Then check your resting heart rate: place two fingers on your wrist pulse and count beats for 15 seconds, multiply by 4. Record this number. This is your resting heart rate baseline.",
+      "expectedOutcome": "You have your resting heart rate baseline and understand that it measures cardiovascular efficiency",
+      "hint": "The average adult resting heart rate is 60-100 BPM. Athletes often have 40-60 BPM due to higher stroke volume from training.",
+      "conceptsExplored": ["pe-fundamental-movement", "pe-cardiovascular-fitness"]
+    },
+    {
+      "instruction": "5-minute dynamic warm-up (no static stretching yet -- read why!): 30 seconds each of arm circles, leg swings, hip circles, high knees, jumping jacks, and inchworms. Your heart rate should rise. Read about injury prevention to understand why dynamic warm-up precedes activity.",
+      "expectedOutcome": "You understand why dynamic warm-up is more effective than static stretching pre-activity for injury prevention and performance",
+      "hint": "Notice how each exercise activates muscles you will use in the circuit -- this is the 'sport-specific' principle of warm-up",
+      "conceptsExplored": ["pe-injury-prevention"]
+    },
+    {
+      "instruction": "Circuit (2 rounds): 10 squats, 8 push-ups (modify as needed), 20 jumping jacks, 10-second plank, 15-second wall sit. Rest 30 seconds between exercises. Check heart rate immediately after the last exercise in round 1. Read about FITT principle.",
+      "expectedOutcome": "You experience the cardiovascular demand of circuit training and understand how Frequency, Intensity, Time, and Type interact",
+      "hint": "If the circuit is too easy (heart rate below 130), reduce rest time. If overwhelming, extend rest to 60 seconds -- this is the FITT principle in action.",
+      "conceptsExplored": ["pe-fitness-training", "pe-cardiovascular-fitness"]
+    },
+    {
+      "instruction": "5-minute cool-down: walk slowly, then read about flexibility. Hold each stretch 30 seconds: quad stretch, hamstring stretch, chest stretch, shoulder cross-body. Notice how warm muscles allow greater range of motion.",
+      "expectedOutcome": "You understand why static stretching is effective post-workout and how temperature affects muscle extensibility",
+      "hint": "This is the right time for static stretching -- muscles are warm and the nervous system is less guarded against lengthening",
+      "conceptsExplored": ["pe-flexibility", "pe-injury-prevention"]
+    },
+    {
+      "instruction": "5 minutes after the cool-down, check your heart rate again. How quickly did it return toward resting? Read about fitness training -- faster recovery is a marker of cardiovascular fitness that improves with training.",
+      "expectedOutcome": "You can compare your exercise and recovery heart rates and understand heart rate recovery as a fitness indicator",
+      "conceptsExplored": ["pe-cardiovascular-fitness", "pe-fitness-training"]
+    }
+  ]
+}
