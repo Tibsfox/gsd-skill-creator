@@ -1,0 +1,20 @@
+{
+  "id": "eagle-equivalent-recognition",
+  "programName": "Heritage Keeper Recognition",
+  "description": "The Heritage Skills equivalent of Eagle Scout: recognition for learners who have demonstrated mastery across multiple badge paths and completed a community documentation project.",
+  "criteria": {
+    "keeperBadgesRequired": 3,
+    "keeperBadgesDescription": "Earn Keeper-tier badges in at least 3 different badge paths",
+    "heritageBookRequired": true,
+    "heritageBookDescription": "Complete and submit a Heritage Book project with at least one community-reviewed chapter",
+    "neighborsBadgeRequired": true,
+    "neighborsBadgeDescription": "Earn at least the Apprentice tier in the Neighbors path — social intelligence is not optional for Heritage Keeper recognition",
+    "teachItRequired": true,
+    "teachItDescription": "Complete at least one teach-it verification at Keeper level (evaluated by an instructor or Keeper-tier peer)"
+  },
+  "recognition": {
+    "title": "Heritage Keeper",
+    "description": "A Heritage Keeper has demonstrated they can teach heritage skills, document heritage knowledge, and understand the social fabric of the communities that created these practices.",
+    "foxfireParallel": "The Foxfire standard: you know it when you can teach it. The Heritage Keeper has met that standard across multiple traditions."
+  }
+}
