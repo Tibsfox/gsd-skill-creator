@@ -1,0 +1,35 @@
+name: bbs
+version: 0.1.0
+title: "BBS Educational Pack"
+description: "BBS culture, protocols, and ANSI art curriculum from terminal emulation through door games"
+status: scaffold
+
+dependencies:
+  packs: []
+  skills: []
+
+triggers:
+  - BBS
+  - bulletin board
+  - ANSI art
+  - FidoNet
+  - IRC
+  - modem
+  - terminal
+  - door game
+  - CP437
+  - SAUCE
+
+modules:
+  count: 5
+  tiers:
+    1: [01-terminal-modem, 02-ansi-art]
+    2: [03-fidonet, 04-irc-dancer]
+    3: [05-door-games]
+
+agents:
+  count: 3
+  ids: [BBS-1, BBS-2, BBS-3]
+
+skills:
+  count: 5

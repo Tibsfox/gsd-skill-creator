@@ -1,0 +1,70 @@
+# BBS Educational Pack — Chipset Configuration
+# Defines 5 domain skills and 3 agents for the BBS curriculum.
+
+name: bbs
+version: 0.1.0
+description: "BBS Educational Pack — routes queries to 5 modules covering terminal protocols through door games"
+
+skills:
+  - id: terminal-modem
+    name: Terminal and Modem Protocols
+    description: "RS-232, Hayes AT commands, XMODEM/ZMODEM file transfer, serial communication, baud rates"
+    triggers: [RS-232, Hayes, AT command, modem, XMODEM, ZMODEM, serial, baud, terminal, dial-up]
+    module: 01-terminal-modem
+    tier: 1
+
+  - id: ansi-art
+    name: ANSI Art
+    description: "ANSI escape sequences, CP437 character set, SAUCE metadata, color palettes, block characters"
+    triggers: [ANSI, CP437, SAUCE, escape sequence, color palette, block character, ANSI art, textmode]
+    module: 02-ansi-art
+    tier: 1
+
+  - id: fidonet
+    name: FidoNet
+    description: "FTS-0001 packets, echomail/netmail routing, nodelist structure, zone:net/node addressing"
+    triggers: [FidoNet, FTS-0001, echomail, netmail, nodelist, "zone:net/node", packet, mailer]
+    module: 03-fidonet
+    tier: 2
+
+  - id: irc-dancer
+    name: IRC and Dancer
+    description: "RFC 1459 protocol dissection, Dancer IRC daemon source analysis, channel operations, bot architecture"
+    triggers: [IRC, RFC 1459, Dancer, channel, PRIVMSG, bot, services, ircd, JOIN, PART]
+    module: 04-irc-dancer
+    tier: 2
+
+  - id: door-games
+    name: Door Games
+    description: "DOOR.SYS/CHAIN.TXT drop files, FOSSIL driver, game loop patterns, multiplayer mechanics"
+    triggers: [door game, DOOR.SYS, CHAIN.TXT, FOSSIL, drop file, BBS door, TradeWars, LORD]
+    module: 05-door-games
+    tier: 3
+
+agents:
+  - id: BBS-1
+    name: terminal-instructor
+    role: "Foundation instructor for terminal protocols and ANSI art rendering"
+    skills: [terminal-modem, ansi-art]
+    tier: 1
+
+  - id: BBS-2
+    name: network-instructor
+    role: "Network protocol instructor for FidoNet store-and-forward and IRC real-time messaging"
+    skills: [fidonet, irc-dancer]
+    tier: 2
+
+  - id: BBS-3
+    name: application-instructor
+    role: "Application layer instructor for door game programming and BBS extensibility"
+    skills: [door-games]
+    tier: 3
+
+topology:
+  type: pipeline
+  description: "Tiered learning progression: BBS-1 (terminal foundations) feeds into BBS-2 (network protocols) which feeds into BBS-3 (applications)"
+  flow:
+    - from: BBS-1
+      to: [BBS-2]
+    - from: BBS-2
+      to: [BBS-3]
