@@ -1,0 +1,53 @@
+{
+  "id": "pottery-08-soapstone-beginner",
+  "title": "Soapstone Properties: Understanding the Material for Carving",
+  "tradition": "inuit",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore the properties of soapstone (steatite) that make it ideal for Inuit carved objects -- especially the qulliq lamp and cooking vessels. Learn why soapstone resists fire, how it is worked, and how the qulliq form is carved. Note: qulliq burning and oil lamp operation are covered in Room 14 (Arctic Living) where fire and CO safety gates apply.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "What is soapstone? Soapstone (steatite) is a metamorphic rock composed primarily of talc, with varying amounts of chlorite and magnetite. Its common name comes from its soapy feel -- the high talc content gives it a smooth, slightly greasy texture. Soapstone is soft (Mohs hardness 1-2, equivalent to a fingernail), heat-resistant, and easy to carve with simple tools including stone flakes, shell, antler, bone, and modern metal rasps and files. It is found throughout Arctic Canada, Labrador, and other areas of the Inuit homeland.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "Soapstone has been used by Inuit peoples for thousands of years. The material's softness (carvable with stone tools before metal was available through trade), heat resistance (a soapstone lamp can hold fire without cracking), and density make it uniquely suited for both functional objects and sculpture. Inuit soapstone source locations were important community resources -- specific quarry sites were known and used across generations, and knowledge of stone quality at those sites was transmitted as practical knowledge.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Why soapstone for a lamp? The qulliq (Inuit soapstone oil lamp) must hold burning oil and withstand the continuous heat of a burning flame without cracking. Most rocks and all unfired clay would fracture from thermal shock (rapid temperature change). Soapstone's high talc content gives it an unusually low coefficient of thermal expansion -- it heats and cools without significant dimensional change, making it nearly immune to thermal shock. This property is what made soapstone the preferred material for the qulliq rather than pottery or other stone types.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The qulliq was the central technology of Inuit domestic life in the Arctic -- it provided heat, light, and cooking fire in a treeless environment where wood fuel was unavailable. An Inuit household's survival through the Arctic winter depended on the qulliq functioning reliably. The selection of suitable soapstone for a qulliq -- not too porous, no cracks or inclusions that would cause failure under sustained heat -- required expert knowledge of local stone sources and stone quality. Note: qulliq operation (lighting, seal oil, wick management, and the critical CO ventilation requirements for enclosed-space use) is covered in Room 14 (Arctic Living).",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 3,
+      "instruction": "The qulliq form: a qulliq lamp is carved as a shallow crescent or half-moon shape in plan view, with a slightly concave interior (the oil reservoir) and a wick gutter along the straight edge. The lamp is typically 12-20 inches long and 4-8 inches wide. Wall thickness is 1-2 inches. The base must be flat so the lamp sits stable on a level surface. The crescent shape is not arbitrary -- the curved back wall retains the oil while the straight wick edge presents the wick material to the air at a consistent angle for clean burning. Sketch the plan view of a qulliq before continuing: the crescent outline, the oil reservoir interior, and the straight wick edge.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The qulliq's crescent form is an efficient functional design developed over generations of use: the shallow curved basin holds oil at a consistent depth as the fuel is consumed; the straight wick edge presents the moss or arctic cotton grass wick to the air for clean burning; the shape allows the wick to be adjusted along its length to control flame intensity and heat output. Regional variations in qulliq form exist across the Inuit homeland from Alaska to Greenland -- different proportions reflecting local soapstone properties, regional fuel availability, and local use patterns.",
+      "sumoMapping": "Artifact"
+    },
+    {
+      "order": 4,
+      "instruction": "Carving technique: soapstone is carved with a sawing or scraping motion rather than a cutting motion as you might use with wood. Traditional tools included stone flakes and shell for initial roughing; antler or bone scrapers for shaping; and fine stone or sand for smoothing. Modern carvers use metal rasps, files, hacksaw blades, and wet-dry sandpaper. Work the stone from the inside out: rough out the interior oil basin first with a rasp or file, removing material in the concave interior. Then shape the exterior profile. Work in stages from coarse to fine.",
+      "safetyNote": "Chemical annotation: soapstone carving produces dust that contains talc and, in some geological formations, asbestos mineral fibers (chrysotile). Asbestos inhalation causes mesothelioma and asbestosis -- permanent, progressive lung diseases with no cure. Work wet: keep the stone and tools wet throughout all carving, filing, and sanding operations to capture dust in the water. Work in a well-ventilated area or outdoors. Wear a NIOSH N95 dust mask when working with soapstone. Source soapstone only from verified suppliers who routinely test their material for asbestos content. Do not use heat to soften or speed soapstone carving -- work the stone cold and wet.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 5,
+      "instruction": "Finishing the surface: after roughing out the basic qulliq form, smooth the interior surface with progressively finer abrasives -- wet-dry sandpaper from 60-grit to 120-grit to 220-grit, working wet throughout. The interior oil basin must be smooth and free of cracks or pores that would allow oil to seep out. The wick gutter edge should be straight and at a consistent angle. The exterior surface of the lamp body can be left at medium finish (120-grit) -- the exterior does not contact the oil and a rougher surface is easier to grip and less likely to slide on a surface.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 6,
+      "instruction": "Soapstone cooking vessels and the broader material culture context: alongside the qulliq, Inuit carvers produced soapstone cooking pots and boiling vessels of various sizes. These were used directly over fire or filled with water heated by the stone-boiling method (fire-heated stones dropped into the water-filled vessel). Soapstone pots replaced the need for ceramic vessels in the Arctic, where suitable pottery clay sources were less available than soapstone outcrops. For the full context of Arctic domestic technology including qulliq operation, cross-reference Room 14 (Arctic Living).",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The Inuit relationship with soapstone spans both functional and artistic dimensions. Contemporary Inuit artists from Cape Dorset (Kinngait), Baker Lake, Rankin Inlet, and other Nunavut communities continue a soapstone sculpture tradition that draws directly on the material knowledge encoded in functional qulliq and vessel carving. Inuit art produced through the Kinngait Studios (established in the 1950s when James Houston helped organize the Cape Dorset print and sculpture program) is now internationally collected -- and the sculptural tradition connects directly to the functional carving knowledge documented in this room.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ]
+}
