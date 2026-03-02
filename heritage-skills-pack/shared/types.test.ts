@@ -88,9 +88,9 @@ describe('Enum completeness', () => {
     expect(values).toContain('redirected');
   });
 
-  it('SafetyDomain has exactly 9 values', () => {
+  it('SafetyDomain has exactly 10 values', () => {
     const values = Object.values(SafetyDomain).filter((v) => typeof v === 'string');
-    expect(values).toHaveLength(9);
+    expect(values).toHaveLength(10);
     expect(values).toContain('food');
     expect(values).toContain('plant');
     expect(values).toContain('tool');
@@ -100,6 +100,7 @@ describe('Enum completeness', () => {
     expect(values).toContain('chemical');
     expect(values).toContain('animal');
     expect(values).toContain('arctic-survival');
+    expect(values).toContain('marine');
   });
 
   it('CulturalSovereigntyLevel has 4 numeric levels', () => {
@@ -217,7 +218,7 @@ describe('ROOM_DIRECTORY', () => {
 });
 
 describe('SAFETY_DOMAIN_TO_ROOMS', () => {
-  it('covers all 9 safety domains', () => {
+  it('covers all 10 safety domains', () => {
     const domains = Object.keys(SAFETY_DOMAIN_TO_ROOMS);
     const expectedDomains = Object.values(SafetyDomain).filter(
       (v) => typeof v === 'string',
@@ -225,7 +226,7 @@ describe('SAFETY_DOMAIN_TO_ROOMS', () => {
     for (const domain of expectedDomains) {
       expect(domains).toContain(domain);
     }
-    expect(domains).toHaveLength(9);
+    expect(domains).toHaveLength(10);
   });
 
   it('FOOD domain includes rooms 03, 05, 11', () => {

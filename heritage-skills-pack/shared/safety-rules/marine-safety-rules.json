@@ -1,0 +1,182 @@
+[
+  {
+    "id": "MARINE-001",
+    "domain": "marine",
+    "pattern": "(?:cold.{0,20}water|hypothermia|cold.?shock|immersion).{0,80}(?:canoe|kayak|paddle|watercraft|vessel|swimming|swim|wade|wading)",
+    "level": "gated",
+    "annotation": {
+      "domain": "marine",
+      "level": "gated",
+      "message": "PNW waters are dangerously cold year-round. Cold shock response (gasping, hyperventilation, cardiac stress) can occur within seconds of immersion even in summer. The 1-10-1 rule: 1 minute to control breathing after entry, 10 minutes of meaningful movement, 1 hour before unconsciousness from hypothermia in 50°F water. Always wear a life jacket. Never paddle alone without a float plan. Know self-rescue techniques before going on the water.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "Transport Canada Cold Water Survival Guide; U.S. Coast Guard Cold Water Safety"
+    },
+    "traditions": ["salish-sea", "first-nations"]
+  },
+  {
+    "id": "MARINE-002",
+    "domain": "marine",
+    "pattern": "(?:capsize|swamp|overturn|flip.{0,20}(?:canoe|kayak)|fall.{0,20}(?:overboard|in|into).{0,20}water)",
+    "level": "gated",
+    "annotation": {
+      "domain": "marine",
+      "level": "gated",
+      "message": "Capsizing in cold PNW water is a survival emergency. If you capsize: stay with the vessel (it floats and is more visible than a swimmer), do not remove your life jacket, signal for help, and if near shore attempt a controlled swim perpendicular to current — do not fight the current. Wet exit from a kayak: tuck, pull spray skirt, push out and surface near boat. Practice self-rescue on warm-weather shallow water before paddling on cold open water.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "American Canoe Association; British Columbia Sea Kayak Alliance"
+    },
+    "traditions": ["salish-sea", "first-nations"]
+  },
+  {
+    "id": "MARINE-003",
+    "domain": "marine",
+    "pattern": "(?:solo.{0,20}(?:paddle|kayak|canoe|water|open.?water)|alone.{0,30}(?:paddle|kayak|canoe|on.{0,10}water|boat))",
+    "level": "gated",
+    "annotation": {
+      "domain": "marine",
+      "level": "gated",
+      "message": "Solo water travel requires a float plan left with a responsible person on shore. Minimum information: your name, departure point, destination, expected return time, vessel description, and emergency contact. On PNW waters, solo paddling without a float plan means no one will know to search for you if you capsize. The buddy system is not optional — it is the practice of all PNW Coast maritime peoples, who understood that the sea demands respect and community.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "Transport Canada; U.S. Coast Guard Boating Safety"
+    },
+    "traditions": ["salish-sea", "first-nations"]
+  },
+  {
+    "id": "MARINE-004",
+    "domain": "marine",
+    "pattern": "(?:cold.?shock|1.?10.?1|one.?ten.?one|sudden.{0,20}immersion|immersion.{0,20}suit|drysuit|wetsuit.{0,30}(?:water|cold|temperature))",
+    "level": "gated",
+    "annotation": {
+      "domain": "marine",
+      "level": "gated",
+      "message": "Cold shock is the primary killer in PNW cold water — it precedes hypothermia. Cold shock occurs in the first 30-90 seconds: involuntary gasping, hyperventilation, possible cardiac arrest. A life jacket ensures you stay afloat during cold shock. A wetsuit provides thermal protection but does not replace a life jacket. A drysuit provides the highest protection for extended cold-water exposure. Cultural note: traditional PNW canoe paddlers dressed for immersion, used community-scale safety protocols, and never underestimated the sea.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Royal National Lifeboat Institution (RNLI); U.S. Coast Guard Cold Water Survival"
+    },
+    "traditions": ["salish-sea", "first-nations"]
+  },
+  {
+    "id": "MARINE-005",
+    "domain": "marine",
+    "pattern": "(?:tidal.{0,20}(?:rip|race|current|bore|rapid|passage)|rip.{0,20}(?:tide|current)|Deception.?Pass|San.?Juan.{0,20}(?:Islands|Pass|Channel)|Strait.{0,20}of.{0,20}Juan.{0,20}de.{0,20}Fuca|Active.?Pass|Dodd.?Narrows)",
+    "level": "annotated",
+    "annotation": {
+      "domain": "marine",
+      "level": "annotated",
+      "message": "PNW tidal currents are among the strongest in North America. Deception Pass (3-8 knots), Active Pass (7-8 knots), and the Strait of Juan de Fuca create conditions that can overwhelm human-powered vessels. Always check tide tables before launching. Time passages through narrows at slack water. Traditional PNW paddlers carried deep knowledge of local tidal patterns — this knowledge was earned through apprenticeship, not assumed. Check NOAA Tides & Currents for current predictions.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "NOAA Tides and Currents; Canadian Hydrographic Service; Waggoner Cruising Guide"
+    },
+    "traditions": ["salish-sea", "first-nations"]
+  },
+  {
+    "id": "MARINE-006",
+    "domain": "marine",
+    "pattern": "(?:tide.{0,20}(?:table|chart|schedule|prediction|window|timing)|tidal.{0,20}(?:window|planning|timing|prediction)|low.?tide|high.?tide|slack.?water|ebb.{0,20}(?:tide|current)|flood.{0,20}(?:tide|current))",
+    "level": "annotated",
+    "annotation": {
+      "domain": "marine",
+      "level": "annotated",
+      "message": "Tide awareness is a foundational skill for all PNW water activities. Key concepts: slack water (brief period between ebb and flood with minimal current — the safest window for crossing narrows); tidal range (difference between high and low tide — 12-15 feet typical in Puget Sound, affecting beach exposure, kelp beds, and anchoring); current vs. tide height (tide height predicts water level, current predictions are separate). Lummi reef net fishing technology was designed around precise tidal knowledge — tidal timing shaped the entire fishing culture of the Salish Sea.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "NOAA Tides and Currents; Pacific Northwest Sea Kayaker's Manual"
+    },
+    "traditions": ["salish-sea", "first-nations"]
+  },
+  {
+    "id": "MARINE-007",
+    "domain": "marine",
+    "pattern": "(?:open.?water.{0,30}(?:crossing|passage|transit)|crossing.{0,30}(?:strait|sound|passage|channel|open.?water))",
+    "level": "annotated",
+    "annotation": {
+      "domain": "marine",
+      "level": "annotated",
+      "message": "Open water crossings require advance planning. Before any crossing: check wind forecast (NOAA marine forecast), check current predictions, identify landing options if conditions deteriorate, ensure all group members have the paddling skill and fitness for the distance, carry a marine VHF radio and know how to use it. Traditional PNW paddlers made open-water crossings in highly engineered canoes with deep local knowledge accumulated over generations — they were not casual ventures. Modern paddlers should treat open crossings with the same seriousness.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "American Canoe Association; Transport Canada"
+    },
+    "traditions": ["salish-sea", "first-nations"]
+  },
+  {
+    "id": "MARINE-008",
+    "domain": "marine",
+    "pattern": "(?:(?:canoe|kayak|vessel).{0,30}(?:load|loading|weight|capacity|stability|overload|tip)|(?:load|loading).{0,30}(?:canoe|kayak|vessel)|vessel.{0,30}(?:load|capacity|stability|weight.?limit|safe.?load))",
+    "level": "gated",
+    "annotation": {
+      "domain": "marine",
+      "level": "gated",
+      "message": "Vessel loading directly affects stability. Canoe loading principles: heaviest gear goes in the center low, paddlers trim the boat level or slightly stern-heavy, weight distributed equally port and starboard, leave freeboard (space above waterline) appropriate to conditions. A swamped canoe is often survivable; an overloaded one may not be. Traditional Northwest Coast ocean-going canoes were loaded following protocols refined over centuries — the community's knowledge of how to load the specific vessel they built informed every voyage.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "American Canoe Association; U.S. Coast Guard Paddlesports Safety"
+    },
+    "traditions": ["salish-sea", "first-nations"]
+  },
+  {
+    "id": "MARINE-009",
+    "domain": "marine",
+    "pattern": "(?:center.{0,20}of.{0,20}gravity|trim.{0,20}(?:canoe|boat|vessel)|freeboard|stability.{0,30}(?:canoe|kayak|vessel|watercraft)|gunwale|thwart.{0,30}(?:position|placement|load))",
+    "level": "gated",
+    "annotation": {
+      "domain": "marine",
+      "level": "gated",
+      "message": "Canoe stability is determined by center of gravity position relative to the hull's center of buoyancy. Practical rules: stay low (kneeling is more stable than sitting on a thwart), do not stand in a moving canoe in open water, move slowly and deliberately when changing positions, communicate before shifting weight. Paddlers should practice wet exits and re-entries in controlled conditions before open-water paddling. The Coast Salish racing canoe and the Nuu-chah-nulth ocean-going canoe have different stability profiles designed for their specific purposes — know your vessel.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "American Canoe Association; British Columbia Canoe Federation"
+    },
+    "traditions": ["salish-sea", "first-nations"]
+  },
+  {
+    "id": "MARINE-010",
+    "domain": "marine",
+    "pattern": "(?:weather.{0,30}(?:window|assessment|check|marine|forecast|condition).{0,40}(?:paddle|canoe|kayak|water)|wind.{0,30}(?:warning|advisory|speed|forecast).{0,40}(?:paddle|water|canoe|marine)|paddling.{0,30}(?:weather|wind|condition|forecast))",
+    "level": "gated",
+    "annotation": {
+      "domain": "marine",
+      "level": "gated",
+      "message": "Check NOAA Marine Forecasts (or Environment Canada for Canadian waters) before every paddle. Key thresholds for human-powered vessels: avoid conditions with winds forecast above 15 knots; never launch in small craft advisory conditions (21+ knots); seas above 3 feet are dangerous for most canoes and sea kayaks. Wind can develop faster than forecast — have an abort plan. Traditional PNW paddlers read the sky, water surface, and coastal geography for wind indicators. Modern paddlers use forecasts AND observe conditions.",
+      "isCritical": true,
+      "canOverride": false,
+      "source": "NOAA National Weather Service Marine Forecasts; Environment and Climate Change Canada"
+    },
+    "traditions": ["salish-sea", "first-nations"]
+  },
+  {
+    "id": "MARINE-011",
+    "domain": "marine",
+    "pattern": "(?:channel.{0,20}marker|buoy.{0,20}(?:red|green|color|colour|system|marker)|aids.{0,20}to.{0,20}navigation|IALA|lateral.{0,20}(?:buoy|marker)|day.?mark|light.?house.{0,30}pattern)",
+    "level": "annotated",
+    "annotation": {
+      "domain": "marine",
+      "level": "annotated",
+      "message": "US and Canadian waters use the IALA-B lateral buoyage system: red right returning (keep red buoys on your right when returning toward port/upstream). Green buoys mark the left side of a channel when returning. Numbered — odd on the left, even on the right. Lights follow the same pattern. Traditional PNW navigators read natural landmarks, wave refraction patterns, kelp bed locations, and bird behavior to navigate without manufactured aids. Understanding both systems gives the fullest picture of these waters.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "U.S. Coast Guard IALA-B Guide; Transport Canada Navigation Safety Regulations"
+    },
+    "traditions": ["salish-sea", "first-nations"]
+  },
+  {
+    "id": "MARINE-012",
+    "domain": "marine",
+    "pattern": "(?:fog.{0,30}(?:paddling|paddle|navigation|signal|horn|whistle|visibility|dense)|dense.{0,20}fog|limited.{0,30}visibility.{0,30}(?:water|marine|paddle))",
+    "level": "annotated",
+    "annotation": {
+      "domain": "marine",
+      "level": "annotated",
+      "message": "Fog is common in PNW waters and creates life-threatening conditions for human-powered vessels. In fog: do not launch if dense fog is forecast; if caught in fog, move to shore immediately; sound a horn or whistle every 2 minutes to signal your position to power vessels; use a compass heading and known landmarks; carry a VHF radio to monitor shipping traffic. Traditional PNW navigators avoided fog on open water — they had detailed knowledge of coastal geography enabling shore-hugging navigation even in poor visibility.",
+      "isCritical": false,
+      "canOverride": true,
+      "source": "Transport Canada Marine Navigation; U.S. Coast Guard Navigation Rules"
+    },
+    "traditions": ["salish-sea", "first-nations"]
+  }
+]
