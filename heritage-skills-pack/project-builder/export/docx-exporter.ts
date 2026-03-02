@@ -143,6 +143,7 @@ export class DocxExporter {
       book.frontMatter.territorialAcknowledgment ?? '',
       book.frontMatter.acknowledgments ?? '',
       book.backMatter.fairUseNotice,
+      ...Object.keys(book.backMatter.glossary ?? {}),
       ...Object.values(book.backMatter.glossary ?? {}),
       ...(book.backMatter.resourceDirectory ?? []),
       ...book.chapters.map((c) => c.title),

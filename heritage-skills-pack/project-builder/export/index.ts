@@ -56,6 +56,7 @@ export function validateExportReadiness(book: HeritageBook): ExportReadinessResu
     book.title,
     book.frontMatter.culturalSovereigntyStatement,
     book.frontMatter.territorialAcknowledgment ?? '',
+    ...Object.keys(book.backMatter.glossary ?? {}),
     ...Object.values(book.backMatter.glossary ?? {}),
     ...book.chapters.map((c) => c.title),
   ].join(' ');
