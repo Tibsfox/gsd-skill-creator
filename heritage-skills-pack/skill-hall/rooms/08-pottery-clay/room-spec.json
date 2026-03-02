@@ -1,0 +1,72 @@
+{
+  "id": "room-08-pottery-clay",
+  "room": 8,
+  "domain": "pottery",
+  "title": "Pottery & Clay",
+  "traditions": ["appalachian", "first-nations", "inuit"],
+  "sumoClasses": ["PotteryMaking", "Clay", "Kiln", "HeritageSkill", "Artifact"],
+  "sumoFile": ["MILO", "heritage-domain-ontology.kif"],
+  "safetyDomains": ["fire", "chemical", "structural"],
+  "trySessions": [
+    "pottery-08-pinch-pot-beginner",
+    "pottery-08-coil-building-beginner",
+    "pottery-08-soapstone-beginner"
+  ],
+  "description": "Room 08 covers three distinct ceramic and stone-working traditions united by the transformation of raw earth material into functional objects through skilled hand-forming.\n\nAppalachian folk pottery is one of the most deeply rooted functional craft traditions of the southern mountains, centered in the Piedmont and foothills of the Carolinas, Georgia, and Virginia. The groundhog kiln — a long, low wood-fired kiln built into a hillside, named for its resemblance to a groundhog burrow — was the primary firing method. Alkaline glazes (wood ash mixed with feldspar, or Albany slip) produce the characteristic olive-green to brown surfaces of Appalachian stoneware, fired to cone 10 temperatures (approximately 2350°F). Face jugs — grotesque vessel forms with applied eyes, nose, and teeth in kaolin white clay on a dark stoneware body — are a distinctive Appalachian form. The face jug tradition has a documented African American origin: enslaved potters at the Edgefield pottery district of South Carolina produced face jugs in the early 1800s. The Dave Drake tradition (Edgefield District, SC) established this form before it was adopted into the broader Appalachian settler pottery tradition. Accurate face jug history requires acknowledging this African American artistry. Jugtown (Seagle and Owens families, Moore County, NC), the Meaders family of White County, Georgia, and the Burlon Craig tradition of Lincoln County, NC are documented Appalachian pottery centers. Kiln operation at stoneware temperatures (1800-2300°F) requires safety gating: bone-dry ware, safe kiln loading, and careful cooling protocol.\n\nFirst Nations coil-built pottery: Haudenosaunee (Iroquois) pottery is a pre-contact and post-contact ceramic tradition of the northeastern woodlands. Pre-contact Haudenosaunee pottery was built entirely by coil construction (no wheel throwing). Clay was tempered with grit, shell, or crushed ceramics (grog) to prevent cracking during drying and open-pit firing. Vessel forms typically feature rounded or pointed bases — designed to set into sand or earth near a fire rather than on a flat surface — with cord-impressed, fabric-impressed, and incised geometric decoration on the upper portion of the vessel. Some surface designs carry clan or nation significance and are Level 2 contextually shared. Nation-specific attribution: Haudenosaunee (Onondaga, Mohawk, Cayuga, Seneca, Oneida, Tuscarora).\n\nInuit soapstone carving: soapstone (steatite) is a soft metamorphic rock composed primarily of talc that is heat-resistant, easily worked with simple tools, and found throughout the Inuit homeland of Arctic Canada and Labrador. The qulliq — a soapstone oil lamp carved in the form of a shallow crescent or half-moon with a wick gutter along the straight edge — was the central domestic technology of Inuit life: the source of heat, light, and cooking fire in a treeless Arctic environment. Soapstone cooking vessels were also carved for direct-fire and stone-boiling use. Note: qulliq burning operations (seal oil, wick management, flame adjustment, CO ventilation requirements) are covered in Room 14 (Arctic Living) where fire and CO safety gates apply. This room covers soapstone carving technique and vessel form only. Soapstone carving dust may contain talc and in some geological formations asbestos minerals — dust safety annotation applies. Nation attribution: Inuit.",
+  "modules": [
+    {
+      "id": "pottery-08-appalachian-earthenware",
+      "title": "Appalachian Hand-Building: Pinch, Coil, and Slab",
+      "tradition": "appalachian",
+      "description": "Appalachian earthenware hand-forming techniques: pinch pot construction (the oldest hand-building method, a direct compression of thumb and fingers), coil building (rolling clay into ropes and stacking to build vessel walls), and slab construction (rolling flat sheets and joining with slip). Appalachian functional forms: storage jugs, crocks, churns, and bowls — the vessels that held food and liquid through the year. Clay wedging to remove air pockets before forming. Surface treatment before firing: smoothing, texturing, slip decoration. Wall thickness control. Slow drying protocol to prevent warping and cracking.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["PotteryMaking", "HeritageSkill"]
+    },
+    {
+      "id": "pottery-08-appalachian-alkaline-glaze",
+      "title": "Alkaline Glazes and Groundhog Kiln Firing",
+      "tradition": "appalachian",
+      "description": "GATED. Appalachian alkaline glaze chemistry and groundhog kiln operation. Alkaline glaze materials: wood ash (fluxes silica at high temperature), feldspar (alumina and silica source), Albany slip (a natural slip clay from Albany, NY, now replaced by Albany Slip substitute). Glaze application: dipping, pouring, brushing. Groundhog kiln construction: the long, low hillside kiln with firebrick firebox at one end and chimney at the other. Kiln loading: kiln furniture (posts and shelves), spacing ware, setting order. Firing cycle: initial low-temperature warm-up to drive off remaining moisture (green ware to bone dry at 212°F), bisque fire (approximately 1850°F), glaze fire to cone 10 (approximately 2350°F). Kiln atmosphere: reduction firing (starving the flame of oxygen) vs. oxidation, and effect on alkaline glaze color. Cooling protocol: do not open kiln until below 300°F. Safety gates apply to all kiln firing operations.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["PotteryMaking", "Kiln", "HeritageSkill"]
+    },
+    {
+      "id": "pottery-08-appalachian-face-jugs",
+      "title": "Face Jugs: Tradition, History, and Attribution",
+      "tradition": "appalachian",
+      "description": "The face jug tradition: grotesque vessel forms with applied human faces — exaggerated features, kaolin white clay eyes and teeth on a dark Appalachian stoneware body. The face jug has a documented African American origin at the Edgefield pottery district of South Carolina, where enslaved African American potters (including Dave Drake, whose signed and dated vessels are now recognized as significant art historical objects) produced face jugs in the 1800s. The debate over whether the face jug grotesque tradition derives from African protective vessel traditions (nkisi nkondi), European grotesque mask traditions, or multiple simultaneous sources is ongoing in craft history scholarship. Presenting face jug history accurately requires acknowledging this African American artistry alongside the Appalachian settler tradition that adopted and continued the form. Cultural level 2 because accurate attribution and history require cross-cultural framing.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["Artifact", "HeritageSkill"]
+    },
+    {
+      "id": "pottery-08-fn-haudenosaunee-pottery",
+      "title": "Haudenosaunee Coil-Built Pottery",
+      "tradition": "first-nations",
+      "description": "Haudenosaunee pottery construction: coil-built ceramic vessels of tempered clay with cord-impressed and incised surface decoration. Pre-contact Haudenosaunee pottery was constructed entirely by coil building — no wheel was used. Local clays were tempered with grit, shell, or crushed fired clay (grog) to reduce cracking. Vessel forms typically have rounded or pointed bases (for use in sand or earth near open fire) rather than flat bottoms. Surface decoration: cord-impressed patterns (a paddle wrapped with twisted cord pressed into leather-hard clay), fabric-impressed textures, and incised geometric designs applied to the upper vessel. Some designs carry clan or nation significance and are Level 2 contextually shared — technique is public, clan-associated meanings require nation-specific attribution. Open-pit firing: Haudenosaunee pottery was fired in open pits with wood fuel, not in enclosed kilns, reaching approximately 900-1200°F (earthenware temperatures). Nation attribution: Haudenosaunee (Onondaga, Mohawk, Cayuga, Seneca, Oneida, Tuscarora).",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["PotteryMaking", "HeritageSkill"]
+    },
+    {
+      "id": "pottery-08-inuit-soapstone-carving",
+      "title": "Inuit Soapstone Carving and Qulliq Form",
+      "tradition": "inuit",
+      "description": "Soapstone (steatite) properties and Inuit carving tradition. Soapstone is a soft metamorphic rock (Mohs hardness 1-2) composed primarily of talc, with high heat resistance and low thermal expansion — making it resistant to thermal shock from fire. Found throughout Arctic Canada and Labrador, soapstone was the primary material for Inuit functional objects before metal tools and metal vessels became available through trade. The qulliq soapstone oil lamp is the central object of this carving tradition: a shallow crescent or half-moon shape with an oil reservoir interior and a wick gutter along the straight edge, typically 12-20 inches long. Soapstone cooking vessels and boiling pots were also carved. Traditional carving tools: stone flakes, shell, antler and bone scrapers, and fine stone or sand for smoothing. Modern carvers use metal rasps, files, and sandpaper. Note: qulliq burning operations (seal oil fuel, wick management, CO ventilation) are covered in Room 14 (Arctic Living). This module covers carving technique and form only. Dust safety annotation applies to all soapstone carving work. Nation attribution: Inuit.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["HeritageSkill", "Artifact"]
+    },
+    {
+      "id": "pottery-08-glaze-chemistry",
+      "title": "Glaze Chemistry: From Alkaline Ash to Food-Safe Surfaces",
+      "tradition": "appalachian",
+      "description": "Ceramic glaze chemistry overview: the three components of any glaze — silica (glass former), alumina (stiffener that prevents the glaze from running off the pot), and flux (lowers the melting point of the silica to achievable kiln temperatures). Alkaline glazes (wood ash, potassium, sodium fluxes) vs. calcium-fluxed stoneware glazes. Lead glazes: historically common in traditional pottery (low-temperature firing, bright colors, easy application), now prohibited for food-contact pottery in most jurisdictions because lead leaches into food, especially acidic foods. The alkaline glazes of the Appalachian tradition (wood ash, feldspar) are lead-free and safe for food use when properly fired to maturity at cone 10. Colorants: iron oxide (tan to black depending on atmosphere), cobalt (blue), manganese dioxide (brown to purple, toxic dust precautions required), copper oxide (green in oxidation, red in heavy reduction). Food-safe glaze testing: fired glazes should be tested for lead and cadmium leaching before use on food-contact surfaces. Chemical ANNOTATE applies to all dry glaze weighing and mixing.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["PotteryMaking", "HeritageSkill"]
+    }
+  ]
+}
