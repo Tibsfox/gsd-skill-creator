@@ -10,7 +10,7 @@ import {
 } from './team-lifecycle.js';
 import { TeamStore } from './team-store.js';
 import { readTeamEvents } from './team-event-log.js';
-import type { TeamConfig } from '../types/team.js';
+import type { TeamConfig } from '../../core/types/team.js';
 import type { TeamLifecycleState } from './team-lifecycle.js';
 
 // ============================================================================

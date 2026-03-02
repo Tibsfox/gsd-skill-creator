@@ -18,9 +18,9 @@ import type { ExecutionState } from './types.js';
 import type { SubversionCallbacks, PhaseResult } from './scheduler.js';
 import { writeExecutionState } from './persistence.js';
 import { createExecutionState, transition } from './state-machine.js';
-import { TeamStore } from '../../teams/team-store.js';
-import { readTeamEvents } from '../../teams/team-event-log.js';
-import type { TeamConfig } from '../../types/team.js';
+import { TeamStore } from '../teams/team-store.js';
+import { readTeamEvents } from '../teams/team-event-log.js';
+import type { TeamConfig } from '../../core/types/team.js';
 
 // ============================================================================
 // Helpers

@@ -21,7 +21,7 @@ import type { ExecutionState } from './types.js';
 import type { SubversionCallbacks } from './scheduler.js';
 import type { GateEvaluatorOptions } from './gates.js';
 import type { WatchdogConfig } from './write-watchdog.js';
-import type { TeamConfig } from '../../types/team.js';
+import type { TeamConfig } from '../../core/types/team.js';
 import { writeFile as writeFileFs, readFile as readFileFs } from 'node:fs/promises';
 import { createExecutionState, transition } from './state-machine.js';
 import { createScheduler } from './scheduler.js';
@@ -31,8 +31,8 @@ import { GateEvaluator } from './gates.js';
 import { estimateContextBudget, shouldPause } from './context-budget.js';
 import { createWatchdog } from './write-watchdog.js';
 import { writeExecutionState } from './persistence.js';
-import { TeamLifecycleManager } from '../../teams/team-lifecycle.js';
-import { TeamStore } from '../../teams/team-store.js';
+import { TeamLifecycleManager } from '../teams/team-lifecycle.js';
+import { TeamStore } from '../teams/team-store.js';
 
 // ============================================================================
 // Types

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { SkillGenerator } from './skill-generator.js';
-import { SkillStore } from '../storage/skill-store.js';
-import type { SkillCandidate } from '../types/detection.js';
+import { SkillStore } from '../../core/storage/skill-store.js';
+import type { SkillCandidate } from '../../core/types/detection.js';
 
 // Minimal SkillStore for testing (only needs constructor path)
 const store = new SkillStore('/tmp/test-skills');

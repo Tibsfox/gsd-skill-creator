@@ -1099,7 +1099,7 @@ async function main() {
 
         case 'dissolve':
         case 'd': {
-          const { teamDissolveCommand } = await import('./cli/commands/team-dissolve.js');
+          const { teamDissolveCommand } = await import('./tools/cli/commands/team-dissolve.js');
           const exitCode = await teamDissolveCommand(subArgs);
           if (exitCode !== 0) process.exit(exitCode);
           break;
@@ -1169,7 +1169,7 @@ async function main() {
 
     case 'site':
     case 'st': {
-      const { siteCommand } = await import('./cli/commands/site.js');
+      const { siteCommand } = await import('./tools/cli/commands/site.js');
       const exitCode = await siteCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1177,7 +1177,7 @@ async function main() {
 
     case 'curl':
     case 'cu': {
-      const { curlCommand } = await import('./cli/commands/curl.js');
+      const { curlCommand } = await import('./tools/cli/commands/curl.js');
       const exitCode = await curlCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
@@ -1185,7 +1185,7 @@ async function main() {
 
     case 'web':
     case 'we': {
-      const { webCommand } = await import('./cli/commands/web.js');
+      const { webCommand } = await import('./tools/cli/commands/web.js');
       const exitCode = await webCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
