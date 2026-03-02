@@ -1,0 +1,65 @@
+{
+  "roomId": "room-10-community-culture",
+  "room": 10,
+  "culturalRules": [
+    {
+      "id": "ROOM10-CULT-001",
+      "domain": "community-culture",
+      "tradition": "appalachian",
+      "concept": "Appalachian mutual aid and community governance",
+      "level": 1,
+      "note": "Appalachian barn raising, church governance, and neighborliness ethics are colonial settler traditions (Scots-Irish, German, English heritage). This content is Level 1 publicly shared. The Foxfire interview methodology is also Level 1 and is the foundation for ethical community documentation. These traditions should be presented as historical and contemporary Appalachian community practices.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM10-CULT-002",
+      "domain": "community-culture",
+      "tradition": "first-nations",
+      "concept": "Haudenosaunee Great Law of Peace and Confederacy governance",
+      "level": 2,
+      "nationAttribution": "Haudenosaunee (Onondaga, Seneca, Mohawk, Cayuga, Oneida, Tuscarora)",
+      "note": "The Great Law of Peace (Gayanashagowa) is publicly documented and foundational to understanding Haudenosaunee political identity. The roles of Clan Mothers, the Tree of Peace metaphor, and consensus decision-making are at Level 2 — contextually shared. The specific protocols of Confederacy Council meetings and the recitation of the Condolence Ceremony are Level 3-4 and must not be described. Focus on the governance philosophy and documented structure, not internal ceremonial protocols.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM10-CULT-003",
+      "domain": "community-culture",
+      "tradition": "first-nations",
+      "concept": "Anishinaabe dodem (clan) system and governance roles",
+      "level": 2,
+      "nationAttribution": "Anishinaabe",
+      "note": "The Anishinaabe clan (dodem/dodaim) system and its governance functions are contextually shared (Level 2). The seven original clans and their governance roles are publicly documented in community-authorized educational materials. Clan-specific protocols, clan ceremonies, and clan-specific restricted knowledge are Level 3-4 and must not be described. Focus on the structure and governance logic, not specific clan protocols.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM10-CULT-004",
+      "domain": "community-culture",
+      "tradition": "first-nations",
+      "concept": "Ceremonial governance and naming ceremonies",
+      "level": 3,
+      "nationAttribution": "First Nations (nation-specific)",
+      "note": "Ceremonial dimensions of governance (potlatch governance structure, naming ceremonies, spiritual authority in governance) are Level 3 — restricted to community members and governed by specific nation protocols. This content must not be generated. Learners asking about ceremonial governance should be referred to nation-specific cultural centers and authorized community sources.",
+      "action": "restrict"
+    },
+    {
+      "id": "ROOM10-CULT-005",
+      "domain": "community-culture",
+      "tradition": "inuit",
+      "concept": "Aajiiqatigiinniq (Inuit consensus) and IQ community principles",
+      "level": 2,
+      "nationAttribution": "Inuit",
+      "note": "Aajiiqatigiinniq (deciding together) and Pijitsirniq (serving others) are publicly documented IQ principles that govern Inuit community decision-making. They are Level 2 — contextually shared with appropriate attribution. IQ principles are living governance practices, not historical artifacts. Always attribute to Inuit (not 'Indigenous peoples' generically) and note that IQ is a living system, not a museum piece.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM10-CULT-006",
+      "domain": "community-culture",
+      "tradition": "inuit",
+      "concept": "Inuit spiritual governance and shamanic authority",
+      "level": 4,
+      "nationAttribution": "Inuit",
+      "note": "Shamanic authority structures and spiritual dimensions of Inuit governance (angakkuq roles in traditional decision-making) are Level 4 — sacred and restricted. This content must not be generated under any circumstances. Hard block with no override. Refer any learner asking about this dimension to community-authorized Inuit cultural sources.",
+      "action": "hard-block"
+    }
+  ]
+}
