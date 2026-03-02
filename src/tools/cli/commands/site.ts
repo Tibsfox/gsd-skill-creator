@@ -41,7 +41,7 @@ async function siteBuildCommand(subArgs: string[]): Promise<number> {
   const includeDrafts = hasFlag(subArgs, 'drafts');
   const clean = hasFlag(subArgs, 'clean');
 
-  const { build } = await import('../../site/build.js');
+  const { build } = await import('../../../integrations/site/build.js');
 
   const result = await build({
     contentDir: 'src/site/content',
@@ -74,7 +74,7 @@ async function siteDeployCommand(subArgs: string[]): Promise<number> {
     return 1;
   }
 
-  const { dryRun } = await import('../../site/deploy.js');
+  const { dryRun } = await import('../../../integrations/site/deploy.js');
 
   const config = {
     method: 'rsync' as const,
@@ -97,7 +97,7 @@ async function siteDeployCommand(subArgs: string[]): Promise<number> {
 async function siteAuditCommand(subArgs: string[]): Promise<number> {
   const buildDir = extractFlag(subArgs, 'build-dir') ?? 'www';
 
-  const { runAudit } = await import('../../site/audit.js');
+  const { runAudit } = await import('../../../integrations/site/audit.js');
   const { readFile } = await import('node:fs/promises');
   const { resolve, join } = await import('node:path');
 

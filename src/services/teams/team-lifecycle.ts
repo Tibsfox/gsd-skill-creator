@@ -15,7 +15,7 @@
  * @module teams/team-lifecycle
  */
 
-import type { TeamConfig, TeamLifecycleState, TeamManagedBy } from '../types/team.js';
+import type { TeamConfig, TeamLifecycleState, TeamManagedBy } from '../../core/types/team.js';
 import type { TeamStore } from './team-store.js';
 import { appendTeamEvent } from './team-event-log.js';
 import type { TeamLifecycleEvent } from './team-event-log.js';
@@ -24,7 +24,7 @@ import type { TeamLifecycleEvent } from './team-event-log.js';
 // Re-export TeamLifecycleState for convenience
 // ============================================================================
 
-export type { TeamLifecycleState } from '../types/team.js';
+export type { TeamLifecycleState } from '../../core/types/team.js';
 
 // ============================================================================
 // Transition Map
