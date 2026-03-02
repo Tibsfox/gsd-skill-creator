@@ -1,0 +1,38 @@
+{
+  "id": "first-project",
+  "title": "Your First Project: Plan and Build a Simple Wooden Box",
+  "description": "Plan and execute a simple woodworking project -- a small box -- from design through completion. This session covers measurement, safety, joinery, and the full project management cycle.",
+  "estimatedMinutes": 30,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Read about tool safety before touching any tools. Identify the PPE needed for this project: at minimum, safety glasses for all cutting operations. Then read about measuring and precision -- what is the golden rule of measurement before cutting?",
+      "expectedOutcome": "You understand the safety requirements and measurement principles before beginning any physical work",
+      "hint": "Measure twice, cut once. And verify your square is actually square before trusting it.",
+      "conceptsExplored": ["trade-tool-safety", "trade-measuring-precision"]
+    },
+    {
+      "instruction": "Read about project planning. Design your box: define the dimensions (e.g., 8\" x 6\" x 4\" tall). Create a cut list: how many pieces, what dimensions? Calculate the material you need from a standard 1x6\" pine board (remember: 1x6 is actually 3/4\" x 5.5\"). Add a 15% waste factor.",
+      "expectedOutcome": "You have a complete cut list with piece names, dimensions, and quantity, plus a materials estimate",
+      "hint": "A simple box has 5 pieces: bottom (1) + sides (2) + ends (2). Sketch it first, then calculate dimensions for each piece.",
+      "conceptsExplored": ["trade-project-planning", "trade-measuring-precision"]
+    },
+    {
+      "instruction": "Read about woodworking basics -- specifically grain direction and wood movement. For your box, which orientation will the wood grain run? Why does it matter for a box bottom (horizontal) vs. the sides? What type of joinery will you use: butt joint with screws or a dado?",
+      "expectedOutcome": "You understand how grain direction affects the cut, appearance, and long-term stability of each piece",
+      "hint": "For a simple first project, butt joints with screws or nails are appropriate. Dadoes and dovetails come later.",
+      "conceptsExplored": ["trade-woodworking-basics"]
+    },
+    {
+      "instruction": "If you have wood and tools available, execute one cut from your cut list following all safety protocols. If not, describe the full sequence of operations in order: which cut first? Why? What would you need to set up and verify before making each cut?",
+      "expectedOutcome": "You have either made a safe, measured cut or written a detailed operation sequence that demonstrates planning before action",
+      "hint": "Typical sequence: mark the cut line -> verify the blade/saw is set correctly -> check the piece is clamped or supported -> make the cut -> verify the dimension",
+      "conceptsExplored": ["trade-tool-safety", "trade-measuring-precision", "trade-woodworking-basics"]
+    },
+    {
+      "instruction": "Read about electrical basics and plumbing basics. What safety principle do both share with woodworking? How does the 'measure twice, cut once' ethic translate to electrical work (verify circuit dead before touching) and plumbing (shut off water before loosening any fitting)?",
+      "expectedOutcome": "You can articulate the universal trades safety principle: verify before acting, and create an irreversible situation only when you are certain it is safe to do so",
+      "conceptsExplored": ["trade-electrical-basics", "trade-plumbing-basics", "trade-tool-safety"]
+    }
+  ]
+}
