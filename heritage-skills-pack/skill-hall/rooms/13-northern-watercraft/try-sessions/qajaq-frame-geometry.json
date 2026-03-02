@@ -1,0 +1,61 @@
+{
+  "id": "watercraft-13-qajaq-geometry-beginner",
+  "title": "Qajaq Frame Geometry",
+  "tradition": "inuit",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore the engineering of the qajaq (kayak) — how Inuit builders create a skin-on-frame craft individually fitted to the paddler, enabling a unique relationship between person and water.",
+  "prerequisites": [],
+  "safetyLevel": "gated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Understand what a qajaq is: a skin-on-frame watercraft built to fit a single paddler like clothing for water travel.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The qajaq is built to fit ONE paddler — like clothing for water travel. The builder measures the paddler's body to determine hull width, cockpit size, and deck height. This is not a standard watercraft that anyone can step into: it is a personal craft calibrated to its owner. Traditional Inuit communities developed the qajaq over thousands of years of arctic coastal life. The word itself comes from Inuktitut (qajaq) and has been adopted into English as 'kayak.'",
+      "sumoMapping": "WaterVehicle"
+    },
+    {
+      "order": 2,
+      "instruction": "Study frame construction: driftwood or bone stringers and ribs, joinery without nails, flexible design that absorbs wave energy.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "In treeless arctic environments, driftwood was a precious resource collected from shorelines. The frame is assembled using precise joinery — slots, lashing points, and careful fitting — without metal fasteners. The flexibility of the frame is intentional: a rigid hull would crack under wave stress; a flexible hull bends with the water. This engineering principle is sophisticated and empirically derived over generations.",
+      "sumoMapping": "WaterVehicle"
+    },
+    {
+      "order": 3,
+      "instruction": "Learn skin covering: sealskin preparation, stretching over the frame, waterproof stitching, and maintenance.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "Ugruk (bearded seal) hide is most commonly used for the qajaq skin because of its strength and waterproofing properties. The hide is cleaned, scraped, stretched, and allowed to dry under tension before being fitted and sewn onto the frame. The stitching technique uses a blind stitch or a specific waterproof stitch that does not penetrate fully through the hide — preventing water from wicking through the seam.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 4,
+      "instruction": "Understand the individualized fitting process: how body measurements translate to hull geometry.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "Each qajaq is as personal as a pair of kamik boots. The hull width is typically set at three fist-widths across the hips (some builders use wrist-to-elbow measurements). The cockpit length is measured across the knees. The deck height from the thigh to the top of the raised fist determines the deck profile. These measurements produce a hull that holds the paddler in contact with the craft at multiple points, enabling precise control and rolling recovery. A qajaq built for the wrong person will feel unstable or be impossible to roll.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 5,
+      "instruction": "Explore paddle design: regional variations in blade shape, length, and construction for different water conditions.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "Qajaq paddles are double-bladed (one blade at each end) and are typically made from driftwood. Blade shape varies by region: Greenlandic paddles have narrow, pointed blades optimized for low-angle paddling in open water; Alaskan paddles tend to be shorter and wider for higher-angle paddling. The paddle is an extension of the qajaq's system — the right paddle for the qajaq and the conditions is as carefully considered as the hull geometry.",
+      "sumoMapping": "Artifact"
+    },
+    {
+      "order": 6,
+      "instruction": "Introduction to rolling and recovery: understand the concept without attempting the skill.",
+      "safetyNote": "Qajaq rolling (returning the craft to upright position after capsizing without exiting) is an advanced skill that requires extensive in-water practice with a qualified instructor. This session introduces the concept only — that the qajaq's individualized fit enables a rolling recovery technique that is not possible in a loosely fitted craft. Do not attempt rolling without proper training, a spotter, and appropriate cold water safety equipment.",
+      "culturalContext": "Rolling recovery techniques were developed because capsizing in arctic coastal waters is immediately life-threatening. A paddler who can roll their qajaq does not need to exit the craft; they can recover the boat while remaining sealed inside. This requires complete familiarity with the craft, extensive practice, and a qajaq fitted precisely to the paddler's body. It is one of the most impressive achievements in human-powered watercraft history.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 7,
+      "instruction": "Cold water safety: required gate for all qajaq activities.",
+      "safetyNote": "Cold water safety: capsizing a qajaq in arctic or near-arctic waters is immediately life-threatening. The 1-10-1 rule applies: approximately 1 minute to control breathing after cold water immersion (gasping reflex), 10 minutes of meaningful movement before cold incapacitation, 1 hour before unconsciousness in very cold water. REQUIRED before any qajaq use: always paddle with partners, wear a PFD or drysuit appropriate to water temperature, never enter cold open water alone, and have a shore-based observer or rescue plan."
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}

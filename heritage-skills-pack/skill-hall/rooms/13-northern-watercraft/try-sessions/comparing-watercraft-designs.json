@@ -1,0 +1,58 @@
+{
+  "id": "watercraft-13-comparing-designs-beginner",
+  "title": "Comparing Watercraft Designs",
+  "tradition": "cross-tradition",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Compare birchbark canoe, qajaq, and umiak designs — and discover why Western classification and Indigenous understanding of the same watercraft answer fundamentally different questions.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Survey the three northern watercraft and their primary purposes: birchbark canoe (river and lake travel), qajaq (solo arctic hunting and coastal travel), and umiak (community travel and ocean voyaging).",
+      "culturalContext": "Each watercraft evolved for specific conditions and purposes. The birchbark canoe navigates rivers and lakes across the northern woodlands — light enough to portage, stable enough to carry trade goods, maneuverable in fast water. The qajaq hunts in arctic coastal waters — low-profile to avoid detection by prey, fitted to the paddler for maximum control, capable of rolling recovery in rough seas. The umiak carries entire families across open ocean — large enough for passengers and cargo, powered by multiple paddlers or sail, capable of crossing open water.",
+      "sumoMapping": "WaterVehicle"
+    },
+    {
+      "order": 2,
+      "instruction": "Compare design principles: open vs. closed deck, group vs. solo, and material choices.",
+      "culturalContext": "The birchbark canoe is open-deck, typically paddled by 2-4 people, and built from forest materials (birchbark, cedar, spruce). The qajaq is closed-deck (the paddler is enclosed), solo-use, and built from tundra and coastal materials (driftwood, bone, sealskin). The umiak is open-deck, multi-person, and built from coastal materials (driftwood or whalebone frame, ugruk or walrus hide). Each design reflects an intimate relationship between the builders and their specific ecosystem.",
+      "sumoMapping": "WaterVehicle"
+    },
+    {
+      "order": 3,
+      "instruction": "Encounter the primary ontological bridge: Canoe as Artifact vs. Canoe as Relationship.",
+      "nationAttribution": "Anishinaabe",
+      "culturalContext": "Here is something remarkable. A Western ontology (SUMO) classifies a birchbark canoe as: Canoe -> WaterVehicle -> TransportationDevice -> Device -> Artifact. It is a manufactured object for water transportation. An Anishinaabe understanding sees the canoe as: a being with spirit, born from the birch tree's gift. Building one is ceremony. Paddling together teaches togetherness — you must paddle in unison, which requires trust and relationship. Both descriptions are true. They answer different questions: WHAT something is vs. WHAT something means. SUMO classifies by function; Anishinaabe knowledge weaves relationship, responsibility, and spirit into every object. The canoe is simultaneously a WaterVehicle and a teacher of togetherness. Knowing only the SUMO view, you can build a boat. Knowing only the Indigenous view, you understand why the journey matters.",
+      "sumoMapping": "WaterVehicle"
+    },
+    {
+      "order": 4,
+      "instruction": "Explore the second ontological bridge: Qajaq as Artifact vs. Qajaq as Extension of Self.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The same tension appears with the qajaq. SUMO says: Kayak -> WaterVehicle -> Artifact. But for an Inuit paddler, the qajaq is an extension of the body — fitted like clothing, responding to the paddler's movements. It enables a relationship with water and ice that no classification system captures: the paddler does not sit in a boat, they become part of the water's surface. The fit is not incidental — it is the entire point. A qajaq built for the wrong person is not just uncomfortable; it is unusable. The artifact cannot be separated from the person it was made for.",
+      "sumoMapping": "WaterVehicle"
+    },
+    {
+      "order": 5,
+      "instruction": "Understand why both the SUMO view and the Indigenous view are necessary — neither is sufficient alone.",
+      "culturalContext": "Neither view is 'right' or 'wrong.' The SUMO classification helps engineers build better boats, enables cross-cultural comparison, and supports interoperable knowledge systems. The Indigenous understanding helps learners build better relationships — with materials, with water, and with each other. A learner who understands only the SUMO view of a canoe can describe its material composition and functional classification. They cannot explain why the builder gave thanks before taking birchbark, or why paddling together teaches togetherness. A learner who understands only the Anishinaabe view may miss the engineering precision that makes the canoe float. This educational pack holds both views together without forcing one to replace the other.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 6,
+      "instruction": "Examine the umiak as community vessel: what the SUMO classification captures and what it misses.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The umiak — a large open boat for community travel — adds another dimension. Its construction is a community project requiring multiple hands, specific knowledge of hide preparation, and cooperative labor. Its use strengthens community bonds — entire families travel together across open ocean in ways impossible in a qajaq. The SUMO classification (a large WaterVehicle capable of carrying multiple passengers and cargo) accurately describes its physical properties. What it misses is everything that matters most about the umiak: its role as the vessel of community movement, the cooperation required to build and operate it, and what traveling together across open ocean means for the people who do it.",
+      "sumoMapping": "WaterVehicle"
+    },
+    {
+      "order": 7,
+      "instruction": "Cold water safety reminder: all northern watercraft carry cold water risk regardless of tradition or context.",
+      "safetyNote": "All watercraft activities in northern waters carry cold water risk. Cold water shock (the gasping reflex) can cause drowning within seconds of unexpected immersion. Before any on-water activity: PFD required, buddy system required, know the 1-10-1 rule (1 minute breathing control, 10 minutes meaningful movement, 1 hour before unconsciousness in cold water), check weather and water conditions before launch."
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}
