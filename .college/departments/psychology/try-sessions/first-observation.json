@@ -1,0 +1,38 @@
+{
+  "id": "psych-first-observation",
+  "title": "Observe Your Own Mind",
+  "description": "Apply psychological concepts to your own thoughts, emotions, and behavior through structured self-observation.",
+  "estimatedMinutes": 20,
+  "steps": [
+    {
+      "step": 1,
+      "title": "Catch a cognitive bias in action",
+      "instruction": "Over the next 24 hours, try to catch yourself using an availability heuristic or confirmation bias.",
+      "prompt": "Describe a moment when you made a judgment based on what was most easily available to your memory. Was it accurate? What information were you missing?"
+    },
+    {
+      "step": 2,
+      "title": "Map an emotion",
+      "instruction": "Pick an emotion you felt today. Use the valence-arousal model: Where is it on the pleasant/unpleasant axis? High or low arousal?",
+      "prompt": "Name the emotion as specifically as you can. What triggered it? What action tendency did it create (approach, avoid, freeze, connect)?"
+    },
+    {
+      "step": 3,
+      "title": "Identify your motivation type",
+      "instruction": "Think of something you are currently working on or toward. Is your motivation primarily intrinsic or extrinsic?",
+      "prompt": "Describe the goal. What drives you to pursue it? How would removing external rewards affect your motivation?"
+    },
+    {
+      "step": 4,
+      "title": "Trace an attribution",
+      "instruction": "Think of something that went wrong recently. Did you attribute it to yourself (internal) or to circumstances (external)?",
+      "prompt": "Write the attribution you made. Is there a self-serving bias here? What would a more balanced attribution look like?"
+    },
+    {
+      "step": 5,
+      "title": "Identify a skill on your acquisition curve",
+      "instruction": "Pick a skill you are currently learning. Which stage are you in: cognitive (understanding), associative (reducing errors), or autonomous (automatic)?",
+      "prompt": "Describe where you are in skill acquisition. What would move you to the next stage?"
+    }
+  ]
+}
