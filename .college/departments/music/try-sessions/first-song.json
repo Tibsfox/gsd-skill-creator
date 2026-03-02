@@ -1,0 +1,37 @@
+{
+  "id": "first-song",
+  "title": "Your First Song: Rhythm, Melody, and the Mathematics of Music",
+  "description": "Experience rhythm, melody, and harmony through active participation. This session works with or without an instrument -- body percussion and humming are all you need.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Read about rhythm and meter. Clap a steady beat at a comfortable tempo. Now clap a simple rhythmic pattern on top of the beat: quarter-quarter-two eighths-quarter (ONE TWO one-and THREE). This is the clave pattern at the heart of Afro-Cuban music and jazz. Feel the difference between the steady pulse and the rhythmic pattern.",
+      "expectedOutcome": "You can maintain a steady beat while clapping a separate rhythmic pattern on top -- the foundation of all rhythmic musicianship",
+      "hint": "Use your dominant hand for the rhythmic pattern and your non-dominant hand as the steady beat -- or use your foot for the steady pulse",
+      "conceptsExplored": ["music-rhythm", "music-meter"]
+    },
+    {
+      "instruction": "Read about scales and intervals. Hum or sing the major scale (do-re-mi-fa-sol-la-ti-do). Notice the two half-steps between mi-fa and ti-do -- these create the scale's characteristic bright sound. Now hum the pentatonic scale: do-re-mi-sol-la. Notice how much smoother and less tense it feels without the half-steps.",
+      "expectedOutcome": "You can hear and feel the difference between major and pentatonic scales, understanding how the half-step creates the major scale's distinctive tension and resolution",
+      "hint": "The pentatonic scale is the black keys on a piano -- play any combination of only black keys and it will always sound good",
+      "conceptsExplored": ["music-scales-intervals"]
+    },
+    {
+      "instruction": "Read about harmony and the I-IV-V progression. If you have an instrument, play or have someone play C major (C-E-G), F major (F-A-C), and G major (G-B-D). If not, listen to a 12-bar blues. Notice how the chord changes create tension (at G) and resolution (returning to C). This movement of tension and release is what drives tonal music.",
+      "expectedOutcome": "You can hear harmonic tension and resolution and understand the basic I-IV-V progression that underlies enormous amounts of Western music",
+      "hint": "Hum along with each chord -- your voice will naturally want to stay within the chord's notes",
+      "conceptsExplored": ["music-harmony", "music-scales-intervals"]
+    },
+    {
+      "instruction": "Read about acoustics of instruments. If you have any instrument available, explore how you can change pitch: on a guitar, shorter string = higher pitch; on a wind instrument, opening holes shortens the air column. If no instrument, explore your voice: sing and change the shape of your mouth and throat -- what happens to pitch and tone?",
+      "expectedOutcome": "You understand the physical relationship between the vibrating object (string, air column, vocal cord) and the pitch it produces",
+      "conceptsExplored": ["music-acoustics"]
+    },
+    {
+      "instruction": "Read about music history. Listen to two short examples: a Bach fugue (Baroque counterpoint) and a Charlie Parker bebop jazz piece. What is similar? What is different? How does the historical context (18th century Germany vs. 1940s New York) shape the music?",
+      "expectedOutcome": "You can hear the connection between jazz and classical counterpoint and articulate how historical and cultural context shapes musical style",
+      "conceptsExplored": ["music-music-history"]
+    }
+  ]
+}
