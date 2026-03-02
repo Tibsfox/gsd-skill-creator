@@ -1,0 +1,83 @@
+[
+  {
+    "heritageConceptId": "room-10-appalachian-barn-raising",
+    "sumoTerm": "SocialGroup",
+    "sumoFile": "People.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass AppalachianBarnRaising SocialGroup)",
+    "naturalLanguage": "An Appalachian barn raising is a social group activity: a structured gathering of community members united by reciprocal obligation to contribute labor toward a shared construction goal.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-10-haudenosaunee-confederacy",
+    "sumoTerm": "Government",
+    "sumoFile": "Government.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass HaudenosauneeConfederacy Government)",
+    "naturalLanguage": "The Haudenosaunee Confederacy (Iroquois League) is a government: a structured political organization with defined roles, laws (the Great Law of Peace), and authority to make collective decisions on behalf of its member nations.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-10-great-law-of-peace",
+    "sumoTerm": "NormativeAttribute",
+    "sumoFile": "Government.kif",
+    "mappingType": "instance",
+    "kifStatement": "(instance GreatLawOfPeace NormativeAttribute)",
+    "naturalLanguage": "The Great Law of Peace (Gayanashagowa) is a normative attribute: a set of principles, rules, and governance structures that prescribe how the Haudenosaunee Confederacy shall conduct itself — who holds authority, how decisions are made, and how conflicts are resolved.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-10-anishinaabe-dodem",
+    "sumoTerm": "SocialGroup",
+    "sumoFile": "People.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass AnishinaabeClanSystem SocialGroup)",
+    "naturalLanguage": "The Anishinaabe clan (dodem) system is a social group organization: kinship groups defined by animal totems that carry specific governance roles and responsibilities within Anishinaabe communities.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-10-aajiiqatigiinniq",
+    "sumoTerm": "CommunicationAct",
+    "sumoFile": "Communication.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Aajiiqatigiinniq CommunicationAct)",
+    "naturalLanguage": "Aajiiqatigiinniq (deciding together) is a communication act: a structured process of deliberation in which Inuit community members speak, listen, and reach a consensus decision through continued dialogue until all voices have been heard and silence signals agreement.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-10-pijitsirniq",
+    "sumoTerm": "NormativeAttribute",
+    "sumoFile": "People.kif",
+    "mappingType": "instance",
+    "kifStatement": "(instance Pijitsirniq NormativeAttribute)",
+    "naturalLanguage": "Pijitsirniq (serving others/the community) is a normative attribute in Inuit culture: a prescriptive principle that positions community service and contribution as the primary ethical obligation of community members — the motivation underlying Aajiiqatigiinniq and other IQ governance practices.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-10-foxfire-methodology",
+    "sumoTerm": "CulturalPractice",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass FoxfireDocumentationMethodology CulturalPractice)",
+    "naturalLanguage": "The Foxfire interview and documentation methodology is a cultural practice: a structured approach to preserving community knowledge through student-conducted interviews with elders and community experts, treating community members as the authoritative holders of heritage knowledge.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-10-community-mutual-aid",
+    "sumoTerm": "CulturalPractice",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass CommunityMutualAid CulturalPractice)",
+    "naturalLanguage": "Community mutual aid (barn raising, cabin raising, harvest days) is a cultural practice: a reciprocal labor-exchange system in which community members contribute work to each other's projects with the expectation of equivalent contribution in return, sustaining community cohesion without monetary exchange.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-10-clan-mother-role",
+    "sumoTerm": "SocialRole",
+    "sumoFile": "People.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass ClanMotherRole SocialRole)",
+    "naturalLanguage": "The Clan Mother role in Haudenosaunee governance is a social role: a defined position with specific authority (selecting and removing chiefs, holding Confederacy membership) and responsibilities within the Haudenosaunee political structure, transmitted matrilineally within clans.",
+    "ontologicalBridge": null
+  }
+]
