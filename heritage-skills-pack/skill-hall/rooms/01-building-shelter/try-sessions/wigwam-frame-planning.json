@@ -1,0 +1,59 @@
+{
+  "id": "building-01-wigwam-frame-beginner",
+  "title": "Wigwam Frame Planning: Anishinaabe Dome Shelter",
+  "tradition": "first-nations",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore the planning and construction logic of the Anishinaabe wigwam -- a dome-framed shelter of bent saplings covered with birchbark or reed mats. Learn how the frame geometry creates structural stability and how the covering system allows for seasonal variation.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Understand the Anishinaabe wigwam: tradition and context. The wigwam (wiigiwaam in Anishinaabemowin) is a dome-shaped dwelling of the Anishinaabe people. Its design allows rapid construction and deconstruction -- critical for communities that follow seasonal rounds across large territories.",
+      "nationAttribution": "Anishinaabe",
+      "culturalContext": "The Anishinaabe (Ojibwe, Chippewa, Odawa, and Potawatomi peoples of the Great Lakes region) developed the wigwam as a dwelling suited to their seasonal movement patterns. A family could construct a wigwam frame in a day and cover it in hours. The same poles could be left standing at a frequently returned camp and recovered with fresh mats or bark on return.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Learn sapling selection: flexible young saplings (ash, cedar, or ironwood are traditional choices) 1-2 inches in diameter, 12-20 feet long depending on desired dome height. Saplings must be green (freshly cut) to bend without splitting.",
+      "nationAttribution": "Anishinaabe",
+      "culturalContext": "The choice of sapling species reflects detailed ecological knowledge. Ash bends smoothly and resists splitting under load. Cedar is lighter and resists rot. Ironwood is extremely tough but harder to work. The selection depends on what is available in the specific territory and what the shelter needs to do.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 3,
+      "instruction": "Lay out the ground plan: mark a roughly oval or circular floor plan, typically 12-16 feet in the longest dimension for a family-sized wigwam. Pairs of opposite poles will be lashed together at the top to form arches. Mark pole positions at 2-3 foot intervals around the perimeter.",
+      "sumoMapping": "ConstructionProcess"
+    },
+    {
+      "order": 4,
+      "instruction": "Bend the arches: drive the butt end of each sapling into the ground at the marked position to a depth of 12-18 inches. Bend the sapling across the floor plan and drive the opposite end into the ground. Lash the crossing poles together with basswood bark or rawhide cord where they intersect.",
+      "safetyNote": "Structural annotation: the arched frame becomes rigid only when multiple poles are lashed together in crossing patterns. Do not rely on a partially completed frame -- a frame with only a few poles lashed can be unstable in wind. Complete lashing before covering.",
+      "sumoMapping": "ConstructionProcess"
+    },
+    {
+      "order": 5,
+      "instruction": "Understand covering options: birchbark panels (harvested in spring when bark peels easily, stored flat for use) or cattail reed mats (woven in summer, overlapped like shingles). Multiple layers of mats provide better insulation. In winter, additional hide or canvas covers may be added.",
+      "nationAttribution": "Anishinaabe",
+      "culturalContext": "Birchbark panels are the prestige covering material -- waterproof, durable, and lightweight. Reed mats are more available in many locations and can be made in quantity during summer. Both allow the same pole frame to be covered in different ways depending on season and what materials are at hand.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 6,
+      "instruction": "Manage the smoke hole: a central smoke hole at the apex of the dome is essential for any fire inside the wigwam. The smoke hole is typically covered by a movable bark or hide flap that can be adjusted for wind direction.",
+      "safetyNote": "Fire and CO annotation: any fire inside an enclosed shelter produces CO. The smoke hole must be open whenever a fire is burning. If smoke accumulates at floor level rather than rising and exiting through the smoke hole, the fire is not drafting correctly -- extinguish it and improve ventilation before restarting.",
+      "sumoMapping": "ConstructionProcess"
+    },
+    {
+      "order": 7,
+      "instruction": "Understand wigwam within community: the Anishinaabe village or camp typically comprised multiple wigwams arranged with shared pathways between them. The wigwam is not just a building -- it is the basic unit of a spatially organized community.",
+      "nationAttribution": "Anishinaabe",
+      "culturalContext": "Community layout in Anishinaabe camps reflected social relationships and practical needs: cooking fires, drying racks, canoe landing sites, and water access all influenced where wigwams were placed relative to each other and to the landscape.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ]
+}

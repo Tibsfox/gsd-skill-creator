@@ -1,0 +1,58 @@
+{
+  "id": "woodcraft-04-snowshoe-geometry-beginner",
+  "title": "Snowshoe Frame Geometry: Dene and Cree Traditions",
+  "tradition": "first-nations",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore the geometry behind traditional snowshoe frame designs from Dene and Cree traditions. Understand how frame shape determines performance in different snow conditions, how wood species and grain orientation affect strength, and how babiche (rawhide) lacing creates the weight-distributing deck.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Snowshoes across nations: context. Snowshoe traditions exist across many northern First Nations, with each nation's design shaped by the specific snow conditions and terrain of their territory. The Dene (Northwest Territories, Yukon, northern British Columbia and Alberta) developed elongated snowshoes for deep, dry boreal snow. The Cree (from Ontario west to Alberta) have distinct regional forms. The Anishinaabe developed the 'bear paw' -- a short, round frame for dense forest movement.",
+      "nationAttribution": "Dene, Cree, Anishinaabe",
+      "culturalContext": "Snowshoe design is a form of encoded ecological knowledge: the frame shape, lacing density, and toe hole position reflect generations of testing against specific snow conditions in specific territories. A Dene snowshoe optimized for dry boreal spruce forest snow would perform poorly in the wet coastal snow of the Pacific Northwest.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Frame species selection: white birch is the traditional Dene and Cree choice -- it has a straight grain, bends without splitting when green or steam-bent, and is strong enough to resist the point loads from boot bindings. Larch (tamarack) is used in some regions. The frame must be free of knots in the bend areas.",
+      "nationAttribution": "Dene, Cree",
+      "culturalContext": "Selecting the right birch tree requires knowing how to read the forest. A straight-grained tree without spiral grain (which causes splitting under load) is required. The Dene knowledge of which trees are suitable for snowshoe frames is part of the broader ecological knowledge of the boreal forest.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 3,
+      "instruction": "Frame shapes: the elongated Dene frame (narrow and long, upturned toe, pointed tail -- for open terrain and deep dry snow), the Michigan/Ojibwe frame (pointed toe and tail, medium width -- good all-round), the bear paw (round, short, no tail -- for dense forest), and the Cree long frame (very long, narrow -- for open muskeg country).",
+      "nationAttribution": "Dene, Cree, Anishinaabe",
+      "sumoMapping": "Artifact"
+    },
+    {
+      "order": 4,
+      "instruction": "Bending the frame: a single long strip of wood is bent into the frame oval. The critical technique is either cold-bending green wood (slow, gentle pressure over days) or steam-bending (faster, requires a steam box, more precise timing). The wood must be bent while held in shape to 'set' in the new form -- clamps or a form board hold the shape while the wood dries.",
+      "safetyNote": "Tool safety annotation: steam bending requires a steam source (burn risk). Keep face away from steam vents; use gloves when handling steamed wood. Work quickly after removing wood from steam -- it cools and begins to set within 1-2 minutes. Have the bending form and clamps ready before opening the steam box.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 5,
+      "instruction": "Cross-members: the frame is divided into toe, body, and heel sections by cross-members (also called crossbars or stretchers). The front cross-member defines the toe hole opening. Cross-members must be fitted tightly and lashed securely -- they are structural members that resist the frame from collapsing under load.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 6,
+      "instruction": "Babiche lacing: babiche is rawhide (animal hide with hair removed, not tanned) cut in long thin strips. When wet, it is pliable and can be woven; as it dries, it shrinks tight and becomes rigid. The lacing pattern varies by nation and by section of the snowshoe (finer mesh at the toe for grip, coarser at the heel for weight).",
+      "nationAttribution": "Dene, Cree",
+      "culturalContext": "Babiche preparation is a separate skill set: the hide must be properly cleaned, dehaired, and cut in continuous spiral strips for even thickness. Uneven babiche produces uneven tension in the finished lacing. For this introduction, note that babiche is the traditional lacing material; modern alternatives (neoprene, artificial sinew) are available but lack the thermal properties and ecological provenance of traditional babiche.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 7,
+      "instruction": "Bindings and use: the binding holds the toe of the boot through the toe hole while allowing the heel to lift on each stride. This 'swing' of the heel is what makes snowshoeing efficient -- the snowshoe swings forward past the stationary foot rather than requiring the whole shoe to be lifted.",
+      "culturalContext": "The snowshoe is not just a tool for crossing snow -- it is a technology that opened the boreal and subarctic winter landscape for travel, hunting, and trade. The Dene, Cree, and Anishinaabe ability to travel efficiently on snowshoes was a strategic and economic capability that shaped their relationships with neighboring peoples and with European traders who quickly adopted snowshoe technology.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}
