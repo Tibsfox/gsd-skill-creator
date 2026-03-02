@@ -1,0 +1,113 @@
+{
+  "roomId": "room-05-food-preservation",
+  "room": 5,
+  "isCritical": true,
+  "primarySafetyDomains": ["food", "fire", "chemical"],
+  "criticalRules": [
+    {
+      "id": "ROOM05-CRIT-001",
+      "description": "Low-acid foods MUST use pressure canning. Water-bath canning of low-acid foods causes botulism.",
+      "trigger": "low-acid AND water-bath canning",
+      "action": "HARD STOP -- redirect to USDA pressure canning guidelines",
+      "source": "USDA Complete Guide to Home Canning, 2015 rev",
+      "examples": [
+        "green beans (pH 5.3-6.2)",
+        "corn (pH 6.0-6.5)",
+        "meats and poultry",
+        "mixed vegetables",
+        "soups",
+        "beans and legumes"
+      ],
+      "safeNote": "CRITICAL: Clostridium botulinum spores can survive boiling at 212°F/100°C. Only pressure canning reaches 240°F/116°C, which destroys spores. Botulism toxin is odorless, colorless, and potentially fatal. There is no safe shortcut for low-acid canning.",
+      "reference": {
+        "title": "USDA Complete Guide to Home Canning",
+        "year": 2015,
+        "url": "https://nchfp.uga.edu/publications/usda/USDA_complete_guide_to_home_canning_2015r.pdf"
+      }
+    },
+    {
+      "id": "ROOM05-CRIT-002",
+      "description": "Pemmican fat rendering MUST reach minimum 250°F/121°C to eliminate bacterial risk.",
+      "trigger": "pemmican fat rendering below safe temperature",
+      "action": "GATE -- require temperature acknowledgment before proceeding",
+      "source": "Traditional food safety research; USDA meat safety guidelines",
+      "safeNote": "CRITICAL: Under-rendered fat in pemmican allows bacterial growth that can cause serious illness. Fat must be rendered until fully liquid and held at minimum 250°F/121°C. Use a thermometer. Do not estimate by appearance alone.",
+      "minimumTemperature": {
+        "fahrenheit": 250,
+        "celsius": 121,
+        "rationale": "Temperature required to eliminate Listeria, Salmonella, and other pathogens present in raw animal fat"
+      }
+    },
+    {
+      "id": "ROOM05-CRIT-003",
+      "description": "All smoking content MUST include minimum safe internal temperatures.",
+      "trigger": "meat or fish smoking without temperature specification",
+      "action": "GATE -- insert temperature requirement before any smoking instruction",
+      "source": "USDA Food Safety and Inspection Service; NCHFP Smoking Guidelines",
+      "minimumTemperatures": {
+        "fish": "145°F/63°C internal",
+        "poultry": "165°F/74°C internal",
+        "whole_cuts_beef_pork": "145°F/63°C internal with 3-minute rest",
+        "ground_meat": "160°F/71°C internal",
+        "wild_game": "160°F/71°C internal (ground), 145°F/63°C (whole cuts)"
+      },
+      "coldSmokingWarning": "Cold smoking alone does NOT cook food to safe temperatures. Cold-smoked products require additional preservation steps (curing with salt/nitrates) to be microbiologically safe. Always specify whether hot or cold smoking is being described."
+    }
+  ],
+  "gateRules": [
+    {
+      "id": "ROOM05-GATE-001",
+      "description": "All fermentation content includes contamination recognition and discard criteria",
+      "trigger": "fermentation methods of any kind",
+      "action": "GATE -- include contamination signs and when-to-discard criteria before fermentation steps",
+      "contaminationSigns": [
+        "unusual colors (pink, black, grey in cultures that should be white or tan)",
+        "fuzzy mold growth (as distinct from expected kahm yeast)",
+        "off odors beyond expected sour/tangy fermentation smell",
+        "sliminess not consistent with expected ferment texture",
+        "bubbling that continues past expected fermentation window"
+      ],
+      "discardProtocol": "When in doubt, discard. Do not taste suspect ferments to determine safety. The cost of discarding is low; the cost of foodborne illness from improperly fermented food can be severe."
+    },
+    {
+      "id": "ROOM05-GATE-002",
+      "description": "Wild game processing includes internal temperature verification",
+      "trigger": "wild game processing or preparation",
+      "action": "GATE -- require internal temperature acknowledgment before processing steps",
+      "temperatures": {
+        "ground_game": "160°F/71°C",
+        "whole_cuts": "145°F/63°C with 3-minute rest",
+        "poultry": "165°F/74°C"
+      },
+      "fieldDressingNote": "Field dressing should be performed promptly after harvest. Keep meat cold (below 40°F/4°C) until processing. Do not allow meat to sit at room temperature for extended periods."
+    },
+    {
+      "id": "ROOM05-GATE-003",
+      "description": "Traditional fermented foods (including Inuit preparations) are presented as cultural knowledge only",
+      "trigger": "traditional fermented foods including igunaq, fermented fish, fermented meat",
+      "action": "GATE -- present as cultural knowledge only, not as preparation instruction",
+      "culturalNote": "Traditional Inuit fermented foods require community expertise, specific environmental conditions, and knowledge passed directly from experienced practitioners. This is not content where step-by-step instruction is appropriate outside community transmission contexts.",
+      "referral": "Refer learners to community-based knowledge keepers and established Inuit food traditions programs for hands-on learning."
+    }
+  ],
+  "annotateRules": [
+    {
+      "id": "ROOM05-ANN-001",
+      "description": "General preservation methods include food safety awareness framing",
+      "trigger": "any food preservation method discussion",
+      "action": "ANNOTATE -- include basic food safety framing appropriate to the method",
+      "framing": "Food preservation is fundamentally about controlling microbial growth. Every method — heat, salt, acid, drying, fermentation, cold — works by creating conditions where pathogens cannot thrive. Understanding WHY each method works helps practitioners recognize when something has gone wrong."
+    },
+    {
+      "id": "ROOM05-ANN-002",
+      "description": "Root cellaring and cold storage methods include temperature requirements",
+      "trigger": "root cellar, cold storage, cache storage discussions",
+      "action": "ANNOTATE -- include ideal temperature and humidity ranges",
+      "idealConditions": {
+        "root_cellar": "32-40°F/0-4°C, 90-95% humidity for most root vegetables",
+        "dry_storage": "50-70°F/10-21°C, below 60% humidity for dried goods",
+        "arctic_cache": "Below freezing (varies by item) -- permafrost provides consistent sub-freezing temperatures"
+      }
+    }
+  ]
+}

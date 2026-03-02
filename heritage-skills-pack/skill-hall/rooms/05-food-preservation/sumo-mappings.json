@@ -1,0 +1,92 @@
+[
+  {
+    "heritageConceptId": "room-05-water-bath-canning",
+    "sumoTerm": "FoodPreservation",
+    "sumoFile": "Food.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass WaterBathCanning FoodPreservation)",
+    "naturalLanguage": "Water-bath canning is a kind of food preservation, applicable to high-acid foods (pH 4.6 and below).",
+    "ontologicalBridge": "bridge-02-food-preservation"
+  },
+  {
+    "heritageConceptId": "room-05-pressure-canning",
+    "sumoTerm": "FoodPreservation",
+    "sumoFile": "Food.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass PressureCanning FoodPreservation)",
+    "naturalLanguage": "Pressure canning is a kind of food preservation that reaches temperatures (240°F/116°C) required to destroy Clostridium botulinum spores in low-acid foods.",
+    "ontologicalBridge": "bridge-02-food-preservation"
+  },
+  {
+    "heritageConceptId": "room-05-pemmican",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass PemmicanMaking HeritageSkill)",
+    "naturalLanguage": "Pemmican making is a heritage skill developed and transmitted by Cree and Métis peoples, combining meat drying, fat rendering, and berry preparation.",
+    "ontologicalBridge": "bridge-02-food-preservation"
+  },
+  {
+    "heritageConceptId": "room-05-pemmican",
+    "sumoTerm": "FoodPreservation",
+    "sumoFile": "Food.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass PemmicanMaking FoodPreservation)",
+    "naturalLanguage": "Pemmican making is a kind of food preservation, combining dehydration and fat encapsulation to achieve long-term storage without refrigeration.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-05-wild-rice-processing",
+    "sumoTerm": "CulturalPractice",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass ManoominHarvesting CulturalPractice)",
+    "naturalLanguage": "Manoomin (wild rice) harvesting and processing is a cultural practice of the Anishinaabe people, embedded in ceremony, seasonal round, and community obligation.",
+    "ontologicalBridge": "bridge-04-seasonal-round"
+  },
+  {
+    "heritageConceptId": "room-05-food-smoking",
+    "sumoTerm": "Cooking",
+    "sumoFile": "Food.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalFoodSmoking Cooking)",
+    "naturalLanguage": "Traditional food smoking — of fish, meat, and game — is a kind of cooking that uses smoke, heat, and airflow to preserve and flavor food.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-05-fermentation",
+    "sumoTerm": "ChemicalProcess",
+    "sumoFile": "Food.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalFoodFermentation FermentingFood)",
+    "naturalLanguage": "Traditional food fermentation — of vegetables, fish, meat, and dairy — is a biochemical process using microbial activity to transform and preserve food.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-05-drying",
+    "sumoTerm": "PhysicalProcess",
+    "sumoFile": "Food.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalFoodDrying FoodPreservation)",
+    "naturalLanguage": "Traditional food drying — of meat, fish, berries, and vegetables — is a kind of food preservation that removes moisture to prevent microbial growth.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-05-cache-storage",
+    "sumoTerm": "Storing",
+    "sumoFile": "Food.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass TraditionalCacheStorage Storing)",
+    "naturalLanguage": "Traditional cache storage — using permafrost, snow, rock, and elevated structures — is a kind of storing that uses the natural environment to maintain safe food temperatures.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-05-maple-sugar",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass MapleSugarProduction HeritageSkill)",
+    "naturalLanguage": "Maple sugar production is a heritage skill developed by Anishinaabe and Haudenosaunee peoples, involving sap collection, evaporation, and crystallization.",
+    "ontologicalBridge": null
+  }
+]
