@@ -1,0 +1,93 @@
+[
+  {
+    "id": "guide-oha",
+    "methodology": "OHA",
+    "title": "Oral History Association Best Practices Guide",
+    "tradition": "cross-tradition",
+    "corePracticeIds": [
+      "practice-01",
+      "practice-02",
+      "practice-03",
+      "practice-04",
+      "practice-05",
+      "practice-06",
+      "practice-07",
+      "practice-08",
+      "practice-09",
+      "practice-10",
+      "practice-11",
+      "practice-12"
+    ],
+    "ethicsFramework": "OHA",
+    "consentProtocolId": "ocap-compliant",
+    "notes": "OHA principles apply across all traditions. For First Nations content, OHA is supplemented by OCAP. For Inuit content, NISR compliance is additionally required. OHA principles: legal/ethical responsibility, interviewer competence, interviewee rights, community rights."
+  },
+  {
+    "id": "guide-smithsonian",
+    "methodology": "Smithsonian",
+    "title": "Smithsonian Folklife Documentary Standards",
+    "tradition": "cross-tradition",
+    "corePracticeIds": [
+      "practice-01",
+      "practice-02",
+      "practice-03",
+      "practice-04",
+      "practice-05",
+      "practice-06",
+      "practice-07",
+      "practice-08",
+      "practice-09",
+      "practice-10",
+      "practice-11",
+      "practice-12"
+    ],
+    "ethicsFramework": "Smithsonian-Folklife",
+    "consentProtocolId": "ocap-compliant",
+    "notes": "Smithsonian Center for Folklife and Cultural Heritage standards emphasize multi-generational context, living tradition documentation, and community-centered representation. Fieldwork norms align closely with OCAP for Indigenous content."
+  },
+  {
+    "id": "guide-iq-pilimmaksarniq",
+    "methodology": "IQ-Pilimmaksarniq",
+    "title": "IQ-Pilimmaksarniq Oral Knowledge Transmission Guide",
+    "tradition": "inuit",
+    "corePracticeIds": [
+      "practice-01",
+      "practice-02",
+      "practice-03",
+      "practice-04",
+      "practice-05",
+      "practice-06",
+      "practice-07",
+      "practice-08",
+      "practice-09",
+      "practice-10",
+      "practice-11",
+      "practice-12"
+    ],
+    "ethicsFramework": "OCAP+NISR",
+    "consentProtocolId": "nisr-compliant",
+    "notes": "This guide embeds the IQ principle of Pilimmaksarniq (learning through practice and observation) as its epistemological foundation. Oral history is not extraction — it is entering a learning relationship. The interviewer is an apprentice in the knowledge keeper's tradition, not a researcher harvesting data. All six IQ principles inform this guide: Inuuqatigiitsiarniq (respect), Tunnganarniq (openness), Pijitsirniq (service), Aajiiqatigiinniq (consensus), Pilimmaksarniq (practice-based learning), Piliriqatigiinniq (collective purpose)."
+  },
+  {
+    "id": "guide-foxfire",
+    "methodology": "Foxfire",
+    "title": "Foxfire Student-Interviewer Method",
+    "tradition": "appalachian",
+    "corePracticeIds": [
+      "practice-01",
+      "practice-02",
+      "practice-03",
+      "practice-04",
+      "practice-05",
+      "practice-06",
+      "practice-07",
+      "practice-08",
+      "practice-09",
+      "practice-10",
+      "practice-11"
+    ],
+    "ethicsFramework": "OHA-standard",
+    "consentProtocolId": "standard",
+    "notes": "The Foxfire method (Eliot Wigginton, Rabun County, Georgia, 1966) positions the student as a genuinely curious learner and the elder as the expert authority. Key Foxfire principles: approach with openness not preconception; document the whole context not just the technique; the elder owns their story; community review validates accuracy. The Foxfire approach has deep parallels with IQ-Pilimmaksarniq — both treat learning as a relational process, not an extraction process."
+  }
+]

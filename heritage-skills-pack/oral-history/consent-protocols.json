@@ -1,0 +1,58 @@
+[
+  {
+    "id": "standard",
+    "type": "individual",
+    "requirements": [
+      "Written consent form signed by knowledge holder before recording begins",
+      "Form explains: what will be recorded, how it will be stored, who may access it, permitted uses",
+      "Knowledge holder retains right to withdraw consent at any time before publication",
+      "Interviewer provides a copy of the signed form to the knowledge holder"
+    ],
+    "ocapCompliant": false,
+    "nisrCompliant": false
+  },
+  {
+    "id": "ocap-compliant",
+    "type": "both",
+    "requirements": [
+      "Individual written consent from the knowledge holder (see standard protocol requirements)",
+      "Community-level consent from the relevant First Nations band council, tribal council, or designated governance body",
+      "Documentation that the community governance body has reviewed and approved the scope of documentation",
+      "Explicit statement of OCAP principles: Ownership — knowledge belongs to the nation; Control — nation determines how it is used; Access — nation may access and review all documentation; Possession — interviewer does not store nation data beyond agreed scope",
+      "Research data management plan reviewed by the community governance body before fieldwork begins",
+      "Community has the right to request destruction of recordings or transcriptions at any time",
+      "FNIGC OCAP® principles apply — see fnigc.ca for authoritative guidance"
+    ],
+    "ocapCompliant": true,
+    "nisrCompliant": false
+  },
+  {
+    "id": "nisr-compliant",
+    "type": "both",
+    "requirements": [
+      "All requirements of the OCAP-compliant protocol",
+      "Research proposal reviewed and approved by the relevant Inuit organization (ITK, Nunavut Tunngavik Inc., Makivvik, Inuvialuit Regional Corporation, or Nunatsiavut Government as applicable)",
+      "ITK National Inuit Strategy on Research (NISR) compliance documentation prepared before fieldwork",
+      "Data sovereignty statement: all Inuit knowledge collected remains under Inuit governance",
+      "Inuktitut transcription reviewed by fluent Inuktitut speaker from the relevant dialect region (Nunavut, Nunavik, Inuvialuit, Labrador)",
+      "Research findings shared with the relevant Inuit organization before any public release",
+      "Any digital publication of Inuktitut content requires approval from the Inuit organization with jurisdiction over that dialect region"
+    ],
+    "ocapCompliant": true,
+    "nisrCompliant": true
+  },
+  {
+    "id": "community-consent",
+    "type": "community",
+    "requirements": [
+      "Consent obtained at the community level through the appropriate governance structure (varies by nation)",
+      "Individual knowledge holder's consent obtained as a secondary layer within the community consent framework",
+      "Community has pre-approved the scope and purpose of documentation through a community meeting or council resolution",
+      "Knowledge described as community property: no individual is positioned as the sole owner or authority",
+      "Attribution reflects community ownership: 'Shared by [Name], [Nation] community knowledge keeper' not 'Interview with [Name]'",
+      "Community review gate required before publication — community must approve how their collective knowledge is represented"
+    ],
+    "ocapCompliant": true,
+    "nisrCompliant": true
+  }
+]
