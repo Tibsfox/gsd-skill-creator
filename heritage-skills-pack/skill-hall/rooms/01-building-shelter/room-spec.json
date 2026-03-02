@@ -1,0 +1,72 @@
+{
+  "id": "room-01-building-shelter",
+  "room": 1,
+  "domain": "building-shelter",
+  "title": "Building & Shelter",
+  "traditions": ["appalachian", "first-nations", "inuit"],
+  "sumoClasses": ["Building", "StationaryArtifact", "ConstructionProcess", "HeritageSkill", "Shelter"],
+  "sumoFile": ["engineering.kif", "heritage-domain-ontology.kif"],
+  "safetyDomains": ["structural", "fire"],
+  "trySessions": [
+    "building-01-notch-cutting-beginner",
+    "building-01-wigwam-frame-beginner",
+    "building-01-dome-geometry-beginner"
+  ],
+  "description": "Room 01 covers shelter construction traditions across Appalachian, First Nations, and Inuit cultures — the accumulated knowledge of how humans build durable, warm, and safe dwellings from locally available materials.\n\nAppalachian log cabin construction draws on traditions brought to the central and southern Appalachians by Scots-Irish, English, and German settlers from the 1700s onward. The cornerstone technique is the notched log corner joint: saddle notching (a rounded seat cut in the bottom of the upper log to fit over the lower log, with the saddle facing down so rain sheds away) and V-notching (matching 60-degree cuts that create a self-aligning, highly stable joint common in German-heritage building). Log selection, chinking with clay-moss-mortar mixtures to seal gaps between logs, and stone chimney construction complete the tradition. The stone chimney requires understanding of firebox geometry, flue sizing, and isolation of combustible framing — a fire safety knowledge system developed through hard experience. Cabin raising was a community event: families contributed labor to each neighbor's cabin raising, clearing day, and harvest, creating the mutual aid network that enabled Appalachian settlement.\n\nFirst Nations shelter traditions covered in this room include: the Anishinaabe wigwam (wiigiwaam in Anishinaabemowin) — a dome-framed dwelling of bent flexible saplings covered with birchbark panels or cattail reed mats, designed for rapid construction and deconstruction to support seasonal movement across large territories; the Haudenosaunee longhouse — a barrel-vault pole structure covered with elm bark, housing multiple family units along a central aisle, extended in length as needed to accommodate more families. The longhouse is more than a physical structure: it is the central organizing metaphor of Haudenosaunee governance and identity. The Haudenosaunee Confederacy (Onondaga, Seneca, Mohawk, Cayuga, Oneida, and Tuscarora nations) are the Haudenosaunee — 'people of the longhouse.' Maliseet and Passamaquoddy birchbark shelters of the eastern woodlands complete the First Nations coverage in this room.\n\nInuit shelter traditions in this room focus on the tupiq — a portable summer tent of seal or caribou hide over a framework of driftwood or whalebone poles. The tupiq is designed for seasonal use on the land, completely disassembled and transported between camps. Igloo geometry (the catenary dome of snow blocks) is introduced in this room but covered in full in Room 14 (Arctic Living), where critical CO safety requirements apply to all enclosed snow shelter scenarios. This room introduces dome geometry principles — why the catenary arch is structurally efficient, how load paths work in compression structures — and explicitly directs learners to Room 14 for full igloo construction content.\n\nStructural safety is the primary safety domain for this room. All shelter construction carries load-bearing requirements: log notches must seat fully and resist settling; wigwam and longhouse frames must be stable before covering is added; any dome frame must resist lateral wind load before weight is applied. Fire safety is the secondary domain: stone chimney construction and any enclosed-shelter fire source introduce CO and fire hazards that are annotated throughout.",
+  "modules": [
+    {
+      "id": "building-01-appalachian-log-cabin",
+      "title": "Appalachian Log Cabin Construction",
+      "tradition": "appalachian",
+      "description": "Appalachian log cabin techniques from Scots-Irish, English, and German settler heritage: saddle notch geometry (rounded seat facing down for water shedding), V-notch geometry (60-degree matching cuts, self-aligning), double-notch variations. Log selection for structural members (straight-grained, knot-free at notch locations, sound timber). Chinking techniques from historical clay-moss-grass to lime mortar to modern chink materials. Stone chimney construction basics: firebox isolation from combustible framing, flue sizing for proper draft. Settling allowance above doors and windows for green log construction. Cabin raising as community mutual aid.",
+      "safetyLevel": "gated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Building", "StationaryArtifact", "ConstructionProcess", "HeritageSkill"]
+    },
+    {
+      "id": "building-01-fn-wigwam",
+      "title": "Anishinaabe Wigwam Frame and Covering",
+      "tradition": "first-nations",
+      "description": "Anishinaabe wigwam construction: sapling selection (ash, cedar, or ironwood, green and flexible, 1-2 inches diameter), ground plan layout for dome or oval floor plan, bending and crossing arches, lashing with basswood bark or rawhide cord. Covering systems: birchbark panels (harvested in spring, stored flat) and cattail reed mats (woven in summer, overlapped for weatherproofing). Smoke hole management for interior fire. Seasonal adaptability: same pole frame re-covered with different materials as needed. Community spatial organization of wigwam villages. Nation attribution: Anishinaabe.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Building", "HeritageSkill", "MaterialCulture"]
+    },
+    {
+      "id": "building-01-fn-longhouse",
+      "title": "Haudenosaunee Longhouse: Structure and Community Dimensions",
+      "tradition": "first-nations",
+      "description": "Haudenosaunee longhouse construction: barrel-vault pole frame of curved arches set at intervals along the length of the building, tied together by longitudinal poles at the apex. Elm bark covering, overlapped and tied. Multiple family units arranged along a central aisle with individual hearths sharing a common smoke hole line along the ridge. Longhouses extended in length as needed — the width is constant, the length grows with the family or community. Cultural note: the longhouse is not only a building. It is the governing metaphor of the Haudenosaunee Confederacy — the Seneca as Keepers of the Western Door, the Mohawk as Keepers of the Eastern Door, the Onondaga at the center as Keepers of the Fire. The Haudenosaunee are 'people of the longhouse.' This community and governance dimension is Level 2 contextually shared. Nation attribution: Haudenosaunee (Onondaga, Seneca, Mohawk, Cayuga, Oneida, Tuscarora).",
+      "safetyLevel": "annotated",
+      "culturalLevel": 2,
+      "sumoMappings": ["Building", "HeritageSkill"]
+    },
+    {
+      "id": "building-01-inuit-tupiq",
+      "title": "Inuit Tupiq: Summer Skin Tent",
+      "tradition": "inuit",
+      "description": "Tupiq construction: a portable summer tent of seal or caribou hide (or in some regions, canvas) over a framework of driftwood or whalebone poles. Designed for complete portability — poles bundled, hides folded, the entire shelter loaded on a qamutik or carried between seasonal camps. Pole frame geometry creates a ridge-pole design or A-frame depending on regional variation. Hide preparation for tent use. Anchoring methods on varied terrain from tundra to gravel beach. The tupiq is the summer counterpart to the winter igloo — lighter, faster to erect, ventilated for warmer temperatures. Nation attribution: Inuit.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Building", "HeritageSkill", "MaterialCulture"]
+    },
+    {
+      "id": "building-01-igloo-crossref",
+      "title": "Igloo Geometry: Cross-Reference to Room 14",
+      "tradition": "inuit",
+      "description": "Introduction to igloo dome geometry: the catenary arch (the natural curve of a hanging chain, inverted as a compression arch), the inward-spiraling snow block course, and the keystone block closure. This module introduces the structural concepts of the igloo as a dome shelter. Full igloo construction — including CO safety requirements, ventilation protocol, cold-trap entrance design, interior platform, and emergency exit procedures — is covered in Room 14 (Arctic Living). This module introduces dome geometry principles only; do not attempt igloo construction without reading Room 14 first. Nation attribution: Inuit.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Building", "ConstructionProcess", "HeritageSkill"]
+    },
+    {
+      "id": "building-01-dome-geometry",
+      "title": "Dome Geometry: Structural Principles Across Shelter Traditions",
+      "tradition": "cross-tradition",
+      "description": "The structural geometry shared across dome and vault shelters from multiple traditions. Catenary arch: the natural curve a hanging chain takes under its own weight, inverted as a compression arch — the most structurally efficient shape for a freestanding arch. Why dome geometry distributes load in compression along every curve, eliminating bending failure. How the wigwam, the Haudenosaunee longhouse barrel vault, and the Inuit igloo each achieve dome geometry through different materials and techniques. Load path analysis: how dome thrust becomes outward horizontal force at the base, and how each tradition resists that thrust. Thermal mass: how dome geometry concentrates interior volume relative to exterior surface, reducing heat loss in cold environments.",
+      "safetyLevel": "annotated",
+      "culturalLevel": 1,
+      "sumoMappings": ["Building", "ConstructionProcess", "StationaryArtifact"]
+    }
+  ]
+}
