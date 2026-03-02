@@ -1,20 +1,20 @@
 /* ---- Types ---- */
 export type {
-  FrontMatter,
-  ContentPage,
-  TocEntry,
+  FrontMatter, FrontMatter as SiteFrontMatter,
+  ContentPage, ContentPage as SiteContentPage,
+  TocEntry, TocEntry as SiteTocEntry,
   SiteConfig,
-  AgentConfig,
+  AgentConfig, AgentConfig as SiteAgentConfig,
   WordPressConfig,
-  DeployConfig,
+  DeployConfig, DeployConfig as SiteDeployConfig,
   NavigationSection,
   NavigationItem,
-  SearchEntry,
-  CitationEntry,
-  CitationDatabase,
-  BuildResult,
-  TemplateData,
-  BuildOptions,
+  SearchEntry, SearchEntry as SiteSearchEntry,
+  CitationEntry, CitationEntry as SiteCitationEntry,
+  CitationDatabase, CitationDatabase as SiteCitationDatabase,
+  BuildResult, BuildResult as SiteBuildResult,
+  TemplateData, TemplateData as SiteTemplateData,
+  BuildOptions, BuildOptions as SiteBuildOptions,
 } from './types.js';
 
 /* ---- Build pipeline ---- */
@@ -25,7 +25,7 @@ export { processMarkdown, resetCitationCounter, getCitationMap } from './markdow
 
 /* ---- Templates ---- */
 export { loadTemplates, renderTemplate } from './templates.js';
-export type { TemplateRegistry } from './templates.js';
+export type { TemplateRegistry, TemplateRegistry as SiteTemplateRegistry } from './templates.js';
 
 /* ---- Utilities ---- */
 export {
@@ -37,7 +37,7 @@ export {
   createFileOps,
   extractToc,
 } from './utils/index.js';
-export type { FileOps, FileOpsConfig, ReadDirFn, StatFn } from './utils/index.js';
+export type { FileOps, FileOps as SiteFileOps, FileOpsConfig, FileOpsConfig as SiteFileOpsConfig, ReadDirFn, StatFn } from './utils/index.js';
 
 /* ---- Agent discovery ---- */
 export {
@@ -53,7 +53,7 @@ export { buildSearchIndex, stripMarkdownSyntax } from './search.js';
 
 /* ---- Citations ---- */
 export { resolveCitations, generateBibliography, formatCitation } from './citations.js';
-export type { ResolvedCitation, BibliographyEntry, CitationResult } from './citations.js';
+export type { ResolvedCitation, ResolvedCitation as SiteResolvedCitation, BibliographyEntry, BibliographyEntry as SiteBibliographyEntry, CitationResult, CitationResult as SiteCitationResult } from './citations.js';
 
 /* ---- Feed ---- */
 export { generateAtomFeed } from './feed.js';
@@ -68,8 +68,8 @@ export {
   pullContent,
   pushContent,
 } from './wordpress/index.js';
-export type { WpPost, WpApiAdapter, WpApiPushAdapter, WpPostData, PullOptions, PullResult, PushResult } from './wordpress/index.js';
+export type { WpPost, WpApiAdapter, WpApiPushAdapter, WpPostData, PullOptions, PullOptions as SitePullOptions, PullResult, PullResult as SitePullResult, PushResult, PushResult as SitePushResult } from './wordpress/index.js';
 
 /* ---- Deploy ---- */
 export { deploy, dryRun, verifyDeployment } from './deploy.js';
-export type { DeployAdapter, DeployOptions, DeployResult, DryRunResult, VerificationResult, FetchFn } from './deploy.js';
+export type { DeployAdapter, DeployAdapter as SiteDeployAdapter, DeployOptions, DeployOptions as SiteDeployOptions, DeployResult, DeployResult as SiteDeployResult, DryRunResult, DryRunResult as SiteDryRunResult, VerificationResult, VerificationResult as SiteVerificationResult, FetchFn } from './deploy.js';
