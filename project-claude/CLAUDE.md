@@ -6,7 +6,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 
 - **Languages:** TypeScript (src/), Rust (src-tauri/), GLSL (shaders)
 - **Build:** `npm run build`
-- **Test:** `npm test` (Vitest, 20600+ tests)
+- **Test:** `npm test` or `make test` (Vitest, 23,234+ tests)
 - **Lint:** `npm run lint`
 - **Key deps:** Tauri v2, xterm.js, Vite v6, Vitest
 - **Desktop frontend:** `desktop/` (Vite webview)
@@ -19,10 +19,16 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `.claude/commands/gsd/` -- GSD command definitions
 - `.claude/hooks/` -- deterministic hooks (commit validation, session state, phase boundary)
 - `project-claude/` -- source of project-specific Claude config (installed via `node project-claude/install.cjs`)
-- `src/` -- TypeScript library and CLI
+- `src/` -- TypeScript library and CLI (domain-grouped)
+- `src/core/` -- Core infrastructure (types, utils, fs, events, hooks, storage, validation, safety, security)
+- `src/packs/` -- Educational packs (agc, citations, dogfood, electronics-pack, engines, holomorphic, knowledge, plane)
+- `src/tools/` -- CLI and dev tools (catalog, cli, commands, git, interpreter, learn, mcp, vtm)
+- `src/platform/` -- Platform services (calibration, console, dashboard, observation, retro, staging, terminal)
+- `src/services/` -- Agent orchestration (agents, brainstorm, chipset, detection, discovery, orchestrator, teams, workflows)
+- `src/integrations/` -- External integrations (amiga, aminet, cloud-ops, dacp, den, site, upstream)
 - `src-tauri/` -- Rust backend (Tauri)
 - `desktop/` -- Vite webview frontend
-- `.college/` -- College Structure: Rosetta Core, panels, departments (culinary-arts, mathematics, mind-body), calibration
+- `.college/` -- College Structure: Rosetta Core, panels, 42 departments, calibration
 - `docs/` -- 158+ markdown files, canonical documentation
 
 ## Commit Convention
