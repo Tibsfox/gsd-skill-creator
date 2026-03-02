@@ -1,11 +1,12 @@
 # Release History
 
-56 milestones shipped across 489 phases, 1,165 plans, ~564K LOC, and 20,604 tests.
+57 milestones shipped across 495 phases, 1,174 plans, ~564K LOC, and 21,002 tests.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned.
 
 | Version | Name | Shipped | Phases | Plans | Also |
 |---------|------|---------|--------|-------|------|
+| v1.49.10 | College Expansion | 2026-03-02 | 6 | 9 | |
 | v1.49.9 | Learn Kung Fu | 2026-03-01 | 11 | 11 | |
 | v1.49.8 | Cooking With Claude | 2026-03-01 | 11 | 45 | |
 | v1.49.7 | Optional tmux with Graceful Degradation | 2026-03-01 | — | — | |
