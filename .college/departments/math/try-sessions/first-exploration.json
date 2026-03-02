@@ -1,0 +1,39 @@
+{
+  "id": "first-exploration",
+  "title": "Your First Math Exploration: Numbers, Patterns, and Space",
+  "description": "Explore core mathematical ideas through hands-on investigation. This session spans number operations, algebra, and geometry — the three pillars of mathematical thinking.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Count the objects on your desk and write the number. Now group them in different ways — by color, size, type. Read about cardinality: what does it mean for a number to represent 'how many'?",
+      "expectedOutcome": "You understand that cardinality is the count of a set, and that the same quantity can be arrived at from different groupings",
+      "hint": "Seven objects grouped as 4+3 or 5+2 still represent the same cardinality — 7",
+      "conceptsExplored": ["math-number-cardinality"]
+    },
+    {
+      "instruction": "Take any two-digit number, double it, then halve the result. What do you notice? Try with three different numbers. Read about operations meaning — why does doubling then halving always return to the original number?",
+      "expectedOutcome": "You observe that multiplication and division are inverse operations, and understand why inverse operations undo each other",
+      "hint": "Doubling multiplies by 2; halving divides by 2 — they undo each other because they are inverses",
+      "conceptsExplored": ["math-operations-meaning", "math-computational-fluency"]
+    },
+    {
+      "instruction": "Look for a repeating pattern around you — tiles, brickwork, fabric, leaf arrangement. Describe the rule of the pattern in words. Read about pattern recognition: what makes something a pattern rather than random?",
+      "expectedOutcome": "You can identify the repeating unit of a pattern and express the rule that generates it",
+      "hint": "A pattern has a rule — describe the unit that repeats and what changes each step",
+      "conceptsExplored": ["math-pattern-recognition"]
+    },
+    {
+      "instruction": "Draw a rectangle. Measure all four sides. Calculate its area (length × width) and perimeter (sum of all sides). Read about measurement and area: why do these formulas work?",
+      "expectedOutcome": "You understand that area counts unit squares within the shape and perimeter measures the boundary, and can calculate both for a rectangle",
+      "hint": "Area counts how many 1×1 unit squares fit inside; perimeter adds the lengths of all edges",
+      "conceptsExplored": ["math-measurement-area", "math-shape-properties"]
+    },
+    {
+      "instruction": "Choose a variable x and write an equation: x + 5 = 12. Solve it. Then write a new equation with a different unknown and solve it. Read about variables and unknowns: what does a variable represent?",
+      "expectedOutcome": "You can solve one-step equations by applying inverse operations and understand that a variable is a placeholder for an unknown value",
+      "hint": "To isolate x, apply the inverse operation to both sides — subtract 5 from both sides of x + 5 = 12",
+      "conceptsExplored": ["math-variables-unknowns", "math-equations-expressions"]
+    }
+  ]
+}

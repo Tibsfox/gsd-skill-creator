@@ -1,0 +1,39 @@
+{
+  "id": "first-experiment",
+  "title": "Your First Physics Experiment: Motion and Forces",
+  "description": "Explore motion, forces, and energy through simple hands-on experiments using everyday objects. This session spans kinematics, Newton's laws, and energy conservation.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Stack books to make a ramp (about 30° incline). Roll a ball down it and measure the time from release to bottom using a phone timer. Read about motion kinematics: what is acceleration and how does it relate to time?",
+      "expectedOutcome": "You observe that the ball speeds up as it rolls down, confirming that an unbalanced force (gravity) causes acceleration",
+      "hint": "Acceleration means the velocity is changing — the ball goes faster each second as gravity acts on it",
+      "conceptsExplored": ["phys-motion-kinematics"]
+    },
+    {
+      "instruction": "Push a book across a table with a gentle constant push. Notice: what happens when you stop pushing? Read about Newton's laws: which law explains why the book decelerates after you stop pushing?",
+      "expectedOutcome": "You identify Newton's First Law (objects in motion stay in motion unless acted on by a net force) and recognize friction as the unbalanced force stopping the book",
+      "hint": "On a frictionless surface the book would continue forever — friction is the force opposing motion",
+      "conceptsExplored": ["phys-newtons-laws"]
+    },
+    {
+      "instruction": "Hold a heavy book and a pencil at the same height and drop them simultaneously. Read about gravitational acceleration: why do objects of different masses fall at the same rate?",
+      "expectedOutcome": "You confirm (approximately) that both objects hit the floor at the same time and understand that gravitational acceleration is constant regardless of mass",
+      "hint": "Galileo confirmed this — air resistance causes differences, not gravity; in vacuum all objects fall identically",
+      "conceptsExplored": ["phys-gravitation"]
+    },
+    {
+      "instruction": "Stack books to the maximum height possible without tipping. Now lift one book from the top to the same height off the floor. Read about potential and kinetic energy: where is the energy stored in a raised object?",
+      "expectedOutcome": "You understand that lifting an object against gravity stores gravitational potential energy, which converts to kinetic energy when released",
+      "hint": "PE = mgh — the higher the object and the heavier it is, the more potential energy stored",
+      "conceptsExplored": ["phys-kinetic-potential-energy", "phys-conservation-of-energy"]
+    },
+    {
+      "instruction": "Rub two rough surfaces together. Feel the heat generated. Read about work and thermodynamics: where did the energy of your motion go? Is energy destroyed?",
+      "expectedOutcome": "You understand that friction converts mechanical energy to thermal energy — energy is conserved (not destroyed) but becomes less useful",
+      "hint": "Energy conservation: the total energy before = total energy after. Friction converts ordered motion into disordered heat",
+      "conceptsExplored": ["phys-work-power", "phys-thermodynamics"]
+    }
+  ]
+}
