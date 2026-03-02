@@ -1,0 +1,45 @@
+{
+  "id": "first-deployment",
+  "title": "Your First Cloud Deployment: Launch a Web Server Instance",
+  "description": "Walk through a minimal OpenStack deployment: authenticate with Keystone, create a network with Neutron, launch a Nova instance, attach a Cinder volume, and verify using a runbook procedure.",
+  "estimatedMinutes": 30,
+  "prerequisites": ["Access to an OpenStack environment (devstack or lab)"],
+  "steps": [
+    {
+      "instruction": "Authenticate with Keystone: run `openstack token issue` and examine the token fields. Identify the catalog field listing service endpoints. Which endpoint type (public/internal/admin) should a regular user application use?",
+      "expectedOutcome": "A scoped token is issued with an expiry time (~1 hour). The catalog shows service entries for nova, neutron, cinder, glance, swift, heat, and horizon. Public endpoints are used by external applications; internal by services communicating within the cloud.",
+      "hint": "The service catalog is embedded in the token body. `openstack catalog list` shows the parsed catalog.",
+      "conceptsExplored": ["cloud-keystone-auth"]
+    },
+    {
+      "instruction": "Create a private network and subnet: `openstack network create lab-net` then `openstack subnet create --network lab-net --subnet-range 10.0.0.0/24 lab-subnet`. Create a router and attach the subnet to it.",
+      "expectedOutcome": "A network named lab-net exists in your project. The subnet lab-subnet (10.0.0.0/24) is attached to a router that connects to the external provider network. `openstack network list` shows lab-net.",
+      "hint": "The router needs a gateway set to the external network: `openstack router set --external-gateway public lab-router`",
+      "conceptsExplored": ["cloud-neutron-networking"]
+    },
+    {
+      "instruction": "Create a security group allowing SSH: `openstack security group create web-sg` then add a rule for TCP port 22 from 0.0.0.0/0. Note the default-deny posture -- without this rule, no inbound traffic reaches instances.",
+      "expectedOutcome": "The web-sg security group exists with one ingress rule: TCP port 22, CIDR 0.0.0.0/0. All other inbound traffic remains blocked. This is the minimum security group for SSH access.",
+      "hint": "Also add ICMP allow to enable ping: `openstack security group rule create --protocol icmp web-sg`",
+      "conceptsExplored": ["cloud-security-groups-policies"]
+    },
+    {
+      "instruction": "Launch a Nova instance: `openstack server create --flavor m1.small --image cirros --network lab-net --security-group web-sg my-server`. Wait for BUILD to transition to ACTIVE. Check `openstack server show my-server`.",
+      "expectedOutcome": "The instance transitions from BUILD -> ACTIVE in 30-60 seconds. `openstack server show` displays the private IP on lab-net, flavor details (vCPUs/RAM/disk), hypervisor, and creation timestamp.",
+      "hint": "If status stays in BUILD, check `openstack server event list my-server` for error events",
+      "conceptsExplored": ["cloud-nova-instances"]
+    },
+    {
+      "instruction": "Create a Cinder block volume and attach it: `openstack volume create --size 1 my-vol` then `openstack server add volume my-server my-vol`. Inside the instance, find the new device at /dev/vdb and format it with mkfs.ext4.",
+      "expectedOutcome": "The volume appears as /dev/vdb inside the instance. After mkfs.ext4 and mount, it provides 1GB of persistent block storage that survives instance reboots (unlike the ephemeral root disk).",
+      "hint": "Block storage persists independently -- you can detach and reattach to a different instance",
+      "conceptsExplored": ["cloud-cinder-block-storage"]
+    },
+    {
+      "instruction": "Write a 3-step runbook for this deployment: (1) token issue + catalog verify, (2) network create + subnet attach, (3) instance launch + health check. Assign a VerificationMethod to each step (test, inspection, or demonstration).",
+      "expectedOutcome": "A structured runbook with 3 ProcedureSteps. Step 1: test (run token issue, observe output). Step 2: inspection (check network list, verify subnet entry). Step 3: demonstration (show instance ACTIVE status to reviewer). This matches NASA TAID verification assignment before ORR.",
+      "hint": "Inspection verifies without executing -- reviewing `openstack network list` output qualifies as inspection",
+      "conceptsExplored": ["cloud-runbook-structure", "cloud-taid-verification"]
+    }
+  ]
+}

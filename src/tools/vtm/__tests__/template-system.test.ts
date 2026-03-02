@@ -82,6 +82,13 @@ beforeAll(async () => {
     ].join('\n'),
   );
 
+  // Fix: create vision-template fixture so tests pass on fresh clone
+  // Credit: jacoblewisau (https://github.com/Tibsfox/gsd-skill-creator/pull/21)
+  await writeFile(
+    join(tempDir, 'vision-template.md'),
+    '# {{name}}\n\nStatus: {{status}}\n\n{{vision}}',
+  );
+
   await writeFile(
     join(tempDir, 'markdown-structure-template.md'),
     [
@@ -391,8 +398,10 @@ describe('createTemplateRegistry', () => {
     }
   });
 
+  // Fix: pass tempDir so registry finds fixtures on fresh clone
+  // Credit: jacoblewisau (https://github.com/Tibsfox/gsd-skill-creator/pull/21)
   it('get() returns metadata + loaded template content for a specific template', async () => {
-    const registry = createTemplateRegistry();
+    const registry = createTemplateRegistry(tempDir);
     const result = await registry.get('vision');
     expect(result).not.toBeNull();
     expect(result!.meta.name).toBe('vision');

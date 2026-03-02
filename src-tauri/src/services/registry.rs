@@ -11,13 +11,16 @@ use super::types::*;
 /// Return the complete service graph with all 7 GSD-OS services.
 ///
 /// Services and their dependencies:
-/// - Tmux: (root, no deps)
+/// - Tmux: (root, no deps, **optional** — PR #24 @PatrickRobotham)
 /// - ClaudeCode: depends on Tmux
-/// - FileWatcher: depends on Tmux
+/// - FileWatcher: no deps (watches `.planning/`, no tmux involvement)
 /// - Dashboard: depends on FileWatcher
 /// - Console: depends on FileWatcher
 /// - Staging: depends on Dashboard, Console
 /// - Terminal: depends on Staging
+///
+/// v1.49.7: Tmux marked optional, FileWatcher deps corrected from
+/// `[Tmux]` to `[]` — fixes Rust/TS graph divergence found by audit.
 pub fn service_graph() -> Vec<ServiceDef> {
     vec![
         ServiceDef {
@@ -29,6 +32,7 @@ pub fn service_graph() -> Vec<ServiceDef> {
                 "tmux new-session -d -s gsd".to_string(),
             )),
             led_position: 0,
+            optional: true, // PR #24 (@PatrickRobotham): tmux is Recommends, not Depends
         },
         ServiceDef {
             id: ServiceId::ClaudeCode,
@@ -37,14 +41,16 @@ pub fn service_graph() -> Vec<ServiceDef> {
             health_check: HealthCheckType::ProcessRunning("claude".to_string()),
             start_command: None, // User-guided
             led_position: 1,
+            optional: false,
         },
         ServiceDef {
             id: ServiceId::FileWatcher,
             name: "File Watcher",
-            depends_on: vec![ServiceId::Tmux],
+            depends_on: vec![], // v1.49.7: corrected — watches .planning/, no tmux dependency
             health_check: HealthCheckType::DirectoryWatch(".planning".into()),
             start_command: Some(StartCommand::Internal),
             led_position: 2,
+            optional: false,
         },
         ServiceDef {
             id: ServiceId::Dashboard,
@@ -55,6 +61,7 @@ pub fn service_graph() -> Vec<ServiceDef> {
             ),
             start_command: Some(StartCommand::Internal),
             led_position: 3,
+            optional: false,
         },
         ServiceDef {
             id: ServiceId::Console,
@@ -65,6 +72,7 @@ pub fn service_graph() -> Vec<ServiceDef> {
             ),
             start_command: Some(StartCommand::Internal),
             led_position: 4,
+            optional: false,
         },
         ServiceDef {
             id: ServiceId::Staging,
@@ -75,6 +83,7 @@ pub fn service_graph() -> Vec<ServiceDef> {
             ),
             start_command: Some(StartCommand::Internal),
             led_position: 5,
+            optional: false,
         },
         ServiceDef {
             id: ServiceId::Terminal,
@@ -85,6 +94,7 @@ pub fn service_graph() -> Vec<ServiceDef> {
             ),
             start_command: Some(StartCommand::Internal),
             led_position: 6,
+            optional: false,
         },
     ]
 }

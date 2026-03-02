@@ -1,0 +1,38 @@
+{
+  "id": "first-question",
+  "title": "Your First Question: A Socratic Dialogue on a Familiar Topic",
+  "description": "Practice philosophical inquiry by applying the Socratic method to a question you think you know the answer to. This session reveals how much remains uncertain when examined carefully.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Choose a concept you are confident you understand: friendship, fairness, knowledge, beauty, or happiness. State your definition clearly in one sentence. Read about philosophical questioning -- what makes a question philosophical rather than factual?",
+      "expectedOutcome": "You have a clear initial definition to work with and understand what makes philosophical questions distinctive",
+      "hint": "Pick something familiar enough to define confidently -- that confidence will be productively challenged",
+      "conceptsExplored": ["philo-philosophical-questioning"]
+    },
+    {
+      "instruction": "Apply the Socratic elenchus to your definition: find a counterexample that fits your definition but is not actually an instance of the concept, OR an instance of the concept that fails your definition. Read about the Socratic method.",
+      "expectedOutcome": "You have identified at least one case where your definition fails, revealing it was incomplete or too broad/narrow",
+      "hint": "For friendship: Is your acquaintance who does favors for you but doesn't care about you as a person a friend? Does your definition rule them out?",
+      "conceptsExplored": ["philo-socratic-method"]
+    },
+    {
+      "instruction": "Revise your definition to handle the counterexample. Now look for a new counterexample to the revised definition. Repeat 2-3 times. Read about logical fallacies -- are there any fallacies in your reasoning?",
+      "expectedOutcome": "You have gone through 2-3 revision cycles and have a more sophisticated definition -- or a better understanding of why the concept resists easy definition",
+      "hint": "If you are struggling to define it, you are doing philosophy correctly -- Socrates showed this was true of justice, virtue, and knowledge too",
+      "conceptsExplored": ["philo-socratic-method", "philo-logical-fallacies"]
+    },
+    {
+      "instruction": "Now consider: does your concept connect to ethics? Read about ethical frameworks -- is your concept (friendship, fairness, happiness) morally important? Why? Which ethical framework treats it as most central?",
+      "expectedOutcome": "You can trace connections between your concept and ethical theory, seeing how abstract concepts link to how we should live",
+      "hint": "Happiness is central to consequentialism (maximize it); friendship is important to virtue ethics (Aristotle devotes two books of the Ethics to it)",
+      "conceptsExplored": ["philo-ethics"]
+    },
+    {
+      "instruction": "Write a brief philosophical reflection: What did you learn? Did the Socratic process change your view? What is still uncertain? Is this kind of inquiry valuable -- and why?",
+      "expectedOutcome": "You have experienced philosophical inquiry from the inside and can reflect on its process and value",
+      "conceptsExplored": ["philo-philosophical-questioning", "philo-socratic-method"]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "first-investigation",
+  "title": "Your First Historical Investigation: What Really Happened?",
+  "description": "Investigate a historical event using primary and secondary sources. This session practices source analysis, corroboration, and evidence-based argumentation.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Choose a historical event you know something about (a war, invention, social movement). Write down what you currently believe happened. Read about primary vs secondary sources: what types of sources would you consult to investigate this event?",
+      "expectedOutcome": "You can distinguish primary sources (diaries, photographs, official documents from the time) from secondary sources (textbooks, biographies) and identify examples for your event",
+      "hint": "A newspaper from 1900 reporting an event is a primary source; a history book written in 2000 about that event is secondary",
+      "conceptsExplored": ["hist-primary-secondary-sources"]
+    },
+    {
+      "instruction": "Find or recall two different accounts of the event (from different perspectives, time periods, or types of sources). Apply HAPP analysis to each: Historical context, Audience, Purpose, Provenance. Read about source analysis.",
+      "expectedOutcome": "You can describe the creator, audience, and likely purpose of each source and explain how these factors might have shaped what it emphasizes or omits",
+      "hint": "A government document about a war will emphasize different things than a soldier's diary from the same war",
+      "conceptsExplored": ["hist-source-analysis", "hist-historical-context"]
+    },
+    {
+      "instruction": "Compare the two accounts. Where do they agree? Where do they disagree? Read about corroboration: what do you do when sources conflict?",
+      "expectedOutcome": "You can identify agreements as more reliable evidence and articulate three possible reasons sources might disagree (different perspectives, different access to information, different purposes)",
+      "hint": "When sources agree despite being independent and from different perspectives, the agreement is stronger evidence of what actually happened",
+      "conceptsExplored": ["hist-corroboration"]
+    },
+    {
+      "instruction": "Identify the causes of your event. Which cause was immediate? Which were long-term underlying causes? Read about historical causation: why do historians distinguish immediate from underlying causes?",
+      "expectedOutcome": "You can name at least one immediate trigger and one underlying structural cause, and explain why historians find the underlying causes more illuminating",
+      "hint": "WWI was triggered by an assassination (immediate cause) but enabled by decades of nationalism, militarism, and alliance systems (underlying causes)",
+      "conceptsExplored": ["hist-historical-causation"]
+    },
+    {
+      "instruction": "Write a 3-sentence historical argument: make a claim about your event, provide specific evidence, and explain your reasoning. Read about thesis construction: what makes a historical thesis strong?",
+      "expectedOutcome": "You have written a defensible, evidence-based historical claim that goes beyond mere description to offer an interpretation",
+      "hint": "A strong thesis is contestable — not everyone would agree with it. 'WWI happened' is not a thesis; 'Nationalism was the primary cause of WWI' is a thesis",
+      "conceptsExplored": ["hist-thesis-construction", "hist-evidence-based-writing"]
+    }
+  ]
+}

@@ -10,15 +10,15 @@
  * Returns empty ideas[] -- clusters are communicated via visualization
  * and stored in internal state for the Mapper agent to read.
  *
- * Uses natural.TfIdf for content-based clustering with a fallback
+ * Uses TF-IDF for content-based clustering with a fallback
  * to even splitting when TfIdf is unavailable.
  *
- * Only imports from ../../shared/types.js, ../engine.js, and 'natural'.
+ * Only imports from ../../shared/types.js, ../engine.js, and ../../../nlp/.
  * No imports from den/, vtm/, knowledge/.
  */
 
 import { randomUUID } from 'node:crypto';
-import natural from 'natural';
+import { TfIdf } from '../../../../nlp/tfidf.js';
 
 import type {
   TechniqueConfig,
@@ -78,7 +78,7 @@ function clusterWithTfIdf(
   max_clusters: number,
 ): Cluster[] {
   try {
-    const tfidf = new natural.TfIdf();
+    const tfidf = new TfIdf();
 
     // Add each idea as a document
     for (const idea of ideas) {

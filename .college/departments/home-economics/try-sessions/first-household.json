@@ -1,0 +1,38 @@
+{
+  "id": "first-household",
+  "title": "Your First Household Plan: Designing a Week of Meals and a Budget",
+  "description": "Plan a week of simple meals with a budget, create a shopping list, and design a home management routine. This session applies nutrition planning, cooking skills, and budgeting concepts together.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Read about nutrition planning and cooking skills. Then audit your existing food inventory: what do you already have that could be used this week? List 5 items. This step reduces food waste and grocery spending.",
+      "expectedOutcome": "You have identified at least 5 existing food items that will form the basis of the week's meal plan",
+      "hint": "Look in the back of the fridge, the freezer, and the pantry -- most households have more usable food than they realize",
+      "conceptsExplored": ["domestic-cooking-skills", "domestic-nutrition-planning"]
+    },
+    {
+      "instruction": "Plan 5 dinners for the week based on your inventory plus simple additions. Apply the Harvard Healthy Plate model: half vegetable/fruit, quarter grain, quarter protein. Write out each meal with its main components.",
+      "expectedOutcome": "You have 5 balanced dinner plans that use existing inventory and require minimal additional shopping",
+      "hint": "Design meals around a protein anchor -- 'what protein do we have?' -- then build vegetables and grains around it",
+      "conceptsExplored": ["domestic-nutrition-planning"]
+    },
+    {
+      "instruction": "Generate a shopping list from your meal plan, estimating costs. Read about budgeting -- what is a reasonable weekly food budget for one person? Compare: fresh vs. frozen vegetables, canned vs. dry legumes, seasonal vs. imported produce.",
+      "expectedOutcome": "You have a prioritized shopping list with estimated costs and understand the cost-per-nutrient tradeoffs of different food choices",
+      "hint": "Dry lentils and beans typically cost $0.10-0.25 per serving vs $1-3 for equivalent meat protein -- a major budget lever",
+      "conceptsExplored": ["domestic-budgeting", "domestic-nutrition-planning"]
+    },
+    {
+      "instruction": "Design a simple home management routine: daily tasks (5 min), weekly tasks (30 min), and one monthly task. Read about home management principles -- what is the minimum maintenance that prevents chaos from accumulating?",
+      "expectedOutcome": "You have a concrete home maintenance routine that takes under 45 minutes per week and prevents the build-up of disorder",
+      "hint": "The most effective routines are simple enough to execute when tired -- 5 minutes of daily tidying beats 2 hours of weekend catch-up",
+      "conceptsExplored": ["domestic-home-management"]
+    },
+    {
+      "instruction": "Reflect: How much would this week's meals cost compared to eating out equivalent meals? Read about budgeting to calculate the monthly savings from cooking at home. What surprised you about planning in advance?",
+      "expectedOutcome": "You have calculated the financial difference between home-cooked and restaurant meals and understand the compounding effect of this choice over months",
+      "conceptsExplored": ["domestic-budgeting", "domestic-cooking-skills"]
+    }
+  ]
+}
