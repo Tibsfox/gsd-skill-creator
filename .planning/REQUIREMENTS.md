@@ -43,11 +43,11 @@ Requirements for College Expansion milestone. Each maps to roadmap phases.
 
 ### Safety
 
-- [ ] **SAFE-01**: Chemistry department has SafetyBoundary definitions for lab safety procedures
-- [ ] **SAFE-02**: Electronics department has SafetyBoundary definitions for electrical safety
-- [ ] **SAFE-03**: Physical-education department has SafetyBoundary definitions for injury prevention
-- [ ] **SAFE-04**: Nutrition department has SafetyBoundary definitions for allergen management
-- [ ] **SAFE-05**: Safety boundaries integrate with the existing 3-mode Safety Warden (annotate/gate/redirect)
+- [x] **SAFE-01**: Chemistry department has SafetyBoundary definitions for lab safety procedures
+- [x] **SAFE-02**: Electronics department has SafetyBoundary definitions for electrical safety
+- [x] **SAFE-03**: Physical-education department has SafetyBoundary definitions for injury prevention
+- [x] **SAFE-04**: Nutrition department has SafetyBoundary definitions for allergen management
+- [x] **SAFE-05**: Safety boundaries integrate with the existing 3-mode Safety Warden (annotate/gate/redirect)
 
 ### Test Suite
 
@@ -107,11 +107,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | XREF-03 | Phase 25 | Complete |
 | XREF-04 | Phase 25 | Complete |
 | XREF-05 | Phase 25 | Complete |
-| SAFE-01 | Phase 26 | Pending |
-| SAFE-02 | Phase 26 | Pending |
-| SAFE-03 | Phase 26 | Pending |
-| SAFE-04 | Phase 26 | Pending |
-| SAFE-05 | Phase 26 | Pending |
+| SAFE-01 | Phase 26 | Complete |
+| SAFE-02 | Phase 26 | Complete |
+| SAFE-03 | Phase 26 | Complete |
+| SAFE-04 | Phase 26 | Complete |
+| SAFE-05 | Phase 26 | Complete |
 | TEST-01 | Phase 27 | Pending |
 | TEST-02 | Phase 27 | Pending |
 | TEST-03 | Phase 27 | Pending |
