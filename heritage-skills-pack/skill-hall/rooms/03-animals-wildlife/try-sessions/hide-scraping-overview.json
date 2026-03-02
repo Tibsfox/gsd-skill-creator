@@ -1,0 +1,55 @@
+{
+  "id": "animals-03-hide-scraping-beginner",
+  "title": "Brain-Tanning Hide Preparation: Scraping and Beaming Overview",
+  "tradition": "first-nations",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore the first stage of brain-tanning -- the traditional hide preparation technique used across many First Nations traditions including Cree and Dene. Learn why scraping is the critical foundation step, what tools are used, and what the hide must look and feel like before moving to the brain solution stage. This session covers the technique at concept level for learners new to hide work.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Brain-tanning across nations: context and attribution. Brain-tanning (using the animal's own brain matter to tan its hide) is practiced across many First Nations. The Lakota, Crow, Cree, and Dene are among the best-documented traditions, though many nations developed independent versions of this technique. The underlying chemistry is the same: brain matter contains lecithin, which lubricates the collagen fibers and prevents them from bonding stiffly as the hide dries. This session draws primarily on documented Cree and Dene techniques for the boreal forest context.",
+      "nationAttribution": "Cree, Dene (primary in this session); Lakota, Crow, and other nations also practice brain-tanning with regional variations",
+      "culturalContext": "Brain-tanning is an example of parallel technical innovation: peoples on different continents (North American First Nations, many African peoples, some Asian peoples) developed brain-based hide softening independently, because the brain-lecithin chemistry is consistent across animal species and the result -- soft, supple, workable leather -- is consistently superior to rawhide for clothing and bags.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Why scraping is the foundational step: a raw deer hide has three layers -- the outer epidermis (hair side), the dermal layer (the actual leather, or 'grain'), and the inner membrane layer (the caul or flesh side). For brain-tanning, BOTH the epidermis and hair AND the inner membrane must be removed to expose the pure dermal layer. If either is left on, the brain solution cannot penetrate, and the hide will not tan evenly. Scraping is the process of removing these layers.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 3,
+      "instruction": "The fleshing beam: the hide is draped over a smooth, angled beam -- traditionally a log peeled smooth, or a purpose-shaped pole about 6 inches in diameter, angled from the ground so the hide hangs at a comfortable working height. The beam supports the hide under the scraping pressure. A beam that is too hard (no flex) or too rough will damage the hide; one that is too soft will allow the hide to skip away from the scraper.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 4,
+      "instruction": "Scraping tools: the fleshing knife (or fleshing iron) is a dull-edged, heavy blade drawn across the hide to remove the membrane layer from the flesh side. Traditional tools: a leg bone split lengthwise (creating a smooth, slightly curved scraping edge), a piece of antler, or a dedicated metal fleshing knife. The grain side uses a different tool -- a sharper scraper to remove the epidermis after the hide has soaked.",
+      "nationAttribution": "Cree, Dene",
+      "safetyNote": "Tool safety annotation: hide scraping tools are used with significant pressure across a large flat surface. Keep the non-scraping hand on the hide surface beside the scraping area, not ahead of the tool. If the tool slips, it travels across the hide surface; a hand positioned in front of the tool's path will be struck. Maintain firm, controlled strokes."
+    },
+    {
+      "order": 5,
+      "instruction": "Fleshing (membrane removal): drape the freshly skinned hide flesh-side up over the beam. Draw the fleshing tool from the center outward in firm, overlapping strokes, removing the thin inner membrane in strips. The hide will lighten in color where the membrane is removed. Work systematically -- missed membrane spots will be obvious later as stiffer, discolored patches.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 6,
+      "instruction": "Graining (epidermis removal): after the hide soaks in water for 1-3 days (loosening the epidermis and hair), it is re-draped grain-side up on the beam. The grain scraper (or a blunt-edged drawknife) is used to push the softened epidermis and hair off in sheets. The goal is a pure white, even dermal layer -- no hair roots, no epidermis patches, no thin spots. This step requires care: scraping too hard creates thin spots; scraping too lightly leaves epidermis.",
+      "nationAttribution": "Cree, Dene",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 7,
+      "instruction": "What comes next: braining and working. After scraping is complete and the hide is evenly worked, the brain solution (cooked brain mixed with water to a thin lotion consistency, or stored brain mixed with water) is applied thoroughly to the hide. The hide is worked -- stretched, pulled, squeezed, and manipulated -- while wet to keep the fibers from bonding. This working-while-drying is the key to soft leather. Final step: smoking, which sets the tan and gives the hide its characteristic color and moisture resistance.",
+      "nationAttribution": "Cree, Dene",
+      "culturalContext": "The complete brain-tanning process requires significant time and physical effort: fleshing takes hours, braining and working requires continuous attention for hours more, and smoking adds another multi-hour stage. Communities that practiced brain-tanning invested this effort because the resulting leather is warmer, softer, and more durable than any chemical substitute for clothing worn in extreme cold.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}
