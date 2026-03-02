@@ -92,8 +92,8 @@ export enum SafetyLevel {
 /**
  * Physical safety domain covered by a safety rule or skill room.
  *
- * Exactly 9 domains covering the full range of physical risks in heritage
- * skills practice.
+ * 9 domains covering the full range of physical risks in heritage
+ * skills practice (Phase 1). Phase 2 adds MARINE.
  */
 export enum SafetyDomain {
   FOOD = 'food',
@@ -105,6 +105,8 @@ export enum SafetyDomain {
   CHEMICAL = 'chemical',
   ANIMAL = 'animal',
   ARCTIC_SURVIVAL = 'arctic-survival',
+  /** Marine safety: cold water, tidal patterns, vessel stability, navigation (Phase 2). */
+  MARINE = 'marine',
 }
 
 /**

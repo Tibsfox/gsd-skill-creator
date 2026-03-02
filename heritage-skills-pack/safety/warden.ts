@@ -1,8 +1,8 @@
 /**
- * Physical Safety Warden -- 9-domain content safety enforcement.
+ * Physical Safety Warden -- 10-domain content safety enforcement.
  *
- * Evaluates user-generated content against 9 physical safety domains:
- * food, plant, tool, medical, structural, fire, chemical, animal, arctic-survival.
+ * Evaluates user-generated content against 10 physical safety domains:
+ * food, plant, tool, medical, structural, fire, chemical, animal, arctic-survival, marine.
  *
  * Three operating modes:
  * 1. ANNOTATE  -- inline safety note, user can proceed
@@ -93,6 +93,7 @@ const DOMAIN_TO_FILE: Record<SafetyDomain, string> = {
   [SafetyDomain.CHEMICAL]: 'chemical-safety.json',
   [SafetyDomain.ANIMAL]: 'animal-safety.json',
   [SafetyDomain.ARCTIC_SURVIVAL]: 'arctic-survival-safety.json',
+  [SafetyDomain.MARINE]: 'marine-safety-rules.json',
 };
 
 /** Default redirect target for professional resources. */
@@ -109,6 +110,8 @@ const DOMAIN_REDIRECT_TARGETS: Partial<Record<SafetyDomain, string>> = {
     'https://www.osha.gov/hazardous-materials (Poison Control: 1-800-222-1222)',
   [SafetyDomain.ARCTIC_SURVIVAL]:
     'https://www.itk.ca/ (Inuit Tapiriit Kanatami) or local emergency services',
+  [SafetyDomain.MARINE]:
+    'Transport Canada Boating Safety: https://tc.canada.ca/boating (Emergency: Coast Guard 1-800-567-5111)',
 };
 
 // ─── SafetyWarden ─────────────────────────────────────────────────────────────

@@ -233,6 +233,8 @@ export const SAFETY_DOMAIN_TO_ROOMS: Readonly<Record<SafetyDomain, readonly Room
     RoomNumber.NORTHERN_WATERCRAFT,
     RoomNumber.ARCTIC_LIVING,
   ],
+  // Phase 2: MARINE domain rooms (15-18) are added in Phase 36+.
+  [SafetyDomain.MARINE]: [],
 } as const;
 
 // ─── Tradition to Rooms Mapping ───────────────────────────────────────────────
