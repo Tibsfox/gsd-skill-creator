@@ -38,7 +38,7 @@ if [[ "$FILE" == *-SUMMARY.md ]]; then
           console.log('STATE.md pruned: ' + result.linesBefore + ' -> ' + result.linesAfter + ' lines');
         }
       } catch {}
-    " 2>/dev/null || true
+    " 2>&1 || echo "Warning: state-pruner failed (non-blocking)"
 
     # Trigger teach-forward extraction (advisory, never blocks)
     timeout 5 npx tsx -e "
@@ -54,7 +54,7 @@ if [[ "$FILE" == *-SUMMARY.md ]]; then
           console.log('Teach-forward: ' + insights.length + ' insights extracted for phase ' + nextPhase);
         }
       } catch {}
-    " 2>/dev/null || true
+    " 2>&1 || echo "Warning: teach-forward failed (non-blocking)"
   fi
 elif [[ "$FILE" == *-VERIFICATION.md ]]; then
   # Traceability staleness advisory (TRACE-02)
@@ -64,7 +64,10 @@ elif [[ "$FILE" == *-VERIFICATION.md ]]; then
   if [ -z "$TRACE_DATE" ]; then
     echo "TRACEABILITY: No traceability_updated field found in REQUIREMENTS.md"
   elif [ "$TRACE_DATE" != "$TODAY" ]; then
-    echo "TRACEABILITY: Requirements table last updated $TRACE_DATE, phase completed since. Review: update traceability table in REQUIREMENTS.md"
+    echo "TRACEABILITY: Requirements table last updated $TRACE_DATE (today: $TODAY)"
+    echo "  Step 1: Open .planning/REQUIREMENTS.md"
+    echo "  Step 2: Find the Traceability table and mark this phase's requirements as Complete"
+    echo "  Step 3: Update '**Traceability updated:**' date to $TODAY"
   fi
 
   # Deviation surface advisory (DEVN-02)
