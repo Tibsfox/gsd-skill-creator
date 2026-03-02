@@ -7,8 +7,8 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { generateSchemaOrg } from '../../../src/site/agents/schema-org';
-import type { ContentPage, SiteConfig } from '../../../src/site/types';
+import { generateSchemaOrg } from '../../../../src/integrations/site/agents/schema-org';
+import type { ContentPage, SiteConfig } from '../../../../src/integrations/site/types';
 
 // schema-dts type imports for compile-time validation
 import type {

@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import * as curlExports from '../../src/curl/index.js';
-import * as webExports from '../../src/web-automation/index.js';
-import * as siteExports from '../../src/site/index.js';
-import * as securityExports from '../../src/security/index.js';
+import * as curlExports from '../../src/tools/curl/index.js';
+import * as webExports from '../../src/tools/web-automation/index.js';
+import * as siteExports from '../../src/integrations/site/index.js';
+import * as securityExports from '../../src/core/security/index.js';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -44,7 +44,7 @@ describe('v1.56 cross-domain barrel validation', () => {
     });
 
     it('bbs-pack has no barrel index.ts (types are module-scoped)', () => {
-      const barrelPath = join(process.cwd(), 'src', 'bbs-pack', 'index.ts');
+      const barrelPath = join(process.cwd(), 'src', 'packs', 'bbs-pack', 'index.ts');
       expect(existsSync(barrelPath)).toBe(false);
     });
   });
@@ -85,7 +85,7 @@ describe('v1.56 cross-domain barrel validation', () => {
     });
 
     it('BBS shared types all carry Bbs prefix', () => {
-      const sharedDir = join(process.cwd(), 'src', 'bbs-pack', 'shared');
+      const sharedDir = join(process.cwd(), 'src', 'packs', 'bbs-pack', 'shared');
       const tsFiles = readdirSync(sharedDir).filter(f => f.endsWith('.ts'));
 
       const exportedTypes: string[] = [];

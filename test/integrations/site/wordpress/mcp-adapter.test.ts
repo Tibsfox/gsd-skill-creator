@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { createMcpWpAdapter } from '../../../src/site/wordpress/mcp-adapter';
-import type { McpToolCaller } from '../../../src/site/wordpress/mcp-adapter';
+import { createMcpWpAdapter } from '../../../../src/integrations/site/wordpress/mcp-adapter';
+import type { McpToolCaller } from '../../../../src/integrations/site/wordpress/mcp-adapter';
 
 /* ---- Mock MCP tool caller ---- */
 

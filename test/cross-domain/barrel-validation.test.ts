@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import * as siteExports from '../../src/site/index.js';
-import * as securityExports from '../../src/security/index.js';
+import * as siteExports from '../../src/integrations/site/index.js';
+import * as securityExports from '../../src/core/security/index.js';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -14,7 +14,7 @@ describe('cross-domain barrel validation', () => {
     });
 
     it('electronics-pack has no barrel index (types are module-scoped)', () => {
-      const barrelPath = join(process.cwd(), 'src', 'electronics-pack', 'index.ts');
+      const barrelPath = join(process.cwd(), 'src', 'packs', 'electronics-pack', 'index.ts');
       expect(existsSync(barrelPath)).toBe(false);
     });
   });

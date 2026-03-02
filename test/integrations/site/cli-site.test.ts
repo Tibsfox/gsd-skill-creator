@@ -7,20 +7,20 @@ const mockDryRun = vi.fn();
 const mockDeploy = vi.fn();
 const mockRunAudit = vi.fn();
 
-vi.mock('../../src/site/build', () => ({
+vi.mock('../../../src/integrations/site/build', () => ({
   build: (...args: unknown[]) => mockBuild(...args),
 }));
 
-vi.mock('../../src/site/deploy', () => ({
+vi.mock('../../../src/integrations/site/deploy', () => ({
   dryRun: (...args: unknown[]) => mockDryRun(...args),
   deploy: (...args: unknown[]) => mockDeploy(...args),
 }));
 
-vi.mock('../../src/site/audit', () => ({
+vi.mock('../../../src/integrations/site/audit', () => ({
   runAudit: (...args: unknown[]) => mockRunAudit(...args),
 }));
 
-import { siteCommand } from '../../src/cli/commands/site';
+import { siteCommand } from '../../../src/tools/cli/commands/site';
 
 describe('siteCommand', () => {
   let logSpy: ReturnType<typeof vi.spyOn>;

@@ -15,7 +15,7 @@ import { execSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 
-const PROJECT_ROOT = resolve(__dirname, '../../..');
+const PROJECT_ROOT = resolve(__dirname, '../../../..');
 const TAURI_DIR = join(PROJECT_ROOT, 'src-tauri');
 const SCANNER_RS = join(
   TAURI_DIR,
@@ -23,7 +23,7 @@ const SCANNER_RS = join(
   'staging',
   'security_scanner.rs',
 );
-const FIXTURES_DIR = join(PROJECT_ROOT, 'tests', 'fixtures', 'security-patterns');
+const FIXTURES_DIR = join(PROJECT_ROOT, 'test', 'fixtures', 'security-patterns');
 
 // ============================================================================
 // Rust security scanner tests pass

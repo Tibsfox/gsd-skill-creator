@@ -19,7 +19,7 @@ import { extractSauce } from '../../shared/sauce.js';
 import { tokenizeAnsi } from '../../shared/ansi.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const fixturePath = join(__dirname, '../../../../data/bbs/fixtures/test-artwork.ans');
+const fixturePath = join(__dirname, '../../../../../data/bbs/fixtures/test-artwork.ans');
 
 const lab01: BbsLab = {
   id: 'bbs-m2-lab-01',
