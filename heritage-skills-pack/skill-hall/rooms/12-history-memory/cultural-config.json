@@ -1,0 +1,75 @@
+{
+  "roomId": "room-12-history-memory",
+  "room": 12,
+  "culturalRules": [
+    {
+      "id": "ROOM12-CULT-001",
+      "domain": "history-memory",
+      "tradition": "appalachian",
+      "concept": "Appalachian family genealogy and regional history",
+      "level": 1,
+      "note": "Appalachian family genealogy, community chronicles, and regional history are Level 1 publicly shared knowledge. Church records, courthouse archives, and Foxfire-documented oral history are public domain historical materials. The Foxfire interview methodology is itself Level 1 — a documented approach to community oral history developed at Rabun Gap-Nacoochee School and published in the Foxfire magazine and book series beginning in 1967. This content is appropriate to include in full.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM12-CULT-002",
+      "domain": "history-memory",
+      "tradition": "first-nations",
+      "concept": "Wampum belt construction and publicly documented belts",
+      "level": 2,
+      "nationAttribution": "Haudenosaunee",
+      "note": "The physical construction of wampum (shell bead production from quahog and whelk shells, stringing on sinew or leather backing) is Level 1 publicly documented craft knowledge. The Hiawatha Belt and Two Row Wampum (Kaswentha) are publicly documented in academic, museum, and community-published sources; their general meanings are Level 2 (contextually shared) — appropriate for educational settings with proper framing and Haudenosaunee attribution. Specific wampum belt messages, treaty interpretations beyond the publicly documented examples, and the protocols of wampum reading at council are Level 3. Do not reproduce specific belt messages as authoritative historical interpretation — acknowledge that the Haudenosaunee themselves are the authoritative interpreters of their wampum. Nation attribution: Haudenosaunee (Onondaga, Seneca, Mohawk, Cayuga, Oneida, Tuscarora).",
+      "action": "include"
+    },
+    {
+      "id": "ROOM12-CULT-003",
+      "domain": "history-memory",
+      "tradition": "first-nations",
+      "concept": "Winter counts as primary historical documents",
+      "level": 2,
+      "nationAttribution": "Lakota, Dakota",
+      "note": "Winter counts (waniyetu wowapi) are publicly documented primary historical sources. Famous winter counts — the Lone Dog Winter Count, the American Horse Winter Count, the Cloud Shield Winter Count — are published and available in museum and library collections. They are Level 2 contextually shared — use with nation-specific attribution to Lakota and Dakota peoples and acknowledgment that specific entries may carry restricted significance depending on the events they record. Do not reproduce specific winter count entries without Lakota or Dakota attribution and sourcing. The methodology of winter count documentation (one pictograph per year, consensus event selection, keeper transmission) is Level 1 knowledge.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM12-CULT-004",
+      "domain": "history-memory",
+      "tradition": "first-nations",
+      "concept": "Oral history as valid evidence — methodology and legal recognition",
+      "level": 1,
+      "nationAttribution": "First Nations (methodology is cross-tradition)",
+      "note": "The methodology of oral history — how to conduct interviews, how to attribute oral history, how to use oral testimony as historical evidence — is Level 1 publicly documented. The value and validity of oral history as primary historical evidence (including in legal contexts) is a documented position established in Canadian law by Delgamuukw v. British Columbia (Supreme Court of Canada, 1997), which established that Gitxsan and Wet'suwet'en oral histories constitute primary evidence of historical occupation and Indigenous title. OCAP principles (Ownership, Control, Access, Possession) as a framework for ethical oral history research are publicly documented. This includes references to oral history principles from the UN Declaration on the Rights of Indigenous Peoples. Teaching the methodology and the legal/scholarly framework is Level 1 — teaching the content of specific restricted oral histories is Level 3–4.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM12-CULT-005",
+      "domain": "history-memory",
+      "tradition": "inuit",
+      "concept": "Inuit place-name knowledge and IQ as oral history",
+      "level": 2,
+      "nationAttribution": "Inuit",
+      "note": "Inuit place-name knowledge and its encoding of ecological history, navigation routes, and ancestral memory is Level 2 contextually shared. The general framework — that place names encode history — is publicly documented in Nunavut government publications, academic research, and community-produced materials. Specific place name meanings and the histories encoded in them require Inuit-specific sourcing and attribution; do not fabricate or reproduce specific place name meanings without documented Inuit sourcing. IQ as a form of oral history (IQ as living memory, not a record of the past) is publicly framed in Nunavut government documents, the Nunavut Social Development Council, and community publications. Pilimmaksarniq as an IQ principle for knowledge transmission is publicly documented.",
+      "action": "include"
+    },
+    {
+      "id": "ROOM12-CULT-006",
+      "domain": "history-memory",
+      "tradition": "first-nations",
+      "concept": "Specific wampum belt ceremonial reading protocols and treaty-specific interpretations",
+      "level": 3,
+      "nationAttribution": "Haudenosaunee",
+      "note": "The ceremonial reading of wampum belts at council — the specific protocols governing who may read which belt, in what context, with what formal address, and under what conditions — are Level 3 community-restricted knowledge transmitted through specific Haudenosaunee cultural protocols. Treaty-specific wampum interpretations beyond the publicly documented belts are similarly restricted. These must not be described or reproduced in educational content. Acknowledge that these protocols exist and that they are held by Haudenosaunee knowledge keepers — do not attempt to describe their content.",
+      "action": "restrict"
+    },
+    {
+      "id": "ROOM12-CULT-007",
+      "domain": "history-memory",
+      "tradition": "first-nations",
+      "concept": "Sacred narrative traditions and restricted oral histories",
+      "level": 4,
+      "nationAttribution": "First Nations (nation-specific)",
+      "note": "Sacred oral narratives — creation stories used in ceremony, restricted clan histories transmitted only within specific lineage or society contexts, healing songs embedded in narrative tradition, and other oral histories whose transmission is governed by specific ceremonial protocols — are Level 4 hard block, no override permitted under any circumstances. Oral history methodology can be taught; the content of restricted oral histories must not be reproduced. The distinction between publicly shared oral tradition (historical accounts told at community gatherings, documented in published sources with community authorization) and sacred oral tradition (transmitted only within specific ceremonial contexts by designated knowledge holders) must be maintained. If a learner asks to know the content of a specific sacred narrative, redirect to the appropriate nation's cultural organization or knowledge keeper.",
+      "action": "hard-block"
+    }
+  ]
+}

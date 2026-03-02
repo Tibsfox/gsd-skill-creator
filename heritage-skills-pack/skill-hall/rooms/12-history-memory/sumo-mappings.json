@@ -1,0 +1,83 @@
+[
+  {
+    "heritageConceptId": "room-12-oral-tradition",
+    "sumoTerm": "OralTradition",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass HeritageOralTradition OralTradition)",
+    "naturalLanguage": "Heritage oral tradition is a form of oral tradition: the transmission of historical knowledge, cultural values, and community memory through spoken narrative, story, and performance rather than written text — preserving information across generations through active practice rather than inscription.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-12-wampum-belt",
+    "sumoTerm": "HistoricalEvent",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass WampumBeltRecord HistoricalEvent)",
+    "naturalLanguage": "A wampum belt record is a historical event documentation: a diplomatic and historical record produced by the Haudenosaunee using shell beads woven on sinew or leather backing, encoding the terms of treaties, the founding of the Confederacy, or other significant political and diplomatic events.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-12-wampum-construction",
+    "sumoTerm": "HeritageSkill",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass WampumConstruction HeritageSkill)",
+    "naturalLanguage": "Wampum construction is a Haudenosaunee heritage skill: the production of shell beads (quahog and whelk shell cut and drilled to cylindrical form) and their weaving onto sinew or leather backing in specific patterns encoding diplomatic and historical messages.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-12-winter-count",
+    "sumoTerm": "Narrative",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass WinterCount Narrative)",
+    "naturalLanguage": "A winter count (waniyetu wowapi) is a narrative document: a pictographic annual record maintained by Lakota and Dakota peoples in which one image per year represents the community's agreed-upon most significant event of that year — functioning as both a calendar and a community history.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-12-appalachian-genealogy",
+    "sumoTerm": "CulturalPractice",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass AppalachianFamilyGenealogy CulturalPractice)",
+    "naturalLanguage": "Appalachian family genealogy is a cultural practice: the systematic collection, organization, and oral transmission of family history across multiple generations, using church records, courthouse archives, family Bibles, and oral testimony to construct a continuous family narrative.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-12-inuit-place-names",
+    "sumoTerm": "Narrative",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass InuitPlaceNameKnowledge Narrative)",
+    "naturalLanguage": "Inuit place-name knowledge is a narrative system: a geographically organized body of historical, ecological, and navigational information encoded in the names given to landscape features — functioning as a map, a historical record, and a survival guide simultaneously.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-12-inuksuit",
+    "sumoTerm": "StationaryArtifact",
+    "sumoFile": "engineering.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass Inuksuk StationaryArtifact)",
+    "naturalLanguage": "An inuksuk (singular of inuksuit) is a stationary artifact: a human-made stone cairn placed in the Arctic landscape to serve as a navigation marker, hunting indicator, or message for other travelers — encoding spatial and temporal information in the landscape itself.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-12-oral-history-methodology",
+    "sumoTerm": "CulturalPractice",
+    "sumoFile": "heritage-domain-ontology.kif",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass OralHistoryMethodology CulturalPractice)",
+    "naturalLanguage": "Oral history methodology is a cultural practice: the structured approach to collecting, attributing, and preserving oral testimonies as primary historical evidence — including interviewing techniques, consent protocols, attribution standards, and preservation practices used across both Appalachian (Foxfire) and Indigenous oral history traditions.",
+    "ontologicalBridge": null
+  },
+  {
+    "heritageConceptId": "room-12-iq-as-memory",
+    "sumoTerm": "OralTradition",
+    "sumoFile": "MILO",
+    "mappingType": "subclass",
+    "kifStatement": "(subclass InuitQaujimajatuqangitMemory OralTradition)",
+    "naturalLanguage": "Inuit Qaujimajatuqangit (IQ) as oral memory is a form of oral tradition: the accumulated ecological, navigational, relational, and historical knowledge of Inuit communities transmitted through oral instruction, story, demonstration, and practice — making no distinction between 'knowledge' and 'history' because IQ knowledge is historical knowledge actively lived.",
+    "ontologicalBridge": null
+  }
+]
