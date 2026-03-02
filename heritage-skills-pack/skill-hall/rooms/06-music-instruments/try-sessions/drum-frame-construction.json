@@ -1,0 +1,57 @@
+{
+  "id": "music-06-drum-frame-beginner",
+  "title": "Frame Drum Construction: Bentwood Hoop and Hide Membrane",
+  "tradition": "first-nations",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore the construction principles of the frame drum as made in Anishinaabe and Cree traditions. Learn how the bentwood hoop is prepared, how the hide membrane is soaked and stretched, and how the drum's acoustic properties emerge from the relationship between hoop tension, membrane thickness, and drying conditions.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 2,
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Read the cultural framing before beginning: frame drum construction -- how to make the physical instrument -- is publicly shared knowledge at Level 1-2. The ceremonial uses of drums and specific drum songs are Level 3-4 restricted. This session covers instrument construction only. Any questions about specific drum songs, ceremonial protocols, or restricted knowledge must be directed to nation-specific cultural sources.",
+      "nationAttribution": "Anishinaabe, Cree",
+      "culturalContext": "Frame drums are used across many First Nations traditions, each with distinct construction traditions, playing styles, and ceremonial contexts. The Anishinaabe and Cree frame drum traditions are well-documented at the construction level in educational resources authorized by community cultural programs. The ceremonial dimensions -- which songs are appropriate when, how drums are treated, what protocols govern a drum's use -- are community-specific knowledge that must come from community sources, not from this session.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "The hoop: a frame drum hoop is traditionally made from a single strip of wood (ash, birch, or cedar are common in Anishinaabe and Cree territory) bent into a circle and lapped at the joint. The wood must be thin enough to bend without cracking -- typically 1/4 inch thick or less -- and must be bent while green or steam-bent. Measure the diameter you want (a beginner drum is typically 12-18 inches across) and calculate the required hoop strip length (circumference equals diameter multiplied by 3.14).",
+      "nationAttribution": "Anishinaabe, Cree",
+      "culturalContext": "The hoop diameter varies by tradition and use. Anishinaabe hand drums used in community singing are often 14-18 inches. Larger drums associated with specific ceremonial contexts may be much larger. For this session, focus on a hand-sized drum suitable for learning the construction principles.",
+      "safetyNote": "Tool safety annotation: bending thin wood strips requires careful control to avoid splitting. Score the inside curve lightly before bending if the strip tends to crack. Bind the bent hoop immediately with cord to hold its shape while it dries. Use knives and planes carefully when thinning the wood strip -- work with the grain direction, keep the cutting edge moving away from the supporting hand.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 3,
+      "instruction": "Hide selection and preparation: a frame drum membrane is traditionally made from moose or deer hide in Anishinaabe and Cree territories. The hide must be rawhide -- cleaned of hair and flesh but not tanned. Rawhide that has been dried can be soaked back to pliability. Soak the hide in cold water until it is flexible but not soft -- 2-6 hours depending on thickness. The hide should flex without cracking but should still feel substantial, not spongy.",
+      "nationAttribution": "Anishinaabe, Cree",
+      "culturalContext": "Hide selection reflects what is ecologically available and culturally appropriate in each territory. Moose hide is the traditional choice in much of Cree and Anishinaabe territory. Deer hide is used where moose are not available. Elk, caribou, and buffalo hide are used in their respective territories. Modern learners sometimes use commercially prepared rawhide from leather suppliers. The acoustic properties of the drum change significantly with hide species and thickness -- thicker hide produces a lower, deeper tone; thinner hide produces a higher, more responsive tone.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 4,
+      "instruction": "Cutting and lashing: cut the soaked hide into a circle 3-4 inches larger than your hoop diameter all around. Punch lacing holes around the edge of the hide circle at 2-3 inch intervals. Thread a long rawhide lace through the holes and over the hoop in a zigzag pattern, drawing the hide snugly over the hoop face. The initial lacing is loose -- you will tighten it progressively as the hide begins to dry and shrink.",
+      "nationAttribution": "Anishinaabe, Cree",
+      "safetyNote": "Tool safety annotation: cutting wet hide requires a sharp knife and a secure cutting surface. Wet hide is slippery. Position the cutting hand so the knife direction is away from the supporting hand. Punch lacing holes with an awl or leather punch placed flat on a cutting board, holding the awl firmly with the punch end facing down and away from hands.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 5,
+      "instruction": "The drying process: as the hide dries, it shrinks and tightens on the hoop. This shrinkage creates the membrane tension that produces the drum's resonance. Check the tension every few hours and tighten the lacing if there is slack. Do not apply heat to accelerate drying -- uneven drying causes uneven tension and can crack the hide. Allow 24-48 hours for complete natural drying in a dry, airy location.",
+      "nationAttribution": "Anishinaabe, Cree",
+      "safetyNote": "Fire and heat annotation: do not use heat guns, hair dryers, forced air heaters, or direct sunlight to accelerate hide drying. Rapid or uneven heat causes the hide to shrink unevenly, producing a drum with uneven tension that will not produce a clear tone. If the membrane cracks during drying, the drum must be remade -- the crack cannot be effectively repaired.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 6,
+      "instruction": "Testing the completed drum: when the hide is completely dry, press gently in the center of the membrane with one finger. It should feel taut and slightly springy. Strike gently with the back of the hand or a padded drum beater and listen to the tone. A well-made frame drum produces a clear, resonant tone with some sustain. A drum with uneven membrane tension will have a dull or inconsistent tone across the surface.",
+      "nationAttribution": "Anishinaabe, Cree",
+      "culturalContext": "The drum's voice -- its specific tone, resonance, and character -- develops over time with use. Many traditional drum makers describe a drum as not fully made until it has been played. The first songs played on a drum are sometimes considered its beginning as a participant in music rather than just a finished object. This cultural dimension is acknowledged here without describing specific ceremonial protocols -- those contexts are Level 3-4 restricted and must be learned through community sources.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ]
+}
