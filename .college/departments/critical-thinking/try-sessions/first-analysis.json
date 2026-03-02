@@ -1,0 +1,39 @@
+{
+  "id": "first-analysis",
+  "title": "Your First Claim Analysis: Is This Argument Any Good?",
+  "description": "Take a claim from today's news or a conversation and subject it to rigorous critical analysis. This session builds the core skills of distinguishing claims from facts, evaluating evidence, and detecting fallacies.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Find a claim someone has made (a news headline, social media post, or opinion from a conversation). Read about claims vs facts and opinions: is this claim a fact, an opinion, or something in between?",
+      "expectedOutcome": "You can categorize the claim and explain why — what evidence would be needed to verify it as factual?",
+      "hint": "A fact is verifiable with evidence; an opinion expresses a preference or judgment; many claims mix both",
+      "conceptsExplored": ["crit-claims-facts-opinions"]
+    },
+    {
+      "instruction": "Look for evidence supporting the claim. Where does the evidence come from? Who created it? With what purpose? Read about sourcing and evidence quality: what makes evidence strong or weak?",
+      "expectedOutcome": "You can identify the source of evidence and apply at least two criteria for assessing its reliability (expertise, independence, date, transparency of methods)",
+      "hint": "Ask: Is this source an expert? Is it independent of the claim-maker? Is the evidence primary or secondhand?",
+      "conceptsExplored": ["crit-sourcing", "crit-evidence-quality"]
+    },
+    {
+      "instruction": "Read about common logical fallacies. Does the argument use ad hominem, straw man, false dichotomy, or appeal to authority? Identify any you find (even if you have to look hard).",
+      "expectedOutcome": "You can identify at least one potential fallacy in the argument or confirm none are present and explain your reasoning",
+      "hint": "False dichotomy is the most common — 'either X or Y' when more options exist",
+      "conceptsExplored": ["crit-ad-hominem-straw-man", "crit-false-dichotomy", "crit-appeal-to-authority"]
+    },
+    {
+      "instruction": "Construct the strongest possible counterargument to the claim. Read about charitable interpretation: why should you steelman opposing views?",
+      "expectedOutcome": "You have articulated a genuine counterargument (not a strawman) and explained why steelmanning opposing views produces stronger thinking",
+      "hint": "A steelman states the opposition's best case, not their worst — it strengthens your analysis by testing your position against real objections",
+      "conceptsExplored": ["crit-charitable-interpretation", "crit-argument-structure"]
+    },
+    {
+      "instruction": "Reflect on your own reaction to the claim. Did you agree quickly? Disagree without reading? Read about confirmation bias and intellectual humility: how might your prior beliefs have colored your analysis?",
+      "expectedOutcome": "You can identify at least one way your existing beliefs may have affected how you evaluated this claim, and describe what truly neutral analysis would require",
+      "hint": "We all have confirmation bias — the goal is not to eliminate it but to notice when it is operating",
+      "conceptsExplored": ["crit-confirmation-bias", "crit-intellectual-humility"]
+    }
+  ]
+}
