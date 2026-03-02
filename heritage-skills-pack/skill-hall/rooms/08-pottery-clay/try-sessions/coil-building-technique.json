@@ -1,0 +1,53 @@
+{
+  "id": "pottery-08-coil-building-beginner",
+  "title": "Coil Building: Haudenosaunee Pottery Construction",
+  "tradition": "first-nations",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore coil-building technique as practiced in Haudenosaunee pottery traditions. Learn how clay coils are formed, stacked, and blended to construct vessel walls, and how the Haudenosaunee tradition of rounded-base vessel forms and cord-impressed surface decoration reflects ecological knowledge and aesthetic choices specific to the northeastern woodlands.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 2,
+  "sumoProcessClass": "HeritageSkill",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Cultural framing: Haudenosaunee pottery is a pre-contact and post-contact ceramic tradition of the Haudenosaunee (Iroquois) nations of the northeastern woodlands. Pre-contact Haudenosaunee pottery was coil-built (no wheel throwing was used) and fired in open pits with wood fuel. Surface decoration includes cord-impressed patterns, fabric-impressed textures, and incised geometric designs. Some designs carry clan or nation significance -- this session covers construction technique. Design attribution and cultural meaning are addressed in the room cultural notes and should be discussed with Haudenosaunee attribution.",
+      "nationAttribution": "Haudenosaunee (Onondaga, Mohawk, Cayuga, Seneca, Oneida, Tuscarora)",
+      "culturalContext": "Haudenosaunee pottery was traditionally produced by women in the community and reflects both practical and aesthetic knowledge systems specific to the northeastern woodlands. The clay sources, vessel forms, and decorative traditions varied across the six nations of the Confederacy, with each nation's pottery having recognizable regional characteristics documented in archaeological literature. Museum collections at the New York State Museum (Albany), the Rochester Museum and Science Center, and the Canadian Museum of History hold extensive Haudenosaunee ceramic collections that are the primary reference for pre-contact forms and styles.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Clay body and preparation: Haudenosaunee pottery used local clays tempered with grit (crushed stone), shell, or grog (crushed fired clay) to prevent cracking during drying and open-pit firing. A tempered clay body is stronger than pure clay and handles the stresses of construction and firing better. For this exercise, use a commercially available earthenware clay or prepare a simple tempered clay body by wedging approximately 15-20% grog (fired clay granules) into soft earthenware clay. Wedge thoroughly until the grog is evenly distributed throughout.",
+      "safetyNote": "Chemical annotation: dry clay and dry grog contain silica. Wedge and mix clay moist -- do not handle dry clay powder without respiratory protection. If using a dry temper material, moisten it before adding to the clay body. Work surfaces should be kept damp.",
+      "nationAttribution": "Haudenosaunee",
+      "sumoMapping": "PotteryMaking"
+    },
+    {
+      "order": 3,
+      "instruction": "Rolling coils: take a portion of wedged clay (about 1/4 of your clay supply) and roll it into a coil on a smooth, lightly moistened surface. Use even pressure and roll from the center of the coil outward to maintain consistent diameter throughout its length -- target 1/2 to 3/4 inch diameter. Coils should be slightly moist but not wet; they should hold their shape when picked up. Prepare 6-8 coils of similar length and diameter before starting to build. Coils that are too wet will collapse under the weight of added coils; coils that are too dry will crack when you try to blend them.",
+      "sumoMapping": "PotteryMaking"
+    },
+    {
+      "order": 4,
+      "instruction": "Building the base and walls: Haudenosaunee vessels traditionally have rounded or pointed bases rather than flat bottoms -- designed to be set into sand, earth, or ash near a cooking fire, not placed on a flat table surface. For this exercise, form a thick disc of clay (about 1/2 inch thick, 4-5 inches diameter) and shape it into a shallow dome -- the exterior base curve of your vessel. Place the base on a piece of cloth or canvas so you can rotate it during building. Begin stacking coils around the perimeter of the base, pressing the bottom of each coil firmly into the course below. Blend each coil into the one below on the interior surface using your thumb, drawing the clay upward and smoothing the junction.",
+      "nationAttribution": "Haudenosaunee",
+      "culturalContext": "The rounded base of Haudenosaunee pottery reflects its use context: vessels were used over open fires or embedded in sand or earth, not placed on flat stone or wooden surfaces. The rounded base distributes thermal stress more evenly during firing and during repeated heating over open fire. This is an engineering solution encoded in the pottery form itself -- a practical knowledge that developed over generations of potters working with locally available clay and fuel.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 5,
+      "instruction": "Surface decoration: cord-impressed decoration was made by wrapping a twisted cord around a wooden paddle and pressing it into the leather-hard clay surface to leave a textured impression across the outer surface of the vessel. Incised geometric patterns were drawn into leather-hard clay with a stick, bone tool, or fingernail. The decoration typically covered the upper portion of the vessel from the shoulder upward. For this exercise, when your vessel walls have stiffened to leather-hard (firm but not brittle), try pressing a twisted cord or a textured surface against the clay to produce a characteristic impressed pattern.",
+      "nationAttribution": "Haudenosaunee",
+      "culturalContext": "The specific geometric patterns used in Haudenosaunee pottery are not arbitrary -- they reflect regional traditions and in some cases carry clan or ceremonial associations that are Level 2 contextually shared knowledge requiring Haudenosaunee attribution. General cord-impressed and incised surface textures are Level 1 publicly documented from archaeological and museum collections. This session introduces the technique of cord-impressed decoration; the meaning and attribution of specific design patterns requires nation-specific sourcing from Haudenosaunee cultural authorities.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 6,
+      "instruction": "Drying and a note on firing: allow the coil-built vessel to dry slowly under loose plastic for 24 hours, then uncovered for 24-48 more hours until bone dry. Haudenosaunee pottery was originally fired in open pits with wood fuel -- not in enclosed kilns. Open-pit firing reaches lower temperatures than kiln firing (approximately 900-1200 degrees F vs. 1800-2300 degrees F for stoneware). The resulting ware is earthenware -- water-permeable and lower strength than high-fired stoneware, but sufficient for cooking, storage, and many traditional uses.",
+      "safetyNote": "If proceeding to firing (open pit or kiln), consult the gate rules for kiln and fire operation (ROOM08-GATE-001 through GATE-003) before beginning any firing. This session does not include firing -- it covers construction technique and drying only.",
+      "sumoMapping": "PotteryMaking"
+    }
+  ]
+}
