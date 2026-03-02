@@ -74,3 +74,37 @@ export interface LearningPath {
   suggestedOrder: string[][];
   prerequisites: Record<string, string[]>;
 }
+
+// ─── Dynamic Mapping Layer ────────────────────────────────────────────────────
+
+/** A named virtual grouping of subjects composed from the flat department pool */
+export interface VirtualDepartment {
+  id: string;
+  name: string;
+  description: string;
+  subjects: string[];
+}
+
+/** A named mapping file (default or user-created) */
+export interface MappingFile {
+  id: string;
+  name: string;
+  source: 'default' | 'user';
+  virtualDepartments: VirtualDepartment[];
+}
+
+/** An educational track with prerequisite ordering */
+export interface EducationalTrack {
+  id: string;
+  name: string;
+  description: string;
+  subjects: string[];
+  prerequisites: Record<string, string[]>;
+}
+
+/** Returned by MappingLoader.listTracks() */
+export interface TrackFile {
+  name: string;
+  description: string;
+  tracks: EducationalTrack[];
+}
