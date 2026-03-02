@@ -1,0 +1,39 @@
+{
+  "id": "first-experiment",
+  "title": "Your First Science Experiment: Investigating a Question",
+  "description": "Experience the scientific method from question to conclusion. This session guides you through designing, running, and reporting a simple experiment using household materials.",
+  "estimatedMinutes": 30,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Choose a simple testable question: 'Does water temperature affect how fast sugar dissolves?' Read about scientific questions: what makes a question testable? Write down your question.",
+      "expectedOutcome": "You have a specific, testable question with an identifiable independent variable (water temperature) and dependent variable (dissolving time)",
+      "hint": "A testable question must be answerable by observation and measurement — not opinion",
+      "conceptsExplored": ["sci-scientific-questions", "sci-observation-skills"]
+    },
+    {
+      "instruction": "Write a hypothesis: 'If I increase water temperature, then sugar will dissolve faster because...' Read about hypothesis formation: what makes a hypothesis scientific rather than just a guess?",
+      "expectedOutcome": "You have a testable prediction stating expected relationship between variables, with a reason based on prior knowledge",
+      "hint": "A good hypothesis uses 'if...then...because' structure and makes a specific, falsifiable prediction",
+      "conceptsExplored": ["sci-hypothesis-formation", "sci-variables-types"]
+    },
+    {
+      "instruction": "Design your experiment: two cups of water at different temperatures (cold and hot), same amount of sugar, same stirring. Read about experimental controls: what must you keep the same to make the test fair?",
+      "expectedOutcome": "You can identify controlled variables (amount of sugar, stirring method, cup size) and understand why controlling them makes the comparison valid",
+      "hint": "Change only one variable at a time — everything else must be identical between trials",
+      "conceptsExplored": ["sci-controlled-experiments", "sci-experimental-controls"]
+    },
+    {
+      "instruction": "Run the experiment 3 times and record your results in a table with columns for water temperature and dissolving time. Read about data tables: why do we record data in tables?",
+      "expectedOutcome": "You have a data table with multiple trials and can explain that tables enable easy comparison and reveal patterns",
+      "hint": "Multiple trials account for random variation — one trial might be an outlier",
+      "conceptsExplored": ["sci-data-tables-graphs", "sci-measurement-units"]
+    },
+    {
+      "instruction": "Write a conclusion using the CER framework: state your Claim, cite your Evidence (data), and explain your Reasoning (connect evidence to hypothesis). Read about claims-evidence-reasoning: why does science require this structure?",
+      "expectedOutcome": "You have a complete CER conclusion that either supports or refutes your hypothesis based on the data",
+      "hint": "The claim restates your hypothesis as confirmed or refuted; evidence cites specific data values; reasoning explains the science",
+      "conceptsExplored": ["sci-claims-evidence-reasoning", "sci-evidence-conclusions"]
+    }
+  ]
+}
