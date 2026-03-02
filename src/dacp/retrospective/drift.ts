@@ -30,6 +30,9 @@ import type { HandoffOutcome, DriftScore, FidelityLevel } from '../types.js';
  * - modification_penalty is downweighted (10%) because post-hoc modification
  *   counts are noisy (refactoring vs behavioral change indistinguishable)
  *
+ * Components are pre-multiplied (weight applied when building the components
+ * object), unlike the types.ts variant which applies weights in the final sum.
+ *
  * Thresholds: promote > 0.3, demote < 0.05 (tighter band because
  * retrospective data is higher confidence -- smaller movements are meaningful)
  *
