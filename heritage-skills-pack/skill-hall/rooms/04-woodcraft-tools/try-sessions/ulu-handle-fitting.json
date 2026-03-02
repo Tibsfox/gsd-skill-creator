@@ -1,0 +1,59 @@
+{
+  "id": "woodcraft-04-ulu-handle-beginner",
+  "title": "Ulu Handle Fitting: Ergonomics and Materials",
+  "tradition": "inuit",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore the anatomy of the ulu -- the iconic Inuit curved-blade knife -- and understand how the handle is fitted for effective use while wearing mittens. Learn the material choices for handles (bone, antler, wood) and how the handle geometry determines the ulu's cutting efficiency.",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "The ulu: context and purpose. The ulu (also spelled ooloo) is a curved-blade knife used primarily by Inuit women for processing food, cleaning hides, and cutting sewing materials. Its curved blade and top-mounted handle allow a rocking cutting motion across a rounded cutting board. The ulu has been used for thousands of years across Inuit communities from Alaska to Greenland.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The ulu is one of the most functional and recognizable tools in the Inuit material culture tradition. Its design optimizes cutting power and control for tasks that require sustained effort -- butchering a seal or caribou, scraping hides, cutting dried meat and fish -- in an environment where hands are often partially numbed and covered by mittens or gloves. Modern Inuit women still use the ulu daily in many communities.",
+      "sumoMapping": "HeritageSkill"
+    },
+    {
+      "order": 2,
+      "instruction": "Blade anatomy: the ulu's blade is a curved crescent, ground to a sharp edge on the concave (inner) lower edge. The curvature varies regionally -- some ulus have a shallow, wide curve (better for broad scraping cuts); others have a deep, narrow curve (better for controlled butchering cuts). Traditionally, blades were made from ground slate, copper, or bone; modern ulus use steel.",
+      "nationAttribution": "Inuit",
+      "sumoMapping": "CuttingDevice"
+    },
+    {
+      "order": 3,
+      "instruction": "The top-mount handle: the handle is attached to the flat (dorsal) side of the blade, typically via a slot or groove in the handle base into which the blade's spine fits. This top-mount design puts the user's palm directly over the blade's cutting edge, enabling a downward rocking cut using the full weight of the hand and arm rather than a push or pull motion.",
+      "safetyNote": "Tool safety annotation: the ulu's curved blade and top-mount handle make the cutting edge less visible than a straight knife during use. The user must maintain awareness of the blade's orientation and keep the non-cutting hand (and cutting board) positioned safely relative to the edge. The rocking motion can carry the blade unexpectedly if the user releases pressure unevenly.",
+      "sumoMapping": "CuttingDevice"
+    },
+    {
+      "order": 4,
+      "instruction": "Handle materials: bone (caribou leg bone, polar bear femur), antler (caribou antler), wood (driftwood in coastal areas; imported or traded wood in interior areas), and occasionally ivory (walrus tusk). Each material has different thermal properties -- bone and antler conduct cold less than metal, making them more comfortable to grip in cold conditions.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "Handle material selection reflects what is locally available and appropriate. A coastal Inuit community with access to driftwood and marine mammal bones will use different materials than an interior community relying on caribou resources. The handle is often shaped to the individual user's hand.",
+      "sumoMapping": "MaterialCulture"
+    },
+    {
+      "order": 5,
+      "instruction": "Fitting the handle: the handle slot must fit the blade's spine closely enough to be stable but allow for adjusting the blade angle. Some handle designs use a tight interference fit (blade held by friction alone); others use a wedge or lashing. The handle width should allow a relaxed grip while wearing mitten liners (inner mittens), not bare hands -- this is the functional design criterion.",
+      "safetyNote": "Tool safety annotation: a loose handle on an ulu is a safety hazard -- the blade can rotate unexpectedly during use. Before using any ulu, verify the blade-to-handle fit is secure. A properly fitted ulu has zero blade wobble when the handle is gripped and held at the midpoint of a cutting stroke.",
+      "sumoMapping": "Manufacturing"
+    },
+    {
+      "order": 6,
+      "instruction": "The cutting board: the ulu is traditionally used with a round or oval cutting board whose top surface has a slight concave curve matching the ulu blade's radius. This curved board and curved blade combination allows the user to rock the blade back and forth to make cuts without lifting the blade from the surface.",
+      "culturalContext": "The ulu and its matching cutting board are designed as a system. The board's curve prevents the food from sliding away from the blade and concentrates the cut. Traditional boards are made from wood, bone, or in some regions, a section of whale vertebra. Modern boards are often made from hard plastic or dense polyethylene.",
+      "sumoMapping": "Artifact"
+    },
+    {
+      "order": 7,
+      "instruction": "Regional variations: Greenlandic Inuit ulus tend toward wider, shallower curves; Yup'ik and Inupiat ulus from Alaska tend toward deeper curves with more pronounced pointed ends; Canadian Inuit designs fall between these regional extremes. All perform the same function with slightly different ergonomic tradeoffs.",
+      "nationAttribution": "Inuit (Greenlandic Inuit, Yup'ik, Inupiat, Canadian Inuit)",
+      "culturalContext": "Regional variation in ulu design is not random -- it reflects the specific mix of cutting tasks most common in each region. A community that processes large quantities of salmon may prefer a different blade curve than one that primarily processes seal and caribou. These differences have been refined over thousands of years of daily use.",
+      "sumoMapping": "HeritageSkill"
+    }
+  ],
+  "sumoProcessClass": "HeritageSkill"
+}

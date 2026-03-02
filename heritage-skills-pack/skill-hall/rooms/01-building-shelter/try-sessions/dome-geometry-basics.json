@@ -1,0 +1,57 @@
+{
+  "id": "building-01-dome-geometry-beginner",
+  "title": "Dome Geometry Basics: Understanding Shelter Structure Across Traditions",
+  "tradition": "cross-tradition",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "description": "Explore the structural geometry shared by dome shelters across traditions: the wigwam, the Haudenosaunee longhouse barrel vault, and the Inuit igloo. Understand why dome geometry is structurally efficient and how each tradition adapted it to their materials and environment. Note: Full igloo construction is covered in Room 14 (Arctic Living).",
+  "prerequisites": [],
+  "safetyLevel": "annotated",
+  "culturalLevel": 1,
+  "sumoProcessClass": "ConstructionProcess",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Understand why dome geometry works: a dome distributes load in compression along every curve. There are no beams working in bending (the structural failure mode of flat spans). The catenary arch -- the natural curve a hanging chain takes under its own weight, inverted -- is the most structurally efficient shape for a freestanding arch.",
+      "culturalContext": "Different traditions arrived at dome geometry through entirely different intellectual paths. Anishinaabe wigwam builders discovered the optimal sapling-bending radius through generations of trial and correction. Inuit igloo builders developed the inward-spiraling snow block geometry through careful observation of how snow compresses. Western engineers derived the catenary curve mathematically in the 17th century. The same structural truth is accessible through radically different knowledge systems.",
+      "sumoMapping": "ConstructionProcess"
+    },
+    {
+      "order": 2,
+      "instruction": "Study the wigwam dome: the Anishinaabe wigwam's arch system creates a self-bracing structure. Each pair of crossing saplings locks the other in position. The dome as a whole is stiffer than the sum of its individual arches.",
+      "nationAttribution": "Anishinaabe",
+      "sumoMapping": "Building"
+    },
+    {
+      "order": 3,
+      "instruction": "Study the longhouse barrel vault: the Haudenosaunee longhouse uses a barrel vault -- a half-cylinder -- rather than a true dome. Curved pole arches placed at intervals along the length of the building, tied together by longitudinal poles at the top, create a structure that can be extended indefinitely in length while the width remains constant. The Haudenosaunee Confederacy -- Seneca, Mohawk, Onondaga, Cayuga, Oneida, and Tuscarora -- each built longhouses. The longhouse also gives the Haudenosaunee their traditional name: 'people of the longhouse'.",
+      "nationAttribution": "Haudenosaunee (Onondaga, Seneca, Mohawk, Cayuga, Oneida, Tuscarora)",
+      "culturalContext": "The Haudenosaunee longhouse was not merely a building -- it was a political metaphor. The Haudenosaunee Confederacy understood their political structure through the longhouse: the Seneca as Keepers of the Western Door, the Mohawk as Keepers of the Eastern Door, the Onondaga at the center as Keepers of the Fire. The building shape encoded governance.",
+      "sumoMapping": "Building"
+    },
+    {
+      "order": 4,
+      "instruction": "Understand igloo dome geometry -- cross-reference to Room 14: the Inuit igloo achieves dome geometry through an inward-spiraling course of snow blocks that progressively overhang the interior space until the keystone block closes the dome. IMPORTANT: Full igloo construction -- including the critical CO safety requirements for any enclosed snow shelter -- is covered in Room 14 (Arctic Living). Do not attempt igloo construction without reading Room 14.",
+      "nationAttribution": "Inuit",
+      "culturalContext": "The igloo's geometry was developed by Inuit builders over thousands of years in an environment where timber is unavailable and snow is abundant. The specific snow condition required (wind-packed snow of the right density), the block cutting tools (the snow knife or pana), the spiral layering technique, and the final keystone block closure are all detailed in Room 14. Here we note only that the igloo achieves a true catenary dome in compressed snow -- a material that SUMO would classify as a PhysicalSubstance, not a StructuralMaterial, revealing a gap in the classification system.",
+      "safetyNote": "ANNOTATE: Igloo construction involves enclosed-space CO hazards from any internal combustion source. See Room 14 (Arctic Living) for complete igloo safety protocol including ventilation, CO awareness, and emergency exit procedures before attempting any snow shelter construction.",
+      "sumoMapping": "ConstructionProcess"
+    },
+    {
+      "order": 5,
+      "instruction": "Analyze load paths and compression: in any dome, the load from the dome's weight travels down the curved surface in compression. At the base of the dome, this compression becomes an outward horizontal thrust -- the dome 'wants' to spread its feet. The wigwam solves this by driving poles into the ground. The igloo solves this by placing the base blocks on the snow floor. The longhouse lashes the bases of the arches together with longitudinal poles.",
+      "sumoMapping": "ConstructionProcess"
+    },
+    {
+      "order": 6,
+      "instruction": "Understand thermal mass and insulation: dome geometry also concentrates interior air volume relative to exterior surface area. A dome encloses more volume per unit of surface than any other shape. Less surface means less heat loss. This is one reason dome shelters perform well in extreme cold -- the igloo, wigwam, and earth lodge all exploit this geometry for thermal efficiency.",
+      "sumoMapping": "Building"
+    },
+    {
+      "order": 7,
+      "instruction": "Apply the structural safety summary: whatever the tradition, a shelter frame must be stable before covering is added. Covering adds weight and wind resistance. A partially constructed or improperly braced dome frame can fail catastrophically when covering is applied. Always complete the frame and verify its stability before adding covering material.",
+      "safetyNote": "Structural annotation: test any shelter frame for stability before covering. Push laterally on the frame and check for racking (twisting out of shape). A stable frame resists lateral load from all directions. Add bracing if needed before covering.",
+      "sumoMapping": "ConstructionProcess"
+    }
+  ]
+}
