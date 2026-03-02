@@ -2,7 +2,7 @@
   {
     "id": "FIRE-001",
     "domain": "fire",
-    "pattern": "(?:indoor|inside|interior|enclosed.{0,20}space|tent|cabin|shelter|room).{0,60}(?:fire|flame|burning|stove|hearth|fireplace|heat).{0,60}(?!ventilat|flue|chimney|smoke.?hole|draft|CO|carbon.?monoxide)",
+    "pattern": "(?:(?:fire|flame|burning|stove|hearth|fireplace|heat).{0,80}(?:indoor|inside|interior|enclosed|tent|cabin|shelter|room)|(?:indoor|inside|interior|enclosed|tent|cabin|shelter|room).{0,80}(?:fire|flame|burning|stove|hearth|fireplace|heat))",
     "level": "gated",
     "annotation": {
       "domain": "fire",
