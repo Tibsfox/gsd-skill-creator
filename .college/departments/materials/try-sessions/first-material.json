@@ -1,0 +1,39 @@
+{
+  "id": "first-material",
+  "title": "Your First Materials Investigation: What Is This Made Of?",
+  "description": "Investigate the materials around you through observation and simple tests. This session spans material properties, materials families, and manufacturing thinking.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Collect 5 objects made of different materials (metal spoon, plastic pen, glass, wood, fabric). Read about mechanical properties: for each object, estimate its hardness, stiffness, and ductility from how it feels.",
+      "expectedOutcome": "You can rank the 5 materials by hardness and stiffness, and identify which are ductile (can bend without breaking) versus brittle",
+      "hint": "Scratch resistance indicates hardness; resistance to bending indicates stiffness; ability to bend without breaking is ductility",
+      "conceptsExplored": ["mfab-mechanical-properties"]
+    },
+    {
+      "instruction": "Sort your objects by material family: metal, polymer, ceramic, composite? Read about metals, polymers, and ceramics: what are the characteristic properties that define each family?",
+      "expectedOutcome": "You can correctly categorize each object and explain the family characteristics — metals conduct electricity; polymers are lightweight; ceramics are hard and brittle",
+      "hint": "When unsure, test electrical conductivity with a battery, wire, and LED — metals conduct, polymers and ceramics don't",
+      "conceptsExplored": ["mfab-metals-alloys", "mfab-polymers", "mfab-ceramics-composites"]
+    },
+    {
+      "instruction": "For each object, guess how it was made: cast/molded, machined, or formed? Read about casting/molding and machining: what shapes are easily produced by each process?",
+      "expectedOutcome": "You can match each object to a likely manufacturing process based on its shape, surface finish, and material, and explain why that process is appropriate",
+      "hint": "Complex shapes with internal features suggest casting/molding; precise flat surfaces suggest machining; uniform cross-sections suggest extrusion",
+      "conceptsExplored": ["mfab-casting-molding", "mfab-machining"]
+    },
+    {
+      "instruction": "Pick the plastic object. Read about life cycle assessment: trace its life from raw material to end-of-life. Where are the biggest environmental impacts?",
+      "expectedOutcome": "You can trace raw material extraction → processing → manufacturing → use → disposal and identify which phase has the largest impact for plastic objects",
+      "hint": "For most plastics, raw material extraction (petroleum) and end-of-life disposal (often landfill or ocean) are the highest-impact phases",
+      "conceptsExplored": ["mfab-lca-lifecycle"]
+    },
+    {
+      "instruction": "Consider the plastic object: could it be designed to be more circular — easier to repair, reuse, or recycle? Read about circular economy: what design changes would improve circularity?",
+      "expectedOutcome": "You can propose at least one design change that would improve end-of-life recyclability or repairability, and explain the circular economy principle it embodies",
+      "hint": "Monomaterial design (one material type rather than glued-together combinations) is the biggest enabler of recyclability",
+      "conceptsExplored": ["mfab-circular-economy"]
+    }
+  ]
+}

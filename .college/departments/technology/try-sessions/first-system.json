@@ -1,0 +1,39 @@
+{
+  "id": "first-system",
+  "title": "Your First Systems Investigation: What Makes It Work?",
+  "description": "Analyze a technological system you use every day by breaking it into inputs, processes, outputs, and feedback loops. This session builds systems thinking, digital literacy, and design awareness.",
+  "estimatedMinutes": 25,
+  "prerequisites": [],
+  "steps": [
+    {
+      "instruction": "Choose a technological system you use daily: a coffee maker, dishwasher, phone, or bicycle. Draw a simple diagram showing inputs, process, and outputs. Read about the IPO model: what counts as an input vs an output?",
+      "expectedOutcome": "You have an IPO diagram with at least 3 inputs (energy, materials, information, or human effort) and 2-3 outputs (including any waste or heat outputs)",
+      "hint": "Don't forget energy as an input and heat as an output — most systems lose energy as heat",
+      "conceptsExplored": ["tech-inputs-processes-outputs"]
+    },
+    {
+      "instruction": "Does your system have any feedback? (A thermostat senses temperature and adjusts heating; a dishwasher has a timer.) Read about feedback and control: how does feedback change a system's behavior?",
+      "expectedOutcome": "You can identify whether the system uses feedback and explain how it makes the system more accurate, efficient, or responsive",
+      "hint": "A system without feedback runs open-loop — it cannot correct errors. Feedback enables self-regulation",
+      "conceptsExplored": ["tech-feedback-control"]
+    },
+    {
+      "instruction": "Think about the tools used to make your system. Were they hand tools, power tools, or automated machinery? Read about hand tools and power tools: what level of skill and precision does each require?",
+      "expectedOutcome": "You can describe the manufacturing process for one component of your system and match it to the appropriate tool/process type",
+      "hint": "Complex shaped parts are injection molded (automated); custom or one-off parts are machined or fabricated by hand",
+      "conceptsExplored": ["tech-hand-tools", "tech-power-tools"]
+    },
+    {
+      "instruction": "If your system is digital (phone, computer), consider: how is information stored and processed? Read about binary and data representation: what does it mean that all digital information is 0s and 1s?",
+      "expectedOutcome": "You can explain that digital information is encoded as binary numbers and describe what a byte represents",
+      "hint": "A photo is millions of pixels, each stored as three numbers (RGB values) — a 12-megapixel photo contains ~36 million numbers stored in binary",
+      "conceptsExplored": ["tech-binary-data"]
+    },
+    {
+      "instruction": "Identify one societal impact of your chosen technology — positive or negative. Read about technology and society: who benefits and who might be harmed by this technology?",
+      "expectedOutcome": "You can articulate a nuanced societal impact that includes both benefits and harms, and identify a group that experiences the technology differently from the majority",
+      "hint": "Every technology has distributional effects — some groups benefit more than others and some bear disproportionate costs",
+      "conceptsExplored": ["tech-history-of-technology", "tech-technology-ethics"]
+    }
+  ]
+}
